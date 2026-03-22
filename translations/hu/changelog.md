@@ -1,51 +1,103 @@
-# Változási napló - AZD Kezdőknek
+# Változásnapló - AZD Kezdőknek
 
 ## Bevezetés
 
-Ez a változási napló dokumentálja az összes figyelemre méltó változást, frissítést és fejlesztést az AZD Kezdőknek adattárban. A szemantikus verziózás elveit követjük, és ezt a naplót vezetjük, hogy segítsük a felhasználókat megérteni, mi változott a verziók között.
+Ez a változásnapló dokumentálja az AZD Kezdőknek tároló minden jelentős változását, frissítését és fejlesztését. A szemantikus verziózás elveit követjük, és fenntartjuk ezt a naplót, hogy segítsük a felhasználókat megérteni, mi változott a verziók között.
 
 ## Tanulási célok
 
-A változási napló átnézése során Ön:
-- Tájékozott marad az új funkciókról és tartalmi bővítésekről
-- Megérti a meglévő dokumentációban történt fejlesztéseket
-- Nyomon követi a hibajavításokat és korrekciókat a pontosság biztosítása érdekében
-- Követi a tananyagtartalmak fejlődését az idő múlásával
+A változásnapló áttekintésével Ön:
+- Naprakész lesz az új funkciókról és tartalomhozzáadásokró
+- Megérti a meglévő dokumentáció fejlesztéseit
+- Nyomon követi a hibajavításokat és korrekciókat a pontosság érdekében
+- Követi a tananyagok fejlődését az idő során
 
 ## Tanulási eredmények
 
-A változási napló bejegyzéseinek átnézése után képes lesz:
-- Azonosítani az új tananyagot és elérhető forrásokat
-- Megérteni, hogy mely részek frissültek vagy javultak
-- Megtervezni tanulási útvonalát a legfrissebb anyagok alapján
-- Visszajelzést adni és javaslatokat tenni a jövőbeli fejlesztésekhez
+A változásnapló bejegyzéseinek áttekintése után képes lesz:
+- Azonosítani az új tananyagokat és erőforrásokat
+- Megérteni, mely szakaszok frissültek vagy javultak
+- Megtervezni tanulási útját a legfrissebb anyagok alapján
+- Visszajelzést és javaslatokat adni a jövőbeli fejlesztésekhez
 
 ## Verziótörténet
+
+### [v3.18.0] - 2026-03-16
+
+#### AZD AI CLI parancsok, tartalom validáció és sablonbővítés
+**Ez a verzió kiterjeszti az `azd ai`, `azd extension`, és `azd mcp` parancsok lefedettségét az összes AI-val kapcsolatos fejezetben, javítja az agents.md törött linkjeit és elavult kódját, frissíti az összevont parancslistát, valamint átdolgozza a Példasablonok szakaszt validált leírásokkal és új Azure AI AZD sablonokkal.**
+
+#### Hozzáadva
+- **🤖 AZD AI CLI lefedettség** 7 fájlban (korábban csak a 8. fejezetben):
+  - `docs/chapter-01-foundation/azd-basics.md` — Új "Bővítmények és AI parancsok" szakasz, amely bemutatja az `azd extension`, `azd ai agent init` és `azd mcp` parancsokat
+  - `docs/chapter-02-ai-development/agents.md` — 4. lehetőség: `azd ai agent init` összehasonlító táblázattal (sablon vs. manifeszt megközelítés)
+  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — "AZD bővítmények a Foundry-hoz" és "Agent-First Telepítés" alfejezetek
+  - `docs/chapter-05-multi-agent/README.md` — Gyorsindítás most mind a sablon, mind a manifeszt alapú telepítési utakat bemutatja
+  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — Telepítés szakasz most tartalmazza az `azd ai agent init` opciót
+  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — "AZD AI Bővítmény Parancsok Diagnosztikához" alfejezet
+  - `resources/cheat-sheet.md` — Új "AI & Bővítmény Parancsok" szakasz az `azd extension`, `azd ai agent init`, `azd mcp`, és `azd infra generate` parancsokkal
+- **📦 Új AZD AI példasablonok** a `microsoft-foundry-integration.md`-ben:
+  - **azure-search-openai-demo-csharp** — .NET alapú RAG chat Blazor WebAssembly-vel, Semantic Kernel-lel és hangalapú chat támogatással
+  - **azure-search-openai-demo-java** — Java RAG chat Langchain4J-vel, ACA/AKS telepítési lehetőségekkel
+  - **contoso-creative-writer** — Többagent kreatív író alkalmazás Azure AI Agent Servicel, Bing Groundinggel és Prompty-vel
+  - **serverless-chat-langchainjs** — Serverless RAG Azure Functionökkel + LangChain.js + Cosmos DB, Ollama helyi fejlesztési támogatással
+  - **chat-with-your-data-solution-accelerator** — Vállalati RAG gyorsító admin portállal, Teams integrációval, PostgreSQL/Cosmos DB opciókkal
+  - **azure-ai-travel-agents** — Többagent MCP orchestrációs referencia alkalmazás szerverekkel .NET, Python, Java és TypeScript nyelveken
+  - **azd-ai-starter** — Minimális Azure AI infrastruktúra Bicep indító sablon
+  - **🔗 Awesome AZD AI Galéria link** — Hivatkozás az [awesome-azd AI galériára](https://azure.github.io/awesome-azd/?tags=ai) (80+ sablon)
+
+#### Javítva
+- **🔗 agents.md navigáció**: Előző/Következő linkek most már megfelelnek a 2. fejezet README tanulási sorrendjének (Microsoft Foundry Integráció → Ügynökök → AI modell telepítés)
+- **🔗 agents.md törött linkek**: `production-ai-practices.md` javítva `../chapter-08-production/production-ai-practices.md` (3 előfordulás)
+- **📦 agents.md elavult kód**: Az `opencensus` lecserélve `azure-monitor-opentelemetry` + OpenTelemetry SDK-ra
+- **🐛 agents.md érvénytelen API**: A `max_tokens` átkerült a `create_agent()`-ből a `create_run()`-ba `max_completion_tokens` néven
+- **🔢 agents.md token számlálás**: A durva `len//4` becslés helyett a `tiktoken.encoding_for_model()` használata
+- **azure-search-openai-demo**: Szolgáltatások javítva "Cognitive Search + App Service"-ről "Azure AI Search + Azure Container Apps"-re (alapértelmezett host módosult 2024 októberében)
+- **contoso-chat**: Leírás frissítve az Azure AI Foundry + Prompty-ra, amely illeszkedik a tároló tényleges címéhez és technológiai stackjéhez
+
+#### Eltávolítva
+- **ai-document-processing**: Nem működő sablonhivatkozás eltávolítva (a tároló nem elérhető nyilvánosan AZD sablonként)
+
+#### Fejlesztve
+- **📝 agents.md gyakorlatok**: Az 1. gyakorlat megmutatja a várt kimenetet és az `azd monitor` lépést; a 2. gyakorlat tartalmazza a teljes `FunctionTool` regisztrációs kódot; a 3. gyakorlat konkrét `prepdocs.py` parancsokra cseréli a homályos útmutatást
+- **📚 agents.md erőforrások**: Dokumentációs linkek frissítve az aktuális Azure AI Agent Service dokumentációra és gyors indításra
+- **📋 agents.md Következő lépések táblázat**: Hozzáadva AI Workshop Lab link a teljes fejezet lefedettséghez
+
+#### Frissített fájlok
+- `docs/chapter-01-foundation/azd-basics.md`
+- `docs/chapter-02-ai-development/agents.md`
+- `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
+- `docs/chapter-05-multi-agent/README.md`
+- `docs/chapter-06-pre-deployment/coordination-patterns.md`
+- `docs/chapter-07-troubleshooting/ai-troubleshooting.md`
+- `resources/cheat-sheet.md`
+
+---
 
 ### [v3.17.0] - 2026-02-05
 
 #### Tanfolyam navigáció fejlesztése
-**Ez a verzió továbbfejleszti a README.md fejezetszintű navigációját egy kibővített táblázatos formával.**
+**Ez a verzió fejleszti a README.md fejezeti navigációját egy kibővített táblázatformátummal.**
 
-#### Megváltozott
-- **Tanfolyamtérkép táblázat**: Közvetlen leckelinkel, időtartam becslésekkel és összetettségi értékeléssel bővítve
-- **Mappatisztítás**: Eltávolítva a fölösleges régi mappák (deployment/, getting-started/, pre-deployment/, troubleshooting/)
-- **Linkellenőrzés**: A tanfolyamtérkép táblázat 21+ belső linkje ellenőrizve
+#### Változtatások
+- **Tanfolyam térkép táblázat**: Kibővítve közvetlen leckelinkekkel, időtartam becslésekkel és összetettségi értékelésekkel
+- **Mappatisztítás**: Régi, fölösleges mappák eltávolítva (deployment/, getting-started/, pre-deployment/, troubleshooting/)
+- **Linkellenőrzés**: Több mint 21 belső link a Tanfolyam térkép táblázatban ellenőrizve
 
 ### [v3.16.0] - 2026-02-05
 
 #### Terméknév frissítések
 **Ez a verzió frissíti a termék hivatkozásokat a jelenlegi Microsoft márkázásnak megfelelően.**
 
-#### Megváltozott
-- **Azure AI Foundry → Microsoft Foundry**: Minden hivatkozás frissítve a nem fordítandó fájlokban
-- **Azure AI Agent Service → Foundry Agents**: Szolgáltatás neve frissítve az aktuális márka szerint
+#### Változtatások
+- **Microsoft Foundry → Microsoft Foundry**: Minden hivatkozás frissítve nem fordító fájlokban
+- **Azure AI Agent Service → Foundry Agents**: A szolgáltatás neve frissítve az aktuális márka szerint
 
 #### Frissített fájlok
 - `README.md` - Fő tanfolyam kezdőoldal
 - `changelog.md` - Verziótörténet
-- `course-outline.md` - Tanfolyam szerkezete
-- `docs/chapter-02-ai-development/agents.md` - AI agent útmutató
+- `course-outline.md` - Tanfolyam felépítés
+- `docs/chapter-02-ai-development/agents.md` - AI ügynökök útmutatója
 - `examples/README.md` - Példák dokumentációja
 - `workshop/README.md` - Workshop kezdőoldal
 - `workshop/docs/index.md` - Workshop index
@@ -55,21 +107,21 @@ A változási napló bejegyzéseinek átnézése után képes lesz:
 
 ### [v3.15.0] - 2026-02-05
 
-#### Jelentős adattárrendezés: fejezetalapú mappanevek
-**Ez a verzió a dokumentációt dedikált fejezetszám szerinti mappákba szervezi át, hogy átláthatóbb legyen a navigáció.**
+#### Jelentős tároló átszervezés: fejezet-alapú mappanév változtatások
+**Ez a verzió dokumentációs mappákat rendez fejezetenként, egyértelműbb navigáció érdekében.**
 
-#### Mappanevek módosítása
-A régi mappák helyett számozott fejezetmappák kerültek bevezetésre:
+#### Mappa átnevezések
+Régi mappák lecserélve fejezet-sorszámos mappákra:
 - `docs/getting-started/` → `docs/chapter-01-foundation/` + `docs/chapter-03-configuration/`
 - `docs/microsoft-foundry/` → `docs/chapter-02-ai-development/` + `docs/chapter-08-production/`
 - `docs/deployment/` → `docs/chapter-04-infrastructure/`
 - `docs/pre-deployment/` → `docs/chapter-06-pre-deployment/`
 - `docs/troubleshooting/` → `docs/chapter-07-troubleshooting/`
-- Új mappa hozzáadva: `docs/chapter-05-multi-agent/`
+- Újonnan hozzáadva: `docs/chapter-05-multi-agent/`
 
-#### Fájlt áthelyezések
-| Fájl | Eredeti | Új hely |
-|------|---------|---------|
+#### Fájl áthelyezések
+| Fájl | Eredeti hely | Új hely |
+|------|--------------|---------|
 | azd-basics.md | getting-started/ | chapter-01-foundation/ |
 | installation.md | getting-started/ | chapter-01-foundation/ |
 | first-project.md | getting-started/ | chapter-01-foundation/ |
@@ -86,16 +138,16 @@ A régi mappák helyett számozott fejezetmappák kerültek bevezetésre:
 | Minden troubleshooting fájl | troubleshooting/ | chapter-07-troubleshooting/ |
 
 #### Hozzáadva
-- **📚 Fejezeti README fájlok**: Minden fejezetmappában létrehozva README.md a következőkkel:
+- **📚 Fejezet README fájlok**: Minden fejezetmappában létrehozva README.md az alábbiakkal:
   - Tanulási célok és időtartam
-  - Lecke tábla leírásokkal
-  - Gyorsindítás parancsok
+  - Lecketábla leírásokkal
+  - Gyorsindítási parancsok
   - Navigáció más fejezetekhez
 
-#### Megváltozott
-- **🔗 Minden belső link frissítve**: Több mint 78 útvonal módosítva az összes dokumentumban
-- **🗺️ Fő README.md**: Tanfolyamtérkép frissítve az új fejezetszerkezettel
-- **📝 examples/README.md**: Kereszthivatkozások frissítve a fejezetmappákra
+#### Változtatások
+- **🔗 Minden belső link frissítve**: Több mint 78 útvonal frissítve az összes dokumentációs fájlban
+- **🗺️ Fő README.md**: Tanfolyam térkép frissítve az új fejezetstruktúrával
+- **📝 examples/README.md**: Kereszthivatkozások frissítve fejezet mappákra
 
 #### Eltávolítva
 - Régi mappastruktúra (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/)
@@ -104,56 +156,56 @@ A régi mappák helyett számozott fejezetmappák kerültek bevezetésre:
 
 ### [v3.14.0] - 2026-02-05
 
-#### Adattárrendezés: fejezetszintű navigáció
-**Ez a verzió fejezetszintű navigációs README fájlokat adott hozzá (aztán a v3.15.0 felülírta).**
+#### Tároló átszervezés: fejezet navigáció
+**Ez a verzió fejezet navigációs README fájlokat adott hozzá (jelen verzió által felváltva v3.15.0-ban).**
 
 ---
 
 ### [v3.13.0] - 2026-02-05
 
-#### Új AI agent útmutató
-**Ez a verzió átfogó útmutatót ad az AI agentek Azure Developer CLI-vel történő telepítéséhez.**
+#### Új AI Ügynökök Útmutató
+**Ez a verzió átfogó útmutatót ad az AI ügynökök Azure Developer CLI-vel történő telepítéséhez.**
 
 #### Hozzáadva
-- **🤖 docs/microsoft-foundry/agents.md**: Teljes útmutató a következő témákkal:
-  - Mi az AI agent és miben különbözik a chatbotoktól
-  - Három gyorsindító agent sablon (Foundry Agents, Prompty, RAG)
-  - Agent architektúra minták (egyagent, RAG, többagent)
+- **🤖 docs/microsoft-foundry/agents.md**: Teljes útmutató az alábbiakról:
+  - Mi az AI ügynök és miben különbözik a chatbotoktól
+  - Három gyorsindítási ügynök sablon (Foundry Agents, Prompty, RAG)
+  - Ügynök architektúra minták (egyesített ügynök, RAG, több ügynök)
   - Eszköz konfiguráció és testreszabás
-  - Felügyelet és metrikák követése
+  - Monitorozás és metrikák nyomon követése
   - Költségszempontok és optimalizáció
-  - Gyakori hibakeresési esetek
-  - Három gyakorlati gyakorlat sikerességi kritériummal
+  - Gyakori hibakeresési helyzetek
+  - Három gyakorlati feladat sikerességi kritériumokkal
 
-#### Tartalomszerkezet
-- **Bevezető**: Agent fogalmak kezdőknek
-- **Gyorsindítás**: Agentek telepítése `azd init --template get-started-with-ai-agents` paranccsal
-- **Architektúra minták**: Vizualizált diagramok agent mintákról
-- **Konfiguráció**: Eszköz beállítások és környezeti változók
-- **Felügyelet**: Application Insights integráció
-- **Gyakorlatok**: Fokozatos gyakorlati tanulás (20-45 perc mindegyik)
+#### Tartalmi felépítés
+- **Bevezetés**: Ügynöki fogalmak kezdőknek
+- **Gyors kezdés**: Ügynökök telepítése `azd init --template get-started-with-ai-agents` paranccsal
+- **Architektúra minták**: Ügynöki minták vizuális diagramjai
+- **Konfiguráció**: Eszközbeállítások és környezeti változók
+- **Monitorozás**: Application Insights integráció
+- **Gyakorlatok**: Fokozatos kéz-a-kézben tanulás (20-45 perc / gyakorlat)
 
 ---
 
 ### [v3.12.0] - 2026-02-05
 
 #### DevContainer környezet frissítés
-**Ez a verzió frissíti a fejlesztői konténer konfigurációját modern eszközökkel és jobb alapbeállításokkal az AZD tanulási élményhez.**
+**Ez a verzió frissíti a fejlesztői konténer konfigurációját modern eszközökkel és jobb alapértelmezett beállításokkal az AZD tanulási élményhez.**
 
-#### Megváltozott
-- **🐳 Alapkép**: Frissítve `python:3.12-bullseye` helyett `python:3.12-bookworm` (legfrissebb stabil Debian)
-- **📛 Konténer név**: Átnevezve "Python 3"-ról "AZD for Beginners"-re az áttekinthetőség kedvéért
+#### Változtatások
+- **🐳 Alap image**: Frissítve `python:3.12-bullseye`-ről `python:3.12-bookworm`-re (a legfrissebb Debian stabil kiadás)
+- **📛 Konténer név**: Átnevezve "Python 3"-ról "AZD for Beginners"-re az egyértelműség érdekében
 
 #### Hozzáadva
-- **🔧 Új Dev Container funkciók**:
-  - `azure-cli` Bicep támogatással engedélyezve
+- **🔧 Új fejlesztői konténer funkciók**:
+  - `azure-cli` engedélyezett Bicep támogatással
   - `node:20` (LTS verzió AZD sablonokhoz)
   - `github-cli` sablonkezeléshez
-  - `docker-in-docker` konténeralkalmazás deploy-hoz
+  - `docker-in-docker` konténer alkalmazás telepítésekhez
 
-- **🔌 Port továbbítások**: Előre beállított portok tipikus fejlesztéshez:
+- **🔌 Port Továbbítás**: Előre konfigurált portok közös fejlesztési célokra:
   - 8000 (MkDocs előnézet)
-  - 3000 (Webalkalmazások)
+  - 3000 (Web appok)
   - 5000 (Python Flask)
   - 8080 (API-k)
 
@@ -162,863 +214,862 @@ A régi mappák helyett számozott fejezetmappák kerültek bevezetésre:
   - `ms-azuretools.vscode-azurefunctions` - Azure Functions támogatás
   - `ms-azuretools.vscode-docker` - Docker támogatás
   - `ms-azuretools.vscode-bicep` - Bicep nyelvi támogatás
-  - `ms-azure-devtools.azure-resource-groups` - Azure erőforrás kezelő
+  - `ms-azure-devtools.azure-resource-groups` - Azure erőforráskezelés
   - `yzhang.markdown-all-in-one` - Markdown szerkesztés
   - `DavidAnson.vscode-markdownlint` - Markdown lintelés
   - `bierner.markdown-mermaid` - Mermaid diagram támogatás
-  - `redhat.vscode-yaml` - YAML támogatás (az azure.yaml-hoz)
+  - `redhat.vscode-yaml` - YAML támogatás (azure.yaml-hoz)
   - `eamodio.gitlens` - Git vizualizáció
   - `mhutchie.git-graph` - Git előzmények
 
-- **⚙️ VS Code beállítások**: Alapértelmezett beállítások hozzáadva Python értelmezőhöz, mentéskor formázáshoz, szóközök eltávolításához
+- **⚙️ VS Code beállítások**: Alapértelmezett beállítások hozzáadva Python interpretálóhoz, formázás mentéskor és szóközök levágása
 
-- **📦 requirements-dev.txt frissítve**:
-  - MkDocs minify plugin hozzáadva
-  - pre-commit kódminőség ellenőrző hozzáadva
+- **📦 Frissített requirements-dev.txt**:
+  - Hozzáadva MkDocs minify plugin
+  - Hozzáadva pre-commit a kódminőséghez
   - Azure SDK csomagok hozzáadva (azure-identity, azure-mgmt-resource)
 
 #### Javítva
-- **Post-Create parancs**: Most ellenőrzi az AZD és Azure CLI telepítését a konténer indításakor
+- **Post-Create Parancs**: Most ellenőrzi az AZD és Azure CLI telepítést a konténer indításakor
 
 ---
 
 ### [v3.11.0] - 2026-02-05
 
-#### Kezdőknek szóló README átdolgozás
-**Ez a verzió jelentősen javítja a README.md-t, hogy kezdők számára is érthető legyen, valamint alapvető erőforrásokat ad AI fejlesztőknek.**
+#### Kezdőknek barátságos README átdolgozás
+**Ez a verzió jelentősen javítja a README.md fájlt a kezdők számára, valamint alapvető erőforrásokat ad AI fejlesztőknek.**
 
 #### Hozzáadva
-- **🆚 Azure CLI vs AZD összehasonlítás**: Egyértelmű magyarázat mikor melyik eszközt használjuk, gyakorlati példákkal
-- **🌟 Kiváló AZD linkek**: Közösségi sablongaléria és hozzájárulási források közvetlen linkjei:
-  - [Awesome AZD Galéria](https://azure.github.io/awesome-azd/) - Több mint 200 azonnal telepíthető sablon
-  - [Sablon beküldése](https://github.com/Azure/awesome-azd/issues) - Közösségi hozzájárulás
-- **🎯 Gyors indítási útmutató**: Egyszerűsített 3 lépéses kezdő szakasz (Telepítés → Bejelentkezés → Telepítés)
-- **📊 Tapasztalatalapú navigációs tábla**: Világos iránymutatás, hogy hol kezdjen az adott fejlesztői tapasztalat alapján
+- **🆚 Azure CLI vs AZD összehasonlítás**: Világos magyarázat mikor melyik eszközt használjuk gyakorlati példákkal
+- **🌟 Kiváló AZD linkek**: Közvetlen hivatkozások közösségi sablongalériára és hozzájárulási forrásokra:
+  - [Awesome AZD Galéria](https://azure.github.io/awesome-azd/) - 200+ készen álló sablon telepítésre
+  - [Sablon Beküldése](https://github.com/Azure/awesome-azd/issues) - Közösségi hozzájárulás
+- **🎯 Gyors kezdési útmutató**: Egyszerűsített 3 lépéses kezdő szakasz (Telepítés → Bejelentkezés → Telepítés)
+- **📊 Tapasztalati alapú navigációs táblázat**: Világos útmutatás kezdési pontokról fejlesztői tapasztalat alapján
 
-#### Megváltozott
-- **README struktúra**: Lépésenként feltáruló információs elrendezés - az alapvető infó az elején
-- **Bevezető szakasz**: Újratervezve, hogy elmagyarázza a „`azd up` varázsát” teljesen kezdőknek
-- **Duplikált tartalom eltávolítása**: Elhárítva a kétszeres hibakeresési rész
-- **Hibakeresési parancsok javítása**: `azd logs` helyett érvényes `azd monitor --logs` használata
+#### Módosítva
+- **README szerkezet**: Újrendezve fokozatos leleplezéshez – a kulcsfontosságú információk elöl
+- **Bevezető szakasz**: Újraírás a "Az `azd up` varázsa" teljes kezdők számára történő megmagyarázásához
+- **Ismétlődő tartalom eltávolítása**: Duplikált hibakeresési szakasz törlése
+- **Hibakeresési parancsok**: Javítva az `azd logs` hivatkozás, érvényes `azd monitor --logs` használatával
 
 #### Javítva
 - **🔐 Hitelesítési parancsok**: Hozzáadva `azd auth login` és `azd auth logout` a cheat-sheet.md-hez
-- **Érvénytelen parancs hivatkozások**: Eltávolítva a maradék `azd logs` a README hibakeresési részéből
+- **Érvénytelen parancs hivatkozások eltávolítása**: Maradék `azd logs` eltávolítva a README hibakeresési szakaszából
 
 #### Megjegyzések
-- **Hatókör**: Változások a fő README.md-ben és a resources/cheat-sheet.md-ben
-- **Célközönség**: Speciálisan AZD-t kezdő fejlesztőknek szánt fejlesztések
+- **Hatókör**: Változások a fő README.md és resources/cheat-sheet.md fájlokra vonatkoznak
+- **Célközönség**: Kifejezetten AZD-ben új fejlesztők számára készült fejlesztések
 
 ---
 
 ### [v3.10.0] - 2026-02-05
 
 #### Azure Developer CLI parancs pontosság frissítés
-**Ez a verzió javítja az összes nem létező AZD parancsot a dokumentációban, biztosítva, hogy minden kódpélda érvényes Azure Developer CLI szintaxist használ.**
+**Ez a verzió javítja az összes nem létező AZD parancsot a dokumentációban, biztosítva hogy minden kódpélda érvényes Azure Developer CLI szintaxist használjon.**
 
 #### Javítva
-- **🔧 Nem létező AZD parancsok eltávolítása**: Átfogó audit és helyesbítés:
-  - `azd logs` (nem létezik) → helyettesítve `azd monitor --logs` vagy Azure CLI alternatívákkal
-  - `azd service` alparancsok (nem léteznek) → helyettesítve `azd show` és Azure CLI-vel
-  - `azd infra import/export/validate` (nem létezik) → eltávolítva vagy érvényes alternatívára cserélve
+- **🔧 Nem létező AZD parancsok eltávolítása**: Átfogó audit és érvénytelen parancsok javítása:
+  - `azd logs` (nem létezik) → helyette `azd monitor --logs` vagy Azure CLI alternatívák
+  - `azd service` alkparancsok (nem léteznek) → helyett `azd show` és Azure CLI
+  - `azd infra import/export/validate` (nem léteznek) → eltávolítva vagy helyettesítve
   - `azd deploy --rollback/--incremental/--parallel/--detect-changes` kapcsolók (nem léteznek) → eltávolítva
-  - `azd provision --what-if/--rollback` kapcsolók (nem léteznek) → `--preview` használatára módosítva
-  - `azd config validate` (nem létezik) → helyettesítve `azd config list`-tel
+  - `azd provision --what-if/--rollback` kapcsolók (nem léteznek) → `--preview` használatra frissítve
+  - `azd config validate` (nem létezik) → `azd config list` használva
   - `azd info`, `azd history`, `azd metrics` (nem léteznek) → eltávolítva
 
-- **📚 Parancs javításokkal frissített fájlok**:
-  - `resources/cheat-sheet.md`: Parancsreferencia teljes áttekintése
-  - `docs/deployment/deployment-guide.md`: Visszavonás és telepítési stratégiák javítása
-  - `docs/troubleshooting/debugging.md`: Naplóelemzés szakasz javítása
+- **📚 Parancsjavításokat tartalmazó fájlok**:
+  - `resources/cheat-sheet.md`: Parancs hivatkozás jelentős átdolgozása
+  - `docs/deployment/deployment-guide.md`: Rollback és telepítési stratégiák javítása
+  - `docs/troubleshooting/debugging.md`: Napló-elemzési szakaszok javítása
   - `docs/troubleshooting/common-issues.md`: Hibakeresési parancsok frissítése
   - `docs/troubleshooting/ai-troubleshooting.md`: AZD hibakeresési rész javítása
-  - `docs/getting-started/azd-basics.md`: Felügyeleti parancsok javítása
-  - `docs/getting-started/first-project.md`: Felügyeleti és hibakeresési példák frissítése
-  - `docs/getting-started/installation.md`: Segítség és verzió példák javítása
-  - `docs/pre-deployment/application-insights.md`: Naplómegtekintési parancsok javítása
-  - `docs/pre-deployment/coordination-patterns.md`: Agent hibakeresési parancsok javítása
+  - `docs/getting-started/azd-basics.md`: Monitoring parancsok javítása
+  - `docs/getting-started/first-project.md`: Monitoring és hibakeresési példák frissítése
+  - `docs/getting-started/installation.md`: Súgó és verzió példák javítása
+  - `docs/pre-deployment/application-insights.md`: Napló megtekintési parancsok javítása
+  - `docs/pre-deployment/coordination-patterns.md`: Ügynök hibakeresési parancsok javítása
 
-- **📝 Verzió hivatkozás frissítés**:
-  - `docs/getting-started/installation.md`: A keménykódolt `1.5.0` verzió általános `1.x.x`-re cserélve a kiadások linkjével
+- **📝 Verzió hivatkozás frissítve**: 
+  - `docs/getting-started/installation.md`: Keménykódolt `1.5.0` verzió helyett generikus `1.x.x` link a kiadásokhoz
 
-#### Megváltozott
-- **Rollback stratégiák**: Dokumentáció frissítve Git alapú visszavonásra (AZD nincs beépített rollback funkciója)
-- **Napló megtekintés**: `azd logs` hivatkozások helyett `azd monitor --logs`, `azd monitor --live` és Azure CLI parancsok
-- **Teljesítmény szakasz**: Nem létező párhuzamos/incrementális telepítési kapcsolók eltávolítva, érvényes alternatívákat sorol fel
+#### Módosítva
+- **Rollback stratégiák**: Dokumentáció frissítve Git alapú rollback használatára (AZD nem támogat natív rollback-et)
+- **Napló megtekintés**: `azd logs` hivatkozások kicserélése `azd monitor --logs`, `azd monitor --live`, illetve Azure CLI parancsokra
+- **Teljesítmény szekció**: Nem létező párhuzamos/incrementális telepítési kapcsolók eltávolítása, érvényes alternatívák biztosítása
 
-#### Műszaki részletek
+#### Technikai részletek
 - **Érvényes AZD parancsok**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
-- **Érvényes azd monitor Kapcsolók**: `--live`, `--logs`, `--overview`
+- **Érvényes azd monitor kapcsolók**: `--live`, `--logs`, `--overview`
 - **Eltávolított funkciók**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
 
 #### Megjegyzések
-- **Ellenőrzés**: Parancsok az Azure Developer CLI v1.23.x ellenőrizve
+- **Ellenőrzés**: Parancsok validálva Azure Developer CLI v1.23.x verzióval
 
 ---
 
 ### [v3.9.0] - 2026-02-05
 
-#### Workshop befejezése és dokumentáció minőségének frissítése
-**Ez a verzió befejezi az interaktív workshop modulokat, kijavítja az összes törött dokumentációs linket, és javítja az AI fejlesztők számára a Microsoft AZD használatával kapcsolatos tartalom általános minőségét.**
+#### Workshop befejezése és dokumentáció minőségjavítás
+**Ez a verzió befejezi az interaktív workshop modulokat, javít minden törött dokumentációs linket, és javítja az általános tartalmi minőséget AI fejlesztők számára Microsoft AZD-vel.**
 
 #### Hozzáadva
-- **📝 CONTRIBUTING.md**: Új hozzájárulási irányelvek dokumentuma:
-  - Világos utasítások hibajelentéshez és változtatási javaslatokhoz
-  - Dokumentációs szabványok új tartalomhoz
-  - Kódpélda útmutatók és commit üzenet konvenciók
+- **📝 CONTRIBUTING.md**: Új hozzájárulási útmutató dokumentum:
+  - Világos útmutatás hibajelentéshez és változtatás javaslathoz
+  - Új tartalom dokumentációs sztenderdek
+  - Kódpélda szabályok és commit üzenet konvenciók
   - Közösségi részvétel információi
 
 #### Befejezve
-- **🎯 Workshop Modul 7 (Lezárás)**: Teljesen befejezett lezáró modul:
-  - Átfogó összefoglaló a workshop eredményeiről
-  - Alapvető fogalmak elsajátítása AZD, sablonok és AI Foundry témákban
-  - Tanulási út folytatására vonatkozó ajánlások
-  - Workshop kihívás gyakorlatok nehézségi szintekkel
+- **🎯 Workshop Modul 7 (Összefoglaló)**: Teljes összegező modul:
+  - Workshop eredmények részletes összefoglalója
+  - Alapfogalmak szekció AZD, sablonok, Microsoft Foundry témákban
+  - Tanulási út folytatására ajánlások
+  - Workshop kihívások nehézségi besorolással
   - Közösségi visszajelzés és támogatási linkek
 
-- **📚 Workshop Modul 3 (Szétszedés)**: Frissített tanulási célok:
-  - GitHub Copilot MCP szerverekkel való aktiválása
+- **📚 Workshop Modul 3 (Dekonstrukció)**: Tanulási célok frissítése:
+  - GitHub Copilot MCP szerverekkel aktiválás
   - AZD sablon mappaszerkezet megértése
-  - Infrastruktúra-kód (Bicep) szervezési minták
+  - Infrastrukturális kód (Bicep) szervezési minták
   - Gyakorlati labor utasítások
 
-- **🔧 Workshop Modul 6 (Leszerelés)**: Befejezve:
+- **🔧 Workshop Modul 6 (Leállítás)**: Befejezve:
   - Erőforrás takarítás és költségkezelési célok
-  - `azd down` használata az infrastruktúra biztonságos leszereléséhez
-  - Lágyan törölt kognitív szolgáltatások visszaállításának útmutatója
-  - Bónusz felfedező feladatok GitHub Copilot és Azure Portal témákban
+  - `azd down` használata biztonságos infrastruktúra leszereléshez
+  - Soft-delete-elt kognitív szolgáltatások helyreállítása
+  - Bónusz felfedező feladatok GitHub Copilot és Azure Portal használatával
 
 #### Javítva
-- **🔗 Törött linkek javítása**: Több mint 15 belső dokumentációs link javítása:
-  - `docs/ai-foundry/ai-model-deployment.md`: Elérési utak javítása a microsoft-foundry-integration.md-hez
-  - `docs/troubleshooting/ai-troubleshooting.md`: ai-model-deployment.md és production-ai-practices.md útvonalak korrigálása
-  - `docs/getting-started/first-project.md`: Nem létező cicd-integration.md lecserélése deployment-guide.md-re
-  - `examples/retail-scenario.md`: GyIK és hibakeresési útmutató elérési utak javítása
-  - `examples/container-app/microservices/README.md`: Tanfolyam kezdőlap és deployment guide helyes elérési utak
+- **🔗 Törött Linkek Javítása**: 15+ törött belső dokumentációs link javítása:
+  - `docs/ai-foundry/ai-model-deployment.md`: microsoft-foundry-integration.md útvonal javítása
+  - `docs/troubleshooting/ai-troubleshooting.md`: ai-model-deployment.md és production-ai-practices.md utak javítása
+  - `docs/getting-started/first-project.md`: nem létező cicd-integration.md helyett deployment-guide.md
+  - `examples/retail-scenario.md`: FAQ és hibakeresési útmutató hivatkozások javítása
+  - `examples/container-app/microservices/README.md`: kurzus kezdő és telepítési útmutató utak javítása
   - `resources/faq.md` és `resources/glossary.md`: AI fejezet hivatkozások frissítése
-  - `course-outline.md`: Oktatói útmutató és AI workshop lab hivatkozások javítása
+  - `course-outline.md`: oktató útmutató és AI workshop labor hivatkozások javítása
 
-- **📅 Workshop státusz zászló**: „Under Construction” helyett aktív workshop státuszra frissítve, 2026 februári dátummal
+- **📅 Workshop állapot banner**: „Építés alatt” jelzés cseréje aktív workshop státuszra, 2026 februári dátummal
 
-- **🔗 Workshop navigáció**: Törött navigációs linkek javítása a workshop README.md-ben, amelyek nem létező lab-1-azd-basics mappára mutattak
+- **🔗 Workshop navigáció javítások**: Töredezett navigációs linkek javítása workshop README.md-ben, nem létező lab-1-azd-basics mappára mutató hivatkozás korrekciója
 
-#### Megváltoztatva
-- **Workshop bemutató**: Az „építés alatt áll” figyelmeztetés eltávolítása, a workshop most már kész és használatra kész
-- **Navigációs konzisztencia**: Biztosítva, hogy minden workshop modul megfelelő modulok közti navigációval rendelkezzen
-- **Tanulási útmutató hivatkozások**: Fejezetek közti hivatkozások frissítése a helyes microsoft-foundry elérési utakra
+#### Módosítva
+- **Workshop bemutatás**: „Építés alatt” figyelmeztetés eltávolítva, workshop kész és használatra kész
+- **Navigációs konzisztencia**: Biztosított modulok közti megfelelő navigáció
+- **Tanulási út hivatkozások**: fejezetkereszt-hivatkozások frissítése a helyes microsoft-foundry utakra
 
-#### Ellenőrizve
-- ✅ Minden angol nyelvű markdown fájl érvényes belső linkekkel rendelkezik
-- ✅ A 0-7 számú workshop modulok teljesek a tanulási célokkal együtt
-- ✅ Fejezetek és modulok közti navigáció megfelelően működik
-- ✅ A tartalom megfelel az AI fejlesztők igényeinek a Microsoft AZD használatával
-- ✅ Kezdők számára is érthető nyelvezet és szerkezet
-- ✅ A CONTRIBUTING.md egyértelmű útmutatást ad a közösségi hozzájárulók számára
+#### Validálva
+- ✅ Minden angol markdown fájlban érvényes belső linkek
+- ✅ Workshop modulok 0-7 teljesek tanulási célokkal
+- ✅ Fejezetek és modulok közti navigáció rendben működik
+- ✅ Tartalom alkalmas AI fejlesztők számára Microsoft AZD-vel
+- ✅ Kezdőbarát nyelvezet és szerkezet végig fenntartva
+- ✅ CONTRIBUTING.md világos útmutatást nyújt közösségi hozzájárulóknak
 
-#### Műszaki kivitelezés
-- **Link ellenőrzés**: Automatikus PowerShell szkript az összes .md belső link felülvizsgálatára
-- **Tartalom audit**: Kézi áttekintés a workshop teljessége és kezdőbarát jellege érdekében
-- **Navigációs rendszer**: Egységes fejezet és modul navigációs minta alkalmazása
+#### Technikai megvalósítás
+- **Link validálás**: Automatikus PowerShell szkript ellenőrizte az összes .md belső linket
+- **Tartalom audit**: Manuális áttekintés a workshop teljességére és kezdőbarát jellemére
+- **Navigációs rendszer**: Következetes fejezet és modul navigációs minták alkalmazása
 
 #### Megjegyzések
-- **Hatókör**: Csak az angol dokumentációra vonatkozó módosítások
-- **Fordítások**: Fordító mappák nem frissültek ebben a verzióban (automatikus szinkronizáció később várható)
-- **Workshop időtartama**: Az egész workshop most 3-4 órányi gyakorlati tanulást kínál
+- **Hatókör**: Módosítások kizárólag angol dokumentációban
+- **Fordítások**: Fordítási mappák nem frissültek ebben a verzióban (automatikus fordítás később szinkronizál)
+- **Workshop időtartam**: A kész workshop 3-4 óra kézibeletős tanulást biztosít
 
 ---
 
 ### [v3.8.0] - 2025-11-19
 
-#### Fejlett dokumentáció: Monitorozás, Biztonság és Több ügynökös minták
-**Ez a verzió átfogó A-minősítésű leckéket ad hozzá az Application Insights integrációról, hitelesítési mintákról és több ügynökös koordinációs mintákról a gyártási telepítésekhez.**
+#### Haladó dokumentáció: Monitoring, biztonság és multi-agent minták
+**Ez a verzió átfogó A-minőségű leckéket ad hozzá az Application Insights integrációról, hitelesítési mintákról és multi-agent koordinációról gyártási telepítésekhez.**
 
 #### Hozzáadva
 - **📊 Application Insights integrációs lecke**: a `docs/pre-deployment/application-insights.md` fájlban:
-  - AZD-orientált telepítés automatikus előkészítéssel
-  - Teljes Bicep sablonok Application Insights + Log Analytics-hez
-  - Működő Python alkalmazások egyedi telemetriával (1,200+ sor)
-  - AI/LLM monitorozási minták (Azure OpenAI token / költségkövetés)
-  - 6 Mermaid diagram (architektúra, elosztott trace, telemetria folyamat)
-  - 3 gyakorlati feladat (riasztások, műszerfalak, AI monitorozás)
-  - Kusto lekérdezési példák és költségoptimalizálás stratégiák
-  - Élő mérőszám folyam streaming és valós idejű hibakeresés
-  - 40-50 perc tanulási idő gyártási készen álló mintákkal
+  - AZD-központú telepítés automatikus provisioninggal
+  - Teljes Bicep sablonok Application Insights + Log Analyticshez
+  - Működő Python alkalmazások egyedi telemetriával (1200+ sor)
+  - AI/LLM monitoring minták (Microsoft Foundry modellek token- és költségkövető)
+  - 6 Mermaid diagram (architektúra, elosztott tracing, telemetria áramlás)
+  - 3 gyakorlati feladat (riasztások, irányítópultok, AI monitoring)
+  - Kusto lekérdezés példák és költségoptimalizálási stratégiák
+  - Élő metrikák streamelése és valós idejű hibakeresés
+  - 40-50 perces tanulási idő gyártásra kész mintákkal
 
 - **🔐 Hitelesítési és biztonsági minták lecke**: a `docs/getting-started/authsecurity.md` fájlban:
-  - 3 hitelesítési minta (kapcsolati stringek, Key Vault, kezelt identitás)
-  - Teljes Bicep infrastruktúra sablonok biztonságos telepítésekhez
-  - Node.js alkalmazás kód Azure SDK integrációval
-  - 3 teljes gyakorlati feladat (kezelt identitás engedélyezése, felhasználói azonosított identitás, Key Vault forgatás)
-  - Biztonsági legjobb gyakorlatok és RBAC konfigurációk
+  - 3 hitelesítési minta (connection stringek, Key Vault, kezelőazonosság)
+  - Teljes Bicep infrastruktúra sablonok biztonságos telepítéshez
+  - Node.js alkalmazáskód Azure SDK integrációval
+  - 3 komplett gyakorlat (kezelőazonosság engedélyezése, felhasználó-alapú identitás, Key Vault forgatás)
+  - Biztonsági legjobb gyakorlatok és RBAC beállítások
   - Hibakeresési útmutató és költségelemzés
-  - Gyártási készen álló jelszó nélküli hitelesítési minták
+  - Gyártásra kész jelszó nélküli hitelesítési minták
 
-- **🤖 Több ügynökös koordinációs minták lecke**: a `docs/pre-deployment/coordination-patterns.md` fájlban:
-  - 5 koordinációs minta (szekvenciális, párhuzamos, hierarchikus, eseményvezérelt, konszenzus)
-  - Teljes orchestrator szolgáltatás implementáció (Python/Flask, 1,500+ sor)
-  - 3 szakosodott ügynök implementáció (Kutató, Író, Szerkesztő)
-  - Service Bus integráció üzenetküldéshez
+- **🤖 Multi-agent koordinációs minták lecke**: a `docs/pre-deployment/coordination-patterns.md` fájlban:
+  - 5 koordinációs minta (soros, párhuzamos, hierarchikus, eseményvezérelt, konszenzus)
+  - Teljes orchestrátor szolgáltatás implementáció (Python/Flask, 1500+ sor)
+  - 3 specializált ügynök implementáció (Kutató, Író, Szerkesztő)
+  - Service Bus integráció üzenetsorhoz
   - Cosmos DB állapotkezelés elosztott rendszerekhez
-  - 6 Mermaid diagram az ügynök interakciókról
-  - 3 haladó gyakorlat (időkorlát kezelés, újrapróbálkozás, áramkör-megszakító)
-  - Költség bontás (240-565 $/hónap) optimalizációs stratégiákkal
-  - Application Insights integráció monitorozáshoz
+  - 6 Mermaid diagram az ügynökök interakcióiról
+  - 3 haladó gyakorlat (időtúllépés kezelése, újrapróbálkozás logika, körkapcsoló)
+  - Költségbontás ($240-$565/hónap) optimalizációs stratégiákkal
+  - Application Insights integráció a monitorozáshoz
 
 #### Bővítve
-- **Előtelepítési fejezet**: Most átfogó monitorozási és koordinációs mintákat tartalmaz
-- **Bevezető fejezet**: Professzionális hitelesítési mintákkal bővült
-- **Gyártási készenlét**: Teljes körű lefedettség biztonságtól megfigyelhetőségig
-- **Tanfolyam vázlat**: Új leckékre hivatkozás a 3. és 6. fejezetben
+- **Pre-deployment fejezet**: Most már tartalmaz átfogó monitorozási és koordinációs mintákat
+- **Getting Started fejezet**: Fejlettebb professzionális hitelesítési mintákkal bővítve
+- **Gyártásra kész állapot**: Teljes lefedettség a biztonságtól az észlelhetőségig
+- **Tanfolyamvázlat**: Frissítve, hogy hivatkozzon az új leckékre a 3. és 6. fejezetekben
 
-#### Megváltoztatva
-- **Tanulási folyamat**: Jobb integráció a biztonság és monitorozás területén a kurzus alatt
-- **Dokumentáció minősége**: Egységes A-minőség (95-97%) az új leckékben
-- **Gyártási minták**: Teljes körű végponttól végpontig lefedettség vállalati telepítésekhez
+#### Módosítva
+- **Tanulási folyamat**: Jobb integráció a biztonság és monitorozás között a tanfolyamban
+- **Dokumentáció minőség**: Következetes A-minőségű sztenderdek (95-97%) az új leckékben
+- **Gyártási minták**: Teljes körű, végponttól végpontig lefedettség vállalati telepítésekhez
 
 #### Javítva
-- **Fejlesztői élmény**: Világos út a fejlesztéstől a gyártási monitorozásig
+- **Fejlesztői élmény**: Tiszta útvonal a fejlesztéstől a gyártásmonitorozásig
 - **Biztonsági szabványok**: Professzionális minták hitelesítéshez és titkok kezeléséhez
-- **Megfigyelhetőség**: Teljes Application Insights integráció AZD-vel
-- **AI munkaterhelések**: Speciális monitorozás Azure OpenAI és több ügynökös rendszerekhez
+- **Megfigyelhetőség**: Teljes Application Insights integráció az AZD-vel
+- **MI feladatok**: Specializált monitorozás a Microsoft Foundry modellekhez és többügynökös rendszerekhez
 
-#### Ellenőrizve
+#### Érvényesített
 - ✅ Minden lecke teljes, működő kódot tartalmaz (nem csak részleteket)
-- ✅ Mermaid diagramok a vizuális tanuláshoz (összesen 19 az 3 leckében)
-- ✅ Gyakorlati feladatok ellenőrzési lépésekkel (összesen 9)
-- ✅ Gyártási készen álló Bicep sablonok `azd up` által telepíthetők
+- ✅ Mermaid diagramok a vizuális tanuláshoz (összesen 19 három leckében)
+- ✅ Gyakorlati feladatok ellenőrző lépésekkel (összesen 9)
+- ✅ Gyártásra kész Bicep sablonok, telepíthetők `azd up` parancssal
 - ✅ Költségelemzés és optimalizációs stratégiák
-- ✅ Hibakeresési útmutatók és legjobb gyakorlatok
-- ✅ Tudásellenőrzési pontok és megerősítő parancsok
+- ✅ Hibakeresési útmutatók és bevált gyakorlatok
+- ✅ Tudásellenőrző pontok ellenőrző parancsokkal
 
-#### Dokumentációs értékelés eredmények
-- **docs/pre-deployment/application-insights.md**: Átfogó monitorozási útmutató
-- **docs/getting-started/authsecurity.md**: Professzionális biztonsági minták
-- **docs/pre-deployment/coordination-patterns.md**: Haladó több ügynökös architektúrák
-- **Összesen Új Tartalom**: Állandó magas minőségi színvonal
+#### Dokumentáció visszajelzések
+- **docs/pre-deployment/application-insights.md**: - Átfogó monitorozási útmutató
+- **docs/getting-started/authsecurity.md**: - Professzionális biztonsági minták
+- **docs/pre-deployment/coordination-patterns.md**: - Fejlett többügynökös architektúrák
+- **Összességében új tartalom**: - Következetes magas színvonal
 
-#### Műszaki kivitelezés
-- **Application Insights**: Log Analytics + egyedi telemetria + elosztott trace
+#### Műszaki megvalósítás
+- **Application Insights**: Log Analytics + egyedi telemetria + elosztott nyomkövetés
 - **Hitelesítés**: Kezelt identitás + Key Vault + RBAC minták
-- **Több ügynök**: Service Bus + Cosmos DB + Konténer appok + orchestráció
-- **Monitorozás**: Élő mérőszámok + Kusto lekérdezések + riasztások + műszerfalak
-- **Költségkezelés**: Mintavételi stratégiák, megtartási szabályok, költségkeret ellenőrzések
+- **Többügynökös**: Service Bus + Cosmos DB + Container Apps + összehangolás
+- **Monitorozás**: Élő metrikák + Kusto lekérdezések + riasztások + irányítópultok
+- **Költségkezelés**: Mintavételezési stratégiák, megtartási szabályok, költségvetési kontrollok
 
 ### [v3.7.0] - 2025-11-19
 
-#### Dokumentáció minőségjavítások és új Azure OpenAI példa
-**Ez a verzió javítja a dokumentáció minőségét egész tárolón belül, továbbá hozzáad egy teljes Azure OpenAI telepítési példát GPT-4 chat felülettel.**
+#### Dokumentáció minőségfejlesztések és új Microsoft Foundry Models példa
+**Ez a verzió javítja a dokumentáció minőségét az egész tárolóban, és egy teljes Microsoft Foundry Models telepítési példát ad hozzá gpt-4.1 chat felülettel.**
 
-#### Hozzáadva
-- **🤖 Azure OpenAI Chat példa**: Teljes GPT-4 telepítés működő megvalósítással az `examples/azure-openai-chat/` mappában:
-  - Teljes Azure OpenAI infrastruktúra (GPT-4 modell telepítés)
-  - Python parancssori chat felület beszélgetési előzményekkel
+#### Hozzáadott
+- **🤖 Microsoft Foundry Models chat példa**: Teljes gpt-4.1 telepítés működő megvalósítással `examples/azure-openai-chat/`:
+  - Teljes Microsoft Foundry Models infrastruktúra (gpt-4.1 modell telepítés)
+  - Python parancssoros chat felület beszélgetési előzményekkel
   - Key Vault integráció biztonságos API kulcs tároláshoz
-  - Tokenhasználat követése és költségbecslés
-  - Rate limit és hiba kezelés
+  - Tokenhasználat nyomon követése és költségbecslés
+  - Sebességkorlátozás és hibakezelés
   - Átfogó README 35-45 perces telepítési útmutatóval
-  - 11 gyártásra kész fájl (Bicep sablonok, Python app, konfiguráció)
-- **📚 Dokumentációs gyakorlatok**: Gyakorlati elemek hozzáadva a konfigurációs útmutatóhoz:
-  - 1. gyakorlat: Több környezet konfiguráció (15 perc)
-  - 2. gyakorlat: Titokkezelési gyakorlat (10 perc)
-  - Világos sikerfeltételek és ellenőrzési lépések
-- **✅ Telepítés ellenőrzés**: Ellenőrző szakasz a telepítési útmutatóban:
-  - Egészségellenőrzési eljárások
-  - Sikerfeltételek listája
-  - Várt kimenetek minden telepítési parancshoz
-  - Gyors hibakeresési referencia
+  - 11 gyártásra kész fájl (Bicep sablonok, Python alkalmazás, konfiguráció)
+- **📚 Dokumentációs gyakorlatok**: Gyakorlati feladatok hozzáadva a konfigurációs útmutatóhoz:
+  - Feladat 1: Több-környezetű konfiguráció (15 perc)
+  - Feladat 2: Titkok kezelése gyakorlatban (10 perc)
+  - Egyértelmű siker kritériumok és ellenőrző lépések
+- **✅ Telepítés ellenőrzése**: Ellenőrzési szakasz hozzáadva a telepítési útmutatóhoz:
+  - Állapotellenőrzési eljárások
+  - Siker kritériumok listája
+  - Várt kimenetek az összes telepítési parancshoz
+  - Gyors hibaelhárítási referencia
 
-#### Bővítve
-- **examples/README.md**: Átadva A-minőségre (93%):
-  - azure-openai-chat hozzáadása minden releváns szakaszban
-  - Helyi példák számának frissítése 3-ról 4-re
-  - AI Alkalmazás példák táblázatához hozzáadva
-  - Beillesztve középhaladó felhasználók Gyors Indulásába
-  - Microsoft Foundry sablonok közé felvéve
-  - Frissítve az Összehasonlító Mátrix és technológiai hivatkozások
+#### Fejlesztett
+- **examples/README.md**: A minőség az A szintre frissítve (93%):
+  - Hozzáadva az azure-openai-chat minden releváns szakaszhoz
+  - Helyi példák száma 3-ról 4-re nőtt
+  - Hozzáadva az MI alkalmazás példák táblázathoz
+  - Integrálva a középhaladó felhasználók gyorsindítójába
+  - Hozzáadva a Microsoft Foundry sablonok szekcióhoz
+  - Frissítve az összehasonlító mátrix és technológia keresési szakaszok
+- **Dokumentáció minőség**: B+ (87%) → A- (92%) javítás a docs mappában:
+  - Hozzáadott várható kimenetek kritikus parancspéldákhoz
+  - Tartalmaz ellenőrző lépéseket konfigurációs változásokhoz
+  - Fejlesztett gyakorlati tanulás feladatokkal
 
-- **Dokumentáció minőség**: B+ (87%) → A- (92%) javítás az egész docs mappán belül:
-  - Kritikus parancspéldák várt kimenet hozzáadása
-  - Konfigurációs változtatások ellenőrzési lépései
-  - Gyakorlati tanulást segítő gyakorlatok bővítése
+#### Megváltozott
+- **Tanulási folyamat**: Jobb AI példák integrálása középhaladó tanulók számára
+- **Dokumentációs szerkezet**: Több cselekvő feladat egyértelmű eredményekkel
+- **Ellenőrzési folyamat**: Kiemelt siker kritériumok a kulcs munkafolyamatokban
 
-#### Megváltoztatva
-- **Tanulási előrehaladás**: Jobb AI példák integrációja középhaladó tanulók számára
-- **Dokumentáció szerkezet**: Több cselekvésre ösztönző gyakorlat világos eredményekkel
-- **Ellenőrzési folyamat**: Kiemelt sikerfeltételek a kulcsfontosságú munkafolyamatokban
+#### Fejlesztett
+- **Fejlesztői élmény**: Microsoft Foundry Models telepítés most 35-45 perc (a korábbi 60-90 helyett)
+- **Költség átláthatóság**: Egyértelmű költségbecslések ($50-200/hó) a Microsoft Foundry Models példához
+- **Tanulási út**: MI fejlesztők tiszta belépési pontja az azure-openai-chat
+- **Dokumentációs szabványok**: Következetes várt kimenetek és ellenőrző lépések
 
-#### Javítva
-- **Fejlesztői élmény**: Azure OpenAI telepítés most 35-45 percig tart (vs 60-90 perc komplex alternatívák)
-- **Költségátláthatóság**: Egyértelmű költségbecslések ($50-200/hónap) az Azure OpenAI példához
-- **Tanulási út**: AI fejlesztők számára világos belépési pont az azure-openai-chat révén
-- **Dokumentációs szabványok**: Egyöntetű várt kimenetek és ellenőrzési lépések
-
-#### Ellenőrizve
-- ✅ Azure OpenAI példa teljesen működőképes `azd up` segítségével
-- ✅ Minden 11 implementációs fájl szintaxisa helyes
-- ✅ README utasítások megfelelnek a tényleges telepítési élménynek
-- ✅ Dokumentációs linkek 8+ helyen frissítve
+#### Érvényesített
+- ✅ Microsoft Foundry Models példa teljesen működőképes `azd up` használatával
+- ✅ Mind a 11 megvalósítási fájl szintaktikailag helyes
+- ✅ README utasítások megfelelnek a valós telepítési élménynek
+- ✅ Dokumentációs hivatkozások 8+ helyen frissítve
 - ✅ Példák indexe pontosan tükrözi a 4 helyi példát
-- ✅ Nincs duplikált külső link a táblázatokban
+- ✅ Egyetlen külső hivatkozás sem ismétlődik táblázatokban
 - ✅ Minden navigációs hivatkozás helyes
 
-#### Műszaki kivitelezés
-- **Azure OpenAI architektúra**: GPT-4 + Key Vault + Konténer app mintázat
-- **Biztonság**: Kezelt identitás készen áll, titkok Key Vault-ban
+#### Műszaki megvalósítás
+- **Microsoft Foundry Models architektúra**: gpt-4.1 + Key Vault + Container Apps minta
+- **Biztonság**: Kezelt identitás kész, titkok Key Vaultban
 - **Monitorozás**: Application Insights integráció
-- **Költségmenedzsment**: Token követés és használat optimalizálás
-- **Telepítés**: Egyszerű `azd up` parancs a teljes beállításhoz
+- **Költségkezelés**: Token követés és felhasználás optimalizálás
+- **Telepítés**: Egyetlen `azd up` parancs a teljes beállításhoz
 
 ### [v3.6.0] - 2025-11-19
 
-#### Nagyszabású frissítés: Konténer alkalmazás telepítési példák
-**Ez a verzió átfogó, gyártásra kész konténer alkalmazás telepítési példákat vezet be az Azure Developer CLI (AZD) használatával, teljes dokumentációval és integrálva a tanulási útra.**
+#### Jelentős frissítés: Container App telepítési példák
+**Ez a verzió átfogó, gyártásra készen álló konténeralkalmazás telepítési példákat vezet be Azure Developer CLI-vel (AZD), teljes dokumentációval és tanulási út integrációval.**
 
-#### Hozzáadva
-- **🚀 Konténer alkalmazás példák**: Új helyi példák az `examples/container-app/` mappában:
-  - [Mester útmutató](examples/container-app/README.md): Teljes áttekintés a konténeres telepítésekről, gyors kezdés, gyártás, és haladó minták
-  - [Egyszerű Flask API](../../examples/container-app/simple-flask-api): Kezdőknek szánt REST API, skálázás nullára, egészségellenőrzések, monitorozás, hibakeresés
-  - [Microservices architektúra](../../examples/container-app/microservices): Gyártásra kész több szolgáltatás telepítés (API Gateway, Product, Order, User, Notification), aszinkron üzenetküldés, Service Bus, Cosmos DB, Azure SQL, elosztott követés, kék-zöld / kanári telepítés
-- **Legjobb gyakorlatok**: Biztonság, monitorozás, költségoptimalizálás és CI/CD útmutatás konténerizált munkaterhelésekhez
-- **Kódminták**: Teljes `azure.yaml`, Bicep sablonok, többszörös nyelvű szolgáltatás implementációk (Python, Node.js, C#, Go)
-- **Tesztelés és hibakeresés**: Végponttól végpontig tesztesetek, monitorozási parancsok, hibakeresési útmutató
+#### Hozzáadott
+- **🚀 Container App példák**: Új helyi példák a `examples/container-app/` könyvtárban:
+  - [Master útmutató](examples/container-app/README.md): Teljes áttekintés konténeres telepítésekről, gyorsindítás, gyártás, fejlett minták
+  - [Egyszerű Flask API](../../examples/container-app/simple-flask-api): Kezdőbarát REST API skálázás nullára, állapotellenőrzések, monitorozás és hibakeresés
+  - [Mikroszolgáltatások architektúrája](../../examples/container-app/microservices): Gyártásra kész több-szolgáltatásos telepítés (API Gateway, Termék, Rendelés, Felhasználó, Értesítés), aszinkron üzenetküldés, Service Bus, Cosmos DB, Azure SQL, elosztott nyomkövetés, blue-green/canary telepítés
+- **Legjobb gyakorlatok**: Biztonság, monitorozás, költségoptimalizáció és CI/CD útmutató konténeres munkaterhelésekhez
+- **Kódminták**: Teljes `azure.yaml`, Bicep sablonok, többnyelvű szolgáltatás megvalósítások (Python, Node.js, C#, Go)
+- **Tesztelés & Hibakeresés**: Végponttól végpontig történő teszt forgatókönyvek, monitorozó parancsok, hibakeresési útmutató
 
-#### Megváltoztatva
-- **README.md**: Frissítve, hogy az új konténer alkalmazás példákat kiemelje és azokhoz linkeket adjon a "Local Examples - Container Applications" alatt
-- **examples/README.md**: Frissítve a konténer alkalmazás példák hangsúlyozásával, összehasonlító mátrix bejegyzések hozzáadásával és technológiai/architektúra hivatkozások frissítésével
-- **Tanfolyam vázlata és tanulmányi útmutató**: Frissítve az új konténer alkalmazás példákra és telepítési mintákra vonatkozó hivatkozásokkal az érintett fejezetekben
+#### Megváltozott
+- **README.md**: Frissítve új container app példák bemutatására és linkelésére az „Helyi példák - Konténeralkalmazások” alatt
+- **examples/README.md**: Frissítve a container app példákat kiemelve, összehasonlító mátrix bejegyzéseket hozzáadva, technológia/architektúra hivatkozások frissítve
+- **Tanfolyam áttekintő & tanulási útmutató**: Frissítve új container app példák és telepítési minták hivatkozásával a releváns fejezetekben
 
-#### Érvényesítve
-- ✅ Minden új példa telepíthető `azd up` paranccsal, és követi a legjobb gyakorlatokat
-- ✅ Dokumentációs kereszt-hivatkozások és navigáció frissítve
-- ✅ A példák az alap szinttől a haladó szcenáriókig terjednek, beleértve a gyártásban használt mikroszolgáltatásokat is
+#### Érvényesített
+- ✅ Minden új példa telepíthető `azd up` használatával és követi a legjobb gyakorlatokat
+- ✅ Dokumentációs kereszthivatkozások és navigáció frissítve
+- ✅ Példák kezdőtől haladó szintig lefedik a forgatókönyveket, beleértve a gyártási mikroszolgáltatásokat is
 
 #### Megjegyzések
 - **Hatókör**: Csak angol nyelvű dokumentáció és példák
-- **Következő lépések**: További haladó konténer minták és CI/CD automatizálás bővítése a jövőbeni kiadásokban
+- **Következő lépések**: További fejlett konténer minták és CI/CD automatizálás bővítése a jövőbeni kiadásokban
 
 ### [v3.5.0] - 2025-11-19
 
-#### Termék újra márkázása: Microsoft Foundry
-**Ez a verzió átfogó terméknév változtatást hajt végre az angol dokumentációban a "Microsoft Foundry" névre, tükrözve a Microsoft hivatalos arculatváltását.**
+#### Termékátnevezés: Microsoft Foundry
+**Ez a verzió teljeskörű terméknév-cserét hajt végre az „Microsoft Foundry” névre az összes angol nyelvű dokumentációban, tükrözve a Microsoft hivatalos átnevezését.**
 
-#### Módosítva
-- **🔄 Termék név frissítés**: Teljes körű újra márkázás "Microsoft Foundry"-ra
-  - Minden hivatkozás frissítve az angol dokumentáció `docs/` mappájában
+#### Megváltozott
+- **🔄 Terméknév frissítés**: Teljes átnevezés „Microsoft Foundry”-ra
+  - Minden hivatkozás frissítve az angol dokumentációkban a `docs/` mappában
   - Mappa átnevezve: `docs/ai-foundry/` → `docs/microsoft-foundry/`
   - Fájl átnevezve: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - Összesen 23 tartalom hivatkozás frissítve 7 dokumentum fájlban
+  - Összesen 23 tartalmi hivatkozás frissítve 7 dokumentációs fájlban
 
-- **📁 Mappaszerkezet változások**:
+- **📁 Mappastruktúra változások**:
   - `docs/ai-foundry/` átnevezve `docs/microsoft-foundry/`-ra
-  - Minden kereszt-hivatkozás frissítve az új mappastruktúrára
-  - Navigációs linkek elfogadva az egész dokumentációban
+  - Minden kereszt-hivatkozás frissítve az új struktúrára
+  - Navigációs linkek ellenőrizve minden dokumentumban
 
-- **📄 Fájl átnév fel**:
+- **📄 Fájl átnevezések**:
   - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - Minden belső hivatkozás frissítve az új fájlnévre
+  - Minden belső link frissítve az új fájlnévre
 
 #### Frissített fájlok
 - **Fejezet dokumentációk** (7 fájl):
   - `docs/microsoft-foundry/ai-model-deployment.md` - 3 navigációs link frissítve
   - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 terméknév hivatkozás frissítve
-  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Már Microsoft Foundry használatban (korábbi frissítésekből)
+  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Már Microsoft Foundry-t használ (korábbi frissítésekből)
   - `docs/microsoft-foundry/production-ai-practices.md` - 3 hivatkozás frissítve (áttekintés, közösségi visszajelzés, dokumentáció)
-  - `docs/getting-started/azd-basics.md` - 4 kereszt-hivatkozás frissítve
-  - `docs/getting-started/first-project.md` - 2 fejezeti navigációs link frissítve
-  - `docs/getting-started/installation.md` - 2 következő fejezet hivatkozás frissítve
+  - `docs/getting-started/azd-basics.md` - 4 kereszthivatkozás frissítve
+  - `docs/getting-started/first-project.md` - 2 fejezeti navigációs hivatkozás frissítve
+  - `docs/getting-started/installation.md` - 2 következő fejezet link frissítve
   - `docs/troubleshooting/ai-troubleshooting.md` - 3 hivatkozás frissítve (navigáció, Discord közösség)
   - `docs/troubleshooting/common-issues.md` - 1 navigációs link frissítve
   - `docs/troubleshooting/debugging.md` - 1 navigációs link frissítve
 
 - **Tanfolyam szerkezet fájlok** (2 fájl):
-  - `README.md` - 17 hivatkozás frissítve (tanfolyam áttekintés, fejezet címek, sablon szekció, közösségi betekintések)
+  - `README.md` - 17 hivatkozás frissítve (tanfolyam áttekintő, fejezetcímek, sablon szekció, közösségi betekintések)
   - `course-outline.md` - 14 hivatkozás frissítve (áttekintés, tanulási célok, fejezeti erőforrások)
 
-#### Érvényesítve
-- ✅ Nincs több "ai-foundry" mappa elérési útvonal hivatkozás angol doksiban
-- ✅ Nincs több "Microsoft Foundry" terméknév hivatkozás angol doksiban
-- ✅ Minden navigációs link működik az új mappaszerkezettel
-- ✅ Fájl és mappa átnevezések sikeresen befejezve
-- ✅ Kereszt-hivatkozások a fejezetek között érvényesítve
+#### Érvényesített
+- ✅ Nincs több „ai-foundry” mappa elérési hivatkozás az angol doksikban
+- ✅ Nincs több „Microsoft Foundry” terméknév hivatkozás az angol doksikban
+- ✅ Minden navigációs link működik az új mappastruktúrával
+- ✅ Fájl- és mappaátnevezések sikeresen végrehajtva
+- ✅ Kereszthivatkozások a fejezetek között ellenőrizve
 
 #### Megjegyzések
-- **Hatókör**: Csak az angol dokumentáció `docs/` mappájában történt változtatás
-- **Fordítások**: A fordító mappák (`translations/`) nincsenek frissítve ebben a verzióban
-- **Workshop**: A workshop anyagok (`workshop/`) nem frissítettek ebben a verzióban
-- **Példák**: A példa fájlokban előfordulhatnak még régi elnevezések (a jövőbeli frissítés tárgyai)
+- **Hatókör**: Változások csak az angol `docs/` mappában
+- **Fordítások**: A fordítókönyvtárak (`translations/`) nem frissültek ebben a verzióban
+- **Workshop anyagok**: `workshop/` nem frissült ebben a verzióban
+- **Példák**: Példafájlok továbbra is használhatnak régi neveket (a jövőbeni frissítésben javítandó)
 - **Külső hivatkozások**: Külső URL-ek és GitHub repo hivatkozások változatlanok
 
 #### Migrációs útmutató közreműködőknek
-Ha helyi ágai vagy dokumentációi a régi szerkezetet használják:
-1. Frissítse a mappa hivatkozásokat: `docs/ai-foundry/` → `docs/microsoft-foundry/`
-2. Frissítse a fájl hivatkozásokat: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-3. Cserélje a terméknevet: "Microsoft Foundry" → "Microsoft Foundry"
-4. Ellenőrizze, hogy minden belső dokumentációs link működik
+Ha helyi ágak vagy dokumentációk hivatkoznak a régi struktúrára:
+1. Frissítsd a mappa hivatkozásokat: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+2. Frissítsd a fájl hivatkozásokat: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+3. Cseréld le a termék nevét: „Microsoft Foundry” → „Microsoft Foundry”
+4. Ellenőrizd, hogy minden belső dokumentációs link működik
 
 ---
 
 ### [v3.4.0] - 2025-10-24
 
-#### Infrastruktúra Előnézet és Érvényesítési Fejlesztések
-**Ez a verzió bevezeti az Azure Developer CLI új előnézeti funkciójának átfogó támogatását és fejleszti a workshop felhasználói élményt.**
+#### Infrastrukturális előnézet és érvényesítés fejlesztések
+**Ez a verzió teljeskörű támogatást vezet be az új Azure Developer CLI előnézeti funkcióhoz és javítja a workshop felhasználói élményt.**
 
-#### Hozzáadva
-- **🧪 azd provision --preview funkció dokumentációja**: Az új infrastruktúra előnézeti képesség részletes ismertetése
-  - Parancs referencia és használati példák a segédlapon
-  - Részletes integráció az üzembe helyezési útmutatóban esettanulmányokkal és előnyökkel
-  - Pre-flight ellenőrzés integrálva a biztonságosabb telepítés érdekében
-  - Kezdő lépések útmutató frissítése az elsőbbséget élvező biztonságos telepítéssel
-- **🚧 Workshop állapot szalag**: Professzionális HTML banner, amely jelzi a workshop fejlesztési állapotát
-  - Gradiens dizájn kivitelezési jelzőkkel a felhasználók egyértelmű tájékoztatásához
-  - Utolsó frissítés időbélyeggel az átláthatóság érdekében
-  - Mobilra reszponzív kialakítás minden eszközre
+#### Hozzáadott
+- **🧪 azd provision --preview funkció dokumentáció**: Teljes lefedettség az új infrastrukturális előnézeti képességhez
+  - Parancs referencia és használati példák cheat sheet-ben
+  - Részletes integráció a provisioning útmutatóban esettanulmányokkal és előnyökkel
+  - Pre-flight ellenőrzés integrálva a telepítés biztonságosabbá tételéhez
+  - Kezdő útmutató frissítve biztonság-központú telepítési gyakorlatokkal
+- **🚧 Workshop állapot sáv**: Professzionális HTML sáv a workshop fejlesztési státuszának jelzésére
+  - Gradiens dizájn és építési indikátorok a világos felhasználói kommunikáció érdekében
+  - Utolsó frissítés időbélyeg a transzparenciához
+  - Mobilbarát kialakítás minden eszköztípusra
 
-#### Fejlesztve
-- **Infrastruktúra biztonság**: Az előnézeti funkció végig integrálva a telepítési dokumentációban
-- **Elő telepítési ellenőrzés**: Automatizált szkriptek már tartalmazzák az infrastruktúra előnézeti tesztelését
-- **Fejlesztői munkafolyamat**: Frissített parancs szekvenciák az előnézet használatával mint legjobb gyakorlat
-- **Workshop élmény**: Egyértelműen kommunikált fejlesztési státusz a felhasználók számára
+#### Fejlesztett
+- **Infrastrukturális biztonság**: Az előnézeti funkció végig integrálva a telepítési dokumentációban
+- **Előtelepítési érvényesítés**: Automatizált szkriptek immár tartalmaznak előnézeti teszteket
+- **Fejlesztői munkafolyamat**: Frissített parancsminták az előnézet használatával mint bevált gyakorlat
+- **Workshop élmény**: Világos elvárások a felhasználók számára a tartalom fejlesztési státuszáról
 
-#### Módosítva
-- **Telepítési legjobb gyakorlatok**: Mostantól előnézeti első munkafolyamat ajánlott
-- **Dokumentációs folyamat**: Az infrastruktúra érvényesítés korábbi helyre került a tanulási folyamatban
-- **Workshop megjelenítés**: Professzionális státusz kommunikáció egyértelmű fejlesztési idővonallal
+#### Megváltozott
+- **Telepítési leggyakoribb gyakorlatok**: Az előnézeti első munkafolyamat ajánlott megközelítés
+- **Dokumentációs folyamat**: Infrastrukturális validáció korábbi helyre került a tanulási folyamatban
+- **Workshop bemutatás**: Professzionális státusz kommunikáció világos fejlesztési idővonallal
 
-#### Javítva
-- **Biztonság-első megközelítés**: Az infrastruktúra változások előzetesen ellenőrizhetők telepítés előtt
-- **Csapatmunka támogatása**: Az előnézeti eredmények megoszthatók átnézés és jóváhagyás céljából
-- **Költségtudatosság**: Jobb erőforrásköltség megértés az előkészítés előtt
-- **Kockázatcsökkentés**: Csökken a telepítési hibák előre történő érvényesítéssel
+#### Fejlesztett
+- **Biztonság-központú megközelítés**: Infrastrukturális változtatások most előzetesen ellenőrizhetők telepítés előtt
+- **Csapatmunka**: Az előnézeti eredmények megoszthatók átvizsgálásra és jóváhagyásra
+- **Költségtudatosság**: Jobb áttekintés az erőforrás-költségekről provisioning előtt
+- **Kockázatcsökkentés**: Csökkentett telepítési hibák előzetes validációval
 
-#### Technikai megvalósítás
-- **Több dokumentum integrációja**: Az előnézeti funkció 4 kulcsfájlban dokumentált
-- **Parancs minták**: Konzekvens szintaxis és példák a teljes dokumentációban
-- **Legjobb gyakorlat integráció**: Az előnézet beépítve az érvényesítési munkafolyamatokba és szkriptekbe
-- **Vizualizációs jelzők**: Egyértelmű ÚJ funkció jelölések a felfedezhetőség érdekében
+#### Műszaki megvalósítás
+- **Több dokumentumos integráció**: Az előnézeti funkció négy fő fájlban dokumentált
+- **Parancs minták**: Következetes szintaxis és példák a dokumentációban
+- **Legjobb gyakorlat integráció**: Előnézet integrálva validációs munkafolyamatokba és szkriptekbe
+- **Vizualizációs indikátorok**: Egyértelmű ÚJ funkció jelölések a jobb felfedezhetőség érdekében
 
 #### Workshop infrastruktúra
-- **Állapot kommunikáció**: Professzionális HTML banner gradiens stílusban
-- **Felhasználói élmény**: Meghatározott fejlesztési státusz megelőzi a félreértéseket
-- **Professzionális bemutatás**: Megőrzi a repository hitelességét, miközben elvárásokat állít fel
-- **Idővonal átláthatóság**: Október 2025 utolsó frissítés időbélyeg az elszámoltathatóságért
+- **Státusz kommunikáció**: Professzionális HTML sáv gradiens stílussal
+- **Felhasználói élmény**: Világos fejlesztési státusz megakadályozza a félreértéseket
+- **Professzionális bemutatás**: Megőrzi a tároló hitelességét és világos elvárásokat állít fel
+- **Idővonal átláthatóság**: 2025 októberi utolsó frissítés időbélyeg az elszámoltathatóságért
 
 ### [v3.3.0] - 2025-09-24
 
 #### Fejlesztett workshop anyagok és interaktív tanulási élmény
-**Ez a verzió átfogó workshop anyagokat vezet be böngésző-alapú interaktív útmutatókkal és strukturált tanulási útvonalakkal.**
+**Ez a verzió átfogó workshop anyagokat vezet be böngésző alapú interaktív útmutatókkal és strukturált tanulási utakkal.**
 
-#### Hozzáadva
-- **🎥 Interaktív workshop útmutató**: Böngésző alapú workshop élmény MkDocs előnézeti lehetőséggel
-- **📝 Strukturált workshop utasítások**: 7 lépéses tanulási útvonal az felfedezéstől a testreszabásig
-  - 0-Bevezető: Workshop áttekintése és beállítás
-  - 1-Sablon kiválasztása: Sablon felfedezés és választási folyamat
-  - 2-Sablon ellenőrzése: Telepítés és érvényesítés
-  - 3-Sablon lebontása: Architektúra megértése
-  - 4-Sablon konfigurálása: Beállítás és testreszabás
-  - 5-Sablon testreszabása: Haladó módosítások és iterációk
-  - 6-Infrastruktúra lebontása: Takarítás és erőforrás menedzsment
-  - 7-Összegzés: Áttekintés és következő lépések
-- **🛠️ Workshop eszközök**: MkDocs konfiguráció Material témával az élmény fokozására
-- **🎯 Gyakorlati tanulási útvonal**: 3 lépéses módszertan (Felfedezés → Telepítés → Testreszabás)
-- **📱 GitHub Codespaces integráció**: Zökkenőmentes fejlesztői környezet beállítás
+#### Hozzáadott
+- **🎥 Interaktív Workshop Útmutató**: Böngészőalapú workshop élmény MkDocs előnézeti képességgel
+- **📝 Strukturált Workshop Utasítások**: 7 lépéses vezetett tanulási út felfedezéstől az egyedi beállításig
+  - 0-Bevezető: Workshop áttekintése és beállítása
+  - 1-Mesterséges-Intelligencia-Sablon-Kiválasztás: Sablon felfedezése és kiválasztási folyamat
+  - 2-Mesterséges-Intelligencia-Sablon-Érvényesítés: Telepítési és érvényesítési eljárások
+  - 3-Mesterséges-Intelligencia-Sablon-Felbontás: A sablon architektúrájának megértése
+  - 4-Mesterséges-Intelligencia-Sablon-Beállítás: Konfigurálás és testreszabás
+  - 5-Mesterséges-Intelligencia-Sablon-Testreszabás: Haladó módosítások és iterációk
+  - 6-Infrastruktúra-Lebontás: Takarítás és erőforrás menedzsment
+  - 7-Összefoglalás: Összegzés és következő lépések
+- **🛠️ Workshop Eszközök**: MkDocs konfiguráció Material témával a jobb tanulási élményért
+- **🎯 Gyakorlati Tanulási Út**: 3 lépéses módszertan (Felfedezés → Telepítés → Testreszabás)
+- **📱 GitHub Codespaces Integráció**: Zökkenőmentes fejlesztői környezet beállítás
 
-#### Fejlesztve
-- **AI Workshop labor**: Kiterjesztve átfogó 2-3 órás strukturált tanulási élménnyel
-- **Workshop dokumentáció**: Professzionális megjelenés navigációval és vizuális segédletekkel
-- **Tanulási folyamat**: Egyértelmű lépésről lépésre vezetés a sablon kiválasztástól a gyártásra telepítésig
-- **Fejlesztői élmény**: Integrált eszközök az egyszerűsített fejlesztési folyamatokhoz
+#### Kibővítve
+- **AI Workshop Labor**: Kiterjesztve átfogó 2-3 órás strukturált tanulási élménnyel
+- **Workshop Dokumentáció**: Professzionális bemutatás navigációval és vizuális segédletekkel
+- **Tanulási Menet**: Világos, lépésenkénti útmutatás a sablon kiválasztásától a gyártási telepítésig
+- **Fejlesztői Élmény**: Integrált eszközök a gördülékeny fejlesztési munkafolyamatokhoz
 
 #### Javítva
-- **Elérhetőség**: Böngésző alapú felület kereséssel, másolási lehetőséggel és témaváltóval
-- **Önálló tanulás**: Rugalmas workshop szerkezet, alkalmazkodva a különböző tanulási sebességekhez
-- **Gyakorlati alkalmazás**: Valós AI sablon telepítési szcenáriók
-- **Közösségi integráció**: Discord integráció workshop támogatás és együttműködés céljából
+- **Megközelíthetőség**: Böngészőalapú felület kereséssel, másolási funkcióval és téma váltással
+- **Önálló Ütemezésű Tanulás**: Rugalmas workshop struktúra, amely támogatja a különböző tanulási sebességeket
+- **Gyakorlati Alkalmazás**: Valós AI sablon telepítési szcenáriók
+- **Közösségi Integráció**: Discord integráció workshop támogatáshoz és együttműködéshez
 
-#### Workshop jellemzők
-- **Beépített keresés**: Gyors kulcsszó- és leckefelderítés
-- **Kódblokk másolás**: Egér fölé helyezve másolási lehetőség minden kód példánál
-- **Téma váltó**: Sötét/fény mód támogatás különböző preferenciákhoz
-- **Vizuális eszközök**: Képernyőfotók és diagramok a jobb megértéshez
-- **Segítség integráció**: Közvetlen Discord hozzáférés közösségi támogatáshoz
+#### Workshop Jellemzők
+- **Beépített Keresés**: Gyors kulcsszó- és léckeletár
+- **Kódblokkok Másolása**: Egér fölé húzva másolási funkció minden kódpéldánál
+- **Téma Váltás**: Sötét/világos mód támogatás különböző preferenciákhoz
+- **Vizuális Segédletek**: Képernyőképek és diagramok a jobb megértésért
+- **Segítség Integráció**: Közvetlen Discord hozzáférés a közösségi támogatáshoz
 
 ### [v3.2.0] - 2025-09-17
 
-#### Nagyszabású navigáció átalakítás és fejezet alapú tanulási rendszer
-**Ez a verzió átfogó fejezet alapú tanulási struktúrát vezet be kiterjedt navigációval az egész repositoryban.**
+#### Jelentős Navigációs Átszervezés és Fejezetalapú Tanulási Rendszer  
+**Ez a verzió átfogó fejezetalapú tanulási struktúrát vezet be, megerősített navigációval az egész tárolón belül.**
 
 #### Hozzáadva
-- **📚 Fejezet alapú tanulási rendszer**: Teljes tanfolyam átszervezése 8 progresszív tanulási fejezetre
-  - 1. fejezet: Alapok és gyors kezdés (⭐ - 30-45 perc)
-  - 2. fejezet: AI-első fejlesztés (⭐⭐ - 1-2 óra)
-  - 3. fejezet: Konfiguráció és hitelesítés (⭐⭐ - 45-60 perc)
-  - 4. fejezet: Infrastructure as Code & Telepítés (⭐⭐⭐ - 1-1,5 óra)
-  - 5. fejezet: Több-ügynökös AI megoldások (⭐⭐⭐⭐ - 2-3 óra)
-  - 6. fejezet: Előzetes telepítési ellenőrzés és tervezés (⭐⭐ - 1 óra)
-  - 7. fejezet: Hibakeresés és debug (⭐⭐ - 1-1,5 óra)
-  - 8. fejezet: Gyártási és vállalati minták (⭐⭐⭐⭐ - 2-3 óra)
-- **📚 Átfogó navigációs rendszer**: Egységes navigációs fejléc és lábléc az összes dokumentáción
-- **🎯 Haladás nyomon követés**: Tanfolyam teljesítési ellenőrző lista és tanulási visszaigazolás
-- **🗺️ Tanulási útmutató**: Egyértelmű belépési pontok különböző tapasztalati szintek és célok szerint
-- **🔗 Kereszthivatkozás navigáció**: Kapcsolódó fejezetek és előfeltételek egyértelmű összekötése
+- **📚 Fejezetalapú Tanulási Rendszer**: Az egész tanfolyam átszervezve 8 progresszív tanulási fejezetre
+  - 1. Fejezet: Alapok és Gyorskezdés (⭐ - 30-45 perc)
+  - 2. Fejezet: AI-Központú Fejlesztés (⭐⭐ - 1-2 óra)
+  - 3. Fejezet: Konfiguráció és Hitelesítés (⭐⭐ - 45-60 perc)
+  - 4. Fejezet: Infrastruktúra Kód formájában & Telepítés (⭐⭐⭐ - 1-1,5 óra)
+  - 5. Fejezet: Többügynökös AI Megoldások (⭐⭐⭐⭐ - 2-3 óra)
+  - 6. Fejezet: Előzetes Telepítési Érvényesítés és Tervezés (⭐⭐ - 1 óra)
+  - 7. Fejezet: Hibakeresés és Hibajavítás (⭐⭐ - 1-1,5 óra)
+  - 8. Fejezet: Gyártás és Vállalati Minták (⭐⭐⭐⭐ - 2-3 óra)
+- **📚 Átfogó Navigációs Rendszer**: Következetes navigációs fejléc és lábléc az összes dokumentációban
+- **🎯 Haladás Követés**: Tanfolyam befejezési ellenőrzőlista és tanulási hitelesítési rendszer
+- **🗺️ Tanulási Útvonal Útmutatás**: Világos belépési pontok különböző tapasztalati szintekhez és célokhoz
+- **🔗 Kereszthivatkozásos Navigáció**: Kapcsolódó fejezetek és előfeltételek egyértelműen összekapcsolva
 
-#### Fejlesztve
-- **README szerkezet**: Strukturált tanulási platformmá alakítva fejezet alapú szervezéssel
-- **Dokumentációs navigáció**: Minden oldalon megjelenik a fejezeti kontextus és haladási útmutató
-- **Sablonok rendszerezése**: Példák és sablonok a megfelelő tanulási fejezetekhez rendelve
-- **Erőforrás integráció**: Segédanyagok, gyakori kérdések, tanulmányi útmutatók kapcsolva a releváns fejezetekhez
-- **Workshop integráció**: Gyakorlati laborokat kötve több fejezeti tanulási célhoz
+#### Kibővítve
+- **README Felépítés**: Fejezetalapú szervezésű, strukturált tanulási platformmá alakítva
+- **Dokumentáció Navigáció**: Minden oldal tartalmazza a fejezet kontextust és haladási útmutatást
+- **Sablon Szervezés**: Példák és sablonok az adott tanulási fejezetekhez társítva
+- **Erőforrás Integráció**: Segédletek, GYIK-ek és tanulási útmutatók kapcsolódnak a releváns fejezetekhez
+- **Workshop Integráció**: Gyakorlati laborok több fejezet tanulási céljaihoz rendelve
 
-#### Módosítva
-- **Tanulási folyamat átalakítása**: Lineáris dokumentációról rugalmas fejezet alapú tanulásra váltás
-- **Konfiguráció elhelyezkedése**: Konfigurációs útmutató átkerült a 3. fejezetbe a jobb tanulási folyamat érdekében
-- **AI tartalom integrációja**: AI-specifikus tartalmak jobb beépítése a tanulási út során
-- **Gyártási tartalom**: Haladó minták összevonva a 8. fejezetben az üzleti felhasználók számára
+#### Megváltozott
+- **Tanulási Menet**: Lineáris dokumentációról rugalmas, fejezetalapú tanulásra váltás
+- **Konfiguráció Elhelyezés**: A konfigurációs útmutató a 3. fejezet pozíciójára áthelyezve a jobb tanulási folyamat érdekében
+- **AI Tartalom Integráció**: AI-specifikus tartalom jobb integrációja a tanulási úton
+- **Gyártási Tartalom**: Haladó minták összevonva a 8. fejezetben vállalati tanulók számára
 
 #### Javítva
-- **Felhasználói élmény**: Egyértelmű navigációs morzsák és fejezeti előrehaladási jelzések
-- **Elérhetőség**: Konzisztens navigációs minták az egyszerűbb tanfolyam bejáráshoz
-- **Professzionális megjelenés**: Egyetemi stílusú tanfolyam struktúra alkalmas oktatási és vállalati képzésre
-- **Tanulási hatékonyság**: Rövidebb idő a releváns tartalom megtalálására jobb szervezéssel
+- **Felhasználói Élmény**: Egyértelmű navigációs morzsák és fejezet haladási mutatók
+- **Megközelíthetőség**: Konzekvens navigációs minták a könnyebb tanfolyami haladáshoz
+- **Professzionális Megjelenés**: Egyetemista-stílusú tanfolyamstruktúra, alkalmas akadémiai és vállalati képzésre
+- **Tanulási Hatékonyság**: Javított szervezéssel rövidebb idő a releváns tartalom megtalálásához
 
-#### Technikai megvalósítás
-- **Navigációs fejlécek**: Szabványosított fejezeti navigáció 40+ dokumentációs fájlban
-- **Lábléc navigáció**: Konzisztens haladási útmutatás és fejezeti teljesítési jelzések
-- **Kereszt linkek**: Átfogó belső hivatkozási rendszer a kapcsolódó fogalmak összeköttetéséhez
-- **Fejezeti térképezés**: Sablonok és példák egyértelmű társítása a tanulási célokkal
+#### Technikai Megvalósítás
+- **Navigációs Fejlécek**: Szabványosított fejezet navigáció több mint 40 dokumentációs fájlban
+- **Navigációs Lábléc**: Következetes haladási útmutatás és fejezet befejezési mutatók
+- **Kereszthivatkozások**: Átfogó belső hivatkozási rendszer kapcsolódó fogalmak összekötésére
+- **Fejezet Leképezés**: Sablonok és példák világosan társítva a tanulási célokhoz
 
-#### Tanulmányi útmutató fejlesztése
-- **📚 Átfogó tanulási célok**: Tanulmányi útmutató átstrukturálva az 8 fejezet rendszeréhez igazítva
-- **🎯 Fejezeti értékelések**: Minden fejezet tartalmaz konkrét tanulási célokat és gyakorlati feladatokat
-- **📋 Haladás nyomon követés**: Heti tanulási ütemterv mérhető eredményekkel és teljesítési listákkal
-- **❓ Értékelési kérdések**: Tudás ellenőrző kérdések minden fejezethez professzionális eredményekkel
-- **🛠️ Gyakorlati feladatok**: Gyakorlati tevékenységek valós telepítési szcenáriókkal és hibakezeléssel
-- **📊 Képesség fejlődés**: Egyértelmű haladás az alapfogalmaktól a vállalati mintákig karrierfejlesztési fókusz mellett
-- **🎓 Tanúsítási keretrendszer**: Szakmai fejlődési eredmények és közösségi elismerés rendszere
-- **⏱️ Időmenedzsment**: Strukturált 10 hetes tanulási terv mérföldkövek érvényesítésével
+#### Tanulási Útmutató Fejlesztése
+- **📚 Átfogó Tanulási Célok**: Átszerkesztett útmutató az 8 fejezetes rendszerhez igazítva
+- **🎯 Fejezetalapú Értékelés**: Minden fejezet konkrét tanulási célokat és gyakorlati feladatokat tartalmaz
+- **📋 Haladás Követés**: Heti tanulási ütemterv mérhető eredményekkel és teljesítési ellenőrzőlistával
+- **❓ Értékelési Kérdések**: Tudás validációs kérdések fejezetenként, profi eredményekkel
+- **🛠️ Gyakorlati Feladatok**: Gyakorlati tevékenységek valós telepítési szcenáriókkal és hibakereséssel
+- **📊 Készségfejlődés**: Egyértelmű előrehaladás alapfogalmaktól a vállalati mintákig, karrier fejlesztési fókusz
+- **🎓 Tanúsítási Keretrendszer**: Profi fejlődési eredmények és közösségi elismerés
+- **⏱️ Időbeosztás Menedzsment**: Strukturált, 10 hetes tanulási terv mérföldkő ellenőrzéssel
 
 ### [v3.1.0] - 2025-09-17
 
-#### Fejlesztett több-ügynökös AI megoldások
-**Ez a verzió javítja a több-ügynökös kiskereskedelmi megoldást jobb ügynök elnevezésekkel és fejlettebb dokumentációval.**
+#### Fejlesztett Többügynökös AI Megoldások  
+**Ez a verzió javítja a többügynökös kiskereskedelmi megoldást jobb ügynök elnevezésekkel és kibővített dokumentációval.**
 
-#### Módosítva
-- **Több-ügynökös terminológia**: A "Cora ügynök" helyett "Vevő ügynök" lett mindenhol használva a könnyebb megértés érdekében
-- **Ügynök architektúra**: Minden dokumentáció, ARM sablon és kód példa megtisztítva egységes "Vevő ügynök" névhasználatra
-- **Konfigurációs példák**: Modernizált ügynök konfigurációs minták új elnevezési konvenciókkal
-- **Dokumentáció konzisztencia**: Minden hivatkozás profi, leíró ügynök neveket használ
+#### Megváltozott
+- **Többügynökös Terminológia**: A “Cora agent” mindenütt “Customer agent”-re cserélve a kiskereskedelmi multi-ügynökös megoldásban az átláthatóság érdekében
+- **Ügynök Architektúra**: Minden dokumentáció, ARM sablon és kódpélda egységesen “Customer agent” névhasználattal frissítve
+- **Konfigurációs Példák**: Modernizált ügynök konfigurációs minták frissített elnevezésekkel
+- **Dokumentáció Egységesség**: Biztosítva, hogy minden hivatkozás profi, leíró ügynök elnevezést használjon
 
-#### Fejlesztve
-- **ARM sablon csomag**: Frissítve retail-multiagent-arm-template a Vevő ügynök hivatkozásokkal
-- **Architektúra diagramok**: Frissített Mermaid diagramok új ügynök elnevezéssel
-- **Kód példák**: Python osztályok és megvalósítási példák most már CustomerAgent névvel
-- **Környezeti változók**: Frissítve minden telepítési szkript CUSTOMER_AGENT_NAME konvencióra
+#### Kibővítve
+- **ARM Sablon Csomag**: A retail-multiagent-arm-template frissítve "Customer agent" hivatkozásokkal
+- **Architektúra Diagramok**: Megújított Mermaid diagramok a frissített ügynök elnevezésekkel
+- **Kódpéldák**: Python osztályok és implementációs példák most CustomerAgent névhasználattal
+- **Környezeti Változók**: Minden telepítési script CUSTOMER_AGENT_NAME konvenciót használ
 
 #### Javítva
-- **Fejlesztői élmény**: Világosabb ügynök szerepek és felelősségek a dokumentációban  
-- **Éles környezetre felkészültség**: Jobb összhang a vállalati névkonvenciókkal  
-- **Tananyagok**: Intuitívabb ügynök elnevezések oktatási célokra  
-- **Sablon használhatósága**: Egyszerűsített megértés az ügynök funkcióiról és telepítési mintáiról  
+- **Fejlesztői Élmény**: Világosabb ügynöki szerepek és felelősségek a dokumentációban
+- **Gyártásra Alkalmasság**: Jobb összhang a vállalati elnevezési konvenciókkal
+- **Tananyagok**: Oktatási célra intuitívabb ügynök elnevezés
+- **Sablon Használhatóság**: Egyszerűbb az ügynök funkciók és telepítési minták megértése
 
-#### Műszaki részletek  
-- Frissített Mermaid architektúra diagramok CustomerAgent hivatkozásokkal  
-- CoraAgent osztálynevek cseréje CustomerAgent-re Python példákban  
-- ARM sablon JSON konfigurációk módosítása "customer" ügynök típus használatára  
-- Környezeti változók frissítése CORA_AGENT_* mintáról CUSTOMER_AGENT_* mintára  
-- Minden telepítési parancs és konténer konfiguráció frissítése  
+#### Technikai Részletek
+- Mermaid architektúra diagramok frissítve CustomerAgent hivatkozásokkal
+- CoraAgent osztálynevek lecserélve CustomerAgent-re Python példákban
+- ARM sablon JSON konfigurációk módosítva, hogy "customer" ügynöktípust használjanak
+- Környezeti változók módosítva CORA_AGENT_* helyett CUSTOMER_AGENT_* mintára
+- Minden telepítő parancs és konténer konfiguráció frissítve
 
-### [v3.0.0] - 2025-09-12  
+### [v3.0.0] - 2025-09-12
 
-#### Jelentős változások - AI fejlesztői fókusz és Microsoft Foundry integráció  
-**Ez a verzió a tárolót átfogó, mesterséges intelligenciára fókuszáló tananyaggá alakítja Microsoft Foundry integrációval.**  
+#### Jelentős Változások - AI Fejlesztői Fókusz és Microsoft Foundry Integráció  
+**Ez a verzió a tárolót átfogó AI-központú tanulási erőforrássá alakítja Microsoft Foundry integrációval.**
 
-#### Hozzáadva  
-- **🤖 AI-első tanulási útvonal**: Teljes átszervezés, amely prioritást ad az AI fejlesztőknek és mérnököknek  
-- **Microsoft Foundry integrációs útmutató**: Átfogó dokumentáció AZD és Microsoft Foundry szolgáltatások összekapcsolásához  
-- **AI modell telepítési minták**: Részletes útmutató modellválasztásról, konfigurációról és termelési telepítési stratégiákról  
-- **AI Műhely labor**: 2-3 órás gyakorlati műhely az AI alkalmazások AZD-be telepíthető megoldásokká alakításához  
-- **Production AI legjobb gyakorlatok**: Vállalati szintű minták AI skálázásához, monitorozásához és biztonságához  
-- **AI-specifikus hibakeresési útmutató**: Átfogó hibaelhárítás Azure OpenAI, Kognitív szolgáltatások és AI telepítési problémákhoz  
-- **AI sablongaléria**: Kiemelt Microsoft Foundry sablongyűjtemény komplexitás-besorolással  
-- **Műhely anyagok**: Teljes műhely felépítés gyakorlati laborokkal és referenciákkal  
+#### Hozzáadva
+- **🤖 AI-Központú Tanulási Út**: Teljes átszervezés AI fejlesztők és mérnökök prioritásával
+- **Microsoft Foundry Integrációs Útmutató**: Átfogó dokumentáció az AZD és Microsoft Foundry szolgáltatások összekapcsolásához
+- **AI Modell Telepítési Minták**: Részletes útmutató modellválasztásról, konfigurációról és gyártási telepítésről
+- **AI Workshop Labor**: 2-3 órás gyakorlati workshop AI alkalmazások AZD-vel történő telepítéséhez
+- **Gyártási AI Legjobb Gyakorlatok**: Vállalati szintű minták méretezéshez, monitorozáshoz és biztonsághoz
+- **AI Specifikus Hibakeresési Útmutató**: Átfogó Microsoft Foundry Modellek, Cognitive Services és AI telepítési hibák kezelése
+- **AI Sablon Galéria**: Kiemelt Microsoft Foundry sablonok gyűjteménye bonyolultsági értékeléssel
+- **Workshop Anyagok**: Teljes workshop struktúra gyakorlati laborokkal és referenciákkal
 
-#### Fejlesztve  
-- **README szerkezet**: AI fejlesztőkre fókuszálva, 45%-os közösségi érdeklődési adatokkal a Microsoft Foundry Discordból  
-- **Tanulási utak**: Külön AI fejlesztői útvonal a hagyományos hallgatói és DevOps mérnök utak mellett  
-- **Sablon ajánlások**: Kiemelt AI sablonok, beleértve azure-search-openai-demo, contoso-chat és openai-chat-app-quickstart  
-- **Közösségi integráció**: Javított Discord közösségi támogatás AI-specifikus csatornákkal és beszélgetésekkel  
+#### Kibővítve
+- **README Felépítés**: AI fejlesztőkre fókuszálva, 45% közösségi érdeklődés Microsoft Foundry Discord adat alapján
+- **Tanulási Utak**: Dedikált AI fejlesztői út együtt a hagyományos tanulói és DevOps mérnöki utak mellett
+- **Sablon Ajánlások**: Kiemelt AI sablonok, mint azure-search-openai-demo, contoso-chat és openai-chat-app-quickstart
+- **Közösségi Integráció**: Megrendült Discord közösségi támogatás AI specifikus csatornákkal és beszélgetésekkel
 
-#### Biztonság és termelési fókusz  
-- **Kezelt identitás minták**: AI-specifikus hitelesítési és biztonsági konfigurációk  
-- **Költségoptimalizáció**: Token használat nyomon követése és költségvetési korlátok AI munkaterhelésekhez  
-- **Több régiós telepítés**: Stratégiák globális AI alkalmazás telepítéshez  
-- **Teljesítmény monitorozás**: AI-specifikus metrikák és Application Insights integráció  
+#### Biztonság és Gyártási Fókusz
+- **Kezelt Identitás Minták**: AI-specifikus hitelesítési és biztonsági konfigurációk
+- **Költségoptimalizálás**: Tokenhasználat követése és költségkontroll AI munkaterheléseknél
+- **Több Régiós Telepítés**: Stratégiák globális AI alkalmazás telepítéshez
+- **Teljesítmény Monitorozás**: AI-specifikus metrikák és Application Insights integráció
 
-#### Dokumentáció minőség  
-- **Lineáris tanfolyam struktúra**: Logikus előrehaladás kezdőtől haladó AI telepítési mintákig  
-- **Ellenőrzött URL-ek**: Minden külső tároló link érvényes és elérhető  
-- **Teljes referencia**: Minden belső dokumentációs link validált és működő  
-- **Éles használatra kész**: Vállalati telepítési minták valós példákkal  
+#### Dokumentáció Minőség
+- **Lineáris Tanfolyam Struktúra**: Logikus előrehaladás kezdőtől haladó AI telepítési mintákig
+- **Érvényesített URL-ek**: Minden külső tárolói link ellenőrizve és elérhető
+- **Teljes Referencia**: Minden belső dokumentációs link ellenőrizve és működő
+- **Gyártásra Kész**: Vállalati telepítési minták valós példákkal
 
-### [v2.0.0] - 2025-09-09  
+### [v2.0.0] - 2025-09-09
 
-#### Jelentős változások - Tároló átszervezés és professzionális fejlesztés  
-**Ez a verzió jelentős átalakítást hajtott végre a tároló szerkezetében és tartalom bemutatásában.**  
+#### Jelentős Változások - Tároló Átszervezés és Professzionális Fejlesztés  
+**Ez a verzió jelentős átalakítást hoz a tároló szerkezetében és tartalom bemutatásában.**
 
-#### Hozzáadva  
-- **Strukturált tanulási keretrendszer**: Minden dokumentációs oldal bevezető, tanulási célok és tanulási eredmények szekcióval  
-- **Navigációs rendszer**: Előző/Következő lecke linkek hozzáadása a dokumentáció kísérteties tanulási előrehaladásához  
-- **Tanulási segédlet**: Átfogó study-guide.md tanulási célokkal, gyakorlati feladatokkal és értékelő anyagokkal  
-- **Professzionális megjelenés**: Minden emoji ikon eltávolítása a jobb hozzáférhetőség és professzionális megjelenés érdekében  
-- **Fejlettebb tartalmi szerkezet**: Tananyagok jobb szervezése és áramlása  
+#### Hozzáadva
+- **Strukturált Tanulási Keretrendszer**: Minden dokumentációs oldal most tartalmazza a Bevezetést, Tanulási Célokat és Elvárt Eredményeket
+- **Navigációs Rendszer**: Korábbi/Következő leckékre mutató linkek minden dokumentációs oldalon a vezetett tanuláshoz
+- **Tanulási Útmutató**: Átfogó study-guide.md tanulási célokkal, gyakorlati feladatokkal és értékelési anyagokkal
+- **Professzionális Megjelenés**: Minden emoji ikon eltávolítva jobb megközelíthetőség és professzionális kinézet érdekében
+- **Kibővített Tartalomstruktúra**: Javított szervezés és tananyag folyamatosság
 
-#### Megváltoztatva  
-- **Dokumentáció formátum**: Minden dokumentáció egységes, tanulásközpontú szerkezettel  
-- **Navigációs áramlás**: Logikus előrehaladás megvalósítása a tananyagokon keresztül  
-- **Tartalom bemutatás**: Díszítő elemek eltávolítása tiszta, professzionális formázásért  
-- **Link struktúra**: Minden belső link frissítése az új navigációs rendszer támogatására  
+#### Megváltozott
+- **Dokumentáció Formátum**: Egységes tanulás-központú felépítésre szabványosítva
+- **Navigációs Folyamat**: Logikus előrehaladás megvalósítva a teljes tananyagon át
+- **Tartalom Megjelenítés**: Dekoratív elemek eltávolítása, tiszta, profi formázás érdekében
+- **Link Struktúra**: Minden belső hivatkozás frissítve az új navigációs rendszer támogatására
 
-#### Javítva  
-- **Hozzáférhetőség**: Emoji függőségek eltávolítása jobb képernyőolvasó kompatibilitásért  
-- **Professzionális megjelenés**: Tiszta, akadémiai stílusú prezentáció, vállalati tanuláshoz megfelelő  
-- **Tanulási élmény**: Strukturált megközelítés világos célokkal és eredményekkel minden leckében  
-- **Tartalom szervezése**: Jobb logikai kapcsolat és áramlás a kapcsolódó témák között  
+#### Javítva
+- **Megközelíthetőség**: Emoji függőségek törölve jobb képernyőolvasó kompatibilitásért
+- **Professzionális Megjelenés**: Tiszta, akadémiai stílusú megjelenés, vállalati tanulásra alkalmas
+- **Tanulási Élmény**: Strukturált megközelítés világos célokkal és eredményekkel minden leckénél
+- **Tartalom Szervezés**: Jobb logikai folyamatosság és kapcsolódás a témák között
 
-### [v1.0.0] - 2025-09-09  
+### [v1.0.0] - 2025-09-09
 
-#### Kezdeti kiadás - Átfogó AZD tanulási tároló  
+#### Kezdeti Kiadás - Átfogó AZD Tanulási Tároló
 
-#### Hozzáadva  
-- **Alap dokumentációs szerkezet**  
-  - Teljes kezdő útmutató sorozat  
-  - Átfogó telepítési és üzemeltetési dokumentáció  
-  - Részletes hibakeresési források és hibakeresési útmutatók  
-  - Előtelepítési ellenőrző eszközök és eljárások  
+#### Hozzáadva
+- **Alap Dokumentációs Struktúra**
+  - Teljes kezdő útmutató sorozat
+  - Átfogó telepítési és szolgáltatásellátási dokumentáció
+  - Részletes hibajavítási források és hibakeresési útmutatók
+  - Előzetes érvényesítési eszközök és eljárások
 
-- **Kezdő modul**  
-  - AZD alapok: Alapfogalmak és terminológia  
-  - Telepítési útmutató: Platform specifikus beállítási útmutatók  
-  - Konfigurációs útmutató: Környezet beállítása és hitelesítés  
-  - Első projekt oktatóanyag: Lépésről lépésre gyakorlati tanulás  
+- **Kezdeti Modul**
+  - AZD alapok: Alapfogalmak és terminológia
+  - Telepítési Útmutató: Platform specifikus beállítási instrukciók
+  - Konfigurációs Útmutató: Környezet beállítása és hitelesítés
+  - Első Projekt Oktatóanyag: Lépésenkénti gyakorlati tanulás
 
-- **Telepítési és üzemeltetési modul**  
-  - Telepítési útmutató: Teljes munkafolyamat dokumentáció  
-  - Üzemeltetési útmutató: Infrastructure as Code Bicep-pel  
-  - Legjobb gyakorlatok termelési telepítéshez  
-  - Több szolgáltatás architektúra minták  
+- **Telepítési és Szolgáltatásellátási Modul**
+  - Telepítési Útmutató: Teljes munkafolyamat dokumentáció
+  - Szolgáltatásellátási Útmutató: Infrastruktúra Kódként Bicep-pel
+  - Gyártási telepítések legjobb gyakorlatai
+  - Többszolgáltatásos architektúra minták
 
-- **Előtelepítési ellenőrzési modul**  
-  - Kapacitástervezés: Azure erőforrás elérhetőség validálása  
-  - SKU választás: Átfogó szolgáltatási szint útmutatás  
-  - Előzetes ellenőrzések: Automatikus validációs szkriptek (PowerShell és Bash)  
-  - Költségbecslő és költségvetési tervező eszközök  
+- **Előzetes Érvényesítési Modul**
+  - Kapacitástervezés: Azure erőforrás elérhetőség ellenőrzése
+  - SKU kiválasztás: Átfogó szolgáltatás szint útmutató
+  - Átvizsgálási Tesztek: Automatizált érvényesítési szkriptek (PowerShell és Bash)
+  - Költségbecslési és költségtervezési eszközök
 
-- **Hibakeresési modul**  
-  - Gyakori problémák: Gyorsták problémák és megoldások  
-  - Hibakeresési útmutató: Rendszeres hibakeresési módszerek  
-  - Haladó diagnosztikai technikák és eszközök  
-  - Teljesítménymonitorozás és optimalizálás  
+- **Hibajavítási Modul**
+  - Gyakori Problémák: Gyakran előforduló hibák és megoldások
+  - Hibakeresési Útmutató: Szisztematikus hibakeresési módszertanok
+  - Haladó diagnosztikai technikák és eszközök
+  - Teljesítmény monitorozás és optimalizálás
 
-- **Források és hivatkozások**  
-  - Parancs összefoglaló: Gyors hivatkozás alapvető parancsokra  
-  - Gloszszárium: Átfogó fogalom- és rövidítésjegyzék  
-  - GYIK: Gyakori kérdések részletes válaszokkal  
-  - Külső forrás linkek és közösségi kapcsolatok  
+- **Erőforrások és Hivatkozások**
+  - Parancs Gyorssegédlet: Gyors hivatkozás alapvető parancsokra
+  - Szószedet: Teljes körű terminológia és rövidítés definíciók
+  - GYIK: Részletes válaszok gyakori kérdésekre
+  - Külső forrás linkek és közösségi kapcsolatok
 
-- **Példák és sablonok**  
-  - Egyszerű webalkalmazás példa  
-  - Statikus weboldal telepítési sablon  
-  - Konténer alkalmazás konfiguráció  
-  - Adatbázis integrációs minták  
-  - Mikroservices architektúra példák  
-  - Serverless funkció implementációk  
+- **Példák és Sablonok**
+  - Egyszerű Webalkalmazás példa
+  - Statikus weboldal telepítési sablon
+  - Konténeres alkalmazás konfiguráció
+  - Adatbázis integrációs minták
+  - Mikroservices architektúra példák
+  - Serverless funkció implementációk
 
-#### Jellemzők  
-- **Többplatformos támogatás**: Telepítési és konfigurációs útmutatók Windows, macOS és Linux rendszerekhez  
-- **Több szakmai szint**: Tartalom diákoktól profi fejlesztőkig  
-- **Gyakorlati fókusz**: Gyakorlati példák és valós életbeli szcenáriók  
-- **Átfogó lefedettség**: Alapfogalmaktól a haladó vállalati mintákig  
-- **Biztonság-központú megközelítés**: Biztonsági legjobb gyakorlatok beépítve  
-- **Költségoptimalizáció**: Útmutatás költséghatékony telepítésekhez és erőforrás menedzsmenthez  
+#### Jellemzők
+- **Többplatformos Támogatás**: Telepítési és konfigurációs útmutatók Windows, macOS és Linux rendszerekre
+- **Különböző Képességi Szintek**: Tartalom diákoktól profi fejlesztőkig
+- **Gyakorlati Fókusz**: Gyakorlati példák és valós szituációk
+- **Átfogó Lefedettség**: Alapfogalmaktól haladó vállalati mintákig
+- **Biztonsági Elsőbbség**: Biztonsági legjobb gyakorlatok beépítve
+- **Költséghatékonyság**: Útmutatás költséghatékony telepítésekhez és erőforrás menedzsmenthez
 
-#### Dokumentáció minőség  
-- **Részletes kódpéldák**: Gyakorlati, tesztelt kódrészletek  
-- **Lépésről lépésre utasítások**: Egyértelmű, cselekvő útmutató  
-- **Átfogó hibakezelés**: Gyakori problémák hibakeresése  
-- **Legjobb gyakorlatok integrációja**: Iparági szabványok és ajánlások  
-- **Verzió kompatibilitás**: Legfrissebb Azure szolgáltatásokkal és az azd verzióival harmonizálva  
+#### Dokumentáció Minőség
+- **Részletes Kódpéldák**: Gyakorlati, tesztelt kódminták
+- **Lépésenkénti Utasítások**: Világos, megvalósítható útmutatás
+- **Átfogó Hibakezelés**: Gyakori hibák javítása
+- **Legjobb Gyakorlatok Integrálása**: Iparági szabványok és ajánlások
+- **Verziókompatibilitás**: Legfrissebb Azure szolgáltatásokkal és azd funkciókkal naprakész
 
-## Tervezett jövőbeni fejlesztések  
+## Tervezett Jövőbeli Fejlesztések
 
 ### Verzió 3.1.0 (Tervezett)  
-#### AI platform bővítés  
-- **Több modell támogatás**: Integrációs minták Hugging Face, Azure Machine Learning és egyedi modellekhez  
-- **AI ügynök keretrendszerek**: Sablonok LangChain, Semantic Kernel és AutoGen telepítésekhez  
-- **Fejlett RAG minták**: Vektor adatbázis opciók az Azure AI Search mellett (Pinecone, Weaviate, stb.)  
-- **AI megfigyelhetőség**: Javított monitorozás modell teljesítmény, token használat és válaszminőség tekintetében  
+#### AI Platform Bővítés
+- **Többmodell-támogatás**: Integrációs minták Hugging Face, Azure Machine Learning és egyéni modellek számára  
+- **AI Ügynök Keretrendszerek**: Sablonok LangChain, Semantic Kernel és AutoGen telepítésekhez  
+- **Fejlett RAG Minták**: Vektoralapú adatbázis lehetőségek az Azure AI Search-en túl (Pinecone, Weaviate stb.)  
+- **AI Megfigyelhetőség**: Fejlesztett monitorozás a modell teljesítményére, tokenhasználatra és válaszminőségre  
 
-#### Fejlesztői élmény  
-- **VS Code bővítmény**: Integrált AZD + AI Foundry fejlesztési élmény  
-- **GitHub Copilot integráció**: AI által támogatott AZD sablon generálás  
-- **Interaktív oktatóanyagok**: Gyakorlati kódolási feladatok automatikus validációval AI szcenáriókhoz  
-- **Videós tartalmak**: Kiegészítő videós oktatóanyagok vizuális tanulók részére AI telepítések fókuszával  
+#### Fejlesztői Élmény  
+- **VS Code Kiterjesztés**: Integrált AZD + Microsoft Foundry fejlesztői élmény  
+- **GitHub Copilot Integráció**: AI által támogatott AZD sablongenerálás  
+- **Interaktív Oktatóanyagok**: Gyakorlati kódolási gyakorlatok automatikus validálással AI forgatókönyvekhez  
+- **Videós Tartalom**: Kiegészítő videós oktatóanyagok vizuális tanulóknak, az AI telepítésekre fókuszálva  
 
-### Verzió 4.0.0 (Tervezett)  
-#### Vállalati AI minták  
-- **Irányítási keretrendszer**: AI modellirányítás, megfelelés és auditálás  
-- **Több bérlős AI**: Több ügyfél kiszolgálása elkülönített AI szolgáltatásokkal  
-- **Edge AI telepítés**: Integráció Azure IoT Edge és konténer példányokkal  
-- **Hibrid felhő AI**: Multi-cloud és hibrid telepítési minták AI munkaterhelésekhez  
+### 4.0.0 Verzió (Tervezett)  
+#### Vállalati AI Minták  
+- **Irányítási Keretrendszer**: AI modellirányítás, megfelelőség és audit nyomvonalak  
+- **Több-bérlős AI**: Minták több ügyfél elkülönített AI szolgáltatásokkal való kiszolgálására  
+- **Edge AI Telepítés**: Integráció az Azure IoT Edge és konténer példányokkal  
+- **Hibrid Felhő AI**: Többfelhős és hibrid telepítési minták AI munkaterhelésekhez  
 
-#### Fejlettebb funkciók  
-- **AI munkafolyamat automatizálás**: MLOps integráció Azure Machine Learning pipeline-okkal  
-- **Fejlett biztonság**: Zero-trust minták, privát végpontok és haladó fenyegetésvédelem  
-- **Teljesítmény optimalizáció**: Fejlett hangolás és skálázás nagy terhelésű AI alkalmazásokhoz  
-- **Globális terjesztés**: Tartalomelosztó és edge caching minták AI alkalmazásokhoz  
+#### Fejlett Funkciók  
+- **AI Folyamat Automatizálás**: MLOps integráció Azure Machine Learning pipeline-okon keresztül  
+- **Fejlett Biztonság**: Zero-trust minták, privát végpontok és fejlett fenyegetésvédelem  
+- **Teljesítményoptimalizálás**: Fejlett hangolási és skálázási stratégiák nagy áteresztőképességű AI alkalmazásokhoz  
+- **Globális Elosztás**: Tartalomkézbesítő és edge cache minták AI alkalmazásokhoz  
 
-### Verzió 3.0.0 (Tervezett) - Az aktuális kiadás által váltva fel  
-#### Javasolt bővítések - Most megvalósítva a v3.0.0-ban  
-- ✅ **AI-központú tartalom**: Átfogó Microsoft Foundry integráció (Kész)  
-- ✅ **Interaktív oktatóanyagok**: Gyakorlati AI műhely labor (Kész)  
-- ✅ **Fejlett biztonsági modul**: AI-specifikus biztonsági minták (Kész)  
-- ✅ **Teljesítmény optimalizáció**: AI munkaterhelési hangolási stratégiák (Kész)  
+### 3.0.0 Verzió (Tervezett) - Felváltva a Jelenlegi Kiadással  
+#### Javasolt Kiegészítések - Most Megvalósítva a v3.0.0-ban  
+- ✅ **AI-Központú Tartalom**: Átfogó Microsoft Foundry integráció (Befejezve)  
+- ✅ **Interaktív Oktatóanyagok**: Gyakorlati AI workshop labor (Befejezve)  
+- ✅ **Fejlett Biztonsági Modul**: AI-specifikus biztonsági minták (Befejezve)  
+- ✅ **Teljesítményoptimalizálás**: AI munkaterhelés hangolási stratégiák (Befejezve)  
 
-### Verzió 2.1.0 (Tervezett) - Részben megvalósítva a v3.0.0-ban  
-#### Apróbb fejlesztések - Néhány az aktuális kiadásban kész  
-- ✅ **További példák**: AI-központú telepítési szcenáriók (Kész)  
-- ✅ **Bővített GYIK**: AI-specifikus kérdések és hibakeresés (Kész)  
-- **Eszköz integráció**: Fejlesztett IDE és szerkesztő integrációs útmutatók  
-- ✅ **Monitorozás bővítés**: AI-specifikus monitorozási és riasztási minták (Kész)  
+### 2.1.0 Verzió (Tervezett) - Részben Megvalósítva a v3.0.0-ban  
+#### Kisebb Fejlesztések - Néhány Befejezve a Jelenlegi Kiadásban  
+- ✅ **További Példák**: AI-központú telepítési forgatókönyvek (Befejezve)  
+- ✅ **Kiterjesztett GYIK**: AI-specifikus kérdések és hibakeresés (Befejezve)  
+- **Eszköz Integráció**: Fejlesztett IDE és szerkesztő integrációs útmutatók  
+- ✅ **Monitorozás Bővítés**: AI-specifikus monitorozási és riasztási minták (Befejezve)  
 
-#### Még tervezett a jövőbeli kiadásokhoz  
-- **Mobilbarát dokumentáció**: Reszponzív kialakítás mobil tanuláshoz  
-- **Offline hozzáférés**: Letölthető dokumentációs csomagok  
-- **Fejlesztett IDE integráció**: VS Code bővítmény AZD + AI munkafolyamatokhoz  
-- **Közösségi irányítópult**: Valós idejű közösségi mérőszámok és hozzájárulás követése  
+#### Még Tervezett Jövőbeli Kiadáshoz  
+- **Mobilbarát Dokumentáció**: Reszponzív dizájn mobil tanuláshoz  
+- **Offline Hozzáférés**: Letölthető dokumentációs csomagok  
+- **Fejlesztett IDE Integráció**: VS Code kiterjesztés AZD + AI munkafolyamatokhoz  
+- **Közösségi Irányítópult**: Valós idejű közösségi metrikák és hozzájárulás követés  
 
-## Útmutató a változásnaplóhoz történő hozzájáruláshoz  
+## Változásnaplóhoz Való Hozzájárulás
 
-### Változások jelentése  
-A tárolóhoz történő hozzájáruláskor kérem, hogy a változásnapló bejegyzései tartalmazzák:  
+### Változások Jelentése  
+Amikor ehhez a tárolóhoz járulsz hozzá, kérjük győződj meg arról, hogy a változásnapló bejegyzések tartalmazzák:
 
-1. **Verziószám**: A sémás verziókövetés szerint (fő.kisebb.javítás)  
+1. **Verziószám**: A szemantikus verziózást követve (fő.kis.jav)  
 2. **Dátum**: Kiadás vagy frissítés dátuma ÉÉÉÉ-HH-NN formátumban  
-3. **Kategória**: Hozzáadott, Megváltoztatott, Elavult, Eltávolított, Javított, Biztonsági  
-4. **Világos leírás**: Rövid összefoglaló a változásról  
-5. **Hatásértékelés**: Hogyan hatnak a változások meglévő felhasználókra  
+3. **Kategória**: Hozzáadva, Módosítva, Elavult, Eltávolítva, Javítva, Biztonság  
+4. **Egyértelmű Leírás**: Rövid leírás a változásokról  
+5. **Hatásértékelés**: Hogyan érintik a változások a meglévő felhasználókat  
 
-### Változási kategóriák  
+### Változási Kategóriák
 
-#### Hozzáadott  
-- Új funkciók, dokumentációs részek vagy képességek  
-- Új példák, sablonok vagy tananyagok  
-- További eszközök, szkriptek vagy segédprogramok  
+#### Hozzáadva  
+- Új funkciók, dokumentációs szakaszok vagy képességek  
+- Új példák, sablonok vagy tanulási anyagok  
+- Kiegészítő eszközök, szkriptek vagy segédprogramok  
 
-#### Megváltoztatott  
-- Meglévő funkciók vagy dokumentáció módosítása  
-- Frissítések a világosság vagy pontosság érdekében  
-- Tartalom vagy szervezet átszervezése  
+#### Módosítva  
+- Létező funkciók vagy dokumentáció módosításai  
+- Frissítések a világosság vagy pontosság javítása érdekében  
+- Tartalom vagy szerkezet átszervezése  
 
 #### Elavult  
-- Fázisban lévő funkciók vagy megközelítések  
-- Eltávolításra kijelölt dokumentációs részek  
-- Olyan módszerek, amelyekhez jobb alternatívák léteznek  
+- Folyamatban lévő funkciók vagy megközelítések eltávolítása  
+- Eltávolításra kijelölt dokumentációs szakaszok  
+- Olyan módszerek, amelyek jobb alternatívákkal rendelkeznek  
 
-#### Eltávolított  
-- Már nem releváns funkciók, dokumentumok vagy példák  
-- Elavult információk vagy megközelítések  
-- Felesleges vagy összevont tartalom  
+#### Eltávolítva  
+- Már nem releváns funkciók, dokumentáció vagy példák  
+- Elavult információk vagy elavult megközelítések  
+- Ismétlődő vagy összevonható tartalom  
 
-#### Javított  
-- Hibajavítások dokumentációban vagy kódban  
+#### Javítva  
+- Hibák javítása a dokumentációban vagy kódban  
 - Jelentett problémák vagy hibák megoldása  
 - Pontosság vagy működés javítása  
 
 #### Biztonság  
-- Biztonsági fejlesztések vagy hibajavítások  
-- Biztonsági legjobb gyakorlat frissítések  
-- Biztonsági sebezhetőségek kezelése  
+- Biztonsággal kapcsolatos fejlesztések vagy javítások  
+- Biztonsági legjobb gyakorlatok frissítése  
+- Biztonsági sebezhetőségek elhárítása  
 
-### Sémás verziókövetés irányelvek  
+### Szemantikus Verziózás Útmutató
 
-#### Fő verzió (X.0.0)  
-- Visszafelé nem kompatibilis változások, melyek felhasználói beavatkozást igényelnek  
-- Jelentős tartalmi vagy szervezeti átszervezés  
-- Alapkoncepciót vagy módszertant módosító változások  
+#### Főverzió (X.0.0)  
+- Olyan törést okozó változások, amelyek felhasználói beavatkozást igényelnek  
+- Jelentős tartalmi vagy szervezeti átszervezések  
+- Alapvető megközelítés vagy módszertan megváltoztatása  
 
-#### Kisebb verzió (X.Y.0)  
-- Új funkciók vagy tartalom bővítések  
+#### Kisebb Verzió (X.Y.0)  
+- Új funkciók vagy tartalomkiegészítések  
 - Visszafelé kompatibilis fejlesztések  
-- További példák, eszközök vagy források  
+- További példák, eszközök vagy erőforrások  
 
-#### Javítási verzió (X.Y.Z)  
+#### Javító Verzió (X.Y.Z)  
 - Hibajavítások és korrekciók  
-- Meglévő tartalom kisebb fejlesztései  
-- Pontosítások és apróbb bővítések  
+- Kis mértékű fejlesztések meglévő tartalomban  
+- Pontosítások és kisebb fejlesztések  
 
-## Közösségi visszajelzés és javaslatok  
+## Közösségi Visszajelzések és Javaslatok  
 
-Aktívan ösztönözzük a közösségi visszajelzéseket a tanulási erőforrás javítása érdekében:  
+Aktívan ösztönözzük a közösség visszajelzéseit a tanulási erőforrás fejlesztéséhez:
 
-### Hogyan adj visszajelzést  
-- **GitHub Issues**: Problémák jelentése vagy fejlesztési javaslatok (AI-specifikus problémák szívesen)  
-- **Discord beszélgetések**: Ötletek megosztása és részvétel a Microsoft Foundry közösségben  
-- **Pull kérések**: Közvetlen fejlesztések beküldése, különösen AI sablonok és útmutatók esetén  
-- **Microsoft Foundry Discord**: Részvétel az #Azure csatornán AZD + AI beszélgetésekhez  
-- **Közösségi fórumok**: Szélesebb Azure fejlesztői beszélgetésekben való részvétel  
+### Hogyan Adj Visszajelzést  
+- **GitHub Issues**: Problémák jelentése vagy fejlesztési javaslatok (AI-specifikus kérdések különösen szívesen)  
+- **Discord Beszélgetések**: Ötletek megosztása és részvétel a Microsoft Foundry közösségben  
+- **Pull Kérések**: Közvetlen fejlesztések hozzájárulása, különösen AI sablonok és útmutatók esetén  
+- **Microsoft Foundry Discord**: Részvétel az #Azure csatornán AZD + AI témákban  
+- **Közösségi Fórumok**: Szélesebb Azure fejlesztői beszélgetésekhez való csatlakozás  
 
-### Visszajelzés kategóriák  
-- **AI tartalom pontossága**: AI szolgáltatás integráció és telepítés javítások  
-- **Tanulási élmény**: Javaslatok az AI fejlesztői tanulási folyamat javítására  
-- **Hiányzó AI tartalom**: További AI sablonok, minták vagy példák kérése  
-- **Hozzáférhetőség**: Javítások különböző tanulási igényekhez  
-- **AI eszköz integráció**: Jobb AI fejlesztési munkafolyamat integrációjának javaslatai  
-- **Termelési AI minták**: Vállalati AI telepítési minta kérések  
+### Visszajelzési Kategóriák  
+- **AI Tartalom Pontossága**: AI szolgáltatás integráció és telepítési információk javításai  
+- **Tanulási Élmény**: Javaslatok AI fejlesztői tanulási folyamat fejlesztésére  
+- **Hiányzó AI Tartalom**: Kérések további AI sablonokra, mintákra vagy példákra  
+- **Akadálymentesítés**: Fejlesztések a sokféle tanulói igény kiszolgálására  
+- **AI Eszköz Integráció**: Javaslatok jobb AI fejlesztési munkafolyamat integrációra  
+- **Éles AI Minták**: Vállalati AI telepítési minta kérések  
 
-### Válaszadási elkötelezettség  
-- **Hibák válaszadása**: Jelentett problémák 48 órán belül  
-- **Funkciókérések értékelése**: Egy héten belül  
-- **Közösségi hozzájárulások átvizsgálása**: Egy héten belül  
-- **Biztonsági ügyek**: Azonnali kezelési prioritás  
+### Válaszadási Elkötelezettség  
+- **Probléma Válaszadás**: 48 órán belül a jelentett problémákra  
+- **Funkciókérések**: Egy héten belüli értékelés  
+- **Közösségi Hozzájárulások**: Egy héten belüli átnézés  
+- **Biztonsági Problémák**: Azonnali prioritás, gyors reagálás  
 
-## Karbantartási ütemterv  
+## Karbantartási Ütemterv  
 
-### Rendszeres frissítések  
-- **Havi átvizsgálás**: Tartalom pontosság és link ellenőrzés  
-- **Negyedéves frissítések**: Jelentős tartalom bővítések és fejlesztések  
-- **Féléves átszervezések**: Átfogó szerkezetátrendezés és fejlesztés  
-- **Éves kiadások**: Főverziós frissítések jelentős fejlesztésekkel  
+### Rendszeres Frissítések  
+- **Havi Felülvizsgálatok**: Tartalom pontosság és linkellenőrzés  
+- **Negyedéves Frissítések**: Jelentős tartalmi bővítések és fejlesztések  
+- **Féléves Átdolgozások**: Átfogó átszervezés és fejlesztés  
+- **Éves Kiadások**: Főverzió frissítések jelentős fejlesztésekkel  
 
-### Monitorozás és minőségbiztosítás  
-- **Automatizált tesztelés**: Kód példák és linkek rendszeres validálása  
-- **Közösségi visszajelzés beépítése**: Felhasználói javaslatok rendszeres integrálása  
-- **Technológiai frissítések**: Legújabb Azure szolgáltatások és azd verziókhoz igazítás  
-- **Hozzáférhetőségi auditok**: Rendszeres felülvizsgálat az inkluzív tervezési elvek szerint  
+### Monitorozás és Minőségbiztosítás  
+- **Automatizált Tesztelés**: Kódpéldák és hivatkozások rendszeres ellenőrzése  
+- **Közösségi Visszajelzés Integrációja**: Felhasználói javaslatok folyamatos beépítése  
+- **Technológiai Frissítések**: A legújabb Azure szolgáltatások és az azd kiadások tükrözése  
+- **Akadálymentesítési Auditok**: Rendszeres felülvizsgálatok az inkluzív tervezési elvek érdekében  
 
-## Verzió támogatási politika  
+## Verziótámogatási Szabályzat  
 
-### Jelenlegi verzió támogatás  
-- **Legfrissebb főverzió**: Teljes támogatás rendszeres frissítésekkel  
-- **Előző főverzió**: Biztonsági frissítések és kritikus javítások 12 hónapig  
-- **Régebbi verziók**: Csak közösségi támogatás, hivatalos frissítések nélkül  
+### Jelenlegi Verzió Támogatás  
+- **Legújabb Főverzió**: Teljes támogatás rendszeres frissítésekkel  
+- **Előző Főverzió**: Biztonsági frissítések és kritikus javítások 12 hónapig  
+- **Régi Verziók**: Csak közösségi támogatás, hivatalos frissítések nélkül  
 
-### Migrációs útmutató  
-Amikor főverziók jelennek meg, biztosítjuk:
-- **Áttelepítési Útmutatók**: Lépésről lépésre áttekintő utasítások
-- **Kompatibilitási Megjegyzések**: Információk a visszafelé nem kompatibilis változásokról
-- **Eszköztámogatás**: Szkriptek vagy segédprogramok az áttelepítés megkönnyítéséhez
-- **Közösségi Támogatás**: Külön fórumok az áttelepítési kérdésekhez
+### Migrációs Útmutató  
+Amikor főverziók jelennek meg, biztosítjuk:  
+- **Migrációs Útmutatók**: Lépésenkénti átállási instrukciók  
+- **Kompatibilitási Megjegyzések**: Törést okozó változások részletei  
+- **Eszköztámogatás**: Migrációt segítő szkriptek vagy segédprogramok  
+- **Közösségi Támogatás**: Dedikált fórumok migrációs kérdésekhez  
 
 ---
 
-**Navigáció**
-- **Előző Lecke**: [Tanulmányi Útmutató](resources/study-guide.md)
-- **Következő Lecke**: Vissza a [Fő README-hez](README.md)
+**Navigáció**  
+- **Előző Lecke**: [Study Guide](resources/study-guide.md)  
+- **Következő Lecke**: Vissza a [Fő README](README.md) -hez  
 
-**Maradj Naprakész**: Kövesd ezt a tárat, hogy értesítéseket kapj az új kiadásokról és a tananyagot érintő fontos frissítésekről.
+**Maradj naprakész**: Kövesd ezt a tárolót az új kiadások és a tananyagot érintő fontos frissítések értesítéseiért.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Jogi nyilatkozat**:
-Ez a dokumentum az AI fordító szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) használatával készült. Bár igyekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hivatalos forrásnak. Kritikus információk esetén professzionális emberi fordítást javaslunk. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+**Jogi nyilatkozat**:  
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) használatával készült. Bár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Kritikus információk esetén szakmai emberi fordítást ajánlunk. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy helytelen értelmezésekért.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

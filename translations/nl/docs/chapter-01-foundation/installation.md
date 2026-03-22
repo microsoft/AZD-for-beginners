@@ -1,40 +1,40 @@
 # Installatie & Setupgids
 
 **Hoofdstuknavigatie:**
-- **📚 Cursus Startpagina**: [AZD Voor Beginners](../../README.md)
-- **📖 Huidig Hoofdstuk**: Hoofdstuk 1 - Basis & Snelstart
+- **📚 Cursus Startpagina**: [AZD voor Beginners](../../README.md)
+- **📖 Huidig hoofdstuk**: Hoofdstuk 1 - Basis & Snelle Start
 - **⬅️ Vorige**: [AZD Basis](azd-basics.md)
-- **➡️ Volgende**: [Je Eerste Project](first-project.md)
-- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 2: AI-First Ontwikkeling](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **➡️ Volgende**: [Je eerste project](first-project.md)
+- **🚀 Volgend hoofdstuk**: [Hoofdstuk 2: AI-first ontwikkeling](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-## Introductie
+## Inleiding
 
-Deze uitgebreide gids begeleidt je bij het installeren en configureren van Azure Developer CLI (azd) op je systeem. Je leert meerdere installatiemethoden voor verschillende besturingssystemen, het instellen van authenticatie en de initiële configuratie om je ontwikkelomgeving voor Azure-implementaties klaar te maken.
+Deze uitgebreide gids leidt je door het installeren en configureren van Azure Developer CLI (azd) op je systeem. Je leert meerdere installatiemethoden voor verschillende besturingssystemen, het instellen van authenticatie en de initiële configuratie om je ontwikkelomgeving voor te bereiden op Azure-implementaties.
 
 ## Leerdoelen
 
 Aan het einde van deze les zul je:
 - Azure Developer CLI succesvol installeren op je besturingssysteem
 - Authenticatie met Azure configureren met meerdere methoden
-- Je ontwikkelomgeving instellen met de benodigde vereisten
-- Verschillende installatieopties begrijpen en wanneer je welke moet gebruiken
-- Veelvoorkomende installatie- en setupproblemen oplossen
+- Je ontwikkelomgeving inrichten met de benodigde vereisten
+- Verschillende installatieroutes begrijpen en wanneer je welke moet gebruiken
+- Veelvoorkomende installatie- en configuratieproblemen oplossen
 
 ## Leerresultaten
 
 Na het voltooien van deze les kun je:
-- azd installeren met de juiste methode voor je platform
-- Authenticeren met Azure met `azd auth login`
+- azd installeren met de juiste methode voor jouw platform
+- Authenticeren bij Azure met `azd auth login`
 - Je installatie verifiëren en basis azd-commando's testen
 - Je ontwikkelomgeving configureren voor optimaal azd-gebruik
 - Veelvoorkomende installatieproblemen zelfstandig oplossen
 
-Deze gids helpt je azd te installeren en te configureren op je systeem, ongeacht je besturingssysteem of ontwikkelomgeving.
+Deze gids helpt je bij het installeren en configureren van Azure Developer CLI op je systeem, ongeacht je besturingssysteem of ontwikkelomgeving.
 
 ## Vereisten
 
 Voordat je azd installeert, zorg dat je:
-- **Azure subscription** - [Maak een gratis account aan](https://azure.microsoft.com/free/)
+- **Azure-abonnement** - [Maak een gratis account aan](https://azure.microsoft.com/free/)
 - **Azure CLI** - Voor authenticatie en resourcebeheer
 - **Git** - Voor het klonen van sjablonen en versiebeheer
 - **Docker** (optioneel) - Voor gecontaineriseerde applicaties
@@ -60,7 +60,7 @@ choco install azd
 ```
 
 #### Optie 4: Handmatige installatie
-1. Download de nieuwste release van [GitHub](https://github.com/Azure/azure-dev/releases)
+1. Download de laatste release van [GitHub](https://github.com/Azure/azure-dev/releases)
 2. Pak uit naar `C:\Program Files\azd\`
 3. Voeg toe aan de PATH-omgevingsvariabele
 
@@ -112,19 +112,19 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd is vooraf geïnstalleerd in GitHub Codespaces. Maak eenvoudig een codespace aan en begin meteen met azd.
+azd is vooraf geïnstalleerd in GitHub Codespaces. Maak gewoon een codespace aan en begin direct met azd.
 
 ### Docker
 
 ```bash
-# Voer azd in een container uit
+# Voer azd uit in een container
 docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest
 
-# Maak een alias voor gemakkelijker gebruik
+# Maak een alias voor eenvoudiger gebruik
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-## ✅ Verifieer installatie
+## ✅ Controleer installatie
 
 Controleer na installatie of azd correct werkt:
 
@@ -132,10 +132,10 @@ Controleer na installatie of azd correct werkt:
 # Controleer versie
 azd version
 
-# Bekijk help
+# Bekijk hulp
 azd --help
 
-# Toon beschikbare sjablonen
+# Bekijk beschikbare sjablonen
 azd template list
 ```
 
@@ -148,12 +148,12 @@ azd version 1.x.x (commit xxxxxx)
 
 **✅ Checklist voor succesvolle installatie:**
 - [ ] `azd version` toont versienummer zonder fouten
-- [ ] `azd --help` toont documentatie van het commando
+- [ ] `azd --help` geeft commando-documentatie weer
 - [ ] `azd template list` toont beschikbare sjablonen
 - [ ] `az account show` toont je Azure-abonnement
-- [ ] Je kunt een testmap aanmaken en succesvol `azd init` uitvoeren
+- [ ] Je kunt een testmap aanmaken en `azd init` met succes uitvoeren
 
-**Als alle controles slagen, ben je klaar om door te gaan naar [Je Eerste Project](first-project.md)!**
+**Als alle controles slagen, ben je klaar om door te gaan naar [Je eerste project](first-project.md)!**
 
 ## Authenticatie instellen
 
@@ -172,7 +172,7 @@ az account show
 ```
 
 ### Apparaatcode-authenticatie
-Als je op een headless systeem werkt of problemen hebt met de browser:
+Als je op een headless systeem werkt of problemen met de browser hebt:
 ```bash
 az login --use-device-code
 ```
@@ -190,13 +190,13 @@ az login --service-principal \
 
 ### Globale configuratie
 ```bash
-# Stel standaardabonnement in
+# Stel het standaardabonnement in
 azd config set defaults.subscription <subscription-id>
 
-# Stel standaardlocatie in
+# Stel de standaardlocatie in
 azd config set defaults.location eastus2
 
-# Bekijk alle configuratie
+# Bekijk alle configuratie-instellingen
 azd config list
 ```
 
@@ -209,7 +209,7 @@ export AZURE_LOCATION="eastus2"
 
 # azd-configuratie
 export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
-export AZD_DEBUG=true  # Schakel debuglogging in
+export AZD_DEBUG=true  # Debuglogging inschakelen
 ```
 
 ## IDE-integratie
@@ -221,11 +221,11 @@ Installeer de Azure Developer CLI-extensie:
 3. Zoek naar "Azure Developer CLI"
 4. Installeer de extensie
 
-Functionaliteiten:
+Functies:
 - IntelliSense voor azure.yaml
 - Geïntegreerde terminalcommando's
 - Bladeren door sjablonen
-- Implementatiemonitoring
+- Bewaking van implementaties
 
 ### GitHub Codespaces
 Maak een `.devcontainer/devcontainer.json` aan:
@@ -249,9 +249,9 @@ Maak een `.devcontainer/devcontainer.json` aan:
 
 ### Veelvoorkomende problemen
 
-#### Toestemming geweigerd (Windows)
+#### Toegang geweigerd (Windows)
 ```powershell
-# Voer PowerShell uit als beheerder
+# Voer PowerShell uit als beheerder.
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
@@ -271,7 +271,7 @@ source ~/.bashrc
 
 #### Netwerk-/proxyproblemen
 ```bash
-# Proxy configureren
+# Configureer proxy
 azd config set http.proxy http://proxy:8080
 azd config set https.proxy https://proxy:8080
 
@@ -306,7 +306,7 @@ azd show
 ## azd bijwerken
 
 ### Automatische updates
-azd meldt je wanneer updates beschikbaar zijn:
+azd zal je informeren wanneer updates beschikbaar zijn:
 ```bash
 azd version --check-for-updates
 ```
@@ -339,11 +339,11 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 - Focus op infrastructuurbeheer
 
 **Azure Developer CLI (azd)**: Hoog-niveau tool voor volledige applicatie-implementaties
-- `azd up` implementeert de volledige app met alle resources
-- Sjabloon-gebaseerde workflows
-- Focus op ontwikkelaarsproductiviteit
+- `azd up` deployt de volledige app met alle resources
+- Op sjablonen gebaseerde workflows
+- Focus op ontwikkelaarproductiviteit
 
-**Je hebt ze allebei nodig**: azd gebruikt de az CLI voor authenticatie
+**Je hebt beide nodig**: azd gebruikt az CLI voor authenticatie
 </details>
 
 <details>
@@ -351,10 +351,10 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 Ja! Je kunt:
 1. Bestaande resources importeren in azd-omgevingen
-2. Bestaande resources verwijzen in je Bicep-sjablonen
+2. Bestaande resources refereren in je Bicep-sjablonen
 3. azd gebruiken voor nieuwe implementaties naast bestaande infrastructuur
 
-Zie [Configuratiegids](configuration.md) voor details.
+Zie de [Configuratiehandleiding](configuration.md) voor details.
 </details>
 
 <details>
@@ -362,7 +362,7 @@ Zie [Configuratiegids](configuration.md) voor details.
 
 Ja, configureer de cloud:
 ```bash
-# Azure voor de overheid
+# Azure Overheid
 az cloud set --name AzureUSGovernment
 az login
 
@@ -375,30 +375,30 @@ az login
 <details>
 <summary><strong>Kan ik azd gebruiken in CI/CD-pijplijnen?</strong></summary>
 
-Zeker! azd is ontworpen voor automatisering:
+Absoluut! azd is ontworpen voor automatisering:
 - Integratie met GitHub Actions
 - Ondersteuning voor Azure DevOps
-- Service principal-authenticatie
+- Authenticatie met service principal
 - Niet-interactieve modus
 
-Zie [Implementatiegids](../chapter-04-infrastructure/deployment-guide.md) voor CI/CD-patronen.
+Zie de [Implementatiehandleiding](../chapter-04-infrastructure/deployment-guide.md) voor CI/CD-patronen.
 </details>
 
 <details>
-<summary><strong>Wat zijn de kosten voor het gebruik van azd?</strong></summary>
+<summary><strong>Wat kost het gebruik van azd?</strong></summary>
 
 azd zelf is **volledig gratis** en open-source. Je betaalt alleen voor:
 - Azure-resources die je implementeert
-- Azure-verbruikskosten (compute, opslag, enz.)
+- Azure-consumptiekosten (compute, opslag, enz.)
 
 Gebruik `azd provision --preview` om kosten te schatten vóór implementatie.
 </details>
 
 ## Volgende stappen
 
-1. **Voltooi de authenticatie**: Zorg dat je toegang hebt tot je Azure-abonnement
-2. **Probeer je eerste deployment**: Volg de [Gids voor je Eerste Project](first-project.md)
-3. **Verken sjablonen**: Bekijk beschikbare sjablonen met `azd template list`
+1. **Voltooi authenticatie**: Zorg dat je toegang hebt tot je Azure-abonnement
+2. **Probeer je eerste implementatie**: Volg de [Handleiding voor het eerste project](first-project.md)
+3. **Verken sjablonen**: Blader door beschikbare sjablonen met `azd template list`
 4. **Configureer je IDE**: Stel je ontwikkelomgeving in
 
 ## Ondersteuning
@@ -408,21 +408,22 @@ Als je problemen tegenkomt:
 - [Meld problemen](https://github.com/Azure/azure-dev/issues)
 - [Communitydiscussies](https://github.com/Azure/azure-dev/discussions)
 - [Azure-ondersteuning](https://azure.microsoft.com/support/)
+- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Krijg Azure-commando-advies direct in je editor met `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Hoofdstuknavigatie:**
-- **📚 Cursus Startpagina**: [AZD Voor Beginners](../../README.md)
-- **📖 Huidig Hoofdstuk**: Hoofdstuk 1 - Basis & Snelstart
+- **📚 Cursus Startpagina**: [AZD voor Beginners](../../README.md)
+- **📖 Huidig hoofdstuk**: Hoofdstuk 1 - Basis & Snelle Start
 - **⬅️ Vorige**: [AZD Basis](azd-basics.md) 
-- **➡️ Volgende**: [Je Eerste Project](first-project.md)
-- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 2: AI-First Ontwikkeling](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **➡️ Volgende**: [Je eerste project](first-project.md)
+- **🚀 Volgend hoofdstuk**: [Hoofdstuk 2: AI-first ontwikkeling](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**✅ Installatie voltooid!** Ga verder naar [Je Eerste Project](first-project.md) om te beginnen met bouwen met azd.
+**✅ Installatie voltooid!** Ga verder naar [Je eerste project](first-project.md) om te beginnen met bouwen met azd.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel wij naar nauwkeurigheid streven, houd er rekening mee dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de originele taal moet als de gezaghebbende bron worden beschouwd. Voor cruciale informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+**Disclaimer**:
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, houd er rekening mee dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de oorspronkelijke taal dient als de gezaghebbende bron te worden beschouwd. Voor kritieke informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

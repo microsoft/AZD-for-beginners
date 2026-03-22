@@ -1,74 +1,74 @@
-# 多代理客服解決方案 - 零售場景
+# 多代理客戶支援方案 - 零售商情境
 
-**第5章：多代理 AI 方案**
-- **📚 課程主頁**: [AZD For Beginners](../README.md)
-- **📖 目前章節**: [Chapter 5: Multi-Agent AI Solutions](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **⬅️ 先決條件**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **➡️ 下一章**: [Chapter 6: Pre-Deployment Validation](../docs/pre-deployment/capacity-planning.md)
-- **🚀 ARM 範本**: [Deployment Package](retail-multiagent-arm-template/README.md)
+**第 5 章：多代理 AI 解決方案**
+- **📚 課程主頁**: [AZD 初學者指南](../README.md)
+- **📖 目前章節**: [第 5 章：多代理 AI 解決方案](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **⬅️ 先決條件**: [第 2 章：以 AI 為先的開發](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **➡️ 下一章**: [第 6 章：部署前驗證](../docs/pre-deployment/capacity-planning.md)
+- **🚀 ARM 範本**: [部署套件](retail-multiagent-arm-template/README.md)
 
-> **⚠️ 架構指南 - 非可執行實作**  
-> 本文件提供一個用於建立多代理系統的**完整架構藍圖**。  
-> **現有內容：** 用於基礎架構部署的 ARM 範本（Azure OpenAI、AI Search、Container Apps 等）  
-> **您需建置：** 代理程式碼、路由邏輯、前端 UI、資料管線（預估 80-120 小時）  
+> **⚠️ 架構指引 - 非可執行實作**  
+> 本文件提供一份用於建構多代理系統的<strong>完整架構藍圖</strong>。  
+> **現有項目：** 用於基礎設施部署的 ARM 範本（Microsoft Foundry Models、AI Search、Container Apps 等）  
+> **您必須建置：** 代理程式碼、路由邏輯、前端 UI、資料管線（估計 80-120 小時）  
 >  
-> **可作為：**
-> - ✅ 多代理專案的架構參考
+> **可用作：**
+> - ✅ 作為您自行多代理專案的架構參考
 > - ✅ 多代理設計模式的學習指南
-> - ✅ 部署 Azure 資源的基礎架構範本
-> - ❌ 非即時可執行的應用（仍需大量開發）
+> - ✅ 用於部署 Azure 資源的基礎設施範本
+> - ❌ 不是一個可直接運行的應用程式（需要大量開發工作）
 
 ## 概覽
 
-**學習目標：** 理解為零售商建立具備庫存管理、文件處理及智慧客服互動之生產等級多代理客服聊天機器人的架構、設計決策與實作方法。
+**學習目標：** 了解建構一個適用於零售商、具備進階 AI 功能（包括庫存管理、文件處理及智能客戶互動）的生產等級多代理客戶支援聊天機器人的架構、設計決策與實作方法。
 
-**完成所需時間：** 閱讀 + 理解（2-3 小時）｜建置完整實作（80-120 小時）
+**完成時間：** 閱讀 + 理解（2-3 小時）｜完整實作建置（80-120 小時）
 
 **您將學到：**
 - 多代理架構模式與設計原則
-- 多區域 Azure OpenAI 部署策略
-- 與 RAG（檢索增強生成）整合的 AI Search
+- 多區域 Microsoft Foundry Models 部署策略
+- AI Search 與 RAG（檢索增強生成）整合
 - 代理評估與安全測試框架
-- 生產部署考量與成本優化
+- 生產部署注意事項與成本優化
 
 ## 架構目標
 
-**教學重點：** 此架構展示企業等級多代理系統的設計模式。
+**教育重點：** 本架構示範企業級多代理系統的模式。
 
-### 系統需求（供您實作）
+### 系統需求（供您的實作使用）
 
-一個生產等級的客服解決方案需要：
-- **多個專責代理** 針對不同客服需求（客服代理 + 庫存管理代理）
-- **多模型部署** 與適當的容量規劃（GPT-4o、GPT-4o-mini、跨區域嵌入模型）
-- **動態資料整合** 與 AI Search 及檔案上傳（向量搜尋 + 文件處理）
-- **完整的監控** 與評估能力（Application Insights + 自訂指標）
-- **生產等級的安全性** 與紅隊驗證（漏洞掃描 + 代理評估）
+一個生產等級的客戶支援解決方案需要：
+- <strong>多個專門化代理</strong> 以應對不同客戶需求（客戶服務 + 庫存管理）
+- <strong>多模型部署</strong> 並進行適當的容量規劃（gpt-4.1、gpt-4.1-mini、跨區域 embeddings）
+- <strong>動態資料整合</strong> 與 AI Search 及檔案上傳（向量搜尋 + 文件處理）
+- <strong>全面監控</strong> 與評估能力（Application Insights + 自訂指標）
+- <strong>生產級安全性</strong> 並進行紅隊驗證（漏洞掃描 + 代理評估）
 
-### 本指南提供的內容
+### 本指南提供內容
 
-✅ **架構模式** - 可擴充多代理系統的驗證設計  
-✅ **基礎架構範本** - 部署所有 Azure 服務的 ARM 範本  
-✅ **程式碼範例** - 關鍵元件的參考實作  
-✅ **設定指引** - 逐步設定說明  
-✅ **最佳實務** - 安全、監控、成本優化策略  
+✅ <strong>架構模式</strong> - 可擴充多代理系統的驗證設計  
+✅ <strong>基礎設施範本</strong> - 部署所有 Azure 服務的 ARM 範本  
+✅ <strong>程式範例</strong> - 關鍵元件的參考實作  
+✅ <strong>設定指引</strong> - 逐步設定說明  
+✅ <strong>最佳實務</strong> - 安全性、監控、成本優化策略  
 
-❌ **不包含** - 完整可運行的應用（仍需開發工作）
+❌ <strong>不包含</strong> - 完整可運行的應用程式（需自行開發）
 
 ## 🗺️ 實作路線圖
 
-### 階段 1：研究架構（2-3 小時） - 從這裡開始
+### 階段 1：研讀架構（2-3 小時） - 從此處開始
 
 **目標：** 了解系統設計與元件互動
 
-- [ ] 閱讀本文件全文
+- [ ] 閱讀完整文件
 - [ ] 檢視架構圖與元件關係
-- [ ] 理解多代理模式與設計決策
-- [ ] 研究代理工具與路由的程式碼範例
-- [ ] 檢視成本估算與容量規劃指引
+- [ ] 了解多代理模式與設計決策
+- [ ] 研究 agent 工具與路由的程式範例
+- [ ] 檢視成本估算與容量規劃建議
 
-**成果：** 清楚了解您需要建置的內容
+**成果：** 清楚瞭解您需要建置的項目
 
-### 階段 2：部署基礎架構（30-45 分鐘）
+### 階段 2：部署基礎設施（30-45 分鐘）
 
 **目標：** 使用 ARM 範本佈建 Azure 資源
 
@@ -77,60 +77,60 @@ cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup -m standard
 ```
 
-**將會部署：**
-- ✅ Azure OpenAI（3 個區域：GPT-4o、GPT-4o-mini、嵌入模型）
-- ✅ AI Search 服務（空白，需索引設定）
+**部署內容：**
+- ✅ Microsoft Foundry Models（3 個區域：gpt-4.1、gpt-4.1-mini、embeddings）
+- ✅ AI Search 服務（為空，需要索引設定）
 - ✅ Container Apps 環境（占位映像檔）
 - ✅ 儲存帳戶、Cosmos DB、Key Vault
 - ✅ Application Insights 監控
 
-**尚未包含：**
+**缺少項目：**
 - ❌ 代理實作程式碼
 - ❌ 路由邏輯
 - ❌ 前端 UI
 - ❌ 搜尋索引結構
 - ❌ 資料管線
 
-### 階段 3：建置應用（80-120 小時）
+### 階段 3：建置應用程式（80-120 小時）
 
-**目標：** 根據本架構實作多代理系統
+**目標：** 根據此架構實作多代理系統
 
-1. **代理實作**（30-40 小時）
+1. <strong>代理實作</strong>（30-40 小時）
    - 基礎代理類別與介面
-   - 使用 GPT-4o 的客服代理
-   - 使用 GPT-4o-mini 的庫存代理
+   - 使用 gpt-4.1 的客戶服務代理
+   - 使用 gpt-4.1-mini 的庫存代理
    - 工具整合（AI Search、Bing、檔案處理）
 
-2. **路由服務**（12-16 小時）
+2. <strong>路由服務</strong>（12-16 小時）
    - 請求分類邏輯
    - 代理選擇與協調
    - FastAPI/Express 後端
 
-3. **前端開發**（20-30 小時）
+3. <strong>前端開發</strong>（20-30 小時）
    - 聊天介面 UI
    - 檔案上傳功能
-   - 回應渲染
+   - 回應呈現
 
-4. **資料管線**（8-12 小時）
+4. <strong>資料管線</strong>（8-12 小時）
    - AI Search 索引建立
    - 使用 Document Intelligence 的文件處理
-   - 嵌入產生與索引
+   - Embedding 產生與索引
 
-5. **監控與評估**（10-15 小時）
+5. <strong>監控與評估</strong>（10-15 小時）
    - 自訂遙測實作
    - 代理評估框架
    - 紅隊安全掃描器
 
 ### 階段 4：部署與測試（8-12 小時）
 
-- 為所有服務建置 Docker 映像檔
+- 為所有服務建立 Docker 映像檔
 - 推送至 Azure Container Registry
-- 更新 Container Apps 使用實際映像檔
-- 設定環境變數與密鑰
+- 更新 Container Apps 為實際映像檔
+- 設定環境變數與祕密
 - 執行評估測試套件
 - 進行安全掃描
 
-**總預估工時：** 經驗豐富的開發者約 80-120 小時
+**總估計工作量：** 經驗豐富開發人員約 80-120 小時
 
 ## 解決方案架構
 
@@ -138,17 +138,17 @@ cd retail-multiagent-arm-template
 
 ```mermaid
 graph TB
-    User[👤 客戶] --> LB[Azure 前端門戶]
-    LB --> WebApp[網頁前端<br/>容器應用]
+    User[👤 客戶] --> LB[Azure 前端閘道]
+    LB --> WebApp[Web 前端<br/>容器應用]
     
     WebApp --> Router[代理路由器<br/>容器應用]
     Router --> CustomerAgent[客戶代理<br/>客戶服務]
     Router --> InvAgent[庫存代理<br/>庫存管理]
     
-    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>美國東部 2]
-    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>美國西部 2]
+    CustomerAgent --> OpenAI1[Microsoft Foundry 模型<br/>gpt-4.1<br/>美國東部 2]
+    InvAgent --> OpenAI2[Microsoft Foundry 模型<br/>gpt-4.1-mini<br/>美國西部 2]
     
-    CustomerAgent --> AISearch[Azure AI Search<br/>產品目錄]
+    CustomerAgent --> AISearch[Azure AI 搜尋<br/>產品目錄]
     CustomerAgent --> BingSearch[Bing 搜尋 API<br/>即時資訊]
     InvAgent --> AISearch
     
@@ -162,16 +162,16 @@ graph TB
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[GPT-4o 評分器<br/>瑞士北部] --> Evaluation[評估框架]
+    GraderModel[gpt-4.1 評分器<br/>瑞士北部] --> Evaluation[評估框架]
     RedTeam[紅隊掃描器] --> SecurityReports[安全報告]
     
     subgraph "資料層"
         Storage
         AISearch
-        CosmosDB[Cosmos DB<br/>對話記錄]
+        CosmosDB[Cosmos DB<br/>聊天紀錄]
     end
     
-    subgraph "人工智慧服務"
+    subgraph "AI 服務"
         OpenAI1
         OpenAI2
         Embeddings
@@ -183,7 +183,7 @@ graph TB
     subgraph "監控與安全"
         AppInsights
         LogAnalytics[日誌分析工作區]
-        KeyVault[Azure 金鑰保管庫<br/>機密與設定]
+        KeyVault[Azure Key Vault<br/>機密與設定]
         RedTeam
         Evaluation
     end
@@ -199,24 +199,24 @@ graph TB
 ```
 ### 元件概覽
 
-| 元件 | 目的 | 技術 | 區域 |
+| Component | Purpose | Technology | Region |
 |-----------|---------|------------|---------|
-| **Web 前端** | 用戶與客服互動的介面 | Container Apps | 主要區域 |
-| **Agent Router** | 將請求路由到適當代理 | Container Apps | 主要區域 |
-| **Customer Agent** | 處理客服查詢 | Container Apps + GPT-4o | 主要區域 |
-| **Inventory Agent** | 管理庫存與履行 | Container Apps + GPT-4o-mini | 主要區域 |
-| **Azure OpenAI** | 提供代理的 LLM 推論 | Cognitive Services | 多區域 |
+| **Web Frontend** | 用戶與客戶互動的介面 | Container Apps | 主要區域 |
+| **Agent Router** | 將請求導向適當代理 | Container Apps | 主要區域 |
+| **Customer Agent** | 處理客戶服務查詢 | Container Apps + gpt-4.1 | 主要區域 |
+| **Inventory Agent** | 管理庫存與履行 | Container Apps + gpt-4.1-mini | 主要區域 |
+| **Microsoft Foundry Models** | 代理的 LLM 推論 | Cognitive Services | 多區域 |
 | **AI Search** | 向量搜尋與 RAG | AI Search Service | 主要區域 |
 | **Storage Account** | 檔案上傳與文件存放 | Blob Storage | 主要區域 |
 | **Application Insights** | 監控與遙測 | Monitor | 主要區域 |
-| **Grader Model** | 代理評估系統 | Azure OpenAI | 次要區域 |
+| **Grader Model** | 代理評估系統 | Microsoft Foundry Models | 次要區域 |
 
 ## 📁 專案結構
 
-> **📍 狀態說明：**  
-> ✅ = 存放於 repository  
-> 📝 = 參考實作（本文件中的程式碼範例）  
-> 🔨 = 需由您建立
+> **📍 狀態圖例：**  
+> ✅ = 已存在於原始碼庫  
+> 📝 = 參考實作（本文件中有程式範例）  
+> 🔨 = 您需要建立此項目
 
 ```
 retail-multiagent-solution/              🔨 Your project directory
@@ -235,7 +235,7 @@ retail-multiagent-solution/              🔨 Your project directory
 │   ├── main.bicep                      🔨 Main Bicep template (optional, ARM exists)
 │   ├── main.parameters.json            🔨 Parameters file
 │   ├── modules/                        📝 Bicep modules (reference examples below)
-│   │   ├── ai-services.bicep           📝 Azure OpenAI deployments
+│   │   ├── ai-services.bicep           📝 Microsoft Foundry Models deployments
 │   │   ├── search.bicep                📝 AI Search configuration
 │   │   ├── storage.bicep               📝 Storage accounts
 │   │   ├── container-apps.bicep        📝 Container Apps environment
@@ -365,16 +365,16 @@ retail-multiagent-solution/              🔨 Your project directory
 
 ## 🚀 快速開始：您現在可以做的事
 
-### 選項 1：僅部署基礎架構（30 分鐘）
+### 選項 1：僅部署基礎設施（30 分鐘）
 
-**您將得到：** 所有 Azure 服務佈建完成並可供開發使用
+**您將得到：** 所有 Azure 服務已佈建並可供開發使用
 
 ```bash
 # 複製儲存庫
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/retail-multiagent-arm-template
 
-# 部署基礎架構
+# 部署基礎設施
 ./deploy.sh -g myResourceGroup -m standard
 
 # 驗證部署
@@ -382,58 +382,58 @@ az resource list --resource-group myResourceGroup --output table
 ```
 
 **預期結果：**
-- ✅ Azure OpenAI 服務已部署（3 個區域）
-- ✅ AI Search 服務已建立（空白）
+- ✅ Microsoft Foundry Models 服務已部署（3 個區域）
+- ✅ AI Search 服務已建立（為空）
 - ✅ Container Apps 環境已就緒
 - ✅ 儲存、Cosmos DB、Key Vault 已設定
-- ❌ 尚無可用的代理（僅基礎架構）
+- ❌ 尚無可用代理（僅基礎設施）
 
-### 選項 2：研究架構（2-3 小時）
+### 選項 2：研讀架構（2-3 小時）
 
-**您將得到：** 對多代理模式的深入理解
+**您將得到：** 深入了解多代理模式
 
-1. 閱讀本文件全文
-2. 檢視各元件的程式碼範例
-3. 理解設計決策與權衡
+1. 閱讀完整文件
+2. 檢視各元件的程式範例
+3. 了解設計決策與權衡
 4. 研究成本優化策略
-5. 規劃您的實作方式
+5. 規劃您的實作方法
 
 **預期結果：**
 - ✅ 對系統架構有清晰的心智模型
-- ✅ 理解所需元件
-- ✅ 現實的工時估算
+- ✅ 了解所需元件
+- ✅ 實際工時估算
 - ✅ 實作計畫
 
 ### 選項 3：建置完整系統（80-120 小時）
 
 **您將得到：** 生產就緒的多代理解決方案
 
-1. **階段 1：** 部署基礎架構（如上）
-2. **階段 2：** 使用下方範例實作代理（30-40 小時）
+1. **階段 1：** 部署基礎設施（如上）
+2. **階段 2：** 使用下列程式範例實作代理（30-40 小時）
 3. **階段 3：** 建置路由服務（12-16 小時）
-4. **階段 4：** 建置前端 UI（20-30 小時）
+4. **階段 4：** 建立前端 UI（20-30 小時）
 5. **階段 5：** 設定資料管線（8-12 小時）
 6. **階段 6：** 新增監控與評估（10-15 小時）
 
 **預期結果：**
-- ✅ 完整功能的多代理系統
-- ✅ 生產等級的監控
-- ✅ 安全驗證
-- ✅ 成本優化的部署
+- ✅ 完整運作的多代理系統
+- ✅ 生產等級監控
+- ✅ 完成安全驗證
+- ✅ 成本優化部署
 
 ---
 
 ## 📚 架構參考與實作指南
 
-以下章節提供詳細的架構模式、設定範例與參考程式碼，以協助您的實作。
+以下章節提供詳細的架構模式、設定範例與參考程式，協助您完成實作。
 
 ## 初始設定需求
 
 ### 1. 多代理與設定
 
-**目標**：部署 2 個專責代理 -「Customer Agent」（客服）與「Inventory」（庫存管理）
+<strong>目標</strong>：部署 2 個專門代理 - 「Customer Agent」（客戶服務）與「Inventory」（庫存管理）
 
-> **📝 注意：** 下列 azure.yaml 與 Bicep 設定檔為**參考範例**，示範如何結構化多代理部署。您需要建立這些檔案與對應的代理實作。
+> **📝 注意：** 下列 azure.yaml 與 Bicep 設定為<strong>參考範例</strong>，示範如何結構化多代理部署。您需要建立這些檔案以及對應的代理實作。
 
 #### 設定步驟：
 
@@ -450,7 +450,7 @@ services:
             "name": "Customer",
             "role": "Customer Service Representative",
             "description": "Handles general customer inquiries, returns, and support",
-            "model": "gpt-4o",
+            "model": "gpt-4.1",
             "temperature": 0.7,
             "max_tokens": 500,
             "tools": ["search", "file_retrieval", "bing_search"]
@@ -459,7 +459,7 @@ services:
             "name": "Inventory",
             "role": "Inventory Management Specialist", 
             "description": "Manages stock levels, product availability, and fulfillment",
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-mini",
             "temperature": 0.3,
             "max_tokens": 300,
             "tools": ["search", "database_query"]
@@ -474,12 +474,12 @@ services:
 param agentsConfig object = {
   customer: {
     name: 'Customer'
-    model: 'gpt-4o'
+    model: 'gpt-4.1'
     capacity: 20
   }
   inventory: {
     name: 'Inventory'
-    model: 'gpt-4o-mini'
+    model: 'gpt-4.1-mini'
     capacity: 10
   }
 }
@@ -509,7 +509,7 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 
 ### 2. 多模型與容量規劃
 
-**目標**：部署聊天模型（客服）、嵌入模型（搜尋）與推理模型（評分器），並進行適當配額管理
+<strong>目標</strong>：部署聊天模型（Customer）、embeddings 模型（search）、以及用於推理的評分模型（grader），並進行適當配額管理
 
 #### 多區域策略：
 
@@ -517,7 +517,7 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 // infra/models.bicep
 param modelDeployments array = [
   {
-    name: 'gpt-4o'
+    name: 'gpt-4.1'
     region: 'eastus2'
     capacity: 20
     usage: 'chat'
@@ -531,7 +531,7 @@ param modelDeployments array = [
     priority: 'medium'
   }
   {
-    name: 'gpt-4o'
+    name: 'gpt-4.1'
     region: 'francecentral'
     capacity: 15
     usage: 'grading'
@@ -546,7 +546,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
   properties: {
     scriptContent: '''
       #!/bin/bash
-      for model in "gpt-4o" "text-embedding-ada-002"; do
+      for model in "gpt-4.1" "text-embedding-ada-002"; do
         available=$(az cognitiveservices usage list --location ${location} --query "[?name.value=='$model'].{current:currentValue,limit:limit}" -o tsv)
         echo "Model: $model, Available capacity: $available"
       done
@@ -561,14 +561,14 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
 # .azure/env/.env.production
 AZURE_OPENAI_REGIONS='["eastus2", "westus2", "francecentral"]'
 AZURE_OPENAI_FALLBACK_ENABLED=true
-MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
+MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 ```
 
 ### 3. AI Search 與資料索引設定
 
-**目標**：為資料更新與自動索引設定 AI Search
+<strong>目標</strong>：為資料更新與自動索引設定 AI Search
 
-#### 預置掛鉤（Pre-Provisioning Hook）：
+#### 預佈建掛鉤：
 
 ```bash
 #!/bin/bash
@@ -596,13 +596,13 @@ echo "Configuring AI Search indexes and uploading initial data..."
 # 取得搜尋服務金鑰
 SEARCH_KEY=$(az search admin-key show --service-name "$AZURE_SEARCH_SERVICE_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query primaryKey -o tsv)
 
-# 建立索引結構
+# 建立索引架構
 curl -X POST "https://$AZURE_SEARCH_SERVICE_NAME.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: $SEARCH_KEY" \
   -d @"./infra/search-schema.json"
 
-# 上傳初始文件
+# 上載初始檔案
 python ./scripts/upload_search_data.py \
   --search-service "$AZURE_SEARCH_SERVICE_NAME" \
   --search-key "$SEARCH_KEY" \
@@ -634,14 +634,14 @@ python ./scripts/upload_search_data.py \
 }
 ```
 
-### 4. 代理使用 AI Search 的工具設定
+### 4. 代理工具設定以使用 AI Search
 
-**目標**：設定代理使用 AI Search 作為基礎依據工具
+<strong>目標</strong>：設定代理以使用 AI Search 作為依據工具
 
 #### 代理搜尋工具實作：
 
 ```python
-# src/agents/tools/search_tool.py
+# 原始碼/代理/工具/搜尋_工具.py
 import asyncio
 from azure.search.documents.aio import SearchClient
 from azure.core.credentials import AzureKeyCredential
@@ -701,9 +701,9 @@ class CustomerAgent:
         # 為 LLM 準備上下文
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # 產生有依據的回覆
+        # 生成以上下文為依據的回應
         response = await self.openai_client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4.1",
             messages=[
                 {"role": "system", "content": f"You are Customer, a helpful customer service agent. Use this context to answer questions: {context}"},
                 {"role": "user", "content": user_query}
@@ -715,7 +715,7 @@ class CustomerAgent:
 
 ### 5. 檔案上傳儲存整合
 
-**目標**：讓代理能處理上傳檔案（手冊、文件）以作為 RAG 上下文
+<strong>目標</strong>：啟用代理處理上傳檔案（手冊、文件）以用於 RAG 上下文
 
 #### 儲存設定：
 
@@ -816,7 +816,7 @@ class DocumentProcessor:
 
 ### 6. Bing 搜尋整合
 
-**目標**：加入 Bing Search 能力以取得即時資訊
+<strong>目標</strong>：加入 Bing 搜尋能力以取得即時資訊
 
 #### Bicep 資源新增：
 
@@ -839,7 +839,7 @@ output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 #### Bing 搜尋工具：
 
 ```python
-# src/代理/工具/bing_搜尋_工具.py
+# src/agents/tools/bing_search_tool.py
 import aiohttp
 import asyncio
 
@@ -880,11 +880,11 @@ class BingSearchTool:
 
 ---
 
-## 監控與可觀察性
+## 監控與可觀測性
 
 ### 7. 追蹤與 Application Insights
 
-**目標**：以追蹤日誌與 Application Insights 建立完整監控
+<strong>目標</strong>：以追蹤日誌與 Application Insights 建立完整監控
 
 #### Application Insights 設定：
 
@@ -984,7 +984,7 @@ class AgentTelemetry:
         """Track search operation performance"""
         properties = {
             'search_type': search_type,
-            'query': query[:100],  # 為保障私隱而截斷
+            'query': query[:100],  # 為私隱而截短
             'results_found': str(results_count > 0)
         }
         
@@ -1047,7 +1047,7 @@ class AgentTelemetry:
 
 ### 8. 紅隊安全驗證
 
-**目標**：為代理與模型實作自動化安全測試
+<strong>目標</strong>：對代理與模型進行自動化安全測試
 
 #### 紅隊設定：
 
@@ -1165,8 +1165,8 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # 實作會向代理端點發送 HTTP 請求
-        # 示範用途，回傳佔位符
+        # 實作上會向代理端點發送 HTTP 請求
+        # 為示範用途，回傳佔位符
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1223,7 +1223,7 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # 基本評分：100 - (vulnerabilities / total * 100)
+        # 基本評分: 100 - (漏洞數 / 總數 * 100)
         if total_strategies == 0:
             return 100.0
         
@@ -1266,14 +1266,14 @@ echo "Security scan completed. Check security_reports/ for results."
 
 ### 9. 使用 Grader 模型的代理評估
 
-**目標**：部署專責評分器模型的評估系統
+<strong>目標</strong>：以專用的 grader 模型部署評估系統
 
 #### Grader 模型設定：
 
 ```bicep
 // infra/evaluation.bicep
 param graderModelConfig object = {
-  name: 'gpt-4o'
+  name: 'gpt-4.1'
   version: '2024-11-20'
   capacity: 30
   region: 'switzerlandnorth'  // Different region for separation
@@ -1296,7 +1296,7 @@ resource graderOpenAI 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
 
 resource graderDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: graderOpenAI
-  name: 'gpt-4o-grader'
+  name: 'gpt-4.1-grader'
   properties: {
     model: {
       format: 'OpenAI'
@@ -1341,7 +1341,7 @@ class AgentEvaluator:
             case_result = await self._evaluate_single_case(test_case)
             evaluation_results['results'].append(case_result)
         
-        # 計算摘要指標
+        # 計算彙總指標
         evaluation_results['summary'] = self._calculate_summary(evaluation_results['results'])
         
         return evaluation_results
@@ -1351,7 +1351,7 @@ class AgentEvaluator:
         user_query = test_case['input']
         expected_criteria = test_case.get('criteria', {})
         
-        # 取得代理的回應
+        # 取得代理回應
         agent_response = await self._get_agent_response(user_query)
         
         # 為回應評分
@@ -1416,7 +1416,7 @@ class AgentEvaluator:
         
         try:
             grader_response = await self.grader_client.chat.completions.create(
-                model="gpt-4o-grader",
+                model="gpt-4.1-grader",
                 messages=[
                     {"role": "system", "content": "You are an expert AI evaluation assistant. Always respond with valid JSON."},
                     {"role": "user", "content": grading_prompt}
@@ -1471,7 +1471,7 @@ class AgentEvaluator:
             if criterion_scores:
                 summary['criteria_averages'][criterion] = sum(criterion_scores) / len(criterion_scores)
         
-        # 表現評分
+        # 效能評級
         avg_score = summary['average_overall_score']
         if avg_score >= 4.5:
             summary['performance_rating'] = 'Excellent'
@@ -1526,11 +1526,11 @@ class AgentEvaluator:
 
 ---
 
-## 自訂與更新
+## 客製化與更新
 
-### 10. Container App 自訂
+### 10. Container App 客製化
 
-**目標**：更新 Container App 設定並替換為自訂 UI
+<strong>目標</strong>：更新 container app 設定並替換為自訂 UI
 
 #### 動態設定：
 
@@ -1548,7 +1548,7 @@ services:
       CUSTOM_LOGO_URL: ${LOGO_URL}
 ```
 
-#### 自訂前端建置：
+#### 自訂前端構建：
 
 ```dockerfile
 # src/frontend/Dockerfile
@@ -1575,7 +1575,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
 
-#### 建置與部署腳本：
+#### 建構與部署腳本：
 
 ```bash
 #!/bin/bash
@@ -1583,7 +1583,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# 使用環境變數建置自訂映像
+# 使用環境變數建立自訂映像
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1614,9 +1614,9 @@ echo "Frontend deployed successfully!"
 
 #### 1. Container Apps 配額限制
 
-**問題**：因區域配額限制導致佈建失敗
+<strong>問題</strong>：因區域配額限制導致部署失敗
 
-**解法**：
+<strong>解法</strong>：
 ```bash
 # 檢查目前配額使用情況
 az containerapp env show \
@@ -1637,9 +1637,9 @@ az support tickets create \
 
 #### 2. 模型部署過期
 
-**問題**：因 API 版本過期導致模型部署失敗
+<strong>問題</strong>：模型部署因 API 版本過期而失敗
 
-**解法**：
+<strong>解法</strong>：
 ```python
 # scripts/update_model_versions.py
 import requests
@@ -1647,11 +1647,11 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # 這會呼叫 Azure OpenAI API 以取得目前版本
+    # 這會呼叫 Microsoft Foundry Models API 以取得目前版本
     latest_versions = {
-        "gpt-4o": "2024-11-20",
+        "gpt-4.1": "2024-11-20",
         "text-embedding-ada-002": "2", 
-        "gpt-4o-mini": "2024-07-18"
+        "gpt-4.1-mini": "2024-07-18"
     }
     
     print("Latest model versions:")
@@ -1686,9 +1686,9 @@ if __name__ == "__main__":
 
 #### 3. 微調整合
 
-**問題**：如何將微調後的模型整合進 AZD 部署
+<strong>問題</strong>：如何將微調後的模型整合進 azd 部署
 
-**解法**：
+<strong>解法</strong>：
 ```python
 # scripts/fine_tuning_pipeline.py
 import asyncio
@@ -1698,7 +1698,7 @@ class FineTuningPipeline:
     def __init__(self, openai_client: AsyncOpenAI):
         self.client = openai_client
     
-    async def start_fine_tuning_job(self, training_file_id: str, model: str = "gpt-4o-mini"):
+    async def start_fine_tuning_job(self, training_file_id: str, model: str = "gpt-4.1-mini"):
         """Start a fine-tuning job"""
         job = await self.client.fine_tuning.jobs.create(
             training_file=training_file_id,
@@ -1726,7 +1726,7 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # 更新部署以使用已微調的模型
+            # 更新部署以使用微調後的模型
             # 這會呼叫 Azure CLI 來更新部署
             return fine_tuned_model
         else:
@@ -1736,11 +1736,11 @@ class FineTuningPipeline:
 
 ---
 
-## 常見問題與開放式探索
+## 常見問答與開放式探索
 
-### 常見問答
+### 常見問題
 
-#### 問：是否有簡單方式部署多個代理（設計模式）？
+#### 問：是否有簡易方法部署多個代理（設計模式）？
 
 **答：有！使用多代理模式：**
 
@@ -1753,13 +1753,13 @@ services:
     config:
       AGENTS: |
         {
-          "customer": {"type": "customer_service", "model": "gpt-4o", "capacity": 20},
-          "inventory": {"type": "inventory_management", "model": "gpt-4o-mini", "capacity": 10},
-          "returns": {"type": "returns_processing", "model": "gpt-4o-mini", "capacity": 5}
+          "customer": {"type": "customer_service", "model": "gpt-4.1", "capacity": 20},
+          "inventory": {"type": "inventory_management", "model": "gpt-4.1-mini", "capacity": 10},
+          "returns": {"type": "returns_processing", "model": "gpt-4.1-mini", "capacity": 5}
         }
 ```
 
-#### 問：可以把「模型路由器」部署為模型嗎（成本影響）？
+#### 問：我可以將「模型路由器」部署為模型以節省成本嗎？
 
 **答：可以，但需謹慎考量：**
 
@@ -1768,8 +1768,8 @@ services:
 class ModelRouter:
     def __init__(self):
         self.routing_rules = {
-            "simple_queries": {"model": "gpt-4o-mini", "cost_per_1k": 0.00015},
-            "complex_reasoning": {"model": "gpt-4o", "cost_per_1k": 0.03},
+            "simple_queries": {"model": "gpt-4.1-mini", "cost_per_1k": 0.00015},
+            "complex_reasoning": {"model": "gpt-4.1", "cost_per_1k": 0.03},
             "embeddings": {"model": "text-embedding-ada-002", "cost_per_1k": 0.0001}
         }
     
@@ -1784,18 +1784,18 @@ class ModelRouter:
     
     def estimate_cost_savings(self, usage_patterns: dict):
         """Estimate cost savings from intelligent routing"""
-        # 實作會計算潛在節省額
+        # 實作會計算潛在節省量
         pass
 ```
 
 **成本影響：**
-- **節省**：對於簡單查詢可減少 60-80% 成本
-- **折衷**：路由邏輯會稍微增加延遲
-- **監控**：追蹤準確度與成本指標
+- <strong>節省</strong>：對於簡單查詢可減少 60-80% 成本
+- <strong>權衡</strong>：路由邏輯會有些微延遲增加
+- <strong>監控</strong>：追蹤準確性與成本指標
 
-#### 問：我可以從 azd 範本啟動微調工作嗎？
+#### 問：我可以從 azd 範本啟動微調作業嗎？
 
-**答：可以，透過佈建後掛鉤（post-provisioning hooks）：**
+**答：可以，使用佈建後掛鉤：**
 
 ```bash
 #!/bin/bash
@@ -1803,15 +1803,15 @@ class ModelRouter:
 
 echo "Starting fine-tuning pipeline..."
 
-# 上傳訓練資料
+# 上載訓練資料
 TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
 
-# 啟動微調工作
+# 啟動微調作業
 FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
-  --model "gpt-4o-mini")
+  --model "gpt-4.1-mini")
 
 # 儲存工作 ID 以便監控
 echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
@@ -1903,65 +1903,66 @@ class CostOptimizer:
 ```
 
 ---
-## ✅ 可立即部署的 ARM 範本
 
-> **✨ 這是真實存在且可運行的！**  
-> 與上述概念性程式碼範例不同，該 ARM 範本是包含於此儲存庫的**真實可運作的基礎設施部署**。
+## ✅ Ready-to-Deploy ARM Template
 
-### 此範本實際執行的內容
+> **✨ 這實際存在並可運作！**  
+> 與上面的概念性程式碼範例不同，這個 ARM 範本是此儲存庫中一個「真實、可運作的基礎設施部署」。
 
-位於 [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) 的 ARM 範本會佈建多代理系統所需的 **所有 Azure 基礎設施**。這是唯一可以直接執行的組件 — 其他部分都需要開發。
+### 這個範本實際做了什麼
+
+位於 [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) 的 ARM 範本會佈建多代理系統所需的 **所有 Azure 基礎設施**。這是唯一一個「可立即執行」的元件——其他所有東西都需要開發。
 
 ### ARM 範本包含哪些內容
 
 位於 [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) 的 ARM 範本包括：
 
-#### **完整的基礎設施**
-- ✅ **多區域 Azure OpenAI** 部署 (GPT-4o、GPT-4o-mini、embeddings、grader)  
-- ✅ **Azure AI Search**，具向量搜尋能力  
-- ✅ **Azure Storage**，包含文件與上傳容器  
-- ✅ **Container Apps 環境**，具自動擴充能力  
-- ✅ **Agent Router 與前端** 的 container apps  
-- ✅ **Cosmos DB**，用於聊天記錄持久化  
-- ✅ **Application Insights**，提供完整監控  
-- ✅ **Key Vault**，用於安全機密管理  
-- ✅ **Document Intelligence**，用於檔案處理  
+#### <strong>完整基礎設施</strong>
+- ✅ **多區域 Microsoft Foundry 模型** 部署（gpt-4.1, gpt-4.1-mini, embeddings, grader）
+- ✅ **Azure AI Search**，具備向量搜尋能力
+- ✅ **Azure Storage**，含文件與上傳容器
+- ✅ **Container Apps 環境**，具有自動擴充
+- ✅ **Agent Router 與前端** 容器應用
+- ✅ **Cosmos DB** 用於聊天歷史持久化
+- ✅ **Application Insights**，提供完整監控
+- ✅ **Key Vault**，安全的秘密管理
+- ✅ **Document Intelligence**，用於檔案處理
 - ✅ **Bing Search API**，提供即時資訊
 
-#### **部署模式**
-| 模式 | 使用情境 | 資源 | 預估每月成本 |
+#### <strong>部署模式</strong>
+| Mode | Use Case | Resources | Estimated Cost/Month |
 |------|----------|-----------|---------------------|
-| **最小配置** | 開發、測試 | 基本 SKUs、單一區域 | $100-370 |
-| **標準** | 生產、適度規模 | 標準 SKUs、多區域 | $420-1,450 |
-| **高階** | 企業、大型規模 | 高階 SKUs、HA 設定 | $1,150-3,500 |
+| **Minimal** | Development, Testing | Basic SKUs, Single region | $100-370 |
+| **Standard** | Production, Moderate scale | Standard SKUs, Multi-region | $420-1,450 |
+| **Premium** | Enterprise, High scale | Premium SKUs, HA setup | $1,150-3,500 |
 
 ### 🎯 快速部署選項
 
-#### 選項 1：一鍵部署到 Azure
+#### 選項 1：一鍵 Azure 部署
 
 [![部署到 Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
 #### 選項 2：使用 Azure CLI 部署
 
 ```bash
-# 複製儲存庫
+# 克隆儲存庫
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
-# 使部署腳本可執行
+# 將部署腳本設為可執行
 chmod +x deploy.sh
 
 # 使用預設設定部署（標準模式）
 ./deploy.sh -g myResourceGroup
 
-# 為生產環境部署，啟用進階功能
+# 為生產環境部署並啟用高級功能
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# 部署供開發使用的精簡版本
+# 為開發環境部署精簡版
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
-#### 選項 3：直接使用 ARM 範本部署
+#### 選項 3：直接 ARM 範本部署
 
 ```bash
 # 建立資源群組
@@ -1977,7 +1978,7 @@ az deployment group create \
 
 ### 範本輸出
 
-部署成功後，您將會收到：
+成功部署後，您會收到：
 
 ```json
 {
@@ -1993,9 +1994,9 @@ az deployment group create \
 
 ### 🔧 部署後設定
 
-ARM 範本會處理基礎設施的佈建。部署完成後：
+ARM 範本處理基礎設施佈建。部署完成後：
 
-1. **設定搜尋索引**：
+1. <strong>設定搜尋索引</strong>：
    ```bash
    # 使用所提供的搜尋架構
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
@@ -2004,7 +2005,7 @@ ARM 範本會處理基礎設施的佈建。部署完成後：
      -d @../data/search-schema.json
    ```
 
-2. **上傳初始文件**：
+2. <strong>上傳初始文件</strong>：
    ```bash
    # 上載產品手冊及知識庫
    az storage blob upload-batch \
@@ -2015,7 +2016,7 @@ ARM 範本會處理基礎設施的佈建。部署完成後：
 
 3. **部署 Agent 程式碼**：
    ```bash
-   # 建立並部署實際的代理應用程式
+   # 建置並部署實際的代理應用程式
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -2039,81 +2040,81 @@ ARM 範本會處理基礎設施的佈建。部署完成後：
 }
 ```
 
-### 📊 部署功能
+### 📊 部署特色
 
-- ✅ **先決條件驗證**（Azure CLI、配額、權限）  
-- ✅ **多區域高可用性**，具自動故障移轉  
-- ✅ **完整監控**，包含 Application Insights 與 Log Analytics  
-- ✅ **安全最佳實務**，使用 Key Vault 與 RBAC  
-- ✅ **成本優化**，可透過可配置的部署模式  
-- ✅ **根據需求模式自動擴充**  
-- ✅ **零停機更新**，使用 Container Apps revisions
+- ✅ <strong>先決條件驗證</strong>（Azure CLI、配額、權限）
+- ✅ <strong>多區域高可用性</strong>，自動故障轉移
+- ✅ <strong>完整監控</strong>，包含 Application Insights 與 Log Analytics
+- ✅ <strong>安全最佳實務</strong>，使用 Key Vault 與 RBAC
+- ✅ <strong>成本優化</strong>，可配置的部署模式
+- ✅ <strong>自動化縮放</strong>，根據需求模式
+- ✅ <strong>零停機更新</strong>，使用 Container Apps 修訂版本
 
 ### 🔍 監控與管理
 
-部署後，可透過以下方式監控您的解決方案：
+部署後，透過下列方式監控您的解決方案：
 
-- **Application Insights**：效能指標、相依性追蹤，以及自訂遙測  
-- **Log Analytics**：來自所有元件的集中式日誌  
-- **Azure Monitor**：資源健康與可用性監控  
+- **Application Insights**：效能指標、相依性追蹤與自訂遙測
+- **Log Analytics**：來自所有元件的集中式日誌
+- **Azure Monitor**：資源健康與可用性監控
 - **Cost Management**：即時成本追蹤與預算警示
 
 ---
 
 ## 📚 完整實作指南
 
-此情境文件結合 ARM 範本，提供部署生產就緒多代理客戶支援解決方案所需的一切。實作涵蓋：
+本情境文件結合 ARM 範本，提供部署生產就緒多代理客服解決方案所需的一切。實作涵蓋：
 
-✅ **架構設計** - 完整的系統設計與元件關係  
-✅ **基礎設施佈建** - 可一鍵部署的完整 ARM 範本  
-✅ **代理設定** - 客戶與庫存代理的詳細設定  
-✅ **多模型部署** - 跨區域的策略性模型部署  
-✅ **搜尋整合** - 支援向量功能與資料索引的 AI Search  
-✅ **安全實作** - 紅隊測試、弱點掃描與安全實務  
-✅ **監控與評估** - 完整的遙測與代理評估框架  
-✅ **生產準備** - 具企業等級高可用性與災難復原的部署  
-✅ **成本優化** - 智慧路由與依使用量動態擴充  
-✅ **疑難排解指南** - 常見問題與解決策略
+✅ <strong>架構設計</strong> - 包含元件關係的完整系統設計  
+✅ <strong>基礎設施佈建</strong> - 一鍵部署的完整 ARM 範本  
+✅ **Agent 設定** - Customer 與 Inventory agents 的詳細設定  
+✅ <strong>多模型部署</strong> - 於多區域策略性模型佈署  
+✅ <strong>搜尋整合</strong> - AI Search 與向量功能及資料索引  
+✅ <strong>安全實作</strong> - 紅隊測試、弱點掃描與安全實務  
+✅ <strong>監控與評估</strong> - 完整遙測與 agent 評估框架  
+✅ <strong>生產準備</strong> - 企業級部署，含高可用與災難復原  
+✅ <strong>成本優化</strong> - 智能路由與依使用量縮放  
+✅ <strong>故障排除指南</strong> - 常見問題與解決策略
 
 ---
 
-## 📊 總結：您學到了什麼
+## 📊 摘要：您學到了什麼
 
 ### 涵蓋的架構模式
 
-✅ **多代理系統設計** - 專門化代理（客服 + 庫存）搭配專用模型  
-✅ **多區域部署** - 策略性模型部署以降低成本並提高冗餘性  
-✅ **RAG 架構** - 結合 AI Search 與向量 embeddings 以提供有根據的回應  
-✅ **代理評估** - 使用專用的 grader 模型進行品質評估  
-✅ **安全框架** - 紅隊測試與弱點掃描模式  
-✅ **成本優化** - 模型路由與容量規劃策略  
-✅ **生產監控** - 使用 Application Insights 與自訂遙測
+✅ <strong>多代理系統設計</strong> - 專職 agent（Customer + Inventory）與專用模型  
+✅ <strong>多區域部署</strong> - 策略性模型配置以降低成本並提高冗餘性  
+✅ **RAG 架構** - AI Search 與向量嵌入整合以提供有根據的回應  
+✅ **Agent 評估** - 專用 grader 模型進行品質評估  
+✅ <strong>安全框架</strong> - 紅隊測試與弱點掃描模式  
+✅ <strong>成本優化</strong> - 模型路由與容量規劃策略  
+✅ <strong>生產監控</strong> - 使用 Application Insights 與自訂遙測  
 
-### 本文件提供的項目
+### 本文件提供的內容
 
-| 組件 | 狀態 | 放置位置 |
+| Component | Status | Where to Find It |
 |-----------|--------|------------------|
-| **基礎設施範本** | ✅ 可部署 | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
-| **架構圖** | ✅ 完成 | 上方的 Mermaid 圖表 |
-| **程式範例** | ✅ 參考實作 | 貫穿本文件 |
-| **設定範式** | ✅ 詳細指引 | 上述第1-10節 |
-| **代理實作** | 🔨 需您實作 | 約40 小時開發 |
-| **前端介面** | 🔨 需您實作 | 約25 小時開發 |
-| **資料管線** | 🔨 需您實作 | 約10 小時開發 |
+| **Infrastructure Template** | ✅ Ready to Deploy | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **Architecture Diagrams** | ✅ Complete | Mermaid diagram above |
+| **Code Examples** | ✅ Reference Implementations | Throughout this document |
+| **Configuration Patterns** | ✅ Detailed Guidance | Sections 1-10 above |
+| **Agent Implementations** | 🔨 You Build This | ~40 hours development |
+| **Frontend UI** | 🔨 You Build This | ~25 hours development |
+| **Data Pipelines** | 🔨 You Build This | ~10 hours development |
 
-### 現實檢視：實際存在的項目
+### 現實檢視：實際存在的部分
 
-**在儲存庫中（可立即使用）：**
-- ✅ 會佈署 15+ 個 Azure 服務的 ARM 範本 (azuredeploy.json)  
-- ✅ 含驗證的部署腳本 (deploy.sh)  
-- ✅ 參數設定檔 (azuredeploy.parameters.json)
+**在儲存庫中（現成可用）：**
+- ✅ 部署 15+ Azure 服務的 ARM 範本（azuredeploy.json）
+- ✅ 含驗證的部署指令腳本（deploy.sh）
+- ✅ 參數設定（azuredeploy.parameters.json）
 
-**文件中參考（需您建立）：**
-- 🔨 代理實作程式碼（約30-40 小時）  
-- 🔨 路由服務（約12-16 小時）  
-- 🔨 前端應用（約20-30 小時）  
-- 🔨 資料設定腳本（約8-12 小時）  
-- 🔨 監控框架（約10-15 小時）
+**文件中提到（需您建立）：**
+- 🔨 Agent 實作程式碼（約 30-40 小時）
+- 🔨 路由服務（約 12-16 小時）
+- 🔨 前端應用（約 20-30 小時）
+- 🔨 資料設定腳本（約 8-12 小時）
+- 🔨 監控框架（約 10-15 小時）
 
 ### 您的下一步
 
@@ -2123,63 +2124,63 @@ cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-#### 如果您想建立完整系統（80-120 小時）
-1. ✅ 閱讀並理解本架構文件（2-3 小時）  
-2. ✅ 使用 ARM 範本部署基礎設施（30 分鐘）  
-3. 🔨 使用參考程式範式實作代理（約40 小時）  
-4. 🔨 使用 FastAPI/Express 建立路由服務（約15 小時）  
-5. 🔨 使用 React/Vue 建立前端介面（約25 小時）  
-6. 🔨 設定資料管線與搜尋索引（約10 小時）  
-7. 🔨 新增監控與評估（約15 小時）  
-8. ✅ 測試、強化安全性與優化（約10 小時）
+#### 如果您想構建完整系統（80-120 小時）
+1. ✅ 閱讀並理解此架構文件（2-3 小時）
+2. ✅ 使用 ARM 範本部署基礎設施（30 分鐘）
+3. 🔨 使用參考程式碼範式實作 agents（約 40 小時）
+4. 🔨 使用 FastAPI/Express 實作路由服務（約 15 小時）
+5. 🔨 使用 React/Vue 建立前端介面（約 25 小時）
+6. 🔨 設定資料管線與搜尋索引（約 10 小時）
+7. 🔨 新增監控與評估（約 15 小時）
+8. ✅ 測試、強化安全性與優化（約 10 小時）
 
-#### 如果您想學習多代理模式（學習）
-- 📖 檢視架構圖與元件關係  
-- 📖 研究 SearchTool、BingTool、AgentEvaluator 等程式範例  
-- 📖 了解多區域部署策略  
-- 📖 學習評估與安全框架  
-- 📖 將這些模式應用到您自己的專案
+#### 如果您想學習多代理模式（研習）
+- 📖 檢視架構圖與元件關係
+- 📖 研讀 SearchTool、BingTool、AgentEvaluator 的程式範例
+- 📖 理解多區域部署策略
+- 📖 學習評估與安全框架
+- 📖 將模式應用到您自己的專案
 
-### 主要重點
+### 重點摘要
 
-1. **基礎設施 vs 應用程式** - ARM 範本提供基礎設施；代理需要開發  
-2. **多區域策略** - 策略性模型部署可降低成本並提升可靠性  
-3. **評估框架** - 專用的 grader 模型可啟用持續品質評估  
-4. **安全為先** - 紅隊測試與弱點掃描對於生產環境至關重要  
-5. **成本優化** - 在 GPT-4o 與 GPT-4o-mini 之間進行智慧路由可節省 60-80%
+1. **基礎設施 vs. 應用程式** - ARM 範本提供基礎設施；agents 仍需開發
+2. <strong>多區域策略</strong> - 策略性模型配置可降低成本並提升可靠性
+3. <strong>評估框架</strong> - 專用 grader 模型可進行持續品質評估
+4. <strong>安全為先</strong> - 紅隊測試與弱點掃描為生產環境必備
+5. <strong>成本優化</strong> - 在 gpt-4.1 與 gpt-4.1-mini 間的智慧路由可節省 60-80%
 
 ### 預估成本
 
-| 部署模式 | 基礎設施／每月 | 開發（一次性） | 第一個月總計 |
+| Deployment Mode | Infrastructure/Month | Development (One-Time) | Total First Month |
 |-----------------|---------------------|------------------------|-------------------|
-| **最小配置** | $100-370 | $15K-25K (80-120 小時) | $15.1K-25.4K |
-| **標準** | $420-1,450 | $15K-25K (相同工作量) | $15.4K-26.5K |
-| **高階** | $1,150-3,500 | $15K-25K (相同工作量) | $16.2K-28.5K |
+| **Minimal** | $100-370 | $15K-25K (80-120 hrs) | $15.1K-25.4K |
+| **Standard** | $420-1,450 | $15K-25K (same effort) | $15.4K-26.5K |
+| **Premium** | $1,150-3,500 | $15K-25K (same effort) | $16.2K-28.5K |
 
-**注意：** 基礎設施佔新實作總成本的 <5%。開發工作才是主要投資。
+**注意：** 對於新實作，基礎設施成本佔總成本少於 5%。開發工時為主要投資。
 
 ### 相關資源
 
-- 📚 [ARM Template Deployment Guide](retail-multiagent-arm-template/README.md) - 基礎設施設定  
-- 📚 [Azure OpenAI Best Practices](https://learn.microsoft.com/azure/ai-services/openai/) - 模型部署實務  
-- 📚 [AI Search Documentation](https://learn.microsoft.com/azure/search/) - 向量搜尋設定說明  
-- 📚 [Container Apps Patterns](https://learn.microsoft.com/azure/container-apps/) - 微服務部署範式  
+- 📚 [ARM Template Deployment Guide](retail-multiagent-arm-template/README.md) - 基礎設施設定
+- 📚 [Microsoft Foundry Models Best Practices](https://learn.microsoft.com/azure/ai-services/openai/) - 模型部署
+- 📚 [AI Search Documentation](https://learn.microsoft.com/azure/search/) - 向量搜尋設定
+- 📚 [Container Apps Patterns](https://learn.microsoft.com/azure/container-apps/) - 微服務佈署
 - 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - 監控設定
 
-### 問題或疑問？
+### 有問題或遇到問題？
 
-- 🐛 [回報問題](https://github.com/microsoft/AZD-for-beginners/issues) - 範本錯誤或文件問題  
-- 💬 [GitHub 討論](https://github.com/microsoft/AZD-for-beginners/discussions) - 架構相關提問  
-- 📖 [常見問題](../resources/faq.md) - 常見問題解答  
-- 🔧 [疑難排解指南](../docs/troubleshooting/common-issues.md) - 部署問題排解
+- 🐛 [回報問題](https://github.com/microsoft/AZD-for-beginners/issues) - 範本錯誤或文件問題
+- 💬 [GitHub 討論](https://github.com/microsoft/AZD-for-beginners/discussions) - 架構相關問題
+- 📖 [常見問題](../resources/faq.md) - 常見問題解答
+- 🔧 [故障排除指南](../docs/troubleshooting/common-issues.md) - 部署問題
 
 ---
 
-**此完整情境提供企業等級的多代理 AI 系統架構藍圖，包含基礎設施範本、實作指引與生產最佳實務，協助使用 Azure Developer CLI 建置先進的客戶支援解決方案。**
+**此完整情境提供企業級的多代理 AI 系統架構藍圖，包含基礎設施範本、實作指引與生產最佳實務，協助使用 Azure Developer CLI 建置進階的客服解決方案。**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責聲明**：
-本文件已使用 AI 翻譯服務「Co-op Translator」（https://github.com/Azure/co-op-translator）進行翻譯。儘管我們力求準確，請注意自動翻譯可能包含錯誤或不準確之處。原始文件以其原生語言所載之版本應被視為具權威性的來源。對於關鍵資訊，建議採用專業人工翻譯。本公司對因使用本翻譯而引致之任何誤解或錯誤詮釋概不負責。
+**免責聲明**:
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保準確性，請注意自動翻譯可能包含錯誤或不準確之處。原始語言的文件應視為具權威性的來源。若涉及重要資訊，建議採用專業人員進行人工翻譯。我們對因使用本翻譯而產生的任何誤解或誤譯概不負責。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

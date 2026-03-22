@@ -1,6 +1,6 @@
 # Exemples de déploiement d'applications conteneurisées avec AZD
 
-Ce répertoire contient des exemples complets pour déployer des applications conteneurisées sur Azure Container Apps à l'aide d'Azure Developer CLI (AZD). Ces exemples démontrent des modèles du monde réel, des meilleures pratiques et des configurations prêtes pour la production.
+This directory contains comprehensive examples for deploying containerized applications to Azure Container Apps using Azure Developer CLI (AZD). These examples demonstrate real-world patterns, best practices, and production-ready configurations.
 
 ## 📚 Table des matières
 
@@ -8,31 +8,30 @@ Ce répertoire contient des exemples complets pour déployer des applications co
 - [Prérequis](../../../../examples/container-app)
 - [Exemples de démarrage rapide](../../../../examples/container-app)
 - [Exemples de production](../../../../examples/container-app)
-- [Modèles avancés](../../../../examples/container-app)
-- [Meilleures pratiques](../../../../examples/container-app)
+- [Patrons avancés](../../../../examples/container-app)
+- [Bonnes pratiques](../../../../examples/container-app)
 
 ## Aperçu
 
-Azure Container Apps est une plateforme de conteneurs sans serveur entièrement gérée qui vous permet d’exécuter des microservices et des applications conteneurisées sans gérer l’infrastructure. Combiné avec AZD, vous obtenez :
+Azure Container Apps is a fully managed serverless container platform that enables you to run microservices and containerized applications without managing infrastructure. When combined with AZD, you get:
 
-- **Déploiement simplifié** : Une seule commande déploie les conteneurs avec l’infrastructure
-- **Mise à l’échelle automatique** : Mise à l’échelle jusqu’à zéro et montée en charge basée sur le trafic HTTP ou les événements
-- **Réseautage intégré** : Découverte de services intégrée et répartition du trafic
-- **Identité gérée** : Authentification sécurisée aux ressources Azure
-- **Optimisation des coûts** : Payez uniquement pour les ressources que vous utilisez
+- **Déploiement simplifié**: Single command deploys containers with infrastructure
+- **Mise à l'échelle automatique**: Scale to zero and scale out based on HTTP traffic or events
+- **Réseau intégré**: Built-in service discovery and traffic splitting
+- **Identité gérée**: Secure authentication to Azure resources
+- **Optimisation des coûts**: Pay only for resources you use
 
 ## Prérequis
 
-Avant de commencer, assurez-vous de disposer de :
-
+Avant de commencer, assurez-vous d'avoir:
 ```bash
 # Vérifier l'installation d'AZD
 azd version
 
-# Vérifier Azure CLI
+# Vérifier l'Azure CLI
 az version
 
-# Vérifier Docker (pour la création d'images personnalisées)
+# Vérifier Docker (pour construire des images personnalisées)
 docker --version
 
 # Se connecter à Azure
@@ -40,10 +39,10 @@ azd auth login
 az login
 ```
 
-**Ressources Azure requises :**
+**Ressources Azure requises:**
 - Abonnement Azure actif
-- Permissions pour créer un groupe de ressources
-- Accès à l’environnement Container Apps
+- Autorisations pour créer des groupes de ressources
+- Accès à l'environnement Azure Container Apps
 
 ## Exemples de démarrage rapide
 
@@ -51,8 +50,7 @@ az login
 
 Déployez une API REST basique avec Azure Container Apps.
 
-**Exemple : API Python Flask**
-
+**Exemple: API Python Flask**
 ```yaml
 # azure.yaml
 name: flask-api-demo
@@ -65,13 +63,12 @@ services:
     host: containerapp
 ```
 
-**Étapes de déploiement :**
-
+**Étapes de déploiement:**
 ```bash
 # Initialiser à partir du modèle
 azd init --template todo-python-mongo
 
-# Approvisionner l'infrastructure et déployer
+# Provisionner l'infrastructure et déployer
 azd up
 
 # Tester le déploiement
@@ -79,11 +76,11 @@ azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-**Fonctionnalités clés :**
-- Mise à l’échelle automatique de 0 à 10 réplicas
-- Probes de santé et contrôles d’activité (liveness)
-- Injection de variables d’environnement
-- Intégration Application Insights
+**Fonctionnalités clés:**
+- Mise à l'échelle automatique de 0 à 10 réplicas
+- Sondes de santé et vérifications de vivacité
+- Injection de variables d'environnement
+- Intégration à Application Insights
 
 ### 2. API Node.js Express
 
@@ -100,11 +97,11 @@ azd env set COLLECTION_NAME todos
 # Déployer
 azd up
 
-# Voir les journaux via Azure Monitor
+# Afficher les journaux via Azure Monitor
 azd monitor --logs
 ```
 
-**Points forts de l’infrastructure :**
+**Points forts de l'infrastructure:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -149,13 +146,13 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 3. Frontend statique + backend API
 
-Déployez une application full-stack avec frontend React et backend API.
+Déployez une application full-stack avec un frontend React et un backend API.
 
 ```bash
 # Initialiser le modèle full-stack
 azd init --template todo-csharp-sql-swa-func
 
-# Examiner la configuration
+# Revoir la configuration
 cat azure.yaml
 
 # Déployer les deux services
@@ -167,11 +164,11 @@ azd show --output json | jq -r '.services.web.endpoint' | xargs start
 
 ## Exemples de production
 
-### Exemple 1 : Architecture microservices
+### Exemple 1: Architecture microservices
 
-**Scénario** : Application e-commerce avec plusieurs microservices
+**Scénario**: Application e-commerce avec plusieurs microservices
 
-**Structure du répertoire :**
+**Structure du répertoire:**
 ```
 microservices-demo/
 ├── azure.yaml
@@ -191,7 +188,7 @@ microservices-demo/
     └── payment-service/
 ```
 
-**Configuration azure.yaml :**
+**Configuration azure.yaml:**
 ```yaml
 name: microservices-ecommerce
 services:
@@ -211,7 +208,7 @@ services:
     host: containerapp
 ```
 
-**Déploiement :**
+**Déploiement:**
 ```bash
 # Initialiser le projet
 azd init
@@ -231,11 +228,11 @@ azd up
 azd monitor --overview
 ```
 
-### Exemple 2 : Application conteneurisée avec IA
+### Exemple 2: Application conteneurisée alimentée par l'IA
 
-**Scénario** : Application de chat IA avec intégration Azure OpenAI
+**Scénario**: Application de chat IA avec intégration des modèles Microsoft Foundry
 
-**Fichier : src/ai-chat/app.py**
+**Fichier: src/ai-chat/app.py**
 ```python
 from flask import Flask, request, jsonify
 from azure.identity import DefaultAzureCredential
@@ -244,7 +241,7 @@ import openai
 
 app = Flask(__name__)
 
-# Utilisez l'identité gérée pour un accès sécurisé
+# Utilisez l’identité gérée pour un accès sécurisé
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -253,12 +250,12 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # Obtenez la clé OpenAI depuis le coffre de clés
+    # Récupérez la clé OpenAI depuis Key Vault
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[{"role": "user", "content": user_message}]
     )
     
@@ -268,7 +265,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-**Fichier : azure.yaml**
+**Fichier: azure.yaml**
 ```yaml
 name: ai-chat-app
 services:
@@ -278,7 +275,7 @@ services:
     host: containerapp
 ```
 
-**Fichier : infra/main.bicep**
+**Fichier: infra/main.bicep**
 ```bicep
 param location string = resourceGroup().location
 param environmentName string
@@ -320,7 +317,7 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**Commandes de déploiement :**
+**Commandes de déploiement:**
 ```bash
 # Configurer l'environnement
 azd init --template ai-chat-app
@@ -328,7 +325,7 @@ azd env new dev
 
 # Configurer OpenAI
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
-azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
+azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4.1"
 
 # Déployer
 azd up
@@ -339,11 +336,11 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Exemple 3 : Travailleur d’arrière-plan avec traitement de file d’attente
+### Exemple 3: Worker d'arrière-plan avec traitement de file d'attente
 
-**Scénario** : Système de traitement de commandes avec file d’attente de messages
+**Scénario**: Système de traitement des commandes avec file d'attente de messages
 
-**Structure du répertoire :**
+**Structure du répertoire:**
 ```
 queue-worker/
 ├── azure.yaml
@@ -360,7 +357,7 @@ queue-worker/
     └── worker/
 ```
 
-**Fichier : src/worker/processor.py**
+**Fichier: src/worker/processor.py**
 ```python
 import os
 from azure.storage.queue import QueueClient
@@ -378,7 +375,7 @@ def process_orders():
     while True:
         messages = queue_client.receive_messages(max_messages=10)
         for message in messages:
-            # Traiter la commande
+            # Traitement de la commande
             print(f"Processing order: {message.content}")
             
             # Message complet
@@ -388,7 +385,7 @@ if __name__ == '__main__':
     process_orders()
 ```
 
-**Fichier : azure.yaml**
+**Fichier: azure.yaml**
 ```yaml
 name: order-processing
 services:
@@ -403,7 +400,7 @@ services:
     host: containerapp
 ```
 
-**Déploiement :**
+**Déploiement:**
 ```bash
 # Initialiser
 azd init
@@ -411,7 +408,7 @@ azd init
 # Déployer avec la configuration de la file d'attente
 azd up
 
-# Dimensionner le worker en fonction de la longueur de la file d'attente
+# Mettre à l'échelle le travailleur en fonction de la longueur de la file d'attente
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -420,9 +417,9 @@ az containerapp update \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
 
-## Modèles avancés
+## Patrons avancés
 
-### Modèle 1 : Déploiement Blue-Green
+### Patron 1: Déploiement blue-green
 
 ```bash
 # Créer une nouvelle révision sans trafic
@@ -431,22 +428,22 @@ azd deploy api --revision-suffix blue --no-traffic
 # Tester la nouvelle révision
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Répartir le trafic (20% vers bleu, 80% vers actuel)
+# Répartir le trafic (20 % vers blue, 80 % vers la version actuelle)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# Basculer complètement vers bleu
+# Basculement complet vers blue
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
 
-### Modèle 2 : Déploiement Canary avec AZD
+### Patron 2: Déploiement canari avec AZD
 
-**Fichier : .azure/dev/config.json**
+**Fichier: .azure/dev/config.json**
 ```json
 {
   "deploymentStrategy": "canary",
@@ -458,12 +455,12 @@ az containerapp ingress traffic set \
 }
 ```
 
-**Script de déploiement :**
+**Script de déploiement:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
 
-# Déployer une nouvelle révision avec 10% du trafic
+# Déployer la nouvelle révision avec 10 % du trafic
 azd deploy api --revision-mode multiple
 
 # Surveiller les métriques
@@ -481,9 +478,9 @@ for i in {20..100..10}; do
 done
 ```
 
-### Modèle 3 : Déploiement multi-régions
+### Patron 3: Déploiement multi-régions
 
-**Fichier : azure.yaml**
+**Fichier: azure.yaml**
 ```yaml
 name: global-app
 services:
@@ -497,7 +494,7 @@ services:
       - southeastasia
 ```
 
-**Fichier : infra/multi-region.bicep**
+**Fichier: infra/multi-region.bicep**
 ```bicep
 param regions array = ['eastus', 'westeurope', 'southeastasia']
 
@@ -527,7 +524,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-**Déploiement :**
+**Déploiement:**
 ```bash
 # Déployer dans toutes les régions
 azd up
@@ -536,9 +533,9 @@ azd up
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### Modèle 4 : Intégration Dapr
+### Patron 4: Intégration Dapr
 
-**Fichier : infra/app/dapr-enabled.bicep**
+**Fichier: infra/app/dapr-enabled.bicep**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: 'dapr-app'
@@ -563,7 +560,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-**Code applicatif avec Dapr :**
+**Code de l'application avec Dapr:**
 ```python
 from flask import Flask
 from dapr.clients import DaprClient
@@ -573,7 +570,7 @@ app = Flask(__name__)
 @app.route('/orders', methods=['POST'])
 def create_order():
     with DaprClient() as client:
-        # Sauvegarder l'état
+        # Enregistrer l'état
         client.save_state(
             store_name='statestore',
             key='order-123',
@@ -590,16 +587,16 @@ def create_order():
     return {'status': 'created'}
 ```
 
-## Meilleures pratiques
+## Bonnes pratiques
 
 ### 1. Organisation des ressources
 
 ```bash
-# Utilisez des conventions de nommage cohérentes
+# Utiliser des conventions de nommage cohérentes
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# Marquez les ressources pour le suivi des coûts
+# Étiqueter les ressources pour le suivi des coûts
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
@@ -662,15 +659,15 @@ services:
             concurrent: 100
 ```
 
-### 4. Supervision et observabilité
+### 4. Surveillance et observabilité
 
 ```bash
 # Activer Application Insights
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
-# Voir les journaux en temps réel
+# Afficher les journaux en temps réel
 azd monitor --logs
-# Ou utilisez Azure CLI pour les applications conteneurs :
+# Ou utilisez Azure CLI pour Container Apps:
 az containerapp logs show --name api --resource-group rg-myapp --follow
 
 # Surveiller les métriques
@@ -688,7 +685,7 @@ az monitor metrics alert create \
 ### 5. Optimisation des coûts
 
 ```bash
-# Mettre à l'échelle jusqu'à zéro lorsqu'il n'est pas utilisé
+# Mettre à l'échelle à zéro lorsqu'il n'est pas utilisé
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -707,7 +704,7 @@ az consumption budget create \
 
 ### 6. Intégration CI/CD
 
-**Exemple GitHub Actions :**
+**Exemple GitHub Actions:**
 ```yaml
 name: Deploy to Azure Container Apps
 
@@ -752,12 +749,12 @@ azd deploy
 # Provisionner uniquement l'infrastructure
 azd provision
 
-# Voir les ressources déployées
+# Afficher les ressources déployées
 azd show
 
-# Diffuser les journaux avec azd monitor ou Azure CLI
+# Diffuser les journaux en continu avec azd monitor ou l'Azure CLI
 azd monitor --logs
-# az containerapp logs show --name <nom-service> --resource-group <nom-groupe-ressource> --follow
+# az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
 # Surveiller l'application
 azd monitor --overview
@@ -768,24 +765,24 @@ azd down --force --purge
 
 ## Dépannage
 
-### Problème : Le conteneur ne démarre pas
+### Problème: le conteneur ne démarre pas
 
 ```bash
-# Vérifiez les logs en utilisant Azure CLI
+# Vérifier les journaux en utilisant Azure CLI
 az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# Voir les événements du conteneur
+# Afficher les événements du conteneur
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
   --revision latest
 
-# Testez localement
+# Tester localement
 docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Problème : Impossible d’accéder au point de terminaison de l’application conteneurisée
+### Problème: Impossible d'accéder au point de terminaison de l'application conteneurisée
 
 ```bash
 # Vérifier la configuration de l'ingress
@@ -801,7 +798,7 @@ az containerapp ingress update \
   --external true
 ```
 
-### Problème : Problèmes de performance
+### Problème: Problèmes de performance
 
 ```bash
 # Vérifier l'utilisation des ressources
@@ -817,9 +814,9 @@ az containerapp update \
   --memory 4Gi
 ```
 
-## Ressources supplémentaires et exemples
-- [Exemple de microservices](./microservices/README.md)
-- [Exemple simple d’API Flask](./simple-flask-api/README.md)
+## Ressources et exemples supplémentaires
+- [Exemple microservices](./microservices/README.md)
+- [Exemple Simple Flash API](./simple-flask-api/README.md)
 - [Documentation Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
 - [Galerie de modèles AZD](https://azure.github.io/awesome-azd/)
 - [Exemples Container Apps](https://github.com/Azure-Samples/container-apps-samples)
@@ -827,21 +824,20 @@ az containerapp update \
 
 ## Contribution
 
-Pour contribuer de nouveaux exemples d’applications conteneurisées :
-
+Pour contribuer de nouveaux exemples d'applications conteneurisées:
 1. Créez un nouveau sous-répertoire avec votre exemple
 2. Incluez les fichiers complets `azure.yaml`, `infra/` et `src/`
-3. Ajoutez un README complet avec instructions de déploiement
+3. Ajoutez un README complet avec les instructions de déploiement
 4. Testez le déploiement avec `azd up`
 5. Soumettez une pull request
 
 ---
 
-**Besoin d’aide ?** Rejoignez la communauté [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) pour obtenir du support et poser vos questions.
+**Besoin d'aide?** Rejoignez la communauté [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) pour obtenir de l'aide et poser des questions.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Avis de non-responsabilité** :
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant foi. Pour des informations critiques, une traduction professionnelle humaine est recommandée. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Avertissement :
+Ce document a été traduit à l'aide du service de traduction par IA [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant foi. Pour les informations critiques, une traduction professionnelle effectuée par un traducteur humain est recommandée. Nous ne saurions être tenus responsables de tout malentendu ou mauvaise interprétation résultant de l'utilisation de cette traduction.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

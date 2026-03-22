@@ -1,30 +1,30 @@
 # 5. Mukauta mallia
 
-!!! tip "TÄMÄN MODUULIN PÄÄTTEESSÄ OSAAT"
+!!! tip "TÄMÄN MODUULIN LOPPUUN MENNESSÄ OSAAT"
 
     - [ ] Tutkinut oletusarvoiset tekoälyagentin kyvyt
-    - [ ] Lisännyt AI Searchin omalla indeksilläsi
-    - [ ] Aktivoinut ja analysoinut seurantamittarit
+    - [ ] Lisännyt AI-haun omalla indeksilläsi
+    - [ ] Aktivoinut ja analysoinut jäljitysmittarit
     - [ ] Suorittanut arviointiajon
     - [ ] Suorittanut red-teaming-skannauksen
-    - [ ] **Lab 5: Laadittu mukautussuunnitelma** 
+    - [ ] **Lab 5: Laati mukautussuunnitelman** 
 
 ---
 
-## 5.1 AI-agentin kyvyt
+## 5.1 Tekoälyagentin kyvyt
 
-!!! success "Suoritettu Lab 01:ssa"
+!!! success "Suoritimme tämän Lab 01:ssa"
 
-- **Tiedostohaku**: OpenAI:n sisäänrakennettu tiedostohaku tiedonhakua varten
+- **Tiedostohaku**: OpenAI:n sisäänrakennettu tiedostohaku tiedon hakemiseen
 - **Lähdeviitteet**: Automaattinen lähdeviittaus vastauksissa
-- **Mukautettavat ohjeet**: Muokkaa agentin käyttäytymistä ja persoonaa
-- **Työkalujen integrointi**: Laajennettava työkalujärjestelmä mukautettuihin toimintoihin
+- **Mukautettavat ohjeet**: Muokkaa agentin käyttäytymistä ja persoonallisuutta
+- **Työkalujen integrointi**: Laajennettavissa oleva työkalujärjestelmä räätälöitäville toiminnoille
 
 ---
 
 ## 5.2 Tiedonhakuvaihtoehdot
 
-!!! task "Suorittaaksesi tämän tarvitsemme tehdä muutoksia ja ottaa uudelleen käyttöön"    
+!!! task "Tämän suorittamiseksi meidän täytyy tehdä muutoksia ja ottaa uudelleen käyttöön"    
     
     ```bash title=""
     # Set environment variables
@@ -40,33 +40,33 @@
 
 ---
 
-**OpenAI Tiedostohaku (oletus):**
+**OpenAI Tiedostohaku (Oletus):**
 
 - Sisäänrakennettu Foundry-agentteihin
-- Automaattinen dokumenttien käsittely ja indeksointi
-- Lisäkonfiguraatiota ei vaadita
+- Automaattinen asiakirjojen käsittely ja indeksointi
+- Ei lisäkonfiguraatiota vaadita
 
-**Azure AI Search (valinnainen):**
+**Azure AI Search (Valinnainen):**
 
-- Hybridinen semanttinen ja vektorihaku
-- Mukautetun indeksin hallinta
+- Hybridinen semanttinen ja vektorihaut
+- Mukautettu indeksinhallinta
 - Edistyneet hakutoiminnot
-- Requires `USE_AZURE_AI_SEARCH_SERVICE=true`
+- Vaatii `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
-## 5.3 [Seuranta ja valvonta](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [Jäljitys & valvonta](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "Suorittaaksesi tämän tarvitsemme tehdä muutoksia ja ottaa uudelleen käyttöön"    
+!!! task "Tämän suorittamiseksi meidän täytyy tehdä muutoksia ja ottaa uudelleen käyttöön"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
     azd deploy
     ```
 
-**Seuranta:**
+**Jäljitys:**
 
-- OpenTelemetry-integraatio
+- OpenTelemetry-integrointi
 - Pyyntö-/vastausseuranta
 - Suorituskykymittarit
 - Saatavilla Microsoft Foundry -portaalissa
@@ -74,8 +74,8 @@
 **Lokitus:**
 
 - Sovelluksen lokit Container Appsissa
-- Rakenteinen lokitus korrelaatio-ID:illä
-- Reaaliaikainen ja historiallinen lokien tarkastelu
+- Rakenteinen lokitus korrelaatiotunnisteilla
+- Reaaliaikainen ja historiallinen lokin katselu
 
 ---
 
@@ -85,13 +85,13 @@
 
 - Sisäänrakennetut arvioijat laadun arviointiin
 - Mukautetut arviointiskriptit
-- Suorituskyvyn vertailu
+- Suorituskyvyn vertailuarviointi
 
 **Jatkuva seuranta:**
 
-- Automaattinen arviointi live-vuorovaikutuksista
+- Automaattinen arviointi reaaliaikaisista vuorovaikutuksista
 - Laadun mittareiden seuranta
-- Suorituskyvyn regressioiden tunnistus
+- Suorituskyvyn regressioiden havaitseminen
 
 **CI/CD-integraatio:**
 
@@ -109,55 +109,55 @@
 - Riskinarviointi tekoälyjärjestelmille
 - Turvallisuusarviointi useissa kategorioissa
 
-**Autentikointi:**
+**Todennus:**
 
-- Hallittu identiteetti Azure-palveluille
-- Valinnainen Azure App Service -autentikointi
-- Perusautentikoinnin vararatkaisu kehitystä varten
+- Hallinnoitu identiteetti Azure-palveluille
+- Valinnainen Azure App Service -todennus
+- Perustason todennus kehitystä varten
 
 
 
-!!! quote "TÄMÄN LABRIN PÄÄTTEESSÄ SINULLA TULISI OLLA"
-    - [ ] Määrittele skenaariosi vaatimukset
-    - [ ] Mukautetut ympäristömuuttujat (konfiguraatio)
-    - [ ] Mukautetut agentin ohjeet (tehtävä)
+!!! quote "TÄMÄN LABIN LOPPUUN MENNESSÄ SINULLA PITÄISI OLLA"
+    - [ ] Määrittänyt skenaarion vaatimukset
+    - [ ] Mukauttanut ympäristömuuttujat (config)
+    - [ ] Mukauttanut agentin ohjeet (tehtävä)
     - [ ] Ottanut käyttöön mukautetun mallin (sovellus)
-    - [ ] Suorittanut jälkiasennustehtävät (manuaalinen)
+    - [ ] Suorittanut jälkiasennuksen tehtävät (manuaalinen)
     - [ ] Suorittanut testiarvioinnin
 
-Tämä esimerkki havainnollistaa mallin mukauttamista yrityksen vähittäiskaupan käyttötapaukseen kahdella erikoistuneella agentilla ja useilla mallien käyttöönotolla.
+Tämä esimerkki osoittaa mallin mukauttamisen yritystason vähittäiskauppakäyttötapaukseen, jossa on kaksi erikoistunutta agenttia ja useita mallien käyttöönottoja.
 
 ---
 
-## 5.6 Mukauta se sinulle!
+## 5.6 Mukauta se itsellesi!
 
 ### 5.6.1. Skenaarion vaatimukset
 
 #### **Agenttien käyttöönotot:** 
 
-   - Shopper Agent: Auttaa asiakkaita löytämään ja vertailemaan tuotteita
+   - Shopper Agent: Auttaa asiakkaita etsimään ja vertailemaan tuotteita
    - Loyalty Agent: Hallinnoi asiakasetuja ja kampanjoita
 
 #### **Mallien käyttöönotot:**
 
-   - `gpt-4.1`: Ensisijainen chat-malli
+   - `gpt-4.1`: Pääasiallinen chat-malli
    - `o3`: Päättelymalli monimutkaisiin kyselyihin
    - `gpt-4.1-nano`: Kevyt malli yksinkertaisiin vuorovaikutuksiin
    - `text-embedding-3-large`: Korkealaatuiset upotukset hakua varten
 
 #### **Ominaisuudet:**
 
-   - Seuranta ja valvonta käytössä
-   - AI Search tuoteluettelolle
+   - Jäljitys ja valvonta otettu käyttöön
+   - AI-haku tuotekatalogille
    - Arviointikehys laadunvarmistukseen
-   - Red teaming turvallisuustarkastuksiin
+   - Red teaming -toimet turvallisuuden varmistamiseksi
 
 ---
 
 ### 5.6.2 Skenaarion toteutus
 
 
-#### 5.6.2.1. Esiasennuskonfiguraatio
+#### 5.6.2.1. Esikokoonpanon konfigurointi
 
 Create a setup script (`setup-retail.sh`)
 
@@ -167,26 +167,26 @@ Create a setup script (`setup-retail.sh`)
 # Aseta ympäristön nimi
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Määritä alue (valitse mallin saatavuuden mukaan)
+# Määritä alue (valitse mallien saatavuuden mukaan)
 azd env set AZURE_LOCATION "eastus2"
 
-# Ota kaikki valinnaiset palvelut käyttöön
+# Ota käyttöön kaikki valinnaiset palvelut
 azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Määritä ensisijainen chat-malli (gpt-4o on lähimpänä saatavilla oleva malli gpt-4.1:lle)
-azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
+# Määritä ensisijainen keskustelumalli (gpt-4.1, lähin saatavilla oleva versio gpt-4.1:stä)
+azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Määritä upotusmalli parannetulle haulle
+# Määritä upotusmalli parannettua hakua varten
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Aseta agentin nimi (luo ensimmäisen agentin)
+# Aseta agentin nimi (luo ensimmäinen agentti)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
 # Määritä hakuindeksi
@@ -248,7 +248,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: Käyttöönotto-skripti
+#### 5.6.2.3: Käyttöönoton skripti
 
 Create `deploy-retail.sh`:
 
@@ -275,12 +275,12 @@ echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Tarkista valitun alueen kiintiö
+# Tarkista kiintiö valitulla alueella
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
 echo "⚠️  Please verify you have 300,000+ TPM quota for:"
-echo "   - gpt-4o: 150,000 TPM"
+echo "   - gpt-4.1: 150,000 TPM"
 echo "   - text-embedding-3-large: 75,000 TPM"
 echo "   - Additional models: 75,000+ TPM"
 
@@ -299,7 +299,7 @@ azd up
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Hae verkkosovelluksen URL-osoite
+# Hae web-sovelluksen URL-osoite
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
@@ -321,7 +321,7 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Jälkiasennuskonfiguraatio
+#### 5.6.2.4: Jälkiasennuksen konfigurointi
 
 Create `configure-retail-agents.sh`:
 
@@ -431,40 +431,40 @@ Next steps:
 
 ### 5.6.4 Odotetut tulokset
 
-Seuraamalla tätä toteutusopasta saat:
+After following this implementation guide, you will have:
 
 1. **Käyttöönotettu infrastruktuuri:**
 
       - Microsoft Foundry -projekti mallien käyttöönottoineen
-      - Container Apps -palvelut web-sovelluksen isännöintiin
+      - Container Apps, joka isännöi web-sovellusta
       - AI Search -palvelu tuotekatalogille
-      - Application Insights seurantaa varten
+      - Application Insights valvontaa varten
 
 2. **Ensimmäinen agentti:**
 
-      - Shopper Agent konfiguroitu perusohjeilla
-      - Tiedostohakuominaisuus aktivoitu
-      - Seuranta ja valvonta konfiguroitu
+      - Shopper Agent perusohjeilla konfiguroituna
+      - Tiedostohakuominaisuus otettu käyttöön
+      - Jäljitys ja valvonta konfiguroitu
 
 3. **Valmis mukautettavaksi:**
 
-      - Kehys Loyalty Agentin lisäämiseksi
+      - Kehys Loyalty Agentin lisäämiseen
       - Mukautetut ohjemallit
       - Testaus- ja validointiskriptit
-      - Seuranta- ja arviointiasetukset
+      - Valvonta- ja arviointiasetukset
 
-4. **Tuotantovalmius:**
+4. **Valmius tuotantoon:**
 
       - Turvallisuusskannaus red teaming -menetelmällä
       - Suorituskyvyn seuranta
-      - Laadunarviointikehys
-      - Laajennettava arkkitehtuuri
+      - Laadun arviointikehys
+      - Skaalautuva arkkitehtuuri
 
-Tämä esimerkki osoittaa, kuinka AZD-mallia voidaan laajentaa ja mukauttaa tiettyihin yritysskenaarioihin säilyttäen parhaat käytännöt turvallisuuden, seurannan ja skaalautuvuuden osalta.
+Tämä esimerkki osoittaa, miten AZD-mallia voidaan laajentaa ja mukauttaa erityisiin yritysskenaarioihin säilyttäen parhaat käytännöt tietoturvan, valvonnan ja skaalautuvuuden osalta.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vastuuvapauslauseke:**
-Tämä asiakirja on käännetty tekoälypohjaisella käännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä on pidettävä ensisijaisena lähteenä. Tärkeiden tietojen osalta suositellaan ammattimaista ihmiskääntäjää. Emme ole vastuussa tästä käännöksestä aiheutuvista väärinymmärryksistä tai virhetulkinnoista.
+**Vastuuvapauslauseke**:
+Tämä asiakirja on käännetty käyttämällä tekoälykäännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, ota huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää ensisijaisena lähteenä. Tärkeää tietoa varten suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa mistään tämän käännöksen käytöstä johtuvista väärinkäsityksistä tai virhetulkinnasta.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

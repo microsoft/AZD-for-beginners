@@ -1,68 +1,43 @@
-# மைக்ரோசேவைகள் கட்டமைப்பு - Container App உதாரணம்
+# மைக்ரோசேர்வுகள் கட்டமைப்பு - Container App உதாரணம்
 
-⏱️ **கண்டறியப்படும் நேரம்**: 25-35 நிமிடங்கள் | 💰 **கண்டறியப்படும் செலவு**: ~$50-100/மாதம் | ⭐ **சிக்கலான நிலை**: மேம்பட்ட
+⏱️ **கணிக்கப்பட்ட நேரம்**: 25-35 minutes | 💰 **கணிக்கப்பட்ட செலவு**: ~$50-100/month | ⭐ **சிக்கல்தன்மை**: மேம்பட்டது
 
-AZD CLI பயன்படுத்தி Azure Container Apps-க்கு அமல்படுத்தப்பட்ட ஒரு **எளிமையாக்கப்பட்ட ஆனால் செயல்பாட்டுக்கான** மைக்ரோசேவைகள் கட்டமைப்பு. இந்த உதாரணம் சேவை-தூண்டு சேவை தொடர்பு, கண்டெய்னர் ஒர்கெஸ்ட்ரேஷன் மற்றும் கண்காணிப்பை வகுப்புணர்தலோடு 2-சேவை அமைப்புடன் காண்பிக்கிறது.
+Azure Container Apps-க்கு AZD CLI மூலம் இடமாற்றப்பட்ட ஒரு **எளிய ஆனால் செயலாற்றக்கூடிய** மைக்ரோசேர்வுகள் கட்டமைப்பு. இந்த உதாரணம் சேவை-இலிருந்து-சேவைக்கு தொடர்பு, கன்டெய்னர் ஒர்ச்சஸ்ட்ரேஷன் மற்றும் கண்காணிப்பை நடைமுறை 2-சேவை அமைப்பில் காணագրுகிறது.
 
-> **📚 கற்றல் அணுகுமுறை**: இந்த உதாரணம் நீங்கள் உண்மையில் அமல்படுத்தி கற்றுக்கொள்ளக் கூடிய குறைந்தது 2-சேவை கட்டமைப்பில் (API Gateway + Backend Service) தொடங்குகிறது. இந்த அடிப்படைத் தேர்ச்சி பெறப்பட்ட பின்னர், முழு மைக்ரோசேவைகள் சூழ்நிலையை விரிவுப்படுத்த வழிகாட்டுதல்கள் வழங்கப்படுகின்றன.
+> **📚 கற்றல் அணுகுமுறை**: இந்த உதாரணம் ஒரு குறைந்தபட்ச 2-சேவை கட்டமைப்பில் (API Gateway + Backend Service) தொடங்கி, நீங்கள் அதை நிச்சயமாக நிபுணத்துவம் பெற deploy செய்து கற்றுக் கொள்ள முடியும். இந்த அடிப்படைத் திறன்களை கற்றுக்கொண்டவுடன், முழு மைக்ரோசேர்வுகள் சூழ்நிலைக்கு விரிவாக்கம் செய்வது குறித்து வழிகாட்டுதல்களை வழங்குகிறோம்.
 
-## நீங்கள் என்ன கற்றுக்கொள்வீர்கள்
+## நீங்கள் என்ன கற்றுக்கொள்ளுவீர்கள்
 
 இந்த உதாரணத்தை முடித்தவுடன், நீங்கள்:
-- பல கண்டெய்னர்களை Azure Container Apps-க்கு அமல்படுத்துவது
-- உள்ளக நெட்ஒரவுக்களுடன் சேவை-தூண்டு சேவை தொடர்பை செயல்படுத்துவது
-- சூழல் அடிப்படையிலான ஸ்கேலிங் மற்றும் ஆரோக்கியச் சோதனைகளை அமைப்பது
-- Application Insights மூலம் பிரிக்கப்பட்ட பயன்பாடுகளை கண்காணிப்பது
-- மைக்ரோசேவைகள் அமல்படுத்தும் மாதிரிகள் மற்றும் சிறந்த நடைமுறைகளை புரிந்து கொள்வது
-- எளிமையிலிருந்து சிக்கலாக தொடர்ச்சியாக விரிவுபடுத்த கற்றுக்கொள்வது
+- Azure Container Apps-க்கு பல கன்டெய்னர்களை deploy செய்வது
+- உள்ளக நெட்வொர்க்கினை உபயோகித்து சேவை-இலிருந்து-சேவைக்கு தொடர்பை அமல்படுத்துவது
+- சூழல் சார்ந்த auto-scaling மற்றும் ஹெல்த் செக்குகளை அமைத்தல்
+- Application Insights மூலம் விநியோஜிக்கப்பட்ட பயன்பாடுகளை கண்காணித்தல்
+- மைக்ரோசெர்விசஸ் deployment மாதிரிகள் மற்றும் சிறந்த பழக்கங்களை புரிந்து கொள்வது
+- எளிமையான கட்டமைப்பிலிருந்து சிக்கலான கட்டமைப்புகளுக்குப் பரிணாம வளர்ச்சியை கற்றுக்கொள்ளுதல்
 
 ## கட்டமைப்பு
 
-### கட்டம் 1: நாம் எதை உருவாக்குகிறோம் (இந்த உதாரணத்தில் சேர்க்கப்பட்டுள்ளது)
+### கட்டம் 1: நாம் அமைக்க இருப்பது (இந்த உதாரணத்தில் அடங்கியுள்ளது)
 
+```mermaid
+graph TD
+    Internet[இணையம்] -- HTTPS --> Gateway[API கேட்வே<br/>Node.js கொண்டெய்னர்<br/>கோரிக்கைகளை வழிமாற்றுகிறது<br/>நல சோதனைகள்<br/>கோரிக்கைகள் பதிவு]
+    Gateway -- HTTP internal --> Product[பொருள் சேவை<br/>Python கொண்டெய்னர்<br/>பொருள் CRUD<br/>இன்-மெமரி தரவுத்தளம்<br/>REST API]
+    Product --> Insights[அப்பிளிகேஷன் இன்சைட்ஸ்<br/>கண்காணிப்பு & பதிவுகள்]
 ```
-                    ┌─────────────────────────────┐
-                    │         Internet            │
-                    └──────────────┬──────────────┘
-                                   │
-                                   │ HTTPS
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │      API Gateway            │
-                    │   (Node.js Container)       │
-                    │   - Routes requests         │
-                    │   - Health checks           │
-                    │   - Request logging         │
-                    └──────────────┬──────────────┘
-                                   │
-                                   │ HTTP (internal)
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │    Product Service          │
-                    │   (Python Container)        │
-                    │   - Product CRUD            │
-                    │   - In-memory data store    │
-                    │   - REST API                │
-                    └──────────────┬──────────────┘
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │   Application Insights      │
-                    │   (Monitoring & Logs)       │
-                    └─────────────────────────────┘
-```
+**ஏன் எளிதாகத் தொடங்க வேண்டும்?**
+- ✅ விரைவாக deploy செய்து புரிந்துகொள்ளலாம் (25-35 நிமிடங்கள்)
+- ✅ சிக்கலில்லாமல் முக்கிய மைக்ரோசேர்வுகள் மாதிரிகளை கற்றுக்கொள்ளலாம்
+- ✅ மாற்றம் செய்து பரிசோதிக்கக்கூடிய செயல்படும் கோடு
+- ✅ கற்றலுக்கான குறைந்தச் செலவு (~$50-100/month 대비 $300-1400/month)
+- ✅ தரவுத்தளங்கள் மற்றும் மெசேஜ் கூய்ஸ் சேர்ப்பதற்கு முன் நம்பிக்கையை உருவாக்குதல்
 
-**எWhy Start Simple?** (எПочему простіти?)?  
-- ✅ விரைவாக ஏற்கவும் புரிந்துகொள்ளவும் (25-35 நிமிடங்கள்)  
-- ✅ சிக்கலின்றி முக்கிய மைக்ரோசேவைகள் மாதிரிகளை கற்று கொள்ளவும்  
-- ✅ நீங்கள் மாற்றம் செய்து பரிசோதிக்கக்கூடிய வேலை செய்கிற குறியீடு  
-- ✅ கற்றலுக்கான குறைந்த செலவு (~$50-100/மாதம் vs $300-1400/மாதம்)  
-- ✅ தரவுத்தளங்கள் மற்றும் மெசேஜ் கியூகளைச் சேர்ப்பதற்கு முன் நம்பிக்கையை கட்டடுங்கள்
-
-**உருவகம்**: இதை ஓர் வண்டித் பயிற்சி கற்றலாகக் கருதுங்கள். நீங்கள் காலியான பார்க்கிங் லாட்டில் (2 சேவைகள்) தொடங்கி அடிப்படைகளை அடக்கி, பிறகு நகர போக்குவரத்து (5+ சேவைகள் மற்றும் தரவுத்தளங்கள்) நோக்கி முன்னேறுவீர்கள்.
+**உதாரணம்**: இது ஓட்டுவதைக் கற்பது போல் நினைத்துக் கொள்ளுங்கள். நீங்கள் ஒரு காலியான பார்க்கிங் மைதானத்துடன் (2 சேவைகள்) தொடங்கி அடிப்படைப் பொறுப்புகளை கற்கிறீர்கள், பின்னர் நகரப் போக்குவரத்து (5+ சேவைகள் தரவுத்தளங்களுடன்) நோக்கி முன்னேறுகிறீர்கள்.
 
 ### கட்டம் 2: எதிர்கால விரிவாக்கம் (குறிப்பு கட்டமைப்பு)
 
-ஒரு 2-சேவை கட்டமைப்பை நீங்கள் கையாளச்செய்த பின்னர், நீங்கள் விரிவுபடுத்தலாம்:
+ஒரு 2-சேவை கட்டமைப்பில் நன்கு தேர்ச்சி அடைந்தவுடன், நீங்கள் இதனை விரிவாக்கலாம்:
 
 ```
 Full Architecture (Not Included - For Reference)
@@ -77,119 +52,119 @@ Full Architecture (Not Included - For Reference)
 └── Azure Storage (🔜 For file storage)
 ```
 
-கட்டளைத் தொகுதிகள் குறுக்கீடு “Expansion Guide” பகுதிக்கு பகுதி இறுதியில் படிக்கவும்.
+முயற்சிகளுக்கான படி படி வழிமுறைகளைத் தெரிந்துகொள்ள "Expansion Guide" பகுதியைப் பாருங்கள்.
 
-## சேர்க்கப்பட்ட அம்சங்கள்
+## அடங்கிய குறிப்புகள்
 
-✅ **சேவை கண்டுபிடிப்பு**: கண்டெய்னர்களுக்கு இடையில் தானாக DNS-உடைய கண்டுபிடிப்பு  
-✅ **லோட் பாலன்சிங்**: ரெப்ளிகாக்களுக்கு இடையே கட்டமைக்கப்பட்ட லோட் பாலன்சிங்  
-✅ **ஆட்டோ-ஸ்கேலிங்**: HTTP கோரிக்கைகள் அடிப்படையில் ஒவ்வொரு சேவைக்கும் தனித்தனியாக ஸ்கேலிங்  
-✅ **ஆரோக்கிய கண்காணிப்பு**: இரு சேவைகளுக்கும் லைவ்நெஸ் மற்றும் ரெடினஸ்ஸு சோதனைகள்  
-✅ **பிரிக்கப்பட்ட லாகிங்**: Application Insights உடன் மைய மற்றும் ஒருங்கிணைந்த பதிவு  
-✅ **உள்ளக நெட்வொர்க்கிங்**: பாதுகாப்பான சேவை-தூண்டு சேவை தொடர்பு  
-✅ **கண்டெய்னர் ஒர்கெஸ்ட்ரேஷன்**: தானாக அடுப்பது மற்றும் ஸ்கேலிங்  
-✅ **சூனிய-இடைநீக்கம் இல்லாத புதுப்பிப்புகள்**: ரிவிஷன் மேலாண்மையுடன் ரோலிங் அப்டேட்கள்  
+✅ **சேவை கண்டுபிடித்தல்**: கன்டெய்னர்களுக்கிடையில் தானாக DNS அடிப்படையிலான கண்டுபிடித்தல்  
+✅ **லோட் பாலன்சிங்**: நகல்களின் மீது உள்ளிலே லோட் பாலன்சிங்  
+✅ **ஆட்டோ-ஸ்கேலிங்**: HTTP கோரிக்கைகளின் அடிப்படையில் சேவையானது தனித்துவமாக ஸ்கேலிங் செய்கிறது  
+✅ **ஹெல்த் கண்காணித்தல்**: இரு சேவைகளுக்கும் liveness மற்றும் readiness probes  
+✅ **விநியோஜிக்கப்பட்ட பதிவு**: Application Insights மூலம் மையமாக்கப்பட்ட பதிவு  
+✅ **உள்ளக நெட்வொர்க்கிங்**: பாதுகாப்பான சேவை-இலிருந்து-சேவை தொடர்பு  
+✅ **கன்டெய்னர் ஒர்ச்சஸ்ட்ரேஷன்**: தானாக deployment மற்றும் ஸ்கேலிங்  
+✅ **ஜீரோ-டவுன்டைம் அப்டேட்ஸ்**: ரிவிஷன் மேலாண்மையுடன் rolling updates  
 
-## முன் தேவைகள்
+## தேவையான முன் தேவை
 
 ### தேவையான கருவிகள்
 
-தொடங்குவதற்கு முன், இந்த கருவிகள் நிறுவப்பட்டுள்ளதா என சரிபார்க்கவும்:
+தொடங்குவதற்கு முன், உங்கள் கணினியில் பின்வரும் கருவிகள் நிறுவப்பட்டிருப்பதை சரிபார்க்கவும்:
 
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (версія 1.0.0 அல்லது உயர்ந்தது)  
+1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 or higher)
    ```bash
    azd version
-   # எதிர்பார்க்கப்படும் வெளியீடு: azd பதிப்பு 1.0.0 அல்லது அதற்கு மேல்
+   # எதிர்பார்க்கப்படும் வெளியீடு: azd பதிப்பு 1.0.0 அல்லது அதற்கும் மேல்
    ```
 
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (версія 2.50.0 அல்லது உயர்ந்தது)  
+2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 or higher)
    ```bash
    az --version
    # எதிர்பார்க்கப்படும் வெளியீடு: azure-cli 2.50.0 அல்லது அதற்கு மேல்
    ```
 
-3. **[Docker](https://www.docker.com/get-started)** (உள்ளூர் வளர்ச்சி/சோதனைக்காக - விருப்பத்தேர்வு)  
+3. **[Docker](https://www.docker.com/get-started)** (உள்ளாடை தாக்குதல்/ஸ்தல அளவீட்டிற்கு - விருப்பம்)
    ```bash
    docker --version
-   # எதிர்பார்க்கப்படும் வெளியீடு: Docker பதிப்பு 20.10 அல்லது அதற்கு மேல்
+   # எதிர்பார்க்கப்படும் வெளியீடு: Docker பதிப்பு 20.10 அல்லது அதற்கு மேலானது
    ```
 
 ### Azure தேவைகள்
 
-- செயலில் உள்ள **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))  
-- உங்கள் subscription இல் வளங்களை உருவாக்க அனுமதிகள்  
-- subscription அல்லது resource group-இல் **Contributor** பங்கு
+- ஒரு செயல்பாட்டிலான **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))
+- உங்கள் subscription-இல் resources உருவாக்க அனுமதிகள்
+- subscription அல்லது resource group-இல் **Contributor** உரிமை
 
-### அறிவு முன் நிபந்தனைகள்
+### அறிவு முன் தேவைகள்
 
-இது ஒரு **மேம்பட்ட நிலை** உதாரணம். நீங்கள் கீழ்காணும் மேம்பாடுகளை ஏற்க வேண்டும்:
-- [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) முடித்திருத்தல்  
-- மைக்ரோசேவைகள் கட்டமைப்பின் அடிப்படை புரிதல்  
-- REST APIs மற்றும் HTTP-ஐ அறிந்திருத்தல்  
-- கண்டெய்னர் கருத்துக்களை புரிந்திருத்தல்
+இது ஒரு **மேம்பட்ட நிலை** உதாரணம். நீங்கள் வேண்டும்:
+- [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) முடித்திருக்க வேண்டும் 
+- மைக்ரோசேர்வுகள் கட்டமைப்பின் அடிப்படை புரிதல்
+- REST APIs மற்றும் HTTP பற்றிய பரிச்சயம்
+- கன்டெய்னர் கருத்துக்களின் புரிதல்
 
-**Container Apps-இல் புதியவரா?** அடிப்படைகளை கற்றுக்கொள்ள முதலில் [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) தொடங்குங்கள்.
+**Container Apps-க்கு புதியவரா?** அடிப்படைகளை கற்றுக்கொள்ள முதலில் [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) பார்க்கவும்.
 
-## விரைவு தொடங்கல் (படி-படி)
+## வேகமான துவக்கம் (படி படியாக)
 
-### படி 1: கிளோன் செய்து செல்லவும்
+### படி 1: கிளோன் செய்து நகருங்கள்
 
 ```bash
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/container-app/microservices
 ```
 
-**✓ வெற்றிக் சரிபார்ப்பு**: `azure.yaml` காணப்படுகிறது என்று உறுதிசெய்துகொண்டு சரிபார்க்கவும்:
+**✓ வெற்றிச் சரிபார்ப்பு**: நீங்கள் `azure.yaml`-ஐ காண்கிறீர்கள் என்பதை உறுதி செய்யவும்:
 ```bash
 ls
 # எதிர்பார்க்கப்படும்: README.md, azure.yaml, infra/, src/
 ```
 
-### படி 2: Azure-இல் அங்கீகாரம் பெறுங்கள்
+### படி 2: Azure உடன் அங்கீகாரம் செய்வது
 
 ```bash
 azd auth login
 ```
 
-இது Azure அங்கீகாரத்திற்காக உங்கள் உலாவியை திறக்கிறது. உங்கள் Azure அங்கீகார விவரங்களுடன் உள்நுழைக.
+இது உங்கள் உலாவியை திறந்து Azure அங்கீகாரத்திற்காக அமைக்கிறது. உங்கள் Azure நற்சான்றுகளைப் பயன்படுத்தி உள்நுழையவும்.
 
-**✓ வெற்றிக் சரிபார்ப்பு**: நீங்கள் இதைப் பார்க்க வேண்டும்:
+**✓ வெற்றிச் சரிபார்ப்பு**: நீங்கள் இதை காண்பீர்கள்:
 ```
 Logged in to Azure.
 ```
 
-### படி 3: சூழலை ஆரம்பிக்கவும்
+### படி 3: சுற்றுப்புறத்தை துவங்கல்
 
 ```bash
 azd init
 ```
 
-**நீங்கள் காண்பீர்கள் என்ற_PROMPTS**:
-- **Environment name**: குறுகிய பெயரை உள்ளிடவும் (எ.கா., `microservices-dev`)  
-- **Azure subscription**: உங்கள் subscription-ஐ தேர்ந்தெடுக்கவும்  
-- **Azure location**: ஒரு பிராந்தியத்தை தேர்வு செய்யவும் (எ.கா., `eastus`, `westeurope`)
+**உங்களுக்கு தோன்றக்கூடிய கேள்விகள்**:
+- **Environment name**: ஒரு சுருக்கமான பெயரை உள்ளிடவும் (உதாரணம்: `microservices-dev`)
+- **Azure subscription**: உங்கள் subscription-ஐ தேர்வு செய்யவும்
+- **Azure location**: ஒரு பிராந்தியம் தேர்வு செய்யவும் (உதாரணம்: `eastus`, `westeurope`)
 
-**✓ வெற்றிக் சரிபார்ப்பு**: நீங்கள் இதைப் பார்க்க வேண்டும்:
+**✓ வெற்றிச் சரிபார்ப்பு**: நீங்கள் இதை காண்பீர்கள்:
 ```
 SUCCESS: New project initialized!
 ```
 
-### படி 4: அடிநிலையமைப்பு மற்றும் சேவைகளை அமல்படுத்தவும்
+### படி 4: உட்பட கட்டமைப்பு மற்றும் சேவைகளை deploy செய்தல்
 
 ```bash
 azd up
 ```
 
-**என்ன நடக்கும்** (8-12 நிமிடங்கள் எடுக்கும்):
-1. Container Apps சூழலை உருவாக்குகிறது  
-2. கண்காணிப்புக்காக Application Insights உருவாக்குகிறது  
-3. API Gateway கண்டெய்னரை கட்டுகிறது (Node.js)  
-4. Product Service கண்டெய்னரை கட்டுகிறது (Python)  
-5. இரு கண்டெய்னர்களையும் Azure-க்கு அமல்படுத்துகிறது  
-6. நெட்வொர்க்கிங் மற்றும் ஆரோக்கியச் சோதனைகளை கட்டமைக்கிறது  
-7. கண்காணிப்பு மற்றும் பதிவு அமைப்புகளை அமைக்கிறது
+**என்ன நடக்கும்** (8-12 நிமிடங்கள் ஆகும்):
+1. Container Apps environment உருவாக்கப்படுகிறது
+2. கண்காணிப்பிற்கான Application Insights உருவாக்கப்படுகிறது
+3. API Gateway கன்டெய்னர் கட்டப்படுகிறது (Node.js)
+4. Product Service கன்டெய்னர் கட்டப்படுகிறது (Python)
+5. இரு கன்டெய்னர்களும் Azure-க்கு deploy செய்யப்படுகின்றன
+6. நெட்வொர்க்கிங் மற்றும் ஹெல்த் செக்குகள் உருவாக்கப்படுகின்றன
+7. கண்காணிப்பு மற்றும் பதிவு அமைப்புகள் செலுத்தப்படுகின்றன
 
-**✓ வெற்றிக் சரிபார்ப்பு**: நீங்கள் இதைப் பார்க்க வேண்டும்:
+**✓ வெற்றிச் சரிபார்ப்பு**: நீங்கள் இதை காண்பீர்கள்:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
@@ -197,22 +172,22 @@ Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
 
 **⏱️ நேரம்**: 8-12 நிமிடங்கள்
 
-### படி 5: அமல்படுத்தலை சோதியுங்கள்
+### படி 5: Deployment-ஐ சோதனை செய்யுங்கள்
 
 ```bash
-# கேட்வே எண்ட்பாயிண்டை பெறவும்
+# கேட்வே எண்ட்பாயிண்டைப் பெறவும்
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
 
-# API கேட்வே நலத்தை சோதிக்கவும்
+# API கேட்வேயின் நலத்தை சோதிக்கவும்
 curl $GATEWAY_URL/health
 
 # எதிர்பார்க்கப்படும் வெளியீடு:
-# {"நிலை":"ஆரோக்கியம்","சேவை":"api-கேட்வே","காலமுத்திரை":"2025-11-19T10:30:00Z"}
+# {"நிலை":"ஆரோக்கியம்","சேவை":"API கேட்வே","காலக்குறிப்பு":"2025-11-19T10:30:00Z"}
 ```
 
-**Gateway மூலமாக product service-ஐ சோதியுங்கள்**:
+**ഗேட் வழியாக product சேவையை சோதிக்கவும்**:
 ```bash
-# பொருட்களை பட்டியலிடவும்
+# பொருட்களை பட்டியலிடு
 curl $GATEWAY_URL/api/products
 
 # எதிர்பார்க்கப்படும் வெளியீடு:
@@ -223,15 +198,15 @@ curl $GATEWAY_URL/api/products
 # ]
 ```
 
-**✓ வெற்றிக் சரிபார்ப்பு**: இரு endpoints-களும் பிழைகள் இல்லாமல் JSON தரவை திருப்புகின்றன.
+**✓ வெற்றிச் சரிபார்ப்பு**: இரு endpoints-லும் பிழைகள் இல்லாமல் JSON தரவை 반환ிக்க வேண்டும்.
 
 ---
 
-**🎉 வாழ்த்துகள்!** நீங்கள் Azure-க்கு ஒரு மைக்ரோசேவைகள் கட்டமைப்பை அமல்படுத்திவிட்டீர்கள்!
+**🎉 வாழ்த்துகள்!** நீங்கள் Azure-க்கு ஒரு மைக்ரோசேர்வுகள் கட்டமைப்பைப் deploy செய்துள்ளீர்கள்!
 
 ## திட்ட அமைப்பு
 
-அடிப்படை கோப்புகள் அனைத்தும் சேர்க்கப்பட்டுள்ளன—இது ஒரு முழுமையான, வேலை செய்கிற உதாரணம்:
+அனைத்து செயலாக்க கோப்புகளும் உட்பட—இது முழுமையான, செயல்படும் உதாரணம்:
 
 ```
 microservices/
@@ -264,43 +239,43 @@ microservices/
 **ஒவ்வொரு கூறும் என்ன செய்கிறது:**
 
 **Infrastructure (infra/)**:
-- `main.bicep`: அனைத்து Azure வளங்களையும் மற்றும் அவற்றின் சார்புகளை ஒருங்கிணைக்கிறது  
-- `core/container-apps-environment.bicep`: Container Apps சூழலும் Azure Container Registry-ஐ உருவாக்குகிறது  
-- `core/monitor.bicep`: பிரிக்கப்பட்ட பதிவு மற்றும் கண்காணிப்புக்காக Application Insights அமைக்கிறது  
-- `app/*.bicep`: ஸ்கேலிங் மற்றும் ஆரோக்கியச் சோதனைகளுடன் தனித்தனி container app வரையறைகள்
+- `main.bicep`: அனைத்து Azure resources மற்றும் அவற்றின் சார்புகளை ஒருங்கிணைக்கிறது
+- `core/container-apps-environment.bicep`: Container Apps environment மற்றும் Azure Container Registry உருவாக்குகிறது
+- `core/monitor.bicep`: விநியோஜிக்கப்பட்ட பதிவு மற்றும் கண்காணிப்பிற்காக Application Insights அமைக்கிறது
+- `app/*.bicep`: தனித்தனி container app வரவுகளுடன் ஸ்கேலிங் மற்றும் ஹெல்த் செக்குகள்
 
 **API Gateway (src/api-gateway/)**:
-- வெளியிடப்படக்கூடிய சேவை, பின்தள சேவைகளுக்கு கோரிக்கைகளை வழிமறைக்கிறது  
-- பதிவு, பிழை கையாளுதல் மற்றும் கோரிக்கை முன்னோக்கி அனுப்பலை செயல்படுத்துகிறது  
-- சேவை-தூண்டு சேவை HTTP தொடர்பை எடுத்துக்காட்டு செய்கிறது
+- பொதுப் பயனாளர்களுக்கான சேவை, பின்னணி சேவைகளுக்கு கோரிக்கைகளை மாறிப்பயன் செய்கிறது
+- பதிவு, பிழை கையாள்வு மற்றும் கோரிக்கை முன்னோக்கிச் செலுத்தலை செயல்படுத்துகிறது
+- சேவை-இலிருந்து-சேவை HTTP தொடர்பை காண்பிக்கிறது
 
 **Product Service (src/product-service/)**:
-- உள்ளக சேவை, சாதாரணத்திற்காக நினைவகில் பொருட் каталாக்கை நிர்வகிக்கிறது  
-- ஆரோக்கியச் சோதனைகளுடன் REST API  
-- பின்னணி மைக்ரோசேவை மாதிரிக்கான எடுத்துக்காட்டு
+- சிக்கலின்மையை குறைப்பதற்காக நினைவகத்தில் பொருள் பட்டியலை நிர்வகிக்கும் உள்ளக சேவை
+- REST API மற்றும் ஹெல்த் செக்குகள்
+- பின்னணி மைக்ரோசேர்வுகள் மாதிரியின் எடுத்துக்காட்டு
 
 ## சேவைகள் கண்ணோட்டம்
 
 ### API Gateway (Node.js/Express)
 
-**Port**: 8080  
-**சேவையை அணுகுவது**: பொது (external ingress)  
-**ப்ரயோஜனம்**: வரும் கோரிக்கைகளை பொருத்தமான பின்தள சேவைகளுக்கு வழிமாற்றுகிறது
+**போர்ட்**: 8080  
+**அணுகல்**: பொதுப் (புறமான இன்ப்ரஸ்)  
+**பொறுப்பு**: வரும் கோரிக்கைகளை சரியான பின்னணி சேவைகளுக்குக் கட்டமைப்பு வழங்குதல்  
 
-**Endpoints**:
-- `GET /` - சேவை தகவல்  
-- `GET /health` - ஆரோக்கியச் சோதனை endpoint  
-- `GET /api/products` - product service-க்கு முன்னோக்கி அனுப்பு (அனைத்தையும் பட்டியலிடு)  
-- `GET /api/products/:id` - product service-க்கு முன்னோக்கி அனுப்பு (ID மூலம் பெறுதல்)
+**எண்ட்பாயின்ட்கள்**:
+- `GET /` - சேவை தகவல்
+- `GET /health` - ஹெல்த் செக் எண்ட்பாயிண்ட்
+- `GET /api/products` - product சேவைக்கு முன்னோக்கிச் செலுத்தல் (அனைத்தையும் பட்டியலிடுதல்)
+- `GET /api/products/:id` - product சேவைக்கு முன்னோக்கிச் செலுத்தல் (ID மூலம் பெறுதல்)
 
 **முக்கிய அம்சங்கள்**:
-- axios மூலம் கோரிக்கை வழிமாற்றல்  
-- மையமாக்கப்பட்ட பதிவு  
-- பிழை கையாளுதல் மற்றும் timeout மேலாண்மை  
-- சூழல் மாறிலிகள் மூலம் சேவை கண்டுபிடிப்பு  
+- axios மூலம் கோரிக்கை வழிமுறை
+- மையகிரியான பதிவு
+- பிழை கையாளுதல் மற்றும் timeout மேலாண்மை
+- சுற்றுப்புறமாறிகள் மூலம் சேவை கண்டுபிடித்தல்
 - Application Insights ஒருங்கிணைப்பு
 
-**Code Highlight** (`src/api-gateway/app.js`):
+**கோடு முக்கியத் துண்டு** (`src/api-gateway/app.js`):
 ```javascript
 // உள்ளக சேவை தொடர்பு
 app.get('/api/products', async (req, res) => {
@@ -311,21 +286,21 @@ app.get('/api/products', async (req, res) => {
 
 ### Product Service (Python/Flask)
 
-**Port**: 8000  
-**அணுகல்**: உள்ளக மட்டும் (பொதுப் பார்வைக்கு இல்லை)  
-**ப்ரயோஜனம்**: நினைவகப் பொருள் தரவுத்தொகுப்பை நிர்வகிக்கிறது
+**போர்ட்**: 8000  
+**அணுகல்**: உள்ளக மட்டுமே (புற அணுகல் இல்லை)  
+**பொறுப்பு**: நினைவகத்தில் தரவுகளை வைத்துள்ள பொருள் பட்டியலை நிர்வகிக்கின்றது  
 
-**Endpoints**:
-- `GET /` - சேவை தகவல்  
-- `GET /health` - ஆரோக்கியச் சோதனை endpoint  
-- `GET /products` - அனைத்து பொருட்களையும் பட்டியலிடு  
-- `GET /products/<id>` - ID மூலம் பொருளை பெறுக
+**எண்ட்பாயின்ட்கள்**:
+- `GET /` - சேவை தகவல்
+- `GET /health` - ஹெல்த் செக் எண்ட்பாயிண்ட்
+- `GET /products` - அனைத்து பொருட்களையும் பட்டியலிடுதல்
+- `GET /products/<id>` - ID மூலம் பொருளைப் பெறுதல்
 
 **முக்கிய அம்சங்கள்**:
-- Flask உடன் RESTful API  
-- நினைவகத்தில் பதிக்கப்பட்ட பொருள் கண்ணோட்டம் (எளிமை, தரவுத்தளம் தேவையில்லை)  
-- probes மூலம் ஆரோக்கிய கண்காணிப்பு  
-- கட்டமைக்கப்பட்ட பதிவு  
+- Flask மூலம் RESTful API
+- நினைவகத் தரவுத்தளப் பகுதி (எளிமை कारणம், தரவுத்தளம் தேவையில்லை)
+- probes மூலம் ஹெல்த் கண்காணித்தல்
+- கட்டமைக்கப்பட்ட பதிவு
 - Application Insights ஒருங்கிணைப்பு
 
 **தரவு மாதிரி**:
@@ -339,76 +314,76 @@ app.get('/api/products', async (req, res) => {
 }
 ```
 
-**உள்ளக மட்டும் ஏன்?**  
-Product service பொது பார்வைக்கு வெளியிடப்படவில்லை. அனைத்து கோரிக்கைகளும் API Gateway மூலமாகவே செல்ல வேண்டும், இது வழங்குகிறது:
-- பாதுகாப்பு: கட்டுப்படுத்தப்பட்ட அணுகல் புள்ளி  
-- நெகிழ்வுத்தன்மை: கிளையன்ட்களை பாதிக்காமல் பின்தளத்தை மாற்றும் திறன்  
-- கண்காணிப்பு: மையமாக்கப்பட்ட கோரிக்கை பதிவு
+**ஏன் உள்ளக மட்டுமே?**
+Product சேவை பொதுமக்களுக்கு வெளிச்சமிடப்படவில்லை. அனைத்து கோரிக்கைகளும் API Gateway-ன் மூலம் செல்ல வேண்டும், இது உங்களுக்கு:
+- பாதுகாப்பு: கட்டுப்படுத்தப்பட்ட அணுகல் புள்ளி
+- நெகிழ்வுத்தன்மை: பின்னணியை மாற்றினாலும் кліயன்ட்களுக்கு பாதிப்பு ஏற்படாது
+- கண்காணிப்பு: மைய பாணியில் கோரிக்கை பதிவுகள்
 
-## சேவை தொடர்பை புரிதல்
+## சேவை தொடர்பைப் புரிந்து கொள்வது
 
-### சேவைகள் ஒன்றுக்கு மற்றவையாக எப்படி பேசுகின்றன
+### சேவைகள் ஒருவருடன் ஒருவர் எப்படி பேசுகின்றன
 
-இந்த உதாரணத்தில், API Gateway Product Service-யுடன் தொடர்பு கொண்டிருக்கிறது **உள்ளக HTTP அழைப்புகள்** மூலம்:
+இந்த உதாரணத்தில், API Gateway Product Service-க்கு **உள்ளக HTTP அழைப்புகள்** மூலம் தொடர்பு கொள்ளிறது:
 
 ```javascript
 // API கேட்வே (src/api-gateway/app.js)
 const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
 
-// உள்ளக HTTP கோரிக்கையைச் செய்யவும்
+// உள்ளக HTTP கோரிக்கை செய்யவும்
 const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 ```
 
-**முக்கிய புள்ளிகள்**:
+**முக்கிய குறிப்புகள்**:
 
-1. **DNS-அடிப்படையிலான கண்டுபிடிப்பு**: Container Apps தானாகவே உள்ளக சேவைகளுக்கு DNS வழங்குகிறது  
-   - Product Service FQDN: `product-service.internal.<environment>.azurecontainerapps.io`  
-   - எளிமையாக்கப்பட்டதாக: `http://product-service` (Container Apps இதை தீர்மானிக்கிறது)
+1. **DNS-அடிப்படையிலான கண்டுபிடித்தல்**: Container Apps தானாக உள்ளக சேவைகளுக்காக DNS வழங்குகிறது
+   - Product Service FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
+   - சுலபப்படுத்தி: `http://product-service` (Container Apps இதனை தீர்மானிக்கிறது)
 
-2. **பொதுவாக வெளிவருவதில்லை**: Product Service-க்கு Bicep-இல் `external: false` உள்ளது  
-   - Container Apps சூழலில் உள்ளதே மட்டும் அணுகக்கூடியது  
-   - இணையத்திலிருந்து அணுகப்படமுடியாது
+2. **பொது வெளிச்சமிடல் இல்லை**: Bicep-இல் Product Service-க்கு `external: false` உள்ளது
+   - Container Apps சூழலில் மட்டுமே அணுகக்கூடியது
+   - இணையத்திலிருந்து அணுக முடியாது
 
-3. **சூழல் மாறிலிகள்**: சேவை URL-கள் deployment நேரத்தில் इंजெக்ட் செய்யப்படுகின்றன  
-   - Bicep internal FQDN-ஐ gateway-க்கு தந்து விடுகிறது  
-   - பயன்பாட்டு குறியீட்டில் கடினமாக குறிக்கப்பட்ட URL-கள் இல்லை
+3. **சுற்றுப்புற மாறிகள்**: சேவை URL-கள் deployment நேரத்தில் ஊட்டப்படுகின்றன
+   - Bicep உள்ளக FQDN-ஐ gateway-க்கு அனுப்புகிறது
+   - பயன்பாட்டு கோடில் எவ்விதம் hardcodedURLs இல்லை
 
-**உருவகக் கோண விளக்கம்**: இதை அலுவலக அறைகளாகக் கவனியுங்கள். API Gateway என்பது வரவேற்பு மேசை (பொதுக்காணும்), மற்றும் Product Service என்பது ஒரு அலுவலக அறை (உள்ளக மட்டும்). வருகையாளர்கள் எந்த அலுவலகத்திற்கும் செல்ல வரவேற்பு வழியாகவே செல்ல வேண்டும்.
+**உதாரணம்**: இதை அலுவலக அறைகளாகப் பார்த்து கொள்ளுங்கள். API Gateway என்பது வரவேற்பு மேசை (பொதுமக்களுக்கு எதிர்பார்க்கப்படும்), Product Service என்பது ஒரு அலுவலக அறை (உள்ளக மட்டுமே). வரவேற்பு மூலம் மட்டுமே அலுவலகத்தை அணுக முடியும்.
 
-## அமல்படுத்தல் விருப்பிகள்
+## Deployment விருப்பங்கள்
 
-### முழு அமல்படுத்தல் (பரிந்துரைக்கப்பட்டது)
+### முழு deployment ( பரிந்துரைக்கப்படுகிறது )
 
 ```bash
-# அடித்தள கட்டமைப்பையும் இரு சேவைகளையும் நடைமுறைப்படுத்தவும்
+# அடித்தள அமைப்பையும் மற்றும் இரு சேவைகளையும் நிலைநிறுத்தவும்
 azd up
 ```
 
-இது அமல்படுத்துகிறது:
-1. Container Apps சூழல்  
-2. Application Insights  
-3. Container Registry  
-4. API Gateway கண்டெய்னர்  
-5. Product Service கண்டெய்னர்
+இது deploy செய்கிறது:
+1. Container Apps environment
+2. Application Insights
+3. Container Registry
+4. API Gateway கன்டெய்னர்
+5. Product Service கன்டெய்னர்
 
 **நேரம்**: 8-12 நிமிடங்கள்
 
-### தனித்தனி சேவையை அமல்படுத்தவும்
+### தனித்தனியான சேவையை deploy செய்தல்
 
 ```bash
-# ஒரே ஒரு சேவையை மட்டுமே நிறுவவும் (முதலில் azd up ஓட்டிய பின்னர்)
+# முதல் azd up இயக்கத்திற்குப் பிறகு ஒரு சேவையை மட்டும் வெளியிடவும்
 azd deploy api-gateway
 
-# அல்லது தயாரிப்பு சேவையை நிறுவவும்
+# அல்லது தயாரிப்பு சேவையை வெளியிடவும்
 azd deploy product-service
 ```
 
-**பயன்பாட்டு நோக்கம்**: ஒரு சேவையில் மட்டுமே குறியீட்டை புதுப்பித்து இருந்தால் அந்த சேவையை மட்டும் மீண்டும் அமல்படுத்த வேண்டிய போது.
+**பயன்பாட்டு நிலை**: ஒரே சேவையில் கோடை புதுப்பித்து அதே சேவையை மட்டும் மீட்டெடுக்க விரும்பும் போது.
 
 ### கட்டமைப்பை புதுப்பிக்கவும்
 
 ```bash
-# ஸ்கேலிங் அளவுருக்களை மாற்றவும்
+# விரிவாக்க அளவுருக்களை மாற்றவும்
 azd env set GATEWAY_MAX_REPLICAS 30
 
 # புதிய கட்டமைப்புடன் மீண்டும் நிறுவவும்
@@ -419,19 +394,19 @@ azd up
 
 ### ஸ்கேலிங் கட்டமைப்பு
 
-இரு சேவைகளும் தங்கள் Bicep கோப்புகளில் HTTP-அடிப்படையிலான ஆட்டோஸ்கேலிங்குடன் வரையறுக்கப்பட்டுள்ளன:
+இரு சேவைகளும் தங்களது Bicep கோப்புகளில் HTTP அடிப்படையிலான ஆட்டோஸ்கேலிங்குடன் உள்ளன:
 
 **API Gateway**:
-- Min replicas: 2 (அணுக்கமாகக் குறைந்தது 2 இருக்க வேண்டும்)  
-- Max replicas: 20  
-- Scale trigger: ஒவ்வொரு ரெப்ளிகாவுக்கும் 50 ஒரே நேரத்தில் கோரிக்கைகள்
+- குறைந்தபட்ச நகல்கள்: 2 (கிடைக்கும் நிலைத்தன்மைக்காக எப்போதும் குறைந்தது 2)
+- அதிகபட்ச நகல்கள்: 20
+- ஸ்கேல் துவக்கக் காரணம்: ஒவ்வொரு நகலுக்கும் 50 ஒரேநேர கோரிக்கைகள்
 
 **Product Service**:
-- Min replicas: 1 (தேவையானால் சுழற்சியில் 0-ஆகவும் ஸ்கேல் ஆகலாம்)  
-- Max replicas: 10  
-- Scale trigger: ஒவ்வொரு ரெப்ளிகாவுக்கும் 100 ஒரே நேரத்தில் கோரிக்கைகள்
+- குறைந்தபட்ச நகல்கள்: 1 ( தேவையானால் zero வரைய வரை ஸ்கேல்அப செய்ய முடியும்)
+- அதிகபட்ச நகல்கள்: 10
+- ஸ்கேல் துவக்கக் காரணம்: ஒவ்வொரு நகலுக்கும் 100 ஒரேநேர கோரிக்கைகள்
 
-**ஸ்கேலிங்கை தனிப்பயனாக்கவும்** (in `infra/app/*.bicep`):
+**ஸ்கேலிங்கை தனிப்பயன் செய்யவும்** (in `infra/app/*.bicep`):
 ```bicep
 scale: {
   minReplicas: 1
@@ -452,18 +427,18 @@ scale: {
 ### வள ஒதுக்கீடு
 
 **API Gateway**:
-- CPU: 1.0 vCPU  
-- Memory: 2 GiB  
-- காரணம்: அனைத்து வெளியுறவு போக்குவரத்தையும் கையாள்கிறது
+- CPU: 1.0 vCPU
+- Memory: 2 GiB
+- காரணம்: அனைத்து வெளியேறும் போக்குவரத்தை கையாளுகிறது
 
 **Product Service**:
-- CPU: 0.5 vCPU  
-- Memory: 1 GiB  
-- காரணம்: நினைவக-கேந்திரமான எளிமையான செயலுகள்
+- CPU: 0.5 vCPU
+- Memory: 1 GiB
+- காரணம்: நினைவகத்தில் எளிதான செயல்பாடுகள்
 
-### ஆரோக்கியச் சோதனைகள்
+### ஹெல்த் செக்குகள்
 
-இரு சேவைகளும் லைவ்நெஸ் மற்றும் ரெடினஸ்ஸு probes-ஐ உள்ளடக்கியுள்ளன:
+இரு சேவைகளும் liveness மற்றும் readiness probes உடன் சேர்க்கப்படுகின்றன:
 
 ```bicep
 probes: [
@@ -488,29 +463,29 @@ probes: [
 ]
 ```
 
-**இது என்ன அர்த்தம்**:
-- **Liveness**: ஆரோக்கியச் சோதனை தோல்வியடையும்போது, Container Apps கண்டெய்னரை மறுதொடக்கம் செய்கிறது  
-- **Readiness**: தயாரில்லை என்றால், Container Apps அந்த ரெப்ளிகாவுக்கு போக்குவரத்து வழிமாற்றுவதை நிறுத்துகிறது
+**இதன் பொருள் என்ன?**
+- **Liveness**: ஹெல்த் செக் தோல்வியடைந்தால், Container Apps கன்டெய்னரை மீண்டும் தொடக்குகிறது
+- **Readiness**: தயாராக இல்லாவிட்டால், Container Apps அந்த நகலுக்கு போக்குவரத்தை நிைத்துவிடும்
 
 
 
-## கண்காணிப்பு & பார்வைத்திறன்
+## கண்காணிப்பு மற்றும் பரிசோதனை
 
 ### சேவை பதிவுகளை காண்க
 
 ```bash
-# azd monitor மூலம் பதிவுகளைப் பார்க்கவும்
+# azd monitor பயன்படுத்தி பதிவுகளைப் பார்க்கவும்
 azd monitor --logs
 
-# அல்லது குறிப்பிட்ட Container Apps-களுக்காக Azure CLI-யைப் பயன்படுத்தவும்:
-# API Gateway-இலிருந்து பதிவுகளை ஒளிபரப்பவும்
+# அல்லது குறிப்பிட்ட Container Apps க்காக Azure CLI ஐப் பயன்படுத்தவும்:
+# API Gateway இலிருந்து பதிவுகளை ஸ்ட்ரீம் செய்யவும்
 az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 
-# சமீபத்திய தயாரிப்பு சேவை பதிவுகளைப் பார்க்கவும்
+# சமீபத்திய product சேவை பதிவுகளைப் பார்க்கவும்
 az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
 
-**எதிர்பார்க்கப்படுகின்ற வெளியீடு**:
+**எதிர்பார்க்கப்படும் வெளியீடு**:
 ```
 [api-gateway] API Gateway listening on port 8080
 [api-gateway] Product Service URL: http://product-service
@@ -520,9 +495,9 @@ az containerapp logs show --name product-service --resource-group $RG_NAME --tai
 
 ### Application Insights கேள்விகள்
 
-Azure போர்டலில் Application Insights-ஐ அணுகி, பிறகு இந்தக் கேள்விகளை இயக்கு:
+Azure போர்டலைலில் Application Insights-ஐ அணுகி, பின்னர் இந்தக் கேள்விகளை ஓட்டவும்:
 
-**மந்தமான கோரிக்கைகளை கண்டறி**:
+**மெல்லிய கோரிக்கைகளை கண்டுபிடி**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -531,7 +506,7 @@ requests
 | order by count_ desc
 ```
 
-**சேவை-தூண்டு சேவை அழைப்புகளை பின்தொடரவும்**:
+**சேவை-இலிருந்து-சேவைக்கு அழைப்புகளை தடம் காண்க**:
 ```kusto
 dependencies
 | where timestamp > ago(1h)
@@ -540,7 +515,7 @@ dependencies
 | order by timestamp desc
 ```
 
-**சேவை போல் பிழை விகிதம்**:
+**சேவையின் தவறுகளின் விகிதம்**:
 ```kusto
 exceptions
 | where timestamp > ago(24h)
@@ -548,7 +523,7 @@ exceptions
 | order by errorCount desc
 ```
 
-**காலதாமத்தில் கோரிக்கை தொகை**:
+**காலத்தின் அடிப்படையில் கோரிக்கை அளவு**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -559,30 +534,30 @@ requests
 ### கண்காணிப்பு டாஷ்போர்டை அணுகுதல்
 
 ```bash
-# Application Insights விவரங்களைப் பெறவும்
+# Application Insights விவரங்களை பெற
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Azure போர்டல் கண்காணிப்பை திறக்கவும்
+# Azure போர்டல் கண்காணிப்பை திற
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
   --query "appId" -o tsv
 ```
 
-### நேரடி மதிப்பீடுகள்
+### நேரடி மீட்ரிக்ஸ்
 
-1. Azure போர்டலில் Application Insights-க்கு செல்லவும்  
-2. "Live Metrics" என்பதை கிளிக் செய்யவும்  
-3. நேரடி கோரிக்கைகள், தோல்விகள் மற்றும் செயல்திறன் காண்க  
-4. சோதனை செய்ய: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
+1. Azure போர்டலில் Application Insights-க்கு செல்லவும்
+2. "Live Metrics" கிளிக் செய்யவும்
+3. நேரடி கோரிக்கைகள், தோல்விகள் மற்றும் செயல்திறன் காண்க
+4. இதை சோதிக்க ஓட்டு: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
 
-## பயிற்சி பயிற்சிகள்
+## நடைமுறை பயிற்சிகள்
 
-[குறிப்பு: முழு பயிற்சி பயிற்சிகளுக்கான படி-படி நடைமுறைகள், deployment சரிபார்ப்பு, தரவு மாற்றம், ஆட்டோஸ்கேலிங் சோதனைகள், பிழை கையாளுதல் மற்றும் மூன்றாவது சேவையைச் சேர்ப்பது போன்ற விவரங்கள் "Practical Exercises" பிரிவில் மேலே பார்க்கவும்.]
+[குறிப்பு: விரிவான படி படியாக பயிற்சிகள் மற்றும் deployment சோதனை, தரவு மாற்றம், ஆட்டோஸ்கேலிங் சோதனைகள், பிழை கையாளுதல் மற்றும் மூன்றாவது சேவையைச் சேர்ப்பது உட்பட முழு பயிற்சிகள் "Practical Exercises" பகுதியில் மேலே காணப்படுகின்றன.]
 
-## செலவுக் கணக்கீடு
+## செலவு பகுப்பாய்வு
 
-### மாதாந்திர கண்ணிடப்படும் செலவுகள் (இந்த 2-சேவை உதாரணத்துக்காக)
+### இந்த 2-சேவை உதாரணத்துக்கான மாதாந்திரக் கணிப்புகள்
 
 | Resource | Configuration | Estimated Cost |
 |----------|--------------|----------------|
@@ -593,14 +568,14 @@ az monitor app-insights component show \
 | Log Analytics | 1 GB/month | $3 |
 | **மொத்தம்** | | **$58-243/month** |
 
-**பயன்பாட்டின் அடிப்படையில் செலவு விவரம்**:
-- **குறைந்த போக்குவரத்து** (சோதனை/கற்றல்): ~$60/மாதம்  
-- **இடைநிலை போக்குவரத்து** (சிறிய தயாரிப்பு): ~$120/மாதம்  
-- **அதிக போக்குவரத்து** (பහුலமான காலங்கள்): ~$240/மாதம்
+**பயன்பாட்டின் அடிப்படையிலான செலவு பகுப்பு**:
+- **இளஞ்சால போக்குவரத்து** (சோதனை/கற்றல்): ~$60/month
+- **நடுத்தரப் போக்குவரத்து** (சின்ன production): ~$120/month
+- **உயர் போக்குவரத்து** (பிஸியாக இருக்கும் காலங்கள்): ~$240/month
 
-### செலவு முந்தைய குறிப்பு
+### செலவு குறைப்புக்கான குறிப்புகள்
 
-1. **வளர்ச்சிக்காக Scale to Zero பயன்படுத்தவும்**:
+1. **வளர்ச்சிக்காக Scale to Zero**:
    ```bicep
    scale: {
      minReplicas: 0  // Save $30-40/month when not in use
@@ -608,29 +583,30 @@ az monitor app-insights component show \
    }
    ```
 
-2. **Cosmos DB-க்கு Consumption Plan பயன்படுத்தவும்** (நீங்கள் அதைச் சேர்க்கும்போது):  
-   - நீங்கள் பயன்படுத்தும் அளவு மட்டுமே பணம் செலுத்துங்கள்  
-   - குறைப்பதற்கான குறைந்தபட்ச கட்டணம் இல்லை
+2. **Cosmos DB-க்கு Consumption Plan பயன்பாடு** (சேர்க்கும் போது):
+   - நீங்கள் உங்கள் பயன்பாட்டுக்கே பொருந்துகிறதை மட்டுமே செலுத்துங்கள்
+   - குறைந்தபட்ச கட்டணம் இல்லை
 
-3. **Application Insights Sampling அமைக்கவும்**:
+3. **Application Insights-க்கு Sampling அமைக்கவும்**:
    ```javascript
-   appInsights.defaultClient.config.samplingPercentage = 50; // கோரிக்கைகளின் 50% ஐ மாதிரியாக எடு
+   appInsights.defaultClient.config.samplingPercentage = 50; // கோரிக்கைகளின் 50%-ஐ மாதிரியாக எடு
    ```
 
-4. **தேவையில்லாதபோது சுத்தம் செய்யவும்**:
+4. **தேவை இல்லாத பொழுதில் அழிக்கவும்**:
    ```bash
    azd down
    ```
 
-### இலவச அடுக்கு விருப்பங்கள்
-For learning/testing, consider:
+### இலவச தளம் விருப்பங்கள்
+
+கற்றலும் சோதனைகளுக்கும், பின்வற்றவை பரிசீலிக்கவும்:
 - Use Azure free credits (first 30 days)
-- Keep to minimum replicas
-- Delete after testing (no ongoing charges)
+- பிரதிகளை குறைந்த அளவுக்கு வைத்திருக்கவும்
+- சோதனைக்கு பிறகு அழிக்கவும் (தொடர்ந்த கட்டணங்கள் இல்லை)
 
 ---
 
-## Cleanup
+## சுத்திகரிப்பு
 
 To avoid ongoing charges, delete all resources:
 
@@ -638,14 +614,14 @@ To avoid ongoing charges, delete all resources:
 azd down --force --purge
 ```
 
-**Confirmation Prompt**:
+**உறுதிச் கோரிக்கை**:
 ```
 ? Total resources to delete: 6, are you sure you want to continue? (y/N)
 ```
 
-Type `y` to confirm.
+உறுதிசெய்ய `y` என்பதனை தட்டச்சு செய்க.
 
-**What Gets Deleted**:
+**என்ன அழிக்கப்படுகிறது**:
 - Container Apps Environment
 - Both Container Apps (gateway & product service)
 - Container Registry
@@ -653,24 +629,24 @@ Type `y` to confirm.
 - Log Analytics Workspace
 - Resource Group
 
-**✓ Verify Cleanup**:
+**✓ சுத்திகரிப்பை சரிபார்க்கவும்**:
 ```bash
 az group list --query "[?starts_with(name,'rg-microservices')]" --output table
 ```
 
-Should return empty.
+வெறுமையாக திரும்ப வேண்டும்.
 
 ---
 
-## Expansion Guide: From 2 to 5+ Services
+## விரிவாக்கக் கையேடு: 2 சேவைகளிலிருந்து 5+ சேவைகள் வரை
 
 Once you've mastered this 2-service architecture, here's how to expand:
 
-### Phase 1: Add Database Persistence (Next Step)
+### நிலை 1: தரவுத்தள நிலைத்தன்மையைச் சேர்க்கவும் (அடுத்த கட்டம்)
 
-**Add Cosmos DB for Product Service**:
+**Product Service க்கு Cosmos DB ஐச் சேர்க்கவும்**:
 
-1. Create `infra/core/cosmos.bicep`:
+1. `infra/core/cosmos.bicep` ஐ உருவாக்கவும்:
    ```bicep
    resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
      name: name
@@ -683,48 +659,48 @@ Once you've mastered this 2-service architecture, here's how to expand:
    }
    ```
 
-2. Update product service to use Cosmos DB instead of in-memory data
+2. product service ஐ in-memory தரவின் பதிலாக Cosmos DB பயன்படுத்த하도록 புதுப்பிக்கவும்
 
-3. Estimated additional cost: ~$25/month (serverless)
+3. கூடுதல் மதிப்பீட்ட செலவு: ~$25/மாதம் (serverless)
 
-### Phase 2: Add Third Service (Order Management)
+### நிலை 2: மூன்றாவது சேவையைச் சேர்க்கவும் (Order Management)
 
-**Create Order Service**:
+**Order Service உருவாக்கவும்**:
 
-1. New folder: `src/order-service/` (Python/Node.js/C#)
-2. New Bicep: `infra/app/order-service.bicep`
-3. Update API Gateway to route `/api/orders`
-4. Add Azure SQL Database for order persistence
+1. புதிய கோப்புறை: `src/order-service/` (Python/Node.js/C#)
+2. புதிய Bicep: `infra/app/order-service.bicep`
+3. API Gateway ஐ `/api/orders` க்கு வழிசெய்யவும்
+4. ஆர்டர் நிலைத்தன்மைக்காக Azure SQL Database ஐச் சேர்க்கவும்
 
-**Architecture becomes**:
+**கட்டமைப்பு ஆகிறது**:
 ```
 API Gateway → Product Service (Cosmos DB)
            → Order Service (Azure SQL)
 ```
 
-### Phase 3: Add Async Communication (Service Bus)
+### நிலை 3: அசிங்க் தொடர்பைச் சேர்க்கவும் (Service Bus)
 
-**Implement Event-Driven Architecture**:
+**நிகழ்வு சார்ந்த கட்டமைப்பை செயல்படுத்தவும்**:
 
-1. Add Azure Service Bus: `infra/core/servicebus.bicep`
-2. Product Service publishes "ProductCreated" events
-3. Order Service subscribes to product events
-4. Add Notification Service to process events
+1. Azure Service Bus ஐ சேர்க்கவும்: `infra/core/servicebus.bicep`
+2. Product Service "ProductCreated" நிகழ்வுகளை வெளியிடும்
+3. Order Service ப்ரொடக்ட் நிகழ்வுகளை subscribe செய்கிறது
+4. நிகழ்வுகளை செயலாக்க Notification Service ஐச் சேர்க்கவும்
 
-**Pattern**: Request/Response (HTTP) + Event-Driven (Service Bus)
+**முறை**: Request/Response (HTTP) + Event-Driven (Service Bus)
 
-### Phase 4: Add User Authentication
+### நிலை 4: பயனர் அங்கீகாரத்தைச் சேர்க்கவும்
 
-**Implement User Service**:
+**User Service ஐ செயல்படுத்தவும்**:
 
-1. Create `src/user-service/` (Go/Node.js)
-2. Add Azure AD B2C or custom JWT authentication
-3. API Gateway validates tokens
-4. Services check user permissions
+1. `src/user-service/` ஐ உருவாக்கவும் (Go/Node.js)
+2. Azure AD B2C அல்லது custom JWT அங்கீகாரம் சேர்க்கவும்
+3. API Gateway டோகன்களை சரிபார்க்கும்
+4. சேவைகள் பயனர் அனுமதிகளை சரிபார்க்கும்
 
-### Phase 5: Production Readiness
+### நிலை 5: உற்பத்தி தயார்மை
 
-**Add These Components**:
+**இந்த கூறுகளைச் சேர்க்கவும்**:
 - Azure Front Door (global load balancing)
 - Azure Key Vault (secret management)
 - Azure Monitor Workbooks (custom dashboards)
@@ -732,91 +708,92 @@ API Gateway → Product Service (Cosmos DB)
 - Blue-Green Deployments
 - Managed Identity for all services
 
-**Full Production Architecture Cost**: ~$300-1,400/month
+**முழு உற்பத்தி கட்டமைப்பு செலவு**: ~$300-1,400/மாதம்
 
 ---
 
-## Learn More
+## மேலும் அறிக
 
-### Related Documentation
+### தொடர்புடைய ஆவணங்கள்
 - [Azure Container Apps Documentation](https://learn.microsoft.com/azure/container-apps/)
-- [Microservices Architecture Guide](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
-- [Application Insights for Distributed Tracing](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
+- [மைக்ரோசர்வீசுகள் கட்டமைப்புக் கையேடு](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
+- [விநியோகிக்கப்பட்ட டிரேசிங் க்கான Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
-### Next Steps in This Course
-- ← Previous: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - Beginner single-container example
-- → Next: [AI Integration Guide](../../../../../examples/docs/ai-foundry) - Add AI capabilities
+### இந்த பாடநெறியில் அடுத்து என்ன செய்யுவது
+- ← Previous: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - தொடக்க நிலை ஒற்றை-கண்டெய்னர் உதாரணம்
+- → Next: [AI Integration Guide](../../../../../examples/docs/ai-foundry) - AI திறன்களைச் சேர்க்கவும்
 - 🏠 [Course Home](../../README.md)
 
-### Comparison: When to Use What
+### ஒப்பீடு: எப்போது என்ன பயன்படுத்தலாம்
 
-**Single Container App** (Simple Flask API example):
-- ✅ Simple applications
-- ✅ Monolithic architecture
-- ✅ Fast to deploy
-- ❌ Limited scalability
-- **Cost**: ~$15-50/month
+**ஒரே கண்டெய்னர் செயலி** (Simple Flask API உதாரணம்):
+- ✅ எளிய பயன்பாடுகள்
+- ✅ ஒருங்கிணைந்த கட்டமைப்பு
+- ✅ விரைவில் துவக்க இயலும்
+- ❌ பரிமாண திறன் வரம்பு
+- **செலவு**: ~$15-50/மாதம்
 
-**Microservices** (This example):
-- ✅ Complex applications
-- ✅ Independent scaling per service
-- ✅ Team autonomy (different services, different teams)
-- ❌ More complex to manage
-- **Cost**: ~$60-250/month
+**மைக்ரோசர்வீசுகள்** (இந்த உதாரணம்):
+- ✅ சிக்கலான பயன்பாடுகள்
+- ✅ சேவைக்கு தனித்துவமாக அளவை மாற்றக்கூடும்
+- ✅ குழு சுயாதீனம் (வித்தியாச சேவைகள், வித்தியாசக் குழுக்கள்)
+- ❌ மேலாண்மைக்கு அதிக சிக்கல்
+- **செலவு**: ~$60-250/மாதம்
 
 **Kubernetes (AKS)**:
-- ✅ Maximum control and flexibility
-- ✅ Multi-cloud portability
-- ✅ Advanced networking
-- ❌ Requires Kubernetes expertise
-- **Cost**: ~$150-500/month minimum
+- ✅ அதிகபட்ச கட்டுப்பாடு மற்றும் நெகிழ்வுத்தன்மை
+- ✅ பல மேகங்களில் இயக்கக்கூடிய திறன்
+- ✅ முன்னேற்றப்பட்ட நெட்வொர்க்கிங்
+- ❌ Kubernetes நுண்ணறிவு தேவை
+- **செலவு**: ~$150-500/மாதம் குறைந்தபட்சம்
 
-**Recommendation**: Start with Container Apps (this example), move to AKS only if you need Kubernetes-specific features.
+**பரிந்துரை**: Container Apps (இந்த உதாரணம்) கொண்டு துவங்குங்கள், Kubernetes-க்கு சம்பந்தபட்ட அம்சங்கள் தேவை படின் மட்டுமே AKS க்கு நகருங்கள்.
 
 ---
 
-## Frequently Asked Questions
+## அடிக்கடி கேட்கப்படும் கேள்விகள்
 
-**Q: Why only 2 services instead of 5+?**  
-A: Educational progression. Master the fundamentals (service communication, monitoring, scaling) with a simple example before adding complexity. The patterns you learn here apply to 100-service architectures.
+**Q: 5+ சேவைகளுக்கு பதிலாக ஏன் வெறும் 2 சேவைகள்?**  
+A: கல்வி முன்னேற்றம். அடிப்படைகளை (சேவை தொடர்பு, கண்காணிப்பு, அளவீடு) ஒரு எளிய உதாரணத்துடன் முதலில் கற்றுக்கொள். இங்கு கற்றுக்கொள்ளும் முறைமைகள் 100-சேவை கட்டமைப்புகளுக்கும் பொருந்தும்.
 
-**Q: Can I add more services myself?**  
-A: Absolutely! Follow the expansion guide above. Each new service follows the same pattern: create src folder, create Bicep file, update azure.yaml, deploy.
+**Q: நான் மேலும் சேவைகளை தனியாகச் சேர்க்கலாமா?**  
+A: ஆம்! மேலே கொடுக்கப்பட்ட விரிவாக்கக் கையேட்டைக் பின்பற்றுங்கள். ஒவ்வொரு புதிய சேவையும் அதே மாதிரியை பின்பற்றும்: src கோப்புறை உருவாக்கு, Bicep கோப்பு உருவாக்கு, azure.yaml ஐப் புதுப்பித்து deploy செய்.
 
-**Q: Is this production-ready?**  
-A: It's a solid foundation. For production, add: managed identity, Key Vault, persistent databases, CI/CD pipeline, monitoring alerts, and backup strategy.
+**Q: இது உற்பத்திக்கு தயாரா?**  
+A: இது வலுவான அடித்தளம். உற்பத்திக்காக, managed identity, Key Vault, நிலைத்த தரவுத்தளங்கள், CI/CD குழாய்கோட், கண்காணிப்பு எச்சரிக்கைகள், மற்றும் காப்பு பலன்கள் போன்றவற்றைச் சேர்க்கவும்.
 
-**Q: Why not use Dapr or other service mesh?**  
-A: Keep it simple for learning. Once you understand native Container Apps networking, you can layer on Dapr for advanced scenarios.
+**Q: Dapr அல்லது பிற சேவை மெஷ் ஏன் பயன்படுத்தக்கூடாது?**  
+A: கற்றலுக்காக எளிமையாக வைத்துள்ளோம். Container Apps இயல்பான நெட்வொர்க்கிங் புரிந்துகொண்ட பின்னர், மேம்பட்ட நிலைகளுக்கு Dapr ஐ மேல் படிவமாகச் சேர்க்கலாம்.
 
-**Q: How do I debug locally?**  
-A: Run services locally with Docker:
+**Q: நான் உள்ளகமாக எப்படி பிழைத் திருத்தம் செய்வேன்?**  
+A: சேவைகளை உள்ளகமாக Docker கொண்டு இயக்கவும்:
 ```bash
 cd src/api-gateway
 docker build -t local-gateway .
 docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
 ```
 
-**Q: Can I use different programming languages?**  
-A: Yes! This example shows Node.js (gateway) + Python (product service). You can mix any languages that run in containers.
+**Q: நான் வேறுபட்ட நிரலாக்க மொழிகளைப் பயன்படுத்தலாமா?**  
+A: ஆம்! இந்த உதாரணம் Node.js (gateway) + Python (product service) ஐ көрсетுகிறது. கண்டெய்னர்களில் இயங்கக்கூடிய எந்த மொழியையும் கலக்கலாம்.
 
-**Q: What if I don't have Azure credits?**  
-A: Use Azure free tier (first 30 days with new accounts) or deploy for short testing periods and delete immediately.
+**Q: எனக்கு Azure கிரெடிட்ஸ் இல்லாவிட்டால் என்ன?**  
+A: புதிய கணக்குகளுக்கு முதல் 30 நாட்கள் Azure இலவச நிலையைப் பயன்படுத்தவும் அல்லது குறுகிய சோதனை காலத்திற்கே நிறுவி உடனடியாக அழிக்கவும்.
 
 ---
 
-> **🎓 Learning Path Summary**: You've learned to deploy a multi-service architecture with automatic scaling, internal networking, centralized monitoring, and production-ready patterns. This foundation prepares you for complex distributed systems and enterprise microservices architectures.
+> **🎓 கற்றல் பாதை சுருக்கம்**: நீங்கள் தானாக அளவை மாற்றும், உள்ளக நெட்வொர்க்கிங், மையப்படுத்தப்பட்ட கண்காணிப்பு மற்றும் உற்பத்தி-தயாரான மாதிரிகளுடன் ஒரு பலசேவை கட்டமைப்பை நிறுவுவது பற்றி கற்றுக்கொண்டீர்கள். இந்த அடித்தளம் சிக்கலான பரவலான அமைப்புகள் மற்றும் நிறுவன மைக்ரோசர்வீஸ் கட்டமைப்புகளுக்குத் தகுதியாக இருக்கத் தயாராகும்.
 
-**📚 Course Navigation:**
+**📚 பாடநெறி வழிசெலுத்தல்:**
 - ← Previous: [Simple Flask API](../../../../../examples/container-app/simple-flask-api)
 - → Next: [Database Integration Example](../../../../../examples/database-app)
 - 🏠 [Course Home](../../../README.md)
-- 📖 [Container Apps Best Practices](../../../docs/chapter-04-infrastructure/deployment-guide.md)
+- 📖 [Container Apps சிறந்த நடைமுறைகள்](../../../docs/chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-தயவுசெய்து கவனிக்க:
-இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவையாகும் Co‑op Translator (https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயற்சித்தாலும், இயந்திர மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறான விவரங்கள் இருக்கக்கூடும் என்பதை தயவுசெய்து கருத்தில் கொள்ளவும். ஆவணத்தின் மூலப் மொழியில் තිබும் ஆவணம் அதிகாரப்பூர்வமானதாகக் கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு தொழில்முறை மனித மொழிபெயர்ப்பை பெறுவது பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பைப் பயன்படுத்துவதால் ஏற்பட்ட எந்தவொரு புரிதலிழப்பிற்கும் அல்லது தவறான விளக்கத்திற்கும் நாங்கள் பொறுப்பேற்கமாட்டோம்.
+அறிவிப்பு:
+
+இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவையான Co-op Translator (https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயற்சித்தாலும், தானியங்கி மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறான தகவல்கள் இருக்கக்கூடும் என்பதை கவனத்தில் கொள்ளவும். அசல் ஆவணம் அதன் மூல மொழியில் உள்ள பதிப்பே அதிகாரப்பூர்வ ஆதாரமாக கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பு பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பின் பயன்பாட்டினால் ஏற்படும் எந்தவொரு தவறான புரிதலுக்காகவும் நாங்கள் பொறுப்பேற்கமாட்டோம்.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

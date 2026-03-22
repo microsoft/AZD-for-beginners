@@ -1,51 +1,51 @@
 # Exempel - Praktiska AZD-mallar och konfigurationer
 
-**Lära genom exempel - organiserat efter kapitel**
-- **📚 Kurshem**: [AZD For Beginners](../README.md)
+**Lärande genom exempel - Organiserat per kapitel**
+- **📚 Kursens startsida**: [AZD för nybörjare](../README.md)
 - **📖 Kapitelkarta**: Exempel organiserade efter inlärningskomplexitet
-- **🚀 Lokalt exempel**: [Retail Multi-Agent-lösning](retail-scenario.md)
+- **🚀 Lokalt exempel**: [Detaljhandels Multiagent-lösning](retail-scenario.md)
 - **🤖 Externa AI-exempel**: Länkar till Azure Samples-repositorier
 
 > **📍 VIKTIGT: Lokala vs externa exempel**  
 > Detta repository innehåller **4 kompletta lokala exempel** med fullständiga implementationer:  
-> - **Azure OpenAI Chat** (GPT-4-distribution med chattgränssnitt)  
+> - **Microsoft Foundry Models Chat** (gpt-4.1 driftsättning med chattgränssnitt)  
 > - **Container Apps** (Enkel Flask-API + mikrotjänster)  
 > - **Database App** (Webb + SQL-databas)  
-> - **Retail Multi-Agent** (Enterprise AI-lösning)  
+> - **Retail Multi-Agent** (företags-AI-lösning)  
 >  
 > Ytterligare exempel är **externa referenser** till Azure-Samples-repositorier som du kan klona.
 
 ## Introduktion
 
-Denna katalog tillhandahåller praktiska exempel och referenser för att hjälpa dig lära dig Azure Developer CLI genom praktisk övning. Retail Multi-Agent-scenariot är en komplett, produktionredo implementation som ingår i detta repository. Ytterligare exempel refererar till officiella Azure Samples som demonstrerar olika AZD-mönster.
+Denna mapp innehåller praktiska exempel och referenser som hjälper dig att lära dig Azure Developer CLI genom praktisk övning. Retail Multi-Agent-scenariot är en komplett, produktionsredo implementation som ingår i detta repository. Ytterligare exempel hänvisar till officiella Azure Samples som visar olika AZD-mönster.
 
-### Legend för komplexitetsbetyg
+### Komplexitetsnivå - förklaring
 
 - ⭐ **Nybörjare** - Grundläggande koncept, en tjänst, 15–30 minuter
-- ⭐⭐ **Mellannivå** - Flera tjänster, databasintegration, 30–60 minuter
+- ⭐⭐ **Medel** - Flera tjänster, databasintegration, 30–60 minuter
 - ⭐⭐⭐ **Avancerad** - Komplex arkitektur, AI-integration, 1–2 timmar
-- ⭐⭐⭐⭐ **Expert** - Produktionredo, företagsmönster, 2+ timmar
+- ⭐⭐⭐⭐ **Expert** - Produktionsredo, företagsmönster, 2+ timmar
 
 ## 🎯 Vad som faktiskt finns i detta repository
 
 ### ✅ Lokal implementation (Redo att använda)
 
-#### [Azure OpenAI Chattapplikation](azure-openai-chat/README.md) 🆕
-**Komplett GPT-4-distribution med chattgränssnitt inkluderad i detta repo**
+#### [Microsoft Foundry Models Chattapplikation](azure-openai-chat/README.md) 🆕
+**Komplett gpt-4.1-driftsättning med chattgränssnitt ingår i detta repo**
 
 - **Plats:** `examples/azure-openai-chat/`
-- **Komplexitet:** ⭐⭐ (Mellannivå)
-- **Vad som ingår:**
-  - Komplett Azure OpenAI-distribution (GPT-4)
-  - Python kommandorads-chattgränssnitt
-  - Key Vault-integrering för säkra API-nycklar
+- **Komplexitet:** ⭐⭐ (Medel)
+- **Innehåll:**
+  - Komplett Microsoft Foundry Models-driftsättning (gpt-4.1)
+  - Python kommandoradschattgränssnitt
+  - Key Vault-integration för säkra API-nycklar
   - Bicep-infrastrukturmallar
-  - Spårning av tokenanvändning och kostnader
-  - Ratebegränsning och felhantering
+  - Tokenanvändning och kostnadsspårning
+  - Hastighetsbegränsning och felhantering
 
-**Quick Start:**
+**Snabbstart:**
 ```bash
-# Navigera till exempel
+# Navigera till exemplet
 cd examples/azure-openai-chat
 
 # Distribuera allt
@@ -56,60 +56,60 @@ pip install -r src/requirements.txt
 python src/chat.py
 ```
 
-**Tekniker:** Azure OpenAI, GPT-4, Key Vault, Python, Bicep
+**Teknologier:** Microsoft Foundry Models, gpt-4.1, Key Vault, Python, Bicep
 
 #### [Container App-exempel](container-app/README.md) 🆕
-**Omfattande containerdistributionsexempel inkluderade i detta repo**
+**Omfattande containerdriftsättnings-exempel ingår i detta repo**
 
 - **Plats:** `examples/container-app/`
 - **Komplexitet:** ⭐-⭐⭐⭐⭐ (Från nybörjare till avancerad)
-- **Vad som ingår:**
-  - [Huvudguide](container-app/README.md) - Fullständig översikt över containerdistributioner
-  - [Enkel Flask-API](../../../examples/container-app/simple-flask-api) - Grundläggande REST-API-exempel
-  - [Mikrotjänstarkitektur](../../../examples/container-app/microservices) - Produktionsredo distribution med flera tjänster
+- **Innehåll:**
+  - [Huvudguide](container-app/README.md) - Komplett översikt över containerdriftsättningar
+  - [Enkel Flask-API](../../../examples/container-app/simple-flask-api) - Grundläggande REST API-exempel
+  - [Mikrotjänster-arkitektur](../../../examples/container-app/microservices) - Produktionsredo fler-tjänsters driftsättning
   - Snabbstart, produktions- och avancerade mönster
   - Övervakning, säkerhet och kostnadsoptimering
 
-**Quick Start:**
+**Snabbstart:**
 ```bash
 # Visa huvudguiden
 cd examples/container-app
 
-# Driftsätt ett enkelt Flask-API
+# Distribuera ett enkelt Flask-API
 cd simple-flask-api
 azd up
 
-# Driftsätt ett exempel på mikrotjänster
+# Distribuera ett exempel på mikrotjänster
 cd ../microservices
 azd up
 ```
 
-**Tekniker:** Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights
+**Teknologier:** Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights
 
-#### [Retail Multi-Agent-lösning](retail-scenario.md) 🆕
-**Fullständig produktionredo implementation inkluderad i detta repo**
+#### [Detaljhandels Multiagent-lösning](retail-scenario.md) 🆕
+**Fullständig produktionsredo implementation ingår i detta repo**
 
 - **Plats:** `examples/retail-multiagent-arm-template/`
 - **Komplexitet:** ⭐⭐⭐⭐ (Avancerad)
-- **Vad som ingår:**
-  - Komplett ARM-distributionsmall
-  - Multi-agentarkitektur (Kund + Lager)
-  - Azure OpenAI-integration
-  - AI Search med RAG
+- **Innehåll:**
+  - Komplett ARM-driftsättningsmall
+  - Multiagent-arkitektur (Kund + Lager)
+  - Microsoft Foundry Models-integration
+  - AI-sökning med RAG
   - Omfattande övervakning
-  - Distributionsskript med ett klick
+  - Driftsättningsskript med ett klick
 
-**Quick Start:**
+**Snabbstart:**
 ```bash
 cd examples/retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-**Tekniker:** Azure OpenAI, AI Search, Container Apps, Cosmos DB, Application Insights
+**Teknologier:** Microsoft Foundry Models, AI Search, Container Apps, Cosmos DB, Application Insights
 
 ---
 
-## 🔗 Externa Azure Samples (Klona för att använda)
+## 🔗 Externa Azure Samples (Klona för användning)
 
 Följande exempel underhålls i officiella Azure-Samples-repositorier. Klona dem för att utforska olika AZD-mönster:
 
@@ -117,13 +117,13 @@ Följande exempel underhålls i officiella Azure-Samples-repositorier. Klona dem
 
 | Mall | Repository | Komplexitet | Tjänster |
 |:---------|:-----------|:-----------|:---------|
-| **Python Flask API** | [Lokal: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, Container Apps, Application Insights |
-| **Mikrotjänster** | [Lokal: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | Flera tjänster, Service Bus, Cosmos DB, SQL |
+| **Python Flask-API** | [Lokal: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, Container Apps, Application Insights |
+| **Mikrotjänster** | [Lokal: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | Fler-tjänster, Service Bus, Cosmos DB, SQL |
 | **Node.js + MongoDB** | [todo-nodejs-mongo](https://github.com/Azure-Samples/todo-nodejs-mongo) | ⭐ | Express, Cosmos DB, Container Apps |
 | **React + Functions** | [todo-csharp-sql-swa-func](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) | ⭐ | Static Web Apps, Functions, SQL |
 | **Python Flask-container** | [container-apps-store-api](https://github.com/Azure-Samples/container-apps-store-api-microservice) | ⭐ | Python, Container Apps, API |
 
-**Hur man använder:**
+**Hur du använder:**
 ```bash
 # Klona valfritt exempel
 git clone https://github.com/Azure-Samples/todo-nodejs-mongo
@@ -137,40 +137,40 @@ azd up
 
 | Mall | Repository | Komplexitet | Fokus |
 |:---------|:-----------|:-----------|:------|
-| **Azure OpenAI Chat** | [Lokal: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | GPT-4-distribution |
+| **Microsoft Foundry Models Chatt** | [Lokal: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | gpt-4.1-driftsättning |
 | **AI Chat Snabbstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Grundläggande AI-chatt |
 | **AI-agenter** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Agentramverk |
 | **Search + OpenAI-demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG-mönster |
 | **Contoso Chat** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | Företags-AI |
 
-### Databas- och avancerade mönster (Kapitel 3-8)
+### Databas & avancerade mönster (Kapitel 3-8)
 
 | Mall | Repository | Komplexitet | Fokus |
 |:---------|:-----------|:-----------|:------|
 | **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | Databasintegration |
-| **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | Serverless NoSQL |
-| **Java-mikrotjänster** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | Flera tjänster |
-| **ML Pipeline** | [mlops-v2](https://github.com/Azure-Samples/mlops-v2) | ⭐⭐⭐⭐ | MLOps |
+| **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | NoSQL serverlöst |
+| **Java-mikrotjänster** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | Fler-tjänster |
+| **ML-pipeline** | [mlops-v2](https://github.com/Azure-Samples/mlops-v2) | ⭐⭐⭐⭐ | MLOps |
 
 ## Lärandemål
 
-Genom att arbeta igenom dessa exempel kommer du att:
+Genom att arbeta med dessa exempel kommer du att:
 - Öva Azure Developer CLI-arbetsflöden med realistiska applikationsscenarier
 - Förstå olika applikationsarkitekturer och deras azd-implementationer
 - Bemästra Infrastructure as Code-mönster för olika Azure-tjänster
-- Tillämpa konfigurationshantering och miljöspecifika distributionsstrategier
-- Implementera övervaknings-, säkerhets- och skalningsmönster i praktiska sammanhang
-- Bygga erfarenhet av felsökning och debugga verkliga distributionsscenarier
+- Tillämpa konfigurationshantering och miljöspecifika driftsättningsstrategier
+- Implementera övervakning, säkerhet och skalningsmönster i praktiska sammanhang
+- Bygga erfarenhet av felsökning och debugging av verkliga driftsättningsscenarier
 
 ## Läranderesultat
 
-Efter att ha slutfört dessa exempel kommer du att kunna:
-- Distribuera olika applikationstyper med Azure Developer CLI med självförtroende
+När du har slutfört dessa exempel kommer du att kunna:
+- Driftsätta olika applikationstyper med Azure Developer CLI med självförtroende
 - Anpassa tillhandahållna mallar till dina egna applikationskrav
-- Designa och implementera egna infrastrukturmönster med Bicep
-- Konfigurera komplexa applikationer med flera tjänster och korrekta beroenden
-- Tillämpa bästa praxis för säkerhet, övervakning och prestanda i verkliga scenarier
-- Felsöka och optimera distributioner baserat på praktisk erfarenhet
+- Designa och implementera anpassade infrastrukturmönster med Bicep
+- Konfigurera komplexa flertjänstapplikationer med korrekta beroenden
+- Tillämpa säkerhets-, övervaknings- och prestandabästa praxis i verkliga scenarier
+- Felsöka och optimera driftsättningar baserat på praktisk erfarenhet
 
 ## Katalogstruktur
 
@@ -188,114 +188,113 @@ Azure Samples AZD Templates (linked externally):
     └── scripts/
 ```
 
-## Snabbstartsexempel
+## Snabbstarts-exempel
 
-> **💡 Ny till AZD?** Börja med exempel nr 1 (Flask API) - det tar ~20 minuter och lär ut kärnkoncept.
+> **💡 Ny till AZD?** Börja med exempel #1 (Flask-API) - det tar ~20 minuter och lär ut kärnkoncepten.
 
 ### För nybörjare
-1. **[Container App - Python Flask API](../../../examples/container-app/simple-flask-api)** (Local) ⭐  
-   Distribuera ett enkelt REST-API med skala till noll  
+1. **[Container App - Python Flask-API](../../../examples/container-app/simple-flask-api)** (Lokal) ⭐  
+   Driftsätt ett enkelt REST API med skalning till noll  
    **Tid:** 20–25 minuter | **Kostnad:** $0-5/månad  
-   **Du kommer att lära dig:** Grundläggande azd-arbetsflöde, containerisering, hälsokontroller  
-   **Förväntat resultat:** Fungerande API-endpoint som returnerar "Hello, World!" med övervakning
+   **Du lär dig:** Grundläggande azd-arbetsflöde, containerisering, hälsokontroller  
+   **Förväntat resultat:** Funktionell API-endpoint som returnerar "Hello, World!" med övervakning
 
-2. **[Simple Web App - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
-   Distribuera en Node.js Express-webbapplikation med MongoDB  
+2. **[Enkel webbapp - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
+   Driftsätt en Node.js Express-webbapplikation med MongoDB  
    **Tid:** 25–35 minuter | **Kostnad:** $10-30/månad  
-   **Du kommer att lära dig:** Databasintegration, miljövariabler, anslutningssträngar  
-   **Förväntat resultat:** Todo-lista-app med skapa/läsa/uppdatera/radera-funktionalitet
+   **Du lär dig:** Databasintegration, miljövariabler, anslutningssträngar  
+   **Förväntat resultat:** Todo-listapp med skapa/läsa/uppdatera/radera-funktionalitet
 
-3. **[Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
-   Hosta en React statisk webbplats med Azure Static Web Apps  
+3. **[Statisk webbplats - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
+   Distribuera en statisk React-webbplats med Azure Static Web Apps  
    **Tid:** 20–30 minuter | **Kostnad:** $0-10/månad  
-   **Du kommer att lära dig:** Statisk hosting, serverlösa funktioner, CDN-distribution  
+   **Du lär dig:** Statisk hosting, serverlösa funktioner, CDN-distribution  
    **Förväntat resultat:** React-gränssnitt med API-backend, automatisk SSL, global CDN
 
-### För mellannivåanvändare
-4. **[Azure OpenAI Chat Application](../../../examples/azure-openai-chat)** (Local) ⭐⭐  
-   Distribuera GPT-4 med chattgränssnitt och säker API-nyckelhantering  
+### För medelavancerade användare
+4. **[Microsoft Foundry Models Chattapplikation](../../../examples/azure-openai-chat)** (Lokal) ⭐⭐  
+   Driftsätt gpt-4.1 med chattgränssnitt och säker hantering av API-nycklar  
    **Tid:** 35–45 minuter | **Kostnad:** $50-200/månad  
-   **Du kommer att lära dig:** Azure OpenAI-distribution, Key Vault-integrering, tokenspårning  
-   **Förväntat resultat:** Fungerande chattapplikation med GPT-4 och kostnadsövervakning
+   **Du lär dig:** Microsoft Foundry Models-driftsättning, Key Vault-integration, tokenspårning  
+   **Förväntat resultat:** Fungerande chattapplikation med gpt-4.1 och kostnadsövervakning
 
-5. **[Container App - Microservices](../../../examples/container-app/microservices)** (Local) ⭐⭐⭐⭐  
-   Produktionsredo arkitektur med flera tjänster  
-   **Tid:** 45–60 minuter | **Kostnad:** $50-150/månad  
-   **Du kommer att lära dig:** Tjänstkommunikation, meddelandeköer, distribuerad spårning  
-   **Förväntat resultat:** 2-tjänstersystem (API-gateway + Produktservice) med övervakning
+5. **[Container App - Mikrotjänster](../../../examples/container-app/microservices)** (Lokal) ⭐⭐⭐⭐  
+   Produktionsredo flertjänstarkitektur  
+   **Tid:** 45–60 minuter | **Kostnad:** $50–150/månad  
+   **Du lär dig:** Tjänstkommunikation, meddelandeköning, distribuerad spårning  
+   **Förväntat resultat:** 2-tjänstersystem (API Gateway + Produkttjänst) med övervakning
 
-6. **[Database App - C# with Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
-   Webbapplikation med C# API och Azure SQL Database  
+6. **[Databasapp - C# med Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
+   Webbapplikation med C#-API och Azure SQL-databas  
    **Tid:** 30–45 minuter | **Kostnad:** $20-80/månad  
-   **Du kommer att lära dig:** Entity Framework, databas-migrationer, anslutningssäkerhet  
-   **Förväntat resultat:** C# API med Azure SQL-backend, automatisk schemadeployment
+   **Du lär dig:** Entity Framework, databas-migrationer, anslutningssäkerhet  
+   **Förväntat resultat:** C#-API med Azure SQL-backend, automatisk schemadriftsättning
 
 7. **[Serverless Function - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
    Python Azure Functions med HTTP-triggers och Cosmos DB  
-   **Tid:** 30–40 minuter | **Kostnad:** $10-40/månad  
-   **Du kommer att lära dig:** Händelsestyrd arkitektur, serverlös skalning, NoSQL-integrering  
+   **Tid:** 30–40 minuter | **Kostnad:** $10–40/månad  
+   **Du lär dig:** Händelsestyrd arkitektur, serverlös skalning, NoSQL-integration  
    **Förväntat resultat:** Funktionsapp som svarar på HTTP-förfrågningar med Cosmos DB-lagring
 
-8. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** ⭐⭐⭐  
+8. **[Mikrotjänster - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** ⭐⭐⭐  
    Fler-tjänsters Java-applikation med Container Apps och API-gateway  
    **Tid:** 60–90 minuter | **Kostnad:** $80-200/månad  
-   **Du kommer att lära dig:** Spring Boot-distribution, servicemesh, lastbalansering  
-   **Förväntat resultat:** Fler-tjänsters Java-system med serviceupptäckt och routning
+   **Du lär dig:** Spring Boot-driftsättning, service mesh, lastbalansering  
+   **Förväntat resultat:** Flertjänstigt Java-system med tjänsteupptäckt och routning
 
 ### Microsoft Foundry-mallar
 
-1. **[Azure OpenAI Chat App - Local Example](../../../examples/azure-openai-chat)** ⭐⭐  
-   Komplett GPT-4-distribution med chattgränssnitt  
+1. **[Microsoft Foundry Models Chattapp - Lokalt exempel](../../../examples/azure-openai-chat)** ⭐⭐  
+   Komplett gpt-4.1-driftsättning med chattgränssnitt  
    **Tid:** 35–45 minuter | **Kostnad:** $50-200/månad  
    **Förväntat resultat:** Fungerande chattapplikation med tokenspårning och kostnadsövervakning
 
-2. **[Azure Search + OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
+2. **[Azure Search + OpenAI-demo](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
    Intelligent chattapplikation med RAG-arkitektur  
    **Tid:** 60–90 minuter | **Kostnad:** $100-300/månad  
-   **Förväntat resultat:** RAG-driven chattgränssnitt med dokumentsökning och källhänvisningar
+   **Förväntat resultat:** RAG-drivet chattgränssnitt med dokumentsökning och referenser
 
-3. **[AI Document Processing](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
+3. **[AI-dokumentbearbetning](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
    Dokumentanalys med Azure AI-tjänster  
    **Tid:** 40–60 minuter | **Kostnad:** $20-80/månad  
    **Förväntat resultat:** API som extraherar text, tabeller och entiteter från uppladdade dokument
 
-4. **[Machine Learning Pipeline](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
+4. **[Maskininlärningspipeline](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
    MLOps-arbetsflöde med Azure Machine Learning  
-   **Tid:** 2-3 timmar | **Kostnad:** $150-500/månad  
-   **Förväntat resultat:** Automatiserad ML-pipeline med träning, distribution och övervakning
+   **Tid:** 2–3 timmar | **Kostnad:** $150-500/månad  
+   **Förväntat resultat:** Automatiserad ML-pipeline med träning, driftsättning och övervakning
 
 ### Verkliga scenarier
 
-#### **Retail Multi-Agent-lösning** 🆕
-**[Komplett implementationsguide](./retail-scenario.md)**
+#### **Detaljhandels Multiagent-lösning** 🆕
+**[Fullständig implementationsguide](./retail-scenario.md)**
 
-En omfattande, produktionredo multi-agent kundtjänstlösning som demonstrerar företagsklassad AI-applikationsdistribution med AZD. Detta scenario erbjuder:
+En omfattande, produktionsredo multiagent kundsupportlösning som demonstrerar företagsklassad driftsättning av AI-applikationer med AZD. Detta scenario erbjuder:
+- **Komplett arkitektur**: Multi-agent-system med specialiserade agenter för kundservice och lagerhantering
+- **Produktionsinfrastruktur**: Distributioner av Microsoft Foundry Models i flera regioner, AI Search, Container Apps och omfattande övervakning
+- **Klar att distribuera ARM-mall**: Enklicksdistribution med flera konfigurationslägen (Minimal/Standard/Premium)
+- **Avancerade funktioner**: Red teaming-säkerhetsvalidering, ramverk för agentevaluering, kostnadsoptimering och felsökningsguider
+- **Verklig affärskontext**: Kundsupportfall för detaljhandel med filuppladdningar, sökintegration och dynamisk skalning
 
-- **Fullständig arkitektur**: Multi-agent-system med specialiserade kundtjänst- och lagerhanteringsagenter
-- **Produktionsinfrastruktur**: Multi-region Azure OpenAI-distributioner, AI Search, Container Apps och omfattande övervakning
-- **Klar att distribuera ARM-mall**: Ett-klicksdistribution med flera konfigurationslägen (Minimal/Standard/Premium)
-- **Avancerade funktioner**: Red teaming-säkerhetsvalidering, agentutvärderingsramverk, kostnadsoptimering och felsökningsguider
-- **Verklig affärskontext**: Kundtjänstfall för återförsäljare med filuppladdningar, sökintegration och dynamisk skalning
-
-**Teknologier**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
+**Tekniker**: Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
 
 **Komplexitet**: ⭐⭐⭐⭐ (Avancerad - Produktionsklar för företag)
 
-**Perfekt för**: AI-utvecklare, lösningsarkitekter och team som bygger produktionssystem med flera agenter
+**Perfekt för**: AI-utvecklare, lösningsarkitekter och team som bygger produktionsklara multi-agent-system
 
-**Komma igång snabbt**: Distribuera hela lösningen på under 30 minuter med den inkluderade ARM-mallen med `./deploy.sh -g myResourceGroup`
+**Snabbstart**: Distribuera hela lösningen på under 30 minuter med den medföljande ARM-mallen med `./deploy.sh -g myResourceGroup`
 
-## 📋 Anvisningar för användning
+## 📋 Användarinstruktioner
 
 ### Förutsättningar
 
 Innan du kör något exempel:
-- ✅ Azure-prenumeration med Owner- eller Contributor-behörighet
+- ✅ Azure-prenumeration med Ägare- eller Bidragsgivare-behörighet
 - ✅ Azure Developer CLI installerad ([Installationsguide](../docs/chapter-01-foundation/installation.md))
-- ✅ Docker Desktop igång (för containerexempel)
-- ✅ Lämpliga Azure-kvoter (kontrollera exempelspecifika krav)
+- ✅ Docker Desktop igång (för container-exempel)
+- ✅ Lämpliga Azure-kvoter (kontrollera krav för varje exempel)
 
-> **💰 Kostnadsvarning:** Alla exempel skapar riktiga Azure-resurser som medför kostnader. Se individuella README-filer för kostnadsuppskattningar. Kom ihåg att köra `azd down` när du är klar för att undvika löpande kostnader.
+> **💰 Kostnadsvarning:** Alla exempel skapar riktiga Azure-resurser som medför kostnader. Se respektive README-filer för kostnadsuppskattningar. Kom ihåg att köra `azd down` när du är klar för att undvika fortsatt debitering.
 
 ### Köra exempel lokalt
 
@@ -305,7 +304,7 @@ Innan du kör något exempel:
    cd examples/simple-web-app
    ```
 
-2. **Initiera AZD-miljön**
+2. **Initiera AZD-miljö**
    ```bash
    # Initiera med befintlig mall
    azd init
@@ -316,7 +315,7 @@ Innan du kör något exempel:
 
 3. **Konfigurera miljön**
    ```bash
-   # Ange nödvändiga variabler
+   # Sätt nödvändiga variabler
    azd env set AZURE_LOCATION eastus
    azd env set AZURE_SUBSCRIPTION_ID your-subscription-id
    ```
@@ -329,28 +328,28 @@ Innan du kör något exempel:
 
 5. **Verifiera distributionen**
    ```bash
-   # Hämta tjänstens endpunkter
+   # Hämta tjänstens slutpunkter
    azd env get-values
    
-   # Testa endpunkten (exempel)
+   # Testa slutpunkten (exempel)
    curl https://your-app-url.azurecontainer.io/health
    ```
    
-   **Förväntade tecken på framgång:**
+   **Förväntade framgångsindikatorer:**
    - ✅ `azd up` slutförs utan fel
-   - ✅ Tjänstens endpoint returnerar HTTP 200
-   - ✅ Azure Portal visar statusen "Körs"
+   - ✅ Tjänstens slutpunkt returnerar HTTP 200
+   - ✅ Azure-portalen visar status 'Körs'
    - ✅ Application Insights tar emot telemetri
 
-> **⚠️ Problem?** Se [Vanliga problem](../docs/chapter-07-troubleshooting/common-issues.md) för felsökning av distributionen
+> **⚠️ Problem?** Se [Vanliga problem](../docs/chapter-07-troubleshooting/common-issues.md) för felsökning vid distribution
 
-### Anpassa exempel
+### Anpassa exemplen
 
 Varje exempel innehåller:
 - **README.md** - Detaljerade installations- och anpassningsinstruktioner
 - **azure.yaml** - AZD-konfiguration med kommentarer
 - **infra/** - Bicep-mallar med parameterförklaringar
-- **src/** - Exempelapplikationskod
+- **src/** - Exempelkod
 - **scripts/** - Hjälpskript för vanliga uppgifter
 
 ## 🎯 Lärandemål
@@ -358,88 +357,88 @@ Varje exempel innehåller:
 ### Exempelkategorier
 
 #### **Grundläggande distributioner**
-- Enkel-tjänst-applikationer
+- En-tjänst-applikationer
 - Enkla infrastrukturmönster
 - Grundläggande konfigurationshantering
-- Kostnadseffektiva utvecklingsupplägg
+- Kostnadseffektiva utvecklingsmiljöer
 
 #### **Avancerade scenarier**
-- Multi-tjänst-arkitekturer
+- Arkitekturer med flera tjänster
 - Komplexa nätverkskonfigurationer
-- Databasintegrationsmönster
-- Säkerhets- och efterlevnadsimplementeringar
+- Mönster för databasintegration
+- Säkerhets- och regelefterlevnadsimplementationer
 
-#### **Produktionsklara mönster**
-- Konfigurationer för hög tillgänglighet
+#### **Mönster redo för produktion**
+- Hög tillgänglighet-konfigurationer
 - Övervakning och observabilitet
 - CI/CD-integration
-- Upplägg för katastrofåterställning
+- Återhämtningslösningar vid katastrof
 
 ## 📖 Exempelbeskrivningar
 
 ### Enkel webbapp - Node.js Express
-**Teknologier**: Node.js, Express, MongoDB, Container Apps  
+**Tekniker**: Node.js, Express, MongoDB, Container Apps  
 **Komplexitet**: Nybörjare  
-**Koncept**: Enkel distribution, REST API, NoSQL-databasintegration
+**Koncept**: Grundläggande distribution, REST-API, NoSQL-databasintegration
 
 ### Statisk webbplats - React SPA
-**Teknologier**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
+**Tekniker**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
 **Komplexitet**: Nybörjare  
-**Koncept**: Statisk hosting, serverlös backend, modern webbfrontendutveckling
+**Koncept**: Statisk hosting, serverlös backend, modern webbutveckling
 
 ### Container-app - Python Flask
-**Teknologier**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
+**Tekniker**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
 **Komplexitet**: Nybörjare  
-**Koncept**: Containerisering, REST API, skala-till-noll, hälsokontroller, övervakning  
+**Koncept**: Containerisering, REST-API, scale-to-zero, health probes, övervakning  
 **Plats**: [Lokalt exempel](../../../examples/container-app/simple-flask-api)
 
 ### Container-app - Mikrotjänstarkitektur
-**Teknologier**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
+**Tekniker**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
 **Komplexitet**: Avancerad  
-**Koncept**: Multi-tjänst-arkitektur, tjänstkommunikation, meddelandeköning, distribuerad spårning  
+**Koncept**: Arkitektur med flera tjänster, tjänstkommunikation, meddelandeköer, distribuerad spårning  
 **Plats**: [Lokalt exempel](../../../examples/container-app/microservices)
 
 ### Databasapp - C# med Azure SQL
-**Teknologier**: C# ASP.NET Core, Azure SQL Database, App Service  
-**Komplexitet**: Mellannivå  
+**Tekniker**: C# ASP.NET Core, Azure SQL Database, App Service  
+**Komplexitet**: Medel  
 **Koncept**: Entity Framework, databasanslutningar, web API-utveckling
 
 ### Serverlös funktion - Python Azure Functions
-**Teknologier**: Python, Azure Functions, Cosmos DB, Static Web Apps  
-**Komplexitet**: Mellannivå  
-**Koncept**: Händelsestyrd arkitektur, serverlös databehandling, fullstackutveckling
+**Tekniker**: Python, Azure Functions, Cosmos DB, Static Web Apps  
+**Komplexitet**: Medel  
+**Koncept**: Händelsestyrd arkitektur, serverlös databehandling, fullstack-utveckling
 
 ### Mikrotjänster - Java Spring Boot
-**Teknologier**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
-**Komplexitet**: Mellannivå  
-**Koncept**: Mikrotjänstkommunikation, distribuerade system, företagsmönster
+**Tekniker**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
+**Komplexitet**: Medel  
+**Koncept**: Tjänstkommunikation, distribuerade system, företagsmönster
 
 ### Microsoft Foundry-exempel
 
-#### Azure OpenAI Chattapp
-**Teknologier**: Azure OpenAI, Cognitive Search, App Service  
-**Komplexitet**: Mellannivå  
+#### Microsoft Foundry Models Chatt-app
+**Tekniker**: Microsoft Foundry Models, Cognitive Search, App Service  
+**Komplexitet**: Medel  
 **Koncept**: RAG-arkitektur, vektorsökning, LLM-integration
 
 #### AI-dokumentbearbetning
-**Teknologier**: Azure AI Document Intelligence, Storage, Functions  
-**Komplexitet**: Mellannivå  
+**Tekniker**: Azure AI Document Intelligence, Storage, Functions  
+**Komplexitet**: Medel  
 **Koncept**: Dokumentanalys, OCR, datautvinning
 
 #### Maskininlärningspipeline
-**Teknologier**: Azure ML, MLOps, Container Registry  
+**Tekniker**: Azure ML, MLOps, Container Registry  
 **Komplexitet**: Avancerad  
-**Koncept**: Modellträning, deploymentspipelines, övervakning
+**Koncept**: Modellträning, distributionspipelines, övervakning
 
 ## 🛠 Konfigurationsexempel
 
-Katalogen `configurations/` innehåller återanvändbara komponenter:
+Mappen `configurations/` innehåller återanvändbara komponenter:
 
 ### Miljökonfigurationer
 - Utvecklingsmiljöinställningar
 - Staging-miljökonfigurationer
 - Produktionsklara konfigurationer
-- Multi-region-distributionsupplägg
+- Distribueringsinställningar för flera regioner
 
 ### Bicep-moduler
 - Återanvändbara infrastrukturkomponenter
@@ -448,28 +447,28 @@ Katalogen `configurations/` innehåller återanvändbara komponenter:
 - Kostnadsoptimerade konfigurationer
 
 ### Hjälpskript
-- Automatisering av miljöinställning
-- Databas-migrationsskript
+- Automatisering av miljöuppsättning
+- Databas-migreringsskript
 - Verktyg för validering av distribution
-- Kostnadsövervakningsverktyg
+- Verktyg för kostnadsövervakning
 
 ## 🔧 Anpassningsguide
 
 ### Anpassa exempel för ditt användningsfall
 
 1. **Granska förutsättningar**
-   - Kontrollera Azure-tjänstkrav
+   - Kontrollera Azure-tjänsternas krav
    - Verifiera prenumerationsgränser
-   - Förstå kostnadsimplikationer
+   - Förstå kostnadsimplikationerna
 
-2. **Ändra konfiguration**
-   - Uppdatera `azure.yaml` tjänstdefinitioner
+2. **Ändra konfigurationen**
+   - Uppdatera service-definitionerna i `azure.yaml`
    - Anpassa Bicep-mallar
    - Justera miljövariabler
 
 3. **Testa noggrant**
-   - Distribuera till utvecklingsmiljö först
-   - Verifiera funktionalitet
+   - Distribuera till utvecklingsmiljön först
+   - Validera funktionalitet
    - Testa skalning och prestanda
 
 4. **Säkerhetsgranskning**
@@ -480,46 +479,46 @@ Katalogen `configurations/` innehåller återanvändbara komponenter:
 ## 📊 Jämförelsematris
 
 | Exempel | Tjänster | Databas | Autentisering | Övervakning | Komplexitet |
-|---------|----------|---------|---------------|-------------|------------|
-| **Azure OpenAI Chat** (Lokal) | 2 | ❌ | Key Vault | Fullständig | ⭐⭐ |
-| **Python Flask API** (Lokal) | 1 | ❌ | Grundläggande | Fullständig | ⭐ |
-| **Microservices** (Lokal) | 5+ | ✅ | Företag | Avancerad | ⭐⭐⭐⭐ |
+|---------|----------|----------|---------------|------------|------------|
+| **Microsoft Foundry Models Chat** (Lokalt) | 2 | ❌ | Key Vault | Fullständig | ⭐⭐ |
+| **Python Flask API** (Lokalt) | 1 | ❌ | Grundläggande | Fullständig | ⭐ |
+| **Microservices** (Lokalt) | 5+ | ✅ | Företag | Avancerad | ⭐⭐⭐⭐ |
 | Node.js Express Todo | 2 | ✅ | Grundläggande | Grundläggande | ⭐ |
 | React SPA + Functions | 3 | ✅ | Grundläggande | Fullständig | ⭐ |
 | Python Flask Container | 2 | ❌ | Grundläggande | Fullständig | ⭐ |
 | C# Web API + SQL | 2 | ✅ | Fullständig | Fullständig | ⭐⭐ |
 | Python Functions + SPA | 3 | ✅ | Fullständig | Fullständig | ⭐⭐ |
 | Java Microservices | 5+ | ✅ | Fullständig | Fullständig | ⭐⭐ |
-| Azure OpenAI Chat | 3 | ✅ | Fullständig | Fullständig | ⭐⭐⭐ |
+| Microsoft Foundry Models Chat | 3 | ✅ | Fullständig | Fullständig | ⭐⭐⭐ |
 | AI Document Processing | 2 | ❌ | Grundläggande | Fullständig | ⭐⭐ |
 | ML Pipeline | 4+ | ✅ | Fullständig | Fullständig | ⭐⭐⭐⭐ |
-| **Retail Multi-Agent** (Lokal) | **8+** | **✅** | **Företag** | **Avancerad** | **⭐⭐⭐⭐** |
+| **Retail Multi-Agent** (Lokalt) | **8+** | **✅** | **Företag** | **Avancerad** | **⭐⭐⭐⭐** |
 
-## 🎓 Lärandeväg
+## 🎓 Lärandespår
 
 ### Rekommenderad ordning
 
-1. **Börja med Enkel webbapp**
+1. **Börja med enkel webbapp**
    - Lär dig grundläggande AZD-koncept
-   - Förstå distributionsflödet
-   - Öva på miljöhantering
+   - Förstå distributionsarbetsflödet
+   - Öva miljöhantering
 
-2. **Prova Statisk webbplats**
+2. **Prova statisk webbplats**
    - Utforska olika hostingalternativ
    - Lär dig om CDN-integration
    - Förstå DNS-konfiguration
 
-3. **Gå vidare till Container-app**
-   - Lär dig containeriseringskoncept
+3. **Gå vidare till Container App**
+   - Lär dig containeriseringsgrunder
    - Förstå skalningskoncept
    - Öva med Docker
 
 4. **Lägg till databasintegration**
    - Lär dig databasprovisionering
-   - Förstå anslutningssträngar
-   - Öva på hantering av hemligheter
+   - Förstå connection strings
+   - Öva hantering av hemligheter
 
-5. **Utforska serverlöst**
+5. **Utforska serverless**
    - Förstå händelsestyrd arkitektur
    - Lär dig om triggers och bindings
    - Öva med API:er
@@ -527,44 +526,44 @@ Katalogen `configurations/` innehåller återanvändbara komponenter:
 6. **Bygg mikrotjänster**
    - Lär dig tjänstkommunikation
    - Förstå distribuerade system
-   - Öva på komplexa distributioner
+   - Öva komplexa distributioner
 
 ## 🔍 Hitta rätt exempel
 
-### Efter teknikstack
-- **Container Apps**: [Python Flask API (Lokal)](../../../examples/container-app/simple-flask-api), [Microservices (Lokal)](../../../examples/container-app/microservices), Java Microservices
-- **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Lokal)](../../../examples/container-app/microservices)
-- **Python**: [Python Flask API (Lokal)](../../../examples/container-app/simple-flask-api), [Microservices Product Service (Lokal)](../../../examples/container-app/microservices), Python Functions + SPA
-- **C#**: [Microservices Order Service (Lokal)](../../../examples/container-app/microservices), C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
-- **Go**: [Microservices User Service (Lokal)](../../../examples/container-app/microservices)
+### Efter teknologistack
+- **Container Apps**: [Python Flask API (Lokalt)](../../../examples/container-app/simple-flask-api), [Microservices (Lokalt)](../../../examples/container-app/microservices), Java Microservices
+- **Node.js**: Node.js Express Todo-app, [Microservices API Gateway (Lokalt)](../../../examples/container-app/microservices)
+- **Python**: [Python Flask API (Lokalt)](../../../examples/container-app/simple-flask-api), [Microservices Product Service (Lokalt)](../../../examples/container-app/microservices), Python Functions + SPA
+- **C#**: [Microservices Order Service (Lokalt)](../../../examples/container-app/microservices), C# Web API + SQL Database, Microsoft Foundry Models Chat App, ML Pipeline
+- **Go**: [Microservices User Service (Lokalt)](../../../examples/container-app/microservices)
 - **Java**: Java Spring Boot Microservices
 - **React**: React SPA + Functions
-- **Containers**: [Python Flask (Lokal)](../../../examples/container-app/simple-flask-api), [Microservices (Lokal)](../../../examples/container-app/microservices), Java Microservices
-- **Databaser**: [Microservices (Lokal)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
-- **AI/ML**: **[Azure OpenAI Chat (Lokal)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Containers**: [Python Flask (Lokalt)](../../../examples/container-app/simple-flask-api), [Microservices (Lokalt)](../../../examples/container-app/microservices), Java Microservices
+- **Databaser**: [Microservices (Lokalt)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **AI/ML**: **[Microsoft Foundry Models Chat (Lokalt)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
 - **Multi-Agent Systems**: **Retail Multi-Agent Solution**
-- **OpenAI Integration**: **[Azure OpenAI Chat (Lokal)](../../../examples/azure-openai-chat)**, Retail Multi-Agent Solution
-- **Enterprise Production**: [Microservices (Lokal)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
+- **OpenAI Integration**: **[Microsoft Foundry Models Chat (Lokalt)](../../../examples/azure-openai-chat)**, Retail Multi-Agent Solution
+- **Enterprise Production**: [Microservices (Lokalt)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
-### Efter arkitekturmönster
-- **Enkel REST API**: [Python Flask API (Lokal)](../../../examples/container-app/simple-flask-api)
+### Efter arkitekturpattern
+- **Enkel REST API**: [Python Flask API (Lokalt)](../../../examples/container-app/simple-flask-api)
 - **Monolitisk**: Node.js Express Todo, C# Web API + SQL
-- **Statisk + Serverless**: React SPA + Functions, Python Functions + SPA
-- **Mikrotjänster**: [Production Microservices (Lokal)](../../../examples/container-app/microservices), Java Spring Boot Microservices
-- **Containeriserat**: [Python Flask (Lokal)](../../../examples/container-app/simple-flask-api), [Microservices (Lokal)](../../../examples/container-app/microservices)
-- **AI-driven**: **[Azure OpenAI Chat (Lokal)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
-- **Multi-Agent-arkitektur**: **Retail Multi-Agent Solution**
-- **Företags multi-tjänst**: [Microservices (Lokal)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
+- **Statisk + serverless**: React SPA + Functions, Python Functions + SPA
+- **Mikrotjänster**: [Production Microservices (Lokalt)](../../../examples/container-app/microservices), Java Spring Boot Microservices
+- **Containeriserad**: [Python Flask (Lokalt)](../../../examples/container-app/simple-flask-api), [Microservices (Lokalt)](../../../examples/container-app/microservices)
+- **AI-driven**: **[Microsoft Foundry Models Chat (Lokalt)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Multi-agent-arkitektur**: **Retail Multi-Agent Solution**
+- **Företags-multi-tjänst**: [Microservices (Lokalt)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
 ### Efter komplexitetsnivå
-- **Nybörjare**: [Python Flask API (Lokal)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions
-- **Mellannivå**: **[Azure OpenAI Chat (Lokal)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
+- **Nybörjare**: [Python Flask API (Lokalt)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions
+- **Medel**: **[Microsoft Foundry Models Chat (Lokalt)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Microsoft Foundry Models Chat App, AI Document Processing
 - **Avancerad**: ML Pipeline
-- **Produktionsklar för företag**: [Microservices (Lokal)](../../../examples/container-app/microservices) (Multi-tjänst med meddelandeköning), **Retail Multi-Agent Solution** (Fullständigt multi-agent-system med ARM-mall för distribution)
+- **Produktionsklar för företag**: [Microservices (Lokalt)](../../../examples/container-app/microservices) (Flera tjänster med meddelandeköning), **Retail Multi-Agent Solution** (Komplett multi-agent-system med ARM-mall för distribution)
 
 ## 📚 Ytterligare resurser
 
-### Dokumentationslänkar
+### Dokumentlänkar
 - [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
 - [Microsoft Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
 - [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
@@ -576,10 +575,10 @@ Katalogen `configurations/` innehåller återanvändbara komponenter:
 - [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
 - [Todo App with C# and Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
 - [Todo App with Python and MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
-- [Todo-app med Node.js och PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
-- [React-webbapp med C#-API](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
-- [Azure Container Apps-jobb](https://github.com/Azure-Samples/container-apps-jobs)
-- [Azure Functions med Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
+- [Todo App with Node.js and PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [React Web App with C# API](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Azure Container Apps Job](https://github.com/Azure-Samples/container-apps-jobs)
+- [Azure Functions with Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
 ### Bästa praxis
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
@@ -587,16 +586,16 @@ Katalogen `configurations/` innehåller återanvändbara komponenter:
 
 ## 🤝 Bidra med exempel
 
-Har du ett användbart exempel att dela? Vi välkomnar ditt bidrag!
+Har du ett användbart exempel att dela? Vi välkomnar bidrag!
 
-### Riktlinjer för inlämning
+### Inlämningsriktlinjer
 1. Följ den etablerade katalogstrukturen
-2. Inkludera en utförlig README.md
-3. Lägg till kommentarer i konfigurationsfilerna
+2. Inkludera en omfattande README.md
+3. Lägg till kommentarer i konfigurationsfiler
 4. Testa noggrant innan du skickar in
 5. Bifoga kostnadsuppskattningar och förutsättningar
 
-### Struktur för exempelmall
+### Exempel på mallstruktur
 ```
 example-name/
 ├── README.md           # Detailed setup instructions
@@ -612,46 +611,46 @@ example-name/
 
 ---
 
-**Proffstips**: Börja med det enklaste exemplet som matchar din teknikstack, och arbeta dig sedan gradvis upp till mer komplexa scenarier. Varje exempel bygger på koncept från de tidigare!
+**Proffstips**: Börja med det enklaste exemplet som matchar din teknologistack, och arbeta sedan gradvis upp till mer komplexa scenarier. Varje exempel bygger på koncept från de föregående!
 
-## 🚀 Redo att börja?
+## 🚀 Redo att komma igång?
 
 ### Din inlärningsväg
 
 1. **Helt nybörjare?** → Börja med [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 min)
 2. **Har du grundläggande AZD-kunskaper?** → Prova [Microservices](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 min)
-3. **Bygger du AI-appar?** → Starta med [Azure OpenAI Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 min) eller utforska [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ timmar)
-4. **Behöver du en specifik teknikstack?** → Använd avsnittet [Hitta rätt exempel](../../../examples) ovan
+3. **Bygger du AI-appar?** → Börja med [Microsoft Foundry Models Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 min) eller utforska [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ timmar)
+4. **Behöver du en viss teknologistack?** → Använd avsnittet [Finding the Right Example](../../../examples) ovan
 
 ### Nästa steg
 
 - ✅ Granska [Förutsättningar](../../../examples) ovan
-- ✅ Välj ett exempel som matchar din kunskapsnivå (se [Komplexitetslegend](../../../examples))
-- ✅ Läs exempelns README noggrant innan du distribuerar
-- ✅ Ställ en påminnelse att köra `azd down` efter testning
-- ✅ Dela din erfarenhet via GitHub Issues eller Discussions
+- ✅ Välj ett exempel som matchar din kunskapsnivå (se [Complexity Legend](../../../examples))
+- ✅ Läs exemplets README noggrant innan distribution
+- ✅ Sätt en påminnelse att köra `azd down` efter testning
+- ✅ Dela dina erfarenheter via GitHub Issues eller Discussions
 
-### Behöver du hjälp?
+### Behöver hjälp?
 
 - 📖 [FAQ](../resources/faq.md) - Vanliga frågor besvarade
-- 🐛 [Felsökningsguide](../docs/chapter-07-troubleshooting/common-issues.md) - Åtgärda distribueringsproblem
+- 🐛 [Troubleshooting Guide](../docs/chapter-07-troubleshooting/common-issues.md) - Åtgärda distributionsproblem
 - 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Fråga communityn
-- 📚 [Studieguide](../resources/study-guide.md) - Förstärk ditt lärande
+- 📚 [Study Guide](../resources/study-guide.md) - Fördjupa din inlärning
 
 ---
 
 **Navigering**
 - **📚 Kursens startsida**: [AZD For Beginners](../README.md)
-- **📖 Studiematerial**: [Studieguide](../resources/study-guide.md) | [Fusklista](../resources/cheat-sheet.md) | [Ordlista](../resources/glossary.md)
-- **🔧 Resurser**: [FAQ](../resources/faq.md) | [Felsökning](../docs/chapter-07-troubleshooting/common-issues.md)
+- **📖 Studiematerial**: [Study Guide](../resources/study-guide.md) | [Cheat Sheet](../resources/cheat-sheet.md) | [Glossary](../resources/glossary.md)
+- **🔧 Resurser**: [FAQ](../resources/faq.md) | [Troubleshooting](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ---
 
-*Senast uppdaterad: november 2025 | [Rapportera problem](https://github.com/microsoft/AZD-for-beginners/issues) | [Bidra med exempel](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
+*Senast uppdaterad: November 2025 | [Rapportera problem](https://github.com/microsoft/AZD-for-beginners/issues) | [Bidra med exempel](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Ansvarsfriskrivning**:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet bör du vara medveten om att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell, mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+Ansvarsfriskrivning:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, vänligen observera att automatiska översättningar kan innehålla fel eller brister. Originaldokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

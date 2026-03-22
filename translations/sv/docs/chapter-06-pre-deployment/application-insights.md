@@ -1,10 +1,10 @@
-# Application Insights Integration with AZD
+# Application Insights-integration med AZD
 
-⏱️ **Beräknad tid**: 40-50 minuter | 💰 **Kostnadspåverkan**: ~$5-15/månad | ⭐ **Komplexitet**: Intermediate
+⏱️ **Beräknad tid**: 40-50 minutes | 💰 **Kostnadspåverkan**: ~$5-15/månad | ⭐ **Komplexitet**: Intermediate
 
 **📚 Lärandespår:**
 - ← Föregående: [Förkontroller](preflight-checks.md) - Validering före distribution
-- 🎯 **Du är här**: Application Insights-integration (Övervakning, telemetri, felsökning)
+- 🎯 **Du är här**: Application Insights Integration (Övervakning, telemetri, felsökning)
 - → Nästa: [Distributionsguide](../chapter-04-infrastructure/deployment-guide.md) - Distribuera till Azure
 - 🏠 [Kursens startsida](../../README.md)
 
@@ -16,11 +16,11 @@ Genom att slutföra den här lektionen kommer du att:
 - Integrera **Application Insights** i AZD-projekt automatiskt
 - Konfigurera **distribuerad spårning** för mikrotjänster
 - Implementera **anpassad telemetri** (metrik, händelser, beroenden)
-- Ställa in **live-metriker** för realtidsövervakning
-- Skapa **larm och instrumentpaneler** från AZD-distributioner
-- Felsöka produktionsproblem med **telemetriförfrågningar**
+- Ställa in **live-metrik** för realtidsövervakning
+- Skapa **aviseringar och instrumentpaneler** från AZD-distributioner
+- Felsöka produktionsproblem med **telemetrifrågor**
 - Optimera **kostnader och sampling**-strategier
-- Övervaka **AI/LLM-applikationer** (tokens, latens, kostnader)
+- Övervaka **AI/LLM-applikationer** (tokenanvändning, latens, kostnader)
 
 ## Varför Application Insights med AZD är viktigt
 
@@ -47,34 +47,34 @@ Genom att slutföra den här lektionen kommer du att:
 ✅ AZD provisions everything automatically
 ```
 
-**Analogi**: Application Insights är som att ha en "svart låda" flygregistrator + en instrumentpanel i cockpit för din applikation. Du ser allt som händer i realtid och kan spela upp varje incident.
+**Liknelse**: Application Insights är som att ha en "black box" flygplansinspelare + instrumentbräda i cockpit för din applikation. Du ser allt som händer i realtid och kan spela upp varje incident.
 
 ---
 
 ## Arkitekturöversikt
 
-### Application Insights i AZD-arkitektur
+### Application Insights i AZD-arkitekturen
 
 ```mermaid
 graph TB
     User[Användare/Klient]
-    App1[Containerapp 1<br/>API-gateway]
-    App2[Containerapp 2<br/>Produkttjänst]
-    App3[Containerapp 3<br/>Ordertjänst]
+    App1[Container-app 1<br/>API-gateway]
+    App2[Container-app 2<br/>Produkttjänst]
+    App3[Container-app 3<br/>Beställningstjänst]
     
-    AppInsights[Applikationsinsikter<br/>Telemetri-hubb]
+    AppInsights[Application Insights<br/>Telemetri-hubb]
     LogAnalytics[(Logganalys<br/>Arbetsyta)]
     
-    Portal[Azure-portalen<br/>Instrumentpaneler & Larm]
+    Portal[Azure Portal<br/>Instrumentpaneler & Larm]
     Query[Kusto-frågor<br/>Anpassad analys]
     
     User --> App1
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|Auto-instrumentering| AppInsights
-    App2 -.->|Auto-instrumentering| AppInsights
-    App3 -.->|Auto-instrumentering| AppInsights
+    App1 -.->|Automatisk instrumentering| AppInsights
+    App2 -.->|Automatisk instrumentering| AppInsights
+    App3 -.->|Automatisk instrumentering| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -85,15 +85,15 @@ graph TB
 ```
 ### Vad som övervakas automatiskt
 
-| Telemetrityp | Vad det fångar | Användningsfall |
+| Telemetrityp | Vad den fångar | Användningsfall |
 |----------------|------------------|----------|
-| **Requests** | HTTP-förfrågningar, statuskoder, varaktighet | Övervakning av API-prestanda |
-| **Dependencies** | Externa anrop (DB, API:er, lagring) | Identifiera flaskhalsar |
-| **Exceptions** | Ohanterade fel med stacktraces | Felsökning av fel |
-| **Custom Events** | Affärshändelser (signup, purchase) | Analys och funnels |
-| **Metrics** | Prestandaräknare, anpassade metrik | Kapacitetsplanering |
-| **Traces** | Loggmeddelanden med svårighetsgrad | Felsökning och revision |
-| **Availability** | Drifttid och svarstidstester | Övervakning av SLA |
+| **Förfrågningar** | HTTP-förfrågningar, statuskoder, varaktighet | Övervakning av API-prestanda |
+| **Beroenden** | Externa anrop (DB, API:er, lagring) | Identifiera flaskhalsar |
+| **Undantag** | Ohåndterade fel med stacktraces | Felsökning av fel |
+| **Anpassade händelser** | Affärshändelser (registrering, köp) | Analys och konverteringstrattar |
+| **Metrik** | Prestandaräknare, anpassade metrikvärden | Kapacitetsplanering |
+| **Spår** | Loggmeddelanden med allvarlighetsgrad | Felsökning och revision |
+| **Tillgänglighet** | Tillgänglighet och svarstidstester | SLA-övervakning |
 
 ---
 
@@ -113,25 +113,25 @@ az --version
 
 ### Azure-krav
 
-- Aktivt Azure-abonnemang
+- Aktiv Azure-prenumeration
 - Behörigheter att skapa:
   - Application Insights-resurser
   - Log Analytics-arbetsytor
   - Container Apps
   - Resursgrupper
 
-### Kunskapsförutsättningar
+### Förkunskaper
 
-Du bör ha slutfört:
-- [AZD-grunderna](../chapter-01-foundation/azd-basics.md) - Kärnkoncept för AZD
-- [Konfiguration](../chapter-03-configuration/configuration.md) - Miljöinställningar
+Du bör ha genomfört:
+- [AZD-grunderna](../chapter-01-foundation/azd-basics.md) - Kärnkoncept i AZD
+- [Konfiguration](../chapter-03-configuration/configuration.md) - Miljöinställning
 - [Första projektet](../chapter-01-foundation/first-project.md) - Grundläggande distribution
 
 ---
 
 ## Lektion 1: Automatisk Application Insights med AZD
 
-### Hur AZD tillhandahåller Application Insights
+### Hur AZD provisionerar Application Insights
 
 AZD skapar och konfigurerar automatiskt Application Insights när du distribuerar. Låt oss se hur det fungerar.
 
@@ -156,7 +156,7 @@ monitored-app/
 
 ### Steg 1: Konfigurera AZD (azure.yaml)
 
-**Fil: `azure.yaml`**
+**File: `azure.yaml`**
 
 ```yaml
 name: monitored-app
@@ -172,13 +172,13 @@ services:
 # AZD automatically provisions monitoring!
 ```
 
-**Det var allt!** AZD skapar Application Insights som standard. Ingen ytterligare konfiguration behövs för grundläggande övervakning.
+**Det är allt!** AZD skapar Application Insights som standard. Ingen extra konfiguration krävs för grundläggande övervakning.
 
 ---
 
 ### Steg 2: Övervakningsinfrastruktur (Bicep)
 
-**Fil: `infra/core/monitoring.bicep`**
+**File: `infra/core/monitoring.bicep`**
 
 ```bicep
 param logAnalyticsName string
@@ -229,7 +229,7 @@ output applicationInsightsName string = applicationInsights.name
 
 ### Steg 3: Anslut Container App till Application Insights
 
-**Fil: `infra/app/api.bicep`**
+**File: `infra/app/api.bicep`**
 
 ```bicep
 param name string
@@ -287,7 +287,7 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ### Steg 4: Applikationskod med telemetri
 
-**Fil: `src/app.py`**
+**File: `src/app.py`**
 
 ```python
 from flask import Flask, request, jsonify
@@ -300,7 +300,7 @@ import os
 
 app = Flask(__name__)
 
-# Hämta Application Insights anslutningssträng
+# Hämta Application Insights-anslutningssträng
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
@@ -364,7 +364,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-**Fil: `src/requirements.txt`**
+**File: `src/requirements.txt`**
 
 ```txt
 Flask==3.0.0
@@ -381,7 +381,7 @@ gunicorn==21.2.0
 # Initiera AZD
 azd init
 
-# Distribuera (tilldelar Application Insights automatiskt)
+# Distribuera (tillhandahåller Application Insights automatiskt)
 azd up
 
 # Hämta app-URL
@@ -394,7 +394,7 @@ curl $APP_URL/api/error-test
 curl $APP_URL/api/slow
 ```
 
-**✅ Förväntat utdata:**
+**✅ Förväntad utdata:**
 ```json
 {
   "status": "healthy",
@@ -407,7 +407,7 @@ curl $APP_URL/api/slow
 ### Steg 6: Visa telemetri i Azure-portalen
 
 ```bash
-# Hämta detaljer för Application Insights
+# Hämta detaljer om Application Insights
 azd env get-values | grep APPLICATIONINSIGHTS
 
 # Öppna i Azure-portalen
@@ -417,7 +417,7 @@ az monitor app-insights component show \
   --query "appId" -o tsv
 ```
 
-**Navigera till Azure Portal → Application Insights → Transaction Search**
+**Navigera till Azure-portalen → Application Insights → Transaktionssökning**
 
 Du bör se:
 - ✅ HTTP-förfrågningar med statuskoder
@@ -433,7 +433,7 @@ Du bör se:
 
 Låt oss lägga till anpassad telemetri för affärskritiska händelser.
 
-**Fil: `src/telemetry.py`**
+**File: `src/telemetry.py`**
 
 ```python
 from opencensus.ext.azure import metrics_exporter
@@ -458,7 +458,7 @@ class TelemetryClient:
             print("⚠️ Application Insights connection string not found")
             return
         
-        # Konfigurera loggaren
+        # Konfigurera logg
         self.logger = logging.getLogger(__name__)
         self.logger.addHandler(AzureLogHandler(connection_string=self.connection_string))
         self.logger.setLevel(logging.INFO)
@@ -473,7 +473,7 @@ class TelemetryClient:
         )
         self.view_manager.register_exporter(exporter)
         
-        # Konfigurera spåraren
+        # Konfigurera spårare
         self.tracer = tracer_module.Tracer(
             exporter=AzureExporter(connection_string=self.connection_string)
         )
@@ -520,7 +520,7 @@ telemetry = TelemetryClient()
 
 ### Uppdatera applikationen med anpassade händelser
 
-**Fil: `src/app.py` (förbättrad)**
+**File: `src/app.py` (förbättrad)**
 
 ```python
 from flask import Flask, request, jsonify
@@ -565,7 +565,7 @@ def search():
     
     start_time = time.time()
     
-    # Simulera sökning (skulle vara en verklig databasfråga)
+    # Simulera sökning (skulle vara en riktig databasfråga)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
     duration = (time.time() - start_time) * 1000  # Konvertera till ms
@@ -634,7 +634,7 @@ curl $APP_URL/api/external-call
 
 **Visa i Azure-portalen:**
 
-Navigera till Application Insights → Logs och kör sedan:
+Navigera till Application Insights → Loggar, och kör sedan:
 
 ```kusto
 // View purchase events
@@ -669,9 +669,9 @@ traces
 
 ### Aktivera spårning över tjänster
 
-För mikrotjänster korrelerar Application Insights automatiskt förfrågningar över tjänster.
+För mikrotjänster korrelerar Application Insights automatiskt förfrågningar mellan tjänster.
 
-**Fil: `infra/main.bicep`**
+**File: `infra/main.bicep`**
 
 ```bicep
 targetScope = 'subscription'
@@ -746,7 +746,7 @@ sequenceDiagram
     participant User
     participant Gateway as API-gateway<br/>(Spårnings-ID: abc123)
     participant Product as Produkttjänst<br/>(Föräldra-ID: abc123)
-    participant Order as Ordertjänst<br/>(Föräldra-ID: abc123)
+    participant Order as Beställningstjänst<br/>(Föräldra-ID: abc123)
     participant AppInsights as Application Insights
     
     User->>Gateway: POST /api/checkout
@@ -766,9 +766,9 @@ sequenceDiagram
     Gateway-->>User: Utcheckning slutförd
     Gateway->>AppInsights: Logga svar (Varaktighet: 450ms)
     
-    Note over AppInsights: Korrelation med spårnings-ID
+    Note over AppInsights: Korrelation med Spårnings-ID
 ```
-**Fråga end-to-end-spår:**
+**Kör fråga för end-to-end-spår:**
 
 ```kusto
 // Find complete request flow
@@ -788,11 +788,11 @@ dependencies
 
 ---
 
-## Lektion 4: Live Metrics och realtidsövervakning
+## Lektion 4: Live-metrik och realtidsövervakning
 
-### Aktivera Live Metrics-ström
+### Aktivera ström för live-metrik
 
-Live Metrics ger realtidstelemetri med <1 sekunds latens.
+Live Metrics tillhandahåller realtidstelemetri med <1 sekunds latens.
 
 **Åtkomst till Live Metrics:**
 
@@ -807,40 +807,40 @@ echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME 
 ```
 
 **Vad du ser i realtid:**
-- ✅ Inkommande förfrågningsfrekvens (requests/sec)
+- ✅ Inkommande förfrågningsfrekvens (förfrågningar/sek)
 - ✅ Utgående beroendeanrop
 - ✅ Antal undantag
 - ✅ CPU- och minnesanvändning
-- ✅ Aktiv serverantal
-- ✅ Provtagning av telemetri
+- ✅ Antal aktiva servrar
+- ✅ Provtelemetri
 
 ### Generera belastning för testning
 
 ```bash
-# Generera belastning för att se mätvärden i realtid
+# Generera belastning för att se live-mått
 for i in {1..100}; do
   curl $APP_URL/api/products &
   curl $APP_URL/api/search?q=test$i &
 done
 
-# Övervaka mätvärden i realtid i Azure-portalen
-# Du bör se en kraftig ökning av förfrågningsfrekvensen
+# Titta på live-mått i Azure-portalen
+# Du bör se en topp i antalet förfrågningar
 ```
 
 ---
 
 ## Praktiska övningar
 
-### Övning 1: Ställ in larm ⭐⭐ (Medel)
+### Övning 1: Ställ in aviseringar ⭐⭐ (Medel)
 
-**Mål**: Skapa larm för hög felprocent och långsamma svar.
+**Mål**: Skapa aviseringar för hög felprocent och långsamma svarstider.
 
 **Steg:**
 
-1. **Skapa larm för felprocent:**
+1. **Skapa avisering för felprocent:**
 
 ```bash
-# Hämta resurs-ID för Application Insights
+# Hämta Application Insights-resursens ID
 APPI_ID=$(az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -857,7 +857,7 @@ az monitor metrics alert create \
   --description "Alert when error rate exceeds 10 per 5 minutes"
 ```
 
-2. **Skapa larm för långsamma svar:**
+2. **Skapa avisering för långsamma svar:**
 
 ```bash
 az monitor metrics alert create \
@@ -870,9 +870,9 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **Skapa larm via Bicep (föredras för AZD):**
+3. **Skapa avisering via Bicep (föredras för AZD):**
 
-**Fil: `infra/core/alerts.bicep`**
+**File: `infra/core/alerts.bicep`**
 
 ```bicep
 param applicationInsightsId string
@@ -944,7 +944,7 @@ output errorAlertId string = errorRateAlert.id
 output slowResponseAlertId string = slowResponseAlert.id
 ```
 
-4. **Testa larm:**
+4. **Testa aviseringar:**
 
 ```bash
 # Generera fel
@@ -965,10 +965,10 @@ az monitor metrics alert list \
 ```
 
 **✅ Framgångskriterier:**
-- ✅ Larm skapade framgångsrikt
-- ✅ Larm utlöses när tröskelvärden överskrids
-- ✅ Kan visa larms historik i Azure-portalen
-- ✅ Integrerat med AZD-distribution
+- ✅ Aviseringar skapade framgångsrikt
+- ✅ Aviseringar utlöses när gränsvärden överskrids
+- ✅ Kan visa aviseringens historik i Azure-portalen
+- ✅ Integrerat med AZD-distributionen
 
 **Tid**: 20–25 minuter
 
@@ -982,9 +982,9 @@ az monitor metrics alert list \
 
 1. **Skapa instrumentpanel via Azure-portalen:**
 
-Navigera till: Azure Portal → Dashboards → New Dashboard
+Navigera till: Azure-portalen → Instrumentpaneler → Ny instrumentpanel
 
-2. **Lägg till rutor för nyckelmetrik:**
+2. **Lägg till brickor för nyckelmetrik:**
 
 - Antal förfrågningar (senaste 24 timmarna)
 - Genomsnittlig svarstid
@@ -994,7 +994,7 @@ Navigera till: Azure Portal → Dashboards → New Dashboard
 
 3. **Skapa instrumentpanel via Bicep:**
 
-**Fil: `infra/core/dashboard.bicep`**
+**File: `infra/core/dashboard.bicep`**
 
 ```bicep
 param dashboardName string
@@ -1082,24 +1082,24 @@ azd up
 ```
 
 **✅ Framgångskriterier:**
-- ✅ Instrumentpanelen visar nyckelmetrik
-- ✅ Kan fästas på Azure Portals startsida
+- ✅ Instrumentpanelen visar viktiga metrik
+- ✅ Kan fästas på Azure-portalens startsida
 - ✅ Uppdateras i realtid
-- ✅ Kan distribueras via AZD
+- ✅ Distribuerbar via AZD
 
 **Tid**: 25–30 minuter
 
 ---
 
-### Övning 3: Övervaka AI/LLM-applikation ⭐⭐⭐ (Avancerad)
+### Övning 3: Övervaka AI/LLM-applikation ⭐⭐⭐ (Avancerat)
 
-**Mål**: Spåra Azure OpenAI-användning (tokens, kostnader, latens).
+**Mål**: Spåra användning av Microsoft Foundry Models (tokens, kostnader, latens).
 
 **Steg:**
 
 1. **Skapa AI-övervakningswrapper:**
 
-**Fil: `src/ai_telemetry.py`**
+**File: `src/ai_telemetry.py`**
 
 ```python
 from telemetry import telemetry
@@ -1107,7 +1107,7 @@ from openai import AzureOpenAI
 import time
 
 class MonitoredAzureOpenAI:
-    """Azure OpenAI client with automatic telemetry"""
+    """Microsoft Foundry Models client with automatic telemetry"""
     
     def __init__(self, api_key, endpoint, api_version="2024-02-01"):
         self.client = AzureOpenAI(
@@ -1121,7 +1121,7 @@ class MonitoredAzureOpenAI:
         start_time = time.time()
         
         try:
-            # Anropa Azure OpenAI
+            # Anropa Microsoft Foundry-modeller
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1136,9 +1136,9 @@ class MonitoredAzureOpenAI:
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # Beräkna kostnad (GPT-4-prissättning)
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0,03 per 1 000 token
-            completion_cost = (completion_tokens / 1000) * 0.06  # $0,06 per 1 000 token
+            # Beräkna kostnad (prissättning för gpt-4.1)
+            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0.03 per 1K tokens
+            completion_cost = (completion_tokens / 1000) * 0.06  # $0.06 per 1K tokens
             total_cost = prompt_cost + completion_cost
             
             # Spåra anpassad händelse
@@ -1204,7 +1204,7 @@ def chat():
     
     # Anropa med automatisk övervakning
     response = openai_client.chat_completion(
-        model='gpt-4',
+        model='gpt-4.1',
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1216,7 +1216,7 @@ def chat():
     })
 ```
 
-3. **Fråga AI-metriker:**
+3. **Fråga AI-metrik:**
 
 ```kusto
 // Total AI spend over time
@@ -1252,9 +1252,9 @@ traces
 
 **✅ Framgångskriterier:**
 - ✅ Varje OpenAI-anrop spåras automatiskt
-- ✅ Token-användning och kostnader syns
-- ✅ Latens övervakas
-- ✅ Kan ställa in budgetlarm
+- ✅ Tokenanvändning och kostnader synliga
+- ✅ Latens övervakad
+- ✅ Kan skapa budgetaviseringar
 
 **Tid**: 35–45 minuter
 
@@ -1262,9 +1262,9 @@ traces
 
 ## Kostnadsoptimering
 
-### Provtagningstrategier
+### Sampling-strategier
 
-Kontrollera kostnader genom att provta telemetri:
+Kontrollera kostnader genom att sampla telemetri:
 
 ```python
 from opencensus.trace.samplers import ProbabilitySampler
@@ -1272,7 +1272,7 @@ from opencensus.trace.samplers import ProbabilitySampler
 # Utveckling: 100% provtagning
 sampler = ProbabilitySampler(rate=1.0)
 
-# Produktion: 10% provtagning (minskar kostnaderna med 90%)
+# Produktion: 10% provtagning (minska kostnaderna med 90%)
 sampler = ProbabilitySampler(rate=0.1)
 
 # Adaptiv provtagning (anpassar sig automatiskt)
@@ -1291,7 +1291,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 }
 ```
 
-### Databehållning
+### Dataretention
 
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
@@ -1303,40 +1303,40 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 }
 ```
 
-### Månadsvisa kostnadsuppskattningar
+### Månatliga kostnadsuppskattningar
 
-| Datavolym | Retentionstid | Månadskostnad |
+| Datavolym | Behållning | Månadskostnad |
 |-------------|-----------|--------------|
-| 1 GB/månad | 30 dagar | ~$2-5 |
-| 5 GB/månad | 30 dagar | ~$10-15 |
-| 10 GB/månad | 90 dagar | ~$25-40 |
-| 50 GB/månad | 90 dagar | ~$100-150 |
+| 1 GB/månad | 30 dagar | ~$2–5 |
+| 5 GB/månad | 30 dagar | ~$10–15 |
+| 10 GB/månad | 90 dagar | ~$25–40 |
+| 50 GB/månad | 90 dagar | ~$100–150 |
 
 **Gratisnivå**: 5 GB/månad ingår
 
 ---
 
-## Kunskapskontroll
+## Kunskapskontrollpunkt
 
 ### 1. Grundläggande integration ✓
 
 Testa din förståelse:
 
-- [ ] **Q1**: Hur tillhandahåller AZD Application Insights?
+- [ ] **Q1**: Hur provisionerar AZD Application Insights?
   - **A**: Automatiskt via Bicep-mallar i `infra/core/monitoring.bicep`
 
 - [ ] **Q2**: Vilken miljövariabel aktiverar Application Insights?
   - **A**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
 - [ ] **Q3**: Vilka är de tre huvudsakliga telemetrityperna?
-  - **A**: Requests (HTTP-anrop), Dependencies (externa anrop), Exceptions (fel)
+  - **A**: Förfrågningar (HTTP-anrop), Beroenden (externa anrop), Undantag (fel)
 
 **Praktisk verifiering:**
 ```bash
 # Kontrollera om Application Insights är konfigurerat
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Verifiera att telemetridata skickas
+# Verifiera att telemetri skickas
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1350,7 +1350,7 @@ az monitor app-insights metrics show \
 Testa din förståelse:
 
 - [ ] **Q1**: Hur spårar du anpassade affärshändelser?
-  - **A**: Använd logger med `custom_dimensions` eller `TelemetryClient.track_event()`
+  - **A**: Använd loggern med `custom_dimensions` eller `TelemetryClient.track_event()`
 
 - [ ] **Q2**: Vad är skillnaden mellan händelser och metrik?
   - **A**: Händelser är diskreta förekomster, metrik är numeriska mätvärden
@@ -1373,17 +1373,17 @@ traces
 Testa din förståelse:
 
 - [ ] **Q1**: Vad är sampling och varför använda det?
-  - **A**: Sampling minskar datavolymen (och kostnaden) genom att endast fånga en procentandel av telemetrin
+  - **A**: Sampling minskar datavolym (och kostnad) genom att endast fånga en procentandel av telemetrin
 
-- [ ] **Q2**: Hur ställer du in larm?
-  - **A**: Använd metrisklarm i Bicep eller Azure-portalen baserat på Application Insights-metriker
+- [ ] **Q2**: Hur ställer du in aviseringar?
+  - **A**: Använd metrikaviseringar i Bicep eller Azure-portalen baserat på Application Insights-metrik
 
 - [ ] **Q3**: Vad är skillnaden mellan Log Analytics och Application Insights?
   - **A**: Application Insights lagrar data i en Log Analytics-arbetsyta; App Insights tillhandahåller applikationsspecifika vyer
 
 **Praktisk verifiering:**
 ```bash
-# Kontrollera provtagningskonfigurationen
+# Kontrollera konfigurationen för provtagning
 az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1406,7 +1406,7 @@ az monitor app-insights component show \
    })
    ```
 
-2. **Ställ in larm för kritiska mätvärden**
+2. **Ställ in aviseringar för kritiska metrik**
    ```bicep
    // Error rate, slow responses, availability
    ```
@@ -1431,7 +1431,7 @@ az monitor app-insights component show \
 
 1. **Logga inte känsliga data**
    ```python
-   # ❌ DÅLIGT
+   # ❌ DÅLIG
    logger.info(f'Login: {username}:{password}')
    
    # ✅ BRA
@@ -1449,7 +1449,7 @@ az monitor app-insights component show \
 
 3. **Ignorera inte dead letter-köer**
 
-4. **Glöm inte att ställa in dataretentionsgränser**
+4. **Glöm inte att sätta gränser för dataretention**
 
 ---
 
@@ -1459,7 +1459,7 @@ az monitor app-insights component show \
 
 **Diagnos:**
 ```bash
-# Kontrollera att anslutningssträngen är angiven
+# Kontrollera att anslutningssträngen är inställd
 azd env get-values | grep APPLICATIONINSIGHTS
 
 # Kontrollera applikationsloggar via Azure Monitor
@@ -1485,7 +1485,7 @@ az containerapp show \
 
 **Diagnos:**
 ```bash
-# Kontrollera dataintaget
+# Kontrollera dataimport
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1493,16 +1493,16 @@ az monitor app-insights metrics show \
 ```
 
 **Lösning:**
-- Minska samplingfrekvensen
-- Minska retentionstiden
-- Ta bort detaljerad loggning
+- Minska samplingsfrekvensen
+- Minska retentionsperioden
+- Ta bort utförlig loggning
 
 ---
 
-## Lär dig mer
+## Läs mer
 
 ### Officiell dokumentation
-- [Översikt av Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Översikt över Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
 - [Application Insights för Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
 - [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
 - [AZD-övervakning](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
@@ -1513,19 +1513,19 @@ az monitor app-insights metrics show \
 - 🏠 [Kursens startsida](../../README.md)
 
 ### Relaterade exempel
-- [Azure OpenAI-exempel](../../../../examples/azure-openai-chat) - AI-telemetri
-- [Mikrotjänstexempel](../../../../examples/microservices) - Distribuerad spårning
+- [Microsoft Foundry Models-exempel](../../../../examples/azure-openai-chat) - AI telemetry
+- [Mikrotjänster-exempel](../../../../examples/microservices) - Distribuerad spårning
 
 ---
 
 ## Sammanfattning
 
 **Du har lärt dig:**
-- ✅ Automatisk provisionering av Application Insights med AZD
+- ✅ Automatisk Application Insights-provisionering med AZD
 - ✅ Anpassad telemetri (händelser, metrik, beroenden)
 - ✅ Distribuerad spårning över mikrotjänster
-- ✅ Live-metrik och övervakning i realtid
-- ✅ Larm och instrumentpaneler
+- ✅ Live-metrik och realtidsövervakning
+- ✅ Aviseringar och instrumentpaneler
 - ✅ Övervakning av AI/LLM-applikationer
 - ✅ Strategier för kostnadsoptimering
 
@@ -1535,17 +1535,17 @@ az monitor app-insights metrics show \
 3. **Spåra affärshändelser** - Inte bara tekniska mätvärden
 4. **Övervaka AI-kostnader** - Spåra tokens och kostnader
 5. **Ställ in larm** - Var proaktiv, inte reaktiv
-6. **Optimera kostnader** - Använd sampling och retentionsgränser
+6. **Optimera kostnader** - Använd sampling och begränsningar för lagringstid
 
 **Nästa steg:**
 1. Slutför de praktiska övningarna
 2. Lägg till Application Insights i dina AZD-projekt
 3. Skapa anpassade instrumentpaneler för ditt team
-4. Läs [Distribueringsguide](../chapter-04-infrastructure/deployment-guide.md)
+4. Lär dig [Driftsättningsguide](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 Friskrivning:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten Co-op Translator (https://github.com/Azure/co-op-translator). Vi strävar efter noggrannhet, men observera att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk ska anses vara den auktoritativa källan. För kritisk information rekommenderas en professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten Co-op Translator (https://github.com/Azure/co-op-translator). Vi strävar efter noggrannhet, men var medveten om att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess ursprungliga språk ska anses vara den auktoritativa källan. För viktig information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

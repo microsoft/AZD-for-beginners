@@ -1,36 +1,36 @@
-# 4. 配置模板
+# 4. 配置範本
 
-!!! tip "在本單元結束時你將能夠"
+!!! tip "在此模組結束時，您將能夠"
 
-    - [ ] 了解 `azure.yaml` 的目的
+    - [ ] 了解 `azure.yaml` 的用途
     - [ ] 了解 `azure.yaml` 的結構
-    - [ ] 了解 azd 生命週期 `hooks` 的價值
-    - [ ] **實驗 4：** 探索並修改環境變量
+    - [ ] 了解 azd 生命週期中 `hooks` 的價值
+    - [ ] **實驗 4:** 探索並修改環境變數
 
 ---
 
-!!! prompt "`azure.yaml` 檔案是做什麼用的？請用程式碼區塊逐行解釋"
+!!! prompt "甚麼是 `azure.yaml` 文件的作用？請用程式區塊逐行說明"
 
-      `azure.yaml` 檔案是 **Azure Developer CLI (azd) 的配置檔案**。它定義了應用程式應如何部署到 Azure，其中包括基礎設施、服務、部署鉤子以及環境變量。
+      `azure.yaml` 文件是 **Azure Developer CLI (azd) 的配置文件**。它定義了您的應用程式如何部署到 Azure，包括基礎架構、服務、部署掛鉤及環境變數。
 
 ---
 
 ## 1. 目的與功能
 
-此 `azure.yaml` 檔案作為 AI 代理應用程式的 **部署藍圖**，該應用程式：
+此 `azure.yaml` 文件作為一個 AI 代理應用程式的 <strong>部署藍圖</strong>，它：
 
-1. **部署前驗證環境**
-2. **佈建 Azure AI 服務**（AI Hub、AI Project、Search 等）
-3. **將 Python 應用部署到 Azure 容器應用**
-4. **配置用於聊天與嵌入功能的 AI 模型**
-5. **設置 AI 應用的監控與追蹤**
-6. **處理新建與既有 Azure AI 專案場景**
+1. <strong>在部署前驗證環境</strong>
+2. **部署 Azure AI 服務**（AI Hub、AI Project、Search 等）
+3. **將 Python 應用部署到 Azure Container Apps**
+4. **為聊天和嵌入功能配置 AI 模型**
+5. **設定 AI 應用的監控與追蹤**
+6. **處理新建及現有 Azure AI 專案的場景**
 
-該檔案允許透過 **一條命令部署**（`azd up`）完整的 AI 代理解決方案，並包含適當的驗證、佈建和部署後配置。
+此文件支援以單一指令 (`azd up`) 完成完整 AI 代理方案的部署，並包含適當的驗證、佈建及部署後配置。
 
 ??? info "展開查看：`azure.yaml`"
 
-      `azure.yaml` 檔案定義了 Azure Developer CLI 應如何在 Azure 中部署和管理此 AI 代理應用。讓我們逐行拆解說明。
+      `azure.yaml` 文件定義了 Azure Developer CLI 如何在 Azure 中部署與管理此 AI 代理應用程式。讓我們逐行解析。
 
       ```yaml title="" linenums="0"
 
@@ -126,19 +126,19 @@
 
 ---
 
-## 2. 拆解檔案內容
+## 2. 拆解文件內容
 
-讓我們分段解析，理解每部分的功能與原因。
+讓我們逐節檢視此文件，瞭解它的用途與原因。
 
-### 2.1 **表頭與 Schema（第1-3行）**
+### 2.1 **標頭與架構定義 (第1-3行)**
 
 ```yaml title="" linenums="0"
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **第 1 行**：為 IDE 提供 YAML 語言伺服器的 schema 驗證與 IntelliSense 支援
+- **第1行**：為 YAML 語言伺服器提供架構驗證，支援 IDE 裡的 IntelliSense
 
-### 2.2 專案元資料（第5-10行）
+### 2.2 專案資料 (第5-10行)
 
 ```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
@@ -148,11 +148,11 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **第 5 行**：定義 Azure Developer CLI 使用的專案名稱
-- **第 6-7 行**：指定此配置基於版本 1.0.2 的模板
-- **第 8-9 行**：要求 Azure Developer CLI 版本必須為 1.14.0 或以上
+- **第5行**：定義 Azure Developer CLI 使用的專案名稱
+- **第6-7行**：指定此為基於範本版本 1.0.2
+- **第8-9行**：要求 Azure Developer CLI 版本 1.14.0 或以上
 
-### 2.3 部署鉤子（第11-40行）
+### 2.3 部署掛鉤 (第11-40行)
 
 ```yaml title="" linenums="0"
 hooks:
@@ -169,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **第 11-20 行**：**部署前鉤子** - 在執行 `azd up` 之前執行
+- **第11-20行**：<strong>部署前掛鉤</strong> - 在執行 `azd up` 前執行
 
-      - 在 Unix/Linux 系統：讓驗證腳本可執行，並執行該腳本
-      - 在 Windows 系統：執行 PowerShell 驗證腳本
-      - 兩者均為互動模式，驗證失敗則停止部署
+      - 在 Unix/Linux 系統上：將驗證腳本設為可執行並執行
+      - 在 Windows 系統上：執行 PowerShell 驗證腳本
+      - 皆為交互式，如失敗則停止部署
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -188,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **第 21-30 行**：**配置後鉤子** - 在 Azure 資源建立完成後執行
+- **第21-30行**：<strong>佈建後掛鉤</strong> - 在 Azure 資源建立完成後執行
 
-  - 執行寫入環境變量的腳本
-  - 即使這些腳本失敗也會繼續部署（`continueOnError: true`）
+  - 執行寫入環境變數腳本
+  - 即使腳本失敗仍繼續部署（`continueOnError: true`）
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -206,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **第 31-40 行**：**部署後鉤子** - 在應用部署完成後執行
+- **第31-40行**：<strong>部署後掛鉤</strong> - 在應用程式部署後執行
 
   - 執行最終設定腳本
-  - 即使腳本失敗也繼續執行
+  - 即使腳本失敗仍繼續
 
-### 2.4 服務設定（第41-48行）
+### 2.4 服務設定 (第41-48行)
 
-設定你要部署的應用服務。
+此段設定您所部署的應用服務。
 
 ```yaml title="" linenums="0"
 services:
@@ -226,18 +226,18 @@ services:
       remoteBuild: true
 ```
 
-- **第 42 行**：定義名為 "api_and_frontend" 的服務
-- **第 43 行**：指定來源碼目錄為 `./src`
-- **第 44 行**：指定程式語言為 Python
-- **第 45 行**：指定主機類型為 Azure 容器應用
-- **第 46-48 行**：Docker 配置
+- **第42行**：定義一個名為 "api_and_frontend" 的服務
+- **第43行**：指定原始碼目錄為 `./src`
+- **第44行**：指定程式語言為 Python
+- **第45行**：使用 Azure Container Apps 作為主機平台
+- **第46-48行**：Docker 配置
 
-      - 映像名稱為 "api_and_frontend"
-      - Docker 映像遠端建置 (在 Azure 端建置，不在本地)
+      - 使用 "api_and_frontend" 作為映像名稱
+      - 在 Azure 中遠端建置 Docker 映像（非本地建置）
 
-### 2.5 管線變量（第49-76行）
+### 2.5 管線變數 (第49-76行)
 
-這些變量用於在 CI/CD 管線中執行 `azd`，達成自動化部署
+這些變數協助您在 CI/CD 管線中自動化執行 `azd`
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -278,93 +278,92 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-此部分定義部署過程中使用的環境變量，依類別整理：
+此區包含部署過程中使用的環境變數，依類別整理如下：
 
-- **Azure 資源命名（第51-60行）**：
+- **Azure 資源名稱 (第51-60行)**：
       - 核心 Azure 服務的資源名稱，如資源群組、AI Hub、AI Project 等
-- **功能開關（第61-63行）**：
-      - 用於啟用或停用特定 Azure 服務的布林變量
-- **AI 代理配置（第64-71行）**：
-      - 主 AI 代理的配置，包括名稱、ID、部署參數、模型詳情
-- **AI 嵌入配置（第72-79行）**：
-      - 用於向量搜尋的嵌入模型設定
-- **搜尋與監控（第80-84行）**：
-      - 搜尋索引名稱、既有資源 ID 及監控/追蹤設定
+- **功能旗標 (第61-63行)**：
+      - 啟用/停用特定 Azure 服務的布林變數
+- **AI 代理設定 (第64-71行)**：
+      - 主 AI 代理相關配置，包含名稱、ID、部署設定及模型細節
+- **AI 嵌入設定 (第72-79行)**：
+      - 用於向量搜尋的嵌入模型配置
+- **搜尋與監控 (第80-84行)**：
+      - 搜尋索引名稱、現有資源 ID 及監控/追蹤設定
 
 ---
 
-## 3. 瞭解環境變量
+## 3. 了解環境變數
+下列環境變數掌控您的部署配置與行為，依主要功能分類。大多數變數有合理預設值，您亦可依需求及現有 Azure 資源調整。
 
-以下環境變量控制你的部署配置與行為，依主要用途分類。大部分變量都有合理預設值，但你可以依照特定需求或既有 Azure 資源自訂。
-
-### 3.1 必填變量
+### 3.1 必填變數 
 
 ```bash title="" linenums="0"
 # 核心 Azure 配置
 AZURE_ENV_NAME                    # 環境名稱（用於資源命名）
-AZURE_LOCATION                    # 部署區域
+AZURE_LOCATION                    # 部署地區
 AZURE_SUBSCRIPTION_ID             # 目標訂閱
 AZURE_RESOURCE_GROUP              # 資源組名稱
 AZURE_PRINCIPAL_ID                # RBAC 用戶主體
 
-# 資源名稱（如未指定，將自動生成）
-AZURE_AIHUB_NAME                  # Microsoft Foundry 集線器名稱
-AZURE_AIPROJECT_NAME              # AI 項目名稱
+# 資源名稱（如未指定將自動生成）
+AZURE_AIHUB_NAME                  # Microsoft Foundry 中心名稱
+AZURE_AIPROJECT_NAME              # AI 專案名稱
 AZURE_AISERVICES_NAME             # AI 服務帳戶名稱
 AZURE_STORAGE_ACCOUNT_NAME        # 儲存帳戶名稱
-AZURE_CONTAINER_REGISTRY_NAME     # 容器註冊表名稱
-AZURE_KEYVAULT_NAME               # 金鑰保管庫名稱（如使用）
+AZURE_CONTAINER_REGISTRY_NAME     # 容器登錄名稱
+AZURE_KEYVAULT_NAME               # 金鑰保管庫名稱（如有使用）
 ```
 
-### 3.2 模型配置
+### 3.2 模型配置 
 ```bash title="" linenums="0"
-# 聊天模型設定
-AZURE_AI_AGENT_MODEL_NAME         # 預設：gpt-4o-mini
-AZURE_AI_AGENT_MODEL_FORMAT       # 預設：OpenAI（或 Microsoft）
-AZURE_AI_AGENT_MODEL_VERSION      # 預設：最新可用版本
+# 聊天模型配置
+AZURE_AI_AGENT_MODEL_NAME         # 默認：gpt-4.1-mini
+AZURE_AI_AGENT_MODEL_FORMAT       # 默認：OpenAI（或Microsoft）
+AZURE_AI_AGENT_MODEL_VERSION      # 默認：最新可用版本
 AZURE_AI_AGENT_DEPLOYMENT_NAME    # 聊天模型的部署名稱
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # 預設：標準
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # 預設：80（千 TPM）
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # 默認：標準
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # 默認：80（千TPM）
 
-# 嵌入模型設定
-AZURE_AI_EMBED_MODEL_NAME         # 預設：text-embedding-3-small
-AZURE_AI_EMBED_MODEL_FORMAT       # 預設：OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # 預設：最新可用版本
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # 嵌入的部署名稱
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # 預設：標準
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # 預設：50（千 TPM）
+# 嵌入模型配置
+AZURE_AI_EMBED_MODEL_NAME         # 默認：text-embedding-3-small
+AZURE_AI_EMBED_MODEL_FORMAT       # 默認：OpenAI
+AZURE_AI_EMBED_MODEL_VERSION      # 默認：最新可用版本
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # 嵌入模型的部署名稱
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # 默認：標準
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # 默認：50（千TPM）
 
-# 代理設定
+# 代理配置
 AZURE_AI_AGENT_NAME               # 代理顯示名稱
 AZURE_EXISTING_AGENT_ID           # 使用現有代理（可選）
 ```
 
-### 3.3 功能開關
+### 3.3 功能切換
 ```bash title="" linenums="0"
 # 可選服務
-USE_APPLICATION_INSIGHTS         # 預設值：true
-USE_AZURE_AI_SEARCH_SERVICE      # 預設值：false
-USE_CONTAINER_REGISTRY           # 預設值：true
+USE_APPLICATION_INSIGHTS         # 預設：true
+USE_AZURE_AI_SEARCH_SERVICE      # 預設：false
+USE_CONTAINER_REGISTRY           # 預設：true
 
-# 監控和追蹤
-ENABLE_AZURE_MONITOR_TRACING     # 預設值：false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # 預設值：false
+# 監察和追蹤
+ENABLE_AZURE_MONITOR_TRACING     # 預設：false
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # 預設：false
 
 # 搜尋配置
 AZURE_AI_SEARCH_INDEX_NAME       # 搜尋索引名稱
 AZURE_SEARCH_SERVICE_NAME        # 搜尋服務名稱
 ```
 
-### 3.4 AI 專案配置
+### 3.4 AI 專案配置 
 ```bash title="" linenums="0"
 # 使用現有資源
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # 現有 AI 專案的完整資源 ID
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # 現有專案的端點 URL
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # 現有 AI 項目的完整資源 ID
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # 現有項目的端點 URL
 ```
 
-### 3.5 檢查你的變量
+### 3.5 檢視您的變數
 
-使用 Azure Developer CLI 來查看和管理你的環境變量：
+使用 Azure Developer CLI 查看並管理環境變數：
 
 ```bash title="" linenums="0"
 # 查看當前環境的所有環境變量
@@ -373,16 +372,16 @@ azd env get-values
 # 獲取特定環境變量
 azd env get-value AZURE_ENV_NAME
 
-# 設置環境變量
+# 設置一個環境變量
 azd env set AZURE_LOCATION eastus
 
-# 從 .env 文件設置多個變量
+# 從 .env 檔案設定多個變量
 azd env set --from-file .env
 ```
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責聲明**：  
-本文件係使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於準確性，但請注意自動翻譯可能包含錯誤或不準確之處。原文應視為具權威性的資料來源。對於重要資訊，建議採用專業人工翻譯。我們不對因使用本翻譯而產生之任何誤解或誤釋承擔責任。
+**免責聲明**：
+本文件是使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，但請注意，機器翻譯可能包含錯誤或不準確之處。原始語言文件應視為權威來源。對於重要資訊，建議採用專業人工翻譯。我們不對因使用此翻譯而產生的任何誤解或誤釋承擔責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,30 +1,30 @@
 # 5. Tùy chỉnh một Mẫu
 
-!!! tip "KHI KẾT THÚC MÔ-ĐUN NÀY BẠN SẼ CÓ THỂ"
+!!! tip "KHI KẾT THÚC MODULE NÀY BẠN SẼ CÓ THỂ"
 
-    - [ ] Khám phá các khả năng mặc định của tác nhân AI
-    - [ ] Thêm AI Search với chỉ mục của riêng bạn
-    - [ ] Kích hoạt và phân tích số liệu Tracing
-    - [ ] Thực hiện một lần chạy đánh giá
-    - [ ] Thực hiện quét red-teaming
-    - [ ] **Lab 5: Xây dựng Kế hoạch Tùy chỉnh** 
+    - [ ] Đã khám phá các Khả năng mặc định của Tác nhân AI
+    - [ ] Đã thêm AI Search với chỉ mục của bạn
+    - [ ] Đã kích hoạt và phân tích các chỉ số Tracing
+    - [ ] Đã thực hiện một lần chạy đánh giá
+    - [ ] Đã thực hiện quét red-teaming
+    - [ ] **Bài lab 5: Xây dựng Kế hoạch Tùy chỉnh** 
 
 ---
 
 ## 5.1 Khả năng của Tác nhân AI
 
-!!! success "Đã hoàn thành trong Lab 01"
+!!! success "Chúng tôi đã hoàn thành điều này trong Lab 01"
 
-- **Tìm kiếm Tệp**: Tìm kiếm tệp tích hợp của OpenAI để truy xuất kiến thức
-- **Trích dẫn**: Gán nguồn tự động trong câu trả lời
-- **Hướng dẫn có thể tùy chỉnh**: Thay đổi hành vi và cá tính của tác nhân
-- **Tích hợp Công cụ**: Hệ thống công cụ mở rộng cho các khả năng tùy chỉnh
+- **File Search**: Tìm kiếm tệp tích hợp sẵn của OpenAI để truy xuất kiến thức
+- **Citations**: Ghi nguồn tự động trong phản hồi
+- **Customizable Instructions**: Chỉnh sửa hành vi và cá tính của tác nhân
+- **Tool Integration**: Hệ thống công cụ mở rộng cho các khả năng tùy chỉnh
 
 ---
 
-## 5.2 Các Tùy chọn Truy xuất Kiến thức
+## 5.2 Tùy chọn Truy xuất Kiến thức
 
-!!! task "Để hoàn thành việc này, chúng ta cần thực hiện thay đổi và triển khai lại"    
+!!! task "Để hoàn thành điều này chúng ta cần thực hiện thay đổi và triển khai lại"    
     
     ```bash title=""
     # Set environment variables
@@ -40,11 +40,11 @@
 
 ---
 
-**Tìm kiếm Tệp OpenAI (Mặc định):**
+**OpenAI File Search (Mặc định):**
 
 - Tích hợp sẵn trong Foundry Agents
 - Xử lý và lập chỉ mục tài liệu tự động
-- Không cần cấu hình bổ sung
+- Không yêu cầu cấu hình bổ sung
 
 **Azure AI Search (Tùy chọn):**
 
@@ -57,25 +57,25 @@
 
 ## 5.3 [Theo dõi & Giám sát](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "Để hoàn thành việc này, chúng ta cần thực hiện thay đổi và triển khai lại"    
+!!! task "Để hoàn thành điều này chúng ta cần thực hiện thay đổi và triển khai lại"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
     azd deploy
     ```
 
-**Theo dõi:**
+**Tracing:**
 
 - Tích hợp OpenTelemetry
 - Theo dõi yêu cầu/phản hồi
-- Số liệu hiệu suất
+- Các chỉ số hiệu suất
 - Có sẵn trong cổng Microsoft Foundry
 
-**Ghi nhật ký:**
+**Logging:**
 
 - Nhật ký ứng dụng trong Container Apps
 - Ghi nhật ký có cấu trúc với ID tương quan
-- Xem nhật ký theo thời gian thực và lịch sử
+- Xem nhật ký thời gian thực và lịch sử
 
 ---
 
@@ -83,19 +83,19 @@
 
 **Đánh giá cục bộ:**
 
-- Các bộ đánh giá tích hợp để đánh giá chất lượng
-- Tập lệnh đánh giá tùy chỉnh
-- Đo điểm chuẩn hiệu suất
+- Bộ đánh giá tích hợp sẵn để đánh giá chất lượng
+- Kịch bản đánh giá tùy chỉnh
+- Điểm chuẩn hiệu suất
 
 **Giám sát liên tục:**
 
 - Đánh giá tự động các tương tác trực tiếp
-- Theo dõi số liệu chất lượng
+- Theo dõi các chỉ số chất lượng
 - Phát hiện suy giảm hiệu suất
 
 **Tích hợp CI/CD:**
 
-- Luồng công việc GitHub Actions
+- Quy trình làm việc GitHub Actions
 - Kiểm thử và đánh giá tự động
 - Kiểm thử so sánh thống kê
 
@@ -103,11 +103,11 @@
 
 ## 5.5 [Tác nhân Red Teaming AI](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**Đánh giá Red Teaming cho AI:**
+**Red Teaming AI:**
 
 - Quét bảo mật tự động
 - Đánh giá rủi ro cho hệ thống AI
-- Đánh giá an toàn trên nhiều hạng mục
+- Đánh giá an toàn qua nhiều hạng mục
 
 **Xác thực:**
 
@@ -117,40 +117,40 @@
 
 
 
-!!! quote "KHI KẾT THÚC BÀI THỰC HÀNH NÀY BẠN NÊN CÓ"
-    - [ ] Xác định yêu cầu cho kịch bản của bạn
-    - [ ] Tùy chỉnh biến môi trường (cấu hình)
-    - [ ] Tùy chỉnh hướng dẫn cho tác nhân (nhiệm vụ)
-    - [ ] Triển khai mẫu đã tùy chỉnh (ứng dụng)
+!!! quote "KHI KẾT THÚC BÀI LAB NÀY BẠN NÊN CÓ"
+    - [ ] Xác định yêu cầu kịch bản của bạn
+    - [ ] Tùy chỉnh biến môi trường (config)
+    - [ ] Tùy chỉnh hướng dẫn tác nhân (task)
+    - [ ] Triển khai mẫu đã tùy chỉnh (app)
     - [ ] Hoàn thành các tác vụ sau triển khai (thủ công)
-    - [ ] Chạy một đánh giá thử
+    - [ ] Chạy một bài kiểm tra đánh giá
 
-Ví dụ này minh họa cách tùy chỉnh mẫu cho trường hợp sử dụng bán lẻ doanh nghiệp với hai tác nhân chuyên biệt và nhiều triển khai mô hình.
+This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
 
 ---
 
-## 5.6 Tùy chỉnh cho bạn!
+## 5.6 Tùy chỉnh cho Bạn!
 
 ### 5.6.1. Yêu cầu Kịch bản
 
 #### **Triển khai Tác nhân:** 
 
-   - Shopper Agent: Giúp khách hàng tìm và so sánh sản phẩm
-   - Loyalty Agent: Quản lý phần thưởng và khuyến mãi cho khách hàng
+   - Shopper Agent: Giúp khách hàng tìm kiếm và so sánh sản phẩm
+   - Loyalty Agent: Quản lý phần thưởng và chương trình khuyến mãi cho khách hàng
 
 #### **Triển khai Mô hình:**
 
    - `gpt-4.1`: Mô hình chat chính
    - `o3`: Mô hình suy luận cho các truy vấn phức tạp
-   - `gpt-4.1-nano`: Mô hình nhẹ cho tương tác đơn giản
+   - `gpt-4.1-nano`: Mô hình nhẹ cho các tương tác đơn giản
    - `text-embedding-3-large`: Embedding chất lượng cao cho tìm kiếm
 
 #### **Tính năng:**
 
    - Bật theo dõi và giám sát
    - AI Search cho danh mục sản phẩm
-   - Khung đánh giá cho đảm bảo chất lượng
-   - Red teaming để kiểm tra bảo mật
+   - Khung đánh giá để đảm bảo chất lượng
+   - Red teaming để kiểm chứng an ninh
 
 ---
 
@@ -167,7 +167,7 @@ Create a setup script (`setup-retail.sh`)
 # Đặt tên môi trường
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Cấu hình vùng (chọn dựa trên việc mô hình có sẵn)
+# Cấu hình vùng (chọn theo khả năng sẵn có của mô hình)
 azd env set AZURE_LOCATION "eastus2"
 
 # Bật tất cả dịch vụ tùy chọn
@@ -175,8 +175,8 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Cấu hình mô hình chat chính (gpt-4o là lựa chọn gần nhất có sẵn so với gpt-4.1)
-azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
+# Cấu hình mô hình chat chính (gpt-4.1 là mô hình khả dụng gần nhất với gpt-4.1)
+azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
@@ -258,7 +258,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# Kiểm tra các điều kiện tiên quyết
+# Xác minh các điều kiện tiên quyết
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -275,12 +275,12 @@ echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Kiểm tra hạn ngạch ở khu vực đã chọn
+# Kiểm tra hạn ngạch trong vùng được chọn
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
 echo "⚠️  Please verify you have 300,000+ TPM quota for:"
-echo "   - gpt-4o: 150,000 TPM"
+echo "   - gpt-4.1: 150,000 TPM"
 echo "   - text-embedding-3-large: 75,000 TPM"
 echo "   - Additional models: 75,000+ TPM"
 
@@ -295,11 +295,11 @@ fi
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Ghi lại các kết quả triển khai
+# Ghi lại các đầu ra của quá trình triển khai
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Lấy URL của ứng dụng web
+# Lấy URL ứng dụng web
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
@@ -378,7 +378,7 @@ echo "
 "
 ```
 
-### 5.6.3: Kiểm thử và Xác nhận
+### 5.6.3: Kiểm thử và Xác thực
 
 Create `test-retail-deployment.sh`:
 
@@ -405,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Chạy đánh giá nếu được cấu hình
+# Chạy đánh giá nếu đã được cấu hình
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -429,42 +429,42 @@ Next steps:
 
 ---
 
-### 5.6.4 Kết quả mong đợi
+### 5.6.4 Kết quả Mong đợi
 
-Sau khi làm theo hướng dẫn triển khai này, bạn sẽ có:
+After following this implementation guide, you will have:
 
-1. **Cơ sở hạ tầng đã triển khai:**
+1. **Hạ tầng đã triển khai:**
 
       - Dự án Microsoft Foundry với các triển khai mô hình
       - Container Apps lưu trữ ứng dụng web
       - Dịch vụ AI Search cho danh mục sản phẩm
-      - Application Insights cho giám sát
+      - Application Insights cho việc giám sát
 
 2. **Tác nhân ban đầu:**
 
       - Shopper Agent được cấu hình với hướng dẫn cơ bản
       - Khả năng tìm kiếm tệp được bật
-      - Theo dõi và giám sát đã được cấu hình
+      - Đã cấu hình theo dõi và giám sát
 
-3. **Sẵn sàng cho Tùy chỉnh:**
+3. **Sẵn sàng để Tùy chỉnh:**
 
-      - Khung cho việc thêm Loyalty Agent
+      - Khung để thêm Loyalty Agent
       - Mẫu hướng dẫn tùy chỉnh
-      - Các script kiểm thử và xác nhận
+      - Script kiểm thử và xác thực
       - Thiết lập giám sát và đánh giá
 
-4. **Sẵn sàng cho Sản xuất:**
+4. **Sẵn sàng cho Môi trường Sản xuất:**
 
       - Quét bảo mật với red teaming
       - Giám sát hiệu suất
       - Khung đánh giá chất lượng
       - Kiến trúc có khả năng mở rộng
 
-Ví dụ này minh họa cách mẫu AZD có thể được mở rộng và tùy chỉnh cho các kịch bản doanh nghiệp cụ thể trong khi vẫn duy trì các thực hành tốt nhất về bảo mật, giám sát và khả năng mở rộng.
+This example demonstrates how the AZD template can be extended and customized for specific enterprise scenarios while maintaining best practices for security, monitoring, and scalability.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Miễn trừ trách nhiệm:
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI Co-op Translator (https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực để đảm bảo tính chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Văn bản gốc bằng ngôn ngữ gốc của tài liệu này nên được coi là nguồn có thẩm quyền. Đối với thông tin quan trọng, nên sử dụng bản dịch chuyên nghiệp do dịch thuật viên thực hiện. Chúng tôi không chịu trách nhiệm đối với bất kỳ sự hiểu nhầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
+**Disclaimer**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc thiếu chính xác. Tài liệu gốc bằng ngôn ngữ gốc của nó nên được xem là nguồn có thẩm quyền. Đối với thông tin quan trọng, nên sử dụng bản dịch chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm cho bất kỳ hiểu lầm hay giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

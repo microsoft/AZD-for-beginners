@@ -1,69 +1,69 @@
-# Deploymentsguide - Mestre AZD-udrulninger
+# Implementeringsvejledning - Mestring af AZD-implementeringer
 
 **Kapitelnavigation:**
 - **📚 Kursusforside**: [AZD for begyndere](../../README.md)
-- **📖 Aktuelt kapitel**: Kapitel 4 - Infrastruktur som kode & udrulning
+- **📖 Nuværende kapitel**: Kapitel 4 - Infrastruktur som kode og udrulning
 - **⬅️ Forrige kapitel**: [Kapitel 3: Konfiguration](../chapter-03-configuration/configuration.md)
 - **➡️ Næste**: [Provisionering af ressourcer](provisioning.md)
-- **🚀 Næste kapitel**: [Kapitel 5: Multi-Agent AI-løsninger](../../examples/retail-scenario.md)
+- **🚀 Næste kapitel**: [Kapitel 5: Multi-agent AI-løsninger](../../examples/retail-scenario.md)
 
 ## Introduktion
 
-Denne## Forstå udrulningsprocessenen omfattende guide dækker alt, du har brug for at vide om udrulning af applikationer ved hjælp af Azure Developer CLI, fra grundlæggende udrulninger med én kommando til avancerede produktionsscenarier med brugerdefinerede hooks, flere miljøer og CI/CD-integration. Mestér hele udrulningslivscyklussen med praktiske eksempler og bedste fremgangsmåder.
+Denne omfattende vejledning dækker alt, hvad du behøver at vide om at udrulle applikationer ved hjælp af Azure Developer CLI, fra grundlæggende enkeltkommando-udrulninger til avancerede produktionsscenarier med tilpassede hooks, flere miljøer og CI/CD-integration. Mestring af hele udrulningslivscyklussen med praktiske eksempler og bedste praksis.
 
 ## Læringsmål
 
-By completing this guide, you will:
-- Mestre alle Azure Developer CLI-udrulningskommandoer og arbejdsgange
-- Forstå hele udrulningslivscyklussen fra provisionering til overvågning
-- Implementere brugerdefinerede udrulningshooks til præ- og post-udrulningsautomation
+Ved at gennemføre denne vejledning vil du:
+- Mestre alle Azure Developer CLI udrulningskommandoer og arbejdsgange
+- Forstå den komplette udrulningslivscyklus fra provisionering til overvågning
+- Implementere tilpassede udrulningshooks til automatisk før- og efter-udrulering
 - Konfigurere flere miljøer med miljøspecifikke parametre
-- Opsætte avancerede udrulningsstrategier inklusive blue-green og canary-udrulninger
+- Opsætte avancerede udrulningsstrategier herunder blue-green og canary-udrulninger
 - Integrere azd-udrulninger med CI/CD-pipelines og DevOps-arbejdsgange
 
 ## Læringsudbytte
 
-Upon completion, you will be able to:
-- Udføre og fejlsøge alle azd-udrulningsarbejdsgange selvstændigt
-- Designe og implementere brugerdefineret udrulningsautomation ved hjælp af hooks
+Efter afslutning vil du være i stand til at:
+- Udføre og fejlsøge alle azd-udrulningsarbejdsgange uafhængigt
+- Designe og implementere tilpasset udrulningsautomatisering ved hjælp af hooks
 - Konfigurere produktionsklare udrulninger med korrekt sikkerhed og overvågning
-- Håndtere komplekse multi-miljø udrulningsscenarier
-- Optimere udrulningsydelse og implementere rollback-strategier
-- Integrere azd-udrulninger i enterprise DevOps-praksis
+- Administrere komplekse udrulningsscenarier med flere miljøer
+- Optimere udrulningsperformance og implementere rollback-strategier
+- Integrere azd-udrulninger i virksomhedens DevOps-praksis
 
-## Udrulningsoversigt
+## Implementeringsoversigt
 
 Azure Developer CLI tilbyder flere udrulningskommandoer:
-- `azd up` - Complete workflow (provision + deploy)
-- `azd provision` - Create/update Azure resources only
-- `azd deploy` - Deploy application code only
-- `azd package` - Build and package applications
+- `azd up` - Komplet workflow (provisionering + udrulning)
+- `azd provision` - Opret/opdater kun Azure-ressourcer
+- `azd deploy` - Udrul kun applikationskode
+- `azd package` - Byg og pak applikationer
 
 ## Grundlæggende udrulningsworkflows
 
-### Fuld udrulning (azd up)
-The most common workflow for new projects:
+### Komplet udrulning (azd up)
+Den mest almindelige arbejdsgang for nye projekter:
 ```bash
 # Udrul alt fra bunden
 azd up
 
-# Udrul med et specifikt miljø
+# Udrul i et specifikt miljø
 azd up --environment production
 
 # Udrul med brugerdefinerede parametre
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Kun infrastrukturudrulning
+### Udelukkende infrastrukturudrulning
 Når du kun skal opdatere Azure-ressourcer:
 ```bash
-# Opsætte/opdatere infrastruktur
+# Provisionere/opdatere infrastruktur
 azd provision
 
-# Opsætte med dry-run for at forhåndsvise ændringer
+# Provisionere med tørkørsel for at forhåndsvise ændringer
 azd provision --preview
 
-# Opsætte specifikke tjenester
+# Provisionere specifikke tjenester
 azd provision --service database
 ```
 
@@ -75,22 +75,22 @@ azd deploy
 
 # Forventet output:
 # Udruller tjenester (azd deploy)
-# - web: Udruller... Fuldført
-# - api: Udruller... Fuldført
+# - web: Udruller... Færdig
+# - api: Udruller... Færdig
 # SUCCES: Din udrulning blev fuldført på 2 minutter og 15 sekunder
 
 # Udrul en specifik tjeneste
 azd deploy --service web
 azd deploy --service api
 
-# Udrul med brugerdefinerede byggeargumenter
+# Udrul med brugerdefinerede build-argumenter
 azd deploy --service api --build-arg NODE_ENV=production
 
 # Bekræft udrulning
 azd show --output json | jq '.services'
 ```
 
-### ✅ Verifikation af udrulning
+### ✅ Verificering af udrulning
 
 Efter enhver udrulning, verificer succes:
 
@@ -98,7 +98,7 @@ Efter enhver udrulning, verificer succes:
 # Kontroller, at alle tjenester kører
 azd show
 
-# Test sundhedsendpoints
+# Test sundhedsendepunkter
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -109,10 +109,10 @@ curl -f "$API_URL/health" || echo "❌ API health check failed"
 azd monitor --logs
 ```
 
-**Succes kriterier:**
-- ✅ Alle tjenester viser status "Running"
-- ✅ Sundhedsendepunkter returnerer HTTP 200
-- ✅ Ingen fejl-logs i de sidste 5 minutter
+**Succeskriterier:**
+- ✅ Alle tjenester viser statusen "Kører"
+- ✅ Health-endpoints returnerer HTTP 200
+- ✅ Ingen fejllogfiler i de sidste 5 minutter
 - ✅ Applikationen svarer på testforespørgsler
 
 ## 🏗️ Forstå udrulningsprocessen
@@ -150,10 +150,10 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### Fase 4: Pakning af applikation
+### Fase 4: Applikationspakning
 - Bygger applikationskode
 - Opretter udrulningsartefakter
-- Pakker til målplatform (containere, ZIP-filer osv.)
+- Pakker til målplatform (containere, ZIP-filer, osv.)
 
 ### Fase 5: Hooks før udrulning
 ```yaml
@@ -225,7 +225,7 @@ azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Staging-miljø
+# Stagingmiljø
 azd env new staging
 azd env set NODE_ENV staging
 azd env set DEBUG false
@@ -240,7 +240,7 @@ azd env set LOG_LEVEL error
 
 ## 🔧 Avancerede udrulningsscenarier
 
-### Multi-service applikationer
+### Flere-tjenesteapplikationer
 ```yaml
 # Complex application with multiple services
 services:
@@ -276,19 +276,19 @@ services:
     host: function
 ```
 
-### Blue-green-udrulninger
+### Blue-Green-udrulninger
 ```bash
-# Opret blåt miljø
+# Opret det blå miljø
 azd env new production-blue
 azd up --environment production-blue
 
-# Test blåt miljø
+# Test det blå miljø
 ./scripts/test-environment.sh production-blue
 
-# Skift trafik til blåt (manuel opdatering af DNS/load balancer)
+# Skift trafik til blå (manuel opdatering af DNS/load balancer)
 ./scripts/switch-traffic.sh production-blue
 
-# Ryd op i grønt miljø
+# Ryd op i det grønne miljø
 azd env select production-green
 azd down --force
 ```
@@ -338,9 +338,9 @@ if [[ $confirm == [yY] ]]; then
 fi
 ```
 
-## 🐳 Container-udrulninger
+## 🐳 Containerudrulninger
 
-### Udrulninger af Container Apps
+### Udrulning af Container-apps
 ```yaml
 services:
   api:
@@ -364,7 +364,7 @@ services:
       maxReplicas: 10
 ```
 
-### Optimering af multistadie Dockerfile
+### Optimering af multi-stage Dockerfile
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -390,11 +390,11 @@ EXPOSE 3000
 CMD ["npm", "start"]
 ```
 
-## ⚡ Ydeevneoptimering
+## ⚡ Ydelsesoptimering
 
 ### Tjenestespecifikke udrulninger
 ```bash
-# Udrul en specifik tjeneste for hurtigere iteration
+# Udrul en bestemt service for hurtigere iteration
 azd deploy --service web
 azd deploy --service api
 
@@ -414,17 +414,17 @@ services:
 
 ### Effektive kodeudrulninger
 ```bash
-# Brug azd deploy (ikke azd up) til kodeændringer
-# Dette springer over opsætning af infrastrukturen og er meget hurtigere
+# Brug azd deploy (ikke azd up) ved kun kodeændringer
+# Dette springer infrastrukturopsætning over og er meget hurtigere
 azd deploy
 
 # Udrul en specifik tjeneste for hurtigste iteration
 azd deploy --service api
 ```
 
-## 🔍 Udrulningsovervågning
+## 🔍 Udrulningsmonitorering
 
-### Real-time udrulningsovervågning
+### Overvågning af udrulning i realtid
 ```bash
 # Overvåg applikationen i realtid
 azd monitor --live
@@ -483,7 +483,7 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 Sikkerhedsmæssige overvejelser
+## 🔐 Sikkerhedsovervejelser
 
 ### Håndtering af hemmeligheder
 ```bash
@@ -535,14 +535,14 @@ services:
 
 ### Hurtig rollback
 ```bash
-# AZD har ikke indbygget tilbageførsel. Anbefalede fremgangsmåder:
+# AZD har ikke indbygget rollback. Anbefalede fremgangsmåder:
 
-# Mulighed 1: Genudrul fra Git (anbefalet)
-git revert HEAD  # Rul den problematiske commit tilbage
+# Mulighed 1: Udrul igen fra Git (anbefalet)
+git revert HEAD  # Fortryd den problematiske commit
 git push
 azd deploy
 
-# Mulighed 2: Genudrul et specifikt commit
+# Mulighed 2: Udrul et specifikt commit igen
 git checkout <previous-commit-hash>
 azd deploy
 git checkout main
@@ -550,15 +550,15 @@ git checkout main
 
 ### Infrastruktur-rollback
 ```bash
-# Forhåndsvis infrastrukturændringer før anvendelse
+# Forhåndsvis infrastrukturændringer, før de anvendes
 azd provision --preview
 
 # For at rulle infrastrukturen tilbage, brug versionskontrol:
-git revert HEAD  # Fortryd infrastrukturændringer
+git revert HEAD  # Tilbagefør infrastrukturændringer
 azd provision    # Anvend tidligere infrastrukturtilstand
 ```
 
-### Rollback af database-migration
+### Rollback af databasemigration
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -572,21 +572,21 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 Udrulningsmetrics
+## 📊 Udrulningsmetrikker
 
-### Spor udrulningsydelse
+### Spor udrulningsperformance
 ```bash
-# Vis den aktuelle udrulningsstatus
+# Vis aktuel udrulningsstatus
 azd show
 
 # Overvåg applikationen med Application Insights
 azd monitor --overview
 
-# Vis målinger i realtid
+# Vis live-metrikker
 azd monitor --live
 ```
 
-### Indsamling af brugerdefinerede metrics
+### Indsamling af brugerdefinerede metrikker
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -605,7 +605,7 @@ hooks:
 
 ## 🎯 Bedste praksis
 
-### 1. Miljøkonsistens
+### 1. Konsistens mellem miljøer
 ```bash
 # Brug konsekvent navngivning
 azd env new dev-$(whoami)
@@ -616,7 +616,7 @@ azd env new production-v1
 ./scripts/sync-environments.sh
 ```
 
-### 2. Infrastrukturvalidering
+### 2. Validering af infrastruktur
 ```bash
 # Forhåndsvis infrastrukturændringer før udrulning
 azd provision --preview
@@ -628,7 +628,7 @@ az bicep lint --file infra/main.bicep
 az bicep build --file infra/main.bicep
 ```
 
-### 3. Testintegration
+### 3. Integration af test
 ```yaml
 hooks:
   predeploy:
@@ -667,15 +667,15 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Næste skridt
 
-- [Provisionering af ressourcer](provisioning.md) - Dybere indblik i infrastrukturadministration
-- [Forudgående udrulningsplanlægning](../chapter-06-pre-deployment/capacity-planning.md) - Planlæg din udrulningsstrategi
+- [Provisionering af ressourcer](provisioning.md) - Dyk ned i infrastrukturadministration
+- [Planlægning før udrulning](../chapter-06-pre-deployment/capacity-planning.md) - Planlæg din udrulningsstrategi
 - [Almindelige problemer](../chapter-07-troubleshooting/common-issues.md) - Løs udrulningsproblemer
 - [Bedste praksis](../chapter-07-troubleshooting/debugging.md) - Produktionsklare udrulningsstrategier
 
-## 🎯 Hands-on udrulningsøvelser
+## 🎯 Praktiske udrulningsøvelser
 
-### Øvelse 1: Inkrementelt udrulningsworkflow (20 minutter)
-**Mål**: Mestre forskellen mellem fulde og inkrementelle udrulninger
+### Øvelse 1: Inkrementel udrulningsworkflow (20 minutter)
+**Mål**: Mestre forskellen mellem fuld og inkrementel udrulning
 
 ```bash
 # Initial udrulning
@@ -683,7 +683,7 @@ mkdir deployment-practice && cd deployment-practice
 azd init --template todo-nodejs-mongo
 azd up
 
-# Registrer tidspunkt for initial udrulning
+# Registrer tidspunktet for initial udrulning
 echo "Full deployment: $(date)" > deployment-log.txt
 
 # Foretag en kodeændring
@@ -700,31 +700,31 @@ cat deployment-log.txt
 azd down --force --purge
 ```
 
-**Succes kriterier:**
+**Succeskriterier:**
 - [ ] Fuld udrulning tager 5-15 minutter
 - [ ] Kun kodeudrulning tager 2-5 minutter
 - [ ] Kodeændringer afspejles i den udrullede app
-- [ ] Infrastruktur uændret efter `azd deploy`
+- [ ] Infrastruktur forbliver uændret efter `azd deploy`
 
-**Læringsudbytte**: `azd deploy` er 50–70% hurtigere end `azd up` for kodeændringer
+**Læringsudbytte**: `azd deploy` er 50-70% hurtigere end `azd up` for kodeændringer
 
-### Øvelse 2: Brugerdefinerede udrulningshooks (30 minutter)
-**Mål**: Implementer præ- og post-udrulningsautomation
+### Øvelse 2: Tilpassede udrulningshooks (30 minutter)
+**Mål**: Implementer automatisering før og efter udrulning
 
 ```bash
-# Opret valideringsscript før udrulning
+# Opret et valideringsscript før udrulning
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
 echo "⚠️ Running pre-deployment checks..."
 
-# Tjek om testene består
+# Kontroller, om testene består
 if ! npm run test:unit; then
     echo "❌ Tests failed! Aborting deployment."
     exit 1
 fi
 
-# Tjek for ændringer, der ikke er committet
+# Kontroller for ændringer, der ikke er committet
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -734,7 +734,7 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# Opret smoke-test efter udrulning
+# Opret en post-deploy smoke-test
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
 echo "💨 Running smoke tests..."
@@ -770,14 +770,14 @@ EOF
 azd deploy
 ```
 
-**Succes kriterier:**
-- [ ] For-udrulningsscript kører før udrulning
-- [ ] Udrulning afbrydes, hvis tests fejler
-- [ ] Post-deploy smoke-test validerer sundhed
+**Succeskriterier:**
+- [ ] Præ-udrulningsscript kører før udrulning
+- [ ] Udrulning afbrydes hvis tests fejler
+- [ ] Efter-udrulnings smoke-test validerer sundhed
 - [ ] Hooks kører i korrekt rækkefølge
 
-### Øvelse 3: Multi-miljø udrulningsstrategi (45 minutter)
-**Mål**: Implementer et trinvist udrulningsworkflow (dev → staging → production)
+### Øvelse 3: Strategi for udrulning i flere miljøer (45 minutter)
+**Mål**: Implementer trinvise udrulningsarbejdsgange (dev → staging → production)
 
 ```bash
 # Opret udrulningsscript
@@ -797,7 +797,7 @@ azd up --no-prompt
 echo "Running dev tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# Trin 2: Udrul til staging-miljø
+# Trin 2: Udrul til stagingmiljø
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
@@ -806,7 +806,7 @@ azd up --no-prompt
 echo "Running staging tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# Trin 3: Manuel godkendelse til produktion
+# Trin 3: Manuel godkendelse før produktion
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -834,30 +834,30 @@ azd env new dev
 azd env new staging
 azd env new production
 
-# Kør faseopdelt udrulning
+# Kør trinvist udrulning
 ./deploy-staged.sh
 ```
 
-**Succes kriterier:**
-- [ ] Dev-miljøet udrulles med succes
-- [ ] Staging-miljøet udrulles med succes
+**Succeskriterier:**
+- [ ] Dev-miljøet udrulles succesfuldt
+- [ ] Staging-miljøet udrulles succesfuldt
 - [ ] Manuel godkendelse kræves for produktion
 - [ ] Alle miljøer har fungerende sundhedstjek
-- [ ] Kan rulles tilbage hvis nødvendigt
+- [ ] Kan rulle tilbage hvis nødvendigt
 
 ### Øvelse 4: Rollback-strategi (25 minutter)
-**Mål**: Implementer og test rollback af udrulning ved hjælp af Git
+**Mål**: Implementer og test rollback ved hjælp af Git
 
 ```bash
 # Udrul v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# Gem v1-commit-hash
+# Gem v1 commit-hash
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# Udrul v2 med en inkompatibel ændring
+# Udrul v2 med inkompatibel ændring
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
@@ -880,18 +880,18 @@ if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; 
 fi
 ```
 
-**Succes kriterier:**
+**Succeskriterier:**
 - [ ] Kan opdage udrulningsfejl
 - [ ] Rollback-script kører automatisk
-- [ ] Applikationen vender tilbage til fungerende tilstand
+- [ ] Applikationen returnerer til fungerende tilstand
 - [ ] Sundhedstjek bestås efter rollback
 
-## 📊 Sporing af udrulningsmetrics
+## 📊 Sporing af udrulningsmetrikker
 
-### Spor din udrulningsydelse
+### Spor din udrulningsperformance
 
 ```bash
-# Opret script til udrulningsmetrikker
+# Opret script til udrulningsmålinger
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
@@ -918,7 +918,7 @@ chmod +x track-deployment.sh
 ./track-deployment.sh
 ```
 
-**Analyser dine metrics:**
+**Analyser dine metrikker:**
 ```bash
 # Vis udrulningshistorik
 cat deployment-metrics.csv
@@ -929,10 +929,10 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 
 ## Yderligere ressourcer
 
-- [Azure Developer CLI Udrulningsreference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Azure App Service Udrulning](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Azure Container Apps Udrulning](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Azure Functions Udrulning](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Azure Developer CLI udrulningsreference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Udrulning til Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Udrulning til Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Udrulning af Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
@@ -943,6 +943,6 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfraskrivelse:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten Co-op Translator (https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på originalsproget bør betragtes som den autoritative kilde. Ved kritisk information anbefales en professionel, menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+**Disclaimer**:
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på dets originalsprog bør betragtes som den autoritative kilde. For kritiske oplysninger anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

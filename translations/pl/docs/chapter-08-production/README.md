@@ -1,21 +1,21 @@
-# Rozdział 8: Wzorce produkcyjne i korporacyjne
+# Rozdział 8: Wzorce Produkcyjne i Korporacyjne
 
-**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 2-3 godziny | **⭐ Złożoność**: Zaawansowany
+**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 2-3 godziny | **⭐ Stopień trudności**: Zaawansowany
 
 ---
 
 ## Przegląd
 
-Ten rozdział obejmuje wzorce wdrożeń gotowych dla przedsiębiorstw, wzmacnianie bezpieczeństwa, monitorowanie oraz optymalizację kosztów dla produkcyjnych obciążeń AI.
+Ten rozdział obejmuje wzorce wdrożeń gotowych do zastosowań korporacyjnych, zabezpieczenia, monitorowanie i optymalizację kosztów dla produkcyjnych obciążeń AI.
 
 ## Cele nauki
 
 Po ukończeniu tego rozdziału będziesz potrafił:
-- Wdrażać odporne aplikacje w wielu regionach
-- Wdrażać wzorce bezpieczeństwa dla przedsiębiorstw
+- Wdrażać aplikacje odporne wieloregionowo
+- Implementować korporacyjne wzorce bezpieczeństwa
 - Konfigurować kompleksowe monitorowanie
 - Optymalizować koszty na dużą skalę
-- Skonfigurować potoki CI/CD z AZD
+- Ustawiać rurociągi CI/CD z AZD
 
 ---
 
@@ -23,45 +23,38 @@ Po ukończeniu tego rozdziału będziesz potrafił:
 
 | # | Lekcja | Opis | Czas |
 |---|--------|-------------|------|
-| 1 | [Praktyki AI w produkcji](production-ai-practices.md) | Wzorce wdrożeń dla przedsiębiorstw | 90 min |
+| 1 | [Praktyki produkcji AI](production-ai-practices.md) | Wzorce wdrożeń korporacyjnych | 90 min |
 
 ---
 
 ## 🚀 Lista kontrolna produkcji
 
-- [ ] Wdrażanie wieloregionowe dla odporności
-- [ ] Zarządzana tożsamość do uwierzytelniania (bez kluczy)
+- [ ] Wdrożenie wieloregionowe dla odporności
+- [ ] Zarządzana tożsamość dla uwierzytelniania (bez kluczy)
 - [ ] Application Insights do monitorowania
 - [ ] Skonfigurowane budżety kosztów i alerty
 - [ ] Włączone skanowanie bezpieczeństwa
-- [ ] Integracja potoków CI/CD
-- [ ] Plan odtwarzania po awarii
+- [ ] Integracja z rurociągiem CI/CD
+- [ ] Plan odzyskiwania po awarii
 
 ---
 
-## 🏗️ Wzorce architektoniczne
+## 🏗️ Wzorce architektury
 
-### Wzorzec 1: Mikroserwisowe AI
+### Wzorzec 1: Microservices AI
 
+```mermaid
+graph LR
+    Gateway[Brama API] --> AI[Usługa AI] --> Models[Modele Microsoft Foundry]
+    Gateway --> Auth[Usługa Uwierzytelniania]
+    AI --> Data[Magazyn Danych]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
-
 ### Wzorzec 2: AI sterowane zdarzeniami
 
+```mermaid
+graph LR
+    EventGrid[Siatka zdarzeń] --> Functions[Funkcje] --> Pipeline[Potok AI]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
 ## 🔐 Najlepsze praktyki bezpieczeństwa
@@ -86,10 +79,10 @@ properties: {
 ## 💰 Optymalizacja kosztów
 
 | Strategia | Oszczędności |
-|----------|---------|
+|----------|--------------|
 | Skalowanie do zera (Container Apps) | 60-80% |
-| Użycie warstw konsumpcyjnych dla środowiska deweloperskiego | 50-70% |
-| Skalowanie według harmonogramu | 30-50% |
+| Używanie planów konsumpcyjnych na dewelopment | 50-70% |
+| Planowane skalowanie | 30-50% |
 | Zarezerwowana pojemność | 20-40% |
 
 ```bash
@@ -103,7 +96,7 @@ az consumption budget create \
 
 ---
 
-## 📊 Konfiguracja monitoringu
+## 📊 Konfiguracja monitorowania
 
 ```bash
 # Strumieniuj logi
@@ -112,7 +105,7 @@ azd monitor --logs
 # Sprawdź Application Insights
 azd monitor
 
-# Wyświetl metryki
+# Zobacz metryki
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -123,7 +116,7 @@ az monitor metrics list --resource <resource-id>
 | Kierunek | Rozdział |
 |-----------|---------|
 | **Poprzedni** | [Rozdział 7: Rozwiązywanie problemów](../chapter-07-troubleshooting/README.md) |
-| **Kurs ukończony** | [Strona główna kursu](../../README.md) |
+| **Koniec kursu** | [Strona główna kursu](../../README.md) |
 
 ---
 
@@ -138,5 +131,5 @@ az monitor metrics list --resource <resource-id>
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Zastrzeżenie**:
-Niniejszy dokument został przetłumaczony przy użyciu usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku źródłowym należy traktować jako źródło wiążące. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+Dokument ten został przetłumaczony przy użyciu automatycznej usługi tłumaczeniowej [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dążymy do dokładności, prosimy mieć na uwadze, że tłumaczenia automatyczne mogą zawierać błędy lub niedokładności. Oryginalny dokument w języku źródłowym powinien być uważany za autorytatywne źródło. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

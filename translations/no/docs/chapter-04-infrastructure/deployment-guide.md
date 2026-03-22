@@ -1,22 +1,22 @@
 # Distribusjonsveiledning - Mestre AZD-distribusjoner
 
 **Kapittelnavigasjon:**
-- **📚 Kursforside**: [AZD for nybegynnere](../../README.md)
-- **📖 Gjeldende kapittel**: Kapittel 4 - Infrastruktur som kode & distribusjon
-- **⬅️ Forrige kapittel**: [Kapittel 3: Konfigurasjon](../chapter-03-configuration/configuration.md)
-- **➡️ Neste**: [Tilordning av ressurser](provisioning.md)
-- **🚀 Neste kapittel**: [Kapittel 5: Multi-agent AI-løsninger](../../examples/retail-scenario.md)
+- **📚 Kurs Hjem**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 4 - Infrastruktur som kode & distribusjon
+- **⬅️ Forrige Kapittel**: [Kapittel 3: Konfigurasjon](../chapter-03-configuration/configuration.md)
+- **➡️ Neste**: [Provisionering av ressurser](provisioning.md)
+- **🚀 Neste Kapittel**: [Kapittel 5: Multi-Agent AI-løsninger](../../examples/retail-scenario.md)
 
 ## Introduksjon
 
-Denne## Understanding the Deployment Processomfattende veiledningen dekker alt du trenger å vite om å distribuere applikasjoner ved bruk av Azure Developer CLI, fra grunnleggende en-kommando-distribusjoner til avanserte produksjonsscenarier med tilpassede hooks, flere miljøer og CI/CD-integrasjon. Mestre hele distribusjonslivssyklusen med praktiske eksempler og beste praksis.
+Denne omfattende veiledningen dekker alt du trenger å vite om å distribuere applikasjoner ved bruk av Azure Developer CLI, fra grunnleggende enkeltkommando-distribusjoner til avanserte produksjonsscenarier med egendefinerte kroker, flere miljøer og CI/CD-integrasjon. Mestre hele distribusjonslivssyklusen med praktiske eksempler og beste praksis.
 
 ## Læringsmål
 
 Ved å fullføre denne veiledningen vil du:
-- Mestre alle Azure Developer CLI-kommandoer og -arbeidsflyter for distribusjon
+- Mestre alle Azure Developer CLI distribusjonskommandoer og arbeidsflyter
 - Forstå hele distribusjonslivssyklusen fra provisjonering til overvåking
-- Implementere tilpassede deploy-hooks for automatisering før og etter distribusjon
+- Implementere egendefinerte distribusjonskroker for automatisering før og etter distribusjon
 - Konfigurere flere miljøer med miljøspesifikke parametere
 - Sette opp avanserte distribusjonsstrategier inkludert blue-green og canary-distribusjoner
 - Integrere azd-distribusjoner med CI/CD-pipelines og DevOps-arbeidsflyter
@@ -25,24 +25,24 @@ Ved å fullføre denne veiledningen vil du:
 
 Etter fullføring vil du kunne:
 - Utføre og feilsøke alle azd-distribusjonsarbeidsflyter selvstendig
-- Designe og implementere tilpasset distribusjonsautomatisering med hooks
+- Designe og implementere egendefinert distribusjonsautomatisering med kroker
 - Konfigurere produksjonsklare distribusjoner med riktig sikkerhet og overvåking
 - Håndtere komplekse distribusjonsscenarier med flere miljøer
-- Optimalisere distribusjonsprestasjoner og implementere rollback-strategier
-- Integrere azd-distribusjoner i bedriftsnivås DevOps-praksis
+- Optimalisere distribusjonsytelse og implementere tilbakeføringsstrategier
+- Integrere azd-distribusjoner i virksomhetens DevOps-praksis
 
-## Oversikt over distribusjon
+## Distribusjonsoversikt
 
 Azure Developer CLI tilbyr flere distribusjonskommandoer:
-- `azd up` - Komplett arbeidsflyt (provisjonering + distribusjon)
+- `azd up` - Komplett arbeidsflyt (provisjon + distribuer)
 - `azd provision` - Opprett/oppdater kun Azure-ressurser
 - `azd deploy` - Distribuer kun applikasjonskode
 - `azd package` - Bygg og pakk applikasjoner
 
 ## Grunnleggende distribusjonsarbeidsflyter
 
-### Komplett distribusjon (azd up)
-Den mest vanlige arbeidsflyten for nye prosjekter:
+### Komplett Distribusjon (azd up)
+Den vanligste arbeidsflyten for nye prosjekter:
 ```bash
 # Distribuer alt fra bunnen av
 azd up
@@ -54,21 +54,21 @@ azd up --environment production
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Kun infrastruktur-distribusjon
+### Kun Infrastruktur-distribusjon
 Når du bare trenger å oppdatere Azure-ressurser:
 ```bash
-# Sette opp/oppdatere infrastruktur
+# Tilrettelegg/oppdater infrastruktur
 azd provision
 
-# Sette opp med prøvekjøring for å forhåndsvise endringer
+# Tilrettelegg med tørrkjøring for å forhåndsvise endringer
 azd provision --preview
 
-# Sette opp spesifikke tjenester
+# Tilrettelegg spesifikke tjenester
 azd provision --service database
 ```
 
-### Kun kode-distribusjon
-For raske oppdateringer av applikasjonen:
+### Kun Kode-distribusjon
+For raske applikasjonsoppdateringer:
 ```bash
 # Distribuer alle tjenester
 azd deploy
@@ -77,47 +77,47 @@ azd deploy
 # Distribuerer tjenester (azd deploy)
 # - web: Distribuerer... Ferdig
 # - api: Distribuerer... Ferdig
-# SUKSESS: Utrullingen din ble fullført på 2 minutter og 15 sekunder
+# VELYKKET: Din distribusjon ble fullført på 2 minutter 15 sekunder
 
-# Distribuer en spesifikk tjeneste
+# Distribuer spesifikk tjeneste
 azd deploy --service web
 azd deploy --service api
 
-# Distribuer med egendefinerte byggeargumenter
+# Distribuer med tilpassede byggeargumenter
 azd deploy --service api --build-arg NODE_ENV=production
 
-# Verifiser utrullingen
+# Verifiser distribusjon
 azd show --output json | jq '.services'
 ```
 
 ### ✅ Verifisering av distribusjon
 
-Etter enhver distribusjon, verifiser at den var vellykket:
+Etter enhver distribusjon, verifiser suksess:
 
 ```bash
 # Sjekk at alle tjenester kjører
 azd show
 
-# Test helsesjekk-endepunkter
+# Test helseendepunkter
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
 curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
 curl -f "$API_URL/health" || echo "❌ API health check failed"
 
-# Overvåk for feil (åpnes som standard i nettleseren)
+# Overvåk etter feil (åpnes i nettleser som standard)
 azd monitor --logs
 ```
 
 **Suksesskriterier:**
-- ✅ Alle tjenester viser statusen "Running"
+- ✅ Alle tjenester viser "Kjører" status
 - ✅ Helseendepunkter returnerer HTTP 200
-- ✅ Ingen feillogger de siste 5 minuttene
+- ✅ Ingen feil logger de siste 5 minuttene
 - ✅ Applikasjonen svarer på testforespørsler
 
 ## 🏗️ Forstå distribusjonsprosessen
 
-### Fase 1: Hooks før provisjonering
+### Fase 1: Pre-Provision Hooks
 ```yaml
 # azure.yaml
 hooks:
@@ -132,12 +132,12 @@ hooks:
 ```
 
 ### Fase 2: Infrastrukturprovisjonering
-- Leser infrastrukturmaler (Bicep/Terraform)
+- Leser infrastruktursjabloner (Bicep/Terraform)
 - Oppretter eller oppdaterer Azure-ressurser
 - Konfigurerer nettverk og sikkerhet
 - Setter opp overvåking og logging
 
-### Fase 3: Hooks etter provisjonering
+### Fase 3: Post-Provision Hooks
 ```yaml
 hooks:
   postprovision:
@@ -150,12 +150,12 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### Fase 4: Pakking av applikasjon
+### Fase 4: Applikasjonspakking
 - Bygger applikasjonskode
 - Lager distribusjonsartefakter
-- Pakker for målplattform (containere, ZIP-filer, osv.)
+- Pakker for målplattform (containere, ZIP-filer, etc.)
 
-### Fase 5: Hooks før distribusjon
+### Fase 5: Pre-Deploy Hooks
 ```yaml
 hooks:
   predeploy:
@@ -173,7 +173,7 @@ hooks:
 - Oppdaterer konfigurasjonsinnstillinger
 - Starter/omstarter tjenester
 
-### Fase 7: Hooks etter distribusjon
+### Fase 7: Post-Deploy Hooks
 ```yaml
 hooks:
   postdeploy:
@@ -238,7 +238,7 @@ azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 Avanserte distribusjonsscenarioer
+## 🔧 Avanserte distribusjonsscenarier
 
 ### Applikasjoner med flere tjenester
 ```yaml
@@ -276,7 +276,7 @@ services:
     host: function
 ```
 
-### Blue-green-distribusjoner
+### Blue-Green Distribusjoner
 ```bash
 # Opprett blått miljø
 azd env new production-blue
@@ -285,15 +285,15 @@ azd up --environment production-blue
 # Test blått miljø
 ./scripts/test-environment.sh production-blue
 
-# Bytt trafikk til blått (manuell oppdatering av DNS/lastbalanserer)
+# Skift trafikk til blått (manuell DNS/load balancer-oppdatering)
 ./scripts/switch-traffic.sh production-blue
 
-# Rydd opp grønt miljø
+# Rydd opp i grønt miljø
 azd env select production-green
 azd down --force
 ```
 
-### Canary-distribusjoner
+### Canary Distribusjoner
 ```yaml
 # azure.yaml - Configure traffic splitting
 services:
@@ -307,7 +307,7 @@ services:
         percentage: 10
 ```
 
-### Faserte distribusjoner
+### Trinnvise distribusjoner
 ```bash
 #!/bin/bash
 # deploy-staged.sh
@@ -340,7 +340,7 @@ fi
 
 ## 🐳 Container-distribusjoner
 
-### Distribusjoner av Container App
+### Container App-distribusjoner
 ```yaml
 services:
   api:
@@ -364,7 +364,7 @@ services:
       maxReplicas: 10
 ```
 
-### Optimalisering av multi-stage Dockerfile
+### Optimalisering av Dockerfile med flere trinn
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -394,7 +394,7 @@ CMD ["npm", "start"]
 
 ### Tjenestespesifikke distribusjoner
 ```bash
-# Distribuer en bestemt tjeneste for raskere iterasjon
+# Distribuer en spesifikk tjeneste for raskere iterasjon
 azd deploy --service web
 azd deploy --service api
 
@@ -402,7 +402,7 @@ azd deploy --service api
 azd deploy
 ```
 
-### Bygge-caching
+### Byggekaching
 ```yaml
 # azure.yaml - Configure build commands
 services:
@@ -412,31 +412,31 @@ services:
     outputPath: dist
 ```
 
-### Effektive kode-distribusjoner
+### Effektiv kode-distribusjon
 ```bash
-# Bruk azd deploy (ikke azd up) for kodeendringer
-# Dette hopper over provisjonering av infrastruktur og er mye raskere
+# Bruk azd deploy (ikke azd up) for kodeendringer alene
+# Dette hopper over infrastrukturprovisjonering og er mye raskere
 azd deploy
 
-# Distribuer en spesifikk tjeneste for raskest mulig iterasjon
+# Distribuer spesifikk tjeneste for raskest iterasjon
 azd deploy --service api
 ```
 
-## 🔍 Overvåking av distribusjon
+## 🔍 Overvåking av distribusjoner
 
 ### Sanntidsovervåking av distribusjoner
 ```bash
 # Overvåk applikasjonen i sanntid
 azd monitor --live
 
-# Vis applikasjonslogger
+# Se applikasjonslogger
 azd monitor --logs
 
 # Sjekk distribusjonsstatus
 azd show
 ```
 
-### Helsekontroller
+### Helsesjekker
 ```yaml
 # azure.yaml - Configure health checks
 services:
@@ -457,7 +457,7 @@ services:
 
 echo "Validating deployment..."
 
-# Sjekk applikasjonens helse
+# Sjekk applikasjonshelse
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -505,7 +505,7 @@ services:
         value: ${JWT_SECRET}
 ```
 
-### Nettverkssikkerhet
+### Nettsikkerhet
 ```yaml
 # azure.yaml - Configure network security
 infra:
@@ -516,7 +516,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### Identitets- og tilgangsstyring
+### Identitet og tilgangsstyring
 ```yaml
 services:
   api:
@@ -531,34 +531,34 @@ services:
           - external-api-key
 ```
 
-## 🚨 Rollback-strategier
+## 🚨 Tilbakeføringsstrategier
 
-### Rask rollback
+### Rask tilbakeføring
 ```bash
-# AZD har ikke innebygd tilbakerulling. Anbefalte tilnærminger:
+# AZD har ikke innebygd tilbakeføring. Anbefalte tilnærminger:
 
 # Alternativ 1: Distribuer på nytt fra Git (anbefalt)
-git revert HEAD  # Angre den problematiske committen
+git revert HEAD  # Tilbakestill den problematiske commit
 git push
 azd deploy
 
-# Alternativ 2: Distribuer en spesifikk commit på nytt
+# Alternativ 2: Distribuer spesifikk commit på nytt
 git checkout <previous-commit-hash>
 azd deploy
 git checkout main
 ```
 
-### Rollback av infrastruktur
+### Infrastruktur-tilbakeføring
 ```bash
 # Forhåndsvis infrastrukturendringer før du bruker dem
 azd provision --preview
 
-# For tilbakestilling av infrastruktur, bruk versjonskontroll:
+# For infrastruktur-tilbakestilling, bruk versjonskontroll:
 git revert HEAD  # Tilbakestill infrastrukturendringer
-azd provision    # Gjenopprett tidligere infrastrukturtilstand
+azd provision    # Bruk forrige infrastrukturtilstand
 ```
 
-### Rollback av databasemigrasjon
+### Tilbakeføring av database-migrasjon
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -572,9 +572,9 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 Distribusjonsmetrikker
+## 📊 Distribusjonsmålinger
 
-### Følg distribusjonsprestasjoner
+### Spor distribusjonsytelse
 ```bash
 # Vis gjeldende distribusjonsstatus
 azd show
@@ -586,7 +586,7 @@ azd monitor --overview
 azd monitor --live
 ```
 
-### Tilpasset innsamling av metrikker
+### Innsamling av egendefinerte målinger
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -603,32 +603,32 @@ hooks:
         -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
 ```
 
-## 🎯 Beste praksis
+## 🎯 Beste praksiser
 
 ### 1. Konsistens mellom miljøer
 ```bash
-# Bruk konsekvent navngivning
+# Bruk konsistent navngivning
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Oppretthold likhet mellom miljøene
+# Oppretthold miljøparitet
 ./scripts/sync-environments.sh
 ```
 
 ### 2. Validering av infrastruktur
 ```bash
-# Forhåndsvis endringer i infrastrukturen før distribusjon
+# Forhåndsvis infrastrukturendringer før distribusjon
 azd provision --preview
 
-# Bruk ARM/Bicep-linting
+# Bruk ARM/Bicep linting
 az bicep lint --file infra/main.bicep
 
 # Valider Bicep-syntaks
 az bicep build --file infra/main.bicep
 ```
 
-### 3. Integrering av testing
+### 3. Testing-integrasjon
 ```yaml
 hooks:
   predeploy:
@@ -659,7 +659,7 @@ hooks:
 
 ### 4. Dokumentasjon og logging
 ```bash
-# Dokumenter utrullingsprosedyrer
+# Dokumenter distribusjonsprosedyrer
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
@@ -667,33 +667,33 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Neste steg
 
-- [Tilordning av ressurser](provisioning.md) - Dypdykk i infrastrukturhåndtering
+- [Provisionering av ressurser](provisioning.md) - Dypdykk i infrastrukturstyring
 - [Planlegging før distribusjon](../chapter-06-pre-deployment/capacity-planning.md) - Planlegg distribusjonsstrategien din
 - [Vanlige problemer](../chapter-07-troubleshooting/common-issues.md) - Løs distribusjonsproblemer
-- [Beste praksis](../chapter-07-troubleshooting/debugging.md) - Produksjonsklare distribusjonsstrategier
+- [Beste praksiser](../chapter-07-troubleshooting/debugging.md) - Produksjonsklare distribusjonsstrategier
 
 ## 🎯 Praktiske distribusjonsøvelser
 
-### Øvelse 1: Inkrementell distribusjonsarbeidsflyt (20 minutter)
-**Mål**: Mestre forskjellen mellom fullstendige og inkrementelle distribusjoner
+### Øvelse 1: Trinnvis distribusjonsarbeidsflyt (20 minutter)
+**Mål**: Mestre forskjellen mellom full og trinnvis distribusjon
 
 ```bash
-# Innledende utrulling
+# Første distribusjon
 mkdir deployment-practice && cd deployment-practice
 azd init --template todo-nodejs-mongo
 azd up
 
-# Registrer tidspunkt for innledende utrulling
+# Registrer tid for første distribusjon
 echo "Full deployment: $(date)" > deployment-log.txt
 
 # Gjør en kodeendring
 echo "// Updated $(date)" >> src/api/src/server.js
 
-# Utrull kun kode (raskt)
+# Distribuer kun kode (raskt)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
-# Sammenlign tidspunkter
+# Sammenlign tider
 cat deployment-log.txt
 
 # Rydd opp
@@ -701,30 +701,30 @@ azd down --force --purge
 ```
 
 **Suksesskriterier:**
-- [ ] Full distribusjon tar 5–15 minutter
-- [ ] Kun kode-distribusjon tar 2–5 minutter
-- [ ] Kodeendringer gjenspeiles i distribuert app
+- [ ] Full distribusjon tar 5-15 minutter
+- [ ] Kode-kun distribusjon tar 2-5 minutter
+- [ ] Kodeendringer reflekteres i distribuert app
 - [ ] Infrastruktur uendret etter `azd deploy`
 
-**Læringsutbytte**: `azd deploy` er 50–70 % raskere enn `azd up` for kodeendringer
+**Læringsutbytte**: `azd deploy` er 50-70 % raskere enn `azd up` for kodeendringer
 
-### Øvelse 2: Tilpassede deploy-hooks (30 minutter)
+### Øvelse 2: Egendefinerte distribusjonskroker (30 minutter)
 **Mål**: Implementere automatisering før og etter distribusjon
 
 ```bash
-# Opprett valideringsskript før distribusjon
+# Lag et valideringsskript før distribusjon
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
 echo "⚠️ Running pre-deployment checks..."
 
-# Sjekk om testene består
+# Sjekk om tester består
 if ! npm run test:unit; then
     echo "❌ Tests failed! Aborting deployment."
     exit 1
 fi
 
-# Sjekk etter ukommitterte endringer
+# Sjekk etter uforpliktede endringer
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -734,7 +734,7 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# Opprett røyktest etter distribusjon
+# Lag en røyktest etter distribusjon
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
 echo "💨 Running smoke tests..."
@@ -772,15 +772,15 @@ azd deploy
 
 **Suksesskriterier:**
 - [ ] Pre-deploy-skript kjører før distribusjon
-- [ ] Distribusjonen avbrytes hvis tester feiler
-- [ ] Post-deploy smoke-test validerer helsen
-- [ ] Hooks kjører i riktig rekkefølge
+- [ ] Distribusjon avbrytes hvis tester feiler
+- [ ] Post-deploy røyketest validerer helsetilstand
+- [ ] Kroker utføres i riktig rekkefølge
 
-### Øvelse 3: Strategi for distribusjon i flere miljøer (45 minutter)
-**Mål**: Implementere en fasebasert distribusjonsarbeidsflyt (dev → staging → production)
+### Øvelse 3: Distribusjonsstrategi med flere miljøer (45 minutter)
+**Mål**: Implementere trinnvis distribusjonsarbeidsflyt (dev → staging → produksjon)
 
 ```bash
-# Opprett distribusjonsskript
+# Lag distribusjonsskript
 cat > deploy-staged.sh << 'EOF'
 #!/bin/bash
 set -e
@@ -834,19 +834,19 @@ azd env new dev
 azd env new staging
 azd env new production
 
-# Kjør trinnvis utrulling
+# Kjør trinnvis distribusjon
 ./deploy-staged.sh
 ```
 
 **Suksesskriterier:**
-- [ ] Dev-miljøet distribueres vellykket
-- [ ] Staging-miljøet distribueres vellykket
+- [ ] Dev-miljø distribueres vellykket
+- [ ] Staging-miljø distribueres vellykket
 - [ ] Manuell godkjenning kreves for produksjon
 - [ ] Alle miljøer har fungerende helsesjekker
-- [ ] Kan rulle tilbake ved behov
+- [ ] Kan tilbakeføres om nødvendig
 
-### Øvelse 4: Rollback-strategi (25 minutter)
-**Mål**: Implementere og teste rollback av distribusjon ved bruk av Git
+### Øvelse 4: Tilbakeføringsstrategi (25 minutter)
+**Mål**: Implementere og teste distribusjonstilbakeføring ved bruk av Git
 
 ```bash
 # Distribuer v1
@@ -857,20 +857,20 @@ azd up
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# Distribuer v2 med en inkompatibel endring
+# Distribuer v2 med bakoverbrudd
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
 azd deploy
 
-# Oppdag feil og rull tilbake
+# Oppdag feil og tilbakestill
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # Rull tilbake med git
+    # Tilbakestill med git
     git revert HEAD --no-edit
     
-    # Rull tilbake miljøet
+    # Tilbakestill miljø
     azd env set APP_VERSION "1.0.0"
     
     # Distribuer v1 på nytt
@@ -881,17 +881,17 @@ fi
 ```
 
 **Suksesskriterier:**
-- [ ] Kan oppdage distribusjonssvikt
-- [ ] Rollback-skript kjører automatisk
+- [ ] Kan oppdage distribusjonsfeil
+- [ ] Tilbakeføringsskript kjører automatisk
 - [ ] Applikasjonen går tilbake til fungerende tilstand
-- [ ] Helsesjekker går gjennom etter rollback
+- [ ] Helsesjekker godkjennes etter tilbakeføring
 
-## 📊 Sporing av distribusjonsmetrikker
+## 📊 Sporing av distribusjonsmålinger
 
-### Følg distribusjonsprestasjonene dine
+### Spor distribusjonsytelsen din
 
 ```bash
-# Opprett skript for distribusjonsmetrikker
+# Lag skript for distribusjonsmålinger
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
@@ -918,31 +918,31 @@ chmod +x track-deployment.sh
 ./track-deployment.sh
 ```
 
-**Analyser metrikker:**
+**Analyser målingene dine:**
 ```bash
-# Vis utrullingshistorikk
+# Vis distribusjonshistorikk
 cat deployment-metrics.csv
 
-# Beregn gjennomsnittlig utrullingstid
+# Beregn gjennomsnittlig distribusjonstid
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
 ## Ytterligere ressurser
 
-- [Azure Developer CLI: distribusjonsreferanse](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Distribusjon for Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Distribusjon for Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Distribusjon for Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Azure Developer CLI distribusjonsreferanse](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Azure App Service distribusjon](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Azure Container Apps distribusjon](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Azure Functions distribusjon](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
 **Navigasjon**
 - **Forrige leksjon**: [Ditt første prosjekt](../chapter-01-foundation/first-project.md)
-- **Neste leksjon**: [Tilordning av ressurser](provisioning.md)
+- **Neste leksjon**: [Provisionering av ressurser](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfraskrivelse:
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet i sin opprinnelige form bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+**Ansvarsfraskrivelse**:  
+Dette dokumentet er oversatt ved bruk av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk skal betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

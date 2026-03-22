@@ -1,43 +1,43 @@
 # インストールとセットアップガイド
 
-**チャプター ナビゲーション:**
-- **📚 コース ホーム**: [AZD 入門](../../README.md)
+**章ナビゲーション:**
+- **📚 コースホーム**: [AZD 初心者向け](../../README.md)
 - **📖 現在の章**: 第1章 - 基礎とクイックスタート
-- **⬅️ 前へ**: [AZD の基本](azd-basics.md)
+- **⬅️ 前へ**: [AZD 基本](azd-basics.md)
 - **➡️ 次へ**: [最初のプロジェクト](first-project.md)
-- **🚀 次の章**: [第2章: AI-ファースト開発](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 次の章**: [第2章：AIファースト開発](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## はじめに
 
-この包括的なガイドでは、システムに Azure Developer CLI (azd) をインストールおよび構成する手順を説明します。異なるオペレーティングシステム向けの複数のインストール方法、認証の設定、および Azure へのデプロイに備えた初期構成について学びます。
+この包括的なガイドでは、Azure Developer CLI (azd) をシステムにインストールおよび構成する手順を説明します。異なるオペレーティングシステム向けの複数のインストール方法、認証の設定、および Azure へのデプロイに向けた開発環境の初期設定を学びます。
 
 ## 学習目標
 
 このレッスンの終了時には、次のことができるようになります:
-- 使用しているオペレーティングシステムに Azure Developer CLI を正常にインストールする
-- 複数の方法で Azure に対する認証を構成する
-- 必要な前提条件を用意して開発環境を設定する
-- さまざまなインストールオプションとその利用シーンを理解する
-- 一般的なインストールおよびセットアップの問題をトラブルシュートする
+- 使用しているオペレーティングシステムに対して Azure Developer CLI を正常にインストールする
+- 複数の方法で Azure と認証を構成する
+- 必要な前提条件を整えて開発環境をセットアップする
+- 異なるインストールオプションを理解し、各オプションを使うべき状況を判断する
+- 一般的なインストールおよびセットアップの問題をトラブルシューティングする
 
 ## 学習成果
 
 このレッスンを完了すると、次のことができるようになります:
 - プラットフォームに適した方法で azd をインストールする
 - `azd auth login` を使用して Azure に認証する
-- インストールを検証して基本的な azd コマンドをテストする
+- インストールを検証し、基本的な azd コマンドの動作をテストする
 - azd を最適に使用するために開発環境を構成する
-- 一般的なインストール問題を自主的に解決する
+- 一般的なインストールの問題を自力で解決する
 
-このガイドは、オペレーティングシステムや開発環境に関わらず、システムに Azure Developer CLI をインストールして構成するのに役立ちます。
+このガイドは、オペレーティングシステムや開発環境に関係なく、Azure Developer CLI をインストールおよび構成するのに役立ちます。
 
 ## 前提条件
 
 azd をインストールする前に、次を確認してください:
-- **Azure subscription** - [無料アカウントを作成](https://azure.microsoft.com/free/)
+- **Azure サブスクリプション** - [無料アカウントを作成する](https://azure.microsoft.com/free/)
 - **Azure CLI** - 認証とリソース管理のため
 - **Git** - テンプレートのクローンとバージョン管理のため
-- **Docker** (optional) - コンテナ化されたアプリケーション向け
+- **Docker**（オプション） - コンテナ化されたアプリケーション用
 
 ## インストール方法
 
@@ -60,9 +60,9 @@ choco install azd
 ```
 
 #### オプション 4: 手動インストール
-1. 最新のリリースを[GitHub](https://github.com/Azure/azure-dev/releases)からダウンロード
-2. `C:\Program Files\azd\` に展開
-3. PATH 環境変数に追加
+1. 最新のリリースを [GitHub](https://github.com/Azure/azure-dev/releases) からダウンロードします
+2. `C:\Program Files\azd\` に展開します
+3. PATH 環境変数に追加します
 
 ### macOS
 
@@ -104,7 +104,7 @@ sudo apt-get install azd
 
 **RHEL/CentOS/Fedora:**
 ```bash
-# Microsoftのパッケージリポジトリを追加する
+# Microsoft のパッケージリポジトリを追加する
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/azure-cli
 sudo dnf install azd
@@ -112,12 +112,12 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd は GitHub Codespaces にプリインストールされています。コードスペースを作成するだけで、すぐに azd を使用できます。
+azd は GitHub Codespaces にプレインストールされています。codespace を作成してすぐに azd を使用できます。
 
 ### Docker
 
 ```bash
-# コンテナ内で azd を実行する
+# コンテナで azd を実行する
 docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest
 
 # より簡単に使えるようにエイリアスを作成する
@@ -126,16 +126,16 @@ alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-
 
 ## ✅ インストールの確認
 
-インストール後、azd が正しく動作することを確認します:
+インストール後、azd が正しく動作していることを確認します:
 
 ```bash
-# バージョンを確認
+# バージョンを確認する
 azd version
 
-# ヘルプを見る
+# ヘルプを表示する
 azd --help
 
-# 利用可能なテンプレートを一覧表示
+# 利用可能なテンプレートを一覧表示する
 azd template list
 ```
 
@@ -144,16 +144,16 @@ azd template list
 azd version 1.x.x (commit xxxxxx)
 ```
 
-**注意**: 実際のバージョン番号は異なります。最新のバージョンは [Azure Developer CLI のリリース](https://github.com/Azure/azure-dev/releases) を確認してください。
+<strong>注</strong>: 実際のバージョン番号は異なる場合があります。最新のバージョンは [Azure Developer CLI リリース](https://github.com/Azure/azure-dev/releases) を確認してください。
 
 **✅ インストール成功チェックリスト:**
 - [ ] `azd version` がエラーなくバージョン番号を表示する
 - [ ] `azd --help` がコマンドのドキュメントを表示する
 - [ ] `azd template list` が利用可能なテンプレートを表示する
-- [ ] `az account show` があなたの Azure サブスクリプションを表示する
+- [ ] `az account show` が Azure サブスクリプションを表示する
 - [ ] テスト用ディレクトリを作成し、`azd init` を正常に実行できる
 
-**すべてのチェックが合格したら、[最初のプロジェクト](first-project.md) に進む準備ができています！**
+**すべてのチェックが通ったら、[最初のプロジェクト](first-project.md) に進む準備ができています！**
 
 ## 認証の設定
 
@@ -172,13 +172,13 @@ az account show
 ```
 
 ### デバイスコード認証
-ヘッドレスシステムを使用しているかブラウザに問題がある場合:
+ヘッドレス環境にいる場合やブラウザの問題がある場合:
 ```bash
 az login --use-device-code
 ```
 
 ### サービスプリンシパル（CI/CD）
-自動化環境向け:
+自動化された環境向け:
 ```bash
 az login --service-principal \
   --username <client-id> \
@@ -186,22 +186,22 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## 構成
+## 設定
 
-### グローバル構成
+### グローバル設定
 ```bash
-# デフォルトのサブスクリプションを設定する
+# 既定のサブスクリプションを設定する
 azd config set defaults.subscription <subscription-id>
 
-# デフォルトのロケーションを設定する
+# 既定の場所を設定する
 azd config set defaults.location eastus2
 
-# すべての設定を表示する
+# すべての構成を表示する
 azd config list
 ```
 
 ### 環境変数
-シェルプロファイル（`.bashrc`, `.zshrc`, `.profile`）に追加:
+シェルプロファイル（`.bashrc`, `.zshrc`, `.profile`）に追加してください:
 ```bash
 # Azure の構成
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -209,26 +209,26 @@ export AZURE_LOCATION="eastus2"
 
 # azd の構成
 export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
-export AZD_DEBUG=true  # デバッグ ログを有効にする
+export AZD_DEBUG=true  # デバッグログを有効にする
 ```
 
 ## IDE 統合
 
 ### Visual Studio Code
-Azure Developer CLI 拡張機能をインストール:
+Azure Developer CLI 拡張機能をインストールします:
 1. VS Code を開く
-2. 拡張機能へ移動 (Ctrl+Shift+X)
-3. 「Azure Developer CLI」を検索
-4. 拡張機能をインストール
+2. Extensions に移動する (Ctrl+Shift+X)
+3. "Azure Developer CLI" を検索する
+4. 拡張機能をインストールする
 
 機能:
 - azure.yaml の IntelliSense
-- 統合ターミナルのコマンド
+- 統合ターミナルコマンド
 - テンプレートの参照
 - デプロイの監視
 
 ### GitHub Codespaces
-`.devcontainer/devcontainer.json` を作成:
+`.devcontainer/devcontainer.json` を作成します:
 ```json
 {
   "name": "Azure Developer CLI",
@@ -241,22 +241,22 @@ Azure Developer CLI 拡張機能をインストール:
 ```
 
 ### IntelliJ/JetBrains
-1. Azure プラグインをインストール
-2. Azure の資格情報を設定
-3. 統合ターミナルで azd コマンドを使用
+1. Azure プラグインをインストールする
+2. Azure の資格情報を設定する
+3. 統合ターミナルで azd コマンドを使用する
 
 ## 🐛 インストールのトラブルシューティング
 
-### よくある問題
+### 一般的な問題
 
-#### アクセス拒否 (Windows)
+#### 許可が拒否されました（Windows）
 ```powershell
-# PowerShell を管理者として実行する
+# PowerShell を管理者として実行してください
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 #### PATH の問題
-手動で azd を PATH に追加:
+azd を手動で PATH に追加します:
 
 **Windows:**
 ```cmd
@@ -271,7 +271,7 @@ source ~/.bashrc
 
 #### ネットワーク/プロキシの問題
 ```bash
-# プロキシを構成する
+# プロキシを設定する
 azd config set http.proxy http://proxy:8080
 azd config set https.proxy https://proxy:8080
 
@@ -282,15 +282,15 @@ azd config set http.insecure true
 #### バージョンの競合
 ```bash
 # 古いインストールを削除する
-# Windows: 'winget uninstall Microsoft.Azd' を実行
-# macOS: 'brew uninstall azd' を実行
-# Linux: 'sudo apt remove azd' を実行
+# Windows: winget uninstall Microsoft.Azd
+# macOS: brew uninstall azd
+# Linux: sudo apt remove azd
 
 # 設定をクリーンアップする
 rm -rf ~/.azd
 ```
 
-### さらにヘルプを得る
+### 追加のヘルプを得る
 ```bash
 # デバッグログを有効にする
 export AZD_DEBUG=true
@@ -306,19 +306,19 @@ azd show
 ## azd の更新
 
 ### 自動更新
-更新が利用可能になると azd が通知します:
+azd は更新が利用可能になると通知します:
 ```bash
 azd version --check-for-updates
 ```
 
 ### 手動更新
 
-**Windows (winget):**
+**Windows（winget）:**
 ```cmd
 winget upgrade Microsoft.Azd
 ```
 
-**macOS (Homebrew):**
+**macOS（Homebrew）:**
 ```bash
 brew upgrade azd
 ```
@@ -333,47 +333,47 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 <details>
 <summary><strong>azd と az CLI の違いは何ですか？</strong></summary>
 
-**Azure CLI (az)**: 個々の Azure リソースを管理するための低レベルツール
+**Azure CLI (az)**: 個々の Azure リソースを管理するための低レベルのツール
 - `az webapp create`, `az storage account create`
-- 一度に 1 つのリソースを扱う
-- インフラ管理に焦点を当てる
+- 一度に1つのリソースを操作
+- インフラ管理に重点
 
-**Azure Developer CLI (azd)**: アプリケーション全体のデプロイを行う高レベルツール
+**Azure Developer CLI (azd)**: アプリケーション全体のデプロイ向けの高レベルツール
 - `azd up` はすべてのリソースを含むアプリ全体をデプロイする
 - テンプレートベースのワークフロー
-- 開発者の生産性に焦点を当てる
+- 開発者の生産性に重点
 
-**両方が必要です**: azd は認証に az CLI を使用します
+<strong>両方が必要です</strong>: azd は認証のために az CLI を使用します
 </details>
 
 <details>
-<summary><strong>既存の Azure リソースで azd を使用できますか？</strong></summary>
+<summary><strong>既存の Azure リソースと azd を一緒に使えますか？</strong></summary>
 
-はい！次のことが可能です:
+はい！次のことができます:
 1. 既存のリソースを azd 環境にインポートする
-2. Bicep テンプレートで既存のリソースを参照する
-3. 既存のインフラストラクチャと並行して新しいデプロイに azd を使用する
+2. Bicep テンプレート内で既存のリソースを参照する
+3. 既存のインフラと並行して azd を使って新しいデプロイを行う
 
 詳細は [構成ガイド](configuration.md) を参照してください。
 </details>
 
 <details>
-<summary><strong>azd は Azure Government や Azure China で動作しますか？</strong></summary>
+<summary><strong>azd は Azure Government や Azure China でも使えますか？</strong></summary>
 
-はい、クラウドを構成してください:
+はい、クラウドを設定してください:
 ```bash
-# Azure（政府向け）
+# Azure Government（政府向け）
 az cloud set --name AzureUSGovernment
 az login
 
-# Azure（中国）
+# Azure China（中国向け）
 az cloud set --name AzureChinaCloud
 az login
 ```
 </details>
 
 <details>
-<summary><strong>CI/CD パイプラインで azd を使用できますか？</strong></summary>
+<summary><strong>CI/CD パイプラインで azd を使えますか？</strong></summary>
 
 もちろんです！azd は自動化向けに設計されています:
 - GitHub Actions 統合
@@ -381,48 +381,49 @@ az login
 - サービスプリンシパル認証
 - 非対話モード
 
-CI/CD のパターンについては [デプロイ ガイド](../chapter-04-infrastructure/deployment-guide.md) を参照してください。
+CI/CD のパターンについては [デプロイガイド](../chapter-04-infrastructure/deployment-guide.md) を参照してください。
 </details>
 
 <details>
-<summary><strong>azd を使用するコストは？</strong></summary>
+<summary><strong>azd を使うのに費用はかかりますか？</strong></summary>
 
-azd 自体は**完全に無料**でオープンソースです。支払うのは次のもののみです:
+azd 自体は <strong>完全に無料</strong> でオープンソースです。支払うのは次のとおりです:
 - デプロイする Azure リソース
-- Azure の利用料金（コンピュート、ストレージなど）
+- Azure の消費コスト（コンピュート、ストレージなど）
 
 デプロイ前にコストを見積もるには `azd provision --preview` を使用してください。
 </details>
 
 ## 次のステップ
 
-1. **認証を完了する**: Azure サブスクリプションにアクセスできることを確認する
-2. **最初のデプロイを試す**: [最初のプロジェクト](first-project.md) のガイドに従ってください
-3. **テンプレートを探索する**: `azd template list` で利用可能なテンプレートを参照する
-4. **IDE を構成する**: 開発環境を設定する
+1. <strong>認証を完了する</strong>: Azure サブスクリプションにアクセスできることを確認する
+2. <strong>最初のデプロイを試す</strong>: [最初のプロジェクト](first-project.md) に従ってください
+3. <strong>テンプレートを探る</strong>: `azd template list` で利用可能なテンプレートを参照する
+4. **IDE を構成する**: 開発環境をセットアップする
 
 ## サポート
 
 問題が発生した場合:
 - [公式ドキュメント](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [問題を報告](https://github.com/Azure/azure-dev/issues)
-- [コミュニティディスカッション](https://github.com/Azure/azure-dev/discussions)
+- [コミュニティの議論](https://github.com/Azure/azure-dev/discussions)
 - [Azure サポート](https://azure.microsoft.com/support/)
+- [**Azure エージェント スキル**](https://skills.sh/microsoft/github-copilot-for-azure) - `npx skills add microsoft/github-copilot-for-azure` を使ってエディタ内で直接 Azure コマンドのガイダンスを取得できます
 
 ---
 
-**チャプター ナビゲーション:**
-- **📚 コース ホーム**: [AZD 入門](../../README.md)
+**章ナビゲーション:**
+- **📚 コースホーム**: [AZD 初心者向け](../../README.md)
 - **📖 現在の章**: 第1章 - 基礎とクイックスタート
-- **⬅️ 前へ**: [AZD の基本](azd-basics.md) 
+- **⬅️ 前へ**: [AZD 基本](azd-basics.md) 
 - **➡️ 次へ**: [最初のプロジェクト](first-project.md)
-- **🚀 次の章**: [第2章: AI-ファースト開発](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 次の章**: [第2章：AIファースト開発](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**✅ インストール完了！** [最初のプロジェクト](first-project.md) に進んで azd で構築を開始しましょう。
+**✅ インストール完了！** 続けて [最初のプロジェクト](first-project.md) に進み、azd での開発を開始してください。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責事項：
-この文書は AI 翻訳サービス「Co-op Translator」(https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性には努めておりますが、自動翻訳には誤りや不正確な表現が含まれる可能性があることをご承知おきください。原文（原言語の文書）を正式な情報源とみなしてください。重要な情報については、専門の翻訳者による人間翻訳をお勧めします。本翻訳の利用に起因して生じた誤解や解釈の相違について、私たちは責任を負いません。
+**免責事項**:
+この文書は、AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性の確保に努めていますが、自動翻訳には誤りや不正確さが含まれる場合があることにご注意ください。原文（原言語の文書）が権威ある一次資料と見なされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の使用に起因するいかなる誤解や解釈違いについても、当方は責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

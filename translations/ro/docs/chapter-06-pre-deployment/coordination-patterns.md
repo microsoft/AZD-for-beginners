@@ -1,91 +1,85 @@
-# Multi-Agent Coordination Patterns
+# Modele de coordonare multi-agent
 
-⏱️ **Estimated Time**: 60-75 minutes | 💰 **Estimated Cost**: ~$100-300/month | ⭐ **Complexity**: Advanced
+⏱️ **Timp estimat**: 60-75 minute | 💰 **Cost estimat**: ~100-300 USD/lună | ⭐ **Complexitate**: Avansat
 
-**📚 Learning Path:**
-- ← Previous: [Planificarea capacității](capacity-planning.md) - Resource sizing and scaling strategies
-- 🎯 **You Are Here**: Multi-Agent Coordination Patterns (Orchestration, communication, state management)
-- → Next: [Selectarea SKU-ului](sku-selection.md) - Choosing the right Azure services
-- 🏠 [Course Home](../../README.md)
+**📚 Parcurs de învățare:**
+- ← Anterior: [Planificarea capacității](capacity-planning.md) - Strategii de dimensionare și scalare a resurselor
+- 🎯 **Ești aici**: Modele de coordonare multi-agent (Orchestrare, comunicare, gestionare stare)
+- → Următor: [Selectarea SKU](sku-selection.md) - Alegerea serviciilor Azure potrivite
+- 🏠 [Pagina principală a cursului](../../README.md)
 
 ---
 
 ## Ce vei învăța
 
-După parcurgerea acestei lecții, vei:
-- Înțelege modelele de arhitectură multi-agent și când să le folosești
-- Implementa modele de orchestrare (centralizat, descentralizat, ierarhic)
-- Proiecta strategii de comunicare între agenți (sintornă, asincronă, bazată pe evenimente)
-- Gestionează stare partajată între agenți distribuiți
-- Implementa sisteme multi-agent pe Azure cu AZD
-- Aplica modele de coordonare pentru scenarii AI din lumea reală
-- Monitoriza și depana sisteme de agenți distribuiți
+Prin parcurgerea acestei lecții, vei:
+- Înțelege modelele de **arhitectură multi-agent** și când să le folosești
+- Implementa **modele de orchestrare** (centralizată, descentralizată, ierarhică)
+- Proiecta strategii de **comunicare între agenți** (sincronă, asincronă, bazată pe evenimente)
+- Gestiona **starea partajată** între agenți distribuiți
+- Implementa sisteme **multi-agent** pe Azure cu AZD
+- Aplica **modele de coordonare** pentru scenarii reale AI
+- Monitoriza și depana sisteme distribuite de agenți
 
 ## De ce contează coordonarea multi-agent
 
-### Evoluția: De la agent unic la sistem multi-agent
+### Evoluția: De la agent unic la multi-agent
 
 **Agent unic (Simplu):**
 ```
 User → Agent → Response
 ```
-- ✅ Ușor de înțeles și de implementat
+- ✅ Ușor de înțeles și implementat
 - ✅ Rapid pentru sarcini simple
-- ❌ Limitat de capabilitățile unui singur model
+- ❌ Limitat de capacitățile unui singur model
 - ❌ Nu poate paraleliza sarcini complexe
 - ❌ Fără specializare
 
 **Sistem multi-agent (Avansat):**
-```
-           ┌─────────────┐
-           │ Orchestrator│
-           └──────┬──────┘
-        ┌─────────┼─────────┐
-        │         │         │
-    ┌───▼──┐  ┌──▼───┐  ┌──▼────┐
-    │Agent1│  │Agent2│  │Agent3 │
-    │(Plan)│  │(Code)│  │(Review)│
-    └──────┘  └──────┘  └───────┘
-```
-- ✅ Agenți specializați pentru sarcini specifice
+```mermaid
+graph TD
+    Orchestrator[Orchestrator] --> Agent1[Agent1<br/>Planificare]
+    Orchestrator --> Agent2[Agent2<br/>Cod]
+    Orchestrator --> Agent3[Agent3<br/>Revizuire]
+```- ✅ Agenți specializați pentru sarcini specifice
 - ✅ Execuție paralelă pentru viteză
 - ✅ Modular și ușor de întreținut
 - ✅ Mai bun pentru fluxuri de lucru complexe
 - ⚠️ Necesită logică de coordonare
 
-**Analogie**: Agentul unic este ca o singură persoană care face toate sarcinile. Sistemul multi-agent este ca o echipă în care fiecare membru are competențe specializate (cercetător, programator, recenzor, redactant) care lucrează împreună.
+**Analogie**: Agentul unic este ca o singură persoană care face toate sarcinile. Multi-agent este ca o echipă în care fiecare membru are abilități specializate (cercetător, programator, recenzor, scriitor) care lucrează împreună.
 
 ---
 
-## Modele de coordonare de bază
+## Modele principale de coordonare
 
-### Modelul 1: Coordonare secvențială (Lanț de responsabilitate)
+### Modelul 1: Coordonare secvențială (Lanțul responsabilității)
 
-**Când să folosești**: Sarcinile trebuie finalizate într-o ordine specifică, fiecare agent construind pe baza rezultatului anterior.
+**Când să folosești**: Sarcinile trebuie să se finalizeze într-o ordine specifică, fiecare agent construind pe ieșirea precedentă.
 
 ```mermaid
 sequenceDiagram
     participant User
     participant Orchestrator
     participant Agent1 as Agent de Cercetare
-    participant Agent2 as Agent Redactor
+    participant Agent2 as Agent Scriitor
     participant Agent3 as Agent Editor
     
-    User->>Orchestrator: "Scrie un articol despre inteligența artificială"
+    User->>Orchestrator: "Scrie articol despre AI"
     Orchestrator->>Agent1: Cercetează subiectul
-    Agent1-->>Orchestrator: Rezultatele cercetării
-    Orchestrator->>Agent2: Scrie schița (folosind cercetarea)
-    Agent2-->>Orchestrator: Schița articolului
+    Agent1-->>Orchestrator: Rezultate cercetare
+    Orchestrator->>Agent2: Scrie schiță (folosind cercetarea)
+    Agent2-->>Orchestrator: Schiță articol
     Orchestrator->>Agent3: Editează și îmbunătățește
     Agent3-->>Orchestrator: Articol final
-    Orchestrator-->>User: Articol îmbunătățit
+    Orchestrator-->>User: Articol finisat
     
-    Note over User,Agent3: Secvențial: Fiecare pas așteaptă pe cel anterior
+    Note over User,Agent3: Secvențial: Fiecare pas așteaptă pe precedentul
 ```
 **Beneficii:**
-- ✅ Flux de date clar
+- ✅ Flux clar de date
 - ✅ Ușor de depanat
-- ✅ Ordine de execuție previzibilă
+- ✅ Ordine previzibilă a execuției
 
 **Limitări:**
 - ❌ Mai lent (fără paralelism)
@@ -93,25 +87,25 @@ sequenceDiagram
 - ❌ Nu poate gestiona sarcini interdependente
 
 **Exemple de utilizare:**
-- Pipeline de creare de conținut (research → write → edit → publish)
-- Generare de cod (plan → implement → test → deploy)
+- Flux de creare conținut (cercetare → scriere → editare → publicare)
+- Generare de cod (planificare → implementare → testare → implementare)
 - Generare de rapoarte (colectare date → analiză → vizualizare → sumar)
 
 ---
 
 ### Modelul 2: Coordonare paralelă (Fan-Out/Fan-In)
 
-**Când să folosești**: Sarcinile independente pot rula simultan, rezultatele fiind combinate la final.
+**Când să folosești**: Sarcini independente ce pot rula simultan, rezultatele sunt combinate la final.
 
 ```mermaid
 graph TB
-    User[Solicitare utilizator]
+    User[Cerere Utilizator]
     Orchestrator[Orchestrator]
-    Agent1[Agent de analiză]
-    Agent2[Agent de cercetare]
-    Agent3[Agent de date]
-    Aggregator[Agregator de rezultate]
-    Response[Răspuns combinat]
+    Agent1[Agent Analiză]
+    Agent2[Agent Cercetare]
+    Agent3[Agent Date]
+    Aggregator[Agregator Rezultate]
+    Response[Răspuns Combinat]
     
     User --> Orchestrator
     Orchestrator --> Agent1
@@ -131,28 +125,28 @@ graph TB
 - ✅ Scalabil orizontal
 
 **Limitări:**
-- ⚠️ Rezultatele pot sosi în ordine aleatorie
-- ⚠️ Este nevoie de logică de agregare
-- ⚠️ Managementul stării este complex
+- ⚠️ Rezultatele pot ajunge în ordine aleatorie
+- ⚠️ Necesită logică de agregare
+- ⚠️ Gestionarea stării este complexă
 
 **Exemple de utilizare:**
 - Colectare date din multiple surse (API-uri + baze de date + web scraping)
 - Analiză competitivă (mai multe modele generează soluții, se selectează cea mai bună)
-- Servicii de traducere (traducere în mai multe limbi simultan)
+- Servicii de traduceri (traducere simultană în multiple limbi)
 
 ---
 
 ### Modelul 3: Coordonare ierarhică (Manager-Lucrător)
 
-**Când să folosești**: Fluxuri de lucru complexe cu sub-sarcini, necesită delegare.
+**Când să folosești**: Fluxuri de lucru complexe cu sub-sarcini, necesară delegarea.
 
 ```mermaid
 graph TB
     Master[Orchestrator Principal]
-    Manager1[Manager de Cercetare]
-    Manager2[Manager de Conținut]
+    Manager1[Manager Cercetare]
+    Manager2[Manager Conținut]
     W1[Extractor Web]
-    W2[Analizator de Lucrări]
+    W2[Analizator Articole]
     W3[Redactor]
     W4[Editor]
     
@@ -168,74 +162,74 @@ graph TB
     style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
 ```
 **Beneficii:**
-- ✅ Gestionează fluxuri de lucru complexe
+- ✅ Gestionează fluxuri complexe
 - ✅ Modular și ușor de întreținut
-- ✅ Frontiere clare ale responsabilităților
+- ✅ Responsabilități clare
 
 **Limitări:**
 - ⚠️ Arhitectură mai complexă
-- ⚠️ Latență mai mare (mai multe straturi de coordonare)
+- ⚠️ Latență mai mare (mai multe niveluri de coordonare)
 - ⚠️ Necesită orchestrare sofisticată
 
 **Exemple de utilizare:**
-- Procesare documente la nivel enterprise (clasificare → rutare → procesare → arhivare)
-- Pipeline-uri de date în mai multe etape (ingestie → curățare → transformare → analiză → raport)
-- Fluxuri de lucru automatizate complexe (planificare → alocare resurse → execuție → monitorizare)
+- Procesare documente în întreprinderi (clasificare → rutare → procesare → arhivare)
+- Pipelines de date multi-etapă (ingestie → curățare → transformare → analiză → raport)
+- Fluxuri automate complexe (planificare → alocare resurse → execuție → monitorizare)
 
 ---
 
-### Modelul 4: Coordonare bazată pe evenimente (Publish-Subscribe)
+### Modelul 4: Coordonare bazată pe evenimente (Publicare-Abonare)
 
-**Când să folosești**: Agenții trebuie să reacționeze la evenimente, se dorește decuplare slabă.
+**Când să folosești**: Agenții trebuie să reacționeze la evenimente, se dorește cuplare slabă.
 
 ```mermaid
 sequenceDiagram
-    participant Agent1 as Colector de date
-    participant EventBus as Bus de servicii Azure
+    participant Agent1 as Colector de Date
+    participant EventBus as Azure Service Bus
     participant Agent2 as Analizator
     participant Agent3 as Notificator
-    participant Agent4 as Arhivator
+    participant Agent4 as Arhivist
     
     Agent1->>EventBus: Publică evenimentul "DatePrimite"
-    EventBus->>Agent2: Abonare: Analiza datelor
-    EventBus->>Agent3: Abonare: Trimite notificări
+    EventBus->>Agent2: Abonare: Analizează datele
+    EventBus->>Agent3: Abonare: Trimite notificare
     EventBus->>Agent4: Abonare: Arhivează datele
     
     Note over Agent1,Agent4: Toți abonații procesează independent
     
-    Agent2->>EventBus: Publică evenimentul "AnalizaCompleta"
-    EventBus->>Agent3: Abonare: Trimite raportul de analiză
+    Agent2->>EventBus: Publică evenimentul "AnalizăFinalizată"
+    EventBus->>Agent3: Abonare: Trimite raport de analiză
 ```
 **Beneficii:**
-- ✅ Decuplare slabă între agenți
+- ✅ Cuplare slabă între agenți
 - ✅ Ușor de adăugat agenți noi (doar se abonează)
 - ✅ Procesare asincronă
-- ✅ Rezilient (persistența mesajelor)
+- ✅ Reziliență (persistența mesajelor)
 
 **Limitări:**
 - ⚠️ Consistență eventuală
 - ⚠️ Depanare complexă
-- ⚠️ Provocări legate de ordonarea mesajelor
+- ⚠️ Provocări în ordonarea mesajelor
 
 **Exemple de utilizare:**
-- Sisteme de monitorizare în timp real (alertări, dashboard-uri, jurnale)
-- Notificări multi-channel (email, SMS, push, Slack)
-- Pipeline-uri de procesare date (mai mulți consumatori pentru aceleași date)
+- Sisteme de monitorizare în timp real (alerte, tablouri de bord, loguri)
+- Notificări multi-canal (email, SMS, push, Slack)
+- Pipelines de procesare date (mai mulți consumatori pentru aceleași date)
 
 ---
 
 ### Modelul 5: Coordonare bazată pe consens (Vot/Quorum)
 
-**Când să folosești**: Este nevoie de acordul mai multor agenți înainte de a continua.
+**Când să folosești**: Este necesar acordul mai multor agenți înainte de a continua.
 
 ```mermaid
 graph TB
     Input[Sarcină de intrare]
-    Agent1[Agentul 1: GPT-4]
-    Agent2[Agentul 2: Claude]
-    Agent3[Agentul 3: Gemini]
-    Voter[Votant de consens]
-    Output[Rezultat convenit]
+    Agent1[Agent 1: gpt-4.1]
+    Agent2[Agent 2: Claude]
+    Agent3[Agent 3: Gemini]
+    Voter[Votan Consensus]
+    Output[Output Agreat]
     
     Input --> Agent1
     Input --> Agent2
@@ -248,39 +242,39 @@ graph TB
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
 **Beneficii:**
-- ✅ Acuaretate mai mare (mai multe opinii)
-- ✅ Tolerant la erori (eșec minor acceptabil)
-- ✅ Asigurare a calității integrată
+- ✅ Acuratețe crescută (mai multe opinii)
+- ✅ Toleranță la erori (acceptă eșecuri minoritare)
+- ✅ Asigurarea calității integrată
 
 **Limitări:**
-- ❌ Costisitor (apeluri multiple la modele)
-- ❌ Mai lent (asteptarea tuturor agenților)
-- ⚠️ Necesită rezolvarea conflictelor
+- ❌ Costisitor (apeluri multiple către modele)
+- ❌ Mai lent (așteptarea tuturor agenților)
+- ⚠️ Necesită rezolvare a conflictelor
 
 **Exemple de utilizare:**
-- Moderare de conținut (mai multe modele revizuiesc conținutul)
-- Revizuire de cod (mai mulți linters / analizatori)
-- Diagnostic medical (mai multe modele AI, validare de către experți)
+- Moderarea conținutului (revizuirea conținutului de mai multe modele)
+- Revizuire cod (mai mulți linters/analyzers)
+- Diagnostic medical (mai multe modele AI, validare expert)
 
 ---
 
-## Prezentare arhitecturală
+## Prezentare arhitectură
 
-### Sistem complet multi-agent pe Azure
+### Sistem multi-agent complet pe Azure
 
 ```mermaid
 graph TB
     User[Utilizator/Client API]
-    APIM[Gestionare API Azure]
+    APIM[Azure API Management]
     Orchestrator[Serviciu Orchestrator<br/>Aplicație Container]
-    ServiceBus[Azure Service Bus<br/>Hub de Evenimente]
+    ServiceBus[Azure Service Bus<br/>Event Hub]
     
-    Agent1[Agent de Cercetare<br/>Aplicație Container]
-    Agent2[Agent de Scriere<br/>Aplicație Container]
+    Agent1[Agent Cercetare<br/>Aplicație Container]
+    Agent2[Agent Scriitor<br/>Aplicație Container]
     Agent3[Agent Analist<br/>Aplicație Container]
-    Agent4[Agent de Revizuire<br/>Aplicație Container]
+    Agent4[Agent Revizor<br/>Aplicație Container]
     
-    CosmosDB[(Cosmos DB<br/>Stare partajată)]
+    CosmosDB[(Cosmos DB<br/>Stare Partajată)]
     Storage[Stocare Azure<br/>Artefacte]
     AppInsights[Application Insights<br/>Monitorizare]
     
@@ -317,50 +311,50 @@ graph TB
 
 | Componentă | Scop | Serviciu Azure |
 |-----------|---------|---------------|
-| **API Gateway** | Punct de intrare, limitare de rată, autentificare | API Management |
+| **API Gateway** | Punct de intrare, limitarea ratei, autentificare | API Management |
 | **Orchestrator** | Coordonează fluxurile de lucru ale agenților | Container Apps |
 | **Message Queue** | Comunicare asincronă | Service Bus / Event Hubs |
-| **Agents** | Lucrători AI specializați | Container Apps / Functions |
-| **State Store** | Stare partajată, urmărire sarcini | Cosmos DB |
-| **Artifact Storage** | Documente, rezultate, jurnale | Blob Storage |
-| **Monitoring** | Tracing distribuit, jurnale | Application Insights |
+| **Agenți** | Lucrători AI specializați | Container Apps / Functions |
+| **Store stare** | Stare partajată, urmărire sarcini | Cosmos DB |
+| **Depozit artefacte** | Documente, rezultate, loguri | Blob Storage |
+| **Monitorizare** | Urmărire distribuită, loguri | Application Insights |
 
 ---
 
 ## Cerințe prealabile
 
-### Instrumente necesare
+### Unelte necesare
 
 ```bash
-# Verificați Azure Developer CLI
+# Verifică Azure Developer CLI
 azd version
 # ✅ Așteptat: azd versiunea 1.0.0 sau mai mare
 
-# Verificați Azure CLI
+# Verifică Azure CLI
 az --version
 # ✅ Așteptat: azure-cli 2.50.0 sau mai mare
 
-# Verificați Docker (pentru testare locală)
+# Verifică Docker (pentru testare locală)
 docker --version
-# ✅ Așteptat: versiunea Docker 20.10 sau mai mare
+# ✅ Așteptat: Docker versiunea 20.10 sau mai mare
 ```
 
 ### Cerințe Azure
 
 - Abonament Azure activ
-- Permisiuni pentru a crea:
+- Permisiuni pentru crearea:
   - Container Apps
-  - Service Bus namespaces
-  - Cosmos DB accounts
-  - Storage accounts
+  - Namespace-uri Service Bus
+  - Conturi Cosmos DB
+  - Conturi de stocare
   - Application Insights
 
 ### Cunoștințe prealabile
 
-Ar trebui să fi finalizat:
-- [Gestionarea configurației](../chapter-03-configuration/configuration.md)
-- [Autentificare & Securitate](../chapter-03-configuration/authsecurity.md)
-- [Exemplu microservicii](../../../../examples/microservices)
+Trebuie să fi parcurs:
+- [Managementul configurației](../chapter-03-configuration/configuration.md)
+- [Autentificare și securitate](../chapter-03-configuration/authsecurity.md)
+- [Exemplu Microservicii](../../../../examples/microservices)
 
 ---
 
@@ -398,11 +392,11 @@ multi-agent-system/
 
 ---
 
-## Lecția 1: Modelul de coordonare secvențială
+## Lecția 1: Model de coordonare secvențială
 
-### Implementare: Pipeline de creare a conținutului
+### Implementare: Pipeline de creare conținut
 
-Să construim un pipeline secvențial: Research → Write → Edit → Publish
+Să construim un pipeline secvențial: Cercetare → Scriere → Editare → Publicare
 
 ### 1. Configurare AZD
 
@@ -567,7 +561,7 @@ from shared.state_manager import StateManager
 app = Flask(__name__)
 state_manager = StateManager()
 
-# Conexiune la Service Bus
+# Conexiune Service Bus
 servicebus_connection_str = os.environ['SERVICEBUS_CONNECTION_STRING']
 servicebus_client = ServiceBusClient.from_connection_string(servicebus_connection_str)
 
@@ -586,7 +580,7 @@ def create_content():
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # Creează o sarcină în magazinul de stare
+    # Creează task în magazinul de stări
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -594,13 +588,13 @@ def create_content():
         input_data={'topic': topic}
     )
     
-    # Trimite mesaj către agentul de cercetare (primul pas)
+    # Trimite mesaj agentului de cercetare (primul pas)
     sender = servicebus_client.get_queue_sender('research-tasks')
     message = ServiceBusMessage(
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # Unde să trimit rezultatele
+            'next_queue': 'writer-tasks'  # Unde să se trimită rezultatele
         }),
         content_type='application/json'
     )
@@ -629,7 +623,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### 5. Agent cercetare
+### 5. Agent Cercetare
 
 **Fișier: `src/agents/research/app.py`**
 
@@ -661,9 +655,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # Apelează Azure OpenAI pentru cercetare
+    # Apelează modelele Microsoft Foundry pentru cercetare
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -680,7 +674,7 @@ def process_research_task(message_data):
         result={'research': research_results}
     )
     
-    # Trimite la următorul agent (scriitor)
+    # Trimite către următorul agent (scriitor)
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -719,7 +713,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 6. Agent scriitor
+### 6. Agent Scriitor
 
 **Fișier: `src/agents/writer/app.py`**
 
@@ -750,9 +744,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # Apelează Azure OpenAI pentru a scrie un articol
+    # Apelează modelele Microsoft Foundry pentru a scrie articolul
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -769,7 +763,7 @@ def process_writing_task(message_data):
         result={'draft': article_draft}
     )
     
-    # Trimite editorului
+    # Trimite către editor
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -807,7 +801,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. Agent editor
+### 7. Agent Editor
 
 **Fișier: `src/agents/editor/app.py`**
 
@@ -837,9 +831,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # Apelează Azure OpenAI pentru editare
+    # Apelează modelele Microsoft Foundry pentru editare
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -883,23 +877,32 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. Implementare și testare
+### 8. Deploy și testare
 
 ```bash
-# Inițializează și implementează
+# Opțiunea A: Implementare bazată pe șablon
 azd init
 azd up
 
+# Opțiunea B: Implementare manifest agent (necessită extensie)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
+azd up
+```
+
+> Vezi [Comenzile AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pentru toate flag-urile și opțiunile `azd ai`.
+
+```bash
 # Obține URL-ul orchestratorului
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
-# Creează conținut
+# Creează conținutul
 curl -X POST $ORCHESTRATOR_URL/create-content \
   -H "Content-Type: application/json" \
   -d '{"topic": "The Future of AI in Healthcare"}'
 ```
 
-**✅ Rezultat așteptat:**
+**✅ Ieșire așteptată:**
 ```json
 {
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -910,13 +913,13 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
 }
 ```
 
-**Verifică progresul sarcinii:**
+**Verifică progresul sarcinilor:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Rezultat așteptat (finalizat):**
+**✅ Ieșire așteptată (finalizat):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -944,11 +947,11 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Lecția 2: Modelul de coordonare paralelă
+## Lecția 2: Model de coordonare paralelă
 
-### Implementare: Agregator de cercetare multi-sursă
+### Implementare: Agregator Cercetare Multi-Sursă
 
-Să construim un sistem paralel care colectează informații din multiple surse simultan.
+Să construim un sistem paralel care adună informații din multiple surse simultan.
 
 ### Orchestrator paralel
 
@@ -987,7 +990,7 @@ def research_parallel():
         }
     )
     
-    # Fan-out: Trimite tuturor agenților simultan
+    # Răspândire: Trimite tuturor agenților simultan
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1056,7 +1059,7 @@ def process_result(message_data):
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # Verifică dacă toți agenții au finalizat (fan-in)
+    # Verifică dacă toți agenții au terminat (fan-in)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
@@ -1070,7 +1073,7 @@ def process_result(message_data):
         # Marchează ca finalizat
         state_manager.complete_task(task_id, aggregated)
         
-        # Curăță
+        # Curăță resursele
         del task_results[task_id]
         
         print(f"✅ Aggregation complete for task {task_id}")
@@ -1102,10 +1105,10 @@ if __name__ == '__main__':
     main()
 ```
 
-**Beneficiile modelului paralel:**
+**Beneficii ale modelului paralel:**
 - ⚡ **de 4x mai rapid** (agenții rulează simultan)
 - 🔄 **Tolerant la erori** (rezultate parțiale acceptabile)
-- 📈 **Scalabil** (se pot adăuga mai ușor agenți)
+- 📈 **Scalabil** (adaugă ușor mai mulți agenți)
 
 ---
 
@@ -1113,21 +1116,21 @@ if __name__ == '__main__':
 
 ### Exercițiul 1: Adaugă gestionare timeout ⭐⭐ (Mediu)
 
-**Scop**: Implementează logică de timeout astfel încât agregatorul să nu aștepte la nesfârșit agenții lenți.
+**Scop**: Implementează logica de timeout astfel încât agregatorul să nu aștepte la nesfârșit agenții lenți.
 
 **Pași**:
 
-1. **Adaugă urmărire timeout la agregator:**
+1. **Adaugă urmărire timeout în agregator:**
 
 ```python
 from datetime import datetime, timedelta
 
-task_timeouts = {}  # task_id -> expiration_time
+task_timeouts = {}  # task_id -> timp_de_expirare
 
 def process_result(message_data):
     task_id = message_data['task_id']
     
-    # Setează timeout pentru primul rezultat
+    # Setează timpul de expirare la primul rezultat
     if task_id not in task_timeouts:
         task_timeouts[task_id] = datetime.utcnow() + timedelta(seconds=30)
     
@@ -1136,7 +1139,7 @@ def process_result(message_data):
         'data': message_data['result']
     })
     
-    # Verifică dacă este finalizat SAU a expirat
+    # Verifică dacă este complet SAU a expirat timpul
     if len(task_results[task_id]) == expected_agents or \
        datetime.utcnow() > task_timeouts[task_id]:
         
@@ -1161,15 +1164,15 @@ def process_result(message_data):
 ```python
 # Într-un agent, adaugă o întârziere pentru a simula procesarea lentă
 import time
-time.sleep(35)  # Depășește limita de timp de 30 de secunde
+time.sleep(35)  # Depășește limita de 30 de secunde de timeout
 ```
 
-3. **Implementează și verifică:**
+3. **Deploy și verificare:**
 
 ```bash
 azd deploy aggregator
 
-# Trimite sarcina
+# Trimite sarcină
 curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
@@ -1179,21 +1182,21 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Criterii de succes:**
-- ✅ Sarcina se finalizează după 30 de secunde chiar dacă agenții sunt incompleți
+- ✅ Sarcina se finalizează după 30 de secunde chiar dacă agenții nu au terminat
 - ✅ Răspunsul indică rezultate parțiale (`"timed_out": true`)
-- ✅ Rezultatele disponibile sunt returnate (3 din 4 agenți)
+- ✅ Se returnează rezultatele disponibile (3 din 4 agenți)
 
 **Timp**: 20-25 minute
 
 ---
 
-### Exercițiul 2: Implementează logica de reîncercare ⭐⭐⭐ (Avansat)
+### Exercițiul 2: Implementează logica retry ⭐⭐⭐ (Avansat)
 
-**Scop**: Reîncearcă automat sarcinile agenților eșuate înainte de a renunța.
+**Scop**: Retrimiterea automată a sarcinilor agenților eșuați înainte de renunțare.
 
 **Pași**:
 
-1. **Adaugă urmărire reîncercări în orchestrator:**
+1. **Adaugă urmărire retry în orchestrator:**
 
 ```python
 from dataclasses import dataclass
@@ -1204,7 +1207,7 @@ class RetryConfig:
     max_retries: int = 3
     backoff_seconds: int = 5
 
-retry_counts: Dict[str, int] = {}  # id_mesaj -> număr_reîncercări
+retry_counts: Dict[str, int] = {}  # message_id -> număr_de_încercări
 
 def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
     """Send message with retry metadata"""
@@ -1224,7 +1227,7 @@ def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConf
         sender.send_messages(message)
 ```
 
-2. **Adaugă handler de reîncercare la agenți:**
+2. **Adaugă handler retry la agenți:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1235,7 +1238,7 @@ def process_with_retry(message, receiver, process_func):
         # Procesează mesajul
         process_func(message_data)
         
-        # Succes - finalizat
+        # Succes - complet
         receiver.complete_message(message)
         
     except Exception as e:
@@ -1244,18 +1247,18 @@ def process_with_retry(message, receiver, process_func):
         max_retries = message_data.get('max_retries', 3)
         
         if retry_count < max_retries:
-            # Reîncercare: abandonează și reintrodu în coadă cu numărul incrementat
+            # Reîncearcă: abandonează și reintrodu în coadă cu numărătoare incrementată
             print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
             
             message_data['retry_count'] = retry_count + 1
             
-            # Trimite înapoi în aceeași coadă cu întârziere
+            # Retrimite în aceeași coadă cu întârziere
             time.sleep(5 * (retry_count + 1))  # Întârziere exponențială
             send_with_retry(queue_name, message_data, RetryConfig())
             
             receiver.complete_message(message)  # Elimină originalul
         else:
-            # Numărul maxim de reîncercări depășit - mută în coada dead-letter
+            # Numărul maxim de încercări depășit - mută în coada mesajelor moarte
             print(f"❌ Max retries exceeded for message {message_id}")
             receiver.dead_letter_message(
                 message,
@@ -1264,7 +1267,7 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **Monitorizează coada dead letter:**
+3. **Monitorizează coada de dead letter:**
 
 ```python
 def monitor_dead_letters():
@@ -1283,31 +1286,31 @@ def monitor_dead_letters():
 ```
 
 **✅ Criterii de succes:**
-- ✅ Sarcinile eșuate se reîncearcă automat (până la 3 ori)
-- ✅ Backoff exponențial între reîncercări (5s, 10s, 15s)
-- ✅ După reîncercări maxime, mesajele ajung în dead letter queue
-- ✅ Coada dead letter poate fi monitorizată și re-redată
+- ✅ Sarcinile eșuate sunt retrimise automat (până la 3 încercări)
+- ✅ Backoff exponențial între încercări (5s, 10s, 15s)
+- ✅ După retry-uri maxime, mesajele sunt trimise în coada dead letter
+- ✅ Coada dead letter poate fi monitorizată și redată
 
 **Timp**: 30-40 minute
 
 ---
 
-### Exercițiul 3: Implementează întrerupător de circuit (Circuit Breaker) ⭐⭐⭐ (Avansat)
+### Exercițiul 3: Implementează Circuit Breaker ⭐⭐⭐ (Avansat)
 
-**Scop**: Previi eșecuri în cascadă oprind cererile către agenții care eșuează.
+**Scop**: Preveni eșecurile în cascadă prin oprirea cererilor către agenții care dau eroare.
 
 **Pași**:
 
-1. **Creează o clasă circuit breaker:**
+1. **Creează clasa circuit breaker:**
 
 ```python
 from enum import Enum
 from datetime import datetime, timedelta
 
 class CircuitState(Enum):
-    CLOSED = "closed"      # Funcționare normală
-    OPEN = "open"          # Eșuează, respinge solicitările
-    HALF_OPEN = "half_open"  # Se testează dacă s-a recuperat
+    CLOSED = "closed"      # Operare normală
+    OPEN = "open"          # Eșec, respinge cererile
+    HALF_OPEN = "half_open"  # Testare dacă s-a recuperat
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1320,7 +1323,7 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # Verifică dacă a expirat timpul de așteptare
+            # Verifică dacă timpul de expirare a trecut
             if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
@@ -1368,16 +1371,16 @@ def send_to_agent(agent_type, message_data):
         circuit.call(lambda: send_message(agent_type, message_data))
     except Exception as e:
         print(f"⚠️ Skipping {agent_type} agent: {e}")
-        # Continuați cu alți agenți
+        # Continuă cu alți agenți
 ```
 
-3. **Testează circuit breaker-ul:**
+3. **Testează circuit breaker:**
 
 ```bash
 # Simulează eșecuri repetate (oprește un agent)
 az containerapp stop --name web-research-agent --resource-group rg-agents
 
-# Trimite mai multe cereri
+# Trimite multiple cereri
 for i in {1..10}; do
   curl -X POST $ORCHESTRATOR_URL/research-parallel \
     -H "Content-Type: application/json" \
@@ -1392,7 +1395,7 @@ az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 5
 
 **✅ Criterii de succes:**
 - ✅ După 5 eșecuri, circuitul se deschide (refuză cererile)
-- ✅ După 60 de secunde, circuitul trece în half-open (testează recuperarea)
+- ✅ După 60 secunde, circuitul trece în starea half-open (testează recuperarea)
 - ✅ Alți agenți continuă să funcționeze normal
 - ✅ Circuitul se închide automat când agentul se recuperează
 
@@ -1450,7 +1453,7 @@ def trace_agent_call(agent_name, task_id, operation):
 
 ### Interogări Application Insights
 
-**Urmărește fluxurile de lucru multi-agent:**
+**Urmărește fluxurile multi-agent:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1460,7 +1463,7 @@ traces
 | order by timestamp asc
 ```
 
-**Comparație performanță agenți:**
+**Comparația performanțelor agenților:**
 
 ```kusto
 // Compare agent execution times
@@ -1474,7 +1477,7 @@ dependencies
 | order by avg_duration desc
 ```
 
-**Analiza eșecurilor:**
+**Analiza erorilor:**
 
 ```kusto
 // Find which agents fail most
@@ -1489,24 +1492,24 @@ exceptions
 
 ---
 
-## Analiză costuri
+## Analiza costurilor
 
-### Costuri ale sistemului multi-agent (Estimări lunare)
+### Costuri sistem multi-agent (estimări lunare)
 
 | Componentă | Configurație | Cost |
 |-----------|--------------|------|
-| **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
-| **4 agenți** | 4 Container Apps (0.5 vCPU, 1GB fiecare) | $60-120 |
-| **Service Bus** | Standard tier, 10M messages | $10-20 |
-| **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
-| **Blob Storage** | 10GB storage, 100K operations | $5-10 |
-| **Application Insights** | 5GB ingestion | $10-15 |
-| **Azure OpenAI** | GPT-4, 10M tokens | $100-300 |
-| **Total** | | **$240-565/lună** |
+| **Orchestrator** | 1 Container App (1 vCPU, 2GB) | 30-50 USD |
+| **4 Agenți** | 4 Container Apps (0.5 vCPU, 1GB fiecare) | 60-120 USD |
+| **Service Bus** | Nivel standard, 10M mesaje | 10-20 USD |
+| **Cosmos DB** | Serverless, 5GB stocare, 1M RUs | 25-50 USD |
+| **Blob Storage** | 10GB stocare, 100K operațiuni | 5-10 USD |
+| **Application Insights** | 5GB ingestie | 10-15 USD |
+| **Modele Microsoft Foundry** | gpt-4.1, 10M tokeni | 100-300 USD |
+| **Total** | | **240-565 USD/lună** |
 
 ### Strategii de optimizare a costurilor
 
-1. **Folosește serverless acolo unde este posibil:**
+1. **Folosește serverless unde e posibil:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1523,24 +1526,24 @@ exceptions
    }
    ```
 
-3. **Folosește batching pentru Service Bus:**
+3. **Folosește batch-uri pentru Service Bus:**
    ```python
-   # Trimite mesajele în loturi (mai ieftin)
+   # Trimite mesaje în loturi (mai ieftin)
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **Cachează rezultate folosite frecvent:**
+4. **Cachează rezultatele folosite frecvent:**
    ```python
-   # Utilizați Azure Cache for Redis
+   # Folosiți Azure Cache pentru Redis
    if cache.exists(query_hash):
        return cache.get(query_hash)
    ```
 
 ---
 
-## Practici recomandate
+## Cele mai bune practici
 
-### ✅ DE FĂCUT:
+### ✅ FĂ:
 
 1. **Folosește operațiuni idempotente**
    ```python
@@ -1552,7 +1555,7 @@ exceptions
        # Procesează sarcina...
    ```
 
-2. **Implementează logging cuprinzător**
+2. **Implementează logare cuprinzătoare**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
@@ -1561,7 +1564,7 @@ exceptions
    ```python
    # Transmite task_id prin întregul flux de lucru
    message_data = {
-       'task_id': task_id,  # ID de corelare
+       'task_id': task_id,  # ID-ul de corelație
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
@@ -1579,12 +1582,12 @@ exceptions
    monitor_dead_letters()
    ```
 
-### ❌ NU FACEȚI:
+### ❌ NU FACE:
 
 1. **Nu crea dependențe circulare**
    ```python
-   # ❌ RĂU: Agent A → Agent B → Agent A (buclă infinită)
-   # ✅ BUN: Definiți un graf aciclic orientat clar (DAG)
+   # ❌ RĂU: Agent A → Agent B → Agent A (ciclu infinit)
+   # ✅ BUN: Definiți un graf orientat aciclic (DAG) clar
    ```
 
 2. **Nu bloca firele agenților**
@@ -1593,22 +1596,23 @@ exceptions
    while not task_complete:
        time.sleep(1)
    
-   # ✅ BUN: Folosiți callback-uri ale cozii de mesaje
+   # ✅ BINE: Folosește callback-uri pentru coada de mesaje
    ```
 
 3. **Nu ignora eșecurile parțiale**
    ```python
-   # ❌ RĂU: Întregul flux de lucru eșuează dacă un agent dă eroare
-   # ✅ BUN: Întoarceți rezultate parțiale cu indicatori de eroare
+   # ❌ RĂU: Eșuează întregul flux de lucru dacă un agent eșuează
+   # ✅ BINE: Returnează rezultate parțiale cu indicatori de eroare
    ```
 
-4. **Nu folosi reîncercări infinite**
+4. **Nu folosi încercări nelimitate**
    ```python
-   # ❌ GREȘIT: încearcă din nou la nesfârșit
-   # ✅ BUN: max_retries = 3, apoi în coada dead-letter
+   # ❌ RĂU: reîncearcă la nesfârșit
+   # ✅ BUN: max_retries = 3, apoi scrie în coada de mesaje nereușite
    ```
 
 ---
+
 ## Ghid de depanare
 
 ### Problemă: Mesaje blocate în coadă
@@ -1616,7 +1620,7 @@ exceptions
 **Simptome:**
 - Mesajele se acumulează în coadă
 - Agenții nu procesează
-- Starea sarcinii blocată la "pending"
+- Starea sarcinii rămâne „în așteptare”
 
 **Diagnostic:**
 ```bash
@@ -1632,7 +1636,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 **Soluții:**
 
-1. **Creșteți replicile agenților:**
+1. **Mărește numărul de replici ale agentului:**
    ```bash
    az containerapp update \
      --name research-agent \
@@ -1640,7 +1644,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
      --max-replicas 10
    ```
 
-2. **Verificați coada dead-letter:**
+2. **Verifică coada de mesaje eșuate (dead letter queue):**
    ```bash
    az servicebus queue show \
      --namespace-name mybus \
@@ -1650,12 +1654,12 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Problemă: Timeout la sarcină / nu se finalizează niciodată
+### Problemă: Timeout la sarcină / sarcina nu se finalizează niciodată
 
 **Simptome:**
-- Starea sarcinii rămâne "in_progress"
-- Unii agenți termină, alții nu
-- Niciun mesaj de eroare
+- Starea sarcinii rămâne „în desfășurare”
+- Unii agenți finalizează, alții nu
+- Fără mesaje de eroare
 
 **Diagnostic:**
 ```bash
@@ -1663,23 +1667,23 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 # Verifică Application Insights
-# Execută interogarea: traces | where customDimensions.task_id == "..."
+# Rulează interogarea: traces | where customDimensions.task_id == "..."
 ```
 
 **Soluții:**
 
-1. **Implementați timeout în aggregator (Exercițiul 1)**
+1. **Implementează timeout în agregator (Exercițiul 1)**
 
-2. **Verificați erorile agenților folosind Azure Monitor:**
+2. **Verifică eventualele erori ale agenților folosind Azure Monitor:**
    ```bash
    # Vizualizați jurnalele prin azd monitor
    azd monitor --logs
    
-   # Sau folosiți Azure CLI pentru a verifica jurnalele unei aplicații container specifice
+   # Sau utilizați Azure CLI pentru a verifica jurnalele aplicației container specifice
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **Verificați că toți agenții rulează:**
+3. **Verifică dacă toți agenții rulează:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1688,50 +1692,50 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Aflați mai multe
+## Află mai multe
 
 ### Documentație oficială
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [Tipare de proiectare pentru sisteme multi-agent](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
+- [Tipare de design Multi-Agent](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
 
 ### Următorii pași în acest curs
 - ← Anterior: [Planificarea capacității](capacity-planning.md)
-- → Următor: [Selectarea SKU-ului](sku-selection.md)
+- → Următor: [Selecția SKU](sku-selection.md)
 - 🏠 [Pagina principală a cursului](../../README.md)
 
 ### Exemple conexe
 - [Exemplu Microservicii](../../../../examples/microservices) - Tipare de comunicare între servicii
-- [Exemplu Azure OpenAI](../../../../examples/azure-openai-chat) - Integrare AI
+- [Exemplu Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Integrare AI
 
 ---
 
 ## Rezumat
 
 **Ai învățat:**
-- ✅ Cinci modele de coordonare (secuențial, paralel, ierarhic, bazat pe evenimente, consens)
-- ✅ Arhitectură multi-agent pe Azure (Service Bus, Cosmos DB, Container Apps)
-- ✅ Gestionarea stării între agenți distribuiți
+- ✅ Cinci tipare de coordonare (secvențial, paralel, ierarhic, bazat pe evenimente, consens)
+- ✅ Arhitectura multi-agent pe Azure (Service Bus, Cosmos DB, Container Apps)
+- ✅ Gestionarea stării în multiple agenți distribuiți
 - ✅ Gestionarea timeout-urilor, reîncercărilor și circuit breaker-elor
-- ✅ Monitorizare și depanare a sistemelor distribuite
+- ✅ Monitorizarea și depanarea sistemelor distribuite
 - ✅ Strategii de optimizare a costurilor
 
-**Aspecte cheie:**
-1. **Alegeți modelul potrivit** - Secvențial pentru fluxuri de lucru ordonate, paralel pentru viteză, bazat pe evenimente pentru flexibilitate
-2. **Gestionați starea cu atenție** - Folosiți Cosmos DB sau un echivalent pentru starea partajată
-3. **Tratați eșecurile elegant** - Timeout-uri, reîncercări, circuit breakers, cozi dead-letter
-4. **Monitorizați totul** - Tracing-ul distribuit este esențial pentru depanare
-5. **Optimizați costurile** - Scalare la zero, folosiți serverless, implementați caching
+**Aspecte esențiale de reținut:**
+1. **Alege tiparul potrivit** - Secvențial pentru fluxuri ordonate, paralel pentru viteză, bazat pe evenimente pentru flexibilitate
+2. **Gestionează cu atenție starea** - Folosește Cosmos DB sau similar pentru starea partajată
+3. **Gestionează eroarile cu grație** - Timeout-uri, reîncercări, circuit breakers, cozi pentru mesaje eșuate
+4. **Monitorizează tot** - Trasabilitatea distribuită este esențială pentru depanare
+5. **Optimizează costurile** - Scalează la zero, folosește serverless, implementează caching
 
 **Următorii pași:**
-1. Finalizați exercițiile practice
-2. Construiți un sistem multi-agent pentru cazul dvs. de utilizare
-3. Studiați [Selectarea SKU-ului](sku-selection.md) pentru a optimiza performanța și costurile
+1. Completează exercițiile practice
+2. Construiește un sistem multi-agent pentru cazul tău de utilizare
+3. Studiază [Selecția SKU](sku-selection.md) pentru a optimiza performanța și costurile
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Declinare de responsabilitate:
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original, în limba sa nativă, trebuie considerat sursa autoritară. Pentru informații critice, se recomandă o traducere profesională realizată de un specialist uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea ca urmare a utilizării acestei traduceri.
+**Declinare a responsabilității**:  
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să țineți cont că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un traducător uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite apărute în urma utilizării acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

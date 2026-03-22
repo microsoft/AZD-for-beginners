@@ -1,106 +1,93 @@
-# AZD ဖြင့် Microsoft SQL ဒေတာဘေ့စ်နှင့် Web App ကို Deploy လုပ်ခြင်း
+# Deploying a Microsoft SQL Database and Web App with AZD
 
-⏱️ **ခန့်မှန်းချိန်**: 20-30 မိနစ် | 💰 **ခန့်မှန်းကျသင့်ငွေ**: ~$15-25/လ | ⭐ **ဒွိယ အဆင့်**: အလယ်အလတ်
+⏱️ **Estimated Time**: 20-30 minutes | 💰 **Estimated Cost**: ~$15-25/month | ⭐ **Complexity**: Intermediate
 
-ဤ **ပြည့်စုံပြီး လုပ်ဆောင်နိုင်သော နမူနာ** သည် [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) ကို အသုံးပြုကာ Python Flask web application ကို Microsoft SQL Database နှင့်အတူ Azure ပေါ်သို့ deploy လုပ်ပုံကို ပြသည်။ ကုဒ်အားလုံး ပါဝင်ပြီး စမ်းသပ်ပြီးသားဖြစ်သည်—ပြင်ပ အလားအလာမလိုအပ်ပါ။
+This **complete, working example** demonstrates how to use the [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) to deploy a Python Flask web application with a Microsoft SQL Database to Azure. All code is included and tested—no external dependencies required.
 
-## သင်ဘာများ သင်ယူမလဲ
+## What You'll Learn
 
-ဤနမူနာကို ပြီးမြောက်အောင်လုပ်လျှင် သင်သည်:
-- multi-tier application (web app + database) ကို infrastructure-as-code ဖြင့် deploy လုပ်နိုင်ခြင်း
-- secret များကို source code တွင် မထည့်ဘဲ database ချိတ်ဆက်မှုများကို လုံခြုံစွာ ဆက်သွယ်ရမည်ဖြစ်စေရန် ပြုလုပ်နိုင်ခြင်း
-- Application Insights ဖြင့် application အခြေအနေကို ထိန်းကြည့်နိုင်ခြင်း
-- AZD CLI ဖြင့် Azure resource များကို ထိရောက်စွာ စီမံခန့်ခွဲနိုင်ခြင်း
-- လုံခြုံရေး၊ ကုန်ကျစရိတ် ထိရောက်မှုနှင့် observability အတွက် Azure ၏ အကောင်းဆုံး လမ်းစဉ်များကို လိုက်နာနိုင်ခြင်း
+By completing this example, you will:
+- Deploy a multi-tier application (web app + database) using infrastructure-as-code
+- Configure secure database connections without hardcoding secrets
+- Monitor application health with Application Insights
+- Manage Azure resources efficiently with AZD CLI
+- Follow Azure best practices for security, cost optimization, and observability
 
-## နမူနာ အကျဉ်းချုံး
-- **Web App**: database ချိတ်ဆက်နိုင်သော Python Flask REST API
-- **Database**: sample data ပါရှိသည့် Azure SQL Database
-- **Infrastructure**: Bicep အသုံးပြု၍ provision (modular, reusable templates)
-- **Deployment**: `azd` commands ဖြင့် အလိုအလျောက် စီစဉ်ပြီး deploy
-- **Monitoring**: logs နှင့် telemetry အတွက် Application Insights
+## Scenario Overview
+- **Web App**: Python Flask REST API with database connectivity
+- **Database**: Azure SQL Database with sample data
+- **Infrastructure**: Provisioned using Bicep (modular, reusable templates)
+- **Deployment**: Fully automated with `azd` commands
+- **Monitoring**: Application Insights for logs and telemetry
 
-## မလိုအပ်မဖြစ် စက်ပစ္စည်းများ
+## Prerequisites
 
-### လိုအပ်သော ကိရိယာများ
+### Required Tools
 
-စတင်မည်မီ အောက်ပါ ကိရိယာများ ထည့်ထားကြောင်း အတည်ပြုပါ။
+Before starting, verify you have these tools installed:
 
-1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 သို့မဟုတ် အထက်)
+1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 or higher)
    ```sh
    az --version
-   # မျှော်မှန်းထားသော ထွက်ရလဒ်: azure-cli 2.50.0 သို့မဟုတ် ထက်မြင့်သော
+   # မျှော်မှန်းရလဒ်: azure-cli 2.50.0 သို့မဟုတ် ထိုထက်မြင့် ဗားရှင်း
    ```
 
-2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 သို့မဟုတ် အထက်)
+2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 or higher)
    ```sh
    azd version
-   # မျှော်လင့်ထားသော ထွက်ရှိမှု: azd version 1.0.0 သို့မဟုတ် ထိုထက်မြင့်သော ဗားရှင်း
+   # မျှော်လင့်ထားသော အထွက်: azd ဗားရှင်း 1.0.0 သို့မဟုတ် အထက်
    ```
 
-3. **[Python 3.8+](https://www.python.org/downloads/)** (local development အတွက်)
+3. **[Python 3.8+](https://www.python.org/downloads/)** (for local development)
    ```sh
    python --version
-   # မျှော်မှန်းထားသော ထွက်ရလဒ်: Python 3.8 သို့မဟုတ် အထက်
+   # မျှော်မှန်းထားသော အထွက်: Python 3.8 သို့မဟုတ် ထက်ပိုမြင့်သော
    ```
 
-4. **[Docker](https://www.docker.com/get-started)** (optional, local containerized development အတွက်)
+4. **[Docker](https://www.docker.com/get-started)** (optional, for local containerized development)
    ```sh
    docker --version
-   # မျှော်မှန်းထားသော အထွက်: Docker ဗားရှင်း 20.10 သို့မဟုတ် အထက်
+   # မျှော်မှန်းထားသော ထွက်ရှိမှု: Docker ဗားရှင်း 20.10 သို့မဟုတ် အထက်ဖြစ်ရမည်။
    ```
 
-### Azure လိုအပ်ချက်များ
+### Azure Requirements
 
-- အကျုံးဝင်သော **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))
-- သင်၏ subscription တွင် resource များ ဖန်တီးခွင့်
-- subscription သို့မဟုတ် resource group အပေါ် **Owner** သို့မဟုတ် **Contributor** အခွင့်အရေး
+- An active **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))
+- Permissions to create resources in your subscription
+- **Owner** or **Contributor** role on the subscription or resource group
 
-### မူလ သိရှိထားရမည့် အချက်များ
+### Knowledge Prerequisites
 
-ဤနမူနာသည် **အလယ်အလတ်အဆင့်** ဖြစ်သည်။ အောက်ပါများကို နားလည်ထားသင့်သည်။
-- အခြေခံ command-line လုပ်ဆောင်ချက်များ
-- cloud အခြေခံ အယူအဆများ (resources, resource groups)
-- web applications နှင့် databases အကြောင်း အခြေခံ နားလည်မှု
+This is an **intermediate-level** example. You should be familiar with:
+- Basic command-line operations
+- Fundamental cloud concepts (resources, resource groups)
+- Basic understanding of web applications and databases
 
-**AZD အသစ်လား?** အရင်ဆုံး [Getting Started guide](../../docs/chapter-01-foundation/azd-basics.md) ကို ဖတ်ရှုပါ။
+**New to AZD?** Start with the [Getting Started guide](../../docs/chapter-01-foundation/azd-basics.md) first.
 
-## မော်ဒယ် ပုံသဏ္ဍာန်
+## Architecture
 
-ဤနမူနာသည် web application နှင့် SQL database ပါရှိသည့် two-tier architecture ကို deploy လုပ်သည်။
+This example deploys a two-tier architecture with a web application and SQL database:
 
+```mermaid
+graph TD
+    Browser[အသုံးပြုသူ ဘရော်ဇာ] <--> WebApp[Azure ဝက်ဘ် အက်ပ်<br/>Flask API<br/>/health<br/>/products]
+    WebApp -- လုံခြုံသော ချိတ်ဆက်မှု<br/>လျှို့ဝှက်ထားသည် --> SQL[Azure SQL ဒေတာဘေ့စ်<br/>ထုတ်ကုန်များ ဇယား<br/>နမူနာဒေတာ]
 ```
-┌─────────────────┐        ┌──────────────────────┐
-│  User Browser   │◄──────►│   Azure Web App      │
-└─────────────────┘        │   (Flask API)        │
-                           │   - /health          │
-                           │   - /products        │
-                           └──────────┬───────────┘
-                                      │
-                                      │ Secure Connection
-                                      │ (Encrypted)
-                                      │
-                           ┌──────────▼───────────┐
-                           │ Azure SQL Database   │
-                           │   - Products table   │
-                           │   - Sample data      │
-                           └──────────────────────┘
-```
-
 **Resource Deployment:**
-- **Resource Group**: အရာအားလုံးကို ထည့်သွင်းထားသော ထုပ်ပိုးတစ်ခု
-- **App Service Plan**: Linux-based hosting (ကုန်ကျစရိတ် အစီအမံအတွက် B1 tier)
-- **Web App**: Python 3.11 runtime နှင့် Flask application
-- **SQL Server**: TLS 1.2 အနည်းဆုံးဖြင့် စီမံထားသော database server
-- **SQL Database**: Basic tier (2GB, development/testing အတွက် အသင့်)
-- **Application Insights**: မော်နစ်ရင်းနှင့် logging
-- **Log Analytics Workspace**: log များကို စုပြုံသိမ်းဆည်းရန်
+- **Resource Group**: Container for all resources
+- **App Service Plan**: Linux-based hosting (B1 tier for cost efficiency)
+- **Web App**: Python 3.11 runtime with Flask application
+- **SQL Server**: Managed database server with TLS 1.2 minimum
+- **SQL Database**: Basic tier (2GB, suitable for development/testing)
+- **Application Insights**: Monitoring and logging
+- **Log Analytics Workspace**: Centralized log storage
 
-**နမူနာမြင်ကွင်း**: ၎င်းကို စားသောက်ဆိုင် (web app) နှင့် ဂိုဒေါင် အအေးခန်း (database) တို့နှင့် နှိုင်းယှဉ်နိုင်သည်။ ဖောက်သည်များသည် မီနူး (API endpoints) မှ ရုပ်ပိုင်းဆိုင်ရာ မှာယူပြီး မီးဖိုချောင် (Flask app) က ဂိုဒေါင်ထဲမှ ပစ္စည်းများ (data) များကို ယူသောက်သည်။ စားသောက်ဆိုင် မန်နေဂျာ (Application Insights) က ဖြစ်ပျက်သမျှကို စည်းကြပ်စောင့်ကြည့်သည်။
+**Analogy**: Think of this like a restaurant (web app) with a walk-in freezer (database). Customers order from the menu (API endpoints), and the kitchen (Flask app) retrieves ingredients (data) from the freezer. The restaurant manager (Application Insights) tracks everything that happens.
 
-## ဖိုင် ဖွဲ့စည်းပုံ
+## Folder Structure
 
-ဤနမူနာတွင် ဖိုင်အားလုံး ပါဝင်သည်—ပြင်ပ အလားအလာ မလိုအပ်ပါ။
+All files are included in this example—no external dependencies required:
 
 ```
 examples/database-app/
@@ -127,118 +114,118 @@ examples/database-app/
         └── Dockerfile          # Container definition
 ```
 
-**ဖိုင်တိုင်း ဘာလုပ်သလဲ:**
-- **azure.yaml**: AZD သို့ ဘာ deploy မည်နှင့် ဘယ်နေရာသို့ ဆိုတာ အကြောင်းပြသည်
-- **infra/main.bicep**: Azure resource များအားလုံးကို စုပေါင်းညှိနှိုင်းသည်
-- **infra/resources/*.bicep**: တစ်ခုချင်း resource သတ်မှတ်ချက်များ (ပြန်လည်အသုံးပြုနိုင်ရန် modular)
-- **src/web/app.py**: database logic ပါဝင်သည့် Flask application
-- **requirements.txt**: Python package များ အလိုအလျောက် ထည့်ရန်စာရင်း
-- **Dockerfile**: deployment အတွက် containerization အညွှန်း
+**What Each File Does:**
+- **azure.yaml**: Tells AZD what to deploy and where
+- **infra/main.bicep**: Orchestrates all Azure resources
+- **infra/resources/*.bicep**: Individual resource definitions (modular for reuse)
+- **src/web/app.py**: Flask application with database logic
+- **requirements.txt**: Python package dependencies
+- **Dockerfile**: Containerization instructions for deployment
 
-## Quickstart (အဆင့်‌بလိုက်)
+## Quickstart (Step-by-Step)
 
-### အဆင့် 1: Clone လုပ်၍ သွားပါ
+### Step 1: Clone and Navigate
 
 ```sh
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/database-app
 ```
 
-**✓ အောင်မြင်မှု စစ်ဆေးမှု**: `azure.yaml` နှင့် `infra/` ဖိုလ်ဒါကို တွေ့ရသည်ကို အတည်ပြုပါ။
+**✓ Success Check**: Verify you see `azure.yaml` and `infra/` folder:
 ```sh
 ls
-# မျှော်လင့်ထားသည်: README.md, azure.yaml, infra/, src/
+# မျှော်မှန်းချက်: README.md, azure.yaml, infra/, src/
 ```
 
-### အဆင့် 2: Azure သို့ authenticate ပြုလုပ်ပါ
+### Step 2: Authenticate with Azure
 
 ```sh
 azd auth login
 ```
 
-ဤကိရိယာသည် သင့် browser ကို ဖွင့်ပေးပြီး Azure authentication ကို ပြုလုပ်စေနိုင်သည်။ သင့် Azure အကောင့်ဖြင့် စာရင်းသွင်းပါ။
+This opens your browser for Azure authentication. Sign in with your Azure credentials.
 
-**✓ အောင်မြင်မှု စစ်ဆေးမှု**: အောက်ပါစာမျက်နှာကို မြင်ရပါမည်။
+**✓ Success Check**: You should see:
 ```
 Logged in to Azure.
 ```
 
-### အဆင့် 3: ပတ်ဝန်းကျင်ကို initialize ပြုလုပ်ပါ
+### Step 3: Initialize the Environment
 
 ```sh
 azd init
 ```
 
-**ဖြစ်ပေါ်သည့်အရာ**: AZD သည် သင့် deployment အတွက် local configuration ကို ဖန်တီးပေးသည်။
+**What happens**: AZD creates a local configuration for your deployment.
 
-**သင်မြင်ရမည့် prompt များ**:
-- **Environment name**: အတိုချုံးအမည် တစ်ခု ထည့်ပါ (ဥပမာ `dev`, `myapp`)
-- **Azure subscription**: စာရင်းမှ သင့် subscription ကို ရွေးချယ်ပါ
-- **Azure location**: ဒေသတစ်ခုရွေးချယ်ပါ (ဥပမာ `eastus`, `westeurope`)
+**Prompts you'll see**:
+- **Environment name**: Enter a short name (e.g., `dev`, `myapp`)
+- **Azure subscription**: Select your subscription from the list
+- **Azure location**: Choose a region (e.g., `eastus`, `westeurope`)
 
-**✓ အောင်မြင်မှု စစ်ဆေးမှု**: အောက်ပါအရာများကို မြင်ရပါမည်။
+**✓ Success Check**: You should see:
 ```
 SUCCESS: New project initialized!
 ```
 
-### အဆင့် 4: Azure Resources များကို Provision လုပ်ပါ
+### Step 4: Provision Azure Resources
 
 ```sh
 azd provision
 ```
 
-**ဖြစ်ပေါ်သည့်အရာ**: AZD သည် အကာအကွယ်အားလုံးကို deploy လုပ်သည် (5-8 မိနစ် ကြာနိုင်သည်)။
-1. Resource group ဖန်တီးသည်
-2. SQL Server နှင့် Database ဖန်တီးသည်
-3. App Service Plan ဖန်တီးသည်
-4. Web App ဖန်တီးသည်
-5. Application Insights ဖန်တီးသည်
-6. networking နှင့် security ကို စီစဉ်သည်
+**What happens**: AZD deploys all infrastructure (takes 5-8 minutes):
+1. Creates resource group
+2. Creates SQL Server and Database
+3. Creates App Service Plan
+4. Creates Web App
+5. Creates Application Insights
+6. Configures networking and security
 
-**သင့်အား မေးမြန်းမည့်အချက်များ**:
-- **SQL admin username**: username တစ်ခု ထည့်ပါ (ဥပမာ `sqladmin`)
-- **SQL admin password**: ခိုင်မာသည့် password တစ်ခု ထည့်ပါ (သိမ်းဆည်းပါ!)
+**You'll be prompted for**:
+- **SQL admin username**: Enter a username (e.g., `sqladmin`)
+- **SQL admin password**: Enter a strong password (save this!)
 
-**✓ အောင်မြင်မှု စစ်ဆေးမှု**: အောက်ပါအရာများကို မြင်ရပါမည်။
+**✓ Success Check**: You should see:
 ```
 SUCCESS: Your application was provisioned in Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
 https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
 ```
 
-**⏱️ အချိန်**: 5-8 မိနစ်
+**⏱️ Time**: 5-8 minutes
 
-### အဆင့် 5: Application ကို Deploy လုပ်ပါ
+### Step 5: Deploy the Application
 
 ```sh
 azd deploy
 ```
 
-**ဖြစ်ပေါ်သည့်အရာ**: AZD သည် သင့် Flask application ကို build ပြီး deploy လုပ်ပေးသည်။
-1. Python application ကို package ပြုလုပ်သည်
-2. Docker container ကို build လုပ်သည်
-3. Azure Web App သို့ push လုပ်သည်
-4. Database ကို sample data ဖြင့် initial ပြုလုပ်သည်
-5. Application ကို စတင်သွားစေသည်
+**What happens**: AZD builds and deploys your Flask application:
+1. Packages the Python application
+2. Builds the Docker container
+3. Pushes to Azure Web App
+4. Initializes the database with sample data
+5. Starts the application
 
-**✓ အောင်မြင်မှု စစ်ဆေးမှု**: အောက်ပါအရာများကို မြင်ရပါမည်။
+**✓ Success Check**: You should see:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
 https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
 ```
 
-**⏱️ အချိန်**: 3-5 မိနစ်
+**⏱️ Time**: 3-5 minutes
 
-### အဆင့် 6: Application ကို Browser ဖြင့် ကြည့်ရှုပါ
+### Step 6: Browse the Application
 
 ```sh
 azd browse
 ```
 
-ဤကိရိယာသည် သင့် deploy ပြီးသော web app ကို browser တွင် `https://app-<unique-id>.azurewebsites.net` မှာ ဖွင့်ပေးမည်။
+This opens your deployed web app in the browser at `https://app-<unique-id>.azurewebsites.net`
 
-**✓ အောင်မြင်မှု စစ်ဆေးမှု**: JSON output တစ်ခုကို မြင်ရပါမည်။
+**✓ Success Check**: You should see JSON output:
 ```json
 {
   "message": "Welcome to the Database App API",
@@ -251,14 +238,14 @@ azd browse
 }
 ```
 
-### အဆင့် 7: API Endpoints များကို စမ်းသပ်ပါ
+### Step 7: Test the API Endpoints
 
-**Health Check** (database ချိတ်ဆက်မှုကို စစ်ဆေးရန်):
+**Health Check** (verify database connection):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/health
 ```
 
-**မျှော်လင့်ထားသည့် ပြန်လည်ဖြေပေးမှု**:
+**Expected Response**:
 ```json
 {
   "status": "healthy",
@@ -271,7 +258,7 @@ curl https://app-<your-id>.azurewebsites.net/health
 curl https://app-<your-id>.azurewebsites.net/products
 ```
 
-**မျှော်လင့်ထားသည့် ပြန်လည်ဖြေပေးမှု**:
+**Expected Response**:
 ```json
 [
   {
@@ -290,68 +277,68 @@ curl https://app-<your-id>.azurewebsites.net/products
 curl https://app-<your-id>.azurewebsites.net/products/1
 ```
 
-**✓ အောင်မြင်မှု စစ်ဆေးမှု**: အားလုံး endpoints များသည် error မရှိပဲ JSON data ပြန်လည်ပေးပါသည်။
+**✓ Success Check**: All endpoints return JSON data without errors.
 
 ---
 
-**🎉 ဂုဏ်ပြုပါတယ်!** သင်သည် AZD အသုံးပြုကာ Azure သို့ web application နှင့် database ကို အောင်မြင်စွာ deploy ပြီးပါပြီ။
+**🎉 Congratulations!** You've successfully deployed a web application with a database to Azure using AZD.
 
-## ဖော်ပြချက် အနက်ရှုခြင်း (Configuration Deep-Dive)
+## Configuration Deep-Dive
 
-### ပတ်ဝန်းကျင် အပြံဳး( Environment Variables )
+### Environment Variables
 
-Secrets များကို Azure App Service configuration ဖြင့် လုံခြုံစွာ စီမံထားသည်—**source code တွင် ခိုင်မာစွာ မထည့်ရပါ**။
+Secrets are managed securely via Azure App Service configuration—**never hardcoded in source code**.
 
-**AZD မှ အလိုအလျောက် ပြုလုပ်ပေးသည်**:
-- `SQL_CONNECTION_STRING`: encrypted credentials ပါရှိသည့် database connection
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`: monitoring telemetry endpoint
-- `SCM_DO_BUILD_DURING_DEPLOYMENT`: dependency အလိုအလျောက် 설치 လုပ်စေရန် စနစ် ဖွင့်သည်
+**Configured Automatically by AZD**:
+- `SQL_CONNECTION_STRING`: Database connection with encrypted credentials
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Monitoring telemetry endpoint
+- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Enables automatic dependency installation
 
-**Secrets များ သိမ်းဆည်းရာနေရာများ**:
-1. `azd provision` လုပ်သည့်အခါ SQL credential များကို secure prompts မှတဆင့် ပေးရမည်
-2. AZD သည် ၎င်းတို့ကို သင့် local `.azure/<env-name>/.env` ဖိုင်အတွင်းသို့ သိမ်းဆည်းသည် (git-ignored)
-3. AZD သည် ၎င်းတို့ကို Azure App Service configuration ထဲသို့ inject လုပ်သည် (at rest တွင် encrypted)
-4. Application သည် runtime တုန့်ပြန်ချိန်တွင် `os.getenv()` ဖြင့် ဖတ်ယူသည်
+**Where Secrets Are Stored**:
+1. During `azd provision`, you provide SQL credentials via secure prompts
+2. AZD stores these in your local `.azure/<env-name>/.env` file (git-ignored)
+3. AZD injects them into Azure App Service configuration (encrypted at rest)
+4. Application reads them via `os.getenv()` at runtime
 
-### local Development
+### Local Development
 
-local စမ်းသပ်မှုအတွက် `.env` ဖိုင်ကို နမူနာမှ ဖန်တီးပါ။
+For local testing, create a `.env` file from the sample:
 
 ```sh
 cp .env.sample .env
-# .env ကို သင့်ဒေတာဘေ့စ်ချိတ်ဆက်မှုဖြင့် တည်းဖြတ်ပါ
+# .env ကို သင့်ဒေသဆိုင်ရာ ဒေတာဘေ့စ် ချိတ်ဆက်မှုဖြင့် တည်းဖြတ်ပါ
 ```
 
 **Local Development Workflow**:
 ```sh
-# လိုအပ်သော ပက်ကေ့ဂျ်များကို တပ်ဆင်ပါ
+# မူတည်မှုများကို တပ်ဆင်ပါ
 cd src/web
 pip install -r requirements.txt
 
-# ပတ်ဝန်းကျင် အပြောင်းအလဲအချက်များကို သတ်မှတ်ပါ
+# ပတ်ဝန်းကျင် အပြောင်းအလဲများကို သတ်မှတ်ပါ
 export SQL_CONNECTION_STRING="your-local-connection-string"
 
-# အပလီကေးရှင်းကို လည်ပတ်အောင် လုပ်ပါ
+# အပလီကေးရှင်းကို လည်ပတ်ပါ
 python app.py
 ```
 
-**စာတွေကို local တွင် စမ်းသပ်ရန်**:
+**Test locally**:
 ```sh
 curl http://localhost:8000/health
-# မျှော်မှန်းချက်: {"status": "healthy", "database": "connected"}
+# မျှော်မှန်းထားသည်: {"status": "ကျန်းမာ", "database": "ချိတ်ဆက်ထားသည်"}
 ```
 
 ### Infrastructure as Code
 
-Azure resources အားလုံးကို **Bicep templates** (`infra/` ဖိုလ်ဒါ) တွင် သတ်မှတ်ထားသည်။
+All Azure resources are defined in **Bicep templates** (`infra/` folder):
 
-- **Modular Design**: resource မျိုးစုံကို ပြန်လည်အသုံးပြုနိုင်ရန် တစ်ဖိုင်စီထားသည်
-- **Parameterized**: SKUs, regions, နှင့် နာမည်ပုံစံများကို မိမိလိုအပ်သလို ပြောင်းနိုင်သည်
-- **Best Practices**: Azure naming standards နှင့် security defaults ကို လိုက်နာထားသည်
-- **Version Controlled**: Infrastructure ပြင်ဆင်မှုများကို Git တွင် ထိန်းသိမ်းထားသည်
+- **Modular Design**: Each resource type has its own file for reusability
+- **Parameterized**: Customize SKUs, regions, naming conventions
+- **Best Practices**: Follows Azure naming standards and security defaults
+- **Version Controlled**: Infrastructure changes are tracked in Git
 
-**ပြင်ဆင်မှု ဥပမာ**:
-database tier ကို ပြောင်းလိုပါက `infra/resources/sql-database.bicep` ကို ပြင်ပါ။
+**Customization Example**:
+To change the database tier, edit `infra/resources/sql-database.bicep`:
 ```bicep
 sku: {
   name: 'Standard'  // Changed from 'Basic'
@@ -360,51 +347,52 @@ sku: {
 }
 ```
 
-## လုံခြုံရေး အကောင်းဆုံး လုပ်ဆောင်ချက်များ
+## Security Best Practices
 
-ဤနမူနာသည် Azure ၏ လုံခြုံရေး အကောင်းဆုံး လမ်းစဉ်များကို လိုက်နာထားသည်။
+This example follows Azure security best practices:
 
-### 1. **Source Code ထဲတွင် Secret မထည့်ရန်**
-- ✅ Credentials များကို Azure App Service configuration မှာ သိမ်းဆည်းထားသည် (encrypted)
-- ✅ `.env` ဖိုင်များကို `.gitignore` မှတဆင့် Git မှ ပယ်ထားသည်
-- ✅ Secrets များကို provision အကာအကွယ် အချိန်တွင် secure parameters ဖြင့် ပေးပို့သည်
+### 1. **No Secrets in Source Code**
+- ✅ Credentials stored in Azure App Service configuration (encrypted)
+- ✅ `.env` files excluded from Git via `.gitignore`
+- ✅ Secrets passed via secure parameters during provisioning
 
 ### 2. **Encrypted Connections**
-- ✅ SQL Server အတွက် TLS 1.2 အနည်းဆုံး
-- ✅ Web App အတွက် HTTPS-only အား တင်းကျပ်စိတ်ထား
-- ✅ Database ချိတ်ဆက်မှုများသည် encrypted channel များ အသုံးပြုသည်
+- ✅ TLS 1.2 minimum for SQL Server
+- ✅ HTTPS-only enforced for Web App
+- ✅ Database connections use encrypted channels
 
 ### 3. **Network Security**
-- ✅ SQL Server firewall ကို Azure services များသာ ခွင့်ပြုရန် စီစဉ်ထားသည်
-- ✅ Public network access ကို ကန့်သတ်ထားသည် (Private Endpoints ဖြင့် ပိုမိုတင်းကျပ်နိုင်သည်)
-- ✅ Web App တွင် FTPS ကို ပိတ်ထားသည်
+- ✅ SQL Server firewall configured to allow Azure services only
+- ✅ Public network access restricted (can be further locked down with Private Endpoints)
+- ✅ FTPS disabled on Web App
 
 ### 4. **Authentication & Authorization**
-- ⚠️ **လက်ရှိ**: SQL authentication (username/password)
-- ✅ **Production အတွက် အကြံပြုချက်**: password မလိုသော authentication အတွက် Azure Managed Identity ကို အသုံးပြုရန်
+- ⚠️ **Current**: SQL authentication (username/password)
+- ✅ **Production Recommendation**: Use Azure Managed Identity for passwordless authentication
 
-**Managed Identity သို့ အဆင့်မြှင့်ရန်**:
-1. Web App တွင် managed identity ကို ဖွင့်ပါ
-2. identity ကို SQL ပေါ်၌ ခွင့်ပြုချက်ပေးပါ
-3. connection string ကို managed identity အသုံးပြုရန် ပြင်ဆင်ပါ
-4. password-based authentication ကို ဖျက်ပစ်ပါ
+**To Upgrade to Managed Identity** (for production):
+1. Enable managed identity on Web App
+2. Grant identity SQL permissions
+3. Update connection string to use managed identity
+4. Remove password-based authentication
 
 ### 5. **Auditing & Compliance**
-- ✅ Application Insights သည် request နှင့် error အားလုံးကို မှတ်တမ်းတင်သည်
-- ✅ SQL Database auditing ကို ဖွင့်ထားသည် (compliance အတွက် ပြင်ဆင်နိုင်သည်)
-- ✅ အရင်းအမြစ်အားလုံးကို tagging ဖြင့် governance အတွက် ထားရှိသည်
+- ✅ Application Insights logs all requests and errors
+- ✅ SQL Database auditing enabled (can be configured for compliance)
+- ✅ All resources tagged for governance
 
-**Production သို့ သွားမည်မတိုင်မှီ လုံခြုံရေး စစ်ဆေးရန် စာရင်း**:
-- [ ] Azure Defender for SQL ကို ဖွင့်ပါ
-- [ ] SQL Database အတွက် Private Endpoints ကို ချိန်ညှိပါ
-- [ ] Web Application Firewall (WAF) ကို ဖွင့်ပါ
-- [ ] secret rotation အတွက် Azure Key Vault ကို အသုံးပြုပါ
-- [ ] Azure AD authentication ကို ဖွင့်ပါ
-- [ ] အရင်းအမြစ်အားလုံးအတွက် diagnostic logging ကို ဖွင့်ပါ
+**Security Checklist Before Production**:
+- [ ] Enable Azure Defender for SQL
+- [ ] Configure Private Endpoints for SQL Database
+- [ ] Enable Web Application Firewall (WAF)
+- [ ] Implement Azure Key Vault for secret rotation
+- [ ] Configure Azure AD authentication
+- [ ] Enable diagnostic logging for all resources
 
-## ကုန်ကျစရိတ် ထိရောက်စွာ အသုံးချခြင်း
+## Cost Optimization
 
-**ခန့်မှန်း လစဉ် ကုန်ကျစရိတ်** (November 2025 အခြေချ):
+**Estimated Monthly Costs** (as of November 2025):
+
 | Resource | SKU/Tier | Estimated Cost |
 |----------|----------|----------------|
 | App Service Plan | B1 (Basic) | ~$13/month |
@@ -412,66 +400,66 @@ sku: {
 | Application Insights | Pay-as-you-go | ~$2/month (low traffic) |
 | **Total** | | **~$20/month** |
 
-**💡 ကုန်ကျစရိတ် လျော့ချနိုင်စရာ အကြံပြုချက်များ**:
+**💡 Cost-Saving Tips**:
 
-1. **သင်ယူရန် Free Tier ကို အသုံးပြုပါ**:
-   - App Service: F1 tier (free, အချိန်ကန့်သတ်)
-   - SQL Database: Azure SQL Database serverless ကို အသုံးပြုပါ
-   - Application Insights: 5GB/month အထိ free ingestion
+1. **Use Free Tier for Learning**:
+   - App Service: F1 tier (free, limited hours)
+   - SQL Database: Use Azure SQL Database serverless
+   - Application Insights: 5GB/month free ingestion
 
-2. **မလိုအပ်ချိန်တွင် resources များကို ပိတ်ထားပါ**:
+2. **Stop Resources When Not in Use**:
    ```sh
-   # ဝက်ဘ်အက်ပ်ကို ပိတ်ပါ (ဒေတာဘေ့စ်အတွက် ကုန်ကျမှုများ ဆက်လက်ဖြစ်နေပါသည်)
+   # ဝက်ဘ်အက်ပ်ကို ပိတ်ပါ (ဒေတာဘေ့စ်အတွက် ကုန်ကျမှု ဆက်ရှိနေမည်)
    az webapp stop --name <app-name> --resource-group <rg-name>
    
-   # လိုအပ်သည့်အချိန်တွင် ပြန်စတင်ပါ
+   # လိုအပ်သည့်အခါ ပြန်စတင်ပါ
    az webapp start --name <app-name> --resource-group <rg-name>
    ```
 
-3. **စမ်းသပ်ပြီးနောက် အားလုံးဖျက်ပစ်ပါ**:
+3. **Delete Everything After Testing**:
    ```sh
    azd down
    ```
-   ဤနည်းလမ်းသည် အရင်းအမြစ်အားလုံးကို ဖျက်ပစ်ပြီး စွဲချက်များ ရပ်တန့်စေပါသည်။
+   This removes ALL resources and stops charges.
 
-4. **Development နှင့် Production SKUs ခွဲခြားအသုံးပြုခြင်း**:
-   - **Development**: ဤနမူနာတွင် အသုံးပြုထားသည့် Basic tier
-   - **Production**: redundancy ပါရှိသည့် Standard/Premium tier
+4. **Development vs. Production SKUs**:
+   - **Development**: Basic tier (used in this example)
+   - **Production**: Standard/Premium tier with redundancy
 
-**ကုန်ကျစရိတ် ကြည့်ရှုခြင်း**:
-- [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement) တွင် ကုန်ကျစရိတ်ကို ကြည့်ရှုပါ
-- မမျှော်လင့်မှုပြဿနာများ ရှောင်ရန် cost alerts များ တပ်ဆင်ပါ
-- resource များအားလုံးကို `azd-env-name` အဖြစ် tag တပ်၍ tracking လုပ်ပါ
+**Cost Monitoring**:
+- View costs in [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
+- Set up cost alerts to avoid surprises
+- Tag all resources with `azd-env-name` for tracking
 
-**Free Tier အစားထိုးရွေးချယ်စရာ**:
-သင်ယူရင်းတွင် `infra/resources/app-service-plan.bicep` ကို ပြင်ဆင်နိုင်သည်။
+**Free Tier Alternative**:
+For learning purposes, you can modify `infra/resources/app-service-plan.bicep`:
 ```bicep
 sku: {
   name: 'F1'  // Free tier
   tier: 'Free'
 }
 ```
-**မှတ်ချက်**: Free tier သည် ကန့်သတ်ချက်များရှိသည် (နေ့စဉ် CPU 60 မိနစ်၊ always-on မရှိ)
+**Note**: Free tier has limitations (60 min/day CPU, no always-on).
 
-## မော်နစ်ရင်းနှင့် ကြည့်ရှုနိုင်မှု (Monitoring & Observability)
+## Monitoring & Observability
 
-### Application Insights ပေါင်းစည်းခြင်း
+### Application Insights Integration
 
-ဤနမူနာတွင် စုံလင်စွာ မော်နစ်ရင်းလုပ်ဆောင်နိုင်ရန် **Application Insights** ပါဝင်သည်။
+This example includes **Application Insights** for comprehensive monitoring:
 
-**မော်နစ်ရင်း အရာများ**:
+**What's Monitored**:
 - ✅ HTTP requests (latency, status codes, endpoints)
-- ✅ Application errors နှင့် exceptions
-- ✅ Flask app မှ custom logging
-- ✅ Database ချိတ်ဆက်မှု ကျန်းမာရေး
-- ✅ performance metrics (CPU, memory)
+- ✅ Application errors and exceptions
+- ✅ Custom logging from Flask app
+- ✅ Database connection health
+- ✅ Performance metrics (CPU, memory)
 
-**Application Insights ကို မည်သို့ဝင်ရောက်ကြည့်မည်**:
-1. [Azure Portal](https://portal.azure.com) ကို ဖွင့်ပါ
-2. သင့် resource group (`rg-<env-name>`) သို့ သွားပါ
-3. Application Insights resource (`appi-<unique-id>`) ကို နှိပ်ပါ
+**Access Application Insights**:
+1. Open [Azure Portal](https://portal.azure.com)
+2. Navigate to your resource group (`rg-<env-name>`)
+3. Click on Application Insights resource (`appi-<unique-id>`)
 
-**အသုံးဝင်သော Queries** (Application Insights → Logs):
+**Useful Queries** (Application Insights → Logs):
 
 **View All Requests**:
 ```kusto
@@ -498,29 +486,29 @@ requests
 
 ### SQL Database Auditing
 
-**SQL Database auditing ကို ဖွင့်ထားသည်** အောက်ပါအချက်များကို ထိန်းသိမ်းရန်:
-- Database access ပုံစံများ
-- မအောင်မြင်သော login ကြိုးပမ်းမှုများ
-- Schema ပြောင်းလဲမှုများ
-- Data access (compliance အတွက်)
+**SQL Database auditing is enabled** to track:
+- Database access patterns
+- Failed login attempts
+- Schema changes
+- Data access (for compliance)
 
-**Audit Logs များကို ကြည့်ရှုရန်**:
+**Access Audit Logs**:
 1. Azure Portal → SQL Database → Auditing
-2. Log Analytics workspace တွင် logs များ ကြည့်ပါ
+2. View logs in Log Analytics workspace
 
-### အချိန်နှင့်တပြေးညီ မော်နစ်ရင်း
+### Real-Time Monitoring
 
-**Live Metrics ကြည့်ရန်**:
+**View Live Metrics**:
 1. Application Insights → Live Metrics
-2. requests, failures, နှင့် performance များကို အချိန်နှင့်တပြေးညီ ကြည့်ရှုနိုင်သည်
+2. See requests, failures, and performance in real-time
 
-**Alerts တပ်ဆင်ရန်**:
-critical ဖြစ်စေသော အချက်များအတွက် alerts များ ပြုလုပ်ပါ။
-- HTTP 500 errors > 5 within 5 minutes
+**Set Up Alerts**:
+Create alerts for critical events:
+- HTTP 500 errors > 5 in 5 minutes
 - Database connection failures
-- တုံ့ပြန်ချိန်မြင့် (>2 စက္ကန့်)
+- High response times (>2 seconds)
 
-**Alert ဖန်တီးခြင်း ဥပမာ**:
+**Example Alert Creation**:
 ```sh
 az monitor metrics alert create \
   --name "High-Response-Time" \
@@ -530,57 +518,56 @@ az monitor metrics alert create \
   --description "Alert when response time exceeds 2 seconds"
 ```
 
-## ပြဿနာဖြေရှင်းခြင်း
+## Troubleshooting
+### ပုံမှန် ပြဿနာများနှင့် ဖြေရှင်းနည်းများ
 
-### အထွေထွေ ပြဿနာများနှင့် ဖြေရှင်းနည်းများ
-
-#### 1. `azd provision` သည် "Location not available" ဖြင့် မအောင်မြင်ခြင်း
+#### 1. `azd provision` သည် "Location not available" ဖြင့် မအောင်မြင်ပါ
 
 **လက္ခဏာ**:
 ```
 Error: The subscription is not registered for the resource type 'components' in the location 'centralus'.
 ```
 
-**ဖြေရှင်းနည်း**:
-အခြား Azure ဒေသတစ်ခုကို ရွေးချယ်ပါ သို့မဟုတ် resource provider ကို register လုပ်ပါ။
+**ဖြေရှင်းချက်**:
+အခြား Azure အလယ်ပိုင်းတစ်ခုကို ရွေးချယ်ပါ သို့မဟုတ် resource provider ကို မှတ်ပုံတင်ပါ။
 ```sh
 az provider register --namespace Microsoft.Insights
 ```
 
-#### 2. SQL ချိတ်ဆက်မှု တပ်ဆင်ချိန် မအောင်မြင်ခြင်း
+#### 2. တင်တပ်မှု (deployment) အတွင်း SQL ချိတ်ဆက်မှု မအောင်မြင်ခြင်း
 
 **လက္ခဏာ**:
 ```
 pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]TCP Provider...')
 ```
 
-**ဖြေရှင်းနည်း**:
-- SQL Server firewall သည် Azure services များအား ခွင့်ပြုထားကြောင်း စစ်ဆေးပါ (အလိုအလျောက် ဖွဲ့စည်းပေးထားသည်)
-- `azd provision` အတွင်း SQL admin password ကို မှန်ကန်စွာ ထည့်သွင်းထားကြောင်း စစ်ဆေးပါ
-- SQL Server သည် အပြည့်အဝ provision လုပ်ပြီးကြောင်း သေချာစေရန် (2-3 မိနစ်ခန့် ကြာနိုင်သည်)
+**ဖြေရှင်းချက်**:
+- SQL Server firewall သည် Azure ဝန်ဆောင်မှုများအား ခွင့်ပြုထားသည်ကို စစ်ဆေးပါ (အလိုအလျောက် ပြုလုပ်ထားနိုင်သည်)
+- `azd provision` လုပ်စဉ် တိကျစွာ SQL admin စကားဝှက် ထည့်ထားသည်ကို စစ်ဆေးပါ
+- SQL Server သည် အပြည့်အ၀ provision လုပ်ပြီးကြောင်း သေချာပါစေ (၂-၃ မိနစ် ကြာနိုင်သည်)
 
-**ချိတ်ဆက်မှု အတည်ပြုရန်**:
+**ချိတ်ဆက်မှု စစ်ဆေးရန်**:
 ```sh
-# Azure Portal မှာ SQL Database → Query တည်းဖြတ်ကိရိယာကို သွားပါ။
-# သင့်အသုံးပြုသူ အချက်အလက်များဖြင့် ချိတ်ဆက်ကြည့်ပါ။
+# Azure Portal ထဲကနေ SQL Database → Query editor သို့ သွားပါ။
+# သင့် အကောင့် အချက်အလက်များဖြင့် ချိတ်ဆက်ကြည့်ပါ။
 ```
 
-#### 3. Web App တွင် "Application Error" ပြပေါ်ခြင်း
+#### 3. Web App တွင် "Application Error" ပြသည်
 
 **လက္ခဏာ**:
-Browser သည် အထွေထွေအမှား စာမျက်နှာကို ပြသသည်။
+ဘရောက်ဇာတွင် ယေဘုယျ အမှားစာမျက်နှာ ကို ပြသသည်။
 
-**ဖြေရှင်းနည်း**:
-application logs များကို စစ်ဆေးပါ:
+**ဖြေရှင်းချက်**:
+အက်ပလီကေးရှင်း logs များကို စစ်ဆေးပါ:
 ```sh
-# လတ်တလော မှတ်တမ်းများကို ကြည့်ရန်
+# နောက်ဆုံးလော့ဂ်များကိုကြည့်ပါ
 az webapp log tail --name <app-name> --resource-group <rg-name>
 ```
 
-**ပုံမှန် ဖြစ်စေသောအကြောင်းရင်းများ**:
-- Environment variables မရှိခြင်း (App Service → Configuration တွင် စစ်ဆေးပါ)
-- Python package တပ်ဆင်ခြင်း မအောင်မြင်ခြင်း (deployment logs ကို စစ်ဆေးပါ)
-- Database initialization အမှား (SQL ချိတ်ဆက်မှုကို စစ်ဆေးပါ)
+**ပုံမှန် အကြောင်းရင်းများ**:
+- ပတ်ဝန်းကျင်အပြောင်းအလဲများ (environment variables) မရှိ/မှားနေခြင်း (App Service → Configuration ကို စစ်ဆေးပါ)
+- Python package တပ်ဆင်မှု မအောင်မြင်ခြင်း (deployment logs ကို စစ်ဆေးပါ)
+- ဒေတာဘေ့စ် စတင်ခြင်း အမှား (SQL ချိတ်ဆက်မှုကို စစ်ဆေးပါ)
 
 #### 4. `azd deploy` သည် "Build Error" ဖြင့် မအောင်မြင်ခြင်း
 
@@ -589,107 +576,107 @@ az webapp log tail --name <app-name> --resource-group <rg-name>
 Error: Failed to build project
 ```
 
-**ဖြေရှင်းနည်း**:
-- `requirements.txt` တွင် syntax အမှား မရှိကြောင်း သေချာစေပါ
-- `infra/resources/web-app.bicep` တွင် Python 3.11 ကို စာရေးပြထားကြောင်း စစ်ဆေးပါ
-- Dockerfile တွင် မှန်ကန်သော base image သတ်မှတ်ထားကြောင်း အတည်ပြုပါ
+**ဖြေရှင်းချက်**:
+- `requirements.txt` တွင် syntax အမှားများ မရှိကြောင်း သေချာပါစေ
+- `infra/resources/web-app.bicep` တွင် Python 3.11 ကို သတ်မှတ်ထားသည်ကို စစ်ဆေးပါ
+- Dockerfile တွင် မှန်ကန်သော base image သတ်မှတ်ထားသည်ကို အတည်ပြုပါ
 
-**local တွင် Debug ပြုလုပ်ရန်**:
+**ဒေသတွင်း Debug ပြုလုပ်ရန်**:
 ```sh
 cd src/web
 docker build -t test-app .
 docker run -p 8000:8000 test-app
 ```
 
-#### 5. AZD commands လုပ်ရာ "Unauthorized" ဖြစ်ခြင်း
+#### 5. AZD အမိန့်များကို အလုပ်လုပ်စဉ် "Unauthorized" ဖြစ်ခြင်း
 
 **လက္ခဏာ**:
 ```
 ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have authorization
 ```
 
-**ဖြေရှင်းနည်း**:
-Azure သို့ ပြန်လည် authentication လုပ်ပါ:
+**ဖြေရှင်းချက်**:
+Azure သို့ ပြန်လည် အကောင့်အတည်ပြု (re-authenticate) လုပ်ပါ:
 ```sh
 azd auth login
 az login
 ```
 
-subscription တွင် မှန်ကန်သော ခွင့်ပြုချက်များ (Contributor role) ရှိကြောင်း စစ်ဆေးပါ။
+Subscription တွင် သင့်အား သင့်လျော်သော ခွင့်ပြုချက်များ (Contributor role) ရှိကြောင်း စစ်ဆေးပါ။
 
-#### 6. Database ကုန်ကျစရိတ် မြင့်မားခြင်း
+#### 6. ဒေတာဘေ့စ် သုံးစွဲမှု ကုန်ကျစရိတ် မြင့်မားခြင်း
 
 **လက္ခဏာ**:
-မျှော်လင့်မထားသော Azure ဘီလ်။
+မမျှော်လင့်ထားသည့် Azure ဘောက်ချာ။
 
-**ဖြေရှင်းနည်း**:
-- စမ်းသပ်ပြီးနောက် `azd down` မကျင့်သွားပါက စစ်ဆေးပါ
-- SQL Database သည် Basic tier ကို အသုံးပြုနေကြောင်း (Premium မဟုတ်) အတည်ပြုပါ
-- Azure Cost Management တွင် ကုန်ကျစရိတ်များကို ပြန်လည်ဆန်းစစ်ပါ
-- ကုန်ကျစရိတ် အချက်ပေးချက်များ (cost alerts) ကို တပ်ဆင်ပါ
+**ဖြေရှင်းချက်**:
+- စမ်းသပ်ပြီးသောနောက် `azd down` မလုပ်ထားလျှင် စစ်ဆေးပါ
+- SQL Database သည် Basic tier ကို အသုံးပြုထားသည်ကို သေချာပါ (Premium မဟုတ်)
+- Azure Cost Management တွင် ကုန်ကျစရိတ်ကို ပြန်လည်စစ်ဆေးပါ
+- ကုန်ကျစရိတ် သတိပေးချက်များ စီစဉ်ပါ
 
-### ကူညီမှု ရယူခြင်း
+### ကူညီမှု ရယူရန်
 
-**AZD Environment Variables အားလုံး ကြည့်ရန်**:
+**AZD ပတ်ဝန်းကျင် variables အားလုံး ကြည့်ရေးရန်**:
 ```sh
 azd env get-values
 ```
 
-**Deployment အခြေအနေ စစ်ဆေးရန်**:
+**Deployment အခြေအနေကို စစ်ဆေးရန်**:
 ```sh
 az webapp show --name <app-name> --resource-group <rg-name> --query state
 ```
 
-**Application logs ကို ဝင်ကြည့်ရန်**:
+**အက်ပလီကေးရှင်း logs အား ဝင်ရောက်ကြည့်ရန်**:
 ```sh
 az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
 ```
 
-**ထပ်မံအကူအညီ လိုပါသလား?**
-- [AZD ပြဿနာဖြေရှင်းခြင်း လမ်းညွှန်](../../docs/chapter-07-troubleshooting/common-issues.md)
-- [Azure App Service ပြဿနာဖြေရှင်းခြင်း](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
-- [Azure SQL ပြဿနာဖြေရှင်းခြင်း](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
+**ပိုမို ကူညီမှု လိုပါသလား?**
+- [AZD ပြဿနာဖြေရှင်း လမ်းညွှန်](../../docs/chapter-07-troubleshooting/common-issues.md)
+- [Azure App Service ပြဿနာဖြေရှင်း](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
+- [Azure SQL ပြဿနာဖြေရှင်း](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
 
 ## လက်တွေ့ လေ့ကျင့်ခန်းများ
 
-### လေ့ကျင့်ခန်း 1: သင်၏ Deployment ကို အတည်ပြုပါ (အခြေခံ)
+### လေ့ကျင့်ခန်း 1: သင့် Deployment ကို အတည်ပြုခြင်း (စတင်သူ)
 
-**ရည်ရွယ်ချက်**: အရင်းအမြစ်များ အားလုံး တပ်ဆင်ပြီး application က အလုပ်လုပ်နေကြောင်း အတည်ပြုပါ။
+**ရည်မှန်းချက်**: အရင်းအမြစ်အားလုံး တင်ထားပြီး အက်ပလီကေးရှင်း လုပ်ဆောင်နိုင်ကြောင်း အတည်ပြုပါ။
 
 **အဆင့်များ**:
-1. သင်၏ resource group ထဲရှိ resource အားလုံးကို စာရင်းထုတ်ပါ:
+1. resource group အတွင်း ရှိသော အရင်းအမြစ်အားလုံး စာရင်းပြပါ:
    ```sh
    az resource list --resource-group rg-<env-name> --output table
    ```
-   **မျှော်မှန်းချက်**: 6-7 resources (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
+   **Expected**: 6-7 resources (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
 
-2. API endpoints အားလုံးကို စမ်းသပ်ပါ:
+2. API endpoint အားလုံးကို စမ်းသပ်ပါ:
    ```sh
    curl https://app-<your-id>.azurewebsites.net/
    curl https://app-<your-id>.azurewebsites.net/health
    curl https://app-<your-id>.azurewebsites.net/products
    curl https://app-<your-id>.azurewebsites.net/products/1
    ```
-   **မျှော်မှန်းချက်**: အားလုံးသည် အမှားမရှိဘဲ မှန်ကန်သော JSON ကို ပြန်ပေးသင့်သည်
+   **Expected**: အားလုံး မှားချက်မရှိ၍ မှန်ကန်သော JSON ပြန်ပေးရမည်
 
 3. Application Insights ကို စစ်ဆေးပါ:
    - Azure Portal တွင် Application Insights သို့ သွားပါ
    - "Live Metrics" သို့ သွားပါ
-   - web app ပေါ်တွင် သင့် browser ကို refresh ပြုလုပ်ပါ
-   **မျှော်မှန်းချက်**: request များကို တိုက်ရိုက် အချိန်တွင် မြင်ရပါမည်
+   - web app ပေါ်တွင် ဘရောက်ဇာကို ပြန်လည် refresh လုပ်ပါ
+   **Expected**: တောင်းဆိုမှုများကို တိုက်ရိုက် အချိန်တွင် တွေ့မြင်ရပါမည်
 
-**အောင်မြင်မှု စံသတ်မှတ်ချက်**: resource 6-7 ခု ရှိရမည်၊ အားလုံး endpoint များ ဒေတာ ပြန်ပေးရမည်၊ Live Metrics တွင် လှုပ်ရှားမှု တွေ့ရမည်။
+**အောင်မြင်မှုပမာဏ**: 6-7 အရင်းအမြစ် အားလုံး ရှိပြီး အားလုံး endpoint များ data ပြန်လည်ပေးသည်၊ Live Metrics တွင် လှုပ်ရှားမှု တွေ့ရသည်။
 
 ---
 
-### လေ့ကျင့်ခန်း 2: API Endpoint အသစ် တစ်ခု ထည့်ရန် (အလယ်အလတ်)
+### လေ့ကျင့်ခန်း 2: API Endpoint အသစ် ထည့်ရန် (အလယ်အလတ်)
 
-**ရည်ရွယ်ချက်**: Flask application ကို endpoint အသစ်ဖြင့် တိုးချဲ့ပါ။
+**ရည်မှန်းချက်**: Flask အက်ပလီကေးရှင်းတွင် endpoint အသစ် တစ်ခု ထည့်ပါ။
 
-**စတင်ရန်ကုဒ်**: လက်ရှိ endpoints များသည် `src/web/app.py` တွင်ရှိသည်
+**စတင်ကုဒ်**: လက်ရှိ endpoints များသည် `src/web/app.py` တွင် ရှိသည်
 
 **အဆင့်များ**:
-1. `src/web/app.py` ကို ပြင်ဆင်ပြီး `get_product()` function ထံနောက်ပိုင်းတွင် endpoint အသစ် တစ်ခု ထည့်ပါ:
+1. `src/web/app.py` ကို သြင်းစစ်ပြီး `get_product()` function အပြီးတွင် endpoint အသစ်တစ်ခု ထည့်ပါ:
    ```python
    @app.route('/products/search/<keyword>')
    def search_products(keyword):
@@ -723,7 +710,7 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
            return jsonify({'error': str(e)}), 500
    ```
 
-2. အပ်ဒိတ်လုပ်ထားသော application ကို deploy ပါ:
+2. အက်ပလီကေးရှင်းကို အပ်ဒိတ် ပြုပြင်ပြီး deploy လုပ်ပါ:
    ```sh
    azd deploy
    ```
@@ -732,18 +719,18 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    ```sh
    curl https://app-<your-id>.azurewebsites.net/products/search/laptop
    ```
-   **မျှော်မှန်းချက်**: "laptop" နှင့် ကိုက်ညီသော products များကို ပြန်ပေးရမည်
+   **Expected**: "laptop" နှင့် ကိုက်ညီသော products များကို ပြန်လည်ပေးမည်
 
-**အောင်မြင်မှု စံသတ်မှတ်ချက်**: endpoint အသစ် အလုပ်လုပ်မည်၊ စစ်ထုတ်ထားသော ရလဒ်များ ပြန်ပေးမည်၊ Application Insights logs တွင် ဖော်ပြမည်။
+**အောင်မြင်မှုပမာဏ**: endpoint အသစ်လုပ်ဆောင်နိုင်ပြီး စစ်ထုတ်ထားသော ဖျော်ဖြေမှုများကို ပြန်ပေးနိုင်သည်၊ Application Insights logs တွင် ပြသရမည်။
 
 ---
 
-### လေ့ကျင့်ခန်း 3: မော်နီတာနှင့် အချက်ပေးချက်များ ထည့်ရန် (အဆင့်မြင့်)
+### လေ့ကျင့်ခန်း 3: မော်နီတာနှင့် သတိပေးချက်များ ထည့်သွင်းရန် (အဆင့်မြင့်)
 
-**ရည်ရွယ်ချက်**: အချက်ပေးချက်များနှင့် အချိန်မီ မော်နီတာစနစ် တပ်ဆင်ပါ။
+**ရည်မှန်းချက်**: ကြိုတင် ကြည့်ရန် မော်နီတာနှင့် သတိပေးချက်များ စီစဉ်ပါ။
 
 **အဆင့်များ**:
-1. HTTP 500 အမှားများအတွက် အချက်ပေးမှုတစ်ခု ဖန်တီးပါ:
+1. HTTP 500 အမှားများအတွက် alert တစ်ခု ဖန်တီးပါ:
    ```sh
    # Application Insights အရင်းအမြစ် ID ကို ရယူပါ
    AI_ID=$(az monitor app-insights component show \
@@ -751,7 +738,7 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
      --resource-group rg-<env-name> \
      --query id -o tsv)
    
-   # သတိပေးချက် တစ်ခု ဖန်တီးပါ
+   # အသိပေးချက် ဖန်တီးပါ
    az monitor metrics alert create \
      --name "High-Error-Rate" \
      --resource-group rg-<env-name> \
@@ -762,28 +749,28 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
      --description "Alert when >5 failed requests in 5 minutes"
    ```
 
-2. အမှားများဖြစ်စေပြီး အချက်ပေးမှုကို စမ်းသပ်ပေးပါ:
+2. အမှားများဖြစ်စေ၍ alert ကို ထိခိုက်စေပါ:
    ```sh
-   # မရှိသော ထုတ်ကုန်တစ်ခုကို တောင်းဆိုပါ
+   # မရှိသော ထုတ်ကုန်ကို တောင်းဆိုခြင်း
    for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
    ```
 
-3. အချက်ပေးမှု ပေါက်ခဲ့သည်/မဟုတ်သည်ကို စစ်ဆေးပါ:
+3. alert ဖိုင်းလ်ထွက်မှုကို စစ်ဆေးပါ:
    - Azure Portal → Alerts → Alert Rules
-   - သင့် အီးမေးကို စစ်ဆေးပါ (တပ်ဆင်ထားပါက)
+   - သင့် အီမေးလ်ကို စစ်ဆေးပါ (ကွန်ဖစ်ဂျာထားပါက)
 
-**အောင်မြင်မှု စံသတ်မှတ်ချက်**: Alert rule တစ်ခု ဖန်တီးထားပြီး အမှားများဖြစ်သောအခါ လှုပ်ရှားမှုကို ဖမ်းယူကာ အသိပေးချက်များ လက်ခံရရှိသည်။
+**အောင်မြင်မှုပမာဏ**: Alert rule တစ်ခု ဖန်တီးပြီး အမှားဖြစ်စဉ်တွင် trigger လုပ်ပြီး သတိပေးချက်များ လက်ခံရရှိသည်။
 
 ---
 
-### လေ့ကျင့်ခန်း 4: Database Schema ပြင်ဆင်ခြင်း (အဆင့်မြင့်)
+### လေ့ကျင့်ခန်း 4: Database Schema ပြင်ဆင်မှုများ (အဆင့်မြင့်)
 
-**ရည်ရွယ်ချက်**: ဇယား အသစ် တစ်ခု ထည့်၍ application ကို အသုံးပြုနိုင်အောင် ပြင်ဆင်ပါ။
+**ရည်မှန်းချက်**: အတန်းသစ်တစ်ခု ထည့်ပြီး အက်ပလီကေးရှင်းကို အရည်အသွေးပြောင်းလဲမှုနှင့် သုံးစွဲပါ။
 
 **အဆင့်များ**:
-1. Azure Portal Query Editor မှတဆင့် SQL Database ကို ချိတ်ဆက်ပါ
+1. Azure Portal Query Editor ဖြင့် SQL Database နဲ့ ချိတ်ဆက်ပါ
 
-2. `categories` ဇယား အသစ် တစ်ခု ဖန်တီးပါ:
+2. `categories` ဆိုသော ဇယားအသစ်ကို ဖန်တီးပါ:
    ```sql
    CREATE TABLE categories (
        id INT PRIMARY KEY IDENTITY(1,1),
@@ -800,56 +787,56 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    UPDATE products SET category_id = 1; -- Set all to Electronics
    ```
 
-3. ပြန်လည်ပေးပို့မှုများတွင် category အချက်အလက်များ ထည့်သွင်းရန် `src/web/app.py` ကို အပ်ဒိတ်လုပ်ပါ
+3. `src/web/app.py` ကို အုပ်ထိန်းပြုပြင်၍ response များတွင် category အချက်အလက် ထည့်ပါ
 
-4. Deploy ပြီး စမ်းသပ်ပါ
+4. Deploy လုပ်ပြီး စမ်းသပ်ပါ
 
-**အောင်မြင်မှု စံသတ်မှတ်ချက်**: ဇယား အသစ် ရှိပြီး products များတွင် category အချက်အလက် ပြသပြီး application အလုပ်လုပ်နေဆဲဖြစ်ရမည်။
+**အောင်မြင်မှုပမာဏ**: ဇယားအသစ် ရှိပြီး products များတွင် category အချက်အလက် ပြသထားသည်၊ အက်ပလီကေးရှင်း အလုပ်လုပ်ဆဲ ဖြစ်ရမည်။
 
 ---
 
-### လေ့ကျင့်ခန်း 5: Caching ကို အကောင်အထည်ဖော်ခြင်း (အထူးကျွမ်းကျင်)
+### လေ့ကျင့်ခန်း 5: Caching အကောင်အထည်ဖော်ခြင်း (အထူးကျွမ်းကျင်)
 
-**ရည်ရွယ်ချက်**: လုပ်ဆောင်ချက်မြင့်တင်ရေးအတွက် Azure Redis Cache ထည့်ပါ။
+**ရည်မှန်းချက်**: လုပ်ဆောင်ချက်မြှင့်တင်ရန် Azure Redis Cache ထည့်ပါ။
 
 **အဆင့်များ**:
-1. `infra/main.bicep` တွင် Redis Cache ကို ထည့်ပါ
-2. product queries များကို cache မည်အောင် `src/web/app.py` ကို အပ်ဒိတ်လုပ်ပါ
-3. Application Insights ဖြင့် အလုပ်လုပ်မှု တိုးတက်မှုကို တိုင်းတာပါ
-4. Caching မတိုင်ခင်/ပြီးနောက် response time များကို နှိုင်းယှဉ်ပါ
+1. `infra/main.bicep` သို့ Redis Cache ကို ထည့်ပါ
+2. `src/web/app.py` ကို ပြင်ဆင်၍ product query များကို cache ထည့်ပါ
+3. Application Insights ဖြင့် နေ့စဉ် အချိန်ပိုင်း တုံ့ပြန်ချိန် တိုင်းတာပါ
+4. Caching မပြုမီ/ပြီးနောက် response time များ နှိုင်းယှဉ်ပါ
 
-**အောင်မြင်မှု စံသတ်မှတ်ချက်**: Redis သည် တပ်ဆင်ပြီး caching အလုပ်လုပ်သည်၊ response time များသည် 50% ထက်ပို တိုးတက်ရမည်။
+**အောင်မြင်မှုပမာဏ**: Redis ကို deploy လုပ်ပြီး caching အလုပ်လုပ်သည်၊ တုံ့ပြန်ချိန်များ >50% များအနေဖြင့် တိုးတက်သည်။
 
-**အကြံပြုချက်**: [Azure Cache for Redis စာတမ်း](https://learn.microsoft.com/azure/azure-cache-for-redis/) နှင့် စတင်ပါ။
+**အကြံပြုချက်**: စတင်ရန် [Azure Cache for Redis documentation](https://learn.microsoft.com/azure/azure-cache-for-redis/) ကို ကြည့်ပါ။
 
 ---
 
-## ရှင်းလင်းရေး
+## ရှင်းလင်းခြင်း
 
-ဆက်လက်စရိတ် ခံရမှု မဖြစ်စေရန် အလုပ်ပြီးနောက် resource အားလုံးကို ဖျက်ပစ်ပါ:
+အဆက်မပြတ် ကုန်ကျစရိတ် မဖြစ်စေရန် အလုပ်ပြီးဆုံးပါက အရင်းအမြစ်အားလုံး ဖျက်ပါ:
 
 ```sh
 azd down
 ```
 
-**အတည်ပြုမေးခွန်း**:
+**အတည်ပြု မေးခွန်း**:
 ```
 ? Total resources to delete: 7, are you sure you want to continue? (y/N)
 ```
 
-`y` ကို အတည်ပြုရန် ရိုက်ထည့်ပါ။
+အတည်ပြုရန် `y` ဟု ရိုက်ထည့်ပါ။
 
 **✓ အောင်မြင်မှု စစ်ဆေးချက်**: 
-- Azure Portal မှ resource အားလုံး ဖျက်သိမ်းထားပြီဖြစ်ရမည်
-- ဆက်လက်တောင်းခံခံရမှု မရှိရပါ
-- ဒေသိယ `.azure/<env-name>` ဖိုလ်ဒါကို ဖျက်နိုင်သည်
+- Azure Portal မှ အရင်းအမြစ်အားလုံး ဖျက်သိမ်းပြီးပါပြီ
+- တက်ရှိနေသည့် ကုန်ကျစရိတ် မရှိပါ
+- ဒေသခံ `.azure/<env-name>` ဖိုလ်ဒါကို ဖျက်လို့ရသည်
 
-**အခြားရွေးချယ်စရာ** (အင်ဖရာစထ်ချာကို ထားပြီး ဒေတာကို ဖျက်ရန်):
+**အခြားရွေးချယ်စရာ** (အဆောက်အအုံကို ထိန်းသိမ်းပြီး ဒေတာကို ဖျက်မည်):
 ```sh
-# အရင်းအမြစ်အုပ်စုကိုပဲ ဖျက်ပါ (AZD ဆက်တင်ကို ထားပါ)
+# AZD ဆက်တင်ကို ထိန်းထားပြီး ရင်းမြစ်အုပ်စုကိုပဲ ဖျက်ပါ
 az group delete --name rg-<env-name> --yes
 ```
-## နောက်ထပ် သိရှိရန်
+## နောက်ထပ် သတင်းအချက်အလက်များ
 
 ### ဆက်စပ် စာတမ်းများ
 - [Azure Developer CLI စာတမ်း](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
@@ -858,52 +845,52 @@ az group delete --name rg-<env-name> --yes
 - [Application Insights စာတမ်း](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
 - [Bicep ဘာသာစကား ကိုးကားချက်](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-### ဒီ သင်တန်းတွင် နောက်တိုးအဆင့်များ
-- **[Container Apps ဥပမာ](../../../../examples/container-app)**: Azure Container Apps ဖြင့် microservices များ deploy လုပ်ပါ
-- **[AI Integration လမ်းညွှန်](../../../../docs/ai-foundry)**: သင့် app တွင် AI လုပ်ဆောင်ချက်များ ထည့်ပါ
-- **[Deployment အကောင်းဆုံး လမ်းညွှန်](../../docs/chapter-04-infrastructure/deployment-guide.md)**: ထုတ်လုပ်မှု deployment မျိုးစံများ
+### ဒီသင်တန်းတွင် နောက်တစ်ဆင့်များ
+- **[Container Apps Example](../../../../examples/container-app)**: Azure Container Apps ဖြင့် microservices များကို တင်သွင်းပါ
+- **[AI Integration Guide](../../../../docs/ai-foundry)**: သင့်အက်ပလီကေးရှင်းတွင် AI စွမ်းရည်များ ထည့်ပါ
+- **[Deployment Best Practices](../../docs/chapter-04-infrastructure/deployment-guide.md)**: ထုတ်လုပ်ရေး deployment ပုံစံများ
 
 ### အဆင့်မြင့် ခေါင်းစဉ်များ
-- **Managed Identity**: စကားဝှက်များ ဖယ်ရှားပြီး Azure AD authentication ကို အသုံးပြုပါ
-- **Private Endpoints**: Virtual network အတွင်း database ချိတ်ဆက်မှုများကို လုံခြုံစေပါ
-- **CI/CD Integration**: GitHub Actions သို့မဟုတ် Azure DevOps ဖြင့် deployments ကို အလိုအလျောက်လုပ်ဆောင်ပါ
-- **Multi-Environment**: dev, staging, production စသည့် ပတ်ဝန်းကျင်များ ဖန်တီးပါ
+- **Managed Identity**: စကားဝှက်များကို ဖယ်ရှားပြီး Azure AD authentication ကို အသုံးပြုပါ
+- **Private Endpoints**: virtual network အတွင်းတွင် ဒေတာဘေ့စ် ချိတ်ဆက်မှုများကို လုံခြုံစေပါ
+- **CI/CD Integration**: GitHub Actions သို့မဟုတ် Azure DevOps ဖြင့် deployment များကို အလိုအလျောက်လုပ်ဆောင်ပါ
+- **Multi-Environment**: dev, staging, production ပတ်ဝန်းကျင်များကို စီစဉ်ပါ
 - **Database Migrations**: schema versioning အတွက် Alembic သို့မဟုတ် Entity Framework ကို အသုံးပြုပါ
 
-### အခြားနည်းလမ်းများနှင့် နှိုင်းယှဉ်ချက်
+### အခြား နည်းလမ်းများနှင့် နှိုင်းယှဉ်
 
-**AZD နှင့် ARM Templates နှိုင်းယှဉ်**:
-- ✅ AZD: အဆင့်မြင့် abstraction၊ command များ ပိုလွယ်ကူသည်
-- ⚠️ ARM: ပိုမိုရှုပ်ထွေး၍ အသေးစိတ် ထိန်းချုပ်နိုင်မှုရှိသည်
+**AZD vs. ARM Templates**:
+- ✅ AZD: အဆင့်မြင့် abstraction နှင့် အမိန့်များ အသုံးပြုရ ပိုမိုလွယ်ကူသည်
+- ⚠️ ARM: စာလုံးများပိုများပြီး အသေးစိတ် ထိန်းချုပ်နိုင်သည်
 
-**AZD နှင့် Terraform နှိုင်းယှဉ်**:
-- ✅ AZD: Azure native၊ Azure ဝန်ဆောင်မှုများနှင့် ပေါင်းစည်းထားသည်
-- ⚠️ Terraform: Multi-cloud ကိုထောက်ပံ့နိုင်ပြီး ecosystem ကြီးသည်
+**AZD vs. Terraform**:
+- ✅ AZD: Azure အတွက် သဘာဝကျပြီး Azure ဝန်ဆောင်မှုများနှင့် ပေါင်းစည်းထားသည်
+- ⚠️ Terraform: Multi-cloud ထောက်ပံ့မှု ရှိပြီး ပို၍ ကြီးမားသော ecosystem ရှိသည်
 
-**AZD နှင့် Azure Portal နှိုင်းယှဉ်**:
-- ✅ AZD: ထပ်တလဲလဲ ပြုလုပ်နိုင်၊ version control ရှိ၊ အလိုအလျောက်လုပ်နိုင်သည်
-- ⚠️ Portal: လက်ဖြင့် နှိပ်၍ ကျင်းပရမည်၊ ပြန်လည်ဖန်တီးရန် အခက်အခဲရှိသည်
+**AZD vs. Azure Portal**:
+- ✅ AZD: ထပ်လုပ်နိုင်ပြီး၊ version-controlled ဖြစ်သည်၊ automation ပြုလုပ်နိုင်သည်
+- ⚠️ Portal: လက်ဖြင့် ကလစ်လုပ်ရသောကြောင့် ထပ်မံ ပြန်လုပ်ရန် ခက်ခဲသည်
 
-**AZD ကို တွေးပါ**: Azure အတွက် Docker Compose — ရှုပ်ထွေးသည့် deployment များအတွက် ဖွဲ့စည်းမှုပိုလွယ်ကူစေသည်။
+AZD ကို Azure အတွက် Docker Compose အဖြစ် တွေးပါ — စနစ်တကျ မျှတသော configuration ဖြင့် ရိုးရှင်းစေသော deployment များအတွက် အထောက်အကူပြုသည်။
 
 ---
 
 ## မကြာခဏ မေးလေ့ရှိသော မေးခွန်းများ
 
-**မေးခွန်း**: မတူသော programming language အသုံးပြုနိုင်ပါသလား?  
-A: ဟုတ်ပါတယ်! `src/web/` ကို Node.js, C#, Go, သို့မဟုတ် မည်သည့် ဘာသာစကားမဆို အစားထိုးနိုင်သည်။ `azure.yaml` နှင့် Bicep ကို ကိုက်ညီအောင် အပ်ဒိတ်လုပ်ပါ။
+**Q: အခြား programming language တစ်ခု ကို အသုံးပြုနိုင်ပါသလား?**  
+A: ဟုတ်ပါတယ်! `src/web/` ကို Node.js, C#, Go သို့မဟုတ် မည်သည့်ဘာသာစကားမဆို ပြောင်းလဲလိုက်ပါ။ `azure.yaml` နှင့် Bicep များကို ကိုက်ညီအောင် ပြင်ဆင်ပါ။
 
-**မေးခွန်း**: database များ ပိုမို ထည့်လိုပါက မည်သို့လုပ်မလဲ?  
-A: `infra/main.bicep` တွင် SQL Database module တစ်ခုထပ်ထည့်ပါ သို့မဟုတ် Azure Database ဝန်ဆောင်မှုမှ PostgreSQL/MySQL ကို အသုံးပြုနိုင်သည်။
+**Q: ပိုသော database များ ထည့်ချင်ရင် မည်သို့လုပ်မလဲ?**  
+A: `infra/main.bicep` တွင် SQL Database module တစ်ခု ထပ်ထည့်ပါ သို့မဟုတ် Azure Database ဝန်ဆောင်မှုများမှ PostgreSQL/MySQL အသုံးပြုပါ။
 
-**မေးခွန်း**: ဤအချက်ကို ထုတ်လုပ်မှုတွင် အသုံးပြုနိုင်မလား?  
-A: ၎င်းသည် စတင်ရန် အချက်အလမ်းတစ်ခုသာ ဖြစ်သည်။ ထုတ်လုပ်မှုအတွက် managed identity, private endpoints, redundancy, backup strategy, WAF, နှင့် မြင့်မားသော မော်နီတာခြင်းများကို ထည့်သွင်းပါ။
+**Q: ၎င်းကို production အတွက် အသုံးပြုနိုင်ပါသလား?**  
+A: ဤကိစ္စသည် စတင်ရန် အခြေခံဖြစ်သည်။ production အတွက် managed identity, private endpoints, redundancy, backup strategy, WAF, နှင့် တိုးတက်သော monitoring များ ထပ်မံ ထည့်သွင်းပါ။
 
-**မေးခွန်း**: code deployment အစား containers ကို အသုံးပြုလိုပါက?  
-A: Docker containers ကို အပြည့်အသုံးပြုထားသော [Container Apps ဥပမာ](../../../../examples/container-app) ကို ကြည့်ပါ။
+**Q: code deployment အစား containers များကို အသုံးချချင်ရင် ဘာလုပ်မလဲ?**  
+A: Docker containers များကို အကုန်လုံး အသုံးပြုထားသော [Container Apps Example](../../../../examples/container-app) ကို ကြည့်ပါ။
 
-**မေးခွန်း**: ဒေသိယ (local) ကွန်ပျူတာမှ database အတွက် မည်သို့ ချိတ်ဆက်မလဲ?  
-A: သင့် IP ကို SQL Server firewall ထဲ ထည့်ပါ:
+**Q: ကျွန်ုပ်၏ local machine မှ database ဆီ ချိတ်ဆက်လိုပါက မည်သို့လုပ်မလဲ?**  
+A: SQL Server firewall တွင် သင့် IP ကို ထည့်ပါ:
 ```sh
 az sql server firewall-rule create \
   --resource-group rg-<env-name> \
@@ -913,21 +900,19 @@ az sql server firewall-rule create \
   --end-ip-address <your-ip>
 ```
 
-**မေးခွန်း**: အသစ် ဖန်တီးရန် အစား ရှိပြီးသား database ကို အသုံးပြုနိုင်မလား?  
-A: ဟုတ်ပါတယ်၊ ရှိပြီးသား SQL Server ကို ကိုးကားရန် `infra/main.bicep` ကို ပြင်ဆင်ပြီး connection string parameters များကို အပ်ဒိတ်လုပ်ပါ။
+**Q: ရှိပြီးသား database ကို အသုံးပြုမလား?**  
+A: ရပါတယ်၊ `infra/main.bicep` ကို ပြင်လို့ ရှိပြီးသား SQL Server ကို ရည်ညွှန်းပြီး connection string parameters များကို အပ်ဒိတ်လုပ်ပါ။
 
----
+> **မှတ်ချက်:** ဤဥပမာသည် AZD ကို အသုံးပြု၍ database ဖြင့် Web app တင်သွင်းရာတွင် အကောင်းဆုံးကျင့်စဉ်များကို ပြသသည်။ ၎င်းတွင် အလုပ်လုပ်နိုင်သော ကုဒ်၊ အပြည့်အစုံစာတမ်းနှင့် လက်တွေ့ လေ့ကျင့်ခန်းများ ပါဝင်သည်။ ထုတ်လုပ်ရေးအတွက် တင်သွင်းရာတွင် သင့်အဖွဲ့အစည်းနှင့် သက်ဆိုင်သော လုံခြုံရေး၊ မျှတမှု၊ လိုက်နာမှုနှင့် ကုန်ကျစရိတ် လိုအပ်ချက်များကို ထည့်သွင်းစဉ်းစားပါ။
 
-> **မှတ်ချက်:** ဤဥပမာသည် AZD အသုံးပြု၍ database ပါဝင်သည့် web app တင်သွင်းမှုအတွက် သင့်တော်သော လုပ်ထုံးလုပ်နည်းများကို ပြသသည်။ ၎င်းတွင် အလုပ်လုပ်သော ကုဒ်၊ ကျယ်ပြန့်သော စာတမ်းများနှင့် သင်ကြားမှုကို အတင်းအကျပ်လုပ်ပေးရန် လက်တွေ့ လေ့ကျင့်ခန်းများ ပါဝင်သည်။ ထုတ်လုပ်မှုကို တင်သွင်းရာတွင် သင့် အဖွဲ့အစည်းအတွက် လုံခြုံရေး၊ တိုးချဲ့နိုင်မှု၊ လိုက်နာမှုနှင့် ကုန်ကျစရိတ် လိုအပ်ချက်များကို ပြန်လည်သုံးသပ်ပါ။
-
-**📚 သင်တန်း လမ်းညွှန်ခြင်း:**
-- ← Previous: [Container Apps ဥပမာ](../../../../examples/container-app)
-- → Next: [AI Integration လမ်းညွှန်](../../../../docs/ai-foundry)
-- 🏠 [သင်တန်း ပင်မစာမျက်နှာ](../../README.md)
+**📚 သင်တန်း လမ်းညွှန်:**
+- ← ယခင်: [Container Apps Example](../../../../examples/container-app)
+- → နောက်တစ်ခု: [AI Integration Guide](../../../../docs/ai-foundry)
+- 🏠 [သင်တန်း မူလစာမျက်နှာ](../../README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-သတိပေးချက်:
-ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ တိကျမှန်ကန်မှုကို ကြိုးစားရေပမယ့် အလိုအလျောက်ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါနိုင်ကြောင်း သတိပြုပါ။ မူရင်းစာတမ်းကို မူရင်းဘာသာစကားဖြင့်သာ အာဏာပိုင် အရင်းအမြစ်အဖြစ် ယူဆရမည်။ အရေးကြီးသော အချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူဘာသာပြန်၏ စစ်ဆေးချက်ကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုမှုကြောင့် ဖြစ်ပေါ်လာသည့် နားလည်မှုမှားခြင်းများ သို့မဟုတ် မမှန်ကန်သော ဖေါ်ပြချက်များအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+**Disclaimer**:
+ဒီစာတမ်းကို AI ဘာသာပြန်မှုဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားနေသော်လည်း အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ရှိနိုင်ကြောင်း သတိပြုပါ။ မူလဘာသာဖြင့် ရေးသားထားသော မူရင်းစာတမ်းကို အာဏာပိုင် အရင်းအမြစ်အဖြစ် သတ်မှတ်စဉ်းစားသင့်သည်။ အရေးကြီးသော အချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူဘာသာပြန်သူမှ ဘာသာပြန်ခြင်းကို အကြံပြုပါသည်။ ဒီဘာသာပြန်ချက်ကို အသုံးပြုခြင်းကြောင့် ဖြစ်ပေါ်လာနိုင်သော နားမလည်မှုများ သို့မဟုတ် မှားယွင်းဖော်ထုတ်ချက်များအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

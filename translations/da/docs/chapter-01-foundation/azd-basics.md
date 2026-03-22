@@ -1,45 +1,60 @@
-# AZD Basics - Forståelse af Azure Developer CLI
+# AZD Basics - Understanding Azure Developer CLI
 
-# AZD Basics - Kernebegreber og Fundament
+# AZD Basics - Core Concepts and Fundamentals
 
 **Chapter Navigation:**
-- **📚 Kursusforside**: [AZD for begyndere](../../README.md)
-- **📖 Aktuelt kapitel**: Kapitel 1 - Grundlag & Hurtigstart
-- **⬅️ Forrige**: [Kursusoversigt](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Næste**: [Installation og opsætning](installation.md)
-- **🚀 Næste kapitel**: [Kapitel 2: AI-først udvikling](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📚 Course Home**: [AZD For Begyndere](../../README.md)
+- **📖 Current Chapter**: Kapitel 1 - Fundament & Hurtig Start
+- **⬅️ Previous**: [Kursusoversigt](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Next**: [Installation & Opsætning](installation.md)
+- **🚀 Next Chapter**: [Kapitel 2: AI-først udvikling](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-## Introduktion
+## Introduction
 
-Denne lektion introducerer dig til Azure Developer CLI (azd), et kraftfuldt kommandolinjeværktøj, der fremskynder din rejse fra lokal udvikling til Azure-udrulning. Du vil lære de grundlæggende begreber, kernefunktioner og forstå, hvordan azd forenkler udrulning af cloud-native applikationer.
+Denne lektion introducerer dig til Azure Developer CLI (azd), et kraftfuldt kommandolinjeværktøj, der accelererer din rejse fra lokal udvikling til udrulning i Azure. Du lærer de fundamentale begreber, kernefunktioner og forstår, hvordan azd forenkler udrulning af cloud-native applikationer.
 
-## Læringsmål
+## Learning Goals
 
 Ved slutningen af denne lektion vil du:
 - Forstå hvad Azure Developer CLI er og dets primære formål
-- Lære kernebegreberne om skabeloner, miljøer og services
-- Udforske nøglefunktioner inklusiv skabelonstyret udvikling og Infrastruktur som kode
-- Forstå azd-projektstruktur og workflow
+- Lære kernekoncepterne omkring skabeloner, miljøer og tjenester
+- Udforske nøglefunktioner inklusive skabelondrevet udvikling og Infrastruktur som kode
+- Forstå azd-projektstrukturen og arbejdsflowet
 - Være forberedt på at installere og konfigurere azd til dit udviklingsmiljø
 
-## Læringsudbytte
+## Learning Outcomes
 
 Efter at have gennemført denne lektion vil du kunne:
-- Forklare azd’s rolle i moderne cloud-udviklingsworkflows
+- Forklare azds rolle i moderne cloud-udviklingsarbejdsgange
 - Identificere komponenterne i en azd-projektstruktur
-- Beskrive hvordan skabeloner, miljøer og services arbejder sammen
+- Beskrive hvordan skabeloner, miljøer og tjenester arbejder sammen
 - Forstå fordelene ved Infrastruktur som kode med azd
 - Genkende forskellige azd-kommandoer og deres formål
 
-## Hvad er Azure Developer CLI (azd)?
+## What is Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) er et kommandolinjeværktøj designet til at fremskynde din rejse fra lokal udvikling til Azure-udrulning. Det forenkler processen med at bygge, udrulle og administrere cloud-native applikationer på Azure.
+Azure Developer CLI (azd) er et kommandolinjeværktøj designet til at accelerere din rejse fra lokal udvikling til udrulning i Azure. Det forenkler processen med at bygge, udrulle og administrere cloud-native applikationer på Azure.
 
-### 🎯 Hvorfor bruge AZD? En realistisk sammenligning
+### What Can You Deploy with azd?
+
+azd understøtter et bredt udvalg af arbejdsbelastninger—og listen vokser hele tiden. I dag kan du bruge azd til at udrulle:
+
+| Workload-type | Eksempler | Samme workflow? |
+|---------------|----------|----------------|
+| **Traditionelle applikationer** | Webapps, REST-API'er, statiske websteder | ✅ `azd up` |
+| **Tjenester og mikrotjenester** | Container Apps, Function Apps, multi-service backends | ✅ `azd up` |
+| **AI-drevne applikationer** | Chatapps med Microsoft Foundry Models, RAG-løsninger med AI Search | ✅ `azd up` |
+| **Intelligente agenter** | Agenter hostet af Foundry, multi-agent orkestreringer | ✅ `azd up` |
+
+Den centrale indsigt er, at **azd-livscyklussen forbliver den samme uanset hvad du udruller**. Du initialiserer et projekt, provisionerer infrastruktur, udruller din kode, overvåger din app og rydder op—uanset om det er et simpelt website eller en sofistikeret AI-agent.
+
+Denne kontinuitet er designet med vilje. azd behandler AI-funktioner som en anden type tjeneste, som din applikation kan bruge, ikke som noget fundamentalt forskelligt. Et chat-endpoint understøttet af Microsoft Foundry Models er, fra azds perspektiv, bare en anden tjeneste, der skal konfigureres og udrulles.
+
+### 🎯 Why Use AZD? A Real-World Comparison
 
 Lad os sammenligne udrulning af en simpel webapp med database:
 
-#### ❌ UDEN AZD: Manuel Azure-udrulning (30+ minutter)
+#### ❌ WITHOUT AZD: Manual Azure Deployment (30+ minutes)
 
 ```bash
 # Trin 1: Opret ressourcegruppe
@@ -50,7 +65,7 @@ az appservice plan create --name myapp-plan \
   --resource-group myapp-rg \
   --sku B1 --is-linux
 
-# Trin 3: Opret Web-app
+# Trin 3: Opret Webapp
 az webapp create --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --plan myapp-plan \
@@ -99,7 +114,7 @@ az monitor app-insights component create \
   --location eastus \
   --resource-group myapp-rg
 
-# Trin 11: Forbind App Insights med Web App
+# Trin 11: Forbind Application Insights til Webapp
 INSTRUMENTATION_KEY=$(az monitor app-insights component show \
   --app myapp-insights \
   --resource-group myapp-rg \
@@ -114,7 +129,7 @@ az webapp config appsettings set \
 npm install
 npm run build
 
-# Trin 13: Opret udrulningspakke
+# Trin 13: Opret deploymentspakke
 zip -r app.zip . -x "*.git*" "node_modules/*"
 
 # Trin 14: Udrul applikationen
@@ -123,20 +138,20 @@ az webapp deployment source config-zip \
   --name myapp-web-unique123 \
   --src app.zip
 
-# Trin 15: Vent og bed om, at det virker 🙏
+# Trin 15: Vent og kryds fingre for, at det virker 🙏
 # (Ingen automatisk validering, manuel test kræves)
 ```
 
-**Problemer:**
+**Problems:**
 - ❌ 15+ kommandoer at huske og køre i rækkefølge
 - ❌ 30-45 minutters manuelt arbejde
-- ❌ Nem at lave fejl (tastefejl, forkerte parametre)
-- ❌ Connection strings eksponeret i terminalhistorikken
+- ❌ Let at lave fejl (tastefejl, forkerte parametre)
+- ❌ Connection strings eksponeret i terminalhistorik
 - ❌ Ingen automatisk rollback hvis noget fejler
-- ❌ Svært at reproducere for teammedlemmer
+- ❌ Svært at replikere for teammedlemmer
 - ❌ Forskelligt hver gang (ikke reproducerbart)
 
-#### ✅ MED AZD: Automatiseret udrulning (5 kommandoer, 10-15 minutter)
+#### ✅ WITH AZD: Automated Deployment (5 commands, 10-15 minutes)
 
 ```bash
 # Trin 1: Initialiser fra skabelon
@@ -157,58 +172,58 @@ azd up
 # ✨ Færdig! Alt er udrullet, konfigureret og overvåget
 ```
 
-**Fordele:**
+**Benefits:**
 - ✅ **5 kommandoer** vs. 15+ manuelle trin
-- ✅ **10-15 minutter** i alt (for det meste ventetid mod Azure)
+- ✅ **10-15 minutter** samlet tid (for det meste ventetid i Azure)
 - ✅ **Ingen fejl** - automatiseret og testet
-- ✅ **Hemmelige værdier håndteres sikkert** via Key Vault
-- ✅ **Automatisk rollback** ved fejl
-- ✅ **Fuldstændig reproducerbar** - samme resultat hver gang
-- ✅ **Klar til teamet** - alle kan udrulle med samme kommandoer
+- ✅ **Hemmeligheder håndteres sikkert** via Key Vault
+- ✅ **Automatisk tilbagerulning** ved fejl
+- ✅ **Fuldstændig reproducerbart** - samme resultat hver gang
+- ✅ **Klar til teambrug** - alle kan udrulle med de samme kommandoer
 - ✅ **Infrastruktur som kode** - versionsstyrede Bicep-skabeloner
 - ✅ **Indbygget overvågning** - Application Insights konfigureret automatisk
 
-### 📊 Tids- og fejlreduktion
+### 📊 Time & Error Reduction
 
-| Metric | Manuel Deployment | AZD Deployment | Improvement |
+| Metric | Manual Deployment | AZD Deployment | Improvement |
 |:-------|:------------------|:---------------|:------------|
 | **Commands** | 15+ | 5 | 67% færre |
 | **Time** | 30-45 min | 10-15 min | 60% hurtigere |
 | **Error Rate** | ~40% | <5% | 88% reduktion |
-| **Consistency** | Low (manual) | 100% (automated) | Perfekt |
-| **Team Onboarding** | 2-4 hours | 30 minutes | 75% hurtigere |
-| **Rollback Time** | 30+ min (manual) | 2 min (automated) | 93% hurtigere |
+| **Consistency** | Lav (manuelt) | 100% (automatiseret) | Perfekt |
+| **Team Onboarding** | 2-4 timer | 30 minutter | 75% hurtigere |
+| **Rollback Time** | 30+ min (manuelt) | 2 min (automatiseret) | 93% hurtigere |
 
-## Kernebegreber
+## Core Concepts
 
-### Skabeloner
+### Templates
 Skabeloner er fundamentet for azd. De indeholder:
 - **Applikationskode** - Din kildekode og afhængigheder
-- **Infrastrukturdefinitioner** - Azure-ressourcer defineret i Bicep eller Terraform
+- **Infrastrukturbeskrivelser** - Azure-ressourcer defineret i Bicep eller Terraform
 - **Konfigurationsfiler** - Indstillinger og miljøvariabler
-- **Udrulningsscripts** - Automatiserede udrulningsworkflows
+- **Udrulningsscripts** - Automatiserede udrulningsarbejdsgange
 
-### Miljøer
+### Environments
 Miljøer repræsenterer forskellige udrulningsmål:
 - **Development** - Til test og udvikling
 - **Staging** - Forproduktionsmiljø
 - **Production** - Live produktionsmiljø
 
 Hvert miljø opretholder sit eget:
-- Azure resource group
+- Azure-ressourcegruppe
 - Konfigurationsindstillinger
 - Udrulningstilstand
 
 ### Services
-Services er byggestenene i din applikation:
-- **Frontend** - Webapplikationer, SPA’er
-- **Backend** - API’er, microservices
-- **Database** - Datastyringsløsninger
+Tjenester er byggestenene i din applikation:
+- **Frontend** - Webapplikationer, SPAs
+- **Backend** - API'er, mikrotjenester
+- **Database** - Datastoringsløsninger
 - **Storage** - Fil- og blob-lagring
 
-## Nøglefunktioner
+## Key Features
 
-### 1. Skabelonstyret udvikling
+### 1. Template-Driven Development
 ```bash
 # Gennemse tilgængelige skabeloner
 azd template list
@@ -217,39 +232,39 @@ azd template list
 azd init --template <template-name>
 ```
 
-### 2. Infrastruktur som kode
+### 2. Infrastructure as Code
 - **Bicep** - Azures domænespecifikke sprog
-- **Terraform** - Multi-cloud infrastrukturværktøj
+- **Terraform** - Multicloud-infrastrukturværktøj
 - **ARM Templates** - Azure Resource Manager-skabeloner
 
-### 3. Integrerede arbejdsgange
+### 3. Integrated Workflows
 ```bash
-# Komplet udrulningsarbejdsgang
-azd up            # Provision + Deploy, dette kræver ingen manuel indgriben til første opsætning
+# Fuldstændig udrulningsarbejdsgang
+azd up            # Provision + Deploy — dette kræver ingen manuel indgriben ved første opsætning
 
-# 🧪 NYT: Forhåndsvis infrastrukturændringer før udrulning (SIKKER)
-azd provision --preview    # Simuler udrulning af infrastruktur uden at foretage ændringer
+# 🧪 NYT: Forhåndsvis ændringer i infrastrukturen før udrulning (SIKKER)
+azd provision --preview    # Simuler udrulning af infrastrukturen uden at foretage ændringer
 
-azd provision     # Opret Azure-ressourcer, brug dette, hvis du opdaterer infrastrukturen
-azd deploy        # Udrul applikationskode eller genudrul koden efter en opdatering
-azd down          # Ryd op i ressourcerne
+azd provision     # Opret Azure-ressourcer; brug dette, hvis du opdaterer infrastrukturen
+azd deploy        # Udrul applikationskode eller genudrul applikationskoden efter en opdatering
+azd down          # Ryd op i ressourcer
 ```
 
-#### 🛡️ Sikker infrastrukturplanlægning med Preview
-Kommandoen `azd provision --preview` er en game-changer til sikre udrulninger:
-- **Tørkørselsanalyse** - Viser hvad der vil blive oprettet, ændret eller slettet
-- **Null risiko** - Ingen faktiske ændringer foretages i dit Azure-miljø
+#### 🛡️ Safe Infrastructure Planning with Preview
+Kommandoen `azd provision --preview` er en game-changer for sikre udrulninger:
+- **Dry-run-analyse** - Viser hvad der vil blive oprettet, ændret eller slettet
+- **Nul risiko** - Ingen faktiske ændringer foretages i dit Azure-miljø
 - **Team-samarbejde** - Del preview-resultater før udrulning
-- **Omkostningsestimering** - Forstå ressourceomkostninger før forpligtelse
+- **Omkostningsestimering** - Forstå ressourcedekostninger før forpligtelse
 
 ```bash
-# Eksempel på workflow til forhåndsvisning
+# Eksempel på forhåndsvisningsarbejdsgang
 azd provision --preview           # Se, hvad der vil ændre sig
 # Gennemgå outputtet, diskuter med teamet
 azd provision                     # Anvend ændringerne med tillid
 ```
 
-### 📊 Visuel: AZD udviklingsworkflow
+### 📊 Visual: AZD Development Workflow
 
 ```mermaid
 graph LR
@@ -258,12 +273,12 @@ graph LR
     C -->|Opret miljø| D{Første udrulning?}
     D -->|Ja| E[azd up]
     D -->|Nej| F[azd provision --preview]
-    F -->|Gennemgå ændringer| G[azd provision]
+    F -->|Gennemse ændringer| G[azd provision]
     E -->|Provisionerer og udruller| H[Ressourcer kører]
     G -->|Opdaterer infrastruktur| H
     H -->|Overvåg| I[azd monitor]
     I -->|Foretag kodeændringer| J[azd deploy]
-    J -->|Genudrul kun kode| H
+    J -->|Udrul kun kode| H
     H -->|Ryd op| K[azd down]
     
     style A fill:#e1f5fe
@@ -273,17 +288,17 @@ graph LR
     style K fill:#ffcdd2
 ```
 **Workflow Explanation:**
-1. **Init** - Start med skabelon eller nyt projekt
-2. **Auth** - Autentificer med Azure
+1. **Init** - Start med en skabelon eller nyt projekt
+2. **Auth** - Godkend med Azure
 3. **Environment** - Opret isoleret udrulningsmiljø
 4. **Preview** - 🆕 Forhåndsvis altid infrastrukturændringer først (sikker praksis)
 5. **Provision** - Opret/opdater Azure-ressourcer
-6. **Deploy** - Push din applikationskode
+6. **Deploy** - Skub din applikationskode
 7. **Monitor** - Observer applikationsydelse
-8. **Iterate** - Foretag ændringer og genudrul kode
+8. **Iterate** - Foretag ændringer og udrul koden igen
 9. **Cleanup** - Fjern ressourcer når du er færdig
 
-### 4. Miljøstyring
+### 4. Environment Management
 ```bash
 # Opret og administrer miljøer
 azd env new <environment-name>
@@ -291,9 +306,29 @@ azd env select <environment-name>
 azd env list
 ```
 
-## 📁 Projektstruktur
+### 5. Extensions and AI Commands
 
-En typisk azd-projektstruktur:
+azd bruger et udvidelsessystem til at tilføje funktionalitet ud over kerne-CLI'en. Dette er især nyttigt for AI-arbejdsbelastninger:
+
+```bash
+# Vis tilgængelige udvidelser
+azd extension list
+
+# Installer Foundry agents-udvidelsen
+azd extension install azure.ai.agents
+
+# Initialiser et AI-agentprojekt ud fra et manifest
+azd ai agent init -m agent-manifest.yaml
+
+# Start MCP-serveren for AI-assisteret udvikling (Alpha)
+azd mcp start
+```
+
+> Udvidelser gennemgås i detaljer i [Kapitel 2: AI-først udvikling](../chapter-02-ai-development/agents.md) og referencen [AZD AI CLI-kommandoer](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
+
+## 📁 Project Structure
+
+En typisk azd projektstruktur:
 ```
 my-app/
 ├── .azd/                    # azd configuration
@@ -313,7 +348,7 @@ my-app/
 └── README.md
 ```
 
-## 🔧 Konfigurationsfiler
+## 🔧 Configuration Files
 
 ### azure.yaml
 Hovedprojektets konfigurationsfil:
@@ -353,15 +388,15 @@ Miljøspecifik konfiguration:
 }
 ```
 
-## 🎪 Almindelige arbejdsgange med hands-on øvelser
+## 🎪 Common Workflows with Hands-On Exercises
 
-> **💡 Læringstip:** Følg disse øvelser i rækkefølge for at opbygge dine AZD-færdigheder gradvist.
+> **💡 Learning Tip:** Følg disse øvelser i rækkefølge for at opbygge dine AZD-færdigheder gradvist.
 
-### 🎯 Øvelse 1: Initialiser dit første projekt
+### 🎯 Exercise 1: Initialize Your First Project
 
-**Mål:** Opret et AZD-projekt og udforsk dets struktur
+**Goal:** Create an AZD project and explore its structure
 
-**Trin:**
+**Steps:**
 ```bash
 # Brug en gennemprøvet skabelon
 azd init --template todo-nodejs-mongo
@@ -379,11 +414,11 @@ ls -la  # Vis alle filer, inklusive skjulte
 
 ---
 
-### 🎯 Øvelse 2: Udrul til Azure
+### 🎯 Exercise 2: Deploy to Azure
 
-**Mål:** Færdiggør end-to-end udrulning
+**Goal:** Complete end-to-end deployment
 
-**Trin:**
+**Steps:**
 ```bash
 # 1. Autentificer
 az login && azd auth login
@@ -392,26 +427,26 @@ az login && azd auth login
 azd env new dev
 azd env set AZURE_LOCATION eastus
 
-# 3. Forhåndsvis ændringer (ANBEFALES)
+# 3. Forhåndsvis ændringer (ANBEFALET)
 azd provision --preview
 
 # 4. Udrul alt
 azd up
 
 # 5. Bekræft udrulning
-azd show    # 6. Se din app-URL
+azd show    # Se URL'en til din app
 ```
 
 **Forventet tid:** 10-15 minutter  
-**✅ Succes:** Applikations-URL åbner i browseren
+**✅ Succes:** Applikationens URL åbnes i browseren
 
 ---
 
-### 🎯 Øvelse 3: Flere miljøer
+### 🎯 Exercise 3: Multiple Environments
 
-**Mål:** Udrul til dev og staging
+**Goal:** Deploy to dev and staging
 
-**Trin:**
+**Steps:**
 ```bash
 # Har allerede dev, opret staging
 azd env new staging
@@ -423,32 +458,32 @@ azd env list
 azd env select dev
 ```
 
-**✅ Succes:** To separate resource groups i Azure Portal
+**✅ Succes:** To separate ressourcegrupper i Azure-portalen
 
 ---
 
-### 🛡️ Clean Slate: `azd down --force --purge`
+### 🛡️ Ren start: `azd down --force --purge`
 
-Når du har brug for fuldstændigt at nulstille:
+Når du har brug for at nulstille fuldstændigt:
 
 ```bash
 azd down --force --purge
 ```
 
-**Hvad den gør:**
-- `--force`: Ingen bekræftelsesprompt
-- `--purge`: Sletter alt lokalt state og Azure-ressourcer
+**Hvad det gør:**
+- `--force`: Ingen bekræftelsesprompter
+- `--purge`: Sletter al lokal tilstand og Azure-ressourcer
 
 **Brug når:**
-- Udrulning fejlede undervejs
+- Udrulningen fejlede midt i processen
 - Skifter projekter
-- Har brug for en frisk start
+- Brug for en frisk start
 
 ---
 
-## 🎪 Originalt workflow-reference
+## 🎪 Original Workflow Reference
 
-### Starte et nyt projekt
+### Starting a New Project
 ```bash
 # Metode 1: Brug eksisterende skabelon
 azd init --template todo-nodejs-mongo
@@ -460,7 +495,7 @@ azd init
 azd init .
 ```
 
-### Udviklingscyklus
+### Development Cycle
 ```bash
 # Opsæt udviklingsmiljø
 azd auth login
@@ -474,35 +509,35 @@ azd up
 azd deploy
 
 # Ryd op, når du er færdig
-azd down --force --purge # kommandoen i Azure Developer CLI er en **hård nulstilling** for dit miljø—især nyttig, når du fejlsøger mislykkede udrulninger, rydder op i forældreløse ressourcer eller forbereder en frisk genudrulning
+azd down --force --purge # kommandoen i Azure Developer CLI er en **hård nulstilling** for dit miljø — især nyttig, når du fejlsøger mislykkede udrulninger, rydder op i forældreløse ressourcer eller forbereder en frisk genudrulning
 ```
 
-## Forstå `azd down --force --purge`
-Kommandoen `azd down --force --purge` er en kraftfuld måde at fuldstændigt nedtage dit azd-miljø og alle tilknyttede ressourcer. Her er en opdeling af hvad hver flag gør:
+## Understanding `azd down --force --purge`
+Kommandoen `azd down --force --purge` er en kraftfuld måde at rive dit azd-miljø og alle tilknyttede ressourcer helt ned. Her er en gennemgang af hvad hver flag gør:
 ```
 --force
 ```
-- Springer bekræftelsesprompter over.
-- Nyttigt til automatisering eller scripting hvor manuel input ikke er muligt.
-- Sikrer at nedtagningen fortsætter uden afbrydelser, selv hvis CLI’en opdager inkonsistenser.
+- Hopper over bekræftelsesprompter.
+- Nyttig til automatisering eller scripting, hvor manuel input ikke er mulig.
+- Sikrer, at nedtagningen fortsætter uden afbrydelse, selv hvis CLI'en opdager inkonsistenser.
 
 ```
 --purge
 ```
-Sletter **al tilknyttet metadata**, inklusive:
-Miljøtilstand
+Sletter **alle tilknyttede metadata**, herunder:
+Environment state
 Lokal `.azure`-mappe
-Cachet udrulningsinformation
-Forhindrer azd i at "huske" tidligere udrulninger, hvilket kan forårsage problemer som uoverensstemmende ressourcegrupper eller forældede registry-referencer.
+Cachede udrulningsoplysninger
+Forhindrer azd i at "huske" tidligere udrulninger, hvilket kan forårsage problemer som mismatchende ressourcegrupper eller forældede registry-referencer.
 
 
 ### Hvorfor bruge begge?
-Når du er kørt fast med `azd up` på grund af tilbageværende state eller delvise udrulninger, sikrer denne kombination en **ren start**.
+Når du er kørt fast med `azd up` på grund af vedvarende tilstand eller delvise udrulninger, sikrer denne kombination en **ren start**.
 
-Det er især nyttigt efter manuelle sletninger af ressourcer i Azure-portalen eller når du skifter skabeloner, miljøer eller navngivningskonventioner for resource groups.
+Det er især nyttigt efter manuelle ressourcer er slettet i Azure-portalen eller når du skifter skabeloner, miljøer eller navnekonventioner for ressourcegrupper.
 
 
-### Håndtering af flere miljøer
+### Managing Multiple Environments
 ```bash
 # Opret staging-miljø
 azd env new staging
@@ -516,22 +551,22 @@ azd env select dev
 azd env list
 ```
 
-## 🔐 Autentificering og legitimationsoplysninger
+## 🔐 Authentication and Credentials
 
-Forståelse af autentificering er afgørende for succesfulde azd-udrulninger. Azure bruger flere autentificeringsmetoder, og azd udnytter den samme credential chain som andre Azure-værktøjer.
+Forståelse af autentificering er afgørende for succesfulde azd-udrulninger. Azure bruger flere autentificeringsmetoder, og azd udnytter den samme legitimationskæde som andre Azure-værktøjer.
 
-### Azure CLI-autentificering (`az login`)
+### Azure CLI Authentication (`az login`)
 
-Før du bruger azd, skal du autentificere med Azure. Den mest almindelige metode er at bruge Azure CLI:
+Før du bruger azd, skal du godkende med Azure. Den mest almindelige metode er at bruge Azure CLI:
 
 ```bash
-# Interaktiv login (åbner browseren)
+# Interaktiv log ind (åbner browseren)
 az login
 
-# Log ind med specifik lejer
+# Log ind med en specifik tenant
 az login --tenant <tenant-id>
 
-# Log ind med serviceprincipal
+# Log ind med en tjenesteprincipal
 az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
 
 # Kontroller nuværende loginstatus
@@ -544,31 +579,31 @@ az account list --output table
 az account set --subscription <subscription-id>
 ```
 
-### Autentificeringsflow
-1. **Interaktiv login**: Åbner din standardbrowser til autentificering
+### Authentication Flow
+1. **Interaktiv login**: Åbner din standardbrowser for godkendelse
 2. **Device Code Flow**: Til miljøer uden browseradgang
 3. **Service Principal**: Til automatisering og CI/CD-scenarier
 4. **Managed Identity**: Til Azure-hostede applikationer
 
-### DefaultAzureCredential-kæden
+### DefaultAzureCredential Chain
 
-`DefaultAzureCredential` er en credential-type, der giver en forenklet autentificeringsoplevelse ved automatisk at prøve flere credential-kilder i en bestemt rækkefølge:
+`DefaultAzureCredential` er en legitimations-type, der giver en forenklet autentificeringsoplevelse ved automatisk at forsøge flere legitimationskilder i en bestemt rækkefølge:
 
 #### Credential Chain Order
 ```mermaid
 graph TD
     A[Standard Azure-legitimationsoplysninger] --> B[Miljøvariabler]
-    B --> C[Arbejdsbelastningsidentitet]
-    C --> D[Administreret Identitet]
+    B --> C[Workload-identitet]
+    C --> D[Administreret identitet]
     D --> E[Visual Studio]
     E --> F[Visual Studio Code]
     F --> G[Azure CLI]
     G --> H[Azure PowerShell]
-    H --> I[Interaktiv Browser]
+    H --> I[Interaktiv browser]
 ```
 #### 1. Environment Variables
 ```bash
-# Indstil miljøvariabler for tjenesteprincipal
+# Sæt miljøvariabler for service-principal
 export AZURE_CLIENT_ID="<app-id>"
 export AZURE_CLIENT_SECRET="<password>"
 export AZURE_TENANT_ID="<tenant-id>"
@@ -582,30 +617,30 @@ Bruges automatisk i:
 
 #### 3. Managed Identity
 For Azure-ressourcer som:
-- Virtual Machines
+- Virtuelle maskiner
 - App Service
 - Azure Functions
 - Container Instances
 
 ```bash
-# Kontroller, om der kører på en Azure-ressource med administreret identitet
+# Kontroller, om det kører på en Azure-ressource med administreret identitet
 az account show --query "user.type" --output tsv
 # Returnerer: "servicePrincipal" hvis der bruges administreret identitet
 ```
 
 #### 4. Developer Tools Integration
-- **Visual Studio**: Bruger automatisk den indloggede konto
-- **VS Code**: Bruger Azure Account-udvidelsens legitimationsoplysninger
-- **Azure CLI**: Bruger `az login`-legitimationsoplysninger (mest almindelig til lokal udvikling)
+- **Visual Studio**: Bruger automatisk den tilmeldte konto
+- **VS Code**: Bruger legitimationsoplysninger fra Azure Account-udvidelsen
+- **Azure CLI**: Bruger `az login`-legitimationsoplysninger (mest almindeligt for lokal udvikling)
 
 ### AZD Authentication Setup
 
 ```bash
-# Metode 1: Brug Azure CLI (Anbefalet til udvikling)
+# Metode 1: Brug Azure CLI (Anbefales til udvikling)
 az login
 azd auth login  # Bruger eksisterende Azure CLI-legitimationsoplysninger
 
-# Metode 2: Direkte azd-godkendelse
+# Metode 2: Direkte azd-autentificering
 azd auth login --use-device-code  # Til headless-miljøer
 
 # Metode 3: Kontroller godkendelsesstatus
@@ -616,9 +651,9 @@ azd auth logout
 azd auth login
 ```
 
-### Autentificerings bedste praksis
+### Authentication Best Practices
 
-#### Til lokal udvikling
+#### For Local Development
 ```bash
 # 1. Log ind med Azure CLI
 az login
@@ -631,7 +666,7 @@ az account set --subscription "Your Subscription Name"
 azd auth login
 ```
 
-#### Til CI/CD-pipelines
+#### For CI/CD Pipelines
 ```yaml
 # GitHub Actions example
 - name: Azure Login
@@ -647,33 +682,33 @@ azd auth login
     azd up --no-prompt
 ```
 
-#### Til produktionsmiljøer
-- Brug **Managed Identity** når du kører på Azure-ressourcer
+#### For Production Environments
+- Brug **Managed Identity** når det kører på Azure-ressourcer
 - Brug **Service Principal** til automatiseringsscenarier
 - Undgå at gemme legitimationsoplysninger i kode eller konfigurationsfiler
 - Brug **Azure Key Vault** til følsom konfiguration
 
-### Almindelige autentificeringsproblemer og løsninger
+### Common Authentication Issues and Solutions
 
-#### Problem: "No subscription found"
+#### Issue: "No subscription found"
 ```bash
-# Løsning: Angiv standardabonnement
+# Løsning: Indstil standardabonnement
 az account list --output table
 az account set --subscription "<subscription-id>"
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 ```
 
-#### Problem: "Insufficient permissions"
+#### Issue: "Insufficient permissions"
 ```bash
-# Løsning: Kontroller og tildel nødvendige roller
+# Løsning: Kontroller og tildel de nødvendige roller
 az role assignment list --assignee $(az account show --query user.name --output tsv)
 
-# Almindelige krævede roller:
-# - Contributor (til ressourcestyring)
+# Ofte krævede roller:
+# - Contributor (til administration af ressourcer)
 # - User Access Administrator (til tildeling af roller)
 ```
 
-#### Problem: "Token expired"
+#### Issue: "Token expired"
 ```bash
 # Løsning: Autentificer igen
 az logout
@@ -682,23 +717,23 @@ azd auth logout
 azd auth login
 ```
 
-### Autentificering i forskellige scenarier
+### Authentication in Different Scenarios
 
-#### Lokal udvikling
+#### Local Development
 ```bash
 # Personlig udviklingskonto
 az login
 azd auth login
 ```
 
-#### Team-udvikling
+#### Team Development
 ```bash
 # Brug en specifik tenant til organisationen
 az login --tenant contoso.onmicrosoft.com
 azd auth login
 ```
 
-#### Multi-tenant scenarier
+#### Multi-tenant Scenarios
 ```bash
 # Skift mellem lejere
 az login --tenant tenant1.onmicrosoft.com
@@ -710,13 +745,12 @@ az login --tenant tenant2.onmicrosoft.com
 azd up
 ```
 
-### Sikkerhedsovervejelser
-
-1. **Opbevaring af legitimationsoplysninger**: Gem aldrig legitimationsoplysninger i kildekode
-2. **Begrænsning af scope**: Brug mindst-privilegium princippet for service principals
-3. **Token-rotation**: Rotér regelmæssigt service principal-secrets
-4. **Audit trail**: Overvåg autentificerings- og udrulningsaktiviteter
-5. **Netværkssikkerhed**: Brug private endpoints når muligt
+### Security Considerations
+1. **Opbevaring af legitimationsoplysninger**: Gem aldrig legitimationsoplysninger i kildekoden
+2. **Begrænsning af tilladelser**: Brug mindst-privilegium-princippet for serviceprincipaler
+3. **Token-rotation**: Roter regelmæssigt serviceprincipalhemmeligheder
+4. **Revisionsspor**: Overvåg autentificering og udrulningsaktiviteter
+5. **Netværkssikkerhed**: Brug private endepunkter når det er muligt
 
 ### Fejlfinding af autentificering
 
@@ -727,9 +761,9 @@ az account show
 az account get-access-token
 
 # Almindelige diagnostiske kommandoer
-whoami                          # Nuværende brugerkontekst
+whoami                          # Aktuel brugerkontekst
 az ad signed-in-user show      # Azure AD-brugerdetaljer
-az group list                  # Test adgang til ressourcer
+az group list                  # Test ressourceadgang
 ```
 
 ## Forstå `azd down --force --purge`
@@ -752,7 +786,7 @@ azd config list             # Konfigurationsindstillinger
 ```bash
 azd monitor                  # Åbn overvågning i Azure-portalen
 azd monitor --logs           # Vis applikationslogfiler
-azd monitor --live           # Vis live-metrikker
+azd monitor --live           # Se live-metrikker
 azd pipeline config          # Opsæt CI/CD
 ```
 
@@ -769,22 +803,22 @@ azd env new env1
 azd init --template template1
 ```
 
-### 2. Udnyt skabeloner
+### 2. Brug skabeloner
 - Start med eksisterende skabeloner
 - Tilpas til dine behov
-- Opret genanvendelige skabeloner for din organisation
+- Opret genbrugelige skabeloner til din organisation
 
-### 3. Miljøisolation
+### 3. Miljøadskillelse
 - Brug separate miljøer til dev/staging/prod
-- Udrul aldrig direkte til produktion fra en lokal maskine
-- Brug CI/CD-pipelines til produktionsudrulninger
+- Udrul aldrig direkte til produktion fra din lokale maskine
+- Brug CI/CD-pipelines til produktionens udrulninger
 
 ### 4. Konfigurationsstyring
 - Brug miljøvariabler til følsomme data
-- Hold konfiguration i versionsstyring
-- Dokumentér miljøspecifikke indstillinger
+- Hold konfiguration i versionskontrol
+- Dokumenter miljøspecifikke indstillinger
 
-## Læringsprogression
+## Læringsforløb
 
 ### Begynder (Uge 1-2)
 1. Installer azd og autentificer
@@ -794,31 +828,31 @@ azd init --template template1
 
 ### Mellem (Uge 3-4)
 1. Tilpas skabeloner
-2. Håndter flere miljøer
+2. Administrer flere miljøer
 3. Forstå infrastrukturkode
 4. Opsæt CI/CD-pipelines
 
 ### Avanceret (Uge 5+)
 1. Opret brugerdefinerede skabeloner
 2. Avancerede infrastrukturmønstre
-3. Multi-region udrulninger
-4. Enterprise-grade konfigurationer
+3. Udrulninger i flere regioner
+4. Konfigurationer på virksomhedsniveau
 
 ## Næste skridt
 
-**📖 Fortsæt kapitel 1:**
-- [Installation & Setup](installation.md) - Få azd installeret og konfigureret
-- [Your First Project](first-project.md) - Komplet, praktisk vejledning
-- [Configuration Guide](configuration.md) - Avancerede konfigurationsmuligheder
+**📖 Fortsæt læringen i Kapitel 1:**
+- [Installation og opsætning](installation.md) - Få azd installeret og konfigureret
+- [Dit første projekt](first-project.md) - Fuldfør praktisk vejledning
+- [Konfigurationsguide](configuration.md) - Avancerede konfigurationsmuligheder
 
 **🎯 Klar til næste kapitel?**
-- [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md) - Begynd at bygge AI-applikationer
+- [Kapitel 2: AI-først udvikling](../chapter-02-ai-development/microsoft-foundry-integration.md) - Begynd at bygge AI-applikationer
 
 ## Yderligere ressourcer
 
-- [Azure Developer CLI Overview](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Template Gallery](https://azure.github.io/awesome-azd/)
-- [Community Samples](https://github.com/Azure-Samples)
+- [Oversigt over Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Skabelongalleri](https://azure.github.io/awesome-azd/)
+- [Fællesskabseksempler](https://github.com/Azure-Samples)
 
 ---
 
@@ -828,7 +862,7 @@ azd init --template template1
 
 **Q: Hvad er forskellen mellem AZD og Azure CLI?**
 
-A: Azure CLI (`az`) bruges til at administrere enkelte Azure-ressourcer. AZD (`azd`) bruges til at administrere hele applikationer:
+A: Azure CLI (`az`) bruges til at administrere individuelle Azure-ressourcer. AZD (`azd`) bruges til at administrere hele applikationer:
 
 ```bash
 # Azure CLI - Lavniveau ressourcestyring
@@ -836,12 +870,12 @@ az webapp create --name myapp --resource-group rg
 az sql server create --name myserver --resource-group rg
 # ...mange flere kommandoer er nødvendige
 
-# AZD - Administration på applikationsniveau
+# AZD - Styring på applikationsniveau
 azd up  # Udruller hele appen med alle ressourcer
 ```
 
-**Se det på denne måde:**
-- `az` = Arbejde med enkelte Lego-klodser
+**Tænk på det på denne måde:**
+- `az` = Arbejde med individuelle Lego-klodser
 - `azd` = Arbejde med komplette Lego-sæt
 
 ---
@@ -855,13 +889,13 @@ azd init --template todo-nodejs-mongo
 azd up
 ```
 
-Du kan lære Bicep senere for at tilpasse infrastrukturen. Skabeloner giver fungerende eksempler, som du kan lære af.
+Du kan lære Bicep senere for at tilpasse infrastrukturen. Skabeloner giver fungerende eksempler at lære af.
 
 ---
 
 **Q: Hvad koster det at køre AZD-skabeloner?**
 
-A: Omkostningerne varierer efter skabelon. De fleste udviklingsskabeloner koster $50-150/pr. måned:
+A: Omkostningerne varierer efter skabelon. De fleste udviklingsskabeloner koster $50-150 pr. måned:
 
 ```bash
 # Forhåndsvis omkostninger før udrulning
@@ -871,25 +905,25 @@ azd provision --preview
 azd down --force --purge  # Fjerner alle ressourcer
 ```
 
-**Pro tip:** Brug gratis niveauer hvor det er muligt:
-- App Service: F1 (Free) tier
-- Azure OpenAI: 50,000 tokens/month free
-- Cosmos DB: 1000 RU/s free tier
+**Pro-tip:** Brug gratis niveauer hvor det er muligt:
+- App Service: F1 (Gratis) niveau
+- Microsoft Foundry Models: Azure OpenAI 50.000 tokens/måned gratis
+- Cosmos DB: 1000 RU/s gratis niveau
 
 ---
 
 **Q: Kan jeg bruge AZD med eksisterende Azure-ressourcer?**
 
-A: Ja, men det er nemmere at starte forfra. AZD fungerer bedst, når det styrer hele livscyklussen. For eksisterende ressourcer:
+A: Ja, men det er nemmere at starte fra bunden. AZD fungerer bedst, når det styrer hele livscyklussen. For eksisterende ressourcer:
 
 ```bash
 # Mulighed 1: Importer eksisterende ressourcer (avanceret)
 azd init
-# Ændr derefter infra/ for at pege på eksisterende ressourcer
+# Ændr derefter infra/ for at referere til eksisterende ressourcer
 
-# Mulighed 2: Start forfra (anbefales)
+# Mulighed 2: Start forfra (anbefalet)
 azd init --template matching-your-stack
-azd up  # Opretter nyt miljø
+azd up  # Opretter et nyt miljø
 ```
 
 ---
@@ -916,7 +950,7 @@ Alle får identisk infrastruktur fra de samme skabeloner.
 
 ### Fejlfinding
 
-**Q: "azd up" mislykkedes halvvejs. Hvad gør jeg?**
+**Q: "azd up" fejlede halvvejs. Hvad gør jeg?**
 
 A: Tjek fejlen, ret den, og prøv igen:
 
@@ -929,7 +963,7 @@ azd show
 # 1. Hvis kvoten er overskredet:
 azd env set AZURE_LOCATION "westus2"  # Prøv en anden region
 
-# 2. Hvis der er konflikt om ressourcenavnet:
+# 2. Hvis der er konflikt med ressourcens navn:
 azd down --force --purge  # Start forfra
 azd up  # Prøv igen
 
@@ -939,7 +973,7 @@ azd auth login
 azd up
 ```
 
-**Det mest almindelige problem:** Forkert Azure-abonnement valgt
+**Mest almindelige problem:** Forkert Azure-abonnement valgt
 ```bash
 az account list --output table
 az account set --subscription "<correct-subscription>"
@@ -947,14 +981,14 @@ az account set --subscription "<correct-subscription>"
 
 ---
 
-**Q: Hvordan udruller jeg kun kodeændringer uden at reprovisionere?**
+**Q: Hvordan deployer jeg kun kodeændringer uden genprovisionering?**
 
 A: Brug `azd deploy` i stedet for `azd up`:
 
 ```bash
-azd up          # Første gang: opsætning + udrulning (langsom)
+azd up          # Første gang: provisionering + udrulning (langsomt)
 
-# Lav kodeændringer...
+# Foretag kodeændringer...
 
 azd deploy      # Efterfølgende gange: kun udrulning (hurtigt)
 ```
@@ -981,7 +1015,7 @@ azd provision --preview
 azd provision
 ```
 
-**Tip:** Start småt - skift SKUs først:
+**Tip:** Start småt - ændr SKUs først:
 ```bicep
 // infra/main.bicep
 sku: {
@@ -991,7 +1025,7 @@ sku: {
 
 ---
 
-**Q: Hvordan sletter jeg alt, som AZD har oprettet?**
+**Q: Hvordan sletter jeg alt, AZD har oprettet?**
 
 A: Én kommando fjerner alle ressourcer:
 
@@ -1010,13 +1044,14 @@ azd down --force --purge
 - Skifter til et andet projekt
 - Vil starte forfra
 
-**Spar penge:** Sletning af ubenyttede ressourcer = $0 omkostninger
+**Omkostningsbesparelser:** Sletning af ubrugte ressourcer = $0 i omkostninger
 
 ---
 
 **Q: Hvad hvis jeg ved et uheld slettede ressourcer i Azure-portalen?**
 
-A: AZD-tilstanden kan komme ud af synk. Fremgangsmåde for ren start:
+A: AZD-tilstanden kan komme ud af sync. Tilgang med en ren start:
+
 ```bash
 # 1. Fjern lokal tilstand
 azd down --force --purge
@@ -1074,23 +1109,23 @@ A: AZD integreres automatisk med Azure Key Vault:
 # Hemmeligheder gemmes i Key Vault, ikke i koden
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
 
-# AZD gør automatisk:
+# AZD gør følgende automatisk:
 # 1. Opretter Key Vault
 # 2. Gemmer en hemmelighed
-# 3. Tildeler app adgang via Managed Identity
+# 3. Giver app adgang via administreret identitet
 # 4. Injicerer ved kørselstid
 ```
 
 **Commit aldrig:**
-- `.azure/` mappen (indeholder miljødata)
-- `.env` filer (lokale hemmeligheder)
-- Connection strings
+- `.azure/`-mappen (indeholder miljødata)
+- `.env`-filer (lokale hemmeligheder)
+- Forbindelsesstrenge
 
 ---
 
 **Q: Kan jeg udrulle til flere regioner?**
 
-A: Ja, opret et miljø pr. region:
+A: Ja, opret et miljø per region:
 
 ```bash
 # Miljø i det østlige USA
@@ -1107,7 +1142,7 @@ azd up
 azd env list
 ```
 
-For ægte multi-region-apps, tilpas Bicep-skabelonerne til at udrulle til flere regioner samtidigt.
+For ægte multi-region apps, tilpas Bicep-skabeloner for at udrulle til flere regioner samtidig.
 
 ---
 
@@ -1115,50 +1150,50 @@ For ægte multi-region-apps, tilpas Bicep-skabelonerne til at udrulle til flere 
 
 1. **AZD-dokumentation:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
 2. **GitHub Issues:** https://github.com/Azure/azure-dev/issues
-3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - #azure-developer-cli-kanal
-4. **Stack Overflow:** Brug tagget `azure-developer-cli`
-5. **Dette kursus:** [Troubleshooting Guide](../chapter-07-troubleshooting/common-issues.md)
+3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - #azure-developer-cli kanal
+4. **Stack Overflow:** Tag `azure-developer-cli`
+5. **Dette kursus:** [Fejlfindingsguide](../chapter-07-troubleshooting/common-issues.md)
 
-**Pro tip:** Før du spørger, kør:
+**Pro-tip:** Før du spørger, kør:
 ```bash
 azd show       # Viser den aktuelle tilstand
 azd version    # Viser din version
 ```
-Inkluder disse oplysninger i dit spørgsmål for hurtigere hjælp.
+Medtag disse oplysninger i dit spørgsmål for hurtigere hjælp.
 
 ---
 
-## 🎓 Hvad er næste skridt?
+## 🎓 Hvad nu?
 
-Du forstår nu AZD-grundprincipperne. Vælg din vej:
+Du forstår nu AZD's grundprincipper. Vælg din vej:
 
 ### 🎯 For begyndere:
-1. **Næste:** [Installation & Setup](installation.md) - Installer AZD på din maskine
-2. **Derefter:** [Your First Project](first-project.md) - Udrul din første app
-3. **Øv:** Fuldfør alle 3 øvelser i denne lektion
+1. **Næste:** [Installation og opsætning](installation.md) - Installer AZD på din maskine
+2. **Derefter:** [Dit første projekt](first-project.md) - Udrul din første app
+3. **Øv dig:** Gennemfør alle 3 øvelser i denne lektion
 
 ### 🚀 For AI-udviklere:
-1. **Spring til:** [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+1. **Spring til:** [Kapitel 2: AI-først udvikling](../chapter-02-ai-development/microsoft-foundry-integration.md)
 2. **Udrul:** Start med `azd init --template get-started-with-ai-chat`
 3. **Lær:** Byg mens du udruller
 
 ### 🏗️ For erfarne udviklere:
-1. **Gennemgå:** [Configuration Guide](configuration.md) - Avancerede indstillinger
-2. **Udforsk:** [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md) - Bicep-dybdegående gennemgang
-3. **Byg:** Opret brugerdefinerede skabeloner til din stak
+1. **Gennemgå:** [Konfigurationsguide](configuration.md) - Avancerede indstillinger
+2. **Udforsk:** [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md) - Dybdegående gennemgang af Bicep
+3. **Byg:** Opret brugerdefinerede skabeloner til din stack
 
 ---
 
 **Kapitelnavigation:**
 - **📚 Kursusforside**: [AZD for begyndere](../../README.md)
-- **📖 Nuværende kapitel**: Kapitel 1 - Fundament & Hurtig Start  
-- **⬅️ Forrige**: [Course Overview](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Næste**: [Installation & Setup](installation.md)
-- **🚀 Næste kapitel**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Nuværende kapitel**: Kapitel 1 - Fundament & Hurtigstart  
+- **⬅️ Forrige**: [Kursusoversigt](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Næste**: [Installation og opsætning](installation.md)
+- **🚀 Næste kapitel**: [Kapitel 2: AI-først udvikling](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfraskrivelse:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Originaldokumentet på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritiske oplysninger anbefales professionel menneskelig oversættelse. Vi kan ikke holdes ansvarlige for eventuelle misforståelser eller fejltolkninger som følge af brugen af denne oversættelse.
+**Ansvarsfraskrivelse**:
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

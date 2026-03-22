@@ -1,50 +1,43 @@
-# Кращі практики для виробничих AI-навантажень з AZD
+# Production AI Workload Best Practices with AZD
 
-**Навігація по розділу:**
-- **📚 Головна курсу**: [AZD For Beginners](../../README.md)
-- **📖 Поточний розділ**: Розділ 8 - Шаблони для виробництва та підприємств
-- **⬅️ Попередній розділ**: [Розділ 7: Усунення несправностей](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Також пов'язано**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎯 Завершення курсу**: [AZD For Beginners](../../README.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 8 - Production & Enterprise Patterns
+- **⬅️ Previous Chapter**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Also Related**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎯 Course Complete**: [AZD For Beginners](../../README.md)
 
-## Огляд
+## Overview
 
-Ця інструкція надає комплексні кращі практики для розгортання готових до виробництва AI-навантажень з використанням Azure Developer CLI (AZD). На основі відгуків від спільноти Microsoft Foundry Discord та реальних розгортань у клієнтів, ці практики охоплюють найпоширеніші проблеми в продукційних AI-системах.
+Цей посібник надає комплексні найкращі практики для розгортання готових до продуктивності AI-навантажень із використанням інструменту Azure Developer CLI (AZD). На основі відгуків спільноти Microsoft Foundry Discord та реальних розгортань клієнтів, ці практики вирішують найпоширеніші проблеми у продуктивних AI-системах.
 
-## Основні проблеми, що вирішуються
+## Key Challenges Addressed
 
-За результатами опитування нашої спільноти, це основні проблеми, з якими стикаються розробники:
+На основі результатів нашого опитування в спільноті, це основні виклики, з якими стикаються розробники:
 
-- **45%** мають труднощі з розгортанням багатосервісних AI-додатків
-- **38%** мають проблеми з керуванням обліковими даними та секретами  
-- **35%** вважають підготовку до продакшну та масштабування складною
-- **32%** потребують кращих стратегій оптимізації витрат
+- **45%** мають труднощі з багатосервісними AI-розгортаннями
+- **38%** мають проблеми з управлінням обліковими даними та секретами  
+- **35%** вважають складним забезпечення готовності до продуктивності та масштабування
+- **32%** потребують покращених стратегій оптимізації вартості
 - **29%** потребують покращеного моніторингу та усунення несправностей
 
-## Патерни архітектури для виробничих AI-систем
+## Architecture Patterns for Production AI
 
-### Патерн 1: Архітектура AI на мікросервісах
+### Pattern 1: Microservices AI Architecture
 
-**Коли використовувати**: Складні AI-додатки з кількома функціональними можливостями
+**Коли використовувати**: складні AI-додатки з кількома можливостями
 
+```mermaid
+graph TD
+    Frontend[Веб-фронтенд] --- Gateway[API Gateway] --- LB[Балансувальник навантаження]
+    Gateway --> Chat[Сервіс Чату]
+    Gateway --> Image[Сервіс зображень]
+    Gateway --> Text[Текстовий сервіс]
+    Chat --> OpenAI[Моделі Microsoft Foundry]
+    Image --> Vision[Комп'ютерне бачення]
+    Text --> DocIntel[Інтелект документів]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Web Frontend  │────│   API Gateway   │────│  Load Balancer  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │
-                ┌───────────────┼───────────────┐
-                │               │               │
-        ┌───────▼──────┐ ┌──────▼──────┐ ┌─────▼──────┐
-        │ Chat Service │ │Image Service│ │Text Service│
-        └──────────────┘ └─────────────┘ └────────────┘
-                │               │               │
-        ┌───────▼──────┐ ┌──────▼──────┐ ┌─────▼──────┐
-        │Azure OpenAI  │ │Computer     │ │Document    │
-        │              │ │Vision       │ │Intelligence│
-        └──────────────┘ └─────────────┘ └────────────┘
-```
-
-**Реалізація в AZD**:
+**Реалізація з AZD**:
 
 ```yaml
 # azure.yaml
@@ -67,9 +60,9 @@ services:
     host: containerapp
 ```
 
-### Патерн 2: Подієво-орієнтована обробка AI
+### Pattern 2: Event-Driven AI Processing
 
-**Коли використовувати**: Пакетна обробка, аналіз документів, асинхронні робочі процеси
+**Коли використовувати**: пакетна обробка, аналіз документів, асинхронні робочі процеси
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -116,15 +109,46 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Найкращі практики безпеки
+## Thinking About AI Agent Health
 
-### 1. Модель безпеки Zero-Trust
+Коли традиційний веб-застосунок виходить з ладу, симптоми знайомі: сторінка не завантажується, API повертає помилку, або розгортання завершується невдачею. AI-застосунки можуть виходити з ладу однаковими способами — але вони також можуть поводитись більш тонко, без очевидних повідомлень про помилки.
+
+Цей розділ допоможе вибудувати ментальну модель моніторингу AI-навантажень, щоб знати, де шукати проблему, коли щось йде не так.
+
+### How Agent Health Differs from Traditional App Health
+
+Традиційний застосунок або працює, або ні. AI-агент може здаватися працюючим, але продукувати погані результати. Розглянемо стан агента в два шари:
+
+| Layer | What to Watch | Where to Look |
+|-------|--------------|---------------|
+| **Інфраструктурне здоров'я** | Чи працює сервіс? Чи надані ресурси? Чи доступні кінцеві точки? | `azd monitor`, здоров'я ресурсів в Azure Portal, логи контейнера/додатку |
+| **Здоров'я поведінки** | Чи правильно реагує агент? Чи своєчасні відповіді? Чи коректно викликається модель? | Application Insights traces, метрики затримки виклику моделі, логи якості відповіді |
+
+Інфраструктурне здоров'я знайоме — воно однакове для будь-якого azd-застосунку. Здоров'я поведінки — це новий шар, який додають AI-навантаження.
+
+### Where to Look When AI Apps Don't Behave as Expected
+
+Якщо ваш AI-застосунок не дає очікуваних результатів, ось концептуальний чеклист:
+
+1. **Почніть з основ.** Чи працює застосунок? Чи може він дістатися до своїх залежностей? Перевірте `azd monitor` та здоров'я ресурсів так само, як для будь-якого застосунку.
+2. **Перевірте з’єднання з моделлю.** Чи успішно ваш застосунок викликає AI-модель? Невдалі або тайм-аутовані виклики моделі — найпоширеніша причина проблем AI-застосунків і будуть відображені у ваших логах.
+3. **Подивіться, що отримала модель.** Відповіді AI залежать від вхідних даних (prompt і будь-якого витягнутого контексту). Якщо вихідні дані помилкові, зазвичай вхідні також некоректні. Перевірте, чи сигналізує ваш застосунок правильні дані моделі.
+4. **Перевірте затримку відповіді.** Виклики AI-моделі повільніші за типові API-виклики. Якщо застосунок здається повільним, перевірте, чи не збільшилися часи відповіді моделі — це може вказувати на обмеження пропускної здатності, квоти або регіональні затори.
+5. **Слідкуйте за сигналами витрат.** Несподівані стрибки використання токенів або API-викликів можуть вказувати на цикл, некоректний prompt або надмірні повторні запити.
+
+Вам не потрібно одразу освоювати всі інструменти спостереження. Головний висновок — у AI-застосунків є додатковий шар моніторингу поведінки, і вбудований моніторинг azd (`azd monitor`) дає стартову точку для аналізу обох шарів.
+
+---
+
+## Security Best Practices
+
+### 1. Zero-Trust Security Model
 
 **Стратегія впровадження**:
-- Жодного зв'язку сервіс-сервіс без аутентифікації
-- Усі виклики API використовують керовані ідентичності
+- Жодного сервіс-сервіс зв’язку без автентифікації
+- Всі API виклики використовують керовані ідентичності
 - Ізоляція мережі з приватними кінцевими точками
-- Контроль доступу за принципом найменших привілеїв
+- Контроль доступу з мінімальними привілеями
 
 ```bicep
 // Managed Identity for each service
@@ -145,7 +169,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. Безпечне керування секретами
+### 2. Secure Secret Management
 
 **Патерн інтеграції з Key Vault**:
 
@@ -180,7 +204,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-### 3. Мережна безпека
+### 3. Network Security
 
 **Конфігурація приватних кінцевих точок**:
 
@@ -240,11 +264,11 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Продуктивність та масштабування
+## Performance and Scaling
 
-### 1. Стратегії автоскейлінгу
+### 1. Auto-Scaling Strategies
 
-**Автоскейлінг Container Apps**:
+**Автоматичне масштабування для контейнерних застосунків**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -288,9 +312,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. Стратегії кешування
+### 2. Caching Strategies
 
-**Redis-кеш для відповідей AI**:
+**Redis кеш для AI-відповідей**:
 
 ```bicep
 // Redis Premium for production workloads
@@ -318,7 +342,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Балансування навантаження та управління трафіком
+### 3. Load Balancing and Traffic Management
 
 **Application Gateway з WAF**:
 
@@ -356,11 +380,11 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 💰 Оптимізація витрат
+## 💰 Cost Optimization
 
-### 1. Правильний підбір розмірів ресурсів
+### 1. Resource Right-Sizing
 
-**Налаштування, специфічні для середовища**:
+**Конфігурації середовищ за вимогою**:
 
 ```bash
 # Середовище розробки
@@ -371,7 +395,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Продуктивне середовище
+# Середовище виробництва
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -380,7 +404,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Моніторинг витрат і бюджети
+### 2. Cost Monitoring and Budgets
 
 ```bicep
 // Cost management and budgets
@@ -421,9 +445,9 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. Оптимізація використання токенів
+### 3. Token Usage Optimization
 
-**Управління витратами OpenAI**:
+**Управління вартістю OpenAI**:
 
 ```typescript
 // Оптимізація токенів на рівні застосунку
@@ -436,7 +460,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Обрізайте контекст, а не введення користувача
+      // Обрізати контекст, а не введення користувача
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -450,9 +474,9 @@ class TokenOptimizer {
 }
 ```
 
-## Моніторинг та спостережуваність
+## Monitoring and Observability
 
-### 1. Всебічний Application Insights
+### 1. Comprehensive Application Insights
 
 ```bicep
 // Application Insights with advanced features
@@ -497,9 +521,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. Моніторинг, специфічний для AI
+### 2. AI-Specific Monitoring
 
-**Користувацькі панелі для метрик AI**:
+**Користувацькі панелі для AI-метрик**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -528,7 +552,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Перевірки стану та моніторинг часу роботи
+### 3. Health Checks and Uptime Monitoring
 
 ```bicep
 // Application Insights availability tests
@@ -597,9 +621,9 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Відновлення після аварій та висока доступність
+## Disaster Recovery and High Availability
 
-### 1. Розгортання в кількох регіонах
+### 1. Multi-Region Deployment
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -661,7 +685,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Резервне копіювання даних та відновлення
+### 2. Data Backup and Recovery
 
 ```bicep
 // Backup configuration for critical data
@@ -712,9 +736,9 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 }
 ```
 
-## DevOps та інтеграція CI/CD
+## DevOps and CI/CD Integration
 
-### 1. Робочий процес GitHub Actions
+### 1. GitHub Actions Workflow
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -795,7 +819,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. Валідація інфраструктури
+### 2. Infrastructure Validation
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -803,7 +827,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Перевірити, чи всі необхідні служби працюють
+# Перевірте, чи всі необхідні служби працюють
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -813,7 +837,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Перевірити розгортання моделей OpenAI
+# Перевірте розгортання моделей OpenAI
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -821,80 +845,80 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Перевірити підключення до сервісу ШІ
+# Тестуйте підключення до AI-служби
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Контрольний список готовності до виробництва
+## Production Readiness Checklist
 
-### Безпека ✅
-- [ ] Усі сервіси використовують керовані ідентичності
-- [ ] Секрети збережені в Key Vault
-- [ ] Налаштовано приватні кінцеві точки
-- [ ] Реалізовано групи мережевої безпеки
-- [ ] RBAC з принципом найменших привілеїв
+### Security ✅
+- [ ] Всі сервіси використовують керовані ідентичності
+- [ ] Секрети зберігаються в Key Vault
+- [ ] Налаштовані приватні кінцеві точки
+- [ ] Впроваджені мережеві групи безпеки
+- [ ] RBAC з мінімальними привілеями
 - [ ] WAF увімкнено на публічних кінцевих точках
 
-### Продуктивність ✅
-- [ ] Налаштовано автоскейлінг
-- [ ] Реалізовано кешування
+### Performance ✅
+- [ ] Налаштоване авто-масштабування
+- [ ] Впроваджено кешування
 - [ ] Налаштовано балансування навантаження
 - [ ] CDN для статичного контенту
-- [ ] Пулінг підключень до бази даних
+- [ ] Пул підключень до бази даних
 - [ ] Оптимізація використання токенів
 
-### Моніторинг ✅
+### Monitoring ✅
 - [ ] Налаштовано Application Insights
 - [ ] Визначено користувацькі метрики
-- [ ] Налаштовано правила оповіщення
-- [ ] Створено панель
-- [ ] Реалізовано перевірки стану
+- [ ] Налаштовано правила сповіщень
+- [ ] Створено панель моніторингу
+- [ ] Впроваджено health checks
 - [ ] Політики зберігання логів
 
-### Надійність ✅
-- [ ] Розгортання в кількох регіонах
+### Reliability ✅
+- [ ] Мульти-регіональне розгортання
 - [ ] План резервного копіювання та відновлення
-- [ ] Реалізовано механізми Circuit Breaker
-- [ ] Налаштовано політики повторних спроб
-- [ ] Плавне зниження функціоналу
-- [ ] Кінцеві точки перевірки стану
+- [ ] Впроваджено circuit breakers
+- [ ] Налаштовані політики повторних спроб
+- [ ] Граціозна деградація
+- [ ] Endpoints для перевірки здоров’я
 
-### Управління витратами ✅
-- [ ] Налаштовано попередження про бюджет
-- [ ] Правильний підбір розміру ресурсів
-- [ ] Застосовано знижки для розробки/тестування
-- [ ] Придбані зарезервовані інстанси
+### Cost Management ✅
+- [ ] Налаштовані оповіщення бюджету
+- [ ] Оптимальний розмір ресурсів
+- [ ] Застосовані знижки для dev/test
+- [ ] Придбані зарезервовані екземпляри
 - [ ] Панель моніторингу витрат
-- [ ] Регулярні перегляди витрат
+- [ ] Регулярний перегляд витрат
 
-### Відповідність ✅
-- [ ] Вимоги щодо розміщення даних дотримано
-- [ ] Увімкнено аудиторський лог
-- [ ] Застосовано політики відповідності
-- [ ] Реалізовано базові налаштування безпеки
+### Compliance ✅
+- [ ] Виконані вимоги щодо розташування даних
+- [ ] Увімкнено аудит логування
+- [ ] Застосовані політики відповідності
+- [ ] Впроваджені базові заходи безпеки
 - [ ] Регулярні оцінки безпеки
 - [ ] План реагування на інциденти
 
-## Бенчмарки продуктивності
+## Performance Benchmarks
 
-### Типові виробничі метрики
+### Typical Production Metrics
 
 | Metric | Target | Monitoring |
 |--------|--------|------------|
-| **Response Time** | < 2 seconds | Application Insights |
-| **Availability** | 99.9% | Uptime monitoring |
-| **Error Rate** | < 0.1% | Application logs |
-| **Token Usage** | < $500/month | Cost management |
-| **Concurrent Users** | 1000+ | Load testing |
-| **Recovery Time** | < 1 hour | Disaster recovery tests |
+| **Час відповіді** | < 2 секунди | Application Insights |
+| **Доступність** | 99.9% | Моніторинг часу роботи |
+| **Рівень помилок** | < 0.1% | Логи застосунку |
+| **Використання токенів** | < $500/місяць | Управління витратами |
+| **Паралельні користувачі** | 1000+ | Навантажувальне тестування |
+| **Час відновлення** | < 1 година | Тести аварійного відновлення |
 
-### Навантжувальне тестування
+### Load Testing
 
 ```bash
-# Скрипт навантажувального тестування для ШІ-застосунків
+# Скрипт навантажувального тестування для AI-додатків
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -902,47 +926,233 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Кращі практики спільноти
+## 🤝 Community Best Practices
 
 На основі відгуків спільноти Microsoft Foundry Discord:
 
-### Топ-рекомендації від спільноти:
+### Найкращі рекомендації спільноти:
 
 1. **Починайте з малого, масштабуйтесь поступово**: Починайте з базових SKU та масштабуйтесь відповідно до реального використання
-2. **Моніторте все**: Налаштуйте всебічний моніторинг з першого дня
-3. **Автоматизуйте безпеку**: Використовуйте інфраструктуру як код для послідовного забезпечення безпеки
-4. **Ретельно тестуйте**: Включіть AI-специфічне тестування у ваш конвеєр
-5. **Плануйте витрати**: Моніторьте використання токенів і рано налаштуйте бюджетні оповіщення
+2. **Моніторьте все**: Налаштуйте комплексний моніторинг з першого дня
+3. **Автоматизуйте безпеку**: Використовуйте інфраструктуру як код для послідовної безпеки
+4. **Тестуйте ретельно**: Включайте AI-специфічне тестування у ваш пайплайн
+5. **Плануйте витрати**: Слідкуйте за використанням токенів і встановлюйте оповіщення бюджету заздалегідь
 
-### Типові помилки, яких слід уникати:
+### Поширені помилки, яких слід уникати:
 
-- ❌ Жорстко вбудовувати API-ключі в код
-- ❌ Не налаштовувати належний моніторинг
-- ❌ Ігнорувати оптимізацію витрат
-- ❌ Не тестувати сценарії відмов
-- ❌ Розгортати без перевірок стану
+- ❌ Жорстке кодування ключів API у коді
+- ❌ Відсутність належного моніторингу
+- ❌ Ігнорування оптимізації витрат
+- ❌ Відсутність тестування сценаріїв відмов
+- ❌ Розгортання без перевірки стану сервісів
 
-## Додаткові ресурси
+## AZD AI CLI Commands and Extensions
 
-- **Azure Well-Architected Framework**: [AI workload guidance](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Microsoft Foundry Documentation**: [Official docs](https://learn.microsoft.com/azure/ai-studio/)
-- **Шаблони спільноти**: [Azure Samples](https://github.com/Azure-Samples)
-- **Спільнота в Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
+AZD включає зростаючий набір команд і розширень, спеціально для AI, які спрощують робочі процеси продуктивних AI-навантажень. Ці інструменти створюють міст між локальною розробкою і розгортанням у продуктивному середовищі AI.
+
+### AZD Extensions for AI
+
+AZD використовує систему розширень для додавання AI-специфічних можливостей. Встановлюйте та керуйте розширеннями за допомогою:
+
+```bash
+# Перелік усіх доступних розширень (включаючи AI)
+azd extension list
+
+# Встановити розширення агентів Foundry
+azd extension install azure.ai.agents
+
+# Встановити розширення тонкого налаштування
+azd extension install azure.ai.finetune
+
+# Встановити розширення користувацьких моделей
+azd extension install azure.ai.models
+
+# Оновити всі встановлені розширення
+azd extension upgrade --all
+```
+
+**Доступні AI-розширення:**
+
+| Extension | Purpose | Status |
+|-----------|---------|--------|
+| `azure.ai.agents` | Керування Foundry Agent Service | Preview |
+| `azure.ai.finetune` | Тонке налаштування моделей Foundry | Preview |
+| `azure.ai.models` | Користувацькі моделі Foundry | Preview |
+| `azure.coding-agent` | Конфігурація coding agent | Available |
+
+### Initializing Agent Projects with `azd ai agent init`
+
+Команда `azd ai agent init` створює проект AI-агента, готового до продуктивності, інтегрованого з Microsoft Foundry Agent Service:
+
+```bash
+# Ініціалізувати новий агентський проєкт з маніфесту агента
+azd ai agent init -m <manifest-path-or-uri>
+
+# Ініціалізувати і націлити конкретний проєкт Foundry
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Ініціалізувати з користувацькою директорією джерела
+azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+
+# Націлити Container Apps як хост
+azd ai agent init -m agent-manifest.yaml --host containerapp
+```
+
+**Ключові прапорці:**
+
+| Flag | Description |
+|------|-------------|
+| `-m, --manifest` | Шлях або URI до маніфесту агента для додавання у проект |
+| `-p, --project-id` | Існуючий ID проекту Microsoft Foundry для вашого середовища azd |
+| `-s, --src` | Каталог для завантаження визначення агента (за замовчуванням `src/<agent-id>`) |
+| `--host` | Перезапис хоста за замовчуванням (наприклад, `containerapp`) |
+| `-e, --environment` | Середовище azd для використання |
+
+**Порада для продуктивності**: Використовуйте `--project-id` для прямого підключення до існуючого проекту Foundry, зберігаючи ваш код агента та хмарні ресурси зв’язаними з самого початку.
+
+### Model Context Protocol (MCP) with `azd mcp`
+
+AZD містить вбудовану підтримку MCP-сервера (Alpha), що дозволяє AI-агентам і інструментам взаємодіяти з вашими ресурсами Azure через стандартизований протокол:
+
+```bash
+# Запустіть сервер MCP для вашого проєкту
+azd mcp start
+
+# Керуйте згодою інструменту для операцій MCP
+azd mcp consent
+```
+
+MCP-сервер відкриває контекст вашого проекту azd — середовища, сервіси та ресурси Azure — для AI-інструментів розробки. Це забезпечує:
+
+- **AI-підтримуване розгортання**: дозволяє coding agents запитувати стан вашого проекту і запускати розгортання
+- **Виявлення ресурсів**: AI-інструменти можуть знаходити, які ресурси Azure використовує ваш проект
+- **Управління середовищем**: агенти можуть перемикатися між dev/staging/production середовищами
+
+### Infrastructure Generation with `azd infra generate`
+
+Для продуктивних AI-навантажень ви можете генерувати і налаштовувати інфраструктуру як код замість автоматичного надання:
+
+```bash
+# Генерувати файли Bicep/Terraform з вашого визначення проєкту
+azd infra generate
+```
+
+Це записує IaC на диск, щоб ви могли:
+- Переглядати та перевіряти інфраструктуру перед розгортанням
+- Додавати власні політики безпеки (мережеві правила, приватні кінцеві точки)
+- Інтегруватися з існуючими процесами перевірки IaC
+- Вести контроль версій інфраструктурних змін окремо від коду застосунку
+
+### Production Lifecycle Hooks
+
+AZD hooks дозволяють вам впроваджувати власну логіку на кожному етапі життєвого циклу розгортання — критично для продуктивних AI-робочих процесів:
+
+```yaml
+# azure.yaml - Production hooks example
+name: ai-production-app
+hooks:
+  preprovision:
+    shell: sh
+    run: scripts/validate-quotas.sh    # Check AI model quota before provisioning
+  postprovision:
+    shell: sh
+    run: scripts/configure-networking.sh  # Set up private endpoints
+  predeploy:
+    shell: sh
+    run: scripts/run-ai-safety-tests.sh  # Run prompt safety checks
+  postdeploy:
+    shell: sh
+    run: scripts/smoke-test.sh           # Verify agent responses post-deploy
+services:
+  agent-api:
+    project: ./src/agent
+    host: containerapp
+    hooks:
+      predeploy:
+        shell: sh
+        run: scripts/validate-model-access.sh  # Per-service hook
+```
+
+```bash
+# Запустіть конкретний хук вручну під час розробки
+azd hooks run predeploy
+```
+
+**Рекомендовані production hooks для AI-навантажень:**
+
+| Hook | Use Case |
+|------|----------|
+| `preprovision` | Перевірка квот підписки для потужностей AI-моделі |
+| `postprovision` | Налаштування приватних кінцевих точок, розгортання ваг моделі |
+| `predeploy` | Запуск тестів безпеки AI, перевірка шаблонів prompt |
+| `postdeploy` | Димові тести відповідей агента, перевірка підключення до моделі |
+
+### CI/CD Pipeline Configuration
+
+Використовуйте `azd pipeline config` для підключення проекту до GitHub Actions або Azure Pipelines із безпечною Azure-аутентифікацією:
+
+```bash
+# Налаштувати конвеєр CI/CD (інтерактивно)
+azd pipeline config
+
+# Налаштувати з конкретним провайдером
+azd pipeline config --provider github
+```
+
+Ця команда:
+- Створює service principal з мінімальним доступом
+- Налаштовує федеративні облікові дані (без збережених секретів)
+- Генерує або оновлює файл визначення пайплайну
+- Налаштовує необхідні змінні оточення у вашій CI/CD системі
+
+**Продакшн-робочий процес із pipeline config:**
+
+```bash
+# 1. Налаштувати виробниче середовище
+azd env new production
+azd env set AZURE_OPENAI_CAPACITY 100
+
+# 2. Налаштувати конвеєр
+azd pipeline config --provider github
+
+# 3. Конвеєр запускає azd deploy при кожному пуші в main
+```
+
+### Adding Components with `azd add`
+
+Поступово додавайте Azure-сервіси до існуючого проекту:
+
+```bash
+# Додати новий компонент служби інтерактивно
+azd add
+```
+
+Це особливо корисно для розширення продуктивних AI-застосунків — наприклад, додавання сервісу пошуку за вектором, нового кінцевого пункту агента або компонента моніторингу в існуюче розгортання.
+
+## Additional Resources
+- **Azure Well-Architected Framework**: [Інструкції щодо робочих навантажень ШІ](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Microsoft Foundry Documentation**: [Офіційна документація](https://learn.microsoft.com/azure/ai-studio/)
+- **Community Templates**: [Приклади Azure](https://github.com/Azure-Samples)
+- **Discord Community**: [#Azure канал](https://discord.gg/microsoft-azure)
+- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure на skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 відкритих навичок агентів для Azure AI, Foundry, розгортання, оптимізації витрат і діагностики. Встановіть у вашому редакторі:
+  ```bash
+  npx skills add microsoft/github-copilot-for-azure
+  ```
 
 ---
 
-**Навігація по розділу:**
-- **📚 Головна курсу**: [AZD For Beginners](../../README.md)
-- **📖 Поточний розділ**: Розділ 8 - Шаблони для виробництва та підприємств
-- **⬅️ Попередній розділ**: [Розділ 7: Усунення несправностей](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Також пов'язано**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎆 Завершення курсу**: [AZD For Beginners](../../README.md)
+**Навігація по розділах:**
+- **📚 Домашня сторінка курсу**: [AZD Для початківців](../../README.md)
+- **📖 Поточний розділ**: Розділ 8 - Патерни для продакшн та підприємств
+- **⬅️ Попередній розділ**: [Розділ 7: Вирішення проблем](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Також пов’язано**: [Лабораторія AI Workshop](ai-workshop-lab.md)
+- **� Курс завершено**: [AZD Для початківців](../../README.md)
 
-**Пам'ятайте**: Виробничі AI-навантаження потребують ретельного планування, моніторингу та постійної оптимізації. Почніть з цих патернів і адаптуйте їх до ваших конкретних вимог.
+**Пам’ятайте**: робочі навантаження ШІ в продакшн потребують ретельного планування, моніторингу та постійної оптимізації. Починайте з цих паттернів і адаптуйте їх до ваших специфічних вимог.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Відмова від відповідальності:
-Цей документ було перекладено за допомогою сервісу машинного перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, просимо врахувати, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ його рідною мовою слід вважати авторитетним джерелом. Для критичної інформації рекомендується скористатися послугами професійного перекладача. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникли внаслідок використання цього перекладу.
+**Відмова від відповідальності**:  
+Цей документ було перекладено за допомогою сервісу AI-перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, будь ласка, майте на увазі, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ рідною мовою слід вважати авторитетним джерелом. Для критичної інформації рекомендується професійний людський переклад. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникли внаслідок використання цього перекладу.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

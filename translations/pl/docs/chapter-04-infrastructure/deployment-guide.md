@@ -1,83 +1,83 @@
-# Przewodnik wdrażania - Opanowanie wdrożeń AZD
+# Przewodnik wdrożeń - Opanowanie wdrożeń AZD
 
-**Nawigacja po rozdziałach:**
-- **📚 Strona kursu**: [AZD For Beginners](../../README.md)
-- **📖 Bieżący rozdział**: Rozdział 4 - Infrastructure as Code & Deployment
-- **⬅️ Poprzedni rozdział**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+**Nawigacja po rozdziale:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Bieżący rozdział**: Rozdział 4 - Infrastruktura jako kod i wdrożenie
+- **⬅️ Poprzedni rozdział**: [Rozdział 3: Konfiguracja](../chapter-03-configuration/configuration.md)
 - **➡️ Następny**: [Provisioning Resources](provisioning.md)
-- **🚀 Następny rozdział**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+- **🚀 Następny rozdział**: [Rozdział 5: Rozwiązania AI z wieloma agentami](../../examples/retail-scenario.md)
 
 ## Wprowadzenie
 
-Ten## Zrozumienie procesu wdrażaniakompletny przewodnik obejmuje wszystko, co musisz wiedzieć o wdrażaniu aplikacji przy użyciu Azure Developer CLI, od podstawowych wdrożeń jednopoleceniowych po zaawansowane scenariusze produkcyjne z niestandardowymi hookami, wieloma środowiskami i integracją CI/CD. Opanuj pełny cykl życia wdrożenia za pomocą praktycznych przykładów i najlepszych praktyk.
+Ten kompleksowy przewodnik obejmuje wszystko, co musisz wiedzieć o wdrażaniu aplikacji za pomocą Azure Developer CLI, od podstawowych wdrożeń jednym poleceniem po zaawansowane scenariusze produkcyjne z niestandardowymi hookami, wieloma środowiskami i integracją CI/CD. Opanuj cały cykl życia wdrożenia wraz z praktycznymi przykładami i najlepszymi praktykami.
 
 ## Cele nauki
 
 Po ukończeniu tego przewodnika będziesz:
-- Opanujesz wszystkie polecenia i procesy wdrażania Azure Developer CLI
-- Zrozumiesz pełny cykl życia wdrożenia od prowizjonowania po monitorowanie
-- Wdrożysz niestandardowe hooki wdrożeniowe do automatyzacji przed- i po-wdrożeniowej
-- Skonfigurujesz wiele środowisk z parametrami specyficznymi dla środowiska
-- Skonfigurujesz zaawansowane strategie wdrożeń, w tym blue-green i canary
-- Zintegrowasz wdrożenia azd z pipeline’ami CI/CD i praktykami DevOps
+- Mistrzem wszystkich poleceń i przepływów pracy wdrożeń Azure Developer CLI
+- Rozumiał pełny cykl życia wdrożenia od provisioningu do monitoringu
+- Umiał wdrażać niestandardowe hooki wdrożeniowe do automatyzacji przed i po wdrożeniu
+- Konfigurować wiele środowisk z parametrami specyficznymi dla środowiska
+- Ustawiać zaawansowane strategie wdrożeń, w tym blue-green i canary deployments
+- Integrując azd z pipeline'ami CI/CD i procesami DevOps
 
-## Efekty nauczania
+## Efekty nauki
 
-Po ukończeniu będziesz w stanie:
-- Wykonywać i rozwiązywać problemy ze wszystkimi przebiegami wdrożeń azd niezależnie
-- Projektować i wdrażać niestandardową automatyzację wdrożeń za pomocą hooków
-- Konfigurować wdrożenia gotowe do produkcji z odpowiednim zabezpieczeniem i monitorowaniem
+Po ukończeniu kursu będziesz potrafił:
+- Samodzielnie wykonywać i rozwiązywać problemy wszystkich przepływów pracy wdrożeń azd
+- Projektować i implementować niestandardową automatyzację wdrożeń za pomocą hooków
+- Konfigurować wdrożenia gotowe do produkcji z odpowiednim zabezpieczeniem i monitoringiem
 - Zarządzać złożonymi scenariuszami wdrożeń wielośrodowiskowych
-- Optymalizować wydajność wdrożeń i wdrażać strategie wycofania
-- Integrować wdrożenia azd z praktykami DevOps w przedsiębiorstwie
+- Optymalizować wydajność wdrożeń i wdrażać strategie rollbacku
+- Włączać wdrożenia azd do praktyk DevOps w przedsiębiorstwach
 
 ## Przegląd wdrożeń
 
-Azure Developer CLI udostępnia kilka poleceń związanych z wdrożeniem:
-- `azd up` - Pełny przebieg (prowizjonowanie + wdrożenie)
-- `azd provision` - Tworzy/aktualizuje tylko zasoby Azure
-- `azd deploy` - Wdraża tylko kod aplikacji
-- `azd package` - Buduje i pakuje aplikacje
+Azure Developer CLI udostępnia kilka poleceń wdrożeniowych:
+- `azd up` - kompletny przepływ (provision + deploy)
+- `azd provision` - tworzy/aktualizuje jedynie zasoby Azure
+- `azd deploy` - wdraża jedynie kod aplikacji
+- `azd package` - buduje i pakuje aplikacje
 
-## Podstawowe procesy wdrażania
+## Podstawowe przepływy pracy wdrożeń
 
-### Pełne wdrożenie (azd up)
-The most common workflow for new projects:
+### Kompletny proces wdrożenia (azd up)
+Najczęściej używany przepływ pracy dla nowych projektów:
 ```bash
-# Wdróż wszystko od podstaw
+# Wdróż wszystko od nowa
 azd up
 
-# Wdróż dla konkretnego środowiska
+# Wdróż z określonym środowiskiem
 azd up --environment production
 
 # Wdróż z niestandardowymi parametrami
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Wdrażanie tylko infrastruktury
-When you only need to update Azure resources:
+### Wdrożenie jedynie infrastruktury
+Gdy potrzebujesz tylko zaktualizować zasoby Azure:
 ```bash
-# Prowizjonowanie/aktualizacja infrastruktury
+# Udostępnij/aktualizuj infrastrukturę
 azd provision
 
-# Prowizjonowanie z symulacją (dry-run) w celu podglądu zmian
+# Udostępnij z symulacją, aby zobaczyć zmiany
 azd provision --preview
 
-# Prowizjonowanie konkretnych usług
+# Udostępnij określone usługi
 azd provision --service database
 ```
 
-### Wdrażanie tylko kodu
-For quick application updates:
+### Wdrożenie jedynie kodu
+Dla szybkich aktualizacji aplikacji:
 ```bash
 # Wdróż wszystkie usługi
 azd deploy
 
 # Oczekiwany wynik:
 # Wdrażanie usług (azd deploy)
-# - web: Wdrażanie... Gotowe
-# - api: Wdrażanie... Gotowe
-# SUKCES: Twoje wdrożenie zakończyło się po 2 minutach i 15 sekundach
+# - web: Wdrażanie... Zakończono
+# - api: Wdrażanie... Zakończono
+# SUKCES: Twoje wdrożenie zakończyło się po 2 minutach 15 sekundach
 
 # Wdróż konkretną usługę
 azd deploy --service web
@@ -92,13 +92,13 @@ azd show --output json | jq '.services'
 
 ### ✅ Weryfikacja wdrożenia
 
-After any deployment, verify success:
+Po każdym wdrożeniu zweryfikuj powodzenie:
 
 ```bash
 # Sprawdź, czy wszystkie usługi działają
 azd show
 
-# Przetestuj endpointy health
+# Przetestuj punkty końcowe stanu zdrowia
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -110,14 +110,14 @@ azd monitor --logs
 ```
 
 **Kryteria sukcesu:**
-- ✅ Wszystkie usługi mają status "Running"
-- ✅ Punkty zdrowia (health endpoints) zwracają HTTP 200
-- ✅ Brak logów z błędami w ciągu ostatnich 5 minut
+- ✅ Wszystkie usługi pokazują status „Running”
+- ✅ Punkty zdrowia zwracają HTTP 200
+- ✅ Brak błędów w logach przez ostatnie 5 minut
 - ✅ Aplikacja odpowiada na testowe żądania
 
-## 🏗️ Zrozumienie procesu wdrażania
+## 🏗️ Zrozumienie procesu wdrożenia
 
-### Faza 1: Hooki przed prowizjonowaniem
+### Faza 1: Hooki przed provisionem
 ```yaml
 # azure.yaml
 hooks:
@@ -131,13 +131,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Faza 2: Prowizjonowanie infrastruktury
+### Faza 2: Provisioning infrastruktury
 - Odczytuje szablony infrastruktury (Bicep/Terraform)
 - Tworzy lub aktualizuje zasoby Azure
 - Konfiguruje sieć i zabezpieczenia
-- Ustawia monitorowanie i logowanie
+- Ustawia monitoring i logowanie
 
-### Faza 3: Hooki po prowizjonowaniu
+### Faza 3: Hooki po provisionie
 ```yaml
 hooks:
   postprovision:
@@ -168,7 +168,7 @@ hooks:
       npm run db:migrate
 ```
 
-### Faza 6: Wdrażanie aplikacji
+### Faza 6: Wdrożenie aplikacji
 - Wdraża spakowane aplikacje do usług Azure
 - Aktualizuje ustawienia konfiguracyjne
 - Uruchamia/ponownie uruchamia usługi
@@ -186,9 +186,9 @@ hooks:
       curl https://${WEB_URL}/health
 ```
 
-## 🎛️ Konfiguracja wdrożeń
+## 🎛️ Konfiguracja wdrożenia
 
-### Ustawienia wdrożenia specyficzne dla usługi
+### Ustawienia wdrożenia specyficzne dla usług
 ```yaml
 # azure.yaml
 services:
@@ -278,17 +278,17 @@ services:
 
 ### Wdrożenia blue-green
 ```bash
-# Utwórz niebieskie środowisko
+# Utwórz środowisko niebieskie
 azd env new production-blue
 azd up --environment production-blue
 
-# Przetestuj niebieskie środowisko
+# Przetestuj środowisko niebieskie
 ./scripts/test-environment.sh production-blue
 
-# Przekieruj ruch na niebieskie (ręczna aktualizacja DNS/load balancera)
+# Przełącz ruch na niebieskie (ręczna aktualizacja DNS/load balancera)
 ./scripts/switch-traffic.sh production-blue
 
-# Usuń zielone środowisko
+# Posprzątaj środowisko zielone
 azd env select production-green
 azd down --force
 ```
@@ -307,7 +307,7 @@ services:
         percentage: 10
 ```
 
-### Wdrażania etapowe
+### Wdrożenia etapowe
 ```bash
 #!/bin/bash
 # deploy-staged.sh
@@ -338,7 +338,7 @@ if [[ $confirm == [yY] ]]; then
 fi
 ```
 
-## 🐳 Wdrażania kontenerów
+## 🐳 Wdrożenia kontenerowe
 
 ### Wdrażanie aplikacji kontenerowych
 ```yaml
@@ -392,9 +392,9 @@ CMD ["npm", "start"]
 
 ## ⚡ Optymalizacja wydajności
 
-### Wdrażania specyficzne dla usług
+### Wdrożenia specyficzne dla usług
 ```bash
-# Wdróż określoną usługę, aby przyspieszyć iterację
+# Wdróż konkretną usługę dla szybszej iteracji
 azd deploy --service web
 azd deploy --service api
 
@@ -402,7 +402,7 @@ azd deploy --service api
 azd deploy
 ```
 
-### Buforowanie buildów
+### Buforowanie budowy
 ```yaml
 # azure.yaml - Configure build commands
 services:
@@ -412,31 +412,31 @@ services:
     outputPath: dist
 ```
 
-### Efektywne wdrożenia kodu
+### Wydajne wdrożenia kodu
 ```bash
-# Użyj azd deploy (nie azd up) dla zmian dotyczących wyłącznie kodu
-# To pomija tworzenie zasobów infrastruktury i jest znacznie szybsze
+# Używaj azd deploy (nie azd up) do zmian tylko w kodzie
+# To pomija provisionowanie infrastruktury i jest znacznie szybsze
 azd deploy
 
 # Wdróż konkretną usługę dla najszybszej iteracji
 azd deploy --service api
 ```
 
-## 🔍 Monitorowanie wdrożeń
+## 🔍 Monitoring wdrożeń
 
-### Monitorowanie wdrożeń w czasie rzeczywistym
+### Monitoring wdrożeń w czasie rzeczywistym
 ```bash
 # Monitoruj aplikację w czasie rzeczywistym
 azd monitor --live
 
-# Wyświetl logi aplikacji
+# Przeglądaj logi aplikacji
 azd monitor --logs
 
 # Sprawdź status wdrożenia
 azd show
 ```
 
-### Kontrole stanu
+### Kontrole stanu zdrowia
 ```yaml
 # azure.yaml - Configure health checks
 services:
@@ -483,16 +483,16 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 Zagadnienia bezpieczeństwa
+## 🔐 Aspekty bezpieczeństwa
 
 ### Zarządzanie sekretami
 ```bash
-# Przechowuj sekrety bezpiecznie
+# Bezpiecznie przechowuj sekrety
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# Odwołuj się do sekretów w pliku azure.yaml
+# Odwołuj się do sekretów w azure.yaml
 ```
 
 ```yaml
@@ -531,9 +531,9 @@ services:
           - external-api-key
 ```
 
-## 🚨 Strategie wycofania (rollback)
+## 🚨 Strategie rollbacku
 
-### Szybkie wycofanie
+### Szybki rollback
 ```bash
 # AZD nie ma wbudowanego mechanizmu wycofywania. Zalecane podejścia:
 
@@ -548,20 +548,20 @@ azd deploy
 git checkout main
 ```
 
-### Wycofanie infrastruktury
+### Rollback infrastruktury
 ```bash
-# Podejrzyj zmiany w infrastrukturze przed zastosowaniem
+# Podgląd zmian infrastruktury przed zastosowaniem
 azd provision --preview
 
-# Aby cofnąć zmiany infrastruktury, użyj kontroli wersji:
+# Do wycofania infrastruktury użyj kontroli wersji:
 git revert HEAD  # Cofnij zmiany w infrastrukturze
 azd provision    # Zastosuj poprzedni stan infrastruktury
 ```
 
-### Wycofanie migracji bazy danych
+### Rollback migracji bazy danych
 ```bash
 #!/bin/bash
-# scripts/rollback-database.sh
+# skrypty/rollback-database.sh
 
 echo "Rolling back database migrations..."
 npm run db:rollback
@@ -574,7 +574,7 @@ echo "Database rollback completed"
 
 ## 📊 Metryki wdrożeń
 
-### Śledź wydajność wdrożeń
+### Śledzenie wydajności wdrożeń
 ```bash
 # Wyświetl bieżący status wdrożenia
 azd show
@@ -582,7 +582,7 @@ azd show
 # Monitoruj aplikację za pomocą Application Insights
 azd monitor --overview
 
-# Wyświetl metryki na żywo
+# Wyświetl dane metryczne na żywo
 azd monitor --live
 ```
 
@@ -605,30 +605,30 @@ hooks:
 
 ## 🎯 Najlepsze praktyki
 
-### 1. Spójność środowisk
+### 1. Spójność środowiska
 ```bash
-# Używaj spójnych nazw
+# Używaj spójnej nazewnictwa
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Utrzymuj zgodność środowisk
+# Zachowaj zgodność środowisk
 ./scripts/sync-environments.sh
 ```
 
 ### 2. Walidacja infrastruktury
 ```bash
-# Podejrzyj zmiany w infrastrukturze przed wdrożeniem
+# Podejrzyj zmiany infrastruktury przed wdrożeniem
 azd provision --preview
 
-# Użyj lintingu ARM/Bicep
+# Użyj lintowania ARM/Bicep
 az bicep lint --file infra/main.bicep
 
 # Zweryfikuj składnię Bicep
 az bicep build --file infra/main.bicep
 ```
 
-### 3. Integracja testowania
+### 3. Integracja testów
 ```yaml
 hooks:
   predeploy:
@@ -659,7 +659,7 @@ hooks:
 
 ### 4. Dokumentacja i logowanie
 ```bash
-# Udokumentuj procedury wdrażania
+# Dokumentuj procedury wdrożeniowe
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
@@ -667,15 +667,15 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Kolejne kroki
 
-- [Prowizjonowanie zasobów](provisioning.md) - Dogłębne omówienie zarządzania infrastrukturą
-- [Planowanie przed wdrożeniem](../chapter-06-pre-deployment/capacity-planning.md) - Zaplanuj strategię wdrożenia
-- [Częste problemy](../chapter-07-troubleshooting/common-issues.md) - Rozwiązywanie problemów z wdrożeniami
-- [Najlepsze praktyki](../chapter-07-troubleshooting/debugging.md) - Strategie wdrożeń gotowych do produkcji
+- [Provisioning Resources](provisioning.md) - Głębsze poznanie zarządzania infrastrukturą
+- [Pre-Deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - Zaplanuj swoją strategię wdrożenia
+- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - Rozwiązywanie problemów z wdrożeniem
+- [Best Practices](../chapter-07-troubleshooting/debugging.md) - Strategie wdrożeń gotowych do produkcji
 
-## 🎯 Praktyczne ćwiczenia wdrożeniowe
+## 🎯 Ćwiczenia praktyczne z wdrożeń
 
-### Ćwiczenie 1: Przebieg wdrożenia przyrostowego (20 minut)
-**Cel**: Opanować różnicę między pełnymi a przyrostowymi wdrożeniami
+### Ćwiczenie 1: Przyrostowy przepływ wdrożeń (20 minut)
+**Cel**: Opanuj różnicę między pełnym a przyrostowym wdrożeniem
 
 ```bash
 # Początkowe wdrożenie
@@ -701,15 +701,15 @@ azd down --force --purge
 ```
 
 **Kryteria sukcesu:**
-- [ ] Pełne wdrożenie zajmuje 5–15 minut
-- [ ] Wdrażanie tylko kodu zajmuje 2–5 minut
+- [ ] Pełne wdrożenie trwa 5-15 minut
+- [ ] Wdrożenie tylko kodu trwa 2-5 minut
 - [ ] Zmiany w kodzie są widoczne w wdrożonej aplikacji
-- [ ] Infrastruktura nie zmienia się po `azd deploy`
+- [ ] Infrastruktura pozostaje bez zmian po `azd deploy`
 
-**Wynik nauki**: `azd deploy` jest o 50–70% szybszy niż `azd up` dla zmian w kodzie
+**Efekt nauki**: `azd deploy` jest 50-70% szybszy niż `azd up` przy zmianach w kodzie
 
-### Ćwiczenie 2: Własne hooki wdrożeniowe (30 minut)
-**Cel**: Wdrożyć automatyzację przed- i po-wdrożeniową
+### Ćwiczenie 2: Niestandardowe hooki wdrożeń (30 minut)
+**Cel**: Zaimplementuj automatyzację przed i po wdrożeniu
 
 ```bash
 # Utwórz skrypt walidacji przed wdrożeniem
@@ -718,13 +718,13 @@ cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
 echo "⚠️ Running pre-deployment checks..."
 
-# Sprawdź, czy testy przechodzą
+# Sprawdź, czy testy przechodzą pomyślnie
 if ! npm run test:unit; then
     echo "❌ Tests failed! Aborting deployment."
     exit 1
 fi
 
-# Sprawdź, czy są niezatwierdzone zmiany
+# Sprawdź, czy nie ma niezatwierdzonych zmian
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -753,7 +753,7 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# Dodaj hooki do azure.yaml
+# Dodaj hooki do pliku azure.yaml
 cat >> azure.yaml << 'EOF'
 
 hooks:
@@ -771,13 +771,13 @@ azd deploy
 ```
 
 **Kryteria sukcesu:**
-- [ ] Skrypt przed-wdrożeniowy uruchamia się przed wdrożeniem
-- [ ] Wdrożenie przerywa się, jeśli testy nie przejdą
-- [ ] Post-deploy smoke test weryfikuje stan zdrowia
+- [ ] Skrypt przed wdrożeniem uruchamia się przed wdrożeniem
+- [ ] Wdrożenie jest przerywane, jeśli testy nie przejdą
+- [ ] Po wdrożeniu uruchamia się test przejścia dymnego (smoke test)
 - [ ] Hooki wykonują się w poprawnej kolejności
 
 ### Ćwiczenie 3: Strategia wdrożeń wielośrodowiskowych (45 minut)
-**Cel**: Wdrożyć etapowy przepływ wdrożeń (dev → staging → production)
+**Cel**: Zaimplementuj etapowy przepływ wdrożeń (dev → staging → produkcja)
 
 ```bash
 # Utwórz skrypt wdrożeniowy
@@ -788,7 +788,7 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# Krok 1: Wdróż do środowiska deweloperskiego
+# Krok 1: Wdrożenie na środowisko deweloperskie
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
@@ -797,7 +797,7 @@ azd up --no-prompt
 echo "Running dev tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# Krok 2: Wdróż do środowiska staging
+# Krok 2: Wdrożenie na środowisko testowe
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
@@ -806,7 +806,7 @@ azd up --no-prompt
 echo "Running staging tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# Krok 3: Ręczne zatwierdzenie przed wdrożeniem na produkcję
+# Krok 3: Ręczna akceptacja dla produkcji
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -839,14 +839,14 @@ azd env new production
 ```
 
 **Kryteria sukcesu:**
-- [ ] Środowisko dev wdraża się pomyślnie
-- [ ] Środowisko staging wdraża się pomyślnie
-- [ ] Wymagana jest ręczna akceptacja dla produkcji
-- [ ] Wszystkie środowiska mają działające kontrole stanu
-- [ ] Możliwość wycofania w razie potrzeby
+- [ ] Środowisko dev udanie się wdraża
+- [ ] Środowisko staging udanie się wdraża
+- [ ] Wymagana jest ręczna akceptacja do produkcji
+- [ ] Wszystkie środowiska mają działające kontrole stanu zdrowia
+- [ ] Możliwość rollbacku, jeśli zajdzie potrzeba
 
-### Ćwiczenie 4: Strategia wycofania (25 minut)
-**Cel**: Wdrożyć i przetestować wycofanie wdrożenia przy użyciu Git
+### Ćwiczenie 4: Strategia rollbacku (25 minut)
+**Cel**: Zaimplementuj i przetestuj rollback wdrożenia za pomocą Gita
 
 ```bash
 # Wdróż v1
@@ -857,23 +857,23 @@ azd up
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# Wdróż v2 ze zmianą łamiącą zgodność wsteczną
+# Wdróż v2 z zmianą łamiącą kompatybilność
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
 azd deploy
 
-# Wykryj awarię i cofnij zmiany
+# Wykryj błąd i cofnij zmiany
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # Cofnięcie przy użyciu Git
+    # Cofnij zmiany za pomocą gita
     git revert HEAD --no-edit
     
-    # Przywrócenie środowiska
+    # Cofnij środowisko
     azd env set APP_VERSION "1.0.0"
     
-    # Wdróż ponownie v1
+    # Ponownie wdroż v1
     azd deploy
     
     echo "✅ Rolled back to v1.0.0"
@@ -881,10 +881,10 @@ fi
 ```
 
 **Kryteria sukcesu:**
-- [ ] Potrafi wykryć awarie wdrożeń
-- [ ] Skrypt wycofania uruchamia się automatycznie
-- [ ] Aplikacja powraca do działającego stanu
-- [ ] Kontrole stanu przechodzą po wycofaniu
+- [ ] Potrafi wykrywać niepowodzenia wdrożenia
+- [ ] Skrypt rollbacku uruchamia się automatycznie
+- [ ] Aplikacja wraca do działającego stanu
+- [ ] Kontrole stanu zdrowia przechodzą po rollbacku
 
 ## 📊 Śledzenie metryk wdrożeń
 
@@ -908,7 +908,7 @@ echo "Timestamp: $(date)"
 echo "Environment: $(azd env show --output json | jq -r '.name')"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
-# Zapisz do pliku
+# Loguj do pliku
 echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
 EOF
 
@@ -929,20 +929,20 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 
 ## Dodatkowe zasoby
 
-- [Referencja wdrożeń Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Wdrażanie Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Wdrażanie Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Wdrażanie Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Azure Developer CLI Deployment Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Azure Container Apps Deployment](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Azure Functions Deployment](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
 **Nawigacja**
 - **Poprzednia lekcja**: [Twój pierwszy projekt](../chapter-01-foundation/first-project.md)
-- **Następna lekcja**: [Prowizjonowanie zasobów](provisioning.md)
+- **Następna lekcja**: [Provisioning Resources](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Zastrzeżenie:
-Ten dokument został przetłumaczony przy użyciu usługi tłumaczenia AI Co-op Translator (https://github.com/Azure/co-op-translator). Mimo że dokładamy starań, aby zapewnić poprawność, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego języku źródłowym należy uznać za wersję wiążącą. W przypadku informacji o krytycznym znaczeniu zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+**Zastrzeżenie**:  
+Niniejszy dokument został przetłumaczony za pomocą automatycznej usługi tłumaczeniowej AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mimo że dokładamy starań, aby tłumaczenie było jak najdokładniejsze, prosimy pamiętać, że tłumaczenia automatyczne mogą zawierać błędy lub niedokładności. Oryginalny dokument w języku źródłowym należy traktować jako źródło autorytatywne. W przypadku informacji kluczowych rekomendowane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

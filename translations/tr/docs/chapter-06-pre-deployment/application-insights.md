@@ -1,30 +1,30 @@
-# Application Insights Integration with AZD
+# Application Insights'in AZD ile Entegrasyonu
 
-⏱️ **Tahmini Süre**: 40-50 dakika | 💰 **Maliyet Etkisi**: ~$5-15/ay | ⭐ **Karmaşıklık**: Orta
+⏱️ **Tahmini Süre**: 40-50 dakika | 💰 **Maliyet Etkisi**: ~$5-15/ay | ⭐ **Zorluk**: Orta
 
-**📚 Öğrenim Yolu:**
-- ← Önceki: [Ön Kontroller](preflight-checks.md) - Dağıtımdan önce doğrulama
+**📚 Öğrenme Yolu:**
+- ← Önceki: [Preflight Checks](preflight-checks.md) - Dağıtımdan önce doğrulama
 - 🎯 **Buradasınız**: Application Insights Entegrasyonu (İzleme, telemetri, hata ayıklama)
 - → Sonraki: [Dağıtım Kılavuzu](../chapter-04-infrastructure/deployment-guide.md) - Azure'a dağıtım
-- 🏠 [Kurs Ana Sayfası](../../README.md)
+- 🏠 [Kurs Anasayfası](../../README.md)
 
 ---
 
 ## Bu Derste Neler Öğreneceksiniz
 
-Bu dersi tamamlayarak:
-- AZD projelerine **Application Insights**'ı otomatik olarak entegre edeceksiniz
-- Mikro hizmetler için **dağıtık izleme** yapılandıracaksınız
-- **Özel telemetri** (metrikler, olaylar, bağımlılıklar) uygulayacaksınız
-- Gerçek zamanlı izleme için **Canlı Metrikler** kuracaksınız
-- AZD dağıtımlarından **uyarılar ve panolar** oluşturacaksınız
-- **Telemetri sorguları** ile üretim sorunlarını hata ayıklayacaksınız
-- **Maliyetler ve örnekleme** stratejilerini optimize edeceksiniz
-- **AI/LLM uygulamalarını** (tokenlar, gecikme, maliyetler) izleyeceksiniz
+Bu dersi tamamlayarak şunları yapabileceksiniz:
+- **Application Insights**'ı AZD projelerine otomatik olarak entegre etmek
+- Mikro hizmetler için **dağıtık izlemeyi** yapılandırmak
+- **Özel telemetri** (metrikler, olaylar, bağımlılıklar) uygulamak
+- Gerçek zamanlı izleme için **Canlı Metrikler** kurmak
+- AZD dağıtımlarından **uyarılar ve panolar** oluşturmak
+- **Telemetri sorguları** ile üretim sorunlarını hata ayıklamak
+- **Maliyetler ve örnekleme** stratejilerini optimize etmek
+- **AI/LLM uygulamalarını** izlemek (token kullanımı, gecikme, maliyetler)
 
 ## Neden AZD ile Application Insights Önemli
 
-### Zorluk: Üretim Gözlemlenebilirliği
+### Zorluk: Üretimde Gözlemlenebilirlik
 
 **Application Insights olmadan:**
 ```
@@ -47,7 +47,7 @@ Bu dersi tamamlayarak:
 ✅ AZD provisions everything automatically
 ```
 
-**Benzetme**: Application Insights, uygulamanız için bir "kara kutu" uçuş kaydedicisi + kokpit panosu gibi. Her şeyi gerçek zamanlı görürsünüz ve herhangi bir olayı yeniden oynatabilirsiniz.
+**Benzetme**: Application Insights, uygulamanız için bir "kara kutu" uçuş kaydedici + kokpit gösterge paneline sahip olmak gibidir. Gerçek zamanlı olarak olan her şeyi görürsünüz ve herhangi bir olayı tekrar oynatabilirsiniz.
 
 ---
 
@@ -83,17 +83,17 @@ graph TB
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style LogAnalytics fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-### Otomatik Olarak Neler İzlenir
+### Otomatik Olarak İzlenenler
 
-| Telemetri Türü | Ne Yakalar | Kullanım Senaryosu |
-|----------------|------------|--------------------|
-| **Requests** | HTTP istekleri, durum kodları, süre | API performans izleme |
-| **Dependencies** | Harici çağrılar (DB, API'ler, depolama) | Darboğazları tespit etme |
-| **Exceptions** | Yığın izleriyle birlikte yakalanmamış hatalar | Hata ayıklama |
-| **Custom Events** | İş olayları (kayıt, satın alma) | Analitik ve huniler |
-| **Metrics** | Performans sayaçları, özel metrikler | Kapasite planlaması |
-| **Traces** | Şiddet düzeyiyle birlikte günlük mesajları | Hata ayıklama ve denetim |
-| **Availability** | Çalışma süresi ve yanıt süresi testleri | SLA izleme |
+| Telemetry Type | What It Captures | Use Case |
+|----------------|------------------|----------|
+| **İstekler** | HTTP istekleri, durum kodları, süre | API performans izleme |
+| **Bağımlılıklar** | Harici çağrılar (DB, API'ler, depolama) | Darboğazları belirleme |
+| **İstisnalar** | Yığın izleriyle yakalanmamış hatalar | Arızaların hata ayıklanması |
+| **Özel Olaylar** | İş olayları (kayıt, satın alma) | Analitik ve dönüşüm hunileri |
+| **Metrikler** | Performans sayaçları, özel metrikler | Kapasite planlaması |
+| **İzler** | Önem düzeyine göre günlük mesajları | Hata ayıklama ve denetleme |
+| **Kullanılabilirlik** | Çalışma süresi ve yanıt süresi testleri | SLA izleme |
 
 ---
 
@@ -113,17 +113,17 @@ az --version
 
 ### Azure Gereksinimleri
 
-- Etkin Azure aboneliği
+- Aktif bir Azure aboneliği
 - Oluşturma izinleri:
   - Application Insights kaynakları
   - Log Analytics çalışma alanları
   - Container Apps
-  - Resource grupları
+  - Kaynak grupları
 
 ### Bilgi Önkoşulları
 
-Aşağıları tamamlamış olmalısınız:
-- [AZD Temelleri](../chapter-01-foundation/azd-basics.md) - AZD temel kavramları
+Tamamlamış olmanız gerekir:
+- [AZD Temelleri](../chapter-01-foundation/azd-basics.md) - Temel AZD kavramları
 - [Konfigürasyon](../chapter-03-configuration/configuration.md) - Ortam kurulumu
 - [İlk Proje](../chapter-01-foundation/first-project.md) - Temel dağıtım
 
@@ -131,9 +131,9 @@ Aşağıları tamamlamış olmalısınız:
 
 ## Ders 1: AZD ile Otomatik Application Insights
 
-### AZD'nin Application Insights Sağlaması
+### AZD'in Application Insights'ı Nasıl Sağladığı
 
-AZD, dağıttığınızda otomatik olarak Application Insights oluşturur ve yapılandırır. Nasıl çalıştığına bakalım.
+AZD dağıttığınızda Application Insights'ı otomatik olarak oluşturur ve yapılandırır. Nasıl çalıştığını görelim.
 
 ### Proje Yapısı
 
@@ -154,7 +154,7 @@ monitored-app/
 
 ---
 
-### Adım 1: AZD'yi Yapılandırma (azure.yaml)
+### Adım 1: AZD'yi yapılandırma (azure.yaml)
 
 **Dosya: `azure.yaml`**
 
@@ -172,7 +172,7 @@ services:
 # AZD automatically provisions monitoring!
 ```
 
-**Hepsi bu kadar!** Temel izleme için ekstra yapılandırma gerekmeden AZD varsayılan olarak Application Insights oluşturacaktır.
+**Hepsi bu!** AZD varsayılan olarak Application Insights'ı oluşturacaktır. Temel izleme için ekstra yapılandırma gerekmez.
 
 ---
 
@@ -227,7 +227,7 @@ output applicationInsightsName string = applicationInsights.name
 
 ---
 
-### Adım 3: Container App'i Application Insights'a Bağlama
+### Adım 3: Container Uygulamayı Application Insights'a Bağlama
 
 **Dosya: `infra/app/api.bicep`**
 
@@ -300,18 +300,18 @@ import os
 
 app = Flask(__name__)
 
-# Application Insights bağlantı dizesini al
+# Application Insights bağlantı dizesini alın
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
-    # Dağıtık izlemeyi yapılandır
+    # Dağıtık izlemeyi yapılandırın
     middleware = FlaskMiddleware(
         app,
         exporter=AzureExporter(connection_string=connection_string),
         sampler=ProbabilitySampler(rate=1.0)  # Geliştirme için %100 örnekleme
     )
     
-    # Günlüklemeyi yapılandır
+    # Günlüklemeyi yapılandırın
     logger = logging.getLogger(__name__)
     logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
@@ -331,7 +331,7 @@ def health():
 def get_products():
     logger.info('Fetching products')
     
-    # Veritabanı çağrısını simüle et (otomatik olarak bağımlılık olarak izlenir)
+    # Veritabanı çağrısını simüle edin (otomatik olarak bir bağımlılık olarak izlenir)
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -356,7 +356,7 @@ def slow_endpoint():
     """Test performance tracking"""
     import time
     logger.info('Slow endpoint called')
-    time.sleep(3)  # Yavaş işlemi simüle et
+    time.sleep(3)  # Yavaş işlemi simüle edin
     logger.warning('Endpoint took 3 seconds to respond')
     return jsonify({'message': 'Slow operation completed'})
 
@@ -404,7 +404,7 @@ curl $APP_URL/api/slow
 
 ---
 
-### Adım 6: Telemetriyi Azure Portalında Görüntüleme
+### Adım 6: Telemetrileri Azure Portal'da Görüntüleme
 
 ```bash
 # Application Insights ayrıntılarını al
@@ -417,12 +417,12 @@ az monitor app-insights component show \
   --query "appId" -o tsv
 ```
 
-**Azure Portalı → Application Insights → İşlem Araması (Transaction Search) menüsüne gidin**
+**Azure Portal'a gidin → Application Insights → Transaction Search**
 
-Aşağıdakileri görmelisiniz:
+Şunları görmelisiniz:
 - ✅ Durum kodlarıyla HTTP istekleri
-- ✅ İstek süresi ( `/api/slow` için 3+ saniye)
-- ✅ `/api/error-test` kaynaklı istisna ayrıntıları
+- ✅ İstek süresi (`/api/slow` için 3+ saniye)
+- ✅ `/api/error-test` ile oluşan istisna detayları
 - ✅ Özel günlük mesajları
 
 ---
@@ -568,7 +568,7 @@ def search():
     # Aramayı simüle et (gerçek bir veritabanı sorgusu olurdu)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
-    duration = (time.time() - start_time) * 1000  # Milisaniyeye dönüştür
+    duration = (time.time() - start_time) * 1000  # ms'ye dönüştür
     
     # Arama etkinliğini takip et
     telemetry.track_event('Search', {
@@ -593,7 +593,7 @@ def external_call():
     success = True
     
     try:
-        # Dış API çağrısını simüle et
+        # Harici API çağrısını simüle et
         response = requests.get('https://api.example.com/data', timeout=5)
         result = response.json()
     except Exception as e:
@@ -632,9 +632,9 @@ curl "$APP_URL/api/search?q=laptop"
 curl $APP_URL/api/external-call
 ```
 
-**Azure Portalında Görüntüleme:**
+**Azure Portal'da Görüntüle:**
 
-Application Insights → Günlükler (Logs) bölümüne gidin, sonra çalıştırın:
+Application Insights → Logs bölümüne gidin, ardından şunu çalıştırın:
 
 ```kusto
 // View purchase events
@@ -665,11 +665,11 @@ traces
 
 ---
 
-## Ders 3: Mikroservisler için Dağıtık İzleme
+## Ders 3: Mikro Hizmetler için Dağıtık İzleme
 
-### Servisler Arası İzleme Etkinleştirme
+### Hizmetler Arası İzlemeyi Etkinleştirme
 
-Mikroservisler için Application Insights, hizmetler arasındaki istekleri otomatik olarak ilişkilendirir.
+Mikro hizmetlerde Application Insights, hizmetler arasında istekleri otomatik olarak ilişkilendirir.
 
 **Dosya: `infra/main.bicep`**
 
@@ -747,10 +747,10 @@ sequenceDiagram
     participant Gateway as API Ağ Geçidi<br/>(İzleme Kimliği: abc123)
     participant Product as Ürün Servisi<br/>(Üst Kimlik: abc123)
     participant Order as Sipariş Servisi<br/>(Üst Kimlik: abc123)
-    participant AppInsights as Uygulama İçgörüleri
+    participant AppInsights as Uygulama Insights
     
     User->>Gateway: POST /api/checkout
-    Note over Gateway: İzlemeyi Başlat: abc123
+    Note over Gateway: İzlemeyi başlat: abc123
     Gateway->>AppInsights: İsteği kaydet (İzleme Kimliği: abc123)
     
     Gateway->>Product: GET /products/123
@@ -766,9 +766,9 @@ sequenceDiagram
     Gateway-->>User: Ödeme tamamlandı
     Gateway->>AppInsights: Yanıtı kaydet (Süre: 450ms)
     
-    Note over AppInsights: İzleme Kimliği ile korelasyon
+    Note over AppInsights: İzleme Kimliğine göre korelasyon
 ```
-**Uçtan uca izlemi sorgulayın:**
+**Uçtan uca izi sorgula:**
 
 ```kusto
 // Find complete request flow
@@ -794,7 +794,7 @@ dependencies
 
 Canlı Metrikler, <1 saniye gecikmeyle gerçek zamanlı telemetri sağlar.
 
-**Canlı Metriklere Erişim:**
+**Live Metrics'e Erişim:**
 
 ```bash
 # Application Insights kaynağını al
@@ -806,8 +806,8 @@ RG_NAME=$(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -
 echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME → Live Metrics"
 ```
 
-**Gerçek zamanlı gördükleriniz:**
-- ✅ Gelen istek hızı (istekler/saniye)
+**Gerçek zamanda gördükleriniz:**
+- ✅ Gelen istek oranı (istek/sn)
 - ✅ Giden bağımlılık çağrıları
 - ✅ İstisna sayısı
 - ✅ CPU ve bellek kullanımı
@@ -831,13 +831,13 @@ done
 
 ## Pratik Alıştırmalar
 
-### Alıştırma 1: Uyarılar Oluşturma ⭐⭐ (Orta)
+### Alıştırma 1: Uyarılar Kurma ⭐⭐ (Orta)
 
-**Hedef**: Yüksek hata oranları ve yavaş yanıtlar için uyarılar oluşturun.
+**Hedef**: Yüksek hata oranları ve yavaş yanıtlar için uyarılar oluşturmak.
 
 **Adımlar:**
 
-1. **Hata oranı için uyarı oluşturma:**
+1. **Hata oranı için uyarı oluşturun:**
 
 ```bash
 # Application Insights kaynak kimliğini al
@@ -857,7 +857,7 @@ az monitor metrics alert create \
   --description "Alert when error rate exceeds 10 per 5 minutes"
 ```
 
-2. **Yavaş yanıtlar için uyarı oluşturma:**
+2. **Yavaş yanıtlar için uyarı oluşturun:**
 
 ```bash
 az monitor metrics alert create \
@@ -870,7 +870,7 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **Bicep ile uyarı oluşturma (AZD için tercih edilir):**
+3. **Bicep ile uyarı oluşturun (AZD için önerilen):**
 
 **Dosya: `infra/core/alerts.bicep`**
 
@@ -944,7 +944,7 @@ output errorAlertId string = errorRateAlert.id
 output slowResponseAlertId string = slowResponseAlert.id
 ```
 
-4. **Uyarıları test etme:**
+4. **Uyarıları test edin:**
 
 ```bash
 # Hatalar oluştur
@@ -952,7 +952,7 @@ for i in {1..20}; do
   curl $APP_URL/api/error-test
 done
 
-# Yavaş yanıtlar üret
+# Yavaş yanıtlar oluştur
 for i in {1..10}; do
   curl $APP_URL/api/slow
 done
@@ -964,35 +964,35 @@ az monitor metrics alert list \
   --output table
 ```
 
-**✅ Başarı Ölçütleri:**
+**✅ Başarı Kriterleri:**
 - ✅ Uyarılar başarıyla oluşturuldu
-- ✅ Eşikler aşıldığında uyarılar tetikleniyor
-- ✅ Azure Portalda uyarı geçmişi görüntülenebiliyor
+- ✅ Eşikler aşıldığında uyarılar tetiklenir
+- ✅ Azure Portal'da uyarı geçmişi görüntülenebilir
 - ✅ AZD dağıtımıyla entegre
 
-**Süre**: 20-25 dakika
+**Zaman**: 20-25 dakika
 
 ---
 
 ### Alıştırma 2: Özel Pano Oluşturma ⭐⭐ (Orta)
 
-**Hedef**: Ana uygulama metriklerini gösteren bir pano oluşturun.
+**Hedef**: Temel uygulama metriklerini gösteren bir pano oluşturmak.
 
 **Adımlar:**
 
-1. **Azure Portal üzerinden pano oluşturma:**
+1. **Azure Portal üzerinden pano oluşturun:**
 
-Gidin: Azure Portal → Dashboards → Yeni Pano
+Şuraya gidin: Azure Portal → Dashboards → New Dashboard
 
-2. **Ana metrikler için kutucuklar ekleyin:**
+2. **Önemli metrikler için kutucuklar ekleyin:**
 
-- Son 24 saat için istek sayısı
+- İstek sayısı (son 24 saat)
 - Ortalama yanıt süresi
 - Hata oranı
-- En yavaş 5 işlem
+- En yavaş ilk 5 işlem
 - Kullanıcıların coğrafi dağılımı
 
-3. **Bicep ile pano oluşturma:**
+3. **Bicep ile pano oluşturun:**
 
 **Dosya: `infra/core/dashboard.bicep`**
 
@@ -1063,10 +1063,10 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
 output dashboardId string = dashboard.id
 ```
 
-4. **Panoyu dağıtma:**
+4. **Panoyu dağıtın:**
 
 ```bash
-# main.bicep dosyasına ekle
+# main.bicep'e ekle
 module dashboard './core/dashboard.bicep' = {
   name: 'dashboard'
   scope: rg
@@ -1081,23 +1081,23 @@ module dashboard './core/dashboard.bicep' = {
 azd up
 ```
 
-**✅ Başarı Ölçütleri:**
-- ✅ Pano ana metrikleri gösteriyor
-- ✅ Azure Portal ana sayfasına sabitlenebiliyor
-- ✅ Gerçek zamanlı güncelleniyor
-- ✅ AZD ile dağıtılabiliyor
+**✅ Başarı Kriterleri:**
+- ✅ Pano temel metrikleri gösteriyor
+- ✅ Azure Portal ana sayfasına sabitleyebilir
+- ✅ Gerçek zamanlı güncellenir
+- ✅ AZD ile dağıtılabilir
 
-**Süre**: 25-30 dakika
+**Zaman**: 25-30 dakika
 
 ---
 
 ### Alıştırma 3: AI/LLM Uygulamasını İzleme ⭐⭐⭐ (İleri)
 
-**Hedef**: Azure OpenAI kullanımını (tokenlar, maliyetler, gecikme) izleyin.
+**Hedef**: Microsoft Foundry Modelleri kullanımını izlemek (token'lar, maliyetler, gecikme).
 
 **Adımlar:**
 
-1. **AI izleme sarmalayıcı oluşturma:**
+1. **AI izleme sarıcı (wrapper) oluşturun:**
 
 **Dosya: `src/ai_telemetry.py`**
 
@@ -1107,7 +1107,7 @@ from openai import AzureOpenAI
 import time
 
 class MonitoredAzureOpenAI:
-    """Azure OpenAI client with automatic telemetry"""
+    """Microsoft Foundry Models client with automatic telemetry"""
     
     def __init__(self, api_key, endpoint, api_version="2024-02-01"):
         self.client = AzureOpenAI(
@@ -1121,7 +1121,7 @@ class MonitoredAzureOpenAI:
         start_time = time.time()
         
         try:
-            # Azure OpenAI'yi çağır
+            # Microsoft Foundry Modellerini çağır
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1136,9 +1136,9 @@ class MonitoredAzureOpenAI:
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # Maliyeti hesapla (GPT-4 fiyatlandırması)
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0.03 1K token başına
-            completion_cost = (completion_tokens / 1000) * 0.06  # $0.06 1K token başına
+            # Maliyeti hesapla (gpt-4.1 fiyatlandırması)
+            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0.03 her 1K token için
+            completion_cost = (completion_tokens / 1000) * 0.06  # $0.06 her 1K token için
             total_cost = prompt_cost + completion_cost
             
             # Özel etkinliği izle
@@ -1182,7 +1182,7 @@ class MonitoredAzureOpenAI:
             raise
 ```
 
-2. **İzlenen istemciyi kullanma:**
+2. **İzlenen istemciyi kullanın:**
 
 ```python
 from flask import Flask, request, jsonify
@@ -1191,7 +1191,7 @@ import os
 
 app = Flask(__name__)
 
-# İzlenen OpenAI istemcisini başlat
+# İzlenen OpenAI istemcisini başlatın
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
     endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
@@ -1202,9 +1202,9 @@ def chat():
     data = request.json
     user_message = data.get('message')
     
-    # Otomatik izleme ile çağır
+    # Otomatik izleme ile çağırın
     response = openai_client.chat_completion(
-        model='gpt-4',
+        model='gpt-4.1',
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1216,7 +1216,7 @@ def chat():
     })
 ```
 
-3. **AI metriklerini sorgulama:**
+3. **AI metriklerini sorgulayın:**
 
 ```kusto
 // Total AI spend over time
@@ -1250,13 +1250,13 @@ traces
     AvgCostPerRequest = avg(Cost)
 ```
 
-**✅ Başarı Ölçütleri:**
+**✅ Başarı Kriterleri:**
 - ✅ Her OpenAI çağrısı otomatik olarak izleniyor
-- ✅ Token kullanımı ve maliyetler görünür
+- ✅ Token kullanımı ve maliyetleri görünür
 - ✅ Gecikme izleniyor
-- ✅ Bütçe uyarıları ayarlanabiliyor
+- ✅ Bütçe uyarıları ayarlanabilir
 
-**Süre**: 35-45 dakika
+**Zaman**: 35-45 dakika
 
 ---
 
@@ -1280,7 +1280,7 @@ from opencensus.trace.samplers import AdaptiveSampler
 sampler = AdaptiveSampler()
 ```
 
-**Bicep içinde:**
+**Bicep'te:**
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -1291,7 +1291,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 }
 ```
 
-### Veri Saklama Süresi
+### Veri Saklama
 
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
@@ -1306,7 +1306,7 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 ### Aylık Maliyet Tahminleri
 
 | Veri Hacmi | Saklama Süresi | Aylık Maliyet |
-|------------|----------------|---------------|
+|-------------|-----------|--------------|
 | 1 GB/ay | 30 gün | ~$2-5 |
 | 5 GB/ay | 30 gün | ~$10-15 |
 | 10 GB/ay | 90 gün | ~$25-40 |
@@ -1322,21 +1322,21 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 
 Anlayışınızı test edin:
 
-- [ ] **S1**: AZD, Application Insights'ı nasıl sağlar?
-  - **C**: Bicep şablonları aracılığıyla otomatik olarak `infra/core/monitoring.bicep` içinde
+- [ ] **Q1**: AZD Application Insights'ı nasıl sağlar?
+  -   - **A**: Bicep şablonları aracılığıyla otomatik olarak `infra/core/monitoring.bicep` içinde
 
-- [ ] **S2**: Hangi ortam değişkeni Application Insights'ı etkinleştirir?
-  - **C**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
+- [ ] **Q2**: Application Insights'ı etkinleştiren çevresel değişken hangisidir?
+  -   - **A**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **S3**: Üç ana telemetri türü nelerdir?
-  - **C**: Requests (HTTP çağrıları), Dependencies (harici çağrılar), Exceptions (hatalar)
+- [ ] **Q3**: Üç ana telemetri türü nelerdir?
+  -   - **A**: İstekler (HTTP çağrıları), Bağımlılıklar (harici çağrılar), İstisnalar (hatalar)
 
 **Uygulamalı Doğrulama:**
 ```bash
-# Application Insights'ın yapılandırılmış olup olmadığını kontrol edin
+# Application Insights'ın yapılandırılmış olup olmadığını kontrol et
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Telemetri verilerinin aktığını doğrulayın
+# Telemetri akışını doğrula
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1349,14 +1349,14 @@ az monitor app-insights metrics show \
 
 Anlayışınızı test edin:
 
-- [ ] **S1**: Özel iş olaylarını nasıl takip edersiniz?
-  - **C**: `custom_dimensions` ile logger kullanarak veya `TelemetryClient.track_event()` ile
+- [ ] **Q1**: Özel iş olaylarını nasıl izlersiniz?
+  -   - **A**: Logger'ı `custom_dimensions` ile kullanın veya `TelemetryClient.track_event()`'i kullanın
 
-- [ ] **S2**: Olaylar ve metrikler arasındaki fark nedir?
-  - **C**: Olaylar ayrı ayrı meydana gelen olaylardır, metrikler sayısal ölçümlerdir
+- [ ] **Q2**: Olaylar ile metrikler arasındaki fark nedir?
+  -   - **A**: Olaylar ayrı gerçekleşimlerdir, metrikler sayısal ölçümlerdir
 
-- [ ] **S3**: Servisler arasında telemetriyi nasıl ilişkilendirirsiniz?
-  - **C**: Application Insights otomatik olarak ilişkilendirme için `operation_Id` kullanır
+- [ ] **Q3**: Hizmetler arasında telemetriyi nasıl ilişkilendirirsiniz?
+  -   - **A**: Application Insights ilişkilendirme için otomatik olarak `operation_Id` kullanır
 
 **Uygulamalı Doğrulama:**
 ```kusto
@@ -1372,14 +1372,14 @@ traces
 
 Anlayışınızı test edin:
 
-- [ ] **S1**: Örnekleme (sampling) nedir ve neden kullanılır?
-  - **C**: Örnekleme, yalnızca bir yüzdesini yakalayarak veri hacmini (ve maliyeti) azaltır
+- [ ] **Q1**: Örnekleme nedir ve neden kullanılır?
+  -   - **A**: Örnekleme, sadece telemetrinin bir yüzdesini yakalayarak veri hacmini (ve maliyeti) azaltır
 
-- [ ] **S2**: Uyarıları nasıl kurarsınız?
-  - **C**: Application Insights metriklerine dayalı olarak Bicep veya Azure Portal'da metrik uyarıları kullanın
+- [ ] **Q2**: Uyarıları nasıl kurarsınız?
+  -   - **A**: Application Insights metriklerine dayalı olarak Bicep veya Azure Portal'da metrik uyarıları kullanın
 
-- [ ] **S3**: Log Analytics ile Application Insights arasındaki fark nedir?
-  - **C**: Application Insights verileri Log Analytics çalışma alanında depolar; App Insights uygulamaya özel görünümler sağlar
+- [ ] **Q3**: Log Analytics ile Application Insights arasındaki fark nedir?
+  -   - **A**: Application Insights verileri Log Analytics çalışma alanında depolar; App Insights uygulamaya özgü görünümler sağlar
 
 **Uygulamalı Doğrulama:**
 ```bash
@@ -1396,7 +1396,7 @@ az monitor app-insights component show \
 
 ### ✅ YAPIN:
 
-1. **Korelasyon kimlikleri kullanın**
+1. **Korelasyon ID'leri kullanın**
    ```python
    logger.info('Processing order', extra={
        'custom_dimensions': {
@@ -1413,10 +1413,10 @@ az monitor app-insights component show \
 
 3. **Yapılandırılmış günlükleme kullanın**
    ```python
-   # ✅ İYİ: Yapılandırılmış
+   # ✅ İYİ: Yapısal
    logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
    
-   # ❌ KÖTÜ: Yapılandırılmamış
+   # ❌ KÖTÜ: Yapısal olmayan
    logger.info(f'User 123 signed up')
    ```
 
@@ -1425,11 +1425,11 @@ az monitor app-insights component show \
    # Veritabanı çağrılarını, HTTP isteklerini vb. otomatik olarak izleyin.
    ```
 
-5. **Dağıtımlar sırasında Canlı Metrikleri kullanın**
+5. **Dağıtımlar sırasında Live Metrics kullanın**
 
 ### ❌ YAPMAYIN:
 
-1. **Hassas verileri günlüğe kaydetmeyin**
+1. **Hassas verileri kaydetmeyin**
    ```python
    # ❌ KÖTÜ
    logger.info(f'Login: {username}:{password}')
@@ -1462,16 +1462,16 @@ az monitor app-insights component show \
 # Bağlantı dizesinin ayarlandığını kontrol edin
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Uygulama günlüklerini Azure Monitor aracılığıyla kontrol edin
+# Azure Monitor aracılığıyla uygulama günlüklerini kontrol edin
 azd monitor --logs
 
-# Veya Container Apps için Azure CLI'yi kullanın:
+# Ya da Container Apps için Azure CLI'yi kullanın:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
 **Çözüm:**
 ```bash
-# Container App içindeki bağlantı dizesini doğrulayın
+# Container App'te bağlantı dizesini doğrulayın
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1495,7 +1495,7 @@ az monitor app-insights metrics show \
 **Çözüm:**
 - Örnekleme oranını düşürün
 - Saklama süresini azaltın
-- Ayrıntılı (verbose) günlüklemeyi kaldırın
+- Ayrıntılı günlüklemeyi kaldırın
 
 ---
 
@@ -1503,42 +1503,42 @@ az monitor app-insights metrics show \
 
 ### Resmi Dokümantasyon
 - [Application Insights Genel Bakış](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Python için Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
+- [Application Insights için Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
 - [Kusto Sorgu Dili](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
 - [AZD İzleme](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
-### Bu Kursta Sonraki Adımlar
-- ← Önceki: [Ön Kontroller](preflight-checks.md)
+### Bu Kurstaki Sonraki Adımlar
+- ← Önceki: [Preflight Checks](preflight-checks.md)
 - → Sonraki: [Dağıtım Kılavuzu](../chapter-04-infrastructure/deployment-guide.md)
-- 🏠 [Kurs Ana Sayfası](../../README.md)
+- 🏠 [Kurs Anasayfası](../../README.md)
 
 ### İlgili Örnekler
-- [Azure OpenAI Örneği](../../../../examples/azure-openai-chat) - AI telemetri
-- [Mikroservisler Örneği](../../../../examples/microservices) - Dağıtık izleme
+- [Microsoft Foundry Models Örneği](../../../../examples/azure-openai-chat) - AI telemetrisi
+- [Mikroservis Örneği](../../../../examples/microservices) - Dağıtık izleme
 
 ---
 
 ## Özet
 
 **Şunları öğrendiniz:**
-- ✅ AZD ile Application Insights'ın otomatik sağlanması
+- ✅ AZD ile otomatik Application Insights oluşturma
 - ✅ Özel telemetri (olaylar, metrikler, bağımlılıklar)
 - ✅ Mikroservisler arasında dağıtık izleme
 - ✅ Canlı metrikler ve gerçek zamanlı izleme
 - ✅ Uyarılar ve panolar
-- ✅ Yapay Zeka/LLM uygulama izleme
+- ✅ AI/LLM uygulama izleme
 - ✅ Maliyet optimizasyonu stratejileri
 
-**Ana Çıkarımlar:**
-1. **AZD izlemeyi otomatik olarak sağlar** - Elle yapılandırma gerekmez
+**Önemli Çıkarımlar:**
+1. **AZD izlemeyi otomatik olarak sağlar** - Manuel kurulum gerekmez
 2. **Yapılandırılmış günlükleme kullanın** - Sorgulamayı kolaylaştırır
-3. **İş olaylarını takip edin** - Sadece teknik metrikler değil
-4. **Yapay Zeka maliyetlerini izleyin** - Tokenleri ve harcamaları takip edin
-5. **Uyarılar oluşturun** - Tepkisel değil proaktif olun
-6. **Maliyetleri optimize edin** - Örnekleme ve saklama sınırlarını kullanın
+3. **İş olaylarını izleyin** - Sadece teknik metrikleri değil
+4. **Yapay zeka maliyetlerini izleyin** - Token kullanımını ve harcamaları takip edin
+5. **Uyarılar kurun** - Proaktif olun, reaktif olmayın
+6. **Maliyetleri optimize edin** - Örnekleme ve saklama sınırları kullanın
 
 **Sonraki Adımlar:**
-1. Pratik egzersizleri tamamlayın
+1. Uygulamalı alıştırmaları tamamlayın
 2. AZD projelerinize Application Insights ekleyin
 3. Ekibiniz için özel panolar oluşturun
 4. İnceleyin [Dağıtım Kılavuzu](../chapter-04-infrastructure/deployment-guide.md)
@@ -1546,6 +1546,6 @@ az monitor app-insights metrics show \
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Sorumluluk Reddi**:
-Bu belge, yapay zeka çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dildeki versiyonu esas ve yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumdan sorumlu değiliz.
+**Disclaimer**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için özen göstermemize rağmen, lütfen otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğinin farkında olun. Orijinal belge, kendi dilindeki otoritatif kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucunda ortaya çıkan herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

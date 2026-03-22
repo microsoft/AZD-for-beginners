@@ -1,20 +1,20 @@
-# Bölüm 5: Çok Ajanlı Yapay Zeka Çözümleri
+# Bölüm 5: Çok Ajanlı AI Çözümleri
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Süre**: 2-3 saat | **⭐ Zorluk**: İleri
+**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Süre**: 2-3 saat | **⭐ Karmaşıklık**: İleri düzey
 
 ---
 
 ## Genel Bakış
 
-Bu bölüm, gelişmiş çok ajanlı mimari desenlerini, ajan orkestrasyonunu ve karmaşık senaryolar için üretime hazır yapay zeka dağıtımlarını kapsar.
+Bu bölüm, gelişmiş çoklu ajan mimarisi desenlerini, ajan orkestrasyonunu ve karmaşık senaryolar için üretime hazır AI dağıtımlarını kapsar.
 
 ## Öğrenme Hedefleri
 
-Bu bölümü tamamladığınızda:
-- Çok ajanlı mimari desenlerini anlayın
-- Koordine edilmiş yapay zeka ajan sistemlerini dağıtın
+Bu bölümü tamamladığınızda, şunları öğreneceksiniz:
+- Çoklu ajan mimarisi desenlerini anlayın
+- Koordine edilmiş AI ajan sistemlerini dağıtın
 - Ajanlar arası iletişimi uygulayın
-- Üretime hazır çok ajanlı çözümler oluşturun
+- Üretime hazır çoklu ajan çözümleri oluşturun
 
 ---
 
@@ -22,65 +22,60 @@ Bu bölümü tamamladığınızda:
 
 | # | Ders | Açıklama | Süre |
 |---|--------|-------------|------|
-| 1 | [Retail Multi-Agent Solution](../../examples/retail-scenario.md) | Tam uygulama anlatımı | 90 dk |
-| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Ajan orkestrasyon stratejileri | 30 dk |
-| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | Tek tıklamayla dağıtım | 30 dk |
+| 1 | [Perakende Çoklu Ajan Çözümü](../../examples/retail-scenario.md) | Tam uygulama adım adım incelemesi | 90 dakika |
+| 2 | [Koordinasyon Desenleri](../chapter-06-pre-deployment/coordination-patterns.md) | Ajan orkestrasyon stratejileri | 30 dakika |
+| 3 | [ARM Şablon Dağıtımı](../../examples/retail-multiagent-arm-template/README.md) | Tek tıkla dağıtım | 30 dakika |
 
 ---
 
 ## 🚀 Hızlı Başlangıç
 
 ```bash
-# Perakende çok ajanlı çözümü dağıtın
-cd examples/retail-multiagent-arm-template
-./deploy.sh
-
-# Veya şablonu doğrudan kullanın
+# Seçenek 1: Bir şablondan dağıtım yap
 azd init --template agent-openai-python-prompty
+azd up
+
+# Seçenek 2: Bir ajan manifestinden dağıtım yap (azure.ai.agents uzantısı gerekir)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
----
-
-## 🤖 Çok Ajanlı Mimari
-
-```
-┌──────────────────────────────────────────────────────────────┐
-│                    Orchestrator Agent                         │
-│              (Routes requests, manages workflow)              │
-└────────────────────┬─────────────────┬───────────────────────┘
-                     │                 │
-         ┌───────────▼───────┐ ┌───────▼───────────┐
-         │  Customer Agent   │ │  Inventory Agent  │
-         │  (User queries,   │ │  (Stock levels,   │
-         │   preferences)    │ │   orders)         │
-         └───────────────────┘ └───────────────────┘
-```
+> **Hangi yaklaşım?** Use `azd init --template` to start from a working sample. Use `azd ai agent init` when you have your own agent manifest. See the [AZD AI CLI referansı](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full details.
 
 ---
 
-## 🎯 Öne Çıkan Çözüm: Perakende Çok Ajanlı Çözümü
+## 🤖 Çoklu Ajan Mimarisi
 
-[Perakende Çok Ajanlı Çözüm](../../examples/retail-scenario.md) şunları gösterir:
+```mermaid
+graph TD
+    Orchestrator[Orkestratör Ajanı<br/>İstekleri yönlendirir, iş akışını yönetir] --> Customer[Müşteri Ajanı<br/>Kullanıcı sorguları, tercihleri]
+    Orchestrator --> Inventory[Envanter Ajanı<br/>Stok seviyeleri, siparişler]
+```
+---
 
-- **Müşteri Ajanı**: Kullanıcı etkileşimleri ve tercihleriyle ilgilenir
+## 🎯 Öne Çıkan Çözüm: Perakende Çoklu Ajan
+
+The [Perakende Çoklu Ajan Çözümü](../../examples/retail-scenario.md) aşağıdakileri gösterir:
+
+- **Müşteri Ajanı**: Kullanıcı etkileşimlerini ve tercihlerini yönetir
 - **Envanter Ajanı**: Stok ve sipariş işlemlerini yönetir
-- **Orkestratör**: Ajanlar arasında koordinasyon sağlar
+- **Orkestratör**: Ajanlar arasındaki koordinasyonu sağlar
 - **Paylaşılan Bellek**: Ajanlar arası bağlam yönetimi
 
 ### Kullanılan Servisler
 
 | Servis | Amaç |
 |---------|---------|
-| Azure OpenAI | Dil anlama |
+| Microsoft Foundry Models | Dil anlama |
 | Azure AI Search | Ürün kataloğu |
-| Cosmos DB | Ajan durumu ve belleği |
+| Cosmos DB | Ajan durumu ve bellek |
 | Container Apps | Ajan barındırma |
 | Application Insights | İzleme |
 
 ---
 
-## 🔗 Navigasyon
+## 🔗 Gezinme
 
 | Yön | Bölüm |
 |-----------|---------|
@@ -91,13 +86,13 @@ azd up
 
 ## 📖 İlgili Kaynaklar
 
-- [Yapay Zeka Ajanları Kılavuzu](../chapter-02-ai-development/agents.md)
-- [Üretim Yapay Zeka Uygulamaları](../chapter-08-production/production-ai-practices.md)
-- [Yapay Zeka Sorun Giderme](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [AI Ajanları Kılavuzu](../chapter-02-ai-development/agents.md)
+- [Üretim AI Uygulamaları](../chapter-08-production/production-ai-practices.md)
+- [AI Sorun Giderme](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Sorumluluk Reddi:
-Bu belge, yapay zeka çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belgenin kendi dilindeki versiyonu yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel bir insan çevirmeni tarafından yapılan çeviri önerilir. Bu çevirinin kullanımı sonucu ortaya çıkan herhangi bir yanlış anlama veya yanlış yorumdan sorumlu değiliz.
+**Sorumluluk Reddi**:
+Bu belge, yapay zeka çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk konusunda özen göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belgenin ana dilindeki sürümü yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucunda ortaya çıkabilecek herhangi bir yanlış anlaşılma veya yanlış yorumdan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

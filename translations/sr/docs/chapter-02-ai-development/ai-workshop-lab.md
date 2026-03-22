@@ -34,7 +34,7 @@ By the end of this workshop, you will be able to:
 
 ### Azure Resources
 - Azure subscription with contributor access
-- Access to Azure OpenAI services (or ability to request access)
+- Access to Microsoft Foundry Models services (or ability to request access)
 - Resource group creation permissions
 
 ### Knowledge Prerequisites
@@ -78,7 +78,7 @@ azure-search-openai-demo/
 │   ├── main.bicep          # Main infrastructure template
 │   ├── main.parameters.json # Environment parameters
 │   └── modules/            # Reusable Bicep modules
-│       ├── openai.bicep    # Azure OpenAI configuration
+│       ├── openai.bicep    # Microsoft Foundry Models configuration
 │       ├── search.bicep    # Cognitive Search setup
 │       └── webapp.bicep    # Web app configuration
 ├── app/                    # Application code
@@ -104,7 +104,7 @@ cat infra/main.bicep
 ```
 
 **Key AI patterns to identify:**
-- Azure OpenAI service provisioning
+- Microsoft Foundry Models service provisioning
 - Cognitive Search integration
 - Secure key management
 - Network security configurations
@@ -142,7 +142,7 @@ azd up
 ```
 
 **What happens during `azd up`:**
-- ✅ Provisions Azure OpenAI service
+- ✅ Provisions Microsoft Foundry Models service
 - ✅ Creates Cognitive Search service
 - ✅ Sets up App Service for the web application
 - ✅ Configures networking and security
@@ -180,13 +180,13 @@ azd show --output json | grep "webAppUrl"
 
 **Debugging commands:**
 ```bash
-# Провери променљиве окружења
+# Проверите променљиве окружења
 azd env get-values
 
-# Погледај логове распоређивања
+# Погледајте логове распоређивања
 az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 
-# Провери статус распоређивања OpenAI
+# Проверите статус распоређивања OpenAI
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
@@ -196,10 +196,10 @@ az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-
 
 1. **Update the OpenAI model:**
 ```bash
-# Пређите на други модел (ако је доступан у вашем региону)
-azd env set AZURE_OPENAI_MODEL gpt-4
+# Пређите на други модел (ако је доступан у вашој регији)
+azd env set AZURE_OPENAI_MODEL gpt-4.1
 
-# Поново примените нову конфигурацију
+# Поново распоредите користећи нову конфигурацију
 azd deploy
 ```
 
@@ -233,7 +233,7 @@ azd env new myai-production
 
 2. **Set production-specific parameters:**
 ```bash
-# У продукцији се обично користе SKU-ови вишег нивоа
+# У продукцији се обично користе SKU-ови вишег ранга
 azd env set AZURE_OPENAI_SKU S0
 azd env set AZURE_SEARCH_SKU standard
 
@@ -265,7 +265,7 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 
 1. **Review the security configuration in your template:**
 ```bash
-# Потражите конфигурацију Key Vault-а и Managed Identity-а
+# Потражите конфигурацију складишта кључева и управљеног идентитета
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
@@ -306,7 +306,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 1. **Configure Application Insights:**
 ```bash
-# Application Insights треба да буде аутоматски конфигурисан
+# Application Insights би требало да буде аутоматски конфигурисан
 # Проверите конфигурацију:
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
@@ -376,7 +376,7 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 mkdir my-ai-app-azd
 cd my-ai-app-azd
 
-# Иницијализуј АЗД шаблон
+# Иницијализуј AZD шаблон
 azd init --template minimal
 ```
 
@@ -452,7 +452,7 @@ output name string = openAIAccount.name
 **Challenge**: Create an AZD template for a document processing AI app.
 
 **Requirements:**
-- Azure OpenAI for content analysis
+- Microsoft Foundry Models for content analysis
 - Document Intelligence for OCR
 - Storage Account for document uploads
 - Function App for processing logic
@@ -471,10 +471,10 @@ output name string = openAIAccount.name
 **Symptoms:** Deployment fails with quota error
 **Solutions:**
 ```bash
-# Проверите тренутне квоте
+# Провери тренутне квоте
 az cognitiveservices usage list --location eastus
 
-# Затражите повећање квоте или покушајте у другој регији
+# Захтевај повећање квоте или пробај другу регију
 azd env set AZURE_LOCATION westus2
 azd up
 ```
@@ -483,10 +483,10 @@ azd up
 **Symptoms:** AI responses fail or model deployment errors
 **Solutions:**
 ```bash
-# Провери доступност модела по регионима
+# Провери доступност модела по регијама
 az cognitiveservices model list --location eastus
 
-# Ажурирај на доступан модел
+# Пребаци на доступан модел
 azd env set AZURE_OPENAI_MODEL gpt-35-turbo-16k
 azd deploy
 ```
@@ -495,10 +495,10 @@ azd deploy
 **Symptoms:** 403 Forbidden errors when calling AI services
 **Solutions:**
 ```bash
-# Провери додељивања улога
+# Проверите доделе улога
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Додај недостајуће улоге
+# Додајте недостајуће улоге
 az role assignment create \
   --assignee YOUR_PRINCIPAL_ID \
   --role "Cognitive Services OpenAI User" \
@@ -547,7 +547,7 @@ Navigate to Azure portal and create a dashboard with:
 
 2. **Set up alerts:**
 ```bash
-# Упозорење о високој стопи грешака
+# Упозорење за високу стопу грешака
 az monitor metrics alert create \
   --name "AI-App-High-Error-Rate" \
   --resource-group YOUR_RG \
@@ -593,7 +593,7 @@ You're tasked with creating a production-ready AI-powered customer service chatb
 
 **Functional Requirements:**
 - Web interface for customer interactions
-- Integration with Azure OpenAI for responses
+- Integration with Microsoft Foundry Models for responses
 - Document search capability using Cognitive Search
 - Integration with existing customer database
 - Multi-language support
@@ -626,11 +626,11 @@ You're tasked with creating a production-ready AI-powered customer service chatb
 
 ### Microsoft Documentation
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Azure OpenAI Service Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
+- [Microsoft Foundry Models Service Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
 - [Microsoft Foundry Documentation](https://learn.microsoft.com/azure/ai-studio/)
 
 ### Sample Templates
-- [Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
+- [Microsoft Foundry Models Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
 - [OpenAI Chat App Quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart)
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
@@ -640,38 +640,38 @@ You're tasked with creating a production-ready AI-powered customer service chatb
 - [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
 
 ## 🎓 Completion Certificate
-Честитамо! Завршили сте AI радионицу. Сада би требало да можете:
 
-- ✅ Претворити постојеће AI апликације у AZD шаблоне
-- ✅ Разместити продукционо-спремне AI апликације
-- ✅ Примeнити најбоље безбедносне праксе за AI радна оптерећења
-- ✅ Пратити и оптимизовати перформансе AI апликација
-- ✅ Решавати уобичајене проблеме при размештању
+Congratulations! You've completed the AI Workshop Lab. You should now be able to:
+- ✅ Претворите постојеће AI апликације у AZD шаблоне
+- ✅ Разместите AI апликације спремне за продукцију
+- ✅ Примените најбоље безбедносне праксе за AI радна оптерећења
+- ✅ Пратите и оптимизујте перформансе AI апликаacija
+- ✅ Решавајте уобичајене проблеме при размештању
 
 ### Следећи кораци
-1. Примените ове обрасце у својим AI пројектима
+1. Примените ове шаблоне на своје AI пројекте
 2. Поделите шаблоне са заједницом
-3. Придружите се Microsoft Foundry Discord-у за сталну подршку
+3. Придружите се Microsoft Foundry Discord-у ради континуиране подршке
 4. Истражите напредне теме као што су размештања у више региона
 
 ---
 
-**Повратне информације о радионици**: Помозите нам да побољшамо ову радионицу тако што ћете поделити своје искуство у [Microsoft Foundry Discord каналу #Azure](https://discord.gg/microsoft-azure).
+**Повратне информације о радионици**: Помозите нам да побољшамо ову радионицу тако што ћете поделити своје искуство у [Microsoft Foundry Discord #Azure каналу](https://discord.gg/microsoft-azure).
 
 ---
 
 **Навигација кроз поглавља:**
 - **📚 Почетна страница курса**: [AZD за почетнике](../../README.md)
-- **📖 Тренутно поглавље**: Поглавље 2 - Развој усмерен на AI
+- **📖 Текуће поглавље**: Поглавље 2 - Развој усмерен на AI
 - **⬅️ Претходно**: [Размештање AI модела](ai-model-deployment.md)
-- **➡️ Следеће**: [Најбоље праксе за AI у продукцији](production-ai-practices.md)
+- **➡️ Следеће**: [Најбоље праксе за продукциони AI](production-ai-practices.md)
 - **🚀 Следеће поглавље**: [Поглавље 3: Конфигурација](../chapter-03-configuration/configuration.md)
 
-**Треба помоћ?** Придружите се нашој заједници за подршку и дискусије о AZD и размештањима AI.
+**Треба помоћ?** Придружите се нашој заједници за подршку и дискусије о AZD-у и размештањима AI-а.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Одрицање одговорности**:
-Овај документ је преведен користећи услугу за превођење засновану на вештачкој интелигенцији [Co-op Translator](https://github.com/Azure/co-op-translator). Иако се трудимо да преводи буду тачни, имајте у виду да аутоматски преводи могу садржати грешке или нетачности. Изворни документ на свом оригиналном језику треба сматрати званичним извором. За критичне информације препоручује се професионални људски превод. Не сносимо одговорност за било каква неразумевања или погрешна тумачења настала услед коришћења овог превода.
+**Ограничење одговорности**:
+Овај документ је преведен помоћу услуге за превођење засноване на вештачкој интелигенцији [Co-op Translator](https://github.com/Azure/co-op-translator). Иако се трудимо да обезбедимо тачност, имајте у виду да аутоматизовани преводи могу садржати грешке или нетачности. Оригинални документ на његовом матичном језику треба сматрати ауторитативним извором. За критичне информације препоручује се професионални превод од стране људског преводиоца. Не сносимо одговорност за било какве неспоразуме или погрешна тумачења која произилазе из употребе овог превода.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

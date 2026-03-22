@@ -1,65 +1,117 @@
-# Mabadiliko - AZD For Beginners
+# Changelog - AZD For Beginners
 
-## Utangulizi
+## Introduction
 
-Mabadiliko haya yanaandika mabadiliko yote muhimu, masasisho, na maboresho kwenye ghala la AZD For Beginners. Tunafuata kanuni za utekelezaji wa matoleo ya semantiki na tunasimamia kumbukumbu hii ili kuwasaidia watumiaji kuelewa kile kilichobadilika kati ya matoleo.
+Hati hii ya mabadiliko inaandika mabadiliko yote muhimu, masasisho, na maboresho kwenye ghala la AZD For Beginners. Tunafuata kanuni za semantic versioning na tunahifadhi kumbukumbu hii kusaidia watumiaji kuelewa kilichobadilika kati ya toleo.
 
-## Malengo ya Kujifunza
+## Learning Goals
 
-Kwa kupitia kumbukumbu ya mabadiliko haya, utaweza:
-- Kubaki umefahamishwa kuhusu vipengele vipya na nyongeza za maudhui
+Kwa kupitia hati ya mabadiliko hii, utak:
+- Kuwa na taarifa kuhusu vipengele vipya na nyongeza za yaliyomo
 - Kuelewa maboresho yaliyofanywa kwenye nyaraka zilizopo
-- Kufuatilia utangazaji wa hitilafu na marekebisho ili kuhakikisha usahihi
-- Kufuatilia maendeleo ya vifaa vya kujifunzia kwa muda
+- Kufuatilia marekebisho ya hitilafu na marekebisho ili kuhakikisha usahihi
+- Kufuatilia mabadiliko ya nyenzo za kujifunzia kwa muda
 
-## Matokeo ya Kujifunza
+## Learning Outcomes
 
-Baada ya kupitia sehemu za kumbukumbu ya mabadiliko, utaweza:
-- Kutambua maudhui na rasilimali mpya za kujifunzia
-- Kuelewa ni sehemu zipi zilizosasishwa au kuboreshwa
-- Kupanga njia yako ya kujifunzia kulingana na vifaa vya hivi karibuni
-- Kutoa maoni na mapendekezo kwa maboresho ya baadaye
+Baada ya kupitia rekodi za mabadiliko, utaweza:
+- Kutambua yaliyomo na rasilimali mpya zinazopewa kujifunzia
+- Kuelewa ni sehemu gani zimeboreshwa au kusasishwa
+- Kupanga njia yako ya kujifunzia kulingana na nyenzo za hivi karibuni
+- Kuchangia mrejesho na mapendekezo kwa maboresho ya baadaye
 
-## Historia ya Matoleo
+## Version History
+
+### [v3.18.0] - 2026-03-16
+
+#### AZD AI CLI Commands, Content Validation & Template Expansion
+**Toleo hili linaongeza ufunuo wa amri za `azd ai`, `azd extension`, na `azd mcp` katika sura zote zinazohusiana na AI, linafufua viungo vilivyovunjika na nambari zilizotenguka katika agents.md, linasasisha jopo la majibu ya haraka (cheat sheet), na kuboresha sehemu ya Example Templates kwa maelezo yaliothibitishwa na templeti mpya za Azure AI AZD.**
+
+#### Added
+- **🤖 AZD AI CLI coverage** across 7 files (previously only in Chapter 8):
+  - `docs/chapter-01-foundation/azd-basics.md` — New "Extensions and AI Commands" section introducing `azd extension`, `azd ai agent init`, and `azd mcp`
+  - `docs/chapter-02-ai-development/agents.md` — Option 4: `azd ai agent init` with comparison table (template vs manifest approach)
+  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — "AZD Extensions for Foundry" and "Agent-First Deployment" subsections
+  - `docs/chapter-05-multi-agent/README.md` — Quick Start now shows both template and manifest-based deployment paths
+  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — Deploy section now includes `azd ai agent init` option
+  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — "AZD AI Extension Commands for Diagnostics" subsection
+  - `resources/cheat-sheet.md` — New "AI & Extensions Commands" section with `azd extension`, `azd ai agent init`, `azd mcp`, and `azd infra generate`
+- **📦 New AZD AI example templates** in `microsoft-foundry-integration.md`:
+  - **azure-search-openai-demo-csharp** — .NET RAG chat with Blazor WebAssembly, Semantic Kernel, and voice chat support
+  - **azure-search-openai-demo-java** — Java RAG chat using Langchain4J with ACA/AKS deployment options
+  - **contoso-creative-writer** — Multi-agent creative writing app using Azure AI Agent Service, Bing Grounding, and Prompty
+  - **serverless-chat-langchainjs** — Serverless RAG using Azure Functions + LangChain.js + Cosmos DB with Ollama local dev support
+  - **chat-with-your-data-solution-accelerator** — Enterprise RAG accelerator with admin portal, Teams integration, and PostgreSQL/Cosmos DB options
+  - **azure-ai-travel-agents** — Multi-agent MCP orchestration reference app with servers in .NET, Python, Java, and TypeScript
+  - **azd-ai-starter** — Minimal Azure AI infrastructure Bicep starter template
+  - **🔗 Awesome AZD AI Gallery link** — Reference to the [Mkusanyiko wa awesome-azd wa AI](https://azure.github.io/awesome-azd/?tags=ai) (80+ templates)
+
+#### Fixed
+- **🔗 agents.md navigation**: Previous/Next links now match Chapter 2 README lesson order (Microsoft Foundry Integration → Agents → AI Model Deployment)
+- **🔗 agents.md broken links**: `production-ai-practices.md` corrected to `../chapter-08-production/production-ai-practices.md` (3 occurrences)
+- **📦 agents.md deprecated code**: Replaced `opencensus` with `azure-monitor-opentelemetry` + OpenTelemetry SDK
+- **🐛 agents.md invalid API**: Moved `max_tokens` from `create_agent()` to `create_run()` as `max_completion_tokens`
+- **🔢 agents.md token counting**: Replaced rough `len//4` estimate with `tiktoken.encoding_for_model()`
+- **azure-search-openai-demo**: Corrected services from "Cognitive Search + App Service" to "Azure AI Search + Azure Container Apps" (default host changed Oct 2024)
+- **contoso-chat**: Updated description to reference Azure AI Foundry + Prompty, matching the repo's actual title and tech stack
+
+#### Removed
+- **ai-document-processing**: Removed non-functional template reference (repo not publicly accessible as an AZD template)
+
+#### Improved
+- **📝 agents.md exercises**: Exercise 1 now shows expected output and `azd monitor` step; Exercise 2 includes full `FunctionTool` registration code; Exercise 3 replaces vague guidance with concrete `prepdocs.py` commands
+- **📚 agents.md resources**: Updated documentation links to current Azure AI Agent Service docs and quickstart
+- **📋 agents.md Next Steps table**: Added AI Workshop Lab link for complete chapter coverage
+
+#### Files Updated
+- `docs/chapter-01-foundation/azd-basics.md`
+- `docs/chapter-02-ai-development/agents.md`
+- `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
+- `docs/chapter-05-multi-agent/README.md`
+- `docs/chapter-06-pre-deployment/coordination-patterns.md`
+- `docs/chapter-07-troubleshooting/ai-troubleshooting.md`
+- `resources/cheat-sheet.md`
+
+---
 
 ### [v3.17.0] - 2026-02-05
 
-#### Kuboresha Urambazaji wa Kozi
-**Toleo hili linaboreshwa urambazaji wa sura za README.md kwa muundo wa jedwali ulioboreshwa.**
+#### Course Navigation Enhancement
+**Toleo hili linaboreshwa kwa urambazaji wa README.md wa sura kwa muundo ulioimarishwa wa jedwali.**
 
-#### Imebadilishwa
-- **Jedwali la Ramani ya Kozi**: Limeboreshwa kwa viungo vya moja kwa moja vya somo, makadirio ya muda, na viwango vya ugumu
-- **Usafishaji wa Folda**: Folda za zamani zisizohitajika ziliondolewa (deployment/, getting-started/, pre-deployment/, troubleshooting/)
-- **Uthibitishaji wa Viungo**: Viungo vya ndani 21+ kwenye jedwali la Ramani ya Kozi vimehakikiwa
+#### Changed
+- **Course Map Table**: Enhanced with direct lesson links, duration estimates, and complexity ratings
+- **Folder Cleanup**: Removed redundant old folders (deployment/, getting-started/, pre-deployment/, troubleshooting/)
+- **Link Validation**: All 21+ internal links in Course Map table verified
 
 ### [v3.16.0] - 2026-02-05
 
-#### Maboresho ya Majina ya Bidhaa
-**Toleo hili linasasisha rejea za bidhaa kwa chapa ya hivi sasa ya Microsoft.**
+#### Product Name Updates
+**Toleo hili linasasisha marejeo ya bidhaa kwa uandishi wa sasa wa chapa ya Microsoft.**
 
-#### Imebadilishwa
-- **Azure AI Foundry → Microsoft Foundry**: Marejeo yote yamesasishwa katika mafaili yasiyo ya tafsiri
-- **Azure AI Agent Service → Foundry Agents**: Jina la huduma limesasishwa kuakisi chapa ya sasa
+#### Changed
+- **Microsoft Foundry → Microsoft Foundry**: All references updated across non-translation files
+- **Azure AI Agent Service → Foundry Agents**: Service name updated to reflect current branding
 
-#### Mafaili Yaliyosasishwa
-- `README.md` - Sehemu kuu ya kuingia ya kozi
-- `changelog.md` - Historia ya matoleo
-- `course-outline.md` - Muundo wa kozi
-- `docs/chapter-02-ai-development/agents.md` - Mwongozo wa maajenti wa AI
-- `examples/README.md` - Nyaraka za mifano
-- `workshop/README.md` - Sehemu ya warsha
-- `workshop/docs/index.md` - Kielekezi cha warsha
-- `workshop/docs/instructions/*.md` - Mafaili yote ya maelekezo ya warsha
+#### Files Updated
+- `README.md` - Main course landing page
+- `changelog.md` - Version history
+- `course-outline.md` - Course structure
+- `docs/chapter-02-ai-development/agents.md` - AI agents guide
+- `examples/README.md` - Examples documentation
+- `workshop/README.md` - Workshop landing page
+- `workshop/docs/index.md` - Workshop index
+- `workshop/docs/instructions/*.md` - All workshop instruction files
 
 ---
 
 ### [v3.15.0] - 2026-02-05
 
-#### Marekebisho Makubwa ya Hazina: Majina ya Folda Kulingana na Sura
-**Toleo hili linasanifu upya nyaraka katika folda maalum za sura kwa urambazaji wazi zaidi.**
+#### Major Repository Restructuring: Chapter-Based Folder Names
+**Toleo hili linapanga upya nyaraka kwa kuunda folda maalum za sura kwa urambazaji wazi zaidi.**
 
-#### Majina ya Folda Yaliyobadilishwa
-Folda za zamani zimebadilishwa na folda zilizo na nambari za sura:
+#### Folder Renames
+Old folders have been replaced with chapter-numbered folders:
 - `docs/getting-started/` → `docs/chapter-01-foundation/` + `docs/chapter-03-configuration/`
 - `docs/microsoft-foundry/` → `docs/chapter-02-ai-development/` + `docs/chapter-08-production/`
 - `docs/deployment/` → `docs/chapter-04-infrastructure/`
@@ -67,8 +119,8 @@ Folda za zamani zimebadilishwa na folda zilizo na nambari za sura:
 - `docs/troubleshooting/` → `docs/chapter-07-troubleshooting/`
 - Added new: `docs/chapter-05-multi-agent/`
 
-#### Uhamisho wa Mafaili
-| Faili | From | To |
+#### File Migrations
+| File | From | To |
 |------|------|---|
 | azd-basics.md | getting-started/ | chapter-01-foundation/ |
 | installation.md | getting-started/ | chapter-01-foundation/ |
@@ -85,939 +137,938 @@ Folda za zamani zimebadilishwa na folda zilizo na nambari za sura:
 | All pre-deployment files | pre-deployment/ | chapter-06-pre-deployment/ |
 | All troubleshooting files | troubleshooting/ | chapter-07-troubleshooting/ |
 
-#### Imeongezwa
-- **📚 Faili za README za Sura**: Imeunda README.md katika kila folda ya sura yenye:
-  - Malengo ya kujifunza na muda
-  - Jedwali la somo lenye maelezo
-  - Amri za kuanza haraka
-  - Urambazaji kwenda sura nyingine
+#### Added
+- **📚 Chapter README files**: Created README.md in each chapter folder with:
+  - Learning objectives and duration
+  - Lesson table with descriptions
+  - Quick start commands
+  - Navigation to other chapters
 
-#### Imebadilishwa
-- **🔗 Imeupdate viungo vyote vya ndani**: Njia 78+ zimesasishwa katika nyaraka zote
-- **🗺️ README.md Kuu**: Imesasisha Ramani ya Kozi kwa muundo wa sura mpya
-- **📝 examples/README.md**: Imeboresha rejea za kuvuka kwenda folda za sura
+#### Changed
+- **🔗 Updated all internal links**: 78+ paths updated across all documentation files
+- **🗺️ Main README.md**: Updated Course Map with new chapter structure
+- **📝 examples/README.md**: Updated cross-references to chapter folders
 
-#### Imetolewa
-- Muundo wa folda wa zamani (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/)
+#### Removed
+- Old folder structure (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/)
 
 ---
 
 ### [v3.14.0] - 2026-02-05
 
-#### Marekebisho ya Hazina: Urambazaji wa Sura
+#### Repository Restructuring: Chapter Navigation
 **Toleo hili liliongeza faili za README za urambazaji wa sura (zilifutwa na v3.15.0).**
 
 ---
 
 ### [v3.13.0] - 2026-02-05
 
-#### Mwongozo Mpya wa Maajenti wa AI
-**Toleo hili linaongeza mwongozo kamili wa kutekeleza maajenti wa AI kwa kutumia Azure Developer CLI.**
+#### New AI Agents Guide
+**Toleo hili linaongeza mwongozo kamili wa utumikishaji wa maajenti wa AI kwa kutumia Azure Developer CLI.**
 
-#### Imeongezwa
-- **🤖 docs/microsoft-foundry/agents.md**: Mwongozo kamili unaoshughulikia:
-  - Nini maajenti ya AI ni na jinsi yanavyotofautiana na chatbots
-  - Violezo vitatu vya kuanza haraka vya maajenti (Foundry Agents, Prompty, RAG)
-  - Mifumo ya usanifu wa maajenti (maajenti mmoja, RAG, maajenti wengi)
-  - Usanidi wa zana na urekebishaji
-  - Ufuatiliaji na ufuatiliaji wa metriksi
-  - Mambo ya gharama na uboreshaji
-  - Masingizio ya kawaida ya utatuzi matatizo
-  - Mazoezi matatu ya vitendo pamoja na vigezo vya mafanikio
+#### Added
+- **🤖 docs/microsoft-foundry/agents.md**: Complete guide covering:
+  - What AI agents are and how they differ from chatbots
+  - Three quick-start agent templates (Foundry Agents, Prompty, RAG)
+  - Agent architecture patterns (single agent, RAG, multi-agent)
+  - Tool configuration and customization
+  - Monitoring and metrics tracking
+  - Cost considerations and optimization
+  - Common troubleshooting scenarios
+  - Three hands-on exercises with success criteria
 
-#### Muundo wa Yaliyomo
-- **Utangulizi**: Dhana za maajenti kwa waanzilishi
-- **Anza Haraka**: Tekeleza maajenti kwa `azd init --template get-started-with-ai-agents`
-- **Mifumo ya Usanifu**: Michoro ya kuona ya mifumo ya maajenti
-- **Usanidi**: Usanidi wa zana na vigezo vya mazingira
-- **Ufuatiliaji**: Uunganisho wa Application Insights
-- **Mazoezi**: Kujifunza kwa vitendo kwa hatua (20-45 dakika kila mojawapo)
+#### Content Structure
+- **Introduction**: Agent concepts for beginners
+- **Quick Start**: Deploy agents with `azd init --template get-started-with-ai-agents`
+- **Architecture Patterns**: Visual diagrams of agent patterns
+- **Configuration**: Tool setup and environment variables
+- **Monitoring**: Application Insights integration
+- **Exercises**: Progressive hands-on learning (20-45 minutes each)
 
 ---
 
 ### [v3.12.0] - 2026-02-05
 
-#### Sasisho la Mazingira ya DevContainer
-**Toleo hili linasasisha usanidi wa kontena la maendeleo kwa zana za kisasa na chaguo mbadala bora kwa uzoefu wa kujifunza AZD.**
+#### DevContainer Environment Update
+**Toleo hili linasasisha usanidi wa kontena ya maendeleo kwa zana za kisasa na chaguo bora kwa uzoefu wa kujifunzia AZD.**
 
-#### Imebadilishwa
-- **🐳 Picha ya Msingi**: Imesasishwa kutoka `python:3.12-bullseye` hadi `python:3.12-bookworm` (Debian thabiti ya hivi karibuni)
-- **📛 Jina la Kontena**: Imebadilishwa kutoka "Python 3" hadi "AZD for Beginners" kwa uwazi
+#### Changed
+- **🐳 Base Image**: Updated from `python:3.12-bullseye` to `python:3.12-bookworm` (latest Debian stable)
+- **📛 Container Name**: Renamed from "Python 3" to "AZD for Beginners" for clarity
 
-#### Imeongezwa
+#### Added
 - **🔧 Vipengele Vipya vya Dev Container**:
-  - `azure-cli` pamoja na msaada wa Bicep umewezeshwa
-  - `node:20` (toleo la LTS kwa templet za AZD)
-  - `github-cli` kwa usimamizi wa templet
-  - `docker-in-docker` kwa utekelezaji wa container app
+  - `azure-cli` with Bicep support enabled
+  - `node:20` (toleo la LTS kwa tempeletti za AZD)
+  - `github-cli` kwa usimamizi wa templeti
+  - `docker-in-docker` kwa utekelezaji wa programu za kontena
 
-- **🔌 Upelekaji Bandari**: Bandari zilizowekwa tayari kwa maendeleo yanayotumika mara kwa mara:
-  - 8000 (Mtazamo wa MkDocs)
-  - 3000 (Tovuti za wavuti)
+- **🔌 Kupeleka Bandari (Port Forwarding)**: Bandari zilizosanikishwa awali kwa maendeleo ya kawaida:
+  - 8000 (mapitio ya MkDocs)
+  - 3000 (programu za wavuti)
   - 5000 (Python Flask)
   - 8080 (API)
 
-- **🧩 Extensions Mpya za VS Code**:
-  - `ms-python.vscode-pylance` - Enhanced Python IntelliSense
-  - `ms-azuretools.vscode-azurefunctions` - Azure Functions support
-  - `ms-azuretools.vscode-docker` - Docker support
-  - `ms-azuretools.vscode-bicep` - Bicep language support
-  - `ms-azure-devtools.azure-resource-groups` - Azure resource management
-  - `yzhang.markdown-all-in-one` - Markdown editing
-  - `DavidAnson.vscode-markdownlint` - Markdown linting
-  - `bierner.markdown-mermaid` - Mermaid diagram support
-  - `redhat.vscode-yaml` - YAML support (for azure.yaml)
-  - `eamodio.gitlens` - Git visualization
-  - `mhutchie.git-graph` - Git history
+- **🧩 Viongezeo Vipya vya VS Code**:
+  - `ms-python.vscode-pylance` - IntelliSense ya Python iliyoboreshwa
+  - `ms-azuretools.vscode-azurefunctions` - msaada wa Azure Functions
+  - `ms-azuretools.vscode-docker` - msaada wa Docker
+  - `ms-azuretools.vscode-bicep` - msaada wa lugha ya Bicep
+  - `ms-azure-devtools.azure-resource-groups` - usimamizi wa rasilimali za Azure
+  - `yzhang.markdown-all-in-one` - uhariri wa Markdown
+  - `DavidAnson.vscode-markdownlint` - ukaguzi wa Markdown (linting)
+  - `bierner.markdown-mermaid` - msaada wa michoro ya Mermaid
+  - `redhat.vscode-yaml` - msaada wa YAML (kwa azure.yaml)
+  - `eamodio.gitlens` - uonyesho wa Git
+  - `mhutchie.git-graph` - historia ya Git
 
-- **⚙️ Mipangilio ya VS Code**: Imeongeza mipangilio ya msingi kwa interpreter ya Python, kuunda umbizo wakati wa kuhifadhi, na kukata nafasi zisizohitajika
+- **⚙️ Mipangilio ya VS Code**: Imeongeza mipangilio za chaguo-msingi kwa tafsiri ya Python, ufomati wakati wa kuhifadhi, na kuondoa nafasi za ziada
 
-- **📦 requirements-dev.txt Imeboreshwa**:
-  - Imeongeza kiendelezi cha MkDocs minify
+- **📦 Imeboreshwa requirements-dev.txt**:
+  - Imeongeza plugin ya MkDocs minify
   - Imeongeza pre-commit kwa ubora wa msimbo
   - Imeongeza vifurushi vya Azure SDK (azure-identity, azure-mgmt-resource)
 
 #### Imerekebishwa
-- **Amri ya Baada ya-Kuunda**: Sasa inathibitisha usakinishaji wa AZD na Azure CLI wakati wa kuanzisha kontena
+- **Amri ya Post-Create**: Sasa inathibitisha usakinishaji wa AZD na Azure CLI wakati kontena inapoanza
 
 ---
 
 ### [v3.11.0] - 2026-02-05
 
-#### Urekebishaji wa README Rafiki kwa Waanzilishi
-**Toleo hili linaboresha sana README.md ili liwe rahisi kwa waanzilishi na linaongeza rasilimali muhimu kwa waendelezaji wa AI.**
+#### Uboreshaji wa README Urafiki kwa Waanzilishi
+**Toleo hili limeboresha kwa kiasi kikubwa README.md ili liwe rahisi zaidi kwa waanzilishi na linaongeza rasilimali muhimu kwa watengenezaji wa AI.**
 
 #### Imeongezwa
-- **🆚 Mlinganisho wa Azure CLI vs AZD**: Ufafanuzi wazi wa lini kutumia kila zana na mifano ya vitendo
-- **🌟 Viungo Bora vya AZD**: Viungo vya moja kwa moja kwenye maktaba ya templet za jamii na rasilimali za michango:
-  - [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) - 200+ ready-to-deploy templates
-  - [Submit a Template](https://github.com/Azure/awesome-azd/issues) - Community contribution
-- **🎯 Mwongozo wa Kuanzia Haraka**: Sehemu iliyo rahisishwa ya hatua 3 za kuanza (Sakinisha → Ingia → Tekeleza)
-- **📊 Jedwali la Urambazaji la Kulingana na Uzoefu**: Mwongozo wazi wa wapi pa kuanza kulingana na uzoefu wa msanidi programu
+- **🆚 Ulinganisho wa Azure CLI na AZD**: Ufafanuzi wazi wa wakati wa kutumia kila chombo pamoja na mifano ya vitendo
+- **🌟 Viungo Bora vya AZD**: Viungo vya moja kwa moja kwa jumba la templeti za jamii na rasilimali za mchango:
+  - [Galeria Bora ya AZD](https://azure.github.io/awesome-azd/) - tempuleti 200+ tayari kutumika
+  - [Wasilisha Templaiti](https://github.com/Azure/awesome-azd/issues) - mchango wa jamii
+- **🎯 Mwongozo wa Kuanzisha Haraka**: Sehemu ya kuanza kwa hatua 3 iliyorahisishwa (Sakinisha → Ingia → Weka)
+- **📊 Jedwali la Urambazaji Kulingana na Uzoefu**: Mwongozo wazi wa wapi pa kuanzia kulingana na uzoefu wa msanidi
 
 #### Imebadilishwa
-- **Muundo wa README**: Umepangwa upya kwa ufichaji wa hatua kwa hatua - taarifa muhimu kwanza
-- **Sehemu ya Utangulizi**: Imaandikwa upya kuelezea "The Magic of `azd up`" kwa waanzilishi wa kabisa
-- **Yaliyofanana Yaliyofutwa**: Imeondoa sehemu ya utatuzi ya picha zilizorudiwa
-- **Amri za Utatuzi**: Imerekebisha rejea ya `azd logs` kutumia `azd monitor --logs` sahihi
+- **Muundo wa README**: Imepangwa upya kwa kufichua hatua kwa taratibu - taarifa muhimu kwanza
+- **Sehemu ya Utangulizi**: Imeandikwa upya ili kuelezea "Uchawi wa `azd up`" kwa waanzilishi kabisa
+- **Yaliyotolewa Mara mbili Yameondolewa**: Imetoa sehemu ya utatuzi iliyorudiwa
+- **Amri za Utatuzi wa Shida**: Imerekebisha rejea ya `azd logs` ili itumie `azd monitor --logs` halali
 
 #### Imerekebishwa
 - **🔐 Amri za Uthibitisho**: Imeongeza `azd auth login` na `azd auth logout` kwenye cheat-sheet.md
-- **Rejea za Amri Zisizo Halali**: Imeondoa `azd logs` iliyobaki kutoka kwenye sehemu ya utatuzi ya README
+- **Rejea za Amri Isizokuwa Sahihi**: Imetoa mabaki ya `azd logs` katika sehemu ya utatuzi ya README
 
 #### Vidokezo
-- **Uwanja**: Mabadiliko yamewekwa kwenye README.md kuu na resources/cheat-sheet.md
-- **Watazamaji Waliolengwa**: Maboresho yanalenga hasa waendelezaji wapya kwa AZD
+- **Eneo la utekelezaji**: Mabadiliko yalitekelezwa kwenye README.md kuu na resources/cheat-sheet.md
+- **Walengwa**: Maboresho yalilenga hasa watengenezaji wapya wa AZD
 
 ---
 
 ### [v3.10.0] - 2026-02-05
 
 #### Sasisho la Usahihi wa Amri za Azure Developer CLI
-**Toleo hili linasahihisha amri za AZD zisizokuwepo katika nyaraka zote, kuhakikisha mifano yote ya msimbo inatumia sintaksia halali ya Azure Developer CLI.**
+**Toleo hili linasahihisha amri za AZD zisizokuwepo katika nyaraka zote, kuhakikisha mifano yote ya msimbo inatumia sintaks sahihi ya Azure Developer CLI.**
 
 #### Imerekebishwa
-- **🔧 Amri za AZD Zisizokuwepo Zilitolewa**: Ukaguzi kamili na marekebisho ya amri batili:
-  - `azd logs` (haitokani) → imebadilishwa na `azd monitor --logs` au mbadala za Azure CLI
-  - amri ndogo za `azd service` (hazipo) → zimebadilishwa na `azd show` na Azure CLI
-  - `azd infra import/export/validate` (hazipo) → zimetolewa au kubadilishwa na mbadala halali
-  - vigezo `azd deploy --rollback/--incremental/--parallel/--detect-changes` (hazipo) → zilitolewa
-  - vigezo `azd provision --what-if/--rollback` (hazipo) → imesasishwa kutumia `--preview`
-  - `azd config validate` (haitokani) → imebadilishwa na `azd config list`
-  - `azd info`, `azd history`, `azd metrics` (hazipo) → zilitolewa
+- **🔧 Amri za AZD Zisizokuwepo Zimetolewa**: Ukaguzi kamili na urekebishaji wa amri batili:
+  - `azd logs` (haipo) → imebadilishwa na `azd monitor --logs` au mbadala za Azure CLI
+  - vikundi ya amri za `azd service` (havipo) → imebadilishwa kwa `azd show` na Azure CLI
+  - `azd infra import/export/validate` (havipo) → zimeondolewa au kubadilishwa kwa mbadala halali
+  - bendera za `azd deploy --rollback/--incremental/--parallel/--detect-changes` (hazipo) → zimeondolewa
+  - bendera za `azd provision --what-if/--rollback` (hazipo) → imesasishwa kutumia `--preview`
+  - `azd config validate` (haipo) → imebadilishwa na `azd config list`
+  - `azd info`, `azd history`, `azd metrics` (havipo) → zimeondolewa
 
-- **📚 Mafaili Yaliyosasishwa kwa Marekebisho ya Amri**:
-  - `resources/cheat-sheet.md`: Marekebisho makubwa ya rejea ya amri
-  - `docs/deployment/deployment-guide.md`: Imeweka sawa mikakati ya rollback na utekelezaji
-  - `docs/troubleshooting/debugging.md`: Imeboresha sehemu za uchambuzi wa logi
-  - `docs/troubleshooting/common-issues.md`: Imeendeleza amri za utatuzi
-  - `docs/troubleshooting/ai-troubleshooting.md`: Imeweka sawa sehemu ya utambuzi wa AZD
+- **📚 Faili Zilizosasishwa na Marekebisho ya Amri**:
+  - `resources/cheat-sheet.md`: Marekebisho makubwa ya rejea za amri
+  - `docs/deployment/deployment-guide.md`: Imeweka sawa mikakati ya rollback na uenezaji
+  - `docs/troubleshooting/debugging.md`: Imerekebisha sehemu za uchambuzi wa logi
+  - `docs/troubleshooting/common-issues.md`: Imeboresha amri za utatuzi
+  - `docs/troubleshooting/ai-troubleshooting.md`: Imeweka sawa sehemu za ufuatiliaji wa AZD
   - `docs/getting-started/azd-basics.md`: Imeweka sawa amri za ufuatiliaji
-  - `docs/getting-started/first-project.md`: Imeboresha mifano ya ufuatiliaji na utambuzi
-  - `docs/getting-started/installation.md`: Imeweka sawa mfano wa msaada na toleo
-  - `docs/pre-deployment/application-insights.md`: Imeweka sawa amri za kutazama logi
-  - `docs/pre-deployment/coordination-patterns.md`: Imeweka sawa amri za utambuzi wa maajenti
+  - `docs/getting-started/first-project.md`: Imebadilisha mifano ya ufuatiliaji na utatuzi
+  - `docs/getting-started/installation.md`: Imeweka sawa msaada na mifano ya toleo
+  - `docs/pre-deployment/application-insights.md`: Imeweka sawa amri za kuangalia logi
+  - `docs/pre-deployment/coordination-patterns.md`: Imeweka sawa amri za ufuatiliaji wa wakala
 
-- **📝 Marejeo ya Toleo Yamesasishwa**:
-  - `docs/getting-started/installation.md`: Imekuwa ikielekeza toleo la jumla `1.x.x` badala ya `1.5.0` iliyowekwa kwa nguvu na kiungo kwa releases
+- **📝 Marejeo ya Toleo Yameboreshwa**:
+  - `docs/getting-started/installation.md`: Imebadilisha toleo lililotajwa moja kwa moja `1.5.0` kuwa `1.x.x` kwa kiungo cha releases
 
 #### Imebadilishwa
-- **Mikakati ya Rollback**: Nyaraka zimesasishwa kutumia rollback zilizotegemea Git (AZD haina rollback ya asili)
-- **Kutaazama Logi**: Rejea za `azd logs` zlibadilishwa na `azd monitor --logs`, `azd monitor --live`, na amri za Azure CLI
-- **Sehemu ya Utendaji**: Imeondoa vigezo vya utekelezaji vya parallel/incremental ambavyo havipo, na kutoa mbadala halali
+- **Mikakati ya Rollback**: Nyaraka zimebadilishwa kutumia rollback iliyotegemea Git (AZD haina rollback asilia)
+- **Kuangalia Logi**: Rejea za `azd logs` zimebadilishwa na `azd monitor --logs`, `azd monitor --live`, na amri za Azure CLI
+- **Sehemu ya Utendaji**: Imetoa bendera zisizokuwepo za uenezaji sambamba/za hatua kwa hatua, ikitoa mbadala sahihi
 
 #### Maelezo ya Kiufundi
 - **Amri Halali za AZD**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
 - **Bendera Halali za azd monitor**: `--live`, `--logs`, `--overview`
 - **Vipengele Vilivyotolewa**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
 
-#### Notes
-- **Uthibitisho**: Amri zilithibitishwa dhidi ya Azure Developer CLI v1.23.x
+#### Vidokezo
+- **Uthibitisho**: Amri zimekaguliwa dhidi ya Azure Developer CLI v1.23.x
 
 ---
 
 ### [v3.9.0] - 2026-02-05
 
-#### Ukamilishaji wa Warsha na Sasisho la Ubora wa Nyaraka
-**Toleo hili linakamilisha moduli za warsha za mwingiliano, linarekebisha viungo vyote vilivyovunjika vya nyaraka, na linaboresha ubora wa maudhui kwa waendelezaji wa AI wanaotumia Microsoft AZD.**
+#### Kukamilika kwa Warsha na Sasisho la Ubora wa Nyaraka
+**Toleo hili linakamilisha moduli za warsha za kiingilizi, linarekebisha viungo vyote vilivyovunjika kwenye nyaraka, na kuboresha ubora wa maudhui kwa watengenezaji wa AI wanaotumia Microsoft AZD.**
 
-#### Added
-- **📝 CONTRIBUTING.md**: Nyaraka mpya za miongozo ya michango zenye:
+#### Imeongezwa
+- **📝 CONTRIBUTING.md**: Hati mpya ya miongozo ya mchango yenye:
   - Maelekezo wazi ya kuripoti matatizo na kupendekeza mabadiliko
   - Viwango vya nyaraka kwa maudhui mapya
-  - Miongozo ya mifano ya msimbo na kanuni za ujumbe wa commit
+  - Miongozo ya mifano ya msimbo na tamaduni za ujumbe wa commit
   - Taarifa za ushiriki wa jamii
 
-#### Completed
-- **🎯 Workshop Module 7 (Wrap-up)**: Moduli ya hitimisho iliyokamilika kabisa ikiwa na:
-  - Muhtasari kamili wa mafanikio ya warsha
-  - Sehemu ya dhana kuu zilizokamilishwa ikijumuisha AZD, templates, na AI Foundry
+#### Imekamilika
+- **🎯 Moduli ya Warsha 7 (Wrap-up)**: Moduli ya hitimisho imetekelezwa kikamilifu ikijumuisha:
+  - Muhtasari mpana wa mafanikio ya warsha
+  - Sehemu ya dhana muhimu zilizopatikana ikijumuisha AZD, templeti, na Microsoft Foundry
   - Mapendekezo ya kuendelea na safari ya kujifunza
-  - Mazoezi ya changamoto za warsha yenye viwango vya ugumu
+  - Mazoezi ya changamoto za warsha na viwango vya ugumu
   - Viungo vya maoni ya jamii na msaada
 
-- **📚 Workshop Module 3 (Deconstruct)**: Malengo ya kujifunza yaliyosasishwa yamejumuisha:
-  - Mwongozo wa kuamilisha GitHub Copilot na seva za MCP
-  - Ufahamu wa muundo wa folda za template za AZD
-  - Mifumo ya kupanga miundombinu-kama-msimbo (Bicep)
-  - Maelekezo ya maabara ya vitendo
+- **📚 Moduli ya Warsha 3 (Deconstruct)**: Imeboresha malengo ya kujifunza ikijumuisha:
+  - Mwongozo wa kuwasha GitHub Copilot na seva za MCP
+  - Uelewa wa muundo wa saraka za templeti za AZD kwenye GitHub
+  - Mifumo ya kupanga miundombinu kwa kutumia Infrastructure-as-Code (Bicep)
+  - Maelekezo ya maabara ya vitendo (hands-on)
 
-- **🔧 Workshop Module 6 (Teardown)**: Imekamilika na:
-  - Malengo ya usafi wa rasilimali na usimamizi wa gharama
-  - Matumizi ya `azd down` kwa uondoaji salama wa miundombinu
-  - Mwongozo wa urejeshaji wa huduma za cognitive zilizofutwa kwa muda (soft-deleted)
-  - Mafunzo ya ziada ya uchunguzi kwa GitHub Copilot na Azure Portal
+- **🔧 Moduli ya Warsha 6 (Teardown)**: Imetekelezwa kikamilifu kwa:
+  - Kusafisha rasilimali na malengo ya usimamizi wa gharama
+  - Matumizi ya `azd down` kwa kuondoa miundombinu kwa usalama
+  - Mwongozo wa urejesho wa huduma za cognitive zilizofutwa kwa mpangilio mpole (soft-deleted)
+  - Vipengele vya ziada kwa uchunguzi wa GitHub Copilot na Azure Portal
 
-#### Fixed
-- **🔗 Marekebisho ya Viungo Vilivyovunjika**: Imetatua viungo 15+ ndani vya nyaraka vilivyovunjika:
-  - `docs/ai-foundry/ai-model-deployment.md`: Imeweka sahihi njia za microsoft-foundry-integration.md
-  - `docs/troubleshooting/ai-troubleshooting.md`: Imerekebisha njia za ai-model-deployment.md na production-ai-practices.md
-  - `docs/getting-started/first-project.md`: Imebadili cicd-integration.md isiyokuwepo na deployment-guide.md
-  - `examples/retail-scenario.md`: Imeweka sahihi njia za FAQ na troubleshooting guide
-  - `examples/container-app/microservices/README.md`: Imerekebisha njia za ukurasa mkuu wa kozi na mwongozo wa deployment
-  - `resources/faq.md` and `resources/glossary.md`: Imesasisha marejeo ya sura ya AI
-  - `course-outline.md`: Imerekebisha marejeo ya mwongozo wa mwalimu na maabara za warsha za AI
+#### Imerekebishwa
+- **🔗 Marekebisho ya Viungo Vilivyovunjika**: Imeweka sawa viungo 15+ vilivyovunjika ndani ya nyaraka:
+  - `docs/ai-foundry/ai-model-deployment.md`: Imeweka sawa njia za microsoft-foundry-integration.md
+  - `docs/troubleshooting/ai-troubleshooting.md`: Imeweka sawa njia za ai-model-deployment.md na production-ai-practices.md
+  - `docs/getting-started/first-project.md`: Imebadilisha cicd-integration.md isiyokuwepo na deployment-guide.md
+  - `examples/retail-scenario.md`: Imeweka sawa njia za Maswali Yanayoulizwa Mara kwa Mara (FAQ) na mwongozo wa utatuzi
+  - `examples/container-app/microservices/README.md`: Imeweka sawa njia za ukurasa wa kozi na mwongozo wa uenezaji
+  - `resources/faq.md` na `resources/glossary.md`: Imeboresha rejea za sura za AI
+  - `course-outline.md`: Imeweka sawa rejea za mwongozo wa mwalimu na maabara ya warsha ya AI
 
-- **📅 Workshop Status Banner**: Imesasishwa kutoka "Under Construction" hadi hali ya warsha hai na tarehe Februari 2026
+- **📅 Bango la Hali ya Warsha**: Imebadilishwa kutoka "Under Construction" kuwa hadharani kwa tarehe Februari 2026
 
-- **🔗 Workshop Navigation**: Imerekebisha viungo vya urambazaji vilivyovunjika kwenye README.md ya warsha vilivyoelekeza kwenye folda isiyokuwepo lab-1-azd-basics
+- **🔗 Urambazaji wa Warsha**: Imeweka sawa viungo vya urambazaji vilivyokuwa vikiashiria saraka isiyokuwepo lab-1-azd-basics
 
-#### Changed
-- **Workshop Presentation**: Imetoa onyo la "under construction", warsha sasa imekamilika na iko tayari kutumiwa
-- **Navigation Consistency**: Imethibitisha kwamba moduli zote za warsha zina urambazaji sahihi kati ya moduli
-- **Learning Path References**: Imesasisha marejeo ya sura ili kutumia njia sahihi za microsoft-foundry
+#### Imebadilishwa
+- **Uwasilishaji wa Warsha**: Imetoa onyo la "under construction", warsha sasa imekamilika na iko tayari kutumika
+- **Muafaka wa Urambazaji**: Imehakikisha moduli zote za warsha zina urambazaji sahihi kati ya moduli
+- **Rejea za Njia za Kujifunza**: Imebadilisha rejea za sura ili kutumia njia sahihi za microsoft-foundry
 
-#### Validated
-- ✅ Faili zote za Markdown za Kiingereza zina viungo vya ndani vinavyofanya kazi
-- ✅ Moduli za warsha 0-7 zimetimia na zina malengo ya kujifunza
+#### Imethibitishwa
+- ✅ Faili zote za Markdown kwa Kiingereza zina viungo vya ndani vinavyofanya kazi
+- ✅ Moduli za warsha 0-7 zimekamilika na zina malengo ya kujifunza
 - ✅ Urambazaji kati ya sura na moduli unafanya kazi vizuri
-- ✅ Maudhui yanafaa kwa waendelezaji wa AI wanaotumia Microsoft AZD
-- ✅ Lugha na muundo vinavyofaa wanaoanza vimehifadhiwa kote
-- ✅ CONTRIBUTING.md inatoa mwongozo wazi kwa wachangiaji wa jamii
+- ✅ Maudhui yanayofaa kwa watengenezaji wa AI wanaotumia Microsoft AZD
+- ✅ Lugha rafiki kwa waanzilishi na muundo umehifadhiwa kote
+- ✅ CONTRIBUTING.md inatoa mwanga wazi kwa wachangiaji wa jamii
 
-#### Technical Implementation
-- **Link Validation**: Skripti ya PowerShell iliyojirudia ilithibitisha viungo vyote vya ndani vya .md
-- **Content Audit**: Mapitio ya mkono ya ukamilifu wa warsha na ufaao kwa wanaoanza kujifunza
-- **Navigation System**: Mifano thabiti ya urambazaji wa sura na moduli imetumika
+#### Utekelezaji wa Kiufundi
+- **Uthibitishaji wa Viungo**: Script ya PowerShell iliyoendeshwa moja kwa moja ilikagua viungo vyote vya .md
+- **Ukaguzi wa Yaliyomo**: Mapitio ya mkono ya ukamilifu wa warsha na ubunifu wa maandishi kwa waanzilishi
+- **Mfumo wa Urambazaji**: Mifumo ya urambazaji wa sura na moduli imewekwa kwa uwiano
 
-#### Notes
-- **Wigo**: Mabadiliko yamewekwa kwa nyaraka za Kiingereza pekee
-- **Tafsiri**: Folda za tafsiri hazijasasishwa katika toleo hili (tafsiri za moja kwa moja zitasawazishwa baadaye)
-- **Workshop Duration**: Warsha kamili sasa inatoa masaa 3-4 ya mafunzo ya vitendo
+#### Vidokezo
+- **Eneo la utekelezaji**: Mabadiliko yalitekelezwa kwa nyaraka za Kiingereza pekee
+- **Tafsiri**: Folda za tafsiri hazikuombwa katika toleo hili (tafsiri za kiotomatiki zitasawazishwa baadaye)
+- **Muda wa Warsha**: Warsha kamili sasa inatoa masaa 3-4 ya kujifunza kwa vitendo
 
 ---
 
 ### [v3.8.0] - 2025-11-19
 
-#### Nyaraka za Kina: Ufuatiliaji, Usalama, na Mifumo ya Mawakala Wengi
-**Toleo hili linaongeza masomo ya daraja A ya kina juu ya ujumuishaji wa Application Insights, mifumo ya uthibitisho, na uratibu wa mawakala wengi kwa utoaji wa uzalishaji.**
+#### Nyaraka za Juu: Ufuatiliaji, Usalama, na Mifumo ya Wakala Wengi
+**Toleo hili linaongeza masomo kamili ya kiwango cha A juu ya ujumuishaji wa Application Insights, mifumo ya uthibitisho, na uratibu wa wakala wengi kwa uenezaji wa uzalishaji.**
 
-#### Added
-- **📊 Application Insights Integration Lesson**: in `docs/pre-deployment/application-insights.md`:
-  - Uenezaji uliolengwa AZD pamoja na utoaji wa moja kwa moja
-  - Templates za Bicep kamili kwa Application Insights + Log Analytics
-  - Programu za Python zinazoendeshwa zenye telemetry maalum (mistari 1,200+)
-  - Mifumo ya ufuatiliaji ya AI/LLM (ufuataji wa tokeni/gharama za Azure OpenAI)
-  - Michoro 6 ya Mermaid (miundo, tracing iliyogawanywa, mtiririko wa telemetry)
-  - Mazoezi 3 ya vitendo (arifu, dashibodi, ufuatiliaji wa AI)
-  - Mifano ya maombi ya Kusto na mikakati ya kuboresha gharama
-  - Utoaji wa metrics kwa wakati halisi na urekebishaji kwa wakati halisi
-  - Muda wa kujifunza wa dakika 40-50 na mifumo tayari kwa uzalishaji
+#### Imeongezwa
+- **📊 Somo la Ujumuishaji wa Application Insights**: katika `docs/pre-deployment/application-insights.md`:
+  - Uenezaji uliolengwa na AZD na upangaji wa moja kwa moja
+  - Templeti kamili za Bicep kwa Application Insights + Log Analytics
+  - Programu za Python zinazoendesha zikiwa na telemetry maalum (mistari 1,200+)
+  - Mifumo ya ufuatiliaji ya AI/LLM (ufuatiliaji wa tokeni/gharama za Microsoft Foundry Models)
+  - Michoro 6 ya Mermaid (miundo, tracing iliyosambazwa, mtiririko wa telemetry)
+  - Mazoezi 3 ya vitendo (alerts, dashboards, ufuatiliaji wa AI)
+  - Mifano ya Kusto query na mikakati ya uboreshaji wa gharama
+  - Kutiririka kwa metrika za moja kwa moja na uchambuzi wa wakati-wa-kweli
+  - Muda wa kujifunza wa dakika 40-50 na mifumo ya uzalishaji
 
-- **🔐 Authentication & Security Patterns Lesson**: in `docs/getting-started/authsecurity.md`:
+- **🔐 Somo la Mifumo ya Uthibitisho & Usalama**: katika `docs/getting-started/authsecurity.md`:
   - Mifumo 3 ya uthibitisho (connection strings, Key Vault, managed identity)
-  - Templates za miundombinu za Bicep kamili kwa utoaji salama
-  - Msimbo wa programu ya Node.js na ujumuishaji wa Azure SDK
-  - Mazoezi 3 kamili (wezesha managed identity, user-assigned identity, mzunguko wa Key Vault)
+  - Templeti kamili za miundombinu za Bicep kwa uenezaji salama
+  - Msimbo wa programu za Node.js unaounganishwa na Azure SDK
+  - Mazoezi 3 kamili (wezeshaji wa managed identity, user-assigned identity, mzunguko wa Key Vault)
   - Mbinu bora za usalama na usanidi wa RBAC
-  - Mwongozo wa utatuzi wa matatizo na uchambuzi wa gharama
-  - Mifumo ya uthibitisho bila nywila tayari kwa uzalishaji
+  - Mwongozo wa utatuzi na uchambuzi wa gharama
+  - Mifumo ya uzalishaji kwa uthibitisho bila nywila (passwordless)
 
-- **🤖 Multi-Agent Coordination Patterns Lesson**: in `docs/pre-deployment/coordination-patterns.md`:
-  - Mifumo 5 ya uratibu (mfuatano, sambamba, mitawaliwa, inayoendeshwa na matukio, makubaliano)
-  - Utekelezaji kamili wa huduma ya orchestrator (Python/Flask, mistari 1,500+)
-  - Utekelezaji 3 maalum wa wakala (Research, Writer, Editor)
-  - Ujumuishaji wa Service Bus kwa uorodhesaji wa ujumbe
-  - Usimamizi wa hali wa Cosmos DB kwa mifumo iliyogawanywa
-  - Michoro 6 ya Mermaid inayoonyesha mwingiliano wa wakala
-  - Mazoezi 3 ya juu (menejimenti ya muda wa kumalizika, mantiki ya jaribu tena, circuit breaker)
-  - Ugawaji wa gharama ($240-565/mwezi) pamoja na mikakati ya uboreshaji
+- **🤖 Somo la Mifumo ya Uratibu wa Wakala Wengi**: katika `docs/pre-deployment/coordination-patterns.md`:
+  - Mifumo 5 ya uratibu (mlolongo, sambamba, kihenjari, inayosababishwa na tukio, mkatikati wa makubaliano)
+  - Utekelezaji kamili wa huduma ya orkestra (Python/Flask, mistari 1,500+)
+  - Utekelezaji wa wakala 3 maalum (Utafiti, Mwandishi, Mhariri)
+  - Ujumuishaji wa Service Bus kwa kuorodhesha ujumbe
+  - Usimamizi wa hali kwa Cosmos DB kwa mifumo iliyosambazwa
+  - Michoro 6 ya Mermaid ikionyesha mwingiliano wa wakala
+  - Mazoezi 3 ya hali ya juu (kusimamia muda wa kusubiri, mantiki ya kurudia, circuit breaker)
+  - Ugawaji wa gharama ($240-565/mwezi) na mikakati ya uboreshaji
   - Ujumuishaji wa Application Insights kwa ufuatiliaji
 
-#### Enhanced
-- **Pre-deployment Chapter**: Sasa inajumuisha mifumo ya kina ya ufuatiliaji na uratibu
-- **Getting Started Chapter**: Imekuzwa na mifumo ya uthibitisho ya kitaalamu
-- **Production Readiness**: Ufunikaji kamili kutoka usalama hadi ufuatiliaji
-- **Course Outline**: Umesasishwa ili kurejea masomo mapya katika Sura 3 na 6
+#### Imeboreshwa
+- **Sura ya Kabla ya Uenezaji (Pre-deployment)**: Sasa inajumuisha ufuatiliaji mpana na mifumo ya uratibu
+- **Sura ya Kuanzia**: Imeboreshwa na mifumo ya kitaalamu ya uthibitisho
+- **Utakamilifu kwa Uzalishaji**: Ufunuo kamili kutoka usalama hadi ufuatiliaji
+- **Muhtasari wa Kozi**: Imesasishwa kuashiria masomo mapya katika Sura 3 na 6
 
-#### Changed
-- **Learning Progression**: Ujumuishaji bora wa usalama na ufuatiliaji kote katika kozi
-- **Documentation Quality**: Viwango vya daraja A vinavyofanana (95-97%) katika masomo mapya
-- **Production Patterns**: Ufunikaji kamili kutoka mwanzo hadi mwisho kwa utoaji wa kampuni
+#### Imebadilishwa
+- **Mchakato wa Kujifunza**: Uingizaji bora wa usalama na ufuatiliaji kote katika kozi
+- **Ubora wa Nyaraka**: Viwango vya kiwango cha A (95-97%) vilihifadhiwa katika masomo mapya
+- **Mifumo ya Uzalishaji**: Ufunuo kamili wa mwisho hadi mwisho kwa uenezaji wa shirika
 
-#### Improved
-- **Developer Experience**: Njia wazi kutoka maendeleo hadi ufuatiliaji wa uzalishaji
-- **Security Standards**: Mifumo ya kitaalamu kwa uthibitisho na usimamizi wa siri
-- **Observability**: Ujumuishaji kamili wa Application Insights na AZD
-- **AI Workloads**: Ufuatiliaji maalum kwa Azure OpenAI na mifumo ya mawakala wengi
+#### Imeboreshwa
+- **Uzoefu wa Mwanaendelezaji**: Njia wazi kutoka kwa maendeleo hadi ufuatiliaji uzalishaji
+- **Viwango vya Usalama**: Mifumo ya kitaalamu kwa uthibitisho na usimamizi wa siri
+- **Uwezo wa Kuonekana**: Muunganisho kamili wa Application Insights na AZD
+- **Mizigo ya AI**: Ufuatiliaji maalum kwa Microsoft Foundry Models na mifumo ya mawakala wengi
 
-#### Validated
-- ✅ Masomo yote yanajumuisha msimbo kamili unaofanya kazi (sio vipande vidogo)
+#### Imethibitishwa
+- ✅ Masomo yote yanajumuisha msimbo kamili unaofanya kazi (si vipande vya msimbo)
 - ✅ Michoro ya Mermaid kwa kujifunza kwa kuona (jumla 19 katika masomo 3)
-- ✅ Mazoezi ya vitendo yenye hatua za uthibitisho (jumla 9)
-- ✅ Templates za Bicep tayari kwa uzalishaji zinazoweza kutumika kwa `azd up`
+- ✅ Mazoezi ya vitendo yenye hatua za uhakiki (jumla 9)
+- ✅ Miundo ya Bicep tayari kwa uzalishaji inayoweza kutumika kupitia `azd up`
 - ✅ Uchambuzi wa gharama na mikakati ya uboreshaji
-- ✅ Miongozo ya utatuzi wa matatizo na mbinu bora
-- ✅ Vidhibiti vya maarifa vikiwa na amri za uthibitisho
+- ✅ Mwongozo wa kutatua matatizo na mbinu bora
+- ✅ Vituo vya ukaguzi wa maarifa yenye amri za uhakiki
 
-#### Documentation Grading Results
-- **docs/pre-deployment/application-insights.md**: - Mwongozo wa kina wa ufuatiliaji
+#### Matokeo ya Upimaji wa Nyaraka
+- **docs/pre-deployment/application-insights.md**: - Mwongozo kamili wa ufuatiliaji
 - **docs/getting-started/authsecurity.md**: - Mifumo ya usalama ya kitaalamu
 - **docs/pre-deployment/coordination-patterns.md**: - Miundo ya juu ya mawakala wengi
-- **Yaliyomo Mapya kwa Jumla**: - Viwango vya ubora vinavyolingana
+- **Overall New Content**: - Viwango vya ubora vya juu vinavyolingana
 
-#### Technical Implementation
-- **Application Insights**: Log Analytics + telemetry maalum + distributed tracing
-- **Authentication**: Managed Identity + Key Vault + RBAC patterns
-- **Multi-Agent**: Service Bus + Cosmos DB + Container Apps + orchestration
-- **Monitoring**: Live metrics + Kusto queries + alerts + dashboards
-- **Cost Management**: Sampling strategies, retention policies, budget controls
+#### Utekelezaji wa Kiufundi
+- **Application Insights**: Log Analytics + telemetri maalum + uchunguzi uliosambazwa
+- **Authentication**: Managed Identity + Key Vault + mifumo ya RBAC
+- **Mawakala Wengi**: Service Bus + Cosmos DB + Container Apps + uandikishaji
+- **Ufuatiliaji**: vipimo vya moja kwa moja + maswali ya Kusto + tahadhari + dashibodi
+- **Usimamizi wa Gharama**: Mikakati ya sampuli, sera za uhifadhi, udhibiti wa bajeti
 
 ### [v3.7.0] - 2025-11-19
 
-#### Maboresho ya Ubora wa Nyaraka na Mfano Mpya wa Azure OpenAI
-**Toleo hili linaboresha ubora wa nyaraka kote kwenye hifadhidata na linaongeza mfano kamili wa uenezaji wa Azure OpenAI wenye kiolesura cha mazungumzo cha GPT-4.**
+#### Maboresho ya Ubora wa Nyaraka na Mfano Mpya wa Microsoft Foundry Models
+**Toleo hili linaboresha ubora wa nyaraka katika hifadhi nzima na linaongeza mfano kamili wa ueneaji wa Microsoft Foundry Models wenye kiolesura cha mazungumzo cha gpt-4.1.**
 
-#### Added
-- **🤖 Mfano wa Mazungumzo wa Azure OpenAI**: Uenezaji kamili wa GPT-4 na utekelezaji unaofanya kazi katika `examples/azure-openai-chat/`:
-  - Miundombinu kamili ya Azure OpenAI (uenezaji wa modeli ya GPT-4)
-  - Kiolesura cha mazungumzo cha mstari wa amri wa Python chenye historia ya mazungumzo
-  - Ujumuishaji wa Key Vault kwa uhifadhi salama wa funguo za API
-  - Ufuatiliaji wa matumizi ya tokeni na makisio ya gharama
-  - Kudhibiti viwango na utunzaji wa makosa
-  - README ya kina yenye mwongozo wa uenezaji wa dakika 35-45
-  - Faili 11 tayari kwa uzalishaji (templates za Bicep, programu ya Python, usanidi)
-- **📚 Mazoezi ya Nyaraka**: Yameongeza mazoezi ya vitendo kwa mwongozo wa usanidi:
-  - Zoezi 1: Usanidi wa mazingira mengi (dakika 15)
-  - Zoezi 2: Mazoezi ya usimamizi wa siri (dakika 10)
-  - Vigezo vya mafanikio vilivyo wazi na hatua za uthibitisho
-- **✅ Uthibitisho wa Uenezaji**: Imeongeza sehemu ya uthibitisho kwenye mwongozo wa uenezaji:
+#### Iliongezwa
+- **🤖 Mfano wa Mazungumzo wa Microsoft Foundry Models**: Ueneaji kamili wa gpt-4.1 na utekelezaji unaofanya kazi katika `examples/azure-openai-chat/`:
+  - Miundombinu kamili ya Microsoft Foundry Models (ueneaji wa mfano gpt-4.1)
+  - Kiolesura cha mazungumzo cha Python kwa mstari wa amri chenye historia ya mazungumzo
+  - Muunganisho wa Key Vault kwa uhifadhi salama wa funguo za API
+  - Ufuatiliaji wa matumizi ya tokeni na makadirio ya gharama
+  - Kudhibiti kiwango cha maombi na utunzaji wa makosa
+  - README kamili yenye mwongozo wa ueneaji wa dakika 35-45
+  - Faili 11 tayari kwa uzalishaji (miundo ya Bicep, programu ya Python, usanidi)
+- **📚 Mazoezi ya Nyaraka**: Imeongezwa mazoezi ya vitendo kwa mwongozo wa usanidi:
+  - Zoefisho 1: Usanidi wa mazingira mengi (dakika 15)
+  - Zoefisho 2: Mazoezi ya usimamizi wa siri (dakika 10)
+  - Vigezo vya mafanikio wazi na hatua za uhakiki
+- **✅ Uhakiki wa Ueneaji**: Imeongezwa sehemu ya uhakiki katika mwongozo wa ueneaji:
   - Taratibu za ukaguzi wa afya
   - Orodha ya vigezo vya mafanikio
-  - Matokeo yanayotarajiwa kwa amri zote za uenezaji
-  - Marejeo ya haraka ya utatuzi wa matatizo
+  - Matokeo yanayotarajiwa kwa amri zote za ueneaji
+  - Rejea ya haraka ya kutatua matatizo
 
-#### Enhanced
+#### Imeboreshwa
 - **examples/README.md**: Imesasishwa hadi ubora wa daraja A (93%):
-  - Iliyongeza azure-openai-chat katika sehemu zote zinazofaa
-  - Imesasisha idadi ya mifano za ndani kutoka 3 hadi 4
-  - Imeongezwa kwenye jedwali la Mifano ya Maombi ya AI
-  - Imejumuishwa kwenye Mwongozo wa Haraka kwa Watumiaji wa Kati
+  - Imeongezwa azure-openai-chat katika sehemu zote muhimu
+  - Imebadilishwa idadi ya mifano za ndani kutoka 3 hadi 4
+  - Imeongezwa kwenye jedwali la Mifano ya Programu za AI
+  - Imeingizwa ndani ya Mwongozo wa Kuanzia kwa Watumiaji wa Kati
   - Imeongezwa kwenye sehemu ya Templates za Microsoft Foundry
-  - Imesasisha Msimbo wa Kulinganisha na sehemu za ugunduzi wa teknolojia
-- **Documentation Quality**: Uliboreshwa B+ (87%) → A- (92%) kote kwenye folda ya nyaraka:
-  - Imeongeza matokeo yanayotarajiwa kwa mifano muhimu ya amri
-  - Imejumuisha hatua za uthibitisho kwa mabadiliko ya usanidi
-  - Imeongeza kujifunza kwa vitendo kwa mazoezi ya vitendo
+  - Imeboreshwa Matrix ya Ulinganisho na sehemu za kupata teknolojia
+- **Ubora wa Nyaraka**: Uboreshaji B+ (87%) → A- (92%) kwenye folda ya docs:
+  - Imeongezwa matokeo yanayotarajiwa kwa mifano ya amri muhimu
+  - Imeingizwa hatua za uhakiki kwa mabadiliko ya usanidi
+  - Imeboreshwa ujifunzaji wa vitendo kwa mazoezi ya vitendo
 
-#### Changed
-- **Learning Progression**: Ujumuishaji bora wa mifano ya AI kwa wanaojifunza wa kati
-- **Documentation Structure**: Mazoezi zaidi yanayoweza kutekelezeka na matokeo wazi
-- **Verification Process**: Vigezo vya mafanikio vilivyoeleweka vimeongezwa kwa michakato muhimu
+#### Imebadilishwa
+- **Mfululizo wa Kujifunza**: Muingiliano bora wa mifano ya AI kwa wanafunzi wa kiwango cha kati
+- **Muundo wa Nyaraka**: Mazoezi yenye utekelezaji zaidi na matokeo wazi
+- **Mchakato wa Uhakiki**: Vigezo vya mafanikio vilivyowekwa wazi vimeongezwa kwa taratibu kuu
 
-#### Improved
-- **Developer Experience**: Uenezaji wa Azure OpenAI sasa unachukua dakika 35-45 (vs 60-90 kwa mbadala ngumu)
-- **Cost Transparency**: Makisio wazi ya gharama ($50-200/mwezi) kwa mfano wa Azure OpenAI
-- **Learning Path**: Waendelezaji wa AI wana nukta ya kuingia wazi na azure-openai-chat
-- **Documentation Standards**: Matokeo yanayotarajiwa na hatua za uthibitisho vinavyolingana
+#### Imeboreshwa
+- **Uzoefu wa Mwanaendelezaji**: Ueneaji wa Microsoft Foundry Models sasa unachukua dakika 35-45 (ikilinganishwa na 60-90 kwa mbadala ngumu)
+- **Uwajibikaji wa Gharama**: Makadirio ya gharama wazi ($50-200/mwezi) kwa mfano wa Microsoft Foundry Models
+- **Njia ya Kujifunza**: Waendelezaji wa AI wana nafasi ya kuingia wazi na azure-openai-chat
+- **Viwango vya Nyaraka**: Matokeo yanayotarajiwa na hatua za uhakiki zenye msimamo
 
-#### Validated
-- ✅ Mfano wa Azure OpenAI unafanya kazi kikamilifu na `azd up`
-- ✅ Faili zote 11 za utekelezaji ziko sahihi kimaandishi
-- ✅ Maelekezo ya README yanalingana na uzoefu halisi wa uenezaji
-- ✅ Viungo vya nyaraka vimesasishwa katika maeneo 8+
-- ✅ Kielezo cha mifano kinaonyesha kwa usahihi mifano 4 za ndani
-- ✅ Hakuna viungo vya nje vilivyojirudia katika jedwali
+#### Imethibitishwa
+- ✅ Mfano wa Microsoft Foundry Models unafanya kazi kikamilifu na `azd up`
+- ✅ Faili zote 11 za utekelezaji ziko sahihi kiusanisi
+- ✅ Maelekezo ya README yanaendana na uzoefu halisi wa ueneaji
+- ✅ Viungo vya nyaraka vimeboreshwa katika maeneo zaidi ya 8
+- ✅ Orodha ya mifano inaonyesha kwa usahihi mifano 4 za ndani
+- ✅ Hakuna viungo vya nje vinavyorudiwa katika jedwali
 - ✅ Marejeo yote ya urambazaji ni sahihi
 
-#### Technical Implementation
-- **Usanifu wa Azure OpenAI**: GPT-4 + Key Vault + muundo wa Container Apps
-- **Usalama**: Managed Identity tayari, siri katika Key Vault
-- **Ufuatiliaji**: Ujumuishaji wa Application Insights
+#### Utekelezaji wa Kiufundi
+- **Microsoft Foundry Models Architecture**: gpt-4.1 + Key Vault + muundo wa Container Apps
+- **Usalama**: Managed Identity imeandaliwa, siri ziko ndani ya Key Vault
+- **Ufuatiliaji**: Muunganisho wa Application Insights
 - **Usimamizi wa Gharama**: Ufuatiliaji wa tokeni na uboreshaji wa matumizi
-- **Uenezaji**: Amri moja ya `azd up` kwa usanidi kamili
+- **Ueneaji**: Amri moja `azd up` kwa usanidi kamili
 
 ### [v3.6.0] - 2025-11-19
 
-#### Sasisho Kuu: Mifano ya Uenezaji wa Container App
-**Toleo hili linaanzisha mifano kamili, tayari kwa uzalishaji ya uenezaji wa programu za container kwa kutumia Azure Developer CLI (AZD), ikiwa na nyaraka kamili na ujumuishaji katika njia ya kujifunza.**
+#### Sasisho Kuu: Mifano ya Ueneaji ya Container App
+**Toleo hili linaanzisha mifano kamili, tayari kwa uzalishaji ya ueneaji wa programu za container ikitumia Azure Developer CLI (AZD), pamoja na nyaraka kamili na uingizaji katika njia ya kujifunza.**
 
-#### Added
-- **🚀 Mifano ya Container App**: Mifano mpya za ndani katika `examples/container-app/`:
-  - [Mwongozo Mkuu](examples/container-app/README.md): Muhtasari kamili wa uenezaji wa container, kuanza kwa haraka, uzalishaji, na mifumo ya juu
-  - [API Rahisi ya Flask](../../examples/container-app/simple-flask-api): API ya REST rafiki kwa wanaoanza yenye scale-to-zero, probes za afya, ufuatiliaji, na utatuzi wa matatizo
-  - [Usanifu wa Microservices](../../examples/container-app/microservices): Uenezaji wa huduma nyingi tayari kwa uzalishaji (API Gateway, Product, Order, User, Notification), ujumbe wa asili asynchronous, Service Bus, Cosmos DB, Azure SQL, distributed tracing, uenezaji wa blue-green/canary
-- **Miongozo Bora**: Usalama, ufuatiliaji, uboreshaji wa gharama, na miongozo ya CI/CD kwa kazi zilizo ndani ya container
-- **Mifano ya Msimbo**: `azure.yaml` kamili, templates za Bicep, na utekelezaji wa huduma kwa lugha nyingi (Python, Node.js, C#, Go)
-- **Upimaji & Utatuzi wa Matatizo**: Hali za majaribio kutoka mwanzo hadi mwisho, amri za ufuatiliaji, mwongozo wa utatuzi wa matatizo
+#### Iliongezwa
+- **🚀 Mifano ya Container App**: Mifano mpya za ndani kwenye `examples/container-app/`:
+  - [Mwongozo Mkuu](examples/container-app/README.md): Muhtasari kamili wa ueneaji wa programu zilizopo ndani ya container, mwongozo wa kuanza, uzalishaji, na mifumo ya juu
+  - [API Rahisi ya Flask](../../examples/container-app/simple-flask-api): API ya REST rafiki kwa wanaoanza yenye skeli hadi sifuri, vipimo vya afya, ufuatiliaji, na utatuzi wa matatizo
+  - [Muundo wa Microservices](../../examples/container-app/microservices): Ueneaji wa huduma nyingi tayari kwa uzalishaji (API Gateway, Product, Order, User, Notification), ujumbe wa asili, Service Bus, Cosmos DB, Azure SQL, uchambuzi uliogawanywa, ueneaji wa blue-green/canary
+- **Mbinu Bora**: Usalama, ufuatiliaji, uboreshaji wa gharama, na mwongozo wa CI/CD kwa mizigo ya container
+- **Vifaa vya Mifano**: `azure.yaml` kamili, miundo ya Bicep, na utekelezaji wa huduma kwa lugha nyingi (Python, Node.js, C#, Go)
+- **Upimaji & Utatuzi Matatizo**: Nyenzo za mtihani kutoka mwanzo hadi mwisho, amri za ufuatiliaji, mwongozo wa kutatua matatizo
 
-#### Changed
-- **README.md**: Imesasishwa ili kuonyesha na kuunganisha mifano mpya ya container app chini ya "Mifano za Ndani - Programu za Container"
-- **examples/README.md**: Imesasishwa kuzingatia mifano ya container app, kuongeza vipengele vya matrix ya kulinganisha, na kusasisha marejeo ya teknolojia/usanifu
-- **Mpangilio wa Kozi & Mwongozo wa Masomo**: Imesasishwa ili kurejelea mifano mpya ya container app na mifumo ya ueneaji katika sura husika
+#### Imebadilishwa
+- **README.md**: Imesasishwa kuonyesha na kuunganisha mifano mpya ya container app chini ya "Local Examples - Container Applications"
+- **examples/README.md**: Imesasishwa kuonyesha mifano ya container app, kuongeza vituo vya kulinganisha, na kusasisha marejeo ya teknolojia/muundo
+- **Muhtasari wa Kozi & Mwongozo wa Masomo**: Imesasishwa kurejea mifano mpya ya container app na mifumo ya ueneaji katika sura zinazofaa
 
-#### Imehakikishwa
-- ✅ Mifano yote mipya inaweza kuanzishwa na `azd up` na inafuata mbinu bora
-- ✅ Viungo vya ndani na urambazaji wa nyaraka vimesasishwa
-- ✅ Mifano inashughulikia hali kutoka kwa waanzilishi hadi wataalamu, ikijumuisha microservices za uzalishaji
+#### Imethibitishwa
+- ✅ Mifano mpya yote inaweza kuenezwa kwa `azd up` na inafuata mbinu bora
+- ✅ Viungo vya nyaraka na urambazaji vimesasishwa
+- ✅ Mifano inashughulikia hali kutoka kwa mgeni hadi juu, ikiwa ni pamoja na microservices za uzalishaji
 
 #### Vidokezo
-- **Wigo**: Nyaraka na mifano kwa Kiingereza pekee
-- **Hatua Inayofuata**: Panua kwa mifumo ya juu ya container na uendeshaji wa CI/CD katika toleo zijazo
+- **Uwanja**: Nyaraka na mifano kwa Kiingereza tu
+- **Hatua Zifuatazo**: Kupanua na mifumo ya juu ya container na automatisering ya CI/CD katika matoleo yajayo
 
 ### [v3.5.0] - 2025-11-19
 
-#### Mabadiliko ya jina la Bidhaa: Microsoft Foundry
-**Toleo hili linafanya mabadiliko kamili ya jina la bidhaa kutoka "Microsoft Foundry" hadi "Microsoft Foundry" katika nyaraka zote za Kiingereza, ikionyesha urejeshaji rasmi wa chapa ya Microsoft.**
+#### Urejesho wa Jina la Bidhaa: Microsoft Foundry
+**Toleo hili linatekeleza mabadiliko ya jina la bidhaa kutoka "Microsoft Foundry" hadi "Microsoft Foundry" katika nyaraka zote za Kiingereza, ikionyesha urejesho rasmi wa jina la Microsoft.**
 
-#### Yaliyobadilishwa
-- **🔄 Sasisho la Jina la Bidhaa**: Kurebranding kamili kutoka "Microsoft Foundry" hadi "Microsoft Foundry"
-  - Marejeleo yote yamesasishwa katika nyaraka za Kiingereza kwenye folda `docs/`
-  - Folda iliyopewa jina jipya: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+#### Imebadilishwa
+- **🔄 Sasisho la Jina la Bidhaa**: Urejesho kamili wa jina kutoka "Microsoft Foundry" hadi "Microsoft Foundry"
+  - Imeboreshwa marejeo yote katika nyaraka za Kiingereza ndani ya folda `docs/`
+  - Jina la folda lilibadilishwa: `docs/ai-foundry/` → `docs/microsoft-foundry/`
   - Faili iliyopewa jina jipya: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - Jumla: marejeleo 23 ya yaliyomo yamesasishwa katika faili 7 za nyaraka
+  - Jumla: Marejeo 23 yaliyosasishwa katika faili 7 za nyaraka
 
 - **📁 Mabadiliko ya Muundo wa Folda**:
-  - `docs/ai-foundry/` ilipewa jina jipya kuwa `docs/microsoft-foundry/`
-  - Viungo vyote vya ndani vimesasishwa kuonyesha muundo mpya wa folda
-  - Viungo vya urambazaji vimehakikiwa katika nyaraka zote
+  - `docs/ai-foundry/` lilibadilishwa jina kuwa `docs/microsoft-foundry/`
+  - Marejeo yote ya ndani yamesasishwa kuonyesha muundo mpya wa folda
+  - Viungo vya urambazaji vimehakikiwa kushirikiana
 
-- **📄 Majina ya Faili Yaliyobadilishwa**:
+- **📄 Urejeshwaji wa Majina ya Faili**:
   - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - Viungo vya ndani vyote vimesasishwa kurejelea jina jipya la faili
+  - Marejeo yote ya ndani yamesasishwa kurejea jina jipya la faili
 
-#### Faili Zilizosasishwa
-- **Nyaraka za Sura** (faili 7):
-  - `docs/microsoft-foundry/ai-model-deployment.md` - masasisho 3 ya viungo vya urambazaji
-  - `docs/microsoft-foundry/ai-workshop-lab.md` - marejeleo 4 ya jina la bidhaa yamesasishwa
-  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Tayari inatumia Microsoft Foundry (kutokana na masasisho ya awali)
-  - `docs/microsoft-foundry/production-ai-practices.md` - marejeleo 3 yamesasishwa (muhtasari, maoni ya jumuiya, nyaraka)
-  - `docs/getting-started/azd-basics.md` - viungo 4 vya marejeleo ya ndani yamesasishwa
-  - `docs/getting-started/first-project.md` - viungo 2 vya urambazaji wa sura vimesasishwa
-  - `docs/getting-started/installation.md` - viungo 2 za sura inayofuata zimesasishwa
-  - `docs/troubleshooting/ai-troubleshooting.md` - marejeleo 3 yamesasishwa (urambazaji, jumuiya ya Discord)
-  - `docs/troubleshooting/common-issues.md` - kiungo 1 cha urambazaji kimesasishwa
-  - `docs/troubleshooting/debugging.md` - kiungo 1 cha urambazaji kimesasishwa
+#### Faili Zilisasishwa
+- **Nyaraka za Sura** (mafayela 7):
+  - `docs/microsoft-foundry/ai-model-deployment.md` - maboresho 3 ya viungo vya urambazaji
+  - `docs/microsoft-foundry/ai-workshop-lab.md` - marejeo 4 ya jina la bidhaa yaliyo sasishwa
+  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Tayari inatumia Microsoft Foundry (kutoka kwa sasisho za awali)
+  - `docs/microsoft-foundry/production-ai-practices.md` - marejeo 3 yaliyosasishwa (muhtasari, maoni ya jamii, nyaraka)
+  - `docs/getting-started/azd-basics.md` - marejeo 4 ya msimbo wa kuvuka yalisasishwa
+  - `docs/getting-started/first-project.md` - marejeo 2 ya urambazaji wa sura yalisasishwa
+  - `docs/getting-started/installation.md` - marejeo 2 ya sura inayofuata yalisasishwa
+  - `docs/troubleshooting/ai-troubleshooting.md` - marejeo 3 yaliyosasishwa (urambazaji, jamii ya Discord)
+  - `docs/troubleshooting/common-issues.md` - kirejeo 1 cha urambazaji kilisasishwa
+  - `docs/troubleshooting/debugging.md` - kirejeo 1 cha urambazaji kilisasishwa
 
-- **Faili za Muundo wa Kozi** (faili 2):
-  - `README.md` - marejeleo 17 yamesasishwa (muhtasari wa kozi, vichwa vya sura, sehemu ya templates, maarifa ya jumuiya)
-  - `course-outline.md` - marejeleo 14 yamesasishwa (muhtasari, malengo ya kujifunza, rasilimali za sura)
+- **Faili za Muundo wa Kozi** (mafayela 2):
+  - `README.md` - marejeo 17 yaliyo sasishwa (muhtasari wa kozi, vichwa vya sura, sehemu za templates, maarifa ya jamii)
+  - `course-outline.md` - marejeo 14 yaliyo sasishwa (muhtasari, malengo ya kujifunza, rasilimali za sura)
 
-#### Imehakikishwa
-- ✅ Hakuna tena marejeleo ya njia ya folda "ai-foundry" katika nyaraka za Kiingereza
-- ✅ Hakuna tena marejeleo ya jina la bidhaa "Microsoft Foundry" katika nyaraka za Kiingereza
-- ✅ Viungo vyote vya urambazaji vinavyofanya kazi na muundo mpya wa folda
-- ✅ Ubadilishaji wa majina ya faili na folda umekamilika kwa mafanikio
-- ✅ Marejeleo ya ndani kati ya sura yamehakikiwa
+#### Imethibitishwa
+- ✅ Hakuna marejeo ya kubaki ya `docs/ai-foundry` katika nyaraka za Kiingereza
+- ✅ Hakuna marejeo yaliobaki ya jina la bidhaa "Microsoft Foundry" katika nyaraka za Kiingereza
+- ✅ Viungo vyote vya urambazaji vinavyofanya kazi lakini sasa vinarejea muundo mpya wa folda
+- ✅ Majina ya faili na madirisha yamebadilishwa kwa mafanikio
+- ✅ Marejeo ya ndani kati ya sura yamehakikiwa
 
 #### Vidokezo
-- **Wigo**: Mabadiliko yamewekwa kwenye nyaraka za Kiingereza katika folda `docs/` pekee
+- **Uwanja**: Mabadiliko yalitumika tu kwa nyaraka za Kiingereza katika folda `docs/`
 - **Tafsiri**: Folda za tafsiri (`translations/`) hazijasasishwa katika toleo hili
 - **Warsha**: Vifaa vya warsha (`workshop/`) havijasasishwa katika toleo hili
-- **Mifano**: Faili za mfano bado zinaweza kurejelea majina ya zamani (itatatuliwa katika sasisho lijalo)
-- **Viungo vya Nje**: URL za nje na marejeleo ya repozitori ya GitHub hayajabadilika
+- **Mifano**: Faili za mfano zinaweza bado kurejea jina la zamani (itashughulikiwa katika sasisho lijalo)
+- **Viungo vya Nje**: URL za nje na marejeo ya GitHub zilibaki kama zilivyokuwa
 
 #### Mwongozo wa Uhamishaji kwa Wachangiaji
-If you have local branches or documentation referencing the old structure:
-1. Sahihisha marejeleo ya folda: `docs/ai-foundry/` → `docs/microsoft-foundry/`
-2. Sahihisha marejeleo ya faili: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+Ikiwa una matawi ya ndani au nyaraka zinarejea muundo wa zamani:
+1. Sasisha marejeo ya folda: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+2. Sasisha marejeo ya faili: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
 3. Badilisha jina la bidhaa: "Microsoft Foundry" → "Microsoft Foundry"
-4. Thibitisha kwamba viungo vyote vya ndani vya nyaraka bado vinafanya kazi
+4. Thibitisha kwamba viungo vyote vya ndani vya nyaraka vinaendelea kufanya kazi
 
 ---
 
 ### [v3.4.0] - 2025-10-24
 
-#### Uboreshaji wa Mapitio ya Miundombinu na Uhakikisho
-**Toleo hili linaanzisha msaada kamili kwa kipengele kipya cha mwoneko awali cha Azure Developer CLI na kuboresha uzoefu wa mtumiaji wa warsha.**
+#### Mwonekano wa Miundombinu na Maboresho ya Uhakiki
+**Toleo hili linaleta msaada kamili kwa kipengele kipya cha onyesho la Azure Developer CLI na linaboreshwa uzoefu wa mtumiaji wa warsha.**
 
-#### Imeongezwa
-- **🧪 azd provision --preview Feature Documentation**: Ufunuo kamili wa uwezo mpya wa mwoneko awali wa miundombinu
-  - Marejeleo ya amri na mifano ya matumizi katika cheat sheet
-  - Uunganisho wa kina katika mwongozo wa provisioning ukiwa na matumizi na faida
-  - Uunganisho wa ukaguzi wa kabla ya uenezaji kwa uhakikisho salama wa uenezaji
-  - Masasisho ya mwongozo wa kuanza na mbinu za uenezaji zinazoweka usalama kwanza
+#### Iliongezwa
+- **🧪 Uandishi wa kipengele azd provision --preview**: Mwanga kamili wa uwezo mpya wa onyesho la miundombinu
+  - Marejeo ya amri na mifano ya matumizi katika kielelezo cha mwendo
+  - Uingizaji wa kina katika mwongozo wa utoaji na matumizi na faida
+  - Uingizaji wa ukaguzi wa kabla ya kuruka kwa uhalali wa ueneaji salama
+  - Sasisho za mwongozo wa kuanza na mbinu za usalama kwanza
 - **🚧 Bango la Hali ya Warsha**: Bango la kitaalamu la HTML linaloonyesha hali ya maendeleo ya warsha
-  - Muundo wenye gradient na viashiria vya ujenzi kwa mawasiliano wazi kwa watumiaji
-  - Alama ya wakati ya sasisho la mwisho kwa uwazi
-  - Muundo unaojibadilisha kwa simu za mkononi kwa aina zote za vifaa
+  - Muundo wa gradient yenye viashiria vya ujenzi kwa mawasiliano wazi kwa watumiaji
+  - Alama ya tarehe ya sasisho la mwisho kwa uwazi
+  - Muundo unaostahimili simu kwa aina zote za vifaa
 
 #### Imeboreshwa
-- **Usalama wa Miundombinu**: Uwezo wa mwoneko awali umeingizwa katika nyaraka zote za uenezaji
-- **Uhakikisho Kabla ya Ueneaji**: Skripti zilizojitokeza sasa zinajumuisha upimaji wa mwoneko awali wa miundombinu
-- **Mtiririko wa Mendelezaji**: Mfululizo wa amri umeboreshwa kujumuisha mwoneko awali kama mbinu bora
-- **Uzoefu wa Warsha**: Matamanio wazi yamewekwa kwa watumiaji kuhusu hali ya maendeleo ya yaliyomo
+- **Usalama wa Miundombinu**: Uwezo wa onyesho umeingizwa katika nyaraka zote za utoaji
+- **Uhakiki Kabla ya Ueneaji**: Skripti za otomatiki sasa zinajumuisha majaribio ya onyesho la miundombinu
+- **Mtiririko wa Kazi wa Mwanaendelezaji**: Mfululizo wa amri umeboreshwa kujumuisha onyesho kama dira bora
+- **Uzoefu wa Warsha**: Tarajia wazi kwa watumiaji kuhusu hali ya maendeleo ya maudhui
 
-#### Yaliyobadilika
-- **Mbinu Bora za Uenezaji**: Mtiririko unaotangulia mwoneko awali sasa ni njia inayopendekezwa
-- **Mtiririko wa Nyaraka**: Uhakikisho wa miundombinu umehamishiwa mapema katika mchakato wa kujifunza
-- **Uwasilishaji wa Warsha**: Mawasiliano ya hali ya kitaalamu yenye ratiba wazi ya maendeleo
+#### Imebadilishwa
+- **Mambo ya Mbinu za Ueneaji**: Mtiririko uliokithiri wa onyesho sasa unapendekezwa
+- **Mtiririko wa Nyaraka**: Uhakiki wa miundombinu umehamishwa mapema katika mchakato wa kujifunza
+- **Uwasilishaji wa Warsha**: Mawasiliano ya hali ya kitaalamu na muda wa maendeleo umewekwa wazi
 
 #### Imeboreshwa
-- **Njia ya Usalama Kwanza**: Mabadiliko ya miundombinu sasa yanaweza kuhakikiwa kabla ya uenezaji
-- **Ushirikiano wa Timu**: Matokeo ya mwoneko awali yanaweza kushirikiwa kwa mapitio na idhini
-- **Uelewa wa Gharama**: Uelewa bora wa gharama za rasilimali kabla ya provisioning
-- **Kupunguza Hatari**: Kufanikiwa kwa kupungua kwa makosa ya uenezaji kupitia uthibitisho wa mapema
+- **Mbinu ya Usalama Kwanza**: Mabadiliko ya miundombinu sasa yanaweza kuthibitishwa kabla ya ueneaji
+- **Ushirikiano wa Timu**: Matokeo ya onyesho yanaweza kushirikiwa kwa ukaguzi na uthibitisho
+- **Uelewa wa Gharama**: Uelewa bora wa gharama za rasilimali kabla ya upandaji
+- **Kupunguza Hatari**: Kupungua kwa kushindwa kwa ueneaji kupitia uhakiki wa mapema
 
-#### Utekelezaji wa Kifundi
-- **Uunganisho wa Nyaraka Nyingi**: Kipengele cha mwoneko awali kimeandikishwa katika faili 4 muhimu
-- **Mifumo ya Amri**: Sarufi thabiti na mifano katika nyaraka zote
-- **Uingizwa wa Mbinu Bora**: Mwoneko awali umejumuishwa katika mtiririko wa uthibitisho na skripti
-- **Viashirio vya Mwonekano**: Uwekaji wazi wa vipengele VIPYA kwa kutambulika
+#### Utekelezaji wa Kiufundi
+- **Ushirikiano wa Nyaraka Nyingi**: Kipengele cha onyesho kimeandikwa katika faili 4 za muhimu
+- **Mifumo ya Amri**: Sintaksia na mifano ya matumizi thabiti kote katika nyaraka
+- **Uingizaji wa Mbinu Bora**: Onyesho limejumuishwa katika mizunguko ya uhakiki na skripti
+- **Viashiria vya Kuonekana**: Ishara mpya za kipengele kwa ugunduzi rahisi
 
 #### Miundombinu ya Warsha
 - **Mawasiliano ya Hali**: Bango la kitaalamu la HTML lenye mtindo wa gradient
-- **Uzoefu wa Mtumiaji**: Hali wazi ya maendeleo inazuia mkanganyiko
-- **Uwasilishaji wa Kitaalamu**: Hufanya uhakika wa uadilifu wa repozitori huku ikiweka matarajio
-- **Uwajibikaji wa Ratiba**: Alama ya wakati ya sasisho la mwisho Oktoba 2025 kwa uwajibikaji
+- **Uzoefu wa Mtumiaji**: Hali ya maendeleo wazi inapunguza mkanganyiko
+- **Uwasilishaji wa Kitaalamu**: Inatunza uaminifu wa hifadhi huku ikiweka matarajio
+- **Uwazi wa Mwendelezo wa Muda**: Tarehe ya mwisho ya sasisho Oktoba 2025 kwa uwajibikaji
 
 ### [v3.3.0] - 2025-09-24
 
-#### Vifaa vya Warsha Vilivyoboreshwa na Uzoefu wa Kujifunza wa Kuingiliana
-**Toleo hili linaanzisha vifaa vya warsha vya kina pamoja na mwongozo mwingiliano unaotegemea kivinjari na njia zilizopangwa za kujifunza.**
+#### Vifaa vya Warsha Vilivyoboreshwa na Uzoefu wa Kujifunza wa Kihusisha
+**Toleo hili linaanzisha vifaa vya warsha vya kina na mwongozo mwingi wa kuingiliana kupitia kivinjari na njia zilizopangwa za kujifunza.**
 
-#### Imeongezwa
-- **🎥 Mwongozo wa Warsha Mwingiliano**: Uzoefu wa warsha unaotegemea kivinjari na uwezo wa mwoneko awali wa MkDocs
-- **📝 Maelekezo ya Warsha Yaliyopangwa**: Njia ya kujifunza ya hatua 7 iliyobadilishwa kutoka ugunduzi hadi ubinafsishaji
-  - 0-Utangulizi: Muhtasari wa warsha na usanidi
-  - 1-Chagua-Kiolezo-AI: Uvumbuzi wa kiolezo na mchakato wa uteuzi
-  - 2-Thibitisha-Kiolezo-AI: Taratibu za uenezaji na uhakikisho
-  - 3-Gundua-AI-Kiolezo: Kuelewa usanifu wa kiolezo
-  - 4-Panga-Kiolezo-AI: Usanidi na ubinafsishaji
-  - 5-Binafsisha-Kiolezo-AI: Marekebisho ya juu na mzunguko
-  - 6-Avua-Miundombinu: Usafishaji na usimamizi wa rasilimali
-  - 7-Mwisho: Muhtasari na hatua zinazofuata
-- **🛠️ Vifaa vya Warsha**: Usanidi wa MkDocs na mandhari ya Material kwa uzoefu wa kujifunza ulioboreshwa
-- **🎯 Njia ya Kujifunza ya Vitendo**: Mbinu ya hatua 3 (Ugunduzi → Uenezaji → Ubinafsishaji)
-- **📱 Uunganisho wa GitHub Codespaces**: Usanidi usio na mshono wa mazingira ya maendeleo
+#### Iliongezwa
+- **🎥 Interactive Workshop Guide**: Uzoefu wa warsha unaotekelezwa kupitia kivinjari wenye uwezo wa kuonyesha awali MkDocs
+- **📝 Structured Workshop Instructions**: Njia ya kujifunza iliyoongozwa ya hatua 7 kutoka kugundua hadi kubinafsisha
+  - 0-Introduction: Muhtasari wa warsha na usanidi
+  - 1-Select-AI-Template: Template discovery and selection process
+  - 2-Validate-AI-Template: Deployment and validation procedures
+  - 3-Deconstruct-AI-Template: Understanding template architecture
+  - 4-Configure-AI-Template: Configuration and customization
+  - 5-Customize-AI-Template: Advanced modifications and iterations
+  - 6-Teardown-Infrastructure: Cleanup and resource management
+  - 7-Wrap-up: Summary and next steps
+- **🛠️ Workshop Tooling**: MkDocs configuration with Material theme for enhanced learning experience
+- **🎯 Hands-On Learning Path**: Mbinu ya hatua 3 (Ugunduzi → Utekelezaji → Ubinafsishaji)
+- **📱 GitHub Codespaces Integration**: Usanidi wa mazingira ya maendeleo bila mshono
 
-#### Imeboreshwa
-- **Maabara ya Warsha ya AI**: Imekuzwa na uzoefu wa kujifunza uliopangwa wa masaa 2-3
-- **Nyaraka za Warsha**: Uwasilishaji wa kitaalamu pamoja na urambazaji na nyenzo za kuona
-- **Maendeleo ya Kujifunza**: Mwongozo wa hatua kwa hatua kutoka uteuzi wa kiolezo hadi uenezaji wa uzalishaji
-- **Uzoefu wa Mendelezaji**: Vifaa vilivyowekwa kwa ajili ya mtiririko ulio rahisishwa wa maendeleo
+#### Iliyoboreshwa
+- **AI Workshop Lab**: Imeongezwa na uzoefu kamili wa kujifunza uliopangwa wa saa 2-3
+- **Workshop Documentation**: Uwasilishaji wa kitaalamu ukiwa na urambazaji na vifaa vya kuona
+- **Learning Progression**: Mwongozo wazi wa hatua kwa hatua kutoka uchaguzi wa kiolezo hadi utekelezaji wa uzalishaji
+- **Developer Experience**: Vifaa vilivyowezeshwa kwa mtiririko wa kazi wa maendeleo uliorahisishwa
 
-#### Imeboreshwa
-- **Ufikiaji**: Kiolesura kinachotegemea kivinjari chenye utaftaji, uwezo wa kunakili, na kubadilisha mandhari
-- **Kujifunza kwa Mwendo Wako**: Muundo wa warsha unaobadilika unaokubali kasi tofauti za kujifunza
-- **Matumizi ya Vitendo**: Hali halisi za uenezaji wa kiolezo za AI
-- **Ushirikiano wa Jamii**: Uunganisho wa Discord kwa msaada wa warsha na ushirikiano
+#### Imboreshwa
+- **Accessibility**: Kiolesura kinachotegemea kivinjari chenye utafutaji, utendaji wa kunakili, na kubadili mandhari
+- **Self-Paced Learning**: Muundo wa warsha unaobadilika unaokubaliana na kasi tofauti za kujifunza
+- **Practical Application**: Mifano ya utekelezaji wa kiolezo cha AI katika mazingira halisi
+- **Community Integration**: Uunganisho wa Discord kwa msaada wa warsha na ushirikiano
 
-#### Sifa za Warsha
-- **Utafutaji Uliomo**: Ugunduzi wa haraka wa maneno muhimu na somo
-- **Uwezo wa kunakili kwa kuonyesha (hover-to-copy) kwa mifano yote ya msimbo**
-- **Kubadilisha Mandhari**: Msaada wa hali ya giza/nyepesi kwa mapendeleo tofauti
-- **Rasilimali za Mwonekano**: Picha za skrini na michoro kwa uelewa ulioboreshwa
-- **Uingizwa wa Msaada**: Ufikiaji wa moja kwa moja wa Discord kwa msaada wa jamii
+#### Workshop Features
+- **Built-in Search**: Ugunduzi wa haraka wa maneno muhimu na masomo
+- **Copy Code Blocks**: Utendaji wa kunakili kwa kuwekea kielekezi juu kwa mifano yote ya msimbo
+- **Theme Toggle**: Msaada wa modi ya giza/mwanga kwa mapendeleo tofauti
+- **Visual Assets**: Picha-skrini na michoro kwa uelewa ulioimarishwa
+- **Help Integration**: Upatikanaji wa moja kwa moja wa Discord kwa msaada wa jamii
 
 ### [v3.2.0] - 2025-09-17
 
-#### Urejeshaji Mkuu wa Urambazaji na Mfumo wa Kujifunza Uliotegemea Sura
-**Toleo hili linaanzisha muundo kamili wa kujifunza uliotegemea sura pamoja na urambazaji ulioboreshwa katika repozitori nzima.**
+#### Major Navigation Restructuring and Chapter-Based Learning System
+**Toleo hili linateleza muundo kamili wa kujifunza unaogawanywa kwa sura pamoja na urambazaji ulioboreshwa katika ghala lote.**
 
 #### Imeongezwa
-- **📚 Mfumo wa Kujifunza Uliotegemea Sura**: Kozi nzima imepangwa upya kuwa sura 8 zenye maendeleo
-  - Sura 1: Misingi & Anza Haraka (⭐ - 30-45 mins)
-  - Sura 2: Maendeleo Yaliyoanza na AI (⭐⭐ - 1-2 hours)
-  - Sura 3: Usanidi & Uthibitishaji (⭐⭐ - 45-60 mins)
-  - Sura 4: Miundombinu kama Msimbo & Uenezaji (⭐⭐⭐ - 1-1.5 hours)
-  - Sura 5: Suluhisho za AI za Mawakala Nyingi (⭐⭐⭐⭐ - 2-3 hours)
-  - Sura 6: Uhakikisho & Mipango Kabla ya Uenezaji (⭐⭐ - 1 hour)
-  - Sura 7: Utatuzi wa Matatizo & Urekebishaji (⭐⭐ - 1-1.5 hours)
-  - Sura 8: Mifumo ya Uzalishaji & Kampuni (⭐⭐⭐⭐ - 2-3 hours)
-- **📚 Mfumo Kamili wa Urambazaji**: Vichwa na migongo ya urambazaji thabiti katika nyaraka zote
-- **🎯 Ufuatiliaji wa Maendeleo**: Orodha ya ukamilishaji wa kozi na mfumo wa uhakikisho wa kujifunza
-- **🗺️ Mwongozo wa Njia ya Kujifunza**: Vinguzo vya kuingia wazi kwa viwango tofauti vya uzoefu na malengo
-- **🔗 Urambazaji wa Marejeleo ya Ndani**: Sura zinazohusiana na masharti ya awali zimeunganishwa kwa uwazi
+- **📚 Chapter-Based Learning System**: Kozi yote imepangwa upya kuwa sura 8 za kujifunza zinazoendelea
+  - Chapter 1: Foundation & Quick Start (⭐ - 30-45 mins)
+  - Chapter 2: AI-First Development (⭐⭐ - 1-2 hours)
+  - Chapter 3: Configuration & Authentication (⭐⭐ - 45-60 mins)
+  - Chapter 4: Infrastructure as Code & Deployment (⭐⭐⭐ - 1-1.5 hours)
+  - Chapter 5: Multi-Agent AI Solutions (⭐⭐⭐⭐ - 2-3 hours)
+  - Chapter 6: Pre-Deployment Validation & Planning (⭐⭐ - 1 hour)
+  - Chapter 7: Troubleshooting & Debugging (⭐⭐ - 1-1.5 hours)
+  - Chapter 8: Production & Enterprise Patterns (⭐⭐⭐⭐ - 2-3 hours)
+- **📚 Comprehensive Navigation System**: Vichwa vya urambazaji na migongo ya ukurasa vinavyolingana katika nyaraka zote
+- **🎯 Progress Tracking**: Orodha ya ukamilishaji wa kozi na mfumo wa uthibitisho wa kujifunza
+- **🗺️ Learning Path Guidance**: Njia za kuingilia zilizo wazi kwa viwango na malengo tofauti ya uzoefu
+- **🔗 Cross-Reference Navigation**: Sura zinazohusiana na masharti ya awali zimeunganishwa wazi
 
-#### Imeboreshwa
-- **Muundo wa README**: Umegeuzwa kuwa jukwaa lililopangwa la kujifunza na mpangilio uliotegemea sura
-- **Urambazaji wa Nyaraka**: Kila ukurasa sasa unajumuisha muktadha wa sura na mwongozo wa maendeleo
-- **Umpangaji wa Templates**: Mifano na templates zimepangwa kwa sura zinazofaa za kujifunza
-- **Uunganisho wa Rasilimali**: Cheat sheets, Maswali ya Mara kwa Mara, na miongozo ya masomo zimeunganishwa na sura husika
-- **Uingizwa wa Warsha**: Maabara za vitendo zimepangwa kwa malengo ya kujifunza ya sura nyingi
+#### Iliyoboreshwa
+- **README Structure**: Imebadilishwa kuwa jukwaa lililo na muundo wa kujifunza uliogawanywa kwa sura
+- **Documentation Navigation**: Kila ukurasa sasa unajumuisha muktadha wa sura na mwongozo wa maendeleo
+- **Template Organization**: Mifano na miundo imepangwa kwenye sura zinazofaa za kujifunza
+- **Resource Integration**: Ramani za mwongozo, Maswali yanayoulizwa mara kwa mara, na mwongozo wa masomo umeunganishwa na sura zinazofaa
+- **Workshop Integration**: Maabara za vitendo zimepangwa kwa malengo ya kujifunza ya sura nyingi
 
-#### Yaliyobadilika
-- **Maendeleo ya Kujifunza**: Imepitishwa kutoka nyaraka zilizo mfululizo hadi kujifunza kwa sura zinazobadilika
-- **Mahali pa Usanidi**: Mwongozo wa usanidi umewekwa upya kama Sura 3 kwa mtiririko bora wa kujifunza
-- **Uingizwa wa Yaliyomo ya AI**: Uingizwa bora wa yaliyomo maalum ya AI kote katika safari ya kujifunza
-- **Yaliyomo ya Uzalishaji**: Mifumo ya juu imeunganishwa katika Sura 8 kwa wanafunzi wa kampuni
+#### Imabadilishwa
+- **Learning Progression**: Imehamishwa kutoka nyaraka za mstari moja hadi kujifunza kwa sura zinazobadilika
+- **Configuration Placement**: Mwongozo wa usanidi umewekwa kama Chapter 3 kwa mtiririko bora wa kujifunza
+- **AI Content Integration**: Uunganisho bora wa yaliyomo maalum ya AI katika safari yote ya kujifunza
+- **Production Content**: Mifumo ya juu imeunganishwa kwenye Chapter 8 kwa wanafunzi wa biashara
 
-#### Imeboreshwa
-- **Uzoefu wa Mtumiaji**: Breadcrumbs za urambazaji wazi na viashiria vya maendeleo ya sura
-- **Ufikiaji**: Mifumo thabiti ya urambazaji kwa urahisi wa kupita kozi
-- **Uwasilishaji wa Kitaalamu**: Muundo wa kozi wa mtindo wa chuo unaofaa kwa mafunzo ya kitaaluma na ya kampuni
-- **Ufanisi wa Kujifunza**: Kupungua kwa muda wa kupata yaliyomo yanayofaa kupitia mpangilio ulioboreshwa
+#### Imboreshwa
+- **User Experience**: Viashiria vya urambazaji na maendeleo ya sura vilivyo wazi
+- **Accessibility**: Mifumo ya urambazaji inayofanana kwa urahisi wa kupitia kozi
+- **Professional Presentation**: Muundo wa kozi kama chuo unaofaa kwa mafunzo ya kitaaluma na kampuni
+- **Learning Efficiency**: Wakati uliopunguzwa wa kupata yaliyomo yanayofaa kupitia muundo ulioboreshwa
 
-#### Utekelezaji wa Kifundi
-- **Vichwa vya Urambazaji**: Urambazaji wa sura uliosawazishwa katika faili zaidi ya 40 za nyaraka
-- **Urambazaji wa Migongo**: Mwongozo thabiti wa maendeleo na viashiria vya kukamilika kwa sura
-- **Uunganishaji wa Ndani**: Mfumo kamili wa viungo vya ndani unaounganisha dhana zinazohusiana
-- **Ramani za Sura**: Templates na mifano zimeambatishwa kwa uwazi na malengo ya kujifunza
+#### Utekelezaji wa Kiufundi
+- **Navigation Headers**: Urambazaji wa sura uliosanifiwa katika faili 40+ za nyaraka
+- **Footer Navigation**: Mwongozo wa maendeleo unaolingana na viashiria vya ukamilishaji wa sura
+- **Cross-Linking**: Mfumo kamili wa uunganishaji wa ndani unaounganisha dhana zinazohusiana
+- **Chapter Mapping**: Miundo na mifano imehusishwa wazi na malengo ya kujifunza
 
 #### Uboreshaji wa Mwongozo wa Masomo
-- **📚 Malengo Kamili ya Kujifunza**: Mwongozo wa masomo umepangwa upya ili kuendana na mfumo wa sura 8
-- **🎯 Tathmini ya Kitaalamu kwa Sura**: Kila sura inajumuisha malengo maalum ya kujifunza na mazoezi ya vitendo
-- **📋 Ufuatiliaji wa Maendeleo**: Ratiba ya kujifunza ya kila wiki yenye matokeo yanayopimika na orodha za kukamilisha
-- **❓ Maswali ya Tathmini**: Maswali ya uthibitisho wa maarifa kwa kila sura yenye matokeo ya kitaalamu
-- **🛠️ Mazoezi ya Vitendo**: Shughuli za vitendo zenye hali halisi za uenezaji na utatuzi wa matatizo
-- **📊 Maendeleo ya Ujuzi**: Ukuaji wazi kutoka kwa dhana za msingi hadi mifumo ya kampuni kwa kuzingatia maendeleo ya kazi
-- **🎓 Mfumo wa Cheti**: Matokeo ya maendeleo ya kitaalamu na mfumo wa utambuzi wa jamii
-- **⏱️ Usimamizi wa Ratiba**: Mpango uliopangwa wa kujifunza wa wiki 10 wenye uthibitisho wa hatua muhimu
+- **📚 Comprehensive Learning Objectives**: Mwongozo wa masomo umepangwa upya ili kuendana na mfumo wa sura 8
+- **🎯 Chapter-Based Assessment**: Kila sura inajumuisha malengo maalum ya kujifunza na mazoezi ya vitendo
+- **📋 Progress Tracking**: Ratiba ya kujifunza ya kila wiki yenye matokeo yanayopimika na orodha za kukamilisha
+- **❓ Assessment Questions**: Maswali ya uthibitisho wa maarifa kwa kila sura yenye matokeo ya kitaalamu
+- **🛠️ Practical Exercises**: Shughuli za vitendo na matukio halisi ya utekelezaji na utatuzi wa matatizo
+- **📊 Skill Progression**: Kuinuka wazi kutoka dhana za msingi hadi mifumo ya biashara na msisitizo wa maendeleo ya taaluma
+- **🎓 Certification Framework**: Matokeo ya maendeleo ya kitaalamu na mfumo wa utambuzi wa jamii
+- **⏱️ Timeline Management**: Mpango wa kujifunza wa wiki 10 uliopangwa na uthibitisho wa hatua za mafanikio
 
 ### [v3.1.0] - 2025-09-17
 
-#### Suluhisho za AI za Mawakala Nyingi Zilizoboreshwa
-**Toleo hili linaboresha suluhisho la rejareja la mawakala wengi kwa uandishi bora wa majina ya mawakala na nyaraka zilizoboreshwa.**
+#### Enhanced Multi-Agent AI Solutions
+**Toleo hili linaboreshwa suluhisho la rejareja la wakala-wengi kwa utoaji bora wa majina ya wakala na nyaraka zilizoboreshwa.**
 
-#### Yaliyobadilishwa
-- **Kamusi ya Mawakala Nyingi**: 'Cora agent' imebadilishwa kuwa 'Customer agent' katika sehemu zote za suluhisho la rejareja la mawakala wengi kwa uelewa wazi zaidi
-- **Usanifu wa Mwakala**: Nyaraka zote, ARM templates, na mifano ya msimbo zimesasishwa kutumia jina thabiti 'Customer agent'
-- **Mifano ya Usanidi**: Mifumo ya usanidi ya wakala yamegawanywa kisasa kwa mabadiliko ya kanuni za uandishi
-- **Ulinganifu wa Nyaraka**: Imehakikishwa kwamba marejeleo yote yanatumia majina ya mawakala ya kitaalamu na ya kuelezea
+#### Imabadilishwa
+- **Multi-Agent Terminology**: Imebadilisha "Cora agent" na "Customer agent" katika suluhisho la rejareja la wakala-wengi kwa kueleweka zaidi
+- **Agent Architecture**: Nyaraka zote, miundo ya ARM, na mifano ya msimbo zimesasishwa kutumia jina linalolingana "Customer agent"
+- **Configuration Examples**: Mifumo ya usanidi wa wakala imemodernishwa na mabadiliko ya vigezo vya majina
+- **Documentation Consistency**: Imehakikishiwa kwamba rejea zote zinatumia majina ya wakala ya kitaalamu na yenye maelezo
 
-#### Imeboreshwa
-- **Kifurushi cha Template za ARM**: retail-multiagent-arm-template imesasishwa na marejeleo ya 'Customer agent'
-- **Michoro ya Usanifu**: Michoro ya Mermaid imesasishwa kwa majina mapya ya mawakala
-- **Mifano ya Msimbo**: Madarasa ya Python na mifano ya utekelezaji sasa zinatumia uandishi wa CustomerAgent
-- **Vigezo vya Mazingira**: Skripti zote za uenezaji zimesasishwa kutumia kanuni za CUSTOMER_AGENT_NAME
+#### Iliyoboreshwa
+- **ARM Template Package**: retail-multiagent-arm-template imesasishwa kwa rejea za Customer agent
+- **Architecture Diagrams**: Michoro ya Mermaid imerefreshwa kwa majina ya wakala yaliyosasishwa
+- **Code Examples**: Madarasa ya Python na mifano ya utekelezaji sasa zinatumia jina la CustomerAgent
+- **Environment Variables**: Skripti zote za utekelezaji zimesasishwa kutumia vigezo vya CUSTOMER_AGENT_NAME
 
-#### Imeboreshwa
-- **Uzoefu wa Mwanaendelezaji**: Majukumu na wajibu wa mawakala yalio wazi zaidi katika nyaraka
-- **Uko Tayari kwa Uzalishaji**: Ulinganifu bora na desturi za majina za kampuni
-- **Vifaa vya Kujifunza**: Majina ya mawakala yanayoeleweka zaidi kwa madhumuni ya elimu
-- **Urahisi wa Matumizi ya Violezo**: Uelewa uliorahisishwa wa kazi za mawakala na mifumo ya uenezaji
+#### Imboreshwa
+- **Developer Experience**: Majukumu ya wakala yameeleweka vizuri zaidi katika nyaraka
+- **Production Readiness**: Uwiano bora na kanuni za majina za makampuni
+- **Learning Materials**: Majina ya wakala yaliyofafanuliwa zaidi kwa madhumuni ya elimu
+- **Template Usability**: Ufahamu uliorahisishwa wa kazi za wakala na mifumo ya utekelezaji
 
 #### Maelezo ya Kiufundi
-- Imesasishwa michoro ya usanifu ya Mermaid yenye marejeleo ya CustomerAgent
-- Imebadilisha majina ya darasa CoraAgent na CustomerAgent katika mifano ya Python
-- Imerekebisha ARM template JSON configurations ili kutumia aina ya wakala "customer"
-- Imesasisha vigezo vya mazingira kutoka CORA_AGENT_* hadi CUSTOMER_AGENT_* patterns
-- Imesasisha amri zote za uenezaji na usanidi wa kontena
+- Updated Mermaid architecture diagrams with CustomerAgent references
+- Replaced CoraAgent class names with CustomerAgent in Python examples
+- Modified ARM template JSON configurations to use "customer" agent type
+- Updated environment variables from CORA_AGENT_* to CUSTOMER_AGENT_* patterns
+- Refreshed all deployment commands and container configurations
 
 ### [v3.0.0] - 2025-09-12
 
-#### Mabadiliko Makubwa - Mtazamo wa Mwanaendelezaji wa AI na Uunganishaji na Microsoft Foundry
-**Toleo hili linageuza hazina ya mradi kuwa rasilimali kamili ya kujifunza inayojikita kwenye AI na uunganishaji na Microsoft Foundry.**
+#### Major Changes - AI Developer Focus and Microsoft Foundry Integration
+**Toleo hili linageuza ghala kuwa rasilimali ya kujifunza inayolenga AI kwa undani pamoja na uunganisho wa Microsoft Foundry.**
 
 #### Imeongezwa
-- **🤖 Njia ya Kujifunza Iliyowekwa AI Kwanza**: Marekebisho kamili yanayoweka kipaumbele kwa waendelezaji na wahandisi wa AI
-- **Mwongozo wa Uunganishaji wa Microsoft Foundry**: Nyaraka kamili za kuunganisha AZD na huduma za Microsoft Foundry
-- **Mifumo ya Uenezaji ya Modeli za AI**: Mwongozo wa kina unaofunika uchaguzo wa modeli, usanidi, na mikakati ya uenezaji wa uzalishaji
-- **Warsha ya Maabara ya AI**: Warsha ya vitendo ya masaa 2-3 ya kubadilisha programu za AI kuwa suluhisho zinazoweza kuenezwa kwa AZD
-- **Mbinu Bora za AI kwa Uzalishaji**: Mifano inayostahili kampuni kwa kupanua, kufuatilia, na kuhakikisha usalama wa mzigo wa kazi za AI
-- **Mwongozo wa Utatuzi wa Matatizo kwa AI**: Utatuzi wa kina wa matatizo kwa Azure OpenAI, Cognitive Services, na masuala ya uenezaji wa AI
-- **Mkusanyiko wa Violezo vya AI**: Mkusanyiko wa vipengele vya violezo vya Microsoft Foundry na viwango vya ugumu
-- **Vifaa vya Warsha**: Muundo kamili wa warsha wenye maabara za vitendo na nyenzo za rejea
+- **🤖 AI-First Learning Path**: Urejeshaji kamili ulioweka kipaumbele kwa waendelezaji na wahandisi wa AI
+- **Microsoft Foundry Integration Guide**: Nyaraka kamili za kuunganisha AZD na huduma za Microsoft Foundry
+- **AI Model Deployment Patterns**: Mwongozo wa kina unaofunika uteuzi wa modeli, usanidi, na mikakati ya utekelezaji wa uzalishaji
+- **AI Workshop Lab**: Warsha ya vitendo ya saa 2-3 kwa kubadilisha programu za AI kuwa suluhisho zinazoendeshwa kwa AZD
+- **Production AI Best Practices**: Mifumo tayari kwa biashara kwa upanuzi, ufuatiliaji, na usalama wa mizigo ya AI
+- **AI-Specific Troubleshooting Guide**: Utatuzi wa matatizo kwa Microsoft Foundry Models, Cognitive Services, na masuala ya utekelezaji wa AI
+- **AI Template Gallery**: Mkusanyiko uliowekwa wa miundo ya Microsoft Foundry pamoja na viwango vya ugumu
+- **Workshop Materials**: Muundo kamili wa warsha unaojumuisha maabara za vitendo na nyenzo za rejea
 
-#### Imeboreshwa
-- **Muundo wa README**: Ulengwa kwa waendelezaji wa AI pamoja na takwimu za asilimia 45 za maslahi ya jamii kutoka Discord ya Microsoft Foundry
-- **Njia za Kujifunzia**: Safari maalum kwa waendelezaji wa AI pamoja na njia za jadi kwa wanafunzi na wahandisi wa DevOps
-- **Mapendekezo ya Violezo**: Violezo vinavyopendekezwa vya AI vikiwemo azure-search-openai-demo, contoso-chat, na openai-chat-app-quickstart
-- **Uunganisho wa Jamii**: Ustawi ulioboreshwa wa jumuiya ya Discord wenye channel maalumu za AI na mijadala
+#### Iliyoboreshwa
+- **README Structure**: Imezingatia waendelezaji wa AI kwa taarifa ya 45% ya maslahi ya jamii kutoka Microsoft Foundry Discord
+- **Learning Paths**: Njia maalum za mtaalamu wa AI kando na njia za jadi kwa wanafunzi na wahandisi wa DevOps
+- **Template Recommendations**: Miundo ya AI iliyochaguliwa ikijumuisha azure-search-openai-demo, contoso-chat, na openai-chat-app-quickstart
+- **Community Integration**: Msaada wa jamii ulioboreshwa kwenye Discord pamoja na chaneli na majadiliano maalum ya AI
 
-#### Msisitizo wa Usalama na Uzalishaji
-- **Mifano ya Utambulisho Iliyosimamiwa**: Usanidi maalumu wa uthibitishaji na usalama kwa AI
-- **Uboreshaji wa Gharama**: Ufuatiliaji wa matumizi ya tokeni na udhibiti wa bajeti kwa mzigo wa kazi za AI
-- **Uenezaji wa Mikoa Nyingi**: Mikakati ya uenezaji ya programu za AI duniani kote
-- **Ufuatiliaji wa Utendaji**: Vipimo maalumu vya AI na uunganishaji wa Application Insights
+#### Security & Production Focus
+- **Managed Identity Patterns**: Mbinu za utambulisho zilizosimamiwa za uthibitisho na usanidi wa usalama wa AI
+- **Cost Optimization**: Ufuatiliaji wa matumizi ya tokeni na udhibiti wa bajeti kwa mizigo ya AI
+- **Multi-Region Deployment**: Mikakati ya utekelezaji wa programu za AI kwa maeneo mengi
+- **Performance Monitoring**: Vipimo maalum vya AI na ujumuishaji wa Application Insights
 
-#### Ubora wa Nyaraka
-- **Muundo wa Kozi wa Mstari**: Mfululizo wa kimantiki kutoka kwa mwanzo hadi mifumo ya juu ya uenezaji wa AI
-- **URL Zilizothibitishwa**: Viungo vyote vya nje vya hazina vimehakikiwa na vinapatikana
-- **Rejea Kamili**: Viungo vyote vya ndani vya nyaraka vimehakikiwa na vinafanya kazi
-- **Tayari kwa Uzalishaji**: Mifumo ya uenezaji ya kampuni yenye mifano ya ulimwengu halisi
+#### Documentation Quality
+- **Linear Course Structure**: Mvutano wa mantiki kutoka mwanzoni hadi mifumo ya juu ya utekelezaji wa AI
+- **Validated URLs**: Viungo vyote vya nje vya ghala vimehakikiwa na vinapatikana
+- **Complete Reference**: Viungo vyote vya ndani vya nyaraka vimehakikiwa na vinavyofanya kazi
+- **Production Ready**: Mifumo ya utekelezaji kwa biashara na mifano ya maisha halisi
 
 ### [v2.0.0] - 2025-09-09
 
-#### Mabadiliko Makubwa - Urekebishaji wa Hazina na Uboreshaji wa Kitaaluma
-**Toleo hili linaashiria mabadiliko makubwa ya muundo wa hazina na uwasilishaji wa yaliyomo.**
+#### Major Changes - Repository Restructure and Professional Enhancement
+**Toleo hili linawakilisha marekebisho makubwa ya muundo wa ghala na uwasilishaji wa yaliyomo.**
 
 #### Imeongezwa
-- **Mfumo wa Kujifunza Uliofanywa kwa Muundo**: Kurasa zote za nyaraka sasa zinajumuisha Sehemu za Utangulizi, Malengo ya Kujifunza, na Matokeo ya Kujifunua
-- **Mfumo wa Utambuzi wa Kusafiri (Navigation System)**: Imeongezwa viungo vya Somo la Awali/Lilofuata katika nyaraka zote kwa ajili ya mwendelezo wa kujifunza unaoongozwa
-- **Mwongozo wa Masomo**: study-guide.md kamili yenye malengo ya kujifunza, mazoezi ya vitendo, na nyenzo za tathmini
-- **Uwasilishaji wa Kitaalamu**: Ikiondolewa alama zote za emoji kwa ajili ya kuboresha upatikanaji na muonekano wa kitaalamu
-- **Muundo wa Yaliyomo Umeboreshwa**: Uandaaji na mtiririko wa nyenzo za kujifunza umeboreshwa
+- **Structured Learning Framework**: Kurasa zote za nyaraka sasa zinajumuisha Sehemu ya Utangulizi, Malengo ya Kujifunza, na Matokeo ya Kujifunza
+- **Navigation System**: Viungo vya Somo la Awali/Kufuata vimeongezwa katika nyaraka zote kwa ukuaji wa kujifunza unaoongozwa
+- **Study Guide**: study-guide.md kamili na malengo ya kujifunza, mazoezi, na vifaa vya tathmini
+- **Professional Presentation**: Ikamuliwa emoji zote za ikoni kwa upatikanaji bora na muonekano wa kitaalamu
+- **Enhanced Content Structure**: Muundo na mtiririko wa nyenzo za kujifunza umeboreshwa
 
-#### Imebadilishwa
-- **Muundo wa Nyaraka**: Kuratibiwa nyaraka zote kwa muundo unaolenga kujifunza kwa uthabiti
-- **Mtiririko wa Utambuzi**: Imetekelezwa mfululizo wa kimantiki kupitia nyenzo zote za kujifunza
-- **Uwasilishaji wa Yaliyomo**: Imeondolewa vipengele vya mapambo kwa faida ya ufomati wazi na wa kitaalamu
-- **Muundo wa Viungo**: Viungo vyote vya ndani vimesasishwa kuunga mkono mfumo mpya wa urambazaji
+#### Imabadilishwa
+- **Documentation Format**: Nyaraka zote zimesanidiwa kwa muundo unaolenga kujifunza
+- **Navigation Flow**: Mtiririko wa kimuundo kupitia nyenzo za kujifunza umeboreshwa
+- **Content Presentation**: Vipengele vya mapambo vimeondolewa kwa tija ya uwasilishaji wa kitaalamu
+- **Link Structure**: Viungo vya ndani vimebadilishwa kuunga mkono mfumo mpya wa urambazaji
 
-#### Imeboreshwa
-- **Upatikanaji**: Imetoa utegemezi wa emoji kwa ajili ya muendeshaji bora wa wasomaji wa skrini
-- **Muonekano wa Kitaalamu**: Uwasilishaji safi wa mtindo wa kitaaluma unaofaa kwa kujifunza kwa kampuni
-- **Uzoefu wa Kujifunza**: Mbinu ya muundo yenye malengo na matokeo wazi kwa kila somo
-- **Uandaaji wa Yaliyomo**: Mtiririko bora wa kimantiki na uhusiano kati ya mada zinazohusiana
+#### Imboreshwa
+- **Accessibility**: Kuondolewa kwa utegemezi wa emoji kwa urahisi wa watazamaji wa skrini
+- **Professional Appearance**: Uwasilishaji mweupe wa mtindo wa kitaaluma unaofaa kwa mafunzo ya kampuni
+- **Learning Experience**: Mbinu iliyopangwa na malengo na matokeo wazi kwa kila somo
+- **Content Organization**: Mtiririko bora wa mantiki na uhusiano kati ya mada zinazohusiana
 
 ### [v1.0.0] - 2025-09-09
 
-#### Utoaji wa Msingi - Hazina Kamili ya Kujifunza AZD
+#### Initial Release - Comprehensive AZD Learning Repository
 
 #### Imeongezwa
-- **Muundo wa Msingi wa Nyaraka**
+- **Core Documentation Structure**
   - Mfululizo kamili wa mwongozo wa kuanza
-  - Nyaraka kamili za uenezaji na upangaji wa rasilimali
-  - Vyanzo vya kina vya utatuzi wa matatizo na mwongozo wa kusuluhisha makosa
-  - Zana na taratibu za uthibitishaji kabla ya uenezaji
+  - Nyaraka kamili za utekelezaji na upatikanaji
+  - Vyanzo vya utatuzi wa matatizo na miongozo ya uharibifu
+  - Vifaa vya uchunguzi kabla ya utekelezaji na taratibu
 
-- **Moduli ya Kuanzia (Getting Started Module)**
-  - Misingi ya AZD: Dhana za msingi na istilahi
-  - Mwongozo wa Usakinishaji: Maelekezo ya usanidi maalum kwa jukwaa
-  - Mwongozo wa Usanidi: Usanidi wa mazingira na uthibitishaji
-  - Mafunzo ya Mradi wa Kwanza: Kujifunza kwa hatua kwa hatua kwa vitendo
+- **Getting Started Module**
+  - AZD Basics: Dhana za msingi na istilahi
+  - Installation Guide: Maelekezo ya usanidi kwa majukwaa mbalimbali
+  - Configuration Guide: Usanidi wa mazingira na uthibitisho
+  - First Project Tutorial: Mafunzo ya hatua kwa hatua kwa vitendo
 
-- **Moduli ya Uenezaji na Upangaji**
-  - Mwongozo wa Uenezaji: Nyaraka kamili za mtiririko wa kazi
-  - Mwongozo wa Upangaji: Miundombinu kama Msimbo kwa kutumia Bicep
-  - Mbinu bora kwa uenezaji wa uzalishaji
-  - Mifano ya usanifu wa huduma nyingi
+- **Deployment and Provisioning Module**
+  - Deployment Guide: Nyaraka kamili za mtiririko wa kazi
+  - Provisioning Guide: Miundombinu kama Msimbo kwa Bicep
+  - Mazoezi bora kwa utekelezaji wa uzalishaji
+  - Mifumo ya usanifu wa huduma nyingi
 
-- **Moduli ya Uthibitishaji Kabla ya Uenezaji**
-  - Mipango ya Uwezo: Uthibitishaji wa upatikanaji wa rasilimali za Azure
-  - Uchaguzi wa SKU: Mwongozo kamili wa ngazi za huduma
-  - Ukaguzi Kabla ya Kuendesha: Skripti za uthibitishaji za otomatiki (PowerShell na Bash)
-  - Zana za makadirio ya gharama na mipango ya bajeti
+- **Pre-deployment Validation Module**
+  - Capacity Planning: Uthibitisho wa upatikanaji wa rasilimali za Azure
+  - SKU Selection: Mwongozo kamili wa ngazi za huduma
+  - Pre-flight Checks: Skripti za uthibitisho wa moja kwa moja (PowerShell na Bash)
+  - Makadirio ya gharama na zana za upangaji bajeti
 
-- **Moduli ya Utatuzi wa Matatizo**
-  - Masuala Yanayotokea Mara kwa Mara: Matatizo na suluhisho zao
-  - Mwongozo wa Kusuluhisha Makosa: Mbinu za kimfumo za utatuzi
+- **Troubleshooting Module**
+  - Common Issues: Matatizo yanayotokea mara kwa mara na suluhisho
+  - Debugging Guide: Mbinu za kimfumo za utatuzi wa matatizo
   - Mbinu za uchunguzi wa hali ya juu na zana
-  - Ufuatiliaji wa utendaji na uboreshaji
+  - Ufuatiliaji wa utendakazi na uboreshaji
 
-- **Rasilimali na Marejeo**
-  - Karatasi ya Muhtasari wa Amri: Rejea ya haraka kwa amri muhimu
-  - Kamusi ya Maneno: Ufafanuzi kamili wa istilahi na mifupisho
-  - Maswali Yanayoulizwa Mara kwa Mara (FAQ): Majibu ya kina kwa maswali ya kawaida
-  - Viungo vya rasilimali za nje na uhusiano wa jamii
+- **Resources and References**
+  - Command Cheat Sheet: Marejeo ya haraka kwa amri muhimu
+  - Glossary: Kamusi kamili ya istilahi na vifupi vya maneno
+  - FAQ: Majibu ya kina kwa maswali ya kawaida
+  - Viungo vya rasilimali za nje na uunganisho wa jamii
 
-- **Mifano na Violezo**
+- **Examples and Templates**
   - Mfano wa Programu Rahisi ya Wavuti
-  - Kiolezo cha uenezaji cha Tovuti Isiyobadilika
-  - Usanidi wa Programu ya Kontena
-  - Mifano ya uunganishaji wa hifadhidata
+  - Kiolezo cha utekelezaji wa Tovuti Isiyobadilika
+  - Uundaji wa Programu ya Kontena
+  - Mifumo ya kuunganishwa kwa Hifadhidata
   - Mifano ya usanifu wa microservices
-  - Utekelezaji wa kazi zisizo na seva (serverless)
+  - Utekelezaji wa kazi zisizo na seva
 
-#### Sifa
-- **Msaada kwa Majukwaa Mengi**: Mwongozo wa usakinishaji na usanidi kwa Windows, macOS, na Linux
-- **Ngazi Nyingi za Ujuzi**: Yaliyomo yaliyoundwa kwa wanafunzi hadi waendelezaji wa kitaalamu
-- **Mazingira ya Vitendo**: Mifano ya vitendo na matukio ya ulimwengu halisi
-- **Ufikivu Kamili**: Kuanzia dhana za msingi hadi mifumo ya juu ya kampuni
-- **Mbinu Inayoipa Kipaumbele Usalama**: Mbinu bora za usalama zimejumuishwa kote
-- **Uboreshaji wa Gharama**: Mwongozo kwa uenezaji wa gharama nafuu na usimamizi wa rasilimali
+#### Features
+- **Multi-Platform Support**: Maelekezo ya usakinishaji na usanidi kwa Windows, macOS, na Linux
+- **Multiple Skill Levels**: Yaliyomo yameundwa kwa wanafunzi hadi waendelezaji wa ngazi ya kitaalamu
+- **Practical Focus**: Mifano ya vitendo na matukio ya maisha halisi
+- **Comprehensive Coverage**: Kutoka dhana za msingi hadi mifumo ya juu ya biashara
+- **Security-First Approach**: Mazoezi bora ya usalama yamejumuishwa kote
+- **Cost Optimization**: Mwongozo wa utekelezaji wa gharama nafuu na usimamizi wa rasilimali
 
-#### Ubora wa Nyaraka
-- **Mifano ya Kina ya Msimbo**: Sampuli za msimbo za vitendo na zilizojaribiwa
-- **Maelekezo Hatua kwa Hatua**: Mwongozo wazi, unaoweza kutekelezwa
-- **Usimamizi Kamili wa Makosa**: Utatuzi wa matatizo kwa masuala ya kawaida
-- **Ujumuishaji wa Mbinu Bora**: Viwango vya sekta na mapendekezo
-- **Ulinganifu wa Toleo**: Imesasishwa kwa huduma za hivi karibuni za Azure na sifa za azd
+#### Documentation Quality
+- **Detailed Code Examples**: Sampuli za msimbo za vitendo, zilizothibitishwa
+- **Step-by-Step Instructions**: Mwongozo wazi, unaoweza kutekelezwa
+- **Comprehensive Error Handling**: Utatuzi wa matatizo kwa masuala ya kawaida
+- **Best Practices Integration**: Viwango vya tasnia na mapendekezo
+- **Version Compatibility**: Imeboreshwa kulingana na huduma za hivi karibuni za Azure na sifa za azd
 
-## Maboresho Yanayopangwa kwa Baadaye
+## Planned Future Enhancements
 
-### Toleo 3.1.0 (Lilopangwa)
-#### Upanuzi wa Jukwaa la AI
-- **Msaada kwa Modeli Nyingi**: Mifano ya uunganishaji kwa Hugging Face, Azure Machine Learning, na modeli za kawaida
-- **Mifumo ya Wakala wa AI**: Violezo kwa uenezaji wa LangChain, Semantic Kernel, na AutoGen
-- **Mifano ya Jibu-Na-Kumbukumbu (RAG) ya Juu**: Chaguzi za hifadhidata za vector zaidi ya Azure AI Search (Pinecone, Weaviate, n.k.)
-- **Ufuatiliaji wa AI**: Ufuatiliaji ulioboreshwa wa utendaji wa modeli, matumizi ya tokeni, na ubora wa majibu
+### Version 3.1.0 (Planned)
+- **Multi-Model Support**: Miundo ya muunganisho kwa Hugging Face, Azure Machine Learning, na modeli maalum
+- **AI Agent Frameworks**: Violezo vya uanzishaji kwa LangChain, Semantic Kernel, na AutoGen
+- **Advanced RAG Patterns**: Chaguo za hifadhidata za vekta zaidi ya Azure AI Search (Pinecone, Weaviate, n.k.)
+- **AI Observability**: Ufuatiliaji ulioboreshwa wa utendaji wa modeli, matumizi ya tokeni, na ubora wa majibu
 
-#### Uzoefu wa Mwanaendelezaji
-- **Kiongezi cha VS Code**: Uzoefu ulioingizwa wa maendeleo wa AZD + AI Foundry
-- **Uunganisho wa GitHub Copilot**: Uundaji wa violezo vya AZD uliosaidiwa na AI
-- **Mafunzo Yanayoshirikisha**: Mazoezi ya kuandika msimbo kwa vitendo yenye uthibitishaji wa otomatiki kwa nyadhifa za AI
-- **Yaliyomo ya Video**: Mafunzo ya video ya ziada kwa wanaojifunza kwa kuona wakiangazia uenezaji wa AI
+#### Developer Experience
+- **VS Code Extension**: Uzoefu uliounganishwa wa maendeleo wa AZD + Microsoft Foundry
+- **GitHub Copilot Integration**: Uundaji wa violezo vya AZD ulioongozwa na AI
+- **Interactive Tutorials**: Mazoezi ya kuandika msimbo kwa vitendo yenye uhakikisho wa kiotomatiki kwa matukio ya AI
+- **Video Content**: Yaliyomo ya video ya ziada kwa wanaojifunza kwa kuona, yakilenga uanzishaji wa AI
 
-### Toleo 4.0.0 (Lilopangwa)
-#### Mifano ya AI kwa Kampuni
-- **Mfumo wa Utawala**: Utawala wa modeli za AI, uzingatiaji wa kanuni, na njia za ukaguzi
-- **AI ya Wamiliki Wengi**: Mifano ya kuhudumia wateja wengi kwa huduma za AI zilizotengwa
-- **Uenezaji wa AI kwa Edge**: Uunganishaji na Azure IoT Edge na vifurushi vya kontena
-- **AI ya Wingu Mchanganyiko**: Mifano ya uenezaji wa multi-cloud na mchanganyiko kwa mzigo wa kazi za AI
+### Version 4.0.0 (Planned)
+#### Enterprise AI Patterns
+- **Governance Framework**: Utawala wa modeli za AI, uzingatiaji wa sheria, na rekodi za ukaguzi
+- **Multi-Tenant AI**: Miundo ya kuhudumia wateja wengi kwa huduma za AI zilizo hifadhiwa kwa kujitegemea
+- **Edge AI Deployment**: Muunganisho na Azure IoT Edge na instansi za kontena
+- **Hybrid Cloud AI**: Miundo ya uanzishaji kwenye wingu nyingi na mseto kwa mzigo wa kazi wa AI
 
-#### Sifa za Juu
-- **Uendeshaji Otomatiki wa Mifereji ya AI**: Uunganishaji wa MLOps na mifereji ya Azure Machine Learning
-- **Usalama wa Juu**: Mifano ya zero-trust, endpoints binafsi, na ulinzi wa vitisho wa juu
-- **Uboreshaji wa Utendaji**: Mikakati ya kurekebisha na kupanua ya kiwango cha juu kwa programu za AI zenye kupitisha sana
-- **Ugawaji wa Kima dunia**: Mifano ya utoaji wa yaliyomo na caching kwa edge kwa programu za AI
+#### Advanced Features
+- **AI Pipeline Automation**: Muunganisho wa MLOps na pipelines za Azure Machine Learning
+- **Advanced Security**: Mifumo ya zero-trust, private endpoints, na ulinzi wa tishio wa hali ya juu
+- **Performance Optimization**: Mbinu za juu za kurekebisha na kupanua kwa programu za AI zenye mtiririko wa juu
+- **Global Distribution**: Miundo ya utoaji wa maudhui na caching ya edge kwa programu za AI
 
-### Toleo 3.0.0 (Lilopangwa) - Limezidiwa na Toleo la Sasa
-#### Mambo Yaliopendekezwa - Sasa Yatekelezwa katika v3.0.0
-- ✅ **Yaliyomo Yanayojikita kwa AI**: Uunganishaji kamili na Microsoft Foundry (Imekamilika)
-- ✅ **Mafunzo Yanayoshirikisha**: Maabara ya warsha ya vitendo ya AI (Imekamilika)
-- ✅ **Moduli ya Usalama wa Juu**: Mifano ya usalama maalumu kwa AI (Imekamilika)
-- ✅ **Uboreshaji wa Utendaji**: Mikakati ya kurekebisha mzigo wa AI (Imekamilika)
+### Version 3.0.0 (Planned) - Superseded by Current Release
+#### Proposed Additions - Now Implemented in v3.0.0
+- ✅ **AI-Focused Content**: Muunganisho kamili wa Microsoft Foundry (Imekamilishwa)
+- ✅ **Interactive Tutorials**: Maabara ya warsha ya AI kwa vitendo (Imekamilishwa)
+- ✅ **Advanced Security Module**: Mifumo ya usalama maalum kwa AI (Imekamilishwa)
+- ✅ **Performance Optimization**: Mbinu za kurekebisha mzigo wa kazi wa AI (Imekamilishwa)
 
-### Toleo 2.1.0 (Lilopangwa) - Zilizotekelezwa Sehemu katika v3.0.0
-#### Maboresho Madogo - Baadhi Yamekamilika katika Toleo la Sasa
-- ✅ **Mifano Zaidi**: Matukio ya uenezaji yanayojikita katika AI (Imekamilika)
-- ✅ **FAQ Iliyongezwa**: Maswali maalumu ya AI na utatuzi wa matatizo (Imekamilika)
-- **Uunganisho wa Zana**: Mwongozo ulioboreshwa wa uunganisho wa IDE na mhariri
-- ✅ **Upanuzi wa Ufuatiliaji**: Mifano ya ufuatiliaji na arifa maalumu kwa AI (Imekamilika)
+### Version 2.1.0 (Planned) - Partially Implemented in v3.0.0
+#### Minor Enhancements - Some Completed in Current Release
+- ✅ **Additional Examples**: Matukio ya uanzishaji yanayolenga AI (Imekamilishwa)
+- ✅ **Extended FAQ**: Maswali maalum ya AI na utatuzi wa matatizo (Imekamilishwa)
+- **Tool Integration**: Mwongozo ulioboreshwa wa muunganisho wa IDE na mhariri
+- ✅ **Monitoring Expansion**: Mifumo ya ufuatiliaji na tahadhari maalum kwa AI (Imekamilishwa)
 
-#### Bado Yapangwa kwa Toleo la Baadaye
-- **Nyaraka Zenye Urafiki kwa Simu**: Ubunifu unaojibadilisha kwa kujifunza kwa simu
-- **Ufikiaji Bila Mtandao**: Vifurushi vya nyaraka vinavyopatikana kwa kupakuliwa
-- **Uunganisho Bora wa IDE**: Kiongezi cha VS Code kwa mtiririko wa kazi wa AZD + AI
-- **Dashibodi ya Jamii**: Vipimo vya jamii kwa wakati halisi na ufuatiliaji wa michango
+#### Still Planned for Future Release
+- **Mobile-Friendly Documentation**: Ubunifu unayojibadilisha kwa kujifunza kwa simu
+- **Offline Access**: Vifurushi vya nyaraka vinavyoweza kupakuliwa
+- **Enhanced IDE Integration**: VS Code extension kwa mtiririko wa kazi wa AZD + AI
+- **Community Dashboard**: Vipimo vya jamii kwa wakati halisi na ufuatiliaji wa michango
 
-## Kuchangia kwenye Taarifa ya Mabadiliko
+## Contributing to the Changelog
 
-### Kuripoti Mabadiliko
-Unapochangia kwenye hazina hii, tafadhali hakikisha kumbukumbu za mabadiliko zinajumuisha:
+### Reporting Changes
+When contributing to this repository, please ensure changelog entries include:
 
-1. **Nambari ya Toleo**: Kufuatana na utendaji wa matoleo wa semantic (major.minor.patch)
-2. **Tarehe**: Tarehe ya utoaji au masasisho kwa muundo YYYY-MM-DD
-3. **Kategoria**: Imeongezwa, Imebadilishwa, Imepitwa na wakati, Imeondolewa, Imerekebishwa, Usalama
-4. **Maelezo Wazi**: Maelezo mafupi ya kile kilichobadilika
-5. **Tathmini ya Athari**: Jinsi mabadiliko yanavyoathiri watumiaji waliopo
+1. **Version Number**: Following semantic versioning (major.minor.patch)
+2. **Date**: Release or update date in YYYY-MM-DD format
+3. **Category**: Added, Changed, Deprecated, Removed, Fixed, Security
+4. **Clear Description**: Concise description of what changed
+5. **Impact Assessment**: How changes affect existing users
 
-### Makundi ya Mabadiliko
+### Change Categories
 
-#### Imeongezwa
-- Sifa mpya, sehemu za nyaraka, au uwezo mpya
+#### Added
+- Vipengele vipya, sehemu za nyaraka, au uwezo mpya
 - Mifano mipya, violezo, au rasilimali za kujifunza
-- Zana za ziada, skripti, au huduma ndogo
+- Zana za ziada, skiripti, au matumizi
 
-#### Imebadilishwa
-- Marekebisho ya kazi au nyaraka zilizopo
+#### Changed
+- Marekebisho ya utendaji uliopo au nyaraka
 - Sasisho za kuboresha uwazi au usahihi
-- Urejeshaji wa muundo wa yaliyomo au shirika
+- Upangaji upya wa yaliyomo au muundo
 
-#### Imepitwa na Wakati
-- Sifa au mbinu zinazokuwa zinapitwa na wakati
+#### Deprecated
+- Vipengele au mbinu zinazohamiawa kutoka huduma
 - Sehemu za nyaraka zilizopangwa kuondolewa
-- Mbinu zilizo na mbadala bora
+- Njia ambazo zina mbadala bora zaidi
 
-#### Imeondolewa
-- Sifa, nyaraka, au mifano ambayo hayana uhusiano tena
-- Taarifa zisizofaa au mbinu zilizopitwa na wakati
-- Yaliyomo ya ziada au yaliyochanganishwa
+#### Removed
+- Vipengele, nyaraka, au mifano ambayo hayana umuhimu tena
+- Taarifa zilizozeeka au mbinu zilizopitwa na wakati
+- Yaliyojirudia au yaliyokunjwa
 
-#### Imerekebishwa
+#### Fixed
 - Marekebisho ya makosa katika nyaraka au msimbo
-- Uamuzi wa masuala au matatizo yaliyoripotiwa
+- Utatuzi wa masuala yaliyoripotiwa
 - Maboresho ya usahihi au utendaji
 
-#### Usalama
+#### Security
 - Maboresho au marekebisho yanayohusiana na usalama
-- Sasisho kwa mbinu bora za usalama
-- Uamuzi wa udhaifu wa usalama
+- Sasisho za mbinu bora za usalama
+- Utatuzi wa udhaifu wa usalama
 
-### Miongozo ya Semantic Versioning
+### Semantic Versioning Guidelines
 
-#### Toleo Kuu (X.0.0)
-- Mabadiliko yanayovunja yaliyohitaji hatua kutoka kwa mtumiaji
-- Urejeshaji mkubwa wa muundo wa yaliyomo au shirika
-- Mabadiliko yanayobadilisha mbinu au njia ya msingi
+#### Major Version (X.0.0)
+- Mabadiliko ya kuvunja yanayohitaji hatua kutoka kwa mtumiaji
+- Upangaji mkubwa wa muundo wa yaliyomo au shirika
+- Mabadiliko yanayoathiri mbinu msingi au metodolojia
 
-#### Toleo Ndogo (X.Y.0)
-- Sifa mpya au nyongeza za yaliyomo
+#### Minor Version (X.Y.0)
+- Vipengele vipya au nyongeza za yaliyomo
 - Maboresho yanayohifadhi ulinganifu wa nyuma
 - Mifano, zana, au rasilimali za ziada
 
-#### Toleo la Marekebisho (X.Y.Z)
-- Marekebisho ya mdudu na marekebisho
-- Maboresho madogo kwa yaliyomo yaliopo
+#### Patch Version (X.Y.Z)
+- Marekebisho ya hitilafu na marekebisho
+- Maboresho madogo kwa yaliyopo
 - Ufafanuzi na maboresho madogo
 
-## Maoni na Mapendekezo ya Jamii
+## Community Feedback and Suggestions
 
-Tunahamasisha kwa moyo wote maoni ya jamii ili kuboresha rasilimali hii ya kujifunza:
+We actively encourage community feedback to improve this learning resource:
 
-### Jinsi ya Kutoa Maoni
-- **Masuala ya GitHub**: Ripoti matatizo au pendekeza maboresho (masuala maalumu ya AI yanakaribishwa)
-- **Mjadala wa Discord**: Shiriki mawazo na ungana na jamii ya Microsoft Foundry
-- **Pull Requests**: Changia maboresho ya moja kwa moja kwa yaliyomo, hasa violezo na mwongozo wa AI
-- **Discord ya Microsoft Foundry**: Shiriki katika channel #Azure kwa mijadala ya AZD + AI
-- **Mijadala ya Jamii**: Shiriki katika mijadala pana ya waendelezaji wa Azure
+### How to Provide Feedback
+- **GitHub Issues**: Ripoti matatizo au pendekeza maboresho (masuala maalum ya AI yanakaribishwa)
+- **Discord Discussions**: Shiriki mawazo na jihusishe na jamii ya Microsoft Foundry
+- **Pull Requests**: Changia maboresho moja kwa moja kwenye yaliyomo, hasa violezo na mwongozo za AI
+- **Microsoft Foundry Discord**: Shiriki katika chaneli ya #Azure kwa mijadala ya AZD + AI
+- **Community Forums**: Shiriki katika mijadala pana ya waendelezaji wa Azure
 
-### Makundi ya Maoni
-- **Usahihi wa Yaliyomo ya AI**: Marekebisho ya taarifa za uunganishaji wa huduma za AI na uenezaji
-- **Uzoefu wa Kujifunza**: Mapendekezo ya kuboresha mtiririko wa kujifunza kwa waendelezaji wa AI
-- **Yaliyomo ya AI Yanayokosekana**: Maombi ya violezo, mifano, au mifumo ya ziada ya AI
-- **Upatikanaji**: Maboresho kwa mahitaji mbalimbali ya kujifunza
-- **Uunganisho wa Zana za AI**: Mapendekezo ya uunganisho bora wa mtiririko wa maendeleo ya AI
-- **Mifano ya AI za Uzalishaji**: Maombi ya mifano ya uenezaji ya AI kwa kampuni
+### Feedback Categories
+- **AI Content Accuracy**: Marekebisho ya taarifa za muunganisho na uanzishaji wa huduma za AI
+- **Learning Experience**: Mapendekezo ya kuboresha mtiririko wa kujifunza kwa waendelezaji wa AI
+- **Missing AI Content**: Maombi ya violezo, mifumo, au mifano ya ziada ya AI
+- **Accessibility**: Maboresho kwa mahitaji tofauti ya kujifunza
+- **AI Tool Integration**: Mapendekezo ya kuunganisha vizuri mtiririko wa kazi wa maendeleo ya AI
+- **Production AI Patterns**: Maombi ya mifumo ya uanzishaji wa AI ya kampuni
 
-### Ahadi ya Kujibu
-- **Majibu kwa Masuala**: Ndani ya masaa 48 kwa matatizo yaliyoripotiwa
-- **Maombi ya Sifa**: Tathmini ndani ya wiki moja
-- **Michango ya Jamii**: Mapitio ndani ya wiki moja
-- **Masuala ya Usalama**: Kipaumbele cha papo hapo na mwitikio wa haraka
+### Response Commitment
+- **Issue Response**: Ndani ya saa 48 kwa matatizo yaliyoripotiwa
+- **Feature Requests**: Tathmini ndani ya wiki moja
+- **Community Contributions**: Mapitio ndani ya wiki moja
+- **Security Issues**: Kipaumbele cha mara moja na jibu la haraka
 
-## Ratiba ya Matengenezo
+## Maintenance Schedule
 
-### Sasisho za Mara kwa Mara
-- **Mapitio ya Kila Mwezi**: Usahihi wa yaliyomo na uhakiki wa viungo
-- **Sasisho za Robo Mwaka**: Nyongeza kubwa za yaliyomo na maboresho
-- **Mapitio ya Nusu Mwaka**: Urekebishaji mpana wa muundo na uboreshaji
-- **Utoaji wa Kila Mwaka**: Sasisho za toleo kuu zenye maboresho makubwa
+### Regular Updates
+- **Monthly Reviews**: Mapitio ya kila mwezi ya usahihi wa yaliyomo na uhalali wa viungo
+- **Quarterly Updates**: Maboresho makubwa na nyongeza kila robo
+- **Semi-Annual Reviews**: Upangaji upya wa kina na maboresho kila nusu mwaka
+- **Annual Releases**: Matoleo makubwa ya kila mwaka yenye maboresho muhimu
 
-### Ufuatiliaji na Usalama wa Ubora
-- **Upimaji wa Otomatiki**: Uthibitishaji wa mara kwa mara wa mifano ya msimbo na viungo
-- **Ujumuishaji wa Maoni ya Jamii**: Uingizwa wa mara kwa mara wa mapendekezo ya watumiaji
-- **Sasisho za Teknolojia**: Ulinganifu na huduma za hivi karibuni za Azure na utoaji wa azd
-- **Ukaguzi wa Upatikanaji**: Mapitio ya mara kwa mara kwa kanuni za muundo jumuishi
+### Monitoring and Quality Assurance
+- **Automated Testing**: Uthibitisho wa mara kwa mara wa mifano ya msimbo na viungo
+- **Community Feedback Integration**: Ushirikishwaji wa mapendekezo ya watumiaji mara kwa mara
+- **Technology Updates**: Ulinganifu na huduma za hivi karibuni za Azure na matoleo ya azd
+- **Accessibility Audits**: Mapitio ya mara kwa mara kwa kanuni za muundo wa ujumuishaji
 
-## Sera ya Usaidizi wa Matoleo
+## Version Support Policy
 
-### Ustawi wa Toleo la Sasa
-- **Toleo Kuu la Hivi Karibuni**: Msaada kamili na sasisho za mara kwa mara
-- **Toleo Kuu la Awali**: Sasisho za usalama na marekebisho muhimu kwa miezi 12
-- **Matoleo ya Kale**: Msaada wa jamii pekee, hakuna sasisho rasmi
+### Current Version Support
+- **Latest Major Version**: Msaada kamili pamoja na maboresho ya mara kwa mara
+- **Previous Major Version**: Sasisho za usalama na marekebisho muhimu kwa miezi 12
+- **Legacy Versions**: Msaada wa jamii tu, hakuna masasisho rasmi
 
-### Mwongozo wa Uhamishaji
-Wakati matoleo makuu yanapotolewa, tunatoa:
-- **Viongozo vya Uhamishaji**: Maelekezo ya hatua kwa hatua ya mchakato wa kuhamia
-- **Maelezo ya Ulinganifu**: Maelezo kuhusu mabadiliko yanayovunja
-- **Msaada wa Zana**: Skripti au zana za kusaidia uhamishaji
-- **Msaada wa Jamii**: Majukwaa maalum kwa maswali kuhusu uhamishaji
+### Migration Guidance
+When major versions are released, we provide:
+- **Migration Guides**: Maelekezo ya hatua kwa hatua ya mabadiliko
+- **Compatibility Notes**: Maelezo kuhusu mabadiliko yanayovunja ulinganifu
+- **Tool Support**: Skiripti au zana kusaidia mchakato wa uhamisho
+- **Community Support**: Mijadala maalum kwa maswali ya uhamisho
 
 ---
 
-**Urambazaji**
-- **Somo Lililopita**: [Mwongozo wa Kujifunza](resources/study-guide.md)
-- **Somo Linalofuata**: Rudi kwenye [README Kuu](README.md)
+**Navigation**
+- **Previous Lesson**: [Mwongozo wa Masomo](resources/study-guide.md)
+- **Next Lesson**: Rudi kwa [README Kuu](README.md)
 
-**Endelea Kusasishwa**: Fuatilia hifadhi hii kwa arifa kuhusu matoleo mapya na masasisho muhimu ya nyenzo za kujifunzia.
+**Stay Updated**: Watch this repository for notifications about new releases and important updates to the learning materials.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Taarifa ya kutolea dhamana:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator] (https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Nakala asilia ya nyaraka katika lugha yake ya asili inapaswa kuzingatiwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, inashauriwa kutumia tafsiri ya kitaalamu inayofanywa na mtafsiri wa binadamu. Hatubebei lawama kwa kutoelewana au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
+**Taarifa ya kutokuwajibika**:
+Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kwamba tafsiri za kimashine zinaweza kuwa na makosa au ukosefu wa usahihi. Nyaraka ya awali katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatuwajibiki kwa kutoelewana au tafsiri potofu zitokanazo na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

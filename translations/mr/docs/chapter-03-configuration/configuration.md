@@ -1,85 +1,111 @@
-# Configuration Guide
+# कॉन्फिगरेशन मार्गदर्शिका
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD नवशिक्यांसाठी](../../README.md)
-- **📖 Current Chapter**: प्रकरण 3 - कॉन्फिगरेशन व प्रमाणीकरण
-- **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next**: [प्रकरण 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 Next Chapter**: [प्रकरण 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
+**अध्याय मार्गदर्शन:**
+- **📚 अभ्यासक्रम गृहपृष्ठ**: [AZD For Beginners](../../README.md)
+- **📖 चालू अध्याय**: अध्याय 3 - कॉन्फिगरेशन आणि प्रमाणीकरण
+- **⬅️ मागील**: [तुमचा पहिला प्रकल्प](first-project.md)
+- **➡️ पुढील**: [तैनाती मार्गदर्शिका](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 पुढील अध्याय**: [अध्याय 4: कूट म्हणून इन्फ्रास्ट्रक्चर](../chapter-04-infrastructure/deployment-guide.md)
 
-## Introduction
+## परिचय
 
-ही सर्वांगिण मार्गदर्शिका Azure Developer CLI चे सर्व कॉन्फिगरेशन संबंधित पैलू समाविष्ट करते जेणेकरून विकास आणि तैनाती वर्कफ्लोज अधिक कार्यक्षम बनतील. तुम्हाला कॉन्फिगरेशन पदानुक्रम, वातावरण व्यवस्थापन, प्रमाणीकरण पद्धती आणि जटिल परिदृश्यांसाठी प्रगत कॉन्फिगरेशन पॅटर्नबद्दल शिकवले जाईल जे सुरक्षित आणि कार्यक्षम Azure तैनातीस सक्षम करतात.
+हा सर्वसमावेशक मार्गदर्शक Azure Developer CLI ची सुसंगत विकास आणि तैनाती कार्यप्रवाहासाठी कॉन्फिगर करण्याच्या सर्व पैलूंवर प्रकाश टाकतो. तुम्ही कॉन्फिगरेशन श्रेणी, पर्यावरण व्यवस्थापन, प्रमाणीकरण पद्धती, आणि प्रगत कॉन्फिगरेशन नमुने याबद्दल शिकाल जे कार्यक्षम आणि सुरक्षित Azure तैनातीस सक्षम करतात.
 
-## Learning Goals
+## शिक्षण उद्दिष्टे
 
 या धड्याच्या शेवटी, तुम्ही:
-- azd कॉन्फिगरेशन पदानुक्रम पारंगत कराल आणि सेटिंग्ज कशा प्राथमिकता देतात हे समजून घ्याल
+- azd कॉन्फिगरेशन श्रेणीमध्ये पारंगत व्हाल आणि समजूतदारपणे सेटिंग्ज कशा प्राधान्यक्रमाने असतात हे समजून घ्याल
 - जागतिक आणि प्रकल्प-विशिष्ट सेटिंग्ज प्रभावीपणे कॉन्फिगर कराल
-- विविध कॉन्फिगरेशनसह एकाधिक वातावरणे व्यवस्थापित कराल
-- सुरक्षित प्रमाणीकरण आणि अधिकृतता पॅटर्न अमलात आणाल
-- जटिल परिस्थितीसाठी प्रगत कॉन्फिगरेशन पॅटर्न समजून घेन
+- भिन्न कॉन्फिगरेशनसह बहुतेक पर्यावरणे व्यवस्थापित कराल
+- सुरक्षित प्रमाणीकरण आणि अनुमती नमुने अमलात आणाल
+- गुंतागुंतीच्या परिस्थितीसाठी प्रगत कॉन्फिगरेशन नमुन्यांना समजून घ्याल
 
-## Learning Outcomes
+## शिक्षण परिणाम
 
-हा धडा पूर्ण केल्यानंतर, तुम्ही सक्षम असाल:
-- विकास वर्कफ्लोजसाठी azd कॉन्फिगर करणे
-- अनेक तैनाती वातावरणे सेटअप व व्यवस्थापित करणे
+हा धडा पूर्ण केल्यावर, तुम्ही सक्षम असाल:
+- सर्वोत्तम विकास कार्यप्रवाहासाठी azd कॉन्फिगर करणे
+- अनेक तैनाती पर्यावरणांची स्थापना आणि व्यवस्थापन करणे
 - सुरक्षित कॉन्फिगरेशन व्यवस्थापन पद्धती अमलात आणणे
-- कॉन्फिगरेशन-संबंधित समस्यांचे निराकरण करणे
-- विशिष्ट संस्थात्मक आवश्यकता पूर्ण करण्यासाठी azd वर्तन सानुकूल करणे
+- कॉन्फिगरेशन-संबंधित समस्या निराकरण करणे
+- विशिष्ट संस्थात्मक आवश्यकतांसाठी azd वर्तन सानुकूलित करणे
 
-ही सर्वांगिण मार्गदर्शिका Azure Developer CLI चे सर्व कॉन्फिगरेशन संबंधित पैलू समाविष्ट करते जेणेकरून विकास आणि तैनाती वर्कफ्लोज अधिक कार्यक्षम बनतील.
+हा सर्वसमावेशक मार्गदर्शक Azure Developer CLI ची सुसंगत विकास आणि तैनाती कार्यप्रवाहासाठी कॉन्फिगर करण्याच्या सर्व पैलूंवर प्रकाश टाकतो.
 
-## Configuration Hierarchy
+## azd प्रकल्पातील AI एजंट्स समजून घेणे
 
-azd एक पदानुक्रमित कॉन्फिगरेशन सिस्टम वापरते:
-1. **कमांड-लाइन ध्वज** (सर्वोच्च प्राधान्य)
-2. **पर्यावरण चल (Environment variables)**
+जर तुम्हाला AI एजंट्सविषयी नवीन असाल, तर azd जगात त्यांना समजून घेण्याचा सोपा मार्ग येथे आहे.
+
+### एजंट म्हणजे काय?
+
+एजंट हा एक सॉफ्टवेअरचा तुकडा आहे जो विनंती प्राप्त करू शकतो, त्याबद्दल विचार करू शकतो आणि क्रिया करू शकतो—अधिकभागी AI मॉडेल कॉल करणे, डेटा शोधणे किंवा इतर सेवा सुरू करणे. azd प्रकल्पात, एजंट तुमच्या वेब फ्रंटेंड किंवा API बॅकएंडसारख्या आणखी एका **सेवा** सारखे आहे.
+
+### एजंट azd प्रकल्प रचनेत कसा बसतो
+
+azd प्रकल्प तीन स्तरांनी बनलेला आहे: **इन्फ्रास्ट्रक्चर**, **कोड**, आणि **कॉन्फिगरेशन**. एजंट हे या स्तरांमध्ये इतर कोणत्याही सेवेप्रमाणे जोडले जातात:
+
+| स्तर | पारंपरिक अॅपसाठी काय करते | एजंटसाठी काय करते |
+|-------|----------------------------|---------------------|
+| **इन्फ्रास्ट्रक्चर** (`infra/`) | वेब अॅप आणि डेटाबेस तयार करते | AI मॉडेल एंडपॉइंट, शोध अनुक्रमणिका, किंवा एजंट होस्ट तयार करते |
+| **कोड** (`src/`) | तुमचा फ्रंटेंड आणि API स्त्रोत कोड असतो | तुमचा एजंट लॉजिक आणि प्रॉम्प्ट संकल्पना असतात |
+| **कॉन्फिगरेशन** (`azure.yaml`) | तुमच्या सेवा आणि त्यांचे होस्टिंग लक्षात ठेवते | तुमचा एजंट सेवा म्हणून सूचीत करते, त्याचा कोड आणि होस्ट दर्शवते |
+
+### `azure.yaml` ची भूमिका
+
+तुम्हाला सध्या साक्षात्कारांच्या व्याकरणाची आठवण ठेवण्याची गरज नाही. संकल्पनात्मकदृष्ट्या, `azure.yaml` ही फाइल आहे जिथे तुम्ही azd ला सांगता: *"मेरी अॅप्लिकेशनमध्ये कोणकोणत्या सेवा आहेत आणि त्यांचा कोड कुठे आहे."*
+
+जेव्हा तुमच्या प्रकल्पात AI एजंट समाविष्ट असतो, तेव्हा `azure.yaml` फक्त त्या एजंटला सेवा म्हणून सूचीबद्ध करतो. मग azd योग्य इन्फ्रास्ट्रक्चर (जसे Microsoft Foundry Models एंडपॉइंट किंवा एजंट होस्ट करण्यासाठी कंटेनर अॅप) तयार करतो आणि तुमचा एजंट कोड तैनात करतो—जसे की हे वेब अॅप किंवा API साठी करतो.
+
+याचा अर्थ असा की शिकण्यासाठी काही मूलभूत नवीन नाही. तुम्ही कसे azd वेब सेवा व्यवस्थापित करतो हे समजलात, तर तुम्हाला अजूनच एजंट कसा व्यवस्थापित करतो हे कळेल.
+
+## कॉन्फिगरेशन श्रेणी
+
+azd एक श्रेणीनुसार कॉन्फिगरेशन प्रणाली वापरते:
+1. **कमांड-लाइन फ्लॅग्ज** (सर्वोच्च प्राधान्य)
+2. **पर्यावरण चल (Environment Variables)**
 3. **स्थानिक प्रकल्प कॉन्फिगरेशन** (`.azd/config.json`)
-4. **ग्लोबल वापरकर्ता कॉन्फिगरेशन** (`~/.azd/config.json`)
+4. **जागतिक वापरकर्ता कॉन्फिगरेशन** (`~/.azd/config.json`)
 5. **डीफॉल्ट मूल्ये** (कमी प्राधान्य)
 
-## Global Configuration
+## जागतिक कॉन्फिगरेशन
 
-### Setting Global Defaults
+### जागतिक डीफॉल्ट्स सेट करणे
 ```bash
-# डिफॉल्ट सदस्यता सेट करा
+# डीफॉल्ट सदस्यता सेट करा
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# डिफॉल्ट स्थान सेट करा
+# डीफॉल्ट स्थान सेट करा
 azd config set defaults.location "eastus2"
 
-# डिफॉल्ट रिसोर्स ग्रुप नामकरण पद्धत सेट करा
+# डीफॉल्ट रिसोर्स ग्रुप नामकरण पद्धत सेट करा
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
 # सर्व जागतिक कॉन्फिगरेशन पहा
 azd config list
 
-# एका कॉन्फिगरेशन काढा
+# एक कॉन्फिगरेशन काढा
 azd config unset defaults.location
 ```
 
-### Common Global Settings
+### सामान्य जागतिक सेटिंग्ज
 ```bash
 # विकास प्राधान्ये
 azd config set alpha.enable true                    # अल्फा वैशिष्ट्ये सक्षम करा
 azd config set telemetry.enabled false             # टेलिमेट्री अक्षम करा
-azd config set output.format json                  # आउटपुट स्वरूप सेट करा
+azd config set output.format json                  # आउटपुट फॉरमॅट सेट करा
 
 # सुरक्षा सेटिंग्ज
 azd config set auth.useAzureCliCredential true     # प्रमाणीकरणासाठी Azure CLI वापरा
 azd config set tls.insecure false                  # TLS पडताळणी लागू करा
 
-# कार्यक्षमता समायोजन
+# कार्यप्रदर्शन ट्यूनिंग
 azd config set provision.parallelism 5             # समांतर संसाधन निर्मिती
-azd config set deploy.timeout 30m                  # तैनातीची कालमर्यादा
+azd config set deploy.timeout 30m                  # परिनियोजन वेळमर्यादा
 ```
 
-## 🏗️ Project Configuration
+## 🏗️ प्रकल्प कॉन्फिगरेशन
 
-### azure.yaml Structure
-`azure.yaml` फाईल ही तुमच्या azd प्रकल्पाचे हृदय आहे:
+### azure.yaml चे रचना
+`azure.yaml` फाइल तुमच्या azd प्रकल्पाचा केंद्रबिंदू आहे:
 
 ```yaml
 # Minimum configuration
@@ -155,9 +181,9 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Service Configuration Options
+### सेवा कॉन्फिगरेशन पर्याय
 
-#### Host Types
+#### होस्ट प्रकार
 ```yaml
 services:
   web-static:
@@ -176,7 +202,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Language-Specific Settings
+#### भाषा-विशिष्ट सेटिंग्ज
 ```yaml
 services:
   node-app:
@@ -200,22 +226,22 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 Environment Management
+## 🌟 पर्यावरण व्यवस्थापन
 
-### Creating Environments
+### पर्यावरण तयार करणे
 ```bash
-# नवीन वातावरण तयार करा
+# नवीन पर्यावरण तयार करा
 azd env new development
 
-# विशिष्ट स्थानासह तयार करा
+# विशिष्ट ठिकाणी तयार करा
 azd env new staging --location "westus2"
 
-# टेम्पलेटमधून तयार करा
+# साचा वापरून तयार करा
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Environment Configuration
-प्रत्येक वातावरणाची स्वतःची कॉन्फिगरेशन `.azure/<env-name>/config.json` मध्ये असते:
+### पर्यावरण कॉन्फिगरेशन
+प्रत्येक पर्यावरणाचे स्वतःचे कॉन्फिगरेशन `.azure/<env-name>/config.json` मध्ये असते:
 
 ```json
 {
@@ -237,14 +263,14 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 }
 ```
 
-### Environment Variables
+### पर्यावरण चल
 ```bash
-# पर्यावरण-विशिष्ट व्हेरिएबल सेट करा
+# पर्यावरण-विशिष्ट चल सेट करा
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# पर्यावरण व्हेरिएबल पहा
+# पर्यावरण चल पहा
 azd env get-values
 
 # अपेक्षित आउटपुट:
@@ -252,16 +278,16 @@ azd env get-values
 # API_KEY=secret-api-key
 # DEBUG=true
 
-# पर्यावरण व्हेरिएबल हटवा
+# पर्यावरण चल काढा
 azd env unset DEBUG
 
-# काढून टाकल्याची पुष्टी करा
+# काढले गेले आहे याची खात्री करा
 azd env get-values | grep DEBUG
 # (काहीही परत येऊ नये)
 ```
 
-### Environment Templates
-सुसंगत वातावरण सेटअपसाठी `.azure/env.template` तयार करा:
+### पर्यावरण साच्यांचे तयार करणे
+सुसंगत पर्यावरण सेटअपसाठी `.azure/env.template` तयार करा:
 ```bash
 # आवश्यक चल
 AZURE_SUBSCRIPTION_ID=
@@ -277,44 +303,44 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 Authentication Configuration
+## 🔐 प्रमाणीकरण कॉन्फिगरेशन
 
-### Azure CLI Integration
+### Azure CLI एकत्रीकरण
 ```bash
-# Azure CLI क्रेडेन्शियल वापरा (डिफॉल्ट)
+# Azure CLI प्रमाणपत्रे वापरा (डीफॉल्ट)
 azd config set auth.useAzureCliCredential true
 
-# विशिष्ट टेनंटसह लॉगिन करा
+# विशिष्ट टेनंटने लॉगिन करा
 az login --tenant <tenant-id>
 
-# डिफॉल्ट सदस्यता सेट करा
+# डीफॉल्ट सदस्यता सेट करा
 az account set --subscription <subscription-id>
 ```
 
-### Service Principal Authentication
-CI/CD पाइपलाइन्ससाठी:
+### सेवा प्राचार्य प्रमाणीकरण
+CI/CD पाईपलाइनसाठी:
 ```bash
-# पर्यावरण चल सेट करा
+# पर्यावरणातील चल सेट करा
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# किंवा थेट संरचीत करा
+# किंवा थेट कॉन्फिगर करा
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Managed Identity
-Azure-होस्ट केलेल्या वातावरणांसाठी:
+### व्यवस्थापित ओळख (Managed Identity)
+Azure-होस्ट केलेल्या पर्यावरणासाठी:
 ```bash
 # व्यवस्थापित ओळख प्रमाणीकरण सक्षम करा
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ Infrastructure Configuration
+## 🏗️ इन्फ्रास्ट्रक्चर कॉन्फिगरेशन
 
-### Bicep Parameters
+### Bicep पॅरामीटर्स
 इन्फ्रास्ट्रक्चर पॅरामीटर्स `infra/main.parameters.json` मध्ये कॉन्फिगर करा:
 ```json
 {
@@ -337,8 +363,8 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 }
 ```
 
-### Terraform Configuration
-Terraform प्रकल्पांसाठी, `infra/terraform.tfvars` मध्ये कॉन्फिगर करा:
+### Terraform कॉन्फिगरेशन
+Terraform प्रकल्पांसाठी `infra/terraform.tfvars` मध्ये कॉन्फिगर करा:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -346,9 +372,9 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Deployment Configuration
+## 🚀 तैनाती कॉन्फिगरेशन
 
-### Build Configuration
+### बिल्ड कॉन्फिगरेशन
 ```yaml
 # In azure.yaml
 services:
@@ -371,7 +397,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Docker Configuration
+### Docker कॉन्फिगरेशन
 ```yaml
 services:
   api:
@@ -387,17 +413,17 @@ services:
 ```
 उदाहरण `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 Advanced Configuration
+## 🔧 प्रगत कॉन्फिगरेशन
 
-### Custom Resource Naming
+### सानुकूल संसाधन नामकरण
 ```bash
-# नामकरणासाठी नियम ठरवा
+# नामांकनाच्या संहितांची सेटिंग करा
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### Network Configuration
+### नेटवर्क कॉन्फिगरेशन
 ```yaml
 # In azure.yaml
 infra:
@@ -408,7 +434,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Monitoring Configuration
+### निरीक्षण कॉन्फिगरेशन
 ```yaml
 # In azure.yaml
 monitoring:
@@ -420,9 +446,9 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Environment-Specific Configurations
+## 🎯 पर्यावरण-विशिष्ट कॉन्फिगरेशन
 
-### Development Environment
+### विकास पर्यावरण
 ```bash
 # .azure/विकास/.env
 DEBUG=true
@@ -431,7 +457,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Staging Environment
+### स्टेजिंग पर्यावरण
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -440,31 +466,31 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### Production Environment
+### उत्पादन पर्यावरण
 ```bash
-# .azure/उत्पादन/.env
+# .azure/production/.env
 DEBUG=false
 LOG_LEVEL=error
 ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Configuration Validation
+## 🔍 कॉन्फिगरेशन वैधता तपासणी
 
-### Validate Configuration
+### कॉन्फिगरेशन वैधता तपासा
 ```bash
-# कॉन्फिगरेशनची वाक्यरचना तपासा
+# संरचना वाक्यरचना तपासा
 azd config validate
 
-# पर्यावरण चलांची चाचणी करा
+# चाचणी पर्यावरण बदल तपासा
 azd env get-values
 
-# पायाभूत संरचनेची पडताळणी करा
+# मूलभूत सुविधा पडताळा
 azd provision --dry-run
 ```
 
-### Configuration Scripts
-वैधता तपासणीसाठी `scripts/` मध्ये स्क्रिप्ट तयार करा:
+### कॉन्फिगरेशन स्क्रिप्ट्स
+`scripts/` मध्ये तपासणी स्क्रिप्ट तयार करा:
 
 ```bash
 #!/bin/bash
@@ -472,13 +498,13 @@ azd provision --dry-run
 
 echo "Validating configuration..."
 
-# आवश्यक पर्यावरण चल तपासा
+# आवश्यक वातावरण चल तपासा
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# azure.yaml ची वाक्यरचना सत्यापित करा
+# azure.yaml वाक्यरचना तपासा
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -487,9 +513,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Best Practices
+## 🎓 सर्वोत्तम पद्धती
 
-### 1. Use Environment Variables
+### 1. पर्यावरण चल वापरा
 ```yaml
 # Good: Use environment variables
 database:
@@ -500,7 +526,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organize Configuration Files
+### 2. कॉन्फिगरेशन फाइल्सचे आयोजन करा
 ```
 .azure/
 ├── config.json              # Global project config
@@ -516,16 +542,16 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Version Control Considerations
+### 3. आवृत्ती नियंत्रण लक्षात ठेवा
 ```bash
 # .gitignore
-.azure/*/config.json         # पर्यावरण कॉन्फिग्स (संसाधन आयडी समाविष्ट असतात)
-.azure/*/.env               # पर्यावरण व्हेरिएबल्स (गुप्त माहिती असू शकतात)
+.azure/*/config.json         # पर्यावरण कॉन्फिगर (स्त्रोत आयडीस समाविष्ट)
+.azure/*/.env               # पर्यावरण चल (गुपिते असू शकतात)
 .env                        # स्थानिक पर्यावरण फाइल
 ```
 
-### 4. Configuration Documentation
-तुमची कॉन्फिगरेशन `CONFIG.md` मध्ये दस्तऐवजीत करा:
+### 4. कॉन्फिगरेशन कागदपत्रीकरण
+तुमच्या कॉन्फिगरेशनचे दस्तऐवजीकरण `CONFIG.md` मध्ये करा:
 ```markdown
 # Configuration Guide
 
@@ -540,11 +566,11 @@ database:
 - Production: Uses production database, error logging only
 ```
 
-## 🎯 Hands-On Practice Exercises
+## 🎯 व्यावहारिक सराव सराव
 
-### Exercise 1: Multi-Environment Configuration (15 minutes)
+### सराव 1: मल्टी-पर्यावरण कॉन्फिगरेशन (15 मिनिटे)
 
-**Goal**: तीन वेगवेगळ्या सेटिंग्ज असलेली वातावरणे तयार व कॉन्फिगर करा
+**उद्दिष्ट:** वेगवेगळ्या सेटिंग्जसह तीन पर्यावरण तयार करा आणि कॉन्फिगर करा
 
 ```bash
 # विकास वातावरण तयार करा
@@ -565,67 +591,67 @@ azd env set LOG_LEVEL error
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 10
 
-# प्रत्येक वातावरण सत्यापित करा
+# प्रत्येक वातावरण तपासा
 azd env select dev && azd env get-values
 azd env select staging && azd env get-values
 azd env select production && azd env get-values
 ```
 
-**Success Criteria:**
-- [ ] तीनही वातावरणे यशस्वीरित्या तयार झाली असावीत
-- [ ] प्रत्येक वातावरणाची स्वतंत्र कॉन्फिगरेशन असावी
-- [ ] वातावरणांमध्ये चुका न होता स्विच करता यावे
-- [ ] `azd env list` सर्व तीन वातावरणे दाखवते
+**यशाची निकषे:**
+- [ ] तीन पर्यावरण यशस्वीपणे तयार केले
+- [ ] प्रत्येक पर्यावरणाची वेगळी कॉन्फिगरेशन आहे
+- [ ] त्रुटीशिवाय पर्यावरणांमध्ये बदल केला जाऊ शकतो
+- [ ] `azd env list` सर्व तीन पर्यावरण दाखवते
 
-### Exercise 2: Secret Management (10 minutes)
+### सराव 2: गुपित व्यवस्थापन (10 मिनिटे)
 
-**Goal**: संवेदनशील डेटासह सुरक्षित कॉन्फिगरेशनचा सराव करा
+**उद्दिष्ट:** संवेदनशील डेटासाठी सुरक्षित कॉन्फिगरेशन प्रॅक्टिस करा
 
 ```bash
-# गुप्त माहिती सेट करा (आउटपुटमध्ये दाखवली जाणार नाही)
+# रहस्य सेट करा (आउटपुटमध्ये दाखवले जात नाही)
 azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 
-# गैर-गुप्त कॉन्फिग सेट करा
+# गुप्त नसलेली कॉन्फिग सेट करा
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# पर्यावरण पहा (गुप्त माहिती लपवली पाहिजे)
+# पर्यावरण पाहा (रहस्ये ठेऊ केली पाहिजेत)
 azd env get-values
 
-# गुप्त माहिती साठवलेली आहे याची पडताळणी करा
-azd env get DB_PASSWORD  # वास्तविक मूल्य दाखवले पाहिजे
+# रहस्ये साठवलेली आहेत की नाही याची पडताळणी करा
+azd env get DB_PASSWORD  # खरी किंमत दाखवली पाहिजे
 ```
 
-**Success Criteria:**
-- [ ] सीक्रेट्स टर्मिनलमध्ये दाखवता येणार नाहीत अशा प्रकारे संग्रहित केलेले असावेत
-- [ ] `azd env get-values` मध्ये रेडॅक्ट केलेले सीक्रेट्स दिसतात
-- [ ] वैयक्तिक `azd env get <SECRET_NAME>` वास्तविक मूल्य परत करते
+**यशाची निकषे:**
+- [ ] गुपिते टर्मिनलमध्ये न दिसता संग्रहित केली गेली
+- [ ] `azd env get-values` मध्ये लालित गुपिते दाखवली जातात
+- [ ] स्वतंत्र `azd env get <SECRET_NAME>` वास्तविक मूल्य प्राप्त करतो
 
-## Next Steps
+## पुढील पावले
 
-- [Your First Project](first-project.md) - कॉन्फिगरेशन प्रत्यक्षात लागू करा
-- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - तैनातीसाठी कॉन्फिगरेशन वापरा
-- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - उत्पादन-तयार कॉन्फिगरेशन
+- [तुमचा पहिला प्रकल्प](first-project.md) - प्रत्यक्षात कॉन्फिगरेशन लागू करा
+- [तैनाती मार्गदर्शिका](../chapter-04-infrastructure/deployment-guide.md) - तैनातीसाठी कॉन्फिगरेशन वापरा
+- [संसाधने पुरवठा करणे](../chapter-04-infrastructure/provisioning.md) - उत्पादन-तयार कॉन्फिगरेशन
 
-## References
+## संदर्भ
 
-- [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Environment Variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [azd कॉन्फिगरेशन संदर्भ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml योजना](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [पर्यावरण चल](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD नवशिक्यांसाठी](../../README.md)
-- **📖 Current Chapter**: प्रकरण 3 - कॉन्फिगरेशन व प्रमाणीकरण
-- **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next Chapter**: [प्रकरण 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
-- **Next Lesson**: [Your First Project](first-project.md)
+**अध्याय मार्गदर्शन:**
+- **📚 अभ्यासक्रम गृहपृष्ठ**: [AZD For Beginners](../../README.md)
+- **📖 चालू अध्याय**: अध्याय 3 - कॉन्फिगरेशन आणि प्रमाणीकरण
+- **⬅️ मागील**: [तुमचा पहिला प्रकल्प](first-project.md)
+- **➡️ पुढील अध्याय**: [अध्याय 4: कूट म्हणून इन्फ्रास्ट्रक्चर](../chapter-04-infrastructure/deployment-guide.md)
+- **पुढील धडा**: [तुमचा पहिला प्रकल्प](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-अस्वीकरण:
-हा दस्तऐवज एआय अनुवाद सेवा Co-op Translator (https://github.com/Azure/co-op-translator) वापरून अनुवादित केला आहे. आम्ही अचूकतेसाठी प्रयत्न करतो, परंतु कृपया ध्यानात ठेवा की स्वयंचलित अनुवादांमध्ये चुका किंवा त्रुटी असू शकतात. मूळ दस्तऐवज त्याच्या मूळ भाषेत अधिकृत स्रोत मानला जावा. महत्त्वाच्या माहितीबाबत व्यावसायिक मानवी अनुवाद सुचवला जातो. या अनुवादाच्या वापरातून उद्भवणाऱ्या कोणत्याही गैरसमज किंवा चुकीच्या अर्थलावासाठी आम्ही जबाबदार नाही.
+**अस्वीकरण**:
+हा दस्तऐवज एआय अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) वापरून अनुवादित करण्यात आला आहे. आम्ही अचूकतेसाठी प्रयत्न करतो, तरी कृपया लक्षात ठेवा की स्वयंचलित अनुवादांमध्ये चुका किंवा अचूकतेतील त्रुटी असू शकतात. मूळ दस्तऐवज त्याच्या मूळ भाषेत अधिकृत स्रोत मानला जावा. महत्त्वाच्या माहितीसाठी व्यावसायिक मानवी अनुवादाचा सल्ला दिला जातो. या अनुवादाच्या वापरामुळे झालेल्या कोणत्याही गैरसमजुती किंवा वाक्प्रचारांसाठी आम्ही जबाबदार नाही.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

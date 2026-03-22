@@ -1,10 +1,10 @@
-# Moniagenttien koordinointimallit
+# Moni-agenttien koordinointimallit
 
-⏱️ **Arvioitu aika**: 60-75 minuuttia | 💰 **Arvioidut kustannukset**: ~$100-300/kk | ⭐ **Vaativuus**: Edistynyt
+⏱️ **Arvioitu aika**: 60-75 minuuttia | 💰 **Arvioidut kustannukset**: ~$100-300/kk | ⭐ **Monimutkaisuus**: Edistynyt
 
 **📚 Oppimispolku:**
-- ← Previous: [Kapasiteetin suunnittelu](capacity-planning.md) - Resurssien mitoittaminen ja skaalautumisstrategiat
-- 🎯 **Olet täällä**: Moniagenttien koordinointimallit (orkestrointi, viestintä, tilanhallinta)
+- ← Edellinen: [Kapasiteetin suunnittelu](capacity-planning.md) - Resurssien mitoitus- ja skaalautumisstrategiat
+- 🎯 **Olet täällä**: Moni-agenttien koordinointimallit (Orkestraatio, viestintä, tilanhallinta)
 - → Seuraava: [SKU-valinta](sku-selection.md) - Oikeiden Azure-palveluiden valinta
 - 🏠 [Kurssin etusivu](../../README.md)
 
@@ -12,69 +12,63 @@
 
 ## Mitä opit
 
-Suorittamalla tämän oppitunnin opit:
-- Ymmärtämään **moniagenttiarkkitehtuurin** malleja ja milloin käyttää niitä
-- Toteuttamaan **orkestrointimalleja** (keskitetty, hajautettu, hierarkkinen)
-- Suunnittelemaan **agenttien viestintästrategioita** (synkroninen, asynkroninen, tapahtumapohjainen)
-- Hallitsemaan **jaettua tilaa** hajautettujen agenttien välillä
-- Ottamaan käyttöön **moniagenttijärjestelmiä** Azureen AZD:n avulla
-- Soveltamaan **koordinaatiomalleja** todellisiin AI-skenaarioihin
-- Valvomaan ja virheenkorjaamaan hajautettuja agenttijärjestelmiä
+Suorittamalla tämän oppitunnin:
+- Ymmärrät **moni-agenttiarkkitehtuurin** malleja ja milloin niitä käytetään
+- Toteutat **orkestraatiomalleja** (keskitetty, hajautettu, hierarkkinen)
+- Suunnittelet **agenttien viestintä**strategioita (synkroninen, asynkroninen, tapahtumapohjainen)
+- Hallitset **jaettua tilaa** hajautettujen agenttien välillä
+- Julkaiset **moni-agenttijärjestelmiä** Azureen AZD:llä
+- Sovellat **koordinaatiomalleja** todellisissa tekoälytilanteissa
+- Valvot ja virheenkorjaat hajautettuja agenttijärjestelmiä
 
-## Miksi moniagenttikoordinaatio on tärkeää
+## Miksi moni-agenttien koordinointi on tärkeää
 
-### Evoluutio: yhdestä agentista moniagenttiin
+### Evoluutio: yksittäisestä agentista moni-agenttiin
 
 **Yksittäinen agentti (yksinkertainen):**
 ```
 User → Agent → Response
 ```
 - ✅ Helppo ymmärtää ja toteuttaa
-- ✅ Nopea yksinkertaisissa tehtävissä
-- ❌ Rajoittunut yksittäisen mallin kykyihin
-- ❌ Ei pysty rinnakkaistamaan monimutkaisia tehtäviä
+- ✅ Nopeaa yksinkertaisissa tehtävissä
+- ❌ Rajoittunut yksittäisen mallin kyvykkyyksiin
+- ❌ Ei voi rinnakkaistaa monimutkaisia tehtäviä
 - ❌ Ei erikoistumista
 
-**Moniagenttijärjestelmä (edistynyt):**
-```
-           ┌─────────────┐
-           │ Orchestrator│
-           └──────┬──────┘
-        ┌─────────┼─────────┐
-        │         │         │
-    ┌───▼──┐  ┌──▼───┐  ┌──▼────┐
-    │Agent1│  │Agent2│  │Agent3 │
-    │(Plan)│  │(Code)│  │(Review)│
-    └──────┘  └──────┘  └───────┘
-```
-- ✅ Erikoistuneet agentit tiettyihin tehtäviin
-- ✅ Rinnakkaisuus nopeuttaa
+**Moni-agenttijärjestelmä (edistynyt):**
+```mermaid
+graph TD
+    Orchestrator[Orkestroija] --> Agent1[Agent1<br/>Suunnitelma]
+    Orchestrator --> Agent2[Agent2<br/>Koodi]
+    Orchestrator --> Agent3[Agent3<br/>Arviointi]
+```- ✅ Erikoistuneita agenteja tiettyihin tehtäviin
+- ✅ Rinnakkainen suoritus nopeuden lisäämiseksi
 - ✅ Modulaarinen ja ylläpidettävä
 - ✅ Parempi monimutkaisissa työnkuluissa
-- ⚠️ Vaatii koordinointilogiikkaa
+- ⚠️ Vaatii koordinaatiologiikkaa
 
-**Analogia**: Yksittäinen agentti on kuin yksi henkilö, joka tekee kaikki tehtävät. Moniagenttijärjestelmä on kuin tiimi, jossa jokaisella jäsenellä on erikoistuneet taidot (tutkija, koodari, tarkastaja, kirjoittaja), jotka työskentelevät yhdessä.
+**Analogiana**: Yksittäinen agentti on kuin yksi henkilö, joka tekee kaikki tehtävät. Moni-agentti on kuin tiimi, jossa jokaisella jäsenellä on erikoisosaamista (tutkija, koodari, tarkastaja, kirjailija) ja he työskentelevät yhdessä.
 
 ---
 
 ## Keskeiset koordinointimallit
 
-### Malli 1: Sekventiaalinen koordinointi (vastuun ketju)
+### Malli 1: Peräkkäinen koordinointi (vastuuketju)
 
-**Milloin käyttää**: Tehtävät on suoritettava tietyssä järjestyksessä, kukin agentti rakentaa edellisen tuottaman tiedon päälle.
+**Milloin käyttää**: Tehtävät on suoritettava tietyssä järjestyksessä, kukin agentti rakentaa edeltävän tuloksen päälle.
 
 ```mermaid
 sequenceDiagram
-    participant User
-    participant Orchestrator
+    participant User as Käyttäjä
+    participant Orchestrator as Orkestroija
     participant Agent1 as Tutkimusagentti
     participant Agent2 as Kirjoittaja-agentti
-    participant Agent3 as Toimittaja-agentti
+    participant Agent3 as Muokkaaja-agentti
     
     User->>Orchestrator: "Kirjoita artikkeli tekoälystä"
     Orchestrator->>Agent1: Tutki aihetta
     Agent1-->>Orchestrator: Tutkimustulokset
-    Orchestrator->>Agent2: Kirjoita luonnos (käyttäen tutkimusta)
+    Orchestrator->>Agent2: Kirjoita luonnos (hyödyntäen tutkimusta)
     Agent2-->>Orchestrator: Artikkelin luonnos
     Orchestrator->>Agent3: Muokkaa ja paranna
     Agent3-->>Orchestrator: Lopullinen artikkeli
@@ -83,25 +77,25 @@ sequenceDiagram
     Note over User,Agent3: Peräkkäinen: Jokainen vaihe odottaa edellistä
 ```
 **Hyödyt:**
-- ✅ Selkeä tietovirta
-- ✅ Helppo virheenkorjata
+- ✅ Selkeä tiedonkulku
+- ✅ Helppo virheenkorjaus
 - ✅ Ennustettava suorituksen järjestys
 
 **Rajoitukset:**
 - ❌ Hitaampi (ei rinnakkaisuutta)
-- ❌ Yksi virhe estää koko ketjun
-- ❌ Ei kykene käsittelemään toisiinsa liittyviä tehtäviä
+- ❌ Yksi epäonnistuminen estää koko ketjun
+- ❌ Ei pysty käsittelemään toisiinsa liittyviä tehtäviä
 
-**Esimerkkikäyttötapaukset:**
-- Sisällönluontiputki (tutkimus → kirjoita → muokkaa → julkaise)
+**Esimerkkitapaukset:**
+- Sisällöntuotantoputki (tutkimus → kirjoita → muokkaa → julkaise)
 - Koodin generointi (suunnittele → toteuta → testaa → ota käyttöön)
-- Raportin luonti (datan keruu → analyysi → visualisointi → yhteenveto)
+- Raportin generointi (datan keruu → analyysi → visualisointi → yhteenveto)
 
 ---
 
-### Malli 2: Rinnakkainen koordinointi (Fan-Out/Fan-In)
+### Malli 2: Rinnakkaiskoordinaatio (Fan-Out/Fan-In)
 
-**Milloin käyttää**: Riippumattomat tehtävät voivat käynnistyä samanaikaisesti, tulokset yhdistetään lopussa.
+**Milloin käyttää**: Riippumattomat tehtävät voivat suorittautua samanaikaisesti, tulokset yhdistetään lopuksi.
 
 ```mermaid
 graph TB
@@ -126,32 +120,32 @@ graph TB
     style Aggregator fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
 **Hyödyt:**
-- ✅ Nopea (rinnakkaissuoritus)
-- ✅ Vikasietoinen (osittaiset tulokset hyväksyttäviä)
-- ✅ Skaalautuu horisontaalisesti
+- ✅ Nopeaa (rinnakkainen suoritus)
+- ✅ Vikasietoisuus (osittaiset tulokset hyväksyttäviä)
+- ✅ Vaakarajassa skaalautuva
 
 **Rajoitukset:**
 - ⚠️ Tulokset saattavat saapua eri järjestyksessä
-- ⚠️ Tarvitsee yhdistämislogiikkaa
+- ⚠️ Tarvitaan yhdistämislogiikkaa
 - ⚠️ Monimutkainen tilanhallinta
 
-**Esimerkkikäyttötapaukset:**
+**Esimerkkitapaukset:**
 - Monilähteinen tiedonkeruu (API:t + tietokannat + web-scraping)
 - Kilpailullinen analyysi (useat mallit tuottavat ratkaisuja, paras valitaan)
 - Käännöspalvelut (käännä useille kielille samanaikaisesti)
 
 ---
 
-### Malli 3: Hierarkkinen koordinointi (esimies–työntekijä)
+### Malli 3: Hierarkkinen koordinointi (johtaja-työntekijä)
 
-**Milloin käyttää**: Monimutkaiset työnkulut, joissa tarvitaan tehtävien delegointia.
+**Milloin käyttää**: Monimutkaiset työnkulut alitehtävineen, tarvitaan delegointia.
 
 ```mermaid
 graph TB
     Master[Pääorkestroija]
     Manager1[Tutkimuspäällikkö]
-    Manager2[Sisällönpäällikkö]
-    W1[Verkkokaavin]
+    Manager2[Sisältöpäällikkö]
+    W1[Verkkoskraperi]
     W2[Artikkelin analysoija]
     W3[Kirjoittaja]
     W4[Toimittaja]
@@ -174,19 +168,19 @@ graph TB
 
 **Rajoitukset:**
 - ⚠️ Monimutkaisempi arkkitehtuuri
-- ⚠️ Korkeampi latenssi (useita koordinointikerroksia)
-- ⚠️ Vaatii kehittynyttä orkestrointia
+- ⚠️ Korkeampi viive (useita koordinaatiokerroksia)
+- ⚠️ Vaatii kehittyneempää orkestrointia
 
-**Esimerkkikäyttötapaukset:**
-- Yritysdokumenttien käsittely (luokittele → reititä → käsittele → arkistoi)
-- Monivaiheiset tietoputket (ingest → puhdista → transformoi → analysoi → raportoi)
+**Esimerkkitapaukset:**
+- Yritysasiakirjojen käsittely (luokittelu → reititys → käsittely → arkistointi)
+- Monivaiheiset dataputket (ingest → siivous → muunnos → analyysi → raportti)
 - Monimutkaiset automaatiotyönkulut (suunnittelu → resurssien jakaminen → suoritus → valvonta)
 
 ---
 
-### Malli 4: Tapahtumapohjainen koordinointi (Publish-Subscribe)
+### Malli 4: Tapahtumapohjainen koordinointi (julkaisu-tilaus)
 
-**Milloin käyttää**: Agenttien täytyy reagoida tapahtumiin, löysä kytkentä on toivottavaa.
+**Milloin käyttää**: Agenttien täytyy reagoida tapahtumiin, halutaan löyhää kytkentää.
 
 ```mermaid
 sequenceDiagram
@@ -196,45 +190,45 @@ sequenceDiagram
     participant Agent3 as Ilmoittaja
     participant Agent4 as Arkistoija
     
-    Agent1->>EventBus: Julkaise "Tiedot vastaanotettu" tapahtuma
+    Agent1->>EventBus: Julkaise "Tieto vastaanotettu" -tapahtuma
     EventBus->>Agent2: Tilaa: Analysoi tiedot
     EventBus->>Agent3: Tilaa: Lähetä ilmoitus
     EventBus->>Agent4: Tilaa: Arkistoi tiedot
     
     Note over Agent1,Agent4: Kaikki tilaajat käsittelevät itsenäisesti
     
-    Agent2->>EventBus: Julkaise "Analyysi valmis" tapahtuma
+    Agent2->>EventBus: Julkaise "Analyysi valmis" -tapahtuma
     EventBus->>Agent3: Tilaa: Lähetä analyysiraportti
 ```
 **Hyödyt:**
-- ✅ Löysä kytkentä agenttien välillä
-- ✅ Helppo lisätä uusia agenteja (tilaa vain tilattava)
+- ✅ Löyhä kytkentä agenttien välillä
+- ✅ Helppo lisätä uusia agenteja (vain tilaa)
 - ✅ Asynkroninen käsittely
-- ✅ Resilientti (viestien pysyvyys)
+- ✅ Resilienssi (viestien pysyvyys)
 
 **Rajoitukset:**
 - ⚠️ Lopullinen yhdenmukaisuus (eventual consistency)
-- ⚠️ Vaikea virheenkorjaus
-- ⚠️ Viestien järjestyksen haasteet
+- ⚠️ Monimutkainen virheenkorjaus
+- ⚠️ Viestien järjestysongelmat
 
-**Esimerkkikäyttötapaukset:**
-- Reaaliaikaisen valvonnan järjestelmät (hälytykset, kojelaudat, lokit)
-- Monikanavaiset ilmoitukset (sähköposti, SMS, push, Slack)
-- Tietoputket (useat kuluttajat samasta datasta)
+**Esimerkkitapaukset:**
+- Reaaliaikaiset valvontajärjestelmät (hälytykset, kojelaudat, lokit)
+- Monikanavaiset ilmoitusjärjestelmät (sähköposti, SMS, push, Slack)
+- Datan käsittelyputket (useat kuluttajat samalle datalle)
 
 ---
 
-### Malli 5: Konsensuspohjainen koordinointi (Voting/Quorum)
+### Malli 5: Konsensukseen perustuva koordinointi (äänestys/kvoraumi)
 
 **Milloin käyttää**: Tarvitaan useiden agenttien hyväksyntä ennen etenemistä.
 
 ```mermaid
 graph TB
-    Input[Syötteen tehtävä]
-    Agent1[Agentti 1: GPT-4]
+    Input[Syöte (tehtävä)]
+    Agent1[Agentti 1: gpt-4.1]
     Agent2[Agentti 2: Claude]
     Agent3[Agentti 3: Gemini]
-    Voter[Konsensusääntäjä]
+    Voter[Konsensusäänestäjä]
     Output[Sovittu tulos]
     
     Input --> Agent1
@@ -248,37 +242,37 @@ graph TB
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
 **Hyödyt:**
-- ✅ Korkeampi tarkkuus (useita mielipiteitä)
-- ✅ Vikasietoinen (vähemmistön viat hyväksyttäviä)
-- ✅ Laatuvarmennus sisäänrakennettuna
+- ✅ Korkeampi tarkkuus (useita näkemyksiä)
+- ✅ Vikasietoisuus (vähemmistöepäonnistumiset hyväksyttäviä)
+- ✅ Laadunvarmistus sisäänrakennettuna
 
 **Rajoitukset:**
 - ❌ Kallis (useita mallikutsuja)
-- ❌ Hitaampi (odottaa kaikkia agentteja)
-- ⚠️ Konfliktinratkaisua tarvitaan
+- ❌ Hitaampi (odottaa kaikkia agenteja)
+- ⚠️ Tarvitaan konfliktinratkaisua
 
-**Esimerkkikäyttötapaukset:**
-- Sisällön moderointi (useat mallit arvioivat sisältöä)
-- Koodikatselmointi (useat linterit/analysoijat)
-- Lääketieteellinen diagnostiikka (useita AI-malleja, asiantuntijan validointi)
+**Esimerkkitapaukset:**
+- Sisällön moderoiminen (useat mallit tarkistavat sisällön)
+- Koodikatselmointi (useat linters/analysoijat)
+- Lääketieteellinen diagnoosi (useat tekoälymallit, asiantuntijavarmennus)
 
 ---
 
-## Arkkitehtuurikatsaus
+## Arkkitehtuurin yleiskuva
 
-### Täydellinen moniagenttijärjestelmä Azurella
+### Täydellinen moni-agenttijärjestelmä Azurella
 
 ```mermaid
 graph TB
     User[Käyttäjä/API-asiakas]
     APIM[Azure API-hallinta]
-    Orchestrator[Orchestrator-palvelu<br/>Container App]
-    ServiceBus[Azure Service Bus<br/>Event Hub]
+    Orchestrator[Orkestroija-palvelu<br/>Konttisovellus]
+    ServiceBus[Azure Service Bus<br/>Tapahtumakeskus]
     
-    Agent1[Tutkimusagentti<br/>Container App]
-    Agent2[Kirjoittaja-agentti<br/>Container App]
-    Agent3[Analyytikko-agentti<br/>Container App]
-    Agent4[Arvioija-agentti<br/>Container App]
+    Agent1[Tutkimusagentti<br/>Konttisovellus]
+    Agent2[Kirjoittaja-agentti<br/>Konttisovellus]
+    Agent3[Analyytikko-agentti<br/>Konttisovellus]
+    Agent4[Tarkastaja-agentti<br/>Konttisovellus]
     
     CosmosDB[(Cosmos DB<br/>Jaettu tila)]
     Storage[Azure Storage<br/>Artefaktit]
@@ -317,13 +311,13 @@ graph TB
 
 | Komponentti | Tarkoitus | Azure-palvelu |
 |-----------|---------|---------------|
-| **API Gateway** | Sisäänkäyntipiste, nopeudenrajoitus, autentikointi | API Management |
-| **Orchestrator** | Koordinoi agenttien työnkulkuja | Container Apps |
-| **Message Queue** | Asynkroninen viestintä | Service Bus / Event Hubs |
-| **Agents** | Erikoistuneet AI-työntekijät | Container Apps / Functions |
-| **State Store** | Jaettu tila, tehtävien seuranta | Cosmos DB |
-| **Artifact Storage** | Dokumentit, tulokset, lokit | Blob Storage |
-| **Monitoring** | Hajautettu jäljitys, lokit | Application Insights |
+| **API-väylä** | Sisäänkäynti, pyyntörajoitus, todennus | API Management |
+| **Orkestroija** | Koordinoi agenttien työnkulkuja | Container Apps |
+| **Viestijono** | Asynkroninen viestintä | Service Bus / Event Hubs |
+| **Agentit** | Erikoistuneet tekoälytyöntekijät | Container Apps / Functions |
+| **Tilatietovarasto** | Jaettu tila, tehtävien seuranta | Cosmos DB |
+| **Artefaktien tallennus** | Asiakirjat, tulokset, lokit | Blob Storage |
+| **Valvonta** | Hajautettu jäljitys, lokit | Application Insights |
 
 ---
 
@@ -350,16 +344,16 @@ docker --version
 - Aktiivinen Azure-tilaus
 - Oikeudet luoda:
   - Container Apps
-  - Service Bus namespaces
-  - Cosmos DB accounts
-  - Storage accounts
+  - Service Bus -nimialueet
+  - Cosmos DB -tilit
+  - Tallennustilit
   - Application Insights
 
-### Ennakkotiedot
+### Tietämyksen esivaatimukset
 
 Sinun tulisi olla suorittanut:
 - [Konfiguraation hallinta](../chapter-03-configuration/configuration.md)
-- [Autentikointi & turvallisuus](../chapter-03-configuration/authsecurity.md)
+- [Todennus & turvallisuus](../chapter-03-configuration/authsecurity.md)
 - [Mikropalveluesimerkki](../../../../examples/microservices)
 
 ---
@@ -398,13 +392,13 @@ multi-agent-system/
 
 ---
 
-## Oppitunti 1: Sekventiaalisen koordinoinnin malli
+## Oppitunti 1: Peräkkäinen koordinointimalli
 
-### Toteutus: Sisällönluontiputki
+### Toteutus: Sisällöntuotantoputki
 
-Rakennetaan sekventiaalinen putki: tutkimus → kirjoita → muokkaa → julkaise
+Rakennetaan peräkkäinen putki: Tutkimus → Kirjoita → Muokkaa → Julkaise
 
-### 1. AZD-määritys
+### 1. AZD-konfiguraatio
 
 **Tiedosto: `azure.yaml`**
 
@@ -435,7 +429,7 @@ services:
     host: containerapp
 ```
 
-### 2. Infrastruktuuri: Service Bus koordinointia varten
+### 2. Infrastruktuuri: Service Bus koordinointiin
 
 **Tiedosto: `infra/core/servicebus.bicep`**
 
@@ -552,7 +546,7 @@ class StateManager:
         return self.container.read_item(task_id, partition_key=task_id)
 ```
 
-### 4. Orkestrointipalvelu
+### 4. Orkestroijan palvelu
 
 **Tiedosto: `src/orchestrator/app.py`**
 
@@ -586,7 +580,7 @@ def create_content():
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # Luo tehtävä tilatallennukseen
+    # Luo tehtävä tilavarastoon
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -600,7 +594,7 @@ def create_content():
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # Mihin lähettää tulokset
+            'next_queue': 'writer-tasks'  # Minne lähettää tulokset
         }),
         content_type='application/json'
     )
@@ -661,9 +655,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # Kutsu Azure OpenAI -palvelua tutkimusta varten
+    # Kutsu Microsoft Foundry -malleja tutkimusta varten
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -680,7 +674,7 @@ def process_research_task(message_data):
         result={'research': research_results}
     )
     
-    # Lähetä seuraavalle agentille (kirjoittaja)
+    # Lähetä seuraavalle agentille (kirjoittajalle)
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -750,9 +744,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # Kutsu Azure OpenAI kirjoittamaan artikkeli
+    # Kutsu Microsoft Foundry -malleja kirjoittamaan artikkeli
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -807,7 +801,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. Editori-agentti
+### 7. Muokkaaja-agentti
 
 **Tiedosto: `src/agents/editor/app.py`**
 
@@ -837,9 +831,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # Kutsu Azure OpenAI -palvelua muokkausta varten
+    # Kutsu Microsoft Foundry Models -malleja muokkausta varten
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -886,10 +880,19 @@ if __name__ == '__main__':
 ### 8. Ota käyttöön ja testaa
 
 ```bash
-# Alusta ja ota käyttöön
+# Vaihtoehto A: Mallipohjainen käyttöönotto
 azd init
 azd up
 
+# Vaihtoehto B: Agentin manifestin käyttöönotto (vaatii laajennuksen)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
+azd up
+```
+
+> Katso [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) kaikista `azd ai`-lipuista ja -vaihtoehdoista.
+
+```bash
 # Hae orkestroijan URL-osoite
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
@@ -944,13 +947,13 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Oppitunti 2: Rinnakkaisen koordinoinnin malli
+## Oppitunti 2: Rinnakkaiskoordinaatiomalli
 
-### Toteutus: Monilähteinen tutkimuksen yhdistäjä
+### Toteutus: Monilähteinen tutkimuksen kerääjä
 
 Rakennetaan rinnakkainen järjestelmä, joka kerää tietoa useista lähteistä samanaikaisesti.
 
-### Rinnakkainen orkestroija
+### Rinnakkaisorkestroija
 
 **Tiedosto: `src/orchestrator/parallel_workflow.py`**
 
@@ -1022,7 +1025,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### Yhdistämislogiikka
+### Aggregointilogiikka
 
 **Tiedosto: `src/agents/aggregator/app.py`**
 
@@ -1038,7 +1041,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
 )
 
-# Seuraa tehtäväkohtaisia tuloksia
+# Seuraa tuloksia tehtävää kohti
 task_results = defaultdict(list)
 expected_agents = 4  # verkko, akateeminen, uutiset, sosiaalinen
 
@@ -1056,7 +1059,7 @@ def process_result(message_data):
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # Tarkista, ovatko kaikki agentit suorittaneet tehtävänsä (fan-in)
+    # Tarkista, ovatko kaikki agentit suorittaneet (fan-in)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
@@ -1103,21 +1106,21 @@ if __name__ == '__main__':
 ```
 
 **Rinnakkaismallin hyödyt:**
-- ⚡ **4x nopeampi** (agentit suorittavat samanaikaisesti)
-- 🔄 **Vikasietoinen** (osittaiset tulokset hyväksyttäviä)
-- 📈 **Skaalautuva** (lisää agentteja helposti)
+- ⚡ **4x nopeampi** (agentit toimivat samanaikaisesti)
+- 🔄 **Vikasietoisuus** (osittaiset tulokset hyväksyttäviä)
+- 📈 **Skaalautuva** (lisää agenteja helposti)
 
 ---
 
 ## Käytännön harjoitukset
 
-### Harjoitus 1: Lisää aikakatkaisukäsittely ⭐⭐ (Keskitaso)
+### Harjoitus 1: Lisää aikakatkaisun käsittely ⭐⭐ (Keskitaso)
 
-**Tavoite**: Toteuta aikakatkaisulogiikka, jotta yhdistäjä ei odota ikuisesti hitaita agentteja.
+**Tavoite**: Toteuta aikakatkaisu niin, että aggregaattori ei odota ikuisesti hitaita agenteja.
 
 **Vaiheet**:
 
-1. **Lisää aikakatkaisuseuranta yhdistäjään:**
+1. **Lisää aikakatkaisun seuranta aggregaattoriin:**
 
 ```python
 from datetime import datetime, timedelta
@@ -1136,7 +1139,7 @@ def process_result(message_data):
         'data': message_data['result']
     })
     
-    # Tarkista, onko valmis tai aikakatkaistu
+    # Tarkista, onko valmis TAI aikakatkaistu
     if len(task_results[task_id]) == expected_agents or \
        datetime.utcnow() > task_timeouts[task_id]:
         
@@ -1179,17 +1182,17 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Onnistumiskriteerit:**
-- ✅ Tehtävä valmistuu 30 sekunnin jälkeen, vaikka agentit eivät olisi valmiita
-- ✅ Vastaus osoittaa osittaiset tulokset (`"timed_out": true`)
+- ✅ Tehtävä päättyy 30 sekunnin jälkeen, vaikka agentit eivät olisi valmiita
+- ✅ Vastauksessa ilmoitetaan osittaiset tulokset (`"timed_out": true`)
 - ✅ Saatavilla olevat tulokset palautetaan (3/4 agentista)
 
 **Aika**: 20-25 minuuttia
 
 ---
 
-### Harjoitus 2: Toteuta uudelleenyrityslogiikka ⭐⭐⭐ (Edistynyt)
+### Harjoitus 2: Ota käyttöön uudelleenyrityslogiikka ⭐⭐⭐ (Edistynyt)
 
-**Tavoite**: Yritä epäonnistuneita agenttitehtäviä automaattisesti uudelleen ennen luopumista.
+**Tavoite**: Uudelleenyritykset epäonnistuneille agenttitehtäville automaattisesti ennen luopumista.
 
 **Vaiheet**:
 
@@ -1204,7 +1207,7 @@ class RetryConfig:
     max_retries: int = 3
     backoff_seconds: int = 5
 
-retry_counts: Dict[str, int] = {}  # viestin tunnus -> uudelleenyritysten lukumäärä
+retry_counts: Dict[str, int] = {}  # viestin_tunnus -> uudelleenyritysten lukumäärä
 
 def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
     """Send message with retry metadata"""
@@ -1244,7 +1247,7 @@ def process_with_retry(message, receiver, process_func):
         max_retries = message_data.get('max_retries', 3)
         
         if retry_count < max_retries:
-            # Yritä uudelleen: hylkää ja laita takaisin jonoon kasvatetulla yrityskerralla
+            # Yritä uudelleen: hylkää ja laita uudelleen jonoon kasvatetulla laskurilla
             print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
             
             message_data['retry_count'] = retry_count + 1
@@ -1255,7 +1258,7 @@ def process_with_retry(message, receiver, process_func):
             
             receiver.complete_message(message)  # Poista alkuperäinen
         else:
-            # Maksimiyritykset ylittyneet - siirrä kuolleiden viestien jonoon
+            # Maksimiyritykset ylittyneet - siirrä virheviestien jonoon
             print(f"❌ Max retries exceeded for message {message_id}")
             receiver.dead_letter_message(
                 message,
@@ -1264,7 +1267,7 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **Valvo dead-letter -jonoa:**
+3. **Valvo dead letter -jonoa:**
 
 ```python
 def monitor_dead_letters():
@@ -1283,22 +1286,22 @@ def monitor_dead_letters():
 ```
 
 **✅ Onnistumiskriteerit:**
-- ✅ Epäonnistuneet tehtävät yritetään automaattisesti uudelleen (enintään 3 kertaa)
-- ✅ Eksponentiaalinen viive uudelleenyrittojen välillä (5s, 10s, 15s)
-- ✅ Maksimiyritysten jälkeen viestit siirtyvät dead-letter -jonoon
-- ✅ Dead-letter -jonoa voidaan valvoa ja toistaa
+- ✅ Epäonnistuneet tehtävät yrittävät uudelleen automaattisesti (enintään 3 kertaa)
+- ✅ Eksponentiaalinen viive yritysten välillä (5s, 10s, 15s)
+- ✅ Maksimiyritysten jälkeen viestit siirtyvät dead letter -jonoon
+- ✅ Dead letter -jonoa voidaan valvoa ja toistaa
 
 **Aika**: 30-40 minuuttia
 
 ---
 
-### Harjoitus 3: Toteuta piirikytkin ⭐⭐⭐ (Edistynyt)
+### Harjoitus 3: Ota käyttöön piirikytkin (Circuit Breaker) ⭐⭐⭐ (Edistynyt)
 
-**Tavoite**: Estää ketjureaktio-virheitä pysäyttämällä pyyntöjä epäonnistuviin agenteihin.
+**Tavoite**: Estä kaskadivaikutukset pysäyttämällä kutsut epäonnistuville agenteille.
 
 **Vaiheet**:
 
-1. **Luo piirikytkinluokka:**
+1. **Luo piirikytkin-luokka:**
 
 ```python
 from enum import Enum
@@ -1306,7 +1309,7 @@ from datetime import datetime, timedelta
 
 class CircuitState(Enum):
     CLOSED = "closed"      # Normaali toiminta
-    OPEN = "open"          # Epäonnistuu, hylkää pyynnöt
+    OPEN = "open"          # Vikatila, hylkää pyynnöt
     HALF_OPEN = "half_open"  # Testataan, onko palautunut
 
 class CircuitBreaker:
@@ -1330,7 +1333,7 @@ class CircuitBreaker:
         try:
             result = func()
             
-            # Onnistuminen
+            # Onnistunut
             if self.state == CircuitState.HALF_OPEN:
                 self.state = CircuitState.CLOSED
                 self.failure_count = 0
@@ -1349,7 +1352,7 @@ class CircuitBreaker:
             raise e
 ```
 
-2. **Käytä agenttikutsuissa:**
+2. **Käytä agenttikutsuihin:**
 
 ```python
 # Orkestroijassa
@@ -1374,7 +1377,7 @@ def send_to_agent(agent_type, message_data):
 3. **Testaa piirikytkin:**
 
 ```bash
-# Simuloi toistuvia vikoja (lopeta yksi agentti)
+# Simuloi toistuvia virheitä (pysäytä yksi agentti)
 az containerapp stop --name web-research-agent --resource-group rg-agents
 
 # Lähetä useita pyyntöjä
@@ -1385,22 +1388,22 @@ for i in {1..10}; do
   sleep 2
 done
 
-# Tarkista lokit - pitäisi näkyä, että piiri avautuu viiden epäonnistumisen jälkeen
+# Tarkista lokit - pitäisi nähdä, että piirikytkin avautuu viiden epäonnistumisen jälkeen
 # Käytä Azure CLI:tä Container App -lokien tarkasteluun:
 az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
 ```
 
 **✅ Onnistumiskriteerit:**
-- ✅ 5 epäonnistumisen jälkeen piiri aukeaa (hylkää pyynnöt)
-- ✅ 60 sekunnin jälkeen piiri menee puoliksi auki (testaa palautumista)
+- ✅ 5 epäonnistumisen jälkeen piiri aukeaa (hylkää kutsut)
+- ✅ 60 sekunnin jälkeen piiri siirtyy puoliksi avoimeksi (testaa palautumista)
 - ✅ Muut agentit jatkavat normaalia toimintaa
-- ✅ Piiri sulkeutuu automaattisesti, kun agentti toipuu
+- ✅ Piiri sulkeutuu automaattisesti, kun agentti palautuu
 
 **Aika**: 40-50 minuuttia
 
 ---
 
-## Monitorointi ja virheenkorjaus
+## Valvonta ja virheenkorjaus
 
 ### Hajautettu jäljitys Application Insightsilla
 
@@ -1450,7 +1453,7 @@ def trace_agent_call(agent_name, task_id, operation):
 
 ### Application Insights -kyselyt
 
-**Seuraa moniagenttien työnkulkuja:**
+**Seuraa moni-agenttityönkulkuja:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1474,7 +1477,7 @@ dependencies
 | order by avg_duration desc
 ```
 
-**Virheanalyysi:**
+**Vika-analyysi:**
 
 ```kusto
 // Find which agents fail most
@@ -1491,22 +1494,22 @@ exceptions
 
 ## Kustannusanalyysi
 
-### Moniagenttijärjestelmän kustannukset (kuukausiarviot)
+### Moni-agenttijärjestelmän kustannukset (kuukausi-arvio)
 
 | Komponentti | Konfiguraatio | Kustannus |
 |-----------|--------------|------|
-| **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
-| **4 agenttia** | 4 Container Apps (0.5 vCPU, 1GB each) | $60-120 |
+| **Orkestroija** | 1 Container App (1 vCPU, 2GB) | $30-50 |
+| **4 agenttia** | 4 Container Apps (0.5 vCPU, 1GB kukin) | $60-120 |
 | **Service Bus** | Standard-taso, 10M viestiä | $10-20 |
-| **Cosmos DB** | Serverless, 5GB tallennustila, 1M RUs | $25-50 |
-| **Blob Storage** | 10GB tallennustila, 100K operaatiota | $5-10 |
-| **Application Insights** | 5GB tiedon sisäänotto | $10-15 |
-| **Azure OpenAI** | GPT-4, 10M tokens | $100-300 |
-| **Yhteensä** | | **$240-565/month** |
+| **Cosmos DB** | Serverless, 5GB tallennus, 1M RUs | $25-50 |
+| **Blob Storage** | 10GB tallennus, 100K operaatiota | $5-10 |
+| **Application Insights** | 5GB ingestio | $10-15 |
+| **Microsoft Foundry Models** | gpt-4.1, 10M tokenia | $100-300 |
+| **Yhteensä** | | **$240-565/kk** |
 
-### Kustannusten optimointistrategiat
+### Kustannusoptimointistrategiat
 
-1. **Käytä serverittömiä palveluja aina kun mahdollista:**
+1. **Käytä serverless-ratkaisuja aina kun mahdollista:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1515,7 +1518,7 @@ exceptions
    }
    ```
 
-2. **Skaalaa agentit nollaan ollessaan vapaina:**
+2. **Skaalaa agentit nollaan, kun ne ovat käyttämättöminä:**
    ```bicep
    scale: {
      minReplicas: 0  // Scale to zero when no messages
@@ -1523,9 +1526,9 @@ exceptions
    }
    ```
 
-3. **Käytä eräkäsittelyä Service Busille:**
+3. **Käytä eräajastusta Service Busissa:**
    ```python
-   # Lähetä viestit erissä (edullisemmin)
+   # Lähetä viestit erissä (halvemmaksi)
    sender.send_messages([message1, message2, message3])
    ```
 
@@ -1540,11 +1543,11 @@ exceptions
 
 ## Parhaat käytännöt
 
-### ✅ TEE:
+### ✅ TEKÄÄ:
 
 1. **Käytä idempotentteja operaatioita**
    ```python
-   # Agentti voi käsitellä samaa viestiä turvallisesti useita kertoja.
+   # Agentti voi käsitellä samaa viestiä turvallisesti useita kertoja
    def process_task(task_id):
        if state_manager.task_exists(task_id):
            print(f"Task {task_id} already processed, skipping")
@@ -1561,7 +1564,7 @@ exceptions
    ```python
    # Välitä task_id koko työnkulun läpi
    message_data = {
-       'task_id': task_id,  # Korrelointi-ID
+       'task_id': task_id,  # Korrelaatio-ID
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
@@ -1583,7 +1586,7 @@ exceptions
 
 1. **Älä luo syklisiä riippuvuuksia**
    ```python
-   # ❌ HUONO: Agentti A → Agentti B → Agentti A (ääretön silmukka)
+   # ❌ HUONO: Agentti A → Agentti B → Agentti A (loputon silmukka)
    # ✅ HYVÄ: Määrittele selkeä suunnattu syklitön graafi (DAG)
    ```
 
@@ -1602,21 +1605,22 @@ exceptions
    # ✅ HYVÄ: Palauta osittaiset tulokset virheiden osoittimilla
    ```
 
-4. **Älä käytä loputtomia uudelleenyrityksiä**
+4. **Älä käytä äärettömiä uudelleenyrityksiä**
    ```python
-   # ❌ HUONO: yritä uudelleen ikuisesti
-   # ✅ HYVÄ: max_retries = 3, sitten dead-letter-jonoon
+   # ❌ HUONO: yritetään uudelleen loputtomiin
+   # ✅ HYVÄ: max_retries = 3, sitten dead letter
    ```
 
 ---
+
 ## Vianetsintäopas
 
 ### Ongelma: Viestit jumissa jonossa
 
 **Oireet:**
-- Viestit kertyvät jonoon
+- Viestit kerääntyvät jonoon
 - Agentit eivät käsittele
-- Tehtävän tila jumissa "odottava"
+- Tehtävän tila jumissa kohdassa "pending"
 
 **Diagnoosi:**
 ```bash
@@ -1626,13 +1630,13 @@ az servicebus queue show \
   --name research-tasks \
   --query "countDetails"
 
-# Tarkista agentin lokit Azure CLI:llä
+# Tarkista agentin lokit Azure CLI:n avulla
 az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
 **Ratkaisut:**
 
-1. **Lisää agenttien replikoja:**
+1. **Lisää agenttien replikoiden määrää:**
    ```bash
    az containerapp update \
      --name research-agent \
@@ -1650,11 +1654,11 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Ongelma: Tehtävän aikakatkaisu/ei koskaan valmistu
+### Ongelma: Tehtävä aikakatkaistaan/ei koskaan valmistu
 
 **Oireet:**
-- Tehtävän tila pysyy "käynnissä"
-- Jotkut agentit suorittavat tehtävän loppuun, toiset eivät
+- Tehtävän tila pysyy "in_progress"
+- Jotkut agentit suorittavat loppuun, toiset eivät
 - Ei virheilmoituksia
 
 **Diagnoosi:**
@@ -1668,14 +1672,14 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 **Ratkaisut:**
 
-1. **Toteuta aikakatkaisu agregaattoriin (Harjoitus 1)**
+1. **Toteuta aikakatkaisu aggregaattoriin (Harjoitus 1)**
 
 2. **Tarkista agenttien virheet Azure Monitorin avulla:**
    ```bash
    # Näytä lokit azd monitor -komennolla
    azd monitor --logs
    
-   # Tai käytä Azure CLI:tä tarkistaaksesi tietyn Container Appin lokit
+   # Tai käytä Azure CLI:tä tarkistaaksesi tietyn Container App -sovelluksen lokit
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
@@ -1688,7 +1692,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Lisätietoja
+## Lue lisää
 
 ### Virallinen dokumentaatio
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
@@ -1697,41 +1701,41 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
 
 ### Seuraavat askeleet tässä kurssissa
-- ← Edellinen: [Kapasiteettisuunnittelu](capacity-planning.md)
+- ← Edellinen: [Kapasiteetin suunnittelu](capacity-planning.md)
 - → Seuraava: [SKU-valinta](sku-selection.md)
 - 🏠 [Kurssin etusivu](../../README.md)
 
 ### Aiheeseen liittyvät esimerkit
-- [Mikropalveluesimerkki](../../../../examples/microservices) - Palvelujen viestintämallit
-- [Azure OpenAI -esimerkki](../../../../examples/azure-openai-chat) - AI-integraatio
+- [Microservices Example](../../../../examples/microservices) - Palveluiden viestintämallit
+- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - Tekoälyn integrointi
 
 ---
 
 ## Yhteenveto
 
 **Olet oppinut:**
-- ✅ Viisi koordinointimallia (sekventiaalinen, rinnakkainen, hierarkkinen, tapahtumapohjainen, konsensus)
-- ✅ Moni-agenttinen arkkitehtuuri Azurella (Service Bus, Cosmos DB, Container Apps)
-- ✅ Tilanhallinta hajautettujen agenttien kesken
-- ✅ Aikakatkaisujen käsittely, uudelleenyrittämiset ja circuit breaker -mallit
-- ✅ Hajautettujen järjestelmien valvonta ja virheenkorjaus
-- ✅ Kustannusten optimointistrategiat
+- ✅ Viisi koordinointimallia (peräkkäinen, rinnakkainen, hierarkkinen, tapahtumapohjainen, konsensus)
+- ✅ Moniagenttinen arkkitehtuuri Azurella (Service Bus, Cosmos DB, Container Apps)
+- ✅ Tilanhallinta hajautettujen agenttien välillä
+- ✅ Aikakatkaisut, uudelleenyritykset ja sulkukytkimet
+- ✅ Hajautettujen järjestelmien valvonta ja vianetsintä
+- ✅ Kustannusoptimointistrategiat
 
 **Keskeiset opit:**
-1. **Valitse oikea malli** - Sekventiaalinen järjestykseen perustuville työnkulkuille, rinnakkainen nopeutta varten, tapahtumapohjainen joustavuuteen
+1. **Valitse oikea malli** - Peräkkäinen, kun tarvitaan järjestystä; rinnakkainen, kun tarvitaan nopeutta; tapahtumapohjainen, kun tarvitaan joustavuutta
 2. **Hallitse tilaa huolellisesti** - Käytä Cosmos DB:tä tai vastaavaa jaetun tilan hallintaan
-3. **Käsittele virheitä huolellisesti** - Aikakatkaisut, uudelleenyrittämiset, circuit breaker -mallit, dead-letter-jonot
-4. **Valvo kaikkea** - Hajautettu jäljitys on välttämätöntä virheenkorjaukseen
-5. **Optimoi kustannukset** - Skaalaa nollaan, käytä serverlessiä, ota käyttöön välimuisti
+3. **Käsittele virheitä hallitusti** - Aikakatkaisut, uudelleenyritykset, sulkukytkimet, dead-letter-jonot
+4. **Valvo kaikkea** - Hajautettu jäljitys on välttämätöntä vianetsinnässä
+5. **Optimoi kustannukset** - Skaalaa nollaan, käytä serverless-ratkaisuja, ota välimuisti käyttöön
 
-**Seuraavat askeleet:**
+**Seuraavat vaiheet:**
 1. Suorita käytännön harjoitukset
-2. Rakenna moni-agenttinen järjestelmä omaan käyttötapaustasi varten
-3. Tutki [SKU-valintaa](sku-selection.md) optimoidaksesi suorituskyvyn ja kustannukset
+2. Rakenna moniagenttinen järjestelmä omaan käyttötapaukseesi
+3. Tutustu [SKU-valinta](sku-selection.md) optimoidaksesi suorituskykyä ja kustannuksia
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:
-Tämä asiakirja on käännetty tekoälykäännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattikäännöksissä saattaa esiintyä virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulee pitää määräävänä lähteenä. Kriittisten tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä johtuvista väärinkäsityksistä tai virhetulkinnoista.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää määräävänä lähteenä. Tärkeissä tiedoissa suositellaan ammattimaisen ihmiskääntäjän tekemää käännöstä. Emme ole vastuussa tämän käännöksen käytöstä johtuvista väärinymmärryksistä tai virheellisistä tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -917,7 +917,7 @@ const blobServiceClient = new BlobServiceClient(
 ```bash
 azd up
 
-# Test that all services can access storage
+# Test all services can access storage
 curl https://api-gateway.azurecontainerapps.io/upload
 curl https://product-service.azurecontainerapps.io/upload
 curl https://order-service.azurecontainerapps.io/upload
@@ -1078,7 +1078,7 @@ initializeServices().catch(console.error);
 app.post('/chat', async (req, res) => {
   try {
     const completion = await openaiClient.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-4.1',
       messages: [{ role: 'user', content: 'Hello!' }]
     });
     
@@ -1512,7 +1512,7 @@ az containerapp revision restart \
 - 🏠 [Course Home](../../README.md)
 
 ### Related Examples
-- [Azure OpenAI Chat Example](../../../../examples/azure-openai-chat) - Uses managed identity for Azure OpenAI
+- [Microsoft Foundry Models Chat Example](../../../../examples/azure-openai-chat) - Uses managed identity for Microsoft Foundry Models
 - [Microservices Example](../../../../examples/microservices) - Multi-service authentication patterns
 
 ---
@@ -1542,6 +1542,6 @@ az containerapp revision restart \
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

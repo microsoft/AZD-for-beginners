@@ -1,21 +1,21 @@
-# Sura 8: Mifumo ya Uzalishaji na Biashara
+# Sura 8: Mifumo ya Uzalishaji & Shirika
 
-**📚 Kozi**: [AZD For Beginners](../../README.md) | **⏱️ Muda**: 2-3 saa | **⭐ Ugumu**: Kiwango cha Juu
+**📚 Kozi**: [AZD For Beginners](../../README.md) | **⏱️ Muda**: 2-3 saa | **⭐ Ugumu**: Ya Juu
 
 ---
 
 ## Muhtasari
 
-Sura hii inashughulikia mifumo ya utoaji inayofaa kwa taasisi, uimarisho wa usalama, ufuatiliaji, na uboreshaji wa gharama kwa mzigo wa kazi wa AI katika uzalishaji.
+Sura hii inashughulikia mifumo ya uwekaji tayari kwa shirika, kuimarisha usalama, ufuatiliaji, na uboreshaji wa gharama kwa kazi za AI za uzalishaji.
 
 ## Malengo ya Kujifunza
 
-Baada ya kumaliza sura hii, utakuwa umeweza:
-- Zindua programu zenye ustahimilivu katika mikoa mingi
-- Tekeleza mifumo ya usalama ya taasisi
-- Sanidi ufuatiliaji kamili
-- Boresha gharama kwa kiwango kikubwa
-- Sanidi mitiririko ya CI/CD kwa AZD
+Kwa kumaliza sura hii, utakufaulu:
+- Kuweka matumizi yenye ustahimilivu katika mikoa mingi
+- Kutekeleza mifumo ya usalama ya shirika
+- Kusanidi ufuatiliaji kamili
+- Kuboresha gharama kwa kiwango kikubwa
+- Kusanidi mitiririko ya CI/CD na AZD
 
 ---
 
@@ -23,45 +23,38 @@ Baada ya kumaliza sura hii, utakuwa umeweza:
 
 | # | Somo | Maelezo | Muda |
 |---|--------|-------------|------|
-| 1 | [Production AI Practices](production-ai-practices.md) | Mifumo ya uenezaji kwa taasisi | 90 dakika |
+| 1 | [Mazoea ya AI ya Uzalishaji](production-ai-practices.md) | Mifumo ya usambazaji ya shirika | 90 dakika |
 
 ---
 
-## 🚀 Orodha ya Ukaguzi ya Uzalishaji
+## 🚀 Orodha ya Uzalishaji
 
-- [ ] Utoaji katika mikoa mingi kwa ustahimilivu
-- [ ] Utambulisho uliosimamiwa kwa uthibitisho (hakuna funguo)
+- [ ] Usambazaji wa mikoa mingi kwa ustahimilivu
+- [ ] Utambulisho uliosimamiwa kwa uthibitisho (bila funguo)
 - [ ] Application Insights kwa ufuatiliaji
-- [ ] Bajeti za gharama na arifa zimesanidiwa
-- [ ] Uchunguzi wa usalama umewezeshwa
+- [ ] Bajeti za gharama na arifu zimesanidiwa
+- [ ] Kuchunguza usalama kumewezeshwa
 - [ ] Uunganishaji wa mitiririko ya CI/CD
-- [ ] Mpango wa urejesho baada ya maafa
+- [ ] Mpango wa urejeshaji wa maafa
 
 ---
 
 ## 🏗️ Mifumo ya Usanifu
 
-### Mfano 1: AI ya Microservices
+### Mfano 1: Microservices AI
 
+```mermaid
+graph LR
+    Gateway[Mlango wa API] --> AI[Huduma ya AI] --> Models[Modeli za Microsoft Foundry]
+    Gateway --> Auth[Huduma ya Uthibitishaji]
+    AI --> Data[Hifadhi ya Data]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
+### Mfano 2: AI Inayotegemea Matukio
 
-### Mfano 2: AI Inayotokana na Matukio
-
+```mermaid
+graph LR
+    EventGrid[Gridi ya Matukio] --> Functions[Kazi] --> Pipeline[Mtiririko wa AI]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
 ## 🔐 Mbinu Bora za Usalama
@@ -85,12 +78,12 @@ properties: {
 
 ## 💰 Uboreshaji wa Gharama
 
-| Mkakati | Akiba |
+| Mikakati | Akiba |
 |----------|---------|
-| Kupunguza hadi sifuri (Container Apps) | 60-80% |
+| Punguza hadi sifuri (Container Apps) | 60-80% |
 | Tumia ngazi za matumizi kwa maendeleo | 50-70% |
 | Kupanua kwa ratiba | 30-50% |
-| Uwezo uliohifadhiwa | 20-40% |
+| Uwezo uliotengwa | 20-40% |
 
 ```bash
 # Weka arifu za bajeti
@@ -106,10 +99,10 @@ az consumption budget create \
 ## 📊 Usanidi wa Ufuatiliaji
 
 ```bash
-# Tiririsha logi
+# Tiririsha kumbukumbu
 azd monitor --logs
 
-# Angalia Application Insights
+# Kagua Application Insights
 azd monitor
 
 # Tazama vipimo
@@ -118,25 +111,25 @@ az monitor metrics list --resource <resource-id>
 
 ---
 
-## 🔗 Urambazaji
+## 🔗 Uvinjari
 
 | Mwelekeo | Sura |
 |-----------|---------|
 | **Iliyopita** | [Sura 7: Utatuzi wa Matatizo](../chapter-07-troubleshooting/README.md) |
-| **Kozi Imekamilika** | [Nyumbani ya Kozi](../../README.md) |
+| **Kozi Imekamilika** | [Nyumbani kwa Kozi](../../README.md) |
 
 ---
 
 ## 📖 Rasilimali Zinazohusiana
 
-- [Mwongozo wa Maajenti wa AI](../chapter-02-ai-development/agents.md)
+- [Mwongozo wa Mawakala wa AI](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Suluhisho za Maajenti Nyingi](../chapter-05-multi-agent/README.md)
+- [Suluhisho za Mawakala Wengi](../chapter-05-multi-agent/README.md)
 - [Mfano wa Microservices](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Tamko la kutokuwajibika:
-Nyaraka hii imetatwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au ukosefu wa usahihi. Nyaraka ya asili katika lugha yake ya asili inapaswa kuzingatiwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu iliyofanywa na mtafsiri binadamu inapendekezwa. Hatubebewi jukumu kwa kutoelewana au tafsiri potofu zitokanazo na matumizi ya tafsiri hii.
+**Taarifa ya kutokuwajibika**:
+Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuwa sahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokukamilika. Nyaraka ya awali katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inashauriwa. Hatuwajibiki kwa kutoelewana au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

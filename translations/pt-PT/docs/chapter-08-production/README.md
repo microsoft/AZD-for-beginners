@@ -1,6 +1,6 @@
-# Capítulo 8: Padrões de Produção e Empresariais
+# Capítulo 8: Padrões de Produção & Empresariais
 
-**📚 Curso**: [AZD For Beginners](../../README.md) | **⏱️ Duração**: 2-3 horas | **⭐ Complexidade**: Avançado
+**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 2-3 horas | **⭐ Complexidade**: Avançado
 
 ---
 
@@ -12,56 +12,49 @@ Este capítulo aborda padrões de implantação prontos para empresas, reforço 
 
 Ao concluir este capítulo, você irá:
 - Implementar aplicações resilientes multi-região
-- Implementar padrões de segurança empresariais
+- Aplicar padrões de segurança empresariais
 - Configurar monitorização abrangente
-- Otimizar custos à escala
+- Otimizar custos em escala
 - Configurar pipelines CI/CD com AZD
 
 ---
 
-## 📚 Lessons
+## 📚 Lições
 
-| # | Aula | Descrição | Tempo |
+| # | Lição | Descrição | Tempo |
 |---|--------|-------------|------|
-| 1 | [Práticas de IA para Produção](production-ai-practices.md) | Padrões de implantação empresarial | 90 min |
+| 1 | [Práticas de IA em Produção](production-ai-practices.md) | Padrões de implementação empresarial | 90 min |
 
 ---
 
-## 🚀 Lista de Verificação de Produção
+## 🚀 Lista de Verificação para Produção
 
 - [ ] Implementação multi-região para resiliência
 - [ ] Identidade gerida para autenticação (sem chaves)
 - [ ] Application Insights para monitorização
-- [ ] Orçamentos de custos e alertas configurados
-- [ ] Verificação de segurança ativada
-- [ ] Integração da pipeline CI/CD
+- [ ] Orçamentos e alertas de custos configurados
+- [ ] Análise de segurança ativada
+- [ ] Integração de pipeline CI/CD
 - [ ] Plano de recuperação de desastres
 
 ---
 
 ## 🏗️ Padrões de Arquitetura
 
-### Padrão 1: Microserviços de IA
+### Padrão 1: IA com Microserviços
 
+```mermaid
+graph LR
+    Gateway[API Gateway] --> AI[Serviço de IA] --> Models[Modelos Microsoft Foundry]
+    Gateway --> Auth[Serviço de Autenticação]
+    AI --> Data[Armazenamento de Dados]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
+### Padrão 2: IA Orientada por Eventos
 
-### Padrão 2: IA Orientada a Eventos
-
+```mermaid
+graph LR
+    EventGrid[Event Grid] --> Functions[FUnções] --> Pipeline[Pipline IA]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
 ## 🔐 Melhores Práticas de Segurança
@@ -85,12 +78,12 @@ properties: {
 
 ## 💰 Otimização de Custos
 
-| Strategy | Savings |
+| Estratégia | Poupança |
 |----------|---------|
-| Scale to zero (Container Apps) | 60-80% |
-| Use consumption tiers for dev | 50-70% |
-| Scheduled scaling | 30-50% |
-| Reserved capacity | 20-40% |
+| Escalar até zero (Container Apps) | 60-80% |
+| Utilizar níveis de consumo para desenvolvimento | 50-70% |
+| Escalonamento agendado | 30-50% |
+| Capacidade reservada | 20-40% |
 
 ```bash
 # Definir alertas de orçamento
@@ -120,10 +113,10 @@ az monitor metrics list --resource <resource-id>
 
 ## 🔗 Navegação
 
-| Direction | Chapter |
+| Direção | Capítulo |
 |-----------|---------|
 | **Anterior** | [Capítulo 7: Resolução de Problemas](../chapter-07-troubleshooting/README.md) |
-| **Curso Concluído** | [Início do Curso](../../README.md) |
+| **Curso Completo** | [Início do Curso](../../README.md) |
 
 ---
 
@@ -137,6 +130,6 @@ az monitor metrics list --resource <resource-id>
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Isenção de responsabilidade**:
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos por garantir a precisão, tenha em atenção que traduções automáticas podem conter erros ou imprecisões. O documento original, na sua língua nativa, deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional por um tradutor humano. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações erradas decorrentes da utilização desta tradução.
+**Aviso Legal**:  
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, por favor, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original, na sua língua nativa, deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se a tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas resultantes do uso desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

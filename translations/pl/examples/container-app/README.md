@@ -1,29 +1,29 @@
-# Przykłady wdrażania aplikacji kontenerowych za pomocą AZD
+# Przykłady wdrażania aplikacji kontenerowych z AZD
 
-Ten katalog zawiera kompleksowe przykłady wdrażania aplikacji konteneryzowanych do Azure Container Apps przy użyciu Azure Developer CLI (AZD). Przykłady te demonstrują rzeczywiste wzorce, najlepsze praktyki oraz konfiguracje gotowe do produkcji.
+Ten katalog zawiera kompleksowe przykłady wdrażania aplikacji kontenerowych do Azure Container Apps za pomocą Azure Developer CLI (AZD). Przykłady te demonstrują wzorce z prawdziwego świata, najlepsze praktyki oraz konfiguracje gotowe do produkcji.
 
 ## 📚 Spis treści
 
-- [Przegląd](../../../../examples/container-app)
-- [Wymagania wstępne](../../../../examples/container-app)
-- [Przykłady szybkiego startu](../../../../examples/container-app)
-- [Przykłady produkcyjne](../../../../examples/container-app)
-- [Zaawansowane wzorce](../../../../examples/container-app)
-- [Najlepsze praktyki](../../../../examples/container-app)
+- [Przegląd](#przegląd)
+- [Wymagania wstępne](#wymagania-wstępne)
+- [Przykłady szybkiego startu](#przykłady-szybkiego-startu)
+- [Przykłady produkcyjne](#przykłady-produkcyjne)
+- [Zaawansowane wzorce](#zaawansowane-wzorce)
+- [Najlepsze praktyki](#najlepsze-praktyki)
 
 ## Przegląd
 
-Azure Container Apps to w pełni zarządzana, bezserwerowa platforma kontenerowa, która umożliwia uruchamianie mikrousług i aplikacji konteneryzowanych bez zarządzania infrastrukturą. W połączeniu z AZD otrzymujesz:
+Azure Container Apps to w pełni zarządzana, bezserwerowa platforma kontenerowa, która umożliwia uruchamianie mikrousług i aplikacji kontenerowych bez zarządzania infrastrukturą. W połączeniu z AZD otrzymujesz:
 
 - **Uproszczone wdrażanie**: Pojedyncze polecenie wdraża kontenery wraz z infrastrukturą
-- **Automatyczne skalowanie**: Skalowanie do zera i skalowanie w górę na podstawie ruchu HTTP lub zdarzeń
-- **Zintegrowana sieć**: Wbudowane wykrywanie usług i dzielenie ruchu
+- **Automatyczne skalowanie**: Skalowanie do zera i na zewnątrz w oparciu o ruch HTTP lub zdarzenia
+- **Zintegrowane sieciowanie**: Wbudowane wykrywanie usług i dzielenie ruchu
 - **Zarządzana tożsamość**: Bezpieczne uwierzytelnianie do zasobów Azure
-- **Optymalizacja kosztów**: Płacisz tylko za zasoby, z których korzystasz
+- **Optymalizacja kosztów**: Płacisz tylko za zasoby, których używasz
 
 ## Wymagania wstępne
 
-Zanim zaczniesz, upewnij się, że masz:
+Przed rozpoczęciem upewnij się, że masz:
 
 ```bash
 # Sprawdź instalację AZD
@@ -32,7 +32,7 @@ azd version
 # Sprawdź Azure CLI
 az version
 
-# Sprawdź Docker (do budowania niestandardowych obrazów)
+# Sprawdź Dockera (do budowania niestandardowych obrazów)
 docker --version
 
 # Zaloguj się do Azure
@@ -47,7 +47,7 @@ az login
 
 ## Przykłady szybkiego startu
 
-### 1. Proste API Web (Python Flask)
+### 1. Proste API Webowe (Python Flask)
 
 Wdróż podstawowe REST API z Azure Container Apps.
 
@@ -71,7 +71,7 @@ services:
 # Inicjalizuj z szablonu
 azd init --template todo-python-mongo
 
-# Zapewnij infrastrukturę i wdrożenie
+# Zapewnij infrastrukturę i wdroż
 azd up
 
 # Przetestuj wdrożenie
@@ -79,9 +79,9 @@ azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-**Kluczowe funkcje:**
+**Kluczowe cechy:**
 - Automatyczne skalowanie od 0 do 10 replik
-- Sondy zdrowia i kontrole żywotności
+- Proby zdrowia i kontrole gotowości
 - Wstrzykiwanie zmiennych środowiskowych
 - Integracja z Application Insights
 
@@ -100,7 +100,7 @@ azd env set COLLECTION_NAME todos
 # Wdróż
 azd up
 
-# Wyświetl logi za pomocą Azure Monitor
+# Przeglądaj logi za pomocą Azure Monitor
 azd monitor --logs
 ```
 
@@ -152,7 +152,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 Wdróż aplikację full-stack z frontendem React i backendem API.
 
 ```bash
-# Inicjalizuj szablon full-stack
+# Zainicjuj szablon full-stack
 azd init --template todo-csharp-sql-swa-func
 
 # Przejrzyj konfigurację
@@ -231,9 +231,9 @@ azd up
 azd monitor --overview
 ```
 
-### Przykład 2: Aplikacja kontenerowa napędzana AI
+### Przykład 2: Aplikacja kontenerowa wspierana przez AI
 
-**Scenariusz**: Aplikacja czatu AI z integracją Azure OpenAI
+**Scenariusz**: Aplikacja czatu AI z integracją Microsoft Foundry Models
 
 **Plik: src/ai-chat/app.py**
 ```python
@@ -258,7 +258,7 @@ def chat():
     openai.api_key = openai_key
     
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[{"role": "user", "content": user_message}]
     )
     
@@ -328,7 +328,7 @@ azd env new dev
 
 # Skonfiguruj OpenAI
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
-azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
+azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4.1"
 
 # Wdróż
 azd up
@@ -339,9 +339,9 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Przykład 3: Pracownik działający w tle z przetwarzaniem kolejki
+### Przykład 3: Pracownik w tle z przetwarzaniem kolejki
 
-**Scenariusz**: System obsługi zamówień z kolejką wiadomości
+**Scenariusz**: System przetwarzania zamówień z kolejką wiadomości
 
 **Struktura katalogów:**
 ```
@@ -381,7 +381,7 @@ def process_orders():
             # Przetwórz zamówienie
             print(f"Processing order: {message.content}")
             
-            # Pełna wiadomość
+            # Kompletna wiadomość
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -411,7 +411,7 @@ azd init
 # Wdróż z konfiguracją kolejki
 azd up
 
-# Skaluj pracownika na podstawie długości kolejki
+# Skaluj pracownika w oparciu o długość kolejki
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -431,7 +431,7 @@ azd deploy api --revision-suffix blue --no-traffic
 # Przetestuj nową rewizję
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Podziel ruch (20% na niebieską, 80% na obecną)
+# Podziel ruch (20% do niebieskiej, 80% do obecnej)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -444,7 +444,7 @@ az containerapp ingress traffic set \
   --revision-weight blue=100
 ```
 
-### Wzorzec 2: Wdrażanie Canary z AZD
+### Wzorzec 2: Canary Deployment z AZD
 
 **Plik: .azure/dev/config.json**
 ```json
@@ -458,7 +458,7 @@ az containerapp ingress traffic set \
 }
 ```
 
-**Skrypt wdrożenia:**
+**Skrypt wdrożeniowy:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
@@ -477,7 +477,7 @@ for i in {20..100..10}; do
     --resource-group rg-myapp \
     --revision-weight latest=$i
   
-  sleep 300  # Czekaj 5 minut
+  sleep 300  # Poczekaj 5 minut
 done
 ```
 
@@ -688,7 +688,7 @@ az monitor metrics alert create \
 ### 5. Optymalizacja kosztów
 
 ```bash
-# Skaluj do zera, gdy nie jest używane
+# Skaluj do zera, gdy nie jest używany
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -737,7 +737,7 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Najczęściej używane polecenia
+## Odniesienie do najczęściej używanych poleceń
 
 ```bash
 # Zainicjuj nowy projekt aplikacji kontenerowej
@@ -749,7 +749,7 @@ azd up
 # Wdróż tylko kod aplikacji (pomiń infrastrukturę)
 azd deploy
 
-# Utwórz tylko infrastrukturę
+# Zaopatrz tylko infrastrukturę
 azd provision
 
 # Wyświetl wdrożone zasoby
@@ -774,7 +774,7 @@ azd down --force --purge
 # Sprawdź logi za pomocą Azure CLI
 az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# Zobacz zdarzenia kontenera
+# Wyświetl zdarzenia kontenera
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
@@ -788,7 +788,7 @@ docker run -p 8000:8000 api:local
 ### Problem: Brak dostępu do punktu końcowego aplikacji kontenerowej
 
 ```bash
-# Zweryfikuj konfigurację ingress
+# Sprawdź konfigurację ingress
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
@@ -830,10 +830,10 @@ az containerapp update \
 Aby dodać nowe przykłady aplikacji kontenerowych:
 
 1. Utwórz nowy podkatalog z twoim przykładem
-2. Dołącz kompletny `azure.yaml`, katalogi `infra/` i `src/`
-3. Dodaj szczegółowy plik README z instrukcjami wdrożenia
+2. Dołącz kompletne pliki `azure.yaml`, `infra/` oraz `src/`
+3. Dodaj obszerny plik README z instrukcjami wdrożenia
 4. Przetestuj wdrożenie za pomocą `azd up`
-5. Prześlij pull request
+5. Złóż pull request
 
 ---
 
@@ -843,5 +843,5 @@ Aby dodać nowe przykłady aplikacji kontenerowych:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczeń AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż staramy się zapewnić dokładność, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku źródłowym powinien być traktowany jako źródło wiarygodne. W przypadku informacji krytycznych zaleca się skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+Niniejszy dokument został przetłumaczony przy użyciu usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy starań, aby tłumaczenie było wierne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego natywnym języku powinien być uważany za źródło wiążące. W przypadku informacji krytycznych zaleca się profesjonalne tłumaczenie wykonane przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

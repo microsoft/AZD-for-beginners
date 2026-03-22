@@ -1,67 +1,61 @@
-# Többügynökös koordinációs minták
+# Többügynökös Koordinációs Minták
 
-⏱️ **Becsült idő**: 60-75 perc | 💰 **Becsült költség**: ~$100-300/hó | ⭐ **Bonyolultság**: Haladó
+⏱️ **Becsült idő**: 60-75 perc | 💰 **Becsült költség**: ~100-300 USD/hónap | ⭐ **Bonyolultság**: Haladó
 
-**📚 Tanulási út:**
-- ← Előző: [Kapacitástervezés](capacity-planning.md) - Erőforrás-méretezés és skálázási stratégiák
-- 🎯 **Itt vagy**: Többügynökös koordinációs minták (Orkesztráció, kommunikáció, állapotkezelés)
-- → Következő: [SKU Selection](sku-selection.md) - A megfelelő Azure szolgáltatások kiválasztása
-- 🏠 [Course Home](../../README.md)
+**📚 Tanulási útvonal:**
+- ← Előző: [Kapacitástervezés](capacity-planning.md) - Erőforrás méretezési és skálázási stratégiák
+- 🎯 **Jelenleg itt vagy**: Többügynökös koordinációs minták (Orkesztráció, kommunikáció, állapotkezelés)
+- → Következő: [SKU kiválasztás](sku-selection.md) - A megfelelő Azure szolgáltatások kiválasztása
+- 🏠 [Tanfolyam kezdőlap](../../README.md)
 
 ---
 
-## Mit fogsz megtanulni
+## Amit megtanulsz
 
-A lecke elvégzésével:
-- Értsd meg a **többügynökös architektúra** mintáit és hogy mikor alkalmazd őket
-- Valósítsd meg az **orkesztrációs mintákat** (központosított, decentralizált, hierarchikus)
-- Tervezd meg az **ügynökök közötti kommunikáció** stratégiáit (szinkron, aszinkron, eseményvezérelt)
-- Kezeld a **megosztott állapotot** elosztott ügynökök között
-- Telepíts **többügynökös rendszereket** Azure-on AZD-vel
-- Alkalmazz **koordinációs mintákat** valós AI forgatókönyvekhez
-- Figyeld és hibakeresd az elosztott ügynök rendszereket
+A lecke elvégzése után képes leszel:
+- Megérteni a **többügynökös architektúra** mintáit és azok alkalmazási helyzetét
+- Megvalósítani **orkesztrációs mintákat** (központi, decentralizált, hierarchikus)
+- Tervezni **ügynöki kommunikációs** stratégiákat (szinkron, aszinkron, eseményvezérelt)
+- Kezelni a **megosztott állapotot** elosztott ügynökök között
+- Telepíteni **többügynökös rendszereket** Azure-ra AZD-vel
+- Alkalmazni **koordinációs mintákat** valós AI forgatókönyvekhez
+- Monitorozni és hibakeresni elosztott ügynökrendszereket
 
-## Miért fontos a többügynökös koordináció
+## Miért fontos a Többügynökös Koordináció
 
-### A fejlődés: az együgynököstől a többügynökösig
+### Fejlődés: Egyetlen ügynöktől többügynökös rendszerig
 
-**Egyetlen ügynök (Egyszerű):**
+**Egyetlen Ügynök (Egyszerű):**  
 ```
 User → Agent → Response
 ```
-- ✅ Könnyen érthető és megvalósítható
-- ✅ Gyors egyszerű feladatoknál
-- ❌ Korlátozott egy modell képességei által
-- ❌ Nem párhuzamosíthatók összetett feladatok
-- ❌ Nincs specializáció
+- ✅ Könnyen érthető és megvalósítható  
+- ✅ Gyors egyszerű feladatokra  
+- ❌ Egy modell képességei korlátozzák  
+- ❌ Nem képes párhuzamosítani összetett feladatokat  
+- ❌ Nincs specializáció  
 
-**Többügynökös rendszer (Fejlett):**
-```
-           ┌─────────────┐
-           │ Orchestrator│
-           └──────┬──────┘
-        ┌─────────┼─────────┐
-        │         │         │
-    ┌───▼──┐  ┌──▼───┐  ┌──▼────┐
-    │Agent1│  │Agent2│  │Agent3 │
-    │(Plan)│  │(Code)│  │(Review)│
-    └──────┘  └──────┘  └───────┘
-```
-- ✅ Speciális ügynökök adott feladatokra
-- ✅ Párhuzamos végrehajtás a gyorsaságért
-- ✅ Moduláris és karbantartható
-- ✅ Jobb összetett munkafolyamatoknál
-- ⚠️ Koordinációs logikát igényel
+**Többügynökös Rendszer (Haladó):**  
+```mermaid
+graph TD
+    Orchestrator[Orchestrátor] --> Agent1[Agent1<br/>Terv]
+    Orchestrator --> Agent2[Agent2<br/>Kód]
+    Orchestrator --> Agent3[Agent3<br/>Áttekintés]
+```- ✅ Speciális ügynökök adott feladatokra  
+- ✅ Párhuzamos végrehajtás gyorsaságért  
+- ✅ Moduláris és karbantartható  
+- ✅ Jobb összetett munkafolyamatoknál  
+- ⚠️ Koordinációs logikát igényel  
 
-**Analógia**: Az együgynök olyan, mint egy ember, aki minden feladatot elvégez. A többügynök olyan, mint egy csapat, ahol minden tag specializált képességekkel rendelkezik (kutató, fejlesztő, ellenőrző, író) és együtt dolgoznak.
+**Analógia**: Az egyetlen ügynök olyan, mint egy ember, aki minden feladatot elvégez. A többügynökös rendszer olyan, mint egy csapat, ahol minden tag specializált (kutató, fejlesztő, ellenőr, író), és együtt dolgoznak.
 
 ---
 
-## Alapvető koordinációs minták
+## Alapvető Koordinációs Minták
 
-### Minta 1: Szekvenciális koordináció (Felelősség láncolata)
+### Minta 1: Szekvenciális Koordináció (Felelősség Lánca)
 
-**Mikor használjuk**: A feladatoknak meghatározott sorrendben kell teljesülniük, minden ügynök a korábbi kimenetre épít.
+**Mikor használd**: A feladatokat meghatározott sorrendben kell végrehajtani, minden ügynök az előző kimenetére épít.
 
 ```mermaid
 sequenceDiagram
@@ -71,47 +65,47 @@ sequenceDiagram
     participant Agent2 as Író ügynök
     participant Agent3 as Szerkesztő ügynök
     
-    User->>Orchestrator: "Írjon cikket az MI-ről"
-    Orchestrator->>Agent1: Téma kutatása
+    User->>Orchestrator: "Írj cikket az AI-ról"
+    Orchestrator->>Agent1: Kutatási téma
     Agent1-->>Orchestrator: Kutatási eredmények
-    Orchestrator->>Agent2: Vázlat írása (a kutatás felhasználásával)
-    Agent2-->>Orchestrator: Cikkvázlat
+    Orchestrator->>Agent2: Írd meg a vázlatot (a kutatás alapján)
+    Agent2-->>Orchestrator: Cikk tervezet
     Orchestrator->>Agent3: Szerkesztés és javítás
     Agent3-->>Orchestrator: Végleges cikk
-    Orchestrator-->>User: Kidolgozott cikk
+    Orchestrator-->>User: Csiszolt cikk
     
-    Note over User,Agent3: Sorrend: Minden lépés megvárja az előzőt
-```
-**Előnyök:**
-- ✅ Egyértelmű adatok áramlása
-- ✅ Könnyű hibakeresés
-- ✅ Előre jelezhető végrehajtási sorrend
+    Note over User,Agent3: Sorrend: Minden lépés a korábbira vár
+```  
+**Előnyök:**  
+- ✅ Egyértelmű adatfolyam  
+- ✅ Könnyen hibakereshető  
+- ✅ Megjósolható végrehajtási rend  
 
-**Korlátozások:**
-- ❌ Lassabb (nincs párhuzamosság)
-- ❌ Egy hiba blokkolja az egész láncot
-- ❌ Nem kezelhetőek egymástól függő feladatok
+**Korlátok:**  
+- ❌ Lassabb (nincs párhuzamosság)  
+- ❌ Egy hiba leállíthatja az egész láncot  
+- ❌ Nem kezeli az egymásra utalt feladatokat  
 
-**Példák:**
-- Tartalomkészítési csővezeték (kutatás → írás → szerkesztés → közzététel)
-- Kódgenerálás (tervezés → megvalósítás → teszt → telepítés)
-- Jelentéskészítés (adatgyűjtés → elemzés → vizualizáció → összefoglaló)
+**Példák:**  
+- Tartalomkészítési folyamat (kutatás → írás → szerkesztés → publikálás)  
+- Kódgenerálás (terv → implementáció → teszt → telepítés)  
+- Jelentéskészítés (adatgyűjtés → elemzés → vizualizáció → összegzés)  
 
 ---
 
-### Minta 2: Párhuzamos koordináció (Fan-Out/Fan-In)
+### Minta 2: Párhuzamos Koordináció (Fan-Out/Fan-In)
 
-**Mikor használjuk**: Független feladatok egyszerre futhatnak, az eredményeket a végén kombináljuk.
+**Mikor használd**: Független feladatok párhuzamosan futtathatók, eredmények a végén összegezve.
 
 ```mermaid
 graph TB
     User[Felhasználói kérés]
-    Orchestrator[Orkesztrátor]
+    Orchestrator[Ütemező]
     Agent1[Elemző ügynök]
     Agent2[Kutató ügynök]
     Agent3[Adat ügynök]
-    Aggregator[Eredmények összegzője]
-    Response[Összevont válasz]
+    Aggregator[Eredmény összesítő]
+    Response[Kombinált válasz]
     
     User --> Orchestrator
     Orchestrator --> Agent1
@@ -124,35 +118,35 @@ graph TB
     
     style Orchestrator fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style Aggregator fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
-```
-**Előnyök:**
-- ✅ Gyors (párhuzamos végrehajtás)
-- ✅ Hibatűrő (részleges eredmények elfogadhatók)
-- ✅ Vízszintesen skálázható
+```  
+**Előnyök:**  
+- ✅ Gyors (párhuzamos végrehajtás)  
+- ✅ Hibabiztos (részleges eredmények elfogadhatók)  
+- ✅ Vízszintesen skálázható  
 
-**Korlátozások:**
-- ⚠️ Az eredmények nem feltétlenül érkeznek sorrendben
-- ⚠️ Aggregálási logikára van szükség
-- ⚠️ Összetett állapotkezelés
+**Korlátok:**  
+- ⚠️ Az eredmények sorrendje lehet akadozó  
+- ⚠️ Összegző logikára van szükség  
+- ⚠️ Összetett állapot kezelés  
 
-**Példák:**
-- Több forrásból történő adatgyűjtés (API-k + adatbázisok + web scraping)
-- Versenyképes elemzés (több modell generál megoldásokat, a legjobb kiválasztva)
-- Fordítási szolgáltatások (egyidejű fordítás több nyelvre)
+**Példák:**  
+- Több forrásból érkező adatgyűjtés (API-k + adatbázisok + webszkrappolás)  
+- Versenyképes elemzés (több modell megoldást generál, a legjobb kiválasztása)  
+- Fordító szolgáltatások (egyszerre több nyelvre fordítás)  
 
 ---
 
-### Minta 3: Hierarchikus koordináció (Vezető–Munkás)
+### Minta 3: Hierarchikus Koordináció (Menedszer-Munkás)
 
-**Mikor használjuk**: Összetett munkafolyamatok alfeladatokkal, delegálás szükséges.
+**Mikor használd**: Összetett munkafolyamatok alfeladatokkal, delegálás szükséges.
 
 ```mermaid
 graph TB
-    Master[Fő koordinátor]
-    Manager1[Kutatási vezető]
-    Manager2[Tartalomkezelő]
-    W1[Webkaparó]
-    W2[Tanulmányelemző]
+    Master[Mester Rendező]
+    Manager1[Kutatás Menedzser]
+    Manager2[Tartalom Menedzser]
+    W1[Webes Adatgyűjtő]
+    W2[Cikk Elemző]
     W3[Író]
     W4[Szerkesztő]
     
@@ -166,27 +160,27 @@ graph TB
     style Master fill:#FF9800,stroke:#F57C00,stroke-width:3px,color:#fff
     style Manager1 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
-```
-**Előnyök:**
-- ✅ Kezeli az összetett munkafolyamatokat
-- ✅ Moduláris és karbantartható
-- ✅ Egyértelmű felelősségi határok
+```  
+**Előnyök:**  
+- ✅ Kezeli az összetett munkafolyamatokat  
+- ✅ Moduláris és karbantartható  
+- ✅ Egyértelmű felelősségi körök  
 
-**Korlátozások:**
-- ⚠️ Összetettebb architektúra
-- ⚠️ Magasabb késleltetés (többszörös koordinációs rétegek)
-- ⚠️ Fejlett orkesztráció szükséges
+**Korlátok:**  
+- ⚠️ Bonyolultabb architektúra  
+- ⚠️ Magasabb késleltetés (több koordinációs réteg)  
+- ⚠️ Lényeges összetett orkestráció  
 
-**Példák:**
-- Vállalati dokumentumfeldolgozás (osztályozás → irányítás → feldolgozás → archiválás)
-- Többlépcsős adatcsővezetékek (betöltés → tisztítás → transzformáció → elemzés → jelentés)
-- Összetett automatizálási folyamatok (tervezés → erőforrás-elosztás → végrehajtás → monitorozás)
+**Példák:**  
+- Vállalati dokumentumkezelés (osztályozás → útvonal → feldolgozás → archiválás)  
+- Többfázisú adatcsővezetékek (befogadás → tisztítás → transzformáció → elemzés → jelentés)  
+- Összetett automatizálási folyamatok (tervezés → erőforrás-kiosztás → végrehajtás → monitorozás)  
 
 ---
 
-### Minta 4: Eseményvezérelt koordináció (Publish-Subscribe)
+### Minta 4: Eseményvezérelt Koordináció (Publish-Subscribe)
 
-**Mikor használjuk**: Az ügynököknek eseményekre kell reagálniuk, laza csatolás kívánatos.
+**Mikor használd**: Ügynököknek reagálniuk kell eseményekre, laza kapcsolódás kívánatos.
 
 ```mermaid
 sequenceDiagram
@@ -196,46 +190,46 @@ sequenceDiagram
     participant Agent3 as Értesítő
     participant Agent4 as Archiváló
     
-    Agent1->>EventBus: Közzétesz "AdatBeérkezett" eseményt
+    Agent1->>EventBus: Publish "DataReceived" event
     EventBus->>Agent2: Feliratkozás: Adatok elemzése
     EventBus->>Agent3: Feliratkozás: Értesítés küldése
     EventBus->>Agent4: Feliratkozás: Adatok archiválása
     
-    Note over Agent1,Agent4: Minden feliratkozó függetlenül dolgozza fel
+    Note over Agent1,Agent4: Minden feliratkozó önállóan dolgozik
     
-    Agent2->>EventBus: Közzétesz "ElemzésKész" eseményt
+    Agent2->>EventBus: Publish "AnalysisComplete" event
     EventBus->>Agent3: Feliratkozás: Elemzési jelentés küldése
-```
-**Előnyök:**
-- ✅ Laza csatolás az ügynökök között
-- ✅ Könnyű új ügynökök hozzáadása (csak fel kell iratkozni)
-- ✅ Aszinkron feldolgozás
-- ✅ Ellenálló (üzenet-persistencia)
+```  
+**Előnyök:**  
+- ✅ Laza kapcsolódás az ügynökök között  
+- ✅ Egyszerű új ügynökök hozzáadása (csak feliratkozni kell)  
+- ✅ Aszinkron feldolgozás  
+- ✅ Ellenálló (üzenetmegőrzés)  
 
-**Korlátozások:**
-- ⚠️ Végül konzisztencia
-- ⚠️ Nehéz hibakeresés
-- ⚠️ Üzenetrendezés kihívásai
+**Korlátok:**  
+- ⚠️ Idővel konzisztens állapot  
+- ⚠️ Nehéz hibakeresés  
+- ⚠️ Üzenetrendezési kihívások  
 
-**Példák:**
-- Valós idejű monitorozó rendszerek (riasztások, dashboardok, naplók)
-- Többcsatornás értesítések (email, SMS, push, Slack)
-- Adatfeldolgozó csővezetékek (több fogyasztó ugyanazokra az adatokra)
+**Példák:**  
+- Valós idejű monitorozó rendszerek (riasztások, műszerfalak, naplók)  
+- Többcsatornás értesítések (email, SMS, push, Slack)  
+- Adatfeldolgozó csővezetékek (több fogyasztó ugyanazon adatból)  
 
 ---
 
-### Minta 5: Konszenzus-alapú koordináció (Szavazás/Kvórum)
+### Minta 5: Konszenzus-alapú Koordináció (Szavazás/Kvórum)
 
-**Mikor használjuk**: Több ügynök egyetértésére van szükség a továbblépés előtt.
+**Mikor használd**: Több ügynöktől kell egyetértés a továbblépéshez.
 
 ```mermaid
 graph TB
-    Input[Bemeneti feladat]
-    Agent1[Ügynök 1: GPT-4]
+    Input[Bemeneti Feladat]
+    Agent1[Ügynök 1: gpt-4.1]
     Agent2[Ügynök 2: Claude]
     Agent3[Ügynök 3: Gemini]
-    Voter[Konszenzus-szavazó]
-    Output[Egyeztetett kimenet]
+    Voter[Konszenzus Szavazó]
+    Output[Egyezményes Kimenet]
     
     Input --> Agent1
     Input --> Agent2
@@ -246,43 +240,43 @@ graph TB
     Voter --> Output
     
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
-```
-**Előnyök:**
-- ✅ Magasabb pontosság (több vélemény)
-- ✅ Hibatűrő (a kisebbségi hibák elfogadhatók)
-- ✅ Beépített minőségbiztosítás
+```  
+**Előnyök:**  
+- ✅ Magasabb pontosság (több vélemény)  
+- ✅ Hibabiztos (a kisebbségi hibák elfogadhatók)  
+- ✅ Beépített minőségbiztosítás  
 
-**Korlátozások:**
-- ❌ Drága (több modell meghívás)
-- ❌ Lassabb (minden ügynök megvárása)
-- ⚠️ Konfliktuskezelés szükséges
+**Korlátok:**  
+- ❌ Drága (több modell hívás)  
+- ❌ Lassabb (minden ügynök megvárása)  
+- ⚠️ Konfliktuskezelés szükséges  
 
-**Példák:**
-- Tartalom moderálás (több modell felülvizsgálja a tartalmat)
-- Kódellenőrzés (több linter/analizátor)
-- Orvosi diagnózis (több AI modell, szakértői validáció)
+**Példák:**  
+- Tartalom moderálás (több modell véleményezi a tartalmat)  
+- Kódellenőrzés (több elemző/analizáló)  
+- Orvosi diagnózis (több AI modell, szakértői validáció)  
 
 ---
 
-## Architektúra áttekintés
+## Architektúra Áttekintés
 
-### Teljes többügynökös rendszer Azure-on
+### Teljes Többügynökös Rendszer Azure-on
 
 ```mermaid
 graph TB
     User[Felhasználó/API kliens]
-    APIM[Azure API-kezelés]
-    Orchestrator[Orchestrátor szolgáltatás<br/>Konténeralkalmazás]
+    APIM[Azure API menedzsment]
+    Orchestrator[Orchestrátor szolgáltatás<br/>Konténer alkalmazás]
     ServiceBus[Azure Service Bus<br/>Eseményközpont]
     
-    Agent1[Kutató ügynök<br/>Konténeralkalmazás]
-    Agent2[Író ügynök<br/>Konténeralkalmazás]
-    Agent3[Elemző ügynök<br/>Konténeralkalmazás]
-    Agent4[Ellenőrző ügynök<br/>Konténeralkalmazás]
+    Agent1[Kutató ügynök<br/>Konténer alkalmazás]
+    Agent2[Író ügynök<br/>Konténer alkalmazás]
+    Agent3[Elemző ügynök<br/>Konténer alkalmazás]
+    Agent4[Felülvizsgáló ügynök<br/>Konténer alkalmazás]
     
     CosmosDB[(Cosmos DB<br/>Megosztott állapot)]
-    Storage[Azure Storage<br/>Artefaktumok]
-    AppInsights[Application Insights<br/>Megfigyelés]
+    Storage[Azure tárhely<br/>Artefaktumok]
+    AppInsights[Alkalmazásfigyelés<br/>Monitorozás]
     
     User --> APIM
     APIM --> Orchestrator
@@ -312,61 +306,61 @@ graph TB
     style Orchestrator fill:#FF9800,stroke:#F57C00,stroke-width:3px,color:#fff
     style ServiceBus fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
-```
+```  
 **Fő komponensek:**
 
-| Komponens | Cél | Azure Service |
-|-----------|---------|---------------|
+| Komponens | Cél | Azure Szolgáltatás |
+|-----------|-----|--------------------|
 | **API Gateway** | Belépési pont, sebességkorlátozás, hitelesítés | API Management |
-| **Orchesztrátor** | Az ügynök munkafolyamatok koordinálása | Container Apps |
-| **Message Queue** | Aszinkron kommunikáció | Service Bus / Event Hubs |
-| **Ügynökök** | Szakosodott AI munkavégzők | Container Apps / Functions |
-| **Állapottár** | Megosztott állapot, feladatkövetés | Cosmos DB |
-| **Artefakt tároló** | Dokumentumok, eredmények, naplók | Blob Storage |
-| **Monitorozás** | Elosztott nyomkövetés, naplók | Application Insights |
+| **Orkesztrátor** | Ügynöki munkafolyamatok koordinálása | Container Apps |
+| **Üzenetsor** | Aszinkron kommunikáció | Service Bus / Event Hubs |
+| **Ügynökök** | Specializált AI munkavégzők | Container Apps / Functions |
+| **Állapottároló** | Megosztott állapot, feladatkövetés | Cosmos DB |
+| **Melléklet Tároló** | Dokumentumok, eredmények, naplók | Blob Storage |
+| **Monitorozás** | Elosztott követés, naplók | Application Insights |
 
 ---
 
 ## Előfeltételek
 
-### Szükséges eszközök
+### Szükséges Eszközök
 
 ```bash
 # Ellenőrizze az Azure Developer CLI-t
 azd version
-# ✅ Elvárt: azd verzió 1.0.0 vagy újabb
+# ✅ Várt: azd verzió 1.0.0 vagy újabb
 
 # Ellenőrizze az Azure CLI-t
 az --version
-# ✅ Elvárt: azure-cli 2.50.0 vagy újabb
+# ✅ Várt: azure-cli 2.50.0 vagy újabb
 
 # Ellenőrizze a Dockert (helyi teszteléshez)
 docker --version
-# ✅ Elvárt: Docker verzió 20.10 vagy újabb
+# ✅ Várt: Docker verzió 20.10 vagy újabb
 ```
+  
+### Azure Követelmények
 
-### Azure követelmények
+- Aktív Azure előfizetés  
+- Jogosultságok a következők létrehozásához:  
+  - Container Apps  
+  - Service Bus névterek  
+  - Cosmos DB fiókok  
+  - Tárolófiókok  
+  - Application Insights  
 
-- Aktív Azure-előfizetés
-- Engedélyek a következők létrehozásához:
-  - Container Apps
-  - Service Bus namespaces
-  - Cosmos DB accounts
-  - Storage accounts
-  - Application Insights
+### Tudás Előfeltételek
 
-### Szükséges tudás
-
-Ezeket el kell végezned:
-- [Konfigurációkezelés](../chapter-03-configuration/configuration.md)
-- [Hitelesítés & Biztonság](../chapter-03-configuration/authsecurity.md)
-- [Mikroszolgáltatások példa](../../../../examples/microservices)
+El kell végezned:  
+- [Konfigurációkezelés](../chapter-03-configuration/configuration.md)  
+- [Hitelesítés és Biztonság](../chapter-03-configuration/authsecurity.md)  
+- [Microservices példa](../../../../examples/microservices)  
 
 ---
 
-## Megvalósítási útmutató
+## Megvalósítási Útmutató
 
-### Projekt struktúra
+### Projektstruktúra
 
 ```
 multi-agent-system/
@@ -395,18 +389,18 @@ multi-agent-system/
         ├── state_manager.py     # Shared state logic
         └── message_handler.py   # Message handling
 ```
-
+  
 ---
 
-## 1. lecke: Szekvenciális koordinációs minta
+## 1. Lecke: Szekvenciális Koordinációs Minta
 
-### Megvalósítás: Tartalomkészítő csővezeték
+### Megvalósítás: Tartalomkészítő Csővezeték
 
-Építsünk egy szekvenciális csővezetéket: Kutatás → Írás → Szerkesztés → Közzététel
+Építsünk egy szekvenciális csővezetéket: Kutatás → Írás → Szerkesztés → Publikálás
 
-### 1. AZD konfiguráció
+### 1. AZD Konfiguráció
 
-**File: `azure.yaml`**
+**Fájl: `azure.yaml`**
 
 ```yaml
 name: content-pipeline
@@ -434,10 +428,10 @@ services:
     language: python
     host: containerapp
 ```
+  
+### 2. Infrastruktúra: Service Bus koordinációhoz
 
-### 2. Infrastruktúra: Service Bus a koordinációhoz
-
-**File: `infra/core/servicebus.bicep`**
+**Fájl: `infra/core/servicebus.bicep`**
 
 ```bicep
 param name string
@@ -491,10 +485,10 @@ resource editorQueue 'Microsoft.ServiceBus/namespaces/queues@2022-10-01-preview'
 output namespace string = serviceBusNamespace.name
 output connectionString string = listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString
 ```
+  
+### 3. Megosztott állapot kezelő
 
-### 3. Megosztott állapotkezelő
-
-**File: `src/shared/state_manager.py`**
+**Fájl: `src/shared/state_manager.py`**
 
 ```python
 from azure.cosmos import CosmosClient, PartitionKey
@@ -551,10 +545,10 @@ class StateManager:
         """Retrieve task state"""
         return self.container.read_item(task_id, partition_key=task_id)
 ```
+  
+### 4. Orkesztrátor Szolgáltatás
 
-### 4. Orkesztrátor szolgáltatás
-
-**File: `src/orchestrator/app.py`**
+**Fájl: `src/orchestrator/app.py`**
 
 ```python
 from flask import Flask, request, jsonify
@@ -586,7 +580,7 @@ def create_content():
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # Feladat létrehozása az állapot tárolóban
+    # Feladat létrehozása állapot tárolóban
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -628,10 +622,10 @@ def get_task_status(task_id):
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
+  
+### 5. Kutató Ügynök
 
-### 5. Kutató ügynök
-
-**File: `src/agents/research/app.py`**
+**Fájl: `src/agents/research/app.py`**
 
 ```python
 from azure.servicebus import ServiceBusClient, ServiceBusMessage
@@ -641,7 +635,7 @@ import os
 import time
 from shared.state_manager import StateManager
 
-# Inicializálja a klienseket
+# Inicializálja az ügyfeleket
 state_manager = StateManager()
 servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
@@ -661,9 +655,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # Hívja az Azure OpenAI-t kutatáshoz
+    # Microsoft Foundry modellek hívása kutatáshoz
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -673,14 +667,14 @@ def process_research_task(message_data):
     
     research_results = response.choices[0].message.content
     
-    # Frissítse az állapotot
+    # Állapot frissítése
     state_manager.update_task_step(
         task_id=task_id,
         step_name='research',
         result={'research': research_results}
     )
     
-    # Küldje a következő ügynöknek (író)
+    # Küldés a következő ügynöknek (író)
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -718,10 +712,10 @@ def main():
 if __name__ == '__main__':
     main()
 ```
+  
+### 6. Író Ügynök
 
-### 6. Író ügynök
-
-**File: `src/agents/writer/app.py`**
+**Fájl: `src/agents/writer/app.py`**
 
 ```python
 from azure.servicebus import ServiceBusClient, ServiceBusMessage
@@ -750,9 +744,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # Hívja az Azure OpenAI-t, hogy írjon cikket
+    # Hívja meg a Microsoft Foundry modelljeit cikk írásához
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -762,14 +756,14 @@ def process_writing_task(message_data):
     
     article_draft = response.choices[0].message.content
     
-    # Frissítse az állapotot
+    # Állapot frissítése
     state_manager.update_task_step(
         task_id=task_id,
         step_name='writing',
         result={'draft': article_draft}
     )
     
-    # Küldje a szerkesztőnek
+    # Küldés a szerkesztőnek
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -806,10 +800,10 @@ def main():
 if __name__ == '__main__':
     main()
 ```
+  
+### 7. Szerkesztő Ügynök
 
-### 7. Szerkesztő ügynök
-
-**File: `src/agents/editor/app.py`**
+**Fájl: `src/agents/editor/app.py`**
 
 ```python
 from azure.servicebus import ServiceBusClient
@@ -837,9 +831,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # Hívja az Azure OpenAI-t a szerkesztéshez
+    # Microsoft Foundry Modellek hívása szerkesztéshez
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -849,7 +843,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # Jelölje a feladatot elkészültként
+    # Feladat jelölése késznek
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -882,15 +876,24 @@ def main():
 if __name__ == '__main__':
     main()
 ```
-
-### 8. Telepítés és tesztelés
+  
+### 8. Telepítés és Tesztelés
 
 ```bash
-# Inicializálás és telepítés
+# 1. lehetőség: Sablonalapú telepítés
 azd init
 azd up
 
-# Orchestrátor URL lekérése
+# 2. lehetőség: Ügynök manifest telepítés (kiterjesztés szükséges)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
+azd up
+```
+  
+> Lásd a [AZD AI CLI Parancsok](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) dokumentációt az összes `azd ai` zászlóval és opcióval kapcsolatban.
+
+```bash
+# Az orchestrator URL-jének lekérése
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
 # Tartalom létrehozása
@@ -898,8 +901,8 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
   -H "Content-Type: application/json" \
   -d '{"topic": "The Future of AI in Healthcare"}'
 ```
-
-**✅ Várt kimenet:**
+  
+**✅ Várt kimenet:**  
 ```json
 {
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -909,14 +912,14 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
   "message": "Content creation pipeline initiated"
 }
 ```
-
-**Ellenőrizd a feladat előrehaladását:**
+  
+**Feladat előrehaladásának ellenőrzése:**  
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
-
-**✅ Várt kimenet (befejezve):**
+  
+**✅ Várt kimenet (kész):**  
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -941,18 +944,18 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
   }
 }
 ```
-
+  
 ---
 
-## 2. lecke: Párhuzamos koordinációs minta
+## 2. Lecke: Párhuzamos Koordinációs Minta
 
-### Megvalósítás: Több forrású kutatás aggregátora
+### Megvalósítás: Többforrású Kutatásgyűjtő
 
-Építsünk egy párhuzamos rendszert, amely egyszerre gyűjt információt több forrásból.
+Készítsünk párhuzamos rendszert, ami egyszerre több forrásból gyűjt információt.
 
-### Párhuzamos orkesztrátor
+### Párhuzamos Orkesztrátor
 
-**File: `src/orchestrator/parallel_workflow.py`**
+**Fájl: `src/orchestrator/parallel_workflow.py`**
 
 ```python
 from flask import Flask, request, jsonify
@@ -987,7 +990,7 @@ def research_parallel():
         }
     )
     
-    # Szétosztás: Küldés az összes ügynöknek egyszerre
+    # Szétosztás: Egyidejűleg küldje el az összes ügynöknek
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1021,10 +1024,10 @@ def research_parallel():
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
+  
+### Összegző Logika
 
-### Aggregálási logika
-
-**File: `src/agents/aggregator/app.py`**
+**Fájl: `src/agents/aggregator/app.py`**
 
 ```python
 from azure.servicebus import ServiceBusClient
@@ -1038,7 +1041,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
 )
 
-# Eredmények nyomon követése feladatonként
+# Eredmények követése feladatonként
 task_results = defaultdict(list)
 expected_agents = 4  # web, akadémiai, hírek, közösségi
 
@@ -1056,18 +1059,18 @@ def process_result(message_data):
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # Ellenőrizze, hogy minden ügynök befejezte-e (fan-in)
+    # Ellenőrizze, hogy az összes ügynök befejezte-e (fan-in)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
-        # Eredmények összevonása
+        # Eredmények kombinálása
         aggregated = {
             'query': message_data['query'],
             'sources': task_results[task_id],
             'summary': generate_summary(task_results[task_id])
         }
         
-        # Befejezettként jelölése
+        # Jelölje be késznek
         state_manager.complete_task(task_id, aggregated)
         
         # Takarítás
@@ -1101,33 +1104,33 @@ def main():
 if __name__ == '__main__':
     main()
 ```
-
-**A párhuzamos minta előnyei:**
-- ⚡ **4x gyorsabb** (az ügynökök egyszerre futnak)
-- 🔄 **Hibatűrő** (részleges eredmények elfogadhatók)
-- 📈 **Skálázható** (könnyen hozzáadhatsz több ügynököt)
+  
+**A párhuzamos minta előnyei:**  
+- ⚡ **4x gyorsabb** (ügynökök egyszerre futnak)  
+- 🔄 **Hibabiztos** (részleges eredmény elfogadható)  
+- 📈 **Skálázható** (könnyű új ügynököket hozzáadni)  
 
 ---
 
-## Gyakorlati feladatok
+## Gyakorlati Feladatok
 
 ### Feladat 1: Timeout kezelés hozzáadása ⭐⭐ (Közepes)
 
-**Cél**: Valósítsd meg a timeout logikát, hogy az aggregátor ne várjon örökké a lassú ügynökökre.
+**Cél**: Timeout logika implementálása, hogy az aggregátor ne várjon örökké a lassú ügynökökre.
 
 **Lépések**:
 
-1. **Adj hozzá timeout követést az aggregátorhoz:**
+1. **Timeout követés hozzáadása az aggregátorhoz:**  
 
 ```python
 from datetime import datetime, timedelta
 
-task_timeouts = {}  # task_id -> lejárati_idő
+task_timeouts = {}  # task_id -> lejárati idő
 
 def process_result(message_data):
     task_id = message_data['task_id']
     
-    # Állítsa be az első eredmény időkorlátját
+    # Időtúllépés beállítása az első eredményre
     if task_id not in task_timeouts:
         task_timeouts[task_id] = datetime.utcnow() + timedelta(seconds=30)
     
@@ -1136,7 +1139,7 @@ def process_result(message_data):
         'data': message_data['result']
     })
     
-    # Ellenőrizze, hogy befejeződött-e VAGY időtúllépés történt-e
+    # Ellenőrizze, hogy befejeződött-e VAGY lejárt-e az idő
     if len(task_results[task_id]) == expected_agents or \
        datetime.utcnow() > task_timeouts[task_id]:
         
@@ -1155,16 +1158,16 @@ def process_result(message_data):
         del task_results[task_id]
         del task_timeouts[task_id]
 ```
-
-2. **Tesztelj mesterséges késleltetésekkel:**
+  
+2. **Tesztelés mesterséges késleltetésekkel:**  
 
 ```python
-# Adj egy ügynöknek késleltetést a lassú feldolgozás szimulálásához
+# Egy ügynöknél adj hozzá késleltetést a lassú feldolgozás szimulálásához
 import time
-time.sleep(35)  # Túllépi a 30 másodperces időkorlátot
+time.sleep(35)  # Meghaladja a 30 másodperces időkorlátot
 ```
-
-3. **Telepítsd és ellenőrizd:**
+  
+3. **Telepítés és ellenőrzés:**  
 
 ```bash
 azd deploy aggregator
@@ -1174,26 +1177,26 @@ curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
 
-# Ellenőrizze az eredményeket 30 másodperc múlva.
+# Eredmények ellenőrzése 30 másodperc múlva
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
+  
+**✅ Sikerkritérium:**  
+- ✅ A feladat 30 másodperc után befejeződik, még ha az ügynökök nem végzették el teljesen  
+- ✅ A válasz jelzi a részleges eredményt (`"timed_out": true`)  
+- ✅ Visszatérnek a rendelkezésre álló eredmények (4-ből 3 ügynök)  
 
-**✅ Sikerkritériumok:**
-- ✅ A feladat 30 másodperc után befejeződik, még ha az ügynökök nem teljesek is
-- ✅ A válasz jelzi a timeout-ot (`"timed_out": true`)
-- ✅ A rendelkezésre álló eredmények visszatérnek (4-ből 3 ügynök)
-
-**Idő**: 20-25 perc
+**Időigény**: 20-25 perc
 
 ---
 
-### Feladat 2: Ismétlési logika megvalósítása ⭐⭐⭐ (Haladó)
+### Feladat 2: Újrapróbálkozási logika megvalósítása ⭐⭐⭐ (Haladó)
 
-**Cél**: Automatikusan ismételni a sikertelen ügynök feladatokat, mielőtt feladnánk.
+**Cél**: Automatikus újrapróbálkozás az elbukott ügynöki feladatoknál mielőtt feladja.
 
 **Lépések**:
 
-1. **Adj hozzá ismétléskövetést az orkesztrátorhoz:**
+1. **Újrapróbálkozás követésének hozzáadása az orkesztrátorhoz:**  
 
 ```python
 from dataclasses import dataclass
@@ -1204,7 +1207,7 @@ class RetryConfig:
     max_retries: int = 3
     backoff_seconds: int = 5
 
-retry_counts: Dict[str, int] = {}  # üzenet_azonosító -> újrapróbálkozások_száma
+retry_counts: Dict[str, int] = {}  # message_id -> újrapróbálkozási_szám
 
 def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
     """Send message with retry metadata"""
@@ -1223,8 +1226,8 @@ def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConf
     with sender:
         sender.send_messages(message)
 ```
-
-2. **Adj ismétlési kezelőt az ügynökökhöz:**
+  
+2. **Újrapróbálkozás kezelő hozzáadása az ügynökökhöz:**  
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1235,7 +1238,7 @@ def process_with_retry(message, receiver, process_func):
         # Üzenet feldolgozása
         process_func(message_data)
         
-        # Siker - befejezve
+        # Siker - kész
         receiver.complete_message(message)
         
     except Exception as e:
@@ -1244,18 +1247,18 @@ def process_with_retry(message, receiver, process_func):
         max_retries = message_data.get('max_retries', 3)
         
         if retry_count < max_retries:
-            # Újrapróbálkozás: elvetés és újra sorba helyezés megnövelt számlálóval
+            # Újrapróbálkozás: elvetés és újrafelvétel növelt számlálóval
             print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
             
             message_data['retry_count'] = retry_count + 1
             
-            # Visszaküldés ugyanabba a sorba késleltetéssel
-            time.sleep(5 * (retry_count + 1))  # Exponenciális késleltetés
+            # Visszaküldés ugyanarra a sorra késleltetéssel
+            time.sleep(5 * (retry_count + 1))  # Exponenciális visszalépés
             send_with_retry(queue_name, message_data, RetryConfig())
             
             receiver.complete_message(message)  # Eredeti eltávolítása
         else:
-            # Maximális próbálkozásszám túllépve - áthelyezés a halott üzenetek sorába
+            # Max újrapróbálkozás túllépve - áthelyezés a halott levél sorba
             print(f"❌ Max retries exceeded for message {message_id}")
             receiver.dead_letter_message(
                 message,
@@ -1263,8 +1266,8 @@ def process_with_retry(message, receiver, process_func):
                 error_description=str(e)
             )
 ```
-
-3. **Monitorozd a dead letter queue-t:**
+  
+3. **Halottlevél sor figyelése:**  
 
 ```python
 def monitor_dead_letters():
@@ -1281,24 +1284,24 @@ def monitor_dead_letters():
             print(f"Reason: {message.dead_letter_reason}")
             print(f"Description: {message.dead_letter_error_description}")
 ```
+  
+**✅ Sikerkritérium:**  
+- ✅ A hibás feladatok automatikusan újrapróbálkoznak (maximum 3-szor)  
+- ✅ Exponenciális visszavárás újrapróbálkozások között (5s, 10s, 15s)  
+- ✅ Max újrapróbálkozás után az üzenetek halottlevél sorba kerülnek  
+- ✅ A halottlevél sort monitorozni és újrajátszani lehet  
 
-**✅ Sikerkritériumok:**
-- ✅ A sikertelen feladatok automatikusan újrapróbálkoznak (legfeljebb 3-szor)
-- ✅ Exponenciális visszavárakoztatás az ismétlések között (5s, 10s, 15s)
-- ✅ Maximális ismétlések után az üzenetek a dead letter queue-ba kerülnek
-- ✅ A dead letter queue monitorozható és újrajátszható
-
-**Idő**: 30-40 perc
+**Időigény**: 30-40 perc
 
 ---
 
-### Feladat 3: Circuit Breaker megvalósítása ⭐⭐⭐ (Haladó)
+### Feladat 3: Kapcsoló megszakító (Circuit Breaker) megvalósítása ⭐⭐⭐ (Haladó)
 
-**Cél**: Megakadályozni a kaszkádolódó hibákat azzal, hogy leállítjuk a kéréseket a hibás ügynökök felé.
+**Cél**: Kaszkádhibákat megakadályozni azáltal, hogy megállítjuk a kéréseket a hibás ügynökökhöz.
 
 **Lépések**:
 
-1. **Hozz létre circuit breaker osztályt:**
+1. **Kapcsoló megszakító osztály létrehozása:**  
 
 ```python
 from enum import Enum
@@ -1306,7 +1309,7 @@ from datetime import datetime, timedelta
 
 class CircuitState(Enum):
     CLOSED = "closed"      # Normál működés
-    OPEN = "open"          # Hiba, kérések elutasítása
+    OPEN = "open"          # Hibás, kérés visszautasítva
     HALF_OPEN = "half_open"  # Tesztelés, hogy helyreállt-e
 
 class CircuitBreaker:
@@ -1320,7 +1323,7 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # Ellenőrzés, hogy lejárt-e az időkorlát
+            # Ellenőrizze, hogy lejárt-e az időkorlát
             if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
@@ -1348,11 +1351,11 @@ class CircuitBreaker:
             
             raise e
 ```
-
-2. **Alkalmazd az ügynök hívásoknál:**
+  
+2. **Alkalmazás az ügynökhívásokra:**  
 
 ```python
-# Az orchestrátorban
+# Az orchestratorban
 agent_circuits = {
     'web': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
     'academic': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
@@ -1368,16 +1371,16 @@ def send_to_agent(agent_type, message_data):
         circuit.call(lambda: send_message(agent_type, message_data))
     except Exception as e:
         print(f"⚠️ Skipping {agent_type} agent: {e}")
-        # Folytassa a többi ügynökkel
+        # Folytatás más ügynökökkel
 ```
-
-3. **Teszteld a circuit breakert:**
+  
+3. **Kapcsoló tesztelése:**  
 
 ```bash
-# Szimuláljon ismétlődő hibákat (állítson le egy ügynököt)
+# Ismétlődő hibák szimulálása (egy ügynök leállítása)
 az containerapp stop --name web-research-agent --resource-group rg-agents
 
-# Küldjön több kérést
+# Többszöri kérés küldése
 for i in {1..10}; do
   curl -X POST $ORCHESTRATOR_URL/research-parallel \
     -H "Content-Type: application/json" \
@@ -1385,26 +1388,26 @@ for i in {1..10}; do
   sleep 2
 done
 
-# Ellenőrizze a naplókat - 5 hiba után látnia kell, hogy a circuit breaker nyitva van
-# Használja az Azure CLI-t a Container App naplóinak megtekintéséhez:
+# Ellenőrizze a naplókat - 5 hiba után meg kell jelennie a nyitott áramkörnek
+# Használja az Azure CLI-t a Konténer alkalmazás naplóinak megtekintéséhez:
 az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
 ```
+  
+**✅ Sikerkritérium:**  
+- ✅ 5 sikertelen próbálkozás után a kapcsoló nyit (kérések elutasítása)  
+- ✅ 60 másodperc után a kapcsoló félig nyitott állapotba kerül (helyreállítás tesztelése)  
+- ✅ Más ügynökök tovább működnek rendesen  
+- ✅ A kapcsoló automatikusan záródik, ha az ügynök helyreáll  
 
-**✅ Sikerkritériumok:**
-- ✅ 5 hiba után a circuit nyit (elutasítja a kéréseket)
-- ✅ 60 másodperc után a circuit fél-nyitott állapotba kerül (teszteli a helyreállítást)
-- ✅ A többi ügynök normálisan folytatja a munkát
-- ✅ A circuit automatikusan záródik, amikor az ügynök helyreáll
-
-**Idő**: 40-50 perc
+**Időigény**: 40-50 perc
 
 ---
 
-## Monitorozás és hibakeresés
+## Monitorozás és Hibakeresés
 
-### Elosztott nyomkövetés Application Insights-szal
+### Elosztott követés Application Insights-szal
 
-**File: `src/shared/tracing.py`**
+**Fájl: `src/shared/tracing.py`**
 
 ```python
 from opencensus.ext.azure.log_exporter import AzureLogHandler
@@ -1420,13 +1423,13 @@ config_integration.trace_integrations(['requests', 'logging'])
 
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
-# Nyomkövető létrehozása
+# Tracer létrehozása
 tracer = Tracer(
     exporter=AzureExporter(connection_string=connection_string),
     sampler=AlwaysOnSampler()
 )
 
-# Naplózás konfigurálása
+# Naplózás beállítása
 logger = logging.getLogger(__name__)
 logger.addHandler(AzureLogHandler(connection_string=connection_string))
 logger.setLevel(logging.INFO)
@@ -1447,10 +1450,10 @@ def trace_agent_call(agent_name, task_id, operation):
             span.add_attribute('error', str(e))
             raise
 ```
+  
+### Application Insights Lekérdezések
 
-### Application Insights lekérdezések
-
-**Kövesd a többügynökös munkafolyamatokat:**
+**Többügynökös munkafolyamatok követése:**  
 
 ```kusto
 // Trace complete workflow for a task
@@ -1459,8 +1462,8 @@ traces
 | project timestamp, message, customDimensions.agent, customDimensions.operation
 | order by timestamp asc
 ```
-
-**Ügynök teljesítmény összehasonlítás:**
+  
+**Ügynökk teljesítmény összehasonlítás:**  
 
 ```kusto
 // Compare agent execution times
@@ -1473,8 +1476,8 @@ dependencies
   by agent = tostring(customDimensions.agent)
 | order by avg_duration desc
 ```
-
-**Hibaelemzés:**
+  
+**Hibák elemzése:**  
 
 ```kusto
 // Find which agents fail most
@@ -1486,27 +1489,27 @@ exceptions
   by agent = tostring(customDimensions.agent)
 | order by failure_count desc
 ```
-
+  
 ---
 
 ## Költségelemzés
 
-### Többügynökös rendszer költségei (havi becslések)
+### Többügynökös Rendszer Költségei (Havi becslés)
 
 | Komponens | Konfiguráció | Költség |
-|-----------|--------------|------|
-| **Orkesztrátor** | 1 Container App (1 vCPU, 2GB) | $30-50 |
-| **4 ügynök** | 4 Container Apps (0.5 vCPU, 1GB mindegyik) | $60-120 |
-| **Service Bus** | Standard tier, 10M messages | $10-20 |
-| **Cosmos DB** | Serverless, 5GB tároló, 1M RUs | $25-50 |
-| **Blob Storage** | 10GB tároló, 100K művelet | $5-10 |
-| **Application Insights** | 5GB ingestion | $10-15 |
-| **Azure OpenAI** | GPT-4, 10M token | $100-300 |
-| **Összesen** | | **$240-565/hó** |
+|-----------|--------------|---------|
+| **Orkesztrátor** | 1 Container App (1 vCPU, 2GB) | 30-50 USD |
+| **4 Ügynök** | 4 Container App (0.5 vCPU, 1GB) | 60-120 USD |
+| **Service Bus** | Standard szint, 10M üzenet | 10-20 USD |
+| **Cosmos DB** | Serverless, 5GB tároló, 1M RU | 25-50 USD |
+| **Blob Storage** | 10GB tároló, 100K művelet | 5-10 USD |
+| **Application Insights** | 5GB adatbevitel | 10-15 USD |
+| **Microsoft Foundry Modellek** | gpt-4.1, 10M token | 100-300 USD |
+| **Összesen** | | **240-565 USD/hó** |
 
-### Költségoptimalizálási stratégiák
+### Költségoptimalizációs Stratégiák
 
-1. **Használj serverless megoldást, ahol lehetséges:**
+1. **Használj serverless megoldásokat, ahol lehet:**  
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1514,125 +1517,126 @@ exceptions
      capabilities: [{ name: 'EnableServerless' }]
    }
    ```
-
-2. **Skálázd az ügynököket nullára, ha inaktívak:**
+  
+2. **Skálázd le az ügynököket nullára, ha inaktívak:**  
    ```bicep
    scale: {
      minReplicas: 0  // Scale to zero when no messages
      maxReplicas: 10
    }
    ```
-
-3. **Használj batch feldolgozást Service Bus-hoz:**
+  
+3. **Használj batch-elést Service Bus-hoz:**  
    ```python
-   # Küldj üzeneteket csoportosan (olcsóbb)
+   # Üzenetek küldése csomagokban (olcsóbb)
    sender.send_messages([message1, message2, message3])
    ```
-
-4. **Gyakran használt eredmények gyorsítótárazása:**
+  
+4. **Cache-eld a gyakran használt eredményeket:**  
    ```python
    # Használja az Azure Cache for Redis szolgáltatást
    if cache.exists(query_hash):
        return cache.get(query_hash)
    ```
-
+  
 ---
 
-## Legjobb gyakorlatok
+## Legjobb Gyakorlatok
 
-### ✅ TEGYÉL:
+### ✅ CSINÁLD:
 
-1. **Használj idempotens műveleteket**
+1. **Használj idempotens műveleteket**  
    ```python
-   # Az ügynök biztonságosan többször is feldolgozhatja ugyanazt az üzenetet
+   # Az ügynök biztonságosan feldolgozhatja ugyanazt az üzenetet többször is
    def process_task(task_id):
        if state_manager.task_exists(task_id):
            print(f"Task {task_id} already processed, skipping")
            return
        # Feladat feldolgozása...
    ```
-
-2. **Valósíts meg átfogó naplózást**
+  
+2. **Valósíts meg átfogó naplózást**  
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
-
-3. **Használj korrelációs azonosítókat**
+  
+3. **Használj korrelációs azonosítókat**  
    ```python
-   # Adja át a task_id-t az egész munkafolyamaton keresztül.
+   # Továbbítsd a task_id-t az egész munkafolyamat során
    message_data = {
        'task_id': task_id,  # Korrelációs azonosító
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
-
-4. **Állítsd be az üzenetek TTL-jét (time-to-live)**
+  
+4. **Állítsd be az üzenetek TTL-jét (élettartamát)**  
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
-
-5. **Figyeld a dead-letter queue-ket**
+  
+5. **Figyeld a halottlevél sorokat**  
    ```python
-   # Sikertelen üzenetek rendszeres figyelése
+   # Rendszeres ellenőrzése a sikertelen üzeneteknek
    monitor_dead_letters()
    ```
+  
+### ❌ NE CSINÁLD:
 
-### ❌ NE TEGYÉL:
-
-1. **Ne hozz létre körkörös függőségeket**
+1. **Ne hozz létre körkörös függőségeket**  
    ```python
    # ❌ ROSSZ: Ügynök A → Ügynök B → Ügynök A (végtelen ciklus)
-   # ✅ JÓ: Határozz meg egyértelmű irányított aciklikus gráfot (DAG)
+   # ✅ JÓ: Egyértelmű, irányított ciklusmentes gráf (DAG) definiálása
    ```
-
-2. **Ne blokkolj ügynökök szálait**
+  
+2. **Ne blokkolj ügynök szálakat**  
    ```python
    # ❌ ROSSZ: Szinkron várakozás
    while not task_complete:
        time.sleep(1)
    
-   # ✅ JÓ: Használjon üzenetsor visszahívásokat
+   # ✅ JÓ: Használj üzenetsor visszahívásokat
    ```
-
+  
 3. **Ne hagyd figyelmen kívül a részleges hibákat**
    ```python
-   # ❌ ROSSZ: Ha egy ügynök meghibásodik, az egész munkafolyamat meghiúsul
-   # ✅ JÓ: Részleges eredmények visszaadása hibajelzőkkel
+   # ❌ ROSSZ: Az egész munkafolyamat meghiúsítása, ha egy ügynök hibázik
+   # ✅ JÓ: Részleges eredmények visszaadása hibajelzésekkel
    ```
 
-4. **Ne használj végtelen ismétléseket**
+4. **Ne használj végtelen próbálkozásokat**
    ```python
    # ❌ ROSSZ: végtelen újrapróbálkozás
-   # ✅ JÓ: max_retries = 3, majd dead-letter sorba
+   # ✅ JÓ: max_retries = 3, majd halott levél
    ```
 
 ---
+
 ## Hibaelhárítási útmutató
 
-### Probléma: Üzenetek beragadva a sorba
+### Probléma: Üzenetek beragadtak a sorban
 
 **Tünetek:**
-- Üzenetek felhalmozódnak a sorban
+- Az üzenetek felgyülemlenek a sorban
 - Az ügynökök nem dolgoznak
 - A feladat állapota "függőben" marad
 
 **Diagnózis:**
 ```bash
-# Ellenőrizze a sor mélységét
+# Sor mélységének ellenőrzése
 az servicebus queue show \
   --namespace-name mybus \
   --name research-tasks \
   --query "countDetails"
 
-# Ellenőrizze az ügynök naplóit az Azure CLI használatával
+# Ügynök naplók ellenőrzése az Azure CLI segítségével
 az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
 **Megoldások:**
 
-1. **Növeld az ügynök-példányok számát:**
+1. **Növeld az ügynökök másolatait:**
    ```bash
    az containerapp update \
      --name research-agent \
@@ -1640,7 +1644,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
      --max-replicas 10
    ```
 
-2. **Dead-letter sor ellenőrzése:**
+2. **Ellenőrizd a holt levél sorokat:**
    ```bash
    az servicebus queue show \
      --namespace-name mybus \
@@ -1650,11 +1654,11 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Probléma: A feladat időtúllép / soha nem fejeződik be
+### Probléma: A feladat időtúllépés miatt nem fejeződik be
 
 **Tünetek:**
 - A feladat állapota "folyamatban" marad
-- Néhány ügynök befejezi, mások nem
+- Egyes ügynökök befejezik, mások nem
 - Nincsenek hibaüzenetek
 
 **Diagnózis:**
@@ -1662,20 +1666,20 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 # Ellenőrizze a feladat állapotát
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
-# Ellenőrizze az Application Insightsot
-# Futtassa a lekérdezést: traces | where customDimensions.task_id == "..."
+# Ellenőrizze az Application Insights szolgáltatást
+# Futtassa a lekérdezést: traces | ahol customDimensions.task_id == "..."
 ```
 
 **Megoldások:**
 
-1. **Időtúllépés megvalósítása az aggregátorban (1. gyakorlat)**
+1. **Időtúllépés kezelése az aggregátorban (1. gyakorlat)**
 
-2. **Ellenőrizd az ügynök hibákat az Azure Monitor segítségével:**
+2. **Ügynök hibák ellenőrzése Azure Monitorral:**
    ```bash
-   # Nézze meg a naplókat az azd monitor segítségével
+   # Naplók megtekintése az azd monitorral
    azd monitor --logs
    
-   # Vagy használja az Azure CLI-t egy adott konténeralkalmazás naplóinak megtekintéséhez
+   # Vagy használd az Azure CLI-t a specifikus konténeralkalmazás naplóinak ellenőrzéséhez
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
@@ -1688,7 +1692,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Tudj meg többet
+## További tudnivalók
 
 ### Hivatalos dokumentáció
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
@@ -1696,43 +1700,42 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
 - [Többügynökös tervezési minták](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
 
-### A tanfolyam következő lépései
-- ← Előző: [Kapacitástervezés](capacity-planning.md)
-- → Következő: [SKU kiválasztása](sku-selection.md)
-- 🏠 [Kurzus kezdőlapja](../../README.md)
+### Következő lépések a tanfolyamban
+- ← Előző: [Kapacitás tervezés](capacity-planning.md)
+- → Következő: [SKU kiválasztás](sku-selection.md)
+- 🏠 [Tanfolyam kezdőlap](../../README.md)
 
 ### Kapcsolódó példák
-- [Mikroszolgáltatások példa](../../../../examples/microservices) - Szolgáltatások közötti kommunikációs minták
-- [Azure OpenAI példa](../../../../examples/azure-openai-chat) - MI integráció
+- [Microservices példa](../../../../examples/microservices) - Szolgáltatás közötti kommunikációs minták
+- [Microsoft Foundry Models példa](../../../../examples/azure-openai-chat) - AI integráció
 
 ---
 
-## Összefoglalás
+## Összefoglaló
 
-**Amit megtanultál:**
-- ✅ Öt koordinációs minta (sorozatos, párhuzamos, hierarchikus, eseményvezérelt, konszenzus)
-- ✅ Többügynökös architektúra Azure-on (Service Bus, Cosmos DB, Container Apps)
-- ✅ Állapotkezelés elosztott ügynökök között
-- ✅ Időtúllépés-kezelés, újrapróbálkozások és circuit breakerek
-- ✅ Elosztott rendszerek monitorozása és hibakeresése
-- ✅ Költségoptimalizálási stratégiák
+**Megtanultad:**
+- ✅ Öt koordinációs mintát (szekvenciális, párhuzamos, hierarchikus, eseményvezérelt, konszenzus)
+- ✅ Többügynökös architektúrát Azure-on (Service Bus, Cosmos DB, Container Apps)
+- ✅ Állapotkezelést elosztott ügynökök között
+- ✅ Időtúllépés kezelést, újrapróbálkozásokat és áramkör törőket
+- ✅ Elosztott rendszerek monitorozását és hibakeresését
+- ✅ Költségoptimalizálási stratégiákat
 
 **Fő tanulságok:**
-1. **Válaszd ki a megfelelő mintát** - sorrendinek az rendezett munkafolyamatokhoz, párhuzamosnak a sebességhez, eseményvezéreltnek a rugalmassághoz
+1. **Válaszd ki a megfelelő mintát** - Szekvenciális az sorrendelt munkafolyamatokhoz, párhuzamos a sebességhez, eseményvezérelt a rugalmassághoz
 2. **Kezeld az állapotot gondosan** - Használj Cosmos DB-t vagy hasonlót a megosztott állapothoz
-3. **Kezeld a hibákat elegánsan** - Időtúllépések, újrapróbálkozások, circuit breakerek, dead-letter sorok
-4. **Figyelj mindent** - Az elosztott nyomkövetés alapvető a hibakereséshez
-5. **Optimalizáld a költségeket** - Skálázás nullára, szerver nélküli megoldások használata, cache alkalmazása
+3. **Kezeld a hibákat elegánsan** - Időtúllépések, újrapróbálkozások, áramkör törők, holt levél sorok
+4. **Figyelj mindent** - Az elosztott követés elengedhetetlen a hibakereséshez
+5. **Optimalizáld a költségeket** - Skálázz nullára, használj szerver nélküli megoldásokat, valósíts meg gyorsítótárazást
 
 **Következő lépések:**
 1. Fejezd be a gyakorlati feladatokat
-2. Építs egy többügynökös rendszert a saját esetedhez
-3. Tanulmányozd a [SKU kiválasztása](sku-selection.md)-t a teljesítmény és költség optimalizálásához
+2. Építs többügynökös rendszert a saját esetedhez
+3. Tanulmányozd a [SKU kiválasztást](sku-selection.md) a teljesítmény és költség optimalizálásához
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Felelősségkizárás:
-
-Ezt a dokumentumot a [Co-op Translator](https://github.com/Azure/co-op-translator) nevű mesterséges intelligencia alapú fordító szolgáltatással fordítottuk. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti, anyanyelvi dokumentum tekintendő hiteles forrásnak. Kritikus jelentőségű információk esetén javasolt hivatásos, emberi fordítást igénybe venni. Nem vállalunk felelősséget az ebből a fordításból eredő félreértésekért vagy téves értelmezésekért.
+**Nyilatkozat**:  
+Ez a dokumentum az AI fordító szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Kritikus információk esetén professzionális, emberi fordítást javaslunk. Nem vállalunk felelősséget az ezen fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

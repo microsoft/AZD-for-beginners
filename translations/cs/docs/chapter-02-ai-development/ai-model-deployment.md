@@ -1,26 +1,26 @@
-# Nasazení AI modelu s Azure Developer CLI
+# Nasazení AI modelů s Azure Developer CLI
 
-**Navigace kapitolou:**
+**Navigace kapitoly:**
 - **📚 Domů kurzu**: [AZD For Beginners](../../README.md)
-- **📖 Aktuální kapitola**: Kapitola 2 - Vývoj zaměřený na AI
+- **📖 Aktuální kapitola**: Kapitola 2 - Vývoj orientovaný na AI
 - **⬅️ Předchozí**: [Integrace Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Další**: [AI Workshop Lab](ai-workshop-lab.md)
+- **➡️ Další**: [Laboratoř AI Workshopu](ai-workshop-lab.md)
 - **🚀 Další kapitola**: [Kapitola 3: Konfigurace](../chapter-03-configuration/configuration.md)
 
-Tento průvodce poskytuje komplexní pokyny pro nasazení AI modelů pomocí šablon AZD, pokrývající vše od výběru modelu až po vzory nasazení do produkce.
+Tento průvodce poskytuje komplexní pokyny pro nasazení AI modelů pomocí šablon AZD, pokrývající vše od výběru modelu po vzory nasazení v produkci.
 
 ## Obsah
 
-- [Strategie výběru modelu](../../../../docs/chapter-02-ai-development)
-- [AZD konfigurace pro AI modely](../../../../docs/chapter-02-ai-development)
-- [Vzory nasazení](../../../../docs/chapter-02-ai-development)
-- [Správa modelů](../../../../docs/chapter-02-ai-development)
-- [Úvahy pro produkci](../../../../docs/chapter-02-ai-development)
-- [Monitorování a pozorovatelnost](../../../../docs/chapter-02-ai-development)
+- [Strategie výběru modelu](#strategie-výběru-modelu)
+- [Konfigurace AZD pro AI modely](#konfigurace-azd-pro-ai-modely)
+- [Vzory nasazení](#vzory-nasazení)
+- [Správa modelů](#správa-modelů)
+- [Úvahy pro produkci](#úvahy-pro-produkci)
+- [Monitorování a pozorovatelnost](#monitorování-a-pozorovatelnost)
 
 ## Strategie výběru modelu
 
-### Modely Azure OpenAI
+### Microsoft Foundry Modely Modely
 
 Vyberte správný model pro váš případ použití:
 
@@ -34,9 +34,9 @@ services:
       AZURE_OPENAI_MODELS: |
         [
           {
-            "name": "gpt-4o-mini",
+            "name": "gpt-4.1-mini",
             "version": "2024-07-18",
-            "deployment": "gpt-4o-mini",
+            "deployment": "gpt-4.1-mini",
             "capacity": 10,
             "format": "OpenAI"
           },
@@ -52,14 +52,14 @@ services:
 
 ### Plánování kapacity modelu
 
-| Model Type | Use Case | Recommended Capacity | Cost Considerations |
+| Typ modelu | Použití | Doporučená kapacita | Hlediska nákladů |
 |------------|----------|---------------------|-------------------|
-| GPT-4o-mini | Chat, Q&A | 10-50 TPM | Nákladově efektivní pro většinu pracovních zátěží |
-| GPT-4 | Complex reasoning | 20-100 TPM | Vyšší náklady, používejte pro prémiové funkce |
-| Text-embedding-ada-002 | Search, RAG | 30-120 TPM | Nezbytné pro sémantické vyhledávání |
-| Whisper | Speech-to-text | 10-50 TPM | Pracovní zátěže zpracování zvuku |
+| gpt-4.1-mini | Chat, otázky a odpovědi | 10-50 TPM | Nákladově efektivní pro většinu zátěží |
+| gpt-4.1 | Komplexní uvažování | 20-100 TPM | Vyšší náklady, používejte pro prémiové funkce |
+| Text-embedding-ada-002 | Vyhledávání, RAG | 30-120 TPM | Nezbytné pro sémantické vyhledávání |
+| Whisper | Přepis řeči na text | 10-50 TPM | Zpracování zvuku |
 
-## AZD konfigurace pro AI modely
+## Konfigurace AZD pro AI modely
 
 ### Konfigurace šablony Bicep
 
@@ -70,10 +70,10 @@ Vytvořte nasazení modelů pomocí šablon Bicep:
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
-    name: 'gpt-4o-mini'
+    name: 'gpt-4.1-mini'
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
     sku: {
@@ -124,13 +124,13 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Proměnné prostředí
 
-Konfigurujte prostředí vaší aplikace:
+Nakonfigurujte prostředí vaší aplikace:
 
 ```bash
-# konfigurace .env
+# Konfigurace .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
-AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
+AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
@@ -146,15 +146,15 @@ services:
     host: containerapp
     config:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
-      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
+      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
 Nejvhodnější pro:
 - Vývoj a testování
-- Aplikace pro jeden trh
-- Optimalizace nákladů
+- Aplikace pro jediný trh
+- Optimalizaci nákladů
 
-### Vzor 2: Nasazení v několika regionech
+### Vzor 2: Nasazení ve více regionech
 
 ```bicep
 // Multi-region deployment
@@ -170,11 +170,11 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 Nejvhodnější pro:
 - Globální aplikace
 - Požadavky na vysokou dostupnost
-- Rozložení zátěže
+- Distribuci zátěže
 
 ### Vzor 3: Hybridní nasazení
 
-Kombinujte Azure OpenAI s dalšími AI službami:
+Kombinujte Microsoft Foundry modely s dalšími AI službami:
 
 ```bicep
 // Hybrid AI services
@@ -207,13 +207,13 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Řízení verzí
 
-Sledujte verze modelů ve vaší konfiguraci AZD:
+Sledujte verze modelů ve vaší AZD konfiguraci:
 
 ```json
 {
   "models": {
     "chat": {
-      "name": "gpt-4o-mini",
+      "name": "gpt-4.1-mini",
       "version": "2024-07-18",
       "fallback": "gpt-35-turbo"
     },
@@ -227,7 +227,7 @@ Sledujte verze modelů ve vaší konfiguraci AZD:
 
 ### Aktualizace modelu
 
-Použijte AZD hooky pro aktualizace modelů:
+Použijte AZD hooks pro aktualizace modelu:
 
 ```bash
 #!/bin/bash
@@ -237,7 +237,7 @@ echo "Checking model availability..."
 az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
-  --query "[?name=='gpt-4o-mini']"
+  --query "[?name=='gpt-4.1-mini']"
 ```
 
 ### A/B testování
@@ -249,11 +249,11 @@ param enableABTesting bool = false
 
 resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'gpt-4o-mini-${enableABTesting ? 'v1' : 'prod'}'
+  name: 'gpt-4.1-mini-${enableABTesting ? 'v1' : 'prod'}'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -283,7 +283,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Příklad použití
+# Ukázka použití
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -333,7 +333,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Optimalizace nákladů
 
-Implementujte opatření pro kontrolu nákladů:
+Implementujte kontroly nákladů:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -367,7 +367,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Integrace s Application Insights
 
-Nakonfigurujte monitorování pro AI pracovní zátěže:
+Konfigurujte monitorování pro AI zátěže:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -408,7 +408,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 Sledujte metriky specifické pro AI:
 
 ```python
-# Vlastní telemetrie pro AI modely
+# Vlastní telemetrie pro modely umělé inteligence
 import logging
 from applicationinsights import TelemetryClient
 
@@ -473,30 +473,30 @@ async def check_ai_models():
 
 ## Další kroky
 
-1. **Přezkoumejte [Průvodce integrací Microsoft Foundry](microsoft-foundry-integration.md)** pro vzory integrace služeb
-2. **Dokončete [AI Workshop Lab](ai-workshop-lab.md)** pro praktické zkušenosti
-3. **Implementujte [Postupy produkčního nasazení AI](production-ai-practices.md)** pro podniková nasazení
-4. **Prozkoumejte [Průvodce řešením problémů s AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** pro běžné problémy
+1. **Projděte si [Průvodce integrací Microsoft Foundry](microsoft-foundry-integration.md)** pro vzory integrace služeb
+2. **Dokončete [Laboratoř AI Workshopu](ai-workshop-lab.md)** pro praktické zkušenosti
+3. **Implementujte [Produktivní postupy AI](production-ai-practices.md)** pro podniková nasazení
+4. **Prozkoumejte [Průvodce řešením problémů AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** pro běžné problémy
 
 ## Zdroje
 
-- [Dostupnost modelů Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Dostupnost modelů Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Dokumentace Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Škálování Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [Optimalizace nákladů na AI modely](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Optimalizace nákladů AI modelů](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Navigace kapitolou:**
+**Navigace kapitoly:**
 - **📚 Domů kurzu**: [AZD For Beginners](../../README.md)
-- **📖 Aktuální kapitola**: Kapitola 2 - Vývoj zaměřený na AI
+- **📖 Aktuální kapitola**: Kapitola 2 - Vývoj orientovaný na AI
 - **⬅️ Předchozí**: [Integrace Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Další**: [AI Workshop Lab](ai-workshop-lab.md)
+- **➡️ Další**: [Laboratoř AI Workshopu](ai-workshop-lab.md)
 - **🚀 Další kapitola**: [Kapitola 3: Konfigurace](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Prohlášení o vyloučení odpovědnosti**:
-Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho originálním jazyce by měl být považován za závazný zdroj. Pro zásadní informace doporučujeme využít profesionální lidský překlad. Nezodpovídáme za žádná nedorozumění nebo chybné výklady, které mohou vzniknout v důsledku použití tohoto překladu.
+**Disclaimer**:
+Tento dokument byl přeložen pomocí služby AI překladu [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho originálním jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za žádná nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

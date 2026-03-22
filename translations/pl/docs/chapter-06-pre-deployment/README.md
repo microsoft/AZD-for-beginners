@@ -1,21 +1,21 @@
-# Rozdział 6: Planowanie i weryfikacja przed wdrożeniem
+# Rozdział 6: Planowanie i Walidacja Przed Wdrożeniem
 
-**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 1 godzina | **⭐ Poziom**: Średniozaawansowany
+**📚 Kurs**: [AZD dla Początkujących](../../README.md) | **⏱️ Czas trwania**: 1 godzina | **⭐ Poziom**: Średniozaawansowany
 
 ---
 
 ## Przegląd
 
-Ten rozdział obejmuje niezbędne kroki planowania i weryfikacji przed wdrożeniem aplikacji. Naucz się unikać kosztownych błędów dzięki właściwemu planowaniu pojemności, wyborowi SKU oraz kontrolom wstępnym.
+Ten rozdział obejmuje kluczowe kroki planowania i walidacji przed wdrożeniem aplikacji. Naucz się unikać kosztownych błędów dzięki właściwemu planowaniu zasobów, wyborowi SKU oraz kontrolom przedwdrożeniowym.
 
-## Cele nauki
+## Cele Nauki
 
-Po ukończeniu tego rozdziału będziesz umiał:
-- Wykonywać kontrole wstępne przed wdrożeniem
-- Planować pojemność i szacować wymagania dotyczące zasobów
-- Wybierać odpowiednie SKU w celu optymalizacji kosztów
-- Konfigurować Application Insights do monitorowania
-- Rozumieć wzorce koordynacji zespołu
+Po ukończeniu tego rozdziału będziesz potrafił:
+- Przeprowadzać kontrole przedwdrożeniowe
+- Planować pojemność i szacować wymagania zasobów
+- Dobierać odpowiednie SKU dla optymalizacji kosztów
+- Konfigurować Application Insights do monitoringu
+- Rozumieć wzorce współpracy zespołowej
 
 ---
 
@@ -23,15 +23,15 @@ Po ukończeniu tego rozdziału będziesz umiał:
 
 | # | Lekcja | Opis | Czas |
 |---|--------|-------------|------|
-| 1 | [Kontrole wstępne](preflight-checks.md) | Weryfikacja konfiguracji przed wdrożeniem | 15 min |
-| 2 | [Planowanie pojemności](capacity-planning.md) | Szacowanie wymagań zasobowych | 20 min |
-| 3 | [Wybór SKU](sku-selection.md) | Wybór odpowiednich poziomów cenowych | 15 min |
-| 4 | [Application Insights](application-insights.md) | Konfiguracja monitorowania | 20 min |
-| 5 | [Wzorce koordynacji](coordination-patterns.md) | Procesy wdrożeniowe zespołu | 15 min |
+| 1 | [Kontrole przedwdrożeniowe](preflight-checks.md) | Walidacja konfiguracji przed wdrożeniem | 15 min |
+| 2 | [Planowanie pojemności](capacity-planning.md) | Szacowanie wymagań zasobów | 20 min |
+| 3 | [Wybór SKU](sku-selection.md) | Dobór odpowiednich poziomów cenowych | 15 min |
+| 4 | [Application Insights](application-insights.md) | Konfiguracja monitoringu | 20 min |
+| 5 | [Wzorce współpracy](coordination-patterns.md) | Procesy wdrożeniowe zespołu | 15 min |
 
 ---
 
-## 🚀 Szybki start
+## 🚀 Szybki Start
 
 ```bash
 # Sprawdź limity subskrypcji
@@ -40,7 +40,7 @@ az vm list-usage --location eastus --output table
 # Podgląd wdrożenia (żadne zasoby nie zostaną utworzone)
 azd provision --preview
 
-# Zwaliduj składnię Bicep
+# Sprawdź składnię Bicep
 az bicep build --file infra/main.bicep
 
 # Sprawdź konfigurację środowiska
@@ -49,32 +49,32 @@ azd env get-values
 
 ---
 
-## ☑️ Lista kontrolna przed wdrożeniem
+## ☑️ Lista Kontrolna Przed Wdrożeniem
 
 ### Przed `azd provision`
 
-- [ ] Limity zasobów (quota) zweryfikowane dla regionu
-- [ ] SKU wybrane odpowiednio
-- [ ] Szacunek kosztów zweryfikowany
-- [ ] Konwencja nazewnictwa spójna
-- [ ] Zabezpieczenia/RBAC skonfigurowane
+- [ ] Zweryfikowana kwota przydziału dla regionu
+- [ ] Odpowiednio dobrane SKU
+- [ ] Przejrzana wycena kosztów
+- [ ] Spójność konwencji nazewnictwa
+- [ ] Skonfigurowane zabezpieczenia/RBAC
 
 ### Przed `azd deploy`
 
-- [ ] Zmienne środowiskowe ustawione
-- [ ] Sekrety w Key Vault
-- [ ] Ciągi połączeń zweryfikowane
-- [ ] Kontrole stanu (health checks) skonfigurowane
+- [ ] Ustawione zmienne środowiskowe
+- [ ] Tajne dane w Key Vault
+- [ ] Zweryfikowane ciągi połączeń
+- [ ] Skonfigurowane kontrole zdrowia
 
 ---
 
-## 💰 Przewodnik wyboru SKU
+## 💰 Przewodnik po Wyborze SKU
 
-| Obciążenie | Środowisko deweloperskie | Produkcja |
+| Obciążenie | Środowisko developerskie | Produkcyjne |
 |----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
-| Azure OpenAI | Standard | Standard + PTU |
+| Microsoft Foundry Models | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
 
 ---
@@ -84,19 +84,19 @@ azd env get-values
 | Kierunek | Rozdział |
 |-----------|---------|
 | **Poprzedni** | [Rozdział 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Następny** | [Rozdział 7: Rozwiązywanie problemów](../chapter-07-troubleshooting/README.md) |
+| **Następny** | [Rozdział 7: Rozwiązywanie Problemów](../chapter-07-troubleshooting/README.md) |
 
 ---
 
-## 📖 Powiązane zasoby
+## 📖 Powiązane Materiały
 
-- [Przewodnik konfiguracji](../chapter-03-configuration/configuration.md)
-- [Przewodnik wdrożenia](../chapter-04-infrastructure/deployment-guide.md)
-- [Częste problemy](../chapter-07-troubleshooting/common-issues.md)
+- [Przewodnik Konfiguracji](../chapter-03-configuration/configuration.md)
+- [Przewodnik Wdrożeniowy](../chapter-04-infrastructure/deployment-guide.md)
+- [Typowe Problemy](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Zastrzeżenie:
-Niniejszy dokument został przetłumaczony przy użyciu usługi tłumaczeń opartych na sztucznej inteligencji Co-op Translator (https://github.com/Azure/co-op-translator). Chociaż dokładamy starań, aby tłumaczenie było jak najbardziej poprawne, prosimy pamiętać, że tłumaczenia automatyczne mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku źródłowym należy traktować jako dokument wiążący. W przypadku informacji krytycznych zaleca się skorzystanie z tłumaczenia wykonanego przez profesjonalnego tłumacza. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+**Zastrzeżenie**:
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dążymy do dokładności, prosimy mieć na uwadze, że tłumaczenia automatyczne mogą zawierać błędy lub niedokładności. Oryginalny dokument w języku źródłowym powinien być uznawany za autorytatywne źródło. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

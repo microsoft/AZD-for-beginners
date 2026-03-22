@@ -1,20 +1,20 @@
-# 2. Patvirtinti šabloną
+# 2. Validate a Template
 
 !!! tip "ŠIO MODULIO PABAIGOJE JŪS GALĖSITE"
 
     - [ ] Išanalizuoti AI sprendimo architektūrą
     - [ ] Suprasti AZD diegimo darbo eigą
-    - [ ] Naudoti GitHub Copilot pagalbai dėl AZD naudojimo
+    - [ ] Naudoti GitHub Copilot pagalbai dirbant su AZD
     - [ ] **Laboratorija 2:** Diegti ir patikrinti AI agentų šabloną
 
 ---
 
 
-## 1. Įvadas
+## 1. Introduction
 
 The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` is an open-source commandline tool that streamlines the developer workflow when building and deploying applications to Azure. 
 
-[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _infrastruktūra-kaip-kodas_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **and** deploy your application at one shot!
+[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _infrastructure-as-code_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **and** deploy your application at one shot!
 
 As a result, jumpstarting your application development process can be as simple as finding the right _AZD Starter template_ that comes closest to your application and infrastructure needs - then customizing the repository to suit your scenario requirements.
 
@@ -32,11 +32,11 @@ Before we begin, let's make sure you have the Azure Developer CLI installed.
       azd version 1.19.0 (commit b3d68cea969b2bfbaa7b7fa289424428edb93e97)
       ```
 
-**Dabar esate pasiruošę pasirinkti ir diegti šabloną su azd**
+**You are now ready to select and deploy a template with azd**
 
 ---
 
-## 2. Šablono pasirinkimas
+## 2. Template Selection
 
 The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
 
@@ -57,7 +57,7 @@ Visit the second link in a new browser tab (or click `Open in GitHub` for the re
 
 ---
 
-## 3. Šablono aktyvavimas
+## 3. Template Activation
 
 Let's try to deploy this template and make sure it is valid. We'll follow the guidelines in the [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) section.
 
@@ -83,17 +83,17 @@ Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
-1. Jūsų Azure portale dabar bus paruošta išteklų grupė su tuo aplinkos pavadinimu:
+1. Your Azure Portal will now have a provisioned resource group with that env name:
 
       ![Infrastruktūra](../../../../../translated_images/lt/02-provisioned-infra.46c706b14f56e0bf.webp)
 
-1. **Dabar esate pasiruošę patikrinti įdiegto infrastruktūrą ir programą**.
+1. **You are now ready to validate the deployed infrastructure and application**.
 
 ---
 
-## 4. Šablono patikra
+## 4. Template Validation
 
-1. Visit Azure Portal [Resursų grupės](https://portal.azure.com/#browse/resourcegroups) page - log in when prompted
+1. Visit Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) page - log in when prompted
 1. Click on RG for your environment name - you see the page above
 
       - click on the Azure Container Apps resource
@@ -101,20 +101,20 @@ Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
 1. You should see a hosted application front-end UI like this:
 
-   ![Programa](../../../../../translated_images/lt/03-test-application.471910da12c3038e.webp)
+   ![Programėlė](../../../../../translated_images/lt/03-test-application.471910da12c3038e.webp)
 
-1. Try asking a couple of [pavyzdinių klausimų](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
+1. Try asking a couple of [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
-      1. Ask: ```Kokia yra Prancūzijos sostinė?``` 
-      1. Ask: ```Kokia yra geriausia palapinė iki $200 dviem žmonėms ir kokias funkcijas ji turi?```
+      1. Ask: ```What is the capital of France?``` 
+      1. Ask: ```What's the best tent under $200 for two people, and what features does it include?```
 
 1. You should get answers similar to what is shown below. _But how does this work?_ 
 
-      ![Programa](../../../../../translated_images/lt/03-test-question.521c1e863cbaddb6.webp)
+      ![Programėlė](../../../../../translated_images/lt/03-test-question.521c1e863cbaddb6.webp)
 
 ---
 
-## 5.  Agento patikra
+## 5.  Agent Validation
 
 The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Microsoft Foundry project for this template. Let's take a look at what that means.
 
@@ -122,7 +122,7 @@ The Azure Container App deploys an endpoint that connects to the AI Agent provis
 
 1. Click on the `Microsoft Foundry` resource in that list
 
-1. You should see this. Click the `Eiti į Microsoft Foundry portalą` button. 
+1. You should see this. Click the `Go to Microsoft Foundry Portal` button. 
    ![Foundry](../../../../../translated_images/lt/04-view-foundry-project.fb94ca41803f28f3.webp)
 
 1. You should see the Foundry Project page for your AI application
@@ -137,13 +137,13 @@ The Azure Container App deploys an endpoint that connects to the AI Agent provis
       - The agent `Knowledge` indicates it has 32 files uploaded (for file search)
       ![Agentai](../../../../../translated_images/lt/07-view-agent-details.0e049f37f61eae62.webp)
 
-1. Look for the `Duomenys+indeksai` option in the left menu and click for details. 
+1. Look for the `Data+indexes` option in the left menu and click for details. 
 
       - You should see the 32 data files uploaded for knowledge.
       - These will correspond to the 12 customer files and 20 product files under `src/files` 
       ![Duomenys](../../../../../translated_images/lt/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
-**Jūs patvirtinote agento veikimą!** 
+**You validated Agent operation!** 
 
 1. The agent responses are grounded in the knowledge in those files. 
 1. You can now ask questions related to that data, and get grounded responses.
@@ -155,7 +155,7 @@ Revisit the browser tab with the Container App endpoint and ask: `What products 
 
 ---
 
-## 6. Agentų žaidimų aikštelė
+## 6. Agent Playground
 
 Let's build a bit more intuition for the capabilities of Microsoft Foundry, by taking the Agent for a spin in the Agents Playground. 
 
@@ -179,11 +179,11 @@ You also see a _stats_ row below the response.
 
 ---
 
-## 7. Integruota stebėsena
+## 7. Built-in Observability
 
 Observability is about instrumenting your application to generate data that can be used to understand, debug, and optimize, its operations. To get a sense for this:
 
-1. Click the `View Run Info` button - you should see this view. This is an example of [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) in action. _You can also get this view by clicking Gijų žurnalai in the top-level menu_.
+1. Click the `View Run Info` button - you should see this view. This is an example of [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) in action. _You can also get this view by clicking Thread Logs in the top-level menu_.
 
    - Get a sense for the run steps and tools engaged by the agent
    - Understand total Token count (vs. output tokens usage) for response
@@ -191,18 +191,18 @@ Observability is about instrumenting your application to generate data that can 
 
       ![Agentas](../../../../../translated_images/lt/10-view-run-info.b20ebd75fef6a1cc.webp)
 
-1. Click the `Metaduomenys` tab to see additional attributes for the run, that may provide useful context for debugging issues later.   
+1. Click the `Metadata` tab to see additional attributes for the run, that may provide useful context for debugging issues later.   
 
       ![Agentas](../../../../../translated_images/lt/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 
-1. Click the `Įvertinimai` tab to see auto-assessments made on the agent response. These include safety evaluations (e.g., Self-harm) and agent-specifc evaluations (e.g., Intent resolution, Task adherence).
+1. Click the `Evaluations` tab to see auto-assessments made on the agent response. These include safety evaluations (e.g., Self-harm) and agent-specifc evaluations (e.g., Intent resolution, Task adherence).
 
       ![Agentas](../../../../../translated_images/lt/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
-1. Last but not least, click the `Stebėsena` tab in the sidebar menu.
+1. Last but not least, click the `Monitoring` tab in the sidebar menu.
 
-      - Select `Išteklių naudojimas` tab in the displayed page - and view the metrics.
+      - Select `Resource usage` tab in the displayed page - and view the metrics.
       - Track application usage in terms of costs (tokens) and load (requests).
       - Track applicaton latency to first byte (input processing) and last byte (output).
 
@@ -210,7 +210,7 @@ Observability is about instrumenting your application to generate data that can 
 
 ---
 
-## 8. Aplinkos kintamieji
+## 8. Environment Variables
 
 So far, we've walked through the deployment in the browser - and validated that our infrastructure is provisioned and the application is operational. But to work with the application _code-first_, we need to configure our local development environment with the relevant variables required to work with these resources. Using `azd` makes it easy.
 
@@ -232,7 +232,7 @@ Let's try out a few commands:
       You see something like:
 
       ```bash title="" linenums="0"
-      AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4o-mini"
+      AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
       AZURE_AI_AGENT_NAME="agent-template-assistant"
       AZURE_AI_EMBED_DEPLOYMENT_NAME="text-embedding-3-small"
       AZURE_AI_EMBED_DIMENSIONS=100
@@ -273,21 +273,21 @@ Let's try out a few commands:
       azd env refresh
       ```
 
-      Tai galingas būdas _sinchronizuoti_ aplinkos kintamuosius tarp dviejų ar daugiau vietinių kūrimo aplinkų (pvz., komanda su keliais kūrėjais) - leidžiantis įdiegtai infrastruktūrai tarnauti kaip patikimam aplinkos kintamųjų būsenos šaltiniui. Komandos nariai tiesiog _atnaujina_ kintamuosius, kad vėl būtų sinchronizuoti.
+      Tai galingas būdas _sinchronizuoti_ aplinkos kintamuosius tarp dviejų ar daugiau vietinių kūrimo aplinkų (pvz., komandos su keliais kūrėjais) - leidžiantis diegiamai infrastruktūrai tarnauti kaip tikroji tiesa apie aplinkos kintamųjų būseną. Komandos nariai tiesiog _atnaujina_ kintamuosius, kad vėl būtų sinchronizuoti.
 
 ---
 
 ## 9. Sveikiname 🏆
 
-Ką tik užbaigėte visą darbo eigą, kurioje:
+Jūs ką tik užbaigėte visą darbo eigą, kurioje:
 
-- [X] Pasirinkote AZD šabloną, kurį norite naudoti
-- [X] Paleidote šabloną su GitHub Codespaces 
-- [X] Įdiegėte šabloną ir patvirtinote, kad jis veikia
+- [X] Pasirinkote AZD Template, kurį norite naudoti
+- [X] Paleidote Template naudodami GitHub Codespaces 
+- [X] Išdiegėte Template ir patvirtinote, kad jis veikia
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Atsakomybės apribojimas**:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų arba netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Esant kritinei informacijai, rekomenduojama pasitelkti profesionalų žmogaus vertimą. Mes neatsakome už bet kokius nesusipratimus ar neteisingus aiškinimus, kilusius dėl šio vertimo naudojimo.
+**Disclaimer**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, atkreipkite dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Jei informacija yra kritiškai svarbi, rekomenduojamas profesionalus žmogaus vertimas. Mes neatsakome už jokius nesusipratimus ar neteisingas interpretacijas, kylančias dėl šio vertimo naudojimo.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,38 +1,38 @@
-# Chương 8: Mẫu Triển khai Sản xuất & Doanh nghiệp
+# Chương 8: Sản xuất & Mô hình Doanh nghiệp
 
-**📚 Khóa học**: [AZD Cho Người Mới](../../README.md) | **⏱️ Thời lượng**: 2-3 hours | **⭐ Độ phức tạp**: Nâng cao
+**📚 Khóa học**: [AZD cho Người mới bắt đầu](../../README.md) | **⏱️ Thời lượng**: 2-3 giờ | **⭐ Độ phức tạp**: Nâng cao
 
 ---
 
 ## Tổng quan
 
-Chương này bao gồm các mẫu triển khai sẵn sàng cho doanh nghiệp, gia cố bảo mật, giám sát và tối ưu hóa chi phí cho các khối lượng công việc AI trong môi trường sản xuất.
+Chương này trình bày các mẫu triển khai sẵn sàng cho doanh nghiệp, tăng cường bảo mật, giám sát và tối ưu chi phí cho khối lượng công việc AI trong môi trường sản xuất.
 
 ## Mục tiêu học tập
 
-Khi hoàn thành chương này, bạn sẽ:
-- Triển khai ứng dụng chịu lỗi đa vùng
-- Thực hiện các mẫu bảo mật cho doanh nghiệp
+Sau khi hoàn thành chương này, bạn sẽ:
+- Triển khai ứng dụng đa vùng có khả năng phục hồi
+- Áp dụng các mô hình bảo mật cho doanh nghiệp
 - Cấu hình giám sát toàn diện
-- Tối ưu hóa chi phí ở quy mô lớn
-- Thiết lập CI/CD pipeline với AZD
+- Tối ưu chi phí ở quy mô lớn
+- Thiết lập pipeline CI/CD với AZD
 
 ---
 
 ## 📚 Bài học
 
-| # | Bài | Mô tả | Thời gian |
+| # | Bài học | Mô tả | Thời gian |
 |---|--------|-------------|------|
-| 1 | [Thực hành AI cho Sản xuất](production-ai-practices.md) | Mẫu triển khai cho doanh nghiệp | 90 phút |
+| 1 | [Thực hành AI trong Sản xuất](production-ai-practices.md) | Mẫu triển khai cho doanh nghiệp | 90 phút |
 
 ---
 
-## 🚀 Danh sách kiểm tra sản xuất
+## 🚀 Danh sách kiểm tra Sản xuất
 
-- [ ] Triển khai đa vùng để đảm bảo khả năng chịu lỗi
-- [ ] Sử dụng managed identity cho xác thực (không dùng khóa)
+- [ ] Triển khai đa vùng để đảm bảo khả năng phục hồi
+- [ ] Sử dụng managed identity để xác thực (không dùng khóa)
 - [ ] Application Insights để giám sát
-- [ ] Cấu hình ngân sách chi phí và cảnh báo
+- [ ] Đặt hạn mức chi phí và cấu hình cảnh báo
 - [ ] Bật quét bảo mật
 - [ ] Tích hợp pipeline CI/CD
 - [ ] Kế hoạch khôi phục thảm họa
@@ -43,28 +43,21 @@ Khi hoàn thành chương này, bạn sẽ:
 
 ### Mẫu 1: Microservices cho AI
 
+```mermaid
+graph LR
+    Gateway[Cổng API] --> AI[Dịch vụ AI] --> Models[Mô hình Microsoft Foundry]
+    Gateway --> Auth[Dịch vụ xác thực]
+    AI --> Data[Kho dữ liệu]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
-
 ### Mẫu 2: AI theo sự kiện
 
+```mermaid
+graph LR
+    EventGrid[Lưới Sự kiện] --> Functions[Hàm] --> Pipeline[Đường ống AI]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
-## 🔐 Thực hành bảo mật tốt nhất
+## 🔐 Các thực hành tốt nhất về Bảo mật
 
 ```bicep
 // Use managed identity
@@ -87,9 +80,9 @@ properties: {
 
 | Chiến lược | Tiết kiệm |
 |----------|---------|
-| Thu nhỏ xuống 0 (Container Apps) | 60-80% |
-| Sử dụng tầng tiêu thụ cho môi dev | 50-70% |
-| Tăng/giảm quy mô theo lịch | 30-50% |
+| Thu nhỏ về 0 (Container Apps) | 60-80% |
+| Sử dụng mức tiêu thụ cho môi trường dev | 50-70% |
+| Tự động mở rộng theo lịch | 30-50% |
 | Dung lượng đặt trước | 20-40% |
 
 ```bash
@@ -103,10 +96,10 @@ az consumption budget create \
 
 ---
 
-## 📊 Cài đặt giám sát
+## 📊 Thiết lập giám sát
 
 ```bash
-# Phát trực tiếp nhật ký
+# Xem nhật ký theo thời gian thực
 azd monitor --logs
 
 # Kiểm tra Application Insights
@@ -123,7 +116,7 @@ az monitor metrics list --resource <resource-id>
 | Hướng | Chương |
 |-----------|---------|
 | **Trước** | [Chương 7: Khắc phục sự cố](../chapter-07-troubleshooting/README.md) |
-| **Hoàn thành Khóa học** | [Trang chủ Khóa học](../../README.md) |
+| **Hoàn thành Khóa học** | [Trang chính Khóa học](../../README.md) |
 
 ---
 
@@ -138,5 +131,5 @@ az monitor metrics list --resource <resource-id>
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Miễn trừ trách nhiệm**:
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn chính thức. Đối với những thông tin quan trọng, nên sử dụng bản dịch do người dịch/chuyên gia dịch thuật thực hiện. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực đảm bảo độ chính xác, xin lưu ý rằng bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ nguyên bản nên được coi là nguồn có thẩm quyền. Đối với các thông tin quan trọng, nên sử dụng bản dịch do người dịch chuyên nghiệp thực hiện. Chúng tôi không chịu trách nhiệm cho bất kỳ hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

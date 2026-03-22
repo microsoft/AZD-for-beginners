@@ -1,17 +1,17 @@
 # 4. Configureer een sjabloon
 
-!!! tip "AAN HET EINDE VAN DEZE MODULE ZUL JE IN STAAT ZIJN"
+!!! tip "AAN HET EINDE VAN DEZE MODULE KUNT U"
 
-    - [ ] Begrijpen wat het doel van `azure.yaml` is
-    - [ ] De structuur van `azure.yaml` begrijpen
-    - [ ] De waarde van azd lifecycle `hooks` begrijpen
-    - [ ] **Lab 4:** Omgevingsvariabelen verkennen en wijzigen
+    - [ ] Begrijpen van het doel van `azure.yaml`
+    - [ ] Begrijpen van de structuur van `azure.yaml`
+    - [ ] De waarde van azd-levenscyclus `hooks` begrijpen
+    - [ ] **Lab 4:** Verken en wijzig omgevingsvariabelen
 
 ---
 
-!!! prompt "Wat doet het bestand `azure.yaml`? Gebruik een codeblok en leg het regel voor regel uit"
+!!! prompt "Wat doet het `azure.yaml`-bestand? Gebruik een codeblok en leg het regel voor regel uit"
 
-      Het `azure.yaml`-bestand is het **configuratiebestand voor Azure Developer CLI (azd)**. Het bepaalt hoe je applicatie naar Azure moet worden uitgerold, inclusief infrastructuur, services, deployment hooks en omgevingsvariabelen.
+      Het `azure.yaml`-bestand is het **configuratiebestand voor Azure Developer CLI (azd)**. Het bepaalt hoe je applicatie naar Azure wordt uitgerold, inclusief infrastructuur, services, deployment hooks en omgevingsvariabelen.
 
 ---
 
@@ -19,18 +19,18 @@
 
 Dit `azure.yaml`-bestand dient als de **implementatieblauwdruk** voor een AI-agentapplicatie die:
 
-1. **De omgeving valideert** vóór uitrol
-2. **Azure AI-services voorziet** (AI Hub, AI Project, Search, enz.)
-3. **Een Python-applicatie uitrolt** naar Azure Container Apps
-4. **AI-modellen configureert** voor zowel chat- als embeddingfunctionaliteit
-5. **Monitoring en tracing instelt** voor de AI-toepassing
-6. **Zowel nieuwe als bestaande** Azure AI-projectscenario's ondersteunt
+1. **Valideert de omgeving** vóór implementatie
+2. **Voorziet in Azure AI-services** (AI Hub, AI Project, Search, enz.)
+3. **Rolt een Python-applicatie uit** naar Azure Container Apps
+4. **Configureert AI-modellen** voor zowel chat- als embedding-functionaliteit
+5. **Zet monitoring en tracing op** voor de AI-applicatie
+6. **Ondersteunt zowel nieuwe als bestaande** Azure AI-projectscenario's
 
-Het bestand maakt **implementatie met één opdracht** (`azd up`) mogelijk van een complete AI-agentoplossing met juiste validatie, provisioning en post-implementatieconfiguratie.
+Het bestand maakt implementatie met één commando (`azd up`) mogelijk van een complete AI-agentoplossing met de juiste validatie, provisioning en post-deployconfiguratie.
 
 ??? info "Uitklappen om te bekijken: `azure.yaml`"
 
-      Het `azure.yaml`-bestand definieert hoe Azure Developer CLI deze AI-agenttoepassing in Azure moet implementeren en beheren. Laten we het regel voor regel ontleden.
+      Het `azure.yaml`-bestand definieert hoe Azure Developer CLI deze AI-agentapplicatie in Azure moet implementeren en beheren. Laten we het regel voor regel ontleden.
 
       ```yaml title="" linenums="0"
 
@@ -128,15 +128,15 @@ Het bestand maakt **implementatie met één opdracht** (`azd up`) mogelijk van e
 
 ## 2. Het bestand ontleden
 
-Laten we het bestand sectie voor sectie doornemen om te begrijpen wat het doet - en waarom.
+Laten we het bestand sectie voor sectie doornemen, om te begrijpen wat het doet - en waarom.
 
-### 2.1 **Header en schema (1-3)**
+### 2.1 **Kop en schema (1-3)**
 
 ```yaml title="" linenums="0"
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Regel 1**: Biedt schema-validatie voor de YAML language server ter ondersteuning van IDE's en IntelliSense
+- **Regel 1**: Biedt schema-validatie voor de YAML-taalserver voor IDE-ondersteuning en IntelliSense
 
 ### 2.2 Projectmetadata (5-10)
 
@@ -149,7 +149,7 @@ requiredVersions:
 ```
 
 - **Regel 5**: Definieert de projectnaam die door Azure Developer CLI wordt gebruikt
-- **Regels 6-7**: Geeft aan dat dit is gebaseerd op een sjabloonversie 1.0.2
+- **Regels 6-7**: Geeft aan dat dit gebaseerd is op een sjabloonversie 1.0.2
 - **Regels 8-9**: Vereist Azure Developer CLI versie 1.14.0 of hoger
 
 ### 2.3 Deploy-hooks (11-40)
@@ -169,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **Regels 11-20**: **Pre-deployment hook** - wordt uitgevoerd vóór `azd up`
+- **Regels 11-20**: **Pre-deploy-hook** - wordt uitgevoerd vóór `azd up`
 
       - Op Unix/Linux: Maakt het validatiescript uitvoerbaar en voert het uit
       - Op Windows: Voert het PowerShell-validatiescript uit
-      - Beide zijn interactief en stoppen de uitrol als ze mislukken
+      - Beide zijn interactief en stoppen de implementatie als ze falen
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -188,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Regels 21-30**: **Post-provision hook** - wordt uitgevoerd nadat Azure-resources zijn gemaakt
+- **Regels 21-30**: **Post-provision-hook** - wordt uitgevoerd nadat Azure-resources zijn gemaakt
 
   - Voert scripts uit die omgevingsvariabelen wegschrijven
-  - Zet de uitrol voort, zelfs als deze scripts falen (`continueOnError: true`)
+  - Gaat door met de implementatie, zelfs als deze scripts falen (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -206,10 +206,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Regels 31-40**: **Post-deploy hook** - wordt uitgevoerd na de uitrol van de applicatie
+- **Regels 31-40**: **Post-deploy-hook** - wordt uitgevoerd na de applicatie-implementatie
 
-  - Voert de laatste setup-scripts uit
-  - Gaat door, zelfs als scripts falen
+  - Voert de laatste installatiescripts uit
+  - Gaat door, zelfs als de scripts falen
 
 ### 2.4 Serviceconfiguratie (41-48)
 
@@ -227,17 +227,17 @@ services:
 ```
 
 - **Regel 42**: Definieert een service met de naam "api_and_frontend"
-- **Regel 43**: Verwijst naar de `./src`-map voor broncode
-- **Regel 44**: Geeft Python op als programmeertaal
+- **Regel 43**: Verwijst naar de `./src`-map voor de broncode
+- **Regel 44**: Geeft Python op als de programmeertaal
 - **Regel 45**: Gebruikt Azure Container Apps als hostingplatform
 - **Regels 46-48**: Docker-configuratie
 
-      - Gebruikt "api_and_frontend" als de imagenaam
+      - Gebruikt "api_and_frontend" als afbeeldingsnaam
       - Bouwt de Docker-image op afstand in Azure (niet lokaal)
 
-### 2.5 Pipeline-variabelen (49-76)
+### 2.5 Pipelinevariabelen (49-76)
 
-Dit zijn variabelen die je helpen `azd` in CI/CD-pijplijnen voor automatisering uit te voeren
+Dit zijn variabelen om je te helpen `azd` uit te voeren in CI/CD-pijplijnen voor automatisering
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -280,48 +280,48 @@ pipeline:
 
 Deze sectie definieert omgevingsvariabelen die **tijdens implementatie** worden gebruikt, georganiseerd per categorie:
 
-- **Azure Resource Names (Regels 51-60)**:
-      - Kern-Azure-service-resourcenaam zoals Resource Group, AI Hub, AI Project, enz.
-- **Feature Flags (Regels 61-63)**:
+- **Azure-resourcenamen (Regels 51-60)**:
+      - Kernnamen van Azure-services, bijv. Resource Group, AI Hub, AI Project, enz.
+- **Featurevlaggen (Regels 61-63)**:
       - Booleaanse variabelen om specifieke Azure-services in of uit te schakelen
 - **AI-agentconfiguratie (Regels 64-71)**:
       - Configuratie voor de hoofd-AI-agent inclusief naam, ID, implementatie-instellingen, modelgegevens
 - **AI-embeddingconfiguratie (Regels 72-79)**:
       - Configuratie voor het embedding-model dat wordt gebruikt voor vectorzoekopdrachten
-- **Zoeken en monitoring (Regels 80-84)**:
-      - Zoekindexnaam, bestaande resource-IDs en monitoring/tracing-instellingen
+- **Zoeken en bewaking (Regels 80-84)**:
+      - Zoekindexnaam, bestaande resource-IDs, en instellingen voor monitoring/tracing
 
 ---
 
 ## 3. Ken de omgevingsvariabelen
-De volgende omgevingsvariabelen bepalen de configuratie en het gedrag van je implementatie, georganiseerd op hoofddoel. De meeste variabelen hebben redelijke standaardwaarden, maar je kunt ze aanpassen om aan je specifieke vereisten of bestaande Azure-resources te voldoen.
+De volgende omgevingsvariabelen bepalen de configuratie en het gedrag van je implementatie, georganiseerd naar hun belangrijkste doel. De meeste variabelen hebben redelijke standaardwaarden, maar je kunt ze aanpassen om aan je specifieke vereisten of bestaande Azure-resources te voldoen.
 
 ### 3.1 Vereiste variabelen 
 
 ```bash title="" linenums="0"
-# Kernconfiguratie voor Azure
-AZURE_ENV_NAME                    # Omgevingsnaam (gebruikt bij het benoemen van resources)
+# Kern Azure-configuratie
+AZURE_ENV_NAME                    # Omgevingsnaam (gebruikt bij resourcebenaming)
 AZURE_LOCATION                    # Implementatieregio
 AZURE_SUBSCRIPTION_ID             # Doelabonnement
 AZURE_RESOURCE_GROUP              # Naam van de resourcegroep
-AZURE_PRINCIPAL_ID                # Gebruikersprincipal voor RBAC
+AZURE_PRINCIPAL_ID                # Gebruikersprincipal voor rolgebaseerde toegangscontrole (RBAC)
 
 # Resourcenamen (automatisch gegenereerd als niet opgegeven)
 AZURE_AIHUB_NAME                  # Naam van de Microsoft Foundry-hub
 AZURE_AIPROJECT_NAME              # AI-projectnaam
-AZURE_AISERVICES_NAME             # Accountnaam voor AI-diensten
-AZURE_STORAGE_ACCOUNT_NAME        # Naam van het opslagaccount
-AZURE_CONTAINER_REGISTRY_NAME     # Naam van het containerregister
-AZURE_KEYVAULT_NAME               # Naam van Key Vault (indien gebruikt)
+AZURE_AISERVICES_NAME             # Naam van het AI-servicesaccount
+AZURE_STORAGE_ACCOUNT_NAME        # Opslagaccountnaam
+AZURE_CONTAINER_REGISTRY_NAME     # Naam van de containerregistry
+AZURE_KEYVAULT_NAME               # Naam van de Key Vault (indien gebruikt)
 ```
 
 ### 3.2 Modelconfiguratie 
 ```bash title="" linenums="0"
 # Chatmodelconfiguratie
-AZURE_AI_AGENT_MODEL_NAME         # Standaard: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_NAME         # Standaard: gpt-4.1-mini
 AZURE_AI_AGENT_MODEL_FORMAT       # Standaard: OpenAI (of Microsoft)
 AZURE_AI_AGENT_MODEL_VERSION      # Standaard: meest recent beschikbaar
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Implementatienaam voor het chatmodel
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # Naam van de implementatie voor het chatmodel
 AZURE_AI_AGENT_DEPLOYMENT_SKU     # Standaard: Standaard
 AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Standaard: 80 (duizenden TPM)
 
@@ -329,36 +329,36 @@ AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Standaard: 80 (duizenden TPM)
 AZURE_AI_EMBED_MODEL_NAME         # Standaard: text-embedding-3-small
 AZURE_AI_EMBED_MODEL_FORMAT       # Standaard: OpenAI
 AZURE_AI_EMBED_MODEL_VERSION      # Standaard: meest recent beschikbaar
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Implementatienaam voor embeddings
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # Naam van de implementatie voor embeddings
 AZURE_AI_EMBED_DEPLOYMENT_SKU     # Standaard: Standaard
 AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Standaard: 50 (duizenden TPM)
 
 # Agentconfiguratie
 AZURE_AI_AGENT_NAME               # Weergavenaam van de agent
-AZURE_EXISTING_AGENT_ID           # Gebruik bestaande agent (optioneel)
+AZURE_EXISTING_AGENT_ID           # Bestaande agent gebruiken (optioneel)
 ```
 
 ### 3.3 Feature-toggle
 ```bash title="" linenums="0"
-# Optionele diensten
-USE_APPLICATION_INSIGHTS         # Standaard: true
-USE_AZURE_AI_SEARCH_SERVICE      # Standaard: false
-USE_CONTAINER_REGISTRY           # Standaard: true
+# Optionele services
+USE_APPLICATION_INSIGHTS         # Standaard: waar
+USE_AZURE_AI_SEARCH_SERVICE      # Standaard: onwaar
+USE_CONTAINER_REGISTRY           # Standaard: waar
 
-# Monitoring en tracing
-ENABLE_AZURE_MONITOR_TRACING     # Standaard: false
-AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Standaard: false
+# Monitoring en tracering
+ENABLE_AZURE_MONITOR_TRACING     # Standaard: onwaar
+AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Standaard: onwaar
 
 # Zoekconfiguratie
-AZURE_AI_SEARCH_INDEX_NAME       # Zoekindexnaam
+AZURE_AI_SEARCH_INDEX_NAME       # Naam van de zoekindex
 AZURE_SEARCH_SERVICE_NAME        # Naam van de zoekservice
 ```
 
 ### 3.4 AI-projectconfiguratie 
 ```bash title="" linenums="0"
 # Bestaande bronnen gebruiken
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Volledige resource-ID van een bestaand AI-project
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint-URL van een bestaand project
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # Volledige resource-ID van bestaand AI-project
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # Endpoint-URL van bestaand project
 ```
 
 ### 3.5 Controleer je variabelen
@@ -382,6 +382,6 @@ azd env set --from-file .env
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vrijwaring:
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de originele taal dient als gezaghebbende bron te worden beschouwd. Voor kritieke informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+**Disclaimer**:
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, wees u ervan bewust dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de originele taal moet als de gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor enige misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

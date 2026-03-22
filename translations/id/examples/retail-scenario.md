@@ -1,16 +1,16 @@
 # Solusi Dukungan Pelanggan Multi-Agen - Skenario Peritel
 
 **Bab 5: Solusi AI Multi-Agen**
-- **📚 Beranda Kursus**: [AZD For Beginners](../README.md)
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../README.md)
 - **📖 Bab Saat Ini**: [Bab 5: Solusi AI Multi-Agen](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **⬅️ Prasyarat**: [Bab 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **➡️ Bab Berikutnya**: [Bab 6: Pre-Deployment Validation](../docs/pre-deployment/capacity-planning.md)
-- **🚀 Template ARM**: [Deployment Package](retail-multiagent-arm-template/README.md)
+- **⬅️ Prasyarat**: [Bab 2: Pengembangan AI-First](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **➡️ Bab Berikutnya**: [Bab 6: Validasi Pra-Penyebaran](../docs/pre-deployment/capacity-planning.md)
+- **🚀 Template ARM**: [Paket Penyebaran](retail-multiagent-arm-template/README.md)
 
-> **⚠️ PANDUAN ARSITEKTUR - BUKAN IMPLEMENTASI YANG BERJALAN**  
-> Dokumen ini menyediakan sebuah **cetakan arsitektur komprehensif** untuk membangun sistem multi-agen.  
-> **Apa yang ada:** ARM template untuk penyebaran infrastruktur (Azure OpenAI, AI Search, Container Apps, dll.)  
-> **Apa yang harus Anda bangun:** Kode agen, logika routing, UI frontend, pipeline data (perkiraan 80-120 jam)  
+> **⚠️ PEDOMAN ARSITEKTUR - BUKAN IMPLEMENTASI YANG BERFUNGSI**  
+> Dokumen ini menyediakan sebuah **cetak biru arsitektur komprehensif** untuk membangun sistem multi-agen.  
+> **Apa yang ada:** template ARM untuk penyebaran infrastruktur (Microsoft Foundry Models, AI Search, Container Apps, dll.)  
+> **Apa yang harus Anda bangun:** kode agen, logika routing, UI frontend, jalur data (perkiraan 80-120 jam)  
 >  
 > **Gunakan ini sebagai:**
 > - ✅ Referensi arsitektur untuk proyek multi-agen Anda
@@ -20,76 +20,76 @@
 
 ## Ikhtisar
 
-**Tujuan Pembelajaran:** Memahami arsitektur, keputusan desain, dan pendekatan implementasi untuk membangun chatbot dukungan pelanggan multi-agen siap-produksi untuk peritel dengan kemampuan AI canggih termasuk manajemen inventaris, pemrosesan dokumen, dan interaksi pelanggan yang cerdas.
+**Tujuan Pembelajaran:** Memahami arsitektur, keputusan desain, dan pendekatan implementasi untuk membangun chatbot dukungan pelanggan multi-agen siap produksi untuk peritel dengan kemampuan AI canggih termasuk manajemen inventaris, pemrosesan dokumen, dan interaksi pelanggan yang cerdas.
 
-**Perkiraan Waktu:** Membaca + Memahami (2-3 jam) | Membangun Implementasi Lengkap (80-120 jam)
+**Waktu Penyelesaian:** Membaca + Memahami (2-3 jam) | Membangun Implementasi Lengkap (80-120 jam)
 
 **Yang Akan Anda Pelajari:**
 - Pola arsitektur multi-agen dan prinsip desain
-- Strategi penyebaran Azure OpenAI multi-wilayah
+- Strategi penyebaran Microsoft Foundry Models multi-wilayah
 - Integrasi AI Search dengan RAG (Retrieval-Augmented Generation)
-- Kerangka kerja evaluasi agen dan pengujian keamanan
+- Kerangka evaluasi agen dan pengujian keamanan
 - Pertimbangan penyebaran produksi dan optimasi biaya
 
 ## Tujuan Arsitektur
 
-**Fokus Edukasi:** Arsitektur ini menunjukkan pola perusahaan untuk sistem multi-agen.
+**Fokus Pendidikan:** Arsitektur ini menunjukkan pola perusahaan untuk sistem multi-agen.
 
 ### Persyaratan Sistem (Untuk Implementasi Anda)
 
-Sebuah solusi dukungan pelanggan produksi memerlukan:
+Solusi dukungan pelanggan produksi memerlukan:
 - **Beberapa agen khusus** untuk kebutuhan pelanggan yang berbeda (Layanan Pelanggan + Manajemen Inventaris)
-- **Penyebaran multi-model** dengan perencanaan kapasitas yang tepat (GPT-4o, GPT-4o-mini, embeddings di berbagai wilayah)
-- **Integrasi data dinamis** dengan AI Search dan unggahan berkas (pencarian vektor + pemrosesan dokumen)
+- **Penyebaran multi-model** dengan perencanaan kapasitas yang tepat (gpt-4.1, gpt-4.1-mini, embedding di berbagai wilayah)
+- **Integrasi data dinamis** dengan AI Search dan unggahan file (pencarian vektor + pemrosesan dokumen)
 - **Pemantauan komprehensif** dan kemampuan evaluasi (Application Insights + metrik kustom)
 - **Keamanan tingkat produksi** dengan validasi red teaming (pemindaian kerentanan + evaluasi agen)
 
 ### Apa yang Disediakan Panduan Ini
 
 ✅ **Pola Arsitektur** - Desain terbukti untuk sistem multi-agen yang dapat diskalakan  
-✅ **Template Infrastruktur** - ARM templates yang menyebarkan semua layanan Azure  
+✅ **Template Infrastruktur** - Template ARM yang menyebarkan semua layanan Azure  
 ✅ **Contoh Kode** - Implementasi referensi untuk komponen kunci  
-✅ **Panduan Konfigurasi** - Instruksi setup langkah-demi-langkah  
+✅ **Panduan Konfigurasi** - Instruksi pengaturan langkah-demi-langkah  
 ✅ **Praktik Terbaik** - Strategi keamanan, pemantauan, optimasi biaya  
 
-❌ **Tidak Termasuk** - Aplikasi lengkap yang bekerja (memerlukan upaya pengembangan)
+❌ **Tidak Termasuk** - Aplikasi kerja lengkap (memerlukan upaya pengembangan)
 
-## 🗺️ Roadmap Implementasi
+## 🗺️ Peta Jalan Implementasi
 
 ### Fase 1: Pelajari Arsitektur (2-3 jam) - MULAI DI SINI
 
 **Tujuan:** Memahami desain sistem dan interaksi komponen
 
-- [ ] Baca dokumen ini secara lengkap
+- [ ] Baca dokumen lengkap ini
 - [ ] Tinjau diagram arsitektur dan hubungan komponen
 - [ ] Pahami pola multi-agen dan keputusan desain
 - [ ] Pelajari contoh kode untuk alat agen dan routing
 - [ ] Tinjau estimasi biaya dan panduan perencanaan kapasitas
 
-**Hasil:** Pemahaman yang jelas tentang apa yang harus Anda bangun
+**Hasil:** Pemahaman yang jelas tentang apa yang perlu Anda bangun
 
 ### Fase 2: Sebarkan Infrastruktur (30-45 menit)
 
-**Tujuan:** Menyediakan sumber daya Azure menggunakan ARM template
+**Tujuan:** Menyediakan sumber daya Azure menggunakan template ARM
 
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup -m standard
 ```
 
-**Apa yang Disebarkan:**
-- ✅ Azure OpenAI (3 region: GPT-4o, GPT-4o-mini, embeddings)
-- ✅ Layanan AI Search (kosong, memerlukan konfigurasi indeks)
-- ✅ Lingkungan Container Apps (image placeholder)
+**Yang Disebarkan:**
+- ✅ Microsoft Foundry Models (3 wilayah: gpt-4.1, gpt-4.1-mini, embeddings)
+- ✅ AI Search service (kosong, perlu konfigurasi indeks)
+- ✅ Container Apps environment (placeholder images)
 - ✅ Storage accounts, Cosmos DB, Key Vault
-- ✅ Pemantauan Application Insights
+- ✅ Application Insights monitoring
 
 **Yang Hilang:**
-- ❌ Kode implementasi agen
+- ❌ Implementasi kode agen
 - ❌ Logika routing
 - ❌ UI frontend
 - ❌ Skema indeks pencarian
-- ❌ Pipeline data
+- ❌ Jalur data
 
 ### Fase 3: Bangun Aplikasi (80-120 jam)
 
@@ -97,24 +97,24 @@ cd retail-multiagent-arm-template
 
 1. **Implementasi Agen** (30-40 jam)
    - Kelas agen dasar dan antarmuka
-   - Agen layanan pelanggan dengan GPT-4o
-   - Agen inventaris dengan GPT-4o-mini
-   - Integrasi alat (AI Search, Bing, pemrosesan berkas)
+   - Agen layanan pelanggan dengan gpt-4.1
+   - Agen inventaris dengan gpt-4.1-mini
+   - Integrasi alat (AI Search, Bing, pemrosesan file)
 
 2. **Layanan Routing** (12-16 jam)
    - Logika klasifikasi permintaan
-   - Seleksi dan orkestrasi agen
+   - Seleksi agen dan orkestrasi
    - Backend FastAPI/Express
 
 3. **Pengembangan Frontend** (20-30 jam)
-   - UI antarmuka chat
-   - Fungsionalitas unggah berkas
+   - UI antarmuka obrolan
+   - Fungsionalitas unggah file
    - Rendering respons
 
-4. **Pipeline Data** (8-12 jam)
+4. **Jalur Data** (8-12 jam)
    - Pembuatan indeks AI Search
    - Pemrosesan dokumen dengan Document Intelligence
-   - Pembangkitan embedding dan pengindeksan
+   - Pembuatan embedding dan pengindeksan
 
 5. **Pemantauan & Evaluasi** (10-15 jam)
    - Implementasi telemetri kustom
@@ -126,11 +126,11 @@ cd retail-multiagent-arm-template
 - Bangun image Docker untuk semua layanan
 - Push ke Azure Container Registry
 - Perbarui Container Apps dengan image nyata
-- Konfigurasi variable lingkungan dan secrets
-- Jalankan rangkaian pengujian evaluasi
+- Konfigurasikan variabel lingkungan dan secret
+- Jalankan suite pengujian evaluasi
 - Lakukan pemindaian keamanan
 
-**Total Perkiraan Upaya:** 80-120 jam untuk pengembang berpengalaman
+**Total Perkiraan Usaha:** 80-120 jam untuk pengembang berpengalaman
 
 ## Arsitektur Solusi
 
@@ -139,21 +139,21 @@ cd retail-multiagent-arm-template
 ```mermaid
 graph TB
     User[👤 Pelanggan] --> LB[Azure Front Door]
-    LB --> WebApp[Antarmuka Web<br/>Aplikasi Kontainer]
+    LB --> WebApp[Frontend Web<br/>Aplikasi Kontainer]
     
     WebApp --> Router[Router Agen<br/>Aplikasi Kontainer]
     Router --> CustomerAgent[Agen Pelanggan<br/>Layanan Pelanggan]
     Router --> InvAgent[Agen Inventaris<br/>Manajemen Stok]
     
-    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>East US 2]
-    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>West US 2]
+    CustomerAgent --> OpenAI1[Model Microsoft Foundry<br/>gpt-4.1<br/>East US 2]
+    InvAgent --> OpenAI2[Model Microsoft Foundry<br/>gpt-4.1-mini<br/>West US 2]
     
     CustomerAgent --> AISearch[Azure AI Search<br/>Katalog Produk]
-    CustomerAgent --> BingSearch[Bing Search API<br/>Informasi Waktu Nyata]
+    CustomerAgent --> BingSearch[Bing Search API<br/>Info Waktu Nyata]
     InvAgent --> AISearch
     
     AISearch --> Storage[Azure Storage<br/>Dokumen & Berkas]
-    Storage --> DocIntel[Document Intelligence<br/>Pemrosesan Konten]
+    Storage --> DocIntel[Intelijen Dokumen<br/>Pemrosesan Konten]
     
     OpenAI1 --> Embeddings[Embedding Teks<br/>ada-002<br/>France Central]
     OpenAI2 --> Embeddings
@@ -162,8 +162,8 @@ graph TB
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[Penilai GPT-4o<br/>Switzerland North] --> Evaluation[Kerangka Evaluasi]
-    RedTeam[Pemindai Red Team] --> SecurityReports[Laporan Keamanan]
+    GraderModel[Penilai gpt-4.1<br/>Swiss Utara] --> Evaluation[Rangka Kerja Evaluasi]
+    RedTeam[Pemindai Tim Merah] --> SecurityReports[Laporan Keamanan]
     
     subgraph "Lapisan Data"
         Storage
@@ -201,21 +201,21 @@ graph TB
 
 | Component | Purpose | Technology | Region |
 |-----------|---------|------------|---------|
-| **Web Frontend** | Antarmuka pengguna untuk interaksi pelanggan | Container Apps | Wilayah Utama |
-| **Agent Router** | Meneruskan permintaan ke agen yang sesuai | Container Apps | Wilayah Utama |
-| **Customer Agent** | Menangani pertanyaan layanan pelanggan | Container Apps + GPT-4o | Wilayah Utama |
-| **Inventory Agent** | Mengelola stok dan pemenuhan | Container Apps + GPT-4o-mini | Wilayah Utama |
-| **Azure OpenAI** | Inferensi LLM untuk agen | Cognitive Services | Multi-wilayah |
-| **AI Search** | Pencarian vektor dan RAG | AI Search Service | Wilayah Utama |
-| **Storage Account** | Unggahan berkas dan dokumen | Blob Storage | Wilayah Utama |
-| **Application Insights** | Pemantauan dan telemetri | Monitor | Wilayah Utama |
-| **Grader Model** | Sistem evaluasi agen | Azure OpenAI | Wilayah Sekunder |
+| **Web Frontend** | User interface for customer interactions | Container Apps | Primary Region |
+| **Agent Router** | Routes requests to appropriate agent | Container Apps | Primary Region |
+| **Customer Agent** | Handles customer service queries | Container Apps + gpt-4.1 | Primary Region |
+| **Inventory Agent** | Manages stock and fulfillment | Container Apps + gpt-4.1-mini | Primary Region |
+| **Microsoft Foundry Models** | LLM inference for agents | Cognitive Services | Multi-region |
+| **AI Search** | Vector search and RAG | AI Search Service | Primary Region |
+| **Storage Account** | File uploads and documents | Blob Storage | Primary Region |
+| **Application Insights** | Monitoring and telemetry | Monitor | Primary Region |
+| **Grader Model** | Agent evaluation system | Microsoft Foundry Models | Secondary Region |
 
 ## 📁 Struktur Proyek
 
-> **📍 Legenda Status:**  
-> ✅ = Ada di repositori  
-> 📝 = Implementasi referensi (contoh kode dalam dokumen ini)  
+> **📍 Legend Status:**  
+> ✅ = Ada di repository  
+> 📝 = Implementasi referensi (contoh kode di dokumen ini)  
 > 🔨 = Anda perlu membuat ini
 
 ```
@@ -235,7 +235,7 @@ retail-multiagent-solution/              🔨 Your project directory
 │   ├── main.bicep                      🔨 Main Bicep template (optional, ARM exists)
 │   ├── main.parameters.json            🔨 Parameters file
 │   ├── modules/                        📝 Bicep modules (reference examples below)
-│   │   ├── ai-services.bicep           📝 Azure OpenAI deployments
+│   │   ├── ai-services.bicep           📝 Microsoft Foundry Models deployments
 │   │   ├── search.bicep                📝 AI Search configuration
 │   │   ├── storage.bicep               📝 Storage accounts
 │   │   ├── container-apps.bicep        📝 Container Apps environment
@@ -382,17 +382,17 @@ az resource list --resource-group myResourceGroup --output table
 ```
 
 **Hasil yang Diharapkan:**
-- ✅ Layanan Azure OpenAI disebarkan (3 region)
-- ✅ Layanan AI Search dibuat (kosong)
-- ✅ Lingkungan Container Apps siap
-- ✅ Storage, Cosmos DB, Key Vault dikonfigurasi
-- ❌ Belum ada agen yang bekerja (hanya infrastruktur)
+- ✅ Microsoft Foundry Models services deployed (3 regions)
+- ✅ AI Search service created (empty)
+- ✅ Container Apps environment ready
+- ✅ Storage, Cosmos DB, Key Vault configured
+- ❌ No working agents yet (infrastructure only)
 
 ### Opsi 2: Pelajari Arsitektur (2-3 jam)
 
 **Yang Anda dapatkan:** Pemahaman mendalam tentang pola multi-agen
 
-1. Baca dokumen ini secara lengkap
+1. Baca dokumen lengkap ini
 2. Tinjau contoh kode untuk setiap komponen
 3. Pahami keputusan desain dan trade-off
 4. Pelajari strategi optimasi biaya
@@ -400,23 +400,23 @@ az resource list --resource-group myResourceGroup --output table
 
 **Hasil yang Diharapkan:**
 - ✅ Model mental yang jelas tentang arsitektur sistem
-- ✅ Pemahaman tentang komponen yang diperlukan
-- ✅ Estimasi upaya yang realistis
+- ✅ Pemahaman komponen yang diperlukan
+- ✅ Estimasi usaha yang realistis
 - ✅ Rencana implementasi
 
 ### Opsi 3: Bangun Sistem Lengkap (80-120 jam)
 
-**Yang Anda dapatkan:** Solusi multi-agen siap-produksi
+**Yang Anda dapatkan:** Solusi multi-agen siap produksi
 
 1. **Fase 1:** Sebarkan infrastruktur (sudah dijelaskan di atas)
 2. **Fase 2:** Implementasikan agen menggunakan contoh kode di bawah (30-40 jam)
 3. **Fase 3:** Bangun layanan routing (12-16 jam)
 4. **Fase 4:** Buat UI frontend (20-30 jam)
-5. **Fase 5:** Konfigurasi pipeline data (8-12 jam)
+5. **Fase 5:** Konfigurasikan jalur data (8-12 jam)
 6. **Fase 6:** Tambahkan pemantauan & evaluasi (10-15 jam)
 
 **Hasil yang Diharapkan:**
-- ✅ Sistem multi-agen berfungsi penuh
+- ✅ Sistem multi-agen yang berfungsi penuh
 - ✅ Pemantauan tingkat produksi
 - ✅ Validasi keamanan
 - ✅ Penyebaran yang dioptimalkan biaya
@@ -425,15 +425,15 @@ az resource list --resource-group myResourceGroup --output table
 
 ## 📚 Referensi Arsitektur & Panduan Implementasi
 
-Bagian berikut memberikan pola arsitektur terperinci, contoh konfigurasi, dan kode referensi untuk memandu implementasi Anda.
+Bagian berikut menyediakan pola arsitektur terperinci, contoh konfigurasi, dan kode referensi untuk membimbing implementasi Anda.
 
 ## Persyaratan Konfigurasi Awal
 
 ### 1. Beberapa Agen & Konfigurasi
 
-**Tujuan**: Menyebarkan 2 agen khusus - "Customer Agent" (layanan pelanggan) dan "Inventory" (manajemen stok)
+**Tujuan**: Sebarkan 2 agen khusus - "Customer Agent" (layanan pelanggan) dan "Inventory" (manajemen stok)
 
-> **📝 Catatan:** Konfigurasi azure.yaml dan Bicep berikut adalah **contoh referensi** yang menunjukkan bagaimana menyusun penyebaran multi-agen. Anda perlu membuat file-file ini dan implementasi agen yang sesuai.
+> **📝 Catatan:** Konfigurasi azure.yaml dan Bicep berikut adalah **contoh referensi** yang menunjukkan cara menyusun penyebaran multi-agen. Anda harus membuat file-file ini dan implementasi agen yang sesuai.
 
 #### Langkah Konfigurasi:
 
@@ -450,7 +450,7 @@ services:
             "name": "Customer",
             "role": "Customer Service Representative",
             "description": "Handles general customer inquiries, returns, and support",
-            "model": "gpt-4o",
+            "model": "gpt-4.1",
             "temperature": 0.7,
             "max_tokens": 500,
             "tools": ["search", "file_retrieval", "bing_search"]
@@ -459,7 +459,7 @@ services:
             "name": "Inventory",
             "role": "Inventory Management Specialist", 
             "description": "Manages stock levels, product availability, and fulfillment",
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-mini",
             "temperature": 0.3,
             "max_tokens": 300,
             "tools": ["search", "database_query"]
@@ -474,12 +474,12 @@ services:
 param agentsConfig object = {
   customer: {
     name: 'Customer'
-    model: 'gpt-4o'
+    model: 'gpt-4.1'
     capacity: 20
   }
   inventory: {
     name: 'Inventory'
-    model: 'gpt-4o-mini'
+    model: 'gpt-4.1-mini'
     capacity: 10
   }
 }
@@ -507,9 +507,9 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 }]
 ```
 
-### 2. Beberapa Model dengan Perencanaan Kapasitas
+### 2. Multi-Model dengan Perencanaan Kapasitas
 
-**Tujuan**: Menyebarkan model chat (Customer), model embeddings (pencarian), dan model penalaran (grader) dengan manajemen kuota yang tepat
+**Tujuan**: Sebarkan model chat (Customer), model embedding (pencarian), dan model penalaran (grader) dengan manajemen kuota yang tepat
 
 #### Strategi Multi-Wilayah:
 
@@ -517,7 +517,7 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 // infra/models.bicep
 param modelDeployments array = [
   {
-    name: 'gpt-4o'
+    name: 'gpt-4.1'
     region: 'eastus2'
     capacity: 20
     usage: 'chat'
@@ -531,7 +531,7 @@ param modelDeployments array = [
     priority: 'medium'
   }
   {
-    name: 'gpt-4o'
+    name: 'gpt-4.1'
     region: 'francecentral'
     capacity: 15
     usage: 'grading'
@@ -546,7 +546,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
   properties: {
     scriptContent: '''
       #!/bin/bash
-      for model in "gpt-4o" "text-embedding-ada-002"; do
+      for model in "gpt-4.1" "text-embedding-ada-002"; do
         available=$(az cognitiveservices usage list --location ${location} --query "[?name.value=='$model'].{current:currentValue,limit:limit}" -o tsv)
         echo "Model: $model, Available capacity: $available"
       done
@@ -555,18 +555,18 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
 }
 ```
 
-#### Konfigurasi Cadangan Wilayah:
+#### Konfigurasi Fallback Wilayah:
 
 ```yaml
 # .azure/env/.env.production
 AZURE_OPENAI_REGIONS='["eastus2", "westus2", "francecentral"]'
 AZURE_OPENAI_FALLBACK_ENABLED=true
-MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
+MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 ```
 
 ### 3. AI Search dengan Konfigurasi Indeks Data
 
-**Tujuan**: Mengonfigurasi AI Search untuk pembaruan data dan pengindeksan otomatis
+**Tujuan**: Konfigurasikan AI Search untuk pembaruan data dan pengindeksan otomatis
 
 #### Hook Pra-Penyediaan:
 
@@ -585,7 +585,7 @@ az search service create \
   --replica-count 1
 ```
 
-#### Pengaturan Data Pasca-Penyediaan:
+#### Penyiapan Data Pasca-Penyediaan:
 
 ```bash
 #!/bin/bash
@@ -593,7 +593,7 @@ az search service create \
 
 echo "Configuring AI Search indexes and uploading initial data..."
 
-# Ambil kunci layanan pencarian
+# Dapatkan kunci layanan pencarian
 SEARCH_KEY=$(az search admin-key show --service-name "$AZURE_SEARCH_SERVICE_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query primaryKey -o tsv)
 
 # Buat skema indeks
@@ -636,12 +636,12 @@ python ./scripts/upload_search_data.py \
 
 ### 4. Konfigurasi Alat Agen untuk AI Search
 
-**Tujuan**: Mengonfigurasi agen untuk menggunakan AI Search sebagai alat grounding
+**Tujuan**: Konfigurasikan agen untuk menggunakan AI Search sebagai alat grounding
 
 #### Implementasi Alat Pencarian Agen:
 
 ```python
-# src/agen/alat/alat_pencarian.py
+# src/agen/perangkat/alat_pencarian.py
 import asyncio
 from azure.search.documents.aio import SearchClient
 from azure.core.credentials import AzureKeyCredential
@@ -685,7 +685,7 @@ class SearchTool:
 #### Integrasi Agen:
 
 ```python
-# src/agen/agen_pelanggan.py
+# src/agents/customer_agent.py
 from agents.tools.search_tool import SearchTool
 from openai import AsyncOpenAI
 
@@ -701,9 +701,9 @@ class CustomerAgent:
         # Siapkan konteks untuk LLM
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # Hasilkan respons dengan grounding
+        # Hasilkan respons dengan pembumian
         response = await self.openai_client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4.1",
             messages=[
                 {"role": "system", "content": f"You are Customer, a helpful customer service agent. Use this context to answer questions: {context}"},
                 {"role": "user", "content": user_query}
@@ -713,9 +713,9 @@ class CustomerAgent:
         return response.choices[0].message.content
 ```
 
-### 5. Integrasi Penyimpanan Unggah Berkas
+### 5. Integrasi Penyimpanan Unggah File
 
-**Tujuan**: Memungkinkan agen memproses berkas yang diunggah (manual, dokumen) untuk konteks RAG
+**Tujuan**: Memungkinkan agen memproses file yang diunggah (manual, dokumen) untuk konteks RAG
 
 #### Konfigurasi Penyimpanan:
 
@@ -756,7 +756,7 @@ resource eventGridTopic 'Microsoft.EventGrid/topics@2023-12-15-preview' = {
 }
 ```
 
-#### Pipeline Pemrosesan Dokumen:
+#### Jalur Pemrosesan Dokumen:
 
 ```python
 # src/document_processor.py
@@ -816,7 +816,7 @@ class DocumentProcessor:
 
 ### 6. Integrasi Bing Search
 
-**Tujuan**: Menambahkan kemampuan Pencarian Bing untuk informasi real-time
+**Tujuan**: Tambahkan kemampuan Bing Search untuk informasi waktu-nyata
 
 #### Penambahan Sumber Daya Bicep:
 
@@ -836,10 +836,10 @@ output bingSearchKey string = bingSearchService.listKeys().key1
 output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 ```
 
-#### Alat Pencarian Bing:
+#### Alat Bing Search:
 
 ```python
-# src/agents/tools/bing_search_tool.py
+# src/agen/alat/bing_pencarian_alat.py
 import aiohttp
 import asyncio
 
@@ -882,7 +882,7 @@ class BingSearchTool:
 
 ## Pemantauan & Observabilitas
 
-### 7. Penelusuran dan Application Insights
+### 7. Tracing dan Application Insights
 
 **Tujuan**: Pemantauan komprehensif dengan log trace dan Application Insights
 
@@ -953,7 +953,7 @@ class AgentTelemetry:
     def __init__(self, instrumentation_key: str):
         self.telemetry_client = TelemetryClient(instrumentation_key)
         
-        # Konfigurasikan logging
+        # Konfigurasikan pencatatan
         handler = LoggingHandler(instrumentation_key)
         logging.basicConfig(handlers=[handler], level=logging.INFO)
         self.logger = logging.getLogger(__name__)
@@ -984,7 +984,7 @@ class AgentTelemetry:
         """Track search operation performance"""
         properties = {
             'search_type': search_type,
-            'query': query[:100],  # Potong untuk privasi
+            'query': query[:100],  # Pangkas untuk privasi
             'results_found': str(results_count > 0)
         }
         
@@ -1166,7 +1166,7 @@ class RedTeamScanner:
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
         # Implementasi akan mengirim permintaan HTTP ke endpoint agen
-        # Untuk keperluan demo, mengembalikan nilai sementara
+        # Untuk keperluan demo, mengembalikan penanda sementara
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1223,7 +1223,7 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # Skor dasar: 100 - (kerentanan / total * 100)
+        # Skoring dasar: 100 - (vulnerabilities / total * 100)
         if total_strategies == 0:
             return 100.0
         
@@ -1240,7 +1240,7 @@ class RedTeamScanner:
         return round(final_score, 2)
 ```
 
-#### Pipeline Keamanan Otomatis:
+#### Jalur Keamanan Otomatis:
 
 ```bash
 #!/bin/bash
@@ -1266,14 +1266,14 @@ echo "Security scan completed. Check security_reports/ for results."
 
 ### 9. Evaluasi Agen dengan Model Grader
 
-**Tujuan**: Menyebarkan sistem evaluasi dengan model grader khusus
+**Tujuan**: Sebarkan sistem evaluasi dengan model grader khusus
 
 #### Konfigurasi Model Grader:
 
 ```bicep
 // infra/evaluation.bicep
 param graderModelConfig object = {
-  name: 'gpt-4o'
+  name: 'gpt-4.1'
   version: '2024-11-20'
   capacity: 30
   region: 'switzerlandnorth'  // Different region for separation
@@ -1296,7 +1296,7 @@ resource graderOpenAI 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
 
 resource graderDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: graderOpenAI
-  name: 'gpt-4o-grader'
+  name: 'gpt-4.1-grader'
   properties: {
     model: {
       format: 'OpenAI'
@@ -1416,7 +1416,7 @@ class AgentEvaluator:
         
         try:
             grader_response = await self.grader_client.chat.completions.create(
-                model="gpt-4o-grader",
+                model="gpt-4.1-grader",
                 messages=[
                     {"role": "system", "content": "You are an expert AI evaluation assistant. Always respond with valid JSON."},
                     {"role": "user", "content": grading_prompt}
@@ -1471,7 +1471,7 @@ class AgentEvaluator:
             if criterion_scores:
                 summary['criteria_averages'][criterion] = sum(criterion_scores) / len(criterion_scores)
         
-        # Peringkat kinerja
+        # Penilaian kinerja
         avg_score = summary['average_overall_score']
         if avg_score >= 4.5:
             summary['performance_rating'] = 'Excellent'
@@ -1528,9 +1528,9 @@ class AgentEvaluator:
 
 ## Kustomisasi & Pembaruan
 
-### 10. Kustomisasi Aplikasi Kontainer
+### 10. Kustomisasi Aplikasi Container
 
-**Tujuan**: Memperbarui konfigurasi aplikasi kontainer dan menggantinya dengan UI kustom
+**Tujuan**: Perbarui konfigurasi aplikasi container dan ganti dengan UI kustom
 
 #### Konfigurasi Dinamis:
 
@@ -1597,7 +1597,7 @@ az acr build \
   --image "retail-frontend:latest" \
   ./src/frontend
 
-# Perbarui aplikasi kontainer
+# Perbarui aplikasi container
 az containerapp update \
   --name "retail-frontend" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1610,7 +1610,7 @@ echo "Frontend deployed successfully!"
 
 ## 🔧 Panduan Pemecahan Masalah
 
-### Masalah Umum dan Solusi
+### Masalah Umum dan Solusinya
 
 #### 1. Batas Kuota Container Apps
 
@@ -1637,7 +1637,7 @@ az support tickets create \
 
 #### 2. Kedaluwarsa Penyebaran Model
 
-**Masalah**: Penyebaran model gagal karena versi API kadaluwarsa
+**Masalah**: Penyebaran model gagal karena versi API yang kedaluwarsa
 
 **Solusi**:
 ```python
@@ -1647,11 +1647,11 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # Ini akan memanggil API Azure OpenAI untuk mendapatkan versi saat ini
+    # Ini akan memanggil Microsoft Foundry Models API untuk mendapatkan versi saat ini
     latest_versions = {
-        "gpt-4o": "2024-11-20",
+        "gpt-4.1": "2024-11-20",
         "text-embedding-ada-002": "2", 
-        "gpt-4o-mini": "2024-07-18"
+        "gpt-4.1-mini": "2024-07-18"
     }
     
     print("Latest model versions:")
@@ -1664,12 +1664,12 @@ def update_bicep_templates(latest_versions):
     """Update Bicep templates with latest versions"""
     template_path = "./infra/models.bicep"
     
-    # Baca dan perbarui template
+    # Baca dan perbarui templat
     with open(template_path, 'r') as f:
         content = f.read()
     
     for model, version in latest_versions.items():
-        # Perbarui versi di template
+        # Perbarui versi dalam templat
         old_pattern = f"version: '[^']*'  // {model}"
         new_pattern = f"version: '{version}'  // {model}"
         content = content.replace(old_pattern, new_pattern)
@@ -1686,7 +1686,7 @@ if __name__ == "__main__":
 
 #### 3. Integrasi Fine-tuning
 
-**Masalah**: Cara mengintegrasikan model yang di-fine-tune ke dalam penyebaran AZD
+**Masalah**: Cara mengintegrasikan model yang disesuaikan (fine-tuned) ke dalam penyebaran AZD
 
 **Solusi**:
 ```python
@@ -1698,7 +1698,7 @@ class FineTuningPipeline:
     def __init__(self, openai_client: AsyncOpenAI):
         self.client = openai_client
     
-    async def start_fine_tuning_job(self, training_file_id: str, model: str = "gpt-4o-mini"):
+    async def start_fine_tuning_job(self, training_file_id: str, model: str = "gpt-4.1-mini"):
         """Start a fine-tuning job"""
         job = await self.client.fine_tuning.jobs.create(
             training_file=training_file_id,
@@ -1726,8 +1726,8 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # Perbarui penyebaran agar menggunakan model hasil fine-tuning
-            # Ini akan memanggil Azure CLI untuk memperbarui penyebaran
+            # Perbarui deployment agar menggunakan model yang telah di-fine-tune
+            # Ini akan memanggil Azure CLI untuk memperbarui deployment
             return fine_tuned_model
         else:
             print(f"Job status: {job.status}")
@@ -1740,9 +1740,9 @@ class FineTuningPipeline:
 
 ### Pertanyaan yang Sering Diajukan
 
-#### Q: Apakah ada cara mudah untuk menyebarkan beberapa agen (pola desain)?
+#### P: Adakah cara mudah untuk menyebarkan beberapa agen (pola desain)?
 
-**A: Ya! Gunakan Pola Multi-Agen:**
+**J: Ya! Gunakan Pola Multi-Agen:**
 
 ```yaml
 # azure.yaml - Multi-Agent Configuration
@@ -1753,23 +1753,23 @@ services:
     config:
       AGENTS: |
         {
-          "customer": {"type": "customer_service", "model": "gpt-4o", "capacity": 20},
-          "inventory": {"type": "inventory_management", "model": "gpt-4o-mini", "capacity": 10},
-          "returns": {"type": "returns_processing", "model": "gpt-4o-mini", "capacity": 5}
+          "customer": {"type": "customer_service", "model": "gpt-4.1", "capacity": 20},
+          "inventory": {"type": "inventory_management", "model": "gpt-4.1-mini", "capacity": 10},
+          "returns": {"type": "returns_processing", "model": "gpt-4.1-mini", "capacity": 5}
         }
 ```
 
-#### Q: Bisakah saya menyebarkan "model router" sebagai sebuah model (implikasi biaya)?
+#### P: Bisakah saya menyebarkan "model router" sebagai model (implikasi biaya)?
 
-**A: Ya, dengan pertimbangan yang matang:**
+**J: Ya, dengan pertimbangan matang:**
 
 ```python
 # Implementasi Model Router
 class ModelRouter:
     def __init__(self):
         self.routing_rules = {
-            "simple_queries": {"model": "gpt-4o-mini", "cost_per_1k": 0.00015},
-            "complex_reasoning": {"model": "gpt-4o", "cost_per_1k": 0.03},
+            "simple_queries": {"model": "gpt-4.1-mini", "cost_per_1k": 0.00015},
+            "complex_reasoning": {"model": "gpt-4.1", "cost_per_1k": 0.03},
             "embeddings": {"model": "text-embedding-ada-002", "cost_per_1k": 0.0001}
         }
     
@@ -1789,17 +1789,17 @@ class ModelRouter:
 ```
 
 **Implikasi Biaya:**
-- **Penghematan**: Pengurangan biaya 60-80% untuk kueri sederhana
+- **Penghematan**: pengurangan biaya 60-80% untuk kueri sederhana
 - **Pertukaran**: Sedikit peningkatan latensi untuk logika routing
 - **Pemantauan**: Lacak metrik akurasi vs. biaya
 
-#### Q: Bisakah saya memulai pekerjaan fine-tuning dari template azd?
+#### P: Bisakah saya memulai pekerjaan fine-tuning dari template azd?
 
-**A: Ya, menggunakan hook pasca-penyediaan:**
+**J: Ya, menggunakan hook pasca-penyediaan:**
 
 ```bash
 #!/bin/bash
-# hooks/postprovision.sh - Integrasi penyetelan
+# hooks/postprovision.sh - Integrasi Fine-tuning
 
 echo "Starting fine-tuning pipeline..."
 
@@ -1808,10 +1808,10 @@ TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
 
-# Mulai pekerjaan penyetelan
+# Mulai pekerjaan fine-tuning
 FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
-  --model "gpt-4o-mini")
+  --model "gpt-4.1-mini")
 
 # Simpan ID pekerjaan untuk pemantauan
 echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
@@ -1861,7 +1861,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 #### Kerangka Optimasi Biaya
 
 ```python
-# src/optimasi/pengoptimal_biaya.py
+# src/optimization/cost_optimizer.py
 class CostOptimizer:
     def __init__(self, usage_analytics):
         self.analytics = usage_analytics
@@ -1903,61 +1903,61 @@ class CostOptimizer:
 ```
 
 ---
-## ✅ Template ARM Siap-Diterapkan
+## ✅ Template ARM Siap Diterapkan
 
 > **✨ INI BENAR-BENAR ADA DAN BERFUNGSI!**  
-> Berbeda dengan contoh kode konseptual di atas, template ARM ini adalah sebuah **penyebaran infrastruktur nyata dan berfungsi** yang disertakan di repositori ini.
+> Berbeda dengan contoh kode konseptual di atas, template ARM ini adalah **penyebaran infrastruktur nyata yang berfungsi** yang disertakan dalam repositori ini.
 
 ### Apa yang Sebenarnya Dilakukan Template Ini
 
-The ARM template at [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) menyediakan **seluruh infrastruktur Azure** yang diperlukan untuk sistem multi-agen. Ini adalah **satu-satunya komponen yang siap dijalankan** - semuanya lainnya memerlukan pengembangan.
+Template ARM di [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) menyediakan **seluruh infrastruktur Azure** yang dibutuhkan untuk sistem multi-agen. Ini adalah **satu-satunya komponen siap-jalankan** - semuanya lainnya memerlukan pengembangan.
 
 ### Apa yang Termasuk dalam Template ARM
 
-The ARM template located in [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) includes:
+Template ARM yang terletak di [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) mencakup:
 
 #### **Infrastruktur Lengkap**
-- ✅ **Penyebaran Azure OpenAI Multi-wilayah** (GPT-4o, GPT-4o-mini, embeddings, grader)
+- ✅ **Penyebaran Model Microsoft Foundry multi-wilayah** (gpt-4.1, gpt-4.1-mini, embeddings, grader)
 - ✅ **Azure AI Search** dengan kemampuan pencarian vektor
 - ✅ **Azure Storage** dengan kontainer dokumen dan unggahan
 - ✅ **Container Apps Environment** dengan penskalaan otomatis
-- ✅ **Agent Router & Frontend** aplikasi kontainer
+- ✅ **Agent Router & Frontend** container apps
 - ✅ **Cosmos DB** untuk penyimpanan riwayat obrolan
-- ✅ **Application Insights** untuk pemantauan menyeluruh
+- ✅ **Application Insights** untuk pemantauan komprehensif
 - ✅ **Key Vault** untuk manajemen rahasia yang aman
 - ✅ **Document Intelligence** untuk pemrosesan file
-- ✅ **Bing Search API** untuk informasi waktu-nyata
+- ✅ **Bing Search API** untuk informasi waktu nyata
 
 #### **Mode Penyebaran**
 | Mode | Kasus Penggunaan | Sumber Daya | Perkiraan Biaya/Bulan |
-|------|------------------|-------------|-----------------------|
-| **Minimal** | Pengembangan, Pengujian | SKU Dasar, wilayah tunggal | $100-370 |
+|------|----------|-----------|---------------------|
+| **Minimal** | Pengembangan, Pengujian | SKU Dasar, Satu wilayah | $100-370 |
 | **Standard** | Produksi, Skala sedang | SKU Standar, Multi-wilayah | $420-1,450 |
-| **Premium** | Perusahaan, Skala besar | SKU Premium, pengaturan HA | $1,150-3,500 |
+| **Premium** | Perusahaan, Skala besar | SKU Premium, Pengaturan HA | $1,150-3,500 |
 
 ### 🎯 Opsi Penyebaran Cepat
 
-#### Opsi 1: Penyebaran Azure dengan Satu Klik
+#### Opsi 1: Penyebaran Azure 1-Klik
 
-[![Terapkan ke Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
+[![Deploy ke Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-#### Opsi 2: Penyebaran dengan Azure CLI
+#### Opsi 2: Penyebaran Azure CLI
 
 ```bash
 # Klon repositori
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
-# Beri hak eksekusi pada skrip deployment
+# Jadikan skrip deployment dapat dieksekusi
 chmod +x deploy.sh
 
-# Sebarkan dengan pengaturan default (mode Standar)
+# Deploy dengan pengaturan bawaan (mode Standar)
 ./deploy.sh -g myResourceGroup
 
-# Sebarkan untuk produksi dengan fitur premium
+# Deploy untuk produksi dengan fitur premium
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# Sebarkan versi minimal untuk pengembangan
+# Deploy versi minimal untuk pengembangan
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
@@ -1975,7 +1975,7 @@ az deployment group create \
   --parameters projectName=retail environmentName=prod
 ```
 
-### Output Template
+### Keluaran Template
 
 Setelah penyebaran berhasil, Anda akan menerima:
 
@@ -2013,9 +2013,9 @@ Template ARM menangani penyediaan infrastruktur. Setelah penyebaran:
      --account-name ${STORAGE_ACCOUNT}
    ```
 
-3. **Sebarkan Kode Agen**:
+3. **Terapkan Kode Agen**:
    ```bash
-   # Membangun dan menyebarkan aplikasi agen yang sebenarnya
+   # Membangun dan menerapkan aplikasi agen yang sebenarnya
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -2043,79 +2043,79 @@ Edit `azuredeploy.parameters.json` untuk menyesuaikan penyebaran Anda:
 
 - ✅ **Validasi prasyarat** (Azure CLI, kuota, izin)
 - ✅ **Ketersediaan tinggi multi-wilayah** dengan failover otomatis
-- ✅ **Pemantauan menyeluruh** dengan Application Insights dan Log Analytics
-- ✅ **Praktik terbaik keamanan** dengan Key Vault dan RBAC
-- ✅ **Optimisasi biaya** dengan mode penyebaran yang dapat dikonfigurasi
+- ✅ **Pemantauan komprehensif** dengan Application Insights dan Log Analytics
+- ✅ **Praktik keamanan terbaik** dengan Key Vault dan RBAC
+- ✅ **Optimasi biaya** dengan mode penyebaran yang dapat dikonfigurasi
 - ✅ **Penskalaan otomatis** berdasarkan pola permintaan
-- ✅ **Pembaruan tanpa waktu henti** dengan revisi Container Apps
+- ✅ **Pembaruan tanpa downtime** dengan revisi Container Apps
 
 ### 🔍 Pemantauan dan Manajemen
 
-Setelah disebarkan, pantau solusi Anda melalui:
+Setelah diterapkan, pantau solusi Anda melalui:
 
 - **Application Insights**: metrik kinerja, pelacakan dependensi, dan telemetri kustom
-- **Log Analytics**: Pencatatan terpusat dari semua komponen
-- **Azure Monitor**: Pemantauan kesehatan dan ketersediaan sumber daya
-- **Cost Management**: Pelacakan biaya waktu-nyata dan peringatan anggaran
+- **Log Analytics**: pencatatan terpusat dari semua komponen
+- **Azure Monitor**: pemantauan kesehatan dan ketersediaan sumber daya
+- **Cost Management**: pelacakan biaya secara real-time dan peringatan anggaran
 
 ---
 
 ## 📚 Panduan Implementasi Lengkap
 
-This scenario document combined with the ARM template provides everything needed to deploy a production-ready multi-agent customer support solution. The implementation covers:
+Dokumen skenario ini dikombinasikan dengan template ARM menyediakan semua yang dibutuhkan untuk menerapkan solusi dukungan pelanggan multi-agen yang siap produksi. Implementasinya mencakup:
 
 ✅ **Desain Arsitektur** - Desain sistem komprehensif dengan hubungan komponen  
-✅ **Penyediaan Infrastruktur** - Template ARM lengkap untuk penyebaran dengan satu klik  
-✅ **Konfigurasi Agen** - Pengaturan terperinci untuk agen Pelanggan dan Inventaris  
-✅ **Penyebaran Multi-Model** - Penempatan model strategis antar wilayah  
+✅ **Penyediaan Infrastruktur** - Template ARM lengkap untuk penyebaran satu-klik  
+✅ **Konfigurasi Agen** - Pengaturan rinci untuk agen Customer dan Inventory  
+✅ **Penyebaran Multi-Model** - Penempatan model strategis di berbagai wilayah  
 ✅ **Integrasi Pencarian** - AI Search dengan kemampuan vektor dan pengindeksan data  
 ✅ **Implementasi Keamanan** - Red teaming, pemindaian kerentanan, dan praktik aman  
 ✅ **Pemantauan & Evaluasi** - Telemetri komprehensif dan kerangka evaluasi agen  
-✅ **Kesiapan Produksi** - Penyebaran setara perusahaan dengan HA dan pemulihan bencana  
-✅ **Optimisasi Biaya** - Routing cerdas dan penskalaan berbasis penggunaan  
-✅ **Panduan Pemecahan Masalah** - Masalah umum dan strategi penyelesaian
+✅ **Kesiapan Produksi** - Penyebaran kelas enterprise dengan HA dan pemulihan bencana  
+✅ **Optimasi Biaya** - Perutean cerdas dan penskalaan berbasis penggunaan  
+✅ **Panduan Pemecahan Masalah** - Masalah umum dan strategi penyelesaiannya
 
 ---
 
 ## 📊 Ringkasan: Apa yang Telah Anda Pelajari
 
-### Pola Arsitektur yang Dicakup
+### Pola Arsitektur yang Dibahas
 
-✅ **Desain Sistem Multi-Agen** - Agen khusus (Pelanggan + Inventaris) dengan model khusus  
-✅ **Penyebaran Multi-Wilayah** - Penempatan model strategis untuk optimisasi biaya dan redundansi  
-✅ **Arsitektur RAG** - Integrasi AI Search dengan embedding vektor untuk respons yang berbasis data  
-✅ **Evaluasi Agen** - Model grader khusus untuk penilaian kualitas  
+✅ **Desain Sistem Multi-Agen** - Agen khusus (Customer + Inventory) dengan model khusus  
+✅ **Penyebaran Multi-Wilayah** - Penempatan model strategis untuk optimasi biaya dan redundansi  
+✅ **Arsitektur RAG** - Integrasi AI Search dengan embedding vektor untuk respons yang berlandaskan  
+✅ **Evaluasi Agen** - Model penilai khusus untuk penilaian kualitas  
 ✅ **Kerangka Keamanan** - Pola red teaming dan pemindaian kerentanan  
-✅ **Optimisasi Biaya** - Routing model dan strategi perencanaan kapasitas  
+✅ **Optimasi Biaya** - Strategi perutean model dan perencanaan kapasitas  
 ✅ **Pemantauan Produksi** - Application Insights dengan telemetri kustom  
 
 ### Apa yang Disediakan Dokumen Ini
 
-| Komponen | Status | Lokasi |
+| Komponen | Status | Di Mana Menemukannya |
 |-----------|--------|------------------|
-| **Template Infrastruktur** | ✅ Siap Diterapkan | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **Template Infrastruktur** | ✅ Siap Dideploy | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
 | **Diagram Arsitektur** | ✅ Lengkap | Diagram Mermaid di atas |
 | **Contoh Kode** | ✅ Implementasi Referensi | Sepanjang dokumen ini |
 | **Pola Konfigurasi** | ✅ Panduan Terperinci | Bagian 1-10 di atas |
-| **Implementasi Agen** | 🔨 Anda Membangunnya | ~40 jam pengembangan |
-| **UI Frontend** | 🔨 Anda Membangunnya | ~25 jam pengembangan |
-| **Pipeline Data** | 🔨 Anda Membangunnya | ~10 jam pengembangan |
+| **Implementasi Agen** | 🔨 Anda Membangun Ini | ~40 jam pengembangan |
+| **UI Frontend** | 🔨 Anda Membangun Ini | ~25 jam pengembangan |
+| **Alur Data** | 🔨 Anda Membangun Ini | ~10 jam pengembangan |
 
-### Pemeriksaan Realitas: Apa yang Sebenarnya Ada
+### Cek Realita: Apa yang Sebenarnya Ada
 
 **Di Repositori (Siap Sekarang):**
-- ✅ Template ARM yang menyebarkan 15+ layanan Azure (azuredeploy.json)
+- ✅ Template ARM yang menerapkan 15+ layanan Azure (azuredeploy.json)
 - ✅ Skrip penyebaran dengan validasi (deploy.sh)
 - ✅ Konfigurasi parameter (azuredeploy.parameters.json)
 
-**Direferensikan dalam Dokumen (Anda Buat):**
+**Dirujuk dalam Dokumen (Anda Buat):**
 - 🔨 Kode implementasi agen (~30-40 jam)
-- 🔨 Layanan routing (~12-16 jam)
+- 🔨 Layanan perutean (~12-16 jam)
 - 🔨 Aplikasi frontend (~20-30 jam)
 - 🔨 Skrip pengaturan data (~8-12 jam)
 - 🔨 Kerangka pemantauan (~10-15 jam)
 
-### Langkah Anda Selanjutnya
+### Langkah Anda Berikutnya
 
 #### Jika Anda Ingin Menyebarkan Infrastruktur (30 menit)
 ```bash
@@ -2127,59 +2127,59 @@ cd retail-multiagent-arm-template
 1. ✅ Baca dan pahami dokumen arsitektur ini (2-3 jam)
 2. ✅ Sebarkan infrastruktur menggunakan template ARM (30 menit)
 3. 🔨 Implementasikan agen menggunakan pola kode referensi (~40 jam)
-4. 🔨 Bangun layanan routing dengan FastAPI/Express (~15 jam)
+4. 🔨 Bangun layanan perutean dengan FastAPI/Express (~15 jam)
 5. 🔨 Buat UI frontend dengan React/Vue (~25 jam)
-6. 🔨 Konfigurasikan pipeline data dan indeks pencarian (~10 jam)
+6. 🔨 Konfigurasi alur data dan indeks pencarian (~10 jam)
 7. 🔨 Tambahkan pemantauan dan evaluasi (~15 jam)
 8. ✅ Uji, amankan, dan optimalkan (~10 jam)
 
-#### Jika Anda Ingin Mempelajari Pola Multi-Agen (Studi)
+#### Jika Anda Ingin Mempelajari Pola Multi-Agen (Belajar)
 - 📖 Tinjau diagram arsitektur dan hubungan komponen
 - 📖 Pelajari contoh kode untuk SearchTool, BingTool, AgentEvaluator
 - 📖 Pahami strategi penyebaran multi-wilayah
 - 📖 Pelajari kerangka evaluasi dan keamanan
-- 📖 Terapkan pola ke proyek Anda sendiri
+- 📖 Terapkan pola pada proyek Anda sendiri
 
 ### Poin Penting
 
 1. **Infrastruktur vs. Aplikasi** - Template ARM menyediakan infrastruktur; agen memerlukan pengembangan  
 2. **Strategi Multi-Wilayah** - Penempatan model strategis mengurangi biaya dan meningkatkan keandalan  
-3. **Kerangka Evaluasi** - Model grader khusus memungkinkan penilaian kualitas berkelanjutan  
-4. **Keamanan Utama** - Red teaming dan pemindaian kerentanan penting untuk produksi  
-5. **Optimisasi Biaya** - Routing cerdas antara GPT-4o dan GPT-4o-mini menghemat 60-80%
+3. **Kerangka Evaluasi** - Model penilai khusus memungkinkan penilaian kualitas berkelanjutan  
+4. **Keamanan Diutamakan** - Red teaming dan pemindaian kerentanan penting untuk produksi  
+5. **Optimasi Biaya** - Perutean cerdas antara gpt-4.1 dan gpt-4.1-mini menghemat 60-80%
 
 ### Perkiraan Biaya
 
 | Mode Penyebaran | Infrastruktur/Bulan | Pengembangan (Sekali) | Total Bulan Pertama |
-|-----------------|---------------------|------------------------|---------------------|
+|-----------------|---------------------|------------------------|-------------------|
 | **Minimal** | $100-370 | $15K-25K (80-120 jam) | $15.1K-25.4K |
-| **Standard** | $420-1,450 | $15K-25K (usaha yang sama) | $15.4K-26.5K |
-| **Premium** | $1,150-3,500 | $15K-25K (usaha yang sama) | $16.2K-28.5K |
+| **Standard** | $420-1,450 | $15K-25K (upaya yang sama) | $15.4K-26.5K |
+| **Premium** | $1,150-3,500 | $15K-25K (upaya yang sama) | $16.2K-28.5K |
 
 **Catatan:** Infrastruktur kurang dari 5% dari total biaya untuk implementasi baru. Upaya pengembangan adalah investasi utama.
 
-### Sumber Daya Terkait
+### Sumber Terkait
 
 - 📚 [Panduan Penyebaran Template ARM](retail-multiagent-arm-template/README.md) - Pengaturan infrastruktur
-- 📚 [Praktik Terbaik Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/) - Penyebaran model
+- 📚 [Praktik Terbaik Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/) - Penyebaran model
 - 📚 [Dokumentasi AI Search](https://learn.microsoft.com/azure/search/) - Konfigurasi pencarian vektor
 - 📚 [Pola Container Apps](https://learn.microsoft.com/azure/container-apps/) - Penyebaran mikroservis
 - 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Pengaturan pemantauan
 
 ### Pertanyaan atau Masalah?
 
-- 🐛 [Laporkan Masalah](https://github.com/microsoft/AZD-for-beginners/issues) - Bug template atau kesalahan dokumentasi
+- 🐛 [Laporkan Masalah](https://github.com/microsoft/AZD-for-beginners/issues) - Bug pada template atau kesalahan dokumentasi
 - 💬 [Diskusi GitHub](https://github.com/microsoft/AZD-for-beginners/discussions) - Pertanyaan arsitektur
 - 📖 [FAQ](../resources/faq.md) - Pertanyaan umum yang dijawab
 - 🔧 [Panduan Pemecahan Masalah](../docs/troubleshooting/common-issues.md) - Masalah penyebaran
 
 ---
 
-**Skenario komprehensif ini menyediakan cetak biru arsitektur setara perusahaan untuk sistem AI multi-agen, lengkap dengan template infrastruktur, panduan implementasi, dan praktik terbaik produksi untuk membangun solusi dukungan pelanggan yang canggih dengan Azure Developer CLI.**
+**Skenario komprehensif ini menyediakan cetak biru arsitektur bertingkat enterprise untuk sistem AI multi-agen, lengkap dengan template infrastruktur, panduan implementasi, dan praktik terbaik produksi untuk membangun solusi dukungan pelanggan yang canggih dengan Azure Developer CLI.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya menjaga ketepatan, harap diperhatikan bahwa terjemahan otomatis dapat mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang menjadi acuan. Untuk informasi yang bersifat krusial, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya mencapai akurasi, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidaktepatan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang timbul akibat penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

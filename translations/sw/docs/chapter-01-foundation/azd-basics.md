@@ -1,48 +1,63 @@
-# AZD Misingi - Kuelewa Azure Developer CLI
+# AZD Basics - Kuelewa Azure Developer CLI
 
-# AZD Misingi - Dhana za Msingi na Mambo Muhimu
+# AZD Basics - Dhana za Msingi na Misingi
 
-**Navigation ya Sura:**
-- **📚 Nyumbani kwa Kozi**: [AZD For Beginners](../../README.md)
-- **📖 Sura ya Sasa**: Sura 1 - Msingi & Kuanzia Haraka
-- **⬅️ Iliyopita**: [Course Overview](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Ifuatayo**: [Installation & Setup](installation.md)
-- **🚀 Sura Ifuatayo**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Uvinjari wa Sura:**
+- **📚 Nyumbani wa Kozi**: [AZD Kwa Waanzilishi](../../README.md)
+- **📖 Sura ya Sasa**: Sura 1 - Msingi na Anza Haraka
+- **⬅️ Iliyotangulia**: [Muhtasari wa Kozi](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Ifuatayo**: [Usakinishaji na Usanidi](installation.md)
+- **🚀 Sura Ifuatayo**: [Sura ya 2: Maendeleo ya AI-Kwanza](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Utangulizi
 
-Somo hili linakujuza kuhusu Azure Developer CLI (azd), zana yenye nguvu ya mstari wa amri inayochochea safari yako kutoka kwenye maendeleo ya ndani hadi utoaji kwa Azure. Utajifunza dhana za msingi, vipengele vya msingi, na kuelewa jinsi azd inavyorahisisha utoaji wa programu za cloud-native.
+Somo hili linakuanzisha kwa Azure Developer CLI (azd), chombo chenye nguvu cha njia ya amri kinachofanikisha safari yako kutoka maendeleo ya ndani hadi uwasilishaji kwenye Azure. Utajifunza dhana za msingi, vipengele vya msingi, na kuelewa jinsi azd inavyorahisisha uwasilishaji wa programu za asili za wingu.
 
 ## Malengo ya Kujifunza
 
 Mwisho wa somo hili, utakuwa umeweza:
-- Kuelewa ni nini Azure Developer CLI na kusudi lake kuu
-- Kujifunza dhana msingi za templates, environments, na services
-- Kuchunguza vipengele muhimu vikiwemo maendeleo kwa kutumia templates na Miundombinu kama Msimbo
-- Kuelewa muundo wa mradi wa azd na mtiririko wa kazi
+- Elewa ni nini Azure Developer CLI na kusudi lake kuu
+- Jifunze dhana za msingi za templeti, mazingira, na huduma
+- Gundua vipengele muhimu vikiwemo maendeleo yanayotokana na templeti na Miundombinu kama Msimbo
+- Elewa muundo wa mradi wa azd na mtiririko wa kazi
 - Kuwa tayari kusakinisha na kusanidi azd kwa mazingira yako ya maendeleo
 
 ## Matokeo ya Kujifunza
 
-Baada ya kumaliza somo hili, utaweza:
-- Kuelezea jukumu la azd katika mtiririko wa kazi wa maendeleo ya wingu za kisasa
-- Kutambua vipengele vya muundo wa mradi wa azd
-- Kuelezea jinsi templates, environments, na services zinavyofanya kazi pamoja
-- Kuelewa faida za Miundombinu kama Msimbo kwa azd
-- Kutambua amri tofauti za azd na madhumuni yao
+Baada ya kukamilisha somo hili, utaweza:
+- Eleza jukumu la azd katika mtiririko wa kazi wa maendeleo ya wingu ya kisasa
+- Tambua vipengele vya muundo wa mradi wa azd
+- Eleza jinsi templeti, mazingira, na huduma zinavyofanya kazi pamoja
+- Elewa faida za Miundombinu kama Msimbo kwa kutumia azd
+- Tambua amri tofauti za azd na madhumuni yao
 
-## Azure Developer CLI (azd) ni Nini?
+## Azure Developer CLI (azd) ni nini?
 
-Azure Developer CLI (azd) ni zana ya mstari wa amri iliyoundwa kuharakisha safari yako kutoka katika maendeleo ya ndani hadi utoaji kwa Azure. Inarahisisha mchakato wa kujenga, kutoa, na kusimamia programu za cloud-native kwenye Azure.
+Azure Developer CLI (azd) ni chombo cha njia ya amri kilichoundwa kuharakisha safari yako kutoka maendeleo ya ndani hadi uwasilishaji kwenye Azure. Inarahisisha mchakato wa kujenga, kupeleka, na kusimamia programu za asili za wingu kwenye Azure.
 
-### 🎯 Kwa Nini Utumie AZD? Ulinganisho wa Uhalisia
+### Unaweza kupeleka nini kwa azd?
 
-Tufananishe utoaji wa tovuti rahisi yenye hifadhidata:
+azd inaunga mkono aina kubwa ya mizigo ya kazi—na orodha inaendelea kukua. Leo, unaweza kutumia azd kupeleka:
 
-#### ❌ BILA AZD: Utoaji wa Azure kwa Mkono (dakika 30+)
+| Aina ya Kazi | Mifano | Mtiririko sawa? |
+|---------------|----------|----------------|
+| **Programu za jadi** | Programu za wavuti, REST APIs, tovuti za statiki | ✅ `azd up` |
+| **Huduma na microservices** | Container Apps, Function Apps, backendi zenye huduma nyingi | ✅ `azd up` |
+| **Programu zilizoendeshwa na AI** | Programu za mazungumzo zenye Microsoft Foundry Models, suluhisho za RAG na AI Search | ✅ `azd up` |
+| **Wakala mahiri** | wakala wanaohifadhiwa Foundry, muundo wa wakala wengi | ✅ `azd up` |
+
+Uelewa muhimu ni kwamba **mzunguko wa maisha wa azd unabaki sawa bila kujali unachopeleka**. Unaanzisha mradi, unatayarisha miundombinu, kupeleka msimbo wako, kufuatilia programu yako, na kusafisha—iwe ni tovuti rahisi au wakala wa AI wa hali ya juu.
+
+Uendelevu huu ni kwa sababu ya muundo. azd inachukulia uwezo wa AI kama aina nyingine ya huduma programu yako inaweza kutumia, sio kitu kinachotofautiana kwa msingi. Mwisho wa mazungumzo unaotumia Microsoft Foundry Models ni, kwa mtazamo wa azd, huduma nyingine tu ya kusanidi na kupeleka.
+
+### 🎯 Kwa Nini Kutumia AZD? Ulinganisho wa Dunia Halisi
+
+Tufananishe kupeleka programu rahisi ya wavuti yenye hifadhidata:
+
+#### ❌ BILA AZD: Uwekaji kwa Azure kwa Mkono (dakika 30+)
 
 ```bash
-# Hatua 1: Unda kundi la rasilimali
+# Hatua 1: Unda kikundi cha rasilimali
 az group create --name myapp-rg --location eastus
 
 # Hatua 2: Unda Mpango wa Huduma ya App
@@ -50,7 +65,7 @@ az appservice plan create --name myapp-plan \
   --resource-group myapp-rg \
   --sku B1 --is-linux
 
-# Hatua 3: Unda App ya Wavuti
+# Hatua 3: Unda programu ya wavuti
 az webapp create --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --plan myapp-plan \
@@ -74,20 +89,20 @@ az cosmosdb mongodb collection create \
   --database-name tododb \
   --name todos
 
-# Hatua 7: Pata mnyororo wa muunganisho
+# Hatua 7: Pata mfuatano wa muunganisho
 CONN_STR=$(az cosmosdb keys list \
   --name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --type connection-strings \
   --query "connectionStrings[0].connectionString" -o tsv)
 
-# Hatua 8: Sanidi mipangilio ya app
+# Hatua 8: Sanidi mipangilio ya programu
 az webapp config appsettings set \
   --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --settings MONGODB_URI="$CONN_STR"
 
-# Hatua 9: Washa uandishi wa kumbukumbu
+# Hatua 9: Wezesha kurekodi kumbukumbu
 az webapp log config --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --application-logging filesystem \
@@ -99,7 +114,7 @@ az monitor app-insights component create \
   --location eastus \
   --resource-group myapp-rg
 
-# Hatua 11: Unganisha App Insights na App ya Wavuti
+# Hatua 11: Unganisha Application Insights na programu ya wavuti
 INSTRUMENTATION_KEY=$(az monitor app-insights component show \
   --app myapp-insights \
   --resource-group myapp-rg \
@@ -110,36 +125,36 @@ az webapp config appsettings set \
   --resource-group myapp-rg \
   --settings APPINSIGHTS_INSTRUMENTATIONKEY="$INSTRUMENTATION_KEY"
 
-# Hatua 12: Jenga programu kwa ndani kwenye mashine yako
+# Hatua 12: Jenga programu kwenye kompyuta yako (kwenye mazingira ya ndani)
 npm install
 npm run build
 
-# Hatua 13: Unda kifurushi cha utekelezaji
+# Hatua 13: Unda kifurushi cha utoaji
 zip -r app.zip . -x "*.git*" "node_modules/*"
 
-# Hatua 14: Sambaza programu
+# Hatua 14: Peleka programu
 az webapp deployment source config-zip \
   --resource-group myapp-rg \
   --name myapp-web-unique123 \
   --src app.zip
 
-# Hatua 15: Subiri na ombea kwamba itafanya kazi 🙏
-# (Hakuna uthibitishaji wa moja kwa moja, upimaji wa mkono unahitajika)
+# Hatua 15: Subiri na omba kwamba itafanya kazi 🙏
+# (Hakuna uhakiki wa kiotomatiki, inahitaji upimaji wa mkono)
 ```
 
 **Matatizo:**
-- ❌ amri 15+ za kukumbuka na kutekeleza kwa mpangilio
-- ❌ kazi ya mkono ya dakika 30-45
-- ❌ Rahisi kufanya makosa (makosa ya kuandika, vigezo visivyo sahihi)
-- ❌ Mifumo ya kuunganisha inaonekana katika historia ya terminal
-- ❌ Hakuna kugeuza kwa moja kwa moja ikiwa kitu kinashindikana
+- ❌ Amri 15+ za kukumbuka na kutekeleza kwa mpangilio
+- ❌ Dakika 30-45 za kazi ya mkono
+- ❌ Rahisi kufanya makosa (makosa ya kubonyeza, vigezo vibaya)
+- ❌ Mifumo ya muunganisho inaonekana katika historia ya terminal
+- ❌ Hakuna urejeshaji otomatiki ikiwa kitu kinashindwa
 - ❌ Ngumu kurudia kwa wanachama wa timu
-- ❌ Tofauti kila mara (haiwezi kutendeka tena kwa usahihi)
+- ❌ Inatofautiana kila wakati (haiwezi kurudiwa)
 
-#### ✅ KWA AZD: Utoaji wa Kisimamia (amri 5, dakika 10-15)
+#### ✅ KWA AZD: Uwekaji Otomatiki (amri 5, dakika 10-15)
 
 ```bash
-# Hatua 1: Anzisha kutoka kwenye kiolezo
+# Hatua 1: Anzisha kutoka kwa kiolezo
 azd init --template todo-nodejs-mongo
 
 # Hatua 2: Thibitisha
@@ -148,123 +163,123 @@ azd auth login
 # Hatua 3: Unda mazingira
 azd env new dev
 
-# Hatua 4: Tazama awali mabadiliko (hiari lakini inashauriwa)
+# Hatua 4: Angalia mabadiliko (hiari lakini inapendekezwa)
 azd provision --preview
 
 # Hatua 5: Sambaza kila kitu
 azd up
 
-# ✨ Imekamilika! Kila kitu kimesambazwa, kimepangiliwa, kimefuatiliwa.
+# ✨ Imekamilika! Kila kitu kimesambazwa, kimesanidiwa, na kinafuatiliwa.
 ```
 
-**Faida:**
-- ✅ **amri 5** dhidi ya hatua 15+ za mkono
-- ✅ **dakika 10-15** jumla (kile kikubwa ni kusubiri Azure)
-- ✅ **Hakuna makosa** - imefanywa otomatiki na imethibitishwa
-- ✅ **Siri zimedeshiwa kwa usalama** kupitia Key Vault
-- ✅ **Ukurudisho wa moja kwa moja** wakati wa kushindwa
-- ✅ **Inayotendeka kwa njia sawa** - matokeo yale yale kila wakati
-- ✅ **Tayari kwa timu** - yeyote anaweza kutoa kwa amri zile zile
-- ✅ **Miundombinu kama Msimbo** - templates za Bicep zikiwa chini ya udhibiti wa toleo
-- ✅ **Ufuatiliaji uliojengwa** - Application Insights imewekwa kiotomatiki
+**Manufaa:**
+- ✅ **Amri 5** dhidi ya hatua 15+ za mkono
+- ✅ **Dakika 10-15** kwa jumla (sehemu kubwa ukisubiri Azure)
+- ✅ **Hakuna makosa** - imepangwa otomatiki na imethibitishwa
+- ✅ **Siri zinadhibitiwa kwa usalama** via Key Vault
+- ✅ **Urejeshaji wa moja kwa moja** on failures
+- ✅ **Inayoweza kurudiwa kikamilifu** - matokeo sawa kila mara
+- ✅ **Tayari kwa timu** - mtu yeyote anaweza kupeleka kwa amri zile zile
+- ✅ **Miundombinu kama Msimbo** - templeti za Bicep zinazosimamiwa kwa toleo
+- ✅ **Ufuatiliaji uliojengewa ndani** - Application Insights imewekwa otomatiki
 
-### 📊 Kupunguza Muda & Makosa
+### 📊 Muda & Kupungua kwa Makosa
 
-| Metric | Manual Deployment | AZD Deployment | Improvement |
+| Kipimo | Uwekaji Mkono | Uwekaji kwa AZD | Kuboresha |
 |:-------|:------------------|:---------------|:------------|
-| **Commands** | 15+ | 5 | 67% fewer |
-| **Time** | 30-45 min | 10-15 min | 60% faster |
-| **Error Rate** | ~40% | <5% | 88% reduction |
-| **Consistency** | Low (manual) | 100% (automated) | Perfect |
-| **Team Onboarding** | 2-4 hours | 30 minutes | 75% faster |
-| **Rollback Time** | 30+ min (manual) | 2 min (automated) | 93% faster |
+| **Amri** | 15+ | 5 | Pungufu ya 67% |
+| **Muda** | 30-45 min | 10-15 min | Haraka kwa 60% |
+| **Kiwango cha Makosa** | ~40% | <5% | Kupungua kwa 88% |
+| **Ulinganifu** | Chini (mkono) | 100% (otomatiki) | Kamili |
+| **Kujiunga kwa Timu** | 2-4 hours | 30 minutes | Haraka kwa 75% |
+| **Muda wa Urejeshaji** | 30+ min (mkono) | 2 min (otomatiki) | Haraka kwa 93% |
 
-## Dhana za Msingi
+## Dhana Muhimu
 
-### Templates
-Templates ni msingi wa azd. Zina:
-- **Msimbo wa programu** - Chanzo chako cha msimbo na utegemezi
-- **Maelezo ya miundombinu** - Rasilimali za Azure zilibainishwa katika Bicep au Terraform
+### Templeti
+Templeti ni msingi wa azd. Zinajumuisha:
+- **Msimbo wa programu** - Msimbo wako wa chanzo na utegemezi
+- **Ufafanuzi wa miundombinu** - Rasilimali za Azure zilibainishwa katika Bicep au Terraform
 - **Faili za usanidi** - Mipangilio na vigezo vya mazingira
-- **Skripti za utoaji** - Mtiririko wa kazi wa utoaji uliosudiwa kiotomatiki
+- **Skripti za uwasilishaji** - Mtiririko wa kazi wa uwasilishaji otomatiki
 
-### Environments
-Environments zinawakilisha malengo tofauti ya utoaji:
-- **Development** - Kwa upimaji na maendeleo
-- **Staging** - Mazingira ya kabla ya uzalishaji
-- **Production** - Mazingira ya uzalishaji wa moja kwa moja
+### Mazingira
+Mazingira yanawakilisha malengo tofauti ya uwasilishaji:
+- **Maendeleo** - Kwa upimaji na maendeleo
+- **Staging** - Mazingira kabla ya uzalishaji
+- **Uzalishaji** - Mazingira ya uzalishaji hai
 
-Kila environment ina:
-- kikundi cha rasilimali cha Azure
-- mipangilio ya usanidi
-- hali ya utoaji
+Kila mazingira yanadumisha:
+- Kikundi cha rasilimali cha Azure
+- Mipangilio ya usanidi
+- Hali ya uwasilishaji
 
-### Services
-Services ni vitatu vinavyojenga programu yako:
-- **Frontend** - Programu za wavuti, SPA
-- **Backend** - API, microservices
-- **Database** - Suluhisho za uhifadhi wa data
-- **Storage** - Hifadhi za faili na blob
+### Huduma
+Huduma ni vipengele vinavyounda programu yako:
+- **Frontend** - Programu za wavuti, SPAs
+- **Backend** - APIs, microservices
+- **Hifadhidata** - Suluhisho za uhifadhi wa data
+- **Uhifadhi** - Uhifadhi wa faili na blob
 
 ## Vipengele Muhimu
 
-### 1. Maendeleo Yanayotegemea Template
+### 1. Maendeleo Yanayotokana na Templeti
 ```bash
-# Pitia violezo vinavyopatikana
+# Pitia vielezo vinavyopatikana
 azd template list
 
-# Anzisha kutoka kwa kiolezo
+# Anzisha kutoka kwenye kielezo
 azd init --template <template-name>
 ```
 
 ### 2. Miundombinu kama Msimbo
-- **Bicep** - Lugha maalum ya Azure
-- **Terraform** - Zana ya miundombinu kwa wingu nyingi
-- **ARM Templates** - templates za Azure Resource Manager
+- **Bicep** - lugha maalumu ya eneo la Azure
+- **Terraform** - Chombo cha miundombinu kwa wingu nyingi
+- **ARM Templates** - templeti za Azure Resource Manager
 
-### 3. Mitiririko Imeunganishwa
+### 3. Mtiririko wa kazi uliounganishwa
 ```bash
-# Mtiririko kamili wa usambazaji
-azd up            # Toa rasilimali + Tekeleza; hii ni isiyohitaji uingiliaji kwa usanidi wa mara ya kwanza
+# Mtiririko kamili wa utoaji
+azd up            # Provision + Deploy hii ni bila kuingilia kwa usanidi wa mara ya kwanza
 
-# 🧪 MPYA: Tazama mabadiliko ya miundombinu kabla ya uanzishaji (SALAMA)
-azd provision --preview    # Kuiga uanzishaji wa miundombinu bila kufanya mabadiliko
+# 🧪 MPYA: Tazama awali mabadiliko ya miundombinu kabla ya utoaji (SALAMA)
+azd provision --preview    # Kuiga utoaji wa miundombinu bila kufanya mabadiliko
 
-azd provision     # Unda rasilimali za Azure; ikiwa unasasisha miundombinu, tumia hii
-azd deploy        # Tekeleza msimbo wa programu au uweke upya msimbo wa programu mara baada ya sasisho
+azd provision     # Unda rasilimali za Azure ikiwa unasasisha miundombinu tumia hii
+azd deploy        # Sambaza msimbo wa programu au usambaze tena baada ya sasisho
 azd down          # Safisha rasilimali
 ```
 
-#### 🛡️ Upangaji Salama wa Miundombinu kwa kupitia Preview
-Amri `azd provision --preview` ni mabadiliko makubwa kwa utoaji salama:
-- **Uchambuzi wa kuendesha kavu** - Inaonyesha kile kitakachoundwa, kubadilishwa, au kufutwa
-- **Hatari sifuri** - Hakuna mabadiliko ya kweli yanayofanyika kwenye mazingira yako ya Azure
-- **Ushirikiano wa timu** - Sambaza matokeo ya preview kabla ya utoaji
+#### 🛡️ Mipango Salama ya Miundombinu kwa Kutazama Kabla
+Amri `azd provision --preview` ni mabadiliko makubwa kwa uwasilishaji salama:
+- **Uchambuzi wa kujaribu bila kutekeleza** - Inaonyesha yatakayoundwa, kubadilishwa, au kufutwa
+- **Hatari sifuri** - Hakuna mabadiliko halisi yafanywayo kwa mazingira yako ya Azure
+- **Ushirikiano wa timu** - Shiriki matokeo ya utangulizi kabla ya uwasilishaji
 - **Makadirio ya gharama** - Elewa gharama za rasilimali kabla ya kujitolea
 
 ```bash
-# Mfano wa mtiririko wa mapitio
+# Mfano wa mtiririko wa kazi wa mwonekano wa awali
 azd provision --preview           # Angalia kile kitakachobadilika
-# Pitia matokeo, jadili na timu
-azd provision                     # Tekeleza mabadiliko kwa kujiamini
+# Pitia matokeo, jadiliana na timu
+azd provision                     # Tekeleza mabadiliko kwa ujasiri
 ```
 
-### 📊 Mchoro: Mtiririko wa Maendeleo wa AZD
+### 📊 Mwonekano: Mtiririko wa Maendeleo wa AZD
 
 ```mermaid
 graph LR
-    A[azd anzisha] -->|Anzisha mradi| B[azd auth ingia]
-    B -->|Thibitisha| C[azd env mpya]
+    A[azd init] -->|Anzisha mradi| B[azd auth login]
+    B -->|Thibitisha| C[azd env new]
     C -->|Unda mazingira| D{Je, ni utoaji wa kwanza?}
-    D -->|Ndiyo| E[azd anza]
-    D -->|Hapana| F[azd provision --mapitio]
-    F -->|Kagua mabadiliko| G[azd weka]
-    E -->|Hutayarisha na kupeleka| H[Rasilimali zinaendesha]
+    D -->|Ndiyo| E[azd up]
+    D -->|Hapana| F[azd provision --preview]
+    F -->|Kagua mabadiliko| G[azd provision]
+    E -->|Inatoa rasilimali na inatekeleza| H[Rasilimali zinaendeshwa]
     G -->|Inasasisha miundombinu| H
-    H -->|Fuatilia| I[azd fuatilia]
-    I -->|Fanya mabadiliko ya msimbo| J[azd peleka]
-    J -->|Weka tena msimbo pekee| H
-    H -->|Safisha| K[azd zima]
+    H -->|Fuatilia| I[azd monitor]
+    I -->|Fanya mabadiliko ya msimbo| J[azd deploy]
+    J -->|Rudia kupeleka msimbo pekee| H
+    H -->|Safisha| K[azd down]
     
     style A fill:#e1f5fe
     style E fill:#c8e6c9
@@ -272,24 +287,44 @@ graph LR
     style H fill:#c5e1a5
     style K fill:#ffcdd2
 ```
-**Ufafanuzi wa Mtiririko wa Kazi:**
-1. **Init** - Anza na template au mradi mpya
-2. **Auth** - Jithibitisha na Azure
-3. **Environment** - Tengeneza mazingira ya utoaji yaliyotengwa
-4. **Preview** - 🆕 Daima angalia mabadiliko ya miundombinu kwanza (tabia salama)
+**Maelezo ya Mtiririko wa Kazi:**
+1. **Init** - Anza na templeti au mradi mpya
+2. **Auth** - Thibitisha na Azure
+3. **Environment** - Unda mazingira ya uwasilishaji yaliyotengwa
+4. **Preview** - 🆕 Daima tazama mabadiliko ya miundombinu kwanza (kanuni salama)
 5. **Provision** - Unda/sasisha rasilimali za Azure
-6. **Deploy** - Tuma msimbo wa programu yako
-7. **Monitor** - Angalia utendaji wa programu
-8. **Iterate** - Fanya mabadiliko na utoe tena msimbo
-9. **Cleanup** - Ondoa rasilimali wakati umemaliza
+6. **Deploy** - Sogeza msimbo wa programu yako
+7. **Monitor** - Chunguza utendaji wa programu
+8. **Iterate** - Fanya mabadiliko na uwekee tena msimbo
+9. **Cleanup** - Ondoa rasilimali wakati umeisha
 
 ### 4. Usimamizi wa Mazingira
 ```bash
-# Unda na kusimamia mazingira
+# Unda na usimamie mazingira
 azd env new <environment-name>
 azd env select <environment-name>
 azd env list
 ```
+
+### 5. Viendelezi (Extensions) na Amri za AI
+
+azd hutumia mfumo wa viendelezi kuongeza uwezo zaidi ya CLI msingi. Hii ni muhimu hasa kwa mizigo ya AI:
+
+```bash
+# Orodhesha viendelezi vinavyopatikana
+azd extension list
+
+# Sakinisha nyongeza ya mawakala wa Foundry
+azd extension install azure.ai.agents
+
+# Anzisha mradi wa wakala wa AI kutoka kwenye manifesti
+azd ai agent init -m agent-manifest.yaml
+
+# Anzisha seva ya MCP kwa ajili ya maendeleo yanosaidiwa na AI (Alpha)
+azd mcp start
+```
+
+> Viendelezi vimeelezewa kwa undani katika [Sura ya 2: Maendeleo ya AI-Kwanza](../chapter-02-ai-development/agents.md) na rejea ya [Amri za AZD AI za CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
 
 ## 📁 Muundo wa Mradi
 
@@ -316,7 +351,7 @@ my-app/
 ## 🔧 Faili za Usanidi
 
 ### azure.yaml
-Faili kuu ya usanidi wa mradi:
+Faili kuu ya usanidi ya mradi:
 ```yaml
 name: my-awesome-app
 metadata:
@@ -353,13 +388,13 @@ Usanidi maalum wa mazingira:
 }
 ```
 
-## 🎪 Mitiririko ya Kazi ya Kawaida na Mazoezi ya Vitendo
+## 🎪 Mtiririko wa Kawaida wa Kazi pamoja na Mazoezi ya Vitendo
 
-> **💡 Mwongozo wa Kujifunza:** Fuata mazoezi haya kwa mpangilio ili kujenga ujuzi wako wa AZD kwa taratibu.
+> **💡 Kidokezo cha Kujifunza:** Fuata mazoezi haya kwa mpangilio kujenga ujuzi wako wa AZD kwa taratibu.
 
-### 🎯 Zoefisho 1: Anzisha Mradi Wako wa Kwanza
+### 🎯 Mazoezi 1: Anzisha Mradi Wako wa Kwanza
 
-**Lengo:** Tengeneza mradi wa AZD na uchunguze muundo wake
+**Lengo:** Unda mradi wa AZD na chunguza muundo wake
 
 **Hatua:**
 ```bash
@@ -367,21 +402,21 @@ Usanidi maalum wa mazingira:
 azd init --template todo-nodejs-mongo
 
 # Chunguza faili zilizotengenezwa
-ls -la  # Tazama faili zote ikiwemo zilizofichwa
+ls -la  # Tazama faili zote ikiwa ni pamoja na zilizofichwa
 
-# Faili muhimu zilizotengenezwa:
+# Faili muhimu zilizoundwa:
 # - azure.yaml (usanidi mkuu)
 # - infra/ (msimbo wa miundombinu)
 # - src/ (msimbo wa programu)
 ```
 
-**✅ Mafanikio:** Una azure.yaml, infra/, na saraka za src/
+**✅ Mafanikio:** Una azure.yaml, infra/, na src/ directories
 
 ---
 
-### 🎯 Zoefisho 2: Toa kwa Azure
+### 🎯 Mazoezi 2: Peleka kwenye Azure
 
-**Lengo:** Kamilisha utoaji wa mwisho hadi mwisho
+**Lengo:** Kamilisha uwasilishaji wa mwisho hadi mwisho
 
 **Hatua:**
 ```bash
@@ -402,14 +437,14 @@ azd up
 azd show    # Tazama URL ya programu yako
 ```
 
-**Muda Unaotegemewa:** dakika 10-15  
-**✅ Mafanikio:** URL ya programu inafunguka kwa kivinjari
+**Wakati Unaotarajiwa:** 10-15 dakika  
+**✅ Mafanikio:** URL ya programu inafunguka kwenye kivinjari
 
 ---
 
-### 🎯 Zoefisho 3: Mazingira Mengi
+### 🎯 Mazoezi 3: Mazingira Mengi
 
-**Lengo:** Toa kwa dev na staging
+**Lengo:** Peleka kwa dev na staging
 
 **Hatua:**
 ```bash
@@ -427,28 +462,28 @@ azd env select dev
 
 ---
 
-### 🛡️ Usiangalie Chini: `azd down --force --purge`
+### 🛡️ Anza Mpya: `azd down --force --purge`
 
-Unapohitaji kuanza upya kabisa:
+Unapohitaji kuweka tena kabisa:
 
 ```bash
 azd down --force --purge
 ```
 
-**Inafanya Nini:**
-- `--force`: Hakuna vidokezo vya uthibitisho
-- `--purge`: Inafuta hali yote ya ndani na rasilimali za Azure
+**Inafanya nini:**
+- `--force`: Hakuna masharti ya uthibitisho
+- `--purge`: Hufuta hali yote ya ndani na rasilimali za Azure
 
 **Tumia wakati:**
-- Utoaji ulishindwa katikati
+- Uwasilishaji ulishindwa katikati
 - Kubadilisha miradi
-- Unahitaji mwanzo safi
+- Unahitaji kuanza upya
 
 ---
 
-## 🎪 Marejeleo ya Mtiririko wa Asili
+## 🎪 Marejeleo ya Mtiririko wa Kazi Asili
 
-### Kuanza Mradi Mpya
+### Kuanzisha Mradi Mpya
 ```bash
 # Njia 1: Tumia kiolezo kilichopo
 azd init --template todo-nodejs-mongo
@@ -473,66 +508,68 @@ azd up
 # Fanya mabadiliko na usambaze tena
 azd deploy
 
-# Safisha unapomaliza
-azd down --force --purge # amri katika Azure Developer CLI ni **upya kamili** kwa mazingira yako—hasa inafaa wakati unapotatua matatizo ya usambazaji yaliyoshindwa, unaposafisha rasilimali zilizotelekezwa, au kujiandaa kwa usambazaji upya
+# Safisha baada ya kumaliza
+azd down --force --purge # Amri katika Azure Developer CLI ni **urejesho kamili** kwa mazingira yako—hasa inafaa wakati unapotatua matatizo ya usambazaji yaliyoshindikana, unaposafisha rasilimali zilizobaki, au kujiandaa kwa usambazaji upya.
 ```
 
 ## Kuelewa `azd down --force --purge`
-Amri `azd down --force --purge` ni njia yenye nguvu ya kuvunja kabisa mazingira yako ya azd na rasilimali zote zinazohusiana. Hapa kuna ufafanuzi wa kila bendera inavyofanya:
+Amri `azd down --force --purge` ni njia yenye nguvu ya kuondoa kabisa mazingira yako ya azd na rasilimali zote zinazohusiana. Hapa kuna muhtasari wa kile kila bendera inafanya:
 ```
 --force
 ```
-- Huacha ombi la uthibitisho.
-- Inafaa kwa uendeshaji otomatiki au kutekeleza skripti ambapo ingia ya mwongozo siyo yawezekana.
-- Inahakikisha kuharibu kunaendelea bila kusitishwa, hata kama CLI inagundua kutolingana.
+- Inaruka maombi ya uthibitisho.
+- Inafaa kwa uotomatishaji au uandishi wa skripti ambapo ingizo la mkono haliwezekani.
+- Inahakikisha ufutaji unaendelea bila usumbufu, hata ikiwa CLI inagundua kutofanana.
 
 ```
 --purge
 ```
-Inafuta **metadata zote zinazohusiana**, ikijumuisha:
-Hali ya environment
+Hufuta **metadata zote zinazohusiana**, ikiwemo:
+Hali ya mazingira
 Folda ya ndani `.azure`
-Taarifa zilizohifadhiwa za utoaji
-Inazuia azd "kukumbuka" utoaji wa awali, ambao unaweza kusababisha matatizo kama vikundi vya rasilimali vilivyopangwa vibaya au marejeleo ya rejista yaliyosimama.
+Taarifa za uwasilishaji zilizohifadhiwa kwenye cache
+Inazuia azd kutoka ku "kukumbuka" uwasilishaji uliopita, ambao unaweza kusababisha matatizo kama vikundi vya rasilimali visivyolingana au marejeo ya rejista yaliyokauka.
 
-### Kwa Nini kutumia zote mbili?
-Unapokutana na kizuizi kwa `azd up` kutokana na hali iliyobaki au utoaji wa sehemu, mseto huu unahakikisha **mwanzo safi**.
 
-Inasaidia hasa baada ya ufutaji wa rasilimali kwa mkono katika Azure portal au wakati wa kubadilisha templates, environments, au kanuni za uandishi wa majina ya vikundi vya rasilimali.
+### Kwa nini utumie zote mbili?
+Unapokutana na kikwazo na `azd up` kutokana na hali iliyobaki au uwasilishaji wa sehemu, mchanganyiko huu unahakikisha **anza mpya**.
 
-### Kusimamia Mazingira Mengi
+Ni muhimu hasa baada ya kufuta rasilimali kwa mkono kwenye Azure portal au wakati wa kubadilisha templeti, mazingira, au kanuni za uandishi wa majina ya vikundi vya rasilimali.
+
+
+### Kusimamia Mazingira Nyingi
 ```bash
-# Unda mazingira ya kujaribu
+# Unda mazingira ya majaribio
 azd env new staging
 azd env select staging
 azd up
 
-# Rudi kwenye mazingira ya maendeleo
+# Rudi kwenye dev
 azd env select dev
 
 # Linganisha mazingira
 azd env list
 ```
 
-## 🔐 Uthibitishaji na Cheti
+## 🔐 Uthibitishaji na Cheti za Uthibitisho
 
-Kuelewa uthibitishaji ni muhimu kwa utoaji wa azd uliofanikiwa. Azure inatumia mbinu nyingi za uthibitishaji, na azd inatumia mnyororo ule ule wa cheti unaotumika na zana nyingine za Azure.
+Kuelewa uthibitishaji ni muhimu kwa uwasilishaji wa mafanikio wa azd. Azure inatumia mbinu kadhaa za uthibitishaji, na azd inatumia mnyororo ule ule wa sifa unaotumika na zana zingine za Azure.
 
 ### Uthibitishaji wa Azure CLI (`az login`)
 
-Kabla ya kutumia azd, unahitaji kuthibitisha na Azure. Njia ya kawaida ni kutumia Azure CLI:
+Kabla ya kutumia azd, unahitaji kuthibitisha na Azure. Njia inayotumika mara nyingi ni kutumia Azure CLI:
 
 ```bash
-# Ingia kwa muingiliano (huifungua kivinjari)
+# Ingia kwa mwingiliano (huifungua kivinjari)
 az login
 
 # Ingia kwa mpangaji maalum
 az login --tenant <tenant-id>
 
-# Ingia kwa mwakilishi wa huduma
+# Ingia kwa muwakilishi wa huduma
 az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
 
-# Angalia hali ya uingizaji sasa
+# Angalia hali ya sasa ya kuingia
 az account show
 
 # Orodhesha usajili unaopatikana
@@ -543,40 +580,40 @@ az account set --subscription <subscription-id>
 ```
 
 ### Mtiririko wa Uthibitishaji
-1. **Ingia kwa Interakti**: Inafungua kivinjari chako chaguo-msingi kwa uthibitishaji
-2. **Device Code Flow**: Kwa mazingira yasiyo na upatikanaji wa kivinjari
-3. **Service Principal**: Kwa ulimwengu wa uendeshaji otomatiki na CI/CD
-4. **Managed Identity**: Kwa programu zinazoendeshwa kwenye rasilimali za Azure
+1. **Interactive Login**: Inafungua kivinjari chako cha kawaida kwa uthibitishaji
+2. **Device Code Flow**: Kwa mazingira bila ufikiaji wa kivinjari
+3. **Service Principal**: Kwa uotomatishaji na matukio ya CI/CD
+4. **Managed Identity**: Kwa programu zinazosimamiwa kwenye Azure
 
 ### Mnyororo wa DefaultAzureCredential
 
-`DefaultAzureCredential` ni aina ya cheti inayotoa uzoefu rahisi wa uthibitishaji kwa kujaribu vyanzo vingi vya cheti kwa mpangilio maalum:
+`DefaultAzureCredential` ni aina ya sifa inayotoa uzoefu wa uthibitishaji uliorahisishwa kwa kujaribu chanzo mbalimbali cha sifa kwa mpangilio maalumu moja kwa moja:
 
 #### Mpangilio wa Mnyororo wa Cheti
 ```mermaid
 graph TD
-    A[Uidhinishaji wa Azure (Chaguo-msingi)] --> B[Vigezo vya Mazingira]
-    B --> C[Utambulisho wa Mizigo ya Kazi]
+    A[Cheti cha Azure chaguo-msingi] --> B[Vigezo vya Mazingira]
+    B --> C[Utambulisho wa Kazi]
     C --> D[Utambulisho uliosimamiwa]
-    D --> E[Studio ya Visual]
-    E --> F[Studio ya Visual Code]
+    D --> E[Visual Studio]
+    E --> F[Visual Studio Code]
     F --> G[CLI ya Azure]
     G --> H[PowerShell ya Azure]
-    H --> I[Kivinjari cha Kuingiliana]
+    H --> I[Kivinjari cha Mwingiliano]
 ```
 #### 1. Vigezo vya Mazingira
 ```bash
-# Weka vigezo vya mazingira kwa wakala wa huduma
+# Weka vigezo vya mazingira kwa ajili ya service principal
 export AZURE_CLIENT_ID="<app-id>"
 export AZURE_CLIENT_SECRET="<password>"
 export AZURE_TENANT_ID="<tenant-id>"
 ```
 
-#### 2. Workload Identity (Kubernetes/GitHub Actions)
-Inatumika moja kwa moja katika:
+#### 2. Utambulisho wa Workload (Kubernetes/GitHub Actions)
+Inatumiwa moja kwa moja katika:
 - Azure Kubernetes Service (AKS) na Workload Identity
 - GitHub Actions na OIDC federation
-- Matukio mengine ya utambulisho wa udhibiti
+- Matukio mengine ya utambulisho uliounganishwa
 
 #### 3. Managed Identity
 Kwa rasilimali za Azure kama:
@@ -586,35 +623,35 @@ Kwa rasilimali za Azure kama:
 - Container Instances
 
 ```bash
-# Angalia ikiwa inakimbia kwenye rasilimali ya Azure yenye utambulisho uliosimamiwa
+# Angalia kama inafanya kazi kwenye rasilimali ya Azure yenye kitambulisho kilichosimamiwa
 az account show --query "user.type" --output tsv
-# Inarudisha: "servicePrincipal" ikiwa inatumia utambulisho uliosimamiwa
+# Inarudisha: "servicePrincipal" ikiwa inatumia kitambulisho kilichosimamiwa
 ```
 
-#### 4. Uingiliano na Zana za Mwandishi
-- **Visual Studio**: Inatumia akaunti iliyosainiwa moja kwa moja
-- **VS Code**: Inatumia cheti za ugani wa Azure Account
-- **Azure CLI**: Inatumia cheti za `az login` (njia ya kawaida kwa maendeleo ya ndani)
+#### 4. Uunganishaji wa Zana za Waendelezaji
+- **Visual Studio**: Inatumia akaunti uliyoingia kiotomatiki
+- **VS Code**: Inatumia sifa za upanuzi wa Azure Account
+- **Azure CLI**: Inatumia sifa za `az login` (inayotumika zaidi kwa maendeleo ya ndani)
 
 ### Usanidi wa Uthibitishaji wa AZD
 
 ```bash
-# Njia ya 1: Tumia Azure CLI (Inapendekezwa kwa maendeleo)
+# Njia 1: Tumia Azure CLI (Inapendekezwa kwa maendeleo)
 az login
-azd auth login  # Inatumia vyeti vilivyopo vya Azure CLI
+azd auth login  # Inatumia vitambulisho vya Azure CLI vilivyopo
 
-# Njia ya 2: Uthibitishaji wa azd wa moja kwa moja
-azd auth login --use-device-code  # Kwa mazingira yasiyo na kiolesura cha mtumiaji
+# Njia 2: Uthibitishaji wa moja kwa moja wa azd
+azd auth login --use-device-code  # Kwa mazingira yasiyo na kiolesura
 
-# Njia ya 3: Angalia hali ya uthibitishaji
+# Njia 3: Angalia hali ya uthibitisho
 azd auth login --check-status
 
-# Njia ya 4: Toka na uthibitisha upya
+# Njia 4: Toka na kujithibitisha tena
 azd auth logout
 azd auth login
 ```
 
-### Mambo Bora ya Uthibitishaji
+### Mbinu Bora za Uthibitishaji
 
 #### Kwa Maendeleo ya Ndani
 ```bash
@@ -625,7 +662,7 @@ az login
 az account show
 az account set --subscription "Your Subscription Name"
 
-# 3. Tumia azd na vitambulisho vilivyopo
+# 3. Tumia azd kwa kutumia sifa zilizopo
 azd auth login
 ```
 
@@ -646,14 +683,14 @@ azd auth login
 ```
 
 #### Kwa Mazingira ya Uzalishaji
-- Tumia **Managed Identity** unapokimbia kwenye rasilimali za Azure
-- Tumia **Service Principal** kwa matukio ya uendeshaji otomatiki
-- Epuka kuhifadhi cheti kwenye msimbo au faili za usanidi
+- Tumia **Managed Identity** wakati unakimbia kwenye rasilimali za Azure
+- Tumia **Service Principal** kwa matukio ya uotomatishaji
+- Epuka kuhifadhi nyaraka za uthibitisho ndani ya msimbo au faili za usanidi
 - Tumia **Azure Key Vault** kwa usanidi nyeti
 
-### Masuala ya Kawaida ya Uthibitishaji na Suluhu
+### Masuala ya Kawaida ya Uthibitishaji na Suluhisho
 
-#### Tatizo: "No subscription found"
+#### Tatizo: "Hakuna usajili uliopatikana"
 ```bash
 # Suluhisho: Weka usajili wa chaguo-msingi
 az account list --output table
@@ -661,17 +698,17 @@ az account set --subscription "<subscription-id>"
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 ```
 
-#### Tatizo: "Insufficient permissions"
+#### Tatizo: "Ruhusa hazitoshi"
 ```bash
 # Suluhisho: Angalia na uteue majukumu yanayohitajika
 az role assignment list --assignee $(az account show --query user.name --output tsv)
 
 # Majukumu yanayohitajika kwa kawaida:
 # - Mchangiaji (kwa usimamizi wa rasilimali)
-# - Msimamizi wa Ufikiaji wa Watumiaji (kwa uteuzi wa majukumu)
+# - Msimamizi wa Upatikanaji wa Watumiaji (kwa uteuzi wa majukumu)
 ```
 
-#### Tatizo: "Token expired"
+#### Tatizo: "Token imeisha"
 ```bash
 # Suluhisho: Thibitisha tena
 az logout
@@ -680,7 +717,7 @@ azd auth logout
 azd auth login
 ```
 
-### Uthibitishaji katika Matukio Mbalimbali
+### Uthibitishaji katika Hali Tofauti
 
 #### Maendeleo ya Ndani
 ```bash
@@ -691,12 +728,12 @@ azd auth login
 
 #### Maendeleo ya Timu
 ```bash
-# Tumia tenanti maalum kwa shirika
+# Tumia mpangaji maalum kwa shirika
 az login --tenant contoso.onmicrosoft.com
 azd auth login
 ```
 
-#### Matukio ya Multi-tenant
+#### Hali za Multi-tenant
 ```bash
 # Badilisha kati ya wapangaji
 az login --tenant tenant1.onmicrosoft.com
@@ -709,22 +746,21 @@ azd up
 ```
 
 ### Mambo ya Usalama
+1. **Uhifadhi wa Vyeti**: Usihifadhi vyeti katika msimbo wa chanzo
+2. **Kikomo cha Eneo**: Tumia kanuni ya ruhusa ndogo kwa wakuu wa huduma
+3. **Mzunguko wa Tokeni**: Badilisha katika kipindi siri za wakuu wa huduma mara kwa mara
+4. **Rekodi za Ukaguzi**: Simamia shughuli za uthibitishaji na utekelezaji
+5. **Usalama wa Mtandao**: Tumia miisho ya kibinafsi inapowezekana
 
-1. **Uhifadhi wa Cheti**: Usihifadhi cheti katika msimbo wa chanzo
-2. **Kuzuia Nafasi**: Tumia kanuni ya udhaifu wa ardhi kwa service principals
-3. **Mzunguko wa Tokeni**: Badilisha siri za service principal mara kwa mara
-4. **Mwendo wa Ukaguzi**:,Fuatilia shughuli za uthibitishaji na utoaji
-5. **Usalama wa Mtandao**: Tumia endpoints binafsi pale inapowezekana
-
-### Utatuzi wa Matatizo ya Uthibitishaji
+### Utatuzi wa Uthibitishaji
 
 ```bash
-# Chunguza matatizo ya uthibitishaji
+# Tatua matatizo ya uthibitishaji
 azd auth login --check-status
 az account show
 az account get-access-token
 
-# Amri za uchunguzi za kawaida
+# Amri za kawaida za uchunguzi
 whoami                          # Muktadha wa mtumiaji wa sasa
 az ad signed-in-user show      # Maelezo ya mtumiaji wa Azure AD
 az group list                  # Jaribu upatikanaji wa rasilimali
@@ -734,9 +770,9 @@ az group list                  # Jaribu upatikanaji wa rasilimali
 
 ### Ugunduzi
 ```bash
-azd template list              # Vinjari kiolezo
-azd template show <template>   # Maelezo ya kiolezo
-azd init --help               # Chaguzi za uanzishaji
+azd template list              # Browse templates
+azd template show <template>   # Template details
+azd init --help               # Initialization options
 ```
 
 ### Usimamizi wa Mradi
@@ -748,15 +784,15 @@ azd config list             # Mipangilio ya usanidi
 
 ### Ufuatiliaji
 ```bash
-azd monitor                  # Fungua ufuatiliaji wa portal ya Azure
+azd monitor                  # Fungua ufuatiliaji wa Portal ya Azure
 azd monitor --logs           # Tazama kumbukumbu za programu
 azd monitor --live           # Tazama vipimo vya moja kwa moja
 azd pipeline config          # Sanidi CI/CD
 ```
 
-## Mibinu Bora
+## Mbinu Bora
 
-### 1. Tumia Majina Yenye Maana
+### 1. Tumia Majina Yanayomaanisha
 ```bash
 # Nzuri
 azd env new production-east
@@ -767,79 +803,79 @@ azd env new env1
 azd init --template template1
 ```
 
-### 2. Tumia Templates
-- Anza na templates zilizopo
-- Boresha kwa mahitaji yako
-- Tengeneza templates zinazorudiwa kwa shirika lako
+### 2. Tumia Violezo
+- Anza na violezo vilivyopo
+- Binafsisha kwa mahitaji yako
+- Unda violezo vinavyoweza kutumika tena kwa shirika lako
 
-### 3. Kutengwa kwa Mazingira
+### 3. Kutenganisha Mazingira
 - Tumia mazingira tofauti kwa dev/staging/prod
-- Usitoe moja kwa moja kwa uzalishaji kutoka kwa mashine ya ndani
-- Tumia pipelines za CI/CD kwa utoaji wa uzalishaji
+- Usitekeleze moja kwa moja kwenye uzalishaji kutoka kwa mashine ya eneo
+- Tumia mitiririko ya CI/CD kwa utekelezaji wa uzalishaji
 
 ### 4. Usimamizi wa Usanidi
 - Tumia vigezo vya mazingira kwa data nyeti
-- Weka usanidi katika udhibiti wa toleo
-- Andika mipangilio maalum kwa mazingira
+- Hifadhi usanidi kwenye udhibiti wa toleo
+- Andika nyaraka za mipangilio maalum ya mazingira
 
-## Maendeleo ya Kujifunza
+## Mfuatano wa Kujifunza
 
 ### Mwanzo (Wiki 1-2)
-1. Sakinisha azd na jithibitishe
-2. Toa template rahisi
+1. Sakinisha azd na fanya uthibitishaji
+2. Tekeleza kiolezo rahisi
 3. Elewa muundo wa mradi
 4. Jifunze amri za msingi (up, down, deploy)
 
 ### Wastani (Wiki 3-4)
-1. Boresha templates
+1. Binafsisha violezo
 2. Simamia mazingira mengi
 3. Elewa msimbo wa miundombinu
-4. Weka pipelines za CI/CD
+4. Sanidi mitiririko ya CI/CD
 
-### Wa juu (Wiki 5+)
-1. Tengeneza templates za kawaida
-2. Mfumo wa juu wa miundombinu
-3. Utoaji wa mikoa mingi
-4. Usanidi wa kiwango cha biashara
+### Mtaalamu (Wiki 5+)
+1. Unda violezo maalum
+2. Mifumo ya juu ya miundombinu
+3. Utekelezaji katika mikoa mingi
+4. Usanidi wa kiwango cha shirika
 
-## Hatua Zifuatazo
+## Hatua Zinazofuata
 
-**📖 Endelea Kujifunza Sura 1:**
-- [Usakinishaji na Usanidi](installation.md) - Pata azd imewekwa na kusanidiwa
-- [Mradi Wako wa Kwanza](first-project.md) - Mafunzo ya vitendo kamili
-- [Mwongozo wa Usanidi](configuration.md) - Chaguzi za usanidi za kiwango cha juu
+**📖 Endelea kujifunza Sura ya 1:**
+- [Usakinishaji na Usanidi](installation.md) - Sakinisha azd na uusanidi
+- [Mradi Wako wa Kwanza](first-project.md) - Kamilisha mafunzo ya vitendo
+- [Mwongozo wa Usanidi](configuration.md) - Chaguzi za juu za usanidi
 
-**🎯 Tayari kwa Sura Ifuatayo?**
-- [Sura 2: Uundaji wa AI Kwanza](../chapter-02-ai-development/microsoft-foundry-integration.md) - Anza kujenga programu za AI
+**🎯 Uko Tayari kwa Sura Ifuatayo?**
+- [Sura 2: Maendeleo yanayolenga AI](../chapter-02-ai-development/microsoft-foundry-integration.md) - Anza kujenga programu za AI
 
-## Rasilimali za Ziada
+## Rasilimali Zaidi
 
-- [Azure Developer CLI Overview](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Template Gallery](https://azure.github.io/awesome-azd/)
-- [Community Samples](https://github.com/Azure-Samples)
+- [Muhtasari wa Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Ghala la Violezo](https://azure.github.io/awesome-azd/)
+- [Mifano za Jamii](https://github.com/Azure-Samples)
 
 ---
 
 ## 🙋 Maswali Yanayoulizwa Mara kwa Mara
 
-### Maswali ya Jumla
+### Maswali ya Kawaida
 
 **Q: Nini tofauti kati ya AZD na Azure CLI?**
 
-A: Azure CLI (`az`) ni kwa kusimamia rasilimali za Azure mmoja mmoja. AZD (`azd`) ni kwa kusimamia programu nzima:
+A: Azure CLI (`az`) ni kwa kusimamia rasilimali za Azure moja moja. AZD (`azd`) ni kwa kusimamia programu nzima:
 
 ```bash
-# Azure CLI - Usimamizi wa rasilimali za ngazi ya chini
+# Azure CLI - usimamizi wa rasilimali kwa ngazi ya chini
 az webapp create --name myapp --resource-group rg
 az sql server create --name myserver --resource-group rg
-# ... amri nyingi zaidi zinahitajika
+# ...amri nyingi zaidi zinahitajika
 
-# AZD - Usimamizi wa kiwango cha programu
+# AZD - usimamizi kwa ngazi ya programu
 azd up  # Inaweka programu nzima pamoja na rasilimali zote
 ```
 
 **Fikiria kwa njia hii:**
-- `az` = Kufanya kazi na vipande vya Lego mmoja mmoja
+- `az` = Kufanya kazi na vipande vya Lego moja moja
 - `azd` = Kufanya kazi na seti kamili za Lego
 
 ---
@@ -848,42 +884,42 @@ azd up  # Inaweka programu nzima pamoja na rasilimali zote
 
 A: Hapana! Anza na violezo:
 ```bash
-# Tumia kiolezo kilichopo - hakuna haja ya ujuzi wa IaC
+# Tumia kiolezo kilichopo - hakuna ujuzi wa IaC unaohitajika.
 azd init --template todo-nodejs-mongo
 azd up
 ```
 
-Unaweza kujifunza Bicep baadaye ili kubadilisha miundombinu. Violezo vinatoa mifano zinazofanya kazi ili kujifunzia.
+Unaweza kujifunza Bicep baadaye ili kubinafsisha miundombinu. Violezo vinatoa mifano inayofanya kazi ya kujifunzia.
 
 ---
 
-**Q: Gharama ni kiasi gani kuendesha templeti za AZD?**
+**Q: Inagharimu kiasi gani kuendesha violezo vya AZD?**
 
-A: Gharama zinatofautiana kulingana na templeti. Templeti nyingi za maendeleo gharama $50-150/mwezi:
+A: Gharama zinatofautiana kulingana na kiolezo. Violezo vingi vya maendeleo vinagharimu $50-150/mwezi:
 
 ```bash
 # Angalia gharama kabla ya kupeleka
 azd provision --preview
 
-# Daima safisha wakati hauzitumia
+# Daima safisha rasilimali wakati hauzitumi
 azd down --force --purge  # Inaondoa rasilimali zote
 ```
 
-**Ushauri wa kitaalamu:** Tumia ngazi za bure inapowezekana:
-- App Service: ngazi ya F1 (Bure)
-- Azure OpenAI: 50,000 tokens/mwezi bure
-- Cosmos DB: ngazi ya bure ya 1000 RU/s
+**Ushauri wa mtaalamu:** Tumia ngazi za bure pale zinapopatikana:
+- App Service: F1 (Free) tier
+- Microsoft Foundry Models: Azure OpenAI 50,000 tokens/month free
+- Cosmos DB: 1000 RU/s free tier
 
 ---
 
-**Q: Je, naweza kutumia AZD na rasilimali za Azure zilizopo?**
+**Q: Je, ninaweza kutumia AZD na rasilimali za Azure zilizopo?**
 
-A: Ndiyo, lakini ni rahisi kuanza upya. AZD inafanya kazi vizuri zaidi inapodhibiti mchakato mzima wa maisha. Kwa rasilimali zilizopo:
+A: Ndiyo, lakini ni rahisi kuanza upya. AZD inafanya kazi vizuri zaidi inapodhibiti mzunguko mzima wa maisha. Kwa rasilimali zilizopo:
 
 ```bash
 # Chaguo 1: Ingiza rasilimali zilizopo (kwa wataalamu)
 azd init
-# Kisha badilisha infra/ ili kurejelea rasilimali zilizopo
+# Kisha badilisha infra/ ili kurejea rasilimali zilizopo
 
 # Chaguo 2: Anza upya (inayopendekezwa)
 azd init --template matching-your-stack
@@ -892,13 +928,13 @@ azd up  # Inaunda mazingira mapya
 
 ---
 
-**Q: Jinsi gani ninaweza kushiriki mradi wangu na wenzangu?**
+**Q: Ninawezaje kushiriki mradi wangu na wenzangu?**
 
-A: Fanya commit ya mradi wa AZD kwenye Git (lakini SI kabrasha `.azure`):
+A: Tuma mradi wa AZD kwa Git (lakini SI folda ya .azure):
 
 ```bash
-# Tayari iko kwenye .gitignore kwa chaguo-msingi
-.azure/        # Inajumuisha siri na data za mazingira
+# Tayari iko katika .gitignore kwa chaguo-msingi
+.azure/        # Ina siri na data za mazingira
 *.env          # Vigezo vya mazingira
 
 # Wanachama wa timu kisha:
@@ -908,7 +944,7 @@ azd env new <their-name>-dev
 azd up
 ```
 
-Kila mtu anapata miundombinu ileile kutoka kwa violezo sawa.
+Kila mtu anapata miundombinu ile ile kutoka kwenye violezo vimo sawa.
 
 ---
 
@@ -916,28 +952,28 @@ Kila mtu anapata miundombinu ileile kutoka kwa violezo sawa.
 
 **Q: "azd up" ilishindwa katikati. Nifanye nini?**
 
-A: Angalia kosa, lifanyie marekebisho, kisha jaribu tena:
+A: Angalia kosa, likarabati, kisha jaribu tena:
 
 ```bash
-# Angalia kumbukumbu za kina
+# Tazama kumbukumbu za kina
 azd show
 
 # Marekebisho ya kawaida:
 
-# 1. Ikiwa kikomo cha rasilimali kimezidi:
-azd env set AZURE_LOCATION "westus2"  # Jaribu mkoa tofauti
+# 1. Ikiwa ukomo umevuka:
+azd env set AZURE_LOCATION "westus2"  # Jaribu eneo tofauti
 
-# 2. Ikiwa kuna mgongano wa majina ya rasilimali:
-azd down --force --purge  # Anzisha upya
+# 2. Ikiwa kuna mgongano wa jina la rasilimali:
+azd down --force --purge  # Anza upya
 azd up  # Jaribu tena
 
-# 3. Ikiwa uthibitisho limeisha:
+# 3. Ikiwa uthibitisho umeisha:
 az login
 azd auth login
 azd up
 ```
 
-**Tatizo la kawaida zaidi:** Usajili wa Azure ulioteuliwa si sahihi
+**Tatizo la kawaida:** Usajili wa Azure ulioteuliwa si sahihi
 ```bash
 az account list --output table
 az account set --subscription "<correct-subscription>"
@@ -945,25 +981,25 @@ az account set --subscription "<correct-subscription>"
 
 ---
 
-**Q: Jinsi gani ninaweza kupeleka mabadiliko ya msimbo tu bila kuanzisha upya miundombinu?**
+**Q: Ninawezaje kutekeleza tu mabadiliko ya msimbo bila kuanzisha tena rasilimali?**
 
 A: Tumia `azd deploy` badala ya `azd up`:
 
 ```bash
-azd up          # Mara ya kwanza: kutayarisha + kupeleka (polepole)
+azd up          # Mara ya kwanza: kuandaa + kupeleka (polepole)
 
 # Fanya mabadiliko ya msimbo...
 
 azd deploy      # Mara zinazofuata: kupeleka tu (haraka)
 ```
 
-Mlinganisho wa kasi:
-- `azd up`: 10-15 minutes (huandaa miundombinu)
-- `azd deploy`: 2-5 minutes (msimbo tu)
+Kulinganisha kasi:
+- `azd up`: 10-15 minutes (provisions infrastructure)
+- `azd deploy`: 2-5 minutes (code only)
 
 ---
 
-**Q: Je, naweza kubinafsisha templeti za miundombinu?**
+**Q: Je, ninaweza kubinafsisha violezo vya miundombinu?**
 
 A: Ndiyo! Hariri faili za Bicep katika `infra/`:
 
@@ -972,7 +1008,7 @@ A: Ndiyo! Hariri faili za Bicep katika `infra/`:
 cd infra/
 code main.bicep  # Hariri katika VS Code
 
-# Angalia awali mabadiliko
+# Tazama mabadiliko
 azd provision --preview
 
 # Tekeleza mabadiliko
@@ -989,32 +1025,32 @@ sku: {
 
 ---
 
-**Q: Jinsi gani ninafuta kila kitu AZD kilichotengeneza?**
+**Q: Ninawezaje kufuta kila kitu ambacho AZD ilitengeneza?**
 
-A: Amri moja inafuta rasilimali zote:
+A: Amri moja hufuta rasilimali zote:
 
 ```bash
 azd down --force --purge
 
-# Hii inaondoa:
+# Hii inafuta:
 # - Rasilimali zote za Azure
 # - Kikundi cha rasilimali
 # - Hali ya mazingira ya ndani
-# - Taarifa za utekelezaji zilizohifadhiwa kwenye cache
+# - Takwimu za utekelezaji zilizohifadhiwa kwenye cache
 ```
 
-**Kimbia hili kila wakati:**
-- Umeisha kumaliza kujaribu templeti
-- Unapobadilisha kwenda mradi tofauti
-- Unapotaka kuanza upya
+**Endelea ukirunisha hili wakati:**
+- Umeisha kumaliza kujaribu kiolezo
+- Unabadilisha kwenda mradi tofauti
+- Unataka kuanza upya
 
-**Akiba ya gharama:** Kufuta rasilimali zisizotumika = malipo $0
+**Akiba ya gharama:** Kufuta rasilimali zisizotumika = $0 malipo
 
 ---
 
-**Q: Nifanye nini ikiwa nisitaki niliuone rasilimali katika Azure Portal?**
+**Q: Je, nini kama nilifuta kwa bahati mbaya rasilimali kwenye Azure Portal?**
 
-A: Hali ya AZD inaweza kupotoka. Njia ya kuanza upya kabisa:
+A: Hali ya AZD inaweza kutokuwa sawa. Njia ya kuanza upya:
 
 ```bash
 # 1. Ondoa hali ya ndani
@@ -1023,7 +1059,7 @@ azd down --force --purge
 # 2. Anza upya
 azd up
 
-# Chaguo mbadala: Ruhusu AZD kugundua na kurekebisha
+# Mbadala: Ruhusu AZD igundue na itengeneze
 azd provision  # Itaunda rasilimali zilizokosekana
 ```
 
@@ -1031,7 +1067,7 @@ azd provision  # Itaunda rasilimali zilizokosekana
 
 ### Maswali ya Juu
 
-**Q: Je, naweza kutumia AZD katika mabomba ya CI/CD?**
+**Q: Je, ninaweza kutumia AZD katika mitiririko ya CI/CD?**
 
 A: Ndiyo! Mfano wa GitHub Actions:
 
@@ -1065,60 +1101,60 @@ jobs:
 
 ---
 
-**Q: Jinsi gani nashughulikia siri na data nyeti?**
+**Q: Ninawezaje kushughulikia siri na data nyeti?**
 
-A: AZD inaunganishwa na Azure Key Vault moja kwa moja:
+A: AZD inaunganisha na Azure Key Vault moja kwa moja:
 
 ```bash
-# Siri zinahifadhiwa katika Key Vault, sio katika msimbo
+# Siri zinahifadhiwa kwenye Key Vault, si kwenye msimbo
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
 
-# AZD kwa kiotomatiki:
+# AZD kwa otomatiki:
 # 1. Inaunda Key Vault
 # 2. Inahifadhi siri
-# 3. Inamruhusu programu kupata ufikaji kwa kutumia Managed Identity
+# 3. Inampa programu ufikiaji kupitia Managed Identity
 # 4. Inaingiza wakati wa utekelezaji
 ```
 
-**Usisajili kamwe:**
-- `.azure/` folder (inajumuisha data za mazingira)
-- `.env` files (siri za ndani)
+**Usiweze kamwe kuingiza:**
+- `.azure/` folder (contains environment data)
+- `.env` files (local secrets)
 - Connection strings
 
 ---
 
-**Q: Je, naweza kupeleka kwenye maeneo mengi?**
+**Q: Je, ninaweza kutuma kwenye mikoa mingi?**
 
 A: Ndiyo, tengeneza mazingira kwa kila eneo:
 
 ```bash
-# mazingira ya Mashariki ya Marekani
+# Mazingira ya Mashariki ya Marekani
 azd env new prod-eastus
 azd env set AZURE_LOCATION eastus
 azd up
 
-# mazingira ya Magharibi ya Ulaya
+# Mazingira ya Magharibi ya Ulaya
 azd env new prod-westeurope
 azd env set AZURE_LOCATION westeurope
 azd up
 
-# Kila mazingira ni ya kujitegemea
+# Kila mazingira ni huru
 azd env list
 ```
 
-Kwa programu za kweli zenye maeneo mengi, badilisha templeti za Bicep ili kupeleka kwenye maeneo mengi kwa wakati mmoja.
+Kwa programu za kweli za mikoa mingi, binafsisha violezo vya Bicep ili kutekeleza kwenye mikoa mingi kwa wakati mmoja.
 
 ---
 
 **Q: Ninaweza kupata msaada wapi ikiwa nimekwama?**
 
-1. **AZD Documentation:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
-2. **GitHub Issues:** https://github.com/Azure/azure-dev/issues
-3. **Discord:** [Discord ya Azure](https://discord.gg/microsoft-azure) - #azure-developer-cli chaneli
-4. **Stack Overflow:** Tag `azure-developer-cli`
-5. **Kozi Hii:** [Mwongozo wa Utatuzi wa Matatizo](../chapter-07-troubleshooting/common-issues.md)
+1. **Nyaraka za AZD:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
+2. **Masuala ya GitHub:** https://github.com/Azure/azure-dev/issues
+3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - chaneli #azure-developer-cli
+4. **Stack Overflow:** Tagi `azure-developer-cli`
+5. **Kozi Hii:** [Mwongozo wa Utatuzi](../chapter-07-troubleshooting/common-issues.md)
 
-**Ushauri wa kitaalamu:** Kabla ya kuuliza, endesha:
+**Ushauri wa mtaalamu:** Kabla ya kuuliza, endesha:
 ```bash
 azd show       # Inaonyesha hali ya sasa
 azd version    # Inaonyesha toleo lako
@@ -1127,37 +1163,37 @@ Jumuisha taarifa hizi katika swali lako kwa msaada wa haraka.
 
 ---
 
-## 🎓 Nini Ifuatayo?
+## 🎓 Nini Kifuatacho?
 
 Sasa unaelewa misingi ya AZD. Chagua njia yako:
 
 ### 🎯 Kwa Waanzilishi:
 1. **Ifuatayo:** [Usakinishaji na Usanidi](installation.md) - Sakinisha AZD kwenye mashine yako
-2. **Kisha:** [Mradi Wako wa Kwanza](first-project.md) - Zindua programu yako ya kwanza
-3. **Mazoezi:** Kamilisha mazoezi 3 yote katika somo hili
+2. **Kisha:** [Mradi Wako wa Kwanza](first-project.md) - Tekeleza programu yako ya kwanza
+3. **Mazoezi:** Kamilisha mazoezi yote 3 katika somo hili
 
 ### 🚀 Kwa Waendelezaji wa AI:
-1. **Ruka hadi:** [Sura 2: Uundaji wa AI Kwanza](../chapter-02-ai-development/microsoft-foundry-integration.md)
-2. **Deploy:** Anza na `azd init --template get-started-with-ai-chat`
-3. **Jifunze:** Jenga wakati unavyopeleka
+1. **Ruka hadi:** [Sura 2: Maendeleo yanayolenga AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+2. **Tekeleza:** Anza na `azd init --template get-started-with-ai-chat`
+3. **Jifunze:** Jenga wakati unavyotekeleza
 
 ### 🏗️ Kwa Waendelezaji Wenye Uzoefu:
-1. **Kagua:** [Mwongozo wa Usanidi](configuration.md) - Mipangilio ya kiwango cha juu
-2. **Chunguza:** [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md) - Uchunguzi wa kina wa Bicep
-3. **Jenga:** Tengeneza templeti maalum kwa stack yako
+1. **Kagua:** [Mwongozo wa Usanidi](configuration.md) - Mipangilio ya juu
+2. **Gundua:** [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md) - Uchanganuzi wa Bicep
+3. **Jenga:** Unda violezo maalum kwa stack yako
 
 ---
 
-**Uelekezaji wa Sura:**
-- **📚 Mwanzo wa Kozi**: [AZD Kwa Waanzilishi](../../README.md)
-- **📖 Sura ya Sasa**: Sura 1 - Msingi na Anza Haraka  
-- **⬅️ Iliyopita**: [Muhtasari wa Kozi](../../README.md#-chapter-1-foundation--quick-start)
+**Uvinjari wa Sura:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Waanzilishi](../../README.md)
+- **📖 Sura ya Sasa**: Sura 1 - Msingi & Anza Haraka  
+- **⬅️ Iliyotangulia**: [Muhtasari wa Kozi](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Ifuatayo**: [Usakinishaji na Usanidi](installation.md)
-- **🚀 Sura Ifuatayo**: [Sura 2: Uundaji wa AI Kwanza](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 Sura Ifuatayo**: [Sura 2: Maendeleo yanayolenga AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Taarifa ya kutokuwajibika:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya utafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au zisizo sahihi. Nyaraka ya awali katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tunashauri kutumia utafsiri wa kitaalamu unaofanywa na binadamu. Hatutawajibika kwa uelewano au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
+**Taarifa ya kutokuwajibika**:
+Nyaraka hii imefasiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuwa sahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au ukosefu wa usahihi. Nyaraka ya awali katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, tunapendekeza tafsiri ya kitaalamu iliyofanywa na mtaalamu wa binadamu. Hatujawajibika kwa kutokuelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

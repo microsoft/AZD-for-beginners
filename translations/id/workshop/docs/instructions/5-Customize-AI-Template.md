@@ -1,30 +1,30 @@
-# 5. Customize a Template
+# 5. Sesuaikan Template
 
 !!! tip "PADA AKHIR MODUL INI ANDA AKAN DAPAT"
 
-    - [ ] Menjelajahi kemampuan agen AI bawaan
-    - [ ] Menambahkan AI Search dengan indeks Anda sendiri
-    - [ ] Mengaktifkan dan menganalisis metrik Tracing
-    - [ ] Menjalankan evaluasi
+    - [ ] Menjelajahi kemampuan Agen AI bawaan
+    - [ ] Menambahkan Pencarian AI dengan indeks Anda sendiri
+    - [ ] Mengaktifkan dan menganalisis metrik Pelacakan
+    - [ ] Menjalankan sesi evaluasi
     - [ ] Menjalankan pemindaian red-teaming
-    - [ ] **Lab 5: Membuat Rencana Kustomisasi** 
+    - [ ] **Lab 5: Membangun Rencana Kustomisasi** 
 
 ---
 
-## 5.1 AI Agent Capabilities
+## 5.1 Kemampuan Agen AI
 
 !!! success "Kami menyelesaikannya di Lab 01"
 
-- **Pencarian File**: Pencarian file bawaan OpenAI untuk pengambilan pengetahuan
+- **Pencarian Berkas**: Pencarian berkas bawaan OpenAI untuk pengambilan pengetahuan
 - **Sitasi**: Atribusi sumber otomatis dalam respons
-- **Instruksi yang Dapat Disesuaikan**: Mengubah perilaku dan kepribadian agen
+- **Instruksi yang Dapat Disesuaikan**: Memodifikasi perilaku dan kepribadian agen
 - **Integrasi Alat**: Sistem alat yang dapat diperluas untuk kemampuan kustom
 
 ---
 
 ## 5.2 Opsi Pengambilan Pengetahuan
 
-!!! task "Untuk menyelesaikan ini kita perlu melakukan perubahan dan mendeploy ulang"    
+!!! task "Untuk menyelesaikan ini kita perlu melakukan perubahan dan menerapkan ulang"    
     
     ```bash title=""
     # Set environment variables
@@ -42,13 +42,13 @@
 
 **OpenAI File Search (Default):**
 
-- Bawaan di Foundry Agents
-- Pemrosesan dokumen dan pengindeksan otomatis
+- Terintegrasi ke Foundry Agents
+- Pemrosesan dan pengindeksan dokumen otomatis
 - Tidak diperlukan konfigurasi tambahan
 
 **Azure AI Search (Opsional):**
 
-- Pencarian semantik dan vektor hibrida
+- Pencarian semantik dan vektor hibrid
 - Manajemen indeks kustom
 - Kemampuan pencarian lanjutan
 - Memerlukan `USE_AZURE_AI_SEARCH_SERVICE=true`
@@ -57,7 +57,7 @@
 
 ## 5.3 [Pelacakan & Pemantauan](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "Untuk menyelesaikan ini kita perlu melakukan perubahan dan mendeploy ulang"    
+!!! task "Untuk menyelesaikan ini kita perlu melakukan perubahan dan menerapkan ulang"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
@@ -75,7 +75,7 @@
 
 - Log aplikasi di Container Apps
 - Pencatatan terstruktur dengan ID korelasi
-- Melihat log waktu nyata dan historis
+- Penayangan log waktu-nyata dan historis
 
 ---
 
@@ -89,13 +89,13 @@
 
 **Pemantauan Berkelanjutan:**
 
-- Evaluasi otomatis dari interaksi langsung
+- Evaluasi otomatis terhadap interaksi langsung
 - Pelacakan metrik kualitas
 - Deteksi regresi kinerja
 
 **Integrasi CI/CD:**
 
-- Alur kerja GitHub Actions
+- Workflow GitHub Actions
 - Pengujian dan evaluasi otomatis
 - Pengujian perbandingan statistik
 
@@ -117,23 +117,23 @@
 
 
 
-!!! quote "PADA AKHIR LAB INI ANDA HARUS MEMILIKI"
-    - [ ] Menentukan persyaratan skenario Anda
-    - [ ] Menyesuaikan variabel env (konfigurasi)
+!!! quote "PADA AKHIR LAB INI ANDA SEHARUSNYA MEMILIKI"
+    - [ ] Menentukan kebutuhan skenario Anda
+    - [ ] Menyesuaikan variabel lingkungan (konfigurasi)
     - [ ] Menyesuaikan instruksi agen (tugas)
     - [ ] Menerapkan template yang disesuaikan (aplikasi)
-    - [ ] Menyelesaikan tugas pasca-deployment (manual)
-    - [ ] Menjalankan evaluasi uji
+    - [ ] Menyelesaikan tugas pasca-penyebaran (manual)
+    - [ ] Menjalankan evaluasi pengujian
 
 This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
 
 ---
 
-## 5.6 Customize It For You!
+## 5.6 Sesuaikan Untuk Anda!
 
-### 5.6.1. Scenario Requirements
+### 5.6.1. Persyaratan Skenario
 
-#### **Penempatan Agen:** 
+#### **Penyebaran Agen:** 
 
    - Shopper Agent: Membantu pelanggan menemukan dan membandingkan produk
    - Loyalty Agent: Mengelola hadiah dan promosi pelanggan
@@ -148,18 +148,18 @@ This example demonstrates customizing the template for an enterprise retail use 
 #### **Fitur:**
 
    - Pelacakan dan pemantauan diaktifkan
-   - AI Search untuk katalog produk
-   - Kerangka evaluasi untuk jaminan kualitas
+   - Pencarian AI untuk katalog produk
+   - Kerangka evaluasi untuk penjaminan kualitas
    - Red teaming untuk validasi keamanan
 
 ---
 
-### 5.6.2 Scenario Implementation
+### 5.6.2 Implementasi Skenario
 
 
-#### 5.6.2.1. Pre-Deployment Config
+#### 5.6.2.1. Konfigurasi Pra-Penyebaran
 
-Create a setup script (`setup-retail.sh`)
+Buat skrip setup (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -175,8 +175,8 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Konfigurasikan model chat utama (gpt-4o sebagai yang paling mendekati gpt-4.1 yang tersedia)
-azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
+# Konfigurasikan model chat utama (gpt-4.1 sebagai model yang paling mendekati gpt-4.1 yang tersedia)
+azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
@@ -198,9 +198,9 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2: Agent Instructions
+#### 5.6.2.2: Instruksi Agen
 
-Create `custom-agents/shopper-agent-instructions.md`:
+Buat `custom-agents/shopper-agent-instructions.md`:
 
 ```markdown
 # Shopper Agent Instructions
@@ -223,7 +223,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-Create `custom-agents/loyalty-agent-instructions.md`:
+Buat `custom-agents/loyalty-agent-instructions.md`:
 
 ```markdown
 # Loyalty Agent Instructions
@@ -248,9 +248,9 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: Deployment Script
+#### 5.6.2.3: Skrip Penyebaran
 
-Create `deploy-retail.sh`:
+Buat `deploy-retail.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -280,7 +280,7 @@ echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
 echo "⚠️  Please verify you have 300,000+ TPM quota for:"
-echo "   - gpt-4o: 150,000 TPM"
+echo "   - gpt-4.1: 150,000 TPM"
 echo "   - text-embedding-3-large: 75,000 TPM"
 echo "   - Additional models: 75,000+ TPM"
 
@@ -295,7 +295,7 @@ fi
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Ambil keluaran penerapan
+# Ambil keluaran penyebaran
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
@@ -321,9 +321,9 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Post-Deployment Config
+#### 5.6.2.4: Konfigurasi Pasca-Penyebaran
 
-Create `configure-retail-agents.sh`:
+Buat `configure-retail-agents.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -378,16 +378,16 @@ echo "
 "
 ```
 
-### 5.6.3: Testing and Validation
+### 5.6.3: Pengujian dan Validasi
 
-Create `test-retail-deployment.sh`:
+Buat `test-retail-deployment.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🧪 Testing retail deployment..."
 
-# Verifikasi bahwa variabel lingkungan telah disetel
+# Verifikasi variabel lingkungan telah disetel
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
@@ -433,7 +433,7 @@ Next steps:
 
 Setelah mengikuti panduan implementasi ini, Anda akan memiliki:
 
-1. **Infrastruktur yang Disebarkan:**
+1. **Infrastruktur yang Diterapkan:**
 
       - Proyek Microsoft Foundry dengan penyebaran model
       - Container Apps yang menjadi host aplikasi web
@@ -443,10 +443,10 @@ Setelah mengikuti panduan implementasi ini, Anda akan memiliki:
 2. **Agen Awal:**
 
       - Shopper Agent dikonfigurasi dengan instruksi dasar
-      - Kemampuan pencarian file diaktifkan
+      - Kemampuan pencarian berkas diaktifkan
       - Pelacakan dan pemantauan dikonfigurasi
 
-3. **Siap Untuk Kustomisasi:**
+3. **Siap untuk Kustomisasi:**
 
       - Kerangka kerja untuk menambahkan Loyalty Agent
       - Template instruksi kustom
@@ -465,6 +465,6 @@ This example demonstrates how the AZD template can be extended and customized fo
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Penafian:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI Co-op Translator (https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat kritis, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
+**Disclaimer**:
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya mencapai akurasi, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber otoritatif. Untuk informasi penting, disarankan menggunakan jasa penerjemah profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang salah yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

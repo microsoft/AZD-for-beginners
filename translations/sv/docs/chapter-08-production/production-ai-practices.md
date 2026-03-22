@@ -1,49 +1,42 @@
 # Bästa praxis för produktions-AI-arbetsbelastningar med AZD
 
 **Kapitelnavigering:**
-- **📚 Kursöversikt**: [AZD för nybörjare](../../README.md)
-- **📖 Aktuellt kapitel**: Kapitel 8 - Produktion och företagsmönster
+- **📚 Kursens startsida**: [AZD för nybörjare](../../README.md)
+- **📖 Aktuellt kapitel**: Kapitel 8 - Produktions- och företagsmönster
 - **⬅️ Föregående kapitel**: [Kapitel 7: Felsökning](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Även relaterat**: [AI Workshop-labb](ai-workshop-lab.md)
+- **⬅️ Relaterat**: [AI Workshop-labb](ai-workshop-lab.md)
 - **🎯 Kurs slutförd**: [AZD för nybörjare](../../README.md)
 
 ## Översikt
 
-Denna guide innehåller omfattande bästa praxis för att distribuera produktionsklara AI-arbetsbelastningar med Azure Developer CLI (AZD). Baserat på feedback från Microsoft Foundry Discord-gemenskapen och verkliga kunddistribueringar tar dessa praxis upp de vanligaste utmaningarna i produktions-AI-system.
+Denna guide ger omfattande bästa praxis för att distribuera produktionsklara AI-arbetsbelastningar med Azure Developer CLI (AZD). Baserat på feedback från Microsoft Foundry Discord-gemenskapen och verkliga kundimplementationer tar dessa praxis upp de vanligaste utmaningarna i produktions-AI-system.
 
 ## Viktiga utmaningar som tas upp
 
-Baserat på resultat från vår community-undersökning är detta de största utmaningarna utvecklare står inför:
+Baserat på resultat från vår community-omröstning är detta de främsta utmaningarna utvecklare står inför:
 
-- **45%** har svårt med AI-distributioner med flera tjänster
-- **38%** har problem med autentiseringsuppgifter och hantering av hemligheter  
-- **35%** tycker att produktionsberedskap och skalning är svårt
+- **45%** har problem med AI-distributioner med flera tjänster
+- **38%** har problem med hantering av autentiseringsuppgifter och hemligheter  
+- **35%** tycker att produktionsberedskap och skalning är svåra
 - **32%** behöver bättre strategier för kostnadsoptimering
 - **29%** behöver förbättrad övervakning och felsökning
 
 ## Arkitekturmönster för produktions-AI
 
-### Mönster 1: Mikrotjänstarkitektur för AI
+### Mönster 1: Mikrotjänst-AI-arkitektur
 
-**När man ska använda**: Komplexa AI-applikationer med flera funktioner
+**När man ska använda det**: Komplexa AI-applikationer med flera funktioner
 
+```mermaid
+graph TD
+    Frontend[Webbfrontend] --- Gateway[API-gateway] --- LB[Lastbalanserare]
+    Gateway --> Chat[Chattjänst]
+    Gateway --> Image[Bildtjänst]
+    Gateway --> Text[Texttjänst]
+    Chat --> OpenAI[Microsoft Foundry-modeller]
+    Image --> Vision[Datorseende]
+    Text --> DocIntel[Dokumentintelligens]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Web Frontend  │────│   API Gateway   │────│  Load Balancer  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │
-                ┌───────────────┼───────────────┐
-                │               │               │
-        ┌───────▼──────┐ ┌──────▼──────┐ ┌─────▼──────┐
-        │ Chat Service │ │Image Service│ │Text Service│
-        └──────────────┘ └─────────────┘ └────────────┘
-                │               │               │
-        ┌───────▼──────┐ ┌──────▼──────┐ ┌─────▼──────┐
-        │Azure OpenAI  │ │Computer     │ │Document    │
-        │              │ │Vision       │ │Intelligence│
-        └──────────────┘ └─────────────┘ └────────────┘
-```
-
 **AZD-implementering**:
 
 ```yaml
@@ -69,7 +62,7 @@ services:
 
 ### Mönster 2: Händelsestyrd AI-bearbetning
 
-**När man ska använda**: Batchbearbetning, dokumentanalys, asynkrona arbetsflöden
+**När man ska använda det**: Batchbearbetning, dokumentanalys, asynkrona arbetsflöden
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -116,15 +109,46 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Bästa praxis för säkerhet
+## Att tänka på AI-agentens hälsa
 
-### 1. Zero-Trust-säkerhetsmodell
+När en traditionell webbapp går sönder är symtomen bekanta: en sida laddas inte, ett API returnerar ett fel eller en distribution misslyckas. AI-drivna applikationer kan gå sönder på samma sätt — men de kan också bete sig felaktigt på mer subtila sätt som inte ger uppenbara felmeddelanden.
+
+Detta avsnitt hjälper dig att bygga en mental modell för övervakning av AI-arbetsbelastningar så att du vet var du ska leta när något verkar fel.
+
+### Hur agenthälsa skiljer sig från traditionell apphälsa
+
+En traditionell app fungerar antingen eller inte. En AI-agent kan verka fungera men ge dåliga resultat. Tänk på agenthälsa i två lager:
+
+| Lager | Vad att bevaka | Var du ska titta |
+|-------|--------------|---------------|
+| **Infrastrukturhälsa** | Körs tjänsten? Är resurserna provisionerade? Är slutpunkterna nåbara? | `azd monitor`, resurshälsa i Azure-portalen, container-/apploggar |
+| **Beteendehälsa** | Svarar agenten korrekt? Är svaren snabba? Anropas modellen korrekt? | Application Insights-spår, metrik för modellanropslatens, loggar för svarskvalitet |
+
+Infrastrukturhälsa är bekant—det är samma för vilken azd-app som helst. Beteendehälsa är det nya lager som AI-arbetsbelastningar introducerar.
+
+### Var du ska titta när AI-appar inte beter sig som förväntat
+
+Om din AI-applikation inte producerar de resultat du förväntar dig finns här en konceptuell kontrollista:
+
+1. **Börja med grunderna.** Kör appen? Kan den nå sina beroenden? Kontrollera `azd monitor` och resurshälsan precis som du skulle göra för vilken app som helst.
+2. **Kontrollera modellanslutningen.** Anropar din applikation AI-modellen framgångsrikt? Misslyckade eller tidsavbrutna modelanrop är den vanligaste orsaken till problem i AI-appar och syns i dina applikationsloggar.
+3. **Titta på vad modellen fick.** AI-svar beror på indata (prompten och eventuellt hämtat kontext). Om utsignalen är felaktig är oftast indatan fel. Kontrollera om din applikation skickar rätt data till modellen.
+4. **Granska svarslatenser.** Modellanrop till AI är långsammare än typiska API-anrop. Om din app känns seg, kontrollera om modellens responstider har ökat—detta kan indikera begränsning (throttling), kapacitetsgränser eller regionnivå-trängsel.
+5. **Håll koll på kostnadssignaler.** Oväntade toppar i tokenanvändning eller API-anrop kan indikera en loop, en felkonfigurerad prompt eller överdrivna återförsök.
+
+Du behöver inte bemästra observabilitetsverktyg direkt. Huvudpoängen är att AI-applikationer har ett extra beteendelager att övervaka, och azd:s inbyggda övervakning (`azd monitor`) ger dig en startpunkt för att undersöka båda lagren.
+
+---
+
+## Säkerhets bästa praxis
+
+### 1. Zero-trust-säkerhetsmodell
 
 **Implementeringsstrategi**:
 - Ingen tjänst-till-tjänst-kommunikation utan autentisering
 - Alla API-anrop använder hanterade identiteter
 - Nätverksisolering med privata slutpunkter
-- Minsta privilegier i åtkomstkontroller
+- Åtkomstkontroller med minsta privilegium
 
 ```bicep
 // Managed Identity for each service
@@ -244,7 +268,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ### 1. Autoskalningsstrategier
 
-**Container Apps autoskalning**:
+**Autoskalning för Container Apps**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -288,7 +312,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. Caching-strategier
+### 2. Cachestrategier
 
 **Redis-cache för AI-svar**:
 
@@ -358,9 +382,9 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ## 💰 Kostnadsoptimering
 
-### 1. Rätt storlek på resurser
+### 1. Rätt dimensionering av resurser
 
-**Miljöspecifika konfigurationer**:
+**Konfigurationer specifika för miljö**:
 
 ```bash
 # Utvecklingsmiljö
@@ -421,7 +445,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. Optimera tokenanvändning
+### 3. Optimering av tokenanvändning
 
 **OpenAI-kostnadshantering**:
 
@@ -444,13 +468,13 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Grovt uppskattat: 1 token ≈ 4 tecken
+    // Ungefärlig uppskattning: 1 token ≈ 4 tecken
     return Math.ceil(text.length / 4);
   }
 }
 ```
 
-## Övervakning och observerbarhet
+## Övervakning och observabilitet
 
 ### 1. Omfattande Application Insights
 
@@ -499,7 +523,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ### 2. AI-specifik övervakning
 
-**Anpassade instrumentpaneler för AI-metriker**:
+**Anpassade dashboards för AI-metriker**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -528,7 +552,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Hälsokontroller och drifttidsövervakning
+### 3. Hälsokontroller och upptidövervakning
 
 ```bicep
 // Application Insights availability tests
@@ -599,7 +623,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 
 ## Katastrofåterställning och hög tillgänglighet
 
-### 1. Distribution över flera regioner
+### 1. Distribution i flera regioner
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -712,7 +736,7 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 }
 ```
 
-## DevOps och CI/CD-integration
+## DevOps och CI/CD-integrering
 
 ### 1. GitHub Actions-arbetsflöde
 
@@ -795,15 +819,15 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. Validering av infrastruktur
+### 2. Infrastruktursvalidering
 
 ```bash
-# scripts/validate_infrastructure.sh
+# skript/validera_infrastruktur.sh
 #!/bin/bash
 
 echo "Validating AI infrastructure deployment..."
 
-# Kontrollera att alla nödvändiga tjänster körs
+# Kontrollera att alla nödvändiga tjänster är igång
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -835,47 +859,47 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Hemligheter lagras i Key Vault
 - [ ] Privata slutpunkter konfigurerade
 - [ ] Nätverkssäkerhetsgrupper implementerade
-- [ ] RBAC med minsta privilegier
-- [ ] WAF aktiverat på offentliga slutpunkter
+- [ ] RBAC med minsta privilegium
+- [ ] WAF aktiverat på publika slutpunkter
 
 ### Prestanda ✅
 - [ ] Autoskalning konfigurerad
-- [ ] Caching implementerad
-- [ ] Lastbalansering uppsatt
+- [ ] Caching implementerat
+- [ ] Lastbalansering konfigurerad
 - [ ] CDN för statiskt innehåll
 - [ ] Databasanslutningspoolning
 - [ ] Optimering av tokenanvändning
 
 ### Övervakning ✅
 - [ ] Application Insights konfigurerat
-- [ ] Anpassade mätvärden definierade
-- [ ] Larmregler uppsatta
+- [ ] Anpassade metrikvärden definierade
+- [ ] Larmregler konfigurerade
 - [ ] Instrumentpanel skapad
 - [ ] Hälsokontroller implementerade
-- [ ] Policyer för loggbehållning
+- [ ] Regler för loggbevarande
 
 ### Tillförlitlighet ✅
-- [ ] Distribution över flera regioner
-- [ ] Plan för backup och återställning
-- [ ] Kretsbrytare implementerade
-- [ ] Återförsöksprinciper konfigurerade
-- [ ] Graceful degradation
-- [ ] Hälsokontrollendpoints
+- [ ] Distribution i flera regioner
+- [ ] Plan för säkerhetskopiering och återställning
+- [ ] Circuit breakers implementerade
+- [ ] Policys för återförsök konfigurerade
+- [ ] Kontrollerad degradering
+- [ ] Endpunkter för hälsokontroller
 
-### Kosthantering ✅
+### Kostnadshantering ✅
 - [ ] Budgetlarm konfigurerade
-- [ ] Rätt storlek på resurser
-- [ ] Rabatter för utveckling/test applicerade
-- [ ] Reservinstanser köpta
+- [ ] Rätt dimensionering av resurser
+- [ ] Rabatt för dev/test tillämpad
+- [ ] Förbokade instanser köpta
 - [ ] Kostnadsövervakningsinstrumentpanel
-- [ ] Regelbundna kostgranskningar
+- [ ] Regelbundna kostnadsgranskningar
 
 ### Efterlevnad ✅
-- [ ] Krav på dataresidens uppfyllda
+- [ ] Krav på datalokalisation uppfyllda
 - [ ] Revisionsloggning aktiverad
-- [ ] Efterlevnadspolicyer tillämpade
+- [ ] Efterlevnadspolicys tillämpade
 - [ ] Säkerhetsbaslinjer implementerade
-- [ ] Regelbundna säkerhetsgranskningar
+- [ ] Regelbundna säkerhetsbedömningar
 - [ ] Plan för incidenthantering
 
 ## Prestandamått
@@ -885,16 +909,16 @@ echo "Infrastructure validation completed successfully!"
 | Mått | Mål | Övervakning |
 |--------|--------|------------|
 | **Svarstid** | < 2 sekunder | Application Insights |
-| **Tillgänglighet** | 99.9% | Övervakning av drifttid |
-| **Felfrekvens** | < 0.1% | Applikationsloggar |
+| **Tillgänglighet** | 99.9% | Upptidövervakning |
+| **Felkvot** | < 0.1% | Applikationsloggar |
 | **Tokenanvändning** | < $500/månad | Kostnadshantering |
 | **Samtidiga användare** | 1000+ | Belastningstestning |
-| **Återhämtningstid** | < 1 timme | Katastrofåterställningstester |
+| **Återhämtningstid** | < 1 timme | Tester för katastrofåterställning |
 
 ### Belastningstestning
 
 ```bash
-# Skript för belastningstestning av AI-applikationer
+# Skript för belastningstest av AI-applikationer
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -908,41 +932,227 @@ Baserat på feedback från Microsoft Foundry Discord-gemenskapen:
 
 ### Topprekommendationer från gemenskapen:
 
-1. **Börja smått, skala gradvis**: Börja med grundläggande SKU:er och skala upp baserat på faktisk användning
+1. **Börja litet, skala gradvis**: Börja med grundläggande SKU:er och skala upp baserat på verklig användning
 2. **Övervaka allt**: Ställ in omfattande övervakning från dag ett
-3. **Automatisera säkerhet**: Använd infrastruktur som kod för konsekvent säkerhet
+3. **Automatisera säkerheten**: Använd infrastruktur som kod för konsekvent säkerhet
 4. **Testa noggrant**: Inkludera AI-specifika tester i din pipeline
 5. **Planera för kostnader**: Övervaka tokenanvändning och ställ in budgetlarm tidigt
 
 ### Vanliga fallgropar att undvika:
 
 - ❌ Att hårdkoda API-nycklar i koden
-- ❌ Inte konfigurera korrekt övervakning
+- ❌ Att inte sätta upp korrekt övervakning
 - ❌ Att ignorera kostnadsoptimering
-- ❌ Att inte testa fel-scenarier
+- ❌ Att inte testa felscenarier
 - ❌ Att distribuera utan hälsokontroller
 
-## Ytterligare resurser
+## AZD AI CLI-kommandon och tillägg
 
+AZD inkluderar ett växande antal AI-specifika kommandon och tillägg som effektiviserar produktions-AI-arbetsflöden. Dessa verktyg överbryggar gapet mellan lokal utveckling och produktionsdistribution för AI-arbetsbelastningar.
+
+### AZD-tillägg för AI
+
+AZD använder ett tilläggssystem för att lägga till AI-specifika funktioner. Installera och hantera tillägg med:
+
+```bash
+# Lista alla tillgängliga tillägg (inklusive AI)
+azd extension list
+
+# Installera Foundry agents-tillägget
+azd extension install azure.ai.agents
+
+# Installera finjusteringstillägget
+azd extension install azure.ai.finetune
+
+# Installera tillägget för anpassade modeller
+azd extension install azure.ai.models
+
+# Uppgradera alla installerade tillägg
+azd extension upgrade --all
+```
+
+**Tillgängliga AI-tillägg:**
+
+| Tillägg | Syfte | Status |
+|-----------|---------|--------|
+| `azure.ai.agents` | Hantering av Foundry Agent Service | Förhandsgranskning |
+| `azure.ai.finetune` | Finjustering av Foundry-modeller | Förhandsgranskning |
+| `azure.ai.models` | Foundry-anpassade modeller | Förhandsgranskning |
+| `azure.coding-agent` | Konfiguration av kodningsagent | Tillgänglig |
+
+### Initiera agentprojekt med `azd ai agent init`
+
+Kommandot `azd ai agent init` skapar ett färdigt produktionsklart AI-agentprojekt integrerat med Microsoft Foundry Agent Service:
+
+```bash
+# Initiera ett nytt agentprojekt från ett agentmanifest
+azd ai agent init -m <manifest-path-or-uri>
+
+# Initiera och rikta in mot ett specifikt Foundry-projekt
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Initiera med en anpassad källkatalog
+azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+
+# Ange Container Apps som värd
+azd ai agent init -m agent-manifest.yaml --host containerapp
+```
+
+**Viktiga flaggor:**
+
+| Flagga | Beskrivning |
+|------|-------------|
+| `-m, --manifest` | Sökväg eller URI till en agentmanifest att lägga till i ditt projekt |
+| `-p, --project-id` | Befintligt Microsoft Foundry-projekt-ID för din azd-miljö |
+| `-s, --src` | Katalog att ladda ner agentdefinitionen till (standard: `src/<agent-id>`) |
+| `--host` | Åsidosätt standardvärdet för host (t.ex. `containerapp`) |
+| `-e, --environment` | Den azd-miljö som ska användas |
+
+**Produktionstips**: Använd `--project-id` för att ansluta direkt till ett befintligt Foundry-projekt, så att din agentkod och dina molnresurser är länkade från början.
+
+### Model Context Protocol (MCP) med `azd mcp`
+
+AZD inkluderar inbyggt stöd för MCP-servern (Alpha), vilket gör det möjligt för AI-agenter och verktyg att interagera med dina Azure-resurser via ett standardiserat protokoll:
+
+```bash
+# Starta MCP-servern för ditt projekt
+azd mcp start
+
+# Hantera samtycke för verktyg vid MCP-operationer
+azd mcp consent
+```
+
+MCP-servern exponerar ditt azd-projektkontext—miljöer, tjänster och Azure-resurser—till AI-drivna utvecklingsverktyg. Detta möjliggör:
+
+- **AI-assisterad distribution**: Låt kodningsagenter fråga ditt projekttillstånd och trigga distributioner
+- **Resursupptäckt**: AI-verktyg kan upptäcka vilka Azure-resurser ditt projekt använder
+- **Miljöhantering**: Agenter kan växla mellan dev/staging/production-miljöer
+
+### Generering av infrastruktur med `azd infra generate`
+
+För produktions-AI-arbetsbelastningar kan du generera och anpassa Infrastruktur som Kod istället för att förlita dig på automatisk provisioning:
+
+```bash
+# Generera Bicep/Terraform-filer från din projektdefinition
+azd infra generate
+```
+
+Detta skriver IaC till disk så att du kan:
+- Granska och revidera infrastrukturen innan distribution
+- Lägg till anpassade säkerhetspolicys (nätverksregler, privata slutpunkter)
+- Integrera med befintliga granskprocesser för IaC
+- Versionshantera infrastrukturändringar separat från applikationskoden
+
+### Produktionslivscykelhooks
+
+AZD-hooks låter dig injicera anpassad logik i varje steg av distributionslivscykeln—kritiskt för produktions-AI-arbetsflöden:
+
+```yaml
+# azure.yaml - Production hooks example
+name: ai-production-app
+hooks:
+  preprovision:
+    shell: sh
+    run: scripts/validate-quotas.sh    # Check AI model quota before provisioning
+  postprovision:
+    shell: sh
+    run: scripts/configure-networking.sh  # Set up private endpoints
+  predeploy:
+    shell: sh
+    run: scripts/run-ai-safety-tests.sh  # Run prompt safety checks
+  postdeploy:
+    shell: sh
+    run: scripts/smoke-test.sh           # Verify agent responses post-deploy
+services:
+  agent-api:
+    project: ./src/agent
+    host: containerapp
+    hooks:
+      predeploy:
+        shell: sh
+        run: scripts/validate-model-access.sh  # Per-service hook
+```
+
+```bash
+# Kör en specifik hook manuellt under utveckling
+azd hooks run predeploy
+```
+
+**Rekommenderade produktionshooks för AI-arbetsbelastningar:**
+
+| Hook | Användningsfall |
+|------|----------|
+| `preprovision` | Validera prenumerationskvoter för AI-modellkapacitet |
+| `postprovision` | Konfigurera privata slutpunkter, distribuera modellvikter |
+| `predeploy` | Kör AI-säkerhetstester, validera promptmallar |
+| `postdeploy` | Röktesta agentens svar, verifiera modellanslutning |
+
+### CI/CD-pipelinekonfiguration
+
+Använd `azd pipeline config` för att ansluta ditt projekt till GitHub Actions eller Azure Pipelines med säker Azure-autentisering:
+
+```bash
+# Konfigurera CI/CD-pipeline (interaktiv)
+azd pipeline config
+
+# Konfigurera med en specifik leverantör
+azd pipeline config --provider github
+```
+
+Detta kommando:
+- Skapar en serviceprincipal med minst privilegier
+- Konfigurerar federerade uppgifter (inga lagrade hemligheter)
+- Genererar eller uppdaterar din pipeline-definitionsfil
+- Ställer in nödvändiga miljövariabler i ditt CI/CD-system
+
+**Produktionsarbetsflöde med pipelinekonfiguration:**
+
+```bash
+# 1. Ställ in produktionsmiljön
+azd env new production
+azd env set AZURE_OPENAI_CAPACITY 100
+
+# 2. Konfigurera pipelinen
+azd pipeline config --provider github
+
+# 3. Pipelinen kör azd deploy vid varje push till main
+```
+
+### Lägga till komponenter med `azd add`
+
+Lägg gradvis till Azure-tjänster i ett befintligt projekt:
+
+```bash
+# Lägg till en ny tjänstkomponent interaktivt
+azd add
+```
+
+Detta är särskilt användbart för att utöka produktions-AI-applikationer—till exempel att lägga till en vektorsöktjänst, en ny agentendpoint eller en övervakningskomponent till en befintlig distribution.
+
+## Ytterligare resurser
 - **Azure Well-Architected Framework**: [Vägledning för AI-arbetsbelastningar](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Microsoft Foundry Documentation**: [Officiell dokumentation](https://learn.microsoft.com/azure/ai-studio/)
-- **Gemenskapsmallar**: [Azure-exempel](https://github.com/Azure-Samples)
-- **Discord Community**: [#Azure-kanalen](https://discord.gg/microsoft-azure)
+- **Microsoft Foundry-dokumentation**: [Officiell dokumentation](https://learn.microsoft.com/azure/ai-studio/)
+- **Gemenskapsmallar**: [Azure Samples](https://github.com/Azure-Samples)
+- **Discord-community**: [#Azure-kanal](https://discord.gg/microsoft-azure)
+- **Agentfärdigheter för Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 öppna agentfärdigheter för Azure AI, Foundry, driftsättning, kostnadsoptimering och diagnostik. Installera i din editor:
+  ```bash
+  npx skills add microsoft/github-copilot-for-azure
+  ```
 
 ---
 
 **Kapitelnavigering:**
-- **📚 Kursöversikt**: [AZD för nybörjare](../../README.md)
-- **📖 Aktuellt kapitel**: Kapitel 8 - Produktion och företagsmönster
+- **📚 Kursens startsida**: [AZD For Beginners](../../README.md)
+- **📖 Aktuellt kapitel**: Kapitel 8 - Produktions- och företagsmönster
 - **⬅️ Föregående kapitel**: [Kapitel 7: Felsökning](../chapter-07-troubleshooting/debugging.md)
 - **⬅️ Även relaterat**: [AI Workshop-labb](ai-workshop-lab.md)
-- **🎆 Kurs klar**: [AZD för nybörjare](../../README.md)
+- **� Kurs slutförd**: [AZD For Beginners](../../README.md)
 
 **Kom ihåg**: Produktions-AI-arbetsbelastningar kräver noggrann planering, övervakning och kontinuerlig optimering. Börja med dessa mönster och anpassa dem efter dina specifika krav.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Ansvarsfriskrivning**:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var god observera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår genom användning av denna översättning.
+Friskrivning:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet bör du observera att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

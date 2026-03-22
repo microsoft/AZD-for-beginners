@@ -1,52 +1,52 @@
 # Studienleitfaden - Umfassende Lernziele
 
-**Navigation des Lernpfads**
-- **📚 Kursübersicht**: [AZD für Anfänger](../README.md)
+**Lernpfad-Navigation**
+- **📚 Kurs-Startseite**: [AZD für Anfänger](../README.md)
 - **📖 Lernen starten**: [Kapitel 1: Grundlagen & Schnellstart](../README.md#-chapter-1-foundation--quick-start)
 - **🎯 Fortschrittsverfolgung**: [Kursabschluss](../README.md#-course-completion--certification)
 
 ## Einführung
 
-Dieser umfassende Studienleitfaden bietet strukturierte Lernziele, Schlüsselkonzepte, Übungsaufgaben und Bewertungsmaterialien, um Ihnen zu helfen, die Azure Developer CLI (azd) zu meistern. Nutzen Sie diesen Leitfaden, um Ihren Fortschritt zu verfolgen und sicherzustellen, dass Sie alle wesentlichen Themen abgedeckt haben.
+Dieser umfassende Studienleitfaden bietet strukturierte Lernziele, Schlüsselkonzepte, Praxisübungen und Bewertungsmaterialien, um Ihnen zu helfen, die Azure Developer CLI (azd) zu meistern. Verwenden Sie diesen Leitfaden, um Ihren Fortschritt zu verfolgen und sicherzustellen, dass Sie alle wesentlichen Themen abgedeckt haben.
 
 ## Lernziele
 
 Durch das Abschließen dieses Studienleitfadens werden Sie:
 - Alle grundlegenden und fortgeschrittenen Konzepte der Azure Developer CLI beherrschen
-- Praktische Fähigkeiten in der Bereitstellung und Verwaltung von Azure-Anwendungen entwickeln
-- Selbstbewusstsein im Beheben von Problemen und Optimieren von Bereitstellungen aufbauen
-- Produktionsreife Bereitstellungspraktiken und Sicherheitsüberlegungen verstehen
+- Praktische Fähigkeiten beim Bereitstellen und Verwalten von Azure-Anwendungen entwickeln
+- Vertrauen in die Fehlerbehebung und Optimierung von Bereitstellungen aufbauen
+- Produktionsreife Bereitstellungspraktiken und Sicherheitsaspekte verstehen
 
 ## Lernergebnisse
 
 Nach Abschluss aller Abschnitte dieses Studienleitfadens werden Sie in der Lage sein:
-- Vollständige Anwendungsarchitekturen mit azd zu entwerfen, bereitzustellen und zu verwalten
-- Umfassende Strategien für Überwachung, Sicherheit und Kostenoptimierung umzusetzen
+- Komplette Anwendungsarchitekturen mit azd zu entwerfen, bereitzustellen und zu verwalten
+- Umfassende Überwachungs-, Sicherheits- und Kostenoptimierungsstrategien umzusetzen
 - Komplexe Bereitstellungsprobleme eigenständig zu beheben
 - Eigene Vorlagen zu erstellen und zur azd-Community beizutragen
 
-## 8-Kapitel-Lernstruktur
+## 8-Kapitel Lernstruktur
 
 ### Kapitel 1: Grundlagen & Schnellstart (Woche 1)
 **Dauer**: 30-45 Minuten | **Komplexität**: ⭐
 
 #### Lernziele
-- Grundlegende Konzepte und Terminologie der Azure Developer CLI verstehen
-- AZD erfolgreich auf Ihrer Entwicklungsplattform installieren und konfigurieren
-- Ihre erste Anwendung mithilfe einer vorhandenen Vorlage bereitstellen
-- Die AZD-Befehlszeilenschnittstelle effektiv navigieren
+- Verstehen Sie die Kernkonzepte und Terminologie der Azure Developer CLI
+- Installieren und konfigurieren Sie AZD erfolgreich auf Ihrer Entwicklungsplattform
+- Stellen Sie Ihre erste Anwendung mithilfe einer vorhandenen Vorlage bereit
+- Navigieren Sie effektiv in der AZD-Kommandozeilenschnittstelle
 
-#### Schlüsselkonzepte zum Meistern
-- AZD-Projektstruktur und Komponenten (azure.yaml, infra/, src/)
-- Vorlagenbasierte Bereitstellungsabläufe
-- Grundlagen der Umgebungskonfiguration
+#### Zentrale Konzepte, die Sie beherrschen sollten
+- AZD-Projektstruktur und -komponenten (azure.yaml, infra/, src/)
+- Vorlagenbasierte Bereitstellungs-Workflows
+- Grundlagen der Umgebungs-Konfiguration
 - Verwaltung von Ressourcengruppen und Abonnements
 
 #### Praktische Übungen
-1. **Installationsüberprüfung**: AZD installieren und mit `azd version` überprüfen
-2. **Erste Bereitstellung**: Vorlage todo-nodejs-mongo erfolgreich bereitstellen
-3. **Umgebungseinrichtung**: Ihre ersten Umgebungsvariablen konfigurieren
-4. **Ressourcen erkunden**: Bereitgestellte Ressourcen im Azure-Portal navigieren
+1. **Installationsüberprüfung**: Installieren Sie AZD und überprüfen Sie es mit `azd version`
+2. **Erste Bereitstellung**: Stellen Sie die Vorlage todo-nodejs-mongo erfolgreich bereit
+3. **Umgebungssetup**: Konfigurieren Sie Ihre ersten Umgebungsvariablen
+4. **Ressourcenerkundung**: Navigieren Sie zu bereitgestellten Ressourcen im Azure-Portal
 
 #### Bewertungsfragen
 - Was sind die Kernkomponenten eines AZD-Projekts?
@@ -56,31 +56,31 @@ Nach Abschluss aller Abschnitte dieses Studienleitfadens werden Sie in der Lage 
 
 ---
 
-### Kapitel 2: KI-First-Entwicklung (Woche 2)
+### Kapitel 2: KI-zentrierte Entwicklung (Woche 2)
 **Dauer**: 1-2 Stunden | **Komplexität**: ⭐⭐
 
 #### Lernziele
-- Microsoft Foundry-Dienste in AZD-Workflows integrieren
-- KI-gestützte Anwendungen bereitstellen und konfigurieren
-- Implementierungsmuster für RAG (Retrieval-Augmented Generation) verstehen
-- KI-Modellbereitstellungen und Skalierung verwalten
+- Integrieren Sie Microsoft Foundry-Services in AZD-Workflows
+- Bereitstellen und Konfigurieren KI-gestützter Anwendungen
+- Verstehen Sie RAG (Retrieval-Augmented Generation)-Implementierungsmuster
+- Verwalten Sie Bereitstellungen und Skalierung von KI-Modellen
 
-#### Schlüsselkonzepte zum Meistern
-- Integration des Azure OpenAI-Dienstes und API-Verwaltung
-- KI-Suchkonfiguration und Vektorindizierung
-- Strategien für Modellbereitstellung und Kapazitätsplanung
-- Überwachung und Leistungsoptimierung von KI-Anwendungen
+#### Zentrale Konzepte, die Sie beherrschen sollten
+- Integration des Microsoft Foundry Models-Services und API-Management
+- AI Search-Konfiguration und Vektorindizierung
+- Strategien zur Bereitstellung von Modellen und Kapazitätsplanung
+- Überwachung von KI-Anwendungen und Leistungsoptimierung
 
 #### Praktische Übungen
-1. **KI-Chat-Bereitstellung**: Vorlage azure-search-openai-demo bereitstellen
-2. **RAG-Implementierung**: Dokumentenindizierung und -abruf konfigurieren
-3. **Modellkonfiguration**: Mehrere KI-Modelle mit unterschiedlichen Zwecken einrichten
-4. **KI-Überwachung**: Application Insights für KI-Workloads implementieren
+1. **AI-Chat-Bereitstellung**: Stellen Sie die Vorlage azure-search-openai-demo bereit
+2. **RAG-Implementierung**: Konfigurieren Sie Dokumentindizierung und -abruf
+3. **Modellkonfiguration**: Richten Sie mehrere KI-Modelle mit unterschiedlichen Zwecken ein
+4. **AI-Überwachung**: Implementieren Sie Application Insights für KI-Workloads
 
 #### Bewertungsfragen
-- Wie konfigurieren Sie Azure OpenAI-Dienste in einer AZD-Vorlage?
-- Was sind die Hauptkomponenten einer RAG-Architektur?
-- Wie verwalten Sie die Kapazität und Skalierung von KI-Modellen?
+- Wie konfigurieren Sie Microsoft Foundry Models-Services in einer AZD-Vorlage?
+- Was sind die Schlüsselkomponenten einer RAG-Architektur?
+- Wie verwalten Sie Kapazität und Skalierung von KI-Modellen?
 - Welche Überwachungsmetriken sind für KI-Anwendungen wichtig?
 
 ---
@@ -89,145 +89,146 @@ Nach Abschluss aller Abschnitte dieses Studienleitfadens werden Sie in der Lage 
 **Dauer**: 45-60 Minuten | **Komplexität**: ⭐⭐
 
 #### Lernziele
-- Strategien für die Verwaltung und Konfiguration von Umgebungen meistern
-- Sichere Authentifizierungsmuster und verwaltete Identität implementieren
-- Ressourcen mit geeigneten Namenskonventionen organisieren
-- Bereitstellungen für mehrere Umgebungen (Entwicklung, Staging, Produktion) konfigurieren
+- Beherrschen Sie Strategien zur Verwaltung und Konfiguration von Umgebungen
+- Implementieren Sie sichere Authentifizierungsmuster und Managed Identity
+- Organisieren Sie Ressourcen mit geeigneten Namenskonventionen
+- Konfigurieren Sie Mehrfach-Umgebungs-Bereitstellungen (dev, staging, prod)
 
-#### Schlüsselkonzepte zum Meistern
-- Hierarchie der Umgebungen und Konfigurationsvorrang
-- Authentifizierung mit verwalteter Identität und Dienstprinzipal
-- Integration von Key Vault für Geheimnisverwaltung
-- Verwaltung von umgebungsspezifischen Parametern
+#### Zentrale Konzepte, die Sie beherrschen sollten
+- Umgebungs-Hierarchie und Konfigurations-Vorrang
+- Managed Identity und Service Principal-Authentifizierung
+- Key Vault-Integration für Secret-Management
+- Umgebungsspezifische Parameterverwaltung
 
 #### Praktische Übungen
-1. **Einrichtung mehrerer Umgebungen**: Entwicklungs-, Staging- und Produktionsumgebungen konfigurieren
-2. **Sicherheitskonfiguration**: Authentifizierung mit verwalteter Identität implementieren
-3. **Geheimnisverwaltung**: Azure Key Vault für sensible Daten integrieren
-4. **Parameterverwaltung**: Umgebungsspezifische Konfigurationen erstellen
+1. **Mehrfach-Umgebungs-Setup**: Konfigurieren Sie dev-, staging- und prod-Umgebungen
+2. **Sicherheitskonfiguration**: Implementieren Sie Managed Identity-Authentifizierung
+3. **Secrets-Management**: Integrieren Sie Azure Key Vault für sensible Daten
+4. **Parameterverwaltung**: Erstellen Sie umgebungsspezifische Konfigurationen
 
 #### Bewertungsfragen
 - Wie konfigurieren Sie verschiedene Umgebungen mit AZD?
-- Welche Vorteile bietet die Verwendung von verwalteter Identität gegenüber Dienstprinzipalen?
+- Welche Vorteile hat die Verwendung von Managed Identity gegenüber Service Principals?
 - Wie verwalten Sie Anwendungsgeheimnisse sicher?
-- Was ist die Konfigurationshierarchie in AZD?
+- Was ist die Konfigurations-Hierarchie in AZD?
 
 ---
 
 ### Kapitel 4: Infrastruktur als Code & Bereitstellung (Woche 4-5)
-**Dauer**: 1-1,5 Stunden | **Komplexität**: ⭐⭐⭐
+**Dauer**: 1-1.5 Stunden | **Komplexität**: ⭐⭐⭐
 
 #### Lernziele
-- Bicep-Infrastrukturvorlagen erstellen und anpassen
-- Fortgeschrittene Bereitstellungsmuster und Workflows implementieren
-- Strategien für die Ressourcenbereitstellung verstehen
-- Skalierbare Architekturen mit mehreren Diensten entwerfen
+- Erstellen und Anpassen von Bicep-Infrastrukturvorlagen
+- Implementieren Sie fortgeschrittene Bereitstellungsmuster und Workflows
+- Verstehen Sie Strategien zur Ressourcenbereitstellung
+- Entwerfen Sie skalierbare Multi-Service-Architekturen
 
-- Containerisierte Anwendungen mit Azure Container Apps und AZD bereitstellen
+- Stellen Sie containerisierte Anwendungen mit Azure Container Apps und AZD bereit
 
-#### Schlüsselkonzepte zum Meistern
-- Struktur und Best Practices für Bicep-Vorlagen
-- Ressourcendependenzen und Bereitstellungsreihenfolge
-- Parameterdateien und Vorlagenmodularität
+
+#### Zentrale Konzepte, die Sie beherrschen sollten
+- Bicep-Vorlagenstruktur und Best Practices
+- Ressourcenabhängigkeiten und Bereitstellungsreihenfolge
+- Parameterdateien und Template-Modularität
 - Benutzerdefinierte Hooks und Bereitstellungsautomatisierung
-- Muster für die Bereitstellung von Container-Apps (Schnellstart, Produktion, Microservices)
+- Bereitstellungsmuster für Container-Apps (Schnellstart, Produktion, Microservices)
 
 #### Praktische Übungen
-1. **Erstellung benutzerdefinierter Vorlagen**: Vorlage für eine Anwendung mit mehreren Diensten erstellen
-2. **Bicep-Meisterschaft**: Modulare, wiederverwendbare Infrastrukturkomponenten erstellen
-3. **Automatisierung der Bereitstellung**: Pre-/Post-Bereitstellungshooks implementieren
-4. **Architekturdesign**: Komplexe Microservices-Architektur bereitstellen
-5. **Bereitstellung von Container-Apps**: [Simple Flask API](../../../examples/container-app/simple-flask-api) und [Microservices Architecture](../../../examples/container-app/microservices) Beispiele mit AZD bereitstellen
+1. **Erstellung einer benutzerdefinierten Vorlage**: Bauen Sie eine Multi-Service-Anwendungs-Vorlage
+2. **Bicep-Beherrschung**: Erstellen Sie modulare, wiederverwendbare Infrastrukturkomponenten
+3. **Bereitstellungsautomatisierung**: Implementieren Sie Pre-/Post-Bereitstellungs-Hooks
+4. **Architekturdesign**: Stellen Sie eine komplexe Microservices-Architektur bereit
+5. **Container-App-Bereitstellung**: Stellen Sie die [Einfache Flask-API](../../../examples/container-app/simple-flask-api) und die [Microservices-Architektur](../../../examples/container-app/microservices) Beispiele mit AZD bereit
 
 #### Bewertungsfragen
 - Wie erstellen Sie benutzerdefinierte Bicep-Vorlagen für AZD?
-- Was sind die Best Practices für die Organisation von Infrastrukturcode?
-- Wie handhaben Sie Ressourcendependenzen in Vorlagen?
-- Welche Bereitstellungsmuster unterstützen Updates ohne Ausfallzeiten?
+- Was sind Best Practices zur Organisation von Infrastrukturcode?
+- Wie gehen Sie mit Ressourcenabhängigkeiten in Vorlagen um?
+- Welche Bereitstellungsmuster unterstützen unterbrechungsfreie Updates?
 
 ---
 
-### Kapitel 5: KI-Lösungen mit mehreren Agenten (Woche 6-7)
+### Kapitel 5: Multi-Agenten-KI-Lösungen (Woche 6-7)
 **Dauer**: 2-3 Stunden | **Komplexität**: ⭐⭐⭐⭐
 
 #### Lernziele
-- Architekturen mit mehreren KI-Agenten entwerfen und implementieren
-- Koordination und Kommunikation zwischen Agenten orchestrieren
-- Produktionsreife KI-Lösungen mit Überwachung bereitstellen
-- Spezialisierung von Agenten und Workflow-Muster verstehen
-- Containerisierte Microservices als Teil von Lösungen mit mehreren Agenten integrieren
+- Entwerfen und Implementieren von Multi-Agenten-KI-Architekturen
+- Orchestrieren Sie Agentenkoordination und -kommunikation
+- Stellen Sie produktionsreife KI-Lösungen mit Überwachung bereit
+- Verstehen Sie Agentenspezialisierung und Workflow-Muster
+- Integrieren Sie containerisierte Microservices als Teil von Multi-Agenten-Lösungen
 
-#### Schlüsselkonzepte zum Meistern
-- Muster und Designprinzipien für Architekturen mit mehreren Agenten
-- Kommunikationsprotokolle und Datenfluss zwischen Agenten
+#### Zentrale Konzepte, die Sie beherrschen sollten
+- Multi-Agenten-Architekturmuster und Designprinzipien
+- Agentenkommunikationsprotokolle und Datenfluss
 - Lastverteilung und Skalierungsstrategien für KI-Agenten
-- Produktionsüberwachung für Systeme mit mehreren Agenten
-- Kommunikation zwischen Diensten in containerisierten Umgebungen
+- Produktionsüberwachung für Multi-Agenten-Systeme
+- Service-to-Service-Kommunikation in containerisierten Umgebungen
 
 #### Praktische Übungen
-1. **Bereitstellung einer Einzelhandelslösung**: Komplettes Szenario mit mehreren Agenten bereitstellen
-2. **Agentenanpassung**: Verhalten von Kunden- und Inventaragenten modifizieren
-3. **Architekturskalierung**: Lastverteilung und automatische Skalierung implementieren
-4. **Produktionsüberwachung**: Umfassende Überwachung und Alarmierung einrichten
-5. **Integration von Microservices**: [Microservices Architecture](../../../examples/container-app/microservices) Beispiel erweitern, um agentenbasierte Workflows zu unterstützen
+1. **Retail-Lösungs-Bereitstellung**: Stellen Sie das vollständige Multi-Agenten-Retail-Szenario bereit
+2. **Agentenanpassung**: Ändern Sie das Verhalten von Customer- und Inventory-Agenten
+3. **Architektur-Skalierung**: Implementieren Sie Load Balancing und Auto-Scaling
+4. **Produktionsüberwachung**: Richten Sie umfassende Überwachung und Alerting ein
+5. **Microservices-Integration**: Erweitern Sie das [Microservices-Architektur](../../../examples/container-app/microservices) Beispiel, um agentenbasierte Workflows zu unterstützen
 
 #### Bewertungsfragen
-- Wie entwerfen Sie effektive Kommunikationsmuster für mehrere Agenten?
-- Was sind die wichtigsten Überlegungen zur Skalierung von KI-Agenten-Workloads?
-- Wie überwachen und debuggen Sie KI-Systeme mit mehreren Agenten?
-- Welche Produktionsmuster gewährleisten die Zuverlässigkeit von KI-Agenten?
+- Wie entwerfen Sie effektive Multi-Agenten-Kommunikationsmuster?
+- Welche Schlüsselfaktoren sind bei der Skalierung von KI-Agenten-Workloads zu beachten?
+- Wie überwachen und debuggen Sie Multi-Agenten-KI-Systeme?
+- Welche Produktionsmuster gewährleisten Zuverlässigkeit für KI-Agenten?
 
 ---
 
-### Kapitel 6: Validierung & Planung vor der Bereitstellung (Woche 8)
+### Kapitel 6: Vorbereitende Validierung & Planung (Woche 8)
 **Dauer**: 1 Stunde | **Komplexität**: ⭐⭐
 
 #### Lernziele
-- Umfassende Kapazitätsplanung und Ressourcenvalidierung durchführen
-- Optimale Azure-SKUs für Kosteneffizienz auswählen
-- Automatisierte Pre-Flight-Checks und Validierung implementieren
-- Bereitstellungen mit Kostenoptimierungsstrategien planen
+- Führen Sie umfassende Kapazitätsplanung und Ressourcenvalidierung durch
+- Wählen Sie optimale Azure-SKUs für Kosten-Effizienz aus
+- Implementieren Sie automatisierte Pre-Flight-Checks und Validierungen
+- Planen Sie Bereitstellungen mit kostenoptimierenden Strategien
 
-#### Schlüsselkonzepte zum Meistern
-- Azure-Ressourcenquoten und Kapazitätsbeschränkungen
-- Kriterien für die Auswahl von SKUs und Kostenoptimierung
+#### Zentrale Konzepte, die Sie beherrschen sollten
+- Azure-Ressourcenquoten und Kapazitätsgrenzen
+- Kriterien zur SKU-Auswahl und Kostenoptimierung
 - Automatisierte Validierungsskripte und Tests
-- Bereitstellungsplanung und Risikobewertung
+- Bereitstellungsplanung und Risikoabschätzung
 
 #### Praktische Übungen
-1. **Kapazitätsanalyse**: Ressourcenanforderungen für Ihre Anwendungen analysieren
-2. **SKU-Optimierung**: Kostenwirksame Servicestufen vergleichen und auswählen
-3. **Validierungsautomatisierung**: Pre-Bereitstellungs-Check-Skripte implementieren
-4. **Kostenplanung**: Bereitstellungskosten schätzen und Budgets erstellen
+1. **Kapazitätsanalyse**: Analysieren Sie Ressourcenanforderungen für Ihre Anwendungen
+2. **SKU-Optimierung**: Vergleichen und wählen Sie kosteneffektive Service-Tiers
+3. **Validierungsautomatisierung**: Implementieren Sie Pre-Bereitstellungs-Checkskripte
+4. **Kostenplanung**: Erstellen Sie Kostenschätzungen und Budgets für Bereitstellungen
 
 #### Bewertungsfragen
-- Wie validieren Sie die Azure-Kapazität vor der Bereitstellung?
+- Wie validieren Sie Azure-Kapazitäten vor einer Bereitstellung?
 - Welche Faktoren beeinflussen Entscheidungen zur SKU-Auswahl?
-- Wie automatisieren Sie die Validierung vor der Bereitstellung?
+- Wie automatisieren Sie Pre-Bereitstellungs-Validierungen?
 - Welche Strategien helfen, Bereitstellungskosten zu optimieren?
 
 ---
 
 ### Kapitel 7: Fehlerbehebung & Debugging (Woche 9)
-**Dauer**: 1-1,5 Stunden | **Komplexität**: ⭐⭐
+**Dauer**: 1-1.5 Stunden | **Komplexität**: ⭐⭐
 
 #### Lernziele
-- Systematische Debugging-Ansätze für AZD-Bereitstellungen entwickeln
-- Häufige Bereitstellungs- und Konfigurationsprobleme lösen
-- KI-spezifische Probleme und Leistungsprobleme debuggen
-- Überwachung und Alarmierung für proaktive Fehlererkennung implementieren
+- Entwickeln Sie systematische Debugging-Ansätze für AZD-Bereitstellungen
+- Beheben Sie häufige Bereitstellungs- und Konfigurationsprobleme
+- Debuggen Sie KI-spezifische Probleme und Performance-Engpässe
+- Implementieren Sie Überwachung und Alerting für proaktive Problemerkennung
 
-#### Schlüsselkonzepte zum Meistern
-- Diagnosetechniken und Protokollierungsstrategien
-- Häufige Fehlerbilder und deren Lösungen
-- Leistungsüberwachung und Optimierung
-- Verfahren zur Vorfallreaktion und Wiederherstellung
+#### Zentrale Konzepte, die Sie beherrschen sollten
+- Diagnosetechniken und Logging-Strategien
+- Häufige Ausfallmuster und deren Lösungen
+- Performance-Überwachung und -Optimierung
+- Incident-Response- und Wiederherstellungsverfahren
 
 #### Praktische Übungen
-1. **Diagnosefähigkeiten**: Mit absichtlich fehlerhaften Bereitstellungen üben
-2. **Protokollanalyse**: Azure Monitor und Application Insights effektiv nutzen
-3. **Leistungsoptimierung**: Langsam laufende Anwendungen optimieren
-4. **Wiederherstellungsverfahren**: Backup und Disaster Recovery implementieren
+1. **Diagnosefähigkeiten**: Üben Sie mit absichtlich fehlerhaften Bereitstellungen
+2. **Log-Analyse**: Nutzen Sie Azure Monitor und Application Insights effektiv
+3. **Performance-Tuning**: Optimieren Sie langsam laufende Anwendungen
+4. **Wiederherstellungsverfahren**: Implementieren Sie Backup- und Disaster-Recovery
 
 #### Bewertungsfragen
 - Was sind die häufigsten AZD-Bereitstellungsfehler?
@@ -241,50 +242,50 @@ Nach Abschluss aller Abschnitte dieses Studienleitfadens werden Sie in der Lage 
 **Dauer**: 2-3 Stunden | **Komplexität**: ⭐⭐⭐⭐
 
 #### Lernziele
-- Unternehmensgerechte Bereitstellungsstrategien implementieren
-- Sicherheitsmuster und Compliance-Rahmenwerke entwerfen
-- Überwachung, Governance und Kostenmanagement etablieren
-- Skalierbare CI/CD-Pipelines mit AZD-Integration erstellen
-- Best Practices für die Bereitstellung von Produktions-Container-Apps anwenden (Sicherheit, Überwachung, Kosten, CI/CD)
+- Implementieren Sie unternehmensgerechte Bereitstellungsstrategien
+- Entwerfen Sie Sicherheitsmuster und Compliance-Frameworks
+- Etablieren Sie Überwachung, Governance und Kostenmanagement
+- Erstellen Sie skalierbare CI/CD-Pipelines mit AZD-Integration
+- Wenden Sie Best Practices für Produktions-Container-App-Bereitstellungen an (Sicherheit, Überwachung, Kosten, CI/CD)
 
-#### Schlüsselkonzepte zum Meistern
-- Sicherheits- und Compliance-Anforderungen für Unternehmen
-- Governance-Rahmenwerke und Richtlinienimplementierung
+#### Zentrale Konzepte, die Sie beherrschen sollten
+- Unternehmenssicherheit und Compliance-Anforderungen
+- Governance-Frameworks und Policy-Implementierung
 - Erweiterte Überwachung und Kostenmanagement
 - CI/CD-Integration und automatisierte Bereitstellungspipelines
-- Blue-Green- und Canary-Bereitstellungsmuster für containerisierte Workloads
+- Blue-Green- und Canary-Bereitstellungsstrategien für containerisierte Workloads
 
 #### Praktische Übungen
-1. **Unternehmenssicherheit**: Umfassende Sicherheitsmuster implementieren
-2. **Governance-Rahmenwerk**: Azure Policy und Ressourcenmanagement einrichten
-3. **Erweiterte Überwachung**: Dashboards und automatisierte Alarmierung erstellen
-4. **CI/CD-Integration**: Automatisierte Bereitstellungspipelines erstellen
-5. **Produktions-Container-Apps**: Sicherheit, Überwachung und Kostenoptimierung auf das [Microservices Architecture](../../../examples/container-app/microservices) Beispiel anwenden
+1. **Unternehmenssicherheit**: Implementieren Sie umfassende Sicherheitsmuster
+2. **Governance-Framework**: Richten Sie Azure Policy und Ressourcenverwaltung ein
+3. **Erweiterte Überwachung**: Erstellen Sie Dashboards und automatisierte Alerts
+4. **CI/CD-Integration**: Bauen Sie automatisierte Bereitstellungspipelines
+5. **Produktions-Container-Apps**: Wenden Sie Sicherheit, Überwachung und Kostenoptimierung auf das [Microservices-Architektur](../../../examples/container-app/microservices) Beispiel an
 
 #### Bewertungsfragen
 - Wie implementieren Sie Unternehmenssicherheit in AZD-Bereitstellungen?
-- Welche Governance-Muster gewährleisten Compliance und Kostenkontrolle?
+- Welche Governance-Muster sorgen für Compliance und Kostenkontrolle?
 - Wie entwerfen Sie skalierbare Überwachung für Produktionssysteme?
 - Welche CI/CD-Muster funktionieren am besten mit AZD-Workflows?
 
 #### Lernziele
-- Grundlagen und Kernkonzepte der Azure Developer CLI verstehen
-- azd erfolgreich auf Ihrer Entwicklungsumgebung installieren und konfigurieren
-- Ihre erste Bereitstellung mithilfe einer vorhandenen Vorlage abschließen
-- Die azd-Projektstruktur navigieren und wichtige Komponenten verstehen
+- Verstehen Sie die Grundlagen und Kernkonzepte der Azure Developer CLI
+- Installieren und konfigurieren Sie azd erfolgreich in Ihrer Entwicklungsumgebung
+- Schließen Sie Ihre erste Bereitstellung mit einer vorhandenen Vorlage ab
+- Navigieren Sie die azd-Projektstruktur und verstehen Sie die wichtigsten Komponenten
 
-#### Schlüsselkonzepte zum Meistern
+#### Zentrale Konzepte, die Sie beherrschen sollten
 - Vorlagen, Umgebungen und Dienste
-- Konfigurationsstruktur der azure.yaml
+- azure.yaml Konfigurationsstruktur
 - Grundlegende azd-Befehle (init, up, down, deploy)
-- Prinzipien der Infrastruktur als Code
+- Prinzipien von Infrastruktur als Code
 - Azure-Authentifizierung und -Autorisierung
 
-#### Übungsaufgaben
+#### Praxisübungen
 
 **Übung 1.1: Installation und Einrichtung**
 ```bash
-# Schließen Sie diese Aufgaben ab:
+# Erledige diese Aufgaben:
 1. Install azd using your preferred method
 2. Install Azure CLI and authenticate
 3. Verify installation with: azd version
@@ -314,7 +315,7 @@ Analyze the following components:
 #### Selbstbewertungsfragen
 1. Was sind die drei Kernkonzepte der azd-Architektur?
 2. Was ist der Zweck der azure.yaml-Datei?
-3. Wie helfen Umgebungen, verschiedene Bereitstellungsziele zu verwalten?
+3. Wie helfen Umgebungen bei der Verwaltung verschiedener Bereitstellungsziele?
 4. Welche Authentifizierungsmethoden können mit azd verwendet werden?
 5. Was passiert, wenn Sie `azd up` zum ersten Mal ausführen?
 
@@ -322,7 +323,7 @@ Analyze the following components:
 
 ## Fortschrittsverfolgung und Bewertungsrahmen
 ```bash
-# Erstellen und Konfigurieren mehrerer Umgebungen:
+# Mehrere Umgebungen erstellen und konfigurieren:
 1. Create development environment: azd env new development
 2. Create staging environment: azd env new staging
 3. Create production environment: azd env new production
@@ -341,7 +342,7 @@ Analyze the following components:
 
 **Übung 2.3: Sicherheitskonfiguration**
 ```bash
-# Sicherheitsbestpraktiken umsetzen:
+# Bewährte Sicherheitspraktiken umsetzen:
 1. Configure managed identity for service authentication
 2. Set up Azure Key Vault for secrets management
 3. Implement least-privilege access controls
@@ -349,28 +350,28 @@ Analyze the following components:
 ```
 
 #### Selbstbewertungsfragen
-1. Wie handhabt azd die Vorrangigkeit von Umgebungsvariablen?
-2. Was sind Bereitstellungshooks und wann sollten Sie sie verwenden?
-3. Wie konfigurieren Sie verschiedene SKUs für unterschiedliche Umgebungen?
+1. Wie behandelt azd die Vorrangregeln für Umgebungsvariablen?
+2. Was sind Bereitstellungs-Hooks und wann sollten Sie diese verwenden?
+3. Wie konfigurieren Sie unterschiedliche SKUs für verschiedene Umgebungen?
 4. Welche Sicherheitsimplikationen haben verschiedene Authentifizierungsmethoden?
 5. Wie verwalten Sie Geheimnisse und sensible Konfigurationsdaten?
 
 ### Modul 3: Bereitstellung und Provisionierung (Woche 4)
 
 #### Lernziele
-- Bereitstellungsabläufe und Best Practices meistern
-- Infrastruktur als Code mit Bicep-Vorlagen verstehen
-- Komplexe Architekturen mit mehreren Diensten implementieren
-- Bereitstellungsleistung und Zuverlässigkeit optimieren
+- Beherrschen Sie Bereitstellungs-Workflows und Best Practices
+- Verstehen Sie Infrastruktur als Code mit Bicep-Vorlagen
+- Implementieren Sie komplexe Multi-Service-Architekturen
+- Optimieren Sie Bereitstellungsleistung und Zuverlässigkeit
 
-#### Schlüsselkonzepte zum Meistern
-- Struktur und Module von Bicep-Vorlagen
-- Ressourcendependenzen und Reihenfolge
+#### Zentrale Konzepte, die Sie beherrschen sollten
+- Bicep-Vorlagenstruktur und Module
+- Ressourcenabhängigkeiten und Reihenfolge
 - Bereitstellungsstrategien (Blue-Green, Rolling Updates)
-- Bereitstellungen in mehreren Regionen
+- Multi-Region-Bereitstellungen
 - Datenbankmigrationen und Datenmanagement
 
-#### Übungsaufgaben
+#### Praxisübungen
 
 **Übung 3.1: Benutzerdefinierte Infrastruktur**
 ```bicep
@@ -382,9 +383,9 @@ Analyze the following components:
 5. Network security groups and virtual networks
 ```
 
-**Übung 3.2: Anwendung mit mehreren Diensten**
+**Übung 3.2: Multi-Service-Anwendung**
 ```bash
-# Bereitstellung einer Microservices-Architektur:
+# Eine Microservices-Architektur bereitstellen:
 1. Frontend web application
 2. Backend API service
 3. Database service
@@ -394,7 +395,7 @@ Analyze the following components:
 
 **Übung 3.3: Datenbankintegration**
 ```bash
-# Implementieren Sie Datenbankbereitstellungsmuster:
+# Datenbank-Bereitstellungsmuster implementieren:
 1. Deploy PostgreSQL with connection pooling
 2. Implement schema migrations
 3. Configure backup and recovery procedures
@@ -403,23 +404,23 @@ Analyze the following components:
 ```
 
 #### Selbstbewertungsfragen
-1. Welche Vorteile bietet die Verwendung von Bicep gegenüber ARM-Vorlagen?
-2. Wie handhaben Sie Datenbankmigrationen in azd-Bereitstellungen?
-3. Welche Strategien gibt es für Bereitstellungen ohne Ausfallzeiten?
+1. Welche Vorteile hat die Verwendung von Bicep gegenüber ARM-Vorlagen?
+2. Wie gehen Sie mit Datenbankmigrationen in azd-Bereitstellungen um?
+3. Welche Strategien gibt es für unterbrechungsfreie Bereitstellungen?
 4. Wie verwalten Sie Abhängigkeiten zwischen Diensten?
-5. Welche Überlegungen gibt es bei Bereitstellungen in mehreren Regionen?
+5. Welche Überlegungen gelten für Multi-Region-Bereitstellungen?
 
-### Modul 4: Validierung vor der Bereitstellung (Woche 5)
+### Modul 4: Vorbereitende Validierung (Woche 5)
 
 #### Lernziele
-- Umfassende Prüfungen vor der Bereitstellung durchführen
+- Umfassende Vorab-Prüfungen vor der Bereitstellung implementieren
 - Kapazitätsplanung und Ressourcenvalidierung meistern
 - SKU-Auswahl und Kostenoptimierung verstehen
 - Automatisierte Validierungspipelines erstellen
 
-#### Wichtige Konzepte zum Meistern
-- Azure-Ressourcenquoten und -limits
-- Kriterien für die SKU-Auswahl und Kostenfolgen
+#### Wichtige Konzepte, die es zu beherrschen gilt
+- Azure-Ressourcenkontingente und -limits
+- Kriterien zur SKU-Auswahl und Kostenfolgen
 - Automatisierte Validierungsskripte und -tools
 - Methoden der Kapazitätsplanung
 - Leistungstests und Optimierung
@@ -428,7 +429,7 @@ Analyze the following components:
 
 **Übung 4.1: Kapazitätsplanung**
 ```bash
-# Implementieren Sie die Kapazitätsvalidierung:
+# Kapazitätsvalidierung implementieren:
 1. Create scripts to check Azure quotas
 2. Validate service availability in target regions
 3. Estimate resource costs for different SKUs
@@ -436,9 +437,9 @@ Analyze the following components:
 5. Document capacity requirements for each environment
 ```
 
-**Übung 4.2: Validierung vor der Bereitstellung**
+**Übung 4.2: Vorab-Validierung**
 ```powershell
-# Erstellen Sie eine umfassende Validierungspipeline:
+# Erstelle eine umfassende Validierungspipeline:
 1. Authentication and permissions validation
 2. Template syntax and parameter validation
 3. Resource naming and availability checks
@@ -448,7 +449,7 @@ Analyze the following components:
 
 **Übung 4.3: SKU-Optimierung**
 ```bash
-# Optimieren Sie die Dienstkonfigurationen:
+# Dienstkonfigurationen optimieren:
 1. Compare performance characteristics of different SKUs
 2. Implement cost-effective development configurations
 3. Design high-performance production configurations
@@ -457,24 +458,24 @@ Analyze the following components:
 ```
 
 #### Selbstbewertungsfragen
-1. Welche Faktoren sollten die Entscheidungen zur SKU-Auswahl beeinflussen?
+1. Welche Faktoren sollten die Entscheidung zur SKU-Auswahl beeinflussen?
 2. Wie validieren Sie die Verfügbarkeit von Azure-Ressourcen vor der Bereitstellung?
-3. Was sind die Hauptkomponenten eines Systems zur Validierung vor der Bereitstellung?
+3. Was sind die wichtigsten Komponenten eines Vorab-Prüfsystems?
 4. Wie schätzen und kontrollieren Sie Bereitstellungskosten?
 5. Welche Überwachung ist für die Kapazitätsplanung unerlässlich?
 
 ### Modul 5: Fehlerbehebung und Debugging (Woche 6)
 
 #### Lernziele
-- Systematische Methoden zur Fehlerbehebung meistern
-- Expertise im Debugging komplexer Bereitstellungsprobleme entwickeln
-- Umfassende Überwachung und Alarmierung implementieren
-- Verfahren zur Incident-Reaktion und Wiederherstellung erstellen
+- Systematische Fehlerbehebungsmethoden meistern
+- Fachwissen im Debuggen komplexer Bereitstellungsprobleme entwickeln
+- Umfassendes Monitoring und Alarmierung implementieren
+- Vorfallreaktions- und Wiederherstellungsverfahren erstellen
 
-#### Wichtige Konzepte zum Meistern
+#### Wichtige Konzepte, die es zu beherrschen gilt
 - Häufige Muster von Bereitstellungsfehlern
-- Techniken zur Protokollanalyse und -korrelation
-- Leistungsüberwachung und Optimierung
+- Protokollanalyse und Korrelationstechniken
+- Leistungsüberwachung und -optimierung
 - Erkennung und Reaktion auf Sicherheitsvorfälle
 - Notfallwiederherstellung und Geschäftskontinuität
 
@@ -490,9 +491,9 @@ Analyze the following components:
 5. Performance and scaling issues
 ```
 
-**Übung 5.2: Überwachungsimplementierung**
+**Übung 5.2: Implementierung von Monitoring**
 ```bash
-# Umfassende Überwachung einrichten:
+# Richten Sie ein umfassendes Monitoring ein:
 1. Application performance monitoring with Application Insights
 2. Infrastructure monitoring with Azure Monitor
 3. Custom dashboards and alerting rules
@@ -500,9 +501,9 @@ Analyze the following components:
 5. Health check endpoints and automated testing
 ```
 
-**Übung 5.3: Incident-Reaktion**
+**Übung 5.3: Vorfallreaktion**
 ```bash
-# Erstellen Sie Verfahren zur Vorfallreaktion:
+# Erstellen von Verfahren zur Vorfallsreaktion:
 1. Create runbooks for common problems
 2. Implement automated recovery procedures
 3. Set up notification and escalation workflows
@@ -511,25 +512,25 @@ Analyze the following components:
 ```
 
 #### Selbstbewertungsfragen
-1. Was ist der systematische Ansatz zur Fehlerbehebung bei azd-Bereitstellungen?
+1. Wie lautet der systematische Ansatz zur Fehlerbehebung bei azd-Bereitstellungen?
 2. Wie korrelieren Sie Protokolle über mehrere Dienste und Ressourcen hinweg?
-3. Welche Überwachungsmetriken sind für die frühzeitige Problemidentifikation am wichtigsten?
-4. Wie implementieren Sie effektive Verfahren zur Notfallwiederherstellung?
-5. Was sind die Hauptkomponenten eines Plans zur Incident-Reaktion?
+3. Welche Monitoring-Metriken sind für die frühzeitige Fehlererkennung am wichtigsten?
+4. Wie implementieren Sie effektive Notfallwiederherstellungsverfahren?
+5. Was sind die Schlüsselkomponenten eines Incident-Response-Plans?
 
 ### Modul 6: Fortgeschrittene Themen und Best Practices (Woche 7-8)
 
 #### Lernziele
-- Bereitstellungsmuster auf Unternehmensniveau implementieren
-- CI/CD-Integration und Automatisierung meistern
-- Eigene Vorlagen entwickeln und zur Community beitragen
-- Fortgeschrittene Sicherheits- und Compliance-Anforderungen verstehen
+- Unternehmensgerechte Bereitstellungsmuster implementieren
+- CI/CD-Integration und -Automatisierung meistern
+- Eigene Templates entwickeln und zur Community beitragen
+- Erweiterte Sicherheits- und Compliance-Anforderungen verstehen
 
-#### Wichtige Konzepte zum Meistern
-- CI/CD-Pipeline-Integrationsmuster
-- Entwicklung und Verteilung benutzerdefinierter Vorlagen
-- Unternehmensgovernance und Compliance
-- Fortgeschrittene Netzwerk- und Sicherheitskonfigurationen
+#### Wichtige Konzepte, die es zu beherrschen gilt
+- Integrationsmuster für CI/CD-Pipelines
+- Entwicklung und Verteilung benutzerdefinierter Templates
+- Unternehmensweite Governance und Compliance
+- Erweiterte Netzwerk- und Sicherheitskonfigurationen
 - Leistungsoptimierung und Kostenmanagement
 
 #### Übungsaufgaben
@@ -544,9 +545,9 @@ Analyze the following components:
 5. Security scanning and compliance checks
 ```
 
-**Übung 6.2: Entwicklung benutzerdefinierter Vorlagen**
+**Übung 6.2: Entwicklung benutzerdefinierter Templates**
 ```bash
-# Erstellen und Veröffentlichen von benutzerdefinierten Vorlagen:
+# Benutzerdefinierte Vorlagen erstellen und veröffentlichen:
 1. Design template for your organization's architecture
 2. Implement parameterization and customization options
 3. Add comprehensive documentation and examples
@@ -556,7 +557,7 @@ Analyze the following components:
 
 **Übung 6.3: Unternehmensimplementierung**
 ```bash
-# Implementieren Sie Funktionen in Unternehmensqualität:
+# Unternehmensgerechte Funktionen implementieren:
 1. Multi-tenant architecture with proper isolation
 2. Centralized logging and monitoring
 3. Compliance and governance controls
@@ -566,9 +567,9 @@ Analyze the following components:
 
 #### Selbstbewertungsfragen
 1. Wie integrieren Sie azd in bestehende CI/CD-Workflows?
-2. Was sind die wichtigsten Überlegungen bei der Entwicklung benutzerdefinierter Vorlagen?
-3. Wie implementieren Sie Governance und Compliance in azd-Bereitstellungen?
-4. Was sind die Best Practices für Bereitstellungen im Unternehmensmaßstab?
+2. Welche Schlüsselfaktoren sind bei der Entwicklung benutzerdefinierter Templates zu beachten?
+3. Wie setzen Sie Governance und Compliance bei azd-Bereitstellungen um?
+4. Was sind Best Practices für Bereitstellungen in Unternehmensmaßstab?
 5. Wie tragen Sie effektiv zur azd-Community bei?
 
 ## Praktische Projekte
@@ -578,14 +579,14 @@ Analyze the following components:
 **Dauer**: 1-2 Wochen
 
 Erstellen und bereitstellen einer persönlichen Portfolio-Website mit:
-- Statischem Website-Hosting auf Azure Storage
-- Konfiguration einer benutzerdefinierten Domain
-- CDN-Integration für globale Leistung
-- Automatisierte Bereitstellungspipeline
+- Statisches Website-Hosting auf Azure Storage
+- Konfiguration einer eigenen Domain
+- CDN-Integration für globale Performance
+- Automatisierte Deployment-Pipeline
 
-**Liefergegenstände**:
-- Funktionierende Website, bereitgestellt auf Azure
-- Benutzerdefinierte azd-Vorlage für Portfolio-Bereitstellungen
+**Ergebnisse**:
+- Funktionierende Website auf Azure bereitgestellt
+- Spezifisches azd-Template für Portfolio-Bereitstellungen
 - Dokumentation des Bereitstellungsprozesses
 - Kostenanalyse und Optimierungsempfehlungen
 
@@ -593,33 +594,33 @@ Erstellen und bereitstellen einer persönlichen Portfolio-Website mit:
 **Komplexität**: Mittel  
 **Dauer**: 2-3 Wochen
 
-Erstellen einer Full-Stack-Aufgabenverwaltungsanwendung mit:
-- React-Frontend, bereitgestellt auf App Service
+Erstellen Sie eine Full-Stack-Aufgabenverwaltung mit:
+- React-Frontend, bereitgestellt in App Service
 - Node.js-API-Backend mit Authentifizierung
 - PostgreSQL-Datenbank mit Migrationen
-- Überwachung mit Application Insights
+- Application Insights für Monitoring
 
-**Liefergegenstände**:
+**Ergebnisse**:
 - Vollständige Anwendung mit Benutzerauthentifizierung
 - Datenbankschema und Migrationsskripte
-- Überwachungs-Dashboards und Alarmierungsregeln
-- Konfiguration für Bereitstellungen in mehreren Umgebungen
+- Monitoring-Dashboards und Alarmierungsregeln
+- Deployment-Konfiguration für mehrere Umgebungen
 
-### Projekt 3: Microservices E-Commerce-Plattform
+### Projekt 3: Microservices-basierte E-Commerce-Plattform
 **Komplexität**: Fortgeschritten  
 **Dauer**: 4-6 Wochen
 
-Entwerfen und implementieren einer Microservices-basierten E-Commerce-Plattform:
+Entwerfen und implementieren Sie eine Microservices-basierte E-Commerce-Plattform:
 - Mehrere API-Dienste (Katalog, Bestellungen, Zahlungen, Benutzer)
 - Nachrichtenwarteschlangen-Integration mit Service Bus
-- Redis-Cache für Leistungsoptimierung
-- Umfassende Protokollierung und Überwachung
+- Redis-Cache zur Leistungsoptimierung
+- Umfassendes Logging und Monitoring
 
-**Referenzbeispiel**: Siehe [Microservices-Architektur](../../../examples/container-app/microservices) für eine produktionsreife Vorlage und Bereitstellungsanleitung
+**Referenzbeispiel**: Siehe [Microservices-Architektur](../../../examples/container-app/microservices) für ein produktionsreifes Template und Bereitstellungsleitfaden
 
-**Liefergegenstände**:
+**Ergebnisse**:
 - Vollständige Microservices-Architektur
-- Muster für die Kommunikation zwischen Diensten
+- Kommunikationsmuster zwischen Diensten
 - Leistungstests und Optimierung
 - Produktionsreife Sicherheitsimplementierung
 
@@ -627,37 +628,37 @@ Entwerfen und implementieren einer Microservices-basierten E-Commerce-Plattform:
 
 ### Wissensüberprüfungen
 
-Absolvieren Sie diese Bewertungen nach jedem Modul:
+Schließen Sie diese Bewertungen nach jedem Modul ab:
 
 **Modul 1 Bewertung**: Grundkonzepte und Installation
 - Multiple-Choice-Fragen zu Kernkonzepten
 - Praktische Installations- und Konfigurationsaufgaben
-- Einfaches Bereitstellungsprojekt
+- Einfache Bereitstellungsübung
 
 **Modul 2 Bewertung**: Konfiguration und Umgebungen
-- Szenarien zur Umgebungsverwaltung
-- Übungen zur Fehlerbehebung bei Konfigurationen
+- Szenarien zum Management von Umgebungen
+- Übungen zur Fehlersuche in der Konfiguration
 - Implementierung von Sicherheitskonfigurationen
 
-**Modul 3 Bewertung**: Bereitstellung und Provisionierung
-- Herausforderungen im Infrastrukturdesign
-- Szenarien für die Bereitstellung mehrerer Dienste
+**Modul 3 Bewertung**: Bereitstellung und Provisioning
+- Herausforderungen im Infrastrukturd-Design
+- Szenarien zur Bereitstellung mehrerer Dienste
 - Übungen zur Leistungsoptimierung
 
-**Modul 4 Bewertung**: Validierung vor der Bereitstellung
+**Modul 4 Bewertung**: Vorbereitungsvalidierung
 - Fallstudien zur Kapazitätsplanung
 - Szenarien zur Kostenoptimierung
 - Implementierung von Validierungspipelines
 
 **Modul 5 Bewertung**: Fehlerbehebung und Debugging
-- Übungen zur Problemdiagnose
-- Aufgaben zur Überwachungsimplementierung
-- Simulationen zur Incident-Reaktion
+- Übungen zur Fehlerdiagnose
+- Aufgaben zur Implementierung von Monitoring
+- Simulationen zur Vorfallreaktion
 
 **Modul 6 Bewertung**: Fortgeschrittene Themen
-- Entwurf von CI/CD-Pipelines
-- Entwicklung benutzerdefinierter Vorlagen
-- Szenarien für Unternehmensarchitekturen
+- Design von CI/CD-Pipelines
+- Entwicklung benutzerdefinierter Templates
+- Unternehmensarchitektur-Szenarien
 
 ### Abschlussprojekt
 
@@ -666,29 +667,29 @@ Entwerfen und implementieren Sie eine vollständige Lösung, die die Beherrschun
 **Anforderungen**:
 - Mehrschichtige Anwendungsarchitektur
 - Mehrere Bereitstellungsumgebungen
-- Umfassende Überwachung und Alarmierung
-- Sicherheits- und Compliance-Implementierung
-- Kostenoptimierung und Leistungsabstimmung
+- Umfassendes Monitoring und Alarmierung
+- Umsetzung von Sicherheits- und Compliance-Anforderungen
+- Kostenoptimierung und Performance-Tuning
 - Vollständige Dokumentation und Runbooks
 
 **Bewertungskriterien**:
 - Qualität der technischen Implementierung
 - Vollständigkeit der Dokumentation
-- Einhaltung von Sicherheits- und Best-Practice-Standards
-- Optimierung von Leistung und Kosten
-- Effektivität bei Fehlerbehebung und Überwachung
+- Einhaltung von Sicherheits- und Best-Practice-Richtlinien
+- Leistungs- und Kostenoptimierung
+- Effektivität von Fehlerbehebung und Monitoring
 
-## Lernressourcen und Referenzen
+## Studienressourcen und Referenzen
 
 ### Offizielle Dokumentation
-- [Azure Developer CLI Dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Bicep Dokumentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Architekturzentrum](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Developer CLI-Dokumentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Bicep-Dokumentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Community-Ressourcen
-- [AZD Template Gallery](https://azure.github.io/awesome-azd/)
-- [Azure-Samples GitHub Organisation](https://github.com/Azure-Samples)
-- [Azure Developer CLI GitHub Repository](https://github.com/Azure/azure-dev)
+- [AZD Template-Galerie](https://azure.github.io/awesome-azd/)
+- [Azure-Samples GitHub-Organisation](https://github.com/Azure-Samples)
+- [Azure Developer CLI GitHub-Repository](https://github.com/Azure/azure-dev)
 
 ### Übungsumgebungen
 - [Azure Free Account](https://azure.microsoft.com/free/)
@@ -700,18 +701,18 @@ Entwerfen und implementieren Sie eine vollständige Lösung, die die Beherrschun
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)
 
-## Empfehlungen für den Lernplan
+## Empfehlungen für den Studienplan
 
 ### Vollzeitstudium (8 Wochen)
 - **Wochen 1-2**: Module 1-2 (Erste Schritte, Konfiguration)
-- **Wochen 3-4**: Module 3-4 (Bereitstellung, Validierung vor der Bereitstellung)
-- **Wochen 5-6**: Module 5-6 (Fehlerbehebung, Fortgeschrittene Themen)
+- **Wochen 3-4**: Module 3-4 (Bereitstellung, Vorbereitungen)
+- **Wochen 5-6**: Module 5-6 (Fehlerbehebung, Fortgeschrittenes)
 - **Wochen 7-8**: Praktische Projekte und Abschlussbewertung
 
 ### Teilzeitstudium (16 Wochen)
 - **Wochen 1-4**: Modul 1 (Erste Schritte)
 - **Wochen 5-7**: Modul 2 (Konfiguration und Umgebungen)
-- **Wochen 8-10**: Modul 3 (Bereitstellung und Provisionierung)
+- **Wochen 8-10**: Modul 3 (Bereitstellung und Provisioning)
 - **Wochen 11-12**: Modul 4 (Validierung vor der Bereitstellung)
 - **Wochen 13-14**: Modul 5 (Fehlerbehebung und Debugging)
 - **Wochen 15-16**: Modul 6 (Fortgeschrittene Themen und Bewertung)
@@ -720,143 +721,143 @@ Entwerfen und implementieren Sie eine vollständige Lösung, die die Beherrschun
 
 ## Fortschrittsverfolgung und Bewertungsrahmen
 
-### Kapitelabschluss-Checkliste
+### Checkliste zum Abschluss der Kapitel
 
-Verfolgen Sie Ihren Fortschritt durch jedes Kapitel mit diesen messbaren Ergebnissen:
+Verfolgen Sie Ihren Fortschritt in jedem Kapitel mit diesen messbaren Ergebnissen:
 
 #### 📚 Kapitel 1: Grundlagen & Schnellstart
-- [ ] **Installation abgeschlossen**: AZD auf Ihrer Plattform installiert und überprüft
-- [ ] **Erste Bereitstellung**: Erfolgreich bereitgestellte todo-nodejs-mongo Vorlage
-- [ ] **Umgebungseinrichtung**: Erste Umgebungsvariablen konfiguriert
-- [ ] **Ressourcennavigation**: Bereitgestellte Ressourcen im Azure-Portal erkundet
-- [ ] **Befehlsbeherrschung**: Vertraut mit grundlegenden AZD-Befehlen
+- [ ] **Installation abgeschlossen**: AZD auf Ihrer Plattform installiert und verifiziert
+- [ ] **Erste Bereitstellung**: Erfolgreich das todo-nodejs-mongo-Template bereitgestellt
+- [ ] **Umgebung eingerichtet**: Erste Umgebungsvariablen konfiguriert
+- [ ] **Ressourcen-Navigation**: Bereitgestellte Ressourcen im Azure-Portal erkundet
+- [ ] **Befehlsbeherrschung**: Sicher im Umgang mit grundlegenden AZD-Befehlen
 
-#### 🤖 Kapitel 2: KI-First-Entwicklung  
-- [ ] **KI-Vorlagenbereitstellung**: Erfolgreich azure-search-openai-demo bereitgestellt
-- [ ] **RAG-Implementierung**: Dokumentenindizierung und -abruf konfiguriert
-- [ ] **Modellkonfiguration**: Mehrere KI-Modelle mit unterschiedlichen Zwecken eingerichtet
-- [ ] **KI-Überwachung**: Application Insights für KI-Workloads implementiert
-- [ ] **Leistungsoptimierung**: Leistung der KI-Anwendung abgestimmt
+#### 🤖 Kapitel 2: KI-fokussierte Entwicklung  
+- [ ] **AI-Template-Bereitstellung**: azure-search-openai-demo erfolgreich bereitgestellt
+- [ ] **RAG-Implementierung**: Dokumentindizierung und -abruf konfiguriert
+- [ ] **Modellkonfiguration**: Mehrere KI-Modelle für unterschiedliche Zwecke eingerichtet
+- [ ] **KI-Monitoring**: Application Insights für KI-Workloads implementiert
+- [ ] **Leistungsoptimierung**: KI-Anwendungsleistung optimiert
 
 #### ⚙️ Kapitel 3: Konfiguration & Authentifizierung
-- [ ] **Multi-Umgebungs-Einrichtung**: Entwicklungs-, Staging- und Produktionsumgebungen konfiguriert
+- [ ] **Multi-Environment-Setup**: Dev-, Staging- und Prod-Umgebungen konfiguriert
 - [ ] **Sicherheitsimplementierung**: Managed Identity-Authentifizierung eingerichtet
 - [ ] **Geheimnisverwaltung**: Azure Key Vault für sensible Daten integriert
-- [ ] **Parameterverwaltung**: Umgebungsspezifische Konfigurationen erstellt
-- [ ] **Authentifizierungsbeherrschung**: Sichere Zugriffsmuster implementiert
+- [ ] **Parameterverwaltung**: Umgebungspezifische Konfigurationen erstellt
+- [ ] **Authentifizierungs-Beherrschung**: Sichere Zugriffsmuster implementiert
 
 #### 🏗️ Kapitel 4: Infrastruktur als Code & Bereitstellung
-- [ ] **Erstellung benutzerdefinierter Vorlagen**: Vorlage für eine Anwendung mit mehreren Diensten erstellt
+- [ ] **Erstellung eigener Templates**: Ein Multi-Service-Anwendungstemplate gebaut
 - [ ] **Bicep-Beherrschung**: Modulare, wiederverwendbare Infrastrukturkomponenten erstellt
-- [ ] **Automatisierung der Bereitstellung**: Pre/Post-Bereitstellungshooks implementiert
+- [ ] **Bereitstellungsautomatisierung**: Pre-/Post-Deployment-Hooks implementiert
 - [ ] **Architekturdesign**: Komplexe Microservices-Architektur bereitgestellt
-- [ ] **Vorlagenoptimierung**: Vorlagen für Leistung und Kosten optimiert
+- [ ] **Template-Optimierung**: Templates für Leistung und Kosten optimiert
 
-#### 🎯 Kapitel 5: Multi-Agent-KI-Lösungen
-- [ ] **Bereitstellung der Einzelhandelslösung**: Vollständiges Multi-Agent-Einzelhandelsszenario bereitgestellt
-- [ ] **Agentenanpassung**: Verhalten von Kunden- und Inventaragenten modifiziert
-- [ ] **Architekturskalierung**: Lastenausgleich und automatische Skalierung implementiert
-- [ ] **Produktionsüberwachung**: Umfassende Überwachung und Alarmierung eingerichtet
-- [ ] **Leistungsabstimmung**: Leistung des Multi-Agent-Systems optimiert
+#### 🎯 Kapitel 5: Mehragenten-KI-Lösungen
+- [ ] **Retail-Lösung bereitzgestellt**: Komplettes Mehragenten-Retail-Szenario bereitgestellt
+- [ ] **Agenten-Anpassung**: Verhalten von Customer- und Inventory-Agenten modifiziert
+- [ ] **Architektur-Skalierung**: Load Balancing und Auto-Scaling implementiert
+- [ ] **Produktions-Monitoring**: Umfassendes Monitoring und Alerting eingerichtet
+- [ ] **Leistungs-Tuning**: Mehragenten-Systemleistung optimiert
 
-#### 🔍 Kapitel 6: Validierung & Planung vor der Bereitstellung
+#### 🔍 Kapitel 6: Validierung und Planung vor der Bereitstellung
 - [ ] **Kapazitätsanalyse**: Ressourcenanforderungen für Anwendungen analysiert
-- [ ] **SKU-Optimierung**: Kostenwirksame Servicestufen ausgewählt
-- [ ] **Validierungsautomatisierung**: Skripte zur Validierung vor der Bereitstellung implementiert
-- [ ] **Kostenplanung**: Schätzungen und Budgets für Bereitstellungskosten erstellt
-- [ ] **Risikobewertung**: Bereitstellungsrisiken identifiziert und gemindert
+- [ ] **SKU-Optimierung**: Kostenoptimale Service-Tiers ausgewählt
+- [ ] **Validierungsautomatisierung**: Pre-Deployment-Check-Skripte implementiert
+- [ ] **Kostenplanung**: Bereitstellungskosten-Schätzungen und Budgets erstellt
+- [ ] **Risikoabschätzung**: Bereitstellungsrisiken identifiziert und gemindert
 
 #### 🚨 Kapitel 7: Fehlerbehebung & Debugging
-- [ ] **Diagnosefähigkeiten**: Erfolgreich absichtlich fehlerhafte Bereitstellungen debuggt
+- [ ] **Diagnosefähigkeiten**: Fehler absichtlich fehlerhafte Bereitstellungen erfolgreich debuggt
 - [ ] **Protokollanalyse**: Azure Monitor und Application Insights effektiv genutzt
-- [ ] **Leistungsabstimmung**: Langsam laufende Anwendungen optimiert
-- [ ] **Wiederherstellungsverfahren**: Backup und Notfallwiederherstellung implementiert
-- [ ] **Überwachungssetup**: Proaktive Überwachung und Alarmierung erstellt
+- [ ] **Leistungsoptimierung**: Langsame Anwendungen optimiert
+- [ ] **Wiederherstellungsverfahren**: Backup- und Notfallwiederherstellung implementiert
+- [ ] **Monitoring-Setup**: Proaktives Monitoring und Alerting erstellt
 
-#### 🏢 Kapitel 8: Produktion & Unternehmensmuster
-- [ ] **Unternehmenssicherheit**: Umfassende Sicherheitsmuster implementiert
-- [ ] **Governance-Rahmenwerk**: Azure Policy und Ressourcenmanagement eingerichtet
-- [ ] **Fortgeschrittene Überwachung**: Dashboards und automatisierte Alarmierung erstellt
-- [ ] **CI/CD-Integration**: Automatisierte Bereitstellungspipelines erstellt
+#### 🏢 Kapitel 8: Produktions- & Unternehmensmuster
+- [ ] **Enterprise-Sicherheit**: Umfassende Sicherheitsmuster implementiert
+- [ ] **Governance-Framework**: Azure Policy und Ressourcenverwaltung eingerichtet
+- [ ] **Erweitertes Monitoring**: Dashboards und automatisiertes Alerting erstellt
+- [ ] **CI/CD-Integration**: Automatisierte Deployment-Pipelines erstellt
 - [ ] **Compliance-Implementierung**: Unternehmens-Compliance-Anforderungen erfüllt
 
 ### Lernzeitplan und Meilensteine
 
-#### Woche 1-2: Grundlagen schaffen
-- **Meilenstein**: Erste KI-Anwendung mit AZD bereitstellen
-- **Validierung**: Funktionierende Anwendung über öffentliche URL zugänglich
-- **Fähigkeiten**: Grundlegende AZD-Workflows und KI-Dienstintegration
+#### Woche 1-2: Grundlagen aufbauen
+- **Meilenstein**: Erste KI-Anwendung mit AZD bereitgestellt
+- **Validierung**: Funktionierende Anwendung über öffentliche URL erreichbar
+- **Fähigkeiten**: Grundlegende AZD-Workflows und KI-Service-Integration
 
-#### Woche 3-4: Konfigurationsbeherrschung
-- **Meilenstein**: Bereitstellung in mehreren Umgebungen mit sicherer Authentifizierung
-- **Validierung**: Dieselbe Anwendung in Entwicklung/Staging/Produktion bereitgestellt
-- **Fähigkeiten**: Umgebungsverwaltung und Sicherheitsimplementierung
+#### Woche 3-4: Konfigurations-Beherrschung
+- **Meilenstein**: Multi-Environment-Bereitstellung mit sicherer Authentifizierung
+- **Validierung**: Dieselbe Anwendung in Dev/Staging/Prod bereitgestellt
+- **Fähigkeiten**: Umgebungsmanagement und Sicherheitsimplementierung
 
 #### Woche 5-6: Infrastruktur-Expertise
-- **Meilenstein**: Benutzerdefinierte Vorlage für komplexe Anwendung mit mehreren Diensten
-- **Validierung**: Wiederverwendbare Vorlage von einem anderen Teammitglied bereitgestellt
+- **Meilenstein**: Eigenes Template für komplexe Multi-Service-Anwendung
+- **Validierung**: Wiederverwendbares Template von einem anderen Teammitglied bereitgestellt
 - **Fähigkeiten**: Bicep-Beherrschung und Infrastrukturautomatisierung
 
 #### Woche 7-8: Fortgeschrittene KI-Implementierung
-- **Meilenstein**: Produktionsreife Multi-Agent-KI-Lösung
-- **Validierung**: System bewältigt reale Last mit Überwachung
-- **Fähigkeiten**: Multi-Agent-Orchestrierung und Leistungsoptimierung
+- **Meilenstein**: Produktionsreife Mehragenten-KI-Lösung
+- **Validierung**: System bewältigt reale Last mit Monitoring
+- **Fähigkeiten**: Mehragenten-Orchestrierung und Leistungsoptimierung
 
 #### Woche 9-10: Produktionsbereitschaft
-- **Meilenstein**: Unternehmensgerechte Bereitstellung mit vollständiger Compliance
-- **Validierung**: Besteht Sicherheitsprüfung und Kostenoptimierungs-Audit
-- **Fähigkeiten**: Governance, Überwachung und CI/CD-Integration
+- **Meilenstein**: Unternehmensgerechte Bereitstellung mit voller Compliance
+- **Validierung**: Besteht Sicherheitsüberprüfung und Kostenoptimierungs-Audit
+- **Fähigkeiten**: Governance, Monitoring und CI/CD-Integration
 
 ### Bewertung und Zertifizierung
 
 #### Methoden zur Wissensvalidierung
 1. **Praktische Bereitstellungen**: Funktionierende Anwendungen für jedes Kapitel
-2. **Code-Reviews**: Qualitätsbewertung von Vorlagen und Konfigurationen
-3. **Problemlösung**: Szenarien zur Fehlerbehebung und Lösungen
-4. **Peer-Learning**: Konzepte anderen Lernenden erklären
-5. **Beitrag zur Community**: Teilen Sie Vorlagen oder Verbesserungen
+2. **Code-Reviews**: Bewertung der Qualität von Templates und Konfigurationen
+3. **Problemlösung**: Szenarien zur Fehlerbehebung und deren Lösungen
+4. **Peer-Unterricht**: Konzepte anderen Lernenden erklären
+5. **Beitrag zur Community**: Templates oder Verbesserungen teilen
 
-#### Ergebnisse der beruflichen Entwicklung
-- **Portfolio-Projekte**: 8 einsatzbereite Deployments
-- **Technische Fähigkeiten**: Branchenübliche AZD- und KI-Deployment-Expertise
+#### Berufliche Entwicklungsergebnisse
+- **Portfolio-Projekte**: 8 produktionsreife Bereitstellungen
+- **Technische Fähigkeiten**: Branchenübliche AZD- und KI-Bereitstellungs-Expertise
 - **Problemlösungsfähigkeiten**: Eigenständige Fehlerbehebung und Optimierung
 - **Anerkennung in der Community**: Aktive Teilnahme an der Azure-Entwickler-Community
-- **Karrierefortschritt**: Fähigkeiten, die direkt auf Cloud- und KI-Rollen anwendbar sind
+- **Karrierefortschritt**: Fähigkeiten direkt anwendbar in Cloud- und KI-Rollen
 
-#### Erfolgsmessung
-- **Erfolgsquote bei Deployments**: >95 % erfolgreiche Deployments
+#### Erfolgskennzahlen
+- **Erfolgsquote der Bereitstellungen**: >95% erfolgreiche Bereitstellungen
 - **Fehlerbehebungszeit**: <30 Minuten für häufige Probleme
 - **Leistungsoptimierung**: Nachweisbare Verbesserungen bei Kosten und Leistung
-- **Sicherheitskonformität**: Alle Deployments erfüllen Unternehmenssicherheitsstandards
-- **Wissensweitergabe**: Fähigkeit, andere Entwickler zu betreuen
+- **Sicherheitskonformität**: Alle Bereitstellungen erfüllen Unternehmenssicherheitsstandards
+- **Wissensvermittlung**: Fähigkeit, andere Entwickler zu betreuen
 
-### Kontinuierliches Lernen und Engagement in der Community
+### Kontinuierliches Lernen und Community-Engagement
 
 #### Auf dem Laufenden bleiben
-- **Azure-Updates**: Verfolgen Sie die Release Notes des Azure Developer CLI
-- **Community-Events**: Nehmen Sie an Azure- und KI-Entwicklerveranstaltungen teil
+- **Azure-Updates**: Verfolgen Sie die Release-Notes des Azure Developer CLI
+- **Community-Veranstaltungen**: Nehmen Sie an Azure- und KI-Entwicklerveranstaltungen teil
 - **Dokumentation**: Tragen Sie zur Community-Dokumentation und zu Beispielen bei
-- **Feedback-Schleife**: Geben Sie Feedback zu Kursinhalten und Azure-Diensten
+- **Feedback-Schleife**: Geben Sie Rückmeldungen zum Kursinhalt und zu Azure-Diensten
 
 #### Karriereentwicklung
 - **Professionelles Netzwerk**: Vernetzen Sie sich mit Azure- und KI-Experten
 - **Vortragsmöglichkeiten**: Präsentieren Sie Ihre Erkenntnisse auf Konferenzen oder Meetups
-- **Open-Source-Beitrag**: Tragen Sie zu AZD-Vorlagen und Tools bei
-- **Mentoring**: Unterstützen Sie andere Entwickler bei ihrer AZD-Lernreise
+- **Open-Source-Beiträge**: Tragen Sie zu AZD-Vorlagen und -Tools bei
+- **Mentoring**: Begleiten Sie andere Entwickler auf ihrer AZD-Lernreise
 
 ---
 
 **Kapitel-Navigation:**
-- **📚 Kursübersicht**: [AZD für Einsteiger](../README.md)
-- **📖 Lernen beginnen**: [Kapitel 1: Grundlagen & Schnellstart](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 Fortschritt verfolgen**: Verfolgen Sie Ihren Fortschritt durch das umfassende 8-Kapitel-Lernsystem
+- **📚 Kursstartseite**: [AZD für Einsteiger](../README.md)
+- **📖 Loslegen**: [Kapitel 1: Grundlagen & Schnellstart](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Fortschrittsverfolgung**: Verfolgen Sie Ihren Fortschritt durch das umfassende 8-Kapitel-Lernsystem
 - **🤝 Community**: [Azure Discord](https://discord.gg/microsoft-azure) für Unterstützung und Diskussion
 
-**Fortschrittsverfolgung beim Lernen**: Nutzen Sie diesen strukturierten Leitfaden, um den Azure Developer CLI durch schrittweises, praxisorientiertes Lernen mit messbaren Ergebnissen und Vorteilen für die berufliche Entwicklung zu meistern.
+**Verfolgung des Lernfortschritts**: Verwenden Sie diesen strukturierten Leitfaden, um das Azure Developer CLI durch fortschreitendes, praxisorientiertes Lernen mit messbaren Ergebnissen und beruflichen Entwicklungsvorteilen zu meistern.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Haftungsausschluss**:  
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Nutzung dieser Übersetzung entstehen.
+**Haftungsausschluss**:
+Dieses Dokument wurde mit dem KI‑Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache ist als maßgebliche Quelle zu betrachten. Bei wichtigen Informationen wird eine professionelle, menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

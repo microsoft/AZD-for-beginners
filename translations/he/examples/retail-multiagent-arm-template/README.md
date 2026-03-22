@@ -1,195 +1,197 @@
-# פתרון רב-סוכנים לקמעונאות - תבנית תשתית
+# פתרון רב-סוכנים לסקטור הקמעונאות - תבנית תשתית
 
-**פרק 5: חבילת פריסה לייצור**
-- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
-- **📖 פרק קשור**: [פרק 5: פתרונות AI רב-סוכנים](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **📝 מדריך תרחיש**: [ארכיטקטורה מלאה](../retail-scenario.md)
-- **🎯 פריסה מהירה**: [פריסה בלחיצה אחת](../../../../examples/retail-multiagent-arm-template)
+**פרק 5: חבילת פריסה בסביבת ייצור**  
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)  
+- **📖 פרק קשור**: [פרק 5: פתרונות AI רב-סוכנים](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)  
+- **📝 מדריך תרחיש**: [ארכיטקטורה מלאה](../retail-scenario.md)  
+- **🎯 פריסה מהירה**: [פריסה בלחיצה אחת](#-quick-deployment)  
 
 > **⚠️ תבנית תשתית בלבד**  
-> תבנית ARM זו פורסת **משאבי Azure** למערכת רב-סוכנים.  
+> תבנית ARM זו מפריסה **משאבי Azure** למערכת רב-סוכנים.  
 >  
-> **מה נפרס (15-25 דקות):**
-> - ✅ Azure OpenAI (GPT-4o, GPT-4o-mini, embeddings בשלושה אזורים)
-> - ✅ שירות חיפוש AI (ריק, מוכן ליצירת אינדקסים)
-> - ✅ Container Apps (תמונות דמה, מוכן לקוד שלך)
-> - ✅ אחסון, Cosmos DB, Key Vault, Application Insights
+> **מה מתקין במהלך הפריסה (15-25 דקות):**  
+> - ✅ שירותי Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini, הטמעות באזורי שירות מגוונים)  
+> - ✅ שירות Azure AI Search (ריק, מוכן ליצירת אינדקס)  
+> - ✅ Container Apps (תמונות מייצגות, מוכנות לקוד שלך)  
+> - ✅ אחסון, Cosmos DB, Key Vault, Application Insights  
 >  
-> **מה לא כלול (דורש פיתוח):**
-> - ❌ קוד מימוש סוכנים (סוכן לקוחות, סוכן מלאי)
-> - ❌ לוגיקת ניתוב ונקודות קצה API
-> - ❌ ממשק משתמש לצ'אט
-> - ❌ סכמות אינדקס חיפוש וצינורות נתונים
-> - ❌ **הערכת מאמץ פיתוח: 80-120 שעות**
+> **מה לא כלול (דורש פיתוח):**  
+> - ❌ קוד יישום הסוכן (סוכן לקוח, סוכן מלאי)  
+> - ❌ לוגיקת ניתוב ונקודות קצה של API  
+> - ❌ ממשק שיחה בצד לקוח  
+> - ❌ סכמות אינדקס חיפוש וצינורות נתונים  
+> - ❌ **מאמץ פיתוח מוערך: 80-120 שעות**  
 >  
-> **השתמש בתבנית זו אם:**
-> - ✅ אתה רוצה להקים תשתית Azure לפרויקט רב-סוכנים
-> - ✅ אתה מתכנן לפתח את מימוש הסוכנים בנפרד
-> - ✅ אתה זקוק לתשתית בסיסית מוכנה לייצור
+> **השתמש בתבנית זו אם:**  
+> - ✅ אתה רוצה להקים תשתית Azure לפרויקט רב-סוכנים  
+> - ✅ מתכנן לפתח את קוד הסוכן בנפרד  
+> - ✅ צריך בסיס תשתיתי מוכן לייצור  
 >  
-> **אל תשתמש אם:**
-> - ❌ אתה מצפה לדמו רב-סוכנים עובד מיד
-> - ❌ אתה מחפש דוגמאות קוד שלמות לאפליקציה
+> **אל תשתמש אם:**  
+> - ❌ מצפה לדמו רב-סוכנים עובד מיד  
+> - ❌ מחפש דוגמאות קוד מלאה ליישום  
 
 ## סקירה כללית
 
-תיקייה זו מכילה תבנית Azure Resource Manager (ARM) מקיפה לפריסת **בסיס התשתית** של מערכת תמיכת לקוחות רב-סוכנים. התבנית מקימה את כל שירותי Azure הנדרשים, מוגדרים ומחוברים כראוי, ומוכנים לפיתוח האפליקציה שלך.
+תיקיה זו מכילה תבנית מקיפה של Azure Resource Manager (ARM) לפריסת **תשתית יסוד** של מערכת תמיכת לקוחות רב-סוכנים. התבנית מספקת את כל שירותי Azure הנדרשים, מוגדרים היטב ומחוברים, מוכנים לפיתוח האפליקציה שלך.
 
-**לאחר הפריסה, יהיה לך:** תשתית Azure מוכנה לייצור  
-**להשלמת המערכת, תצטרך:** קוד סוכנים, ממשק משתמש קדמי, וקונפיגורציית נתונים (ראה [מדריך ארכיטקטורה](../retail-scenario.md))
+**לאחר הפריסה תקבל:** תשתית Azure מוכנה לייצור  
+**להשלמת המערכת דרוש:** קוד סוכן, ממשק משתמש, ותצורת נתונים (ראה [מדריך ארכיטקטורה](../retail-scenario.md))
 
-## 🎯 מה נפרס
+## 🎯 מה מותקן
 
-### תשתית ליבה (סטטוס לאחר פריסה)
+### תשתית ליבה (מצב לאחר פריסה)
 
-✅ **שירותי Azure OpenAI** (מוכנים לקריאות API)
-  - אזור ראשי: פריסת GPT-4o (קיבולת 20K TPM)
-  - אזור משני: פריסת GPT-4o-mini (קיבולת 10K TPM)
-  - אזור שלישי: מודל embeddings טקסט (קיבולת 30K TPM)
-  - אזור הערכה: מודל grader של GPT-4o (קיבולת 15K TPM)
-  - **סטטוס:** פעיל לחלוטין - ניתן לבצע קריאות API מיד
+✅ **שירותי Microsoft Foundry Models** (מוכנים לקריאות API)  
+- אזור ראשי: פריסת gpt-4.1 (קיבולת 20K TPM)  
+- אזור משני: פריסת gpt-4.1-mini (קיבולת 10K TPM)  
+- אזור שלישי: מודל הטמעות טקסט (קיבולת 30K TPM)  
+- אזור הערכה: מודל gpt-4.1 grader (קיבולת 15K TPM)  
+- **מצב:** פועל במלואו - ניתן לבצע קריאות API מיד  
 
-✅ **Azure AI Search** (ריק - מוכן לקונפיגורציה)
-  - יכולות חיפוש וקטורי מופעלות
-  - רמת Standard עם מחיצה אחת, שכפול אחד
-  - **סטטוס:** השירות פועל, אך דורש יצירת אינדקס
-  - **פעולה נדרשת:** צור אינדקס חיפוש עם הסכמה שלך
+✅ **Azure AI Search** (ריקה - מוכנה לתצורה)  
+- הפעלת יכולות חיפוש וקטורי  
+- שכבת בסיס עם מחיצת 1, שכפול 1  
+- **מצב:** שירות פעיל, אך נדרש יצירת אינדקס  
+- **פעולה נדרשת:** צור אינדקס חיפוש עם הסכמה שלך  
 
-✅ **Azure Storage Account** (ריק - מוכן להעלאות)
-  - מכולות Blob: `documents`, `uploads`
-  - קונפיגורציה מאובטחת (HTTPS בלבד, ללא גישה ציבורית)
-  - **סטטוס:** מוכן לקבלת קבצים
-  - **פעולה נדרשת:** העלה את נתוני המוצרים והמסמכים שלך
+✅ **חשבון אחסון Azure** (ריק - מוכן להעלאות)  
+- מיכלי Blob: `documents`, `uploads`  
+- תצורה מאובטחת (HTTPS בלבד, ללא גישה ציבורית)  
+- **מצב:** מוכן לקבל קבצים  
+- **פעולה נדרשת:** העלה את נתוני המוצרים והמסמכים  
 
-⚠️ **סביבת Container Apps** (תמונות דמה נפרסו)
-  - אפליקציית ניתוב סוכנים (תמונת ברירת מחדל של nginx)
-  - אפליקציה קדמית (תמונת ברירת מחדל של nginx)
-  - קונפיגורציית אוטו-סקיילינג (0-10 מופעים)
-  - **סטטוס:** מפעיל מכולות דמה
-  - **פעולה נדרשת:** בנה ופרוס את אפליקציות הסוכנים שלך
+⚠️ **סביבת Container Apps** (תמונות מייצגות מותקנות)  
+- אפליקציית ניתוב סוכנים (תמונה ברירת מחדל nginx)  
+- אפליקציית frontend (תמונה ברירת מחדל nginx)  
+- קביעת גודל אוטומטי (0-10 מופעים)  
+- **מצב:** מפעיל מכולות מייצגות  
+- **פעולה נדרשת:** בנה ופרוס את אפליקציות הסוכן שלך  
 
-✅ **Azure Cosmos DB** (ריק - מוכן לנתונים)
-  - מסד נתונים ומכולה מוגדרים מראש
-  - מותאם לפעולות בעלות השהיה נמוכה
-  - TTL מופעל לניקוי אוטומטי
-  - **סטטוס:** מוכן לאחסון היסטוריית צ'אט
+✅ **Azure Cosmos DB** (ריק - מוכן לנתונים)  
+- בסיס נתונים ומיכל מוגדרים מראש  
+- מותאם לפעולות עם זמן תגובה נמוך  
+- TTL מופעל לניקוי אוטומטי  
+- **מצב:** מוכן לאחסון היסטוריית שיחות  
 
-✅ **Azure Key Vault** (אופציונלי - מוכן לסודות)
-  - מחיקה רכה מופעלת
-  - RBAC מוגדר לזהויות מנוהלות
-  - **סטטוס:** מוכן לאחסון מפתחות API ומחרוזות חיבור
+✅ **Azure Key Vault** (אופציונלי - מוכן לסודות)  
+- מחיקה רכה מופעלת  
+- RBAC מוגדר לזהויות מנוהלות  
+- **מצב:** מוכן לאחסון מפתחות API ומחרוזות חיבור  
 
-✅ **Application Insights** (אופציונלי - ניטור פעיל)
-  - מחובר ל-Log Analytics workspace
-  - מדדים והתראות מותאמים אישית מוגדרים
-  - **סטטוס:** מוכן לקבלת טלמטריה מהאפליקציות שלך
+✅ **Application Insights** (אופציונלי - ניטור פעיל)  
+- מחובר למרחב עבודה Log Analytics  
+- מדדים מותאמים והתראות מוגדרים  
+- **מצב:** מוכן לקבל טלמטריה מהאפליקציות  
 
-✅ **Document Intelligence** (מוכן לקריאות API)
-  - רמת S0 לעומסי עבודה בייצור
-  - **סטטוס:** מוכן לעיבוד מסמכים שהועלו
+✅ **Document Intelligence** (מוכן לקריאות API)  
+- שכבת S0 לעומסי עבודה בייצור  
+- **מצב:** מוכן לעיבוד מסמכים שהועלו  
 
-✅ **Bing Search API** (מוכן לקריאות API)
-  - רמת S1 לחיפושים בזמן אמת
-  - **סטטוס:** מוכן לשאילתות חיפוש באינטרנט
+✅ **Bing Search API** (מוכן לקריאות API)  
+- שכבת S1 לחיפושים בזמן אמת  
+- **מצב:** מוכן לשאילתות חיפוש רשת  
 
 ### מצבי פריסה
 
-| מצב | קיבולת OpenAI | מופעי מכולות | רמת חיפוש | יתירות אחסון | מתאים ל- |
-|------|-----------------|---------------------|-------------|-------------------|----------|
-| **מינימלי** | 10K-20K TPM | 0-2 שכפולים | Basic | LRS (מקומי) | פיתוח/בדיקות, למידה, הוכחת היתכנות |
-| **סטנדרטי** | 30K-60K TPM | 2-5 שכפולים | Standard | ZRS (אזורי) | ייצור, תעבורה מתונה (<10K משתמשים) |
-| **פרימיום** | 80K-150K TPM | 5-10 שכפולים, יתירות אזורית | Premium | GRS (גיאוגרפי) | ארגוני, תעבורה גבוהה (>10K משתמשים), SLA של 99.99% |
+| מצב  | קיבולת OpenAI | מופעי מכולות | שכבת חיפוש | שכפול אחסון    | מתאים ל:                     |
+|-------|--------------|--------------|------------|----------------|------------------------------|
+| **מינימלי** | 10K-20K TPM   | 0-2 שכפולים | בסיסי      | LRS (מקומי)    | פיתוח/בדיקה, למידה, הוכחת מושג |
+| **סטנדרטי** | 30K-60K TPM   | 2-5 שכפולים | סטנדרטי   | ZRS (אזור)    | ייצור, תנועה בינונית (<10K משתמשים) |
+| **פרימיום** | 80K-150K TPM  | 5-10 שכפולים, שכפול אזורי | פרימיום   | GRS (גאוגרפי) | ארגוני, תנועה גבוהה (>10K משתמשים), SLA 99.99% |
 
-**השפעת עלות:**
-- **מינימלי → סטנדרטי:** עלייה של פי 4 בעלות (~$100-370 לחודש → ~$420-1,450 לחודש)
-- **סטנדרטי → פרימיום:** עלייה של פי 3 בעלות (~$420-1,450 לחודש → ~$1,150-3,500 לחודש)
-- **בחר על בסיס:** עומס צפוי, דרישות SLA, מגבלות תקציב
+**השפעת עלות:**  
+- **מינימלי → סטנדרטי:** ~4X עלות ($100-370/חודש → $420-1,450/חודש)  
+- **סטנדרטי → פרימיום:** ~3X עלות ($420-1,450/חודש → $1,150-3,500/חודש)  
+- **בחר לפי:** עומס צפוי, דרישות SLA, מגבלות תקציב  
 
-**תכנון קיבולת:**
-- **TPM (Tokens Per Minute):** סך הכל בכל פריסות המודלים
-- **מופעי מכולות:** טווח אוטו-סקיילינג (מינימום-מקסימום שכפולים)
-- **רמת חיפוש:** משפיעה על ביצועי שאילתות ומגבלות גודל אינדקס
+**תכנון קיבולת:**  
+- **TPM (טוקנים לדקה):** סך כל הפריסות של המודלים  
+- **מופעי מכולות:** טווח קביעת גודל אוטומטי (מינימום-מקסימום שכפולים)  
+- **שכבת חיפוש:** משפיעה על ביצועי שאילתות והגבלות גודל אינדקס  
 
 ## 📋 דרישות מוקדמות
 
-### כלים נדרשים
-1. **Azure CLI** (גרסה 2.50.0 או גבוהה יותר)
+### כלים נדרשים  
+1. **Azure CLI** (גרסה 2.50.0 ומעלה)  
    ```bash
    az --version  # בדוק גרסה
-   az login      # אימות
+   az login      # אימת את זהותך
    ```
-
-2. **מנוי Azure פעיל** עם גישת Owner או Contributor
+  
+2. **מנוי Azure פעיל** עם גישת בעלים או תורם  
    ```bash
-   az account show  # אמת את המנוי
+   az account show  # אמת מנוי
    ```
+  
 
-### מכסות Azure נדרשות
+### מכסי Azure נדרשים
 
-לפני הפריסה, ודא שיש לך מכסות מספקות באזורים היעד:
+לפני הפריסה, ודא שיש מכסים מספיקים באזורי היעד שלך:
 
 ```bash
-# בדוק זמינות של Azure OpenAI באזור שלך
+# בדוק זמינות דגמי Microsoft Foundry באזור שלך
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus2
 
-# אמת את מכסת OpenAI (דוגמה עבור gpt-4o)
+# אמת את הקצאת OpenAI (דוגמה ל-gpt-4.1)
 az cognitiveservices usage list \
   --location eastus2 \
-  --query "[?name.value=='OpenAI.Standard.gpt-4o']"
+  --query "[?name.value=='OpenAI.Standard.gpt-4.1']"
 
-# בדוק את מכסת Container Apps
+# בדוק קצאת אפליקציות מכולה
 az provider show \
   --namespace Microsoft.App \
   --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
 ```
+  
+**מכסים מינימליים נדרשים:**  
+- **Microsoft Foundry Models:** 3-4 פריסות מודלים באזורי שירות  
+  - gpt-4.1: 20K TPM (טוקנים לדקה)  
+  - gpt-4.1-mini: 10K TPM  
+  - text-embedding-ada-002: 30K TPM  
+  - **הערה:** ייתכן רשימת המתנה ל-gpt-4.1 באזורים מסוימים - בדוק [זמינות מודלים](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)  
+- **Container Apps:** סביבת ניהול + 2-10 מופעי מכולות  
+- **AI Search:** שכבת סטנדרט (Basic אינה מספקת לחיפוש וקטורי)  
+- **Cosmos DB:** throughput סטנדרטי ממונע  
 
-**מכסות מינימליות נדרשות:**
-- **Azure OpenAI:** 3-4 פריסות מודלים באזורים שונים
-  - GPT-4o: 20K TPM (Tokens Per Minute)
-  - GPT-4o-mini: 10K TPM
-  - text-embedding-ada-002: 30K TPM
-  - **הערה:** ייתכן ש-GPT-4o יהיה ברשימת המתנה באזורים מסוימים - בדוק [זמינות מודלים](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- **Container Apps:** סביבה מנוהלת + 2-10 מופעי מכולות
-- **AI Search:** רמת Standard (Basic לא מספיקה לחיפוש וקטורי)
-- **Cosmos DB:** תפוקה סטנדרטית מוקצבת
-
-**אם המכסה אינה מספיקה:**
-1. עבור לפורטל Azure → מכסות → בקש הגדלה
-2. או השתמש ב-Azure CLI:
+**אם המכסה אינה מספקת:**  
+1. עבור לפורטל Azure → Quotas → בקש הגדלה  
+2. או השתמש ב-Azure CLI:  
    ```bash
    az support tickets create \
      --ticket-name "OpenAI-Quota-Increase" \
      --severity "minimal" \
-     --description "Request quota increase for Azure OpenAI GPT-4o in eastus2"
+     --description "Request quota increase for Microsoft Foundry Models gpt-4.1 in eastus2"
    ```
-3. שקול אזורים חלופיים עם זמינות
+  
+3. שקול אזורי שירות חלופיים  
 
 ## 🚀 פריסה מהירה
 
-### אפשרות 1: שימוש ב-Azure CLI
+### אפשרות 1: באמצעות Azure CLI
 
 ```bash
-# לשכפל או להוריד את קבצי התבנית
+# שיכפול או הורדת קבצי התבנית
 git clone <repository-url>
 cd examples/retail-multiagent-arm-template
 
-# להפוך את סקריפט הפריסה לביצוע
+# הפוך את סקריפט הפריסה לביצועי
 chmod +x deploy.sh
 
-# לפרוס עם הגדרות ברירת מחדל
+# פרוס עם הגדרות ברירת מחדל
 ./deploy.sh -g myResourceGroup
 
-# לפרוס לייצור עם תכונות פרימיום
+# פרוס עבור ייצור עם תכונות פרימיום
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 ```
+  
+### אפשרות 2: באמצעות פורטל Azure
 
-### אפשרות 2: שימוש בפורטל Azure
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-[![פרוס ל-Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
-
-### אפשרות 3: שימוש ישיר ב-Azure CLI
+### אפשרות 3: באמצעות Azure CLI ישירות
 
 ```bash
 # צור קבוצת משאבים
@@ -201,56 +203,56 @@ az deployment group create \
   --template-file azuredeploy.json \
   --parameters azuredeploy.parameters.json
 ```
-
-## ⏱️ ציר זמן לפריסה
+  
+## ⏱️ לוח זמנים לפריסה
 
 ### למה לצפות
 
-| שלב | משך זמן | מה קורה |
-|-------|----------|--------------||
-| **אימות תבנית** | 30-60 שניות | Azure מאמת את תחביר תבנית ARM והפרמטרים |
-| **הקמת קבוצת משאבים** | 10-20 שניות | יוצר קבוצת משאבים (אם נדרש) |
-| **פריסת OpenAI** | 5-8 דקות | יוצר 3-4 חשבונות OpenAI ומפריס מודלים |
-| **Container Apps** | 3-5 דקות | יוצר סביבה ומפריס מכולות דמה |
-| **חיפוש ואחסון** | 2-4 דקות | מקים שירות חיפוש AI וחשבונות אחסון |
-| **Cosmos DB** | 2-3 דקות | יוצר מסד נתונים ומגדיר מכולות |
-| **הגדרת ניטור** | 2-3 דקות | מקים Application Insights ו-Log Analytics |
-| **קונפיגורציית RBAC** | 1-2 דקות | מגדיר זהויות מנוהלות והרשאות |
-| **סה"כ פריסה** | **15-25 דקות** | תשתית מלאה מוכנה |
+| שלב               | משך           | מה קורה                     |
+|--------------------|---------------|-----------------------------|
+| **אימות תבנית**    | 30-60 שניות    | Azure מאמת תחביר ופרמטרים של ה-ARM |
+| **הקמת קבוצת משאבים**|10-20 שניות  | יוצר קבוצת משאבים (אם נדרש)        |
+| **הקצאת OpenAI**   | 5-8 דקות       | יוצר 3-4 חשבונות OpenAI ומפריס מודלים |
+| **Container Apps**  | 3-5 דקות       | יוצר סביבה ומפריס מכולות מייצגות  |
+| **Search & Storage**| 2-4 דקות       | מפריס שירות AI Search וחשבונות אחסון  |
+| **Cosmos DB**       | 2-3 דקות       | יוצר בסיס נתונים ומגדיר מכולות       |
+| **הגדרת ניטור**    | 2-3 דקות       | מגדיר Application Insights ו-Log Analytics |
+| **קביעת RBAC**     | 1-2 דקות       | מגדיר זהויות מנוהלות והרשאות         |
+| **סך הכל פריסה**  | **15-25 דקות** | תשתית מוכנה לשימוש                  |
 
-**לאחר הפריסה:**
-- ✅ **תשתית מוכנה:** כל שירותי Azure נפרסו ופועלים
-- ⏱️ **פיתוח אפליקציה:** 80-120 שעות (באחריותך)
-- ⏱️ **קונפיגורציית אינדקס:** 15-30 דקות (דורש את הסכמה שלך)
-- ⏱️ **העלאת נתונים:** משתנה לפי גודל מערך הנתונים
-- ⏱️ **בדיקות ואימות:** 2-4 שעות
+**לאחר הפריסה:**  
+- ✅ **תשתית מוכנה:** כל שירותי Azure מופעלים ופועלים  
+- ⏱️ **פיתוח אפליקציה:** 80-120 שעות (אחריות שלך)  
+- ⏱️ **קביעת אינדקס:** 15-30 דקות (דורש הסכמה משלך)  
+- ⏱️ **העלאת נתונים:** משתנה לפי גודל מאגר הנתונים  
+- ⏱️ **בדיקות ואימות:** 2-4 שעות  
 
 ---
 
-## ✅ אימות הצלחת פריסה
+## ✅ וודא הצלחת הפריסה
 
-### שלב 1: בדוק הקמת משאבים (2 דקות)
+### שלב 1: בדוק מתן משאבים (2 דקות)
 
 ```bash
-# ודא שכל המשאבים נפרסו בהצלחה
+# אמת שכל המשאבים הושקו בהצלחה
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
   --output table
 ```
+  
+**מצופה:** טבלה ריקה (כל המשאבים במצב "Succeeded")
 
-**מצופה:** טבלה ריקה (כל המשאבים מציגים סטטוס "Succeeded")
-
-### שלב 2: אמת פריסות Azure OpenAI (3 דקות)
+### שלב 2: אמת פריסות Microsoft Foundry Models (3 דקות)
 
 ```bash
-# רשום את כל חשבונות OpenAI
+# ראה את כל חשבונות OpenAI
 az cognitiveservices account list \
   --resource-group myResourceGroup \
   --query "[?kind=='OpenAI'].{Name:name, Location:location, Status:properties.provisioningState}" \
   --output table
 
-# בדוק פריסות מודלים עבור האזור הראשי
+# בדוק פריסות דגמים לאזור הראשי
 OPENAI_NAME=$(az cognitiveservices account list \
   --resource-group myResourceGroup \
   --query "[?kind=='OpenAI'] | [0].name" -o tsv)
@@ -260,21 +262,21 @@ az cognitiveservices account deployment list \
   --resource-group myResourceGroup \
   --output table
 ```
+  
+**מצופה:**  
+- 3-4 חשבונות OpenAI (אזור ראשי, משני, שלישי והערכה)  
+- 1-2 פריסות מודל לכל חשבון (gpt-4.1, gpt-4.1-mini, text-embedding-ada-002)
 
-**מצופה:** 
-- 3-4 חשבונות OpenAI (אזורים ראשי, משני, שלישי, הערכה)
-- 1-2 פריסות מודלים לכל חשבון (gpt-4o, gpt-4o-mini, text-embedding-ada-002)
-
-### שלב 3: בדוק נקודות קצה של תשתית (5 דקות)
+### שלב 3: בדוק נקודות סוף של התשתית (5 דקות)
 
 ```bash
-# קבל כתובות URL של אפליקציית מכולה
+# לקבל כתובות URL של אפליקציית מכולה
 az containerapp list \
   --resource-group myResourceGroup \
   --query "[].{Name:name, URL:properties.configuration.ingress.fqdn, Status:properties.runningStatus}" \
   --output table
 
-# בדוק נקודת קצה של נתב (תמונה מציינת מקום תענה)
+# לבדוק נקודת קצה של נתב (תמונה ממלא תפקיד תענה)
 ROUTER_URL=$(az containerapp show \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -283,12 +285,12 @@ ROUTER_URL=$(az containerapp show \
 echo "Testing: https://$ROUTER_URL"
 curl -I https://$ROUTER_URL || echo "Container running (placeholder image - expected)"
 ```
+  
+**מצופה:**  
+- Container Apps במצב "Running"  
+- nginx החלופי מחזיר HTTP 200 או 404 (עדיין ללא קוד יישום)
 
-**מצופה:** 
-- Container Apps מציגים סטטוס "Running"
-- nginx דמה מגיב עם HTTP 200 או 404 (עדיין אין קוד אפליקציה)
-
-### שלב 4: אמת גישת API של Azure OpenAI (3 דקות)
+### שלב 4: אמת גישה ל-API של Microsoft Foundry Models (3 דקות)
 
 ```bash
 # קבל נקודת קצה ומפתח של OpenAI
@@ -302,8 +304,8 @@ OPENAI_KEY=$(az cognitiveservices account keys list \
   --resource-group myResourceGroup \
   --query "key1" -o tsv)
 
-# בדוק פריסת GPT-4o
-curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview" \
+# בדוק פריסת gpt-4.1
+curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
   -d '{
@@ -311,50 +313,50 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
     "max_tokens": 10
   }'
 ```
-
-**מצופה:** תגובת JSON עם השלמת צ'אט (מאשר ש-OpenAI פעיל)
+  
+**מצופה:** תגובת JSON עם השלמת שיחה (מאשר OpenAI פעיל)
 
 ### מה עובד ומה לא
 
-**✅ עובד לאחר פריסה:**
-- מודלים של Azure OpenAI נפרסו ומקבלים קריאות API
-- שירות חיפוש AI פועל (ריק, ללא אינדקסים עדיין)
-- Container Apps פועלים (תמונות דמה של nginx)
-- חשבונות אחסון נגישים ומוכנים להעלאות
-- Cosmos DB מוכן לפעולות נתונים
-- Application Insights אוסף טלמטריה של תשתית
-- Key Vault מוכן לאחסון סודות
+**✅ עובד לאחר פריסה:**  
+- מודלים של Microsoft Foundry Models בפריסה ומקבלים קריאות API  
+- שירות AI Search פעיל (ריק, ללא אינדקסים)  
+- Container Apps פעילים (תמונות nginx מייצגות)  
+- חשבונות אחסון נגישים ומוכנים להעלאה  
+- Cosmos DB מוכן לפעולות נתונים  
+- Application Insights אוסף טלמטריה תשתיתית  
+- Key Vault מוכן לאחסון סודות  
 
-**❌ לא עובד עדיין (דורש פיתוח):**
-- נקודות קצה של סוכנים (אין קוד אפליקציה נפרס)
-- פונקציונליות צ'אט (דורש ממשק קדמי + אחורי)
-- שאילתות חיפוש (אין אינדקס חיפוש שנוצר עדיין)
-- צינור עיבוד מסמכים (אין נתונים שהועלו)
-- טלמטריה מותאמת אישית (דורש אינסטרומנטציה של אפליקציה)
+**❌ לא עובד עדיין (דורש פיתוח):**  
+- נקודות קצה של סוכנים (אין קוד יישום פרוס)  
+- פונקציונליות שיחה (דורשת מימוש frontend + backend)  
+- שאילתות חיפוש (טרם נוצר אינדקס חיפוש)  
+- צנרת עיבוד מסמכים (טרם הועלו נתונים)  
+- טלמטריה מותאמת (דורשת הכללת תוכנה)  
 
-**השלבים הבאים:** ראה [קונפיגורציה לאחר פריסה](../../../../examples/retail-multiagent-arm-template) לפיתוח ופריסת האפליקציה שלך
+**שלבים הבאים:** ראה [הגדרות לאחר פריסה](#-post-deployment-next-steps) לפיתוח ופריסת האפליקציה שלך  
 
 ---
 
-## ⚙️ אפשרויות קונפיגורציה
+## ⚙️ אפשרויות תצורה
 
 ### פרמטרי תבנית
 
-| פרמטר | סוג | ברירת מחדל | תיאור |
-|-----------|------|---------|-------------|
-| `projectName` | string | "retail" | קידומת לכל שמות המשאבים |
-| `location` | string | מיקום קבוצת המשאבים | אזור פריסה ראשי |
-| `secondaryLocation` | string | "westus2" | אזור משני לפריסה רב-אזורית |
-| `tertiaryLocation` | string | "francecentral" | אזור למודל embeddings |
-| `environmentName` | string | "dev" | ייעוד סביבה (dev/staging/prod) |
-| `deploymentMode` | string | "standard" | קונפיגורציית פריסה (minimal/standard/premium) |
-| `enableMultiRegion` | bool | true | הפעלת פריסה רב-אזורית |
-| `enableMonitoring` | bool | true | הפעלת Application Insights וניטור |
-| `enableSecurity` | bool | true | הפעלת Key Vault ואבטחה משופרת |
+| פרמטר              | סוג    | ברירת מחדל         | תיאור                             |
+|--------------------|--------|--------------------|----------------------------------|
+| `projectName`       | מחרוזת | "retail"           | תחילית לכל שמות המשאבים          |
+| `location`          | מחרוזת | מיקום קבוצת משאבים | אזור פריסה ראשי                  |
+| `secondaryLocation` | מחרוזת | "westus2"          | אזור משני לפריסה רב-אזורית       |
+| `tertiaryLocation`  | מחרוזת | "francecentral"    | אזור לפריסת מודל הטמעות          |
+| `environmentName`   | מחרוזת | "dev"              | סימון סביבה (פיתוח/בדיקה/ייצור) |
+| `deploymentMode`    | מחרוזת | "standard"         | תצורת פריסה (minimal/standard/premium) |
+| `enableMultiRegion` | בוליאני| true               | הפעלת פריסה רב-אזורית            |
+| `enableMonitoring`  | בוליאני| true               | הפעלת Application Insights וניטור |
+| `enableSecurity`    | בוליאני| true               | הפעלת Key Vault ואבטחה מוגברת     |
 
 ### התאמת פרמטרים
 
-ערוך `azuredeploy.parameters.json`:
+ערוך את `azuredeploy.parameters.json`:
 
 ```json
 {
@@ -376,31 +378,22 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
   }
 }
 ```
+  
+## 🏗️ סקירת ארכיטקטורה
 
-## 🏗️ סקירה ארכיטקטונית
-
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │  Agent Router   │    │     Agents      │
-│ (Container App) │───▶│ (Container App) │───▶│ Customer + Inv  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   AI Search     │    │  Azure OpenAI   │    │    Storage      │
-│   (Vector DB)   │    │ (Multi-region)  │    │   (Documents)   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│  Cosmos DB      │    │ App Insights    │    │   Key Vault     │
-│ (Chat History)  │    │  (Monitoring)   │    │   (Secrets)     │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
+```mermaid
+graph TD
+    Frontend[Frontend<br/>אפליקציית מכולה] --> Router[Agent Router<br/>אפליקציית מכולה] --> Agents[Agents<br/>לקוחות + משקיעים]
+    Router --> Search[AI Search<br/>מאגר וקטורים]
+    Router --> Models[Microsoft Foundry Models<br/>רב-אזורי]
+    Agents --> Storage[Storage<br/>מסמכים]
+    Search --> CosmosDB[Cosmos DB<br/>היסטוריית שיחות]
+    Models --> AppInsights[App Insights<br/>ניטור]
+    Storage --> KeyVault[Key Vault<br/>סיסמאות]
+```  
 ## 📖 שימוש בסקריפט פריסה
 
-הסקריפט `deploy.sh` מספק חוויית פריסה אינטראקטיבית:
+סקריפט `deploy.sh` מספק חווית פריסה אינטראקטיבית:
 
 ```bash
 # הצג עזרה
@@ -417,7 +410,7 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
   -m premium \
   -l eastus2
 
-# פריסת פיתוח ללא ריבוי אזורים
+# פריסת פיתוח ללא מרובי אזורים
 ./deploy.sh \
   -g myDevRG \
   -e dev \
@@ -425,80 +418,80 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
   --no-multi-region \
   --no-security
 ```
-
+  
 ### תכונות הסקריפט
 
-- ✅ **אימות דרישות מוקדמות** (Azure CLI, סטטוס התחברות, קבצי תבנית)
-- ✅ **ניהול קבוצת משאבים** (יוצר אם לא קיים)
-- ✅ **אימות תבנית** לפני פריסה
-- ✅ **מעקב התקדמות** עם פלט צבעוני
-- ✅ **תצוגת פלטי פריסה**
-- ✅ **הנחיות לאחר פריסה**
+- ✅ **אימות דרישות מוקדמות** (Azure CLI, כניסה, קבצי תבנית)  
+- ✅ **ניהול קבוצת משאבים** (יוצר במידת הצורך)  
+- ✅ **אימות תבנית** לפני פריסה  
+- ✅ **מעקב התקדמות** עם פלט בצבעים  
+- ✅ **הצגת פלטי פריסה**  
+- ✅ **הנחיות לאחר הפריסה**  
 
-## 📊 ניטור פריסה
+## 📊 מעקב פריסה
 
-### בדוק סטטוס פריסה
+### בדוק מצב פריסה
 
 ```bash
-# רשימת פריסות
+# לרשום פריסות
 az deployment group list --resource-group myResourceGroup --output table
 
-# קבלת פרטי פריסה
+# לקבל פרטים על הפריסה
 az deployment group show \
   --resource-group myResourceGroup \
   --name retail-deployment-YYYYMMDD-HHMMSS
 
-# מעקב אחר התקדמות הפריסה
+# לעקוב אחר התקדמות הפריסה
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
   --parameters azuredeploy.parameters.json \
   --verbose
 ```
-
+  
 ### פלטי פריסה
 
-לאחר פריסה מוצלחת, הפלטים הבאים זמינים:
+לאחר פריסה מוצלחת, זמינים הפלטים הבאים:
 
-- **כתובת URL קדמית**: נקודת קצה ציבורית לממשק האינטרנט
-- **כתובת URL של ניתוב**: נקודת קצה API לנתב הסוכנים
-- **נקודות קצה של OpenAI**: נקודות קצה של שירות OpenAI ראשי ומשני
-- **שירות חיפוש**: נקודת קצה של שירות חיפוש AI של Azure
-- **חשבון אחסון**: שם חשבון האחסון למסמכים
-- **Key Vault**: שם ה-Key Vault (אם מופעל)
-- **Application Insights**: שם שירות הניטור (אם מופעל)
+- **כתובת frontend**: נקודת קצה ציבורית לממשק ווב  
+- **כתובת Router**: נקודת קצה API לנתב הסוכן  
+- **נקודות קצה OpenAI**: נקודות השירות הראשית והמשנית  
+- **שירות חיפוש**: נקודת קצה לשירות Azure AI Search  
+- **חשבון אחסון**: שם חשבון האחסון למסמכים  
+- **Key Vault**: שם מחסן המפתחות (אם מופעל)  
+- **Application Insights**: שם שירות המעקב (אם מופעל)  
 
-## 🔧 לאחר פריסה: השלבים הבאים
-> **📝 חשוב:** התשתית נפרסה, אך עליכם לפתח ולפרוס את קוד האפליקציה.
+## 🔧 לאחר פריסה: שלבים הבאים
+> **📝 חשוב:** התשתית הוצבה, אך עליך לפתח ולפרוס את קוד היישום.
 
-### שלב 1: פיתוח אפליקציות סוכנים (באחריותכם)
+### שלב 1: פיתוח יישומי סוכן (אחריותך)
 
-תבנית ARM יוצרת **אפליקציות קונטיינר ריקות** עם תמונות nginx לדוגמה. עליכם:
+תבנית ARM יוצרת **יישומי מכולה ריקים** עם תמונות nginx זמניות. עליך:
 
 **פיתוח נדרש:**
-1. **מימוש סוכנים** (30-40 שעות)
-   - סוכן שירות לקוחות עם אינטגרציה ל-GPT-4o
-   - סוכן מלאי עם אינטגרציה ל-GPT-4o-mini
+1. **מימוש סוכן** (30-40 שעות)
+   - סוכן שירות לקוחות עם אינטגרציה ל-gpt-4.1
+   - סוכן מלאי עם אינטגרציה ל-gpt-4.1-mini
    - לוגיקת ניתוב סוכנים
 
-2. **פיתוח ממשק קדמי** (20-30 שעות)
-   - ממשק משתמש לצ'אט (React/Vue/Angular)
-   - פונקציונליות להעלאת קבצים
-   - עיצוב ותצוגת תגובות
+2. **פיתוח חזית (Frontend)** (20-30 שעות)
+   - ממשק משתמש לשיחה (React/Vue/Angular)
+   - פונקציית העלאת קבצים
+   - הצגה ועיצוב תגובות
 
-3. **שירותי צד שרת** (12-16 שעות)
-   - FastAPI או Express router
-   - Middleware לאימות
-   - אינטגרציה של טלמטריה
+3. **שירותי Backend** (12-16 שעות)
+   - נתב FastAPI או Express
+   - תווך אימות
+   - אינטגרציית טלמטריה
 
-**ראו:** [מדריך ארכיטקטורה](../retail-scenario.md) לדפוסי יישום ודוגמאות קוד מפורטות
+**ראה:** [מדריך ארכיטקטורה](../retail-scenario.md) לדוגמאות קוד ודפוסי מימוש מפורטים
 
-### שלב 2: הגדרת אינדקס חיפוש AI (15-30 דקות)
+### שלב 2: קביעת אינדקס חיפוש AI (15-30 דקות)
 
-צרו אינדקס חיפוש התואם למודל הנתונים שלכם:
+צור אינדקס חיפוש התואם למודל הנתונים שלך:
 
 ```bash
-# קבל פרטי שירות חיפוש
+# קבל פרטי שירות החיפוש
 SEARCH_NAME=$(az search service list \
   --resource-group myResourceGroup \
   --query "[0].name" -o tsv)
@@ -508,7 +501,7 @@ SEARCH_KEY=$(az search admin-key show \
   --resource-group myResourceGroup \
   --query "primaryKey" -o tsv)
 
-# צור אינדקס עם הסכימה שלך (דוגמה)
+# צור אינדקס עם הסכמה שלך (דוגמה)
 curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: ${SEARCH_KEY}" \
@@ -530,15 +523,15 @@ curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023
 ```
 
 **משאבים:**
-- [עיצוב סכמת אינדקס חיפוש AI](https://learn.microsoft.com/azure/search/search-what-is-an-index)
-- [הגדרת חיפוש וקטורי](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
+- [תכנון סכמת אינדקס חיפוש AI](https://learn.microsoft.com/azure/search/search-what-is-an-index)
+- [קביעת תצורת חיפוש וקטורי](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
 
-### שלב 3: העלאת הנתונים שלכם (זמן משתנה)
+### שלב 3: העלאת הנתונים שלך (משך משתנה)
 
-לאחר שיש לכם נתוני מוצרים ומסמכים:
+כאשר יש לך נתוני מוצר ומסמכים:
 
 ```bash
-# קבל פרטי חשבון אחסון
+# קבל פרטי חשבון האחסון
 STORAGE_NAME=$(az storage account list \
   --resource-group myResourceGroup \
   --query "[0].name" -o tsv)
@@ -564,23 +557,23 @@ az storage blob upload \
   --account-key $STORAGE_KEY
 ```
 
-### שלב 4: בנייה ופריסת האפליקציות שלכם (8-12 שעות)
+### שלב 4: בנייה ופריסת היישומים שלך (8-12 שעות)
 
-לאחר שפיתחתם את קוד הסוכן:
+כאשר פיתחת את קוד הסוכן שלך:
 
 ```bash
-# 1. צור רישום מכולות של Azure (אם נדרש)
+# 1. צור רישום מכולות של Azure (אם צריך)
 az acr create \
   --name myregistry \
   --resource-group myResourceGroup \
   --sku Basic
 
-# 2. בנה ודחף תמונת סוכן נתב
+# 2. בנה ודחוף תמונת נתב סוכן
 docker build -t myregistry.azurecr.io/agent-router:v1 /path/to/your/router/code
 az acr login --name myregistry
 docker push myregistry.azurecr.io/agent-router:v1
 
-# 3. בנה ודחף תמונת ממשק קדמי
+# 3. בנה ודחוף תמונת הממשק הקדמי
 docker build -t myregistry.azurecr.io/frontend:v1 /path/to/your/frontend/code
 docker push myregistry.azurecr.io/frontend:v1
 
@@ -606,16 +599,16 @@ az containerapp update \
     SEARCH_KEY=secretref:search-key
 ```
 
-### שלב 5: בדיקת האפליקציה שלכם (2-4 שעות)
+### שלב 5: בדיקת היישום שלך (2-4 שעות)
 
 ```bash
-# קבל את כתובת ה-URL של היישום שלך
+# קבל את כתובת האינטרנט של האפליקציה שלך
 ROUTER_URL=$(az containerapp show \
   --name retail-router \
   --resource-group myResourceGroup \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# בדוק את נקודת הקצה של הסוכן (לאחר שהקוד שלך נפרס)
+# נקודת הקצה של סוכן הבדיקה (ברגע שקודך מפורסם)
 curl -X POST "https://${ROUTER_URL}/chat" \
   -H "Content-Type: application/json" \
   -d '{
@@ -623,71 +616,71 @@ curl -X POST "https://${ROUTER_URL}/chat" \
     "agent": "customer"
   }'
 
-# בדוק את יומני היישום
+# בדוק יומני יישום
 az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
   --follow
 ```
 
-### משאבי יישום
+### משאבי מימוש
 
 **ארכיטקטורה ועיצוב:**
-- 📖 [מדריך ארכיטקטורה מלא](../retail-scenario.md) - דפוסי יישום מפורטים
+- 📖 [מדריך הארכיטקטורה המלא](../retail-scenario.md) - דפוסי מימוש מפורטים
 - 📖 [דפוסי עיצוב רב-סוכנים](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
 
 **דוגמאות קוד:**
-- 🔗 [דוגמת צ'אט Azure OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo) - דפוס RAG
+- 🔗 [דוגמת שיחה עם דגמי Foundry של Microsoft](https://github.com/Azure-Samples/azure-search-openai-demo) - דפוס RAG
 - 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - מסגרת סוכנים (C#)
-- 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - תזמור סוכנים (Python)
-- 🔗 [AutoGen](https://github.com/microsoft/autogen) - שיחות רב-סוכנים
+- 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - אורקסטרציה של סוכנים (Python)
+- 🔗 [AutoGen](https://github.com/microsoft/autogen) - שיחות רב-סוכניות
 
-**הערכת מאמץ כולל:**
+**הערכת מאמץ כוללת:**
 - פריסת תשתית: 15-25 דקות (✅ הושלם)
-- פיתוח אפליקציה: 80-120 שעות (🔨 העבודה שלכם)
-- בדיקות ואופטימיזציה: 15-25 שעות (🔨 העבודה שלכם)
+- פיתוח יישום: 80-120 שעות (🔨 עבודתך)
+- בדיקות ואופטימיזציה: 15-25 שעות (🔨 עבודתך)
 
 ## 🛠️ פתרון בעיות
 
 ### בעיות נפוצות
 
-#### 1. חריגה ממכסת Azure OpenAI
+#### 1. חריגת מכסת דגמי Microsoft Foundry
 
 ```bash
-# בדוק את השימוש הנוכחי במכסה
+# בדוק את השימוש במכסת הנוכחי
 az cognitiveservices usage list --location eastus2
 
 # בקש הגדלת מכסה
 az support tickets create \
   --ticket-name "OpenAI-Quota-Increase" \
   --severity "minimal" \
-  --description "Request quota increase for Azure OpenAI in region X"
+  --description "Request quota increase for Microsoft Foundry Models in region X"
 ```
 
-#### 2. פריסת אפליקציות קונטיינר נכשלה
+#### 2. פריסת יישומי מכולות נכשלה
 
 ```bash
-# בדוק יומני אפליקציית מכולה
+# בדוק יומני יישום הקונטיינר
 az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
   --follow
 
-# הפעל מחדש את אפליקציית המכולה
+# הפעל מחדש את יישום הקונטיינר
 az containerapp revision restart \
   --name retail-router \
   --resource-group myResourceGroup
 ```
 
-#### 3. אתחול שירות חיפוש
+#### 3. אתחול שירות החיפוש
 
 ```bash
-# בדוק את מצב שירות החיפוש
+# אמת את מצב שירות החיפוש
 az search service show \
   --name <search-service-name> \
   --resource-group myResourceGroup
 
-# בדוק את קישוריות שירות החיפוש
+# בדוק את חיבוריות שירות החיפוש
 curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-version=2023-11-01" \
   -H "api-key: <search-admin-key>"
 ```
@@ -695,12 +688,12 @@ curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-versio
 ### אימות פריסה
 
 ```bash
-# ודא שכל המשאבים נוצרו
+# לאמת שכל המשאבים נוצרו
 az resource list \
   --resource-group myResourceGroup \
   --output table
 
-# בדוק את מצב הבריאות של המשאבים
+# לבדוק את מצב הבריאות של המשאב
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
@@ -710,16 +703,16 @@ az resource list \
 ## 🔐 שיקולי אבטחה
 
 ### ניהול מפתחות
-- כל הסודות נשמרים ב-Azure Key Vault (כאשר מופעל)
-- אפליקציות קונטיינר משתמשות בזהות מנוהלת לאימות
-- חשבונות אחסון מוגדרים עם ברירות מחדל מאובטחות (HTTPS בלבד, ללא גישה ציבורית לבלוב)
+- כל הסודות מאוחסנים ב-Azure Key Vault (כשמאופשר)
+- יישומי מכולות משתמשים בזהות מנוהלת לאימות
+- חשבונות אחסון מוגדרים כברירת מחדל מאובטחת (רק HTTPS, ללא גישה ציבורית לבלובים)
 
 ### אבטחת רשת
-- אפליקציות קונטיינר משתמשות ברשת פנימית ככל האפשר
+- יישומי מכולות משתמשים ברשת פנימית ככל האפשר
 - שירות החיפוש מוגדר עם אפשרות נקודות קצה פרטיות
-- Cosmos DB מוגדר עם ההרשאות המינימליות הנדרשות
+- Cosmos DB מוגדר עם הרשאות מינימליות נדרשות
 
-### הגדרת RBAC
+### קביעת תצורת RBAC
 ```bash
 # הקצה תפקידים נחוצים לזהות מנוהלת
 az role assignment create \
@@ -732,13 +725,13 @@ az role assignment create \
 
 ### הערכות עלות (חודשיות, USD)
 
-| מצב | OpenAI | אפליקציות קונטיינר | חיפוש | אחסון | סה"כ משוער |
-|------|--------|--------------------|--------|---------|------------|
+| מצב | OpenAI | יישומי מכולות | חיפוש | אחסון | סה"כ משוער |
+|------|--------|----------------|--------|---------|------------|
 | מינימלי | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
 | סטנדרטי | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
 | פרימיום | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
 
-### מעקב עלויות
+### ניטור עלויות
 
 ```bash
 # הגדר התראות תקציב
@@ -754,9 +747,9 @@ az consumption budget create \
 ## 🔄 עדכונים ותחזוקה
 
 ### עדכוני תבנית
-- ניהול גרסאות של קבצי תבנית ARM
+- ניהול גרסאות עבור קבצי תבנית ARM
 - בדיקת שינויים בסביבת פיתוח תחילה
-- שימוש במצב פריסה אינקרמנטלי לעדכונים
+- שימוש במצב פריסה הדרגתי לעדכונים
 
 ### עדכוני משאבים
 ```bash
@@ -770,24 +763,24 @@ az deployment group create \
 
 ### גיבוי ושחזור
 - גיבוי אוטומטי של Cosmos DB מופעל
-- מחיקה רכה של Key Vault מופעלת
-- גרסאות אפליקציות קונטיינר נשמרות לצורך שחזור
+- מחיקה רכה ב-Key Vault מופעלת
+- שמירת סבבי יישום מכולות לצורך חזרה אחורה
 
 ## 📞 תמיכה
 
-- **בעיות בתבנית**: [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
-- **תמיכת Azure**: [פורטל תמיכת Azure](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
-- **קהילה**: [Azure AI Discord](https://discord.gg/microsoft-azure)
+- **בעיות בתבנית:** [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
+- **תמיכת Azure:** [פורטאל התמיכה של Azure](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
+- **קהילה:** [Azure AI Discord](https://discord.gg/microsoft-azure)
 
 ---
 
-**⚡ מוכנים לפרוס את פתרון הרב-סוכנים שלכם?**
+**⚡ מוכן לפרוס את פתרון הרב-סוכנים שלך?**
 
-התחילו עם: `./deploy.sh -g myResourceGroup`
+התחל עם: `./deploy.sh -g myResourceGroup`
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**הצהרת אחריות**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור סמכותי. למידע קריטי, מומלץ להשתמש בתרגום מקצועי על ידי אדם. אנו לא נושאים באחריות לאי הבנות או לפרשנויות שגויות הנובעות משימוש בתרגום זה.
+**כתב ויתור**:  
+מסמך זה תורגם תוך שימוש בשירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש להיות מודעים לכך שתרגומים אוטומטיים עשויים להכיל שגיאות או אי דיוקים. יש לראות במסמך המקורי בשפת המקור כמקור הסמכות. למידע קריטי, מומלץ להשתמש בתרגום מקצועי מבני אדם. איננו אחראים לכל אי הבנה או פרשנות שגויה הנובעת משימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

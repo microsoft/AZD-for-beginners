@@ -1,287 +1,289 @@
-# 學習指南 - 全面學習目標
+# Study Guide - Comprehensive Learning Objectives
 
-**學習路徑導航**
-- **📚 課程首頁**: [AZD 初學者指南](../README.md)
-- **📖 開始學習**: [第1章：基礎與快速入門](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 進度追蹤**: [課程完成](../README.md#-course-completion--certification)
+**Learning Path Navigation**
+- **📚 Course Home**: [AZD 入門](../README.md)
+- **📖 Start Learning**: [第 1 章：基礎與快速入門](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Progress Tracking**: [課程完成](../README.md#-course-completion--certification)
 
-## 簡介
+## Introduction
 
-這份全面的學習指南提供了結構化的學習目標、關鍵概念、實踐練習以及評估材料，幫助您掌握 Azure Developer CLI (azd)。使用此指南來追蹤您的學習進度，確保涵蓋所有重要主題。
+本完整學習指南提供結構化的學習目標、關鍵概念、實作練習與評量材料，幫助你掌握 Azure Developer CLI (azd)。使用此指南追蹤你的進度並確保已涵蓋所有必要主題。
 
-## 學習目標
+## Learning Goals
 
-完成此學習指南後，您將能夠：
-- 掌握 Azure Developer CLI 的所有基礎與進階概念
-- 發展部署與管理 Azure 應用程式的實際技能
-- 建立解決問題與優化部署的信心
-- 理解生產環境部署實踐與安全考量
+完成本學習指南後，你將能夠：
+- 精通 Azure Developer CLI 的所有基礎與進階概念
+- 培養部署與管理 Azure 應用程式的實務技能
+- 在故障排除與部署優化方面建立信心
+- 了解生產就緒的部署實務與安全性考量
 
-## 學習成果
+## Learning Outcomes
 
-完成本學習指南的所有章節後，您將能夠：
-- 使用 azd 設計、部署和管理完整的應用程式架構
-- 實施全面的監控、安全性與成本優化策略
-- 獨立解決複雜的部署問題
-- 創建自定義模板並為 azd 社群做出貢獻
+完成本學習指南所有章節後，你將能：
+- 使用 azd 設計、部署及管理完整的應用程式架構
+- 實作完整的監控、安全與成本最佳化策略
+- 能獨立排解複雜的部署問題
+- 建立自訂範本並為 azd 社群做出貢獻
 
-## 八章學習結構
+## 8-Chapter Learning Structure
 
-### 第1章：基礎與快速入門 (第1週)
-**時長**: 30-45 分鐘 | **難度**: ⭐
+### Chapter 1: Foundation & Quick Start (Week 1)
+**Duration**: 30-45 minutes | **Complexity**: ⭐
 
-#### 學習目標
-- 理解 Azure Developer CLI 的核心概念與術語
-- 成功在您的開發平台上安裝並配置 AZD
-- 使用現有模板部署您的第一個應用程式
-- 有效地操作 AZD 命令列介面
+#### Learning Objectives
+- 了解 Azure Developer CLI 的核心概念與術語
+- 成功在你的開發平台上安裝並配置 AZD
+- 使用現有範本部署你的第一個應用程式
+- 有效操作 AZD 的命令列介面
 
-#### 需掌握的關鍵概念
+#### Key Concepts to Master
 - AZD 專案結構與組件 (azure.yaml, infra/, src/)
-- 基於模板的部署工作流程
-- 環境配置基礎
+- 以範本為基礎的部署工作流程
+- 環境設定基礎
 - 資源群組與訂閱管理
 
-#### 實踐練習
-1. **安裝驗證**: 安裝 AZD 並使用 `azd version` 驗證
-2. **首次部署**: 成功部署 todo-nodejs-mongo 模板
-3. **環境設置**: 配置您的第一組環境變數
-4. **資源探索**: 在 Azure 入口網站中瀏覽已部署的資源
+#### Practical Exercises
+1. **Installation Verification**: Install AZD and verify with `azd version`
+2. **First Deployment**: Deploy todo-nodejs-mongo template successfully
+3. **Environment Setup**: Configure your first environment variables
+4. **Resource Exploration**: Navigate deployed resources in Azure Portal
 
-#### 評估問題
-- AZD 專案的核心組件是什麼？
-- 如何從模板初始化新專案？
-- `azd up` 和 `azd deploy` 有什麼區別？
+#### Assessment Questions
+- AZD 專案的核心組件有哪些？
+- 如何從範本初始化一個新專案？
+- `azd up` 與 `azd deploy` 之間有何不同？
 - 如何使用 AZD 管理多個環境？
 
 ---
 
-### 第2章：AI 優先開發 (第2週)
-**時長**: 1-2 小時 | **難度**: ⭐⭐
+### Chapter 2: AI-First Development (Week 2)
+**Duration**: 1-2 hours | **Complexity**: ⭐⭐
 
-#### 學習目標
+#### Learning Objectives
 - 將 Microsoft Foundry 服務整合到 AZD 工作流程中
-- 部署並配置 AI 驅動的應用程式
-- 理解 RAG（檢索增強生成）實現模式
+- 部署並配置具 AI 能力的應用程式
+- 理解 RAG（檢索增強生成）實作模式
 - 管理 AI 模型的部署與擴展
 
-#### 需掌握的關鍵概念
-- Azure OpenAI 服務整合與 API 管理
-- AI 搜索配置與向量索引
+#### Key Concepts to Master
+- Microsoft Foundry Models 服務整合與 API 管理
+- AI Search 配置與向量索引
 - 模型部署策略與容量規劃
-- AI 應用程式的監控與性能優化
+- AI 應用程式的監控與效能優化
 
-#### 實踐練習
-1. **AI 聊天部署**: 部署 azure-search-openai-demo 模板
-2. **RAG 實現**: 配置文件索引與檢索
-3. **模型配置**: 設置多個具有不同用途的 AI 模型
-4. **AI 監控**: 為 AI 工作負載實施 Application Insights
+#### Practical Exercises
+1. **AI Chat Deployment**: Deploy azure-search-openai-demo template
+2. **RAG Implementation**: Configure document indexing and retrieval
+3. **Model Configuration**: Set up multiple AI models with different purposes
+4. **AI Monitoring**: Implement Application Insights for AI workloads
 
-#### 評估問題
-- 如何在 AZD 模板中配置 Azure OpenAI 服務？
-- RAG 架構的關鍵組件是什麼？
+#### Assessment Questions
+- 如何在 AZD 範本中配置 Microsoft Foundry Models 服務？
+- RAG 架構的主要元件有哪些？
 - 如何管理 AI 模型的容量與擴展？
-- AI 應用程式的重要監控指標有哪些？
+- 對於 AI 應用程式，哪些監控指標很重要？
 
 ---
 
-### 第3章：配置與身份驗證 (第3週)
-**時長**: 45-60 分鐘 | **難度**: ⭐⭐
+### Chapter 3: Configuration & Authentication (Week 3)
+**Duration**: 45-60 minutes | **Complexity**: ⭐⭐
 
-#### 學習目標
-- 掌握環境配置與管理策略
-- 實施安全的身份驗證模式與受管理身份
-- 使用適當的命名規範組織資源
-- 配置多環境部署（開發、測試、正式）
+#### Learning Objectives
+- 精通環境配置與管理策略
+- 實作安全的驗證模式與 Managed Identity
+- 使用適當的命名規則來組織資源
+- 配置多環境部署（dev、staging、prod）
 
-#### 需掌握的關鍵概念
-- 環境層級與配置優先順序
-- 受管理身份與服務主體身份驗證
+#### Key Concepts to Master
+- 環境階層與配置先後順序
+- Managed Identity 與 Service Principal 驗證
 - Key Vault 整合以管理機密
 - 環境特定參數管理
 
-#### 實踐練習
-1. **多環境設置**: 配置開發、測試與正式環境
-2. **安全配置**: 實施受管理身份驗證
-3. **機密管理**: 整合 Azure Key Vault 管理敏感數據
-4. **參數管理**: 創建環境特定配置
+#### Practical Exercises
+1. **Multi-Environment Setup**: Configure dev, staging, and prod environments
+2. **Security Configuration**: Implement managed identity authentication
+3. **Secrets Management**: Integrate Azure Key Vault for sensitive data
+4. **Parameter Management**: Create environment-specific configurations
 
-#### 評估問題
+#### Assessment Questions
 - 如何使用 AZD 配置不同的環境？
-- 使用受管理身份比服務主體有什麼優勢？
+- 使用 Managed Identity 比 Service Principal 有哪些好處？
 - 如何安全地管理應用程式機密？
-- AZD 的配置層級是什麼？
+- AZD 中的配置階層是什麼？
 
 ---
 
-### 第4章：基礎設施即代碼與部署 (第4-5週)
-**時長**: 1-1.5 小時 | **難度**: ⭐⭐⭐
+### Chapter 4: Infrastructure as Code & Deployment (Week 4-5)
+**Duration**: 1-1.5 hours | **Complexity**: ⭐⭐⭐
 
-#### 學習目標
-- 創建並自定義 Bicep 基礎設施模板
-- 實施進階部署模式與工作流程
-- 理解資源配置策略
+#### Learning Objectives
+- 建立並自訂 Bicep 基礎建設範本
+- 實作進階部署模式與工作流程
+- 了解資源佈建策略
 - 設計可擴展的多服務架構
-- 使用 Azure Container Apps 和 AZD 部署容器化應用程式
 
-#### 需掌握的關鍵概念
-- Bicep 模板結構與最佳實踐
-- 資源依賴與部署順序
-- 參數文件與模板模組化
-- 自定義掛鉤與部署自動化
-- 容器應用部署模式（快速入門、生產、微服務）
+- 使用 Azure Container Apps 與 AZD 部署容器化應用程式
 
-#### 實踐練習
-1. **自定義模板創建**: 建立多服務應用程式模板
-2. **Bicep 精通**: 創建模組化、可重用的基礎設施組件
-3. **部署自動化**: 實施部署前/後掛鉤
-4. **架構設計**: 部署複雜的微服務架構
-5. **容器應用部署**: 使用 AZD 部署 [Simple Flask API](../../../examples/container-app/simple-flask-api) 和 [Microservices Architecture](../../../examples/container-app/microservices) 範例
 
-#### 評估問題
-- 如何為 AZD 創建自定義 Bicep 模板？
-- 組織基礎設施代碼的最佳實踐是什麼？
-- 如何在模板中處理資源依賴？
-- 哪些部署模式支持零停機更新？
+#### Key Concepts to Master
+- Bicep 範本結構與最佳實務
+- 資源相依性與部署順序
+- 參數檔案與範本模組化
+- 自訂 hook 與部署自動化
+- Container App 部署模式（快速入門、正式環境、微服務）
+
+#### Practical Exercises
+1. **Custom Template Creation**: Build a multi-service application template
+2. **Bicep Mastery**: Create modular, reusable infrastructure components
+3. **Deployment Automation**: Implement pre/post deployment hooks
+4. **Architecture Design**: Deploy complex microservices architecture
+5. **Container App Deployment**: Deploy the [Simple Flask API](../../../examples/container-app/simple-flask-api) and [Microservices Architecture](../../../examples/container-app/microservices) examples using AZD
+
+#### Assessment Questions
+- 如何為 AZD 建立自訂 Bicep 範本？
+- 組織基礎建設程式碼的最佳實務為何？
+- 在範本中如何處理資源相依性？
+- 哪些部署模式支援零停機更新？
 
 ---
 
-### 第5章：多代理 AI 解決方案 (第6-7週)
-**時長**: 2-3 小時 | **難度**: ⭐⭐⭐⭐
+### Chapter 5: Multi-Agent AI Solutions (Week 6-7)
+**Duration**: 2-3 hours | **Complexity**: ⭐⭐⭐⭐
 
-#### 學習目標
-- 設計並實現多代理 AI 架構
-- 協調代理之間的通信與合作
-- 部署具備監控功能的生產級 AI 解決方案
-- 理解代理專業化與工作流程模式
+#### Learning Objectives
+- 設計並實作多代理（multi-agent）AI 架構
+- 協調代理之間的協作與通訊
+- 部署具生產能力的 AI 解決方案並加入監控
+- 理解代理的專長化與工作流程模式
 - 將容器化微服務整合為多代理解決方案的一部分
 
-#### 需掌握的關鍵概念
+#### Key Concepts to Master
 - 多代理架構模式與設計原則
-- 代理通信協議與數據流
+- 代理通訊協定與資料流程
 - AI 代理的負載平衡與擴展策略
 - 多代理系統的生產監控
-- 容器化環境中的服務間通信
+- 容器化環境中的服務間通訊
 
-#### 實踐練習
-1. **零售解決方案部署**: 部署完整的多代理零售場景
-2. **代理自定義**: 修改客戶與庫存代理行為
-3. **架構擴展**: 實施負載平衡與自動擴展
-4. **生產監控**: 設置全面的監控與警報
-5. **微服務整合**: 擴展 [Microservices Architecture](../../../examples/container-app/microservices) 範例以支持基於代理的工作流程
+#### Practical Exercises
+1. **Retail Solution Deployment**: Deploy the complete multi-agent retail scenario
+2. **Agent Customization**: Modify Customer and Inventory agent behaviors
+3. **Architecture Scaling**: Implement load balancing and auto-scaling
+4. **Production Monitoring**: Set up comprehensive monitoring and alerting
+5. **Microservices Integration**: Extend the [Microservices Architecture](../../../examples/container-app/microservices) example to support agent-based workflows
 
-#### 評估問題
-- 如何設計有效的多代理通信模式？
-- 擴展 AI 代理工作負載的關鍵考量是什麼？
-- 如何監控與調試多代理 AI 系統？
+#### Assessment Questions
+- 如何設計有效的多代理通訊模式？
+- 在擴展 AI 代理工作負載時，需考量哪些要點？
+- 如何監控與除錯多代理 AI 系統？
 - 哪些生產模式可確保 AI 代理的可靠性？
 
 ---
 
-### 第6章：部署前驗證與規劃 (第8週)
-**時長**: 1 小時 | **難度**: ⭐⭐
+### Chapter 6: Pre-Deployment Validation & Planning (Week 8)
+**Duration**: 1 hour | **Complexity**: ⭐⭐
 
-#### 學習目標
-- 執行全面的容量規劃與資源驗證
-- 選擇最優的 Azure SKU 以實現成本效益
-- 實施自動化的部署前檢查與驗證
-- 使用成本優化策略進行部署規劃
+#### Learning Objectives
+- 執行完整的容量規劃與資源驗證
+- 為成本效益選擇最佳的 Azure SKU
+- 實作自動化的 pre-flight 檢查與驗證
+- 以成本最佳化策略進行部署規劃
 
-#### 需掌握的關鍵概念
+#### Key Concepts to Master
 - Azure 資源配額與容量限制
-- SKU 選擇標準與成本優化
+- SKU 選擇準則與成本最佳化
 - 自動化驗證腳本與測試
 - 部署規劃與風險評估
 
-#### 實踐練習
-1. **容量分析**: 分析應用程式的資源需求
-2. **SKU 優化**: 比較並選擇具成本效益的服務層級
-3. **驗證自動化**: 實施部署前檢查腳本
-4. **成本規劃**: 創建部署成本估算與預算
+#### Practical Exercises
+1. **Capacity Analysis**: Analyze resource requirements for your applications
+2. **SKU Optimization**: Compare and select cost-effective service tiers
+3. **Validation Automation**: Implement pre-deployment check scripts
+4. **Cost Planning**: Create deployment cost estimates and budgets
 
-#### 評估問題
-- 如何在部署前驗證 Azure 容量？
+#### Assessment Questions
+- 在部署前如何驗證 Azure 的容量？
 - 哪些因素會影響 SKU 選擇決策？
-- 如何自動化部署前驗證？
-- 哪些策略有助於優化部署成本？
+- 如何自動化部署前的驗證？
+- 有哪些策略可幫助優化部署成本？
 
 ---
 
-### 第7章：故障排除與調試 (第9週)
-**時長**: 1-1.5 小時 | **難度**: ⭐⭐
+### Chapter 7: Troubleshooting & Debugging (Week 9)
+**Duration**: 1-1.5 hours | **Complexity**: ⭐⭐
 
-#### 學習目標
-- 發展 AZD 部署的系統化調試方法
+#### Learning Objectives
+- 為 AZD 部署建立系統化的除錯方法
 - 解決常見的部署與配置問題
-- 調試 AI 特定問題與性能問題
-- 實施監控與警報以主動檢測問題
+- 除錯 AI 特有的問題與效能問題
+- 實作監控與警示以進行主動問題偵測
 
-#### 需掌握的關鍵概念
+#### Key Concepts to Master
 - 診斷技術與日誌策略
-- 常見故障模式及其解決方案
-- 性能監控與優化
-- 事件響應與恢復程序
+- 常見失敗模式及其解法
+- 效能監控與優化
+- 事件回應與復原程序
 
-#### 實踐練習
-1. **診斷技能**: 練習故意損壞的部署
-2. **日誌分析**: 有效使用 Azure Monitor 與 Application Insights
-3. **性能調整**: 優化性能較慢的應用程式
-4. **恢復程序**: 實施備份與災難恢復
+#### Practical Exercises
+1. **Diagnostic Skills**: Practice with intentionally broken deployments
+2. **Log Analysis**: Use Azure Monitor and Application Insights effectively
+3. **Performance Tuning**: Optimize slow-performing applications
+4. **Recovery Procedures**: Implement backup and disaster recovery
 
-#### 評估問題
-- 最常見的 AZD 部署失敗是什麼？
-- 如何調試身份驗證與權限問題？
+#### Assessment Questions
+- 最常見的 AZD 部署失敗有哪些？
+- 如何除錯驗證與權限相關的問題？
 - 哪些監控策略有助於防止生產問題？
-- 如何在 Azure 中優化應用程式性能？
+- 如何在 Azure 中優化應用程式效能？
 
 ---
 
-### 第8章：生產與企業模式 (第10-11週)
-**時長**: 2-3 小時 | **難度**: ⭐⭐⭐⭐
+### Chapter 8: Production & Enterprise Patterns (Week 10-11)
+**Duration**: 2-3 hours | **Complexity**: ⭐⭐⭐⭐
 
-#### 學習目標
-- 實施企業級部署策略
+#### Learning Objectives
+- 實作企業級的部署策略
 - 設計安全模式與合規框架
 - 建立監控、治理與成本管理
-- 使用 AZD 整合創建可擴展的 CI/CD 管道
-- 應用生產容器應用部署的最佳實踐（安全性、監控、成本、CI/CD）
+- 使用 AZD 整合建立可擴展的 CI/CD 管線
+- 套用生產環境容器應用的最佳實務（安全性、監控、成本、CI/CD）
 
-#### 需掌握的關鍵概念
-- 企業安全與合規要求
-- 治理框架與政策實施
+#### Key Concepts to Master
+- 企業安全與合規需求
+- 治理框架與政策實作
 - 進階監控與成本管理
-- CI/CD 整合與自動化部署管道
+- CI/CD 整合與自動化部署管線
 - 容器化工作負載的藍綠與金絲雀部署策略
 
-#### 實踐練習
-1. **企業安全**: 實施全面的安全模式
-2. **治理框架**: 設置 Azure Policy 與資源管理
-3. **進階監控**: 創建儀表板與自動警報
-4. **CI/CD 整合**: 構建自動化部署管道
-5. **生產容器應用**: 將安全性、監控與成本優化應用於 [Microservices Architecture](../../../examples/container-app/microservices) 範例
+#### Practical Exercises
+1. **Enterprise Security**: Implement comprehensive security patterns
+2. **Governance Framework**: Set up Azure Policy and resource management
+3. **Advanced Monitoring**: Create dashboards and automated alerting
+4. **CI/CD Integration**: Build automated deployment pipelines
+5. **Production Container Apps**: Apply security, monitoring, and cost optimization to the [Microservices Architecture](../../../examples/container-app/microservices) example
 
-#### 評估問題
-- 如何在 AZD 部署中實施企業安全？
-- 哪些治理模式可確保合規與成本控制？
-- 如何設計可擴展的生產系統監控？
-- 哪些 CI/CD 模式最適合 AZD 工作流程？
+#### Assessment Questions
+- 如何在 AZD 部署中實作企業級安全？
+- 哪些治理模式可確保合規與成本控管？
+- 如何為生產系統設計可擴展的監控？
+- 哪些 CI/CD 模式最適合與 AZD 工作流程搭配？
 
-#### 學習目標
-- 理解 Azure Developer CLI 的基礎與核心概念
-- 成功在您的開發環境中安裝並配置 azd
-- 使用現有模板完成您的首次部署
-- 瀏覽 azd 專案結構並理解其關鍵組件
+#### Learning Objectives
+- 了解 Azure Developer CLI 的基本概念與核心概念
+- 成功在你的開發環境上安裝並配置 azd
+- 使用現有範本完成第一次部署
+- 瀏覽 azd 專案結構並了解關鍵組件
 
-#### 需掌握的關鍵概念
-- 模板、環境與服務
-- azure.yaml 配置結構
-- 基本 azd 命令（init, up, down, deploy）
-- 基礎設施即代碼原則
-- Azure 身份驗證與授權
+#### Key Concepts to Master
+- 範本、環境與服務
+- azure.yaml 的配置結構
+- 基本 azd 指令 (init, up, down, deploy)
+- 基礎設施即程式碼原則
+- Azure 驗證與授權
 
-#### 實踐練習
+#### Practice Exercises
 
-**練習 1.1: 安裝與設置**
+**Exercise 1.1: Installation and Setup**
 ```bash
 # 完成這些任務：
 1. Install azd using your preferred method
@@ -291,9 +293,9 @@
 5. Explore available templates: azd template list
 ```
 
-**練習 1.2: 首次部署**
+**Exercise 1.2: First Deployment**
 ```bash
-# 部署一個簡單的網絡應用程式：
+# 部署一個簡單的網頁應用程式：
 1. Initialize project: azd init --template todo-nodejs-mongo
 2. Review project structure and configuration files
 3. Deploy to Azure: azd up
@@ -301,7 +303,7 @@
 5. Clean up resources: azd down
 ```
 
-**練習 1.3: 專案結構分析**
+**Exercise 1.3: Project Structure Analysis**
 ```
 Analyze the following components:
 1. azure.yaml - service definitions and hooks
@@ -310,18 +312,18 @@ Analyze the following components:
 4. .azure/ directory - environment configurations
 ```
 
-#### 自我評估問題
+#### Self-Assessment Questions
 1. azd 架構的三個核心概念是什麼？
-2. azure.yaml 文件的用途是什麼？
+2. azure.yaml 檔案的目的為何？
 3. 環境如何幫助管理不同的部署目標？
-4. azd 支持哪些身份驗證方法？
-5. 第一次執行 `azd up` 時會發生什麼？
+4. azd 可以使用哪些驗證方法？
+5. 當你第一次執行 `azd up` 時會發生什麼事？
 
 ---
 
-## 進度追蹤與評估框架
+## Progress Tracking and Assessment Framework
 ```bash
-# 建立及配置多個環境：
+# 建立及設定多個環境：
 1. Create development environment: azd env new development
 2. Create staging environment: azd env new staging
 3. Create production environment: azd env new production
@@ -329,7 +331,7 @@ Analyze the following components:
 5. Deploy the same application to different environments
 ```
 
-**練習 2.2: 進階配置**
+**Exercise 2.2: Advanced Configuration**
 ```yaml
 # Modify azure.yaml to include:
 1. Multiple services with different configurations
@@ -338,40 +340,40 @@ Analyze the following components:
 4. Custom resource naming patterns
 ```
 
-**練習 2.3: 安全配置**
+**Exercise 2.3: Security Configuration**
 ```bash
-# 實施安全最佳做法：
+# 實施安全最佳做法:
 1. Configure managed identity for service authentication
 2. Set up Azure Key Vault for secrets management
 3. Implement least-privilege access controls
 4. Enable HTTPS and secure communication protocols
 ```
 
-#### 自我評估問題
-1. azd 如何處理環境變數的優先順序？
-2. 部署掛鉤是什麼，應該在什麼時候使用？
+#### Self-Assessment Questions
+1. azd 如何處理環境變數的先後順序？
+2. 什麼是部署 hook，何時應該使用它們？
 3. 如何為不同環境配置不同的 SKU？
-4. 不同身份驗證方法的安全影響是什麼？
-5. 如何管理機密與敏感配置數據？
+4. 不同驗證方法的安全性影響為何？
+5. 如何管理機密與敏感的配置資料？
 
-### 模組 3: 部署與資源配置 (第4週)
+### Module 3: Deployment and Provisioning (Week 4)
 
-#### 學習目標
-- 掌握部署工作流程與最佳實踐
-- 理解使用 Bicep 模板的基礎設施即代碼
-- 實施複雜的多服務架構
-- 優化部署性能與可靠性
+#### Learning Objectives
+- 精通部署工作流程與最佳實務
+- 了解使用 Bicep 範本的基礎設施即程式碼
+- 實作複雜的多服務架構
+- 優化部署效能與可靠性
 
-#### 需掌握的關鍵概念
-- Bicep 模板結構與模組
-- 資源依賴與順序
-- 部署策略（藍綠部署、滾動更新）
+#### Key Concepts to Master
+- Bicep 範本結構與模組
+- 資源相依性與排序
+- 部署策略（藍綠、滾動更新）
 - 多區域部署
-- 資料庫遷移與數據管理
+- 資料庫遷移與資料管理
 
-#### 實踐練習
+#### Practice Exercises
 
-**練習 3.1: 自定義基礎設施**
+**Exercise 3.1: Custom Infrastructure**
 ```bicep
 // Create custom Bicep templates for:
 1. Web application with custom domain and SSL
@@ -381,7 +383,7 @@ Analyze the following components:
 5. Network security groups and virtual networks
 ```
 
-**練習 3.2: 多服務應用程式**
+**Exercise 3.2: Multi-Service Application**
 ```bash
 # 部署微服務架構：
 1. Frontend web application
@@ -391,9 +393,9 @@ Analyze the following components:
 5. Background worker service
 ```
 
-**練習 3.3: 資料庫整合**
+**Exercise 3.3: Database Integration**
 ```bash
-# 實施數據庫部署模式：
+# 實作資料庫部署模式：
 1. Deploy PostgreSQL with connection pooling
 2. Implement schema migrations
 3. Configure backup and recovery procedures
@@ -401,86 +403,85 @@ Analyze the following components:
 5. Implement data seeding for different environments
 ```
 
-#### 自我評估問題
-1. 使用 Bicep 比 ARM 模板有哪些優勢？
-2. 如何在 azd 部署中處理資料庫遷移？
-3. 哪些策略支持零停機部署？
-4. 如何管理服務之間的依賴關係？
-5. 多地區部署需要考慮哪些因素？
+#### Self-Assessment Questions
+1. 使用 Bicep 相較於 ARM 範本有何優勢？
+2. 在 azd 部署中如何處理資料庫遷移？
+3. 存在哪些零停機部署的策略？
+4. 如何管理服務之間的相依性？
+5. 多區域部署需考量哪些因素？
 
-### 模組 4：部署前驗證（第 5 週）
+### Module 4: Pre-Deployment Validation (Week 5)
 
-#### 學習目標
-- 執行全面的部署前檢查
-- 掌握容量規劃和資源驗證
-- 理解 SKU 選擇和成本優化
+#### Learning Objectives
+- 實施全面的部署前檢查
+- 精通容量規劃與資源驗證
+- 了解 SKU 選擇與成本優化
 - 建立自動化驗證管道
 
-#### 需要掌握的關鍵概念
-- Azure 資源配額和限制
-- SKU 選擇標準及成本影響
-- 自動化驗證腳本和工具
-- 容量規劃方法
-- 性能測試與優化
+#### 應掌握的關鍵概念
+- Azure 資源配額與限制
+- SKU 選擇準則與成本影響
+- 自動化驗證腳本與工具
+- 容量規劃方法論
+- 效能測試與優化
 
-#### 練習題目
+#### 練習題
 
-**練習 4.1：容量規劃**  
+**練習 4.1：容量規劃**
 ```bash
-# 實施容量驗證：
+# 實作容量驗證：
 1. Create scripts to check Azure quotas
 2. Validate service availability in target regions
 3. Estimate resource costs for different SKUs
 4. Plan for scaling and growth requirements
 5. Document capacity requirements for each environment
 ```
-  
-**練習 4.2：部署前驗證**  
+
+**練習 4.2：部署前驗證**
 ```powershell
-# 建立全面的驗證管道：
+# 建立全面的驗證流程：
 1. Authentication and permissions validation
 2. Template syntax and parameter validation
 3. Resource naming and availability checks
 4. Network connectivity and security validation
 5. Cost estimation and budget verification
 ```
-  
-**練習 4.3：SKU 優化**  
+
+**練習 4.3：SKU 優化**
 ```bash
-# 優化服務配置：
+# 優化服務配置:
 1. Compare performance characteristics of different SKUs
 2. Implement cost-effective development configurations
 3. Design high-performance production configurations
 4. Create monitoring dashboards for resource utilization
 5. Set up auto-scaling policies
 ```
-  
 
 #### 自我評估問題
-1. 哪些因素應該影響 SKU 的選擇決策？
-2. 如何在部署前驗證 Azure 資源的可用性？
-3. 部署前檢查系統的關鍵組成部分是什麼？
-4. 如何估算和控制部署成本？
-5. 容量規劃中需要哪些重要的監控？
+1. 哪些因素應影響 SKU 的選擇決策？
+2. 在部署前你如何驗證 Azure 資源的可用性？
+3. 部署前檢查系統的關鍵組成部分有哪些？
+4. 你如何估算並控制部署成本？
+5. 哪些監控對容量規劃是必要的？
 
-### 模組 5：故障排除與除錯（第 6 週）
+### 模組 5：疑難排解與偵錯（第 6 週）
 
 #### 學習目標
-- 掌握系統化的故障排除方法
-- 精通複雜部署問題的除錯
-- 實施全面的監控和警報
-- 建立事件響應和恢復程序
+- 精通系統化的疑難排解方法
+- 培養偵錯複雜部署問題的專業技能
+- 實施全面的監控與警示
+- 建立事件回應與復原程序
 
-#### 需要掌握的關鍵概念
-- 常見的部署失敗模式
+#### 應掌握的關鍵概念
+- 常見部署失敗模式
 - 日誌分析與關聯技術
-- 性能監控與優化
-- 安全事件檢測與響應
-- 災難恢復與業務連續性
+- 效能監控與優化
+- 安全事件偵測與回應
+- 災難復原與業務持續性
 
-#### 練習題目
+#### 練習題
 
-**練習 5.1：故障排除場景**  
+**練習 5.1：疑難排解情境**
 ```bash
 # 練習解決常見問題：
 1. Authentication and authorization failures
@@ -489,53 +490,52 @@ Analyze the following components:
 4. Network connectivity problems
 5. Performance and scaling issues
 ```
-  
-**練習 5.2：監控實施**  
+
+**練習 5.2：監控實作**
 ```bash
-# 設置全面監控：
+# 設定全面監控：
 1. Application performance monitoring with Application Insights
 2. Infrastructure monitoring with Azure Monitor
 3. Custom dashboards and alerting rules
 4. Log aggregation and analysis
 5. Health check endpoints and automated testing
 ```
-  
-**練習 5.3：事件響應**  
+
+**練習 5.3：事件回應**
 ```bash
-# 建立事件響應程序：
+# 建立事故應變程序：
 1. Create runbooks for common problems
 2. Implement automated recovery procedures
 3. Set up notification and escalation workflows
 4. Practice disaster recovery scenarios
 5. Document lessons learned and improvements
 ```
-  
 
 #### 自我評估問題
-1. 系統化解決 azd 部署問題的方法是什麼？
-2. 如何在多個服務和資源之間關聯日誌？
-3. 哪些監控指標對於早期問題檢測最為關鍵？
-4. 如何實施有效的災難恢復程序？
-5. 事件響應計劃的關鍵組成部分是什麼？
+1. 對 azd 部署的系統化疑難排解方法是什麼？
+2. 你如何在多個服務與資源間關聯日誌？
+3. 哪些監控指標對早期問題偵測最為關鍵？
+4. 你如何實施有效的災難復原程序？
+5. 事件回應計畫的關鍵組成部分有哪些？
 
-### 模組 6：進階主題與最佳實踐（第 7-8 週）
+### 模組 6：進階主題與最佳實務（第 7-8 週）
 
 #### 學習目標
-- 實施企業級部署模式
+- 實作企業級的部署模式
 - 精通 CI/CD 整合與自動化
-- 開發自訂模板並貢獻社群
-- 理解進階的安全性與合規要求
+- 開發自訂範本並貢獻社群
+- 了解進階安全與合規需求
 
-#### 需要掌握的關鍵概念
-- CI/CD 管道整合模式
-- 自訂模板開發與分發
+#### 應掌握的關鍵概念
+- CI/CD 管線整合模式
+- 自訂範本開發與發佈
 - 企業治理與合規
-- 進階網絡與安全配置
-- 性能優化與成本管理
+- 進階網路與安全設定
+- 效能優化與成本管理
 
-#### 練習題目
+#### 練習題
 
-**練習 6.1：CI/CD 整合**  
+**練習 6.1：CI/CD 整合**
 ```yaml
 # Implement automated deployment pipelines:
 1. GitHub Actions workflow for azd deployments
@@ -544,157 +544,156 @@ Analyze the following components:
 4. Automated testing and quality gates
 5. Security scanning and compliance checks
 ```
-  
-**練習 6.2：自訂模板開發**  
+
+**練習 6.2：自訂範本開發**
 ```bash
-# 建立及發佈自訂範本：
+# 建立並發佈自訂範本:
 1. Design template for your organization's architecture
 2. Implement parameterization and customization options
 3. Add comprehensive documentation and examples
 4. Test template across different environments
 5. Publish and maintain template in template gallery
 ```
-  
-**練習 6.3：企業實施**  
+
+**練習 6.3：企業實作**
 ```bash
-# 實現企業級功能：
+# 實作企業級功能:
 1. Multi-tenant architecture with proper isolation
 2. Centralized logging and monitoring
 3. Compliance and governance controls
 4. Cost allocation and chargeback mechanisms
 5. Disaster recovery and business continuity
 ```
-  
 
 #### 自我評估問題
-1. 如何將 azd 整合到現有的 CI/CD 工作流程中？
-2. 自訂模板開發需要考慮哪些關鍵因素？
-3. 如何在 azd 部署中實施治理與合規？
-4. 企業級部署的最佳實踐是什麼？
-5. 如何有效地為 azd 社群做出貢獻？
+1. 你如何將 azd 整合到現有的 CI/CD 工作流程？
+2. 自訂範本開發的主要考量是什麼？
+3. 你如何在 azd 部署中實施治理與合規？
+4. 企業規模部署的最佳實務為何？
+5. 你如何有效地為 azd 社群做出貢獻？
 
-## 實踐專案
+## 實作專案
 
 ### 專案 1：個人作品集網站
-**複雜度**：初學者  
-**時長**：1-2 週  
+<strong>複雜度</strong>: 初級  
+<strong>持續時間</strong>: 1-2 週
 
-建立並部署個人作品集網站，使用：
-- Azure Storage 的靜態網站託管
-- 自訂網域配置
-- CDN 整合以提升全球性能
-- 自動化部署管道
+使用以下方式建立並部署個人作品集網站：
+- 在 Azure Storage 上的靜態網站託管
+- 自訂網域設定
+- 整合 CDN 以提升全球效能
+- 自動化部署管線
 
-**交付成果**：
-- 部署在 Azure 上的運行網站
-- 用於作品集部署的自訂 azd 模板
-- 部署過程的文檔
+<strong>交付項目</strong>:
+- 在 Azure 上部署並可運作的網站
+- 用於作品集部署的自訂 azd 範本
+- 部署流程文件
 - 成本分析與優化建議
 
 ### 專案 2：任務管理應用程式
-**複雜度**：中級  
-**時長**：2-3 週  
+<strong>複雜度</strong>: 中階  
+<strong>持續時間</strong>: 2-3 週
 
-創建一個全棧任務管理應用程式，包括：
-- 部署到 App Service 的 React 前端
-- 帶有身份驗證的 Node.js API 後端
-- 帶有遷移的 PostgreSQL 資料庫
+建立具有下列功能的全端任務管理應用程式：
+- React 前端部署到 App Service
+- 具有驗證的 Node.js API 後端
+- 含遷移的 PostgreSQL 資料庫
 - Application Insights 監控
 
-**交付成果**：
-- 完整的應用程式，包含用戶身份驗證
+<strong>交付項目</strong>:
+- 含使用者驗證的完整應用程式
 - 資料庫架構與遷移腳本
-- 監控儀表板與警報規則
-- 多環境部署配置
+- 監控儀表板與警示規則
+- 多環境部署設定
 
 ### 專案 3：微服務電子商務平台
-**複雜度**：進階  
-**時長**：4-6 週  
+<strong>複雜度</strong>: 進階  
+<strong>持續時間</strong>: 4-6 週
 
-設計並實現基於微服務的電子商務平台：
-- 多個 API 服務（目錄、訂單、支付、用戶）
-- 與 Service Bus 的消息隊列整合
-- 使用 Redis 快取提升性能
-- 全面的日誌記錄與監控
+設計並實作一個基於微服務的電子商務平台：
+- 多個 API 服務（目錄、訂單、付款、使用者）
+- 與 Service Bus 整合的訊息佇列
+- 使用 Redis 快取以優化效能
+- 全面性的日誌紀錄與監控
 
-**參考範例**：請參閱 [Microservices Architecture](../../../examples/container-app/microservices) 以獲取生產就緒模板和部署指南
+<strong>參考範例</strong>：請參閱 [微服務架構](../../../examples/container-app/microservices) 以取得生產就緒的範本與部署指南
 
-**交付成果**：
+<strong>交付項目</strong>:
 - 完整的微服務架構
-- 服務間的通信模式
-- 性能測試與優化
-- 生產就緒的安全實施
+- 服務間通訊模式
+- 效能測試與優化
+- 生產就緒的安全實作
 
-## 評估與認證
+## 評量與認證
 
-### 知識檢查
+### 知識檢測
 
-在每個模組後完成以下評估：
+在每個模組後完成以下評量：
 
-**模組 1 評估**：基礎概念與安裝
-- 核心概念的選擇題
-- 實際安裝與配置任務
+**模組 1 評量**：基本概念與安裝
+- 核心概念的多選題
+- 實際的安裝與設定任務
 - 簡單的部署練習
 
-**模組 2 評估**：配置與環境
-- 環境管理場景
-- 配置故障排除練習
-- 安全配置實施
+**模組 2 評量**：設定與環境
+- 環境管理情境
+- 設定故障排除練習
+- 安全設定實作
 
-**模組 3 評估**：部署與資源配置
+**模組 3 評量**：部署與佈建
 - 基礎設施設計挑戰
-- 多服務部署場景
-- 性能優化練習
+- 多服務部署情境
+- 效能優化練習
 
-**模組 4 評估**：部署前驗證
+**模組 4 評量**：部署前驗證
 - 容量規劃案例研究
-- 成本優化場景
-- 驗證管道實施
+- 成本優化情境
+- 驗證管線實作
 
-**模組 5 評估**：故障排除與除錯
+**模組 5 評量**：疑難排解與偵錯
 - 問題診斷練習
-- 監控實施任務
-- 事件響應模擬
+- 監控實作任務
+- 事件回應模擬
 
-**模組 6 評估**：進階主題
-- CI/CD 管道設計
-- 自訂模板開發
-- 企業架構場景
+**模組 6 評量**：進階主題
+- CI/CD 管線設計
+- 自訂範本開發
+- 企業架構情境
 
-### 最終綜合專案
+### 最終整合專案
 
-設計並實現一個完整的解決方案，展示對所有概念的掌握：
+設計並實作一個能展示所有概念掌握度的完整解決方案：
 
-**要求**：
-- 多層應用程式架構
+<strong>需求</strong>:
+- 多層次應用程式架構
 - 多個部署環境
-- 全面的監控與警報
-- 安全性與合規實施
-- 成本優化與性能調整
-- 完整的文檔與操作手冊
+- 全面的監控與警示
+- 安全與合規實作
+- 成本優化與效能調校
+- 完整文件與 runbooks
 
-**評估標準**：
-- 技術實施質量
-- 文檔完整性
-- 安全性與最佳實踐的遵守
-- 性能與成本優化
-- 故障排除與監控的有效性
+<strong>評分標準</strong>:
+- 技術實作品質
+- 文件完整性
+- 安全與最佳實務遵循
+- 效能與成本優化
+- 疑難排解與監控成效
 
 ## 學習資源與參考資料
 
-### 官方文檔
-- [Azure Developer CLI 文檔](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Bicep 文檔](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+### 官方文件
+- [Azure Developer CLI 文件](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Bicep 文件](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure 架構中心](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### 社群資源
-- [AZD 模板庫](https://azure.github.io/awesome-azd/)
+- [AZD 範本畫廊](https://azure.github.io/awesome-azd/)
 - [Azure-Samples GitHub 組織](https://github.com/Azure-Samples)
-- [Azure Developer CLI GitHub 儲存庫](https://github.com/Azure/azure-dev)
+- [Azure Developer CLI GitHub 倉庫](https://github.com/Azure/azure-dev)
 
 ### 練習環境
 - [Azure 免費帳戶](https://azure.microsoft.com/free/)
-- [Azure DevOps 免費層](https://azure.microsoft.com/services/devops/)
+- [Azure DevOps 免費方案](https://azure.microsoft.com/services/devops/)
 - [GitHub Actions](https://github.com/features/actions)
 
 ### 其他工具
@@ -702,163 +701,163 @@ Analyze the following components:
 - [Visual Studio Code](https://code.visualstudio.com/)
 - [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)
 
-## 學習時間表建議
+## 建議學習進度
 
 ### 全職學習（8 週）
-- **第 1-2 週**：模組 1-2（入門、配置）
+- **第 1-2 週**：模組 1-2（快速上手、設定）
 - **第 3-4 週**：模組 3-4（部署、部署前）
-- **第 5-6 週**：模組 5-6（故障排除、進階主題）
-- **第 7-8 週**：實踐專案與最終評估
+- **第 5-6 週**：模組 5-6（疑難排解、進階主題）
+- **第 7-8 週**：實作專案與最終評估
 
 ### 兼職學習（16 週）
-- **第 1-4 週**：模組 1（入門）
-- **第 5-7 週**：模組 2（配置與環境）
-- **第 8-10 週**：模組 3（部署與資源配置）
+- **第 1-4 週**：模組 1（快速上手）
+- **第 5-7 週**：模組 2（設定與環境）
+- **第 8-10 週**：模組 3（部署與佈建）
 - **第 11-12 週**：模組 4（部署前驗證）
-- **第 13-14 週**：模組 5（故障排除與除錯）
-- **第 15-16 週**：模組 6（進階主題與評估）
+- **第 13-14 週**：模組 5（疑難排解與偵錯）
+- **第 15-16 週**：模組 6（進階主題與評量）
 
 ---
 
-## 進度追蹤與評估框架
+## 進度追蹤與評量框架
 
-### 章節完成檢查表
+### 章節完成檢查清單
 
-通過以下可衡量的成果追蹤每章進度：
+使用下列可衡量成果追蹤每章進度：
 
 #### 📚 第 1 章：基礎與快速入門
-- [ ] **完成安裝**：在您的平台上安裝並驗證 AZD
-- [ ] **首次部署**：成功部署 todo-nodejs-mongo 模板
-- [ ] **環境設置**：配置第一個環境變數
-- [ ] **資源導航**：在 Azure Portal 中探索已部署的資源
-- [ ] **命令掌握**：熟悉基本的 AZD 命令
+- [ ] <strong>安裝完成</strong>：已在您的平台安裝並驗證 AZD
+- [ ] <strong>首次部署</strong>：成功部署 todo-nodejs-mongo 範本
+- [ ] <strong>環境設定</strong>：已配置第一組環境變數
+- [ ] <strong>資源導覽</strong>：已在 Azure 入口網站探索部署的資源
+- [ ] <strong>指令掌握</strong>：熟悉基本的 AZD 指令
 
-#### 🤖 第 2 章：AI 優先開發  
-- [ ] **AI 模板部署**：成功部署 azure-search-openai-demo
-- [ ] **RAG 實施**：配置文件索引與檢索
-- [ ] **模型配置**：設置多個具有不同用途的 AI 模型
-- [ ] **AI 監控**：為 AI 工作負載實施 Application Insights
-- [ ] **性能優化**：調整 AI 應用程式性能
+#### 🤖 第 2 章：以 AI 為先的開發
+- [ ] **AI 範本部署**：已成功部署 azure-search-openai-demo
+- [ ] **RAG 實作**：配置文件索引與檢索
+- [ ] <strong>模型設定</strong>：設定多個具不同用途的 AI 模型
+- [ ] **AI 監控**：為 AI 工作負載實作 Application Insights
+- [ ] <strong>效能優化</strong>：調校 AI 應用效能
 
-#### ⚙️ 第 3 章：配置與身份驗證
-- [ ] **多環境設置**：配置開發、測試和生產環境
-- [ ] **安全實施**：設置受管理的身份驗證
-- [ ] **機密管理**：整合 Azure Key Vault 管理敏感數據
-- [ ] **參數管理**：創建特定於環境的配置
-- [ ] **身份驗證掌握**：實施安全的訪問模式
+#### ⚙️ 第 3 章：設定與驗證
+- [ ] <strong>多環境設定</strong>：配置 dev、staging 與 prod 環境
+- [ ] <strong>安全實作</strong>：設定 Managed Identity 驗證
+- [ ] <strong>機密管理</strong>：整合 Azure Key Vault 管理敏感資料
+- [ ] <strong>參數管理</strong>：建立環境專屬配置
+- [ ] <strong>驗證掌握</strong>：實作安全的存取模式
 
-#### 🏗️ 第 4 章：基礎設施即代碼與部署
-- [ ] **自訂模板創建**：構建多服務應用程式模板
-- [ ] **Bicep 掌握**：創建模組化、可重用的基礎設施組件
-- [ ] **部署自動化**：實施部署前/後掛鉤
-- [ ] **架構設計**：部署複雜的微服務架構
-- [ ] **模板優化**：優化模板以提升性能和降低成本
+#### 🏗️ 第 4 章：基礎設施即程式碼與部署
+- [ ] <strong>自訂範本建立</strong>：建立多服務應用程式範本
+- [ ] **Bicep 精通**：建立模組化、可重用的基礎設施元件
+- [ ] <strong>部署自動化</strong>：實作部署前/後的 hooks
+- [ ] <strong>架構設計</strong>：部署複雜的微服務架構
+- [ ] <strong>範本優化</strong>：為效能與成本優化範本
 
 #### 🎯 第 5 章：多代理 AI 解決方案
-- [ ] **零售解決方案部署**：部署完整的多代理零售場景
-- [ ] **代理自訂**：修改客戶和庫存代理行為
-- [ ] **架構擴展**：實施負載平衡和自動擴展
-- [ ] **生產監控**：設置全面的監控與警報
-- [ ] **性能調整**：優化多代理系統性能
+- [ ] <strong>零售解決方案部署</strong>：部署完整的多代理零售情境
+- [ ] <strong>代理自訂</strong>：修改客服與庫存代理行為
+- [ ] <strong>架構擴充</strong>：實作負載平衡與自動擴充
+- [ ] <strong>生產監控</strong>：建立全面的監控與警示
+- [ ] <strong>效能調校</strong>：優化多代理系統效能
 
 #### 🔍 第 6 章：部署前驗證與規劃
-- [ ] **容量分析**：分析應用程式的資源需求
-- [ ] **SKU 優化**：選擇具成本效益的服務層級
-- [ ] **驗證自動化**：實施部署前檢查腳本
-- [ ] **成本規劃**：創建部署成本估算與預算
-- [ ] **風險評估**：識別並減輕部署風險
+- [ ] <strong>容量分析</strong>：分析應用所需的資源
+- [ ] **SKU 優化**：選擇具成本效益的服務等級
+- [ ] <strong>驗證自動化</strong>：實作部署前檢查腳本
+- [ ] <strong>成本規劃</strong>：建立部署成本估算與預算
+- [ ] <strong>風險評估</strong>：辨識並緩解部署風險
 
-#### 🚨 第 7 章：故障排除與除錯
-- [ ] **診斷技能**：成功排除故意破壞的部署問題
-- [ ] **日誌分析**：有效使用 Azure Monitor 和 Application Insights
-- [ ] **性能調整**：優化性能較差的應用程式
-- [ ] **恢復程序**：實施備份與災難恢復
-- [ ] **監控設置**：創建主動監控與警報
+#### 🚨 第 7 章：疑難排解與偵錯
+- [ ] <strong>診斷技能</strong>：成功偵錯故意破壞的部署
+- [ ] <strong>日誌分析</strong>：有效使用 Azure Monitor 與 Application Insights
+- [ ] <strong>效能調校</strong>：優化效能不佳的應用程式
+- [ ] <strong>復原程序</strong>：實作備份與災難復原
+- [ ] <strong>監控設定</strong>：建立主動式監控與警示
 
-#### 🏢 第 8 章：生產與企業模式
-- [ ] **企業安全**：實施全面的安全模式
-- [ ] **治理框架**：設置 Azure Policy 和資源管理
-- [ ] **進階監控**：創建儀表板與自動化警報
-- [ ] **CI/CD 整合**：構建自動化部署管道
-- [ ] **合規實施**：滿足企業合規要求
+#### 🏢 第 8 章：生產環境與企業實務
+- [ ] <strong>企業安全</strong>：實作完整的安全模式
+- [ ] <strong>治理框架</strong>：設定 Azure Policy 與資源管理
+- [ ] <strong>進階監控</strong>：建立儀表板與自動化警示
+- [ ] **CI/CD 整合**：建立自動化部署管線
+- [ ] <strong>合規實作</strong>：符合企業合規需求
 
-### 學習時間表與里程碑
+### 學習時程與里程碑
 
-#### 第 1-2 週：基礎建設
-- **里程碑**：使用 AZD 部署第一個 AI 應用程式
-- **驗證**：可通過公共 URL 訪問的運行應用程式
-- **技能**：基本 AZD 工作流程與 AI 服務整合
+#### 第 1-2 週：基礎建立
+- <strong>里程碑</strong>：使用 AZD 部署第一個 AI 應用
+- <strong>驗證</strong>：可透過公開 URL 存取的運作應用
+- <strong>技能</strong>：基本 AZD 工作流程與 AI 服務整合
 
-#### 第 3-4 週：配置掌握
-- **里程碑**：多環境部署與安全身份驗證
-- **驗證**：相同應用程式部署到開發/測試/生產環境
-- **技能**：環境管理與安全實施
+#### 第 3-4 週：設定精通
+- <strong>里程碑</strong>：具安全驗證的多環境部署
+- <strong>驗證</strong>：同一應用已部署到 dev/staging/prod
+- <strong>技能</strong>：環境管理與安全實作
 
-#### 第 5-6 週：基礎設施專業知識
-- **里程碑**：用於複雜多服務應用程式的自訂模板
-- **驗證**：由其他團隊成員部署的可重用模板
-- **技能**：Bicep 掌握與基礎設施自動化
+#### 第 5-6 週：基礎設施專業
+- <strong>里程碑</strong>：為複雜多服務應用建立自訂範本
+- <strong>驗證</strong>：其他團隊成員能部署並重用該範本
+- <strong>技能</strong>：Bicep 精通與基礎設施自動化
 
-#### 第 7-8 週：進階 AI 實施
-- **里程碑**：生產就緒的多代理 AI 解決方案
-- **驗證**：系統處理實際負載並設有監控
-- **技能**：多代理協作與性能優化
+#### 第 7-8 週：進階 AI 實作
+- <strong>里程碑</strong>：生產就緒的多代理 AI 解決方案
+- <strong>驗證</strong>：系統能處理實際負載並具監控
+- <strong>技能</strong>：多代理協調與效能優化
 
 #### 第 9-10 週：生產準備
-- **里程碑**：具備完整合規的企業級部署
-- **驗證**：通過安全審查與成本優化審核
-- **技能**：治理、監控與 CI/CD 整合
+- <strong>里程碑</strong>：具完整合規的企業級部署
+- <strong>驗證</strong>：通過安全審查與成本優化稽核
+- <strong>技能</strong>：治理、監控與 CI/CD 整合
 
-### 評估與認證
+### 評量與認證
 
 #### 知識驗證方法
-1. **實際部署**：每章的運行應用程式
-2. **代碼審查**：模板與配置的質量評估
-3. **問題解決**：故障排除場景與解決方案
-4. **同儕教學**：向其他學員解釋概念
-5. **社群貢獻**：分享模板或改進建議
+1. <strong>實務部署</strong>：各章節的運作應用
+2. <strong>程式碼審查</strong>：範本與設定品質評估
+3. <strong>問題解決</strong>：疑難排解情境與解法
+4. <strong>同儕教學</strong>：向其他學習者說明概念
+5. <strong>社群貢獻</strong>：分享範本或改進案
 
-#### 專業發展成果
-- **作品集項目**：8個可投入生產的部署
-- **技術技能**：符合業界標準的AZD及AI部署專業知識
-- **解決問題能力**：獨立排除故障及優化能力
-- **社群認可**：積極參與Azure開發者社群
-- **職業發展**：技能直接應用於雲端及AI相關職位
+#### 職業發展成果
+- <strong>作品集專案</strong>: 8 個可投入生產的部署
+- <strong>技術能力</strong>: Industry-standard AZD and AI deployment expertise
+- <strong>問題解決能力</strong>: 獨立故障排除與最佳化
+- <strong>社群認可</strong>: 積極參與 Azure 開發者社群
+- <strong>職涯晉升</strong>: 技能可直接應用於雲端與 AI 職務
 
 #### 成功指標
-- **部署成功率**：>95%的成功部署率
-- **故障排除時間**：常見問題解決時間少於30分鐘
-- **效能優化**：成本及效能的顯著改進
-- **安全合規**：所有部署均符合企業安全標準
-- **知識傳遞**：能夠指導其他開發者
+- <strong>部署成功率</strong>: >95% 成功部署
+- <strong>故障排除時間</strong>: <30 分鐘解決常見問題
+- <strong>效能最佳化</strong>: 在成本與效能上有可展示的改善
+- <strong>安全合規</strong>: 所有部署皆符合企業安全標準
+- <strong>知識傳承</strong>: 能夠指導其他開發者
 
 ### 持續學習與社群參與
 
-#### 保持最新
-- **Azure更新**：關注Azure Developer CLI的版本更新說明
-- **社群活動**：參加Azure及AI開發者活動
-- **文件貢獻**：為社群文件及範例作出貢獻
-- **反饋循環**：對課程內容及Azure服務提供反饋
+#### 緊貼最新動態
+- **Azure Updates**: Follow Azure Developer CLI release notes
+- <strong>社群活動</strong>: 參與 Azure 與 AI 的開發者活動
+- <strong>文件</strong>: 為社群文件與範例做出貢獻
+- <strong>回饋機制</strong>: 就課程內容與 Azure 服務提供回饋
 
-#### 職業發展
-- **專業網絡**：與Azure及AI專家建立聯繫
-- **演講機會**：在會議或聚會中分享學習成果
-- **開源貢獻**：為AZD模板及工具作出貢獻
-- **指導他人**：引導其他開發者學習AZD
+#### 職涯發展
+- <strong>專業人脈</strong>: 與 Azure 及 AI 專家建立連繫
+- <strong>演講機會</strong>: 在會議或聚會分享所學
+- <strong>開源貢獻</strong>: 為 AZD 範本與工具做出貢獻
+- <strong>指導</strong>: 在 AZD 的學習旅程中協助其他開發者
 
 ---
 
-**章節導航：**
-- **📚 課程首頁**：[AZD For Beginners](../README.md)
-- **📖 開始學習**：[第1章：基礎與快速入門](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 進度追蹤**：通過全面的8章學習系統追蹤您的進步
-- **🤝 社群**：[Azure Discord](https://discord.gg/microsoft-azure) 提供支援與討論
+**章節導覽:**
+- **📚 課程首頁**: [AZD 初學者指南](../README.md)
+- **📖 開始學習**: [第 1 章：基礎與快速上手](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 進度追蹤**: 透過完整的 8 章學習系統追蹤你的進展
+- **🤝 社群**: 在 [Azure Discord](https://discord.gg/microsoft-azure) 尋求支援與討論
 
-**學習進度追蹤**：使用這份結構化指南，通過漸進式、實用的學習，掌握Azure Developer CLI，並獲得可衡量的成果及專業發展效益。
+<strong>學習進度追蹤</strong>: 使用此結構化指南，透過循序漸進且實務導向的學習掌握 Azure Developer CLI，並獲得可衡量的成果與專業發展效益。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責聲明**：  
-此文件已使用人工智能翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力確保準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要信息，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。
+**Disclaimer**:
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，但請注意自動翻譯可能包含錯誤或不準確之處。原始文件的原文應視為具權威性的版本。對於關鍵資訊，建議採用專業人工翻譯。我們不對因使用本翻譯而導致的任何誤解或誤釋承擔責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

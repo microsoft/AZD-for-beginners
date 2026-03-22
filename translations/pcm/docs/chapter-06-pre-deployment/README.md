@@ -1,4 +1,4 @@
-# Chapter 6: Pre-Deployment Plannin & Validation
+# Chapter 6: Pre-Deployment Planning & Validation
 
 **📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1 hour | **⭐ Complexity**: Intermediate
 
@@ -6,26 +6,26 @@
 
 ## Overview
 
-Dis chapter dey cover di important plannin an validation steps wey you suppose do before you deploy your application. E go help you avoid costly mistakes by doing proper capacity plannin, choosing correct SKUs, an running preflight checks.
+Dis chapter dey explain the important planning and validation steps wey you suppose do before you deploy your application. Learn how to avoid costly mistake by doing proper capacity planning, choosing correct SKUs, and running preflight checks.
 
 ## Learning Objectives
 
-By completing this chapter, you will:
-- Run preflight checks before deployment
-- Plan capacity and estimate resource requirements
-- Select appropriate SKUs for cost optimization
+By completing this chapter, you go:
+- Run preflight checks before you deploy
+- Plan capacity and estimate wetin resource dem go need
+- Choose appropriate SKUs make cost dey optimized
 - Configure Application Insights for monitoring
-- Understand team coordination patterns
+- Understand how team dem go coordinate
 
 ---
 
 ## 📚 Lessons
 
-| # | Lesson | Description | Time |
+| # | Lekshon | Wetin e mean | Time |
 |---|--------|-------------|------|
-| 1 | [Preflight Checks](preflight-checks.md) | Make sure di configuration dey correct before you deploy | 15 min |
-| 2 | [Capacity Planning](capacity-planning.md) | Estimate how much resources you go need | 20 min |
-| 3 | [SKU Selection](sku-selection.md) | Choose di right pricing tiers | 15 min |
+| 1 | [Preflight Checks](preflight-checks.md) | Validate configuration before deployment | 15 min |
+| 2 | [Capacity Planning](capacity-planning.md) | Estimate resource requirements | 20 min |
+| 3 | [SKU Selection](sku-selection.md) | Choose appropriate pricing tiers | 15 min |
 | 4 | [Application Insights](application-insights.md) | Configure monitoring | 20 min |
 | 5 | [Coordination Patterns](coordination-patterns.md) | Team deployment workflows | 15 min |
 
@@ -37,13 +37,13 @@ By completing this chapter, you will:
 # Check di subscription quota dem
 az vm list-usage --location eastus --output table
 
-# Preview di deployment (no resource dem go create)
+# Preview di deployment (no resources go dey created)
 azd provision --preview
 
-# Check say Bicep syntax correct
+# Make sure say Bicep syntax correct
 az bicep build --file infra/main.bicep
 
-# Check di environment setup
+# Check di environment configuration
 azd env get-values
 ```
 
@@ -53,7 +53,7 @@ azd env get-values
 
 ### Before `azd provision`
 
-- [ ] Quota don check for region
+- [ ] Quota don verify for the region
 - [ ] SKUs don choose well
 - [ ] Cost estimate don review
 - [ ] Naming convention dey consistent
@@ -74,7 +74,7 @@ azd env get-values
 |----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
-| Azure OpenAI | Standard | Standard + PTU |
+| Microsoft Foundry Models | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
 
 ---
@@ -98,5 +98,5 @@ azd env get-values
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 Disclaimer:
-Dis document na AI translate (Co-op Translator: https://github.com/Azure/co-op-translator) translate am. Even though we try make am correct, abeg note say automatic translation fit get errors or wrong parts. Di original document for im own language suppose be di correct one. If na important tin, make you use professional human translator. We no go responsible for any misunderstanding or wrong meaning wey fit come from dis translation.
+Dis document get translated by AI translation service wey dem dey call Co-op Translator (https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg note say automatic translations fit get mistakes or no too accurate. The original document for im original language na the main authoritative source. If na serious or important information, make you use professional human translator. We no go responsible for any misunderstanding or wrong interpretation wey fit come from this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

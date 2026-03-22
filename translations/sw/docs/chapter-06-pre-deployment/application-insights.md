@@ -1,30 +1,30 @@
-# Uunganisho wa Application Insights na AZD
+# Uunganishaji wa Application Insights na AZD
 
-⏱️ **Muda Unaokadiriwa**: 40-50 minutes | 💰 **Athari ya Gharama**: ~$5-15/month | ⭐ **Ugumu**: Intermediate
+⏱️ **Muda Unakadiriwa**: 40-50 dakika | 💰 **Athari ya Gharama**: ~$5-15/mwezi | ⭐ **Ugumu**: Wastani
 
 **📚 Njia ya Kujifunza:**
-- ← Iliyotangulia: [Ukaguzi wa awali](preflight-checks.md) - Uthibitishaji kabla ya utoaji
-- 🎯 **Uko Hapa**: Uunganisho wa Application Insights (Ufuatiliaji, telemetri, utambuzi makosa)
-- → Ifuatayo: [Mwongozo wa Utoaji](../chapter-04-infrastructure/deployment-guide.md) - Deploy to Azure
-- 🏠 [Nyumbani kwa Kozi](../../README.md)
+- ← Iliyopita: [Preflight Checks](preflight-checks.md) - Uthibitishaji kabla ya uwasilishaji
+- 🎯 **Uko Hapa**: Uunganishaji wa Application Insights (Ufuatiliaji, telemetri, utatuzi wa matatizo)
+- → Ifuatayo: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Tekeleza kwenye Azure
+- 🏠 [Course Home](../../README.md)
 
 ---
 
-## Utajifunza Nini
+## Utakachojifunza
 
-Kwa kumaliza somo hili, utapata:
-- Kuunganisha Application Insights kwenye miradi ya AZD kwa otomatiki
-- Sanidi ufuatiliaji uliogawanyika kwa microservices
-- Tekeleza telemetri maalum (vipimo, matukio, utegemezi)
-- Weka vipimo vya moja kwa moja kwa ufuatiliaji wa wakati halisi
-- Tengeneza arifu na dashibodi kutoka kwa utoaji wa AZD
-- Rekebisha matatizo ya uzalishaji kwa kutumia maswali ya telemetri
-- Boresha gharama na mikakati ya sampuli
-- Fuatilia programu za AI/LLM (tokens, ucheleweshaji, gharama)
+Kwa kukamilisha somo hili, utajifunza:
+- Uunganisha **Application Insights** kwenye miradi ya AZD kiotomatiki
+- Kusanidi **ufuatiliaji uliosambazwa** kwa microservices
+- Kutekeleza **telemetri ya desturi** (metrik, matukio, utegemezi)
+- Kuweka **metrik za papo hapo** kwa ufuatiliaji wa wakati halisi
+- Kuunda **arifa na dashibodi** kutoka kwa utekelezaji wa AZD
+- Kutatua matatizo ya uzalishaji kwa **maswali ya telemetri**
+- Kuboresha **gharama na mikakati ya sampuli**
+- Kufuatilia **programu za AI/LLM** (tokens, ucheleweshaji, gharama)
 
 ## Kwa Nini Application Insights na AZD Ni Muhimu
 
-### Changamoto: Ufuatiliaji Katika Uzalishaji
+### Changamoto: Uwezo wa Kuonekana katika Uzalishaji
 
 **Bila Application Insights:**
 ```
@@ -36,7 +36,7 @@ Kwa kumaliza somo hili, utapata:
 ❌ Unknown failure rates and bottlenecks
 ```
 
-**Na Application Insights + AZD:**
+**Kwa Application Insights + AZD:**
 ```
 ✅ Automatic telemetry collection
 ✅ Centralized logs from all services
@@ -47,34 +47,34 @@ Kwa kumaliza somo hili, utapata:
 ✅ AZD provisions everything automatically
 ```
 
-**Sanauli**: Application Insights ni kama kuwa na rekoda ya "black box" ya ndege + dashibodi ya kokpiti kwa programu yako. Unaona kila kitu kinachotokea kwa wakati halisi na unaweza kurudisha tukio lolote tena.
+**Analojia**: Application Insights ni kama kuwa na rekoda ya ndege "black box" + dashibodi ya kokpiti kwa programu yako. Unaona kila kitu kinachotokea kwa wakati halisi na unaweza kuirudia tukio lolote.
 
 ---
 
 ## Muhtasari wa Usanifu
 
-### Application Insights katika Muundo wa AZD
+### Application Insights katika Usanifu wa AZD
 
 ```mermaid
 graph TB
     User[Mtumiaji/Mteja]
-    App1[Programu ya Kontena 1<br/>Mlango la API]
+    App1[Programu ya Kontena 1<br/>Mlango wa API]
     App2[Programu ya Kontena 2<br/>Huduma ya Bidhaa]
-    App3[Programu ya Kontena 3<br/>Huduma ya Oda]
+    App3[Programu ya Kontena 3<br/>Huduma ya Maagizo]
     
-    AppInsights[Uchunguzi wa Programu<br/>Kituo cha Telemetri]
-    LogAnalytics[(Uchambuzi wa Logi<br/>Eneo la Kazi)]
+    AppInsights[Application Insights<br/>Kituo cha Telemetri]
+    LogAnalytics[(Log Analytics<br/>Eneo la Kazi)]
     
-    Portal[Portal ya Azure<br/>Dashibodi na Arifa]
+    Portal[Azure Portal<br/>Dashibodi & Tahadhari]
     Query[Maswali ya Kusto<br/>Uchambuzi Maalum]
     
     User --> App1
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|Uwekaji wa upimaji kiotomatiki| AppInsights
-    App2 -.->|Uwekaji wa upimaji kiotomatiki| AppInsights
-    App3 -.->|Uwekaji wa upimaji kiotomatiki| AppInsights
+    App1 -.->|Uwekaji otomatiki| AppInsights
+    App2 -.->|Uwekaji otomatiki| AppInsights
+    App3 -.->|Uwekaji otomatiki| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -83,57 +83,57 @@ graph TB
     style AppInsights fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style LogAnalytics fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-### Nini Kinachofuatiliwa kwa Otomatiki
+### Nini Kinachofuatiliwa Kiotomatiki
 
-| Aina ya Telemetri | Inachokamata | Matumizi |
+| Aina ya Telemetri | Kinachokamatwa | Matumizi |
 |----------------|------------------|----------|
-| **Requests** | Maombi ya HTTP, nambari za hali, muda | Ufuatiliaji wa utendaji wa API |
-| **Dependencies** | Miito ya nje (DB, APIs, storage) | Tambua vikwazo |
-| **Exceptions** | Makosa yasiyoshughulikiwa yenye stack trace | Kurekebisha makosa |
-| **Custom Events** | Matukio ya biashara (signup, purchase) | Uchambuzi na mtiririko |
-| **Metrics** | Viashiria vya utendaji, vipimo maalum | Mipango ya uwezo |
-| **Traces** | Ujumbe za logi zenye uzito | Kurekebisha na ukaguzi |
-| **Availability** | Vipimo vya uptime na muda wa majibu | Ufuatiliaji wa SLA |
+| **Requests** | maombi ya HTTP, nambari za hali, muda | ufuatiliaji wa utendaji wa API |
+| **Dependencies** | miito ya nje (DB, APIs, uhifadhi) | tambua vikwazo |
+| **Exceptions** | makosa yasiyotendwa na stack traces | utatuzi wa kushindwa |
+| **Custom Events** | matukio ya kibiashara (signup, purchase) | uchambuzi na mafunneli |
+| **Metrics** | counters za utendaji, metrik za desturi | upangaji wa uwezo |
+| **Traces** | ujumbe za logi zenye uzito | utatuzi na ukaguzi |
+| **Availability** | vipimo vya uptime na wakati wa majibu | ufuatiliaji wa SLA |
 
 ---
 
-## Mahitaji
+## Mahitaji ya Awali
 
 ### Zana Zinazohitajika
 
 ```bash
 # Thibitisha Azure Developer CLI
 azd version
-# ✅ Inatarajiwa: toleo la azd 1.0.0 au zaidi
+# ✅ Inatarajiwa: azd toleo 1.0.0 au zaidi
 
 # Thibitisha Azure CLI
 az --version
-# ✅ Inatarajiwa: toleo la azure-cli 2.50.0 au zaidi
+# ✅ Inatarajiwa: azure-cli 2.50.0 au zaidi
 ```
 
 ### Mahitaji ya Azure
 
-- Usajili wa Azure ukiwa hai
+- Usajili wa Azure unaofanya kazi
 - Ruhusa za kuunda:
-  - rasilimali za Application Insights
+  - Application Insights resources
   - Log Analytics workspaces
   - Container Apps
-  - makundi ya rasilimali
+  - Resource groups
 
 ### Maarifa Yanayohitajika
 
-Unapaswa kuwa umemaliza:
-- [AZD Basics](../chapter-01-foundation/azd-basics.md) - Core AZD concepts
-- [Configuration](../chapter-03-configuration/configuration.md) - Environment setup
-- [First Project](../chapter-01-foundation/first-project.md) - Basic deployment
+Unapaswa kuwa umekamilisha:
+- [AZD Basics](../chapter-01-foundation/azd-basics.md) - Ma dhana za msingi za AZD
+- [Configuration](../chapter-03-configuration/configuration.md) - Usanidi wa mazingira
+- [First Project](../chapter-01-foundation/first-project.md) - Utekelezaji wa msingi
 
 ---
 
-## Somo 1: Application Insights Otomatiki na AZD
+## Somo 1: Application Insights ya Kiotomatiki na AZD
 
 ### Jinsi AZD Inavyotoa Application Insights
 
-AZD kwa otomatiki huunda na kusanidi Application Insights unapofanya utoaji. Tuwone jinsi inavyofanya kazi.
+AZD huunda na kusanidi Application Insights kiotomatiki unapotekeleza. Hebu tazame jinsi inavyofanya kazi.
 
 ### Muundo wa Mradi
 
@@ -156,7 +156,7 @@ monitored-app/
 
 ### Hatua 1: Sanidi AZD (azure.yaml)
 
-**Faili: `azure.yaml`**
+**File: `azure.yaml`**
 
 ```yaml
 name: monitored-app
@@ -172,13 +172,13 @@ services:
 # AZD automatically provisions monitoring!
 ```
 
-**Hiyo ni yote!** AZD itaunda Application Insights kwa chaguo-msingi. Hakuna usanidi wa ziada unaohitajika kwa ufuatiliaji wa msingi.
+**Hivyo ndivyo!** AZD itaunda Application Insights kwa chaguo-msingi. Hakuna usanidi wa ziada unaohitajika kwa ufuatiliaji wa msingi.
 
 ---
 
 ### Hatua 2: Miundombinu ya Ufuatiliaji (Bicep)
 
-**Faili: `infra/core/monitoring.bicep`**
+**File: `infra/core/monitoring.bicep`**
 
 ```bicep
 param logAnalyticsName string
@@ -229,7 +229,7 @@ output applicationInsightsName string = applicationInsights.name
 
 ### Hatua 3: Unganisha Container App na Application Insights
 
-**Faili: `infra/app/api.bicep`**
+**File: `infra/app/api.bicep`**
 
 ```bicep
 param name string
@@ -287,7 +287,7 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ### Hatua 4: Msimbo wa Programu na Telemetri
 
-**Faili: `src/app.py`**
+**File: `src/app.py`**
 
 ```python
 from flask import Flask, request, jsonify
@@ -300,7 +300,7 @@ import os
 
 app = Flask(__name__)
 
-# Pata msururu wa muunganisho wa Application Insights
+# Pata mnyororo wa muunganisho wa Application Insights
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
 if connection_string:
@@ -308,10 +308,10 @@ if connection_string:
     middleware = FlaskMiddleware(
         app,
         exporter=AzureExporter(connection_string=connection_string),
-        sampler=ProbabilitySampler(rate=1.0)  # Kusampulia 100% kwa mazingira ya maendeleo
+        sampler=ProbabilitySampler(rate=1.0)  # Sampuli 100% kwa maendeleo
     )
     
-    # Sanidi kurekodi kumbukumbu
+    # Sanidi uandishi wa kumbukumbu
     logger = logging.getLogger(__name__)
     logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
@@ -331,7 +331,7 @@ def health():
 def get_products():
     logger.info('Fetching products')
     
-    # Iga wito wa hifadhidata (inafuatiliwa moja kwa moja kama utegemezi)
+    # Kuigiza wito la hifadhidata (unafuatiliwa kiotomatiki kama utegemezi)
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -356,7 +356,7 @@ def slow_endpoint():
     """Test performance tracking"""
     import time
     logger.info('Slow endpoint called')
-    time.sleep(3)  # Iga operesheni polepole
+    time.sleep(3)  # Kuigiza operesheni ya taratibu
     logger.warning('Endpoint took 3 seconds to respond')
     return jsonify({'message': 'Slow operation completed'})
 
@@ -364,7 +364,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-**Faili: `src/requirements.txt`**
+**File: `src/requirements.txt`**
 
 ```txt
 Flask==3.0.0
@@ -375,26 +375,26 @@ gunicorn==21.2.0
 
 ---
 
-### Hatua 5: Weka na Thibitisha
+### Hatua 5: Tekeleza na Thibitisha
 
 ```bash
 # Anzisha AZD
 azd init
 
-# Sambaza (hutayarisha Application Insights kiotomatiki)
+# Sambaza (huandaa Application Insights kiotomatiki)
 azd up
 
 # Pata URL ya programu
 APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
 
-# Zalisha telemetry
+# Zalisha telemetri
 curl $APP_URL/health
 curl $APP_URL/api/products
 curl $APP_URL/api/error-test
 curl $APP_URL/api/slow
 ```
 
-**✅ Matokeo Yanayotarajiwa:**
+**✅ Matokeo yanayotarajiwa:**
 ```json
 {
   "status": "healthy",
@@ -404,13 +404,13 @@ curl $APP_URL/api/slow
 
 ---
 
-### Hatua 6: Tazama Telemetri katika Azure Portal
+### Hatua 6: Tazama Telemetri kwenye Azure Portal
 
 ```bash
 # Pata maelezo ya Application Insights
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Fungua katika Azure Portal
+# Fungua kwenye Portal ya Azure
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"') \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"') \
@@ -420,20 +420,20 @@ az monitor app-insights component show \
 **Nenda kwenye Azure Portal → Application Insights → Transaction Search**
 
 Unapaswa kuona:
-- ✅ Maombi ya HTTP yenye nambari za hali
+- ✅ Maombi ya HTTP na nambari za hali
 - ✅ Muda wa ombi (3+ sekunde kwa `/api/slow`)
 - ✅ Maelezo ya makosa kutoka `/api/error-test`
-- ✅ Ujumbe maalum za logi
+- ✅ Ujumbe wa logi za desturi
 
 ---
 
-## Somo 2: Telemetri Maalum na Matukio
+## Somo 2: Telemetri ya Desturi na Matukio
 
 ### Fuata Matukio ya Kibiashara
 
-Wacha tuongeze telemetri maalum kwa matukio muhimu ya biashara.
+Hebu tuongeze telemetri ya desturi kwa matukio muhimu ya kibiashara.
 
-**Faili: `src/telemetry.py`**
+**File: `src/telemetry.py`**
 
 ```python
 from opencensus.ext.azure import metrics_exporter
@@ -518,9 +518,9 @@ class TelemetryClient:
 telemetry = TelemetryClient()
 ```
 
-### Sasisha Programu na Matukio Maalum
+### Sasisha Programu kwa Matukio ya Desturi
 
-**Faili: `src/app.py` (imeboreshwa)**
+**File: `src/app.py` (enhanced)**
 
 ```python
 from flask import Flask, request, jsonify
@@ -565,7 +565,7 @@ def search():
     
     start_time = time.time()
     
-    # Iga utafutaji (ingekuwa ni swali halisi kwenye hifadhidata)
+    # Kuiga utafutaji (ingekuwa ombi halisi la hifadhidata)
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
     duration = (time.time() - start_time) * 1000  # Badilisha kuwa ms
@@ -593,7 +593,7 @@ def external_call():
     success = True
     
     try:
-        # Iga wito wa API wa nje
+        # Kuiga wito wa API ya nje
         response = requests.get('https://api.example.com/data', timeout=5)
         result = response.json()
     except Exception as e:
@@ -616,7 +616,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-### Jaribu Telemetri Maalum
+### Jaribu Telemetri ya Desturi
 
 ```bash
 # Fuatilia tukio la ununuzi
@@ -632,7 +632,7 @@ curl "$APP_URL/api/search?q=laptop"
 curl $APP_URL/api/external-call
 ```
 
-**Tazama katika Azure Portal:**
+**Tazama kwenye Azure Portal:**
 
 Nenda kwenye Application Insights → Logs, kisha endesha:
 
@@ -665,13 +665,13 @@ traces
 
 ---
 
-## Somo 3: Ufuatiliaji Uliogawanyika kwa Microservices
+## Somo 3: Ufuatiliaji Uliosambazwa kwa Microservices
 
-### Washa ufuatiliaji kwa huduma mbalimbali
+### Weka Ufuatiliaji wa Msalaba-Services
 
-Kwa microservices, Application Insights kwa otomatiki huunganisha maombi kati ya huduma.
+Kwa microservices, Application Insights huoanisha kiotomatiki maombi katika huduma mbalimbali.
 
-**Faili: `infra/main.bicep`**
+**File: `infra/main.bicep`**
 
 ```bicep
 targetScope = 'subscription'
@@ -739,36 +739,36 @@ output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applica
 output GATEWAY_URL string = apiGateway.outputs.uri
 ```
 
-### Angalia Miamala Kuanzia Mwisho Hadi Mwisho
+### Tazama Muamala Kuanzia Mwisho-Mwisho
 
 ```mermaid
 sequenceDiagram
     participant User
-    participant Gateway as Mlango wa API<br/>(ID ya Trasi: abc123)
-    participant Product as Huduma ya Bidhaa<br/>(ID ya Mzazi: abc123)
-    participant Order as Huduma ya Oda<br/>(ID ya Mzazi: abc123)
+    participant Gateway as Mlango la API<br/>(Kitambulisho cha Ufuatiliaji: abc123)
+    participant Product as Huduma ya Bidhaa<br/>(ID Mzazi: abc123)
+    participant Order as Huduma ya Oda<br/>(ID Mzazi: abc123)
     participant AppInsights as Uchambuzi wa Programu
     
     User->>Gateway: POST /api/checkout
-    Note over Gateway: Anzisha Trasi: abc123
-    Gateway->>AppInsights: Rekodi ombi (ID ya Trasi: abc123)
+    Note over Gateway: Anza Ufuatiliaji: abc123
+    Gateway->>AppInsights: Rekodi ombi (Kitambulisho cha Ufuatiliaji: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: ID ya Mzazi: abc123
+    Note over Product: ID Mzazi: abc123
     Product->>AppInsights: Rekodi wito wa utegemezi
     Product-->>Gateway: Maelezo ya bidhaa
     
     Gateway->>Order: POST /orders
-    Note over Order: ID ya Mzazi: abc123
+    Note over Order: ID Mzazi: abc123
     Order->>AppInsights: Rekodi wito wa utegemezi
     Order-->>Gateway: Oda imeundwa
     
-    Gateway-->>User: Kukamilika kwa malipo
+    Gateway-->>User: Malipo yamekamilika
     Gateway->>AppInsights: Rekodi majibu (Muda: 450ms)
     
-    Note over AppInsights: Uhusianishaji kwa ID ya Trasi
+    Note over AppInsights: Ulinganifu kwa Kitambulisho cha Ufuatiliaji
 ```
-**Uliza ufuatiliaji kutoka mwanzo hadi mwisho:**
+**Uliza ufuatiliaji wa mwisho-mwisho:**
 
 ```kusto
 // Find complete request flow
@@ -788,56 +788,56 @@ dependencies
 
 ---
 
-## Somo 4: Vipimo Moja kwa Moja na Ufuatiliaji wa Wakati Halisi
+## Somo 4: Metriki za Moja kwa Moja na Ufuatiliaji wa Wakati Halisi
 
-### Washa Mtiririko wa Vipimo Moja kwa Moja
+### Weka Mtiririko wa Metriki za Moja kwa Moja
 
-Live Metrics hutoa telemetri ya wakati halisi yenye ucheleweshaji wa <1 second.
+Metriki za Moja kwa Moja zinatoa telemetri ya wakati halisi kwa ucheleweshaji <1 sekunde.
 
-**Pata Live Metrics:**
+**Pata Metriki za Moja kwa Moja:**
 
 ```bash
 # Pata rasilimali ya Application Insights
 APPI_NAME=$(azd env get-values | grep APPLICATIONINSIGHTS_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Pata kikundi cha rasilimali
+# Pata kundi la rasilimali
 RG_NAME=$(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -d '"')
 
 echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME → Live Metrics"
 ```
 
-**Unachoona kwa wakati halisi:**
-- ✅ Kiwango cha maombi yanayoingia (maombi/sec)
-- ✅ Miito ya utegemezi inayoondoka
+**Unachokuona kwa wakati halisi:**
+- ✅ Kiwango cha maombi yanayoingia (requests/sec)
+- ✅ Miito ya utegemezi inayoenda nje
 - ✅ Idadi ya makosa
-- ✅ Matumizi ya CPU na kumbukumbu
-- ✅ Idadi ya seva zilizo hai
+- ✅ Matumizi ya CPU na memory
+- ✅ Idadi ya server zilizo hai
 - ✅ Sampuli ya telemetri
 
-### Tengeneza Mzigo kwa Upimaji
+### Tengeneza Mzigo kwa Ajili ya Upimaji
 
 ```bash
-# Tengeneza mzigo ili uone takwimu za wakati halisi
+# Unda mzigo ili kuona vipimo hai
 for i in {1..100}; do
   curl $APP_URL/api/products &
   curl $APP_URL/api/search?q=test$i &
 done
 
-# Tazama takwimu za wakati halisi katika Portal ya Azure
-# Unapaswa kuona ongezeko la ghafla la kiwango cha maombi
+# Tazama vipimo hai katika Azure Portal
+# Unapaswa kuona kiwango cha maombi kikiongezeka ghafla
 ```
 
 ---
 
 ## Mazoezi ya Vitendo
 
-### Shughuli 1: Sanidi Arifu ⭐⭐ (Wastani)
+### Zoezi 1: Weka Arifa ⭐⭐ (Wastani)
 
-**Lengo**: Tengeneza arifu kwa viwango vya juu vya makosa na majibu ya polepole.
+**Lengo**: Tengeneza arifa kwa viwango vya makosa ya juu na majibu polepole.
 
 **Hatua:**
 
-1. **Unda arifu kwa kiwango cha makosa:**
+1. **Tengeneza arifa kwa kiwango cha makosa:**
 
 ```bash
 # Pata ID ya rasilimali ya Application Insights
@@ -846,7 +846,7 @@ APPI_ID=$(az monitor app-insights component show \
   --resource-group $RG_NAME \
   --query "id" -o tsv)
 
-# Unda onyo la kipimo kwa maombi yaliyoshindwa
+# Unda tahadhari ya kipimo kwa maombi yaliyoshindwa
 az monitor metrics alert create \
   --name "High-Error-Rate" \
   --resource-group $RG_NAME \
@@ -857,7 +857,7 @@ az monitor metrics alert create \
   --description "Alert when error rate exceeds 10 per 5 minutes"
 ```
 
-2. **Unda arifu kwa majibu ya polepole:**
+2. **Tengeneza arifa kwa majibu polepole:**
 
 ```bash
 az monitor metrics alert create \
@@ -870,9 +870,9 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **Unda arifu kupitia Bicep (inayopendekezwa kwa AZD):**
+3. **Tengeneza arifa kupitia Bicep (inadokezwa kwa AZD):**
 
-**Faili: `infra/core/alerts.bicep`**
+**File: `infra/core/alerts.bicep`**
 
 ```bicep
 param applicationInsightsId string
@@ -944,7 +944,7 @@ output errorAlertId string = errorRateAlert.id
 output slowResponseAlertId string = slowResponseAlert.id
 ```
 
-4. **Jaribu arifu:**
+4. **Jaribu arifa:**
 
 ```bash
 # Zalisha makosa
@@ -957,7 +957,7 @@ for i in {1..10}; do
   curl $APP_URL/api/slow
 done
 
-# Angalia hali ya tahadhari (subiri dakika 5-10)
+# Kagua hali ya arifa (subiri dakika 5-10)
 az monitor metrics alert list \
   --resource-group $RG_NAME \
   --query "[].{Name:name, Enabled:enabled, State:properties.enabled}" \
@@ -965,18 +965,18 @@ az monitor metrics alert list \
 ```
 
 **✅ Vigezo vya Mafanikio:**
-- ✅ Arifu zimeundwa kwa mafanikio
-- ✅ Arifu zinaanzishwa wakati vizingiti vinapovuka
-- ✅ Unaweza kuona historia ya arifu katika Azure Portal
-- ✅ Imeunganishwa na utoaji wa AZD
+- ✅ Arifa zimeundwa kwa mafanikio
+- ✅ Arifa zinaanza kufanya kazi wakati vigezo vinavuka
+- ✅ Unaweza kuona historia ya arifa katika Azure Portal
+- ✅ Zimeunganishwa na utekelezaji wa AZD
 
-**Muda**: 20-25 minutes
+**Muda**: 20-25 dakika
 
 ---
 
-### Shughuli 2: Tengeneza Dashibodi Maalum ⭐⭐ (Wastani)
+### Zoezi 2: Tengeneza Dashibodi ya Desturi ⭐⭐ (Wastani)
 
-**Lengo**: Jenga dashibodi inayonyesha vipimo muhimu vya programu.
+**Lengo**: Jenga dashibodi inayonyesha metrik za msingi za programu.
 
 **Hatua:**
 
@@ -984,17 +984,17 @@ az monitor metrics alert list \
 
 Nenda kwa: Azure Portal → Dashboards → New Dashboard
 
-2. **Ongeza tile za vipimo muhimu:**
+2. **Ongeza tiles kwa metrik kuu:**
 
-- Idadi ya maombi (masaa 24 yaliyopita)
-- Muda wa majibu wa wastani
+- Idadi ya maombi (saa 24 zilizopita)
+- Muda wa wastani wa majibu
 - Kiwango cha makosa
-- Operesheni 5 zilizo polepole zaidi
+- Operesheni 5 zenye polepole zaidi
 - Usambazaji wa kijiografia wa watumiaji
 
 3. **Tengeneza dashibodi kupitia Bicep:**
 
-**Faili: `infra/core/dashboard.bicep`**
+**File: `infra/core/dashboard.bicep`**
 
 ```bicep
 param dashboardName string
@@ -1063,7 +1063,7 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
 output dashboardId string = dashboard.id
 ```
 
-4. **Weka dashibodi:**
+4. **Tekeleza dashibodi:**
 
 ```bash
 # Ongeza kwenye main.bicep
@@ -1077,29 +1077,29 @@ module dashboard './core/dashboard.bicep' = {
   }
 }
 
-# Sambaza
+# Tekeleza
 azd up
 ```
 
 **✅ Vigezo vya Mafanikio:**
-- ✅ Dashibodi inaonyesha vipimo muhimu
-- ✅ Inaweza kupigwa alama kwenye ukurasa wa nyumbani wa Azure Portal
+- ✅ Dashibodi inaonyesha metrik kuu
+- ✅ Inaweza kupigwa pini kwenye ukurasa kuu wa Azure Portal
 - ✅ Inasasishwa kwa wakati halisi
-- ✅ Inayoweza kuwekwa kwa kutumia AZD
+- ✅ Inatekelezwa kupitia AZD
 
-**Muda**: 25-30 minutes
+**Muda**: 25-30 dakika
 
 ---
 
-### Shughuli 3: Fuatilia Programu za AI/LLM ⭐⭐⭐ (Chenye Ujuzi wa Juu)
+### Zoezi 3: Fuatilia Programu ya AI/LLM ⭐⭐⭐ (Kiwango cha Juu)
 
-**Lengo**: Fuata matumizi ya Azure OpenAI (tokens, gharama, ucheleweshaji).
+**Lengo**: Fuatilia matumizi ya Microsoft Foundry Models (tokens, gharama, ucheleweshaji).
 
 **Hatua:**
 
-1. **Tengeneza wrapper ya ufuatiliaji wa AI:**
+1. **Unda kifuniko cha ufuatiliaji wa AI:**
 
-**Faili: `src/ai_telemetry.py`**
+**File: `src/ai_telemetry.py`**
 
 ```python
 from telemetry import telemetry
@@ -1107,7 +1107,7 @@ from openai import AzureOpenAI
 import time
 
 class MonitoredAzureOpenAI:
-    """Azure OpenAI client with automatic telemetry"""
+    """Microsoft Foundry Models client with automatic telemetry"""
     
     def __init__(self, api_key, endpoint, api_version="2024-02-01"):
         self.client = AzureOpenAI(
@@ -1121,7 +1121,7 @@ class MonitoredAzureOpenAI:
         start_time = time.time()
         
         try:
-            # Ita Azure OpenAI
+            # Iita mifano ya Microsoft Foundry
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1136,7 +1136,7 @@ class MonitoredAzureOpenAI:
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # Hesabu gharama (bei ya GPT-4)
+            # Hesabu gharama (bei ya gpt-4.1)
             prompt_cost = (prompt_tokens / 1000) * 0.03  # $0.03 kwa 1K tokeni
             completion_cost = (completion_tokens / 1000) * 0.06  # $0.06 kwa 1K tokeni
             total_cost = prompt_cost + completion_cost
@@ -1182,7 +1182,7 @@ class MonitoredAzureOpenAI:
             raise
 ```
 
-2. **Tumia mteja mwenye ufuatiliaji:**
+2. **Tumia mteja aliyefuatiliwa:**
 
 ```python
 from flask import Flask, request, jsonify
@@ -1191,7 +1191,7 @@ import os
 
 app = Flask(__name__)
 
-# Anzisha mteja wa OpenAI unaofuatiliwa
+# Anzisha mteja wa OpenAI uliosimamiwa
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
     endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
@@ -1202,9 +1202,9 @@ def chat():
     data = request.json
     user_message = data.get('message')
     
-    # Ita kwa ufuatiliaji wa moja kwa moja
+    # Ita kwa ufuatiliaji wa kiotomatiki
     response = openai_client.chat_completion(
-        model='gpt-4',
+        model='gpt-4.1',
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1216,7 +1216,7 @@ def chat():
     })
 ```
 
-3. **Uliza vipimo vya AI:**
+3. **Uliza metrik za AI:**
 
 ```kusto
 // Total AI spend over time
@@ -1251,12 +1251,12 @@ traces
 ```
 
 **✅ Vigezo vya Mafanikio:**
-- ✅ Kila mwito wa OpenAI unafuatiliwa kwa otomatiki
-- ✅ Matumizi ya tokens na gharama zinaonekana
-- ✅ Ucheleweshaji unaofuatiliwa
-- ✅ Inawezekana kuweka arifu za bajeti
+- ✅ Kila antisho la OpenAI linafuatiliwa kiotomatiki
+- ✅ Matumizi ya tokeni na gharama zinaonekana
+- ✅ Ucheleweshaji unafuatiliwa
+- ✅ Inawezekana kuweka arifa za bajeti
 
-**Muda**: 35-45 minutes
+**Muda**: 35-45 dakika
 
 ---
 
@@ -1264,18 +1264,18 @@ traces
 
 ### Mikakati ya Sampuli
 
-Dhibiti gharama kwa kusampua telemetri:
+Dhibiti gharama kwa kutumia sampuli ya telemetri:
 
 ```python
 from opencensus.trace.samplers import ProbabilitySampler
 
-# Maendeleo: sampuli 100%
+# Maendeleo: uchukuaji wa sampuli 100%
 sampler = ProbabilitySampler(rate=1.0)
 
-# Uzalishaji: sampuli 10% (punguza gharama kwa 90%)
+# Uzalishaji: uchukuaji wa sampuli 10% (punguza gharama kwa 90%)
 sampler = ProbabilitySampler(rate=0.1)
 
-# Usampuli unaobadilika (hujirekebisha kiotomatiki)
+# Uchukuaji wa sampuli unaobadilika (hujirekebisha kiotomatiki)
 from opencensus.trace.samplers import AdaptiveSampler
 sampler = AdaptiveSampler()
 ```
@@ -1303,40 +1303,40 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 }
 ```
 
-### Makadirio ya Gharama Kila Mwezi
+### Makadirio ya Gharama za Mwezi
 
-| Kiasi cha Data | Uhifadhi | Gharama ya Kila Mwezi |
+| Kiasi cha Data | Uhifadhi | Gharama za Mwezi |
 |-------------|-----------|--------------|
-| 1 GB/mwezi | siku 30 | ~$2-5 |
-| 5 GB/mwezi | siku 30 | ~$10-15 |
-| 10 GB/mwezi | siku 90 | ~$25-40 |
-| 50 GB/mwezi | siku 90 | ~$100-150 |
+| 1 GB/month | 30 days | ~$2-5 |
+| 5 GB/month | 30 days | ~$10-15 |
+| 10 GB/month | 90 days | ~$25-40 |
+| 50 GB/month | 90 days | ~$100-150 |
 
-**Ngazi ya bure**: 5 GB/mwezi imejumuishwa
+**Ngazi ya bure**: 5 GB/mwezi inajumuishwa
 
 ---
 
-## Ukaguzi wa Maarifa
+## Kiashiria cha Maarifa
 
-### 1. Uingizaji Msingi ✓
+### 1. Muunganisho Msingi ✓
 
-Jaribu uelewa wako:
+Jaribu ufahamu wako:
 
-- [ ] **Q1**: Je, AZD inatengeneza vipi Application Insights?
-  - **A**: Kwa otomatiki kupitia templates za Bicep katika `infra/core/monitoring.bicep`
+- [ ] **Q1**: Jinsi gani AZD inatoa Application Insights?
+  - **A**: Kiotomatiki kupitia templates za Bicep katika `infra/core/monitoring.bicep`
 
 - [ ] **Q2**: Ni variable gani ya mazingira inayowezesha Application Insights?
   - **A**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
 - [ ] **Q3**: Ni aina gani tatu kuu za telemetri?
-  - **A**: Requests (HTTP calls), Dependencies (external calls), Exceptions (errors)
+  - **A**: Requests (miito ya HTTP), Dependencies (miito ya nje), Exceptions (makosa)
 
 **Uthibitisho wa Vitendo:**
 ```bash
-# Angalia ikiwa Application Insights imesanidiwa
+# Angalia ikiwa Application Insights imewekwa
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Thibitisha kuwa telemetry inatiririka
+# Thibitisha kuwa telemetri inatiririka
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1345,18 +1345,18 @@ az monitor app-insights metrics show \
 
 ---
 
-### 2. Telemetri Maalum ✓
+### 2. Telemetri ya Desturi ✓
 
-Jaribu uelewa wako:
+Jaribu ufahamu wako:
 
-- [ ] **Q1**: Unafuatiliaje matukio maalum ya biashara?
-  - **A**: Tumia logger pamoja na `custom_dimensions` au `TelemetryClient.track_event()`
+- [ ] **Q1**: Jinsi gani unafuata matukio ya kibiashara?
+  - **A**: Tumia logger na `custom_dimensions` au `TelemetryClient.track_event()`
 
-- [ ] **Q2**: Nini tofauti kati ya matukio na vipimo?
-  - **A**: Matukio ni matukio ya pekee, vipimo ni vipimo vya kihesabu
+- [ ] **Q2**: Tofauti gani kati ya matukio na metrik?
+  - **A**: Matukio ni matukio ya pekee, metrik ni vipimo vya nambari
 
-- [ ] **Q3**: Unaunganisha vipi telemetri kati ya huduma?
-  - **A**: Application Insights kwa otomatiki hutumia `operation_Id` kwa ajili ya kuunganisha
+- [ ] **Q3**: Jinsi gani unachanisha telemetri katika huduma mbalimbali?
+  - **A**: Application Insights hutumia kiotomatiki `operation_Id` kwa ulinganishaji
 
 **Uthibitisho wa Vitendo:**
 ```kusto
@@ -1370,20 +1370,20 @@ traces
 
 ### 3. Ufuatiliaji wa Uzalishaji ✓
 
-Jaribu uelewa wako:
+Jaribu ufahamu wako:
 
-- [ ] **Q1**: Sampling ni nini na kwanini kuitumia?
-  - **A**: Sampuli hupunguza kiasi cha data (na gharama) kwa kukamata sehemu tu ya telemetri
+- [ ] **Q1**: Je, sampuli ni nini na kwa nini kuitumia?
+  - **A**: Sampuli hupunguza kiasi cha data (na gharama) kwa kukamata asilimia tu ya telemetri
 
-- [ ] **Q2**: Unawezaje kuanzisha arifu?
-  - **A**: Tumia arifu za metric katika Bicep au Azure Portal kwa kuzingatia vipimo vya Application Insights
+- [ ] **Q2**: Jinsi gani unaweka arifa?
+  - **A**: Tumia metric alerts katika Bicep au Azure Portal kulingana na metrik za Application Insights
 
-- [ ] **Q3**: Nini tofauti kati ya Log Analytics na Application Insights?
-  - **A**: Application Insights huhifadhi data katika workspace ya Log Analytics; App Insights hutoa mtazamo maalum wa programu
+- [ ] **Q3**: Tofauti gani kati ya Log Analytics na Application Insights?
+  - **A**: Application Insights inahifadhi data katika Log Analytics workspace; App Insights hutoa mitazamo maalum ya programu
 
 **Uthibitisho wa Vitendo:**
 ```bash
-# Kagua usanidi wa sampuli
+# Angalia usanidi wa sampuli
 az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1392,11 +1392,11 @@ az monitor app-insights component show \
 
 ---
 
-## Mazoea Bora
+## Mbinu Bora
 
 ### ✅ FANYA:
 
-1. **Tumia vitambulisho vya ulinganisho (correlation IDs)**
+1. **Tumia correlation IDs**
    ```python
    logger.info('Processing order', extra={
        'custom_dimensions': {
@@ -1406,39 +1406,39 @@ az monitor app-insights component show \
    })
    ```
 
-2. **Sanidi arifu kwa vipimo muhimu**
+2. **Sanidi arifa kwa metrik muhimu**
    ```bicep
    // Error rate, slow responses, availability
    ```
 
-3. **Tumia uandishi wa logi uliopangwa**
+3. **Tumia logging yenye muundo**
    ```python
-   # ✅ ZURI: Iliyopangwa
+   # ✅ BORA: Iliyopangwa
    logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
    
-   # ❌ MBAYA: Isiyo na muundo
+   # ❌ BAYA: Isiyo na muundo
    logger.info(f'User 123 signed up')
    ```
 
 4. **Fuatilia utegemezi**
    ```python
-   # Fuatilia kwa kiotomatiki miito ya hifadhidata, maombi ya HTTP, n.k.
+   # Fuatilia kwa otomatiki miito ya hifadhidata, maombi ya HTTP, n.k.
    ```
 
-5. **Tumia Live Metrics wakati wa utoaji**
+5. **Tumia Live Metrics wakati wa utekelezaji**
 
 ### ❌ USIFANYE:
 
-1. **Usiandike data nyeti katika logi**
+1. **Usirekodi data nyeti**
    ```python
    # ❌ MBAYA
    logger.info(f'Login: {username}:{password}')
    
-   # ✅ BORA
+   # ✅ NZURI
    logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
    ```
 
-2. **Usitumie sampuli ya 100% katika uzalishaji**
+2. **Usitumie 100% sampuli katika uzalishaji**
    ```python
    # ❌ Ghali
    sampler = ProbabilitySampler(rate=1.0)
@@ -1447,7 +1447,7 @@ az monitor app-insights component show \
    sampler = ProbabilitySampler(rate=0.1)
    ```
 
-3. **Usiache kuangalia dead letter queues**
+3. **Usiache queues za barua walioonekana kuwa "dead letter"**
 
 4. **Usisahau kuweka mipaka ya uhifadhi wa data**
 
@@ -1459,7 +1459,7 @@ az monitor app-insights component show \
 
 **Uchunguzi:**
 ```bash
-# Angalia kwamba msururu wa muunganisho umewekwa
+# Hakikisha mnyororo wa muunganisho umewekwa
 azd env get-values | grep APPLICATIONINSIGHTS
 
 # Angalia kumbukumbu za programu kupitia Azure Monitor
@@ -1471,7 +1471,7 @@ az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 
 **Suluhisho:**
 ```bash
-# Thibitisha msururu wa muunganisho katika Programu ya Kontena
+# Thibitisha mstari wa muunganisho katika programu ya kontena
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1481,11 +1481,11 @@ az containerapp show \
 
 ---
 
-### Tatizo: Gharama za Juu
+### Tatizo: Gharama za juu
 
 **Uchunguzi:**
 ```bash
-# Kagua uingizaji wa data
+# Kagua upokeaji wa data
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1495,57 +1495,57 @@ az monitor app-insights metrics show \
 **Suluhisho:**
 - Punguza kiwango cha sampuli
 - Punguza kipindi cha uhifadhi
-- Ondoa uandishi wa logi wenye maelezo mengi
+- Ondoa kurekodi kwa maelezo mengi
 
 ---
 
 ## Jifunze Zaidi
 
 ### Nyaraka Rasmi
-- [Muhtasari wa Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Application Insights kwa Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
+- [Application Insights Overview](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Application Insights for Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
 - [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
-- [Ufuatiliaji wa AZD](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
+- [AZD Monitoring](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
-### Hatua Zifuatazo Katika Kozi Hii
-- ← Iliyotangulia: [Ukaguzi wa awali](preflight-checks.md)
-- → Ifuatayo: [Mwongozo wa Utoaji](../chapter-04-infrastructure/deployment-guide.md)
-- 🏠 [Nyumbani kwa Kozi](../../README.md)
+### Hatua Ifuatayo Katika Kozi Hii
+- ← Iliyopita: [Preflight Checks](preflight-checks.md)
+- → Ifuatayo: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+- 🏠 [Course Home](../../README.md)
 
 ### Mifano Inayohusiana
-- [Azure OpenAI Example](../../../../examples/azure-openai-chat) - telemetri ya AI
-- [Microservices Example](../../../../examples/microservices) - Ufuatiliaji uliogawanyika
+- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - telemetri ya AI
+- [Microservices Example](../../../../examples/microservices) - ufuatiliaji uliosambazwa
 
 ---
 
 ## Muhtasari
 
 **Umejifunza:**
-- ✅ Utoaji wa Application Insights kwa otomatiki kwa AZD
-- ✅ Telemetri maalum (matukio, vipimo, utegemezi)
-- ✅ Ufuatiliaji uliogawanyika katika microservices
-- ✅ Metiriki za moja kwa moja na ufuatiliaji wa wakati halisi
+- ✅ Uundaji wa Application Insights kiotomatiki na AZD
+- ✅ Telemetri ya desturi (matukio, metrik, utegemezi)
+- ✅ Ufuatiliaji uliosambazwa kwa microservices
+- ✅ Metriki za papo hapo na ufuatiliaji wa wakati halisi
 - ✅ Arifa na dashibodi
 - ✅ Ufuatiliaji wa programu za AI/LLM
-- ✅ Mikakati ya uboreshaji wa gharama
+- ✅ Mikakati ya kuboresha gharama
 
 **Mambo Muhimu:**
-1. **AZD hutoa ufuatiliaji kiotomatiki** - Hakuna usanidi wa mikono
-2. **Tumia uandishi wa kumbukumbu uliopangwa** - Hufanya utafutaji kuwa rahisi
-3. **Fuata matukio ya kibiashara** - Si metriki za kiufundi pekee
-4. **Fuatilia gharama za AI** - Fuata tokens na matumizi
-5. **Weka arifa** - Kuwa wa kujiandaa, si wa kujibu
+1. **AZD huweka ufuatiliaji kiotomatiki** - Hakuna usanidi wa mkono
+2. **Tumia uandishi wa kumbukumbu uliopangwa** - Hufanya uchunguzi kuwa rahisi
+3. **Fuata matukio ya biashara** - Sio tu vipimo vya kiufundi
+4. **Fuatilia gharama za AI** - Fuata tokeni na matumizi
+5. **Weka arifu** - Chukua hatua mapema, usisubiri
 6. **Boresha gharama** - Tumia sampuli na mipaka ya uhifadhi
 
 **Hatua Zifuatazo:**
 1. Kamilisha mazoezi ya vitendo
 2. Ongeza Application Insights kwenye miradi yako ya AZD
-3. Unda dashibodi maalum kwa timu yako
+3. Tengeneza dashibodi maalum kwa timu yako
 4. Jifunze [Mwongozo wa Utekelezaji](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Taarifa ya kutokuwajibika:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Nyaraka ya asili katika lugha yake inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, inashauriwa kutumia tafsiri ya kitaalamu iliyofanywa na mtafsiri wa binadamu. Hatuwajibiki kwa uelewa au tafsiri isiyo sahihi itokanayo na matumizi ya tafsiri hii.
+**Tamko la kutokuhusika**:
+Dokumenti hii imetafsiriwa kwa kutumia huduma ya utafsiri wa AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuwa sahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au ukosefu wa usahihi. Nyaraka ya asili katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, inashauriwa kutafsiriwa na mtafsiri mtaalamu wa binadamu. Hatutawajibika kwa uelewa mbaya au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

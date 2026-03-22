@@ -1,48 +1,48 @@
 # Microsoft Foundry と AZD の統合
 
-**Chapter Navigation:**
-- **📚 コースホーム**: [AZD 入門](../../README.md)
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD For Beginners](../../README.md)
 - **📖 現在の章**: 第2章 - AIファースト開発
-- **⬅️ 前の章**: [第1章: あなたの最初のプロジェクト](../chapter-01-foundation/first-project.md)
-- **➡️ 次へ**: [AIモデルのデプロイ](ai-model-deployment.md)
-- **🚀 次の章**: [第3章: 構成](../chapter-03-configuration/configuration.md)
+- **⬅️ 前の章**: [Chapter 1: Your First Project](../chapter-01-foundation/first-project.md)
+- **➡️ 次へ**: [AI Model Deployment](ai-model-deployment.md)
+- **🚀 次の章**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
 ## 概要
 
-このガイドは、Microsoft Foundry サービスを Azure Developer CLI (AZD) と統合して、AI アプリケーションのデプロイを効率化する方法を示します。Microsoft Foundry は AI アプリケーションの構築、デプロイ、および管理のための包括的なプラットフォームを提供し、AZD はインフラとデプロイプロセスを簡素化します。
+本ガイドでは、Microsoft Foundry サービスを Azure Developer CLI (AZD) と統合して、AI アプリケーションのデプロイを効率化する方法を示します。Microsoft Foundry は AI アプリケーションの構築、デプロイ、管理のための包括的なプラットフォームを提供し、AZD はインフラストラクチャとデプロイのプロセスを簡素化します。
 
-## Microsoft Foundryとは？
+## Microsoft Foundry とは？
 
-Microsoft Foundry は AI 開発のための統合プラットフォームで、以下を含みます:
+Microsoft Foundry は Microsoft の統合された AI 開発プラットフォームで、以下を含みます:
 
-- **Model Catalog**: 最新のAIモデルへのアクセス
+- **Model Catalog**: 最先端の AI モデルへのアクセス
 - **Prompt Flow**: AI ワークフローのビジュアルデザイナー
-- **AI Foundry Portal**: AI アプリケーションの統合開発環境
+- **Microsoft Foundry Portal**: AI アプリケーションのための統合開発環境
 - **Deployment Options**: 複数のホスティングおよびスケーリングオプション
 - **Safety and Security**: 組み込みの責任ある AI 機能
 
-## AZD + Microsoft Foundry: より良い統合
+## AZD + Microsoft Foundry: 連携による利点
 
 | 機能 | Microsoft Foundry | AZD 統合の利点 |
 |---------|-----------------|------------------------|
-| **モデルのデプロイ** | ポータルでの手動デプロイ | 自動化され、再現可能なデプロイ |
-| **インフラストラクチャ** | クリックでのプロビジョニング | インフラストラクチャをコードとして管理（Bicep） |
-| **環境管理** | 単一環境にフォーカス | 複数環境（dev/staging/prod） |
-| **CI/CD 統合** | 限定的 | ネイティブの GitHub Actions サポート |
-| **コスト管理** | 基本的な監視 | 環境ごとのコスト最適化 |
+| **Model Deployment** | マニュアルのポータルデプロイ | 自動化された再現可能なデプロイ |
+| **Infrastructure** | クリックでのプロビジョニング | Infrastructure as Code (Bicep) |
+| **Environment Management** | 単一環境フォーカス | マルチ環境（dev/staging/prod） |
+| **CI/CD Integration** | 限定的 | ネイティブな GitHub Actions サポート |
+| **Cost Management** | 基本的なモニタリング | 環境別のコスト最適化 |
 
 ## 前提条件
 
 - 適切な権限を持つ Azure サブスクリプション
-- Azure Developer CLI がインストールされていること
-- Azure OpenAI サービスへのアクセス
-- Microsoft Foundry の基本的な理解
+- Azure Developer CLI がインストール済みであること
+- Microsoft Foundry Models サービスへのアクセス
+- Microsoft Foundry に関する基本的な知識
 
 ## コア統合パターン
 
-### パターン 1: Azure OpenAI 統合
+### パターン 1: Microsoft Foundry Models の統合
 
-**ユースケース**: Azure OpenAI モデルを使用したチャットアプリのデプロイ
+<strong>ユースケース</strong>: Microsoft Foundry Models を使用したチャットアプリケーションのデプロイ
 
 ```yaml
 # azure.yaml
@@ -56,9 +56,9 @@ services:
       - AZURE_OPENAI_API_KEY
 ```
 
-**Infrastructure (main.bicep):**
+**インフラストラクチャ (main.bicep):**
 ```bicep
-// Azure OpenAI Account
+// Microsoft Foundry Models Account
 resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   name: openAIAccountName
   location: location
@@ -92,7 +92,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### パターン 2: AI Search + RAG 統合
 
-**ユースケース**: 検索補強生成（RAG）アプリケーションのデプロイ
+<strong>ユースケース</strong>: リトリーバル拡張生成（RAG）アプリケーションのデプロイ
 
 ```bicep
 // Azure AI Search
@@ -122,7 +122,7 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 
 ### パターン 3: ドキュメントインテリジェンス統合
 
-**ユースケース**: ドキュメント処理および分析ワークフロー
+<strong>ユースケース</strong>: ドキュメントの処理および解析ワークフロー
 
 ```bicep
 // Document Intelligence service
@@ -155,9 +155,9 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ## 🔧 設定パターン
 
-### 環境変数の設定
+### 環境変数のセットアップ
 
-**本番環境の設定:**
+**本番構成:**
 ```bash
 # コアAIサービス
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
@@ -173,7 +173,7 @@ azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
-**開発環境の設定:**
+**開発構成:**
 ```bash
 # 開発向けのコスト最適化設定
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -181,7 +181,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # 無料枠
 ```
 
-### Key Vault を使った安全な設定
+### Key Vault を使ったセキュアな構成
 
 ```bicep
 // Key Vault for secrets
@@ -218,13 +218,45 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ## デプロイワークフロー
 
+### Foundry 用 AZD 拡張機能
+
+AZD は Microsoft Foundry サービスと連携して AI 固有の機能を追加する拡張機能を提供します:
+
+```bash
+# Foundry Agents 拡張機能をインストールする
+azd extension install azure.ai.agents
+
+# ファインチューニング拡張機能をインストールする
+azd extension install azure.ai.finetune
+
+# カスタムモデル拡張機能をインストールする
+azd extension install azure.ai.models
+
+# インストール済み拡張機能を一覧表示する
+azd extension list
+```
+
+### `azd ai` を使ったエージェントファーストのデプロイ
+
+エージェントマニフェストがある場合は、`azd ai agent init` を使用して Foundry Agent Service に接続されたプロジェクトのスキャフォールドを作成します:
+
+```bash
+# エージェントのマニフェストから初期化する
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Azure にデプロイする
+azd up
+```
+
+フルコマンド参照とフラグについては [AZD AI CLI コマンド](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) を参照してください。
+
 ### 単一コマンドでのデプロイ
 
 ```bash
-# 1つのコマンドですべてをデプロイする
+# 1つのコマンドですべてをデプロイ
 azd up
 
-# または段階的にデプロイする
+# または段階的にデプロイ
 azd provision  # インフラのみ
 azd deploy     # アプリケーションのみ
 ```
@@ -246,9 +278,9 @@ azd env set AZURE_OPENAI_CAPACITY 100
 azd up
 ```
 
-## 監視と可観測性
+## モニタリングと可観測性
 
-### Application Insights 統合
+### Application Insights の統合
 
 ```bicep
 // Application Insights for AI application monitoring
@@ -311,7 +343,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ## 🔐 セキュリティのベストプラクティス
 
-### マネージド ID の設定
+### マネージドID の構成
 
 ```bicep
 // Managed identity for the web application
@@ -358,7 +390,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ## パフォーマンス最適化
 
-### キャッシング戦略
+### キャッシュ戦略
 
 ```yaml
 # azure.yaml - Redis cache integration
@@ -424,13 +456,13 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ## よくある問題のトラブルシューティング
 
-### 課題 1: OpenAI クォータ超過
+### 問題 1: OpenAI クォータ超過
 
 **症状:**
 - デプロイがクォータエラーで失敗する
-- アプリケーションログに 429 エラーが表示される
+- アプリケーションログで 429 エラーが発生する
 
-**対処法:**
+**解決策:**
 ```bash
 # 現在のクォータ使用状況を確認する
 az cognitiveservices usage list --location eastus
@@ -439,18 +471,18 @@ az cognitiveservices usage list --location eastus
 azd env set AZURE_LOCATION westus2
 azd up
 
-# 容量を一時的に削減する
+# 一時的に容量を減らす
 azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
 
-### 課題 2: 認証失敗
+### 問題 2: 認証エラー
 
 **症状:**
-- AI サービス呼び出し時に 401/403 エラーが発生する
-- 「アクセスが拒否されました」と表示される
+- AI サービス呼び出し時に 401/403 エラー
+- "Access denied" メッセージ
 
-**対処法:**
+**解決策:**
 ```bash
 # ロール割り当てを検証する
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
@@ -462,72 +494,164 @@ az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### 課題 3: モデルのデプロイ問題
+### 問題 3: モデルのデプロイ問題
 
 **症状:**
-- デプロイでモデルが利用できない
-- 特定のモデルバージョンが失敗する
+- デプロイにモデルが利用できない
+- 特定モデルバージョンが失敗する
 
-**対処法:**
+**解決策:**
 ```bash
 # 地域別の利用可能なモデルを一覧表示する
 az cognitiveservices model list --location eastus
 
-# Bicep テンプレートのモデルバージョンを更新する
+# Bicep テンプレート内のモデルバージョンを更新する
 # モデルの容量要件を確認する
 ```
 
 ## サンプルテンプレート
 
-### 基本的なチャットアプリケーション
+### RAG チャットアプリケーション (Python)
 
-**リポジトリ**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+**Repository**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-**サービス**: Azure OpenAI + Cognitive Search + App Service
+**Services**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-**クイックスタート**:
+<strong>説明</strong>: 最も人気のある Azure AI サンプル — 本番対応の RAG チャットアプリで、自身のドキュメントに関して質問できます。チャットには GPT-4.1-mini、埋め込みには text-embedding-ada-002、検索には Azure AI Search を使用します。マルチモーダルドキュメント、音声入出力、Microsoft Entra 認証、Application Insights トレースをサポートします。
+
+<strong>クイックスタート</strong>:
 ```bash
 azd init --template azure-search-openai-demo
 azd up
 ```
 
-### ドキュメント処理パイプライン
+### RAG チャットアプリケーション (.NET)
 
-**リポジトリ**: [ai-document-processing](https://github.com/Azure-Samples/ai-document-processing)
+**Repository**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
 
-**サービス**: Document Intelligence + Storage + Functions
+**Services**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
 
-**クイックスタート**:
+<strong>説明</strong>: Python RAG チャットサンプルの .NET/C# 相当。ASP.NET Core Minimal API と Blazor WebAssembly フロントエンドで構築されています。ボイスチャット、GPT-4o-mini vision サポート、および同梱の .NET MAUI Blazor ハイブリッドのデスクトップ/モバイルクライアントを含みます。
+
+<strong>クイックスタート</strong>:
 ```bash
-azd init --template ai-document-processing
+azd init --template azure-search-openai-demo-csharp
 azd up
 ```
 
-### RAG を用いたエンタープライズチャット
+### RAG チャットアプリケーション (Java)
 
-**リポジトリ**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
+**Repository**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
 
-**サービス**: Azure OpenAI + Search + Container Apps + Cosmos DB
+**Services**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
 
-**クイックスタート**:
+<strong>説明</strong>: Langchain4J を使用した RAG チャットサンプルの Java 版。マイクロサービスのイベント駆動アーキテクチャ、複数の検索戦略（テキスト、ベクター、ハイブリッド）、Azure Document Intelligence を使ったドキュメントアップロード、および Azure Container Apps または Azure Kubernetes Service 上へのデプロイをサポートします。
+
+<strong>クイックスタート</strong>:
+```bash
+azd init --template azure-search-openai-demo-java
+azd up
+```
+
+### Enterprise Retail Copilot with Azure AI Foundry
+
+**Repository**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
+
+**Services**: Azure OpenAI + Azure AI Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
+
+<strong>説明</strong>: Azure AI Foundry と Prompty を利用したエンドツーエンドの小売 RAG コパイロット。Contoso Outdoor 小売店向けチャットボットで、製品カタログと顧客注文データに基づいた応答を行います。プロトタイプは Prompty、評価は AI 支援の評価者で行い、AZD を介して Container Apps にデプロイする GenAIOps ワークフローを示します。
+
+<strong>クイックスタート</strong>:
 ```bash
 azd init --template contoso-chat
 azd up
 ```
 
+### クリエイティブライティング マルチエージェントアプリケーション
+
+**Repository**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
+
+**Services**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
+
+<strong>説明</strong>: Prompty を使ったエージェントオーケストレーションを示すマルチエージェントサンプル。リサーチエージェント（Bing Grounding in Azure AI Agent Service）、プロダクトエージェント（Azure AI Search）、ライターエージェント、エディターエージェントが協調して、十分に調査された記事を生成します。GitHub Actions を使った CI/CD と評価を含みます。
+
+<strong>クイックスタート</strong>:
+```bash
+azd init --template contoso-creative-writer
+azd up
+```
+
+### サーバーレス RAG チャット (JavaScript/TypeScript)
+
+**Repository**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
+
+**Services**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
+
+<strong>説明</strong>: LangChain.js を使用した完全サーバーレスの RAG チャットボット。API に Azure Functions、ホスティングに Azure Static Web Apps を使用します。Azure Cosmos DB をベクターストアとチャット履歴データベースの両方として使用します。ローカル開発では Ollama を使った無償テストをサポートします。
+
+<strong>クイックスタート</strong>:
+```bash
+azd init --template serverless-chat-langchainjs
+azd up
+```
+
+### Chat with Your Data Solution Accelerator
+
+**Repository**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
+
+**Services**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
+
+<strong>説明</strong>: ドキュメントアップロード/管理用の管理ポータルを備えたエンタープライズ対応の RAG ソリューションアクセラレータ。複数のオーケストレータオプション（Semantic Kernel、LangChain、Prompt Flow）、音声からテキスト、Microsoft Teams 統合、および PostgreSQL または Cosmos DB バックエンドの選択肢を提供します。プロダクション向け RAG シナリオのカスタマイズ可能な出発点として設計されています。
+
+<strong>クイックスタート</strong>:
+```bash
+azd init --template chat-with-your-data-solution-accelerator
+azd up
+```
+
+### AI トラベルエージェント — マルチエージェント MCP オーケストレーション
+
+**Repository**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
+
+**Services**: Azure OpenAI + Azure AI Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
+
+<strong>説明</strong>: LangChain.js、LlamaIndex.TS、Microsoft Agent Framework の 3 つのフレームワークを使ったマルチエージェント AI オーケストレーションのリファレンスアプリケーション。MCP（Model Context Protocol）サーバーを 4 言語で提供し、サーバーレスの Azure Container Apps としてデプロイ、OpenTelemetry によるモニタリングを備えています。
+
+<strong>クイックスタート</strong>:
+```bash
+azd init --template azure-ai-travel-agents
+azd up
+```
+
+### Azure AI Starter
+
+**Repository**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
+
+**Services**: Azure AI Services + Azure OpenAI
+
+<strong>説明</strong>: 構成済みの機械学習モデルで Azure AI サービスをデプロイする最小限の Bicep テンプレート。フルアプリケーションスタックが不要で、Azure AI インフラのみをプロビジョニングしたい場合の軽量な出発点です。
+
+<strong>クイックスタート</strong>:
+```bash
+azd init --template azd-ai-starter
+azd up
+```
+
+> <strong>さらにテンプレートを参照</strong>: [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) を訪れて、言語やシナリオ別の 80+ の AI 特化 AZD テンプレートを参照してください。
+
 ## 次のステップ
 
-1. **例を試す**: ユースケースに合った既成テンプレートから始める
-2. **ニーズに合わせてカスタマイズ**: インフラとアプリケーションコードを変更する
-3. **監視を追加**: 包括的な可観測性を実装する
-4. **コストを最適化**: 予算に合わせて設定を微調整する
-5. **デプロイを保護する**: エンタープライズ向けのセキュリティパターンを実装する
-6. **本番へのスケールアウト**: マルチリージョンと高可用性機能を追加する
+1. <strong>サンプルを試す</strong>: ユースケースに合った事前構築テンプレートから始める
+2. <strong>ニーズに合わせてカスタマイズ</strong>: インフラとアプリケーションコードを修正する
+3. <strong>モニタリングを追加</strong>: 包括的な可観測性を実装する
+4. <strong>コストを最適化</strong>: 予算に合わせた設定を微調整する
+5. <strong>デプロイを保護</strong>: エンタープライズ向けのセキュリティパターンを適用する
+6. <strong>本番スケールへ</strong>: マルチリージョンおよび高可用性の機能を追加する
 
-## 🎯 ハンズオン演習
+## 🎯 実践演習
 
-### 演習 1: Azure OpenAI チャットアプリをデプロイ (30 分)
-**目標**: 本番対応の AI チャットアプリをデプロイしてテストする
+### 演習 1: Microsoft Foundry Models チャットアプリをデプロイ (30 分)
+<strong>目標</strong>: 本番対応の AI チャットアプリケーションをデプロイし、テストする
 
 ```bash
 # テンプレートを初期化する
@@ -555,17 +679,17 @@ azd down --force --purge
 **成功基準:**
 - [ ] デプロイがクォータエラーなく完了する
 - [ ] ブラウザでチャットインターフェイスにアクセスできる
-- [ ] 質問をして AI による応答を得られる
+- [ ] 質問して AI による応答が得られる
 - [ ] Application Insights にテレメトリデータが表示される
-- [ ] リソースを正常にクリーンアップできる
+- [ ] リソースが正常にクリーンアップされる
 
-**推定コスト**: $5-10（30 分のテスト）
+<strong>推定コスト</strong>: テスト 30 分で $5-10
 
 ### 演習 2: マルチモデルデプロイの構成 (45 分)
-**目標**: 異なる設定で複数の AI モデルをデプロイする
+<strong>目標</strong>: 異なる構成で複数の AI モデルをデプロイする
 
 ```bash
-# カスタム Bicep 構成を作成する
+# カスタムのBicep構成を作成する
 cat > infra/ai-models.bicep << 'EOF'
 param openAiAccountName string
 param location string
@@ -574,14 +698,14 @@ resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
   name: openAiAccountName
 }
 
-// GPT-4o-mini for general chat
+// gpt-4.1-mini for general chat
 resource gpt4omini 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'gpt-4o-mini'
+  name: 'gpt-4.1-mini'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
     scaleSettings: {
@@ -616,13 +740,13 @@ azd show
 ```
 
 **成功基準:**
-- [ ] 複数のモデルが正常にデプロイされる
-- [ ] 異なる容量設定が適用されている
+- [ ] 複数のモデルが正常にデプロイされている
+- [ ] 異なるキャパシティ設定が適用されている
 - [ ] モデルが API 経由でアクセス可能である
 - [ ] アプリケーションから両方のモデルを呼び出せる
 
 ### 演習 3: コスト監視の実装 (20 分)
-**目標**: 予算アラートとコスト追跡を設定する
+<strong>目標</strong>: 予算アラートとコスト追跡を設定する
 
 ```bash
 # Bicep に予算アラートを追加する
@@ -665,49 +789,49 @@ az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-d
 
 **成功基準:**
 - [ ] Azure で予算アラートが作成されている
-- [ ] メール通知が設定されている
-- [ ] Azure ポータルでコストデータを確認できる
+- [ ] 電子メール通知が構成されている
+- [ ] Azure ポータルでコストデータを表示できる
 - [ ] 予算閾値が適切に設定されている
 
 ## 💡 よくある質問
 
 <details>
-<summary><strong>開発中の Azure OpenAI コストをどのように削減しますか？</strong></summary>
+<summary><strong>Microsoft Foundry Models の開発中のコストをどのように削減できますか？</strong></summary>
 
-1. **無料枠を利用**: Azure OpenAI は月 50,000 トークンの無料枠を提供しています
-2. **容量を減らす**: 開発では 30+ ではなく 10 TPM に設定する
-3. **azd down を使用**: アクティブに開発していないときはリソースをデアロケートする
-4. **レスポンスをキャッシュ**: 繰り返しのクエリには Redis キャッシュを実装する
-5. **プロンプトエンジニアリングを活用**: 効率的なプロンプトでトークン使用量を削減する
+1. <strong>フリーティアを利用する</strong>: Microsoft Foundry Models は月額 50,000 トークンを無料で提供します
+2. <strong>容量を減らす</strong>: 開発では 30+ ではなく 10 TPM に設定する
+3. **azd down を使用する**: アクティブに開発していないときはリソースを解放する
+4. <strong>レスポンスをキャッシュする</strong>: 繰り返しのクエリには Redis キャッシュを実装する
+5. <strong>プロンプトエンジニアリングを活用する</strong>: 効率的なプロンプトでトークン使用量を削減する
 
 ```bash
-# 開発環境の設定
+# 開発用の設定
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set ENABLE_RESPONSE_CACHE true
 ```
 </details>
 
 <details>
-<summary><strong>Azure OpenAI と OpenAI API の違いは何ですか？</strong></summary>
+<summary><strong>Microsoft Foundry Models と OpenAI API の違いは何ですか？</strong></summary>
 
-**Azure OpenAI**:
+**Microsoft Foundry Models**:
 - エンタープライズ向けのセキュリティとコンプライアンス
 - プライベートネットワーク統合
-- SLA 保証
-- マネージド ID による認証
+- SLA の保証
+- マネージド ID 認証
 - より高いクォータが利用可能
 
 **OpenAI API**:
 - 新しいモデルへのより速いアクセス
-- 簡単なセットアップ
+- より簡単なセットアップ
 - 参入障壁が低い
-- 公共インターネットのみ
+- 公開インターネットのみ
 
-本番アプリには、**Azure OpenAI を推奨します**。
+本番アプリケーションには、<strong>Microsoft Foundry Models を推奨</strong>します。
 </details>
 
 <details>
-<summary><strong>Azure OpenAI のクォータ超過エラーをどのように対処しますか？</strong></summary>
+<summary><strong>Microsoft Foundry Models のクォータ超過エラーをどのように対処しますか?</strong></summary>
 
 ```bash
 # 現在のクォータを確認する
@@ -717,7 +841,7 @@ az cognitiveservices usage list --location eastus2
 azd env set AZURE_LOCATION westus2
 azd up
 
-# 容量を一時的に削減する
+# 容量を一時的に減らす
 azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
@@ -727,9 +851,9 @@ azd provision
 </details>
 
 <details>
-<summary><strong>自分のデータを Azure OpenAI で使えますか？</strong></summary>
+<summary><strong>Microsoft Foundry Models で自分のデータを使用できますか?</strong></summary>
 
-はい! RAG (Retrieval Augmented Generation) には **Azure AI Search** を使用します:
+はい！RAG（Retrieval Augmented Generation）には **Azure AI Search** を使用してください:
 
 ```yaml
 # azure.yaml
@@ -745,14 +869,14 @@ services:
 </details>
 
 <details>
-<summary><strong>AI モデルのエンドポイントをどのように保護しますか？</strong></summary>
+<summary><strong>AI モデルのエンドポイントをどのように保護しますか?</strong></summary>
 
-**ベストプラクティス**:
-1. マネージド ID を使用する（API キーは使わない）
+<strong>ベストプラクティス</strong>:
+1. Managed Identity（API キーを使用しない）を使用する
 2. プライベートエンドポイントを有効にする
-3. ネットワークセキュリティグループを設定する
+3. ネットワークセキュリティグループを構成する
 4. レート制限を実装する
-5. シークレットは Azure Key Vault を使用する
+5. 機密情報には Azure Key Vault を使用する
 
 ```bicep
 // Managed Identity authentication
@@ -774,24 +898,25 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 ## コミュニティとサポート
 
-- **Microsoft Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
-- **AZD GitHub**: [Issues and discussions](https://github.com/Azure/azure-dev)
+- **Microsoft Foundry Discord**: [#Azure チャンネル](https://discord.gg/microsoft-azure)
+- **AZD GitHub**: [Issues とディスカッション](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [公式ドキュメント](https://learn.microsoft.com/azure/ai-studio/)
+- **Agent Skills**: [skills.sh の Microsoft Foundry スキル](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - エディタに Azure + Foundry エージェントスキルをインストールするには `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Chapter Navigation:**
-- **📚 コースホーム**: [AZD 入門](../../README.md)
+**章ナビゲーション:**
+- **📚 コースホーム**: [AZD For Beginners](../../README.md)
 - **📖 現在の章**: 第2章 - AIファースト開発
 - **⬅️ 前の章**: [第1章: あなたの最初のプロジェクト](../chapter-01-foundation/first-project.md)
-- **➡️ 次へ**: [AIモデルのデプロイ](ai-model-deployment.md)
+- **➡️ 次へ**: [AI モデルのデプロイ](ai-model-deployment.md)
 - **🚀 次の章**: [第3章: 構成](../chapter-03-configuration/configuration.md)
 
-**助けが必要ですか？** コミュニティのディスカッションに参加するか、リポジトリで issue を作成してください。Azure AI + AZD コミュニティはあなたの成功を支援します！
+**助けが必要ですか？** コミュニティのディスカッションに参加するか、リポジトリで Issue を開いてください。Azure AI + AZD コミュニティは、あなたの成功を支援するためにここにあります！
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責事項：
-この文書は AI 翻訳サービス「Co-op Translator」（https://github.com/Azure/co-op-translator）を使用して翻訳されました。正確性の確保に努めていますが、自動翻訳には誤りや不正確な箇所が含まれる可能性があることにご注意ください。原文（原語の文書）が権威ある情報源とみなされます。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じた誤解や解釈の相違について、当社は一切の責任を負いません。
+**免責事項**:
+この文書は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を用いて翻訳されました。正確性には努めておりますが、自動翻訳は誤りや不正確さを含む可能性があることをご承知おきください。原文（原言語の文書）を正式な信頼できる情報源と見なしてください。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用に起因するいかなる誤解や誤訳についても、当方は責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

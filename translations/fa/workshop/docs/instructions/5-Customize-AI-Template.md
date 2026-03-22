@@ -1,30 +1,30 @@
 # 5. سفارشی‌سازی یک قالب
 
-!!! tip "تا پایان این ماژول شما قادر خواهید بود"
+!!! tip "در پایان این ماژول قادر خواهید بود"
 
-    - [ ] کاوش در قابلیت‌های پیش‌فرض عامل‌های هوش مصنوعی
-    - [ ] افزودن AI Search با ایندکس خودتان
-    - [ ] فعال‌سازی و تحلیل معیارهای ردیابی
-    - [ ] اجرای یک دور ارزیابی
-    - [ ] اجرای یک اسکن red-teaming
-    - [ ] **آزمایشگاه 5: ساخت یک برنامه سفارشی‌سازی** 
+    - [ ] قابلیت‌های پیش‌فرض عامل‌های هوش مصنوعی را بررسی کردید
+    - [ ] جستجوی AI را با ایندکس خود اضافه کردید
+    - [ ] معیارهای Tracing را فعال و تحلیل کردید
+    - [ ] یک اجرای ارزیابی انجام دادید
+    - [ ] یک اسکن red-teaming اجرا کردید
+    - [ ] **آزمایشگاه 5: تهیه طرح سفارشی‌سازی** 
 
 ---
 
-## 5.1 قابلیت‌های عامل هوش مصنوعی
+## 5.1 قابلیت‌های عامل هوش‌مصنوعی
 
-!!! success "این مورد را در آزمایشگاه 01 انجام دادیم"
+!!! success "این مورد را در آزمایشگاه 01 تکمیل کردیم"
 
 - **File Search**: جستجوی فایل داخلی OpenAI برای بازیابی دانش
-- **Citations**: نسبت‌دهی خودکار منبع در پاسخ‌ها
+- **Citations**: تخصیص خودکار منبع در پاسخ‌ها
 - **Customizable Instructions**: تغییر رفتار و شخصیت عامل
-- **Tool Integration**: سیستم ابزار قابل‌توسعه برای قابلیت‌های سفارشی
+- **Tool Integration**: سیستم ابزار قابل توسعه برای قابلیت‌های سفارشی
 
 ---
 
 ## 5.2 گزینه‌های بازیابی دانش
 
-!!! task "برای تکمیل این مورد باید تغییراتی اعمال کرده و مجدداً مستقر کنیم"    
+!!! task "برای تکمیل این باید تغییراتی ایجاد کرده و مجدداً مستقر کنیم"    
     
     ```bash title=""
     # Set environment variables
@@ -42,122 +42,122 @@
 
 **OpenAI File Search (Default):**
 
-- یکپارچه با عوامل Foundry
-- پردازش و ایندکس‌بندی خودکار اسناد
-- نیاز به پیکربندی اضافی ندارد
+- Built-in to Foundry Agents
+- Automatic document processing and indexing
+- No additional configuration required
 
 **Azure AI Search (Optional):**
 
-- جستجوی ترکیبی معنایی و برداری
-- مدیریت ایندکس سفارشی
-- قابلیت‌های جستجوی پیشرفته
-- نیازمند `USE_AZURE_AI_SEARCH_SERVICE=true`
+- Hybrid semantic and vector search
+- Custom index management
+- Advanced search capabilities
+- Requires `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
-## 5.3 [ردیابی و مانیتورینگ](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [ردیابی و نظارت](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "برای تکمیل این مورد باید تغییراتی اعمال کرده و مجدداً مستقر کنیم"    
+!!! task "برای تکمیل این باید تغییراتی ایجاد کرده و مجدداً مستقر کنیم"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
     azd deploy
     ```
 
-**Tracing:**
+**ردیابی:**
 
-- ادغام OpenTelemetry
-- ردیابی درخواست/پاسخ
-- شاخص‌های عملکرد
-- در پرتال Microsoft Foundry در دسترس است
+- OpenTelemetry integration
+- Request/response tracking
+- Performance metrics
+- Available in Microsoft Foundry portal
 
-**Logging:**
+**لاگ‌گیری:**
 
-- لاگ‌های برنامه در Container Apps
-- لاگ‌گیری ساختاریافته با شناسه‌های همبستگی
-- مشاهده لاگ‌ها به‌صورت زمان‌واقعی و تاریخی
+- Application logs in Container Apps
+- Structured logging with correlation IDs
+- Real-time and historical log viewing
 
 ---
 
 ## 5.4 [ارزیابی عامل](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
-**Local Evaluation:**
+**ارزیابی محلی:**
 
-- ارزیاب‌های داخلی برای سنجش کیفیت
-- اسکریپت‌های ارزیابی سفارشی
-- معیارسنجی عملکرد
+- Built-in evaluators for quality assessment
+- Custom evaluation scripts
+- Performance benchmarking
 
-**Continuous Monitoring:**
+**نظارت مستمر:**
 
-- ارزیابی خودکار تعاملات زنده
-- رهگیری شاخص‌های کیفیت
-- تشخیص بازگشت عملکرد
+- Automatic evaluation of live interactions
+- Quality metrics tracking
+- Performance regression detection
 
-**CI/CD Integration:**
+**ادغام CI/CD:**
 
-- گردش‌کار GitHub Actions
-- آزمون و ارزیابی خودکار
-- آزمون مقایسه‌ای آماری
+- GitHub Actions workflow
+- Automated testing and evaluation
+- Statistical comparison testing
 
 ---
 
 ## 5.5 [عامل تیم قرمز هوش مصنوعی](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**AI Red Teaming:**
+**تیم‌قرمز (Red Teaming) هوش مصنوعی:**
 
-- اسکن امنیتی خودکار
-- ارزیابی ریسک برای سیستم‌های هوش مصنوعی
-- ارزیابی ایمنی در چندین دسته
+- Automated security scanning
+- Risk assessment for AI systems
+- Safety evaluation across multiple categories
 
-**Authentication:**
+**احراز هویت:**
 
-- هویت مدیریت‌شده برای سرویس‌های Azure
-- احراز هویت اختیاری Azure App Service
-- بازگشت به احراز هویت پایه برای توسعه
+- Managed Identity برای سرویس‌های Azure
+- Optional Azure App Service authentication
+- Basic auth fallback for development
 
 
 
-!!! quote "تا پایان این آزمایشگاه شما باید داشته باشید"
+!!! quote "در پایان این آزمایشگاه شما باید موارد زیر را داشته باشید"
     - [ ] نیازمندی‌های سناریوی خود را تعریف کنید
-    - [ ] متغیرهای محیطی سفارشی (پیکربندی)
-    - [ ] دستورالعمل‌های عامل سفارشی (وظیفه)
-    - [ ] الگوی سفارشی را مستقر کرده باشید (برنامه)
-    - [ ] وظایف پس از استقرار را انجام داده باشید (دستی)
-    - [ ] یک ارزیابی تستی اجرا کرده باشید
+    - [ ] متغیرهای محیطی را سفارشی کنید (config)
+    - [ ] دستورالعمل‌های عامل را سفارشی کنید (task)
+    - [ ] قالب سفارشی‌شده را استقرار دهید (app)
+    - [ ] وظایف پس از استقرار را تکمیل کنید (manual)
+    - [ ] یک ارزیابی آزمایشی اجرا کنید
 
-این مثال نشان می‌دهد چگونه قالب را برای یک مورد استفاده خرده‌فروشی سازمانی با دو عامل تخصصی و چندین استقرار مدل سفارشی‌سازی کنیم.
+This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
 
 ---
 
-## 5.6 آن را برای خودتان سفارشی کنید!
+## 5.6 سفارشی‌سازی برای شما!
 
 ### 5.6.1. نیازمندی‌های سناریو
 
-#### **استقرار عوامل:** 
+#### **استقرار عامل‌ها:** 
 
    - Shopper Agent: به مشتریان کمک می‌کند محصولات را پیدا و مقایسه کنند
-   - Loyalty Agent: جوایز و تبلیغات مشتریان را مدیریت می‌کند
+   - Loyalty Agent: مدیریت جوایز و تبلیغات مشتریان
 
 #### **استقرار مدل‌ها:**
 
-   - `gpt-4.1`: مدل گفتگو اصلی
+   - `gpt-4.1`: مدل اصلی چت
    - `o3`: مدل استدلال برای پرسش‌های پیچیده
    - `gpt-4.1-nano`: مدل سبک برای تعاملات ساده
-   - `text-embedding-3-large`: تعبیه‌های با کیفیت بالا برای جستجو
+   - `text-embedding-3-large`: تعبیه‌های باکیفیت برای جستجو
 
-#### **قابلیت‌ها:**
+#### **ویژگی‌ها:**
 
-   - ردیابی و مانیتورینگ فعال شده‌اند
+   - ردیابی و نظارت فعال شده‌اند
    - AI Search برای فهرست محصولات
    - چارچوب ارزیابی برای تضمین کیفیت
-   - تست تیم قرمز برای اعتبارسنجی امنیت
+   - تیم‌قرمز برای اعتبارسنجی امنیت
 
 ---
 
 ### 5.6.2 پیاده‌سازی سناریو
 
 
-#### 5.6.2.1. پیکربندی قبل از استقرار
+#### 5.6.2.1 پیکربندی پیش از استقرار
 
 Create a setup script (`setup-retail.sh`)
 
@@ -175,18 +175,18 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# مدل چت اصلی را پیکربندی کنید (gpt-4o نزدیک‌ترین مدل موجود به gpt-4.1)
-azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
+# مدل اصلی چت را پیکربندی کنید (gpt-4.1 به‌عنوان نزدیک‌ترین مدل موجود به gpt-4.1)
+azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# مدل امبدینگ را برای جستجوی بهبود یافته پیکربندی کنید
+# مدل امبدینگ را برای بهبود جستجو پیکربندی کنید
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# نام عامل را تنظیم کنید (اولین عامل را ایجاد خواهد کرد)
+# نام عامل را تنظیم کنید (اولین عامل ایجاد خواهد شد)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
 # شاخص جستجو را پیکربندی کنید
@@ -275,12 +275,12 @@ echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# بررسی سهمیه در منطقه‌ی انتخاب‌شده
+# بررسی سهمیه در منطقه انتخاب‌شده
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
 echo "⚠️  Please verify you have 300,000+ TPM quota for:"
-echo "   - gpt-4o: 150,000 TPM"
+echo "   - gpt-4.1: 150,000 TPM"
 echo "   - text-embedding-3-large: 75,000 TPM"
 echo "   - Additional models: 75,000+ TPM"
 
@@ -295,7 +295,7 @@ fi
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# ذخیره خروجی‌های استقرار
+# ثبت خروجی‌های استقرار
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
@@ -387,11 +387,11 @@ Create `test-retail-deployment.sh`:
 
 echo "🧪 Testing retail deployment..."
 
-# بررسی اینکه متغیرهای محیطی تنظیم شده‌اند
+# اطمینان حاصل کنید که متغیرهای محیطی تنظیم شده‌اند
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# آزمایش در دسترس بودن برنامه وب
+# در دسترس بودن برنامه وب را آزمایش کنید
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -433,38 +433,38 @@ Next steps:
 
 پس از دنبال کردن این راهنمای پیاده‌سازی، شما خواهید داشت:
 
-1. **زیرساخت مستقر شده:**
+1. **زیرساخت‌های مستقر شده:**
 
-      - پروژه Microsoft Foundry با استقرارهای مدل
-      - Container Apps میزبانی برنامه وب
-      - سرویس AI Search برای فهرست محصولات
-      - Application Insights برای پایش
+      - Microsoft Foundry project با استقرار مدل‌ها
+      - Container Apps میزبانی‌کننده برنامه وب
+      - AI Search service برای فهرست محصولات
+      - Application Insights برای نظارت
 
 2. **عامل اولیه:**
 
-      - عامل خریدار با دستورالعمل‌های پایه پیکربندی شده است
+      - Shopper Agent با دستورالعمل‌های پایه پیکربندی شده است
       - قابلیت جستجوی فایل فعال شده است
-      - ردیابی و مانیتورینگ پیکربندی شده‌اند
+      - ردیابی و نظارت پیکربندی شده‌اند
 
-3. **آماده برای سفارشی‌سازی:**
+3. **آماده‌سازی برای سفارشی‌سازی:**
 
-      - چارچوبی برای افزودن عامل وفاداری
+      - چارچوبی برای اضافه کردن عامل Loyalty
       - قالب‌های دستورالعمل سفارشی
       - اسکریپت‌های تست و اعتبارسنجی
-      - تنظیمات پایش و ارزیابی
+      - تنظیمات نظارت و ارزیابی
 
 4. **آمادگی برای تولید:**
 
-      - اسکن امنیتی با تیم قرمز
-      - پایش عملکرد
+      - اسکن امنیتی با تیم‌قرمز
+      - نظارت بر عملکرد
       - چارچوب ارزیابی کیفیت
       - معماری مقیاس‌پذیر
 
-این مثال نشان می‌دهد که چگونه قالب AZD می‌تواند برای سناریوهای سازمانی خاص گسترش یافته و سفارشی شود در حالی که بهترین شیوه‌ها برای امنیت، پایش و مقیاس‌پذیری را حفظ می‌کند.
+This example demonstrates how the AZD template can be extended and customized for specific enterprise scenarios while maintaining best practices for security, monitoring, and scalability.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-سلب مسئولیت:
-این سند با استفاده از سرویس ترجمهٔ هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. اگرچه ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان مادری آن باید به‌عنوان منبع/مرجع معتبر در نظر گرفته شود. برای اطلاعات حساس یا حیاتی، ترجمهٔ حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرستی که از استفاده از این ترجمه ناشی شود، مسئولیتی نداریم.
+**سلب مسئولیت**:
+این سند با استفاده از سرویس ترجمهٔ هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. اگرچه ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان مبدأ باید به‌عنوان منبع معتبر تلقی شود. برای اطلاعات حیاتی، ترجمهٔ حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرست ناشی از استفاده از این ترجمه مسئول نیستیم.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

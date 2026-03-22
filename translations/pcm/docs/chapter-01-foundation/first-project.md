@@ -1,4 +1,4 @@
-# Ya First Project - Hands-On Tutorial
+# Your First Project - Hands-On Tutorial
 
 **Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
@@ -9,34 +9,34 @@
 
 ## Introduction
 
-Welcome to ya first Azure Developer CLI project! Dis hands-on tutorial go show you step-by-step how to create, deploy, and manage one full-stack application for Azure using azd. You go work with real todo app wey get React frontend, Node.js API backend, and MongoDB database.
+Welcome to your first Azure Developer CLI project! Dis comprehensive hands-on tutorial go show you step-by-step how to create, deploy, and manage one full-stack application for Azure using azd. You go work with real todo application wey get React frontend, Node.js API backend, and MongoDB database.
 
 ## Learning Goals
 
-By finishing dis tutorial, you go:
-- Make you sabi how azd project initialization dey work using templates
+By completing this tutorial, you go:
+- Master the azd project initialization workflow using templates
 - Understand Azure Developer CLI project structure and configuration files
-- Deploy complete application to Azure with infrastructure provisioning
-- Implement app updates and redeployment strategies
+- Run complete application deployment to Azure with infrastructure provisioning
+- Implement application updates and redeployment strategies
 - Manage multiple environments for development and staging
-- Use resource cleanup and cost management best practices
+- Apply resource cleanup and cost management practices
 
 ## Learning Outcomes
 
 After you finish, you go fit:
 - Initialize and configure azd projects from templates on your own
-- Navigate and change azd project structure well
-- Deploy full-stack apps to Azure with single commands
-- Troubleshoot common deployment and authentication problems
-- Manage many Azure environments for different deployment stages
-- Implement continuous deployment workflows for app updates
+- Navigate and modify azd project structures well
+- Deploy full-stack applications to Azure with single commands
+- Troubleshoot common deployment and authentication wahalas
+- Manage multiple Azure environments for different deployment stages
+- Implement continuous deployment workflows for application updates
 
 ## Getting Started
 
 ### Prerequisites Checklist
 - ✅ Azure Developer CLI installed ([Installation Guide](installation.md))
 - ✅ Azure CLI installed and authenticated
-- ✅ Git installed on your system
+- ✅ Git installed for your system
 - ✅ Node.js 16+ (for this tutorial)
 - ✅ Visual Studio Code (recommended)
 
@@ -45,7 +45,7 @@ After you finish, you go fit:
 # Make sure say azd don install
 azd version
 ```
-### Check say you don authenticate for Azure
+### Make sure say you don authenticate for Azure
 
 ```bash
 az account show
@@ -58,10 +58,10 @@ node --version
 
 ## Step 1: Choose and Initialize a Template
 
-Make we start with popular todo application template wey get React frontend and Node.js API backend.
+Make we start with one popular todo application template wey get React frontend and Node.js API backend.
 
 ```bash
-# Check di templates wey dey available
+# Check di templates wey dey
 azd template list
 
 # Set up di todo app template
@@ -70,25 +70,25 @@ cd my-first-azd-app
 azd init --template todo-nodejs-mongo
 
 # Follow di prompts:
-# - Put di environment name: "dev"
-# - Pick di subscription (if you get more than one)
-# - Pick di region: "East US 2" (or di region wey you prefer)
+# - Put environment name: "dev"
+# - Choose one subscription (if you get more than one)
+# - Choose a region: "East US 2" (or di region wey you prefer)
 ```
 
-### Wetin Just Happen?
-- Template code don download enter your local directory
+### What Just Happened?
+- The template code don download enter your local directory
 - `azure.yaml` file don create with service definitions
-- Infrastructure code don set up for the `infra/` directory
+- Infrastructure code don set for the `infra/` directory
 - Environment configuration don create
 
 ## Step 2: Explore the Project Structure
 
-Make we check wetin azd don create for us:
+Make we check wetin azd create for us:
 
 ```bash
 # See di project structure
 tree /f   # Windows
-# or
+# abi
 find . -type f | head -20   # macOS/Linux
 ```
 
@@ -121,21 +121,21 @@ my-first-azd-app/
 
 ### Key Files to Understand
 
-**azure.yaml** - Na di heart of your azd project:
+**azure.yaml** - Na the core of your azd project:
 ```bash
-# Check di project configuration
+# See di project configuration
 cat azure.yaml
 ```
 
 **infra/main.bicep** - Infrastructure definition:
 ```bash
-# Check di infrastructure code
+# See di infrastructure code
 head -30 infra/main.bicep
 ```
 
 ## Step 3: Customize Your Project (Optional)
 
-Before you deploy, you fit customize the app:
+Before you deploy, you fit customize the application:
 
 ### Modify the Frontend
 ```bash
@@ -143,7 +143,7 @@ Before you deploy, you fit customize the app:
 code src/web/src/App.tsx
 ```
 
-Make small change:
+Do one simple change:
 ```typescript
 // Find di title den change am
 <h1>My Awesome Todo App</h1>
@@ -151,34 +151,34 @@ Make small change:
 
 ### Configure Environment Variables
 ```bash
-# Make environment variables wey you want
+# Set di custom environment variables
 azd env set WEBSITE_TITLE "My First AZD App"
 azd env set API_VERSION "v1.18"
-# See all environment variables wey dey
+# See all di environment variables
 azd env get-values
 ```
 
 ## Step 4: Deploy to Azure
 
-Now di koko part - deploy everything to Azure!
+Now the exciting part - deploy everything go Azure!
 
 ```bash
-# Deploy di infrastructure and di application
+# Set up infrastructure and app
 azd up
 
 # Dis command go do:
 # 1. Go set up Azure resources (App Service, Cosmos DB, etc.)
 # 2. Go build your app
-# 3. Go deploy to di resources wey dem don provide
+# 3. Go deploy to di resources wey dem provision
 # 4. Show di app URL
 ```
 
-### Wetin Dey Happen During Deployment?
+### What's Happening During Deployment?
 
-The `azd up` command go do these steps:
-1. **Provision** (`azd provision`) - e go create Azure resources
-2. **Package** - e go build your application code
-3. **Deploy** (`azd deploy`) - e go deploy code go Azure resources
+The `azd up` command dey do these steps:
+1. **Provision** (`azd provision`) - E go create Azure resources
+2. **Package** - E go build your application code
+3. **Deploy** (`azd deploy`) - E go deploy code go the Azure resources
 
 ### Expected Output
 ```
@@ -196,23 +196,23 @@ https://app-web-abc123def.azurewebsites.net
 ## Step 5: Test Your Application
 
 ### Access Your Application
-Click di URL wey deployment output give you, or get am anytime:
+Click the URL wey the deployment output give you, or get am anytime:
 ```bash
-# Find di endpoints for di application
+# Get di application endpoints
 azd show
 
-# Open di application for di browser wey you dey use
+# Open di application for your browser
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
 ### Test the Todo App
 1. **Add a todo item** - Click "Add Todo" and enter the task
-2. **Mark as complete** - Check off items wey you don finish
-3. **Delete items** - Remove todos wey you no need again
+2. **Mark as complete** - Check off the items wey done
+3. **Delete items** - Remove the todos wey you no need again
 
 ### Monitor Your Application
 ```bash
-# Open Azure portal make you fit see your resources
+# Open di Azure portal make you see your resources
 azd monitor
 
 # See di application logs
@@ -224,7 +224,7 @@ azd monitor --live
 
 ## Step 6: Make Changes and Redeploy
 
-Make we change small and see how e easy to update:
+Make we do one change and see how e easy to update:
 
 ### Modify the API
 ```bash
@@ -232,7 +232,7 @@ Make we change small and see how e easy to update:
 code src/api/src/routes/lists.js
 ```
 
-Add custom response header:
+Add one custom response header:
 ```javascript
 // Find di route handler, den add:
 res.header('X-Powered-By', 'Azure Developer CLI');
@@ -240,50 +240,50 @@ res.header('X-Powered-By', 'Azure Developer CLI');
 
 ### Deploy Just the Code Changes
 ```bash
-# Deploy na only di application code (no need to deploy infrastructure)
+# Deploy only di app code (no touch infrastructure)
 azd deploy
 
-# E plenty faster pass 'azd up' because di infrastructure don already dey
+# E way faster pass 'azd up' because infrastructure don already dey
 ```
 
 ## Step 7: Manage Multiple Environments
 
-Create staging environment make you test changes before production:
+Create staging environment make you test changes before you push to production:
 
 ```bash
 # Make one new staging environment
 azd env new staging
 
-# Put am for staging
+# Deploy am go staging
 azd up
 
-# Change back go dev environment
+# Switch back go dev environment
 azd env select dev
 
-# Show all environments
+# Show all environment dem
 azd env list
 ```
 
 ### Environment Comparison
 ```bash
-# See di dev environment
+# See dev environment
 azd env select dev
 azd show
 
-# See di staging environment
+# See staging environment
 azd env select staging
 azd show
 ```
 
 ## Step 8: Clean Up Resources
 
-When you don finish dey experiment, clean up so you no go continue to pay:
+When you don finish to dey experiment, clean up make you no dey incur ongoing charges:
 
 ```bash
-# Delete all Azure resources for di current environment
+# Delete all Azure resources wey dey for di current environment
 azd down
 
-# Force delete without confirmation and permanently remove resources wey don soft-delete
+# Force delete no need confirm, and wipe soft-deleted resources finish
 azd down --force --purge
 
 # Delete di specific environment
@@ -291,11 +291,31 @@ azd env select staging
 azd down --force --purge
 ```
 
-## Wetin You Don Learn
+## Classic App vs. AI-Powered App: Same Workflow
+
+You just deploy one traditional web application. But if you want deploy AI-powered app instead—like chat app wey dey use Microsoft Foundry Models—no wahala.
+
+The good gist: **the workflow na the same.**
+
+| Step | Classic Todo App | AI Chat App |
+|------|-----------------|-------------|
+| Initialize | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
+| Authenticate | `azd auth login` | `azd auth login` |
+| Deploy | `azd up` | `azd up` |
+| Monitor | `azd monitor` | `azd monitor` |
+| Clean up | `azd down --force --purge` | `azd down --force --purge` |
+
+The only difference na the **template** wey you start from. AI template fit include extra infrastructure (like Microsoft Foundry Models resource or AI Search index), but azd go manage all that for you. You no need learn new commands, use different tool, or change how you dey reason about deployment.
+
+Na the koko principle of azd be this: **one workflow, any workload.** The skills wey you practice for this tutorial—initializing, deploying, monitoring, redeploying, and cleaning up—dey apply the same for AI applications and agents.
+
+---
+
+## What You've Learned
 
 Congrats! You don successfully:
 - ✅ Initialize azd project from template
-- ✅ Explore project structure and key files
+- ✅ Explore the project structure and important files
 - ✅ Deploy full-stack application to Azure
 - ✅ Make code changes and redeploy
 - ✅ Manage multiple environments
@@ -307,32 +327,32 @@ Congrats! You don successfully:
 **Goal**: Show say you sabi azd init and deployment workflow
 
 ```bash
-# Try use Python + MongoDB stack
+# Try use di Python + MongoDB stack
 mkdir todo-python && cd todo-python
 azd init --template todo-python-mongo
 azd up
 
-# Make sure say deployment dey work
+# Make sure say deployment dey ok
 azd show
 curl $(azd show --output json | jq -r '.services.web.endpoint')
 
-# Tidy up
+# Clear up di tins
 azd down --force --purge
 ```
 
 **Success Criteria:**
 - [ ] Application deploy without errors
-- [ ] You fit access application URL for browser
-- [ ] Application dey work correct (add/remove todos)
-- [ ] All resources don clean up successfully
+- [ ] Fit access application URL for browser
+- [ ] Application dey work as e suppose (add/remove todos)
+- [ ] You clean up all resources successfully
 
 ### Exercise 2: Customize Configuration (20 minutes)
-**Goal**: Practice environment variable configuration
+**Goal**: Practice how to set environment variables
 
 ```bash
 cd my-first-azd-app
 
-# Make wan custom environment
+# Make di custom environment
 azd env new custom-config
 
 # Set di custom variables
@@ -351,7 +371,7 @@ azd up
 - [ ] Custom environment create successfully
 - [ ] Environment variables set and you fit retrieve dem
 - [ ] Application deploy with custom configuration
-- [ ] You fit verify custom settings for deployed app
+- [ ] You fit verify custom settings for the deployed app
 
 ### Exercise 3: Multi-Environment Workflow (25 minutes)
 **Goal**: Master environment management and deployment strategies
@@ -363,7 +383,7 @@ azd env set ENVIRONMENT_TYPE dev
 azd env set LOG_LEVEL debug
 azd up
 
-# Note di dev URL
+# Write down di dev URL
 DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Dev: $DEV_URL"
 
@@ -373,18 +393,18 @@ azd env set ENVIRONMENT_TYPE staging
 azd env set LOG_LEVEL info
 azd up
 
-# Note di staging URL
+# Write down di staging URL
 STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Staging: $STAGING_URL"
 
 # Compare di environments
 azd env list
 
-# Test both di environments
+# Test di both environments
 curl "$DEV_URL/health"
 curl "$STAGING_URL/health"
 
-# Clean up both of dem
+# Clean up dem both
 azd env select dev-$(whoami) && azd down --force --purge
 azd env select staging-$(whoami) && azd down --force --purge
 ```
@@ -394,7 +414,7 @@ azd env select staging-$(whoami) && azd down --force --purge
 - [ ] Both environments deploy successfully
 - [ ] You fit switch between environments using `azd env select`
 - [ ] Environment variables different between environments
-- [ ] Both environments clean up successfully
+- [ ] You clean up both environments successfully
 
 ## 📊 Your Progress
 
@@ -416,7 +436,7 @@ azd env select staging-$(whoami) && azd down --force --purge
 # Sign in again wit Azure
 az login
 
-# Confirm sey di subscription get access
+# Check say you get access to di subscription
 az account show
 ```
 
@@ -426,7 +446,7 @@ az account show
 export AZD_DEBUG=true
 azd up --debug
 
-# See app logs for Azure
+# See di application logs for Azure
 azd monitor --logs
 
 # If na Container Apps, use Azure CLI:
@@ -435,20 +455,20 @@ azd monitor --logs
 
 ### Resource Name Conflicts
 ```bash
-# Make you use one unique environment name
+# Make you use one environment name wey nobody get
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
 ### Port/Network Issues
 ```bash
-# Make sure say ports dey available
+# Check if ports dey available
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
 ## Next Steps
 
-Now wey you don complete your first project, explore these advanced topics:
+Now wey you don finish your first project, explore these advanced topics:
 
 ### 1. Customize Infrastructure
 - [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md)
@@ -463,12 +483,12 @@ Now wey you don complete your first project, explore these advanced topics:
 
 ### 4. Explore More Templates
 ```bash
-# Find template dem by category
+# Check templates wey dem put for each category
 azd template list --filter web
 azd template list --filter api
 azd template list --filter database
 
-# Try different tech stack dem
+# Try different tech stacks
 azd init --template todo-python-mongo
 azd init --template todo-csharp-sql
 azd init --template todo-java-mongo
@@ -493,7 +513,7 @@ azd init --template todo-java-mongo
 
 ---
 
-**Congrats on completing your first azd project!** You don ready to build and deploy beta fine applications on Azure with confidence.
+**Congratulations on completing your first azd project!** You don ready now to build and deploy beta applications on Azure with confidence.
 
 ---
 
@@ -508,6 +528,6 @@ azd init --template todo-java-mongo
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dis document don translate by AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). Even though we dey try make everything correct, abeg sabi say automated translations fit get mistakes or wrong meanings. The original document for im original language na di correct/authoritative one. If na important matter, make una use professional human translation. We no dey liable for any misunderstanding or wrong interpretation wey fit come from this translation.
+Abeg read:
+Dis document don translate wit AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg sabi say automatic translations fit get mistakes or wrong tins. Di original document for im original language suppose be di official/authority source. If na important information, we advise make professional human translator do di translation. We no go take responsibility for any misunderstandings or wrong interpretations wey fit come from using dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

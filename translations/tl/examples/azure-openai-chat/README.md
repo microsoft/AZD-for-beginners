@@ -1,63 +1,41 @@
-# Azure OpenAI Chat Application
+# Aplikasyon ng Chat ng Microsoft Foundry Models
 
-**Landas ng Pag-aaral:** Intermediate ⭐⭐ | **Oras:** 35-45 minuto | **Gastos:** $50-200/buwan
+**Landas ng Pagkatuto:** Gitnang Antas ⭐⭐ | **Oras:** 35-45 minuto | **Gastos:** $50-200/buwan
 
-Isang kumpletong Azure OpenAI chat application na na-deploy gamit ang Azure Developer CLI (azd). Ang halimbawang ito ay nagpapakita ng GPT-4 deployment, secure API access, at isang simpleng chat interface.
+Isang kumpletong aplikasyon ng chat ng Microsoft Foundry Models na ide-deploy gamit ang Azure Developer CLI (azd). Ipinapakita ng halimbawang ito ang pag-deploy ng gpt-4.1, secure na pag-access sa API, at isang simpleng chat interface.
 
 ## 🎯 Ano ang Matututuhan Mo
 
-- I-deploy ang Azure OpenAI Service gamit ang GPT-4 model  
-- Siguraduhing ligtas ang OpenAI API keys gamit ang Key Vault  
-- Gumawa ng simpleng chat interface gamit ang Python  
-- Subaybayan ang paggamit ng token at mga gastos  
-- Magpatupad ng rate limiting at error handling  
+- I-deploy ang Microsoft Foundry Models Service na may modelong gpt-4.1
+- I-secure ang mga API key ng OpenAI gamit ang Key Vault
+- Gumawa ng simpleng chat interface gamit ang Python
+- Subaybayan ang paggamit ng token at mga gastos
+- Magpatupad ng rate limiting at error handling
 
-## 📦 Kasama sa Package
+## 📦 Ano ang Kasama
 
-✅ **Azure OpenAI Service** - GPT-4 model deployment  
-✅ **Python Chat App** - Simpleng command-line chat interface  
-✅ **Key Vault Integration** - Ligtas na imbakan ng API key  
+✅ **Microsoft Foundry Models Service** - deployment ng modelong gpt-4.1  
+✅ **Python Chat App** - Simpleng command-line na chat interface  
+✅ **Key Vault Integration** - Secure na pag-iimbak ng API key  
 ✅ **ARM Templates** - Kumpletong infrastructure as code  
 ✅ **Cost Monitoring** - Pagsubaybay sa paggamit ng token  
-✅ **Rate Limiting** - Iwasan ang pagkaubos ng quota  
+✅ **Rate Limiting** - Pigilan ang pagkaubos ng quota  
 
 ## Arkitektura
 
+```mermaid
+graph TD
+    App[Chat na Aplikasyon sa Python<br/>Lokal/Cloud<br/>Command-line na interface<br/>Kasaysayan ng pag-uusap<br/>Pagsubaybay sa paggamit ng token] -- "HTTPS (Susi ng API)" --> Foundry[Serbisyo ng Microsoft Foundry Models<br/>Modelo gpt-4.1<br/>Kapasidad na 20K token/min<br/>Failover sa maraming rehiyon]
+    Foundry --> KV[Azure Key Vault<br/>Susi ng OpenAI API<br/>URL ng endpoint]
+    Foundry -. Pinamamahalaang Identidad .-> KV
 ```
-┌─────────────────────────────────────────────┐
-│   Python Chat Application (Local/Cloud)    │
-│   - Command-line interface                 │
-│   - Conversation history                   │
-│   - Token usage tracking                   │
-└──────────────────┬──────────────────────────┘
-                   │ HTTPS (API Key)
-                   ▼
-┌─────────────────────────────────────────────┐
-│   Azure OpenAI Service                      │
-│   ┌───────────────────────────────────────┐ │
-│   │   GPT-4 Model                         │ │
-│   │   - 20K tokens/min capacity           │ │
-│   │   - Multi-region failover (optional)  │ │
-│   └───────────────────────────────────────┘ │
-│                                             │
-│   Managed Identity ───────────────────────┐ │
-└────────────────────────────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────────┐
-│   Azure Key Vault                           │
-│   - OpenAI API Key (secret)                 │
-│   - Endpoint URL (secret)                   │
-└─────────────────────────────────────────────┘
-```
-
 ## Mga Kinakailangan
 
-### Kailangan
+### Kinakailangan
 
-- **Azure Developer CLI (azd)** - [Gabay sa Pag-install](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)  
-- **Azure subscription** na may OpenAI access - [Mag-apply para sa access](https://aka.ms/oai/access)  
-- **Python 3.9+** - [I-download ang Python](https://www.python.org/downloads/)  
+- **Azure Developer CLI (azd)** - [Gabay sa pag-install](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+- **Azure subscription** na may access sa OpenAI - [Humiling ng access](https://aka.ms/oai/access)
+- **Python 3.9+** - [I-install ang Python](https://www.python.org/downloads/)
 
 ### I-verify ang Mga Kinakailangan
 
@@ -65,90 +43,90 @@ Isang kumpletong Azure OpenAI chat application na na-deploy gamit ang Azure Deve
 # Suriin ang bersyon ng azd (kailangan 1.5.0 o mas mataas)
 azd version
 
-# Tiyakin ang pag-login sa Azure
+# Suriin ang pag-login sa Azure
 azd auth login
 
 # Suriin ang bersyon ng Python
 python --version  # o python3 --version
 
-# Tiyakin ang access sa OpenAI (suriin sa Azure Portal)
+# Suriin ang pag-access sa OpenAI (tingnan sa Azure Portal)
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus
 ```
 
-> **⚠️ Mahalagang Paalala:** Ang Azure OpenAI ay nangangailangan ng pag-apruba ng aplikasyon. Kung hindi ka pa nakakapag-apply, bisitahin ang [aka.ms/oai/access](https://aka.ms/oai/access). Karaniwang tumatagal ng 1-2 araw ng negosyo ang pag-apruba.
+> **⚠️ Mahalagang Paalala:** Ang Microsoft Foundry Models ay nangangailangan ng pag-apruba ng aplikasyon. Kung hindi ka pa nag-aapply, bisitahin ang [aka.ms/oai/access](https://aka.ms/oai/access). Karaniwan tumatagal ang pag-apruba nang 1-2 araw ng trabaho.
 
 ## ⏱️ Timeline ng Deployment
 
 | Yugto | Tagal | Ano ang Nangyayari |
-|-------|-------|--------------------|
-| Pagsusuri ng mga kinakailangan | 2-3 minuto | I-verify ang availability ng OpenAI quota |
-| I-deploy ang imprastraktura | 8-12 minuto | Gumawa ng OpenAI, Key Vault, model deployment |
+|-------|----------|--------------|
+| Pagsusuri ng paunang kinakailangan | 2-3 minuto | Suriin ang availability ng OpenAI quota |
+| Mag-deploy ng infrastructure | 8-12 minuto | Lumikha ng OpenAI, Key Vault, at pag-deploy ng modelo |
 | I-configure ang aplikasyon | 2-3 minuto | I-set up ang environment at dependencies |
-| **Kabuuan** | **12-18 minuto** | Handa nang makipag-chat gamit ang GPT-4 |
+| **Kabuuan** | **12-18 minuto** | Handa nang makipag-chat gamit ang gpt-4.1 |
 
-**Tandaan:** Ang unang deployment ng OpenAI ay maaaring mas matagal dahil sa model provisioning.
+**Tandaan:** Maaaring mas tumagal ang unang pag-deploy ng OpenAI dahil sa provisioning ng modelo.
 
-## Mabilisang Simula
+## Mabilis na Pagsisimula
 
 ```bash
-# Mag-navigate sa halimbawa
+# Pumunta sa halimbawa
 cd examples/azure-openai-chat
 
-# I-initialize ang kapaligiran
+# Ihanda ang kapaligiran
 azd env new myopenai
 
-# I-deploy ang lahat (infrastructure + configuration)
+# I-deploy ang lahat (imprastruktura at konfigurasyon)
 azd up
-# Ikaw ay tatanungin na:
-# 1. Piliin ang Azure subscription
-# 2. Pumili ng lokasyon na may OpenAI availability (hal., eastus, eastus2, westus)
-# 3. Maghintay ng 12-18 minuto para sa deployment
+# Hihilingin sa iyo na:
+# 1. Piliin ang Azure na subskripsyon
+# 2. Pumili ng lokasyon kung saan available ang OpenAI (hal., eastus, eastus2, westus)
+# 3. Maghintay ng 12-18 minuto para sa pag-deploy
 
-# I-install ang mga Python dependencies
+# I-install ang mga dependency ng Python
 pip install -r requirements.txt
 
-# Simulan ang pakikipag-chat!
+# Magsimulang mag-chat!
 python chat.py
 ```
 
-**Inaasahang Output:**
+**Ina-asahang Output:**
 ```
-🤖 Azure OpenAI Chat Application
-Connected to: GPT-4 (eastus)
+🤖 Microsoft Foundry Models Chat Application
+Connected to: gpt-4.1 (eastus)
 Type your message (or 'quit' to exit)
 
-You: Hello! Tell me about Azure OpenAI.
-Assistant: Azure OpenAI Service provides REST API access to OpenAI's powerful language models including GPT-4, GPT-3.5-Turbo, and Embeddings...
+You: Hello! Tell me about Microsoft Foundry Models.
+Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's powerful language models including gpt-4.1, GPT-3.5-Turbo, and Embeddings...
 
 [Tokens used: 145 | Estimated cost: $0.0044]
 ```
 
-## ✅ I-verify ang Deployment
+## ✅ Patunayan ang Pag-deploy
 
-### Hakbang 1: Suriin ang Azure Resources
+### Hakbang 1: Suriin ang mga Azure Resources
 
 ```bash
-# Tingnan ang mga na-deploy na resources
+# Tingnan ang mga na-deploy na resource
 azd show
 
-# Ipinapakita ang inaasahang output:
+# Ipinapakita ng inaasahang output:
 # - OpenAI Service: (pangalan ng resource)
 # - Key Vault: (pangalan ng resource)
-# - Deployment: gpt-4
+# - Pag-deploy: gpt-4.1
 # - Lokasyon: eastus (o ang napili mong rehiyon)
 ```
 
 ### Hakbang 2: Subukan ang OpenAI API
 
 ```bash
-# Kunin ang OpenAI endpoint at key
+# Kunin ang OpenAI endpoint at susi
 OPENAI_ENDPOINT=$(azd env get-value AZURE_OPENAI_ENDPOINT)
 OPENAI_KEY=$(azd env get-value AZURE_OPENAI_API_KEY)
 
 # Subukan ang tawag sa API
-curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4/chat/completions?api-version=2024-08-01-preview" \
+curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
   -d '{
@@ -157,7 +135,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4/chat/completions?api-version=202
   }'
 ```
 
-**Inaasahang Tugon:**
+**Ina-asahang Tugon:**
 ```json
 {
   "choices": [
@@ -176,7 +154,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4/chat/completions?api-version=202
 }
 ```
 
-### Hakbang 3: I-verify ang Access sa Key Vault
+### Hakbang 3: Patunayan ang Access sa Key Vault
 
 ```bash
 # Ilista ang mga lihim sa Key Vault
@@ -188,17 +166,17 @@ az keyvault secret list \
   --output table
 ```
 
-**Inaasahang Mga Lihim:**
-- `openai-api-key`  
-- `openai-endpoint`  
+**Ina-asahang Mga Sekreto:**
+- `openai-api-key`
+- `openai-endpoint`
 
-**Pamantayan ng Tagumpay:**
-- ✅ Na-deploy ang OpenAI service gamit ang GPT-4  
-- ✅ Ang API call ay nagbabalik ng wastong completion  
-- ✅ Ang mga lihim ay nakaimbak sa Key Vault  
-- ✅ Gumagana ang pagsubaybay sa paggamit ng token  
+**Kriteriya ng Tagumpay:**
+- ✅ Na-deploy ang OpenAI service na may gpt-4.1
+- ✅ Nagbabalik ng wastong completion ang API call
+- ✅ Mga sekreto na naka-imbak sa Key Vault
+- ✅ Gumagana ang pagsubaybay ng paggamit ng token
 
-## Istruktura ng Proyekto
+## Estruktura ng Proyekto
 
 ```
 azure-openai-chat/
@@ -217,68 +195,69 @@ azure-openai-chat/
 
 ## Mga Tampok ng Aplikasyon
 
-### Chat Interface (`chat.py`)
+### Interface ng Chat (`chat.py`)
 
-Kasama sa chat application ang:  
-- **Kasaysayan ng Usapan** - Pinapanatili ang konteksto sa bawat mensahe  
-- **Pagbibilang ng Token** - Sinusubaybayan ang paggamit at tinatantya ang mga gastos  
-- **Error Handling** - Maayos na paghawak ng rate limits at mga error sa API  
-- **Pagtatantya ng Gastos** - Real-time na kalkulasyon ng gastos kada mensahe  
-- **Streaming Support** - Opsyonal na streaming responses  
+Kasama sa chat application ang:
+
+- **Conversation History** - Pinapanatili ang konteksto sa mga mensahe
+- **Token Counting** - Sinusubaybayan ang paggamit at tinatantya ang mga gastos
+- **Error Handling** - Maayos na pag-handle ng rate limits at mga error ng API
+- **Cost Estimation** - Sa totoong oras na pagkalkula ng gastos bawat mensahe
+- **Streaming Support** - Opsyonal na streaming ng mga tugon
 
 ### Mga Utos
 
-Habang nakikipag-chat, maaari mong gamitin:  
-- `quit` o `exit` - Tapusin ang session  
-- `clear` - Burahin ang kasaysayan ng usapan  
-- `tokens` - Ipakita ang kabuuang paggamit ng token  
-- `cost` - Ipakita ang tinatayang kabuuang gastos  
+Habang nakikipag-chat, maaaring gamitin ang mga sumusunod:
+- `quit` o `exit` - Tapusin ang sesyon
+- `clear` - I-clear ang kasaysayan ng pag-uusap
+- `tokens` - Ipakita ang kabuuang paggamit ng token
+- `cost` - Ipakita ang tinatayang kabuuang gastos
 
-### Configuration (`config.py`)
+### Konfigurasyon (`config.py`)
 
-Naglo-load ng configuration mula sa environment variables:  
+Naglo-load ng konfigurasyon mula sa environment variables:
 ```python
 AZURE_OPENAI_ENDPOINT  # Mula sa Key Vault
 AZURE_OPENAI_API_KEY   # Mula sa Key Vault
-AZURE_OPENAI_MODEL     # Default: gpt-4
-AZURE_OPENAI_MAX_TOKENS # Default: 800
+AZURE_OPENAI_MODEL     # Paunang-tatakda: gpt-4.1
+AZURE_OPENAI_MAX_TOKENS # Paunang-tatakda: 800
 ```
 
 ## Mga Halimbawa ng Paggamit
 
-### Simpleng Chat
+### Pangunahing Chat
 
 ```bash
 python chat.py
 ```
 
-### Chat gamit ang Custom Model
+### Chat gamit ang Custom na Modelo
 
 ```bash
 export AZURE_OPENAI_MODEL=gpt-35-turbo
 python chat.py
 ```
 
-### Chat gamit ang Streaming
+### Chat na may Streaming
 
 ```bash
 python chat.py --stream
 ```
 
-### Halimbawa ng Usapan
+### Halimbawang Pag-uusap
 
 ```
-You: Explain Azure OpenAI Service in 3 sentences.
-Assistant: Azure OpenAI Service is Microsoft Azure's cloud platform offering 
+You: Explain Microsoft Foundry Models Service in 3 sentences.
+Assistant: Microsoft Foundry Models Service is Microsoft Azure's cloud platform offering 
 that provides access to OpenAI's powerful language models. It enables developers 
-to integrate capabilities like GPT-4 into their applications with enterprise-grade 
+to integrate capabilities like gpt-4.1 into their applications with enterprise-grade 
 security and compliance. The service includes features for content filtering, 
 abuse monitoring, and responsible AI practices.
 
 [Tokens used: 89 | Estimated cost: $0.0027]
 
 You: What models are available?
-Assistant: Azure OpenAI Service offers several model families including GPT-4 
+Assistant: Microsoft Foundry Models Service offers several model families including gpt-4.1 
 (most capable), GPT-3.5-Turbo (faster and cost-effective), and Embeddings models 
 for vector search. Each model has different capabilities, pricing, and token limits.
 
@@ -289,51 +268,51 @@ Total session: 156 tokens | $0.0047
 
 ## Pamamahala ng Gastos
 
-### Presyo ng Token (GPT-4)
+### Pagpepresyo ng Token (gpt-4.1)
 
-| Model | Input (bawat 1K tokens) | Output (bawat 1K tokens) |
-|-------|-------------------------|--------------------------|
-| GPT-4 | $0.03 | $0.06 |
+| Modelo | Input (bawat 1K tokens) | Output (bawat 1K tokens) |
+|-------|----------------------|------------------------|
+| gpt-4.1 | $0.03 | $0.06 |
 | GPT-3.5-Turbo | $0.0015 | $0.002 |
 
 ### Tinatayang Buwanang Gastos
 
 Batay sa mga pattern ng paggamit:
 
-| Antas ng Paggamit | Mensahe/Araw | Tokens/Araw | Buwanang Gastos |
-|-------------------|--------------|-------------|-----------------|
-| **Mababa** | 20 mensahe | 3,000 tokens | $3-5 |
+| Antas ng Paggamit | Mensahe/Araw | Token/Araw | Buwanang Gastos |
+|-------------|--------------|------------|--------------|
+| **Magaan** | 20 mensahe | 3,000 tokens | $3-5 |
 | **Katamtaman** | 100 mensahe | 15,000 tokens | $15-25 |
-| **Mataas** | 500 mensahe | 75,000 tokens | $75-125 |
+| **Mabigat** | 500 mensahe | 75,000 tokens | $75-125 |
 
-**Base Infrastructure Cost:** $1-2/buwan (Key Vault + minimal compute)
+**Pangunahing Gastos ng Infrastrukturang:** $1-2/buwan (Key Vault + minimal compute)
 
 ### Mga Tip sa Pag-optimize ng Gastos
 
 ```bash
-# 1. Gamitin ang GPT-3.5-Turbo para sa mas simpleng gawain (20x mas mura)
+# 1. Gumamit ng GPT-3.5-Turbo para sa mas simpleng mga gawain (20 beses na mas mura)
 export AZURE_OPENAI_MODEL=gpt-35-turbo
 
-# 2. Bawasan ang max tokens para sa mas maikling sagot
+# 2. Bawasan ang maximum na token para sa mas maikling mga sagot
 export AZURE_OPENAI_MAX_TOKENS=400
 
-# 3. Subaybayan ang paggamit ng token
+# 3. Subaybayan ang paggamit ng mga token
 python chat.py --show-tokens
 
-# 4. Mag-set up ng mga alerto sa badyet
+# 4. Magtakda ng mga abiso sa badyet
 az consumption budget create \
   --budget-name "openai-budget" \
   --amount 50 \
   --time-grain Monthly
 ```
 
-## Pagsubaybay
+## Pagmo-monitor
 
 ### Tingnan ang Paggamit ng Token
 
 ```bash
 # Sa Azure Portal:
-# OpenAI Resource → Metrics → Piliin ang "Token Transaction"
+# Resource ng OpenAI → Mga Sukatan → Piliin ang "Token Transaction"
 
 # O sa pamamagitan ng Azure CLI:
 az monitor metrics list \
@@ -343,17 +322,17 @@ az monitor metrics list \
   --interval PT1M
 ```
 
-### Tingnan ang API Logs
+### Tingnan ang Mga Log ng API
 
 ```bash
-# I-stream ang mga diagnostic log
+# I-stream ang mga diagnostic na log
 az monitor diagnostic-settings create \
   --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
   --name openai-logs \
   --logs '[{"category": "Audit", "enabled": true}]' \
   --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID)
 
-# Mag-query ng mga log
+# Mga log ng query
 az monitor log-analytics query \
   --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID) \
   --analytics-query "AzureDiagnostics | where Category == 'Audit' | top 10 by TimeGenerated"
@@ -361,67 +340,67 @@ az monitor log-analytics query \
 
 ## Pag-troubleshoot
 
-### Isyu: "Access Denied" Error
+### Isyu: Error na "Access Denied"
 
-**Sintomas:** 403 Forbidden kapag tumatawag sa API  
+**Mga Sintomas:** 403 Forbidden kapag tumatawag sa API
 
-**Mga Solusyon:**  
+**Mga Solusyon:**
 ```bash
-# 1. Tiyakin na ang access sa OpenAI ay aprubado
+# 1. Suriin na aprubado ang pag-access sa OpenAI
 az cognitiveservices account show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
 
-# 2. Suriin kung tama ang API key
+# 2. Suriin na tama ang API key
 azd env get-value AZURE_OPENAI_API_KEY
 
-# 3. Tiyakin ang tamang format ng endpoint URL
+# 3. Suriin ang format ng endpoint URL
 azd env get-value AZURE_OPENAI_ENDPOINT
 # Dapat ay: https://[name].openai.azure.com/
 ```
 
 ### Isyu: "Rate Limit Exceeded"
 
-**Sintomas:** 429 Too Many Requests  
+**Mga Sintomas:** 429 Too Many Requests
 
-**Mga Solusyon:**  
+**Mga Solusyon:**
 ```bash
 # 1. Suriin ang kasalukuyang quota
 az cognitiveservices account deployment show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
-  --deployment-name gpt-4
+  --deployment-name gpt-4.1
 
 # 2. Humiling ng pagtaas ng quota (kung kinakailangan)
-# Pumunta sa Azure Portal → OpenAI Resource → Quotas → Humiling ng Pagtaas
+# Pumunta sa Azure Portal → OpenAI Resource → Quotas → Request Increase
 
 # 3. Ipatupad ang retry logic (nasa chat.py na)
-# Awtomatikong inuulit ng application gamit ang exponential backoff
+# Awtomatikong sinusubukan muli ng aplikasyon gamit ang exponential backoff
 ```
 
 ### Isyu: "Model Not Found"
 
-**Sintomas:** 404 error para sa deployment  
+**Mga Sintomas:** 404 error para sa deployment
 
-**Mga Solusyon:**  
+**Mga Solusyon:**
 ```bash
-# 1. Ilista ang mga available na deployment
+# 1. Ilista ang mga magagamit na deployment
 az cognitiveservices account deployment list \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
 
-# 2. Tiyakin ang pangalan ng modelo sa kapaligiran
+# 2. Suriin ang pangalan ng modelo sa kapaligiran
 echo $AZURE_OPENAI_MODEL
 
 # 3. I-update sa tamang pangalan ng deployment
-export AZURE_OPENAI_MODEL=gpt-4  # o gpt-35-turbo
+export AZURE_OPENAI_MODEL=gpt-4.1  # o gpt-35-turbo
 ```
 
 ### Isyu: Mataas na Latency
 
-**Sintomas:** Mabagal na oras ng tugon (>5 segundo)  
+**Mga Sintomas:** Mabagal na oras ng tugon (>5 segundo)
 
-**Mga Solusyon:**  
+**Mga Solusyon:**
 ```bash
 # 1. Suriin ang latency ng rehiyon
 # I-deploy sa rehiyon na pinakamalapit sa mga gumagamit
@@ -429,41 +408,41 @@ export AZURE_OPENAI_MODEL=gpt-4  # o gpt-35-turbo
 # 2. Bawasan ang max_tokens para sa mas mabilis na mga tugon
 export AZURE_OPENAI_MAX_TOKENS=400
 
-# 3. Gumamit ng streaming para sa mas magandang UX
+# 3. Gumamit ng streaming para sa mas mahusay na karanasan ng gumagamit
 python chat.py --stream
 ```
 
-## Mga Pinakamahusay na Kasanayan sa Seguridad
+## Pinakamahusay na Praktika sa Seguridad
 
 ### 1. Protektahan ang API Keys
 
 ```bash
-# Huwag kailanman mag-commit ng mga susi sa source control
-# Gumamit ng Key Vault (nakakonfigura na)
+# Huwag kailanman i-commit ang mga susi sa source control
+# Gamitin ang Key Vault (naka-configure na)
 
-# Regular na i-rotate ang mga susi
+# I-rotate ang mga susi nang regular
 az cognitiveservices account keys regenerate \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
   --key-name key1
 ```
 
-### 2. Magpatupad ng Content Filtering
+### 2. Ipatupad ang Content Filtering
 
 ```python
-# Kasama sa Azure OpenAI ang built-in na pagsasala ng nilalaman
+# Kasama sa Microsoft Foundry Models ang built-in na pag-filter ng nilalaman
 # I-configure sa Azure Portal:
-# OpenAI Resource → Mga Filter ng Nilalaman → Gumawa ng Custom na Filter
+# OpenAI Resource → Mga Filter ng Nilalaman → Lumikha ng Pasadyang Filter
 
-# Mga Kategorya: Poot, Sekswal, Karahasan, Pagpapakamatay
-# Mga Antas: Mababang, Katamtaman, Mataas na pagsasala
+# Mga Kategorya: Poot, Sekswal, Karahasan, Pagsasaktan sa sarili
+# Mga Antas: Mababang pag-filter, Katamtamang pag-filter, Mataas na pag-filter
 ```
 
 ### 3. Gumamit ng Managed Identity (Production)
 
 ```bash
-# Para sa production deployments, gumamit ng managed identity
-# sa halip na API keys (nangangailangan ng app hosting sa Azure)
+# Para sa mga deployment sa production, gumamit ng managed identity
+# sa halip na mga API key (kinakailangan na naka-host ang app sa Azure)
 
 # I-update ang infra/openai.bicep upang isama:
 # identity: { type: 'SystemAssigned' }
@@ -474,35 +453,35 @@ az cognitiveservices account keys regenerate \
 ### Patakbuhin nang Lokal
 
 ```bash
-# I-install ang mga dependency
+# I-install ang mga dependensya
 pip install -r src/requirements.txt
 
 # Itakda ang mga variable ng kapaligiran
 export AZURE_OPENAI_ENDPOINT="https://[name].openai.azure.com/"
 export AZURE_OPENAI_API_KEY="your-api-key"
-export AZURE_OPENAI_MODEL="gpt-4"
+export AZURE_OPENAI_MODEL="gpt-4.1"
 
 # Patakbuhin ang aplikasyon
 python src/chat.py
 ```
 
-### Patakbuhin ang Mga Pagsubok
+### Patakbuhin ang Mga Test
 
 ```bash
-# I-install ang mga dependency para sa pagsusuri
+# I-install ang mga dependency para sa pagsubok
 pip install pytest pytest-cov
 
-# Patakbuhin ang mga pagsusuri
+# Patakbuhin ang mga pagsubok
 pytest tests/ -v
 
 # Kasama ang coverage
 pytest tests/ --cov=src --cov-report=html
 ```
 
-### I-update ang Model Deployment
+### I-update ang Pag-deploy ng Modelo
 
 ```bash
-# I-deploy ang iba't ibang bersyon ng modelo
+# I-deploy ang ibang bersyon ng modelo
 az cognitiveservices account deployment create \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
@@ -514,94 +493,94 @@ az cognitiveservices account deployment create \
   --sku-name "Standard"
 ```
 
-## Paglilinis
+## Linisin
 
 ```bash
-# Tanggalin ang lahat ng Azure resources
+# Tanggalin ang lahat ng mga mapagkukunan ng Azure
 azd down --force --purge
 
-# Tatanggalin nito:
-# - OpenAI Service
+# Tinatanggal nito:
+# - Serbisyo ng OpenAI
 # - Key Vault (na may 90-araw na soft delete)
-# - Resource Group
-# - Lahat ng deployments at configurations
+# - Grupo ng mga resource
+# - Lahat ng mga deployment at konfigurasyon
 ```
 
-## Mga Susunod na Hakbang
+## Susunod na Mga Hakbang
 
 ### Palawakin ang Halimbawang Ito
 
-1. **Magdagdag ng Web Interface** - Gumawa ng React/Vue frontend  
+1. **Magdagdag ng Web Interface** - Bumuo ng React/Vue frontend
    ```bash
-   # Magdagdag ng frontend service sa azure.yaml
+   # Idagdag ang frontend na serbisyo sa azure.yaml
    # I-deploy sa Azure Static Web Apps
    ```
 
-2. **Magpatupad ng RAG** - Magdagdag ng document search gamit ang Azure AI Search  
+2. **Ipatupad ang RAG** - Magdagdag ng paghahanap ng dokumento gamit ang Azure AI Search
    ```python
    # Isama ang Azure Cognitive Search
-   # Mag-upload ng mga dokumento at lumikha ng vector index
+   # Mag-upload ng mga dokumento at lumikha ng index ng vector
    ```
 
-3. **Magdagdag ng Function Calling** - Paganahin ang paggamit ng tool  
+3. **Magdagdag ng Function Calling** - Paganahin ang paggamit ng tool
    ```python
-   # Tukuyin ang mga function sa chat.py
-   # Payagan ang GPT-4 na tumawag ng mga panlabas na API
+   # Magdeklara ng mga function sa chat.py
+   # Pahintulutan ang gpt-4.1 na tumawag sa mga panlabas na API
    ```
 
-4. **Suporta sa Multi-Model** - Mag-deploy ng maraming modelo  
+4. **Suporta sa Maramihang Modelo** - Mag-deploy ng maraming modelo
    ```bash
-   # Magdagdag ng gpt-35-turbo, mga modelo ng embeddings
-   # Ipatupad ang lohika ng pag-ruta ng modelo
+   # Magdagdag ng gpt-35-turbo at mga modelo ng embeddings
+   # Ipatupad ang lohika ng pag-ruta ng mga modelo
    ```
 
-### Kaugnay na Mga Halimbawa
+### Mga Kaugnay na Halimbawa
 
-- **[Retail Multi-Agent](../retail-scenario.md)** - Advanced na multi-agent architecture  
-- **[Database App](../../../../examples/database-app)** - Magdagdag ng permanenteng storage  
-- **[Container Apps](../../../../examples/container-app)** - I-deploy bilang containerized service  
+- **[Retail Multi-Agent](../retail-scenario.md)** - Mas advanced na arkitekturang multi-agent
+- **[Database App](../../../../examples/database-app)** - Magdagdag ng persistent storage
+- **[Container Apps](../../../../examples/container-app)** - I-deploy bilang service na naka-container
 
-### Mga Mapagkukunan ng Pag-aaral
+### Mga Mapagkukunan sa Pagkatuto
 
-- 📚 [AZD Para sa Mga Baguhan na Kurso](../../README.md) - Pangunahing kurso  
-- 📚 [Azure OpenAI Documentation](https://learn.microsoft.com/azure/ai-services/openai/) - Opisyal na dokumentasyon  
-- 📚 [OpenAI API Reference](https://platform.openai.com/docs/api-reference) - Mga detalye ng API  
-- 📚 [Responsible AI](https://www.microsoft.com/ai/responsible-ai) - Mga pinakamahusay na kasanayan  
+- 📚 [AZD For Beginners Course](../../README.md) - Pangunahing pahina ng kurso
+- 📚 [Microsoft Foundry Models Documentation](https://learn.microsoft.com/azure/ai-services/openai/) - Opisyal na dokumentasyon
+- 📚 [OpenAI API Reference](https://platform.openai.com/docs/api-reference) - Mga detalye ng API
+- 📚 [Responsible AI](https://www.microsoft.com/ai/responsible-ai) - Mga pinakamahusay na kasanayan
 
-## Karagdagang Mapagkukunan
+## Karagdagang Mga Mapagkukunan
 
 ### Dokumentasyon
-- **[Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/)** - Kumpletong gabay  
-- **[GPT-4 Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - Mga kakayahan ng modelo  
-- **[Content Filtering](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - Mga tampok sa kaligtasan  
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd reference  
+- **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - Kumpletong gabay
+- **[gpt-4.1 Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - Mga kakayahan ng modelo
+- **[Content Filtering](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - Mga tampok para sa kaligtasan
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - sanggunian para sa azd
 
 ### Mga Tutorial
-- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - Unang deployment  
-- **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - Paggawa ng chat apps  
-- **[Function Calling](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - Advanced na mga tampok  
+- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - Unang pag-deploy
+- **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - Paggawa ng mga chat app
+- **[Function Calling](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - Mga advanced na tampok
 
-### Mga Tool
-- **[Azure OpenAI Studio](https://oai.azure.com/)** - Web-based playground  
-- **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - Pagsusulat ng mas mahusay na prompts  
-- **[Token Calculator](https://platform.openai.com/tokenizer)** - Tantiya ng paggamit ng token  
+### Mga Kasangkapan
+- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Playground na web-based
+- **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - Pagsusulat ng mas mahusay na mga prompt
+- **[Token Calculator](https://platform.openai.com/tokenizer)** - Tantiya ng paggamit ng token
 
 ### Komunidad
-- **[Azure AI Discord](https://discord.gg/azure)** - Humingi ng tulong mula sa komunidad  
-- **[GitHub Discussions](https://github.com/Azure-Samples/openai/discussions)** - Forum ng Q&A  
-- **[Azure Blog](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - Pinakabagong balita  
+- **[Azure AI Discord](https://discord.gg/azure)** - Humingi ng tulong sa komunidad
+- **[GitHub Discussions](https://github.com/Azure-Samples/openai/discussions)** - Forum ng Q&A
+- **[Azure Blog](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - Pinakabagong mga update
 
 ---
 
-**🎉 Tagumpay!** Na-deploy mo ang Azure OpenAI at nakabuo ng gumaganang chat application. Simulan ang paggalugad sa mga kakayahan ng GPT-4 at mag-eksperimento sa iba't ibang prompts at use cases.
+**🎉 Tagumpay!** Nadeploy mo na ang Microsoft Foundry Models at nakabuo ng gumaganang chat application. Simulan mong tuklasin ang mga kakayahan ng gpt-4.1 at subukan ang iba't ibang mga prompt at mga use case.
 
-**Mga Tanong?** [Magbukas ng isyu](https://github.com/microsoft/AZD-for-beginners/issues) o tingnan ang [FAQ](../../resources/faq.md)
+**May mga tanong?** [Magbukas ng isyu](https://github.com/microsoft/AZD-for-beginners/issues) o tingnan ang [FAQ](../../resources/faq.md)
 
-**Babala sa Gastos:** Tandaan na patakbuhin ang `azd down` kapag tapos na sa pagsubok upang maiwasan ang patuloy na singil (~$50-100/buwan para sa aktibong paggamit).
+**Babala sa Gastos:** Tandaan na patakbuhin ang `azd down` kapag tapos na sa pag-test upang maiwasan ang patuloy na singilan (~$50-100/buwan para sa aktibong paggamit).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Paunawa**:  
-Ang dokumentong ito ay isinalin gamit ang AI translation service na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatugma. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na dulot ng paggamit ng pagsasaling ito.
+**Paunawa**:
+Ang dokumentong ito ay isinalin gamit ang serbisyo ng pagsasaling AI na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman sinisikap naming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o di-katumpakan. Ang orihinal na dokumento sa katutubong wika nito ang dapat ituring na opisyal na sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasaling-tao. Hindi kami mananagot para sa anumang hindi pagkakaunawaan o maling interpretasyon na magmumula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

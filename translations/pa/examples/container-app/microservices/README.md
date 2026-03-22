@@ -1,68 +1,41 @@
-# Microservices Architecture - Container App Example
+# ਮਾਈਕਰੋਸਰਵਿਸਿਜ਼ ਆਰਕੀਟੈਕਚਰ - ਕੰਟੇਨਰ ਐਪ ਉਦਾਹਰਣ
 
-⏱️ **Estimated Time**: 25-35 minutes | 💰 **Estimated Cost**: ~$50-100/month | ⭐ **Complexity**: Advanced
+⏱️ **ਅੰਦਾਜ਼ਾ ਸਮਾਂ**: 25-35 ਮਿੰਟ | 💰 **ਅੰਦਾਜ਼ਾ ਲਾਗਤ**: ~$50-100/ਮਹੀਨਾ | ⭐ **ਜਟਿਲਤਾ**: ਉੱਚ ਪੱਧਰ
 
-A **simplified but functional** microservices architecture deployed to Azure Container Apps using AZD CLI. This example demonstrates service-to-service communication, container orchestration, and monitoring with a practical 2-service setup.
+ਇੱਕ **ਸਧਾਰਨ ਪਰ ਕਾਰਗਰ** ਮਾਈਕਰੋਸਰਵਿਸਿਜ਼ ਆਰਕੀਟੈਕਚਰ ਜੋ AZD CLI ਦੀ ਵਰਤੋਂ ਕਰਕੇ Azure Container Apps 'ਤੇ ਡਿਪਲੋਯ ਕੀਤੀ ਗਈ ਹੈ। ਇਸ ਉਦਾਹਰਣ ਵਿੱਚ ਸਰਵਿਸ-ਟੂ-ਸਰਵਿਸ ਸੰਚਾਰ, ਕੰਟੇਨਰ ਆਰਕੀਸਟ੍ਰੇਸ਼ਨ ਅਤੇ ਮਾਨੀਟਰਿੰਗ ਨੂੰ ਇੱਕ ਪ੍ਰਾਇਕਟਿਕਲ 2-ਸਰਵਿਸ ਸੈਟਅਪ ਦੇ ਨਾਲ ਦਰਸਾਇਆ ਗਿਆ ਹੈ।
 
-> **📚 Learning Approach**: This example starts with a minimal 2-service architecture (API Gateway + Backend Service) that you can actually deploy and learn from. After mastering this foundation, we provide guidance for expanding to a full microservices ecosystem.
+> **📚 ਸਿੱਖਣ ਦਾ ਢੰਗ**: ਇਹ ਉਦਾਹਰਣ ਇੱਕ ਘੱਟੋ-ਘੱਟ 2-ਸਰਵਿਸ ਆਰਕੀਟੈਕਚਰ (API ਗੇਟਵੇ + ਬੈਕਐਂਡ ਸਰਵਿਸ) ਨਾਲ ਸ਼ੁਰੂ ਹੁੰਦੀ ਹੈ ਜਿਸਨੂੰ ਤੁਸੀਂ ਅਸਲ ਵਿੱਚ ਡਿਪਲੋਏ ਅਤੇ ਸਿੱਖ ਸਕਦੇ ਹੋ। ਇਸ ਬੁਨਿਆਦ ਨੂੰ ਸਮਝਣ ਦੇ ਬਾਅਦ, ਅਸੀਂ ਪੂਰੇ ਮਾਈਕਰੋਸਰਵਿਸ ਈਕੋਸਿਸਟਮ ਤੱਕ ਫੈਲਾਉਣ ਲਈ ਦਿਸ਼ਾ-ਨਿਰਦੇਸ਼ ਦਿੰਦੇ ਹਾਂ।
 
-## What You'll Learn
+## ਤੁਸੀਂ ਕੀ ਸਿੱਖੋਗੇ
 
-By completing this example, you will:
-- Deploy multiple containers to Azure Container Apps
-- Implement service-to-service communication with internal networking
-- Configure environment-based scaling and health checks
-- Monitor distributed applications with Application Insights
-- Understand microservices deployment patterns and best practices
-- Learn progressive expansion from simple to complex architectures
+ਇਸ ਉਦਾਹਰਣ ਨੂੰ ਪੂਰਾ ਕਰਕੇ, ਤੁਸੀਂ:
+- Azure Container Apps 'ਤੇ ਬਹੁਤ ਸਾਰੇ ਕੰਟੇਨਰ ਡਿਪਲੋਯ ਕਰਨਾ ਸਿੱਖੋਗੇ
+- ਅੰਦਰੂਨੀ ਨੈਟਵਰਕਿੰਗ ਨਾਲ ਸਰਵਿਸ-ਟੂ-ਸਰਵਿਸ ਸੰਚਾਰ ਲਾਗੂ ਕਰਨਾ ਸਿੱਖੋਗੇ
+- ਵਾਤਾਵਰਨ-ਆਧਾਰਿਤ ਸਕੇਲਿੰਗ ਅਤੇ ਹੈਲਥ ਚੈਕਸ ਸੰਰਚਿਤ ਕਰਨਗੇ
+- Application Insights ਨਾਲ ਵਿਤਰਿਤ ਐਪਲੀਕੇਸ਼ਨਾਂ ਦੀ ਨਿਗਰਾਨੀ ਕਰਨਾ ਸਿੱਖੋਗੇ
+- ਮਾਈਕਰੋਸਰਵਿਸਿਜ਼ ਡਿਪਲੋਯਮੈਂਟ ਪੈਟਰਨ ਅਤੇ ਸਰਵੋਤਮ ਅਭਿਆਸਾਂ ਨੂੰ ਸਮਝੋਗੇ
+- ਸਧਾਰਨ ਤੋਂ ਜਟਿਲ ਆਰਕੀਟੈਕਚਰਾਂ ਤੱਕ ਕ੍ਰਮਿਕ ਤੌਰ 'ਤੇ ਵਧਾਉਣਾ ਸਿੱਖੋਗੇ
 
-## Architecture
+## ਆਰਕੀਟੈਕਚਰ
 
-### Phase 1: What We're Building (Included in This Example)
+### ਫੇਜ਼ 1: ਜੋ ਅਸੀਂ ਬਣਾ ਰਹੇ ਹਾਂ (ਇਸ ਉਦਾਹਰਣ ਵਿੱਚ ਸ਼ਾਮਿਲ)
 
+```mermaid
+graph TD
+    Internet[ਇੰਟਰਨੈਟ] -- HTTPS --> Gateway[API ਗੇਟਵੇ<br/>Node.js ਕੰਟੇਨਰ<br/>ਬੇਨਤੀਆਂ ਦਾ ਰੂਟਿੰਗ<br/>ਹੈਲਥ ਚੈੱਕ<br/>ਬੇਨਤੀ ਲਾਗਿੰਗ]
+    Gateway -- HTTP internal --> Product[ਉਤਪਾਦ ਸੇਵਾ<br/>ਪਾਇਥਨ ਕੰਟੇਨਰ<br/>ਉਤਪਾਦ CRUD<br/>ਇਨ-ਮੇਮਰੀ ਡੇਟਾ ਸਟੋਰ<br/>REST API]
+    Product --> Insights[ਐਪਲੀਕੇਸ਼ਨ ਇਨਸਾਈਟਸ<br/>ਮਾਨੀਟਰਨਿੰਗ ਅਤੇ ਲੌਗ]
 ```
-                    ┌─────────────────────────────┐
-                    │         Internet            │
-                    └──────────────┬──────────────┘
-                                   │
-                                   │ HTTPS
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │      API Gateway            │
-                    │   (Node.js Container)       │
-                    │   - Routes requests         │
-                    │   - Health checks           │
-                    │   - Request logging         │
-                    └──────────────┬──────────────┘
-                                   │
-                                   │ HTTP (internal)
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │    Product Service          │
-                    │   (Python Container)        │
-                    │   - Product CRUD            │
-                    │   - In-memory data store    │
-                    │   - REST API                │
-                    └──────────────┬──────────────┘
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │   Application Insights      │
-                    │   (Monitoring & Logs)       │
-                    └─────────────────────────────┘
-```
+**ਸਧਾਰਨ ਤੋਂ ਕਿਉਂ ਸ਼ੁਰੂ ਕਰੀਏ?**
+- ✅ ਤੇਜ਼ੀ ਨਾਲ ਡਿਪਲੋਈ ਅਤੇ ਸਮਝੋ (25-35 ਮਿੰਟ)
+- ✅ ਜਟਿਲਤਾ ਦੇ ਬਿਨ੍ਹਾਂ ਮੁੱਖ ਮਾਈਕਰੋਸਰਵਿਸ ਪੈਟਰਨ ਸਿੱਖੋ
+- ✅ ਕੰਮ ਕਰਨ ਵਾਲਾ ਕੋਡ ਜੋ ਤੁਸੀਂ ਸੋਧ ਅਤੇ ਪ੍ਰਯੋਗ ਕਰ ਸਕਦੇ ਹੋ
+- ✅ ਸਿੱਖਣ ਲਈ ਘੱਟ ਲਾਗਤ (~$50-100/ਮਹੀਨਾ vs $300-1400/ਮਹੀਨਾ)
+- ✅ ਡੇਟਾਬੇਸ ਅਤੇ ਮੈਸੇਜ ਕਿਊਜ਼ ਸ਼ਾਮਿਲ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਵਿਸ਼ਵਾਸ ਬਣਾਓ
 
-**Why Start Simple?**
-- ✅ Deploy and understand quickly (25-35 minutes)
-- ✅ Learn core microservices patterns without complexity
-- ✅ Working code you can modify and experiment with
-- ✅ Lower cost for learning (~$50-100/month vs $300-1400/month)
-- ✅ Build confidence before adding databases and message queues
+**ਉਪਮਾ**: ਇਸਨੂੰ ਡ੍ਰਾਈਵ ਸਿੱਖਣ ਵਾਂਗ ਸੋਚੋ। ਤੁਸੀਂ ਖਾਲੀ ਪਾਰਕਿੰਗ ਲਾਟ (2 ਸਰਵਿਸ) ਨਾਲ ਸ਼ੁਰੂ ਕਰਦੇ ਹੋ, ਬੁਨਿਆਦੀ ਗੱਲਾਂ 'ਤੇ ਨਿਪੁੰਨ ਹੋਦੇ ਹੋ, ਫਿਰ ਸ਼ਹਿਰ ਟ੍ਰੈਫਿਕ (5+ ਸਰਵਿਸਾਂ ਨਾਲ ਡੇਟਾਬੇਸ) ਵੱਲ ਪ੍ਰਗਟਿ ਕਰਦੇ ਹੋ।
 
-**Analogy**: Think of this like learning to drive. You start with an empty parking lot (2 services), master the basics, then progress to city traffic (5+ services with databases).
-
-### Phase 2: Future Expansion (Reference Architecture)
-
-Once you master the 2-service architecture, you can expand to:
+### ਫੇਜ਼ 2: ਭਵਿੱਖੀ ਵਧਾਈ (ਸੰਦਰਭ ਆਰਕੀਟੈਕਚਰ)
 
 ```
 Full Architecture (Not Included - For Reference)
@@ -77,127 +50,127 @@ Full Architecture (Not Included - For Reference)
 └── Azure Storage (🔜 For file storage)
 ```
 
-See "Expansion Guide" section at the end for step-by-step instructions.
+ਅੰਤ ਵਿੱਚ ਦਿੱਤੇ "Expansion Guide" ਸੈਕਸ਼ਨ ਨੂੰ ਕਦਮ-ਦਰ-ਕਦਮ ਨਿਰਦੇਸ਼ਾਂ ਲਈ ਦੇਖੋ।
 
-## Features Included
+## ਸ਼ਾਮਿਲ ਫੀਚਰ
 
-✅ **Service Discovery**: Automatic DNS-based discovery between containers  
-✅ **Load Balancing**: Built-in load balancing across replicas  
-✅ **Auto-scaling**: Independent scaling per service based on HTTP requests  
-✅ **Health Monitoring**: Liveness and readiness probes for both services  
-✅ **Distributed Logging**: Centralized logging with Application Insights  
-✅ **Internal Networking**: Secure service-to-service communication  
-✅ **Container Orchestration**: Automatic deployment and scaling  
-✅ **Zero-Downtime Updates**: Rolling updates with revision management  
+✅ **ਸਰਵਿਸ ਡਿਸਕਵਰੀ**: ਕੰਟੇਨਰਾਂ ਦੇ ਵਿਚਕਾਰ ਆਟੋਮੈਟਿਕ DNS-ਅਧਾਰਿਤ ਡਿਸਕਵਰੀ  
+✅ **ਲੋਡ ਬੈਲੈਂਸਿੰਗ**: ਰਿਪਲਿਕਾਸ ਦੇ ਆੜ-ਪਾਸ ਆਟੋਮੈਟਿਕ ਲੋਡ ਬੈਲੈਂਸਿੰਗ  
+✅ **ਆਟੋ-ਸਕੇਲਿੰਗ**: HTTP ਰਿਕਵੈਸਟਾਂ ਅਧਾਰਿਤ ਹਰ ਸਰਵਿਸ ਲਈ ਅਲੱਗ ਸਕੇਲਿੰਗ  
+✅ **ਹੈਲਥ ਮਾਨੀਟਰਿੰਗ**: ਦੋਹਾਂ ਸਰਵਿਸਾਂ ਲਈ ਲਾਈਵਨੇਸ ਅਤੇ ਰੈਡੀਨੇਸ ਪ੍ਰੋਬਸ  
+✅ **ਵਿਤਰਿਤ ਲੌਗਿੰਗ**: Application Insights ਨਾਲ ਕੇਂਦਰੀਕ੍ਰਿਤ ਲੌਗਿੰਗ  
+✅ **ਅੰਦਰੂਨੀ ਨੈਟਵਰਕਿੰਗ**: ਸੁਰੱਖਿਅਤ ਸਰਵਿਸ-ਟੂ-ਸਰਵਿਸ ਸਾਂਝ  
+✅ **ਕੰਟੇਨਰ ਆਰਕੀਸਟ੍ਰੇਸ਼ਨ**: ਆਟੋਮੈਟਿਕ ਡਿਪਲੋਯਮੈਂਟ ਅਤੇ ਸਕੇਲਿੰਗ  
+✅ **ਜ਼ੀਰੋ-ਡਾਊਨਟਾਈਮ ਅਪਡੇਟਸ**: ਰੋਲਿੰਗ ਅਪਡੇਟਸ ਅਤੇ ਰਿਵਿਜ਼ਨ ਮੈਨੇਜਮੈਂਟ  
 
-## Prerequisites
+## ਪੂਰਵ-ਆਵਸ਼ਕਤਾਵਾਂ
 
-### Required Tools
+### ਲੋੜੀਂਦੇ ਟੂਲ
 
-Before starting, verify you have these tools installed:
+ਸ਼ੁਰੂ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ, ਜਾਂਚ ਕਰੋ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਇਹ ਟੂਲ ਇੰਸਟਾਲ ਹੋਏ ਹਨ:
 
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 or higher)
+1. **[Azure ਡਿਵੈਲਪਰ CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (ਸੰસ્કਰਣ 1.0.0 ਜਾਂ ਵੱਧ)
    ```bash
    azd version
-   # ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁੱਟ: azd ਵਰਜਨ 1.0.0 ਜਾਂ ਇਸ ਤੋਂ ਉੱਪਰ
+   # ਉਮੀਦਿਤ ਨਤੀਜਾ: azd ਸੰਸਕਰਣ 1.0.0 ਜਾਂ ਇਸ ਤੋਂ ਉੱਚਾ
    ```
 
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 or higher)
+2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (ਸੰਸਕਰਣ 2.50.0 ਜਾਂ ਵੱਧ)
    ```bash
    az --version
-   # ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁੱਟ: azure-cli 2.50.0 ਜਾਂ ਇਸ ਤੋਂ ਵੱਧ
+   # ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁੱਟ: azure-cli 2.50.0 ਜਾਂ ਉੱਚਾ
    ```
 
-3. **[Docker](https://www.docker.com/get-started)** (for local development/testing - optional)
+3. **[Docker](https://www.docker.com/get-started)** (ਲੋਕਲ ਡਿਵੈਲਪਮੈਂਟ/ਟੈਸਟਿੰਗ ਲਈ - ਵਿਕਲਪੀ)
    ```bash
    docker --version
-   # ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁੱਟ: Docker ਵਰਜਨ 20.10 ਜਾਂ ਇਸ ਤੋਂ ਉੱਚਾ
+   # ਉਮੀਦਿਤ ਨਤੀਜਾ: Docker ਵਰਜ਼ਨ 20.10 ਜਾਂ ਉੱਪਰ
    ```
 
-### Azure Requirements
+### Azure ਦੀਆਂ ਲੋੜਾਂ
 
-- An active **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))
-- Permissions to create resources in your subscription
-- **Contributor** role on the subscription or resource group
+- ਇੱਕ ਸਰਗਰਮ **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))
+- ਤੁਹਾਡੇ subscription ਵਿੱਚ resources ਬਣਾਉਣ ਦੀ ਆਗਿਆ
+- Subscription ਜਾਂ resource group 'Contributor' ਭੂਮਿਕਾ
 
-### Knowledge Prerequisites
+### ਜਾਣਕਾਰੀ ਦੀਆਂ ਲੋੜਾਂ
 
-This is an **advanced-level** example. You should have:
-- Completed the [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) 
-- Basic understanding of microservices architecture
-- Familiarity with REST APIs and HTTP
-- Understanding of container concepts
+ਇਹ ਇੱਕ **ਉੱਚ ਪੱਧਰ** ਦਾ ਉਦਾਹਰਣ ਹੈ। ਤੁਹਾਡੇ ਕੋਲ ਇਹ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ:
+- ਪੂਰਾ ਕੀਤਾ ਹੋਇਆ [ਸਧਾਰਣ Flask API ਉਦਾਹਰਣ](../../../../../examples/container-app/simple-flask-api) 
+- ਮਾਈਕਰੋਸਰਵਿਸ ਆਰਕੀਟੈਕਚਰ ਦੀ ਮੁੱਢਲੀ ਸਮਝ
+- REST APIs ਅਤੇ HTTP ਨਾਲ ਆਸ਼ਕਤਾ
+- ਕੰਟੇਨਰ ਸੰਕਲਪਾਂ ਦੀ ਸਮਝ
 
-**New to Container Apps?** Start with the [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) first to learn the basics.
+**Container Apps ਵਿੱਚ ਨਵੇਂ ਹੋ?** ਬੁਨਿਆਦੀ ਗਿਆਨ ਲਈ ਪਹਿਲਾਂ [ਸਧਾਰਣ Flask API ਉਦਾਹਰਣ](../../../../../examples/container-app/simple-flask-api) ਦੇ ਨਾਲ ਸ਼ੁਰੂ ਕਰੋ।
 
-## Quick Start (Step-by-Step)
+## ਤੁਰੰਤ ਸ਼ੁਰੂ (ਕਦਮ-ਦਰ-ਕਦਮ)
 
-### Step 1: Clone and Navigate
+### ਕਦਮ 1: ਕਲੋਨ ਅਤੇ ਨੈਵੀਗੇਟ ਕਰੋ
 
 ```bash
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/container-app/microservices
 ```
 
-**✓ Success Check**: Verify you see `azure.yaml`:
+**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਜਾਂਚੋ ਕਿ ਤੁਸੀਂ `azure.yaml` ਵੇਖ ਰਹੇ ਹੋ:
 ```bash
 ls
-# ਉਮੀਦ: README.md, azure.yaml, infra/, src/
+# ਉਮੀਦ ਕੀਤੀ ਗਈ: README.md, azure.yaml, infra/, src/
 ```
 
-### Step 2: Authenticate with Azure
+### ਕਦਮ 2: Azure ਨਾਲ ਪ੍ਰਮਾਣੀਕਰਨ ਕਰੋ
 
 ```bash
 azd auth login
 ```
 
-This opens your browser for Azure authentication. Sign in with your Azure credentials.
+ਇਸ ਨਾਲ ਤੁਹਾਡੇ ਬ੍ਰਾਉਜ਼ਰ ਵਿੱਚ Azure ਪ੍ਰਮਾਣੀਕਰਨ ਖੁੱਲੇਗਾ। ਆਪਣੇ Azure ਪ੍ਰਮਾਣ ਪੱਤਰਾਂ ਨਾਲ ਸਾਈਨ ਇਨ ਕਰੋ।
 
-**✓ Success Check**: You should see:
+**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਤੁਹਾਨੂੰ ਇਹ ਦੇਖਣਾ ਚਾਹੀਦਾ ਹੈ:
 ```
 Logged in to Azure.
 ```
 
-### Step 3: Initialize the Environment
+### ਕਦਮ 3: ਵਾਤਾਵਰਨ ਸ਼ੁਰੂ ਕਰੋ
 
 ```bash
 azd init
 ```
 
-**Prompts you'll see**:
-- **Environment name**: Enter a short name (e.g., `microservices-dev`)
-- **Azure subscription**: Select your subscription
-- **Azure location**: Choose a region (e.g., `eastus`, `westeurope`)
+**ਤੁਹਾਨੂੰ ਜੋ ਪ੍ਰੌਮਪਟ ਦਿੱਸਣਗੇ**:
+- **Environment name**: ਇੱਕ ਛੋਟਾ ਨਾਮ ਦਰਜ ਕਰੋ (ਉదਾਹਰਨ: `microservices-dev`)
+- **Azure subscription**: ਆਪਣਾ subscription ਚੁਣੋ
+- **Azure location**: ਇੱਕ ਖੇਤਰ ਚੁਣੋ (ਉਦਾਹਰਨ: `eastus`, `westeurope`)
 
-**✓ Success Check**: You should see:
+**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਤੁਹਾਨੂੰ ਇਹ ਦੇਖਣਾ ਚਾਹੀਦਾ ਹੈ:
 ```
 SUCCESS: New project initialized!
 ```
 
-### Step 4: Deploy Infrastructure and Services
+### ਕਦਮ 4: ਇੰਫ੍ਰਾਸਟ੍ਰੱਕਚਰ ਅਤੇ ਸਰਵਿਸਾਂ ਡਿਪਲੋਯ ਕਰੋ
 
 ```bash
 azd up
 ```
 
-**What happens** (takes 8-12 minutes):
-1. Creates Container Apps environment
-2. Creates Application Insights for monitoring
-3. Builds API Gateway container (Node.js)
-4. Builds Product Service container (Python)
-5. Deploys both containers to Azure
-6. Configures networking and health checks
-7. Sets up monitoring and logging
+**ਕੀ ਹੁੰਦਾ ਹੈ** (8-12 ਮਿੰਟ ਲੱਗਦੇ ਹਨ):
+1. Container Apps ਵਾਤਾਵਰਨ ਬਣਾਇਆ ਜਾਂਦਾ ਹੈ
+2. ਮਾਨੀਟਰਿੰਗ ਲਈ Application Insights ਬਣਾਇਆ ਜਾਂਦਾ ਹੈ
+3. API Gateway ਕੰਟੇਨਰ (Node.js) ਬਣਾਇਆ ਜਾਂਦਾ ਹੈ
+4. Product Service ਕੰਟੇਨਰ (Python) ਬਣਾਇਆ ਜਾਂਦਾ ਹੈ
+5. ਦੋਹਾਂ ਕੰਟੇਨਰਾਂ ਨੂੰ Azure 'ਤੇ ਡਿਪਲੋਯ ਕੀਤਾ ਜਾਂਦਾ ਹੈ
+6. ਨੈਟਵਰਕਿੰਗ ਅਤੇ ਹੈਲਥ ਚੈਕਸ ਕਨਫਿਗਰ ਕੀਤੇ ਜਾਂਦੇ ਹਨ
+7. ਮਾਨੀਟਰਿੰਗ ਅਤੇ ਲੌਗਿੰਗ ਸੈਟਅਪ ਕੀਤੀ ਜਾਂਦੀ ਹੈ
 
-**✓ Success Check**: You should see:
+**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਤੁਹਾਨੂੰ ਇਹ ਦੇਖਣਾ ਚਾਹੀਦਾ ਹੈ:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
 ```
 
-**⏱️ Time**: 8-12 minutes
+**⏱️ ਸਮਾਂ**: 8-12 ਮਿੰਟ
 
-### Step 5: Test the Deployment
+### ਕਦਮ 5: ਡਿਪਲੋਯਮੈਂਟ ਦੀ ਜਾਂਚ ਕਰੋ
 
 ```bash
 # ਗੇਟਵੇ ਐਂਡਪੌਇੰਟ ਪ੍ਰਾਪਤ ਕਰੋ
@@ -206,16 +179,16 @@ GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d
 # API ਗੇਟਵੇ ਦੀ ਸਿਹਤ ਦੀ ਜਾਂਚ ਕਰੋ
 curl $GATEWAY_URL/health
 
-# ਉਮੀਦਿਤ ਆਉਟਪੁੱਟ:
-# {"status":"ਸਿਹਤਮੰਦ","service":"api-ਗੇਟਵੇ","timestamp":"2025-11-19T10:30:00Z"}
+# ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁੱਟ:
+# {"status":"healthy","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
 ```
 
-**Test product service through gateway**:
+**ਗੇਟਵੇ ਤੋਂ ਪ੍ਰੋਡਕਟ ਸਰਵਿਸ ਦੀ ਜਾਂਚ ਕਰੋ**:
 ```bash
 # ਉਤਪਾਦਾਂ ਦੀ ਸੂਚੀ
 curl $GATEWAY_URL/api/products
 
-# ਉਮੀਦ ਕੀਤੀ ਨਤੀਜਾ:
+# ਉਮੀਦ ਕੀਤਾ ਨਤੀਜਾ:
 # [
 #   {"id":1,"name":"Laptop","price":999.99,"stock":50},
 #   {"id":2,"name":"Mouse","price":29.99,"stock":200},
@@ -223,15 +196,15 @@ curl $GATEWAY_URL/api/products
 # ]
 ```
 
-**✓ Success Check**: Both endpoints return JSON data without errors.
+**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਦੋਹਾਂ ਐਂਡਪોઈਂਟ JSON ਡੇਟਾ ਬਿਨਾਂ ਤਰੁਟੀਆਂ ਦੇ ਵਾਪਸ ਕਰਦੇ ਹਨ।
 
 ---
 
-**🎉 Congratulations!** You've deployed a microservices architecture to Azure!
+**🎉 ਵਧਾਈਆਂ!** ਤੁਸੀਂ Azure 'ਤੇ ਮਾਈਕਰੋਸਰਵਿਸ ਆਰਕੀਟੈਕਚਰ ਡਿਪਲੋਏ ਕਰ ਦਿੱਤਾ ਹੈ!
 
-## Project Structure
+## ਪ੍ਰੋਜੈਕਟ ਸਟਰਕਚਰ
 
-All implementation files are included—this is a complete, working example:
+ਸਾਰੇ ਇੰਪਲੀਮੇਂਟੇਸ਼ਨ ਫਾਈਲਾਂ ਸ਼ਾਮਿਲ ਹਨ—ਇਹ ਇੱਕ ਪੂਰਾ, ਕਾਰਗਰ ਉਦਾਹਰਣ ਹੈ:
 
 ```
 microservices/
@@ -261,46 +234,46 @@ microservices/
         └── Dockerfile               # Container definition
 ```
 
-**What Each Component Does:**
+**ਹਰੇਕ ਕੰਪੋਨੈਂਟ ਕੀ ਕਰਦਾ ਹੈ:**
 
-**Infrastructure (infra/)**:
-- `main.bicep`: Orchestrates all Azure resources and their dependencies
-- `core/container-apps-environment.bicep`: Creates the Container Apps environment and Azure Container Registry
-- `core/monitor.bicep`: Sets up Application Insights for distributed logging
-- `app/*.bicep`: Individual container app definitions with scaling and health checks
+**ਇੰਫਰਾਸਟ੍ਰਕਚਰ (infra/)**:
+- `main.bicep`: ਸਾਰੇ Azure resources ਅਤੇ ਉਨ੍ਹਾਂ ਦੀਆਂ ਨਿਰਭਰਤਾਵਾਂ ਨੂੰ ਆਰਕੀਸਟ੍ਰੇਟ ਕਰਦਾ ਹੈ
+- `core/container-apps-environment.bicep`: Container Apps ਵਾਤਾਵਰਨ ਅਤੇ Azure Container Registry ਬਣਾਉਂਦਾ ਹੈ
+- `core/monitor.bicep`: ਵਿੱਤਰਿਤ ਲੌਗਿੰਗ ਲਈ Application Insights ਸੈਟ ਕਰਦਾ ਹੈ
+- `app/*.bicep`: ਸਕੇਲਿੰਗ ਅਤੇ ਹੈਲਥ ਚੈਕਸ ਨਾਲ ਵਿਅਕਤੀਗਤ ਕੰਟੇਨਰ ਐਪ ਪਰਿਭਾਸ਼ਾਵਾਂ
 
 **API Gateway (src/api-gateway/)**:
-- Public-facing service that routes requests to backend services
-- Implements logging, error handling, and request forwarding
-- Demonstrates service-to-service HTTP communication
+- ਪਬਲਿਕ-ਫੇਸਿੰਗ ਸਰਵਿਸ ਜੋ ਬੈਕਐਂਡ ਸਰਵਿਸਾਂ ਵੱਲ ਰਿਕਵੈਸਟ ਰੂਟ ਕਰਦਾ ਹੈ
+- ਲੌਗਿੰਗ, ਐਰਰ ਹੈਂਡਲਿੰਗ, ਅਤੇ ਰਿਕਵੈਸਟ ਫਾਰਵਰਡਿੰਗ ਲਾਗੂ ਕਰਦਾ ਹੈ
+- ਸਰਵਿਸ-ਟੂ-ਸਰਵਿਸ HTTP ਸੰਚਾਰ ਦਾ ਦਰਸਾਉਂਦਾ ਹੈ
 
 **Product Service (src/product-service/)**:
-- Internal service with product catalog (in-memory for simplicity)
-- REST API with health checks
-- Example of backend microservice pattern
+- ਅੰਦਰੂਨੀ ਸਰਵਿਸ ਜਿਸ ਵਿੱਚ ਪ੍ਰੋਡਕਟ ਕੈਟਾਲੌਗ ਹੈ (ਸਧਾਰਨਤਾ ਲਈ ਇਨ-ਮੈਮੋਰੀ)
+- REST API ਅਤੇ ਹੈਲਥ ਚੈਕਸ
+- ਬੈਕਐਂਡ ਮਾਈਕਰੋਸਰਵਿਸ ਪੈਟਰਨ ਦਾ ਉਦਾਹਰਣ
 
-## Services Overview
+## ਸਰਵਿਸਾਂ ਦਾ ਝਲਕ
 
 ### API Gateway (Node.js/Express)
 
-**Port**: 8080  
-**Access**: Public (external ingress)  
-**Purpose**: Routes incoming requests to appropriate backend services  
+**ਪੋਰਟ**: 8080  
+**ਪਹੁੰਚ**: ਪਬਲਿਕ (ਬਾਹਰੀ ਇਨਗ੍ਰੈੱਸ)  
+**ਮਕਸਦ**: ਆਉਣ ਵਾਲੀਆਂ ਰਿਕਵੈਸਟਾਂ ਨੂੰ ਸਹੀ ਬੈਕਐਂਡ ਸਰਵਿਸਾਂ ਨੂੰ ਰੂਟ ਕਰਨਾ  
 
-**Endpoints**:
-- `GET /` - Service information
-- `GET /health` - Health check endpoint
-- `GET /api/products` - Forward to product service (list all)
-- `GET /api/products/:id` - Forward to product service (get by ID)
+**ਐਂਡਪੌਇੰਟਸ**:
+- `GET /` - ਸਰਵਿਸ ਜਾਣਕਾਰੀ
+- `GET /health` - ਹੈਲਥ ਚੈਕ ਐਂਡਪੌਇੰਟ
+- `GET /api/products` - ਪ੍ਰੋਡਕਟ ਸਰਵਿਸ ਵੱਲ ਫਾਰਵਰਡ (ਸਭ ਲਿਸਟ)
+- `GET /api/products/:id` - ਪ੍ਰੋਡਕਟ ਸਰਵਿਸ ਵੱਲ ਫਾਰਵਰਡ (ID ਦੇ ਆਧਾਰ 'ਤੇ ਲਿਆਉਣਾ)
 
-**Key Features**:
-- Request routing with axios
-- Centralized logging
-- Error handling and timeout management
-- Service discovery via environment variables
-- Application Insights integration
+**ਮੁੱਖ ਫੀਚਰ**:
+- axios ਨਾਲ ਰਿਕਵੈਸਟ ਰੂਟਿੰਗ
+- ਕੇਂਦਰੀਕ੍ਰਿਤ ਲੌਗਿੰਗ
+- ਐਰਰ ਹੈਂਡਲਿੰਗ ਅਤੇ ਟਾਈਮਆਉਟ ਪ੍ਰਬੰਧਨ
+- ਵਾਤਾਵਰਨ ਵਾਰੀਏਬਲਾਂ ਰਾਹੀਂ ਸਰਵਿਸ ਡਿਸਕਵਰੀ
+- Application Insights ਇੰਟੀਗ੍ਰੇਸ਼ਨ
 
-**Code Highlight** (`src/api-gateway/app.js`):
+**ਕੋਡ હਾਈਲਾਈਟ** (`src/api-gateway/app.js`):
 ```javascript
 // ਅੰਦਰੂਨੀ ਸੇਵਾ ਸੰਚਾਰ
 app.get('/api/products', async (req, res) => {
@@ -311,24 +284,24 @@ app.get('/api/products', async (req, res) => {
 
 ### Product Service (Python/Flask)
 
-**Port**: 8000  
-**Access**: Internal only (no external ingress)  
-**Purpose**: Manages product catalog with in-memory data  
+**ਪੋਰਟ**: 8000  
+**ਪਹੁੰਚ**: ਸਿਰਫ ਅੰਦਰੂਨੀ (ਕੋਈ ਬਾਹਰੀ ਇਨਗ੍ਰੈੱਸ ਨਹੀਂ)  
+**ਮਕਸਦ**: ਇਨ-ਮੈਮੋਰੀ ਡੇਟਾ ਨਾਲ ਪ੍ਰੋਡਕਟ ਕੈਟਾਲੋਗ ਦਾ ਪ੍ਰਬੰਧਨ  
 
-**Endpoints**:
-- `GET /` - Service information
-- `GET /health` - Health check endpoint
-- `GET /products` - List all products
-- `GET /products/<id>` - Get product by ID
+**ਐਂਡਪੌਇੰਟਸ**:
+- `GET /` - ਸਰਵਿਸ ਜਾਣਕਾਰੀ
+- `GET /health` - ਹੈਲਥ ਚੈਕ ਐਂਡਪੌਇੰਟ
+- `GET /products` - ਸਾਰੇ ਪ੍ਰੋਡਕਟ ਲਿਸਟ
+- `GET /products/<id>` - ID ਦੇ ਆਧਾਰ 'ਤੇ ਪ੍ਰੋਡਕਟ ਲਿਆਓ
 
-**Key Features**:
-- RESTful API with Flask
-- In-memory product store (simple, no database needed)
-- Health monitoring with probes
-- Structured logging
-- Application Insights integration
+**ਮੁੱਖ ਫੀਚਰ**:
+- Flask ਨਾਲ RESTful API
+- ਇਨ-ਮੈਮੋਰੀ ਪ੍ਰੋਡਕਟ ਸਟੋਰ (ਸਧਾਰਨ, ਕੋਈ ਡੇਟਾਬੇਸ ਲੋੜ ਨਹੀਂ)
+- ਪ੍ਰੋਬਸ ਨਾਲ ਹੈਲਥ ਮਾਨੀਟਰਿੰਗ
+- ਸੰਰਚਿਤ ਲੌਗਿੰਗ
+- Application Insights ਇੰਟੀਗ੍ਰੇਸ਼ਨ
 
-**Data Model**:
+**ਡਾਟਾ ਮਾਡਲ**:
 ```python
 {
   "id": 1,
@@ -339,17 +312,17 @@ app.get('/api/products', async (req, res) => {
 }
 ```
 
-**Why Internal Only?**
-The product service is not exposed publicly. All requests must go through the API Gateway, which provides:
-- Security: Controlled access point
-- Flexibility: Can change backend without affecting clients
-- Monitoring: Centralized request logging
+**ਅੰਦਰੂਨੀ ਹੀ ਕਿਉਂ?**
+ਪ੍ਰੋਡਕਟ ਸਰਵਿਸ ਨੂੰ ਪਬਲਿਕ ਤੌਰ 'ਤੇ ਦਰਸਾਇਆ ਨਹੀਂ ਗਿਆ। ਸਾਰੇ ਰਿਕਵੈਸਟ API ਗੇਟਵੇ ਰਾਹੀਂ ਜਾਣੇ ਚਾਹੀਦੇ ਹਨ, ਜੋ ਇਹ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ:
+- ਸੁਰੱਖਿਆ: ਨਿਯੰਤਰਿਤ ਪਹੁੰਚ ਬਿੰਦੂ
+- ਲਚੀਲਾਪਣ: ਬੈਕਐਂਡ ਬਦਲਣ 'ਤੇ ਕਲਾਇੰਟ ਪ੍ਰਭਾਵਿਤ ਨਹੀਂ ਹੁੰਦੇ
+- ਮਾਨੀਟਰਿੰਗ: ਕੇਂਦਰੀਕ੍ਰਿਤ ਰਿਕਵੈਸਟ ਲੌਗਿੰਗ
 
-## Understanding Service Communication
+## ਸਰਵਿਸ ਸੰਚਾਰ ਨੂੰ ਸਮਝਣਾ
 
-### How Services Talk to Each Other
+### ਸਰਵਿਸਾਂ ਇੱਕ ਦੂਜੇ ਨਾਲ ਕਿਵੇਂ ਗੱਲ ਕਰਦੀਆਂ ਹਨ
 
-In this example, the API Gateway communicates with the Product Service using **internal HTTP calls**:
+ਇਸ ਉਦਾਹਰਣ ਵਿੱਚ, API Gateway ਪ੍ਰੋਡਕਟ ਸਰਵਿਸ ਨਾਲ **ਅੰਦਰੂਨੀ HTTP ਕਾਲਾਂ** ਰਾਹੀਂ ਸੰਚਾਰ ਕਰਦਾ ਹੈ:
 
 ```javascript
 // API ਗੇਟਵੇ (src/api-gateway/app.js)
@@ -359,79 +332,79 @@ const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
 const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 ```
 
-**Key Points**:
+**ਮੁੱਖ ਬਿੰਦੂ**:
 
-1. **DNS-Based Discovery**: Container Apps automatically provides DNS for internal services
+1. **DNS-ਅਧਾਰਿਤ ਡਿਸਕਵਰੀ**: Container Apps ਆਟੋਮੈਟਿਕ ਤੌਰ 'ਤੇ ਅੰਦਰੂਨੀ ਸਰਵਿਸਾਂ ਲਈ DNS ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ
    - Product Service FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
-   - Simplified as: `http://product-service` (Container Apps resolves it)
+   - ਸਧਾਰਨ ਰੂਪ ਵਿੱਚ: `http://product-service` (Container Apps ਇਸਨੂੰ resolve ਕਰਦਾ ਹੈ)
 
-2. **No Public Exposure**: Product Service has `external: false` in Bicep
-   - Only accessible within the Container Apps environment
-   - Cannot be reached from the internet
+2. **ਕੋਈ ਪਬਲਿਕ ਐਕਸਪੋਜ਼ਰ ਨਹੀਂ**: Bicep ਵਿਚ Product Service ਵਿੱਚ `external: false` ਹੈ
+   - ਸਿਰਫ Container Apps ਵਾਤਾਵਰਨ ਅੰਦਰ ਪਹੁੰਚਯੋਗ
+   - ਇੰਟਰਨੈਟ ਤੋਂ ਪਹੁੰਚ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ
 
-3. **Environment Variables**: Service URLs are injected at deployment time
-   - Bicep passes the internal FQDN to the gateway
-   - No hardcoded URLs in application code
+3. **ਵਾਤਾਵਰਨ ਵਾਰੀਏਬਲ**: ਸਰਵਿਸ URLs ਡਿਪਲੋਯਮੈਂਟ ਸਮੇਂ ਇੰਜੈਕਟ ਕੀਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ
+   - Bicep ਗੇਟਵੇ ਨੂੰ ਅੰਦਰੂਨੀ FQDN ਪਾਸ ਕਰਦਾ ਹੈ
+   - ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ ਵਿੱਚ ਕੋਈ ਹਾਰਡਕੋਡ ਕੀਤਾ URL ਨਹੀਂ
 
-**Analogy**: Think of this like office rooms. The API Gateway is the reception desk (public-facing), and the Product Service is an office room (internal only). Visitors must go through reception to reach any office.
+**ਉਪਮਾ**: ਇਸਨੂੰ ਦਫ਼ਤਰ ਦੇ ਕਮਰਿਆਂ ਵਾਂਗ ਸੋਚੋ। API Gateway ਰਿਸੈਪਸ਼ਨ ਡੈੱਸਕ ਹੈ (ਪਬਲਿਕ-ਫੇਸਿੰਗ), ਅਤੇ Product Service ਇੱਕ ਦਫ਼ਤਰ ਕਮਰਾ ਹੈ (ਸਿਰਫ ਅੰਦਰੂਨੀ)। ਮੁਹਤਾਜ਼ ਨੂੰ ਕਿਸੇ ਵੀ ਦਫ਼ਤਰ ਤੱਕ ਪਹੁੰਚਣ ਲਈ ਰਿਸੈਪਸ਼ਨ ਰਾਹੀਂ ਜਾਣਾ ਪੈਂਦਾ ਹੈ।
 
-## Deployment Options
+## ਡਿਪਲੋਯਮੈਂਟ ਵਿਕਲਪ
 
-### Full Deployment (Recommended)
+### ਪੂਰਾ ਡਿਪਲੋਯਮੈਂਟ (ਸਿਫਾਰਸ਼ੀ)
 
 ```bash
-# ਬੁਨਿਆਦੀ ਢਾਂਚਾ ਅਤੇ ਦੋਵਾਂ ਸੇਵਾਵਾਂ ਨੂੰ ਤੈਨਾਤ ਕਰੋ
+# ਢਾਂਚਾ ਅਤੇ ਦੋਹਾਂ ਸੇਵਾਵਾਂ ਨੂੰ ਸਥਾਪਿਤ ਕਰੋ
 azd up
 ```
 
-This deploys:
-1. Container Apps environment
+ਇਹ ਡਿਪਲੋਯ ਕਰਦਾ ਹੈ:
+1. Container Apps ਵਾਤਾਵਰਨ
 2. Application Insights
 3. Container Registry
-4. API Gateway container
-5. Product Service container
+4. API Gateway ਕੰਟੇਨਰ
+5. Product Service ਕੰਟੇਨਰ
 
-**Time**: 8-12 minutes
+**ਸਮਾਂ**: 8-12 ਮਿੰਟ
 
-### Deploy Individual Service
+### ਵਿਅਕਤੀਗਤ ਸਰਵਿਸ ਡਿਪਲੋਯ ਕਰੋ
 
 ```bash
-# ਕੇਵਲ ਇੱਕ ਸੇਵਾ ਤੈਨਾਤ ਕਰੋ (ਸ਼ੁਰੂਆਤੀ azd up ਤੋਂ ਬਾਅਦ)
+# ਕੇਵਲ ਇੱਕ ਸੇਵਾ ਤੈਨਾਤ ਕਰੋ (ਪਹਿਲੀ azd up ਤੋਂ ਬਾਅਦ)
 azd deploy api-gateway
 
-# ਜਾਂ ਪ੍ਰੋਡਕਟ ਸੇਵਾ ਤੈਨਾਤ ਕਰੋ
+# ਜਾਂ ਉਤਪਾਦ ਸੇਵਾ ਤੈਨਾਤ ਕਰੋ
 azd deploy product-service
 ```
 
-**Use Case**: When you've updated code in one service and want to redeploy only that service.
+**ਵਰਤੋਂ ਦਾ ਕੇਸ**: ਜਦੋਂ ਤੁਸੀਂ ਇੱਕ ਸਰਵਿਸ ਵਿੱਚ ਕੋਡ ਅੱਪਡੇਟ ਕੀਤਾ ਹੈ ਅਤੇ ਸਿਰਫ ਉਸੇ ਸਰਵਿਸ ਨੂੰ ਦੁਬਾਰਾ ਡਿਪਲੋਯ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ।
 
-### Update Configuration
+### ਕੁਨਫਿਗਰੇਸ਼ਨ ਅਪਡੇਟ ਕਰੋ
 
 ```bash
-# ਸਕੇਲਿੰਗ ਪੈਰਾਮੀਟਰਾਂ ਨੂੰ ਬਦਲੋ
+# ਸਕੇਲਿੰਗ ਪੈਰਾਮੀਟਰਾਂ ਬਦਲੋ
 azd env set GATEWAY_MAX_REPLICAS 30
 
 # ਨਵੀਂ ਸੰਰਚਨਾ ਨਾਲ ਮੁੜ ਤੈਨਾਤ ਕਰੋ
 azd up
 ```
 
-## Configuration
+## ਕੁਨਫਿਗਰੇਸ਼ਨ
 
-### Scaling Configuration
+### ਸਕੇਲਿੰਗ ਸੰਰਚਨਾ
 
-Both services are configured with HTTP-based autoscaling in their Bicep files:
+ਦੋਹਾਂ ਸਰਵਿਸਾਂ ਨੂੰ ਉਨ੍ਹਾਂ ਦੀਆਂ Bicep ਫਾਈਲਾਂ ਵਿੱਚ HTTP-ਅਧਾਰਿਤ ਆਟੋ-ਸਕੇਲਿੰਗ ਨਾਲ ਸੰਰਚਿਤ ਕੀਤਾ ਗਿਆ ਹੈ:
 
 **API Gateway**:
-- Min replicas: 2 (always at least 2 for availability)
-- Max replicas: 20
-- Scale trigger: 50 concurrent requests per replica
+- ਘੱਟੋ-ਘੱਟ ਰਿਪਲਿਕਾਸ: 2 (ਉਪਲਬਧਤਾ ਲਈ ਹਮੇਸ਼ਾ ਘੱਟੋ-ਘੱਟ 2)
+- ਵੱਧ ਤੱਕ ਰਿਪਲਿਕਾਸ: 20
+- ਸਕੇਲ ਟ੍ਰਿਗਰ: ਪ੍ਰਤੀ ਰਿਪਲਿਕਾ 50 ਸਮਕਾਲੀ ਰਿਕਵੈਸਟ
 
 **Product Service**:
-- Min replicas: 1 (can scale to zero if needed)
-- Max replicas: 10
-- Scale trigger: 100 concurrent requests per replica
+- ਘੱਟੋ-ਘੱਟ ਰਿਪਲਿਕਾਸ: 1 (ਲੋੜ ਪੈਣ 'ਤੇ zero ਤੱਕ ਸਕੇਲ ਕਰਨ ਦੇ ਯੋਗ)
+- ਵੱਧ ਤੱਕ ਰਿਪਲਿਕਾਸ: 10
+- ਸਕੇਲ ਟ੍ਰਿਗਰ: ਪ੍ਰਤੀ ਰਿਪਲਿਕਾ 100 ਸਮਕਾਲੀ ਰਿਕਵੈਸਟ
 
-**Customize Scaling** (in `infra/app/*.bicep`):
+**ਸਕੇਲਿੰਗ ਨੂੰ ਕਸਟਮਾਈਜ ਕਰੋ** (in `infra/app/*.bicep`):
 ```bicep
 scale: {
   minReplicas: 1
@@ -449,21 +422,21 @@ scale: {
 }
 ```
 
-### Resource Allocation
+### ਰਿਸੋਰਸ ਵੰਡ
 
 **API Gateway**:
 - CPU: 1.0 vCPU
-- Memory: 2 GiB
-- Reason: Handles all external traffic
+- ਮੈਮੋਰੀ: 2 GiB
+- ਕਾਰਨ: ਸਾਰੇ ਬਾਹਰੀ ਟ੍ਰੈਫਿਕ ਨੂੰ ਹੈਂਡਲ ਕਰਦਾ ਹੈ
 
 **Product Service**:
 - CPU: 0.5 vCPU
-- Memory: 1 GiB
-- Reason: Lightweight in-memory operations
+- ਮੈਮੋਰੀ: 1 GiB
+- ਕਾਰਨ: ਹਲਕੀ-ਫੁਲਕੀ ਇਨ-ਮੈਮੋਰੀ ਆਪਰੇਸ਼ਨ
 
-### Health Checks
+### ਹੈਲਥ ਚੈਕਸ
 
-Both services include liveness and readiness probes:
+ਦੋਹਾਂ ਸਰਵਿਸਾਂ ਵਿੱਚ ਲਾਈਵਨੇਸ ਅਤੇ ਰੈਡੀਨੇਸ ਪ੍ਰੋਬਸ ਸ਼ਾਮਿਲ ਹਨ:
 
 ```bicep
 probes: [
@@ -488,29 +461,29 @@ probes: [
 ]
 ```
 
-**What This Means**:
-- **Liveness**: If health check fails, Container Apps restarts the container
-- **Readiness**: If not ready, Container Apps stops routing traffic to that replica
+**ਇਸਦਾ ਕੀ ਮਤਲਬ ਹੈ**:
+- **Liveness**: ਜੇ ਹੈਲਥ ਚੈੱਕ ਫੇਲ ਹੋ ਜਾਂਦਾ ਹੈ, Container Apps ਕੰਟੇਨਰ ਨੂੰ ਰੀਸਟਾਰਟ ਕਰਦਾ ਹੈ
+- **Readiness**: ਜੇ ਤਿਆਰ ਨਹੀਂ ਹੈ, Container Apps ਉਸ ਰਿਪਲਿਕਾ ਵਾਲੀ ਟ੍ਰੈਫਿਕ ਨੂੰ ਰੂਟਿੰਗ ਤੋਂ ਰੋਕਦਾ ਹੈ
 
 
 
-## Monitoring & Observability
+## ਮਾਨੀਟਰਿੰਗ ਅਤੇ ਦ੍ਰਿਸ਼ਯਤਾ
 
-### View Service Logs
+### ਸਰਵਿਸ ਲੌਗ ਵੇਖੋ
 
 ```bash
 # azd monitor ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਲੌਗ ਵੇਖੋ
 azd monitor --logs
 
-# ਜਾਂ ਖਾਸ Container Apps ਲਈ Azure CLI ਵਰਤੋਂ:
+# ਜਾਂ ਨਿਰਦਿਸ਼ਟ ਕੰਟੇਨਰ ਐਪਸ ਲਈ Azure CLI ਦੀ ਵਰਤੋਂ ਕਰੋ:
 # API Gateway ਤੋਂ ਲੌਗ ਸਟ੍ਰੀਮ ਕਰੋ
 az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 
-# ਹਾਲੀਆ ਉਤਪਾਦ ਸੇਵਾ ਦੇ ਲੌਗ ਵੇਖੋ
+# ਤਾਜ਼ਾ ਉਤਪਾਦ ਸੇਵਾ ਦੇ ਲੌਗ ਵੇਖੋ
 az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
 
-**Expected Output**:
+**ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁੱਟ**:
 ```
 [api-gateway] API Gateway listening on port 8080
 [api-gateway] Product Service URL: http://product-service
@@ -518,11 +491,11 @@ az containerapp logs show --name product-service --resource-group $RG_NAME --tai
 [product-service] Retrieved 5 products
 ```
 
-### Application Insights Queries
+### Application Insights ਕਵੈਰੀਜ਼
 
-Access Application Insights in Azure Portal, then run these queries:
+Azure ਪੋਰਟਲ ਵਿੱਚ Application Insights ਨੂੰ ਐਕਸੈਸ ਕਰੋ, ਫਿਰ ਇਹਨੂੰ ਚਲਾਓ:
 
-**Find Slow Requests**:
+**ਢੀਲੀਆ ਰਿਕਵੈਸਟ ਲੱਭੋ**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -531,7 +504,7 @@ requests
 | order by count_ desc
 ```
 
-**Track Service-to-Service Calls**:
+**ਸਰਵਿਸ-ਟੂ-ਸਰਵਿਸ ਕਾਲਜ਼ ਨੂੰ ਟਰੈਕ ਕਰੋ**:
 ```kusto
 dependencies
 | where timestamp > ago(1h)
@@ -540,7 +513,7 @@ dependencies
 | order by timestamp desc
 ```
 
-**Error Rate by Service**:
+**ਸਰਵਿਸ ਮੁਤਾਬਕ ਤਰੁੱਟੀ ਦਰ**:
 ```kusto
 exceptions
 | where timestamp > ago(24h)
@@ -548,7 +521,7 @@ exceptions
 | order by errorCount desc
 ```
 
-**Request Volume Over Time**:
+**ਸਮੇਂ ਦੇ ਨਾਲ ਰਿਕਵੈਸਟ ਖਪਤ**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -556,7 +529,7 @@ requests
 | render timechart
 ```
 
-### Access Monitoring Dashboard
+### ਮਾਨੀਟਰਿੰਗ ਡੈਸ਼ਬੋਰਡ ਐਕਸੈਸ ਕਰੋ
 
 ```bash
 # Application Insights ਦੇ ਵੇਰਵੇ ਪ੍ਰਾਪਤ ਕਰੋ
@@ -569,20 +542,20 @@ az monitor app-insights component show \
   --query "appId" -o tsv
 ```
 
-### Live Metrics
+### ਲਾਈਵ ਮੈਟ੍ਰਿਕਸ
 
-1. Navigate to Application Insights in Azure Portal
-2. Click "Live Metrics"
-3. See real-time requests, failures, and performance
-4. Test by running: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
+1. Azure ਪੋਰਟਲ ਵਿੱਚ Application Insights ਤੇ ਜਾਓ
+2. "Live Metrics" 'ਤੇ ਕਲਿਕ ਕਰੋ
+3. ਰੀਅਲ-ਟਾਈਮ ਰਿਕਵੈਸਟ, ਫੇਲਿਆਵਾਂ, ਅਤੇ ਪ੍ਰਦਰਸ਼ਨ ਵੇਖੋ
+4. ਇਹ ਚਲਾ ਕੇ ਟੈਸਟ ਕਰੋ: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
 
-## Practical Exercises
+## ਪ੍ਰਾਇਕਟਿਕਲ ਅਭਿਆਸ
 
-[Note: See full exercises above in the "Practical Exercises" section for detailed step-by-step exercises including deployment verification, data modification, autoscaling tests, error handling, and adding a third service.]
+[ਨੋਟ: ਵਿਸਥਾਰਪੂਰਵਕ ਕਦਮ-ਦਰ-ਕਦਮ ਅਭਿਆਸਾਂ ਲਈ "Practical Exercises" ਸੈਕਸ਼ਨ ਵਿੱਚ ਉਪਰ ਦਿੱਤੇ ਪੂਰੇ ਅਭਿਆਸਾਂ ਨੂੰ ਦੇਖੋ, ਜਿਨ੍ਹਾਂ ਵਿੱਚ ਡਿਪਲੋਯਮੈਂਟ ਵੈਰੀਫਿਕੇਸ਼ਨ, ਡੇਟਾ ਸੋਧ, ਆਟੋਸਕੇਲਿੰਗ ਟੈਸਟ, ਐਰਰ ਹੈਂਡਲਿੰਗ ਅਤੇ ਤੀਜੀ ਸਰਵਿਸ ਸ਼ਾਮਿਲ ਕਰਨ ਦੇ ਨਿਰਦੇਸ਼ ਹਨ।]
 
-## Cost Analysis
+## ਲਾਗਤ ਵਿਸ਼ਲੇਸ਼ਣ
 
-### Estimated Monthly Costs (For This 2-Service Example)
+### ਇਸ 2-ਸਰਵਿਸ ਉਦਾਹਰਣ ਲਈ ਅੰਦਾਜ਼ਿਤ ਮਹੀਨਾਵਾਰ ਲਾਗਤ
 
 | Resource | Configuration | Estimated Cost |
 |----------|--------------|----------------|
@@ -593,14 +566,14 @@ az monitor app-insights component show \
 | Log Analytics | 1 GB/month | $3 |
 | **Total** | | **$58-243/month** |
 
-**Cost Breakdown by Usage**:
-- **Light traffic** (testing/learning): ~$60/month
-- **Moderate traffic** (small production): ~$120/month
-- **High traffic** (busy periods): ~$240/month
+**ਵਰਤੋਂ ਅਨੁਸਾਰ ਲਾਗਤ ਵਿਭਾਜਨ**:
+- **ਘੱਟ ਟ੍ਰੈਫਿਕ** (ਟੈਸਟਿੰਗ/ਸਿੱਖਣ): ~$60/ਮਹੀਨਾ
+- **ਮਧਯਮ ਟ੍ਰੈਫਿਕ** (ਛੋਟੀ ਪ੍ਰੋਡਕਸ਼ਨ): ~$120/ਮਹੀਨਾ
+- **ਉੱਚ ਟ੍ਰੈਫਿਕ** (ਬਹੁਤ ਰੁਝਾਨ ਵਾਲੇ ਸਮੇਂ): ~$240/ਮਹੀਨਾ
 
-### Cost Optimization Tips
+### ਲਾਗਤ ਕਮੀ ਕਰਨ ਦੇ ਸੁਝਾਅ
 
-1. **Scale to Zero for Development**:
+1. **ਡਿਵੈਲਪਮੈਂਟ ਲਈ Zero ਤੱਕ ਸਕੇਲ ਕਰੋ**:
    ```bicep
    scale: {
      minReplicas: 0  // Save $30-40/month when not in use
@@ -608,69 +581,70 @@ az monitor app-insights component show \
    }
    ```
 
-2. **Use Consumption Plan for Cosmos DB** (when you add it):
-   - Pay only for what you use
-   - No minimum charge
+2. **Cosmos DB ਲਈ Consumption Plan ਵਰਤੋਂ** (ਜਦੋਂ ਤੁਸੀਂ ਇਸਨੂੰ ਸ਼ਾਮਿਲ ਕਰੋ):
+   - ਸਿਰਫ਼ ਉਹੀ ਭਰੇ ਜੋ ਤੁਸੀਂ ਵਰਤਦੇ ਹੋ
+   - ਕੋਈ ਘੱਟੋ-ਘੱਟ ਚਾਰਜ ਨਹੀਂ
 
-3. **Set Application Insights Sampling**:
+3. **Application Insights ਸੈਂਪਲਿੰਗ ਸੈੱਟ ਕਰੋ**:
    ```javascript
-   appInsights.defaultClient.config.samplingPercentage = 50; // ਬੇਨਤੀਆਂ ਵਿੱਚੋਂ 50% ਦਾ ਨਮੂਨਾ ਲਓ
+   appInsights.defaultClient.config.samplingPercentage = 50; // ਬੇਨਤੀਆਂ ਦਾ 50% ਨਮੂਨਾ ਲਵੋ
    ```
 
-4. **Clean Up When Not Needed**:
+4. **ਜਦੋਂ ਲੋੜ ਨਾ ਹੋਵੇ ਤਾਂ ਸਫਾਈ ਕਰੋ**:
    ```bash
    azd down
    ```
 
-### Free Tier Options
-For learning/testing, consider:
-- Azure ਦੇ ਮੁਫ਼ਤ ਕਰੈਡਿਟ ਦੀ ਵਰਤੋਂ ਕਰੋ (ਪਹਿਲੇ 30 ਦਿਨ)
-- ਨਿੱਕੀ ਤੋਂ ਨਿੱਕੀ ਨਕਲਾਂ ਰੱਖੋ
-- ਟੈਸਟਿੰਗ ਦੇ ਬਾਅਦ ਮਿਟਾ ਦਿਓ (ਕੋਈ جاري ਖਰਚੇ ਨਹੀਂ)
+### ਮੁਫ਼ਤ ਟੀਅਰ ਵਿਕਲਪ
+
+ਸਿੱਖਣ/ਟੈਸਟ ਕਰਨ ਲਈ, ਵਿਚਾਰ ਕਰੋ:
+- Azure ਮੁਫ਼ਤ ਕਰੈਡਿਟ ਵਰਤੋ (ਪਹਿਲੇ 30 ਦਿਨ)
+- ਰੀਪਲਿਕਾਸ ਘੱਟ ਤੋਂ ਘੱਟ ਰੱਖੋ
+- ਟੈਸਟਿੰਗ ਤੋਂ ਬਾਅਦ ਮਿਟਾਓ (ਕੋਈ ਚੱਲਦੇ ਚਾਰਜ ਨਹੀਂ)
 
 ---
 
 ## Cleanup
 
-ਜਾਰੀ ਰਹਿਣ ਵਾਲੇ ਖਰਚਿਆਂ ਤੋਂ ਬਚਣ ਲਈ, ਸਾਰੇ ਰਿਸੋਰਸ ਮਿਟਾ ਦਿਓ:
+ਚੱਲਦੇ ਚਾਰਜਾਂ ਤੋਂ ਬਚਣ ਲਈ, ਸਾਰੇ ਰਿਸੋਰਸ ਮਿਟਾ ਦਿਓ:
 
 ```bash
 azd down --force --purge
 ```
 
-**Confirmation Prompt**:
+**ਪੁਸ਼ਟੀ ਪ੍ਰਾਂਪਟ**:
 ```
 ? Total resources to delete: 6, are you sure you want to continue? (y/N)
 ```
 
-Type `y` to confirm.
+ਪੁਸ਼ਟੀ ਕਰਨ ਲਈ `y` ਟਾਈਪ ਕਰੋ।
 
-**What Gets Deleted**:
+**ਕੀ ਮਿਟਾਇਆ ਜਾਏਗਾ**:
 - Container Apps Environment
-- ਦੋਹਾਂ Container Apps (gateway & product service)
+- ਦੋਵਾਂ Container Apps (gateway & product service)
 - Container Registry
 - Application Insights
 - Log Analytics Workspace
 - Resource Group
 
-**✓ Verify Cleanup**:
+**✓ ਸਫਾਈ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ**:
 ```bash
 az group list --query "[?starts_with(name,'rg-microservices')]" --output table
 ```
 
-Should return empty.
+ਖਾਲੀ ਵਾਪਸ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।
 
 ---
 
 ## Expansion Guide: From 2 to 5+ Services
 
-ਜਦੋਂ ਤੁਸੀਂ ਇਸ 2-ਸੇਵਾ ਆਰਕੀਟੈਕਚਰ 'ਤੇ ਕਾਬੂ ਪਾ ਲਓਗੇ, ਤਾਂ ਇਹਨਾਂ ਤਰੀਕਿਆਂ ਨਾਲ ਵਿਸਥਾਰ ਕਰੋ:
+ਜਦੋਂ ਤੁਸੀਂ ਇਸ 2-ਸਰਵਿਸ ਆਰਕੀਟੈਕਚਰ 'ਤੇ ਨਿਪੁੰਨ ਹੋ ਜਾਓ, ਤਾਂ ਵਧਾਉਣ ਲਈ ਇੱਥੇ ਹੈ:
 
 ### Phase 1: Add Database Persistence (Next Step)
 
-**Add Cosmos DB for Product Service**:
+**Product Service ਲਈ Cosmos DB ਜੋੜੋ**:
 
-1. Create `infra/core/cosmos.bicep`:
+1. ਬਣਾਓ `infra/core/cosmos.bicep`:
    ```bicep
    resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
      name: name
@@ -683,20 +657,20 @@ Should return empty.
    }
    ```
 
-2. Update product service to use Cosmos DB instead of in-memory data
+2. Product service ਨੂੰ in-memory ਡੇਟਾ ਦੀ ਥਾਂ Cosmos DB ਵਰਤਣ ਲਈ ਅਪਡੇਟ ਕਰੋ
 
-3. Estimated additional cost: ~$25/month (serverless)
+3. ਅਨੁਮਾਨਤ ਵਾਧੂ ਲਾਗਤ: ~$25/month (serverless)
 
 ### Phase 2: Add Third Service (Order Management)
 
-**Create Order Service**:
+**Order Service ਬਣਾਓ**:
 
-1. New folder: `src/order-service/` (Python/Node.js/C#)
-2. New Bicep: `infra/app/order-service.bicep`
-3. Update API Gateway to route `/api/orders`
-4. Add Azure SQL Database for order persistence
+1. ਨਵੀਂ ਫੋਲਡਰ: `src/order-service/` (Python/Node.js/C#)
+2. ਨਵਾਂ Bicep: `infra/app/order-service.bicep`
+3. API Gateway ਨੂੰ `/api/orders` ਰੂਟ ਕਰਨ ਲਈ ਅਪਡੇਟ ਕਰੋ
+4. ਆਰਡਰ ਪਰਸਿਸਟੈਂਸ ਲਈ Azure SQL Database ਜੋੜੋ
 
-**Architecture becomes**:
+**ਆਰਕੀਟੈਕਚਰ ਬਣ ਜਾਂਦਾ ਹੈ**:
 ```
 API Gateway → Product Service (Cosmos DB)
            → Order Service (Azure SQL)
@@ -704,35 +678,35 @@ API Gateway → Product Service (Cosmos DB)
 
 ### Phase 3: Add Async Communication (Service Bus)
 
-**Implement Event-Driven Architecture**:
+**Event-Driven ਆਰਕੀਟੈਕਚਰ ਲਾਗੂ ਕਰੋ**:
 
-1. Add Azure Service Bus: `infra/core/servicebus.bicep`
-2. Product Service publishes "ProductCreated" events
-3. Order Service subscribes to product events
-4. Add Notification Service to process events
+1. Azure Service Bus ਜੋੜੋ: `infra/core/servicebus.bicep`
+2. Product Service "ProductCreated" ਇਵੈਂਟ ਪਬਲਿਸ਼ ਕਰਦਾ ਹੈ
+3. Order Service product ਇਵੈਂਟ ਨੂੰ سبਸਕ੍ਰਾਈਬ ਕਰਦਾ ਹੈ
+4. ਇਵੈਂਟ ਪ੍ਰਕਿਰਿਆ ਕਰਨ ਲਈ Notification Service ਜੋੜੋ
 
-**Pattern**: Request/Response (HTTP) + Event-Driven (Service Bus)
+**ਪੈਟਰਨ**: Request/Response (HTTP) + ਇਵੈਂਟ-ਡ੍ਰਿਵਨ (Service Bus)
 
 ### Phase 4: Add User Authentication
 
-**Implement User Service**:
+**User Service ਲਾਗੂ ਕਰੋ**:
 
-1. Create `src/user-service/` (Go/Node.js)
-2. Add Azure AD B2C or custom JWT authentication
-3. API Gateway validates tokens
-4. Services check user permissions
+1. ਬਣਾਓ `src/user-service/` (Go/Node.js)
+2. Azure AD B2C ਜਾਂ ਕਸਟਮ JWT ਪ੍ਰਮਾਣਿਕਤਾ ਜੋੜੋ
+3. API Gateway ਟੋਕਨ ਵੈਰੀਫਾਈ ਕਰਦਾ ਹੈ
+4. ਸਰਵਿਸਿਜ਼ ਯੂਜ਼ਰ ਪਰਮਿਸ਼ਨ ਚੈੱਕ ਕਰਦੀਆਂ ਹਨ
 
 ### Phase 5: Production Readiness
 
-**Add These Components**:
-- Azure Front Door (ਗਲੋਬਲ ਲੋਡ ਬੈਲੰਸਿੰਗ)
-- Azure Key Vault (ਸੀਕ੍ਰੈਟ ਮੈਨੇਜਮੈਂਟ)
+**ਇਹ ਕੰਪੋਨੈਂਟ ਜੋੜੋ**:
+- Azure Front Door (ਗਲੋਬਲ ਲੋਡ ਬੈਲੈਂਸਿੰਗ)
+- Azure Key Vault (ਸੀਕ੍ਰੇਟ ਮੈਨੇਜਮੈਂਟ)
 - Azure Monitor Workbooks (ਕਸਟਮ ਡੈਸ਼ਬੋਰਡ)
 - CI/CD Pipeline (GitHub Actions)
 - Blue-Green Deployments
-- ਸਾਰੇ ਸੇਵਾਵਾਂ ਲਈ Managed Identity
+- ਸਾਰੀਆਂ ਸਰਵਿਸਿਜ਼ ਲਈ Managed Identity
 
-**Full Production Architecture Cost**: ~$300-1,400/month
+**ਪੂਰੀ ਪ੍ਰੋਡਕਸ਼ਨ ਆਰਕੀਟੈਕਚਰ ਦੀ ਲਾਗਤ**: ~$300-1,400/month
 
 ---
 
@@ -745,68 +719,68 @@ API Gateway → Product Service (Cosmos DB)
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
 ### Next Steps in This Course
-- ← Previous: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - ਸ਼ੁਰੂਆਤੀ ਇਕ-ਕੰਟੇਨਰ ਉਦਾਹਰਨ
-- → Next: [AI Integration Guide](../../../../../examples/docs/ai-foundry) - AI ਸਮਰੱਥਾਵਾਂ ਸ਼ਾਮِل ਕਰੋ
+- ← Previous: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - ਸ਼ੁਰੂਆਤੀ ਇੱਕ-ਕਨਟੇਨਰ ਉਦਾਹਰਨ
+- → Next: [AI Integration Guide](../../../../../examples/docs/ai-foundry) - AI ਸਮਰੱਥਾਵਾਂ ਜੋੜੋ
 - 🏠 [Course Home](../../README.md)
 
 ### Comparison: When to Use What
 
-**Single Container App** (Simple Flask API example):
-- ✅ ਸਧਾਰਣ ਐਪਲੀਕੇਸ਼ਨ
-- ✅ ਮੋਨੋਲਿਥਿਕ ਆਰਕੀਟੈਕਚਰ
-- ✅ ਤੇਜ਼ ਡਿਪਲੋਯਮੈਂਟ
+**Single Container App** (ਸਾਦਾ Flask API ਉਦਾਹਰਨ):
+- ✅ ਸਰਲ ਐਪਲੀਕੇਸ਼ਨ
+- ✅ ਮੋਨੋਲੀਥਿਕ ਆਰਕੀਟੈਕਚਰ
+- ✅ ਤੇਜ਼ ਤਰੀਕੇ ਨਾਲ ਡਿਪਲੌਏਬਲ
 - ❌ ਸੀਮਿਤ ਸਕੇਲਬਿਲਟੀ
 - **ਲਾਗਤ**: ~$15-50/month
 
-**Microservices** (This example):
+**Microservices** (ਇਸ ਉਦਾਹਰਨ):
 - ✅ ਜਟਿਲ ਐਪਲੀਕੇਸ਼ਨ
-- ✅ ਹਰ ਸੇਵਾ ਲਈ ਅਜ਼ਾਦ ਸਕੇਲਿੰਗ
-- ✅ ਟੀਮ ਆਤਮਨਿਰਭਰਤਾ (ਵੱਖ-ਵੱਖ ਸੇਵਾਵਾਂ, ਵੱਖ-ਵੱਖ ਟੀਮਾਂ)
-- ❌ ਪ੍ਰਬੰਧਨ ਲਈ ਵਧੇਰੇ ਜਟਿਲਤਾ
+- ✅ ਹਰ ਸਰਵਿਸ ਲਈ ਸੁਤੰਤਰ ਤੌਰ 'ਤੇ ਸਕੇਲਿੰਗ
+- ✅ ਟੀਮ ਆਜ਼ਾਦੀ (ਵੱਖ-ਵੱਖ ਸਰਵਿਸਿਜ਼, ਵੱਖ-ਵੱਖ ਟੀਮਾਂ)
+- ❌ ਪ੍ਰਬੰਧਨ ਵਿੱਚ ਵੱਧ ਜਟਿਲਤਾ
 - **ਲਾਗਤ**: ~$60-250/month
 
 **Kubernetes (AKS)**:
-- ✅ ਅਧਿਕਤਮ ਕੰਟਰੋਲ ਅਤੇ ਲਚਕੀਲਾਪਨ
+- ✅ ਵੱਧ ਤੋਂ ਵੱਧ ਕੰਟਰੋਲ ਅਤੇ ਲਚਕੀਲਾਪਨ
 - ✅ ਮਲਟੀ-ਕਲਾਉਡ ਪੋਰਟੇਬਿਲਿਟੀ
-- ✅ ਐਡਵਾਂਸਡ ਨੈਟਵਰਕਿੰਗ
-- ❌ Kubernetes ਮਹਾਰਤ ਦੀ ਲੋੜ
-- **ਲਾਗਤ**: ~$150-500/month minimum
+- ✅ ਐਡਵਾਂਸਡ ਨੈੱਟਵਰਕਿੰਗ
+- ❌ Kubernetes ਦੀ ਮਹਿਰਤ ਦੀ ਲੋੜ
+- **ਲਾਗਤ**: ~$150-500/month ਨਿਊਨਤਮ
 
-**Recommendation**: Container Apps (ਇਸ ਉਦਾਹਰਨ) ਨਾਲ ਸ਼ੁਰੂ ਕਰੋ, ਕੇਵਲ ਜੇ ਤੁਹਾਨੂੰ Kubernetes-ਵਸ਼ੇਸ਼ ਫੀਚਰਾਂ ਦੀ ਲੋੜ ਹੋਵੇ ਤਾਂ AKS ਵੱਲ ਵਧੋ।
+**ਸਿਫਾਰਿਸ਼**: ਸ਼ੁਰੂ ਕਰੋ Container Apps ਨਾਲ (ਇਹ ਉਦਾਹਰਨ), AKS ਤੇ ਤਬ ਜਾਓ ਜਦੋਂ ਤੁਹਾਨੂੰ Kubernetes-ਖਾਸ ਫੀਚਰਾਂ ਦੀ ਲੋੜ ਹੋਵੇ।
 
 ---
 
 ## Frequently Asked Questions
 
-**Q: Why only 2 services instead of 5+?**  
-A: ਪਾਠਕ੍ਰਮਕ ਤਰੱਕੀ। ਜਟਿਲਤਾ ਜੋੜਨ ਤੋਂ ਪਹਿਲਾਂ ਹਨੇਰੇ ਨਿਯਮ (ਸੇਵਾ ਸੰਚਾਰ, ਮਾਨੀਟਰਿੰਗ, ਸਕੇਲਿੰਗ) ਨੂੰ ਸਿੱਖਣ ਲਈ ਸਰਲ ਉਦਾਹਰਨ ਨਾਲ ਮੁਢਲੀ ਨਿਯਮਾਂ 'ਤੇ ਮਾਹਰ ਬਣੋ। ਇੱਥੇ ਸਿੱਖੇ ਪੈਟਰਨ 100-ਸੇਵਾ ਆਰਕੀਟੈਕਚਰਾਂ 'ਤੇ ਵੀ ਲਾਗੂ ਹੁੰਦੇ ਹਨ।
+**Q: ਕਿਉਂ ਸਿਰਫ 2 ਸਰਵਿਸਿਜ਼ 5+ ਦੀ ਬਜਾਏ?**  
+A: ਤਾਲੀਮੀ ਪੱਧਰਬੰਦੀ। ਸਧਾਰਣ ਉਦਾਹਰਨ ਨਾਲ ਮੂਲ ਗੱਲਾਂ (ਸਰਵਿਸ ਕਮਿਊਨੀਕੇਸ਼ਨ, ਮਾਨੀਟਰਿੰਗ, ਸਕੇਲਿੰਗ) 'ਤੇ ਨਿਪੁੰਨਤਾ ਹਾਸਲ ਕਰੋ, ਫਿਰ ਜਟਿਲਤਾ ਜੋੜੋ। ਇੱਥੇ ਸਿੱਖੇ ਪੈਟਰਨ 100-ਸਰਵਿਸ ਆਰਕੀਟੈਕਚਰਾਂ 'ਤੇ ਵੀ ਲਾਗੂ ਹੁੰਦੇ ਹਨ।
 
-**Q: Can I add more services myself?**  
-A: ਬਿਲਕੁਲ! ਉੱਪਰ ਦਿੱਤੇ Expansion Guide ਨੂੰ ਫੋਲੋ ਕਰੋ। ਹਰ ਨਵੀਂ ਸੇਵਾ ਇੱਕੋ ਜਿਹਾ ਪੈਟਰਨ ਫੋਲੋ ਕਰਦੀ ਹੈ: src ਫੋਲਡਰ ਬਣਾਓ, Bicep ਫਾਇਲ ਬਣਾਓ, azure.yaml ਅੱਪਡੇਟ ਕਰੋ, ਤੇ ਡਿਪਲੋਏ ਕਰੋ।
+**Q: ਕੀ ਮੈਂ ਖੁਦ ਹੋਰ ਸਰਵਿਸਿਜ਼ ਜੋੜ ਸਕਦਾ/ਸਕਦੀ ਹਾਂ?**  
+A: ਬਿਲਕੁਲ! ਉੱਪਰ ਦਿੱਤੇ Expansion Guide ਦੀ ਪਾਲਣਾ ਕਰੋ। ਹਰ ਨਵੀਂ ਸਰਵਿਸ ਇੱਕੋ ਪੈਟਰਨ ਫਾਲੋ ਕਰਦੀ ਹੈ: src ਫੋਲਡਰ ਬਣਾਓ, Bicep ਫਾਈਲ ਬਣਾਓ, azure.yaml ਅਪਡੇਟ ਕਰੋ, ਡਿਪਲੌਏ ਕਰੋ।
 
-**Q: Is this production-ready?**  
-A: ਇਹ ਇੱਕ ਮਜ਼ਬੂਤ ਬੁਨਿਆਦ ਹੈ। ਪ੍ਰੋਡਕਸ਼ਨ ਲਈ ਸ਼ਾਮِل ਕਰੋ: managed identity, Key Vault, ਸਥਾਈ ਡੇਟਾਬੇਸ, CI/CD ਪਾਈਪਲਾਈਨ, monitoring alerts, ਅਤੇ ਬੈਕਅੱਪ ਰਣਨੀਤੀ।
+**Q: ਕੀ ਇਹ production-ready ਹੈ?**  
+A: ਇਹ ਇੱਕ ਮਜ਼ਬੂਤ ਬੁਨਿਆਦ ਹੈ। ਪ੍ਰੋਡਕਸ਼ਨ ਲਈ ਜੋੜੋ: managed identity, Key Vault, ਪਰਸਿਸਟੈਂਟ ਡੇਟਾਬੇਸ, CI/CD pipeline, ਮਾਨੀਟਰਿੰਗ ਅਲਰਟਸ, ਅਤੇ ਬੈਕਅੱਪ ਰਣਨੀਤੀ।
 
-**Q: Why not use Dapr or other service mesh?**  
-A: ਸਿੱਖਣ ਲਈ ਸਧਾਰਨ ਰੱਖੋ। ਜਦੋਂ ਤੁਸੀਂ ਨੇਟਿਵ Container Apps ਨੈਟਵਰਕਿੰਗ ਨੂੰ ਸਮਝ ਲੈਂਦੇ ਹੋ, ਤਾਂ ਉन्नਤ ਸਿਨਾਰੀਆਂ ਲਈ Dapr ਜੋੜ ਸਕਦੇ ਹੋ।
+**Q: ਕਿਉਂ Dapr ਜਾਂ ਹੋਰ service mesh ਨਹੀਂ ਵਰਤਦੇ?**  
+A: ਸਿੱਖਣ ਲਈ ਸਧਾਰਨ ਰੱਖੋ। ਜਦੋਂ ਤੁਸੀਂ Container Apps ਦੇ ਨੈਟਵਰਕਿੰਗ ਨੂੰ ਸਮਝ ਲਵੋਗੇ, ਤਾਂ ਆਡਵਾਂਸ ਸੀਨੈਰਿਓਜ਼ ਲਈ Dapr ਜੋੜ ਸਕਦੇ ਹੋ।
 
-**Q: How do I debug locally?**  
-A: Docker ਨਾਲ ਸੇਵਾਵਾਂ ਲੋਕਲ ਤੌਰ 'ਤੇ ਚਲਾਓ:
+**Q: ਮੈਂ ਲੋਕੱਲੀ ਕਿਵੇਂ ਡੀਬੱਗ ਕਰਾਂ?**  
+A: Docker ਨਾਲ ਸਰਵਿਸਿਜ਼ ਲੋਕਲ ਰਨ ਕਰੋ:
 ```bash
 cd src/api-gateway
 docker build -t local-gateway .
 docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
 ```
 
-**Q: Can I use different programming languages?**  
-A: ਹਾਂ! ਇਸ ਉਦਾਹਰਨ ਵਿੱਚ Node.js (gateway) + Python (product service) ਦਿਖਾਇਆ ਗਿਆ ਹੈ। ਤੁਸੀਂ ਕੋਈ ਵੀ ਭਾਸ਼ਾ ਮਿਲਾ ਕੇ ਵਰਤ ਸਕਦੇ ਹੋ ਜੋ ਕੰਟੇਨਰਾਂ ਵਿੱਚ ਚਲਦੀ ਹੋਵੇ।
+**Q: ਕੀ ਮੈਂ ਵੱਖ-ਵੱਖ ਪ੍ਰੋਗ੍ਰਾਮਿੰਗ ਭਾਸ਼ਾਵਾਂ ਵਰਤ ਸਕਦਾ/ਸਕਦੀ ਹਾਂ?**  
+A: ਹਾਂ! ਇਸ ਉਦਾਹਰਨ ਵਿੱਚ Node.js (gateway) + Python (product service) ਦਿਖਾਇਆ ਗਿਆ ਹੈ। ਤੁਸੀਂ ਕੋਈ ਵੀ ਭਾਸ਼ਾ ਜੋ ਕੰਟੇਨਰਾਂ ਵਿੱਚ ਚਲ ਸਕੇ ਇਸ ਵਿੱਚ ਮਿਕਸ ਕਰ ਸਕਦੇ ਹੋ।
 
-**Q: What if I don't have Azure credits?**  
-A: Azure ਮੁਫ਼ਤ ਟੀਅਰ ਵਰਤੋਂ (ਨਵੇਂ ਅਕਾਊਂਟਾਂ ਲਈ ਪਹਿਲੇ 30 ਦਿਨ) ਜਾਂ ਛੋਟੇ ਟੈਸਟਿੰਗ ਅੰਤਰਾਲਾਂ ਲਈ ਡਿਪਲੋਏ ਕਰੋ ਅਤੇ ਤੁਰੰਤ ਮਿਟਾ ਦਿਓ।
+**Q: ਜੇ ਮੇਰੇ ਕੋਲ Azure ਕਰੈਡਿਟ ਨਾ ਹੋਣ ਤਾਂ?**  
+A: Azure free tier ਵਰਤੋਂ (ਨਵਾਂ ਖਾਤਾ: ਪਹਿਲੇ 30 ਦਿਨ) ਜਾਂ ਛੋਟੇ ਟੈਸਟਿੰਗ ਪੀਰੀਅਡ ਲਈ ਡਿਪਲੌਏ ਕਰੋ ਅਤੇ ਤੁਰੰਤ ਮਿਟਾ ਦਿਓ।
 
 ---
 
-> **🎓 Learning Path Summary**: ਤੁਸੀਂ ਸਵੈ-ਸਕੇਲਿੰਗ, ਅੰਦਰੂਨੀ ਨੈਟਵਰਕਿੰਗ, ਕੇਂਦਰੀਕ੍ਰਿਤ ਮਾਨੀਟਰਿੰਗ ਅਤੇ ਪ੍ਰੋਡਕਸ਼ਨ-ਰੈਡੀ ਪੈਟਰਨਾਂ ਨਾਲ ਇੱਕ ਮਲਟੀ-ਸੇਵਾ ਆਰਕੀਟੈਕਚਰ ਡਿਪਲੋਏ ਕਰਨਾ ਸਿੱਖ ਲਿਆ ਹੈ। ਇਹ ਬੁਨਿਆਦ ਤੁਹਾਨੂੰ ਜਟਿਲ ਵੰਡੇ ਗਏ ਸਿਸਟਮਾਂ ਅਤੇ ਉਦਯੋਗਿਕ ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਆਰਕੀਟੈਕਚਰਾਂ ਲਈ ਤਿਆਰ ਕਰਦੀ ਹੈ।
+> **🎓 Learning Path Summary**: ਤੁਸੀਂ ਇਕ multi-service ਆਰਕੀਟੈਕਚਰ ਡਿਪਲੌਏ ਕਰਨ ਲਈ ਸਿੱਖਿਆ ਹੈ ਜਿਸ ਵਿੱਚ ਆਟੋਮੈਟਿਕ ਸਕੇਲਿੰਗ, ਅੰਦਰੂਨੀ ਨੈੱਟਵਰਕਿੰਗ, ਕੇਂਦਰੀਕ੍ਰਿਤ ਮਾਨੀਟਰਿੰਗ, ਅਤੇ ਪ੍ਰੋਡਕਸ਼ਨ-ਰੇਡੀ ਪੈਟਰਨ ਸ਼ਾਮਲ ਹਨ। ਇਹ ਬੁਨਿਆਦ ਤੁਹਾਨੂੰ ਜਟਿਲ ਵਿਤਰਿਤ ਸਿਸਟਮਾਂ ਅਤੇ ਐਨਟਰਪਰਾਈਜ਼ ਮਾਈਕ੍ਰੋਸਰਵਿਸ ਆਰਕੀਟੈਕਚਰਾਂ ਲਈ ਤਿਆਰ ਕਰਦੀ ਹੈ।
 
 **📚 Course Navigation:**
 - ← Previous: [Simple Flask API](../../../../../examples/container-app/simple-flask-api)
@@ -817,6 +791,6 @@ A: Azure ਮੁਫ਼ਤ ਟੀਅਰ ਵਰਤੋਂ (ਨਵੇਂ ਅਕਾਊ
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-ਡਿਸਕਲੇਮਰ:
-ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ Co-op Translator (https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਅਸੀਂ ਸਹੀਅਤ ਲਈ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ, ਪਰ ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਸਵਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਤ੍ਰੁੱਟੀਆਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਇਸਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਹੀ ਪ੍ਰਮਾਣਿਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਿਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੇ ਉਪਯੋਗ ਨਾਲ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆਵਾਂ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+**ਅਸਵੀਕਾਰਤਾ**:
+ਇਸ ਦਸਤਾਵੇਜ਼ ਨੂੰ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰ ਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਅਸੀਂ ਸ਼ੁੱਧਤਾ ਲਈ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ, ਪਰ ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਸਵੈਚਾਲਿਤ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਤ੍ਰੁੱਟੀਆਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼, ਜੋ ਇਸ ਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਹੈ, ਹੀ ਅਧਿਕਾਰਿਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਨਾਜ਼ੁਕ ਜਾਂ ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਪੈਦਾ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫ਼ਹਿਮੀਆਂ ਜਾਂ ਭੁੱਲ-ਵਿਆਖਿਆਵਾਂ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

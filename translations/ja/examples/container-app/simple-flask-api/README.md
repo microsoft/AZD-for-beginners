@@ -1,88 +1,80 @@
-# シンプルな Flask API - コンテナー アプリの例
+# Simple Flask API - Container App の例
 
-**学習パス:** 初級 ⭐ | **所要時間:** 25～35分 | **費用:** $0～15/月
+**Learning Path:** Beginner ⭐ | **Time:** 25-35 minutes | **Cost:** $0-15/month
 
-Azure Developer CLI (azd) を使用して Azure Container Apps にデプロイされた、完全に動作する Python Flask REST API の例です。このサンプルはコンテナのデプロイ、自動スケーリング、モニタリングの基本を示します。
+Azure Developer CLI (azd) を使用して Azure Container Apps にデプロイされた、完全に動作する Python Flask REST API のサンプルです。この例ではコンテナーのデプロイ、自動スケーリング、監視の基本を示します。
 
 ## 🎯 学べること
 
 - コンテナ化された Python アプリケーションを Azure にデプロイする
-- スケール・トゥ・ゼロを含む自動スケーリングを構成する
+- scale-to-zero を使った自動スケーリングを構成する
 - ヘルスプローブとレディネスチェックを実装する
-- アプリケーションのログとメトリクスを監視する
-- Azure Developer CLI を使った迅速なデプロイ
+- アプリケーションのログとメトリックを監視する
+- 高速デプロイのために Azure Developer CLI を使用する
 
 ## 📦 含まれるもの
 
 ✅ **Flask Application** - CRUD 操作を備えた完全な REST API (`src/app.py`)  
-✅ **Dockerfile** - 本番対応のコンテナ設定  
-✅ **Bicep Infrastructure** - Container Apps 環境と API のデプロイ  
+✅ **Dockerfile** - 本番向けコンテナ構成  
+✅ **Bicep Infrastructure** - Container Apps 環境と API デプロイ  
 ✅ **AZD Configuration** - ワンコマンドでのデプロイ設定  
-✅ **Health Probes** - Liveness と readiness チェックが設定済み  
-✅ **Auto-scaling** - HTTP ロードに基づく 0-10 レプリカの自動スケーリング  
+✅ **Health Probes** - liveness と readiness チェックを構成済み  
+✅ **Auto-scaling** - HTTP 負荷に基づく 0-10 レプリカ  
 
 ## Architecture
 
+```mermaid
+graph TD
+    subgraph ACA[Azure コンテナ アプリ環境]
+        Flask[Flask API コンテナ<br/>ヘルスエンドポイント<br/>REST API<br/>自動スケーリング 0〜10 レプリカ]
+        AppInsights[アプリケーション インサイト]
+    end
 ```
-┌─────────────────────────────────────────┐
-│   Azure Container Apps Environment      │
-│                                         │
-│  ┌───────────────────────────────────┐ │
-│  │   Flask API Container             │ │
-│  │   - Health endpoints              │ │
-│  │   - REST API                      │ │
-│  │   - Auto-scaling (0-10 replicas)  │ │
-│  └───────────────────────────────────┘ │
-│                                         │
-│  Application Insights ────────────────┐ │
-└────────────────────────────────────────┘
-```
+## Prerequisites
 
-## 前提条件
-
-### 必須
-- **Azure Developer CLI (azd)** - [インストールガイド](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+### 必要なもの
+- **Azure Developer CLI (azd)** - [インストール ガイド](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
 - **Azure subscription** - [無料アカウント](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Docker のインストール](https://www.docker.com/products/docker-desktop/)（ローカルテスト用）
+- **Docker Desktop** - [Docker をインストール](https://www.docker.com/products/docker-desktop/)（ローカルテスト用）
 
 ### 前提条件の確認
 
 ```bash
-# azd のバージョンを確認してください (1.5.0 以上が必要)
+# azd のバージョンを確認 (1.5.0 以上が必要)
 azd version
 
-# Azure へのログインを確認してください
+# Azure へのログインを確認
 azd auth login
 
 # Docker を確認 (任意、ローカルテスト用)
 docker --version
 ```
 
-## ⏱️ デプロイのタイムライン
+## ⏱️ デプロイタイムライン
 
-| フェーズ | 所要時間 | 何が起きるか |
+| Phase | Duration | What Happens |
 |-------|----------|--------------||
-| Environment setup | 30秒 | azd 環境を作成 |
-| Build container | 2～3分 | Docker で Flask アプリをビルド |
-| Provision infrastructure | 3～5分 | Container Apps、レジストリ、モニタリングを作成 |
-| Deploy application | 2～3分 | イメージをプッシュして Container Apps にデプロイ |
-| **合計** | **8～12分** | デプロイ完了 |
+| Environment setup | 30 seconds | Create azd environment |
+| Build container | 2-3 minutes | Docker build Flask app |
+| Provision infrastructure | 3-5 minutes | Create Container Apps, registry, monitoring |
+| Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
+| **Total** | **8-12 minutes** | Complete deployment ready |
 
 ## クイックスタート
 
 ```bash
-# 例に移動する
+# 例に移動
 cd examples/container-app/simple-flask-api
 
-# 環境を初期化する（固有の名前を選択）
+# 環境を初期化する（一意の名前を選択）
 azd env new myflaskapi
 
-# すべてをデプロイする（インフラ＋アプリケーション）
+# すべてをデプロイする（インフラストラクチャ＋アプリケーション）
 azd up
-# 次の入力が求められます：
+# 次の操作を求められます:
 # 1. Azure サブスクリプションを選択
 # 2. ロケーションを選択（例: eastus2）
-# 3. デプロイ完了まで8〜12分待つ
+# 3. デプロイに8～12分かかります
 
 # API エンドポイントを取得する
 azd env get-values
@@ -91,7 +83,7 @@ azd env get-values
 curl $(azd env get-value API_ENDPOINT)/health
 ```
 
-**期待される出力:**
+**Expected Output:**
 ```json
 {
   "status": "healthy",
@@ -106,10 +98,10 @@ curl $(azd env get-value API_ENDPOINT)/health
 ### ステップ 1: デプロイ状況の確認
 
 ```bash
-# 展開されたサービスを表示
+# デプロイ済みのサービスを表示
 azd show
 
-# 期待される出力は次のとおりです:
+# 期待される出力は次のとおり:
 # - サービス: api
 # - エンドポイント: https://ca-api-[env].xxx.azurecontainerapps.io
 # - ステータス: 実行中
@@ -121,26 +113,26 @@ azd show
 # APIエンドポイントを取得
 API_URL=$(azd env get-value API_ENDPOINT)
 
-# ヘルスチェック
+# ヘルスチェックを行う
 curl $API_URL/health
 
 # ルートエンドポイントをテスト
 curl $API_URL/
 
-# アイテムを作成
+# アイテムを作成する
 curl -X POST $API_URL/api/items \
   -H "Content-Type: application/json" \
   -d '{"name": "Test Item", "description": "My first item"}'
 
-# すべてのアイテムを取得
+# すべてのアイテムを取得する
 curl $API_URL/api/items
 ```
 
 **成功基準:**
 - ✅ ヘルスエンドポイントが HTTP 200 を返す
 - ✅ ルートエンドポイントが API 情報を表示する
-- ✅ POST が項目を作成し HTTP 201 を返す
-- ✅ GET が作成した項目を返す
+- ✅ POST がアイテムを作成し HTTP 201 を返す
+- ✅ GET が作成したアイテムを返す
 
 ### ステップ 3: ログの表示
 
@@ -151,9 +143,9 @@ azd monitor --logs
 # または Azure CLI を使用する:
 az containerapp logs show --name api --resource-group $RG_NAME --follow
 
-# 次の内容が表示されます:
+# 次の内容が表示されるはずです:
 # - Gunicorn の起動メッセージ
-# - HTTP リクエストのログ
+# - HTTP リクエストログ
 # - アプリケーションの情報ログ
 ```
 
@@ -176,21 +168,21 @@ simple-flask-api/
 
 ## API エンドポイント
 
-| エンドポイント | メソッド | 説明 |
+| Endpoint | Method | Description |
 |----------|--------|-------------|
 | `/health` | GET | ヘルスチェック |
-| `/api/items` | GET | すべての項目を一覧表示 |
-| `/api/items` | POST | 新しい項目を作成 |
-| `/api/items/{id}` | GET | 特定の項目を取得 |
-| `/api/items/{id}` | PUT | 項目を更新 |
-| `/api/items/{id}` | DELETE | 項目を削除 |
+| `/api/items` | GET | すべてのアイテムを一覧表示 |
+| `/api/items` | POST | 新しいアイテムを作成 |
+| `/api/items/{id}` | GET | 特定のアイテムを取得 |
+| `/api/items/{id}` | PUT | アイテムを更新 |
+| `/api/items/{id}` | DELETE | アイテムを削除 |
 
 ## 設定
 
 ### 環境変数
 
 ```bash
-# カスタム設定を行う
+# カスタム構成を設定する
 azd env set PORT 8000
 azd env set LOG_LEVEL info
 azd env set MAX_REPLICAS 20
@@ -198,10 +190,10 @@ azd env set MAX_REPLICAS 20
 
 ### スケーリング構成
 
-この API は HTTP トラフィックに基づいて自動的にスケールします：
-- **最小レプリカ数**: 0（アイドル時にゼロにスケール）
-- **最大レプリカ数**: 10
-- **各レプリカあたりの同時リクエスト数**: 50
+API は HTTP トラフィックに基づいて自動的にスケールします:
+- **Min Replicas**: 0（アイドル時はゼロにスケール）
+- **Max Replicas**: 10
+- **Concurrent Requests per Replica**: 50
 
 ## 開発
 
@@ -222,13 +214,13 @@ curl http://localhost:8000/health
 ### コンテナのビルドとテスト
 
 ```bash
-# Dockerイメージをビルド
+# Dockerイメージをビルドする
 docker build -t flask-api:local ./src
 
-# コンテナをローカルで実行
+# コンテナをローカルで実行する
 docker run -p 8000:8000 flask-api:local
 
-# コンテナをテスト
+# コンテナをテストする
 curl http://localhost:8000/health
 ```
 
@@ -251,19 +243,19 @@ azd deploy api
 ### 設定の更新
 
 ```bash
-# 環境変数を更新する
+# 環境変数を更新
 azd env set API_KEY "new-api-key"
 
-# 新しい設定で再デプロイする
+# 新しい設定で再デプロイ
 azd deploy api
 ```
 
-## モニタリング
+## 監視
 
 ### ログの表示
 
 ```bash
-# azd monitor を使ってライブログをストリーミングする
+# azd monitor を使用してライブログをストリーミングする
 azd monitor --logs
 
 # または Container Apps 用の Azure CLI を使用する:
@@ -276,10 +268,10 @@ az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ### メトリクスの監視
 
 ```bash
-# Azure Monitor のダッシュボードを開く
+# Azure Monitor ダッシュボードを開く
 azd monitor --overview
 
-# 特定のメトリクスを表示する
+# 特定のメトリックを表示する
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "Requests,ResponseTime"
@@ -293,7 +285,7 @@ az monitor metrics list \
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-期待される応答:
+Expected response:
 ```json
 {
   "status": "healthy",
@@ -301,7 +293,7 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 }
 ```
 
-### 項目の作成
+### アイテムの作成
 
 ```bash
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
@@ -309,7 +301,7 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/item
   -d '{"name": "Test Item", "description": "A test item"}'
 ```
 
-### すべての項目を取得
+### すべてのアイテムを取得
 
 ```bash
 curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
@@ -317,16 +309,16 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 
 ## コスト最適化
 
-このデプロイはスケール・トゥ・ゼロを使用するため、API がリクエストを処理している時のみ料金が発生します：
+このデプロイは scale-to-zero を使用するため、API がリクエストを処理しているときのみ課金されます:
 
-- **アイドル時のコスト**: 約 $0/月（ゼロにスケール）
-- **稼働時のコスト**: レプリカあたり約 $0.000024/秒
-- **想定月額コスト**（軽度の利用）: $5～15
+- <strong>アイドル時のコスト</strong>: 約 $0/月（ゼロにスケール）
+- <strong>アクティブ時のコスト</strong>: レプリカあたり約 $0.000024/秒
+- <strong>月間想定コスト</strong>（軽負荷）: $5-15
 
-### さらにコストを削減する
+### コストをさらに削減する方法
 
 ```bash
-# 開発環境向けに最大レプリカ数を縮小する
+# 開発用に最大レプリカ数を縮小する
 azd env set MAX_REPLICAS 3
 
 # アイドルタイムアウトを短くする
@@ -335,33 +327,33 @@ azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5分
 
 ## トラブルシューティング
 
-### コンテナが起動しない場合
+### コンテナが起動しない
 
 ```bash
 # Azure CLI を使ってコンテナのログを確認する
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
-# ローカルで Docker イメージがビルドされることを確認する
+# Docker イメージがローカルでビルドされることを確認する
 docker build -t test ./src
 ```
 
-### API にアクセスできない場合
+### API にアクセスできない
 
 ```bash
-# ingress が外部にあることを確認する
+# ingressが外部であることを確認する
 az containerapp show --name api --resource-group rg-simple-flask-api \
   --query properties.configuration.ingress.external
 ```
 
-### レスポンスタイムが長い場合
+### 応答時間が長い
 
 ```bash
-# CPU/メモリの使用状況を確認する
+# CPU/メモリ使用率を確認する
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# 必要に応じてリソースを増やす
+# 必要に応じてリソースをスケールアップする
 az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
@@ -377,26 +369,26 @@ azd down --force --purge
 
 ### この例を拡張する
 
-1. **データベースを追加** - Azure Cosmos DB または SQL Database を統合する
+1. **Add Database** - Azure Cosmos DB または SQL Database を統合する
    ```bash
    # infra/main.bicep に Cosmos DB モジュールを追加する
-   # app.py をデータベース接続用に更新する
+   # データベース接続を追加するために app.py を更新する
    ```
 
-2. **認証を追加** - Azure AD または API キーを実装する
+2. **Add Authentication** - Azure AD または API キーを実装する
    ```python
    # app.py に認証ミドルウェアを追加する
    from functools import wraps
    ```
 
-3. **CI/CD を設定** - GitHub Actions ワークフロー
+3. **Set Up CI/CD** - GitHub Actions ワークフロー
    ```yaml
    # Create .github/workflows/deploy.yml
    name: Deploy to Azure
    on: [push]
    ```
 
-4. **マネージド ID を追加** - Azure サービスへのアクセスを保護する
+4. **Add Managed Identity** - Azure サービスへのアクセスを安全にする
    ```bicep
    # Update infra/app/api.bicep
    identity: { type: 'SystemAssigned' }
@@ -404,41 +396,41 @@ azd down --force --purge
 
 ### 関連する例
 
-- **[Database App](../../../../../examples/database-app)** - SQL Database を使った完全な例
+- **[Database App](../../../../../examples/database-app)** - SQL Database を使用した完全な例
 - **[Microservices](../../../../../examples/container-app/microservices)** - マルチサービスアーキテクチャ
 - **[Container Apps Master Guide](../README.md)** - すべてのコンテナパターン
 
 ### 学習リソース
 
-- 📚 [AZD For Beginners Course](../../../README.md) - コースのメインページ
-- 📚 [Container Apps Patterns](../README.md) - さらに多くのデプロイパターン
+- 📚 [AZD For Beginners Course](../../../README.md) - メインコースのホーム
+- 📚 [Container Apps Patterns](../README.md) - さらなるデプロイパターン
 - 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - コミュニティテンプレート
 
 ## 追加リソース
 
 ### ドキュメント
-- **[Flask Documentation](https://flask.palletsprojects.com/)** - Flask フレームワーク ガイド
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - 公式の Azure ドキュメント
+- **[Flask Documentation](https://flask.palletsprojects.com/)** - Flask フレームワークガイド
+- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - 公式 Azure ドキュメント
 - **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd コマンドリファレンス
 
 ### チュートリアル
 - **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - 最初のアプリをデプロイする
 - **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Python 開発ガイド
-- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - インフラストラクチャをコードで管理
+- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - インフラストラクチャをコード化する言語
 
 ### ツール
-- **[Azure Portal](https://portal.azure.com)** - リソースを視覚的に管理する
-- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE 統合
+- **[Azure Portal](https://portal.azure.com)** - リソースを視覚的に管理
+- **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE 連携
 
 ---
 
-**🎉 おめでとうございます！** 自動スケーリングとモニタリングを備えた、プロダクション対応の Flask API を Azure Container Apps にデプロイしました。
+**🎉 おめでとうございます！** 自動スケーリングと監視を備えた本番対応の Flask API を Azure Container Apps にデプロイしました。
 
-**ご質問はありますか？** [Issue を作成する](https://github.com/microsoft/AZD-for-beginners/issues) または [よくある質問](../../../resources/faq.md) を確認してください
+**Questions?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) or check the [FAQ](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責事項：
-この文書は AI 翻訳サービス「Co-op Translator」（https://github.com/Azure/co-op-translator）を使用して翻訳されました。正確性には努めていますが、自動翻訳には誤りや不正確さが含まれる可能性があります。原文（原言語の文書）を正式な情報源とみなしてください。重要な情報については、専門の人間翻訳者による翻訳を推奨します。本翻訳の利用により生じた誤解や解釈の相違について、当社は一切責任を負いません。
+**免責事項**:
+本書は AI 翻訳サービス [Co-op トランスレーター](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性には最善を尽くしていますが、自動翻訳には誤りや不正確さが含まれる可能性があることをご承知おきください。原文（原言語版）を正式な参照元とみなしてください。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の使用に起因するいかなる誤解や誤訳についても、当方は責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

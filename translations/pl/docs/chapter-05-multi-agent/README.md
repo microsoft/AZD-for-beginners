@@ -1,20 +1,20 @@
-# Rozdział 5: Rozwiązania AI wieloagentowe
+# Rozdział 5: Rozwiązania AI z wieloma agentami
 
-**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 2-3 hours | **⭐ Złożoność**: Zaawansowany
+**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 2-3 godziny | **⭐ Poziom trudności**: Zaawansowany
 
 ---
 
 ## Przegląd
 
-Ten rozdział obejmuje zaawansowane wzorce architektury wieloagentowej, orkiestrację agentów oraz gotowe do produkcji wdrożenia AI dla złożonych scenariuszy.
+Ten rozdział omawia zaawansowane wzorce architektury z wieloma agentami, orkiestrację agentów oraz gotowe do produkcji wdrożenia AI dla złożonych scenariuszy.
 
 ## Cele nauki
 
 Po ukończeniu tego rozdziału będziesz:
 - Rozumieć wzorce architektury wieloagentowej
 - Wdrażać skoordynowane systemy agentów AI
-- Implementować komunikację agent–agent
-- Budować rozwiązania wieloagentowe gotowe do produkcji
+- Implementować komunikację agent-agenta
+- Budować gotowe do produkcji rozwiązania wieloagentowe
 
 ---
 
@@ -22,7 +22,7 @@ Po ukończeniu tego rozdziału będziesz:
 
 | # | Lekcja | Opis | Czas |
 |---|--------|-------------|------|
-| 1 | [Rozwiązanie wieloagentowe dla handlu detalicznego](../../examples/retail-scenario.md) | Pełne omówienie implementacji | 90 min |
+| 1 | [Rozwiązanie wieloagentowe dla handlu detalicznego](../../examples/retail-scenario.md) | Kompletny przegląd implementacji | 90 min |
 | 2 | [Wzorce koordynacji](../chapter-06-pre-deployment/coordination-patterns.md) | Strategie orkiestracji agentów | 30 min |
 | 3 | [Wdrożenie szablonu ARM](../../examples/retail-multiagent-arm-template/README.md) | Wdrożenie jednym kliknięciem | 30 min |
 
@@ -31,51 +31,46 @@ Po ukończeniu tego rozdziału będziesz:
 ## 🚀 Szybki start
 
 ```bash
-# Wdróż wieloagentowe rozwiązanie dla handlu detalicznego
-cd examples/retail-multiagent-arm-template
-./deploy.sh
-
-# Lub użyj szablonu bezpośrednio
+# Opcja 1: Wdrażaj z szablonu
 azd init --template agent-openai-python-prompty
 azd up
+
+# Opcja 2: Wdrażaj z manifestu agenta (wymaga rozszerzenia azure.ai.agents)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
+azd up
 ```
+
+> **Które podejście?** Użyj `azd init --template`, aby rozpocząć od działającego przykładu. Użyj `azd ai agent init`, gdy masz własny manifest agenta. Zobacz [referencję CLI AZD AI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) dla pełnych szczegółów.
 
 ---
 
 ## 🤖 Architektura wieloagentowa
 
+```mermaid
+graph TD
+    Orchestrator[Agent Orkiestratora<br/>Kieruje żądaniami, zarządza przepływem pracy] --> Customer[Agent Klienta<br/>Zapytania użytkownika, preferencje]
+    Orchestrator --> Inventory[Agent Inwentaryzacji<br/>Poziomy zapasów, zamówienia]
 ```
-┌──────────────────────────────────────────────────────────────┐
-│                    Orchestrator Agent                         │
-│              (Routes requests, manages workflow)              │
-└────────────────────┬─────────────────┬───────────────────────┘
-                     │                 │
-         ┌───────────▼───────┐ ┌───────▼───────────┐
-         │  Customer Agent   │ │  Inventory Agent  │
-         │  (User queries,   │ │  (Stock levels,   │
-         │   preferences)    │ │   orders)         │
-         └───────────────────┘ └───────────────────┘
-```
-
 ---
 
-## 🎯 Wyróżnione rozwiązanie: Rozwiązanie wieloagentowe dla handlu detalicznego
+## 🎯 Prezentowane rozwiązanie: Wieloagentowe rozwiązanie dla handlu detalicznego
 
-Rozwiązanie [wieloagentowe dla handlu detalicznego](../../examples/retail-scenario.md) demonstruje:
+[Wieloagentowe rozwiązanie dla handlu detalicznego](../../examples/retail-scenario.md) demonstruje:
 
-- **Agent klienta**: Obsługuje interakcje z użytkownikiem i preferencje
-- **Agent magazynowy**: Zarządza stanami magazynowymi i przetwarzaniem zamówień
-- **Orkiestrator**: Koordynuje działanie agentów
+- **Agent klienta**: Zarządza interakcjami z użytkownikiem i preferencjami
+- **Agent magazynowy**: Zarządza zapasami i przetwarzaniem zamówień
+- **Orkiestrator**: Koordynuje współpracę między agentami
 - **Wspólna pamięć**: Zarządzanie kontekstem między agentami
 
 ### Używane usługi
 
-| Usługa | Zastosowanie |
+| Usługa | Cel |
 |---------|---------|
-| Azure OpenAI | Rozumienie języka |
+| Microsoft Foundry Models | Rozumienie języka |
 | Azure AI Search | Katalog produktów |
 | Cosmos DB | Stan i pamięć agenta |
-| Container Apps | Hostowanie agentów |
+| Container Apps | Hosting agentów |
 | Application Insights | Monitorowanie |
 
 ---
@@ -85,19 +80,19 @@ Rozwiązanie [wieloagentowe dla handlu detalicznego](../../examples/retail-scena
 | Kierunek | Rozdział |
 |-----------|---------|
 | **Poprzedni** | [Rozdział 4: Infrastruktura](../chapter-04-infrastructure/README.md) |
-| **Następny** | [Rozdział 6: Przygotowanie do wdrożenia](../chapter-06-pre-deployment/README.md) |
+| **Następny** | [Rozdział 6: Wstępne wdrożenie](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Powiązane zasoby
 
 - [Przewodnik po agentach AI](../chapter-02-ai-development/agents.md)
-- [Praktyki AI w produkcji](../chapter-08-production/production-ai-practices.md)
+- [Praktyki produkcyjne AI](../chapter-08-production/production-ai-practices.md)
 - [Rozwiązywanie problemów z AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Zastrzeżenie:
-Niniejszy dokument został przetłumaczony przy użyciu usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dążymy do jak największej dokładności, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego języku źródłowym należy uznać za źródło wiążące. W przypadku informacji o krytycznym znaczeniu zaleca się skorzystanie z usług profesjonalnego tłumacza. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+**Zastrzeżenie**:
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dążymy do dokładności, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku należy traktować jako źródło autorytatywne. W przypadku informacji kluczowych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

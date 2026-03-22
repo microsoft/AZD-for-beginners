@@ -1,28 +1,28 @@
-# AI Workshop Lab: Ako spraviť vaše AI riešenia nasaditeľné pomocou AZD
+# AI Workshop Lab: Nasadenie vašich AI riešení pomocou AZD
 
-**Chapter Navigation:**
-- **📚 Domov kurzu**: [AZD Pre začiatočníkov](../../README.md)
-- **📖 Aktuálna kapitola**: Kapitola 2 - Vývoj s AI na prvom mieste
-- **⬅️ Predchádzajúce**: [Nasadenie AI modelu](ai-model-deployment.md)
-- **➡️ Ďalšie**: [Najlepšie postupy pre produkčné AI](production-ai-practices.md)
-- **🚀 Ďalšia kapitola**: [Kapitola 3: Konfigurácia](../chapter-03-configuration/configuration.md)
+**Navigácia kapitol:**
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 2 - Vývoj orientovaný na AI
+- **⬅️ Predchádzajúca**: [Nasadenie AI modelu](ai-model-deployment.md)
+- **➡️ Ďalšia**: [Najlepšie postupy pre produkčné AI](production-ai-practices.md)
+- **🚀 Nasledujúca kapitola**: [Kapitola 3: Konfigurácia](../chapter-03-configuration/configuration.md)
 
 ## Prehľad workshopu
 
-Tento praktický lab prevedie vývojárov procesom, ako vziať existujúcu AI šablónu a nasadiť ju pomocou Azure Developer CLI (AZD). Naučíte sa základné vzory pre produkčné nasadenia AI s použitím služieb Microsoft Foundry.
+Toto praktické laboratórium vedie vývojárov procesom prevodu existujúcej AI šablóny a jej nasadenia pomocou Azure Developer CLI (AZD). Naučíte sa základné vzory pre produkčné nasadenia AI pomocou služieb Microsoft Foundry.
 
 **Trvanie:** 2-3 hodiny  
 **Úroveň:** Stredne pokročilá  
 **Predpoklady:** Základné znalosti Azure, znalosť konceptov AI/ML
 
-## 🎓 Ciele workshopu
+## 🎓 Ciele učenia
 
-By the end of this workshop, you will be able to:
-- ✅ Previesť existujúcu AI aplikáciu na používanie AZD šablón
-- ✅ Konfigurovať služby Microsoft Foundry pomocou AZD
+Na konci tohto workshopu budete schopní:
+- ✅ Previesť existujúcu AI aplikáciu na použitie AZD šablón
+- ✅ Nakonfigurovať služby Microsoft Foundry pomocou AZD
 - ✅ Implementovať bezpečné spravovanie poverení pre AI služby
-- ✅ Nasadiť produkčné AI aplikácie pripravené na prevádzku s monitorovaním
-- ✅ Riešiť bežné problémy pri nasadzovaní AI
+- ✅ Nasadiť produkčne pripravené AI aplikácie s monitorovaním
+- ✅ Riešiť bežné problémy pri nasadení AI
 
 ## Predpoklady
 
@@ -33,16 +33,16 @@ By the end of this workshop, you will be able to:
 - Editor kódu (odporúča sa VS Code)
 
 ### Azure zdroje
-- Azure predplatné s právami prispievateľa
-- Prístup k službám Azure OpenAI (alebo možnosť požiadať o prístup)
+- Predplatné Azure s právami prispievateľa
+- Prístup k službám Microsoft Foundry Models (alebo možnosť požiadať o prístup)
 - Oprávnenia na vytváranie skupín prostriedkov
 
-### Potrebné vedomosti
+### Potrebné znalosti
 - Základné porozumenie službám Azure
-- Znalosť príkazového riadku
-- Základné koncepty AI/ML (API, modely, výzvy)
+- Prax s príkazovým riadkom
+- Základy AI/ML (API, modely, promptov)
 
-## Nastavenie labu
+## Nastavenie laboratória
 
 ### Krok 1: Príprava prostredia
 
@@ -69,7 +69,7 @@ cd azure-search-openai-demo
 
 ### Stavba AI AZD šablóny
 
-Preskúmajte kľúčové súbory v AZD šablóne pripravenej na AI:
+Preskúmajte kľúčové súbory v AZD šablóne pripravené na AI:
 
 ```
 azure-search-openai-demo/
@@ -78,7 +78,7 @@ azure-search-openai-demo/
 │   ├── main.bicep          # Main infrastructure template
 │   ├── main.parameters.json # Environment parameters
 │   └── modules/            # Reusable Bicep modules
-│       ├── openai.bicep    # Azure OpenAI configuration
+│       ├── openai.bicep    # Microsoft Foundry Models configuration
 │       ├── search.bicep    # Cognitive Search setup
 │       └── webapp.bicep    # Web app configuration
 ├── app/                    # Application code
@@ -104,21 +104,21 @@ cat infra/main.bicep
 ```
 
 **Kľúčové AI vzory na identifikáciu:**
-- Zriaďovanie služby Azure OpenAI
+- Zriadenie služby Microsoft Foundry Models
 - Integrácia Cognitive Search
-- Bezpečné spravovanie kľúčov
+- Bezpečné riadenie kľúčov
 - Konfigurácie sieťovej bezpečnosti
 
 ### **Diskusný bod:** Prečo sú tieto vzory dôležité pre AI
 
 - **Závislosti služieb**: AI aplikácie často vyžadujú viacero koordinovaných služieb
-- **Bezpečnosť**: API kľúče a koncové body potrebujú bezpečné spravovanie
-- **Škálovateľnosť**: AI pracovné zaťaženia majú špecifické požiadavky na škálovanie
+- **Bezpečnosť**: API kľúče a koncové body potrebujú bezpečné riadenie
+- **Škálovateľnosť**: AI pracovné záťaže majú špecifické požiadavky na škálovanie
 - **Riadenie nákladov**: AI služby môžu byť drahé, ak nie sú správne nakonfigurované
 
 ## Modul 2: Nasadenie vašej prvej AI aplikácie
 
-### Krok 2.1: Inicializácia prostredia
+### Krok 2.1: Inicializujte prostredie
 
 1. **Vytvorte nové AZD prostredie:**
 ```bash
@@ -142,16 +142,16 @@ azd up
 ```
 
 **Čo sa deje počas `azd up`:**
-- ✅ Zriaďuje službu Azure OpenAI
-- ✅ Vytvára službu Cognitive Search
-- ✅ Nastavuje App Service pre webovú aplikáciu
-- ✅ Konfiguruje sieťovanie a bezpečnosť
-- ✅ Nasadzuje kód aplikácie
-- ✅ Nastavuje monitorovanie a logovanie
+- ✅ Provisioning služby Microsoft Foundry Models
+- ✅ Vytvorenie služby Cognitive Search
+- ✅ Nastavenie App Service pre webovú aplikáciu
+- ✅ Konfigurácia sietí a bezpečnosti
+- ✅ Nasadenie kódu aplikácie
+- ✅ Nastavenie monitorovania a protokolovania
 
 2. **Sledujte priebeh nasadenia** a zaznamenajte vytvárané prostriedky.
 
-### Krok 2.3: Overte svoje nasadenie
+### Krok 2.3: Overenie vášho nasadenia
 
 1. **Skontrolujte nasadené prostriedky:**
 ```bash
@@ -164,48 +164,48 @@ azd show --output json | grep "webAppUrl"
 ```
 
 3. **Otestujte AI funkčnosť:**
-   - Prejdite do webovej aplikácie
-   - Vyskúšajte ukážkové dotazy
-   - Overte, že odpovede AI fungujú
+   - Prejdite na webovú aplikáciu
+   - Vyskúšajte ukážkové dopyty
+   - Overte, že AI odpovede fungujú
 
-### **Lab cvičenie 2.1: Cvičenie riešenia problémov**
+### **Lab cvičenie 2.1: Prax riešenia problémov**
 
-**Scenár**: Nasadenie prebehlo úspešne, ale AI neodpovedá.
+**Scenár**: Nasadenie bolo úspešné, ale AI neodpovedá.
 
-**Bežné problémy, ktoré treba skontrolovať:**
+**Bežné problémy na kontrolu:**
 1. **OpenAI API kľúče**: Overte, či sú správne nastavené
-2. **Dostupnosť modelu**: Skontrolujte, či váš región podporuje daný model
-3. **Sieťové pripojenie**: Uistite sa, že služby môžu komunikovať
-4. **RBAC oprávnenia**: Overte, či aplikácia má prístup k OpenAI
+2. **Dostupnosť modelu**: Skontrolujte, či váš región podporuje model
+3. **Sieťová konektivita**: Uistite sa, že služby môžu komunikovať
+4. **RBAC oprávnenia**: Overte, či má aplikácia prístup k OpenAI
 
-**Príkazy na ladenie:**
+**Ladiace príkazy:**
 ```bash
-# Skontrolovať premenné prostredia
+# Skontrolujte premenné prostredia
 azd env get-values
 
-# Zobraziť protokoly nasadenia
+# Zobrazte protokoly nasadenia
 az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 
-# Skontrolovať stav nasadenia OpenAI
+# Skontrolujte stav nasadenia OpenAI
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
-## Modul 3: Prispôsobenie AI aplikácií pre vaše potreby
+## Modul 3: Prispôsobenie AI aplikácií podľa vašich potrieb
 
-### Krok 3.1: Úprava konfigurácie AI
+### Krok 3.1: Úprava AI konfigurácie
 
 1. **Aktualizujte OpenAI model:**
 ```bash
-# Prepnite na iný model (ak je vo vašom regióne dostupný)
-azd env set AZURE_OPENAI_MODEL gpt-4
+# Prepnite na iný model (ak je dostupný vo vašom regióne)
+azd env set AZURE_OPENAI_MODEL gpt-4.1
 
-# Znovu nasaďte s novou konfiguráciou
+# Znovu nasadiť s novou konfiguráciou
 azd deploy
 ```
 
 2. **Pridajte ďalšie AI služby:**
 
-Upravte `infra/main.bicep` na pridanie Document Intelligence:
+Upravte `infra/main.bicep`, aby ste pridali Document Intelligence:
 
 ```bicep
 // Add to main.bicep
@@ -233,7 +233,7 @@ azd env new myai-production
 
 2. **Nastavte parametre špecifické pre produkciu:**
 ```bash
-# V produkčnom prostredí sa zvyčajne používajú vyššie SKU
+# V produkcii sa zvyčajne používajú vyššie SKU
 azd env set AZURE_OPENAI_SKU S0
 azd env set AZURE_SEARCH_SKU standard
 
@@ -246,30 +246,30 @@ azd env set ENABLE_PRIVATE_ENDPOINTS true
 **Výzva**: Nakonfigurujte šablónu pre nákladovo efektívny vývoj.
 
 **Úlohy:**
-1. Určte, ktoré SKU je možné nastaviť na bezplatné/základné úrovne
+1. Identifikujte, ktoré SKU je možné nastaviť na free/basic úrovne
 2. Nakonfigurujte premenné prostredia pre minimálne náklady
-3. Nasadiť a porovnať náklady s produkčnou konfiguráciou
+3. Nasadte a porovnajte náklady s produkčnou konfiguráciou
 
-**Náznaky riešenia:**
-- Použite F0 (bezplatnú) úroveň pre Cognitive Services, kde je to možné
-- Použite Basic úroveň pre Search Service vo vývoji
+**Tipy k riešeniu:**
+- Použite F0 (bezplatný) stupeň pre Cognitive Services, keď je to možné
+- Použite Basic stupeň pre Search Service vo vývoji
 - Zvážte použitie Consumption plánu pre Functions
 
-## Modul 4: Bezpečnosť a produkčné najlepšie postupy
+## Modul 4: Bezpečnosť a najlepšie postupy pre produkciu
 
 ### Krok 4.1: Bezpečné spravovanie poverení
 
-**Aktuálny problém**: Mnoho AI aplikácií má API kľúče natvrdo v kóde alebo používa nebezpečné úložisko.
+**Súčasná výzva**: Mnoho AI aplikácií má API kľúče natvrdo v kóde alebo používa nebezpečné úložiská.
 
-**Riešenie AZD**: Managed Identity + integrácia Key Vault.
+**Riešenie AZD**: Managed Identity + integrácia s Key Vault.
 
 1. **Skontrolujte bezpečnostnú konfiguráciu vo vašej šablóne:**
 ```bash
-# Vyhľadajte konfiguráciu Key Vault a spravovanej identity
+# Skontrolujte konfiguráciu Key Vault a spravovanej identity
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
-2. **Overte, že Managed Identity funguje:**
+2. **Overte, či Managed Identity funguje:**
 ```bash
 # Skontrolujte, či má webová aplikácia správnu konfiguráciu identity
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
@@ -277,7 +277,7 @@ az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 
 ### Krok 4.2: Sieťová bezpečnosť
 
-1. **Povoľte súkromné koncové body** (ak ešte nie sú nakonfigurované):
+1. **Povoliť privátne endpointy** (ak ešte nie sú nakonfigurované):
 
 Pridajte do vašej bicep šablóny:
 ```bicep
@@ -302,7 +302,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-### Krok 4.3: Monitorovanie a pozorovateľnosť
+### Krok 4.3: Monitorovanie a observabilita
 
 1. **Nakonfigurujte Application Insights:**
 ```bash
@@ -339,37 +339,37 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 **Úloha**: Skontrolujte svoje nasadenie z hľadiska bezpečnostných najlepších postupov.
 
 **Kontrolný zoznam:**
-- [ ] Žiadne natvrdo zadané tajomstvá v kóde alebo konfigurácii
-- [ ] Managed Identity používaná na autentifikáciu medzi službami
-- [ ] Key Vault ukladá citlivú konfiguráciu
-- [ ] Sieťový prístup je správne obmedzený
-- [ ] Monitorovanie a logovanie sú povolené
+- [ ] Žiadne natvrdo vložené tajné údaje v kóde alebo konfigurácii
+- [ ] Managed Identity používané pre autentifikáciu medzi službami
+- [ ] Key Vault uchováva citlivé konfigurácie
+- [ ] Prístup do siete je správne obmedzený
+- [ ] Monitorovanie a protokolovanie sú povolené
 
 ## Modul 5: Konverzia vašej vlastnej AI aplikácie
 
-### Krok 5.1: Hodnotiaci pracovný list
+### Krok 5.1: Hodnotiaci formulár
 
-**Pred konverziou vašej aplikácie**, odpovedzte na tieto otázky:
+**Pred konverziou aplikácie** odpovedzte na tieto otázky:
 
 1. **Architektúra aplikácie:**
    - Aké AI služby vaša aplikácia používa?
    - Aké výpočtové prostriedky potrebuje?
-   - Vyžaduje si databázu?
+   - Vyžaduje databázu?
    - Aké sú závislosti medzi službami?
 
 2. **Bezpečnostné požiadavky:**
-   - Aké citlivé údaje vaša aplikácia spracúva?
+   - S akými citlivými údajmi vaša aplikácia pracuje?
    - Aké požiadavky na súlad (compliance) máte?
-   - Potrebujete súkromné sieťovanie?
+   - Potrebujete privátnu sieť?
 
 3. **Požiadavky na škálovanie:**
-   - Aké je očakávané zaťaženie?
+   - Aké zaťaženie očakávate?
    - Potrebujete automatické škálovanie?
-   - Sú nejaké regionálne požiadavky?
+   - Existujú regionálne požiadavky?
 
-### Krok 5.2: Vytvorte svoju AZD šablónu
+### Krok 5.2: Vytvorte vašu AZD šablónu
 
-**Nasledujte tento vzor pri konverzii vašej aplikácie:**
+**Postupujte podľa tohto vzoru pri konverzii aplikácie:**
 
 1. **Vytvorte základnú štruktúru:**
 ```bash
@@ -423,7 +423,7 @@ module openAI 'modules/openai.bicep' = {
 }
 ```
 
-**infra/modules/openai.bicep** - OpenAI modul:
+**infra/modules/openai.bicep** - Modul OpenAI:
 ```bicep
 @description('Name of the OpenAI service')
 param name string
@@ -452,16 +452,16 @@ output name string = openAIAccount.name
 **Výzva**: Vytvorte AZD šablónu pre AI aplikáciu na spracovanie dokumentov.
 
 **Požiadavky:**
-- Azure OpenAI pre analýzu obsahu
+- Microsoft Foundry Models pre analýzu obsahu
 - Document Intelligence pre OCR
 - Storage Account pre nahrávanie dokumentov
-- Function App pre spracovateľskú logiku
-- Web app pre používateľské rozhranie
+- Function App pre spracovnú logiku
+- Webová aplikácia pre používateľské rozhranie
 
 **Bonusové body:**
-- Pridajte správnu obsluhu chýb
+- Pridajte riadne ošetrenie chýb
 - Zahrňte odhad nákladov
-- Nastavte monitorovacie panely
+- Nastavte monitorovacie dashboardy
 
 ## Modul 6: Riešenie bežných problémov
 
@@ -474,13 +474,13 @@ output name string = openAIAccount.name
 # Skontrolujte aktuálne kvóty
 az cognitiveservices usage list --location eastus
 
-# Požiadajte o zvýšenie kvóty alebo vyskúšajte iný región
+# Požiadajte o zvýšenie kvóty alebo skúste iný región
 azd env set AZURE_LOCATION westus2
 azd up
 ```
 
 #### Problém 2: Model nie je dostupný v regióne
-**Príznaky:** Odpovede AI zlyhávajú alebo chyby pri nasadzovaní modelu
+**Príznaky:** AI odpovede zlyhávajú alebo sú chyby pri nasadzovaní modelu
 **Riešenia:**
 ```bash
 # Skontrolujte dostupnosť modelu podľa regiónu
@@ -495,49 +495,49 @@ azd deploy
 **Príznaky:** 403 Forbidden chyby pri volaní AI služieb
 **Riešenia:**
 ```bash
-# Skontrolujte priradenia rolí
+# Skontrolovať priradenia rolí
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Pridajte chýbajúce role
+# Pridať chýbajúce role
 az role assignment create \
   --assignee YOUR_PRINCIPAL_ID \
   --role "Cognitive Services OpenAI User" \
   --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 ```
 
-### Výkonové problémy
+### Problémy s výkonom
 
-#### Problém 4: Pomalé odpovede AI
+#### Problém 4: Pomalé AI odpovede
 **Kroky vyšetrovania:**
-1. Skontrolujte Application Insights pre výkonové metriky
-2. Skontrolujte metriky služby OpenAI v Azure portáli
-3. Overte sieťové pripojenie a latenciu
+1. Skontrolujte Application Insights pre metriky výkonu
+2. Preskúmajte metriky služby OpenAI v Azure porte
+3. Overte sieťovú konektivitu a latenciu
 
 **Riešenia:**
-- Implementujte cache pre bežné dotazy
+- Implementujte cache pre časté dopyty
 - Použite vhodný OpenAI model pre váš prípad použitia
-- Zvážte read repliku pre scenáre s vysokým zaťažením
+- Zvážte read repliky pre scenáre s vysokým zaťažením
 
-### **Lab cvičenie 6.1: Výzva na ladenie**
+### **Lab cvičenie 6.1: Ladiaca výzva**
 
-**Scenár**: Nasadenie prebehlo úspešne, ale aplikácia vracia chyby 500.
+**Scenár**: Nasadenie bolo úspešné, ale aplikácia vracia chyby 500.
 
-**Úlohy na ladenie:**
+**Úlohy pri ladení:**
 1. Skontrolujte logy aplikácie
 2. Overte konektivitu služieb
 3. Otestujte autentifikáciu
-4. Skontrolujte konfiguráciu
+4. Preskúmajte konfiguráciu
 
 **Nástroje na použitie:**
 - `azd show` pre prehľad nasadenia
-- Azure portál pre podrobné logy služieb
+- Azure portál pre detailné logy služieb
 - Application Insights pre telemetriu aplikácie
 
 ## Modul 7: Monitorovanie a optimalizácia
 
-### Krok 7.1: Nastavenie komplexného monitorovania
+### Krok 7.1: Nastavte komplexné monitorovanie
 
-1. **Vytvorte vlastné panely (dashboards):**
+1. **Vytvorte vlastné dashboardy:**
 
 Prejdite do Azure portálu a vytvorte dashboard s:
 - Počet požiadaviek OpenAI a latencia
@@ -564,114 +564,114 @@ az monitor metrics alert create \
 az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
-2. **Implementujte opatrenia na riadenie nákladov:**
-- Nastavte upozornenia rozpočtu
-- Použite politiky automatického škálovania
+2. **Zaviesť kontroly nákladov:**
+- Nastavte upozornenia na rozpočet
+- Použite autoscaling politiky
 - Implementujte cache požiadaviek
 - Sledujte využitie tokenov pre OpenAI
 
 ### **Lab cvičenie 7.1: Optimalizácia výkonu**
 
-**Úloha**: Optimalizujte svoju AI aplikáciu pre výkon aj náklady.
+**Úloha**: Optimalizujte vašu AI aplikáciu z hľadiska výkonu aj nákladov.
 
 **Metriky na zlepšenie:**
-- Znížte priemerný čas odozvy o 20%
-- Znížte mesačné náklady o 15%
-- Zachovajte 99.9% dostupnosť
+- Znížiť priemerný čas odpovede o 20%
+- Znížiť mesačné náklady o 15%
+- Udržať 99.9% dostupnosť
 
 **Stratégie na vyskúšanie:**
-- Implementujte cache odpovedí
+- Implementujte response caching
 - Optimalizujte prompty pre efektívnosť tokenov
 - Použite vhodné compute SKU
-- Nastavte správne automatické škálovanie
+- Nastavte správne autoscaling
 
 ## Záverečná výzva: End-to-End implementácia
 
 ### Scenár výzvy
 
-Máte za úlohu vytvoriť produkčného chatbota pre zákaznícku podporu poháňaného AI s týmito požiadavkami:
+Vašou úlohou je vytvoriť produkčný AI chatbot pre zákaznícku podporu s týmito požiadavkami:
 
 **Funkčné požiadavky:**
 - Webové rozhranie pre interakcie so zákazníkmi
-- Integrácia so službou Azure OpenAI pre odpovede
-- Schopnosť vyhľadávania dokumentov pomocou Cognitive Search
-- Integrácia so existujúcou databázou zákazníkov
+- Integrácia s Microsoft Foundry Models pre odpovede
+- Vyhľadávanie dokumentov pomocou Cognitive Search
+- Integrácia s existujúcou databázou zákazníkov
 - Podpora viacerých jazykov
 
 **Nefunkčné požiadavky:**
 - Zvládnuť 1000 súbežných používateľov
-- SLA 99,9% dostupnosť
-- Súlad so SOC 2
-- Náklady pod 500 $/mesiac
-- Nasadiť do viacerých prostredí (dev, staging, prod)
+- 99.9% SLA dostupnosť
+- SOC 2 súlad
+- Náklady do 500 $/mesiac
+- Nasadenie do viacerých prostredí (dev, staging, prod)
 
 ### Kroky implementácie
 
-1. Navrhnite architektúru
-2. Vytvorte AZD šablónu
-3. Implementujte bezpečnostné opatrenia
-4. Nastavte monitorovanie a upozorňovanie
-5. Vytvorte deployment pipeliny
-6. Zdokumentujte riešenie
+1. **Návrh architektúry**
+2. **Vytvorenie AZD šablóny**
+3. **Implementácia bezpečnostných opatrení**
+4. **Nastavenie monitorovania a alertovania**
+5. **Vytvorenie pipeline pre nasadzovanie**
+6. **Zdokumentovanie riešenia**
 
 ### Kritériá hodnotenia
 
 - ✅ **Funkčnosť**: Spĺňa všetky požiadavky?
 - ✅ **Bezpečnosť**: Sú implementované najlepšie postupy?
-- ✅ **Škálovateľnosť**: Zvládne zaťaženie?
-- ✅ **Udržiavateľnosť**: Je kód a infraštruktúra dobre organizovaná?
-- ✅ **Náklady**: Drží sa v rozpočte?
+- ✅ **Škálovateľnosť**: Zvládne požadované zaťaženie?
+- ✅ **Udržiavateľnosť**: Je kód a infraštruktúra dobre zorganizovaná?
+- ✅ **Náklady**: Je v stanovenom rozpočte?
 
-## Doplnkové zdroje
+## Ďalšie zdroje
 
 ### Dokumentácia Microsoftu
 - [Dokumentácia Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Dokumentácia služby Azure OpenAI](https://learn.microsoft.com/azure/cognitive-services/openai/)
+- [Dokumentácia služby Microsoft Foundry Models](https://learn.microsoft.com/azure/cognitive-services/openai/)
 - [Dokumentácia Microsoft Foundry](https://learn.microsoft.com/azure/ai-studio/)
 
-### Vzorkové šablóny
-- [Ukážková aplikácia Azure OpenAI Chat](https://github.com/Azure-Samples/azure-search-openai-demo)
-- [Rýchly štart OpenAI Chat App](https://github.com/Azure-Samples/openai-chat-app-quickstart)
+### Ukážkové šablóny
+- [Chat aplikácia Microsoft Foundry Models](https://github.com/Azure-Samples/azure-search-openai-demo)
+- [Rýchly štart OpenAI chat aplikácie](https://github.com/Azure-Samples/openai-chat-app-quickstart)
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
 ### Komunitné zdroje
 - [Microsoft Foundry Discord](https://discord.gg/microsoft-azure)
-- [GitHub Azure Developer CLI](https://github.com/Azure/azure-dev)
-- [Skvelé AZD šablóny](https://azure.github.io/awesome-azd/)
+- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
+- [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
 
 ## 🎓 Certifikát o absolvovaní
-Gratulujeme! Dokončili ste AI Workshop Lab. Teraz by ste mali byť schopní:
 
-- ✅ Previesť existujúce AI aplikácie na AZD šablóny
-- ✅ Nasadiť AI aplikácie pripravené na produkciu
+Gratulujeme! Dokončili ste AI Workshop Lab. Mali by ste teraz byť schopní:
+- ✅ Previesť existujúce AI aplikácie na šablóny AZD
+- ✅ Nasadiť produkčne pripravené AI aplikácie
 - ✅ Implementovať osvedčené bezpečnostné postupy pre AI pracovné zaťaženia
 - ✅ Monitorovať a optimalizovať výkon AI aplikácií
-- ✅ Riešiť bežné problémy pri nasadení
+- ✅ Riešiť bežné problémy pri nasadzovaní
 
 ### Ďalšie kroky
-1. Aplikujte tieto postupy vo vlastných AI projektoch
+1. Aplikujte tieto vzory do vlastných AI projektov
 2. Prispievajte šablóny späť komunite
-3. Pripojte sa na Microsoft Foundry Discord pre priebežnú podporu
-4. Preskúmajte pokročilé témy, napríklad nasadenia v viacerých regiónoch
+3. Pridajte sa na Microsoft Foundry Discord pre priebežnú podporu
+4. Preskúmajte pokročilé témy, napríklad nasadenia do viacerých regiónov
 
 ---
 
-**Workshop Feedback**: Pomôžte nám zlepšiť tento workshop tým, že sa podelíte o svoje skúsenosti v [Microsoft Foundry Discord kanáli #Azure](https://discord.gg/microsoft-azure).
+**Spätná väzba k workshopu**: Pomôžte nám zlepšiť tento workshop tým, že sa podelíte o svoje skúsenosti v [kanáli Microsoft Foundry Discord #Azure](https://discord.gg/microsoft-azure).
 
 ---
 
 **Navigácia kapitol:**
-- **📚 Course Home**: [AZD pre začiatočníkov](../../README.md)
-- **📖 Current Chapter**: Kapitola 2 - Vývoj orientovaný na AI
+- **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
+- **📖 Aktuálna kapitola**: Kapitola 2 - Vývoj zameraný na AI
 - **⬅️ Predchádzajúca**: [Nasadenie AI modelu](ai-model-deployment.md)
-- **➡️ Ďalšia**: [Najlepšie postupy pre produkčné AI](production-ai-practices.md)
-- **🚀 Ďalšia kapitola**: [Kapitola 3: Konfigurácia](../chapter-03-configuration/configuration.md)
+- **➡️ Nasledujúca**: [Najlepšie postupy pre produkčné AI](production-ai-practices.md)
+- **🚀 Nasledujúca kapitola**: [Kapitola 3: Konfigurácia](../chapter-03-configuration/configuration.md)
 
-**Potrebujete pomoc?** Pripojte sa k našej komunite pre podporu a diskusie o AZD a nasadeniach AI.
+**Potrebujete pomoc?** Pridajte sa k našej komunite pre podporu a diskusie o AZD a nasadeniach AI.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vylúčenie zodpovednosti:
-Tento dokument bol preložený pomocou služby automatického prekladu umelej inteligencie [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, vezmite prosím na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho originálnom jazyku by mal byť považovaný za rozhodujúci zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nezodpovedáme za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+**Vylúčenie zodpovednosti**:
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, berte prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu nenesieme zodpovednosť.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

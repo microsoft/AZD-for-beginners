@@ -1,36 +1,36 @@
-# Cheat Sheet příkazů - Základní příkazy AZD
+# Příručka příkazů - Základní příkazy AZD
 
-**Rychlá reference pro všechny kapitoly**
-- **📚 Domovský kurz**: [AZD pro začátečníky](../README.md)
-- **📖 Rychlý start**: [Kapitola 1: Základy & Rychlý start](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI příkazy**: [Kapitola 2: Vývoj orientovaný na AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+**Rychlý přehled pro všechny kapitoly**
+- **📚 Domov kurzu**: [AZD pro začátečníky](../README.md)
+- **📖 Rychlý start**: [Kapitola 1: Základy a rychlý start](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Příkazy AI**: [Kapitola 2: Vývoj orientovaný na AI](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Pokročilé**: [Kapitola 4: Infrastruktura jako kód](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Úvod
 
-Tento komplexní přehled poskytuje rychlou referenci pro nejčastěji používané příkazy Azure Developer CLI, uspořádané podle kategorií s praktickými příklady. Ideální pro rychlé vyhledávání během vývoje, řešení problémů a každodenních operací s projekty azd.
+Tento komplexní přehled poskytuje rychlou referenci pro nejčastěji používané příkazy Azure Developer CLI, uspořádané podle kategorií s praktickými příklady. Ideální pro rychlé dohledání během vývoje, řešení problémů a každodenních operací s projekty azd.
 
-## Cíle učení
+## Vzdělávací cíle
 
 Používáním tohoto přehledu budete:
 - Mít okamžitý přístup k základním příkazům a syntaxi Azure Developer CLI
-- Rozumět organizaci příkazů podle funkčních kategorií a případů použití
-- Odkazovat se na praktické příklady pro běžné scénáře vývoje a nasazení
-- Získat příkazy pro řešení problémů pro rychlé odstranění chyb
+- Rozumět organizaci příkazů podle funkčních kategorií a použití
+- Najít praktické příklady pro běžné scénáře vývoje a nasazení
+- Přistupovat k diagnostickým příkazům pro rychlé řešení problémů
 - Efektivně najít pokročilé možnosti konfigurace a přizpůsobení
-- Najít příkazy pro správu prostředí a pracovní postupy pro více prostředí
+- Lokalizovat příkazy pro správu prostředí a pracovní postupy s více prostředími
 
-## Výsledky učení
+## Očekávané výsledky učení
 
-Pravidelným používáním tohoto přehledu budete schopni:
-- Spouštět příkazy azd sebejistě bez nutnosti nahlížet do úplné dokumentace
+Při pravidelném odkazování na tento přehled budete schopni:
+- Spouštět příkazy azd s jistotou bez nutnosti nahlížení do kompletní dokumentace
 - Rychle řešit běžné problémy pomocí vhodných diagnostických příkazů
-- Efektivně spravovat více prostředí a scénáře nasazení
-- Používat pokročilé funkce azd a konfigurační možnosti podle potřeby
+- Efektivně spravovat více prostředí a scénářů nasazení
+- Aplikovat pokročilé funkce azd a možnosti konfigurace podle potřeby
 - Řešit problémy s nasazením pomocí systematických sekvencí příkazů
-- Optimalizovat pracovní postupy prostřednictvím efektivního využití zkratek a možností azd
+- Optimalizovat pracovní postupy efektivním používáním zkratek a voleb azd
 
-## Příkazy pro začátek
+## Začínáme - příkazy
 
 ### Autentizace
 ```bash
@@ -59,7 +59,7 @@ az logout
 # Procházet dostupné šablony
 azd template list
 
-# Inicializovat z šablony
+# Inicializovat ze šablony
 azd init --template todo-nodejs-mongo
 azd init --template <template-name>
 
@@ -70,11 +70,11 @@ azd init .
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## Hlavní příkazy pro nasazení
+## Základní příkazy nasazení
 
 ### Kompletní pracovní postup nasazení
 ```bash
-# Nasadit vše (příprava + nasazení)
+# Nasadit vše (provisionování + nasazení)
 azd up
 
 # Nasadit s vypnutými potvrzovacími výzvami
@@ -89,13 +89,13 @@ azd up --parameter location=westus2
 
 ### Pouze infrastruktura
 ```bash
-# Zajistit prostředky v Azure
+# Nasazení prostředků Azure
 azd provision
 
 # 🧪 Náhled změn infrastruktury
 azd provision --preview
-# Zobrazuje simulovaný náhled toho, jaké prostředky by byly vytvořeny/upraveny/smazány
-# Podobné 'terraform plan' nebo 'bicep what-if' - bezpečné spustit, nebudou provedeny žádné změny
+# Zobrazuje náhled v režimu suchého běhu, které prostředky by byly vytvořeny/upraveny/odstraněny
+# Podobné jako 'terraform plan' nebo 'bicep what-if' – bezpečné ke spuštění, žádné změny nebudou provedeny
 ```
 
 ### Pouze aplikace
@@ -111,7 +111,7 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### Sestavení a balení
+### Kompilace a balení
 ```bash
 # Sestavit aplikace
 azd package
@@ -157,11 +157,11 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-## ⚙️ Konfigurační příkazy
+## ⚙️ Příkazy konfigurace
 
 ### Globální konfigurace
 ```bash
-# Vypsat všechna nastavení
+# Vypsat všechny konfigurace
 azd config list
 
 # Nastavit globální výchozí hodnoty
@@ -171,7 +171,7 @@ azd config set defaults.subscription "sub-id"
 # Odstranit konfiguraci
 azd config unset defaults.location
 
-# Obnovit všechna nastavení
+# Resetovat všechna nastavení
 azd config reset
 ```
 
@@ -183,7 +183,7 @@ azd config validate
 # Zobrazit informace o projektu
 azd show
 
-# Získat koncové body služeb
+# Získat koncové body služby
 azd show --output json
 ```
 
@@ -194,17 +194,17 @@ azd show --output json
 # Otevřít panel monitorování v portálu Azure
 azd monitor
 
-# Otevřít živé metriky Application Insights
+# Otevřít živé metriky v Application Insights
 azd monitor --live
 
-# Otevřít panel protokolů Application Insights
+# Otevřít panel protokolů v Application Insights
 azd monitor --logs
 
-# Otevřít přehled Application Insights
+# Otevřít přehled v Application Insights
 azd monitor --overview
 ```
 
-### Zobrazení logů kontejneru
+### Zobrazení logů kontejnerů
 ```bash
 # Zobrazit protokoly pomocí Azure CLI (pro Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
@@ -212,35 +212,35 @@ az containerapp logs show --name <app-name> --resource-group <rg-name>
 # Sledovat protokoly v reálném čase
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# Zobrazit protokoly v portálu Azure
+# Zobrazit protokoly z Azure portálu
 azd monitor --logs
 ```
 
-### Dotazy Log Analytics
+### Dotazy v Log Analytics
 ```bash
-# Přístup k Log Analytics prostřednictvím Azure Portal
+# Přístup k Log Analytics přes Azure Portal
 azd monitor --logs
 
-# Dotazování protokolů pomocí Azure CLI
+# Provádějte dotazy v protokolech pomocí Azure CLI
 az monitor log-analytics query \
   --workspace <workspace-id> \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
-## 🛠️ Příkazy pro údržbu
+## 🛠️ Údržbové příkazy
 
 ### Vyčištění
 ```bash
 # Odstranit všechny prostředky Azure
 azd down
 
-# Vynutit smazání bez potvrzení
+# Vynutit odstranění bez potvrzení
 azd down --force
 
-# Vymazat dočasně smazané prostředky
+# Trvale vymazat dočasně smazané prostředky
 azd down --purge
 
-# Úplné vyčištění
+# Dokončit úklid
 azd down --force --purge
 ```
 
@@ -278,13 +278,13 @@ azd infra generate
 # 🧪 Náhled a plánování infrastruktury
 azd provision --preview
 # Simuluje zřizování infrastruktury bez nasazení
-# Analyzuje šablony Bicep/Terraform a zobrazuje:
+# Analyzuje šablony Bicep/Terraform a ukazuje:
 # - Zdroje, které budou přidány (zelené +)
 # - Zdroje, které budou upraveny (žluté ~)
-# - Zdroje, které budou smazány (červené -)
-# Bezpečné spuštění - v prostředí Azure nejsou provedeny žádné skutečné změny
+# - Zdroje, které budou odstraněny (červené -)
+# Bezpečné spuštění - nejsou provedeny žádné skutečné změny v prostředí Azure
 
-# Sestaví infrastrukturu z azure.yaml
+# Syntetizovat infrastrukturu z azure.yaml
 azd infra synth
 ```
 
@@ -300,22 +300,77 @@ azd show --output json
 azd show --output json | jq '.services'
 ```
 
+## 🤖 Příkazy AI a rozšíření
+
+### Rozšíření AZD
+```bash
+# Zobrazit všechna dostupná rozšíření (včetně AI)
+azd extension list
+
+# Nainstalovat rozšíření Foundry agents
+azd extension install azure.ai.agents
+
+# Nainstalovat rozšíření pro doladění
+azd extension install azure.ai.finetune
+
+# Nainstalovat rozšíření pro vlastní modely
+azd extension install azure.ai.models
+
+# Aktualizovat všechna nainstalovaná rozšíření
+azd extension upgrade --all
+```
+
+### Příkazy AI agenta
+```bash
+# Inicializovat projekt agenta z manifestu
+azd ai agent init -m <manifest-path-or-uri>
+
+# Zacílit na konkrétní projekt Foundry
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Určit zdrojový adresář agenta
+azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+
+# Zvolit hostingový cíl
+azd ai agent init -m agent-manifest.yaml --host containerapp
+```
+
+### MCP Server (Alpha)
+```bash
+# Spusťte MCP server pro váš projekt
+azd mcp start
+
+# Spravujte souhlasy nástrojů pro operace MCP
+azd mcp consent
+```
+
+### Generování infrastruktury
+```bash
+# Vygenerujte IaC soubory z definice vašeho projektu
+azd infra generate
+
+# Syntetizujte infrastrukturu ze souboru azure.yaml
+azd infra synth
+```
+
+---
+
 ## 🎯 Rychlé pracovní postupy
 
-### Pracovní postup vývoje
+### Vývojový pracovní postup
 ```bash
-# Zahajte nový projekt
+# Zahájit nový projekt
 azd init --template todo-nodejs-mongo
 cd my-project
 
-# Nasaďte do vývojového prostředí
+# Nasadit do vývoje
 azd env new dev
 azd up
 
-# Proveďte změny a znovu je nasaďte
+# Proveďte změny a znovu nasaďte
 azd deploy
 
-# Otevřete monitorovací panel
+# Otevřít monitorovací panel
 azd monitor --live
 ```
 
@@ -326,15 +381,15 @@ azd env new dev
 azd env new staging  
 azd env new production
 
-# Nasadit na vývojové prostředí (dev)
+# Nasadit do dev
 azd env select dev
 azd up
 
-# Otestovat a nasadit do předprodukčního prostředí (staging)
+# Otestovat a nasadit na staging
 azd env select staging
 azd up
 
-# Nasadit do produkčního prostředí
+# Nasadit do produkce
 azd env select production
 azd up
 ```
@@ -353,11 +408,11 @@ azd config list
 # Otevřít monitorovací panel pro protokoly
 azd monitor --logs
 
-# Zkontrolovat stav zdrojů
+# Zkontrolovat stav prostředků
 azd show --output json
 ```
 
-## 🔍 Příkazy pro ladění
+## 🔍 Ladicí příkazy
 
 ### Informace pro ladění
 ```bash
@@ -371,7 +426,7 @@ export AZD_DISABLE_TELEMETRY=true
 # Zkontrolovat aktuální konfiguraci
 azd config list
 
-# Zkontrolovat stav ověření
+# Zkontrolovat stav autentizace
 az account show
 ```
 
@@ -398,15 +453,15 @@ find . -type f  # Linux/macOS
 # Přejít do kořenového adresáře projektu azd
 cd $(azd root)
 
-# Zobrazit adresář konfigurace azd
+# Zobrazit konfigurační adresář azd
 echo $AZD_CONFIG_DIR  # Obvykle ~/.azd
 ```
 
-## 🎨 Formát výstupu
+## 🎨 Formátování výstupu
 
-### Výstup JSON
+### Výstup v JSON
 ```bash
-# Získat výstup ve formátu JSON pro skriptování
+# Získat JSON výstup pro skriptování
 azd show --output json
 azd env list --output json
 azd config list --output json
@@ -427,7 +482,7 @@ azd show --output json | jq '.services | keys'
 
 ## 🔧 Běžné kombinace příkazů
 
-### Skript pro kontrolu stavu
+### Skript kontroly stavu
 ```bash
 #!/bin/bash
 # Rychlá kontrola stavu
@@ -436,7 +491,7 @@ azd env show
 azd monitor --logs
 ```
 
-### Validace nasazení
+### Ověření nasazení
 ```bash
 #!/bin/bash
 # Ověření před nasazením
@@ -504,22 +559,22 @@ azd deploy
 azd show --output json
 ```
 
-### Příkazy pro obnovení
+### Příkazy pro obnovu
 ```bash
-# Obnova po selhání nasazení - vyčistit a znovu nasadit
+# Obnovit po neúspěšném nasazení - vyčistit a znovu nasadit
 azd down --force --purge
 azd up
 
-# Pouze znovu zřídit infrastrukturu
+# Obnovit pouze infrastrukturu
 azd provision
 
-# Pouze znovu nasadit aplikaci
+# Znovu nasadit pouze aplikaci
 azd deploy
 ```
 
-## 💡 Užitečné tipy
+## 💡 Profesionální tipy
 
-### Zkratky (aliasy) pro rychlejší pracovní postup
+### Aliasy pro rychlejší pracovní postup
 ```bash
 # Přidejte do svého .bashrc nebo .zshrc
 alias azdup='azd up'
@@ -551,7 +606,7 @@ azd-status() {
 
 ## 📖 Nápověda a dokumentace
 
-### Získání pomoci
+### Získání nápovědy
 ```bash
 # Obecná nápověda
 azd --help
@@ -578,17 +633,21 @@ azd template show <template-name> --docs
 
 ---
 
-**Tip**: Uložte si tento přehled do záložek a použijte `Ctrl+F` pro rychlé nalezení požadovaných příkazů!
+**Tip**: Uložte si tuto příručku do záložek a použijte `Ctrl+F` pro rychlé nalezení příkazů, které potřebujete!
 
 ---
 
 **Navigace**
 - **Předchozí lekce**: [Kontroly před nasazením](../docs/pre-deployment/preflight-checks.md)
-- **Další lekce**: [Glosář](glossary.md)
+- **Další lekce**: [Slovník](glossary.md)
+
+---
+
+> **💡 Chcete nápovědu k příkazům Azure ve svém editoru?** Nainstalujte [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) pomocí `npx skills add microsoft/github-copilot-for-azure` — 37 dovedností pro AI, Foundry, nasazení, diagnostiku a další.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vyloučení odpovědnosti**:
-Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho původním jazyce by měl být považován za rozhodující zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo špatné interpretace vyplývající z použití tohoto překladu.
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Ač usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho originálním jazyce by měl být považován za autoritativní zdroj. Pro zásadní informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakákoli nedorozumění nebo chybné výklady vyplývající z použití tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

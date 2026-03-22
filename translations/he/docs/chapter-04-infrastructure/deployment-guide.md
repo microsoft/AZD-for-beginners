@@ -1,89 +1,89 @@
-# מדריך פריסה - שליטה על פריסות AZD
+# מדריך פריסה - שליטה בפריסות AZD
 
-**ניווט בין פרקים:**
-- **📚 בית הקורס**: [AZD למתחילים](../../README.md)
-- **📖 הפרק הנוכחי**: פרק 4 - תשתית כקוד ופריסה
+**ניווט בפרקים:**
+- **📚 דף קורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 4 - תשתית כקוד ופריסה
 - **⬅️ פרק קודם**: [פרק 3: תצורה](../chapter-03-configuration/configuration.md)
 - **➡️ הבא**: [הקצאת משאבים](provisioning.md)
-- **🚀 הפרק הבא**: [פרק 5: פתרונות AI מרובי-סוכנים](../../examples/retail-scenario.md)
+- **🚀 פרק הבא**: [פרק 5: פתרונות AI מרובי-סוכנים](../../examples/retail-scenario.md)
 
-## מבוא
+## הקדמה
 
-This## Understanding the Deployment Processcomprehensive guide covers everything you need to know about deploying applications using Azure Developer CLI, from basic single-command deployments to advanced production scenarios with custom hooks, multiple environments, and CI/CD integration. Master the complete deployment lifecycle with practical examples and best practices.
+מדריך מקיף זה מכסה את כל מה שצריך לדעת על פריסת יישומים באמצעות Azure Developer CLI, מפריסות בפקודה בודדת בסיסית ועד תרחישי ייצור מתקדמים עם hooks מותאמים, סביבות מרובות ואינטגרציה של CI/CD. שלוט בכל מחזור חיי הפריסה עם דוגמאות מעשיות ונהלים מומלצים.
 
-## מטרות הלמידה
+## יעדי הלמידה
 
-על ידי השלמת מדריך זה, תוכל:
-- לשלוט בכל פקודות וזרימות העבודה של Azure Developer CLI לפריסה
-- להבין את מחזור חיי הפריסה המלא מההקצאה לניטור
+בסיום מדריך זה, תוכל:
+- לשלוט בכל פקודות וזרמי העבודה של פריסה ב-Azure Developer CLI
+- להבין את מחזור חיי הפריסה המלא מהקצאה ועד ניטור
 - ליישם hooks מותאמים לפריסה לאוטומציה לפני ואחרי הפריסה
-- להגדיר מספר סביבות עם פרמטרים ספציפיים לכל סביבה
-- להגדיר אסטרטגיות פריסה מתקדמות כולל פריסות blue-green ו-canary
-- לשלב פריסות `azd` בצנרת CI/CD ובזרימות עבודה של DevOps
+- להגדיר סביבות מרובות עם פרמטרים ייחודיים לסביבה
+- להקים אסטרטגיות פריסה מתקדמות כולל פריסות כחול-ירוק ו-canary
+- לאחד פריסות azd עם צינורות CI/CD וזרמי עבודה ב-DevOps
 
-## תוצאות למידה
+## תוצאות הלמידה
 
-בסיום, תוכל:
-- להריץ ולפתור בעיות בכל זרימות העבודה של פריסת `azd` באופן עצמאי
-- לעצב וליישם אוטומציה לפריסה מותאמת באמצעות hooks
+בסיום תוכל:
+- להפעיל ולטפל בבעיות בכל זרמי העבודה של פריסת azd באופן עצמאי
+- לעצב וליישם אוטומציה מותאמת לפריסה באמצעות hooks
 - להגדיר פריסות מוכנות לייצור עם אבטחה וניטור מתאימים
-- לנהל תרחישי פריסה מורכבים עם מספר סביבות
-- לאופטם ביצועי פריסה וליישם אסטרטגיות החזרה למצב קודם
-- לשלב פריסות `azd` בפרקטיקות DevOps ארגוניות
+- לנהל תרחישי פריסה מורכבים בסביבות מרובות
+- לאופטם ביצועי פריסה וליישם אסטרטגיות חזרה אחורה
+- לשלב פריסות azd בפרקטיקות DevOps ארגוניות
 
 ## סקירת פריסה
 
-Azure Developer CLI מספקת מספר פקודות פריסה:
-- `azd up` - זרימת עבודה מלאה (provision + deploy)
-- `azd provision` - יצירה/עדכון של משאבי Azure בלבד
-- `azd deploy` - פריסת קוד היישום בלבד
-- `azd package` - בניה ועטיפת יישומים
+Azure Developer CLI מספק מספר פקודות לפריסה:
+- `azd up` - זרם עבודה מלא (הקצאה + פריסה)
+- `azd provision` - יצירה/עדכון משאבי Azure בלבד
+- `azd deploy` - פריסת קוד אפליקציה בלבד
+- `azd package` - בניה וחבילה של יישומים
 
 ## זרמי עבודה בסיסיים לפריסה
 
 ### פריסה מלאה (azd up)
-זרימת העבודה השכיחה ביותר לפרויקטים חדשים:
+זרם העבודה הנפוץ ביותר לפרויקטים חדשים:
 ```bash
-# פרוס הכל מאפס
+# לפרוס הכל מאפס
 azd up
 
-# פרוס בסביבה ספציפית
+# לפרוס עם סביבה ספציפית
 azd up --environment production
 
-# פרוס עם פרמטרים מותאמים אישית
+# לפרוס עם פרמטרים מותאמים אישית
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### פריסה של תשתית בלבד
-כאשר אתה צריך רק לעדכן משאבי Azure:
+### פריסת תשתית בלבד
+כשצריך רק לעדכן משאבי Azure:
 ```bash
-# פריסה/עדכון תשתית
+# פרוס/עדכן תשתית
 azd provision
 
-# פריסה עם הרצה יבשה לקבלת תצוגה מקדימה של השינויים
+# פרוס עם הרצה יבשה לצפייה מקדימה בשינויים
 azd provision --preview
 
-# פריסת שירותים ספציפיים
+# פרוס שירותים ספציפיים
 azd provision --service database
 ```
 
 ### פריסת קוד בלבד
-לעדכונים מהירים של היישום:
+לעדכוני אפליקציה מהירים:
 ```bash
 # פרוס את כל השירותים
 azd deploy
 
 # פלט צפוי:
-# פריסת שירותים (azd deploy)
-# - web: פריסה... הושלמה
-# - api: פריסה... הושלמה
-# הצלחה: הפריסה שלך הושלמה בתוך 2 דקות ו-15 שניות
+# מפריס שירותים (azd deploy)
+# - web: בפריסה... בוצע
+# - api: בפריסה... בוצע
+# הצלחה: הפריסה שלך הושלמה תוך 2 דקות ו-15 שניות
 
 # פרוס שירות ספציפי
 azd deploy --service web
 azd deploy --service api
 
-# פרוס עם פרמטרי בנייה מותאמים
+# פרוס עם ארגומנטים מותאמים לבנייה
 azd deploy --service api --build-arg NODE_ENV=production
 
 # אמת את הפריסה
@@ -92,32 +92,32 @@ azd show --output json | jq '.services'
 
 ### ✅ אימות פריסה
 
-לאחר כל פריסה, אמת את ההצלחה:
+לאחר כל פריסה, אמת הצלחה:
 
 ```bash
 # בדוק שכל השירותים פועלים
 azd show
 
-# בדוק נקודות קצה של מצב המערכת
+# בדוק נקודות קצה של מצב בריאות
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
 curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
 curl -f "$API_URL/health" || echo "❌ API health check failed"
 
-# עקוב אחר שגיאות (נפתח בדפדפן כברירת מחדל)
+# נטר שגיאות (נפתח בדפדפן כברירת מחדל)
 azd monitor --logs
 ```
 
 **קריטריוני הצלחה:**
-- ✅ כל השירותים מציגים מצב "Running"
-- ✅ נקודות בריאות מחזירות HTTP 200
-- ✅ אין יומני שגיאות בחמש הדקות האחרונות
-- ✅ היישום מגיב לבקשות בדיקה
+- ✅ כל השירותים במצב "Running"
+- ✅ נקודות הבריאות מחזירות HTTP 200
+- ✅ אין רשומות שגיאה ב-5 הדקות האחרונות
+- ✅ האפליקציה מגיבה לבקשות בדיקה
 
 ## 🏗️ הבנת תהליך הפריסה
 
-### שלב 1: Pre-Provision Hooks
+### שלב 1: Hooks לפני ההקצאה
 ```yaml
 # azure.yaml
 hooks:
@@ -137,7 +137,7 @@ hooks:
 - מגדיר רשת ואבטחה
 - מגדיר ניטור ורישום
 
-### שלב 3: Post-Provision Hooks
+### שלב 3: Hooks אחרי ההקצאה
 ```yaml
 hooks:
   postprovision:
@@ -150,12 +150,12 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### שלב 4: אריזת היישום
-- בונה את קוד היישום
+### שלב 4: אריזת האפליקציה
+- בונה קוד אפליקציה
 - יוצר ארטיפקטים לפריסה
-- אורז עבור הפלטפורמה היעד (containers, ZIP files, וכו')
+- אורז לפלטפורמה היעד (קונטיינרים, קבצי ZIP ועוד)
 
-### שלב 5: Pre-Deploy Hooks
+### שלב 5: Hooks לפני הפריסה
 ```yaml
 hooks:
   predeploy:
@@ -168,12 +168,12 @@ hooks:
       npm run db:migrate
 ```
 
-### שלב 6: פריסת היישום
-- מפרוס את היישומים הארוזים לשירותי Azure
+### שלב 6: פריסת האפליקציה
+- מפריס אפליקציות ארוזות לשירותי Azure
 - מעדכן הגדרות תצורה
-- מתחיל/מאתחל שירותים
+- מפעיל/מאתחל מחדש שירותים
 
-### שלב 7: Post-Deploy Hooks
+### שלב 7: Hooks אחרי הפריסה
 ```yaml
 hooks:
   postdeploy:
@@ -186,9 +186,9 @@ hooks:
       curl https://${WEB_URL}/health
 ```
 
-## 🎛️ תצורת פריסה
+## 🎛️ הגדרות פריסה
 
-### הגדרות פריסה ספציפיות לשירות
+### הגדרות פריסה לשירות מסוים
 ```yaml
 # azure.yaml
 services:
@@ -218,7 +218,7 @@ services:
     buildCommand: npm install --production
 ```
 
-### קונפיגורציות ספציפיות לסביבה
+### תצורות ייחודיות לסביבה
 ```bash
 # סביבת פיתוח
 azd env set NODE_ENV development
@@ -240,7 +240,7 @@ azd env set LOG_LEVEL error
 
 ## 🔧 תרחישי פריסה מתקדמים
 
-### יישומים מרובי-שירותים
+### אפליקציות מרובות שירותים
 ```yaml
 # Complex application with multiple services
 services:
@@ -276,16 +276,16 @@ services:
     host: function
 ```
 
-### פריסות Blue-Green
+### פריסות כחול-ירוק
 ```bash
-# צור את הסביבה הכחולה
+# צור סביבה כחולה
 azd env new production-blue
 azd up --environment production-blue
 
 # בדוק את הסביבה הכחולה
 ./scripts/test-environment.sh production-blue
 
-# העבר את התעבורה לסביבה הכחולה (עדכון DNS/מאזן עומסים ידני)
+# החלף תנועה לכחולה (עדכון DNS/מאזן עומסים ידני)
 ./scripts/switch-traffic.sh production-blue
 
 # נקה את הסביבה הירוקה
@@ -338,9 +338,9 @@ if [[ $confirm == [yY] ]]; then
 fi
 ```
 
-## 🐳 פריסות מכולות
+## 🐳 פריסות קונטיינר
 
-### פריסות Container App
+### פריסות אפליקציות קונטיינר
 ```yaml
 services:
   api:
@@ -364,7 +364,7 @@ services:
       maxReplicas: 10
 ```
 
-### אופטימיזציית Dockerfile רב-שלבית
+### אופטימיזציית Dockerfile מרובת שלבים
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -390,19 +390,19 @@ EXPOSE 3000
 CMD ["npm", "start"]
 ```
 
-## ⚡ אופטימיזציה של ביצועים
+## ⚡ אופטימיזציית ביצועים
 
-### פריסות ספציפיות לשירות
+### פריסות לשירות ייחודי
 ```bash
-# פרוס שירות ספציפי לאיטרציה מהירה
+# לפרוס שירות ספציפי עבור איטרציה מהירה יותר
 azd deploy --service web
 azd deploy --service api
 
-# פרוס את כל השירותים
+# לפרוס את כל השירותים
 azd deploy
 ```
 
-### caching בבנייה
+### מטמון בניה
 ```yaml
 # azure.yaml - Configure build commands
 services:
@@ -414,25 +414,25 @@ services:
 
 ### פריסות קוד יעילות
 ```bash
-# השתמש ב-azd deploy (לא ב-azd up) לשינויים של קוד בלבד
-# זה מדלג על פריסת התשתית והוא הרבה יותר מהיר
+# השתמש ב-azd deploy (ולא ב-azd up) לשינויים בקוד בלבד
+# זה מדלג על פריסת תשתית ומהיר בהרבה
 azd deploy
 
-# פרוס שירות ספציפי לאיטרציה מהירה יותר
+# פרוס שירות ספציפי כדי לחזור במהירות מירבית
 azd deploy --service api
 ```
 
-## 🔍 ניטור פריסה
+## 🔍 ניטור הפריסה
 
 ### ניטור פריסה בזמן אמת
 ```bash
-# נטר את היישום בזמן אמת
+# לנטר את היישום בזמן אמת
 azd monitor --live
 
-# צפה ביומני היישום
+# לצפות ביומני היישום
 azd monitor --logs
 
-# בדוק את מצב הפריסה
+# לבדוק את מצב הפריסה
 azd show
 ```
 
@@ -457,7 +457,7 @@ services:
 
 echo "Validating deployment..."
 
-# בדוק את בריאות היישום
+# בדוק את מצב הבריאות של האפליקציה
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -487,12 +487,12 @@ echo "✅ Deployment validation completed successfully"
 
 ### ניהול סודות
 ```bash
-# אחסן סודות באופן מאובטח
+# אחסן סודות בצורה מאובטחת
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# התייחס לסודות בקובץ azure.yaml
+# הפנה לסודות בקובץ azure.yaml
 ```
 
 ```yaml
@@ -531,37 +531,37 @@ services:
           - external-api-key
 ```
 
-## 🚨 אסטרטגיות החזרה למצב קודם
+## 🚨 אסטרטגיות חזרה אחורה
 
-### החזרה מהירה
+### חזרה אחורה מהירה
 ```bash
-# ל-AZD אין גלגול לאחור מובנה. גישות מומלצות:
+# ל-AZD אין אפשרות החזרה מובנית. גישות מומלצות:
 
 # אפשרות 1: פריסה מחדש מ-Git (מומלץ)
-git revert HEAD  # בטל את ה-commit הבעייתי
+git revert HEAD  # החזר את ה-commit הבעייתי
 git push
 azd deploy
 
-# אפשרות 2: פריסה מחדש של ה-commit הספציפי
+# אפשרות 2: פריסה מחדש של commit מסוים
 git checkout <previous-commit-hash>
 azd deploy
 git checkout main
 ```
 
-### החזרת תשתית
+### חזרה אחורה בתשתית
 ```bash
 # תצוגה מקדימה של שינויים בתשתית לפני יישום
 azd provision --preview
 
-# לגלגול חזרה של התשתית, השתמש בבקרת גרסאות:
-git revert HEAD  # בטל שינויים בתשתית
-azd provision    # יישם את מצב התשתית הקודם
+# עבור הרצת תשתית חזרה, השתמש בבקרת גירסאות:
+git revert HEAD  # ביטול שינויים בתשתית
+azd provision    # יישום מצב תשתית קודם
 ```
 
-### החזרת מיגרציית מסד נתונים
+### חזרה אחורה במיגרציית מסד נתונים
 ```bash
 #!/bin/bash
-# סקריפטים/שחזור-מסד-נתונים.sh
+# scripts/rollback-database.sh
 
 echo "Rolling back database migrations..."
 npm run db:rollback
@@ -574,19 +574,19 @@ echo "Database rollback completed"
 
 ## 📊 מדדי פריסה
 
-### עקוב אחרי ביצועי הפריסה
+### מעקב אחרי ביצועי הפריסה
 ```bash
-# הצג מצב הפריסה הנוכחי
+# הצג את מצב הפריסה הנוכחי
 azd show
 
-# נטר את היישום באמצעות Application Insights
+# נטר את היישום עם Application Insights
 azd monitor --overview
 
-# הצג מדדי זמן אמת
+# הצג מדדים בזמן אמת
 azd monitor --live
 ```
 
-### איסוף מדדים מותאמים
+### איסוף מדדים מותאמים אישית
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -603,16 +603,16 @@ hooks:
         -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
 ```
 
-## 🎯 שיטות עבודה מומלצות
+## 🎯 נהלים מומלצים
 
-### 1. עקביות סביבות
+### 1. עקביות סביבתית
 ```bash
-# השתמש בשמות עקביים
+# השתמש בשם עקבי
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# שמור על עקביות בין הסביבות
+# שמור על תאימות סביבתית
 ./scripts/sync-environments.sh
 ```
 
@@ -621,14 +621,14 @@ azd env new production-v1
 # תצוגה מקדימה של שינויים בתשתית לפני הפריסה
 azd provision --preview
 
-# השתמש ב-lint עבור ARM/Bicep
+# השתמש בלינטינג של ARM/Bicep
 az bicep lint --file infra/main.bicep
 
-# אמת את התחביר של Bicep
+# אשר תחביר Bicep
 az bicep build --file infra/main.bicep
 ```
 
-### 3. אינטגרציה של בדיקות
+### 3. אינטגרציית בדיקות
 ```yaml
 hooks:
   predeploy:
@@ -665,51 +665,51 @@ echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
 ```
 
-## הצעדים הבאים
+## שלבים הבאים
 
-- [הקצאת משאבים](provisioning.md) - העמקה בניהול תשתיות
+- [הקצאת משאבים](provisioning.md) - העמקה בניהול תשתית
 - [תכנון לפני פריסה](../chapter-06-pre-deployment/capacity-planning.md) - תכנן את אסטרטגיית הפריסה שלך
-- [בעיות נפוצות](../chapter-07-troubleshooting/common-issues.md) - פתרון בעיות פריסה
-- [שיטות עבודה מומלצות](../chapter-07-troubleshooting/debugging.md) - אסטרטגיות פריסה מוכנות לייצור
+- [בעיות נפוצות](../chapter-07-troubleshooting/common-issues.md) - פתרון בעיות בפריסה
+- [נהלים מומלצים](../chapter-07-troubleshooting/debugging.md) - אסטרטגיות פריסה מוכנות לייצור
 
 ## 🎯 תרגילי פריסה מעשיים
 
-### תרגיל 1: זרם עבודה של פריסה אינקרמנטלית (20 דקות)
-**מטרה**: לשלוט בהבחנה בין פריסות מלאות לאינקרמנטליות
+### תרגיל 1: זרם עבודה של פריסה הדרגתית (20 דקות)
+**מטרה**: לשלוט בהבדל בין פריסה מלאה להדרגתית
 
 ```bash
-# פריסה ראשונית
+# פריסת התחלתית
 mkdir deployment-practice && cd deployment-practice
 azd init --template todo-nodejs-mongo
 azd up
 
-# תעד את זמן הפריסה הראשונית
+# הקלט זמן פריסת התחלתית
 echo "Full deployment: $(date)" > deployment-log.txt
 
-# בצע שינוי בקוד
+# ביצוע שינוי בקוד
 echo "// Updated $(date)" >> src/api/src/server.js
 
-# פרוס רק את הקוד (מהיר)
+# פרוס רק קוד (מהיר)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
 # השווה זמנים
 cat deployment-log.txt
 
-# נקה
+# ניקוי
 azd down --force --purge
 ```
 
 **קריטריוני הצלחה:**
-- [ ] פריסה מלאה אורכת 5–15 דקות
-- [ ] פריסת קוד בלבד אורכת 2–5 דקות
-- [ ] שינויים בקוד משתקפים ביישום המופעל
+- [ ] פריסה מלאה נמשכת 5-15 דקות
+- [ ] פריסת קוד בלבד נמשכת 2-5 דקות
+- [ ] שינויים בקוד משתקפים באפליקציה המופעלת
 - [ ] התשתית לא משתנה לאחר `azd deploy`
 
-**תוצאת למידה**: `azd deploy` מהיר ב-50–70% מ-`azd up` עבור שינויים בקוד
+**תוצאת למידה**: `azd deploy` מהיר ב-50-70% מ-`azd up` עבור שינויים בקוד
 
 ### תרגיל 2: Hooks מותאמים לפריסה (30 דקות)
-**מטרה**: יישם אוטומציה לפני ואחרי הפריסה
+**מטרה**: ליישם אוטומציה לפני ואחרי פריסה
 
 ```bash
 # צור סקריפט אימות לפני פריסה
@@ -724,7 +724,7 @@ if ! npm run test:unit; then
     exit 1
 fi
 
-# בדוק אם קיימים שינויים שלא בוצע להם commit
+# בדוק שינויים בלתי מחויבים
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -734,7 +734,7 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# צור בדיקת תקינות בסיסית לאחר פריסה
+# צור בדיקת עישון לאחר פריסה
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
 echo "💨 Running smoke tests..."
@@ -753,7 +753,7 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# הוסף hooks לקובץ azure.yaml
+# הוסף ווים ל-azure.yaml
 cat >> azure.yaml << 'EOF'
 
 hooks:
@@ -766,21 +766,21 @@ hooks:
     run: ./scripts/post-deploy-test.sh
 EOF
 
-# בדוק פריסה עם hooks
+# בדוק פריסה עם ווים
 azd deploy
 ```
 
 **קריטריוני הצלחה:**
-- [ ] סקריפט Pre-deploy רץ לפני הפריסה
-- [ ] הפריסה מבוטלת אם הבדיקות נכשלות
-- [ ] בדיקת smoke לאחר הפריסה מאמתת את הבריאות
-- [ ] ה-hooks מתבצעים בסדר הנכון
+- [ ] סקריפט לפני הפריסה רץ לפני הפריסה
+- [ ] פריסה מבוטלת אם הבדיקות נכשלות
+- [ ] בדיקת עשן לאחר הפריסה מאמתת בריאות
+- [ ] Hooks מתבצעים בסדר הנכון
 
-### תרגיל 3: אסטרטגיית פריסה רב-סביבתית (45 דקות)
-**מטרה**: יישם זרם עבודה של פריסה בשלבים (dev → staging → production)
+### תרגיל 3: אסטרטגיית פריסה מרובת סביבות (45 דקות)
+**מטרה**: ליישם זרם עבודה פריסה בשלבים (dev → staging → הפקה)
 
 ```bash
-# ‎צור סקריפט לפריסה
+# צור סקריפט פריסה
 cat > deploy-staged.sh << 'EOF'
 #!/bin/bash
 set -e
@@ -788,7 +788,7 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# ‎שלב 1: פריסה לסביבת פיתוח
+# שלב 1: פריסה לסביבת פיתוח
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
@@ -797,7 +797,7 @@ azd up --no-prompt
 echo "Running dev tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# ‎שלב 2: פריסה לסביבת סטייג'ינג
+# שלב 2: פריסה לסביבת העמסה
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
@@ -806,7 +806,7 @@ azd up --no-prompt
 echo "Running staging tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# ‎שלב 3: אישור ידני עבור הייצור
+# שלב 3: אישור ידני לייצור
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -829,51 +829,51 @@ EOF
 
 chmod +x deploy-staged.sh
 
-# ‎צור סביבות
+# צור סביבות
 azd env new dev
 azd env new staging
 azd env new production
 
-# ‎הרץ פריסה בשלבים
+# הפעלת פריסה בשלבים
 ./deploy-staged.sh
 ```
 
 **קריטריוני הצלחה:**
-- [ ] סביבת Dev נפרסת בהצלחה
-- [ ] סביבת Staging נפרסת בהצלחה
-- [ ] נדרש אישור ידני לפריסה לייצור
-- [ ] לכל הסביבות יש בדיקות בריאות פועלות
-- [ ] ניתן להחזיר למצב קודם אם נדרש
+- [ ] סביבות פיתוח מתפרסות בהצלחה
+- [ ] סביבות בדיקה מתפרסות בהצלחה
+- [ ] נדרש אישור ידני לייצור
+- [ ] בכל הסביבות קיימות בדיקות בריאות עובדות
+- [ ] אפשרות לחזרה אחורה במידת הצורך
 
-### תרגיל 4: אסטרטגיית החזרה למצב קודם (25 דקות)
-**מטרה**: יישם ובדוק החזרה של פריסה באמצעות Git
+### תרגיל 4: אסטרטגיית חזרה אחורה (25 דקות)
+**מטרה**: ליישם ולבדוק חזרה אחורה לפריסה בעזרת Git
 
 ```bash
-# פרוס v1
+# פרוס גרסה 1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# שמור את ה-hash של ה-commit של v1
+# שמור את ה-hash של הקומיט בגרסה 1
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# פרוס v2 עם שינוי שמפר תאימות
+# פרוס גרסה 2 עם שינוי שמשבר תאימות
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
 azd deploy
 
-# זהה כישלון והחזר לגרסה קודמת
+# זיהוי כשל וביצוע ביטול
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # החזר לגרסה קודמת באמצעות git
+    # בטל באמצעות git
     git revert HEAD --no-edit
     
-    # גלגול חזרה של הסביבה
+    # בטל את הסביבה
     azd env set APP_VERSION "1.0.0"
     
-    # פרוס מחדש v1
+    # פרוס מחדש את גרסה 1
     azd deploy
     
     echo "✅ Rolled back to v1.0.0"
@@ -881,17 +881,17 @@ fi
 ```
 
 **קריטריוני הצלחה:**
-- [ ] יכול לזהות כישלונות פריסה
-- [ ] סקריפט ההחזרה מתבצע אוטומטית
-- [ ] היישום חוזר למצב עבודה
-- [ ] בדיקות הבריאות עוברות לאחר ההחזרה
+- [ ] יכולת לזהות כשלים בפריסה
+- [ ] סקריפט חזרה אחורה מתבצע אוטומטית
+- [ ] האפליקציה חוזרת למצב תקין
+- [ ] בדיקות הבריאות עובדות לאחר החזרה אחורה
 
-## 📊 מעקב אחר מדדי פריסה
+## 📊 מעקב מדדי פריסה
 
 ### עקוב אחר ביצועי הפריסה שלך
 
 ```bash
-# צור סקריפט למדדי פריסה
+# צור סקריפט מדדי פריסה
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
@@ -920,16 +920,16 @@ chmod +x track-deployment.sh
 
 **נתח את המדדים שלך:**
 ```bash
-# הצג היסטוריית הפריסה
+# הצג היסטוריית פריסות
 cat deployment-metrics.csv
 
-# חשב את זמן הפריסה הממוצע
+# חשב זמן פריסה ממוצע
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
 ## משאבים נוספים
 
-- [תיעוד Azure Developer CLI לפריסה](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [מדריך הפניות לפריסות Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [פריסת Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
 - [פריסת Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
 - [פריסת Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
@@ -937,12 +937,12 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 ---
 
 **ניווט**
-- **הدرس הקודם**: [הפרויקט הראשון שלך](../chapter-01-foundation/first-project.md)
-- **הدرس הבא**: [הקצאת משאבים](provisioning.md)
+- **שיעור קודם**: [הפרויקט הראשון שלך](../chapter-01-foundation/first-project.md)
+- **שיעור הבא**: [הקצאת משאבים](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-הצהרת אי-אחריות:
-מסמך זה תורגם בעזרת שירות תרגום מבוסס בינה מלאכותית Co-op Translator (https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדייק, יש לקחת בחשבון שתורגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. יש לראות במסמך המקורי בשפתו כמקור הסמכות. עבור מידע קריטי מומלץ להיעזר בתרגום מקצועי על ידי מתרגם אנושי. איננו אחראים לכל אי-הבנה או פרשנות שגויה הנובעת מהשימוש בתרגום זה.
+**כתב ויתור**:  
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש להיות מודעים לכך שתרגומים אוטומטיים עשויים לכלול טעויות או חוסר דיוקים. המסמך המקורי בשפת המקור שלו צריך להיחשב כמקור הסמכותי. למידע קריטי מומלץ להיעזר בתרגום מקצועי אנושי. אנו לא אחראים לכל אי הבנה או פרשנות שגויה הנובעת מהשימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

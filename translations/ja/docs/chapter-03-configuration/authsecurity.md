@@ -1,30 +1,30 @@
-# Authentication Patterns and Managed Identity
+# 認証パターンとマネージド アイデンティティ
 
-⏱️ **推定時間**: 45-60 分 | 💰 **コスト影響**: 無料（追加料金なし） | ⭐ **複雑さ**: 中級
+⏱️ <strong>推定時間</strong>: 45-60 分 | 💰 <strong>コスト影響</strong>: 無料（追加料金なし） | ⭐ <strong>複雑さ</strong>: 中級
 
-**📚 学習経路:**
-- ← 前へ: [構成管理](configuration.md) - 環境変数とシークレットの管理
-- 🎯 **現在地**: 認証とセキュリティ（Managed Identity、Key Vault、セキュアなパターン）
-- → 次へ: [最初のプロジェクト](first-project.md) - 最初の AZD アプリを構築する
-- 🏠 [コースホーム](../../README.md)
+**📚 学習パス:**
+- ← 前: [構成管理](configuration.md) - 環境変数とシークレットの管理
+- 🎯 <strong>現在位置</strong>: 認証とセキュリティ（マネージド アイデンティティ、Key Vault、セキュアなパターン）
+- → 次: [最初のプロジェクト](first-project.md) - 最初の AZD アプリを構築する
+- 🏠 [コース ホーム](../../README.md)
 
 ---
 
 ## このレッスンで学ぶこと
 
 このレッスンを完了すると、以下ができるようになります:
-- Azure の認証パターン（キー、接続文字列、Managed Identity）を理解する
-- パスワード不要の認証のために **Managed Identity** を実装する
-- **Azure Key Vault** 統合でシークレットを保護する
-- AZD デプロイのために **ロール ベースのアクセス制御 (RBAC)** を構成する
-- Container Apps や Azure サービスでセキュリティのベストプラクティスを適用する
-- キー ベースの認証から ID ベースの認証へ移行する
+- Azure の認証パターン（キー、接続文字列、マネージド アイデンティティ）を理解する
+- パスワード不要の認証のためにマネージド アイデンティティを実装する
+- Azure Key Vault 統合でシークレットを保護する
+- AZD デプロイのためのロールベースアクセス制御（RBAC）を構成する
+- Container Apps と Azure サービスでセキュリティベストプラクティスを適用する
+- キー ベースの認証からアイデンティティ ベースの認証へ移行する
 
-## なぜ Managed Identity が重要か
+## マネージド アイデンティティが重要な理由
 
-### 問題点: 伝統的な認証
+### 問題: 従来の認証
 
-**Managed Identity 導入前:**
+**マネージド アイデンティティ導入前:**
 ```javascript
 // ❌ セキュリティリスク: コード内にハードコーディングされた機密情報
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
@@ -33,17 +33,17 @@ const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
 **問題点:**
-- 🔴 **コードや設定ファイル、環境変数にシークレットが露出**
-- 🔴 **資格情報のローテーションにコード変更と再デプロイが必要**
-- 🔴 **監査が困難** - 誰がいつ何にアクセスしたか？
-- 🔴 **スプロール** - シークレットが複数のシステムに散在
-- 🔴 **コンプライアンスリスク** - セキュリティ監査に失敗する可能性
+- 🔴 **コード、設定ファイル、環境変数にシークレットが露出**
+- 🔴 <strong>認証情報のローテーション</strong> にコード変更と再デプロイが必要
+- 🔴 <strong>監査が困難</strong> - 誰がいつ何にアクセスしたか？
+- 🔴 <strong>拡散</strong> - シークレットが複数のシステムに散在
+- 🔴 <strong>コンプライアンスリスク</strong> - セキュリティ監査に失敗する可能性
 
-### 解決策: Managed Identity
+### 解決策: マネージド アイデンティティ
 
-**Managed Identity 導入後:**
+**マネージド アイデンティティ導入後:**
 ```javascript
-// ✅ セキュア: コード内に秘密情報はありません
+// ✅ 安全: コード内に機密情報はありません
 const credential = new DefaultAzureCredential();
 const client = new BlobServiceClient(
   "https://mystorageaccount.blob.core.windows.net",
@@ -52,76 +52,76 @@ const client = new BlobServiceClient(
 ```
 
 **利点:**
-- ✅ **コードや設定にシークレットがゼロ**
-- ✅ **自動ローテーション** - Azure が管理
-- ✅ **Azure AD ログで完全な監査トレイル**
-- ✅ **集中管理されたセキュリティ** - Azure ポータルで管理
-- ✅ **コンプライアンス対応** - セキュリティ基準を満たす
+- ✅ <strong>コードや設定にシークレットがゼロ</strong>
+- ✅ <strong>自動ローテーション</strong> - Azure が処理
+- ✅ **Azure AD ログでの完全な監査トレイル**
+- ✅ <strong>集中管理されたセキュリティ</strong> - Azure ポータルで管理
+- ✅ <strong>コンプライアンス対応</strong> - セキュリティ基準に準拠
 
-**例え**: 伝統的な認証は複数の物理鍵を持ち歩くようなものです。Managed Identity は、誰であるかに基づいて自動的にアクセスを付与するセキュリティバッジのようなものです—失くしたり複製したり回転させる鍵が不要になります。
+<strong>例え</strong>: 従来の認証は複数のドア用の物理キーを持ち歩くようなものです。マネージド アイデンティティは、あなたが誰であるかに基づいて自動的にアクセスを付与するセキュリティバッジのようなものです—失くしたりコピーしたりローテーションするキーは不要です。
 
 ---
 
-## アーキテクチャの概要
+## アーキテクチャ概要
 
-### Managed Identity を使った認証フロー
+### マネージド アイデンティティによる認証フロー
 
 ```mermaid
 sequenceDiagram
-    participant App as あなたのアプリケーション<br/>(コンテナ アプリ)
-    participant MI as マネージド アイデンティティ<br/>(Azure AD)
+    participant App as アプリケーション<br/>(コンテナアプリ)
+    participant MI as マネージド ID<br/>(Azure AD)
     participant KV as キー ボールト
     participant Storage as Azure ストレージ
     participant DB as Azure SQL
     
-    App->>MI: アクセストークンを要求<br/>(自動)
-    MI->>MI: IDを検証<br/>(パスワード不要)
-    MI-->>App: トークンを返す<br/>(有効期限1時間)
+    App->>MI: アクセストークンを要求する<br/>(自動)
+    MI->>MI: ID を検証する<br/>(パスワード不要)
+    MI-->>App: トークンを返す<br/>(1 時間有効)
     
-    App->>KV: シークレットを取得<br/>(トークンを使用)
-    KV->>KV: RBAC権限を確認
+    App->>KV: シークレットを取得する<br/>(トークンを使用)
+    KV->>KV: RBAC 権限を確認
     KV-->>App: シークレット値を返す
     
-    App->>Storage: BLOBをアップロード<br/>(トークンを使用)
-    Storage->>Storage: RBAC権限を確認
+    App->>Storage: BLOB をアップロードする<br/>(トークンを使用)
+    Storage->>Storage: RBAC 権限を確認
     Storage-->>App: 成功
     
-    App->>DB: データをクエリ<br/>(トークンを使用)
-    DB->>DB: SQL権限を確認
+    App->>DB: データをクエリする<br/>(トークンを使用)
+    DB->>DB: SQL 権限を確認
     DB-->>App: 結果を返す
     
-    Note over App,DB: すべての認証はパスワード不要！
+    Note over App,DB: すべての認証はパスワード不要!
 ```
-### Managed Identity の種類
+### マネージド アイデンティティの種類
 
 ```mermaid
 graph TB
     MI[マネージド ID]
-    SystemAssigned[システム割り当てマネージド ID]
-    UserAssigned[ユーザー割り当てマネージド ID]
+    SystemAssigned[システム割り当て ID]
+    UserAssigned[ユーザー割り当て ID]
     
     MI --> SystemAssigned
     MI --> UserAssigned
     
-    SystemAssigned --> SA1[ライフサイクルはリソースに紐付く]
+    SystemAssigned --> SA1[ライフサイクルがリソースに紐付く]
     SystemAssigned --> SA2[自動作成/削除]
-    SystemAssigned --> SA3[単一リソースに最適]
+    SystemAssigned --> SA3[単一のリソースに最適]
     
     UserAssigned --> UA1[独立したライフサイクル]
     UserAssigned --> UA2[手動作成/削除]
-    UserAssigned --> UA3[複数のリソース間で共有可能]
+    UserAssigned --> UA3[リソース間で共有]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
-| 機能 | System-Assigned | User-Assigned |
+| 機能 | システム割り当て | ユーザー割り当て |
 |---------|----------------|---------------|
-| **ライフサイクル** | リソースに紐付く | 独立している |
-| **作成** | リソース作成時に自動 | 手動で作成 |
-| **削除** | リソース削除時に削除される | リソース削除後も存続 |
-| **共有** | 単一リソースのみ | 複数のリソースで共有可能 |
-| **ユースケース** | 単純なシナリオ | 複数リソースにまたがる複雑なシナリオ |
-| **AZD デフォルト** | ✅ 推奨 | 任意 |
+| <strong>ライフサイクル</strong> | リソースに紐付く | 独立している |
+| <strong>生成方法</strong> | リソース作成時に自動で | 手動で作成 |
+| <strong>削除</strong> | リソースと共に削除される | リソース削除後も残る |
+| <strong>共有</strong> | 1つのリソースのみ | 複数のリソース |
+| <strong>ユースケース</strong> | 単純なシナリオ | 複数リソースの複雑なシナリオ |
+| **AZD のデフォルト** | ✅ 推奨 | オプション |
 
 ---
 
@@ -129,41 +129,41 @@ graph TB
 
 ### 必要なツール
 
-前のレッスンですでにインストールしていることを想定しています:
+前のレッスンですでにこれらをインストールしているはずです：
 
 ```bash
-# Azure Developer CLI を確認
+# Azure Developer CLI を確認する
 azd version
-# ✅ 期待される: azd バージョン 1.0.0 以上
+# ✅ 期待される: azd のバージョン 1.0.0 以上
 
-# Azure CLI を確認
+# Azure CLI を確認する
 az --version
-# ✅ 期待される: azure-cli 2.50.0 以上
+# ✅ 期待される: azure-cli のバージョン 2.50.0 以上
 ```
 
 ### Azure の要件
 
-- 有効な Azure サブスクリプション
-- 以下の権限:
-  - Managed Identity の作成
-  - RBAC ロールの割り当て
-  - Key Vault リソースの作成
-  - Container Apps のデプロイ
+- アクティブな Azure サブスクリプション
+- 次の権限:
+  - マネージド アイデンティティを作成する権限
+  - RBAC ロールを割り当てる権限
+  - Key Vault リソースを作成する権限
+  - Container Apps をデプロイする権限
 
 ### 知識の前提
 
-以下を完了していることが望ましい:
-- [Installation Guide](installation.md) - AZD セットアップ
-- [AZD Basics](azd-basics.md) - コア概念
-- [Configuration Management](configuration.md) - 環境変数
+次を完了していること:
+- [インストール ガイド](installation.md) - AZD のセットアップ
+- [AZD の基本](azd-basics.md) - コア概念
+- [構成管理](configuration.md) - 環境変数
 
 ---
 
 ## レッスン 1: 認証パターンの理解
 
-### パターン 1: 接続文字列（レガシー - 回避推奨）
+### パターン 1: 接続文字列（レガシー - 避ける）
 
-**仕組み:**
+**仕組み：**
 ```bash
 # 接続文字列に認証情報が含まれています
 STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=xK7mN9pQ2wR5..."
@@ -171,19 +171,19 @@ COSMOS_CONNECTION_STRING="AccountEndpoint=https://myaccount.documents.azure.com:
 SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=P@ssw0rd..."
 ```
 
-**問題点:**
-- ❌ 環境変数にシークレットが見える
-- ❌ デプロイシステムにログとして残る
+**問題点：**
+- ❌ 環境変数にシークレットが表示される
+- ❌ デプロイシステムにログ出力される
 - ❌ ローテーションが困難
 - ❌ アクセスの監査トレイルがない
 
-**使用タイミング:** ローカル開発時のみ、決して本番では使用しない。
+**使用時期:** ローカル開発時のみ。決して本番で使用しない。
 
 ---
 
-### パターン 2: Key Vault リファレンス（改善）
+### パターン 2: Key Vault 参照（改善）
 
-**仕組み:**
+**仕組み：**
 ```bicep
 // Store secret in Key Vault
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
@@ -202,22 +202,22 @@ env: [
 ]
 ```
 
-**利点:**
+**利点：**
 - ✅ シークレットが Key Vault に安全に保存される
-- ✅ シークレットの一元管理
-- ✅ コード変更なしでローテーション可能
+- ✅ シークレットの集中管理
+- ✅ コード変更なしでのローテーション
 
-**制限事項:**
-- ⚠️ 依然としてキー/パスワードを使用している
-- ⚠️ Key Vault へのアクセス管理が必要
+**制限：**
+- ⚠️ 依然としてキー/パスワードを使用する
+- ⚠️ Key Vault へのアクセスを管理する必要がある
 
-**使用タイミング:** 接続文字列から Managed Identity へ移行するための移行ステップ。
+**使用時期:** 接続文字列からマネージド アイデンティティへの移行ステップとして。
 
 ---
 
-### パターン 3: Managed Identity（ベストプラクティス）
+### パターン 3: マネージド アイデンティティ（ベストプラクティス）
 
-**仕組み:**
+**仕組み：**
 ```bicep
 // Enable managed identity
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -237,7 +237,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-**アプリケーションコード:**
+**アプリケーションコード：**
 ```javascript
 // 秘密は必要ありません！
 const { DefaultAzureCredential } = require('@azure/identity');
@@ -250,22 +250,22 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-**利点:**
-- ✅ コード/設定にシークレットがゼロ
-- ✅ 資格情報の自動ローテーション
+**利点：**
+- ✅ コードや設定にシークレットがゼロ
+- ✅ 自動認証情報ローテーション
 - ✅ 完全な監査トレイル
 - ✅ RBAC ベースの権限管理
 - ✅ コンプライアンス対応
 
-**使用タイミング:** 本番アプリケーションでは常に使用する。
+**使用時期:** 常に、本番アプリケーションで使用する。
 
 ---
 
-## レッスン 2: AZD での Managed Identity 実装
+## レッスン 2: AZD でのマネージド アイデンティティ実装
 
 ### ステップバイステップの実装
 
-Managed Identity を使用して Azure Storage と Key Vault にアクセスするセキュアな Container App を構築します。
+マネージド アイデンティティを使用して Azure Storage と Key Vault にアクセスする、安全な Container App を構築しましょう。
 
 ### プロジェクト構成
 
@@ -302,9 +302,9 @@ services:
 # Enable managed identity (AZD handles this automatically)
 ```
 
-### 2. インフラ: Managed Identity を有効化
+### 2. インフラ: マネージド アイデンティティを有効化
 
-**File: `infra/main.bicep`**
+ファイル: `infra/main.bicep`
 
 ```bicep
 targetScope = 'subscription'
@@ -384,9 +384,9 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output APP_URL string = containerApp.outputs.url
 ```
 
-### 3. System-Assigned Identity を持つ Container App
+### 3. システム割り当てアイデンティティを持つ Container App
 
-**File: `infra/app/container-app.bicep`**
+ファイル: `infra/app/container-app.bicep`
 
 ```bicep
 param name string
@@ -443,7 +443,7 @@ output url string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ### 4. RBAC ロール割り当てモジュール
 
-**File: `infra/core/role-assignment.bicep`**
+ファイル: `infra/core/role-assignment.bicep`
 
 ```bicep
 param principalId string
@@ -463,9 +463,9 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 output id string = roleAssignment.id
 ```
 
-### 5. Managed Identity を使用するアプリケーションコード
+### 5. マネージド アイデンティティを使用したアプリケーションコード
 
-**File: `src/app.js`**
+ファイル: `src/app.js`
 
 ```javascript
 const express = require('express');
@@ -476,17 +476,17 @@ const { SecretClient } = require('@azure/keyvault-secrets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔑 資格情報を初期化（マネージド ID で自動的に動作）
+// 🔑 資格情報を初期化する（マネージド ID で自動的に動作します）
 const credential = new DefaultAzureCredential();
 
-// Azure Storage の設定
+// Azure Storage のセットアップ
 const storageAccountName = process.env.AZURE_STORAGE_ACCOUNT_NAME;
 const blobServiceClient = new BlobServiceClient(
   `https://${storageAccountName}.blob.core.windows.net`,
   credential  // キーは不要です！
 );
 
-// Key Vault の設定
+// Key Vault のセットアップ
 const keyVaultName = process.env.AZURE_KEY_VAULT_NAME;
 const secretClient = new SecretClient(
   `https://${keyVaultName}.vault.azure.net`,
@@ -498,7 +498,7 @@ app.get('/health', (req, res) => {
   res.json({ status: 'healthy', authentication: 'managed-identity' });
 });
 
-// ファイルを Blob ストレージにアップロード
+// ファイルを Blob ストレージにアップロードする
 app.post('/upload', async (req, res) => {
   try {
     const containerClient = blobServiceClient.getContainerClient('uploads');
@@ -520,7 +520,7 @@ app.post('/upload', async (req, res) => {
   }
 });
 
-// Key Vault からシークレットを取得
+// Key Vault からシークレットを取得する
 app.get('/secret/:name', async (req, res) => {
   try {
     const secretName = req.params.name;
@@ -537,7 +537,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// Blob コンテナーを一覧表示（読み取りアクセスを示す）
+// Blob コンテナーを一覧表示する（読み取りアクセスを示す）
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -562,7 +562,7 @@ app.listen(PORT, () => {
 });
 ```
 
-**File: `src/package.json`**
+ファイル: `src/package.json`
 
 ```json
 {
@@ -589,7 +589,7 @@ azd init
 # インフラとアプリケーションをデプロイする
 azd up
 
-# アプリのURLを取得する
+# アプリの URL を取得する
 APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
 
 # ヘルスチェックをテストする
@@ -618,7 +618,7 @@ curl -X POST $APP_URL/upload
 }
 ```
 
-**コンテナー一覧のテスト:**
+**コンテナ一覧のテスト:**
 ```bash
 curl $APP_URL/containers
 ```
@@ -634,26 +634,26 @@ curl $APP_URL/containers
 
 ---
 
-## 一般的な Azure RBAC ロール
+## よく使われる Azure RBAC ロール
 
-### Managed Identity 用の組み込みロール ID
+### マネージド アイデンティティ用の組み込みロール ID
 
-| Service | Role Name | Role ID | Permissions |
+| サービス | ロール名 | ロール ID | 権限 |
 |---------|-----------|---------|-------------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | ブロブとコンテナーの読み取り |
-| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | ブロブの読み取り、書き込み、削除 |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | キューメッセージの読み取り、書き込み、削除 |
+| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | BLOB とコンテナの読み取り |
+| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | BLOB の読み取り、書き込み、削除 |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | キュー メッセージの読み取り、書き込み、削除 |
 | **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | シークレットの読み取り |
 | **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | シークレットの読み取り、書き込み、削除 |
 | **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Cosmos DB データの読み取り |
-| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Cosmos DB データの読み取り、書き込み |
+| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Cosmos DB データの読み取り・書き込み |
 | **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | SQL データベースの管理 |
-| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | メッセージの送受信および管理 |
+| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | メッセージの送受信と管理 |
 
-### ロール ID の確認方法
+### ロール ID の見つけ方
 
 ```bash
-# 組み込みロールをすべて列挙する
+# すべての組み込みロールを一覧表示する
 az role definition list --query "[].{Name:roleName, ID:name}" --output table
 
 # 特定のロールを検索する
@@ -667,13 +667,13 @@ az role definition list --name "Storage Blob Data Contributor"
 
 ## 実践演習
 
-### 演習 1: 既存アプリに Managed Identity を有効化 ⭐⭐（中級）
+### 演習 1: 既存アプリにマネージド アイデンティティを有効化 ⭐⭐（中）
 
-**目標**: 既存の Container App デプロイに Managed Identity を追加する
+<strong>目標</strong>: 既存の Container App デプロイにマネージド アイデンティティを追加する
 
-**シナリオ**: 接続文字列を使っている Container App を Managed Identity に変換する
+<strong>シナリオ</strong>: 接続文字列を使用している Container App をマネージド アイデンティティに変換する。
 
-**開始点**: 次の構成を持つ Container App:
+<strong>開始時点</strong>: 次の構成を持つ Container App:
 
 ```bicep
 // ❌ Current: Using connection string
@@ -685,9 +685,9 @@ env: [
 ]
 ```
 
-**手順**:
+<strong>手順</strong>:
 
-1. **Bicep で Managed Identity を有効化:**
+1. **Bicep でマネージド アイデンティティを有効化：**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -699,7 +699,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **Storage へのアクセスを付与:**
+2. **Storage へのアクセス権を付与：**
 
 ```bicep
 // Get storage account reference
@@ -719,9 +719,9 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-3. **アプリケーションコードを更新:**
+3. **アプリケーションコードを更新：**
 
-**変更前（接続文字列）:**
+**前（接続文字列）：**
 ```javascript
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -730,7 +730,7 @@ const blobServiceClient = BlobServiceClient.fromConnectionString(
 );
 ```
 
-**変更後（Managed Identity）:**
+**後（マネージド アイデンティティ）：**
 ```javascript
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
@@ -742,7 +742,7 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-4. **環境変数を更新:**
+4. **環境変数を更新：**
 
 ```bicep
 env: [
@@ -754,54 +754,54 @@ env: [
 ]
 ```
 
-5. **デプロイしてテスト:**
+5. **デプロイとテスト：**
 
 ```bash
 # 再デプロイ
 azd up
 
-# まだ正しく動作することを確認する
+# まだ動作するかをテストする
 curl https://myapp.azurecontainerapps.io/upload
 ```
 
-**✅ 成功基準:**
-- ✅ アプリがエラーなくデプロイされる
-- ✅ ストレージ操作が機能する（アップロード、一覧表示、ダウンロード）
-- ✅ 環境変数に接続文字列が存在しない
-- ✅ Azure ポータルの「Identity」ブレードで ID が表示される
+**✅ 合格基準:**
+- ✅ アプリケーションがエラーなくデプロイされる
+- ✅ Storage 操作が機能する（アップロード、一覧表示、ダウンロード）
+- ✅ 環境変数に接続文字列がない
+- ✅ Azure ポータルの "Identity" ブレードでアイデンティティが確認できる
 
 **検証:**
 
 ```bash
-# マネージド ID が有効になっているか確認する
+# マネージド ID が有効になっていることを確認
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 # ✅ 期待値: "SystemAssigned"
 
-# ロールの割り当てを確認する
+# ロールの割り当てを確認
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv) \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.Storage/storageAccounts/mystorageaccount
 # ✅ 期待値: "Storage Blob Data Contributor" ロールが表示される
 ```
 
-**所要時間**: 20-30 分
+<strong>時間</strong>: 20-30 分
 
 ---
 
-### 演習 2: ユーザー割り当て ID でのマルチサービスアクセス ⭐⭐⭐（上級）
+### 演習 2: ユーザー割り当てアイデンティティによるマルチサービスアクセス ⭐⭐⭐（上級）
 
-**目標**: 複数の Container App で共有する user-assigned identity を作成する
+<strong>目標</strong>: 複数の Container App で共有されるユーザー割り当てアイデンティティを作成する
 
-**シナリオ**: 同じ Storage アカウントと Key Vault にアクセスする必要がある 3 つのマイクロサービスがある
+<strong>シナリオ</strong>: 同じ Storage アカウントと Key Vault にアクセスする必要がある 3 つのマイクロサービスがある。
 
-**手順**:
+<strong>手順</strong>:
 
-1. **user-assigned identity を作成:**
+1. **ユーザー割り当てアイデンティティの作成:**
 
-**File: `infra/core/identity.bicep`**
+ファイル: `infra/core/identity.bicep`
 
 ```bicep
 param name string
@@ -819,7 +819,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **user-assigned identity にロールを割り当てる:**
+2. **ユーザー割り当てアイデンティティにロールを割り当てる:**
 
 ```bicep
 // In main.bicep
@@ -856,7 +856,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **複数の Container App に ID を割り当てる:**
+3. **複数の Container App にアイデンティティを割り当てる:**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -898,12 +898,12 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 ```javascript
 const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
 
-// ユーザー割り当ての ID を使用する場合は、クライアント ID を指定してください
+// ユーザー割り当てアイデンティティを使用する場合はクライアント ID を指定してください
 const credential = new ManagedIdentityCredential(
   process.env.AZURE_CLIENT_ID  // ユーザー割り当てアイデンティティのクライアント ID
 );
 
-// または DefaultAzureCredential を使用してください（自動検出）
+// または DefaultAzureCredential を使用（自動検出）
 const credential = new DefaultAzureCredential();
 
 const blobServiceClient = new BlobServiceClient(
@@ -912,44 +912,44 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-5. **デプロイして検証:**
+5. **デプロイと検証:**
 
 ```bash
 azd up
 
-# すべてのサービスがストレージにアクセスできるかテストする
+# すべてのサービスがストレージにアクセスできることをテストする
 curl https://api-gateway.azurecontainerapps.io/upload
 curl https://product-service.azurecontainerapps.io/upload
 curl https://order-service.azurecontainerapps.io/upload
 ```
 
-**✅ 成功基準:**
-- ✅ 3 つのサービスで 1 つの ID を共有している
+**✅ 合格基準:**
+- ✅ 3 サービス間で共有される 1 つのアイデンティティ
 - ✅ すべてのサービスが Storage と Key Vault にアクセスできる
-- ✅ サービスを 1 つ削除しても ID は存続する
-- ✅ 権限を集中管理できる
+- ✅ サービスを 1 つ削除してもアイデンティティが保持される
+- ✅ 権限管理が集中化されている
 
-**User-Assigned Identity の利点:**
-- 管理すべき ID が一つ
+**ユーザー割り当てアイデンティティの利点:**
+- 管理するアイデンティティが一つ
 - サービス間で一貫した権限
-- サービス削除時も存続
+- サービス削除時もアイデンティティが存続
 - 複雑なアーキテクチャに適している
 
-**所要時間**: 30-40 分
+<strong>時間</strong>: 30-40 分
 
 ---
 
 ### 演習 3: Key Vault シークレットのローテーション実装 ⭐⭐⭐（上級）
 
-**目標**: サードパーティ API キーを Key Vault に保存し、Managed Identity を使ってアクセスする
+<strong>目標</strong>: サードパーティの API キーを Key Vault に保存し、マネージド アイデンティティでアクセスする
 
-**シナリオ**: アプリが外部 API（OpenAI、Stripe、SendGrid など）を呼び出す必要があり、API キーが必要
+<strong>シナリオ</strong>: アプリが API キーを必要とする外部 API（OpenAI、Stripe、SendGrid）を呼び出す必要がある。
 
-**手順**:
+<strong>手順</strong>:
 
-1. **RBAC を使った Key Vault を作成:**
+1. **RBAC を使用した Key Vault の作成:**
 
-**File: `infra/core/keyvault.bicep`**
+ファイル: `infra/core/keyvault.bicep`
 
 ```bicep
 param name string
@@ -978,10 +978,10 @@ output name string = keyVault.name
 output uri string = keyVault.properties.vaultUri
 ```
 
-2. **Key Vault にシークレットを保存:**
+2. **Key Vault にシークレットを格納:**
 
 ```bash
-# Key Vault の名前を取得する
+# Key Vault の名前を取得
 KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
 
 # サードパーティの API キーを保存する
@@ -1003,7 +1003,7 @@ az keyvault secret set \
 
 3. **シークレットを取得するアプリケーションコード:**
 
-**File: `src/config.js`**
+ファイル: `src/config.js`
 
 ```javascript
 const { DefaultAzureCredential } = require('@azure/identity');
@@ -1020,7 +1020,7 @@ class Config {
   }
 
   async getSecret(secretName) {
-    // まずキャッシュを確認する
+    // 最初にキャッシュを確認する
     if (this.cache[secretName]) {
       return this.cache[secretName];
     }
@@ -1054,7 +1054,7 @@ module.exports = new Config();
 
 4. **アプリケーションでシークレットを使用:**
 
-**File: `src/app.js`**
+ファイル: `src/app.js`
 
 ```javascript
 const express = require('express');
@@ -1063,7 +1063,7 @@ const { OpenAI } = require('openai');
 
 const app = express();
 
-// Key Vault から取得したキーで OpenAI を初期化する
+// Key Vaultからキーを取得してOpenAIを初期化する
 let openaiClient;
 
 async function initializeServices() {
@@ -1078,7 +1078,7 @@ initializeServices().catch(console.error);
 app.post('/chat', async (req, res) => {
   try {
     const completion = await openaiClient.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-4.1',
       messages: [{ role: 'user', content: 'Hello!' }]
     });
     
@@ -1096,21 +1096,21 @@ app.listen(3000, () => {
 });
 ```
 
-5. **デプロイしてテスト:**
+5. **デプロイとテスト:**
 
 ```bash
 azd up
 
-# APIキーが正しく機能するかテストする
+# APIキーが機能することをテストする
 curl -X POST https://myapp.azurecontainerapps.io/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello AI"}'
 ```
 
-**✅ 成功基準:**
-- ✅ コードや環境変数に API キーが存在しない
-- ✅ アプリが Key Vault からキーを取得する
-- ✅ サードパーティ API が正しく動作する
+**✅ 合格基準:**
+- ✅ コードや環境変数に API キーがない
+- ✅ アプリケーションが Key Vault からキーを取得する
+- ✅ サードパーティの API が正しく動作する
 - ✅ コード変更なしでキーをローテーションできる
 
 **シークレットをローテーションする:**
@@ -1128,7 +1128,7 @@ az containerapp revision restart \
   --resource-group rg-myapp
 ```
 
-**所要時間**: 25-35 分
+<strong>時間</strong>: 25-35 分
 
 ---
 
@@ -1138,14 +1138,14 @@ az containerapp revision restart \
 
 理解度をテスト:
 
-- [ ] **Q1**: 主要な認証パターンは何ですか？ 
-  - **A**: 接続文字列（レガシー）、Key Vault リファレンス（移行）、Managed Identity（ベスト）
+- [ ] **Q1**: 主要な認証パターンは何ですか？
+  - **A**: 接続文字列（レガシー）、Key Vault 参照（移行）、マネージド アイデンティティ（ベスト）
 
-- [ ] **Q2**: なぜ Managed Identity は接続文字列より優れているのか？
-  - **A**: コードにシークレットがない、自動ローテーション、完全な監査トレイル、RBAC ベースの権限
+- [ ] **Q2**: なぜマネージド アイデンティティは接続文字列より優れているのか？
+  - **A**: コードにシークレットがない、自動ローテーション、完全な監査トレイル、RBAC による権限
 
-- [ ] **Q3**: システム割り当て ID の代わりにユーザー割り当て ID を使うのはどんな場合？
-  - **A**: 複数のリソースで ID を共有する場合や、ID のライフサイクルをリソースと独立させたい場合
+- [ ] **Q3**: システム割り当てではなくユーザー割り当てアイデンティティを使用するのはどんな場合か？
+  - **A**: 複数のリソースでアイデンティティを共有する場合、またはアイデンティティのライフサイクルがリソースのライフサイクルと独立している場合
 
 **ハンズオン検証:**
 ```bash
@@ -1155,7 +1155,7 @@ az containerapp show \
   --resource-group rg-myapp \
   --query "identity.type"
 
-# そのアイデンティティのすべてのロール割り当てを一覧表示する
+# そのアイデンティティに対するすべてのロール割り当てを一覧表示する
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 ```
@@ -1166,21 +1166,21 @@ az role assignment list \
 
 理解度をテスト:
 
-- [ ] **Q1**: "Storage Blob Data Contributor" のロール ID は？
+- [ ] **Q1**: 「Storage Blob Data Contributor」のロール ID は？
   - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
-- [ ] **Q2**: "Key Vault Secrets User" はどのような権限を与えるか？
-  - **A**: シークレットの読み取り専用（作成、更新、削除は不可）
+- [ ] **Q2**: 「Key Vault Secrets User」はどんな権限を提供するか？
+  - **A**: シークレットの読み取り専用アクセス（作成、更新、削除は不可）
 
-- [ ] **Q3**: Container App に Azure SQL へのアクセスを付与するにはどうするか？
-  - **A**: "SQL DB Contributor" ロールを割り当てるか、SQL の Azure AD 認証を構成する
+- [ ] **Q3**: Container App に Azure SQL へのアクセス権を付与するには？
+  - **A**: 「SQL DB Contributor」ロールを割り当てるか、SQL に対して Azure AD 認証を設定する
 
 **ハンズオン検証:**
 ```bash
 # 特定のロールを見つける
 az role definition list --name "Storage Blob Data Contributor"
 
-# 自分のIDに割り当てられているロールを確認する
+# 自分のアイデンティティに割り当てられているロールを確認する
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
@@ -1188,16 +1188,16 @@ az role assignment list --assignee $PRINCIPAL_ID --output table
 ---
 
 ### 3. Key Vault 統合 ✓
-- [ ] **Q1**: Key Vaultでアクセスポリシーの代わりにRBACを有効にするにはどうすればよいですか?
-  - **A**: Bicepで`enableRbacAuthorization: true`を設定します
+- [ ] **Q1**: Key Vaultでアクセス ポリシーの代わりに RBAC を有効にするにはどうしますか?
+  - **A**: Bicepで `enableRbacAuthorization: true` を設定する
 
-- [ ] **Q2**: 管理対象 ID の認証を扱う Azure SDK ライブラリはどれですか?
+- [ ] **Q2**: どの Azure SDK ライブラリがマネージド ID 認証を扱いますか?
   - **A**: `@azure/identity` と `DefaultAzureCredential` クラス
 
-- [ ] **Q3**: Key Vault のシークレットはキャッシュにどのくらいの期間保持されますか?
+- [ ] **Q3**: Key Vault のシークレットはキャッシュにどのくらい残りますか?
   - **A**: アプリケーション依存です。独自のキャッシュ戦略を実装してください
 
-**ハンズオン検証:**
+**Hands-On Verification:**
 ```bash
 # Key Vault へのアクセスをテスト
 az keyvault secret show \
@@ -1214,11 +1214,11 @@ az keyvault show \
 
 ---
 
-## セキュリティ ベストプラクティス
+## セキュリティのベストプラクティス
 
 ### ✅ 実行すること:
 
-1. **常に本番ではマネージド ID を使用する**
+1. **本番環境では常にマネージド ID を使用する**
    ```bicep
    identity: {
      type: 'SystemAssigned'
@@ -1229,12 +1229,12 @@ az keyvault show \
    - 可能な場合は "Reader" ロールを使用する
    - 必要でない限り "Owner" や "Contributor" を避ける
 
-3. **サードパーティのキーを Key Vault に保管する**
+3. **サードパーティのキーを Key Vault に保存する**
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
 
-4. **監査ログを有効にする**
+4. <strong>監査ログを有効にする</strong>
    ```bicep
    diagnosticSettings: {
      logs: [{ category: 'AuditEvent', enabled: true }]
@@ -1248,25 +1248,25 @@ az keyvault show \
    azd env new prod
    ```
 
-6. **シークレットを定期的にローテーションする**
+6. <strong>シークレットを定期的にローテーションする</strong>
    - Key Vault のシークレットに有効期限を設定する
    - Azure Functions でローテーションを自動化する
 
-### ❌ 実行しないこと:
+### ❌ やってはいけないこと:
 
-1. **シークレットを決してハードコードしない**
+1. <strong>シークレットをハードコードしてはいけない</strong>
    ```javascript
    // ❌ 悪い
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
    ```
 
-2. **本番環境で接続文字列を使用しない**
+2. <strong>本番環境で接続文字列を使用しない</strong>
    ```javascript
    // ❌ 悪い
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
    ```
 
-3. **過剰な権限を付与しない**
+3. <strong>過度な権限を付与しない</strong>
    ```bicep
    // ❌ BAD - too much access
    roleDefinitionId: 'Owner'
@@ -1275,7 +1275,7 @@ az keyvault show \
    roleDefinitionId: 'Storage Blob Data Reader'
    ```
 
-4. **シークレットをログ出力しない**
+4. <strong>シークレットをログに出力しない</strong>
    ```javascript
    // ❌ 悪い
    console.log('API Key:', apiKey);
@@ -1292,9 +1292,9 @@ az keyvault show \
 
 ---
 
-## トラブルシューティング ガイド
+## トラブルシューティングガイド
 
-### 問題: Azure Storage にアクセスすると "Unauthorized" になる
+### 問題: Azure Storage にアクセスすると「Unauthorized」になる
 
 **症状:**
 ```
@@ -1305,18 +1305,18 @@ AuthorizationPermissionMismatch: This request is not authorized to perform this 
 **診断:**
 
 ```bash
-# マネージド ID が有効か確認する
+# マネージド ID が有効かどうかを確認する
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
-# ✅ 期待値: "SystemAssigned" または "UserAssigned"
+# ✅ 期待: "SystemAssigned" または "UserAssigned"
 
 # ロール割り当てを確認する
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
-# 期待値: "Storage Blob Data Contributor" のようなロールが表示されるはず
+# 期待: "Storage Blob Data Contributor" または類似のロールが表示されるはず
 ```
 
 **解決策:**
@@ -1330,7 +1330,7 @@ az role assignment create \
   --scope $STORAGE_ID
 ```
 
-2. **伝播を待つ（5〜10分かかることがあります）:**
+2. **伝播を待つ（5〜10分かかる場合があります）:**
 ```bash
 # ロール割り当ての状態を確認する
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
@@ -1355,13 +1355,13 @@ The user, group or application does not have secrets get permission
 **診断:**
 
 ```bash
-# Key Vault の RBAC が有効か確認する
+# Key Vault の RBAC が有効になっているか確認する
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
 # ✅ 期待値: true
 
-# ロール割り当てを確認する
+# ロールの割り当てを確認する
 az role assignment list \
   --assignee $PRINCIPAL_ID \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.KeyVault/vaults/$KV_NAME
@@ -1369,7 +1369,7 @@ az role assignment list \
 
 **解決策:**
 
-1. **Key VaultでRBACを有効にする:**
+1. **Key Vault で RBAC を有効にする:**
 ```bash
 az keyvault update \
   --name $KV_NAME \
@@ -1428,7 +1428,7 @@ export AZURE_CLIENT_SECRET="your-client-secret"
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
-// ローカル開発では AzureCliCredential を使用してください
+// ローカル開発では AzureCliCredential を使用する
 const credential = process.env.NODE_ENV === 'production' 
   ? new DefaultAzureCredential()
   : new AzureCliCredential();
@@ -1441,22 +1441,22 @@ const credential = process.env.NODE_ENV === 'production'
 **症状:**
 - ロールは正常に割り当てられている
 - それでも 403 エラーが発生する
-- アクセスが断続的（時々動作し、時々動作しない）
+- 断続的なアクセス（時々動作し、時々動作しない）
 
 **説明:**
-Azure RBAC の変更はグローバルに反映されるまで 5〜10 分かかることがあります。
+Azure RBAC の変更は、グローバルに反映されるまで 5〜10 分かかることがあります。
 
 **解決策:**
 
 ```bash
-# 待ってから再試行してください
+# 待って再試行
 echo "Waiting for RBAC propagation..."
-sleep 300  # 5分待ってください
+sleep 300  # 5分待つ
 
-# アクセスをテストしてください
+# アクセスをテスト
 curl https://myapp.azurecontainerapps.io/upload
 
-# それでも失敗する場合は、アプリを再起動してください
+# それでも失敗する場合はアプリを再起動する
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
@@ -1470,32 +1470,32 @@ az containerapp revision restart \
 
 | リソース | コスト |
 |----------|------|
-| **Managed Identity** | 🆓 **無料** - 料金なし |
-| **RBAC Role Assignments** | 🆓 **無料** - 料金なし |
-| **Azure AD Token Requests** | 🆓 **無料** - 含まれる |
-| **Key Vault Operations** | $0.03（10,000 操作ごと） |
-| **Key Vault Storage** | $0.024 /シークレット/月 |
+| **マネージド ID** | 🆓 <strong>無料</strong> - 課金なし |
+| **RBAC ロール割り当て** | 🆓 <strong>無料</strong> - 課金なし |
+| **Azure AD トークン要求** | 🆓 <strong>無料</strong> - 含まれる |
+| **Key Vault Operations** | $0.03 / 10,000 操作あたり |
+| **Key Vault Storage** | $0.024 / シークレット / 月 |
 
-**マネージド ID がコストを削減する理由:**
-- ✅ サービス間認証のための Key Vault 操作を排除する
-- ✅ セキュリティインシデントを減少させる（資格情報漏えいがない）
-- ✅ 運用負荷を低減する（手動ローテーションが不要）
+**マネージド ID がコスト削減につながる理由：**
+- ✅ サービス間認証での Key Vault 操作を排除する
+- ✅ セキュリティインシデントを削減する（資格情報の漏洩なし）
+- ✅ 運用負荷を低減する（手動ローテーション不要）
 
-**コスト比較の例（毎月）:**
+**コスト比較の例（月次）:**
 
-| シナリオ | 接続文字列 | マネージド ID | 節約額 |
+| シナリオ | 接続文字列 | マネージド ID | 削減額 |
 |----------|-------------------|-----------------|---------|
-| 小規模アプリ（100万リクエスト） | ~$50（Key Vault + 操作） | ~$0 | $50/月 |
-| 中規模アプリ（1000万リクエスト） | ~$200 | ~$0 | $200/月 |
-| 大規模アプリ（1億リクエスト） | ~$1,500 | ~$0 | $1,500/月 |
+| 小規模アプリ（1M リクエスト） | ~$50 (Key Vault + ops) | ~$0 | $50/月 |
+| 中規模アプリ（10M リクエスト） | ~$200 | ~$0 | $200/月 |
+| 大規模アプリ（100M リクエスト） | ~$1,500 | ~$0 | $1,500/月 |
 
 ---
 
-## 詳しく学ぶ
+## 詳しく知る
 
 ### 公式ドキュメント
 - [Azure マネージド ID](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
-- [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
+- [Azure RBAC（ロールベースのアクセス制御）](https://learn.microsoft.com/azure/role-based-access-control/overview)
 - [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
 - [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
 
@@ -1505,13 +1505,13 @@ az containerapp revision restart \
 - [azure-identity (Python)](https://pypi.org/project/azure-identity/)
 
 ### このコースの次のステップ
-- ← 前へ: [構成管理](configuration.md)
-- → 次へ: [最初のプロジェクト](first-project.md)
+- ← 前: [構成管理](configuration.md)
+- → 次: [最初のプロジェクト](first-project.md)
 - 🏠 [コースホーム](../../README.md)
 
 ### 関連する例
-- [Azure OpenAI チャットの例](../../../../examples/azure-openai-chat) - Azure OpenAI に対してマネージド ID を使用
-- [マイクロサービスの例](../../../../examples/microservices) - マルチサービス認証パターン
+- [Microsoft Foundry Models Chat Example](../../../../examples/azure-openai-chat) - Microsoft Foundry Models に対してマネージド ID を使用
+- [Microservices Example](../../../../examples/microservices) - 複数サービスの認証パターン
 
 ---
 
@@ -1519,27 +1519,27 @@ az containerapp revision restart \
 
 **学んだこと:**
 - ✅ 3つの認証パターン（接続文字列、Key Vault、マネージド ID）
-- ✅ AZD でマネージド ID を有効化および設定する方法
-- ✅ Azure サービス向けの RBAC ロール割り当て
+- ✅ AZD でマネージド ID を有効化および構成する方法
+- ✅ Azure サービスの RBAC ロール割り当て
 - ✅ サードパーティのシークレットのための Key Vault 統合
-- ✅ ユーザー割り当て ID とシステム割り当て ID の違い
+- ✅ ユーザー割り当て ID とシステム割り当て ID
 - ✅ セキュリティのベストプラクティスとトラブルシューティング
 
 **重要なポイント:**
-1. **常に本番ではマネージド ID を使用する** - シークレットが不要、自動ローテーション
+1. **本番環境では常にマネージド ID を使用する** - シークレット不要、自動ローテーション
 2. **最小権限の RBAC ロールを使用する** - 必要な権限のみ付与する
-3. **サードパーティのキーを Key Vault に保管する** - シークレットを集中管理する
-4. **環境ごとに ID を分離する** - 開発、ステージング、本番の分離
-5. **監査ログを有効にする** - 誰が何にアクセスしたかを追跡する
+3. **サードパーティのキーを Key Vault に保存する** - シークレットの集中管理
+4. **環境ごとに ID を分ける** - 開発、ステージング、本番の分離
+5. <strong>監査ログを有効にする</strong> - 誰が何にアクセスしたかを追跡する
 
 **次のステップ:**
 1. 上記の実践演習を完了する
-2. 既存アプリを接続文字列からマネージド ID に移行する
-3. セキュリティを最初から組み込んだ最初の AZD プロジェクトを構築する: [First Project](first-project.md)
+2. 既存のアプリを接続文字列からマネージド ID に移行する
+3. 初日からセキュリティを考慮した最初の AZD プロジェクトを構築する: [最初のプロジェクト](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責事項:
-本書はAI翻訳サービス「Co-op Translator」(https://github.com/Azure/co-op-translator)を用いて翻訳されました。正確さには努めておりますが、自動翻訳には誤りや不正確な箇所が含まれる可能性があることをご承知おきください。原文（原語版）が正式な基準となります。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じた誤解や解釈の相違について、当社は責任を負いません。
+**免責事項**:
+この文書は AI翻訳サービス [Co-op トランスレーター](https://github.com/Azure/co-op-translator) を用いて翻訳されました。正確性には努めていますが、自動翻訳には誤りや不正確な点が含まれる場合があることにご留意ください。原文（原語の文書）が権威ある情報源と見なされるべきです。重要な情報については、専門の人による翻訳を推奨します。本翻訳の使用に起因するいかなる誤解や誤訳についても、当社は責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,51 +1,43 @@
-# সহজ Flask API - Container App উদাহরণ
+# Simple Flask API - Container App Example
 
-**শিখন পথ:** শুরুতি ⭐ | **সময়:** 25-35 minutes | **খরচ:** $0-15/month
+**শেখার পথ:** শুরু ⭐ | **সময়:** 25-35 মিনিট | **খরচ:** $0-15/মাস
 
-একটি সম্পূর্ণ, কার্যকর Python Flask REST API যা Azure Developer CLI (azd) ব্যবহার করে Azure Container Apps-এ ডিপ্লয় করা হয়েছে। এই উদাহরণ কন্টেইনার ডিপ্লয়মেন্ট, অটো-স্কেলিং, এবং মনিটরিং মৌলিক বিষয়গুলো দেখায়।
+একটি সম্পূর্ণ, কাজ করা Python Flask REST API যা Azure Developer CLI (azd) ব্যবহার করে Azure Container Apps-এ ডিপ্লয় করা হয়েছে। এই উদাহরণটি কনটেইনার ডিপ্লয়মেন্ট, অটো-স্কেলিং এবং মনিটরিং বেসিকগুলি প্রদর্শন করে।
 
-## 🎯 আপনি যা শিখবেন
+## 🎯 আপনি কী শিখবেন
 
-- Azure-এ কন্টেইনারকৃত Python অ্যাপ্লিকেশন ডিপ্লয় করবেন
-- scale-to-zero সহ অটো-স্কেলিং কনফিগার করবেন
-- হেলথ প্রোব এবং রেডিনেস চেক বাস্তবায়ন করবেন
-- অ্যাপ্লিকেশনের লগ ও মেট্রিক মনিটর করবেন
-- দ্রুত ডিপ্লয়ের জন্য Azure Developer CLI ব্যবহার করবেন
+- কনটেইনারাইজড Python অ্যাপ Azure-এ ডিপ্লয় করতে
+- scale-to-zero সহ অটো-স্কেলিং কনফিগার করতে
+- হেলথ প্রোব এবং রেডিনেস চেক বাস্তবায়ন করতে
+- অ্যাপ্লিকেশন লগ এবং মেট্রিক মনিটর করতে
+- দ্রুত ডিপ্লয়মেন্টের জন্য Azure Developer CLI ব্যবহার করতে
 
-## 📦 অন্তর্ভুক্ত
+## 📦 কী অন্তর্ভুক্ত
 
-✅ **Flask অ্যাপ্লিকেশন** - সম্পূর্ণ REST API CRUD অপারেশনসহ (`src/app.py`)  
-✅ **Dockerfile** - প্রোডাকশন-রেডি কন্টেইনার কনফিগারেশন  
-✅ **Bicep অবকাঠামো** - Container Apps পরিবেশ এবং API ডিপ্লয়মেন্ট  
+✅ **Flask Application** - CRUD অপারেশন সহ সম্পূর্ণ REST API (`src/app.py`)  
+✅ **Dockerfile** - প্রোডাকশন-রেডি কনটেইনার কনফিগারেশন  
+✅ **Bicep Infrastructure** - Container Apps পরিবেশ এবং API ডিপ্লয়মেন্ট  
 ✅ **AZD Configuration** - এক-কমান্ড ডিপ্লয়মেন্ট সেটআপ  
-✅ **Health Probes** - Liveness এবং readiness চেক কনফিগার করা হয়েছে  
-✅ **Auto-scaling** - HTTP লোড অনুযায়ী 0-10 রেপ্লিকা  
+✅ **Health Probes** - Liveness এবং readiness চেক কনফিগার করা হয়েছে  
+✅ **Auto-scaling** - HTTP লোডের ভিত্তিতে 0-10 রেপ্লিকা
 
 ## আর্কিটেকচার
 
+```mermaid
+graph TD
+    subgraph ACA[আজুর কন্টেইনার অ্যাপস পরিবেশ]
+        Flask[Flask API কন্টেইনার<br/>স্বাস্থ্য এন্ডপয়েন্টসমূহ<br/>REST API<br/>স্বয়ংক্রিয় স্কেলিং 0-10 রেপ্লিকা]
+        AppInsights[অ্যাপ্লিকেশন ইনসাইটস]
+    end
 ```
-┌─────────────────────────────────────────┐
-│   Azure Container Apps Environment      │
-│                                         │
-│  ┌───────────────────────────────────┐ │
-│  │   Flask API Container             │ │
-│  │   - Health endpoints              │ │
-│  │   - REST API                      │ │
-│  │   - Auto-scaling (0-10 replicas)  │ │
-│  └───────────────────────────────────┘ │
-│                                         │
-│  Application Insights ────────────────┐ │
-└────────────────────────────────────────┘
-```
-
-## পূর্বশর্ত
+## প্রয়োজনীয়তা
 
 ### প্রয়োজনীয়
-- **Azure Developer CLI (azd)** - [ইনস্টলেশন নির্দেশিকা](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** - [ফ্রি অ্যাকাউন্ট](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [ডকার ইনস্টল করুন](https://www.docker.com/products/docker-desktop/) (স্থানীয় পরীক্ষার জন্য)
+- **Azure Developer CLI (azd)** - [ইনস্টল নির্দেশিকা](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+- **Azure subscription** - [Free account](https://azure.microsoft.com/free/)
+- **Docker Desktop** - [Install Docker](https://www.docker.com/products/docker-desktop/) (স্থানীয় পরীক্ষার জন্য)
 
-### পূর্বশর্ত যাচাই করুন
+### প্রয়োজনীয়তা যাচাই করুন
 
 ```bash
 # azd সংস্করণ পরীক্ষা করুন (প্রয়োজন 1.5.0 বা তার বেশি)
@@ -62,11 +54,11 @@ docker --version
 
 | ধাপ | সময়কাল | কি ঘটে |
 |-------|----------|--------------||
-| Environment setup | 30 সেকেন্ড | azd পরিবেশ তৈরি করুন |
-| Build container | 2-3 মিনিট | Docker দিয়ে Flask অ্যাপ বিল্ড |
-| Provision infrastructure | 3-5 মিনিট | Container Apps, registry, monitoring তৈরি করুন |
-| Deploy application | 2-3 মিনিট | ইমেজ পুশ করে Container Apps-এ ডিপ্লয় |
-| **মোট** | **8-12 মিনিট** | পূর্ণ ডিপ্লয়মেন্ট প্রস্তুত |
+| Environment setup | 30 seconds | azd পরিবেশ তৈরি করুন |
+| Build container | 2-3 minutes | Docker ব্যবহার করে Flask অ্যাপ বিল্ড |
+| Provision infrastructure | 3-5 minutes | Container Apps, registry, monitoring তৈরি করা |
+| Deploy application | 2-3 minutes | ইমেজ পুশ করে Container Apps-এ ডিপ্লয় |
+| **মোট** | **8-12 minutes** | সম্পূর্ণ ডিপ্লয়মেন্ট প্রস্তুত |
 
 ## দ্রুত শুরু
 
@@ -74,7 +66,7 @@ docker --version
 # উদাহরণে যান
 cd examples/container-app/simple-flask-api
 
-# পরিবেশ আরম্ভ করুন (একটি অনন্য নাম বেছে নিন)
+# পরিবেশ ইনিশিয়ালাইজ করুন (একটি অনন্য নাম নির্বাচন করুন)
 azd env new myflaskapi
 
 # সবকিছু ডিপ্লয় করুন (ইনফ্রাস্ট্রাকচার + অ্যাপ্লিকেশন)
@@ -82,7 +74,7 @@ azd up
 # আপনাকে অনুরোধ করা হবে:
 # 1. Azure সাবস্ক্রিপশন নির্বাচন করুন
 # 2. অবস্থান নির্বাচন করুন (যেমন, eastus2)
-# 3. ডিপ্লয়ের জন্য 8-12 মিনিট অপেক্ষা করুন
+# 3. ডিপ্লয়মেন্টের জন্য 8-12 মিনিট অপেক্ষা করুন
 
 # আপনার API এন্ডপয়েন্ট পান
 azd env get-values
@@ -103,22 +95,22 @@ curl $(azd env get-value API_ENDPOINT)/health
 
 ## ✅ ডিপ্লয়মেন্ট যাচাই করুন
 
-### ধাপ ১: ডিপ্লয়মেন্ট স্থিতি যাচাই করুন
+### ধাপ 1: ডিপ্লয়মেন্ট স্থিতি যাচাই করুন
 
 ```bash
 # ডিপ্লয় করা সার্ভিসগুলো দেখুন
 azd show
 
-# প্রত্যাশিত আউটপুট প্রদর্শিত হবে:
+# প্রত্যাশিত আউটপুট দেখায়:
 # - সার্ভিস: api
 # - এন্ডপয়েন্ট: https://ca-api-[env].xxx.azurecontainerapps.io
-# - স্ট্যাটাস: চলমান
+# - স্ট্যাটাস: চলছে
 ```
 
-### ধাপ ২: API এন্ডপয়েন্ট পরীক্ষা করুন
+### ধাপ 2: API এন্ডপয়েন্ট পরীক্ষা করুন
 
 ```bash
-# API এন্ডপয়েন্ট পান
+# API এন্ডপয়েন্ট নিন
 API_URL=$(azd env get-value API_ENDPOINT)
 
 # স্বাস্থ্য পরীক্ষা করুন
@@ -132,32 +124,32 @@ curl -X POST $API_URL/api/items \
   -H "Content-Type: application/json" \
   -d '{"name": "Test Item", "description": "My first item"}'
 
-# সমস্ত আইটেম পান
+# সমস্ত আইটেম নিন
 curl $API_URL/api/items
 ```
 
 **সফলতার মানদণ্ড:**
 - ✅ হেলথ এন্ডপয়েন্ট HTTP 200 রিটার্ন করে
-- ✅ রুট এন্ডপয়েন্ট API তথ্য দেখায়
+- ✅ রুট এন্ডপয়েন্ট API তথ্য প্রদর্শন করে
 - ✅ POST আইটেম তৈরি করে এবং HTTP 201 রিটার্ন করে
 - ✅ GET তৈরি করা আইটেমগুলো রিটার্ন করে
 
-### ধাপ ৩: লগ দেখুন
+### ধাপ 3: লগ দেখুন
 
 ```bash
 # azd monitor ব্যবহার করে লাইভ লগ স্ট্রিম করুন
 azd monitor --logs
 
-# বা Azure CLI ব্যবহার করুন:
+# অথবা Azure CLI ব্যবহার করুন:
 az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # আপনি দেখতে পাবেন:
-# - Gunicorn স্টার্টআপ বার্তা
+# - Gunicorn স্টার্টআপ বার্তাগুলি
 # - HTTP অনুরোধ লগ
 # - অ্যাপ্লিকেশন তথ্য লগ
 ```
 
-## প্রকল্প কাঠামো
+## প্রকল্পের কাঠামো
 
 ```
 simple-flask-api/
@@ -174,16 +166,16 @@ simple-flask-api/
     └── Dockerfile
 ```
 
-## API এন্ডপয়েন্টস
+## API এন্ডপয়েন্ট
 
 | এন্ডপয়েন্ট | মেথড | বর্ণনা |
 |----------|--------|-------------|
-| `/health` | GET | হেলথ চেক |
-| `/api/items` | GET | সব আইটেম দেখায় |
-| `/api/items` | POST | নতুন আইটেম তৈরি করে |
+| `/health` | GET | স্বাস্থ্য পরীক্ষা |
+| `/api/items` | GET | সমস্ত আইটেম তালিকা |
+| `/api/items` | POST | নতুন আইটেম তৈরি করুন |
 | `/api/items/{id}` | GET | নির্দিষ্ট আইটেম পান |
-| `/api/items/{id}` | PUT | আইটেম আপডেট করে |
-| `/api/items/{id}` | DELETE | আইটেম মুছে ফেলে |
+| `/api/items/{id}` | PUT | আইটেম আপডেট করুন |
+| `/api/items/{id}` | DELETE | আইটেম মুছুন |
 
 ## কনফিগারেশন
 
@@ -198,28 +190,28 @@ azd env set MAX_REPLICAS 20
 
 ### স্কেলিং কনফিগারেশন
 
-API স্বয়ংক্রিয়ভাবে HTTP ট্রাফিক অনুযায়ী স্কেল করে:
-- **ন্যূনতম রেপ্লিকা**: 0 (নিষ্ক্রিয় থাকলে শূন্যে স্কেল করে)
+API স্বয়ংক্রিয়ভাবে HTTP ট্রাফিকের ভিত্তিতে স্কেল হবে:
+- **সর্বনিম্ন রেপ্লিকা**: 0 (নিষ্ক্রিয় হলে শূন্যে স্কেল করে)
 - **সর্বোচ্চ রেপ্লিকা**: 10
-- **প্রতিটি রেপ্লিকায় সমান্তরাল অনুরোধ**: 50
+- **প্রতি রেপ্লিকা সমান্তরাল অনুরোধ**: 50
 
 ## ডেভেলপমেন্ট
 
-### স্থানীয়ভাবে চালান
+### লোকালি চালান
 
 ```bash
-# নির্ভরশীলতা ইনস্টল করুন
+# নির্ভরশীলতাগুলো ইনস্টল করুন
 cd src
 pip install -r requirements.txt
 
-# অ্যাপটি চালান
+# অ্যাপ চালান
 python app.py
 
 # স্থানীয়ভাবে পরীক্ষা করুন
 curl http://localhost:8000/health
 ```
 
-### কন্টেইনার বিল্ড ও টেস্ট করুন
+### কন্টেইনার তৈরি ও পরীক্ষা করুন
 
 ```bash
 # Docker ইমেজ তৈরি করুন
@@ -244,7 +236,7 @@ azd up
 ### কেবল কোড ডিপ্লয়মেন্ট
 
 ```bash
-# শুধুমাত্র অ্যাপ্লিকেশন কোড ডিপ্লয় করুন (ইনফ্রাস্ট্রাকচার অপরিবর্তিত)
+# শুধুমাত্র অ্যাপলিকেশন কোড ডিপ্লয় করুন (ইনফ্রাস্ট্রাকচার অপরিবর্তিত)
 azd deploy api
 ```
 
@@ -254,7 +246,7 @@ azd deploy api
 # পরিবেশ ভেরিয়েবলগুলো আপডেট করুন
 azd env set API_KEY "new-api-key"
 
-# নতুন কনফিগারেশনের সাথে পুনরায় স্থাপন করুন
+# নতুন কনফিগারেশনের সাথে পুনরায় ডিপ্লয় করুন
 azd deploy api
 ```
 
@@ -273,19 +265,19 @@ az containerapp logs show --name api --resource-group $RG_NAME --follow
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ```
 
-### মেট্রিক্স মনিটর করুন
+### মেট্রিক্স পর্যবেক্ষণ করুন
 
 ```bash
 # Azure Monitor ড্যাশবোর্ড খুলুন
 azd monitor --overview
 
-# নির্দিষ্ট মেট্রিক্স দেখুন
+# নির্দিষ্ট মেট্রিকগুলো দেখুন
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "Requests,ResponseTime"
 ```
 
-## টেস্টিং
+## পরীক্ষা
 
 ### হেলথ চেক
 
@@ -293,7 +285,7 @@ az monitor metrics list \
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-প্রত্যাশিত প্রতিক্রিয়া:
+প্রত্যাশিত উত্তর:
 ```json
 {
   "status": "healthy",
@@ -309,7 +301,7 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/item
   -d '{"name": "Test Item", "description": "A test item"}'
 ```
 
-### সব আইটেম পেতে
+### সমস্ত আইটেম পান
 
 ```bash
 curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
@@ -317,38 +309,38 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 
 ## খরচ অপ্টিমাইজেশন
 
-এই ডিপ্লয়মেন্ট scale-to-zero ব্যবহার করে, তাই আপনি শুধুমাত্র তখনই পরিশোধ করবেন যখন API অনুরোধ প্রক্রিয়া করছে:
+এই ডিপ্লয়মেন্টটি scale-to-zero ব্যবহার করে, তাই API অনুরোধ প্রক্রিয়াকরণ করার সময়ই আপনি খরচ দেবেন:
 
-- **নিষ্ক্রিয় খরচ**: ~$0/মাস (শূন্যে স্কেল করা)
+- **অচল খরচ**: ~$0/মাস (শূন্যে স্কেল করা)
 - **সক্রিয় খরচ**: ~$0.000024/সেকেন্ড প্রতি রেপ্লিকা
-- **প্রত্যাশিত মাসিক খরচ** (কম ব্যবহারে): $5-15
+- **প্রত্যাশিত মাসিক খরচ** (হালকা ব্যবহারে): $5-15
 
-### খরচ আরও কমান
+### আরও খরচ কমান
 
 ```bash
-# ডেভের জন্য সর্বোচ্চ রেপ্লিকা সংখ্যা কমান
+# ডেভের জন্য সর্বোচ্চ রিপ্লিকা কমান
 azd env set MAX_REPLICAS 3
 
-# ছোট নিষ্ক্রিয় সময়সীমা ব্যবহার করুন
+# সংক্ষিপ্ত নিষ্ক্রিয় সময়সীমা ব্যবহার করুন
 azd env set SCALE_TO_ZERO_TIMEOUT 300  # ৫ মিনিট
 ```
 
-## সমস্যা সমাধান
+## সমস্যার সমাধান
 
 ### কন্টেইনার শুরু হবে না
 
 ```bash
-# Azure CLI ব্যবহার করে কন্টেইনার লগগুলি পরীক্ষা করুন
+# Azure CLI ব্যবহার করে কনটেইনার লগ পরীক্ষা করুন
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
-# স্থানীয়ভাবে Docker ইমেজ তৈরি হচ্ছে কি না যাচাই করুন
+# লোকালি Docker ইমেজ বিল্ড হচ্ছে কি না যাচাই করুন
 docker build -t test ./src
 ```
 
 ### API অ্যাক্সেসযোগ্য নয়
 
 ```bash
-# ইনগ্রেস বাহ্যিক কিনা যাচাই করুন
+# ইনগ্রেসটি বাহ্যিক কিনা যাচাই করুন
 az containerapp show --name api --resource-group rg-simple-flask-api \
   --query properties.configuration.ingress.external
 ```
@@ -366,30 +358,30 @@ az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
 
-## ক্লিন আপ
+## পরিষ্কার করুন
 
 ```bash
-# সমস্ত সম্পদ মুছে ফেলুন
+# সমস্ত সম্পদ মুছুন
 azd down --force --purge
 ```
 
-## পরবর্তী ধাপসমূহ
+## পরবর্তী ধাপ
 
-### এই উদাহরণটি প্রসারিত করুন
+### এই উদাহরণটি সম্প্রসারিত করুন
 
-1. **ডাটাবেস যুক্ত করুন** - Azure Cosmos DB বা SQL Database ইন্টিগ্রেট করুন
+1. **ডাটাবেস যোগ করুন** - Azure Cosmos DB বা SQL Database ইন্টিগ্রেট করুন
    ```bash
    # infra/main.bicep-এ Cosmos DB মডিউল যোগ করুন
-   # app.py-এ ডাটাবেস সংযোগ যোগ করে ফাইলটি আপডেট করুন
+   # app.py-এ ডেটাবেস সংযোগ আপডেট করুন
    ```
 
-2. **প্রমাণীকরণ যোগ করুন** - Azure AD বা API কী বাস্তবায়ন করুন
+2. **অথেনটিকেশন যোগ করুন** - Azure AD বা API কী বাস্তবায়ন করুন
    ```python
    # app.py-এ প্রমাণীকরণ মিডলওয়্যার যোগ করুন
    from functools import wraps
    ```
 
-3. **CI/CD কনফিগার করুন** - GitHub Actions ওয়ার্কফ্লো
+3. **CI/CD সেটআপ করুন** - GitHub Actions ওয়ার্কফ্লো
    ```yaml
    # Create .github/workflows/deploy.yml
    name: Deploy to Azure
@@ -402,13 +394,13 @@ azd down --force --purge
    identity: { type: 'SystemAssigned' }
    ```
 
-### সম্পর্কিত উদাহরণসমূহ
+### সম্পর্কিত উদাহরণ
 
 - **[ডাটাবেস অ্যাপ](../../../../../examples/database-app)** - SQL Database সহ সম্পূর্ণ উদাহরণ
-- **[Microservices](../../../../../examples/container-app/microservices)** - মাল্টি-সার্ভিস আর্কিটেকচার
-- **[Container Apps মাষ্টার গাইড](../README.md)** - সব কন্টেইনার প্যাটার্ন
+- **[মাইক্রোসার্ভিসেস](../../../../../examples/container-app/microservices)** - মাল্টি-সার্ভিস স্থাপত্য
+- **[Container Apps Master Guide](../README.md)** - সমস্ত কনটেইনার প্যাটার্ন
 
-### শিক্ষণ সম্পদ
+### শেখার সম্পদ
 
 - 📚 [AZD For Beginners Course](../../../README.md) - মূল কোর্স হোম
 - 📚 [Container Apps Patterns](../README.md) - আরও ডিপ্লয়মেন্ট প্যাটার্ন
@@ -418,7 +410,7 @@ azd down --force --purge
 
 ### ডকুমেন্টেশন
 - **[Flask Documentation](https://flask.palletsprojects.com/)** - Flask ফ্রেমওয়ার্ক গাইড
-- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - অফিসিয়াল Azure ডকুমেন্টেশন
+- **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Azure অফিসিয়াল ডকস
 - **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd কমান্ড রেফারেন্স
 
 ### টিউটোরিয়াল
@@ -427,18 +419,18 @@ azd down --force --purge
 - **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - ইনফ্রাস্ট্রাকচার অ্যাজ কোড
 
 ### টুলস
-- **[Azure Portal](https://portal.azure.com)** - ভিজ্যুয়ালি রিসোর্স ম্যানেজ করুন
+- **[Azure Portal](https://portal.azure.com)** - রিসোর্স ভিজ্যুয়ালি ম্যানেজ করুন
 - **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE ইন্টিগ্রেশন
 
 ---
 
-**🎉 অভিনন্দন!** আপনি অটো-স্কেলিং এবং মনিটরিং সহ একটি প্রোডাকশন-রেডি Flask API Azure Container Apps-এ ডিপ্লয় করেছেন।
+**🎉 অভিনন্দন!** আপনি একটি প্রোডাকশন-রেডি Flask API Azure Container Apps-এ অটো-স্কেলিং এবং মনিটরিং সহ ডিপ্লয় করেছেন।
 
-**প্রশ্ন আছে?** [ইস্যু খুলুন](https://github.com/microsoft/AZD-for-beginners/issues) অথবা [প্রশ্নোত্তর](../../../resources/faq.md) দেখুন
+**প্রশ্ন আছে?** [ইস্যু খুলুন](https://github.com/microsoft/AZD-for-beginners/issues) অথবা [প্রশ্নোত্তর (FAQ)](../../../resources/faq.md) দেখুন
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-দায়মুক্তি:
-এই নথিটি AI অনুবাদ সেবা Co-op Translator (https://github.com/Azure/co-op-translator) ব্যবহার করে অনুবাদ করা হয়েছে। আমরা যথাযথতার জন্য চেষ্টা করি, তবুও অনুগ্রহ করে জেনে রাখুন যে স্বয়ংক্রিয় অনুবাদে ত্রুটি বা ভুল থাকতে পারে। মূল নথিটি তার নিজ ভাষায় কর্তৃপক্ষপূর্ণ উৎস হিসেবে গণ্য করা উচিত। গুরুত্বপূর্ণ তথ্যের ক্ষেত্রে পেশাদার মানব অনুবাদ করা উত্তম। এই অনুবাদ ব্যবহারের ফলে সৃষ্ট কোনো ভুল বোঝাবুঝি বা ভ্রান্ত ব্যাখ্যার জন্য আমরা দায়ী নই।
+দায়-অস্বীকৃতি:
+এই দলিলটি AI অনুবাদ সেবা [Co-op Translator](https://github.com/Azure/co-op-translator) ব্যবহার করে অনুবাদ করা হয়েছে। আমরা যথাসাধ্য সঠিকতা বজায় রাখার চেষ্টা করি; তবুও স্বয়ংক্রিয় অনুবাদে ভুল বা অসঙ্গতি থাকতে পারে। মূল নথিটি তার মৌলিক ভাষায়ই কর্তৃত্বপূর্ণ উৎস হিসেবে বিবেচিত হওয়া উচিত। গুরুত্বপূর্ণ তথ্যের জন্য পেশাদার মানব অনুবাদ গ্রহণ করা উচিৎ। এই অনুবাদ ব্যবহারের ফলে সৃষ্ট কোনো ভুল বোঝাবুঝি বা ভুল ব্যাখ্যার জন্য আমরা দায়ী নই।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

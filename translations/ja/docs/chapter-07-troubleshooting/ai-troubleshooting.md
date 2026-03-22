@@ -1,30 +1,28 @@
-# AI専用トラブルシューティングガイド
+# AI 固有のトラブルシューティング ガイド
 
 **章ナビゲーション:**
-- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+- **📚 コース ホーム**: [AZD 入門](../../README.md)
 - **📖 現在の章**: 第7章 - トラブルシューティングとデバッグ
 - **⬅️ 前へ**: [デバッグガイド](debugging.md)
-- **➡️ 次の章**: [第8章: 本番運用とエンタープライズパターン](../chapter-08-production/production-ai-practices.md)
-- **🤖 関連**: [第2章: AIファースト開発](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **➡️ 次の章**: [第8章: 本番とエンタープライズのパターン](../chapter-08-production/production-ai-practices.md)
+- **🤖 関連:** [第2章: AIファースト開発](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**前:** [本番AIプラクティス](../chapter-08-production/production-ai-practices.md) | **次:** [AZD 基本](../chapter-01-foundation/azd-basics.md)
-
-この包括的なトラブルシューティングガイドは、AZD を使って AI ソリューションをデプロイする際によく発生する問題に対処し、Azure AI サービス固有の解決策とデバッグ手法を提供します。
+この包括的なトラブルシューティング ガイドは、AZD を使用して AI ソリューションをデプロイする際の一般的な問題に対処し、Azure AI サービス固有の解決策とデバッグ手法を提供します。
 
 ## 目次
 
-- [Azure OpenAI サービスの問題](../../../../docs/chapter-07-troubleshooting)
-- [Azure AI Search の問題](../../../../docs/chapter-07-troubleshooting)
-- [コンテナーアプリのデプロイ問題](../../../../docs/chapter-07-troubleshooting)
-- [認証と権限エラー](../../../../docs/chapter-07-troubleshooting)
-- [モデルデプロイの失敗](../../../../docs/chapter-07-troubleshooting)
-- [パフォーマンスとスケーリングの問題](../../../../docs/chapter-07-troubleshooting)
-- [コストとクォータ管理](../../../../docs/chapter-07-troubleshooting)
-- [デバッグツールと手法](../../../../docs/chapter-07-troubleshooting)
+- [Microsoft Foundry モデル サービスの問題](#azure-openai-service-issues)
+- [Azure AI Search の問題](#azure-ai-search-の問題)
+- [Container Apps のデプロイ問題](#container-apps-のデプロイ問題)
+- [認証と権限のエラー](#認証と権限のエラー)
+- [モデルデプロイの失敗](#モデルデプロイの失敗)
+- [パフォーマンスとスケーリングの問題](#パフォーマンスとスケーリングの問題)
+- [コストとクォータの管理](#コストとクォータの管理)
+- [デバッグツールと手法](#デバッグツールと手法)
 
-## Azure OpenAI サービスの問題
+## Microsoft Foundry モデル サービスの問題
 
-### 問題: 選択したリージョンで OpenAI サービスが利用できない
+### 問題: リージョンで OpenAI サービスが利用できない
 
 **症状:**
 ```
@@ -32,15 +30,15 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **原因:**
-- 選択したリージョンで Azure OpenAI が利用できない
-- 優先リージョンでクォータが尽きている
-- リージョンの容量制限
+- 選択したリージョンで Microsoft Foundry モデルが利用できない
+- 優先リージョンでクォータが使い果たされている
+- リージョンごとの容量制約
 
 **解決策:**
 
 1. **リージョンの可用性を確認する:**
 ```bash
-# OpenAI の利用可能なリージョンを一覧表示する
+# OpenAIの利用可能なリージョンを一覧表示する
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
@@ -70,7 +68,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### 問題: モデルデプロイのクォータ超過
+### 問題: モデルデプロイ クォータ超過
 
 **症状:**
 ```
@@ -81,7 +79,7 @@ Error: Deployment failed due to insufficient quota
 
 1. **現在のクォータを確認する:**
 ```bash
-# クォータの使用量を確認する
+# クォータの使用状況を確認する
 az cognitiveservices usage list \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG
@@ -89,7 +87,7 @@ az cognitiveservices usage list \
 
 2. **クォータの増加をリクエストする:**
 ```bash
-# クォータ増加リクエストを送信する
+# クォータ増加リクエストを提出する
 az support tickets create \
   --ticket-name "OpenAI Quota Increase" \
   --description "Need increased quota for production deployment" \
@@ -97,14 +95,14 @@ az support tickets create \
   --problem-classification "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/quota_service_problemClassification_guid"
 ```
 
-3. **モデル容量を最適化する:**
+3. **モデルの容量を最適化する:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -126,7 +124,7 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 1. **サポートされている API バージョンを使用する:**
 ```python
-# サポートされている最新バージョンを使用してください
+# サポートされている最新のバージョンを使用してください
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
@@ -140,7 +138,7 @@ az rest --method get \
 
 ## Azure AI Search の問題
 
-### 問題: 検索サービスの価格ティアが不十分
+### 問題: 検索サービスの価格プランが不十分
 
 **症状:**
 ```
@@ -149,7 +147,7 @@ Error: Semantic search requires Basic tier or higher
 
 **解決策:**
 
-1. **価格ティアをアップグレードする:**
+1. **価格プランをアップグレードする:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -167,7 +165,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **セマンティック検索を無効化する（開発時）:**
+2. **意味検索を無効にする（開発環境）:**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -190,7 +188,7 @@ Error: Cannot create index, insufficient permissions
 
 **解決策:**
 
-1. **検索サービスキーを確認する:**
+1. **検索サービスのキーを確認する:**
 ```bash
 # 検索サービスの管理者キーを取得する
 az search admin-key show \
@@ -214,7 +212,7 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **マネージドIDを使用する:**
+3. **マネージド ID を使用する:**
 ```bicep
 // Grant search permissions to managed identity
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -228,9 +226,9 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## コンテナーアプリのデプロイ問題
+## Container Apps のデプロイ問題
 
-### 問題: コンテナーのビルド失敗
+### 問題: コンテナのビルド失敗
 
 **症状:**
 ```
@@ -275,7 +273,7 @@ azure-cosmos==4.5.1
 
 3. **ヘルスチェックを追加する:**
 ```python
-# main.py - ヘルスチェック用エンドポイントを追加
+# main.py - ヘルスチェックエンドポイントを追加
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -285,7 +283,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### 問題: コンテナーアプリの起動失敗
+### 問題: コンテナアプリの起動失敗
 
 **症状:**
 ```
@@ -329,7 +327,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **モデルの読み込みを最適化する:**
 ```python
-# 起動時間を短縮するためにモデルを遅延読み込みする
+# 起動時間を短縮するためにモデルを遅延ロードする
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -351,19 +349,19 @@ async def lifespan(app: FastAPI):
     # 起動
     app.state.model_manager = ModelManager()
     yield
-    # 終了
+    # シャットダウン
     pass
 
 app = FastAPI(lifespan=lifespan)
 ```
 
-## 認証と権限エラー
+## 認証と権限のエラー
 
-### 問題: マネージドIDの権限が拒否される
+### 問題: マネージド ID の権限が拒否された
 
 **症状:**
 ```
-Error: Authentication failed for Azure OpenAI Service
+Error: Authentication failed for Microsoft Foundry Models Service
 ```
 
 **解決策:**
@@ -408,7 +406,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### 問題: Key Vault へのアクセスが拒否される
+### 問題: Key Vault へのアクセスが拒否された
 
 **症状:**
 ```
@@ -470,12 +468,12 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **モデルフォールバックを使用する:**
+2. **モデルのフォールバックを使用する:**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
 param primaryModel object = {
-  name: 'gpt-4o-mini'
+  name: 'gpt-4.1-mini'
   version: '2024-07-18'
 }
 
@@ -523,16 +521,16 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 ## パフォーマンスとスケーリングの問題
 
-### 問題: 高レイテンシの応答
+### 問題: レイテンシが高い応答
 
 **症状:**
-- 応答時間が 30 秒を超える
+- 応答時間が30秒を超える
 - タイムアウトエラー
-- ユーザー体験の悪化
+- ユーザー体験の低下
 
 **解決策:**
 
-1. **リクエストタイムアウトを実装する:**
+1. **リクエストのタイムアウトを実装する:**
 ```python
 # 適切なタイムアウトを設定する
 import httpx
@@ -629,9 +627,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **メモリ使用を最適化する:**
+2. **メモリ使用量を最適化する:**
 ```python
-# メモリ効率の良いモデルの処理
+# メモリ効率の良いモデルの扱い
 import gc
 import psutil
 
@@ -653,20 +651,20 @@ class MemoryOptimizedAI:
         return result
 ```
 
-## コストとクォータ管理
+## コストとクォータの管理
 
-### 問題: 想定外の高額コスト
+### 問題: 想定外の高額なコスト
 
 **症状:**
-- Azure の請求額が予想より高い
-- トークン使用量が見積もりを超えている
+- 予想より高い Azure 請求
+- トークン使用量が見積りを超えている
 - 予算アラートが発生した
 
 **解決策:**
 
-1. **コスト管理を実装する:**
+1. **コスト管理を導入する:**
 ```python
-# トークン使用状況の追跡
+# トークン使用量の追跡
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -712,24 +710,24 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 ```python
 # コストを考慮したモデル選択
 MODEL_COSTS = {
-    'gpt-4o-mini': 0.00015,  # 1Kトークンあたり
-    'gpt-4': 0.03,          # 1Kトークンあたり
+    'gpt-4.1-mini': 0.00015,  # 1Kトークンあたり
+    'gpt-4.1': 0.03,          # 1Kトークンあたり
     'gpt-35-turbo': 0.0015  # 1Kトークンあたり
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
     """Select model based on complexity and budget."""
     if complexity == 'simple' or budget_remaining < 10:
-        return 'gpt-4o-mini'
+        return 'gpt-4.1-mini'
     elif complexity == 'medium':
         return 'gpt-35-turbo'
     else:
-        return 'gpt-4'
+        return 'gpt-4.1'
 ```
 
 ## デバッグツールと手法
 
-### AZD デバッグコマンド
+### AZD デバッグ コマンド
 
 ```bash
 # 詳細なログ出力を有効にする
@@ -738,7 +736,7 @@ azd up --debug
 # デプロイの状態を確認する
 azd show
 
-# アプリケーションのログを表示する（監視ダッシュボードを開きます）
+# アプリケーションログを表示する（監視ダッシュボードが開きます）
 azd monitor --logs
 
 # リアルタイムのメトリクスを表示する
@@ -748,6 +746,26 @@ azd monitor --live
 azd env get-values
 ```
 
+### 診断用の AZD AI 拡張コマンド
+
+もし `azd ai agent init` を使用してエージェントをデプロイした場合、これらの追加ツールが利用できます:
+
+```bash
+# agents拡張機能がインストールされていることを確認してください
+azd extension install azure.ai.agents
+
+# マニフェストからエージェントを再初期化または更新する
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# MCPサーバーを使用してAIツールがプロジェクトの状態を照会できるようにする
+azd mcp start
+
+# レビューおよび監査のためにインフラストラクチャファイルを生成する
+azd infra generate
+```
+
+> **ヒント:** `azd infra generate` を使用して IaC をディスクに書き出し、プロビジョニングされたリソースを正確に検査できるようにします。これはリソース構成の問題をデバッグする際に非常に有用です。詳細は [AZD AI CLI リファレンス](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) を参照してください。
+
 ### アプリケーションのデバッグ
 
 1. **構造化ログ:**
@@ -755,7 +773,7 @@ azd env get-values
 import logging
 import json
 
-# AIアプリケーションの構造化ロギングを設定する
+# AI アプリケーション向けの構造化ログを設定する
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -834,42 +852,43 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## よくあるエラーコードと解決策
+## よくあるエラーコードと対処法
 
 | エラーコード | 説明 | 解決策 |
 |------------|-------------|----------|
-| 401 | 認証されていない | API キーとマネージドIDの設定を確認する |
-| 403 | 禁止 | RBAC のロール割り当てを確認する |
-| 429 | レート制限 | 指数バックオフを用いたリトライロジックを実装する |
-| 500 | サーバー内部エラー | モデルデプロイのステータスとログを確認する |
-| 503 | サービス利用不可 | サービスの正常性とリージョンの可用性を確認する |
+| 401 | 認証されていません | API キーとマネージド ID の構成を確認してください |
+| 403 | 禁止されています | RBAC のロール割り当てを確認してください |
+| 429 | レート制限 | 指数バックオフを用いたリトライ ロジックを実装してください |
+| 500 | サーバー内部エラー | モデルのデプロイ状況とログを確認してください |
+| 503 | サービス利用不可 | サービスの状態とリージョンの可用性を確認してください |
 
 ## 次のステップ
 
-1. **[AI モデルデプロイガイド](../chapter-02-ai-development/ai-model-deployment.md) を確認する** 展開のベストプラクティスのために
-2. **[本番AIプラクティス](../chapter-08-production/production-ai-practices.md) を完了する** エンタープライズ対応ソリューションのために
-3. **[Microsoft Foundry Discord](https://aka.ms/foundry/discord) に参加する** コミュニティサポートのために
-4. **Issue を提出する** AZD 固有の問題については [AZD GitHub リポジトリ](https://github.com/Azure/azure-dev) へ
+1. **[AI モデルデプロイ ガイド](../chapter-02-ai-development/ai-model-deployment.md) を確認する** デプロイのベストプラクティス
+2. **[本番 AI プラクティス](../chapter-08-production/production-ai-practices.md) を完了する** エンタープライズ対応のソリューション
+3. **[Microsoft Foundry の Discord](https://aka.ms/foundry/discord) に参加する** コミュニティサポートのために
+4. <strong>問題を提出する</strong> AZD 固有の問題については [AZD GitHub リポジトリ](https://github.com/Azure/azure-dev) に提出してください
 
 ## リソース
 
-- [Azure OpenAI サービスのトラブルシューティング](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [コンテナーアプリのトラブルシューティング](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI Search のトラブルシューティング](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [Microsoft Foundry モデル サービストラブルシューティング](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [Container Apps トラブルシューティング](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Azure AI Search トラブルシューティング](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - エディタに Azure トラブルシューティングスキルをインストール: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **章ナビゲーション:**
-- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+- **📚 コース ホーム**: [AZD 入門](../../README.md)
 - **📖 現在の章**: 第7章 - トラブルシューティングとデバッグ
 - **⬅️ 前へ**: [デバッグガイド](debugging.md)
-- **➡️ 次の章**: [第8章: 本番運用とエンタープライズパターン](../chapter-08-production/production-ai-practices.md)
-- **🤖 関連**: [第2章: AIファースト開発](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- [Azure Developer CLI トラブルシューティング](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **➡️ 次の章**: [第8章: 本番とエンタープライズのパターン](../chapter-08-production/production-ai-practices.md)
+- **🤖 関連:** [第2章: AIファースト開発](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 参考**: [Azure Developer CLI トラブルシューティング](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責事項：
-本書は AI 翻訳サービス「Co-op Translator」（https://github.com/Azure/co-op-translator）を使用して翻訳されました。正確性には努めておりますが、自動翻訳には誤りや不正確な箇所が含まれる場合があることをご承知ください。原文（原言語）の文書を正式な出典としてご参照ください。重要な情報については専門の翻訳者による人的翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や誤訳についても、責任を負いかねます。
+**免責事項**:
+この文書は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を用いて翻訳されています。正確性を期すよう努めていますが、自動翻訳には誤りや不正確な箇所が含まれる可能性があることをご承知おきください。原文（原言語の文書）を正式な出典と見なしてください。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じた誤解や解釈の相違について、当社は一切の責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

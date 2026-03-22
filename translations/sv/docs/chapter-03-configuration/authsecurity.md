@@ -1,30 +1,30 @@
-# Autentiseringsmönster och Hanterad identitet
+# Authentication Patterns and Managed Identity
 
-⏱️ **Beräknad tid**: 45–60 minuter | 💰 **Kostnadspåverkan**: Gratis (inga ytterligare avgifter) | ⭐ **Komplexitet**: Mellan
+⏱️ **Uppskattad tid**: 45-60 minuter | 💰 **Kostnadspåverkan**: Gratis (inga extra avgifter) | ⭐ **Komplexitet**: Mellannivå
 
 **📚 Lärväg:**
 - ← Föregående: [Konfigurationshantering](configuration.md) - Hantera miljövariabler och hemligheter
-- 🎯 **Du är här**: Autentisering & Säkerhet (Hanterad identitet, Key Vault, säkra mönster)
-- → Nästa: [First Project](first-project.md) - Bygg din första AZD-applikation
-- 🏠 [Course Home](../../README.md)
+- 🎯 **Du är här**: Autentisering & Säkerhet (Managed Identity, Key Vault, säkra mönster)
+- → Nästa: [Första projektet](first-project.md) - Bygg din första AZD-applikation
+- 🏠 [Kursens startsida](../../README.md)
 
 ---
 
-## Vad du kommer lära dig
+## Vad du kommer att lära dig
 
 Genom att slutföra denna lektion kommer du att:
-- Förstå Azure-autentiseringsmönster (nycklar, anslutningssträngar, hanterad identitet)
-- Implementera **Hanterad identitet** för lösenordsfri autentisering
-- Skydda hemligheter med **Azure Key Vault**-integration
+- Förstå Azure-autentiseringsmönster (nycklar, connection strings, managed identity)
+- Implementera **Managed Identity** för lösenordslös autentisering
+- Säkerställa hemligheter med **Azure Key Vault**-integration
 - Konfigurera **rollbaserad åtkomstkontroll (RBAC)** för AZD-distributioner
 - Tillämpa säkerhetsbästa praxis i Container Apps och Azure-tjänster
 - Migrera från nyckelbaserad till identitetsbaserad autentisering
 
-## Varför Hanterad identitet spelar roll
+## Varför Managed Identity är viktigt
 
 ### Problemet: Traditionell autentisering
 
-**Innan Hanterad identitet:**
+**Före Managed Identity:**
 ```javascript
 // ❌ SÄKERHETSRISK: Hårdkodade hemligheter i koden
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
@@ -34,14 +34,14 @@ const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 
 **Problem:**
 - 🔴 **Exponerade hemligheter** i kod, konfigurationsfiler, miljövariabler
-- 🔴 **Rotering av referenser** kräver kodändringar och omdistribuering
-- 🔴 **Granskningmardrömmar** - vem åtkom vad, när?
-- 🔴 **Spridning** - hemligheter utspridda över flera system
-- 🔴 **Efterlevnadsrisker** - misslyckas med säkerhetsrevisioner
+- 🔴 **Kredentialrotation** kräver kodändringar och omdistribuering
+- 🔴 **Revisionsmardrömmar** - vem åtkom vad, när?
+- 🔴 **Spridning** - hemligheter utspridda i flera system
+- 🔴 **Efterlevnadsrisker** - misslyckas vid säkerhetsrevisioner
 
-### Lösningen: Hanterad identitet
+### Lösningen: Managed Identity
 
-**Efter Hanterad identitet:**
+**Efter Managed Identity:**
 ```javascript
 // ✅ SÄKERT: Inga hemligheter i koden
 const credential = new DefaultAzureCredential();
@@ -53,30 +53,30 @@ const client = new BlobServiceClient(
 
 **Fördelar:**
 - ✅ **Inga hemligheter** i kod eller konfiguration
-- ✅ **Automatisk rotering** - Azure hanterar det
-- ✅ **Fullständig granskningslogg** i Azure AD-loggar
+- ✅ **Automatisk rotation** - Azure hanterar det
+- ✅ **Full revisionsspårning** i Azure AD-loggar
 - ✅ **Centraliserad säkerhet** - hantera i Azure-portalen
-- ✅ **Klar för efterlevnad** - uppfyller säkerhetsstandarder
+- ✅ **Redo för efterlevnad** - uppfyller säkerhetsstandarder
 
-**Analogi**: Traditionell autentisering är som att bära flera fysiska nycklar till olika dörrar. Hanterad identitet är som att ha ett säkerhetskort som automatiskt ger åtkomst baserat på vem du är—inga nycklar att tappa bort, kopiera eller rotera.
+**Analogin**: Traditionell autentisering är som att bära flera fysiska nycklar för olika dörrar. Managed Identity är som att ha ett säkerhets-id som automatiskt ger åtkomst baserat på vem du är—inga nycklar att tappa bort, kopiera eller rotera.
 
 ---
 
 ## Arkitekturöversikt
 
-### Autentiseringsflöde med Hanterad identitet
+### Autentiseringsflöde med Managed Identity
 
 ```mermaid
 sequenceDiagram
-    participant App as Din applikation<br/>(Containerapp)
+    participant App as Din applikation<br/>(Container-app)
     participant MI as Hanterad identitet<br/>(Azure AD)
     participant KV as Nyckelvalv
     participant Storage as Azure-lagring
-    participant DB as Azure SQL
+    participant DB as Azure SQL-databas
     
     App->>MI: Begär åtkomsttoken<br/>(automatiskt)
     MI->>MI: Verifiera identitet<br/>(inget lösenord behövs)
-    MI-->>App: Returnera token<br/>(giltig i 1 timme)
+    MI-->>App: Returnera token<br/>(giltig 1 timme)
     
     App->>KV: Hämta hemlighet<br/>(med token)
     KV->>KV: Kontrollera RBAC-behörigheter
@@ -86,13 +86,13 @@ sequenceDiagram
     Storage->>Storage: Kontrollera RBAC-behörigheter
     Storage-->>App: Lyckades
     
-    App->>DB: Begär data<br/>(med token)
+    App->>DB: Hämta data<br/>(med token)
     DB->>DB: Kontrollera SQL-behörigheter
     DB-->>App: Returnera resultat
     
     Note over App,DB: All autentisering är lösenordslös!
 ```
-### Typer av Hanterade identiteter
+### Typer av Managed Identities
 
 ```mermaid
 graph TB
@@ -103,11 +103,11 @@ graph TB
     MI --> SystemAssigned
     MI --> UserAssigned
     
-    SystemAssigned --> SA1[Livscykel knuten till resurs]
+    SystemAssigned --> SA1[Livscykel kopplad till resursen]
     SystemAssigned --> SA2[Automatisk skapande/borttagning]
-    SystemAssigned --> SA3[Bäst för enskild resurs]
+    SystemAssigned --> SA3[Bäst för en enda resurs]
     
-    UserAssigned --> UA1[Egen livscykel]
+    UserAssigned --> UA1[Oberoende livscykel]
     UserAssigned --> UA2[Manuell skapande/borttagning]
     UserAssigned --> UA3[Delad mellan resurser]
     
@@ -143,9 +143,9 @@ az --version
 
 ### Azure-krav
 
-- Aktivt Azure-abonnemang
+- Aktiv Azure-prenumeration
 - Behörigheter att:
-  - Skapa hanterade identiteter
+  - Skapa managed identities
   - Tilldela RBAC-roller
   - Skapa Key Vault-resurser
   - Distribuera Container Apps
@@ -153,15 +153,15 @@ az --version
 ### Kunskapsförutsättningar
 
 Du bör ha slutfört:
-- [Installationsguide](installation.md) - AZD-installation
+- [Installationsguide](installation.md) - AZD-inställning
 - [AZD Basics](azd-basics.md) - Kärnkoncept
-- [Konfigurationshantering](configuration.md) - Miljövariabler
+- [Configuration Management](configuration.md) - Miljövariabler
 
 ---
 
 ## Lektion 1: Förstå autentiseringsmönster
 
-### Mönster 1: Anslutningssträngar (Gammalt - Undvik)
+### Mönster 1: Connection Strings (Legacy - Undvik)
 
 **Hur det fungerar:**
 ```bash
@@ -175,7 +175,7 @@ SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=
 - ❌ Hemligheter synliga i miljövariabler
 - ❌ Loggas i distributionssystem
 - ❌ Svårt att rotera
-- ❌ Ingen revisionslogg över åtkomst
+- ❌ Ingen revisionsspårning av åtkomst
 
 **När man ska använda:** Endast för lokal utveckling, aldrig i produktion.
 
@@ -205,17 +205,17 @@ env: [
 **Fördelar:**
 - ✅ Hemligheter lagras säkert i Key Vault
 - ✅ Centraliserad hantering av hemligheter
-- ✅ Rotering utan kodändringar
+- ✅ Rotation utan kodändringar
 
 **Begränsningar:**
-- ⚠️ Använder fortfarande nycklar/lösenord
+- ⚠️ Fortfarande användning av nycklar/lösenord
 - ⚠️ Behöver hantera åtkomst till Key Vault
 
-**När man ska använda:** Övergångssteg från anslutningssträngar till hanterad identitet.
+**När man ska använda:** Övergångssteg från connection strings till managed identity.
 
 ---
 
-### Mönster 3: Hanterad identitet (Bästa praxis)
+### Mönster 3: Managed Identity (Bästa praxis)
 
 **Hur det fungerar:**
 ```bicep
@@ -251,21 +251,21 @@ const blobServiceClient = new BlobServiceClient(
 ```
 
 **Fördelar:**
-- ✅ Inga hemligheter i kod/konfig
-- ✅ Automatisk rotation av referenser
-- ✅ Fullständig revisionslogg
+- ✅ Inga hemligheter i kod/konfiguration
+- ✅ Automatisk credential-rotation
+- ✅ Full revisionsspårning
 - ✅ RBAC-baserade behörigheter
-- ✅ Klar för efterlevnad
+- ✅ Efterlevnadsklar
 
-**När man ska använda:** Alltid för produktionsapplikationer.
+**När man ska använda:** Alltid, för produktionsapplikationer.
 
 ---
 
-## Lektion 2: Implementera Hanterad identitet med AZD
+## Lektion 2: Implementera Managed Identity med AZD
 
 ### Steg-för-steg-implementering
 
-Låt oss bygga en säker Container App som använder hanterad identitet för att få åtkomst till Azure Storage och Key Vault.
+Låt oss bygga en säker Container App som använder managed identity för att komma åt Azure Storage och Key Vault.
 
 ### Projektstruktur
 
@@ -302,7 +302,7 @@ services:
 # Enable managed identity (AZD handles this automatically)
 ```
 
-### 2. Infrastruktur: Aktivera Hanterad identitet
+### 2. Infrastruktur: Aktivera Managed Identity
 
 **Fil: `infra/main.bicep`**
 
@@ -463,7 +463,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 output id string = roleAssignment.id
 ```
 
-### 5. Applikationskod med Hanterad identitet
+### 5. Applikationskod med Managed Identity
 
 **Fil: `src/app.js`**
 
@@ -592,7 +592,7 @@ azd up
 # Hämta appens URL
 APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
 
-# Testa hälsokontrollen
+# Testa hälsokontroll
 curl $APP_URL/health
 ```
 
@@ -604,7 +604,7 @@ curl $APP_URL/health
 }
 ```
 
-**Testa blob-uppladdning:**
+**Test av blob-uppladdning:**
 ```bash
 curl -X POST $APP_URL/upload
 ```
@@ -618,7 +618,7 @@ curl -X POST $APP_URL/upload
 }
 ```
 
-**Testa listning av containers:**
+**Test av container-listning:**
 ```bash
 curl $APP_URL/containers
 ```
@@ -636,19 +636,19 @@ curl $APP_URL/containers
 
 ## Vanliga Azure RBAC-roller
 
-### Inbyggda roll-ID:n för Hanterad identitet
+### Inbyggda roll-ID:n för Managed Identity
 
 | Service | Role Name | Role ID | Permissions |
 |---------|-----------|---------|-------------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Läsa blobs och containers |
-| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Läsa, skriva, ta bort blobs |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Läsa, skriva, ta bort kömeddelanden |
-| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Läsa hemligheter |
-| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Läsa, skriva, ta bort hemligheter |
-| **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Läsa Cosmos DB-data |
-| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Läsa, skriva Cosmos DB-data |
+| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Läs blobs och containers |
+| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Läs, skriv, ta bort blobs |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Läs, skriv, ta bort kömeddelanden |
+| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Läs hemligheter |
+| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Läs, skriv, ta bort hemligheter |
+| **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Läs data i Cosmos DB |
+| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Läs och skriv data i Cosmos DB |
 | **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Hantera SQL-databaser |
-| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Skicka, ta emot, hantera meddelanden |
+| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Skicka, ta emot och hantera meddelanden |
 
 ### Hur man hittar roll-ID:n
 
@@ -667,13 +667,13 @@ az role definition list --name "Storage Blob Data Contributor"
 
 ## Praktiska övningar
 
-### Övning 1: Aktivera Hanterad identitet för befintlig app ⭐⭐ (Medium)
+### Övning 1: Aktivera Managed Identity för befintlig app ⭐⭐ (Medel)
 
-**Mål**: Lägg till hanterad identitet i en befintlig Container App-distribution
+**Mål**: Lägg till managed identity till en befintlig Container App-distribution
 
-**Scenario**: Du har en Container App som använder anslutningssträngar. Konvertera den till hanterad identitet.
+**Scenario**: Du har en Container App som använder connection strings. Konvertera den till managed identity.
 
-**Utgångspunkt**: Container App med denna konfiguration:
+**Startpunkt**: Container App med denna konfiguration:
 
 ```bicep
 // ❌ Current: Using connection string
@@ -687,7 +687,7 @@ env: [
 
 **Steg**:
 
-1. **Aktivera hanterad identitet i Bicep:**
+1. **Aktivera managed identity i Bicep:**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -699,7 +699,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **Ge Storage-åtkomst:**
+2. **Ge åtkomst till Storage:**
 
 ```bicep
 // Get storage account reference
@@ -721,7 +721,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 3. **Uppdatera applikationskoden:**
 
-**Före (anslutningssträng):**
+**Före (connection string):**
 ```javascript
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -730,7 +730,7 @@ const blobServiceClient = BlobServiceClient.fromConnectionString(
 );
 ```
 
-**Efter (hanterad identitet):**
+**Efter (managed identity):**
 ```javascript
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
@@ -757,7 +757,7 @@ env: [
 5. **Distribuera och testa:**
 
 ```bash
-# Driftsätt på nytt
+# Distribuera om
 azd up
 
 # Testa att det fortfarande fungerar
@@ -767,8 +767,8 @@ curl https://myapp.azurecontainerapps.io/upload
 **✅ Framgångskriterier:**
 - ✅ Applikationen distribueras utan fel
 - ✅ Storage-operationer fungerar (uppladdning, lista, nedladdning)
-- ✅ Inga anslutningssträngar i miljövariabler
-- ✅ Identitet syns i Azure-portalen under "Identity"-bladet
+- ✅ Inga connection strings i miljövariabler
+- ✅ Identiteten syns i Azure-portalen under fliken "Identity"
 
 **Verifiering:**
 
@@ -787,19 +787,19 @@ az role assignment list \
 # ✅ Förväntat: Visar rollen "Storage Blob Data Contributor"
 ```
 
-**Tid**: 20–30 minuter
+**Tid**: 20-30 minuter
 
 ---
 
-### Övning 2: Åtkomst för flera tjänster med användartilldelad identitet ⭐⭐⭐ (Avancerad)
+### Övning 2: Flera tjänsters åtkomst med user-assigned identity ⭐⭐⭐ (Avancerad)
 
-**Mål**: Skapa en användartilldelad identitet som delas mellan flera Container Apps
+**Mål**: Skapa en user-assigned identity som delas mellan flera Container Apps
 
 **Scenario**: Du har 3 mikrotjänster som alla behöver åtkomst till samma Storage-konto och Key Vault.
 
 **Steg**:
 
-1. **Skapa användartilldelad identitet:**
+1. **Skapa user-assigned identity:**
 
 **Fil: `infra/core/identity.bicep`**
 
@@ -819,7 +819,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **Tilldela roller till användartilldelad identitet:**
+2. **Tilldela roller till user-assigned identity:**
 
 ```bicep
 // In main.bicep
@@ -856,7 +856,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **Tilldela identitet till flera Container Apps:**
+3. **Tilldela identiteten till flera Container Apps:**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -924,24 +924,24 @@ curl https://order-service.azurecontainerapps.io/upload
 ```
 
 **✅ Framgångskriterier:**
-- ✅ En identitet delas av 3 tjänster
+- ✅ En identitet delas mellan 3 tjänster
 - ✅ Alla tjänster kan komma åt Storage och Key Vault
 - ✅ Identiteten kvarstår om du tar bort en tjänst
 - ✅ Centraliserad behörighetshantering
 
-**Fördelar med användartilldelad identitet:**
+**Fördelar med user-assigned identity:**
 - En identitet att hantera
-- Konsistenta behörigheter över tjänster
-- Överlever borttagning av tjänst
-- Bättre för komplexa arkitekturer
+- Konsekventa behörigheter över tjänster
+- Överlever borttagning av tjänster
+- Bättre för komplex arkitektur
 
-**Tid**: 30–40 minuter
+**Tid**: 30-40 minuter
 
 ---
 
-### Övning 3: Implementera Key Vault-secretrotatering ⭐⭐⭐ (Avancerad)
+### Övning 3: Implementera Key Vault-hemlighetsrotation ⭐⭐⭐ (Avancerad)
 
-**Mål**: Lagra tredjeparts-API-nycklar i Key Vault och åtkomma dem med hanterad identitet
+**Mål**: Lagra tredjeparts API-nycklar i Key Vault och nå dem med managed identity
 
 **Scenario**: Din app behöver anropa en extern API (OpenAI, Stripe, SendGrid) som kräver API-nycklar.
 
@@ -981,7 +981,7 @@ output uri string = keyVault.properties.vaultUri
 2. **Lagra hemligheter i Key Vault:**
 
 ```bash
-# Hämta namnet på Key Vault
+# Hämta Key Vault-namn
 KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
 
 # Lagra tredjeparts-API-nycklar
@@ -1078,7 +1078,7 @@ initializeServices().catch(console.error);
 app.post('/chat', async (req, res) => {
   try {
     const completion = await openaiClient.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-4.1',
       messages: [{ role: 'user', content: 'Hello!' }]
     });
     
@@ -1128,7 +1128,7 @@ az containerapp revision restart \
   --resource-group rg-myapp
 ```
 
-**Tid**: 25–35 minuter
+**Tid**: 25-35 minuter
 
 ---
 
@@ -1138,14 +1138,14 @@ az containerapp revision restart \
 
 Testa din förståelse:
 
-- [ ] **Q1**: Vilka är de tre huvudautentiseringsmönstren? 
-  - **A**: Anslutningssträngar (gammalt), Key Vault-referenser (övergång), Hanterad identitet (bäst)
+- [ ] **Q1**: Vilka är de tre huvudsakliga autentiseringsmönstren? 
+  - **A**: Connection strings (legacy), Key Vault-referenser (övergång), Managed Identity (bäst)
 
-- [ ] **Q2**: Varför är hanterad identitet bättre än anslutningssträngar?
-  - **A**: Inga hemligheter i kod, automatisk rotation, full revisionslogg, RBAC-behörigheter
+- [ ] **Q2**: Varför är managed identity bättre än connection strings?
+  - **A**: Inga hemligheter i kod, automatisk rotation, full revisionsspårning, RBAC-behörigheter
 
-- [ ] **Q3**: När skulle du använda användartilldelad identitet istället för systemtilldelad?
-  - **A**: När identiteten ska delas mellan flera resurser eller när identitetens livscykel är oberoende av resursens livscykel
+- [ ] **Q3**: När skulle du använda user-assigned identity istället för system-assigned?
+  - **A**: När identiteten ska delas över flera resurser eller när identitetens livscykel är oberoende av resursens livscykel
 
 **Hands-On-verifiering:**
 ```bash
@@ -1170,7 +1170,7 @@ Testa din förståelse:
   - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
 - [ ] **Q2**: Vilka behörigheter ger "Key Vault Secrets User"?
-  - **A**: Endast läsbehörighet till hemligheter (kan inte skapa, uppdatera eller ta bort)
+  - **A**: Läsbehörighet till hemligheter (kan inte skapa, uppdatera eller ta bort)
 
 - [ ] **Q3**: Hur ger du en Container App åtkomst till Azure SQL?
   - **A**: Tilldela rollen "SQL DB Contributor" eller konfigurera Azure AD-autentisering för SQL
@@ -1180,7 +1180,7 @@ Testa din förståelse:
 # Hitta en specifik roll
 az role definition list --name "Storage Blob Data Contributor"
 
-# Kontrollera vilka roller som är tilldelade din identitet
+# Kontrollera vilka roller som tilldelats din identitet
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
@@ -1190,16 +1190,16 @@ az role assignment list --assignee $PRINCIPAL_ID --output table
 ### 3. Key Vault-integration ✓
 
 Testa din förståelse:
-- [ ] **Q1**: Hur aktiverar du RBAC för Key Vault istället för åtkomstprinciper?
+- [ ] **Q1**: Hur aktiverar du RBAC för Key Vault istället för åtkomstpolicyer?
   - **A**: Ange `enableRbacAuthorization: true` i Bicep
 
-- [ ] **Q2**: Vilket Azure SDK-bibliotek hanterar autentisering med managed identity?
+- [ ] **Q2**: Vilket Azure SDK-bibliotek hanterar autentisering för hanterad identitet?
   - **A**: `@azure/identity` med klassen `DefaultAzureCredential`
 
-- [ ] **Q3**: Hur länge ligger Key Vault-hemligheter i cache?
-  - **A**: Beror på applikationen; implementera din egen cachningsstrategi
+- [ ] **Q3**: Hur länge stannar Key Vault-hemligheter i cache?
+  - **A**: Beroende på applikation; implementera din egen cachningsstrategi
 
-**Hands-On Verification:**
+**Praktisk verifiering:**
 ```bash
 # Testa åtkomst till Key Vault
 az keyvault secret show \
@@ -1211,12 +1211,12 @@ az keyvault secret show \
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Förväntat: true
+# ✅ Förväntat: sant
 ```
 
 ---
 
-## Security Best Practices
+## Bästa säkerhetspraxis
 
 ### ✅ GÖR:
 
@@ -1227,8 +1227,8 @@ az keyvault show \
    }
    ```
 
-2. **Använd minst privilegierade RBAC-roller**
-   - Använd "Reader"-roller när det är möjligt
+2. **Använd minst-privilegierade RBAC-roller**
+   - Använd "Reader" roller när det är möjligt
    - Undvik "Owner" eller "Contributor" om det inte är nödvändigt
 
 3. **Lagra tredjepartsnycklar i Key Vault**
@@ -1236,7 +1236,7 @@ az keyvault show \
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
 
-4. **Aktivera revisionsloggning**
+4. **Aktivera granskningsloggning**
    ```bicep
    diagnosticSettings: {
      logs: [{ category: 'AuditEvent', enabled: true }]
@@ -1294,11 +1294,11 @@ az keyvault show \
 
 ---
 
-## Troubleshooting Guide
+## Felsökningsguide
 
 ### Problem: "Unauthorized" vid åtkomst till Azure Storage
 
-**Symtom:**
+**Symptom:**
 ```
 Error: Unauthorized (403)
 AuthorizationPermissionMismatch: This request is not authorized to perform this operation
@@ -1332,9 +1332,9 @@ az role assignment create \
   --scope $STORAGE_ID
 ```
 
-2. **Vänta på propagation (kan ta 5–10 minuter):**
+2. **Vänta på att ändringarna sprider sig (kan ta 5-10 minuter):**
 ```bash
-# Kontrollera rolltilldelningsstatus
+# Kontrollera status för rolltilldelning
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
 
@@ -1348,7 +1348,7 @@ const credential = new DefaultAzureCredential();
 
 ### Problem: Åtkomst till Key Vault nekad
 
-**Symtom:**
+**Symptom:**
 ```
 Error: Forbidden (403)
 The user, group or application does not have secrets get permission
@@ -1361,7 +1361,7 @@ The user, group or application does not have secrets get permission
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Förväntat: true
+# ✅ Förväntat: sant
 
 # Kontrollera rolltilldelningar
 az role assignment list \
@@ -1391,7 +1391,7 @@ az role assignment create \
 
 ### Problem: DefaultAzureCredential misslyckas lokalt
 
-**Symtom:**
+**Symptom:**
 ```
 Error: DefaultAzureCredential failed to retrieve a token
 CredentialUnavailableError: No credential available
@@ -1403,7 +1403,7 @@ CredentialUnavailableError: No credential available
 # Kontrollera om du är inloggad
 az account show
 
-# Kontrollera Azure CLI-autentisering
+# Kontrollera autentisering för Azure CLI
 az ad signed-in-user show
 ```
 
@@ -1426,7 +1426,7 @@ export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
 
-4. **Eller använd en annan autentiseringsmetod lokalt:**
+4. **Eller använd annat autentiseringssätt lokalt:**
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
@@ -1438,15 +1438,15 @@ const credential = process.env.NODE_ENV === 'production'
 
 ---
 
-### Problem: Rolltilldelning tar för lång tid att propagera
+### Problem: Rolltilldelning tar för lång tid att slå igenom
 
-**Symtom:**
-- Rollen tilldelades framgångsrikt
+**Symptom:**
+- Rollen tilldelad framgångsrikt
 - Får fortfarande 403-fel
-- Intermittent åtkomst (ibland fungerar det, ibland inte)
+- Intermittent åtkomst (ibland fungerar, ibland inte)
 
 **Förklaring:**
-Ändringar i Azure RBAC kan ta 5–10 minuter att sprida globalt.
+Ändringar i Azure RBAC kan ta 5-10 minuter att sprida globalt.
 
 **Lösning:**
 
@@ -1466,37 +1466,37 @@ az containerapp revision restart \
 
 ---
 
-## Cost Considerations
+## Kostnadsöverväganden
 
 ### Kostnader för hanterad identitet
 
-| Resource | Cost |
-|----------|------|
+| Resurs | Kostnad |
+|--------|---------|
 | **Hanterad identitet** | 🆓 **GRATIS** - Ingen kostnad |
 | **RBAC-rolltilldelningar** | 🆓 **GRATIS** - Ingen kostnad |
-| **Azure AD tokenförfrågningar** | 🆓 **GRATIS** - Ingår |
-| **Key Vault-operationer** | $0.03 per 10 000 operationer |
+| **Azure AD-tokenförfrågningar** | 🆓 **GRATIS** - Ingår |
+| **Key Vault-operationer** | $0.03 per 10,000 operationer |
 | **Key Vault-lagring** | $0.024 per hemlighet per månad |
 
-**Hanterad identitet sparar pengar genom att:**
-- ✅ Eliminera Key Vault-operationer för tjänst-till-tjänst-autentisering
-- ✅ Minska säkerhetsincidenter (inga läckta inloggningsuppgifter)
-- ✅ Minska driftkostnader (ingen manuell rotation)
+Hanterad identitet sparar pengar genom att:
+- ✅ Eliminera Key Vault-operationer för service-till-service-autentisering
+- ✅ Minska säkerhetsincidenter (inga läckta hemligheter)
+- ✅ Minska operativ överbelastning (ingen manuell rotation)
 
-**Exempel på kostnadsjämförelse (månatlig):**
+Exempel på kostnadsjämförelse (månadsvis):
 
 | Scenario | Anslutningssträngar | Hanterad identitet | Besparingar |
-|----------|-------------------|-----------------|---------|
-| Liten app (1M förfrågningar) | ~$50 (Key Vault + ops) | ~$0 | $50/månad |
-| Medelstor app (10M förfrågningar) | ~$200 | ~$0 | $200/månad |
-| Stor app (100M förfrågningar) | ~$1,500 | ~$0 | $1,500/månad |
+|----------|-------------------|--------------------|------------|
+| Liten app (1M requests) | ~$50 (Key Vault + ops) | ~$0 | $50/month |
+| Medelstor app (10M requests) | ~$200 | ~$0 | $200/month |
+| Stor app (100M requests) | ~$1,500 | ~$0 | $1,500/month |
 
 ---
 
 ## Läs mer
 
 ### Officiell dokumentation
-- [Azure Managed Identity](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
+- [Azure hanterade identiteter](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
 - [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
 - [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
 - [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
@@ -1512,8 +1512,8 @@ az containerapp revision restart \
 - 🏠 [Kursens startsida](../../README.md)
 
 ### Relaterade exempel
-- [Azure OpenAI Chat Example](../../../../examples/azure-openai-chat) - Använder hanterad identitet för Azure OpenAI
-- [Microservices Example](../../../../examples/microservices) - Autentiseringsmönster för flera tjänster
+- [Microsoft Foundry Models Chat Example](../../../../examples/azure-openai-chat) - Använder hanterad identitet för Microsoft Foundry Models
+- [Microservices Example](../../../../examples/microservices) - Mönster för autentisering i flera tjänster
 
 ---
 
@@ -1523,16 +1523,16 @@ az containerapp revision restart \
 - ✅ Tre autentiseringsmönster (anslutningssträngar, Key Vault, hanterad identitet)
 - ✅ Hur man aktiverar och konfigurerar hanterad identitet i AZD
 - ✅ RBAC-rolltilldelningar för Azure-tjänster
-- ✅ Key Vault-integrering för tredjepartshemligheter
-- ✅ Användar-tilldelade vs system-tilldelade identiteter
-- ✅ Säkerhetsbästa praxis och felsökning
+- ✅ Integration med Key Vault för tredjepartshemligheter
+- ✅ Användartilldelade vs systemtilldelade identiteter
+- ✅ Bästa säkerhetspraxis och felsökning
 
-**Viktiga slutsatser:**
+**Viktigaste punkterna:**
 1. **Använd alltid hanterad identitet i produktion** - Inga hemligheter, automatisk rotation
-2. **Använd minst privilegierade RBAC-roller** - Ge endast nödvändiga behörigheter
+2. **Använd minst-privilegierade RBAC-roller** - Ge endast nödvändiga behörigheter
 3. **Lagra tredjepartsnycklar i Key Vault** - Centraliserad hantering av hemligheter
-4. **Separera identiteter per miljö** - Isolering mellan dev, staging, prod
-5. **Aktivera revisionsloggning** - Spåra vem som fick åtkomst till vad
+4. **Separera identiteter per miljö** - Isolering för dev, staging, prod
+5. **Aktivera granskningsloggning** - Spåra vem som har åtkomst till vad
 
 **Nästa steg:**
 1. Slutför de praktiska övningarna ovan
@@ -1543,5 +1543,5 @@ az containerapp revision restart \
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 Ansvarsfriskrivning:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten Co-op Translator (https://github.com/Azure/co-op-translator). Vi strävar efter noggrannhet, men observera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet i sitt originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig observera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas en professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

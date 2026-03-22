@@ -1,57 +1,57 @@
-# Примери деплојације Container App апликација помоћу AZD
+# Примери деплоја Container App помоћу AZD
 
-Овај директоријум садржи свеобухватне примере за деплојацију контејнеризованих апликација на Azure Container Apps користећи Azure Developer CLI (AZD). Ови примери демонстрирају стварне обрасце, добре праксе и конфигурације спремне за продукцију.
+Овај директоријум садржи свеобухватне примере за деплој контейнеризованих апликација на Azure Container Apps уз помоћ Azure Developer CLI (AZD). Ови примери показују реалне сценарије, најбоље праксе и конфигурације спремне за продукцију.
 
 ## 📚 Садржај
 
-- [Преглед](../../../../examples/container-app)
-- [Захтеви](../../../../examples/container-app)
-- [Брзи примери](../../../../examples/container-app)
-- [Примери за продукцију](../../../../examples/container-app)
-- [Напредни обрасци](../../../../examples/container-app)
-- [Најбоље праксе](../../../../examples/container-app)
+- [Преглед](#overview)
+- [Претходни захтеви](#prerequisites)
+- [Брзи примери за покретање](#quick-start-examples)
+- [Примери за продукцију](#production-examples)
+- [Напредни обрасци](#advanced-patterns)
+- [Најбоље праксе](#best-practices)
 
-## Преглед
+## Overview
 
-Azure Container Apps је потпуно управљана серверлес платформа за контејнере која вам омогућава да покрећете микросервисе и контејнеризоване апликације без управљања инфраструктуром. Када се комбинује са AZD, добијате:
+Azure Container Apps је потпуно управљана serverless платформа за контејнере која вам омогућава да покрећете микросервисе и контейнеризоване апликације без управљања инфраструктуром. У комбинацији са AZD, добијате:
 
-- **Поједностављено деплојавање**: Једна команда деплојује контејнере заједно са инфраструктуром
-- **Аутоматско скалирање**: Скалирање до нуле и скалирање ван у зависности од HTTP саобраћаја или догађаја
-- **Интегрисано умрежавање**: Уграђено откривање сервиса и расподела саобраћаја
-- **Управљани идентитет**: Сигурна аутентикација према Azure ресурсима
-- **Оптимизација трошкова**: Плаћате само ресурсе које користите
+- **Поједностављено деплојање**: Једна команда деплојује контејнере са инфраструктуром
+- **Аутоматско скалирање**: Скалирање до нуле и скалирање на основу HTTP саобраћаја или догађаја
+- **Интегрисано умрежавање**: Уграђено откривање сервиса и поделa саобраћаја
+- **Управљани идентитет**: Безбедна аутентификација према Azure ресурсима
+- **Оптимизација трошкова**: Платите само за ресурсе које користите
 
-## Захтеви
+## Prerequisites
 
-Пре почетка, уверите се да имате:
+Пре него што почнете, уверите се да имате:
 
 ```bash
-# Проверите инсталацију AZD
+# Провери инсталацију AZD
 azd version
 
-# Проверите Azure CLI
+# Провери Azure CLI
 az version
 
-# Проверите Docker (за креирање прилагођених слика)
+# Провери Docker (за изградњу прилагођених слика)
 docker --version
 
-# Пријавите се у Azure
+# Пријави се у Azure
 azd auth login
 az login
 ```
 
 **Потребни Azure ресурси:**
-- Активна Azure претплата
-- Дозволе за креирање ресурсне групе
+- Активан Azure претплатни рачун
+- Дозволе за креирање ресурсних група
 - Приступ окружењу Container Apps
 
-## Брзи примери
+## Quick Start Examples
 
-### 1. Једноставан Web API (Python Flask)
+### 1. Simple Web API (Python Flask)
 
-Деплојујте основни REST API помоћу Azure Container Apps.
+Деплојујте основни REST API са Azure Container Apps.
 
-**Пример: Python Flask API**
+**Example: Python Flask API**
 
 ```yaml
 # azure.yaml
@@ -65,13 +65,13 @@ services:
     host: containerapp
 ```
 
-**Кораци деплојације:**
+**Степени деплоја:**
 
 ```bash
 # Иницијализуј из шаблона
 azd init --template todo-python-mongo
 
-# Обезбеди инфраструктуру и изврши распоређивање
+# Обезбеди инфраструктуру и размешти
 azd up
 
 # Тестирај распоређивање
@@ -81,8 +81,8 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 
 **Кључне карактеристике:**
 - Аутоматско скалирање од 0 до 10 реплика
-- Провере стања и провере живости
-- Инјекција променљивих окружења
+- Провере здравља и ливнесс провере
+- Убацивање променљивих окружења
 - Интеграција са Application Insights
 
 ### 2. Node.js Express API
@@ -90,21 +90,21 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 Деплојујте Node.js бекенд са интеграцијом MongoDB.
 
 ```bash
-# Иницијализујте шаблон за Node.js API
+# Иницијализујте Node.js API шаблон
 azd init --template todo-nodejs-mongo
 
 # Конфигуришите променљиве окружења
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
-# Деплојирајте
+# Размештите
 azd up
 
-# Прикажите логове помоћу Azure Monitor-а
+# Прегледајте логове помоћу Azure Monitor-а
 azd monitor --logs
 ```
 
-**Истакнуте карактеристике инфраструктуре:**
+**Истакнута инфраструктура:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -147,29 +147,29 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 3. Статички фронтенд + API бекенд
+### 3. Static Frontend + API Backend
 
 Деплојујте full-stack апликацију са React фронтендом и API бекендом.
 
 ```bash
-# Иницијализујте шаблон за фул-стек
+# Иницијализуј шаблон фул-стек
 azd init --template todo-csharp-sql-swa-func
 
-# Прегледајте конфигурацију
+# Прегледај конфигурацију
 cat azure.yaml
 
-# Разместите оба сервиса
+# Распореди обе услуге
 azd up
 
-# Отворите апликацију
+# Отвори апликацију
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
-## Примери за продукцију
+## Production Examples
 
-### Пример 1: Архитектура микросервиса
+### Example 1: Microservices Architecture
 
-**Сценарио**: Е-трговина апликација са више микросервиса
+**Сценарио**: E-commerce апликација са више микросервиса
 
 **Структура директоријума:**
 ```
@@ -211,29 +211,29 @@ services:
     host: containerapp
 ```
 
-**Деплојација:**
+**Деплој:**
 ```bash
 # Иницијализуј пројекат
 azd init
 
-# Подеси производно окружење
+# Постави продукционо окружење
 azd env new production
 
-# Конфигуриши производна подешавања
+# Конфигуриши продукциона подешавања
 azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
 
-# Размешти све сервисе
+# Размешти све услуге
 azd up
 
-# Прати распоређивање
+# Надгледај распоређивање
 azd monitor --overview
 ```
 
-### Пример 2: AI-подржана Container App апликација
+### Example 2: AI-Powered Container App
 
-**Сценарио**: AI чат апликација са интеграцијом Azure OpenAI
+**Сценарио**: AI чат апликација са интеграцијом Microsoft Foundry модела
 
 **Фајл: src/ai-chat/app.py**
 ```python
@@ -244,7 +244,7 @@ import openai
 
 app = Flask(__name__)
 
-# Користите управљани идентитет за безбедан приступ
+# Користите управљани идентитет за сигуран приступ
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -253,12 +253,12 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # Добијте OpenAI кључ из Key Vault-а
+    # Преузмите OpenAI кључ из складишта кључева
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[{"role": "user", "content": user_message}]
     )
     
@@ -320,28 +320,28 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**Команде за деплојацију:**
+**Команде за деплој:**
 ```bash
-# Подесите окружење
+# Поставити окружење
 azd init --template ai-chat-app
 azd env new dev
 
-# Конфигуришите OpenAI
+# Конфигурисати OpenAI
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
-azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
+azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4.1"
 
-# Размештите
+# Разместити
 azd up
 
-# Тестирајте АПИ
+# Тестирати АПИ
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat \
   -H "Content-Type: application/json" \
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Пример 3: Позадински радник са обрадом реда
+### Example 3: Background Worker with Queue Processing
 
-**Сценарио**: Систем за обраду поруџбина са редом порука
+**Сценарио**: Систем за обраду поруџбина са порукама у реду
 
 **Структура директоријума:**
 ```
@@ -403,15 +403,15 @@ services:
     host: containerapp
 ```
 
-**Деплојација:**
+**Деплој:**
 ```bash
 # Иницијализуј
 azd init
 
-# Распореди са конфигурацијом реда
+# Размести са конфигурацијом реда
 azd up
 
-# Прилагоди број радника у складу са дужином реда
+# Прилагоди број радника у зависности од дужине реда
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -420,9 +420,9 @@ az containerapp update \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
 
-## Напредни обрасци
+## Advanced Patterns
 
-### Образац 1: Blue-Green деплојација
+### Pattern 1: Blue-Green Deployment
 
 ```bash
 # Креирај нову ревизију без саобраћаја
@@ -444,7 +444,7 @@ az containerapp ingress traffic set \
   --revision-weight blue=100
 ```
 
-### Образац 2: Canary деплојација са AZD
+### Pattern 2: Canary Deployment with AZD
 
 **Фајл: .azure/dev/config.json**
 ```json
@@ -458,7 +458,7 @@ az containerapp ingress traffic set \
 }
 ```
 
-**Скрипта за деплојацију:**
+**Скрипта за деплој:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
@@ -466,7 +466,7 @@ az containerapp ingress traffic set \
 # Распореди нову ревизију са 10% саобраћаја
 azd deploy api --revision-mode multiple
 
-# Прати метрике
+# Надгледај метрике
 azd monitor --service api --duration 5m
 
 # Повећај саобраћај постепено
@@ -481,7 +481,7 @@ for i in {20..100..10}; do
 done
 ```
 
-### Образац 3: Мултирегионална деплојација
+### Pattern 3: Multi-Region Deployment
 
 **Фајл: azure.yaml**
 ```yaml
@@ -527,16 +527,16 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-**Деплојација:**
+**Деплој:**
 ```bash
-# Распоредити у све регионе
+# Разместити у све регионе
 azd up
 
 # Проверити крајње тачке
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### Образац 4: Интеграција са Dapr
+### Pattern 4: Dapr Integration
 
 **Фајл: infra/app/dapr-enabled.bicep**
 ```bicep
@@ -563,7 +563,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-**Код апликације са Dapr:**
+**Апликациони код са Dapr-ом:**
 ```python
 from flask import Flask
 from dapr.clients import DaprClient
@@ -590,7 +590,7 @@ def create_order():
     return {'status': 'created'}
 ```
 
-## Најбоље праксе
+## Best Practices
 
 ### 1. Организација ресурса
 
@@ -662,7 +662,7 @@ services:
             concurrent: 100
 ```
 
-### 4. Надгледање и опсервабилност
+### 4. Надгледање и посматрање
 
 ```bash
 # Омогућите Application Insights
@@ -688,16 +688,16 @@ az monitor metrics alert create \
 ### 5. Оптимизација трошкова
 
 ```bash
-# Смањити на нулу када није у употреби
+# Скалирај на нулу када није у употреби
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# Користити спот инстанце у развојним окружењима
+# Користи спот инстанце за развојна окружења
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# Подесити обавештења о буџету
+# Постави обавештења о буџету
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
@@ -705,7 +705,7 @@ az consumption budget create \
   --threshold 80
 ```
 
-### 6. Интеграција CI/CD
+### 6. CI/CD интеграција
 
 **Пример GitHub Actions:**
 ```yaml
@@ -737,10 +737,10 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Референца уобичајених команди
+## Common Commands Reference
 
 ```bash
-# Иницијализуј нови пројекат контејнерске апликације
+# Иницијализуј нови пројекат контейнерске апликације
 azd init --template <template-name>
 
 # Размешти инфраструктуру и апликацију
@@ -755,7 +755,7 @@ azd provision
 # Погледај распоређене ресурсе
 azd show
 
-# Прикажи логове у реалном времену користећи azd monitor или Azure CLI
+# Стримуј логове користећи azd monitor или Azure CLI
 azd monitor --logs
 # az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
@@ -766,9 +766,9 @@ azd monitor --overview
 azd down --force --purge
 ```
 
-## Решавање проблема
+## Troubleshooting
 
-### Проблем: Контейнер не успева да се покрене
+### Проблем: Контейнер не успева да стартује
 
 ```bash
 # Проверите логове помоћу Azure CLI
@@ -785,7 +785,7 @@ docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Проблем: Не може се приступити крајњој тачки контейнер апликације
+### Проблем: Не може да приступи endpoint-у контейнер апликације
 
 ```bash
 # Проверите конфигурацију ингреса
@@ -804,12 +804,12 @@ az containerapp ingress update \
 ### Проблем: Проблеми са перформансама
 
 ```bash
-# Проверите искоришћење ресурса
+# Провери употребу ресурса
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Повећајте ресурсе
+# Повећај ресурсе
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -818,30 +818,30 @@ az containerapp update \
 ```
 
 ## Додатни ресурси и примери
-- [Пример микросервиса](./microservices/README.md)
-- [Пример једноставног Flask API-ја](./simple-flask-api/README.md)
-- [Документација Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
-- [Галерија AZD шаблона](https://azure.github.io/awesome-azd/)
-- [Примери за Container Apps](https://github.com/Azure-Samples/container-apps-samples)
-- [Bicep шаблони](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+- [Microservices Example](./microservices/README.md)
+- [Simple Flash API Example](./simple-flask-api/README.md)
+- [Azure Container Apps Documentation](https://learn.microsoft.com/azure/container-apps/)
+- [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
+- [Container Apps Samples](https://github.com/Azure-Samples/container-apps-samples)
+- [Bicep Templates](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-## Допринос
+## Contributing
 
-Да бисте допринели новим примерима container апликација:
+Да бисте допринели новим примерима за container app:
 
 1. Креирајте нови поддиректоријум са вашим примером
-2. Укључите комплетне датотеке `azure.yaml`, `infra/` и `src/`
-3. Додајте свеобухватан README са упутствима за деплојацију
-4. Тестирајте деплојацију помоћу `azd up`
-5. Поднесите pull request
+2. Укључите комплетан `azure.yaml`, `infra/`, и `src/` фајлове
+3. Додајте детаљан README са упутствима за деплој
+4. Тестирајте деплој са `azd up`
+5. Пошаљите pull request
 
 ---
 
-**Треба помоћ?** Придружите се заједници на [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) за подршку и питања.
+**Need Help?** Придружите се заједници [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) за подршку и питања.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Одрицање од одговорности**:
-Овај документ је преведен помоћу сервиса за превод заснованог на вештачкој интелигенцији [Co-op Translator](https://github.com/Azure/co-op-translator). Иако тежимо ка тачности, имајте у виду да аутоматизовани преводи могу садржати грешке или нетачности. Изворни документ на оригиналном језику треба сматрати обавезујућим извором. За критичне информације препоручује се професионални превод који обавља стручни преводилац. Не сносимо одговорност за било каква неспоразумевања или погрешна тумачења која произлазе из употребе овог превода.
+**Изјава о одрицању одговорности**:
+Овај документ је преведен помоћу услуге за превођење засноване на вештачкој интелигенцији [Co-op Translator](https://github.com/Azure/co-op-translator). Иако се трудимо да будемо прецизни, имајте на уму да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати меродавним извором. За критичне информације препоручује се професионални људски превод. Не сносимо одговорност за било какве неспоразуме или погрешна тумачења која проистекну из употребе овог превода.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

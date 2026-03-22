@@ -2,56 +2,48 @@
 
 **Learning Path:** Beginner ⭐ | **Time:** 25-35 minutes | **Cost:** $0-15/month
 
-A complete, working Python Flask REST API deployed to Azure Container Apps using Azure Developer CLI (azd). This example demonstrates container deployment, auto-scaling, and monitoring basics.
+Na complete, dey work Python Flask REST API wey dem don deploy for Azure Container Apps using Azure Developer CLI (azd). Dis example dey show how dem dey deploy container, auto-scaling, and basic monitoring.
 
-## 🎯 What You'll Learn
+## 🎯 Wetin You Go Learn
 
-- Deploy a containerized Python application to Azure
-- Configure auto-scaling with scale-to-zero
-- Implement health probes and readiness checks
-- Monitor application logs and metrics
-- Use Azure Developer CLI for rapid deployment
+- How to deploy Python app wey dey inside container go Azure
+- How to configure auto-scaling wey fit scale to zero
+- How to set health probes and readiness checks
+- How to monitor application logs and metrics
+- How to use Azure Developer CLI for quick deployment
 
-## 📦 What's Included
+## 📦 Wetin Dey Included
 
-✅ **Flask Application** - Complete REST API with CRUD operations (`src/app.py`)  
-✅ **Dockerfile** - Production-ready container configuration  
+✅ **Flask Application** - Complete REST API wey get CRUD operations (`src/app.py`)  
+✅ **Dockerfile** - Container configuration wey ready for production  
 ✅ **Bicep Infrastructure** - Container Apps environment and API deployment  
-✅ **AZD Configuration** - One-command deployment setup  
-✅ **Health Probes** - Liveness and readiness checks configured  
+✅ **AZD Configuration** - Setup wey you fit deploy with one command  
+✅ **Health Probes** - Liveness and readiness checks don configure  
 ✅ **Auto-scaling** - 0-10 replicas based on HTTP load  
 
 ## Architecture
 
+```mermaid
+graph TD
+    subgraph ACA[Azure Container Apps Area]
+        Flask[Flask API Kontena<br/>Health endpoint dem<br/>REST API<br/>Auto-scaling 0-10 replica dem]
+        AppInsights[Application Insights]
+    end
 ```
-┌─────────────────────────────────────────┐
-│   Azure Container Apps Environment      │
-│                                         │
-│  ┌───────────────────────────────────┐ │
-│  │   Flask API Container             │ │
-│  │   - Health endpoints              │ │
-│  │   - REST API                      │ │
-│  │   - Auto-scaling (0-10 replicas)  │ │
-│  └───────────────────────────────────┘ │
-│                                         │
-│  Application Insights ────────────────┐ │
-└────────────────────────────────────────┘
-```
-
 ## Prerequisites
 
-### Required
+### Wetin Dem Require
 - **Azure Developer CLI (azd)** - [Install guide](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
 - **Azure subscription** - [Free account](https://azure.microsoft.com/free/)
 - **Docker Desktop** - [Install Docker](https://www.docker.com/products/docker-desktop/) (for local testing)
 
-### Verify Prerequisites
+### How to Verify Say Everything Dey
 
 ```bash
 # Make sure say azd version dey 1.5.0 or pass
 azd version
 
-# Confirm say you don log in to Azure
+# Make sure say you don log in to Azure
 azd auth login
 
 # Check Docker (optional, if you wan test locally)
@@ -60,7 +52,7 @@ docker --version
 
 ## ⏱️ Deployment Timeline
 
-| Phase | Duration | What Happens |
+| Phase | Duration | Wetin Go Happen |
 |-------|----------|--------------||
 | Environment setup | 30 seconds | Create azd environment |
 | Build container | 2-3 minutes | Docker build Flask app |
@@ -71,27 +63,27 @@ docker --version
 ## Quick Start
 
 ```bash
-# Go open di example
+# Go to di example
 cd examples/container-app/simple-flask-api
 
-# Set up di environment (make sure say name unique)
+# Set up di environment (pick one unique name)
 azd env new myflaskapi
 
-# Deploy all di tins (infrastructure + application)
+# Deploy everytin (infrastructure + application)
 azd up
 # Dem go ask you to:
 # 1. Choose Azure subscription
-# 2. Pick di location (e.g., eastus2)
-# 3. Wait 8-12 minutes for di deployment
+# 2. Choose location (e.g., eastus2)
+# 3. Wait 8-12 minutes make di deployment finish
 
-# Grab your API endpoint
+# Collect your API endpoint
 azd env get-values
 
 # Test di API
 curl $(azd env get-value API_ENDPOINT)/health
 ```
 
-**Expected Output:**
+**Wetin you suppose see:**
 ```json
 {
   "status": "healthy",
@@ -106,11 +98,11 @@ curl $(azd env get-value API_ENDPOINT)/health
 ### Step 1: Check Deployment Status
 
 ```bash
-# See services wey don deploy
+# See di services wey don deploy
 azd show
 
-# Wetin di expected output go show:
-# - Sabis: api
+# Wetin expected output go show:
+# - Service: api
 # - Endpoint: https://ca-api-[env].xxx.azurecontainerapps.io
 # - Status: Dey run
 ```
@@ -121,7 +113,7 @@ azd show
 # Get di API endpoint
 API_URL=$(azd env get-value API_ENDPOINT)
 
-# Check di health
+# Check if e dey
 curl $API_URL/health
 
 # Check di root endpoint
@@ -137,23 +129,23 @@ curl $API_URL/api/items
 ```
 
 **Success Criteria:**
-- ✅ Health endpoint returns HTTP 200
-- ✅ Root endpoint shows API information
-- ✅ POST creates item and returns HTTP 201
-- ✅ GET returns created items
+- ✅ Health endpoint go return HTTP 200
+- ✅ Root endpoint go show API information
+- ✅ POST go create item and return HTTP 201
+- ✅ GET go return the items wey dem create
 
 ### Step 3: View Logs
 
 ```bash
-# Stream di live logs wit azd monitor
+# Stream live logs wit azd monitor
 azd monitor --logs
 
 # Or you fit use Azure CLI:
 az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # You go see:
-# - Gunicorn messages wey dey show say e don start
-# - Logs wey dey show HTTP requests
+# - Gunicorn messages wey show as e dey start
+# - Logs wey dey show HTTP request dem
 # - Logs wey dey show application info
 ```
 
@@ -190,7 +182,7 @@ simple-flask-api/
 ### Environment Variables
 
 ```bash
-# Set di settings wey you choose.
+# Set kustom konfigureshon
 azd env set PORT 8000
 azd env set LOG_LEVEL info
 azd env set MAX_REPLICAS 20
@@ -198,8 +190,8 @@ azd env set MAX_REPLICAS 20
 
 ### Scaling Configuration
 
-The API automatically scales based on HTTP traffic:
-- **Min Replicas**: 0 (scales to zero when idle)
+The API go automatically scale based on HTTP traffic:
+- **Min Replicas**: 0 (e go scale go zero when idle)
 - **Max Replicas**: 10
 - **Concurrent Requests per Replica**: 50
 
@@ -215,17 +207,17 @@ pip install -r requirements.txt
 # Run di app
 python app.py
 
-# Test am for local machine
+# Test am locally
 curl http://localhost:8000/health
 ```
 
 ### Build and Test Container
 
 ```bash
-# Make Docker image
+# Make di Docker image
 docker build -t flask-api:local ./src
 
-# Run di container for local komputa
+# Run di container for your computer
 docker run -p 8000:8000 flask-api:local
 
 # Test di container
@@ -237,14 +229,14 @@ curl http://localhost:8000/health
 ### Full Deployment
 
 ```bash
-# Deploy di infrastructure and di application
+# Deploy di infrastructure an di application
 azd up
 ```
 
 ### Code-Only Deployment
 
 ```bash
-# Deploy only di application code (infrastructure no change)
+# Deploy only di application code (infrastructure no go change)
 azd deploy api
 ```
 
@@ -263,10 +255,10 @@ azd deploy api
 ### View Logs
 
 ```bash
-# Dey stream live logs wit azd monitor
+# Stream di live logs wit azd monitor
 azd monitor --logs
 
-# Abi use Azure CLI for Container Apps:
+# Or you fit use Azure CLI for Container Apps:
 az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # See di last 100 lines
@@ -317,7 +309,7 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 
 ## Cost Optimization
 
-This deployment uses scale-to-zero, so you only pay when the API is processing requests:
+This deployment use scale-to-zero, so you go dey pay only when the API dey process requests:
 
 - **Idle cost**: ~$0/month (scaled to zero)
 - **Active cost**: ~$0.000024/second per replica
@@ -326,10 +318,10 @@ This deployment uses scale-to-zero, so you only pay when the API is processing r
 ### Reduce Costs Further
 
 ```bash
-# Bring down di max replicas for dev
+# Make di max replicas small for dev
 azd env set MAX_REPLICAS 3
 
-# Make di idle timeout shorter
+# Use shorta idle timeout
 azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minutes
 ```
 
@@ -338,17 +330,17 @@ azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minutes
 ### Container Won't Start
 
 ```bash
-# Check container logs wit Azure CLI
+# Use Azure CLI check di container logs
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
-# Confirm say Docker image dey build locally
+# Check say Docker image dey build for local machine
 docker build -t test ./src
 ```
 
 ### API Not Accessible
 
 ```bash
-# Make sure say ingress dey outside
+# Confirm say ingress dey external
 az containerapp show --name api --resource-group rg-simple-flask-api \
   --query properties.configuration.ingress.external
 ```
@@ -356,12 +348,12 @@ az containerapp show --name api --resource-group rg-simple-flask-api \
 ### High Response Times
 
 ```bash
-# Check how CPU and memory dey used
+# Check how CPU/Memory dey used
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# If e necessary, add more resources
+# Add more resources if e need am
 az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
@@ -385,7 +377,7 @@ azd down --force --purge
 
 2. **Add Authentication** - Implement Azure AD or API keys
    ```python
-   # Put authentication middleware enter app.py
+   # Put authentication middleware for app.py
    from functools import wraps
    ```
 
@@ -404,8 +396,8 @@ azd down --force --purge
 
 ### Related Examples
 
-- **[Database App](../../../../../examples/database-app)** - Complete example with SQL Database
-- **[Microservices](../../../../../examples/container-app/microservices)** - Multi-service architecture
+- **[Database App](../../../../../examples/database-app)** - Complete example wey get SQL Database
+- **[Microservices](../../../../../examples/container-app/microservices)** - Architecture wey get multiple services
 - **[Container Apps Master Guide](../README.md)** - All container patterns
 
 ### Learning Resources
@@ -417,7 +409,7 @@ azd down --force --purge
 ## Additional Resources
 
 ### Documentation
-- **[Flask Documentation](https://flask.palletsprojects.com/)** - Flask framework guide
+- **[Flask Documentation](https://flask.palletsprojects.com/)** - Guide for the Flask framework
 - **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Official Azure docs
 - **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd command reference
 
@@ -432,14 +424,13 @@ azd down --force --purge
 
 ---
 
-**🎉 Congratulations!** You've deployed a production-ready Flask API to Azure Container Apps with auto-scaling and monitoring.
+**🎉 Congratulations!** You don deploy production-ready Flask API go Azure Container Apps wey get auto-scaling and monitoring.
 
-**Questions?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) or check the [FAQ](../../../resources/faq.md)
+**Questions?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) abi check the [FAQ](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Make una sabi:
-
-Dis document don translate wit AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg note say automatic translations fit get errors or mistakes. Di original document for im native language na di authoritative source. If na important matter, better make person wey sabi translate am professionally do am. We no go responsible for any misunderstandings or wrong interpretations wey fit follow from dis translation.
+Abeg read (Disclaimer):
+Dis dokument don translate wit AI translation service (Co-op Translator: https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg sabi say machine translations fit get mistakes or no too correct. Di original dokument for dia original language na di correct/official source. If na serious matter, make you use professional human translator. We no go responsible for any wrong understanding or wrong interpretation wey fit come from dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

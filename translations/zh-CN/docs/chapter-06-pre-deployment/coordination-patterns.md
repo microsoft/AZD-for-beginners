@@ -1,59 +1,53 @@
-# 多代理协调模式
+# 多智能体协调模式
 
-⏱️ **预计时间**: 60-75 minutes | 💰 **预计费用**: ~$100-300/month | ⭐ **复杂度**: 高级
+⏱️ <strong>预计时间</strong>: 60-75 分钟 | 💰 <strong>预计费用</strong>: ~$100-300/月 | ⭐ <strong>复杂度</strong>: 高级
 
 **📚 学习路径:**
-- ← 上一项: [容量规划](capacity-planning.md) - 资源大小和扩展策略
-- 🎯 **你在这里**: 多代理协调模式 (编排、通信、状态管理)
-- → 下一项: [SKU 选择](sku-selection.md) - 选择合适的 Azure 服务
+- ← 上一节: [容量规划](capacity-planning.md) - 资源大小调整与扩展策略
+- 🎯 <strong>您在此处</strong>: 多智能体协调模式（编排、通信、状态管理）
+- → 下一节: [SKU 选择](sku-selection.md) - 选择合适的 Azure 服务
 - 🏠 [课程首页](../../README.md)
 
 ---
 
-## 你将学到什么
+## 你将学到的内容
 
 完成本课后，你将：
-- 理解 **多代理架构** 模式及其使用场景
-- 实现 **编排模式**（集中式、去中心化、分层）
-- 设计 **代理通信** 策略（同步、异步、事件驱动）
-- 管理分布式代理之间的 **共享状态**
-- 使用 AZD 在 Azure 上部署 **多代理系统**
-- 将 **协调模式** 应用于真实世界的 AI 场景
-- 监控和调试分布式代理系统
+- 理解 <strong>多智能体架构</strong> 模式及其使用场景
+- 实现 <strong>编排模式</strong>（集中式、去中心化、分层）
+- 设计 <strong>智能体通信</strong> 策略（同步、异步、事件驱动）
+- 管理分布式智能体之间的 <strong>共享状态</strong>
+- 使用 AZD 在 Azure 上部署 <strong>多智能体系统</strong>
+- 将 <strong>协调模式</strong> 应用于真实世界的 AI 场景
+- 监控并调试分布式智能体系统
 
-## 为什么多代理协调很重要
+## 为什么多智能体协调很重要
 
-### 演变：从单代理到多代理
+### 演变：从单智能体到多智能体
 
-**单代理（简单）：**
+**单智能体（简单）：**
 ```
 User → Agent → Response
 ```
 - ✅ 易于理解和实现
-- ✅ 适合简单任务，速度快
-- ❌ 受单一模型能力限制
-- ❌ 无法并行化复杂任务
-- ❌ 无法专业化
+- ✅ 适用于简单任务时速度快
+- ❌ 受单个模型能力限制
+- ❌ 无法并行处理复杂任务
+- ❌ 无专业化分工
 
-**多代理系统（高级）：**
-```
-           ┌─────────────┐
-           │ Orchestrator│
-           └──────┬──────┘
-        ┌─────────┼─────────┐
-        │         │         │
-    ┌───▼──┐  ┌──▼───┐  ┌──▼────┐
-    │Agent1│  │Agent2│  │Agent3 │
-    │(Plan)│  │(Code)│  │(Review)│
-    └──────┘  └──────┘  └───────┘
-```
-- ✅ 为特定任务提供专业化代理
+**多智能体系统（高级）：**
+```mermaid
+graph TD
+    Orchestrator[编排器] --> Agent1[代理1<br/>计划]
+    Orchestrator --> Agent2[代理2<br/>编码]
+    Orchestrator --> Agent3[代理3<br/>评审]
+```- ✅ 针对特定任务的专业化智能体
 - ✅ 并行执行以提高速度
 - ✅ 模块化且易于维护
 - ✅ 更擅长处理复杂工作流
 - ⚠️ 需要协调逻辑
 
-**类比**：单代理就像一个人完成所有任务。多代理则像一个团队，每个成员具有专门技能（研究员、编码员、审阅者、撰写者）共同协作。
+<strong>类比</strong>：单智能体就像一个人做所有任务。多智能体就像一个团队，每个成员都有专门技能（研究员、编码者、评审、作者）一起协作。
 
 ---
 
@@ -61,57 +55,58 @@ User → Agent → Response
 
 ### 模式 1：顺序协调（责任链）
 
-**何时使用**：任务必须按特定顺序完成，每个代理基于前一个的输出继续处理。
+<strong>何时使用</strong>：任务必须按特定顺序完成，每个智能体基于上一个的输出构建。
 
 ```mermaid
 sequenceDiagram
-    participant User
-    participant Orchestrator
+    participant User as 用户
+    participant Orchestrator as 协调者
     participant Agent1 as 研究代理
     participant Agent2 as 写作代理
     participant Agent3 as 编辑代理
     
-    User->>Orchestrator: "撰写关于人工智能的文章"
+    User->>Orchestrator: "写一篇关于人工智能的文章"
     Orchestrator->>Agent1: 研究主题
     Agent1-->>Orchestrator: 研究结果
-    Orchestrator->>Agent2: 撰写草稿（使用研究）
+    Orchestrator->>Agent2: 撰写草稿（使用研究成果）
     Agent2-->>Orchestrator: 文章草稿
     Orchestrator->>Agent3: 编辑并改进
     Agent3-->>Orchestrator: 最终文章
     Orchestrator-->>User: 润色后的文章
     
-    Note over User,Agent3: 顺序执行：每一步都等待前一步完成
-```}
+    Note over User,Agent3: 顺序执行：每一步都等待前一步
+```
+
 **优点：**
-- ✅ 数据流清晰
+- ✅ 明确的数据流
 - ✅ 易于调试
 - ✅ 可预测的执行顺序
 
 **限制：**
 - ❌ 较慢（无并行）
-- ❌ 单点失败会阻塞整个链
+- ❌ 一次失败会阻塞整个链
 - ❌ 无法处理相互依赖的任务
 
 **示例用例：**
-- 内容创建管道（调研 → 撰写 → 编辑 → 发布）
+- 内容创作流水线（研究 → 写作 → 编辑 → 发布）
 - 代码生成（规划 → 实现 → 测试 → 部署）
-- 报告生成（数据收集 → 分析 → 可视化 → 摘要）
+- 报告生成（数据收集 → 分析 → 可视化 → 总结）
 
 ---
 
-### 模式 2：并行协调（分发/汇总）
+### 模式 2：并行协调（扇出/扇入）
 
-**何时使用**：独立任务可以同时运行，结果在结束时合并。
+<strong>何时使用</strong>：独立任务可以同时运行，结果在最后合并。
 
 ```mermaid
 graph TB
     User[用户请求]
-    Orchestrator[协调器]
+    Orchestrator[编排器]
     Agent1[分析代理]
     Agent2[研究代理]
     Agent3[数据代理]
     Aggregator[结果聚合器]
-    Response[合并响应]
+    Response[合并的响应]
     
     User --> Orchestrator
     Orchestrator --> Agent1
@@ -126,25 +121,25 @@ graph TB
     style Aggregator fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
 **优点：**
-- ✅ 快速（并行执行）
+- ✅ 速度快（并行执行）
 - ✅ 容错（部分结果可接受）
-- ✅ 横向扩展
+- ✅ 横向扩展性好
 
 **限制：**
-- ⚠️ 结果可能无序到达
+- ⚠️ 结果可能乱序到达
 - ⚠️ 需要聚合逻辑
 - ⚠️ 复杂的状态管理
 
 **示例用例：**
-- 多源数据收集（APIs + 数据库 + 网页爬取）
-- 竞品分析（多个模型生成解决方案，选择最佳）
-- 翻译服务（同时翻译为多种语言）
+- 多源数据收集（API + 数据库 + 网页爬取）
+- 竞争分析（多个模型生成方案，选择最佳）
+- 翻译服务（同时翻译成多种语言）
 
 ---
 
 ### 模式 3：分层协调（管理者-工作者）
 
-**何时使用**：具有子任务、需要委派的复杂工作流。
+<strong>何时使用</strong>：具有子任务的复杂工作流，需要委派。
 
 ```mermaid
 graph TB
@@ -153,7 +148,7 @@ graph TB
     Manager2[内容经理]
     W1[网页爬虫]
     W2[论文分析器]
-    W3[撰稿人]
+    W3[作者]
     W4[编辑]
     
     Master --> Manager1
@@ -174,23 +169,23 @@ graph TB
 
 **限制：**
 - ⚠️ 更复杂的架构
-- ⚠️ 延迟更高（多层协调）
+- ⚠️ 较高的延迟（多层协调）
 - ⚠️ 需要复杂的编排
 
 **示例用例：**
 - 企业文档处理（分类 → 路由 → 处理 → 存档）
-- 多阶段数据管道（摄取 → 清洗 → 转换 → 分析 → 报告）
+- 多阶段数据流水线（摄取 → 清洗 → 转换 → 分析 → 报告）
 - 复杂自动化工作流（规划 → 资源分配 → 执行 → 监控）
 
 ---
 
 ### 模式 4：事件驱动协调（发布-订阅）
 
-**何时使用**：代理需要对事件做出反应，需要松耦合。
+<strong>何时使用</strong>：智能体需要对事件作出响应，期望松耦合。
 
 ```mermaid
 sequenceDiagram
-    participant Agent1 as 数据采集器
+    participant Agent1 as 数据收集器
     participant EventBus as Azure 服务总线
     participant Agent2 as 分析器
     participant Agent3 as 通知者
@@ -207,31 +202,31 @@ sequenceDiagram
     EventBus->>Agent3: 订阅: 发送分析报告
 ```
 **优点：**
-- ✅ 代理之间松耦合
-- ✅ 易于添加新代理（只需订阅）
+- ✅ 智能体之间松耦合
+- ✅ 易于添加新智能体（只需订阅）
 - ✅ 异步处理
-- ✅ 弹性强（消息持久化）
+- ✅ 弹性（消息持久化）
 
 **限制：**
 - ⚠️ 最终一致性
 - ⚠️ 调试复杂
-- ⚠️ 消息顺序问题
+- ⚠️ 消息排序挑战
 
 **示例用例：**
 - 实时监控系统（告警、仪表盘、日志）
-- 多渠道通知（电子邮件、短信、推送、Slack）
-- 数据处理管道（同一数据的多个消费者）
+- 多渠道通知（邮件、短信、推送、Slack）
+- 数据处理流水线（相同数据的多个消费者）
 
 ---
 
 ### 模式 5：基于共识的协调（投票/法定人数）
 
-**何时使用**：在继续之前需要多个代理达成一致意见。
+<strong>何时使用</strong>：在继续之前需要多个智能体达成一致。
 
 ```mermaid
 graph TB
     Input[输入任务]
-    Agent1[代理 1：GPT-4]
+    Agent1[代理 1：gpt-4.1]
     Agent2[代理 2：Claude]
     Agent3[代理 3：Gemini]
     Voter[共识投票者]
@@ -254,25 +249,25 @@ graph TB
 
 **限制：**
 - ❌ 成本高（多次模型调用）
-- ❌ 较慢（需等待所有代理）
-- ⚠️ 需要冲突解决机制
+- ❌ 较慢（等待所有智能体）
+- ⚠️ 需要冲突解决
 
 **示例用例：**
 - 内容审核（多个模型审查内容）
-- 代码审查（多个静态检查器/分析器）
-- 医疗诊断（多个 AI 模型、专家验证）
+- 代码审查（多个 linter/分析器）
+- 医学诊断（多个 AI 模型，专家验证）
 
 ---
 
 ## 架构概览
 
-### 在 Azure 上的完整多代理系统
+### 在 Azure 上的完整多智能体系统
 
 ```mermaid
 graph TB
     User[用户/API 客户端]
     APIM[Azure API 管理]
-    Orchestrator[编排服务<br/>容器应用]
+    Orchestrator[Orchestrator 服务<br/>容器应用]
     ServiceBus[Azure 服务总线<br/>事件中心]
     
     Agent1[研究代理<br/>容器应用]
@@ -317,19 +312,19 @@ graph TB
 
 | 组件 | 目的 | Azure 服务 |
 |-----------|---------|---------------|
-| **API 网关** | 入口点，速率限制，身份验证 | API Management |
-| **编排器** | 协调代理工作流 | Container Apps |
-| **消息队列** | 异步通信 | Service Bus / Event Hubs |
-| **代理** | 专用 AI 工作单元 | Container Apps / Functions |
-| **状态存储** | 共享状态，任务跟踪 | Cosmos DB |
-| **工件存储** | 文档、结果、日志 | Blob Storage |
-| **监控** | 分布式跟踪、日志 | Application Insights |
+| **API Gateway** | 入口点，限流，认证 | API Management |
+| **Orchestrator** | 协调智能体工作流 | Container Apps |
+| **Message Queue** | 异步通信 | Service Bus / Event Hubs |
+| **Agents** | 专门的 AI 工作者 | Container Apps / Functions |
+| **State Store** | 共享状态，任务跟踪 | Cosmos DB |
+| **Artifact Storage** | 文档、结果、日志 | Blob Storage |
+| **Monitoring** | 分布式追踪，日志 | Application Insights |
 
 ---
 
 ## 先决条件
 
-### 必需的工具
+### 所需工具
 
 ```bash
 # 验证 Azure 开发者 CLI
@@ -338,7 +333,7 @@ azd version
 
 # 验证 Azure CLI
 az --version
-# ✅ 预期：azure-cli 2.50.0 或更高
+# ✅ 预期：azure-cli 版本 2.50.0 或更高
 
 # 验证 Docker（用于本地测试）
 docker --version
@@ -347,7 +342,7 @@ docker --version
 
 ### Azure 要求
 
-- 有效的 Azure 订阅
+- 活跃的 Azure 订阅
 - 创建以下资源的权限：
   - Container Apps
   - Service Bus namespaces
@@ -357,9 +352,9 @@ docker --version
 
 ### 知识先决条件
 
-你应已完成：
+你应该已完成：
 - [配置管理](../chapter-03-configuration/configuration.md)
-- [身份验证与安全](../chapter-03-configuration/authsecurity.md)
+- [认证与安全](../chapter-03-configuration/authsecurity.md)
 - [微服务示例](../../../../examples/microservices)
 
 ---
@@ -400,13 +395,13 @@ multi-agent-system/
 
 ## 课程 1：顺序协调模式
 
-### 实施：内容创建管道
+### 实现：内容创作流水线
 
-我们来构建一个顺序管道：调研 → 撰写 → 编辑 → 发布
+我们来构建一个顺序流水线：研究 → 写作 → 编辑 → 发布
 
 ### 1. AZD 配置
 
-**文件： `azure.yaml`**
+**文件：`azure.yaml`**
 
 ```yaml
 name: content-pipeline
@@ -437,7 +432,7 @@ services:
 
 ### 2. 基础设施：用于协调的 Service Bus
 
-**文件： `infra/core/servicebus.bicep`**
+**文件：`infra/core/servicebus.bicep`**
 
 ```bicep
 param name string
@@ -494,7 +489,7 @@ output connectionString string = listKeys('${serviceBusNamespace.id}/Authorizati
 
 ### 3. 共享状态管理器
 
-**文件： `src/shared/state_manager.py`**
+**文件：`src/shared/state_manager.py`**
 
 ```python
 from azure.cosmos import CosmosClient, PartitionKey
@@ -552,9 +547,9 @@ class StateManager:
         return self.container.read_item(task_id, partition_key=task_id)
 ```
 
-### 4. 编排服务
+### 4. 编排器服务
 
-**文件： `src/orchestrator/app.py`**
+**文件：`src/orchestrator/app.py`**
 
 ```python
 from flask import Flask, request, jsonify
@@ -567,7 +562,7 @@ from shared.state_manager import StateManager
 app = Flask(__name__)
 state_manager = StateManager()
 
-# 服务总线连接
+# Service Bus 连接
 servicebus_connection_str = os.environ['SERVICEBUS_CONNECTION_STRING']
 servicebus_client = ServiceBusClient.from_connection_string(servicebus_connection_str)
 
@@ -600,7 +595,7 @@ def create_content():
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # 将结果发送到何处
+            'next_queue': 'writer-tasks'  # 将结果发送到哪里
         }),
         content_type='application/json'
     )
@@ -629,9 +624,9 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### 5. 调研代理
+### 5. 研究智能体
 
-**文件： `src/agents/research/app.py`**
+**文件：`src/agents/research/app.py`**
 
 ```python
 from azure.servicebus import ServiceBusClient, ServiceBusMessage
@@ -661,9 +656,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # 调用 Azure OpenAI 进行研究
+    # 调用 Microsoft Foundry 模型进行研究
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -680,7 +675,7 @@ def process_research_task(message_data):
         result={'research': research_results}
     )
     
-    # 发送到下一个代理（写作者）
+    # 发送到下一个代理（撰写者）
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -719,9 +714,9 @@ if __name__ == '__main__':
     main()
 ```
 
-### 6. 撰写代理
+### 6. 写手智能体
 
-**文件： `src/agents/writer/app.py`**
+**文件：`src/agents/writer/app.py`**
 
 ```python
 from azure.servicebus import ServiceBusClient, ServiceBusMessage
@@ -750,9 +745,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # 调用 Azure OpenAI 撰写文章
+    # 调用 Microsoft Foundry Models 来撰写文章
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -807,9 +802,9 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. 编辑代理
+### 7. 编辑智能体
 
-**文件： `src/agents/editor/app.py`**
+**文件：`src/agents/editor/app.py`**
 
 ```python
 from azure.servicebus import ServiceBusClient
@@ -837,9 +832,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # 调用 Azure OpenAI 进行编辑
+    # 调用 Microsoft Foundry 模型进行编辑
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -849,7 +844,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # 将任务标记为已完成
+    # 将任务标记为完成
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -883,14 +878,23 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. 部署与测试
+### 8. 部署和测试
 
 ```bash
-# 初始化并部署
+# 选项 A：基于模板的部署
 azd init
 azd up
 
-# 获取编排器 URL
+# 选项 B：代理清单部署（需要扩展）
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
+azd up
+```
+
+> 参见 [AZD AI CLI 命令](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) 了解所有 `azd ai` 标志和选项。
+
+```bash
+# 获取编排器的 URL
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
 # 创建内容
@@ -946,13 +950,13 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ## 课程 2：并行协调模式
 
-### 实施：多源调研聚合器
+### 实现：多源研究聚合器
 
 我们来构建一个并行系统，同时从多个来源收集信息。
 
 ### 并行编排器
 
-**文件： `src/orchestrator/parallel_workflow.py`**
+**文件：`src/orchestrator/parallel_workflow.py`**
 
 ```python
 from flask import Flask, request, jsonify
@@ -987,7 +991,7 @@ def research_parallel():
         }
     )
     
-    # 扇出：同时发送给所有代理
+    # 扇出：同时发送到所有代理
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1024,7 +1028,7 @@ if __name__ == '__main__':
 
 ### 聚合逻辑
 
-**文件： `src/agents/aggregator/app.py`**
+**文件：`src/agents/aggregator/app.py`**
 
 ```python
 from azure.servicebus import ServiceBusClient
@@ -1040,7 +1044,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 # 跟踪每个任务的结果
 task_results = defaultdict(list)
-expected_agents = 4  # 网络, 学术, 新闻, 社交
+expected_agents = 4  # 网络、学术、新闻、社交
 
 def process_result(message_data):
     """Aggregate results from parallel agents"""
@@ -1056,7 +1060,7 @@ def process_result(message_data):
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # 检查是否所有代理已完成（汇聚）
+    # 检查是否所有代理都已完成（汇聚）
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
@@ -1103,21 +1107,21 @@ if __name__ == '__main__':
 ```
 
 **并行模式的优点：**
-- ⚡ **快 4 倍**（代理同时运行）
-- 🔄 **容错**（部分结果可接受）
-- 📈 **可扩展**（轻松添加更多代理）
+- ⚡ **快 4 倍**（智能体同时运行）
+- 🔄 <strong>容错</strong>（部分结果可接受）
+- 📈 <strong>可扩展</strong>（可轻松添加更多智能体）
 
 ---
 
 ## 实践练习
 
-### 练习 1：添加超时处理 ⭐⭐（中级）
+### 练习 1：添加超时处理 ⭐⭐（中等）
 
-**目标**：实现超时逻辑，避免聚合器无限等待慢速代理。
+<strong>目标</strong>：实现超时逻辑，避免聚合器无限等待慢速智能体。
 
-**步骤**：
+<strong>步骤</strong>：
 
-1. **在聚合器中添加超时跟踪：**
+1. **向聚合器添加超时跟踪：**
 
 ```python
 from datetime import datetime, timedelta
@@ -1159,9 +1163,9 @@ def process_result(message_data):
 2. **使用人为延迟进行测试：**
 
 ```python
-# 在一个代理中添加延迟以模拟慢速处理
+# 在一个代理中添加延迟以模拟缓慢处理
 import time
-time.sleep(35)  # 超过 30 秒的超时
+time.sleep(35)  # 超过 30 秒的超时限制
 ```
 
 3. **部署并验证：**
@@ -1179,21 +1183,21 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ 成功标准：**
-- ✅ 即使代理未全部完成，任务也应在 30 秒后完成
+- ✅ 即使智能体未完成，任务在 30 秒后完成
 - ✅ 响应指示部分结果（`"timed_out": true`）
-- ✅ 返回可用结果（4 个代理中 3 个）
+- ✅ 返回可用结果（4 个智能体中 3 个）
 
-**时间**：20-25 分钟
+<strong>时间</strong>：20-25 分钟
 
 ---
 
 ### 练习 2：实现重试逻辑 ⭐⭐⭐（高级）
 
-**目标**：在放弃之前自动重试失败的代理任务。
+<strong>目标</strong>：在放弃之前自动重试失败的智能体任务。
 
-**步骤**：
+<strong>步骤</strong>：
 
-1. **在编排器中添加重试跟踪：**
+1. **向编排器添加重试跟踪：**
 
 ```python
 from dataclasses import dataclass
@@ -1204,7 +1208,7 @@ class RetryConfig:
     max_retries: int = 3
     backoff_seconds: int = 5
 
-retry_counts: Dict[str, int] = {}  # message_id 映射到 retry_count
+retry_counts: Dict[str, int] = {}  # 消息ID -> 重试次数
 
 def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
     """Send message with retry metadata"""
@@ -1224,7 +1228,7 @@ def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConf
         sender.send_messages(message)
 ```
 
-2. **向代理添加重试处理程序：**
+2. **向智能体添加重试处理程序：**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1244,18 +1248,18 @@ def process_with_retry(message, receiver, process_func):
         max_retries = message_data.get('max_retries', 3)
         
         if retry_count < max_retries:
-            # 重试: 放弃并重新入队，重试次数递增
+            # 重试：放弃并重新入队，计数递增
             print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
             
             message_data['retry_count'] = retry_count + 1
             
-            # 延迟发送回同一队列
+            # 发送回相同队列，带延迟
             time.sleep(5 * (retry_count + 1))  # 指数退避
             send_with_retry(queue_name, message_data, RetryConfig())
             
             receiver.complete_message(message)  # 移除原始消息
         else:
-            # 超过最大重试次数 - 移动到死信队列
+            # 超过最大重试次数 - 移至死信队列
             print(f"❌ Max retries exceeded for message {message_id}")
             receiver.dead_letter_message(
                 message,
@@ -1284,19 +1288,19 @@ def monitor_dead_letters():
 
 **✅ 成功标准：**
 - ✅ 失败任务自动重试（最多 3 次）
-- ✅ 重试之间使用指数退避（5s、10s、15s）
+- ✅ 重试之间采用指数退避（5s、10s、15s）
 - ✅ 达到最大重试后，消息进入死信队列
-- ✅ 可监控并重放死信队列中的消息
+- ✅ 可以监控并重放死信队列
 
-**时间**：30-40 分钟
+<strong>时间</strong>：30-40 分钟
 
 ---
 
 ### 练习 3：实现断路器 ⭐⭐⭐（高级）
 
-**目标**：通过阻止对故障代理的请求来防止级联故障。
+<strong>目标</strong>：通过停止对失败智能体的请求来防止级联故障。
 
-**步骤**：
+<strong>步骤</strong>：
 
 1. **创建断路器类：**
 
@@ -1307,7 +1311,7 @@ from datetime import datetime, timedelta
 class CircuitState(Enum):
     CLOSED = "closed"      # 正常运行
     OPEN = "open"          # 失败，拒绝请求
-    HALF_OPEN = "half_open"  # 测试是否已恢复
+    HALF_OPEN = "half_open"  # 测试是否恢复
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1349,7 +1353,7 @@ class CircuitBreaker:
             raise e
 ```
 
-2. **应用到代理调用：**
+2. **应用于智能体调用：**
 
 ```python
 # 在编排器中
@@ -1368,7 +1372,7 @@ def send_to_agent(agent_type, message_data):
         circuit.call(lambda: send_message(agent_type, message_data))
     except Exception as e:
         print(f"⚠️ Skipping {agent_type} agent: {e}")
-        # 继续处理其他代理
+        # 继续执行其他代理
 ```
 
 3. **测试断路器：**
@@ -1386,25 +1390,25 @@ for i in {1..10}; do
 done
 
 # 检查日志 - 在5次失败后应看到断路器打开
-# 使用 Azure CLI 获取容器应用日志：
+# 使用 Azure CLI 查看容器应用日志：
 az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
 ```
 
 **✅ 成功标准：**
-- ✅ 发生 5 次失败后，断路器打开（拒绝请求）
-- ✅ 60 秒后，断路器转为半开（测试恢复）
-- ✅ 其它代理继续正常工作
-- ✅ 当代理恢复时，断路器自动关闭
+- ✅ 连续 5 次失败后，断路器打开（拒绝请求）
+- ✅ 60 秒后，断路器进入半开状态（测试恢复）
+- ✅ 其他智能体正常继续工作
+- ✅ 智能体恢复后，断路器自动关闭
 
-**时间**：40-50 分钟
+<strong>时间</strong>：40-50 分钟
 
 ---
 
-## 监控与调试
+## 监控和调试
 
-### 使用 Application Insights 的分布式跟踪
+### 使用 Application Insights 进行分布式跟踪
 
-**文件： `src/shared/tracing.py`**
+**文件：`src/shared/tracing.py`**
 
 ```python
 from opencensus.ext.azure.log_exporter import AzureLogHandler
@@ -1415,12 +1419,12 @@ from opencensus.trace.samplers import AlwaysOnSampler
 import logging
 import os
 
-# 配置跟踪
+# 配置追踪
 config_integration.trace_integrations(['requests', 'logging'])
 
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
-# 创建跟踪器
+# 创建追踪器
 tracer = Tracer(
     exporter=AzureExporter(connection_string=connection_string),
     sampler=AlwaysOnSampler()
@@ -1450,7 +1454,7 @@ def trace_agent_call(agent_name, task_id, operation):
 
 ### Application Insights 查询
 
-**跟踪多代理工作流：**
+**跟踪多智能体工作流：**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1460,7 +1464,7 @@ traces
 | order by timestamp asc
 ```
 
-**代理性能比较：**
+**智能体性能比较：**
 
 ```kusto
 // Compare agent execution times
@@ -1491,22 +1495,22 @@ exceptions
 
 ## 成本分析
 
-### 多代理系统成本（每月估算）
+### 多智能体系统成本（每月估算）
 
 | 组件 | 配置 | 成本 |
 |-----------|--------------|------|
-| **编排器** | 1 个 Container App（1 vCPU，2GB） | $30-50 |
-| **4 个代理** | 4 个 Container Apps（每个 0.5 vCPU，1GB） | $60-120 |
-| **Service Bus** | Standard 级别，1000 万条消息 | $10-20 |
-| **Cosmos DB** | Serverless，5GB 存储，100 万 RUs | $25-50 |
-| **Blob Storage** | 10GB 存储，10 万次操作 | $5-10 |
-| **Application Insights** | 5GB 摄取 | $10-15 |
-| **Azure OpenAI** | GPT-4，1000 万 tokens | $100-300 |
-| **总计** | | **$240-565/月** |
+| <strong>编排器</strong> | 1 Container App (1 vCPU, 2GB) | $30-50 |
+| **4 个智能体** | 4 Container Apps (0.5 vCPU, 1GB each) | $60-120 |
+| **Service Bus** | Standard tier, 10M messages | $10-20 |
+| **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
+| **Blob Storage** | 10GB storage, 100K operations | $5-10 |
+| **Application Insights** | 5GB ingestion | $10-15 |
+| **Microsoft Foundry Models** | gpt-4.1, 10M tokens | $100-300 |
+| <strong>总计</strong> | | **$240-565/月** |
 
 ### 成本优化策略
 
-1. **尽可能使用无服务器（serverless）：**
+1. **尽可能使用无服务器：**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1515,7 +1519,7 @@ exceptions
    }
    ```
 
-2. **空闲时将代理缩减为零：**
+2. **在空闲时将智能体缩放为零：**
    ```bicep
    scale: {
      minReplicas: 0  // Scale to zero when no messages
@@ -1525,11 +1529,11 @@ exceptions
 
 3. **对 Service Bus 使用批处理：**
    ```python
-   # 批量发送消息（更便宜）
+   # 以批量方式发送消息（更便宜）
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **缓存经常使用的结果：**
+4. **缓存常用结果：**
    ```python
    # 使用 Azure Cache for Redis
    if cache.exists(query_hash):
@@ -1540,11 +1544,11 @@ exceptions
 
 ## 最佳实践
 
-### ✅ 建议采用：
+### ✅ 要做的：
 
-1. **使用幂等操作**
+1. <strong>使用幂等操作</strong>
    ```python
-   # 代理可以安全地多次处理相同的消息
+   # 代理可以安全地多次处理同一条消息
    def process_task(task_id):
        if state_manager.task_exists(task_id):
            print(f"Task {task_id} already processed, skipping")
@@ -1552,7 +1556,7 @@ exceptions
        # 正在处理任务...
    ```
 
-2. **实现全面的日志记录**
+2. <strong>实现全面的日志记录</strong>
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
@@ -1573,53 +1577,53 @@ exceptions
    }
    ```
 
-5. **监控死信队列**
+5. <strong>监控死信队列</strong>
    ```python
-   # 对失败消息的定期监控
+   # 定期监控失败的消息
    monitor_dead_letters()
    ```
 
-### ❌ 切勿：
+### ❌ 不要：
 
-1. **不要创建循环依赖**
+1. <strong>不要创建循环依赖</strong>
    ```python
-   # ❌ 错误: 代理 A → 代理 B → 代理 A (无限循环)
-   # ✅ 良好: 定义清晰的有向无环图 (DAG)
+   # ❌ 错误：代理 A → 代理 B → 代理 A（无限循环）
+   # ✅ 良好：定义清晰的有向无环图（DAG）
    ```
 
-2. **不要阻塞代理线程**
+2. <strong>不要阻塞智能体线程</strong>
    ```python
-   # ❌ 错误: 同步等待
+   # ❌ 不推荐：同步等待
    while not task_complete:
        time.sleep(1)
    
-   # ✅ 好: 使用消息队列回调
+   # ✅ 推荐：使用消息队列回调
    ```
 
-3. **不要忽略部分失败**
+3. <strong>不要忽略部分失败</strong>
    ```python
-   # ❌ 错误做法：如果一个代理失败就让整个工作流失败
-   # ✅ 推荐做法：返回部分结果并附带错误指示
+   # ❌ 不好: 如果某个代理失败则使整个工作流失败
+   # ✅ 好: 返回带有错误指示的部分结果
    ```
 
-4. **不要使用无限重试**
+4. <strong>不要使用无限重试</strong>
    ```python
    # ❌ 错误：无限重试
-   # ✅ 推荐：max_retries = 3，然后进入死信队列
+   # ✅ 正确：max_retries = 3，然后进入死信队列
    ```
 
 ---
 
-## 故障排查指南
+## 故障排除指南
 
 ### 问题：消息卡在队列中
 
-**症状：**
-- 消息在队列中堆积
+**症状:**
+- 消息在队列中积压
 - 代理未处理
-- 任务状态卡在 "pending"
+- 任务状态停留在 "pending"
 
-**诊断：**
+**诊断:**
 ```bash
 # 检查队列深度
 az servicebus queue show \
@@ -1631,9 +1635,9 @@ az servicebus queue show \
 az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
-**解决方案：**
+**解决方案:**
 
-1. **增加代理副本：**
+1. **增加代理副本数:**
    ```bash
    az containerapp update \
      --name research-agent \
@@ -1641,7 +1645,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
      --max-replicas 10
    ```
 
-2. **检查死信队列：**
+2. **检查死信队列:**
    ```bash
    az servicebus queue show \
      --namespace-name mybus \
@@ -1651,27 +1655,27 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### 问题：任务超时/从未完成
+### 问题：任务超时/永远不会完成
 
-**症状：**
+**症状:**
 - 任务状态保持 "in_progress"
-- 一些代理完成，其他未完成
-- 没有错误消息
+- 一些代理完成，其他代理没有
+- 无错误消息
 
-**诊断：**
+**诊断:**
 ```bash
 # 检查任务状态
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 # 检查 Application Insights
-# 运行查询: traces | where customDimensions.task_id == "..."
+# 运行查询：traces | where customDimensions.task_id == "..."
 ```
 
-**解决方案：**
+**解决方案:**
 
 1. **在聚合器中实现超时（练习 1）**
 
-2. **使用 Azure Monitor 检查代理故障：**
+2. **使用 Azure Monitor 检查代理故障:**
    ```bash
    # 通过 azd monitor 查看日志
    azd monitor --logs
@@ -1680,7 +1684,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **验证所有代理正在运行：**
+3. **验证所有代理正在运行:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1698,41 +1702,41 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
 
 ### 本课程的下一步
-- ← 上一节: [容量规划](capacity-planning.md)
-- → 下一节: [SKU 选择](sku-selection.md)
+- ← 上一节: [Capacity Planning](capacity-planning.md)
+- → 下一节: [SKU Selection](sku-selection.md)
 - 🏠 [课程首页](../../README.md)
 
 ### 相关示例
-- [微服务示例](../../../../examples/microservices) - 服务通信模式
-- [Azure OpenAI 示例](../../../../examples/azure-openai-chat) - AI 集成
+- [Microservices Example](../../../../examples/microservices) - 服务通信模式
+- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - AI 集成
 
 ---
 
 ## 总结
 
-**您已学到：**
+**你已学会:**
 - ✅ 五种协调模式（顺序、并行、分层、事件驱动、共识）
-- ✅ Azure 上的多代理架构（Service Bus, Cosmos DB, Container Apps）
+- ✅ 在 Azure 上的多代理架构（Service Bus、Cosmos DB、Container Apps）
 - ✅ 分布式代理之间的状态管理
 - ✅ 超时处理、重试和断路器
 - ✅ 分布式系统的监控和调试
 - ✅ 成本优化策略
 
-**关键要点：**
-1. **选择正确的模式** - 顺序用于有序工作流，并行用于速度，事件驱动用于灵活性
-2. **谨慎管理状态** - 使用 Cosmos DB 或类似服务来存储共享状态
-3. **优雅地处理故障** - 超时、重试、断路器、死信队列
-4. **监控一切** - 分布式追踪对于调试至关重要
-5. **优化成本** - 缩减到零、使用无服务器、实现缓存
+**主要结论:**
+1. <strong>选择正确的模式</strong> - 顺序用于有序工作流，并行用于速度，事件驱动用于灵活性
+2. <strong>小心管理状态</strong> - 使用 Cosmos DB 或类似工具进行共享状态存储
+3. <strong>优雅地处理失败</strong> - 超时、重试、断路器、死信队列
+4. <strong>监控一切</strong> - 分布式追踪对于调试至关重要
+5. <strong>优化成本</strong> - 缩放到零，使用无服务器，实现缓存
 
-**下一步：**
+**下一步:**
 1. 完成实践练习
-2. 为您的用例构建一个多代理系统
-3. 学习 [SKU 选择](sku-selection.md) 以优化性能和成本
+2. 为你的用例构建一个多代理系统
+3. 学习 [SKU Selection](sku-selection.md) 以优化性能和成本
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免责声明：
-本文件已使用 AI 翻译服务 Co-op Translator（https://github.com/Azure/co-op-translator）进行翻译。尽管我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始母语版本的文件应被视为权威来源。对于关键信息，建议采用专业人工翻译。对于因使用此翻译而产生的任何误解或错误解释，我们不承担任何责任。
+**免责声明**:
+本文件已使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。虽然我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。应将原始语言的文档视为权威来源。对于关键性信息，建议使用专业人工翻译。对于因使用本翻译而产生的任何误解或误释，我们不承担任何责任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

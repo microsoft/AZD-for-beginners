@@ -1,70 +1,63 @@
-# Peatükk 8: Tootmise & Ettevõtte mustrid
+# 8. peatükk: Tootmise ja ettevõtte mustrid
 
-**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 2-3 hours | **⭐ Raskusaste**: Edasijõudnud
+**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 2–3 tundi | **⭐ keerukusaste**: Edasijõudnud
 
 ---
 
 ## Ülevaade
 
-See peatükk käsitleb ettevõttele valmis juurutamise mustreid, turvalisuse karmistamist, monitooringut ja kulude optimeerimist tootmis-AI töökoormuste jaoks.
+See peatükk käsitleb ettevõttele valmis juurutamise mustreid, turvalisuse tugevdamist, jälgimist ja kulude optimeerimist tootmise tehisintellekti töökoormuste jaoks.
 
 ## Õpieesmärgid
 
-Selle peatüki lõpetamisel:
-- Juurutada mitmeregioonilisi vastupidavaid rakendusi
-- Rakendada ettevõtte turbemustreid
-- Seadistada põhjalik monitooring
-- Optimeerida kulusid suures mahus
-- Seada üles CI/CD töövood AZD-iga
+Selle peatüki lõpetamisega:
+- Juurutate mitmeregioonilisi vastupidavaid rakendusi
+- Rakendate ettevõtte turbemustreid
+- Konfigureerite põhjaliku jälgimise
+- Optimeerite kulusid suures mahus
+- Seate üles CI/CD torujuhtmed koos AZD-ga
 
 ---
 
 ## 📚 Õppetunnid
 
 | # | Õppetund | Kirjeldus | Aeg |
-|---|--------|-------------|------|
-| 1 | [Tootmis-AI tavad](production-ai-practices.md) | Ettevõtte juurutamise mustrid | 90 min |
+|---|----------|-----------|-----|
+| 1 | [Tootmise tehisintellekti tavad](production-ai-practices.md) | Ettevõtte juurutamise mustrid | 90 min |
 
 ---
 
 ## 🚀 Tootmise kontrollnimekiri
 
 - [ ] Mitmeregiooniline juurutus vastupidavuse tagamiseks
-- [ ] Haldatud identiteet autentimiseks (ilma võtmeteta)
-- [ ] Application Insights monitooringuks
-- [ ] Kulubudgetid ja hoiatused seadistatud
-- [ ] Turbe skaneerimine lubatud
-- [ ] CI/CD töövoo integreerimine
-- [ ] Katastrofi taastamise plaan
+- [ ] Hallatud identiteet autentimiseks (ilma võtiteta)
+- [ ] Application Insights jälgimiseks
+- [ ] Kulueelarved ja teavitused konfigureeritud
+- [ ] Turbeskaneerimine lubatud
+- [ ] CI/CD torujuhtme integratsioon
+- [ ] Katastroofide taastamise plaan
 
 ---
 
 ## 🏗️ Arhitektuuri mustrid
 
-### Muster 1: Mikroteenuste AI
+### Muster 1: Mikroteenused ja tehisintellekt
 
+```mermaid
+graph LR
+    Gateway[API värav] --> AI[Tehisintellekti teenus] --> Models[Microsoft Foundry mudelid]
+    Gateway --> Auth[Autentimisteenus]
+    AI --> Data[Andmehoidla]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
+### Muster 2: Sündmuspõhine tehisintellekt
 
-### Muster 2: Sündmustel põhinev AI
-
+```mermaid
+graph LR
+    EventGrid[Eventi võrk] --> Functions[Funktsioonid] --> Pipeline[AI torujuhe]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
-## 🔐 Turvalisuse parimad tavad
+## 🔐 Turbe parimad tavad
 
 ```bicep
 // Use managed identity
@@ -83,17 +76,17 @@ properties: {
 
 ---
 
-## 💰 Kuluoptimeerimine
+## 💰 Kulude optimeerimine
 
 | Strateegia | Sääst |
-|----------|---------|
-| Skaleerimine nullini (Container Apps) | 60-80% |
-| Kasuta tarbimispõhiseid tasemeid arenduses | 50-70% |
-| Ajastatud skaleerimine | 30-50% |
-| Broneeritud maht | 20-40% |
+|------------|-------|
+| Skaleeri nulli (Container Apps) | 60–80% |
+| Kasuta tarbimispõhiseid tasemeid arenduseks | 50–70% |
+| Ajastatud skaleerimine | 30–50% |
+| Reserveeritud maht | 20–40% |
 
 ```bash
-# Sea eelarvehoiatused
+# Määra eelarvehoiatused
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -103,7 +96,7 @@ az consumption budget create \
 
 ---
 
-## 📊 Monitooringu seadistamine
+## 📊 Jälgimise seadistamine
 
 ```bash
 # Voogesita logisid
@@ -112,7 +105,7 @@ azd monitor --logs
 # Kontrolli Application Insightsi
 azd monitor
 
-# Kuva mõõdikud
+# Vaata mõõdikuid
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -121,22 +114,22 @@ az monitor metrics list --resource <resource-id>
 ## 🔗 Navigeerimine
 
 | Suund | Peatükk |
-|-----------|---------|
-| **Eelmine** | [Peatükk 7: Tõrkeotsing](../chapter-07-troubleshooting/README.md) |
+|-------|---------|
+| **Eelmine** | [7. peatükk: Tõrkeotsing](../chapter-07-troubleshooting/README.md) |
 | **Kursus lõpetatud** | [Kursuse avaleht](../../README.md) |
 
 ---
 
 ## 📖 Seotud ressursid
 
-- [AI agentide juhend](../chapter-02-ai-development/agents.md)
+- [Tehisintellekti agendid juhend](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Mitmeagendi lahendused](../chapter-05-multi-agent/README.md)
+- [Mitme agendi lahendused](../chapter-05-multi-agent/README.md)
 - [Mikroteenuste näide](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Lahtiütlus**:
-See dokument on tõlgitud tehisintellekti tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi me püüame tagada täpsust, palun arvestage, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokumenti selle algkeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta ühegi arusaamatuse või valesti tõlgendamise eest, mis tuleneb selle tõlke kasutamisest.
+**Täiendav teave**:
+Seda dokumenti on tõlgitud kasutades tehisintellektil põhinevat tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüdleme täpsuse poole, tuleb arvestada, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle emakeeles tuleks pidada usaldusväärseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti mõistmiste eest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

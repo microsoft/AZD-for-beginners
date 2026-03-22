@@ -1,48 +1,48 @@
-# Primul tău proiect - Tutorial practic
+# Primul Tău Proiect - Tutorial Practic
 
-**Navigare capitole:**
-- **📚 Pagina cursului**: [AZD pentru începători](../../README.md)
-- **📖 Capitolul curent**: Capitolul 1 - Fundament & Pornire rapidă
-- **⬅️ Anterior**: [Instalare & Configurare](installation.md)
-- **➡️ Următor**: [Configurare](configuration.md)
-- **🚀 Capitolul următor**: [Capitolul 2: Dezvoltare orientată spre AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Navigare capitole:**  
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)  
+- **📖 Capitol Curent**: Capitolul 1 - Fundamente & Start Rapid  
+- **⬅️ Anterior**: [Instalare & Configurare](installation.md)  
+- **➡️ Următor**: [Configurare](configuration.md)  
+- **🚀 Capitol Următor**: [Capitolul 2: Dezvoltare AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Introducere
 
-Bine ai venit la primul tău proiect Azure Developer CLI! Acest tutorial practic cuprinzător oferă un parcurs complet pentru crearea, implementarea și gestionarea unei aplicații full-stack pe Azure folosind azd. Vei lucra cu o aplicație reală todo care include un frontend React, un backend API Node.js și o bază de date MongoDB.
+Bine ai venit la primul tău proiect Azure Developer CLI! Acest tutorial practic cuprinzător oferă un parcurs complet pentru crearea, implementarea și gestionarea unei aplicații full-stack pe Azure folosind azd. Vei lucra cu o aplicație reală de tip todo care include un frontend React, backend API Node.js și o bază de date MongoDB.
 
-## Obiective de învățare
+## Obiective de Învățare
 
-Parcurgând acest tutorial, vei:
-- Stăpâni fluxul de inițializare al proiectelor azd folosind șabloane
-- Înțelege structura proiectului Azure Developer CLI și fișierele de configurare
-- Executa implementarea completă a aplicației pe Azure cu provisioning de infrastructură
-- Implementa strategii de actualizare și reimplementare a aplicației
-- Gestionează medii multiple pentru dezvoltare și staging
-- Aplica practici de curățare a resurselor și gestionare a costurilor
+Parcurgând acest tutorial, vei:  
+- Stăpâni fluxul de inițializare a proiectului azd folosind șabloane  
+- Înțelege structura proiectului Azure Developer CLI și fișierele de configurare  
+- Executa implementarea completă a aplicației pe Azure cu aprovizionare infrastructură  
+- Implementa actualizări ale aplicației și strategii de redeploy  
+- Gestione multiple medii pentru dezvoltare și staging  
+- Aplica bune practici de curățare a resurselor și gestionare a costurilor
 
-## Rezultate ale învățării
+## Rezultate de Învățare
 
-La final, vei putea:
-- Inițializa și configura proiecte azd din șabloane independent
-- Naviga și modifica structurile proiectelor azd eficient
-- Implementa aplicații full-stack pe Azure folosind comenzi unice
-- Depana probleme comune de implementare și autentificare
-- Gestionează mai multe medii Azure pentru diferite etape de implementare
-- Implementa fluxuri de lucru de deploy continuu pentru actualizările aplicației
+La final vei putea:  
+- Inițializa și configura proiecte azd din șabloane independent  
+- Naviga și modifica structuri de proiect azd eficient  
+- Implementa aplicații full-stack pe Azure cu comenzi unice  
+- Depana probleme comune de implementare și autentificare  
+- Gestione multiple medii Azure pentru etape de implementare diferite  
+- Implementa fluxuri de implementare continuă pentru actualizări
 
-## Început
+## Începutul
 
-### Lista de verificare - Cerințe prealabile
-- ✅ Azure Developer CLI instalat ([Ghid de instalare](installation.md))
-- ✅ Azure CLI instalat și autentificat
-- ✅ Git instalat pe sistemul tău
-- ✅ Node.js 16+ (pentru acest tutorial)
+### Listă Verificare Cerințe Prealabile  
+- ✅ Azure Developer CLI instalat ([Ghid de Instalare](installation.md))  
+- ✅ Azure CLI instalat și autentificat  
+- ✅ Git instalat pe sistemul tău  
+- ✅ Node.js 16+ (pentru acest tutorial)  
 - ✅ Visual Studio Code (recomandat)
 
-### Verifică configurația
+### Verifică Configurarea Ta  
 ```bash
-# Verifică instalarea azd
+# Verificați instalarea azd
 azd version
 ```
 ### Verifică autentificarea Azure
@@ -50,38 +50,38 @@ azd version
 ```bash
 az account show
 ```
-
-### Verifică versiunea Node.js
+  
+### Verifică versiunea Node.js  
 ```bash
 node --version
 ```
+  
+## Pasul 1: Alege și Inițializează un Șablon
 
-## Pasul 1: Alege și inițializează un șablon
-
-Să începem cu un șablon popular de aplicație todo care include un frontend React și un backend API Node.js.
+Începem cu un șablon popular de aplicație todo care include un frontend React și backend API Node.js.
 
 ```bash
-# Răsfoiți șabloanele disponibile
+# Răsfoiește template-urile disponibile
 azd template list
 
-# Inițializați șablonul aplicației todo
+# Inițializează template-ul aplicației todo
 mkdir my-first-azd-app
 cd my-first-azd-app
 azd init --template todo-nodejs-mongo
 
-# Urmați instrucțiunile:
-# - Introduceți un nume pentru mediu: "dev"
-# - Alegeți un abonament (dacă aveți mai multe)
-# - Alegeți o regiune: "East US 2" (sau regiunea preferată)
+# Urmează instrucțiunile:
+# - Introdu un nume pentru mediu: "dev"
+# - Alege un abonament (dacă ai mai multe)
+# - Alege o regiune: "East US 2" (sau regiunea preferată)
 ```
+  
+### Ce s-a întâmplat?  
+- Codul șablonului a fost descărcat în directorul local  
+- A fost creat un fișier `azure.yaml` cu definiții de servicii  
+- S-a configurat codul infrastructurii în directorul `infra/`  
+- A fost creată o configurație de mediu
 
-### Ce s-a întâmplat?
-- Descărcat codul șablonului în directorul local
-- Creat fișierul `azure.yaml` cu definițiile serviciilor
-- Configurat codul pentru infrastructură în directorul `infra/`
-- Creat o configurație de mediu
-
-## Pasul 2: Explorează structura proiectului
+## Pasul 2: Explorează Structura Proiectului
 
 Să examinăm ce a creat azd pentru noi:
 
@@ -91,8 +91,8 @@ tree /f   # Windows
 # sau
 find . -type f | head -20   # macOS/Linux
 ```
-
-Ar trebui să vezi:
+  
+Ar trebui să vezi:  
 ```
 my-first-azd-app/
 ├── .azd/
@@ -118,69 +118,69 @@ my-first-azd-app/
 ├── azure.yaml                  # azd project configuration
 └── README.md                   # Project documentation
 ```
+  
+### Fișiere Cheie de Înțeles
 
-### Fișiere cheie de înțeles
-
-**azure.yaml** - Inima proiectului azd:
+**azure.yaml** - Inima proiectului tău azd:  
 ```bash
-# Vizualizează configurația proiectului
+# Vizualizați configurația proiectului
 cat azure.yaml
 ```
-
-**infra/main.bicep** - Definiția infrastructurii:
+  
+**infra/main.bicep** - Definiția infrastructurii:  
 ```bash
 # Vizualizați codul infrastructurii
 head -30 infra/main.bicep
 ```
-
-## Pasul 3: Personalizează proiectul tău (Opțional)
+  
+## Pasul 3: Personalizează Proiectul (Opțional)
 
 Înainte de implementare, poți personaliza aplicația:
 
-### Modifică frontend-ul
+### Modifică Frontend-ul  
 ```bash
 # Deschide componenta aplicației React
 code src/web/src/App.tsx
 ```
-
-Fă o schimbare simplă:
+  
+Fă o schimbare simplă:  
 ```typescript
-// Găsește titlul și schimbă-l
+// Găsiți titlul și schimbați-l
 <h1>My Awesome Todo App</h1>
 ```
-
-### Configurează variabilele de mediu
+  
+### Configurează Variabilele de Mediu  
 ```bash
-# Setați variabile de mediu personalizate
+# Setează variabile de mediu personalizate
 azd env set WEBSITE_TITLE "My First AZD App"
 azd env set API_VERSION "v1.18"
-# Vizualizați toate variabilele de mediu
+# Vizualizează toate variabilele de mediu
 azd env get-values
 ```
+  
+## Pasul 4: Implementare pe Azure
 
-## Pasul 4: Implementare în Azure
-
-Acum partea interesantă — implementează totul în Azure!
+Acum partea interesantă - implementează totul pe Azure!
 
 ```bash
-# Desfășurați infrastructura și aplicația
+# Implementați infrastructura și aplicația
 azd up
 
 # Această comandă va:
-# 1. Creează resurse Azure (App Service, Cosmos DB, etc.)
-# 2. Construiește aplicația
-# 3. Desfășoară aplicația pe resursele create
-# 4. Afișează URL-ul aplicației
+# 1. Furniza resurse Azure (App Service, Cosmos DB, etc.)
+# 2. Compila aplicația dvs.
+# 3. Implementați pe resursele furnizate
+# 4. Afișați URL-ul aplicației
 ```
-
+  
 ### Ce se întâmplă în timpul implementării?
 
-Comanda `azd up` execută acești pași:
-1. **Provision** (`azd provision`) - Creează resurse Azure
-2. **Package** - Construiește codul aplicației tale
-3. **Deploy** (`azd deploy`) - Publică codul în resursele Azure
+Comanda `azd up` realizează următorii pași:  
+1. **Provisionare** (`azd provision`) - Creează resurse Azure  
+2. **Ambalare** - Compilează codul aplicației  
+3. **Implementare** (`azd deploy`) - Depune codul în resurse Azure
 
-### Ieșire așteptată
+### Ieșire Așteptată  
 ```
 Packaging services (azd package)
 
@@ -192,25 +192,25 @@ https://portal.azure.com/#@/resource/subscriptions/{subscription-id}/resourceGro
 Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
+  
+## Pasul 5: Testează Aplicația
 
-## Pasul 5: Testează aplicația ta
-
-### Accesează aplicația ta
-Dă clic pe URL-ul furnizat în rezultatul implementării, sau obține-l oricând:
+### Accesează Aplicația  
+Dă click pe URL-ul oferit în rezultatul implementării sau obține-l oricând:  
 ```bash
-# Obține endpoint-urile aplicației
+# Obține punctele finale ale aplicației
 azd show
 
 # Deschide aplicația în browserul tău
 azd show --output json | jq -r '.services.web.endpoint'
 ```
+  
+### Testează Aplicația Todo  
+1. **Adaugă un element todo** - Apasă "Add Todo" și introdu o sarcină  
+2. **Marchează ca finalizat** - Bifează elementele realizate  
+3. **Șterge elemente** - Elimină todo-urile de care nu mai ai nevoie
 
-### Testează aplicația Todo
-1. **Adaugă un element todo** - Click "Adaugă Todo" și introduce o sarcină
-2. **Marchează ca finalizat** - Bifează elementele finalizate
-3. **Șterge elemente** - Elimină todos pe care nu le mai dorești
-
-### Monitorizează aplicația ta
+### Monitorizează Aplicația  
 ```bash
 # Deschide portalul Azure pentru resursele tale
 azd monitor
@@ -218,93 +218,113 @@ azd monitor
 # Vizualizează jurnalele aplicației
 azd monitor --logs
 
-# Vizualizează metrici în timp real
+# Vizualizează metrici live
 azd monitor --live
 ```
+  
+## Pasul 6: Fă Modificări și Redeploy
 
-## Pasul 6: Fă modificări și reimplementează
+Hai să facem o schimbare și să vedem cât de ușor este să actualizezi:
 
-Să facem o modificare și să vedem cât de ușor este să actualizăm:
-
-### Modifică API-ul
+### Modifică API-ul  
 ```bash
 # Editează codul API
 code src/api/src/routes/lists.js
 ```
-
-Adaugă un antet de răspuns personalizat:
+  
+Adaugă un header personalizat în răspuns:  
 ```javascript
-// Găsește un handler de rută și adaugă:
+// Găsiți un handler pentru rută și adăugați:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
-
-### Publică doar modificările de cod
+  
+### Implementare Doar a Codului Modificat  
 ```bash
-# Desfășurați doar codul aplicației (omiteți infrastructura)
+# Desfășurați doar codul aplicației (săriți peste infrastructură)
 azd deploy
 
 # Acest lucru este mult mai rapid decât 'azd up' deoarece infrastructura există deja
 ```
+  
+## Pasul 7: Gestionează Multiple Medii
 
-## Pasul 7: Gestionează medii multiple
-
-Creează un mediu de staging pentru a testa modificările înainte de producție:
+Creează un mediu staging pentru a testa modificările înainte de producție:
 
 ```bash
-# Creați un nou mediu de staging
+# Creează un nou mediu de testare
 azd env new staging
 
-# Implementați în mediul de staging
+# Distribuie în mediul de testare
 azd up
 
-# Comutați înapoi la mediul de dezvoltare
+# Revino la mediul de dezvoltare
 azd env select dev
 
-# Listați toate mediile
+# Listează toate mediile
 azd env list
 ```
-
-### Compararea mediilor
+  
+### Compararea Mediilor  
 ```bash
-# Vizualizați mediul de dezvoltare
+# Vizualizează mediul de dezvoltare
 azd env select dev
 azd show
 
-# Vizualizați mediul de staging
+# Vizualizează mediul de pre-producție
 azd env select staging
 azd show
 ```
+  
+## Pasul 8: Curăță Resursele
 
-## Pasul 8: Curăță resursele
-
-Când ai terminat experimentele, curăță resursele pentru a evita costuri continue:
+Când termini cu experimentele, curăță resursele ca să eviți costuri continue:
 
 ```bash
 # Șterge toate resursele Azure pentru mediul curent
 azd down
 
-# Forțează ștergerea fără confirmare și elimină definitiv resursele marcate ca șterse
+# Ștergere forțată fără confirmare și curățare a resurselor șterse soft
 azd down --force --purge
 
-# Șterge un mediu specific
+# Șterge mediul specificat
 azd env select staging
 azd down --force --purge
 ```
+  
+## Aplicație Clasică vs. Aplicație AI: Același Flux de Lucru
 
-## Ce ai învățat
+Tocmai ai implementat o aplicație web tradițională. Dar dacă ai vrea să implementezi în schimb o aplicație AI—să zicem, o aplicație de chat bazată pe Microsoft Foundry Models?
 
-Felicitări! Ai reușit:
-- ✅ Inițializat un proiect azd dintr-un șablon
-- ✅ Explorată structura proiectului și fișierele cheie
-- ✅ Implementată o aplicație full-stack pe Azure
-- ✅ Efectuate modificări de cod și reimplementate
-- ✅ Gestionate medii multiple
-- ✅ Curățate resursele
+Vestea bună: **fluxul de lucru este identic.**
 
-## 🎯 Exerciții pentru validarea competențelor
+| Pas | Aplicație Todo Clasică | Aplicație Chat AI |  
+|------|-----------------------|-------------------|  
+| Inițializează | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |  
+| Autentificare | `azd auth login` | `azd auth login` |  
+| Implementare | `azd up` | `azd up` |  
+| Monitorizare | `azd monitor` | `azd monitor` |  
+| Curățare | `azd down --force --purge` | `azd down --force --purge` |
 
-### Exercițiul 1: Implementă un șablon diferit (15 minute)
-**Scop**: Demonstrează stăpânirea fluxului de lucru azd init și implementare
+Singura diferență este șablonul de pornire. Un șablon AI include infrastructură suplimentară (cum ar fi un resource Microsoft Foundry Models sau un index AI Search), dar azd gestionează totul pentru tine. Nu trebuie să înveți comenzi noi, să adopți unelte diferite sau să modifici modul în care gândești despre implementare.
+
+Acesta este principiul de bază al azd: **un singur flux, orice tip de sarcină.** Abilitățile exersate în acest tutorial—inițializare, implementare, monitorizare, redeploy și curățare—se aplică în egală măsură aplicațiilor AI și agenților.
+
+---
+
+## Ce Ai Învățat
+
+Felicitări! Ai reușit să:  
+- ✅ Inițializezi un proiect azd dintr-un șablon  
+- ✅ Explorezi structura proiectului și fișierele cheie  
+- ✅ Implementezi o aplicație full-stack pe Azure  
+- ✅ Faci modificări de cod și redeploy  
+- ✅ Gestionezi multiple medii  
+- ✅ Cureți resursele
+
+## 🎯 Exerciții pentru Validarea Abilităților
+
+### Exercițiul 1: Implementează un Șablon Diferit (15 minute)  
+**Obiectiv**: Demonstrează stăpânirea fluxului azd init și implementare
 
 ```bash
 # Încearcă stiva Python + MongoDB
@@ -319,15 +339,15 @@ curl $(azd show --output json | jq -r '.services.web.endpoint')
 # Curăță
 azd down --force --purge
 ```
+  
+**Criterii de Succes:**  
+- [ ] Aplicația se implementează fără erori  
+- [ ] Poți accesa URL-ul aplicației în browser  
+- [ ] Aplicația funcționează corect (adăugare/ștergere todos)  
+- [ ] Ai curățat cu succes toate resursele
 
-**Criterii de succes:**
-- [ ] Aplicația se implementează fără erori
-- [ ] Poți accesa URL-ul aplicației în browser
-- [ ] Aplicația funcționează corect (adaugă/șterge todos)
-- [ ] Curățat cu succes toate resursele
-
-### Exercițiul 2: Personalizează configurația (20 minute)
-**Scop**: Exersează configurarea variabilelor de mediu
+### Exercițiul 2: Personalizează Configurația (20 minute)  
+**Obiectiv**: Exersează configurarea variabilelor de mediu
 
 ```bash
 cd my-first-azd-app
@@ -343,18 +363,18 @@ azd env set ENABLE_DEBUG "true"
 # Verifică variabilele
 azd env get-values | grep APP_TITLE
 
-# Desfășoară cu configurație personalizată
+# Deplasează cu configurație personalizată
 azd up
 ```
-
-**Criterii de succes:**
-- [ ] Mediu personalizat creat cu succes
-- [ ] Variabilele de mediu setate și recuperabile
-- [ ] Aplicația se implementează cu configurație personalizată
+  
+**Criterii de Succes:**  
+- [ ] Mediu personalizat creat cu succes  
+- [ ] Variabilele de mediu setate și accesibile  
+- [ ] Aplicația se implementează cu configurația personalizată  
 - [ ] Poți verifica setările personalizate în aplicația implementată
 
-### Exercițiul 3: Flux de lucru multi-mediu (25 minute)
-**Scop**: Stăpânește gestionarea mediilor și strategiile de implementare
+### Exercițiul 3: Flux Multi-Mediu (25 minute)  
+**Obiectiv**: Stăpânește gestionarea mediilor și strategii de implementare
 
 ```bash
 # Creează mediul de dezvoltare
@@ -363,17 +383,17 @@ azd env set ENVIRONMENT_TYPE dev
 azd env set LOG_LEVEL debug
 azd up
 
-# Notează URL-ul mediului de dezvoltare
+# Notează URL-ul de dezvoltare
 DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Dev: $DEV_URL"
 
-# Creează mediul de staging
+# Creează mediul de testare
 azd env new staging-$(whoami)
 azd env set ENVIRONMENT_TYPE staging
 azd env set LOG_LEVEL info
 azd up
 
-# Notează URL-ul mediului de staging
+# Notează URL-ul de testare
 STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Staging: $STAGING_URL"
 
@@ -388,126 +408,126 @@ curl "$STAGING_URL/health"
 azd env select dev-$(whoami) && azd down --force --purge
 azd env select staging-$(whoami) && azd down --force --purge
 ```
+  
+**Criterii de Succes:**  
+- [ ] Două medii create cu configurații diferite  
+- [ ] Ambele medii implementate cu succes  
+- [ ] Poți comuta între medii folosind `azd env select`  
+- [ ] Variabilele de mediu diferă între medii  
+- [ ] Ai curățat cu succes ambele medii
 
-**Criterii de succes:**
-- [ ] Două medii create cu configurații diferite
-- [ ] Ambele medii implementate cu succes
-- [ ] Poți comuta între medii folosind `azd env select`
-- [ ] Variabilele de mediu diferă între medii
-- [ ] Curățat cu succes ambele medii
+## 📊 Progresul Tău
 
-## 📊 Progresul tău
+**Timp Investit**: ~60-90 minute  
+**Competențe Dobândite**:  
+- ✅ Inițializare proiect bazată pe șabloane  
+- ✅ Aprovizionare resurse Azure  
+- ✅ Fluxuri de implementare a aplicației  
+- ✅ Gestionarea mediilor  
+- ✅ Gestionare configurație  
+- ✅ Curățare resurse și gestionare costuri
 
-**Timp investit**: ~60-90 minute  
-**Competențe dobândite**:
-- ✅ Inițializare proiect bazată pe șabloane
-- ✅ Provisionare resurse Azure
-- ✅ Fluxuri de lucru pentru implementarea aplicațiilor
-- ✅ Gestionarea mediilor
-- ✅ Administrarea configurațiilor
-- ✅ Curățarea resurselor și gestionarea costurilor
+**Nivel Următor**: Ești pregătit pentru [Ghid de Configurare](configuration.md) pentru a învăța pattern-uri avansate de configurare!
 
-**Următorul nivel**: Ești pregătit pentru [Ghidul de configurare](configuration.md) pentru a învăța modele avansate de configurare!
+## Depanare Probleme Comune
 
-## Depanare - Probleme comune
-
-### Erori de autentificare
+### Erori de Autentificare  
 ```bash
-# Reautentifică-te în Azure
+# Reautentificare cu Azure
 az login
 
-# Verifică accesul la abonament
+# Verifică accesul abonamentului
 az account show
 ```
-
-### Eșecuri la implementare
+  
+### Eșecuri la Implementare  
 ```bash
-# Activați jurnalizarea de depanare
+# Activează înregistrarea jurnalului de depanare
 export AZD_DEBUG=true
 azd up --debug
 
-# Vizualizați jurnalele aplicației în Azure
+# Vizualizează jurnalele aplicației în Azure
 azd monitor --logs
 
-# Pentru Container Apps, utilizați Azure CLI:
+# Pentru Container Apps, folosește Azure CLI:
 # az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 ```
-
-### Conflicte de nume ale resurselor
+  
+### Conflicte de Nume Resurse  
 ```bash
-# Utilizați un nume de mediu unic
+# Folosiți un nume unic pentru mediu
 azd env new dev-$(whoami)-$(date +%s)
 ```
-
-### Probleme de port/rețea
+  
+### Probleme cu Porturi/Rețea  
 ```bash
 # Verifică dacă porturile sunt disponibile
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
+  
+## Pașii Următori
 
-## Pașii următori
+Acum că ai finalizat primul proiect, explorează aceste subiecte avansate:
 
-Acum că ai finalizat primul tău proiect, explorează aceste subiecte avansate:
+### 1. Personalizează Infrastructura  
+- [Infrastructură ca și Cod](../chapter-04-infrastructure/provisioning.md)  
+- [Adaugă baze de date, storage și alte servicii](../chapter-04-infrastructure/provisioning.md#adding-services)
 
-### 1. Personalizează infrastructura
-- [Infrastructură ca cod](../chapter-04-infrastructure/provisioning.md)
-- [Adaugă baze de date, stocare și alte servicii](../chapter-04-infrastructure/provisioning.md#adding-services)
+### 2. Configurează CI/CD  
+- [Ghid de Implementare](../chapter-04-infrastructure/deployment-guide.md) - Fluxuri complete CI/CD  
+- [Documentație Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - Configurare pipeline
 
-### 2. Configurează CI/CD
-- [Ghid de implementare](../chapter-04-infrastructure/deployment-guide.md) - Fluxuri CI/CD complete
-- [Documentația Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - Configurarea pipeline-ului
+### 3. Bune Practici pentru Producție  
+- [Ghid de Implementare](../chapter-04-infrastructure/deployment-guide.md) - Securitate, performanță și monitorizare
 
-### 3. Practici recomandate pentru producție
-- [Ghid de implementare](../chapter-04-infrastructure/deployment-guide.md) - Securitate, performanță și monitorizare
-
-### 4. Explorează mai multe șabloane
+### 4. Explorează Mai Multe Șabloane  
 ```bash
-# Răsfoiește șabloane după categorie
+# Răsfoiește șabloanele pe categorii
 azd template list --filter web
 azd template list --filter api
 azd template list --filter database
 
-# Încearcă diferite stack-uri tehnologice
+# Încearcă diferite seturi de tehnologii
 azd init --template todo-python-mongo
 azd init --template todo-csharp-sql
 azd init --template todo-java-mongo
 ```
+  
+## Resurse Suplimentare
 
-## Resurse suplimentare
-
-### Materiale de învățare
-- [Documentația Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+### Materiale de Învățare  
+- [Documentație Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
-### Comunitate și suport
-- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+### Comunitate & Suport  
+- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)  
+- [Comunitatea Azure Developer](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)  
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
-### Șabloane și exemple
-- [Ghidul oficial de șabloane](https://azure.github.io/awesome-azd/)
-- [Șabloane comunitare](https://github.com/Azure-Samples/azd-templates)
-- [Modele enterprise](https://github.com/Azure/azure-dev/tree/main/templates)
+### Șabloane & Exemple  
+- [Galerie Oficială Șabloane](https://azure.github.io/awesome-azd/)  
+- [Șabloane Comunitare](https://github.com/Azure-Samples/azd-templates)  
+- [Modele Enterprise](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
-Felicitări pentru finalizarea primului tău proiect azd! Acum ești gata să construiești și să implementezi aplicații uimitoare pe Azure cu încredere.
+**Felicitări pentru finalizarea primului tău proiect azd!** Acum ești pregătit să construiești și să implementezi aplicații extraordinare pe Azure cu încredere.
 
 ---
 
-**Navigare capitole:**
-- **📚 Pagina cursului**: [AZD pentru începători](../../README.md)
-- **📖 Capitolul curent**: Capitolul 1 - Fundament & Pornire rapidă
-- **⬅️ Anterior**: [Instalare & Configurare](installation.md)
-- **➡️ Următor**: [Configurare](configuration.md)
-- **🚀 Capitolul următor**: [Capitolul 2: Dezvoltare orientată spre AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **Următoarea lecție**: [Ghid de implementare](../chapter-04-infrastructure/deployment-guide.md)
+**Navigare capitole:**  
+- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)  
+- **📖 Capitol Curent**: Capitolul 1 - Fundamente & Start Rapid  
+- **⬅️ Anterior**: [Instalare & Configurare](installation.md)  
+- **➡️ Următor**: [Configurare](configuration.md)  
+- **🚀 Capitol Următor**: [Capitolul 2: Dezvoltare AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)  
+- **Următoarea Lecție**: [Ghid de Implementare](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Declinare de responsabilitate:
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original, în limba sa nativă, trebuie considerat sursa autorizată. Pentru informații critice, se recomandă o traducere profesională realizată de un traducător uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări eronate care decurg din utilizarea acestei traduceri.
+**Declinare a responsabilității**:  
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un expert uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite rezultate din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

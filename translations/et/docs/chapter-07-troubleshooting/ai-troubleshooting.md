@@ -1,28 +1,26 @@
-# AI-spetsiifiline tõrkeotsingu juhend
+# AI-spetsiifiline veaotsingu juhend
 
-**Peatüki navigeerimine:**
-- **📚 Kursuse avaleht**: [AZD For Beginners](../../README.md)
-- **📖 Praegune peatükk**: Peatükk 7 - Tõrkeotsing ja silumine
-- **⬅️ Eelmine**: [Debugging Guide](debugging.md)
-- **➡️ Järgmine peatükk**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
-- **🤖 Seotud**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Peatükkide navigeerimine:**
+- **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
+- **📖 Praegune peatükk**: Peatükk 7 - Veaotsing ja silumine
+- **⬅️ Eelmine**: [Silumise juhend](debugging.md)
+- **➡️ Järgmine peatükk**: [Peatükk 8: Tootmise ja ettevõtluse mustrid](../chapter-08-production/production-ai-practices.md)
+- **🤖 Seotud**: [Peatükk 2: AI-esimene arendus](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**Eelmine:** [Production AI Practices](../chapter-08-production/production-ai-practices.md) | **Järgmine:** [AZD Basics](../chapter-01-foundation/azd-basics.md)
-
-See põhjalik tõrkeotsingu juhend käsitleb levinud probleeme AI-lahenduste juurutamisel AZD abil ning pakub lahendusi ja silumisvõtteid, mis on spetsiifilised Azure AI teenustele.
+See põhjalik veaotsingu juhend käsitleb levinumaid probleeme AI-lahenduste juurutamisel AZD-ga, pakkudes lahendusi ja silumistehnikaid, mis on spetsiifilised Azure AI teenustele.
 
 ## Sisukord
 
-- [Azure OpenAI teenuse probleemid](../../../../docs/chapter-07-troubleshooting)
-- [Azure AI Searchi probleemid](../../../../docs/chapter-07-troubleshooting)
-- [Container Appsi juurutamisprobleemid](../../../../docs/chapter-07-troubleshooting)
-- [Autentimise ja õiguste vead](../../../../docs/chapter-07-troubleshooting)
-- [Mudeli juurutamise tõrked](../../../../docs/chapter-07-troubleshooting)
+- [Microsoft Foundry mudelite teenuse probleemid](../../../../docs/chapter-07-troubleshooting)
+- [Azure AI otsingu probleemid](../../../../docs/chapter-07-troubleshooting)
+- [Container Apps juurutamisprobleemid](../../../../docs/chapter-07-troubleshooting)
+- [Autentimis- ja juurdepääsuloadega seotud vead](../../../../docs/chapter-07-troubleshooting)
+- [Mudeli juurutamise vead](../../../../docs/chapter-07-troubleshooting)
 - [Jõudluse ja skaleerimise probleemid](../../../../docs/chapter-07-troubleshooting)
-- [Kulu- ja piirangute haldus](../../../../docs/chapter-07-troubleshooting)
+- [Kulu ja kvota haldamine](../../../../docs/chapter-07-troubleshooting)
 - [Silumise tööriistad ja tehnikad](../../../../docs/chapter-07-troubleshooting)
 
-## Azure OpenAI teenuse probleemid
+## Microsoft Foundry mudelite teenuse probleemid
 
 ### Probleem: OpenAI teenus pole regioonis saadaval
 
@@ -32,15 +30,15 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **Põhjused:**
-- Azure OpenAI mitte valitud regioonis saadaval
-- Kvota eelistatud regioonides ammendatud
-- Piirkondlikud mahupiirangud
+- Microsoft Foundry mudelid pole valitud regioonis saadaval
+- Kvota on eelistatud regioonides ammendunud
+- Regionaalsed võimsusepiirangud
 
 **Lahendused:**
 
 1. **Kontrolli regiooni saadavust:**
 ```bash
-# Loetle OpenAI jaoks saadaolevad piirkonnad
+# Loetle OpenAI saadaolevad regioonid
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
@@ -81,7 +79,7 @@ Error: Deployment failed due to insufficient quota
 
 1. **Kontrolli praegust kvotat:**
 ```bash
-# Kontrolli kvoodi kasutust
+# Kontrolli kvota kasutust
 az cognitiveservices usage list \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG
@@ -104,7 +102,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -126,19 +124,19 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 1. **Kasuta toetatud API versiooni:**
 ```python
-# Kasutage viimast toetatud versiooni
+# Kasuta uusimat toetatud versiooni
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
 2. **Kontrolli API versiooni ühilduvust:**
 ```bash
-# Loetle toetatud API versioonid
+# Loendi toetatud API versioonid
 az rest --method get \
   --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
 ```
 
-## Azure AI Searchi probleemid
+## Azure AI otsingu probleemid
 
 ### Probleem: Otsinguteenuse hinnaklass ei ole piisav
 
@@ -167,7 +165,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Keela semantiline otsing (arendus):**
+2. **Keela semantiline otsing (arenduses):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -181,7 +179,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Probleem: Indeksi loomise tõrked
+### Probleem: Indeksi loomise ebaõnnestumine
 
 **Sümptomid:**
 ```
@@ -190,7 +188,7 @@ Error: Cannot create index, insufficient permissions
 
 **Lahendused:**
 
-1. **Kinnita otsinguteenuse võtmed:**
+1. **Kontrolli otsinguteenuse võtmeid:**
 ```bash
 # Hangi otsinguteenuse administraatori võti
 az search admin-key show \
@@ -200,7 +198,7 @@ az search admin-key show \
 
 2. **Kontrolli indeksi skeemi:**
 ```python
-# Valideeri indeksi skeem
+# Kontrolli indeksi skeemi
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
@@ -214,7 +212,7 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **Kasuta hallatud identiteeti:**
+3. **Kasuta hallatavat identiteeti:**
 ```bicep
 // Grant search permissions to managed identity
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -228,9 +226,9 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Container Appsi juurutamisprobleemid
+## Container Apps juurutamisprobleemid
 
-### Probleem: Konteineri ehituse tõrked
+### Probleem: Konteineri ehitamise ebaõnnestumine
 
 **Sümptomid:**
 ```
@@ -261,7 +259,7 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **Valideeri sõltuvused:**
+2. **Kontrolli sõltuvusi:**
 ```txt
 # requirements.txt - Pin versions for stability
 fastapi==0.104.1
@@ -285,7 +283,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Probleem: Konteinerirakenduse käivituse tõrked
+### Probleem: Container App käivitamise ebaõnnestumine
 
 **Sümptomid:**
 ```
@@ -294,7 +292,7 @@ Error: Container failed to start within timeout period
 
 **Lahendused:**
 
-1. **Suurenda käivitamise ajalõppu:**
+1. **Suurenda käivitusaega:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -329,7 +327,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Optimeeri mudeli laadimist:**
 ```python
-# Mudelite laisk laadimine käivitamisaega vähendamiseks
+# Mudelite laisk laadimine käivitamisaja lühendamiseks
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -343,7 +341,7 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # AI-kliendi initsialiseerimine siin
+        # Algata siin tehisintellekti klient
         pass
 
 @asynccontextmanager
@@ -351,26 +349,26 @@ async def lifespan(app: FastAPI):
     # Käivitamine
     app.state.model_manager = ModelManager()
     yield
-    # Seiskamine
+    # Sulgemine
     pass
 
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Autentimise ja õiguste vead
+## Autentimis- ja juurdepääsuloadega seotud vead
 
-### Probleem: Hallatud identiteedile juurdepääs keelatud
+### Probleem: Hallatava identiteedi juurdepääs keelatud
 
 **Sümptomid:**
 ```
-Error: Authentication failed for Azure OpenAI Service
+Error: Authentication failed for Microsoft Foundry Models Service
 ```
 
 **Lahendused:**
 
-1. **Kontrolli rollide määramisi:**
+1. **Kontrolli rolli määranguid:**
 ```bash
-# Kontrolli praeguseid rollijaotusi
+# Kontrolli praeguseid rollide määramisi
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
@@ -436,7 +434,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Kasuta RBAC-i juurdepääsupoliitikaid asemel:**
+2. **Kasuta RBAC-i juurdepääsupoliitikate asemel:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -449,7 +447,7 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## Mudeli juurutamise tõrked
+## Mudeli juurutamise vead
 
 ### Probleem: Mudeli versioon pole saadaval
 
@@ -470,12 +468,12 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **Kasuta tagavaralisi mudeleid:**
+2. **Kasuta mudeli tagasilanget:**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
 param primaryModel object = {
-  name: 'gpt-4o-mini'
+  name: 'gpt-4.1-mini'
   version: '2024-07-18'
 }
 
@@ -499,7 +497,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 }
 ```
 
-3. **Valideeri mudel enne juurutamist:**
+3. **Kontrolli mudelit enne juurutamist:**
 ```python
 # Mudeli valideerimine enne juurutamist
 import httpx
@@ -523,18 +521,18 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 ## Jõudluse ja skaleerimise probleemid
 
-### Probleem: Kõrge latentsusega vastused
+### Probleem: Kõrge latentsus vastustes
 
 **Sümptomid:**
-- Vastusajad > 30 sekundit
-- Ajalõpu vead
-- Halb kasutajakogemus
+- Vastuseajad > 30 sekundit
+- Ajakulu vead
+- Kehv kasutajakogemus
 
 **Lahendused:**
 
-1. **Rakenda päringu ajalõpud:**
+1. **Rakenda päringute ajapiirangud:**
 ```python
-# Seadistage sobivad ajapiirangud
+# Seadistage õiged ajalõppud
 import httpx
 
 client = httpx.AsyncClient(
@@ -547,9 +545,9 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **Lisa vastuste vahemällu salvestamine:**
+2. **Lisa vastuse vahemälu:**
 ```python
-# Redis-vahemälu vastuste jaoks
+# Redis vahemälu vastuste jaoks
 import redis.asyncio as redis
 import json
 
@@ -629,9 +627,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **Optimeeri mälukasutust:**
+2. **Optimeeri mälu kasutust:**
 ```python
-# Mäluefektiivne mudeli käsitlemine
+# Mälu säästlik mudeli käsitlemine
 import gc
 import psutil
 
@@ -644,7 +642,7 @@ class MemoryOptimizedAI:
         # Kontrolli mälu kasutust enne töötlemist
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Sunnita prügikoristust
+            gc.collect()  # Sundkäivita prügikogu
             
         result = await self._process_ai_request(request)
         
@@ -653,20 +651,20 @@ class MemoryOptimizedAI:
         return result
 ```
 
-## Kulu- ja piirangute haldus
+## Kulu ja kvota haldamine
 
-### Probleem: Ettearvamatult kõrged kulud
+### Probleem: Ootamatult kõrged kulud
 
 **Sümptomid:**
-- Azure arve oodatust kõrgem
-- Tokenite kasutus ületab hinnanguid
-- Eelarvehoiatused käivitunud
+- Azure arve on oodatust kõrgem
+- Tokeni kasutus ületab prognoose
+- Eelarve hoiatused aktiveerunud
 
 **Lahendused:**
 
-1. **Rakenda kulukontrolle:**
+1. **Rakenda kulude kontrolli:**
 ```python
-# Tokenite kasutamise jälgimine
+# Märgise kasutamise jälgimine
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -683,7 +681,7 @@ class TokenTracker:
         return total_tokens
 ```
 
-2. **Sea üles kuluteavitused:**
+2. **Sea üles kulude hoiatused:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
@@ -710,35 +708,35 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 3. **Optimeeri mudeli valikut:**
 ```python
-# Kulusid arvestav mudeli valik
+# Kulu-teadlik mudeli valik
 MODEL_COSTS = {
-    'gpt-4o-mini': 0.00015,  # 1000 tokeni kohta
-    'gpt-4': 0.03,          # 1000 tokeni kohta
-    'gpt-35-turbo': 0.0015  # 1000 tokeni kohta
+    'gpt-4.1-mini': 0.00015,  # iga 1K tokeni kohta
+    'gpt-4.1': 0.03,          # iga 1K tokeni kohta
+    'gpt-35-turbo': 0.0015  # iga 1K tokeni kohta
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
     """Select model based on complexity and budget."""
     if complexity == 'simple' or budget_remaining < 10:
-        return 'gpt-4o-mini'
+        return 'gpt-4.1-mini'
     elif complexity == 'medium':
         return 'gpt-35-turbo'
     else:
-        return 'gpt-4'
+        return 'gpt-4.1'
 ```
 
 ## Silumise tööriistad ja tehnikad
 
-### AZD silumise käsud
+### AZD silumiskäsud
 
 ```bash
 # Luba üksikasjalik logimine
 azd up --debug
 
-# Kontrolli juurutuse olekut
+# Kontrolli juurutamise olekut
 azd show
 
-# Vaata rakenduse logisid (avab monitooringu juhtpaneeli)
+# Vaata rakenduse logisid (avatakse jälgimisliides)
 azd monitor --logs
 
 # Vaata reaalajas mõõdikuid
@@ -748,6 +746,26 @@ azd monitor --live
 azd env get-values
 ```
 
+### AZD AI laienduse käsud diagnostika jaoks
+
+Kui oled agendid juurutanud käsklusega `azd ai agent init`, on saadaval need lisatööriistad:
+
+```bash
+# Veenduge, et agendi laiendus on installitud
+azd extension install azure.ai.agents
+
+# Algseadista või uuenda agenti manifestist
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Kasuta MCP serverit, et lasta tehisintellekti tööriistadel projektiseisundit pärida
+azd mcp start
+
+# Genereeri infrastruktuuri failid ülevaatamiseks ja auditeerimiseks
+azd infra generate
+```
+
+> **Vihje:** Kasuta käsku `azd infra generate`, et kirjutada IaC kettale, et saaksid täpselt kontrollida, millised ressursid juurutati. See on hindamatu ressurss juurutamise konfiguratsiooni probleemide silumisel. Täpsemad juhised leiad [AZD AI CLI viidetest](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
+
 ### Rakenduse silumine
 
 1. **Struktureeritud logimine:**
@@ -755,7 +773,7 @@ azd env get-values
 import logging
 import json
 
-# Seadista struktureeritud logimine tehisintellekti rakenduste jaoks
+# Konfigureeri struktureeritud logimine tehisintellekti rakendustele
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -774,14 +792,14 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **Tervisekontrolli lõpp-punktid:**
+2. **Tervisekontrolli otspunktid:**
 ```python
 @app.get("/debug/health")
 async def detailed_health_check():
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # Kontrolli OpenAI-ühenduvust
+    # Kontrolli OpenAI ühenduvust
     try:
         client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
         await client.models.list()
@@ -803,7 +821,7 @@ async def detailed_health_check():
     return checks
 ```
 
-3. **Jõudluse jälgimine:**
+3. **Jõudluse monitooring:**
 ```python
 import time
 from functools import wraps
@@ -834,42 +852,43 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## Levinud veakoodid ja lahendused
+## Levinumad veakoodid ja lahendused
 
-| Error Code | Description | Solution |
+| Veakood | Kirjeldus | Lahendus |
 |------------|-------------|----------|
-| 401 | Volitamata | Kontrolli API võtmeid ja hallatud identiteedi konfiguratsiooni |
-| 403 | Keelatud | Kinnita RBAC rollide määrangud |
-| 429 | Päringute piirang | Rakenda kordusloogika eksponentsiaalse tagasilangusega |
-| 500 | Sisemine serveri viga | Kontrolli mudeli juurutuse olekut ja logisid |
-| 503 | Teenus pole saadaval | Kontrolli teenuse tervist ja piirkondlikku saadavust |
+| 401 | Lubamatu | Kontrolli API võtmeid ja hallatava identiteedi konfiguratsiooni |
+| 403 | Keelatud | Kontrolli RBAC rollide määranguid |
+| 429 | Liiga palju päringuid | Rakenda korduskatse loogikat eksponentsiaalse tagasilöögiga |
+| 500 | Sisemine serveri viga | Kontrolli mudeli juurutamise olekut ja logisid |
+| 503 | Teenus pole saadaval | Kontrolli teenuse olekut ja regiooni saadavust |
 
 ## Järgmised sammud
 
-1. **Tutvu [AI mudeli juurutamise juhendiga](../chapter-02-ai-development/ai-model-deployment.md)** juurutamise parimate tavade jaoks
-2. **Tutvu [Tootmise AI praktikatega](../chapter-08-production/production-ai-practices.md)** ettevõttevalmis lahenduste jaoks
-3. **Liitu [Microsoft Foundry Discordiga](https://aka.ms/foundry/discord)** kogukonna toe saamiseks
-4. **Esita probleemiaruandeid** aadressile [AZD GitHubi hoidla](https://github.com/Azure/azure-dev) AZD-spetsiifiliste probleemide korral
+1. **Vaata üle [AI mudeli juurutamise juhend](../chapter-02-ai-development/ai-model-deployment.md)** parimate tavade jaoks
+2. **Lõpeta [Tootmis- ja ettevõtluse AI praktikad](../chapter-08-production/production-ai-practices.md)**
+3. **Liitu [Microsoft Foundry Discordiga](https://aka.ms/foundry/discord) kogukonna toe saamiseks**
+4. **Esita probleemid** [AZD GitHubi hoidlas](https://github.com/Azure/azure-dev), mis on seotud AZD spetsiifiliste probleemidega
 
 ## Ressursid
 
-- [Azure OpenAI Service Troubleshooting](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI Search Troubleshooting](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [Microsoft Foundry mudelite teenuse veaotsing](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [Container Apps veaotsing](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Azure AI otsingu veaotsing](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Paigalda Azure veaotsingu oskused oma redaktorisse: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Peatüki navigeerimine:**
-- **📚 Kursuse avaleht**: [AZD For Beginners](../../README.md)
-- **📖 Praegune peatükk**: Peatükk 7 - Tõrkeotsing ja silumine
-- **⬅️ Eelmine**: [Debugging Guide](debugging.md)
-- **➡️ Järgmine peatükk**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
-- **🤖 Seotud**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+**Peatükkide navigeerimine:**
+- **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
+- **📖 Praegune peatükk**: Peatükk 7 - Veaotsing ja silumine
+- **⬅️ Eelmine**: [Silumise juhend](debugging.md)
+- **➡️ Järgmine peatükk**: [Peatükk 8: Tootmise ja ettevõtluse mustrid](../chapter-08-production/production-ai-practices.md)
+- **🤖 Seotud**: [Peatükk 2: AI-esimene arendus](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Viide**: [Azure Developer CLI veaotsing](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Lahtiütlus:
-Seda dokumenti on tõlgitud tehisintellekti-põhise tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, tuleb arvestada, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokumenti selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste ega väärtõlgenduste eest.
+**Vastutusest loobumine**:  
+See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi me püüame täpsust, palun arvestage, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle emakeeles tuleks pidada autoriteetseks allikaks. Tähtsa informatsiooni puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tingitud väärarusaamade või valesti mõistmiste eest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

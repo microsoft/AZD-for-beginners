@@ -1,20 +1,20 @@
-# Luku 6: Ennakkosuunnittelu ja varmennus
+# Luku 6: Ennen käyttöönottoa suunnittelu ja validointi
 
-**📚 Kurssi**: [AZD For Beginners](../../README.md) | **⏱️ Kesto**: 1 tunti | **⭐ Vaativuustaso**: Keskitasoinen
+**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 1 tunti | **⭐ Vaikeusaste**: Keskitaso
 
 ---
 
 ## Yleiskatsaus
 
-Tässä luvussa käsitellään olennaisia suunnittelu- ja varmennusvaiheita ennen sovelluksesi käyttöönottoa. Opit välttämään kalliita virheitä asianmukaisella kapasiteettisuunnittelulla, SKU-valinnalla ja esitarkistuksilla.
+Tässä luvussa käsitellään olennaiset suunnittelu- ja validointivaiheet ennen sovelluksesi käyttöönottoa. Opit välttämään kalliita virheitä oikealla kapasiteettisuunnittelulla, SKU-valinnoilla ja ennakkotarkastuksilla.
 
 ## Oppimistavoitteet
 
-Tämän luvun suorittamisen jälkeen osaat:
-- Suunnitella kapasiteetin ja arvioida resurssitarpeet
-- Suorittaa esitarkistukset ennen käyttöönottoa
-- Valita sopivat SKU:t kustannusoptimointia varten
-- Määrittää Application Insightsin valvontaa varten
+By completing this chapter, you will:
+- Suorittaa ennakkotarkastukset ennen käyttöönottoa
+- Suunnitella kapasiteetin ja arvioida resurssivaatimukset
+- Valita sopivat SKU:t kustannusten optimointia varten
+- Määrittää Application Insights valvontaa varten
 - Ymmärtää tiimin koordinointimallit
 
 ---
@@ -22,10 +22,10 @@ Tämän luvun suorittamisen jälkeen osaat:
 ## 📚 Oppitunnit
 
 | # | Oppitunti | Kuvaus | Aika |
-|---|----------|-------------|------|
-| 1 | [Esitarkistukset](preflight-checks.md) | Varmista konfiguraatio ennen käyttöönottoa | 15 min |
-| 2 | [Kapasiteetin suunnittelu](capacity-planning.md) | Arvioi resurssitarpeet | 20 min |
-| 3 | [SKU-valinta](sku-selection.md) | Valitse sopivat hintatasot | 15 min |
+|---|--------|-------------|------|
+| 1 | [Ennakkotarkastukset](preflight-checks.md) | Varmista kokoonpano ennen käyttöönottoa | 15 min |
+| 2 | [Kapasiteettisuunnittelu](capacity-planning.md) | Arvioi resurssivaatimukset | 20 min |
+| 3 | [SKU-valinta](sku-selection.md) | Valitse sopivat hinnoittelutasot | 15 min |
 | 4 | [Application Insights](application-insights.md) | Määritä valvonta | 20 min |
 | 5 | [Koordinointimallit](coordination-patterns.md) | Tiimin käyttöönoton työnkulut | 15 min |
 
@@ -37,34 +37,34 @@ Tämän luvun suorittamisen jälkeen osaat:
 # Tarkista tilauksen kiintiöt
 az vm list-usage --location eastus --output table
 
-# Esikatsele käyttöönottoa (ei luoda resursseja)
+# Esikatsele käyttöönottoa (resursseja ei luoda)
 azd provision --preview
 
-# Tarkista Bicep-syntaksi
+# Tarkista Bicep-syntaksin oikeellisuus
 az bicep build --file infra/main.bicep
 
-# Tarkista ympäristön määritys
+# Tarkista ympäristöasetukset
 azd env get-values
 ```
 
 ---
 
-## ☑️ Tarkistuslista ennen käyttöönottoa
+## ☑️ Ennen käyttöönottoa - tarkistuslista
 
 ### Ennen `azd provision`
 
-- [ ] Kiintiöt tarkistettu alueella
+- [ ] Alueen kiintiöt tarkistettu
 - [ ] SKU:t valittu asianmukaisesti
 - [ ] Kustannusarvio tarkistettu
 - [ ] Nimeämiskäytäntö yhdenmukainen
-- [ ] Tietoturva/RBAC määritetty
+- [ ] Tietoturva/RBAC konfiguroitu
 
 ### Ennen `azd deploy`
 
 - [ ] Ympäristömuuttujat asetettu
-- [ ] Salaisuudet tallennettu Key Vaultiin
-- [ ] Yhteysmerkkijonot tarkistettu
-- [ ] Terveystarkastukset määritetty
+- [ ] Salaisuudet Key Vaultissa
+- [ ] Yhteysmerkkijonot varmennettu
+- [ ] Terveystarkastukset konfiguroitu
 
 ---
 
@@ -74,7 +74,7 @@ azd env get-values
 |----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
-| Azure OpenAI | Standard | Standard + PTU |
+| Microsoft Foundry Models | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
 
 ---
@@ -88,15 +88,15 @@ azd env get-values
 
 ---
 
-## 📖 Liittyvät resurssit
+## 📖 Aiheeseen liittyvät resurssit
 
-- [Konfiguraatio-opas](../chapter-03-configuration/configuration.md)
+- [Konfigurointiohje](../chapter-03-configuration/configuration.md)
 - [Käyttöönotto-opas](../chapter-04-infrastructure/deployment-guide.md)
 - [Yleiset ongelmat](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vastuuvapauslauseke:
-Tämä asiakirja on käännetty tekoälykäännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme täsmällisyyteen, huomioithan, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa alkuperäiskielellä on pidettävä ensisijaisena/virallisena lähteenä. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme vastaa tämän käännöksen käytöstä johtuvista väärinymmärryksistä tai virheellisistä tulkinnoista.
+**Vastuuvapauslauseke**:
+Tämä asiakirja on käännetty käyttämällä tekoälykäännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, ota huomioon, että automatisoiduissa käännöksissä saattaa esiintyä virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulisi pitää määräävänä lähteenä. Tärkeiden tietojen osalta suositellaan ammattimaista ihmiskääntäjän tekemää käännöstä. Emme ole vastuussa tästä käännöksestä aiheutuvista väärinymmärryksistä tai virheellisistä tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

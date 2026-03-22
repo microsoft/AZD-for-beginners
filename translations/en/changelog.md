@@ -22,6 +22,58 @@ After reviewing changelog entries, you will be able to:
 
 ## Version History
 
+### [v3.18.0] - 2026-03-16
+
+#### AZD AI CLI Commands, Content Validation & Template Expansion
+**This version adds `azd ai`, `azd extension`, and `azd mcp` command coverage across all AI-related chapters, fixes broken links and deprecated code in agents.md, updates the cheat sheet, and overhauls the Example Templates section with validated descriptions and new Azure AI AZD templates.**
+
+#### Added
+- **🤖 AZD AI CLI coverage** across 7 files (previously only in Chapter 8):
+  - `docs/chapter-01-foundation/azd-basics.md` — New "Extensions and AI Commands" section introducing `azd extension`, `azd ai agent init`, and `azd mcp`
+  - `docs/chapter-02-ai-development/agents.md` — Option 4: `azd ai agent init` with comparison table (template vs manifest approach)
+  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — "AZD Extensions for Foundry" and "Agent-First Deployment" subsections
+  - `docs/chapter-05-multi-agent/README.md` — Quick Start now shows both template and manifest-based deployment paths
+  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — Deploy section now includes `azd ai agent init` option
+  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — "AZD AI Extension Commands for Diagnostics" subsection
+  - `resources/cheat-sheet.md` — New "AI & Extensions Commands" section with `azd extension`, `azd ai agent init`, `azd mcp`, and `azd infra generate`
+- **📦 New AZD AI example templates** in `microsoft-foundry-integration.md`:
+  - **azure-search-openai-demo-csharp** — .NET RAG chat with Blazor WebAssembly, Semantic Kernel, and voice chat support
+  - **azure-search-openai-demo-java** — Java RAG chat using Langchain4J with ACA/AKS deployment options
+  - **contoso-creative-writer** — Multi-agent creative writing app using Azure AI Agent Service, Bing Grounding, and Prompty
+  - **serverless-chat-langchainjs** — Serverless RAG using Azure Functions + LangChain.js + Cosmos DB with Ollama local dev support
+  - **chat-with-your-data-solution-accelerator** — Enterprise RAG accelerator with admin portal, Teams integration, and PostgreSQL/Cosmos DB options
+  - **azure-ai-travel-agents** — Multi-agent MCP orchestration reference app with servers in .NET, Python, Java, and TypeScript
+  - **azd-ai-starter** — Minimal Azure AI infrastructure Bicep starter template
+  - **🔗 Awesome AZD AI Gallery link** — Reference to the [awesome-azd AI gallery](https://azure.github.io/awesome-azd/?tags=ai) (80+ templates)
+
+#### Fixed
+- **🔗 agents.md navigation**: Previous/Next links now match Chapter 2 README lesson order (Microsoft Foundry Integration → Agents → AI Model Deployment)
+- **🔗 agents.md broken links**: `production-ai-practices.md` corrected to `../chapter-08-production/production-ai-practices.md` (3 occurrences)
+- **📦 agents.md deprecated code**: Replaced `opencensus` with `azure-monitor-opentelemetry` + OpenTelemetry SDK
+- **🐛 agents.md invalid API**: Moved `max_tokens` from `create_agent()` to `create_run()` as `max_completion_tokens`
+- **🔢 agents.md token counting**: Replaced rough `len//4` estimate with `tiktoken.encoding_for_model()`
+- **azure-search-openai-demo**: Corrected services from "Cognitive Search + App Service" to "Azure AI Search + Azure Container Apps" (default host changed Oct 2024)
+- **contoso-chat**: Updated description to reference Azure AI Foundry + Prompty, matching the repo's actual title and tech stack
+
+#### Removed
+- **ai-document-processing**: Removed non-functional template reference (repo not publicly accessible as an AZD template)
+
+#### Improved
+- **📝 agents.md exercises**: Exercise 1 now shows expected output and `azd monitor` step; Exercise 2 includes full `FunctionTool` registration code; Exercise 3 replaces vague guidance with concrete `prepdocs.py` commands
+- **📚 agents.md resources**: Updated documentation links to current Azure AI Agent Service docs and quickstart
+- **📋 agents.md Next Steps table**: Added AI Workshop Lab link for complete chapter coverage
+
+#### Files Updated
+- `docs/chapter-01-foundation/azd-basics.md`
+- `docs/chapter-02-ai-development/agents.md`
+- `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
+- `docs/chapter-05-multi-agent/README.md`
+- `docs/chapter-06-pre-deployment/coordination-patterns.md`
+- `docs/chapter-07-troubleshooting/ai-troubleshooting.md`
+- `resources/cheat-sheet.md`
+
+---
+
 ### [v3.17.0] - 2026-02-05
 
 #### Course Navigation Enhancement
@@ -38,7 +90,7 @@ After reviewing changelog entries, you will be able to:
 **This version updates product references to current Microsoft branding.**
 
 #### Changed
-- **Azure AI Foundry → Microsoft Foundry**: All references updated across non-translation files
+- **Microsoft Foundry → Microsoft Foundry**: All references updated across non-translation files
 - **Azure AI Agent Service → Foundry Agents**: Service name updated to reflect current branding
 
 #### Files Updated
@@ -271,7 +323,7 @@ Old folders have been replaced with chapter-numbered folders:
 #### Completed
 - **🎯 Workshop Module 7 (Wrap-up)**: Fully completed wrap-up module with:
   - Comprehensive summary of workshop accomplishments
-  - Key concepts mastered section covering AZD, templates, and AI Foundry
+  - Key concepts mastered section covering AZD, templates, and Microsoft Foundry
   - Learning journey continuation recommendations
   - Workshop challenge exercises with difficulty ratings
   - Community feedback and support links
@@ -337,7 +389,7 @@ Old folders have been replaced with chapter-numbered folders:
   - AZD-focused deployment with automatic provisioning
   - Complete Bicep templates for Application Insights + Log Analytics
   - Working Python applications with custom telemetry (1,200+ lines)
-  - AI/LLM monitoring patterns (Azure OpenAI token/cost tracking)
+  - AI/LLM monitoring patterns (Microsoft Foundry Models token/cost tracking)
   - 6 Mermaid diagrams (architecture, distributed tracing, telemetry flow)
   - 3 hands-on exercises (alerts, dashboards, AI monitoring)
   - Kusto query examples and cost optimization strategies
@@ -379,7 +431,7 @@ Old folders have been replaced with chapter-numbered folders:
 - **Developer Experience**: Clear path from development to production monitoring
 - **Security Standards**: Professional patterns for authentication and secrets management
 - **Observability**: Complete Application Insights integration with AZD
-- **AI Workloads**: Specialized monitoring for Azure OpenAI and multi-agent systems
+- **AI Workloads**: Specialized monitoring for Microsoft Foundry Models and multi-agent systems
 
 #### Validated
 - ✅ All lessons include complete working code (not snippets)
@@ -405,12 +457,12 @@ Old folders have been replaced with chapter-numbered folders:
 
 ### [v3.7.0] - 2025-11-19
 
-#### Documentation Quality Improvements and New Azure OpenAI Example
-**This version enhances documentation quality across the repository and adds a complete Azure OpenAI deployment example with GPT-4 chat interface.**
+#### Documentation Quality Improvements and New Microsoft Foundry Models Example
+**This version enhances documentation quality across the repository and adds a complete Microsoft Foundry Models deployment example with gpt-4.1 chat interface.**
 
 #### Added
-- **🤖 Azure OpenAI Chat Example**: Complete GPT-4 deployment with working implementation in `examples/azure-openai-chat/`:
-  - Complete Azure OpenAI infrastructure (GPT-4 model deployment)
+- **🤖 Microsoft Foundry Models Chat Example**: Complete gpt-4.1 deployment with working implementation in `examples/azure-openai-chat/`:
+  - Complete Microsoft Foundry Models infrastructure (gpt-4.1 model deployment)
   - Python command-line chat interface with conversation history
   - Key Vault integration for secure API key storage
   - Token usage tracking and cost estimation
@@ -446,13 +498,13 @@ Old folders have been replaced with chapter-numbered folders:
 - **Verification Process**: Explicit success criteria added to key workflows
 
 #### Improved
-- **Developer Experience**: Azure OpenAI deployment now takes 35-45 minutes (vs 60-90 for complex alternatives)
-- **Cost Transparency**: Clear cost estimates ($50-200/month) for Azure OpenAI example
+- **Developer Experience**: Microsoft Foundry Models deployment now takes 35-45 minutes (vs 60-90 for complex alternatives)
+- **Cost Transparency**: Clear cost estimates ($50-200/month) for Microsoft Foundry Models example
 - **Learning Path**: AI developers have clear entry point with azure-openai-chat
 - **Documentation Standards**: Consistent expected outputs and verification steps
 
 #### Validated
-- ✅ Azure OpenAI example fully functional with `azd up`
+- ✅ Microsoft Foundry Models example fully functional with `azd up`
 - ✅ All 11 implementation files syntactically correct
 - ✅ README instructions match actual deployment experience
 - ✅ Documentation links updated across 8+ locations
@@ -461,7 +513,7 @@ Old folders have been replaced with chapter-numbered folders:
 - ✅ All navigation references correct
 
 #### Technical Implementation
-- **Azure OpenAI Architecture**: GPT-4 + Key Vault + Container Apps pattern
+- **Microsoft Foundry Models Architecture**: gpt-4.1 + Key Vault + Container Apps pattern
 - **Security**: Managed Identity ready, secrets in Key Vault
 - **Monitoring**: Application Insights integration
 - **Cost Management**: Token tracking and usage optimization
@@ -607,256 +659,256 @@ If you have local branches or documentation referencing the old structure:
 **This version introduces comprehensive workshop materials with browser-based interactive guides and structured learning paths.**
 
 #### Added
-- **🎥 Interactive Workshop Guide**: Browser-based workshop experience with MkDocs preview capability
-- **📝 Structured Workshop Instructions**: 7-step guided learning path from discovery to customization
-  - 0-Introduction: Workshop overview and setup
-  - 1-Select-AI-Template: Template discovery and selection process
-  - 2-Validate-AI-Template: Deployment and validation procedures
-  - 3-Deconstruct-AI-Template: Understanding template architecture
-  - 4-Configure-AI-Template: Configuration and customization
-  - 5-Customize-AI-Template: Advanced modifications and iterations
-  - 6-Teardown-Infrastructure: Cleanup and resource management
-  - 7-Wrap-up: Summary and next steps
-- **🛠️ Workshop Tooling**: MkDocs configuration with Material theme for enhanced learning experience
-- **🎯 Hands-On Learning Path**: 3-step methodology (Discovery → Deployment → Customization)
-- **📱 GitHub Codespaces Integration**: Seamless development environment setup
+- **🎥 Interactive Workshop Guide**: Browser-based workshop experience with MkDocs preview capability  
+- **📝 Structured Workshop Instructions**: 7-step guided learning path from discovery to customization  
+  - 0-Introduction: Workshop overview and setup  
+  - 1-Select-AI-Template: Template discovery and selection process  
+  - 2-Validate-AI-Template: Deployment and validation procedures  
+  - 3-Deconstruct-AI-Template: Understanding template architecture  
+  - 4-Configure-AI-Template: Configuration and customization  
+  - 5-Customize-AI-Template: Advanced modifications and iterations  
+  - 6-Teardown-Infrastructure: Cleanup and resource management  
+  - 7-Wrap-up: Summary and next steps  
+- **🛠️ Workshop Tooling**: MkDocs configuration with Material theme for enhanced learning experience  
+- **🎯 Hands-On Learning Path**: 3-step methodology (Discovery → Deployment → Customization)  
+- **📱 GitHub Codespaces Integration**: Seamless development environment setup  
 
-#### Enhanced
-- **AI Workshop Lab**: Extended with comprehensive 2-3 hour structured learning experience
-- **Workshop Documentation**: Professional presentation with navigation and visual aids
-- **Learning Progression**: Clear step-by-step guidance from template selection to production deployment
-- **Developer Experience**: Integrated tooling for streamlined development workflows
+#### Enhanced  
+- **AI Workshop Lab**: Extended with comprehensive 2-3 hour structured learning experience  
+- **Workshop Documentation**: Professional presentation with navigation and visual aids  
+- **Learning Progression**: Clear step-by-step guidance from template selection to production deployment  
+- **Developer Experience**: Integrated tooling for streamlined development workflows  
 
-#### Improved
-- **Accessibility**: Browser-based interface with search, copy functionality, and theme toggle
-- **Self-Paced Learning**: Flexible workshop structure accommodating different learning speeds
-- **Practical Application**: Real-world AI template deployment scenarios
-- **Community Integration**: Discord integration for workshop support and collaboration
+#### Improved  
+- **Accessibility**: Browser-based interface with search, copy functionality, and theme toggle  
+- **Self-Paced Learning**: Flexible workshop structure accommodating different learning speeds  
+- **Practical Application**: Real-world AI template deployment scenarios  
+- **Community Integration**: Discord integration for workshop support and collaboration  
 
-#### Workshop Features
-- **Built-in Search**: Quick keyword and lesson discovery
-- **Copy Code Blocks**: Hover-to-copy functionality for all code examples
-- **Theme Toggle**: Dark/light mode support for different preferences
-- **Visual Assets**: Screenshots and diagrams for enhanced understanding
-- **Help Integration**: Direct Discord access for community support
+#### Workshop Features  
+- **Built-in Search**: Quick keyword and lesson discovery  
+- **Copy Code Blocks**: Hover-to-copy functionality for all code examples  
+- **Theme Toggle**: Dark/light mode support for different preferences  
+- **Visual Assets**: Screenshots and diagrams for enhanced understanding  
+- **Help Integration**: Direct Discord access for community support  
 
-### [v3.2.0] - 2025-09-17
+### [v3.2.0] - 2025-09-17  
 
-#### Major Navigation Restructuring and Chapter-Based Learning System
-**This version introduces a comprehensive chapter-based learning structure with enhanced navigation throughout the entire repository.**
+#### Major Navigation Restructuring and Chapter-Based Learning System  
+**This version introduces a comprehensive chapter-based learning structure with enhanced navigation throughout the entire repository.**  
 
-#### Added
-- **📚 Chapter-Based Learning System**: Restructured entire course into 8 progressive learning chapters
-  - Chapter 1: Foundation & Quick Start (⭐ - 30-45 mins)
-  - Chapter 2: AI-First Development (⭐⭐ - 1-2 hours)
-  - Chapter 3: Configuration & Authentication (⭐⭐ - 45-60 mins)
-  - Chapter 4: Infrastructure as Code & Deployment (⭐⭐⭐ - 1-1.5 hours)
-  - Chapter 5: Multi-Agent AI Solutions (⭐⭐⭐⭐ - 2-3 hours)
-  - Chapter 6: Pre-Deployment Validation & Planning (⭐⭐ - 1 hour)
-  - Chapter 7: Troubleshooting & Debugging (⭐⭐ - 1-1.5 hours)
-  - Chapter 8: Production & Enterprise Patterns (⭐⭐⭐⭐ - 2-3 hours)
-- **📚 Comprehensive Navigation System**: Consistent navigation headers and footers across all documentation
-- **🎯 Progress Tracking**: Course completion checklist and learning verification system
-- **🗺️ Learning Path Guidance**: Clear entry points for different experience levels and goals
-- **🔗 Cross-Reference Navigation**: Related chapters and prerequisites clearly linked
+#### Added  
+- **📚 Chapter-Based Learning System**: Restructured entire course into 8 progressive learning chapters  
+  - Chapter 1: Foundation & Quick Start (⭐ - 30-45 mins)  
+  - Chapter 2: AI-First Development (⭐⭐ - 1-2 hours)  
+  - Chapter 3: Configuration & Authentication (⭐⭐ - 45-60 mins)  
+  - Chapter 4: Infrastructure as Code & Deployment (⭐⭐⭐ - 1-1.5 hours)  
+  - Chapter 5: Multi-Agent AI Solutions (⭐⭐⭐⭐ - 2-3 hours)  
+  - Chapter 6: Pre-Deployment Validation & Planning (⭐⭐ - 1 hour)  
+  - Chapter 7: Troubleshooting & Debugging (⭐⭐ - 1-1.5 hours)  
+  - Chapter 8: Production & Enterprise Patterns (⭐⭐⭐⭐ - 2-3 hours)  
+- **📚 Comprehensive Navigation System**: Consistent navigation headers and footers across all documentation  
+- **🎯 Progress Tracking**: Course completion checklist and learning verification system  
+- **🗺️ Learning Path Guidance**: Clear entry points for different experience levels and goals  
+- **🔗 Cross-Reference Navigation**: Related chapters and prerequisites clearly linked  
 
-#### Enhanced
-- **README Structure**: Transformed into a structured learning platform with chapter-based organization
-- **Documentation Navigation**: Every page now includes chapter context and progression guidance
-- **Template Organization**: Examples and templates mapped to appropriate learning chapters
-- **Resource Integration**: Cheat sheets, FAQs, and study guides connected to relevant chapters
-- **Workshop Integration**: Hands-on labs mapped to multiple chapter learning objectives
+#### Enhanced  
+- **README Structure**: Transformed into a structured learning platform with chapter-based organization  
+- **Documentation Navigation**: Every page now includes chapter context and progression guidance  
+- **Template Organization**: Examples and templates mapped to appropriate learning chapters  
+- **Resource Integration**: Cheat sheets, FAQs, and study guides connected to relevant chapters  
+- **Workshop Integration**: Hands-on labs mapped to multiple chapter learning objectives  
 
-#### Changed
-- **Learning Progression**: Moved from linear documentation to flexible chapter-based learning
-- **Configuration Placement**: Repositioned configuration guide as Chapter 3 for better learning flow
-- **AI Content Integration**: Better integration of AI-specific content throughout the learning journey
-- **Production Content**: Advanced patterns consolidated in Chapter 8 for enterprise learners
+#### Changed  
+- **Learning Progression**: Moved from linear documentation to flexible chapter-based learning  
+- **Configuration Placement**: Repositioned configuration guide as Chapter 3 for better learning flow  
+- **AI Content Integration**: Better integration of AI-specific content throughout the learning journey  
+- **Production Content**: Advanced patterns consolidated in Chapter 8 for enterprise learners  
 
-#### Improved
-- **User Experience**: Clear navigation breadcrumbs and chapter progression indicators
-- **Accessibility**: Consistent navigation patterns for easier course traversal
-- **Professional Presentation**: University-style course structure suitable for academic and corporate training
-- **Learning Efficiency**: Reduced time to find relevant content through improved organization
+#### Improved  
+- **User Experience**: Clear navigation breadcrumbs and chapter progression indicators  
+- **Accessibility**: Consistent navigation patterns for easier course traversal  
+- **Professional Presentation**: University-style course structure suitable for academic and corporate training  
+- **Learning Efficiency**: Reduced time to find relevant content through improved organization  
 
-#### Technical Implementation
-- **Navigation Headers**: Standardized chapter navigation across 40+ documentation files
-- **Footer Navigation**: Consistent progression guidance and chapter completion indicators
-- **Cross-Linking**: Comprehensive internal linking system connecting related concepts
-- **Chapter Mapping**: Templates and examples clearly associated with learning objectives
+#### Technical Implementation  
+- **Navigation Headers**: Standardized chapter navigation across 40+ documentation files  
+- **Footer Navigation**: Consistent progression guidance and chapter completion indicators  
+- **Cross-Linking**: Comprehensive internal linking system connecting related concepts  
+- **Chapter Mapping**: Templates and examples clearly associated with learning objectives  
 
-#### Study Guide Enhancement
-- **📚 Comprehensive Learning Objectives**: Restructured study guide to align with 8-chapter system
-- **🎯 Chapter-Based Assessment**: Each chapter includes specific learning objectives and practical exercises
-- **📋 Progress Tracking**: Weekly learning schedule with measurable outcomes and completion checklists
-- **❓ Assessment Questions**: Knowledge validation questions for each chapter with professional outcomes
-- **🛠️ Practical Exercises**: Hands-on activities with real deployment scenarios and troubleshooting
-- **📊 Skill Progression**: Clear advancement from basic concepts to enterprise patterns with career development focus
-- **🎓 Certification Framework**: Professional development outcomes and community recognition system
-- **⏱️ Timeline Management**: Structured 10-week learning plan with milestone validation
+#### Study Guide Enhancement  
+- **📚 Comprehensive Learning Objectives**: Restructured study guide to align with 8-chapter system  
+- **🎯 Chapter-Based Assessment**: Each chapter includes specific learning objectives and practical exercises  
+- **📋 Progress Tracking**: Weekly learning schedule with measurable outcomes and completion checklists  
+- **❓ Assessment Questions**: Knowledge validation questions for each chapter with professional outcomes  
+- **🛠️ Practical Exercises**: Hands-on activities with real deployment scenarios and troubleshooting  
+- **📊 Skill Progression**: Clear advancement from basic concepts to enterprise patterns with career development focus  
+- **🎓 Certification Framework**: Professional development outcomes and community recognition system  
+- **⏱️ Timeline Management**: Structured 10-week learning plan with milestone validation  
 
-### [v3.1.0] - 2025-09-17
+### [v3.1.0] - 2025-09-17  
 
-#### Enhanced Multi-Agent AI Solutions
-**This version improves the multi-agent retail solution with better agent naming and enhanced documentation.**
+#### Enhanced Multi-Agent AI Solutions  
+**This version improves the multi-agent retail solution with better agent naming and enhanced documentation.**  
 
-#### Changed
-- **Multi-Agent Terminology**: Replaced "Cora agent" with "Customer agent" throughout retail multi-agent solution for clearer understanding
-- **Agent Architecture**: Updated all documentation, ARM templates, and code examples to use consistent "Customer agent" naming
-- **Configuration Examples**: Modernized agent configuration patterns with updated naming conventions
-- **Documentation Consistency**: Ensured all references use professional, descriptive agent names
+#### Changed  
+- **Multi-Agent Terminology**: Replaced "Cora agent" with "Customer agent" throughout retail multi-agent solution for clearer understanding  
+- **Agent Architecture**: Updated all documentation, ARM templates, and code examples to use consistent "Customer agent" naming  
+- **Configuration Examples**: Modernized agent configuration patterns with updated naming conventions  
+- **Documentation Consistency**: Ensured all references use professional, descriptive agent names  
 
-#### Enhanced
-- **ARM Template Package**: Updated retail-multiagent-arm-template with Customer agent references
-- **Architecture Diagrams**: Refreshed Mermaid diagrams with updated agent naming
-- **Code Examples**: Python classes and implementation examples now use CustomerAgent naming
-- **Environment Variables**: Updated all deployment scripts to use CUSTOMER_AGENT_NAME conventions
+#### Enhanced  
+- **ARM Template Package**: Updated retail-multiagent-arm-template with Customer agent references  
+- **Architecture Diagrams**: Refreshed Mermaid diagrams with updated agent naming  
+- **Code Examples**: Python classes and implementation examples now use CustomerAgent naming  
+- **Environment Variables**: Updated all deployment scripts to use CUSTOMER_AGENT_NAME conventions  
 
-#### Improved
-- **Developer Experience**: Clearer agent roles and responsibilities in documentation
-- **Production Readiness**: Better alignment with enterprise naming conventions
-- **Learning Materials**: More intuitive agent naming for educational purposes
-- **Template Usability**: Simplified understanding of agent functions and deployment patterns
+#### Improved  
+- **Developer Experience**: Clearer agent roles and responsibilities in documentation  
+- **Production Readiness**: Better alignment with enterprise naming conventions  
+- **Learning Materials**: More intuitive agent naming for educational purposes  
+- **Template Usability**: Simplified understanding of agent functions and deployment patterns  
 
-#### Technical Details
-- Updated Mermaid architecture diagrams with CustomerAgent references
-- Replaced CoraAgent class names with CustomerAgent in Python examples
-- Modified ARM template JSON configurations to use "customer" agent type
-- Updated environment variables from CORA_AGENT_* to CUSTOMER_AGENT_* patterns
-- Refreshed all deployment commands and container configurations
+#### Technical Details  
+- Updated Mermaid architecture diagrams with CustomerAgent references  
+- Replaced CoraAgent class names with CustomerAgent in Python examples  
+- Modified ARM template JSON configurations to use "customer" agent type  
+- Updated environment variables from CORA_AGENT_* to CUSTOMER_AGENT_* patterns  
+- Refreshed all deployment commands and container configurations  
 
-### [v3.0.0] - 2025-09-12
+### [v3.0.0] - 2025-09-12  
 
-#### Major Changes - AI Developer Focus and Microsoft Foundry Integration
-**This version transforms the repository into a comprehensive AI-focused learning resource with Microsoft Foundry integration.**
+#### Major Changes - AI Developer Focus and Microsoft Foundry Integration  
+**This version transforms the repository into a comprehensive AI-focused learning resource with Microsoft Foundry integration.**  
 
-#### Added
-- **🤖 AI-First Learning Path**: Complete restructure prioritizing AI developers and engineers
-- **Microsoft Foundry Integration Guide**: Comprehensive documentation for connecting AZD with Microsoft Foundry services
-- **AI Model Deployment Patterns**: Detailed guide covering model selection, configuration, and production deployment strategies
-- **AI Workshop Lab**: 2-3 hour hands-on workshop for converting AI applications to AZD-deployable solutions
-- **Production AI Best Practices**: Enterprise-ready patterns for scaling, monitoring, and securing AI workloads
-- **AI-Specific Troubleshooting Guide**: Comprehensive troubleshooting for Azure OpenAI, Cognitive Services, and AI deployment issues
-- **AI Template Gallery**: Featured collection of Microsoft Foundry templates with complexity ratings
-- **Workshop Materials**: Complete workshop structure with hands-on labs and reference materials
+#### Added  
+- **🤖 AI-First Learning Path**: Complete restructure prioritizing AI developers and engineers  
+- **Microsoft Foundry Integration Guide**: Comprehensive documentation for connecting AZD with Microsoft Foundry services  
+- **AI Model Deployment Patterns**: Detailed guide covering model selection, configuration, and production deployment strategies  
+- **AI Workshop Lab**: 2-3 hour hands-on workshop for converting AI applications to AZD-deployable solutions  
+- **Production AI Best Practices**: Enterprise-ready patterns for scaling, monitoring, and securing AI workloads  
+- **AI-Specific Troubleshooting Guide**: Comprehensive troubleshooting for Microsoft Foundry Models, Cognitive Services, and AI deployment issues  
+- **AI Template Gallery**: Featured collection of Microsoft Foundry templates with complexity ratings  
+- **Workshop Materials**: Complete workshop structure with hands-on labs and reference materials  
 
-#### Enhanced
-- **README Structure**: AI-developer focused with 45% community interest data from Microsoft Foundry Discord
-- **Learning Paths**: Dedicated AI developer journey alongside traditional paths for students and DevOps engineers
-- **Template Recommendations**: Featured AI templates including azure-search-openai-demo, contoso-chat, and openai-chat-app-quickstart
-- **Community Integration**: Enhanced Discord community support with AI-specific channels and discussions
+#### Enhanced  
+- **README Structure**: AI-developer focused with 45% community interest data from Microsoft Foundry Discord  
+- **Learning Paths**: Dedicated AI developer journey alongside traditional paths for students and DevOps engineers  
+- **Template Recommendations**: Featured AI templates including azure-search-openai-demo, contoso-chat, and openai-chat-app-quickstart  
+- **Community Integration**: Enhanced Discord community support with AI-specific channels and discussions  
 
-#### Security & Production Focus
-- **Managed Identity Patterns**: AI-specific authentication and security configurations
-- **Cost Optimization**: Token usage tracking and budget controls for AI workloads
-- **Multi-Region Deployment**: Strategies for global AI application deployment
-- **Performance Monitoring**: AI-specific metrics and Application Insights integration
+#### Security & Production Focus  
+- **Managed Identity Patterns**: AI-specific authentication and security configurations  
+- **Cost Optimization**: Token usage tracking and budget controls for AI workloads  
+- **Multi-Region Deployment**: Strategies for global AI application deployment  
+- **Performance Monitoring**: AI-specific metrics and Application Insights integration  
 
-#### Documentation Quality
-- **Linear Course Structure**: Logical progression from beginner to advanced AI deployment patterns
-- **Validated URLs**: All external repository links verified and accessible
-- **Complete Reference**: All internal documentation links validated and functional
-- **Production Ready**: Enterprise deployment patterns with real-world examples
+#### Documentation Quality  
+- **Linear Course Structure**: Logical progression from beginner to advanced AI deployment patterns  
+- **Validated URLs**: All external repository links verified and accessible  
+- **Complete Reference**: All internal documentation links validated and functional  
+- **Production Ready**: Enterprise deployment patterns with real-world examples  
 
-### [v2.0.0] - 2025-09-09
+### [v2.0.0] - 2025-09-09  
 
-#### Major Changes - Repository Restructure and Professional Enhancement
-**This version represents a significant overhaul of the repository structure and content presentation.**
+#### Major Changes - Repository Restructure and Professional Enhancement  
+**This version represents a significant overhaul of the repository structure and content presentation.**  
 
-#### Added
-- **Structured Learning Framework**: All documentation pages now include Introduction, Learning Goals, and Learning Outcomes sections
-- **Navigation System**: Added Previous/Next lesson links throughout all documentation for guided learning progression
-- **Study Guide**: Comprehensive study-guide.md with learning objectives, practice exercises, and assessment materials
-- **Professional Presentation**: Removed all emoji icons for improved accessibility and professional appearance
-- **Enhanced Content Structure**: Improved organization and flow of learning materials
+#### Added  
+- **Structured Learning Framework**: All documentation pages now include Introduction, Learning Goals, and Learning Outcomes sections  
+- **Navigation System**: Added Previous/Next lesson links throughout all documentation for guided learning progression  
+- **Study Guide**: Comprehensive study-guide.md with learning objectives, practice exercises, and assessment materials  
+- **Professional Presentation**: Removed all emoji icons for improved accessibility and professional appearance  
+- **Enhanced Content Structure**: Improved organization and flow of learning materials  
 
-#### Changed
-- **Documentation Format**: Standardized all documentation with consistent learning-focused structure
-- **Navigation Flow**: Implemented logical progression through all learning materials
-- **Content Presentation**: Removed decorative elements in favor of clear, professional formatting
-- **Link Structure**: Updated all internal links to support new navigation system
+#### Changed  
+- **Documentation Format**: Standardized all documentation with consistent learning-focused structure  
+- **Navigation Flow**: Implemented logical progression through all learning materials  
+- **Content Presentation**: Removed decorative elements in favor of clear, professional formatting  
+- **Link Structure**: Updated all internal links to support new navigation system  
 
-#### Improved
-- **Accessibility**: Removed emoji dependencies for better screen reader compatibility
-- **Professional Appearance**: Clean, academic-style presentation suitable for enterprise learning
-- **Learning Experience**: Structured approach with clear objectives and outcomes for each lesson
-- **Content Organization**: Better logical flow and connection between related topics
+#### Improved  
+- **Accessibility**: Removed emoji dependencies for better screen reader compatibility  
+- **Professional Appearance**: Clean, academic-style presentation suitable for enterprise learning  
+- **Learning Experience**: Structured approach with clear objectives and outcomes for each lesson  
+- **Content Organization**: Better logical flow and connection between related topics  
 
-### [v1.0.0] - 2025-09-09
+### [v1.0.0] - 2025-09-09  
 
-#### Initial Release - Comprehensive AZD Learning Repository
+#### Initial Release - Comprehensive AZD Learning Repository  
 
-#### Added
-- **Core Documentation Structure**
-  - Complete getting-started guide series
-  - Comprehensive deployment and provisioning documentation
-  - Detailed troubleshooting resources and debugging guides
-  - Pre-deployment validation tools and procedures
+#### Added  
+- **Core Documentation Structure**  
+  - Complete getting-started guide series  
+  - Comprehensive deployment and provisioning documentation  
+  - Detailed troubleshooting resources and debugging guides  
+  - Pre-deployment validation tools and procedures  
 
-- **Getting Started Module**
-  - AZD Basics: Core concepts and terminology
-  - Installation Guide: Platform-specific setup instructions
-  - Configuration Guide: Environment setup and authentication
-  - First Project Tutorial: Step-by-step hands-on learning
+- **Getting Started Module**  
+  - AZD Basics: Core concepts and terminology  
+  - Installation Guide: Platform-specific setup instructions  
+  - Configuration Guide: Environment setup and authentication  
+  - First Project Tutorial: Step-by-step hands-on learning  
 
-- **Deployment and Provisioning Module**
-  - Deployment Guide: Complete workflow documentation
-  - Provisioning Guide: Infrastructure as Code with Bicep
-  - Best practices for production deployments
-  - Multi-service architecture patterns
+- **Deployment and Provisioning Module**  
+  - Deployment Guide: Complete workflow documentation  
+  - Provisioning Guide: Infrastructure as Code with Bicep  
+  - Best practices for production deployments  
+  - Multi-service architecture patterns  
 
-- **Pre-deployment Validation Module**
-  - Capacity Planning: Azure resource availability validation
-  - SKU Selection: Comprehensive service tier guidance
-  - Pre-flight Checks: Automated validation scripts (PowerShell and Bash)
-  - Cost estimation and budget planning tools
+- **Pre-deployment Validation Module**  
+  - Capacity Planning: Azure resource availability validation  
+  - SKU Selection: Comprehensive service tier guidance  
+  - Pre-flight Checks: Automated validation scripts (PowerShell and Bash)  
+  - Cost estimation and budget planning tools  
 
-- **Troubleshooting Module**
-  - Common Issues: Frequently encountered problems and solutions
-  - Debugging Guide: Systematic troubleshooting methodologies
-  - Advanced diagnostic techniques and tools
-  - Performance monitoring and optimization
+- **Troubleshooting Module**  
+  - Common Issues: Frequently encountered problems and solutions  
+  - Debugging Guide: Systematic troubleshooting methodologies  
+  - Advanced diagnostic techniques and tools  
+  - Performance monitoring and optimization  
 
-- **Resources and References**
-  - Command Cheat Sheet: Quick reference for essential commands
-  - Glossary: Comprehensive terminology and acronym definitions
-  - FAQ: Detailed answers to common questions
-  - External resource links and community connections
+- **Resources and References**  
+  - Command Cheat Sheet: Quick reference for essential commands  
+  - Glossary: Comprehensive terminology and acronym definitions  
+  - FAQ: Detailed answers to common questions  
+  - External resource links and community connections  
 
-- **Examples and Templates**
-  - Simple Web Application example
-  - Static Website deployment template
-  - Container Application configuration
-  - Database integration patterns
-  - Microservices architecture examples
-  - Serverless function implementations
+- **Examples and Templates**  
+  - Simple Web Application example  
+  - Static Website deployment template  
+  - Container Application configuration  
+  - Database integration patterns  
+  - Microservices architecture examples  
+  - Serverless function implementations  
 
-#### Features
-- **Multi-Platform Support**: Installation and configuration guides for Windows, macOS, and Linux
-- **Multiple Skill Levels**: Content designed for students through professional developers
-- **Practical Focus**: Hands-on examples and real-world scenarios
-- **Comprehensive Coverage**: From basic concepts to advanced enterprise patterns
-- **Security-First Approach**: Security best practices integrated throughout
-- **Cost Optimization**: Guidance for cost-effective deployments and resource management
+#### Features  
+- **Multi-Platform Support**: Installation and configuration guides for Windows, macOS, and Linux  
+- **Multiple Skill Levels**: Content designed for students through professional developers  
+- **Practical Focus**: Hands-on examples and real-world scenarios  
+- **Comprehensive Coverage**: From basic concepts to advanced enterprise patterns  
+- **Security-First Approach**: Security best practices integrated throughout  
+- **Cost Optimization**: Guidance for cost-effective deployments and resource management  
 
-#### Documentation Quality
-- **Detailed Code Examples**: Practical, tested code samples
-- **Step-by-Step Instructions**: Clear, actionable guidance
-- **Comprehensive Error Handling**: Troubleshooting for common issues
-- **Best Practices Integration**: Industry standards and recommendations
-- **Version Compatibility**: Up-to-date with latest Azure services and azd features
+#### Documentation Quality  
+- **Detailed Code Examples**: Practical, tested code samples  
+- **Step-by-Step Instructions**: Clear, actionable guidance  
+- **Comprehensive Error Handling**: Troubleshooting for common issues  
+- **Best Practices Integration**: Industry standards and recommendations  
+- **Version Compatibility**: Up-to-date with latest Azure services and azd features  
 
-## Planned Future Enhancements
+## Planned Future Enhancements  
 
-### Version 3.1.0 (Planned)
-#### AI Platform Expansion
+### Version 3.1.0 (Planned)  
+#### AI Platform Expansion  
 - **Multi-Model Support**: Integration patterns for Hugging Face, Azure Machine Learning, and custom models
 - **AI Agent Frameworks**: Templates for LangChain, Semantic Kernel, and AutoGen deployments
 - **Advanced RAG Patterns**: Vector database options beyond Azure AI Search (Pinecone, Weaviate, etc.)
 - **AI Observability**: Enhanced monitoring for model performance, token usage, and response quality
 
 #### Developer Experience
-- **VS Code Extension**: Integrated AZD + AI Foundry development experience
+- **VS Code Extension**: Integrated AZD + Microsoft Foundry development experience
 - **GitHub Copilot Integration**: AI-assisted AZD template generation
 - **Interactive Tutorials**: Hands-on coding exercises with automated validation for AI scenarios
 - **Video Content**: Supplementary video tutorials for visual learners focusing on AI deployments
@@ -1019,5 +1071,5 @@ When major versions are released, we provide:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -2,23 +2,23 @@
 
 This directory contains comprehensive examples for deploying containerized applications to Azure Container Apps using Azure Developer CLI (AZD). These examples demonstrate real-world patterns, best practices, and production-ready configurations.
 
-## 📚 Table of Contents
+## 📚 Inhoudsopgave
 
-- [Overzicht](../../../../examples/container-app)
-- [Vereisten](../../../../examples/container-app)
-- [Snelstartvoorbeelden](../../../../examples/container-app)
-- [Productievoorbeelden](../../../../examples/container-app)
-- [Geavanceerde patronen](../../../../examples/container-app)
-- [Beste praktijken](../../../../examples/container-app)
+- [Overzicht](#overview)
+- [Vereisten](#prerequisites)
+- [Snelstartvoorbeelden](#quick-start-examples)
+- [Productievoorbeelden](#production-examples)
+- [Geavanceerde patronen](#advanced-patterns)
+- [Beste praktijken](#best-practices)
 
 ## Overview
 
 Azure Container Apps is a fully managed serverless container platform that enables you to run microservices and containerized applications without managing infrastructure. When combined with AZD, you get:
 
-- **Vereenvoudigde implementatie**: Met één opdracht worden containers en de infrastructuur uitgerold
-- **Automatisch schalen**: Schaalt tot nul en schaalt uit op basis van HTTP-verkeer of gebeurtenissen
-- **Geïntegreerde netwerkfunctionaliteit**: Ingebouwde service-ontdekking en verkeersverdeling
-- **Beheerde identiteit**: Veilige authenticatie voor Azure-resources
+- **Vereenvoudigde implementatie**: Eén opdracht implementeert containers met infrastructuur
+- **Automatische schaalverdeling**: Schaal naar nul en schaal uit op basis van HTTP-verkeer of gebeurtenissen
+- **Geïntegreerde netwerken**: Ingebouwde service discovery en verkeerssplitsing
+- **Beheerde identiteit**: Veilige authenticatie naar Azure-resources
 - **Kostenoptimalisatie**: Betaal alleen voor de resources die je gebruikt
 
 ## Prerequisites
@@ -35,15 +35,15 @@ az version
 # Controleer Docker (voor het bouwen van aangepaste images)
 docker --version
 
-# Log in bij Azure
+# Aanmelden bij Azure
 azd auth login
 az login
 ```
 
 **Vereiste Azure-resources:**
 - Actief Azure-abonnement
-- Machtigingen voor het aanmaken van resourcegroepen
-- Toegang tot de Container Apps-omgeving
+- Machtigingen om resourcegroepen te maken
+- Toegang tot Container Apps-omgeving
 
 ## Quick Start Examples
 
@@ -65,13 +65,13 @@ services:
     host: containerapp
 ```
 
-**Deployment Steps:**
+**Implementeerstappen:**
 
 ```bash
-# Initialiseren vanaf sjabloon
+# Initialiseren vanuit sjabloon
 azd init --template todo-python-mongo
 
-# Voorzie de infrastructuur en voer de uitrol uit
+# Infrastructuur voorzien en uitrollen
 azd up
 
 # Test de uitrol
@@ -80,8 +80,8 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
 **Belangrijkste kenmerken:**
-- Automatisch schalen van 0 tot 10 replica's
-- Health-probes en liveness-controles
+- Auto-scaling van 0 tot 10 replicas
+- Health probes en liveness checks
 - Injectie van omgevingsvariabelen
 - Integratie met Application Insights
 
@@ -97,14 +97,14 @@ azd init --template todo-nodejs-mongo
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
-# Implementeer
+# Uitrollen
 azd up
 
 # Bekijk logs via Azure Monitor
 azd monitor --logs
 ```
 
-**Infrastructure Highlights:**
+**Infrastructuurhoogtepunten:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -158,7 +158,7 @@ azd init --template todo-csharp-sql-swa-func
 # Controleer configuratie
 cat azure.yaml
 
-# Implementeer beide diensten
+# Implementeer beide services
 azd up
 
 # Open de applicatie
@@ -169,7 +169,7 @@ azd show --output json | jq -r '.services.web.endpoint' | xargs start
 
 ### Example 1: Microservices Architecture
 
-**Scenario**: E-commerceapplicatie met meerdere microservices
+**Scenario**: E-commerce application with multiple microservices
 
 **Directory Structure:**
 ```
@@ -191,7 +191,7 @@ microservices-demo/
     └── payment-service/
 ```
 
-**azure.yaml Configuratie:**
+**azure.yaml Configuration:**
 ```yaml
 name: microservices-ecommerce
 services:
@@ -211,9 +211,9 @@ services:
     host: containerapp
 ```
 
-**Implementatie:**
+**Deployment:**
 ```bash
-# Project initialiseren
+# Initialiseer project
 azd init
 
 # Stel productieomgeving in
@@ -224,16 +224,16 @@ azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
 
-# Implementeer alle diensten
+# Rol alle services uit
 azd up
 
-# Bewaak de implementatie
+# Bewaak de uitrol
 azd monitor --overview
 ```
 
 ### Example 2: AI-Powered Container App
 
-**Scenario**: AI-chatapplicatie met Azure OpenAI-integratie
+**Scenario**: AI chat application with Microsoft Foundry Models integration
 
 **Bestand: src/ai-chat/app.py**
 ```python
@@ -244,7 +244,7 @@ import openai
 
 app = Flask(__name__)
 
-# Gebruik beheerde identiteit voor veilige toegang
+# Gebruik Managed Identity voor beveiligde toegang
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -253,12 +253,12 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # Haal OpenAI-sleutel op uit Key Vault
+    # Haal de OpenAI-sleutel uit Key Vault
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[{"role": "user", "content": user_message}]
     )
     
@@ -328,12 +328,12 @@ azd env new dev
 
 # OpenAI configureren
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
-azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
+azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4.1"
 
 # Uitrollen
 azd up
 
-# Test de API
+# De API testen
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat \
   -H "Content-Type: application/json" \
   -d '{"message": "Hello, how are you?"}'
@@ -341,7 +341,7 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
 
 ### Example 3: Background Worker with Queue Processing
 
-**Scenario**: Orderverwerkingssysteem met berichtenwachtrij
+**Scenario**: Order processing system with message queue
 
 **Directory Structure:**
 ```
@@ -408,7 +408,7 @@ services:
 # Initialiseren
 azd init
 
-# Uitrollen met wachtrijconfiguratie
+# Implementeren met wachtrijconfiguratie
 azd up
 
 # Schaal de worker op basis van de lengte van de wachtrij
@@ -425,19 +425,19 @@ az containerapp update \
 ### Pattern 1: Blue-Green Deployment
 
 ```bash
-# Creëer nieuwe revisie zonder verkeer
+# Maak een nieuwe revisie zonder verkeer
 azd deploy api --revision-suffix blue --no-traffic
 
 # Test de nieuwe revisie
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Verdeel verkeer (20% naar blauw, 80% naar huidige)
+# Verdeel het verkeer (20% naar blauw, 80% naar de huidige)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# Volledige overstap naar blauw
+# Volledige overschakeling naar blauw
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -458,7 +458,7 @@ az containerapp ingress traffic set \
 }
 ```
 
-**Implementatiescript:**
+**Deployment Script:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
@@ -466,7 +466,7 @@ az containerapp ingress traffic set \
 # Rol nieuwe revisie uit met 10% van het verkeer
 azd deploy api --revision-mode multiple
 
-# Controleer statistieken
+# Houd metrics in de gaten
 azd monitor --service api --duration 5m
 
 # Verhoog het verkeer geleidelijk
@@ -599,7 +599,7 @@ def create_order():
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# Voorzie resources van tags voor kostenbewaking
+# Voorzie resources van tags voor kostenregistratie
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
@@ -673,7 +673,7 @@ azd monitor --logs
 # Of gebruik de Azure CLI voor Container Apps:
 az containerapp logs show --name api --resource-group rg-myapp --follow
 
-# Bewaak metrics
+# Controleer metrics
 azd monitor --live
 
 # Maak waarschuwingen aan
@@ -707,7 +707,7 @@ az consumption budget create \
 
 ### 6. CI/CD Integration
 
-**GitHub Actions Example:**
+**GitHub Actions-voorbeeld:**
 ```yaml
 name: Deploy to Azure Container Apps
 
@@ -743,35 +743,35 @@ jobs:
 # Initialiseer nieuw container-app-project
 azd init --template <template-name>
 
-# Infrastructuur en applicatie implementeren
+# Implementeer infrastructuur en applicatie
 azd up
 
-# Alleen applicatiecode implementeren (infrastructuur overslaan)
+# Implementeer alleen applicatiecode (sla infrastructuur over)
 azd deploy
 
-# Alleen infrastructuur inrichten
+# Voorzie alleen infrastructuur
 azd provision
 
-# Bekijk uitgerolde resources
+# Bekijk gedeployde resources
 azd show
 
-# Logs streamen met azd monitor of de Azure CLI
+# Stream logs met azd monitor of Azure CLI
 azd monitor --logs
 # az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
-# Applicatie monitoren
+# Monitor applicatie
 azd monitor --overview
 
-# Resources opruimen
+# Ruim resources op
 azd down --force --purge
 ```
 
 ## Troubleshooting
 
-### Issue: Container fails to start
+### Probleem: Container start niet
 
 ```bash
-# Controleer de logboeken met Azure CLI
+# Controleer logs met Azure CLI
 az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
 # Bekijk containergebeurtenissen
@@ -785,7 +785,7 @@ docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Issue: Can't access container app endpoint
+### Probleem: Kan geen toegang krijgen tot container app-endpoint
 
 ```bash
 # Controleer de ingress-configuratie
@@ -801,7 +801,7 @@ az containerapp ingress update \
   --external true
 ```
 
-### Issue: Performance problems
+### Probleem: Prestatieproblemen
 
 ```bash
 # Controleer het gebruik van middelen
@@ -809,7 +809,7 @@ az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Schaal de middelen op
+# Schaal middelen op
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -819,29 +819,29 @@ az containerapp update \
 
 ## Additional Resources and Examples
 - [Microservices-voorbeeld](./microservices/README.md)
-- [Eenvoudig Flash-API-voorbeeld](./simple-flask-api/README.md)
-- [Azure Container Apps-documentatie](https://learn.microsoft.com/azure/container-apps/)
-- [AZD-sjabloongalerij](https://azure.github.io/awesome-azd/)
-- [Container Apps-voorbeelden](https://github.com/Azure-Samples/container-apps-samples)
-- [Bicep-sjablonen](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+- [Simple Flash API Example](./simple-flask-api/README.md)
+- [Azure Container Apps Documentation](https://learn.microsoft.com/azure/container-apps/)
+- [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
+- [Container Apps Samples](https://github.com/Azure-Samples/container-apps-samples)
+- [Bicep Templates](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ## Contributing
 
 To contribute new container app examples:
 
-1. Maak een nieuwe subdirectory met je voorbeeld
-2. Voeg volledige `azure.yaml`, `infra/` en `src/` bestanden toe
-3. Voeg een uitgebreide README toe met implementatie-instructies
-4. Test de implementatie met `azd up`
-5. Dien een pull request in
+1. Create a new subdirectory with your example
+2. Include complete `azure.yaml`, `infra/`, and `src/` files
+3. Add comprehensive README with deployment instructions
+4. Test deployment with `azd up`
+5. Submit a pull request
 
 ---
 
-**Hulp nodig?** Sluit je aan bij de [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) community voor ondersteuning en vragen.
+**Hulp nodig?** Sluit je aan bij de [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) gemeenschap voor ondersteuning en vragen.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dit document is vertaald met behulp van de AI-vertalingsdienst Co-op Translator (https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, houd er rekening mee dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+**Disclaimer**:
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we ons best doen om nauwkeurig te zijn, houd er rekening mee dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor enige misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

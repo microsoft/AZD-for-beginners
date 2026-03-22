@@ -1,126 +1,104 @@
-# Azure OpenAI チャットアプリケーション
+# Microsoft Foundry Models チャットアプリケーション
 
-**学習レベル:** 中級 ⭐⭐ | **所要時間:** 35-45分 | **コスト:** 月額 $50-200
+**Learning Path:** 中級 ⭐⭐ | **Time:** 35-45 分 | **Cost:** $50-200/月
 
-Azure Developer CLI (azd) を使用してデプロイされた完全な Azure OpenAI チャットアプリケーション。この例では、GPT-4 のデプロイ、セキュアな API アクセス、シンプルなチャットインターフェースを実現します。
+Azure Developer CLI (azd) を使用してデプロイされた完全な Microsoft Foundry Models チャットアプリケーションの例です。この例では gpt-4.1 のデプロイ、セキュアな API アクセス、およびシンプルなチャットインターフェイスを示します。
 
-## 🎯 学べること
+## 🎯 学習内容
 
-- GPT-4 モデルを使用した Azure OpenAI Service のデプロイ
-- Key Vault を使用した OpenAI API キーのセキュリティ保護
-- Python を使ったシンプルなチャットインターフェースの構築
-- トークン使用量とコストのモニタリング
-- レート制限とエラーハンドリングの実装
+- gpt-4.1 モデルで Microsoft Foundry Models サービスをデプロイする
+- Key Vault で OpenAI API キーを安全に管理する
+- Python でシンプルなチャットインターフェイスを構築する
+- トークン使用量とコストを監視する
+- レート制限とエラー処理を実装する
 
-## 📦 含まれる内容
+## 📦 含まれるもの
 
-✅ **Azure OpenAI Service** - GPT-4 モデルのデプロイ  
-✅ **Python チャットアプリ** - シンプルなコマンドラインチャットインターフェース  
-✅ **Key Vault 統合** - API キーのセキュアな保存  
-✅ **ARM テンプレート** - 完全なインフラストラクチャコード  
-✅ **コストモニタリング** - トークン使用量の追跡  
-✅ **レート制限** - クォータの枯渇を防止  
+✅ **Microsoft Foundry Models Service** - gpt-4.1 モデルのデプロイ  
+✅ **Python Chat App** - シンプルなコマンドラインチャットインターフェイス  
+✅ **Key Vault Integration** - API キーの安全な格納  
+✅ **ARM Templates** - 完全なインフラストラクチャをコード化  
+✅ **Cost Monitoring** - トークン使用量の追跡  
+✅ **Rate Limiting** - クォータ枯渇の防止  
 
-## アーキテクチャ
+## Architecture
 
+```mermaid
+graph TD
+    App[Python チャットアプリケーション<br/>ローカル/クラウド<br/>コマンドラインインターフェース<br/>会話履歴<br/>トークン使用量の追跡] -- "HTTPS (APIキー)" --> Foundry[Microsoft Foundry モデルサービス<br/>gpt-4.1 モデル<br/>毎分20Kトークンの処理能力<br/>マルチリージョンフェイルオーバー]
+    Foundry --> KV[Azure Key Vault<br/>OpenAI APIキー<br/>エンドポイントURL]
+    Foundry -. マネージドID .-> KV
 ```
-┌─────────────────────────────────────────────┐
-│   Python Chat Application (Local/Cloud)    │
-│   - Command-line interface                 │
-│   - Conversation history                   │
-│   - Token usage tracking                   │
-└──────────────────┬──────────────────────────┘
-                   │ HTTPS (API Key)
-                   ▼
-┌─────────────────────────────────────────────┐
-│   Azure OpenAI Service                      │
-│   ┌───────────────────────────────────────┐ │
-│   │   GPT-4 Model                         │ │
-│   │   - 20K tokens/min capacity           │ │
-│   │   - Multi-region failover (optional)  │ │
-│   └───────────────────────────────────────┘ │
-│                                             │
-│   Managed Identity ───────────────────────┐ │
-└────────────────────────────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────────┐
-│   Azure Key Vault                           │
-│   - OpenAI API Key (secret)                 │
-│   - Endpoint URL (secret)                   │
-└─────────────────────────────────────────────┘
-```
+## Prerequisites
 
-## 前提条件
-
-### 必須
+### Required
 
 - **Azure Developer CLI (azd)** - [インストールガイド](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure サブスクリプション** (OpenAI アクセス付き) - [アクセス申請](https://aka.ms/oai/access)
-- **Python 3.9+** - [Python のインストール](https://www.python.org/downloads/)
+- **Azure subscription** with OpenAI access - [アクセスをリクエスト](https://aka.ms/oai/access)
+- **Python 3.9+** - [Python をインストール](https://www.python.org/downloads/)
 
-### 前提条件の確認
+### Verify Prerequisites
 
 ```bash
-# azdバージョンを確認（1.5.0以上が必要）
+# azd のバージョンを確認（1.5.0 以上が必要）
 azd version
 
-# Azureログインを確認
+# Azure へのログインを確認
 azd auth login
 
-# Pythonバージョンを確認
+# Python のバージョンを確認
 python --version  # または python3 --version
 
-# OpenAIアクセスを確認（Azureポータルで確認）
+# OpenAI へのアクセスを確認（Azure ポータルで確認）
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus
 ```
 
-> **⚠️ 重要:** Azure OpenAI を利用するには申請が必要です。まだ申請していない場合は [aka.ms/oai/access](https://aka.ms/oai/access) をご覧ください。承認には通常 1～2 営業日かかります。
+> **⚠️ 重要:** Microsoft Foundry Models は申請による承認が必要です。まだ申請していない場合は、[aka.ms/oai/access](https://aka.ms/oai/access) をご確認ください。承認には通常 1-2 営業日かかります。
 
 ## ⏱️ デプロイのタイムライン
 
-| フェーズ | 所要時間 | 実行内容 |
-|---------|----------|----------|
-| 前提条件の確認 | 2-3分 | OpenAI クォータの利用可能性を確認 |
-| インフラのデプロイ | 8-12分 | OpenAI、Key Vault、モデルのデプロイ |
-| アプリケーションの設定 | 2-3分 | 環境と依存関係のセットアップ |
-| **合計** | **12-18分** | GPT-4 とのチャットが可能に |
+| フェーズ | 所要時間 | 内容 |
+|-------|----------|--------------|
+| 前提条件の確認 | 2-3 分 | OpenAI のクォータ可用性を確認 |
+| インフラのデプロイ | 8-12 分 | OpenAI、Key Vault、モデル展開の作成 |
+| アプリケーションの設定 | 2-3 分 | 環境と依存関係を設定 |
+| <strong>合計</strong> | **12-18 分** | gpt-4.1 でチャットできる状態になります |
 
-**注意:** 初回の OpenAI デプロイは、モデルのプロビジョニングにより時間がかかる場合があります。
+**注意:** 初回の OpenAI デプロイはモデルのプロビジョニングにより時間がかかる場合があります。
 
 ## クイックスタート
 
 ```bash
-# 例に移動する
+# サンプルに移動してください
 cd examples/azure-openai-chat
 
-# 環境を初期化する
+# 環境を初期化してください
 azd env new myopenai
 
-# すべてをデプロイする（インフラストラクチャ + 設定）
+# すべてをデプロイしてください (インフラ + 構成)
 azd up
-# 次のプロンプトが表示されます:
-# 1. Azureサブスクリプションを選択する
-# 2. OpenAIが利用可能な場所を選択する（例: eastus, eastus2, westus）
-# 3. デプロイメントに12～18分待つ
+# 次の操作が求められます:
+# 1. Azure サブスクリプションを選択してください
+# 2. OpenAI が利用可能なリージョンを選択してください (例: eastus, eastus2, westus)
+# 3. デプロイが完了するまで12～18分お待ちください
 
-# Pythonの依存関係をインストールする
+# Python の依存関係をインストールしてください
 pip install -r requirements.txt
 
-# チャットを開始する！
+# チャットを始めてください!
 python chat.py
 ```
 
 **期待される出力:**
 ```
-🤖 Azure OpenAI Chat Application
-Connected to: GPT-4 (eastus)
+🤖 Microsoft Foundry Models Chat Application
+Connected to: gpt-4.1 (eastus)
 Type your message (or 'quit' to exit)
 
-You: Hello! Tell me about Azure OpenAI.
-Assistant: Azure OpenAI Service provides REST API access to OpenAI's powerful language models including GPT-4, GPT-3.5-Turbo, and Embeddings...
+You: Hello! Tell me about Microsoft Foundry Models.
+Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's powerful language models including gpt-4.1, GPT-3.5-Turbo, and Embeddings...
 
 [Tokens used: 145 | Estimated cost: $0.0044]
 ```
@@ -133,22 +111,22 @@ Assistant: Azure OpenAI Service provides REST API access to OpenAI's powerful la
 # 展開されたリソースを表示
 azd show
 
-# 予想される出力は次のようになります:
-# - OpenAIサービス: (リソース名)
+# 期待される出力は次のとおりです:
+# - OpenAI サービス: (リソース名)
 # - Key Vault: (リソース名)
-# - デプロイメント: gpt-4
-# - ロケーション: eastus (または選択した地域)
+# - デプロイ: gpt-4.1
+# - 場所: eastus (または選択したリージョン)
 ```
 
 ### ステップ 2: OpenAI API のテスト
 
 ```bash
-# OpenAIエンドポイントとキーを取得する
+# OpenAIのエンドポイントとキーを取得する
 OPENAI_ENDPOINT=$(azd env get-value AZURE_OPENAI_ENDPOINT)
 OPENAI_KEY=$(azd env get-value AZURE_OPENAI_API_KEY)
 
 # API呼び出しをテストする
-curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4/chat/completions?api-version=2024-08-01-preview" \
+curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
   -d '{
@@ -157,7 +135,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4/chat/completions?api-version=202
   }'
 ```
 
-**期待されるレスポンス:**
+**期待される応答:**
 ```json
 {
   "choices": [
@@ -179,7 +157,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4/chat/completions?api-version=202
 ### ステップ 3: Key Vault アクセスの確認
 
 ```bash
-# Key Vault内のシークレットを一覧表示
+# Key Vault のシークレットを一覧表示する
 KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
 
 az keyvault secret list \
@@ -193,12 +171,12 @@ az keyvault secret list \
 - `openai-endpoint`
 
 **成功基準:**
-- ✅ GPT-4 を使用した OpenAI サービスがデプロイされている
-- ✅ API 呼び出しが有効なレスポンスを返す
+- ✅ gpt-4.1 で OpenAI サービスがデプロイされている
+- ✅ API コールが有効なレスポンスを返す
 - ✅ シークレットが Key Vault に保存されている
 - ✅ トークン使用量の追跡が機能している
 
-## プロジェクト構造
+## プロジェクト構成
 
 ```
 azure-openai-chat/
@@ -217,69 +195,69 @@ azure-openai-chat/
 
 ## アプリケーションの機能
 
-### チャットインターフェース (`chat.py`)
+### チャットインターフェイス (`chat.py`)
 
-このチャットアプリケーションには以下が含まれます:
+チャットアプリケーションには以下が含まれます:
 
-- **会話履歴** - メッセージ間のコンテキストを保持
-- **トークンカウント** - 使用量を追跡し、コストを推定
-- **エラーハンドリング** - レート制限や API エラーの優雅な処理
-- **コスト推定** - メッセージごとのリアルタイムコスト計算
-- **ストリーミング対応** - オプションでストリーミングレスポンスをサポート
+- <strong>会話履歴</strong> - メッセージ間でコンテキストを維持
+- <strong>トークンカウント</strong> - 使用量を追跡しコストを見積もる
+- <strong>エラー処理</strong> - レート制限や API エラーを適切に処理
+- <strong>コスト見積もり</strong> - メッセージごとのリアルタイムコスト計算
+- <strong>ストリーミングサポート</strong> - オプションのストリーミング応答
 
 ### コマンド
 
-チャット中に使用可能なコマンド:
-- `quit` または `exit` - セッションを終了
+チャット中に使用できるコマンド:
+- `quit` or `exit` - セッションを終了
 - `clear` - 会話履歴をクリア
 - `tokens` - 総トークン使用量を表示
-- `cost` - 推定総コストを表示
+- `cost` - 推定合計コストを表示
 
 ### 設定 (`config.py`)
 
-環境変数から設定を読み込み:
+環境変数から設定を読み込みます:
 ```python
-AZURE_OPENAI_ENDPOINT  # キーボールトから
-AZURE_OPENAI_API_KEY   # キーボールトから
-AZURE_OPENAI_MODEL     # デフォルト: gpt-4
-AZURE_OPENAI_MAX_TOKENS # デフォルト: 800
+AZURE_OPENAI_ENDPOINT  # Key Vault から
+AZURE_OPENAI_API_KEY   # Key Vault から
+AZURE_OPENAI_MODEL     # 既定: gpt-4.1
+AZURE_OPENAI_MAX_TOKENS # 既定: 800
 ```
 
 ## 使用例
 
-### 基本的なチャット
+### 基本チャット
 
 ```bash
 python chat.py
 ```
 
-### カスタムモデルでのチャット
+### カスタムモデルでチャット
 
 ```bash
 export AZURE_OPENAI_MODEL=gpt-35-turbo
 python chat.py
 ```
 
-### ストリーミング対応のチャット
+### ストリーミングでチャット
 
 ```bash
 python chat.py --stream
 ```
 
-### 会話例
+### 例の会話
 
 ```
-You: Explain Azure OpenAI Service in 3 sentences.
-Assistant: Azure OpenAI Service is Microsoft Azure's cloud platform offering 
+You: Explain Microsoft Foundry Models Service in 3 sentences.
+Assistant: Microsoft Foundry Models Service is Microsoft Azure's cloud platform offering 
 that provides access to OpenAI's powerful language models. It enables developers 
-to integrate capabilities like GPT-4 into their applications with enterprise-grade 
+to integrate capabilities like gpt-4.1 into their applications with enterprise-grade 
 security and compliance. The service includes features for content filtering, 
 abuse monitoring, and responsible AI practices.
 
 [Tokens used: 89 | Estimated cost: $0.0027]
 
 You: What models are available?
-Assistant: Azure OpenAI Service offers several model families including GPT-4 
+Assistant: Microsoft Foundry Models Service offers several model families including gpt-4.1 
 (most capable), GPT-3.5-Turbo (faster and cost-effective), and Embeddings models 
 for vector search. Each model has different capabilities, pricing, and token limits.
 
@@ -290,32 +268,32 @@ Total session: 156 tokens | $0.0047
 
 ## コスト管理
 
-### トークンプライシング (GPT-4)
+### トークン価格（gpt-4.1）
 
-| モデル | 入力 (1K トークンあたり) | 出力 (1K トークンあたり) |
-|-------|--------------------------|--------------------------|
-| GPT-4 | $0.03 | $0.06 |
+| モデル | 入力（1K トークンあたり） | 出力（1K トークンあたり） |
+|-------|----------------------|------------------------|
+| gpt-4.1 | $0.03 | $0.06 |
 | GPT-3.5-Turbo | $0.0015 | $0.002 |
 
-### 月額コストの見積もり
+### 推定月間コスト
 
-使用パターンに基づく:
+利用パターンに基づく:
 
-| 使用レベル | メッセージ/日 | トークン/日 | 月額コスト |
-|-----------|--------------|------------|------------|
-| **軽量** | 20 メッセージ | 3,000 トークン | $3-5 |
-| **中程度** | 100 メッセージ | 15,000 トークン | $15-25 |
-| **重度** | 500 メッセージ | 75,000 トークン | $75-125 |
+| 利用レベル | 1日あたりのメッセージ数 | 1日あたりのトークン数 | 月間コスト |
+|-------------|--------------|------------|--------------|
+| <strong>ライト</strong> | 20 メッセージ | 3,000 トークン | $3-5 |
+| <strong>モデレート</strong> | 100 メッセージ | 15,000 トークン | $15-25 |
+| <strong>ヘビー</strong> | 500 メッセージ | 75,000 トークン | $75-125 |
 
-**基本インフラコスト:** 月額 $1-2 (Key Vault + 最小限のコンピュート)
+**基本インフラコスト:** $1-2/月（Key Vault + 最小限のコンピュート）
 
-### コスト削減のヒント
+### コスト最適化のヒント
 
 ```bash
-# 1. 簡単なタスクにはGPT-3.5-Turboを使用する（20倍安い）
+# 1. より簡単なタスクには GPT-3.5-Turbo を使用する（20倍安価）
 export AZURE_OPENAI_MODEL=gpt-35-turbo
 
-# 2. 短い応答には最大トークン数を減らす
+# 2. 最大トークン数を減らして応答を短くする
 export AZURE_OPENAI_MAX_TOKENS=400
 
 # 3. トークン使用量を監視する
@@ -330,13 +308,13 @@ az consumption budget create \
 
 ## モニタリング
 
-### トークン使用量の確認
+### トークン使用量の表示
 
 ```bash
 # Azure ポータルで:
-# OpenAI リソース → メトリクス → "トークントランザクション" を選択
+# OpenAI リソース → メトリクス → 「Token Transaction」を選択
 
-# または Azure CLI 経由で:
+# または Azure CLI で:
 az monitor metrics list \
   --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
   --metric "TokenTransaction" \
@@ -344,7 +322,7 @@ az monitor metrics list \
   --interval PT1M
 ```
 
-### API ログの確認
+### API ログの表示
 
 ```bash
 # ストリーム診断ログ
@@ -362,26 +340,26 @@ az monitor log-analytics query \
 
 ## トラブルシューティング
 
-### 問題: "アクセス拒否" エラー
+### 問題: "Access Denied" エラー
 
 **症状:** API 呼び出し時に 403 Forbidden
 
 **解決策:**
 ```bash
-# 1. OpenAIアクセスが承認されていることを確認する
+# 1. OpenAIへのアクセスが承認されていることを確認する
 az cognitiveservices account show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
 
-# 2. APIキーが正しいことを確認する
+# 2. APIキーが正しいか確認する
 azd env get-value AZURE_OPENAI_API_KEY
 
 # 3. エンドポイントURLの形式を確認する
 azd env get-value AZURE_OPENAI_ENDPOINT
-# 次の形式である必要があります: https://[name].openai.azure.com/
+# 次の形式であるべき: https://[name].openai.azure.com/
 ```
 
-### 問題: "レート制限超過"
+### 問題: "Rate Limit Exceeded"
 
 **症状:** 429 Too Many Requests
 
@@ -391,18 +369,18 @@ azd env get-value AZURE_OPENAI_ENDPOINT
 az cognitiveservices account deployment show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
-  --deployment-name gpt-4
+  --deployment-name gpt-4.1
 
-# 2. クォータの増加をリクエストする（必要に応じて）
-# Azureポータル → OpenAIリソース → クォータ → 増加をリクエスト
+# 2. クォータの増加を申請する（必要な場合）
+# Azure ポータルに移動 → OpenAI リソース → クォータ → 増加をリクエスト
 
-# 3. リトライロジックを実装する（chat.pyに既に実装済み）
-# アプリケーションは指数バックオフで自動的にリトライします
+# 3. 再試行ロジックを実装する（既に chat.py にあります）
+# アプリケーションは指数バックオフで自動的に再試行します
 ```
 
-### 問題: "モデルが見つかりません"
+### 問題: "Model Not Found"
 
-**症状:** デプロイメントで 404 エラー
+**症状:** デプロイ時に 404 エラー
 
 **解決策:**
 ```bash
@@ -415,19 +393,19 @@ az cognitiveservices account deployment list \
 echo $AZURE_OPENAI_MODEL
 
 # 3. 正しいデプロイメント名に更新する
-export AZURE_OPENAI_MODEL=gpt-4  # または gpt-35-turbo
+export AZURE_OPENAI_MODEL=gpt-4.1  # または gpt-35-turbo
 ```
 
-### 問題: 高いレイテンシー
+### 問題: 高いレイテンシ
 
-**症状:** 応答時間が遅い (>5 秒)
+**症状:** 応答が遅い（>5 秒）
 
 **解決策:**
 ```bash
-# 1. 地域の遅延を確認する
-# ユーザーに最も近い地域にデプロイする
+# 1. 地域ごとのレイテンシを確認する
+# ユーザーに最も近いリージョンにデプロイする
 
-# 2. より速い応答のためにmax_tokensを減らす
+# 2. より高速な応答のためにmax_tokensを減らす
 export AZURE_OPENAI_MAX_TOKENS=400
 
 # 3. より良いUXのためにストリーミングを使用する
@@ -439,10 +417,10 @@ python chat.py --stream
 ### 1. API キーの保護
 
 ```bash
-# キーをソース管理にコミットしないでください
-# Key Vault を使用する（既に設定済み）
+# キーをソース管理に決してコミットしないでください
+# Key Vault を使用してください（既に構成済み）
 
-# 定期的にキーをローテーションする
+# キーを定期的にローテーションしてください
 az cognitiveservices account keys regenerate \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
@@ -452,27 +430,27 @@ az cognitiveservices account keys regenerate \
 ### 2. コンテンツフィルタリングの実装
 
 ```python
-# Azure OpenAIには組み込みのコンテンツフィルタリングが含まれています
-# Azureポータルで構成します:
-# OpenAIリソース → コンテンツフィルター → カスタムフィルターを作成
+# Microsoft Foundry Modelsには組み込みのコンテンツフィルタリングが含まれています
+# Azure ポータルで設定:
+# OpenAI リソース → コンテンツ フィルター → カスタム フィルターを作成
 
-# カテゴリ: ヘイト、性的、暴力、自傷行為
-# レベル: 低、中、高フィルタリング
+# カテゴリ: ヘイト、性的コンテンツ、暴力、自傷行為
+# レベル: 低、中、高のフィルタリング
 ```
 
-### 3. マネージド ID の使用 (本番環境)
+### 3. マネージドIDを使用する（本番）
 
 ```bash
-# 本番環境へのデプロイでは、マネージドIDを使用してください
-# APIキーの代わりに（Azureでのアプリホスティングが必要です）
+# 本番環境へのデプロイでは、マネージド アイデンティティを使用してください
+# APIキーの代わりに使用してください（アプリを Azure 上でホストする必要があります）
 
-# infra/openai.bicep を更新して以下を含めてください:
+# infra/openai.bicep を更新して次を含めてください:
 # identity: { type: 'SystemAssigned' }
 ```
 
 ## 開発
 
-### ローカルでの実行
+### ローカルで実行
 
 ```bash
 # 依存関係をインストールする
@@ -481,26 +459,26 @@ pip install -r src/requirements.txt
 # 環境変数を設定する
 export AZURE_OPENAI_ENDPOINT="https://[name].openai.azure.com/"
 export AZURE_OPENAI_API_KEY="your-api-key"
-export AZURE_OPENAI_MODEL="gpt-4"
+export AZURE_OPENAI_MODEL="gpt-4.1"
 
 # アプリケーションを実行する
 python src/chat.py
 ```
 
-### テストの実行
+### テストを実行
 
 ```bash
-# テスト依存関係をインストールする
+# テストの依存関係をインストールする
 pip install pytest pytest-cov
 
 # テストを実行する
 pytest tests/ -v
 
-# カバレッジ付き
+# カバレッジを有効にして
 pytest tests/ --cov=src --cov-report=html
 ```
 
-### モデルデプロイメントの更新
+### モデルデプロイの更新
 
 ```bash
 # 異なるモデルバージョンをデプロイする
@@ -518,91 +496,91 @@ az cognitiveservices account deployment create \
 ## クリーンアップ
 
 ```bash
-# すべてのAzureリソースを削除する
+# すべての Azure リソースを削除する
 azd down --force --purge
 
-# これにより削除されます:
-# - OpenAIサービス
-# - Key Vault（90日間のソフト削除付き）
-# - リソースグループ
-# - すべてのデプロイメントと構成
+# これにより次のものが削除されます:
+# - OpenAI サービス
+# - Key Vault (90日間のソフトデリート付き)
+# - リソース グループ
+# - すべてのデプロイおよび構成
 ```
 
 ## 次のステップ
 
-### この例を拡張
+### この例の拡張
 
-1. **Web インターフェースの追加** - React/Vue フロントエンドの構築
+1. **Web インターフェイスを追加** - React/Vue フロントエンドを構築  
    ```bash
-   # azure.yamlにフロントエンドサービスを追加
-   # Azure Static Web Appsにデプロイ
+   # フロントエンドサービスを azure.yaml に追加する
+   # Azure Static Web Apps にデプロイする
    ```
 
-2. **RAG の実装** - Azure AI Search を使用したドキュメント検索の追加
+2. **RAG を実装** - Azure AI Search を使ったドキュメント検索を追加  
    ```python
-   # Azure Cognitive Searchを統合する
-   # ドキュメントをアップロードしてベクターインデックスを作成する
+   # Azure Cognitive Search を統合する
+   # ドキュメントをアップロードしてベクトルインデックスを作成する
    ```
 
-3. **関数呼び出しの追加** - ツール使用を有効化
+3. <strong>ファンクションコーリングを追加</strong> - ツールの使用を有効にする  
    ```python
-   # chat.pyで関数を定義する
-   # GPT-4に外部APIを呼び出させる
+   # chat.py に関数を定義する
+   # gpt-4.1 に外部 API を呼び出させる
    ```
 
-4. **マルチモデル対応** - 複数モデルのデプロイ
+4. <strong>マルチモデルサポート</strong> - 複数モデルをデプロイ  
    ```bash
-   # gpt-35-turbo、埋め込みモデルを追加
-   # モデルルーティングロジックを実装
+   # gpt-35-turbo と埋め込みモデルを追加する
+   # モデルのルーティングロジックを実装する
    ```
 
 ### 関連例
 
-- **[小売マルチエージェント](../retail-scenario.md)** - 高度なマルチエージェントアーキテクチャ
-- **[データベースアプリ](../../../../examples/database-app)** - 永続ストレージの追加
-- **[コンテナアプリ](../../../../examples/container-app)** - コンテナ化されたサービスとしてデプロイ
+- **[Retail Multi-Agent](../retail-scenario.md)** - 進んだマルチエージェントアーキテクチャ
+- **[Database App](../../../../examples/database-app)** - 永続ストレージを追加
+- **[Container Apps](../../../../examples/container-app)** - コンテナ化されたサービスとしてデプロイ
 
 ### 学習リソース
 
-- 📚 [AZD 初心者向けコース](../../README.md) - メインコースホーム
-- 📚 [Azure OpenAI ドキュメント](https://learn.microsoft.com/azure/ai-services/openai/) - 公式ドキュメント
-- 📚 [OpenAI API リファレンス](https://platform.openai.com/docs/api-reference) - API 詳細
+- 📚 [AZD For Beginners Course](../../README.md) - コースのメインページ
+- 📚 [Microsoft Foundry Models ドキュメント](https://learn.microsoft.com/azure/ai-services/openai/) - 公式ドキュメント
+- 📚 [OpenAI API リファレンス](https://platform.openai.com/docs/api-reference) - API の詳細
 - 📚 [責任ある AI](https://www.microsoft.com/ai/responsible-ai) - ベストプラクティス
 
 ## 追加リソース
 
 ### ドキュメント
-- **[Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/)** - 完全ガイド
-- **[GPT-4 モデル](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - モデルの機能
-- **[コンテンツフィルタリング](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - 安全機能
+- **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - 完全なガイド
+- **[gpt-4.1 モデル](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - モデルの機能
+- **[コンテンツフィルタリング](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - セーフティ機能
 - **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd リファレンス
 
 ### チュートリアル
-- **[OpenAI クイックスタート](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - 初回デプロイ
-- **[チャット補完](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - チャットアプリの構築
-- **[関数呼び出し](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - 高度な機能
+- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - 最初のデプロイ
+- **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - チャットアプリの構築
+- **[Function Calling](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - 高度な機能
 
 ### ツール
-- **[Azure OpenAI Studio](https://oai.azure.com/)** - Web ベースのプレイグラウンド
-- **[プロンプトエンジニアリングガイド](https://platform.openai.com/docs/guides/prompt-engineering)** - より良いプロンプトの作成
-- **[トークン計算機](https://platform.openai.com/tokenizer)** - トークン使用量の見積もり
+- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Web ベースのプレイグラウンド
+- **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - プロンプト作成のガイド
+- **[Token Calculator](https://platform.openai.com/tokenizer)** - トークン使用量を見積もる
 
 ### コミュニティ
-- **[Azure AI Discord](https://discord.gg/azure)** - コミュニティからのサポート
+- **[Azure AI Discord](https://discord.gg/azure)** - コミュニティから支援を得る
 - **[GitHub Discussions](https://github.com/Azure-Samples/openai/discussions)** - Q&A フォーラム
-- **[Azure ブログ](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - 最新情報
+- **[Azure Blog](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - 最新情報
 
 ---
 
-**🎉 成功！** Azure OpenAI をデプロイし、動作するチャットアプリケーションを構築しました。GPT-4 の機能を探索し、さまざまなプロンプトやユースケースを試してみてください。
+**🎉 おめでとうございます！** Microsoft Foundry Models をデプロイし、動作するチャットアプリケーションを構築しました。gpt-4.1 の機能を試し、さまざまなプロンプトやユースケースを試してください。
 
-**質問がありますか？** [問題を報告](https://github.com/microsoft/AZD-for-beginners/issues) または [FAQ](../../resources/faq.md) を確認してください。
+**質問がありますか？** [Issue を開く](https://github.com/microsoft/AZD-for-beginners/issues) または [よくある質問](../../resources/faq.md) を確認してください
 
-**コストアラート:** テストが終了したら `azd down` を実行して、継続的な料金 (~月額 $50-100) を回避してください。
+**コスト注意:** テストが終わったら継続的な課金を避けるために `azd down` を実行することを忘れないでください（アクティブ使用で約 $50-100/月）。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責事項**:  
-この文書は、AI翻訳サービス[Co-op Translator](https://github.com/Azure/co-op-translator)を使用して翻訳されています。正確性を期すよう努めておりますが、自動翻訳には誤りや不正確さが含まれる可能性があります。原文（元の言語で記載された文書）を公式な情報源としてご参照ください。重要な情報については、専門の人間による翻訳をお勧めします。本翻訳の利用に起因する誤解や誤認について、当方は一切の責任を負いかねます。
+**免責事項**:
+この文書は AI 翻訳サービス [Co-op トランスレーター](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性には努めていますが、自動翻訳には誤りや不正確な表現が含まれている可能性があることをご了承ください。原文（原言語版）を権威ある出典とみなしてください。重要な情報については、専門の翻訳者による翻訳を推奨します。本翻訳の利用に起因するいかなる誤解や誤訳についても、当社は責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

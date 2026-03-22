@@ -1,49 +1,42 @@
-# Beste praksis for produksjonsklare AI-arbeidsbelastninger med AZD
+# Beste praksis for produksjons-AI arbeidsbelastninger med AZD
 
-**Chapter Navigation:**
-- **📚 Kursoversikt**: [AZD for nybegynnere](../../README.md)
-- **📖 Gjeldende kapittel**: Kapittel 8 - Produksjon og bedriftsmønstre
+**Kapittelnavigasjon:**
+- **📚 Kursstart**: [AZD For Beginners](../../README.md)
+- **📖 Nåværende kapittel**: Kapittel 8 - Produksjon & bedriftsmønstre
 - **⬅️ Forrige kapittel**: [Kapittel 7: Feilsøking](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Også relatert**: [AI Workshop-lab](ai-workshop-lab.md)
-- **🎯 Fullfør kurset**: [AZD for nybegynnere](../../README.md)
+- **⬅️ Også relatert**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎯 Kurs fullført**: [AZD For Beginners](../../README.md)
 
 ## Oversikt
 
-Denne veiledningen gir omfattende beste praksiser for utrulling av produksjonsklare AI-arbeidsbelastninger ved bruk av Azure Developer CLI (AZD). Basert på tilbakemeldinger fra Microsoft Foundry Discord-fellesskapet og reelle kundedistribusjoner, tar disse praksisene for seg de vanligste utfordringene i produksjons-AI-systemer.
+Denne veiledningen gir omfattende beste praksis for distribusjon av produksjonsklare AI-arbeidsbelastninger ved hjelp av Azure Developer CLI (AZD). Basert på tilbakemeldinger fra Microsoft Foundry Discord-fellesskapet og virkelige kundedistribusjoner, tar disse praksisene for seg de vanligste utfordringene i produksjons-AI-systemer.
 
 ## Viktige utfordringer som adresseres
 
-Basert på resultatene fra vår meningsmåling i fellesskapet, er dette de største utfordringene utviklere møter:
+Basert på resultatene fra vår undersøkelse i fellesskapet, er dette de største utfordringene utviklere møter:
 
-- **45%** sliter med AI-distribusjoner med flere tjenester
-- **38%** har problemer med håndtering av legitimasjon og hemmeligheter  
-- **35%** synes produksjonsklarhet og skalering er vanskelig
-- **32%** trenger bedre strategier for kostnadsoptimalisering
-- **29%** krever forbedret overvåking og feilsøking
+- **45 %** sliter med distribusjon av flere AI-tjenester
+- **38 %** har problemer med håndtering av legitimasjon og hemmeligheter  
+- **35 %** synes produksjonsberedskap og skalering er vanskelig
+- **32 %** trenger bedre kostnadsoptimaliseringsstrategier
+- **29 %** krever forbedret overvåkning og feilsøking
 
 ## Arkitekturmønstre for produksjons-AI
 
 ### Mønster 1: Mikrotjeneste-AI-arkitektur
 
-**Når det bør brukes**: Komplekse AI-applikasjoner med flere funksjoner
+**Når man skal bruke det**: Komplekse AI-applikasjoner med flere kapabiliteter
 
+```mermaid
+graph TD
+    Frontend[Web Frontend] --- Gateway[API Gateway] --- LB[Lastbalanserer]
+    Gateway --> Chat[Chat-tjeneste]
+    Gateway --> Image[Bildetjeneste]
+    Gateway --> Text[Teksttjeneste]
+    Chat --> OpenAI[Microsoft Foundry-modeller]
+    Image --> Vision[Datamaskinsyn]
+    Text --> DocIntel[Dokumentintelligens]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Web Frontend  │────│   API Gateway   │────│  Load Balancer  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │
-                ┌───────────────┼───────────────┐
-                │               │               │
-        ┌───────▼──────┐ ┌──────▼──────┐ ┌─────▼──────┐
-        │ Chat Service │ │Image Service│ │Text Service│
-        └──────────────┘ └─────────────┘ └────────────┘
-                │               │               │
-        ┌───────▼──────┐ ┌──────▼──────┐ ┌─────▼──────┐
-        │Azure OpenAI  │ │Computer     │ │Document    │
-        │              │ │Vision       │ │Intelligence│
-        └──────────────┘ └─────────────┘ └────────────┘
-```
-
 **AZD-implementering**:
 
 ```yaml
@@ -69,7 +62,7 @@ services:
 
 ### Mønster 2: Hendelsesdrevet AI-behandling
 
-**Når det bør brukes**: Batchbehandling, dokumentanalyse, asynkrone arbeidsflyter
+**Når man skal bruke det**: Batch-behandling, dokumentanalyse, asynkrone arbeidsflyter
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -116,7 +109,38 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Sikkerhetspraksis
+## Å tenke på AI-agentens helse
+
+Når en tradisjonell webapp svikter, er symptomene gjenkjennelige: en side laster ikke, en API gir feil, eller en distribusjon feiler. AI-drevne applikasjoner kan feile på alle disse måtene – men de kan også oppføre seg på mer subtile måter uten å gi tydelige feilmeldinger.
+
+Dette avsnittet hjelper deg å bygge en mental modell for overvåkning av AI-arbeidsbelastninger, slik at du vet hvor du skal se når noe ikke virker som forventet.
+
+### Hvordan agenthelse skiller seg fra tradisjonell app-helse
+
+En tradisjonell app fungerer enten eller ikke. En AI-agent kan se ut til å fungere, men produsere dårlige resultater. Tenk på agenthelse i to lag:
+
+| Lag | Hva du skal følge med på | Hvor du skal se |
+|-------|--------------|---------------|
+| **Infrastrukturhelse** | Kjører tjenesten? Er ressurser satt opp? Er endepunktene tilgjengelige? | `azd monitor`, Azure Portal ressurshelse, container-/app-logger |
+| **Atferdshelse** | Responderer agenten korrekt? Er svarene raske nok? Kalles modellen riktig? | Application Insights-spor, mål for modellresponslatenstid, logger for responskvalitet |
+
+Infrastrukturhelse er kjent – det er det samme for enhver azd-app. Atferdshelse er det nye laget som AI-arbeidsbelastninger introduserer.
+
+### Hvor du skal se når AI-apper ikke oppfører seg som forventet
+
+Hvis AI-applikasjonen din ikke gir forventede resultater, er her en konseptuell sjekkliste:
+
+1. **Start med det grunnleggende.** Kjører appen? Kommer den til avhengigheter? Sjekk `azd monitor` og ressurshelse som du ville gjort for enhver app.
+2. **Sjekk modelltilkoblingen.** Klarer applikasjonen din å kalle AI-modellen? Feilet eller tidsavbrutte modellkall er den vanligste årsaken til AI-app-problemer og vil vises i applikasjonsloggene.
+3. **Se på hva modellen mottok.** AI-svar avhenger av input (prompt og eventuell hentet kontekst). Hvis output er feil, er input vanligvis feil. Sjekk om applikasjonen sender riktig data til modellen.
+4. **Gå over responstiden.** AI-modellkall er tregere enn vanlige API-kall. Hvis appen føles treg, sjekk om modellens responstid har økt – dette kan indikere begrensning, kapasitetsgrenser eller kongestjon på regionsnivå.
+5. **Følg med på kostnadssignaler.** Uventede topper i tokenbruk eller API-kall kan tyde på en løkke, en feilkonfigurert prompt eller overdrevne gjentakelser.
+
+Du trenger ikke mestre observability-verktøy umiddelbart. Nøkkelpunkter er at AI-applikasjoner har et ekstra lag atferd å overvåke, og azds innebygde overvåkning (`azd monitor`) gir et startpunkt for undersøkelse av begge lagene.
+
+---
+
+## Sikkerhetsbeste praksis
 
 ### 1. Zero-Trust sikkerhetsmodell
 
@@ -124,7 +148,7 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 - Ingen tjeneste-til-tjeneste-kommunikasjon uten autentisering
 - Alle API-kall bruker administrerte identiteter
 - Nettverksisolasjon med private endepunkter
-- Minst privilegium tilgangskontroller
+- Tilgangskontroller for minste privilegium
 
 ```bicep
 // Managed Identity for each service
@@ -145,7 +169,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. Sikker håndtering av hemmeligheter
+### 2. Sikker hemmelighetshåndtering
 
 **Key Vault-integrasjonsmønster**:
 
@@ -242,7 +266,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ## Ytelse og skalering
 
-### 1. Autoskaleringstrategier
+### 1. Autoskaleringsstrategier
 
 **Autoskalering for Container Apps**:
 
@@ -288,7 +312,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. Cachingstrategier
+### 2. Caching-strategier
 
 **Redis-cache for AI-responser**:
 
@@ -318,7 +342,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Lastbalansering og trafikkhåndtering
+### 3. Lastbalansering og trafikkstyring
 
 **Application Gateway med WAF**:
 
@@ -358,7 +382,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ## 💰 Kostnadsoptimalisering
 
-### 1. Ressursdimensjonering
+### 1. Ressursrettstørrelse
 
 **Miljøspesifikke konfigurasjoner**:
 
@@ -421,12 +445,12 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. Optimalisering av tokenbruk
+### 3. Tokenbrukoptimalisering
 
 **OpenAI kostnadsstyring**:
 
 ```typescript
-// Tokenoptimalisering på applikasjonsnivå
+// Applikasjonsnivå tokenoptimalisering
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -436,7 +460,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Forkort konteksten, ikke brukerens inndata
+      // Forkort kontekst, ikke brukerinput
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -450,7 +474,7 @@ class TokenOptimizer {
 }
 ```
 
-## Overvåking og observerbarhet
+## Overvåkning og observabilitet
 
 ### 1. Omfattende Application Insights
 
@@ -497,7 +521,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. AI-spesifikk overvåking
+### 2. AI-spesifikk overvåkning
 
 **Egendefinerte dashbord for AI-metrikker**:
 
@@ -528,7 +552,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Helsjekker og oppetidsovervåking
+### 3. Helsekontroller og oppetidsovervåkning
 
 ```bicep
 // Application Insights availability tests
@@ -714,7 +738,7 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 
 ## DevOps og CI/CD-integrasjon
 
-### 1. GitHub Actions-arbeidsflyt
+### 1. GitHub Actions-workflow
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -795,7 +819,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. Infrastrukturbekreftelse
+### 2. Infrastrukturvalidering
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -813,7 +837,7 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Valider OpenAI-modellutrullinger
+# Valider OpenAI modellutrullinger
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
 if [[ ! $models == *"gpt-35-turbo"* ]]; then
@@ -821,7 +845,7 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# Test tilkoblingen til AI-tjenesten
+# Test AI-tjenestens tilkobling
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
@@ -832,10 +856,10 @@ echo "Infrastructure validation completed successfully!"
 
 ### Sikkerhet ✅
 - [ ] Alle tjenester bruker administrerte identiteter
-- [ ] Hemmeligheter lagret i Key Vault
+- [ ] Hemmeligheter lagres i Key Vault
 - [ ] Private endepunkter konfigurert
 - [ ] Nettverkssikkerhetsgrupper implementert
-- [ ] RBAC med minst privilegium
+- [ ] RBAC med minste privilegium
 - [ ] WAF aktivert på offentlige endepunkter
 
 ### Ytelse ✅
@@ -843,58 +867,58 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Caching implementert
 - [ ] Lastbalansering satt opp
 - [ ] CDN for statisk innhold
-- [ ] Databasetilkoblings-pooling
+- [ ] Databaseforbindelsespooling
 - [ ] Optimalisering av tokenbruk
 
-### Overvåking ✅
+### Overvåkning ✅
 - [ ] Application Insights konfigurert
-- [ ] Egendefinerte metrikker definert
-- [ ] Varselregler satt opp
+- [ ] Egne metrikker definert
+- [ ] Varslingsregler satt opp
 - [ ] Dashbord opprettet
-- [ ] Helsjekker implementert
-- [ ] Retningslinjer for logglagring
+- [ ] Helsekontroller implementert
+- [ ] Loggbevaringspolicyer
 
 ### Pålitelighet ✅
 - [ ] Distribusjon i flere regioner
-- [ ] Sikkerhetskopierings- og gjenopprettingsplan
+- [ ] Backup- og gjenopprettingsplan
 - [ ] Kretsbrytere implementert
-- [ ] Gjenprøvingspolicyer konfigurert
-- [ ] Kontrollert degradering
-- [ ] Helsjekk-endepunkter
+- [ ] Retry-policyer konfigurert
+- [ ] Graceful degradert ytelse
+- [ ] Endepunkter for helsecheck
 
 ### Kostnadsstyring ✅
 - [ ] Budsjettvarsler konfigurert
-- [ ] Ressursdimensjonering
-- [ ] Rabatt for utvikling/test brukt
-- [ ] Reservede instanser kjøpt
-- [ ] Kostnadsmonitoreringsdashbord
+- [ ] Ressursrettstørrelse
+- [ ] Rabatt for dev/test brukt
+- [ ] Reservasjon av instanser kjøpt
+- [ ] Kostnadsovervåkningsdashbord
 - [ ] Regelmessige kostnadsgjennomganger
 
 ### Samsvar ✅
-- [ ] Krav til datalagring oppfylt
+- [ ] Oppfylte krav til datalagring
 - [ ] Revisjonslogging aktivert
-- [ ] Samsvarspolicyer anvendt
-- [ ] Sikkerhetsbaselines implementert
+- [ ] Samsvarspolicyer brukt
+- [ ] Implementerte sikkerhetsbaselines
 - [ ] Regelmessige sikkerhetsvurderinger
-- [ ] Beredskapsplan for hendelser
+- [ ] Hendelseshåndteringsplan
 
-## Ytelsesmålinger
+## Ytelsesbenchmark
 
 ### Typiske produksjonsmetrikker
 
-| Metrikk | Mål | Overvåking |
+| Metode | Mål | Overvåkning |
 |--------|--------|------------|
 | **Responstid** | < 2 sekunder | Application Insights |
-| **Tilgjengelighet** | 99.9% | Oppetidsovervåking |
-| **Feilrate** | < 0.1% | Applikasjonslogger |
-| **Tokenbruk** | < $500/måned | Kostnadsstyring |
+| ** tilgjengelighet** | 99,9 % | Oppetidsovervåkning |
+| **Feilrate** | < 0,1 % | Applikasjonslogger |
+| **Tokenbruk** | < 500 $/måned | Kostnadsstyring |
 | **Samtidige brukere** | 1000+ | Lasttesting |
-| **Gjenopprettingstid** | < 1 time | Katastrofegjenopprettingstester |
+| **Gjenopprettingstid** | < 1 time | Katastroferestester |
 
 ### Lasttesting
 
 ```bash
-# Skript for belastningstesting av AI-applikasjoner
+# Lastetestskript for AI-applikasjoner
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -902,47 +926,233 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Fellesskapets beste praksiser
+## 🤝 Fellesskapets beste praksis
 
 Basert på tilbakemeldinger fra Microsoft Foundry Discord-fellesskapet:
 
 ### Topp anbefalinger fra fellesskapet:
 
-1. **Start i det små, skaler gradvis**: Begynn med grunnleggende SKUer og skaler opp basert på faktisk bruk
-2. **Overvåk alt**: Sett opp omfattende overvåking fra dag én
+1. **Start i det små, skaler gradvis**: Begynn med grunnleggende SKUer og skaler basert på faktisk bruk
+2. **Overvåk alt**: Sett opp omfattende overvåkning fra dag én
 3. **Automatiser sikkerhet**: Bruk infrastruktur som kode for konsekvent sikkerhet
-4. **Test grundig**: Inkluder AI-spesifikk testing i pipelineen din
-5. **Planlegg for kostnader**: Overvåk tokenbruk og sett budsjettvarsler tidlig
+4. **Test grundig**: Inkluder AI-spesifikk testing i pipelinen din
+5. **Planlegg for kostnader**: Overvåk tokenbruk og sett opp budsjettvarsler tidlig
 
 ### Vanlige fallgruver å unngå:
 
-- ❌ Hardkoding av API-nøkler i koden
-- ❌ Ikke sette opp riktig overvåking
+- ❌ Hardkode API-nøkler i kode
+- ❌ Ikke sette opp riktig overvåkning
 - ❌ Ignorere kostnadsoptimalisering
-- ❌ Ikke teste feilsituasjoner
-- ❌ Distribuere uten helsesjekker
+- ❌ Ikke teste feilhåndteringsscenarier
+- ❌ Distribuere uten helsechecks
 
-## Tilleggsressurser
+## AZD AI CLI-kommandoer og utvidelser
 
-- **Azure Well-Architected Framework**: [Veiledning for AI-arbeidsbelastninger](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Microsoft Foundry Documentation**: [Offisiell dokumentasjon](https://learn.microsoft.com/azure/ai-studio/)
+AZD inkluderer et voksende sett med AI-spesifikke kommandoer og utvidelser som forenkler produksjons-AI-arbeidsflyter. Disse verktøyene bygger bro mellom lokal utvikling og produksjonsdistribusjon for AI-arbeidsbelastninger.
+
+### AZD-utvidelser for AI
+
+AZD bruker et utvidelsessystem for å legge til AI-spesifikke kapabiliteter. Installer og administrer utvidelser med:
+
+```bash
+# Liste alle tilgjengelige utvidelser (inkludert AI)
+azd extension list
+
+# Installer Foundry-agentutvidelsen
+azd extension install azure.ai.agents
+
+# Installer finjusteringsutvidelsen
+azd extension install azure.ai.finetune
+
+# Installer utvidelsen for egendefinerte modeller
+azd extension install azure.ai.models
+
+# Oppgrader alle installerte utvidelser
+azd extension upgrade --all
+```
+
+**Tilgjengelige AI-utvidelser:**
+
+| Utvidelse | Formål | Status |
+|-----------|---------|--------|
+| `azure.ai.agents` | Administrasjon av Foundry Agent Service | Forhåndsvisning |
+| `azure.ai.finetune` | Finjustering av Foundry-modeller | Forhåndsvisning |
+| `azure.ai.models` | Foundry egendefinerte modeller | Forhåndsvisning |
+| `azure.coding-agent` | Konfigurasjon av kodeagent | Tilgjengelig |
+
+### Initialisere agentprosjekter med `azd ai agent init`
+
+Kommandoen `azd ai agent init` skaffer en produksjonsklar AI-agentprosj ekt integrert med Microsoft Foundry Agent Service:
+
+```bash
+# Initialiser et nytt agentprosjekt fra en agentmanifest
+azd ai agent init -m <manifest-path-or-uri>
+
+# Initialiser og målrett et spesifikt Foundry-prosjekt
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Initialiser med en tilpasset kildekatalog
+azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+
+# Målrett Container Apps som vert
+azd ai agent init -m agent-manifest.yaml --host containerapp
+```
+
+**Viktige flagg:**
+
+| Flagg | Beskrivelse |
+|------|-------------|
+| `-m, --manifest` | Sti eller URI til en agentmanifest som skal legges til prosjektet ditt |
+| `-p, --project-id` | Eksisterende Microsoft Foundry-prosjekt-ID for azd-miljøet ditt |
+| `-s, --src` | Katalog for nedlasting av agentdefinisjon (standard er `src/<agent-id>`) |
+| `--host` | Overstyr standard vertsnavn (f.eks. `containerapp`) |
+| `-e, --environment` | azd-miljøet som skal brukes |
+
+**Produksjonstips**: Bruk `--project-id` for å koble direkte til et eksisterende Foundry-prosjekt, slik at agentkoden og skyressursene dine er koblet sammen fra begynnelsen.
+
+### Modellkontekstprotokoll (MCP) med `azd mcp`
+
+AZD inkluderer innebygd støtte for MCP-server (Alpha), som gjør det mulig for AI-agenter og verktøy å samhandle med Azure-ressursene dine gjennom en standardisert protokoll:
+
+```bash
+# Start MCP-serveren for prosjektet ditt
+azd mcp start
+
+# Administrer verktøysamtykke for MCP-operasjoner
+azd mcp consent
+```
+
+MCP-serveren eksponerer konteksten for azd-prosjektet ditt — miljøer, tjenester og Azure-ressurser — til AI-drevne utviklingsverktøy. Dette gir:
+
+- **AI-assistert distribusjon**: La kodeagenter forespørre prosjekttilstanden din og utløse distribusjoner
+- **Ressursoppdagelse**: AI-verktøy kan oppdage hvilke Azure-ressurser prosjektet ditt bruker
+- **Miljøhåndtering**: Agenter kan bytte mellom utviklings-, staging- og produksjonsmiljøer
+
+### Infrastrukturgenerering med `azd infra generate`
+
+For produksjons-AI-arbeidsbelastninger kan du generere og tilpasse Infrastruktur som kode i stedet for å stole på automatisk provisjonering:
+
+```bash
+# Generer Bicep/Terraform-filer fra prosjektdefinisjonen din
+azd infra generate
+```
+
+Dette skriver IaC til disk slik at du kan:
+- Gjennomgå og revidere infrastrukturen før distribusjon
+- Legge til egendefinerte sikkerhetspolicyer (nettverksregler, private endepunkter)
+- Integrere med eksisterende IaC-gjennomgangsprosesser
+- Versjonskontrollere infrastrukturendringer separat fra applikasjonskode
+
+### Produksjonslivssyklus-kroker
+
+AZD-kroker lar deg injisere egendefinert logikk i alle stadier av distribusjonslivssyklusen – kritisk for produksjons-AI-arbeidsflyter:
+
+```yaml
+# azure.yaml - Production hooks example
+name: ai-production-app
+hooks:
+  preprovision:
+    shell: sh
+    run: scripts/validate-quotas.sh    # Check AI model quota before provisioning
+  postprovision:
+    shell: sh
+    run: scripts/configure-networking.sh  # Set up private endpoints
+  predeploy:
+    shell: sh
+    run: scripts/run-ai-safety-tests.sh  # Run prompt safety checks
+  postdeploy:
+    shell: sh
+    run: scripts/smoke-test.sh           # Verify agent responses post-deploy
+services:
+  agent-api:
+    project: ./src/agent
+    host: containerapp
+    hooks:
+      predeploy:
+        shell: sh
+        run: scripts/validate-model-access.sh  # Per-service hook
+```
+
+```bash
+# Kjør en spesifikk hook manuelt under utvikling
+azd hooks run predeploy
+```
+
+**Anbefalte produksjonskroker for AI-arbeidsmengder:**
+
+| Krok | Bruksområde |
+|------|----------|
+| `preprovision` | Validere abonnementskvoter for AI-modellkapasitet |
+| `postprovision` | Konfigurere private endepunkter, distribuere modellvekter |
+| `predeploy` | Kjør AI-sikkerhetstester, valider promptmaler |
+| `postdeploy` | Røyktest agentrespons, verifiser modelltilkobling |
+
+### CI/CD-pipeline-konfigurasjon
+
+Bruk `azd pipeline config` for å koble prosjektet ditt til GitHub Actions eller Azure Pipelines med sikker Azure-autentisering:
+
+```bash
+# Konfigurer CI/CD-pipeline (interaktiv)
+azd pipeline config
+
+# Konfigurer med en spesifikk leverandør
+azd pipeline config --provider github
+```
+
+Denne kommandoen:
+- Oppretter en tjenesteprinsipp med minste privilegium
+- Konfigurerer fødererte legitimasjoner (ingen lagrede hemmeligheter)
+- Genererer eller oppdaterer definisjonsfil for pipeline
+- Setter nødvendige miljøvariabler i ditt CI/CD-system
+
+**Produksjonsarbeidsflyt med pipeline-konfigurasjon:**
+
+```bash
+# 1. Sett opp produksjonsmiljø
+azd env new production
+azd env set AZURE_OPENAI_CAPACITY 100
+
+# 2. Konfigurer pipeline
+azd pipeline config --provider github
+
+# 3. Pipeline kjører azd deploy ved hver push til main
+```
+
+### Legge til komponenter med `azd add`
+
+Legg til Azure-tjenester etter hvert i et eksisterende prosjekt:
+
+```bash
+# Legg til en ny tjenestekomponent interaktivt
+azd add
+```
+
+Dette er spesielt nyttig for å utvide produksjons-AI-applikasjoner—for eksempel å legge til en vektorsøketjeneste, et nytt agentendepunkt eller en overvåkingskomponent til en eksisterende distribusjon.
+
+## Ytterligere ressurser
+- **Azure Well-Architected Framework**: [AI arbeidsbelastningsveiledning](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Microsoft Foundry Dokumentasjon**: [Offisielle dokumenter](https://learn.microsoft.com/azure/ai-studio/)
 - **Fellesskapsmaler**: [Azure Samples](https://github.com/Azure-Samples)
-- **Discord-fellesskap**: [#Azure-kanal](https://discord.gg/microsoft-azure)
+- **Discord Fellesskap**: [#Azure-kanal](https://discord.gg/microsoft-azure)
+- **Agentferdigheter for Azure**: [microsoft/github-copilot-for-azure på skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 åpne agentferdigheter for Azure AI, Foundry, utrulling, kostnadsoptimalisering og diagnostikk. Installer i redigereren din:
+  ```bash
+  npx skills add microsoft/github-copilot-for-azure
+  ```
 
 ---
 
-**Chapter Navigation:**
-- **📚 Kursoversikt**: [AZD for nybegynnere](../../README.md)
-- **📖 Gjeldende kapittel**: Kapittel 8 - Produksjon og bedriftsmønstre
-- **⬅️ Forrige kapittel**: [Kapittel 7: Feilsøking](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Også relatert**: [AI Workshop-lab](ai-workshop-lab.md)
-- **🎆 Fullfør kurset**: [AZD for nybegynnere](../../README.md)
+**Kapittelnavigasjon:**
+- **📚 Kurs Hjem**: [AZD For Beginners](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 8 - Produksjon & Enterprise-mønstre
+- **⬅️ Forrige Kapittel**: [Kapittel 7: Feilsøking](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Også Relatert**: [AI Workshop Lab](ai-workshop-lab.md)
+- **� Kurs Fullført**: [AZD For Beginners](../../README.md)
 
-**Husk**: Produksjons-AI-arbeidsbelastninger krever nøye planlegging, overvåking og kontinuerlig optimalisering. Begynn med disse mønstrene og tilpass dem til dine spesifikke krav.
+**Husk**: Produksjons-AI-arbeidsbelastninger krever nøye planlegging, overvåking og kontinuerlig optimalisering. Start med disse mønstrene og tilpass dem til dine spesifikke krav.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfraskrivelse:
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst merk at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår som følge av bruk av denne oversettelsen.
+**Ansvarsfraskrivelse**:  
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på dets morsmål skal betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

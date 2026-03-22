@@ -1,24 +1,24 @@
-# Обрасци аутентикације и управљани идентитет
+# Аутентификациони обрасци и управљани идентитет
 
-⏱️ **Процењено време**: 45-60 минута | 💰 **Утицај на трошкове**: Бесплатно (без додатних накнада) | ⭐ **Комплексност**: Средњи
+⏱️ **Процењено време**: 45-60 минута | 💰 **Утицај на цену**: Бесплатно (без додатних трошкова) | ⭐ **Сложеност**: Средњи
 
 **📚 Пут учења:**
 - ← Претходно: [Управљање конфигурацијом](configuration.md) - Управљање променљивим окружења и тајнама
-- 🎯 **Тренутно:** Аутентификација и безбедност (управљани идентитет, Key Vault, безбедни обрасци)
-- → Следеће: [Први пројекат](first-project.md) - Израдите своју прву AZD апликацију
-- 🏠 [Почетна курса](../../README.md)
+- 🎯 **Налазите се овде**: Аутентификација & Безбедност (Управљани идентитет, Key Vault, безбедни обрасци)
+- → Следеће: [Први пројекат](first-project.md) - Изградите своју прву AZD апликацију
+- 🏠 [Почетна страница курса](../../README.md)
 
 ---
 
 ## Шта ћете научити
 
-Попуњавањем ове лекције ћете:
+Попуњавањем ове лекције, ви ћете:
 - Разумети Azure обрасце аутентификације (кључеви, connection strings, управљани идентитет)
-- Имплементирати **управљани идентитет** за аутентификацију без лозинки
+- Имплементирати **Управљани идентитет** за аутентификацију без лозинки
 - Заштитити тајне интеграцијом са **Azure Key Vault**
-- Конфигурисати **контролу приступа засновану на улогама (RBAC)** за AZD размештања
-- Примeнити најбоље безбедносне праксе у Container Apps и Azure сервисима
-- Мигрирати са аутентикације засноване на кључу на аутентификацију засновану на идентитету
+- Конфигурисати **контролу приступа засновану на улогама (RBAC)** за AZD размењивања
+- Применити најбоље безбедносне праксе у Container Apps и Azure сервисима
+- Мигрирати са аутентификације засноване на кључевима на аутентификацију засновану на идентитету
 
 ## Зашто је управљани идентитет важан
 
@@ -26,39 +26,39 @@
 
 **Пре управљаног идентитета:**
 ```javascript
-// ❌ РИЗИК БЕЗБЕДНОСТИ: Тврдо уграђене тајне у коду
+// ❌ РИЗИК БЕЗБЕДНОСТИ: Тајне уграђене у код
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
 const storageKey = "xK7mN9pQ2wR5tY8uI0oP3aS6dF1gH4jK...";
 const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
 **Проблеми:**
-- 🔴 **Изложене тајне** у коду, конфигурационим фајловима, променљивим окружењима
-- 🔴 **Ротација креденцијала** захтева измене кода и поновно распоређивање
-- 🔴 **Ноћне море за ревизију** - ко је приступио чему и када?
-- 🔴 **Распростирање** - тајне расуте по више система
-- 🔴 **Ризици усклађености** - не прође безбедносне ревизије
+- 🔴 **Изложене тајне** у коду, конфигурационим фајловима, променљивим окружења
+- 🔴 **Ротација акредитива** захтева измене кода и поновно распоређивање
+- 🔴 **Ноћна мора за ревизију** - ко је приступио чему и када?
+- 🔴 **Расејање** - тајне распршене по више система
+- 🔴 **Ризици усклађености** - не пролази безбедносне ревизије
 
 ### Решење: Управљани идентитет
 
-**После управљаног идентитета:**
+**Након управљаног идентитета:**
 ```javascript
 // ✅ СИГУРНО: Нема тајни у коду
 const credential = new DefaultAzureCredential();
 const client = new BlobServiceClient(
   "https://mystorageaccount.blob.core.windows.net",
-  credential  // Azure аутоматски управља аутентификацијом
+  credential  // Azure аутоматски рукује аутентификацијом
 );
 ```
 
 **Предности:**
 - ✅ **Нема тајни** у коду или конфигурацији
-- ✅ **Аутоматска ротација** - Azure то обрађује
+- ✅ **Аутоматска ротација** - Azure се стара о томе
 - ✅ **Потпун траг ревизије** у Azure AD логовима
 - ✅ **Централизована безбедност** - управљање у Azure порталу
 - ✅ **Спремно за усклађеност** - испуњава безбедносне стандарде
 
-**Аналогија**: Традиционална аутентификација је као ношење више физичких кључева за различита врата. Управљани идентитет је као сигурносна пропусница која аутоматски даје приступ на основу тога ко сте — нема кључева које можете изгубити, копирати или ротирати.
+**Аналогија**: Традиционална аутентификација је као ношење више физичких кључева за различита врата. Управљани идентитет је као безбедносна значка која аутоматски додељује приступ у зависности од тога ко сте — нема кључева које треба изгубити, копирати или ротирати.
 
 ---
 
@@ -68,68 +68,68 @@ const client = new BlobServiceClient(
 
 ```mermaid
 sequenceDiagram
-    participant App as Ваша апликација<br/>(апликација у контејнеру)
+    participant App as Ваша апликација<br/>(Апликација у контејнеру)
     participant MI as Управљани идентитет<br/>(Azure AD)
-    participant KV as Кеј Волт
-    participant Storage as Ажур складиште
-    participant DB as Ажур SQL
+    participant KV as Хранилиште кључева
+    participant Storage as Azure складиште
+    participant DB as Azure SQL
     
-    App->>MI: Захтев за токен приступа<br/>(аутоматски)
-    MI->>MI: Потврди идентитет<br/>(без лозинке)
-    MI-->>App: Врати токен<br/>(важећи 1 сат)
+    App->>MI: Захтев за приступни токен<br/>(аутоматски)
+    MI->>MI: Провера идентитета<br/>(није потребна лозинка)
+    MI-->>App: Враћа токен<br/>(важећи 1 сат)
     
-    App->>KV: Добији тајну<br/>(користећи токен)
-    KV->>KV: Провери RBAC дозволе
-    KV-->>App: Врати вредност тајне
+    App->>KV: Дохвата тајну<br/>(користећи токен)
+    KV->>KV: Провера RBAC дозвола
+    KV-->>App: Враћа вредност тајне
     
     App->>Storage: Отпреми блоб<br/>(користећи токен)
-    Storage->>Storage: Провери RBAC дозволе
+    Storage->>Storage: Провера RBAC дозвола
     Storage-->>App: Успешно
     
-    App->>DB: Упит података<br/>(користећи токен)
-    DB->>DB: Провери SQL дозволе
-    DB-->>App: Врати резултате
+    App->>DB: Запитује податке<br/>(користећи токен)
+    DB->>DB: Провера SQL дозвола
+    DB-->>App: Враћа резултате
     
-    Note over App,DB: Сва аутентификација без лозинке!
+    Note over App,DB: Сва аутентикација је без лозинки!
 ```
 ### Типови управљаних идентитета
 
 ```mermaid
 graph TB
     MI[Управљани идентитет]
-    SystemAssigned[Системски додељен идентитет]
-    UserAssigned[Кориснички додељен идентитет]
+    SystemAssigned[Системски додељени идентитет]
+    UserAssigned[Кориснички додељени идентитет]
     
     MI --> SystemAssigned
     MI --> UserAssigned
     
     SystemAssigned --> SA1[Животни циклус везан за ресурс]
     SystemAssigned --> SA2[Аутоматско креирање/брисање]
-    SystemAssigned --> SA3[Најбоље за један ресурс]
+    SystemAssigned --> SA3[Најбоље за појединачни ресурс]
     
     UserAssigned --> UA1[Независтан животни циклус]
     UserAssigned --> UA2[Ручно креирање/брисање]
-    UserAssigned --> UA3[Заједничко за више ресурса]
+    UserAssigned --> UA3[Дељено између ресурса]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
-| Карактеристика | System-Assigned | User-Assigned |
+| Карактеристика | Системски додељен | Кориснички додељен |
 |---------|----------------|---------------|
-| **Животни циклус** | Повезан са ресурсом | Независан |
+| **Животни циклус** | Везан за ресурс | Независтан |
 | **Креирање** | Аутоматски са ресурсом | Ручно креирање |
-| **Брисање** | Брише се са ресурсом | Опстаје након брисања ресурса |
+| **Брисање** | Брише се са ресурсом | Остаје након брисања ресурса |
 | **Дељење** | Само један ресурс | Више ресурса |
 | **Случај употребе** | Једноставни сценарији | Комплексни сценарији са више ресурса |
-| **AZD подразумевано** | ✅ Препоручено | Опционо |
+| **Подразумевано у AZD** | ✅ Препоручено | Опционо |
 
 ---
 
-## Претпоставке
+## Предуслови
 
-### Потребни алати
+### Захтевани алати
 
-Требало би да већ имате ово инсталирано из претходних лекција:
+Већ бисте требали да имате ово инсталирано из претходних лекција:
 
 ```bash
 # Проверите Azure Developer CLI
@@ -138,7 +138,7 @@ azd version
 
 # Проверите Azure CLI
 az --version
-# ✅ Очекује се: azure-cli верзија 2.50.0 или новија
+# ✅ Очекује се: azure-cli 2.50.0 или новија
 ```
 
 ### Захтеви за Azure
@@ -150,10 +150,10 @@ az --version
   - Креирање Key Vault ресурса
   - Размештање Container Apps
 
-### Потребно предзнање
+### Претходно знање
 
 Требало би да сте завршили:
-- [Водич за инсталацију](installation.md) - AZD подешавање
+- [Водич за инсталацију](installation.md) - Постављање AZD
 - [Основе AZD](azd-basics.md) - Основни концепти
 - [Управљање конфигурацијом](configuration.md) - Променљиве окружења
 
@@ -161,27 +161,27 @@ az --version
 
 ## Лекција 1: Разумевање образаца аутентификације
 
-### Образац 1: Connection Strings (застарело - избегавајте)
+### Образац 1: Connection Strings (Застарело - избегавајте)
 
 **Како функционише:**
 ```bash
-# Конекцијски низ садржи приступне податке
+# Низ за повезивање садржи акредитиве
 STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=xK7mN9pQ2wR5..."
 COSMOS_CONNECTION_STRING="AccountEndpoint=https://myaccount.documents.azure.com:443/;AccountKey=C2x7..."
 SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=P@ssw0rd..."
 ```
 
 **Проблеми:**
-- ❌ Тајне видљиве у променљивим окружењима
-- ❌ Записује се у логовима система за распоређивање
-- ❌ Тешко за ротирање
+- ❌ Тајне видљиве у променљивим окружења
+- ❌ Логовано у системима за размештање
+- ❌ Тешко за ротацију
 - ❌ Нема трага ревизије приступа
 
-**Када користити:** Само за локални развој, никада у продукцији.
+**Када користити:** Само за локални развој, никада за продукцију.
 
 ---
 
-### Образац 2: Референце Key Vault-а (боље)
+### Образац 2: Key Vault референце (Боље)
 
 **Како функционише:**
 ```bicep
@@ -203,19 +203,19 @@ env: [
 ```
 
 **Предности:**
-- ✅ Тајне безбедно складиштене у Key Vault-у
+- ✅ Тајне сигурно похрањене у Key Vault
 - ✅ Централизовано управљање тајнама
 - ✅ Ротација без измена кода
 
 **Ограничења:**
-- ⚠️ И даље се користе кључеви/лозинке
-- ⚠️ Потребно је управљати приступом Key Vault-у
+- ⚠️ И даље користи кључеве/лозинке
+- ⚠️ Потребно управљати приступом Key Vault-у
 
 **Када користити:** Прелазни корак од connection strings ка управљаном идентитету.
 
 ---
 
-### Образац 3: Управљани идентитет (најбоља пракса)
+### Образац 3: Управљани идентитет (Најбоља пракса)
 
 **Како функционише:**
 ```bicep
@@ -252,7 +252,7 @@ const blobServiceClient = new BlobServiceClient(
 
 **Предности:**
 - ✅ Нема тајни у коду/конфигурацији
-- ✅ Аутоматска ротација креденцијала
+- ✅ Аутоматска ротација акредитива
 - ✅ Потпун траг ревизије
 - ✅ Дозволе засноване на RBAC
 - ✅ Спремно за усклађеност
@@ -265,7 +265,7 @@ const blobServiceClient = new BlobServiceClient(
 
 ### Имплементација корак по корак
 
-Хајде да направимо безбедан Container App који користи управљани идентитет за приступ Azure Storage-у и Key Vault-у.
+Хајде да направимо сигурну Container App која користи управљани идентитет за приступ Azure Storage и Key Vault.
 
 ### Структура пројекта
 
@@ -384,7 +384,7 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output APP_URL string = containerApp.outputs.url
 ```
 
-### 3. Container App са System-Assigned идентитетом
+### 3. Container App са системски додељеним идентитетом
 
 **Фајл: `infra/app/container-app.bicep`**
 
@@ -476,10 +476,10 @@ const { SecretClient } = require('@azure/keyvault-secrets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔑 Иницијализујте креденцијал (ради аутоматски са управљеним идентитетом)
+// 🔑 Иницијализујте креденцијале (ради аутоматски са управљаним идентитетом)
 const credential = new DefaultAzureCredential();
 
-// Подешавање Azure Storage-а
+// Подешавање Azure складишта
 const storageAccountName = process.env.AZURE_STORAGE_ACCOUNT_NAME;
 const blobServiceClient = new BlobServiceClient(
   `https://${storageAccountName}.blob.core.windows.net`,
@@ -498,7 +498,7 @@ app.get('/health', (req, res) => {
   res.json({ status: 'healthy', authentication: 'managed-identity' });
 });
 
-// Отпремите датотеку у Blob складиште
+// Отпремите датотеку у блоб складиште
 app.post('/upload', async (req, res) => {
   try {
     const containerClient = blobServiceClient.getContainerClient('uploads');
@@ -520,7 +520,7 @@ app.post('/upload', async (req, res) => {
   }
 });
 
-// Добијте тајну из Key Vault-а
+// Преузмите тајну из Key Vault-а
 app.get('/secret/:name', async (req, res) => {
   try {
     const secretName = req.params.name;
@@ -537,7 +537,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// Листај blob контејнере (показује приступ за читање)
+// Листа блоб контејнера (демонстрира приступ за читање)
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -586,7 +586,7 @@ app.listen(PORT, () => {
 # Иницијализујте AZD окружење
 azd init
 
-# Размештите инфраструктуру и апликацију
+# Разместите инфраструктуру и апликацију
 azd up
 
 # Добијте URL апликације
@@ -596,7 +596,7 @@ APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
 curl $APP_URL/health
 ```
 
-**✅ Очекивани излаз:**
+**✅ Очекивани резултат:**
 ```json
 {
   "status": "healthy",
@@ -609,7 +609,7 @@ curl $APP_URL/health
 curl -X POST $APP_URL/upload
 ```
 
-**✅ Очекивани излаз:**
+**✅ Очекивани резултат:**
 ```json
 {
   "success": true,
@@ -623,7 +623,7 @@ curl -X POST $APP_URL/upload
 curl $APP_URL/containers
 ```
 
-**✅ Очекивани излаз:**
+**✅ Очекивани резултат:**
 ```json
 {
   "containers": ["uploads"],
@@ -638,17 +638,17 @@ curl $APP_URL/containers
 
 ### Уграђени ID-јеви улога за управљани идентитет
 
-| Сервис | Назив улоге | ИД улоге | Дозволе |
+| Сервис | Име улоге | ID улоге | Дозволе |
 |---------|-----------|---------|-------------|
 | **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Читање блобова и контејнера |
-| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Читање, писање, брисање блобова |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Читање, писање, брисање порука у реду |
+| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Читање, упис, брисање блобова |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Читање, упис, брисање порука у редовима |
 | **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Читање тајни |
-| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Читање, писање, брисање тајни |
-| **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Читање података у Cosmos DB |
-| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Читање, писање података у Cosmos DB |
+| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Читање, упис, брисање тајни |
+| **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Читање података из Cosmos DB |
+| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Читање, упис података у Cosmos DB |
 | **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Управљање SQL базама података |
-| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Слање, примање и управљање порукама |
+| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Слање, пријем и управљање порукама |
 
 ### Како пронаћи ID-јеве улога
 
@@ -667,13 +667,13 @@ az role definition list --name "Storage Blob Data Contributor"
 
 ## Практични задаци
 
-### Вежба 1: Омогућите управљани идентитет за постојећу апликацију ⭐⭐ (Средње)
+### Вежба 1: Омогућите управљани идентитет за постојећу апликацију ⭐⭐ (Средњи)
 
-**Циљ**: Додајте управљани идентитет постојећем Container App размештању
+**Циљ**: Додати управљани идентитет у постојеће размењивање Container App-а
 
 **Сценарио**: Имате Container App који користи connection strings. Конвертујте га у управљани идентитет.
 
-**Почетна тачка**: Container App са овом конфигурацијом:
+**Полазна тачка**: Container App са следећом конфигурацијом:
 
 ```bicep
 // ❌ Current: Using connection string
@@ -699,7 +699,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **Додајте приступ Storage-у:**
+2. **Доделите приступ Storage-у:**
 
 ```bicep
 // Get storage account reference
@@ -743,7 +743,6 @@ const blobServiceClient = new BlobServiceClient(
 ```
 
 4. **Ажурирајте променљиве окружења:**
-
 ```bicep
 env: [
   {
@@ -754,33 +753,32 @@ env: [
 ]
 ```
 
-5. **Размештање и тестирање:**
-
+5. **Разместите и тестирајте:**
 ```bash
-# Поново распоредити
+# Поновно распоређивање
 azd up
 
-# Проверити да ли и даље ради
+# Проверите да ли и даље функционише
 curl https://myapp.azurecontainerapps.io/upload
 ```
 
 **✅ Критеријуми успеха:**
-- ✅ Апликација се размешта без грешака
-- ✅ Операције над Storage-ом функционишу (отпремање, листање, преузимање)
+- ✅ Апликација се распореди без грешака
+- ✅ Операције са Storage-ом функционишу (отпремање, листање, преузимање)
 - ✅ Нема connection strings у променљивим окружења
-- ✅ Идентитет видљив у Azure порталу под картицом "Identity"
+- ✅ Идентитет видљив у Azure порталу под "Identity" blade
 
 **Верификација:**
 
 ```bash
-# Проверите да ли је управљани идентитет омогућен
+# Проверите да ли је омогућен управљени идентитет
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 # ✅ Очекује се: "SystemAssigned"
 
-# Проверите доделу улога
+# Проверите доделу улоге
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv) \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.Storage/storageAccounts/mystorageaccount
@@ -791,15 +789,15 @@ az role assignment list \
 
 ---
 
-### Вежба 2: Приступ више сервиса са User-Assigned идентитетом ⭐⭐⭐ (Напредно)
+### Вежба 2: Приступ више сервиса са кориснички додељеним идентитетом ⭐⭐⭐ (Напредно)
 
-**Циљ**: Креирајте user-assigned идентитет који се дели између више Container App-ова
+**Циљ**: Креирати кориснички додељени идентитет који се дели између више Container App-ова
 
-**Сценарио**: Имате 3 микросервиса којима је свима потребан приступ истом Storage налогу и Key Vault-у.
+**Сценарио**: Имате 3 микросервиса који сви треба да приступају истом Storage налогу и Key Vault-у.
 
 **Кораци**:
 
-1. **Креирајте user-assigned идентитет:**
+1. **Креирајте кориснички додељени идентитет:**
 
 **Фајл: `infra/core/identity.bicep`**
 
@@ -819,7 +817,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **Доделите улоге user-assigned идентитету:**
+2. **Доделите улоге кориснички додељеном идентитету:**
 
 ```bicep
 // In main.bicep
@@ -912,28 +910,28 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-5. **Размештање и верификација:**
+5. **Разместите и верификујте:**
 
 ```bash
 azd up
 
-# Проверити да ли све услуге могу да приступе складишту
+# Тестирати да ли све услуге могу да приступе складишту
 curl https://api-gateway.azurecontainerapps.io/upload
 curl https://product-service.azurecontainerapps.io/upload
 curl https://order-service.azurecontainerapps.io/upload
 ```
 
 **✅ Критеријуми успеха:**
-- ✅ Један идентитет који деле 3 сервиса
-- ✅ Сви сервиси могу да приступе Storage-у и Key Vault-у
-- ✅ Идентитет опстаје ако обришете један сервис
+- ✅ Један идентитет дели се између 3 сервиса
+- ✅ Сви сервиси могу приступити Storage-у и Key Vault-у
+- ✅ Идентитет опстаје ако избришете један сервис
 - ✅ Централизовано управљање дозволама
 
-**Предности user-assigned идентитета:**
+**Предности кориснички додељеног идентитета:**
 - Један идентитет за управљање
-- Конзистентне дозволе међу сервисима
+- Конзистентне дозволе преко сервиса
 - Опстаје након брисања сервиса
-- Боље за комплексну архитектуру
+- Боље за комплексне архитектуре
 
 **Време**: 30-40 минута
 
@@ -941,9 +939,9 @@ curl https://order-service.azurecontainerapps.io/upload
 
 ### Вежба 3: Имплементација ротације тајни у Key Vault-у ⭐⭐⭐ (Напредно)
 
-**Циљ**: Складиштите API кључеве трећих страна у Key Vault-у и приступајте им користећи управљани идентитет
+**Циљ**: Складиштити API кључеве трећих страна у Key Vault-у и приступати им користећи управљани идентитет
 
-**Сценарио**: Ваша апликација треба да позове екстерни API (OpenAI, Stripe, SendGrid) који захтева API кључеве.
+**Сценарио**: Ваша апликација треба да позове спољни API (OpenAI, Stripe, SendGrid) који захтева API кључеве.
 
 **Кораци**:
 
@@ -978,13 +976,13 @@ output name string = keyVault.name
 output uri string = keyVault.properties.vaultUri
 ```
 
-2. **Сачувајте тајне у Key Vault-у:**
+2. **Сачувајте тајне у Key Vault:**
 
 ```bash
 # Добијте име Key Vault-а
 KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Сачувајте API кључеве трећих страна
+# Сачувајте API кључеве треће стране
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1020,7 +1018,7 @@ class Config {
   }
 
   async getSecret(secretName) {
-    // Прво провери кеш
+    // Прво проверите кеш
     if (this.cache[secretName]) {
       return this.cache[secretName];
     }
@@ -1072,13 +1070,13 @@ async function initializeServices() {
   console.log('✅ Services initialized with secrets from Key Vault');
 }
 
-// Позовите при покретању
+// Позвати при покретању
 initializeServices().catch(console.error);
 
 app.post('/chat', async (req, res) => {
   try {
     const completion = await openaiClient.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-4.1',
       messages: [{ role: 'user', content: 'Hello!' }]
     });
     
@@ -1096,12 +1094,12 @@ app.listen(3000, () => {
 });
 ```
 
-5. **Размештање и тестирање:**
+5. **Разместите и тестирате:**
 
 ```bash
 azd up
 
-# Проверите да ли АПИ кључеви функционишу
+# Проверити да ли API кључеви функционишу
 curl -X POST https://myapp.azurecontainerapps.io/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello AI"}'
@@ -1111,7 +1109,7 @@ curl -X POST https://myapp.azurecontainerapps.io/chat \
 - ✅ Нема API кључева у коду или променљивим окружења
 - ✅ Апликација преузима кључеве из Key Vault-а
 - ✅ API-ји трећих страна раде исправно
-- ✅ Можете ротирати кључеве без промена у коду
+- ✅ Можете ротирати кључеве без измена кода
 
 **Ротирајте тајну:**
 
@@ -1122,7 +1120,7 @@ az keyvault secret set \
   --name "OpenAI-ApiKey" \
   --value "sk-proj-NEW_KEY_HERE"
 
-# Поново покрени апликацију да учита нови кључ
+# Поново покрени апликацију да би преузела нови кључ
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
@@ -1132,20 +1130,20 @@ az containerapp revision restart \
 
 ---
 
-## Провера знања
+## Контролна тачка знања
 
 ### 1. Обрасци аутентификације ✓
 
 Тестирајте своје разумевање:
 
-- [ ] **Q1**: Која су три главна образаца аутентификације? 
+- [ ] **Q1**: Која су три главна обрасца аутентификације? 
   - **A**: Connection strings (застарело), Key Vault references (прелазно), Managed Identity (најбоље)
 
 - [ ] **Q2**: Зашто је управљани идентитет бољи од connection strings?
-  - **A**: Нема тајни у коду, аутоматска ротација, потпун траг ревизије, дозволе засноване на RBAC
+  - **A**: Нема тајни у коду, аутоматска ротација, потпун траг ревизије, RBAC дозволе
 
-- [ ] **Q3**: Када бисте користили user-assigned идентитет уместо system-assigned?
-  - **A**: Када делите идентитет између више ресурса или када је животни циклус идентитета независан од животног циклуса ресурса
+- [ ] **Q3**: Када бисте користили кориснички додељени идентитет уместо системски додељеног?
+  - **A**: Када делите идентитет преко више ресурса или када је животни циклус идентитета независан од животног циклуса ресурса
 
 **Практична верификација:**
 ```bash
@@ -1155,7 +1153,7 @@ az containerapp show \
   --resource-group rg-myapp \
   --query "identity.type"
 
-# Прикажите све доделе улога за идентитет
+# Прикажите све доделе улога за тај идентитет
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 ```
@@ -1170,34 +1168,34 @@ az role assignment list \
   - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
 - [ ] **Q2**: Које дозволе пружа "Key Vault Secrets User"?
-  - **A**: Само читање тајни (не може да креира, ажурира или брише)
+  - **A**: Само читање тајни (не може да креира, ажурира или обрише)
 
-- [ ] **Q3**: Како доделити Container App-у приступ Azure SQL?
-  - **A**: Доделите улогу "SQL DB Contributor" или конфигуришите Azure AD аутентификацију за SQL
+- [ ] **Q3**: Како доделите Container App-у приступ Azure SQL?
+  - **A**: Доделите улогу "SQL DB Contributor" или конфигуришите Azure AD аутентикацију за SQL
 
 **Практична верификација:**
 ```bash
-# Пронађи одређену улогу
+# Пронађите одређену улогу
 az role definition list --name "Storage Blob Data Contributor"
 
-# Провери које улоге су додељене вашем идентитету
+# Проверите које су улоге додељене вашем идентитету
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
 
 ---
 
-### 3. Интеграција са Key Vault-ом ✓
+### 3. Интеграција Key Vault-а ✓
 
 Тестирајте своје разумевање:
-- [ ] **Q1**: Како омогућите RBAC за Key Vault уместо приступних политика?
-  - **A**: Set `enableRbacAuthorization: true` in Bicep
+- [ ] **Q1**: Како да омогућите RBAC за Key Vault уместо приступних политика?
+  - **A**: Подесите `enableRbacAuthorization: true` у Bicep
 
-- [ ] **Q2**: Која Azure SDK библиотека обрађује аутентификацију менаџисаног идентитета?
-  - **A**: `@azure/identity` with `DefaultAzureCredential` class
+- [ ] **Q2**: Која Azure SDK библиотека обрађује аутентификацију управљаног идентитета?
+  - **A**: `@azure/identity` са класом `DefaultAzureCredential`
 
-- [ ] **Q3**: Колико дуго тајне из Key Vault-a остају у кешу?
-  - **A**: Application-dependent; implement your own caching strategy
+- [ ] **Q3**: Колико дуго тајне из Key Vault-а остају у кешу?
+  - **A**: Зависно од апликације; имплементирајте своју стратегију кеширања
 
 **Hands-On Verification:**
 ```bash
@@ -1211,24 +1209,24 @@ az keyvault secret show \
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Очекује се: true
+# ✅ Очекивано: true
 ```
 
 ---
 
 ## Безбедносне најбоље праксе
 
-### ✅ URADITE:
+### ✅ РАДИТЕ:
 
-1. **Увек користите менаџисани идентитет у продукцији**
+1. **Увек користите управљани идентитет у продукцији**
    ```bicep
    identity: {
      type: 'SystemAssigned'
    }
    ```
 
-2. **Користите RBAC улоге са најмање привилегија**
-   - Користите "Reader" улоге кад год је могуће
+2. **Користите RBAC улоге са најмањим привилегијама**
+   - Користите "Reader" улоге кад је могуће
    - Избегавајте "Owner" или "Contributor" осим ако је неопходно
 
 3. **Чувајте кључеве трећих страна у Key Vault-у**
@@ -1236,7 +1234,7 @@ az keyvault show \
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
 
-4. **Омогућите audit logovanje**
+4. **Омогућите аудиторско логовање**
    ```bicep
    diagnosticSettings: {
      logs: [{ category: 'AuditEvent', enabled: true }]
@@ -1251,14 +1249,14 @@ az keyvault show \
    ```
 
 6. **Редовно ротирајте тајне**
-   - Поставите датуме истека за тајне у Key Vault-у
+   - Поставите рок трајања за тајне у Key Vault-у
    - Аутоматизујте ротацију помоћу Azure Functions
 
-### ❌ NEMOJTE:
+### ❌ НЕ РАДИТЕ:
 
-1. **Никада не hardкодирајте тајне**
+1. **Никада не hardcode-ујте тајне**
    ```javascript
-   // ❌ ЛОШЕ
+   // ❌ ЛОШ
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
    ```
 
@@ -1277,7 +1275,7 @@ az keyvault show \
    roleDefinitionId: 'Storage Blob Data Reader'
    ```
 
-4. **Не логујте тајне**
+4. **Не лог-ујте тајне**
    ```javascript
    // ❌ ЛОШЕ
    console.log('API Key:', apiKey);
@@ -1296,18 +1294,18 @@ az keyvault show \
 
 ## Водич за решавање проблема
 
-### Problem: "Unauthorized" when accessing Azure Storage
+### Проблем: "Unauthorized" при приступу Azure Storage
 
-**Simptomi:**
+**Симптоми:**
 ```
 Error: Unauthorized (403)
 AuthorizationPermissionMismatch: This request is not authorized to perform this operation
 ```
 
-**Dijagnoza:**
+**Дијагноза:**
 
 ```bash
-# Проверите да ли је управљани идентитет омогућен
+# Проверите да ли је омогућен управљани идентитет
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
@@ -1321,9 +1319,9 @@ az role assignment list --assignee $PRINCIPAL_ID
 # Очекује се: Требало би да видите "Storage Blob Data Contributor" или сличну улогу
 ```
 
-**Rešenja:**
+**Решења:**
 
-1. **Dodelite ispravnu RBAC ulogu:**
+1. **Доделите исправну RBAC улогу:**
 ```bash
 STORAGE_ID=$(az storage account show --name mystorageaccount --resource-group rg-myapp --query "id" -o tsv)
 az role assignment create \
@@ -1332,13 +1330,13 @@ az role assignment create \
   --scope $STORAGE_ID
 ```
 
-2. **Sačekajte propagaciju (može potrajati 5-10 minuta):**
+2. **Сачекајте пропагацију (може потрајати 5-10 минута):**
 ```bash
-# Проверите статус доделе улоге
+# Провери статус доделе улоге
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
 
-3. **Proverite da aplikacija koristi ispravne kredencijale:**
+3. **Проверите да апликацијски код користи исправан креденцијал:**
 ```javascript
 // Уверите се да користите DefaultAzureCredential
 const credential = new DefaultAzureCredential();
@@ -1346,39 +1344,39 @@ const credential = new DefaultAzureCredential();
 
 ---
 
-### Problem: Pristup Key Vault-u odbijen
+### Проблем: Одбијен приступ Key Vault-у
 
-**Simptomi:**
+**Симптоми:**
 ```
 Error: Forbidden (403)
 The user, group or application does not have secrets get permission
 ```
 
-**Dijagnoza:**
+**Дијагноза:**
 
 ```bash
-# Провери да ли је RBAC за Key Vault омогућен
+# Проверите да ли је RBAC за Key Vault омогућен
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
 # ✅ Очекује се: true
 
-# Провери доделе улога
+# Проверите доделе улога
 az role assignment list \
   --assignee $PRINCIPAL_ID \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.KeyVault/vaults/$KV_NAME
 ```
 
-**Rešenja:**
+**Решења:**
 
-1. **Omogućite RBAC na Key Vault-u:**
+1. **Омогућите RBAC на Key Vault-у:**
 ```bash
 az keyvault update \
   --name $KV_NAME \
   --enable-rbac-authorization true
 ```
 
-2. **Dodelite ulogu Key Vault Secrets User:**
+2. **Доделите улогу Key Vault Secrets User:**
 ```bash
 KV_ID=$(az keyvault show --name $KV_NAME --query "id" -o tsv)
 az role assignment create \
@@ -1389,44 +1387,44 @@ az role assignment create \
 
 ---
 
-### Problem: DefaultAzureCredential fails locally
+### Проблем: DefaultAzureCredential не ради локално
 
-**Simptomi:**
+**Симптоми:**
 ```
 Error: DefaultAzureCredential failed to retrieve a token
 CredentialUnavailableError: No credential available
 ```
 
-**Dijagnoza:**
+**Дијагноза:**
 
 ```bash
 # Проверите да ли сте пријављени
 az account show
 
-# Проверите аутентификацију Azure CLI
+# Проверите Azure CLI аутентификацију
 az ad signed-in-user show
 ```
 
-**Rešenja:**
+**Решења:**
 
-1. **Prijavite se u Azure CLI:**
+1. **Пријавите се у Azure CLI:**
 ```bash
 az login
 ```
 
-2. **Podesite Azure pretplatu:**
+2. **Подесите Azure subscription:**
 ```bash
 az account set --subscription "Your Subscription Name"
 ```
 
-3. **Za lokalni razvoj, koristite promenljive okruženja:**
+3. **За локални развој, користите окружне променљиве:**
 ```bash
 export AZURE_TENANT_ID="your-tenant-id"
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
 
-4. **Ili koristite drugačiji kredencijal lokalno:**
+4. **Или користите други креденцијал локално:**
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
@@ -1438,17 +1436,17 @@ const credential = process.env.NODE_ENV === 'production'
 
 ---
 
-### Problem: Dodeljivanje uloge traje predugo da se propagira
+### Проблем: Додела улоге се споро пропагира
 
-**Simptomi:**
-- Uloga je uspešno dodeljena
-- I dalje dobijate 403 greške
-- Povremen pristup (ponekad radi, ponekad ne)
+**Симптоми:**
+- Улога је успешно додељена
+- И даље добијате 403 грешке
+- Повремени приступ (понекад ради, понекад не)
 
-**Objašnjenje:**
-Promene u Azure RBAC-u mogu potrajati 5-10 minuta da se propagiraju globalno.
+**Објашњење:**
+Azure RBAC измене могу потрајати 5-10 минута да се глобално пропагирају.
 
-**Rešenje:**
+**Решење:**
 
 ```bash
 # Сачекајте и покушајте поново
@@ -1466,82 +1464,82 @@ az containerapp revision restart \
 
 ---
 
-## Razmatranja troškova
+## Трошковни аспекти
 
-### Troškovi menadžисаног идентитета
+### Трошкови управљаног идентитета
 
-| Resurs | Trošak |
+| Resurs | Цена |
 |----------|------|
-| **Menadžisani identitet** | 🆓 **BESPLATNO** - Bez naknade |
-| **Dodeljivanje RBAC uloga** | 🆓 **BESPLATNO** - Bez naknade |
-| **Azure AD zahtevi za tokene** | 🆓 **BESPLATNO** - Uključeno |
-| **Operacije Key Vault-a** | $0.03 po 10.000 operacija |
-| **Skladištenje u Key Vault-u** | $0.024 po tajni mesečno |
+| **Upravljani identitet** | 🆓 **БЕСПЛАТНО** - Нема наплате |
+| **RBAC dodela uloga** | 🆓 **БЕСПЛАТНО** - Нема наплате |
+| **Azure AD Token zahtevi** | 🆓 **БЕСПЛАТНО** - Укључено |
+| **Operacije Key Vault-a** | $0.03 per 10,000 operations |
+| **Skladištenje Key Vault-a** | $0.024 per secret per month |
 
-**Menadžisani identitet štedi novac time što:**
-- ✅ Eliminacijom Key Vault operacija za autentifikaciju servis-servis
-- ✅ Smanjenjem bezbednosnih incidenata (nema procurelih kredencijala)
-- ✅ Smanjenjem operativног оптерећења (нема ручне ротације)
+**Upravljani identitet штеди новац тако што:**
+- ✅ Eliminiše Key Vault операције за сервис-на-сервис аутентификацију
+- ✅ Smanjuje bezbednosne incidente (нема процурелих креденцијала)
+- ✅ Smanjuje оперативни надзор (нема ручне ротације)
 
-**Primer poređenja troškova (mesečno):**
+**Пример поређења трошкова (месечно):**
 
-| Scenarij | Stringovi za konekciju | Menadžisani identitet | Ušteda |
-|----------|-------------------|-----------------|---------|
-| Mala aplikacija (1M zahteva) | ~$50 (Key Vault + operacije) | ~$0 | $50/mesec |
-| Srednja aplikacija (10M zahteva) | ~$200 | ~$0 | $200/mesec |
-| Velika aplikacija (100M zahteva) | ~$1,500 | ~$0 | $1,500/mesec |
+| Сценарио | Connection Strings | Управљани идентитет | Уштеда |
+|----------|-------------------|---------------------|---------|
+| Мала апликација (1M захтева) | ~$50 (Key Vault + ops) | ~$0 | $50/month |
+| Средња апликација (10M захтева) | ~$200 | ~$0 | $200/month |
+| Велика апликација (100M захтева) | ~$1,500 | ~$0 | $1,500/month |
 
 ---
 
-## Saznajte više
+## Сазнајте више
 
-### Službena dokumentacija
-- [Menadžisani identitet Azure-a](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
+### Званична документација
+- [Azure Managed Identity](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
 - [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
 - [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
 - [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
 
-### SDK dokumentacija
+### SDK документација
 - [@azure/identity (Node.js)](https://www.npmjs.com/package/@azure/identity)
 - [Azure.Identity (C#)](https://www.nuget.org/packages/Azure.Identity/)
 - [azure-identity (Python)](https://pypi.org/project/azure-identity/)
 
-### Sledeći koraci u ovom kursu
-- ← Prethodno: [Upravljanje konfiguracijom](configuration.md)
-- → Sledeće: [Prvi projekat](first-project.md)
-- 🏠 [Početna stranica kursa](../../README.md)
+### Следећи кораци у овом курсу
+- ← Претходно: [Configuration Management](configuration.md)
+- → Следеће: [First Project](first-project.md)
+- 🏠 [Course Home](../../README.md)
 
 ### Povezani primeri
-- [Primer Azure OpenAI četa](../../../../examples/azure-openai-chat) - Koristi menadžisani identitet za Azure OpenAI
-- [Primer mikroservisa](../../../../examples/microservices) - Šabloni autentifikacije više servisa
+- [Microsoft Foundry Models Chat Example](../../../../examples/azure-openai-chat) - Користи управљани идентитет за Microsoft Foundry Models
+- [Microservices Example](../../../../examples/microservices) - Обрасци аутентификације за више сервиса
 
 ---
 
-## Sažetak
+## Резиме
 
-**Naučili ste:**
-- ✅ Tri obrasca autentifikacije (stringovi za konekciju, Key Vault, menadžisani identitet)
-- ✅ Kako omogućiti i konfigurisati menadžisani identitet u AZD
-- ✅ RBAC dodeljivanje uloga za Azure servise
-- ✅ Integraciju Key Vault-a za tajne trećih strana
-- ✅ Korisnički dodeljeni vs sistemski dodeljeni identiteti
-- ✅ Najbolje bezbednosne prakse i rešavanje problema
+**Науčili сте:**
+- ✅ Три обрасца аутентификације (connection strings, Key Vault, управљани идентитет)
+- ✅ Како омогућити и конфигурисати управљани идентитет у AZD
+- ✅ RBAC доделе улога за Azure сервисе
+- ✅ Интеграцију Key Vault-а за тајне трећих страна
+- ✅ Кориснички додељени nasuprot системски додељеним идентитетима
+- ✅ Најбоље праксе за безбедност и решавање проблема
 
-**Ključni zaključci:**
-1. **Увек користите менаџисани идентитет у продукцији** - Нема тајни, аутоматска ротација
-2. **Користите RBAC улоге са најмање привилегија** - Додајте само неопходне дозволе
-3. **Складиштите кључеве трећих страна у Key Vault-у** - Централизовано управљање тајнама
-4. **Одвојите идентитете по окружењу** - Изолација за dev, staging, prod
-5. **Омогућите audit logovanje** - Пратите ко је шта приступао
+**Кључне напомене:**
+1. **Увек користите управљани идентитет у продукцији** - Нула тајни, аутоматска ротација
+2. **Користите RBAC улоге са најмањим привилегијама** - Додајте само неопходне дозволе
+3. **Чувајте кључеве трећих страна у Key Vault-у** - Централизовано управљање тајнама
+4. **Одвојите идентитете по окружењима** - Изолација за dev, staging, prod
+5. **Омогућите аудиторско логовање** - Пратите ко је приступао чему
 
-**Sledeći koraci:**
-1. Završite praktične vežbe iznad
-2. Migrirajte postojeću aplikaciju sa connection strings na menadžisani identitet
-3. Napravite svoj prvi AZD projekat sa bezbednošću od prvog dana: [Prvi projekat](first-project.md)
+**Следећи кораци:**
+1. Завршите практичне вежбе изнад
+2. Мигрирајте постојећу апликацију са connection strings на управљани идентитет
+3. Направите свој први AZD пројекат са безбедношћу од првог дана: [First Project](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Изјава о одрицању одговорности:
-Овај документ је преведен уз помоћ сервиса за превод који користи вештачку интелигенцију [Co-op Translator](https://github.com/Azure/co-op-translator). Иако тежимо прецизности, имајте у виду да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати званичним извором. За критичне информације препоручује се професионалан људски превод. Не одговарамо за било каква непоразумевања или погрешна тумачења која произилазе из коришћења овог превода.
+**Disclaimer**:
+Овај документ је преведен уз помоћ сервиса за превођење на бази вештачке интелигенције [Co-op Translator](https://github.com/Azure/co-op-translator). Иако се трудимо да будемо прецизни, имајте на уму да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати коначним и ауторитетним извором. За критичне информације препоручује се професионални људски превод. Нисмо одговорни за било каква неразумевања или погрешна тумачења која произилазе из коришћења овог превода.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

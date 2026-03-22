@@ -1,20 +1,20 @@
-# 2. Валидација шаблона
+# 2. Validate a Template
 
-!!! tip "НА КРАЈУ ОВОГ МОДУЛА МОЋИ ЋЕТЕ"
+!!! tip "НА КРАЈУ ОВОГ МОДУЛА БИЋЕТЕ У СТАЊУ ДА"
 
-    - [ ] Анализирати архитектуру AI решења
-    - [ ] Разумети AZD ток рада за деплој
-    - [ ] Користити GitHub Copilot за помоћ око коришћења AZD
-    - [ ] **Lab 2:** Деплој и валидација шаблона AI агената
+    - [ ] Анализирајте архитектуру AI решења
+    - [ ] Разумете AZD радни ток за деплојање
+    - [ ] Користите GitHub Copilot за помоћ у коришћењу AZD
+    - [ ] **Лаб 2:** Деплој и валидација шаблона AI агената
 
 ---
 
 
-## 1. Увод
+## 1. Introduction
 
 The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` is an open-source commandline tool that streamlines the developer workflow when building and deploying applications to Azure. 
 
-[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _инфраструктура-као-код_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **and** deploy your application at one shot!
+[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _infrastructure-as-code_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **and** deploy your application at one shot!
 
 As a result, jumpstarting your application development process can be as simple as finding the right _AZD Starter template_ that comes closest to your application and infrastructure needs - then customizing the repository to suit your scenario requirements.
 
@@ -36,14 +36,14 @@ Before we begin, let's make sure you have the Azure Developer CLI installed.
 
 ---
 
-## 2. Избор шаблона
+## 2. Template Selection
 
 The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
 
 1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
 
-![Изаберите](../../../../../translated_images/sr/01-pick-template.60d2d5fff5ebc374.webp)
+![Одаберите](../../../../../translated_images/sr/01-pick-template.60d2d5fff5ebc374.webp)
 
 
 The **Basic** options are your starter templates:
@@ -57,11 +57,11 @@ Visit the second link in a new browser tab (or click `Open in GitHub` for the re
 
 ---
 
-## 3. Активирање шаблона
+## 3. Template Activation
 
 Let's try to deploy this template and make sure it is valid. We'll follow the guidelines in the [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) section.
 
-1. Click [овде](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) - confirm the default action to `Create codespace`
+1. Click [this link](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) - confirm the default action to `Create codespace`
 1. This opens a new browser tab - wait for the GitHub Codespaces session to complete loading
 1. Open the VS Code terminal in Codespaces - type the following command:
 
@@ -91,13 +91,13 @@ Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
 ---
 
-## 4. Валидација шаблона
+## 4. Template Validation
 
-1. Visit Azure Portal [Групе ресурса](https://portal.azure.com/#browse/resourcegroups) page - log in when prompted
+1. Visit Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) page - log in when prompted
 1. Click on RG for your environment name - you see the page above
 
-      - кликните на ресурс Azure Container Apps
-      - кликните на Application Url у одељку _Essentials_ (горе десно)
+      - click on the Azure Container Apps resource
+      - click on the Application Url in the _Essentials_ section (top right)
 
 1. You should see a hosted application front-end UI like this:
 
@@ -105,8 +105,8 @@ Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
 1. Try asking a couple of [пример питања](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
-      1. Ask: ```Који је главни град Француске?``` 
-      1. Ask: ```Који је најбољи шатор до $200 за две особе, и које карактеристике укључује?```
+      1. Ask: ```Која је престоница Француске?``` 
+      1. Ask: ```Који је најбољи шатор до $200 за двоје људи и које карактеристике укључује?```
 
 1. You should get answers similar to what is shown below. _But how does this work?_ 
 
@@ -114,7 +114,7 @@ Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
 ---
 
-## 5.  Валидација агента
+## 5.  Agent Validation
 
 The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Microsoft Foundry project for this template. Let's take a look at what that means.
 
@@ -126,16 +126,16 @@ The Azure Container App deploys an endpoint that connects to the AI Agent provis
    ![Foundry](../../../../../translated_images/sr/04-view-foundry-project.fb94ca41803f28f3.webp)
 
 1. You should see the Foundry Project page for your AI application
-   ![Project](../../../../../translated_images/sr/05-visit-foundry-portal.d734e98135892d7e.webp)
+   ![Пројекат](../../../../../translated_images/sr/05-visit-foundry-portal.d734e98135892d7e.webp)
 
 1. Click on `Agents` - you see the default Agent provisioned in your project
-   ![Agents](../../../../../translated_images/sr/06-visit-agents.bccb263f77b00a09.webp)
+   ![Агенти](../../../../../translated_images/sr/06-visit-agents.bccb263f77b00a09.webp)
 
 1. Select it - and you see the Agent details. Note the following:
 
-      - The agent uses File Search by default (always)
-      - The agent `Knowledge` indicates it has 32 files uploaded (for file search)
-      ![Agents](../../../../../translated_images/sr/07-view-agent-details.0e049f37f61eae62.webp)
+      - Агент подразумевано користи File Search (увек)
+      - Агент `Knowledge` показује да има отпремљено 32 фајла (за претрагу фајлова)
+      ![Агенти](../../../../../translated_images/sr/07-view-agent-details.0e049f37f61eae62.webp)
 
 1. Look for the `Data+indexes` option in the left menu and click for details. 
 
@@ -189,16 +189,16 @@ Observability is about instrumenting your application to generate data that can 
    - Understand total Token count (vs. output tokens usage) for response
    - Understand the latency and where time is being spent in execution
 
-      ![Agent](../../../../../translated_images/sr/10-view-run-info.b20ebd75fef6a1cc.webp)
+      ![Агент](../../../../../translated_images/sr/10-view-run-info.b20ebd75fef6a1cc.webp)
 
 1. Click the `Metadata` tab to see additional attributes for the run, that may provide useful context for debugging issues later.   
 
-      ![Agent](../../../../../translated_images/sr/11-view-run-info-metadata.7966986122c7c2df.webp)
+      ![Агент](../../../../../translated_images/sr/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 
 1. Click the `Evaluations` tab to see auto-assessments made on the agent response. These include safety evaluations (e.g., Self-harm) and agent-specifc evaluations (e.g., Intent resolution, Task adherence).
 
-      ![Agent](../../../../../translated_images/sr/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
+      ![Агент](../../../../../translated_images/sr/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
 1. Last but not least, click the `Monitoring` tab in the sidebar menu.
 
@@ -206,11 +206,11 @@ Observability is about instrumenting your application to generate data that can 
       - Track application usage in terms of costs (tokens) and load (requests).
       - Track applicaton latency to first byte (input processing) and last byte (output).
 
-      ![Agent](../../../../../translated_images/sr/13-monitoring-resources.5148015f7311807f.webp)
+      ![Агент](../../../../../translated_images/sr/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 
-## 8. Променљиве окружења
+## 8. Environment Variables
 
 So far, we've walked through the deployment in the browser - and validated that our infrastructure is provisioned and the application is operational. But to work with the application _code-first_, we need to configure our local development environment with the relevant variables required to work with these resources. Using `azd` makes it easy.
 
@@ -232,7 +232,7 @@ Let's try out a few commands:
       You see something like:
 
       ```bash title="" linenums="0"
-      AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4o-mini"
+      AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
       AZURE_AI_AGENT_NAME="agent-template-assistant"
       AZURE_AI_EMBED_DEPLOYMENT_NAME="text-embedding-3-small"
       AZURE_AI_EMBED_DIMENSIONS=100
@@ -267,27 +267,27 @@ Let's try out a few commands:
 
 1. Note that some resources are persistent (e.g., model deployments) and will require more than just an `azd up` to force the redeployment. Let's try tearing down the original deployment and redeploying with changed env vars.
 
-1. **Refresh** If you had previously deployed infrastructure using an azd template - you can _refresh_ the state of your local environment variables based on the current state of your Azure deployment using this command:
+1. **Освежите** If you had previously deployed infrastructure using an azd template - you can _refresh_ the state of your local environment variables based on the current state of your Azure deployment using this command:
 
       ```bash title="" linenums="0"
       azd env refresh
       ```
 
-      Ово је моћан начин да се _синхронизују_ променљиве окружења између два или више локалних развојних окружења (нпр. тим са више програмера) - омогућавајући да размештена инфраструктура служи као основна истина за статус променљивих окружења. Чланови тима једноставно _освежавају_ променљиве да би поново били усклађени.
+      Ово је моћан начин да _синхронизујете_ променљиве окружења између два или више локалних развојних окружења (нпр. тим са више програмера) - омогућавајући да распоређена инфраструктура служи као поуздан извор података о стању променљивих окружења. Чланови тима једноставно _освеже_ променљиве да би се поново синхронизовали.
 
 ---
 
 ## 9. Честитамо 🏆
 
-Управо сте завршили крај-до-краја радни ток у којем сте:
+Управо сте завршили крај-до-крај радни ток у којем сте:
 
-- [X] Изабрали AZD шаблон који желите да користите
-- [X] Покренули шаблон помоћу GitHub Codespaces 
-- [X] Размештили шаблон и потврдили да ради
+- [X] Одабрали сте AZD шаблон који желите да користите
+- [X] Покренули сте шаблон помоћу GitHub Codespaces 
+- [X] Распоредили сте шаблон и проверили да ради
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Изјава о одрицању одговорности:
-Овај документ је преведен уз помоћ услуге за превођење помоћу вештачке интелигенције [Co-op Translator](https://github.com/Azure/co-op-translator). Иако се трудимо да обезбедимо тачност, имајте у виду да аутоматски преводи могу да садрже грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати ауторитетним извором. За критичне информације препоручујемо коришћење услуга професионалног преводиоца. Не сносимо одговорност за било какве неспоразуме или погрешне тумачења која произилазе из коришћења овог превода.
+**Изјава о одрицању одговорности**:
+Овај документ је преведен помоћу услуге превођења засноване на вештачкој интелигенцији [Co-op Translator](https://github.com/Azure/co-op-translator). Иако се трудимо да будемо прецизни, имајте у виду да аутоматски преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати ауторитетним извором. За критичне информације препоручује се професионални људски превод. Не сносимо одговорност за било какве неспоразуме или погрешне тумачења која произилазе из коришћења овог превода.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

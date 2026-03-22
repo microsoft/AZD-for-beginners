@@ -1,26 +1,26 @@
-# AI Model Deployment with Azure Developer CLI
+# Distribuering av AI-modeller med Azure Developer CLI
 
-**Chapter Navigation:**
-- **📚 Kursens startsida**: [AZD för nybörjare](../../README.md)
+**Kapitelnavigering:**
+- **📚 Kursöversikt**: [AZD för nybörjare](../../README.md)
 - **📖 Aktuellt kapitel**: Kapitel 2 - AI-först utveckling
-- **⬅️ Föregående**: [Microsoft Foundry-integration](microsoft-foundry-integration.md)
-- **➡️ Nästa**: [AI-workshoplabb](ai-workshop-lab.md)
+- **⬅️ Föregående**: [Integration med Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Nästa**: [AI workshop-labb](ai-workshop-lab.md)
 - **🚀 Nästa kapitel**: [Kapitel 3: Konfiguration](../chapter-03-configuration/configuration.md)
 
-Denna guide innehåller omfattande instruktioner för att distribuera AI-modeller med hjälp av AZD-mallar, och täcker allt från modellval till produktionsdistributionsmönster.
+Denna guide ger omfattande instruktioner för att distribuera AI-modeller med AZD-mallar, och täcker allt från modellval till produktionsutrullningsmönster.
 
 ## Innehållsförteckning
 
-- [Modellvalstrategi](../../../../docs/chapter-02-ai-development)
+- [Strategi för modellval](../../../../docs/chapter-02-ai-development)
 - [AZD-konfiguration för AI-modeller](../../../../docs/chapter-02-ai-development)
-- [Distributionsmönster](../../../../docs/chapter-02-ai-development)
+- [Utrullningsmönster](../../../../docs/chapter-02-ai-development)
 - [Modellhantering](../../../../docs/chapter-02-ai-development)
 - [Produktionsöverväganden](../../../../docs/chapter-02-ai-development)
 - [Övervakning och observerbarhet](../../../../docs/chapter-02-ai-development)
 
-## Modellvalstrategi
+## Strategi för modellval
 
-### Azure OpenAI-modeller
+### Microsoft Foundry-modeller Modeller
 
 Välj rätt modell för ditt användningsfall:
 
@@ -34,9 +34,9 @@ services:
       AZURE_OPENAI_MODELS: |
         [
           {
-            "name": "gpt-4o-mini",
+            "name": "gpt-4.1-mini",
             "version": "2024-07-18",
-            "deployment": "gpt-4o-mini",
+            "deployment": "gpt-4.1-mini",
             "capacity": 10,
             "format": "OpenAI"
           },
@@ -52,28 +52,28 @@ services:
 
 ### Kapacitetsplanering för modeller
 
-| Modelltyp | Användningsfall | Rekommenderad kapacitet | Kostnadsöverväganden |
+| Modelltyp | Användningsfall | Rekommenderad kapacitet | Kostnadsaspekter |
 |------------|----------|---------------------|-------------------|
-| GPT-4o-mini | Chatt, Q&A | 10-50 TPM | Kostnadseffektivt för de flesta arbetsbelastningar |
-| GPT-4 | Komplexa resonemang | 20-100 TPM | Högre kostnad, använd för premiumfunktioner |
-| Text-embedding-ada-002 | Sökning, RAG | 30-120 TPM | Avgörande för semantisk sökning |
-| Whisper | Tal till text | 10-50 TPM | Arbetsbelastningar för ljudbearbetning |
+| gpt-4.1-mini | Chatt, Frågor och svar | 10-50 TPM | Kostnadseffektivt för de flesta arbetsbelastningar |
+| gpt-4.1 | Komplex resonemang | 20-100 TPM | Högre kostnad, använd för premiumfunktioner |
+| Text-embedding-ada-002 | Sökning, RAG | 30-120 TPM | Viktigt för semantisk sökning |
+| Whisper | Tal-till-text | 10-50 TPM | Arbetsbelastningar för ljudbearbetning |
 
 ## AZD-konfiguration för AI-modeller
 
-### Konfiguration av Bicep-mallar
+### Bicep-mallkonfiguration
 
-Skapa modelldistributioner genom Bicep-mallar:
+Skapa modell-utrullningar genom Bicep-mallar:
 
 ```bicep
 // infra/main.bicep
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
-    name: 'gpt-4o-mini'
+    name: 'gpt-4.1-mini'
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
     sku: {
@@ -130,11 +130,11 @@ Konfigurera din applikationsmiljö:
 # .env-konfiguration
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
-AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
+AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
-## Distributionsmönster
+## Utrullningsmönster
 
 ### Mönster 1: Distribution i en region
 
@@ -146,7 +146,7 @@ services:
     host: containerapp
     config:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
-      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
+      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
 Bäst för:
@@ -154,7 +154,7 @@ Bäst för:
 - Applikationer för en enda marknad
 - Kostnadsoptimering
 
-### Mönster 2: Distribution i flera regioner
+### Mönster 2: Flerregionsdistribution
 
 ```bicep
 // Multi-region deployment
@@ -174,7 +174,7 @@ Bäst för:
 
 ### Mönster 3: Hybriddistribution
 
-Kombinera Azure OpenAI med andra AI-tjänster:
+Kombinera Microsoft Foundry-modeller med andra AI-tjänster:
 
 ```bicep
 // Hybrid AI services
@@ -205,7 +205,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ## Modellhantering
 
-### Versionshantering
+### Versionskontroll
 
 Spåra modellversioner i din AZD-konfiguration:
 
@@ -213,7 +213,7 @@ Spåra modellversioner i din AZD-konfiguration:
 {
   "models": {
     "chat": {
-      "name": "gpt-4o-mini",
+      "name": "gpt-4.1-mini",
       "version": "2024-07-18",
       "fallback": "gpt-35-turbo"
     },
@@ -227,7 +227,7 @@ Spåra modellversioner i din AZD-konfiguration:
 
 ### Modelluppdateringar
 
-Använd AZD hooks för modelluppdateringar:
+Använd AZD-hooks för modelluppdateringar:
 
 ```bash
 #!/bin/bash
@@ -237,7 +237,7 @@ echo "Checking model availability..."
 az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
-  --query "[?name=='gpt-4o-mini']"
+  --query "[?name=='gpt-4.1-mini']"
 ```
 
 ### A/B-testning
@@ -249,11 +249,11 @@ param enableABTesting bool = false
 
 resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'gpt-4o-mini-${enableABTesting ? 'v1' : 'prod'}'
+  name: 'gpt-4.1-mini-${enableABTesting ? 'v1' : 'prod'}'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -268,7 +268,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### Kapacitetsplanering
 
-Beräkna erforderlig kapacitet baserat på användningsmönster:
+Beräkna nödvändig kapacitet baserat på användningsmönster:
 
 ```python
 # Exempel på kapacitetsberäkning
@@ -445,7 +445,7 @@ class AITelemetry:
 Implementera hälsomonitorering för AI-tjänster:
 
 ```python
-# Ändpunkter för hälsokontroll
+# Slutpunkter för hälsokontroll
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -455,7 +455,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Testa anslutning till OpenAI
+        # Testa OpenAI-anslutning
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -473,30 +473,30 @@ async def check_ai_models():
 
 ## Nästa steg
 
-1. **Granska [Microsoft Foundry-integrationguiden](microsoft-foundry-integration.md)** för serviceintegrationsmönster
-2. **Genomför [AI-workshoplabb](ai-workshop-lab.md)** för praktisk erfarenhet
-3. **Implementera [Produktions-AI-praktiker](production-ai-practices.md)** för företagsdistributioner
+1. **Granska [Integrationsguiden för Microsoft Foundry](microsoft-foundry-integration.md)** för mönster för tjänsteintegration
+2. **Genomför [AI workshop-labb](ai-workshop-lab.md)** för praktisk erfarenhet
+3. **Implementera [Produktionsriktlinjer för AI](production-ai-practices.md)** för företagsutplaceringar
 4. **Utforska [AI-felsökningsguiden](../chapter-07-troubleshooting/ai-troubleshooting.md)** för vanliga problem
 
 ## Resurser
 
-- [Tillgänglighet för Azure OpenAI-modeller](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Dokumentation för Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Tillgänglighet för Microsoft Foundry-modeller](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI-dokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Skalning av Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Kostnadsoptimering för AI-modeller](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Chapter Navigation:**
-- **📚 Kursens startsida**: [AZD för nybörjare](../../README.md)
+**Kapitelnavigering:**
+- **📚 Kursöversikt**: [AZD för nybörjare](../../README.md)
 - **📖 Aktuellt kapitel**: Kapitel 2 - AI-först utveckling
-- **⬅️ Föregående**: [Microsoft Foundry-integration](microsoft-foundry-integration.md)
-- **➡️ Nästa**: [AI-workshoplabb](ai-workshop-lab.md)
+- **⬅️ Föregående**: [Integration med Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Nästa**: [AI workshop-labb](ai-workshop-lab.md)
 - **🚀 Nästa kapitel**: [Kapitel 3: Konfiguration](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfriskrivning**:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, observera att automatiska översättningar kan innehålla fel eller felaktigheter. Originaldokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var god observera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på sitt ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

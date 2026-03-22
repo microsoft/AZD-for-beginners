@@ -1,81 +1,76 @@
-# Kapitel 5: Multi-Agenten-KI-Lösungen
+# Kapitel 5: Multi-Agent-KI-Lösungen
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Dauer**: 2-3 Stunden | **⭐ Komplexität**: Fortgeschritten
+**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Dauer**: 2-3 hours | **⭐ Komplexität**: Fortgeschritten
 
 ---
 
 ## Überblick
 
-Dieses Kapitel behandelt fortgeschrittene Multi-Agenten-Architekturmuster, Agenten-Orchestrierung und produktionsreife KI-Bereitstellungen für komplexe Szenarien.
+Dieses Kapitel behandelt fortgeschrittene Multi-Agent-Architekturmuster, Agenten-Orchestrierung und produktionsreife KI-Bereitstellungen für komplexe Szenarien.
 
 ## Lernziele
 
-Wenn Sie dieses Kapitel abschließen, werden Sie:
-- Multi-Agenten-Architekturmuster verstehen
-- Koordinierte KI-Agentensysteme bereitstellen
-- Agenten-zu-Agenten-Kommunikation implementieren
-- Produktionsreife Multi-Agenten-Lösungen erstellen
+Nach Abschluss dieses Kapitels werden Sie:
+- Multi-Agent-Architekturmuster verstehen
+- koordinierte KI-Agentensysteme bereitstellen
+- Agent-zu-Agent-Kommunikation implementieren
+- produktionsreife Multi-Agent-Lösungen erstellen
 
 ---
 
-## 📚 Lektionen
+## 📚 Lessons
 
 | # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Multi-Agenten-Lösung für den Einzelhandel](../../examples/retail-scenario.md) | Vollständige Implementierungsdurchführung | 90 Min |
-| 2 | [Koordinationsmuster](../chapter-06-pre-deployment/coordination-patterns.md) | Agenten-Orchestrierungsstrategien | 30 Min |
-| 3 | [ARM-Template-Bereitstellung](../../examples/retail-multiagent-arm-template/README.md) | Ein-Klick-Bereitstellung | 30 Min |
+| 1 | [Retail Multi-Agent Solution](../../examples/retail-scenario.md) | Vollständiger Implementierungsdurchgang | 90 min |
+| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Strategien zur Agenten-Orchestrierung | 30 min |
+| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | Ein-Klick-Bereitstellung | 30 min |
 
 ---
 
 ## 🚀 Schnellstart
 
 ```bash
-# Bereitstellen der Multi-Agenten-Lösung für den Einzelhandel
-cd examples/retail-multiagent-arm-template
-./deploy.sh
-
-# Oder verwenden Sie die Vorlage direkt
+# Option 1: Bereitstellung aus einer Vorlage
 azd init --template agent-openai-python-prompty
+azd up
+
+# Option 2: Bereitstellung aus einem Agentenmanifest (erfordert die Erweiterung azure.ai.agents)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
----
-
-## 🤖 Multi-Agenten-Architektur
-
-```
-┌──────────────────────────────────────────────────────────────┐
-│                    Orchestrator Agent                         │
-│              (Routes requests, manages workflow)              │
-└────────────────────┬─────────────────┬───────────────────────┘
-                     │                 │
-         ┌───────────▼───────┐ ┌───────▼───────────┐
-         │  Customer Agent   │ │  Inventory Agent  │
-         │  (User queries,   │ │  (Stock levels,   │
-         │   preferences)    │ │   orders)         │
-         └───────────────────┘ └───────────────────┘
-```
+> **Welche Vorgehensweise?** Verwenden Sie `azd init --template`, um mit einem funktionierenden Beispiel zu beginnen. Verwenden Sie `azd ai agent init`, wenn Sie Ihr eigenes Agenten-Manifest haben. Siehe die [AZD AI CLI-Referenz](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) für vollständige Details.
 
 ---
 
-## 🎯 Vorgestellte Lösung: Multi-Agenten-Lösung für den Einzelhandel
+## 🤖 Multi-Agent-Architektur
 
-Die [Multi-Agenten-Lösung für den Einzelhandel](../../examples/retail-scenario.md) demonstriert:
+```mermaid
+graph TD
+    Orchestrator[Orchestrator-Agent<br/>Leitet Anfragen, verwaltet den Arbeitsablauf] --> Customer[Customer-Agent<br/>Benutzeranfragen, Präferenzen]
+    Orchestrator --> Inventory[Inventory-Agent<br/>Lagerbestände, Bestellungen]
+```
+---
 
-- **Kunden-Agent**: Verarbeitet Benutzerinteraktionen und -präferenzen
-- **Lager-Agent**: Verwaltet Bestände und Auftragsverarbeitung
-- **Orchestrator**: Koordiniert die Zusammenarbeit zwischen den Agenten
-- **Gemeinsamer Speicher**: Kontextverwaltung über Agenten hinweg
+## 🎯 Vorgestellte Lösung: Einzelhandels-Multi-Agent
+
+Die [Retail Multi-Agent Solution](../../examples/retail-scenario.md) zeigt:
+
+- **Customer Agent**: Verarbeitet Benutzerinteraktionen und Präferenzen
+- **Inventory Agent**: Verwaltet Lagerbestand und Auftragsabwicklung
+- **Orchestrator**: Koordiniert zwischen Agenten
+- **Shared Memory**: Kontextverwaltung über Agenten hinweg
 
 ### Verwendete Dienste
 
 | Service | Purpose |
 |---------|---------|
-| Azure OpenAI | Sprachverständnis |
+| Microsoft Foundry Models | Sprachverstehen |
 | Azure AI Search | Produktkatalog |
-| Cosmos DB | Agentenzustand und Speicher |
-| Container Apps | Hosting der Agenten |
+| Cosmos DB | Agentenzustand und -speicher |
+| Container Apps | Agent-Hosting |
 | Application Insights | Überwachung |
 
 ---
@@ -84,20 +79,20 @@ Die [Multi-Agenten-Lösung für den Einzelhandel](../../examples/retail-scenario
 
 | Direction | Chapter |
 |-----------|---------|
-| **Previous** | [Kapitel 4: Infrastruktur](../chapter-04-infrastructure/README.md) |
-| **Next** | [Kapitel 6: Vorbereitungen vor der Bereitstellung](../chapter-06-pre-deployment/README.md) |
+| **Previous** | [Chapter 4: Infrastructure](../chapter-04-infrastructure/README.md) |
+| **Next** | [Chapter 6: Pre-Deployment](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Verwandte Ressourcen
 
-- [Leitfaden zu KI-Agenten](../chapter-02-ai-development/agents.md)
-- [Produktions-KI-Praktiken](../chapter-08-production/production-ai-practices.md)
-- [KI-Fehlerbehebung](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [AI Agents Guide](../chapter-02-ai-development/agents.md)
+- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
+- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 Haftungsausschluss:
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst Co-op Translator (https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache ist als maßgebliche Quelle zu betrachten. Bei wichtigen Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Verwendung dieser Übersetzung ergeben.
+Dieses Dokument wurde mithilfe des KI-Übersetzungsdienstes [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir um Genauigkeit bemüht sind, kann es bei automatischen Übersetzungen zu Fehlern oder Ungenauigkeiten kommen. Das Originaldokument in seiner ursprünglichen Sprache ist als maßgebliche Quelle zu betrachten. Für wichtige Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Nutzung dieser Übersetzung entstehen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

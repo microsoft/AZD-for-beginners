@@ -2,119 +2,119 @@
 
 **Öğrenme Yolu Navigasyonu**
 - **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../README.md)
-- **📖 Öğrenmeye Başla**: [Bölüm 1: Temel Bilgiler ve Hızlı Başlangıç](../README.md#-chapter-1-foundation--quick-start)
+- **📖 Öğrenmeye Başla**: [Bölüm 1: Temel & Hızlı Başlangıç](../README.md#-chapter-1-foundation--quick-start)
 - **🎯 İlerleme Takibi**: [Kurs Tamamlama](../README.md#-course-completion--certification)
 
 ## Giriş
 
-Bu kapsamlı çalışma rehberi, Azure Developer CLI (azd) konusunda ustalaşmanıza yardımcı olmak için yapılandırılmış öğrenme hedefleri, temel kavramlar, pratik alıştırmalar ve değerlendirme materyalleri sunar. İlerlemenizi takip etmek ve tüm temel konuları kapsadığınızdan emin olmak için bu rehberi kullanabilirsiniz.
+Bu kapsamlı çalışma rehberi, Azure Developer CLI (azd) konusunda ustalaşmanıza yardımcı olacak yapılandırılmış öğrenme hedefleri, ana kavramlar, pratik alıştırmalar ve değerlendirme materyalleri sağlar. Bu rehberi ilerlemenizi takip etmek ve temel konuların tümünü kapsadığınızdan emin olmak için kullanın.
 
 ## Öğrenme Hedefleri
 
-Bu çalışma rehberini tamamladığınızda:
-- Azure Developer CLI'nin temel ve ileri düzey tüm kavramlarını öğrenmiş olacaksınız
-- Azure uygulamalarını dağıtma ve yönetme konusunda pratik beceriler geliştireceksiniz
-- Dağıtımları optimize etme ve sorun giderme konusunda kendinize güven kazanacaksınız
-- Üretime hazır dağıtım uygulamaları ve güvenlik konularını anlayacaksınız
+Bu çalışma rehberini tamamlayarak:
+- Azure Developer CLI'nin tüm temel ve ileri düzey kavramlarında ustalaşacaksınız
+- Azure uygulamalarını dağıtma ve yönetmede pratik beceriler geliştireceksiniz
+- Dağıtımları sorun giderme ve optimize etme konusunda güven kazanacaksınız
+- Üretime hazır dağıtım uygulamalarını ve güvenlik hususlarını anlayacaksınız
 
 ## Öğrenme Çıktıları
 
 Bu çalışma rehberinin tüm bölümlerini tamamladıktan sonra:
-- azd kullanarak tam uygulama mimarileri tasarlayabilir, dağıtabilir ve yönetebilirsiniz
-- Kapsamlı izleme, güvenlik ve maliyet optimizasyon stratejilerini uygulayabilirsiniz
-- Karmaşık dağıtım sorunlarını bağımsız olarak çözebilirsiniz
-- Özel şablonlar oluşturabilir ve azd topluluğuna katkıda bulunabilirsiniz
+- azd kullanarak eksiksiz uygulama mimarileri tasarlayacak, dağıtacak ve yöneteceksiniz
+- Kapsamlı izleme, güvenlik ve maliyet optimizasyonu stratejileri uygulayacaksınız
+- Karmaşık dağıtım sorunlarını bağımsız olarak çözebileceksiniz
+- Özel şablonlar oluşturacak ve azd topluluğuna katkıda bulunacaksınız
 
 ## 8 Bölümlük Öğrenme Yapısı
 
-### Bölüm 1: Temel Bilgiler ve Hızlı Başlangıç (1. Hafta)
+### Bölüm 1: Temel & Hızlı Başlangıç (Hafta 1)
 **Süre**: 30-45 dakika | **Zorluk**: ⭐
 
 #### Öğrenme Hedefleri
-- Azure Developer CLI'nin temel kavramlarını ve terminolojisini anlayın
-- AZD'yi geliştirme platformunuza başarıyla kurun ve yapılandırın
-- Mevcut bir şablon kullanarak ilk uygulamanızı dağıtın
-- AZD komut satırı arayüzünde etkili bir şekilde gezinmeyi öğrenin
+- Azure Developer CLI çekirdek kavramlarını ve terminolojiyi anlayın
+- Geliştirme platformunuzda AZD'yi başarıyla yükleyip yapılandırın
+- Mevcut bir şablonu kullanarak ilk uygulamanızı dağıtın
+- AZD komut satırı arayüzünde etkili şekilde gezinmeyi öğrenin
 
-#### Ustalaşılacak Temel Kavramlar
+#### Ustalaşılması Gereken Temel Kavramlar
 - AZD proje yapısı ve bileşenleri (azure.yaml, infra/, src/)
 - Şablon tabanlı dağıtım iş akışları
-- Ortam yapılandırma temelleri
+- Ortam yapılandırması temelleri
 - Kaynak grubu ve abonelik yönetimi
 
 #### Pratik Alıştırmalar
-1. **Kurulum Doğrulama**: AZD'yi kurun ve `azd version` ile doğrulayın
+1. **Kurulum Doğrulama**: AZD'yi yükleyin ve `azd version` ile doğrulayın
 2. **İlk Dağıtım**: todo-nodejs-mongo şablonunu başarıyla dağıtın
-3. **Ortam Ayarı**: İlk ortam değişkenlerinizi yapılandırın
-4. **Kaynak Keşfi**: Azure Portal'da dağıtılmış kaynaklarda gezin
+3. **Ortam Kurulumu**: İlk ortam değişkenlerinizi yapılandırın
+4. **Kaynak Keşfi**: Azure Portal'da dağıtılan kaynakları keşfedin
 
 #### Değerlendirme Soruları
-- AZD projesinin temel bileşenleri nelerdir?
-- Bir şablondan yeni bir proje nasıl başlatılır?
-- `azd up` ve `azd deploy` arasındaki fark nedir?
-- AZD ile birden fazla ortam nasıl yönetilir?
+- Bir AZD projesinin temel bileşenleri nelerdir?
+- Bir şablondan yeni bir projeyi nasıl başlatırsınız?
+- `azd up` ile `azd deploy` arasındaki fark nedir?
+- AZD ile birden fazla ortamı nasıl yönetirsiniz?
 
 ---
 
-### Bölüm 2: AI-Öncelikli Geliştirme (2. Hafta)
+### Bölüm 2: Yapay Zeka Öncelikli Geliştirme (Hafta 2)
 **Süre**: 1-2 saat | **Zorluk**: ⭐⭐
 
 #### Öğrenme Hedefleri
-- Microsoft Foundry hizmetlerini AZD iş akışlarına entegre edin
-- AI destekli uygulamaları dağıtın ve yapılandırın
+- Microsoft Foundry hizmetlerini AZD iş akışlarıyla entegre edin
+- Yapay zekâ destekli uygulamaları dağıtın ve yapılandırın
 - RAG (Retrieval-Augmented Generation) uygulama desenlerini anlayın
-- AI modeli dağıtımlarını ve ölçeklendirmeyi yönetin
+- Yapay zekâ model dağıtımlarını ve ölçeklendirmesini yönetin
 
-#### Ustalaşılacak Temel Kavramlar
-- Azure OpenAI hizmet entegrasyonu ve API yönetimi
-- AI Arama yapılandırması ve vektör indeksleme
-- Model dağıtım stratejileri ve kapasite planlaması
+#### Ustalaşılması Gereken Temel Kavramlar
+- Microsoft Foundry Models hizmet entegrasyonu ve API yönetimi
+- AI Search yapılandırması ve vektör indeksleme
+- Model dağıtım stratejileri ve kapasite planlama
 - AI uygulama izleme ve performans optimizasyonu
 
 #### Pratik Alıştırmalar
 1. **AI Sohbet Dağıtımı**: azure-search-openai-demo şablonunu dağıtın
-2. **RAG Uygulaması**: Belge indeksleme ve geri çağırmayı yapılandırın
-3. **Model Yapılandırması**: Farklı amaçlar için birden fazla AI modeli kurun
-4. **AI İzleme**: AI iş yükleri için Application Insights'ı uygulayın
+2. **RAG Uygulaması**: Belge indeksleme ve alma yapılandırmasını uygulayın
+3. **Model Yapılandırma**: Farklı amaçlar için birden fazla AI modeli kurun
+4. **AI İzleme**: AI iş yükleri için Application Insights uygulayın
 
 #### Değerlendirme Soruları
-- AZD şablonunda Azure OpenAI hizmetleri nasıl yapılandırılır?
-- RAG mimarisinin temel bileşenleri nelerdir?
-- AI modeli kapasitesi ve ölçeklendirme nasıl yönetilir?
+- AZD şablonunda Microsoft Foundry Models hizmetlerini nasıl yapılandırırsınız?
+- Bir RAG mimarisinin temel bileşenleri nelerdir?
+- AI model kapasitesini ve ölçeklendirmesini nasıl yönetirsiniz?
 - AI uygulamaları için hangi izleme metrikleri önemlidir?
 
 ---
 
-### Bölüm 3: Yapılandırma ve Kimlik Doğrulama (3. Hafta)
+### Bölüm 3: Yapılandırma & Kimlik Doğrulama (Hafta 3)
 **Süre**: 45-60 dakika | **Zorluk**: ⭐⭐
 
 #### Öğrenme Hedefleri
 - Ortam yapılandırma ve yönetim stratejilerinde ustalaşın
-- Güvenli kimlik doğrulama desenleri ve yönetilen kimlik uygulayın
-- Kaynakları doğru adlandırma kurallarıyla organize edin
-- Çoklu ortam dağıtımlarını (geliştirme, test, üretim) yapılandırın
+- Güvenli kimlik doğrulama desenleri ve managed identity uygulayın
+- Kaynakları uygun adlandırma kurallarıyla organize edin
+- Çok ortamlı dağıtımları (dev, staging, prod) yapılandırın
 
-#### Ustalaşılacak Temel Kavramlar
+#### Ustalaşılması Gereken Temel Kavramlar
 - Ortam hiyerarşisi ve yapılandırma önceliği
-- Yönetilen kimlik ve hizmet ilkesi kimlik doğrulama
-- Gizli bilgiler yönetimi için Key Vault entegrasyonu
-- Ortama özel parametre yönetimi
+- Managed identity ve service principal kimlik doğrulama
+- Gizli veriler için Key Vault entegrasyonu
+- Ortamlara özgü parametre yönetimi
 
 #### Pratik Alıştırmalar
-1. **Çoklu Ortam Ayarı**: Geliştirme, test ve üretim ortamlarını yapılandırın
-2. **Güvenlik Yapılandırması**: Yönetilen kimlik kimlik doğrulamasını uygulayın
-3. **Gizli Bilgi Yönetimi**: Hassas veriler için Azure Key Vault'u entegre edin
-4. **Parametre Yönetimi**: Ortama özel yapılandırmalar oluşturun
+1. **Çoklu Ortam Kurulumu**: dev, staging ve prod ortamlarını yapılandırın
+2. **Güvenlik Yapılandırması**: Managed identity kimlik doğrulamasını uygulayın
+3. **Gizli Yönetimi**: Hassas veriler için Azure Key Vault entegrasyonu yapın
+4. **Parametre Yönetimi**: Ortamlara özgü yapılandırmalar oluşturun
 
 #### Değerlendirme Soruları
-- AZD ile farklı ortamlar nasıl yapılandırılır?
-- Yönetilen kimlik kullanmanın hizmet ilkelerine göre avantajları nelerdir?
-- Uygulama gizli bilgileri nasıl güvenli bir şekilde yönetilir?
-- AZD'deki yapılandırma hiyerarşisi nedir?
+- AZD ile farklı ortamları nasıl yapılandırırsınız?
+- Managed identity kullanmanın service principal'a göre faydaları nelerdir?
+- Uygulama gizli verilerini nasıl güvenli şekilde yönetirsiniz?
+- AZD'de yapılandırma hiyerarşisi nedir?
 
 ---
 
-### Bölüm 4: Kod Olarak Altyapı ve Dağıtım (4-5. Hafta)
+### Bölüm 4: Altyapı Kod Olarak & Dağıtım (Hafta 4-5)
 **Süre**: 1-1.5 saat | **Zorluk**: ⭐⭐⭐
 
 #### Öğrenme Hedefleri
@@ -125,164 +125,165 @@ Bu çalışma rehberinin tüm bölümlerini tamamladıktan sonra:
 
 - Azure Container Apps ve AZD kullanarak konteynerleştirilmiş uygulamaları dağıtın
 
-#### Ustalaşılacak Temel Kavramlar
+
+#### Ustalaşılması Gereken Temel Kavramlar
 - Bicep şablon yapısı ve en iyi uygulamalar
 - Kaynak bağımlılıkları ve dağıtım sıralaması
 - Parametre dosyaları ve şablon modülerliği
-- Özel kancalar ve dağıtım otomasyonu
-- Konteyner uygulama dağıtım desenleri (hızlı başlangıç, üretim, mikro hizmetler)
+- Özel hook'lar ve dağıtım otomasyonu
+- Container app dağıtım desenleri (hızlı başlangıç, üretim, mikroservisler)
 
 #### Pratik Alıştırmalar
 1. **Özel Şablon Oluşturma**: Çok hizmetli bir uygulama şablonu oluşturun
-2. **Bicep Ustalığı**: Modüler, yeniden kullanılabilir altyapı bileşenleri oluşturun
-3. **Dağıtım Otomasyonu**: Ön/son dağıtım kancalarını uygulayın
-4. **Mimari Tasarım**: Karmaşık mikro hizmet mimarisi dağıtın
-5. **Konteyner Uygulama Dağıtımı**: [Simple Flask API](../../../examples/container-app/simple-flask-api) ve [Microservices Architecture](../../../examples/container-app/microservices) örneklerini AZD kullanarak dağıtın
+2. **Bicep Ustaca Kullanımı**: Modüler, yeniden kullanılabilir altyapı bileşenleri oluşturun
+3. **Dağıtım Otomasyonu**: Ön/son dağıtım hook'larını uygulayın
+4. **Mimari Tasarım**: Karmaşık mikroservis mimarisi dağıtın
+5. **Container App Dağıtımı**: AZD kullanarak [Basit Flask API](../../../examples/container-app/simple-flask-api) ve [Mikroservis Mimarisi](../../../examples/container-app/microservices) örneklerini dağıtın
 
 #### Değerlendirme Soruları
-- AZD için özel Bicep şablonları nasıl oluşturulur?
-- Altyapı kodunu düzenlemek için en iyi uygulamalar nelerdir?
-- Şablonlarda kaynak bağımlılıkları nasıl ele alınır?
-- Sıfır kesinti süresi güncellemelerini destekleyen dağıtım desenleri nelerdir?
+- AZD için özel Bicep şablonlarını nasıl oluşturursunuz?
+- Altyapı kodunu organize etmede en iyi uygulamalar nelerdir?
+- Şablonlarda kaynak bağımlılıklarını nasıl yönetirsiniz?
+- Hangi dağıtım desenleri kesintisiz güncellemeyi destekler?
 
 ---
 
-### Bölüm 5: Çoklu Ajanlı AI Çözümleri (6-7. Hafta)
+### Bölüm 5: Çok Ajanlı Yapay Zeka Çözümleri (Hafta 6-7)
 **Süre**: 2-3 saat | **Zorluk**: ⭐⭐⭐⭐
 
 #### Öğrenme Hedefleri
-- Çoklu ajanlı AI mimarileri tasarlayın ve uygulayın
-- Ajan koordinasyonu ve iletişimini düzenleyin
-- İzleme ile üretime hazır AI çözümleri dağıtın
+- Çok ajanlı yapay zeka mimarileri tasarlayın ve uygulayın
+- Ajan koordinasyonu ve iletişimini orkestre edin
+- İzlemeli üretim hazır AI çözümleri dağıtın
 - Ajan uzmanlaşması ve iş akışı desenlerini anlayın
-- Çoklu ajan çözümlerinin bir parçası olarak konteynerleştirilmiş mikro hizmetleri entegre edin
+- Çok ajanlı çözümlerin bir parçası olarak konteynerleştirilmiş mikroservisleri entegre edin
 
-#### Ustalaşılacak Temel Kavramlar
-- Çoklu ajan mimari desenleri ve tasarım ilkeleri
+#### Ustalaşılması Gereken Temel Kavramlar
+- Çok ajanlı mimari desenleri ve tasarım ilkeleri
 - Ajan iletişim protokolleri ve veri akışı
 - AI ajanları için yük dengeleme ve ölçeklendirme stratejileri
-- Çoklu ajan sistemleri için üretim izleme
-- Konteynerleştirilmiş ortamlarda hizmetler arası iletişim
+- Çok ajanlı sistemler için üretim izlemesi
+- Konteynerleştirilmiş ortamlarda servisler arası iletişim
 
 #### Pratik Alıştırmalar
-1. **Perakende Çözümü Dağıtımı**: Tam çoklu ajanlı perakende senaryosunu dağıtın
+1. **Perakende Çözümü Dağıtımı**: Tam çok ajanlı perakende senaryosunu dağıtın
 2. **Ajan Özelleştirme**: Müşteri ve Envanter ajan davranışlarını değiştirin
 3. **Mimari Ölçeklendirme**: Yük dengeleme ve otomatik ölçeklendirme uygulayın
-4. **Üretim İzleme**: Kapsamlı izleme ve uyarı ayarları yapın
-5. **Mikro Hizmet Entegrasyonu**: [Microservices Architecture](../../../examples/container-app/microservices) örneğini ajan tabanlı iş akışlarını destekleyecek şekilde genişletin
+4. **Üretim İzleme**: Kapsamlı izleme ve uyarı kurun
+5. **Mikroservis Entegrasyonu**: [Mikroservis Mimarisi](../../../examples/container-app/microservices) örneğini ajan tabanlı iş akışlarını destekleyecek şekilde genişletin
 
 #### Değerlendirme Soruları
-- Etkili çoklu ajan iletişim desenleri nasıl tasarlanır?
-- AI ajan iş yüklerini ölçeklendirmek için temel hususlar nelerdir?
-- Çoklu ajanlı AI sistemleri nasıl izlenir ve hata ayıklanır?
-- AI ajanları için güvenilirliği sağlayan üretim desenleri nelerdir?
+- Etkili çok ajanlı iletişim desenlerini nasıl tasarlarsınız?
+- AI ajan iş yüklerini ölçeklendirirken dikkat edilmesi gereken başlıca noktalar nelerdir?
+- Çok ajanlı AI sistemlerini nasıl izler ve hata ayıklarsınız?
+- AI ajanları için güvenilirliği hangi üretim desenleri sağlar?
 
 ---
 
-### Bölüm 6: Dağıtım Öncesi Doğrulama ve Planlama (8. Hafta)
+### Bölüm 6: Ön Dağıtım Doğrulama & Planlama (Hafta 8)
 **Süre**: 1 saat | **Zorluk**: ⭐⭐
 
 #### Öğrenme Hedefleri
-- Kapsamlı kapasite planlaması ve kaynak doğrulama gerçekleştirin
-- Maliyet etkinliği için en uygun Azure SKU'larını seçin
-- Otomatik ön kontrol ve doğrulama uygulayın
+- Kapsamlı kapasite planlaması ve kaynak doğrulaması yapın
+- Maliyet etkinliği için optimal Azure SKU'larını seçin
+- Otomatik ön koşul kontrolleri ve doğrulamayı uygulayın
 - Maliyet optimizasyon stratejileriyle dağıtımları planlayın
 
-#### Ustalaşılacak Temel Kavramlar
-- Azure kaynak kotaları ve kapasite sınırlamaları
+#### Ustalaşılması Gereken Temel Kavramlar
+- Azure kaynak kota ve kapasite sınırlamaları
 - SKU seçim kriterleri ve maliyet optimizasyonu
 - Otomatik doğrulama betikleri ve testler
 - Dağıtım planlama ve risk değerlendirmesi
 
 #### Pratik Alıştırmalar
 1. **Kapasite Analizi**: Uygulamalarınız için kaynak gereksinimlerini analiz edin
-2. **SKU Optimizasyonu**: Maliyet etkin hizmet katmanlarını karşılaştırın ve seçin
-3. **Doğrulama Otomasyonu**: Dağıtım öncesi kontrol betikleri uygulayın
-4. **Maliyet Planlaması**: Dağıtım maliyet tahminleri ve bütçeler oluşturun
+2. **SKU Optimizasyonu**: Maliyet-etkin servis katmanlarını karşılaştırıp seçin
+3. **Doğrulama Otomasyonu**: Ön dağıtım kontrol betiklerini uygulayın
+4. **Maliyet Planlama**: Dağıtım maliyet tahminleri ve bütçeler oluşturun
 
 #### Değerlendirme Soruları
-- Dağıtım öncesi Azure kapasitesi nasıl doğrulanır?
-- SKU seçim kararlarını etkileyen faktörler nelerdir?
-- Ön dağıtım doğrulaması nasıl otomatikleştirilir?
-- Dağıtım maliyetlerini optimize eden stratejiler nelerdir?
+- Dağıtımdan önce Azure kapasitesini nasıl doğrularsınız?
+- SKU seçim kararlarını hangi faktörler etkiler?
+- Ön dağıtım doğrulamayı nasıl otomatikleştirirsiniz?
+- Dağıtım maliyetlerini optimize etmek için hangi stratejiler yardımcı olur?
 
 ---
 
-### Bölüm 7: Sorun Giderme ve Hata Ayıklama (9. Hafta)
+### Bölüm 7: Sorun Giderme & Hata Ayıklama (Hafta 9)
 **Süre**: 1-1.5 saat | **Zorluk**: ⭐⭐
 
 #### Öğrenme Hedefleri
 - AZD dağıtımları için sistematik hata ayıklama yaklaşımları geliştirin
 - Yaygın dağıtım ve yapılandırma sorunlarını çözün
-- AI'ya özgü sorunları ve performans problemlerini giderin
-- Proaktif sorun tespiti için izleme ve uyarı uygulayın
+- AI'ya özgü sorunları ve performans problemlerini hata ayıklayın
+- Proaktif sorun tespiti için izleme ve uyarı mekanizmaları uygulayın
 
-#### Ustalaşılacak Temel Kavramlar
-- Tanılama teknikleri ve günlük kaydı stratejileri
+#### Ustalaşılması Gereken Temel Kavramlar
+- Tanı teknikleri ve kayıt (logging) stratejileri
 - Yaygın hata desenleri ve çözümleri
 - Performans izleme ve optimizasyon
 - Olay müdahale ve kurtarma prosedürleri
 
 #### Pratik Alıştırmalar
-1. **Tanılama Becerileri**: Kasten bozulmuş dağıtımlarla pratik yapın
-2. **Günlük Analizi**: Azure Monitor ve Application Insights'ı etkili bir şekilde kullanın
-3. **Performans Ayarı**: Yavaş çalışan uygulamaları optimize edin
+1. **Tanı Becerileri**: Bilerek bozulmuş dağıtımlarla pratik yapın
+2. **Günlük Analizi**: Azure Monitor ve Application Insights'ı etkin kullanın
+3. **Performans İyileştirme**: Yavaş çalışan uygulamaları optimize edin
 4. **Kurtarma Prosedürleri**: Yedekleme ve felaket kurtarma uygulayın
 
 #### Değerlendirme Soruları
 - En yaygın AZD dağıtım hataları nelerdir?
-- Kimlik doğrulama ve izin sorunları nasıl giderilir?
-- Üretim sorunlarını önlemeye yardımcı olan izleme stratejileri nelerdir?
-- Azure'da uygulama performansı nasıl optimize edilir?
+- Kimlik doğrulama ve izin sorunlarını nasıl hata ayıklarsınız?
+- Üretim sorunlarını önlemeye yardımcı olacak hangi izleme stratejileri vardır?
+- Azure'da uygulama performansını nasıl optimize edersiniz?
 
 ---
 
-### Bölüm 8: Üretim ve Kurumsal Desenler (10-11. Hafta)
+### Bölüm 8: Üretim & Kurumsal Desenler (Hafta 10-11)
 **Süre**: 2-3 saat | **Zorluk**: ⭐⭐⭐⭐
 
 #### Öğrenme Hedefleri
-- Kurumsal düzeyde dağıtım stratejileri uygulayın
+- Kurum düzeyinde dağıtım stratejilerini uygulayın
 - Güvenlik desenleri ve uyumluluk çerçeveleri tasarlayın
-- İzleme, yönetişim ve maliyet yönetimi oluşturun
+- İzleme, yönetişim ve maliyet yönetimini oluşturun
 - AZD entegrasyonu ile ölçeklenebilir CI/CD boru hatları oluşturun
-- Üretim konteyner uygulama dağıtımları için en iyi uygulamaları uygulayın (güvenlik, izleme, maliyet, CI/CD)
+- Üretim için container app dağıtımları için en iyi uygulamaları uygulayın (güvenlik, izleme, maliyet, CI/CD)
 
-#### Ustalaşılacak Temel Kavramlar
+#### Ustalaşılması Gereken Temel Kavramlar
 - Kurumsal güvenlik ve uyumluluk gereksinimleri
 - Yönetişim çerçeveleri ve politika uygulamaları
 - Gelişmiş izleme ve maliyet yönetimi
 - CI/CD entegrasyonu ve otomatik dağıtım boru hatları
-- Konteynerleştirilmiş iş yükleri için mavi-yeşil ve kanarya dağıtım stratejileri
+- Container iş yükleri için blue-green ve canary dağıtım stratejileri
 
 #### Pratik Alıştırmalar
-1. **Kurumsal Güvenlik**: Kapsamlı güvenlik desenleri uygulayın
-2. **Yönetişim Çerçevesi**: Azure Policy ve kaynak yönetimini ayarlayın
+1. **Kurum Güvenliği**: Kapsamlı güvenlik desenleri uygulayın
+2. **Yönetişim Çerçevesi**: Azure Policy ve kaynak yönetimini kurun
 3. **Gelişmiş İzleme**: Panolar ve otomatik uyarılar oluşturun
 4. **CI/CD Entegrasyonu**: Otomatik dağıtım boru hatları oluşturun
-5. **Üretim Konteyner Uygulamaları**: [Microservices Architecture](../../../examples/container-app/microservices) örneğine güvenlik, izleme ve maliyet optimizasyonu uygulayın
+5. **Üretim Container Uygulamaları**: [Mikroservis Mimarisi](../../../examples/container-app/microservices) örneğine güvenlik, izleme ve maliyet optimizasyonu uygulayın
 
 #### Değerlendirme Soruları
-- AZD dağıtımlarında kurumsal güvenlik nasıl uygulanır?
-- Uyumluluk ve maliyet kontrolünü sağlayan yönetişim desenleri nelerdir?
-- Üretim sistemleri için ölçeklenebilir izleme nasıl tasarlanır?
-- AZD iş akışlarıyla en iyi çalışan CI/CD desenleri nelerdir?
+- AZD dağıtımlarında kurumsal güvenliği nasıl uygularsınız?
+- Hangi yönetişim desenleri uyumluluk ve maliyet kontrolünü sağlar?
+- Üretim sistemleri için ölçeklenebilir izlemeyi nasıl tasarlarsınız?
+- AZD iş akışlarıyla en iyi çalışan CI/CD desenleri hangileridir?
 
 #### Öğrenme Hedefleri
-- Azure Developer CLI'nin temel bilgilerini ve ana kavramlarını anlayın
-- Geliştirme ortamınıza azd'yi başarıyla kurun ve yapılandırın
-- Mevcut bir şablon kullanarak ilk dağıtımınızı tamamlayın
+- Azure Developer CLI temellerini ve çekirdek kavramlarını anlayın
+- Geliştirme ortamınızda azd'yi başarıyla yükleyip yapılandırın
+- Mevcut bir şablonu kullanarak ilk dağıtımınızı tamamlayın
 - azd proje yapısını gezin ve temel bileşenleri anlayın
 
-#### Ustalaşılacak Temel Kavramlar
-- Şablonlar, ortamlar ve hizmetler
+#### Ustalaşılması Gereken Temel Kavramlar
+- Şablonlar, ortamlar ve servisler
 - azure.yaml yapılandırma yapısı
 - Temel azd komutları (init, up, down, deploy)
-- Kod Olarak Altyapı ilkeleri
-- Azure kimlik doğrulama ve yetkilendirme
+- Altyapı kodu (Infrastructure as Code) ilkeleri
+- Azure kimlik doğrulama ve yetkilendirmesi
 
 #### Pratik Alıştırmalar
 
-**Alıştırma 1.1: Kurulum ve Ayar**
+**Alıştırma 1.1: Kurulum ve Yapılandırma**
 ```bash
 # Bu görevleri tamamlayın:
 1. Install azd using your preferred method
@@ -311,7 +312,7 @@ Analyze the following components:
 4. .azure/ directory - environment configurations
 ```
 
-#### Kendi Kendine Değerlendirme Soruları
+#### Öz-Değerlendirme Soruları
 1. azd mimarisinin üç temel kavramı nelerdir?
 2. azure.yaml dosyasının amacı nedir?
 3. Ortamlar farklı dağıtım hedeflerini yönetmeye nasıl yardımcı olur?
@@ -322,7 +323,7 @@ Analyze the following components:
 
 ## İlerleme Takibi ve Değerlendirme Çerçevesi
 ```bash
-# Birden fazla ortam oluştur ve yapılandır:
+# Birden çok ortam oluşturun ve yapılandırın:
 1. Create development environment: azd env new development
 2. Create staging environment: azd env new staging
 3. Create production environment: azd env new production
@@ -341,35 +342,90 @@ Analyze the following components:
 
 **Alıştırma 2.3: Güvenlik Yapılandırması**
 ```bash
-# Güvenlik en iyi uygulamalarını uygulayın:
+# Güvenlik için en iyi uygulamaları uygulayın:
 1. Configure managed identity for service authentication
 2. Set up Azure Key Vault for secrets management
 3. Implement least-privilege access controls
 4. Enable HTTPS and secure communication protocols
 ```
 
-#### Kendi Kendine Değerlendirme Soruları
-1. azd ortam değişkeni öncel
-5. Çok bölgeli dağıtımlar için hangi hususlar dikkate alınmalıdır?
+#### Öz-Değerlendirme Soruları
+1. azd ortam değişkeni önceliğini nasıl ele alır?
+2. Dağıtım hook'ları nedir ve ne zaman kullanılmalıdır?
+3. Farklı ortamlar için farklı SKU'ları nasıl yapılandırırsınız?
+4. Farklı kimlik doğrulama yöntemlerinin güvenlik sonuçları nelerdir?
+5. Gizli ve hassas yapılandırma verilerini nasıl yönetirsiniz?
 
-### Modül 4: Dağıtım Öncesi Doğrulama (5. Hafta)
+### Modül 3: Dağıtım ve Sağlama (Hafta 4)
 
 #### Öğrenme Hedefleri
-- Kapsamlı dağıtım öncesi kontrolleri uygulama
-- Kapasite planlama ve kaynak doğrulama konusunda uzmanlaşma
-- SKU seçimi ve maliyet optimizasyonunu anlama
-- Otomatik doğrulama hatları oluşturma
+- Dağıtım iş akışlarında ve en iyi uygulamalarda ustalaşın
+- Bicep şablonlarıyla Altyapı Kod Olarak (IaC) anlayışını kazanın
+- Karmaşık çok hizmetli mimarileri uygulayın
+- Dağıtım performansını ve güvenilirliğini optimize edin
 
-#### Öğrenilmesi Gereken Temel Kavramlar
-- Azure kaynak kotaları ve sınırları
+#### Ustalaşılması Gereken Temel Kavramlar
+- Bicep şablon yapısı ve modüller
+- Kaynak bağımlılıkları ve sıralama
+- Dağıtım stratejileri (blue-green, rolling updates)
+- Çok bölge dağıtımları
+- Veritabanı göçleri ve veri yönetimi
+
+#### Pratik Alıştırmalar
+
+**Alıştırma 3.1: Özel Altyapı**
+```bicep
+// Create custom Bicep templates for:
+1. Web application with custom domain and SSL
+2. Database with backup and high availability
+3. Storage account with access policies
+4. Monitoring and logging configuration
+5. Network security groups and virtual networks
+```
+
+**Alıştırma 3.2: Çok Hizmetli Uygulama**
+```bash
+# Bir mikroservis mimarisi dağıtın:
+1. Frontend web application
+2. Backend API service
+3. Database service
+4. Message queue service
+5. Background worker service
+```
+
+**Alıştırma 3.3: Veritabanı Entegrasyonu**
+```bash
+# Veritabanı dağıtım desenlerini uygula:
+1. Deploy PostgreSQL with connection pooling
+2. Implement schema migrations
+3. Configure backup and recovery procedures
+4. Set up read replicas for performance
+5. Implement data seeding for different environments
+```
+
+#### Öz-Değerlendirme Soruları
+1. Bicep'i ARM şablonlarına göre kullanmanın avantajları nelerdir?
+2. azd dağıtımlarında veritabanı göçlerini nasıl ele alırsınız?
+3. Kesintisiz dağıtımlar için hangi stratejiler vardır?
+4. Servisler arasındaki bağımlılıkları nasıl yönetirsiniz?
+5. Çok bölge dağıtımları için nelere dikkat edilmelidir?
+
+### Modül 4: Ön Dağıtım Doğrulama (Hafta 5)
+- Dağıtımdan önce kapsamlı ön kontrolleri uygulayın
+- Kapasite planlaması ve kaynak doğrulamasında uzmanlaşın
+- SKU seçimi ve maliyet optimizasyonunu anlayın
+- Otomatik doğrulama boru hatları oluşturun
+
+#### Ustalaşılacak Temel Kavramlar
+- Azure kaynak kota ve limitleri
 - SKU seçim kriterleri ve maliyet etkileri
 - Otomatik doğrulama betikleri ve araçları
-- Kapasite planlama yöntemleri
+- Kapasite planlama metodolojileri
 - Performans testi ve optimizasyon
 
 #### Uygulama Alıştırmaları
 
-**Alıştırma 4.1: Kapasite Planlama**
+**Alıştırma 4.1: Kapasite Planlaması**
 ```bash
 # Kapasite doğrulamasını uygulayın:
 1. Create scripts to check Azure quotas
@@ -379,9 +435,9 @@ Analyze the following components:
 5. Document capacity requirements for each environment
 ```
 
-**Alıştırma 4.2: Dağıtım Öncesi Doğrulama**
+**Alıştırma 4.2: Ön Uçuş Doğrulaması**
 ```powershell
-# Kapsamlı doğrulama hattı oluştur:
+# Kapsamlı doğrulama hattı oluşturun:
 1. Authentication and permissions validation
 2. Template syntax and parameter validation
 3. Resource naming and availability checks
@@ -399,33 +455,33 @@ Analyze the following components:
 5. Set up auto-scaling policies
 ```
 
-#### Kendini Değerlendirme Soruları
+#### Öz Değerlendirme Soruları
 1. SKU seçim kararlarını hangi faktörler etkilemelidir?
-2. Azure kaynaklarının dağıtımdan önceki uygunluğunu nasıl doğrularsınız?
-3. Dağıtım öncesi kontrol sisteminin temel bileşenleri nelerdir?
+2. Dağıtımdan önce Azure kaynak kullanılabilirliğini nasıl doğrularsınız?
+3. Bir ön-ucuş (pre-flight) kontrol sisteminin temel bileşenleri nelerdir?
 4. Dağıtım maliyetlerini nasıl tahmin eder ve kontrol edersiniz?
-5. Kapasite planlaması için hangi izleme işlemleri gereklidir?
+5. Kapasite planlaması için hangi izleme bilgilerinin olması gerekir?
 
-### Modül 5: Sorun Giderme ve Hata Ayıklama (6. Hafta)
+### Modül 5: Sorun Giderme ve Hata Ayıklama (Hafta 6)
 
 #### Öğrenme Hedefleri
-- Sistematik sorun giderme yöntemlerinde uzmanlaşma
-- Karmaşık dağıtım sorunlarını hata ayıklama konusunda uzmanlık geliştirme
-- Kapsamlı izleme ve uyarı sistemleri uygulama
-- Olay müdahale ve kurtarma prosedürleri oluşturma
+- Sistematik sorun giderme metodolojilerinde ustalaşın
+- Karmaşık dağıtım sorunlarını hata ayıklamada uzmanlaşın
+- Kapsamlı izleme ve uyarı mekanizmaları uygulayın
+- Olay müdahale ve kurtarma prosedürleri oluşturun
 
-#### Öğrenilmesi Gereken Temel Kavramlar
+#### Ustalaşılacak Temel Kavramlar
 - Yaygın dağıtım hatası kalıpları
-- Günlük analizi ve korelasyon teknikleri
+- Günlük analiz ve korelasyon teknikleri
 - Performans izleme ve optimizasyon
-- Güvenlik olaylarını tespit etme ve müdahale
+- Güvenlik olayı tespiti ve müdahale
 - Felaket kurtarma ve iş sürekliliği
 
 #### Uygulama Alıştırmaları
 
 **Alıştırma 5.1: Sorun Giderme Senaryoları**
 ```bash
-# Yaygın sorunları çözme pratiği yapın:
+# Yaygın sorunları çözme pratiği:
 1. Authentication and authorization failures
 2. Resource provisioning conflicts
 3. Application startup and runtime errors
@@ -435,7 +491,7 @@ Analyze the following components:
 
 **Alıştırma 5.2: İzleme Uygulaması**
 ```bash
-# Kapsamlı izleme kurun:
+# Kapsamlı izlemeyi kurun:
 1. Application performance monitoring with Application Insights
 2. Infrastructure monitoring with Azure Monitor
 3. Custom dashboards and alerting rules
@@ -445,7 +501,7 @@ Analyze the following components:
 
 **Alıştırma 5.3: Olay Müdahalesi**
 ```bash
-# Olay müdahale prosedürlerini oluşturun:
+# Olay müdahalesi prosedürleri oluşturun:
 1. Create runbooks for common problems
 2. Implement automated recovery procedures
 3. Set up notification and escalation workflows
@@ -453,26 +509,26 @@ Analyze the following components:
 5. Document lessons learned and improvements
 ```
 
-#### Kendini Değerlendirme Soruları
-1. Azd dağıtımlarında sistematik sorun giderme yaklaşımı nedir?
-2. Birden fazla hizmet ve kaynak arasında günlükleri nasıl ilişkilendirirsiniz?
-3. Erken problem tespiti için en kritik izleme metrikleri nelerdir?
+#### Öz Değerlendirme Soruları
+1. azd dağıtımları için sistematik sorun giderme yaklaşımı nedir?
+2. Birden çok hizmet ve kaynak arasında günlükleri nasıl korelâte edersiniz?
+3. Erken problem tespiti için hangi izleme metrikleri en kritik olanlardır?
 4. Etkili felaket kurtarma prosedürlerini nasıl uygularsınız?
 5. Bir olay müdahale planının temel bileşenleri nelerdir?
 
-### Modül 6: İleri Düzey Konular ve En İyi Uygulamalar (7-8. Hafta)
+### Modül 6: İleri Konular ve En İyi Uygulamalar (Hafta 7-8)
 
 #### Öğrenme Hedefleri
-- Kurumsal düzeyde dağıtım modelleri uygulama
-- CI/CD entegrasyonu ve otomasyonunda uzmanlaşma
-- Özel şablonlar geliştirme ve topluluğa katkıda bulunma
-- İleri düzey güvenlik ve uyumluluk gereksinimlerini anlama
+- Kurumsal düzeyde dağıtım desenleri uygulayın
+- CI/CD entegrasyonu ve otomasyonunda ustalaşın
+- Özel şablonlar geliştirin ve topluluğa katkıda bulunun
+- İleri güvenlik ve uyumluluk gereksinimlerini anlayın
 
-#### Öğrenilmesi Gereken Temel Kavramlar
-- CI/CD hattı entegrasyon modelleri
+#### Ustalaşılacak Temel Kavramlar
+- CI/CD boru hattı entegrasyon desenleri
 - Özel şablon geliştirme ve dağıtımı
-- Kurumsal yönetim ve uyumluluk
-- İleri düzey ağ ve güvenlik yapılandırmaları
+- Kurumsal yönetişim ve uyumluluk
+- İleri ağ ve güvenlik yapılandırmaları
 - Performans optimizasyonu ve maliyet yönetimi
 
 #### Uygulama Alıştırmaları
@@ -489,7 +545,7 @@ Analyze the following components:
 
 **Alıştırma 6.2: Özel Şablon Geliştirme**
 ```bash
-# Özel şablonlar oluştur ve yayınla:
+# Özel şablonlar oluşturun ve yayınlayın:
 1. Design template for your organization's architecture
 2. Implement parameterization and customization options
 3. Add comprehensive documentation and examples
@@ -499,7 +555,7 @@ Analyze the following components:
 
 **Alıştırma 6.3: Kurumsal Uygulama**
 ```bash
-# Kurumsal düzeyde özellikler uygulayın:
+# Kurumsal sınıf özellikleri uygulayın:
 1. Multi-tenant architecture with proper isolation
 2. Centralized logging and monitoring
 3. Compliance and governance controls
@@ -507,12 +563,12 @@ Analyze the following components:
 5. Disaster recovery and business continuity
 ```
 
-#### Kendini Değerlendirme Soruları
-1. Azd'yi mevcut CI/CD iş akışlarına nasıl entegre edersiniz?
+#### Öz Değerlendirme Soruları
+1. azd'yi mevcut CI/CD iş akışlarına nasıl entegre edersiniz?
 2. Özel şablon geliştirme için temel hususlar nelerdir?
-3. Azd dağıtımlarında yönetim ve uyumluluğu nasıl uygularsınız?
+3. azd dağıtımlarında yönetişim ve uyumluluğu nasıl uygularsınız?
 4. Kurumsal ölçekli dağıtımlar için en iyi uygulamalar nelerdir?
-5. Azd topluluğuna etkili bir şekilde nasıl katkıda bulunursunuz?
+5. azd topluluğuna etkili şekilde nasıl katkıda bulunursunuz?
 
 ## Pratik Projeler
 
@@ -520,16 +576,16 @@ Analyze the following components:
 **Zorluk Seviyesi**: Başlangıç  
 **Süre**: 1-2 hafta
 
-Şunları kullanarak kişisel bir portföy web sitesi oluşturun ve dağıtın:
+Aşağıdakileri kullanarak kişisel portföy web sitesi oluşturun ve dağıtın:
 - Azure Storage üzerinde statik web sitesi barındırma
 - Özel alan adı yapılandırması
 - Küresel performans için CDN entegrasyonu
-- Otomatik dağıtım hattı
+- Otomatik dağıtım boru hattı
 
 **Teslimatlar**:
-- Azure'da dağıtılmış çalışan bir web sitesi
+- Azure üzerinde çalışan web sitesi
 - Portföy dağıtımları için özel azd şablonu
-- Dağıtım sürecinin belgelenmesi
+- Dağıtım sürecinin dokümantasyonu
 - Maliyet analizi ve optimizasyon önerileri
 
 ### Proje 2: Görev Yönetimi Uygulaması
@@ -537,14 +593,14 @@ Analyze the following components:
 **Süre**: 2-3 hafta
 
 Tam yığın bir görev yönetimi uygulaması oluşturun:
-- App Service'e dağıtılmış React frontend
-- Kimlik doğrulamalı Node.js API backend
-- PostgreSQL veritabanı ve geçişler
-- Application Insights izleme
+- App Service'e dağıtılan React ön yüzü
+- Kimlik doğrulamalı Node.js API arka ucu
+- Göçler ile PostgreSQL veritabanı
+- Application Insights ile izleme
 
 **Teslimatlar**:
-- Kullanıcı kimlik doğrulaması ile tamamlanmış uygulama
-- Veritabanı şeması ve geçiş betikleri
+- Kullanıcı kimlik doğrulamalı eksiksiz uygulama
+- Veritabanı şeması ve göç betikleri
 - İzleme panoları ve uyarı kuralları
 - Çoklu ortam dağıtım yapılandırması
 
@@ -553,89 +609,89 @@ Tam yığın bir görev yönetimi uygulaması oluşturun:
 **Süre**: 4-6 hafta
 
 Mikroservis tabanlı bir e-ticaret platformu tasarlayın ve uygulayın:
-- Birden fazla API hizmeti (katalog, siparişler, ödemeler, kullanıcılar)
+- Birden çok API servisi (katalog, siparişler, ödemeler, kullanıcılar)
 - Service Bus ile mesaj kuyruğu entegrasyonu
 - Performans optimizasyonu için Redis önbelleği
-- Kapsamlı günlük kaydı ve izleme
+- Kapsamlı günlükleme ve izleme
 
-**Referans Örneği**: Üretime hazır bir şablon ve dağıtım kılavuzu için [Mikroservis Mimari](../../../examples/container-app/microservices) bölümüne bakın
+**Referans Örneği**: Üretime hazır şablon ve dağıtım kılavuzu için bkz. [Microservices Architecture](../../../examples/container-app/microservices)
 
 **Teslimatlar**:
 - Tam mikroservis mimarisi
-- Hizmetler arası iletişim modelleri
-- Performans testi ve optimizasyon
+- Hizmetler arası iletişim desenleri
+- Performans testi ve optimizasyonu
 - Üretime hazır güvenlik uygulaması
 
 ## Değerlendirme ve Sertifikasyon
 
 ### Bilgi Kontrolleri
 
-Her modülden sonra bu değerlendirmeleri tamamlayın:
+Her modülün ardından bu değerlendirmeleri tamamlayın:
 
-**Modül 1 Değerlendirme**: Temel kavramlar ve kurulum
-- Temel kavramlar üzerine çoktan seçmeli sorular
+**Modül 1 Değerlendirmesi**: Temel kavramlar ve kurulum
+- Temel kavramlar hakkında çoktan seçmeli sorular
 - Pratik kurulum ve yapılandırma görevleri
-- Basit dağıtım alıştırması
+- Basit bir dağıtım alıştırması
 
-**Modül 2 Değerlendirme**: Yapılandırma ve ortamlar
+**Modül 2 Değerlendirmesi**: Yapılandırma ve ortamlar
 - Ortam yönetimi senaryoları
 - Yapılandırma sorun giderme alıştırmaları
-- Güvenlik yapılandırması uygulaması
+- Güvenlik yapılandırma uygulamaları
 
-**Modül 3 Değerlendirme**: Dağıtım ve sağlama
+**Modül 3 Değerlendirmesi**: Dağıtım ve sağlama
 - Altyapı tasarım zorlukları
-- Çoklu hizmet dağıtım senaryoları
-- Performans optimizasyonu alıştırmaları
+- Çok hizmetli dağıtım senaryoları
+- Performans optimizasyon alıştırmaları
 
-**Modül 4 Değerlendirme**: Dağıtım öncesi doğrulama
+**Modül 4 Değerlendirmesi**: Ön-dağıtım doğrulaması
 - Kapasite planlama vaka çalışmaları
-- Maliyet optimizasyon senaryoları
-- Doğrulama hattı uygulaması
+- Maliyet optimizasyonu senaryoları
+- Doğrulama boru hattı uygulaması
 
-**Modül 5 Değerlendirme**: Sorun giderme ve hata ayıklama
-- Sorun teşhis alıştırmaları
+**Modül 5 Değerlendirmesi**: Sorun giderme ve hata ayıklama
+- Problem tanı alıştırmaları
 - İzleme uygulama görevleri
 - Olay müdahale simülasyonları
 
-**Modül 6 Değerlendirme**: İleri düzey konular
-- CI/CD hattı tasarımı
+**Modül 6 Değerlendirmesi**: İleri konular
+- CI/CD boru hattı tasarımı
 - Özel şablon geliştirme
-- Kurumsal mimari senaryolar
+- Kurumsal mimari senaryoları
 
-### Final Proje
+### Final Bitirme Projesi
 
-Tüm kavramlarda ustalığı gösteren eksiksiz bir çözüm tasarlayın ve uygulayın:
+Tüm kavramlarda ustalığınızı gösteren eksiksiz bir çözüm tasarlayın ve uygulayın:
 
 **Gereksinimler**:
 - Çok katmanlı uygulama mimarisi
-- Birden fazla dağıtım ortamı
-- Kapsamlı izleme ve uyarı sistemleri
+- Birden çok dağıtım ortamı
+- Kapsamlı izleme ve uyarı
 - Güvenlik ve uyumluluk uygulaması
-- Maliyet optimizasyonu ve performans ayarı
-- Tam belgeler ve çalışma kılavuzları
+- Maliyet optimizasyonu ve performans ayarlamaları
+- Tam dokümantasyon ve çalışma el kitapları
 
 **Değerlendirme Kriterleri**:
 - Teknik uygulama kalitesi
-- Belgelerin eksiksizliği
+- Dokümantasyonun tamlığı
 - Güvenlik ve en iyi uygulamalara uyum
 - Performans ve maliyet optimizasyonu
 - Sorun giderme ve izleme etkinliği
 
 ## Çalışma Kaynakları ve Referanslar
 
-### Resmi Belgeler
-- [Azure Developer CLI Belgeleri](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Bicep Belgeleri](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Mimari Merkezi](https://learn.microsoft.com/en-us/azure/architecture/)
+### Resmi Dokümantasyon
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
 ### Topluluk Kaynakları
-- [AZD Şablon Galerisi](https://azure.github.io/awesome-azd/)
-- [Azure-Samples GitHub Organizasyonu](https://github.com/Azure-Samples)
-- [Azure Developer CLI GitHub Deposu](https://github.com/Azure/azure-dev)
+- [AZD Template Gallery](https://azure.github.io/awesome-azd/)
+- [Azure-Samples GitHub Organization](https://github.com/Azure-Samples)
+- [Azure Developer CLI GitHub Repository](https://github.com/Azure/azure-dev)
 
 ### Uygulama Ortamları
-- [Azure Ücretsiz Hesap](https://azure.microsoft.com/free/)
-- [Azure DevOps Ücretsiz Katman](https://azure.microsoft.com/services/devops/)
+- [Azure Free Account](https://azure.microsoft.com/free/)
+- [Azure DevOps Free Tier](https://azure.microsoft.com/services/devops/)
 - [GitHub Actions](https://github.com/features/actions)
 
 ### Ek Araçlar
@@ -647,17 +703,17 @@ Tüm kavramlarda ustalığı gösteren eksiksiz bir çözüm tasarlayın ve uygu
 
 ### Tam Zamanlı Çalışma (8 hafta)
 - **Hafta 1-2**: Modül 1-2 (Başlangıç, Yapılandırma)
-- **Hafta 3-4**: Modül 3-4 (Dağıtım, Dağıtım Öncesi)
-- **Hafta 5-6**: Modül 5-6 (Sorun Giderme, İleri Düzey Konular)
-- **Hafta 7-8**: Pratik Projeler ve Final Değerlendirme
+- **Hafta 3-4**: Modül 3-4 (Dağıtım, Ön-dağıtım)
+- **Hafta 5-6**: Modül 5-6 (Sorun Giderme, İleri Konular)
+- **Hafta 7-8**: Pratik Projeler ve Final Değerlendirmesi
 
 ### Yarı Zamanlı Çalışma (16 hafta)
 - **Hafta 1-4**: Modül 1 (Başlangıç)
 - **Hafta 5-7**: Modül 2 (Yapılandırma ve Ortamlar)
 - **Hafta 8-10**: Modül 3 (Dağıtım ve Sağlama)
-- **Hafta 11-12**: Modül 4 (Dağıtım Öncesi Doğrulama)
+- **Hafta 11-12**: Modül 4 (Ön-dağıtım Doğrulaması)
 - **Hafta 13-14**: Modül 5 (Sorun Giderme ve Hata Ayıklama)
-- **Hafta 15-16**: Modül 6 (İleri Düzey Konular ve Değerlendirme)
+- **Hafta 15-16**: Modül 6 (İleri Konular ve Değerlendirme)
 
 ---
 
@@ -665,93 +721,112 @@ Tüm kavramlarda ustalığı gösteren eksiksiz bir çözüm tasarlayın ve uygu
 
 ### Bölüm Tamamlama Kontrol Listesi
 
-Her bölümü aşağıdaki ölçülebilir sonuçlarla takip edin:
+Her bölümdeki ilerlemenizi bu ölçülebilir çıktılarla takip edin:
 
-#### 📚 Bölüm 1: Temel Bilgiler ve Hızlı Başlangıç
-- [ ] **Kurulum Tamamlandı**: AZD platformunuzda kuruldu ve doğrulandı
-- [ ] **İlk Dağıtım**: todo-nodejs-mongo şablonu başarıyla dağıtıldı
-- [ ] **Ortam Kurulumu**: İlk ortam değişkenleri yapılandırıldı
-- [ ] **Kaynak Gezinme**: Azure Portal'da dağıtılmış kaynaklar keşfedildi
-- [ ] **Komut Uzmanlığı**: Temel AZD komutlarına hakim olundu
+#### 📚 Bölüm 1: Temel & Hızlı Başlangıç
+- [ ] **Kurulum Tamamlandı**: AZD platformunuza kuruldu ve doğrulandı
+- [ ] **İlk Dağıtım**: todo-nodejs-mongo şablonunu başarıyla dağıttınız
+- [ ] **Ortam Kurulumu**: İlk ortam değişkenlerini yapılandırdınız
+- [ ] **Kaynak Gezinme**: Azure Portal'da dağıtılan kaynakları incelediniz
+- [ ] **Komut Ustalığı**: Temel AZD komutlarına hakim oldunuz
 
-#### 🤖 Bölüm 2: AI-Öncelikli Geliştirme  
-- [ ] **AI Şablon Dağıtımı**: azure-search-openai-demo başarıyla dağıtıldı
-- [ ] **RAG Uygulaması**: Belge indeksleme ve geri alma yapılandırıldı
-- [ ] **Model Yapılandırması**: Farklı amaçlarla birden fazla AI modeli kuruldu
-- [ ] **AI İzleme**: AI iş yükleri için Application Insights uygulandı
-- [ ] **Performans Optimizasyonu**: AI uygulama performansı ayarlandı
+#### 🤖 Bölüm 2: Yapay Zeka Odaklı Geliştirme
+- [ ] **AI Şablon Dağıtımı**: azure-search-openai-demo'yu başarıyla dağıttınız
+- [ ] **RAG Uygulaması**: Belge indeksleme ve getirme yapılandırdınız
+- [ ] **Model Yapılandırması**: Farklı amaçlar için birden fazla AI modeli kurdunuz
+- [ ] **AI İzleme**: AI iş yükleri için Application Insights uyguladınız
+- [ ] **Performans Optimizasyonu**: AI uygulama performansını ayarladınız
 
-#### ⚙️ Bölüm 3: Yapılandırma ve Kimlik Doğrulama
-- [ ] **Çoklu Ortam Kurulumu**: Geliştirme, test ve üretim ortamları yapılandırıldı
-- [ ] **Güvenlik Uygulaması**: Yönetilen kimlik doğrulama kuruldu
-- [ ] **Gizli Bilgi Yönetimi**: Hassas veriler için Azure Key Vault entegre edildi
-- [ ] **Parametre Yönetimi**: Ortama özgü yapılandırmalar oluşturuldu
-- [ ] **Kimlik Doğrulama Uzmanlığı**: Güvenli erişim modelleri uygulandı
+#### ⚙️ Bölüm 3: Yapılandırma & Kimlik Doğrulama
+- [ ] **Çoklu Ortam Kurulumu**: dev, staging ve prod ortamlarını yapılandırdınız
+- [ ] **Güvenlik Uygulaması**: Yönetilen kimlik ile kimlik doğrulamayı kurdunuz
+- [ ] **Gizli Yönetimi**: Hassas veriler için Azure Key Vault'u entegre ettiniz
+- [ ] **Parametre Yönetimi**: Ortama özel yapılandırmalar oluşturdunuz
+- [ ] **Kimlik Doğrulama Ustalığı**: Güvenli erişim desenlerini uyguladınız
 
-#### 🏗️ Bölüm 4: Kod Olarak Altyapı ve Dağıtım
-- [ ] **Özel Şablon Oluşturma**: Çok hizmetli bir uygulama şablonu oluşturuldu
-- [ ] **Bicep Uzmanlığı**: Modüler, yeniden kullanılabilir altyapı bileşenleri oluşturuldu
-- [ ] **Dağıtım Otomasyonu**: Dağıtım öncesi/sonrası kancalar uygulandı
-- [ ] **Mimari Tasarım**: Karmaşık mikroservis mimarisi dağıtıldı
-- [ ] **Şablon Optimizasyonu**: Performans ve maliyet için şablonlar optimize edildi
+#### 🏗️ Bölüm 4: Altyapı Kod Olarak & Dağıtım
+- [ ] **Özel Şablon Oluşturma**: Çok hizmetli bir uygulama şablonu oluşturdunuz
+- [ ] **Bicep Ustalığı**: Modüler, yeniden kullanılabilir altyapı bileşenleri yarattınız
+- [ ] **Dağıtım Otomasyonu**: Ön/son dağıtım kancalarını uyguladınız
+- [ ] **Mimari Tasarım**: Karmaşık mikroservis mimarisi dağıttınız
+- [ ] **Şablon Optimizasyonu**: Şablonları performans ve maliyet için optimize ettiniz
 
-#### 🎯 Bölüm 5: Çoklu Ajanlı AI Çözümleri
-- [ ] **Perakende Çözümü Dağıtımı**: Tam çoklu ajanlı perakende senaryosu dağıtıldı
-- [ ] **Ajan Özelleştirme**: Müşteri ve Envanter ajan davranışları değiştirildi
-- [ ] **Mimari Ölçekleme**: Yük dengeleme ve otomatik ölçekleme uygulandı
-- [ ] **Üretim İzleme**: Kapsamlı izleme ve uyarı sistemleri kuruldu
-- [ ] **Performans Ayarı**: Çoklu ajan sistem performansı optimize edildi
+#### 🎯 Bölüm 5: Çok Ajanlı AI Çözümleri
+- [ ] **Perakende Çözümü Dağıtımı**: Tam çok ajanlı perakende senaryosunu dağıttınız
+- [ ] **Ajan Özelleştirme**: Müşteri ve Envanter ajan davranışlarını değiştirdiniz
+- [ ] **Mimari Ölçeklendirme**: Yük dengeleme ve otomatik ölçeklendirme uyguladınız
+- [ ] **Üretim İzleme**: Kapsamlı izleme ve uyarı kurdunuz
+- [ ] **Performans Ayarı**: Çok ajanlı sistem performansını optimize ettiniz
 
-#### 🔍 Bölüm 6: Dağıtım Öncesi Doğrulama ve Planlama
-- [ ] **Kapasite Analizi**: Uygulamalar için kaynak gereksinimleri analiz edildi
-- [ ] **SKU Optimizasyonu**: Maliyet açısından etkili hizmet seviyeleri seçildi
-- [ ] **Doğrulama Otomasyonu**: Dağıtım öncesi kontrol betikleri uygulandı
-- [ ] **Maliyet Planlaması**: Dağıtım maliyet tahminleri ve bütçeler oluşturuldu
-- [ ] **Risk Değerlendirmesi**: Dağıtım riskleri belirlendi ve azaltıldı
+#### 🔍 Bölüm 6: Ön-Dağıtım Doğrulama & Planlama
+- [ ] **Kapasite Analizi**: Uygulamalar için kaynak gereksinimlerini analiz ettiniz
+- [ ] **SKU Optimizasyonu**: Maliyet-etkin hizmet katmanlarını seçtiniz
+- [ ] **Doğrulama Otomasyonu**: Ön-dağıtım kontrol betikleri uyguladınız
+- [ ] **Maliyet Planlaması**: Dağıtım maliyet tahminleri ve bütçeler oluşturdunuz
+- [ ] **Risk Değerlendirmesi**: Dağıtım risklerini belirlediniz ve hafiflettiniz
 
-#### 🚨 Bölüm 7: Sorun Giderme ve Hata Ayıklama
-- [ ] **Tanı Becerileri**: Kasıtlı olarak bozulmuş dağıtımları başarıyla hata ayıklandı
-- [ ] **Günlük Analizi**: Azure Monitor ve Application Insights etkili bir şekilde kullanıldı
-- [ ] **Performans Ayarı**: Yavaş çalışan uygulamalar optimize edildi
-- [ ] **Kurtarma Prosedürleri**: Yedekleme ve felaket kurtarma uygulandı
-- [ ] **İzleme Kurulumu**: Proaktif izleme ve uyarı sistemleri oluşturuldu
+#### 🚨 Bölüm 7: Sorun Giderme & Hata Ayıklama
+- [ ] **Tanısal Beceriler**: Kasten bozulmuş dağıtımları başarıyla hata ayıkladınız
+- [ ] **Günlük Analizi**: Azure Monitor ve Application Insights'ı etkili kullandınız
+- [ ] **Performans Ayarı**: Yavaş çalışan uygulamaları optimize ettiniz
+- [ ] **Kurtarma Prosedürleri**: Yedekleme ve felaket kurtarma uyguladınız
+- [ ] **İzleme Kurulumu**: Proaktif izleme ve uyarı mekanizmaları oluşturdunuz
 
-#### 🏢 Bölüm 8: Üretim ve Kurumsal Modeller
-- [ ] **Kurumsal Güvenlik**: Kapsamlı güvenlik modelleri uygulandı
-- [ ] **Yönetim Çerçevesi**: Azure Policy ve kaynak yönetimi kuruldu
-- [ ] **İleri Düzey İzleme**: Panolar ve otomatik uyarılar oluşturuldu
-- [ ] **CI/CD Entegrasyonu**: Otomatik dağıtım hatları oluşturuldu
-- [ ] **Uyumluluk Uygulaması**: Kurumsal uyumluluk gereksinimleri karşılandı
+#### 🏢 Bölüm 8: Üretim & Kurumsal Desenler
+- [ ] **Kurumsal Güvenlik**: Kapsamlı güvenlik desenleri uyguladınız
+- [ ] **Yönetişim Çerçevesi**: Azure Policy ve kaynak yönetimini kurdunuz
+- [ ] **İleri İzleme**: Panolar ve otomatik uyarılar oluşturdunuz
+- [ ] **CI/CD Entegrasyonu**: Otomatik dağıtım boru hatları kurdunuz
+- [ ] **Uyumluluk Uygulaması**: Kurumsal uyumluluk gereksinimlerini karşıladınız
 
 ### Öğrenme Zaman Çizelgesi ve Kilometre Taşları
 
-#### Hafta 1-2: Temel Bilgi Oluşturma
+#### Hafta 1-2: Temel Oluşturma
 - **Kilometre Taşı**: AZD kullanarak ilk AI uygulamasını dağıtın
-- **Doğrulama**: Çalışan uygulama genel URL üzerinden erişilebilir
-- **Beceriler**: Temel AZD iş akışları ve AI hizmet entegrasyonu
+- **Doğrulama**: Çalışan uygulama halka açık URL üzerinden erişilebilir
+- **Beceriler**: Temel AZD iş akışları ve AI servis entegrasyonu
 
-#### Hafta 3-4: Yapılandırma Uzmanlığı
-- **Kilometre Taşı**: Güvenli kimlik doğrulama ile çoklu ortam dağıtımı
-- **Doğrulama**: Aynı uygulama geliştirme/test/üretim ortamlarına dağıtıldı
+#### Hafta 3-4: Yapılandırma Ustalığı
+- **Kilometre Taşı**: Çok ortamlı dağıtım ve güvenli kimlik doğrulama
+- **Doğrulama**: Aynı uygulama dev/staging/prod ortamlarına dağıtıldı
 - **Beceriler**: Ortam yönetimi ve güvenlik uygulaması
 
 #### Hafta 5-6: Altyapı Uzmanlığı
 - **Kilometre Taşı**: Karmaşık çok hizmetli uygulama için özel şablon
-- **
+- **Doğrulama**: Yeniden kullanılabilir şablon başka bir ekip üyesi tarafından dağıtıldı
+- **Beceriler**: Bicep ustalığı ve altyapı otomasyonu
+
+#### Hafta 7-8: İleri AI Uygulamaları
+- **Kilometre Taşı**: Üretime hazır çok ajanlı AI çözümü
+- **Doğrulama**: Sistem gerçek dünya yükünü izleme ile karşılayabiliyor
+- **Beceriler**: Çok ajanlı orkestrasyon ve performans optimizasyonu
+
+#### Hafta 9-10: Üretim Hazırlığı
+- **Kilometre Taşı**: Tam uyumluluk ile kurumsal düzeyde dağıtım
+- **Doğrulama**: Güvenlik incelemesini ve maliyet optimizasyonu denetimini geçti
+- **Beceriler**: Yönetişim, izleme ve CI/CD entegrasyonu
+
+### Değerlendirme ve Sertifikasyon
+
+#### Bilgi Doğrulama Yöntemleri
+1. **Pratik Dağıtımlar**: Her bölüm için çalışan uygulamalar
+2. **Kod İncelemeleri**: Şablon ve yapılandırma kalite değerlendirmesi
+3. **Problem Çözme**: Sorun giderme senaryoları ve çözümleri
+4. **Akrana Öğretme**: Kavramları diğer öğrenenlere açıklayın
 5. **Topluluk Katkısı**: Şablonlar veya iyileştirmeler paylaşın
 
-#### Mesleki Gelişim Sonuçları
+#### Mesleki Gelişim Çıktıları
 - **Portföy Projeleri**: 8 üretime hazır dağıtım
-- **Teknik Beceriler**: Endüstri standardı AZD ve AI dağıtım uzmanlığı
+- **Teknik Yetenekler**: Endüstri-standardı AZD ve AI dağıtım uzmanlığı
 - **Problem Çözme Yetkinlikleri**: Bağımsız sorun giderme ve optimizasyon
-- **Topluluk Tanınırlığı**: Azure geliştirici topluluğunda aktif katılım
-- **Kariyer İlerlemesi**: Bulut ve AI rolleri için doğrudan uygulanabilir beceriler
+- **Topluluk Tanınması**: Azure geliştirici topluluğunda aktif katılım
+- **Kariyer İlerlemesi**: Bulut ve AI rollerine doğrudan uygulanabilir beceriler
 
 #### Başarı Ölçütleri
-- **Dağıtım Başarı Oranı**: %95'ten fazla başarılı dağıtım
+- **Dağıtım Başarı Oranı**: >95% başarılı dağıtımlar
 - **Sorun Giderme Süresi**: Yaygın sorunlar için <30 dakika
-- **Performans Optimizasyonu**: Maliyet ve performansta gösterilebilir iyileştirmeler
-- **Güvenlik Uyumluluğu**: Tüm dağıtımlar kurumsal güvenlik standartlarını karşılar
+- **Performans Optimizasyonu**: Maliyet ve performansta kanıtlanabilir iyileşmeler
+- **Güvenlik Uyumluluğu**: Tüm dağıtımlar kurumsal güvenlik standartlarına uygundur
 - **Bilgi Aktarımı**: Diğer geliştiricilere mentorluk yapabilme
 
 ### Sürekli Öğrenme ve Topluluk Katılımı
@@ -759,28 +834,28 @@ Her bölümü aşağıdaki ölçülebilir sonuçlarla takip edin:
 #### Güncel Kalın
 - **Azure Güncellemeleri**: Azure Developer CLI sürüm notlarını takip edin
 - **Topluluk Etkinlikleri**: Azure ve AI geliştirici etkinliklerine katılın
-- **Dokümantasyon**: Topluluk dokümantasyonu ve örneklerine katkıda bulunun
-- **Geri Bildirim Döngüsü**: Kurs içeriği ve Azure hizmetleri hakkında geri bildirim sağlayın
+- **Dokümantasyon**: Topluluk dokümantasyonuna ve örneklere katkıda bulunun
+- **Geri Bildirim Döngüsü**: Ders içeriği ve Azure hizmetleri hakkında geri bildirim sağlayın
 
 #### Kariyer Gelişimi
 - **Profesyonel Ağ**: Azure ve AI uzmanlarıyla bağlantı kurun
-- **Konuşma Fırsatları**: Konferanslarda veya buluşmalarda öğrenimlerinizi sunun
+- **Konuşma Fırsatları**: Öğrendiklerinizi konferanslarda veya buluşmalarda sunun
 - **Açık Kaynak Katkısı**: AZD şablonlarına ve araçlarına katkıda bulunun
-- **Mentorluk**: Diğer geliştiricilere AZD öğrenme yolculuklarında rehberlik edin
+- **Mentorluk**: Diğer geliştiricilere AZD öğrenim yolculuklarında rehberlik edin
 
 ---
 
-**Bölüm Gezinme:**
-- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../README.md)
-- **📖 Öğrenmeye Başla**: [Bölüm 1: Temel Bilgiler ve Hızlı Başlangıç](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 İlerleme Takibi**: Kapsamlı 8 bölümlük öğrenme sistemiyle ilerlemenizi takip edin
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar](../README.md)
+- **📖 Öğrenmeye Başla**: [Bölüm 1: Temel & Hızlı Başlangıç](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 İlerleme Takibi**: Kapsamlı 8-bölümlük öğrenme sistemi aracılığıyla ilerlemenizi takip edin
 - **🤝 Topluluk**: Destek ve tartışma için [Azure Discord](https://discord.gg/microsoft-azure)
 
-**Çalışma İlerleme Takibi**: Azure Developer CLI'yi yapılandırılmış bir rehberle, ölçülebilir sonuçlar ve mesleki gelişim avantajlarıyla aşamalı ve pratik bir şekilde öğrenin.
+**Çalışma İlerleme Takibi**: Bu yapılandırılmış rehberi, ölçülebilir sonuçlar ve mesleki gelişim faydalarıyla birlikte kademeli, uygulamalı öğrenme yoluyla Azure Developer CLI'de uzmanlaşmak için kullanın.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+**Sorumluluk Reddi**:
+Bu belge, yapay zeka çeviri servisi [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kaynak dilindeki hâliyle yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumlama için sorumluluk kabul etmiyoruz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

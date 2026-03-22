@@ -1,96 +1,96 @@
-# Інструкція з встановлення та налаштування
+# Посібник з встановлення та налаштування
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD для початківців](../../README.md)
-- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
-- **⬅️ Previous**: [AZD Basics](azd-basics.md)
-- **➡️ Next**: [Your First Project](first-project.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Навігація по розділах:**
+- **📚 Головна сторінка курсу**: [AZD Для початківців](../../README.md)
+- **📖 Поточний розділ**: Розділ 1 - Основи та швидкий старт
+- **⬅️ Попередній**: [Основи AZD](azd-basics.md)
+- **➡️ Наступний**: [Ваш перший проєкт](first-project.md)
+- **🚀 Наступний розділ**: [Розділ 2: Розробка з пріоритетом на AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-## Introduction
+## Вступ
 
-Цей всеосяжний посібник проведе вас через встановлення та налаштування Azure Developer CLI (azd) на вашій системі. Ви дізнаєтесь кілька методів встановлення для різних операційних систем, налаштування автентифікації та початкової конфігурації, щоб підготувати ваше середовище розробки для розгортання в Azure.
+Цей всеосяжний посібник проведе вас через процес встановлення та налаштування Azure Developer CLI (azd) на вашій системі. Ви дізнаєтеся кілька методів встановлення для різних операційних систем, налаштування аутентифікації та початкову конфігурацію для підготовки вашого середовища розробки до розгортання в Azure.
 
-## Learning Goals
+## Цілі навчання
 
-By the end of this lesson, you will:
-- Successfully install Azure Developer CLI on your operating system
-- Configure authentication with Azure using multiple methods
-- Set up your development environment with necessary prerequisites
-- Understand different installation options and when to use each
-- Troubleshoot common installation and setup issues
+Після завершення цього уроку ви:
+- Успішно встановите Azure Developer CLI на вашу операційну систему
+- Налаштуєте автентифікацію з Azure за допомогою кількох методів
+- Підготуєте своє середовище розробки з необхідними передумовами
+- Зрозумієте різні варіанти встановлення та коли кожен з них використовувати
+- Навчитесь усувати поширені проблеми при встановленні та налаштуванні
 
-## Learning Outcomes
+## Результати навчання
 
-After completing this lesson, you will be able to:
-- Install azd using the appropriate method for your platform
-- Authenticate with Azure using azd auth login
-- Verify your installation and test basic azd commands
-- Configure your development environment for optimal azd usage
-- Resolve common installation problems independently
+Після проходження цього уроку ви зможете:
+- Встановлювати azd за відповідним методом для вашої платформи
+- Аутентифікуватись у Azure за допомогою azd auth login
+- Перевірити встановлення та протестувати базові команди azd
+- Налаштувати своє середовище розробки для оптимального використання azd
+- Самостійно розв’язувати поширені проблеми з встановленням
 
-This guide will help you install and configure Azure Developer CLI on your system, regardless of your operating system or development environment.
+Цей посібник допоможе вам встановити та налаштувати Azure Developer CLI на вашій системі, незалежно від операційної системи або середовища розробки.
 
-## Prerequisites
+## Передумови
 
-Before installing azd, ensure you have:
-- **Azure subscription** - [Create a free account](https://azure.microsoft.com/free/)
-- **Azure CLI** - For authentication and resource management
-- **Git** - For cloning templates and version control
-- **Docker** (optional) - For containerized applications
+Перед встановленням azd переконайтеся, що у вас є:
+- **Підписка Azure** - [Створіть безкоштовний обліковий запис](https://azure.microsoft.com/free/)
+- **Azure CLI** - для аутентифікації та керування ресурсами
+- **Git** - для клонування шаблонів та контролю версій
+- **Docker** (необов’язково) - для контейнеризованих додатків
 
-## Installation Methods
+## Методи встановлення
 
 ### Windows
 
-#### Option 1: PowerShell (Recommended)
+#### Варіант 1: PowerShell (рекомендовано)
 ```powershell
 # Запустіть від імені адміністратора або з підвищеними правами
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
-#### Option 2: Windows Package Manager (winget)
+#### Варіант 2: Менеджер пакетів Windows (winget)
 ```cmd
 winget install Microsoft.Azd
 ```
 
-#### Option 3: Chocolatey
+#### Варіант 3: Chocolatey
 ```cmd
 choco install azd
 ```
 
-#### Option 4: Manual Installation
-1. Download the latest release from [GitHub](https://github.com/Azure/azure-dev/releases)
-2. Extract to `C:\Program Files\azd\`
-3. Add to PATH environment variable
+#### Варіант 4: Ручне встановлення
+1. Завантажте останній реліз з [GitHub](https://github.com/Azure/azure-dev/releases)
+2. Розпакуйте у `C:\Program Files\azd\`
+3. Додайте до змінної оточення PATH
 
 ### macOS
 
-#### Option 1: Homebrew (Recommended)
+#### Варіант 1: Homebrew (рекомендовано)
 ```bash
 brew tap azure/azd
 brew install azd
 ```
 
-#### Option 2: Install Script
+#### Варіант 2: Інсталяційний скрипт
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Option 3: Manual Installation
+#### Варіант 3: Ручне встановлення
 ```bash
-# Завантажте та встановіть
+# Завантажити та встановити
 curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.com/Azure/azure-dev/releases/latest/download --verbose
 ```
 
 ### Linux
 
-#### Option 1: Install Script (Recommended)
+#### Варіант 1: Інсталяційний скрипт (рекомендовано)
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Option 2: Package Managers
+#### Варіант 2: Менеджери пакетів
 
 **Ubuntu/Debian:**
 ```bash
@@ -104,7 +104,7 @@ sudo apt-get install azd
 
 **RHEL/CentOS/Fedora:**
 ```bash
-# Додати репозиторій пакетів Microsoft
+# Додати репозиторій пакунків Microsoft
 sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 sudo dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/azure-cli
 sudo dnf install azd
@@ -112,7 +112,7 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd comes pre-installed in GitHub Codespaces. Simply create a codespace and start using azd immediately.
+azd встановлено за замовчуванням у GitHub Codespaces. Просто створіть codespace і починайте використовувати azd одразу.
 
 ### Docker
 
@@ -120,65 +120,65 @@ azd comes pre-installed in GitHub Codespaces. Simply create a codespace and star
 # Запустіть azd у контейнері
 docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest
 
-# Створіть псевдонім для зручнішого використання
+# Створіть псевдонім для легшого використання
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-## ✅ Verify Installation
+## ✅ Перевірка встановлення
 
-After installation, verify azd is working correctly:
+Після встановлення перевірте, чи azd працює коректно:
 
 ```bash
 # Перевірити версію
 azd version
 
-# Переглянути довідку
+# Переглянути допомогу
 azd --help
 
-# Перелічити доступні шаблони
+# Список доступних шаблонів
 azd template list
 ```
 
-Expected output:
+Очікуваний результат:
 ```
 azd version 1.x.x (commit xxxxxx)
 ```
 
-**Note**: The actual version number will vary. Check [Azure Developer CLI releases](https://github.com/Azure/azure-dev/releases) for the latest version.
+**Примітка**: Фактичний номер версії може змінюватись. Перевірте [релізи Azure Developer CLI](https://github.com/Azure/azure-dev/releases) для останньої версії.
 
-**✅ Installation Success Checklist:**
-- [ ] `azd version` shows version number without errors
-- [ ] `azd --help` displays command documentation
-- [ ] `azd template list` shows available templates
-- [ ] `az account show` displays your Azure subscription
-- [ ] You can create a test directory and run `azd init` successfully
+**✅ Контрольний список успішного встановлення:**
+- [ ] `azd version` показує номер версії без помилок
+- [ ] `azd --help` відображає документацію з команд
+- [ ] `azd template list` показує наявні шаблони
+- [ ] `az account show` показує вашу підписку Azure
+- [ ] Ви можете створити тестовий каталог і успішно виконати `azd init`
 
-**If all checks pass, you're ready to proceed to [Your First Project](first-project.md)!**
+**Якщо всі перевірки пройдені, ви готові перейти до [Вашого першого проєкту](first-project.md)!**
 
-## Authentication Setup
+## Налаштування аутентифікації
 
-### Azure CLI Authentication (Recommended)
+### Аутентифікація через Azure CLI (рекомендовано)
 ```bash
 # Встановіть Azure CLI, якщо він ще не встановлений
 # Windows: winget install Microsoft.AzureCLI
 # macOS: brew install azure-cli
 # Linux: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-# Увійдіть у Azure
+# Увійдіть в Azure
 az login
 
 # Перевірте автентифікацію
 az account show
 ```
 
-### Device Code Authentication
-If you're on a headless system or having browser issues:
+### Аутентифікація через код пристрою
+Якщо ви працюєте в системі без інтерфейсу або маєте проблеми з браузером:
 ```bash
 az login --use-device-code
 ```
 
-### Service Principal (CI/CD)
-For automated environments:
+### Сервісний обліковий запис (CI/CD)
+Для автоматизованих середовищ:
 ```bash
 az login --service-principal \
   --username <client-id> \
@@ -186,9 +186,9 @@ az login --service-principal \
   --tenant <tenant-id>
 ```
 
-## Configuration
+## Конфігурація
 
-### Global Configuration
+### Глобальна конфігурація
 ```bash
 # Встановити підписку за замовчуванням
 azd config set defaults.subscription <subscription-id>
@@ -196,12 +196,12 @@ azd config set defaults.subscription <subscription-id>
 # Встановити місцезнаходження за замовчуванням
 azd config set defaults.location eastus2
 
-# Переглянути всю конфігурацію
+# Переглянути всі налаштування
 azd config list
 ```
 
-### Environment Variables
-Add to your shell profile (`.bashrc`, `.zshrc`, `.profile`):
+### Змінні оточення
+Додайте у ваш профіль shell (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
 # Конфігурація Azure
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -209,26 +209,26 @@ export AZURE_LOCATION="eastus2"
 
 # Конфігурація azd
 export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
-export AZD_DEBUG=true  # Увімкнути логування для налагодження
+export AZD_DEBUG=true  # Увімкнути ведення журналу відлагодження
 ```
 
-## IDE Integration
+## Інтеграція з IDE
 
 ### Visual Studio Code
-Install the Azure Developer CLI extension:
-1. Open VS Code
-2. Go to Extensions (Ctrl+Shift+X)
-3. Search for "Azure Developer CLI"
-4. Install the extension
+Встановіть розширення Azure Developer CLI:
+1. Відкрийте VS Code
+2. Перейдіть у Розширення (Ctrl+Shift+X)
+3. Знайдіть "Azure Developer CLI"
+4. Встановіть розширення
 
-Features:
-- IntelliSense for azure.yaml
-- Integrated terminal commands
-- Template browsing
-- Deployment monitoring
+Функції:
+- IntelliSense для azure.yaml
+- Інтегрований термінал для команд
+- Огляд шаблонів
+- Моніторинг розгортань
 
 ### GitHub Codespaces
-Create a `.devcontainer/devcontainer.json`:
+Створіть `.devcontainer/devcontainer.json`:
 ```json
 {
   "name": "Azure Developer CLI",
@@ -241,22 +241,22 @@ Create a `.devcontainer/devcontainer.json`:
 ```
 
 ### IntelliJ/JetBrains
-1. Install the Azure plugin
-2. Configure Azure credentials
-3. Use integrated terminal for azd commands
+1. Встановіть плагін Azure
+2. Налаштуйте облікові дані Azure
+3. Використовуйте інтегрований термінал для команд azd
 
-## 🐛 Troubleshooting Installation
+## 🐛 Усунення неполадок встановлення
 
-### Common Issues
+### Поширені проблеми
 
-#### Permission Denied (Windows)
+#### Відмова в доступі (Windows)
 ```powershell
 # Запустіть PowerShell від імені адміністратора
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-#### PATH Issues
-Manually add azd to your PATH:
+#### Проблеми зі змінною PATH
+Додайте azd до PATH вручну:
 
 **Windows:**
 ```cmd
@@ -269,19 +269,19 @@ echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Network/Proxy Issues
+#### Проблеми з мережею/проксі
 ```bash
 # Налаштувати проксі
 azd config set http.proxy http://proxy:8080
 azd config set https.proxy https://proxy:8080
 
-# Пропустити перевірку SSL (не рекомендується для використання в виробничому середовищі)
+# Пропустити перевірку SSL (не рекомендується для виробництва)
 azd config set http.insecure true
 ```
 
-#### Version Conflicts
+#### Конфлікти версій
 ```bash
-# Видалити старі встановлення
+# Видалити старі інсталяції
 # Windows: winget uninstall Microsoft.Azd
 # macOS: brew uninstall azd
 # Linux: sudo apt remove azd
@@ -290,28 +290,28 @@ azd config set http.insecure true
 rm -rf ~/.azd
 ```
 
-### Getting More Help
+### Отримання додаткової допомоги
 ```bash
-# Увімкнути налагоджувальне логування
+# Увімкнути журналювання відладки
 export AZD_DEBUG=true
 azd <command> --debug
 
 # Переглянути поточну конфігурацію
 azd config list
 
-# Переглянути поточний стан розгортання
+# Переглянути поточний статус розгортання
 azd show
 ```
 
-## Updating azd
+## Оновлення azd
 
-### Automatic Updates
-azd will notify you when updates are available:
+### Автоматичні оновлення
+azd повідомить вас, коли доступні оновлення:
 ```bash
 azd version --check-for-updates
 ```
 
-### Manual Updates
+### Ручні оновлення
 
 **Windows (winget):**
 ```cmd
@@ -328,45 +328,45 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-## 💡 Frequently Asked Questions
+## 💡 Часті питання
 
 <details>
 <summary><strong>У чому різниця між azd та az CLI?</strong></summary>
 
-**Azure CLI (az)**: Інструмент низького рівня для керування окремими ресурсами Azure
+**Azure CLI (az)**: Низькорівневий інструмент для керування окремими ресурсами Azure
 - `az webapp create`, `az storage account create`
-- Один ресурс за раз
-- Зосереджено на управлінні інфраструктурою
+- По одному ресурсу за раз
+- Орієнтований на управління інфраструктурою
 
-**Azure Developer CLI (azd)**: Інструмент високого рівня для повного розгортання додатків
-- `azd up` розгортає весь додаток з усіма ресурсами
+**Azure Developer CLI (azd)**: Високорівневий інструмент для повного розгортання додатків
+- `azd up` розгортає увесь додаток з усіма ресурсами
 - Робочі процеси на основі шаблонів
-- Орієнтовано на підвищення продуктивності розробника
+- Орієнтований на продуктивність розробника
 
-**Вам потрібні обидва**: azd використовує az CLI для автентифікації
+**Вам потрібні обидва**: azd використовує az CLI для аутентифікації
 </details>
 
 <details>
-<summary><strong>Чи можу я використовувати azd з існуючими ресурсами Azure?</strong></summary>
+<summary><strong>Чи можна використовувати azd з існуючими ресурсами Azure?</strong></summary>
 
 Так! Ви можете:
 1. Імпортувати існуючі ресурси в середовища azd
-2. Посилатися на існуючі ресурси у своїх шаблонах Bicep
-3. Використовувати azd для нових розгортань поряд із наявною інфраструктурою
+2. Посилатися на існуючі ресурси у ваших шаблонах Bicep
+3. Використовувати azd для нових розгортань поряд із існуючою інфраструктурою
 
-See [Configuration Guide](configuration.md) for details.
+Деталі дивіться у [Посібнику з конфігурації](configuration.md).
 </details>
 
 <details>
 <summary><strong>Чи працює azd з Azure Government або Azure China?</strong></summary>
 
-Так, налаштуйте хмару:
+Так, налаштуйте відповідне хмарне середовище:
 ```bash
-# Azure для уряду
+# Azure урядовий
 az cloud set --name AzureUSGovernment
 az login
 
-# Azure для Китаю
+# Azure Китай
 az cloud set --name AzureChinaCloud
 az login
 ```
@@ -375,54 +375,55 @@ az login
 <details>
 <summary><strong>Чи можна використовувати azd у CI/CD пайплайнах?</strong></summary>
 
-Абсолютно! azd призначено для автоматизації:
-- GitHub Actions integration
-- Azure DevOps support
-- Service principal authentication
-- Non-interactive mode
+Звичайно! azd створено для автоматизації:
+- Інтеграція з GitHub Actions
+- Підтримка Azure DevOps
+- Аутентифікація сервісним обліковим записом
+- Безінтерактивний режим
 
-See [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) for CI/CD patterns.
+Дивіться [Посібник з розгортання](../chapter-04-infrastructure/deployment-guide.md) для прикладів CI/CD.
 </details>
 
 <details>
-<summary><strong>Яка вартість використання azd?</strong></summary>
+<summary><strong>Які витрати пов'язані з використанням azd?</strong></summary>
 
-azd itself is **completely free** and open-source. You only pay for:
-- Azure resources you deploy
-- Azure consumption costs (compute, storage, etc.)
+azd є **повністю безкоштовним** та з відкритим кодом. Ви сплачуєте лише за:
+- Ресурси Azure, які ви розгортаєте
+- Вартість споживання Azure (обчислення, зберігання тощо)
 
-Use `azd provision --preview` to estimate costs before deployment.
+Використовуйте `azd provision --preview` для оцінки витрат перед розгортанням.
 </details>
 
-## Next Steps
+## Наступні кроки
 
-1. **Complete authentication**: Ensure you can access your Azure subscription
-2. **Try your first deployment**: Follow the [First Project Guide](first-project.md)
-3. **Explore templates**: Browse available templates with `azd template list`
-4. **Configure your IDE**: Set up your development environment
+1. **Завершіть аутентифікацію**: Переконайтеся, що маєте доступ до вашої підписки Azure
+2. **Спробуйте перше розгортання**: Дотримуйтесь [Посібника першого проєкту](first-project.md)
+3. **Огляньте шаблони**: Перегляньте доступні шаблони за допомогою `azd template list`
+4. **Налаштуйте ваше IDE**: Підготуйте середовище розробки
 
-## Support
+## Підтримка
 
-If you encounter issues:
-- [Official Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Report Issues](https://github.com/Azure/azure-dev/issues)
-- [Community Discussions](https://github.com/Azure/azure-dev/discussions)
-- [Azure Support](https://azure.microsoft.com/support/)
+Якщо виникнуть проблеми:
+- [Офіційна документація](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Повідомити про проблему](https://github.com/Azure/azure-dev/issues)
+- [Обговорення спільноти](https://github.com/Azure/azure-dev/discussions)
+- [Підтримка Azure](https://azure.microsoft.com/support/)
+- [**Навички агента Azure**](https://skills.sh/microsoft/github-copilot-for-azure) – отримуйте підказки команд Azure прямо у вашому редакторі за допомогою `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD для початківців](../../README.md)
-- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
-- **⬅️ Previous**: [AZD Basics](azd-basics.md) 
-- **➡️ Next**: [Your First Project](first-project.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Навігація по розділах:**
+- **📚 Головна сторінка курсу**: [AZD Для початківців](../../README.md)
+- **📖 Поточний розділ**: Розділ 1 - Основи та швидкий старт
+- **⬅️ Попередній**: [Основи AZD](azd-basics.md)
+- **➡️ Наступний**: [Ваш перший проєкт](first-project.md)
+- **🚀 Наступний розділ**: [Розділ 2: Розробка з пріоритетом на AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**✅ Installation Complete!** Continue to [Your First Project](first-project.md) to start building with azd.
+**✅ Встановлення завершено!** Продовжуйте до [Вашого першого проєкту](first-project.md), щоб почати роботу з azd.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Відмова від відповідальності**:
-Цей документ було перекладено за допомогою сервісу машинного перекладу на основі штучного інтелекту [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, будь ласка, зверніть увагу, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ рідною мовою слід вважати авторитетним джерелом. Для критично важливої інформації рекомендується скористатися послугами професійного людського перекладача. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникли внаслідок використання цього перекладу.
+**Відмова від відповідальності**:  
+Цей документ був перекладений за допомогою сервісу автоматичного перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, будь ласка, майте на увазі, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ рідною мовою слід вважати авторитетним джерелом. Для важливої інформації рекомендується професійний людський переклад. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникли внаслідок використання цього перекладу.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

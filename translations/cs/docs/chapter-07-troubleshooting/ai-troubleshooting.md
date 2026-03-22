@@ -1,30 +1,28 @@
-# Průvodce řešením problémů specifických pro AI
+# Příručka řešení problémů specifických pro AI
 
-**Navigace kapitolou:**
+**Navigace kapitolami:**
 - **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
 - **📖 Aktuální kapitola**: Kapitola 7 - Řešení problémů a ladění
 - **⬅️ Předchozí**: [Průvodce laděním](debugging.md)
 - **➡️ Další kapitola**: [Kapitola 8: Produkční a podnikové vzory](../chapter-08-production/production-ai-practices.md)
-- **🤖 Související**: [Kapitola 2: Vývoj orientovaný na AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🤖 Souvisí**: [Kapitola 2: Vývoj orientovaný na AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**Předchozí:** [Produkční praktiky AI](../chapter-08-production/production-ai-practices.md) | **Další:** [Základy AZD](../chapter-01-foundation/azd-basics.md)
+Tato komplexní příručka řešení problémů se zabývá běžnými problémy při nasazování AI řešení s AZD a poskytuje řešení a techniky ladění specifické pro služby Azure AI.
 
-Tento komplexní průvodce řešením problémů se zabývá běžnými problémy při nasazování AI řešení pomocí AZD a poskytuje řešení a techniky ladění specifické pro služby Azure AI.
+## Obsah
 
-## Table of Contents
+- [Microsoft Foundry Models Service Issues](#azure-openai-service-issues)
+- [Azure AI Search Problems](#azure-ai-search-problems)
+- [Container Apps Deployment Issues](#container-apps-deployment-issues)
+- [Authentication and Permission Errors](#authentication-and-permission-errors)
+- [Model Deployment Failures](#model-deployment-failures)
+- [Performance and Scaling Issues](#performance-and-scaling-issues)
+- [Cost and Quota Management](#cost-and-quota-management)
+- [Debugging Tools and Techniques](#debugging-tools-and-techniques)
 
-- [Azure OpenAI Service Issues](../../../../docs/chapter-07-troubleshooting)
-- [Azure AI Search Problems](../../../../docs/chapter-07-troubleshooting)
-- [Container Apps Deployment Issues](../../../../docs/chapter-07-troubleshooting)
-- [Authentication and Permission Errors](../../../../docs/chapter-07-troubleshooting)
-- [Model Deployment Failures](../../../../docs/chapter-07-troubleshooting)
-- [Performance and Scaling Issues](../../../../docs/chapter-07-troubleshooting)
-- [Cost and Quota Management](../../../../docs/chapter-07-troubleshooting)
-- [Debugging Tools and Techniques](../../../../docs/chapter-07-troubleshooting)
+## Microsoft Foundry Models Service Issues
 
-## Problémy se službou Azure OpenAI
-
-### Problém: Služba OpenAI není v regionu dostupná
+### Problém: Služba OpenAI nedostupná v regionu
 
 **Příznaky:**
 ```
@@ -32,15 +30,15 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **Příčiny:**
-- Azure OpenAI není dostupný ve vybraném regionu
-- Kvóta vyčerpána v preferovaných regionech
+- Microsoft Foundry Models není dostupná ve vybraném regionu
+- Kvóta ve preferovaných regionech vyčerpána
 - Regionální omezení kapacity
 
 **Řešení:**
 
-1. **Zkontrolujte dostupnost regionu:**
+1. **Zkontrolujte dostupnost v regionu:**
 ```bash
-# Seznam dostupných regionů pro OpenAI
+# Vypsat dostupné regiony pro OpenAI
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
@@ -70,7 +68,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### Problém: Překročená kvóta pro nasazení modelu
+### Problém: Překročena kvóta nasazení modelu
 
 **Příznaky:**
 ```
@@ -81,13 +79,13 @@ Error: Deployment failed due to insufficient quota
 
 1. **Zkontrolujte aktuální kvótu:**
 ```bash
-# Zkontrolovat využití kvóty
+# Zkontrolujte využití kvóty
 az cognitiveservices usage list \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG
 ```
 
-2. **Požádejte o navýšení kvóty:**
+2. **Požádejte o zvýšení kvóty:**
 ```bash
 # Odeslat žádost o zvýšení kvóty
 az support tickets create \
@@ -104,7 +102,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -138,9 +136,9 @@ az rest --method get \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
 ```
 
-## Problémy služby Azure AI Search
+## Azure AI Search Problems
 
-### Problém: Cenová úroveň vyhledávací služby je nedostatečná
+### Problém: Cenová úroveň služby Search nedostatečná
 
 **Příznaky:**
 ```
@@ -167,7 +165,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Zakázat sémantické vyhledávání (vývoj):**
+2. **Vypněte sémantické vyhledávání (vývoj):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -181,7 +179,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Problém: Selhání při vytváření indexu
+### Problém: Chyby při vytváření indexu
 
 **Příznaky:**
 ```
@@ -190,7 +188,7 @@ Error: Cannot create index, insufficient permissions
 
 **Řešení:**
 
-1. **Ověřte klíče vyhledávací služby:**
+1. **Ověřte klíče služby Search:**
 ```bash
 # Získat administrační klíč služby vyhledávání
 az search admin-key show \
@@ -228,7 +226,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Problémy s nasazením Container Apps
+## Container Apps Deployment Issues
 
 ### Problém: Selhání sestavení kontejneru
 
@@ -273,7 +271,7 @@ azure-search-documents==11.4.0
 azure-cosmos==4.5.1
 ```
 
-3. **Přidejte kontrolu stavu (health check):**
+3. **Přidejte kontrolu zdraví:**
 ```python
 # main.py - Přidat endpoint pro kontrolu stavu
 from fastapi import FastAPI
@@ -285,7 +283,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Problém: Selhání spuštění aplikace v kontejneru
+### Problém: Chyby při spuštění Container App
 
 **Příznaky:**
 ```
@@ -343,7 +341,7 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # Inicializovat AI klienta zde
+        # Inicializujte zde AI klienta
         pass
 
 @asynccontextmanager
@@ -357,13 +355,13 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Chyby autentizace a oprávnění
+## Authentication and Permission Errors
 
-### Problém: Spravované identitě bylo odepřeno oprávnění
+### Problém: Povolení spravované identity zamítnuto
 
 **Příznaky:**
 ```
-Error: Authentication failed for Azure OpenAI Service
+Error: Authentication failed for Microsoft Foundry Models Service
 ```
 
 **Řešení:**
@@ -393,7 +391,7 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-3. **Otestujte autentizaci:**
+3. **Otestujte ověřování:**
 ```python
 # Test ověřování spravované identity
 from azure.identity import DefaultAzureCredential
@@ -408,7 +406,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### Problém: Přístup k Key Vault odepřen
+### Problém: Přístup do Key Vaultu zamítnut
 
 **Příznaky:**
 ```
@@ -417,7 +415,7 @@ Error: The user, group or application does not have secrets get permission
 
 **Řešení:**
 
-1. **Udělte oprávnění k Key Vault:**
+1. **Udělte oprávnění k Key Vaultu:**
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -449,9 +447,9 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## Selhání nasazení modelu
+## Model Deployment Failures
 
-### Problém: Verze modelu není dostupná
+### Problém: Verze modelu není k dispozici
 
 **Příznaky:**
 ```
@@ -470,12 +468,12 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **Použijte náhradní modely (fallbacky):**
+2. **Použijte náhradní modely (fallbacks):**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
 param primaryModel object = {
-  name: 'gpt-4o-mini'
+  name: 'gpt-4.1-mini'
   version: '2024-07-18'
 }
 
@@ -521,20 +519,20 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
         return False
 ```
 
-## Problémy s výkonem a škálováním
+## Performance and Scaling Issues
 
 ### Problém: Vysoká latence odpovědí
 
 **Příznaky:**
-- Časy odezvy > 30 sekund
+- Doba odezvy > 30 sekund
 - Chyby vypršení časového limitu
 - Špatná uživatelská zkušenost
 
 **Řešení:**
 
-1. **Zavést časové limity pro požadavky:**
+1. **Implementujte časové limity požadavků:**
 ```python
-# Nakonfigurujte správné časové limity
+# Nastavte správné časové limity
 import httpx
 
 client = httpx.AsyncClient(
@@ -547,7 +545,7 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **Přidat cache odpovědí:**
+2. **Přidejte cachování odpovědí:**
 ```python
 # Redis mezipaměť pro odpovědi
 import redis.asyncio as redis
@@ -601,7 +599,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Problém: Chyby z nedostatku paměti
+### Problém: Chyby vyčerpání paměti
 
 **Příznaky:**
 ```
@@ -610,7 +608,7 @@ Error: Container killed due to memory limit exceeded
 
 **Řešení:**
 
-1. **Zvyšte alokaci paměti:**
+1. **Zvyšte přidělení paměti:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -631,7 +629,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Optimalizujte využití paměti:**
 ```python
-# Paměťově úsporné zpracování modelu
+# Paměťově efektivní zacházení s modelem
 import gc
 import psutil
 
@@ -644,27 +642,27 @@ class MemoryOptimizedAI:
         # Zkontrolujte využití paměti před zpracováním
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Vynutit sběr odpadu
+            gc.collect()  # Vynutit sběr paměti
             
         result = await self._process_ai_request(request)
         
-        # Vyčistit po zpracování
+        # Uklidit po zpracování
         gc.collect()
         return result
 ```
 
-## Řízení nákladů a kvót
+## Cost and Quota Management
 
 ### Problém: Neočekávaně vysoké náklady
 
 **Příznaky:**
 - Faktura Azure vyšší než očekávaná
-- Spotřeba tokenů překračuje odhady
-- Spuštěné upozornění na rozpočet
+- Využití tokenů překračuje odhady
+- Spuštěné upozornění rozpočtu
 
 **Řešení:**
 
-1. **Zaveďte kontroly nákladů:**
+1. **Implementujte kontroly nákladů:**
 ```python
 # Sledování využití tokenů
 class TokenTracker:
@@ -710,26 +708,26 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 3. **Optimalizujte výběr modelu:**
 ```python
-# Výběr modelu s ohledem na náklady
+# Výběr modelu zohledňující náklady
 MODEL_COSTS = {
-    'gpt-4o-mini': 0.00015,  # za 1K tokenů
-    'gpt-4': 0.03,          # za 1K tokenů
-    'gpt-35-turbo': 0.0015  # za 1K tokenů
+    'gpt-4.1-mini': 0.00015,  # na 1K tokenů
+    'gpt-4.1': 0.03,          # na 1K tokenů
+    'gpt-35-turbo': 0.0015  # na 1K tokenů
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
     """Select model based on complexity and budget."""
     if complexity == 'simple' or budget_remaining < 10:
-        return 'gpt-4o-mini'
+        return 'gpt-4.1-mini'
     elif complexity == 'medium':
         return 'gpt-35-turbo'
     else:
-        return 'gpt-4'
+        return 'gpt-4.1'
 ```
 
-## Nástroje a techniky pro ladění
+## Debugging Tools and Techniques
 
-### AZD Debugging Commands
+### Příkazy pro ladění AZD
 
 ```bash
 # Povolit podrobné protokolování
@@ -738,15 +736,35 @@ azd up --debug
 # Zkontrolovat stav nasazení
 azd show
 
-# Zobrazit protokoly aplikace (otevře panel monitorování)
+# Zobrazit protokoly aplikace (otevře monitorovací panel)
 azd monitor --logs
 
-# Zobrazit živé metriky
+# Zobrazit metriky v reálném čase
 azd monitor --live
 
 # Zkontrolovat proměnné prostředí
 azd env get-values
 ```
+
+### Příkazy rozšíření AZD AI pro diagnostiku
+
+Pokud jste nasadili agenty pomocí `azd ai agent init`, jsou k dispozici tyto další nástroje:
+
+```bash
+# Ujistěte se, že je nainstalováno rozšíření agentů
+azd extension install azure.ai.agents
+
+# Znovu inicializujte nebo aktualizujte agenta z manifestu
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Použijte MCP server, aby nástroje AI mohly dotazovat stav projektu
+azd mcp start
+
+# Vygenerujte soubory infrastruktury pro revizi a audit
+azd infra generate
+```
+
+> **Tip:** Použijte `azd infra generate` k zápisu IaC na disk, abyste mohli přesně zkontrolovat, jaké prostředky byly vytvořeny. To je neocenitelné při ladění problémů s konfigurací prostředků. Podrobnosti najdete v [referenci AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
 
 ### Ladění aplikace
 
@@ -755,7 +773,7 @@ azd env get-values
 import logging
 import json
 
-# Konfigurujte strukturované logování pro AI aplikace
+# Nakonfigurujte strukturované logování pro AI aplikace
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -774,14 +792,14 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **Endpointy pro kontrolu stavu (health check):**
+2. **Kontrolní koncové body:**
 ```python
 @app.get("/debug/health")
 async def detailed_health_check():
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # Zkontrolujte připojení k OpenAI
+    # Zkontrolovat připojení k OpenAI
     try:
         client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
         await client.models.list()
@@ -789,7 +807,7 @@ async def detailed_health_check():
     except Exception as e:
         checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
     
-    # Zkontrolujte službu vyhledávání
+    # Zkontrolovat službu vyhledávání
     try:
         search_client = SearchIndexClient(
             endpoint=AZURE_SEARCH_ENDPOINT,
@@ -803,7 +821,7 @@ async def detailed_health_check():
     return checks
 ```
 
-3. **Sledování výkonu:**
+3. **Monitorování výkonu:**
 ```python
 import time
 from functools import wraps
@@ -839,37 +857,38 @@ def monitor_performance(func):
 | Kód chyby | Popis | Řešení |
 |------------|-------------|----------|
 | 401 | Neautorizováno | Zkontrolujte API klíče a konfiguraci spravované identity |
-| 403 | Zakázáno | Ověřte přiřazení RBAC rolí |
-| 429 | Omezeno rychlostí | Implementujte logiku opakování s exponenciálním zpožděním mezi pokusy |
+| 403 | Zakázáno | Ověřte přiřazení rolí RBAC |
+| 429 | Omezeno rychlostí | Implementujte logiku opakování s exponenciálním backoffem |
 | 500 | Interní chyba serveru | Zkontrolujte stav nasazení modelu a logy |
-| 503 | Služba nedostupná | Ověřte stav služby a dostupnost v regionu |
+| 503 | Služba nedostupná | Ověřte stav služby a regionální dostupnost |
 
 ## Další kroky
 
-1. **Projděte si [Průvodce nasazením AI modelů](../chapter-02-ai-development/ai-model-deployment.md)** pro osvědčené postupy nasazení
-2. **Dokončete [Produkční praktiky AI](../chapter-08-production/production-ai-practices.md)** pro podniková řešení
+1. **Přečtěte si [AI Model Deployment Guide](../chapter-02-ai-development/ai-model-deployment.md)** pro osvědčené postupy nasazení
+2. **Projděte [Production AI Practices](../chapter-08-production/production-ai-practices.md)** pro podniková řešení připravená do produkce
 3. **Připojte se k [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** pro podporu komunity
-4. **Nahlaste problémy** do [úložiště AZD na GitHubu](https://github.com/Azure/azure-dev) pro problémy specifické pro AZD
+4. **Zasílejte problémy** do [repozitáře AZD na GitHubu](https://github.com/Azure/azure-dev) pro problémy specifické pro AZD
 
 ## Zdroje
 
-- [Řešení problémů služby Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [Řešení problémů Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Řešení problémů Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [Microsoft Foundry Models Service Troubleshooting](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Azure AI Search Troubleshooting](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Dovednost Azure Diagnostics Agent**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Nainstalujte si Azure diagnostické dovednosti ve svém editoru: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Navigace kapitolou:**
+**Navigace kapitolami:**
 - **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
 - **📖 Aktuální kapitola**: Kapitola 7 - Řešení problémů a ladění
 - **⬅️ Předchozí**: [Průvodce laděním](debugging.md)
 - **➡️ Další kapitola**: [Kapitola 8: Produkční a podnikové vzory](../chapter-08-production/production-ai-practices.md)
-- **🤖 Související**: [Kapitola 2: Vývoj orientovaný na AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- [Řešení problémů Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **🤖 Souvisí**: [Kapitola 2: Vývoj orientovaný na AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Reference**: [Řešení problémů s Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Prohlášení o vyloučení odpovědnosti**:
-Tento dokument byl přeložen pomocí služby AI překladu [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za žádná nedorozumění nebo chybné výklady vzniklé v důsledku použití tohoto překladu.
+**Upozornění**:
+Tento dokument byl přeložen pomocí služby pro překlad využívající umělou inteligenci [Co-op Translator](https://github.com/Azure/co-op-translator). Snažíme se o přesnost, nicméně mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho mateřském jazyce by měl být považován za závazný zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nezodpovídáme za žádná nedorozumění nebo chybné výklady vyplývající z použití tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

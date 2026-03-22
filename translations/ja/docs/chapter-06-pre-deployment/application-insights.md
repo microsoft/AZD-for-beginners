@@ -1,30 +1,30 @@
 # Application Insights と AZD の統合
 
-⏱️ **所要時間（目安）**: 40-50 分 | 💰 **費用影響**: 約 $5-15/月 | ⭐ **難易度**: 中級
+⏱️ <strong>所要時間の目安</strong>: 40-50 分 | 💰 <strong>コスト影響</strong>: 約 $5-15/月 | ⭐ <strong>難易度</strong>: 中級
 
-**📚 学習パス:**
-- ← 前へ: [事前チェック](preflight-checks.md) - 配備前の検証
-- 🎯 **現在の位置**: Application Insights の統合（監視、テレメトリ、デバッグ）
-- → 次へ: [デプロイガイド](../chapter-04-infrastructure/deployment-guide.md) - Azure へデプロイ
+**📚 学習の流れ:**
+- ← 前へ: [事前チェック](preflight-checks.md) - デプロイ前の検証
+- 🎯 <strong>現在地</strong>: Application Insights 統合（監視、テレメトリ、デバッグ）
+- → 次へ: [デプロイガイド](../chapter-04-infrastructure/deployment-guide.md) - Azure へのデプロイ
 - 🏠 [コースホーム](../../README.md)
 
 ---
 
 ## このレッスンで学ぶこと
 
-By completing this lesson, you will:
-- AZD プロジェクトに**Application Insights**を自動的に統合する
-- マイクロサービス向けに**分散トレーシング**を設定する
-- カスタム**テレメトリ**（メトリクス、イベント、依存関係）を実装する
-- リアルタイム監視のために**ライブメトリクス**を設定する
-- AZD デプロイから**アラートとダッシュボード**を作成する
-- **テレメトリクエリ**で本番の問題をデバッグする
-- **コストとサンプリング**戦略を最適化する
+このレッスンを修了すると、以下ができるようになります:
+- AZD プロジェクトに **Application Insights** を自動的に統合する
+- マイクロサービス向けの <strong>分散トレーシング</strong> を設定する
+- <strong>カスタムテレメトリ</strong>（メトリック、イベント、依存関係）を実装する
+- リアルタイム監視のための <strong>ライブメトリクス</strong> を設定する
+- AZD デプロイから <strong>アラートとダッシュボード</strong> を作成する
+- **テレメトリ クエリ** で本番の問題をデバッグする
+- <strong>コストとサンプリング</strong> 戦略を最適化する
 - **AI/LLM アプリケーション**（トークン、レイテンシ、コスト）を監視する
 
-## なぜ AZD と Application Insights の組み合わせが重要か
+## なぜ AZD と Application Insights が重要か
 
-### 課題：本番の可観測性
+### 課題: 本番での可観測性
 
 **Application Insights がない場合:**
 ```
@@ -36,7 +36,7 @@ By completing this lesson, you will:
 ❌ Unknown failure rates and bottlenecks
 ```
 
-**Application Insights + AZD を使用した場合:**
+**Application Insights + AZD を使う場合:**
 ```
 ✅ Automatic telemetry collection
 ✅ Centralized logs from all services
@@ -47,7 +47,7 @@ By completing this lesson, you will:
 ✅ AZD provisions everything automatically
 ```
 
-**例え**: Application Insights は、アプリケーション向けの「ブラックボックス」フライトレコーダーとコックピットのダッシュボードを組み合わせたようなものです。リアルタイムで何が起きているかをすべて確認でき、任意のインシデントを再現することができます。
+<strong>例え</strong>: Application Insights はアプリケーション用の「ブラックボックス」フライトレコーダーとコックピットのダッシュボードを同時に持つようなものです。リアルタイムで起きていることをすべて確認でき、あらゆるインシデントを再生できます。
 
 ---
 
@@ -62,19 +62,19 @@ graph TB
     App2[コンテナ アプリ 2<br/>製品サービス]
     App3[コンテナ アプリ 3<br/>注文サービス]
     
-    AppInsights[Application Insights<br/>テレメトリ ハブ]
+    AppInsights[アプリケーション インサイト<br/>テレメトリ ハブ]
     LogAnalytics[(ログ分析<br/>ワークスペース)]
     
-    Portal[Azure ポータル<br/>ダッシュボードとアラート]
+    Portal[Azure ポータル<br/>ダッシュボード & アラート]
     Query[Kusto クエリ<br/>カスタム分析]
     
     User --> App1
     App1 --> App2
     App2 --> App3
     
-    App1 -.->|自動計測| AppInsights
-    App2 -.->|自動計測| AppInsights
-    App3 -.->|自動計測| AppInsights
+    App1 -.->|自動インストルメンテーション| AppInsights
+    App2 -.->|自動インストルメンテーション| AppInsights
+    App3 -.->|自動インストルメンテーション| AppInsights
     
     AppInsights --> LogAnalytics
     LogAnalytics --> Portal
@@ -85,15 +85,15 @@ graph TB
 ```
 ### 自動的に監視されるもの
 
-| テレメトリの種類 | 収集される内容 | 利用シナリオ |
+| テレメトリ種別 | 取得内容 | 用途 |
 |----------------|------------------|----------|
-| **Requests** | HTTP リクエスト、ステータスコード、所要時間 | API のパフォーマンス監視 |
-| **Dependencies** | 外部呼び出し（DB、API、ストレージ） | ボトルネック特定 |
-| **Exceptions** | ハンドルされていないエラーとスタックトレース | 障害のデバッグ |
-| **Custom Events** | ビジネスイベント（サインアップ、購入） | 分析とファネル |
-| **Metrics** | パフォーマンスカウンター、カスタムメトリクス | キャパシティプランニング |
-| **Traces** | 重大度付きのログメッセージ | デバッグと監査 |
-| **Availability** | 稼働時間と応答時間のテスト | SLA 監視 |
+| <strong>リクエスト</strong> | HTTPリクエスト、ステータスコード、所要時間 | API のパフォーマンス監視 |
+| <strong>依存関係</strong> | 外部呼び出し（DB、API、ストレージ） | ボトルネックの特定 |
+| <strong>例外</strong> | スタックトレースを含む未処理のエラー | 障害のデバッグ |
+| <strong>カスタムイベント</strong> | ビジネスイベント（サインアップ、購入） | 分析やファネル |
+| <strong>メトリック</strong> | パフォーマンスカウンタ、カスタムメトリック | 容量計画 |
+| <strong>トレース</strong> | 重大度付きのログメッセージ | デバッグと監査 |
+| <strong>可用性</strong> | 稼働時間と応答時間のテスト | SLA の監視 |
 
 ---
 
@@ -102,13 +102,13 @@ graph TB
 ### 必要なツール
 
 ```bash
-# Azure Developer CLI を確認する
+# Azure Developer CLI の確認
 azd version
-# ✅ 期待: azd バージョン 1.0.0 以上
+# ✅ 期待される: azd バージョン 1.0.0 以上
 
-# Azure CLI を確認する
+# Azure CLI の確認
 az --version
-# ✅ 期待: azure-cli 2.50.0 以上
+# ✅ 期待される: azure-cli バージョン 2.50.0 以上
 ```
 
 ### Azure の要件
@@ -122,18 +122,18 @@ az --version
 
 ### 知識の前提
 
-以下を完了していること:
-- [AZD の基本](../chapter-01-foundation/azd-basics.md) - AZD のコア概念
-- [設定](../chapter-03-configuration/configuration.md) - 環境設定
-- [最初のプロジェクト](../chapter-01-foundation/first-project.md) - 基本的なデプロイ
+以下を完了していることが望ましい:
+- [AZD Basics](../chapter-01-foundation/azd-basics.md) - AZD の基本概念
+- [Configuration](../chapter-03-configuration/configuration.md) - 環境設定
+- [First Project](../chapter-01-foundation/first-project.md) - 基本的なデプロイ
 
 ---
 
-## レッスン 1: AZD による Application Insights の自動設定
+## レッスン 1: AZD による自動的な Application Insights
 
 ### AZD が Application Insights をプロビジョニングする方法
 
-AZD はデプロイ時に Application Insights を自動的に作成・構成します。仕組みを見てみましょう。
+AZD はデプロイ時に自動的に Application Insights を作成して設定します。仕組みを見てみましょう。
 
 ### プロジェクト構成
 
@@ -154,7 +154,7 @@ monitored-app/
 
 ---
 
-### ステップ 1: AZD の設定 (azure.yaml)
+### ステップ 1: AZD の設定（azure.yaml）
 
 **ファイル: `azure.yaml`**
 
@@ -172,11 +172,11 @@ services:
 # AZD automatically provisions monitoring!
 ```
 
-**これで完了です!** AZD はデフォルトで Application Insights を作成します。基本的な監視には追加構成は不要です。
+**以上です！** 基本的な監視のために、AZD はデフォルトで Application Insights を作成します。追加設定は不要です。
 
 ---
 
-### ステップ 2: 監視インフラストラクチャ (Bicep)
+### ステップ 2: 監視インフラ（Bicep）
 
 **ファイル: `infra/core/monitoring.bicep`**
 
@@ -227,7 +227,7 @@ output applicationInsightsName string = applicationInsights.name
 
 ---
 
-### ステップ 3: Container App を Application Insights に接続する
+### ステップ 3: コンテナアプリを Application Insights に接続
 
 **ファイル: `infra/app/api.bicep`**
 
@@ -285,7 +285,7 @@ output uri string = 'https://${containerApp.properties.configuration.ingress.fqd
 
 ---
 
-### ステップ 4: テレメトリを含むアプリケーションコード
+### ステップ 4: テレメトリを使ったアプリケーションコード
 
 **ファイル: `src/app.py`**
 
@@ -308,10 +308,10 @@ if connection_string:
     middleware = FlaskMiddleware(
         app,
         exporter=AzureExporter(connection_string=connection_string),
-        sampler=ProbabilitySampler(rate=1.0)  # 開発環境での100%サンプリング
+        sampler=ProbabilitySampler(rate=1.0)  # 開発環境では100%サンプリング
     )
     
-    # ログを構成する
+    # ロギングを構成する
     logger = logging.getLogger(__name__)
     logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
@@ -384,10 +384,10 @@ azd init
 # デプロイ（Application Insights を自動的にプロビジョニングします）
 azd up
 
-# アプリの URL を取得する
+# アプリの URL を取得
 APP_URL=$(azd env get-values | grep API_URL | cut -d '=' -f2 | tr -d '"')
 
-# テレメトリを生成する
+# テレメトリを生成
 curl $APP_URL/health
 curl $APP_URL/api/products
 curl $APP_URL/api/error-test
@@ -404,10 +404,10 @@ curl $APP_URL/api/slow
 
 ---
 
-### ステップ 6: Azure ポータルでテレメトリを表示する
+### ステップ 6: Azure ポータルでテレメトリを表示
 
 ```bash
-# Application Insights の詳細を取得
+# Application Insights の詳細を取得する
 azd env get-values | grep APPLICATIONINSIGHTS
 
 # Azure ポータルで開く
@@ -417,21 +417,21 @@ az monitor app-insights component show \
   --query "appId" -o tsv
 ```
 
-**Azure ポータルへ移動 → Application Insights → トランザクション検索**
+**Azure ポータル → Application Insights → Transaction Search に移動**
 
-次の項目が表示されるはずです:
-- ✅ ステータスコードを含む HTTP リクエスト
-- ✅ リクエスト所要時間（`/api/slow` では 3 秒以上）
-- ✅ `/api/error-test` からの例外の詳細
+以下が確認できるはずです:
+- ✅ ステータスコード付きの HTTP リクエスト
+- ✅ `/api/slow` のリクエスト所要時間（3秒以上）
+- ✅ `/api/error-test` からの例外詳細
 - ✅ カスタムログメッセージ
 
 ---
 
 ## レッスン 2: カスタムテレメトリとイベント
 
-### ビジネスイベントを追跡する
+### ビジネスイベントの追跡
 
-ビジネスに重要なイベント用のカスタムテレメトリを追加しましょう。
+ビジネス上重要なイベントのためにカスタムテレメトリを追加しましょう。
 
 **ファイル: `src/telemetry.py`**
 
@@ -458,12 +458,12 @@ class TelemetryClient:
             print("⚠️ Application Insights connection string not found")
             return
         
-        # ロガーを設定する
+        # ロガーの設定
         self.logger = logging.getLogger(__name__)
         self.logger.addHandler(AzureLogHandler(connection_string=self.connection_string))
         self.logger.setLevel(logging.INFO)
         
-        # メトリクスエクスポーターを設定する
+        # メトリクスエクスポーターの設定
         self.stats = stats_module.stats
         self.view_manager = self.stats.view_manager
         self.stats_recorder = self.stats.stats_recorder
@@ -473,7 +473,7 @@ class TelemetryClient:
         )
         self.view_manager.register_exporter(exporter)
         
-        # トレーサーを設定する
+        # トレーサーの設定
         self.tracer = tracer_module.Tracer(
             exporter=AzureExporter(connection_string=self.connection_string)
         )
@@ -518,7 +518,7 @@ class TelemetryClient:
 telemetry = TelemetryClient()
 ```
 
-### カスタムイベントでアプリケーションを更新する
+### カスタムイベントでアプリを更新
 
 **ファイル: `src/app.py`（拡張版）**
 
@@ -565,7 +565,7 @@ def search():
     
     start_time = time.time()
     
-    # 検索をシミュレートする（実際にはデータベースクエリになる）
+    # 検索をシミュレートする（実際はデータベースクエリになる）
     results = [{'id': 1, 'name': f'Result for {query}'}]
     
     duration = (time.time() - start_time) * 1000  # ミリ秒に変換する
@@ -616,7 +616,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-### カスタムテレメトリをテストする
+### カスタムテレメトリのテスト
 
 ```bash
 # 購入イベントを追跡する
@@ -634,7 +634,7 @@ curl $APP_URL/api/external-call
 
 **Azure ポータルで表示:**
 
-Application Insights → ログ に移動し、次を実行します:
+Application Insights → Logs に移動し、次を実行:
 
 ```kusto
 // View purchase events
@@ -667,9 +667,9 @@ traces
 
 ## レッスン 3: マイクロサービスの分散トレーシング
 
-### サービス間トレーシングを有効にする
+### クロスサービストレーシングを有効にする
 
-マイクロサービスでは、Application Insights がサービス間のリクエストを自動的に相関付けします。
+マイクロサービス向けに、Application Insights はサービス間のリクエストを自動的に相関付けします。
 
 **ファイル: `infra/main.bicep`**
 
@@ -739,36 +739,36 @@ output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applica
 output GATEWAY_URL string = apiGateway.outputs.uri
 ```
 
-### エンドツーエンドトランザクションを表示する
+### エンドツーエンドのトランザクションを表示
 
 ```mermaid
 sequenceDiagram
     participant User
-    participant Gateway as API ゲートウェイ<br/>(トレース ID: abc123)
-    participant Product as プロダクトサービス<br/>(親 ID: abc123)
-    participant Order as 注文サービス<br/>(親 ID: abc123)
+    participant Gateway as API ゲートウェイ<br/>(トレースID: abc123)
+    participant Product as プロダクトサービス<br/>(親ID: abc123)
+    participant Order as 注文サービス<br/>(親ID: abc123)
     participant AppInsights as アプリケーション インサイト
     
     User->>Gateway: POST /api/checkout
     Note over Gateway: トレース開始: abc123
-    Gateway->>AppInsights: リクエストを記録 (トレース ID: abc123)
+    Gateway->>AppInsights: リクエストをログ (トレースID: abc123)
     
     Gateway->>Product: GET /products/123
-    Note over Product: 親 ID: abc123
-    Product->>AppInsights: 依存呼び出しを記録
-    Product-->>Gateway: 商品詳細
+    Note over Product: 親ID: abc123
+    Product->>AppInsights: 依存関係の呼び出しをログ
+    Product-->>Gateway: 製品の詳細
     
     Gateway->>Order: POST /orders
-    Note over Order: 親 ID: abc123
-    Order->>AppInsights: 依存呼び出しを記録
-    Order-->>Gateway: 注文が作成されました
+    Note over Order: 親ID: abc123
+    Order->>AppInsights: 依存関係の呼び出しをログ
+    Order-->>Gateway: 注文作成済み
     
     Gateway-->>User: チェックアウト完了
-    Gateway->>AppInsights: レスポンスを記録 (所要時間: 450ms)
+    Gateway->>AppInsights: レスポンスをログ (所要時間: 450ms)
     
-    Note over AppInsights: トレース ID による相関
+    Note over AppInsights: トレースIDによる相関
 ```
-**エンドツーエンドトレースをクエリする:**
+**エンドツーエンドのトレースをクエリ:**
 
 ```kusto
 // Find complete request flow
@@ -792,9 +792,9 @@ dependencies
 
 ### ライブメトリクスストリームを有効にする
 
-ライブメトリクスは 1 秒未満のレイテンシでリアルタイムのテレメトリを提供します。
+ライブメトリクスは <1 秒のレイテンシでリアルタイムのテレメトリを提供します。
 
-**ライブメトリクスへアクセスする:**
+**ライブメトリクスへのアクセス:**
 
 ```bash
 # Application Insights リソースを取得する
@@ -806,8 +806,8 @@ RG_NAME=$(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2 | tr -
 echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME → Live Metrics"
 ```
 
-**リアルタイムで表示されるもの:**
-- ✅ 受信リクエスト率（リクエスト/秒）
+**リアルタイムで見えるもの:**
+- ✅ 受信リクエストレート（リクエスト/秒）
 - ✅ 送信依存呼び出し
 - ✅ 例外数
 - ✅ CPU とメモリ使用率
@@ -824,23 +824,23 @@ for i in {1..100}; do
 done
 
 # Azure ポータルでライブ メトリックを監視する
-# リクエスト レートが急増しているのが確認できるはずです
+# リクエスト レートのスパイクが見られるはずです
 ```
 
 ---
 
 ## 実践演習
 
-### 演習 1: アラートの設定 ⭐⭐（中）
+### 演習 1: アラートの設定 ⭐⭐ (中)
 
-**目標**: エラー率の高さと遅いレスポンスに対するアラートを作成する。
+<strong>目的</strong>: エラー率と遅い応答に対するアラートを作成する。
 
 **手順:**
 
-1. **エラー率のアラートを作成する:**
+1. **エラー率のアラートを作成:**
 
 ```bash
-# Application Insights リソース ID を取得する
+# Application Insights のリソース ID を取得する
 APPI_ID=$(az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -857,7 +857,7 @@ az monitor metrics alert create \
   --description "Alert when error rate exceeds 10 per 5 minutes"
 ```
 
-2. **遅いレスポンスのアラートを作成する:**
+2. **遅い応答のアラートを作成:**
 
 ```bash
 az monitor metrics alert create \
@@ -870,7 +870,7 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **Bicep によるアラート作成（AZD では推奨）:**
+3. **Bicep を使ってアラートを作成（AZD 推奨）:**
 
 **ファイル: `infra/core/alerts.bicep`**
 
@@ -944,7 +944,7 @@ output errorAlertId string = errorRateAlert.id
 output slowResponseAlertId string = slowResponseAlert.id
 ```
 
-4. **アラートをテストする:**
+4. **アラートをテスト:**
 
 ```bash
 # エラーを発生させる
@@ -957,42 +957,42 @@ for i in {1..10}; do
   curl $APP_URL/api/slow
 done
 
-# アラートの状態を確認する (5〜10分待つ)
+# アラートの状態を確認する（5～10分待つ）
 az monitor metrics alert list \
   --resource-group $RG_NAME \
   --query "[].{Name:name, Enabled:enabled, State:properties.enabled}" \
   --output table
 ```
 
-**✅ 成功基準:**
+**✅ 成功条件:**
 - ✅ アラートが正常に作成されている
 - ✅ 閾値超過時にアラートが発火する
-- ✅ Azure ポータルでアラート履歴を確認できる
-- ✅ AZD のデプロイと統合されている
+- ✅ Azure ポータルでアラート履歴が確認できる
+- ✅ AZD デプロイに統合されている
 
-**所要時間**: 20-25 分
+<strong>所要時間</strong>: 20-25 分
 
 ---
 
-### 演習 2: カスタムダッシュボードの作成 ⭐⭐（中）
+### 演習 2: カスタムダッシュボードの作成 ⭐⭐ (中)
 
-**目標**: 主要なアプリケーションメトリクスを表示するダッシュボードを作成する。
+<strong>目的</strong>: 主要なアプリケーションメトリクスを表示するダッシュボードを構築する。
 
 **手順:**
 
-1. **Azure ポータルでダッシュボードを作成する:**
+1. **Azure ポータルでダッシュボードを作成:**
 
-次の場所へ移動: Azure ポータル → ダッシュボード → 新しいダッシュボード
+Azure ポータル → Dashboards → New Dashboard に移動
 
-2. **主要メトリクスのタイルを追加する:**
+2. **主要メトリクス用のタイルを追加:**
 
 - リクエスト数（過去24時間）
 - 平均応答時間
 - エラー率
-- 遅い操作トップ5
+- 上位5つの最遅操作
 - ユーザーの地域分布
 
-3. **Bicep によるダッシュボード作成:**
+3. **Bicep でダッシュボードを作成:**
 
 **ファイル: `infra/core/dashboard.bicep`**
 
@@ -1063,7 +1063,7 @@ resource dashboard 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
 output dashboardId string = dashboard.id
 ```
 
-4. **ダッシュボードをデプロイする:**
+4. **ダッシュボードをデプロイ:**
 
 ```bash
 # main.bicep に追加
@@ -1081,23 +1081,23 @@ module dashboard './core/dashboard.bicep' = {
 azd up
 ```
 
-**✅ 成功基準:**
-- ✅ ダッシュボードが主要メトリクスを表示している
+**✅ 成功条件:**
+- ✅ ダッシュボードに主要メトリクスが表示される
 - ✅ Azure ポータルのホームにピン留めできる
 - ✅ リアルタイムで更新される
-- ✅ AZD を通じてデプロイ可能
+- ✅ AZD 経由でデプロイ可能
 
-**所要時間**: 25-30 分
+<strong>所要時間</strong>: 25-30 分
 
 ---
 
-### 演習 3: AI/LLM アプリケーションの監視 ⭐⭐⭐（上級）
+### 演習 3: AI/LLM アプリケーションの監視 ⭐⭐⭐ (上級)
 
-**目標**: Azure OpenAI の使用状況（トークン、コスト、レイテンシ）を追跡する。
+<strong>目的</strong>: Microsoft Foundry Models の使用状況（トークン、コスト、レイテンシ）を追跡する。
 
 **手順:**
 
-1. **AI モニタリングラッパーを作成する:**
+1. **AI 監視ラッパーを作成:**
 
 **ファイル: `src/ai_telemetry.py`**
 
@@ -1107,7 +1107,7 @@ from openai import AzureOpenAI
 import time
 
 class MonitoredAzureOpenAI:
-    """Azure OpenAI client with automatic telemetry"""
+    """Microsoft Foundry Models client with automatic telemetry"""
     
     def __init__(self, api_key, endpoint, api_version="2024-02-01"):
         self.client = AzureOpenAI(
@@ -1121,14 +1121,14 @@ class MonitoredAzureOpenAI:
         start_time = time.time()
         
         try:
-            # Azure OpenAI を呼び出す
+            # Microsoft Foundry モデルを呼び出す
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
                 **kwargs
             )
             
-            duration = (time.time() - start_time) * 1000  # ミリ秒
+            duration = (time.time() - start_time) * 1000  # ms
             
             # 使用量を抽出する
             usage = response.usage
@@ -1136,9 +1136,9 @@ class MonitoredAzureOpenAI:
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # コストを計算する（GPT-4 の料金）
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # 1K トークンあたり $0.03
-            completion_cost = (completion_tokens / 1000) * 0.06  # 1K トークンあたり $0.06
+            # コストを計算する（gpt-4.1の価格）
+            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0.03（1Kトークンあたり）
+            completion_cost = (completion_tokens / 1000) * 0.06  # $0.06（1Kトークンあたり）
             total_cost = prompt_cost + completion_cost
             
             # カスタムイベントを追跡する
@@ -1182,7 +1182,7 @@ class MonitoredAzureOpenAI:
             raise
 ```
 
-2. **モニタリングされたクライアントを使用する:**
+2. **監視付きクライアントを使用:**
 
 ```python
 from flask import Flask, request, jsonify
@@ -1191,7 +1191,7 @@ import os
 
 app = Flask(__name__)
 
-# 監視対象の OpenAI クライアントを初期化する
+# 監視付きの OpenAI クライアントを初期化する
 openai_client = MonitoredAzureOpenAI(
     api_key=os.environ['AZURE_OPENAI_API_KEY'],
     endpoint=os.environ['AZURE_OPENAI_ENDPOINT']
@@ -1204,7 +1204,7 @@ def chat():
     
     # 自動監視で呼び出す
     response = openai_client.chat_completion(
-        model='gpt-4',
+        model='gpt-4.1',
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1216,7 +1216,7 @@ def chat():
     })
 ```
 
-3. **AI メトリクスをクエリする:**
+3. **AI メトリクスをクエリ:**
 
 ```kusto
 // Total AI spend over time
@@ -1250,13 +1250,13 @@ traces
     AvgCostPerRequest = avg(Cost)
 ```
 
-**✅ 成功基準:**
-- ✅ すべての OpenAI 呼び出しが自動的に追跡される
+**✅ 成功条件:**
+- ✅ すべての OpenAI 呼び出しが自動的にトラッキングされる
 - ✅ トークン使用量とコストが可視化される
 - ✅ レイテンシが監視される
-- ✅ 予算アラートを設定できる
+- ✅ 予算アラートが設定できる
 
-**所要時間**: 35-45 分
+<strong>所要時間</strong>: 35-45 分
 
 ---
 
@@ -1269,10 +1269,10 @@ traces
 ```python
 from opencensus.trace.samplers import ProbabilitySampler
 
-# 開発: 100% サンプリング
+# 開発環境: 100% サンプリング
 sampler = ProbabilitySampler(rate=1.0)
 
-# 本番: 10% サンプリング (コストを90%削減)
+# 本番環境: 10% サンプリング (コストを90%削減)
 sampler = ProbabilitySampler(rate=0.1)
 
 # 適応サンプリング (自動で調整)
@@ -1280,7 +1280,7 @@ from opencensus.trace.samplers import AdaptiveSampler
 sampler = AdaptiveSampler()
 ```
 
-**Bicep 内で:**
+**Bicep では:**
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -1291,7 +1291,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 }
 ```
 
-### データ保持期間
+### データ保持
 
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
@@ -1307,31 +1307,31 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 
 | データ量 | 保持期間 | 月額コスト |
 |-------------|-----------|--------------|
-| 1 GB/月 | 30 日 | 約 $2-5 |
-| 5 GB/月 | 30 日 | 約 $10-15 |
-| 10 GB/月 | 90 日 | 約 $25-40 |
-| 50 GB/月 | 90 日 | 約 $100-150 |
+| 1 GB/月 | 30日 | 約 $2-5 |
+| 5 GB/月 | 30日 | 約 $10-15 |
+| 10 GB/月 | 90日 | 約 $25-40 |
+| 50 GB/月 | 90日 | 約 $100-150 |
 
-**無料枠**: 5 GB/月 が含まれます
+<strong>無料枠</strong>: 5 GB/月 が含まれます
 
 ---
 
-## 知識のチェックポイント
+## 知識チェックポイント
 
 ### 1. 基本的な統合 ✓
 
-理解度を確認しましょう:
+理解度をテスト:
 
-- [ ] **Q1**: AZD はどのように Application Insights をプロビジョニングしますか？
-  - **A**: `infra/core/monitoring.bicep` の Bicep テンプレートを介して自動的に行われます
+- [ ] **Q1**: AZD はどうやって Application Insights をプロビジョニングしますか？
+  - **A**: `infra/core/monitoring.bicep` の Bicep テンプレートを通じて自動的に行われます
 
 - [ ] **Q2**: Application Insights を有効にする環境変数は何ですか？
   - **A**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **Q3**: 主なテレメトリの種類は何ですか？
-  - **A**: Requests（HTTP 呼び出し）、Dependencies（外部呼び出し）、Exceptions（エラー）
+- [ ] **Q3**: 主要なテレメトリの種類は何ですか？
+  - **A**: リクエスト（HTTP 呼び出し）、依存関係（外部呼び出し）、例外（エラー）
 
-**実践での検証:**
+**ハンズオン検証:**
 ```bash
 # Application Insights が構成されているか確認する
 azd env get-values | grep APPLICATIONINSIGHTS
@@ -1347,18 +1347,18 @@ az monitor app-insights metrics show \
 
 ### 2. カスタムテレメトリ ✓
 
-理解度を確認しましょう:
+理解度をテスト:
 
-- [ ] **Q1**: カスタムのビジネスイベントをどのように追跡しますか？
-  - **A**: `custom_dimensions` を使ったロガー、または `TelemetryClient.track_event()` を使用する
+- [ ] **Q1**: カスタムビジネスイベントはどう追跡しますか？
+  - **A**: `custom_dimensions` を使ったロガーや `TelemetryClient.track_event()` を使用する
 
-- [ ] **Q2**: イベントとメトリクスの違いは何ですか？
-  - **A**: イベントは離散的な発生、メトリクスは数値の測定です
+- [ ] **Q2**: イベントとメトリックの違いは何ですか？
+  - **A**: イベントは離散的な発生事象、メトリックは数値的な測定値
 
-- [ ] **Q3**: サービス間でテレメトリをどのように相関付けしますか？
-  - **A**: Application Insights は相関のために自動的に `operation_Id` を使用します
+- [ ] **Q3**: サービス間でテレメトリを相関させるには？
+  - **A**: Application Insights は自動的に `operation_Id` を使って相関します
 
-**実践での検証:**
+**ハンズオン検証:**
 ```kusto
 // Verify custom events
 traces
@@ -1370,20 +1370,20 @@ traces
 
 ### 3. 本番監視 ✓
 
-理解度を確認しましょう:
+理解度をテスト:
 
 - [ ] **Q1**: サンプリングとは何で、なぜ使いますか？
-  - **A**: サンプリングはテレメトリの一部のみを収集することでデータ量（およびコスト）を削減します
+  - **A**: サンプリングはテレメトリ量（とコスト）を削減するために、一定割合のデータのみをキャプチャすることです
 
-- [ ] **Q2**: どのようにアラートを設定しますか？
-  - **A**: Application Insights のメトリクスに基づいて、Bicep または Azure ポータルでメトリックアラートを使用します
+- [ ] **Q2**: アラートはどう設定しますか？
+  - **A**: Application Insights のメトリックに基づき、Bicep または Azure ポータルでメトリックアラートを使います
 
 - [ ] **Q3**: Log Analytics と Application Insights の違いは何ですか？
-  - **A**: Application Insights はデータを Log Analytics ワークスペースに保存します；App Insights はアプリケーション固有のビューを提供します
+  - **A**: Application Insights は Log Analytics ワークスペースにデータを格納し、アプリケーション固有のビューを提供します
 
-**実践での検証:**
+**ハンズオン検証:**
 ```bash
-# サンプリング構成を確認する
+# サンプリング設定を確認する
 az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1394,7 +1394,7 @@ az monitor app-insights component show \
 
 ## ベストプラクティス
 
-### ✅ 実行すべきこと:
+### ✅ 実施すべきこと:
 
 1. **相関 ID を使用する**
    ```python
@@ -1406,12 +1406,12 @@ az monitor app-insights component show \
    })
    ```
 
-2. **重要なメトリクスのアラートを設定する**
+2. <strong>重要なメトリクスに対するアラートを設定する</strong>
    ```bicep
    // Error rate, slow responses, availability
    ```
 
-3. **構造化ログを使用する**
+3. <strong>構造化ログを使用する</strong>
    ```python
    # ✅ 良い: 構造化されている
    logger.info('User signup', extra={'custom_dimensions': {'user_id': 123}})
@@ -1420,16 +1420,16 @@ az monitor app-insights component show \
    logger.info(f'User 123 signed up')
    ```
 
-4. **依存関係を監視する**
+4. <strong>依存関係を監視する</strong>
    ```python
-   # 自動的にデータベース呼び出し、HTTPリクエストなどを追跡します。
+   # データベース呼び出し、HTTPリクエストなどを自動的に追跡します。
    ```
 
 5. **デプロイ中は Live Metrics を使用する**
 
-### ❌ 避けること:
+### ❌ やってはいけないこと:
 
-1. **機密データをログに残さない**
+1. <strong>機密データをログに記録しない</strong>
    ```python
    # ❌ 悪い
    logger.info(f'Login: {username}:{password}')
@@ -1438,7 +1438,7 @@ az monitor app-insights component show \
    logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
    ```
 
-2. **本番で 100% サンプリングを使用しない**
+2. **本番で 100% サンプリングを使わない**
    ```python
    # ❌ 高価
    sampler = ProbabilitySampler(rate=1.0)
@@ -1447,9 +1447,9 @@ az monitor app-insights component show \
    sampler = ProbabilitySampler(rate=0.1)
    ```
 
-3. **デッドレターキューを無視しない**
+3. <strong>デッドレターキューを無視しない</strong>
 
-4. **データ保持制限を設定するのを忘れない**
+4. <strong>データ保持期間の上限設定を忘れない</strong>
 
 ---
 
@@ -1462,16 +1462,16 @@ az monitor app-insights component show \
 # 接続文字列が設定されていることを確認してください
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Azure Monitor を使用してアプリケーションのログを確認してください
+# Azure Monitor でアプリケーションのログを確認してください
 azd monitor --logs
 
-# または Container Apps 用の Azure CLI を使用してください:
+# または Container Apps 用の Azure CLI を使用する:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
 **解決策:**
 ```bash
-# コンテナーアプリの接続文字列を確認してください
+# コンテナ アプリの接続文字列を確認してください
 az containerapp show \
   --name $APP_NAME \
   --resource-group $RG_NAME \
@@ -1481,7 +1481,7 @@ az containerapp show \
 
 ---
 
-### 問題: 高額なコスト
+### 問題: コストが高い
 
 **診断:**
 ```bash
@@ -1494,58 +1494,59 @@ az monitor app-insights metrics show \
 
 **解決策:**
 - サンプリング率を下げる
-- 保持期間を短縮する
+- 保持期間を短くする
 - 冗長なログ出力を削除する
 
 ---
 
-## さらに学ぶ
+## もっと学ぶ
 
 ### 公式ドキュメント
-- [Application Insights の概要](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Python 向け Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
+- [Application Insights Overview](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Application Insights for Python](https://learn.microsoft.com/azure/azure-monitor/app/opencensus-python)
 - [Kusto Query Language](https://learn.microsoft.com/azure/data-explorer/kusto/query/)
-- [AZD の監視](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
+- [AZD Monitoring](https://learn.microsoft.com/azure/developer/azure-developer-cli/monitor-your-app)
 
-### コースの次のステップ
+### このコースの次のステップ
 - ← 前へ: [事前チェック](preflight-checks.md)
 - → 次へ: [デプロイガイド](../chapter-04-infrastructure/deployment-guide.md)
 - 🏠 [コースホーム](../../README.md)
 
-### 関連例
-- [Azure OpenAI の例](../../../../examples/azure-openai-chat) - AI テレメトリ
-- [マイクロサービスの例](../../../../examples/microservices) - 分散トレーシング
+### 関連する例
+- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - AI テレメトリ
+- [Microservices Example](../../../../examples/microservices) - 分散トレーシング
 
 ---
 
 ## まとめ
 
 **学んだこと:**
-- ✅ AZD による Application Insights の自動プロビジョニング
-- ✅ カスタムテレメトリ（イベント、メトリクス、依存関係）
+- ✅ AZD による自動的な Application Insights のプロビジョニング
+- ✅ カスタムテレメトリ（イベント、メトリック、依存関係）
 - ✅ マイクロサービス間の分散トレーシング
 - ✅ ライブメトリクスとリアルタイム監視
 - ✅ アラートとダッシュボード
 - ✅ AI/LLM アプリケーションの監視
 - ✅ コスト最適化戦略
 
-**主なポイント:**
-1. **AZD は監視を自動的にプロビジョニングする** - 手動セットアップは不要
-2. **構造化ログを使用する** - クエリが簡単になる
-3. **ビジネスイベントを追跡する** - 技術的なメトリクスだけでなく
+**重要なポイント:**
+
+1. **AZD は監視を自動的にプロビジョニングします** - 手動のセットアップ不要
+2. <strong>構造化ログを使用する</strong> - クエリが簡単になる
+3. <strong>ビジネスイベントを追跡する</strong> - 技術的なメトリクスだけでなく
 4. **AI コストを監視する** - トークンと支出を追跡する
-5. **アラートを設定する** - 受動的ではなく、能動的に対応する
-6. **コストを最適化する** - サンプリングと保持期間の制限を使用する
+5. <strong>アラートを設定する</strong> - 受動的ではなく能動的に
+6. <strong>コストを最適化する</strong> - サンプリングと保持制限を使用する
 
 **次のステップ:**
 1. 実践演習を完了する
 2. AZD プロジェクトに Application Insights を追加する
-3. チーム用のカスタムダッシュボードを作成する
-4. 学ぶ [デプロイガイド](../chapter-04-infrastructure/deployment-guide.md)
+3. チーム向けのカスタムダッシュボードを作成する
+4. 学ぶ [デプロイ ガイド](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責事項：
-この文書は AI 翻訳サービス Co‑op Translator (https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性には努めておりますが、自動翻訳には誤りや不正確さが含まれる可能性があることにご留意ください。原文（原言語の文書）を正確な出典としてご参照ください。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用に起因するいかなる誤解や誤訳についても責任を負いかねます。
+**免責事項**:
+本書類は AI 翻訳サービス [Co-op トランスレーター](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性を期して努力していますが、自動翻訳には誤りや不正確な点が含まれる可能性があることにご注意ください。原文（元の言語での文書）が権威ある情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や誤訳についても、当方は責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,49 +1,49 @@
-# Példák - Gyakorlati AZD sablonok és konfigurációk
+# Példák - Gyakorlati AZD Sablonok és Konfigurációk
 
-**Tanulás példán keresztül - fejezetek szerint rendezve**
-- **📚 Kurzus kezdőlap**: [AZD kezdőknek](../README.md)
-- **📖 Fejezet térkép**: Példák a tanulási nehézség szerint rendezve
-- **🚀 Helyi példa**: [Kiskereskedelmi többügynökös megoldás](retail-scenario.md)
-- **🤖 Külső AI példák**: Hivatkozások Azure Samples adattárakra
+**Tanulás példák alapján - fejezetenként szervezve**
+- **📚 Kurzus kezdőoldal**: [AZD kezdőknek](../README.md)
+- **📖 Fejezet térkép**: Példák a tanulási nehézség szerint rendszerezve
+- **🚀 Lokális példa**: [Kiskereskedelmi több-ügynök megoldás](retail-scenario.md)
+- **🤖 Külső MI példák**: Hivatkozások Azure Samples tárolókra
 
 > **📍 FONTOS: Helyi vs Külső példák**  
-> Ez a tárház **4 teljes helyi példát** tartalmaz teljes implementációkkal:  
-> - **Azure OpenAI Chat** (GPT-4 üzembe helyezés chat felülettel)  
-> - **Container Apps** (Egyszerű Flask API + Mikroszolgáltatások)  
-> - **Adatbázisos alkalmazás** (Web + SQL adatbázis)  
-> - **Kiskereskedelmi többügynök** (Vállalati AI megoldás)  
+> Ez a tároló **4 teljes helyi példát** tartalmaz teljes megvalósítással:  
+> - **Microsoft Foundry Models Chat** (gpt-4.1 telepítés chat felülettel)  
+> - **Konténer alkalmazások** (Egyszerű Flask API + mikroszolgáltatások)  
+> - **Adatbázis alkalmazás** (Web + SQL adatbázis)  
+> - **Kiskereskedelmi több-ügynök** (Vállalati MI megoldás)  
 >  
-> További példák **külső hivatkozások** az Azure-Samples adattárakra, amelyeket klónozhatsz.
+> További példák a hivatalos Azure Samples tárolókra mutató **külső hivatkozások**, amelyeket leklónozhatsz.
 
 ## Bevezetés
 
-Ez a könyvtár gyakorlati példákat és hivatkozásokat kínál, hogy segítse az Azure Developer CLI elsajátítását gyakorlati példákon keresztül. A Kiskereskedelmi többügynökös forgatókönyv egy teljes, gyártásra kész implementáció, amely megtalálható ebben a tárházban. További példák hivatalos Azure Samples referencia implementációkra mutatnak, amelyek különböző AZD mintákat mutatnak be.
+Ez a könyvtár gyakorlati példákat és hivatkozásokat kínál, hogy az Azure Developer CLI-t kézzelfogható gyakorlatokon keresztül tanuld meg. A Kiskereskedelmi több-ügynök forgatókönyv egy teljes, éles üzembe helyezhető megvalósítás, amely megtalálható ebben a tárolóban. A további példák hivatalos Azure Samples projektjeire hivatkoznak, amelyek különféle AZD mintákat mutatnak be.
 
-### Bonyolultsági szintek
+### Bonyolultsági besorolás
 
-- ⭐ **Kezdő** - Alapfogalmak, egy szolgáltatás, 15-30 perc
+- ⭐ **Kezdő** - Alapfogalmak, egyetlen szolgáltatás, 15-30 perc
 - ⭐⭐ **Középhaladó** - Több szolgáltatás, adatbázis integráció, 30-60 perc
-- ⭐⭐⭐ **Haladó** - Összetett architektúra, AI integráció, 1-2 óra
-- ⭐⭐⭐⭐ **Szakértő** - Gyártásra kész, vállalati minták, 2+ óra
+- ⭐⭐⭐ **Haladó** - Összetett architektúra, MI integráció, 1-2 óra
+- ⭐⭐⭐⭐ **Szakértő** - Éles, vállalati minták, 2+ óra
 
-## 🎯 Mi található ebben a tárban
+## 🎯 Mi található ebben a tárolóban
 
-### ✅ Helyi implementáció (azonnal használható)
+### ✅ Helyi megvalósítás (Használatra készen)
 
-#### [Azure OpenAI Chat alkalmazás](azure-openai-chat/README.md) 🆕  
-**Teljes GPT-4 üzembe helyezés chat felülettel, benne ebben a tárban**
+#### [Microsoft Foundry Models Chat Alkalmazás](azure-openai-chat/README.md) 🆕  
+**Teljes gpt-4.1 telepítés chat felülettel, ebben a repo-ban**
 
 - **Hely:** `examples/azure-openai-chat/`
 - **Bonyolultság:** ⭐⭐ (Középhaladó)
 - **Tartalom:**
-  - Teljes Azure OpenAI üzembe helyezés (GPT-4)
-  - Python parancssoros chat felület
-  - Key Vault integráció biztonságos API kulcsokhoz
+  - Teljes Microsoft Foundry Models telepítés (gpt-4.1)
+  - Python parancssori chat felület
+  - Key Vault integráció az API kulcsok biztonságához
   - Bicep infrastruktúra sablonok
-  - Token használat és költség nyomon követés
+  - Token használat és költségkövetés
   - Korlátozás és hibakezelés
 
-**Gyors kezdés:**  
+**Gyors indulás:**
 ```bash
 # Navigálás a példához
 cd examples/azure-openai-chat
@@ -55,124 +55,124 @@ azd up
 pip install -r src/requirements.txt
 python src/chat.py
 ```
-  
-**Technológiák:** Azure OpenAI, GPT-4, Key Vault, Python, Bicep
 
-#### [Container App példák](container-app/README.md) 🆕  
-**Átfogó konténer telepítési példák ebben a tárban**
+**Technológiák:** Microsoft Foundry Models, gpt-4.1, Key Vault, Python, Bicep
+
+#### [Konténer alkalmazás példák](container-app/README.md) 🆕  
+**Átfogó konténer telepítési példák ebben a repo-ban**
 
 - **Hely:** `examples/container-app/`
 - **Bonyolultság:** ⭐-⭐⭐⭐⭐ (Kezdő - Haladó)
 - **Tartalom:**
-  - [Mester útmutató](container-app/README.md) - Átfogó konténer telepítési áttekintés
+  - [Fő útmutató](container-app/README.md) - Teljes áttekintés a konténer telepítésekről
   - [Egyszerű Flask API](../../../examples/container-app/simple-flask-api) - Alap REST API példa
-  - [Mikroszolgáltatások architektúra](../../../examples/container-app/microservices) - Gyártásra kész több szolgáltatásos telepítés
-  - Gyors kezdés, gyártás, haladó minták
-  - Monitorozás, biztonság és költség optimalizálás
+  - [Mikroszolgáltatások architektúra](../../../examples/container-app/microservices) - Éles több-szolgáltatásos telepítés
+  - Gyors indulás, éles és haladó minták
+  - Monitorozás, biztonság és költség-optimalizálás
 
-**Gyors kezdés:**  
+**Gyors indulás:**
 ```bash
-# Fő útmutató megtekintése
+# Nézze meg a fő útmutatót
 cd examples/container-app
 
 # Egyszerű Flask API telepítése
 cd simple-flask-api
 azd up
 
-# Mikroszolgáltatások példa telepítése
+# Példa mikroszolgáltatások telepítésére
 cd ../microservices
 azd up
 ```
-  
+
 **Technológiák:** Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights
 
-#### [Kiskereskedelmi többügynökös megoldás](retail-scenario.md) 🆕  
-**Teljes gyártásra kész implementáció ebben a tárban**
+#### [Kiskereskedelmi több-ügynök megoldás](retail-scenario.md) 🆕  
+**Teljes, éles megvalósítás ebben a repo-ban**
 
 - **Hely:** `examples/retail-multiagent-arm-template/`
 - **Bonyolultság:** ⭐⭐⭐⭐ (Haladó)
 - **Tartalom:**
-  - Teljes ARM telepítő sablon
-  - Többügynök architektúra (Ügyfél + Készlet)
-  - Azure OpenAI integráció
-  - AI Keresés RAG-mintával
+  - Teljes ARM telepítési sablon
+  - Több-ügynök architektúra (Vevő + Készlet)
+  - Microsoft Foundry Models integráció
+  - MI keresés RAG-mintával
   - Átfogó monitorozás
-  - Egykattintásos telepítő script
+  - Egyszerű telepítő script
 
-**Gyors kezdés:**  
+**Gyors indulás:**
 ```bash
 cd examples/retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
-  
-**Technológiák:** Azure OpenAI, AI keresés, Container Apps, Cosmos DB, Application Insights
+
+**Technológiák:** Microsoft Foundry Models, MI keresés, Container Apps, Cosmos DB, Application Insights
 
 ---
 
-## 🔗 Külső Azure Samples (Klónozd a használathoz)
+## 🔗 Külső Azure Samples (Klónozással használható)
 
-A következő példák hivatalos Azure-Samples adattárakban találhatók. Klónozd őket a különböző AZD minták megismeréséhez:
+Az alábbi példák hivatalos Azure-Samples tárolókban vannak karbantartva. Klónozd őket, hogy különféle AZD mintákat fedezz fel:
 
-### Egyszerű alkalmazások (1-2. fejezet)
+### Egyszerű alkalmazások (1-2. fejezetek)
 
-| Sablon | Adattár | Bonyolultság | Szolgáltatások |
-|:---------|:-----------|:-----------|:---------|
+| Sablon | Tároló | Bonyolultság | Szolgáltatások |
+|:-------|:--------|:-------------|:---------------|
 | **Python Flask API** | [Helyi: simple-flask-api](../../../examples/container-app/simple-flask-api) | ⭐ | Python, Container Apps, Application Insights |
-| **Mikroszolgáltatások** | [Helyi: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | Több szolgáltatás, Service Bus, Cosmos DB, SQL |
+| **Mikroszolgáltatások** | [Helyi: microservices](../../../examples/container-app/microservices) | ⭐⭐⭐⭐ | Több-szolgáltatásos, Service Bus, Cosmos DB, SQL |
 | **Node.js + MongoDB** | [todo-nodejs-mongo](https://github.com/Azure-Samples/todo-nodejs-mongo) | ⭐ | Express, Cosmos DB, Container Apps |
 | **React + Functions** | [todo-csharp-sql-swa-func](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) | ⭐ | Static Web Apps, Functions, SQL |
-| **Python Flask konténer** | [container-apps-store-api](https://github.com/Azure-Samples/container-apps-store-api-microservice) | ⭐ | Python, Container Apps, API |
+| **Python Flask Konténer** | [container-apps-store-api](https://github.com/Azure-Samples/container-apps-store-api-microservice) | ⭐ | Python, Container Apps, API |
 
-**Használati útmutató:**  
+**Használat módja:**
 ```bash
-# Bármely példány klónozása
+# Klónozz bármely példányt
 git clone https://github.com/Azure-Samples/todo-nodejs-mongo
 cd todo-nodejs-mongo
 
 # Telepítés
 azd up
 ```
-  
-### AI alkalmazás példák (2., 5., 8. fejezet)
 
-| Sablon | Adattár | Bonyolultság | Fókusz |
-|:---------|:-----------|:-----------|:------|
-| **Azure OpenAI Chat** | [Helyi: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | GPT-4 üzembe helyezés |
-| **AI Chat Gyorsstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Alap AI chat |
-| **AI Ügynökök** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Ügynök keretrendszer |
-| **Keresés + OpenAI Demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG minta |
-| **Contoso Chat** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | Vállalati AI |
+### MI alkalmazás példák (2., 5., 8. fejezetek)
 
-### Adatbázis & haladó minták (3-8. fejezet)
+| Sablon | Tároló | Bonyolultság | Fókusz |
+|:-------|:--------|:-------------|:--------|
+| **Microsoft Foundry Models Chat** | [Helyi: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | gpt-4.1 telepítés |
+| **MI Chat Gyorsstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Alap MI chat |
+| **MI Ügynökök** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Ügynök keretrendszer |
+| **Keresés + OpenAI Demó** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | RAG minta |
+| **Contoso Chat** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | Vállalati MI |
 
-| Sablon | Adattár | Bonyolultság | Fókusz |
-|:---------|:-----------|:-----------|:------|
+### Adatbázis & Haladó minták (3-8. fejezetek)
+
+| Sablon | Tároló | Bonyolultság | Fókusz |
+|:-------|:--------|:-------------|:--------|
 | **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | Adatbázis integráció |
 | **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | NoSQL szerver nélküli |
-| **Java Mikroszolgáltatások** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | Több szolgáltatás |
-| **ML Pipeline** | [mlops-v2](https://github.com/Azure-Samples/mlops-v2) | ⭐⭐⭐⭐ | MLOps |
+| **Java Mikroszolgáltatások** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | Több-szolgáltatásos |
+| **MI folyamat** | [mlops-v2](https://github.com/Azure-Samples/mlops-v2) | ⭐⭐⭐⭐ | MLOps |
 
 ## Tanulási célok
 
-Ezeknek a példáknak a megoldásával:  
-- Gyakorolhatod az Azure Developer CLI munkafolyamatait valós alkalmazási forgatókönyveken keresztül  
-- Megérted a különböző alkalmazás architektúrákat és azok azd implementációit  
-- Mesteri szintre jutsz a különböző Azure szolgáltatások infrastruktúra kód mintáinak alkalmazásában  
-- Megismered a konfigurációkezelést és a környezet specifikus telepítési stratégiákat  
-- Képes leszel monitorozási, biztonsági és skálázási minták megvalósítására gyakorlati környezetben  
-- Tapasztalatot szerzel a hibakeresés és diagnosztika terén valós telepítési forgatókönyvekben
+Ezeket a példákat végighaladva képes leszel:
+- Azure Developer CLI munkafolyamatokat gyakorolni valós alkalmazási forgatókönyvekkel
+- Megérteni különböző alkalmazás architektúrákat és azok azd megvalósításait
+- Mesteri szintre fejleszteni az Infrastructure as Code mintákat különböző Azure szolgáltatásokra
+- Alkalmazni konfigurációkezelést és környezet-specifikus telepítési stratégiákat
+- Megvalósítani monitorozási, biztonsági és skálázási mintákat gyakorlati környezetben
+- Szerezni tapasztalatot valós telepítési hibakeresésben és problémamegoldásban
 
 ## Tanulási eredmények
 
-Ezeknek a példáknak a befejeztével képes leszel:  
-- Magabiztosan telepíteni különféle alkalmazás típusokat az Azure Developer CLI segítségével  
-- Az itt található sablonokat saját alkalmazás igényeidhez alakítani  
-- Egyedi infrastruktúra mintákat tervezni és implementálni Bicep használatával  
-- Összetett több szolgáltatásos alkalmazásokat megfelelő függőségek konfigurálásával telepíteni  
-- Biztonsági, monitorozási és teljesítmény optimalizálási legjobb gyakorlatokat alkalmazni  
-- Gyakorlatias tapasztalatok alapján hibákat elhárítani és telepítéseket optimalizálni
+A példák befejezése után képes leszel:
+- Magabiztosan telepíteni különféle alkalmazástípusokat Azure Developer CLI segítségével
+- A sablonokat saját alkalmazás igényeidhez igazítani
+- Egyedi infrastruktúra mintákat megtervezni és megvalósítani Bicep segítségével
+- Összetett több-szolgáltatásos alkalmazásokat megfelelő függőségekkel konfigurálni
+- Biztonsági, monitorozási és teljesítmény-optimalizálási legjobb gyakorlatokat alkalmazni valós helyzetekben
+- Gyakorlati tapasztalat alapján telepítési hibákat diagnosztizálni és optimalizálni
 
-## Könyvtár felépítés
+## Könyvtár struktúra
 
 ```
 Azure Samples AZD Templates (linked externally):
@@ -187,416 +187,415 @@ Azure Samples AZD Templates (linked externally):
     ├── bicep-modules/
     └── scripts/
 ```
-  
-## Gyors kezdési példák
 
-> **💡 Új vagy az AZD-ben?** Kezdd az 1. példával (Flask API) - kb. 20 perc alatt megtanulod az alapokat.
+## Gyors indulási példák
+
+> **💡 Új vagy az AZD-ben?** Kezdd az 1-es példával (Flask API) - ez körülbelül 20 perc és megtanítja az alapokat.
 
 ### Kezdőknek
-1. **[Container App - Python Flask API](../../../examples/container-app/simple-flask-api)** (Helyi) ⭐  
-   Egyszerű REST API telepítés scale-to-zero funkcióval  
-   **Idő:** 20-25 perc | **Költség:** 0-5 USD/hó  
-   **Tanulási cél:** alap azd munkafolyamat, konténerizáció, egészség ellenőrzések  
-   **Várt eredmény:** működő API végpont "Hello, World!" válasszal monitorozással
+1. **[Konténer alkalmazás - Python Flask API](../../../examples/container-app/simple-flask-api)** (Helyi) ⭐  
+   Egyszerű REST API telepítése skálázással nulla példányra  
+   **Idő:** 20-25 perc | **Költség:** $0-5/hó  
+   **Amit tanulsz:** Alap azd munkafolyamat, konténerizáció, állapotellenőrzés  
+   **Várható eredmény:** Működő API végpont, amely "Hello, World!"-ot ad vissza monitorozással
 
 2. **[Egyszerű webalkalmazás - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
-   Node.js Express webalkalmazás telepítés MongoDB-vel  
-   **Idő:** 25-35 perc | **Költség:** 10-30 USD/hó  
-   **Tanulási cél:** adatbázis integráció, környezeti változók, kapcsolati stringek  
-   **Várt eredmény:** teendők listázó alkalmazás létrehozás/olvasás/frissítés/törlés funkcióval
+   Node.js Express webalkalmazás telepítése MongoDB-vel  
+   **Idő:** 25-35 perc | **Költség:** $10-30/hó  
+   **Amit tanulsz:** Adatbázis integráció, környezeti változók, kapcsolati láncok  
+   **Várható eredmény:** Todo lista app létrehozás/olvasás/frissítés/törlés funkciókkal
 
-3. **[Statikus weboldal - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
-   React statikus weboldal hosztolása Azure Static Web Apps-el  
-   **Idő:** 20-30 perc | **Költség:** 0-10 USD/hó  
-   **Tanulási cél:** statikus hoszting, szerver nélküli függvények, CDN telepítés  
-   **Várt eredmény:** React UI API háttérrel, automatikus SSL, globális CDN
+3. **[Statikus webhely - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
+   React statikus weboldal tárolása Azure Static Web Apps segítségével  
+   **Idő:** 20-30 perc | **Költség:** $0-10/hó  
+   **Amit tanulsz:** Statikus hosztolás, szerver nélküli funkciók, CDN telepítés  
+   **Várható eredmény:** React felület API háttérrel, automatikus SSL, globális CDN
 
 ### Középhaladóknak
-4. **[Azure OpenAI Chat alkalmazás](../../../examples/azure-openai-chat)** (Helyi) ⭐⭐  
-   GPT-4 telepítése chates felülettel és biztonságos API kulcs kezeléssel  
-   **Idő:** 35-45 perc | **Költség:** 50-200 USD/hó  
-   **Tanulási cél:** Azure OpenAI telepítés, Key Vault integráció, token követés  
-   **Várt eredmény:** működő chat alkalmazás GPT-4-gyel és költségkövetéssel
+4. **[Microsoft Foundry Models Chat Alkalmazás](../../../examples/azure-openai-chat)** (Helyi) ⭐⭐  
+   gpt-4.1 telepítése chat felülettel és biztonságos API kulcs kezeléssel  
+   **Idő:** 35-45 perc | **Költség:** $50-200/hó  
+   **Amit tanulsz:** Microsoft Foundry Models telepítés, Key Vault integráció, token követés  
+   **Várható eredmény:** Működő chat alkalmazás gpt-4.1-gyel és költségkövetéssel
 
-5. **[Container App - Mikroszolgáltatások](../../../examples/container-app/microservices)** (Helyi) ⭐⭐⭐⭐  
-   Gyártásra kész több szolgáltatásos architektúra  
-   **Idő:** 45-60 perc | **Költség:** 50-150 USD/hó  
-   **Tanulási cél:** szolgáltatás közti kommunikáció, üzenetsor, elosztott követés  
-   **Várt eredmény:** 2 szolgáltatásos rendszer (API Gateway + Termék szolgáltatás) monitorozással
+5. **[Konténer alkalmazás - Mikroszolgáltatások](../../../examples/container-app/microservices)** (Helyi) ⭐⭐⭐⭐  
+   Éles, több szolgáltatásból álló architektúra  
+   **Idő:** 45-60 perc | **Költség:** $50-150/hó  
+   **Amit tanulsz:** Szolgáltatás közötti kommunikáció, üzenetküldés, elosztott követés  
+   **Várható eredmény:** 2-szolgáltatásos rendszer (API Gateway + Termék szolgáltatás) monitorozással
 
-6. **[Adatbázisos alkalmazás - C# Azure SQL-lel](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
+6. **[Adatbázis alkalmazás - C# Azure SQL-lel](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
    Webalkalmazás C# API-val és Azure SQL adatbázissal  
-   **Idő:** 30-45 perc | **Költség:** 20-80 USD/hó  
-   **Tanulási cél:** Entity Framework, adatbázis migrációk, kapcsolatbiztonság  
-   **Várt eredmény:** C# API Azure SQL háttérrel, automatikus séma telepítés
+   **Idő:** 30-45 perc | **Költség:** $20-80/hó  
+   **Amit tanulsz:** Entity Framework, adatbázis migrációk, kapcsolódás biztonság  
+   **Várható eredmény:** C# API Azure SQL háttérrel, automatikus séma telepítés
 
-7. **[Serverless funkció - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
-   Python Azure Functions HTTP triggerrel és Cosmos DB integrációval  
-   **Idő:** 30-40 perc | **Költség:** 10-40 USD/hó  
-   **Tanulási cél:** eseményvezérelt architektúra, szerver nélküli skálázás, NoSQL integráció  
-   **Várt eredmény:** HTTP kérdésekre válaszoló funkció app Cosmos DB tárolással
+7. **[Szerver nélküli funkció - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
+   Python Azure Functions HTTP triggerrel és Cosmos DB-vel  
+   **Idő:** 30-40 perc | **Költség:** $10-40/hó  
+   **Amit tanulsz:** Esemény alapú architektúra, szerver nélküli skálázás, NoSQL integráció  
+   **Várható eredmény:** Funkció alkalmazás HTTP kérésekre válaszol Cosmos DB tárral
 
 8. **[Mikroszolgáltatások - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** ⭐⭐⭐  
-   Több szolgáltatásos Java alkalmazás Container Apps-el és API gateway-jel  
-   **Idő:** 60-90 perc | **Költség:** 80-200 USD/hó  
-   **Tanulási cél:** Spring Boot telepítés, szolgáltatás háló, terheléselosztás  
-   **Várt eredmény:** több szolgáltatásos Java rendszer szolgáltatás felfedezéssel és routinggal
+   Több-szolgáltatásos Java alkalmazás Container Apps-szel és API kapuval  
+   **Idő:** 60-90 perc | **Költség:** $80-200/hó  
+   **Amit tanulsz:** Spring Boot telepítés, szolgáltatás hálózat, terheléselosztás  
+   **Várható eredmény:** Több-szolgáltatásos Java rendszer szolgáltatás felfedezéssel és útválasztással
 
 ### Microsoft Foundry sablonok
 
-1. **[Azure OpenAI Chat App - helyi példa](../../../examples/azure-openai-chat)** ⭐⭐  
-   Teljes GPT-4 telepítés chat felülettel  
-   **Idő:** 35-45 perc | **Költség:** 50-200 USD/hó  
-   **Várt eredmény:** működő chat alkalmazás token követéssel és költség monitorozással
+1. **[Microsoft Foundry Models Chat App - helyi példa](../../../examples/azure-openai-chat)** ⭐⭐  
+   Teljes gpt-4.1 telepítés chat felülettel  
+   **Idő:** 35-45 perc | **Költség:** $50-200/hó  
+   **Várható eredmény:** Működő chat alkalmazás token követéssel és költség monitorozással
 
-2. **[Azure Search + OpenAI demo](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
+2. **[Azure Search + OpenAI Demó](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
    Intelligens chat alkalmazás RAG architektúrával  
-   **Idő:** 60-90 perc | **Költség:** 100-300 USD/hó  
-   **Várt eredmény:** RAG vezérelt chat felület dokumentum kereséssel és hivatkozásokkal
+   **Idő:** 60-90 perc | **Költség:** $100-300/hó  
+   **Várható eredmény:** RAG-alapú chat felület dokumentumkereséssel és hivatkozásokkal
 
-3. **[AI Dokumentum feldolgozás](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
-   Dokumentumelemzés Azure AI szolgáltatásokkal  
-   **Idő:** 40-60 perc | **Költség:** 20-80 USD/hó  
-   **Várt eredmény:** API szöveg, táblázatok és entitások kinyerésére feltöltött dokumentumokból
+3. **[MI dokumentum feldolgozás](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
+   Dokumentumelemzés Azure MI szolgáltatásokkal  
+   **Idő:** 40-60 perc | **Költség:** $20-80/hó  
+   **Várható eredmény:** API szöveg, táblázatok és entitások kinyerésére feltöltött dokumentumokból
 
-4. **[Gépi tanulási pipeline](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
+4. **[Gépi tanulási folyamat](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
    MLOps munkafolyamat Azure Machine Learninggel  
-   **Idő:** 2-3 óra | **Költség:** 150-500 USD/hó  
-   **Várt eredmény:** automatizált ML pipeline tanítással, telepítéssel és monitorozással
+   **Idő:** 2-3 óra | **Költség:** $150-500/hó  
+   **Várható eredmény:** Automatizált ML folyamat képzéssel, telepítéssel és monitorozással
 
-### Valós forgatókönyvek
+### Valódi világ példák
 
-#### **Kiskereskedelmi többügynökös megoldás** 🆕  
-**[Teljes implementációs útmutató](./retail-scenario.md)**
+#### **Kiskereskedelmi több-ügynök megoldás** 🆕  
+**[Teljes megvalósítási útmutató](./retail-scenario.md)**
 
-Átfogó, gyártásra kész többügynökös ügyféltámogatási megoldás, amely vállalati szintű AI alkalmazás telepítést mutat be az AZD használatával. Ez a forgatókönyv tartalmazza:
+Egy átfogó, éles, több-ügynök ügyféltámogató megoldás, amely bemutatja vállalati szintű MI alkalmazás telepítését AZD-vel. Ez a forgatókönyv biztosítja:
+- **Teljes architektúra**: Többügynökös rendszer, specializált ügyfélszolgálati és készletkezelési ügynökökkel
+- **Termelési infrastruktúra**: Több régiós Microsoft Foundry Models telepítések, AI Search, Container Apps és átfogó monitorozás
+- **Kész telepítésre alkalmas ARM sablon**: Egykattintásos telepítés több konfigurációs móddal (Minimal/Standard/Premium)
+- **Fejlett funkciók**: Red teaming biztonsági érvényesítés, ügynökértékelő keretrendszer, költségoptimalizálás és hibakeresési útmutatók
+- **Valós üzleti kontextus**: Kiskereskedői ügyféltámogatási eset fájlfeltöltésekkel, keresési integrációval és dinamikus skálázással
 
-- **Teljes architektúra**: Többügynökös rendszer speciális ügyfélszolgálati és készletkezelő ügynökökkel
-- **Termelési infrastruktúra**: Több régiós Azure OpenAI telepítések, AI Keresés, Konténeralkalmazások és átfogó monitorozás
-- **Kész Telepíthető ARM-sablon**: Egykattintásos telepítés több konfigurációs móddal (Minimális/Standard/Prémium)
-- **Fejlett funkciók**: Red teaming biztonsági validáció, ügynökértékelési keretrendszer, költségoptimalizálás és hibakeresési útmutatók
-- **Valós Üzleti Kontextus**: Kiskereskedelmi ügyfélszolgálati eset fájlfeltöltéssel, keresés integrációval és dinamikus skálázással
+**Technológiák**: Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
 
-**Technológiák**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Keresés, Konténeralkalmazások, Cosmos DB, Application Insights, Dokumentumintelligencia, Bing Keresés API
+**Bonyolultság**: ⭐⭐⭐⭐ (Haladó - Vállalati termelésre kész)
 
-**Bonyolultság**: ⭐⭐⭐⭐ (Fejlett – Vállalati Termelésre Kész)
+**Tökéletes**: AI fejlesztőknek, megoldásarchitektúráknak és többügynökös rendszereket építő csapatoknak
 
-**Tökéletes:** AI fejlesztőknek, megoldásarchitekteknek és csapatoknak, akik termelési többügynökös rendszereket építenek
+**Gyors kezdés**: Telepítse a teljes megoldást kevesebb mint 30 perc alatt a mellékelt ARM sablon használatával a `./deploy.sh -g myResourceGroup` paranccsal
 
-**Gyors kezdés**: Telepítse a teljes megoldást 30 percen belül a mellékelt ARM-sablonnal a `./deploy.sh -g myResourceGroup` paranccsal
-
-## 📋 Használati útmutató
+## 📋 Használati utasítások
 
 ### Előfeltételek
 
-Bármely példa futtatása előtt:
-- ✅ Azure előfizetés Tulajdonosi vagy Közreműködői hozzáféréssel
-- ✅ Azure Developer CLI telepítve ([Telepítési Útmutató](../docs/chapter-01-foundation/installation.md))
-- ✅ Docker Desktop fut (konténer példákhoz)
-- ✅ Megfelelő Azure kvóták (ellenőrizze a példa specifikus követelményeket)
+Mielőtt bármilyen példát futtatna:
+- ✅ Azure-előfizetés tulajdonosi vagy közreműködői jogosultsággal
+- ✅ Azure Developer CLI telepítve ([Telepítési útmutató](../docs/chapter-01-foundation/installation.md))
+- ✅ Docker Desktop fut (konténeres példákhoz)
+- ✅ Megfelelő Azure kvóták (ellenőrizze az egyes példák követelményeit)
 
-> **💰 Költség Figyelmeztetés:** Minden példa valós Azure erőforrásokat hoz létre, amelyek költséget generálnak. Lásd a külön README fájlokat a költségbecslésekhez. A folyamatos költségek elkerülése érdekében futtassa az `azd down` parancsot a befejezés után.
+> **💰 Költségfigyelmeztetés:** Minden példa valódi Azure erőforrásokat hoz létre, amelyek költséggel járnak. A költségbecsléseket az egyes README fájlok tartalmazzák. Ne felejtse el a `azd down` parancsot futtatni a használat után a folyamatos költségek elkerülése érdekében.
 
 ### Példák helyi futtatása
 
-1. **Klónozza vagy másolja a példát**  
+1. **Példa klónozása vagy másolása**
    ```bash
-   # Navigáljon a kívánt példához
+   # Navigáljon a kívánt példára
    cd examples/simple-web-app
    ```
-  
-2. **AZD környezet inicializálása**  
+
+2. **AZD környezet inicializálása**
    ```bash
    # Inicializálás meglévő sablonnal
    azd init
    
-   # Vagy hozz létre új környezetet
+   # Vagy új környezet létrehozása
    azd env new my-environment
    ```
-  
-3. **Környezet konfigurálása**  
+
+3. **Környezet konfigurálása**
    ```bash
    # Állítsa be a szükséges változókat
    azd env set AZURE_LOCATION eastus
    azd env set AZURE_SUBSCRIPTION_ID your-subscription-id
    ```
-  
-4. **Telepítés**  
+
+4. **Telepítés**
    ```bash
    # Infrastruktúra és alkalmazás telepítése
    azd up
    ```
-  
-5. **Telepítés ellenőrzése**  
+
+5. **Telepítés ellenőrzése**
    ```bash
-   # Szolgáltatás végpontjainak lekérése
+   # Szerezze be a szolgáltatás végpontjait
    azd env get-values
    
-   # Végpont tesztelése (példa)
+   # Tesztelje a végpontot (példa)
    curl https://your-app-url.azurecontainer.io/health
    ```
-  
-   **Várt sikeres eredmények:**  
-   - ✅ `azd up` hibamentesen lefut  
-   - ✅ Szolgáltatás végpont HTTP 200-at ad vissza  
-   - ✅ Azure Portal "Futásban" állapotot mutat  
-   - ✅ Application Insights telemetria adatokat fogad  
+   
+   **Várt sikeres eredmények:**
+   - ✅ Az `azd up` sikeresen, hibák nélkül lefut
+   - ✅ A szolgáltatás végpont HTTP 200-as választ ad
+   - ✅ Az Azure Portal „Futásban” állapotot mutat
+   - ✅ Az Application Insights fogadja a telemetriát
 
-> **⚠️ Probléma?** Lásd: [Gyakori Problémák](../docs/chapter-07-troubleshooting/common-issues.md) a telepítési hibák elhárításához
+> **⚠️ Probléma esetén?** Tekintse meg a [Gyakori hibák](../docs/chapter-07-troubleshooting/common-issues.md) oldalt a telepítési hibák elhárításához
 
 ### Példák testreszabása
 
 Minden példa tartalmaz:
-- **README.md** – Részletes telepítési és testreszabási útmutató  
-- **azure.yaml** – AZD konfiguráció kommentekkel  
-- **infra/** – Bicep sablonok paraméter magyarázatokkal  
-- **src/** – Minta alkalmazáskód  
-- **scripts/** – Segédszkriptek gyakori feladatokhoz  
+- **README.md** - Részletes telepítési és testreszabási útmutató
+- **azure.yaml** - AZD konfiguráció megjegyzésekkel
+- **infra/** - Bicep sablonok paramétermagyarázatokkal
+- **src/** - Mintaalkalmazás kódja
+- **scripts/** - Segéddszkriptek általános feladatokhoz
 
 ## 🎯 Tanulási célok
 
-### Példa kategóriák
+### Példakategóriák
 
-#### **Alap telepítések**  
-- Egyszolgáltatásos alkalmazások  
-- Egyszerű infrastruktúra minták  
-- Alap konfigurációkezelés  
-- Költséghatékony fejlesztési környezetek  
+#### **Alapvető telepítések**
+- Egyszerű, egy szolgáltatásos alkalmazások
+- Egyszerű infrastruktúra minták
+- Alap konfigurációkezelés
+- Költséghatékony fejlesztési környezetek
 
-#### **Fejlett forgatókönyvek**  
-- Többszolgáltatásos architektúrák  
-- Összetett hálózati konfigurációk  
-- Adatbázisintegrációs minták  
-- Biztonsági és megfelelőségi megvalósítások  
+#### **Fejlett forgatókönyvek**
+- Több szolgáltatást tartalmazó architektúrák
+- Összetett hálózati konfigurációk
+- Adatbázis-integrációs minták
+- Biztonsági és megfelelőségi megoldások
 
-#### **Termelésre kész minták**  
-- Magas rendelkezésre állás beállítások  
-- Monitorozás és megfigyelhetőség  
-- CI/CD integráció  
-- Katasztrófa utáni helyreállítási beállítások  
+#### **Termelésre kész minták**
+- Magas rendelkezésre állás konfigurációk
+- Monitorozás és megfigyelhetőség
+- CI/CD integráció
+- Katasztrófavédelmi beállítások
 
-## 📖 Példa leírások
+## 📖 Példaleírások
 
-### Egyszerű Webalkalmazás - Node.js Express  
-**Technológiák**: Node.js, Express, MongoDB, Konténeralkalmazások  
+### Egyszerű webalkalmazás - Node.js Express
+**Technológiák**: Node.js, Express, MongoDB, Container Apps  
 **Bonyolultság**: Kezdő  
-**Koncepciók**: Alap telepítés, REST API, NoSQL adatbázsintegráció  
+**Fogalmak**: Alap telepítés, REST API, NoSQL adatbázis integráció
 
-### Statikus Weboldal - React SPA  
+### Statikus weboldal - React SPA
 **Technológiák**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
 **Bonyolultság**: Kezdő  
-**Koncepciók**: Statikus hoszting, szerver nélküli háttér, modern webfejlesztés  
+**Fogalmak**: Statikus hoszting, szerver nélküli backend, korszerű webfejlesztés
 
-### Konténeralkalmazás - Python Flask  
-**Technológiák**: Python Flask, Docker, Konténeralkalmazások, Konténerregisztráció, Application Insights  
+### Container App - Python Flask
+**Technológiák**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
 **Bonyolultság**: Kezdő  
-**Koncepciók**: Konténerizáció, REST API, skálázás nullára, egészségvizsgálatok, monitorozás  
-**Hely**: [Helyi példa](../../../examples/container-app/simple-flask-api)  
+**Fogalmak**: Konténerizáció, REST API, scale-to-zero, egészségellenőrzések, monitorozás  
+**Helyszín**: [Helyi példa](../../../examples/container-app/simple-flask-api)
 
-### Konténeralkalmazás - Mikroservices architektúra  
-**Technológiák**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Konténeralkalmazások  
-**Bonyolultság**: Fejlett  
-**Koncepciók**: Többszolgáltatásos architektúra, szolgáltatáskommunikáció, üzenet sorban állítás, elosztott nyomkövetés  
-**Hely**: [Helyi példa](../../../examples/container-app/microservices)  
+### Container App - Mikroszolgáltatások Architektúra
+**Technológiák**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
+**Bonyolultság**: Haladó  
+**Fogalmak**: Több szolgáltatás architektúrája, szolgáltatásközi kommunikáció, üzenetközvetítés, elosztott nyomkövetés  
+**Helyszín**: [Helyi példa](../../../examples/container-app/microservices)
 
-### Adatbázis alkalmazás - C# Azure SQL-lel  
-**Technológiák**: C# ASP.NET Core, Azure SQL Adatbázis, App Service  
+### Adatbázis-alkalmazás - C# Azure SQL-lel
+**Technológiák**: C# ASP.NET Core, Azure SQL Database, App Service  
 **Bonyolultság**: Középhaladó  
-**Koncepciók**: Entity Framework, adatbázis kapcsolatok, web API fejlesztés  
+**Fogalmak**: Entity Framework, adatbázis-kapcsolatok, web API fejlesztés
 
-### Szerver nélküli függvény - Python Azure Functions  
+### Szerver nélküli függvény - Python Azure Functions
 **Technológiák**: Python, Azure Functions, Cosmos DB, Static Web Apps  
 **Bonyolultság**: Középhaladó  
-**Koncepciók**: Eseményvezérelt architektúra, szerver nélküli számítás, full-stack fejlesztés  
+**Fogalmak**: Eseményvezérelt architektúra, szerver nélküli számítás, teljes stack fejlesztés
 
-### Mikroservices - Java Spring Boot  
-**Technológiák**: Java Spring Boot, Konténeralkalmazások, Service Bus, API Gateway  
+### Mikroszolgáltatások - Java Spring Boot
+**Technológiák**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
 **Bonyolultság**: Középhaladó  
-**Koncepciók**: Mikroservices kommunikáció, elosztott rendszerek, vállalati minták  
+**Fogalmak**: Mikroszolgáltatások közti kommunikáció, elosztott rendszerek, vállalati minták
 
 ### Microsoft Foundry példák
 
-#### Azure OpenAI Csevegőalkalmazás  
-**Technológiák**: Azure OpenAI, Cognitive Search, App Service  
+#### Microsoft Foundry Models Chat App
+**Technológiák**: Microsoft Foundry Models, Cognitive Search, App Service  
 **Bonyolultság**: Középhaladó  
-**Koncepciók**: RAG architektúra, vektoros keresés, LLM integráció  
+**Fogalmak**: RAG architektúra, vektoros keresés, LLM integráció
 
-#### AI Dokumentumfeldolgozás  
-**Technológiák**: Azure AI Dokumentumintelligencia, Tárolás, Functions  
+#### AI Dokumentumfeldolgozás
+**Technológiák**: Azure AI Document Intelligence, Storage, Functions  
 **Bonyolultság**: Középhaladó  
-**Koncepciók**: Dokumentumelemzés, OCR, adatkinyerés  
+**Fogalmak**: Dokumentumelemzés, OCR, adatkinyerés
 
-#### Gépi tanulási adatfolyam  
-**Technológiák**: Azure ML, MLOps, Konténerregisztráció  
-**Bonyolultság**: Fejlett  
-**Koncepciók**: Modell tanítás, telepítési adatfolyamok, monitorozás  
+#### Gépi tanulási folyamat
+**Technológiák**: Azure ML, MLOps, Container Registry  
+**Bonyolultság**: Haladó  
+**Fogalmak**: Modelltréning, telepítési folyamatok, monitorozás
 
 ## 🛠 Konfigurációs példák
 
-A `configurations/` mappa újrafelhasználható komponenseket tartalmaz:
+A `configurations/` könyvtár újrahasználható komponenseket tartalmaz:
 
-### Környezet konfigurációk  
-- Fejlesztési környezet beállítások  
-- Teszt környezet konfigurációk  
-- Termelésre kész konfigurációk  
-- Több régiós telepítési beállítások  
+### Környezeti konfigurációk
+- Fejlesztői környezet beállítások
+- Tesztelő környezet konfigurációk
+- Termelésre kész konfigurációk
+- Többrégiós telepítési beállítások
 
-### Bicep modulok  
-- Újrafelhasználható infrastruktúra komponensek  
-- Általános erőforrás minták  
-- Biztonságos sablonok  
-- Költségoptimalizált konfigurációk  
+### Bicep modulok
+- Újrahasználható infrastruktúra komponensek
+- Gyakori erőforrásminták
+- Biztonságos sablonok
+- Költségoptimalizált konfigurációk
 
-### Segédszkriptek  
-- Környezeti beállítás automatizálás  
-- Adatbázis migrációs szkriptek  
-- Telepítés érvényesítő eszközök  
-- Költségfigyelő eszközök  
+### Segéd szkriptek
+- Környezetbeállítás automatizálás
+- Adatbázis migrációs szkriptek
+- Telepítés érvényesítő eszközök
+- Költségfigyelő eszközök
 
 ## 🔧 Testreszabási útmutató
 
-### Példák adaptálása az Ön használati esetéhez
+### Példák adaptálása az Ön igényeihez
 
-1. **Előfeltételek felülvizsgálata**  
-   - Ellenőrizze az Azure szolgáltatás követelményeket  
-   - Ellenőrizze az előfizetés korlátait  
-   - Ismerje meg a költségimpaktot  
+1. **Ellenőrizze az előfeltételeket**
+   - Azure szolgáltatási követelmények átnézése
+   - Előfizetési limitek ellenőrzése
+   - Költségvonzatok megértése
 
-2. **Konfiguráció módosítása**  
-   - Frissítse az `azure.yaml` szolgáltatás definíciókat  
-   - Testreszabja a Bicep sablonokat  
-   - Állítsa be a környezeti változókat  
+2. **Konfiguráció módosítása**
+   - `azure.yaml` szolgáltatásdefiníciók frissítése
+   - Bicep sablonok testreszabása
+   - Környezeti változók beállítása
 
-3. **Alapos tesztelés**  
-   - Először telepítsen a fejlesztői környezetbe  
-   - Érvényesítse a funkciókat  
-   - Tesztelje a skálázást és a teljesítményt  
+3. **Alapos tesztelés**
+   - Először fejlesztői környezetbe telepítés
+   - Funkcionalitás validálása
+   - Skálázás és teljesítmény tesztelése
 
-4. **Biztonsági áttekintés**  
-   - Vizsgálja felül a hozzáférésvezérlést  
-   - Valósítsa meg a titkok kezelését  
-   - Engedélyezze a monitorozást és riasztásokat  
+4. **Biztonsági áttekintés**
+   - Hozzáférés-ellenőrzések felülvizsgálata
+   - Titkok kezelése
+   - Monitorozás és riasztás engedélyezése
 
 ## 📊 Összehasonlító mátrix
 
 | Példa | Szolgáltatások | Adatbázis | Hitelesítés | Monitorozás | Bonyolultság |
-|---------|--------------|-----------|-------------|-------------|--------------|
-| **Azure OpenAI Chat** (Helyi) | 2 | ❌ | Key Vault | Teljes | ⭐⭐ |
+|---------|----------|----------|------|------------|------------|
+| **Microsoft Foundry Models Chat** (Helyi) | 2 | ❌ | Key Vault | Teljes | ⭐⭐ |
 | **Python Flask API** (Helyi) | 1 | ❌ | Alap | Teljes | ⭐ |
-| **Microservices** (Helyi) | 5+ | ✅ | Vállalati | Fejlett | ⭐⭐⭐⭐ |
+| **Mikroszolgáltatások** (Helyi) | 5+ | ✅ | Vállalati | Haladó | ⭐⭐⭐⭐ |
 | Node.js Express Todo | 2 | ✅ | Alap | Alap | ⭐ |
 | React SPA + Functions | 3 | ✅ | Alap | Teljes | ⭐ |
-| Python Flask Konténer | 2 | ❌ | Alap | Teljes | ⭐ |
+| Python Flask Container | 2 | ❌ | Alap | Teljes | ⭐ |
 | C# Web API + SQL | 2 | ✅ | Teljes | Teljes | ⭐⭐ |
 | Python Functions + SPA | 3 | ✅ | Teljes | Teljes | ⭐⭐ |
-| Java Mikroservices | 5+ | ✅ | Teljes | Teljes | ⭐⭐ |
-| Azure OpenAI Chat | 3 | ✅ | Teljes | Teljes | ⭐⭐⭐ |
+| Java Mikroszolgáltatások | 5+ | ✅ | Teljes | Teljes | ⭐⭐ |
+| Microsoft Foundry Models Chat | 3 | ✅ | Teljes | Teljes | ⭐⭐⭐ |
 | AI Dokumentumfeldolgozás | 2 | ❌ | Alap | Teljes | ⭐⭐ |
 | ML Pipeline | 4+ | ✅ | Teljes | Teljes | ⭐⭐⭐⭐ |
-| **Retail Multi-Agent** (Helyi) | **8+** | **✅** | **Vállalati** | **Fejlett** | **⭐⭐⭐⭐** |
+| **Kiskereskedelmi Többügynökös** (Helyi) | **8+** | **✅** | **Vállalati** | **Haladó** | **⭐⭐⭐⭐** |
 
 ## 🎓 Tanulási útvonal
 
 ### Ajánlott sorrend
 
-1. **Kezdje egyszerű webalkalmazással**  
-   - Tanulja meg az alap AZD fogalmakat  
-   - Értse meg a telepítési munkafolyamatot  
-   - Gyakorolja a környezet kezelését  
+1. **Kezdje Egy Egyszerű Webalkalmazással**
+   - Alap AZD fogalmak megtanulása
+   - Telepítési folyamat megértése
+   - Környezetkezelési gyakorlat
 
-2. **Próbálja ki a statikus weboldalt**  
-   - Fedezze fel a különböző hoszting lehetőségeket  
-   - Ismerje meg a CDN integrációt  
-   - Értse meg a DNS konfigurációt  
+2. **Próbálja ki a Statikus Weboldalt**
+   - Különböző hoszting lehetőségek felfedezése
+   - CDN integráció tanulmányozása
+   - DNS konfiguráció megértése
 
-3. **Lépjen a konténeralkalmazáshoz**  
-   - Tanulja meg a konténerizáció alapjait  
-   - Értse meg a skálázási koncepciókat  
-   - Gyakoroljon Dockerrel  
+3. **Lépjen a Container App-ra**
+   - Konténerizáció alapjainak elsajátítása
+   - Skálázási koncepciók megértése
+   - Docker gyakorlása
 
-4. **Adjon hozzá adatbázisintegrációt**  
-   - Tanulja meg az adatbázis kihelyezést  
-   - Értse meg a kapcsolati karakterláncokat  
-   - Gyakorolja a titkok kezelését  
+4. **Adatbázis Integrálása**
+   - Adatbázis-provizionálás megtanulása
+   - Kapcsolati stringek megértése
+   - Titkok kezelése gyakorlat
 
-5. **Fedezze fel a szerver nélküli megoldásokat**  
-   - Értse meg az eseményvezérelt architektúrát  
-   - Tanuljon a trigger-ekről és kötésekről  
-   - Gyakoroljon API-kkal  
+5. **Ismerje meg a Szerver Nélküli Megoldásokat**
+   - Eseményvezérelt architektúra
+   - Trigger és binding fogalmak
+   - API-k gyakorlása
 
-6. **Építsen mikroservices rendszert**  
-   - Tanulja meg a szolgáltatáskommunikációt  
-   - Értse meg az elosztott rendszereket  
-   - Gyakorolja az összetett telepítéseket  
+6. **Építsen Mikroszolgáltatásokat**
+   - Szolgáltatásközi kommunikáció
+   - Elosztott rendszerek megértése
+   - Összetett telepítések gyakorlása
 
 ## 🔍 Megfelelő példa megtalálása
 
-### Technológiai stáb szerint
-- **Konténeralkalmazások**: [Python Flask API (Helyi)](../../../examples/container-app/simple-flask-api), [Microservices (Helyi)](../../../examples/container-app/microservices), Java Mikroservices  
-- **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Helyi)](../../../examples/container-app/microservices)  
-- **Python**: [Python Flask API (Helyi)](../../../examples/container-app/simple-flask-api), [Microservices Termék Szolgáltatás (Helyi)](../../../examples/container-app/microservices), Python Functions + SPA  
-- **C#**: [Microservices Rendelés Szolgáltatás (Helyi)](../../../examples/container-app/microservices), C# Web API + SQL Adatbázis, Azure OpenAI Chat App, ML Pipeline  
-- **Go**: [Microservices Felhasználói Szolgáltatás (Helyi)](../../../examples/container-app/microservices)  
-- **Java**: Java Spring Boot Mikroservices  
-- **React**: React SPA + Functions  
-- **Konténerek**: [Python Flask (Helyi)](../../../examples/container-app/simple-flask-api), [Microservices (Helyi)](../../../examples/container-app/microservices), Java Mikroservices  
-- **Adatbázisok**: [Microservices (Helyi)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB  
-- **AI/ML**: **[Azure OpenAI Chat (Helyi)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, AI Dokumentumfeldolgozás, ML Pipeline, **Kiskereskedelmi Többügynökös Megoldás**  
-- **Többügynökös rendszerek**: **Kiskereskedelmi Többügynökös Megoldás**  
-- **OpenAI integráció**: **[Azure OpenAI Chat (Helyi)](../../../examples/azure-openai-chat)**, Kiskereskedelmi Többügynökös Megoldás  
-- **Vállalati termelés**: [Microservices (Helyi)](../../../examples/container-app/microservices), **Kiskereskedelmi Többügynökös Megoldás**  
+### Technológiai halmazonként
+- **Container Apps**: [Python Flask API (Helyi)](../../../examples/container-app/simple-flask-api), [Mikroszolgáltatások (Helyi)](../../../examples/container-app/microservices), Java Mikroszolgáltatások
+- **Node.js**: Node.js Express Todo App, [Mikroszolgáltatások API Gateway (Helyi)](../../../examples/container-app/microservices)
+- **Python**: [Python Flask API (Helyi)](../../../examples/container-app/simple-flask-api), [Mikroszolgáltatás Termék Szolgáltatás (Helyi)](../../../examples/container-app/microservices), Python Functions + SPA
+- **C#**: [Mikroszolgáltatás Rendelés Szolgáltatás (Helyi)](../../../examples/container-app/microservices), C# Web API + SQL Database, Microsoft Foundry Models Chat App, ML Pipeline
+- **Go**: [Mikroszolgáltatás Felhasználó Szolgáltatás (Helyi)](../../../examples/container-app/microservices)
+- **Java**: Java Spring Boot Mikroszolgáltatások
+- **React**: React SPA + Functions
+- **Konténerek**: [Python Flask (Helyi)](../../../examples/container-app/simple-flask-api), [Mikroszolgáltatások (Helyi)](../../../examples/container-app/microservices), Java Mikroszolgáltatások
+- **Adatbázisok**: [Mikroszolgáltatások (Helyi)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
+- **AI/ML**: **[Microsoft Foundry Models Chat (Helyi)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Dokumentumfeldolgozás, ML Pipeline, **Kiskereskedelmi Többügynökös Megoldás**
+- **Többügynökös rendszerek**: **Kiskereskedelmi Többügynökös Megoldás**
+- **OpenAI Integráció**: **[Microsoft Foundry Models Chat (Helyi)](../../../examples/azure-openai-chat)**, Kiskereskedelmi Többügynökös Megoldás
+- **Vállalati termelés**: [Mikroszolgáltatások (Helyi)](../../../examples/container-app/microservices), **Kiskereskedelmi Többügynökös Megoldás**
 
 ### Architektúra minta szerint
-- **Egyszerű REST API**: [Python Flask API (Helyi)](../../../examples/container-app/simple-flask-api)  
-- **Monolitikus**: Node.js Express Todo, C# Web API + SQL  
-- **Statikus + szerver nélküli**: React SPA + Functions, Python Functions + SPA  
-- **Mikroservices**: [Termelési Mikroservices (Helyi)](../../../examples/container-app/microservices), Java Spring Boot Mikroservices  
-- **Konténerizált**: [Python Flask (Helyi)](../../../examples/container-app/simple-flask-api), [Microservices (Helyi)](../../../examples/container-app/microservices)  
-- **AI-vezérelt**: **[Azure OpenAI Chat (Helyi)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, AI Dokumentumfeldolgozás, ML Pipeline, **Kiskereskedelmi Többügynökös Megoldás**  
-- **Többügynökös architektúra**: **Kiskereskedelmi Többügynökös Megoldás**  
-- **Vállalati többszolgáltatásos**: [Microservices (Helyi)](../../../examples/container-app/microservices), **Kiskereskedelmi Többügynökös Megoldás**  
+- **Egyszerű REST API**: [Python Flask API (Helyi)](../../../examples/container-app/simple-flask-api)
+- **Monolitikus**: Node.js Express Todo, C# Web API + SQL
+- **Statikus + Szerver nélküli**: React SPA + Functions, Python Functions + SPA
+- **Mikroszolgáltatások**: [Termelési Mikroszolgáltatások (Helyi)](../../../examples/container-app/microservices), Java Spring Boot Mikroszolgáltatások
+- **Konténerizált**: [Python Flask (Helyi)](../../../examples/container-app/simple-flask-api), [Mikroszolgáltatások (Helyi)](../../../examples/container-app/microservices)
+- **AI-vezérelt**: **[Microsoft Foundry Models Chat (Helyi)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Dokumentumfeldolgozás, ML Pipeline, **Kiskereskedelmi Többügynökös Megoldás**
+- **Többügynökös architektúra**: **Kiskereskedelmi Többügynökös Megoldás**
+- **Vállalati többszolgáltatós**: [Mikroszolgáltatások (Helyi)](../../../examples/container-app/microservices), **Kiskereskedelmi Többügynökös Megoldás**
 
 ### Bonyolultsági szint szerint
-- **Kezdő**: [Python Flask API (Helyi)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions  
-- **Középhaladó**: **[Azure OpenAI Chat (Helyi)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Mikroservices, Azure OpenAI Chat App, AI Dokumentumfeldolgozás  
-- **Fejlett**: ML Pipeline  
-- **Vállalati termelésre kész**: [Microservices (Helyi)](../../../examples/container-app/microservices) (Többszolgáltatásos üzenetsorral), **Kiskereskedelmi Többügynökös Megoldás** (Teljes többügynökös rendszer ARM sablon telepítéssel)  
+- **Kezdő**: [Python Flask API (Helyi)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions
+- **Középhaladó**: **[Microsoft Foundry Models Chat (Helyi)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Mikroszolgáltatások, Microsoft Foundry Models Chat App, AI Dokumentumfeldolgozás
+- **Haladó**: ML Pipeline
+- **Vállalati termelésre kész**: [Mikroszolgáltatások (Helyi)](../../../examples/container-app/microservices) (Több szolgáltatás üzenetközvetítéssel), **Kiskereskedelmi Többügynökös Megoldás** (Teljes többszereplős rendszer ARM sablonos telepítéssel)
 
 ## 📚 További források
 
-### Dokumentációs linkek  
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)  
-- [Microsoft Foundry AZD Sablonok](https://github.com/Azure/ai-foundry-templates)  
-- [Bicep dokumentáció](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
-- [Azure Architektúra Központ](https://learn.microsoft.com/en-us/azure/architecture/)  
+### Dokumentációs linkek
+- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
+- [Microsoft Foundry AZD sablonok](https://github.com/Azure/ai-foundry-templates)
+- [Bicep dokumentáció](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
-### Közösségi példák  
-- [Azure Samples AZD Sablonok](https://github.com/Azure-Samples/azd-templates)  
-- [Microsoft Foundry Sablonok](https://github.com/Azure/ai-foundry-templates)  
-- [Azure Developer CLI Galéria](https://azure.github.io/awesome-azd/)  
-- [Todo App C#-ral és Azure SQL-lel](https://github.com/Azure-Samples/todo-csharp-sql)  
-- [Todo App Pythonnal és MongoDB-vel](https://github.com/Azure-Samples/todo-python-mongo)
-- [Todo alkalmazás Node.js-sel és PostgreSQL-lel](https://github.com/Azure-Samples/todo-nodejs-mongo)
-- [React webalkalmazás C# API-val](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+### Közösségi példák
+- [Azure Samples AZD Sablonok](https://github.com/Azure-Samples/azd-templates)
+- [Microsoft Foundry Sablonok](https://github.com/Azure/ai-foundry-templates)
+- [Azure Developer CLI Galéria](https://azure.github.io/awesome-azd/)
+- [Todo alkalmazás C# és Azure SQL használatával](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Todo alkalmazás Python és MongoDB használatával](https://github.com/Azure-Samples/todo-python-mongo)
+- [Todo alkalmazás Node.js és PostgreSQL használatával](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [React Webalkalmazás C# API-val](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
 - [Azure Container Apps Feladat](https://github.com/Azure-Samples/container-apps-jobs)
 - [Azure Functions Java-val](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
-### Legjobb Gyakorlatok
-- [Azure Well-Architected Keretrendszer](https://learn.microsoft.com/en-us/azure/well-architected/)
-- [Cloud Adoption Keretrendszer](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
+### Legjobb gyakorlatok
+- [Azure Jól Megtervezett Keretrendszer](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Felhőalkalmazás-keretrendszer](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
-## 🤝 Példák Hozzájárulása
+## 🤝 Példák hozzájárulása
 
-Van hasznos példád, amit megosztanál? Örömmel fogadjuk a hozzájárulásokat!
+Van hasznos példád, amit megosztanál? Szívesen fogadjuk a hozzájárulásokat!
 
-### Beküldési Irányelvek
-1. Kövesd a kialakított könyvtárstruktúrát
+### Beküldési irányelvek
+1. Kövesd a kialakított könyvtárszerkezetet
 2. Tartalmazzon átfogó README.md fájlt
-3. Kommentáld a konfigurációs fájlokat
-4. Alaposan tesztelj beküldés előtt
-5. Foglald bele a költségbecslést és előfeltételeket
+3. Adj hozzá megjegyzéseket a konfigurációs fájlokhoz
+4. Tesztelj alaposan beküldés előtt
+5. Tartalmazzon költségbecslést és előfeltételeket
 
-### Példa Sablon Struktúra
+### Példa sablon szerkezete
 ```
 example-name/
 ├── README.md           # Detailed setup instructions
@@ -612,46 +611,46 @@ example-name/
 
 ---
 
-**Pro Tipp**: Kezdd a legegyszerűbb példával, ami illeszkedik a technológiai stack-hez, majd fokozatosan haladj a bonyolultabb forgatókönyvek felé. Minden példa az előzőek koncepcióira épül!
+**Pro Tipp**: Kezdd a legegyszerűbb példával, amely megfelel a technológiai felépítésednek, majd fokozatosan haladj a bonyolultabb forgatókönyvek felé. Minden példa az előzőek koncepcióira épül!
 
-## 🚀 Készen állsz a kezdésre?
+## 🚀 Készen állsz a kezdéshez?
 
-### Tanulási Útvonalad
+### Tanulási utad
 
-1. **Teljesen Kezdő vagy?** → Kezdd a [Flask API-val](../../../examples/container-app/simple-flask-api) (⭐, 20 perc)
-2. **Alap AZD Tudásod van?** → Próbáld ki a [Microservices](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 perc) példát
-3. **AI Alkalmazásokat Építesz?** → Kezdd az [Azure OpenAI Chat]-kel (azure-openai-chat/) (⭐⭐, 35 perc) vagy fedezd fel a [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ óra) példát
-4. **Specifikus Technológiai Stack-re van szükséged?** → Használd a fentebb lévő [Megfelelő Példa Keresése](../../../examples) szekciót
+1. **Teljesen kezdő vagy?** → Kezd a [Flask API-val](../../../examples/container-app/simple-flask-api) (⭐, 20 perc)
+2. **Van alap AZD ismereted?** → Próbáld ki a [Microservices-t](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 perc)
+3. **AI alkalmazásokat építesz?** → Kezd a [Microsoft Foundry Models Chattel](../../../examples/azure-openai-chat) (⭐⭐, 35 perc) vagy fedezd fel a [Retail Multi-Agent-et](retail-scenario.md) (⭐⭐⭐⭐, 2+ óra)
+4. **Specifikus technológiai stackre van szükséged?** → Használd a fenti [Megfelelő példa keresése](#-finding-the-right-example) részt
 
-### Következő Lépések
+### Következő lépések
 
-- ✅ Nézd át a fentiekben a [Előfeltételeket](../../../examples)
-- ✅ Válassz példát a képességeidnek megfelelően (lásd [Bonyolultsági Jelmagyarázat](../../../examples))
+- ✅ Nézd át a fentiekben a [Előfeltételeket](#előfeltételek)
+- ✅ Válassz példát a tudásszintednek megfelelően (lásd [Bonyolultsági jelmagyarázat](#bonyolultsági-besorolás))
 - ✅ Olvasd el alaposan a példa README-jét telepítés előtt
-- ✅ Állíts be emlékeztetőt az `azd down` futtatására a tesztelés után
-- ✅ Oszd meg élményeidet GitHub Issues vagy Discussions útján
+- ✅ Állíts be emlékeztetőt az `azd down` parancs futtatására tesztelés után
+- ✅ Oszd meg tapasztalatodat GitHub Issues vagy Discussions segítségével
 
 ### Segítségre van szükséged?
 
-- 📖 [GYIK](../resources/faq.md) - Gyakori kérdések megválaszolva
-- 🐛 [Hibaelhárítási Útmutató](../docs/chapter-07-troubleshooting/common-issues.md) - Telepítési problémák javítása
-- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Közösségi kérdezés
-- 📚 [Tanulási Útmutató](../resources/study-guide.md) - Tanulás megerősítése
+- 📖 [GYIK](../resources/faq.md) - Gyakori kérdések és válaszok
+- 🐛 [Hibakeresési útmutató](../docs/chapter-07-troubleshooting/common-issues.md) - Telepítési problémák javítása
+- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Közösségi kérdések
+- 📚 [Tanulmányi útmutató](../resources/study-guide.md) - Tanulás megerősítése
 
 ---
 
 **Navigáció**
-- **📚 Tanfolyam Főoldal**: [AZD Kezdőknek](../README.md)
-- **📖 Tananyagok**: [Tanulási Útmutató](../resources/study-guide.md) | [Gyorsreferencia](../resources/cheat-sheet.md) | [Fogalomtár](../resources/glossary.md)
-- **🔧 Források**: [GYIK](../resources/faq.md) | [Hibaelhárítás](../docs/chapter-07-troubleshooting/common-issues.md)
+- **📚 Tanfolyam kezdőlap:** [AZD Kezdőknek](../README.md)
+- **📖 Tananyagok:** [Tanulmányi útmutató](../resources/study-guide.md) | [Összefoglaló](../resources/cheat-sheet.md) | [Szójegyzék](../resources/glossary.md)
+- **🔧 Források:** [GYIK](../resources/faq.md) | [Hibakeresés](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ---
 
-*Utoljára frissítve: 2025 november | [Hibabejelentés](https://github.com/microsoft/AZD-for-beginners/issues) | [Példák hozzájárulása](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
+*Utolsó frissítés: 2025 november | [Hibabejelentés](https://github.com/microsoft/AZD-for-beginners/issues) | [Példák hozzájárulása](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Felelősség kizárása**:
-Ezt a dokumentumot az AI fordító szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével fordítottuk le. Bár igyekszünk pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti, anyanyelvi dokumentum tekintendő hiteles forrásnak. Kritikus információk esetén szakmai, emberi fordítást javaslunk. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy félreértelmezésekért.
+Ezt a dokumentumot az AI fordító szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével fordítottuk. Bár pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum anyanyelvű változata tekintendő hivatalos forrásnak. Fontos információk esetén professzionális emberi fordítást javaslunk. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy félreértelmezésekért.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

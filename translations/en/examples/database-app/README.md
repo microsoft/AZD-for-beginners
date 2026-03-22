@@ -69,24 +69,11 @@ This is an **intermediate-level** example. You should be familiar with:
 
 This example deploys a two-tier architecture with a web application and SQL database:
 
+```mermaid
+graph TD
+    Browser[User Browser] <--> WebApp[Azure Web App<br/>Flask API<br/>/health<br/>/products]
+    WebApp -- Secure Connection<br/>Encrypted --> SQL[Azure SQL Database<br/>Products table<br/>Sample data]
 ```
-┌─────────────────┐        ┌──────────────────────┐
-│  User Browser   │◄──────►│   Azure Web App      │
-└─────────────────┘        │   (Flask API)        │
-                           │   - /health          │
-                           │   - /products        │
-                           └──────────┬───────────┘
-                                      │
-                                      │ Secure Connection
-                                      │ (Encrypted)
-                                      │
-                           ┌──────────▼───────────┐
-                           │ Azure SQL Database   │
-                           │   - Products table   │
-                           │   - Sample data      │
-                           └──────────────────────┘
-```
-
 **Resource Deployment:**
 - **Resource Group**: Container for all resources
 - **App Service Plan**: Linux-based hosting (B1 tier for cost efficiency)
@@ -422,10 +409,10 @@ This example follows Azure security best practices:
 
 2. **Stop Resources When Not in Use**:
    ```sh
-   # Stop the web app (database still charges)
+   # Stop the web application (the database continues to run)
    az webapp stop --name <app-name> --resource-group <rg-name>
    
-   # Restart when needed
+   # Restart as needed
    az webapp start --name <app-name> --resource-group <rg-name>
    ```
 
@@ -532,124 +519,123 @@ az monitor metrics alert create \
 ```
 
 ## Troubleshooting
-
 ### Common Issues and Solutions
 
 #### 1. `azd provision` fails with "Location not available"
 
-**Symptom**:
+**Symptom**:  
 ```
 Error: The subscription is not registered for the resource type 'components' in the location 'centralus'.
 ```
-
-**Solution**:
-Choose a different Azure region or register the resource provider:
+  
+**Solution**:  
+Choose a different Azure region or register the resource provider:  
 ```sh
 az provider register --namespace Microsoft.Insights
 ```
-
+  
 #### 2. SQL Connection Fails During Deployment
 
-**Symptom**:
+**Symptom**:  
 ```
 pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]TCP Provider...')
 ```
+  
+**Solution**:  
+- Verify SQL Server firewall allows Azure services (configured automatically)  
+- Check the SQL admin password was entered correctly during `azd provision`  
+- Ensure SQL Server is fully provisioned (can take 2-3 minutes)  
 
-**Solution**:
-- Verify SQL Server firewall allows Azure services (configured automatically)
-- Check the SQL admin password was entered correctly during `azd provision`
-- Ensure SQL Server is fully provisioned (can take 2-3 minutes)
-
-**Verify Connection**:
+**Verify Connection**:  
 ```sh
 # From Azure Portal, go to SQL Database → Query editor
 # Try to connect with your credentials
 ```
-
+  
 #### 3. Web App Shows "Application Error"
 
-**Symptom**:
+**Symptom**:  
 Browser shows generic error page.
 
-**Solution**:
-Check application logs:
+**Solution**:  
+Check application logs:  
 ```sh
 # View recent logs
 az webapp log tail --name <app-name> --resource-group <rg-name>
 ```
-
-**Common causes**:
-- Missing environment variables (check App Service → Configuration)
-- Python package installation failed (check deployment logs)
-- Database initialization error (check SQL connectivity)
+  
+**Common causes**:  
+- Missing environment variables (check App Service → Configuration)  
+- Python package installation failed (check deployment logs)  
+- Database initialization error (check SQL connectivity)  
 
 #### 4. `azd deploy` Fails with "Build Error"
 
-**Symptom**:
+**Symptom**:  
 ```
 Error: Failed to build project
 ```
+  
+**Solution**:  
+- Ensure `requirements.txt` has no syntax errors  
+- Check that Python 3.11 is specified in `infra/resources/web-app.bicep`  
+- Verify Dockerfile has correct base image  
 
-**Solution**:
-- Ensure `requirements.txt` has no syntax errors
-- Check that Python 3.11 is specified in `infra/resources/web-app.bicep`
-- Verify Dockerfile has correct base image
-
-**Debug locally**:
+**Debug locally**:  
 ```sh
 cd src/web
 docker build -t test-app .
 docker run -p 8000:8000 test-app
 ```
-
+  
 #### 5. "Unauthorized" When Running AZD Commands
 
-**Symptom**:
+**Symptom**:  
 ```
 ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have authorization
 ```
-
-**Solution**:
-Re-authenticate with Azure:
+  
+**Solution**:  
+Re-authenticate with Azure:  
 ```sh
 azd auth login
 az login
 ```
-
+  
 Verify you have the correct permissions (Contributor role) on the subscription.
 
 #### 6. High Database Costs
 
-**Symptom**:
+**Symptom**:  
 Unexpected Azure bill.
 
-**Solution**:
-- Check if you forgot to run `azd down` after testing
-- Verify SQL Database is using Basic tier (not Premium)
-- Review costs in Azure Cost Management
-- Set up cost alerts
+**Solution**:  
+- Check if you forgot to run `azd down` after testing  
+- Verify SQL Database is using Basic tier (not Premium)  
+- Review costs in Azure Cost Management  
+- Set up cost alerts  
 
 ### Getting Help
 
-**View All AZD Environment Variables**:
+**View All AZD Environment Variables**:  
 ```sh
 azd env get-values
 ```
-
-**Check Deployment Status**:
+  
+**Check Deployment Status**:  
 ```sh
 az webapp show --name <app-name> --resource-group <rg-name> --query state
 ```
-
-**Access Application Logs**:
+  
+**Access Application Logs**:  
 ```sh
 az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
 ```
-
-**Need More Help?**
-- [AZD Troubleshooting Guide](../../docs/chapter-07-troubleshooting/common-issues.md)
-- [Azure App Service Troubleshooting](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
-- [Azure SQL Troubleshooting](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
+  
+**Need More Help?**  
+- [AZD Troubleshooting Guide](../../docs/chapter-07-troubleshooting/common-issues.md)  
+- [Azure App Service Troubleshooting](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)  
+- [Azure SQL Troubleshooting](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)  
 
 ## Practical Exercises
 
@@ -657,27 +643,27 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 **Goal**: Confirm all resources are deployed and the application is working.
 
-**Steps**:
-1. List all resources in your resource group:
+**Steps**:  
+1. List all resources in your resource group:  
    ```sh
    az resource list --resource-group rg-<env-name> --output table
    ```
-   **Expected**: 6-7 resources (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
+   **Expected**: 6-7 resources (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)  
 
-2. Test all API endpoints:
+2. Test all API endpoints:  
    ```sh
    curl https://app-<your-id>.azurewebsites.net/
    curl https://app-<your-id>.azurewebsites.net/health
    curl https://app-<your-id>.azurewebsites.net/products
    curl https://app-<your-id>.azurewebsites.net/products/1
    ```
-   **Expected**: All return valid JSON without errors
+   **Expected**: All return valid JSON without errors  
 
-3. Check Application Insights:
-   - Navigate to Application Insights in Azure Portal
-   - Go to "Live Metrics"
-   - Refresh your browser on the web app
-   **Expected**: See requests appearing in real-time
+3. Check Application Insights:  
+   - Navigate to Application Insights in Azure Portal  
+   - Go to "Live Metrics"  
+   - Refresh your browser on the web app  
+   **Expected**: See requests appearing in real-time  
 
 **Success Criteria**: All 6-7 resources exist, all endpoints return data, Live Metrics shows activity.
 
@@ -689,8 +675,8 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 **Starter Code**: Current endpoints in `src/web/app.py`
 
-**Steps**:
-1. Edit `src/web/app.py` and add a new endpoint after the `get_product()` function:
+**Steps**:  
+1. Edit `src/web/app.py` and add a new endpoint after the `get_product()` function:  
    ```python
    @app.route('/products/search/<keyword>')
    def search_products(keyword):
@@ -723,17 +709,17 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
            logger.error(f"Error searching products: {str(e)}")
            return jsonify({'error': str(e)}), 500
    ```
-
-2. Deploy the updated application:
+  
+2. Deploy the updated application:  
    ```sh
    azd deploy
    ```
-
-3. Test the new endpoint:
+  
+3. Test the new endpoint:  
    ```sh
    curl https://app-<your-id>.azurewebsites.net/products/search/laptop
    ```
-   **Expected**: Returns products matching "laptop"
+   **Expected**: Returns products matching "laptop"  
 
 **Success Criteria**: New endpoint works, returns filtered results, shows up in Application Insights logs.
 
@@ -743,8 +729,8 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 **Goal**: Set up proactive monitoring with alerts.
 
-**Steps**:
-1. Create an alert for HTTP 500 errors:
+**Steps**:  
+1. Create an alert for HTTP 500 errors:  
    ```sh
    # Get Application Insights resource ID
    AI_ID=$(az monitor app-insights component show \
@@ -762,16 +748,16 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
      --evaluation-frequency 1m \
      --description "Alert when >5 failed requests in 5 minutes"
    ```
-
-2. Trigger the alert by causing errors:
+  
+2. Trigger the alert by causing errors:  
    ```sh
    # Request a non-existent product
    for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
    ```
-
-3. Check if the alert fired:
-   - Azure Portal → Alerts → Alert Rules
-   - Check your email (if configured)
+  
+3. Check if the alert fired:  
+   - Azure Portal → Alerts → Alert Rules  
+   - Check your email (if configured)  
 
 **Success Criteria**: Alert rule is created, triggers on errors, notifications are received.
 
@@ -781,10 +767,10 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 **Goal**: Add a new table and modify the application to use it.
 
-**Steps**:
+**Steps**:  
 1. Connect to SQL Database via Azure Portal Query Editor
 
-2. Create a new `categories` table:
+2. Create a new `categories` table:  
    ```sql
    CREATE TABLE categories (
        id INT PRIMARY KEY IDENTITY(1,1),
@@ -800,7 +786,7 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    ALTER TABLE products ADD category_id INT;
    UPDATE products SET category_id = 1; -- Set all to Electronics
    ```
-
+  
 3. Update `src/web/app.py` to include category information in responses
 
 4. Deploy and test
@@ -813,11 +799,11 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 **Goal**: Add Azure Redis Cache to improve performance.
 
-**Steps**:
-1. Add Redis Cache to `infra/main.bicep`
-2. Update `src/web/app.py` to cache product queries
-3. Measure performance improvement with Application Insights
-4. Compare response times before/after caching
+**Steps**:  
+1. Add Redis Cache to `infra/main.bicep`  
+2. Update `src/web/app.py` to cache product queries  
+3. Measure performance improvement with Application Insights  
+4. Compare response times before/after caching  
 
 **Success Criteria**: Redis is deployed, caching works, response times improve by >50%.
 
@@ -832,58 +818,59 @@ To avoid ongoing charges, delete all resources when done:
 ```sh
 azd down
 ```
-
-**Confirmation prompt**:
+  
+**Confirmation prompt**:  
 ```
 ? Total resources to delete: 7, are you sure you want to continue? (y/N)
 ```
-
+  
 Type `y` to confirm.
 
-**✓ Success Check**: 
-- All resources are deleted from Azure Portal
-- No ongoing charges
-- Local `.azure/<env-name>` folder can be deleted
+**✓ Success Check**:   
+- All resources are deleted from Azure Portal  
+- No ongoing charges  
+- Local `.azure/<env-name>` folder can be deleted  
 
-**Alternative** (keep infrastructure, delete data):
+**Alternative** (keep infrastructure, delete data):  
 ```sh
 # Delete only the resource group (keep AZD config)
 az group delete --name rg-<env-name> --yes
 ```
+  
 ## Learn More
 
 ### Related Documentation
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Azure SQL Database Documentation](https://learn.microsoft.com/azure/azure-sql/database/)
-- [Azure App Service Documentation](https://learn.microsoft.com/azure/app-service/)
-- [Application Insights Documentation](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Bicep Language Reference](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)  
+- [Azure SQL Database Documentation](https://learn.microsoft.com/azure/azure-sql/database/)  
+- [Azure App Service Documentation](https://learn.microsoft.com/azure/app-service/)  
+- [Application Insights Documentation](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)  
+- [Bicep Language Reference](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)  
 
 ### Next Steps in This Course
-- **[Container Apps Example](../../../../examples/container-app)**: Deploy microservices with Azure Container Apps
-- **[AI Integration Guide](../../../../docs/ai-foundry)**: Add AI capabilities to your app
-- **[Deployment Best Practices](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Production deployment patterns
+- **[Container Apps Example](../../../../examples/container-app)**: Deploy microservices with Azure Container Apps  
+- **[AI Integration Guide](../../../../docs/ai-foundry)**: Add AI capabilities to your app  
+- **[Deployment Best Practices](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Production deployment patterns  
 
 ### Advanced Topics
-- **Managed Identity**: Remove passwords and use Azure AD authentication
-- **Private Endpoints**: Secure database connections within a virtual network
-- **CI/CD Integration**: Automate deployments with GitHub Actions or Azure DevOps
-- **Multi-Environment**: Set up dev, staging, and production environments
-- **Database Migrations**: Use Alembic or Entity Framework for schema versioning
+- **Managed Identity**: Remove passwords and use Azure AD authentication  
+- **Private Endpoints**: Secure database connections within a virtual network  
+- **CI/CD Integration**: Automate deployments with GitHub Actions or Azure DevOps  
+- **Multi-Environment**: Set up dev, staging, and production environments  
+- **Database Migrations**: Use Alembic or Entity Framework for schema versioning  
 
 ### Comparison to Other Approaches
 
-**AZD vs. ARM Templates**:
-- ✅ AZD: Higher-level abstraction, simpler commands
-- ⚠️ ARM: More verbose, granular control
+**AZD vs. ARM Templates**:  
+- ✅ AZD: Higher-level abstraction, simpler commands  
+- ⚠️ ARM: More verbose, granular control  
 
-**AZD vs. Terraform**:
-- ✅ AZD: Azure-native, integrated with Azure services
-- ⚠️ Terraform: Multi-cloud support, larger ecosystem
+**AZD vs. Terraform**:  
+- ✅ AZD: Azure-native, integrated with Azure services  
+- ⚠️ Terraform: Multi-cloud support, larger ecosystem  
 
-**AZD vs. Azure Portal**:
-- ✅ AZD: Repeatable, version-controlled, automatable
-- ⚠️ Portal: Manual clicks, difficult to reproduce
+**AZD vs. Azure Portal**:  
+- ✅ AZD: Repeatable, version-controlled, automatable  
+- ⚠️ Portal: Manual clicks, difficult to reproduce  
 
 **Think of AZD as**: Docker Compose for Azure—simplified configuration for complex deployments.
 
@@ -904,7 +891,7 @@ A: This is a starting point. For production, add: managed identity, private endp
 A: Check out the [Container Apps Example](../../../../examples/container-app) which uses Docker containers throughout.
 
 **Q: How do I connect to the database from my local machine?**  
-A: Add your IP to the SQL Server firewall:
+A: Add your IP to the SQL Server firewall:  
 ```sh
 az sql server firewall-rule create \
   --resource-group rg-<env-name> \
@@ -913,7 +900,7 @@ az sql server firewall-rule create \
   --start-ip-address <your-ip> \
   --end-ip-address <your-ip>
 ```
-
+  
 **Q: Can I use an existing database instead of creating a new one?**  
 A: Yes, modify `infra/main.bicep` to reference an existing SQL Server and update the connection string parameters.
 
@@ -921,14 +908,14 @@ A: Yes, modify `infra/main.bicep` to reference an existing SQL Server and update
 
 > **Note:** This example demonstrates best practices for deploying a web app with a database using AZD. It includes working code, comprehensive documentation, and practical exercises to reinforce learning. For production deployments, review security, scaling, compliance, and cost requirements specific to your organization.
 
-**📚 Course Navigation:**
-- ← Previous: [Container Apps Example](../../../../examples/container-app)
-- → Next: [AI Integration Guide](../../../../docs/ai-foundry)
+**📚 Course Navigation:**  
+- ← Previous: [Container Apps Example](../../../../examples/container-app)  
+- → Next: [AI Integration Guide](../../../../docs/ai-foundry)  
 - 🏠 [Course Home](../../README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

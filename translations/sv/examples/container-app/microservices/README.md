@@ -1,68 +1,43 @@
-# Microservices Architecture - Container App Example
+# Microservicesarkitektur - Container App-exempel
 
-⏱️ **Estimated Time**: 25-35 minutes | 💰 **Estimated Cost**: ~$50-100/month | ⭐ **Complexity**: Advanced
+⏱️ **Uppskattad tid**: 25-35 minuter | 💰 **Uppskattad kostnad**: ~$50-100/month | ⭐ **Komplexitet**: Avancerad
 
-A **simplified but functional** microservices architecture deployed to Azure Container Apps using AZD CLI. This example demonstrates service-to-service communication, container orchestration, and monitoring with a practical 2-service setup.
+En **förenklad men fungerande** microservices-arkitektur distribuerad till Azure Container Apps med AZD CLI. Detta exempel demonstrerar tjänst-till-tjänst-kommunikation, containerorkestrering och övervakning med en praktisk lösning med 2 tjänster.
 
-> **📚 Learning Approach**: This example starts with a minimal 2-service architecture (API Gateway + Backend Service) that you can actually deploy and learn from. After mastering this foundation, we provide guidance for expanding to a full microservices ecosystem.
+> **📚 Inlärningsmetod**: Detta exempel börjar med en minimal 2-tjänsters arkitektur (API Gateway + Backend-tjänst) som du faktiskt kan distribuera och lära dig av. Efter att ha bemästrat denna grund ger vi vägledning för att expandera till ett komplett mikrotjänst-ekosystem.
 
-## What You'll Learn
+## Vad du kommer att lära dig
 
-By completing this example, you will:
-- Deploy multiple containers to Azure Container Apps
-- Implement service-to-service communication with internal networking
-- Configure environment-based scaling and health checks
-- Monitor distributed applications with Application Insights
-- Understand microservices deployment patterns and best practices
-- Learn progressive expansion from simple to complex architectures
+Genom att slutföra detta exempel kommer du att:
+- Distribuera flera containers till Azure Container Apps
+- Implementera tjänst-till-tjänst-kommunikation med intern nätverkstrafik
+- Konfigurera miljöbaserad skalning och hälsokontroller
+- Övervaka distribuerade applikationer med Application Insights
+- Förstå distributionsmönster och bästa praxis för mikrotjänster
+- Lära dig progressiv utbyggnad från enkel till komplex arkitektur
 
-## Architecture
+## Arkitektur
 
-### Phase 1: What We're Building (Included in This Example)
+### Fas 1: Vad vi bygger (Inkluderat i detta exempel)
 
+```mermaid
+graph TD
+    Internet[Internet] -- HTTPS --> Gateway[API-gateway<br/>Node.js-container<br/>Dirigerar förfrågningar<br/>Hälsokontroller<br/>Loggning av förfrågningar]
+    Gateway -- HTTP internal --> Product[Produkttjänst<br/>Python-container<br/>CRUD för produkter<br/>Minnesbaserad datalagring<br/>REST-API]
+    Product --> Insights[Application Insights<br/>Övervakning och loggar]
 ```
-                    ┌─────────────────────────────┐
-                    │         Internet            │
-                    └──────────────┬──────────────┘
-                                   │
-                                   │ HTTPS
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │      API Gateway            │
-                    │   (Node.js Container)       │
-                    │   - Routes requests         │
-                    │   - Health checks           │
-                    │   - Request logging         │
-                    └──────────────┬──────────────┘
-                                   │
-                                   │ HTTP (internal)
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │    Product Service          │
-                    │   (Python Container)        │
-                    │   - Product CRUD            │
-                    │   - In-memory data store    │
-                    │   - REST API                │
-                    └──────────────┬──────────────┘
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │   Application Insights      │
-                    │   (Monitoring & Logs)       │
-                    └─────────────────────────────┘
-```
+**Varför börja enkelt?**
+- ✅ Distribuera och förstå snabbt (25-35 minuter)
+- ✅ Lära dig kärnmönster för mikrotjänster utan komplexitet
+- ✅ Körbar kod som du kan modifiera och experimentera med
+- ✅ Lägre kostnad för lärande (~$50-100/month vs $300-1400/month)
+- ✅ Bygg upp självförtroende innan du lägger till databaser och meddelandeköer
 
-**Why Start Simple?**
-- ✅ Deploy and understand quickly (25-35 minutes)
-- ✅ Learn core microservices patterns without complexity
-- ✅ Working code you can modify and experiment with
-- ✅ Lower cost for learning (~$50-100/month vs $300-1400/month)
-- ✅ Build confidence before adding databases and message queues
+**Analogi**: Tänk på detta som att lära sig köra bil. Du börjar på en tom parkeringsplats (2 tjänster), bemästrar grunderna och går sedan vidare till stadstrafik (5+ tjänster med databaser).
 
-**Analogy**: Think of this like learning to drive. You start with an empty parking lot (2 services), master the basics, then progress to city traffic (5+ services with databases).
+### Fas 2: Framtida utbyggnad (Referensarkitektur)
 
-### Phase 2: Future Expansion (Reference Architecture)
-
-Once you master the 2-service architecture, you can expand to:
+När du bemästrar 2-tjänstersarkitekturen kan du expandera till:
 
 ```
 Full Architecture (Not Included - For Reference)
@@ -77,161 +52,161 @@ Full Architecture (Not Included - For Reference)
 └── Azure Storage (🔜 For file storage)
 ```
 
-See "Expansion Guide" section at the end for step-by-step instructions.
+Se avsnittet "Expansion Guide" längst ner för steg-för-steg-instruktioner.
 
-## Features Included
+## Funktioner som ingår
 
-✅ **Service Discovery**: Automatic DNS-based discovery between containers  
-✅ **Load Balancing**: Built-in load balancing across replicas  
-✅ **Auto-scaling**: Independent scaling per service based on HTTP requests  
-✅ **Health Monitoring**: Liveness and readiness probes for both services  
-✅ **Distributed Logging**: Centralized logging with Application Insights  
-✅ **Internal Networking**: Secure service-to-service communication  
-✅ **Container Orchestration**: Automatic deployment and scaling  
-✅ **Zero-Downtime Updates**: Rolling updates with revision management  
+✅ **Service Discovery**: Automatisk DNS-baserad upptäckt mellan containers  
+✅ **Lastbalansering**: Inbyggd lastbalansering över repliker  
+✅ **Autoskalning**: Oberoende skalning per tjänst baserat på HTTP-förfrågningar  
+✅ **Hälsomonitorering**: Liveness- och readiness-prober för båda tjänsterna  
+✅ **Distribuerad loggning**: Centraliserad loggning med Application Insights  
+✅ **Internt nätverk**: Säker tjänst-till-tjänst-kommunikation  
+✅ **Containerorkestrering**: Automatisk distribution och skalning  
+✅ **Uppdateringar utan driftstopp**: Rolling updates med revisionhantering  
 
-## Prerequisites
+## Förutsättningar
 
-### Required Tools
+### Nödvändiga verktyg
 
-Before starting, verify you have these tools installed:
+Innan du börjar, verifiera att du har dessa verktyg installerade:
 
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 or higher)
+1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 eller högre)
    ```bash
    azd version
    # Förväntad utdata: azd version 1.0.0 eller högre
    ```
 
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 or higher)
+2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 eller högre)
    ```bash
    az --version
-   # Förväntat utdata: azure-cli 2.50.0 eller högre
+   # Förväntad utdata: azure-cli 2.50.0 eller högre
    ```
 
-3. **[Docker](https://www.docker.com/get-started)** (for local development/testing - optional)
+3. **[Docker](https://www.docker.com/get-started)** (för lokal utveckling/testning - valfritt)
    ```bash
    docker --version
-   # Förväntat utdata: Docker version 20.10 eller högre
+   # Förväntad utdata: Docker version 20.10 eller högre
    ```
 
-### Azure Requirements
+### Azure-krav
 
-- An active **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))
-- Permissions to create resources in your subscription
-- **Contributor** role on the subscription or resource group
+- Ett aktivt **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))
+- Behörighet att skapa resurser i din prenumeration
+- Rollen **Contributor** på prenumerationen eller resursgruppen
 
-### Knowledge Prerequisites
+### Kunskapsförutsättningar
 
-This is an **advanced-level** example. You should have:
-- Completed the [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) 
-- Basic understanding of microservices architecture
-- Familiarity with REST APIs and HTTP
-- Understanding of container concepts
+Detta är ett **avancerat** exempel. Du bör ha:
+- Slutfört [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) 
+- Grundläggande förståelse för mikrotjänstarkitektur
+- Bekantskap med REST API:er och HTTP
+- Förståelse för containerkoncept
 
-**New to Container Apps?** Start with the [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) first to learn the basics.
+**Ny på Container Apps?** Starta med [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) först för att lära dig grunderna.
 
-## Quick Start (Step-by-Step)
+## Snabbstart (Steg för steg)
 
-### Step 1: Clone and Navigate
+### Steg 1: Klona och navigera
 
 ```bash
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/container-app/microservices
 ```
 
-**✓ Success Check**: Verify you see `azure.yaml`:
+**✓ Kontroll**: Bekräfta att du ser `azure.yaml`:
 ```bash
 ls
 # Förväntat: README.md, azure.yaml, infra/, src/
 ```
 
-### Step 2: Authenticate with Azure
+### Steg 2: Autentisera med Azure
 
 ```bash
 azd auth login
 ```
 
-This opens your browser for Azure authentication. Sign in with your Azure credentials.
+Detta öppnar din webbläsare för Azure-autentisering. Logga in med dina Azure-uppgifter.
 
-**✓ Success Check**: You should see:
+**✓ Kontroll**: Du bör se:
 ```
 Logged in to Azure.
 ```
 
-### Step 3: Initialize the Environment
+### Steg 3: Initiera miljön
 
 ```bash
 azd init
 ```
 
-**Prompts you'll see**:
-- **Environment name**: Enter a short name (e.g., `microservices-dev`)
-- **Azure subscription**: Select your subscription
-- **Azure location**: Choose a region (e.g., `eastus`, `westeurope`)
+**Frågor du kommer att få**:
+- **Miljönamn**: Ange ett kort namn (t.ex. `microservices-dev`)
+- **Azure-prenumeration**: Välj din prenumeration
+- **Azure-plats**: Välj en region (t.ex. `eastus`, `westeurope`)
 
-**✓ Success Check**: You should see:
+**✓ Kontroll**: Du bör se:
 ```
 SUCCESS: New project initialized!
 ```
 
-### Step 4: Deploy Infrastructure and Services
+### Steg 4: Distribuera infrastruktur och tjänster
 
 ```bash
 azd up
 ```
 
-**What happens** (takes 8-12 minutes):
-1. Creates Container Apps environment
-2. Creates Application Insights for monitoring
-3. Builds API Gateway container (Node.js)
-4. Builds Product Service container (Python)
-5. Deploys both containers to Azure
-6. Configures networking and health checks
-7. Sets up monitoring and logging
+**Vad som händer** (tar 8-12 minuter):
+1. Skapar Container Apps-environment
+2. Skapar Application Insights för övervakning
+3. Bygger API Gateway-container (Node.js)
+4. Bygger Product Service-container (Python)
+5. Distribuerar båda containrarna till Azure
+6. Konfigurerar nätverk och hälsokontroller
+7. Sätter upp övervakning och loggning
 
-**✓ Success Check**: You should see:
+**✓ Kontroll**: Du bör se:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
 ```
 
-**⏱️ Time**: 8-12 minutes
+**⏱️ Tid**: 8-12 minuter
 
-### Step 5: Test the Deployment
+### Steg 5: Testa distributionen
 
 ```bash
-# Hämta gateway-ändpunkt
+# Hämta gateway-slutpunkten
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
 
 # Testa API-gatewayens hälsa
 curl $GATEWAY_URL/health
 
-# Förväntat utdata:
-# {"status":"healthy","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
+# Förväntat resultat:
+# {"status":"hälsosam","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
 ```
 
-**Test product service through gateway**:
+**Testa produkttjänsten genom API-gateway**:
 ```bash
 # Lista produkter
 curl $GATEWAY_URL/api/products
 
 # Förväntat resultat:
 # [
-#   {"id":1,"namn":"Bärbar dator","pris":999.99,"lager":50},
-#   {"id":2,"namn":"Mus","pris":29.99,"lager":200},
-#   {"id":3,"namn":"Tangentbord","pris":79.99,"lager":150}
+#   {"id":1,"name":"Bärbar dator","price":999.99,"stock":50},
+#   {"id":2,"name":"Mus","price":29.99,"stock":200},
+#   {"id":3,"name":"Tangentbord","price":79.99,"stock":150}
 # ]
 ```
 
-**✓ Success Check**: Both endpoints return JSON data without errors.
+**✓ Kontroll**: Båda endpunkterna returnerar JSON-data utan fel.
 
 ---
 
-**🎉 Congratulations!** You've deployed a microservices architecture to Azure!
+**🎉 Grattis!** Du har distribuerat en mikrotjänstarkitektur till Azure!
 
-## Project Structure
+## Projektstruktur
 
-All implementation files are included—this is a complete, working example:
+Alla implementationsfiler ingår—detta är ett komplett, fungerande exempel:
 
 ```
 microservices/
@@ -261,46 +236,46 @@ microservices/
         └── Dockerfile               # Container definition
 ```
 
-**What Each Component Does:**
+**Vad varje komponent gör:**
 
-**Infrastructure (infra/)**:
-- `main.bicep`: Orchestrates all Azure resources and their dependencies
-- `core/container-apps-environment.bicep`: Creates the Container Apps environment and Azure Container Registry
-- `core/monitor.bicep`: Sets up Application Insights for distributed logging
-- `app/*.bicep`: Individual container app definitions with scaling and health checks
+**Infrastruktur (infra/)**:
+- `main.bicep`: Orkestrerar alla Azure-resurser och deras beroenden
+- `core/container-apps-environment.bicep`: Skapar Container Apps-environment och Azure Container Registry
+- `core/monitor.bicep`: Sätter upp Application Insights för distribuerad loggning
+- `app/*.bicep`: Individuella container app-definitioner med skalning och hälsokontroller
 
 **API Gateway (src/api-gateway/)**:
-- Public-facing service that routes requests to backend services
-- Implements logging, error handling, and request forwarding
-- Demonstrates service-to-service HTTP communication
+- Publik tjänst som routar förfrågningar till backend-tjänster
+- Implementerar loggning, felhantering och request-forwarding
+- Demonstrerar tjänst-till-tjänst HTTP-kommunikation
 
 **Product Service (src/product-service/)**:
-- Internal service with product catalog (in-memory for simplicity)
-- REST API with health checks
-- Example of backend microservice pattern
+- Intern tjänst med produktkatalog (i minnet för enkelhet)
+- REST API med hälsokontroller
+- Exempel på backend-mikrotjänstmönster
 
-## Services Overview
+## Tjänsters översikt
 
-### API Gateway (Node.js/Express)
+### API-gateway (Node.js/Express)
 
 **Port**: 8080  
-**Access**: Public (external ingress)  
-**Purpose**: Routes incoming requests to appropriate backend services  
+**Åtkomst**: Publik (extern ingress)  
+**Syfte**: Router inkommande förfrågningar till lämpliga backend-tjänster  
 
-**Endpoints**:
-- `GET /` - Service information
-- `GET /health` - Health check endpoint
-- `GET /api/products` - Forward to product service (list all)
-- `GET /api/products/:id` - Forward to product service (get by ID)
+**Endpunkter**:
+- `GET /` - Tjänstinformation
+- `GET /health` - Hälsokontroll
+- `GET /api/products` - Vidarebefordra till produkttjänsten (lista alla)
+- `GET /api/products/:id` - Vidarebefordra till produkttjänsten (hämta efter ID)
 
-**Key Features**:
-- Request routing with axios
-- Centralized logging
-- Error handling and timeout management
-- Service discovery via environment variables
-- Application Insights integration
+**Huvudfunktioner**:
+- Request-routing med axios
+- Centraliserad loggning
+- Felhantering och timeout-hantering
+- Service discovery via miljövariabler
+- Integrering med Application Insights
 
-**Code Highlight** (`src/api-gateway/app.js`):
+**Kodexempel** (`src/api-gateway/app.js`):
 ```javascript
 // Intern kommunikation mellan tjänster
 app.get('/api/products', async (req, res) => {
@@ -309,26 +284,26 @@ app.get('/api/products', async (req, res) => {
 });
 ```
 
-### Product Service (Python/Flask)
+### Produkttjänst (Python/Flask)
 
 **Port**: 8000  
-**Access**: Internal only (no external ingress)  
-**Purpose**: Manages product catalog with in-memory data  
+**Åtkomst**: Endast intern (ingen extern ingress)  
+**Syfte**: Hanterar produktkatalog med data i minnet  
 
-**Endpoints**:
-- `GET /` - Service information
-- `GET /health` - Health check endpoint
-- `GET /products` - List all products
-- `GET /products/<id>` - Get product by ID
+**Endpunkter**:
+- `GET /` - Tjänstinformation
+- `GET /health` - Hälsokontroll
+- `GET /products` - Lista alla produkter
+- `GET /products/<id>` - Hämta produkt efter ID
 
-**Key Features**:
-- RESTful API with Flask
-- In-memory product store (simple, no database needed)
-- Health monitoring with probes
-- Structured logging
-- Application Insights integration
+**Huvudfunktioner**:
+- RESTful API med Flask
+- Produktlager i minnet (enkelt, ingen databas behövs)
+- Hälsomonitorering med prober
+- Strukturerad loggning
+- Integrering med Application Insights
 
-**Data Model**:
+**Datamodell**:
 ```python
 {
   "id": 1,
@@ -339,73 +314,73 @@ app.get('/api/products', async (req, res) => {
 }
 ```
 
-**Why Internal Only?**
-The product service is not exposed publicly. All requests must go through the API Gateway, which provides:
-- Security: Controlled access point
-- Flexibility: Can change backend without affecting clients
-- Monitoring: Centralized request logging
+**Varför endast internt?**
+Produkttjänsten exponeras inte publikt. Alla förfrågningar måste gå genom API-gatewayen, som erbjuder:
+- Säkerhet: Kontrollerad åtkomstpunkt
+- Flexibilitet: Kan byta backend utan att påverka klienter
+- Övervakning: Centraliserad förfrågningsloggning
 
-## Understanding Service Communication
+## Förstå tjänstekommunikation
 
-### How Services Talk to Each Other
+### Hur tjänster kommunicerar med varandra
 
-In this example, the API Gateway communicates with the Product Service using **internal HTTP calls**:
+I detta exempel kommunicerar API-gatewayen med produkttjänsten via **interna HTTP-anrop**:
 
 ```javascript
 // API-gateway (src/api-gateway/app.js)
 const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
 
-// Gör ett internt HTTP-anrop
+// Gör intern HTTP-begäran
 const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 ```
 
-**Key Points**:
+**Viktiga punkter**:
 
-1. **DNS-Based Discovery**: Container Apps automatically provides DNS for internal services
+1. **DNS-baserad upptäckt**: Container Apps tillhandahåller automatiskt DNS för interna tjänster
    - Product Service FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
-   - Simplified as: `http://product-service` (Container Apps resolves it)
+   - Förenklat som: `http://product-service` (Container Apps löser detta)
 
-2. **No Public Exposure**: Product Service has `external: false` in Bicep
-   - Only accessible within the Container Apps environment
-   - Cannot be reached from the internet
+2. **Ingen publik exponering**: Product Service har `external: false` i Bicep
+   - Endast åtkomlig inom Container Apps-environmentet
+   - Kan inte nås från internet
 
-3. **Environment Variables**: Service URLs are injected at deployment time
-   - Bicep passes the internal FQDN to the gateway
-   - No hardcoded URLs in application code
+3. **Miljövariabler**: Tjänst-URL:er injiceras vid distribution
+   - Bicep skickar den interna FQDN till gatewayen
+   - Inga hårdkodade URL:er i applikationskoden
 
-**Analogy**: Think of this like office rooms. The API Gateway is the reception desk (public-facing), and the Product Service is an office room (internal only). Visitors must go through reception to reach any office.
+**Analogi**: Tänk på detta som kontorsrum. API-gatewayen är receptionen (publik), och produkttjänsten är ett kontorsrum (endast internt). Besökare måste gå via receptionen för att nå något kontor.
 
-## Deployment Options
+## Distributionsalternativ
 
-### Full Deployment (Recommended)
+### Fullständig distribution (rekommenderas)
 
 ```bash
 # Distribuera infrastrukturen och båda tjänsterna
 azd up
 ```
 
-This deploys:
-1. Container Apps environment
+Detta distribuerar:
+1. Container Apps-environment
 2. Application Insights
 3. Container Registry
-4. API Gateway container
-5. Product Service container
+4. API Gateway-container
+5. Product Service-container
 
-**Time**: 8-12 minutes
+**Tid**: 8-12 minuter
 
-### Deploy Individual Service
+### Distribuera enskild tjänst
 
 ```bash
-# Distribuera endast en tjänst (efter den initiala azd up)
+# Distribuera endast en tjänst (efter första azd up)
 azd deploy api-gateway
 
 # Eller distribuera produkttjänsten
 azd deploy product-service
 ```
 
-**Use Case**: When you've updated code in one service and want to redeploy only that service.
+**Användningsfall**: När du uppdaterat koden i en tjänst och vill distribuera endast den tjänsten.
 
-### Update Configuration
+### Uppdatera konfiguration
 
 ```bash
 # Ändra skalningsparametrar
@@ -415,23 +390,23 @@ azd env set GATEWAY_MAX_REPLICAS 30
 azd up
 ```
 
-## Configuration
+## Konfiguration
 
-### Scaling Configuration
+### Skalningskonfiguration
 
-Both services are configured with HTTP-based autoscaling in their Bicep files:
+Båda tjänsterna är konfigurerade med HTTP-baserad autoskalning i sina Bicep-filer:
 
 **API Gateway**:
-- Min replicas: 2 (always at least 2 for availability)
-- Max replicas: 20
-- Scale trigger: 50 concurrent requests per replica
+- Minsta repliker: 2 (alltid minst 2 för tillgänglighet)
+- Max repliker: 20
+- Skalnings-trigger: 50 samtidiga förfrågningar per replika
 
 **Product Service**:
-- Min replicas: 1 (can scale to zero if needed)
-- Max replicas: 10
-- Scale trigger: 100 concurrent requests per replica
+- Minsta repliker: 1 (kan skalas till noll om det behövs)
+- Max repliker: 10
+- Skalnings-trigger: 100 samtidiga förfrågningar per replika
 
-**Customize Scaling** (in `infra/app/*.bicep`):
+**Anpassa skalning** (i `infra/app/*.bicep`):
 ```bicep
 scale: {
   minReplicas: 1
@@ -449,21 +424,21 @@ scale: {
 }
 ```
 
-### Resource Allocation
+### Resursallokering
 
 **API Gateway**:
 - CPU: 1.0 vCPU
-- Memory: 2 GiB
-- Reason: Handles all external traffic
+- Minne: 2 GiB
+- Orsak: Hanterar all extern trafik
 
 **Product Service**:
 - CPU: 0.5 vCPU
-- Memory: 1 GiB
-- Reason: Lightweight in-memory operations
+- Minne: 1 GiB
+- Orsak: Lättviktiga operationer i minnet
 
-### Health Checks
+### Hälsokontroller
 
-Both services include liveness and readiness probes:
+Båda tjänsterna inkluderar liveness- och readiness-prober:
 
 ```bicep
 probes: [
@@ -488,15 +463,15 @@ probes: [
 ]
 ```
 
-**What This Means**:
-- **Liveness**: If health check fails, Container Apps restarts the container
-- **Readiness**: If not ready, Container Apps stops routing traffic to that replica
+**Vad detta innebär**:
+- **Liveness**: Om hälsokontrollen misslyckas startar Container Apps om containern
+- **Readiness**: Om den inte är redo slutar Container Apps routa trafik till den replikan
 
 
 
-## Monitoring & Observability
+## Övervakning och observerbarhet
 
-### View Service Logs
+### Visa tjänstloggar
 
 ```bash
 # Visa loggar med azd monitor
@@ -510,7 +485,7 @@ az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
 
-**Expected Output**:
+**Förväntad utdata**:
 ```
 [api-gateway] API Gateway listening on port 8080
 [api-gateway] Product Service URL: http://product-service
@@ -518,11 +493,11 @@ az containerapp logs show --name product-service --resource-group $RG_NAME --tai
 [product-service] Retrieved 5 products
 ```
 
-### Application Insights Queries
+### Application Insights-frågor
 
-Access Application Insights in Azure Portal, then run these queries:
+Öppna Application Insights i Azure-portalen, och kör sedan dessa frågor:
 
-**Find Slow Requests**:
+**Hitta långsamma förfrågningar**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -531,7 +506,7 @@ requests
 | order by count_ desc
 ```
 
-**Track Service-to-Service Calls**:
+**Spåra tjänst-till-tjänst-anrop**:
 ```kusto
 dependencies
 | where timestamp > ago(1h)
@@ -540,7 +515,7 @@ dependencies
 | order by timestamp desc
 ```
 
-**Error Rate by Service**:
+**Felfrekvens per tjänst**:
 ```kusto
 exceptions
 | where timestamp > ago(24h)
@@ -548,7 +523,7 @@ exceptions
 | order by errorCount desc
 ```
 
-**Request Volume Over Time**:
+**Förfrågningsvolym över tid**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -556,51 +531,51 @@ requests
 | render timechart
 ```
 
-### Access Monitoring Dashboard
+### Öppna övervakningspanel
 
 ```bash
 # Hämta Application Insights-detaljer
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Öppna övervakningen i Azure-portalen
+# Öppna övervakning i Azure-portalen
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
   --query "appId" -o tsv
 ```
 
-### Live Metrics
+### Metrik i realtid
 
-1. Navigate to Application Insights in Azure Portal
-2. Click "Live Metrics"
-3. See real-time requests, failures, and performance
-4. Test by running: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
+1. Navigera till Application Insights i Azure-portalen
+2. Klicka på "Live Metrics"
+3. Se realtidsförfrågningar, fel och prestanda
+4. Testa genom att köra: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
 
-## Practical Exercises
+## Praktiska övningar
 
-[Note: See full exercises above in the "Practical Exercises" section for detailed step-by-step exercises including deployment verification, data modification, autoscaling tests, error handling, and adding a third service.]
+[Obs: Se de fullständiga övningarna ovan i avsnittet "Praktiska övningar" för detaljerade steg-för-steg-övningar inklusive distributionsverifiering, datamodifiering, autoskalningstester, felhantering och att lägga till en tredje tjänst.]
 
-## Cost Analysis
+## Kostnadsanalys
 
-### Estimated Monthly Costs (For This 2-Service Example)
+### Uppskattade månadskostnader (för detta exempel med 2 tjänster)
 
-| Resource | Configuration | Estimated Cost |
+| Resurs | Konfiguration | Uppskattad kostnad |
 |----------|--------------|----------------|
 | API Gateway | 2-20 replicas, 1 vCPU, 2GB RAM | $30-150 |
 | Product Service | 1-10 replicas, 0.5 vCPU, 1GB RAM | $15-75 |
 | Container Registry | Basic tier | $5 |
 | Application Insights | 1-2 GB/month | $5-10 |
 | Log Analytics | 1 GB/month | $3 |
-| **Total** | | **$58-243/month** |
+| **Totalt** | | **$58-243/month** |
 
-**Cost Breakdown by Usage**:
-- **Light traffic** (testing/learning): ~$60/month
-- **Moderate traffic** (small production): ~$120/month
-- **High traffic** (busy periods): ~$240/month
+**Kostnadsfördelning efter användning**:
+- **Låg trafik** (test/lärande): ~$60/month
+- **Måttlig trafik** (liten produktion): ~$120/month
+- **Hög trafik** (perioder med hög belastning): ~$240/month
 
-### Cost Optimization Tips
+### Tips för kostnadsoptimering
 
-1. **Scale to Zero for Development**:
+1. **Skala till noll för utveckling**:
    ```bicep
    scale: {
      minReplicas: 0  // Save $30-40/month when not in use
@@ -608,29 +583,30 @@ az monitor app-insights component show \
    }
    ```
 
-2. **Use Consumption Plan for Cosmos DB** (when you add it):
-   - Pay only for what you use
-   - No minimum charge
+2. **Använd Consumption Plan för Cosmos DB** (när du lägger till det):
+   - Betala bara för det du använder
+   - Ingen minimiavgift
 
-3. **Set Application Insights Sampling**:
+3. **Ställ in sampling i Application Insights**:
    ```javascript
-   appInsights.defaultClient.config.samplingPercentage = 50; // Sampla 50% av förfrågningarna
+   appInsights.defaultClient.config.samplingPercentage = 50; // Välj 50 % av förfrågningarna
    ```
 
-4. **Clean Up When Not Needed**:
+4. **Rensa upp när det inte behövs**:
    ```bash
    azd down
    ```
 
-### Free Tier Options
-For learning/testing, consider:
-- Use Azure free credits (first 30 days)
-- Keep to minimum replicas
-- Delete after testing (no ongoing charges)
+### Gratisalternativ
+
+För lärande/testning, överväg:
+- Använd Azure gratis krediter (första 30 dagarna)
+- Håll antalet repliker till minimum
+- Radera efter testning (inga löpande kostnader)
 
 ---
 
-## Rensa upp
+## Rensning
 
 För att undvika löpande kostnader, ta bort alla resurser:
 
@@ -647,10 +623,10 @@ Skriv `y` för att bekräfta.
 
 **Vad som tas bort**:
 - Container Apps-miljö
-- Båda Container Apps (gateway & produkttjänst)
+- Båda Container Apps (gateway och produkttjänst)
 - Container Registry
 - Application Insights
-- Log Analytics Workspace
+- Log Analytics-arbetsyta
 - Resursgrupp
 
 **✓ Verifiera rensning**:
@@ -658,19 +634,19 @@ Skriv `y` för att bekräfta.
 az group list --query "[?starts_with(name,'rg-microservices')]" --output table
 ```
 
-Bör vara tomt.
+Bör returnera tomt.
 
 ---
 
-## Uppskalningsguide: Från 2 till 5+ tjänster
+## Utbyggnadsguide: Från 2 till 5+ tjänster
 
-När du har bemästrat denna arkitektur med 2 tjänster, här är hur du kan utöka:
+När du bemästrat denna tvåtjänsters arkitektur, här är hur du kan utöka:
 
-### Fas 1: Lägg till databasbeständighet (nästa steg)
+### Fas 1: Lägg till databaspersistens (nästa steg)
 
-**Lägg till Cosmos DB för produkttjänsten**:
+**Lägg till Cosmos DB för Produkttjänsten**:
 
-1. Create `infra/core/cosmos.bicep`:
+1. Skapa `infra/core/cosmos.bicep`:
    ```bicep
    resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
      name: name
@@ -683,20 +659,20 @@ När du har bemästrat denna arkitektur med 2 tjänster, här är hur du kan ut�
    }
    ```
 
-2. Uppdatera produkttjänsten för att använda Cosmos DB istället för in-memory-data
+2. Uppdatera produkttjänsten att använda Cosmos DB istället för minnesbaserad data
 
-3. Beräknad extra kostnad: ~25 USD/månad (serverless)
+3. Beräknad extra kostnad: ~$25/month (serverless)
 
-### Fas 2: Lägg till tredje tjänst (Orderhantering)
+### Fas 2: Lägg till tredje tjänst (orderhantering)
 
-**Skapa Ordertjänst**:
+**Skapa Orderservice**:
 
 1. Ny mapp: `src/order-service/` (Python/Node.js/C#)
 2. Ny Bicep: `infra/app/order-service.bicep`
-3. Uppdatera API-gateway för att routa `/api/orders`
+3. Uppdatera API Gateway för att routa `/api/orders`
 4. Lägg till Azure SQL Database för orderpersistens
 
-**Arkitekturen blir**:
+**Arkitektur blir**:
 ```
 API Gateway → Product Service (Cosmos DB)
            → Order Service (Azure SQL)
@@ -708,18 +684,18 @@ API Gateway → Product Service (Cosmos DB)
 
 1. Lägg till Azure Service Bus: `infra/core/servicebus.bicep`
 2. Produkttjänsten publicerar "ProductCreated"-händelser
-3. Ordertjänsten prenumererar på produktevenemang
-4. Lägg till Notification Service för att bearbeta händelser
+3. Orderservicen prenumererar på produkthändelser
+4. Lägg till Notificationsservice för att hantera händelser
 
-**Mönster**: Begäran/Svar (HTTP) + händelsestyrt (Service Bus)
+**Mönster**: Request/Response (HTTP) + Händelsestyrt (Service Bus)
 
 ### Fas 4: Lägg till användarautentisering
 
 **Implementera användartjänst**:
 
 1. Skapa `src/user-service/` (Go/Node.js)
-2. Lägg till Azure AD B2C eller kundanpassad JWT-autentisering
-3. API-gateway validerar tokens
+2. Lägg till Azure AD B2C eller anpassad JWT-autentisering
+3. API Gateway validerar tokens
 4. Tjänster kontrollerar användarbehörigheter
 
 ### Fas 5: Produktionsberedskap
@@ -729,48 +705,48 @@ API Gateway → Product Service (Cosmos DB)
 - Azure Key Vault (hemlighetshantering)
 - Azure Monitor Workbooks (anpassade dashboards)
 - CI/CD-pipeline (GitHub Actions)
-- Blue-Green-distributioner
-- Hanterad identitet för alla tjänster
+- Blue-green-distributioner
+- Managed Identity för alla tjänster
 
-**Kostnad för full produktionsarkitektur**: ~$300-1,400/månad
+**Fullständig produktionsarkitektur kostnad**: ~$300-1,400/month
 
 ---
 
-## Lär dig mer
+## Läs mer
 
 ### Relaterad dokumentation
-- [Dokumentation för Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
-- [Mikrotjänstarkitekturguide](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
-- [Application Insights för distribuerad spårning](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
-- [Dokumentation för Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Azure Container Apps Documentation](https://learn.microsoft.com/azure/container-apps/)
+- [Microservices Architecture Guide](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
+- [Application Insights for Distributed Tracing](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
-### Nästa steg i denna kurs
-- ← Föregående: [Enkel Flask-API](../../../../../examples/container-app/simple-flask-api) - Nybörjarexempel med en enda container
-- → Nästa: [Guide för AI-integration](../../../../../examples/docs/ai-foundry) - Lägg till AI-funktioner
-- 🏠 [Kursens startsida](../../README.md)
+### Nästa steg i den här kursen
+- ← Föregående: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - Nybörjare: exempel med en enda container
+- → Nästa: [AI Integration Guide](../../../../../examples/docs/ai-foundry) - Lägg till AI-funktioner
+- 🏠 [Course Home](../../README.md)
 
-### Jämförelse: När man ska använda vad
+### Jämförelse: När ska man använda vad
 
-**Enkel Container App** (Exempel: Enkel Flask-API):
+**Enkel Container-app** (Exempel: Simple Flask API):
 - ✅ Enkla applikationer
 - ✅ Monolitisk arkitektur
-- ✅ Snabbt att distribuera
+- ✅ Snabb att distribuera
 - ❌ Begränsad skalbarhet
-- **Kostnad**: ~$15-50/månad
+- **Kostnad**: ~$15-50/month
 
 **Mikrotjänster** (Detta exempel):
 - ✅ Komplexa applikationer
 - ✅ Oberoende skalning per tjänst
 - ✅ Teamautonomi (olika tjänster, olika team)
 - ❌ Mer komplext att hantera
-- **Kostnad**: ~$60-250/månad
+- **Kostnad**: ~$60-250/month
 
 **Kubernetes (AKS)**:
-- ✅ Maximal kontroll och flexibilitet
-- ✅ Multi-cloud-portabilitet
+- ✅ Maximalt kontroll och flexibilitet
+- ✅ Portabilitet över flera moln
 - ✅ Avancerad nätverkshantering
 - ❌ Kräver Kubernetes-expertis
-- **Kostnad**: ~$150-500/månad minst
+- **Kostnad**: ~$150-500/month minimum
 
 **Rekommendation**: Börja med Container Apps (detta exempel), gå över till AKS endast om du behöver Kubernetes-specifika funktioner.
 
@@ -778,45 +754,45 @@ API Gateway → Product Service (Cosmos DB)
 
 ## Vanliga frågor
 
-**Q: Varför endast 2 tjänster istället för 5+?**  
-A: Pedagogisk progression. Bemästra grunderna (tjänstkommunikation, övervakning, skalning) med ett enkelt exempel innan du lägger till komplexitet. Mönstren du lär dig här gäller för arkitekturer med 100 tjänster.
+**F: Varför bara 2 tjänster istället för 5+?**  
+Svar: Pedagogisk progression. Bemästra grunderna (tjänstkommunikation, övervakning, skalning) med ett enkelt exempel innan du lägger till komplexitet. Mönstren du lär dig här gäller även för arkitekturer med 100 tjänster.
 
-**Q: Kan jag lägga till fler tjänster själv?**  
-A: Absolut! Följ uppskalningsguiden ovan. Varje ny tjänst följer samma mönster: skapa src-mapp, skapa Bicep-fil, uppdatera azure.yaml, distribuera.
+**F: Kan jag lägga till fler tjänster själv?**  
+Svar: Absolut! Följ utbyggnadsguiden ovan. Varje ny tjänst följer samma mönster: skapa src-mapp, skapa Bicep-fil, uppdatera azure.yaml, distribuera.
 
-**Q: Är detta produktionsklart?**  
-A: Det är en stabil grund. För produktion, lägg till: hanterad identitet, Key Vault, persistenta databaser, CI/CD-pipeline, övervakningslarm och backupstrategi.
+**F: Är detta produktionsklart?**  
+Svar: Det är en stabil grund. För produktion, lägg till: managed identity, Key Vault, persistenta databaser, CI/CD-pipeline, övervakningslarm och backupstrategi.
 
-**Q: Varför inte använda Dapr eller annan service mesh?**  
-A: Håll det enkelt för inlärning. När du förstår den inbyggda Container Apps-nätverkeringen kan du lägga till Dapr för avancerade scenarier.
+**F: Varför inte använda Dapr eller annan service mesh?**  
+Svar: Håll det enkelt för lärande. När du väl förstår inbyggd Container Apps-nätverkshantering kan du lägga till Dapr för avancerade scenarier.
 
-**Q: Hur felsöker jag lokalt?**  
-A: Kör tjänster lokalt med Docker:
+**F: Hur felsöker jag lokalt?**  
+Svar: Kör tjänster lokalt med Docker:
 ```bash
 cd src/api-gateway
 docker build -t local-gateway .
 docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
 ```
 
-**Q: Kan jag använda olika programmeringsspråk?**  
-A: Ja! Detta exempel visar Node.js (gateway) + Python (produkttjänst). Du kan blanda vilka som helst språk som körs i containrar.
+**F: Kan jag använda olika programmeringsspråk?**  
+Svar: Ja! Detta exempel visar Node.js (gateway) + Python (produktstjänst). Du kan blanda vilka språk som helst som körs i containrar.
 
-**Q: Vad gör jag om jag inte har Azure-krediter?**  
-A: Använd Azure gratisnivå (första 30 dagarna med nya konton) eller distribuera för korta testperioder och ta bort omedelbart.
+**F: Vad gör jag om jag inte har Azure-krediter?**  
+Svar: Använd Azures kostnadsfria nivå (första 30 dagarna för nya konton) eller distribuera för korta testperioder och radera omedelbart.
 
 ---
 
-> **🎓 Sammanfattning av lärvägen**: Du har lärt dig att distribuera en arkitektur med flera tjänster med automatisk skalning, intern nätverkstrafik, centraliserad övervakning och produktionsnära mönster. Denna grund förbereder dig för komplexa distribuerade system och företagsmikrotjänstarkitekturer.
+> **🎓 Sammanfattning av inlärningsvägen**: Du har lärt dig att distribuera en fler-tjänsters arkitektur med automatisk skalning, intern nätverkshantering, centraliserad övervakning och produktionsklara mönster. Denna grund förbereder dig för komplexa distribuerade system och företagsmikrotjänstarkitekturer.
 
 **📚 Kursnavigering:**
-- ← Föregående: [Enkel Flask-API](../../../../../examples/container-app/simple-flask-api)
-- → Nästa: [Databasintegrations-exempel](../../../../../examples/database-app)
-- 🏠 [Kursens startsida](../../../README.md)
+- ← Föregående: [Simple Flask API](../../../../../examples/container-app/simple-flask-api)
+- → Nästa: [Database Integration Example](../../../../../examples/database-app)
+- 🏠 [Course Home](../../../README.md)
 - 📖 [Container Apps Best Practices](../../../docs/chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfriskrivning:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten Co-op Translator (https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet bör du vara medveten om att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk ska betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+**Ansvarsfriskrivning**:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, observera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
