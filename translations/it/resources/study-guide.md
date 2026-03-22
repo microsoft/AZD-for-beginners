@@ -1,86 +1,86 @@
-# Guida allo Studio - Obiettivi di Apprendimento Completi
+# Guida di Studio - Obiettivi di Apprendimento Completi
 
-**Navigazione del Percorso di Apprendimento**
-- **📚 Home del Corso**: [AZD Per Principianti](../README.md)
-- **📖 Inizia a Imparare**: [Capitolo 1: Fondamenti & Avvio Rapido](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 Monitoraggio del Progresso**: [Completamento del Corso](../README.md#-course-completion--certification)
+**Navigazione del percorso di apprendimento**
+- **📚 Home del corso**: [AZD For Beginners](../README.md)
+- **📖 Inizia a studiare**: [Capitolo 1: Fondamenti & Avvio rapido](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Tracciamento del progresso**: [Completamento del corso](../README.md#-course-completion--certification)
 
 ## Introduzione
 
-Questa guida allo studio completa fornisce obiettivi di apprendimento strutturati, concetti chiave, esercizi pratici e materiali di valutazione per aiutarti a padroneggiare Azure Developer CLI (azd). Usa questa guida per monitorare i tuoi progressi e assicurarti di aver coperto tutti gli argomenti essenziali.
+Questa guida di studio completa fornisce obiettivi di apprendimento strutturati, concetti chiave, esercizi pratici e materiali di valutazione per aiutarti a padroneggiare Azure Developer CLI (azd). Usa questa guida per monitorare i tuoi progressi e assicurarti di aver coperto tutti gli argomenti essenziali.
 
-## Obiettivi di Apprendimento
+## Obiettivi di apprendimento
 
-Completando questa guida allo studio, sarai in grado di:
+Completando questa guida di studio, sarai in grado di:
 - Padroneggiare tutti i concetti fondamentali e avanzati di Azure Developer CLI
 - Sviluppare competenze pratiche nel distribuire e gestire applicazioni Azure
-- Acquisire sicurezza nel risolvere problemi e ottimizzare le distribuzioni
+- Acquisire fiducia nel risolvere problemi e ottimizzare le distribuzioni
 - Comprendere le pratiche di distribuzione pronte per la produzione e le considerazioni sulla sicurezza
 
-## Risultati di Apprendimento
+## Risultati dell'apprendimento
 
-Dopo aver completato tutte le sezioni di questa guida allo studio, sarai in grado di:
-- Progettare, distribuire e gestire architetture applicative complete utilizzando azd
+Dopo aver completato tutte le sezioni di questa guida, sarai in grado di:
+- Progettare, distribuire e gestire architetture applicative complete usando azd
 - Implementare strategie complete di monitoraggio, sicurezza e ottimizzazione dei costi
-- Risolvere autonomamente problemi complessi di distribuzione
-- Creare modelli personalizzati e contribuire alla comunità azd
+- Risolvere in modo indipendente problemi complessi di distribuzione
+- Creare template personalizzati e contribuire alla community di azd
 
-## Struttura di Apprendimento in 8 Capitoli
+## Struttura di apprendimento in 8 capitoli
 
-### Capitolo 1: Fondamenti & Avvio Rapido (Settimana 1)
+### Capitolo 1: Fondamenti & Avvio rapido (Settimana 1)
 **Durata**: 30-45 minuti | **Complessità**: ⭐
 
-#### Obiettivi di Apprendimento
-- Comprendere i concetti e la terminologia di base di Azure Developer CLI
-- Installare e configurare con successo AZD sulla tua piattaforma di sviluppo
-- Distribuire la tua prima applicazione utilizzando un modello esistente
-- Navigare efficacemente nell'interfaccia a riga di comando di AZD
+#### Obiettivi di apprendimento
+- Comprendere i concetti core e la terminologia di Azure Developer CLI
+- Installare e configurare correttamente AZD sulla tua piattaforma di sviluppo
+- Distribuire la tua prima applicazione usando un template esistente
+- Navigare efficacemente l'interfaccia a riga di comando di AZD
 
-#### Concetti Chiave da Padroneggiare
-- Struttura e componenti del progetto AZD (azure.yaml, infra/, src/)
-- Flussi di lavoro di distribuzione basati su modelli
-- Nozioni di base sulla configurazione dell'ambiente
-- Gestione dei gruppi di risorse e delle sottoscrizioni
+#### Concetti chiave da padroneggiare
+- Struttura e componenti di un progetto AZD (azure.yaml, infra/, src/)
+- Flussi di lavoro basati su template per la distribuzione
+- Nozioni di base sulla configurazione degli ambienti
+- Gestione di resource group e subscription
 
-#### Esercizi Pratici
-1. **Verifica dell'Installazione**: Installa AZD e verifica con `azd version`
-2. **Prima Distribuzione**: Distribuisci con successo il modello todo-nodejs-mongo
-3. **Configurazione dell'Ambiente**: Configura le tue prime variabili di ambiente
-4. **Esplorazione delle Risorse**: Naviga tra le risorse distribuite nel Portale di Azure
+#### Esercizi pratici
+1. **Verifica dell'installazione**: Installa AZD e verifica con `azd version`
+2. **Prima distribuzione**: Distribuisci con successo il template todo-nodejs-mongo
+3. **Configurazione dell'ambiente**: Configura le tue prime variabili di ambiente
+4. **Esplorazione delle risorse**: Esplora le risorse distribuite nel Portale di Azure
 
-#### Domande di Valutazione
+#### Domande di valutazione
 - Quali sono i componenti principali di un progetto AZD?
-- Come si inizializza un nuovo progetto da un modello?
+- Come inizializzi un nuovo progetto da un template?
 - Qual è la differenza tra `azd up` e `azd deploy`?
-- Come si gestiscono più ambienti con AZD?
+- Come gestisci più ambienti con AZD?
 
 ---
 
 ### Capitolo 2: Sviluppo AI-First (Settimana 2)
 **Durata**: 1-2 ore | **Complessità**: ⭐⭐
 
-#### Obiettivi di Apprendimento
-- Integrare i servizi Microsoft Foundry con i flussi di lavoro AZD
+#### Obiettivi di apprendimento
+- Integrare i servizi Microsoft Foundry nei flussi di lavoro AZD
 - Distribuire e configurare applicazioni potenziate dall'AI
-- Comprendere i modelli di implementazione RAG (Retrieval-Augmented Generation)
-- Gestire le distribuzioni e il dimensionamento dei modelli AI
+- Comprendere i pattern di implementazione RAG (Retrieval-Augmented Generation)
+- Gestire le distribuzioni e lo scaling dei modelli AI
 
-#### Concetti Chiave da Padroneggiare
-- Integrazione del servizio Azure OpenAI e gestione delle API
-- Configurazione della ricerca AI e indicizzazione vettoriale
-- Strategie di distribuzione dei modelli e pianificazione della capacità
+#### Concetti chiave da padroneggiare
+- Integrazione del servizio Models di Microsoft Foundry e gestione delle API
+- Configurazione di AI Search e indicizzazione vettoriale
+- Strategie di deployment dei modelli e pianificazione della capacità
 - Monitoraggio delle applicazioni AI e ottimizzazione delle prestazioni
 
-#### Esercizi Pratici
-1. **Distribuzione Chat AI**: Distribuisci il modello azure-search-openai-demo
+#### Esercizi pratici
+1. **Distribuzione chat AI**: Distribuisci il template azure-search-openai-demo
 2. **Implementazione RAG**: Configura l'indicizzazione e il recupero dei documenti
-3. **Configurazione del Modello**: Configura più modelli AI con scopi diversi
+3. **Configurazione dei modelli**: Imposta più modelli AI con scopi diversi
 4. **Monitoraggio AI**: Implementa Application Insights per i carichi di lavoro AI
 
-#### Domande di Valutazione
-- Come si configurano i servizi Azure OpenAI in un modello AZD?
+#### Domande di valutazione
+- Come configuri i servizi Models di Microsoft Foundry in un template AZD?
 - Quali sono i componenti chiave di un'architettura RAG?
-- Come si gestisce la capacità e il dimensionamento dei modelli AI?
+- Come gestisci la capacità e lo scaling dei modelli AI?
 - Quali metriche di monitoraggio sono importanti per le applicazioni AI?
 
 ---
@@ -88,203 +88,204 @@ Dopo aver completato tutte le sezioni di questa guida allo studio, sarai in grad
 ### Capitolo 3: Configurazione & Autenticazione (Settimana 3)
 **Durata**: 45-60 minuti | **Complessità**: ⭐⭐
 
-#### Obiettivi di Apprendimento
-- Padroneggiare le strategie di configurazione e gestione degli ambienti
-- Implementare modelli di autenticazione sicuri e identità gestite
+#### Obiettivi di apprendimento
+- Padroneggiare strategie di configurazione e gestione degli ambienti
+- Implementare pattern di autenticazione sicura e managed identity
 - Organizzare le risorse con convenzioni di denominazione appropriate
 - Configurare distribuzioni multi-ambiente (dev, staging, prod)
 
-#### Concetti Chiave da Padroneggiare
-- Gerarchia degli ambienti e precedenza della configurazione
-- Autenticazione con identità gestite e principali di servizio
+#### Concetti chiave da padroneggiare
+- Gerarchia degli ambienti e precedenza delle configurazioni
+- Managed identity e autenticazione con service principal
 - Integrazione di Key Vault per la gestione dei segreti
 - Gestione dei parametri specifici per ambiente
 
-#### Esercizi Pratici
-1. **Configurazione Multi-Ambiente**: Configura gli ambienti dev, staging e prod
-2. **Configurazione della Sicurezza**: Implementa l'autenticazione con identità gestite
-3. **Gestione dei Segreti**: Integra Azure Key Vault per i dati sensibili
-4. **Gestione dei Parametri**: Crea configurazioni specifiche per ambiente
+#### Esercizi pratici
+1. **Configurazione multi-ambiente**: Configura gli ambienti dev, staging e prod
+2. **Configurazione della sicurezza**: Implementa l'autenticazione con managed identity
+3. **Gestione dei segreti**: Integra Azure Key Vault per i dati sensibili
+4. **Gestione dei parametri**: Crea configurazioni specifiche per ambiente
 
-#### Domande di Valutazione
-- Come si configurano ambienti diversi con AZD?
-- Quali sono i vantaggi dell'uso di identità gestite rispetto ai principali di servizio?
-- Come si gestiscono in modo sicuro i segreti delle applicazioni?
+#### Domande di valutazione
+- Come configuri diversi ambienti con AZD?
+- Quali sono i vantaggi dell'uso di managed identity rispetto ai service principal?
+- Come gestisci in modo sicuro i segreti dell'applicazione?
 - Qual è la gerarchia di configurazione in AZD?
 
 ---
 
-### Capitolo 4: Infrastruttura come Codice & Distribuzione (Settimana 4-5)
-**Durata**: 1-1,5 ore | **Complessità**: ⭐⭐⭐
+### Capitolo 4: Infrastructure as Code & Distribuzione (Settimana 4-5)
+**Durata**: 1-1.5 ore | **Complessità**: ⭐⭐⭐
 
-#### Obiettivi di Apprendimento
-- Creare e personalizzare modelli di infrastruttura Bicep
-- Implementare modelli e flussi di lavoro di distribuzione avanzati
+#### Obiettivi di apprendimento
+- Creare e personalizzare template infrastrutturali Bicep
+- Implementare pattern e flussi di lavoro di deployment avanzati
 - Comprendere le strategie di provisioning delle risorse
-- Progettare architetture scalabili multi-servizio
+- Progettare architetture multi-servizio scalabili
 
 - Distribuire applicazioni containerizzate utilizzando Azure Container Apps e AZD
 
-#### Concetti Chiave da Padroneggiare
-- Struttura e best practice dei modelli Bicep
-- Dipendenze delle risorse e ordine di distribuzione
-- File di parametri e modularità dei modelli
-- Hook personalizzati e automazione della distribuzione
-- Modelli di distribuzione delle app containerizzate (avvio rapido, produzione, microservizi)
 
-#### Esercizi Pratici
-1. **Creazione di Modelli Personalizzati**: Costruisci un modello di applicazione multi-servizio
-2. **Maestria in Bicep**: Crea componenti di infrastruttura modulari e riutilizzabili
-3. **Automazione della Distribuzione**: Implementa hook pre/post distribuzione
-4. **Progettazione dell'Architettura**: Distribuisci un'architettura complessa di microservizi
-5. **Distribuzione di App Containerizzate**: Distribuisci gli esempi [Simple Flask API](../../../examples/container-app/simple-flask-api) e [Microservices Architecture](../../../examples/container-app/microservices) utilizzando AZD
+#### Concetti chiave da padroneggiare
+- Struttura dei template Bicep e best practice
+- Dipendenze tra risorse e ordine di deployment
+- File di parametri e modularità dei template
+- Hook personalizzati e automazione delle distribuzioni
+- Pattern di deployment per container app (quick start, produzione, microservizi)
 
-#### Domande di Valutazione
-- Come si creano modelli Bicep personalizzati per AZD?
-- Quali sono le best practice per organizzare il codice dell'infrastruttura?
-- Come si gestiscono le dipendenze delle risorse nei modelli?
-- Quali modelli di distribuzione supportano aggiornamenti senza interruzioni?
+#### Esercizi pratici
+1. **Creazione di template personalizzati**: Costruisci un template per un'app multi-servizio
+2. **Padronanza di Bicep**: Crea componenti infrastrutturali modulari e riutilizzabili
+3. **Automazione del deployment**: Implementa hook pre/post deployment
+4. **Progettazione dell'architettura**: Distribuisci una complessa architettura a microservizi
+5. **Distribuzione di Container App**: Distribuisci gli esempi [Simple Flask API](../../../examples/container-app/simple-flask-api) e [Microservices Architecture](../../../examples/container-app/microservices) usando AZD
+
+#### Domande di valutazione
+- Come crei template Bicep personalizzati per AZD?
+- Quali sono le best practice per organizzare il codice infrastrutturale?
+- Come gestisci le dipendenze tra risorse nei template?
+- Quali pattern di deployment supportano aggiornamenti senza downtime?
 
 ---
 
 ### Capitolo 5: Soluzioni AI Multi-Agente (Settimana 6-7)
 **Durata**: 2-3 ore | **Complessità**: ⭐⭐⭐⭐
 
-#### Obiettivi di Apprendimento
+#### Obiettivi di apprendimento
 - Progettare e implementare architetture AI multi-agente
-- Coordinare e orchestrare la comunicazione tra agenti
+- Orchestrare il coordinamento e la comunicazione tra agenti
 - Distribuire soluzioni AI pronte per la produzione con monitoraggio
-- Comprendere la specializzazione degli agenti e i modelli di flusso di lavoro
+- Comprendere la specializzazione degli agenti e i pattern di workflow
 - Integrare microservizi containerizzati come parte di soluzioni multi-agente
 
-#### Concetti Chiave da Padroneggiare
-- Modelli di architettura multi-agente e principi di progettazione
-- Protocolli di comunicazione tra agenti e flusso di dati
-- Strategie di bilanciamento del carico e scalabilità per agenti AI
-- Monitoraggio della produzione per sistemi multi-agente
-- Comunicazione tra servizi in ambienti containerizzati
+#### Concetti chiave da padroneggiare
+- Pattern architetturali e principi di design per sistemi multi-agente
+- Protocolli di comunicazione tra agenti e flusso dei dati
+- Strategie di load balancing e scaling per agenti AI
+- Monitoraggio di produzione per sistemi multi-agente
+- Comunicazione service-to-service in ambienti containerizzati
 
-#### Esercizi Pratici
-1. **Distribuzione della Soluzione Retail**: Distribuisci lo scenario retail multi-agente completo
-2. **Personalizzazione degli Agenti**: Modifica i comportamenti degli agenti Customer e Inventory
-3. **Scalabilità dell'Architettura**: Implementa bilanciamento del carico e auto-scaling
-4. **Monitoraggio della Produzione**: Configura monitoraggio e avvisi completi
-5. **Integrazione dei Microservizi**: Estendi l'esempio [Microservices Architecture](../../../examples/container-app/microservices) per supportare flussi di lavoro basati su agenti
+#### Esercizi pratici
+1. **Distribuzione soluzione retail**: Distribuisci lo scenario completo multi-agente per il retail
+2. **Personalizzazione degli agenti**: Modifica i comportamenti degli agenti Customer e Inventory
+3. **Scalabilità dell'architettura**: Implementa load balancing e auto-scaling
+4. **Monitoraggio di produzione**: Configura monitoraggio e alerting completi
+5. **Integrazione microservizi**: Estendi l'esempio [Microservices Architecture](../../../examples/container-app/microservices) per supportare workflow basati su agenti
 
-#### Domande di Valutazione
-- Come si progettano modelli efficaci di comunicazione multi-agente?
+#### Domande di valutazione
+- Come progetti pattern di comunicazione efficaci tra agenti?
 - Quali sono le considerazioni chiave per scalare i carichi di lavoro degli agenti AI?
-- Come si monitorano e si risolvono i problemi nei sistemi AI multi-agente?
-- Quali modelli di produzione garantiscono l'affidabilità per gli agenti AI?
+- Come monitori e fai il debug di sistemi AI multi-agente?
+- Quali pattern di produzione garantiscono affidabilità per gli agenti AI?
 
 ---
 
 ### Capitolo 6: Validazione & Pianificazione Pre-Distribuzione (Settimana 8)
 **Durata**: 1 ora | **Complessità**: ⭐⭐
 
-#### Obiettivi di Apprendimento
-- Eseguire una pianificazione della capacità e una validazione delle risorse complete
-- Selezionare gli SKU Azure ottimali per un rapporto costo-efficacia
-- Implementare controlli e validazioni pre-volo automatizzati
-- Pianificare distribuzioni con strategie di ottimizzazione dei costi
+#### Obiettivi di apprendimento
+- Eseguire una pianificazione completa della capacità e la validazione delle risorse
+- Selezionare SKU Azure ottimali per rapporto costi/benefici
+- Implementare controlli pre-volo e validazioni automatiche
+- Pianificare le distribuzioni con strategie di ottimizzazione dei costi
 
-#### Concetti Chiave da Padroneggiare
-- Quote delle risorse Azure e limitazioni di capacità
+#### Concetti chiave da padroneggiare
+- Quote di risorse Azure e limitazioni di capacità
 - Criteri di selezione degli SKU e ottimizzazione dei costi
 - Script di validazione automatizzati e test
 - Pianificazione delle distribuzioni e valutazione dei rischi
 
-#### Esercizi Pratici
-1. **Analisi della Capacità**: Analizza i requisiti delle risorse per le tue applicazioni
-2. **Ottimizzazione degli SKU**: Confronta e seleziona livelli di servizio convenienti
-3. **Automazione della Validazione**: Implementa script di controllo pre-distribuzione
-4. **Pianificazione dei Costi**: Crea stime e budget per i costi di distribuzione
+#### Esercizi pratici
+1. **Analisi della capacità**: Analizza i requisiti delle risorse per le tue applicazioni
+2. **Ottimizzazione SKU**: Confronta e seleziona tier di servizio economicamente vantaggiosi
+3. **Automazione della validazione**: Implementa script di controllo pre-distribuzione
+4. **Pianificazione dei costi**: Crea stime dei costi e budget per le distribuzioni
 
-#### Domande di Valutazione
-- Come si valida la capacità di Azure prima della distribuzione?
+#### Domande di valutazione
+- Come validi la capacità Azure prima della distribuzione?
 - Quali fattori influenzano le decisioni di selezione degli SKU?
-- Come si automatizza la validazione pre-distribuzione?
+- Come automatizzi la validazione pre-distribuzione?
 - Quali strategie aiutano a ottimizzare i costi di distribuzione?
 
 ---
 
-### Capitolo 7: Risoluzione dei Problemi & Debugging (Settimana 9)
-**Durata**: 1-1,5 ore | **Complessità**: ⭐⭐
+### Capitolo 7: Troubleshooting & Debugging (Settimana 9)
+**Durata**: 1-1.5 ore | **Complessità**: ⭐⭐
 
-#### Obiettivi di Apprendimento
-- Sviluppare approcci sistematici per il debugging delle distribuzioni AZD
+#### Obiettivi di apprendimento
+- Sviluppare approcci sistematici di debug per le distribuzioni AZD
 - Risolvere problemi comuni di distribuzione e configurazione
-- Debuggare problemi specifici dell'AI e problemi di prestazioni
-- Implementare monitoraggio e avvisi per rilevare proattivamente i problemi
+- Debuggare problemi specifici dell'AI e di prestazioni
+- Implementare monitoraggio e alerting per il rilevamento proattivo dei problemi
 
-#### Concetti Chiave da Padroneggiare
+#### Concetti chiave da padroneggiare
 - Tecniche diagnostiche e strategie di logging
-- Modelli comuni di errore e loro soluzioni
+- Pattern di fallimento comuni e le loro soluzioni
 - Monitoraggio delle prestazioni e ottimizzazione
-- Procedure di risposta agli incidenti e recupero
+- Procedure di risposta agli incidenti e ripristino
 
-#### Esercizi Pratici
-1. **Competenze Diagnostiche**: Esercitati con distribuzioni intenzionalmente errate
-2. **Analisi dei Log**: Usa Azure Monitor e Application Insights in modo efficace
-3. **Ottimizzazione delle Prestazioni**: Ottimizza applicazioni con prestazioni lente
-4. **Procedure di Recupero**: Implementa backup e recupero di emergenza
+#### Esercizi pratici
+1. **Competenze diagnostiche**: Esercitati con distribuzioni intenzionalmente rotte
+2. **Analisi dei log**: Usa efficacemente Azure Monitor e Application Insights
+3. **Ottimizzazione delle prestazioni**: Ottimizza applicazioni con prestazioni lente
+4. **Procedure di recupero**: Implementa backup e disaster recovery
 
-#### Domande di Valutazione
-- Quali sono i fallimenti di distribuzione AZD più comuni?
-- Come si risolvono problemi di autenticazione e permessi?
+#### Domande di valutazione
+- Quali sono i guasti di distribuzione AZD più comuni?
+- Come fai il debug di problemi di autenticazione e permessi?
 - Quali strategie di monitoraggio aiutano a prevenire problemi in produzione?
-- Come si ottimizzano le prestazioni delle applicazioni in Azure?
+- Come ottimizzi le prestazioni delle applicazioni in Azure?
 
 ---
 
-### Capitolo 8: Modelli di Produzione & Enterprise (Settimana 10-11)
+### Capitolo 8: Pattern di Produzione & Enterprise (Settimana 10-11)
 **Durata**: 2-3 ore | **Complessità**: ⭐⭐⭐⭐
 
-#### Obiettivi di Apprendimento
+#### Obiettivi di apprendimento
 - Implementare strategie di distribuzione di livello enterprise
-- Progettare modelli di sicurezza e framework di conformità
+- Progettare pattern di sicurezza e framework di conformità
 - Stabilire monitoraggio, governance e gestione dei costi
 - Creare pipeline CI/CD scalabili con integrazione AZD
-- Applicare best practice per distribuzioni di app containerizzate in produzione (sicurezza, monitoraggio, costi, CI/CD)
+- Applicare best practice per distribuzioni di container app in produzione (sicurezza, monitoraggio, costi, CI/CD)
 
-#### Concetti Chiave da Padroneggiare
-- Requisiti di sicurezza e conformità aziendali
+#### Concetti chiave da padroneggiare
+- Requisiti di sicurezza enterprise e conformità
 - Framework di governance e implementazione delle policy
 - Monitoraggio avanzato e gestione dei costi
-- Integrazione CI/CD e pipeline di distribuzione automatizzate
-- Strategie di distribuzione blue-green e canary per carichi di lavoro containerizzati
+- Integrazione CI/CD e pipeline di deployment automatizzate
+- Strategie di deployment blue-green e canary per workload containerizzati
 
-#### Esercizi Pratici
-1. **Sicurezza Aziendale**: Implementa modelli di sicurezza completi
-2. **Framework di Governance**: Configura Azure Policy e gestione delle risorse
-3. **Monitoraggio Avanzato**: Crea dashboard e avvisi automatizzati
-4. **Integrazione CI/CD**: Costruisci pipeline di distribuzione automatizzate
-5. **App Containerizzate in Produzione**: Applica sicurezza, monitoraggio e ottimizzazione dei costi all'esempio [Microservices Architecture](../../../examples/container-app/microservices)
+#### Esercizi pratici
+1. **Sicurezza enterprise**: Implementa pattern di sicurezza completi
+2. **Framework di governance**: Configura Azure Policy e gestione delle risorse
+3. **Monitoraggio avanzato**: Crea dashboard e alerting automatizzato
+4. **Integrazione CI/CD**: Costruisci pipeline di deployment automatizzate
+5. **Container Apps in produzione**: Applica sicurezza, monitoraggio e ottimizzazione dei costi all'esempio [Microservices Architecture](../../../examples/container-app/microservices)
 
-#### Domande di Valutazione
-- Come si implementa la sicurezza aziendale nelle distribuzioni AZD?
-- Quali modelli di governance garantiscono conformità e controllo dei costi?
-- Come si progetta un monitoraggio scalabile per i sistemi in produzione?
-- Quali modelli CI/CD funzionano meglio con i flussi di lavoro AZD?
+#### Domande di valutazione
+- Come implementi la sicurezza enterprise nelle distribuzioni AZD?
+- Quali pattern di governance assicurano conformità e controllo dei costi?
+- Come progetti un monitoraggio scalabile per sistemi di produzione?
+- Quali pattern CI/CD funzionano meglio con i flussi di lavoro AZD?
 
-#### Obiettivi di Apprendimento
-- Comprendere i fondamenti e i concetti chiave di Azure Developer CLI
-- Installare e configurare con successo azd nel tuo ambiente di sviluppo
-- Completare la tua prima distribuzione utilizzando un modello esistente
-- Navigare nella struttura del progetto azd e comprendere i componenti chiave
+#### Obiettivi di apprendimento
+- Comprendere i fondamenti e i concetti core di Azure Developer CLI
+- Installare e configurare correttamente azd nel tuo ambiente di sviluppo
+- Completare la tua prima distribuzione usando un template esistente
+- Navigare la struttura del progetto azd e comprendere i componenti chiave
 
-#### Concetti Chiave da Padroneggiare
-- Modelli, ambienti e servizi
+#### Concetti chiave da padroneggiare
+- Template, ambienti e servizi
 - Struttura di configurazione azure.yaml
-- Comandi di base azd (init, up, down, deploy)
+- Comandi base azd (init, up, down, deploy)
 - Principi di Infrastructure as Code
-- Autenticazione e autorizzazione Azure
+- Autenticazione e autorizzazione in Azure
 
-#### Esercizi Pratici
+#### Esercizi pratici
 
-**Esercizio 1.1: Installazione e Configurazione**
+**Esercizio 1.1: Installazione e configurazione**
 ```bash
-# Completa questi compiti:
+# Completa queste attività:
 1. Install azd using your preferred method
 2. Install Azure CLI and authenticate
 3. Verify installation with: azd version
@@ -292,9 +293,9 @@ Dopo aver completato tutte le sezioni di questa guida allo studio, sarai in grad
 5. Explore available templates: azd template list
 ```
 
-**Esercizio 1.2: Prima Distribuzione**
+**Esercizio 1.2: Prima distribuzione**
 ```bash
-# Distribuire un'applicazione web semplice:
+# Distribuire una semplice applicazione web:
 1. Initialize project: azd init --template todo-nodejs-mongo
 2. Review project structure and configuration files
 3. Deploy to Azure: azd up
@@ -302,7 +303,7 @@ Dopo aver completato tutte le sezioni di questa guida allo studio, sarai in grad
 5. Clean up resources: azd down
 ```
 
-**Esercizio 1.3: Analisi della Struttura del Progetto**
+**Esercizio 1.3: Analisi della struttura del progetto**
 ```
 Analyze the following components:
 1. azure.yaml - service definitions and hooks
@@ -311,16 +312,16 @@ Analyze the following components:
 4. .azure/ directory - environment configurations
 ```
 
-#### Domande di Auto-Valutazione
-1. Quali sono i tre concetti principali dell'architettura azd?
+#### Domande di autovalutazione
+1. Quali sono i tre concetti core dell'architettura azd?
 2. Qual è lo scopo del file azure.yaml?
-3. Come gli ambienti aiutano a gestire diversi target di distribuzione?
-4. Quali metodi di autenticazione possono essere utilizzati con azd?
+3. Come aiutano gli ambienti a gestire diversi target di distribuzione?
+4. Quali metodi di autenticazione possono essere usati con azd?
 5. Cosa succede quando esegui `azd up` per la prima volta?
 
 ---
 
-## Monitoraggio del Progresso e Framework di Valutazione
+## Tracciamento del progresso e quadro di valutazione
 ```bash
 # Creare e configurare più ambienti:
 1. Create development environment: azd env new development
@@ -330,7 +331,7 @@ Analyze the following components:
 5. Deploy the same application to different environments
 ```
 
-**Esercizio 2.2: Configurazione Avanzata**
+**Esercizio 2.2: Configurazione avanzata**
 ```yaml
 # Modify azure.yaml to include:
 1. Multiple services with different configurations
@@ -339,7 +340,7 @@ Analyze the following components:
 4. Custom resource naming patterns
 ```
 
-**Esercizio 2.3: Configurazione della Sicurezza**
+**Esercizio 2.3: Configurazione della sicurezza**
 ```bash
 # Implementare le migliori pratiche di sicurezza:
 1. Configure managed identity for service authentication
@@ -348,51 +349,83 @@ Analyze the following components:
 4. Enable HTTPS and secure communication protocols
 ```
 
-#### Domande di Auto-Valutazione
-1. Come azd gestisce la precedenza delle variabili di ambiente?
-2. Cosa sono gli hook di distribuzione e quando dovresti usarli?
-3. Come si configurano diversi SKU per diversi ambienti?
+#### Domande di autovalutazione
+1. Come gestisce azd la precedenza delle variabili d'ambiente?
+2. Cosa sono i deployment hooks e quando dovresti usarli?
+3. Come configuri SKU diversi per ambienti differenti?
 4. Quali sono le implicazioni di sicurezza dei diversi metodi di autenticazione?
-5. Come si gestiscono segreti e dati di configurazione sensibili?
+5. Come gestisci segreti e dati di configurazione sensibili?
 
 ### Modulo 3: Distribuzione e Provisioning (Settimana 4)
 
-#### Obiettivi di Apprendimento
-- Padroneggiare i flussi di lavoro di distribuzione e le best practice
-- Comprendere Infrastructure as Code con i modelli Bicep
-- Implementare architetture complesse multi-servizio
-- Ottimizzare le prestazioni e l'affidabilità della distribuzione
+#### Obiettivi di apprendimento
+- Padroneggiare i flussi di lavoro di deployment e le best practice
+- Comprendere Infrastructure as Code con template Bicep
+- Implementare architetture multi-servizio complesse
+- Ottimizzare le prestazioni e l'affidabilità delle distribuzioni
 
-#### Concetti Chiave da Padroneggiare
-- Struttura e moduli dei modelli Bicep
-- Dipendenze delle risorse e ordine
-- Strategie di distribuzione (blue-green, aggiornamenti progressivi)
+#### Concetti chiave da padroneggiare
+- Struttura dei template Bicep e moduli
+- Dipendenze tra risorse e ordine
+- Strategie di deployment (blue-green, rolling updates)
 - Distribuzioni multi-regione
 - Migrazioni di database e gestione dei dati
 
-#### Esercizi Pratici
+#### Esercizi pratici
 
-**Eserc
-5. Quali sono le considerazioni per le implementazioni multi-regione?
+**Esercizio 3.1: Infrastruttura personalizzata**
+```bicep
+// Create custom Bicep templates for:
+1. Web application with custom domain and SSL
+2. Database with backup and high availability
+3. Storage account with access policies
+4. Monitoring and logging configuration
+5. Network security groups and virtual networks
+```
 
-### Modulo 4: Validazione Pre-Implementazione (Settimana 5)
+**Esercizio 3.2: Applicazione multi-servizio**
+```bash
+# Distribuire un'architettura a microservizi:
+1. Frontend web application
+2. Backend API service
+3. Database service
+4. Message queue service
+5. Background worker service
+```
 
-#### Obiettivi di Apprendimento
-- Implementare controlli pre-implementazione completi
-- Padroneggiare la pianificazione della capacità e la validazione delle risorse
-- Comprendere la selezione degli SKU e l'ottimizzazione dei costi
-- Creare pipeline di validazione automatizzate
+**Esercizio 3.3: Integrazione del database**
+```bash
+# Implementare pattern di deployment del database:
+1. Deploy PostgreSQL with connection pooling
+2. Implement schema migrations
+3. Configure backup and recovery procedures
+4. Set up read replicas for performance
+5. Implement data seeding for different environments
+```
 
-#### Concetti Chiave da Padroneggiare
+#### Domande di autovalutazione
+1. Quali sono i vantaggi dell'uso di Bicep rispetto ai template ARM?
+2. Come gestisci le migrazioni di database nelle distribuzioni azd?
+3. Quali strategie esistono per distribuzioni senza downtime?
+4. Come gestisci le dipendenze tra servizi?
+5. Quali sono le considerazioni per le distribuzioni multi-regione?
+
+### Modulo 4: Validazione Pre-Distribuzione (Settimana 5)
+- Implementare controlli pre-distribuzione completi
+- Padroneggiare la pianificazione della capacità e la convalida delle risorse
+- Comprendere la selezione SKU e l'ottimizzazione dei costi
+- Costruire pipeline di convalida automatizzate
+
+#### Concetti chiave da padroneggiare
 - Quote e limiti delle risorse Azure
-- Criteri di selezione degli SKU e implicazioni sui costi
-- Script e strumenti di validazione automatizzati
+- Criteri di selezione SKU e implicazioni sui costi
+- Script e strumenti di convalida automatizzati
 - Metodologie di pianificazione della capacità
-- Test delle prestazioni e ottimizzazione
+- Test di prestazioni e ottimizzazione
 
-#### Esercizi Pratici
+#### Esercizi pratici
 
-**Esercizio 4.1: Pianificazione della Capacità**
+**Exercise 4.1: Capacity Planning**
 ```bash
 # Implementare la validazione della capacità:
 1. Create scripts to check Azure quotas
@@ -402,7 +435,7 @@ Analyze the following components:
 5. Document capacity requirements for each environment
 ```
 
-**Esercizio 4.2: Validazione Pre-Implementazione**
+**Exercise 4.2: Pre-flight Validation**
 ```powershell
 # Costruire una pipeline di validazione completa:
 1. Authentication and permissions validation
@@ -412,9 +445,9 @@ Analyze the following components:
 5. Cost estimation and budget verification
 ```
 
-**Esercizio 4.3: Ottimizzazione degli SKU**
+**Exercise 4.3: SKU Optimization**
 ```bash
-# Ottimizzare le configurazioni del servizio:
+# Ottimizza le configurazioni del servizio:
 1. Compare performance characteristics of different SKUs
 2. Implement cost-effective development configurations
 3. Design high-performance production configurations
@@ -422,33 +455,33 @@ Analyze the following components:
 5. Set up auto-scaling policies
 ```
 
-#### Domande di Auto-Valutazione
-1. Quali fattori dovrebbero influenzare le decisioni sulla selezione degli SKU?
-2. Come si valida la disponibilità delle risorse Azure prima dell'implementazione?
-3. Quali sono i componenti chiave di un sistema di controllo pre-implementazione?
-4. Come si stimano e controllano i costi di implementazione?
-5. Quali monitoraggi sono essenziali per la pianificazione della capacità?
+#### Domande di autovalutazione
+1. Quali fattori dovrebbero influenzare le decisioni di selezione dello SKU?
+2. Come si convalida la disponibilità delle risorse Azure prima della distribuzione?
+3. Quali sono i componenti chiave di un sistema di controlli pre-flight?
+4. Come si stimano e si controllano i costi di distribuzione?
+5. Quale monitoraggio è essenziale per la pianificazione della capacità?
 
-### Modulo 5: Risoluzione dei Problemi e Debugging (Settimana 6)
+### Modulo 5: Risoluzione dei problemi e Debug (Settimana 6)
 
-#### Obiettivi di Apprendimento
-- Padroneggiare metodologie sistematiche di risoluzione dei problemi
-- Sviluppare competenze nel debugging di problemi complessi di implementazione
-- Implementare monitoraggio e avvisi completi
-- Creare procedure di risposta agli incidenti e di recupero
+#### Obiettivi di apprendimento
+- Padroneggiare metodologie sistematiche di troubleshooting
+- Sviluppare competenze nel debug di problemi di deployment complessi
+- Implementare monitoraggio e alerting completi
+- Costruire procedure di risposta agli incidenti e di recupero
 
-#### Concetti Chiave da Padroneggiare
-- Modelli comuni di fallimento delle implementazioni
+#### Concetti chiave da padroneggiare
+- Pattern comuni di fallimento nelle distribuzioni
 - Tecniche di analisi e correlazione dei log
 - Monitoraggio delle prestazioni e ottimizzazione
 - Rilevamento e risposta agli incidenti di sicurezza
-- Recupero dai disastri e continuità aziendale
+- Disaster recovery e continuità operativa
 
-#### Esercizi Pratici
+#### Esercizi pratici
 
-**Esercizio 5.1: Scenari di Risoluzione dei Problemi**
+**Exercise 5.1: Troubleshooting Scenarios**
 ```bash
-# Pratica la risoluzione di problemi comuni:
+# Esercitati a risolvere problemi comuni:
 1. Authentication and authorization failures
 2. Resource provisioning conflicts
 3. Application startup and runtime errors
@@ -456,9 +489,9 @@ Analyze the following components:
 5. Performance and scaling issues
 ```
 
-**Esercizio 5.2: Implementazione del Monitoraggio**
+**Exercise 5.2: Monitoring Implementation**
 ```bash
-# Configurare un monitoraggio completo:
+# Configura un monitoraggio completo:
 1. Application performance monitoring with Application Insights
 2. Infrastructure monitoring with Azure Monitor
 3. Custom dashboards and alerting rules
@@ -466,9 +499,9 @@ Analyze the following components:
 5. Health check endpoints and automated testing
 ```
 
-**Esercizio 5.3: Risposta agli Incidenti**
+**Exercise 5.3: Incident Response**
 ```bash
-# Costruire procedure di risposta agli incidenti:
+# Sviluppare procedure di risposta agli incidenti:
 1. Create runbooks for common problems
 2. Implement automated recovery procedures
 3. Set up notification and escalation workflows
@@ -476,31 +509,31 @@ Analyze the following components:
 5. Document lessons learned and improvements
 ```
 
-#### Domande di Auto-Valutazione
-1. Qual è l'approccio sistematico per risolvere i problemi di implementazione azd?
+#### Domande di autovalutazione
+1. Qual è l'approccio sistematico al troubleshooting delle distribuzioni azd?
 2. Come si correlano i log tra più servizi e risorse?
-3. Quali metriche di monitoraggio sono più critiche per rilevare problemi precocemente?
-4. Come si implementano procedure efficaci di recupero dai disastri?
+3. Quali metriche di monitoraggio sono più critiche per la rilevazione precoce dei problemi?
+4. Come si implementano procedure efficaci di disaster recovery?
 5. Quali sono i componenti chiave di un piano di risposta agli incidenti?
 
-### Modulo 6: Argomenti Avanzati e Best Practices (Settimana 7-8)
+### Modulo 6: Argomenti avanzati e migliori pratiche (Settimane 7-8)
 
-#### Obiettivi di Apprendimento
-- Implementare modelli di implementazione di livello enterprise
+#### Obiettivi di apprendimento
+- Implementare pattern di distribuzione di livello enterprise
 - Padroneggiare l'integrazione e l'automazione CI/CD
 - Sviluppare template personalizzati e contribuire alla community
 - Comprendere requisiti avanzati di sicurezza e conformità
 
-#### Concetti Chiave da Padroneggiare
-- Modelli di integrazione delle pipeline CI/CD
+#### Concetti chiave da padroneggiare
+- Pattern di integrazione della pipeline CI/CD
 - Sviluppo e distribuzione di template personalizzati
-- Governance e conformità aziendale
+- Governance enterprise e conformità
 - Configurazioni avanzate di rete e sicurezza
 - Ottimizzazione delle prestazioni e gestione dei costi
 
-#### Esercizi Pratici
+#### Esercizi pratici
 
-**Esercizio 6.1: Integrazione CI/CD**
+**Exercise 6.1: CI/CD Integration**
 ```yaml
 # Implement automated deployment pipelines:
 1. GitHub Actions workflow for azd deployments
@@ -510,7 +543,7 @@ Analyze the following components:
 5. Security scanning and compliance checks
 ```
 
-**Esercizio 6.2: Sviluppo di Template Personalizzati**
+**Exercise 6.2: Custom Template Development**
 ```bash
 # Crea e pubblica modelli personalizzati:
 1. Design template for your organization's architecture
@@ -520,9 +553,9 @@ Analyze the following components:
 5. Publish and maintain template in template gallery
 ```
 
-**Esercizio 6.3: Implementazione Enterprise**
+**Exercise 6.3: Enterprise Implementation**
 ```bash
-# Implementa funzionalità di livello aziendale:
+# Implementare funzionalità di livello enterprise:
 1. Multi-tenant architecture with proper isolation
 2. Centralized logging and monitoring
 3. Compliance and governance controls
@@ -530,37 +563,37 @@ Analyze the following components:
 5. Disaster recovery and business continuity
 ```
 
-#### Domande di Auto-Valutazione
+#### Domande di autovalutazione
 1. Come si integra azd nei flussi di lavoro CI/CD esistenti?
 2. Quali sono le considerazioni chiave per lo sviluppo di template personalizzati?
-3. Come si implementano governance e conformità nelle implementazioni azd?
-4. Quali sono le best practices per implementazioni su scala enterprise?
+3. Come si implementano governance e conformità nelle distribuzioni azd?
+4. Quali sono le migliori pratiche per le distribuzioni su scala enterprise?
 5. Come si contribuisce efficacemente alla community azd?
 
-## Progetti Pratici
+## Progetti pratici
 
-### Progetto 1: Sito Web Portfolio Personale
+### Progetto 1: Sito portfolio personale
 **Complessità**: Principiante  
 **Durata**: 1-2 settimane
 
-Crea e implementa un sito web portfolio personale utilizzando:
-- Hosting di siti web statici su Azure Storage
-- Configurazione di un dominio personalizzato
+Costruire e distribuire un sito portfolio personale usando:
+- Hosting di siti statici su Azure Storage
+- Configurazione di dominio personalizzato
 - Integrazione CDN per prestazioni globali
-- Pipeline di implementazione automatizzata
+- Pipeline di deployment automatizzata
 
 **Consegne**:
-- Sito web funzionante implementato su Azure
-- Template azd personalizzato per implementazioni di portfolio
-- Documentazione del processo di implementazione
-- Raccomandazioni per analisi e ottimizzazione dei costi
+- Sito funzionante distribuito su Azure
+- Template azd personalizzato per deployment di portfolio
+- Documentazione del processo di distribuzione
+- Analisi dei costi e raccomandazioni di ottimizzazione
 
-### Progetto 2: Applicazione di Gestione Attività
+### Progetto 2: Applicazione di gestione attività
 **Complessità**: Intermedio  
 **Durata**: 2-3 settimane
 
-Crea un'applicazione full-stack per la gestione delle attività con:
-- Frontend React implementato su App Service
+Creare un'applicazione full-stack per la gestione delle attività con:
+- Frontend React distribuito su App Service
 - Backend API Node.js con autenticazione
 - Database PostgreSQL con migrazioni
 - Monitoraggio con Application Insights
@@ -568,54 +601,54 @@ Crea un'applicazione full-stack per la gestione delle attività con:
 **Consegne**:
 - Applicazione completa con autenticazione utente
 - Schema del database e script di migrazione
-- Dashboard di monitoraggio e regole di avviso
-- Configurazione di implementazione multi-ambiente
+- Cruscotti di monitoraggio e regole di alerting
+- Configurazione di distribuzione multi-ambiente
 
-### Progetto 3: Piattaforma E-commerce Microservizi
+### Progetto 3: Piattaforma e-commerce a microservizi
 **Complessità**: Avanzato  
 **Durata**: 4-6 settimane
 
-Progetta e implementa una piattaforma e-commerce basata su microservizi:
-- Servizi API multipli (catalogo, ordini, pagamenti, utenti)
-- Integrazione di code di messaggi con Service Bus
+Progettare e implementare una piattaforma e-commerce basata su microservizi:
+- Molteplici servizi API (catalogo, ordini, pagamenti, utenti)
+- Integrazione con message queue tramite Service Bus
 - Cache Redis per ottimizzazione delle prestazioni
 - Logging e monitoraggio completi
 
-**Esempio di Riferimento**: Vedi [Architettura Microservizi](../../../examples/container-app/microservices) per un template pronto per la produzione e guida all'implementazione
+**Esempio di riferimento**: Vedi [Architettura a microservizi](../../../examples/container-app/microservices) per un template pronto per la produzione e una guida al deployment
 
 **Consegne**:
-- Architettura completa basata su microservizi
-- Modelli di comunicazione tra servizi
-- Test delle prestazioni e ottimizzazione
-- Implementazione di sicurezza pronta per la produzione
+- Architettura a microservizi completa
+- Pattern di comunicazione tra servizi
+- Test di prestazioni e ottimizzazione
+- Implementazione della sicurezza pronta per la produzione
 
-## Valutazione e Certificazione
+## Valutazione e certificazione
 
-### Verifiche di Conoscenza
+### Verifiche delle conoscenze
 
 Completa queste valutazioni dopo ogni modulo:
 
 **Valutazione Modulo 1**: Concetti di base e installazione
-- Domande a scelta multipla sui concetti fondamentali
+- Domande a scelta multipla sui concetti core
 - Attività pratiche di installazione e configurazione
-- Esercizio di implementazione semplice
+- Esercizio di deployment semplice
 
 **Valutazione Modulo 2**: Configurazione e ambienti
 - Scenari di gestione degli ambienti
-- Esercizi di risoluzione dei problemi di configurazione
-- Implementazione di configurazioni di sicurezza
+- Esercizi di troubleshooting della configurazione
+- Implementazione della configurazione di sicurezza
 
-**Valutazione Modulo 3**: Implementazione e provisioning
+**Valutazione Modulo 3**: Distribuzione e provisioning
 - Sfide di progettazione dell'infrastruttura
-- Scenari di implementazione multi-servizio
+- Scenari di distribuzione multi-servizio
 - Esercizi di ottimizzazione delle prestazioni
 
-**Valutazione Modulo 4**: Validazione pre-implementazione
-- Studi di caso sulla pianificazione della capacità
+**Valutazione Modulo 4**: Convalida pre-distribuzione
+- Case study di pianificazione della capacità
 - Scenari di ottimizzazione dei costi
-- Implementazione di pipeline di validazione
+- Implementazione di pipeline di convalida
 
-**Valutazione Modulo 5**: Risoluzione dei problemi e debugging
+**Valutazione Modulo 5**: Troubleshooting e debugging
 - Esercizi di diagnosi dei problemi
 - Attività di implementazione del monitoraggio
 - Simulazioni di risposta agli incidenti
@@ -625,204 +658,204 @@ Completa queste valutazioni dopo ogni modulo:
 - Sviluppo di template personalizzati
 - Scenari di architettura enterprise
 
-### Progetto Finale
+### Progetto finale (Capstone)
 
 Progetta e implementa una soluzione completa che dimostri la padronanza di tutti i concetti:
 
 **Requisiti**:
-- Architettura applicativa multi-livello
-- Ambienti di implementazione multipli
-- Monitoraggio e avvisi completi
+- Architettura applicativa multi-tier
+- Molteplici ambienti di distribuzione
+- Monitoraggio e alerting completi
 - Implementazione di sicurezza e conformità
-- Ottimizzazione dei costi e tuning delle prestazioni
+- Ottimizzazione dei costi e delle prestazioni
 - Documentazione completa e runbook
 
-**Criteri di Valutazione**:
+**Criteri di valutazione**:
 - Qualità dell'implementazione tecnica
 - Completezza della documentazione
-- Adesione alle best practices di sicurezza
+- Aderenza alla sicurezza e alle migliori pratiche
 - Ottimizzazione delle prestazioni e dei costi
-- Efficacia nel troubleshooting e monitoraggio
+- Efficacia nel troubleshooting e nel monitoraggio
 
-## Risorse di Studio e Riferimenti
+## Risorse di studio e riferimenti
 
-### Documentazione Ufficiale
-- [Documentazione Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Documentazione Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Centro Architettura Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+### Documentazione ufficiale
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
-### Risorse della Community
-- [Galleria Template AZD](https://azure.github.io/awesome-azd/)
-- [Organizzazione GitHub Azure-Samples](https://github.com/Azure-Samples)
-- [Repository GitHub Azure Developer CLI](https://github.com/Azure/azure-dev)
+### Risorse della community
+- [AZD Template Gallery](https://azure.github.io/awesome-azd/)
+- [Azure-Samples GitHub Organization](https://github.com/Azure-Samples)
+- [Azure Developer CLI GitHub Repository](https://github.com/Azure/azure-dev)
 
-### Ambienti Pratici
-- [Account Gratuito Azure](https://azure.microsoft.com/free/)
-- [Tier Gratuito Azure DevOps](https://azure.microsoft.com/services/devops/)
+### Ambienti di pratica
+- [Azure Free Account](https://azure.microsoft.com/free/)
+- [Azure DevOps Free Tier](https://azure.microsoft.com/services/devops/)
 - [GitHub Actions](https://github.com/features/actions)
 
-### Strumenti Aggiuntivi
+### Strumenti aggiuntivi
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
 - [Visual Studio Code](https://code.visualstudio.com/)
-- [Pacchetto Estensioni Azure Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)
+- [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)
 
-## Raccomandazioni per il Programma di Studio
+## Raccomandazioni sul programma di studio
 
-### Studio a Tempo Pieno (8 settimane)
-- **Settimane 1-2**: Moduli 1-2 (Introduzione, Configurazione)
-- **Settimane 3-4**: Moduli 3-4 (Implementazione, Pre-implementazione)
-- **Settimane 5-6**: Moduli 5-6 (Risoluzione dei Problemi, Argomenti Avanzati)
-- **Settimane 7-8**: Progetti Pratici e Valutazione Finale
+### Studio a tempo pieno (8 settimane)
+- **Settimane 1-2**: Moduli 1-2 (Primi passi, Configurazione)
+- **Settimane 3-4**: Moduli 3-4 (Distribuzione, Pre-distribuzione)
+- **Settimane 5-6**: Moduli 5-6 (Troubleshooting, Argomenti avanzati)
+- **Settimane 7-8**: Progetti pratici e valutazione finale
 
-### Studio Part-Time (16 settimane)
-- **Settimane 1-4**: Modulo 1 (Introduzione)
-- **Settimane 5-7**: Modulo 2 (Configurazione e Ambienti)
-- **Settimane 8-10**: Modulo 3 (Implementazione e Provisioning)
-- **Settimane 11-12**: Modulo 4 (Validazione Pre-implementazione)
-- **Settimane 13-14**: Modulo 5 (Risoluzione dei Problemi e Debugging)
-- **Settimane 15-16**: Modulo 6 (Argomenti Avanzati e Valutazione)
+### Studio part-time (16 settimane)
+- **Settimane 1-4**: Modulo 1 (Primi passi)
+- **Settimane 5-7**: Modulo 2 (Configurazione e ambienti)
+- **Settimane 8-10**: Modulo 3 (Distribuzione e provisioning)
+- **Settimane 11-12**: Modulo 4 (Convalida pre-distribuzione)
+- **Settimane 13-14**: Modulo 5 (Troubleshooting e debugging)
+- **Settimane 15-16**: Modulo 6 (Argomenti avanzati e valutazione)
 
 ---
 
-## Monitoraggio del Progresso e Framework di Valutazione
+## Quadro di monitoraggio dei progressi e valutazione
 
-### Checklist di Completamento Capitoli
+### Lista di controllo per il completamento del capitolo
 
-Monitora il tuo progresso attraverso ogni capitolo con questi risultati misurabili:
+Monitora i tuoi progressi attraverso ogni capitolo con questi risultati misurabili:
 
-#### 📚 Capitolo 1: Fondamenti & Avvio Rapido
-- [ ] **Installazione Completata**: AZD installato e verificato sulla tua piattaforma
-- [ ] **Prima Implementazione**: Template todo-nodejs-mongo implementato con successo
-- [ ] **Configurazione Ambiente**: Variabili di ambiente configurate per la prima volta
-- [ ] **Navigazione Risorse**: Esplorate risorse implementate nel Portale Azure
-- [ ] **Padronanza Comandi**: Familiarità con i comandi di base AZD
+#### 📚 Capitolo 1: Fondamenti e Avvio rapido
+- [ ] **Installazione completata**: AZD installato e verificato sulla tua piattaforma
+- [ ] **Primo deployment**: Template todo-nodejs-mongo distribuito con successo
+- [ ] **Configurazione ambiente**: Variabili d'ambiente iniziali configurate
+- [ ] **Navigazione risorse**: Risorse distribuite esplorate in Azure Portal
+- [ ] **Padronanza comandi**: Familiarità con i comandi di base AZD
 
 #### 🤖 Capitolo 2: Sviluppo AI-First  
-- [ ] **Implementazione Template AI**: Template azure-search-openai-demo implementato con successo
-- [ ] **Implementazione RAG**: Configurazione di indicizzazione e recupero documenti
-- [ ] **Configurazione Modelli**: Configurati modelli AI multipli con scopi diversi
-- [ ] **Monitoraggio AI**: Implementato Application Insights per carichi di lavoro AI
-- [ ] **Ottimizzazione Prestazioni**: Ottimizzate le prestazioni dell'applicazione AI
+- [ ] **Deploy template AI**: azure-search-openai-demo distribuito con successo
+- [ ] **Implementazione RAG**: Indicizzazione e retrieval dei documenti configurati
+- [ ] **Configurazione modelli**: Più modelli AI configurati per scopi diversi
+- [ ] **Monitoraggio AI**: Application Insights implementato per i workload AI
+- [ ] **Ottimizzazione prestazioni**: Performance dell'app AI ottimizzate
 
-#### ⚙️ Capitolo 3: Configurazione & Autenticazione
-- [ ] **Setup Multi-Ambiente**: Configurati ambienti dev, staging e prod
-- [ ] **Implementazione Sicurezza**: Configurata autenticazione con identità gestita
-- [ ] **Gestione Segreti**: Integrato Azure Key Vault per dati sensibili
-- [ ] **Gestione Parametri**: Creata configurazione specifica per ambiente
-- [ ] **Padronanza Autenticazione**: Implementati modelli di accesso sicuro
+#### ⚙️ Capitolo 3: Configurazione e Autenticazione
+- [ ] **Setup multi-ambiente**: Ambienti dev, staging e prod configurati
+- [ ] **Implementazione sicurezza**: Autenticazione con managed identity configurata
+- [ ] **Gestione segreti**: Azure Key Vault integrato per dati sensibili
+- [ ] **Gestione parametri**: Configurazioni specifiche per ambiente create
+- [ ] **Padronanza autenticazione**: Pattern di accesso sicuro implementati
 
-#### 🏗️ Capitolo 4: Infrastruttura come Codice & Implementazione
-- [ ] **Creazione Template Personalizzato**: Creato template applicativo multi-servizio
-- [ ] **Padronanza Bicep**: Creati componenti infrastrutturali modulari e riutilizzabili
-- [ ] **Automazione Implementazione**: Implementati hook pre/post implementazione
-- [ ] **Progettazione Architettura**: Implementata architettura complessa basata su microservizi
-- [ ] **Ottimizzazione Template**: Template ottimizzati per prestazioni e costi
+#### 🏗️ Capitolo 4: Infrastructure as Code e Distribuzione
+- [ ] **Creazione template personalizzato**: Template per applicazione multi-servizio creato
+- [ ] **Padronanza Bicep**: Componenti infrastrutturali modulari e riutilizzabili creati
+- [ ] **Automazione deploy**: Hook pre/post deployment implementati
+- [ ] **Progettazione architettura**: Architettura microservizi complessa distribuita
+- [ ] **Ottimizzazione template**: Template ottimizzati per prestazioni e costi
 
-#### 🎯 Capitolo 5: Soluzioni AI Multi-Agent
-- [ ] **Implementazione Soluzione Retail**: Scenario retail multi-agent completato
-- [ ] **Personalizzazione Agenti**: Modificati comportamenti degli agenti Cliente e Inventario
-- [ ] **Scalabilità Architettura**: Implementato bilanciamento del carico e auto-scaling
-- [ ] **Monitoraggio Produzione**: Configurato monitoraggio e avvisi completi
-- [ ] **Ottimizzazione Prestazioni**: Ottimizzato sistema multi-agent
+#### 🎯 Capitolo 5: Soluzioni AI Multi-Agente
+- [ ] **Deploy retail**: Scenario retail multi-agente distribuito completamente
+- [ ] **Personalizzazione agenti**: Comportamenti degli agenti Customer e Inventory modificati
+- [ ] **Scalabilità architettura**: Bilanciamento del carico e auto-scaling implementati
+- [ ] **Monitoraggio produzione**: Monitoraggio e alerting completi configurati
+- [ ] **Tuning prestazioni**: Prestazioni del sistema multi-agente ottimizzate
 
-#### 🔍 Capitolo 6: Validazione Pre-Implementazione & Pianificazione
-- [ ] **Analisi Capacità**: Analizzati requisiti di risorse per applicazioni
-- [ ] **Ottimizzazione SKU**: Selezionati livelli di servizio economici
-- [ ] **Automazione Validazione**: Implementati script di controllo pre-implementazione
-- [ ] **Pianificazione Costi**: Creati stime e budget per implementazione
-- [ ] **Valutazione Rischi**: Identificati e mitigati rischi di implementazione
+#### 🔍 Capitolo 6: Convalida e pianificazione pre-distribuzione
+- [ ] **Analisi capacità**: Requisiti delle risorse analizzati per le applicazioni
+- [ ] **Ottimizzazione SKU**: Tier di servizio costo-efficaci selezionati
+- [ ] **Automazione convalida**: Script di controllo pre-deploy implementati
+- [ ] **Pianificazione costi**: Preventivi di costo e budget creati per il deployment
+- [ ] **Valutazione rischi**: Rischi di distribuzione identificati e mitigati
 
-#### 🚨 Capitolo 7: Risoluzione dei Problemi & Debugging
-- [ ] **Competenze Diagnostiche**: Debugging di implementazioni intenzionalmente errate completato
-- [ ] **Analisi Log**: Utilizzati Azure Monitor e Application Insights in modo efficace
-- [ ] **Ottimizzazione Prestazioni**: Applicazioni lente ottimizzate
-- [ ] **Procedure di Recupero**: Implementati backup e recupero dai disastri
-- [ ] **Setup Monitoraggio**: Creato monitoraggio proattivo e avvisi
+#### 🚨 Capitolo 7: Troubleshooting e Debugging
+- [ ] **Competenze diagnostiche**: Deployment intenzionalmente difettosi debugati con successo
+- [ ] **Analisi log**: Azure Monitor e Application Insights utilizzati efficacemente
+- [ ] **Ottimizzazione prestazioni**: Applicazioni lente ottimizzate
+- [ ] **Procedure di recupero**: Backup e disaster recovery implementati
+- [ ] **Setup monitoraggio**: Monitoraggio proattivo e alerting creati
 
-#### 🏢 Capitolo 8: Produzione & Modelli Enterprise
-- [ ] **Sicurezza Enterprise**: Implementati modelli di sicurezza completi
-- [ ] **Framework Governance**: Configurati Azure Policy e gestione risorse
-- [ ] **Monitoraggio Avanzato**: Creati dashboard e avvisi automatizzati
-- [ ] **Integrazione CI/CD**: Costruite pipeline di implementazione automatizzate
-- [ ] **Implementazione Conformità**: Soddisfatti requisiti di conformità aziendale
+#### 🏢 Capitolo 8: Produzione e pattern enterprise
+- [ ] **Sicurezza enterprise**: Pattern di sicurezza completi implementati
+- [ ] **Framework di governance**: Azure Policy e gestione delle risorse configurati
+- [ ] **Monitoraggio avanzato**: Cruscotti e alerting automatizzato creati
+- [ ] **Integrazione CI/CD**: Pipeline di deployment automatizzate costruite
+- [ ] **Conformità**: Requisiti di conformità enterprise soddisfatti
 
-### Cronologia di Apprendimento e Traguardi
+### Cronologia di apprendimento e milestone
 
-#### Settimana 1-2: Costruzione Fondamentale
-- **Traguardo**: Implementare la prima applicazione AI utilizzando AZD
-- **Validazione**: Applicazione funzionante accessibile tramite URL pubblico
-- **Competenze**: Flussi di lavoro AZD di base e integrazione servizi AI
+#### Settimane 1-2: Costruzione delle basi
+- **Milestone**: Distribuire la prima applicazione AI usando AZD
+- **Validazione**: Applicazione funzionante accessibile via URL pubblico
+- **Competenze**: Flussi di lavoro base di AZD e integrazione dei servizi AI
 
-#### Settimana 3-4: Padronanza Configurazione
-- **Traguardo**: Implementazione multi-ambiente con autenticazione sicura
-- **Validazione**: Stessa applicazione implementata su dev/staging/prod
-- **Competenze**: Gestione ambienti e implementazione sicurezza
+#### Settimane 3-4: Padronanza della configurazione
+- **Milestone**: Deploy multi-ambiente con autenticazione sicura
+- **Validazione**: Stessa applicazione distribuita su dev/staging/prod
+- **Competenze**: Gestione degli ambienti e implementazione della sicurezza
 
-#### Settimana 5-6: Esperienza Infrastrutturale
-- **Traguardo**: Template personalizzato per applicazione multi-servizio complessa
-- **Validazione**: Template riutilizzabile implementato da un altro membro del team
-- **Competenze**: Padronanza Bicep e automazione infrastrutturale
+#### Settimane 5-6: Competenza infrastrutturale
+- **Milestone**: Template personalizzato per applicazione multi-servizio complessa
+- **Validazione**: Template riutilizzabile distribuito da un altro membro del team
+- **Competenze**: Padronanza di Bicep e automazione infrastrutturale
 
-#### Settimana 7-8: Implementazione AI Avanzata
-- **Traguardo**: Soluzione AI multi-agent pronta per la produzione
-- **Validazione**: Sistema che gestisce carico reale con monitoraggio
-- **Competenze**: Orchestrazione multi-agent e ottimizzazione prestazioni
+#### Settimane 7-8: Implementazione AI avanzata
+- **Milestone**: Soluzione multi-agente AI pronta per la produzione
+- **Validazione**: Sistema in grado di gestire carichi reali con monitoraggio
+- **Competenze**: Orchestrazione multi-agente e ottimizzazione delle prestazioni
 
-#### Settimana 9-10: Prontezza per la Produzione
-- **Traguardo**: Implementazione di livello enterprise con piena conformità
-- **Validazione**: Supera revisione di sicurezza e audit di ottimizzazione costi
+#### Settimane 9-10: Prontezza alla produzione
+- **Milestone**: Distribuzione di livello enterprise con conformità completa
+- **Validazione**: Superata revisione di sicurezza e audit di ottimizzazione dei costi
 - **Competenze**: Governance, monitoraggio e integrazione CI/CD
 
-### Valutazione e Certificazione
+### Valutazione e certificazione
 
-#### Metodi di Validazione della Conoscenza
-1. **Implementazioni Pratiche**: Applicazioni funzionanti per ogni capitolo
-2. **Revisione Codice**: Valutazione qualità template e configurazioni
-3. **Risoluzione Problemi**: Scenari di troubleshooting e soluzioni
-4. **Insegnamento tra Pari**: Spiegare concetti ad altri studenti
-5. **Contributo della Comunità**: Condividi modelli o miglioramenti
+#### Metodi di validazione delle conoscenze
+1. **Deploy pratici**: Applicazioni funzionanti per ogni capitolo
+2. **Code review**: Valutazione della qualità di template e configurazioni
+3. **Problem solving**: Scenari di troubleshooting e relative soluzioni
+4. **Insegnamento tra pari**: Spiegare i concetti ad altri apprendenti
+5. **Contributo alla community**: Condividere template o miglioramenti
 
-#### Risultati di Sviluppo Professionale
-- **Progetti nel Portfolio**: 8 implementazioni pronte per la produzione
-- **Competenze Tecniche**: Esperienza con AZD e distribuzione AI a livello industriale
-- **Capacità di Risoluzione dei Problemi**: Risoluzione autonoma dei problemi e ottimizzazione
-- **Riconoscimento nella Comunità**: Partecipazione attiva nella comunità degli sviluppatori Azure
-- **Avanzamento di Carriera**: Competenze direttamente applicabili a ruoli nel cloud e nell'AI
+#### Risultati per lo sviluppo professionale
+- **Progetti del portfolio**: 8 distribuzioni pronte per la produzione
+- **Competenze tecniche**: Competenza nel deployment AZD e AI secondo gli standard del settore
+- **Capacità di problem-solving**: Risoluzione dei problemi e ottimizzazione in autonomia
+- **Riconoscimento nella comunità**: Partecipazione attiva nella community di sviluppatori Azure
+- **Avanzamento di carriera**: Competenze direttamente applicabili a ruoli cloud e AI
 
-#### Metriche di Successo
-- **Tasso di Successo delle Implementazioni**: >95% di implementazioni riuscite
-- **Tempo di Risoluzione dei Problemi**: <30 minuti per problemi comuni
-- **Ottimizzazione delle Prestazioni**: Miglioramenti dimostrabili in termini di costi e prestazioni
-- **Conformità alla Sicurezza**: Tutte le implementazioni rispettano gli standard di sicurezza aziendali
-- **Trasferimento di Conoscenze**: Capacità di fare da mentore ad altri sviluppatori
+#### Metriche di successo
+- **Tasso di successo dei deployment**: >95% di deployment riusciti
+- **Tempo di risoluzione**: <30 minuti per problemi comuni
+- **Ottimizzazione delle prestazioni**: Miglioramenti dimostrabili nei costi e nelle prestazioni
+- **Conformità alla sicurezza**: Tutti i deployment soddisfano gli standard di sicurezza aziendali
+- **Trasferimento di conoscenza**: Capacità di fare da mentore ad altri sviluppatori
 
-### Apprendimento Continuo e Coinvolgimento nella Comunità
+### Apprendimento continuo e coinvolgimento nella comunità
 
-#### Rimanere Aggiornati
+#### Rimani aggiornato
 - **Aggiornamenti Azure**: Segui le note di rilascio di Azure Developer CLI
-- **Eventi della Comunità**: Partecipa a eventi per sviluppatori Azure e AI
-- **Documentazione**: Contribuisci alla documentazione e agli esempi della comunità
-- **Ciclo di Feedback**: Fornisci feedback sui contenuti del corso e sui servizi Azure
+- **Eventi della comunità**: Partecipa a eventi per sviluppatori Azure e AI
+- **Documentazione**: Contribuisci alla documentazione e agli esempi della community
+- **Ciclo di feedback**: Fornisci feedback sui contenuti del corso e sui servizi Azure
 
-#### Sviluppo di Carriera
-- **Rete Professionale**: Connettiti con esperti di Azure e AI
-- **Opportunità di Parlare in Pubblico**: Presenta le tue conoscenze a conferenze o meetup
-- **Contributo Open Source**: Contribuisci a modelli e strumenti AZD
-- **Mentorship**: Guida altri sviluppatori nel loro percorso di apprendimento AZD
+#### Sviluppo della carriera
+- **Rete professionale**: Connettiti con esperti Azure e AI
+- **Opportunità di intervento**: Presenta ciò che hai imparato a conferenze o meetup
+- **Contributi open source**: Contribuisci ai template e agli strumenti AZD
+- **Mentoring**: Guida altri sviluppatori nel loro percorso di apprendimento di AZD
 
 ---
 
-**Navigazione del Capitolo:**
-- **📚 Home del Corso**: [AZD Per Principianti](../README.md)
-- **📖 Inizia a Imparare**: [Capitolo 1: Fondamenti e Avvio Rapido](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 Monitoraggio dei Progressi**: Tieni traccia dei tuoi progressi attraverso il sistema di apprendimento completo in 8 capitoli
+**Navigazione del capitolo:**
+- **📚 Home del corso**: [AZD per principianti](../README.md)
+- **📖 Inizia a imparare**: [Capitolo 1: Fondamenti e Avvio rapido](../README.md#-chapter-1-foundation--quick-start)
+- **🎯 Monitoraggio dei progressi**: Monitora i tuoi progressi attraverso il completo sistema di apprendimento di 8 capitoli
 - **🤝 Comunità**: [Azure Discord](https://discord.gg/microsoft-azure) per supporto e discussione
 
-**Monitoraggio dei Progressi di Studio**: Usa questa guida strutturata per padroneggiare Azure Developer CLI attraverso un apprendimento progressivo e pratico con risultati misurabili e benefici per lo sviluppo professionale.
+**Monitoraggio del progresso di studio**: Usa questa guida strutturata per padroneggiare Azure Developer CLI attraverso un apprendimento progressivo e pratico con risultati misurabili e benefici per lo sviluppo professionale.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatiche potrebbero contenere errori o imprecisioni. Il documento originale nella sua lingua nativa dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale umana. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+**Esclusione di responsabilità**:
+Questo documento è stato tradotto utilizzando il servizio di traduzione automatica basato su IA [Co-op Translator](https://github.com/Azure/co-op-translator). Pur impegnandoci per l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o inesattezze. Il documento originale nella lingua di origine deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale eseguita da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

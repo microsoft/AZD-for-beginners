@@ -1,49 +1,42 @@
-# Production AI Workload Best Practices with AZD
+# Üretim AI İş Yükleri İçin AZD ile En İyi Uygulamalar
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD Yeni Başlayanlar](../../README.md)
-- **📖 Current Chapter**: Bölüm 8 - Üretim ve Kurumsal Desenler
-- **⬅️ Previous Chapter**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Also Related**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎯 Course Complete**: [AZD Yeni Başlayanlar](../../README.md)
+**Bölüm Navigasyonu:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Geçerli Bölüm**: Bölüm 8 - Üretim & Kurumsal Desenler
+- **⬅️ Önceki Bölüm**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Ayrıca İlgili**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🎯 Kurs Tamamlandı**: [AZD For Beginners](../../README.md)
 
 ## Genel Bakış
 
-Bu kılavuz, Azure Developer CLI (AZD) kullanarak üretime hazır AI iş yükleri dağıtımı için kapsamlı en iyi uygulamaları sağlar. Microsoft Foundry Discord topluluğundan gelen geri bildirimler ve gerçek dünya müşteri dağıtımlarına dayanarak, bu uygulamalar üretim AI sistemlerindeki en yaygın zorlukları ele alır.
+Bu rehber, Azure Developer CLI (AZD) kullanarak üretime hazır AI iş yükleri dağıtımı için kapsamlı en iyi uygulamaları sağlar. Microsoft Foundry Discord topluluğundan ve gerçek müşteri dağıtımlarından gelen geri bildirimlere dayanan bu uygulamalar, üretim AI sistemlerindeki en yaygın zorlukları ele alır.
 
-## Ele Alınan Ana Zorluklar
+## Ele Alınan Temel Zorluklar
 
 Topluluk anketi sonuçlarımıza göre geliştiricilerin karşılaştığı en önemli zorluklar şunlardır:
 
-- **45%** çok servisli AI dağıtımlarıyla mücadele ediyor
+- **45%** çoklu servis AI dağıtımlarıyla mücadele ediyor
 - **38%** kimlik bilgileri ve gizli yönetimi ile ilgili sorunlar yaşıyor  
 - **35%** üretime hazır hale getirme ve ölçeklendirmeyi zor buluyor
-- **32%** daha iyi maliyet optimizasyon stratejilerine ihtiyaç duyuyor
-- **29%** geliştirilmiş izleme ve hata ayıklamaya ihtiyaç duyuyor
+- **32%** daha iyi maliyet optimizasyonu stratejilerine ihtiyaç duyuyor
+- **29%** geliştirilmiş izleme ve sorun giderme gerektiriyor
 
 ## Üretim AI için Mimari Desenler
 
-### Pattern 1: Microservices AI Architecture
+### Desen 1: Mikroservis AI Mimarisi
 
 **Ne zaman kullanılmalı**: Birden çok yeteneğe sahip karmaşık AI uygulamaları
 
+```mermaid
+graph TD
+    Frontend[Web Ön Uç] --- Gateway[API Ağ Geçidi] --- LB[Yük Dengeleyici]
+    Gateway --> Chat[Sohbet Hizmeti]
+    Gateway --> Image[Görüntü Hizmeti]
+    Gateway --> Text[Metin Hizmeti]
+    Chat --> OpenAI[Microsoft Foundry Modelleri]
+    Image --> Vision[Bilgisayarla Görme]
+    Text --> DocIntel[Belge Zekâsı]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Web Frontend  │────│   API Gateway   │────│  Load Balancer  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │
-                ┌───────────────┼───────────────┐
-                │               │               │
-        ┌───────▼──────┐ ┌──────▼──────┐ ┌─────▼──────┐
-        │ Chat Service │ │Image Service│ │Text Service│
-        └──────────────┘ └─────────────┘ └────────────┘
-                │               │               │
-        ┌───────▼──────┐ ┌──────▼──────┐ ┌─────▼──────┐
-        │Azure OpenAI  │ │Computer     │ │Document    │
-        │              │ │Vision       │ │Intelligence│
-        └──────────────┘ └─────────────┘ └────────────┘
-```
-
 **AZD Uygulaması**:
 
 ```yaml
@@ -67,7 +60,7 @@ services:
     host: containerapp
 ```
 
-### Pattern 2: Event-Driven AI Processing
+### Desen 2: Olay Tabanlı AI İşleme
 
 **Ne zaman kullanılmalı**: Toplu işleme, belge analizi, asenkron iş akışları
 
@@ -116,14 +109,45 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
+## AI Ajan Sağlığı Hakkında Düşünmek
+
+Geleneksel bir web uygulaması bozulduğunda belirtiler tanıdıktır: bir sayfa yüklenmez, bir API hata döndürür veya bir dağıtım başarısız olur. AI destekli uygulamalar aynı şekillerde bozulabilir—ancak açık hata mesajları üretmeyen daha ince yollarla da kötü davranabilirler.
+
+Bu bölüm, AI iş yüklerini izlemek için nerelere bakmanız gerektiğini bilmenizi sağlayacak zihinsel modeli oluşturmanıza yardımcı olur.
+
+### Ajan Sağlığı Geleneksel Uygulama Sağlığından Nasıl Farklıdır
+
+Geleneksel bir uygulama ya çalışır ya da çalışmaz. Bir AI ajanı çalışıyormuş gibi görünebilir ancak kötü sonuçlar üretebilir. Ajan sağlığını iki katmanda düşünün:
+
+| Katman | Ne İzlenmeli | Nereye Bakılmalı |
+|-------|--------------|---------------|
+| **Altyapı sağlığı** | Hizmet çalışıyor mu? Kaynaklar tahsis edildi mi? Uç noktalar erişilebilir mi? | `azd monitor`, Azure Portal kaynak sağlığı, container/uygulama günlükleri |
+| **Davranış sağlığı** | Ajan doğru yanıt veriyor mu? Yanıtlar zamanında mı? Model doğru şekilde çağrılıyor mu? | Application Insights izleri, model çağrısı gecikme metrikleri, yanıt kalite günlükleri |
+
+Altyapı sağlığı tanıdıktır—herhangi bir azd uygulaması için aynıdır. Davranış sağlığı ise AI iş yüklerinin getirdiği yeni katmandır.
+
+### AI Uygulamaları Beklendiği Gibi Davranmıyorsa Nereye Bakılmalı
+
+AI uygulamanız beklediğiniz sonuçları üretmiyorsa, işte kavramsal bir kontrol listesi:
+
+1. **Temellerle başlayın.** Uygulama çalışıyor mu? Bağımlılıklarına ulaşabiliyor mu? Herhangi bir uygulama için yaptığınız gibi `azd monitor` ve kaynak sağlığını kontrol edin.
+2. **Model bağlantısını kontrol edin.** Uygulamanız AI modelini başarılı bir şekilde çağırıyor mu? Başarısız veya zaman aşımına uğrayan model çağrıları, AI uygulaması sorunlarının en yaygın nedenidir ve uygulama günlüklerinizde görünecektir.
+3. **Modelin ne aldığına bakın.** AI yanıtları girişe (prompt ve alınan bağlam) bağlıdır. Çıktı yanlışsa, genellikle giriş yanlıştır. Uygulamanızın modele doğru verileri gönderip göndermediğini kontrol edin.
+4. **Yanıt gecikmesini gözden geçirin.** AI model çağrıları tipik API çağrılarından daha yavaştır. Uygulamanız yavaş hissediyorsa, model yanıt sürelerinin artıp artmadığını kontrol edin—bu kısıtlanma, kapasite sınırları veya bölge düzeyinde yoğunluk göstergesi olabilir.
+5. **Maliyet sinyallerine dikkat edin.** Token kullanımında veya API çağrılarında beklenmeyen artışlar bir döngü, yanlış yapılandırılmış bir prompt veya aşırı yeniden denemeler olduğunu gösterebilir.
+
+Gözlemlenebilirlik araçlarını hemen ustalıkla kullanmanız gerekmez. Ana çıkarım, AI uygulamalarının izlenecek ek bir davranış katmanına sahip olduğu ve azd'nin yerleşik izleme (`azd monitor`) sizin için her iki katmanı da araştırmaya başlamanıza yardımcı olduğudur.
+
+---
+
 ## Güvenlik En İyi Uygulamaları
 
-### 1. Sıfır Güven (Zero-Trust) Güvenlik Modeli
+### 1. Sıfır-Güven (Zero-Trust) Güvenlik Modeli
 
 **Uygulama Stratejisi**:
 - Kimlik doğrulama olmadan hizmetler arası iletişim yok
 - Tüm API çağrıları yönetilen kimlikleri kullanır
-- Özel uç noktalarla ağ izolasyonu
+- Özel uç noktalar ile ağ izolasyonu
 - En az ayrıcalık erişim kontrolleri
 
 ```bicep
@@ -320,7 +344,7 @@ var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${r
 
 ### 3. Yük Dengeleme ve Trafik Yönetimi
 
-**WAF ile Application Gateway**:
+**WAF'li Application Gateway**:
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -360,7 +384,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ### 1. Kaynakların Doğru Boyutlandırılması
 
-**Ortam Özelinde Yapılandırmalar**:
+**Ortam Özel Yapılandırmaları**:
 
 ```bash
 # Geliştirme ortamı
@@ -421,7 +445,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. Token Kullanımı Optimizasyonu
+### 3. Token Kullanım Optimizasyonu
 
 **OpenAI Maliyet Yönetimi**:
 
@@ -444,7 +468,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Yaklaşık tahmin: 1 token ≈ 4 karakter
+    // Kabaca tahmin: 1 token ≈ 4 karakter
     return Math.ceil(text.length / 4);
   }
 }
@@ -528,7 +552,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Sağlık Kontrolleri ve Çalışır Durum İzleme
+### 3. Sağlık Kontrolleri ve Çalışırlık İzleme
 
 ```bicep
 // Application Insights availability tests
@@ -803,7 +827,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Gerekli tüm servislerin çalışıp çalışmadığını kontrol edin
+# Tüm gerekli servislerin çalışıp çalışmadığını kontrol edin
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -821,35 +845,35 @@ if [[ ! $models == *"gpt-35-turbo"* ]]; then
     exit 1
 fi
 
-# AI servis bağlantısını test edin
+# AI hizmeti bağlantısını test edin
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Üretim Hazırlığı Kontrol Listesi
+## Üretim Hazırlık Kontrol Listesi
 
 ### Güvenlik ✅
 - [ ] Tüm hizmetler yönetilen kimlikleri kullanıyor
-- [ ] Gizli bilgiler Key Vault'ta saklanıyor
+- [ ] Gizli bilgiler Key Vault'ta depolanıyor
 - [ ] Özel uç noktalar yapılandırıldı
-- [ ] Ağ güvenlik grupları uygulandı
-- [ ] En az ayrıcalık ile RBAC
-- [ ] Genel uç noktalar üzerinde WAF etkin
+- [ ] Ağ güvenliği grupları uygulandı
+- [ ] RBAC en az ayrıcalık ilkesiyle
+- [ ] Genel uç noktalarda WAF etkin
 
 ### Performans ✅
 - [ ] Otomatik ölçeklendirme yapılandırıldı
 - [ ] Önbellekleme uygulandı
 - [ ] Yük dengeleme kuruldu
 - [ ] Statik içerik için CDN
-- [ ] Veritabanı bağlantı havuzu
-- [ ] Token kullanımı optimize edildi
+- [ ] Veri tabanı bağlantı havuzu
+- [ ] Token kullanım optimizasyonu
 
 ### İzleme ✅
 - [ ] Application Insights yapılandırıldı
 - [ ] Özel metrikler tanımlandı
-- [ ] Uyarı kuralları oluşturuldu
+- [ ] Uyarı kuralları yapılandırıldı
 - [ ] Pano oluşturuldu
 - [ ] Sağlık kontrolleri uygulandı
 - [ ] Günlük saklama politikaları
@@ -859,22 +883,22 @@ echo "Infrastructure validation completed successfully!"
 - [ ] Yedekleme ve kurtarma planı
 - [ ] Devre kesiciler uygulandı
 - [ ] Yeniden deneme politikaları yapılandırıldı
-- [ ] Zarif düşüş (graceful degradation)
+- [ ] Kademeli bozulma
 - [ ] Sağlık kontrol uç noktaları
 
 ### Maliyet Yönetimi ✅
 - [ ] Bütçe uyarıları yapılandırıldı
 - [ ] Kaynakların doğru boyutlandırılması
-- [ ] Geliştirme/test indirimleri uygulandı
+- [ ] Geliştirici/test indirimleri uygulandı
 - [ ] Rezerve edilmiş örnekler satın alındı
 - [ ] Maliyet izleme panosu
-- [ ] Düzenli maliyet değerlendirmeleri
+- [ ] Düzenli maliyet incelemeleri
 
 ### Uyumluluk ✅
-- [ ] Veri ikamet gereksinimleri karşılandı
-- [ ] Denetim günlüğü etkinleştirildi
+- [ ] Veri konumu gereksinimleri karşılandı
+- [ ] Denetim günlük kaydı etkinleştirildi
 - [ ] Uyumluluk politikaları uygulandı
-- [ ] Güvenlik temel ilkeleri uygulandı
+- [ ] Güvenlik temelleri uygulandı
 - [ ] Düzenli güvenlik değerlendirmeleri
 - [ ] Olay müdahale planı
 
@@ -882,19 +906,19 @@ echo "Infrastructure validation completed successfully!"
 
 ### Tipik Üretim Metrikleri
 
-| Metric | Target | Monitoring |
+| Metrik | Hedef | İzleme |
 |--------|--------|------------|
-| **Yanıt Süresi** | < 2 seconds | Application Insights |
-| **Erişilebilirlik** | 99.9% | Uptime monitoring |
-| **Hata Oranı** | < 0.1% | Application logs |
-| **Token Kullanımı** | < $500/month | Maliyet yönetimi |
-| **Eşzamanlı Kullanıcılar** | 1000+ | Load testing |
-| **Kurtarma Süresi** | < 1 hour | Disaster recovery tests |
+| **Yanıt Süresi** | < 2 saniye | Application Insights |
+| **Erişilebilirlik** | 99.9% | Çalışırlık izleme |
+| **Hata Oranı** | < 0.1% | Uygulama günlükleri |
+| **Token Kullanımı** | < $500/ay | Maliyet yönetimi |
+| **Eşzamanlı Kullanıcılar** | 1000+ | Yük testleri |
+| **Kurtarma Süresi** | < 1 saat | Felaket kurtarma testleri |
 
 ### Yük Testi
 
 ```bash
-# Yapay zeka uygulamaları için yük test betiği
+# Yapay zeka uygulamaları için yük testi betiği
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -904,17 +928,17 @@ python scripts/load_test.py \
 
 ## 🤝 Topluluk En İyi Uygulamaları
 
-Microsoft Foundry Discord topluluğundan gelen geri bildirimlere dayanarak:
+Microsoft Foundry Discord topluluğu geri bildirimlerine dayanarak:
 
 ### Topluluğun En Önemli Önerileri:
 
-1. **Küçük Başlayın, Kademeli Ölçeklendirin**: Temel SKU'larla başlayın ve gerçek kullanım bazında ölçeklendirin
+1. **Küçük Başlayın, Kademeli Ölçekleyin**: Temel SKU'larla başlayın ve gerçek kullanım temelinde ölçeklendirin
 2. **Her Şeyi İzleyin**: İlk günden itibaren kapsamlı izleme kurun
 3. **Güvenliği Otomatikleştirin**: Tutarlı güvenlik için altyapıyı kod olarak kullanın
-4. **Kapsamlı Test Yapın**: Pipeline'ınıza AI'ye özgü testleri dahil edin
-5. **Maliyetleri Planlayın**: Token kullanımını izleyin ve erken bütçe uyarıları ayarlayın
+4. **Yaygın Test Yapın**: Pipeline'ınıza AI'ye özel testleri dahil edin
+5. **Maliyetleri Planlayın**: Token kullanımını izleyin ve erken bütçe uyarıları oluşturun
 
-### Kaçınılması Gereken Yaygın Hatalar:
+### Kaçınılması Gereken Yaygın Tuzaklar:
 
 - ❌ API anahtarlarını koda gömmek
 - ❌ Uygun izlemeyi kurmamak
@@ -922,27 +946,213 @@ Microsoft Foundry Discord topluluğundan gelen geri bildirimlere dayanarak:
 - ❌ Hata senaryolarını test etmemek
 - ❌ Sağlık kontrolleri olmadan dağıtım yapmak
 
-## Ek Kaynaklar
+## AZD AI CLI Komutları ve Uzantıları
 
+AZD, üretim AI iş akışlarını kolaylaştıran AI'ye özel komut ve uzantıların büyüyen bir setini içerir. Bu araçlar yerel geliştirme ile üretim dağıtımı arasındaki boşluğu kapatır.
+
+### AI için AZD Uzantıları
+
+AZD, AI'ye özgü yetenekler eklemek için bir uzantı sistemi kullanır. Uzantıları şu şekilde kurup yönetin:
+
+```bash
+# Tüm kullanılabilir uzantıları listele (yapay zeka dahil)
+azd extension list
+
+# Foundry agents uzantısını yükle
+azd extension install azure.ai.agents
+
+# İnce ayar uzantısını yükle
+azd extension install azure.ai.finetune
+
+# Özel modeller uzantısını yükle
+azd extension install azure.ai.models
+
+# Tüm yüklü uzantıları yükselt
+azd extension upgrade --all
+```
+
+**Mevcut AI uzantıları:**
+
+| Uzantı | Amaç | Durum |
+|-----------|---------|--------|
+| `azure.ai.agents` | Foundry Agent Service yönetimi | Önizleme |
+| `azure.ai.finetune` | Foundry model ince ayarı | Önizleme |
+| `azure.ai.models` | Foundry özel modeller | Önizleme |
+| `azure.coding-agent` | Kodlama ajanı yapılandırması | Mevcut |
+
+### `azd ai agent init` ile Ajan Projelerini Başlatma
+
+`azd ai agent init` komutu, Microsoft Foundry Agent Service ile entegre edilmiş üretime hazır bir AI ajan projesinin iskeletini oluşturur:
+
+```bash
+# Bir ajan manifestinden yeni bir ajan projesi başlatın
+azd ai agent init -m <manifest-path-or-uri>
+
+# Belirli bir Foundry projesini başlatın ve hedefleyin
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Özel bir kaynak diziniyle başlatın
+azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+
+# Container Apps'i host olarak hedefleyin
+azd ai agent init -m agent-manifest.yaml --host containerapp
+```
+
+**Önemli bayraklar:**
+
+| Bayrak | Açıklama |
+|------|-------------|
+| `-m, --manifest` | Projenize eklemek için bir ajan manifesti yolu veya URI'si |
+| `-p, --project-id` | azd ortamınız için mevcut Microsoft Foundry Proje Kimliği |
+| `-s, --src` | Ajan tanımını indirmek için dizin (varsayılan `src/<agent-id>`) |
+| `--host` | Varsayılan host'u geçersiz kıl (örn. `containerapp`) |
+| `-e, --environment` | Kullanılacak azd ortamı |
+
+**Üretim ipucu**: `--project-id` kullanarak doğrudan mevcut bir Foundry projesine bağlanın; böylece ajan kodunuz ve bulut kaynaklarınız baştan itibaren bağlı kalır.
+
+### `azd mcp` ile Model Bağlam Protokolü (MCP)
+
+AZD, yerleşik MCP sunucusu desteği (Alpha) içerir; bu, AI ajanlarının ve araçlarının standartlaştırılmış bir protokol aracılığıyla Azure kaynaklarınızla etkileşim kurmasını sağlar:
+
+```bash
+# Projeniz için MCP sunucusunu başlatın
+azd mcp start
+
+# MCP işlemleri için araç onaylarını yönetin
+azd mcp consent
+```
+
+MCP sunucusu, azd proje bağlamınızı—ortamlar, hizmetler ve Azure kaynakları—AI destekli geliştirme araçlarına açar. Bu şunları sağlar:
+
+- **AI destekli dağıtım**: Kodlama ajanlarının proje durumunuzu sorgulayıp dağıtımları tetiklemesine izin verin
+- **Kaynak keşfi**: AI araçları projenizin hangi Azure kaynaklarını kullandığını keşfedebilir
+- **Ortam yönetimi**: Ajanlar dev/staging/production ortamları arasında geçiş yapabilir
+
+### `azd infra generate` ile Altyapı Üretimi
+
+Üretim AI iş yükleri için otomatik sağlamaya güvenmek yerine Altyapıyı Kod olarak oluşturup özelleştirebilirsiniz:
+
+```bash
+# Proje tanımınızdan Bicep/Terraform dosyaları oluşturun
+azd infra generate
+```
+
+Bu, IaC'i diske yazar, böylece şunları yapabilirsiniz:
+- Dağıtımdan önce altyapıyı gözden geçirmek ve denetlemek
+- Özel güvenlik politikaları eklemek (ağ kuralları, özel uç noktalar)
+- Mevcut IaC inceleme süreçleriyle entegre etmek
+- Altyapı değişikliklerini uygulama kodundan ayrı olarak versiyon kontrolüne almak
+
+### Üretim Yaşam Döngüsü Kancaları
+
+AZD kancaları, dağıtım yaşam döngüsünün her aşamasına özel mantık enjekte etmenizi sağlar—üretim AI iş akışları için kritik önemdedir:
+
+```yaml
+# azure.yaml - Production hooks example
+name: ai-production-app
+hooks:
+  preprovision:
+    shell: sh
+    run: scripts/validate-quotas.sh    # Check AI model quota before provisioning
+  postprovision:
+    shell: sh
+    run: scripts/configure-networking.sh  # Set up private endpoints
+  predeploy:
+    shell: sh
+    run: scripts/run-ai-safety-tests.sh  # Run prompt safety checks
+  postdeploy:
+    shell: sh
+    run: scripts/smoke-test.sh           # Verify agent responses post-deploy
+services:
+  agent-api:
+    project: ./src/agent
+    host: containerapp
+    hooks:
+      predeploy:
+        shell: sh
+        run: scripts/validate-model-access.sh  # Per-service hook
+```
+
+```bash
+# Geliştirme sırasında belirli bir kancayı manuel olarak çalıştırın
+azd hooks run predeploy
+```
+
+**AI iş yükleri için önerilen üretim kancaları:**
+
+| Hook | Kullanım Durumu |
+|------|----------|
+| `preprovision` | AI model kapasitesi için abonelik kotalarını doğrulayın |
+| `postprovision` | Özel uç noktaları yapılandırın, model ağırlıklarını dağıtın |
+| `predeploy` | AI güvenlik testleri çalıştırın, prompt şablonlarını doğrulayın |
+| `postdeploy` | Ajan yanıtlarını duman testi ile kontrol edin, model bağlantısını doğrulayın |
+
+### CI/CD Pipeline Yapılandırması
+
+Projenizi güvenli Azure kimlik doğrulaması ile GitHub Actions veya Azure Pipelines'a bağlamak için `azd pipeline config` kullanın:
+
+```bash
+# CI/CD boru hattını yapılandır (etkileşimli)
+azd pipeline config
+
+# Belirli bir sağlayıcıyla yapılandır
+azd pipeline config --provider github
+```
+
+Bu komut:
+- En az ayrıcalıklı erişime sahip bir service principal oluşturur
+- Federated credentials yapılandırır (saklanan gizli bilgiler yok)
+- Pipeline tanım dosyanızı oluşturur veya günceller
+- CI/CD sisteminizde gereken ortam değişkenlerini ayarlar
+
+**Pipeline yapılandırması ile üretim iş akışı:**
+
+```bash
+# 1. Üretim ortamını kurun
+azd env new production
+azd env set AZURE_OPENAI_CAPACITY 100
+
+# 2. Boru hattını yapılandırın
+azd pipeline config --provider github
+
+# 3. Boru hattı, main'e yapılan her push'ta azd deploy çalıştırır
+```
+
+### `azd add` ile Bileşen Ekleme
+
+Mevcut bir projeye Azure hizmetlerini kademeli olarak ekleyin:
+
+```bash
+# Yeni bir servis bileşenini etkileşimli olarak ekle
+azd add
+```
+
+Bu, üretim AI uygulamalarını genişletmek için özellikle kullanışlıdır—örneğin, bir vektör arama hizmeti eklemek, yeni bir ajan uç noktası eklemek veya mevcut bir dağıtıma izleme bileşeni eklemek.
+
+## Ek Kaynaklar
 - **Azure Well-Architected Framework**: [AI iş yükü yönergeleri](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Microsoft Foundry Documentation**: [Resmi belgeler](https://learn.microsoft.com/azure/ai-studio/)
 - **Community Templates**: [Azure Örnekleri](https://github.com/Azure-Samples)
 - **Discord Community**: [#Azure kanalı](https://discord.gg/microsoft-azure)
+- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - Azure AI, Foundry, dağıtım, maliyet optimizasyonu ve tanılama için 37 açık ajan becerisi. Düzenleyicinize kurun:
+  ```bash
+  npx skills add microsoft/github-copilot-for-azure
+  ```
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD Yeni Başlayanlar](../../README.md)
-- **📖 Current Chapter**: Bölüm 8 - Üretim ve Kurumsal Desenler
-- **⬅️ Previous Chapter**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Also Related**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎆 Course Complete**: [AZD Yeni Başlayanlar](../../README.md)
+**Bölüm Gezintisi:**
+- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../../README.md)
+- **📖 Geçerli Bölüm**: Bölüm 8 - Üretim ve Kurumsal Kalıplar
+- **⬅️ Önceki Bölüm**: [Bölüm 7: Sorun Giderme](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Ayrıca İlgili**: [AI Workshop Lab](ai-workshop-lab.md)
+- **� Kurs Tamamlandı**: [AZD Yeni Başlayanlar İçin](../../README.md)
 
-**Unutmayın**: Üretim AI iş yükleri dikkatli planlama, izleme ve sürekli optimizasyon gerektirir. Bu desenlerle başlayın ve bunları özel gereksinimlerinize uyacak şekilde uyarlayın.
+**Unutmayın**: Üretim yapay zeka iş yükleri dikkatli planlama, izleme ve sürekli optimizasyon gerektirir. Bu kalıplarla başlayın ve bunları özel gereksinimlerinize uyarlayın.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Feragatname:
-Bu belge, AI çeviri servisi Co-op Translator (https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilindeki metin yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından doğabilecek yanlış anlamalar veya hatalı yorumlamalardan sorumlu değiliz.
+**Feragatname**:
+Bu belge AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk konusunda özen göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi ana dilindeki versiyonu yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucunda ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

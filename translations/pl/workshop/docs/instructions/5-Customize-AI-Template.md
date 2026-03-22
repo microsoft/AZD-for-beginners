@@ -1,24 +1,24 @@
-# 5. Dostosuj Szablon
+# 5. Dostosuj szablon
 
-!!! tip "NA KONIEC TEGO MODUŁU BĘDZIESZ UMIEĆ"
+!!! tip "NA KONIEC TEGO MODUŁU BĘDZIESZ MIAŁ MOŻLIWOŚĆ"
 
-    - [ ] Poznać domyślne możliwości agenta AI
-    - [ ] Dodać AI Search z własnym indeksem
-    - [ ] Aktywować i analizować metryki śledzenia
-    - [ ] Przeprowadzić wykonanie ewaluacji
-    - [ ] Wykonać skan red-teaming
-    - [ ] **Laboratorium 5: Zbudować Plan Dostosowania** 
+    - [ ] Zapoznania się z domyślnymi możliwościami agenta AI
+    - [ ] Dodania wyszukiwania AI z własnym indeksem
+    - [ ] Aktywowania i analizowania metryk śledzenia
+    - [ ] Wykonania uruchomienia ewaluacji
+    - [ ] Przeprowadzenia skanowania red-teaming
+    - [ ] **Laboratorium 5: Stworzenia planu dostosowania**
 
 ---
 
-## 5.1 Możliwości Agenta AI
+## 5.1 Możliwości agenta AI
 
 !!! success "Ukończyliśmy to w Laboratorium 01"
 
-- **Wyszukiwanie w plikach**: Wbudowane wyszukiwanie plików OpenAI do pozyskiwania wiedzy
+- **Wyszukiwanie plików**: Wbudowane wyszukiwanie plików OpenAI do pozyskiwania wiedzy
 - **Cytowania**: Automatyczne przypisywanie źródeł w odpowiedziach
-- **Dostosowywalne instrukcje**: Modyfikuj zachowanie i osobowość agenta
-- **Integracja narzędzi**: Rozszerzalny system narzędzi dla niestandardowych możliwości
+- **Dostosowywalne instrukcje**: Modyfikacja zachowania i osobowości agenta
+- **Integracja narzędzi**: Rozszerzalny system narzędzi dla niestandardowych funkcji
 
 ---
 
@@ -40,22 +40,22 @@
 
 ---
 
-**OpenAI File Search (Domyślnie):**
+**Wbudowane wyszukiwanie plików OpenAI (domyślne):**
 
 - Wbudowane w Foundry Agents
 - Automatyczne przetwarzanie i indeksowanie dokumentów
 - Nie wymaga dodatkowej konfiguracji
 
-**Azure AI Search (Opcjonalnie):**
+**Azure AI Search (opcjonalne):**
 
 - Hybrydowe wyszukiwanie semantyczne i wektorowe
-- Zarządzanie niestandardowym indeksem
+- Zarządzanie własnym indeksem
 - Zaawansowane możliwości wyszukiwania
 - Wymaga `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
-## 5.3 [Śledzenie i Monitorowanie](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [Śledzenie i monitorowanie](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
 !!! task "Aby to ukończyć, musimy wprowadzić zmiany i ponownie wdrożyć"    
     
@@ -66,26 +66,26 @@
 
 **Śledzenie:**
 
-- Integracja OpenTelemetry
-- Śledzenie zapytań/odpowiedzi
+- Integracja z OpenTelemetry
+- Śledzenie żądań/odpowiedzi
 - Metryki wydajności
 - Dostępne w portalu Microsoft Foundry
 
 **Logowanie:**
 
 - Logi aplikacji w Container Apps
-- Strukturalne logowanie z identyfikatorami korelacji
+- Strukturyzowane logowanie z identyfikatorami korelacji
 - Podgląd logów w czasie rzeczywistym i historycznych
 
 ---
 
-## 5.4 [Ewaluacja Agenta](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
+## 5.4 [Ocena agenta](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
-**Lokalna ewaluacja:**
+**Ocena lokalna:**
 
-- Wbudowane narzędzia oceny jakości
-- Niestandardowe skrypty ewaluacyjne
-- Testy wydajności
+- Wbudowane narzędzia oceniające jakość
+- Niestandardowe skrypty oceny
+- Benchmark wydajności
 
 **Ciągłe monitorowanie:**
 
@@ -95,35 +95,38 @@
 
 **Integracja CI/CD:**
 
-- Workflow GitHub Actions
-- Automatyczne testowanie i ocenianie
-- Testowanie porównawcze statystyczne
+- Workflow w GitHub Actions
+- Automatyczne testowanie i ocena
+- Testy porównawcze statystyczne
 
 ---
 
-## 5.5 [Agent AI do red teamingu](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [Agent do testów bezpieczeństwa AI (red teaming)](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**AI Red Teaming:**
+**Testy bezpieczeństwa AI (red teaming):**
 
 - Automatyczne skanowanie bezpieczeństwa
-- Ocena ryzyka systemów AI
-- Ewaluacja bezpieczeństwa we wszystkich kategoriach
+- Ocena ryzyka dla systemów AI
+- Ocena bezpieczeństwa w wielu kategoriach
 
 **Uwierzytelnianie:**
 
 - Managed Identity dla usług Azure
 - Opcjonalne uwierzytelnianie Azure App Service
-- Podstawowe uwierzytelnianie jako awaryjne rozwiązanie dla środowiska deweloperskiego
+- Fallback podstawowego uwierzytelniania dla środowiska developerskiego
 
-!!! quote "PO ZAKOŃCZENIU TEGO LABORATORIUM POWINIENEŚ MIEĆ"
-    - [ ] Określone wymagania scenariusza
-    - [ ] Dostosowane zmienne środowiskowe (konfiguracja)
+!!!
+
+quote "NA KONIEC TEGO LABORATORIUM POWINIENEŚ MIEĆ"
+
+    - [ ] Zdefiniowane wymagania scenariusza
+    - [ ] Dostosowane zmienne środowiskowe (config)
     - [ ] Dostosowane instrukcje agenta (zadanie)
     - [ ] Wdrożony dostosowany szablon (aplikacja)
-    - [ ] Wykonane zadania po wdrożeniu (ręczne)
-    - [ ] Przeprowadzony test ewaluacyjny
+    - [ ] Wykonane zadania po wdrożeniu (manualne)
+    - [ ] Przeprowadzona testowa ewaluacja
 
-Ten przykład demonstruje dostosowanie szablonu dla przedsiębiorstwa handlu detalicznego z dwoma wyspecjalizowanymi agentami i wieloma wdrożeniami modeli.
+Ten przykład pokazuje, jak dostosować szablon dla zastosowania w przedsiębiorstwie z dwoma wyspecjalizowanymi agentami i wieloma wdrożeniami modeli.
 
 ---
 
@@ -133,22 +136,22 @@ Ten przykład demonstruje dostosowanie szablonu dla przedsiębiorstwa handlu det
 
 #### **Wdrożenia agentów:** 
 
-   - Agent zakupowy: Pomaga klientom znaleźć i porównać produkty
+   - Agent kupującego: Pomaga klientom znajdować i porównywać produkty
    - Agent lojalnościowy: Zarządza nagrodami i promocjami klientów
 
 #### **Wdrożenia modeli:**
 
    - `gpt-4.1`: Podstawowy model czatu
-   - `o3`: Model rozumowania dla złożonych zapytań
+   - `o3`: Model rozumowania do skomplikowanych zapytań
    - `gpt-4.1-nano`: Lekki model do prostych interakcji
-   - `text-embedding-3-large`: Wysokiej jakości embedingi do wyszukiwania
+   - `text-embedding-3-large`: Wysokiej jakości osadzenia do wyszukiwania
 
 #### **Funkcje:**
 
    - Włączone śledzenie i monitorowanie
    - AI Search dla katalogu produktów
-   - Ramy oceny jakości
-   - Red teaming dla weryfikacji bezpieczeństwa
+   - System oceny dla zapewnienia jakości
+   - Red teaming do walidacji bezpieczeństwa
 
 ---
 
@@ -157,7 +160,7 @@ Ten przykład demonstruje dostosowanie szablonu dla przedsiębiorstwa handlu det
 
 #### 5.6.2.1. Konfiguracja przed wdrożeniem
 
-Utwórz skrypt instalacyjny (`setup-retail.sh`)
+Utwórz skrypt konfiguracji (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -173,8 +176,8 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Skonfiguruj główny model czatu (gpt-4o jako najbliższy dostępny model do gpt-4.1)
-azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
+# Skonfiguruj główny model czatu (gpt-4.1 jako najbliższy dostępny model do gpt-4.1)
+azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
@@ -273,12 +276,12 @@ echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Sprawdź limit w wybranym regionie
+# Sprawdź limit zasobów w wybranym regionie
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
 echo "⚠️  Please verify you have 300,000+ TPM quota for:"
-echo "   - gpt-4o: 150,000 TPM"
+echo "   - gpt-4.1: 150,000 TPM"
 echo "   - text-embedding-3-large: 75,000 TPM"
 echo "   - Additional models: 75,000+ TPM"
 
@@ -293,11 +296,11 @@ fi
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Zarejestruj wyniki wdrożenia
+# Zbierz wyniki wdrożenia
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Pobierz URL aplikacji internetowej
+# Pobierz adres URL aplikacji webowej
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
@@ -335,7 +338,7 @@ AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | t
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# Instrukcje do ręcznej konfiguracji
+# Instrukcje dotyczące ręcznej konfiguracji
 echo "
 🤖 Agent Configuration:
 
@@ -376,7 +379,7 @@ echo "
 "
 ```
 
-### 5.6.3: Testowanie i weryfikacja
+### 5.6.3: Testowanie i walidacja
 
 Utwórz `test-retail-deployment.sh`:
 
@@ -429,40 +432,40 @@ Next steps:
 
 ### 5.6.4 Oczekiwane rezultaty
 
-Po wykonaniu tego przewodnika implementacji będziesz mieć:
+Po wykonaniu tego przewodnika implementacji będziesz miał:
 
 1. **Wdrożoną infrastrukturę:**
 
       - Projekt Microsoft Foundry z wdrożeniami modeli
-      - Container Apps hostujące aplikację internetową
-      - Usługę AI Search dla katalogu produktów
+      - Container Apps hostujące aplikację webową
+      - Usługa AI Search dla katalogu produktów
       - Application Insights do monitorowania
 
-2. **Początkowego agenta:**
+2. **Wstępnego agenta:**
 
-      - Agenta zakupowego skonfigurowanego z podstawowymi instrukcjami
-      - Włączoną funkcjonalność wyszukiwania plików
+      - Agenta kupującego skonfigurowanego z podstawowymi instrukcjami
+      - Włączoną możliwość wyszukiwania plików
       - Skonfigurowane śledzenie i monitorowanie
 
 3. **Gotowość do dostosowania:**
 
-      - Ramy do dodania Agenta lojalnościowego
+      - Framework do dodania agenta lojalnościowego
       - Szablony niestandardowych instrukcji
-      - Skrypty do testowania i weryfikacji
-      - Konfiguracja monitoringu i ewaluacji
+      - Skrypty testowe i walidacyjne
+      - Konfiguracja monitorowania i oceny
 
-4. **Gotowość do produkcji:**
+4. **Gotowość produkcyjna:**
 
-      - Skanowanie bezpieczeństwa z red teamingiem
+      - Skanowanie bezpieczeństwa za pomocą red teaming
       - Monitorowanie wydajności
-      - Ramy oceny jakości
+      - System oceny jakości
       - Skalowalna architektura
 
-Ten przykład demonstruje, jak szablon AZD może być rozszerzony i dostosowany do określonych scenariuszy korporacyjnych, zachowując najlepsze praktyki dotyczące bezpieczeństwa, monitoringu i skalowalności.
+Ten przykład pokazuje, jak szablon AZD może być rozszerzony i dostosowany do specyficznych scenariuszy korporacyjnych przy zachowaniu najlepszych praktyk w zakresie bezpieczeństwa, monitorowania i skalowalności.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Zastrzeżenie**:
-Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczeniowej AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mimo że dążymy do dokładności, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku źródłowym należy uważać za źródło autorytatywne. W przypadku ważnych informacji zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+**Zastrzeżenie**:  
+Ten dokument został przetłumaczony przy użyciu usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dążymy do dokładności, prosimy pamiętać, że tłumaczenia automatyczne mogą zawierać błędy lub niedokładności. Oryginalny dokument w języku źródłowym powinien być uważany za źródło wiarygodne. W przypadku informacji istotnych zaleca się skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

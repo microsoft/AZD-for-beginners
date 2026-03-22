@@ -1,68 +1,43 @@
-# Microservices Architecture - Container App Example
+# Mikroservis Mimarisi - Container App Örneği
 
-⏱️ **Estimated Time**: 25-35 minutes | 💰 **Estimated Cost**: ~$50-100/month | ⭐ **Complexity**: Advanced
+⏱️ **Tahmini Süre**: 25-35 dakika | 💰 **Tahmini Maliyet**: ~$50-100/ay | ⭐ **Zorluk**: İleri
 
-A **simplified but functional** microservices architecture deployed to Azure Container Apps using AZD CLI. This example demonstrates service-to-service communication, container orchestration, and monitoring with a practical 2-service setup.
+Azure Container Apps'e AZD CLI kullanılarak dağıtılmış, **basit ama işlevsel** bir mikroservis mimarisi. Bu örnek, pratik bir 2-servis kurulumu ile servisler arası iletişim, konteyner orkestrasyonu ve izlemeyi gösterir.
 
-> **📚 Learning Approach**: This example starts with a minimal 2-service architecture (API Gateway + Backend Service) that you can actually deploy and learn from. After mastering this foundation, we provide guidance for expanding to a full microservices ecosystem.
+> **📚 Öğrenme Yaklaşımı**: Bu örnek, gerçekten dağıtabileceğiniz ve öğrenebileceğiniz minimal bir 2-servis mimarisiyle (API Gateway + Backend Servis) başlar. Bu temel üzerinde ustalaştıktan sonra tam bir mikroservis ekosistemine genişleme için rehberlik sağlıyoruz.
 
-## What You'll Learn
+## Neler Öğreneceksiniz
 
-By completing this example, you will:
-- Deploy multiple containers to Azure Container Apps
-- Implement service-to-service communication with internal networking
-- Configure environment-based scaling and health checks
-- Monitor distributed applications with Application Insights
-- Understand microservices deployment patterns and best practices
-- Learn progressive expansion from simple to complex architectures
+Bu örneği tamamlayarak:
+- Birden çok konteyneri Azure Container Apps'e dağıtmayı öğreneceksiniz
+- Dahili ağ ile servisler arası iletişimi uygulayacaksınız
+- Ortama bağlı ölçeklendirme ve sağlık kontrolleri yapılandıracaksınız
+- Application Insights ile dağıtık uygulamaları izleyeceksiniz
+- Mikroservis dağıtım desenleri ve en iyi uygulamaları anlayacaksınız
+- Basitten karmaşığa kademeli genişlemeyi öğreneceksiniz
 
-## Architecture
+## Mimari
 
-### Phase 1: What We're Building (Included in This Example)
+### Aşama 1: Ne İnşa Ediyoruz (Bu Örnekte Dahil)
 
+```mermaid
+graph TD
+    Internet[İnternet] -- HTTPS --> Gateway[API Ağ Geçidi<br/>Node.js Konteyneri<br/>İstekleri yönlendirir<br/>Sağlık kontrolleri<br/>İstek günlük kaydı]
+    Gateway -- HTTP internal --> Product[Ürün Servisi<br/>Python Konteyneri<br/>Ürün Oluşturma/Okuma/Güncelleme/Silme<br/>Bellek içi veri deposu<br/>REST API]
+    Product --> Insights[Application Insights<br/>İzleme ve Günlükler]
 ```
-                    ┌─────────────────────────────┐
-                    │         Internet            │
-                    └──────────────┬──────────────┘
-                                   │
-                                   │ HTTPS
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │      API Gateway            │
-                    │   (Node.js Container)       │
-                    │   - Routes requests         │
-                    │   - Health checks           │
-                    │   - Request logging         │
-                    └──────────────┬──────────────┘
-                                   │
-                                   │ HTTP (internal)
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │    Product Service          │
-                    │   (Python Container)        │
-                    │   - Product CRUD            │
-                    │   - In-memory data store    │
-                    │   - REST API                │
-                    └──────────────┬──────────────┘
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │   Application Insights      │
-                    │   (Monitoring & Logs)       │
-                    └─────────────────────────────┘
-```
+**Neden Basit Başlamalıyız?**
+- ✅ Hızlı dağıtım ve anlayış (25-35 dakika)
+- ✅ Karmaşıklık olmadan temel mikroservis desenlerini öğrenme
+- ✅ Değiştirip deneyebileceğiniz çalışan kod
+- ✅ Öğrenme maliyeti daha düşük (~$50-100/ay vs $300-1400/ay)
+- ✅ Veritabanları ve mesaj kuyruğu eklemeden önce güven kazanma
 
-**Why Start Simple?**
-- ✅ Deploy and understand quickly (25-35 minutes)
-- ✅ Learn core microservices patterns without complexity
-- ✅ Working code you can modify and experiment with
-- ✅ Lower cost for learning (~$50-100/month vs $300-1400/month)
-- ✅ Build confidence before adding databases and message queues
+**Benzetme**: Bunu araba öğrenmeye benzetin. Boş bir otoparkta (2 servis) başlarsınız, temelleri öğrenirsiniz, sonra şehir trafiğine (veritabanlı 5+ servis) geçersiniz.
 
-**Analogy**: Think of this like learning to drive. You start with an empty parking lot (2 services), master the basics, then progress to city traffic (5+ services with databases).
+### Aşama 2: Gelecekte Genişleme (Referans Mimari)
 
-### Phase 2: Future Expansion (Reference Architecture)
-
-Once you master the 2-service architecture, you can expand to:
+Bir kez 2-servis mimarisinde ustalaştığınızda, genişletebilirsiniz:
 
 ```
 Full Architecture (Not Included - For Reference)
@@ -77,127 +52,127 @@ Full Architecture (Not Included - For Reference)
 └── Azure Storage (🔜 For file storage)
 ```
 
-See "Expansion Guide" section at the end for step-by-step instructions.
+Adım adım talimatlar için sonunda yer alan "Genişleme Rehberi" bölümüne bakın.
 
-## Features Included
+## Dahil Özellikler
 
-✅ **Service Discovery**: Automatic DNS-based discovery between containers  
-✅ **Load Balancing**: Built-in load balancing across replicas  
-✅ **Auto-scaling**: Independent scaling per service based on HTTP requests  
-✅ **Health Monitoring**: Liveness and readiness probes for both services  
-✅ **Distributed Logging**: Centralized logging with Application Insights  
-✅ **Internal Networking**: Secure service-to-service communication  
-✅ **Container Orchestration**: Automatic deployment and scaling  
-✅ **Zero-Downtime Updates**: Rolling updates with revision management  
+✅ **Servis Keşfi**: Konteynerler arasında otomatik DNS tabanlı keşif  
+✅ **Yük Dengeleme**: Kopyalar arasında yerleşik yük dengeleme  
+✅ **Otomatik Ölçeklendirme**: HTTP isteklerine göre servis başına bağımsız ölçeklendirme  
+✅ **Sağlık İzleme**: Her iki servis için liveness ve readiness probe'ları  
+✅ **Dağıtık Günlükleme**: Application Insights ile merkezi günlükleme  
+✅ **Dahili Ağ**: Güvenli servisler arası iletişim  
+✅ **Konteyner Orkestrasyonu**: Otomatik dağıtım ve ölçeklendirme  
+✅ **Sıfır Kesinti Güncellemeleri**: Revizyon yönetimi ile rolling update'ler  
 
-## Prerequisites
+## Önkoşullar
 
-### Required Tools
+### Gerekli Araçlar
 
-Before starting, verify you have these tools installed:
+Başlamadan önce bu araçların yüklü olduğundan emin olun:
 
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 or higher)
+1. **[Azure Geliştirici CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (sürüm 1.0.0 veya üstü)
    ```bash
    azd version
    # Beklenen çıktı: azd sürüm 1.0.0 veya daha yüksek
    ```
 
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 or higher)
+2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (sürüm 2.50.0 veya üstü)
    ```bash
    az --version
    # Beklenen çıktı: azure-cli 2.50.0 veya daha yüksek
    ```
 
-3. **[Docker](https://www.docker.com/get-started)** (for local development/testing - optional)
+3. **[Docker](https://www.docker.com/get-started)** (yerel geliştirme/test için - isteğe bağlı)
    ```bash
    docker --version
-   # Beklenen çıktı: Docker sürümü 20.10 veya daha yüksek
+   # Beklenen çıktı: Docker sürümü 20.10 veya daha yeni
    ```
 
-### Azure Requirements
+### Azure Gereksinimleri
 
-- An active **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))
-- Permissions to create resources in your subscription
-- **Contributor** role on the subscription or resource group
+- Aktif bir **Azure aboneliği** ([ücretsiz hesap oluşturun](https://azure.microsoft.com/free/))
+- Aboneliğinizde kaynak oluşturma izinleri
+- Abonelikte veya kaynak grubunda **Contributor** rolü
 
-### Knowledge Prerequisites
+### Bilgi Önkoşulları
 
-This is an **advanced-level** example. You should have:
-- Completed the [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) 
-- Basic understanding of microservices architecture
-- Familiarity with REST APIs and HTTP
-- Understanding of container concepts
+Bu bir **ileri seviye** örnektir. Aşağıdakilere sahip olmalısınız:
+- [Basit Flask API örneğini tamamlamış olmak](../../../../../examples/container-app/simple-flask-api) 
+- Mikroservis mimarisi hakkında temel anlayış
+- REST API'ler ve HTTP hakkında aşinalık
+- Konteyner kavramları hakkında anlayış
 
-**New to Container Apps?** Start with the [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) first to learn the basics.
+**Container Apps'e yeni misiniz?** Temelleri öğrenmek için önce [Basit Flask API örneği](../../../../../examples/container-app/simple-flask-api) ile başlayın.
 
-## Quick Start (Step-by-Step)
+## Hızlı Başlangıç (Adım Adım)
 
-### Step 1: Clone and Navigate
+### Adım 1: Klonlayın ve Gezin
 
 ```bash
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/container-app/microservices
 ```
 
-**✓ Success Check**: Verify you see `azure.yaml`:
+**✓ Başarı Kontrolü**: `azure.yaml` dosyasını gördüğünüzü doğrulayın:
 ```bash
 ls
 # Beklenen: README.md, azure.yaml, infra/, src/
 ```
 
-### Step 2: Authenticate with Azure
+### Adım 2: Azure ile Kimlik Doğrulama
 
 ```bash
 azd auth login
 ```
 
-This opens your browser for Azure authentication. Sign in with your Azure credentials.
+Bu, Azure kimlik doğrulaması için tarayıcınızı açar. Azure kimlik bilgilerinizle oturum açın.
 
-**✓ Success Check**: You should see:
+**✓ Başarı Kontrolü**: Şunları görmelisiniz:
 ```
 Logged in to Azure.
 ```
 
-### Step 3: Initialize the Environment
+### Adım 3: Ortamı Başlatma
 
 ```bash
 azd init
 ```
 
-**Prompts you'll see**:
-- **Environment name**: Enter a short name (e.g., `microservices-dev`)
-- **Azure subscription**: Select your subscription
-- **Azure location**: Choose a region (e.g., `eastus`, `westeurope`)
+**Göreceğiniz istemler**:
+- **Ortam adı**: Kısa bir ad girin (örn., `microservices-dev`)
+- **Azure aboneliği**: Aboneliğinizi seçin
+- **Azure bölgesi**: Bir bölge seçin (örn., `eastus`, `westeurope`)
 
-**✓ Success Check**: You should see:
+**✓ Başarı Kontrolü**: Şunları görmelisiniz:
 ```
 SUCCESS: New project initialized!
 ```
 
-### Step 4: Deploy Infrastructure and Services
+### Adım 4: Altyapıyı ve Servisleri Dağıtma
 
 ```bash
 azd up
 ```
 
-**What happens** (takes 8-12 minutes):
-1. Creates Container Apps environment
-2. Creates Application Insights for monitoring
-3. Builds API Gateway container (Node.js)
-4. Builds Product Service container (Python)
-5. Deploys both containers to Azure
-6. Configures networking and health checks
-7. Sets up monitoring and logging
+**Ne olur** (8-12 dakika sürer):
+1. Container Apps ortamı oluşturulur
+2. İzleme için Application Insights oluşturulur
+3. API Gateway konteyneri (Node.js) derlenir
+4. Product Service konteyneri (Python) derlenir
+5. Her iki konteyner Azure'a dağıtılır
+6. Ağ ve sağlık kontrolleri yapılandırılır
+7. İzleme ve günlükleme ayarlanır
 
-**✓ Success Check**: You should see:
+**✓ Başarı Kontrolü**: Şunları görmelisiniz:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
 ```
 
-**⏱️ Time**: 8-12 minutes
+**⏱️ Süre**: 8-12 dakika
 
-### Step 5: Test the Deployment
+### Adım 5: Dağıtımı Test Etme
 
 ```bash
 # Ağ geçidi uç noktasını al
@@ -207,31 +182,31 @@ GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d
 curl $GATEWAY_URL/health
 
 # Beklenen çıktı:
-# {"durum":"sağlıklı","servis":"api-geçidi","zamanDamgası":"2025-11-19T10:30:00Z"}
+# {"status":"sağlıklı","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
 ```
 
-**Test product service through gateway**:
+**Ürün servisini gateway üzerinden test et**:
 ```bash
 # Ürünleri listele
 curl $GATEWAY_URL/api/products
 
 # Beklenen çıktı:
 # [
-#   {"id":1,"name":"Laptop","price":999.99,"stock":50},
-#   {"id":2,"name":"Mouse","price":29.99,"stock":200},
-#   {"id":3,"name":"Keyboard","price":79.99,"stock":150}
+#   {"id":1,"name":"Dizüstü Bilgisayar","price":999.99,"stock":50},
+#   {"id":2,"name":"Fare","price":29.99,"stock":200},
+#   {"id":3,"name":"Klavye","price":79.99,"stock":150}
 # ]
 ```
 
-**✓ Success Check**: Both endpoints return JSON data without errors.
+**✓ Başarı Kontrolü**: Her iki uçnokta da hatasız JSON veri döndürmelidir.
 
 ---
 
-**🎉 Congratulations!** You've deployed a microservices architecture to Azure!
+**🎉 Tebrikler!** Bir mikroservis mimarisini Azure'a dağıttınız!
 
-## Project Structure
+## Proje Yapısı
 
-All implementation files are included—this is a complete, working example:
+Tüm uygulama dosyaları dahil—bu eksiksiz, çalışan bir örnektir:
 
 ```
 microservices/
@@ -261,74 +236,74 @@ microservices/
         └── Dockerfile               # Container definition
 ```
 
-**What Each Component Does:**
+**Her Bileşen Ne Yapar:**
 
-**Infrastructure (infra/)**:
-- `main.bicep`: Orchestrates all Azure resources and their dependencies
-- `core/container-apps-environment.bicep`: Creates the Container Apps environment and Azure Container Registry
-- `core/monitor.bicep`: Sets up Application Insights for distributed logging
-- `app/*.bicep`: Individual container app definitions with scaling and health checks
+**Altyapı (infra/)**:
+- `main.bicep`: Tüm Azure kaynaklarını ve bağımlılıklarını orkestre eder
+- `core/container-apps-environment.bicep`: Container Apps ortamını ve Azure Container Registry'i oluşturur
+- `core/monitor.bicep`: Dağıtık günlükleme için Application Insights'ı ayarlar
+- `app/*.bicep`: Ölçeklendirme ve sağlık kontrolleri ile bireysel container app tanımları
 
 **API Gateway (src/api-gateway/)**:
-- Public-facing service that routes requests to backend services
-- Implements logging, error handling, and request forwarding
-- Demonstrates service-to-service HTTP communication
+- İstekleri arka uç servislere yönlendiren dışa açık servis
+- Günlükleme, hata yönetimi ve istek iletmeyi uygular
+- Servisler arası HTTP iletişimini gösterir
 
-**Product Service (src/product-service/)**:
-- Internal service with product catalog (in-memory for simplicity)
-- REST API with health checks
-- Example of backend microservice pattern
+**Ürün Servisi (src/product-service/)**:
+- Ürün kataloğuna sahip dahili servis (basitlik için bellek içi)
+- Sağlık kontrolleri ile REST API
+- Arka uç mikroservis deseni örneği
 
-## Services Overview
+## Servisler Genel Bakış
 
 ### API Gateway (Node.js/Express)
 
 **Port**: 8080  
-**Access**: Public (external ingress)  
-**Purpose**: Routes incoming requests to appropriate backend services  
+**Erişim**: Dışa açık (harici ingress)  
+**Amaç**: Gelen istekleri uygun arka uç servislerine yönlendirir  
 
-**Endpoints**:
-- `GET /` - Service information
-- `GET /health` - Health check endpoint
-- `GET /api/products` - Forward to product service (list all)
-- `GET /api/products/:id` - Forward to product service (get by ID)
+**Uç Noktalar**:
+- `GET /` - Servis bilgisi
+- `GET /health` - Sağlık kontrol uç noktası
+- `GET /api/products` - Ürün servisine ilet (tümünü listele)
+- `GET /api/products/:id` - Ürün servisine ilet (ID ile getir)
 
-**Key Features**:
-- Request routing with axios
-- Centralized logging
-- Error handling and timeout management
-- Service discovery via environment variables
-- Application Insights integration
+**Temel Özellikler**:
+- axios ile istek yönlendirme
+- Merkezi günlükleme
+- Hata yönetimi ve zaman aşımı yönetimi
+- Ortam değişkenleri aracılığıyla servis keşfi
+- Application Insights entegrasyonu
 
-**Code Highlight** (`src/api-gateway/app.js`):
+**Kod Örneği** (`src/api-gateway/app.js`):
 ```javascript
-// Dahili servis iletişimi
+// Servis içi iletişim
 app.get('/api/products', async (req, res) => {
   const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
   res.json(response.data);
 });
 ```
 
-### Product Service (Python/Flask)
+### Ürün Servisi (Python/Flask)
 
 **Port**: 8000  
-**Access**: Internal only (no external ingress)  
-**Purpose**: Manages product catalog with in-memory data  
+**Erişim**: Yalnızca dahili (harici ingress yok)  
+**Amaç**: Bellek içi veri ile ürün kataloğunu yönetir  
 
-**Endpoints**:
-- `GET /` - Service information
-- `GET /health` - Health check endpoint
-- `GET /products` - List all products
-- `GET /products/<id>` - Get product by ID
+**Uç Noktalar**:
+- `GET /` - Servis bilgisi
+- `GET /health` - Sağlık kontrol uç noktası
+- `GET /products` - Tüm ürünleri listele
+- `GET /products/<id>` - ID ile ürünü getir
 
-**Key Features**:
-- RESTful API with Flask
-- In-memory product store (simple, no database needed)
-- Health monitoring with probes
-- Structured logging
-- Application Insights integration
+**Temel Özellikler**:
+- Flask ile RESTful API
+- Bellek içi ürün deposu (basit, veritabanı gerektirmez)
+- Probe'lar ile sağlık izleme
+- Yapılandırılmış günlükleme
+- Application Insights entegrasyonu
 
-**Data Model**:
+**Veri Modeli**:
 ```python
 {
   "id": 1,
@@ -339,17 +314,17 @@ app.get('/api/products', async (req, res) => {
 }
 ```
 
-**Why Internal Only?**
-The product service is not exposed publicly. All requests must go through the API Gateway, which provides:
-- Security: Controlled access point
-- Flexibility: Can change backend without affecting clients
-- Monitoring: Centralized request logging
+**Neden Yalnızca Dahili?**
+Ürün servisi herkese açık değildir. Tüm istekler API Gateway üzerinden gitmelidir; bu da sağlar:
+- Güvenlik: Kontrol edilen erişim noktası
+- Esneklik: Arka ucu değiştirebilme, istemcileri etkilemeden
+- İzleme: Merkezi istek günlükleme
 
-## Understanding Service Communication
+## Servis İletişimini Anlama
 
-### How Services Talk to Each Other
+### Servisler Birbiriyle Nasıl İletişim Kurar
 
-In this example, the API Gateway communicates with the Product Service using **internal HTTP calls**:
+Bu örnekte, API Gateway Ürün Servisi ile **dahili HTTP çağrıları** kullanarak iletişim kurar:
 
 ```javascript
 // API Ağ Geçidi (src/api-gateway/app.js)
@@ -359,79 +334,79 @@ const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
 const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 ```
 
-**Key Points**:
+**Önemli Noktalar**:
 
-1. **DNS-Based Discovery**: Container Apps automatically provides DNS for internal services
+1. **DNS Tabanlı Keşif**: Container Apps otomatik olarak dahili servisler için DNS sağlar
    - Product Service FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
-   - Simplified as: `http://product-service` (Container Apps resolves it)
+   - Basitleştirilmiş: `http://product-service` (Container Apps bunu çözer)
 
-2. **No Public Exposure**: Product Service has `external: false` in Bicep
-   - Only accessible within the Container Apps environment
-   - Cannot be reached from the internet
+2. **Herkese Açık Maruz Kalma Yok**: Ürün Servisi Bicep'te `external: false` olarak ayarlanmıştır
+   - Sadece Container Apps ortamı içinde erişilebilir
+   - İnternetten ulaşılamaz
 
-3. **Environment Variables**: Service URLs are injected at deployment time
-   - Bicep passes the internal FQDN to the gateway
-   - No hardcoded URLs in application code
+3. **Ortam Değişkenleri**: Servis URL'leri dağıtım zamanında enjekte edilir
+   - Bicep, gateway'e dahili FQDN'i geçirir
+   - Uygulama kodunda sabitlenmiş URL yoktur
 
-**Analogy**: Think of this like office rooms. The API Gateway is the reception desk (public-facing), and the Product Service is an office room (internal only). Visitors must go through reception to reach any office.
+**Benzetme**: Bunu ofis odalarına benzetin. API Gateway resepsiyon masasıdır (dışa açık) ve Ürün Servisi bir ofis odasıdır (yalnızca dahili). Ziyaretçiler bir odaya ulaşmak için resepsiyondan geçmelidir.
 
-## Deployment Options
+## Dağıtım Seçenekleri
 
-### Full Deployment (Recommended)
+### Tam Dağıtım (Önerilen)
 
 ```bash
 # Altyapıyı ve her iki servisi dağıtın
 azd up
 ```
 
-This deploys:
-1. Container Apps environment
+Bu dağıtır:
+1. Container Apps ortamı
 2. Application Insights
 3. Container Registry
-4. API Gateway container
-5. Product Service container
+4. API Gateway konteyneri
+5. Ürün Servisi konteyneri
 
-**Time**: 8-12 minutes
+**Süre**: 8-12 dakika
 
-### Deploy Individual Service
+### Bireysel Servisi Dağıtma
 
 ```bash
 # Sadece bir hizmet dağıtın (ilk azd up'tan sonra)
 azd deploy api-gateway
 
-# Veya ürün servisini dağıtın
+# Ya da ürün hizmetini dağıtın
 azd deploy product-service
 ```
 
-**Use Case**: When you've updated code in one service and want to redeploy only that service.
+**Kullanım Durumu**: Bir serviste kodu güncellediğinizde sadece o servisi yeniden dağıtmak istediğinizde kullanın.
 
-### Update Configuration
+### Yapılandırmayı Güncelleme
 
 ```bash
 # Ölçeklendirme parametrelerini değiştir
 azd env set GATEWAY_MAX_REPLICAS 30
 
-# Yeni yapılandırmayla yeniden dağıt
+# Yeni yapılandırma ile yeniden dağıt
 azd up
 ```
 
-## Configuration
+## Yapılandırma
 
-### Scaling Configuration
+### Ölçeklendirme Yapılandırması
 
-Both services are configured with HTTP-based autoscaling in their Bicep files:
+Her iki servis de Bicep dosyalarında HTTP tabanlı otomatik ölçeklendirme ile yapılandırılmıştır:
 
 **API Gateway**:
-- Min replicas: 2 (always at least 2 for availability)
-- Max replicas: 20
-- Scale trigger: 50 concurrent requests per replica
+- Minimum replika: 2 (erişilebilirlik için her zaman en az 2)
+- Maksimum replika: 20
+- Ölçek tetikleyici: replika başına 50 eşzamanlı istek
 
-**Product Service**:
-- Min replicas: 1 (can scale to zero if needed)
-- Max replicas: 10
-- Scale trigger: 100 concurrent requests per replica
+**Ürün Servisi**:
+- Minimum replika: 1 (gerekirse sıfıra ölçeklenebilir)
+- Maksimum replika: 10
+- Ölçek tetikleyici: replika başına 100 eşzamanlı istek
 
-**Customize Scaling** (in `infra/app/*.bicep`):
+**Ölçeklendirmeyi Özelleştir** (`infra/app/*.bicep` içinde):
 ```bicep
 scale: {
   minReplicas: 1
@@ -449,21 +424,21 @@ scale: {
 }
 ```
 
-### Resource Allocation
+### Kaynak Tahsisi
 
 **API Gateway**:
 - CPU: 1.0 vCPU
-- Memory: 2 GiB
-- Reason: Handles all external traffic
+- Bellek: 2 GiB
+- Sebep: Tüm dış trafiği yönlendirir
 
-**Product Service**:
+**Ürün Servisi**:
 - CPU: 0.5 vCPU
-- Memory: 1 GiB
-- Reason: Lightweight in-memory operations
+- Bellek: 1 GiB
+- Sebep: Bellek içi hafif işlemler
 
-### Health Checks
+### Sağlık Kontrolleri
 
-Both services include liveness and readiness probes:
+Her iki servis de liveness ve readiness probe'ları içerir:
 
 ```bicep
 probes: [
@@ -488,29 +463,29 @@ probes: [
 ]
 ```
 
-**What This Means**:
-- **Liveness**: If health check fails, Container Apps restarts the container
-- **Readiness**: If not ready, Container Apps stops routing traffic to that replica
+**Bu Ne Anlama Geliyor**:
+- **Liveness**: Sağlık kontrolü başarısız olursa, Container Apps konteyneri yeniden başlatır
+- **Readiness**: Hazır değilse, Container Apps o replikaya trafik yönlendirmeyi durdurur
 
 
 
-## Monitoring & Observability
+## İzleme ve Gözlemlenebilirlik
 
-### View Service Logs
+### Servis Günlüklerini Görüntüleme
 
 ```bash
 # azd monitor kullanarak günlükleri görüntüleyin
 azd monitor --logs
 
 # Veya belirli Container Apps için Azure CLI'yi kullanın:
-# API Gateway'den günlükleri akış halinde izleyin
+# API Gateway'den günlükleri akış halinde görüntüleyin
 az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 
-# Son ürün servisinin günlüklerini görüntüleyin
+# Ürün servisinin son günlüklerini görüntüleyin
 az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
 
-**Expected Output**:
+**Beklenen Çıktı**:
 ```
 [api-gateway] API Gateway listening on port 8080
 [api-gateway] Product Service URL: http://product-service
@@ -518,11 +493,11 @@ az containerapp logs show --name product-service --resource-group $RG_NAME --tai
 [product-service] Retrieved 5 products
 ```
 
-### Application Insights Queries
+### Application Insights Sorguları
 
-Access Application Insights in Azure Portal, then run these queries:
+Azure Portal'da Application Insights'a erişin, ardından bu sorguları çalıştırın:
 
-**Find Slow Requests**:
+**Yavaş İstekleri Bul**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -531,7 +506,7 @@ requests
 | order by count_ desc
 ```
 
-**Track Service-to-Service Calls**:
+**Servisler Arası Çağrıları İzle**:
 ```kusto
 dependencies
 | where timestamp > ago(1h)
@@ -540,7 +515,7 @@ dependencies
 | order by timestamp desc
 ```
 
-**Error Rate by Service**:
+**Servise Göre Hata Oranı**:
 ```kusto
 exceptions
 | where timestamp > ago(24h)
@@ -548,7 +523,7 @@ exceptions
 | order by errorCount desc
 ```
 
-**Request Volume Over Time**:
+**Zamana Göre İstek Hacmi**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -556,51 +531,51 @@ requests
 | render timechart
 ```
 
-### Access Monitoring Dashboard
+### İzleme Panosuna Erişim
 
 ```bash
 # Application Insights ayrıntılarını al
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Azure Portal izleme sayfasını aç
+# Azure Portal'da izlemeyi aç
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
   --query "appId" -o tsv
 ```
 
-### Live Metrics
+### Canlı Metrikler
 
-1. Navigate to Application Insights in Azure Portal
-2. Click "Live Metrics"
-3. See real-time requests, failures, and performance
-4. Test by running: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
+1. Azure Portal'da Application Insights'a gidin
+2. "Live Metrics"e tıklayın
+3. Gerçek zamanlı istekleri, hataları ve performansı görün
+4. Şunu çalıştırarak test edin: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
 
-## Practical Exercises
+## Pratik Alıştırmalar
 
-[Note: See full exercises above in the "Practical Exercises" section for detailed step-by-step exercises including deployment verification, data modification, autoscaling tests, error handling, and adding a third service.]
+[Not: Ayrıntılı adım adım alıştırmalar, dağıtım doğrulama, veri değiştirme, otomatik ölçeklendirme testleri, hata yönetimi ve üçüncü bir servis eklemeyi içeren tam alıştırmalar için yukarıdaki "Pratik Alıştırmalar" bölümüne bakın.]
 
-## Cost Analysis
+## Maliyet Analizi
 
-### Estimated Monthly Costs (For This 2-Service Example)
+### Tahmini Aylık Maliyetler (Bu 2-Servis Örneği İçin)
 
-| Resource | Configuration | Estimated Cost |
+| Kaynak | Yapılandırma | Tahmini Maliyet |
 |----------|--------------|----------------|
-| API Gateway | 2-20 replicas, 1 vCPU, 2GB RAM | $30-150 |
-| Product Service | 1-10 replicas, 0.5 vCPU, 1GB RAM | $15-75 |
+| API Gateway | 2-20 replika, 1 vCPU, 2GB RAM | $30-150 |
+| Product Service | 1-10 replika, 0.5 vCPU, 1GB RAM | $15-75 |
 | Container Registry | Basic tier | $5 |
 | Application Insights | 1-2 GB/month | $5-10 |
 | Log Analytics | 1 GB/month | $3 |
-| **Total** | | **$58-243/month** |
+| **Toplam** | | **$58-243/month** |
 
-**Cost Breakdown by Usage**:
-- **Light traffic** (testing/learning): ~$60/month
-- **Moderate traffic** (small production): ~$120/month
-- **High traffic** (busy periods): ~$240/month
+**Kullanıma Göre Maliyet Dağılımı**:
+- **Hafif trafik** (test/öğrenme): ~$60/ay
+- **Orta trafik** (küçük üretim): ~$120/ay
+- **Yüksek trafik** (yoğun dönemler): ~$240/ay
 
-### Cost Optimization Tips
+### Maliyet Optimizasyonu İpuçları
 
-1. **Scale to Zero for Development**:
+1. **Geliştirme için Sıfıra Ölçeklendir**:
    ```bicep
    scale: {
      minReplicas: 0  // Save $30-40/month when not in use
@@ -608,31 +583,32 @@ az monitor app-insights component show \
    }
    ```
 
-2. **Use Consumption Plan for Cosmos DB** (when you add it):
-   - Pay only for what you use
-   - No minimum charge
+2. **Cosmos DB için Tüketim Planını Kullanın** (eklediğinizde):
+   - Sadece kullandığınız kadar ödeyin
+   - Minimum ücret yok
 
-3. **Set Application Insights Sampling**:
+3. **Application Insights Örneklemesini Ayarlayın**:
    ```javascript
    appInsights.defaultClient.config.samplingPercentage = 50; // İsteklerin %50'sini örnekle
    ```
 
-4. **Clean Up When Not Needed**:
+4. **Kullanılmadığında Temizleyin**:
    ```bash
    azd down
    ```
 
-### Free Tier Options
-Öğrenme/test için göz önünde bulundurun:
+### Ücretsiz Katman Seçenekleri
+
+Öğrenme/test için şu seçenekleri düşünün:
 - Azure ücretsiz kredilerini kullanın (ilk 30 gün)
-- Replika sayısını minimumda tutun
-- Testten sonra silin (süregelen maliyet olmasın)
+- Replikaları minimumda tutun
+- Test sonrası silin (süregelen ücret olmasın)
 
 ---
 
 ## Temizlik
 
-Süregelen maliyetlerden kaçınmak için tüm kaynakları silin:
+Süregelen ücretlerden kaçınmak için tüm kaynakları silin:
 
 ```bash
 azd down --force --purge
@@ -647,30 +623,30 @@ Onaylamak için `y` yazın.
 
 **Neler Silinir**:
 - Container Apps Environment
-- Her iki Container App (gateway & product service)
+- Her iki Container App (gateway ve product service)
 - Container Registry
 - Application Insights
 - Log Analytics Workspace
 - Resource Group
 
-**✓ Temizlemeyi Doğrula**:
+**✓ Temizliği Doğrula**:
 ```bash
 az group list --query "[?starts_with(name,'rg-microservices')]" --output table
 ```
 
-Boş dönmeli.
+Boş dönmelidir.
 
 ---
 
-## Genişletme Rehberi: 2 hizmetten 5+ hizmete
+## Genişletme Rehberi: 2 Hizmetten 5+ Hizmete
 
-Bu 2 servisli mimariyi öğrendikten sonra genişletme yöntemleri:
+Bu 2-servis mimarisini ustalaştıktan sonra, genişletme şu şekilde yapılır:
 
 ### Aşama 1: Veritabanı Kalıcılığı Ekle (Sonraki Adım)
 
 **Ürün Servisi için Cosmos DB Ekle**:
 
-1. Create `infra/core/cosmos.bicep`:
+1. Oluşturun `infra/core/cosmos.bicep`:
    ```bicep
    resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
      name: name
@@ -685,16 +661,16 @@ Bu 2 servisli mimariyi öğrendikten sonra genişletme yöntemleri:
 
 2. Ürün servisini bellekteki veriler yerine Cosmos DB kullanacak şekilde güncelleyin
 
-3. Tahmini ek maliyet: ~$25/ay (sunucusuz)
+3. Tahmini ek maliyet: ~$25/ay (serverless)
 
-### Aşama 2: Üçüncü Servisi Ekle (Sipariş Yönetimi)
+### Aşama 2: Üçüncü Hizmeti Ekle (Sipariş Yönetimi)
 
-**Sipariş Servisini Oluştur**:
+**Sipariş Servisini Oluşturun**:
 
 1. Yeni klasör: `src/order-service/` (Python/Node.js/C#)
 2. Yeni Bicep: `infra/app/order-service.bicep`
-3. API Gateway'i `/api/orders` yönlendirecek şekilde güncelleyin
-4. Sipariş kalıcılığı için Azure SQL Veritabanı ekleyin
+3. API Gateway'i `/api/orders` yoluna yönlendirecek şekilde güncelleyin
+4. Sipariş kalıcılığı için Azure SQL Database ekleyin
 
 **Mimari şu hale gelir**:
 ```
@@ -704,11 +680,11 @@ API Gateway → Product Service (Cosmos DB)
 
 ### Aşama 3: Asenkron İletişim Ekle (Service Bus)
 
-**Olay Tabanlı Mimariyi Uygulayın**:
+**Olay Tabanlı Mimari Uygulayın**:
 
 1. Azure Service Bus ekleyin: `infra/core/servicebus.bicep`
-2. Ürün Servisi "ProductCreated" etkinliklerini yayınlar
-3. Sipariş Servisi ürün etkinliklerine abone olur
+2. Ürün Servisi "ProductCreated" olaylarını yayınlar
+3. Sipariş Servisi ürün olaylarına abone olur
 4. Olayları işlemek için Bildirim Servisi ekleyin
 
 **Desen**: İstek/Cevap (HTTP) + Olay Tabanlı (Service Bus)
@@ -717,22 +693,22 @@ API Gateway → Product Service (Cosmos DB)
 
 **Kullanıcı Servisini Uygulayın**:
 
-1. Create `src/user-service/` (Go/Node.js)
+1. Oluşturun `src/user-service/` (Go/Node.js)
 2. Azure AD B2C veya özel JWT kimlik doğrulaması ekleyin
 3. API Gateway tokenları doğrular
 4. Servisler kullanıcı izinlerini kontrol eder
 
-### Aşama 5: Üretim Hazırlığı
+### Aşama 5: Prodüksiyon Hazırlığı
 
 **Bu Bileşenleri Ekleyin**:
 - Azure Front Door (küresel yük dengeleme)
 - Azure Key Vault (gizli yönetimi)
-- Azure Monitor Workbooks (özel panolar)
-- CI/CD Boru hattı (GitHub Actions)
-- Mavi-Yeşil Dağıtımlar
-- Tüm servisler için Yönetilen Kimlik
+- Azure Monitor Workbooks (özelleştirilmiş panolar)
+- CI/CD Pipeline (GitHub Actions)
+- Blue-Green Dağıtımlar
+- Tüm servisler için Managed Identity
 
-**Tam Üretim Mimarisi Maliyeti**: ~$300-1.400/ay
+**Tam Prodüksiyon Mimarisi Maliyeti**: ~$300-1,400/ay
 
 ---
 
@@ -740,18 +716,18 @@ API Gateway → Product Service (Cosmos DB)
 
 ### İlgili Dokümantasyon
 - [Azure Container Apps Dokümantasyonu](https://learn.microsoft.com/azure/container-apps/)
-- [Mikroservis Mimarisi Kılavuzu](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
+- [Mikroservis Mimarisi Rehberi](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
 - [Dağıtık İzleme için Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
 - [Azure Developer CLI Dokümantasyonu](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
 ### Bu Kurstaki Sonraki Adımlar
-- ← Previous: [Basit Flask API](../../../../../examples/container-app/simple-flask-api) - Yeni başlayanlar için tek konteyner örneği
-- → Next: [Yapay Zeka Entegrasyon Kılavuzu](../../../../../examples/docs/ai-foundry) - Yapay Zeka yetenekleri ekleyin
+- ← Önceki: [Basit Flask API](../../../../../examples/container-app/simple-flask-api) - Yeni başlayanlar için tek konteyner örneği
+- → Sonraki: [AI Entegrasyon Rehberi](../../../../../examples/docs/ai-foundry) - AI yetenekleri ekleyin
 - 🏠 [Kurs Ana Sayfası](../../README.md)
 
-### Karşılaştırma: Ne Zaman Hangisini Kullanmalı
+### Karşılaştırma: Hangi Durumda Ne Kullanılır
 
-**Tek Konteyner Uygulaması** (Basit Flask API örneği):
+**Tek Konteyner Uygulama** (Basit Flask API örneği):
 - ✅ Basit uygulamalar
 - ✅ Monolitik mimari
 - ✅ Hızlı dağıtım
@@ -760,7 +736,7 @@ API Gateway → Product Service (Cosmos DB)
 
 **Mikroservisler** (Bu örnek):
 - ✅ Karmaşık uygulamalar
-- ✅ Servis başına bağımsız ölçeklendirme
+- ✅ Hizmet başına bağımsız ölçeklendirme
 - ✅ Ekip özerkliği (farklı servisler, farklı ekipler)
 - ❌ Yönetimi daha karmaşık
 - **Maliyet**: ~$60-250/ay
@@ -768,30 +744,30 @@ API Gateway → Product Service (Cosmos DB)
 **Kubernetes (AKS)**:
 - ✅ Maksimum kontrol ve esneklik
 - ✅ Çoklu bulut taşınabilirliği
-- ✅ Gelişmiş ağ özellikleri
+- ✅ İleri seviye ağ özellikleri
 - ❌ Kubernetes uzmanlığı gerektirir
 - **Maliyet**: ~$150-500/ay minimum
 
-**Öneri**: Başlangıç olarak Container Apps ile başlayın (bu örnek), yalnızca Kubernetes'e özgü özelliklere ihtiyacınız varsa AKS'ye geçin.
+**Öneri**: Bu örnekte olduğu gibi Container Apps ile başlayın; Kubernetes'e özgü özelliklere ihtiyacınız olursa AKS'ye geçin.
 
 ---
 
 ## Sıkça Sorulan Sorular
 
-**Q: Neden 5+'ten ziyade sadece 2 servis?**  
-A: Eğitimsel ilerleme. Karmaşıklığı eklemeden önce temel ilkeleri (servis iletişimi, izleme, ölçeklendirme) basit bir örnekle öğrenin. Burada öğrendiğiniz desenler 100 servisli mimarilere de uygulanır.
+**Q: Neden 5+' yerine sadece 2 hizmet var?**  
+A: Eğitimsel ilerleme. Temelleri (servis iletişimi, izleme, ölçeklendirme) basit bir örnekle ustalaşın, sonra karmaşıklığı ekleyin. Burada öğrendiğiniz desenler 100 servislik mimarilere uygulanır.
 
-**Q: Daha fazla servis ekleyebilir miyim?**  
-A: Kesinlikle! Yukarıdaki genişletme rehberini izleyin. Her yeni servis aynı deseni takip eder: src klasörü oluşturun, Bicep dosyası oluşturun, azure.yaml'i güncelleyin, dağıtın.
+**Q: Daha fazla hizmet ekleyebilir miyim?**  
+A: Kesinlikle! Yukarıdaki genişletme rehberini takip edin. Her yeni servis aynı deseni izler: src klasörü oluşturun, Bicep dosyası oluşturun, azure.yaml'i güncelleyin, deploy edin.
 
-**Q: Bu üretime hazır mı?**  
-A: Sağlam bir temel. Üretim için ekleyin: Yönetilen kimlik, Key Vault, kalıcı veritabanları, CI/CD hattı, izleme uyarıları ve yedekleme stratejisi.
+**Q: Bu prodüksiyon hazır mı?**  
+A: Sağlam bir temel. Prodüksiyon için ekleyin: managed identity, Key Vault, kalıcı veritabanları, CI/CD pipeline, izleme uyarıları ve yedekleme stratejisi.
 
-**Q: Neden Dapr veya diğer servis mesh'lerini kullanmıyoruz?**  
-A: Öğrenme için basit tutun. Native Container Apps ağını anladıktan sonra gelişmiş senaryolar için Dapr'ı ekleyebilirsiniz.
+**Q: Neden Dapr veya başka bir servis mesh kullanmıyoruz?**  
+A: Öğrenme için basit tutun. Native Container Apps ağını anladıktan sonra, gelişmiş senaryolar için Dapr ekleyebilirsiniz.
 
-**Q: Yerelde nasıl hata ayıklarım?**  
-A: Servisleri lokal olarak Docker ile çalıştırın:
+**Q: Lokal olarak nasıl hata ayıklarım?**  
+A: Servisleri Docker ile yerel olarak çalıştırın:
 ```bash
 cd src/api-gateway
 docker build -t local-gateway .
@@ -799,24 +775,24 @@ docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gatew
 ```
 
 **Q: Farklı programlama dilleri kullanabilir miyim?**  
-A: Evet! Bu örnek Node.js (gateway) + Python (ürün servisi) gösterir. Konteynerlerde çalışabilecek herhangi bir dili karıştırabilirsiniz.
+A: Evet! Bu örnek Node.js (gateway) + Python (product service) gösterir. Konteynerlerde çalışabilen herhangi bir dili karıştırabilirsiniz.
 
-**Q: Azure kredim yoksa ne olur?**  
-A: Azure ücretsiz katmanını kullanın (yeni hesaplar için ilk 30 gün) veya kısa test dönemleri için dağıtıp hemen silin.
+**Q: Azure kredim yoksa ne yapmalıyım?**  
+A: Azure ücretsiz katmanını kullanın (yeni hesaplarda ilk 30 gün) veya kısa test süreleri için dağıtın ve hemen silin.
 
 ---
 
-> **🎓 Öğrenme Yolu Özeti**: Otomatik ölçekleme, dahili ağ, merkezi izleme ve üretime hazır desenlerle çok servisli bir mimari dağıtmayı öğrendiniz. Bu temel sizi karmaşık dağıtık sistemler ve kurumsal mikroservis mimarilerine hazırlar.
+> **🎓 Öğrenme Yol Haritası Özeti**: Çok hizmetli bir mimariyi otomatik ölçekleme, dahili ağ, merkezi izleme ve prodüksiyon hazır desenlerle dağıtmayı öğrendiniz. Bu temel sizi karmaşık dağıtık sistemler ve kurumsal mikroservis mimarilerine hazırlar.
 
 **📚 Kurs Gezinmesi:**
-- ← Previous: [Basit Flask API](../../../../../examples/container-app/simple-flask-api)
-- → Next: [Veritabanı Entegrasyon Örneği](../../../../../examples/database-app)
+- ← Önceki: [Basit Flask API](../../../../../examples/container-app/simple-flask-api)
+- → Sonraki: [Veritabanı Entegrasyon Örneği](../../../../../examples/database-app)
 - 🏠 [Kurs Ana Sayfası](../../../README.md)
 - 📖 [Container Apps En İyi Uygulamaları](../../../docs/chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Sorumluluk Reddi:
-Bu belge, yapay zeka çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilindeki versiyonu yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı nedeniyle ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi ana dilindeki haliyle yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanılması sonucu ortaya çıkabilecek herhangi bir yanlış anlaşılma veya yanlış yorumdan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

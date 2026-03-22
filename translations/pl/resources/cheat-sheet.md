@@ -1,43 +1,43 @@
-# Command Cheat Sheet - Podstawowe polecenia AZD
+# Command Cheat Sheet - Najważniejsze Polecenia AZD
 
 **Szybkie odniesienie do wszystkich rozdziałów**
-- **📚 Strona kursu**: [AZD dla początkujących](../README.md)
-- **📖 Szybki start**: [Rozdział 1: Podstawy i szybki start](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 Polecenia AI**: [Rozdział 2: Rozwój AI-First](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Zaawansowane**: [Rozdział 4: Infrastruktura jako kod](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **📚 Strona kursu**: [AZD Dla Początkujących](../README.md)
+- **📖 Szybki start**: [Rozdział 1: Fundamenty i szybki start](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 Polecenia AI**: [Rozdział 2: AI-First Development](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Zaawansowane**: [Rozdział 4: Infrastructure as Code](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Wprowadzenie
 
-Ten obszerny cheat sheet zapewnia szybkie odniesienie do najczęściej używanych poleceń Azure Developer CLI, zorganizowanych według kategorii z praktycznymi przykładami. Idealny do szybkich wyszukiwań podczas tworzenia, rozwiązywania problemów i codziennych operacji z projektami azd.
+Ten kompleksowy cheat sheet zapewnia szybkie odniesienie do najczęściej używanych poleceń Azure Developer CLI, zorganizowanych według kategorii wraz z praktycznymi przykładami. Idealny do szybkich przeglądów podczas tworzenia, rozwiązywania problemów i codziennych operacji z projektami azd.
 
 ## Cele nauki
 
 Korzystając z tego cheat sheeta, będziesz:
-- Miał natychmiastowy dostęp do podstawowych poleceń i składni Azure Developer CLI
-- Rozumiał organizację poleceń według funkcjonalnych kategorii i zastosowań
-- Mógł odnosić się do praktycznych przykładów dla typowych scenariuszy tworzenia i wdrażania
-- Uzyska szybki dostęp do poleceń rozwiązywania problemów
-- Znalazł zaawansowane opcje konfiguracyjne i personalizacyjne
-- Oddzielnie zarządzał środowiskami i wielośrodowiskowymi przepływami pracy
+- Mieć natychmiastowy dostęp do podstawowych poleceń i składni Azure Developer CLI
+- Rozumieć organizację poleceń według funkcjonalnych kategorii i przypadków użycia
+- Odnosić się do praktycznych przykładów powszechnych scenariuszy rozwoju i wdrażania
+- Korzystać z poleceń diagnostycznych do szybkiego rozwiązywania problemów
+- Znajdować zaawansowane opcje konfiguracji i dostosowywania efektywnie
+- Lokalizować polecenia zarządzania środowiskami i workflow dla wielu środowisk
 
-## Wyniki nauki
+## Rezultaty nauki
 
-Regularne odniesienia do tego cheat sheeta pozwolą Ci:
-- Wykonywać polecenia azd pewnie bez konieczności przeglądania pełnej dokumentacji
-- Szybko rozwiązywać typowe problemy za pomocą odpowiednich poleceń diagnostycznych
+Regularnie korzystając z tego cheat sheeta, będziesz potrafić:
+- Pewnie wykonywać polecenia azd bez konieczności odwoływania się do pełnej dokumentacji
+- Szybko rozwiązywać typowe problemy przy użyciu właściwych poleceń diagnostycznych
 - Efektywnie zarządzać wieloma środowiskami i scenariuszami wdrożeń
-- Stosować zaawansowane funkcje i opcje konfiguracyjne azd według potrzeb
-- Diagnozować problemy z wdrożeniami korzystając z systematycznych sekwencji poleceń
-- Optymalizować przepływy pracy dzięki skutecznemu wykorzystaniu skrótów i opcji azd
+- Stosować zaawansowane funkcje i opcje konfiguracji azd w razie potrzeby
+- Rozwiązywać problemy z wdrożeniem korzystając z systematycznych sekwencji poleceń
+- Optymalizować workflow poprzez efektywne wykorzystanie skrótów i opcji azd
 
-## Polecenia rozpoczęcia pracy
+## Polecenia na start
 
 ### Uwierzytelnianie
 ```bash
 # Zaloguj się do Azure za pomocą AZD
 azd auth login
 
-# Zaloguj się do Azure CLI (AZD używa tego w tle)
+# Zaloguj się do Azure CLI (AZD korzysta z tego w tle)
 az login
 
 # Sprawdź bieżące konto
@@ -54,7 +54,7 @@ azd auth logout
 az logout
 ```
 
-### Inicjowanie projektu
+### Inicjalizacja projektu
 ```bash
 # Przeglądaj dostępne szablony
 azd template list
@@ -72,12 +72,12 @@ azd init --template todo-nodejs-mongo my-awesome-app
 
 ## Główne polecenia wdrożeniowe
 
-### Kompletny przepływ wdrożenia
+### Kompletny workflow wdrożenia
 ```bash
 # Wdróż wszystko (prowizja + wdrożenie)
 azd up
 
-# Wdróż bez wyświetlania monitów potwierdzenia
+# Wdróż bez potwierdzeń
 azd up --confirm-with-no-prompt
 
 # Wdróż do określonego środowiska
@@ -89,12 +89,12 @@ azd up --parameter location=westus2
 
 ### Tylko infrastruktura
 ```bash
-# Przygotuj zasoby Azure
+# Udostępnij zasoby Azure
 azd provision
 
-# 🧪 Podgląd zmian infrastruktury
+# 🧪 Podgląd zmian w infrastrukturze
 azd provision --preview
-# Pokazuje symulację zasobów, które zostałyby utworzone/modyfikowane/usunięte
+# Pokazuje symulację zasobów, które zostałyby utworzone/zmodyfikowane/usunięte
 # Podobne do 'terraform plan' lub 'bicep what-if' - bezpieczne do uruchomienia, bez wprowadzania zmian
 ```
 
@@ -111,9 +111,9 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### Kompilacja i pakowanie
+### Budowanie i pakowanie
 ```bash
-# Buduj aplikacje
+# Twórz aplikacje
 azd package
 
 # Buduj określoną usługę
@@ -150,7 +150,7 @@ azd env set DEBUG true
 # Pobierz zmienną środowiskową
 azd env get API_KEY
 
-# Wyświetl wszystkie zmienne środowiskowe
+# Wypisz wszystkie zmienne środowiskowe
 azd env get-values
 
 # Usuń zmienną środowiskową
@@ -161,29 +161,29 @@ azd env unset DEBUG
 
 ### Konfiguracja globalna
 ```bash
-# Wypisz całą konfigurację
+# Wyświetl wszystkie konfiguracje
 azd config list
 
-# Ustaw domyślne wartości globalne
+# Ustaw globalne domyślne wartości
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
 # Usuń konfigurację
 azd config unset defaults.location
 
-# Zresetuj całą konfigurację
+# Zresetuj wszystkie konfiguracje
 azd config reset
 ```
 
 ### Konfiguracja projektu
 ```bash
-# Waliduj azure.yaml
+# Zweryfikuj azure.yaml
 azd config validate
 
 # Pokaż informacje o projekcie
 azd show
 
-# Pobierz punkty końcowe usługi
+# Pobierz punkty końcowe usług
 azd show --output json
 ```
 
@@ -191,34 +191,34 @@ azd show --output json
 
 ### Panel monitorowania
 ```bash
-# Otwórz pulpit monitorowania portalu Azure
+# Otwórz pulpit nawigacyjny monitorowania portalu Azure
 azd monitor
 
-# Otwórz metryki na żywo Application Insights
+# Otwórz dane metryczne na żywo Application Insights
 azd monitor --live
 
-# Otwórz panel logów Application Insights
+# Otwórz panel dzienników Application Insights
 azd monitor --logs
 
 # Otwórz przegląd Application Insights
 azd monitor --overview
 ```
 
-### Podgląd logów kontenera
+### Przeglądanie logów kontenera
 ```bash
-# Przeglądaj logi za pomocą Azure CLI (dla Container Apps)
+# Wyświetl logi za pomocą Azure CLI (dla Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
 # Śledź logi w czasie rzeczywistym
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# Przeglądaj logi z Azure Portal
+# Wyświetl logi z Azure Portal
 azd monitor --logs
 ```
 
-### Zapytania w Log Analytics
+### Zapytania Log Analytics
 ```bash
-# Uzyskaj dostęp do analizy dzienników za pomocą portalu Azure
+# Uzyskaj dostęp do analizy dzienników przez portal Azure
 azd monitor --logs
 
 # Zapytania dzienników za pomocą Azure CLI
@@ -237,10 +237,10 @@ azd down
 # Wymuś usunięcie bez potwierdzenia
 azd down --force
 
-# Oczyść zasoby miękko usunięte
+# Oczyść tymczasowo usunięte zasoby
 azd down --purge
 
-# Całkowite oczyszczenie
+# Całkowite sprzątanie
 azd down --force --purge
 ```
 
@@ -249,14 +249,14 @@ azd down --force --purge
 # Sprawdź aktualizacje azd
 azd version
 
-# Pobierz aktualną wersję
+# Pobierz bieżącą wersję
 azd version
 
-# Wyświetl bieżącą konfigurację
+# Zobacz bieżącą konfigurację
 azd config list
 ```
 
-## 🔧 Polecenia zaawansowane
+## 🔧 Zaawansowane polecenia
 
 ### Pipeline i CI/CD
 ```bash
@@ -266,7 +266,7 @@ azd pipeline config
 # Skonfiguruj Azure DevOps
 azd pipeline config --provider azdo
 
-# Pokaż konfigurację potoku
+# Pokaż konfigurację pipeline'u
 azd pipeline show
 ```
 
@@ -275,14 +275,14 @@ azd pipeline show
 # Generuj szablony infrastruktury
 azd infra generate
 
-# 🧪 Podgląd infrastruktury i planowanie
+# 🧪 Podgląd i planowanie infrastruktury
 azd provision --preview
-# Symuluje tworzenie infrastruktury bez wdrażania
+# Symuluje provisionowanie infrastruktury bez wdrażania
 # Analizuje szablony Bicep/Terraform i pokazuje:
 # - Zasoby do dodania (zielony +)
 # - Zasoby do modyfikacji (żółty ~)
 # - Zasoby do usunięcia (czerwony -)
-# Bezpieczne uruchomienie - brak faktycznych zmian w środowisku Azure
+# Bezpieczne do uruchomienia - brak faktycznych zmian w środowisku Azure
 
 # Syntetyzuje infrastrukturę z azure.yaml
 azd infra synth
@@ -300,9 +300,64 @@ azd show --output json
 azd show --output json | jq '.services'
 ```
 
-## 🎯 Szybkie przepływy pracy
+## 🤖 Polecenia AI i rozszerzenia
 
-### Przepływ pracy przy tworzeniu
+### Rozszerzenia AZD
+```bash
+# Wyświetl wszystkie dostępne rozszerzenia (w tym AI)
+azd extension list
+
+# Zainstaluj rozszerzenie agentów Foundry
+azd extension install azure.ai.agents
+
+# Zainstaluj rozszerzenie do fine-tuningu
+azd extension install azure.ai.finetune
+
+# Zainstaluj rozszerzenie niestandardowych modeli
+azd extension install azure.ai.models
+
+# Zaktualizuj wszystkie zainstalowane rozszerzenia
+azd extension upgrade --all
+```
+
+### Polecenia agenta AI
+```bash
+# Inicjalizuj projekt agenta na podstawie manifestu
+azd ai agent init -m <manifest-path-or-uri>
+
+# Wybierz konkretny projekt Foundry
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Określ katalog źródłowy agenta
+azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+
+# Wybierz cel hostingu
+azd ai agent init -m agent-manifest.yaml --host containerapp
+```
+
+### MCP Server (Alpha)
+```bash
+# Uruchom serwer MCP dla swojego projektu
+azd mcp start
+
+# Zarządzaj zgodą na narzędzia dla operacji MCP
+azd mcp consent
+```
+
+### Generowanie infrastruktury
+```bash
+# Wygeneruj pliki IaC na podstawie definicji projektu
+azd infra generate
+
+# Syntezuj infrastrukturę z pliku azure.yaml
+azd infra synth
+```
+
+---
+
+## 🎯 Szybkie workflow
+
+### Workflow deweloperski
 ```bash
 # Rozpocznij nowy projekt
 azd init --template todo-nodejs-mongo
@@ -312,16 +367,16 @@ cd my-project
 azd env new dev
 azd up
 
-# Wprowadź zmiany i wdroż ponownie
+# Wprowadź zmiany i ponownie wdroż
 azd deploy
 
 # Otwórz panel monitoringu
 azd monitor --live
 ```
 
-### Wielośrodowiskowy przepływ pracy
+### Workflow wielośrodowiskowy
 ```bash
-# Konfiguruj środowiska
+# Skonfiguruj środowiska
 azd env new dev
 azd env new staging  
 azd env new production
@@ -330,7 +385,7 @@ azd env new production
 azd env select dev
 azd up
 
-# Testuj i promuj na środowisko staging
+# Testuj i promuj na środowisko testowe
 azd env select staging
 azd up
 
@@ -339,7 +394,7 @@ azd env select production
 azd up
 ```
 
-### Przepływ pracy rozwiązywania problemów
+### Workflow rozwiązywania problemów
 ```bash
 # Włącz tryb debugowania
 export AZD_DEBUG=true
@@ -350,7 +405,7 @@ azd show
 # Zweryfikuj konfigurację
 azd config list
 
-# Otwórz panel monitorowania dla logów
+# Otwórz pulpit monitoringu dla logów
 azd monitor --logs
 
 # Sprawdź status zasobów
@@ -365,10 +420,10 @@ azd show --output json
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Wyłącz telemetrię dla czystszego wyjścia
+# Wyłącz telemetrię dla czyściejszego wyjścia
 export AZD_DISABLE_TELEMETRY=true
 
-# Sprawdź bieżącą konfigurację
+# Sprawdź aktualną konfigurację
 azd config list
 
 # Sprawdź status uwierzytelniania
@@ -391,14 +446,14 @@ azd template validate <template-name>
 
 ### Struktura projektu
 ```bash
-# Pokaż bieżącą strukturę katalogów
+# Pokaż strukturę bieżącego katalogu
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
 # Przejdź do katalogu głównego projektu azd
 cd $(azd root)
 
-# Pokaż katalog konfiguracji azd
+# Pokaż katalog konfiguracyjny azd
 echo $AZD_CONFIG_DIR  # Zwykle ~/.azd
 ```
 
@@ -416,7 +471,7 @@ azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Wyjście w tabeli
+### Wyjście tabelaryczne
 ```bash
 # Formatuj jako tabelę
 azd env list --output table
@@ -425,7 +480,7 @@ azd env list --output table
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Najczęstsze kombinacje poleceń
+## 🔧 Popularne kombinacje poleceń
 
 ### Skrypt sprawdzający stan
 ```bash
@@ -510,16 +565,16 @@ azd show --output json
 azd down --force --purge
 azd up
 
-# Tylko ponowne zapewnienie infrastruktury
+# Ponownie skonfiguruj tylko infrastrukturę
 azd provision
 
-# Tylko ponowne wdrożenie aplikacji
+# Wdroż ponownie tylko aplikację
 azd deploy
 ```
 
-## 💡 Profesjonalne wskazówki
+## 💡 Pro wskazówki
 
-### Aliasy przyspieszające pracę
+### Alias do szybszego workflow
 ```bash
 # Dodaj do swojego .bashrc lub .zshrc
 alias azdup='azd up'
@@ -535,7 +590,7 @@ azd-env() {
     azd env select $1 && azd show
 }
 
-# Szybkie wdrożenie z monitorowaniem
+# Szybkie wdrażanie z monitorowaniem
 azd-deploy-watch() {
     azd deploy --service $1 && azd monitor --live
 }
@@ -578,7 +633,7 @@ azd template show <template-name> --docs
 
 ---
 
-**Wskazówka**: Dodaj ten cheat sheet do ulubionych i użyj `Ctrl+F`, aby szybko znaleźć potrzebne polecenia!
+**Wskazówka**: Dodaj ten cheat sheet do zakładek i użyj `Ctrl+F`, aby szybko znaleźć potrzebne polecenia!
 
 ---
 
@@ -588,7 +643,11 @@ azd template show <template-name> --docs
 
 ---
 
+> **💡 Chcesz pomoc z poleceniami Azure w swoim edytorze?** Zainstaluj [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) poleceniem `npx skills add microsoft/github-copilot-for-azure` — 37 umiejętności dla AI, Foundry, wdrożeń, diagnostyki i innych.
+
+---
+
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Zastrzeżenie**:  
-Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczeniowej AI [Co-op Translator](https://github.com/Azure/co-op-translator). Choć staramy się zapewnić dokładność, prosimy mieć na uwadze, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku źródłowym należy traktować jako dokument wiążący. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego, ludzkiego tłumaczenia. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dążymy do dokładności, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku rodzimym należy uważać za źródło autorytatywne. Dla informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia ludzkiego. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

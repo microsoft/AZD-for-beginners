@@ -1,72 +1,66 @@
-# Çoklu Ajan Koordinasyon Desenleri
+# Çok Ajanlı Koordinasyon Desenleri
 
-⏱️ **Tahmini Süre**: 60-75 dakika | 💰 **Tahmini Maliyet**: ~$100-300/ay | ⭐ **Karmaşıklık**: İleri
+⏱️ **Tahmini Süre**: 60-75 dakika | 💰 **Tahmini Maliyet**: ~$100-300/ay | ⭐ **Zorluk**: İleri
 
 **📚 Öğrenme Yolu:**
-- ← Önceki: [Kapasite Planlaması](capacity-planning.md) - Kaynak boyutlandırma ve ölçeklendirme stratejileri
-- 🎯 **Buradasınız**: Çoklu Ajan Koordinasyon Desenleri (Orkestrasyon, iletişim, durum yönetimi)
-- → Sonraki: [SKU Seçimi](sku-selection.md) - Doğru Azure hizmetlerini seçme
-- 🏠 [Kurs Ana Sayfası](../../README.md)
+- ← Önceki: [Capacity Planning](capacity-planning.md) - Kaynak boyutlandırma ve ölçeklendirme stratejileri
+- 🎯 **Şu Anda Buradasınız**: Çok Ajanlı Koordinasyon Desenleri (Orkestrasyon, iletişim, durum yönetimi)
+- → Sonraki: [SKU Selection](sku-selection.md) - Doğru Azure hizmetlerini seçme
+- 🏠 [Kurs Anasayfası](../../README.md)
 
 ---
 
-## Bu Derste Neler Öğreneceksiniz
+## Neler Öğreneceksiniz
 
-Bu dersi tamamlayarak şunları öğreneceksiniz:
-- **çoklu ajan mimarisi** desenlerini ve ne zaman kullanılacağını anlamak
-- **orkestrasyon desenleri** uygulamak (merkezi, dağıtık, hiyerarşik)
-- **ajan iletişimi** stratejileri tasarlamak (eşzamanlı, eşzamansız, olay odaklı)
-- dağıtılmış ajanlar arasında **paylaşılan durumu** yönetmek
-- AZD ile Azure üzerinde **çoklu ajan sistemleri** dağıtmak
-- gerçek dünya AI senaryoları için **koordinasyon desenleri** uygulamak
-- dağıtılmış ajan sistemlerini izlemek ve hata ayıklamak
+Bu dersi tamamlayarak:
+- **Çok-ajan mimarisi** desenlerini ve ne zaman kullanılacağını anlayacaksınız
+- **Orkestrasyon desenlerini** (merkezi, merkezi olmayan, hiyerarşik) uygulayacaksınız
+- **Ajan iletişimi** stratejilerini tasarlayacaksınız (senkron, asincron, olay tabanlı)
+- Dağıtık ajanlar arasında **paylaşılan durumu** yöneteceksiniz
+- AZD ile Azure üzerinde **çok-ajan sistemlerini** dağıtacaksınız
+- Gerçek dünya AI senaryoları için **koordinasyon desenlerini** uygulayacaksınız
+- Dağıtık ajan sistemlerini izleyecek ve hata ayıklayacaksınız
 
-## Neden Çoklu Ajan Koordinasyonu Önemlidir
+## Neden Çok Ajanlı Koordinasyon Önemli
 
-### Evrim: Tek Ajan'dan Çoklu Ajan'a
+### Evrim: Tek Ajan’dan Çok Ajan’a
 
 **Tek Ajan (Basit):**
 ```
 User → Agent → Response
 ```
-- ✅ Anlaması ve uygulaması kolay
+- ✅ Anlaşılması ve uygulanması kolay
 - ✅ Basit görevler için hızlı
-- ❌ Tek modelin yetenekleri ile sınırlı
-- ❌ Karmaşık görevleri paralel olarak çalıştıramaz
+- ❌ Tek modelin yetenekleriyle sınırlı
+- ❌ Karmaşık görevleri paralelleştiremez
 - ❌ Uzmanlaşma yok
 
-**Çoklu Ajan Sistemi (İleri):**
-```
-           ┌─────────────┐
-           │ Orchestrator│
-           └──────┬──────┘
-        ┌─────────┼─────────┐
-        │         │         │
-    ┌───▼──┐  ┌──▼───┐  ┌──▼────┐
-    │Agent1│  │Agent2│  │Agent3 │
-    │(Plan)│  │(Code)│  │(Review)│
-    └──────┘  └──────┘  └───────┘
-```
-- ✅ Belirli görevler için uzmanlaşmış ajanlar
+**Çok Ajanlı Sistem (İleri):**
+```mermaid
+graph TD
+    Orchestrator[Orkestratör] --> Agent1[Ajan1<br/>Planlama]
+    Orchestrator --> Agent2[Ajan2<br/>Kodlama]
+    Orchestrator --> Agent3[Ajan3<br/>İnceleme]
+```- ✅ Belirli görevler için uzman ajanlar
 - ✅ Hız için paralel yürütme
 - ✅ Modüler ve sürdürülebilir
 - ✅ Karmaşık iş akışlarında daha iyi
 - ⚠️ Koordinasyon mantığı gerektirir
 
-**Analogy**: Tek ajan, tüm görevleri yapan bir kişi gibidir. Çoklu ajan ise her üyenin uzmanlığı olan (araştırmacı, kodlayıcı, inceleyici, yazar) bir ekip gibidir ve birlikte çalışır.
+**Benzetme**: Tek ajan, tüm işleri yapan tek kişiye benzer. Çok ajanlı yapı ise her üyenin uzmanlaştığı (araştırmacı, geliştirici, gözden geçiren, yazar) bir ekip gibidir ve birlikte çalışır.
 
 ---
 
 ## Temel Koordinasyon Desenleri
 
-### Desen 1: Sıralı Koordinasyon (Sorumluluk Zinciri)
+### Desen 1: Ardışık Koordinasyon (Sorumluluk Zinciri)
 
-**Ne zaman kullanılır**: Görevler belirli bir sırada tamamlanmalı, her ajan önceki çıktıya dayanır.
+**Ne zaman kullanılır**: Görevler belirli bir sırayla tamamlanmalıdır, her ajan önceki çıktıya dayanır.
 
 ```mermaid
 sequenceDiagram
-    participant User as Kullanıcı
-    participant Orchestrator as Orkestratör
+    participant User
+    participant Orchestrator
     participant Agent1 as Araştırma Ajanı
     participant Agent2 as Yazar Ajanı
     participant Agent3 as Editör Ajanı
@@ -76,11 +70,11 @@ sequenceDiagram
     Agent1-->>Orchestrator: Araştırma sonuçları
     Orchestrator->>Agent2: Taslak yaz (araştırmayı kullanarak)
     Agent2-->>Orchestrator: Taslak makale
-    Orchestrator->>Agent3: Düzenle ve geliştir
+    Orchestrator->>Agent3: Düzelt ve geliştir
     Agent3-->>Orchestrator: Nihai makale
-    Orchestrator-->>User: Son hâlindeki makale
+    Orchestrator-->>User: Düzeltilmiş makale
     
-    Note over User,Agent3: Sıralı: Her adım bir öncekini bekler
+    Note over User,Agent3: Sıralı: Her adım öncekinin tamamlanmasını bekler
 ```
 **Faydalar:**
 - ✅ Net veri akışı
@@ -92,7 +86,7 @@ sequenceDiagram
 - ❌ Bir hata tüm zinciri engeller
 - ❌ Karşılıklı bağımlı görevleri yönetemez
 
-**Örnek Kullanım Senaryoları:**
+**Örnek Kullanım Durumları:**
 - İçerik oluşturma hattı (araştırma → yazma → düzenleme → yayınlama)
 - Kod üretimi (planlama → uygulama → test → dağıtım)
 - Rapor oluşturma (veri toplama → analiz → görselleştirme → özet)
@@ -101,7 +95,7 @@ sequenceDiagram
 
 ### Desen 2: Paralel Koordinasyon (Fan-Out/Fan-In)
 
-**Ne zaman kullanılır**: Bağımsız görevler aynı anda çalıştırılabilir, sonuçlar sonunda birleştirilir.
+**Ne zaman kullanılır**: Bağımsız görevler aynı anda çalışabilir, sonuçlar sonunda birleştirilir.
 
 ```mermaid
 graph TB
@@ -128,23 +122,23 @@ graph TB
 **Faydalar:**
 - ✅ Hızlı (paralel yürütme)
 - ✅ Hata toleranslı (kısmi sonuçlar kabul edilebilir)
-- ✅ Yatay olarak ölçeklenebilir
+- ✅ Yatay olarak ölçeklenir
 
 **Sınırlamalar:**
 - ⚠️ Sonuçlar sırasız gelebilir
-- ⚠️ Birleştirme mantığı gerekir
+- ⚠️ Toplama mantığı gerekir
 - ⚠️ Karmaşık durum yönetimi
 
-**Örnek Kullanım Senaryoları:**
+**Örnek Kullanım Durumları:**
 - Çok kaynaklı veri toplama (API'ler + veritabanları + web kazıma)
-- Rekabet analizi (birden fazla model çözümler üretir, en iyisi seçilir)
-- Çeviri hizmetleri (aynı anda birden çok dile çeviri)
+- Rekabetçi analiz (birden çok model çözüm üretir, en iyisi seçilir)
+- Çeviri hizmetleri (aynı anda birden fazla dile çeviri)
 
 ---
 
-### Desen 3: Hiyerarşik Koordinasyon (Yönetici-Çalışan)
+### Desen 3: Hiyerarşik Koordinasyon (Yönetici-İşçi)
 
-**Ne zaman kullanılır**: Alt görevlerin olduğu karmaşık iş akışları, devretme gerektiğinde.
+**Ne zaman kullanılır**: Alt görevleri olan karmaşık iş akışları, delege edilmesi gereken işler.
 
 ```mermaid
 graph TB
@@ -174,10 +168,10 @@ graph TB
 
 **Sınırlamalar:**
 - ⚠️ Daha karmaşık mimari
-- ⚠️ Daha yüksek gecikme (birden fazla koordinasyon katmanı)
-- ⚠️ Karmaşık orkestrasyon gerektirir
+- ⚠️ Daha yüksek gecikme (birden çok koordinasyon katmanı)
+- ⚠️ Sofistike orkestrasyon gerektirir
 
-**Örnek Kullanım Senaryoları:**
+**Örnek Kullanım Durumları:**
 - Kurumsal belge işleme (sınıflandır → yönlendir → işle → arşivle)
 - Çok aşamalı veri boru hatları (al → temizle → dönüştür → analiz et → raporla)
 - Karmaşık otomasyon iş akışları (planlama → kaynak tahsisi → yürütme → izleme)
@@ -186,7 +180,7 @@ graph TB
 
 ### Desen 4: Olay Tabanlı Koordinasyon (Yayınla-Abone Ol)
 
-**Ne zaman kullanılır**: Ajanların olaylara tepki vermesi gerekir, gevşek bağlılık istenir.
+**Ne zaman kullanılır**: Ajanlar olaylara tepki vermelidir, gevşek bağlılık istenir.
 
 ```mermaid
 sequenceDiagram
@@ -197,27 +191,27 @@ sequenceDiagram
     participant Agent4 as Arşivleyici
     
     Agent1->>EventBus: Yayınla "VeriAlındı" olayı
-    EventBus->>Agent2: Abone ol: Verileri analiz et
+    EventBus->>Agent2: Abone ol: Veriyi analiz et
     EventBus->>Agent3: Abone ol: Bildirim gönder
-    EventBus->>Agent4: Abone ol: Verileri arşivle
+    EventBus->>Agent4: Abone ol: Veriyi arşivle
     
     Note over Agent1,Agent4: Tüm aboneler bağımsız olarak işler
     
     Agent2->>EventBus: Yayınla "AnalizTamamlandı" olayı
-    EventBus->>Agent3: Abone ol: Analiz raporunu gönder
+    EventBus->>Agent3: Abone ol: Analiz raporu gönder
 ```
 **Faydalar:**
 - ✅ Ajanlar arasında gevşek bağlılık
 - ✅ Yeni ajan eklemek kolay (sadece abone ol)
-- ✅ Eşzamansız işlem
+- ✅ Asenkron işlem
 - ✅ Dayanıklı (mesaj kalıcılığı)
 
 **Sınırlamalar:**
-- ⚠️ Nihai tutarlılık (eventual consistency)
+- ⚠️ Nihai tutarlılık
 - ⚠️ Karmaşık hata ayıklama
 - ⚠️ Mesaj sıralama zorlukları
 
-**Örnek Kullanım Senaryoları:**
+**Örnek Kullanım Durumları:**
 - Gerçek zamanlı izleme sistemleri (uyarılar, panolar, günlükler)
 - Çok kanallı bildirimler (e-posta, SMS, push, Slack)
 - Veri işleme boru hatları (aynı verinin birden çok tüketicisi)
@@ -226,16 +220,16 @@ sequenceDiagram
 
 ### Desen 5: Konsensüs Tabanlı Koordinasyon (Oylama/Quorum)
 
-**Ne zaman kullanılır**: İlerlemek için birden fazla ajanın anlaşmasına ihtiyaç varsa.
+**Ne zaman kullanılır**: İlerlemeden önce birden çok ajanın anlaşması gerekir.
 
 ```mermaid
 graph TB
     Input[Girdi Görevi]
-    Agent1[Ajan 1: GPT-4]
+    Agent1[Ajan 1: gpt-4.1]
     Agent2[Ajan 2: Claude]
     Agent3[Ajan 3: Gemini]
-    Voter[Konsensüs Oylayıcı]
-    Output[Uzlaşılmış Çıktı]
+    Voter[Konsensüs Oylayıcısı]
+    Output[Uzlaşılan Çıktı]
     
     Input --> Agent1
     Input --> Agent2
@@ -248,37 +242,37 @@ graph TB
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
 **Faydalar:**
-- ✅ Daha yüksek doğruluk (birden fazla görüş)
+- ✅ Daha yüksek doğruluk (birden çok görüş)
 - ✅ Hata toleranslı (azınlık hataları kabul edilebilir)
-- ✅ Yerleşik kalite güvence
+- ✅ Yerleşik kalite güvencesi
 
 **Sınırlamalar:**
-- ❌ Maliyetli (birden fazla model çağrısı)
+- ❌ Pahalı (birden çok model çağrısı)
 - ❌ Daha yavaş (tüm ajanların beklenmesi)
 - ⚠️ Çatışma çözümü gerekir
 
-**Örnek Kullanım Senaryoları:**
-- İçerik moderasyonu (birden fazla model içeriği inceler)
-- Kod inceleme (birden fazla linter/analyzer)
-- Tıbbi teşhis (birden fazla AI modeli, uzman doğrulaması)
+**Örnek Kullanım Durumları:**
+- İçerik moderasyonu (birden çok model içeriği inceler)
+- Kod incelemesi (birden çok linter/analyzer)
+- Tıbbi teşhis (birden çok AI modeli, uzman doğrulaması)
 
 ---
 
 ## Mimari Genel Bakış
 
-### Azure Üzerinde Tam Çoklu Ajan Sistemi
+### Azure Üzerinde Tam Çok Ajanlı Sistem
 
 ```mermaid
 graph TB
     User[Kullanıcı/API İstemcisi]
     APIM[Azure API Yönetimi]
-    Orchestrator[Orkestratör Hizmeti<br/>Kapsayıcı Uygulama]
-    ServiceBus[Azure Service Bus<br/>Olay Hubu]
+    Orchestrator[Orkestratör Hizmeti<br/>Konteyner Uygulaması]
+    ServiceBus[Azure Service Bus<br/>Olay Hub]
     
-    Agent1[Araştırma Ajanı<br/>Kapsayıcı Uygulama]
-    Agent2[Yazar Ajanı<br/>Kapsayıcı Uygulama]
-    Agent3[Analist Ajanı<br/>Kapsayıcı Uygulama]
-    Agent4[İnceleme Ajanı<br/>Kapsayıcı Uygulama]
+    Agent1[Araştırma Ajanı<br/>Konteyner Uygulaması]
+    Agent2[Yazar Ajanı<br/>Konteyner Uygulaması]
+    Agent3[Analist Ajanı<br/>Konteyner Uygulaması]
+    Agent4[İnceleyici Ajanı<br/>Konteyner Uygulaması]
     
     CosmosDB[(Cosmos DB<br/>Paylaşılan Durum)]
     Storage[Azure Depolama<br/>Artefaktlar]
@@ -317,17 +311,17 @@ graph TB
 
 | Component | Purpose | Azure Service |
 |-----------|---------|---------------|
-| **API Gateway** | Giriş noktası, hız sınırlama, kimlik doğrulama | API Management |
+| **API Gateway** | Giriş noktası, hız sınırlandırma, kimlik doğrulama | API Management |
 | **Orchestrator** | Ajan iş akışlarını koordine eder | Container Apps |
-| **Message Queue** | Eşzamansız iletişim | Service Bus / Event Hubs |
-| **Agents** | Uzmanlaşmış AI işleyicileri | Container Apps / Functions |
+| **Message Queue** | Asenkron iletişim | Service Bus / Event Hubs |
+| **Agents** | Uzmanlaşmış AI çalışanları | Container Apps / Functions |
 | **State Store** | Paylaşılan durum, görev takibi | Cosmos DB |
-| **Artifact Storage** | Dökümanlar, sonuçlar, günlükler | Blob Storage |
-| **Monitoring** | Dağıtılmış izleme, günlükler | Application Insights |
+| **Artifact Storage** | Belgeler, sonuçlar, günlükler | Blob Storage |
+| **Monitoring** | Dağıtık izleme, günlükler | Application Insights |
 
 ---
 
-## Önkoşullar
+## Ön Koşullar
 
 ### Gerekli Araçlar
 
@@ -347,20 +341,20 @@ docker --version
 
 ### Azure Gereksinimleri
 
-- Aktif bir Azure aboneliği
+- Aktif Azure aboneliği
 - Oluşturma izinleri:
   - Container Apps
-  - Service Bus namespace'leri
+  - Service Bus namespaces
   - Cosmos DB hesapları
   - Storage hesapları
   - Application Insights
 
 ### Bilgi Önkoşulları
 
-Tamamlamış olmanız gerekir:
-- [Yapılandırma Yönetimi](../chapter-03-configuration/configuration.md)
-- [Kimlik Doğrulama & Güvenlik](../chapter-03-configuration/authsecurity.md)
-- [Mikroservis Örneği](../../../../examples/microservices)
+Tamamlamış olmalısınız:
+- [Configuration Management](../chapter-03-configuration/configuration.md)
+- [Authentication & Security](../chapter-03-configuration/authsecurity.md)
+- [Microservices Example](../../../../examples/microservices)
 
 ---
 
@@ -398,11 +392,11 @@ multi-agent-system/
 
 ---
 
-## Ders 1: Sıralı Koordinasyon Deseni
+## Ders 1: Ardışık Koordinasyon Deseni
 
-### Uygulama: İçerik Oluşturma Hattı
+### Uygulama: İçerik Oluşturma İş Akışı
 
-Sıralı bir boru hattı oluşturalım: Araştırma → Yazma → Düzenleme → Yayınlama
+Şimdi ardışık bir iş akışı oluşturalım: Araştırma → Yazma → Düzenleme → Yayınlama
 
 ### 1. AZD Yapılandırması
 
@@ -600,7 +594,7 @@ def create_content():
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # Sonuçların nereye gönderileceği
+            'next_queue': 'writer-tasks'  # Sonuçlar nereye gönderilecek
         }),
         content_type='application/json'
     )
@@ -661,9 +655,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # Araştırma için Azure OpenAI'yi çağır
+    # Araştırma için Microsoft Foundry modellerini çağır
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -719,7 +713,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 6. Yazar Ajanı
+### 6. Yazar Ajan
 
 **Dosya: `src/agents/writer/app.py`**
 
@@ -750,9 +744,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # Makale yazması için Azure OpenAI'yi çağır
+    # Makale yazması için Microsoft Foundry Modellerini çağır
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -807,7 +801,7 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. Editör Ajanı
+### 7. Editör Ajan
 
 **Dosya: `src/agents/editor/app.py`**
 
@@ -837,9 +831,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # Düzenlemek için Azure OpenAI'yi çağır
+    # Düzenlemek için Microsoft Foundry Modellerini çağır
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -849,7 +843,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # Görevi tamamlandı olarak işaretle
+    # Görevi tamamlanmış olarak işaretle
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -883,13 +877,22 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. Dağıt ve Test Et
+### 8. Dağıtım ve Test
 
 ```bash
-# Başlat ve dağıt
+# Seçenek A: Şablon tabanlı dağıtım
 azd init
 azd up
 
+# Seçenek B: Ajan manifestiyle dağıtım (eklenti gerektirir)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
+azd up
+```
+
+> Bakınız [AZD AI CLI Komutları](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) tüm `azd ai` bayrakları ve seçenekleri için.
+
+```bash
 # Orkestratör URL'sini al
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
@@ -948,7 +951,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ### Uygulama: Çok Kaynaklı Araştırma Toplayıcı
 
-Aynı anda birden çok kaynaktan bilgi toplayan paralel bir sistem oluşturalım.
+Çoklu kaynaklardan bilgiyi aynı anda toplayan bir paralel sistem oluşturalım.
 
 ### Paralel Orkestratör
 
@@ -987,7 +990,7 @@ def research_parallel():
         }
     )
     
-    # Çoklu gönderim: Tüm ajanlara aynı anda gönder
+    # Fan-out: Tüm ajanlara aynı anda gönder
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1022,7 +1025,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### Birleştirme Mantığı
+### Toplama Mantığı
 
 **Dosya: `src/agents/aggregator/app.py`**
 
@@ -1038,9 +1041,9 @@ servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
 )
 
-# Her görev için sonuçları takip et
+# Görev başına sonuçları takip et
 task_results = defaultdict(list)
-expected_agents = 4  # web, akademik, haberler, sosyal
+expected_agents = 4  # web, akademik, haber, sosyal
 
 def process_result(message_data):
     """Aggregate results from parallel agents"""
@@ -1048,7 +1051,7 @@ def process_result(message_data):
     agent_type = message_data['agent_type']
     result = message_data['result']
     
-    # Sonucu sakla
+    # Sonucu depola
     task_results[task_id].append({
         'agent': agent_type,
         'data': result
@@ -1103,26 +1106,26 @@ if __name__ == '__main__':
 ```
 
 **Paralel Desenin Faydaları:**
-- ⚡ **4 kat daha hızlı** (ajanlar eşzamanlı çalışır)
+- ⚡ **4x daha hızlı** (ajanlar eşzamanlı çalışır)
 - 🔄 **Hata toleranslı** (kısmi sonuçlar kabul edilebilir)
 - 📈 **Ölçeklenebilir** (daha fazla ajan kolayca eklenir)
 
 ---
 
-## Uygulamalı Egzersizler
+## Pratik Alıştırmalar
 
-### Egzersiz 1: Zaman Aşımı İşleme Ekle ⭐⭐ (Orta)
+### Alıştırma 1: Zaman Aşımı İşleme Ekle ⭐⭐ (Orta)
 
-**Hedef**: Birleştiricinin yavaş ajanları bekleyerek sonsuza kadar beklememesi için zaman aşımı mantığı uygulayın.
+**Amaç**: Toplayıcının yavaş ajanlar için sonsuza kadar beklememesi için zaman aşımı mantığı uygulayın.
 
 **Adımlar**:
 
-1. **Birleştiriciye zaman aşımı takibi ekle:**
+1. **Toplayıcıya zaman aşımı takibi ekleyin:**
 
 ```python
 from datetime import datetime, timedelta
 
-task_timeouts = {}  # task_id -> expiration_time
+task_timeouts = {}  # görev_id -> sonlanma_zamanı
 
 def process_result(message_data):
     task_id = message_data['task_id']
@@ -1151,20 +1154,20 @@ def process_result(message_data):
         
         state_manager.complete_task(task_id, aggregated)
         
-        # Temizleme
+        # Temizlik
         del task_results[task_id]
         del task_timeouts[task_id]
 ```
 
-2. **Yapay gecikmelerle test et:**
+2. **Yapay gecikmelerle test edin:**
 
 ```python
-# Bir ajan için yavaş işlemeyi simüle etmek amacıyla gecikme ekleyin
+# Bir ajan içinde, yavaş işlemi simüle etmek için gecikme ekleyin
 import time
 time.sleep(35)  # 30 saniyelik zaman aşımını aşıyor
 ```
 
-3. **Dağıt ve doğrula:**
+3. **Dağıtın ve doğrulayın:**
 
 ```bash
 azd deploy aggregator
@@ -1174,26 +1177,26 @@ curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
 
-# 30 saniye sonra sonuçları kontrol et
+# 30 saniye sonra sonuçları kontrol edin
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Başarı Kriterleri:**
 - ✅ Ajanlar eksik olsa bile görev 30 saniye sonra tamamlanır
-- ✅ Yanıt kısmi sonuçları belirten ("timed_out": true) alanı içerir
-- ✅ Mevcut sonuçlar döndürülür (4 ajandan 3'ü gibi)
+- ✅ Yanıt kısmi sonuçları gösterir (`"timed_out": true`)
+- ✅ Mevcut sonuçlar döndürülür (4 ajandan 3'ü)
 
 **Süre**: 20-25 dakika
 
 ---
 
-### Egzersiz 2: Yeniden Deneme Mantığını Uygula ⭐⭐⭐ (İleri)
+### Alıştırma 2: Yeniden Deneme Mantığını Uygula ⭐⭐⭐ (İleri)
 
-**Hedef**: Başarısız ajan görevlerini vazgeçmeden önce otomatik olarak yeniden dene.
+**Amaç**: Başarısız ajan görevlerini vazgeçmeden önce otomatik olarak yeniden deneyin.
 
 **Adımlar**:
 
-1. **Orkestratöre yeniden deneme takibi ekle:**
+1. **Orkestratöre yeniden deneme takibi ekleyin:**
 
 ```python
 from dataclasses import dataclass
@@ -1224,7 +1227,7 @@ def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConf
         sender.send_messages(message)
 ```
 
-2. **Ajanlara yeniden deneme işleyicisi ekle:**
+2. **Ajanlara yeniden deneme işleyicisi ekleyin:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1244,18 +1247,18 @@ def process_with_retry(message, receiver, process_func):
         max_retries = message_data.get('max_retries', 3)
         
         if retry_count < max_retries:
-            # Yeniden dene: bırak ve sayısı artırılmış olarak kuyruğa yeniden ekle
+            # Yeniden dene: bırak ve artırılmış sayıyla tekrar kuyruğa koy
             print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
             
             message_data['retry_count'] = retry_count + 1
             
-            # Aynı kuyruğa gecikmeli olarak geri gönder
-            time.sleep(5 * (retry_count + 1))  # Üstel geri çekilme
+            # Gecikmeli olarak aynı kuyruğa geri gönder
+            time.sleep(5 * (retry_count + 1))  # Üstel bekleme
             send_with_retry(queue_name, message_data, RetryConfig())
             
-            receiver.complete_message(message)  # Orijinali kaldır
+            receiver.complete_message(message)  # Orijinali sil
         else:
-            # Maksimum yeniden deneme sayısı aşıldı - ölü mesaj kuyruğuna taşı
+            # Maksimum deneme sayısı aşıldı - ölü mesaj kuyruğuna taşı
             print(f"❌ Max retries exceeded for message {message_id}")
             receiver.dead_letter_message(
                 message,
@@ -1264,7 +1267,7 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **Dead letter kuyruğunu izle:**
+3. **Dead letter kuyruğunu izleyin:**
 
 ```python
 def monitor_dead_letters():
@@ -1284,21 +1287,21 @@ def monitor_dead_letters():
 
 **✅ Başarı Kriterleri:**
 - ✅ Başarısız görevler otomatik olarak yeniden denenir (en fazla 3 kez)
-- ✅ Yeniden denemeler arasında üssel geri çekilme (5s, 10s, 15s)
-- ✅ Maks yeniden denemeden sonra mesajlar dead letter kuyruğuna gider
-- ✅ Dead letter kuyruğu izlenebilir ve yeniden oynatılabilir
+- ✅ Denemeler arasında üstel geri çekilme (5s, 10s, 15s)
+- ✅ Maksimum denemeden sonra mesajlar dead letter kuyruğuna gider
+- ✅ Dead letter kuyruğu izlenebilir ve tekrar oynatılabilir
 
 **Süre**: 30-40 dakika
 
 ---
 
-### Egzersiz 3: Devre Kesici (Circuit Breaker) Uygula ⭐⭐⭐ (İleri)
+### Alıştırma 3: Devre Kesici Uygula ⭐⭐⭐ (İleri)
 
-**Hedef**: Başarısız ajanlara yapılan istekleri durdurarak zincirleme hataları önleyin.
+**Amaç**: Başarısız ajanlara yapılan istekleri durdurarak zincirleme hataları önleyin.
 
 **Adımlar**:
 
-1. **Devre kesici sınıfı oluştur:**
+1. **Devre kesici sınıfı oluşturun:**
 
 ```python
 from enum import Enum
@@ -1307,7 +1310,7 @@ from datetime import datetime, timedelta
 class CircuitState(Enum):
     CLOSED = "closed"      # Normal çalışma
     OPEN = "open"          # Arızalı, istekleri reddet
-    HALF_OPEN = "half_open"  # İyileşip iyileşmediğini test et
+    HALF_OPEN = "half_open"  # Toparlanıp toparlanmadığını test et
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1349,7 +1352,7 @@ class CircuitBreaker:
             raise e
 ```
 
-2. **Ajan çağrılarına uygula:**
+2. **Ajan çağrılarına uygulayın:**
 
 ```python
 # Orkestratörde
@@ -1368,16 +1371,16 @@ def send_to_agent(agent_type, message_data):
         circuit.call(lambda: send_message(agent_type, message_data))
     except Exception as e:
         print(f"⚠️ Skipping {agent_type} agent: {e}")
-        # Diğer ajanlarla devam et
+        # Diğer ajanlarla devam edin
 ```
 
-3. **Devre kesiciyi test et:**
+3. **Devre kesiciyi test edin:**
 
 ```bash
 # Tekrarlanan hataları simüle et (bir ajanı durdur)
 az containerapp stop --name web-research-agent --resource-group rg-agents
 
-# Birden çok istek gönder
+# Birden fazla istek gönder
 for i in {1..10}; do
   curl -X POST $ORCHESTRATOR_URL/research-parallel \
     -H "Content-Type: application/json" \
@@ -1385,14 +1388,14 @@ for i in {1..10}; do
   sleep 2
 done
 
-# Günlükleri kontrol et - 5 başarısızlıktan sonra devre açık olmalı
+# Günlükleri kontrol et - 5 başarısızlıktan sonra devrenin açık olduğunu görmelisin
 # Container App günlükleri için Azure CLI'yi kullan:
 az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
 ```
 
 **✅ Başarı Kriterleri:**
 - ✅ 5 başarısızlıktan sonra devre açılır (istekleri reddeder)
-- ✅ 60 saniye sonra devre yarı-açık olur (iyileşme testi)
+- ✅ 60 saniye sonra devre yarı-açık olur (iyileşmeyi test eder)
 - ✅ Diğer ajanlar normal şekilde çalışmaya devam eder
 - ✅ Ajan iyileştiğinde devre otomatik olarak kapanır
 
@@ -1415,18 +1418,18 @@ from opencensus.trace.samplers import AlwaysOnSampler
 import logging
 import os
 
-# İzlemeyi yapılandır
+# İzlemeyi yapılandırın
 config_integration.trace_integrations(['requests', 'logging'])
 
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
 
-# İzleyici oluştur
+# İzleyici oluşturun
 tracer = Tracer(
     exporter=AzureExporter(connection_string=connection_string),
     sampler=AlwaysOnSampler()
 )
 
-# Günlüklemeyi yapılandır
+# Kayıtlamayı yapılandırın
 logger = logging.getLogger(__name__)
 logger.addHandler(AzureLogHandler(connection_string=connection_string))
 logger.setLevel(logging.INFO)
@@ -1450,7 +1453,7 @@ def trace_agent_call(agent_name, task_id, operation):
 
 ### Application Insights Sorguları
 
-**Çoklu ajan iş akışlarını takip et:**
+**Çok ajanlı iş akışlarını takip et:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1491,7 +1494,7 @@ exceptions
 
 ## Maliyet Analizi
 
-### Çoklu Ajan Sistemi Maliyetleri (Aylık Tahminler)
+### Çok Ajanlı Sistem Maliyetleri (Aylık Tahminler)
 
 | Component | Configuration | Cost |
 |-----------|--------------|------|
@@ -1501,7 +1504,7 @@ exceptions
 | **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
 | **Blob Storage** | 10GB storage, 100K operations | $5-10 |
 | **Application Insights** | 5GB ingestion | $10-15 |
-| **Azure OpenAI** | GPT-4, 10M tokens | $100-300 |
+| **Microsoft Foundry Models** | gpt-4.1, 10M tokens | $100-300 |
 | **Toplam** | | **$240-565/month** |
 
 ### Maliyet Optimizasyon Stratejileri
@@ -1515,7 +1518,7 @@ exceptions
    }
    ```
 
-2. **Ajanları boşta olduklarında sıfıra ölçekleyin:**
+2. **Ajanları boşta iken sıfıra ölçeklendirin:**
    ```bicep
    scale: {
      minReplicas: 0  // Scale to zero when no messages
@@ -1523,7 +1526,7 @@ exceptions
    }
    ```
 
-3. **Service Bus için toplu işleme (batching) kullanın:**
+3. **Service Bus için toplu işlem kullanın:**
    ```python
    # Mesajları toplu olarak gönderin (daha ucuz)
    sender.send_messages([message1, message2, message3])
@@ -1549,7 +1552,7 @@ exceptions
        if state_manager.task_exists(task_id):
            print(f"Task {task_id} already processed, skipping")
            return
-       # Görev işleniyor...
+       # Görevi işliyor...
    ```
 
 2. **Kapsamlı günlükleme uygulayın**
@@ -1557,11 +1560,11 @@ exceptions
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **Korelasyon kimlikleri (correlation IDs) kullanın**
+3. **Korelasyon kimlikleri kullanın**
    ```python
    # task_id'yi tüm iş akışı boyunca iletin
    message_data = {
-       'task_id': task_id,  # Korelasyon kimliği
+       'task_id': task_id,  # Korelasyon Kimliği
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
@@ -1584,7 +1587,7 @@ exceptions
 1. **Dairesel bağımlılıklar oluşturmayın**
    ```python
    # ❌ KÖTÜ: Ajan A → Ajan B → Ajan A (sonsuz döngü)
-   # ✅ İYİ: Açık bir yönlendirilmiş döngüsüz grafik (DAG) tanımlayın
+   # ✅ İYİ: Açık bir yönlü döngüsüz grafik (DAG) tanımlayın
    ```
 
 2. **Ajan iş parçacıklarını engellemeyin**
@@ -1598,27 +1601,28 @@ exceptions
 
 3. **Kısmi hataları görmezden gelmeyin**
    ```python
-   # ❌ KÖTÜ: Bir ajan başarısız olursa tüm iş akışını başarısız kıl
-   # ✅ İYİ: Hata göstergeleriyle kısmi sonuçları döndür
+   # ❌ KÖTÜ: Bir ajan başarısız olursa tüm iş akışını başarısız saymak
+   # ✅ İYİ: Hata göstergeleriyle kısmi sonuçları döndürmek
    ```
 
-4. **Sonsuz yeniden denemeler kullanmayın**
+4. **Sonsuz yeniden denemeleri kullanmayın**
    ```python
-   # ❌ KÖTÜ: sonsuza kadar yeniden deneme
-   # ✅ İYİ: max_retries = 3, sonra ölü mektup kuyruğuna gönder
+   # ❌ KÖTÜ: sonsuza kadar yeniden dene
+   # ✅ İYİ: max_retries = 3, sonra dead-letter kuyruğuna
    ```
 
 ---
+
 ## Sorun Giderme Rehberi
 
-### Sorun: Kuyrukta takılan mesajlar
+### Sorun: Kuyruğa takılan mesajlar
 
 **Belirtiler:**
-- Mesajlar kuyrukta birikir
-- Ajanlar işlem yapmıyor
-- Görev durumu "pending" olarak takılı
+- Mesajlar kuyruğa birikiyor
+- Ajanlar işlemiyor
+- Görev durumu "pending" olarak takılı kalıyor
 
-**Teşhis:**
+**Tanı:**
 ```bash
 # Kuyruk derinliğini kontrol et
 az servicebus queue show \
@@ -1650,14 +1654,14 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Sorun: Görev zaman aşımı/asla tamamlanmıyor
+### Sorun: Görev zaman aşımı/tamamlanmıyor
 
 **Belirtiler:**
-- Görev durumu "in_progress" olarak kalır
+- Görev durumu "in_progress" olarak kalıyor
 - Bazı ajanlar tamamlıyor, diğerleri tamamlamıyor
 - Hata mesajı yok
 
-**Teşhis:**
+**Tanı:**
 ```bash
 # Görev durumunu kontrol et
 curl $ORCHESTRATOR_URL/task/$TASK_ID
@@ -1668,14 +1672,14 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 **Çözümler:**
 
-1. **Toplayıcıda zaman aşımı uygulayın (Alıştırma 1)**
+1. **Toplayıcıda zaman aşımı uygulayın (Egzersiz 1)**
 
-2. **Ajan hatalarını Azure Monitor kullanarak kontrol edin:**
+2. **Azure Monitor kullanarak ajan hatalarını kontrol edin:**
    ```bash
    # azd monitor ile günlükleri görüntüleyin
    azd monitor --logs
    
-   # Veya Azure CLI'yi kullanarak belirli konteyner uygulaması günlüklerini kontrol edin
+   # Veya belirli kapsayıcı uygulama günlüklerini kontrol etmek için Azure CLI'yi kullanın
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
@@ -1697,41 +1701,41 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Çok Ajanlı Tasarım Desenleri](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
 
 ### Bu Kurstaki Sonraki Adımlar
-- ← Önceki: [Kapasite Planlama](capacity-planning.md)
+- ← Önceki: [Kapasite Planlaması](capacity-planning.md)
 - → Sonraki: [SKU Seçimi](sku-selection.md)
 - 🏠 [Kurs Ana Sayfası](../../README.md)
 
 ### İlgili Örnekler
 - [Mikroservis Örneği](../../../../examples/microservices) - Servis iletişim desenleri
-- [Azure OpenAI Örneği](../../../../examples/azure-openai-chat) - Yapay zeka entegrasyonu
+- [Microsoft Foundry Modelleri Örneği](../../../../examples/azure-openai-chat) - AI entegrasyonu
 
 ---
 
 ## Özet
 
 **Öğrendikleriniz:**
-- ✅ Beş koordinasyon deseni (sıralı, paralel, hiyerarşik, olaya dayalı, uzlaşı)
+- ✅ Beş koordinasyon deseni (ardışık, paralel, hiyerarşik, olay güdümlü, uzlaşma)
 - ✅ Azure üzerinde çok ajanlı mimari (Service Bus, Cosmos DB, Container Apps)
 - ✅ Dağıtık ajanlar arasında durum yönetimi
 - ✅ Zaman aşımı yönetimi, yeniden denemeler ve devre kesiciler
 - ✅ Dağıtık sistemlerin izlenmesi ve hata ayıklaması
 - ✅ Maliyet optimizasyonu stratejileri
 
-**Önemli Noktalar:**
-1. **Doğru deseni seçin** - Sıralı, sıralı iş akışları için; paralel, hız için; olaya dayalı, esneklik için
+**Temel Çıkarımlar:**
+1. **Doğru deseni seçin** - Sıralı iş akışları için ardışık, hız için paralel, esneklik için olay güdümlü
 2. **Durumu dikkatle yönetin** - Paylaşılan durum için Cosmos DB veya benzeri kullanın
 3. **Hataları zarifçe yönetin** - Zaman aşımı, yeniden denemeler, devre kesiciler, dead letter kuyrukları
-4. **Her şeyi izleyin** - Hata ayıklama için dağıtık izleme şarttır
-5. **Maliyetleri optimize edin** - Sıfıra ölçekleme, sunucusuz kullanın, önbellekleme uygulayın
+4. **Her şeyi izleyin** - Dağıtık izleme hata ayıklama için hayati önem taşır
+5. **Maliyetleri optimize edin** - Sıfıra ölçekleyin, serverless kullanın, önbellekleme uygulayın
 
 **Sonraki Adımlar:**
-1. Pratik alıştırmaları tamamlayın
+1. Pratik egzersizleri tamamlayın
 2. Kullanım durumunuz için çok ajanlı bir sistem oluşturun
 3. Performans ve maliyeti optimize etmek için [SKU Seçimi](sku-selection.md) inceleyin
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Sorumluluk Reddi:
-Bu belge, [Co-op Translator](https://github.com/Azure/co-op-translator) adlı yapay zeka çeviri hizmeti kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Kaynak dilindeki orijinal belge yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanılmasından doğabilecek her türlü yanlış anlama veya yanlış yorumlamadan sorumluluk kabul etmiyoruz.
+**Feragatname**:
+Bu belge yapay zeka çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilindeki sürümü esas kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel bir çevirmen tarafından yapılan çeviri önerilir. Bu çevirinin kullanımı sonucunda ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumdan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

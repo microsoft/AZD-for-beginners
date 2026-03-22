@@ -1,36 +1,36 @@
-# 4. Konfiguracja szablonu
+# 4. Skonfiguruj Szablon
 
-!!! tip "NA KONIEC TEGO MODUŁU BĘDZIESZ W STANIE"
+!!! tip "NA KONIEC TEGO MODUŁU BĘDZIESZ UMIAŁ"
 
     - [ ] Zrozumieć cel pliku `azure.yaml`
     - [ ] Zrozumieć strukturę pliku `azure.yaml`
-    - [ ] Zrozumieć wartość `hooks` w cyklu życia azd
+    - [ ] Zrozumieć wartość lifecycle `hooks` w azd
     - [ ] **Lab 4:** Zbadać i zmodyfikować zmienne środowiskowe
 
 ---
 
-!!! prompt "Do czego służy plik `azure.yaml`? Użyj bloku kodu i wyjaśnij go linia po linii"
+!!! prompt "Do czego służy plik `azure.yaml`? Użyj bloku kodu i wyjaśnij go linijka po linijce"
 
-      Plik `azure.yaml` jest **plikiem konfiguracyjnym dla Azure Developer CLI (azd)**. Definiuje on, jak Twoja aplikacja powinna być wdrożona w Azure, w tym infrastrukturę, usługi, haki wdrożeniowe oraz zmienne środowiskowe.
+      Plik `azure.yaml` to **plik konfiguracyjny Azure Developer CLI (azd)**. Definiuje on, jak Twoja aplikacja powinna być wdrożona do Azure, włączając infrastrukturę, usługi, hooki wdrożeniowe oraz zmienne środowiskowe.
 
 ---
 
 ## 1. Cel i funkcjonalność
 
-Ten plik `azure.yaml` służy jako **plan wdrożenia** dla aplikacji agenta AI, która:
+Plik `azure.yaml` służy jako **plan wdrożenia** aplikacji agenta AI, która:
 
 1. **Weryfikuje środowisko** przed wdrożeniem
-2. **Utworza usługi Azure AI** (AI Hub, AI Project, Search itp.)
-3. **Wdraża aplikację Python** do Azure Container Apps
-4. **Konfiguruje modele AI** zarówno do chatu, jak i osadzania (embedding)
+2. **Dostarcza usługi Azure AI** (AI Hub, AI Project, Search itd.)
+3. **Wdroży aplikację Python** na Azure Container Apps
+4. **Konfiguruje modele AI** zarówno do czatu jak i funkcji embeddingu
 5. **Ustawia monitorowanie i śledzenie** dla aplikacji AI
-6. **Obsługuje zarówno nowe, jak i istniejące** scenariusze projektu AI w Azure
+6. **Obsługuje scenariusze nowych i istniejących** projektów Azure AI
 
-Plik umożliwia **wdrożenie jednym poleceniem** (`azd up`) kompletnego rozwiązania agenta AI z odpowiednią weryfikacją, tworzeniem zasobów oraz konfiguracją po wdrożeniu.
+Plik umożliwia **wdrożenie jednym poleceniem** (`azd up`) kompletnego rozwiązania agenta AI z odpowiednią walidacją, provisioningiem i konfiguracją po wdrożeniu.
 
 ??? info "Rozwiń, aby zobaczyć: `azure.yaml`"
 
-      Plik `azure.yaml` definiuje, jak Azure Developer CLI powinien wdrażać i zarządzać aplikacją AI Agent w Azure. Przeanalizujmy go linia po linii.
+      Plik `azure.yaml` definiuje, jak Azure Developer CLI powinien wdrożyć i zarządzać tą aplikacją agenta AI w Azure. Przeanalizujmy go linijka po linijce.
 
       ```yaml title="" linenums="0"
 
@@ -126,9 +126,9 @@ Plik umożliwia **wdrożenie jednym poleceniem** (`azd up`) kompletnego rozwiąz
 
 ---
 
-## 2. Rozbiórka pliku
+## 2. Rozbiór pliku
 
-Przejdźmy przez plik sekcja po sekcji, aby zrozumieć, co robi i dlaczego.
+Przejdźmy przez plik sekcja po sekcji, aby zrozumieć co robi — i dlaczego.
 
 ### 2.1 **Nagłówek i schemat (1-3)**
 
@@ -136,7 +136,7 @@ Przejdźmy przez plik sekcja po sekcji, aby zrozumieć, co robi i dlaczego.
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Linia 1**: Zapewnia walidację schematu języka YAML dla wsparcia IDE i IntelliSense
+- **Linia 1**: Zapewnia walidację schematu YAML dla wsparcia IDE i IntelliSense
 
 ### 2.2 Metadane projektu (5-10)
 
@@ -149,10 +149,10 @@ requiredVersions:
 ```
 
 - **Linia 5**: Definiuje nazwę projektu używaną przez Azure Developer CLI
-- **Linie 6-7**: Określa bazę na szablonie w wersji 1.0.2
-- **Linie 8-9**: Wymaga wersji Azure Developer CLI 1.14.0 lub nowszej
+- **Linie 6-7**: Określa, że jest to oparty na szablonie w wersji 1.0.2
+- **Linie 8-9**: Wymaga wersji Azure Developer CLI 1.14.0 lub wyższej
 
-### 2.3 Haki wdrożeniowe (11-40)
+### 2.3 Hooki wdrożeniowe (11-40)
 
 ```yaml title="" linenums="0"
 hooks:
@@ -169,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **Linie 11-20**: **Hak przed wdrożeniem** - uruchamiany przed `azd up`
+- **Linie 11-20**: **Hook przed wdrożeniem** — uruchamiany przed `azd up`
 
-      - Na Unix/Linux: nadaje uprawnienia do wykonania skryptu walidacji i go uruchamia
-      - Na Windows: uruchamia skrypt PowerShell walidacji
-      - Oba są interaktywne i zatrzymają wdrożenie, jeśli się nie powiodą
+      - Na Unix/Linux: nadaje uprawnienia do wykonania i uruchamia skrypt walidacji
+      - Na Windows: uruchamia skrypt walidacji w PowerShell
+      - Oba są interaktywne i przerwą wdrożenie, jeśli zawiodą
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -188,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Linie 21-30**: **Hak po utworzeniu zasobów** - uruchamiany po utworzeniu zasobów Azure
+- **Linie 21-30**: **Hook po dostarczeniu zasobów** — uruchamiany po stworzeniu zasobów Azure
 
   - Wykonuje skrypty zapisu zmiennych środowiskowych
-  - Kontynuuje wdrożenie nawet jeśli te skrypty się nie powiodą (`continueOnError: true`)
+  - Kontynuuje wdrożenie nawet jeśli skrypty się nie powiodą (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -206,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Linie 31-40**: **Hak po wdrożeniu** - uruchamiany po wdrożeniu aplikacji
+- **Linie 31-40**: **Hook po wdrożeniu aplikacji** — uruchamiany po wdrożeniu aplikacji
 
-  - Wykonuje finalne skrypty ustawiające
-  - Kontynuuje nawet jeśli skrypty się nie powiodą
+  - Wykonuje końcowe skrypty konfiguracyjne
+  - Kontynuuje nawet jeśli skrypty zawiodą
 
-### 2.4 Konfiguracja usługi (41-48)
+### 2.4 Konfiguracja serwisu (41-48)
 
-Konfiguruje usługę aplikacji, którą wdrażasz.
+Konfiguruje serwis aplikacji, którą wdrażasz.
 
 ```yaml title="" linenums="0"
 services:
@@ -226,18 +226,18 @@ services:
       remoteBuild: true
 ```
 
-- **Linia 42**: Definiuje usługę o nazwie "api_and_frontend"
-- **Linia 43**: Wskazuje katalog `./src` jako źródło kodu
-- **Linia 44**: Określa język programowania Python
+- **Linia 42**: Definiuje serwis o nazwie "api_and_frontend"
+- **Linia 43**: Wskazuje na katalog `./src` z kodem źródłowym
+- **Linia 44**: Określa Pythona jako język programowania
 - **Linia 45**: Używa Azure Container Apps jako platformy hostingowej
 - **Linie 46-48**: Konfiguracja Dockera
 
-      - Używa "api_and_frontend" jako nazwy obrazu
+      - Używa nazwy obrazu "api_and_frontend"
       - Buduje obraz Dockera zdalnie w Azure (nie lokalnie)
 
-### 2.5 Zmienne potoku (49-76)
+### 2.5 Zmienne pipeline (49-76)
 
-To zmienne, które pomagają uruchamiać `azd` w CI/CD dla automatyzacji
+To zmienne pomocne przy uruchamianiu `azd` w pipeline CI/CD dla automatyzacji
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -278,62 +278,62 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-Ta sekcja definiuje zmienne środowiskowe używane **podczas wdrożenia**, uszeregowane według kategorii:
+Ta sekcja definiuje zmienne środowiskowe używane **podczas wdrożenia**, podzielone na kategorie:
 
 - **Nazwy zasobów Azure (linie 51-60)**:
-      - Podstawowe nazwy zasobów usług Azure, np. Grupa zasobów, AI Hub, AI Project itd.
-- **Flagi funkcji (linie 61-63)**:
-      - Zmienne boolowskie do włączania/wyłączania konkretnych usług Azure
+      - Podstawowe nazwy zasobów usług Azure, np. Resource Group, AI Hub, AI Project itd.
+- **Flagii funkcji (linie 61-63)**:
+      - Zmienne boolean włączające/wyłączające konkretne usługi Azure
 - **Konfiguracja agenta AI (linie 64-71)**:
-      - Konfiguracja głównego agenta AI, w tym nazwa, ID, ustawienia wdrożenia, szczegóły modelu
+      - Konfiguracja głównego agenta AI, włączając nazwę, ID, ustawienia wdrożenia, szczegóły modelu
 - **Konfiguracja embeddingu AI (linie 72-79)**:
       - Konfiguracja modelu embeddingowego używanego do wyszukiwania wektorowego
 - **Wyszukiwanie i monitorowanie (linie 80-84)**:
-      - Nazwa indeksu wyszukiwania, istniejące ID zasobów oraz ustawienia monitoringu i śledzenia
+      - Nazwa indeksu wyszukiwania, istniejące ID zasobów, oraz ustawienia monitoringu/śledzenia
 
 ---
 
 ## 3. Znajomość zmiennych środowiskowych
-Poniższe zmienne środowiskowe kontrolują konfigurację i zachowanie Twojego wdrożenia, uszeregowane według ich głównego zastosowania. Większość zmiennych ma sensowne domyślne wartości, ale możesz je dostosować, aby odpowiadały Twoim specyficznym wymaganiom lub istniejącym zasobom Azure.
+Poniższe zmienne środowiskowe kontrolują konfigurację i zachowanie Twojego wdrożenia, pogrupowane według ich głównego celu. Większość ma rozsądne wartości domyślne, ale możesz je dostosować do swoich wymagań lub istniejących zasobów Azure.
 
 ### 3.1 Wymagane zmienne 
 
 ```bash title="" linenums="0"
 # Podstawowa konfiguracja Azure
-AZURE_ENV_NAME                    # Nazwa środowiska (używana w nazewnictwie zasobów)
+AZURE_ENV_NAME                    # Nazwa środowiska (używana w nazwach zasobów)
 AZURE_LOCATION                    # Region wdrożenia
 AZURE_SUBSCRIPTION_ID             # Docelowa subskrypcja
 AZURE_RESOURCE_GROUP              # Nazwa grupy zasobów
-AZURE_PRINCIPAL_ID                # Użytkownik główny dla RBAC
+AZURE_PRINCIPAL_ID                # Podmiot użytkownika dla RBAC
 
 # Nazwy zasobów (generowane automatycznie, jeśli nie określono)
-AZURE_AIHUB_NAME                  # Nazwa Microsoft Foundry hub
+AZURE_AIHUB_NAME                  # Nazwa huba Microsoft Foundry
 AZURE_AIPROJECT_NAME              # Nazwa projektu AI
 AZURE_AISERVICES_NAME             # Nazwa konta usług AI
 AZURE_STORAGE_ACCOUNT_NAME        # Nazwa konta magazynu
 AZURE_CONTAINER_REGISTRY_NAME     # Nazwa rejestru kontenerów
-AZURE_KEYVAULT_NAME               # Nazwa Key Vault (jeśli używana)
+AZURE_KEYVAULT_NAME               # Nazwa Key Vault (jeśli używany)
 ```
 
 ### 3.2 Konfiguracja modelu 
 ```bash title="" linenums="0"
-# Konfiguracja modelu czatu
-AZURE_AI_AGENT_MODEL_NAME         # Domyślnie: gpt-4o-mini
+# Konfiguracja Modelu Czatowego
+AZURE_AI_AGENT_MODEL_NAME         # Domyślnie: gpt-4.1-mini
 AZURE_AI_AGENT_MODEL_FORMAT       # Domyślnie: OpenAI (lub Microsoft)
 AZURE_AI_AGENT_MODEL_VERSION      # Domyślnie: najnowsza dostępna
-AZURE_AI_AGENT_DEPLOYMENT_NAME    # Nazwa wdrożenia modelu czatu
+AZURE_AI_AGENT_DEPLOYMENT_NAME    # Nazwa wdrożenia dla modelu czatowego
 AZURE_AI_AGENT_DEPLOYMENT_SKU     # Domyślnie: Standard
 AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # Domyślnie: 80 (tysięcy TPM)
 
-# Konfiguracja modelu osadzania
+# Konfiguracja Modelu Embedującego
 AZURE_AI_EMBED_MODEL_NAME         # Domyślnie: text-embedding-3-small
 AZURE_AI_EMBED_MODEL_FORMAT       # Domyślnie: OpenAI
 AZURE_AI_EMBED_MODEL_VERSION      # Domyślnie: najnowsza dostępna
-AZURE_AI_EMBED_DEPLOYMENT_NAME    # Nazwa wdrożenia dla osadzeń
+AZURE_AI_EMBED_DEPLOYMENT_NAME    # Nazwa wdrożenia dla embedowań
 AZURE_AI_EMBED_DEPLOYMENT_SKU     # Domyślnie: Standard
 AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Domyślnie: 50 (tysięcy TPM)
 
-# Konfiguracja agenta
+# Konfiguracja Agenta
 AZURE_AI_AGENT_NAME               # Wyświetlana nazwa agenta
 AZURE_EXISTING_AGENT_ID           # Użyj istniejącego agenta (opcjonalnie)
 ```
@@ -383,5 +383,5 @@ azd env set --from-file .env
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Zastrzeżenie**:  
-Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mimo iż staramy się zapewnić dokładność, prosimy pamiętać, że tłumaczenia automatyczne mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego języku źródłowym należy traktować jako źródło ostateczne. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż staramy się zapewnić dokładność, prosimy mieć na uwadze, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w jego języku oryginalnym powinien być uznawany za źródło autorytatywne. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

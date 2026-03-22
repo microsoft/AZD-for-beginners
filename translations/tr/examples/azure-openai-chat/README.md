@@ -1,96 +1,74 @@
-# Azure OpenAI Sohbet Uygulaması
+# Microsoft Foundry Models Chat Application
 
-**Öğrenme Seviyesi:** Orta ⭐⭐ | **Süre:** 35-45 dakika | **Maliyet:** Aylık $50-200
+**Learning Path:** Intermediate ⭐⭐ | **Time:** 35-45 minutes | **Cost:** $50-200/month
 
-Azure Developer CLI (azd) kullanılarak dağıtılmış tam bir Azure OpenAI sohbet uygulaması. Bu örnek, GPT-4 dağıtımını, güvenli API erişimini ve basit bir sohbet arayüzünü gösterir.
+Azure Developer CLI (azd) kullanılarak dağıtılmış eksiksiz bir Microsoft Foundry Models sohbet uygulaması. Bu örnek, gpt-4.1 dağıtımını, güvenli API erişimini ve basit bir sohbet arayüzünü gösterir.
 
-## 🎯 Öğrenecekleriniz
+## 🎯 What You'll Learn
 
-- GPT-4 modeliyle Azure OpenAI Hizmeti'ni dağıtma  
-- OpenAI API anahtarlarını Key Vault ile güvence altına alma  
-- Python ile basit bir sohbet arayüzü oluşturma  
-- Token kullanımını ve maliyetleri izleme  
-- Hız sınırlama ve hata yönetimi uygulama  
+- gpt-4.1 modeli ile Microsoft Foundry Models Service dağıtımı
+- OpenAI API anahtarlarını Key Vault ile güvence altına alma
+- Python ile basit bir sohbet arayüzü oluşturma
+- Token kullanımını ve maliyetleri izleme
+- Hız sınırlama ve hata yönetimi uygulama
 
-## 📦 İçerikler
+## 📦 What's Included
 
-✅ **Azure OpenAI Hizmeti** - GPT-4 modeli dağıtımı  
-✅ **Python Sohbet Uygulaması** - Basit komut satırı sohbet arayüzü  
-✅ **Key Vault Entegrasyonu** - Güvenli API anahtarı depolama  
-✅ **ARM Şablonları** - Tam altyapı kodu  
-✅ **Maliyet İzleme** - Token kullanımı takibi  
-✅ **Hız Sınırlama** - Kota tükenmesini önleme  
+✅ **Microsoft Foundry Models Service** - gpt-4.1 model dağıtımı  
+✅ **Python Chat App** - Basit komut satırı sohbet arayüzü  
+✅ **Key Vault Integration** - API anahtarlarının güvenli depolanması  
+✅ **ARM Templates** - Altyapı kodu olarak tam şablonlar  
+✅ **Cost Monitoring** - Token kullanım takibi  
+✅ **Rate Limiting** - Kota tükenmesini önleme  
 
-## Mimari
+## Architecture
 
+```mermaid
+graph TD
+    App[Python Sohbet Uygulaması<br/>Yerel/Bulut<br/>Komut satırı arayüzü<br/>Konuşma geçmişi<br/>Jeton kullanım takibi] -- "HTTPS (API Anahtarı)" --> Foundry[Microsoft Foundry Modeller Hizmeti<br/>gpt-4.1 Modeli<br/>20K token/dak kapasite<br/>Çok bölgeli yedek geçişi]
+    Foundry --> KV[Azure Anahtar Kasası<br/>OpenAI API Anahtarı<br/>Uç Nokta URL'si]
+    Foundry -. Yönetilen Kimlik .-> KV
 ```
-┌─────────────────────────────────────────────┐
-│   Python Chat Application (Local/Cloud)    │
-│   - Command-line interface                 │
-│   - Conversation history                   │
-│   - Token usage tracking                   │
-└──────────────────┬──────────────────────────┘
-                   │ HTTPS (API Key)
-                   ▼
-┌─────────────────────────────────────────────┐
-│   Azure OpenAI Service                      │
-│   ┌───────────────────────────────────────┐ │
-│   │   GPT-4 Model                         │ │
-│   │   - 20K tokens/min capacity           │ │
-│   │   - Multi-region failover (optional)  │ │
-│   └───────────────────────────────────────┘ │
-│                                             │
-│   Managed Identity ───────────────────────┐ │
-└────────────────────────────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────────┐
-│   Azure Key Vault                           │
-│   - OpenAI API Key (secret)                 │
-│   - Endpoint URL (secret)                   │
-└─────────────────────────────────────────────┘
-```
+## Prerequisites
 
-## Ön Koşullar
+### Required
 
-### Gereklilikler
+- **Azure Developer CLI (azd)** - [Kurulum kılavuzu](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+- **Azure subscription** with OpenAI access - [Request access](https://aka.ms/oai/access)
+- **Python 3.9+** - [Install Python](https://www.python.org/downloads/)
 
-- **Azure Developer CLI (azd)** - [Kurulum rehberi](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)  
-- **OpenAI erişimi olan Azure aboneliği** - [Erişim talep edin](https://aka.ms/oai/access)  
-- **Python 3.9+** - [Python'u indir](https://www.python.org/downloads/)  
-
-### Ön Koşulları Doğrulama
+### Verify Prerequisites
 
 ```bash
-# Azd sürümünü kontrol et (1.5.0 veya daha yüksek gerekli)
+# azd sürümünü kontrol edin (1.5.0 veya daha yüksek gerekir)
 azd version
 
-# Azure girişini doğrula
+# Azure girişini doğrulayın
 azd auth login
 
-# Python sürümünü kontrol et
+# Python sürümünü kontrol edin
 python --version  # veya python3 --version
 
-# OpenAI erişimini doğrula (Azure Portal'da kontrol et)
+# OpenAI erişimini doğrulayın (Azure Portal'da kontrol edin)
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus
 ```
 
-> **⚠️ Önemli:** Azure OpenAI, uygulama onayı gerektirir. Henüz başvurmadıysanız, [aka.ms/oai/access](https://aka.ms/oai/access) adresini ziyaret edin. Onay genellikle 1-2 iş günü sürer.
+> **⚠️ Important:** Microsoft Foundry Models requires application approval. If you haven't applied, visit [aka.ms/oai/access](https://aka.ms/oai/access). Approval typically takes 1-2 business days.
 
-## ⏱️ Dağıtım Zaman Çizelgesi
+## ⏱️ Deployment Timeline
 
-| Aşama                | Süre          | Ne Oluyor?                          |
-|----------------------|---------------|-------------------------------------|
-| Ön koşul kontrolü    | 2-3 dakika    | OpenAI kota uygunluğu doğrulanır    |
-| Altyapı dağıtımı     | 8-12 dakika   | OpenAI, Key Vault, model dağıtımı   |
-| Uygulama yapılandırma| 2-3 dakika    | Ortam ve bağımlılıklar ayarlanır    |
-| **Toplam**           | **12-18 dakika** | GPT-4 ile sohbet etmeye hazır!     |
+| Phase | Duration | What Happens |
+|-------|----------|--------------|
+| Prerequisites check | 2-3 minutes | Verify OpenAI quota availability |
+| Deploy infrastructure | 8-12 minutes | Create OpenAI, Key Vault, model deployment |
+| Configure application | 2-3 minutes | Set up environment and dependencies |
+| **Total** | **12-18 minutes** | Ready to chat with gpt-4.1 |
 
-**Not:** İlk OpenAI dağıtımı, model sağlama nedeniyle daha uzun sürebilir.
+**Note:** First-time OpenAI deployment may take longer due to model provisioning.
 
-## Hızlı Başlangıç
+## Quick Start
 
 ```bash
 # Örneğe gidin
@@ -101,9 +79,9 @@ azd env new myopenai
 
 # Her şeyi dağıtın (altyapı + yapılandırma)
 azd up
-# Şunlar için yönlendirileceksiniz:
-# 1. Azure aboneliğini seçin
-# 2. OpenAI kullanılabilirliği olan bir konum seçin (ör. eastus, eastus2, westus)
+# Sizden şunlar istenecek:
+# 1. Azure aboneliği seçin
+# 2. OpenAI kullanılabilirliği olan konumu seçin (örn., eastus, eastus2, westus)
 # 3. Dağıtım için 12-18 dakika bekleyin
 
 # Python bağımlılıklarını yükleyin
@@ -113,42 +91,42 @@ pip install -r requirements.txt
 python chat.py
 ```
 
-**Beklenen Çıktı:**
+**Expected Output:**
 ```
-🤖 Azure OpenAI Chat Application
-Connected to: GPT-4 (eastus)
+🤖 Microsoft Foundry Models Chat Application
+Connected to: gpt-4.1 (eastus)
 Type your message (or 'quit' to exit)
 
-You: Hello! Tell me about Azure OpenAI.
-Assistant: Azure OpenAI Service provides REST API access to OpenAI's powerful language models including GPT-4, GPT-3.5-Turbo, and Embeddings...
+You: Hello! Tell me about Microsoft Foundry Models.
+Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's powerful language models including gpt-4.1, GPT-3.5-Turbo, and Embeddings...
 
 [Tokens used: 145 | Estimated cost: $0.0044]
 ```
 
-## ✅ Dağıtımı Doğrulama
+## ✅ Verify Deployment
 
-### Adım 1: Azure Kaynaklarını Kontrol Etme
+### Step 1: Check Azure Resources
 
 ```bash
-# Dağıtılan kaynakları görüntüle
+# Dağıtılan kaynakları görüntüleyin
 azd show
 
 # Beklenen çıktı şunları gösterir:
 # - OpenAI Hizmeti: (kaynak adı)
 # - Anahtar Kasası: (kaynak adı)
-# - Dağıtım: gpt-4
-# - Konum: eastus (veya seçtiğiniz bölge)
+# - Dağıtım: gpt-4.1
+# - Bölge: eastus (veya seçtiğiniz bölge)
 ```
 
-### Adım 2: OpenAI API'sini Test Etme
+### Step 2: Test OpenAI API
 
 ```bash
-# OpenAI uç noktasını ve anahtarını alın
+# OpenAI uç noktasını ve anahtarını al
 OPENAI_ENDPOINT=$(azd env get-value AZURE_OPENAI_ENDPOINT)
 OPENAI_KEY=$(azd env get-value AZURE_OPENAI_API_KEY)
 
 # API çağrısını test et
-curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4/chat/completions?api-version=2024-08-01-preview" \
+curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
   -d '{
@@ -157,7 +135,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4/chat/completions?api-version=202
   }'
 ```
 
-**Beklenen Yanıt:**
+**Expected Response:**
 ```json
 {
   "choices": [
@@ -176,10 +154,10 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4/chat/completions?api-version=202
 }
 ```
 
-### Adım 3: Key Vault Erişimini Doğrulama
+### Step 3: Verify Key Vault Access
 
 ```bash
-# Anahtar Kasasında sırları listele
+# Key Vault'taki sırları listele
 KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
 
 az keyvault secret list \
@@ -188,17 +166,17 @@ az keyvault secret list \
   --output table
 ```
 
-**Beklenen Sırlar:**
-- `openai-api-key`  
-- `openai-endpoint`  
+**Expected Secrets:**
+- `openai-api-key`
+- `openai-endpoint`
 
-**Başarı Kriterleri:**
-- ✅ GPT-4 ile OpenAI hizmeti dağıtıldı  
-- ✅ API çağrısı geçerli bir yanıt döndürüyor  
-- ✅ Sırlar Key Vault'ta saklandı  
-- ✅ Token kullanımı takibi çalışıyor  
+**Success Criteria:**
+- ✅ OpenAI service deployed with gpt-4.1
+- ✅ API call returns valid completion
+- ✅ Secrets stored in Key Vault
+- ✅ Token usage tracking works
 
-## Proje Yapısı
+## Project Structure
 
 ```
 azure-openai-chat/
@@ -215,70 +193,71 @@ azure-openai-chat/
 └── .gitignore                  ✅ Git ignore rules
 ```
 
-## Uygulama Özellikleri
+## Application Features
 
-### Sohbet Arayüzü (`chat.py`)
+### Chat Interface (`chat.py`)
 
-Sohbet uygulaması şunları içerir:  
-- **Konuşma Geçmişi** - Mesajlar arasında bağlamı korur  
-- **Token Sayımı** - Kullanımı izler ve maliyetleri tahmin eder  
-- **Hata Yönetimi** - Hız sınırları ve API hatalarını zarifçe ele alır  
-- **Maliyet Tahmini** - Mesaj başına gerçek zamanlı maliyet hesaplama  
-- **Akış Desteği** - İsteğe bağlı akış yanıtları  
+Sohbet uygulaması şunları içerir:
 
-### Komutlar
+- **Conversation History** - Mesajlar arasında bağlamı korur
+- **Token Counting** - Kullanımı izler ve maliyet tahmini yapar
+- **Error Handling** - Hız limitleri ve API hatalarını zarifçe ele alır
+- **Cost Estimation** - Mesaj başına gerçek zamanlı maliyet hesaplama
+- **Streaming Support** - Opsiyonel akış yanıtları
 
-Sohbet sırasında şunları kullanabilirsiniz:  
-- `quit` veya `exit` - Oturumu sonlandırır  
-- `clear` - Konuşma geçmişini temizler  
-- `tokens` - Toplam token kullanımını gösterir  
-- `cost` - Tahmini toplam maliyeti gösterir  
+### Commands
 
-### Yapılandırma (`config.py`)
+Sohbet sırasında kullanabileceğiniz komutlar:
+- `quit` or `exit` - Oturumu sonlandırır
+- `clear` - Konuşma geçmişini temizler
+- `tokens` - Toplam token kullanımını gösterir
+- `cost` - Tahmini toplam maliyeti gösterir
 
-Ortam değişkenlerinden yapılandırma yükler:  
+### Configuration (`config.py`)
+
+Ortam değişkenlerinden yapılandırmayı yükler:
 ```python
 AZURE_OPENAI_ENDPOINT  # Anahtar Kasasından
 AZURE_OPENAI_API_KEY   # Anahtar Kasasından
-AZURE_OPENAI_MODEL     # Varsayılan: gpt-4
+AZURE_OPENAI_MODEL     # Varsayılan: gpt-4.1
 AZURE_OPENAI_MAX_TOKENS # Varsayılan: 800
 ```
 
-## Kullanım Örnekleri
+## Usage Examples
 
-### Temel Sohbet
+### Basic Chat
 
 ```bash
 python chat.py
 ```
 
-### Özel Model ile Sohbet
+### Chat with Custom Model
 
 ```bash
 export AZURE_OPENAI_MODEL=gpt-35-turbo
 python chat.py
 ```
 
-### Akışlı Sohbet
+### Chat with Streaming
 
 ```bash
 python chat.py --stream
 ```
 
-### Örnek Konuşma
+### Example Conversation
 
 ```
-You: Explain Azure OpenAI Service in 3 sentences.
-Assistant: Azure OpenAI Service is Microsoft Azure's cloud platform offering 
+You: Explain Microsoft Foundry Models Service in 3 sentences.
+Assistant: Microsoft Foundry Models Service is Microsoft Azure's cloud platform offering 
 that provides access to OpenAI's powerful language models. It enables developers 
-to integrate capabilities like GPT-4 into their applications with enterprise-grade 
+to integrate capabilities like gpt-4.1 into their applications with enterprise-grade 
 security and compliance. The service includes features for content filtering, 
 abuse monitoring, and responsible AI practices.
 
 [Tokens used: 89 | Estimated cost: $0.0027]
 
 You: What models are available?
-Assistant: Azure OpenAI Service offers several model families including GPT-4 
+Assistant: Microsoft Foundry Models Service offers several model families including gpt-4.1 
 (most capable), GPT-3.5-Turbo (faster and cost-effective), and Embeddings models 
 for vector search. Each model has different capabilities, pricing, and token limits.
 
@@ -287,31 +266,31 @@ for vector search. Each model has different capabilities, pricing, and token lim
 Total session: 156 tokens | $0.0047
 ```
 
-## Maliyet Yönetimi
+## Cost Management
 
-### Token Fiyatlandırması (GPT-4)
+### Token Pricing (gpt-4.1)
 
-| Model       | Girdi (1K token başına) | Çıktı (1K token başına) |
-|-------------|-------------------------|-------------------------|
-| GPT-4       | $0.03                  | $0.06                  |
-| GPT-3.5-Turbo| $0.0015               | $0.002                 |
+| Model | Input (per 1K tokens) | Output (per 1K tokens) |
+|-------|----------------------|------------------------|
+| gpt-4.1 | $0.03 | $0.06 |
+| GPT-3.5-Turbo | $0.0015 | $0.002 |
 
-### Tahmini Aylık Maliyetler
+### Estimated Monthly Costs
 
-Kullanım desenlerine göre:  
+Based on usage patterns:
 
-| Kullanım Seviyesi | Mesaj/Gün | Token/Gün | Aylık Maliyet |
-|-------------------|-----------|-----------|---------------|
-| **Hafif**        | 20 mesaj  | 3,000 token | $3-5         |
-| **Orta**         | 100 mesaj | 15,000 token| $15-25       |
-| **Yoğun**        | 500 mesaj | 75,000 token| $75-125      |
+| Usage Level | Messages/Day | Tokens/Day | Monthly Cost |
+|-------------|--------------|------------|--------------|
+| **Light** | 20 messages | 3,000 tokens | $3-5 |
+| **Moderate** | 100 messages | 15,000 tokens | $15-25 |
+| **Heavy** | 500 messages | 75,000 tokens | $75-125 |
 
-**Temel Altyapı Maliyeti:** $1-2/ay (Key Vault + minimum işlem)  
+**Base Infrastructure Cost:** $1-2/month (Key Vault + minimal compute)
 
-### Maliyet Optimizasyon İpuçları
+### Cost Optimization Tips
 
 ```bash
-# 1. Daha basit görevler için GPT-3.5-Turbo kullanın (20 kat daha ucuz)
+# 1. Daha basit görevler için GPT-3.5-Turbo'yu kullanın (20 kat daha ucuz)
 export AZURE_OPENAI_MODEL=gpt-35-turbo
 
 # 2. Daha kısa yanıtlar için maksimum token sayısını azaltın
@@ -327,15 +306,15 @@ az consumption budget create \
   --time-grain Monthly
 ```
 
-## İzleme
+## Monitoring
 
-### Token Kullanımını Görüntüleme
+### View Token Usage
 
 ```bash
 # Azure Portal'da:
-# OpenAI Kaynağı → Metrikler → "Token İşlemi"ni Seç
+# OpenAI Kaynağı → Metrikler → "Token Transaction" seçin
 
-# Veya Azure CLI üzerinden:
+# Veya Azure CLI ile:
 az monitor metrics list \
   --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
   --metric "TokenTransaction" \
@@ -343,29 +322,29 @@ az monitor metrics list \
   --interval PT1M
 ```
 
-### API Günlüklerini Görüntüleme
+### View API Logs
 
 ```bash
-# Tanı günlüklerini akışa al
+# Akış tanılama günlükleri
 az monitor diagnostic-settings create \
   --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
   --name openai-logs \
   --logs '[{"category": "Audit", "enabled": true}]' \
   --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID)
 
-# Günlükleri sorgula
+# Sorgu günlükleri
 az monitor log-analytics query \
   --workspace $(azd env get-value LOG_ANALYTICS_WORKSPACE_ID) \
   --analytics-query "AzureDiagnostics | where Category == 'Audit' | top 10 by TimeGenerated"
 ```
 
-## Sorun Giderme
+## Troubleshooting
 
-### Sorun: "Erişim Reddedildi" Hatası
+### Issue: "Access Denied" Error
 
-**Belirtiler:** API çağrısında 403 Yasak hatası  
+**Symptoms:** 403 Forbidden when calling API
 
-**Çözümler:**  
+**Solutions:**
 ```bash
 # 1. OpenAI erişiminin onaylandığını doğrulayın
 az cognitiveservices account show \
@@ -375,103 +354,103 @@ az cognitiveservices account show \
 # 2. API anahtarının doğru olduğunu kontrol edin
 azd env get-value AZURE_OPENAI_API_KEY
 
-# 3. Uç nokta URL formatını doğrulayın
+# 3. Uç nokta URL biçimini doğrulayın
 azd env get-value AZURE_OPENAI_ENDPOINT
-# Şu şekilde olmalı: https://[name].openai.azure.com/
+# Şu şekilde olmalıdır: https://[name].openai.azure.com/
 ```
 
-### Sorun: "Hız Sınırı Aşıldı"
+### Issue: "Rate Limit Exceeded"
 
-**Belirtiler:** 429 Çok Fazla İstek hatası  
+**Symptoms:** 429 Too Many Requests
 
-**Çözümler:**  
+**Solutions:**
 ```bash
-# 1. Mevcut kotayı kontrol et
+# 1. Mevcut kotayı kontrol edin
 az cognitiveservices account deployment show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
-  --deployment-name gpt-4
+  --deployment-name gpt-4.1
 
-# 2. Kota artırımı talep et (gerekirse)
-# Azure Portal → OpenAI Kaynağı → Kotalar → Artış Talep Et bölümüne git
+# 2. Kota artışı talep edin (gerekirse)
+# Azure Portal'a gidin → OpenAI Kaynağı → Kotalar → Artış Talep Et
 
-# 3. Yeniden deneme mantığını uygula (zaten chat.py içinde)
-# Uygulama otomatik olarak üstel geri çekilme ile yeniden deniyor
+# 3. Yeniden deneme mantığını uygulayın (zaten chat.py'de)
+# Uygulama otomatik olarak üstel geri çekilme ile yeniden dener
 ```
 
-### Sorun: "Model Bulunamadı"
+### Issue: "Model Not Found"
 
-**Belirtiler:** Dağıtım için 404 hatası  
+**Symptoms:** 404 error for deployment
 
-**Çözümler:**  
+**Solutions:**
 ```bash
-# 1. Mevcut dağıtımları listele
+# 1. Kullanılabilir dağıtımları listele
 az cognitiveservices account deployment list \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
 
-# 2. Ortamdaki model adını doğrula
+# 2. Ortamda model adını doğrulayın
 echo $AZURE_OPENAI_MODEL
 
-# 3. Doğru dağıtım adını güncelle
-export AZURE_OPENAI_MODEL=gpt-4  # veya gpt-35-turbo
+# 3. Doğru dağıtım adına güncelleyin
+export AZURE_OPENAI_MODEL=gpt-4.1  # veya gpt-35-turbo
 ```
 
-### Sorun: Yüksek Gecikme
+### Issue: High Latency
 
-**Belirtiler:** Yavaş yanıt süreleri (>5 saniye)  
+**Symptoms:** Slow response times (>5 seconds)
 
-**Çözümler:**  
+**Solutions:**
 ```bash
-# 1. Bölgesel gecikmeyi kontrol et
-# Kullanıcılara en yakın bölgeye dağıt
+# 1. Bölgesel gecikmeyi kontrol edin
+# Kullanıcılara en yakın bölgeye dağıtın
 
-# 2. Daha hızlı yanıtlar için max_tokens değerini azalt
+# 2. Daha hızlı yanıtlar için max_tokens değerini azaltın
 export AZURE_OPENAI_MAX_TOKENS=400
 
-# 3. Daha iyi kullanıcı deneyimi için akışı kullan
+# 3. Daha iyi kullanıcı deneyimi için akış (streaming) kullanın
 python chat.py --stream
 ```
 
-## Güvenlik En İyi Uygulamaları
+## Security Best Practices
 
-### 1. API Anahtarlarını Koruyun
+### 1. Protect API Keys
 
 ```bash
-# Anahtarları asla kaynak kontrolüne göndermeyin
-# Anahtar Kasası kullanın (zaten yapılandırılmış)
+# Anahtarları asla kaynak kontrolüne eklemeyin
+# Key Vault kullanın (zaten yapılandırıldı)
 
-# Anahtarları düzenli olarak döndürün
+# Anahtarları düzenli olarak değiştirin
 az cognitiveservices account keys regenerate \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
   --key-name key1
 ```
 
-### 2. İçerik Filtreleme Uygulayın
+### 2. Implement Content Filtering
 
 ```python
-# Azure OpenAI, yerleşik içerik filtreleme içerir
+# Microsoft Foundry Modelleri yerleşik içerik filtrelemesine sahiptir
 # Azure Portal'da yapılandırın:
 # OpenAI Kaynağı → İçerik Filtreleri → Özel Filtre Oluştur
 
-# Kategoriler: Nefret, Cinsel, Şiddet, Kendine zarar verme
-# Seviyeler: Düşük, Orta, Yüksek filtreleme
+# Kategoriler: Nefret, Cinsel, Şiddet, Kendine Zarar
+# Düzeyler: Düşük, Orta, Yüksek filtreleme
 ```
 
-### 3. Yönetilen Kimlik Kullanın (Üretim)
+### 3. Use Managed Identity (Production)
 
 ```bash
 # Üretim dağıtımları için yönetilen kimlik kullanın
 # API anahtarları yerine (Azure'da uygulama barındırmayı gerektirir)
 
-# infra/openai.bicep dosyasını güncelleyin:
+# infra/openai.bicep dosyasını şunu içerecek şekilde güncelle:
 # identity: { type: 'SystemAssigned' }
 ```
 
-## Geliştirme
+## Development
 
-### Yerel Olarak Çalıştırma
+### Run Locally
 
 ```bash
 # Bağımlılıkları yükle
@@ -480,13 +459,13 @@ pip install -r src/requirements.txt
 # Ortam değişkenlerini ayarla
 export AZURE_OPENAI_ENDPOINT="https://[name].openai.azure.com/"
 export AZURE_OPENAI_API_KEY="your-api-key"
-export AZURE_OPENAI_MODEL="gpt-4"
+export AZURE_OPENAI_MODEL="gpt-4.1"
 
 # Uygulamayı çalıştır
 python src/chat.py
 ```
 
-### Testleri Çalıştırma
+### Run Tests
 
 ```bash
 # Test bağımlılıklarını yükle
@@ -495,14 +474,14 @@ pip install pytest pytest-cov
 # Testleri çalıştır
 pytest tests/ -v
 
-# Kapsama ile
+# Kapsam ile
 pytest tests/ --cov=src --cov-report=html
 ```
 
-### Model Dağıtımını Güncelleme
+### Update Model Deployment
 
 ```bash
-# Farklı model versiyonunu dağıt
+# Farklı bir model sürümünü dağıt
 az cognitiveservices account deployment create \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
@@ -514,10 +493,10 @@ az cognitiveservices account deployment create \
   --sku-name "Standard"
 ```
 
-## Temizlik
+## Clean Up
 
 ```bash
-# Tüm Azure kaynaklarını sil
+# Tüm Azure kaynaklarını silin
 azd down --force --purge
 
 # Bu şunları kaldırır:
@@ -527,81 +506,81 @@ azd down --force --purge
 # - Tüm dağıtımlar ve yapılandırmalar
 ```
 
-## Sonraki Adımlar
+## Next Steps
 
-### Bu Örneği Genişletin
+### Expand This Example
 
-1. **Web Arayüzü Ekleyin** - React/Vue ön yüzü oluşturun  
+1. **Add Web Interface** - Build React/Vue frontend
    ```bash
-   # Azure.yaml dosyasına frontend hizmeti ekle
-   # Azure Static Web Apps'a dağıt
+   # Ön uç servisini azure.yaml dosyasına ekle
+   # Azure Static Web Apps'e dağıt
    ```
 
-2. **RAG Uygulayın** - Azure AI Search ile belge arama ekleyin  
+2. **Implement RAG** - Add document search with Azure AI Search
    ```python
-   # Azure Cognitive Search'i entegre et
-   # Belgeleri yükle ve vektör indeksi oluştur
+   # Azure Cognitive Search'i entegre edin
+   # Belgeleri yükleyin ve vektör dizini oluşturun
    ```
 
-3. **Fonksiyon Çağrısı Ekleyin** - Araç kullanımını etkinleştirin  
+3. **Add Function Calling** - Enable tool use
    ```python
-   # chat.py dosyasında fonksiyonları tanımlayın
-   # GPT-4'ün harici API'leri çağırmasına izin verin
+   # chat.py içinde fonksiyonları tanımlayın
+   # gpt-4.1'in harici API'leri çağırmasına izin verin
    ```
 
-4. **Çoklu Model Desteği** - Birden fazla model dağıtın  
+4. **Multi-Model Support** - Deploy multiple models
    ```bash
-   # gpt-35-turbo, gömme modeller ekle
+   # gpt-35-turbo ve embedding modellerini ekle
    # Model yönlendirme mantığını uygula
    ```
 
-### İlgili Örnekler
+### Related Examples
 
-- **[Perakende Çoklu Ajan](../retail-scenario.md)** - Gelişmiş çoklu ajan mimarisi  
-- **[Veritabanı Uygulaması](../../../../examples/database-app)** - Kalıcı depolama ekleyin  
-- **[Kapsayıcı Uygulamalar](../../../../examples/container-app)** - Kapsayıcılaştırılmış hizmet olarak dağıtın  
+- **[Retail Multi-Agent](../retail-scenario.md)** - Gelişmiş çok ajanlı mimari
+- **[Database App](../../../../examples/database-app)** - Kalıcı depolama ekleyin
+- **[Container Apps](../../../../examples/container-app)** - Konteyner olarak hizmete dağıtın
 
-### Öğrenme Kaynakları
+### Learning Resources
 
-- 📚 [AZD Başlangıç Kursu](../../README.md) - Ana kurs sayfası  
-- 📚 [Azure OpenAI Belgeleri](https://learn.microsoft.com/azure/ai-services/openai/) - Resmi belgeler  
-- 📚 [OpenAI API Referansı](https://platform.openai.com/docs/api-reference) - API detayları  
-- 📚 [Sorumlu AI](https://www.microsoft.com/ai/responsible-ai) - En iyi uygulamalar  
+- 📚 [AZD For Beginners Course](../../README.md) - Ana kurs ana sayfası
+- 📚 [Microsoft Foundry Models Documentation](https://learn.microsoft.com/azure/ai-services/openai/) - Resmi dokümantasyon
+- 📚 [OpenAI API Reference](https://platform.openai.com/docs/api-reference) - API ayrıntıları
+- 📚 [Responsible AI](https://www.microsoft.com/ai/responsible-ai) - En iyi uygulamalar
 
-## Ek Kaynaklar
+## Additional Resources
 
-### Belgeler
-- **[Azure OpenAI Hizmeti](https://learn.microsoft.com/azure/ai-services/openai/)** - Tam rehber  
-- **[GPT-4 Modelleri](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - Model yetenekleri  
-- **[İçerik Filtreleme](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - Güvenlik özellikleri  
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd referansı  
+### Documentation
+- **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - Tam kılavuz
+- **[gpt-4.1 Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - Model yetenekleri
+- **[Content Filtering](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - Güvenlik özellikleri
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd referansı
 
-### Eğitimler
-- **[OpenAI Hızlı Başlangıç](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - İlk dağıtım  
-- **[Sohbet Tamamlamaları](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - Sohbet uygulamaları oluşturma  
-- **[Fonksiyon Çağrısı](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - Gelişmiş özellikler  
+### Tutorials
+- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - İlk dağıtım
+- **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - Sohbet uygulamaları oluşturma
+- **[Function Calling](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - Gelişmiş özellikler
 
-### Araçlar
-- **[Azure OpenAI Stüdyosu](https://oai.azure.com/)** - Web tabanlı oyun alanı  
-- **[Prompt Mühendisliği Rehberi](https://platform.openai.com/docs/guides/prompt-engineering)** - Daha iyi istemler yazma  
-- **[Token Hesaplayıcı](https://platform.openai.com/tokenizer)** - Token kullanımını tahmin etme  
+### Tools
+- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - Web tabanlı oyun alanı
+- **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - Daha iyi istemler yazma
+- **[Token Calculator](https://platform.openai.com/tokenizer)** - Token kullanımını tahmin etme
 
-### Topluluk
-- **[Azure AI Discord](https://discord.gg/azure)** - Topluluktan yardım alın  
-- **[GitHub Tartışmaları](https://github.com/Azure-Samples/openai/discussions)** - Soru-Cevap forumu  
-- **[Azure Blog](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - En son güncellemeler  
+### Community
+- **[Azure AI Discord](https://discord.gg/azure)** - Topluluktan yardım alın
+- **[GitHub Discussions](https://github.com/Azure-Samples/openai/discussions)** - Soru-cevap forumu
+- **[Azure Blog](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - En son güncellemeler
 
 ---
 
-**🎉 Tebrikler!** Azure OpenAI'yi dağıttınız ve çalışan bir sohbet uygulaması oluşturdunuz. GPT-4'ün yeteneklerini keşfetmeye başlayın ve farklı istemler ve kullanım durumlarıyla deney yapın.
+**🎉 Success!** You've deployed Microsoft Foundry Models and built a working chat application. Start exploring gpt-4.1's capabilities and experiment with different prompts and use cases.
 
-**Sorularınız mı var?** [Bir sorun açın](https://github.com/microsoft/AZD-for-beginners/issues) veya [SSS](../../resources/faq.md) bölümüne göz atın.
+**Questions?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) or check the [FAQ](../../resources/faq.md)
 
-**Maliyet Uyarısı:** Test işlemi tamamlandığında `azd down` komutunu çalıştırmayı unutmayın, aksi takdirde (~$50-100/ay aktif kullanım için) devam eden ücretlerle karşılaşabilirsiniz.
+**Cost Alert:** Remember to run `azd down` when done testing to avoid ongoing charges (~$50-100/month for active usage).
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+**Disclaimer**:
+Bu belge AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen göz önünde bulundurun. Orijinal belge kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
