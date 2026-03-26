@@ -234,6 +234,21 @@ By completing this structured course, you will:
 - **Optimize for Production**: Security, scaling, monitoring, and cost management
 - **Build Multi-Agent Solutions**: Deploy complex AI architectures
 
+## Before You Start: Accounts, Access, and Assumptions
+
+Before you begin Chapter 1, make sure you have the following in place. The installation steps later in this guide assume these basics are already handled.
+
+- **An Azure subscription**: You can use an existing subscription from work or your own account, or create a [free trial](https://aka.ms/azurefreetrial) to get started.
+- **Permission to create Azure resources**: For most exercises, you should have at least **Contributor** access on the target subscription or resource group. Some chapters may also assume you can create resource groups, managed identities, and RBAC assignments.
+- [**A GitHub account**](https://github.com): This is useful for forking the repository, tracking your own changes, and using GitHub Codespaces for the workshop.
+- **Basic terminal familiarity**: You do not need to be an expert, but you should be comfortable running commands such as `git clone`, `azd auth login`, and `azd up`.
+
+> **Working in an enterprise subscription?**
+> If your Azure environment is managed by an administrator, confirm ahead of time that you can deploy resources in the subscription or resource group you plan to use. If not, ask for a sandbox subscription or Contributor access before you start.
+
+> **New to Azure?**
+> Start with your own Azure trial or pay-as-you-go subscription at https://aka.ms/azurefreetrial so you can complete the exercises end to end without waiting on tenant-level approvals.
+
 ## 🗺️ Course Map: Quick Navigation by Chapter
 
 Each chapter has a dedicated README with learning objectives, quick starts, and exercises:
