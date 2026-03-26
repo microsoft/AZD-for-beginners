@@ -1,116 +1,116 @@
-# Perakende Çoklu Ajan Çözümü - Altyapı Şablonu
+# Perakende Çok Ajanlı Çözüm - Altyapı Şablonu
 
 **Bölüm 5: Üretim Dağıtım Paketi**
 - **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
-- **📖 İlgili Bölüm**: [Bölüm 5: Çoklu Ajanlı AI Çözümleri](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **📝 Senaryo Kılavuzu**: [Tam Mimari](../retail-scenario.md)
-- **🎯 Hızlı Dağıtım**: [Tek Tıkla Dağıtım](../../../../examples/retail-multiagent-arm-template)
+- **📖 İlgili Bölüm**: [Bölüm 5: Çok Ajanlı Yapay Zeka Çözümleri](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **📝 Senaryo Rehberi**: [Tam Mimari](../retail-scenario.md)
+- **🎯 Hızlı Dağıtım**: [Tek Tıkla Dağıtım](#-quick-deployment)
 
 > **⚠️ SADECE ALTYAPI ŞABLONU**  
-> Bu ARM şablonu, çoklu ajan sistemi için **Azure kaynaklarını** dağıtır.  
+> Bu ARM şablonu çok ajanlı bir sistem için **Azure kaynaklarını** dağıtır.  
 >  
 > **Dağıtılanlar (15-25 dakika):**
-> - ✅ Azure OpenAI (GPT-4o, GPT-4o-mini, 3 bölgede gömme modeller)
-> - ✅ AI Arama hizmeti (boş, indeks oluşturma için hazır)
+> - ✅ Microsoft Foundry Modelleri (gpt-4.1, gpt-4.1-mini, 3 bölgede embeddings)
+> - ✅ AI Search servisi (boş, indeks oluşturulmaya hazır)
 > - ✅ Container Apps (yer tutucu görüntüler, kodunuz için hazır)
 > - ✅ Depolama, Cosmos DB, Key Vault, Application Insights
 >  
-> **Dahil Olmayanlar (geliştirme gerektirir):**
+> **DAHİL OLMAYANLAR (geliştirme gerektirir):**
 > - ❌ Ajan uygulama kodu (Müşteri Ajanı, Envanter Ajanı)
 > - ❌ Yönlendirme mantığı ve API uç noktaları
-> - ❌ Ön uç sohbet arayüzü
-> - ❌ Arama indeks şemaları ve veri hatları
-> - ❌ **Tahmini geliştirme süresi: 80-120 saat**
+> - ❌ Ön uç sohbet kullanıcı arayüzü
+> - ❌ Arama indeks şemaları ve veri boru hatları
+> - ❌ **Tahmini geliştirme çabası: 80-120 saat**
 >  
 > **Bu şablonu kullanın eğer:**
-> - ✅ Çoklu ajan projesi için Azure altyapısı oluşturmak istiyorsanız
-> - ✅ Ajan uygulamasını ayrı olarak geliştirmeyi planlıyorsanız
-> - ✅ Üretime hazır bir altyapı temeli istiyorsanız
+> - ✅ Çok ajanlı bir proje için Azure altyapısı sağlamak istiyorsunuz
+> - ✅ Ajan uygulamasını ayrı olarak geliştirmeyi planlıyorsunuz
+> - ✅ Üretime hazır bir altyapı temel hattına ihtiyacınız var
 >  
 > **Kullanmayın eğer:**
-> - ❌ Hemen çalışan bir çoklu ajan demosu bekliyorsanız
-> - ❌ Tam uygulama kodu örnekleri arıyorsanız
+> - ❌ Anında çalışan bir çok ajanlı demo bekliyorsanız
+> - ❌ Tam uygulama kod örnekleri arıyorsanız
 
 ## Genel Bakış
 
-Bu dizin, çoklu ajan müşteri destek sistemi için **altyapı temeli** oluşturmak üzere kapsamlı bir Azure Resource Manager (ARM) şablonu içerir. Şablon, gerekli tüm Azure hizmetlerini, doğru şekilde yapılandırılmış ve birbirine bağlanmış olarak, uygulama geliştirme için hazır hale getirir.
+Bu dizin, çok ajanlı bir müşteri destek sistemi için **altyapı temelini** dağıtmak üzere kapsamlı bir Azure Resource Manager (ARM) şablonu içerir. Şablon, gerekli tüm Azure hizmetlerini uygun şekilde yapılandırılmış ve birbirine bağlanmış olarak sağlar; uygulama geliştirmeye hazırdır.
 
 **Dağıtımdan sonra sahip olacağınız:** Üretime hazır Azure altyapısı  
-**Sistemi tamamlamak için ihtiyacınız olanlar:** Ajan kodu, ön uç arayüzü ve veri yapılandırması (bkz. [Mimari Kılavuzu](../retail-scenario.md))
+**Sistemi tamamlamak için ihtiyacınız olanlar:** Ajan kodu, ön uç UI ve veri yapılandırması (bkz. [Tam Mimari](../retail-scenario.md))
 
-## 🎯 Dağıtılanlar
+## 🎯 Neler Dağıtılır
 
-### Temel Altyapı (Dağıtımdan Sonraki Durum)
+### Temel Altyapı (Dağıtım Sonrası Durum)
 
-✅ **Azure OpenAI Hizmetleri** (API çağrıları için hazır)
-  - Birincil bölge: GPT-4o dağıtımı (20K TPM kapasite)
-  - İkincil bölge: GPT-4o-mini dağıtımı (10K TPM kapasite)
-  - Üçüncül bölge: Metin gömme modeli (30K TPM kapasite)
-  - Değerlendirme bölgesi: GPT-4o grader modeli (15K TPM kapasite)
-  - **Durum:** Tam işlevsel - hemen API çağrıları yapılabilir
+✅ **Microsoft Foundry Modelleri Servisleri** (API çağrılarına hazır)
+  - Birincil bölge: gpt-4.1 dağıtımı (20K TPM kapasitesi)
+  - İkincil bölge: gpt-4.1-mini dağıtımı (10K TPM kapasitesi)
+  - Üçüncül bölge: Metin embeddings modeli (30K TPM kapasitesi)
+  - Değerlendirme bölgesi: gpt-4.1 grader modeli (15K TPM kapasitesi)
+  - **Durum:** Tam işlevsel - hemen API çağrıları yapabilirsiniz
 
-✅ **Azure AI Arama** (Boş - yapılandırmaya hazır)
+✅ **Azure AI Search** (Boş - yapılandırmaya hazır)
   - Vektör arama yetenekleri etkin
-  - Standart seviye, 1 bölüm, 1 kopya
-  - **Durum:** Hizmet çalışıyor, ancak indeks oluşturulması gerekiyor
-  - **Gerekli işlem:** Şemanızla arama indeksi oluşturun
+  - Standart katman, 1 bölüm, 1 kopya
+  - **Durum:** Servis çalışıyor, ancak indeks oluşturulması gerekiyor
+  - **Gereken eylem:** Şemanızla arama indeksi oluşturun
 
 ✅ **Azure Depolama Hesabı** (Boş - yüklemelere hazır)
   - Blob konteynerleri: `documents`, `uploads`
-  - Güvenli yapılandırma (yalnızca HTTPS, genel erişim yok)
+  - Güvenli yapılandırma (sadece HTTPS, genel erişim yok)
   - **Durum:** Dosya almaya hazır
-  - **Gerekli işlem:** Ürün verilerinizi ve belgelerinizi yükleyin
+  - **Gereken eylem:** Ürün verilerinizi ve belgelerinizi yükleyin
 
 ⚠️ **Container Apps Ortamı** (Yer tutucu görüntüler dağıtıldı)
   - Ajan yönlendirici uygulaması (nginx varsayılan görüntüsü)
   - Ön uç uygulaması (nginx varsayılan görüntüsü)
   - Otomatik ölçeklendirme yapılandırıldı (0-10 örnek)
   - **Durum:** Yer tutucu konteynerler çalışıyor
-  - **Gerekli işlem:** Ajan uygulamalarınızı oluşturup dağıtın
+  - **Gereken eylem:** Ajan uygulamalarınızı oluşturup dağıtın
 
 ✅ **Azure Cosmos DB** (Boş - veri için hazır)
-  - Veritabanı ve konteyner önceden yapılandırılmış
-  - Düşük gecikme işlemleri için optimize edilmiş
-  - TTL etkin, otomatik temizleme için
+  - Veritabanı ve konteyner ön yapılandırıldı
+  - Düşük gecikme işlemleri için optimize edildi
+  - Otomatik temizlik için TTL etkin
   - **Durum:** Sohbet geçmişini depolamaya hazır
 
-✅ **Azure Key Vault** (Opsiyonel - sırlar için hazır)
-  - Yumuşak silme etkin
-  - Yönetilen kimlikler için RBAC yapılandırılmış
-  - **Durum:** API anahtarlarını ve bağlantı dizgilerini depolamaya hazır
+✅ **Azure Key Vault** (İsteğe bağlı - gizli bilgiler için hazır)
+  - Soft delete etkin
+  - Yönetilen kimlikler için RBAC yapılandırıldı
+  - **Durum:** API anahtarları ve bağlantı dizelerini depolamaya hazır
 
-✅ **Application Insights** (Opsiyonel - izleme aktif)
+✅ **Application Insights** (İsteğe bağlı - izleme aktif)
   - Log Analytics çalışma alanına bağlı
-  - Özel metrikler ve uyarılar yapılandırılmış
+  - Özel metrikler ve uyarılar yapılandırıldı
   - **Durum:** Uygulamalarınızdan telemetri almaya hazır
 
-✅ **Belge Zekası** (API çağrıları için hazır)
-  - S0 seviyesi üretim iş yükleri için
+✅ **Document Intelligence** (API çağrıları için hazır)
+  - Üretim iş yükleri için S0 katmanı
   - **Durum:** Yüklenen belgeleri işlemeye hazır
 
-✅ **Bing Arama API** (API çağrıları için hazır)
-  - S1 seviyesi gerçek zamanlı aramalar için
+✅ **Bing Search API** (API çağrıları için hazır)
+  - Gerçek zamanlı aramalar için S1 katmanı
   - **Durum:** Web arama sorguları için hazır
 
 ### Dağıtım Modları
 
-| Mod | OpenAI Kapasitesi | Konteyner Örnekleri | Arama Seviyesi | Depolama Yedekleme | En İyi Kullanım Alanı |
+| Parametre | OpenAI Kapasitesi | Konteyner Örnekleri | Arama Katmanı | Depolama Yedekliliği | En Uygun |
 |------|-----------------|---------------------|-------------|-------------------|----------|
-| **Minimal** | 10K-20K TPM | 0-2 kopya | Temel | LRS (Yerel) | Geliştirme/test, öğrenme, kavram kanıtı |
-| **Standart** | 30K-60K TPM | 2-5 kopya | Standart | ZRS (Bölge) | Üretim, orta trafik (<10K kullanıcı) |
-| **Premium** | 80K-150K TPM | 5-10 kopya, bölge yedekli | Premium | GRS (Coğrafi) | Kurumsal, yüksek trafik (>10K kullanıcı), %99.99 SLA |
+| **Minimal** | 10K-20K TPM | 0-2 kopya | Basic | LRS (Yerel) | Geliştirme/test, öğrenme, kavram kanıtı |
+| **Standard** | 30K-60K TPM | 2-5 kopya | Standard | ZRS (Bölge) | Üretim, orta trafik (<10K kullanıcı) |
+| **Premium** | 80K-150K TPM | 5-10 kopya, bölge-yedekli | Premium | GRS (Coğrafi) | Kurumsal, yüksek trafik (>10K kullanıcı), %99.99 SLA |
 
 **Maliyet Etkisi:**
-- **Minimal → Standart:** ~4 kat maliyet artışı ($100-370/ay → $420-1,450/ay)
-- **Standart → Premium:** ~3 kat maliyet artışı ($420-1,450/ay → $1,150-3,500/ay)
-- **Seçim yaparken dikkate alın:** Beklenen yük, SLA gereksinimleri, bütçe kısıtlamaları
+- **Minimal → Standard:** ~4x maliyet artışı ($100-370/mo → $420-1,450/mo)
+- **Standard → Premium:** ~3x maliyet artışı ($420-1,450/mo → $1,150-3,500/mo)
+- **Seçim için:** Beklenen yük, SLA gereksinimleri, bütçe sınırlamaları
 
-**Kapasite Planlama:**
-- **TPM (Dakika Başına Token):** Tüm model dağıtımları toplamı
+**Kapasite Planlaması:**
+- **TPM (Dakikadaki Tokenler):** Tüm model dağıtımlarının toplamı
 - **Konteyner Örnekleri:** Otomatik ölçeklendirme aralığı (min-maks kopya)
-- **Arama Seviyesi:** Sorgu performansını ve indeks boyutu sınırlarını etkiler
+- **Arama Katmanı:** Sorgu performansını ve indeks boyutu sınırlarını etkiler
 
-## 📋 Ön Koşullar
+## 📋 Gereksinimler
 
 ### Gerekli Araçlar
 1. **Azure CLI** (sürüm 2.50.0 veya üstü)
@@ -119,25 +119,25 @@ Bu dizin, çoklu ajan müşteri destek sistemi için **altyapı temeli** oluştu
    az login      # Kimlik doğrula
    ```
 
-2. **Aktif Azure aboneliği** Sahip veya Katkıda Bulunan erişimi ile
+2. **Etkin Azure aboneliği** - Sahip (Owner) veya Katkıda Bulunan (Contributor) erişimi
    ```bash
    az account show  # Aboneliği doğrula
    ```
 
 ### Gerekli Azure Kotaları
 
-Dağıtımdan önce, hedef bölgelerinizde yeterli kotaları doğrulayın:
+Dağıtımdan önce hedef bölgelerinizde yeterli kotaların olduğundan emin olun:
 
 ```bash
-# Azure OpenAI'nin bölgenizdeki kullanılabilirliğini kontrol edin
+# Bölgenizde Microsoft Foundry modellerinin kullanılabilirliğini kontrol edin
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus2
 
-# OpenAI kotasını doğrulayın (gpt-4o örneği için)
+# OpenAI kotasını doğrulayın (gpt-4.1 için örnek)
 az cognitiveservices usage list \
   --location eastus2 \
-  --query "[?name.value=='OpenAI.Standard.gpt-4o']"
+  --query "[?name.value=='OpenAI.Standard.gpt-4.1']"
 
 # Container Apps kotasını kontrol edin
 az provider show \
@@ -145,30 +145,30 @@ az provider show \
   --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
 ```
 
-**Minimum Gerekli Kotalar:**
-- **Azure OpenAI:** 3-4 model dağıtımı farklı bölgelerde
-  - GPT-4o: 20K TPM (Dakika Başına Token)
-  - GPT-4o-mini: 10K TPM
+**Minimum Gereken Kotalar:**
+- **Microsoft Foundry Modelleri:** Bölgeler arasında 3-4 model dağıtımı
+  - gpt-4.1: 20K TPM (Dakikadaki Tokenler)
+  - gpt-4.1-mini: 10K TPM
   - text-embedding-ada-002: 30K TPM
-  - **Not:** GPT-4o bazı bölgelerde bekleme listesinde olabilir - [model kullanılabilirliği](https://learn.microsoft.com/azure/ai-services/openai/concepts/models) kontrol edin
+  - **Not:** gpt-4.1 bazı bölgelerde bekleme listesi olabilir - kontrol edin [model kullanılabilirliği](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - **Container Apps:** Yönetilen ortam + 2-10 konteyner örneği
-- **AI Arama:** Standart seviye (Vektör arama için Temel yetersiz)
-- **Cosmos DB:** Standart sağlanmış işlem hacmi
+- **AI Search:** Standart katman (Vektör arama için Basic yetersiz)
+- **Cosmos DB:** Standart sağlanan throughput
 
 **Eğer kota yetersizse:**
-1. Azure Portal → Kotalar → Artış talep et
-2. Veya Azure CLI kullan:
+1. Azure Portal → Quotas → Artış talep edin
+2. Veya Azure CLI kullanın:
    ```bash
    az support tickets create \
      --ticket-name "OpenAI-Quota-Increase" \
      --severity "minimal" \
-     --description "Request quota increase for Azure OpenAI GPT-4o in eastus2"
+     --description "Request quota increase for Microsoft Foundry Models gpt-4.1 in eastus2"
    ```
-3. Uygunluk olan alternatif bölgeleri düşünün
+3. Kullanılabilirliği olan alternatif bölgeleri düşünün
 
 ## 🚀 Hızlı Dağıtım
 
-### Seçenek 1: Azure CLI Kullanarak
+### Seçenek 1: Azure CLI kullanarak
 
 ```bash
 # Şablon dosyalarını klonlayın veya indirin
@@ -181,15 +181,15 @@ chmod +x deploy.sh
 # Varsayılan ayarlarla dağıtın
 ./deploy.sh -g myResourceGroup
 
-# Premium özelliklerle üretim için dağıtın
+# Üretim için premium özelliklerle dağıtın
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 ```
 
-### Seçenek 2: Azure Portal Kullanarak
+### Seçenek 2: Azure Portal kullanarak
 
 [![Azure'a Dağıt](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-### Seçenek 3: Doğrudan Azure CLI Kullanarak
+### Seçenek 3: Azure CLI'yi doğrudan kullanarak
 
 ```bash
 # Kaynak grubu oluştur
@@ -206,30 +206,30 @@ az deployment group create \
 
 ### Beklenenler
 
-| Aşama | Süre | Ne Oluyor |
+| Aşama | Süre | Neler Olur |
 |-------|----------|--------------||
-| **Şablon Doğrulama** | 30-60 saniye | Azure, ARM şablon sözdizimini ve parametrelerini doğrular |
-| **Kaynak Grubu Kurulumu** | 10-20 saniye | Kaynak grubu oluşturulur (gerekirse) |
-| **OpenAI Dağıtımı** | 5-8 dakika | 3-4 OpenAI hesabı oluşturulur ve modeller dağıtılır |
-| **Container Apps** | 3-5 dakika | Ortam oluşturulur ve yer tutucu konteynerler dağıtılır |
-| **Arama ve Depolama** | 2-4 dakika | AI Arama hizmeti ve depolama hesapları sağlanır |
-| **Cosmos DB** | 2-3 dakika | Veritabanı oluşturulur ve konteynerler yapılandırılır |
-| **İzleme Kurulumu** | 2-3 dakika | Application Insights ve Log Analytics yapılandırılır |
-| **RBAC Yapılandırması** | 1-2 dakika | Yönetilen kimlikler ve izinler yapılandırılır |
-| **Toplam Dağıtım** | **15-25 dakika** | Tam altyapı hazır |
+| **Template Validation** | 30-60 seconds | Azure validates ARM template syntax and parameters |
+| **Resource Group Setup** | 10-20 seconds | Creates resource group (if needed) |
+| **OpenAI Provisioning** | 5-8 minutes | Creates 3-4 OpenAI accounts and deploys models |
+| **Container Apps** | 3-5 minutes | Creates environment and deploys placeholder containers |
+| **Search & Storage** | 2-4 minutes | Provisions AI Search service and storage accounts |
+| **Cosmos DB** | 2-3 minutes | Creates database and configures containers |
+| **Monitoring Setup** | 2-3 minutes | Sets up Application Insights and Log Analytics |
+| **RBAC Configuration** | 1-2 minutes | Configures managed identities and permissions |
+| **Total Deployment** | **15-25 minutes** | Complete infrastructure ready |
 
-**Dağıtımdan Sonra:**
-- ✅ **Altyapı Hazır:** Tüm Azure hizmetleri sağlanmış ve çalışıyor
-- ⏱️ **Uygulama Geliştirme:** 80-120 saat (sorumluluğunuzda)
-- ⏱️ **İndeks Yapılandırması:** 15-30 dakika (şemanız gerekiyor)
-- ⏱️ **Veri Yükleme:** Veri seti boyutuna bağlı olarak değişir
-- ⏱️ **Test ve Doğrulama:** 2-4 saat
+**Dağıtım Sonrası:**
+- ✅ **Altyapı Hazır:** Tüm Azure servisleri sağlandı ve çalışıyor
+- ⏱️ **Uygulama Geliştirme:** 80-120 saat (sizin sorumluluğunuz)
+- ⏱️ **İndeks Yapılandırması:** 15-30 dakika (şemanız gereklidir)
+- ⏱️ **Veri Yükleme:** Veri kümesine bağlı olarak değişir
+- ⏱️ **Test & Doğrulama:** 2-4 saat
 
 ---
 
-## ✅ Dağıtım Başarısını Doğrulama
+## ✅ Dağıtım Başarısını Doğrulayın
 
-### Adım 1: Kaynak Sağlama Kontrolü (2 dakika)
+### Adım 1: Kaynak Sağlanmasını Kontrol Edin (2 dakika)
 
 ```bash
 # Tüm kaynakların başarıyla dağıtıldığını doğrulayın
@@ -239,9 +239,9 @@ az resource list \
   --output table
 ```
 
-**Beklenen:** Boş tablo (tüm kaynaklar "Başarılı" durumunu gösterir)
+**Beklenen:** Boş tablo (tüm kaynaklar "Succeeded" durumunu gösterir)
 
-### Adım 2: Azure OpenAI Dağıtımlarını Doğrulama (3 dakika)
+### Adım 2: Microsoft Foundry Modelleri Dağıtımlarını Doğrulayın (3 dakika)
 
 ```bash
 # Tüm OpenAI hesaplarını listele
@@ -263,18 +263,18 @@ az cognitiveservices account deployment list \
 
 **Beklenen:** 
 - 3-4 OpenAI hesabı (birincil, ikincil, üçüncül, değerlendirme bölgeleri)
-- Hesap başına 1-2 model dağıtımı (gpt-4o, gpt-4o-mini, text-embedding-ada-002)
+- Hesap başına 1-2 model dağıtımı (gpt-4.1, gpt-4.1-mini, text-embedding-ada-002)
 
-### Adım 3: Altyapı Uç Noktalarını Test Etme (5 dakika)
+### Adım 3: Altyapı Uç Noktalarını Test Edin (5 dakika)
 
 ```bash
-# Container Uygulama URL'lerini Al
+# Konteyner Uygulaması URL'lerini Al
 az containerapp list \
   --resource-group myResourceGroup \
   --query "[].{Name:name, URL:properties.configuration.ingress.fqdn, Status:properties.runningStatus}" \
   --output table
 
-# Yönlendirici uç noktasını test et (yer tutucu resim yanıt verecek)
+# Yönlendirici uç noktasını test et (yer tutucu bir resim yanıt verecek)
 ROUTER_URL=$(az containerapp show \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -285,13 +285,13 @@ curl -I https://$ROUTER_URL || echo "Container running (placeholder image - expe
 ```
 
 **Beklenen:** 
-- Container Apps "Çalışıyor" durumunu gösterir
-- Yer tutucu nginx HTTP 200 veya 404 ile yanıt verir (henüz uygulama kodu yok)
+- Container Apps "Running" durumunu gösterir
+- Yer tutucu nginx HTTP 200 veya 404 yanıtı verir (henüz uygulama kodu yok)
 
-### Adım 4: Azure OpenAI API Erişimini Doğrulama (3 dakika)
+### Adım 4: Microsoft Foundry Modelleri API Erişimini Doğrulayın (3 dakika)
 
 ```bash
-# OpenAI uç noktasını ve anahtarını alın
+# OpenAI uç noktasını ve anahtarını al
 OPENAI_ENDPOINT=$(az cognitiveservices account show \
   --name $OPENAI_NAME \
   --resource-group myResourceGroup \
@@ -302,8 +302,8 @@ OPENAI_KEY=$(az cognitiveservices account keys list \
   --resource-group myResourceGroup \
   --query "key1" -o tsv)
 
-# GPT-4o dağıtımını test edin
-curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview" \
+# gpt-4.1 dağıtımını test et
+curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
   -d '{
@@ -312,27 +312,27 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
   }'
 ```
 
-**Beklenen:** JSON yanıtı ile sohbet tamamlama (OpenAI'nin işlevsel olduğunu doğrular)
+**Beklenen:** Chat tamamlaması içeren JSON yanıtı (OpenAI'nin çalıştığını doğrular)
 
-### Çalışanlar ve Çalışmayanlar
+### Neler Çalışıyor vs. Neler Çalışmıyor
 
-**✅ Dağıtımdan Sonra Çalışanlar:**
-- Azure OpenAI modelleri dağıtıldı ve API çağrılarını kabul ediyor
-- AI Arama hizmeti çalışıyor (boş, henüz indeks yok)
+**✅ Dağıtım Sonrası Çalışanlar:**
+- Microsoft Foundry Modelleri dağıtıldı ve API çağrılarını kabul ediyor
+- AI Search servisi çalışıyor (boş, henüz indeks yok)
 - Container Apps çalışıyor (yer tutucu nginx görüntüleri)
-- Depolama hesapları erişilebilir ve yüklemeye hazır
+- Depolama hesapları erişilebilir ve yüklemelere hazır
 - Cosmos DB veri işlemleri için hazır
-- Application Insights altyapı telemetrisini topluyor
-- Key Vault sır depolamaya hazır
+- Application Insights altyapı telemetrisi topluyor
+- Key Vault gizli bilgi depolamaya hazır
 
 **❌ Henüz Çalışmayanlar (Geliştirme Gerektirir):**
-- Ajan uç noktaları (henüz uygulama kodu dağıtılmadı)
-- Sohbet işlevselliği (ön uç + arka uç uygulaması gerekiyor)
+- Ajan uç noktaları (uygulama kodu dağıtılmadı)
+- Sohbet işlevselliği (ön uç + arka uç uygulanması gerekir)
 - Arama sorguları (henüz arama indeksi oluşturulmadı)
-- Belge işleme hattı (henüz veri yüklenmedi)
-- Özel telemetri (uygulama enstrümantasyonu gerekiyor)
+- Belge işleme hattı (veri yüklenmedi)
+- Özel telemetri (uygulama enstrümantasyonu gerekli)
 
-**Sonraki Adımlar:** [Dağıtım Sonrası Yapılandırma](../../../../examples/retail-multiagent-arm-template) bölümüne bakarak uygulamanızı geliştirin ve dağıtın
+**Sonraki Adımlar:** Bakınız [Dağıtım Sonrası Yapılandırma](#-post-deployment-next-steps) uygulamanızı geliştirmek ve dağıtmak için
 
 ---
 
@@ -342,19 +342,19 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
 
 | Parametre | Tür | Varsayılan | Açıklama |
 |-----------|------|---------|-------------|
-| `projectName` | string | "retail" | Tüm kaynak adları için ön ek |
-| `location` | string | Kaynak grubu konumu | Birincil dağıtım bölgesi |
+| `projectName` | string | "retail" | Tüm kaynak adları için önek |
+| `location` | string | Resource group location | Birincil dağıtım bölgesi |
 | `secondaryLocation` | string | "westus2" | Çok bölgeli dağıtım için ikincil bölge |
-| `tertiaryLocation` | string | "francecentral" | Gömme modeli için bölge |
-| `environmentName` | string | "dev" | Ortam tanımı (geliştirme/ön hazırlık/üretim) |
-| `deploymentMode` | string | "standard" | Dağıtım yapılandırması (minimal/standart/premium) |
+| `tertiaryLocation` | string | "francecentral" | Embedding modeli için bölge |
+| `environmentName` | string | "dev" | Ortam tanımı (dev/staging/prod) |
+| `deploymentMode` | string | "standard" | Dağıtım yapılandırması (minimal/standard/premium) |
 | `enableMultiRegion` | bool | true | Çok bölgeli dağıtımı etkinleştir |
-| `enableMonitoring` | bool | true | Application Insights ve günlük kaydını etkinleştir |
+| `enableMonitoring` | bool | true | Application Insights ve günlüklemeyi etkinleştir |
 | `enableSecurity` | bool | true | Key Vault ve gelişmiş güvenliği etkinleştir |
 
 ### Parametreleri Özelleştirme
 
-`azuredeploy.parameters.json` dosyasını düzenleyin:
+Düzenleyin `azuredeploy.parameters.json`:
 
 ```json
 {
@@ -379,31 +379,22 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
 
 ## 🏗️ Mimari Genel Bakış
 
+```mermaid
+graph TD
+    Frontend[Önyüz<br/>Kapsayıcı Uygulama] --> Router[Ajan Yönlendirici<br/>Kapsayıcı Uygulama] --> Agents[Ajanlar<br/>Müşteri + Envanter]
+    Router --> Search[Yapay Zeka Arama<br/>Vektör Veritabanı]
+    Router --> Models[Microsoft Foundry Modelleri<br/>Çok bölgeli]
+    Agents --> Storage[Depolama<br/>Belgeler]
+    Search --> CosmosDB[Cosmos DB<br/>Sohbet Geçmişi]
+    Models --> AppInsights[Uygulama İçgörüleri<br/>İzleme]
+    Storage --> KeyVault[Anahtar Kasası<br/>Sırlar]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │  Agent Router   │    │     Agents      │
-│ (Container App) │───▶│ (Container App) │───▶│ Customer + Inv  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   AI Search     │    │  Azure OpenAI   │    │    Storage      │
-│   (Vector DB)   │    │ (Multi-region)  │    │   (Documents)   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│  Cosmos DB      │    │ App Insights    │    │   Key Vault     │
-│ (Chat History)  │    │  (Monitoring)   │    │   (Secrets)     │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
+## 📖 Dağıtım Betiği Kullanımı
 
-## 📖 Dağıtım Komut Dosyası Kullanımı
-
-`deploy.sh` komut dosyası, etkileşimli bir dağıtım deneyimi sunar:
+`deploy.sh` betiği etkileşimli bir dağıtım deneyimi sağlar:
 
 ```bash
-# Yardım göster
+# Yardımı göster
 ./deploy.sh --help
 
 # Temel dağıtım
@@ -417,7 +408,7 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
   -m premium \
   -l eastus2
 
-# Çok bölgeli olmadan geliştirme dağıtımı
+# Çoklu bölge olmadan geliştirme dağıtımı
 ./deploy.sh \
   -g myDevRG \
   -e dev \
@@ -426,18 +417,18 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
   --no-security
 ```
 
-### Komut Dosyası Özellikleri
+### Betik Özellikleri
 
-- ✅ **Ön Koşul Doğrulama** (Azure CLI, oturum durumu, şablon dosyaları)
-- ✅ **Kaynak Grubu Yönetimi** (yoksa oluşturur)
-- ✅ **Şablon Doğrulama** dağıtımdan önce
-- ✅ **İlerleme İzleme** renkli çıktı ile
-- ✅ **Dağıtım Çıktıları** görüntüleme
-- ✅ **Dağıtım Sonrası Rehberlik**
+- ✅ **Gereksinimler doğrulaması** (Azure CLI, giriş durumu, şablon dosyaları)
+- ✅ **Kaynak grubu yönetimi** (yoksa oluşturur)
+- ✅ **Dağıtım öncesi şablon doğrulaması**
+- ✅ **Renkli çıktı ile ilerleme izleme**
+- ✅ **Dağıtım çıktılarını gösterme**
+- ✅ **Dağıtım sonrası rehberlik**
 
 ## 📊 Dağıtımı İzleme
 
-### Dağıtım Durumunu Kontrol Etme
+### Dağıtım Durumunu Kontrol Et
 
 ```bash
 # Dağıtımları listele
@@ -458,44 +449,44 @@ az deployment group create \
 
 ### Dağıtım Çıktıları
 
-Başarılı bir dağıtımdan sonra aşağıdaki çıktılar mevcut olacaktır:
+Başarılı dağıtımdan sonra aşağıdaki çıktılar kullanılabilir:
 
-- **Ön Uç URL**: Web arayüzü için genel uç nokta
-- **Yönlendirici URL**: Ajan yönlendirici için API uç noktası
-- **OpenAI Uç Noktaları**: Birincil ve ikincil OpenAI hizmet uç noktaları
-- **Arama Hizmeti**: Azure AI Arama hizmeti uç noktası
+- **Ön Uç URL'si**: Web arayüzü için genel uç nokta
+- **Yönlendirici URL'si**: Ajan yönlendirici için API uç noktası
+- **OpenAI Uç Noktaları**: Birincil ve ikincil OpenAI servis uç noktaları
+- **Arama Servisi**: Azure AI Search servis uç noktası
 - **Depolama Hesabı**: Belgeler için depolama hesabı adı
 - **Key Vault**: Key Vault adı (etkinse)
-- **Application Insights**: İzleme hizmeti adı (etkinse)
+- **Application Insights**: İzleme servisi adı (etkinse)
 
 ## 🔧 Dağıtım Sonrası: Sonraki Adımlar
 > **📝 Önemli:** Altyapı dağıtıldı, ancak uygulama kodunu geliştirip dağıtmanız gerekiyor.
 
-### Aşama 1: Ajan Uygulamalarını Geliştirin (Sizin Sorumluluğunuz)
+### Aşama 1: Ajan Uygulamaları Geliştirme (Sizin Sorumluluğunuz)
 
-ARM şablonu, **boş Container Apps** oluşturur ve bunlara yer tutucu nginx görüntüleri ekler. Sizin yapmanız gerekenler:
+ARM şablonu, yer tutucu nginx görüntüleriyle **boş Container Uygulamaları** oluşturur. Şunları yapmalısınız:
 
 **Gerekli Geliştirme:**
-1. **Ajan Uygulaması Geliştirme** (30-40 saat)
-   - GPT-4o entegrasyonlu müşteri hizmetleri ajanı
-   - GPT-4o-mini entegrasyonlu envanter ajanı
+1. **Ajan Uygulaması** (30-40 saat)
+   - gpt-4.1 entegrasyonlu müşteri hizmetleri ajanı
+   - gpt-4.1-mini entegrasyonlu envanter ajanı
    - Ajan yönlendirme mantığı
 
-2. **Frontend Geliştirme** (20-30 saat)
+2. **Ön Uç Geliştirme** (20-30 saat)
    - Sohbet arayüzü UI (React/Vue/Angular)
    - Dosya yükleme işlevselliği
-   - Yanıtların işlenmesi ve formatlanması
+   - Yanıtların render edilmesi ve biçimlendirilmesi
 
-3. **Backend Servisleri** (12-16 saat)
-   - FastAPI veya Express router
-   - Kimlik doğrulama middleware
+3. **Arka Uç Servisleri** (12-16 saat)
+   - FastAPI veya Express yönlendiricisi
+   - Kimlik doğrulama ara katmanı
    - Telemetri entegrasyonu
 
-**Bakınız:** [Mimari Kılavuz](../retail-scenario.md) detaylı uygulama desenleri ve kod örnekleri için
+Bkz: [Mimari Kılavuz](../retail-scenario.md) ayrıntılı uygulama desenleri ve kod örnekleri için
 
-### Aşama 2: AI Arama İndeksini Yapılandırın (15-30 dakika)
+### Aşama 2: AI Arama Dizini Yapılandırması (15-30 dakika)
 
-Veri modelinize uygun bir arama indeksi oluşturun:
+Veri modelinize uygun bir arama dizini oluşturun:
 
 ```bash
 # Arama hizmeti ayrıntılarını alın
@@ -508,7 +499,7 @@ SEARCH_KEY=$(az search admin-key show \
   --resource-group myResourceGroup \
   --query "primaryKey" -o tsv)
 
-# Şemanızla (örnek) bir indeks oluşturun
+# Şemanızla bir dizin oluşturun (örnek)
 curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: ${SEARCH_KEY}" \
@@ -533,9 +524,9 @@ curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023
 - [AI Arama İndeksi Şema Tasarımı](https://learn.microsoft.com/azure/search/search-what-is-an-index)
 - [Vektör Arama Yapılandırması](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
 
-### Aşama 3: Verilerinizi Yükleyin (Süre değişkenlik gösterebilir)
+### Aşama 3: Verilerinizi Yükleyin (Süre değişir)
 
-Ürün verileriniz ve belgeleriniz hazır olduğunda:
+Ürün verileriniz ve belgeleriniz olduğunda:
 
 ```bash
 # Depolama hesabı ayrıntılarını alın
@@ -555,7 +546,7 @@ az storage blob upload-batch \
   --account-name $STORAGE_NAME \
   --account-key $STORAGE_KEY
 
-# Örnek: Tek dosya yükleme
+# Örnek: Tek dosya yükleyin
 az storage blob upload \
   --container-name documents \
   --name "product-manual.pdf" \
@@ -564,7 +555,7 @@ az storage blob upload \
   --account-key $STORAGE_KEY
 ```
 
-### Aşama 4: Uygulamalarınızı Geliştirin ve Dağıtın (8-12 saat)
+### Aşama 4: Uygulamalarınızı Oluşturun ve Dağıtın (8-12 saat)
 
 Ajan kodunuzu geliştirdikten sonra:
 
@@ -575,16 +566,16 @@ az acr create \
   --resource-group myResourceGroup \
   --sku Basic
 
-# 2. Agent router görüntüsünü oluşturun ve gönderin
+# 2. Agent yönlendirici imajını oluşturun ve gönderin
 docker build -t myregistry.azurecr.io/agent-router:v1 /path/to/your/router/code
 az acr login --name myregistry
 docker push myregistry.azurecr.io/agent-router:v1
 
-# 3. Frontend görüntüsünü oluşturun ve gönderin
+# 3. Ön uç imajını oluşturun ve gönderin
 docker build -t myregistry.azurecr.io/frontend:v1 /path/to/your/frontend/code
 docker push myregistry.azurecr.io/frontend:v1
 
-# 4. Container Apps'i görüntülerinizle güncelleyin
+# 4. Container Apps'i imajlarınızla güncelleyin
 az containerapp update \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -609,13 +600,13 @@ az containerapp update \
 ### Aşama 5: Uygulamanızı Test Edin (2-4 saat)
 
 ```bash
-# Uygulama URL'inizi alın
+# Uygulamanızın URL'sini alın
 ROUTER_URL=$(az containerapp show \
   --name retail-router \
   --resource-group myResourceGroup \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# Test ajanı uç noktası (kodunuz dağıtıldıktan sonra)
+# Test ajan uç noktası (kodunuz dağıtıldıktan sonra)
 curl -X POST "https://${ROUTER_URL}/chat" \
   -H "Content-Type: application/json" \
   -d '{
@@ -632,15 +623,15 @@ az containerapp logs show \
 
 ### Uygulama Kaynakları
 
-**Mimari ve Tasarım:**
-- 📖 [Tam Mimari Kılavuz](../retail-scenario.md) - Detaylı uygulama desenleri
-- 📖 [Çoklu Ajan Tasarım Desenleri](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
+**Mimari & Tasarım:**
+- 📖 [Tam Mimari Kılavuz](../retail-scenario.md) - Ayrıntılı uygulama desenleri
+- 📖 [Çok Ajanlı Tasarım Desenleri](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
 
 **Kod Örnekleri:**
-- 🔗 [Azure OpenAI Sohbet Örneği](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG deseni
+- 🔗 [Microsoft Foundry Modelleri Sohbet Örneği](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG deseni
 - 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Ajan çerçevesi (C#)
 - 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - Ajan orkestrasyonu (Python)
-- 🔗 [AutoGen](https://github.com/microsoft/autogen) - Çoklu ajan konuşmaları
+- 🔗 [AutoGen](https://github.com/microsoft/autogen) - Çok ajanlı sohbetler
 
 **Tahmini Toplam Çaba:**
 - Altyapı dağıtımı: 15-25 dakika (✅ Tamamlandı)
@@ -651,43 +642,43 @@ az containerapp logs show \
 
 ### Yaygın Sorunlar
 
-#### 1. Azure OpenAI Kota Aşıldı
+#### 1. Microsoft Foundry Models Kotası Aşıldı
 
 ```bash
 # Mevcut kota kullanımını kontrol et
 az cognitiveservices usage list --location eastus2
 
-# Kota artırımı talep et
+# Kota artışı talep et
 az support tickets create \
   --ticket-name "OpenAI-Quota-Increase" \
   --severity "minimal" \
-  --description "Request quota increase for Azure OpenAI in region X"
+  --description "Request quota increase for Microsoft Foundry Models in region X"
 ```
 
 #### 2. Container Apps Dağıtımı Başarısız Oldu
 
 ```bash
-# Konteyner uygulama günlüklerini kontrol et
+# Konteyner uygulamasının günlüklerini kontrol et
 az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
   --follow
 
-# Konteyner uygulamasını yeniden başlat
+# Konteyner uygulamayı yeniden başlat
 az containerapp revision restart \
   --name retail-router \
   --resource-group myResourceGroup
 ```
 
-#### 3. Arama Servisi Başlatılamadı
+#### 3. Arama Hizmeti Başlatma
 
 ```bash
-# Arama hizmeti durumunu doğrula
+# Arama hizmeti durumunu doğrulayın
 az search service show \
   --name <search-service-name> \
   --resource-group myResourceGroup
 
-# Arama hizmeti bağlantısını test et
+# Arama hizmeti bağlantısını test edin
 curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-version=2023-11-01" \
   -H "api-key: <search-admin-key>"
 ```
@@ -700,7 +691,7 @@ az resource list \
   --resource-group myResourceGroup \
   --output table
 
-# Kaynak sağlığını kontrol et
+# Kaynakların sağlığını kontrol et
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
@@ -710,14 +701,14 @@ az resource list \
 ## 🔐 Güvenlik Hususları
 
 ### Anahtar Yönetimi
-- Tüm gizli bilgiler Azure Key Vault'ta saklanır (etkinleştirildiğinde)
+- Tüm gizli anahtarlar Azure Key Vault'ta depolanır (etkinleştirildiğinde)
 - Container uygulamaları kimlik doğrulama için yönetilen kimlik kullanır
-- Depolama hesapları güvenli varsayılanlarla yapılandırılmıştır (yalnızca HTTPS, genel blob erişimi yok)
+- Depolama hesapları güvenli varsayılanlara sahiptir (yalnızca HTTPS, genel blob erişimi yok)
 
 ### Ağ Güvenliği
-- Container uygulamaları mümkün olduğunca dahili ağ kullanır
-- Arama servisi özel uç noktalarla yapılandırılmıştır
-- Cosmos DB yalnızca gerekli minimum izinlerle yapılandırılmıştır
+- Container uygulamaları mümkün olduğunda dahili ağ kullanır
+- Arama hizmeti özel uç noktalar seçeneğiyle yapılandırıldı
+- Cosmos DB minimum gerekli izinlerle yapılandırıldı
 
 ### RBAC Yapılandırması
 ```bash
@@ -732,8 +723,8 @@ az role assignment create \
 
 ### Maliyet Tahminleri (Aylık, USD)
 
-| Mod | OpenAI | Container Apps | Arama | Depolama | Toplam Tahmin |
-|-----|--------|----------------|-------|----------|---------------|
+| Mod | OpenAI | Container Uygulamaları | Arama | Depolama | Toplam Tahmin |
+|------|--------|----------------|--------|---------|------------|
 | Minimal | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
 | Standart | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
 | Premium | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
@@ -741,7 +732,7 @@ az role assignment create \
 ### Maliyet İzleme
 
 ```bash
-# Bütçe uyarılarını ayarla
+# Bütçe uyarıları ayarlayın
 az consumption budget create \
   --account-name <subscription-id> \
   --budget-name "retail-budget" \
@@ -760,7 +751,7 @@ az consumption budget create \
 
 ### Kaynak Güncellemeleri
 ```bash
-# Yeni parametrelerle güncelleme
+# Yeni parametrelerle güncelle
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -771,23 +762,23 @@ az deployment group create \
 ### Yedekleme ve Kurtarma
 - Cosmos DB otomatik yedekleme etkinleştirildi
 - Key Vault yumuşak silme etkinleştirildi
-- Container uygulama revizyonları geri alma için saklanır
+- Container uygulama revizyonları geri alma için korunur
 
 ## 📞 Destek
 
-- **Şablon Sorunları:** [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
-- **Azure Desteği:** [Azure Destek Portalı](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
-- **Topluluk:** [Azure AI Discord](https://discord.gg/microsoft-azure)
+- **Şablon Sorunları**: [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
+- **Azure Desteği**: [Azure Destek Portalı](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
+- **Topluluk**: [Azure AI Discord](https://discord.gg/microsoft-azure)
 
 ---
 
-**⚡ Çoklu ajan çözümünüzü dağıtmaya hazır mısınız?**
+**⚡ Çok ajanlı çözümünüzü dağıtmaya hazır mısınız?**
 
 Başlamak için: `./deploy.sh -g myResourceGroup`
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Feragatname**:  
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dili, yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalar için sorumluluk kabul etmiyoruz.
+**Disclaimer**:
+Bu belge, yapay zeka çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belgenin kendi dilindeki sürümü otoritatif kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi tavsiye edilir. Bu çevirinin kullanılması nedeniyle ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumdan sorumlu tutulamayız.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

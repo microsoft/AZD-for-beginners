@@ -1,21 +1,21 @@
-# Capitolo 8: Modelli di Produzione e Aziendali
+# Capitolo 8: Pattern di produzione & aziendali
 
-**📚 Corso**: [AZD per Principianti](../../README.md) | **⏱️ Durata**: 2-3 hours | **⭐ Complessità**: Avanzato
+**📚 Corso**: [AZD per principianti](../../README.md) | **⏱️ Durata**: 2-3 ore | **⭐ Complessità**: Avanzata
 
 ---
 
 ## Panoramica
 
-Questo capitolo tratta modelli di distribuzione pronti per l'azienda, hardening della sicurezza, monitoraggio e ottimizzazione dei costi per carichi di lavoro AI in produzione.
+Questo capitolo copre pattern di deployment pronti per l'azienda, hardening della sicurezza, monitoraggio e ottimizzazione dei costi per carichi di lavoro AI in produzione.
 
 ## Obiettivi di apprendimento
 
 Completando questo capitolo, sarai in grado di:
 - Distribuire applicazioni resilienti multi-regione
 - Implementare pattern di sicurezza aziendali
-- Configurare monitoraggio completo
+- Configurare un monitoraggio completo
 - Ottimizzare i costi su larga scala
-- Impostare pipeline CI/CD con AZD
+- Configurare pipeline CI/CD con AZD
 
 ---
 
@@ -23,45 +23,38 @@ Completando questo capitolo, sarai in grado di:
 
 | # | Lezione | Descrizione | Tempo |
 |---|--------|-------------|------|
-| 1 | [Pratiche AI di Produzione](production-ai-practices.md) | Modelli di distribuzione per aziende | 90 min |
+| 1 | [Pratiche di produzione IA](production-ai-practices.md) | Pattern di deployment aziendali | 90 min |
 
 ---
 
 ## 🚀 Checklist di produzione
 
 - [ ] Distribuzione multi-regione per resilienza
-- [ ] Managed identity per l'autenticazione (senza chiavi)
+- [ ] Identità gestita per l'autenticazione (senza chiavi)
 - [ ] Application Insights per il monitoraggio
 - [ ] Budget dei costi e avvisi configurati
 - [ ] Scansione di sicurezza abilitata
-- [ ] Integrazione della pipeline CI/CD
-- [ ] Piano di disaster recovery
+- [ ] Integrazione pipeline CI/CD
+- [ ] Piano di ripristino di emergenza
 
 ---
 
-## 🏗️ Modelli architetturali
+## 🏗️ Pattern architetturali
 
-### Modello 1: Microservizi AI
+### Pattern 1: Microservizi AI
 
+```mermaid
+graph LR
+    Gateway[Gateway API] --> AI[Servizio AI] --> Models[Modelli Microsoft Foundry]
+    Gateway --> Auth[Servizio di autenticazione]
+    AI --> Data[Archivio dati]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
+### Pattern 2: AI basata su eventi
 
-### Modello 2: AI basata su eventi
-
+```mermaid
+graph LR
+    EventGrid[Griglia di eventi] --> Functions[Funzioni] --> Pipeline[Pipeline di IA]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
 ## 🔐 Migliori pratiche di sicurezza
@@ -85,12 +78,12 @@ properties: {
 
 ## 💰 Ottimizzazione dei costi
 
-| Strategia | Risparmio |
+| Strategia | Risparmi |
 |----------|---------|
-| Scale to zero (Container Apps) | 60-80% |
-| Use consumption tiers for dev | 50-70% |
-| Scheduled scaling | 30-50% |
-| Reserved capacity | 20-40% |
+| Scalare a zero (Container Apps) | 60-80% |
+| Usare tier a consumo per lo sviluppo | 50-70% |
+| Scaling pianificato | 30-50% |
+| Capacità riservata | 20-40% |
 
 ```bash
 # Imposta avvisi sul budget
@@ -122,21 +115,21 @@ az monitor metrics list --resource <resource-id>
 
 | Direction | Chapter |
 |-----------|---------|
-| **Previous** | [Capitolo 7: Risoluzione dei problemi](../chapter-07-troubleshooting/README.md) |
-| **Course Complete** | [Course Home](../../README.md) |
+| **Precedente** | [Capitolo 7: Risoluzione dei problemi](../chapter-07-troubleshooting/README.md) |
+| **Corso completato** | [Home del corso](../../README.md) |
 
 ---
 
 ## 📖 Risorse correlate
 
-- [Guida agli agenti AI](../chapter-02-ai-development/agents.md)
+- [Guida agli agenti IA](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Soluzioni multi-agente](../chapter-05-multi-agent/README.md)
-- [Esempio microservizi](../../examples/microservices/README.md)
+- [Esempio di microservizi](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Dichiarazione di non responsabilità:
-Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Pur facendo il possibile per garantire l'accuratezza, si tenga presente che le traduzioni automatiche possono contenere errori o inesattezze. Il documento originale nella sua lingua deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda di ricorrere a una traduzione professionale eseguita da un traduttore umano. Non ci assumiamo alcuna responsabilità per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+**Disclaimer**:
+Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Pur impegnandoci per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o inesattezze. Il documento originale nella sua lingua nativa deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un essere umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

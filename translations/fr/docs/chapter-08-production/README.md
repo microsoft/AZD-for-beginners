@@ -1,70 +1,63 @@
-# Chapitre 8 : Production et modèles d'entreprise
+# Chapitre 8 : Modèles de production et d'entreprise
 
-**📚 Cours**: [AZD pour débutants](../../README.md) | **⏱️ Durée**: 2-3 heures | **⭐ Complexité**: Avancé
+**📚 Cours**: [AZD For Beginners](../../README.md) | **⏱️ Durée**: 2-3 heures | **⭐ Complexité**: Avancé
 
 ---
 
 ## Aperçu
 
-Ce chapitre couvre les modèles de déploiement prêts pour l'entreprise, le renforcement de la sécurité, la supervision et l'optimisation des coûts pour les charges de travail IA en production.
+Ce chapitre couvre les modèles de déploiement prêts pour l'entreprise, le durcissement de la sécurité, la surveillance et l'optimisation des coûts pour les charges de travail IA en production.
 
 ## Objectifs d'apprentissage
 
-En terminant ce chapitre, vous allez :
+En terminant ce chapitre, vous pourrez :
 - Déployer des applications résilientes multi-régions
-- Mettre en œuvre des modèles de sécurité d'entreprise
-- Configurer une supervision complète
+- Implémenter des modèles de sécurité d'entreprise
+- Configurer une surveillance complète
 - Optimiser les coûts à grande échelle
 - Mettre en place des pipelines CI/CD avec AZD
 
 ---
 
-## 📚 Lessons
+## 📚 Leçons
 
-| # | Lesson | Description | Time |
+| # | Leçon | Description | Durée |
 |---|--------|-------------|------|
-| 1 | [Pratiques IA en production](production-ai-practices.md) | Modèles de déploiement d'entreprise | 90 min |
+| 1 | [Pratiques d'IA en production](production-ai-practices.md) | Modèles de déploiement en entreprise | 90 min |
 
 ---
 
-## 🚀 Checklist de production
+## 🚀 Liste de contrôle de production
 
-- [ ] Déploiement multi-région pour la résilience
+- [ ] Déploiement multi-régions pour la résilience
 - [ ] Identité gérée pour l'authentification (sans clés)
 - [ ] Application Insights pour la surveillance
 - [ ] Budgets de coûts et alertes configurés
 - [ ] Analyse de sécurité activée
-- [ ] Intégration du pipeline CI/CD
+- [ ] Intégration de pipelines CI/CD
 - [ ] Plan de reprise après sinistre
 
 ---
 
 ## 🏗️ Modèles d'architecture
 
-### Modèle 1 : Microservices IA
+### Modèle 1 : IA en microservices
 
+```mermaid
+graph LR
+    Gateway[Passerelle API] --> AI[Service d'IA] --> Models[Modèles Microsoft Foundry]
+    Gateway --> Auth[Service d'authentification]
+    AI --> Data[Stockage de données]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
+### Modèle 2 : IA pilotée par les événements
 
-### Modèle 2 : IA pilotée par événements
-
+```mermaid
+graph LR
+    EventGrid[Grille d'événements] --> Functions[Fonctions] --> Pipeline[Pipeline IA]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
-## 🔐 Bonnes pratiques de sécurité
+## 🔐 Meilleures pratiques de sécurité
 
 ```bicep
 // Use managed identity
@@ -88,8 +81,8 @@ properties: {
 | Stratégie | Économies |
 |----------|---------|
 | Mise à l'échelle à zéro (Container Apps) | 60-80% |
-| Utiliser des niveaux de consommation pour le dev | 50-70% |
-| Mise à l'échelle planifiée | 30-50% |
+| Utiliser des niveaux de consommation pour l'environnement de dev | 50-70% |
+| Mise à l'échelle programmée | 30-50% |
 | Capacité réservée | 20-40% |
 
 ```bash
@@ -106,7 +99,7 @@ az consumption budget create \
 ## 📊 Configuration de la surveillance
 
 ```bash
-# Flux de journaux
+# Afficher les journaux en continu
 azd monitor --logs
 
 # Consulter Application Insights
@@ -127,7 +120,7 @@ az monitor metrics list --resource <resource-id>
 
 ---
 
-## 📖 Ressources liées
+## 📖 Ressources connexes
 
 - [Guide des agents IA](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
@@ -137,6 +130,6 @@ az monitor metrics list --resource <resource-id>
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Avertissement :**
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatiques peuvent contenir des erreurs ou des inexactitudes. Le document original, dans sa langue d'origine, doit être considéré comme la source faisant foi. Pour les informations critiques, une traduction humaine professionnelle est recommandée. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+Clause de non-responsabilité :
+Ce document a été traduit à l'aide du service de traduction automatique Co-op Translator (https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant foi. Pour les informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un traducteur humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

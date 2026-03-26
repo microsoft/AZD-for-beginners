@@ -1,26 +1,26 @@
 # Triển khai Mô hình AI với Azure Developer CLI
 
-**Điều hướng chương:**
-- **📚 Trang khóa học**: [AZD cho người mới bắt đầu](../../README.md)
-- **📖 Chương hiện tại**: Chương 2 - Phát triển theo hướng AI
-- **⬅️ Trước**: [Tích hợp Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Tiếp**: [Phòng thí nghiệm Workshop AI](ai-workshop-lab.md)
+**Điều hướng Chương:**
+- **📚 Trang Khóa học**: [AZD cho Người Mới Bắt Đầu](../../README.md)
+- **📖 Chương Hiện tại**: Chương 2 - Phát triển Ưu tiên AI
+- **⬅️ Trước đó**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ Tiếp theo**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Chương tiếp theo**: [Chương 3: Cấu hình](../chapter-03-configuration/configuration.md)
 
-Hướng dẫn này cung cấp các chỉ dẫn toàn diện để triển khai các mô hình AI bằng cách sử dụng mẫu AZD, bao gồm mọi thứ từ lựa chọn mô hình đến các mẫu triển khai trong môi trường sản xuất.
+Hướng dẫn này cung cấp chỉ dẫn toàn diện để triển khai các mô hình AI sử dụng các mẫu AZD, bao gồm mọi thứ từ lựa chọn mô hình đến các mẫu triển khai cho môi trường sản xuất.
 
 ## Mục lục
 
-- [Chiến lược lựa chọn mô hình](../../../../docs/chapter-02-ai-development)
-- [Cấu hình AZD cho mô hình AI](../../../../docs/chapter-02-ai-development)
-- [Các mẫu triển khai](../../../../docs/chapter-02-ai-development)
-- [Quản lý mô hình](../../../../docs/chapter-02-ai-development)
-- [Cân nhắc khi đưa vào sản xuất](../../../../docs/chapter-02-ai-development)
-- [Giám sát và khả năng quan sát](../../../../docs/chapter-02-ai-development)
+- [Chiến lược Lựa chọn Mô hình](#chiến-lược-lựa-chọn-mô-hình)
+- [Cấu hình AZD cho Mô hình AI](#cấu-hình-azd-cho-mô-hình-ai)
+- [Mẫu Triển khai](#mẫu-triển-khai)
+- [Quản lý Mô hình](#quản-lý-mô-hình)
+- [Cân nhắc cho môi trường sản xuất](#cân-nhắc-cho-môi-trường-sản-xuất)
+- [Giám sát và Khả năng quan sát](#giám-sát-và-khả-năng-quan-sát)
 
-## Chiến lược lựa chọn mô hình
+## Chiến lược Lựa chọn Mô hình
 
-### Các mô hình Azure OpenAI
+### Mô hình Microsoft Foundry Models Models
 
 Chọn mô hình phù hợp cho trường hợp sử dụng của bạn:
 
@@ -34,9 +34,9 @@ services:
       AZURE_OPENAI_MODELS: |
         [
           {
-            "name": "gpt-4o-mini",
+            "name": "gpt-4.1-mini",
             "version": "2024-07-18",
-            "deployment": "gpt-4o-mini",
+            "deployment": "gpt-4.1-mini",
             "capacity": 10,
             "format": "OpenAI"
           },
@@ -50,30 +50,30 @@ services:
         ]
 ```
 
-### Lập kế hoạch dung lượng mô hình
+### Lập kế hoạch Dung lượng Mô hình
 
-| Loại mô hình | Trường hợp sử dụng | Dung lượng khuyến nghị | Cân nhắc chi phí |
+| Model Type | Use Case | Recommended Capacity | Cost Considerations |
 |------------|----------|---------------------|-------------------|
-| GPT-4o-mini | Trò chuyện, Hỏi & Đáp | 10-50 TPM | Tiết kiệm chi phí cho hầu hết các khối lượng công việc |
-| GPT-4 | Suy luận phức tạp | 20-100 TPM | Chi phí cao hơn, dùng cho các tính năng cao cấp |
+| gpt-4.1-mini | Trò chuyện, Hỏi & Đáp | 10-50 TPM | Tiết kiệm chi phí cho hầu hết khối lượng công việc |
+| gpt-4.1 | Lý luận phức tạp | 20-100 TPM | Chi phí cao hơn, sử dụng cho tính năng cao cấp |
 | Text-embedding-ada-002 | Tìm kiếm, RAG | 30-120 TPM | Cần thiết cho tìm kiếm ngữ nghĩa |
-| Whisper | Nhận dạng giọng nói | 10-50 TPM | Khối lượng công việc xử lý âm thanh |
+| Whisper | Chuyển giọng nói sang văn bản | 10-50 TPM | Khối lượng công việc xử lý âm thanh |
 
-## Cấu hình AZD cho mô hình AI
+## Cấu hình AZD cho Mô hình AI
 
-### Cấu hình mẫu Bicep
+### Cấu hình Mẫu Bicep
 
-Tạo các triển khai mô hình thông qua các mẫu Bicep:
+Tạo các triển khai mô hình thông qua mẫu Bicep:
 
 ```bicep
 // infra/main.bicep
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
-    name: 'gpt-4o-mini'
+    name: 'gpt-4.1-mini'
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
     sku: {
@@ -130,13 +130,13 @@ Cấu hình môi trường ứng dụng của bạn:
 # Cấu hình .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
-AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
+AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
-## Các mẫu triển khai
+## Mẫu Triển khai
 
-### Mẫu 1: Triển khai một vùng
+### Mẫu 1: Triển khai Một Vùng
 
 ```yaml
 # azure.yaml - Single region
@@ -146,7 +146,7 @@ services:
     host: containerapp
     config:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
-      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
+      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
 Phù hợp cho:
@@ -154,7 +154,7 @@ Phù hợp cho:
 - Ứng dụng cho một thị trường
 - Tối ưu chi phí
 
-### Mẫu 2: Triển khai đa vùng
+### Mẫu 2: Triển khai Đa Vùng
 
 ```bicep
 // Multi-region deployment
@@ -169,12 +169,12 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 
 Phù hợp cho:
 - Ứng dụng toàn cầu
-- Yêu cầu tính sẵn sàng cao
+- Yêu cầu độ sẵn sàng cao
 - Phân phối tải
 
-### Mẫu 3: Triển khai kết hợp
+### Mẫu 3: Triển khai Lai
 
-Kết hợp Azure OpenAI với các dịch vụ AI khác:
+Kết hợp Microsoft Foundry Models với các dịch vụ AI khác:
 
 ```bicep
 // Hybrid AI services
@@ -203,9 +203,9 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Quản lý mô hình
+## Quản lý Mô hình
 
-### Quản lý phiên bản
+### Quản lý Phiên bản
 
 Theo dõi phiên bản mô hình trong cấu hình AZD của bạn:
 
@@ -213,7 +213,7 @@ Theo dõi phiên bản mô hình trong cấu hình AZD của bạn:
 {
   "models": {
     "chat": {
-      "name": "gpt-4o-mini",
+      "name": "gpt-4.1-mini",
       "version": "2024-07-18",
       "fallback": "gpt-35-turbo"
     },
@@ -225,9 +225,9 @@ Theo dõi phiên bản mô hình trong cấu hình AZD của bạn:
 }
 ```
 
-### Cập nhật mô hình
+### Cập nhật Mô hình
 
-Sử dụng hook của AZD để cập nhật mô hình:
+Sử dụng hooks của AZD cho cập nhật mô hình:
 
 ```bash
 #!/bin/bash
@@ -237,10 +237,10 @@ echo "Checking model availability..."
 az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
-  --query "[?name=='gpt-4o-mini']"
+  --query "[?name=='gpt-4.1-mini']"
 ```
 
-### Kiểm thử A/B
+### Thử nghiệm A/B
 
 Triển khai nhiều phiên bản mô hình:
 
@@ -249,11 +249,11 @@ param enableABTesting bool = false
 
 resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'gpt-4o-mini-${enableABTesting ? 'v1' : 'prod'}'
+  name: 'gpt-4.1-mini-${enableABTesting ? 'v1' : 'prod'}'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -264,14 +264,14 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Cân nhắc khi đưa vào sản xuất
+## Cân nhắc cho môi trường sản xuất
 
-### Lập kế hoạch dung lượng
+### Lập kế hoạch Dung lượng
 
-Tính dung lượng cần thiết dựa trên mô hình sử dụng:
+Tính toán dung lượng cần thiết dựa trên mẫu sử dụng:
 
 ```python
-# Ví dụ tính dung lượng
+# Ví dụ tính toán dung lượng
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -293,7 +293,7 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Cấu hình tự động mở rộng
+### Cấu hình Tự động mở rộng
 
 Cấu hình tự động mở rộng cho Container Apps:
 
@@ -331,7 +331,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Tối ưu chi phí
+### Tối ưu hóa Chi phí
 
 Thực hiện các biện pháp kiểm soát chi phí:
 
@@ -363,7 +363,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Giám sát và khả năng quan sát
+## Giám sát và Khả năng quan sát
 
 ### Tích hợp Application Insights
 
@@ -403,12 +403,12 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Các chỉ số tùy chỉnh
+### Số liệu Tùy chỉnh
 
-Theo dõi các chỉ số đặc thù cho AI:
+Theo dõi các số liệu riêng cho AI:
 
 ```python
-# Giám sát tùy chỉnh cho các mô hình AI
+# Telemetri tùy chỉnh cho các mô hình AI
 import logging
 from applicationinsights import TelemetryClient
 
@@ -440,12 +440,12 @@ class AITelemetry:
         )
 ```
 
-### Kiểm tra sức khỏe
+### Kiểm tra Sức khỏe
 
-Triển khai giám sát trạng thái dịch vụ AI:
+Thực hiện giám sát sức khỏe dịch vụ AI:
 
 ```python
-# Các endpoint kiểm tra trạng thái hoạt động
+# Các endpoint kiểm tra tình trạng
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -474,30 +474,29 @@ async def check_ai_models():
 ## Bước tiếp theo
 
 1. **Xem lại [Hướng dẫn Tích hợp Microsoft Foundry](microsoft-foundry-integration.md)** cho các mẫu tích hợp dịch vụ
-2. **Hoàn thành [Phòng thí nghiệm Workshop AI](ai-workshop-lab.md)** để có kinh nghiệm thực hành
-3. **Triển khai [Thực hành AI cho môi trường sản xuất](production-ai-practices.md)** cho các triển khai doanh nghiệp
-4. **Tham khảo [Hướng dẫn Khắc phục sự cố AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** cho các vấn đề phổ biến
+2. **Hoàn thành [AI Workshop Lab](ai-workshop-lab.md)** để có trải nghiệm thực hành
+3. **Triển khai [Thực hành AI cho Môi trường Sản xuất](production-ai-practices.md)** cho các triển khai doanh nghiệp
+4. **Khám phá [Hướng dẫn Khắc phục sự cố AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** cho các vấn đề phổ biến
 
 ## Tài nguyên
 
-- [Tình trạng sẵn có của mô hình Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Khả dụng Mô hình Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Tài liệu Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Mở rộng Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [Tối ưu chi phí cho mô hình AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Tự động mở rộng Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Tối ưu hóa Chi phí Mô hình AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Điều hướng chương:**
-- **📚 Trang khóa học**: [AZD cho người mới bắt đầu](../../README.md)
-- **📖 Chương hiện tại**: Chương 2 - Phát triển theo hướng AI
-- **⬅️ Trước**: [Tích hợp Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Tiếp**: [Phòng thí nghiệm Workshop AI](ai-workshop-lab.md)
+**Điều hướng Chương:**
+- **📚 Trang Khóa học**: [AZD cho Người Mới Bắt Đầu](../../README.md)
+- **📖 Chương Hiện tại**: Chương 2 - Phát triển Ưu tiên AI
+- **⬅️ Trước đó**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ Tiếp theo**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Chương tiếp theo**: [Chương 3: Cấu hình](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Miễn trừ trách nhiệm:
-
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật bằng AI Co-op Translator (https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa sai sót hoặc không chính xác. Văn bản gốc bằng ngôn ngữ nguyên bản nên được coi là nguồn chính thức. Đối với thông tin quan trọng, nên sử dụng bản dịch chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm đối với bất kỳ hiểu nhầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+**Disclaimer**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực để đạt độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa sai sót hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ nguyên bản nên được coi là nguồn có thẩm quyền. Đối với thông tin quan trọng, nên sử dụng dịch thuật chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm đối với bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

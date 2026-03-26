@@ -1,48 +1,48 @@
-# Microsoft Foundry ve AZD Entegrasyonu
+# Microsoft Foundry'ın AZD ile Entegrasyonu
 
 **Chapter Navigation:**
-- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../../README.md)
-- **📖 Current Chapter**: Bölüm 2 - Yapay Zeka Öncelikli Geliştirme
+- **📚 Kurs Anasayfası**: [AZD Yeni Başlayanlar](../../README.md)
+- **📖 Geçerli Bölüm**: Bölüm 2 - Yapay Zeka Öncelikli Geliştirme
 - **⬅️ Önceki Bölüm**: [Bölüm 1: İlk Projeniz](../chapter-01-foundation/first-project.md)
 - **➡️ Sonraki**: [AI Model Dağıtımı](ai-model-deployment.md)
 - **🚀 Sonraki Bölüm**: [Bölüm 3: Yapılandırma](../chapter-03-configuration/configuration.md)
 
 ## Genel Bakış
 
-Bu kılavuz, Microsoft Foundry hizmetlerini Azure Developer CLI (AZD) ile entegre ederek yapay zeka uygulamalarının dağıtımlarını nasıl kolaylaştıracağını gösterir. Microsoft Foundry, yapay zeka uygulamaları oluşturmak, dağıtmak ve yönetmek için kapsamlı bir platform sağlarken, AZD altyapı ve dağıtım sürecini basitleştirir.
+Bu rehber, Microsoft Foundry hizmetlerini Azure Developer CLI (AZD) ile entegre ederek yapay zeka uygulamalarının konuşlandırılmasını nasıl kolaylaştırabileceğinizi gösterir. Microsoft Foundry, yapay zeka uygulamaları oluşturmak, dağıtmak ve yönetmek için kapsamlı bir platform sağlar; AZD ise altyapı ve dağıtım sürecini basitleştirir.
 
 ## Microsoft Foundry Nedir?
 
 Microsoft Foundry, yapay zeka geliştirme için birleşik bir platformdur ve şunları içerir:
 
-- **Model Kataloğu**: En gelişmiş yapay zeka modellere erişim
+- **Model Catalog**: En yeni yapay zeka modellerine erişim
 - **Prompt Flow**: Yapay zeka iş akışları için görsel tasarımcı
-- **AI Foundry Portalı**: Yapay zeka uygulamaları için entegre geliştirme ortamı
-- **Dağıtım Seçenekleri**: Birden çok barındırma ve ölçeklendirme seçeneği
-- **Güvenlik ve Emniyet**: Yerleşik sorumlu yapay zeka özellikleri
+- **Microsoft Foundry Portal**: Yapay zeka uygulamaları için entegre geliştirme ortamı
+- **Deployment Options**: Çoklu barındırma ve ölçeklendirme seçenekleri
+- **Safety and Security**: Yerleşik sorumlu yapay zeka özellikleri
 
 ## AZD + Microsoft Foundry: Birlikte Daha İyi
 
 | Özellik | Microsoft Foundry | AZD Entegrasyon Avantajı |
 |---------|-----------------|------------------------|
-| **Model Dağıtımı** | Portal üzerinden manuel dağıtım | Otomatik, tekrarlanabilir dağıtımlar |
-| **Altyapı** | Tıklayarak sağlanan provizyon | Kod olarak Altyapı (Bicep) |
-| **Ortam Yönetimi** | Tek ortam odaklı | Çoklu ortam (dev/staging/prod) |
-| **CI/CD Entegrasyonu** | Sınırlı | Yerel GitHub Actions desteği |
-| **Maliyet Yönetimi** | Temel izleme | Ortama özel maliyet optimizasyonu |
+| **Model Deployment** | Manual portal deployment | Otomatik, tekrarlanabilir dağıtımlar |
+| **Infrastructure** | Click-through provisioning | Kod Olarak Altyapı (Bicep) |
+| **Environment Management** | Single environment focus | Çoklu ortam (dev/staging/prod) |
+| **CI/CD Integration** | Limited | Yerel GitHub Actions desteği |
+| **Cost Management** | Basic monitoring | Ortama özel maliyet optimizasyonu |
 
 ## Önkoşullar
 
 - Uygun izinlere sahip Azure aboneliği
 - Azure Developer CLI yüklü
-- Azure OpenAI hizmetlerine erişim
+- Microsoft Foundry Models hizmetlerine erişim
 - Microsoft Foundry hakkında temel bilgi
 
 ## Temel Entegrasyon Desenleri
 
-### Desen 1: Azure OpenAI Entegrasyonu
+### Desen 1: Microsoft Foundry Models Entegrasyonu
 
-**Kullanım Durumu**: Azure OpenAI modelleriyle sohbet uygulamaları dağıtmak
+**Kullanım Durumu**: Microsoft Foundry Models modelleriyle sohbet uygulamaları dağıtma
 
 ```yaml
 # azure.yaml
@@ -58,7 +58,7 @@ services:
 
 **Altyapı (main.bicep):**
 ```bicep
-// Azure OpenAI Account
+// Microsoft Foundry Models Account
 resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   name: openAIAccountName
   location: location
@@ -92,7 +92,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### Desen 2: AI Search + RAG Entegrasyonu
 
-**Kullanım Durumu**: retrieval-augmented generation (RAG) uygulamalarını dağıtmak
+**Kullanım Durumu**: Geri getirilmeye dayalı güçlendirilmiş üretim (RAG) uygulamaları dağıtma
 
 ```bicep
 // Azure AI Search
@@ -120,7 +120,7 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### Desen 3: Belge Zekası Entegrasyonu
+### Desen 3: Belge Zekâsı Entegrasyonu
 
 **Kullanım Durumu**: Belge işleme ve analiz iş akışları
 
@@ -159,7 +159,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 **Üretim Yapılandırması:**
 ```bash
-# Temel YZ hizmetleri
+# Çekirdek Yapay Zeka hizmetleri
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
@@ -218,15 +218,47 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ## Dağıtım İş Akışları
 
+### Foundry için AZD Uzantıları
+
+AZD, Microsoft Foundry hizmetleriyle çalışmak için AI'ya özgü yetenekler ekleyen uzantılar sağlar:
+
+```bash
+# Foundry ajanları uzantısını yükleyin
+azd extension install azure.ai.agents
+
+# İnce ayar uzantısını yükleyin
+azd extension install azure.ai.finetune
+
+# Özel modeller uzantısını yükleyin
+azd extension install azure.ai.models
+
+# Yüklü uzantıları listeleyin
+azd extension list
+```
+
+### Ajan-Öncelikli Dağıtım `azd ai` ile
+
+Bir ajan manifestonuz varsa, Foundry Agent Service'e bağlanmış bir proje iskeleti oluşturmak için `azd ai agent init` kullanın:
+
+```bash
+# Ajan manifestosundan başlat
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Azure'a dağıt
+azd up
+```
+
+Tam komut referansı ve bayraklar için [AZD AI CLI Komutları](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) sayfasına bakın.
+
 ### Tek Komutla Dağıtım
 
 ```bash
-# Her şeyi tek bir komutla dağıtın
+# Her şeyi tek komutla dağıtın
 azd up
 
-# Veya kademeli olarak dağıtın
-azd provision  # Yalnızca altyapı
-azd deploy     # Yalnızca uygulama
+# Ya da kademeli olarak dağıtın
+azd provision  # Sadece altyapı
+azd deploy     # Sadece uygulama
 ```
 
 ### Ortama Özgü Dağıtımlar
@@ -246,7 +278,7 @@ azd env set AZURE_OPENAI_CAPACITY 100
 azd up
 ```
 
-## İzleme ve Görünürlük
+## İzleme ve Gözlemlenebilirlik
 
 ### Application Insights Entegrasyonu
 
@@ -422,12 +454,12 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## Yaygın Sorun Giderme
+## Yaygın Sorunların Giderilmesi
 
 ### Sorun 1: OpenAI Kota Aşıldı
 
 **Belirtiler:**
-- Dağıtım kota hatalarıyla başarısız olur
+- Dağıtım kota hatalarıyla başarısız oluyor
 - Uygulama günlüklerinde 429 hataları
 
 **Çözümler:**
@@ -447,8 +479,8 @@ azd deploy
 ### Sorun 2: Kimlik Doğrulama Hataları
 
 **Belirtiler:**
-- AI hizmetleri çağrılırken 401/403 hataları
-- "Erişim reddedildi" mesajları
+- AI hizmetlerine çağrı yaparken 401/403 hataları
+- "Erişim reddedildi" iletileri
 
 **Çözümler:**
 ```bash
@@ -465,25 +497,27 @@ az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ### Sorun 3: Model Dağıtım Sorunları
 
 **Belirtiler:**
-- Dağıtımda modellerin kullanılamaması
-- Belirli model sürümlerinin başarısız olması
+- Modeller dağıtımda mevcut değil
+- Belirli model sürümleri başarısız oluyor
 
 **Çözümler:**
 ```bash
-# Bölgeye göre kullanılabilir modelleri listele
+# Bölgeye göre mevcut modelleri listele
 az cognitiveservices model list --location eastus
 
 # Bicep şablonunda model sürümünü güncelle
-# Model kapasite gereksinimlerini kontrol et
+# Modelin kapasite gereksinimlerini kontrol et
 ```
 
 ## Örnek Şablonlar
 
-### Temel Sohbet Uygulaması
+### RAG Sohbet Uygulaması (Python)
 
 **Depo**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-**Hizmetler**: Azure OpenAI + Cognitive Search + App Service
+**Hizmetler**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
+
+**Açıklama**: En popüler Azure AI örneği — kendi belgeleriniz üzerinde soru sormanıza olanak tanıyan üretim hazır bir RAG sohbet uygulaması. Sohbet için GPT-4.1-mini, gömme (embeddings) için text-embedding-ada-002 ve geri getirme için Azure AI Search kullanır. Çok modlu belgeleri, ses giriş/çıkışını, Microsoft Entra kimlik doğrulamayı ve Application Insights izlemeyi destekler.
 
 **Hızlı Başlangıç**:
 ```bash
@@ -491,23 +525,41 @@ azd init --template azure-search-openai-demo
 azd up
 ```
 
-### Belge İşleme Boru Hattı
+### RAG Sohbet Uygulaması (.NET)
 
-**Depo**: [ai-document-processing](https://github.com/Azure-Samples/ai-document-processing)
+**Depo**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
 
-**Hizmetler**: Document Intelligence + Storage + Functions
+**Hizmetler**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
+
+**Açıklama**: Python RAG sohbet örneğinin .NET/C# eşdeğeri. ASP.NET Core Minimal API ve Blazor WebAssembly ön yüzü ile oluşturulmuştur. Sesli sohbet, GPT-4o-mini görsel desteği ve eşlik eden .NET MAUI Blazor Hibrit masaüstü/mobil istemciyi içerir.
 
 **Hızlı Başlangıç**:
 ```bash
-azd init --template ai-document-processing
+azd init --template azure-search-openai-demo-csharp
 azd up
 ```
 
-### Kurumsal Sohbet (RAG)
+### RAG Sohbet Uygulaması (Java)
+
+**Depo**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
+
+**Hizmetler**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
+
+**Açıklama**: AI orkestrasyonu için Langchain4J kullanan RAG sohbet örneğinin Java versiyonu. Mikro hizmet olaya dayalı mimariyi, birden çok arama stratejisini (metin, vektör, hibrit), Azure Document Intelligence ile belge yüklemeyi ve Azure Container Apps veya Azure Kubernetes Service üzerinde dağıtımı destekler.
+
+**Hızlı Başlangıç**:
+```bash
+azd init --template azure-search-openai-demo-java
+azd up
+```
+
+### Azure AI Foundry ile Kurumsal Perakende Yardımcısı
 
 **Depo**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
-**Hizmetler**: Azure OpenAI + Search + Container Apps + Cosmos DB
+**Hizmetler**: Azure OpenAI + Azure AI Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
+
+**Açıklama**: Azure AI Foundry ve Prompty kullanan uçtan uca perakende RAG yardımcı uygulaması. Cevapları ürün kataloğu ve müşteri sipariş verilerine dayandıran Contoso Outdoor perakende sohbet botu. Tam GenAIOps iş akışını gösterir — Prompty ile prototip oluşturma, AI destekli değerlendiricilerle değerlendirme ve AZD ile Container Apps'e dağıtım.
 
 **Hızlı Başlangıç**:
 ```bash
@@ -515,9 +567,81 @@ azd init --template contoso-chat
 azd up
 ```
 
+### Yaratıcı Yazarlık Çok Ajanlı Uygulama
+
+**Depo**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
+
+**Hizmetler**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
+
+**Açıklama**: Prompty ile AI ajan orkestrasyonunu gösteren çok ajanlı örnek. İyi araştırılmış makaleler üretmek için bir araştırma ajanı (Azure AI Agent Service içinde Bing Grounding), bir ürün ajanı (Azure AI Search), bir yazar ajanı ve bir editör ajanı kullanır. GitHub Actions içinde değerlendirme ile CI/CD içerir.
+
+**Hızlı Başlangıç**:
+```bash
+azd init --template contoso-creative-writer
+azd up
+```
+
+### Sunucusuz RAG Sohbet (JavaScript/TypeScript)
+
+**Depo**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
+
+**Hizmetler**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
+
+**Açıklama**: Tamamen sunucusuz RAG sohbet botu; API için Azure Functions ve barındırma için Azure Static Web Apps kullanır. Azure Cosmos DB'yi hem vektör deposu hem de sohbet geçmişi veritabanı olarak kullanır. Sıfır maliyetli test için Ollama ile yerel geliştirmeyi destekler.
+
+**Hızlı Başlangıç**:
+```bash
+azd init --template serverless-chat-langchainjs
+azd up
+```
+
+### Verilerinizle Sohbet Çözüm Hızlandırıcısı
+
+**Depo**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
+
+**Hizmetler**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
+
+**Açıklama**: Kurumsal düzeyde RAG çözüm hızlandırıcısı; belge yükleme/ yönetimi için yönetici portalı, birden çok orkestratör seçeneği (Semantic Kernel, LangChain, Prompt Flow), konuşmadan metne, Microsoft Teams entegrasyonu ve PostgreSQL veya Cosmos DB arka ucu seçeneği sunar. Üretim RAG senaryoları için özelleştirilebilir bir başlangıç noktası olarak tasarlanmıştır.
+
+**Hızlı Başlangıç**:
+```bash
+azd init --template chat-with-your-data-solution-accelerator
+azd up
+```
+
+### AI Seyahat Ajanları — Çok Ajanlı MCP Orkestrasyonu
+
+**Depo**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
+
+**Hizmetler**: Azure OpenAI + Azure AI Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
+
+**Açıklama**: Üç çerçeve (LangChain.js, LlamaIndex.TS ve Microsoft Agent Framework) kullanarak çok ajanlı AI orkestrasyonu için referans uygulaması. Dört dilde MCP (Model Context Protocol) sunucularını, OpenTelemetry izleme ile sunucusuz Azure Container Apps olarak dağıtmayı içerir.
+
+**Hızlı Başlangıç**:
+```bash
+azd init --template azure-ai-travel-agents
+azd up
+```
+
+### Azure AI Başlangıç
+
+**Depo**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
+
+**Hizmetler**: Azure AI Services + Azure OpenAI
+
+**Açıklama**: Yapılandırılmış makine öğrenimi modelleriyle Azure AI hizmetlerini dağıtan minimal bir Bicep şablonu. Tam bir uygulama yığını olmadan yalnızca Azure AI altyapısının sağlanması gerektiğinde hafif bir başlangıç noktasıdır.
+
+**Hızlı Başlangıç**:
+```bash
+azd init --template azd-ai-starter
+azd up
+```
+
+> **Daha fazla şablona göz atın**: 80+'den fazla dil ve senaryo için AI'ya özel AZD şablonları görmek üzere [Awesome AZD AI Şablon Galerisi](https://azure.github.io/awesome-azd/?tags=ai) adresini ziyaret edin.
+
 ## Sonraki Adımlar
 
-1. **Örnekleri Deneyin**: Kullanım durumunuza uyan önceden hazırlanmış bir şablonla başlayın
+1. **Örnekleri Deneyin**: Kullanım durumunuza uygun önceden hazırlanmış bir şablonla başlayın
 2. **İhtiyaçlarınıza Göre Özelleştirin**: Altyapı ve uygulama kodunu değiştirin
 3. **İzleme Ekleyin**: Kapsamlı gözlemlenebilirlik uygulayın
 4. **Maliyetleri Optimize Edin**: Bütçenize göre yapılandırmaları ince ayar yapın
@@ -526,8 +650,8 @@ azd up
 
 ## 🎯 Uygulamalı Alıştırmalar
 
-### Alıştırma 1: Azure OpenAI Sohbet Uygulaması Dağıtımı (30 dakika)
-**Hedef**: Üretime hazır bir yapay zeka sohbet uygulamasını dağıtmak ve test etmek
+### Alıştırma 1: Microsoft Foundry Models Sohbet Uygulamasını Dağıtma (30 dakika)
+**Amaç**: Üretim hazır bir AI sohbet uygulamasını dağıtmak ve test etmek
 
 ```bash
 # Şablonu başlat
@@ -554,15 +678,15 @@ azd down --force --purge
 
 **Başarı Kriterleri:**
 - [ ] Dağıtım kota hatası olmadan tamamlanır
-- [ ] Tarayıcıda sohbet arabirimine erişilebilir
-- [ ] Soru sorup yapay zeka destekli yanıtlar alınabilir
+- [ ] Tarayıcıda sohbet arayüzüne erişilebilir
+- [ ] Sorular sorulabilir ve AI destekli yanıtlar alınabilir
 - [ ] Application Insights telemetri verilerini gösterir
 - [ ] Kaynaklar başarıyla temizlendi
 
-**Tahmini Maliyet**: 30 dakika test için $5-10
+**Tahmini Maliyet**: 30 dakikalık test için $5-10
 
-### Alıştırma 2: Çok-Modelli Dağıtım Yapılandırması (45 dakika)
-**Hedef**: Farklı yapılandırmalara sahip birden çok yapay zeka modelini dağıtmak
+### Alıştırma 2: Çoklu Model Dağıtımını Yapılandırma (45 dakika)
+**Amaç**: Farklı yapılandırmalara sahip birden çok AI modelini dağıtmak
 
 ```bash
 # Özel Bicep yapılandırması oluşturun
@@ -574,14 +698,14 @@ resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
   name: openAiAccountName
 }
 
-// GPT-4o-mini for general chat
+// gpt-4.1-mini for general chat
 resource gpt4omini 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'gpt-4o-mini'
+  name: 'gpt-4.1-mini'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
     scaleSettings: {
@@ -618,11 +742,11 @@ azd show
 **Başarı Kriterleri:**
 - [ ] Birden çok model başarıyla dağıtıldı
 - [ ] Farklı kapasite ayarları uygulandı
-- [ ] Modellere API üzerinden erişilebiliyor
-- [ ] Her iki modeli de uygulamadan çağırılabilir
+- [ ] Modeller API üzerinden erişilebilir
+- [ ] Uygulamadan her iki modele de çağrı yapılabilir
 
 ### Alıştırma 3: Maliyet İzleme Uygulama (20 dakika)
-**Hedef**: Bütçe uyarıları ve maliyet takibi kurmak
+**Amaç**: Bütçe uyarıları ve maliyet takibi kurmak
 
 ```bash
 # Bicep'e bütçe uyarısı ekle
@@ -672,13 +796,13 @@ az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-d
 ## 💡 Sıkça Sorulan Sorular
 
 <details>
-<summary><strong>Geliştirme sırasında Azure OpenAI maliyetlerini nasıl azaltırım?</strong></summary>
+<summary><strong>Geliştirme sırasında Microsoft Foundry Models maliyetlerini nasıl azaltırım?</strong></summary>
 
-1. **Ücretsiz Katmanı Kullanın**: Azure OpenAI ayda 50.000 token ücretsiz sunar
+1. **Ücretsiz Katmanı Kullanın**: Microsoft Foundry Models aylık 50.000 token ücretsiz sunar
 2. **Kapasiteyi Azaltın**: Geliştirme için kapasiteyi 30+ yerine 10 TPM olarak ayarlayın
-3. **azd down kullanın**: Aktif geliştirme yapılmadığında kaynakları boşaltın
+3. **azd down kullanın**: Aktif geliştirme yapılmıyorsa kaynakları serbest bırakın
 4. **Yanıtları Önbelleğe Alın**: Tekrarlanan sorgular için Redis önbelleği uygulayın
-5. **Prompt Mühendisliği Kullanın**: Verimli istemlerle token kullanımını azaltın
+5. **Prompt Mühendisliğini Kullanın**: Etkili prompt'larla token kullanımını azaltın
 
 ```bash
 # Geliştirme yapılandırması
@@ -688,26 +812,26 @@ azd env set ENABLE_RESPONSE_CACHE true
 </details>
 
 <details>
-<summary><strong>Azure OpenAI ile OpenAI API arasındaki fark nedir?</strong></summary>
+<summary><strong>Microsoft Foundry Models ile OpenAI API arasındaki fark nedir?</strong></summary>
 
-**Azure OpenAI**:
+**Microsoft Foundry Models**:
 - Kurumsal güvenlik ve uyumluluk
 - Özel ağ entegrasyonu
 - SLA garantileri
-- Yönetilen kimlik ile kimlik doğrulama
+- Yönetilen kimlik kimlik doğrulaması
 - Daha yüksek kotalar mevcut
 
 **OpenAI API**:
 - Yeni modellere daha hızlı erişim
 - Daha basit kurulum
-- Giriş engeli daha düşüktür
-- Yalnızca genel internet
+- Daha düşük giriş engeli
+- Sadece genel internet
 
-Üretim uygulamaları için **Azure OpenAI önerilir**.
+Üretim uygulamaları için **Microsoft Foundry Models önerilir**.
 </details>
 
 <details>
-<summary><strong>Azure OpenAI kota aşıldı hatalarını nasıl ele alırım?</strong></summary>
+<summary><strong>Microsoft Foundry Modellerinde kota aşıldı hatalarını nasıl ele alırım?</strong></summary>
 
 ```bash
 # Mevcut kotayı kontrol et
@@ -722,14 +846,14 @@ azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
 # Kota artışı talep et
-# Azure Portal'a git > Kotalar > Artış talebi oluştur
+# Azure Portal'a git > Kotalar > Artış talebinde bulun
 ```
 </details>
 
 <details>
-<summary><strong>Azure OpenAI ile kendi verilerimi kullanabilir miyim?</strong></summary>
+<summary><strong>Microsoft Foundry Modelleriyle kendi verilerimi kullanabilir miyim?</strong></summary>
 
-Evet! RAG (Retrieval Augmented Generation) için **Azure AI Search**'ü kullanın:
+Evet! RAG (Retrieval Augmented Generation) için **Azure AI Search** kullanın:
 
 ```yaml
 # azure.yaml
@@ -741,18 +865,18 @@ services:
       - AZURE_OPENAI_ENDPOINT
 ```
 
-Şablona bakın: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo).
+Şablon için [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) projesine bakın.
 </details>
 
 <details>
-<summary><strong>Yapay zeka model uç noktalarını nasıl güvenli hale getiririm?</strong></summary>
+<summary><strong>Yapay zeka model uç noktalarını nasıl güvence altına alırım?</strong></summary>
 
 **En İyi Uygulamalar**:
-1. Yönetilen Kimlik kullanın (API anahtarları yok)
-2. Özel Uç Noktaları etkinleştirin
+1. Managed Identity kullanın (API anahtarları kullanmayın)
+2. Private Endpoints'i etkinleştirin
 3. Ağ güvenlik gruplarını yapılandırın
-4. İstek hızını sınırlayın
-5. Gizli bilgiler için Azure Key Vault kullanın
+4. Hız sınırlaması uygulayın
+5. Gizli veriler için Azure Key Vault kullanın
 
 ```bicep
 // Managed Identity authentication
@@ -777,21 +901,22 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 - **Microsoft Foundry Discord**: [#Azure kanalı](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Sorunlar ve tartışmalar](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Resmi dokümantasyon](https://learn.microsoft.com/azure/ai-studio/)
+- **Agent Skills**: [skills.sh üzerindeki Microsoft Foundry becerisi](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Editörünüze Azure + Foundry ajan becerilerini şu komutla yükleyin: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Chapter Navigation:**
-- **📚 Kurs Ana Sayfası**: [AZD Yeni Başlayanlar İçin](../../README.md)
-- **📖 Current Chapter**: Bölüm 2 - Yapay Zeka Öncelikli Geliştirme
-- **⬅️ Önceki Bölüm**: [Bölüm 1: İlk Projeniz](../chapter-01-foundation/first-project.md)
-- **➡️ Sonraki**: [AI Model Dağıtımı](ai-model-deployment.md)
-- **🚀 Sonraki Bölüm**: [Bölüm 3: Yapılandırma](../chapter-03-configuration/configuration.md)
+**Bölüm Gezintisi:**
+- **📚 Kurs Ana Sayfası**: [AZD For Beginners](../../README.md)
+- **📖 Geçerli Bölüm**: Chapter 2 - AI-First Development
+- **⬅️ Önceki Bölüm**: [Chapter 1: Your First Project](../chapter-01-foundation/first-project.md)
+- **➡️ Sonraki**: [AI Model Deployment](ai-model-deployment.md)
+- **🚀 Sonraki Bölüm**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
-**Yardıma mı ihtiyacınız var?** Topluluk tartışmalarımıza katılın veya depoda bir issue açın. Azure AI + AZD topluluğu başarıya ulaşmanız için burada!
+**Yardıma mı ihtiyacınız var?** Topluluk tartışmalarımıza katılın veya depoda bir sorun açın. Azure AI + AZD topluluğu başarılı olmanız için burada!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Sorumluluk reddi:
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belgenin kendi dilindeki versiyonu yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanılmasından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+**Feragatname**:
+Bu belge, AI çeviri servisi [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hata veya yanlışlıklar içerebileceğinin farkında olun. Orijinal belge, ana dilindeki hâliyle yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi tavsiye edilir. Bu çevirinin kullanılması sonucunda ortaya çıkan herhangi bir yanlış anlama veya yanlış yorumdan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

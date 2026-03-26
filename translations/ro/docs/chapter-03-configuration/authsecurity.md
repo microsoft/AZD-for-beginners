@@ -1,32 +1,32 @@
-# Modele de autentificare și Identitate gestionată
+# Modele de Autentificare și Identitate Gestionată
 
-⏱️ **Timp estimat**: 45-60 minute | 💰 **Impact costuri**: Gratuit (fără costuri suplimentare) | ⭐ **Complexitate**: Intermediar
+⏱️ **Timp estimat**: 45-60 minute | 💰 **Impact cost**: Gratuit (fără costuri suplimentare) | ⭐ **Complexitate**: Intermediar
 
 **📚 Parcurs de învățare:**
-- ← Anterior: [Gestionarea Configurațiilor](configuration.md) - Gestionarea variabilelor de mediu și a secretelor
-- 🎯 **Ești aici**: Autentificare & Securitate (Identitate gestionată, Key Vault, modele securizate)
-- → Următor: [Primul Proiect](first-project.md) - Construiește prima ta aplicație AZD
-- 🏠 [Pagina cursului](../../README.md)
+- ← Anterior: [Managementul Configurației](configuration.md) - Gestionarea variabilelor de mediu și secretelor
+- 🎯 **Ești aici**: Autentificare & Securitate (Identitate Gestionată, Key Vault, modele securizate)
+- → Următorul: [Primul Proiect](first-project.md) - Creează prima ta aplicație AZD
+- 🏠 [Acasă Curs](../../README.md)
 
 ---
 
-## Ce vei învăța
+## Ce Vei Învăța
 
-Parcurgând această lecție, vei:
-- Înțelege modelele de autentificare Azure (chei, șiruri de conectare, identitate gestionată)
-- Implementa **Identitate gestionată** pentru autentificare fără parole
+Prin finalizarea acestei lecții, vei:
+- Înțelege modelele de autentificare Azure (chei, stringuri de conexiune, identitate gestionată)
+- Implementa **Identitatea Gestionată** pentru autentificare fără parolă
 - Proteja secretele cu integrarea **Azure Key Vault**
 - Configura **controlul accesului bazat pe roluri (RBAC)** pentru implementările AZD
-- Aplică bune practici de securitate în Container Apps și servicii Azure
-- Migrează de la autentificare bazată pe chei la autentificare bazată pe identitate
+- Aplica bune practici de securitate în Container Apps și servicii Azure
+- Migra de la autentificarea pe bază de chei la cea bazată pe identitate
 
-## De ce contează Identitatea gestionată
+## De ce Contează Identitatea Gestionată
 
-### Problema: Autentificarea tradițională
+### Problema: Autentificarea Tradițională
 
 **Înainte de Identitatea Gestionată:**
 ```javascript
-// ❌ RISC DE SECURITATE: Secrete incluse direct în cod
+// ❌ RISC DE SECURITATE: Secrete hardcodate în cod
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
 const storageKey = "xK7mN9pQ2wR5tY8uI0oP3aS6dF1gH4jK...";
 const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
@@ -34,16 +34,16 @@ const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 
 **Probleme:**
 - 🔴 **Secrete expuse** în cod, fișiere de configurare, variabile de mediu
-- 🔴 **Rotirea credențialelor** necesită modificări în cod și redeploy
-- 🔴 **Coșmaruri la audit** - cine a accesat ce și când?
-- 🔴 **Împrăștiere** - secrete răspândite în mai multe sisteme
-- 🔴 **Riscuri de conformitate** - nu trece auditurile de securitate
+- 🔴 **Rotația credentialelor** necesită modificări în cod și redeploy
+- 🔴 **Coșmaruri de audit** - cine a accesat ce, când?
+- 🔴 **Fragmentare** - secrete împrăștiate în multiple sisteme
+- 🔴 **Riscuri de conformitate** - neconform cu audituri de securitate
 
-### Soluția: Identitate gestionată
+### Soluția: Identitatea Gestionată
 
 **După Identitatea Gestionată:**
 ```javascript
-// ✅ Securizat: Niciun secret în cod
+// ✅ SECUR: Fără secrete în cod
 const credential = new DefaultAzureCredential();
 const client = new BlobServiceClient(
   "https://mystorageaccount.blob.core.windows.net",
@@ -53,46 +53,46 @@ const client = new BlobServiceClient(
 
 **Beneficii:**
 - ✅ **Zero secrete** în cod sau configurație
-- ✅ **Rotire automată** - Azure se ocupă de asta
-- ✅ **Urmă completă a auditului** în jurnalele Azure AD
-- ✅ **Securitate centralizată** - gestionezi din Azure Portal
-- ✅ **Pregătit pentru conformitate** - respectă standardele de securitate
+- ✅ **Rotație automată** - gestionată de Azure
+- ✅ **Jurnal complet de audit** în logurile Azure AD
+- ✅ **Securitate centralizată** - gestionată în Portalul Azure
+- ✅ **Conformitate pregătită** - respectă standardele de securitate
 
-**Analogii**: Autentificarea tradițională e ca și cum ai purta mai multe chei fizice pentru uși diferite. Identitatea gestionată e ca un ecuson de securitate care acordă acces automat în funcție de cine ești — fără chei de pierdut, copiați sau rotit.
+**Analogie**: Autentificarea tradițională este ca purtarea mai multor chei fizice pentru uși diferite. Identitatea Gestionată este ca un ecuson de securitate care acordă acces automat bazat pe cine ești — fără chei de pierdut, copiat sau roatat.
 
 ---
 
-## Prezentare arhitecturală
+## Prezentare Arhitecturală
 
-### Fluxul de autentificare cu Identitate gestionată
+### Fluxul de Autentificare cu Identitate Gestionată
 
 ```mermaid
 sequenceDiagram
-    participant App as Aplicația dvs.<br/>(Aplicație în container)
-    participant MI as Identitate gestionată<br/>(Azure AD)
-    participant KV as Seif de chei
-    participant Storage as Stocare Azure
+    participant App as Aplicația Dvs.<br/>(Aplicație Container)
+    participant MI as Identitate Gestionată<br/>(Azure AD)
+    participant KV as Key Vault
+    participant Storage as Azure Storage
     participant DB as Azure SQL
     
-    App->>MI: Solicita token de acces<br/>(automat)
+    App->>MI: Solicită token de acces<br/>(automat)
     MI->>MI: Verifică identitatea<br/>(fără parolă necesară)
-    MI-->>App: Returnează tokenul<br/>(valabil 1 oră)
+    MI-->>App: Returnează token<br/>(valid 1 oră)
     
-    App->>KV: Obține secretul<br/>(folosind tokenul)
+    App->>KV: Obține secret<br/>(folosind token)
     KV->>KV: Verifică permisiunile RBAC
-    KV-->>App: Returnează valoarea secretului
+    KV-->>App: Returnează valoarea secretă
     
-    App->>Storage: Încarcă blob<br/>(folosind tokenul)
+    App->>Storage: Încarcă blob<br/>(folosind token)
     Storage->>Storage: Verifică permisiunile RBAC
     Storage-->>App: Succes
     
-    App->>DB: Interoghează date<br/>(folosind tokenul)
+    App->>DB: Interoghează date<br/>(folosind token)
     DB->>DB: Verifică permisiunile SQL
-    DB-->>App: Returnează rezultatele
+    DB-->>App: Returnează rezultate
     
-    Note over App,DB: Toată autentificarea este fără parolă!
+    Note over App,DB: Toată autentificarea fără parolă!
 ```
-### Tipuri de identități gestionate
+### Tipuri de Identități Gestionate
 
 ```mermaid
 graph TB
@@ -103,79 +103,79 @@ graph TB
     MI --> SystemAssigned
     MI --> UserAssigned
     
-    SystemAssigned --> SA1[Ciclul de viață legat de resursă]
+    SystemAssigned --> SA1[Ciclu de viață legat de resursă]
     SystemAssigned --> SA2[Creare/ștergere automată]
-    SystemAssigned --> SA3[Potrivită pentru o singură resursă]
+    SystemAssigned --> SA3[Ideal pentru o singură resursă]
     
-    UserAssigned --> UA1[Ciclul de viață independent]
+    UserAssigned --> UA1[Ciclu de viață independent]
     UserAssigned --> UA2[Creare/ștergere manuală]
     UserAssigned --> UA3[Partajată între resurse]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
-| Caracteristică | Atribuită sistemului | Atribuită utilizatorului |
-|---------|----------------|---------------|
+| Caracteristică | Sistem-atribuită | Utilizator-atribuită |
+|----------------|------------------|---------------------|
 | **Durata de viață** | Legată de resursă | Independentă |
-| **Creare** | Automată odată cu resursa | Creare manuală |
+| **Creare** | Automată cu resursa | Creare manuală |
 | **Ștergere** | Ștearsă odată cu resursa | Persistă după ștergerea resursei |
 | **Partajare** | O singură resursă | Mai multe resurse |
-| **Caz de utilizare** | Scenarii simple | Scenarii complexe multi-resursă |
-| **AZD implicit** | ✅ Recomandat | Opțional |
+| **Caz de utilizare** | Scenarii simple | Scenarii complexe cu multiple resurse |
+| **Implicit AZD** | ✅ Recomandată | Opțională |
 
 ---
 
-## Cerințe prealabile
+## Precondiții
 
-### Instrumente necesare
+### Unelte necesare
 
-Ar trebui să aveți deja instalate acestea din lecțiile anterioare:
+Ar trebui să ai deja instalate din lecțiile anterioare:
 
 ```bash
 # Verificați Azure Developer CLI
 azd version
-# ✅ Așteptat: azd versiunea 1.0.0 sau mai recentă
+# ✅ Așteptat: versiunea azd 1.0.0 sau mai mare
 
 # Verificați Azure CLI
 az --version
-# ✅ Așteptat: azure-cli 2.50.0 sau mai recentă
+# ✅ Așteptat: azure-cli 2.50.0 sau mai mare
 ```
 
 ### Cerințe Azure
 
 - Abonament Azure activ
 - Permisiuni pentru:
-  - Crearea de identități gestionate
-  - Atribuirea rolurilor RBAC
-  - Crearea resurselor Key Vault
-  - Implementarea Container Apps
+  - Creare identități gestionate
+  - Atribuire roluri RBAC
+  - Creare resurse Key Vault
+  - Implementare Container Apps
 
-### Cunoștințe prealabile
+### Cunoștințe anterioare
 
-Ar trebui să fi parcurs:
-- [Ghid de instalare](installation.md) - Configurare AZD
-- [Noțiuni de bază AZD](azd-basics.md) - Concepte de bază
-- [Gestionarea Configurațiilor](configuration.md) - Variabile de mediu
+Trebuie să fi finalizat:
+- [Ghid de Installare](installation.md) - Configurare AZD
+- [Bazele AZD](azd-basics.md) - Concepte de bază
+- [Management Configurație](configuration.md) - Variabile de mediu
 
 ---
 
-## Lecția 1: Înțelegerea modelelor de autentificare
+## Lecția 1: Înțelegerea Modelelor de Autentificare
 
-### Modelul 1: Șiruri de conectare (Moștenit - Evitați)
+### Modelul 1: Stringuri de Conexiune (Legacy - Evitat)
 
 **Cum funcționează:**
 ```bash
-# Șirul de conexiune conține datele de autentificare
+# Șirul de conexiune conține acreditări
 STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=xK7mN9pQ2wR5..."
 COSMOS_CONNECTION_STRING="AccountEndpoint=https://myaccount.documents.azure.com:443/;AccountKey=C2x7..."
 SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=P@ssw0rd..."
 ```
 
 **Probleme:**
-- ❌ Secrete vizibile în variabilele de mediu
-- ❌ Înregistrate în sistemele de deploy
-- ❌ Dificil de rotit
-- ❌ Fără traseu de audit
+- ❌ Secrete vizibile în variabile de mediu
+- ❌ Logate în sistemele de deploy
+- ❌ Dificil de rotat
+- ❌ Fără istoric de audit
 
 **Când să folosești:** Doar pentru dezvoltare locală, niciodată în producție.
 
@@ -203,19 +203,19 @@ env: [
 ```
 
 **Beneficii:**
-- ✅ Secrete stocate în siguranță în Key Vault
+- ✅ Secrete stocate securizat în Key Vault
 - ✅ Management centralizat al secretelor
-- ✅ Rotire fără modificări de cod
+- ✅ Rotație fără modificări în cod
 
 **Limitări:**
-- ⚠️ Încă se folosesc chei/parole
+- ⚠️ Se folosesc încă chei/parole
 - ⚠️ Trebuie gestionat accesul la Key Vault
 
-**Când să folosești:** Pas de tranziție de la șiruri de conectare la identitate gestionată.
+**Când să folosești:** Pas de tranziție de la stringuri de conexiune la identitate gestionată.
 
 ---
 
-### Modelul 3: Identitate gestionată (Cea mai bună practică)
+### Modelul 3: Identitate Gestionată (Cea mai bună practică)
 
 **Cum funcționează:**
 ```bicep
@@ -237,7 +237,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-**Codul aplicației:**
+**Cod aplicație:**
 ```javascript
 // Nu sunt necesare secrete!
 const { DefaultAzureCredential } = require('@azure/identity');
@@ -252,12 +252,12 @@ const blobServiceClient = new BlobServiceClient(
 
 **Beneficii:**
 - ✅ Zero secrete în cod/config
-- ✅ Rotire automată a credențialelor
-- ✅ Urmă completă a auditului
+- ✅ Rotație automată a credentialelor
+- ✅ Istoric complet de audit
 - ✅ Permisiuni bazate pe RBAC
 - ✅ Pregătit pentru conformitate
 
-**Când să folosești:** Întotdeauna, pentru aplicații de producție.
+**Când să folosești:** Întotdeauna, pentru aplicații în producție.
 
 ---
 
@@ -265,7 +265,7 @@ const blobServiceClient = new BlobServiceClient(
 
 ### Implementare pas cu pas
 
-Să construim o Container App sigură care folosește identitate gestionată pentru a accesa Azure Storage și Key Vault.
+Să construim o Container App securizată care folosește identitate gestionată pentru acces la Azure Storage și Key Vault.
 
 ### Structura proiectului
 
@@ -286,7 +286,7 @@ secure-app/
     └── Dockerfile
 ```
 
-### 1. Configurează AZD (azure.yaml)
+### 1. Configurare AZD (azure.yaml)
 
 ```yaml
 name: secure-app
@@ -302,7 +302,7 @@ services:
 # Enable managed identity (AZD handles this automatically)
 ```
 
-### 2. Infrastructură: Activarea Identității Gestionate
+### 2. Infrastructură: Activare identitate gestionată
 
 **Fișier: `infra/main.bicep`**
 
@@ -384,7 +384,7 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output APP_URL string = containerApp.outputs.url
 ```
 
-### 3. Container App cu identitate atribuită sistemului
+### 3. Container App cu identitate sistem-atribuită
 
 **Fișier: `infra/app/container-app.bicep`**
 
@@ -441,7 +441,7 @@ output id string = containerApp.id
 output url string = 'https://${containerApp.properties.configuration.ingress.fqdn}'
 ```
 
-### 4. Modul de atribuire a rolurilor RBAC
+### 4. Modul atribuire rol RBAC
 
 **Fișier: `infra/core/role-assignment.bicep`**
 
@@ -463,7 +463,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 output id string = roleAssignment.id
 ```
 
-### 5. Codul aplicației cu Identitate Gestionată
+### 5. Cod aplicație cu identitate gestionată
 
 **Fișier: `src/app.js`**
 
@@ -476,10 +476,10 @@ const { SecretClient } = require('@azure/keyvault-secrets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔑 Inițializează acreditarea (funcționează automat cu identitate gestionată)
+// 🔑 Inițializează acreditările (funcționează automat cu identitate gestionată)
 const credential = new DefaultAzureCredential();
 
-// Configurare stocare Azure
+// Configurare Azure Storage
 const storageAccountName = process.env.AZURE_STORAGE_ACCOUNT_NAME;
 const blobServiceClient = new BlobServiceClient(
   `https://${storageAccountName}.blob.core.windows.net`,
@@ -493,12 +493,12 @@ const secretClient = new SecretClient(
   credential  // Nu sunt necesare chei!
 );
 
-// Verificare stare de sănătate
+// Verificare stare sănătate
 app.get('/health', (req, res) => {
   res.json({ status: 'healthy', authentication: 'managed-identity' });
 });
 
-// Încarcă fișier în Blob Storage
+// Încarcă fișier în stocarea blob
 app.post('/upload', async (req, res) => {
   try {
     const containerClient = blobServiceClient.getContainerClient('uploads');
@@ -520,7 +520,7 @@ app.post('/upload', async (req, res) => {
   }
 });
 
-// Obține secret din Key Vault
+// Obține secretul din Key Vault
 app.get('/secret/:name', async (req, res) => {
   try {
     const secretName = req.params.name;
@@ -537,7 +537,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// Listează containere blob (demonstrează acces de citire)
+// Listează containerele blob (demonstrează acces de citire)
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -583,7 +583,7 @@ app.listen(PORT, () => {
 ### 6. Implementare și testare
 
 ```bash
-# Inițializează mediul AZD
+# Initializează mediul AZD
 azd init
 
 # Desfășoară infrastructura și aplicația
@@ -596,7 +596,7 @@ APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
 curl $APP_URL/health
 ```
 
-**✅ Ieșire așteptată:**
+**✅ Rezultat așteptat:**
 ```json
 {
   "status": "healthy",
@@ -609,7 +609,7 @@ curl $APP_URL/health
 curl -X POST $APP_URL/upload
 ```
 
-**✅ Ieșire așteptată:**
+**✅ Rezultat așteptat:**
 ```json
 {
   "success": true,
@@ -623,7 +623,7 @@ curl -X POST $APP_URL/upload
 curl $APP_URL/containers
 ```
 
-**✅ Ieșire așteptată:**
+**✅ Rezultat așteptat:**
 ```json
 {
   "containers": ["uploads"],
@@ -634,15 +634,15 @@ curl $APP_URL/containers
 
 ---
 
-## Roluri RBAC comune în Azure
+## Roluri RBAC Comune Azure
 
-### ID-urile rolurilor încorporate pentru Identitate gestionată
+### ID-uri implicite pentru roluri identitate gestionată
 
 | Serviciu | Nume rol | ID rol | Permisiuni |
-|---------|-----------|---------|-------------|
+|----------|----------|---------|------------|
 | **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Citire blob-uri și containere |
 | **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Citire, scriere, ștergere blob-uri |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Citire, scriere, ștergere mesaje în coadă |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Citire, scriere, ștergere mesaje coadă |
 | **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Citire secrete |
 | **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Citire, scriere, ștergere secrete |
 | **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Citire date Cosmos DB |
@@ -650,7 +650,7 @@ curl $APP_URL/containers
 | **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Gestionare baze de date SQL |
 | **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Trimitere, primire, gestionare mesaje |
 
-### Cum să găsești ID-urile rolurilor
+### Cum găsești ID-urile rolurilor
 
 ```bash
 # Listează toate rolurile încorporate
@@ -659,21 +659,21 @@ az role definition list --query "[].{Name:roleName, ID:name}" --output table
 # Caută un rol specific
 az role definition list --query "[?contains(roleName, 'Storage Blob')].{Name:roleName, ID:name}" --output table
 
-# Obține detaliile rolului
+# Obține detalii despre rol
 az role definition list --name "Storage Blob Data Contributor"
 ```
 
 ---
 
-## Exerciții practice
+## Exerciții Practice
 
-### Exercițiul 1: Activarea identității gestionate pentru o aplicație existentă ⭐⭐ (Mediu)
+### Exercițiul 1: Activare Identitate Gestionată pentru Aplicația Existenta ⭐⭐ (Mediu)
 
-**Obiectiv**: Adaugă identitate gestionată la o implementare Container App existentă
+**Scop**: Adaugă identitatea gestionată la o implementare existentă Container App
 
-**Scenariu**: Ai o Container App care folosește șiruri de conectare. Convertește-o la identitate gestionată.
+**Scenariu**: Ai o Container App care folosește stringuri de conexiune. Convertește-o la identitate gestionată.
 
-**Punct de plecare**: Container App cu această configurație:
+**Punct de start**: Container App cu această configurație:
 
 ```bicep
 // ❌ Current: Using connection string
@@ -699,7 +699,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **Acordă acces la Storage:**
+2. **Acordă acces Storage:**
 
 ```bicep
 // Get storage account reference
@@ -721,7 +721,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 3. **Actualizează codul aplicației:**
 
-**Înainte (șir de conectare):**
+**Înainte (string conexiune):**
 ```javascript
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -742,7 +742,7 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-4. **Actualizează variabilele de mediu:**
+4. **Actualizează variabile de mediu:**
 
 ```bicep
 env: [
@@ -754,33 +754,33 @@ env: [
 ]
 ```
 
-5. **Implementare și testare:**
+5. **Deploy și test:**
 
 ```bash
-# Relansează
+# Redeploy
 azd up
 
-# Verifică dacă încă funcționează
+# Testează dacă încă funcționează
 curl https://myapp.azurecontainerapps.io/upload
 ```
 
 **✅ Criterii de succes:**
-- ✅ Aplicația se implementează fără erori
-- ✅ Operațiunile pe Storage funcționează (încărcare, listare, descărcare)
-- ✅ Nu există șiruri de conectare în variabilele de mediu
-- ✅ Identitatea este vizibilă în Azure Portal sub fila "Identity"
+- ✅ Aplicația se deployează fără erori
+- ✅ Operațiunile pe Storage funcționează (upload, listare, download)
+- ✅ Nu există stringuri de conexiune în variabilele de mediu
+- ✅ Identitatea este vizibilă în Portalul Azure în panoul „Identitate”
 
 **Verificare:**
 
 ```bash
-# Verificați dacă identitatea gestionată este activată
+# Verifică dacă identitatea gestionată este activată
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 # ✅ Așteptat: "SystemAssigned"
 
-# Verificați atribuirea rolului
+# Verifică atribuirea rolului
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv) \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.Storage/storageAccounts/mystorageaccount
@@ -791,15 +791,15 @@ az role assignment list \
 
 ---
 
-### Exercițiul 2: Acces multi-serviciu cu identitate atribuită utilizatorului ⭐⭐⭐ (Avansat)
+### Exercițiul 2: Acces Multi-Serviciu cu Identitate Utilizator-Atribuită ⭐⭐⭐ (Avansat)
 
-**Obiectiv**: Creează o identitate atribuită utilizatorului partajată între mai multe Container Apps
+**Scop**: Creează o identitate atribuită utilizator partajată între mai multe Container Apps
 
-**Scenariu**: Ai 3 microservicii care au nevoie de acces la același cont Storage și Key Vault.
+**Scenariu**: Ai 3 microservicii care au nevoie toate de acces la acelasi cont Storage și Key Vault.
 
 **Pași**:
 
-1. **Creează identitate atribuită utilizatorului:**
+1. **Creează identitate utilizator-atribuită:**
 
 **Fișier: `infra/core/identity.bicep`**
 
@@ -819,7 +819,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **Atribuie roluri identității atribuite utilizatorului:**
+2. **Atribuie roluri pentru identitatea utilizator-atribuită:**
 
 ```bicep
 // In main.bicep
@@ -856,7 +856,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **Atribuie identitatea mai multor Container Apps:**
+3. **Atribuie identitatea la multiple Container Apps:**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -893,17 +893,17 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-4. **Codul aplicației (toate serviciile folosesc același model):**
+4. **Cod aplicație (toate serviciile folosesc același model):**
 
 ```javascript
 const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
 
-// Pentru identitatea atribuită utilizatorului, specificați ID-ul clientului
+// Pentru identitate atribuită utilizatorului, specificați ID-ul clientului
 const credential = new ManagedIdentityCredential(
-  process.env.AZURE_CLIENT_ID  // ID-ul clientului pentru identitatea atribuită utilizatorului
+  process.env.AZURE_CLIENT_ID  // ID-ul clientului identității atribuite utilizatorului
 );
 
-// Sau utilizați DefaultAzureCredential (detectează automat)
+// Sau folosiți DefaultAzureCredential (detectează automat)
 const credential = new DefaultAzureCredential();
 
 const blobServiceClient = new BlobServiceClient(
@@ -912,36 +912,36 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-5. **Implementare și verificare:**
+5. **Deploy și verifică:**
 
 ```bash
 azd up
 
-# Testează dacă toate serviciile pot accesa stocarea
+# Testați dacă toate serviciile pot accesa stocarea
 curl https://api-gateway.azurecontainerapps.io/upload
 curl https://product-service.azurecontainerapps.io/upload
 curl https://order-service.azurecontainerapps.io/upload
 ```
 
 **✅ Criterii de succes:**
-- ✅ O identitate partajată între 3 servicii
+- ✅ O singură identitate partajată între 3 servicii
 - ✅ Toate serviciile pot accesa Storage și Key Vault
 - ✅ Identitatea persistă dacă ștergi un serviciu
 - ✅ Management centralizat al permisiunilor
 
-**Beneficii ale identității atribuite utilizatorului:**
+**Avantaje ale identității utilizator-atribuite:**
 - O singură identitate de gestionat
-- Permisiuni consistente între servicii
-- Supraviețuiește ștergerii unui serviciu
+- Permisiuni consistente pe serviciile multiple
+- Supraviețuiește ștergerii serviciilor
 - Mai potrivit pentru arhitecturi complexe
 
 **Timp**: 30-40 minute
 
 ---
 
-### Exercițiul 3: Implementarea rotației secretelor în Key Vault ⭐⭐⭐ (Avansat)
+### Exercițiul 3: Implementare rotație secrete Key Vault ⭐⭐⭐ (Avansat)
 
-**Obiectiv**: Stochează chei API terțe în Key Vault și accesează-le folosind identitate gestionată
+**Scop**: Stochează chei API terțe în Key Vault și accesează-le folosind identitatea gestionată
 
 **Scenariu**: Aplicația ta trebuie să apeleze un API extern (OpenAI, Stripe, SendGrid) care necesită chei API.
 
@@ -981,10 +981,10 @@ output uri string = keyVault.properties.vaultUri
 2. **Stochează secrete în Key Vault:**
 
 ```bash
-# Obține numele Key Vault-ului
+# Obțineți numele Key Vault
 KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Stochează cheile API ale terților
+# Stocați cheile API ale terților
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1001,7 +1001,7 @@ az keyvault secret set \
   --value "SG.xxxxxxxxxxxxx"
 ```
 
-3. **Codul aplicației pentru preluarea secretelor:**
+3. **Cod aplicație pentru preluarea secretelor:**
 
 **Fișier: `src/config.js`**
 
@@ -1020,7 +1020,7 @@ class Config {
   }
 
   async getSecret(secretName) {
-    // Verifică mai întâi cache-ul
+    // Verificați mai întâi memoria cache
     if (this.cache[secretName]) {
       return this.cache[secretName];
     }
@@ -1078,7 +1078,7 @@ initializeServices().catch(console.error);
 app.post('/chat', async (req, res) => {
   try {
     const completion = await openaiClient.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-4.1',
       messages: [{ role: 'user', content: 'Hello!' }]
     });
     
@@ -1096,27 +1096,27 @@ app.listen(3000, () => {
 });
 ```
 
-5. **Implementare și testare:**
+5. **Deploy și test:**
 
 ```bash
 azd up
 
-# Testează dacă cheile API funcționează
+# Testați dacă cheile API funcționează
 curl -X POST https://myapp.azurecontainerapps.io/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello AI"}'
 ```
 
 **✅ Criterii de succes:**
-- ✅ Niciună cheie API în cod sau variabilele de mediu
+- ✅ Nicio cheie API în cod sau variabile de mediu
 - ✅ Aplicația preia cheile din Key Vault
 - ✅ API-urile terțe funcționează corect
-- ✅ Poți roti cheile fără modificări de cod
+- ✅ Poți roata cheile fără să modifici codul
 
-**Rotirea unui secret:**
+**Rotește un secret:**
 
 ```bash
-# Actualizează secretul din Key Vault
+# Actualizează secretul în Key Vault
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1132,18 +1132,20 @@ az containerapp revision restart \
 
 ---
 
-## Punct de verificare a cunoștințelor
+## Verificare Cunoștințe
 
 ### 1. Modele de autentificare ✓
 
 Testează-ți înțelegerea:
 
-- [ ] **Q1**: Care sunt cele trei modele principale de autentificare? 
-  - **R**: Șiruri de conectare (moștenit), Referințe Key Vault (tranziție), Identitate gestionată (cel mai bun)
-- [ ] **Q2**: De ce este identitatea gestionată mai bună decât șirurile de conectare?
-  - **R**: Fără secrete în cod, rotire automată, urma completă a auditului, permisiuni RBAC
-- [ ] **Q3**: Când ai folosi o identitate atribuită utilizatorului în loc de una atribuită sistemului?
-  - **R**: Când vrei să partajezi identitatea între mai multe resurse sau când ciclul de viață al identității este independent de cel al resursei
+- [ ] **Î1**: Care sunt cele trei modele principale de autentificare? 
+  - **R**: Stringuri de conexiune (legacy), Referințe Key Vault (tranziție), Identitate Gestionată (cea mai bună)
+
+- [ ] **Î2**: De ce este mai bună identitatea gestionată față de stringuri de conexiune?
+  - **R**: Fără secrete în cod, rotație automată, istoric complet de audit, permisiuni RBAC
+
+- [ ] **Î3**: Când folosești identitate utilizator-atribuită în loc de sistem-atribuită?
+  - **R**: Când partajezi identitatea între mai multe resurse sau când ciclul vieții identității este independent de resursă
 
 **Verificare practică:**
 ```bash
@@ -1153,7 +1155,7 @@ az containerapp show \
   --resource-group rg-myapp \
   --query "identity.type"
 
-# Listează toate atribuțiile de rol pentru acea identitate
+# Listează toate atribuțiile de rol pentru identitate
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 ```
@@ -1164,16 +1166,18 @@ az role assignment list \
 
 Testează-ți înțelegerea:
 
-- [ ] **Q1**: Care este ID-ul rolului pentru "Storage Blob Data Contributor"?
+- [ ] **Î1**: Care este ID-ul rolului "Storage Blob Data Contributor"?
   - **R**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
-- [ ] **Q2**: Ce permisiuni oferă "Key Vault Secrets User"?
-  - **R**: Acces doar în citire la secrete (nu poate crea, actualiza sau șterge)
-- [ ] **Q3**: Cum acorzi unei Container App acces la Azure SQL?
-  - **R**: Atribuind rolul "SQL DB Contributor" sau configurând autentificare Azure AD pentru SQL
+
+- [ ] **Î2**: Ce permisiuni oferă rolul "Key Vault Secrets User"?
+  - **R**: Acces doar în citire la secrete (nu poate crea, modifica sau șterge)
+
+- [ ] **Î3**: Cum acorzi acces unei Container App la Azure SQL?
+  - **R**: Atribuind rolul "SQL DB Contributor" sau configurând autentificarea Azure AD pentru SQL
 
 **Verificare practică:**
 ```bash
-# Găsește un rol specific
+# Găsește rolul specific
 az role definition list --name "Storage Blob Data Contributor"
 
 # Verifică ce roluri sunt atribuite identității tale
@@ -1183,19 +1187,19 @@ az role assignment list --assignee $PRINCIPAL_ID --output table
 
 ---
 
-### 3. Integrarea Key Vault ✓
+### 3. Integrare Key Vault ✓
 
-Testează înțelegerea:
-- [ ] **Q1**: Cum activezi RBAC pentru Key Vault în loc de politicile de acces?
-  - **A**: Setează `enableRbacAuthorization: true` în Bicep
+Testează-ți înțelegerea:
+- [ ] **Întrebarea 1**: Cum activezi RBAC pentru Key Vault în locul politicilor de acces?
+  - **Răspuns**: Setează `enableRbacAuthorization: true` în Bicep
 
-- [ ] **Q2**: Ce bibliotecă din Azure SDK se ocupă de autentificarea cu identitate gestionată?
-  - **A**: `@azure/identity` cu clasa `DefaultAzureCredential`
+- [ ] **Întrebarea 2**: Ce bibliotecă Azure SDK gestionează autentificarea prin identitate gestionată?
+  - **Răspuns**: `@azure/identity` cu clasa `DefaultAzureCredential`
 
-- [ ] **Q3**: Cât timp rămân secretele din Key Vault în cache?
-  - **A**: Depinde de aplicație; implementați propria strategie de cache
+- [ ] **Întrebarea 3**: Cât timp stau secretele Key Vault în cache?
+  - **Răspuns**: Depinde de aplicație; implementează-ți propria strategie de caching
 
-**Verificare practică:**
+**Verificare Practică:**
 ```bash
 # Testează accesul la Key Vault
 az keyvault secret show \
@@ -1207,64 +1211,64 @@ az keyvault secret show \
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Așteptat: true
+# ✅ Așteptat: adevărat
 ```
 
 ---
 
 ## Cele mai bune practici de securitate
 
-### ✅ DE FĂCUT:
+### ✅ FĂ:
 
-1. **Folosiți întotdeauna identitate gestionată în producție**
+1. **Folosește întotdeauna identitatea gestionată în producție**
    ```bicep
    identity: {
      type: 'SystemAssigned'
    }
    ```
 
-2. **Folosiți roluri RBAC cu privilegiu minim**
-   - Folosiți roluri "Reader" atunci când este posibil
-   - Evitați "Owner" sau "Contributor" decât dacă este necesar
+2. **Folosește roluri RBAC cu cel mai mic privilegiu necesar**
+   - Folosește roluri de „Cititor” când este posibil
+   - Evită „Proprietar” sau „Contribuitor” decât dacă este necesar
 
-3. **Stocați cheile terților în Key Vault**
+3. **Stochează cheile terțelor părți în Key Vault**
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
 
-4. **Activați jurnalizarea de audit**
+4. **Activează înregistrările de audit**
    ```bicep
    diagnosticSettings: {
      logs: [{ category: 'AuditEvent', enabled: true }]
    }
    ```
 
-5. **Folosiți identități diferite pentru dev/staging/prod**
+5. **Folosește identități diferite pentru dev/staging/prod**
    ```bash
    azd env new dev
    azd env new staging
    azd env new prod
    ```
 
-6. **Rotiți secretele în mod regulat**
-   - Stabiliți date de expirare pentru secretele din Key Vault
-   - Automatizați rotația cu Azure Functions
+6. **Rotește secretele regulat**
+   - Setează date de expirare pentru secretele Key Vault
+   - Automatizează rotația cu Azure Functions
 
-### ❌ NU FACEȚI:
+### ❌ NU FACE:
 
-1. **Nu introduceți niciodată secrete în cod**
+1. **Niciodată să nu codifici secretele direct în cod**
    ```javascript
    // ❌ RĂU
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
    ```
 
-2. **Nu folosiți șiruri de conexiune în producție**
+2. **Nu folosi connection strings în producție**
    ```javascript
    // ❌ RĂU
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
    ```
 
-3. **Nu acordați permisiuni excesive**
+3. **Nu acorda permisiuni excesive**
    ```bicep
    // ❌ BAD - too much access
    roleDefinitionId: 'Owner'
@@ -1273,16 +1277,16 @@ az keyvault show \
    roleDefinitionId: 'Storage Blob Data Reader'
    ```
 
-4. **Nu înregistrați secretele în jurnale**
+4. **Nu loga secretele**
    ```javascript
-   // ❌ GREȘIT
+   // ❌ RĂU
    console.log('API Key:', apiKey);
    
-   // ✅ CORECT
+   // ✅ BUN
    console.log('API Key retrieved successfully');
    ```
 
-5. **Nu partajați identitățile de producție între medii**
+5. **Nu partaja identități de producție între medii**
    ```bicep
    // ❌ BAD - same identity for dev and prod
    // ✅ GOOD - separate identities per environment
@@ -1292,7 +1296,7 @@ az keyvault show \
 
 ## Ghid de depanare
 
-### Problemă: "Unauthorized" when accessing Azure Storage
+### Problemă: "Unauthorized" la accesarea Azure Storage
 
 **Simptome:**
 ```
@@ -1303,23 +1307,23 @@ AuthorizationPermissionMismatch: This request is not authorized to perform this 
 **Diagnostic:**
 
 ```bash
-# Verificați dacă identitatea gestionată este activată
+# Verifică dacă identitatea gestionată este activată
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 # ✅ Așteptat: "SystemAssigned" sau "UserAssigned"
 
-# Verificați atribuțiile rolurilor
+# Verifică atribuțiile rolului
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
-# Așteptat: Ar trebui să vedeți "Storage Blob Data Contributor" sau un rol similar
+# Așteptat: Ar trebui să vezi "Storage Blob Data Contributor" sau un rol similar
 ```
 
 **Soluții:**
 
-1. **Acordați rolul RBAC corect:**
+1. **Acordă rolul RBAC corect:**
 ```bash
 STORAGE_ID=$(az storage account show --name mystorageaccount --resource-group rg-myapp --query "id" -o tsv)
 az role assignment create \
@@ -1328,21 +1332,21 @@ az role assignment create \
   --scope $STORAGE_ID
 ```
 
-2. **Așteptați propagarea (poate dura 5-10 minute):**
+2. **Așteaptă propagarea (poate dura 5-10 minute):**
 ```bash
 # Verifică starea atribuirii rolului
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
 
-3. **Verificați că codul aplicației folosește acreditarea corectă:**
+3. **Verifică dacă codul aplicației folosește acreditările corecte:**
 ```javascript
-// Asigură-te că folosești DefaultAzureCredential.
+// Asigură-te că folosești DefaultAzureCredential
 const credential = new DefaultAzureCredential();
 ```
 
 ---
 
-### Problemă: Accesul la Key Vault refuzat
+### Problemă: Accesul la Key Vault este refuzat
 
 **Simptome:**
 ```
@@ -1357,9 +1361,9 @@ The user, group or application does not have secrets get permission
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Așteptat: true
+# ✅ Așteptat: adevărat
 
-# Verifică atribuiri de roluri
+# Verifică atribuirea rolurilor
 az role assignment list \
   --assignee $PRINCIPAL_ID \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.KeyVault/vaults/$KV_NAME
@@ -1367,14 +1371,14 @@ az role assignment list \
 
 **Soluții:**
 
-1. **Activați RBAC pe Key Vault:**
+1. **Activează RBAC pe Key Vault:**
 ```bash
 az keyvault update \
   --name $KV_NAME \
   --enable-rbac-authorization true
 ```
 
-2. **Acordați rolul Key Vault Secrets User:**
+2. **Acordă rolul Key Vault Secrets User:**
 ```bash
 KV_ID=$(az keyvault show --name $KV_NAME --query "id" -o tsv)
 az role assignment create \
@@ -1385,7 +1389,7 @@ az role assignment create \
 
 ---
 
-### Problemă: DefaultAzureCredential nu funcționează local
+### Problemă: DefaultAzureCredential eșuează local
 
 **Simptome:**
 ```
@@ -1405,28 +1409,28 @@ az ad signed-in-user show
 
 **Soluții:**
 
-1. **Autentificați-vă la Azure CLI:**
+1. **Autentifică-te în Azure CLI:**
 ```bash
 az login
 ```
 
-2. **Setați abonamentul Azure:**
+2. **Setează subscripția Azure:**
 ```bash
 az account set --subscription "Your Subscription Name"
 ```
 
-3. **Pentru dezvoltare locală, folosiți variabile de mediu:**
+3. **Pentru dezvoltare locală, folosește variabile de mediu:**
 ```bash
 export AZURE_TENANT_ID="your-tenant-id"
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
 
-4. **Sau folosiți o acreditare diferită local:**
+4. **Sau folosește altă acreditare locală:**
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
-// Folosiți AzureCliCredential pentru dezvoltare locală
+// Folosește AzureCliCredential pentru dezvoltare locală
 const credential = process.env.NODE_ENV === 'production' 
   ? new DefaultAzureCredential()
   : new AzureCliCredential();
@@ -1434,15 +1438,15 @@ const credential = process.env.NODE_ENV === 'production'
 
 ---
 
-### Problemă: Atribuirea rolului durează prea mult pentru a se propaga
+### Problemă: Atribuirea rolului durează prea mult să se propage
 
 **Simptome:**
-- Rol atribuit cu succes
-- Încă apare eroarea 403
+- Rolul a fost atribuit cu succes
+- Încă apar erori 403
 - Acces intermitent (uneori funcționează, alteori nu)
 
 **Explicație:**
-Modificările RBAC în Azure pot dura 5-10 minute pentru a se propaga la nivel global.
+Modificările RBAC Azure pot dura 5-10 minute să se propage global.
 
 **Soluție:**
 
@@ -1454,7 +1458,7 @@ sleep 300  # Așteaptă 5 minute
 # Testează accesul
 curl https://myapp.azurecontainerapps.io/upload
 
-# Dacă încă nu funcționează, repornește aplicația
+# Dacă încă eșuează, repornește aplicația
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
@@ -1464,80 +1468,80 @@ az containerapp revision restart \
 
 ## Considerații privind costurile
 
-### Costuri pentru identitatea gestionată
+### Costurile identității gestionate
 
 | Resursă | Cost |
 |----------|------|
-| **Identitate gestionată** | 🆓 **GRATUIT** - Fără cost |
-| **Atribuiri rol RBAC** | 🆓 **GRATUIT** - Fără cost |
-| **Solicitări token Azure AD** | 🆓 **GRATUIT** - Inclus |
-| **Operațiuni Key Vault** | $0.03 per 10,000 operațiuni |
+| **Identitate gestionată** | 🆓 **GRATUIT** - Fără taxă |
+| **Atribuiri de roluri RBAC** | 🆓 **GRATUIT** - Fără taxă |
+| **Solicitări token Azure AD** | 🆓 **GRATUIT** - Incluse |
+| **Operațiuni Key Vault** | $0.03 per 10.000 de operațiuni |
 | **Stocare Key Vault** | $0.024 per secret pe lună |
 
 **Identitatea gestionată economisește bani prin:**
 - ✅ Eliminarea operațiunilor Key Vault pentru autentificarea serviciu-la-serviciu
-- ✅ Reducerea incidentelor de securitate (fără acreditări scurse)
-- ✅ Scăderea overhead-ului operațional (fără rotație manuală)
+- ✅ Reducerea incidentelor de securitate (fără credențiale scurse)
+- ✅ Micșorarea încărcăturii operaționale (fără rotație manuală)
 
-**Exemplu de comparație a costurilor (lunare):**
+**Exemplu comparație costuri (lunar):**
 
-| Scenariu | Șiruri de conexiune | Identitate gestionată | Economii |
-|----------|-------------------|-----------------|---------|
-| Aplicație mică (1M solicitări) | ~$50 (Key Vault + ops) | ~$0 | $50/lună |
-| Aplicație medie (10M solicitări) | ~$200 | ~$0 | $200/lună |
-| Aplicație mare (100M solicitări) | ~$1,500 | ~$0 | $1,500/lună |
+| Scenariu | Connection Strings | Identitate Gestionată | Economii |
+|----------|-------------------|---------------------|----------|
+| Aplicație mică (1M cereri) | ~50$ (Key Vault + ops) | ~0$ | 50$/lună |
+| Aplicație medie (10M cereri) | ~200$ | ~0$ | 200$/lună |
+| Aplicație mare (100M cereri) | ~1.500$ | ~0$ | 1.500$/lună |
 
 ---
 
-## Aflați mai multe
+## Află mai multe
 
 ### Documentație oficială
-- [Identitate gestionată Azure](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
+- [Azure Managed Identity](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
 - [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
 - [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
 - [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
 
-### Documentația SDK-ului
+### Documentație SDK
 - [@azure/identity (Node.js)](https://www.npmjs.com/package/@azure/identity)
 - [Azure.Identity (C#)](https://www.nuget.org/packages/Azure.Identity/)
 - [azure-identity (Python)](https://pypi.org/project/azure-identity/)
 
 ### Pașii următori în acest curs
-- ← Anterior: [Gestionarea configurației](configuration.md)
-- → Următor: [Primul proiect](first-project.md)
+- ← Anterior: [Configuration Management](configuration.md)
+- → Următor: [First Project](first-project.md)
 - 🏠 [Pagina principală a cursului](../../README.md)
 
 ### Exemple conexe
-- [Exemplu Azure OpenAI Chat](../../../../examples/azure-openai-chat) - Folosește identitate gestionată pentru Azure OpenAI
-- [Exemplu microservicii](../../../../examples/microservices) - Modele de autentificare multi-serviciu
+- [Microsoft Foundry Models Chat Example](../../../../examples/azure-openai-chat) - Folosește identitatea gestionată pentru Microsoft Foundry Models
+- [Exemplu Microservicii](../../../../examples/microservices) - Modele de autentificare multi-servicii
 
 ---
 
 ## Rezumat
 
-**Ați învățat:**
-- ✅ Trei modele de autentificare (șiruri de conexiune, Key Vault, identitate gestionată)
-- ✅ Cum să activați și să configurați identitatea gestionată în AZD
-- ✅ Atribuiri de rol RBAC pentru serviciile Azure
+**Ai învățat:**
+- ✅ Trei modele de autentificare (connection strings, Key Vault, identitate gestionată)
+- ✅ Cum să activezi și configurezi identitatea gestionată în AZD
+- ✅ Atribuiri de roluri RBAC pentru servicii Azure
 - ✅ Integrarea Key Vault pentru secrete terțe
-- ✅ Identități atribuite de utilizator vs atribuite de sistem
+- ✅ Identități atribuite utilizatorilor vs identități de sistem
 - ✅ Cele mai bune practici de securitate și depanare
 
-**Aspecte cheie:**
-1. **Folosiți întotdeauna identitatea gestionată în producție** - Fără secrete, rotație automată
-2. **Folosiți roluri RBAC cu privilegiu minim** - Acordați doar permisiunile necesare
-3. **Stocați cheile terților în Key Vault** - Management centralizat al secretelor
-4. **Separați identitățile per mediu** - Izolare dev, staging, prod
-5. **Activați jurnalizarea de audit** - Urmăriți cine a accesat ce
+**Aspecte esențiale:**
+1. **Folosește întotdeauna identitatea gestionată în producție** - Fără secrete, rotație automată
+2. **Folosește roluri RBAC cu cel mai mic privilegiu** - Acordă doar permisiunile necesare
+3. **Stochează chei ale terților în Key Vault** - Management centralizat al secretelor
+4. **Separă identitățile pe medii** - Izolare dev, staging, producție
+5. **Activează audit logging** - Monitorizează cine a accesat ce
 
 **Pașii următori:**
-1. Finalizați exercițiile practice de mai sus
-2. Migrați o aplicație existentă de la șiruri de conexiune la identitate gestionată
-3. Construiți primul proiect AZD cu securitate din prima zi: [Primul proiect](first-project.md)
+1. Finalizează exercițiile practice de mai sus
+2. Migratează o aplicație existentă de la connection strings la identitate gestionată
+3. Construiește primul proiect AZD cu securitate de la început: [First Project](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Declinare de responsabilitate:
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original, în limba sa nativă, trebuie considerat sursa autorizată. Pentru informații critice se recomandă o traducere profesională realizată de un traducător uman. Nu ne asumăm nicio răspundere pentru eventualele neînțelegeri sau interpretări greșite care rezultă din utilizarea acestei traduceri.
+**Declinare a responsabilității**:  
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inacurateți. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite rezultate din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

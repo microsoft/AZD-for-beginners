@@ -1,30 +1,28 @@
-# AI specifinis trikčių šalinimo vadovas
+# DI specifinis trikčių šalinimo vadovas
 
 **Skyriaus naršymas:**
-- **📚 Course Home**: [AZD Pradedantiesiems](../../README.md)
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
 - **📖 Dabartinis skyrius**: 7 skyrius - Trikčių šalinimas ir derinimas
 - **⬅️ Ankstesnis**: [Derinimo vadovas](debugging.md)
-- **➡️ Kitas skyrius**: [8 skyrius: Produkcijos ir įmonės modeliai](../chapter-08-production/production-ai-practices.md)
-- **🤖 Susiję**: [2 skyrius: DI pirmumo kūrimas](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **➡️ Kitas skyrius**: [8 skyrius: Produkcijos ir įmonių modeliai](../chapter-08-production/production-ai-practices.md)
+- **🤖 Susiję**: [2 skyrius: DI-pirmasis vystymas](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**Ankstesnis:** [Produkcinio DI praktikos](../chapter-08-production/production-ai-practices.md) | **Kitas:** [AZD pagrindai](../chapter-01-foundation/azd-basics.md)
-
-Šis išsamus trikčių šalinimo vadovas nagrinėja dažnas problemas diegiant DI sprendimus su AZD ir pateikia sprendimus bei derinimo metodikas, specifines Azure DI paslaugoms.
+Šis išsamus trikčių šalinimo vadovas nagrinėja dažniausias problemas diegiant DI sprendimus su AZD, pateikdamas sprendimus ir derinimo technikas, specifines Azure AI paslaugoms.
 
 ## Turinys
 
-- [Azure OpenAI paslaugos problemos](../../../../docs/chapter-07-troubleshooting)
-- [Azure AI Search problemos](../../../../docs/chapter-07-troubleshooting)
-- [Container Apps diegimo problemos](../../../../docs/chapter-07-troubleshooting)
-- [Autentifikavimo ir leidimų klaidos](../../../../docs/chapter-07-troubleshooting)
-- [Modelio diegimo klaidos](../../../../docs/chapter-07-troubleshooting)
-- [Veikimo ir skalavimo problemos](../../../../docs/chapter-07-troubleshooting)
-- [Sąnaudų ir kvotų valdymas](../../../../docs/chapter-07-troubleshooting)
-- [Derinimo įrankiai ir metodai](../../../../docs/chapter-07-troubleshooting)
+- [Microsoft Foundry modelių paslaugos problemos](#azure-openai-service-issues)
+- [Azure AI Search problemos](#azure-ai-search-problemos)
+- [Container Apps diegimo problemos](#container-apps-diegimo-problemos)
+- [Autentifikavimo ir leidimų klaidos](#autentifikavimo-ir-leidimų-klaidos)
+- [Modelio diegimo nesėkmės](#modelio-diegimo-nesėkmės)
+- [Veiklos ir mastelio problemos](#veiklos-ir-mastelio-problemos)
+- [Išlaidų ir kvotų valdymas](#išlaidų-ir-kvotų-valdymas)
+- [Derinimo įrankiai ir technikos](#derinimo-įrankiai-ir-technikos)
 
-## Azure OpenAI paslaugos problemos
+## Microsoft Foundry modelių paslaugos problemos
 
-### Problema: OpenAI paslauga neprieinama regione
+### Problema: OpenAI paslauga nepasiekiama regione
 
 **Simptomai:**
 ```
@@ -32,8 +30,8 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **Priežastys:**
-- Azure OpenAI neprieinamas pasirinktoje regione
-- Kvota išnaudota pageidaujamose regionuose
+- Microsoft Foundry modeliai nėra prieinami pasirinktame regione
+- Kvota išnaudota pageidaujamuose regionuose
 - Regioniniai pajėgumų apribojimai
 
 **Sprendimai:**
@@ -70,7 +68,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### Problema: Modelio diegimo kvota viršyta
+### Problema: Viršyta modelio diegimo kvota
 
 **Simptomai:**
 ```
@@ -81,7 +79,7 @@ Error: Deployment failed due to insufficient quota
 
 1. **Patikrinkite esamą kvotą:**
 ```bash
-# Patikrinti kvotos naudojimą
+# Patikrinkite kvotos naudojimą
 az cognitiveservices usage list \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG
@@ -89,7 +87,7 @@ az cognitiveservices usage list \
 
 2. **Prašykite kvotos padidinimo:**
 ```bash
-# Pateikti prašymą padidinti kvotą
+# Pateikti prašymą dėl kvotos padidinimo
 az support tickets create \
   --ticket-name "OpenAI Quota Increase" \
   --description "Need increased quota for production deployment" \
@@ -97,14 +95,14 @@ az support tickets create \
   --problem-classification "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/quota_service_problemClassification_guid"
 ```
 
-3. **Optimizuokite modelio pajėgumus:**
+3. **Optimizuokite modelio talpą:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -149,7 +147,7 @@ Error: Semantic search requires Basic tier or higher
 
 **Sprendimai:**
 
-1. **Pakelkite kainodaros lygį:**
+1. **Atnaujinkite kainodaros lygį:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -167,7 +165,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Išjunkite semantinę paiešką (kūrimo metu):**
+2. **Išjunkite semantinę paiešką (vystymui):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -214,7 +212,7 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **Naudokite valdomą identitetą:**
+3. **Naudokite valdomą tapatybę:**
 ```bicep
 // Grant search permissions to managed identity
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -230,7 +228,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 
 ## Container Apps diegimo problemos
 
-### Problema: konteinerio kūrimo klaidos
+### Problema: Konteinerio kūrimo klaidos
 
 **Simptomai:**
 ```
@@ -275,7 +273,7 @@ azure-cosmos==4.5.1
 
 3. **Pridėkite sveikatos patikrą:**
 ```python
-# main.py - pridėti sveikatos patikros galinį tašką
+# main.py - Pridėti sveikatos patikros galinį tašką
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -285,7 +283,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Problema: konteinerio programos paleidimo klaidos
+### Problema: Konteinerio programos paleidimo klaidos
 
 **Simptomai:**
 ```
@@ -294,7 +292,7 @@ Error: Container failed to start within timeout period
 
 **Sprendimai:**
 
-1. **Padidinkite paleidimo laiko limitą:**
+1. **Padidinkite paleidimo laiką (timeout):**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -329,7 +327,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Optimizuokite modelio užkrovimą:**
 ```python
-# Kraukite modelius tingiai, kad sumažintumėte paleidimo laiką
+# Tingus modelių įkėlimas, siekiant sumažinti paleidimo laiką
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -343,7 +341,7 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # Inicializuokite AI klientą čia
+        # Inicializuokite DI klientą čia
         pass
 
 @asynccontextmanager
@@ -359,18 +357,18 @@ app = FastAPI(lifespan=lifespan)
 
 ## Autentifikavimo ir leidimų klaidos
 
-### Problema: valdomo identiteto leidimas atmestas
+### Problema: Valdomos tapatybės leidimas atmestas
 
 **Simptomai:**
 ```
-Error: Authentication failed for Azure OpenAI Service
+Error: Authentication failed for Microsoft Foundry Models Service
 ```
 
 **Sprendimai:**
 
 1. **Patikrinkite vaidmenų priskyrimus:**
 ```bash
-# Patikrinti dabartinius vaidmenų priskyrimus
+# Patikrinkite dabartinius vaidmenų priskyrimus
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
@@ -393,7 +391,7 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-3. **Patikrinkite autentifikavimą:**
+3. **Išbandykite autentifikaciją:**
 ```python
 # Išbandyti valdomos tapatybės autentifikavimą
 from azure.identity import DefaultAzureCredential
@@ -408,7 +406,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### Problema: Key Vault prieiga atmesta
+### Problema: Prieiga prie Key Vault atmesta
 
 **Simptomai:**
 ```
@@ -417,7 +415,7 @@ Error: The user, group or application does not have secrets get permission
 
 **Sprendimai:**
 
-1. **Suteikite Key Vault teises:**
+1. **Suteikite Key Vault leidimus:**
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -436,7 +434,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Naudokite RBAC vietoje prieigos politikų:**
+2. **Naudokite RBAC vietoj prieigos politikų:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -449,9 +447,9 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## Modelio diegimo klaidos
+## Modelio diegimo nesėkmės
 
-### Problema: modelio versija neprieinama
+### Problema: Modelio versija nepasiekiama
 
 **Simptomai:**
 ```
@@ -460,7 +458,7 @@ Error: Model version 'gpt-4-32k' is not available
 
 **Sprendimai:**
 
-1. **Patikrinkite turimus modelius:**
+1. **Patikrinkite prieinamas modelio versijas:**
 ```bash
 # Išvardinti prieinamus modelius
 az cognitiveservices account list-models \
@@ -470,12 +468,12 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **Naudokite modelių atsarginius variantus:**
+2. **Naudokite atsargines modelio parinktis:**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
 param primaryModel object = {
-  name: 'gpt-4o-mini'
+  name: 'gpt-4.1-mini'
   version: '2024-07-18'
 }
 
@@ -499,9 +497,9 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 }
 ```
 
-3. **Patikrinkite modelį prieš diegiant:**
+3. **Patikrinkite modelį prieš diegimą:**
 ```python
-# Modelio validacija prieš diegimą
+# Modelio patikrinimas prieš diegimą
 import httpx
 
 async def validate_model_availability(model_name: str, version: str) -> bool:
@@ -521,20 +519,20 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
         return False
 ```
 
-## Veikimo ir skalavimo problemos
+## Veiklos ir mastelio problemos
 
-### Problema: didelis atsakymo vėlavimas
+### Problema: Didelis delsos laikas atsakymuose
 
 **Simptomai:**
 - Atsakymo laikas > 30 sekundžių
-- Laiko pasibaigimo klaidos
+- Timeout klaidos
 - Prasta naudotojo patirtis
 
 **Sprendimai:**
 
-1. **Įdiekite užklausos laiko limitus:**
+1. **Nustatykite užklausų laiko limitus:**
 ```python
-# Konfigūruokite tinkamus laiko limitus
+# Konfigūruoti tinkamus laiko limitus
 import httpx
 
 client = httpx.AsyncClient(
@@ -601,7 +599,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Problema: Neužtenka atminties klaidos
+### Problema: Klaidos dėl atminties išeikvojimo
 
 **Simptomai:**
 ```
@@ -641,30 +639,30 @@ class MemoryOptimizedAI:
         
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # Atminties naudojimo tikrinimas prieš apdorojimą
+        # Patikrinkite atminties naudojimą prieš apdorojimą
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Priverstinis šiukšlių surinkimas
+            gc.collect()  # Priversti šiukšlių surinkimą
             
         result = await self._process_ai_request(request)
         
-        # Išvalymas po apdorojimo
+        # Išvalyti po apdorojimo
         gc.collect()
         return result
 ```
 
-## Sąnaudų ir kvotų valdymas
+## Išlaidų ir kvotų valdymas
 
-### Problema: netikėtai didelės sąnaudos
+### Problema: Netikėtos didelės išlaidos
 
 **Simptomai:**
 - Azure sąskaita didesnė nei tikėtasi
-- Žetonų naudojimas viršija prognozes
-- Suveikė biudžeto įspėjimai
+- Tokenų naudojimas viršija apskaičiavimus
+- Įsijungė biudžeto įspėjimai
 
 **Sprendimai:**
 
-1. **Įgyvendinkite sąnaudų kontrolės priemones:**
+1. **Įdiekite išlaidų kontrolę:**
 ```python
 # Žetonų naudojimo stebėjimas
 class TokenTracker:
@@ -683,7 +681,7 @@ class TokenTracker:
         return total_tokens
 ```
 
-2. **Sukonfigūruokite sąnaudų įspėjimus:**
+2. **Nustatykite išlaidų įspėjimus:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
@@ -710,52 +708,72 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 3. **Optimizuokite modelių pasirinkimą:**
 ```python
-# Modelio pasirinkimas atsižvelgiant į kainą
+# Modelio pasirinkimas, atsižvelgiant į kainą
 MODEL_COSTS = {
-    'gpt-4o-mini': 0.00015,  # už 1K tokenų
-    'gpt-4': 0.03,          # už 1K tokenų
-    'gpt-35-turbo': 0.0015  # už 1K tokenų
+    'gpt-4.1-mini': 0.00015,  # už 1K žetonų
+    'gpt-4.1': 0.03,          # už 1K žetonų
+    'gpt-35-turbo': 0.0015  # už 1K žetonų
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
     """Select model based on complexity and budget."""
     if complexity == 'simple' or budget_remaining < 10:
-        return 'gpt-4o-mini'
+        return 'gpt-4.1-mini'
     elif complexity == 'medium':
         return 'gpt-35-turbo'
     else:
-        return 'gpt-4'
+        return 'gpt-4.1'
 ```
 
-## Derinimo įrankiai ir metodai
+## Derinimo įrankiai ir technikos
 
-### AZD derinimo komandos
+### AZD trikčių šalinimo komandos
 
 ```bash
-# Įjungti išsamų žurnalavimą
+# Įjungti išsamų žurnalo fiksavimą
 azd up --debug
 
 # Patikrinti diegimo būseną
 azd show
 
-# Peržiūrėti programos žurnalus (atidaro stebėjimo skydelį)
+# Peržiūrėti programos žurnalus (atidarys stebėjimo prietaisų skydelį)
 azd monitor --logs
 
-# Peržiūrėti tiesioginius rodiklius
+# Peržiūrėti metrikas realiu laiku
 azd monitor --live
 
 # Patikrinti aplinkos kintamuosius
 azd env get-values
 ```
 
-### Programos derinimas
+### AZD AI plėtinių komandos diagnostikai
+
+Jei diegėte agentus naudodami `azd ai agent init`, šie papildomi įrankiai yra prieinami:
+
+```bash
+# Įsitikinkite, kad agentų plėtinys įdiegtas
+azd extension install azure.ai.agents
+
+# Iš naujo inicializuokite arba atnaujinkite agentą pagal manifestą
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Naudokite MCP serverį, kad DI įrankiai galėtų užklausti projekto būsenos
+azd mcp start
+
+# Sugeneruokite infrastruktūros failus peržiūrai ir auditui
+azd infra generate
+```
+
+> **Patarimas:** Naudokite `azd infra generate`, kad įrašytumėte IaC į diską ir galėtumėte patikrinti, kokie tiksliai resursai buvo paruošti. Tai yra neįkainojama derinant resursų konfigūracijos problemas. Peržiūrėkite [AZD AI CLI nuorodą](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) visai informacijai.
+
+### Programos trikčių šalinimas
 
 1. **Struktūruotas žurnalavimas:**
 ```python
 import logging
 import json
 
-# Konfigūruokite struktūruotą registravimą dirbtinio intelekto programoms
+# Sukonfigūruokite struktūruotą žurnalavimą dirbtinio intelekto programoms
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -781,7 +799,7 @@ async def detailed_health_check():
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # Patikrinti ryšį su OpenAI
+    # Patikrinkite OpenAI ryšį
     try:
         client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
         await client.models.list()
@@ -789,7 +807,7 @@ async def detailed_health_check():
     except Exception as e:
         checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
     
-    # Patikrinti paieškos paslaugą
+    # Patikrinkite paieškos paslaugą
     try:
         search_client = SearchIndexClient(
             endpoint=AZURE_SEARCH_ENDPOINT,
@@ -803,7 +821,7 @@ async def detailed_health_check():
     return checks
 ```
 
-3. **Veiklos stebėjimas:**
+3. **Veiklos stebėsena:**
 ```python
 import time
 from functools import wraps
@@ -834,42 +852,43 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## Dažni klaidų kodai ir sprendimai
+## Bendri klaidų kodai ir sprendimai
 
 | Klaidos kodas | Aprašymas | Sprendimas |
 |------------|-------------|----------|
-| 401 | Neautorizuota | Patikrinkite API raktus ir valdomo identiteto konfigūraciją |
-| 403 | Draudžiama | Patikrinkite RBAC vaidmenų priskyrimus |
-| 429 | Apribotas užklausų skaičius | Įgyvendinkite pakartojimų logiką su eksponentiniu atidėjimu |
+| 401 | Neautorizuota | Patikrinkite API raktus ir valdomos tapatybės konfigūraciją |
+| 403 | Užblokuota | Patikrinkite RBAC vaidmenų priskyrimus |
+| 429 | Viršytas greičio limitas | Įgyvendinkite pakartojimų logiką su eksponentiniu vėlavimu |
 | 500 | Vidinė serverio klaida | Patikrinkite modelio diegimo būseną ir žurnalus |
-| 503 | Paslauga neprieinama | Patikrinkite paslaugos sveikatą ir regioninį prieinamumą |
+| 503 | Paslauga nepasiekiama | Patikrinkite paslaugos būklę ir regioninį prieinamumą |
 
 ## Tolimesni veiksmai
 
-1. **Peržiūrėkite [DI modelio diegimo vadovą](../chapter-02-ai-development/ai-model-deployment.md)** dėl diegimo geriausių praktikų
-2. **Atlikite [Produkcinio DI praktikas](../chapter-08-production/production-ai-practices.md)** dėl įmonėms tinkamų sprendimų
+1. **Peržiūrėkite [DI modelio diegimo vadovą](../chapter-02-ai-development/ai-model-deployment.md)** dėl geriausių diegimo praktikų
+2. **Užbaikite [Produkcines DI praktikas](../chapter-08-production/production-ai-practices.md)** dėl sprendimų, paruoštų įmonei
 3. **Prisijunkite prie [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** dėl bendruomenės palaikymo
-4. **Pateikite problemas** į [AZD GitHub repository](https://github.com/Azure/azure-dev) dėl AZD specifinių problemų
+4. **Pateikite problemas** į [AZD GitHub saugyklą](https://github.com/Azure/azure-dev) dėl su AZD susijusių problemų
 
 ## Ištekliai
 
-- [Azure OpenAI paslaugos trikčių šalinimas](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [Microsoft Foundry modelių paslaugos trikčių šalinimas](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
 - [Container Apps trikčių šalinimas](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 - [Azure AI Search trikčių šalinimas](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Azure diagnostikos agento įrankis**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Įdiekite Azure trikčių šalinimo įrankius savo redaktoriuje: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Skyriaus naršymas:**
-- **📚 Course Home**: [AZD Pradedantiesiems](../../README.md)
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
 - **📖 Dabartinis skyrius**: 7 skyrius - Trikčių šalinimas ir derinimas
 - **⬅️ Ankstesnis**: [Derinimo vadovas](debugging.md)
-- **➡️ Kitas skyrius**: [8 skyrius: Produkcijos ir įmonės modeliai](../chapter-08-production/production-ai-practices.md)
-- **🤖 Susiję**: [2 skyrius: DI pirmumo kūrimas](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- [Azure Developer CLI trikčių šalinimas](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **➡️ Kitas skyrius**: [8 skyrius: Produkcijos ir įmonių modeliai](../chapter-08-production/production-ai-practices.md)
+- **🤖 Susiję**: [2 skyrius: DI-pirmasis vystymas](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Nuoroda**: [Azure Developer CLI trikčių šalinimas](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Atsakomybės apribojimas:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą Co-op Translator (https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, atkreipkite dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalų dokumentą jo gimtąja (originalia) kalba reikėtų laikyti autoritetingu šaltiniu. Kritinei informacijai rekomenduojamas profesionalus, žmogaus atliktas vertimas. Mes neatsakome už jokius nesusipratimus ar klaidingus aiškinimus, kilusius dėl šio vertimo naudojimo.
+**Atsakomybės apribojimas**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Svarbios informacijos atveju rekomenduojamas profesionalus žmogaus vertimas. Mes neatsakome už jokius nesusipratimus ar neteisingus aiškinimus, kilusius dėl šio vertimo naudojimo.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

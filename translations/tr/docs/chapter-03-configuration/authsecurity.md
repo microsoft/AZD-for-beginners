@@ -1,70 +1,70 @@
-# Kimlik Doğrulama Desenleri ve Yönetilen Kimlik
+# Authentication Patterns and Managed Identity
 
-⏱️ **Tahmini Süre**: 45-60 dakika | 💰 **Maliyet Etkisi**: Ücretsiz (ek ücret yok) | ⭐ **Karmaşıklık**: Orta
+⏱️ **Estimated Time**: 45-60 minutes | 💰 **Cost Impact**: Free (no additional charges) | ⭐ **Complexity**: Intermediate
 
-**📚 Öğrenme Yolu:**
-- ← Önceki: [Konfigürasyon Yönetimi](configuration.md) - Ortam değişkenleri ve sırları yönetme
-- 🎯 **Buradasınız**: Kimlik Doğrulama & Güvenlik (Yönetilen Kimlik, Key Vault, güvenli desenler)
-- → Sonraki: [İlk Proje](first-project.md) - İlk AZD uygulamanızı oluşturun
-- 🏠 [Kurs Ana Sayfası](../../README.md)
+**📚 Learning Path:**
+- ← Previous: [Yapılandırma Yönetimi](configuration.md) - Ortam değişkenlerini ve gizli bilgileri yönetme
+- 🎯 **You Are Here**: Kimlik Doğrulama ve Güvenlik (Managed Identity, Key Vault, güvenli desenler)
+- → Next: [First Project](first-project.md) - İlk AZD uygulamanızı oluşturma
+- 🏠 [Course Home](../../README.md)
 
 ---
 
 ## Bu Derste Öğrenecekleriniz
 
 By completing this lesson, you will:
-- Azure kimlik doğrulama desenlerini anlayın (anahtarlar, bağlantı dizeleri, yönetilen kimlik)
-- Parolasız kimlik doğrulama için **Yönetilen Kimlik** uygulayın
-- Gizli verileri **Azure Key Vault** entegrasyonu ile güvenli hale getirin
-- AZD dağıtımları için **rol tabanlı erişim denetimi (RBAC)** yapılandırın
-- Container Apps ve Azure hizmetlerinde güvenlik en iyi uygulamalarını uygulayın
-- Anahtara dayalı kimlik doğrulamadan kimliğe dayalı kimlik doğrulamaya geçin
+- Understand Azure authentication patterns (keys, connection strings, managed identity)
+- Implement **Managed Identity** for passwordless authentication
+- Secure secrets with **Azure Key Vault** integration
+- Configure **role-based access control (RBAC)** for AZD deployments
+- Apply security best practices in Container Apps and Azure services
+- Migrate from key-based to identity-based authentication
 
-## Yönetilen Kimliğin Önemi
+## Managed Identity Neden Önemlidir
 
 ### Sorun: Geleneksel Kimlik Doğrulama
 
-**Yönetilen Kimlikten Önce:**
+**Managed Identity'den Önce:**
 ```javascript
-// ❌ GÜVENLİK RİSKİ: Kod içinde sert kodlanmış gizli bilgiler
+// ❌ GÜVENLİK RİSKİ: Koda gömülü gizli bilgiler
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
 const storageKey = "xK7mN9pQ2wR5tY8uI0oP3aS6dF1gH4jK...";
 const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
-**Problemler:**
-- 🔴 **Kodda, yapılandırma dosyalarında veya ortam değişkenlerinde açığa çıkan gizli bilgiler**
-- 🔴 **Kimlik bilgisi döndürme**, kod değişiklikleri ve yeniden dağıtım gerektirir
-- 🔴 **Denetim kabusları** - kim neye, ne zaman erişti?
-- 🔴 **Yayılma (sprawl)** - gizli bilgilerin birden çok sistemde dağınık olması
-- 🔴 **Uyumluluk riskleri** - güvenlik denetimlerinden başarısız olma
+**Sorunlar:**
+- 🔴 **Koda, yapılandırma dosyalarına veya ortam değişkenlerine açığa çıkmış gizli bilgiler**
+- 🔴 **Kimlik bilgisi döndürme** kod değişiklikleri ve yeniden dağıtım gerektirir
+- 🔴 **Denetim kabusu** - kim neye, ne zaman erişti?
+- 🔴 **Yayılma** - gizli bilgiler birden fazla sistemde dağınık
+- 🔴 **Uygunluk riskleri** - güvenlik denetimlerini geçememe
 
-### Çözüm: Yönetilen Kimlik
+### Çözüm: Managed Identity
 
-**Yönetilen Kimlikten Sonra:**
+**Managed Identity'den Sonra:**
 ```javascript
-// ✅ SECURE: Kodda herhangi bir gizli bilgi yok
+// ✅ GÜVENLİ: Kodda gizli bilgi yok
 const credential = new DefaultAzureCredential();
 const client = new BlobServiceClient(
   "https://mystorageaccount.blob.core.windows.net",
-  credential  // Azure kimlik doğrulamasını otomatik olarak yönetir
+  credential  // Azure kimlik doğrulamayı otomatik olarak halleder
 );
 ```
 
 **Faydalar:**
-- ✅ **Kodda veya yapılandırmada sıfır gizli bilgi**
-- ✅ **Otomatik döndürme** - Azure bununla ilgilenir
-- ✅ Azure AD günlüklerinde **tam denetim izi**
-- ✅ **Merkezi güvenlik** - Azure Portal'dan yönetin
-- ✅ **Uyumluluk hazır** - güvenlik standartlarını karşılar
+- ✅ **Koda veya yapılandırmaya sıfır gizli bilgi**
+- ✅ **Otomatik döndürme** - Azure bunu yönetir
+- ✅ **Azure AD günlüklerinde tam denetim izi**
+- ✅ **Merkezileştirilmiş güvenlik** - Azure Portal'dan yönetim
+- ✅ **Uygunluk hazır** - güvenlik standartlarını karşılar
 
-**Benzetme**: Geleneksel kimlik doğrulama, farklı kapılar için birden çok fiziksel anahtar taşımaya benzer. Yönetilen Kimlik ise kim olduğunuza göre otomatik olarak erişim veren bir güvenlik kartı gibidir—kaybedilecek, kopyalanacak veya döndürülecek anahtar yok.
+**Benzetme**: Geleneksel kimlik doğrulama, farklı kapılar için birden çok fiziksel anahtar taşımaya benzer. Managed Identity ise kimliğinize göre otomatik olarak erişim veren bir güvenlik kartı gibidir—kaybolacak, kopyalanacak veya döndürülecek anahtar yoktur.
 
 ---
 
 ## Mimari Genel Bakış
 
-### Yönetilen Kimlikle Kimlik Doğrulama Akışı
+### Managed Identity ile Kimlik Doğrulama Akışı
 
 ```mermaid
 sequenceDiagram
@@ -72,7 +72,7 @@ sequenceDiagram
     participant MI as Yönetilen Kimlik<br/>(Azure AD)
     participant KV as Anahtar Kasası
     participant Storage as Azure Depolama
-    participant DB as Azure SQL
+    participant DB as Azure SQL Veritabanı
     
     App->>MI: Erişim belirteci isteği<br/>(otomatik)
     MI->>MI: Kimliği doğrula<br/>(parola gerekmez)
@@ -82,17 +82,17 @@ sequenceDiagram
     KV->>KV: RBAC izinlerini kontrol et
     KV-->>App: Gizli değeri döndür
     
-    App->>Storage: Blob yükle<br/>(belirteç kullanılarak)
+    App->>Storage: Blob yükle<br/>(belirteç kullanarak)
     Storage->>Storage: RBAC izinlerini kontrol et
     Storage-->>App: Başarılı
     
-    App->>DB: Veri sorgula<br/>(belirteç kullanılarak)
+    App->>DB: Veri sorgula<br/>(belirteç kullanarak)
     DB->>DB: SQL izinlerini kontrol et
     DB-->>App: Sonuçları döndür
     
-    Note over App,DB: Tüm kimlik doğrulamaları parolasız!
+    Note over App,DB: Tüm kimlik doğrulamaları parola gerektirmez!
 ```
-### Yönetilen Kimlik Türleri
+### Managed Identity Türleri
 
 ```mermaid
 graph TB
@@ -109,75 +109,76 @@ graph TB
     
     UserAssigned --> UA1[Bağımsız yaşam döngüsü]
     UserAssigned --> UA2[Manuel oluşturma/silme]
-    UserAssigned --> UA3[Kaynaklar arasında paylaşılan]
+    UserAssigned --> UA3[Kaynaklar arasında paylaşılabilir]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
-| Özellik | Sistem Atanmış | Kullanıcı Atanmış |
+| Feature | System-Assigned | User-Assigned |
 |---------|----------------|---------------|
+| **Özellik** | **Sistem Atamalı** | **Kullanıcı Atamalı** |
 | **Yaşam Döngüsü** | Kaynağa bağlı | Bağımsız |
-| **Oluşturma** | Kaynakla birlikte otomatik | Elle oluşturma |
-| **Silme** | Kaynakla birlikte silinir | Kaynak silinse bile kalır |
+| **Oluşturma** | Kaynak ile otomatik | Elle oluşturma |
+| **Silinme** | Kaynakla silinir | Kaynak silindikten sonra da kalır |
 | **Paylaşım** | Sadece bir kaynak | Birden çok kaynak |
-| **Kullanım Durumu** | Basit senaryolar | Karmaşık birden çok kaynak içeren senaryolar |
-| **AZD Varsayılanı** | ✅ Önerilir | İsteğe bağlı |
+| **Kullanım Durumu** | Basit senaryolar | Karmaşık çok-kaynaklı senaryolar |
+| **AZD Varsayılanı** | ✅ Önerilir | Opsiyonel |
 
 ---
 
-## Önkoşullar
+## Gereksinimler
 
 ### Gerekli Araçlar
 
-Önceki derslerden bunların zaten yüklü olması gerekir:
+Önceki derslerden bu araçların zaten yüklü olması gerekir:
 
 ```bash
 # Azure Developer CLI'yi doğrulayın
 azd version
-# ✅ Beklenen: azd sürüm 1.0.0 veya daha yüksek
+# ✅ Beklenen: azd version 1.0.0 veya daha yüksek
 
 # Azure CLI'yi doğrulayın
 az --version
-# ✅ Beklenen: azure-cli sürüm 2.50.0 veya daha yüksek
+# ✅ Beklenen: azure-cli 2.50.0 veya daha yüksek
 ```
 
 ### Azure Gereksinimleri
 
-- Etkin Azure aboneliği
+- Aktif Azure aboneliği
 - İzinler:
-  - Yönetilen kimlikler oluşturma
+  - Managed identity oluşturma
   - RBAC rolleri atama
   - Key Vault kaynakları oluşturma
   - Container Apps dağıtma
 
 ### Bilgi Önkoşulları
 
-Aşağıdakileri tamamlamış olmalısınız:
-- [Kurulum Kılavuzu](installation.md) - AZD kurulumu
+Tamamlamış olmalısınız:
+- [Kurulum Rehberi](installation.md) - AZD kurulumu
 - [AZD Temelleri](azd-basics.md) - Temel kavramlar
-- [Konfigürasyon Yönetimi](configuration.md) - Ortam değişkenleri
+- [Yapılandırma Yönetimi](configuration.md) - Ortam değişkenleri
 
 ---
 
-## Ders 1: Kimlik Doğrulama Desenlerini Anlamak
+## Ders 1: Kimlik Doğrulama Desenlerini Anlama
 
 ### Desen 1: Bağlantı Dizeleri (Eski - Kaçının)
 
 **Nasıl çalışır:**
 ```bash
-# Bağlantı dizesi kimlik bilgileri içeriyor
+# Bağlantı dizesi kimlik bilgileri içerir
 STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=xK7mN9pQ2wR5..."
 COSMOS_CONNECTION_STRING="AccountEndpoint=https://myaccount.documents.azure.com:443/;AccountKey=C2x7..."
 SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=P@ssw0rd..."
 ```
 
-**Problemler:**
-- ❌ Sırlar ortam değişkenlerinde görünür
-- ❌ Dağıtım sistemlerinde günlüğe kaydedilir
-- ❌ Yenilenmesi zor
-- ❌ Erişim için denetim izi yok
+**Sorunlar:**
+- ❌ Gizli bilgiler ortam değişkenlerinde görünür
+- ❌ Dağıtım sistemlerinde günlüklenir
+- ❌ Döndürmesi zordur
+- ❌ Erişim denetim izi yok
 
-**Ne zaman kullanılır:** Yalnızca yerel geliştirme için, asla üretimde kullanmayın.
+**Ne zaman kullanılmalı:** Sadece yerel geliştirme için, üretimde asla.
 
 ---
 
@@ -203,19 +204,19 @@ env: [
 ```
 
 **Faydalar:**
-- ✅ Sırlar Key Vault'ta güvenli bir şekilde saklanır
-- ✅ Gizli verilerin merkezi yönetimi
-- ✅ Kod değişikliği olmadan yenileme
+- ✅ Gizli bilgiler güvenli şekilde Key Vault'ta saklanır
+- ✅ Gizli bilgilerin merkezi yönetimi
+- ✅ Kod değişikliği olmadan döndürme
 
 **Sınırlamalar:**
-- ⚠️ Hâlâ anahtarlar/parolalar kullanılıyor
+- ⚠️ Hâlâ anahtar/parola kullanımı söz konusu
 - ⚠️ Key Vault erişimini yönetmeniz gerekir
 
-**Ne zaman kullanılır:** Bağlantı dizelerinden yönetilen kimliğe geçiş adımı.
+**Ne zaman kullanılmalı:** Bağlantı dizelerinden managed identity'ye geçiş adımı olarak.
 
 ---
 
-### Desen 3: Yönetilen Kimlik (En İyi Uygulama)
+### Desen 3: Managed Identity (En İyi Uygulama)
 
 **Nasıl çalışır:**
 ```bicep
@@ -239,7 +240,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 **Uygulama kodu:**
 ```javascript
-// Gizli bilgiye ihtiyaç yok!
+// Gizli bilgiye gerek yok!
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -251,21 +252,21 @@ const blobServiceClient = new BlobServiceClient(
 ```
 
 **Faydalar:**
-- ✅ Kodda/yapılandırmada sıfır gizli bilgi
-- ✅ Kimlik bilgisi otomatik yenileme
+- ✅ Koda/yapılandırmaya sıfır gizli bilgi
+- ✅ Otomatik kimlik bilgisi döndürme
 - ✅ Tam denetim izi
 - ✅ RBAC tabanlı izinler
-- ✅ Uyumluluk için hazır
+- ✅ Uygunluk hazır
 
-**Ne zaman kullanılır:** Her zaman, üretim uygulamaları için.
+**Ne zaman kullanılmalı:** Her zaman, üretim uygulamaları için.
 
 ---
 
-## Ders 2: AZD ile Yönetilen Kimlik Uygulama
+## Ders 2: AZD ile Managed Identity Uygulama
 
 ### Adım Adım Uygulama
 
-Azure Storage ve Key Vault'a erişmek için yönetilen kimlik kullanan güvenli bir Container App oluşturalım.
+Managed identity kullanan güvenli bir Container App oluşturalım.
 
 ### Proje Yapısı
 
@@ -302,7 +303,7 @@ services:
 # Enable managed identity (AZD handles this automatically)
 ```
 
-### 2. Altyapı: Yönetilen Kimliği Etkinleştirme
+### 2. Altyapı: Managed Identity'yi Etkinleştirme
 
 **Dosya: `infra/main.bicep`**
 
@@ -384,7 +385,7 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output APP_URL string = containerApp.outputs.url
 ```
 
-### 3. Sistem Atanmış Kimlik ile Container App
+### 3. Sistem Atamalı Kimlikle Container App
 
 **Dosya: `infra/app/container-app.bicep`**
 
@@ -463,7 +464,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 output id string = roleAssignment.id
 ```
 
-### 5. Yönetilen Kimlik ile Uygulama Kodu
+### 5. Managed Identity ile Uygulama Kodu
 
 **Dosya: `src/app.js`**
 
@@ -476,7 +477,7 @@ const { SecretClient } = require('@azure/keyvault-secrets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔑 Kimlik bilgilerini başlat (yönetilen kimlikle otomatik olarak çalışır)
+// 🔑 Kimlik bilgilerini başlat (yönetilen kimlik ile otomatik çalışır)
 const credential = new DefaultAzureCredential();
 
 // Azure Depolama kurulumu
@@ -537,7 +538,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// Blob kapsayıcılarını listele (okuma erişimini gösterir)
+// Blob konteynerlerini listele (okuma erişimini gösterir)
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -580,7 +581,7 @@ app.listen(PORT, () => {
 }
 ```
 
-### 6. Dağıt ve Test Et
+### 6. Dağıtım ve Test
 
 ```bash
 # AZD ortamını başlat
@@ -589,7 +590,7 @@ azd init
 # Altyapıyı ve uygulamayı dağıt
 azd up
 
-# Uygulama URL'sini al
+# Uygulamanın URL'sini al
 APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
 
 # Sağlık kontrolünü test et
@@ -636,11 +637,11 @@ curl $APP_URL/containers
 
 ## Yaygın Azure RBAC Rolleri
 
-### Yönetilen Kimlik için Yerleşik Rol Kimlikleri
+### Managed Identity için Yerleşik Rol Kimlikleri
 
-| Hizmet | Role Name | Rol Kimliği | İzinler |
+| Service | Role Name | Role ID | Permissions |
 |---------|-----------|---------|-------------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Blob'ları ve konteynerleri okuma |
+| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Blob ve konteynerleri okuma |
 | **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Blob'ları okuma, yazma, silme |
 | **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Kuyruk mesajlarını okuma, yazma, silme |
 | **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Sırları okuma |
@@ -656,7 +657,7 @@ curl $APP_URL/containers
 # Tüm yerleşik rolleri listele
 az role definition list --query "[].{Name:roleName, ID:name}" --output table
 
-# Belirli bir rol ara
+# Belirli rolü ara
 az role definition list --query "[?contains(roleName, 'Storage Blob')].{Name:roleName, ID:name}" --output table
 
 # Rol ayrıntılarını al
@@ -665,13 +666,13 @@ az role definition list --name "Storage Blob Data Contributor"
 
 ---
 
-## Pratik Egzersizler
+## Uygulamalı Alıştırmalar
 
-### Egzersiz 1: Mevcut Uygulama İçin Yönetilen Kimliği Etkinleştirin ⭐⭐ (Orta)
+### Alıştırma 1: Var Olan Uygulamaya Managed Identity Etkinleştirme ⭐⭐ (Orta)
 
-**Hedef**: Mevcut bir Container App dağıtımına yönetilen kimlik ekleyin
+**Hedef**: Var olan bir Container App dağıtımına managed identity ekleyin
 
-**Senaryo**: Bağlantı dizeleri kullanan bir Container App'iniz var. Bunu yönetilen kimliğe dönüştürün.
+**Senaryo**: Bağlantı dizeleri kullanan bir Container App'iniz var. Bunu managed identity'ye dönüştürün.
 
 **Başlangıç Noktası**: Bu yapılandırmaya sahip Container App:
 
@@ -687,7 +688,7 @@ env: [
 
 **Adımlar**:
 
-1. **Bicep'te yönetilen kimliği etkinleştirin:**
+1. **Bicep'te managed identity'yi etkinleştirin:**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -730,7 +731,7 @@ const blobServiceClient = BlobServiceClient.fromConnectionString(
 );
 ```
 
-**Sonra (yönetilen kimlik):**
+**Sonra (managed identity):**
 ```javascript
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
@@ -754,7 +755,7 @@ env: [
 ]
 ```
 
-5. **Dağıtın ve test edin:**
+5. **Dağıtım ve test:**
 
 ```bash
 # Yeniden konuşlandır
@@ -768,12 +769,12 @@ curl https://myapp.azurecontainerapps.io/upload
 - ✅ Uygulama hatasız dağıtılır
 - ✅ Storage işlemleri çalışır (yükleme, listeleme, indirme)
 - ✅ Ortam değişkenlerinde bağlantı dizeleri yok
-- ✅ Azure Portal'da "Identity" sekmesi altında kimlik görünür
+- ✅ Identity Azure Portal'da "Identity" bölümünde görünür
 
 **Doğrulama:**
 
 ```bash
-# Yönetilen kimliğin etkin olduğunu kontrol edin
+# Yönetilen kimliğin etkin olduğundan emin olun
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
@@ -791,15 +792,15 @@ az role assignment list \
 
 ---
 
-### Egzersiz 2: Kullanıcı Atanmış Kimlikle Çok Servisli Erişim ⭐⭐⭐ (Gelişmiş)
+### Alıştırma 2: Çoklu Hizmet Erişimi için Kullanıcı Atamalı Kimlik ⭐⭐⭐ (İleri)
 
-**Hedef**: Birden çok Container App arasında paylaşılan kullanıcı atanmış kimlik oluşturun
+**Hedef**: Birden çok Container App arasında paylaşılan kullanıcı atamalı bir kimlik oluşturun
 
 **Senaryo**: Aynı Storage hesabına ve Key Vault'a erişmesi gereken 3 mikroservisiniz var.
 
 **Adımlar**:
 
-1. **Kullanıcı atanmış kimlik oluşturun:**
+1. **Kullanıcı atamalı kimlik oluşturun:**
 
 **Dosya: `infra/core/identity.bicep`**
 
@@ -819,7 +820,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **Kullanıcı atanmış kimliğe roller atayın:**
+2. **Kullanıcı atamalı kimliğe roller atayın:**
 
 ```bicep
 // In main.bicep
@@ -898,9 +899,9 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 ```javascript
 const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
 
-// Kullanıcıya atanmış kimlik için istemci kimliğini belirtin
+// Kullanıcı tarafından atanan kimlik için istemci kimliğini belirtin
 const credential = new ManagedIdentityCredential(
-  process.env.AZURE_CLIENT_ID  // Kullanıcıya atanmış kimlik istemci kimliği
+  process.env.AZURE_CLIENT_ID  // Kullanıcı tarafından atanan kimlik istemci kimliği
 );
 
 // Veya DefaultAzureCredential kullanın (otomatik algılar)
@@ -917,7 +918,7 @@ const blobServiceClient = new BlobServiceClient(
 ```bash
 azd up
 
-# Tüm servislerin depolamaya erişebildiğini test et
+# Tüm hizmetlerin depolamaya erişebildiğini test et
 curl https://api-gateway.azurecontainerapps.io/upload
 curl https://product-service.azurecontainerapps.io/upload
 curl https://order-service.azurecontainerapps.io/upload
@@ -925,25 +926,25 @@ curl https://order-service.azurecontainerapps.io/upload
 
 **✅ Başarı Kriterleri:**
 - ✅ 3 servis arasında paylaşılan tek bir kimlik
-- ✅ Tüm servisler Storage ve Key Vault'a erişebilir
-- ✅ Bir servisi silseniz bile kimlik korunur
-- ✅ Merkezi izin yönetimi
+- ✅ Tüm servisler Storage ve Key Vault'a erişebiliyor
+- ✅ Bir servisi silseniz bile kimlik kalıcı
+- ✅ İzin yönetimi merkezi
 
-**Kullanıcı Atanmış Kimliğin Faydaları:**
-- Yönetilecek tek bir kimlik
+**Kullanıcı Atamalı Kimliğin Faydaları:**
+- Yönetilecek tek kimlik
 - Servisler arasında tutarlı izinler
-- Servis silinmesi hâlinde bile kalır
+- Servis silinmesine karşı kalıcı
 - Karmaşık mimariler için daha uygun
 
 **Süre**: 30-40 dakika
 
 ---
 
-### Egzersiz 3: Key Vault Gizli Bilgi Döndürme Uygulama ⭐⭐⭐ (Gelişmiş)
+### Alıştırma 3: Key Vault Gizli Bilgi Döndürme Uygulama ⭐⭐⭐ (İleri)
 
-**Hedef**: Üçüncü taraf API anahtarlarını Key Vault'ta saklayın ve bunlara yönetilen kimlikle erişin
+**Hedef**: Üçüncü taraf API anahtarlarını Key Vault'ta saklayın ve managed identity kullanarak bunlara erişin
 
-**Senaryo**: Uygulamanız API anahtarları gerektiren bir dış API'yi (OpenAI, Stripe, SendGrid) çağırmalıdır.
+**Senaryo**: Uygulamanız OpenAI, Stripe, SendGrid gibi dış bir API'yi çağırmak için API anahtarlarına ihtiyaç duyuyor.
 
 **Adımlar**:
 
@@ -978,13 +979,13 @@ output name string = keyVault.name
 output uri string = keyVault.properties.vaultUri
 ```
 
-2. **Sırları Key Vault'ta saklayın:**
+2. **Key Vault'ta gizli bilgiler depolayın:**
 
 ```bash
-# Anahtar Kasası adını al
+# Key Vault adını al
 KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Üçüncü taraf API anahtarlarını sakla
+# Üçüncü taraf API anahtarlarını depola
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1001,7 +1002,7 @@ az keyvault secret set \
   --value "SG.xxxxxxxxxxxxx"
 ```
 
-3. **Sırları almak için uygulama kodu:**
+3. **Gizli bilgileri almak için uygulama kodu:**
 
 **Dosya: `src/config.js`**
 
@@ -1020,7 +1021,7 @@ class Config {
   }
 
   async getSecret(secretName) {
-    // Önce önbelleği kontrol edin
+    // Önce önbelleği kontrol et
     if (this.cache[secretName]) {
       return this.cache[secretName];
     }
@@ -1052,7 +1053,7 @@ class Config {
 module.exports = new Config();
 ```
 
-4. **Uygulamada sırları kullanın:**
+4. **Uygulamada gizli bilgileri kullanma:**
 
 **Dosya: `src/app.js`**
 
@@ -1078,7 +1079,7 @@ initializeServices().catch(console.error);
 app.post('/chat', async (req, res) => {
   try {
     const completion = await openaiClient.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-4.1',
       messages: [{ role: 'user', content: 'Hello!' }]
     });
     
@@ -1109,11 +1110,11 @@ curl -X POST https://myapp.azurecontainerapps.io/chat \
 
 **✅ Başarı Kriterleri:**
 - ✅ Kodda veya ortam değişkenlerinde API anahtarları yok
-- ✅ Uygulama anahtarları Key Vault'tan alır
-- ✅ Üçüncü taraf API'ler doğru çalışır
-- ✅ Kod değişikliği olmadan anahtarları döndürebilirsiniz
+- ✅ Uygulama Key Vault'tan anahtarları alıyor
+- ✅ Üçüncü taraf API'ler doğru çalışıyor
+- ✅ Anahtarları kod değişikliği olmadan döndürebiliyorsunuz
 
-**Bir sırrı döndürme:**
+**Bir gizli bilgiyi döndürme:**
 
 ```bash
 # Key Vault'taki gizli değeri güncelle
@@ -1132,24 +1133,24 @@ az containerapp revision restart \
 
 ---
 
-## Bilgi Kontrol Noktası
+## Bilgi Kontrolü
 
 ### 1. Kimlik Doğrulama Desenleri ✓
 
 Anlayışınızı test edin:
 
-- [ ] **S1**: Üç ana kimlik doğrulama deseni nelerdir? 
-  - **Cevap**: Bağlantı dizeleri (eski), Key Vault referansları (geçiş), Yönetilen Kimlik (en iyi)
+- [ ] **Q1**: Üç ana kimlik doğrulama deseni nelerdir? 
+  - **A**: Bağlantı dizeleri (eski), Key Vault referansları (geçiş), Managed Identity (en iyi)
 
-- [ ] **S2**: Yönetilen kimlik neden bağlantı dizelerinden daha iyidir?
-  - **Cevap**: Kodda gizli bilgi yok, otomatik yenileme, tam denetim izi, RBAC izinleri
+- [ ] **Q2**: Managed identity neden bağlantı dizelerinden daha iyidir?
+  - **A**: Kodda gizli bilgi yok, otomatik döndürme, tam denetim izi, RBAC izinleri
 
-- [ ] **S3**: Sistem atanmış yerine kullanıcı atanmış kimliği ne zaman kullanırsınız?
-  - **Cevap**: Kimliği birden çok kaynak arasında paylaşırken veya kimlik yaşam döngüsünün kaynak yaşam döngüsünden bağımsız olduğu durumlarda
+- [ ] **Q3**: Sistem atamalı yerine kullanıcı atamalı kimliği ne zaman kullanırsınız?
+  - **A**: Birden çok kaynak arasında kimliği paylaşırken veya kimlik yaşam döngüsünün kaynaktan bağımsız olması gerektiğinde
 
-**Uygulamalı Doğrulama:**
+**Hands-On Verification:**
 ```bash
-# Uygulamanızın hangi tür kimliği kullandığını kontrol edin
+# Uygulamanızın hangi tür kimlik kullandığını kontrol edin
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
@@ -1166,18 +1167,18 @@ az role assignment list \
 
 Anlayışınızı test edin:
 
-- [ ] **S1**: "Storage Blob Data Contributor" rol kimliği nedir?
-  - **Cevap**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
+- [ ] **Q1**: "Storage Blob Data Contributor" için rol kimliği nedir?
+  - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
-- [ ] **S2**: "Key Vault Secrets User" hangi izinleri sağlar?
-  - **Cevap**: Sırlara salt okunur erişim (oluşturma, güncelleme veya silme yapamaz)
+- [ ] **Q2**: "Key Vault Secrets User" hangi izinleri sağlar?
+  - **A**: Sırlara salt okunur erişim (oluşturma, güncelleme veya silme yapamaz)
 
-- [ ] **S3**: Bir Container App'e Azure SQL erişimini nasıl verirsiniz?
-  - **Cevap**: "SQL DB Contributor" rolünü atayarak veya SQL için Azure AD kimlik doğrulamasını yapılandırarak
+- [ ] **Q3**: Bir Container App'e Azure SQL erişimi nasıl verirsiniz?
+  - **A**: "SQL DB Contributor" rolünü atayın veya SQL için Azure AD kimlik doğrulamasını yapılandırın
 
-**Uygulamalı Doğrulama:**
+**Hands-On Verification:**
 ```bash
-# Belirli bir rolü bulun
+# Belirli bir rol bul
 az role definition list --name "Storage Blob Data Contributor"
 
 # Kimliğinize hangi rollerin atandığını kontrol edin
@@ -1189,29 +1190,29 @@ az role assignment list --assignee $PRINCIPAL_ID --output table
 
 ### 3. Key Vault Entegrasyonu ✓
 
-Anlayışınızı test edin:
+Test your understanding:
 - [ ] **Q1**: Key Vault için erişim politikaları yerine RBAC nasıl etkinleştirilir?
-  - **A**: Bicep'te `enableRbacAuthorization: true` ayarlayın
+  - **A**: Bicep'te `enableRbacAuthorization: true` olarak ayarlayın
 
-- [ ] **Q2**: Yönetilen kimlik kimlik doğrulamasını hangi Azure SDK kütüphanesi sağlar?
+- [ ] **Q2**: Yönetilen kimlik kimlik doğrulamasını hangi Azure SDK kitaplığı ele alır?
   - **A**: `@azure/identity` ile `DefaultAzureCredential` sınıfı
 
-- [ ] **Q3**: Key Vault gizli değerleri önbellekte ne kadar süre kalır?
-  - **A**: Uygulamaya bağlı; kendi önbellekleme stratejinizi uygulayın
+- [ ] **Q3**: Key Vault sırları önbellekte ne kadar süre kalır?
+  - **A**: Uygulamaya bağlıdır; kendi önbellekleme stratejinizi uygulayın
 
 **Uygulamalı Doğrulama:**
 ```bash
-# Anahtar Kasası erişimini test et
+# Key Vault erişimini test et
 az keyvault secret show \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
   --query "value"
 
-# RBAC'in etkin olup olmadığını kontrol et
+# RBAC'in etkin olduğunu kontrol et
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Beklenen: true
+# ✅ Beklenen: doğru
 ```
 
 ---
@@ -1220,7 +1221,7 @@ az keyvault show \
 
 ### ✅ YAPIN:
 
-1. **Üretimde her zaman yönetilen kimlik kullanın**
+1. **Üretimde her zaman yönetilen kimliği kullanın**
    ```bicep
    identity: {
      type: 'SystemAssigned'
@@ -1229,14 +1230,14 @@ az keyvault show \
 
 2. **En az ayrıcalıklı RBAC rollerini kullanın**
    - Mümkün olduğunda "Reader" rollerini kullanın
-   - Gerekmedikçe "Owner" veya "Contributor" rollerinden kaçının
+   - Gerekmedikçe "Owner" veya "Contributor" kullanmaktan kaçının
 
-3. **Üçüncü taraf anahtarlarını Key Vault'ta saklayın**
+3. **Üçüncü taraf anahtarları Key Vault'ta depolayın**
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
 
-4. **Denetim günlüklemesini etkinleştirin**
+4. **Denetim günlük kaydını etkinleştirin**
    ```bicep
    diagnosticSettings: {
      logs: [{ category: 'AuditEvent', enabled: true }]
@@ -1250,13 +1251,13 @@ az keyvault show \
    azd env new prod
    ```
 
-6. **Gizli değerleri düzenli olarak yenileyin**
+6. **Sırları düzenli olarak döndürün**
    - Key Vault sırlarına son kullanma tarihleri ayarlayın
-   - Rotasyonu Azure Functions ile otomatikleştirin
+   - Yenilemeyi Azure Functions ile otomatikleştirin
 
 ### ❌ YAPMAYIN:
 
-1. **Gizli bilgileri asla kodda sabitlemeyin**
+1. **Sırları asla doğrudan kod içine yazmayın**
    ```javascript
    // ❌ KÖTÜ
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
@@ -1268,7 +1269,7 @@ az keyvault show \
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
    ```
 
-3. **Aşırı izin vermeyin**
+3. **Aşırı izinler vermeyin**
    ```bicep
    // ❌ BAD - too much access
    roleDefinitionId: 'Owner'
@@ -1277,7 +1278,7 @@ az keyvault show \
    roleDefinitionId: 'Storage Blob Data Reader'
    ```
 
-4. **Gizli bilgileri günlüklemeyin**
+4. **Sırları günlük kaydına yazmayın**
    ```javascript
    // ❌ KÖTÜ
    console.log('API Key:', apiKey);
@@ -1286,7 +1287,7 @@ az keyvault show \
    console.log('API Key retrieved successfully');
    ```
 
-5. **Üretim kimliklerini ortamlarda paylaşmayın**
+5. **Üretim kimliklerini ortamlar arasında paylaşmayın**
    ```bicep
    // ❌ BAD - same identity for dev and prod
    // ✅ GOOD - separate identities per environment
@@ -1307,18 +1308,18 @@ AuthorizationPermissionMismatch: This request is not authorized to perform this 
 **Teşhis:**
 
 ```bash
-# Yönetilen kimliğin etkin olup olmadığını kontrol edin
+# Yönetilen kimliğin etkin olup olmadığını kontrol et
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 # ✅ Beklenen: "SystemAssigned" veya "UserAssigned"
 
-# Rol atamalarını kontrol edin
+# Rol atamalarını kontrol et
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
-# Beklenen: "Storage Blob Data Contributor" veya benzer bir rol görülmelidir
+# Beklenen: "Storage Blob Data Contributor" veya benzer bir rol görülmeli
 ```
 
 **Çözümler:**
@@ -1332,7 +1333,7 @@ az role assignment create \
   --scope $STORAGE_ID
 ```
 
-2. **Yayılmayı bekleyin (5-10 dakika sürebilir):**
+2. **Yayınlanmasını bekleyin (5-10 dakika sürebilir):**
 ```bash
 # Rol atama durumunu kontrol et
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
@@ -1357,11 +1358,11 @@ The user, group or application does not have secrets get permission
 **Teşhis:**
 
 ```bash
-# Key Vault RBAC'in etkin olup olmadığını kontrol et
+# Key Vault RBAC'in etkin olduğunu kontrol et
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Beklenen: true
+# ✅ Beklenen: doğru
 
 # Rol atamalarını kontrol et
 az role assignment list \
@@ -1371,14 +1372,14 @@ az role assignment list \
 
 **Çözümler:**
 
-1. **Key Vault'ta RBAC'ı etkinleştirin:**
+1. **Key Vault için RBAC'i etkinleştirin:**
 ```bash
 az keyvault update \
   --name $KV_NAME \
   --enable-rbac-authorization true
 ```
 
-2. **Key Vault Secrets User rolünü verin:**
+2. **Key Vault Secrets User rolünü atayın:**
 ```bash
 KV_ID=$(az keyvault show --name $KV_NAME --query "id" -o tsv)
 az role assignment create \
@@ -1419,7 +1420,7 @@ az login
 az account set --subscription "Your Subscription Name"
 ```
 
-3. **Yerel geliştirme için ortam değişkenlerini kullanın:**
+3. **Yerel geliştirme için çevresel değişkenleri kullanın:**
 ```bash
 export AZURE_TENANT_ID="your-tenant-id"
 export AZURE_CLIENT_ID="your-client-id"
@@ -1438,11 +1439,11 @@ const credential = process.env.NODE_ENV === 'production'
 
 ---
 
-### Sorun: Rol atamasının yayılması çok uzun sürüyor
+### Sorun: Rol ataması yayınlanması çok uzun sürüyor
 
 **Belirtiler:**
 - Rol başarıyla atandı
-- Hala 403 hatası alınıyor
+- Hâlâ 403 hatası alınıyor
 - Aralıklı erişim (bazen çalışıyor, bazen çalışmıyor)
 
 **Açıklama:**
@@ -1451,7 +1452,7 @@ Azure RBAC değişikliklerinin küresel olarak yayılması 5-10 dakika sürebili
 **Çözüm:**
 
 ```bash
-# Bekleyin ve tekrar deneyin
+# Bekleyin ve yeniden deneyin
 echo "Waiting for RBAC propagation..."
 sleep 300  # 5 dakika bekleyin
 
@@ -1470,50 +1471,50 @@ az containerapp revision restart \
 
 ### Yönetilen Kimlik Maliyetleri
 
-| Kaynak | Maliyet |
+| Resource | Cost |
 |----------|------|
-| **Yönetilen Kimlik** | 🆓 **ÜCRETSİZ** - Ücret alınmaz |
-| **RBAC Rol Atamaları** | 🆓 **ÜCRETSİZ** - Ücret alınmaz |
-| **Azure AD Jeton İstekleri** | 🆓 **ÜCRETSİZ** - Dahil |
+| **Yönetilen Kimlik** | 🆓 **FREE** - Ücret yok |
+| **RBAC Role Assignments** | 🆓 **FREE** - Ücret yok |
+| **Azure AD Token Requests** | 🆓 **FREE** - Dahil |
 | **Key Vault Operations** | $0.03 per 10,000 operations |
-| **Key Vault Storage** | $0.024 her gizli değer için aylık |
+| **Key Vault Storage** | $0.024 sır başına ayda |
 
 **Yönetilen kimlik şu şekillerde para tasarrufu sağlar:**
-- ✅ Hizmetler arası kimlik doğrulama için Key Vault işlemlerini ortadan kaldırmak
-- ✅ Güvenlik olaylarını azaltmak (sızan kimlik bilgisi yok)
-- ✅ İşletme yükünü azaltmak (manuel döndürme yok)
+- ✅ Servisler arası kimlik doğrulama için Key Vault işlemlerini ortadan kaldırmak
+- ✅ Güvenlik olaylarını azaltmak (sızmış kimlik bilgisi yok)
+- ✅ Operasyonel yükü azaltmak (manuel döndürme yok)
 
 **Örnek Maliyet Karşılaştırması (aylık):**
 
-| Senaryo | Bağlantı Dizeleri | Yönetilen Kimlik | Tasarruf |
+| Scenario | Connection Strings | Managed Identity | Savings |
 |----------|-------------------|-----------------|---------|
-| Küçük uygulama (1M requests) | ~$50 (Key Vault + ops) | ~$0 | $50/ay |
-| Orta uygulama (10M requests) | ~$200 | ~$0 | $200/ay |
-| Büyük uygulama (100M requests) | ~$1,500 | ~$0 | $1,500/ay |
+| Small app (1M requests) | ~$50 (Key Vault + ops) | ~$0 | $50/month |
+| Medium app (10M requests) | ~$200 | ~$0 | $200/month |
+| Large app (100M requests) | ~$1,500 | ~$0 | $1,500/month |
 
 ---
 
 ## Daha Fazla Bilgi
 
-### Resmi Dokümantasyon
+### Resmi Belgeler
 - [Azure Yönetilen Kimlik](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
 - [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
 - [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
 - [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
 
-### SDK Dokümantasyonu
+### SDK Belgeleri
 - [@azure/identity (Node.js)](https://www.npmjs.com/package/@azure/identity)
 - [Azure.Identity (C#)](https://www.nuget.org/packages/Azure.Identity/)
 - [azure-identity (Python)](https://pypi.org/project/azure-identity/)
 
-### Bu Derste Sonraki Adımlar
+### Bu Kurstaki Sonraki Adımlar
 - ← Önceki: [Yapılandırma Yönetimi](configuration.md)
 - → Sonraki: [İlk Proje](first-project.md)
-- 🏠 [Kurs Ana Sayfası](../../README.md)
+- 🏠 [Kurs Anasayfası](../../README.md)
 
 ### İlgili Örnekler
-- [Azure OpenAI Sohbet Örneği](../../../../examples/azure-openai-chat) - Azure OpenAI için yönetilen kimlik kullanır
-- [Mikroservis Örneği](../../../../examples/microservices) - Çok hizmetli kimlik doğrulama desenleri
+- [Microsoft Foundry Models Chat Example](../../../../examples/azure-openai-chat) - Microsoft Foundry Modelleri için yönetilen kimlik kullanır
+- [Microservices Example](../../../../examples/microservices) - Çok servisli kimlik doğrulama desenleri
 
 ---
 
@@ -1522,26 +1523,26 @@ az containerapp revision restart \
 **Öğrendikleriniz:**
 - ✅ Üç kimlik doğrulama deseni (bağlantı dizeleri, Key Vault, yönetilen kimlik)
 - ✅ AZD'de yönetilen kimliğin nasıl etkinleştirileceği ve yapılandırılacağı
-- ✅ Azure hizmetleri için RBAC rol atamaları
+- ✅ Azure servisleri için RBAC rol atamaları
 - ✅ Üçüncü taraf sırları için Key Vault entegrasyonu
 - ✅ Kullanıcı atanmış ve sistem atanmış kimlikler
 - ✅ Güvenlik en iyi uygulamaları ve sorun giderme
 
-**Ana Çıkarımlar:**
-1. **Üretimde her zaman yönetilen kimlik kullanın** - Sıfır gizli bilgi, otomatik yenileme
+**Ana Noktalar:**
+1. **Üretimde her zaman yönetilen kimliği kullanın** - Sıfır gizli bilgi, otomatik yenileme
 2. **En az ayrıcalıklı RBAC rollerini kullanın** - Sadece gerekli izinleri verin
-3. **Üçüncü taraf anahtarlarını Key Vault'ta saklayın** - Merkezi gizli yönetimi
+3. **Üçüncü taraf anahtarları Key Vault'ta depolayın** - Merkezi gizli yönetimi
 4. **Ortam başına ayrı kimlikler kullanın** - Dev, staging, prod izolasyonu
-5. **Denetim günlüklemesini etkinleştirin** - Kimin neye eriştiğini izleyin
+5. **Denetim günlük kaydını etkinleştirin** - Kim neye eriştiğini izleyin
 
 **Sonraki Adımlar:**
-1. Yukarıdaki pratik egzersizleri tamamlayın
+1. Yukarıdaki pratik alıştırmaları tamamlayın
 2. Mevcut bir uygulamayı bağlantı dizelerinden yönetilen kimliğe taşıyın
-3. İlk AZD projenizi başından itibaren güvenlik ile oluşturun: [İlk Proje](first-project.md)
+3. Güvenliği baştan itibaren dahil ederek ilk AZD projenizi oluşturun: [İlk Proje](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Feragatname:
-Bu belge, yapay zeka çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğinin farkında olunuz. Orijinal belge, kendi dilindeki haliyle yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanılması sonucu ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğinin farkında olun. Orijinal belge, kendi dilindeki haliyle yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımıyla ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumdan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,17 +1,18 @@
 # 3. Desconstruir um Template
 
-!!! tip "NO FINAL DESTE MÓDULO SERÁS CAPAZ DE"
+!!! tip "NO FINAL DESTE MÓDULO, IRÁS CONSEGUIR"
 
     - [ ] Ativar o GitHub Copilot com servidores MCP para assistência Azure
-    - [ ] Compreender a estrutura de pastas e componentes do template AZD
+    - [ ] Compreender a estrutura e os componentes da pasta do template AZD
     - [ ] Explorar padrões de organização de infraestrutura como código (Bicep)
-    - [ ] **Lab 3:** Utilizar o GitHub Copilot para explorar e compreender a arquitetura do repositório
+    - [ ] **Lab 3:** Usar o GitHub Copilot para explorar e entender a arquitetura do repositório 
 
 ---
 
-Com os templates AZD e a Azure Developer CLI (`azd`) podemos rapidamente iniciar a nossa jornada de desenvolvimento de IA com repositórios padronizados que fornecem código de exemplo, infraestrutura e ficheiros de configuração - na forma de um projeto _starter_ pronto a implantar.
 
-**Mas agora, precisamos de compreender a estrutura do projeto e a base de código - e ser capazes de personalizar o template AZD - sem qualquer experiência ou conhecimento prévio de AZD!**
+Com os templates AZD e a Azure Developer CLI (`azd`) podemos começar rapidamente a nossa jornada de desenvolvimento de IA com repositórios padronizados que fornecem código de exemplo, infraestruturas e ficheiros de configuração - na forma de um projeto _starter_ pronto a implementar.
+
+**Mas agora, precisamos de compreender a estrutura do projeto e a base de código - e ser capazes de personalizar o template AZD - sem qualquer experiência ou compreensão prévia do AZD!**
 
 ---
 
@@ -19,20 +20,20 @@ Com os templates AZD e a Azure Developer CLI (`azd`) podemos rapidamente iniciar
 
 ### 1.1 Instalar o GitHub Copilot Chat
 
-É tempo de explorar o [GitHub Copilot com Modo Agente](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Agora, podemos usar linguagem natural para descrever a nossa tarefa a um nível elevado e receber assistência na execução. Para este laboratório, usaremos o [plano gratuito do Copilot](https://github.com/github-copilot/signup) que tem um limite mensal para conclusões e interações de chat.
+É tempo de explorar o [GitHub Copilot com Modo Agente](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Agora, podemos usar linguagem natural para descrever a nossa tarefa a um nível elevado, e obter assistência na execução. Para este laboratório, iremos usar o [plano gratuito do Copilot](https://github.com/github-copilot/signup) que tem um limite mensal para conclusões e interações no chat.
 
-A extensão pode ser instalada a partir do marketplace, mas deverá já estar disponível no teu ambiente Codespaces. _Clica em `Open Chat` no menu suspenso do ícone do Copilot - e escreve um prompt como `What can you do?`_ - podes ser solicitado a iniciar sessão. **O GitHub Copilot Chat está pronto**.
+A extensão pode ser instalada a partir do marketplace, mas deverá já estar disponível no teu ambiente Codespaces. _Clique em `Open Chat` no menu suspenso do ícone do Copilot - e escreve um prompt como `What can you do?`_ - poderá ser pedido que inicies sessão. **O GitHub Copilot Chat está pronto**.
 
-### 1.2. Instalar Servidores MCP
+### 1.2. Instalar os Servidores MCP
 
-Para que o modo Agente seja eficaz, é necessário ter acesso às ferramentas certas para ajudar a recuperar conhecimentos ou executar ações. É aqui que os servidores MCP são úteis. Vamos configurar os seguintes servidores:
+Para que o modo Agente seja eficaz, precisa de acesso às ferramentas corretas para o ajudar a recuperar conhecimento ou executar ações. É aqui que os servidores MCP ajudam. Iremos configurar os seguintes servidores:
 
-1. [Azure MCP Server](../../../../../workshop/docs/instructions)
-1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
+1. [Servidor Azure MCP](../../../../../workshop/docs/instructions)
+1. [Servidor Microsoft Docs MCP](../../../../../workshop/docs/instructions)
 
-Para ativá-los:
+Para os ativar:
 
-1. Cria um ficheiro chamado `.vscode/mcp.json` se não existir
+1. Cria um ficheiro chamado `.vscode/mcp.json` se este não existir
 1. Copia o seguinte para esse ficheiro - e inicia os servidores!
    ```json title=".vscode/mcp.json"
    {
@@ -54,9 +55,9 @@ Para ativá-los:
    }
    ```
 
-??? warning "Poderás receber um erro indicando que `npx` não está instalado (clica para expandir solução)"
+??? warning "Poderás receber um erro a indicar que o `npx` não está instalado (clicar para expandir para a correção)"
 
-      Para corrigir, abre o ficheiro `.devcontainer/devcontainer.json` e adiciona esta linha à secção de features. Depois reconstrói o container. Deverás agora ter o `npx` instalado.
+      Para corrigir, abre o ficheiro `.devcontainer/devcontainer.json` e adiciona esta linha à secção features. Depois reconstrói o contentor. Agora deverás ter o `npx` instalado.
 
       ```title="" linenums="0"
          "features": {
@@ -69,45 +70,45 @@ Para ativá-los:
 
 ### 1.3. Testar o GitHub Copilot Chat
 
-**Usa primeiro o `az login` para autenticar com Azure através da linha de comando do VS Code.**
+**Primeiro usa `az login` para autenticar na Azure a partir da linha de comandos do VS Code.**
 
-Agora deverás conseguir consultar o estado da tua subscrição Azure e colocar questões sobre recursos implementados ou configuração. Tenta estes prompts:
+Agora deverás conseguir consultar o estado da tua subscrição Azure e fazer perguntas sobre os recursos implementados ou configuração. Experimenta estes prompts:
 
 1. `List my Azure resource groups`
 1. `#foundry list my current deployments`
 
-Também podes perguntar sobre documentação Azure e obter respostas baseadas no servidor Microsoft Docs MCP. Tenta estes prompts:
+Podes também colocar questões sobre a documentação Azure e obter respostas assentes no servidor Microsoft Docs MCP. Experimenta estes prompts:
 
 1. `#microsoft_docs_search What is Azure Developer CLI?`
 1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
 
-Ou podes pedir snippets de código para completar uma tarefa. Tenta este prompt:
+Ou podes pedir snippets de código para completar uma tarefa. Experimenta este prompt.
 
 1. `Give me a Python code example that uses AAD for an interactive chat client`
 
-No modo `Ask`, isto irá fornecer código que podes copiar e colar para experimentar. No modo `Agent`, pode ir mais longe e criar os recursos relevantes para ti - incluindo scripts de configuração e documentação - para ajudar a executar essa tarefa.
+No modo `Ask`, isto irá fornecer código que podes copiar-colar e experimentar. No modo `Agent`, poderá avançar um passo e criar os recursos relevantes para ti - incluindo scripts de configuração e documentação - para ajudar a executar essa tarefa.
 
-**Estás agora equipado para começar a explorar o repositório de templates**
+**Agora estás equipado para começar a explorar o repositório do template**
 
 ---
 
-## 2. Desconstruir a Arquitetura
+## 2. Desconstruir a Arquitectura
 
-??? prompt "PERGUNTA: Explica a arquitetura da aplicação em docs/images/architecture.png em 1 parágrafo"
+??? prompt "PERGUNTA: Explica a arquitectura da aplicação em docs/images/architecture.png em 1 parágrafo"
 
-      Esta aplicação é uma aplicação de chat alimentada por IA construída na Azure que demonstra uma arquitetura moderna baseada em agentes. A solução centra-se numa Azure Container App que hospeda o código principal da aplicação, que processa a entrada do utilizador e gera respostas inteligentes através de um agente de IA.
+      Esta aplicação é uma aplicação de chat com IA construída no Azure que demonstra uma arquitetura moderna baseada em agentes. A solução centra-se numa Azure Container App que hospeda o código principal da aplicação, que processa a entrada do utilizador e gera respostas inteligentes através de um agente de IA.
       
-      A arquitetura aproveita o Microsoft Foundry Project como base para as capacidades de IA, conectando-se aos Azure AI Services que fornecem os modelos de linguagem subjacentes (como o GPT-4o-mini) e a funcionalidade de agente.
+      A arquitetura aproveita o Microsoft Foundry Project como base para capacidades de IA, ligando-se aos Serviços Azure AI que fornecem os modelos de linguagem subjacentes (como o gpt-4.1-mini) e funcionalidades de agente.
       
-      As interações do utilizador fluem através de um frontend baseado em React para um backend FastAPI que comunica com o serviço do agente de IA para gerar respostas contextuais.
+      As interações do utilizador fluem por um frontend baseado em React para um backend FastAPI que comunica com o serviço do agente IA para gerar respostas contextuais.
       
-      O sistema incorpora capacidades de recuperação de conhecimento através de pesquisa de ficheiros ou do serviço Azure AI Search, permitindo que o agente aceda e cite informação a partir de documentos carregados.
+      O sistema incorpora capacidades de recuperação de conhecimento através de pesquisa de ficheiros ou do serviço Azure AI Search, permitindo que o agente aceda e cite informações de documentos carregados.
       
-      Para excelência operacional, a arquitetura inclui monitorização abrangente através do Application Insights e do Log Analytics Workspace para tracing, logging e otimização de performance.
+      Para excelência operacional, a arquitetura inclui monitorização abrangente através do Application Insights e Log Analytics Workspace para rastreamento, registo e otimização de desempenho.
       
-      O Azure Storage fornece armazenamento blob para dados da aplicação e carregamentos de ficheiros, enquanto a Managed Identity assegura acesso seguro entre recursos Azure sem armazenar credenciais.
+      O Azure Storage fornece armazenamento de blobs para dados da aplicação e carregamentos de ficheiros, enquanto a Identidade Gerida garante acesso seguro entre os recursos Azure sem armazenar credenciais.
       
-      Toda a solução foi desenhada para escalabilidade e manutenção, com a aplicação conteinerizada a escalar automaticamente consoante a procura, enquanto fornece capacidades integradas de segurança, monitorização e CI/CD através do ecossistema de serviços geridos da Azure.
+      Toda a solução é concebida para escalabilidade e manutenção, com a aplicação conteinerizada a escalar automaticamente conforme a procura, proporcionando segurança incorporada, monitorização e capacidades CI/CD através do ecossistema de serviços geridos da Azure.
 
 ![Architecture](../../../../../translated_images/pt-PT/architecture.48d94861e6e6cdc0.webp)
 
@@ -115,170 +116,171 @@ No modo `Ask`, isto irá fornecer código que podes copiar e colar para experime
 
 ## 3. Estrutura do Repositório
 
-!!! prompt "PERGUNTA: Explica a estrutura das pastas do template. Começa com um diagrama hierárquico visual."
+!!! prompt "PERGUNTA: Explica a estrutura da pasta do template. Começa com um diagrama hierárquico visual."
 
 ??? info "RESPOSTA: Diagrama Hierárquico Visual"
 
       ```bash title="" 
       get-started-with-ai-agents/
-      ├── 📋 Configuração & Setup
+      ├── 📋 Configuração e Setup
       │   ├── azure.yaml                    # Configuração da Azure Developer CLI
-      │   ├── docker-compose.yaml           # Containers para desenvolvimento local
+      │   ├── docker-compose.yaml           # Contentores para desenvolvimento local
       │   ├── pyproject.toml                # Configuração do projeto Python
       │   ├── requirements-dev.txt          # Dependências de desenvolvimento
-      │   └── .devcontainer/                # Configuração do container de desenvolvimento VS Code
+      │   └── .devcontainer/                # Setup do contentor dev no VS Code
       │
       ├── 🏗️ Infraestrutura (infra/)
-      │   ├── main.bicep                    # Template principal de infraestrutura
+      │   ├── main.bicep                    # Template principal da infraestrutura
       │   ├── api.bicep                     # Recursos específicos da API
-      │   ├── main.parameters.json          # Parâmetros de infraestrutura
-      │   └── core/                         # Componentes modulares de infraestrutura
+      │   ├── main.parameters.json          # Parâmetros da infraestrutura
+      │   └── core/                         # Componentes modulares da infraestrutura
       │       ├── ai/                       # Configurações dos serviços de IA
       │       ├── host/                     # Infraestrutura de hosting
-      │       ├── monitor/                  # Monitorização e logging
+      │       ├── monitor/                  # Monitorização e registo
       │       ├── search/                   # Configuração do Azure AI Search
       │       ├── security/                 # Segurança e identidade
       │       └── storage/                  # Configurações da conta de armazenamento
       │
       ├── 💻 Código da Aplicação (src/)
-      │   ├── api/                          # Backend API
+      │   ├── api/                          # API backend
       │   │   ├── main.py                   # Entrada da aplicação FastAPI
-      │   │   ├── routes.py                 # Definições das rotas API
-      │   │   ├── search_index_manager.py   # Funcionalidades de pesquisa
-      │   │   ├── data/                     # Gestão de dados da API
-      │   │   ├── static/                   # Recursos web estáticos
+      │   │   ├── routes.py                 # Definições das rotas da API
+      │   │   ├── search_index_manager.py   # Funcionalidade de pesquisa
+      │   │   ├── data/                     # Manipulação de dados da API
+      │   │   ├── static/                   # Assets estáticos web
       │   │   └── templates/                # Templates HTML
       │   ├── frontend/                     # Frontend React/TypeScript
       │   │   ├── package.json              # Dependências Node.js
-      │   │   ├── vite.config.ts            # Configuração do build Vite
+      │   │   ├── vite.config.ts            # Configuração build Vite
       │   │   └── src/                      # Código fonte do frontend
       │   ├── data/                         # Ficheiros de dados de exemplo
       │   │   └── embeddings.csv            # Embeddings pré-computados
       │   ├── files/                        # Ficheiros da base de conhecimento
       │   │   ├── customer_info_*.json      # Exemplos de dados de clientes
-      │   │   └── product_info_*.md         # Documentação de produto
-      │   ├── Dockerfile                    # Configuração do container
+      │   │   └── product_info_*.md         # Documentação de produtos
+      │   ├── Dockerfile                    # Configuração do contentor
       │   └── requirements.txt              # Dependências Python
       │
-      ├── 🔧 Automação & Scripts (scripts/)
-      │   ├── postdeploy.sh/.ps1           # Setup pós-implantação
+      ├── 🔧 Automação e Scripts (scripts/)
+      │   ├── postdeploy.sh/.ps1           # Setup pós-implementação
       │   ├── setup_credential.sh/.ps1     # Configuração de credenciais
-      │   ├── validate_env_vars.sh/.ps1    # Validação de variáveis de ambiente
-      │   └── resolve_model_quota.sh/.ps1  # Gestão de quota dos modelos
+      │   ├── validate_env_vars.sh/.ps1    # Validação de ambiente
+      │   └── resolve_model_quota.sh/.ps1  # Gestão da quota dos modelos
       │
-      ├── 🧪 Testes & Avaliação
-      │   ├── tests/                        # Testes unitários e de integração
+      ├── 🧪 Testes e Avaliação
+      │   ├── tests/                        # Testes unitários e integração
       │   │   └── test_search_index_manager.py
-      │   ├── evals/                        # Framework de avaliação do agente
-      │   │   ├── evaluate.py               # Executor de avaliações
-      │   │   ├── eval-queries.json         # Queries de teste
+      │   ├── evals/                        # Framework de avaliação de agentes
+      │   │   ├── evaluate.py               # Executor da avaliação
+      │   │   ├── eval-queries.json         # Consultas de teste
       │   │   └── eval-action-data-path.json
-      │   ├── sandbox/                      # Ambiente de desenvolvimento
-      │   │   ├── 1-quickstart.py           # Exemplos para início rápido
+      │   ├── sandbox/                      # Espaço para desenvolvimento
+      │   │   ├── 1-quickstart.py           # Exemplos de início rápido
       │   │   └── aad-interactive-chat.py   # Exemplos de autenticação
-      │   └── airedteaming/                 # Avaliação de segurança de IA
+      │   └── airedteaming/                 # Avaliação da segurança AI
       │       └── ai_redteaming.py          # Testes de equipa vermelha
       │
       ├── 📚 Documentação (docs/)
-      │   ├── deployment.md                 # Guia de implantação
-      │   ├── local_development.md          # Instruções para configuração local
-      │   ├── troubleshooting.md            # Problemas comuns & soluções
+      │   ├── deployment.md                 # Guia de implementação
+      │   ├── local_development.md          # Instruções para setup local
+      │   ├── troubleshooting.md            # Problemas comuns e soluções
       │   ├── azure_account_setup.md        # Pré-requisitos Azure
-      │   └── images/                       # Recursos para documentação
+      │   └── images/                       # Assets de documentação
       │
       └── 📄 Metadados do Projeto
          ├── README.md                     # Visão geral do projeto
-         ├── CODE_OF_CONDUCT.md           # Regras da comunidade
-         ├── CONTRIBUTING.md              # Guia de contribuições
+         ├── CODE_OF_CONDUCT.md           # Normas da comunidade
+         ├── CONTRIBUTING.md              # Guia para contribuições
          ├── LICENSE                      # Termos da licença
-         └── next-steps.md                # Orientações pós-implantação
+         └── next-steps.md                # Orientações pós-implementação
       ```
 
-### 3.1. Arquitetura Principal da App
+### 3.1. Arquitectura da App Core
 
-Este template segue um padrão de **aplicação web full-stack** com:
+Este template segue o padrão de uma **aplicação web full-stack** com:
 
-- **Backend**: Python FastAPI com integração Azure IA
-- **Frontend**: TypeScript/React com Vite como sistema de build
-- **Infraestrutura**: Templates Azure Bicep para recursos cloud
-- **Conteinerização**: Docker para implantação consistente
+- **Backend**: Python FastAPI com integração Azure AI
+- **Frontend**: TypeScript/React com sistema de build Vite
+- **Infraestrutura**: Templates Bicep da Azure para recursos cloud
+- **Contentorização**: Docker para deploys consistentes
 
-### 3.2 Infra como Código (bicep)
+### 3.2 Infraestrutura como Código (bicep)
 
 A camada de infraestrutura usa templates **Azure Bicep** organizados modularmente:
 
    - **`main.bicep`**: Orquestra todos os recursos Azure
    - **Módulos `core/`**: Componentes reutilizáveis para diferentes serviços
-      - Serviços IA (Azure OpenAI, AI Search)
-      - Hosting de containers (Azure Container Apps)
+      - Serviços AI (Modelos Microsoft Foundry, AI Search)
+      - Hosting conteinerizado (Azure Container Apps)
       - Monitorização (Application Insights, Log Analytics)
-      - Segurança (Key Vault, Identidade Gerida)
+      - Segurança (Key Vault, Managed Identity)
 
 ### 3.3 Código da Aplicação (`src/`)
 
 **API Backend (`src/api/`)**:
 
 - API REST baseada em FastAPI
-- Integração com Foundry Agents
+- Integração com agentes Foundry
 - Gestão do índice de pesquisa para recuperação de conhecimento
-- Capacidades de upload e processamento de ficheiros
+- Funcionalidades de upload e processamento de ficheiros
 
 **Frontend (`src/frontend/`)**:
 
 - SPA moderna React/TypeScript
 - Vite para desenvolvimento rápido e builds otimizados
-- Interface de chat para interações com o agente
+- Interface de chat para interações com agente
 
 **Base de Conhecimento (`src/files/`)**:
 
-- Dados de exemplo de clientes e produtos
+- Dados de clientes e produtos de exemplo
 - Demonstra recuperação de conhecimento baseada em ficheiros
 - Exemplos em JSON e Markdown
+
 
 ### 3.4 DevOps & Automação
 
 **Scripts (`scripts/`)**:
 
-- Scripts multiplataforma PowerShell e Bash
-- Validação e preparação do ambiente
-- Configuração pós-implantação
-- Gestão da quota dos modelos
+- Scripts cross-platform PowerShell e Bash
+- Validação e setup do ambiente
+- Configuração pós-implementação
+- Gestão de quota de modelos
 
 **Integração Azure Developer CLI**:
 
-- Configuração `azure.yaml` para workflows `azd`
-- Provisionamento e implantação automatizados
+- Configuração `azure.yaml` para fluxos `azd`
+- Provisionamento e deployment automatizados
 - Gestão de variáveis de ambiente
 
-### 3.5 Testes & Garantia de Qualidade
+### 3.5 Testes e Garantia de Qualidade
 
 **Framework de Avaliação (`evals/`)**:
 
-- Avaliação de desempenho do agente
-- Testes de qualidade perguntas-respostas
+- Avaliação de performance dos agentes
+- Testes de qualidade resposta-consulta
 - Pipeline de avaliação automatizada
 
-**Segurança em IA (`airedteaming/`)**:
+**Segurança AI (`airedteaming/`)**:
 
-- Testes de equipa vermelha para segurança de IA
-- Análise de vulnerabilidades de segurança
+- Testes de equipa vermelha para segurança AI
+- Scan de vulnerabilidades
 - Práticas responsáveis de IA
 
 ---
 
 ## 4. Parabéns 🏆
 
-Conseguiste usar com sucesso o GitHub Copilot Chat com servidores MCP para explorar o repositório.
+Conseguiste usar o GitHub Copilot Chat com servidores MCP para explorar o repositório.
 
 - [X] Ativaste o GitHub Copilot para Azure
-- [X] Compreendeste a Arquitetura da Aplicação
+- [X] Compreendeste a Arquitectura da Aplicação
 - [X] Exploraste a estrutura do template AZD
 
-Isto dá-te uma visão dos ativos de _infraestrutura como código_ neste template. A seguir, vamos analisar o ficheiro de configuração para o AZD.
+Isto dá-te uma noção dos ativos de _infraestrutura como código_ deste template. Seguidamente, vamos analisar o ficheiro de configuração para o AZD.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Aviso Legal**:
-Este documento foi traduzido utilizando o serviço de tradução automática [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se a tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
+**Aviso Legal**:  
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações erradas decorrentes da utilização desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

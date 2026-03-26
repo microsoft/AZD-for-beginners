@@ -1,51 +1,66 @@
-# AZD Basics - Understanding Azure Developer CLI
+# AZD põhitõed - Azure Developer CLI mõistmine
 
-# AZD Basics - Core Concepts and Fundamentals
+# AZD põhitõed - põhimõisted ja alused
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
-- **⬅️ Previous**: [Course Overview](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Next**: [Installation & Setup](installation.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Peatükkide navigeerimine:**
+- **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
+- **📖 Praegune peatükk**: Peatükk 1 - alus & kiire algus
+- **⬅️ Eelmine**: [Kursuse ülevaade](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Järgmine**: [Paigaldus & seadistamine](installation.md)
+- **🚀 Järgmine peatükk**: [Peatükk 2: AI-keskne arendus](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-## Introduction
+## Sissejuhatus
 
-This lesson introduces you to Azure Developer CLI (azd), a powerful command-line tool that accelerates your journey from local development to Azure deployment. You'll learn the fundamental concepts, core features, and understand how azd simplifies cloud-native application deployment.
+See õppetund tutvustab Azure Developer CLI-d (azd), võimast käsureatööriista, mis kiirendab teie teekonda kohalikust arendusest Azure'i juurutamiseni. Õpite põhimõisteid, põhifunktsioone ja mõistate, kuidas azd lihtsustab pilvepõhiste rakenduste juurutamist.
 
-## Learning Goals
+## Õpieesmärgid
 
-By the end of this lesson, you will:
-- Understand what Azure Developer CLI is and its primary purpose
-- Learn the core concepts of templates, environments, and services
-- Explore key features including template-driven development and Infrastructure as Code
-- Understand the azd project structure and workflow
-- Be prepared to install and configure azd for your development environment
+Selle õppetunni lõpuks:
+- Mõistate, mis on Azure Developer CLI ja selle peamist eesmärki
+- Õpite malli-, keskkonna- ja teenuse põhikontseptsioone
+- Uurite peamisi funktsioone, sealhulgas mallipõhist arendust ja Infrastructure as Code’i
+- Saate aru azd projekti struktuurist ja töörühmast
+- Olete valmis paigaldama ja seadistama azd oma arenduskeskkonnas
 
-## Learning Outcomes
+## Õpitulemused
 
-After completing this lesson, you will be able to:
-- Explain the role of azd in modern cloud development workflows
-- Identify the components of an azd project structure
-- Describe how templates, environments, and services work together
-- Understand the benefits of Infrastructure as Code with azd
-- Recognize different azd commands and their purposes
+Pärast selle õppetunni läbimist suudate:
+- Selgitada azd rolli kaasaegsetes pilvearenduse töövoogudes
+- Tuvastada azd projekti struktuuri komponendid
+- Kirjeldada, kuidas mallid, keskkonnad ja teenused koos töötavad
+- Mõista Infrastructure as Code’i eeliseid azd-ga
+- Tunda ära erinevaid azd käske ja nende otstarvet
 
-## What is Azure Developer CLI (azd)?
+## Mis on Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) is a command-line tool designed to accelerate your journey from local development to Azure deployment. It simplifies the process of building, deploying, and managing cloud-native applications on Azure.
+Azure Developer CLI (azd) on käsureatööriist, mis on loodud kiirendama teie teekonda kohalikust arendusest Azure'i juurutamiseni. See lihtsustab pilvepõhiste rakenduste ehitamist, juurutamist ja haldamist Azure’is.
 
-### 🎯 Why Use AZD? A Real-World Comparison
+### Mida saab azd-ga juurutada?
 
-Let's compare deploying a simple web app with database:
+azd toetab laia valikut töökoormusi – ja nimekiri kasvab pidevalt. Täna saate azd-ga juurutada:
 
-#### ❌ WITHOUT AZD: Manual Azure Deployment (30+ minutes)
+| Töökoormuse tüüp | Näited | Sama töövoog? |
+|------------------|--------|--------------|
+| **Traditsioonilised rakendused** | Veebirakendused, REST API-d, staatilised saidid | ✅ `azd up` |
+| **Teenused ja mikroteenused** | Container Appsid, Function Appsid, mitme teenuse backendid | ✅ `azd up` |
+| **AI-põhised rakendused** | Vestlusrakendused Microsoft Foundry mudelitega, RAG lahendused AI Search’iga | ✅ `azd up` |
+| **Intelligent agents** | Foundry hostitud agendid, mitme agendi orkestreerimine | ✅ `azd up` |
+
+Oluline mõte on see, et **azd elutsükkel on sama, sõltumata sellest, mida te juurutate**. Te algatate projekti, loote infrastruktuuri, juurutate koodi, jälgite rakendust ja koristate pärast – kas tegemist on lihtsa veebisaidiga või keeruka AI-agendiga.
+
+See järjepidevus on teadlik disainivalik. azd käsitleb AI võimekust kui teist tüüpi teenust, mida teie rakendus kasutada saab, mitte midagi radikaalselt erinevat. Microsoft Foundry mudelitel põhinev jutupunkt on azd vaates lihtsalt veel üks teenus, mida seadistada ja juurutada.
+
+### 🎯 Miks kasutada AZD-d? Reaalne võrdlus
+
+Vaatame ette lihtsa veebirakenduse ja andmebaasi juurutamist:
+
+#### ❌ ILMA AZD-TA: käsitsi Azure juurutamine (30+ minutit)
 
 ```bash
 # Samm 1: Loo ressursirühm
 az group create --name myapp-rg --location eastus
 
-# Samm 2: Loo App Service'i plaan
+# Samm 2: Loo rakenduse teenuse plaan
 az appservice plan create --name myapp-plan \
   --resource-group myapp-rg \
   --sku B1 --is-linux
@@ -56,7 +71,7 @@ az webapp create --name myapp-web-unique123 \
   --plan myapp-plan \
   --runtime "NODE:18-lts"
 
-# Samm 4: Loo Cosmos DB konto (10–15 minutit)
+# Samm 4: Loo Cosmos DB konto (10-15 minutit)
 az cosmosdb create --name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --kind MongoDB
@@ -67,7 +82,7 @@ az cosmosdb mongodb database create \
   --resource-group myapp-rg \
   --name tododb
 
-# Samm 6: Loo kogum
+# Samm 6: Loo kogu
 az cosmosdb mongodb collection create \
   --account-name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
@@ -93,13 +108,13 @@ az webapp log config --name myapp-web-unique123 \
   --application-logging filesystem \
   --detailed-error-messages true
 
-# Samm 10: Seadista Application Insights
+# Samm 10: Sea üles Application Insights
 az monitor app-insights component create \
   --app myapp-insights \
   --location eastus \
   --resource-group myapp-rg
 
-# Samm 11: Ühenda App Insights veebirakendusega
+# Samm 11: Seo App Insights veebirakendusega
 INSTRUMENTATION_KEY=$(az monitor app-insights component show \
   --app myapp-insights \
   --resource-group myapp-rg \
@@ -110,7 +125,7 @@ az webapp config appsettings set \
   --resource-group myapp-rg \
   --settings APPINSIGHTS_INSTRUMENTATIONKEY="$INSTRUMENTATION_KEY"
 
-# Samm 12: Ehita rakendus lokaalselt
+# Samm 12: Koosta rakendus lokaalselt
 npm install
 npm run build
 
@@ -123,177 +138,197 @@ az webapp deployment source config-zip \
   --name myapp-web-unique123 \
   --src app.zip
 
-# Samm 15: Oota ja palveta, et see töötab 🙏
-# (Automaatset valideerimist ei ole, vajalik manuaalne testimine)
+# Samm 15: Oota ja palveta, et see toimib 🙏
+# (Automatiseeritud valideerimist pole, vajalik käsitsi testimine)
 ```
+  
+**Probleemid:**  
+- ❌ >15 käsku meeles pidada ja õigesti järjestada  
+- ❌ 30–45 minutit käsitsi tööd  
+- ❌ Lihtne teha vigu (trükivead, valed parameetrid)  
+- ❌ Ühendusstringid ilmuvad terminali ajaloos nähtavale  
+- ❌ Pole automaatset tagasipöördumist kui midagi ebaõnnestub  
+- ❌ Raske meeskonnakaaslastele taastada  
+- ❌ Iga kord erinev (taastamatud sammud)  
 
-**Problems:**
-- ❌ 15+ commands to remember and execute in order
-- ❌ 30-45 minutes of manual work
-- ❌ Easy to make mistakes (typos, wrong parameters)
-- ❌ Connection strings exposed in terminal history
-- ❌ No automated rollback if something fails
-- ❌ Hard to replicate for team members
-- ❌ Different every time (not reproducible)
-
-#### ✅ WITH AZD: Automated Deployment (5 commands, 10-15 minutes)
+#### ✅ AZD-GA: automatiseeritud juurutamine (5 käsku, 10–15 minutit)
 
 ```bash
-# Samm 1: Alusta mallist
+# Samm 1: Algata mallist
 azd init --template todo-nodejs-mongo
 
-# Samm 2: Autenteeri
+# Samm 2: Autendi
 azd auth login
 
 # Samm 3: Loo keskkond
 azd env new dev
 
-# Samm 4: Eelvaata muudatusi (valikuline, kuid soovitatav)
+# Samm 4: Vaata muudatusi eelvaates (valikuline, kuid soovitatav)
 azd provision --preview
 
-# Samm 5: Juuruta kõik
+# Samm 5: Arenda kõik välja
 azd up
 
-# ✨ Valmis! Kõik on juurutatud, seadistatud ja jälgitud
+# ✨ Valmis! Kõik on välja arendatud, konfigureeritud ja jälgitav
 ```
+  
+**Eelised:**  
+- ✅ **5 käsku** vs >15 käsitsi sammu  
+- ✅ **10–15 minutit** kokku (põhiliselt ooteaeg Azure’is)  
+- ✅ **Null vigu** - automatiseeritud ja testitud  
+- ✅ **Saladused turvaliselt hallatud** Key Vault’i kaudu  
+- ✅ **Automaatne tagasipöördumine** vigade korral  
+- ✅ **Täielikult järjepidev ja taastatav** - iga kord sama tulemus  
+- ✅ **Sobib tiimile** - igaüks saab kasutada samu käske  
+- ✅ **Infrastructure as Code** - versioonihalduses Bicep mallid  
+- ✅ **Automaatne jälgimine** - Application Insights seadistatud  
 
-**Benefits:**
-- ✅ **5 commands** vs. 15+ manual steps
-- ✅ **10-15 minutes** total time (mostly waiting for Azure)
-- ✅ **Zero errors** - automated and tested
-- ✅ **Secrets managed securely** via Key Vault
-- ✅ **Automatic rollback** on failures
-- ✅ **Fully reproducible** - same result every time
-- ✅ **Team-ready** - anyone can deploy with same commands
-- ✅ **Infrastructure as Code** - version controlled Bicep templates
-- ✅ **Built-in monitoring** - Application Insights configured automatically
+### 📊 Aja- ja vigade vähendamine
 
-### 📊 Time & Error Reduction
+| Mõõdik | Käsitsi juurutamine | AZD juurutamine | Paranemine |
+|:-------|:--------------------|:----------------|:-----------|
+| **Käsud** | >15 | 5 | 67% vähem |
+| **Aeg** | 30–45 min | 10–15 min | 60% kiirem |
+| **Vigade määr** | ~40% | <5% | 88% vähendamine |
+| **Järjepidevus** | Madal (käsitsi) | 100% (automatiseeritud) | Täiuslik |
+| **Tiimi sisseelamine** | 2–4 tundi | 30 minutit | 75% kiirem |
+| **Tagasipöördumise aeg** | 30+ minutit (käsitsi) | 2 minutit (automatiseeritud) | 93% kiirem |
 
-| Metric | Manual Deployment | AZD Deployment | Improvement |
-|:-------|:------------------|:---------------|:------------|
-| **Commands** | 15+ | 5 | 67% fewer |
-| **Time** | 30-45 min | 10-15 min | 60% faster |
-| **Error Rate** | ~40% | <5% | 88% reduction |
-| **Consistency** | Low (manual) | 100% (automated) | Perfect |
-| **Team Onboarding** | 2-4 hours | 30 minutes | 75% faster |
-| **Rollback Time** | 30+ min (manual) | 2 min (automated) | 93% faster |
+## Peamised kontseptsioonid
 
-## Core Concepts
+### Mallid  
+Mallid on azd alus. Need sisaldavad:  
+- **Rakenduse kood** - teie lähtekood ja sõltuvused  
+- **Infrastruktuuri määratlused** - Azure’i ressursid Bicepi või Terraformi kaudu  
+- **Seadistusfailid** - sätted ja keskkonnamuutujad  
+- **Juurutusskriptid** - automatiseeritud juurutamise töövood  
 
-### Templates
-Templates are the foundation of azd. They contain:
-- **Application code** - Your source code and dependencies
-- **Infrastructure definitions** - Azure resources defined in Bicep or Terraform
-- **Configuration files** - Settings and environment variables
-- **Deployment scripts** - Automated deployment workflows
+### Keskkonnad  
+Keskkonnad tähistavad erinevaid juurutamise sihtkohti:  
+- **Arendus** - testimiseks ja arenduseks  
+- **Staging** - eeltootmiskeskkond  
+- **Tootmine** - reaalne live keskkond  
 
-### Environments
-Environments represent different deployment targets:
-- **Development** - For testing and development
-- **Staging** - Pre-production environment
-- **Production** - Live production environment
+Igal keskkonnal on oma:  
+- Azure’i ressursigrupp  
+- Konfiguratsiooniseaded  
+- Juurutuse olek  
 
-Each environment maintains its own:
-- Azure resource group
-- Configuration settings
-- Deployment state
+### Teenused  
+Teenused on teie rakenduse ehituskivid:  
+- **Frontend** - veebirakendused, SPA-d  
+- **Backend** - API-d, mikroteenused  
+- **Andmebaas** - andmesalvestuse lahendused  
+- **Salvestus** - failide ja blobide salvestus  
 
-### Services
-Services are the building blocks of your application:
-- **Frontend** - Web applications, SPAs
-- **Backend** - APIs, microservices
-- **Database** - Data storage solutions
-- **Storage** - File and blob storage
+## Peamised funktsioonid
 
-## Key Features
-
-### 1. Template-Driven Development
+### 1. Mallipõhine arendus  
 ```bash
-# Sirvi saadaolevaid malle
+# Sirvige saadaolevaid malle
 azd template list
 
-# Initsialiseeri mallist
+# Algata mallist
 azd init --template <template-name>
 ```
+  
+### 2. Infrastructure as Code  
+- **Bicep** - Azure’i domeenispetsiifiline keel  
+- **Terraform** - Hübriidpilve infrastruktuuri tööriist  
+- **ARM Mallid** - Azure Resource Manager mallid  
 
-### 2. Infrastructure as Code
-- **Bicep** - Azure's domain-specific language
-- **Terraform** - Multi-cloud infrastructure tool
-- **ARM Templates** - Azure Resource Manager templates
-
-### 3. Integrated Workflows
+### 3. Integreeritud töövood  
 ```bash
 # Täielik juurutamise töövoog
-azd up            # Provision + Deploy — see on käed-vabad esmakordse seadistuse jaoks
+azd up            # Hankimine + juurutamine, see on esmakordseks seadistamiseks käed-vabad
 
-# 🧪 UUS: Vaata infrastruktuuri muudatusi enne juurutamist (OHUTU)
+# 🧪 UUS: Eelvaade infrastruktuuri muudatustest enne juurutamist (OHUTU)
 azd provision --preview    # Simuleeri infrastruktuuri juurutamist ilma muudatusi tegemata
 
-azd provision     # Loo Azure'i ressursid; kui uuendad infrastruktuuri, kasuta seda
-azd deploy        # Juuruta rakenduse kood või juuruta see uuesti pärast värskendust
-azd down          # Eemalda ressursid
+azd provision     # Loo Azure ressursid, kui uuendad infrastruktuuri, kasuta seda
+azd deploy        # Juuruta rakenduse kood või juuruta rakenduse kood uuesti pärast uuendust
+azd down          # Ressursside puhastamine
 ```
-
-#### 🛡️ Safe Infrastructure Planning with Preview
-The `azd provision --preview` command is a game-changer for safe deployments:
-- **Dry-run analysis** - Shows what will be created, modified, or deleted
-- **Zero risk** - No actual changes are made to your Azure environment
-- **Team collaboration** - Share preview results before deployment
-- **Cost estimation** - Understand resource costs before commitment
+  
+#### 🛡️ Turvaline infrastruktuuri planeerimine eelvaatega  
+Käsk `azd provision --preview` on mängumuutja turvalistel juurutustel:  
+- **Eelläbivaatamine** - näitab, mida luuakse, muudetakse või kustutatakse  
+- **Nullrisk** - tegelikke muudatusi Azure’is ei toimu  
+- **Tiimi koostöö** - jagage eelvaadet enne juurutamist  
+- **Kulu hinnang** - mõistke ressursikulude mõju enne pühendumist  
 
 ```bash
-# Näidise eelvaate töövoog
+# Näidisvalmimuse töövoog
 azd provision --preview           # Vaata, mis muutub
-# Vaata väljundit üle, aruta meeskonnaga
-azd provision                     # Rakenda muudatused enesekindlalt
+# Vaata väljund üle, aruta meeskonnaga
+azd provision                     # Rakenda muudatused kindlalt
 ```
-
-### 📊 Visual: AZD Development Workflow
+  
+### 📊 Visuaal: AZD arenduse töövoog  
 
 ```mermaid
 graph LR
-    A[azd init] -->|Initsialiseeri projekt| B[azd auth login]
-    B -->|Autenteeri| C[azd env new]
-    C -->|Loo keskkond| D{Esimene juurutus?}
+    A[azd init] -->|Algatage projekt| B[azd auth login]
+    B -->|Autentige| C[azd env new]
+    C -->|Loo keskkond| D{Esimene deploy?}
     D -->|Jah| E[azd up]
     D -->|Ei| F[azd provision --preview]
-    F -->|Kontrolli muudatusi| G[azd provision]
-    E -->|Provisionib ja juurutab| H[Ressursid töötavad]
+    F -->|Vaadake muudatusi| G[azd provision]
+    E -->|Provisionib & deployib| H[Ressursid töötavad]
     G -->|Uuendab infrastruktuuri| H
-    H -->|Jälgi| I[azd monitor]
+    H -->|Jälgimine| I[azd monitor]
     I -->|Tee koodimuudatusi| J[azd deploy]
-    J -->|Juuruta ainult kood| H
-    H -->|Puhasta| K[azd down]
+    J -->|Deploy ainult kood| H
+    H -->|Koristus| K[azd down]
     
     style A fill:#e1f5fe
     style E fill:#c8e6c9
     style F fill:#fff9c4
     style H fill:#c5e1a5
     style K fill:#ffcdd2
-```
-**Workflow Explanation:**
-1. **Init** - Start with template or new project
-2. **Auth** - Authenticate with Azure
-3. **Environment** - Create isolated deployment environment
-4. **Preview** - 🆕 Always preview infrastructure changes first (safe practice)
-5. **Provision** - Create/update Azure resources
-6. **Deploy** - Push your application code
-7. **Monitor** - Observe application performance
-8. **Iterate** - Make changes and redeploy code
-9. **Cleanup** - Remove resources when done
+```  
+**Töövoo selgitus:**  
+1. **Init** - alustage mallist või uuest projektist  
+2. **Auth** - autentige Azure’is  
+3. **Keskkond** - looge isoleeritud juurutuskeskkond  
+4. **Preview** - 🆕 Alati eelvaade infrastruktuuri muudatustele (turvaline tava)  
+5. **Provision** - looge või uuendage Azure’i ressursse  
+6. **Deploy** - lükake oma rakenduse kood üles  
+7. **Monitor** - jälgige rakenduse jõudlust  
+8. **Iterate** - tehke muudatusi ja juurutage uuesti  
+9. **Cleanup** - eemaldage ressursid kui valmis  
 
-### 4. Environment Management
+### 4. Keskkondade haldus  
 ```bash
 # Loo ja halda keskkondi
 azd env new <environment-name>
 azd env select <environment-name>
 azd env list
 ```
+  
+### 5. Laiendused ja AI käsud  
 
-## 📁 Project Structure
+azd kasutab laienduste süsteemi, et lisada võimalusi üle põhikäsurealiidese. See on eriti kasulik AI töökoormuste jaoks:  
 
-A typical azd project structure:
+```bash
+# Loetle saadaolevad laiendused
+azd extension list
+
+# Paigalda Foundry agentide laiendus
+azd extension install azure.ai.agents
+
+# Algata tehisintellekti agendi projekt manifestist
+azd ai agent init -m agent-manifest.yaml
+
+# Käivita MCP server tehisintellekti abiga arendamiseks (Alfa)
+azd mcp start
+```
+  
+> Laiendused on põhjalikult käsitletud [Peatükis 2: AI-keskne arendus](../chapter-02-ai-development/agents.md) ja [AZD AI CLI käskude](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) reference’is.  
+
+## 📁 Projekti struktuur  
+
+Tüüpiline azd projekti struktuur:  
 ```
 my-app/
 ├── .azd/                    # azd configuration
@@ -312,11 +347,11 @@ my-app/
 ├── azure.yaml           # azd project configuration
 └── README.md
 ```
+  
+## 🔧 Seadistusfailid  
 
-## 🔧 Configuration Files
-
-### azure.yaml
-The main project configuration file:
+### azure.yaml  
+Põhiline projekti seadistusfail:  
 ```yaml
 name: my-awesome-app
 metadata:
@@ -337,9 +372,9 @@ hooks:
     shell: pwsh
     run: echo "Preparing to provision..."
 ```
-
-### .azure/config.json
-Environment-specific configuration:
+  
+### .azure/config.json  
+Keskkonnapõhine seadistus:  
 ```json
 {
   "version": 1,
@@ -352,286 +387,283 @@ Environment-specific configuration:
   }
 }
 ```
+  
+## 🎪 Levinud töövood praktiliste harjutustega  
 
-## 🎪 Common Workflows with Hands-On Exercises
+> **💡 Õpunipp:** Järgige neid harjutusi järjekorras, et järk-järgult arendada AZD oskusi.  
 
-> **💡 Learning Tip:** Follow these exercises in order to build your AZD skills progressively.
+### 🎯 Harjutus 1: Looge oma esimene projekt  
 
-### 🎯 Exercise 1: Initialize Your First Project
+**Eesmärk:** Looge AZD projekt ja uurige selle struktuuri  
 
-**Goal:** Create an AZD project and explore its structure
-
-**Steps:**
+**Sammud:**  
 ```bash
-# Kasuta tõestatud malli
+# Kasutage tõestatud mall
 azd init --template todo-nodejs-mongo
 
-# Uuri genereeritud faile
-ls -la  # Vaata kõiki faile, sealhulgas peidetud faile
+# Uurige loodud faile
+ls -la  # Vaadake kõiki faile, sh peidetud faile
 
-# Peamised loodud failid:
-# - azure.yaml (peamine konfiguratsioon)
-# - infra/ (infrastruktuuri kood)
+# Loodud võtmefailid:
+# - azure.yaml (põhikonfiguratsioon)
+# - infra/ (taristu kood)
 # - src/ (rakenduse kood)
 ```
+  
+**✅ Edu:** Teil on azure.yaml, infra/ ja src/ kaustad  
 
-**✅ Success:** You have azure.yaml, infra/, and src/ directories
+---  
 
----
+### 🎯 Harjutus 2: Juurutage Azure’i  
 
-### 🎯 Exercise 2: Deploy to Azure
+**Eesmärk:** Lõplik juurutamine algusest lõpuni  
 
-**Goal:** Complete end-to-end deployment
-
-**Steps:**
+**Sammud:**  
 ```bash
-# 1. Autentige
+# 1. Autendi
 az login && azd auth login
 
-# 2. Looge keskkond
+# 2. Loo keskkond
 azd env new dev
 azd env set AZURE_LOCATION eastus
 
-# 3. Eelvaadake muudatusi (SOOVITATAV)
+# 3. Vaata muudatusi eelvaates (SOOVITATAV)
 azd provision --preview
 
-# 4. Rakendage kõik
+# 4. Paigalda kõik
 azd up
 
-# 5. Kontrollige juurutust
-azd show    # Vaadake oma rakenduse URL-i
+# 5. Kontrolli paigaldust
+azd show    # Vaata oma rakenduse URL-i
 ```
+  
+**Oodatav aeg:** 10–15 minutit  
+**✅ Edu:** Rakenduse URL avaneb brauseris  
 
-**Expected Time:** 10-15 minutes  
-**✅ Success:** Application URL opens in browser
+---  
 
----
+### 🎯 Harjutus 3: Mitmed keskkonnad  
 
-### 🎯 Exercise 3: Multiple Environments
+**Eesmärk:** Juurutage dev ja staging keskkondadesse  
 
-**Goal:** Deploy to dev and staging
-
-**Steps:**
+**Sammud:**  
 ```bash
-# Dev on juba olemas, loo staging
+# Dev olemas, loo staging
 azd env new staging
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Lülitu nende vahel
+# Vaheta nende vahel
 azd env list
 azd env select dev
 ```
+  
+**✅ Edu:** Kaks eraldi ressursigruppi Azure Portaalis  
 
-**✅ Success:** Two separate resource groups in Azure Portal
+---  
 
----
+### 🛡️ Puhas algus: `azd down --force --purge`  
 
-### 🛡️ Clean Slate: `azd down --force --purge`
-
-When you need to completely reset:
+Kui peate keskkonna täielikult lähtestama:  
 
 ```bash
 azd down --force --purge
 ```
+  
+**Mida see teeb:**  
+- `--force`: Ei nõua kinnitust  
+- `--purge`: Kustutab kogu lokaalse oleku ja Azure ressursid  
 
-**What it does:**
-- `--force`: No confirmation prompts
-- `--purge`: Deletes all local state and Azure resources
+**Kasutamiseks, kui:**  
+- Juurutamine ebaõnnestus poole peal  
+- Projekti vahetate  
+- Vajate uut algust  
 
-**Use when:**
-- Deployment failed mid-way
-- Switching projects
-- Need fresh start
+---  
 
----
+## 🎪 Originaal töövoo reference  
 
-## 🎪 Original Workflow Reference
-
-### Starting a New Project
+### Uue projekti käivitamine  
 ```bash
 # Meetod 1: Kasuta olemasolevat malli
 azd init --template todo-nodejs-mongo
 
-# Meetod 2: Alusta algusest
+# Meetod 2: Alusta nullist
 azd init
 
-# Meetod 3: Kasuta praegust kataloogi
+# Meetod 3: Kasuta praegust kausta
 azd init .
 ```
-
-### Development Cycle
+  
+### Arendustsükkel  
 ```bash
-# Seadista arenduskeskkond
+# Arenduskeskkonna seadistamine
 azd auth login
 azd env new dev
 azd env select dev
 
-# Juuruta kõik
+# Kõige juurutamine
 azd up
 
 # Tee muudatusi ja juuruta uuesti
 azd deploy
 
 # Puhasta pärast lõpetamist
-azd down --force --purge # käsk Azure Developer CLI-s on teie keskkonna jaoks **täielik lähtestus** — eriti kasulik, kui te tõrkeotsingul tegelete ebaõnnestunud juurutustega, puhastate hülgatud ressursse või valmistute uueks juurutamiseks.
+azd down --force --purge # käsk Azure Developer CLI-s on sinu keskkonna **tõsine lähtestamine**—eriti kasulik, kui sa lahendad ebaõnnestunud juurutusi, puhastad hüljatud ressursse või valmistud uueks juurutamiseks.
 ```
-
-## Understanding `azd down --force --purge`
-The `azd down --force --purge` command is a powerful way to completely tear down your azd environment and all associated resources. Here's a breakdown of what each flag does:
+  
+## `azd down --force --purge` mõistmine  
+Käsk `azd down --force --purge` on võimas viis oma azd keskkonna ja kõigi seotud ressursside täielikuks eemaldamiseks. Siin on selgitus, mida iga lipp teeb:  
 ```
 --force
 ```
-- Skips confirmation prompts.
-- Useful for automation or scripting where manual input isn’t feasible.
-- Ensures the teardown proceeds without interruption, even if the CLI detects inconsistencies.
+- Jätab vahele kinnitusküsimused.  
+- Kasulik automatiseerimise või skriptimise puhul, kus käsitsi sisend pole võimalik.  
+- Tagab, et sulgemine kulgeb katkestusteta, isegi kui CLI tuvastab ebakõlasid.  
 
 ```
 --purge
 ```
-Deletes **all associated metadata**, including:
-Environment state
-Local `.azure` folder
-Cached deployment info
-Prevents azd from "remembering" previous deployments, which can cause issues like mismatched resource groups or stale registry references.
+Kustutab **kõik seotud metaandmed**, sh:  
+Keskkonna oleku  
+Lokaalne `.azure` kaust  
+Vahemällu salvestatud juurutuse info  
+Tõkestab azd-l eelnevate juurutuste "meelespidamise", mis võib põhjustada probleeme nagu ebasobivad ressursigrupid või aegunud registriviited.  
 
+### Miks kasutada mõlemat?  
+Kui olete `azd up`-ga takerdunud jätkuva oleku või osalise juurutusega, tagab see kombinatsioon **puhaste lehtede alguse**.  
 
-### Why use both?
-When you've hit a wall with `azd up` due to lingering state or partial deployments, this combo ensures a **clean slate**.
+See on eriti kasulik pärast käsitsi kustutamist Azure portaalis või mallide, keskkondade või ressursigruppide nimetustestide vahetamisel.  
 
-It’s especially helpful after manual resource deletions in the Azure portal or when switching templates, environments, or resource group naming conventions.
-
-
-### Managing Multiple Environments
+### Mitme keskkonna haldamine  
 ```bash
-# Loo staging-keskkond
+# Loo staging keskkond
 azd env new staging
 azd env select staging
 azd up
 
-# Lülitu tagasi arenduskeskkonda
+# Vaheta tagasi arendusrežiimi
 azd env select dev
 
 # Võrdle keskkondi
 azd env list
 ```
+  
+## 🔐 Autentimine ja volitused  
 
-## 🔐 Authentication and Credentials
+Autentimise mõistmine on edukate azd juurutuste jaoks kriitiline. Azure kasutab mitut autentimismeetodit ja azd kasutab samu volituste ahelaid, mida ka teised Azure tööriistad.  
 
-Understanding authentication is crucial for successful azd deployments. Azure uses multiple authentication methods, and azd leverages the same credential chain used by other Azure tools.
+### Azure CLI autentimine (`az login`)  
 
-### Azure CLI Authentication (`az login`)
-
-Before using azd, you need to authenticate with Azure. The most common method is using Azure CLI:
+Enne azd kasutamist peate Azure’is autentima. Kõige levinum meetod on Azure CLI kasutamine:  
 
 ```bash
 # Interaktiivne sisselogimine (avab brauseri)
 az login
 
-# Sisselogimine konkreetse üürniku kaudu
+# Logi sisse konkreetse üürnikuna
 az login --tenant <tenant-id>
 
-# Sisselogimine teenuse esindajana
+# Logi sisse teenuseteenuse kontoga
 az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
 
-# Kontrolli praegust sisselogimisolekut
+# Kontrolli praegust sisselogimise olekut
 az account show
 
 # Loetle saadaolevad tellimused
 az account list --output table
 
-# Määra vaikimisi tellimus
+# Sea vaikimisi tellimus
 az account set --subscription <subscription-id>
 ```
+  
+### Autentimise voog  
+1. **Interaktiivne sisselogimine**: Avab brauseri vaikimisi autentimiseks  
+2. **Seadmekoodi voog**: Keskkondade jaoks, kus puudub brauseri juurdepääs  
+3. **Teenuse põhiüksus (Service Principal)**: Automatiseerimise ja CI/CD stsenaariumide jaoks  
+4. **Haldusidentiteet**: Azure’is hostitud rakenduste jaoks  
 
-### Authentication Flow
-1. **Interactive Login**: Opens your default browser for authentication
-2. **Device Code Flow**: For environments without browser access
-3. **Service Principal**: For automation and CI/CD scenarios
-4. **Managed Identity**: For Azure-hosted applications
+### DefaultAzureCredential kett  
+`DefaultAzureCredential` on volitustüüp, mis pakub lihtsustatud autentimiskogemust, püüdes automaatselt mitmeid volituste allikaid kindlas järjekorras:  
 
-### DefaultAzureCredential Chain
-
-`DefaultAzureCredential` is a credential type that provides a simplified authentication experience by automatically trying multiple credential sources in a specific order:
-
-#### Credential Chain Order
+#### Volituste keti järjestus  
 ```mermaid
 graph TD
-    A[Vaikimisi Azure tuvastusandmed] --> B[Keskkonnamuutujad]
+    A[DefaultAzureCredential] --> B[Keskkonnamuutujad]
     B --> C[Töökoorma identiteet]
-    C --> D[Haldatud identiteet]
+    C --> D[Hallatud identiteet]
     D --> E[Visual Studio]
     E --> F[Visual Studio Code]
     F --> G[Azure CLI]
     G --> H[Azure PowerShell]
     H --> I[Interaktiivne brauser]
-```
-#### 1. Environment Variables
+```  
+#### 1. Keskkonnamuutujad  
 ```bash
-# Määra keskkonnamuutujad teenusekonto jaoks
+# Määra teenuse põhisekretäri keskkonnamuutujad
 export AZURE_CLIENT_ID="<app-id>"
 export AZURE_CLIENT_SECRET="<password>"
 export AZURE_TENANT_ID="<tenant-id>"
 ```
+  
+#### 2. Töökoormuse identiteet (Kubernetes/GitHub Actions)  
+Automaatne kasutus:  
+- Azure Kubernetes Service (AKS) töökoormuse identiteediga  
+- GitHub Actions OIDC föderatsiooniga  
+- Muud födereeritud identiteedi stsenaariumid  
 
-#### 2. Workload Identity (Kubernetes/GitHub Actions)
-Used automatically in:
-- Azure Kubernetes Service (AKS) with Workload Identity
-- GitHub Actions with OIDC federation
-- Other federated identity scenarios
-
-#### 3. Managed Identity
-For Azure resources like:
-- Virtual Machines
-- App Service
-- Azure Functions
-- Container Instances
+#### 3. Haldusidentiteet  
+Azure'i ressursside jaoks nagu:  
+- Virtuaalmasinad  
+- App Service  
+- Azure Functions  
+- Container Instances  
 
 ```bash
-# Kontrolli, kas töötab Azure'i ressursil, millel on hallatud identiteet
+# Kontrolli, kas töötab Azure'i ressursil hallatud identiteediga
 az account show --query "user.type" --output tsv
 # Tagastab: "servicePrincipal", kui kasutatakse hallatud identiteeti
 ```
+  
+#### 4. Arendustööriistade integratsioon  
+- **Visual Studio**: Kasutab automaatselt sisse logitud kontot  
+- **VS Code**: Kasutab Azure Account laienduse volitusi  
+- **Azure CLI**: Kasutab `az login` volitusi (kohaliku arenduse kõige tavalisem)  
 
-#### 4. Developer Tools Integration
-- **Visual Studio**: Automatically uses signed-in account
-- **VS Code**: Uses Azure Account extension credentials
-- **Azure CLI**: Uses `az login` credentials (most common for local development)
-
-### AZD Authentication Setup
+### AZD autentimise seadistamine  
 
 ```bash
-# Meetod 1: Kasutage Azure CLI-d (soovitatav arendamiseks)
+# Meetod 1: Kasuta Azure CLI-d (Soovitatav arendamiseks)
 az login
-azd auth login  # Kasutab olemasolevaid Azure CLI volitusi
+azd auth login  # Kasutab olemasolevaid Azure CLI mandaate
 
-# Meetod 2: Otsene azd-autentimine
-azd auth login --use-device-code  # Graafilise kasutajaliideseta keskkondade jaoks
+# Meetod 2: Otsene azd autentimine
+azd auth login --use-device-code  # Peatajuvates keskkondades
 
-# Meetod 3: Kontrollige autentimise olekut
+# Meetod 3: Kontrolli autentimise olekut
 azd auth login --check-status
 
-# Meetod 4: Logige välja ja autentige uuesti
+# Meetod 4: Logi välja ja autentitu uuesti
 azd auth logout
 azd auth login
 ```
+  
+### Autentimise head tavad  
 
-### Authentication Best Practices
-
-#### For Local Development
+#### Kohaliku arenduse jaoks  
 ```bash
-# 1. Logi sisse Azure CLI abil
+# 1. Logi sisse Azure CLI-ga
 az login
 
-# 2. Kontrolli, et kasutatav tellimus on õige
+# 2. Kontrolli õiget tellimust
 az account show
 az account set --subscription "Your Subscription Name"
 
-# 3. Kasuta azd olemasolevate autentimisandmetega
+# 3. Kasuta azd olemasolevate volitustega
 azd auth login
 ```
-
-#### For CI/CD Pipelines
+  
+#### CI/CD torujuhtmete jaoks  
 ```yaml
 # GitHub Actions example
 - name: Azure Login
@@ -646,173 +678,172 @@ azd auth login
                     --tenant-id ${{ secrets.AZURE_TENANT_ID }}
     azd up --no-prompt
 ```
+  
+#### Tootmiskeskkondades  
+- Kasutage **Haldusidentiteeti** kui töötab Azure’i ressurssidel  
+- Kasutage **Teenuse põhiüksust** automatiseerimise stsenaariumides  
+- Vältige volituste salvestamist koodi või konfiguratsiooni  
+- Kasutage **Azure Key Vault’i** tundliku konfiguratsiooni jaoks  
 
-#### For Production Environments
-- Use **Managed Identity** when running on Azure resources
-- Use **Service Principal** for automation scenarios
-- Avoid storing credentials in code or configuration files
-- Use **Azure Key Vault** for sensitive configuration
+### Levinud autentimise probleemid ja lahendused  
 
-### Common Authentication Issues and Solutions
-
-#### Issue: "No subscription found"
+#### Probleem: "Konto puudub"  
 ```bash
 # Lahendus: Määra vaikimisi tellimus
 az account list --output table
 az account set --subscription "<subscription-id>"
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 ```
-
-#### Issue: "Insufficient permissions"
+  
+#### Probleem: "Piiratud õigused"  
 ```bash
-# Lahendus: kontrolli ja määra vajalikud rollid
+# Lahendus: Kontrolli ja määra vajalikud rollid
 az role assignment list --assignee $(az account show --query user.name --output tsv)
 
-# Tavalised vajalikud rollid:
-# - Contributor (ressursside haldamiseks)
-# - User Access Administrator (rollide määramiseks)
+# Üldised vajalikud rollid:
+# - Kaastööline (ressursside haldamiseks)
+# - Kasutaja ligipääsu administraator (rolli määramiseks)
 ```
-
-#### Issue: "Token expired"
+  
+#### Probleem: "Token aegunud"  
 ```bash
-# Lahendus: Logi uuesti sisse
+# Lahendus: Autentige uuesti
 az logout
 az login
 azd auth logout
 azd auth login
 ```
+  
+### Autentimine erinevates stsenaariumides  
 
-### Authentication in Different Scenarios
-
-#### Local Development
+#### Kohalik arendus  
 ```bash
-# Isikliku arengu konto
+# Personal development account
 az login
 azd auth login
 ```
-
-#### Team Development
+  
+#### Tiimi arendus  
 ```bash
-# Kasuta organisatsiooni jaoks konkreetset üürnikku.
+# Kasutage organisatsiooni jaoks konkreetset üürnikku
 az login --tenant contoso.onmicrosoft.com
 azd auth login
 ```
-
-#### Multi-tenant Scenarios
+  
+#### Mitme üürniku stsenaariumid  
 ```bash
-# Lülitu üürnike vahel
+# Vaheta üürnike vahel
 az login --tenant tenant1.onmicrosoft.com
-# Juuruta üürnikule 1
+# Paigalda üürnikule 1
 azd up
 
 az login --tenant tenant2.onmicrosoft.com  
-# Juuruta üürnikule 2
+# Paigalda üürnikule 2
 azd up
 ```
+  
+### Turvaküsimused
+1. **Tunnuste salvestamine**: Ära kunagi salvesta tunnuseid lähtekoodi
+2. **Piirangu kehtestamine**: Kasuta teenusprincipaalide puhul vähima õiguse põhimõtet
+3. **Tokeni pööramine**: Pööra teenusprincipaali saladusi regulaarselt
+4. **Auditijälg**: Jälgi autentimist ja juurutustegevusi
+5. **Võrgu turvalisus**: Kasuta võimalusel privaatseid lõpp-punkte
 
-### Security Considerations
-
-1. **Credential Storage**: Never store credentials in source code
-2. **Scope Limitation**: Use least-privilege principle for service principals
-3. **Token Rotation**: Regularly rotate service principal secrets
-4. **Audit Trail**: Monitor authentication and deployment activities
-5. **Network Security**: Use private endpoints when possible
-
-### Troubleshooting Authentication
+### Autentimise tõrkeotsing
 
 ```bash
-# Autentimisprobleemide tõrkeotsing
+# Tõrkeotsing autentimisprobleemide jaoks
 azd auth login --check-status
 az account show
 az account get-access-token
 
-# Üldised diagnostikakäsud
-whoami                          # Praeguse kasutaja kontekst
-az ad signed-in-user show      # Azure AD kasutaja üksikasjad
-az group list                  # Ressursi juurdepääsu testimine
+# Levinud diagnostikakäsud
+whoami                          # Praegune kasutaja kontekst
+az ad signed-in-user show      # Azure AD kasutaja andmed
+az group list                  # Testi ressursi juurdepääsu
 ```
 
-## Understanding `azd down --force --purge`
+## Mõistmine `azd down --force --purge`
 
-### Discovery
+### Avastamine
 ```bash
 azd template list              # Sirvi malle
-azd template show <template>   # Malli üksikasjad
-azd init --help               # Initsialiseerimise valikud
+azd template show <template>   # Malleteabe
+azd init --help               # Initsialiseerimisvalikud
 ```
 
-### Project Management
+### Projekti haldamine
 ```bash
 azd show                     # Projekti ülevaade
 azd env show                 # Praegune keskkond
-azd config list             # Konfiguratsiooniseaded
+azd config list             # Konfiguratsiooni seaded
 ```
 
-### Monitoring
+### Jälgimine
 ```bash
-azd monitor                  # Ava Azure'i portaali jälgimine
+azd monitor                  # Ava Azure portaali jälgimine
 azd monitor --logs           # Vaata rakenduse logisid
 azd monitor --live           # Vaata reaalajas mõõdikuid
-azd pipeline config          # Seadista CI/CD
+azd pipeline config          # Sea üles CI/CD
 ```
 
-## Best Practices
+## Parimad tavad
 
-### 1. Use Meaningful Names
+### 1. Kasuta tähendusrikkaid nimesid
 ```bash
 # Hea
 azd env new production-east
 azd init --template web-app-secure
 
-# Väldi
+# Vältima
 azd env new env1
 azd init --template template1
 ```
 
-### 2. Leverage Templates
-- Start with existing templates
-- Customize for your needs
-- Create reusable templates for your organization
+### 2. Kasuta malle
+- Alusta olemasolevate mallide kasutamisest
+- Kohanda vastavalt oma vajadustele
+- Loo korduvkasutatavad mallid oma organisatsiooni jaoks
 
-### 3. Environment Isolation
-- Use separate environments for dev/staging/prod
-- Never deploy directly to production from local machine
-- Use CI/CD pipelines for production deployments
+### 3. Keskkonna isoleerimine
+- Kasuta eraldi keskkondi arendus-/staging-/tootmiseks
+- Ära juuruta otse tootmisse kohaliku masina pealt
+- Kasuta CI/CD torujuhtmeid tootmise juurutamiseks
 
-### 4. Configuration Management
-- Use environment variables for sensitive data
-- Keep configuration in version control
-- Document environment-specific settings
+### 4. Konfiguratsiooni haldamine
+- Kasuta keskkonnamuutujaid tundliku info jaoks
+- Hoia konfiguratsioon versioonihalduses
+- Dokumenteeri keskkonnaspetsiifilised seaded
 
-## Learning Progression
+## Õppimise areng
 
-### Beginner (Week 1-2)
-1. Install azd and authenticate
-2. Deploy a simple template
-3. Understand project structure
-4. Learn basic commands (up, down, deploy)
+### Algaja (1.-2. nädal)
+1. Paigalda azd ja autentitu
+2. Juuruta lihtne mall
+3. Mõista projekti ülesehitust
+4. Õpi põhilisi käske (up, down, deploy)
 
-### Intermediate (Week 3-4)
-1. Customize templates
-2. Manage multiple environments
-3. Understand infrastructure code
-4. Set up CI/CD pipelines
+### Kesktase (3.-4. nädal)
+1. Kohanda malle
+2. Halda mitut keskkonda
+3. Mõista infrastruktuuri koodi
+4. Sea üles CI/CD torujuhtmed
 
-### Advanced (Week 5+)
-1. Create custom templates
-2. Advanced infrastructure patterns
-3. Multi-region deployments
-4. Enterprise-grade configurations
+### Edasijõudnud (5. nädal ja edasi)
+1. Loo kohandatud malle
+2. Täiustatud infrastruktuuri mustrid
+3. Mitmeregioonilised juurutused
+4. Ettevõtte taseme konfiguratsioonid
 
-## Next Steps
+## Järgmised sammud
 
-**📖 Continue Chapter 1 Learning:**
-- [Installimine ja seadistamine](installation.md) - Paigalda ja seadista azd
-- [Teie esimene projekt](first-project.md) - Täielik praktiline juhend
-- [Konfiguratsioonijuhend](configuration.md) - Täpsemad konfiguratsioonivõimalused
+**📖 Jätka peatükiga 1:**
+- [Paigaldus ja seadistamine](installation.md) - Paigalda ja seadista azd
+- [Sinu esimene projekt](first-project.md) - Lõpeta praktiline õpetus
+- [Konfiguratsioonijuhend](configuration.md) - Täiustatud konfiguratsiooni võimalused
 
 **🎯 Valmis järgmise peatüki jaoks?**
-- [Peatükk 2: AI-esmane arendus](../chapter-02-ai-development/microsoft-foundry-integration.md) - Alusta AI-rakenduste loomist
+- [Peatükk 2: AI-keskne arendus](../chapter-02-ai-development/microsoft-foundry-integration.md) - Alusta AI rakenduste loomist
 
 ## Lisamaterjalid
 
@@ -826,81 +857,81 @@ azd init --template template1
 
 ### Üldised küsimused
 
-**Q: Mis vahe on AZD-l ja Azure CLI-l?**
+**K: Mis vahe on AZD-l ja Azure CLI-l?**
 
-A: Azure CLI (`az`) on mõeldud üksikute Azure'i ressursside haldamiseks. AZD (`azd`) on mõeldud kogu rakenduste haldamiseks:
+V: Azure CLI (`az`) haldab üksikuid Azure ressursse. AZD (`azd`) haldab terviklikke rakendusi:
 
 ```bash
-# Azure CLI - madala taseme ressursside haldus
+# Azure CLI - madala taseme ressursside haldamine
 az webapp create --name myapp --resource-group rg
 az sql server create --name myserver --resource-group rg
-# ...vajatakse veel palju käske
+# ...vajalik veel palju käske
 
-# AZD - rakenduse taseme haldus
-azd up  # Juurutab kogu rakenduse koos kõigi ressurssidega
+# AZD - rakenduse taseme haldamine
+azd up  # Paigaldab kogu rakenduse koos kõigi ressurssidega
 ```
 
-**Mõtle sellele nii:**
-- `az` = Töötamine üksikute Lego klotsidega
-- `azd` = Töötamine tervete Lego komplektidega
+**Mõtle nii:**
+- `az` = Üksikute Lego klotsidega töötamine
+- `azd` = Täielike Lego komplektide kasutamine
 
 ---
 
-**Q: Kas ma pean AZD kasutamiseks teadma Bicepit või Terraformi?**
+**K: Kas pean AZD kasutamiseks teadma Bicepit või Terraformi?**
 
-A: Ei! Alusta mallidest:
+V: Ei! Alusta mallide kasutamisest:
 ```bash
-# Kasutage olemasolevat malli - IaC-i teadmisi pole vaja
+# Kasutage olemasolevat malli - IaC teadmisi ei ole vaja
 azd init --template todo-nodejs-mongo
 azd up
 ```
 
-Hiljem võid Bicepit õppida infrastruktuuri kohandamiseks. Mallid pakuvad töökorras näiteid, millest õppida.
+Hiljem võid õppida Bicepit infrastruktuuri kohandamiseks. Mallid pakuvad töövalmis näiteid, millest õppida.
 
 ---
 
-**Q: Kui palju maksab AZD mallide käitamine?**
+**K: Kui palju maksab AZD mallide jooksutamine?**
 
-A: Kulud sõltuvad mallist. Enamik arenduse malle maksab $50-150 kuus:
+V: Kulu sõltub mallist. Enamik arenduse malli maksab 50-150 dollarit kuus:
 
 ```bash
-# Kulude eelvaade enne juurutamist
+# Vaata kulusid enne kasutuselevõttu
 azd provision --preview
 
-# Puhasta alati, kui seda ei kasutata
+# Alati puhasta, kui ei kasutata
 azd down --force --purge  # Eemaldab kõik ressursid
 ```
 
-**Pro-nõuanne:** Kasuta tasuta tasemeid, kui need on saadaval:
+**Nõuanne:** Kasuta tasuta tasemeid, kus võimalik:
 - App Service: F1 (tasuta) tase
-- Azure OpenAI: 50,000 tokenit/kuu tasuta
+- Microsoft Foundry mudelid: Azure OpenAI 50,000 tokenit kuus tasuta
 - Cosmos DB: 1000 RU/s tasuta tase
 
 ---
 
-**Q: Kas ma saan AZD-d kasutada olemasolevate Azure'i ressurssidega?**
+**K: Kas saan AZD kasutada olemasolevate Azure ressurssidega?**
 
-A: Jah, kuid on lihtsam alustada puhtalt. AZD töötab kõige paremini, kui see haldab kogu elutsüklit. Olemasolevate ressursside puhul:
+V: Jah, kuid lihtsam on alustada puhtalt lehelt. AZD töötab kõige paremini, kui haldab kogu elutsüklit. Olemasolevate ressursside puhul:
 
 ```bash
 # Valik 1: Impordi olemasolevad ressursid (edasijõudnutele)
 azd init
 # Seejärel muuda infra/ nii, et see viitaks olemasolevatele ressurssidele
 
-# Valik 2: Alusta nullist (soovitatav)
+# Valik 2: Alusta uuesti (soovitatav)
 azd init --template matching-your-stack
-azd up  # Luuakse uus keskkond
+azd up  # Loob uue keskkonna
 ```
 
 ---
 
-**Q: Kuidas jagada oma projekti meeskonnakaaslastega?**
+**K: Kuidas jagada oma projekti meeskonnakaaslastega?**
 
-A: Pane AZD projekt Git'i (AGA MITTE `.azure` kausta):
+V: Pane AZD projekt Git-i (aga ÄRA lisa .azure kausta):
 
 ```bash
-# Juba vaikimisi .gitignore'is
-.azure/        # Sisaldab salasõnu ja keskkonnaandmeid
+# Juba vaikimisi .gitignore failis
+.azure/        # Sisaldab saladusi ja keskkonna andmeid
 *.env          # Keskkonnamuutujad
 
 # Meeskonnaliikmed siis:
@@ -910,27 +941,27 @@ azd env new <their-name>-dev
 azd up
 ```
 
-Kõik saavad identsed infrastruktuurid samadest mallidest.
+Kõik saavad samast mallist loodud identsed infrastruktuurid.
 
 ---
 
 ### Tõrkeotsingu küsimused
 
-**Q: "azd up" ebaõnnestus poole peal. Mida teha?**
+**K: "azd up" nurjus poole peale. Mida teha?**
 
-A: Kontrolli viga, paranda see ja proovi uuesti:
+V: Kontrolli viga, paranda ja proovi uuesti:
 
 ```bash
-# Kuva üksikasjalikke logisid
+# Vaata üksikasjalikke logisid
 azd show
 
-# Levinumad lahendused:
+# Levinud parandused:
 
-# 1. Kui limiit on ületatud:
+# 1. Kui kvant leidub:
 azd env set AZURE_LOCATION "westus2"  # Proovi teist piirkonda
 
-# 2. Kui ressursi nime konflikt tekib:
-azd down --force --purge  # Alusta nullist
+# 2. Kui ressursi nime konflikt:
+azd down --force --purge  # Puhas leht
 azd up  # Proovi uuesti
 
 # 3. Kui autentimine on aegunud:
@@ -939,7 +970,7 @@ azd auth login
 azd up
 ```
 
-**Levinum probleem:** Valitud on vale Azure'i tellimus
+**Sagedaseim probleem:** Valitud vale Azure tellimus
 ```bash
 az account list --output table
 az account set --subscription "<correct-subscription>"
@@ -947,41 +978,41 @@ az account set --subscription "<correct-subscription>"
 
 ---
 
-**Q: Kuidas ma saan juurutada ainult koodimuudatusi ilma infrastruktuuri uuesti provisioneerimata?**
+**K: Kuidas juurutada ainult koodimuudatusi, ilma infrastruktuuri uuesti üles seadmata?**
 
-A: Kasuta `azd deploy` asemel `azd up`:
+V: Kasuta `azd deploy` asemel `azd up`:
 
 ```bash
-azd up          # Esimene kord: provisioneerimine + juurutamine (aeglane)
+azd up          # Esimene kord: tarkvara ettevalmistamine + juurutamine (aeglane)
 
-# Tee koodimuudatusi...
+# Tee koodi muudatusi...
 
-azd deploy      # Järgnevatel kordadel: ainult juurutamine (kiire)
+azd deploy      # Järgnevad korrad: ainult juurutamine (kiire)
 ```
 
 Kiiruse võrdlus:
-- `azd up`: 10-15 minutit (provisioneerib infrastruktuuri)
+- `azd up`: 10-15 minutit (infrastruktuuri juurutamine)
 - `azd deploy`: 2-5 minutit (ainult kood)
 
 ---
 
-**Q: Kas ma saan infrastruktuuri malle kohandada?**
+**K: Kas saan infrastruktuuri malle kohandada?**
 
-A: Jah! Muuda Bicep-faile kaustas `infra/`:
+V: Jah! Muuda `infra/` kataloogis olevaid Bicep-faile:
 
 ```bash
 # Pärast azd init
 cd infra/
-code main.bicep  # Redigeeri VS Code'is
+code main.bicep  # Muuda VS Code'is
 
-# Muudatuste eelvaade
+# Eelvaate muudatused
 azd provision --preview
 
 # Rakenda muudatused
 azd provision
 ```
 
-**Nipp:** Alusta väikselt - muuda esmalt SKU-sid:
+**Nõuanne:** Alusta väikestest muutustest - muuda esmalt SKU-sid:
 ```bicep
 // infra/main.bicep
 sku: {
@@ -991,51 +1022,51 @@ sku: {
 
 ---
 
-**Q: Kuidas ma kustutan kõik, mida AZD lõi?**
+**K: Kuidas kustutada kõik, mida AZD lõi?**
 
-A: Üks käsk kustutab kõik ressursid:
+V: Üks käsk eemaldab kõik ressursid:
 
 ```bash
 azd down --force --purge
 
 # See kustutab:
 # - Kõik Azure'i ressursid
-# - Ressursigrupp
-# - Kohaliku keskkonna olek
-# - Vahemällu salvestatud juurutamise andmed
+# - Ressursside grupi
+# - Kohaliku keskkonna oleku
+# - Vahemällu salvestatud juurutusandmed
 ```
 
-**Käivita see alati, kui:**
-- Malli testimine lõpetatud
-- Üleminek teisele projektile
-- Tahad alustada uuesti
+**Kasuta alati kui:**
+- Oled malli testimise lõpetanud
+- Vahetad projekti
+- Tahad alustada puhtalt lehelt
 
-**Kulukokkuhoid:** Kasutamata ressursside kustutamine = $0
+**Kulu kokkuhoid:** Kasutamata ressursside kustutamine = $0 tasu
 
 ---
 
-**Q: Mis juhtub, kui ma kogemata kustutasin ressursse Azure'i portaalis?**
+**K: Mis siis, kui ma kogemata kustutasin ressursse Azure portalist?**
 
-A: AZD olek võib sünkroonist välja minna. Puhas lähtesta lähenemine:
+V: AZD seisund võib sünkroonsust kaotada. Puhasta kõike alustades:
 
 ```bash
 # 1. Eemalda kohalik olek
 azd down --force --purge
 
-# 2. Alusta puhtalt
+# 2. Alusta uuesti
 azd up
 
-# Alternatiiv: Lase AZD-il tuvastada ja parandada
-azd provision  # Loob puuduolevad ressursid
+# Alternatiiv: Luba AZD-l tuvastada ja parandada
+azd provision  # Loob puuduvad ressursid
 ```
 
 ---
 
-### Täiustatud küsimused
+### Edasijõudnud küsimused
 
-**Q: Kas ma saan AZD-d kasutada CI/CD torudes?**
+**K: Kas AZD-d saab kasutada CI/CD torujuhtmetes?**
 
-A: Jah! Näide GitHub Actions'ist:
+V: Jah! Näide GitHub Actions-ist:
 
 ```yaml
 # .github/workflows/deploy.yml
@@ -1067,31 +1098,31 @@ jobs:
 
 ---
 
-**Q: Kuidas ma käsitlen salasid ja tundlikke andmeid?**
+**K: Kuidas käsitled saladusi ja tundlikku infot?**
 
-A: AZD integreerub automaatselt Azure Key Vaultiga:
+V: AZD integreerub automaatselt Azure Key Vaultiga:
 
 ```bash
-# Saladused hoitakse Key Vaultis, mitte koodis
+# Saladused salvestatakse Key Vaulti, mitte koodi
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
 
-# AZD teeb automaatselt:
-# 1. Loob Key Vaulti
-# 2. Salvestab saladuse
-# 3. Annab rakendusele juurdepääsu hallatud identiteedi kaudu
-# 4. Süstib käituse ajal
+# AZD automaatselt:
+# 1. Loodab Key Vaulti
+# 2. Salvestab salajasõna
+# 3. Annab rakendusele juurdepääsu hallatava identiteedi kaudu
+# 4. Süstib käitamisajal
 ```
 
-**Ära kunagi lisa versioonihaldusse:**
-- `.azure/` kaust (sisaldab keskkonnaandmeid)
-- `.env` failid (kohalikud salajased andmed)
-- Connection strings
+**Ära kunagi pane versioonihaldusse:**
+- `.azure/` kaust (sisaldab keskkonna andmeid)
+- `.env` failid (kohalikud saladused)
+- Ühendusstringid
 
 ---
 
-**Q: Kas ma saan juurutada mitmesse regioonisse?**
+**K: Kas saan juurutada mitmesse regiooni?**
 
-A: Jah, loo iga regiooni jaoks eraldi keskkond:
+V: Jah, loo iga regiooni kohta eraldi keskkond:
 
 ```bash
 # Ida-USA keskkond
@@ -1104,62 +1135,62 @@ azd env new prod-westeurope
 azd env set AZURE_LOCATION westeurope
 azd up
 
-# Iga keskkond on sõltumatu
+# Iga keskkond on iseseisev
 azd env list
 ```
 
-Tõeliste mitme regiooni rakenduste jaoks kohanda Bicep-malle, et korraga juurutada mitmesse regiooni.
+Tõeliste mitmeregiooniliste rakenduste puhul kohanda Bicep malle, et korraga mitmesse regiooni juurutada.
 
 ---
 
-**Q: Kust ma saan abi, kui jään hätta?**
+**K: Kust ma saan abi, kui takerdun?**
 
 1. **AZD dokumentatsioon:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
-2. **GitHubi Issues:** https://github.com/Azure/azure-dev/issues
+2. **GitHub probleemid:** https://github.com/Azure/azure-dev/issues
 3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - #azure-developer-cli kanal
-4. **Stack Overflow:** Märgista silt `azure-developer-cli`
+4. **Stack Overflow:** Märksõna `azure-developer-cli`
 5. **See kursus:** [Tõrkeotsingu juhend](../chapter-07-troubleshooting/common-issues.md)
 
-**Pro-nõuanne:** Enne küsimist käivita:
+**Nõuanne:** Enne küsimuse esitamist käivita:
 ```bash
-azd show       # Näitab praegust olekut
-azd version    # Näitab teie versiooni
+azd show       # Kuvab praeguse oleku
+azd version    # Kuvab teie versiooni
 ```
-Lisage see teave oma küsimusse kiirema abi saamiseks.
+Lisa see info oma küsimusse kiirema abi saamiseks.
 
 ---
 
-## 🎓 Mis järgmiseks?
+## 🎓 Mis edasi?
 
-Nüüd mõistate AZD põhialuseid. Valige oma tee:
+Nüüd mõistad AZD aluseid. Vali oma tee:
 
 ### 🎯 Algajatele:
-1. **Järgmine:** [Installimine ja seadistamine](installation.md) - Paigalda AZD oma arvutisse
-2. **Siis:** [Teie esimene projekt](first-project.md) - Juuruta oma esimene rakendus
-3. **Harjuta:** Täida kõik 3 harjutust selles õppetunnis
+1. **Järgmine samm:** [Paigaldus ja seadistamine](installation.md) - Paigalda AZD oma arvutisse
+2. **Siis:** [Sinu esimene projekt](first-project.md) - Juuruta oma esimene rakendus
+3. **Harjuta:** Täida selle õppetüki kõik 3 harjutust
 
-### 🚀 AI-arendajatele:
-1. **Mine otse:** [Peatükk 2: AI-esmane arendus](../chapter-02-ai-development/microsoft-foundry-integration.md)
+### 🚀 Tehisintellekti arendajatele:
+1. **Hüppa juurde:** [Peatükk 2: AI-keskne arendus](../chapter-02-ai-development/microsoft-foundry-integration.md)
 2. **Juuruta:** Alusta käsuga `azd init --template get-started-with-ai-chat`
-3. **Õpi:** Ehita, samal ajal kui juurutad
+3. **Õpi:** Arenda ja juuruta paralleelselt
 
 ### 🏗️ Kogenud arendajatele:
-1. **Vaata üle:** [Konfiguratsioonijuhend](configuration.md) - Täpsemad seaded
-2. **Uuri:** [Infrastruktuur kui kood](../chapter-04-infrastructure/provisioning.md) - Bicep süvaülevaade
-3. **Loo:** Loo kohandatud mallid oma stacki jaoks
+1. **Vaata üle:** [Konfiguratsioonijuhend](configuration.md) - Täiustatud seaded
+2. **Uuri:** [Infra koodina](../chapter-04-infrastructure/provisioning.md) - Süvitsi Bicepi teemad
+3. **Loo:** Tee oma malle oma tehnoloogiapinule
 
 ---
 
-**Peatüki navigeerimine:**
+**Peatükkide navigeerimine:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
-- **📖 Praegune peatükk**: Peatükk 1 - Alused ja kiire algus  
+- **📖 Jooksev peatükk**: Peatükk 1 - Alused ja kiire algus  
 - **⬅️ Eelmine**: [Kursuse ülevaade](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Järgmine**: [Installimine ja seadistamine](installation.md)
-- **🚀 Järgmine peatükk**: [Peatükk 2: AI-esmane arendus](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **➡️ Järgmine**: [Paigaldus ja seadistamine](installation.md)
+- **🚀 Järgmine peatükk**: [Peatükk 2: AI-keskne arendus](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vastutusest loobumine:
-See dokument on tõlgitud tehisintellekti tõlketeenuse Co-op Translator (https://github.com/Azure/co-op-translator) abil. Kuigi me püüame tagada täpsust, palun arvestage, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Algset dokumenti selle algkeeles tuleks pidada autoriteetseks allikaks. Kriitilise teabe puhul soovitatakse professionaalset inimtõlget. Me ei vastuta ühegi arusaamatuse ega valesti tõlgendamise eest, mis tuleneb selle tõlke kasutamisest.
+**Vastutusest loobumine**:
+See dokument on tõlgitud kasutades tehisintellektil põhinevat tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüame tagada täpsust, palun arvestage, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tingitud valesti mõistmiste või tõlgenduste eest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

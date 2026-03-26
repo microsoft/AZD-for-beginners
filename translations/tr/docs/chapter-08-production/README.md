@@ -1,21 +1,21 @@
 # Bölüm 8: Üretim ve Kurumsal Desenler
 
-**📚 Kurs**: [Yeni Başlayanlar için AZD](../../README.md) | **⏱️ Süre**: 2-3 saat | **⭐ Zorluk**: İleri
+**📚 Kurs**: [AZD Yeni Başlayanlar İçin](../../README.md) | **⏱️ Süre**: 2-3 saat | **⭐ Zorluk**: İleri
 
 ---
 
 ## Genel Bakış
 
-Bu bölüm, üretim AI iş yükleri için kurumsal hazır dağıtım desenlerini, güvenlik güçlendirmesini, izlemeyi ve maliyet optimizasyonunu kapsar.
+Bu bölüm, üretim AI iş yükleri için kurumsal düzeyde dağıtım desenlerini, güvenlik sertleştirmesini, izlemeyi ve maliyet optimizasyonunu kapsar.
 
 ## Öğrenme Hedefleri
 
-Bu bölümü tamamlayarak şunları yapabileceksiniz:
+Bu bölümü tamamladığınızda şunları yapabileceksiniz:
 - Çok bölgeli dayanıklı uygulamalar dağıtmak
 - Kurumsal güvenlik desenlerini uygulamak
 - Kapsamlı izlemeyi yapılandırmak
-- Ölçeklendirmede maliyetleri optimize etmek
-- AZD ile CI/CD hatları kurmak
+- Ölçekte maliyetleri optimize etmek
+- AZD ile CI/CD boru hatları kurmak
 
 ---
 
@@ -29,8 +29,8 @@ Bu bölümü tamamlayarak şunları yapabileceksiniz:
 
 ## 🚀 Üretim Kontrol Listesi
 
-- [ ] Dayanıklılık için çok bölgeli dağıtım
-- [ ] Kimlik doğrulama için yönetilen kimlik (anahtar yok)
+- [ ] Çok bölgeli dağıtım (dayanıklılık için)
+- [ ] Yönetilen kimlik ile kimlik doğrulama (anahtar yok)
 - [ ] İzleme için Application Insights
 - [ ] Maliyet bütçeleri ve uyarılar yapılandırıldı
 - [ ] Güvenlik taraması etkinleştirildi
@@ -43,25 +43,18 @@ Bu bölümü tamamlayarak şunları yapabileceksiniz:
 
 ### Desen 1: Mikroservis AI
 
+```mermaid
+graph LR
+    Gateway[API Ağ Geçidi] --> AI[Yapay Zeka Servisi] --> Models[Microsoft Foundry Modelleri]
+    Gateway --> Auth[Kimlik Doğrulama Servisi]
+    AI --> Data[Veri Deposu]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
-
 ### Desen 2: Olay Tabanlı AI
 
+```mermaid
+graph LR
+    EventGrid[Olay Izgarası] --> Functions[Fonksiyonlar] --> Pipeline[Yapay Zeka Boru Hattı]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
 ## 🔐 Güvenlik En İyi Uygulamaları
@@ -87,10 +80,10 @@ properties: {
 
 | Strateji | Tasarruf |
 |----------|---------|
-| Sıfıra ölçekleme (Container Apps) | 60-80% |
-| Geliştirme için tüketim katmanlarını kullanmak | 50-70% |
+| Sıfıra ölçeklendirme (Container Apps) | 60-80% |
+| Geliştirme için tüketim katmanlarını kullanma | 50-70% |
 | Zamanlanmış ölçeklendirme | 30-50% |
-| Rezerve kapasite | 20-40% |
+| Ayrılmış kapasite | 20-40% |
 
 ```bash
 # Bütçe uyarıları ayarla
@@ -106,7 +99,7 @@ az consumption budget create \
 ## 📊 İzleme Kurulumu
 
 ```bash
-# Günlükleri akış halinde izle
+# Günlükleri canlı izle
 azd monitor --logs
 
 # Application Insights'ı kontrol et
@@ -123,13 +116,13 @@ az monitor metrics list --resource <resource-id>
 | Yön | Bölüm |
 |-----------|---------|
 | **Önceki** | [Bölüm 7: Sorun Giderme](../chapter-07-troubleshooting/README.md) |
-| **Kurs Tamamlandı** | [Kurs Ana Sayfası](../../README.md) |
+| **Kurs Tamamlandı** | [Kurs Ana Sayfa](../../README.md) |
 
 ---
 
 ## 📖 İlgili Kaynaklar
 
-- [AI Ajanları Rehberi](../chapter-02-ai-development/agents.md)
+- [AI Ajanları Kılavuzu](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Çok Ajanlı Çözümler](../chapter-05-multi-agent/README.md)
 - [Mikroservis Örneği](../../examples/microservices/README.md)
@@ -137,6 +130,6 @@ az monitor metrics list --resource <resource-id>
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Sorumluluk Reddi:
-Bu belge, yapay zeka çeviri servisi [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belgenin kendi dilindeki versiyonu yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanılması sonucunda ortaya çıkan herhangi bir yanlış anlama veya yanlış yorumdan sorumlu değiliz.
+**Disclaimer**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi ana dilindeki versiyonu yetkili kaynak olarak kabul edilmelidir. Önemli bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

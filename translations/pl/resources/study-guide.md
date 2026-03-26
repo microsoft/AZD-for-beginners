@@ -1,29 +1,29 @@
-# Przewodnik nauki - Kompleksowe cele edukacyjne
+# Przewodnik nauki - kompleksowe cele edukacyjne
 
-**Nawigacja po ścieżce nauki**
+**Nawigacja ścieżki nauki**
 - **📚 Strona główna kursu**: [AZD dla początkujących](../README.md)
 - **📖 Rozpocznij naukę**: [Rozdział 1: Podstawy i szybki start](../README.md#-chapter-1-foundation--quick-start)
 - **🎯 Śledzenie postępów**: [Ukończenie kursu](../README.md#-course-completion--certification)
 
 ## Wprowadzenie
 
-Ten kompleksowy przewodnik nauki dostarcza uporządkowane cele edukacyjne, kluczowe koncepcje, ćwiczenia praktyczne oraz materiały oceniające, które pomogą Ci opanować Azure Developer CLI (azd). Użyj tego przewodnika, aby śledzić swoje postępy i upewnić się, że pokryłeś wszystkie istotne tematy.
+Ten kompleksowy przewodnik nauki zapewnia uporządkowane cele edukacyjne, kluczowe koncepcje, ćwiczenia praktyczne oraz materiały do oceny, które pomogą Ci opanować Azure Developer CLI (azd). Używaj tego przewodnika, aby śledzić postępy i upewnić się, że opanowałeś wszystkie kluczowe tematy.
 
 ## Cele nauki
 
-Po ukończeniu tego przewodnika nauki będziesz:
+Po ukończeniu tego przewodnika nauczysz się:
 - Opanować wszystkie podstawowe i zaawansowane koncepcje Azure Developer CLI
-- Rozwinąć praktyczne umiejętności w zakresie wdrażania i zarządzania aplikacjami Azure
-- Zyskać pewność w rozwiązywaniu problemów i optymalizacji wdrożeń
+- Rozwinąć praktyczne umiejętności wdrażania i zarządzania aplikacjami w Azure
+- Zyskać pewność siebie w rozwiązywaniu problemów i optymalizacji wdrożeń
 - Zrozumieć praktyki wdrożeń gotowych do produkcji oraz kwestie bezpieczeństwa
 
-## Rezultaty nauki
+## Efekty nauki
 
-Po ukończeniu wszystkich sekcji tego przewodnika nauki będziesz w stanie:
-- Projektować, wdrażać i zarządzać kompletnymi architekturami aplikacji za pomocą azd
-- Wdrażać kompleksowe strategie monitorowania, bezpieczeństwa i optymalizacji kosztów
-- Samodzielnie rozwiązywać złożone problemy związane z wdrożeniami
-- Tworzyć własne szablony i wnosić wkład w społeczność azd
+Po ukończeniu wszystkich sekcji tego przewodnika będziesz potrafił:
+- Projektować, wdrażać i zarządzać kompletną architekturą aplikacji za pomocą azd
+- Wdrażać kompleksowy monitoring, bezpieczeństwo i strategie optymalizacji kosztów
+- Samodzielnie rozwiązywać złożone problemy z wdrożeniem
+- Tworzyć niestandardowe szablony i wnosić wkład do społeczności azd
 
 ## Struktura nauki w 8 rozdziałach
 
@@ -33,22 +33,22 @@ Po ukończeniu wszystkich sekcji tego przewodnika nauki będziesz w stanie:
 #### Cele nauki
 - Zrozumieć podstawowe koncepcje i terminologię Azure Developer CLI
 - Pomyślnie zainstalować i skonfigurować AZD na swojej platformie deweloperskiej
-- Wdrożyć swoją pierwszą aplikację za pomocą istniejącego szablonu
-- Skutecznie poruszać się po interfejsie wiersza poleceń AZD
+- Wdrożyć pierwszą aplikację przy użyciu istniejącego szablonu
+- Efektywnie poruszać się po interfejsie linii poleceń AZD
 
 #### Kluczowe koncepcje do opanowania
-- Struktura projektu AZD i jego komponenty (azure.yaml, infra/, src/)
-- Przepływy pracy oparte na szablonach wdrożeń
+- Struktura i komponenty projektu AZD (azure.yaml, infra/, src/)
+- Workflow wdrożenia oparte na szablonach
 - Podstawy konfiguracji środowiska
 - Zarządzanie grupami zasobów i subskrypcjami
 
 #### Ćwiczenia praktyczne
-1. **Weryfikacja instalacji**: Zainstaluj AZD i zweryfikuj za pomocą `azd version`
+1. **Weryfikacja instalacji**: Zainstaluj AZD i sprawdź wersję za pomocą `azd version`
 2. **Pierwsze wdrożenie**: Pomyślnie wdroż szablon todo-nodejs-mongo
 3. **Konfiguracja środowiska**: Skonfiguruj swoje pierwsze zmienne środowiskowe
 4. **Eksploracja zasobów**: Przeglądaj wdrożone zasoby w Azure Portal
 
-#### Pytania oceniające
+#### Pytania do oceny
 - Jakie są podstawowe komponenty projektu AZD?
 - Jak zainicjować nowy projekt z szablonu?
 - Jaka jest różnica między `azd up` a `azd deploy`?
@@ -56,29 +56,29 @@ Po ukończeniu wszystkich sekcji tego przewodnika nauki będziesz w stanie:
 
 ---
 
-### Rozdział 2: Rozwój oparty na AI (Tydzień 2)
+### Rozdział 2: Rozwój z naciskiem na AI (Tydzień 2)
 **Czas trwania**: 1-2 godziny | **Złożoność**: ⭐⭐
 
 #### Cele nauki
-- Zintegrować usługi Microsoft Foundry z przepływami pracy AZD
-- Wdrażać i konfigurować aplikacje oparte na AI
+- Zintegrować usługi Microsoft Foundry z workflow AZD
+- Wdrażać i konfigurować aplikacje wykorzystujące AI
 - Zrozumieć wzorce implementacji RAG (Retrieval-Augmented Generation)
-- Zarządzać wdrożeniami modeli AI i ich skalowaniem
+- Zarządzać wdrożeniami i skalowaniem modeli AI
 
 #### Kluczowe koncepcje do opanowania
-- Integracja usługi Azure OpenAI i zarządzanie API
-- Konfiguracja wyszukiwania AI i indeksowania wektorowego
-- Strategie wdrożeń modeli i planowanie pojemności
+- Integracja usług Microsoft Foundry Models i zarządzanie API
+- Konfiguracja AI Search i indeksowanie wektorowe
+- Strategie wdrażania modeli i planowanie pojemności
 - Monitorowanie aplikacji AI i optymalizacja wydajności
 
 #### Ćwiczenia praktyczne
 1. **Wdrożenie czatu AI**: Wdroż szablon azure-search-openai-demo
-2. **Implementacja RAG**: Skonfiguruj indeksowanie dokumentów i ich wyszukiwanie
-3. **Konfiguracja modeli**: Skonfiguruj wiele modeli AI do różnych celów
-4. **Monitorowanie AI**: Wdroż Application Insights dla obciążeń AI
+2. **Implementacja RAG**: Skonfiguruj indeksowanie i wyszukiwanie dokumentów
+3. **Konfiguracja modelu**: Skonfiguruj kilka modeli AI o różnych zastosowaniach
+4. **Monitoring AI**: Zaimplementuj Application Insights dla obciążeń AI
 
-#### Pytania oceniające
-- Jak skonfigurować usługi Azure OpenAI w szablonie AZD?
+#### Pytania do oceny
+- Jak skonfigurować usługi Microsoft Foundry Models w szablonie AZD?
 - Jakie są kluczowe komponenty architektury RAG?
 - Jak zarządzać pojemnością i skalowaniem modeli AI?
 - Jakie metryki monitorowania są ważne dla aplikacji AI?
@@ -90,121 +90,121 @@ Po ukończeniu wszystkich sekcji tego przewodnika nauki będziesz w stanie:
 
 #### Cele nauki
 - Opanować strategie konfiguracji i zarządzania środowiskami
-- Wdrażać bezpieczne wzorce uwierzytelniania i zarządzane tożsamości
-- Organizować zasoby zgodnie z odpowiednimi konwencjami nazewnictwa
+- Wdrożyć bezpieczne wzorce uwierzytelniania i zarządzanie tożsamością
+- Organizować zasoby za pomocą odpowiednich konwencji nazewnictwa
 - Konfigurować wdrożenia wielośrodowiskowe (dev, staging, prod)
 
 #### Kluczowe koncepcje do opanowania
-- Hierarchia środowisk i priorytety konfiguracji
-- Uwierzytelnianie za pomocą zarządzanej tożsamości i zasad serwisowych
-- Integracja Key Vault do zarządzania tajemnicami
+- Hierarchia środowisk i kolejność reguł konfiguracji
+- Uwierzytelnianie za pomocą zarządzanej tożsamości i service principal
+- Integracja z Key Vault dla zarządzania sekretami
 - Zarządzanie parametrami specyficznymi dla środowiska
 
 #### Ćwiczenia praktyczne
-1. **Konfiguracja wielośrodowiskowa**: Skonfiguruj środowiska dev, staging i prod
-2. **Konfiguracja bezpieczeństwa**: Wdroż uwierzytelnianie za pomocą zarządzanej tożsamości
-3. **Zarządzanie tajemnicami**: Zintegruj Azure Key Vault dla danych wrażliwych
+1. **Ustawienie wielu środowisk**: Skonfiguruj środowiska dev, staging i prod
+2. **Konfiguracja bezpieczeństwa**: Wdroż uwierzytelnianie zarządzanej tożsamości
+3. **Zarządzanie sekretami**: Integracja z Azure Key Vault dla danych wrażliwych
 4. **Zarządzanie parametrami**: Utwórz konfiguracje specyficzne dla środowiska
 
-#### Pytania oceniające
+#### Pytania do oceny
 - Jak skonfigurować różne środowiska za pomocą AZD?
-- Jakie są korzyści z używania zarządzanej tożsamości zamiast zasad serwisowych?
-- Jak bezpiecznie zarządzać tajemnicami aplikacji?
+- Jakie są korzyści z używania zarządzanej tożsamości zamiast service principal?
+- Jak bezpiecznie zarządzać sekretami aplikacji?
 - Jaka jest hierarchia konfiguracji w AZD?
 
 ---
 
-### Rozdział 4: Infrastruktura jako kod i wdrożenie (Tydzień 4-5)
+### Rozdział 4: Infrastruktura jako kod i wdrożenia (Tydzień 4-5)
 **Czas trwania**: 1-1,5 godziny | **Złożoność**: ⭐⭐⭐
 
 #### Cele nauki
 - Tworzyć i dostosowywać szablony infrastruktury Bicep
-- Wdrażać zaawansowane wzorce i przepływy pracy wdrożeń
-- Zrozumieć strategie udostępniania zasobów
+- Wdrażać zaawansowane wzorce i workflow wdrożeniowe
+- Zrozumieć strategie provisioning zasobów
 - Projektować skalowalne architektury wielousługowe
 
-- Wdrażać aplikacje konteneryzowane za pomocą Azure Container Apps i AZD
+- Wdrażać aplikacje konteneryzowane z użyciem Azure Container Apps i AZD
 
 #### Kluczowe koncepcje do opanowania
 - Struktura szablonów Bicep i najlepsze praktyki
 - Zależności zasobów i kolejność wdrożeń
-- Pliki parametrów i modułowość szablonów
-- Niestandardowe haki i automatyzacja wdrożeń
-- Wzorce wdrożeń aplikacji kontenerowych (szybki start, produkcja, mikroserwisy)
+- Pliki parametrów i modularność szablonów
+- Niestandardowe hooki i automatyzacja wdrożeń
+- Wzorce wdrożenia aplikacji kontenerowych (quick start, produkcja, mikroserwisy)
 
 #### Ćwiczenia praktyczne
-1. **Tworzenie niestandardowego szablonu**: Zbuduj szablon aplikacji wielousługowej
-2. **Opanowanie Bicep**: Utwórz modułowe, wielokrotnego użytku komponenty infrastruktury
-3. **Automatyzacja wdrożeń**: Wdroż haki przed/po wdrożeniu
+1. **Tworzenie niestandardowych szablonów**: Zbuduj szablon aplikacji wielousługowej
+2. **Opanowanie Bicep**: Stwórz modułowe, wielokrotnego użytku komponenty infrastruktury
+3. **Automatyzacja wdrożeń**: Wdroż hooki przed/po wdrożeniu
 4. **Projektowanie architektury**: Wdroż złożoną architekturę mikroserwisów
-5. **Wdrożenie aplikacji kontenerowej**: Wdroż [Simple Flask API](../../../examples/container-app/simple-flask-api) oraz [Microservices Architecture](../../../examples/container-app/microservices) za pomocą AZD
+5. **Wdrożenie aplikacji kontenerowej**: Wdroż przykłady [Simple Flask API](../../../examples/container-app/simple-flask-api) i [Microservices Architecture](../../../examples/container-app/microservices) używając AZD
 
-#### Pytania oceniające
+#### Pytania do oceny
 - Jak tworzyć niestandardowe szablony Bicep dla AZD?
 - Jakie są najlepsze praktyki organizacji kodu infrastruktury?
-- Jak radzić sobie z zależnościami zasobów w szablonach?
-- Jakie wzorce wdrożeń wspierają aktualizacje bez przestojów?
+- Jak obsługiwać zależności zasobów w szablonach?
+- Jakie wzorce wdrożeniowe wspierają aktualizacje bez przestojów?
 
 ---
 
-### Rozdział 5: Rozwiązania AI z wieloma agentami (Tydzień 6-7)
+### Rozdział 5: Wieloagentowe rozwiązania AI (Tydzień 6-7)
 **Czas trwania**: 2-3 godziny | **Złożoność**: ⭐⭐⭐⭐
 
 #### Cele nauki
-- Projektować i wdrażać architektury AI z wieloma agentami
-- Koordynować komunikację i współpracę agentów
-- Wdrażać rozwiązania AI gotowe do produkcji z monitorowaniem
-- Zrozumieć specjalizację agentów i wzorce przepływów pracy
-- Zintegrować konteneryzowane mikroserwisy jako część rozwiązań z wieloma agentami
+- Projektować i implementować architektury AI z wieloma agentami
+- Orkiestracja koordynacji i komunikacji agentów
+- Wdrażać rozwiązania AI gotowe do produkcji z monitoringiem
+- Zrozumieć specjalizację agentów i wzorce workflow
+- Integrować konteneryzowane mikroserwisy jako część rozwiązań wieloagentowych
 
 #### Kluczowe koncepcje do opanowania
-- Wzorce architektury z wieloma agentami i zasady projektowania
+- Wzorce architektury wieloagentowej i zasady projektowania
 - Protokoły komunikacji agentów i przepływ danych
-- Strategie równoważenia obciążenia i skalowania dla agentów AI
-- Monitorowanie produkcji dla systemów z wieloma agentami
-- Komunikacja między usługami w środowiskach konteneryzowanych
+- Strategie load balancing i skalowania dla agentów AI
+- Monitoring produkcyjny systemów wieloagentowych
+- Komunikacja usług w środowiskach konteneryzowanych
 
 #### Ćwiczenia praktyczne
-1. **Wdrożenie rozwiązania dla handlu detalicznego**: Wdroż kompletny scenariusz handlu detalicznego z wieloma agentami
-2. **Dostosowanie agentów**: Zmodyfikuj zachowania agentów Klienta i Magazynu
-3. **Skalowanie architektury**: Wdroż równoważenie obciążenia i automatyczne skalowanie
-4. **Monitorowanie produkcji**: Skonfiguruj kompleksowe monitorowanie i alerty
-5. **Integracja mikroserwisów**: Rozszerz przykład [Microservices Architecture](../../../examples/container-app/microservices) o przepływy pracy oparte na agentach
+1. **Wdrożenie rozwiązania retail**: Wdroż kompletny scenariusz wieloagentowy dla handlu detalicznego
+2. **Dostosowanie agentów**: Zmodyfikuj zachowania agentów Customer i Inventory
+3. **Skalowanie architektury**: Wdroż load balancing i auto-skalowanie
+4. **Monitoring produkcyjny**: Skonfiguruj kompleksowy monitoring i alerty
+5. **Integracja mikroserwisów**: Rozszerz przykład [Microservices Architecture](../../../examples/container-app/microservices) o wsparcie workflow opartych na agentach
 
-#### Pytania oceniające
-- Jak projektować efektywne wzorce komunikacji między agentami?
+#### Pytania do oceny
+- Jak zaprojektować efektywne wzorce komunikacji wieloagentowej?
 - Jakie są kluczowe aspekty skalowania obciążeń agentów AI?
-- Jak monitorować i debugować systemy AI z wieloma agentami?
+- Jak monitorować i debugować systemy wieloagentowe AI?
 - Jakie wzorce produkcyjne zapewniają niezawodność agentów AI?
 
 ---
 
-### Rozdział 6: Walidacja przed wdrożeniem i planowanie (Tydzień 8)
+### Rozdział 6: Walidacja i planowanie przed wdrożeniem (Tydzień 8)
 **Czas trwania**: 1 godzina | **Złożoność**: ⭐⭐
 
 #### Cele nauki
 - Przeprowadzać kompleksowe planowanie pojemności i walidację zasobów
 - Wybierać optymalne SKU Azure dla efektywności kosztowej
-- Wdrażać zautomatyzowane kontrole przed wdrożeniem i walidację
-- Planować wdrożenia z uwzględnieniem strategii optymalizacji kosztów
+- Wdrażać zautomatyzowane kontrole i walidacje pre-flight
+- Planować wdrożenia ze strategią optymalizacji kosztów
 
 #### Kluczowe koncepcje do opanowania
-- Limity kwot zasobów Azure i ograniczenia pojemności
-- Kryteria wyboru SKU i optymalizacja kosztów
-- Zautomatyzowane skrypty walidacji i testowania
+- Limity kwot i pojemności zasobów Azure
+- Kryteria doboru SKU i optymalizacja kosztów
+- Zautomatyzowane skrypty walidacyjne i testujące
 - Planowanie wdrożeń i ocena ryzyka
 
 #### Ćwiczenia praktyczne
-1. **Analiza pojemności**: Przeanalizuj wymagania zasobów dla swoich aplikacji
-2. **Optymalizacja SKU**: Porównaj i wybierz efektywne kosztowo poziomy usług
-3. **Automatyzacja walidacji**: Wdroż skrypty kontroli przed wdrożeniem
-4. **Planowanie kosztów**: Utwórz szacunkowe koszty wdrożenia i budżety
+1. **Analiza pojemności**: Analizuj wymagania zasobów dla swoich aplikacji
+2. **Optymalizacja SKU**: Porównuj i wybieraj kosztowo efektywne poziomy usług
+3. **Automatyzacja walidacji**: Wdraż skrypty kontroli przed wdrożeniem
+4. **Planowanie kosztów**: Twórz szacunki i budżety wdrożeniowe
 
-#### Pytania oceniające
+#### Pytania do oceny
 - Jak walidować pojemność Azure przed wdrożeniem?
-- Jakie czynniki wpływają na decyzje dotyczące wyboru SKU?
-- Jak zautomatyzować walidację przed wdrożeniem?
-- Jakie strategie pomagają optymalizować koszty wdrożenia?
+- Jakie czynniki wpływają na decyzje wyboru SKU?
+- Jak automatyzować walidację przed wdrożeniem?
+- Jakie strategie pomagają optymalizować koszty wdrożeń?
 
 ---
 
@@ -212,27 +212,27 @@ Po ukończeniu wszystkich sekcji tego przewodnika nauki będziesz w stanie:
 **Czas trwania**: 1-1,5 godziny | **Złożoność**: ⭐⭐
 
 #### Cele nauki
-- Rozwijać systematyczne podejście do debugowania wdrożeń AZD
-- Rozwiązywać typowe problemy związane z wdrożeniami i konfiguracją
-- Debugować specyficzne dla AI problemy i kwestie wydajności
-- Wdrażać monitorowanie i alerty dla proaktywnego wykrywania problemów
+- Rozwijać systematyczne podejścia do debugowania wdrożeń AZD
+- Rozwiązywać typowe błędy konfiguracji i wdrożeń
+- Debugować problemy specyficzne dla AI i kwestie wydajności
+- Wdrażać monitoring i alerty dla proaktywnego wykrywania problemów
 
 #### Kluczowe koncepcje do opanowania
 - Techniki diagnostyczne i strategie logowania
 - Typowe wzorce awarii i ich rozwiązania
-- Monitorowanie wydajności i optymalizacja
-- Procedury reagowania na incydenty i odzyskiwania
+- Monitoring wydajności i optymalizacja
+- Procedury reakcji na incydenty i odzyskiwania
 
 #### Ćwiczenia praktyczne
-1. **Umiejętności diagnostyczne**: Ćwicz na celowo uszkodzonych wdrożeniach
-2. **Analiza logów**: Skutecznie używaj Azure Monitor i Application Insights
-3. **Optymalizacja wydajności**: Popraw wydajność wolno działających aplikacji
-4. **Procedury odzyskiwania**: Wdroż kopie zapasowe i odzyskiwanie po awarii
+1. **Umiejętności diagnostyczne**: Praktyka na celowo błędnych wdrożeniach
+2. **Analiza logów**: Efektywne użycie Azure Monitor i Application Insights
+3. **Optymalizacja wydajności**: Usprawnianie wolno działających aplikacji
+4. **Procedury odzyskiwania**: Wdrażanie kopii zapasowych i planów awaryjnych
 
-#### Pytania oceniające
-- Jakie są najczęstsze awarie wdrożeń AZD?
+#### Pytania do oceny
+- Jakie są najczęstsze błędy wdrożeń AZD?
 - Jak debugować problemy z uwierzytelnianiem i uprawnieniami?
-- Jakie strategie monitorowania pomagają zapobiegać problemom w produkcji?
+- Jakie strategie monitorowania pomagają zapobiegać problemom produkcyjnym?
 - Jak optymalizować wydajność aplikacji w Azure?
 
 ---
@@ -241,44 +241,44 @@ Po ukończeniu wszystkich sekcji tego przewodnika nauki będziesz w stanie:
 **Czas trwania**: 2-3 godziny | **Złożoność**: ⭐⭐⭐⭐
 
 #### Cele nauki
-- Wdrażać strategie wdrożeń na poziomie korporacyjnym
+- Wdrażać strategie wdrożeń klasy enterprise
 - Projektować wzorce bezpieczeństwa i ramy zgodności
-- Ustanawiać monitorowanie, zarządzanie i kontrolę kosztów
-- Tworzyć skalowalne potoki CI/CD z integracją AZD
-- Stosować najlepsze praktyki dla wdrożeń aplikacji kontenerowych w produkcji (bezpieczeństwo, monitorowanie, koszty, CI/CD)
+- Ustanawiać monitoring, governance i zarządzanie kosztami
+- Tworzyć skalowalne pipeline’y CI/CD z integracją AZD
+- Stosować najlepsze praktyki produkcyjnych wdrożeń aplikacji kontenerowych (bezpieczeństwo, monitoring, koszty, CI/CD)
 
 #### Kluczowe koncepcje do opanowania
-- Wymagania dotyczące bezpieczeństwa i zgodności na poziomie korporacyjnym
-- Ramy zarządzania i wdrażanie polityk
-- Zaawansowane monitorowanie i zarządzanie kosztami
-- Integracja CI/CD i zautomatyzowane potoki wdrożeniowe
-- Strategie wdrożeń blue-green i canary dla obciążeń kontenerowych
+- Wymagania bezpieczeństwa i zgodności korporacyjnej
+- Ramy governance i implementacja polityk
+- Zaawansowany monitoring i zarządzanie kosztami
+- Integracja CI/CD i automatyzacja pipeline’ów
+- Strategie wdrożeń blue-green i canary dla obciążeń konteneryzowanych
 
 #### Ćwiczenia praktyczne
 1. **Bezpieczeństwo korporacyjne**: Wdroż kompleksowe wzorce bezpieczeństwa
-2. **Ramy zarządzania**: Skonfiguruj Azure Policy i zarządzanie zasobami
-3. **Zaawansowane monitorowanie**: Utwórz pulpity i zautomatyzowane alerty
-4. **Integracja CI/CD**: Zbuduj zautomatyzowane potoki wdrożeniowe
-5. **Aplikacje kontenerowe w produkcji**: Zastosuj bezpieczeństwo, monitorowanie i optymalizację kosztów do przykładu [Microservices Architecture](../../../examples/container-app/microservices)
+2. **Ramy governance**: Skonfiguruj Azure Policy i zarządzanie zasobami
+3. **Zaawansowany monitoring**: Twórz dashboardy i automatyczne alerty
+4. **Integracja CI/CD**: Buduj automatyczne pipeline’y wdrożeniowe
+5. **Produkcja kontenerów**: Zastosuj zabezpieczenia, monitoring i optymalizację kosztów do przykładu [Microservices Architecture](../../../examples/container-app/microservices)
 
-#### Pytania oceniające
-- Jak wdrażać bezpieczeństwo korporacyjne w wdrożeniach AZD?
-- Jakie wzorce zarządzania zapewniają zgodność i kontrolę kosztów?
-- Jak projektować skalowalne monitorowanie dla systemów produkcyjnych?
-- Jakie wzorce CI/CD najlepiej współpracują z przepływami pracy AZD?
+#### Pytania do oceny
+- Jak wdrożyć bezpieczeństwo klasy enterprise w wdrożeniach AZD?
+- Jakie wzorce governance zapewniają zgodność i kontrolę kosztów?
+- Jak projektować skalowalny monitoring dla systemów produkcyjnych?
+- Jakie wzorce CI/CD najlepiej sprawdzają się z workflow AZD?
 
 #### Cele nauki
 - Zrozumieć podstawy i kluczowe koncepcje Azure Developer CLI
-- Pomyślnie zainstalować i skonfigurować azd w swoim środowisku deweloperskim
-- Ukończyć pierwsze wdrożenie za pomocą istniejącego szablonu
-- Zrozumieć strukturę projektu azd i kluczowe komponenty
+- Pomyślnie zainstalować i skonfigurować azd w środowisku deweloperskim
+- Ukończyć pierwsze wdrożenie używając istniejącego szablonu
+- Poruszać się po strukturze projektu azd i rozumieć kluczowe komponenty
 
 #### Kluczowe koncepcje do opanowania
 - Szablony, środowiska i usługi
 - Struktura konfiguracji azure.yaml
 - Podstawowe polecenia azd (init, up, down, deploy)
 - Zasady Infrastructure as Code
-- Uwierzytelnianie i autoryzacja w Azure
+- Uwierzytelnianie i autoryzacja Azure
 
 #### Ćwiczenia praktyczne
 
@@ -292,29 +292,143 @@ Po ukończeniu wszystkich sekcji tego przewodnika nauki będziesz w stanie:
 5. Explore available templates: azd template list
 ```
 
-**Ćwiczenie 1.2: Pierwsze
-5. Jakie są kwestie do rozważenia przy wdrożeniach w wielu regionach?
+**Ćwiczenie 1.2: Pierwsze wdrożenie**
+```bash
+# Wdróż prostą aplikację internetową:
+1. Initialize project: azd init --template todo-nodejs-mongo
+2. Review project structure and configuration files
+3. Deploy to Azure: azd up
+4. Test the deployed application
+5. Clean up resources: azd down
+```
+
+**Ćwiczenie 1.3: Analiza struktury projektu**
+```
+Analyze the following components:
+1. azure.yaml - service definitions and hooks
+2. infra/ directory - Bicep templates and modules
+3. src/ directory - application source code
+4. .azure/ directory - environment configurations
+```
+
+#### Pytania do samodzielnej oceny
+1. Jakie są trzy podstawowe koncepcje architektury azd?
+2. Jaki jest cel pliku azure.yaml?
+3. Jak środowiska pomagają zarządzać różnymi celami wdrożeń?
+4. Jakie metody uwierzytelniania można wykorzystać z azd?
+5. Co się dzieje po uruchomieniu `azd up` po raz pierwszy?
+
+---
+
+## Śledzenie postępów i framework oceny
+```bash
+# Utwórz i skonfiguruj wiele środowisk:
+1. Create development environment: azd env new development
+2. Create staging environment: azd env new staging
+3. Create production environment: azd env new production
+4. Configure different settings for each environment
+5. Deploy the same application to different environments
+```
+
+**Ćwiczenie 2.2: Zaawansowana konfiguracja**
+```yaml
+# Modify azure.yaml to include:
+1. Multiple services with different configurations
+2. Pre and post deployment hooks
+3. Environment-specific parameters
+4. Custom resource naming patterns
+```
+
+**Ćwiczenie 2.3: Konfiguracja bezpieczeństwa**
+```bash
+# Wdrażaj najlepsze praktyki bezpieczeństwa:
+1. Configure managed identity for service authentication
+2. Set up Azure Key Vault for secrets management
+3. Implement least-privilege access controls
+4. Enable HTTPS and secure communication protocols
+```
+
+#### Pytania do samodzielnej oceny
+1. Jak azd obsługuje kolejność nadpisywania zmiennych środowiskowych?
+2. Czym są hooki wdrożeniowe i kiedy ich używać?
+3. Jak konfigurować różne SKU dla różnych środowisk?
+4. Jakie są implikacje bezpieczeństwa różnych metod uwierzytelniania?
+5. Jak zarządzać sekretami i wrażliwymi danymi konfiguracyjnymi?
+
+### Moduł 3: Wdrożenia i provisioning (Tydzień 4)
+
+#### Cele nauki
+- Opanować workflow wdrożeń i najlepsze praktyki
+- Zrozumieć Infrastructure as Code za pomocą szablonów Bicep
+- Wdrożyć złożone architektury wielousługowe
+- Optymalizować wydajność i niezawodność wdrożeń
+
+#### Kluczowe koncepcje do opanowania
+- Struktura i moduły szablonów Bicep
+- Zależności zasobów i ich kolejność
+- Strategie wdrożeń (blue-green, rolling updates)
+- Wdrożenia wieloregionowe
+- Migracje baz danych i zarządzanie danymi
+
+#### Ćwiczenia praktyczne
+
+**Ćwiczenie 3.1: Niestandardowa infrastruktura**
+```bicep
+// Create custom Bicep templates for:
+1. Web application with custom domain and SSL
+2. Database with backup and high availability
+3. Storage account with access policies
+4. Monitoring and logging configuration
+5. Network security groups and virtual networks
+```
+
+**Ćwiczenie 3.2: Aplikacja wielousługowa**
+```bash
+# Wdróż architekturę mikroserwisów:
+1. Frontend web application
+2. Backend API service
+3. Database service
+4. Message queue service
+5. Background worker service
+```
+
+**Ćwiczenie 3.3: Integracja bazy danych**
+```bash
+# Zaimplementuj wzorce wdrażania bazy danych:
+1. Deploy PostgreSQL with connection pooling
+2. Implement schema migrations
+3. Configure backup and recovery procedures
+4. Set up read replicas for performance
+5. Implement data seeding for different environments
+```
+
+#### Pytania do samodzielnej oceny
+1. Jakie są zalety używania Bicep nad szablonami ARM?
+2. Jak obsługiwać migracje baz danych podczas wdrożeń azd?
+3. Jakie istnieją strategie wdrożeń bez przestojów?
+4. Jak zarządzać zależnościami między usługami?
+5. Jakie są rozważania dotyczące wdrożeń wieloregionowych?
 
 ### Moduł 4: Walidacja przed wdrożeniem (Tydzień 5)
 
 #### Cele nauki
-- Wdrażanie kompleksowych kontroli przed wdrożeniem
-- Opanowanie planowania pojemności i walidacji zasobów
-- Zrozumienie wyboru SKU i optymalizacji kosztów
-- Tworzenie zautomatyzowanych potoków walidacyjnych
+- Wdrażaj kompleksowe kontrole przed wdrożeniem  
+- Opanuj planowanie pojemności i weryfikację zasobów  
+- Zrozum wybór SKU i optymalizację kosztów  
+- Buduj zautomatyzowane potoki walidacyjne  
 
-#### Kluczowe pojęcia do opanowania
-- Limity i kwoty zasobów Azure
-- Kryteria wyboru SKU i ich wpływ na koszty
-- Zautomatyzowane skrypty i narzędzia walidacyjne
-- Metodologie planowania pojemności
-- Testowanie wydajności i optymalizacja
+#### Kluczowe pojęcia do opanowania  
+- Limity i kwoty zasobów Azure  
+- Kryteria wyboru SKU oraz konsekwencje kosztowe  
+- Automatyczne skrypty i narzędzia walidacyjne  
+- Metody planowania pojemności  
+- Testowanie wydajności i optymalizacja  
 
-#### Ćwiczenia praktyczne
+#### Ćwiczenia praktyczne  
 
 **Ćwiczenie 4.1: Planowanie pojemności**  
 ```bash
-# Wdrożenie walidacji pojemności:
+# Zaimplementuj walidację pojemności:
 1. Create scripts to check Azure quotas
 2. Validate service availability in target regions
 3. Estimate resource costs for different SKUs
@@ -322,9 +436,9 @@ Po ukończeniu wszystkich sekcji tego przewodnika nauki będziesz w stanie:
 5. Document capacity requirements for each environment
 ```
   
-**Ćwiczenie 4.2: Walidacja przed wdrożeniem**  
+**Ćwiczenie 4.2: Walidacja przedwdrożeniowa**  
 ```powershell
-# Zbuduj kompleksowy system walidacji:
+# Zbuduj kompleksowy proces walidacji:
 1. Authentication and permissions validation
 2. Template syntax and parameter validation
 3. Resource naming and availability checks
@@ -342,30 +456,29 @@ Po ukończeniu wszystkich sekcji tego przewodnika nauki będziesz w stanie:
 5. Set up auto-scaling policies
 ```
   
+#### Pytania do samooceny  
+1. Jakie czynniki powinny wpływać na decyzje dotyczące wyboru SKU?  
+2. Jak weryfikujesz dostępność zasobów Azure przed wdrożeniem?  
+3. Jakie są kluczowe elementy systemu kontroli przedwdrożeniowej?  
+4. Jak szacujesz i kontrolujesz koszty wdrożenia?  
+5. Jakie monitorowanie jest niezbędne dla planowania pojemności?  
 
-#### Pytania do samooceny
-1. Jakie czynniki powinny wpływać na decyzje dotyczące wyboru SKU?
-2. Jak weryfikujesz dostępność zasobów Azure przed wdrożeniem?
-3. Jakie są kluczowe elementy systemu kontroli przed wdrożeniem?
-4. Jak oszacować i kontrolować koszty wdrożenia?
-5. Jakie monitorowanie jest kluczowe w planowaniu pojemności?
+### Moduł 5: Rozwiązywanie problemów i debugowanie (tydzień 6)  
 
-### Moduł 5: Rozwiązywanie problemów i debugowanie (Tydzień 6)
+#### Cele nauki  
+- Opanuj systematyczne metody rozwiązywania problemów  
+- Rozwiń umiejętności debugowania złożonych problemów wdrożeniowych  
+- Wdrażaj kompleksowe monitorowanie i alertowanie  
+- Buduj procedury reagowania na incydenty i odzyskiwania  
 
-#### Cele nauki
-- Opanowanie systematycznych metod rozwiązywania problemów
-- Rozwijanie umiejętności debugowania złożonych problemów wdrożeniowych
-- Wdrażanie kompleksowego monitorowania i alertowania
-- Tworzenie procedur reagowania na incydenty i odzyskiwania
+#### Kluczowe pojęcia do opanowania  
+- Typowe wzorce awarii wdrożeń  
+- Techniki analizy i korelacji logów  
+- Monitorowanie wydajności i optymalizacja  
+- Wykrywanie incydentów bezpieczeństwa i reakcja  
+- Odzyskiwanie po awarii i ciągłość działania  
 
-#### Kluczowe pojęcia do opanowania
-- Typowe wzorce awarii wdrożeń
-- Analiza logów i techniki korelacji
-- Monitorowanie wydajności i optymalizacja
-- Wykrywanie incydentów bezpieczeństwa i reagowanie
-- Odzyskiwanie po awarii i ciągłość działania
-
-#### Ćwiczenia praktyczne
+#### Ćwiczenia praktyczne  
 
 **Ćwiczenie 5.1: Scenariusze rozwiązywania problemów**  
 ```bash
@@ -377,9 +490,9 @@ Po ukończeniu wszystkich sekcji tego przewodnika nauki będziesz w stanie:
 5. Performance and scaling issues
 ```
   
-**Ćwiczenie 5.2: Wdrażanie monitorowania**  
+**Ćwiczenie 5.2: Implementacja monitorowania**  
 ```bash
-# Skonfiguruj kompleksowe monitorowanie:
+# Skonfiguruj kompleksowy monitoring:
 1. Application performance monitoring with Application Insights
 2. Infrastructure monitoring with Azure Monitor
 3. Custom dashboards and alerting rules
@@ -387,7 +500,7 @@ Po ukończeniu wszystkich sekcji tego przewodnika nauki będziesz w stanie:
 5. Health check endpoints and automated testing
 ```
   
-**Ćwiczenie 5.3: Reagowanie na incydenty**  
+**Ćwiczenie 5.3: Reakcja na incydenty**  
 ```bash
 # Opracuj procedury reagowania na incydenty:
 1. Create runbooks for common problems
@@ -397,30 +510,29 @@ Po ukończeniu wszystkich sekcji tego przewodnika nauki będziesz w stanie:
 5. Document lessons learned and improvements
 ```
   
+#### Pytania do samooceny  
+1. Jaki jest systematyczny sposób rozwiązywania problemów w wdrożeniach azd?  
+2. Jak korelujesz logi z wielu usług i zasobów?  
+3. Które metryki monitorowania są najważniejsze dla wczesnego wykrywania problemów?  
+4. Jak wdrażasz skuteczne procedury odzyskiwania po awarii?  
+5. Jakie są kluczowe komponenty planu reagowania na incydenty?  
 
-#### Pytania do samooceny
-1. Jaka jest systematyczna metoda rozwiązywania problemów z wdrożeniami azd?
-2. Jak korelować logi z różnych usług i zasobów?
-3. Jakie metryki monitorowania są najważniejsze dla wczesnego wykrywania problemów?
-4. Jak wdrożyć skuteczne procedury odzyskiwania po awarii?
-5. Jakie są kluczowe elementy planu reagowania na incydenty?
+### Moduł 6: Zaawansowane tematy i najlepsze praktyki (tydzień 7-8)  
 
-### Moduł 6: Zaawansowane tematy i najlepsze praktyki (Tydzień 7-8)
+#### Cele nauki  
+- Wdrażaj wzorce wdrożeń klasy korporacyjnej  
+- Opanuj integrację i automatyzację CI/CD  
+- Twórz własne szablony i angażuj się w społeczność  
+- Poznaj zaawansowane wymagania bezpieczeństwa i zgodności  
 
-#### Cele nauki
-- Wdrażanie wzorców wdrożeń na poziomie przedsiębiorstwa
-- Opanowanie integracji i automatyzacji CI/CD
-- Tworzenie niestandardowych szablonów i wkład w społeczność
-- Zrozumienie zaawansowanych wymagań dotyczących bezpieczeństwa i zgodności
+#### Kluczowe pojęcia do opanowania  
+- Wzorce integracji potoków CI/CD  
+- Tworzenie i dystrybucja własnych szablonów  
+- Zarządzanie i zgodność korporacyjna  
+- Zaawansowane konfiguracje sieci i bezpieczeństwa  
+- Optymalizacja wydajności i zarządzanie kosztami  
 
-#### Kluczowe pojęcia do opanowania
-- Wzorce integracji potoków CI/CD
-- Tworzenie i dystrybucja niestandardowych szablonów
-- Zarządzanie i zgodność na poziomie przedsiębiorstwa
-- Zaawansowane konfiguracje sieciowe i bezpieczeństwa
-- Optymalizacja wydajności i zarządzanie kosztami
-
-#### Ćwiczenia praktyczne
+#### Ćwiczenia praktyczne  
 
 **Ćwiczenie 6.1: Integracja CI/CD**  
 ```yaml
@@ -432,7 +544,7 @@ Po ukończeniu wszystkich sekcji tego przewodnika nauki będziesz w stanie:
 5. Security scanning and compliance checks
 ```
   
-**Ćwiczenie 6.2: Tworzenie niestandardowych szablonów**  
+**Ćwiczenie 6.2: Tworzenie własnego szablonu**  
 ```bash
 # Twórz i publikuj niestandardowe szablony:
 1. Design template for your organization's architecture
@@ -442,9 +554,9 @@ Po ukończeniu wszystkich sekcji tego przewodnika nauki będziesz w stanie:
 5. Publish and maintain template in template gallery
 ```
   
-**Ćwiczenie 6.3: Wdrożenie na poziomie przedsiębiorstwa**  
+**Ćwiczenie 6.3: Wdrożenie korporacyjne**  
 ```bash
-# Wdrożenie funkcji klasy korporacyjnej:
+# Wdroż funkcje klasy korporacyjnej:
 1. Multi-tenant architecture with proper isolation
 2. Centralized logging and monitoring
 3. Compliance and governance controls
@@ -452,262 +564,299 @@ Po ukończeniu wszystkich sekcji tego przewodnika nauki będziesz w stanie:
 5. Disaster recovery and business continuity
 ```
   
+#### Pytania do samooceny  
+1. Jak integrujesz azd z istniejącymi przepływami CI/CD?  
+2. Jakie są kluczowe aspekty tworzenia własnych szablonów?  
+3. Jak wdrażasz zarządzanie i zgodność w wdrożeniach azd?  
+4. Jakie są najlepsze praktyki wdrożeń na skalę korporacyjną?  
+5. Jak efektywnie wspierasz społeczność azd?  
 
-#### Pytania do samooceny
-1. Jak zintegrować azd z istniejącymi potokami CI/CD?
-2. Jakie są kluczowe kwestie przy tworzeniu niestandardowych szablonów?
-3. Jak wdrożyć zarządzanie i zgodność w wdrożeniach azd?
-4. Jakie są najlepsze praktyki dla wdrożeń na skalę przedsiębiorstwa?
-5. Jak skutecznie przyczynić się do rozwoju społeczności azd?
+## Projekty praktyczne  
 
-## Projekty praktyczne
-
-### Projekt 1: Strona portfolio osobistego  
-**Złożoność**: Początkujący  
+### Projekt 1: Osobista strona portfolio  
+**Poziom trudności**: Początkujący  
 **Czas trwania**: 1-2 tygodnie  
 
-Zbuduj i wdroż stronę portfolio osobistego, korzystając z:  
-- Hostingu statycznych stron na Azure Storage  
-- Konfiguracji niestandardowej domeny  
-- Integracji CDN dla globalnej wydajności  
-- Zautomatyzowanego potoku wdrożeniowego  
+Zbuduj i wdroż osobistą stronę portfolio wykorzystując:  
+- Statyczny hosting witryny na Azure Storage  
+- Konfigurację własnej domeny  
+- Integrację CDN dla globalnej wydajności  
+- Zautomatyzowany potok wdrożeniowy  
 
-**Rezultaty**:  
+**Efekty końcowe**:  
 - Działająca strona wdrożona na Azure  
-- Niestandardowy szablon azd dla wdrożeń portfolio  
+- Własny szablon azd dla wdrożeń portfolio  
 - Dokumentacja procesu wdrożenia  
-- Rekomendacje dotyczące analizy kosztów i optymalizacji  
+- Analiza kosztów i rekomendacje optymalizacyjne  
 
 ### Projekt 2: Aplikacja do zarządzania zadaniami  
-**Złożoność**: Średniozaawansowany  
+**Poziom trudności**: Średniozaawansowany  
 **Czas trwania**: 2-3 tygodnie  
 
-Stwórz pełnoprawną aplikację do zarządzania zadaniami z:  
-- Frontendem React wdrożonym na App Service  
-- Backendem API Node.js z uwierzytelnianiem  
+Stwórz aplikację full-stack do zarządzania zadaniami z:  
+- Frontendem React wdrożonym w App Service  
+- Backendem Node.js z autentykacją  
 - Bazą danych PostgreSQL z migracjami  
-- Monitorowaniem za pomocą Application Insights  
+- Monitoringiem w Application Insights  
 
-**Rezultaty**:  
-- Kompletny system z uwierzytelnianiem użytkowników  
-- Schemat bazy danych i skrypty migracyjne  
-- Pulpity monitorowania i reguły alertów  
-- Konfiguracja wdrożenia dla wielu środowisk  
+**Efekty końcowe**:  
+- Kompletną aplikację z uwierzytelnianiem użytkowników  
+- Schemat bazy danych i skrypty migracji  
+- Pulpity monitoringu i reguły alertowania  
+- Konfigurację wdrożeń dla wielu środowisk  
 
 ### Projekt 3: Platforma e-commerce oparta na mikroserwisach  
-**Złożoność**: Zaawansowany  
+**Poziom trudności**: Zaawansowany  
 **Czas trwania**: 4-6 tygodni  
 
-Zaprojektuj i wdroż platformę e-commerce opartą na mikroserwisach:  
+Zaprojektuj i wdroż platformę e-commerce bazującą na mikroserwisach:  
 - Wiele usług API (katalog, zamówienia, płatności, użytkownicy)  
-- Integracja kolejki komunikatów z Service Bus  
-- Redis jako pamięć podręczna dla optymalizacji wydajności  
-- Kompleksowe logowanie i monitorowanie  
+- Integracja kolejek wiadomości z Service Bus  
+- Cache Redis dla optymalizacji wydajności  
+- Kompleksowy logging i monitoring  
 
-**Przykład referencyjny**: Zobacz [Architektura mikroserwisów](../../../examples/container-app/microservices) dla gotowego szablonu i przewodnika wdrożeniowego  
+**Przykład referencyjny**: Zobacz [Architektura mikroserwisów](../../../examples/container-app/microservices) — szablon i przewodnik wdrożenia produkcyjnego  
 
-**Rezultaty**:  
-- Kompleksowa architektura mikroserwisów  
+**Efekty końcowe**:  
+- Kompletną architekturę mikroserwisów  
 - Wzorce komunikacji między usługami  
-- Testowanie wydajności i optymalizacja  
-- Gotowe do produkcji wdrożenie zabezpieczeń  
+- Testy wydajności i optymalizacja  
+- Gotową do produkcji implementację zabezpieczeń  
 
-## Ocena i certyfikacja
+## Ocena i certyfikacja  
 
-### Sprawdzanie wiedzy
+### Sprawdziany wiedzy  
 
-Ukończ te oceny po każdym module:
+Wykonaj te oceny po każdym module:  
 
 **Ocena Modułu 1**: Podstawowe pojęcia i instalacja  
-- Pytania wielokrotnego wyboru dotyczące podstawowych pojęć  
-- Praktyczne zadania instalacyjne i konfiguracyjne  
+- Pytania wielokrotnego wyboru dotyczące podstaw  
+- Praktyczne zadania instalacji i konfiguracji  
 - Proste ćwiczenie wdrożeniowe  
 
 **Ocena Modułu 2**: Konfiguracja i środowiska  
 - Scenariusze zarządzania środowiskami  
-- Ćwiczenia rozwiązywania problemów z konfiguracją  
-- Wdrażanie konfiguracji bezpieczeństwa  
+- Ćwiczenia rozwiązywania problemów konfiguracyjnych  
+- Implementacja zabezpieczeń  
 
-**Ocena Modułu 3**: Wdrożenie i udostępnianie  
-- Wyzwania projektowe infrastruktury  
-- Scenariusze wdrożeń wielousługowych  
+**Ocena Modułu 3**: Wdrożenie i provisionowanie  
+- Wyzwania projektowania infrastruktury  
+- Scenariusze wdrażania wielu usług  
 - Ćwiczenia optymalizacji wydajności  
 
 **Ocena Modułu 4**: Walidacja przed wdrożeniem  
-- Studium przypadku planowania pojemności  
+- Studium przypadków planowania pojemności  
 - Scenariusze optymalizacji kosztów  
-- Wdrażanie potoków walidacyjnych  
+- Implementacja potoków walidacyjnych  
 
 **Ocena Modułu 5**: Rozwiązywanie problemów i debugowanie  
-- Ćwiczenia diagnozowania problemów  
-- Zadania wdrażania monitorowania  
+- Ćwiczenia diagnozy problemów  
+- Zadania implementacji monitoringu  
 - Symulacje reagowania na incydenty  
 
-**Ocena Modułu 6**: Zaawansowane tematy  
+**Ocena Modułu 6**: Tematy zaawansowane  
 - Projektowanie potoków CI/CD  
-- Tworzenie niestandardowych szablonów  
-- Scenariusze architektury na poziomie przedsiębiorstwa  
+- Tworzenie własnych szablonów  
+- Scenariusze architektury korporacyjnej  
 
-### Projekt końcowy
+### Finałowy projekt kompleksowy  
 
-Zaprojektuj i wdroż kompletne rozwiązanie, które pokaże opanowanie wszystkich pojęć:
+Zaprojektuj i wdroż kompletne rozwiązanie pokazujące opanowanie wszystkich pojęć:  
 
 **Wymagania**:  
 - Architektura aplikacji wielowarstwowej  
 - Wiele środowisk wdrożeniowych  
 - Kompleksowe monitorowanie i alertowanie  
-- Wdrożenie zabezpieczeń i zgodności  
+- Implementacja zabezpieczeń i zgodności  
 - Optymalizacja kosztów i wydajności  
-- Kompleksowa dokumentacja i instrukcje  
+- Pełna dokumentacja i instrukcje obsługi  
 
 **Kryteria oceny**:  
-- Jakość techniczna wdrożenia  
-- Kompleksowość dokumentacji  
-- Zgodność z najlepszymi praktykami bezpieczeństwa  
+- Jakość technicznej realizacji  
+- Kompletność dokumentacji  
+- Przestrzeganie bezpieczeństwa i najlepszych praktyk  
 - Optymalizacja wydajności i kosztów  
-- Skuteczność monitorowania i rozwiązywania problemów  
+- Skuteczność rozwiązywania problemów i monitoringu  
 
-## Zasoby do nauki i odniesienia
+## Materiały do nauki i odnośniki  
 
-### Oficjalna dokumentacja
+### Oficjalna dokumentacja  
 - [Dokumentacja Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
 - [Dokumentacja Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
-- [Centrum Architektury Azure](https://learn.microsoft.com/en-us/azure/architecture/)  
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)  
 
-### Zasoby społecznościowe
+### Zasoby społecznościowe  
 - [Galeria szablonów AZD](https://azure.github.io/awesome-azd/)  
-- [Organizacja GitHub Azure-Samples](https://github.com/Azure-Samples)  
-- [Repozytorium GitHub Azure Developer CLI](https://github.com/Azure/azure-dev)  
+- [Organizacja Azure-Samples na GitHub](https://github.com/Azure-Samples)  
+- [Repozytorium Azure Developer CLI na GitHub](https://github.com/Azure/azure-dev)  
 
-### Środowiska praktyczne
+### Środowiska do ćwiczeń  
 - [Darmowe konto Azure](https://azure.microsoft.com/free/)  
-- [Darmowy poziom Azure DevOps](https://azure.microsoft.com/services/devops/)  
+- [Bezpłatny plan Azure DevOps](https://azure.microsoft.com/services/devops/)  
 - [GitHub Actions](https://github.com/features/actions)  
 
-### Dodatkowe narzędzia
+### Dodatkowe narzędzia  
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)  
 - [Visual Studio Code](https://code.visualstudio.com/)  
 - [Pakiet rozszerzeń Azure Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack)  
 
-## Rekomendacje harmonogramu nauki
+## Rekomendowany harmonogram nauki  
 
-### Nauka w pełnym wymiarze godzin (8 tygodni)
+### Nauka w trybie pełnoetatowym (8 tygodni)  
 - **Tygodnie 1-2**: Moduły 1-2 (Wprowadzenie, Konfiguracja)  
-- **Tygodnie 3-4**: Moduły 3-4 (Wdrożenie, Walidacja przed wdrożeniem)  
-- **Tygodnie 5-6**: Moduły 5-6 (Rozwiązywanie problemów, Zaawansowane tematy)  
+- **Tygodnie 3-4**: Moduły 3-4 (Wdrożenie, Walidacja przedwdrożeniowa)  
+- **Tygodnie 5-6**: Moduły 5-6 (Rozwiązywanie problemów, Tematy zaawansowane)  
 - **Tygodnie 7-8**: Projekty praktyczne i ocena końcowa  
 
-### Nauka w niepełnym wymiarze godzin (16 tygodni)
+### Nauka w trybie niestacjonarnym (16 tygodni)  
 - **Tygodnie 1-4**: Moduł 1 (Wprowadzenie)  
 - **Tygodnie 5-7**: Moduł 2 (Konfiguracja i środowiska)  
-- **Tygodnie 8-10**: Moduł 3 (Wdrożenie i udostępnianie)  
+- **Tygodnie 8-10**: Moduł 3 (Wdrożenie i provisionowanie)  
 - **Tygodnie 11-12**: Moduł 4 (Walidacja przed wdrożeniem)  
 - **Tygodnie 13-14**: Moduł 5 (Rozwiązywanie problemów i debugowanie)  
-- **Tygodnie 15-16**: Moduł 6 (Zaawansowane tematy i ocena)  
+- **Tygodnie 15-16**: Moduł 6 (Tematy zaawansowane i ocena)  
 
 ---
 
-## Śledzenie postępów i ramy oceny
+## Ramy śledzenia postępów i oceny  
 
-### Lista kontrolna ukończenia rozdziałów
+### Lista kontrolna ukończenia rozdziałów  
 
-Śledź swoje postępy w każdym rozdziale za pomocą tych mierzalnych wyników:
+Śledź swoje postępy w każdym rozdziale poprzez mierzalne cele:  
 
 #### 📚 Rozdział 1: Podstawy i szybki start  
-- [ ] **Instalacja zakończona**: AZD zainstalowany i zweryfikowany na Twojej platformie  
-- [ ] **Pierwsze wdrożenie**: Pomyślnie wdrożono szablon todo-nodejs-mongo  
-- [ ] **Konfiguracja środowiska**: Skonfigurowano pierwsze zmienne środowiskowe  
-- [ ] **Nawigacja po zasobach**: Eksploracja wdrożonych zasobów w Azure Portal  
-- [ ] **Opanowanie poleceń**: Swobodne korzystanie z podstawowych poleceń AZD  
+- [ ] **Instalacja zakończona**: AZD zainstalowane i zweryfikowane na platformie  
+- [ ] **Pierwsze wdrożenie**: Sukces wdrożenia szablonu todo-nodejs-mongo  
+- [ ] **Konfiguracja środowiska**: Skonfigurowane pierwsze zmienne środowiskowe  
+- [ ] **Nawigacja po zasobach**: Przegląd zasobów w portalu Azure  
+- [ ] **Opanowanie poleceń**: Komfortowe korzystanie z podstawowych poleceń AZD  
 
-#### 🤖 Rozdział 2: Rozwój AI-First  
-- [ ] **Wdrożenie szablonu AI**: Pomyślnie wdrożono azure-search-openai-demo  
-- [ ] **Implementacja RAG**: Skonfigurowano indeksowanie i wyszukiwanie dokumentów  
-- [ ] **Konfiguracja modelu**: Ustawiono wiele modeli AI o różnych celach  
-- [ ] **Monitorowanie AI**: Wdrożono Application Insights dla obciążeń AI  
-- [ ] **Optymalizacja wydajności**: Dostosowano wydajność aplikacji AI  
+#### 🤖 Rozdział 2: Rozwój AI-first  
+- [ ] **Wdrożenie szablonu AI**: Pomyslnie wdrożony azure-search-openai-demo  
+- [ ] **Implementacja RAG**: Skonfigurowany indeks dokumentów i wyszukiwanie  
+- [ ] **Konfiguracja modeli**: Ustawienie wielu modeli AI o różnych przeznaczeniach  
+- [ ] **Monitorowanie AI**: Wdrożenie Application Insights do monitorowania AI  
+- [ ] **Optymalizacja wydajności**: Dostosowanie wydajności aplikacji AI  
 
 #### ⚙️ Rozdział 3: Konfiguracja i uwierzytelnianie  
-- [ ] **Konfiguracja wielu środowisk**: Skonfigurowano środowiska dev, staging i prod  
-- [ ] **Wdrożenie zabezpieczeń**: Skonfigurowano uwierzytelnianie za pomocą tożsamości zarządzanej  
-- [ ] **Zarządzanie sekretami**: Zintegrowano Azure Key Vault dla danych wrażliwych  
-- [ ] **Zarządzanie parametrami**: Utworzono konfiguracje specyficzne dla środowisk  
-- [ ] **Opanowanie uwierzytelniania**: Wdrożono bezpieczne wzorce dostępu  
+- [ ] **Multi-środowiskowa konfiguracja**: Konfiguracja środowisk dev, staging i prod  
+- [ ] **Implementacja bezpieczeństwa**: Uwierzytelnianie przy użyciu managed identity  
+- [ ] **Zarządzanie sekretami**: Integracja Azure Key Vault dla danych wrażliwych  
+- [ ] **Zarządzanie parametrami**: Tworzenie konfiguracji specyficznych dla środowiska  
+- [ ] **Opanowanie uwierzytelniania**: Implementacja bezpiecznych wzorców dostępu  
 
-#### 🏗️ Rozdział 4: Infrastruktura jako kod i wdrożenie  
-- [ ] **Tworzenie niestandardowych szablonów**: Zbudowano szablon aplikacji wielousługowej  
-- [ ] **Opanowanie Bicep**: Stworzono modułowe, wielokrotnego użytku komponenty infrastruktury  
-- [ ] **Automatyzacja wdrożeń**: Wdrożono haki przed/po wdrożeniu  
-- [ ] **Projektowanie architektury**: Wdrożono złożoną architekturę mikroserwisów  
-- [ ] **Optymalizacja szablonów**: Zoptymalizowano szablony pod kątem wydajności i kosztów  
+#### 🏗️ Rozdział 4: Infrastruktura jako kod i wdrożenia  
+- [ ] **Tworzenie własnych szablonów**: Budowa szablonu wielousługowej aplikacji  
+- [ ] **Opanowanie Bicep**: Tworzenie modułowych, wielokrotnego użytku komponentów infra  
+- [ ] **Automatyzacja wdrażania**: Implementacja hooków przed i po wdrożeniu  
+- [ ] **Projektowanie architektury**: Wdrożenie złożonej architektury mikroserwisowej  
+- [ ] **Optymalizacja szablonów**: Optymalizacja pod kątem wydajności i kosztów  
 
 #### 🎯 Rozdział 5: Rozwiązania AI z wieloma agentami  
-- [ ] **Wdrożenie rozwiązania detalicznego**: Wdrożono kompletny scenariusz detaliczny z wieloma agentami  
-- [ ] **Dostosowanie agentów**: Zmodyfikowano zachowania agentów Klienta i Magazynu  
-- [ ] **Skalowanie architektury**: Wdrożono równoważenie obciążenia i autoskalowanie  
-- [ ] **Monitorowanie produkcji**: Skonfigurowano kompleksowe monitorowanie i alertowanie  
-- [ ] **Optymalizacja wydajności**: Zoptymalizowano wydajność systemu wieloagentowego  
+- [ ] **Wdrożenie rozwiązania retail**: Kompleksowy scenariusz wieloagentowy retail  
+- [ ] **Dostosowanie agentów**: Modyfikacja zachowań agentów Customer i Inventory  
+- [ ] **Skalowanie architektury**: Implementacja load balancing i autoskalowania  
+- [ ] **Monitorowanie produkcyjne**: Kompleksowe monitorowanie i alertowanie  
+- [ ] **Optymalizacja wydajności**: Zoptymalizowany system wieloagentowy  
 
-#### 🔍 Rozdział 6: Walidacja przed wdrożeniem i planowanie  
-- [ ] **Analiza pojemności**: Przeanalizowano wymagania dotyczące zasobów dla aplikacji  
-- [ ] **Optymalizacja SKU**: Wybrano opłacalne poziomy usług  
-- [ ] **Automatyzacja walidacji**: Wdrożono skrypty kontroli przed wdrożeniem  
-- [ ] **Planowanie kosztów**: Stworzono szacunki kosztów wdrożenia i budżety  
-- [ ] **Ocena ryzyka**: Zidentyfikowano i zminimalizowano ryzyka wdrożeniowe  
+#### 🔍 Rozdział 6: Walidacja i planowanie przed wdrożeniem  
+- [ ] **Analiza pojemności**: Analiza wymagań zasobów aplikacji  
+- [ ] **Optymalizacja SKU**: Wybór ekonomicznych poziomów usług  
+- [ ] **Automatyzacja walidacji**: Wdrożenie skryptów kontroli przed wdrożeniem  
+- [ ] **Planowanie kosztów**: Tworzenie szacunków i budżetów wdrożeniowych  
+- [ ] **Ocena ryzyka**: Identyfikacja i łagodzenie ryzyk wdrożeniowych  
 
 #### 🚨 Rozdział 7: Rozwiązywanie problemów i debugowanie  
-- [ ] **Umiejętności diagnostyczne**: Pomyślnie zdebugowano celowo uszkodzone wdrożenia  
-- [ ] **Analiza logów**: Skutecznie wykorzystano Azure Monitor i Application Insights  
-- [ ] **Optymalizacja wydajności**: Zoptymalizowano aplikacje o niskiej wydajności  
-- [ ] **Procedury odzyskiwania**: Wdrożono kopie zapasowe i odzyskiwanie po awarii  
-- [ ] **Konfiguracja monitorowania**: Stworzono proaktywne monitorowanie i alertowanie  
+- [ ] **Umiejętności diagnostyczne**: Skuteczne debugowanie celowo uszkodzonych wdrożeń  
+- [ ] **Analiza logów**: Efektywne wykorzystanie Azure Monitor i Application Insights  
+- [ ] **Optymalizacja wydajności**: Poprawa wolno działających aplikacji  
+- [ ] **Procedury odzyskiwania**: Implementacja backupów i odzyskiwania po awarii  
+- [ ] **Konfiguracja monitoringu**: Tworzenie proaktywnego monitoringu i alertów  
 
-#### 🏢 Rozdział 8: Produkcja i wzorce przedsiębiorstwa  
-- [ ] **Zabezpieczenia przedsiębiorstwa**: Wdrożono kompleksowe wzorce bezpieczeństwa  
-- [ ] **Ramowe zarządzanie**: Skonfigurowano Azure
-5. **Wkład społeczności**: Udostępniaj szablony lub ulepszenia
+#### 🏢 Rozdział 8: Wzorce produkcyjne i korporacyjne  
+- [ ] **Bezpieczeństwo korporacyjne**: Wdrażanie kompleksowych wzorców bezpieczeństwa  
+- [ ] **Ramowy system zarządzania**: Konfiguracja Azure Policy i zarządzania zasobami  
+- [ ] **Zaawansowane monitorowanie**: Tworzenie paneli i automatyzacja alertów  
+- [ ] **Integracja CI/CD**: Budowa zautomatyzowanych potoków wdrożeniowych  
+- [ ] **Wdrożenie zgodności**: Spełnienie wymagań zgodności korporacyjnej  
 
-#### Wyniki rozwoju zawodowego
-- **Projekty portfolio**: 8 wdrożeń gotowych do produkcji
-- **Umiejętności techniczne**: Ekspertyza w zakresie standardów branżowych AZD i wdrożeń AI
-- **Zdolności rozwiązywania problemów**: Samodzielne rozwiązywanie problemów i optymalizacja
-- **Uznanie w społeczności**: Aktywny udział w społeczności deweloperów Azure
-- **Rozwój kariery**: Umiejętności bezpośrednio związane z rolami w chmurze i AI
+### Harmonogram nauki i kamienie milowe  
 
-#### Metryki sukcesu
-- **Wskaźnik sukcesu wdrożeń**: >95% udanych wdrożeń
-- **Czas rozwiązywania problemów**: <30 minut na typowe problemy
-- **Optymalizacja wydajności**: Udokumentowane ulepszenia w kosztach i wydajności
-- **Zgodność z bezpieczeństwem**: Wszystkie wdrożenia spełniają standardy bezpieczeństwa przedsiębiorstwa
-- **Transfer wiedzy**: Zdolność do mentorowania innych deweloperów
+#### Tydzień 1-2: Budowa fundamentów  
+- **Kamień milowy**: Wdrożenie pierwszej aplikacji AI przy użyciu AZD  
+- **Walidacja**: Działająca aplikacja dostępna pod publicznym URL  
+- **Umiejętności**: Podstawowe przepływy pracy AZD i integracja usług AI  
 
-### Ciągłe uczenie się i zaangażowanie w społeczność
+#### Tydzień 3-4: Opanowanie konfiguracji  
+- **Kamień milowy**: Wdrożenie wielośrodowiskowe z bezpiecznym uwierzytelnianiem  
+- **Walidacja**: Ta sama aplikacja wdrożona na dev/staging/prod  
+- **Umiejętności**: Zarządzanie środowiskami i implementacja zabezpieczeń  
 
-#### Bądź na bieżąco
-- **Aktualizacje Azure**: Śledź notatki o wydaniach Azure Developer CLI
-- **Wydarzenia społecznościowe**: Uczestnicz w wydarzeniach dla deweloperów Azure i AI
-- **Dokumentacja**: Współtwórz dokumentację społecznościową i przykłady
-- **Pętla zwrotna**: Przekazuj opinie na temat treści kursu i usług Azure
+#### Tydzień 5-6: Ekspertyza w infrastrukturze  
+- **Kamień milowy**: Własny szablon dla złożonej aplikacji wielousługowej  
+- **Walidacja**: Szablon wielokrotnego użycia wdrożony przez innego członka zespołu  
+- **Umiejętności**: Opanowanie Bicep i automatyzacja infrastruktury  
 
-#### Rozwój kariery
-- **Sieć zawodowa**: Nawiązuj kontakty z ekspertami Azure i AI
-- **Możliwości wystąpień**: Prezentuj swoje doświadczenia na konferencjach lub spotkaniach
-- **Wkład w open source**: Współtwórz szablony i narzędzia AZD
-- **Mentorstwo**: Wspieraj innych deweloperów w ich nauce AZD
+#### Tydzień 7-8: Zaawansowana implementacja AI  
+- **Kamień milowy**: Produkcyjnie gotowe rozwiązanie AI wieloagentowego  
+- **Walidacja**: System radzący sobie z obciążeniem rzeczywistym z monitoringiem  
+- **Umiejętności**: Orkiestracja agentów i optymalizacja wydajności  
+
+#### Tydzień 9-10: Gotowość produkcyjna  
+- **Kamień milowy**: Wdrożenie klasy korporacyjnej z pełną zgodnością  
+- **Walidacja**: Pozytywna weryfikacja bezpieczeństwa i audyt optymalizacji kosztów  
+- **Umiejętności**: Zarządzanie, monitoring i integracja CI/CD  
+
+### Ocena i certyfikacja  
+
+#### Metody weryfikacji wiedzy  
+1. **Praktyczne wdrożenia**: Działające aplikacje w każdym rozdziale  
+2. **Przeglądy kodu**: Ocena jakości szablonów i konfiguracji  
+3. **Rozwiązywanie problemów**: Scenariusze i rozwiązania problematyczne  
+4. **Nauczanie rówieśników**: Wyjaśnianie koncepcji innym uczącym się  
+5. **Wkład w społeczność**: Dzielenie się szablonami lub ulepszeniami  
+
+#### Efekty rozwoju zawodowego
+- **Projekty w portfolio**: 8 wdrożeń gotowych do produkcji  
+- **Umiejętności techniczne**: Ekspertyza w standardzie branżowym AZD i wdrożeniach AI  
+- **Zdolności rozwiązywania problemów**: Samodzielne rozwiązywanie problemów i optymalizacja  
+- **Uznanie społeczności**: Aktywny udział w społeczności deweloperów Azure  
+- **Rozwój kariery**: Umiejętności bezpośrednio przydatne w rolach chmurowych i AI  
+
+#### Metryki sukcesu  
+- **Wskaźnik sukcesu wdrożeń**: >95% udanych wdrożeń  
+- **Czas rozwiązywania problemów**: <30 minut dla typowych problemów  
+- **Optymalizacja wydajności**: Wymierne poprawy kosztów i wydajności  
+- **Zgodność z bezpieczeństwem**: Wszystkie wdrożenia spełniają standardy bezpieczeństwa przedsiębiorstwa  
+- **Transfer wiedzy**: Umiejętność mentorskiego wsparcia innych deweloperów  
+
+### Ciągłe uczenie się i zaangażowanie społeczności  
+
+#### Bądź na bieżąco  
+- **Aktualizacje Azure**: Śledź notatki do wydań Azure Developer CLI  
+- **Wydarzenia społeczności**: Uczestnicz w wydarzeniach dla deweloperów Azure i AI  
+- **Dokumentacja**: Współtwórz dokumentację i przykłady dla społeczności  
+- **Pętla informacji zwrotnej**: Przekazuj opinie na temat treści kursu i usług Azure  
+
+#### Rozwój kariery  
+- **Sieć zawodowa**: Nawiąż kontakty z ekspertami Azure i AI  
+- **Możliwości wystąpień**: Prezentuj zdobytą wiedzę na konferencjach lub spotkaniach  
+- **Wkład w open source**: Wspieraj szablony i narzędzia AZD  
+- **Mentoring**: Wspieraj innych deweloperów w ich nauce AZD  
 
 ---
 
-**Nawigacja po rozdziałach:**
-- **📚 Strona główna kursu**: [AZD dla początkujących](../README.md)
-- **📖 Rozpocznij naukę**: [Rozdział 1: Podstawy i szybki start](../README.md#-chapter-1-foundation--quick-start)
-- **🎯 Śledzenie postępów**: Śledź swoje osiągnięcia w ramach kompleksowego systemu nauki składającego się z 8 rozdziałów
-- **🤝 Społeczność**: [Azure Discord](https://discord.gg/microsoft-azure) dla wsparcia i dyskusji
+**Nawigacja po rozdziale:**  
+- **📚 Strona kursu**: [AZD For Beginners](../README.md)  
+- **📖 Rozpocznij naukę**: [Rozdział 1: Podstawy i szybki start](../README.md#-chapter-1-foundation--quick-start)  
+- **🎯 Śledzenie postępów**: Monitoruj swój rozwój w ramach kompleksowego, 8-rozdziałowego systemu nauki  
+- **🤝 Społeczność**: [Azure Discord](https://discord.gg/microsoft-azure) dla wsparcia i dyskusji  
 
-**Śledzenie postępów w nauce**: Korzystaj z tej strukturalnej instrukcji, aby opanować Azure Developer CLI poprzez progresywną, praktyczną naukę z mierzalnymi wynikami i korzyściami dla rozwoju zawodowego.
+**Śledzenie postępów nauki:** Skorzystaj z tego uporządkowanego przewodnika, aby opanować Azure Developer CLI poprzez stopniową, praktyczną naukę z mierzalnymi rezultatami i korzyściami rozwoju zawodowego.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Zastrzeżenie**:  
-Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż staramy się zapewnić dokładność, prosimy mieć na uwadze, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego rodzimym języku powinien być uznawany za wiarygodne źródło. W przypadku informacji krytycznych zaleca się skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+**Zastrzeżenie**:
+Dokument ten został przetłumaczony przy użyciu usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mimo że dążymy do dokładności, należy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego języku źródłowym powinien być uważany za źródło wiarygodne. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,22 +1,22 @@
 # 2. Validasi Template
 
-!!! tip "DI AKHIR MODUL INI ANDA AKAN DAPAT"
+!!! tip "DI AKHIR MODUL INI ANDA AKAN MAMPU"
 
     - [ ] Menganalisis Arsitektur Solusi AI
-    - [ ] Memahami Alur Kerja Penerapan AZD
+    - [ ] Memahami Alur Penerapan AZD
     - [ ] Menggunakan GitHub Copilot untuk membantu penggunaan AZD
-    - [ ] **Lab 2:** Deploy & Validasi template AI Agents
+    - [ ] **Lab 2:** Mendeploy & Memvalidasi template AI Agents
 
 ---
 
 
-## 1. Pendahuluan
+## 1. Pengantar
 
 The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) atau `azd` adalah alat baris perintah sumber terbuka yang menyederhanakan alur kerja pengembang saat membangun dan menerapkan aplikasi ke Azure. 
 
-[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) adalah repositori standar yang menyertakan contoh kode aplikasi, aset _infrastructure-as-code_, dan file konfigurasi `azd` untuk arsitektur solusi yang kohesif. Penyediaan infrastruktur menjadi sesederhana perintah `azd provision` - sementara menggunakan `azd up` memungkinkan Anda untuk menyediakan infrastruktur **dan** menerapkan aplikasi Anda sekaligus!
+[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) adalah repositori standar yang mencakup kode aplikasi contoh, _infrastructure-as-code_ assets, dan file konfigurasi `azd` untuk arsitektur solusi yang terpadu. Penyediaan infrastruktur menjadi semudah menjalankan perintah `azd provision` - sedangkan menggunakan `azd up` memungkinkan Anda untuk menyediakan infrastruktur **dan** menyebarkan aplikasi Anda sekaligus!
 
-Akibatnya, memulai proses pengembangan aplikasi Anda bisa sesederhana menemukan _AZD Starter template_ yang paling mendekati kebutuhan aplikasi dan infrastruktur Anda - lalu menyesuaikan repositori agar sesuai dengan persyaratan skenario Anda.
+Sebagai hasilnya, memulai proses pengembangan aplikasi Anda dapat sesederhana menemukan _AZD Starter template_ yang paling mendekati kebutuhan aplikasi dan infrastruktur Anda - lalu menyesuaikan repositori tersebut untuk memenuhi persyaratan skenario Anda.
 
 Sebelum kita mulai, pastikan Anda telah menginstal Azure Developer CLI.
 
@@ -26,19 +26,19 @@ Sebelum kita mulai, pastikan Anda telah menginstal Azure Developer CLI.
       azd version
       ```
 
-1. Anda akan melihat sesuatu seperti ini!
+1. Anda seharusnya melihat sesuatu seperti ini!
 
       ```bash title="" linenums="0"
       azd version 1.19.0 (commit b3d68cea969b2bfbaa7b7fa289424428edb93e97)
       ```
 
-**Sekarang Anda siap memilih dan menerapkan template dengan azd**
+**Sekarang Anda siap untuk memilih dan menyebarkan template dengan azd**
 
 ---
 
 ## 2. Pemilihan Template
 
-Platform Microsoft Foundry dilengkapi dengan [serangkaian template AZD yang direkomendasikan](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) yang mencakup skenario solusi populer seperti _otomatisasi alur kerja multi-agen_ dan _pemrosesan konten multi-modal_. Anda juga dapat menemukan template ini dengan mengunjungi portal Microsoft Foundry.
+Platform Microsoft Foundry dilengkapi dengan [serangkaian templat AZD yang direkomendasikan](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) yang mencakup skenario solusi populer seperti _otomatisasi alur kerja multi-agent_ dan _pemrosesan konten multi-modal_. Anda juga dapat menemukan templat ini dengan mengunjungi portal Microsoft Foundry.
 
 1. Kunjungi [https://ai.azure.com/templates]
 1. Masuk ke portal Microsoft Foundry saat diminta - Anda akan melihat sesuatu seperti ini.
@@ -46,12 +46,12 @@ Platform Microsoft Foundry dilengkapi dengan [serangkaian template AZD yang dire
 ![Pilih](../../../../../translated_images/id/01-pick-template.60d2d5fff5ebc374.webp)
 
 
-Opsi **Basic** adalah template pemula Anda:
+Opsi **Basic** adalah templat pemula Anda:
 
-1. [ ] [Mulai dengan AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) yang menerapkan aplikasi chat dasar _dengan data Anda_ ke Azure Container Apps. Gunakan ini untuk mengeksplorasi skenario chatbot AI dasar.
-1. [X] [Mulai dengan AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) yang juga menerapkan AI Agent standar (dengan Foundry Agents). Gunakan ini untuk mengenal solusi AI agenik yang melibatkan alat dan model.
+1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) that deploys a basic chat application _with your data_ to Azure Container Apps. Use this to explore a basic AI chatbot scenario.
+1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) that also deploys a standard AI Agent (with the Foundry Agents). Use this to get familiar with agentic AI solutions involving tools and models.
 
-Kunjungi tautan kedua di tab browser baru (atau klik `Open in GitHub` untuk kartu terkait). Anda akan melihat repositori untuk AZD Template ini. Luangkan satu menit untuk menjelajahi README. Arsitektur aplikasi terlihat seperti ini:
+Kunjungi tautan kedua di tab browser baru (atau klik `Open in GitHub` pada kartu terkait). Anda akan melihat repositori untuk AZD Template ini. Luangkan waktu untuk mengeksplorasi README. Arsitektur aplikasi terlihat seperti ini:
 
 ![Arsitektur](../../../../../translated_images/id/architecture.8cec470ec15c65c7.webp)
 
@@ -59,56 +59,56 @@ Kunjungi tautan kedua di tab browser baru (atau klik `Open in GitHub` untuk kart
 
 ## 3. Aktivasi Template
 
-Mari kita coba menerapkan template ini dan memastikan itu valid. Kita akan mengikuti panduan di bagian [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started).
+Mari kita coba mendeploy template ini dan memastikan itu valid. Kita akan mengikuti panduan di bagian [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started).
 
 1. Klik [this link](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) - konfirmasi tindakan default untuk `Create codespace`
-1. Ini membuka tab browser baru - tunggu sesi GitHub Codespaces selesai dimuat
+1. Ini membuka tab browser baru - tunggu hingga sesi GitHub Codespaces selesai dimuat
 1. Buka terminal VS Code di Codespaces - ketik perintah berikut:
 
    ```bash title="" linenums="0"
    azd up
    ```
 
-Complete the workflow steps that this will trigger:
+Selesaikan langkah-langkah alur kerja yang akan dipicu oleh ini:
 
 1. Anda akan diminta untuk masuk ke Azure - ikuti instruksi untuk mengautentikasi
-1. Masukkan nama lingkungan unik untuk Anda - mis., saya menggunakan `nitya-mshack-azd`
-1. This  will create a `.azure/` folder - you will see a subfolder with the env name
-1. Anda akan diminta untuk memilih nama langganan - pilih default
+1. Masukkan nama environment yang unik untuk Anda - mis., saya menggunakan `nitya-mshack-azd`
+1. Ini akan membuat folder `.azure/` - Anda akan melihat subfolder dengan nama env tersebut
+1. Anda akan diminta untuk memilih nama subscription - pilih default
 1. Anda akan diminta untuk memilih lokasi - gunakan `East US 2`
 
-Sekarang, Anda menunggu sampai penyediaan selesai. **Ini memakan waktu 10-15 menit**
+Sekarang, tunggu hingga penyediaan selesai. **Ini membutuhkan waktu 10-15 menit**
 
 1. Saat selesai, konsol Anda akan menampilkan pesan SUCCESS seperti ini:
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
-1. Portal Azure Anda sekarang akan memiliki resource group yang diprovisikan dengan nama env itu:
+1. Portal Azure Anda sekarang akan memiliki resource group yang disediakan dengan nama environment tersebut:
 
       ![Infrastruktur](../../../../../translated_images/id/02-provisioned-infra.46c706b14f56e0bf.webp)
 
-1. **Sekarang Anda siap memvalidasi infrastruktur dan aplikasi yang telah diterapkan**.
+1. **Sekarang Anda siap untuk memvalidasi infrastruktur dan aplikasi yang telah disebarkan**.
 
 ---
 
 ## 4. Validasi Template
 
-1. Kunjungi halaman Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) - masuk saat diminta
-1. Klik pada RG untuk nama lingkungan Anda - Anda akan melihat halaman di atas
+1. Kunjungi halaman Resource Groups di Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) - masuk saat diminta
+1. Klik RG untuk nama environment Anda - Anda akan melihat halaman seperti di atas
 
-      - klik pada resource Azure Container Apps
-      - klik pada Application Url di bagian _Essentials_ (kanan atas)
+      - klik resource Azure Container Apps
+      - klik Application Url di bagian _Essentials_ (kanan atas)
 
-1. Anda akan melihat UI front-end aplikasi yang dihosting seperti ini:
+1. Anda seharusnya melihat UI front-end aplikasi yang dihosting seperti ini:
 
    ![Aplikasi](../../../../../translated_images/id/03-test-application.471910da12c3038e.webp)
 
-1. Coba ajukan beberapa [pertanyaan contoh](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
+1. Cobalah mengajukan beberapa [pertanyaan contoh](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
-      1. Tanyakan: ```What is the capital of France?``` 
-      1. Tanyakan: ```What's the best tent under $200 for two people, and what features does it include?```
+      1. Ask: ```Apa ibu kota Prancis?``` 
+      1. Ask: ```Tenda terbaik di bawah $200 untuk dua orang, dan fitur apa saja yang dimilikinya?```
 
-1. Anda akan mendapatkan jawaban yang mirip dengan yang ditunjukkan di bawah ini. _Tapi bagaimana ini bekerja?_ 
+1. Anda seharusnya mendapatkan jawaban yang mirip dengan yang ditunjukkan di bawah ini. _Tapi bagaimana ini bekerja?_ 
 
       ![Aplikasi](../../../../../translated_images/id/03-test-question.521c1e863cbaddb6.webp)
 
@@ -116,40 +116,40 @@ Sekarang, Anda menunggu sampai penyediaan selesai. **Ini memakan waktu 10-15 men
 
 ## 5.  Validasi Agen
 
-Azure Container App menerapkan sebuah endpoint yang terhubung ke AI Agent yang disediakan dalam proyek Microsoft Foundry untuk template ini. Mari kita lihat apa artinya itu.
+Azure Container App menerapkan endpoint yang terhubung ke AI Agent yang disediakan di proyek Microsoft Foundry untuk template ini. Mari kita lihat apa artinya itu.
 
-1. Kembali ke halaman _Overview_ Azure Portal untuk resource group Anda
+1. Kembalilah ke halaman _Overview_ di Azure Portal untuk resource group Anda
 
-1. Klik pada resource `Microsoft Foundry` dalam daftar tersebut
+1. Klik resource `Microsoft Foundry` di daftar tersebut
 
 1. Anda akan melihat ini. Klik tombol `Go to Microsoft Foundry Portal`. 
    ![Foundry](../../../../../translated_images/id/04-view-foundry-project.fb94ca41803f28f3.webp)
 
-1. Anda akan melihat halaman Proyek Foundry untuk aplikasi AI Anda
+1. Anda akan melihat halaman Foundry Project untuk aplikasi AI Anda
    ![Proyek](../../../../../translated_images/id/05-visit-foundry-portal.d734e98135892d7e.webp)
 
-1. Klik pada `Agents` - Anda akan melihat Agent default yang disediakan dalam proyek Anda
+1. Klik pada `Agents` - Anda melihat Agen default yang disediakan di proyek Anda
    ![Agen](../../../../../translated_images/id/06-visit-agents.bccb263f77b00a09.webp)
 
-1. Pilih itu - dan Anda akan melihat detail Agent. Perhatikan hal berikut:
+1. Pilih itu - dan Anda melihat detail Agen. Perhatikan hal berikut:
 
       - Agen menggunakan File Search secara default (selalu)
-      - `Knowledge` agen menunjukkan bahwa ia memiliki 32 file yang diunggah (untuk file search)
+      - Agen `Knowledge` menunjukkan memiliki 32 file yang diunggah (untuk pencarian file)
       ![Agen](../../../../../translated_images/id/07-view-agent-details.0e049f37f61eae62.webp)
 
-1. Cari opsi `Data+indexes` di menu kiri dan klik untuk melihat detail. 
+1. Cari opsi `Data+indexes` di menu kiri dan klik untuk detail. 
 
       - Anda akan melihat 32 file data yang diunggah untuk knowledge.
-      - Ini akan sesuai dengan 12 file customer dan 20 file product di bawah `src/files` 
+      - Ini akan sesuai dengan 12 file customer dan 20 file produk di bawah `src/files` 
       ![Data](../../../../../translated_images/id/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
 **Anda telah memvalidasi operasi Agen!** 
 
-1. Respons agen didasarkan pada pengetahuan dalam file-file tersebut. 
-1. Anda sekarang dapat mengajukan pertanyaan terkait data itu, dan mendapatkan respons yang berlandaskan.
-1. Contoh: `customer_info_10.json` menggambarkan 3 pembelian yang dilakukan oleh "Amanda Perez"
+1. Respons agen didasarkan pada knowledge dalam file-file tersebut. 
+1. Anda sekarang dapat menanyakan pertanyaan terkait data itu, dan mendapatkan respons yang berbasis.
+1. Contoh: `customer_info_10.json` menjelaskan 3 pembelian yang dilakukan oleh "Amanda Perez"
 
-Kembali ke tab browser dengan endpoint Container App dan tanyakan: `What products does Amanda Perez own?`. Anda akan melihat sesuatu seperti ini:
+Kunjungi kembali tab browser dengan endpoint Container App dan tanyakan: `Produk apa yang dimiliki Amanda Perez?`. Anda seharusnya melihat sesuatu seperti ini:
 
 ![Data](../../../../../translated_images/id/09-ask-in-aca.4102297fc465a4d5.webp)
 
@@ -157,23 +157,23 @@ Kembali ke tab browser dengan endpoint Container App dan tanyakan: `What product
 
 ## 6. Playground Agen
 
-Mari bangun sedikit intuisi lebih lanjut tentang kemampuan Microsoft Foundry, dengan mencoba Agent di Agents Playground. 
+Mari kita bangun sedikit intuisi untuk kemampuan Microsoft Foundry, dengan mencoba Agen di Agents Playground. 
 
-1. Kembali ke halaman `Agents` di Microsoft Foundry - pilih agent default
+1. Kembalilah ke halaman `Agents` di Microsoft Foundry - pilih agen default
 1. Klik opsi `Try in Playground` - Anda akan mendapatkan UI Playground seperti ini
-1. Tanyakan pertanyaan yang sama: `What products does Amanda Perez own?`
+1. Tanyakan pertanyaan yang sama: `Produk apa yang dimiliki Amanda Perez?`
 
     ![Data](../../../../../translated_images/id/09-ask-in-playground.a1b93794f78fa676.webp)
 
-Anda mendapatkan respons yang sama (atau serupa) - tetapi Anda juga mendapatkan informasi tambahan yang dapat Anda gunakan untuk memahami kualitas, biaya, dan kinerja aplikasi agenik Anda. Misalnya:
+Anda mendapatkan respons yang sama (atau mirip) - tetapi Anda juga mendapatkan informasi tambahan yang dapat Anda gunakan untuk memahami kualitas, biaya, dan kinerja aplikasi berbasis agen Anda. Misalnya:
 
-1. Perhatikan bahwa respons menyebut file data yang digunakan untuk "mengarahkan" respons
-1. Arahkan kursor ke salah satu label file ini - apakah data tersebut cocok dengan kueri dan respons yang ditampilkan?
+1. Perhatikan bahwa respons mengutip file data yang digunakan untuk "mengground" respons
+1. Arahkan kursor di atas salah satu label file ini - apakah data cocok dengan kueri dan respons yang ditampilkan?
 
-Anda juga melihat baris _statistik_ di bawah respons. 
+Anda juga melihat baris _stats_ di bawah respons. 
 
-1. Arahkan kursor ke metrik mana pun - mis., Safety. Anda akan melihat sesuatu seperti ini
-1. Apakah penilaian yang dinilai cocok dengan intuisi Anda tentang tingkat keselamatan respons?
+1. Arahkan kursor pada metrik mana pun - mis., Safety. Anda akan melihat sesuatu seperti ini
+1. Apakah penilaian yang dinilai sesuai dengan intuisi Anda tentang tingkat keselamatan respons?
 
       ![Data](../../../../../translated_images/id/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
@@ -181,7 +181,7 @@ Anda juga melihat baris _statistik_ di bawah respons.
 
 ## 7. Observabilitas Bawaan
 
-Observabilitas berkaitan dengan menginstrumen aplikasi Anda untuk menghasilkan data yang dapat digunakan untuk memahami, men-debug, dan mengoptimalkan operasinya. Untuk merasakan ini:
+Observabilitas adalah tentang menginstrumentasi aplikasi Anda untuk menghasilkan data yang dapat digunakan untuk memahami, men-debug, dan mengoptimalkan operasi aplikasi tersebut. Untuk mendapatkan gambaran tentang ini:
 
 1. Klik tombol `View Run Info` - Anda akan melihat tampilan ini. Ini adalah contoh [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) dalam aksi. _Anda juga dapat mendapatkan tampilan ini dengan mengklik Thread Logs di menu tingkat atas_.
 
@@ -191,19 +191,19 @@ Observabilitas berkaitan dengan menginstrumen aplikasi Anda untuk menghasilkan d
 
       ![Agen](../../../../../translated_images/id/10-view-run-info.b20ebd75fef6a1cc.webp)
 
-1. Klik tab `Metadata` untuk melihat atribut tambahan untuk run, yang dapat memberikan konteks berguna untuk men-debug masalah nanti.   
+1. Klik tab `Metadata` untuk melihat atribut tambahan untuk run, yang mungkin memberikan konteks berguna untuk men-debug masalah di kemudian hari.   
 
       ![Agen](../../../../../translated_images/id/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 
-1. Klik tab `Evaluations` untuk melihat penilaian otomatis yang dibuat terhadap respons agen. Ini termasuk evaluasi keselamatan (mis., Self-harm) dan evaluasi khusus agen (mis., Penyelesaian Intent, Kepatuhan Tugas).
+1. Klik tab `Evaluations` untuk melihat penilaian otomatis yang dibuat terhadap respons agen. Ini mencakup evaluasi keselamatan (mis., Menyakiti diri sendiri) dan evaluasi spesifik agen (mis., Penyelesaian niat, Kepatuhan tugas).
 
       ![Agen](../../../../../translated_images/id/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
-1. Terakhir, klik tab `Monitoring` di menu sidebar.
+1. Terakhir tetapi tidak kalah penting, klik tab `Monitoring` di menu sidebar.
 
       - Pilih tab `Resource usage` di halaman yang ditampilkan - dan lihat metriknya.
-      - Lacak penggunaan aplikasi dalam hal biaya (token) dan beban (permintaan).
+      - Lacak penggunaan aplikasi dalam hal biaya (token) dan beban (request).
       - Lacak latensi aplikasi hingga byte pertama (pemrosesan input) dan byte terakhir (output).
 
       ![Agen](../../../../../translated_images/id/13-monitoring-resources.5148015f7311807f.webp)
@@ -212,18 +212,18 @@ Observabilitas berkaitan dengan menginstrumen aplikasi Anda untuk menghasilkan d
 
 ## 8. Variabel Lingkungan
 
-Sejauh ini, kita telah menelusuri penerapan di browser - dan memvalidasi bahwa infrastruktur kita telah diprovisikan dan aplikasi beroperasi. Tetapi untuk bekerja dengan aplikasi secara _code-first_, kita perlu mengonfigurasi lingkungan pengembangan lokal kita dengan variabel relevan yang diperlukan untuk bekerja dengan sumber daya ini. Menggunakan `azd` membuatnya mudah.
+Sejauh ini, kita telah melalui penyebaran di browser - dan memvalidasi bahwa infrastruktur kita disediakan dan aplikasinya beroperasi. Tetapi untuk bekerja dengan aplikasi secara _code-first_, kita perlu mengonfigurasi lingkungan pengembangan lokal kita dengan variabel relevan yang diperlukan untuk bekerja dengan sumber daya ini. Menggunakan `azd` membuatnya mudah.
 
-1. The Azure Developer CLI [uses environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) untuk menyimpan dan mengelola pengaturan konfigurasi untuk penerapan aplikasi.
+1. The Azure Developer CLI [uses environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) untuk menyimpan dan mengelola pengaturan konfigurasi untuk penyebaran aplikasi.
 
-1. Variabel lingkungan disimpan di `.azure/<env-name>/.env` - ini memfokuskan mereka pada lingkungan `env-name` yang digunakan selama penerapan dan membantu Anda mengisolasi lingkungan antar target penerapan yang berbeda dalam repositori yang sama.
+1. Variabel lingkungan disimpan di `.azure/<env-name>/.env` - ini membatasi cakupannya ke environment `env-name` yang digunakan selama penyebaran dan membantu Anda mengisolasi environment antara target penyebaran yang berbeda dalam repo yang sama.
 
-1. Variabel lingkungan secara otomatis dimuat oleh perintah `azd` setiap kali menjalankan perintah tertentu (mis., `azd up`). Perlu dicatat bahwa `azd` tidak secara otomatis membaca variabel lingkungan tingkat OS (mis., yang disetel di shell) - sebaliknya gunakan `azd set env` dan `azd get env` untuk mentransfer informasi dalam skrip.
+1. Variabel lingkungan otomatis dimuat oleh perintah `azd` kapan pun ia mengeksekusi perintah tertentu (mis., `azd up`). Perhatikan bahwa `azd` tidak secara otomatis membaca variabel lingkungan tingkat OS (mis., yang diatur di shell) - sebaliknya gunakan `azd set env` dan `azd get env` untuk mentransfer informasi dalam skrip.
 
 
 Mari coba beberapa perintah:
 
-1. Dapatkan semua variabel lingkungan yang diatur untuk `azd` di lingkungan ini:
+1. Dapatkan semua variabel lingkungan yang disetel untuk `azd` di environment ini:
 
       ```bash title="" linenums="0"
       azd env get-values
@@ -232,14 +232,14 @@ Mari coba beberapa perintah:
       Anda akan melihat sesuatu seperti:
 
       ```bash title="" linenums="0"
-      AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4o-mini"
+      AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
       AZURE_AI_AGENT_NAME="agent-template-assistant"
       AZURE_AI_EMBED_DEPLOYMENT_NAME="text-embedding-3-small"
       AZURE_AI_EMBED_DIMENSIONS=100
       ...
       ```
 
-1. Dapatkan nilai tertentu - mis., saya ingin tahu apakah kita mengatur nilai `AZURE_AI_AGENT_MODEL_NAME`
+1. Dapatkan nilai spesifik - mis., saya ingin tahu apakah kami mengatur nilai `AZURE_AI_AGENT_MODEL_NAME`
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
@@ -251,7 +251,7 @@ Mari coba beberapa perintah:
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
       ```
 
-1. Tetapkan variabel lingkungan baru untuk `azd`. Di sini, kita memperbarui nama model agen. _Catatan: setiap perubahan yang dibuat akan segera tercermin dalam file `.azure/<env-name>/.env`._
+1. Setel variabel lingkungan baru untuk `azd`. Di sini, kami memperbarui nama model agen. _Catatan: setiap perubahan yang dibuat akan segera tercermin di file `.azure/<env-name>/.env`._
 
       ```bash title="" linenums="0"
       azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
@@ -259,21 +259,21 @@ Mari coba beberapa perintah:
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-      Sekarang, kita harus menemukan nilai sudah diatur:
+      Sekarang, kita harus menemukan nilai telah disetel:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
 
-1. Perlu dicatat bahwa beberapa sumber daya bersifat persisten (mis., penyebaran model) dan akan memerlukan lebih dari sekadar `azd up` untuk memaksa penyebaran ulang. Mari coba menurunkan penerapan asli dan menerapkan kembali dengan variabel lingkungan yang diubah.
+1. Perlu diingat bahwa beberapa sumber daya bersifat persisten (mis., penyebaran model) dan akan memerlukan lebih dari sekadar `azd up` untuk memaksa penyebaran ulang. Mari kita coba menurunkan penyebaran awal dan mendeploy ulang dengan variabel environment yang diubah.
 
-1. **Refresh** Jika Anda sebelumnya telah menerapkan infrastruktur menggunakan template azd - Anda dapat _refresh_ status variabel lingkungan lokal Anda berdasarkan status saat ini dari penerapan Azure Anda menggunakan perintah ini:
+1. **Refresh** Jika Anda sebelumnya telah menyebarkan infrastruktur menggunakan template azd - Anda dapat _refresh_ status variabel lingkungan lokal Anda berdasarkan status penyebaran Azure Anda saat ini menggunakan perintah ini:
 
       ```bash title="" linenums="0"
       azd env refresh
       ```
 
-      Ini adalah cara yang ampuh untuk _sinkronkan_ variabel lingkungan di dua atau lebih lingkungan pengembangan lokal (misalnya, tim dengan beberapa pengembang) - memungkinkan infrastruktur yang dideploy berfungsi sebagai sumber kebenaran untuk status variabel lingkungan. Anggota tim cukup _muat ulang_ variabel untuk kembali sinkron.
+      Ini adalah cara yang ampuh untuk _menyinkronkan_ variabel lingkungan di antara dua atau lebih lingkungan pengembangan lokal (misalnya, tim dengan beberapa pengembang) - memungkinkan infrastruktur yang dideploy menjadi sumber kebenaran untuk status variabel lingkungan. Anggota tim cukup _segarkan_ variabel untuk kembali sinkron.
 
 ---
 
@@ -283,11 +283,11 @@ Anda baru saja menyelesaikan alur kerja ujung-ke-ujung di mana Anda:
 
 - [X] Memilih Template AZD yang Ingin Anda Gunakan
 - [X] Meluncurkan Template dengan GitHub Codespaces 
-- [X] Mendeploy Template dan memvalidasi bahwa itu berfungsi
+- [X] Menyebarkan Template dan memvalidasi bahwa itu berfungsi
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Penafian:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan berbasis AI Co-op Translator (https://github.com/Azure/co-op-translator). Meskipun kami berupaya mencapai ketepatan, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat penting, disarankan menggunakan jasa penerjemah profesional manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul akibat penggunaan terjemahan ini.
+**Disclaimer**:
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya mencapai akurasi, harap diperhatikan bahwa terjemahan otomatis dapat mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat kritis, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas salah paham atau salah tafsir yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

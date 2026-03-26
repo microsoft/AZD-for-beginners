@@ -1,195 +1,195 @@
-# Giải pháp Đa Tác Nhân Bán Lẻ - Mẫu Hạ Tầng
+# Retail Multi-Agent Solution - Infrastructure Template
 
-**Chương 5: Gói Triển Khai Sản Xuất**
-- **📚 Trang Chủ Khóa Học**: [AZD Cho Người Mới Bắt Đầu](../../README.md)
-- **📖 Chương Liên Quan**: [Chương 5: Giải pháp AI Đa Tác Nhân](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **📝 Hướng Dẫn Kịch Bản**: [Kiến Trúc Hoàn Chỉnh](../retail-scenario.md)
-- **🎯 Triển Khai Nhanh**: [Triển Khai Một Lần Nhấp](../../../../examples/retail-multiagent-arm-template)
+**Chapter 5: Production Deployment Package**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Related Chapter**: [Chương 5: Giải pháp AI Đa tác nhân](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **📝 Scenario Guide**: [Complete Architecture](../retail-scenario.md)
+- **🎯 Quick Deploy**: [Triển khai một lần nhấp](#-quick-deployment)
 
 > **⚠️ CHỈ LÀ MẪU HẠ TẦNG**  
-> Mẫu ARM này triển khai **tài nguyên Azure** cho hệ thống đa tác nhân.  
+> Mẫu ARM này triển khai **các tài nguyên Azure** cho một hệ thống đa tác nhân.  
 >  
 > **Những gì được triển khai (15-25 phút):**
-> - ✅ Azure OpenAI (GPT-4o, GPT-4o-mini, embeddings trên 3 khu vực)
-> - ✅ Dịch vụ Tìm kiếm AI (trống, sẵn sàng tạo chỉ mục)
-> - ✅ Ứng dụng Container (hình ảnh mẫu, sẵn sàng cho mã của bạn)
-> - ✅ Lưu trữ, Cosmos DB, Key Vault, Application Insights
+> - ✅ Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini, embeddings across 3 regions)
+> - ✅ Dịch vụ AI Search (rỗng, sẵn sàng để tạo index)
+> - ✅ Container Apps (hình ảnh giữ chỗ, sẵn sàng cho mã của bạn)
+> - ✅ Storage, Cosmos DB, Key Vault, Application Insights
 >  
-> **Những gì KHÔNG bao gồm (cần phát triển):**
-> - ❌ Mã triển khai tác nhân (Tác nhân Khách hàng, Tác nhân Kho hàng)
-> - ❌ Logic định tuyến và điểm cuối API
+> **Những gì KHÔNG bao gồm (cần phát triển thêm):**
+> - ❌ Mã triển khai agent (Customer Agent, Inventory Agent)
+> - ❌ Logic định tuyến và các endpoint API
 > - ❌ Giao diện chat frontend
-> - ❌ Các schema chỉ mục tìm kiếm và pipeline dữ liệu
-> - ❌ **Ước tính thời gian phát triển: 80-120 giờ**
+> - ❌ Schema index tìm kiếm và các pipelines dữ liệu
+> - ❌ **Ước tính công sức phát triển: 80-120 giờ**
 >  
 > **Sử dụng mẫu này nếu:**
-> - ✅ Bạn muốn cung cấp hạ tầng Azure cho dự án đa tác nhân
-> - ✅ Bạn dự định phát triển triển khai tác nhân riêng biệt
-> - ✅ Bạn cần một cơ sở hạ tầng sẵn sàng cho sản xuất
+> - ✅ Bạn muốn cấp phát hạ tầng Azure cho một dự án đa tác nhân
+> - ✅ Bạn dự định phát triển mã agent riêng biệt
+> - ✅ Bạn cần một baseline hạ tầng sẵn sàng cho production
 >  
-> **Không sử dụng nếu:**
+> **Không dùng nếu:**
 > - ❌ Bạn mong đợi một demo đa tác nhân hoạt động ngay lập tức
-> - ❌ Bạn đang tìm kiếm ví dụ mã ứng dụng hoàn chỉnh
+> - ❌ Bạn đang tìm ví dụ mã ứng dụng hoàn chỉnh
 
-## Tổng Quan
+## Overview
 
-Thư mục này chứa một mẫu Azure Resource Manager (ARM) toàn diện để triển khai **nền tảng hạ tầng** của hệ thống hỗ trợ khách hàng đa tác nhân. Mẫu này cung cấp tất cả các dịch vụ Azure cần thiết, được cấu hình và kết nối đúng cách, sẵn sàng cho việc phát triển ứng dụng của bạn.
+Thư mục này chứa một mẫu Azure Resource Manager (ARM) toàn diện để triển khai **nền tảng hạ tầng** cho hệ thống hỗ trợ khách hàng đa tác nhân. Mẫu sẽ cấp phát tất cả dịch vụ Azure cần thiết, được cấu hình và kết nối đúng cách, sẵn sàng cho việc phát triển ứng dụng của bạn.
 
-**Sau khi triển khai, bạn sẽ có:** Hạ tầng Azure sẵn sàng cho sản xuất  
-**Để hoàn thành hệ thống, bạn cần:** Mã tác nhân, giao diện frontend, và cấu hình dữ liệu (xem [Hướng Dẫn Kiến Trúc](../retail-scenario.md))
+**Sau khi triển khai, bạn sẽ có:** Hạ tầng Azure sẵn cho production  
+**Để hoàn thiện hệ thống, bạn cần:** Mã agent, UI frontend và cấu hình dữ liệu (xem [Architecture Guide](../retail-scenario.md))
 
 ## 🎯 Những gì được triển khai
 
-### Hạ tầng Cốt lõi (Trạng thái Sau Triển Khai)
+### Core Infrastructure (Trạng thái sau khi triển khai)
 
-✅ **Dịch vụ Azure OpenAI** (Sẵn sàng cho các cuộc gọi API)
-  - Khu vực chính: Triển khai GPT-4o (công suất 20K TPM)
-  - Khu vực phụ: Triển khai GPT-4o-mini (công suất 10K TPM)
-  - Khu vực thứ ba: Mô hình embeddings văn bản (công suất 30K TPM)
-  - Khu vực đánh giá: Mô hình đánh giá GPT-4o (công suất 15K TPM)
-  - **Trạng thái:** Hoạt động hoàn toàn - có thể thực hiện các cuộc gọi API ngay lập tức
+✅ **Microsoft Foundry Models Services** (Sẵn sàng cho các cuộc gọi API)
+  - Primary region: gpt-4.1 deployment (20K TPM capacity)
+  - Secondary region: gpt-4.1-mini deployment (10K TPM capacity)
+  - Tertiary region: Text embeddings model (30K TPM capacity)
+  - Evaluation region: gpt-4.1 grader model (15K TPM capacity)
+  - **Trạng thái:** Hoạt động đầy đủ - có thể gọi API ngay lập tức
 
-✅ **Azure AI Search** (Trống - sẵn sàng cấu hình)
-  - Khả năng tìm kiếm vector được kích hoạt
-  - Tier tiêu chuẩn với 1 phân vùng, 1 bản sao
-  - **Trạng thái:** Dịch vụ đang chạy, nhưng cần tạo chỉ mục
-  - **Hành động cần thiết:** Tạo chỉ mục tìm kiếm với schema của bạn
+✅ **Azure AI Search** (Rỗng - sẵn sàng để cấu hình)
+  - Khả năng tìm kiếm vector được bật
+  - Hạng mục Standard với 1 partition, 1 replica
+  - **Trạng thái:** Dịch vụ đang chạy, nhưng cần tạo index
+  - **Hành động cần thiết:** Tạo search index với schema của bạn
 
-✅ **Tài khoản Lưu trữ Azure** (Trống - sẵn sàng tải lên)
-  - Các container blob: `documents`, `uploads`
+✅ **Azure Storage Account** (Rỗng - sẵn sàng để tải lên)
+  - Blob containers: `documents`, `uploads`
   - Cấu hình bảo mật (chỉ HTTPS, không truy cập công khai)
-  - **Trạng thái:** Sẵn sàng nhận tệp
-  - **Hành động cần thiết:** Tải lên dữ liệu sản phẩm và tài liệu của bạn
+  - **Trạng thái:** Sẵn sàng nhận file
+  - **Hành động cần thiết:** Tải dữ liệu sản phẩm và tài liệu của bạn lên
 
-⚠️ **Môi trường Ứng dụng Container** (Hình ảnh mẫu được triển khai)
-  - Ứng dụng định tuyến tác nhân (hình ảnh mặc định nginx)
-  - Ứng dụng frontend (hình ảnh mặc định nginx)
-  - Cấu hình tự động mở rộng (0-10 instances)
-  - **Trạng thái:** Đang chạy các container mẫu
-  - **Hành động cần thiết:** Xây dựng và triển khai các ứng dụng tác nhân của bạn
+⚠️ **Container Apps Environment** (Hình ảnh giữ chỗ đã được triển khai)
+  - Agent router app (nginx default image)
+  - Frontend app (nginx default image)
+  - Auto-scaling được cấu hình (0-10 instances)
+  - **Trạng thái:** Chạy các container giữ chỗ
+  - **Hành động cần thiết:** Xây dựng và triển khai ứng dụng agent của bạn
 
-✅ **Azure Cosmos DB** (Trống - sẵn sàng cho dữ liệu)
-  - Cơ sở dữ liệu và container được cấu hình trước
-  - Tối ưu hóa cho các hoạt động độ trễ thấp
-  - TTL được kích hoạt để tự động dọn dẹp
-  - **Trạng thái:** Sẵn sàng lưu trữ lịch sử chat
+✅ **Azure Cosmos DB** (Rỗng - sẵn sàng cho dữ liệu)
+  - Database và container đã được cấu hình trước
+  - Tối ưu cho thao tác độ trễ thấp
+  - TTL được bật để dọn dẹp tự động
+  - **Trạng thái:** Sẵn sàng lưu lịch sử chat
 
-✅ **Azure Key Vault** (Tùy chọn - sẵn sàng cho các bí mật)
-  - Xóa mềm được kích hoạt
-  - RBAC được cấu hình cho các danh tính được quản lý
-  - **Trạng thái:** Sẵn sàng lưu trữ các khóa API và chuỗi kết nối
+✅ **Azure Key Vault** (Tùy chọn - sẵn sàng cho secrets)
+  - Soft delete được bật
+  - RBAC được cấu hình cho managed identities
+  - **Trạng thái:** Sẵn sàng lưu API keys và connection strings
 
 ✅ **Application Insights** (Tùy chọn - giám sát đang hoạt động)
-  - Kết nối với workspace Log Analytics
-  - Các chỉ số và cảnh báo tùy chỉnh được cấu hình
-  - **Trạng thái:** Sẵn sàng nhận telemetry từ các ứng dụng của bạn
+  - Kết nối tới Log Analytics workspace
+  - Metrics tùy chỉnh và cảnh báo đã được cấu hình
+  - **Trạng thái:** Sẵn sàng nhận telemetry từ ứng dụng của bạn
 
 ✅ **Document Intelligence** (Sẵn sàng cho các cuộc gọi API)
-  - Tier S0 cho khối lượng công việc sản xuất
-  - **Trạng thái:** Sẵn sàng xử lý các tài liệu được tải lên
+  - Hạng mục S0 cho workloads production
+  - **Trạng thái:** Sẵn sàng xử lý tài liệu đã tải lên
 
 ✅ **Bing Search API** (Sẵn sàng cho các cuộc gọi API)
-  - Tier S1 cho các tìm kiếm thời gian thực
-  - **Trạng thái:** Sẵn sàng cho các truy vấn tìm kiếm web
+  - Hạng mục S1 cho tìm kiếm real-time
+  - **Trạng thái:** Sẵn sàng cho truy vấn web
 
-### Chế độ Triển Khai
+### Deployment Modes
 
-| Chế độ | Công suất OpenAI | Instances Container | Tier Tìm kiếm | Dự phòng Lưu trữ | Tốt nhất cho |
-|-------|------------------|---------------------|---------------|------------------|--------------|
-| **Tối thiểu** | 10K-20K TPM | 0-2 bản sao | Cơ bản | LRS (Cục bộ) | Phát triển/thử nghiệm, học tập, bằng chứng khái niệm |
-| **Tiêu chuẩn** | 30K-60K TPM | 2-5 bản sao | Tiêu chuẩn | ZRS (Vùng) | Sản xuất, lưu lượng vừa phải (<10K người dùng) |
-| **Cao cấp** | 80K-150K TPM | 5-10 bản sao, dự phòng vùng | Cao cấp | GRS (Địa lý) | Doanh nghiệp, lưu lượng cao (>10K người dùng), SLA 99.99% |
+| Mode | OpenAI Capacity | Container Instances | Search Tier | Storage Redundancy | Best For |
+|------|-----------------|---------------------|-------------|-------------------|----------|
+| **Minimal** | 10K-20K TPM | 0-2 replicas | Basic | LRS (Local) | Dev/test, learning, proof-of-concept |
+| **Standard** | 30K-60K TPM | 2-5 replicas | Standard | ZRS (Zone) | Production, moderate traffic (<10K users) |
+| **Premium** | 80K-150K TPM | 5-10 replicas, zone-redundant | Premium | GRS (Geo) | Enterprise, high traffic (>10K users), 99.99% SLA |
 
-**Tác động Chi phí:**
-- **Tối thiểu → Tiêu chuẩn:** Tăng chi phí ~4 lần ($100-370/tháng → $420-1,450/tháng)
-- **Tiêu chuẩn → Cao cấp:** Tăng chi phí ~3 lần ($420-1,450/tháng → $1,150-3,500/tháng)
-- **Chọn dựa trên:** Lưu lượng dự kiến, yêu cầu SLA, hạn chế ngân sách
+**Tác động chi phí:**
+- **Minimal → Standard:** ~tăng 4x chi phí ($100-370/tháng → $420-1,450/tháng)
+- **Standard → Premium:** ~tăng 3x chi phí ($420-1,450/tháng → $1,150-3,500/tháng)
+- **Chọn dựa trên:** Tải dự kiến, yêu cầu SLA, giới hạn ngân sách
 
-**Lập Kế Hoạch Công Suất:**
-- **TPM (Tokens Per Minute):** Tổng cộng trên tất cả các triển khai mô hình
-- **Instances Container:** Phạm vi tự động mở rộng (bản sao tối thiểu-tối đa)
-- **Tier Tìm kiếm:** Ảnh hưởng đến hiệu suất truy vấn và giới hạn kích thước chỉ mục
+**Kế hoạch công suất:**
+- **TPM (Tokens Per Minute):** Tổng trên tất cả các deployment model
+- **Container Instances:** Phạm vi auto-scaling (số replicas min-max)
+- **Search Tier:** Ảnh hưởng đến hiệu năng truy vấn và giới hạn kích thước index
 
-## 📋 Yêu Cầu Trước
+## 📋 Yêu cầu trước khi triển khai
 
-### Công Cụ Cần Thiết
-1. **Azure CLI** (phiên bản 2.50.0 hoặc cao hơn)
+### Công cụ cần có
+1. **Azure CLI** (phiên bản 2.50.0 trở lên)
    ```bash
    az --version  # Kiểm tra phiên bản
    az login      # Xác thực
    ```
 
-2. **Đăng ký Azure đang hoạt động** với quyền Chủ sở hữu hoặc Người đóng góp
+2. **Active Azure subscription** với quyền Owner hoặc Contributor
    ```bash
    az account show  # Xác minh đăng ký
    ```
 
-### Hạn Mức Azure Cần Thiết
+### Hạn mức Azure cần thiết
 
-Trước khi triển khai, hãy xác minh hạn mức đủ trong các khu vực mục tiêu của bạn:
+Trước khi triển khai, xác minh hạn mức đủ trong các vùng mục tiêu của bạn:
 
 ```bash
-# Kiểm tra tính khả dụng của Azure OpenAI trong khu vực của bạn
+# Kiểm tra khả dụng của các mô hình Microsoft Foundry trong khu vực của bạn
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus2
 
-# Xác minh hạn mức OpenAI (ví dụ cho gpt-4o)
+# Xác minh hạn mức OpenAI (ví dụ cho gpt-4.1)
 az cognitiveservices usage list \
   --location eastus2 \
-  --query "[?name.value=='OpenAI.Standard.gpt-4o']"
+  --query "[?name.value=='OpenAI.Standard.gpt-4.1']"
 
-# Kiểm tra hạn mức Container Apps
+# Kiểm tra hạn mức của Container Apps
 az provider show \
   --namespace Microsoft.App \
   --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
 ```
 
-**Hạn Mức Tối Thiểu Cần Thiết:**
-- **Azure OpenAI:** 3-4 triển khai mô hình trên các khu vực
-  - GPT-4o: 20K TPM (Tokens Per Minute)
-  - GPT-4o-mini: 10K TPM
+**Hạn mức tối thiểu cần thiết:**
+- **Microsoft Foundry Models:** 3-4 deployment model across regions
+  - gpt-4.1: 20K TPM (Tokens Per Minute)
+  - gpt-4.1-mini: 10K TPM
   - text-embedding-ada-002: 30K TPM
-  - **Lưu ý:** GPT-4o có thể có danh sách chờ ở một số khu vực - kiểm tra [khả dụng mô hình](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- **Ứng dụng Container:** Môi trường được quản lý + 2-10 instances container
-- **AI Search:** Tier tiêu chuẩn (Cơ bản không đủ cho tìm kiếm vector)
-- **Cosmos DB:** Throughput tiêu chuẩn được cung cấp
+  - **Lưu ý:** gpt-4.1 có thể có danh sách chờ ở một số vùng - kiểm tra [model availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- **Container Apps:** Managed environment + 2-10 container instances
+- **AI Search:** Hạng mục Standard (Basic không đủ cho vector search)
+- **Cosmos DB:** Throughput provisioned Standard
 
 **Nếu hạn mức không đủ:**
-1. Đi tới Azure Portal → Quotas → Yêu cầu tăng
-2. Hoặc sử dụng Azure CLI:
+1. Truy cập Azure Portal → Quotas → Request increase
+2. Hoặc dùng Azure CLI:
    ```bash
    az support tickets create \
      --ticket-name "OpenAI-Quota-Increase" \
      --severity "minimal" \
-     --description "Request quota increase for Azure OpenAI GPT-4o in eastus2"
+     --description "Request quota increase for Microsoft Foundry Models gpt-4.1 in eastus2"
    ```
-3. Cân nhắc các khu vực thay thế với khả dụng
+3. Xem xét các vùng thay thế có khả năng sẵn có
 
-## 🚀 Triển Khai Nhanh
+## 🚀 Triển khai nhanh
 
-### Tùy Chọn 1: Sử dụng Azure CLI
+### Tùy chọn 1: Sử dụng Azure CLI
 
 ```bash
 # Sao chép hoặc tải xuống các tệp mẫu
 git clone <repository-url>
 cd examples/retail-multiagent-arm-template
 
-# Làm cho tập lệnh triển khai có thể thực thi
+# Làm cho script triển khai có thể thực thi
 chmod +x deploy.sh
 
 # Triển khai với cài đặt mặc định
 ./deploy.sh -g myResourceGroup
 
-# Triển khai cho sản xuất với các tính năng cao cấp
+# Triển khai cho môi trường sản xuất với các tính năng cao cấp
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 ```
 
-### Tùy Chọn 2: Sử dụng Azure Portal
+### Tùy chọn 2: Sử dụng Azure Portal
 
 [![Triển khai lên Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-### Tùy Chọn 3: Sử dụng Azure CLI trực tiếp
+### Tùy chọn 3: Sử dụng Azure CLI trực tiếp
 
 ```bash
 # Tạo nhóm tài nguyên
@@ -202,46 +202,46 @@ az deployment group create \
   --parameters azuredeploy.parameters.json
 ```
 
-## ⏱️ Thời Gian Triển Khai
+## ⏱️ Thời gian triển khai
 
-### Những Gì Mong Đợi
+### Những gì cần mong đợi
 
-| Giai đoạn | Thời gian | Những gì xảy ra |
-|----------|-----------|-----------------||
-| **Xác thực Mẫu** | 30-60 giây | Azure xác thực cú pháp mẫu ARM và các tham số |
-| **Thiết lập Nhóm Tài nguyên** | 10-20 giây | Tạo nhóm tài nguyên (nếu cần) |
-| **Cung cấp OpenAI** | 5-8 phút | Tạo 3-4 tài khoản OpenAI và triển khai mô hình |
-| **Ứng dụng Container** | 3-5 phút | Tạo môi trường và triển khai các container mẫu |
-| **Tìm kiếm & Lưu trữ** | 2-4 phút | Cung cấp dịch vụ Tìm kiếm AI và tài khoản lưu trữ |
-| **Cosmos DB** | 2-3 phút | Tạo cơ sở dữ liệu và cấu hình container |
-| **Thiết lập Giám sát** | 2-3 phút | Thiết lập Application Insights và Log Analytics |
-| **Cấu hình RBAC** | 1-2 phút | Cấu hình danh tính được quản lý và quyền |
-| **Triển khai Tổng cộng** | **15-25 phút** | Hạ tầng hoàn chỉnh sẵn sàng |
+| Phase | Duration | What Happens |
+|-------|----------|--------------||
+| **Template Validation** | 30-60 seconds | Azure validates ARM template syntax and parameters |
+| **Resource Group Setup** | 10-20 seconds | Creates resource group (if needed) |
+| **OpenAI Provisioning** | 5-8 minutes | Creates 3-4 OpenAI accounts and deploys models |
+| **Container Apps** | 3-5 minutes | Creates environment and deploys placeholder containers |
+| **Search & Storage** | 2-4 minutes | Provisions AI Search service and storage accounts |
+| **Cosmos DB** | 2-3 minutes | Creates database and configures containers |
+| **Monitoring Setup** | 2-3 minutes | Sets up Application Insights and Log Analytics |
+| **RBAC Configuration** | 1-2 minutes | Configures managed identities and permissions |
+| **Total Deployment** | **15-25 minutes** | Complete infrastructure ready |
 
-**Sau Triển Khai:**
-- ✅ **Hạ tầng Sẵn Sàng:** Tất cả các dịch vụ Azure được cung cấp và chạy
-- ⏱️ **Phát triển Ứng dụng:** 80-120 giờ (trách nhiệm của bạn)
-- ⏱️ **Cấu hình Chỉ mục:** 15-30 phút (cần schema của bạn)
-- ⏱️ **Tải lên Dữ liệu:** Thay đổi theo kích thước tập dữ liệu
-- ⏱️ **Kiểm tra & Xác thực:** 2-4 giờ
+**Sau khi triển khai:**
+- ✅ **Hạ tầng sẵn sàng:** Tất cả dịch vụ Azure đã được cấp phát và đang chạy
+- ⏱️ **Phát triển ứng dụng:** 80-120 giờ (trách nhiệm của bạn)
+- ⏱️ **Cấu hình Index:** 15-30 phút (yêu cầu schema của bạn)
+- ⏱️ **Tải dữ liệu:** Tùy thuộc kích thước dataset
+- ⏱️ **Kiểm thử & xác nhận:** 2-4 giờ
 
 ---
 
-## ✅ Xác Minh Thành Công Triển Khai
+## ✅ Xác minh triển khai thành công
 
-### Bước 1: Kiểm tra Cung cấp Tài nguyên (2 phút)
+### Bước 1: Kiểm tra việc cấp phát tài nguyên (2 phút)
 
 ```bash
-# Xác minh tất cả các tài nguyên đã triển khai thành công
+# Xác minh tất cả tài nguyên đã được triển khai thành công
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
   --output table
 ```
 
-**Kỳ vọng:** Bảng trống (tất cả tài nguyên hiển thị trạng thái "Succeeded")
+**Mong đợi:** Bảng rỗng (tất cả resources hiển thị trạng thái "Succeeded")
 
-### Bước 2: Xác minh Triển khai Azure OpenAI (3 phút)
+### Bước 2: Xác minh Microsoft Foundry Models Deployments (3 phút)
 
 ```bash
 # Liệt kê tất cả các tài khoản OpenAI
@@ -250,7 +250,7 @@ az cognitiveservices account list \
   --query "[?kind=='OpenAI'].{Name:name, Location:location, Status:properties.provisioningState}" \
   --output table
 
-# Kiểm tra triển khai mô hình cho khu vực chính
+# Kiểm tra việc triển khai mô hình cho vùng chính
 OPENAI_NAME=$(az cognitiveservices account list \
   --resource-group myResourceGroup \
   --query "[?kind=='OpenAI'] | [0].name" -o tsv)
@@ -261,20 +261,20 @@ az cognitiveservices account deployment list \
   --output table
 ```
 
-**Kỳ vọng:** 
-- 3-4 tài khoản OpenAI (khu vực chính, phụ, thứ ba, đánh giá)
-- 1-2 triển khai mô hình mỗi tài khoản (gpt-4o, gpt-4o-mini, text-embedding-ada-002)
+**Mong đợi:** 
+- 3-4 OpenAI accounts (primary, secondary, tertiary, evaluation regions)
+- 1-2 model deployments cho mỗi account (gpt-4.1, gpt-4.1-mini, text-embedding-ada-002)
 
-### Bước 3: Kiểm tra Điểm cuối Hạ tầng (5 phút)
+### Bước 3: Kiểm tra các endpoint hạ tầng (5 phút)
 
 ```bash
-# Lấy URL Ứng dụng Container
+# Lấy các URL của Container App
 az containerapp list \
   --resource-group myResourceGroup \
   --query "[].{Name:name, URL:properties.configuration.ingress.fqdn, Status:properties.runningStatus}" \
   --output table
 
-# Kiểm tra điểm cuối của bộ định tuyến (hình ảnh giữ chỗ sẽ phản hồi)
+# Kiểm tra endpoint của router (sẽ trả về hình ảnh giữ chỗ)
 ROUTER_URL=$(az containerapp show \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -284,14 +284,14 @@ echo "Testing: https://$ROUTER_URL"
 curl -I https://$ROUTER_URL || echo "Container running (placeholder image - expected)"
 ```
 
-**Kỳ vọng:** 
-- Ứng dụng Container hiển thị trạng thái "Running"
-- Nginx mẫu phản hồi với HTTP 200 hoặc 404 (chưa có mã ứng dụng)
+**Mong đợi:** 
+- Container Apps hiển thị trạng thái "Running"
+- Nginx giữ chỗ trả về HTTP 200 hoặc 404 (chưa có mã ứng dụng)
 
-### Bước 4: Xác minh Truy cập API Azure OpenAI (3 phút)
+### Bước 4: Xác minh truy cập API Microsoft Foundry Models (3 phút)
 
 ```bash
-# Lấy điểm cuối và khóa OpenAI
+# Lấy endpoint và khóa OpenAI
 OPENAI_ENDPOINT=$(az cognitiveservices account show \
   --name $OPENAI_NAME \
   --resource-group myResourceGroup \
@@ -302,8 +302,8 @@ OPENAI_KEY=$(az cognitiveservices account keys list \
   --resource-group myResourceGroup \
   --query "key1" -o tsv)
 
-# Kiểm tra triển khai GPT-4o
-curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview" \
+# Kiểm tra triển khai gpt-4.1
+curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
   -d '{
@@ -312,47 +312,47 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
   }'
 ```
 
-**Kỳ vọng:** Phản hồi JSON với hoàn thành chat (xác nhận OpenAI hoạt động)
+**Mong đợi:** Phản hồi JSON với chat completion (xác nhận OpenAI hoạt động)
 
-### Những gì Hoạt động và Không Hoạt động
+### Cái gì đang hoạt động vs. cái gì chưa
 
-**✅ Hoạt động Sau Triển Khai:**
-- Các mô hình Azure OpenAI được triển khai và chấp nhận các cuộc gọi API
-- Dịch vụ Tìm kiếm AI đang chạy (trống, chưa có chỉ mục)
-- Ứng dụng Container đang chạy (hình ảnh mẫu nginx)
-- Tài khoản lưu trữ có thể truy cập và sẵn sàng tải lên
-- Cosmos DB sẵn sàng cho các hoạt động dữ liệu
+**✅ Hoạt động sau khi triển khai:**
+- Microsoft Foundry Models đã được triển khai và chấp nhận các cuộc gọi API
+- Dịch vụ AI Search đang chạy (rỗng, chưa có index)
+- Container Apps đang chạy (hình ảnh nginx giữ chỗ)
+- Storage accounts có thể truy cập và sẵn sàng cho upload
+- Cosmos DB sẵn sàng cho thao tác dữ liệu
 - Application Insights thu thập telemetry hạ tầng
-- Key Vault sẵn sàng lưu trữ bí mật
+- Key Vault sẵn sàng lưu secrets
 
-**❌ Chưa Hoạt động (Cần Phát Triển):**
-- Điểm cuối tác nhân (chưa triển khai mã ứng dụng)
-- Chức năng chat (cần triển khai frontend + backend)
-- Truy vấn tìm kiếm (chưa tạo chỉ mục tìm kiếm)
-- Pipeline xử lý tài liệu (chưa tải lên dữ liệu)
-- Telemetry tùy chỉnh (cần công cụ hóa ứng dụng)
+**❌ Chưa hoạt động (Cần phát triển):**
+- Các endpoint của agent (chưa có mã ứng dụng triển khai)
+- Chức năng chat (cần frontend + backend triển khai)
+- Truy vấn tìm kiếm (chưa tạo search index)
+- Pipeline xử lý tài liệu (chưa có dữ liệu được tải lên)
+- Telemetry tùy chỉnh (cần instrumentation trong ứng dụng)
 
-**Bước Tiếp Theo:** Xem [Cấu hình Sau Triển Khai](../../../../examples/retail-multiagent-arm-template) để phát triển và triển khai ứng dụng của bạn
+**Bước tiếp theo:** Xem [Cấu hình sau triển khai](#-post-deployment-next-steps) để phát triển và triển khai ứng dụng của bạn
 
 ---
 
-## ⚙️ Tùy Chọn Cấu Hình
+## ⚙️ Các tùy chọn cấu hình
 
-### Tham Số Mẫu
+### Tham số mẫu
 
-| Tham số | Loại | Mặc định | Mô tả |
-|---------|------|----------|-------|
-| `projectName` | string | "retail" | Tiền tố cho tất cả tên tài nguyên |
-| `location` | string | Vị trí nhóm tài nguyên | Khu vực triển khai chính |
-| `secondaryLocation` | string | "westus2" | Khu vực phụ cho triển khai đa khu vực |
-| `tertiaryLocation` | string | "francecentral" | Khu vực cho mô hình embeddings |
-| `environmentName` | string | "dev" | Định danh môi trường (dev/staging/prod) |
-| `deploymentMode` | string | "standard" | Cấu hình triển khai (tối thiểu/tiêu chuẩn/cao cấp) |
-| `enableMultiRegion` | bool | true | Kích hoạt triển khai đa khu vực |
-| `enableMonitoring` | bool | true | Kích hoạt Application Insights và logging |
-| `enableSecurity` | bool | true | Kích hoạt Key Vault và bảo mật nâng cao |
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `projectName` | string | "retail" | Prefix cho tất cả tên tài nguyên |
+| `location` | string | Resource group location | Vùng triển khai chính |
+| `secondaryLocation` | string | "westus2" | Vùng phụ cho triển khai đa vùng |
+| `tertiaryLocation` | string | "francecentral" | Vùng cho model embeddings |
+| `environmentName` | string | "dev" | Tên môi trường (dev/staging/prod) |
+| `deploymentMode` | string | "standard" | Cấu hình triển khai (minimal/standard/premium) |
+| `enableMultiRegion` | bool | true | Bật triển khai đa vùng |
+| `enableMonitoring` | bool | true | Bật Application Insights và logging |
+| `enableSecurity` | bool | true | Bật Key Vault và bảo mật nâng cao |
 
-### Tùy Chỉnh Tham Số
+### Tùy chỉnh tham số
 
 Chỉnh sửa `azuredeploy.parameters.json`:
 
@@ -377,28 +377,19 @@ Chỉnh sửa `azuredeploy.parameters.json`:
 }
 ```
 
-## 🏗️ Tổng Quan Kiến Trúc
+## 🏗️ Tổng quan kiến trúc
 
+```mermaid
+graph TD
+    Frontend[Giao diện<br/>Ứng dụng Container] --> Router[Bộ định tuyến tác nhân<br/>Ứng dụng Container] --> Agents[Tác nhân<br/>Khách hàng + Hàng tồn kho]
+    Router --> Search[Tìm kiếm AI<br/>Cơ sở dữ liệu vector]
+    Router --> Models[Microsoft Foundry Models<br/>Đa vùng]
+    Agents --> Storage[Lưu trữ<br/>Tài liệu]
+    Search --> CosmosDB[Cosmos DB<br/>Lịch sử trò chuyện]
+    Models --> AppInsights[App Insights<br/>Giám sát]
+    Storage --> KeyVault[Key Vault<br/>Bí mật]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │  Agent Router   │    │     Agents      │
-│ (Container App) │───▶│ (Container App) │───▶│ Customer + Inv  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   AI Search     │    │  Azure OpenAI   │    │    Storage      │
-│   (Vector DB)   │    │ (Multi-region)  │    │   (Documents)   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│  Cosmos DB      │    │ App Insights    │    │   Key Vault     │
-│ (Chat History)  │    │  (Monitoring)   │    │   (Secrets)     │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
-## 📖 Sử Dụng Script Triển Khai
+## 📖 Sử dụng script triển khai
 
 Script `deploy.sh` cung cấp trải nghiệm triển khai tương tác:
 
@@ -417,7 +408,7 @@ Script `deploy.sh` cung cấp trải nghiệm triển khai tương tác:
   -m premium \
   -l eastus2
 
-# Triển khai phát triển không có đa vùng
+# Triển khai phát triển không đa vùng
 ./deploy.sh \
   -g myDevRG \
   -e dev \
@@ -426,29 +417,29 @@ Script `deploy.sh` cung cấp trải nghiệm triển khai tương tác:
   --no-security
 ```
 
-### Tính Năng Script
+### Tính năng của script
 
-- ✅ **Xác thực yêu cầu trước** (Azure CLI, trạng thái đăng nhập, tệp mẫu)
-- ✅ **Quản lý nhóm tài nguyên** (tạo nếu chưa tồn tại)
-- ✅ **Xác thực mẫu** trước khi triển khai
+- ✅ **Kiểm tra yêu cầu trước** (Azure CLI, trạng thái đăng nhập, các file template)
+- ✅ **Quản lý resource group** (tạo nếu chưa tồn tại)
+- ✅ **Xác thực template** trước khi triển khai
 - ✅ **Theo dõi tiến trình** với đầu ra có màu
-- ✅ **Hiển thị đầu ra triển khai**
+- ✅ **Hiển thị outputs của deployment**
 - ✅ **Hướng dẫn sau triển khai**
 
-## 📊 Giám Sát Triển Khai
+## 📊 Giám sát triển khai
 
-### Kiểm tra Trạng Thái Triển Khai
+### Kiểm tra trạng thái triển khai
 
 ```bash
-# Liệt kê các triển khai
+# Liệt kê các bản triển khai
 az deployment group list --resource-group myResourceGroup --output table
 
-# Lấy chi tiết triển khai
+# Lấy chi tiết bản triển khai
 az deployment group show \
   --resource-group myResourceGroup \
   --name retail-deployment-YYYYMMDD-HHMMSS
 
-# Theo dõi tiến trình triển khai
+# Theo dõi tiến độ triển khai
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -456,34 +447,34 @@ az deployment group create \
   --verbose
 ```
 
-### Đầu Ra Triển Khai
+### Outputs của triển khai
 
-Sau khi triển khai thành công, các đầu ra sau sẽ có sẵn:
+Sau khi triển khai thành công, các outputs sau có sẵn:
 
-- **URL Frontend**: Điểm cuối công khai cho giao diện web
-- **URL Router**: Điểm cuối API cho bộ định tuyến tác nhân
-- **Điểm cuối OpenAI**: Điểm cuối dịch vụ OpenAI chính và phụ
-- **Dịch vụ Tìm kiếm**: Điểm cuối dịch vụ Tìm kiếm AI Azure
-- **Tài khoản Lưu trữ**: Tên tài khoản lưu trữ cho tài liệu
-- **Key Vault**: Tên Key Vault (nếu được kích hoạt)
-- **Application Insights**: Tên dịch vụ giám sát (nếu được kích hoạt)
+- **Frontend URL**: Endpoint công khai cho giao diện web
+- **Router URL**: Endpoint API cho agent router
+- **OpenAI Endpoints**: Endpoint dịch vụ OpenAI chính và phụ
+- **Search Service**: Endpoint dịch vụ Azure AI Search
+- **Storage Account**: Tên storage account cho tài liệu
+- **Key Vault**: Tên Key Vault (nếu bật)
+- **Application Insights**: Tên dịch vụ giám sát (nếu bật)
 
-## 🔧 Sau Triển Khai: Bước Tiếp Theo
+## 🔧 Sau triển khai: Bước tiếp theo
 > **📝 Quan trọng:** Hạ tầng đã được triển khai, nhưng bạn cần phát triển và triển khai mã ứng dụng.
 
 ### Giai đoạn 1: Phát triển Ứng dụng Agent (Trách nhiệm của bạn)
 
-Mẫu ARM tạo ra **Container Apps trống** với hình ảnh nginx placeholder. Bạn cần:
+Mẫu ARM tạo ra **Container Apps trống** với hình ảnh nginx giữ chỗ. Bạn phải:
 
-**Phát triển bắt buộc:**
+**Yêu cầu Phát triển:**
 1. **Triển khai Agent** (30-40 giờ)
-   - Agent dịch vụ khách hàng tích hợp GPT-4o
-   - Agent quản lý hàng tồn kho tích hợp GPT-4o-mini
+   - Agent dịch vụ khách hàng tích hợp gpt-4.1
+   - Agent quản lý tồn kho tích hợp gpt-4.1-mini
    - Logic định tuyến agent
 
-2. **Phát triển Giao diện Người dùng** (20-30 giờ)
-   - Giao diện trò chuyện (React/Vue/Angular)
-   - Chức năng tải tệp lên
+2. **Phát triển Frontend** (20-30 giờ)
+   - Giao diện chat UI (React/Vue/Angular)
+   - Chức năng tải lên tệp
    - Hiển thị và định dạng phản hồi
 
 3. **Dịch vụ Backend** (12-16 giờ)
@@ -491,7 +482,7 @@ Mẫu ARM tạo ra **Container Apps trống** với hình ảnh nginx placeholde
    - Middleware xác thực
    - Tích hợp telemetry
 
-**Xem thêm:** [Hướng dẫn Kiến trúc](../retail-scenario.md) để biết các mẫu triển khai chi tiết và ví dụ mã
+**Xem:** [Hướng dẫn Kiến trúc](../retail-scenario.md) cho các mẫu triển khai chi tiết và ví dụ mã
 
 ### Giai đoạn 2: Cấu hình Chỉ mục Tìm kiếm AI (15-30 phút)
 
@@ -508,7 +499,7 @@ SEARCH_KEY=$(az search admin-key show \
   --resource-group myResourceGroup \
   --query "primaryKey" -o tsv)
 
-# Tạo chỉ mục với lược đồ của bạn (ví dụ)
+# Tạo chỉ mục với sơ đồ của bạn (ví dụ)
 curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: ${SEARCH_KEY}" \
@@ -530,15 +521,15 @@ curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023
 ```
 
 **Tài nguyên:**
-- [Thiết kế Schema Chỉ mục Tìm kiếm AI](https://learn.microsoft.com/azure/search/search-what-is-an-index)
+- [Thiết kế Lược đồ Chỉ mục Tìm kiếm AI](https://learn.microsoft.com/azure/search/search-what-is-an-index)
 - [Cấu hình Tìm kiếm Vector](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
 
-### Giai đoạn 3: Tải Dữ liệu của Bạn lên (Thời gian thay đổi)
+### Giai đoạn 3: Tải Dữ liệu của Bạn Lên (Thời gian thay đổi)
 
-Khi bạn đã có dữ liệu sản phẩm và tài liệu:
+Khi bạn có dữ liệu sản phẩm và tài liệu:
 
 ```bash
-# Lấy chi tiết tài khoản lưu trữ
+# Lấy thông tin chi tiết tài khoản lưu trữ
 STORAGE_NAME=$(az storage account list \
   --resource-group myResourceGroup \
   --query "[0].name" -o tsv)
@@ -555,7 +546,7 @@ az storage blob upload-batch \
   --account-name $STORAGE_NAME \
   --account-key $STORAGE_KEY
 
-# Ví dụ: Tải lên một tệp
+# Ví dụ: Tải lên một tệp duy nhất
 az storage blob upload \
   --container-name documents \
   --name "product-manual.pdf" \
@@ -566,25 +557,25 @@ az storage blob upload \
 
 ### Giai đoạn 4: Xây dựng và Triển khai Ứng dụng của Bạn (8-12 giờ)
 
-Khi bạn đã phát triển mã agent:
+Khi bạn đã phát triển mã agent của mình:
 
 ```bash
-# 1. Tạo Azure Container Registry (nếu cần thiết)
+# 1. Tạo Azure Container Registry (nếu cần)
 az acr create \
   --name myregistry \
   --resource-group myResourceGroup \
   --sku Basic
 
-# 2. Xây dựng và đẩy hình ảnh agent router
+# 2. Xây dựng và đẩy image cho agent router
 docker build -t myregistry.azurecr.io/agent-router:v1 /path/to/your/router/code
 az acr login --name myregistry
 docker push myregistry.azurecr.io/agent-router:v1
 
-# 3. Xây dựng và đẩy hình ảnh frontend
+# 3. Xây dựng và đẩy image cho frontend
 docker build -t myregistry.azurecr.io/frontend:v1 /path/to/your/frontend/code
 docker push myregistry.azurecr.io/frontend:v1
 
-# 4. Cập nhật Container Apps với các hình ảnh của bạn
+# 4. Cập nhật Container Apps bằng các image của bạn
 az containerapp update \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -595,7 +586,7 @@ az containerapp update \
   --resource-group myResourceGroup \
   --image myregistry.azurecr.io/frontend:v1
 
-# 5. Cấu hình các biến môi trường
+# 5. Cấu hình biến môi trường
 az containerapp update \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -606,7 +597,7 @@ az containerapp update \
     SEARCH_KEY=secretref:search-key
 ```
 
-### Giai đoạn 5: Kiểm tra Ứng dụng của Bạn (2-4 giờ)
+### Giai đoạn 5: Kiểm thử Ứng dụng của Bạn (2-4 giờ)
 
 ```bash
 # Lấy URL ứng dụng của bạn
@@ -633,25 +624,25 @@ az containerapp logs show \
 ### Tài nguyên Triển khai
 
 **Kiến trúc & Thiết kế:**
-- 📖 [Hướng dẫn Kiến trúc Hoàn chỉnh](../retail-scenario.md) - Các mẫu triển khai chi tiết
+- 📖 [Hướng dẫn Kiến trúc Đầy đủ](../retail-scenario.md) - Mẫu triển khai chi tiết
 - 📖 [Mẫu Thiết kế Đa-Agent](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
 
 **Ví dụ Mã:**
-- 🔗 [Mẫu Chat Azure OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo) - Mẫu RAG
-- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Framework agent (C#)
+- 🔗 [Microsoft Foundry Models Chat Sample](https://github.com/Azure-Samples/azure-search-openai-demo) - mẫu RAG
+- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Khung agent (C#)
 - 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - Điều phối agent (Python)
-- 🔗 [AutoGen](https://github.com/microsoft/autogen) - Hội thoại đa-agent
+- 🔗 [AutoGen](https://github.com/microsoft/autogen) - Đàm thoại đa-agent
 
-**Ước tính Tổng Thời gian:**
+**Ước tính Tổng Nỗ lực:**
 - Triển khai hạ tầng: 15-25 phút (✅ Hoàn thành)
 - Phát triển ứng dụng: 80-120 giờ (🔨 Công việc của bạn)
-- Kiểm tra và tối ưu hóa: 15-25 giờ (🔨 Công việc của bạn)
+- Kiểm thử và tối ưu: 15-25 giờ (🔨 Công việc của bạn)
 
-## 🛠️ Xử lý sự cố
+## 🛠️ Khắc phục sự cố
 
 ### Các vấn đề thường gặp
 
-#### 1. Hết hạn mức Azure OpenAI
+#### 1. Microsoft Foundry Models Quota Exceeded
 
 ```bash
 # Kiểm tra mức sử dụng hạn ngạch hiện tại
@@ -661,7 +652,7 @@ az cognitiveservices usage list --location eastus2
 az support tickets create \
   --ticket-name "OpenAI-Quota-Increase" \
   --severity "minimal" \
-  --description "Request quota increase for Azure OpenAI in region X"
+  --description "Request quota increase for Microsoft Foundry Models in region X"
 ```
 
 #### 2. Triển khai Container Apps thất bại
@@ -687,7 +678,7 @@ az search service show \
   --name <search-service-name> \
   --resource-group myResourceGroup
 
-# Kiểm tra kết nối dịch vụ tìm kiếm
+# Kiểm tra kết nối tới dịch vụ tìm kiếm
 curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-version=2023-11-01" \
   -H "api-key: <search-admin-key>"
 ```
@@ -695,48 +686,48 @@ curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-versio
 ### Xác thực Triển khai
 
 ```bash
-# Xác minh tất cả các tài nguyên đã được tạo
+# Xác nhận tất cả các tài nguyên đã được tạo
 az resource list \
   --resource-group myResourceGroup \
   --output table
 
-# Kiểm tra trạng thái sức khỏe của tài nguyên
+# Kiểm tra tình trạng tài nguyên
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
   --output table
 ```
 
-## 🔐 Cân nhắc về Bảo mật
+## 🔐 Cân nhắc Bảo mật
 
 ### Quản lý Khóa
-- Tất cả các bí mật được lưu trữ trong Azure Key Vault (khi được kích hoạt)
-- Container apps sử dụng managed identity để xác thực
-- Tài khoản lưu trữ có cấu hình bảo mật mặc định (chỉ HTTPS, không truy cập blob công khai)
+- Tất cả bí mật được lưu trữ trong Azure Key Vault (khi được bật)
+- Container app sử dụng managed identity để xác thực
+- Tài khoản lưu trữ có cấu hình mặc định an toàn (chỉ HTTPS, không truy cập blob công khai)
 
 ### Bảo mật Mạng
-- Container apps sử dụng mạng nội bộ khi có thể
+- Container app sử dụng mạng nội bộ khi có thể
 - Dịch vụ tìm kiếm được cấu hình với tùy chọn private endpoints
 - Cosmos DB được cấu hình với quyền tối thiểu cần thiết
 
 ### Cấu hình RBAC
 ```bash
-# Gán các vai trò cần thiết cho danh tính được quản lý
+# Gán các vai trò cần thiết cho định danh được quản lý
 az role assignment create \
   --assignee <container-app-managed-identity> \
   --role "Cognitive Services OpenAI User" \
   --scope <openai-resource-id>
 ```
 
-## 💰 Tối ưu hóa Chi phí
+## 💰 Tối ưu Chi phí
 
 ### Ước tính Chi phí (Hàng tháng, USD)
 
-| Chế độ | OpenAI | Container Apps | Tìm kiếm | Lưu trữ | Tổng Ước tính |
-|--------|--------|----------------|----------|---------|---------------|
-| Tối thiểu | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
-| Tiêu chuẩn | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
-| Cao cấp | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
+| Mode | OpenAI | Container Apps | Search | Storage | Total Est. |
+|------|--------|----------------|--------|---------|------------|
+| Minimal | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
+| Standard | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
+| Premium | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
 
 ### Giám sát Chi phí
 
@@ -756,7 +747,7 @@ az consumption budget create \
 ### Cập nhật Mẫu
 - Quản lý phiên bản các tệp mẫu ARM
 - Kiểm tra thay đổi trong môi trường phát triển trước
-- Sử dụng chế độ triển khai gia tăng để cập nhật
+- Sử dụng chế độ triển khai tăng dần cho các cập nhật
 
 ### Cập nhật Tài nguyên
 ```bash
@@ -768,16 +759,16 @@ az deployment group create \
   --mode Incremental
 ```
 
-### Sao lưu và Phục hồi
-- Cosmos DB được kích hoạt sao lưu tự động
-- Key Vault được kích hoạt soft delete
-- Các phiên bản container app được duy trì để rollback
+### Sao lưu và Khôi phục
+- Sao lưu tự động Cosmos DB được bật
+- Tính năng soft delete của Key Vault được bật
+- Các phiên bản Container app được giữ để khôi phục
 
 ## 📞 Hỗ trợ
 
-- **Vấn đề về Mẫu:** [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
-- **Hỗ trợ Azure:** [Cổng hỗ trợ Azure](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
-- **Cộng đồng:** [Azure AI Discord](https://discord.gg/microsoft-azure)
+- **Vấn đề với Mẫu**: [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
+- **Hỗ trợ Azure**: [Azure Support Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
+- **Cộng đồng**: [Azure AI Discord](https://discord.gg/microsoft-azure)
 
 ---
 
@@ -788,6 +779,6 @@ Bắt đầu với: `./deploy.sh -g myResourceGroup`
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Tuyên bố miễn trừ trách nhiệm**:  
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ bản địa nên được coi là nguồn thông tin chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp của con người. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+**Miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực để đạt độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Văn bản gốc bằng ngôn ngữ gốc của nó nên được coi là nguồn có thẩm quyền. Đối với thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm cho bất kỳ hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

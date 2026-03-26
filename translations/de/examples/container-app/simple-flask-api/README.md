@@ -1,60 +1,52 @@
-# Einfache Flask-API - Container-App-Beispiel
+# Simple Flask API - Container App Example
 
 **Lernpfad:** Anfänger ⭐ | **Zeit:** 25-35 Minuten | **Kosten:** $0-15/Monat
 
-Ein vollständiges, funktionsfähiges Python Flask REST-API, das mit Azure Developer CLI (azd) in Azure Container Apps bereitgestellt wird. Dieses Beispiel zeigt grundlegende Konzepte der Bereitstellung von Containern, Autoskalierung und Überwachung.
+Eine vollständige, funktionierende Python Flask REST-API, die mit Azure Container Apps über die Azure Developer CLI (azd) bereitgestellt wird. Dieses Beispiel zeigt die Bereitstellung von Containern, Auto-Skalierung und Grundlagen der Überwachung.
 
 ## 🎯 Was Sie lernen werden
 
 - Eine containerisierte Python-Anwendung in Azure bereitstellen
-- Autoskalierung mit Skalierung auf Null konfigurieren
+- Auto-Skalierung mit Scale-to-Zero konfigurieren
 - Health-Probes und Readiness-Checks implementieren
 - Anwendungsprotokolle und Metriken überwachen
-- Azure Developer CLI für schnelle Bereitstellung verwenden
+- Azure Developer CLI für schnelle Bereitstellungen nutzen
 
-## 📦 Was enthalten ist
+## 📦 Enthalten
 
-✅ **Flask-Anwendung** - Vollständige REST-API mit CRUD-Operationen (`src/app.py`)  
-✅ **Dockerfile** - Produktionsbereite Container-Konfiguration  
-✅ **Bicep-Infrastruktur** - Container Apps-Umgebung und API-Bereitstellung  
-✅ **AZD-Konfiguration** - Bereitstellung mit einem Befehl einrichten  
-✅ **Health-Probes** - Liveness- und Readiness-Prüfungen konfiguriert  
-✅ **Autoskalierung** - 0-10 Replikate basierend auf HTTP-Auslastung  
+✅ **Flask Application** - Vollständige REST-API mit CRUD-Operationen (`src/app.py`)  
+✅ **Dockerfile** - Produktionsfertige Container-Konfiguration  
+✅ **Bicep Infrastructure** - Container Apps-Umgebung und API-Bereitstellung  
+✅ **AZD Configuration** - Ein-Kommando-Bereitstellungs-Setup  
+✅ **Health Probes** - Konfigurierte Liveness- und Readiness-Checks  
+✅ **Auto-scaling** - 0-10 Replikate basierend auf HTTP-Last  
 
-## Architektur
+## Architecture
 
+```mermaid
+graph TD
+    subgraph ACA[Azure Container Apps-Umgebung]
+        Flask[Flask-API-Container<br/>Health-Endpunkte<br/>REST-API<br/>Auto-Skalierung 0-10 Replikate]
+        AppInsights[Anwendungs-Insights]
+    end
 ```
-┌─────────────────────────────────────────┐
-│   Azure Container Apps Environment      │
-│                                         │
-│  ┌───────────────────────────────────┐ │
-│  │   Flask API Container             │ │
-│  │   - Health endpoints              │ │
-│  │   - REST API                      │ │
-│  │   - Auto-scaling (0-10 replicas)  │ │
-│  └───────────────────────────────────┘ │
-│                                         │
-│  Application Insights ────────────────┐ │
-└────────────────────────────────────────┘
-```
-
 ## Voraussetzungen
 
 ### Erforderlich
 - **Azure Developer CLI (azd)** - [Installationsanleitung](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure-Abonnement** - [Kostenloses Konto](https://azure.microsoft.com/free/)
+- **Azure subscription** - [Free account](https://azure.microsoft.com/free/)
 - **Docker Desktop** - [Docker installieren](https://www.docker.com/products/docker-desktop/) (für lokale Tests)
 
 ### Voraussetzungen überprüfen
 
 ```bash
-# Überprüfe die azd-Version (benötigt 1.5.0 oder höher)
+# azd-Version prüfen (benötigt 1.5.0 oder höher)
 azd version
 
-# Überprüfe die Azure-Anmeldung
+# Azure-Anmeldung überprüfen
 azd auth login
 
-# Überprüfe Docker (optional, für lokale Tests)
+# Docker prüfen (optional, für lokale Tests)
 docker --version
 ```
 
@@ -68,26 +60,26 @@ docker --version
 | Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
 | **Total** | **8-12 minutes** | Complete deployment ready |
 
-## Schneller Einstieg
+## Schnellstart
 
 ```bash
-# Wechsle zum Beispiel
+# Zum Beispiel navigieren
 cd examples/container-app/simple-flask-api
 
-# Initialisiere die Umgebung (wähle einen eindeutigen Namen)
+# Umgebung initialisieren (einen eindeutigen Namen wählen)
 azd env new myflaskapi
 
-# Stelle alles bereit (Infrastruktur + Anwendung)
+# Alles bereitstellen (Infrastruktur + Anwendung)
 azd up
-# Du wirst aufgefordert:
-# 1. Wähle ein Azure-Abonnement
-# 2. Wähle einen Standort (z. B. eastus2)
-# 3. Warte 8-12 Minuten auf die Bereitstellung
+# Sie werden aufgefordert:
+# 1. Azure-Abonnement auswählen
+# 2. Standort wählen (z. B. eastus2)
+# 3. 8–12 Minuten auf die Bereitstellung warten
 
-# Rufe deinen API-Endpunkt ab
+# Ihren API-Endpunkt abrufen
 azd env get-values
 
-# Teste die API
+# API testen
 curl $(azd env get-value API_ENDPOINT)/health
 ```
 
@@ -109,7 +101,7 @@ curl $(azd env get-value API_ENDPOINT)/health
 # Bereitgestellte Dienste anzeigen
 azd show
 
-# Erwartete Ausgabe zeigt:
+# Die erwartete Ausgabe zeigt:
 # - Dienst: api
 # - Endpunkt: https://ca-api-[env].xxx.azurecontainerapps.io
 # - Status: Läuft
@@ -121,7 +113,7 @@ azd show
 # API-Endpunkt abrufen
 API_URL=$(azd env get-value API_ENDPOINT)
 
-# Gesundheit testen
+# Gesundheitsstatus testen
 curl $API_URL/health
 
 # Root-Endpunkt testen
@@ -148,13 +140,13 @@ curl $API_URL/api/items
 # Live-Protokolle mit azd monitor streamen
 azd monitor --logs
 
-# Oder verwenden Sie die Azure CLI:
+# Oder die Azure CLI verwenden:
 az containerapp logs show --name api --resource-group $RG_NAME --follow
 
-# Sie sollten sehen:
+# Sie sollten Folgendes sehen:
 # - Gunicorn-Startmeldungen
 # - HTTP-Anforderungsprotokolle
-# - Anwendungs-Info-Protokolle
+# - Informationsprotokolle der Anwendung
 ```
 
 ## Projektstruktur
@@ -178,7 +170,7 @@ simple-flask-api/
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
-| `/health` | GET | Gesundheitsprüfung |
+| `/health` | GET | Health-Check |
 | `/api/items` | GET | Alle Elemente auflisten |
 | `/api/items` | POST | Neues Element erstellen |
 | `/api/items/{id}` | GET | Bestimmtes Element abrufen |
@@ -198,10 +190,10 @@ azd env set MAX_REPLICAS 20
 
 ### Skalierungskonfiguration
 
-Die API skaliert automatisch basierend auf dem HTTP-Verkehr:
-- **Minimale Replikate**: 0 (skaliert auf Null, wenn inaktiv)
-- **Maximale Replikate**: 10
-- **Gleichzeitige Anfragen pro Replikat**: 50
+Die API skaliert automatisch basierend auf HTTP-Traffic:
+- **Min Replicas**: 0 (skaliert auf Null, wenn inaktiv)
+- **Max Replicas**: 10
+- **Concurrent Requests per Replica**: 50
 
 ## Entwicklung
 
@@ -317,19 +309,19 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 
 ## Kostenoptimierung
 
-Diese Bereitstellung verwendet Skalierung auf Null, sodass Sie nur zahlen, wenn die API Anfragen verarbeitet:
+Diese Bereitstellung verwendet Scale-to-Zero, sodass Sie nur zahlen, wenn die API Anfragen verarbeitet:
 
-- **Leerlaufkosten**: ~$0/Monat (auf Null skaliert)
-- **Aktive Kosten**: ~$0.000024/Sekunde pro Replikat
+- **Idle cost**: ~$0/month (skaliert auf Null)
+- **Active cost**: ~$0.000024/second per replica
 - **Erwartete monatliche Kosten** (geringe Nutzung): $5-15
 
-### Kosten weiter reduzieren
+### Kosten weiter senken
 
 ```bash
-# Maximale Replikate für Dev reduzieren
+# Maximale Anzahl der Replikate für die Entwicklung reduzieren
 azd env set MAX_REPLICAS 3
 
-# Verwende kürzere Leerlaufzeit
+# Kürzeren Leerlauf-Timeout verwenden
 azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 Minuten
 ```
 
@@ -341,11 +333,11 @@ azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 Minuten
 # Containerprotokolle mit der Azure CLI überprüfen
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
-# Überprüfen, ob das Docker-Image lokal erstellt wird
+# Überprüfen, ob das Docker-Image lokal gebaut werden kann
 docker build -t test ./src
 ```
 
-### API nicht zugänglich
+### API nicht erreichbar
 
 ```bash
 # Überprüfen, ob der Ingress extern ist
@@ -356,7 +348,7 @@ az containerapp show --name api --resource-group rg-simple-flask-api \
 ### Hohe Antwortzeiten
 
 ```bash
-# CPU-/Speicherauslastung überprüfen
+# CPU- und Speicherauslastung überprüfen
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
@@ -366,7 +358,7 @@ az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
 
-## Aufräumen
+## Bereinigen
 
 ```bash
 # Alle Ressourcen löschen
@@ -385,7 +377,7 @@ azd down --force --purge
 
 2. **Authentifizierung hinzufügen** - Azure AD oder API-Schlüssel implementieren
    ```python
-   # Füge Authentifizierungs-Middleware in app.py hinzu.
+   # Füge Authentifizierungs-Middleware zu app.py hinzu
    from functools import wraps
    ```
 
@@ -396,7 +388,7 @@ azd down --force --purge
    on: [push]
    ```
 
-4. **Verwaltete Identität hinzufügen** - Zugriff auf Azure-Dienste absichern
+4. **Managed Identity hinzufügen** - Gesicherten Zugriff auf Azure-Dienste einrichten
    ```bicep
    # Update infra/app/api.bicep
    identity: { type: 'SystemAssigned' }
@@ -404,9 +396,9 @@ azd down --force --purge
 
 ### Verwandte Beispiele
 
-- **[Datenbank-App](../../../../../examples/database-app)** - Vollständiges Beispiel mit SQL Database
-- **[Microservices](../../../../../examples/container-app/microservices)** - Architektur mit mehreren Diensten
-- **[Container Apps Master Guide](../README.md)** - Alle Container-Muster
+- **[Database App](../../../../../examples/database-app)** - Vollständiges Beispiel mit SQL Database
+- **[Microservices](../../../../../examples/container-app/microservices)** - Mehrere Dienste Architektur
+- **[Container Apps Master Guide](../README.md)** - Alle Container-Pattern
 
 ### Lernressourcen
 
@@ -417,28 +409,28 @@ azd down --force --purge
 ## Zusätzliche Ressourcen
 
 ### Dokumentation
-- **[Flask-Dokumentation](https://flask.palletsprojects.com/)** - Flask-Framework-Anleitung
+- **[Flask Documentation](https://flask.palletsprojects.com/)** - Flask-Framework-Anleitung
 - **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Offizielle Azure-Dokumentation
 - **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd Befehlsreferenz
 
 ### Tutorials
 - **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Ihre erste App bereitstellen
 - **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Python-Entwicklungsleitfaden
-- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastruktur als Code
+- **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastructure as Code
 
 ### Tools
-- **[Azure-Portal](https://portal.azure.com)** - Ressourcen visuell verwalten
+- **[Azure Portal](https://portal.azure.com)** - Ressourcen visuell verwalten
 - **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE-Integration
 
 ---
 
-**🎉 Herzlichen Glückwunsch!** Sie haben eine produktionsbereite Flask-API in Azure Container Apps mit Autoskalierung und Überwachung bereitgestellt.
+**🎉 Herzlichen Glückwunsch!** Sie haben eine produktionsbereite Flask-API in Azure Container Apps mit Auto-Skalierung und Überwachung bereitgestellt.
 
-**Fragen?** [Issue öffnen](https://github.com/microsoft/AZD-for-beginners/issues) oder schauen Sie in die [FAQ](../../../resources/faq.md)
+**Fragen?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) oder schauen Sie in die [FAQ](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 Haftungsausschluss:
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst Co-op Translator (https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache ist als maßgebliche Quelle zu betrachten. Für wichtige Informationen wird eine professionelle, menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Nutzung dieser Übersetzung ergeben.
+Dieses Dokument wurde mithilfe des KI-Übersetzungsdienstes [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir um Genauigkeit bemüht sind, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Originalsprache ist als maßgebliche Quelle zu betrachten. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Nutzung dieser Übersetzung ergeben.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

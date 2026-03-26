@@ -1,155 +1,155 @@
-# Multi-Agent Customer Support Solution - Retailer Scenario
+# Solusyon ng Multi-Agent para sa Suporta ng Customer - Senaryo ng Retailer
 
 **Kabanata 5: Multi-Agent AI Solutions**
-- **📚 Course Home**: [AZD For Beginners](../README.md)
-- **📖 Current Chapter**: [Chapter 5: Multi-Agent AI Solutions](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **⬅️ Prerequisites**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **➡️ Next Chapter**: [Chapter 6: Pre-Deployment Validation](../docs/pre-deployment/capacity-planning.md)
+- **📚 Course Home**: [AZD Para sa Mga Nagsisimula](../README.md)
+- **📖 Current Chapter**: [Kabanata 5: Multi-Agent AI Solutions](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **⬅️ Prerequisites**: [Kabanata 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **➡️ Next Chapter**: [Kabanata 6: Pre-Deployment Validation](../docs/pre-deployment/capacity-planning.md)
 - **🚀 ARM Templates**: [Deployment Package](retail-multiagent-arm-template/README.md)
 
-> **⚠️ GABAY SA ARKITEKTURA - HINDI ISANG GUMAGAWANG IMPLEMENTASYON**  
-> Ang dokumentong ito ay nagbibigay ng isang **komprehensibong blueprint ng arkitektura** para sa pagbuo ng isang multi-agent system.  
-> **Ano ang umiiral:** ARM template para sa pagpapatupad ng imprastruktura (Azure OpenAI, AI Search, Container Apps, atbp.)  
+> **⚠️ GABAY SA ARKITEKTURA - HINDI TUMATALAB NA IMPLEMENTASYON**  
+> Nagbibigay ang dokumentong ito ng isang **komprehensibong plano ng arkitektura** para sa pagbuo ng isang multi-agent system.  
+> **Ano ang umiiral:** ARM template para sa pag-deploy ng imprastruktura (Microsoft Foundry Models, AI Search, Container Apps, atbp.)  
 > **Ano ang kailangan mong buuin:** Agent code, routing logic, frontend UI, data pipelines (tinatayang 80-120 oras)  
 >  
 > **Gamitin ito bilang:**
-> - ✅ Sanggunian ng arkitektura para sa iyong sariling multi-agent na proyekto
-> - ✅ Gabay sa pagkatuto para sa mga pattern ng multi-agent design
+> - ✅ Sanggunian sa arkitektura para sa iyong sariling multi-agent na proyekto
+> - ✅ Gabay sa pag-aaral para sa mga disenyo ng multi-agent
 > - ✅ Template ng imprastruktura para mag-deploy ng Azure resources
-> - ❌ HINDI isang handa-agamitin na aplikasyon (kailangan ng malawak na pag-develop)
+> - ❌ HINDI isang handa-agamitin na aplikasyon (kailangan ng malaking pag-develop)
 
-## Overview
+## Pangkalahatang-ideya
 
-**Learning Objective:** Maunawaan ang arkitektura, mga desisyon sa disenyo, at paraan ng implementasyon para bumuo ng production-ready na multi-agent customer support chatbot para sa isang retailer na may sopistikadong kakayahan ng AI kabilang ang inventory management, document processing, at intelligent customer interactions.
+**Layunin ng Pagkatuto:** Maunawaan ang arkitektura, mga desisyon sa disenyo, at paraan ng implementasyon para sa pagbuo ng isang production-ready na multi-agent customer support chatbot para sa isang retailer na may sopistikadong kakayahan ng AI kabilang ang pamamahala ng imbentaryo, pagproseso ng dokumento, at intelihenteng interaksyon sa customer.
 
-**Time to Complete:** Pagbasa + Pag-unawa (2-3 oras) | Buong Implementasyon (80-120 oras)
+**Oras na Kakailanganin:** Pagbasa + Pag-unawa (2-3 oras) | Buong Implementasyon (80-120 oras)
 
-**What You'll Learn:**
-- Mga pattern ng multi-agent architecture at prinsipyong disenyo
-- Mga estratehiya sa multi-region Azure OpenAI deployment
+**Mga Matututunan Mo:**
+- Mga pattern ng arkitektura ng multi-agent at prinsipyo ng disenyo
+- Mga estratehiya sa pag-deploy ng Microsoft Foundry Models sa maraming rehiyon
 - Integrasyon ng AI Search gamit ang RAG (Retrieval-Augmented Generation)
-- Mga framework para sa agent evaluation at security testing
-- Mga konsiderasyon sa production deployment at pag-optimize ng gastos
+- Mga framework para sa pagsusuri at seguridad ng ahente
+- Mga konsiderasyon para sa production deployment at optimisasyon ng gastos
 
-## Architecture Goals
+## Mga Layunin ng Arkitektura
 
-**Educational Focus:** Ipinapakita ng arkitekturang ito ang mga enterprise pattern para sa multi-agent systems.
+**Pokus Pang-edukasyon:** Ipinapakita ng arkitekturang ito ang mga enterprise pattern para sa mga multi-agent system.
 
-### System Requirements (For Your Implementation)
+### Mga Kinakailangan ng Sistema (Para sa Iyong Implementasyon)
 
-Isang production customer support solution ay nangangailangan ng:
-- **Maramihang espesyalisadong agent** para sa iba't ibang pangangailangan ng customer (Customer Service + Inventory Management)
-- **Multi-model deployment** na may tamang capacity planning (GPT-4o, GPT-4o-mini, embeddings sa iba't ibang rehiyon)
-- **Dynamic data integration** gamit ang AI Search at file uploads (vector search + document processing)
-- **Komprehensibong monitoring** at evaluation capabilities (Application Insights + custom metrics)
-- **Production-grade security** na may red teaming validation (vulnerability scanning + agent evaluation)
+Ang production customer support solution ay nangangailangan ng:
+- **Maramihang espesyal na ahente** para sa iba't ibang pangangailangan ng customer (Customer Service + Inventory Management)
+- **Multi-model deployment** na may wastong capacity planning (gpt-4.1, gpt-4.1-mini, embeddings sa iba't ibang rehiyon)
+- **Dynamic data integration** sa AI Search at pag-upload ng file (vector search + pagproseso ng dokumento)
+- **Komprehensibong monitoring** at kakayahan sa pagsusuri (Application Insights + custom metrics)
+- **Seguridad na angkop sa production** na may red teaming validation (vulnerability scanning + agent evaluation)
 
-### What This Guide Provides
+### Ano ang Ibinibigay ng Gabay na Ito
 
-✅ **Architecture Patterns** - Napatunayan na disenyo para sa scalable na multi-agent systems  
+✅ **Mga Pattern ng Arkitektura** - Napatunayang disenyo para sa scalable na multi-agent systems  
 ✅ **Infrastructure Templates** - ARM templates na nagde-deploy ng lahat ng Azure services  
-✅ **Code Examples** - Mga reference implementation para sa mga pangunahing komponent  
-✅ **Configuration Guidance** - Step-by-step na setup instructions  
-✅ **Best Practices** - Seguridad, monitoring, at mga estratehiya para sa pag-optimize ng gastos  
+✅ **Mga Halimbawa ng Code** - Reference implementations para sa mga pangunahing bahagi  
+✅ **Patnubay sa Konfigurasyon** - Hakbang-hakbang na setup instructions  
+✅ **Pinakamahuhusay na Praktis** - Seguridad, monitoring, at mga estratehiya sa pag-optimize ng gastos  
 
-❌ **Hindi Kasama** - Kumpletong gumagawang aplikasyon (kakailanganin ng development effort)
+❌ **Hindi Kasama** - Buong gumaganang aplikasyon (kakailanganin ng development effort)
 
-## 🗺️ Implementation Roadmap
+## 🗺️ Roadmap ng Implementasyon
 
-### Phase 1: Study Architecture (2-3 hours) - START HERE
+### Phase 1: Pag-aralan ang Arkitektura (2-3 oras) - SIMULAN DITO
 
-**Goal:** Maunawaan ang system design at mga ugnayan ng komponent
+**Layunin:** Maunawaan ang disenyo ng sistema at ugnayan ng mga component
 
 - [ ] Basahin ang buong dokumentong ito
-- [ ] Suriin ang architecture diagram at mga relasyon ng komponent
-- [ ] Unawain ang mga multi-agent pattern at mga desisyon sa disenyo
-- [ ] Pag-aralan ang mga code example para sa mga agent tools at routing
-- [ ] Suriin ang mga cost estimates at gabay sa capacity planning
+- [ ] Suriin ang diagram ng arkitektura at mga relasyon ng component
+- [ ] Unawain ang mga pattern at desisyon sa disenyo ng multi-agent
+- [ ] Pag-aralan ang mga halimbawa ng code para sa mga tool ng agent at routing
+- [ ] Suriin ang mga pagtatantya ng gastos at gabay sa capacity planning
 
-**Outcome:** Maliwanag na pag-unawa sa mga kailangan mong buuin
+**Kinalabasan:** Maliwanag na pagkaunawa sa kung ano ang kailangang buuin
 
-### Phase 2: Deploy Infrastructure (30-45 minutes)
+### Phase 2: I-deploy ang Imprastruktura (30-45 minuto)
 
-**Goal:** Mag-provision ng Azure resources gamit ang ARM template
+**Layunin:** Mag-provision ng Azure resources gamit ang ARM template
 
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup -m standard
 ```
 
-**What Gets Deployed:**
-- ✅ Azure OpenAI (3 regions: GPT-4o, GPT-4o-mini, embeddings)
-- ✅ AI Search service (empty, needs index configuration)
+**Ano ang Ide-deploy:**
+- ✅ Microsoft Foundry Models (3 rehiyon: gpt-4.1, gpt-4.1-mini, embeddings)
+- ✅ AI Search service (walang laman, kailangan ng index configuration)
 - ✅ Container Apps environment (placeholder images)
 - ✅ Storage accounts, Cosmos DB, Key Vault
-- ✅ Application Insights monitoring
+- ✅ Application Insights para sa monitoring
 
-**What's Missing:**
-- ❌ Agent implementation code
+**Mga Wala Pa:**
+- ❌ Implementasyon ng agent code
 - ❌ Routing logic
 - ❌ Frontend UI
 - ❌ Search index schema
 - ❌ Data pipelines
 
-### Phase 3: Build Application (80-120 hours)
+### Phase 3: Buuin ang Aplikasyon (80-120 oras)
 
-**Goal:** I-implement ang multi-agent system base sa arkitekturang ito
+**Layunin:** I-implementa ang multi-agent system base sa arkitekturang ito
 
-1. **Agent Implementation** (30-40 hours)
+1. **Implementasyon ng Agent** (30-40 oras)
    - Base agent class at mga interface
-   - Customer service agent gamit ang GPT-4o
-   - Inventory agent gamit ang GPT-4o-mini
-   - Mga tool integrations (AI Search, Bing, file processing)
+   - Customer service agent gamit ang gpt-4.1
+   - Inventory agent gamit ang gpt-4.1-mini
+   - Integrasyon ng mga tool (AI Search, Bing, pagproseso ng file)
 
-2. **Routing Service** (12-16 hours)
-   - Logic para sa request classification
+2. **Routing Service** (12-16 oras)
+   - Logic para sa klasipikasyon ng request
    - Pagpili at orchestration ng agent
    - FastAPI/Express backend
 
-3. **Frontend Development** (20-30 hours)
-   - Chat interface UI
-   - Functionality para sa file upload
-   - Pag-render ng mga sagot
+3. **Frontend Development** (20-30 oras)
+   - UI ng chat interface
+   - Functionality para sa pag-upload ng file
+   - Pag-render ng mga tugon
 
-4. **Data Pipeline** (8-12 hours)
+4. **Data Pipeline** (8-12 oras)
    - Paglikha ng AI Search index
-   - Document processing gamit ang Document Intelligence
+   - Pagproseso ng dokumento gamit ang Document Intelligence
    - Pagbuo ng embeddings at pag-index
 
-5. **Monitoring & Evaluation** (10-15 hours)
+5. **Monitoring & Evaluation** (10-15 oras)
    - Implementasyon ng custom telemetry
-   - Framework para sa agent evaluation
+   - Framework para sa pagsusuri ng agent
    - Red team security scanner
 
-### Phase 4: Deploy & Test (8-12 hours)
+### Phase 4: I-deploy at Subukan (8-12 oras)
 
 - Gumawa ng Docker images para sa lahat ng serbisyo
 - I-push sa Azure Container Registry
-- I-update ang Container Apps gamit ang totoong mga imahe
+- I-update ang Container Apps gamit ang totoong images
 - I-configure ang environment variables at secrets
 - Patakbuhin ang evaluation test suite
-- Magsagawa ng security scanning
+- Isagawa ang security scanning
 
-**Total Estimated Effort:** 80-120 oras para sa mga karanasang developer
+**Tinatayang Kabuuang Pagsisikap:** 80-120 oras para sa mga bihasang developer
 
-## Solution Architecture
+## Arkitektura ng Solusyon
 
-### Architecture Diagram
+### Diagram ng Arkitektura
 
 ```mermaid
 graph TB
     User[👤 Kustomer] --> LB[Azure Front Door]
-    LB --> WebApp[Front-end ng Web<br/>App ng Container]
+    LB --> WebApp[Frontend ng Web<br/>App na Container]
     
-    WebApp --> Router[Router ng Ahente<br/>App ng Container]
+    WebApp --> Router[Router ng Ahente<br/>App na Container]
     Router --> CustomerAgent[Ahente ng Kustomer<br/>Serbisyo sa Kustomer]
     Router --> InvAgent[Ahente ng Imbentaryo<br/>Pamamahala ng Imbentaryo]
     
-    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>East US 2]
-    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>West US 2]
+    CustomerAgent --> OpenAI1[Mga Modelo ng Microsoft Foundry<br/>gpt-4.1<br/>East US 2]
+    InvAgent --> OpenAI2[Mga Modelo ng Microsoft Foundry<br/>gpt-4.1-mini<br/>West US 2]
     
     CustomerAgent --> AISearch[Azure AI Search<br/>Katalogo ng Produkto]
-    CustomerAgent --> BingSearch[Bing Search API<br/>Impormasyon nang Real-time]
+    CustomerAgent --> BingSearch[Bing Search API<br/>Impormasyon na Real-time]
     InvAgent --> AISearch
     
     AISearch --> Storage[Azure Storage<br/>Mga Dokumento at File]
@@ -158,14 +158,14 @@ graph TB
     OpenAI1 --> Embeddings[Embeddings ng Teksto<br/>ada-002<br/>France Central]
     OpenAI2 --> Embeddings
     
-    Router --> AppInsights[Application Insights<br/>Pagsubaybay]
+    Router --> AppInsights[Application Insights<br/>Pagmamanman]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[GPT-4o Grader<br/>Switzerland North] --> Evaluation[Balangkas ng Ebalwasyon]
+    GraderModel[gpt-4.1 Grader<br/>Switzerland North] --> Evaluation[Balangkas ng Evaluasyon]
     RedTeam[Scanner ng Red Team] --> SecurityReports[Mga Ulat sa Seguridad]
     
-    subgraph "Layer ng Datos"
+    subgraph "Layer ng Data"
         Storage
         AISearch
         CosmosDB[Cosmos DB<br/>Kasaysayan ng Chat]
@@ -183,7 +183,7 @@ graph TB
     subgraph "Pagmamanman at Seguridad"
         AppInsights
         LogAnalytics[Workspace ng Log Analytics]
-        KeyVault[Azure Key Vault<br/>Mga Lihim at Konfigurasyon]
+        KeyVault[Azure Key Vault<br/>Mga Sekreto at Konfig]
         RedTeam
         Evaluation
     end
@@ -197,26 +197,26 @@ graph TB
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
 ```
-### Component Overview
+### Pangkalahatang-ideya ng mga Component
 
 | Component | Purpose | Technology | Region |
 |-----------|---------|------------|---------|
-| **Web Frontend** | User interface para sa pakikipag-ugnayan ng customer | Container Apps | Pangunahing Rehiyon |
-| **Agent Router** | Nag-roroute ng mga request sa angkop na agent | Container Apps | Pangunahing Rehiyon |
-| **Customer Agent** | Humahandle ng customer service queries | Container Apps + GPT-4o | Pangunahing Rehiyon |
-| **Inventory Agent** | Namamahala ng stock at fulfillment | Container Apps + GPT-4o-mini | Pangunahing Rehiyon |
-| **Azure OpenAI** | LLM inference para sa mga agent | Cognitive Services | Multi-region |
+| **Web Frontend** | Interface ng user para sa interaksyon ng customer | Container Apps | Pangunahing Rehiyon |
+| **Agent Router** | Nagruruta ng mga request sa angkop na agent | Container Apps | Pangunahing Rehiyon |
+| **Customer Agent** | Humahawak ng mga katanungan sa serbisyo ng customer | Container Apps + gpt-4.1 | Pangunahing Rehiyon |
+| **Inventory Agent** | Namamahala ng stock at pagpapatupad | Container Apps + gpt-4.1-mini | Pangunahing Rehiyon |
+| **Microsoft Foundry Models** | LLM inference para sa mga agent | Cognitive Services | Maramihang Rehiyon |
 | **AI Search** | Vector search at RAG | AI Search Service | Pangunahing Rehiyon |
-| **Storage Account** | File uploads at mga dokumento | Blob Storage | Pangunahing Rehiyon |
+| **Storage Account** | Pag-upload ng mga file at dokumento | Blob Storage | Pangunahing Rehiyon |
 | **Application Insights** | Monitoring at telemetry | Monitor | Pangunahing Rehiyon |
-| **Grader Model** | Sistema para sa agent evaluation | Azure OpenAI | Sekondaryong Rehiyon |
+| **Grader Model** | Sistema para sa pagsusuri ng agent | Microsoft Foundry Models | Pangalawang Rehiyon |
 
-## 📁 Project Structure
+## 📁 Istruktura ng Proyekto
 
 > **📍 Legend ng Status:**  
-> ✅ = Nasa repository  
+> ✅ = Nasa repositoryo  
 > 📝 = Reference implementation (halimbawa ng code sa dokumentong ito)  
-> 🔨 = Kailangan mong likhain ito
+> 🔨 = Kailangan mong likhain
 
 ```
 retail-multiagent-solution/              🔨 Your project directory
@@ -235,7 +235,7 @@ retail-multiagent-solution/              🔨 Your project directory
 │   ├── main.bicep                      🔨 Main Bicep template (optional, ARM exists)
 │   ├── main.parameters.json            🔨 Parameters file
 │   ├── modules/                        📝 Bicep modules (reference examples below)
-│   │   ├── ai-services.bicep           📝 Azure OpenAI deployments
+│   │   ├── ai-services.bicep           📝 Microsoft Foundry Models deployments
 │   │   ├── search.bicep                📝 AI Search configuration
 │   │   ├── storage.bicep               📝 Storage accounts
 │   │   ├── container-apps.bicep        📝 Container Apps environment
@@ -363,14 +363,14 @@ retail-multiagent-solution/              🔨 Your project directory
 
 ---
 
-## 🚀 Quick Start: What You Can Do Right Now
+## 🚀 Quick Start: Ano ang Maaari Mong Gawin Ngayon
 
-### Option 1: Deploy Infrastructure Only (30 minutes)
+### Opsyon 1: I-deploy Lang ang Imprastruktura (30 minuto)
 
-**What you get:** Lahat ng Azure services na provisioned at handa para sa development
+**Ano ang makukuha mo:** Lahat ng Azure services na naka-provision at handa para sa development
 
 ```bash
-# I-clone ang repositoryo
+# Kopyahin ang repositoryo
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/retail-multiagent-arm-template
 
@@ -381,61 +381,61 @@ cd AZD-for-beginners/examples/retail-multiagent-arm-template
 az resource list --resource-group myResourceGroup --output table
 ```
 
-**Expected outcome:**
-- ✅ Azure OpenAI services deployed (3 regions)
-- ✅ AI Search service created (empty)
-- ✅ Container Apps environment ready
-- ✅ Storage, Cosmos DB, Key Vault configured
-- ❌ Walang gumagawang agents pa (infrastruktura lamang)
+**Inaasahang kinalabasan:**
+- ✅ Microsoft Foundry Models services na na-deploy (3 rehiyon)
+- ✅ AI Search service na nalikha (walang laman)
+- ✅ Container Apps environment na handa
+- ✅ Storage, Cosmos DB, Key Vault na naka-configure
+- ❌ Walang gumaganang mga agent pa (imprastruktura lamang)
 
-### Option 2: Study Architecture (2-3 hours)
+### Opsyon 2: Pag-aralan ang Arkitektura (2-3 oras)
 
-**What you get:** Malalim na pag-unawa sa mga pattern ng multi-agent
+**Ano ang makukuha mo:** Malalim na pag-unawa sa mga pattern ng multi-agent
 
 1. Basahin ang buong dokumentong ito
-2. Suriin ang mga code example para sa bawat komponent
-3. Unawain ang mga desisyon sa disenyo at trade-offs
-4. Pag-aralan ang mga estratehiya para sa pag-optimize ng gastos
+2. Suriin ang mga halimbawa ng code para sa bawat component
+3. Unawain ang mga desisyon sa disenyo at mga trade-off
+4. Pag-aralan ang mga estratehiya sa pag-optimize ng gastos
 5. Planuhin ang iyong paraan ng implementasyon
 
-**Expected outcome:**
-- ✅ Maliwanag na mental model ng system architecture
-- ✅ Pag-unawa sa kinakailangang mga komponent
-- ✅ Realistikong mga pagtatantya ng effort
+**Inaasahang kinalabasan:**
+- ✅ Maliwanag na mental model ng arkitektura ng sistema
+- ✅ Pag-unawa sa mga kinakailangang component
+- ✅ Realistikong pagtatantya ng pagsisikap
 - ✅ Plano ng implementasyon
 
-### Option 3: Build Complete System (80-120 hours)
+### Opsyon 3: Buuin ang Kumpletong Sistema (80-120 oras)
 
-**What you get:** Production-ready na multi-agent solution
+**Ano ang makukuha mo:** Production-ready na multi-agent solution
 
-1. **Phase 1:** I-deploy ang infrastructure (tapos na sa itaas)
-2. **Phase 2:** I-implement ang mga agent gamit ang mga code example sa ibaba (30-40 oras)
-3. **Phase 3:** I-build ang routing service (12-16 oras)
+1. **Phase 1:** I-deploy ang imprastruktura (natapos sa itaas)
+2. **Phase 2:** I-implementa ang mga agent gamit ang mga halimbawa ng code sa ibaba (30-40 oras)
+3. **Phase 3:** Buuin ang routing service (12-16 oras)
 4. **Phase 4:** Gumawa ng frontend UI (20-30 oras)
-5. **Phase 5:** I-configure ang data pipelines (8-12 oras)
+5. **Phase 5:** I-configure ang mga data pipeline (8-12 oras)
 6. **Phase 6:** Magdagdag ng monitoring & evaluation (10-15 oras)
 
-**Expected outcome:**
-- ✅ Fully functional na multi-agent system
-- ✅ Production-grade monitoring
-- ✅ Security validation
-- ✅ Cost-optimized deployment
+**Inaasahang kinalabasan:**
+- ✅ Ganap na gumaganang multi-agent system
+- ✅ Monitoring na angkop sa production
+- ✅ Validasyon ng seguridad
+- ✅ Cost-optimized na deployment
 
 ---
 
-## 📚 Architecture Reference & Implementation Guide
+## 📚 Sanggunian sa Arkitektura & Gabay sa Implementasyon
 
-Ang mga sumusunod na seksyon ay nagbibigay ng detalyadong architecture patterns, configuration examples, at reference code para gabayan ang iyong implementasyon.
+Ang sumusunod na mga seksyon ay nagbibigay ng detalyadong mga pattern ng arkitektura, mga halimbawa ng konfigurasyon, at reference code upang gabayan ang iyong implementasyon.
 
-## Initial Configuration Requirements
+## Paunang Mga Kinakailangan sa Konfigurasyon
 
-### 1. Multiple Agents & Configuration
+### 1. Maramihang Ahente & Konfigurasyon
 
-**Goal**: Mag-deploy ng 2 espesyalisadong agent - "Customer Agent" (customer service) at "Inventory" (pamamahala ng stock)
+**Layunin**: Mag-deploy ng 2 espesyal na ahente - "Customer Agent" (serbisyo sa customer) at "Inventory" (pamamahala ng stock)
 
-> **📝 Tandaan:** Ang mga sumusunod na azure.yaml at Bicep configurations ay **mga halimbawa ng sanggunian** na nagpapakita kung paano istraktura ang multi-agent deployments. Kailangan mong likhain ang mga file na ito at ang mga kaukulang implementasyon ng agent.
+> **📝 Tala:** Ang mga sumusunod na azure.yaml at Bicep configurations ay **mga halimbawa lamang** na nagpapakita kung paano istrukturahin ang multi-agent deployments. Kailangan mong likhain ang mga file na ito at ang katugmang implementasyon ng mga agent.
 
-#### Configuration Steps:
+#### Mga Hakbang sa Konfigurasyon:
 
 ```yaml
 # azure.yaml - Agent Configuration
@@ -450,7 +450,7 @@ services:
             "name": "Customer",
             "role": "Customer Service Representative",
             "description": "Handles general customer inquiries, returns, and support",
-            "model": "gpt-4o",
+            "model": "gpt-4.1",
             "temperature": 0.7,
             "max_tokens": 500,
             "tools": ["search", "file_retrieval", "bing_search"]
@@ -459,7 +459,7 @@ services:
             "name": "Inventory",
             "role": "Inventory Management Specialist", 
             "description": "Manages stock levels, product availability, and fulfillment",
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-mini",
             "temperature": 0.3,
             "max_tokens": 300,
             "tools": ["search", "database_query"]
@@ -467,19 +467,19 @@ services:
         }
 ```
 
-#### Bicep Template Updates:
+#### Mga Update sa Bicep Template:
 
 ```bicep
 // infra/agents.bicep
 param agentsConfig object = {
   customer: {
     name: 'Customer'
-    model: 'gpt-4o'
+    model: 'gpt-4.1'
     capacity: 20
   }
   inventory: {
     name: 'Inventory'
-    model: 'gpt-4o-mini'
+    model: 'gpt-4.1-mini'
     capacity: 10
   }
 }
@@ -507,17 +507,17 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 }]
 ```
 
-### 2. Multiple Models with Capacity Planning
+### 2. Maramihang Model na may Capacity Planning
 
-**Goal**: Mag-deploy ng chat model (Customer), embeddings model (search), at reasoning model (grader) na may tamang quota management
+**Layunin**: Mag-deploy ng chat model (Customer), embeddings model (search), at reasoning model (grader) na may tamang pamamahala ng quota
 
-#### Multi-Region Strategy:
+#### Estratehiya sa Multi-Rehiyon:
 
 ```bicep
 // infra/models.bicep
 param modelDeployments array = [
   {
-    name: 'gpt-4o'
+    name: 'gpt-4.1'
     region: 'eastus2'
     capacity: 20
     usage: 'chat'
@@ -531,7 +531,7 @@ param modelDeployments array = [
     priority: 'medium'
   }
   {
-    name: 'gpt-4o'
+    name: 'gpt-4.1'
     region: 'francecentral'
     capacity: 15
     usage: 'grading'
@@ -546,7 +546,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
   properties: {
     scriptContent: '''
       #!/bin/bash
-      for model in "gpt-4o" "text-embedding-ada-002"; do
+      for model in "gpt-4.1" "text-embedding-ada-002"; do
         available=$(az cognitiveservices usage list --location ${location} --query "[?name.value=='$model'].{current:currentValue,limit:limit}" -o tsv)
         echo "Model: $model, Available capacity: $available"
       done
@@ -555,18 +555,18 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
 }
 ```
 
-#### Region Fallback Configuration:
+#### Konfigurasyon ng Region Fallback:
 
 ```yaml
 # .azure/env/.env.production
 AZURE_OPENAI_REGIONS='["eastus2", "westus2", "francecentral"]'
 AZURE_OPENAI_FALLBACK_ENABLED=true
-MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
+MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 ```
 
-### 3. AI Search with Data Index Configuration
+### 3. AI Search na may Konfigurasyon ng Data Index
 
-**Goal**: I-configure ang AI Search para sa mga pag-update ng data at automated indexing
+**Layunin**: I-configure ang AI Search para sa pag-update ng data at automated indexing
 
 #### Pre-Provisioning Hook:
 
@@ -576,7 +576,7 @@ MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 
 echo "Setting up AI Search configuration..."
 
-# Lumikha ng serbisyo sa paghahanap na may partikular na SKU
+# Lumikha ng serbisyo ng paghahanap na may espesipikong SKU
 az search service create \
   --name "$AZURE_SEARCH_SERVICE_NAME" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -593,7 +593,7 @@ az search service create \
 
 echo "Configuring AI Search indexes and uploading initial data..."
 
-# Kunin ang susi ng serbisyo sa paghahanap
+# Kunin ang susi ng serbisyo ng paghahanap
 SEARCH_KEY=$(az search admin-key show --service-name "$AZURE_SEARCH_SERVICE_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query primaryKey -o tsv)
 
 # Lumikha ng iskema ng index
@@ -609,7 +609,7 @@ python ./scripts/upload_search_data.py \
   --data-path "./data/initial-docs"
 ```
 
-#### Search Index Schema:
+#### Schema ng Search Index:
 
 ```json
 {
@@ -634,14 +634,14 @@ python ./scripts/upload_search_data.py \
 }
 ```
 
-### 4. Agent Tool Configuration for AI Search
+### 4. Konfigurasyon ng Tool ng Agent para sa AI Search
 
-**Goal**: I-configure ang mga agent upang gamitin ang AI Search bilang grounding tool
+**Layunin**: I-configure ang mga agent para gamitin ang AI Search bilang grounding tool
 
-#### Agent Search Tool Implementation:
+#### Implementasyon ng Agent Search Tool:
 
 ```python
-# src/agents/tools/search_tool.py
+# src/mga_ahente/mga_kasangkapan/kasangkapan_paghahanap.py
 import asyncio
 from azure.search.documents.aio import SearchClient
 from azure.core.credentials import AzureKeyCredential
@@ -682,7 +682,7 @@ class SearchTool:
         return [doc async for doc in results]
 ```
 
-#### Agent Integration:
+#### Integrasyon ng Agent:
 
 ```python
 # src/agents/customer_agent.py
@@ -701,9 +701,9 @@ class CustomerAgent:
         # Ihanda ang konteksto para sa LLM
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # Bumuo ng tugon na may batayan
+        # Gumawa ng tugon na may pinagbatayan
         response = await self.openai_client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4.1",
             messages=[
                 {"role": "system", "content": f"You are Customer, a helpful customer service agent. Use this context to answer questions: {context}"},
                 {"role": "user", "content": user_query}
@@ -713,11 +713,11 @@ class CustomerAgent:
         return response.choices[0].message.content
 ```
 
-### 5. File Upload Storage Integration
+### 5. Integrasyon ng File Upload Storage
 
-**Goal**: Payagan ang mga agent na mag-process ng uploaded files (manwal, dokumento) para sa RAG context
+**Layunin**: Paganahin ang mga agent na magproseso ng mga in-upload na file (mga manual, dokumento) para sa RAG context
 
-#### Storage Configuration:
+#### Konfigurasyon ng Storage:
 
 ```bicep
 // infra/storage.bicep
@@ -756,7 +756,7 @@ resource eventGridTopic 'Microsoft.EventGrid/topics@2023-12-15-preview' = {
 }
 ```
 
-#### Document Processing Pipeline:
+#### Pipeline ng Pagproseso ng Dokumento:
 
 ```python
 # src/document_processor.py
@@ -814,11 +814,11 @@ class DocumentProcessor:
         await self.search_client.upload_documents([document])
 ```
 
-### 6. Bing Search Integration
+### 6. Integrasyon ng Bing Search
 
-**Goal**: Magdagdag ng Bing Search capabilities para sa real-time na impormasyon
+**Layunin**: Magdagdag ng mga kakayahan ng Bing Search para sa real-time na impormasyon
 
-#### Bicep Resource Addition:
+#### Pagdaragdag ng Bicep Resource:
 
 ```bicep
 // infra/bing-search.bicep
@@ -882,11 +882,11 @@ class BingSearchTool:
 
 ## Monitoring & Observability
 
-### 7. Tracing and Application Insights
+### 7. Tracing at Application Insights
 
-**Goal**: Komprehensibong monitoring gamit ang trace logs at application insights
+**Layunin**: Komprehensibong monitoring gamit ang trace logs at application insights
 
-#### Application Insights Configuration:
+#### Konfigurasyon ng Application Insights:
 
 ```bicep
 // infra/monitoring.bicep
@@ -939,7 +939,7 @@ resource agentPerformanceAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-#### Custom Telemetry Implementation:
+#### Implementasyon ng Custom Telemetry:
 
 ```python
 # src/telemetry/agent_telemetry.py
@@ -953,7 +953,7 @@ class AgentTelemetry:
     def __init__(self, instrumentation_key: str):
         self.telemetry_client = TelemetryClient(instrumentation_key)
         
-        # Isaayos ang pag-log
+        # Itakda ang pag-log
         handler = LoggingHandler(instrumentation_key)
         logging.basicConfig(handlers=[handler], level=logging.INFO)
         self.logger = logging.getLogger(__name__)
@@ -1045,11 +1045,11 @@ class AgentTelemetry:
         return len(text) // 4
 ```
 
-### 8. Red Teaming Security Validation
+### 8. Red Teaming para sa Pagpapatibay ng Seguridad
 
-**Goal**: Automated security testing para sa mga agent at modelo
+**Layunin**: Automated security testing para sa mga agent at modelo
 
-#### Red Teaming Configuration:
+#### Konfigurasyon ng Red Teaming:
 
 ```python
 # src/security/red_team_scanner.py
@@ -1097,7 +1097,7 @@ class RedTeamScanner:
                     'details': strategy_result['details']
                 })
         
-        # Kalkulahin ang pangkalahatang iskor ng seguridad
+        # Kalkulahin ang kabuuang iskor ng seguridad
         scan_results['overall_score'] = self._calculate_security_score(scan_results)
         
         return scan_results
@@ -1165,7 +1165,7 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # Ang implementasyon ay magpapadala ng HTTP request sa endpoint ng ahente
+        # Ipapadala ng implementasyon ang HTTP request sa endpoint ng ahente
         # Para sa demo, nagbabalik ng placeholder
         import aiohttp
         
@@ -1188,7 +1188,7 @@ class RedTeamScanner:
     
     def _analyze_response(self, response: str, strategy: str) -> Dict:
         """Analyze response for vulnerabilities"""
-        # Pinasimpleng pagtuklas ng kahinaan
+        # Pinadaling pagtuklas ng mga kahinaan
         vulnerability_patterns = {
             'prompt_injection': ['system prompt', 'internal config', 'admin mode'],
             'jailbreak_attempts': ['DAN mode', 'rules broken', 'safety disabled'],
@@ -1223,7 +1223,7 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # Pangunahing pagmamarka: 100 - (mga kahinaan / kabuuan * 100)
+        # Pangunahing pag-score: 100 - (vulnerabilities / total * 100)
         if total_strategies == 0:
             return 100.0
         
@@ -1254,7 +1254,7 @@ AGENT_ENDPOINT=$(az containerapp show \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# Patakbuhin ang pagsusuri sa seguridad
+# Patakbuhin ang pag-scan ng seguridad
 python -m src.security.red_team_scanner \
   --endpoint "https://$AGENT_ENDPOINT" \
   --api-key "$AGENT_API_KEY" \
@@ -1264,16 +1264,16 @@ python -m src.security.red_team_scanner \
 echo "Security scan completed. Check security_reports/ for results."
 ```
 
-### 9. Agent Evaluation with Grader Model
+### 9. Pagsusuri ng Agent gamit ang Grader Model
 
-**Goal**: Mag-deploy ng evaluation system na may dedikadong grader model
+**Layunin**: Mag-deploy ng sistema ng pagsusuri na may dedikadong grader model
 
-#### Grader Model Configuration:
+#### Konfigurasyon ng Grader Model:
 
 ```bicep
 // infra/evaluation.bicep
 param graderModelConfig object = {
-  name: 'gpt-4o'
+  name: 'gpt-4.1'
   version: '2024-11-20'
   capacity: 30
   region: 'switzerlandnorth'  // Different region for separation
@@ -1296,7 +1296,7 @@ resource graderOpenAI 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
 
 resource graderDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: graderOpenAI
-  name: 'gpt-4o-grader'
+  name: 'gpt-4.1-grader'
   properties: {
     model: {
       format: 'OpenAI'
@@ -1311,7 +1311,7 @@ resource graderDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023
 }
 ```
 
-#### Evaluation Framework:
+#### Framework ng Pagsusuri:
 
 ```python
 # src/evaluation/agent_evaluator.py
@@ -1416,7 +1416,7 @@ class AgentEvaluator:
         
         try:
             grader_response = await self.grader_client.chat.completions.create(
-                model="gpt-4o-grader",
+                model="gpt-4.1-grader",
                 messages=[
                     {"role": "system", "content": "You are an expert AI evaluation assistant. Always respond with valid JSON."},
                     {"role": "user", "content": grading_prompt}
@@ -1425,7 +1425,7 @@ class AgentEvaluator:
                 max_tokens=500
             )
             
-            # I-parse ang tugon na JSON
+            # I-parse ang JSON na tugon
             grading_text = grader_response.choices[0].message.content
             grading_result = json.loads(grading_text)
             
@@ -1471,7 +1471,7 @@ class AgentEvaluator:
             if criterion_scores:
                 summary['criteria_averages'][criterion] = sum(criterion_scores) / len(criterion_scores)
         
-        # Pagsusuri ng pagganap
+        # Rating ng pagganap
         avg_score = summary['average_overall_score']
         if avg_score >= 4.5:
             summary['performance_rating'] = 'Excellent'
@@ -1487,7 +1487,7 @@ class AgentEvaluator:
         return summary
 ```
 
-#### Test Cases Configuration:
+#### Konfigurasyon ng Mga Test Case:
 
 ```json
 // tests/evaluation_test_cases.json
@@ -1526,13 +1526,13 @@ class AgentEvaluator:
 
 ---
 
-## Customization & Updates
+## Pag-customize & Mga Pag-update
 
-### 10. Container App Customization
+### 10. Pag-customize ng Container App
 
-**Goal**: I-update ang container app configuration at palitan ng custom UI
+**Layunin**: I-update ang konfigurasyon ng container app at palitan ng custom UI
 
-#### Dynamic Configuration:
+#### Dynamic na Konfigurasyon:
 
 ```yaml
 # azure.yaml - Container App Configuration
@@ -1575,7 +1575,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
 
-#### Build and Deploy Script:
+#### Script para sa Build at Deploy:
 
 ```bash
 #!/bin/bash
@@ -1583,7 +1583,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# Bumuo ng pasadyang imahe na may mga environment variable
+# Bumuo ng pasadyang imahe na may mga variable ng kapaligiran
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1608,15 +1608,15 @@ echo "Frontend deployed successfully!"
 
 ---
 
-## 🔧 Troubleshooting Guide
+## 🔧 Gabay sa Pag-troubleshoot
 
-### Common Issues and Solutions
+### Mga Karaniwang Isyu at Solusyon
 
-#### 1. Container Apps Quota Limits
+#### 1. Mga Limitasyon sa Quota ng Container Apps
 
-**Problem**: Nabibigo ang deployment dahil sa regional quota limits
+**Problema**: Nabibigo ang deployment dahil sa mga regional quota limits
 
-**Solution**:
+**Solusyon**:
 ```bash
 # Suriin ang kasalukuyang paggamit ng quota
 az containerapp env show \
@@ -1635,11 +1635,11 @@ az support tickets create \
   --description "Request quota increase for Container Apps in region X"
 ```
 
-#### 2. Model Deployment Expiry
+#### 2. Pag-expire ng Model Deployment
 
-**Problem**: Nabibigo ang model deployment dahil sa expired API version
+**Problema**: Nabibigo ang pag-deploy ng modelo dahil sa expired na API version
 
-**Solution**:
+**Solusyon**:
 ```python
 # scripts/update_model_versions.py
 import requests
@@ -1647,11 +1647,11 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # Ito ay tatawag sa Azure OpenAI API upang kunin ang kasalukuyang mga bersyon
+    # Tatawag ito sa Microsoft Foundry Models API para kunin ang kasalukuyang mga bersyon
     latest_versions = {
-        "gpt-4o": "2024-11-20",
+        "gpt-4.1": "2024-11-20",
         "text-embedding-ada-002": "2", 
-        "gpt-4o-mini": "2024-07-18"
+        "gpt-4.1-mini": "2024-07-18"
     }
     
     print("Latest model versions:")
@@ -1684,11 +1684,11 @@ if __name__ == "__main__":
     update_bicep_templates(versions)
 ```
 
-#### 3. Fine-tuning Integration
+#### 3. Integrasyon ng Fine-tuning
 
-**Problem**: Paano i-integrate ang fine-tuned models sa AZD deployment
+**Problema**: Paano i-integrate ang fine-tuned na mga modelo sa AZD deployment
 
-**Solution**:
+**Solusyon**:
 ```python
 # scripts/fine_tuning_pipeline.py
 import asyncio
@@ -1698,7 +1698,7 @@ class FineTuningPipeline:
     def __init__(self, openai_client: AsyncOpenAI):
         self.client = openai_client
     
-    async def start_fine_tuning_job(self, training_file_id: str, model: str = "gpt-4o-mini"):
+    async def start_fine_tuning_job(self, training_file_id: str, model: str = "gpt-4.1-mini"):
         """Start a fine-tuning job"""
         job = await self.client.fine_tuning.jobs.create(
             training_file=training_file_id,
@@ -1726,8 +1726,8 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # I-update ang deployment upang gamitin ang fine-tuned na modelo
-            # Ito ay tatawag sa Azure CLI para i-update ang deployment
+            # I-update ang deployment upang gumamit ng fine-tuned na modelo
+            # Magpapatakbo ito ng Azure CLI upang i-update ang deployment
             return fine_tuned_model
         else:
             print(f"Job status: {job.status}")
@@ -1736,11 +1736,11 @@ class FineTuningPipeline:
 
 ---
 
-## FAQ & Open-Ended Exploration
+## FAQ & Bukas na Eksplorasyon
 
-### Frequently Asked Questions
+### Mga Madalas Itanong
 
-#### Q: May madali bang paraan para mag-deploy ng maramihang agents (design pattern)?
+#### Q: May madaling paraan ba para mag-deploy ng maramihang ahente (design pattern)?
 
 **A: Oo! Gamitin ang Multi-Agent Pattern:**
 
@@ -1753,23 +1753,23 @@ services:
     config:
       AGENTS: |
         {
-          "customer": {"type": "customer_service", "model": "gpt-4o", "capacity": 20},
-          "inventory": {"type": "inventory_management", "model": "gpt-4o-mini", "capacity": 10},
-          "returns": {"type": "returns_processing", "model": "gpt-4o-mini", "capacity": 5}
+          "customer": {"type": "customer_service", "model": "gpt-4.1", "capacity": 20},
+          "inventory": {"type": "inventory_management", "model": "gpt-4.1-mini", "capacity": 10},
+          "returns": {"type": "returns_processing", "model": "gpt-4.1-mini", "capacity": 5}
         }
 ```
 
 #### Q: Maaari ko bang i-deploy ang "model router" bilang isang modelo (mga implikasyon sa gastos)?
 
-**A: Oo, sa maingat na konsiderasyon:**
+**A: Oo, sa maingat na pagsasaalang-alang:**
 
 ```python
 # Implementasyon ng Model Router
 class ModelRouter:
     def __init__(self):
         self.routing_rules = {
-            "simple_queries": {"model": "gpt-4o-mini", "cost_per_1k": 0.00015},
-            "complex_reasoning": {"model": "gpt-4o", "cost_per_1k": 0.03},
+            "simple_queries": {"model": "gpt-4.1-mini", "cost_per_1k": 0.00015},
+            "complex_reasoning": {"model": "gpt-4.1", "cost_per_1k": 0.03},
             "embeddings": {"model": "text-embedding-ada-002", "cost_per_1k": 0.0001}
         }
     
@@ -1784,12 +1784,12 @@ class ModelRouter:
     
     def estimate_cost_savings(self, usage_patterns: dict):
         """Estimate cost savings from intelligent routing"""
-        # Kakalkulahin ng implementasyon ang potensyal na matitipid
+        # Ang implementasyon ay magkakalkula ng potensyal na pagtitipid
         pass
 ```
 
 **Mga Implikasyon sa Gastos:**
-- **Pag-save**: 60-80% pagbawas sa gastos para sa simpleng queries
+- **Pagtipid**: 60-80% pagbawas sa gastos para sa mga simpleng query
 - **Mga Trade-off**: Bahagyang pagtaas ng latency para sa routing logic
 - **Monitoring**: Subaybayan ang accuracy kumpara sa mga metric ng gastos
 
@@ -1799,19 +1799,19 @@ class ModelRouter:
 
 ```bash
 #!/bin/bash
-# hooks/postprovision.sh - Integrasyon para sa fine-tuning
+# hooks/postprovision.sh - Integrasyon ng fine-tuning
 
 echo "Starting fine-tuning pipeline..."
 
-# I-upload ang data ng pagsasanay
+# Mag-upload ng data ng pagsasanay
 TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
 
-# Simulan ang trabaho para sa fine-tuning
+# Simulan ang trabaho ng fine-tuning
 FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
-  --model "gpt-4o-mini")
+  --model "gpt-4.1-mini")
 
 # I-save ang ID ng trabaho para sa pagmamanman
 echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
@@ -1820,9 +1820,9 @@ echo "Fine-tuning job started: $FINE_TUNE_JOB_ID"
 echo "Monitor progress with: azd hooks run monitor-fine-tuning"
 ```
 
-### Advanced Scenarios
+### Mga Advanced na Senaryo
 
-#### Multi-Region Deployment Strategy
+#### Estratehiya sa Multi-Rehiyon na Deployment
 
 ```bicep
 // infra/multi-region.bicep
@@ -1858,7 +1858,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-#### Cost Optimization Framework
+#### Framework para sa Pag-optimize ng Gastos
 
 ```python
 # src/optimization/cost_optimizer.py
@@ -1882,7 +1882,7 @@ class CostOptimizer:
                     'estimated_savings': usage['monthly_cost'] * 0.3
                 })
         
-        # Pagsusuri ng oras ng kasagsagan
+        # Pagsusuri ng oras ng rurok
         peak_patterns = self.analytics.get_peak_patterns()
         if peak_patterns['variance'] > 0.6:
             recommendations.append({
@@ -1903,43 +1903,44 @@ class CostOptimizer:
 ```
 
 ---
-## ✅ Handang I-deploy na ARM Template
 
-> **✨ ITO AY TUNAY NA UMIIRAL AT GUMAGANA!**  
-> Hindi tulad ng mga konseptwal na halimbawa ng code sa itaas, ang ARM template ay isang **tunay, gumaganang deployment ng imprastruktura** na kasama sa repositoryong ito.
+## ✅ Handa nang I-deploy na ARM Template
 
-### Ano ang Ginagawa ng Template na Ito
+> **✨ ITO AY TALAGANG UMIIRAL AT GUMAGANA!**  
+> Hindi tulad ng mga konseptwal na halimbawa ng code sa itaas, ang ARM template ay isang **totoo, gumaganang deployment ng imprastruktura** na kasama sa repositoryong ito.
 
-Ang ARM template sa [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) ay nagpo-provision ng **lahat ng Azure infrastructure** na kailangan para sa multi-agent system. Ito ang **nag-iisang ready-to-run na bahagi** - ang lahat ng iba pa ay nangangailangan ng development.
+### Ano ang Gagawin ng Template na Ito
+
+Ang ARM template sa [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) ay nagpo-provision ng **lahat ng Azure infrastructure** na kailangan para sa multi-agent system. Ito ang **nag-iisang handa nang patakbuhin na bahagi** - ang lahat ng iba pa ay nangangailangan ng development.
 
 ### Ano ang Kasama sa ARM Template
 
 Ang ARM template na matatagpuan sa [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) ay naglalaman ng:
 
-#### **Kumpletong Imprastruktura**
-- ✅ **Multi-region Azure OpenAI** deployments (GPT-4o, GPT-4o-mini, embeddings, grader)
+#### **Kompletong Imprastruktura**
+- ✅ **Multi-region Microsoft Foundry Models** deployments (gpt-4.1, gpt-4.1-mini, embeddings, grader)
 - ✅ **Azure AI Search** na may kakayahan sa vector search
-- ✅ **Azure Storage** na may mga container para sa dokumento at upload
+- ✅ **Azure Storage** na may document at upload containers
 - ✅ **Container Apps Environment** na may auto-scaling
 - ✅ **Agent Router & Frontend** container apps
-- ✅ **Cosmos DB** para sa pagpapanatili ng kasaysayan ng chat
-- ✅ **Application Insights** para sa komprehensibong pagsubaybay
-- ✅ **Key Vault** para sa ligtas na pamamahala ng mga lihim
+- ✅ **Cosmos DB** para sa pagpapanatili ng chat history
+- ✅ **Application Insights** para sa komprehensibong monitoring
+- ✅ **Key Vault** para sa secure na pamamahala ng mga secret
 - ✅ **Document Intelligence** para sa pagproseso ng mga file
 - ✅ **Bing Search API** para sa real-time na impormasyon
 
-#### **Mga Mode ng Deployment**
+#### **Mga Mode ng Pag-deploy**
 | Mode | Use Case | Resources | Estimated Cost/Month |
 |------|----------|-----------|---------------------|
 | **Minimal** | Pag-develop, Pagsubok | Basic SKUs, Isang rehiyon | $100-370 |
-| **Standard** | Produksyon, Katamtamang sukat | Standard SKUs, Multi-rehiyon | $420-1,450 |
+| **Standard** | Production, Katamtamang sukat | Standard SKUs, Multi-region | $420-1,450 |
 | **Premium** | Enterprise, Malaking sukat | Premium SKUs, HA setup | $1,150-3,500 |
 
-### 🎯 Mabilis na Mga Opsyon sa Deployment
+### 🎯 Mabilis na Mga Opsyon sa Pag-deploy
 
-#### Opsyon 1: One-Click Azure Deployment
+#### Opsyon 1: Isang-Click Azure Deployment
 
-[![Mag-deploy sa Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
+[![I-deploy sa Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
 #### Opsyon 2: Azure CLI Deployment
 
@@ -1951,20 +1952,20 @@ cd azd-for-beginners/examples/retail-multiagent-arm-template
 # Gawing executable ang deployment script
 chmod +x deploy.sh
 
-# I-deploy gamit ang mga default na setting (karaniwang mode)
+# I-deploy gamit ang mga default na setting (Karaniwang mode)
 ./deploy.sh -g myResourceGroup
 
 # I-deploy para sa produksyon na may mga premium na tampok
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# I-deploy ang minimal na bersyon para sa development
+# I-deploy ang minimal na bersyon para sa pag-develop
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
 #### Opsyon 3: Direktang ARM Template Deployment
 
 ```bash
-# Lumikha ng grupo ng mga resource
+# Lumikha ng resource group
 az group create --name myResourceGroup --location eastus2
 
 # I-deploy ang template nang direkta
@@ -1977,7 +1978,7 @@ az deployment group create \
 
 ### Mga Output ng Template
 
-Pagkatapos ng matagumpay na deployment, matatanggap mo ang:
+Matapos ang matagumpay na pag-deploy, matatanggap mo ang:
 
 ```json
 {
@@ -1991,20 +1992,20 @@ Pagkatapos ng matagumpay na deployment, matatanggap mo ang:
 }
 ```
 
-### 🔧 Pag-configure Pagkatapos ng Deployment
+### 🔧 Konfigurasyon Pagkatapos ng Pag-deploy
 
-Ang ARM template ang humahawak ng provisioning ng imprastruktura. Pagkatapos ng deployment:
+Ang ARM template ang humahawak ng provisioning ng imprastruktura. Pagkatapos ng pag-deploy:
 
 1. **I-configure ang Search Index**:
    ```bash
-   # Gamitin ang ibinigay na schema ng paghahanap
+   # Gamitin ang ibinigay na iskema ng paghahanap
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
      -H "Content-Type: application/json" \
      -H "api-key: ${SEARCH_KEY}" \
      -d @../data/search-schema.json
    ```
 
-2. **I-upload ang Paunang Dokumento**:
+2. **I-upload ang Mga Paunang Dokumento**:
    ```bash
    # Mag-upload ng mga manwal ng produkto at base ng kaalaman
    az storage blob upload-batch \
@@ -2013,9 +2014,9 @@ Ang ARM template ang humahawak ng provisioning ng imprastruktura. Pagkatapos ng 
      --account-name ${STORAGE_ACCOUNT}
    ```
 
-3. **I-deploy ang Agent Code**:
+3. **I-deploy ang Code ng Agent**:
    ```bash
-   # Bumuo at i-deploy ang aktwal na mga aplikasyon ng ahente
+   # Bumuo at i-deploy ang mga aktwal na aplikasyon ng ahente
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -2023,9 +2024,9 @@ Ang ARM template ang humahawak ng provisioning ng imprastruktura. Pagkatapos ng 
      --image myregistry.azurecr.io/agent-router:latest
    ```
 
-### 🎛️ Mga Opsyon sa Pag-customize
+### 🎛️ Mga Pagpipilian sa Pag-customize
 
-I-edit ang `azuredeploy.parameters.json` para i-customize ang iyong deployment:
+I-edit ang `azuredeploy.parameters.json` upang i-customize ang iyong deployment:
 
 ```json
 {
@@ -2039,12 +2040,12 @@ I-edit ang `azuredeploy.parameters.json` para i-customize ang iyong deployment:
 }
 ```
 
-### 📊 Mga Tampok ng Deployment
+### 📊 Mga Tampok ng Pag-deploy
 
 - ✅ **Prerequisites validation** (Azure CLI, quotas, permissions)
 - ✅ **Multi-region high availability** na may automatic failover
-- ✅ **Komprehensibong pagsubaybay** gamit ang Application Insights at Log Analytics
-- ✅ **Mga pinakamahusay na kasanayan sa seguridad** gamit ang Key Vault at RBAC
+- ✅ **Komprehensibong monitoring** gamit ang Application Insights at Log Analytics
+- ✅ **Mga pinakamahuhusay na kasanayan sa seguridad** gamit ang Key Vault at RBAC
 - ✅ **Pag-optimize ng gastos** gamit ang configurable deployment modes
 - ✅ **Automated scaling** batay sa demand patterns
 - ✅ **Zero-downtime updates** gamit ang Container Apps revisions
@@ -2053,133 +2054,133 @@ I-edit ang `azuredeploy.parameters.json` para i-customize ang iyong deployment:
 
 Kapag na-deploy na, subaybayan ang iyong solusyon sa pamamagitan ng:
 
-- **Application Insights**: Mga performance metrics, dependency tracking, at custom telemetry
-- **Log Analytics**: Sentralisadong logging mula sa lahat ng komponent
-- **Azure Monitor**: Kalusugan ng resources at pagsubaybay ng availability
+- **Application Insights**: Mga metric ng performance, dependency tracking, at custom telemetry
+- **Log Analytics**: Sentralisadong logging mula sa lahat ng bahagi
+- **Azure Monitor**: Kalusugan at availability ng resources
 - **Cost Management**: Real-time na pagsubaybay ng gastos at mga alerto sa budget
 
 ---
 
-## 📚 Kumpletong Gabay sa Implementasyon
+## 📚 Kompletong Gabay sa Implementasyon
 
-Ang dokumentong senaryo na ito kasama ang ARM template ay nagbibigay ng lahat ng kailangan para mag-deploy ng production-ready na multi-agent customer support solution. Saklaw ng implementasyon ang:
+Ang dokumentong senaryo na ito kasama ang ARM template ay nagbibigay ng lahat ng kailangan upang mag-deploy ng production-ready na multi-agent customer support solution. Saklaw ng implementasyon ang:
 
-✅ **Disenyo ng Arkitektura** - Komprehensibong disenyo ng sistema na may mga relasyon ng komponent  
-✅ **Provisioning ng Imprastruktura** - Kumpletong ARM template para sa one-click deployment  
+✅ **Disenyo ng Arkitektura** - Komprehensibong disenyo ng sistema na may relasyon ng mga bahagi  
+✅ **Provisioning ng Imprastruktura** - Kompletong ARM template para sa one-click deployment  
 ✅ **Konfigurasyon ng Agent** - Detalyadong setup para sa Customer at Inventory agents  
 ✅ **Multi-Model Deployment** - Estratehikong paglalagay ng mga modelo sa iba't ibang rehiyon  
-✅ **Integrasyon ng Search** - AI Search na may vector capabilities at pag-index ng data  
-✅ **Implementasyon ng Seguridad** - Red teaming, vulnerability scanning, at mga secure na kasanayan  
-✅ **Pagsubaybay at Ebalwasyon** - Komprehensibong telemetry at framework para sa ebalwasyon ng agent  
-✅ **Kahandaan para sa Produksyon** - Enterprise-grade na deployment na may HA at disaster recovery  
-✅ **Pag-optimize ng Gastos** - Intelligent routing at scaling base sa paggamit  
+✅ **Integrasyon ng Search** - AI Search na may vector capabilities at data indexing  
+✅ **Pagpapatupad ng Seguridad** - Red teaming, vulnerability scanning, at mga secure na kasanayan  
+✅ **Pagsubaybay at Pagsusuri** - Komprehensibong telemetry at framework para sa pagsusuri ng agent  
+✅ **Kahandaan para sa Produksyon** - Enterprise-grade deployment na may HA at disaster recovery  
+✅ **Pag-optimize ng Gastos** - Matalinong routing at scaling base sa paggamit  
 ✅ **Gabay sa Pag-troubleshoot** - Karaniwang isyu at mga estratehiya ng resolusyon
 
 ---
 
 ## 📊 Buod: Ano ang Iyong Natutunan
 
-### Mga Pattern ng Arkitektura na Tinatalakay
+### Mga Pattern ng Arkitektura na Sakop
 
-✅ **Disenyo ng Multi-Agent System** - Espesyalisadong mga agent (Customer + Inventory) na may dedikadong mga modelo  
-✅ **Multi-Region Deployment** - Estratehikong paglalagay ng modelo para sa pag-optimize ng gastos at redundancy  
-✅ **RAG Architecture** - Integrasyon ng AI Search na may vector embeddings para sa grounded na mga sagot  
-✅ **Ebalwasyon ng Agent** - Dedikadong grader model para sa pagtatasa ng kalidad  
-✅ **Framework ng Seguridad** - Mga pattern ng red teaming at vulnerability scanning  
+✅ **Disenyo ng Multi-Agent System** - Mga espesyalisadong agent (Customer + Inventory) na may dedikadong mga modelo  
+✅ **Multi-Region Deployment** - Estratehikong paglalagay ng mga modelo para sa pag-optimize ng gastos at redundancy  
+✅ **RAG Architecture** - Integrasyon ng AI Search na may vector embeddings para sa mga nakabatay na tugon  
+✅ **Pagsusuri ng Agent** - Dedikadong grader model para sa pagsusuri ng kalidad  
+✅ **Balangkas ng Seguridad** - Mga pattern para sa red teaming at vulnerability scanning  
 ✅ **Pag-optimize ng Gastos** - Model routing at capacity planning strategies  
-✅ **Pagsubaybay sa Produksyon** - Application Insights na may custom telemetry  
+✅ **Pagsubaybay para sa Produksyon** - Application Insights na may custom telemetry  
 
 ### Ano ang Ibinibigay ng Dokumentong Ito
 
-| Component | Status | Where to Find It |
+| Sangkap | Katayuan | Saan Ito Matatagpuan |
 |-----------|--------|------------------|
-| **Infrastructure Template** | ✅ Handang I-deploy | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
-| **Architecture Diagrams** | ✅ Kumpleto | Mermaid diagram sa itaas |
-| **Code Examples** | ✅ Reference Implementations | Sa buong dokumentong ito |
-| **Configuration Patterns** | ✅ Detalyadong Gabay | Mga Seksyon 1-10 sa itaas |
-| **Agent Implementations** | 🔨 Ikaw ang Gagawa Nito | ~40 oras development |
-| **Frontend UI** | 🔨 Ikaw ang Gagawa Nito | ~25 oras development |
-| **Data Pipelines** | 🔨 Ikaw ang Gagawa Nito | ~10 oras development |
+| **Template ng Imprastruktura** | ✅ Handang I-deploy | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **Mga Diagram ng Arkitektura** | ✅ Kumpleto | Mermaid diagram sa itaas |
+| **Mga Halimbawa ng Code** | ✅ Mga Implementasyong Sanggunian | Buong dokumento |
+| **Mga Pattern ng Konfigurasyon** | ✅ Detalyadong Gabay | Mga Seksiyon 1-10 sa itaas |
+| **Mga Implementasyon ng Agent** | 🔨 Ikaw ang Bubuo Nito | ~40 oras ng development |
+| **Frontend UI** | 🔨 Ikaw ang Bubuo Nito | ~25 oras ng development |
+| **Mga Data Pipeline** | 🔨 Ikaw ang Bubuo Nito | ~10 oras ng development |
 
-### Reality Check: Ano ang Talagang Umiiral
+### Katotohanan: Ano ang Talagang Nariyan
 
-**Sa Repositoryo (Handa Na Ngayon):**
-- ✅ ARM template na nag-de-deploy ng 15+ Azure services (azuredeploy.json)
+**Sa Repositorio (Handa Na):**
+- ✅ ARM template na nagde-deploy ng 15+ Azure services (azuredeploy.json)
 - ✅ Deployment script na may validation (deploy.sh)
 - ✅ Parameters configuration (azuredeploy.parameters.json)
 
-**Nabanggit sa Dokumento (Ikaw ang Lilikha):**
-- 🔨 Agent implementation code (~30-40 hours)
-- 🔨 Routing service (~12-16 hours)
-- 🔨 Frontend application (~20-30 hours)
-- 🔨 Data setup scripts (~8-12 hours)
-- 🔨 Monitoring framework (~10-15 hours)
+**Nakabanggit sa Dokumento (Ikaw ang Lilikha):**
+- 🔨 Agent implementation code (~30-40 oras)
+- 🔨 Routing service (~12-16 oras)
+- 🔨 Frontend application (~20-30 oras)
+- 🔨 Data setup scripts (~8-12 oras)
+- 🔨 Monitoring framework (~10-15 oras)
 
-### Ang Iyong Susunod na Mga Hakbang
+### Ang Iyong Mga Susunod na Hakbang
 
-#### Kung Gusto Mong I-deploy ang Imprastruktura (30 minuto)
+#### Kung Nais Mong I-deploy ang Imprastruktura (30 minuto)
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-#### Kung Gusto Mong Buuhin ang Kumpletong Sistema (80-120 oras)
-1. ✅ Basahin at unawain ang dokumentong arkitektura na ito (2-3 oras)
+#### Kung Nais Mong Buuin ang Kompletong Sistema (80-120 oras)
+1. ✅ Basahin at unawain ang dokumentong ito ng arkitektura (2-3 oras)
 2. ✅ I-deploy ang imprastruktura gamit ang ARM template (30 minuto)
-3. 🔨 I-implementa ang mga agent gamit ang reference code patterns (~40 oras)
-4. 🔨 Bumuo ng routing service gamit ang FastAPI/Express (~15 oras)
+3. 🔨 I-implement ang mga agent gamit ang mga pattern ng sanggunian (~40 oras)
+4. 🔨 Buuin ang routing service gamit ang FastAPI/Express (~15 oras)
 5. 🔨 Gumawa ng frontend UI gamit ang React/Vue (~25 oras)
 6. 🔨 I-configure ang data pipeline at search index (~10 oras)
-7. 🔨 Idagdag ang pagsubaybay at ebalwasyon (~15 oras)
+7. 🔨 Magdagdag ng monitoring at pagsusuri (~15 oras)
 8. ✅ Subukan, siguraduhin ang seguridad, at i-optimize (~10 oras)
 
-#### Kung Gusto Mong Matutunan ang Mga Pattern ng Multi-Agent (Pag-aaral)
-- 📖 Suriin ang diagram ng arkitektura at ang mga relasyon ng komponent
+#### Kung Nais Mong Matutunan ang Mga Pattern ng Multi-Agent (Pag-aaral)
+- 📖 Repasuhin ang diagram ng arkitektura at relasyon ng mga bahagi
 - 📖 Pag-aralan ang mga halimbawa ng code para sa SearchTool, BingTool, AgentEvaluator
 - 📖 Unawain ang estratehiya ng multi-region deployment
-- 📖 Matutunan ang mga framework ng ebalwasyon at seguridad
-- 📖 Ilapat ang mga pattern sa iyong sariling mga proyekto
+- 📖 Matutunan ang mga framework para sa pagsusuri at seguridad
+- 📖 I-apply ang mga pattern sa iyong sariling mga proyekto
 
-### Mahahalagang Punto
+### Pangunahing Mga Natutunan
 
-1. **Imprastruktura vs. Aplikasyon** - Nagbibigay ang ARM template ng imprastruktura; nangangailangan ng development ang mga agent
-2. **Multi-Region Strategy** - Ang estratehikong paglalagay ng modelo ay nagpapababa ng gastos at nagpapabuti ng pagiging maaasahan
-3. **Framework ng Ebalwasyon** - Nagbibigay ang dedikadong grader model ng tuloy-tuloy na pagtatasa ng kalidad
-4. **Seguridad Muna** - Mahalaga ang red teaming at vulnerability scanning para sa produksyon
-5. **Pag-optimize ng Gastos** - Ang intelligent routing sa pagitan ng GPT-4o at GPT-4o-mini ay nakakatipid ng 60-80%
+1. **Imprastruktura vs. Aplikasyon** - Ang ARM template ay nagbibigay ng imprastruktura; ang mga agent ay nangangailangan ng development
+2. **Estratehiya ng Multi-Region** - Ang estratehikong paglalagay ng mga modelo ay nagpapababa ng gastos at nagpapabuti ng pagiging maaasahan
+3. **Balangkas ng Pagsusuri** - Ang dedikadong grader model ay nagpapahintulot ng tuloy-tuloy na pagsusuri ng kalidad
+4. **Seguridad ang Unahin** - Ang red teaming at vulnerability scanning ay mahalaga para sa produksyon
+5. **Pag-optimize ng Gastos** - Ang matalinong routing sa pagitan ng gpt-4.1 at gpt-4.1-mini ay nakakatipid ng 60-80%
 
-### Tinatayang Gastos
+### Tinatayang Mga Gastos
 
-| Mode ng Pag-deploy | Imprastruktura/Buwan | Development (Isang Beses) | Kabuuang Unang Buwan |
-|--------------------|----------------------|---------------------------|----------------------|
+| Deployment Mode | Infrastructure/Month | Development (One-Time) | Total First Month |
+|-----------------|---------------------|------------------------|-------------------|
 | **Minimal** | $100-370 | $15K-25K (80-120 hrs) | $15.1K-25.4K |
 | **Standard** | $420-1,450 | $15K-25K (parehong effort) | $15.4K-26.5K |
 | **Premium** | $1,150-3,500 | $15K-25K (parehong effort) | $16.2K-28.5K |
 
-**Tandaan:** Ang imprastruktura ay <5% ng kabuuang gastos para sa mga bagong implementasyon. Ang development effort ang pangunahing pamumuhunan.
+**Tandaan:** Ang imprastruktura ay <5% ng kabuuang gastos para sa mga bagong implementasyon. Ang development effort ang pangunahing puhunan.
 
 ### Mga Kaugnay na Mapagkukunan
 
-- 📚 [Gabayan sa Pag-deploy ng ARM Template](retail-multiagent-arm-template/README.md) - Setup ng imprastruktura
-- 📚 [Azure OpenAI Best Practices](https://learn.microsoft.com/azure/ai-services/openai/) - Pag-deploy ng modelo
-- 📚 [AI Search Documentation](https://learn.microsoft.com/azure/search/) - Konfigurasyon ng vector search
-- 📚 [Container Apps Patterns](https://learn.microsoft.com/azure/container-apps/) - Pag-deploy ng microservices
+- 📚 [Gabay sa Pag-deploy ng ARM Template](retail-multiagent-arm-template/README.md) - Setup ng imprastruktura
+- 📚 [Pinakamahusay na Praktis para sa Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/) - Pag-deploy ng mga modelo
+- 📚 [Dokumentasyon ng AI Search](https://learn.microsoft.com/azure/search/) - Konfigurasyon ng vector search
+- 📚 [Mga Pattern ng Container Apps](https://learn.microsoft.com/azure/container-apps/) - Pag-deploy ng microservices
 - 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - Setup ng pagsubaybay
 
-### Mga Tanong o Isyu?
+### Mga Tanong o Problema?
 
-- 🐛 [Mag-report ng Isyu](https://github.com/microsoft/AZD-for-beginners/issues) - Mga bug sa template o dokumentasyon
-- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Mga tanong tungkol sa arkitektura
-- 📖 [FAQ](../resources/faq.md) - Mga karaniwang tanong na sinagot
-- 🔧 [Gabay sa Pag-troubleshoot](../docs/troubleshooting/common-issues.md) - Mga isyu sa deployment
+- 🐛 [Iulat ang Mga Isyu](https://github.com/microsoft/AZD-for-beginners/issues) - Mga bug sa template o pagkakamali sa dokumentasyon
+- 💬 [Mga Diskusyon sa GitHub](https://github.com/microsoft/AZD-for-beginners/discussions) - Mga tanong tungkol sa arkitektura
+- 📖 [FAQ](../resources/faq.md) - Mga karaniwang tanong at sagot
+- 🔧 [Gabay sa Pag-troubleshoot](../docs/troubleshooting/common-issues.md) - Mga isyu sa pag-deploy
 
 ---
 
-**Ang komprehensibong senaryong ito ay nagbibigay ng enterprise-grade na blueprint ng arkitektura para sa mga multi-agent AI system, kumpleto sa mga template ng imprastruktura, gabay sa implementasyon, at mga pinakamahusay na kasanayan sa produksyon para sa pagbuo ng sopistikadong customer support solutions gamit ang Azure Developer CLI.**
+**Ang komprehensibong senaryong ito ay nagbibigay ng isang enterprise-grade na blueprint ng arkitektura para sa mga multi-agent AI system, kumpleto sa mga template ng imprastruktura, gabay sa implementasyon, at mga pinakamahusay na kasanayan para sa produksyon sa pagbuo ng sopistikadong customer support solutions gamit ang Azure Developer CLI.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Paunawa:
-Isinalin ang dokumentong ito gamit ang serbisyong pagsasalin na pinapagana ng AI na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, mangyaring tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatumpak. Dapat ituring na ang orihinal na dokumento sa orihinal nitong wika ang opisyal na sanggunian. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasaling-tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na magmumula sa paggamit ng pagsasaling ito.
+**Paunawa**:
+Ang dokumentong ito ay isinalin gamit ang AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa kawastuhan, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatumpak. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na awtoritatibong pinagmulan. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasaling-tao. Hindi kami mananagutan para sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

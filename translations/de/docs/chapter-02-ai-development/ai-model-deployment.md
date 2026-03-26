@@ -1,13 +1,13 @@
 # Bereitstellung von KI-Modellen mit Azure Developer CLI
 
 **Kapitel-Navigation:**
-- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📚 Kursübersicht**: [AZD Für Anfänger](../../README.md)
 - **📖 Aktuelles Kapitel**: Kapitel 2 - KI-zentrierte Entwicklung
-- **⬅️ Vorheriges**: [Microsoft Foundry-Integration](microsoft-foundry-integration.md)
-- **➡️ Nächstes**: [AI-Workshop-Lab](ai-workshop-lab.md)
+- **⬅️ Zurück**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ Weiter**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Nächstes Kapitel**: [Kapitel 3: Konfiguration](../chapter-03-configuration/configuration.md)
 
-Diese Anleitung bietet umfassende Anweisungen zur Bereitstellung von KI-Modellen mit AZD-Vorlagen und deckt alles von der Modellauswahl bis hin zu Produktionsbereitstellungs‑Mustern ab.
+Dieser Leitfaden bietet umfassende Anleitungen zur Bereitstellung von KI-Modellen mit AZD-Templates und deckt alles ab, von der Modellauswahl bis hin zu Produktionsbereitstellungsmustern.
 
 ## Inhaltsverzeichnis
 
@@ -20,7 +20,7 @@ Diese Anleitung bietet umfassende Anweisungen zur Bereitstellung von KI-Modellen
 
 ## Strategie zur Modellauswahl
 
-### Azure OpenAI-Modelle
+### Microsoft Foundry-Modelle
 
 Wählen Sie das richtige Modell für Ihren Anwendungsfall:
 
@@ -34,9 +34,9 @@ services:
       AZURE_OPENAI_MODELS: |
         [
           {
-            "name": "gpt-4o-mini",
+            "name": "gpt-4.1-mini",
             "version": "2024-07-18",
-            "deployment": "gpt-4o-mini",
+            "deployment": "gpt-4.1-mini",
             "capacity": 10,
             "format": "OpenAI"
           },
@@ -52,28 +52,28 @@ services:
 
 ### Kapazitätsplanung für Modelle
 
-| Model Type | Use Case | Recommended Capacity | Cost Considerations |
+| Modelltyp | Anwendungsfall | Empfohlene Kapazität | Kostenüberlegungen |
 |------------|----------|---------------------|-------------------|
-| GPT-4o-mini | Chat, Q&A | 10-50 TPM | Kostengünstig für die meisten Workloads |
-| GPT-4 | Complex reasoning | 20-100 TPM | Höhere Kosten, für Premium‑Funktionen verwenden |
-| Text-embedding-ada-002 | Search, RAG | 30-120 TPM | Wesentlich für semantische Suche |
-| Whisper | Speech-to-text | 10-50 TPM | Audioverarbeitungs-Workloads |
+| gpt-4.1-mini | Chat, Fragen & Antworten | 10-50 TPM | Kosteneffizient für die meisten Workloads |
+| gpt-4.1 | Komplexe Schlussfolgerungen | 20-100 TPM | Höhere Kosten, für Premium-Funktionen verwenden |
+| Text-embedding-ada-002 | Suche, RAG | 30-120 TPM | Wesentlich für semantische Suche |
+| Whisper | Sprache-zu-Text | 10-50 TPM | Audioverarbeitungs-Workloads |
 
 ## AZD-Konfiguration für KI-Modelle
 
-### Bicep Template Configuration
+### Bicep-Template-Konfiguration
 
-Create model deployments through Bicep templates:
+Erstellen Sie Modellbereitstellungen mittels Bicep-Templates:
 
 ```bicep
 // infra/main.bicep
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
-    name: 'gpt-4o-mini'
+    name: 'gpt-4.1-mini'
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
     sku: {
@@ -130,13 +130,13 @@ Konfigurieren Sie Ihre Anwendungsumgebung:
 # .env-Konfiguration
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
-AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
+AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
 ## Bereitstellungsmuster
 
-### Pattern 1: Single-Region Deployment
+### Muster 1: Einzelregion-Bereitstellung
 
 ```yaml
 # azure.yaml - Single region
@@ -146,15 +146,15 @@ services:
     host: containerapp
     config:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
-      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
+      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Am besten für:
-- Entwicklung und Testing
-- Anwendungen für einen einzelnen Markt
+Am besten geeignet für:
+- Entwicklung und Tests
+- Anwendungen für einen Markt
 - Kostenoptimierung
 
-### Pattern 2: Multi-Region Deployment
+### Muster 2: Mehrregionen-Bereitstellung
 
 ```bicep
 // Multi-region deployment
@@ -167,14 +167,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Am besten für:
+Am besten geeignet für:
 - Globale Anwendungen
 - Anforderungen an hohe Verfügbarkeit
 - Lastverteilung
 
-### Pattern 3: Hybrid Deployment
+### Muster 3: Hybride Bereitstellung
 
-Combine Azure OpenAI with other AI services:
+Kombinieren Sie Microsoft Foundry-Modelle mit anderen KI-Diensten:
 
 ```bicep
 // Hybrid AI services
@@ -207,13 +207,13 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Versionskontrolle
 
-Track model versions in your AZD configuration:
+Verfolgen Sie Modellversionen in Ihrer AZD-Konfiguration:
 
 ```json
 {
   "models": {
     "chat": {
-      "name": "gpt-4o-mini",
+      "name": "gpt-4.1-mini",
       "version": "2024-07-18",
       "fallback": "gpt-35-turbo"
     },
@@ -237,23 +237,23 @@ echo "Checking model availability..."
 az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
-  --query "[?name=='gpt-4o-mini']"
+  --query "[?name=='gpt-4.1-mini']"
 ```
 
 ### A/B-Tests
 
-Deploy multiple model versions:
+Stellen Sie mehrere Modellversionen bereit:
 
 ```bicep
 param enableABTesting bool = false
 
 resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'gpt-4o-mini-${enableABTesting ? 'v1' : 'prod'}'
+  name: 'gpt-4.1-mini-${enableABTesting ? 'v1' : 'prod'}'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -268,10 +268,10 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### Kapazitätsplanung
 
-Berechnen Sie die erforderliche Kapazität basierend auf Nutzungsmustern:
+Berechnen Sie die benötigte Kapazität basierend auf Nutzungsmustern:
 
 ```python
-# Beispiel zur Kapazitätsberechnung
+# Beispiel für die Kapazitätsberechnung
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -283,7 +283,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Beispielverwendung
+# Anwendungsbeispiel
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -295,7 +295,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### Auto-Scaling-Konfiguration
 
-Konfigurieren Sie die automatische Skalierung für Container Apps:
+Konfigurieren Sie Auto-Scaling für Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -365,7 +365,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ## Überwachung und Beobachtbarkeit
 
-### Integration von Application Insights
+### Application Insights-Integration
 
 Konfigurieren Sie die Überwachung für KI-Workloads:
 
@@ -442,10 +442,10 @@ class AITelemetry:
 
 ### Health-Checks
 
-Implementieren Sie die Überwachung der Dienstgesundheit von KI-Services:
+Implementieren Sie die Gesundheitsüberwachung für KI-Dienste:
 
 ```python
-# Endpunkte für Health-Checks
+# Endpunkte für Gesundheitsprüfungen
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -473,30 +473,30 @@ async def check_ai_models():
 
 ## Nächste Schritte
 
-1. **Lesen Sie die [Microsoft Foundry-Integrationsanleitung](microsoft-foundry-integration.md)** für Service‑Integrationsmuster
-2. **Absolvieren Sie das [AI-Workshop-Lab](ai-workshop-lab.md)** für praktische Erfahrungen
-3. **Implementieren Sie die [Produktions-KI-Praktiken](production-ai-practices.md)** für Unternehmenseinsätze
-4. **Lesen Sie die [KI-Fehlerbehebungsanleitung](../chapter-07-troubleshooting/ai-troubleshooting.md)** für gängige Probleme
+1. **Überprüfen Sie die [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** für Integrationsmuster von Diensten
+2. **Schließen Sie das [AI Workshop Lab](ai-workshop-lab.md)** für praktische Erfahrungen ab
+3. **Implementieren Sie [Production AI Practices](production-ai-practices.md)** für Unternehmensbereitstellungen
+4. **Erkunden Sie den [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** für häufige Probleme
 
 ## Ressourcen
 
-- [Verfügbarkeit von Azure OpenAI-Modellen](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI Dokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps Skalierung](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Verfügbarkeit der Microsoft Foundry-Modelle](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI-Dokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Skalierung von Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Kostenoptimierung für KI-Modelle](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **Kapitel-Navigation:**
-- **📚 Kursübersicht**: [AZD für Anfänger](../../README.md)
+- **📚 Kursübersicht**: [AZD Für Anfänger](../../README.md)
 - **📖 Aktuelles Kapitel**: Kapitel 2 - KI-zentrierte Entwicklung
-- **⬅️ Vorheriges**: [Microsoft Foundry-Integration](microsoft-foundry-integration.md)
-- **➡️ Nächstes**: [AI-Workshop-Lab](ai-workshop-lab.md)
+- **⬅️ Zurück**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ Weiter**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Nächstes Kapitel**: [Kapitel 3: Konfiguration](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 Haftungsausschluss:
-Dieses Dokument wurde mit dem KI‑Übersetzungsdienst Co‑op Translator (https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir um Genauigkeit bemüht sind, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ausgangssprache ist als verbindliche Quelle zu betrachten. Für kritische Informationen empfehlen wir eine professionelle Übersetzung durch einen menschlichen Übersetzer. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Nutzung dieser Übersetzung ergeben.
+Dieses Dokument wurde mithilfe des KI-Übersetzungsdienstes [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache ist als maßgebliche Quelle zu betrachten. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

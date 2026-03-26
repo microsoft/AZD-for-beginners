@@ -1,49 +1,42 @@
-# Mazoea Bora kwa Mizigo ya Kazi ya AI za Uzalishaji kwa AZD
+# Misingi Bora ya Mizigo ya AI kwa Uzalishaji na AZD
 
-**Chapter Navigation:**
-- **📚 Nyumbani wa Kozi**: [AZD For Beginners](../../README.md)
-- **📖 Sura ya Sasa**: Chapter 8 - Production & Enterprise Patterns
-- **⬅️ Sura ya Awali**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Pia Yanayohusiana**: [AI Workshop Lab](ai-workshop-lab.md)
+**Urambazaji wa Sura:**
+- **📚 Nyumbani kwa Kozi**: [AZD For Beginners](../../README.md)
+- **📖 Sura ya Sasa**: Sura 8 - Production & Enterprise Patterns
+- **⬅️ Sura Iliyotangulia**: [Sura 7: Utatuzi wa Matatizo](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Pia Inayohusiana**: [Maabara ya Mafunzo ya AI](ai-workshop-lab.md)
 - **🎯 Kozi Imekamilika**: [AZD For Beginners](../../README.md)
 
 ## Muhtasari
 
-Mwongozo huu unatoa mazoea bora kwa kupeleka mizigo ya kazi ya AI inayofaa kwa uzalishaji kwa kutumia Azure Developer CLI (AZD). Kulingana na maoni kutoka kwa jamii ya Microsoft Foundry Discord na utekelezaji halisi wa wateja, mazoea haya yanashughulikia changamoto za kawaida zaidi katika mifumo ya AI ya uzalishaji.
+Mwongozo huu unatoa mbinu bora za kikao kwa kupeleka mizigo ya AI iliyotayarishwa kwa uzalishaji kwa kutumia Azure Developer CLI (AZD). Kulingana na maoni kutoka kwa jamii ya Microsoft Foundry Discord na utekelezaji halisi wa wateja, mbinu hizi zinashughulikia changamoto zinazojitokeza zaidi katika mifumo ya AI za uzalishaji.
 
-## Changamoto Kuu Zinazoshughulikiwa
+## Changamoto Muhimu Zinazoshughulikiwa
 
-Kulingana na matokeo ya kura za jamii yetu, hizi ndizo changamoto kuu zinazowakabili watengenezaji:
+Kulingana na matokeo ya kura za jamii yetu, hizi ndizo changamoto kuu watengenezaji wanazokumbana nazo:
 
-- **45%** wanapata shida na uzinduzi wa AI wenye huduma nyingi
-- **38%** wana matatizo na usimamizi wa vitambulisho na siri  
-- **35%** wanapata ugumu katika utoaji wa uzalishaji na upanuaji
+- **45%** wanapata ugumu katika kusambaza huduma nyingi za AI
+- **38%** wana matatizo na usimamizi wa nywila na siri  
+- **35%** wanapata ugumu na utayarishaji kwa uzalishaji na upanuzi
 - **32%** wanahitaji mikakati bora ya uboreshaji wa gharama
-- **29%** wana hitaji la uboreshaji wa ufuatiliaji na utatuzi wa matatizo
+- **29%** wanahitaji uboreshaji wa ufuatiliaji na utatuzi wa matatizo
 
-## Miundo ya Usanifu kwa AI ya Uzalishaji
+## Mifumo ya Ubunifu kwa AI za Uzalishaji
 
-### Mfano 1: Usanifu wa AI wa Microservices
+### Mfumo 1: Miundombinu ya AI ya Microservices
 
-**Wakati wa kutumia**: Programu tata za AI zenye uwezo mwingi
+**Wakati wa kutumia**: Programu ngumu za AI zenye uwezo mwingi
 
+```mermaid
+graph TD
+    Frontend[Kiolesura cha Wavuti] --- Gateway[Mlango wa API] --- LB[Mizani wa Mzigo]
+    Gateway --> Chat[Huduma ya Gumzo]
+    Gateway --> Image[Huduma ya Picha]
+    Gateway --> Text[Huduma ya Maandishi]
+    Chat --> OpenAI[Miundo ya Microsoft Foundry]
+    Image --> Vision[Maono ya Kompyuta]
+    Text --> DocIntel[Uelewa wa Nyaraka]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Web Frontend  │────│   API Gateway   │────│  Load Balancer  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │
-                ┌───────────────┼───────────────┐
-                │               │               │
-        ┌───────▼──────┐ ┌──────▼──────┐ ┌─────▼──────┐
-        │ Chat Service │ │Image Service│ │Text Service│
-        └──────────────┘ └─────────────┘ └────────────┘
-                │               │               │
-        ┌───────▼──────┐ ┌──────▼──────┐ ┌─────▼──────┐
-        │Azure OpenAI  │ │Computer     │ │Document    │
-        │              │ │Vision       │ │Intelligence│
-        └──────────────┘ └─────────────┘ └────────────┘
-```
-
 **Utekelezaji wa AZD**:
 
 ```yaml
@@ -67,9 +60,9 @@ services:
     host: containerapp
 ```
 
-### Mfano 2: Usindikaji wa AI unaoendeshwa na Matukio
+### Mfumo 2: Usindikaji wa AI Unaosababishwa na Matukio
 
-**Wakati wa kutumia**: Usindikaji wa kundi (batch), uchambuzi wa nyaraka, miradi ya kazi zisizo za sambamba
+**Wakati wa kutumia**: Usindikaji wa kundi, uchambuzi wa nyaraka, na taratibu zisizo za wakati (asynchronous)
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -116,15 +109,46 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Mbinu Bora za Usalama
+## Kufikiria Kuhusu Afya ya Wakala wa AI
+
+Wakati programu ya wavuti ya kawaida inapoharibika, dalili ni za kawaida: ukurasa haujapakia, API inarejea kosa, au uenezaji unashindikana. Programu zinazotumia AI zinaweza kuharibika kwa njia zote hizo—lakini pia zinaweza kufanya vibaya kwa njia laini ambazo hazionyeshi ujumbe wa kosa wazi.
+
+Sehemu hii inakusaidia kujenga mfano wa akili kwa ufuatiliaji wa mizigo ya AI ili ujuwe wapi kuangalia wakati mambo hayako sawa.
+
+### Jinsi Afya ya Wakala Inavyotofautiana na Afya ya Programu ya Kawaida
+
+Programu ya kawaida au inafanya kazi au hairafiki. Wakala wa AI anaweza kuonekana kufanya kazi lakini kutoa matokeo duni. Fikiria afya ya wakala katika tabaka mbili:
+
+| Tabaka | Kile cha Kuangalia | Wapi Kuangalia |
+|-------|--------------|---------------|
+| **Afya ya miundombinu** | Je, huduma inaendesha? Je, rasilimali zimepelekwa? Je, vituo vya mwisho vinapatikana? | `azd monitor`, Afya ya rasilimali kwenye Azure Portal, logi za container/app |
+| **Afya ya tabia** | Je, wakala anajibu kwa usahihi? Je, majibu yanapatikana kwa wakati? Je, mfano unaitwa kwa usahihi? | Application Insights traces, vipimo vya ucheleweshaji wa miito ya mfano, logi za ubora wa majibu |
+
+Afya ya miundombinu ni ya kawaida—ni ile ile kwa programu yoyote ya azd. Afya ya tabia ni tabaka jipya ambalo mizigo ya AI inaingiza.
+
+### Wapi Kuangalia Wakati Programu za AI Hazitendeki Kulingana na Inavyotarajiwa
+
+Ikiwa programu yako ya AI haisababisha matokeo unayotegemea, hapa kuna orodha ya kiteknolojia ya kuangalia:
+
+1. **Anza na mambo ya msingi.** Je, programu inaendesha? Je, inaweza kufikia utegemezi wake? Angalia `azd monitor` na afya ya rasilimali kama unavyofanya kwa programu yoyote.
+2. **Kagua muunganisho wa mfano.** Je, programu yako inaita mfano wa AI kwa mafanikio? Miito ya mfano iliyoshindikana au iliyochelewa ndiyo chanzo cha kawaida cha matatizo ya programu za AI na itaonekana katika logi za programu yako.
+3. **Tazama kile kilichopokelewa na mfano.** Majibu ya AI yanategemea pembejeo (prompt na muktadha uliopatikana). Ikiwa toleo ni baya, kawaida pembejeo ni mbaya. Angalia kama programu yako inatuma data sahihi kwa mfano.
+4. **Kagua ucheleweshaji wa majibu.** Miito ya mfano ya AI ni polepole kuliko miito ya kawaida ya API. Ikiwa programu yako inahisi polepole, angalia kama nyakati za majibu ya mfano zimeongezeka—hii inaweza kuashiria throttling, vizingiti vya uwezo, au msongamano kwa kiwango cha kanda.
+5. **Angalia ishara za gharama.** Mlipuko usiotegemezwa katika matumizi ya tokeni au miito ya API unaweza kuashiria mzunguko, prompt isiyosanidiwa vizuri, au jaribio la kurudi kwa mara nyingi.
+
+Hauhitaji kumiliki zana za ufuatiliaji mara moja. Muhimu ni kwamba programu za AI zina tabaka za ziada za tabia za kufuatilia, na ufuatiliaji uliyojengwa wa azd (`azd monitor`) unakupa sehemu ya kuanza kuchunguza tabaka zote mbili.
+
+---
+
+## Mambo Bora ya Usalama
 
 ### 1. Mfumo wa Usalama wa Zero-Trust
 
 **Mikakati ya Utekelezaji**:
-- Hakuna mawasiliano ya huduma kwa huduma bila uthibitisho
-- Miito ya API yote inatumia vitambulisho vinavyosimamiwa
-- Kutenganishwa kwa mtandao kwa kutumia endpoints za kibinafsi
-- Udhibiti wa upatikanaji wa haki ndogo (least privilege)
+- Hakuna mawasiliano kati ya huduma bila uthibitisho
+- Miito yote ya API itumie vitambulisho vilivosimamiwa
+- Kutengwa kwa mtandao kwa kutumia private endpoints
+- Udhibiti wa upatikanaji wa haki ndogo
 
 ```bicep
 // Managed Identity for each service
@@ -147,7 +171,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 ### 2. Usimamizi Salama wa Siri
 
-**Mfumo wa Uunganishaji wa Key Vault**:
+**Mfumo wa Uunganisho wa Key Vault**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -182,7 +206,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### 3. Usalama wa Mtandao
 
-**Usanidi wa Endpoint Binafsi**:
+**Usanidi wa Private Endpoint**:
 
 ```bicep
 // Virtual Network for AI services
@@ -240,11 +264,11 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Utendaji na Upanuaji
+## Utendaji na Upanuzi
 
-### 1. Mikakati ya Kujiendesha kwa Upanuaji
+### 1. Mikakati ya Upanuzi Otomatiki
 
-**Kujiendesha kwa Upanuaji kwa Container Apps**:
+**Upanuzi Otomatiki wa Container Apps**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -288,9 +312,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. Mikakati ya Kuhifadhi Katika Cache
+### 2. Mikakati ya Caching
 
-**Redis Cache kwa Majibu ya AI**:
+**Hifadhi ya Redis kwa Majibu ya AI**:
 
 ```bicep
 // Redis Premium for production workloads
@@ -318,9 +342,9 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Usawazishaji wa Mzigo na Usimamizi wa Trafiki
+### 3. Ulinganifu wa Mzigo na Usimamizi wa Trafiki
 
-**Application Gateway na WAF**:
+**Application Gateway pamoja na WAF**:
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -358,7 +382,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ## 💰 Uboreshaji wa Gharama
 
-### 1. Kupima Rasilimali Kwa Ustahili
+### 1. Kukokotoa Rasilimali kwa Usahihi
 
 **Usanidi Maalum kwa Mazingira**:
 
@@ -423,7 +447,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ### 3. Uboreshaji wa Matumizi ya Tokeni
 
-**Usimamizi wa Gharama za OpenAI**:
+**Usimamizi wa Gharama wa OpenAI**:
 
 ```typescript
 // Uboreshaji wa tokeni kwa ngazi ya programu
@@ -436,7 +460,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Fupisha muktadha, sio ingizo la mtumiaji
+      // Katisha muktadha, si ingizo la mtumiaji
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -444,7 +468,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Makadirio ya karibu: 1 token ≈ 4 herufi
+    // Makadirio ya karibu: 1 tokeni ≈ alama 4
     return Math.ceil(text.length / 4);
   }
 }
@@ -499,7 +523,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ### 2. Ufuatiliaji Maalum kwa AI
 
-**Dashibodi Maalum kwa Vipimo vya AI**:
+**Dashibodi za Desturi kwa Vipimo vya AI**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -528,7 +552,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Mikaguzi ya Afya na Ufuatiliaji wa Uptime
+### 3. Ukaguzi wa Afya na Ufuatiliaji wa Uptime
 
 ```bicep
 // Application Insights availability tests
@@ -597,9 +621,9 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Ufufuaji kwa Ajali na Upatikanaji wa Juu
+## Urejeshaji wa Ajali na Upatikanaji wa Juu
 
-### 1. Uwekezaji katika Mikoa Nyingi
+### 1. Uenezaji kwa Mikoa Mingi
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -661,7 +685,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Nakili za Data na Ufufuaji
+### 2. Uhifadhi na Urejeshaji wa Data
 
 ```bicep
 // Backup configuration for critical data
@@ -712,7 +736,7 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 }
 ```
 
-## DevOps na Uunganishaji wa CI/CD
+## Ushirikianaji wa DevOps na CI/CD
 
 ### 1. Mtiririko wa Kazi wa GitHub Actions
 
@@ -828,73 +852,73 @@ python scripts/test_connectivity.py
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Orodha ya Ukamilishaji kwa Uzalishaji
+## Orodha ya Kujiandaa kwa Uzalishaji
 
-### Usalama ✅
-- [ ] Huduma zote zinatumia vitambulisho vinavyosimamiwa
-- [ ] Siri zimehifadhiwa katika Key Vault
-- [ ] Endpoints binafsi zimesanidiwa
-- [ ] Vikundi vya usalama wa mtandao vimetekelezwa
-- [ ] RBAC kwa udhibiti wa haki ndogo
+### Security ✅
+- [ ] Huduma zote zinatumia vitambulisho vilivosimamiwa
+- [ ] Siri zimehifadhiwa ndani ya Key Vault
+- [ ] Private endpoints zimesanidiwa
+- [ ] Kundi za usalama wa mtandao (Network Security Groups) zimetekelezwa
+- [ ] RBAC kwa haki ndogo
 - [ ] WAF imewezeshwa kwenye endpoints za umma
 
-### Utendaji ✅
-- [ ] Kujiendesha kwa upanuaji kumesanidiwa
-- [ ] Kuhifadhi katika cache kumewekwa
-- [ ] Usawazishaji wa mzigo umetayarishwa
-- [ ] CDN kwa maudhui yasiyobadilika
-- [ ] Pooling ya muunganisho wa hifadhidata
+### Performance ✅
+- [ ] Upanuzi otomatiki umewekwa
+- [ ] Caching imetekelezwa
+- [ ] Ulinganifu wa mzigo umewekwa
+- [ ] CDN kwa yaliyomo yasiyobadilika
+- [ ] Pooli za muunganisho wa hifadhidata
 - [ ] Uboreshaji wa matumizi ya tokeni
 
-### Ufuatiliaji ✅
+### Monitoring ✅
 - [ ] Application Insights imesanidiwa
-- [ ] Vipimo maalum vimefafanuliwa
-- [ ] Kanuni za tahadhari zimesanidiwa
+- [ ] Vipimo vya desturi vimefafanuliwa
+- [ ] Sheria za alarm zimewekwa
 - [ ] Dashibodi imeundwa
-- [ ] Mikaguzi ya afya imetekelezwa
+- [ ] Ukaguzi wa afya umetekelezwa
 - [ ] Sera za uhifadhi wa logi
 
-### Uthabiti ✅
-- [ ] Uwekezaji katika mikoa mingi
-- [ ] Mpango wa nakili na ufufuaji
-- [ ] Vizuizi vya mzunguko vimetekelezwa
-- [ ] Sera za kurudia zimewekwa
-- [ ] Kupungua kwa heshima polepole (graceful degradation)
-- [ ] Endpoints za kukagua afya
+### Reliability ✅
+- [ ] Uenezaji wa mikoa mingi
+- [ ] Mpango wa kuhifadhi na kurejesha
+- [ ] Circuit breakers zimetekelezwa
+- [ ] Sera za kujaribu tena zimesanidiwa
+- [ ] Kupungua kwa huduma kidogo kidogo (graceful degradation)
+- [ ] Endpoints za ukaguzi wa afya
 
-### Usimamizi wa Gharama ✅
-- [ ] Tahadhari za bajeti zimesanidiwa
-- [ ] Kupima rasilimali kwa ustahili
-- [ ] Punguzo kwa maendeleo/mtihani yamewekwa
-- [ ] Mashine zilizoegeshwa (reserved instances) zimelinunuliwa
+### Cost Management ✅
+- [ ] Alarm za bajeti zimesanidiwa
+- [ ] Kukokotoa kwa rasilimali kwa usahihi
+- [ ] Punguzo za dev/test zimetumika
+- [ ] Instances zilizohifadhiwa zimenunuliwa
 - [ ] Dashibodi ya ufuatiliaji wa gharama
-- [ ] Mapitio ya gharama ya kawaida
+- [ ] Mapitio ya gharama mara kwa mara
 
-### Uzingatiaji ✅
-- [ ] Mahitaji ya makazi ya data yametimizwa
+### Compliance ✅
+- [ ] Mahitaji ya kukaa kwa data yamezingatiwa
 - [ ] Ufuatiliaji wa ukaguzi umewezeshwa
-- [ ] Sera za uzingatiaji zimetumika
+- [ ] Sera za uzingatia zimewekwa
 - [ ] Misingi ya usalama imetekelezwa
-- [ ] Tathmini za usalama za kawaida
-- [ ] Mpango wa kukabiliana na matukio ya usalama
+- [ ] Tathmini za usalama za mara kwa mara
+- [ ] Mpango wa majibu kwa matukio
 
-## Vigezo vya Utendaji
+## Viashiria vya Utendaji
 
 ### Vipimo vya Kawaida vya Uzalishaji
 
-| Metric | Target | Monitoring |
+| Kipimo | Lengo | Ufuatiliaji |
 |--------|--------|------------|
-| **Muda wa Majibu** | < 2 sekunde | Application Insights |
+| **Muda wa Kujibu** | < 2 seconds | Application Insights |
 | **Upatikanaji** | 99.9% | Ufuatiliaji wa uptime |
 | **Kiwango cha Makosa** | < 0.1% | Logi za programu |
-| **Matumizi ya Tokeni** | < $500/mwezi | Usimamizi wa gharama |
-| **Watumiaji Wanaofanya kazi kwa wakati mmoja** | 1000+ | Upimaji wa mzigo |
-| **Muda wa Ufufuaji** | < 1 hour | Majaribio ya ufufuaji wa dharura |
+| **Matumizi ya Tokeni** | < $500/month | Usimamizi wa gharama |
+| **Watumiaji Wanaofanya Kazi kwa Wakati Mmoja** | 1000+ | Majaribio ya mzigo |
+| **Muda wa Urejeshaji** | < 1 hour | Majaribio ya urejeshaji wa ajali |
 
-### Upimaji wa Mzigo
+### Majaribio ya Mzigo
 
 ```bash
-# Skripti ya upimaji wa mzigo kwa programu za akili bandia
+# Skripti ya upimaji wa mzigo kwa programu za AI
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -904,45 +928,231 @@ python scripts/load_test.py \
 
 ## 🤝 Mazoea Bora ya Jamii
 
-Kulingana na maoni ya jamii ya Microsoft Foundry Discord:
+Kulingana na maoni ya jamii ya Microsoft Foundry kwenye Discord:
 
 ### Mapendekezo Muhimu kutoka kwa Jamii:
 
-1. **Anza Ndogo, Panua Polepole**: Anza na SKUs za msingi na panua kulingana na matumizi halisi
+1. **Anza Kidogo, Panua Polepole**: Anza na SKU za msingi na pandisha kulingana na matumizi halisi
 2. **Fuatilia Kila Kitu**: Sanidi ufuatiliaji kamili tangu siku ya kwanza
-3. **Panga Usalama Kiotomatiki**: Tumia miundombinu kama msimbo kwa usalama thabiti
-4. **Fanya Majaribio Vizuri**: Jumuisha upimaji maalum kwa AI katika mchakato wako wa utoaji
-5. **Panga Gharama**: Fuatilia matumizi ya tokeni na weka tahadhari za bajeti mapema
+3. **Automatisha Usalama**: Tumia infrastructure as code kwa usalama thabiti
+4. **Jaribu kwa Kina**: Jumuisha upimaji maalum kwa AI katika pipeline yako
+5. **Panga Gharama**: Fuatilia matumizi ya tokeni na weka alarm za bajeti mapema
 
 ### Makosa ya Kawaida ya Kuepuka:
 
-- ❌ Kuandika vitufe vya API moja kwa moja katika msimbo
-- ❌ Kutosanidi ufuatiliaji unaofaa
-- ❌ Kupuuza uboreshaji wa gharama
+- ❌ Kuweka funguo za API ndani ya msimbo (hardcoding)
+- ❌ Kutoanzisha ufuatiliaji sahihi
+- ❌ Kupuuzia uboreshaji wa gharama
 - ❌ Kutojaribu hali za kushindwa
-- ❌ Kupeleka bila mikaguzi ya afya
+- ❌ Kueneza bila ukaguzi wa afya
 
-## Rasilimali Zingine
+## Amri za AZD AI CLI na Upanuzi
 
-- **Azure Well-Architected Framework**: [miongozo kwa mzigo wa AI](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Microsoft Foundry Documentation**: [nyaraka rasmi](https://learn.microsoft.com/azure/ai-studio/)
-- **Community Templates**: [Mifano ya Azure](https://github.com/Azure-Samples)
-- **Discord Community**: [chaneli ya #Azure](https://discord.gg/microsoft-azure)
+AZD inajumuisha seti inayokua ya amri maalum za AI na upanuzi zinazoraidia mizigo ya AI ya uzalishaji. Zana hizi zinaunganisha pengo kati ya maendeleo ya ndani na uenezaji wa uzalishaji kwa mizigo ya AI.
+
+### Upanuzi za AZD kwa AI
+
+AZD inatumia mfumo wa upanuzi kuongeza uwezo maalum wa AI. Sakinisha na simamia upanuzi kwa:
+
+```bash
+# Orodhesha nyongeza zote zinazopatikana (ikiwa ni pamoja na AI)
+azd extension list
+
+# Sakinisha nyongeza ya mawakala wa Foundry
+azd extension install azure.ai.agents
+
+# Sakinisha nyongeza ya kurekebisha kwa kina
+azd extension install azure.ai.finetune
+
+# Sakinisha nyongeza ya mifano maalum
+azd extension install azure.ai.models
+
+# Sasisha nyongeza zote zilizosakinishwa
+azd extension upgrade --all
+```
+
+**Upanuzi za AI Zinazopatikana:**
+
+| Upanuzi | Madhumuni | Hali |
+|-----------|---------|--------|
+| `azure.ai.agents` | Usimamizi wa Foundry Agent Service | Matangulizi |
+| `azure.ai.finetune` | Kurekebisha modeli za Foundry | Matangulizi |
+| `azure.ai.models` | Modeli za desturi za Foundry | Matangulizi |
+| `azure.coding-agent` | Usanidi wa wakala wa kuandika msimbo | Inapatikana |
+
+### Kuzindua Miradi ya Wakala kwa `azd ai agent init`
+
+Amri ya `azd ai agent init` inatengeneza muundo wa mradi wa wakala wa AI uliyoandaliwa kwa uzalishaji uliounganishwa na Microsoft Foundry Agent Service:
+
+```bash
+# Anzisha mradi mpya wa wakala kutoka kwenye manifesi ya wakala
+azd ai agent init -m <manifest-path-or-uri>
+
+# Anzisha na kulenga mradi maalum wa Foundry
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Anzisha kwa katalogi ya chanzo iliyobinafsishwa
+azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+
+# Lenga Container Apps kama mwenyeji
+azd ai agent init -m agent-manifest.yaml --host containerapp
+```
+
+**Vigezo Muhimu:**
+
+| Bendera | Maelezo |
+|------|-------------|
+| `-m, --manifest` | Njia au URI kwa manifest ya wakala ya kuongeza kwenye mradi wako |
+| `-p, --project-id` | ID ya Mradi wa Microsoft Foundry uliopo kwa mazingira yako ya azd |
+| `-s, --src` | Saraka ya kupakua ufafanuzi wa wakala (kwa kawaida `src/<agent-id>`) |
+| `--host` | Kufanya override kwa mwenyeji wa chaguo-msingi (mfano, `containerapp`) |
+| `-e, --environment` | Mazingira ya azd ya kutumia |
+
+**Msemo wa uzalishaji**: Tumia `--project-id` kuunganishwa moja kwa moja na mradi wa Foundry uliopo, ukihifadhi msimbo wa wakala wako na rasilimali za wingu zikiwa zimeshikana tangu mwanzo.
+
+### Model Context Protocol (MCP) na `azd mcp`
+
+AZD inajumuisha msaada wa seva ya MCP uliyojengwa (Alpha), kuruhusu wakala wa AI na zana kuingiliana na rasilimali zako za Azure kupitia itifaki iliyo sanifu:
+
+```bash
+# Anzisha seva ya MCP kwa mradi wako
+azd mcp start
+
+# Dhibiti idhini ya zana kwa shughuli za MCP
+azd mcp consent
+```
+
+Seva ya MCP inafichua muktadha wa mradi wako wa azd—mazingira, huduma, na rasilimali za Azure—kwa zana za maendeleo zinazotumia AI. Hii inaruhusu:
+
+- **Uenezaji unaosaidiwa na AI**: Waruhusu mawakala wa kuandika msimbo kuulizia hali ya mradi wako na kuanzisha uenezaji
+- **Ugunduzi wa rasilimali**: Zana za AI zinaweza kugundua rasilimali za Azure ambazo mradi wako unazitumia
+- **Usimamizi wa mazingira**: Mawakala yanaweza kubadilisha kati ya mazingira ya dev/staging/production
+
+### Uundaji wa Miundombinu kwa `azd infra generate`
+
+Kwa mizigo ya AI ya uzalishaji, unaweza kutengeneza na kubinafsisha Infrastructure as Code badala ya kutegemea utoaji wa kiotomatiki:
+
+```bash
+# Tengeneza faili za Bicep/Terraform kutoka kwa ufafanuzi wa mradi wako
+azd infra generate
+```
+
+Hii inaandika IaC kwenye diski ili uweze:
+- Kukagua na kufanya ukaguzi wa miundombinu kabla ya kueneza
+- Kuongeza sera za usalama za desturi (kanuni za mtandao, private endpoints)
+- Kuunganisha na michakato ya ukaguzi ya IaC iliyopo
+- Kudhibiti toleo za mabadiliko ya miundombinu tofauti na msimbo wa programu
+
+### Hooks za Mzunguko wa Uzalishaji
+
+AZD hooks zinakuwezesha kuingiza mantiki za desturi katika kila hatua ya mzunguko wa uenezaji—muhimu kwa taratibu za AI za uzalishaji:
+
+```yaml
+# azure.yaml - Production hooks example
+name: ai-production-app
+hooks:
+  preprovision:
+    shell: sh
+    run: scripts/validate-quotas.sh    # Check AI model quota before provisioning
+  postprovision:
+    shell: sh
+    run: scripts/configure-networking.sh  # Set up private endpoints
+  predeploy:
+    shell: sh
+    run: scripts/run-ai-safety-tests.sh  # Run prompt safety checks
+  postdeploy:
+    shell: sh
+    run: scripts/smoke-test.sh           # Verify agent responses post-deploy
+services:
+  agent-api:
+    project: ./src/agent
+    host: containerapp
+    hooks:
+      predeploy:
+        shell: sh
+        run: scripts/validate-model-access.sh  # Per-service hook
+```
+
+```bash
+# Run a specific hook manually during development
+azd hooks run predeploy
+```
+
+**Hooks za uzalishaji zinazopendekezwa kwa mizigo ya AI:**
+
+| Hook | Matumizi |
+|------|----------|
+| `preprovision` | Thibitisha vigezo vya usajili kwa uwezo wa modeli ya AI |
+| `postprovision` | Sanidi private endpoints, tuma uzito wa modeli |
+| `predeploy` | Endesha majaribio ya usalama wa AI, thibitisha templeti za prompt |
+| `postdeploy` | Fanya mtihani wa awali wa majibu ya wakala, thibitisha muunganisho wa modeli |
+
+### Usanidi wa Mto wa CI/CD
+
+Tumia `azd pipeline config` kuunganisha mradi wako na GitHub Actions au Azure Pipelines kwa uthibitisho salama wa Azure:
+
+```bash
+# Sanidi mchakato wa CI/CD (kwa njia ya mwingiliano)
+azd pipeline config
+
+# Sanidi kwa mtoa huduma maalum
+azd pipeline config --provider github
+```
+
+Amri hii:
+- Inaunda service principal na upatikanaji wa haki ndogo
+- Inasanidi vibali vya muungano (hakuna siri zilizohifadhiwa)
+- Inatengeneza au kusasisha faili la ufafanuzi wa pipeline yako
+- Inasanidi vigezo vya mazingira vinavyohitajika katika mfumo wako wa CI/CD
+
+**Mtiririko wa uzalishaji na usanidi wa pipeline:**
+
+```bash
+# 1. Sanidi mazingira ya uzalishaji
+azd env new production
+azd env set AZURE_OPENAI_CAPACITY 100
+
+# 2. Sanidi mtiririko wa pipeline
+azd pipeline config --provider github
+
+# 3. Mtiririko unaendesha azd deploy kila inapofanywa push kwenye tawi main
+```
+
+### Kuongeza Vipengele kwa `azd add`
+
+Ongeza huduma za Azure hatua kwa hatua kwenye mradi uliopo:
+
+```bash
+# Ongeza sehemu mpya ya huduma kwa kuingiliana
+azd add
+```
+
+Hii ni muhimu hasa kwa kupanua programu za AI za uzalishaji—kwa mfano, kuongeza huduma ya utafutaji wa vector, endpoint mpya ya wakala, au kipengele cha ufuatiliaji kwenye uenezaji uliopo.
+
+## Rasilimali Zaidi
+- **Azure Well-Architected Framework**: [Mwongozo wa mzigo wa kazi wa AI](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Microsoft Foundry Documentation**: [Nyaraka rasmi](https://learn.microsoft.com/azure/ai-studio/)
+- **Violezo vya Jamii**: [Azure Samples](https://github.com/Azure-Samples)
+- **Jumuiya ya Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
+- **Ujuzi wa Mawakala kwa Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - ujuzi 37 za mawakala zilizo wazi kwa Azure AI, Foundry, utoaji, uboreshaji wa gharama, na uchunguzi. Sakinisha katika mhariri wako:
+  ```bash
+  npx skills add microsoft/github-copilot-for-azure
+  ```
 
 ---
 
-**Chapter Navigation:**
-- **📚 Nyumbani wa Kozi**: [AZD For Beginners](../../README.md)
-- **📖 Sura ya Sasa**: Chapter 8 - Production & Enterprise Patterns
-- **⬅️ Sura ya Awali**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Pia Yanayohusiana**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎆 Kozi Imekamilika**: [AZD For Beginners](../../README.md)
+**Utaratibu wa Sura:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Waanzilishi](../../README.md)
+- **📖 Sura ya Sasa**: Sura 8 - Mifumo ya Uzalishaji na Biashara
+- **⬅️ Sura Iliyopita**: [Sura 7: Kutatua Matatizo](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Pia Kuhusiana**: [Maabara ya Warsha ya AI](ai-workshop-lab.md)
+- **� Kozi Imekamilika**: [AZD Kwa Waanzilishi](../../README.md)
 
-**Kumbuka**: Mizigo ya kazi ya AI kwa uzalishaji yanahitaji upangaji wa makini, ufuatiliaji, na uboreshaji endelevu. Anza na mifumo hii na uibadilishe kulingana na mahitaji yako maalum.
+**Kumbuka**: Mzigo wa kazi wa AI wa uzalishaji unahitaji upangaji makini, ufuatiliaji, na uboreshaji unaoendelea. Anza na mifumo hii na uziboreshe ili ziendane na mahitaji yako maalum.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Angalizo:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kufikia usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au ukosefu wa usahihi. Nyaraka ya awali kwa lugha yake ya asili inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa habari muhimu, inashauriwa kutumia tafsiri ya kitaalamu iliyofanywa na mtaalamu wa binadamu. Hatuwajibiki kwa uelewa mbaya au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+**Disclaimer**:
+Hati hii imekutafsiriwa kwa kutumia huduma ya utafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba utafsiri wa kiotomatiki unaweza kuwa na makosa au ukosefu wa usahihi. Hati ya awali katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, inashauriwa kutumia utafsiri wa kitaalamu uliofanywa na binadamu. Hatubebei dhamana kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,59 +1,53 @@
 # Multi-Agent Coordination Patterns
 
-⏱️ **How long e go take**: 60-75 minutes | 💰 **How much e go cost**: ~$100-300/month | ⭐ **How e hard be**: Advanced
+⏱️ **How long e go take**: 60-75 minutes | 💰 **How much e go cost**: ~$100-300/month | ⭐ **Difficulty**: Advanced
 
-**📚 Roadmap wey you dey follow:**
-- ← Previous: [Capacity Planning](capacity-planning.md) - How to size resources and scale dem
+**📚 Roadmap for learning:**
+- ← Previous: [Capacity Planning](capacity-planning.md) - Resource sizing and scaling strategies
 - 🎯 **You Dey Here**: Multi-Agent Coordination Patterns (Orchestration, communication, state management)
-- → Next: [SKU Selection](sku-selection.md) - How to choose correct Azure services
+- → Next: [SKU Selection](sku-selection.md) - Choosing the right Azure services
 - 🏠 [Course Home](../../README.md)
 
 ---
 
 ## Wetin You Go Learn
 
-If you finish this lesson, you go:
-- Go sabi multi-agent architecture patterns and when make you use dem
-- Implement orchestration patterns (centralized, decentralized, hierarchical)
-- Design how agents go dey communicate (synchronous, asynchronous, event-driven)
-- Manage shared state wey distributed agents dey share
-- Deploy multi-agent systems for Azure with AZD
-- Use coordination patterns for real-world AI scenarios
+If you finish dis lesson, you go:
+- Understand **multi-agent architecture** patterns and when to use dem
+- Implement **orchestration patterns** (centralized, decentralized, hierarchical)
+- Design **agent communication** strategies (synchronous, asynchronous, event-driven)
+- Manage **shared state** across distributed agents
+- Deploy **multi-agent systems** on Azure with AZD
+- Apply **coordination patterns** for real-world AI scenarios
 - Monitor and debug distributed agent systems
 
-## Why Multi-Agent Coordination Dey Important
+## Why Multi-Agent Coordination Matter
 
-### How e don change: From Single Agent go Multi-Agent
+### The Evolution: From Single Agent to Multi-Agent
 
 **Single Agent (Simple):**
 ```
 User → Agent → Response
 ```
-- ✅ E easy to understand and to implement
-- ✅ Quick for simple tasks
-- ❌ E dey limited by wetin the single model fit do
-- ❌ You no fit parallelize complex tasks
+- ✅ Easy to understand and implement
+- ✅ Fast for simple tasks
+- ❌ Limited by single model's capabilities
+- ❌ Cannot parallelize complex tasks
 - ❌ No specialization
 
 **Multi-Agent System (Advanced):**
-```
-           ┌─────────────┐
-           │ Orchestrator│
-           └──────┬──────┘
-        ┌─────────┼─────────┐
-        │         │         │
-    ┌───▼──┐  ┌──▼───┐  ┌──▼────┐
-    │Agent1│  │Agent2│  │Agent3 │
-    │(Plan)│  │(Code)│  │(Review)│
-    └──────┘  └──────┘  └───────┘
-```
-- ✅ Agents wey get special skills for specific tasks
-- ✅ Dem fit run in parallel make e fast
-- ✅ Modular and easy to maintain
-- ✅ Better for complex workflows
-- ⚠️ E need coordination logic
+```mermaid
+graph TD
+    Orchestrator[Orkestrator] --> Agent1[Ejent1<br/>Plan]
+    Orchestrator --> Agent2[Ejent2<br/>Kodu]
+    Orchestrator --> Agent3[Ejent3<br/>Revyu]
+```- ✅ Specialized agents for specific tasks
+- ✅ Parallel execution for speed
+- ✅ Modular and maintainable
+- ✅ Better at complex workflows
+- ⚠️ Requires coordination logic
 
-**Analogy**: Single agent na like one person wey dey do all the work. Multi-agent na like team wey each member get special skill (researcher, coder, reviewer, writer) wey dem dey work together.
+**Analogy**: Single agent na like one person dey do all work. Multi-agent na like team wey each person get im own specialty (researcher, coder, reviewer, writer) wey dey work together.
 
 ---
 
@@ -61,36 +55,36 @@ User → Agent → Response
 
 ### Pattern 1: Sequential Coordination (Chain of Responsibility)
 
-**When to use**: When tasks suppose complete for one particular order, each agent go build on top of previous output.
+**When to use**: Tasks suppose finish for one correct order, each agent go build on wetin the previous agent deliver.
 
 ```mermaid
 sequenceDiagram
-    participant User as Person wey dey use
-    participant Orchestrator as Person wey dey arrange
+    participant User
+    participant Orchestrator
     participant Agent1 as Agent wey dey do research
     participant Agent2 as Agent wey dey write
     participant Agent3 as Agent wey dey edit
     
-    User->>Orchestrator: "Make one article about AI"
-    Orchestrator->>Agent1: Find info for topic
-    Agent1-->>Orchestrator: Wetin dem find from research
-    Orchestrator->>Agent2: Write draft (use research)
-    Agent2-->>Orchestrator: Draft article
-    Orchestrator->>Agent3: Edit am, improve am
-    Agent3-->>Orchestrator: Final article wey ready
-    Orchestrator-->>User: Article wey dem polish
+    User->>Orchestrator: "Write one article about AI"
+    Orchestrator->>Agent1: Do research for di topic
+    Agent1-->>Orchestrator: Wetin di research show
+    Orchestrator->>Agent2: Write draft (use di research)
+    Agent2-->>Orchestrator: Draft wey dem write
+    Orchestrator->>Agent3: Edit and make am beta
+    Agent3-->>Orchestrator: Di final article
+    Orchestrator-->>User: Article wey dem don polish
     
-    Note over User,Agent3: One-after-anoda: Every step go wait for the one wey before am
+    Note over User,Agent3: One by one: Every step go wait for di one wey finish before am
 ```
 **Benefits:**
-- ✅ Data flow clear
-- ✅ E easy to debug
-- ✅ Execution order predictable
+- ✅ Clear data flow
+- ✅ Easy to debug
+- ✅ Predictable execution order
 
 **Limitations:**
 - ❌ Slower (no parallelism)
-- ❌ One failure fit block whole chain
-- ❌ No fit handle interdependent tasks well
+- ❌ One failure fit block the whole chain
+- ❌ No fit handle tasks wey depend on each other too much
 
 **Example Use Cases:**
 - Content creation pipeline (research → write → edit → publish)
@@ -101,17 +95,17 @@ sequenceDiagram
 
 ### Pattern 2: Parallel Coordination (Fan-Out/Fan-In)
 
-**When to use**: When independent tasks fit run at the same time, results go combine at the end.
+**When to use**: Independent tasks fit run at the same time, then you go combine results for the end.
 
 ```mermaid
 graph TB
-    User[Request wey User send]
-    Orchestrator[Di Orchestrator]
-    Agent1[Agent wey dey do analysis]
+    User[Request wey user send]
+    Orchestrator[Person wey dey coordinate]
+    Agent1[Agent wey dey analyze]
     Agent2[Agent wey dey do research]
     Agent3[Agent wey dey handle data]
-    Aggregator[Agent wey dey gather results]
-    Response[Response wey dem combine]
+    Aggregator[Person wey dey gather results]
+    Response[Answer wey dem combine]
     
     User --> Orchestrator
     Orchestrator --> Agent1
@@ -127,34 +121,34 @@ graph TB
 ```
 **Benefits:**
 - ✅ Fast (parallel execution)
-- ✅ Fault-tolerant (partial results fit still dey acceptable)
+- ✅ Fault-tolerant (partial results fit still work)
 - ✅ Scales horizontally
 
 **Limitations:**
 - ⚠️ Results fit show up out-of-order
-- ⚠️ You go need aggregation logic
-- ⚠️ State management go complex
+- ⚠️ You need aggregation logic
+- ⚠️ State management fit hard
 
 **Example Use Cases:**
 - Multi-source data gathering (APIs + databases + web scraping)
-- Competitive analysis (multiple models generate solutions, best one selected)
-- Translation services (translate to many languages at the same time)
+- Competitive analysis (multiple models generate solutions, best selected)
+- Translation services (translate to multiple languages simultaneously)
 
 ---
 
 ### Pattern 3: Hierarchical Coordination (Manager-Worker)
 
-**When to use**: When workflow complex with sub-tasks and you need delegation.
+**When to use**: For complex workflows wey get sub-tasks and you need delegation.
 
 ```mermaid
 graph TB
-    Master[Main Oga wey dey arrange everything]
-    Manager1[Manager wey dey handle research]
-    Manager2[Manager wey dey handle content]
-    W1[Tool wey dey scrap website]
-    W2[Tool wey dey analyze papers]
-    W3[Writer wey dey write]
-    W4[Editor wey dey edit]
+    Master[Master Wey Dey Run Everytin]
+    Manager1[Manager Wey Dey Handle Research]
+    Manager2[Manager Wey Dey Manage Content]
+    W1[Program Wey Dey Scrap Web]
+    W2[Program Wey Dey Analyze Paper]
+    W3[Writer Wey Dey Write Content]
+    W4[Editor Wey Dey Edit Content]
     
     Master --> Manager1
     Master --> Manager2
@@ -168,14 +162,14 @@ graph TB
     style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
 ```
 **Benefits:**
-- ✅ Fits handle complex workflows
-- ✅ Modular and easy to maintain
-- ✅ Responsibility boundaries clear
+- ✅ Handles complex workflows
+- ✅ Modular and maintainable
+- ✅ Clear responsibility boundaries
 
 **Limitations:**
 - ⚠️ Architecture go more complex
-- ⚠️ Higher latency (multiple coordination layers)
-- ⚠️ E need sophisticated orchestration
+- ⚠️ Higher latency (many coordination layers)
+- ⚠️ Need sophisticated orchestration
 
 **Example Use Cases:**
 - Enterprise document processing (classify → route → process → archive)
@@ -186,7 +180,7 @@ graph TB
 
 ### Pattern 4: Event-Driven Coordination (Publish-Subscribe)
 
-**When to use**: When agents suppose react to events and you want loose coupling.
+**When to use**: Agents need react to events, and you want make dem loosely coupled.
 
 ```mermaid
 sequenceDiagram
@@ -196,15 +190,15 @@ sequenceDiagram
     participant Agent3 as Person wey dey send notification
     participant Agent4 as Person wey dey archive data
     
-    Agent1->>EventBus: Publish "Data Don reach" event
-    EventBus->>Agent2: Subscribe: Do analysis for data
-    EventBus->>Agent3: Subscribe: Send notification
-    EventBus->>Agent4: Subscribe: Put data for archive
+    Agent1->>EventBus: Send out "DataDonReach" event
+    EventBus->>Agent2: Subscribe: Dey analyze di data
+    EventBus->>Agent3: Subscribe: Dey send notification
+    EventBus->>Agent4: Subscribe: Dey archive di data
     
-    Note over Agent1,Agent4: All subscribers dey process by themselves
+    Note over Agent1,Agent4: All subscribers dey process by demself
     
-    Agent2->>EventBus: Publish "Analysis Don complete" event
-    EventBus->>Agent3: Subscribe: Send analysis report
+    Agent2->>EventBus: Send out "AnalysisDonFinish" event
+    EventBus->>Agent3: Subscribe: Dey send report of di analysis
 ```
 **Benefits:**
 - ✅ Loose coupling between agents
@@ -214,28 +208,28 @@ sequenceDiagram
 
 **Limitations:**
 - ⚠️ Eventual consistency
-- ⚠️ Debugging go complex
-- ⚠️ Message ordering fit be wahala
+- ⚠️ Debugging fit hard
+- ⚠️ Message ordering fit cause wahala
 
 **Example Use Cases:**
 - Real-time monitoring systems (alerts, dashboards, logs)
 - Multi-channel notifications (email, SMS, push, Slack)
-- Data processing pipelines (many consumers fit read same data)
+- Data processing pipelines (multiple consumers of same data)
 
 ---
 
 ### Pattern 5: Consensus-Based Coordination (Voting/Quorum)
 
-**When to use**: When you need agreement from many agents before you continue.
+**When to use**: When you need agreement from many agents before you proceed.
 
 ```mermaid
 graph TB
     Input[Di task wey dem give]
-    Agent1[Agent 1: GPT-4]
-    Agent2[Agent 2: Claude]
-    Agent3[Agent 3: Gemini]
-    Voter[Voter wey reach agreement]
-    Output[Output wey dem agree on]
+    Agent1[Ajent 1: gpt-4.1]
+    Agent2[Ajent 2: Claude]
+    Agent3[Ajent 3: Gemini]
+    Voter[Person wey dey pick consensus]
+    Output[Output wey we agree on]
     
     Input --> Agent1
     Input --> Agent2
@@ -249,18 +243,18 @@ graph TB
 ```
 **Benefits:**
 - ✅ Higher accuracy (many opinions)
-- ✅ Fault-tolerant (minority failures fit dey acceptable)
-- ✅ Quality assurance dey built-in
+- ✅ Fault-tolerant (small number of failures fit still be okay)
+- ✅ Quality assurance dey baked in
 
 **Limitations:**
-- ❌ Expensive (multiple model calls)
-- ❌ Slower (you dey wait for many agents)
-- ⚠️ You go need conflict resolution
+- ❌ Cost plenty (many model calls)
+- ❌ Slower (you go wait for multiple agents)
+- ⚠️ Need conflict resolution
 
 **Example Use Cases:**
-- Content moderation (many models go review content)
+- Content moderation (multiple models review content)
 - Code review (multiple linters/analyzers)
-- Medical diagnosis (many AI models plus expert validation)
+- Medical diagnosis (multiple AI models, expert validation)
 
 ---
 
@@ -270,19 +264,19 @@ graph TB
 
 ```mermaid
 graph TB
-    User[User / API Klient]
-    APIM[Azure API Management]
-    Orchestrator[Orchestrator Sabis<br/>Container App]
-    ServiceBus[Azure Sabis Bus<br/>Event Hub]
+    User[User/API Klaiyent]
+    APIM[Azure API Manajment]
+    Orchestrator[Orchestrator Savaes<br/>Container App]
+    ServiceBus[Azure Service Bus<br/>Event Hub]
     
-    Agent1[Research Ejent<br/>Container App]
-    Agent2[Writer Ejent<br/>Container App]
-    Agent3[Analyst Ejent<br/>Container App]
-    Agent4[Reviewer Ejent<br/>Container App]
+    Agent1[Agent wey dey do research<br/>Container App]
+    Agent2[Agent wey dey write<br/>Container App]
+    Agent3[Agent wey dey do analysis<br/>Container App]
+    Agent4[Agent wey dey review<br/>Container App]
     
-    CosmosDB[(Cosmos DB<br/>Shared State)]
-    Storage[Azure Storage<br/>Artifacts]
-    AppInsights[Application Insights<br/>Monitoring]
+    CosmosDB[(Cosmos DB<br/>State wey dem dey share)]
+    Storage[Azure Storage<br/>Tin dem dey store]
+    AppInsights[Application Insights<br/>Dey monitor]
     
     User --> APIM
     APIM --> Orchestrator
@@ -332,17 +326,17 @@ graph TB
 ### Required Tools
 
 ```bash
-# Check say Azure Developer CLI dey
+# Make sure say Azure Developer CLI dey
 azd version
-# ✅ Wetin dem expect: azd version 1.0.0 or pass
+# ✅ Wetin we expect: azd version 1.0.0 or pass
 
-# Check say Azure CLI dey
+# Make sure say Azure CLI dey
 az --version
-# ✅ Wetin dem expect: azure-cli 2.50.0 or pass
+# ✅ Wetin we expect: azure-cli 2.50.0 or pass
 
-# Check say Docker dey (to test for your machine)
+# Make sure say Docker dey (so you fit test am for your machine)
 docker --version
-# ✅ Wetin dem expect: Docker version 20.10 or pass
+# ✅ Wetin we expect: Docker version 20.10 or pass
 ```
 
 ### Azure Requirements
@@ -586,7 +580,7 @@ def create_content():
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # Make task for di state store
+    # Make task for state store
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -594,13 +588,13 @@ def create_content():
         input_data={'topic': topic}
     )
     
-    # Send message go research agent (di first step)
+    # Send message go research agent (first step)
     sender = servicebus_client.get_queue_sender('research-tasks')
     message = ServiceBusMessage(
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # Where make we send di results
+            'next_queue': 'writer-tasks'  # Where we go send results
         }),
         content_type='application/json'
     )
@@ -641,7 +635,7 @@ import os
 import time
 from shared.state_manager import StateManager
 
-# Set up di clients
+# Make di clients dem ready
 state_manager = StateManager()
 servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
@@ -661,9 +655,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # Call Azure OpenAI make research
+    # Call Microsoft Foundry models make we do research
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -680,7 +674,7 @@ def process_research_task(message_data):
         result={'research': research_results}
     )
     
-    # Send am to next agent (writa)
+    # Send am go di next agent (writer)
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -750,9 +744,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # Call Azure OpenAI make e write article
+    # Make Microsoft Foundry Models write di article
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -769,7 +763,7 @@ def process_writing_task(message_data):
         result={'draft': article_draft}
     )
     
-    # Send am go di editor
+    # Send to di editor
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -837,9 +831,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # Call Azure OpenAI make e edit
+    # Call Microsoft Foundry Models make dem edit am
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -886,10 +880,19 @@ if __name__ == '__main__':
 ### 8. Deploy and Test
 
 ```bash
-# Make am ready an deploy
+# Option A: Deployment wey base on template
 azd init
 azd up
 
+# Option B: Deployment wey base on agent manifest (go need extension)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
+azd up
+```
+
+> See [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for all `azd ai` flags and options.
+
+```bash
 # Find di orchestrator URL
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
@@ -899,7 +902,7 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
   -d '{"topic": "The Future of AI in Healthcare"}'
 ```
 
-**✅ Expected output:**
+**✅ Wetin you suppose see:**
 ```json
 {
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -916,7 +919,7 @@ TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ Expected output (completed):**
+**✅ Wetin you suppose see (completed):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -948,7 +951,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ### Implementation: Multi-Source Research Aggregator
 
-Make we build parallel system wey go gather info from many sources at the same time.
+Make we build parallel system wey dey gather info from many sources at the same time.
 
 ### Parallel Orchestrator
 
@@ -987,7 +990,7 @@ def research_parallel():
         }
     )
     
-    # Fan-out: Send to all agents at di same time
+    # Fan-out: Send to all agents dem at di same time
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1038,7 +1041,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
 )
 
-# Follow result dem for each task
+# Dey keep track of result dem for each task
 task_results = defaultdict(list)
 expected_agents = 4  # web, akademik, news, social
 
@@ -1048,7 +1051,7 @@ def process_result(message_data):
     agent_type = message_data['agent_type']
     result = message_data['result']
     
-    # Save di result
+    # Save result
     task_results[task_id].append({
         'agent': agent_type,
         'data': result
@@ -1056,7 +1059,7 @@ def process_result(message_data):
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # Check if all agents don finish (fan-in)
+    # Check if all agent dem don finish (fan-in)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
@@ -1067,10 +1070,10 @@ def process_result(message_data):
             'summary': generate_summary(task_results[task_id])
         }
         
-        # Mark say e don complete
+        # Mark am finish
         state_manager.complete_task(task_id, aggregated)
         
-        # Clear up
+        # Clear everytin
         del task_results[task_id]
         
         print(f"✅ Aggregation complete for task {task_id}")
@@ -1103,9 +1106,9 @@ if __name__ == '__main__':
 ```
 
 **Benefits of Parallel Pattern:**
-- ⚡ **4x faster** (agents run simultaneously)
-- 🔄 **Fault-tolerant** (partial results fit dey acceptable)
-- 📈 **Scalable** (you fit add more agents easy)
+- ⚡ **4x faster** (agents dey run at the same time)
+- 🔄 **Fault-tolerant** (partial results fit still be okay)
+- 📈 **Scalable** (fit add more agents sharp sharp)
 
 ---
 
@@ -1113,7 +1116,7 @@ if __name__ == '__main__':
 
 ### Exercise 1: Add Timeout Handling ⭐⭐ (Medium)
 
-**Goal**: Implement timeout logic make aggregator no dey wait forever for slow agents.
+**Goal**: Implement timeout logic so aggregator no go wait forever for slow agents.
 
 **Steps**:
 
@@ -1136,7 +1139,7 @@ def process_result(message_data):
         'data': message_data['result']
     })
     
-    # Check if e don complete OR don time out
+    # Check if e don complete OR e don time out
     if len(task_results[task_id]) == expected_agents or \
        datetime.utcnow() > task_timeouts[task_id]:
         
@@ -1159,9 +1162,9 @@ def process_result(message_data):
 2. **Test with artificial delays:**
 
 ```python
-# For wan agent, add delay make e look like e dey process slow
+# Make one agent delay small to show say e dey process slow
 import time
-time.sleep(35)  # E don pass di 30-second timeout
+time.sleep(35)  # E don pass 30-second timeout
 ```
 
 3. **Deploy and verify:**
@@ -1169,17 +1172,17 @@ time.sleep(35)  # E don pass di 30-second timeout
 ```bash
 azd deploy aggregator
 
-# Send di task
+# Submit di task
 curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
 
-# Check di results afta 30 sekons
+# Check di results after 30 sekons
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Success Criteria:**
-- ✅ Task complete after 30 seconds even if some agents no finish
+- ✅ Task go finish after 30 seconds even if some agents never finish
 - ✅ Response go show partial results (`"timed_out": true`)
 - ✅ Available results go return (3 out of 4 agents)
 
@@ -1204,7 +1207,7 @@ class RetryConfig:
     max_retries: int = 3
     backoff_seconds: int = 5
 
-retry_counts: Dict[str, int] = {}  # message_id na retry_count
+retry_counts: Dict[str, int] = {}  # message_id dey point to retry_count
 
 def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
     """Send message with retry metadata"""
@@ -1244,18 +1247,18 @@ def process_with_retry(message, receiver, process_func):
         max_retries = message_data.get('max_retries', 3)
         
         if retry_count < max_retries:
-            # Retry: Abandon am, put am back for queue with count wey don increase
+            # Retry: abandon am, put am back for queue and increase di count
             print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
             
             message_data['retry_count'] = retry_count + 1
             
-            # Send am back to di same queue with delay
+            # Send am back to di same queue wit delay
             time.sleep(5 * (retry_count + 1))  # Backoff wey dey increase exponentially
             send_with_retry(queue_name, message_data, RetryConfig())
             
-            receiver.complete_message(message)  # Remove di original
+            receiver.complete_message(message)  # Comot di original
         else:
-            # Max retries don pass - move am go dead-letter queue
+            # Max retries don pass - send am go dead letter queue
             print(f"❌ Max retries exceeded for message {message_id}")
             receiver.dead_letter_message(
                 message,
@@ -1283,10 +1286,10 @@ def monitor_dead_letters():
 ```
 
 **✅ Success Criteria:**
-- ✅ Failed tasks retry automatically (up to 3 times)
+- ✅ Failed tasks go retry automatically (up to 3 times)
 - ✅ Exponential backoff between retries (5s, 10s, 15s)
-- ✅ After max retries, messages go to dead letter queue
-- ✅ You fit monitor and replay dead letter queue
+- ✅ After max retries, messages go dead letter queue
+- ✅ Dead letter queue fit be monitored and replayed
 
 **Time**: 30-40 minutes
 
@@ -1294,7 +1297,7 @@ def monitor_dead_letters():
 
 ### Exercise 3: Implement Circuit Breaker ⭐⭐⭐ (Advanced)
 
-**Goal**: Stop cascading failures by blocking requests to agents wey dey fail.
+**Goal**: Make sure one failing agent no go cause cascade—stop requests to failing agents.
 
 **Steps**:
 
@@ -1306,7 +1309,7 @@ from datetime import datetime, timedelta
 
 class CircuitState(Enum):
     CLOSED = "closed"      # Everything dey normal
-    OPEN = "open"          # E dey fail, dey reject request dem
+    OPEN = "open"          # Dey fail, dey reject request dem
     HALF_OPEN = "half_open"  # Dey test if e don recover
 
 class CircuitBreaker:
@@ -1320,7 +1323,7 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # Check if timeout don finish
+            # Check if timeout don expire
             if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
@@ -1368,13 +1371,13 @@ def send_to_agent(agent_type, message_data):
         circuit.call(lambda: send_message(agent_type, message_data))
     except Exception as e:
         print(f"⚠️ Skipping {agent_type} agent: {e}")
-        # Continue wit oda agents
+        # Carry on wit oda agents
 ```
 
 3. **Test circuit breaker:**
 
 ```bash
-# Make am dey fail many times (stop one agent)
+# Make e be like say failures dey happen again and again (stop one agent)
 az containerapp stop --name web-research-agent --resource-group rg-agents
 
 # Send plenty requests
@@ -1385,16 +1388,16 @@ for i in {1..10}; do
   sleep 2
 done
 
-# Check di logs - you go see say di circuit don open after 5 failures
-# Use Azure CLI to check Container App logs:
+# Check logs - you go see say circuit open after 5 failures
+# Use Azure CLI make you fit see Container App logs:
 az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
 ```
 
 **✅ Success Criteria:**
-- ✅ After 5 failures, circuit open (requests go reject)
-- ✅ After 60 seconds, circuit go half-open (e go test recovery)
-- ✅ Other agents go continue to work normally
-- ✅ Circuit go close automatically when agent recover
+- ✅ After 5 failures, circuit open (requests dey reject)
+- ✅ After 60 seconds, circuit go half-open (e go test if recovery don happen)
+- ✅ Other agents go still dey work normal
+- ✅ Circuit go close automatic when agent don recover
 
 **Time**: 40-50 minutes
 
@@ -1415,7 +1418,7 @@ from opencensus.trace.samplers import AlwaysOnSampler
 import logging
 import os
 
-# Set up tracing
+# Make tracing ready
 config_integration.trace_integrations(['requests', 'logging'])
 
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
@@ -1426,7 +1429,7 @@ tracer = Tracer(
     sampler=AlwaysOnSampler()
 )
 
-# Set up logging
+# Make logging ready
 logger = logging.getLogger(__name__)
 logger.addHandler(AzureLogHandler(connection_string=connection_string))
 logger.setLevel(logging.INFO)
@@ -1450,7 +1453,7 @@ def trace_agent_call(agent_name, task_id, operation):
 
 ### Application Insights Queries
 
-Track multi-agent workflows:
+**Track multi-agent workflows:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1501,7 +1504,7 @@ exceptions
 | **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
 | **Blob Storage** | 10GB storage, 100K operations | $5-10 |
 | **Application Insights** | 5GB ingestion | $10-15 |
-| **Azure OpenAI** | GPT-4, 10M tokens | $100-300 |
+| **Microsoft Foundry Models** | gpt-4.1, 10M tokens | $100-300 |
 | **Total** | | **$240-565/month** |
 
 ### Cost Optimization Strategies
@@ -1525,7 +1528,7 @@ exceptions
 
 3. **Use batching for Service Bus:**
    ```python
-   # Send messages for batches (e go cost less)
+   # Send messages for batch dem (e go cheap)
    sender.send_messages([message1, message2, message3])
    ```
 
@@ -1544,7 +1547,7 @@ exceptions
 
 1. **Use idempotent operations**
    ```python
-   # Agent fit process di same message many times, e no go cause wahala
+   # Agent fit process di same message many times without wahala
    def process_task(task_id):
        if state_manager.task_exists(task_id):
            print(f"Task {task_id} already processed, skipping")
@@ -1559,9 +1562,9 @@ exceptions
 
 3. **Use correlation IDs**
    ```python
-   # Carry task_id through di whole workflow
+   # Carry task_id go through the whole workflow
    message_data = {
-       'task_id': task_id,  # ID wey show correlation
+       'task_id': task_id,  # ID wey dey connect
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
@@ -1575,64 +1578,65 @@ exceptions
 
 5. **Monitor dead letter queues**
    ```python
-   # Dey dey check failed messages
+   # Dey always dey monitor messages wey don fail
    monitor_dead_letters()
    ```
 
 ### ❌ DON'T:
 
-1. **No dey create circular dependencies**
+1. **Don't create circular dependencies**
    ```python
-   # ❌ NO GOOD: Agent A → Agent B → Agent A (loop wey no dey stop)
-   # ✅ GOOD: Make sure say di directed acyclic graph (DAG) clear
+   # ❌ NO GOOD: Agent A → Agent B → Agent A (loop wey no dey end)
+   # ✅ GOOD: Make clear graph wey get direction and no get cycle (DAG)
    ```
 
-2. **No block agent threads**
+2. **Don't block agent threads**
    ```python
-   # ❌ NO GOOD: Dey wait wey dey block
+   # ❌ BAD: Dey wait sync wey dey block
    while not task_complete:
        time.sleep(1)
    
-   # ✅ GOOD: Make you use callbacks wey dey come from message queue
+   # ✅ GOOD: Make you use callback dem for message queue
    ```
 
-3. **No ignore partial failures**
+3. **Don't ignore partial failures**
    ```python
-   # ❌ NO GOOD: Make di whole workflow stop if one agent fail
-   # ✅ GOOD: Bring back some results an show wetin get error
+   # ❌ BAD: Make di whole workflow stop if one agent fail
+   # ✅ GOOD: Send back some results wey dey show error signs
    ```
 
-4. **No use infinite retries**
+4. **No dey use retries wey no get end**
    ```python
-   # ❌ BAD: go dey keep try forever
-   # ✅ GOOD: max_retries = 3, den send am go dead letter
+   # ❌ BAD: go dey retry forever
+   # ✅ GOOD: max_retries = 3, after dat put am for dead letter
    ```
 
 ---
-## Troubleshooting Guide
 
-### Problem: Messages wey dey stuck for queue
+## Guide to Fix Wahala
 
-**Symptoms:**
-- Messages dey pile up for queue
+### Problem: Messages wey jam for queue
+
+**Signs:**
+- Messages dey accumulate for queue
 - Agents no dey process
 - Task status dey stuck for "pending"
 
 **Diagnosis:**
 ```bash
-# Check how deep di queue be
+# Check how deep di queue dey
 az servicebus queue show \
   --namespace-name mybus \
   --name research-tasks \
   --query "countDetails"
 
-# Check agent log dem wit Azure CLI
+# Make you use Azure CLI check di agent logs
 az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
-**Solutions:**
+**Solution dem:**
 
-1. **Add more agent replicas:**
+1. **Increase agent replicas:**
    ```bash
    az containerapp update \
      --name research-agent \
@@ -1640,7 +1644,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
      --max-replicas 10
    ```
 
-2. **Check di dead letter queue:**
+2. **Check dead letter queue:**
    ```bash
    az servicebus queue show \
      --namespace-name mybus \
@@ -1650,36 +1654,36 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Problem: Task timeout / e no ever complete
+### Problem: Task time out / no dey complete
 
-**Symptoms:**
-- Task status dey stay "in_progress"
-- Some agents finish, others no finish
+**Signs:**
+- Task status still dey "in_progress"
+- Some agents don finish, others never finish
 - No error messages
 
 **Diagnosis:**
 ```bash
-# Check di task state
+# Check di task status
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 # Check di Application Insights
 # Run di query: traces | where customDimensions.task_id == "..."
 ```
 
-**Solutions:**
+**Solution dem:**
 
-1. **Put timeout for aggregator (Exercise 1)**
+1. **Implememt timeout for aggregator (Exercise 1)**
 
-2. **Check if agents don fail using Azure Monitor:**
+2. **Check for agent failures with Azure Monitor:**
    ```bash
-   # Use azd monitor make you see logs
+   # See logs wit azd monitor
    azd monitor --logs
    
-   # Or you fit use Azure CLI check logs for specific container app
+   # Or use Azure CLI to check particular container app log dem
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **Make sure say all agents dey run:**
+3. **Make sure all agents dey run:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1702,8 +1706,8 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - 🏠 [Course Home](../../README.md)
 
 ### Related Examples
-- [Microservices Example](../../../../examples/microservices) - How services dey communicate
-- [Azure OpenAI Example](../../../../examples/azure-openai-chat) - How to integrate AI
+- [Microservices Example](../../../../examples/microservices) - Service communication patterns
+- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - AI integration
 
 ---
 
@@ -1711,27 +1715,27 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 **You don learn:**
 - ✅ Five coordination patterns (sequential, parallel, hierarchical, event-driven, consensus)
-- ✅ Multi-agent architecture on Azure (Service Bus, Cosmos DB, Container Apps)
+- ✅ Multi-agent architecture for Azure (Service Bus, Cosmos DB, Container Apps)
 - ✅ How to manage state across distributed agents
 - ✅ How to handle timeout, retries, and circuit breakers
 - ✅ How to monitor and debug distributed systems
 - ✅ Ways to optimize cost
 
-**Key Takeaways:**
-1. **Choose di right pattern** - Use sequential if workflow need order, parallel if you want speed, event-driven if you want flexibility
-2. **Manage state carefully** - Use Cosmos DB or similar make una share state
-3. **Handle failures gracefully** - Timeouts, retries, circuit breakers, dead letter queues
-4. **Monitor everything** - Distributed tracing na important thing for debugging
-5. **Optimize costs** - Scale to zero, use serverless, add caching
+**Main Takeaways:**
+1. **Choose the correct pattern** - Sequential if order matter, parallel if you want speed, event-driven if you want flexibilty
+2. **Manage state well** - Use Cosmos DB or similar for shared state
+3. **Handle failures well** - Timeouts, retries, circuit breakers, dead letter queues
+4. **Monitor everything** - Distributed tracing na key for debugging
+5. **Optimize costs** - Scale to zero, use serverless, implement caching
 
 **Next Steps:**
 1. Finish the practical exercises
-2. Build multi-agent system for your own use case
+2. Build multi-agent system for your use case
 3. Study [SKU Selection](sku-selection.md) to optimize performance and cost
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 Disclaimer:
-Dis document don translate with AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg sabi say automatic translations fit get mistakes or no too accurate. The original document for im original/native language na di official source. If na important/critical information, better make you use professional human translator. We no go responsible for any misunderstanding or wrong interpretation wey fit come from dis translation.
+Dis document don translate wit AI translation service [Co-op Translator] (https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg sabi say automatic translations fit get errors or wrong tins. Di original document for im original language remain di official/authoritative source. If na important information, better make una use professional human translator. We no go dey responsible for any misunderstanding or wrong interpretation wey fit come from using dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

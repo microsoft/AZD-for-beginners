@@ -1,96 +1,96 @@
 # راهنمای نصب و راه‌اندازی
 
-**هدایت فصل:**
-- **📚 خانه دوره**: [AZD برای مبتدیان](../../README.md)
-- **📖 فصل جاری**: فصل 1 - مبانی و شروع سریع
+**ناوبری فصل:**
+- **📚 صفحه اصلی دوره**: [AZD برای مبتدیان](../../README.md)
+- **📖 فصل جاری**: فصل ۱ - مبانی و شروع سریع
 - **⬅️ قبلی**: [مبانی AZD](azd-basics.md)
 - **➡️ بعدی**: [اولین پروژه شما](first-project.md)
-- **🚀 فصل بعدی**: [فصل 2: توسعه با رویکرد اولویت هوش مصنوعی](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 فصل بعدی**: [فصل ۲: توسعه مبتنی بر هوش مصنوعی](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## مقدمه
 
-این راهنمای جامع شما را در نصب و پیکربندی Azure Developer CLI (azd) روی سیستم‌تان همراهی می‌کند. شما روش‌های مختلف نصب برای سیستم‌عامل‌های مختلف، تنظیم احراز هویت و پیکربندی اولیه را یاد می‌گیرید تا محیط توسعه خود را برای استقرار در Azure آماده کنید.
+این راهنمای جامع شما را در نصب و پیکربندی Azure Developer CLI (azd) روی سیستم‌تان همراهی می‌کند. شما روش‌های مختلف نصب برای سیستم‌عامل‌های گوناگون، تنظیم احراز هویت و پیکربندی اولیه را برای آماده‌سازی محیط توسعه خود برای استقرار در Azure خواهید آموخت.
 
 ## اهداف یادگیری
 
 تا پایان این درس، شما:
-- با موفقیت Azure Developer CLI را روی سیستم‌عامل خود نصب خواهید کرد
+- Azure Developer CLI را به‌طور موفقیت‌آمیز روی سیستم‌عامل خود نصب خواهید کرد
 - احراز هویت با Azure را با روش‌های مختلف پیکربندی خواهید کرد
 - محیط توسعه خود را با پیش‌نیازهای لازم تنظیم خواهید کرد
-- گزینه‌های مختلف نصب و زمان استفاده از هر کدام را خواهید فهمید
-- مشکلات متداول نصب و راه‌اندازی را رفع خواهید کرد
+- گزینه‌های مختلف نصب و زمان استفاده از هر کدام را درک خواهید کرد
+- مشکلات رایج نصب و راه‌اندازی را عیب‌یابی خواهید کرد
 
-## نتایج یادگیری
+## دستاوردهای آموزشی
 
 پس از تکمیل این درس، شما قادر خواهید بود:
 - azd را با روش مناسب برای پلتفرم خود نصب کنید
-- با استفاده از `azd auth login` با Azure احراز هویت کنید
-- نصب را تأیید کرده و دستورات پایه‌ای azd را آزمایش کنید
+- با استفاده از azd auth login با Azure احراز هویت کنید
+- نصب خود را تأیید کرده و دستورات پایه azd را تست کنید
 - محیط توسعه خود را برای استفاده بهینه از azd پیکربندی کنید
-- مشکلات رایج نصب را به‌طور مستقل حل کنید
+- مشکلات متداول نصب را به‌صورت مستقل حل کنید
 
-این راهنما به شما کمک می‌کند Azure Developer CLI را روی سیستم خود نصب و پیکربندی کنید، صرف‌نظر از سیستم‌عامل یا محیط توسعه‌تان.
+این راهنما به شما کمک می‌کند تا Azure Developer CLI را روی سیستم خود نصب و پیکربندی کنید، صرف‌نظر از سیستم‌عامل یا محیط توسعه شما.
 
 ## پیش‌نیازها
 
-قبل از نصب azd، مطمئن شوید که دارید:
+قبل از نصب azd، اطمینان حاصل کنید که:
 - **اشتراک Azure** - [یک حساب رایگان ایجاد کنید](https://azure.microsoft.com/free/)
 - **Azure CLI** - برای احراز هویت و مدیریت منابع
 - **Git** - برای کلون کردن قالب‌ها و کنترل نسخه
-- **Docker** (اختیاری) - برای برنامه‌های کانتینری‌شده
+- **Docker** (اختیاری) - برای برنامه‌های کانتینری
 
 ## روش‌های نصب
 
-### Windows
+### ویندوز
 
-#### گزینه 1: PowerShell (توصیه‌شده)
+#### گزینه ۱: PowerShell (توصیه‌شده)
 ```powershell
 # به‌عنوان مدیر یا با امتیازات ارتقا یافته اجرا کنید
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
-#### گزینه 2: Windows Package Manager (winget)
+#### گزینه ۲: Windows Package Manager (winget)
 ```cmd
 winget install Microsoft.Azd
 ```
 
-#### گزینه 3: Chocolatey
+#### گزینه ۳: Chocolatey
 ```cmd
 choco install azd
 ```
 
-#### گزینه 4: نصب دستی
+#### گزینه ۴: نصب دستی
 1. آخرین نسخه را از [GitHub](https://github.com/Azure/azure-dev/releases) دانلود کنید
-2. از حالت فشرده خارج کنید به `C:\Program Files\azd\`
-3. به متغیر محیطی PATH اضافه کنید
+2. آن را در `C:\Program Files\azd\` استخراج کنید
+3. آن را به متغیر محیطی PATH اضافه کنید
 
 ### macOS
 
-#### گزینه 1: Homebrew (توصیه‌شده)
+#### گزینه ۱: Homebrew (توصیه‌شده)
 ```bash
 brew tap azure/azd
 brew install azd
 ```
 
-#### گزینه 2: اسکریپت نصب
+#### گزینه ۲: Install Script
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### گزینه 3: نصب دستی
+#### گزینه ۳: نصب دستی
 ```bash
 # دانلود و نصب
 curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.com/Azure/azure-dev/releases/latest/download --verbose
 ```
 
-### Linux
+### لینوکس
 
-#### گزینه 1: اسکریپت نصب (توصیه‌شده)
+#### گزینه ۱: Install Script (توصیه‌شده)
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### گزینه 2: مدیر بسته‌ها
+#### گزینه ۲: Package Managers
 
 **Ubuntu/Debian:**
 ```bash
@@ -112,7 +112,7 @@ sudo dnf install azd
 
 ### GitHub Codespaces
 
-azd به‌صورت پیش‌فرض در GitHub Codespaces نصب شده است. به‌سادگی یک codespace ایجاد کنید و فوراً از azd استفاده کنید.
+azd به‌صورت از پیش نصب‌شده در GitHub Codespaces موجود است. به‌سادگی یک codespace ایجاد کنید و فوراً از azd استفاده کنید.
 
 ### Docker
 
@@ -120,22 +120,22 @@ azd به‌صورت پیش‌فرض در GitHub Codespaces نصب شده است.
 # azd را در یک کانتینر اجرا کنید
 docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest
 
-# یک نام مستعار برای استفاده‌ی آسان‌تر ایجاد کنید
+# یک نام مستعار برای استفادهٔ آسان‌تر ایجاد کنید
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
 ## ✅ بررسی نصب
 
-پس از نصب، بررسی کنید azd به‌درستی کار می‌کند:
+پس از نصب، بررسی کنید که azd به‌درستی کار می‌کند:
 
 ```bash
-# نسخه را بررسی کنید
+# بررسی نسخه
 azd version
 
-# راهنما را مشاهده کنید
+# مشاهده راهنما
 azd --help
 
-# قالب‌های موجود را فهرست کنید
+# فهرست قالب‌های موجود
 azd template list
 ```
 
@@ -144,34 +144,34 @@ azd template list
 azd version 1.x.x (commit xxxxxx)
 ```
 
-**توجه**: شماره نسخه واقعی ممکن است متفاوت باشد. برای آخرین نسخه‌ها به [Azure Developer CLI releases](https://github.com/Azure/azure-dev/releases) مراجعه کنید.
+**توجه**: شماره نسخه واقعی ممکن است متفاوت باشد. برای آخرین نسخه به [نسخه‌های Azure Developer CLI](https://github.com/Azure/azure-dev/releases) مراجعه کنید.
 
-**✅ فهرست بررسی موفقیت نصب:**
-- [ ] `azd version` شماره نسخه را بدون خطا نمایش می‌دهد
-- [ ] `azd --help` مستندات دستورات را نشان می‌دهد
-- [ ] `azd template list` قالب‌های موجود را نمایش می‌دهد
-- [ ] `az account show` اشتراک Azure شما را نمایش می‌دهد
-- [ ] می‌توانید یک پوشه آزمایشی ایجاد کرده و `azd init` را با موفقیت اجرا کنید
+**✅ چک‌لیست موفقیت نصب:**
+- [ ] `azd version` شماره نسخه را بدون خطا نشان دهد
+- [ ] `azd --help` مستندات دستورات را نمایش دهد
+- [ ] `azd template list` قالب‌های موجود را نمایش دهد
+- [ ] `az account show` اشتراک Azure شما را نمایش دهد
+- [ ] بتوانید یک پوشه تست ایجاد کرده و با موفقیت `azd init` را اجرا کنید
 
-**اگر همه بررسی‌ها موفق بودند، آماده‌اید به [اولین پروژه شما](first-project.md) بروید!**
+**اگر همه بررسی‌ها موفق باشند، آماده‌اید به [اولین پروژه شما](first-project.md) بروید!**
 
-## پیکربندی احراز هویت
+## راه‌اندازی احراز هویت
 
 ### احراز هویت با Azure CLI (توصیه‌شده)
 ```bash
-# اگر هنوز نصب نشده است، Azure CLI را نصب کنید
+# اگر قبلاً نصب نشده است، Azure CLI را نصب کنید
 # ویندوز: winget install Microsoft.AzureCLI
 # مک‌اواس: brew install azure-cli
 # لینوکس: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-# وارد Azure شوید
+# به Azure وارد شوید
 az login
 
-# احراز هویت را بررسی کنید
+# احراز هویت را تأیید کنید
 az account show
 ```
 
-### احراز هویت با Device Code
+### احراز هویت با کد دستگاه
 اگر روی سیستمی بدون رابط گرافیکی هستید یا با مرورگر مشکل دارید:
 ```bash
 az login --use-device-code
@@ -196,12 +196,12 @@ azd config set defaults.subscription <subscription-id>
 # تنظیم مکان پیش‌فرض
 azd config set defaults.location eastus2
 
-# مشاهدهٔ تمام پیکربندی‌ها
+# نمایش تمام پیکربندی‌ها
 azd config list
 ```
 
 ### متغیرهای محیطی
-به فایل پروفایل شل خود اضافه کنید (`.bashrc`, `.zshrc`, `.profile`):
+به پروفایل پوسته خود (`.bashrc`, `.zshrc`, `.profile`) اضافه کنید:
 ```bash
 # پیکربندی Azure
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
@@ -209,7 +209,7 @@ export AZURE_LOCATION="eastus2"
 
 # پیکربندی azd
 export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
-export AZD_DEBUG=true  # فعال‌سازی ثبت لاگ اشکال‌زدایی
+export AZD_DEBUG=true  # فعال‌سازی ثبت لاگ‌های اشکال‌زدایی
 ```
 
 ## ادغام با IDE
@@ -217,7 +217,7 @@ export AZD_DEBUG=true  # فعال‌سازی ثبت لاگ اشکال‌زدای
 ### Visual Studio Code
 افزونه Azure Developer CLI را نصب کنید:
 1. VS Code را باز کنید
-2. به بخش Extensions (Ctrl+Shift+X) بروید
+2. به بخش Extensions بروید (Ctrl+Shift+X)
 3. عبارت "Azure Developer CLI" را جستجو کنید
 4. افزونه را نصب کنید
 
@@ -225,10 +225,10 @@ export AZD_DEBUG=true  # فعال‌سازی ثبت لاگ اشکال‌زدای
 - IntelliSense برای azure.yaml
 - دستورات ترمینال یکپارچه
 - مرور قالب‌ها
-- نظارت بر استقرار
+- مانیتورینگ استقرار
 
 ### GitHub Codespaces
-یک فایل `.devcontainer/devcontainer.json` ایجاد کنید:
+یک `.devcontainer/devcontainer.json` ایجاد کنید:
 ```json
 {
   "name": "Azure Developer CLI",
@@ -242,23 +242,23 @@ export AZD_DEBUG=true  # فعال‌سازی ثبت لاگ اشکال‌زدای
 
 ### IntelliJ/JetBrains
 1. افزونه Azure را نصب کنید
-2. اعتبارنامه‌های Azure را پیکربندی کنید
+2. اطلاعات احراز هویت Azure را پیکربندی کنید
 3. از ترمینال یکپارچه برای دستورات azd استفاده کنید
 
-## 🐛 رفع اشکال نصب
+## 🐛 عیب‌یابی نصب
 
 ### مشکلات رایج
 
 #### دسترسی رد شد (Windows)
 ```powershell
-# PowerShell را به‌عنوان مدیر اجرا کنید
+# PowerShell را به‌عنوان مدیر اجرا کنید.
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 #### مشکلات PATH
-azd را به‌صورت دستی به PATH خود اضافه کنید:
+azd را به‌صورت دستی به PATH اضافه کنید:
 
-**Windows:**
+**ویندوز:**
 ```cmd
 setx PATH "%PATH%;C:\Program Files\azd\"
 ```
@@ -275,45 +275,45 @@ source ~/.bashrc
 azd config set http.proxy http://proxy:8080
 azd config set https.proxy https://proxy:8080
 
-# اعتبارسنجی SSL را نادیده بگیرید (برای محیط تولید توصیه نمی‌شود)
+# غیرفعال‌سازی بررسی SSL (برای محیط تولید توصیه نمی‌شود)
 azd config set http.insecure true
 ```
 
 #### تعارض نسخه‌ها
 ```bash
-# نصب‌های قدیمی را حذف کنید
+# حذف نصب‌های قدیمی
 # ویندوز: winget uninstall Microsoft.Azd
 # مک‌اواس: brew uninstall azd
 # لینوکس: sudo apt remove azd
 
-# پیکربندی را پاک کنید
+# پاک‌سازی پیکربندی
 rm -rf ~/.azd
 ```
 
 ### دریافت کمک بیشتر
 ```bash
-# لاگ‌گیری اشکال‌زدایی را فعال کنید
+# فعال‌سازی ثبت وقایع اشکال‌زدایی
 export AZD_DEBUG=true
 azd <command> --debug
 
-# پیکربندی فعلی را مشاهده کنید
+# مشاهده پیکربندی جاری
 azd config list
 
-# وضعیت استقرار فعلی را مشاهده کنید
+# مشاهده وضعیت استقرار جاری
 azd show
 ```
 
 ## به‌روزرسانی azd
 
 ### به‌روزرسانی خودکار
-azd زمانی که به‌روزرسانی در دسترس باشد به شما اطلاع می‌دهد:
+azd زمانی که به‌روزرسانی موجود باشد به شما اطلاع خواهد داد:
 ```bash
 azd version --check-for-updates
 ```
 
 ### به‌روزرسانی دستی
 
-**Windows (winget):**
+**ویندوز (winget):**
 ```cmd
 winget upgrade Microsoft.Azd
 ```
@@ -323,7 +323,7 @@ winget upgrade Microsoft.Azd
 brew upgrade azd
 ```
 
-**Linux:**
+**لینوکس:**
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
@@ -331,7 +331,7 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 ## 💡 سوالات متداول
 
 <details>
-<summary><strong>تفاوت azd و az CLI چیست؟</strong></summary>
+<summary><strong>تفاوت بین azd و az CLI چیست؟</strong></summary>
 
 **Azure CLI (az)**: ابزار سطح پایین برای مدیریت منابع منفرد Azure
 - `az webapp create`, `az storage account create`
@@ -339,28 +339,28 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 - تمرکز بر مدیریت زیرساخت
 
 **Azure Developer CLI (azd)**: ابزار سطح بالا برای استقرار کامل برنامه‌ها
-- `azd up` کل برنامه را همراه با تمام منابع مستقر می‌کند
-- جریان کاری مبتنی بر قالب
+- `azd up` کل برنامه را همراه با همه منابع مستقر می‌کند
+- گردش‌کار مبتنی بر قالب
 - تمرکز بر افزایش بهره‌وری توسعه‌دهنده
 
-**به هر دو نیاز دارید**: azd از az CLI برای احراز هویت استفاده می‌کند
+**شما به هر دو نیاز دارید**: azd از az CLI برای احراز هویت استفاده می‌کند
 </details>
 
 <details>
-<summary><strong>آیا می‌توانم از azd با منابع موجود Azure استفاده کنم؟</strong></summary>
+<summary><strong>آیا می‌توانم از azd با منابع Azure موجود استفاده کنم؟</strong></summary>
 
 بله! شما می‌توانید:
-1. منابع موجود را به محیط‌های azd وارد کنید
+1. منابع موجود را در محیط‌های azd وارد کنید
 2. به منابع موجود در قالب‌های Bicep خود ارجاع دهید
-3. از azd برای استقرارهای جدید هم‌زمان با زیرساخت موجود استفاده کنید
+3. از azd برای استقرارهای جدید در کنار زیرساخت موجود استفاده کنید
 
-جزئیات را در [راهنمای پیکربندی](configuration.md) ببینید.
+برای جزئیات به [راهنمای پیکربندی](configuration.md) مراجعه کنید.
 </details>
 
 <details>
 <summary><strong>آیا azd با Azure Government یا Azure China کار می‌کند؟</strong></summary>
 
-بله، cloud را پیکربندی کنید:
+بله، ابر را پیکربندی کنید:
 ```bash
 # آژور دولتی
 az cloud set --name AzureUSGovernment
@@ -373,56 +373,57 @@ az login
 </details>
 
 <details>
-<summary><strong>آیا می‌توانم از azd در مسیرهای CI/CD استفاده کنم؟</strong></summary>
+<summary><strong>آیا می‌توانم از azd در خطوط CI/CD استفاده کنم؟</strong></summary>
 
-قطعاً! azd برای اتوماسیون طراحی شده است:
+قطعاً! azd برای خودکارسازی طراحی شده است:
 - یکپارچه‌سازی با GitHub Actions
 - پشتیبانی از Azure DevOps
-- احراز هویت با Service Principal
-- حالت بدون تعامل
+- احراز هویت Service Principal
+- حالت غیرتعاملی
 
-الگوهای CI/CD را در [راهنمای استقرار](../chapter-04-infrastructure/deployment-guide.md) ببینید.
+برای الگوهای CI/CD به [راهنمای استقرار](../chapter-04-infrastructure/deployment-guide.md) مراجعه کنید.
 </details>
 
 <details>
 <summary><strong>هزینه استفاده از azd چقدر است؟</strong></summary>
 
-خود azd به‌صورت **کاملاً رایگان** و متن‌باز است. شما فقط بابت موارد زیر هزینه می‌پردازید:
+خود azd به‌تنهایی **کاملاً رایگان** و متن‌باز است. شما تنها برای موارد زیر هزینه می‌پردازید:
 - منابع Azure که مستقر می‌کنید
-- هزینه‌های مصرف Azure (محاسبات، ذخیره‌سازی و غیره)
+- هزینه‌های مصرف Azure (محاسبه، ذخیره‌سازی، و غیره)
 
-از `azd provision --preview` برای برآورد هزینه‌ها قبل از استقرار استفاده کنید.
+برای برآورد هزینه‌ها قبل از استقرار از `azd provision --preview` استفاده کنید.
 </details>
 
 ## گام‌های بعدی
 
-1. **احراز هویت را کامل کنید**: اطمینان حاصل کنید که به اشتراک Azure خود دسترسی دارید
-2. **اولین استقرار خود را امتحان کنید**: از [راهنمای اولین پروژه](first-project.md) پیروی کنید
-3. **قالب‌ها را بررسی کنید**: با `azd template list` قالب‌های موجود را مرور کنید
-4. **IDE خود را پیکربندی کنید**: محیط توسعه خود را تنظیم کنید
+1. **تکمیل احراز هویت**: اطمینان حاصل کنید که می‌توانید به اشتراک Azure خود دسترسی داشته باشید
+2. **اولین استقرار خود را امتحان کنید**: دستورالعمل [راهنمای اولین پروژه](first-project.md) را دنبال کنید
+3. **کاوش در قالب‌ها**: قالب‌های موجود را با `azd template list` مرور کنید
+4. **پیکربندی IDE**: محیط توسعه خود را تنظیم کنید
 
 ## پشتیبانی
 
 اگر با مشکلی مواجه شدید:
 - [مستندات رسمی](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [گزارش مشکلات](https://github.com/Azure/azure-dev/issues)
-- [بحث‌های انجمن](https://github.com/Azure/azure-dev/discussions)
+- [گزارش مسائل](https://github.com/Azure/azure-dev/issues)
+- [بحث‌های جامعه](https://github.com/Azure/azure-dev/discussions)
 - [پشتیبانی Azure](https://azure.microsoft.com/support/)
+- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - راهنمایی دستورات Azure را مستقیماً در ویرایشگر خود با `npx skills add microsoft/github-copilot-for-azure` دریافت کنید
 
 ---
 
-**هدایت فصل:**
-- **📚 خانه دوره**: [AZD برای مبتدیان](../../README.md)
-- **📖 فصل جاری**: فصل 1 - مبانی و شروع سریع
+**ناوبری فصل:**
+- **📚 صفحه اصلی دوره**: [AZD برای مبتدیان](../../README.md)
+- **📖 فصل جاری**: فصل ۱ - مبانی و شروع سریع
 - **⬅️ قبلی**: [مبانی AZD](azd-basics.md) 
 - **➡️ بعدی**: [اولین پروژه شما](first-project.md)
-- **🚀 فصل بعدی**: [فصل 2: توسعه با رویکرد اولویت هوش مصنوعی](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 فصل بعدی**: [فصل ۲: توسعه مبتنی بر هوش مصنوعی](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**✅ نصب کامل شد!** برای شروع ساخت با azd به [اولین پروژه شما](first-project.md) بروید.
+**✅ نصب کامل شد!** برای شروع ساختن با azd به [اولین پروژه شما](first-project.md) بروید.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-سلب مسئولیت:
-این سند با استفاده از سرویس ترجمهٔ هوش مصنوعی Co-op Translator (https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی اشتباهات یا نادرستی‌هایی باشند. سند اصلی به زبان اصلی خود باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمهٔ انسانی حرفه‌ای توصیه می‌شود. ما در قبال هر گونه سوءتفاهم یا تفسیر نادرست ناشی از استفاده از این ترجمه مسئولیتی نداریم.
+**سلب مسئولیت**:
+این سند با استفاده از سرویس ترجمهٔ هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. نسخهٔ اصلی سند به زبان اصلی آن باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حساس، ترجمهٔ حرفه‌ای انسانی توصیه می‌شود. ما در برابر هرگونه سوءتفاهم یا تفسیر نادرستی که از استفاده از این ترجمه ناشی شود مسئولیتی نداریم.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

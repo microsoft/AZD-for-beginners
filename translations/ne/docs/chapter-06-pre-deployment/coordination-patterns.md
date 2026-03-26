@@ -2,58 +2,52 @@
 
 ⏱️ **अनुमानित समय**: 60-75 मिनेट | 💰 **अनुमानित लागत**: ~$100-300/महिना | ⭐ **जटिलता**: उन्नत
 
-**📚 पठन मार्ग:**
-- ← अघिल्लो: [Capacity Planning](capacity-planning.md) - स्रोत साइजिङ र स्केलिङ रणनीतिहरू
-- 🎯 **तपाईं यहाँ हुनुहुन्छ**: बहु-एजेन्ट समन्वय ढाँचाहरू (ओर्केस्ट्रेसन, सञ्चार, अवस्था व्यवस्थापन)
-- → अर्को: [SKU Selection](sku-selection.md) - उपयुक्त Azure सेवाहरू चयन गर्ने
-- 🏠 [Course Home](../../README.md)
+**📚 सिकाइ मार्ग:**
+- ← अघिल्लो: [क्षमता योजना](capacity-planning.md) - स्रोत आकार निर्धारण र स्केलिङ रणनीतिहरू
+- 🎯 **तपाईं यहाँ हुनुहुन्छ**: बहु-एजेन्ट समन्वय ढाँचाहरू (ओर्केस्ट्रेशन, संचार, राज्य व्यवस्थापन)
+- → अर्को: [SKU चयन](sku-selection.md) - सही Azure सेवाहरू छनौट गर्नु
+- 🏠 [कोर्स होम](../../README.md)
 
 ---
 
 ## तपाईंले के सिक्नुहुनेछ
 
-यस पाठलाई पूरा गर्दा, तपाईंले:
-- **बहु-एजेन्ट आर्किटेक्चर** ढाँचाहरू र कहिले प्रयोग गर्ने बुझ्नुहुनेछ
-- **ओर्केस्ट्रेसन ढाँचाहरू** कार्यान्वयन गर्नुहुनेछ (केन्द्रीयकृत, विकेन्द्रित, पदानुक्रमिक)
-- **एजेन्ट सञ्चार** रणनीतिहरू डिजाइन गर्ने (सिनक्रमनस, एसिनक्रमनस, घटना-चालित)
-- वितरित एजेन्टहरू बीच **साझा अवस्था** व्यवस्थापन गर्ने
-- AZD संग Azure मा **बहु-एजेन्ट प्रणालीहरू** डिप्लोय गर्ने
-- वास्तविक संसारका AI परिदृश्यहरूका लागि **समन्वय ढाँचाहरू** लागू गर्ने
-- वितरित एजेन्ट प्रणालीहरूको अनुगमन र डीबग गर्ने
+यो पाठ पूरा गरेपछि, तपाईंले:
+- बहु-एजेन्ट वास्तुकला ढाँचाहरू र कहिले प्रयोग गर्ने भन्ने बुझ्ने
+- **ओर्केस्ट्रेशन ढाँचाहरू** लागू गर्ने (केन्द्रिकृत, विकेन्द्रिकृत, पदानुक्रमिक)
+- **एजेन्ट संचार** रणनीतिहरू डिजाइन गर्ने (सिङ्क्रोनस, एसिङ्क्रोनस, इभेन्ट-ड्राइभन)
+- वितरण गरिएको एजेन्टहरू बीच **साझा राज्य** व्यवस्थापन गर्ने
+- AZD सँग Azure मा **बहु-एजेन्ट प्रणालीहरू** डिप्लोय गर्ने
+- वास्तविक-विश्व AI परिदृश्यहरूको लागि **समन्वय ढाँचाहरू** लागू गर्ने
+- वितरण गरिएको एजेन्ट प्रणालीहरू अनुगमन र डिबग गर्ने
 
 ## किन बहु-एजेन्ट समन्वय महत्वपूर्ण छ
 
-### विकास: एकल एजेन्टदेखि बहु-एजेन्टसम्म
+### विकासक्रम: एकल एजेन्टबाट बहु-एजेन्टसम्म
 
-**एकल एजेन्ट (सरल):**
+**एकल एजेन्ट (सहज):**
 ```
 User → Agent → Response
 ```
-- ✅ बुझ्न र कार्यान्वयन गर्न सजिलो
-- ✅ साधा कामहरूको लागि छिटो
-- ❌ एकल मोडेलको क्षमताले सीमित
-- ❌ जटिल कार्यहरू समानान्तर गर्न सकिँदैन
+- ✅ बुझ्न र लागू गर्न सजिलो
+- ✅ साधारण कार्यहरूका लागि छिटो
+- ❌ एकल मोडलको क्षमताले सीमित
+- ❌ जटिल कार्यहरूमा समानान्तरता गर्न सक्दैन
 - ❌ विशेषज्ञता छैन
 
 **बहु-एजेन्ट प्रणाली (उन्नत):**
-```
-           ┌─────────────┐
-           │ Orchestrator│
-           └──────┬──────┘
-        ┌─────────┼─────────┐
-        │         │         │
-    ┌───▼──┐  ┌──▼───┐  ┌──▼────┐
-    │Agent1│  │Agent2│  │Agent3 │
-    │(Plan)│  │(Code)│  │(Review)│
-    └──────┘  └──────┘  └───────┘
-```
-- ✅ विशिष्ट कार्यहरूका लागि विशेषीकृत एजेन्टहरू
-- ✅ गति बढाउन समानान्तर कार्यान्वयन
+```mermaid
+graph TD
+    Orchestrator[समन्वयकर्ता] --> Agent1[एजेन्ट1<br/>योजना]
+    Orchestrator --> Agent2[एजेन्ट2<br/>कोड]
+    Orchestrator --> Agent3[एजेन्ट3<br/>समीक्षा]
+```- ✅ विशिष्ट कार्यहरूका लागि विशेषज्ञ एजेन्टहरू
+- ✅ तीव्रता लागि समानान्तर कार्यान्वयन
 - ✅ मोड्युलर र मर्मतयोग्य
 - ✅ जटिल कार्यप्रवाहहरूमा राम्रो
 - ⚠️ समन्वय तर्क आवश्यक
 
-**उपमा**: एकल एजेन्ट त्यो एक व्यक्तिले सबै काम गर्ने जस्तै हो। बहु-एजेन्ट टोली जस्तो हो जहाँ प्रत्येक सदस्यसँग विशेष सीपहरू हुन्छन् (अनुसन्धानकर्ता, कोडर, समीक्षक, लेखक) र उनीहरू सँगै काम गर्छन्।
+**उपमा**: एकल एजेन्ट एक व्यक्तिले सबै कार्य गर्ने जस्तो हो। बहु-एजेन्ट भनेको टीम जस्तै जहाँ प्रत्येक सदस्यसँग विशेष सीपहरू (अनुसन्धानकर्ता, कोडर, समीक्षक, लेखक) हुन्छन् र सँगै काम गर्छन्।
 
 ---
 
@@ -61,56 +55,56 @@ User → Agent → Response
 
 ### ढाँचा 1: अनुक्रमिक समन्वय (Chain of Responsibility)
 
-**कहिले प्रयोग गर्ने**: कार्यहरू विशिष्ट क्रममा पूरा हुनुपर्छ, प्रत्येक एजेन्टले अघिल्लो आउटपुटमा निर्माण गर्छ।
+**कहिले प्रयोग गर्ने**: कार्यहरू निश्चित क्रममा पूरा हुनुपर्छ, प्रत्येक एजेन्टले अघिल्लोको आउटपुटमा निर्माण गर्दछ।
 
 ```mermaid
 sequenceDiagram
     participant User
     participant Orchestrator
-    participant Agent1 as अनुसन्धान एजेन्ट
+    participant Agent1 as अनुसन्धानकर्ता एजेन्ट
     participant Agent2 as लेखक एजेन्ट
     participant Agent3 as सम्पादक एजेन्ट
     
-    User->>Orchestrator: "एआई सम्बन्धी लेख लेख्नुहोस्"
-    Orchestrator->>Agent1: विषय अनुसन्धान गर्नुहोस्
+    User->>Orchestrator: "कृत्रिम बुद्धिमत्ता (AI) सम्बन्धी लेख लेख्नुहोस्"
+    Orchestrator->>Agent1: अनुसन्धान विषय
     Agent1-->>Orchestrator: अनुसन्धान नतिजा
-    Orchestrator->>Agent2: अनुसन्धान प्रयोग गरी मस्यौदा लेख्नुहोस्
-    Agent2-->>Orchestrator: मस्यौदा लेख
+    Orchestrator->>Agent2: ड्राफ्ट लेख्नुहोस् (अनुसन्धान प्रयोग गरेर)
+    Agent2-->>Orchestrator: ड्राफ्ट लेख
     Orchestrator->>Agent3: सम्पादन र सुधार गर्नुहोस्
     Agent3-->>Orchestrator: अन्तिम लेख
     Orchestrator-->>User: परिष्कृत लेख
     
-    Note over User,Agent3: क्रमिक: प्रत्येक चरणले अघिल्लो चरणको प्रतीक्षा गर्छ
+    Note over User,Agent3: क्रमिक: प्रत्येक चरणले अघिल्लोको प्रतीक्षा गर्छ
 ```
 **फाइदाहरू:**
-- ✅ स्पष्ट डेटा प्रवाह
-- ✅ डीबग गर्न सजिलो
+- ✅ स्पष्ट डाटा फ्लो
+- ✅ डिबग गर्न सजिलो
 - ✅ पूर्वानुमेय कार्यान्वयन क्रम
 
 **सीमाहरू:**
 - ❌ ढिलो (समानान्तरता छैन)
-- ❌ एउटै असफलताले सम्पूर्ण चेन अवरुद्ध गर्छ
-- ❌ अन्तरनिर्भर कार्यहरू सम्हाल्न सक्दैन
+- ❌ एउटा असफलताले सम्पूर्ण चेन रोक्छ
+- ❌ अन्तरनिर्भर कार्यहरू ह्यान्डल गर्न सक्दैन
 
-**उदाहरण प्रयोग केसहरू:**
+**उदाहरण प्रयोग केशहरू:**
 - सामग्री सिर्जना पाइपलाइन (अनुसन्धान → लेखन → सम्पादन → प्रकाशन)
-- कोड जेनेरेशन (योजना → कार्यान्वयन → परीक्षण → डिप्लोय)
-- रिपोर्ट निर्माण (डेटा सङ्कलन → विश्लेषण → भिजुअलाइजेसन → सारांश)
+- कोड जेनरेसन (योजना → कार्यान्वयन → परीक्षण → डिप्लोय)
+- प्रतिवेदन निर्माण (डेटा सङ्कलन → विश्लेषण → भिजुअलाइजेशन → सारांश)
 
 ---
 
 ### ढाँचा 2: समानान्तर समन्वय (Fan-Out/Fan-In)
 
-**कहिले प्रयोग गर्ने**: स्वतन्त्र कार्यहरू एकै पटक चलाउन सकिन्छ, परिणामहरू अन्त्यमा संयुक्त गरिन्छ।
+**कहिले प्रयोग गर्ने**: स्वतन्त्र कार्यहरू एकैसाथ चलाउन सकिन्छ, परिणामहरू अन्त्यमा संयोजन गरिन्छ।
 
 ```mermaid
 graph TB
-    User[प्रयोगकर्ता अनुरोध]
+    User[प्रयोगकर्ताको अनुरोध]
     Orchestrator[समन्वयक]
     Agent1[विश्लेषण एजेन्ट]
     Agent2[अनुसन्धान एजेन्ट]
     Agent3[डेटा एजेन्ट]
-    Aggregator[नतिजा समेकक]
+    Aggregator[परिणाम सङ्कलक]
     Response[संयुक्त प्रतिक्रिया]
     
     User --> Orchestrator
@@ -127,28 +121,28 @@ graph TB
 ```
 **फाइदाहरू:**
 - ✅ छिटो (समानान्तर कार्यान्वयन)
-- ✅ दोष सहिष्णु (आंशिक परिणामहरू स्वीकार्य)
-- ✅ горизонтली स्केल हुन्छ
+- ✅ फॉल्ट-टोलरन्ट (आंशिक परिणामहरू स्वीकार्य)
+- ✅ क्षैतिज रूपमा स्केल हुन्छ
 
 **सीमाहरू:**
-- ⚠️ परिणामहरू क्रमबद्ध आउने छैनन्
+- ⚠️ परिणामहरू आउट-अफ-अर्डर आउन सक्छन्
 - ⚠️ एग्रिगेसन तर्क आवश्यक
-- ⚠️ जटिल अवस्था व्यवस्थापन
+- ⚠️ जटिल राज्य व्यवस्थापन
 
-**उदाहरण प्रयोग केसहरू:**
+**उदाहरण प्रयोग केशहरू:**
 - बहु-स्रोत डेटा सङ्कलन (APIs + डेटाबेस + वेब स्क्र्यापिङ)
-- प्रतिस्पर्धी विश्लेषण (विभिन्न मोडेलहरूले समाधान उत्पन्न गर्छन्, सर्वश्रेष्ठ चयन गरिन्छ)
-- अनुवाद सेवाहरू (एकैसाथ धेरै भाषाहरूमा अनुवाद)
+- प्रतिस्पर्धात्मक विश्लेषण (धेरै मोडेलहरूले समाधान जेनरेट गर्छन्, उत्कृष्ट चयन गरिन्छ)
+- अनुवाद सेवाहरू (एकैसाथ धेरै भाषामा अनुवाद)
 
 ---
 
 ### ढाँचा 3: पदानुक्रमिक समन्वय (Manager-Worker)
 
-**कहिले प्रयोग गर्ने**: उप-टास्कहरू हुने जटिल कार्यप्रवाहहरूमा, डेलिगेसन आवश्यक हुन्छ।
+**कहिले प्रयोग गर्ने**: उप-कर्महरू भएको जटिल कार्यप्रवाहहरूमा, प्रतिनिधित्व आवश्यक हुन्छ।
 
 ```mermaid
 graph TB
-    Master[मास्टर समन्वयक]
+    Master[मुख्य समन्वयक]
     Manager1[अनुसन्धान प्रबन्धक]
     Manager2[सामग्री प्रबन्धक]
     W1[वेब स्क्रेपर]
@@ -168,73 +162,73 @@ graph TB
     style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
 ```
 **फाइदाहरू:**
-- ✅ जटिल कार्यप्रवाहहरू सम्हाल्छ
+- ✅ जटिल कार्यप्रवाहहरू ह्यान्डल गर्दछ
 - ✅ मोड्युलर र मर्मतयोग्य
-- ✅ जिम्मेवारी सीमाना स्पष्ट
+- ✅ स्पष्ट जिम्मेवारी सीमा
 
 **सीमाहरू:**
-- ⚠️ बढी जटिल आर्किटेक्चर
-- ⚠️ उच्च लेटेन्सी (धेरै समन्वय तहहरू)
-- ⚠️ परिष्कृत ओर्केस्ट्रेसन आवश्यक
+- ⚠️ बढी जटिल वास्तुकला
+- ⚠️ उच्च लेटेन्सी (बहु समन्वय तहहरू)
+- ⚠️ परिष्कृत ओर्केस्ट्रेशन आवश्यक
 
-**उदाहरण प्रयोग केसहरू:**
-- एण्टरप्राइज दस्तावेज प्रक्रिया (वर्गीकरण → मार्गनिर्देशन → प्रक्रिया → अभिलेखन)
+**उदाहरण प्रयोग केशहरू:**
+- एन्ड-टु-एन्ड कर्पोरेट दस्तावेज प्रोसेसिङ (वर्गीकरण → मार्गनिर्देशन → प्रक्रिया → आर्काइभ)
 - बहु-चरण डेटा पाइपलाइनहरू (इन्जेस्ट → क्लिन → ट्रान्सफर्म → विश्लेषण → रिपोर्ट)
-- जटिल अटोमेसन कार्यप्रवाहहरू (योजना → स्रोत आवंटन → कार्यान्वयन → अनुगमन)
+- जटिल स्वचालन कार्यप्रवाहहरू (योजना → स्रोत आवंटन → कार्यान्वयन → अनुगमन)
 
 ---
 
-### ढाँचा 4: घटना-चालित समन्वय (Publish-Subscribe)
+### ढाँचा 4: इभेन्ट-ड्राइभन समन्वय (Publish-Subscribe)
 
-**कहिले प्रयोग गर्ने**: एजेन्टहरूले घटनाहरूमा प्रतिक्रिया दिनु पर्छ, ढिलो कूप्लिङ चाहिन्छ।
+**कहिले प्रयोग गर्ने**: एजेन्टहरूले घटनाहरूमा प्रतिक्रिया दिनुपर्छ, ढिलाइयुक्त कप्लिङ चाहिन्छ।
 
 ```mermaid
 sequenceDiagram
-    participant Agent1 as डेटा सङ्ग्राहक
+    participant Agent1 as डेटा संकलक
     participant EventBus as Azure सेवा बस
     participant Agent2 as विश्लेषक
-    participant Agent3 as सूचनाप्रेषक
+    participant Agent3 as सूचनाकर्ता
     participant Agent4 as अभिलेखकर्ता
     
-    Agent1->>EventBus: प्रकाशित गर्नुहोस् "डेटा प्राप्त भयो" घटना
-    EventBus->>Agent2: सदस्यता लिने: डेटा विश्लेषण गर्नुहोस्
-    EventBus->>Agent3: सदस्यता लिने: सूचना पठाउनुहोस्
-    EventBus->>Agent4: सदस्यता लिने: डेटा अभिलेखित गर्नुहोस्
+    Agent1->>EventBus: प्रकाशित गर्नुहोस् "डेटा प्राप्त" घटना
+    EventBus->>Agent2: सदस्यता: डेटा विश्लेषण गर्नुहोस्
+    EventBus->>Agent3: सदस्यता: सूचना पठाउनुहोस्
+    EventBus->>Agent4: सदस्यता: डेटा अभिलेख गर्नुहोस्
     
-    Note over Agent1,Agent4: सबै सदस्यहरूले स्वतन्त्र रूपमा प्रक्रिया गर्छन्
+    Note over Agent1,Agent4: सबै सदस्यहरूले स्वतन्त्र रूपमा प्रशोधन गर्छन्
     
-    Agent2->>EventBus: प्रकाशित गर्नुहोस् "विश्लेषण सम्पन्न" घटना
-    EventBus->>Agent3: सदस्यता लिने: विश्लेषण प्रतिवेदन पठाउनुहोस्
+    Agent2->>EventBus: प्रकाशित गर्नुहोस् "विश्लेषण पूरा" घटना
+    EventBus->>Agent3: सदस्यता: विश्लेषण रिपोर्ट पठाउनुहोस्
 ```
 **फाइदाहरू:**
-- ✅ एजेन्टहरूबीच ढिलो कूप्लिङ
-- ✅ नयाँ एजेन्टहरू थप्न सजिलो (सिर्फ सदस्यता लिनुहोस्)
-- ✅ एसिनक्रमनस प्रक्रिया
-- ✅ लचिलो (मेसेज दृढता)
+- ✅ एजेन्टहरू बीच ढिला कप्लिङ (लूज़ कप्लिङ)
+- ✅ नयाँ एजेन्टहरू थप्न सजिलो (जस्ट सब्सक्राइब गर्नुहोस्)
+- ✅ एसिङ्क्रोनस प्रोसेसिङ
+- ✅ प्रत्यास्थ (मेसेज पर्सिस्टेन्स)
 
 **सीमाहरू:**
-- ⚠️ अन्तिम रूपमा समरूपता (eventual consistency)
-- ⚠️ जटिल डीबगिङ
+- ⚠️ अन्ततः सुसंगतता
+- ⚠️ जटिल डिबगिङ
 - ⚠️ मेसेज अर्डरिङ चुनौतीहरू
 
-**उदाहरण प्रयोग केसहरू:**
-- वास्तविक-समय अनुगमन प्रणाली (अलर्टहरू, ड्यासबोर्ड, लगहरू)
-- बहु-च्यानल नोटिफिकेसन (इमेल, SMS, पुश, Slack)
-- डेटा प्रोसेसिङ पाइपलाइनहरू (एकै डेटा का बहु उपभोक्ता)
+**उदाहरण प्रयोग केशहरू:**
+- रियल-टाइम मोनिटरिङ सिस्टमहरू (अलर्टहरू, ड्यासबोर्ड, लगहरू)
+- बहु-च्यानल सूचना (इमेल, SMS, पुश, Slack)
+- डेटा प्रोसेसिङ पाइपलाइनहरू (एकै डेटा का धेरै कन्ज्युमरहरू)
 
 ---
 
-### ढाँचा 5: सहमति-आधारित समन्वय (Voting/Quorum)
+### ढाँचा 5: कन्सेन्सस-आधारित समन्वय (Voting/Quorum)
 
-**कहिले प्रयोग गर्ने**: अगाडि बढ्नु अघि धेरै एजेन्टहरूबाट सहमति आवश्यक हुन्छ।
+**कहिले प्रयोग गर्ने**: अगाडि बढ्नु अघि धेरै एजेन्टहरूको सहमति आवश्यक पर्दछ।
 
 ```mermaid
 graph TB
     Input[इनपुट कार्य]
-    Agent1[एजेन्ट 1: GPT-4]
+    Agent1[एजेन्ट 1: gpt-4.1]
     Agent2[एजेन्ट 2: Claude]
     Agent3[एजेन्ट 3: Gemini]
-    Voter[सहमति मतदाता]
+    Voter[सहमति भोटर]
     Output[सहमत नतिजा]
     
     Input --> Agent1
@@ -248,41 +242,41 @@ graph TB
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
 **फाइदाहरू:**
-- ✅ उच्च सत्यता (धेरै विचारहरू)
-- ✅ दोष सहिष्णु (अल्पसंख्यक असफलताहरू स्वीकार्य)
-- ✅ गुणस्तर सुनिश्चितता निर्मित
+- ✅ उच्च सटीकता (धेरै विचार)
+- ✅ फॉल्ट-टोलरन्ट (माइनोरिटी असफलताहरू स्वीकार्य)
+- ✅ गुणस्तर सुनिश्चितता अन्तर्निर्मित
 
 **सीमाहरू:**
-- ❌ महँगो (धेरै मोडेल कलहरू)
-- ❌ ढिलो (सबै एजेन्टहरूको पर्खाइ)
+- ❌ महँगो (धेरै मोडल कलहरू)
+- ❌ ढिलो (सबै एजेन्टहरूको प्रतिक्षा)
 - ⚠️ द्वन्द्व समाधान आवश्यक
 
-**उदाहरण प्रयोग केसहरू:**
-- सामग्री मोडरेशन (धेरै मोडेलहरूले सामग्री समीक्षा गर्छन्)
+**उदाहरण प्रयोग केशहरू:**
+- सामग्रीModeration (धेरै मोडेलहरूले सामग्री समीक्षा)
 - कोड समीक्षा (धेरै लिन्टर/एनालाइजरहरू)
-- चिकित्सकीय निदान (धेरै AI मोडेलहरू, विशेषज्ञ प्रमाणीकरण)
+- मेडिकल डायग्नोसिस (धेरै AI मोडेलहरू, विशेषज्ञ प्रमाणीकरण)
 
 ---
 
-## आर्किटेक्चर अवलोकन
+## वास्तुकला अवलोकन
 
 ### Azure मा पूर्ण बहु-एजेन्ट प्रणाली
 
 ```mermaid
 graph TB
-    User[प्रयोगकर्ता/API क्लाइन्ट]
+    User[प्रयोगकर्ता/API क्लाइएन्ट]
     APIM[Azure API व्यवस्थापन]
     Orchestrator[ओर्केस्ट्रेटर सेवा<br/>कन्टेनर एप]
-    ServiceBus[Azure सेवा बस<br/>इभेन्ट हब]
+    ServiceBus[Azure सर्भिस बस<br/>इभेन्ट हब]
     
     Agent1[अनुसन्धान एजेन्ट<br/>कन्टेनर एप]
     Agent2[लेखक एजेन्ट<br/>कन्टेनर एप]
     Agent3[विश्लेषक एजेन्ट<br/>कन्टेनर एप]
     Agent4[समीक्षक एजेन्ट<br/>कन्टेनर एप]
     
-    CosmosDB[(Cosmos DB<br/>साझा अवस्था)]
-    Storage[Azure Storage<br/>आर्टिफ्याक्टहरू]
-    AppInsights[Application Insights<br/>निगरानी]
+    CosmosDB[(Cosmos DB<br/>साझा स्थिति)]
+    Storage[Azure भण्डारण<br/>आर्टिफ्याक्टहरू]
+    AppInsights[एप्लिकेशन इनसाइट्स<br/>अनुगमन]
     
     User --> APIM
     APIM --> Orchestrator
@@ -313,58 +307,58 @@ graph TB
     style ServiceBus fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-**मुख्य घटकहरू:**
+**प्रमुख कम्पोनेन्टहरू:**
 
-| घटक | उद्देश्य | Azure Service |
+| Component | Purpose | Azure Service |
 |-----------|---------|---------------|
-| **API Gateway** | प्रवेश बिन्दु, दर सीमाङ्कन, प्रमाणीकरण | API Management |
-| **Orchestrator** | एजेन्ट कार्यप्रवाहहरू समन्वय गर्छ | Container Apps |
-| **Message Queue** | असिन्क्रोनस सञ्चार | Service Bus / Event Hubs |
-| **Agents** | विशेषीकृत AI कार्यकर्ता | Container Apps / Functions |
-| **State Store** | साझा अवस्था, कार्य ट्र्याकिङ | Cosmos DB |
-| **Artifact Storage** | कागजातहरू, नतिजा, लगहरू | Blob Storage |
-| **Monitoring** | वितरित ट्रेसिङ, लगहरू | Application Insights |
+| **API Gateway** | प्रवेश बिन्दु, rate limiting, auth | API Management |
+| **Orchestrator** | एजेन्ट कार्यप्रवाहहरू समन्वय गर्दछ | Container Apps |
+| **Message Queue** | एसिङ्क्रोनस संचार | Service Bus / Event Hubs |
+| **Agents** | विशिष्ट AI वर्करहरू | Container Apps / Functions |
+| **State Store** | साझा राज्य, कार्य ट्र्याकिङ | Cosmos DB |
+| **Artifact Storage** | कागजातहरू, परिणामहरू, लगहरू | Blob Storage |
+| **Monitoring** | वितरण गरिएको ट्रेसिङ, लगहरू | Application Insights |
 
 ---
 
 ## पूर्वआवश्यकताहरू
 
-### आवश्यक उपकरणहरू
+### आवश्यक टुलहरू
 
 ```bash
-# Azure Developer CLI जाँच गर्नुहोस्
+# सत्यापित गर्नुहोस् Azure Developer CLI
 azd version
 # ✅ अपेक्षित: azd संस्करण 1.0.0 वा माथि
 
-# Azure CLI जाँच गर्नुहोस्
+# सत्यापित गर्नुहोस् Azure CLI
 az --version
-# ✅ अपेक्षित: azure-cli संस्करण 2.50.0 वा माथि
+# ✅ अपेक्षित: azure-cli 2.50.0 वा माथि
 
-# Docker जाँच गर्नुहोस् (स्थानीय परीक्षणको लागि)
+# सत्यापित गर्नुहोस् Docker (स्थानीय परीक्षणका लागि)
 docker --version
 # ✅ अपेक्षित: Docker संस्करण 20.10 वा माथि
 ```
 
-### Azure आवश्यकताहरू
+### Azure आवश्यकता
 
 - सक्रिय Azure सदस्यता
 - सिर्जना गर्ने अनुमति:
   - Container Apps
-  - Service Bus namespaces
-  - Cosmos DB accounts
-  - Storage accounts
+  - Service Bus नामस्थानहरू
+  - Cosmos DB खाता
+  - Storage खाताहरू
   - Application Insights
 
-### ज्ञान सम्बन्धी पूर्वआवश्यकताहरू
+### ज्ञान पूर्वआवश्यकताहरू
 
-तपाईंले पूरा गरेका हुनुपर्छ:
-- [Configuration Management](../chapter-03-configuration/configuration.md)
-- [Authentication & Security](../chapter-03-configuration/authsecurity.md)
-- [Microservices Example](../../../../examples/microservices)
+तपाईंले पूरा गरेको हुनुपर्छ:
+- [कन्फिगरेसन व्यवस्थापन](../chapter-03-configuration/configuration.md)
+- [प्रमाणीकरण र सुरक्षा](../chapter-03-configuration/authsecurity.md)
+- [माइक्रोसर्भिस उदाहरण](../../../../examples/microservices)
 
 ---
 
-## कार्यान्वयन मार्गदर्शन
+## कार्यान्वयन गाइड
 
 ### प्रोजेक्ट संरचना
 
@@ -402,7 +396,7 @@ multi-agent-system/
 
 ### कार्यान्वयन: सामग्री सिर्जना पाइपलाइन
 
-हामी अनुक्रमिक पाइपलाइन बनाउछौं: अनुसन्धान → लेखन → सम्पादन → प्रकाशन
+आउनुहोस् एक अनुक्रमिक पाइपलाइन बनाउँ: अनुसन्धान → लेखन → सम्पादन → प्रकाशन
 
 ### 1. AZD कन्फिगरेसन
 
@@ -435,7 +429,7 @@ services:
     host: containerapp
 ```
 
-### 2. पूर्वाधार: समन्वयका लागि Service Bus
+### 2. पूर्वाधार: समन्वयको लागि Service Bus
 
 **फाइल: `infra/core/servicebus.bicep`**
 
@@ -492,7 +486,7 @@ output namespace string = serviceBusNamespace.name
 output connectionString string = listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString
 ```
 
-### 3. साझा अवस्था प्रबन्धक
+### 3. साझा राज्य प्रबन्धक
 
 **फाइल: `src/shared/state_manager.py`**
 
@@ -586,7 +580,7 @@ def create_content():
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # स्टेट स्टोरमा टास्क सिर्जना गर्नुहोस्
+    # स्टेट स्टोरमा कार्य सिर्जना गर्नुहोस्
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -594,13 +588,13 @@ def create_content():
         input_data={'topic': topic}
     )
     
-    # अनुसन्धान एजेन्टमा सन्देश पठाउनुहोस् (पहिलो चरण)
+    # अनुसन्धान एजेन्टलाई सन्देश पठाउनुहोस् (पहिलो चरण)
     sender = servicebus_client.get_queue_sender('research-tasks')
     message = ServiceBusMessage(
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # परिणामहरू कहाँ पठाउने
+            'next_queue': 'writer-tasks'  # नतिजाहरू कहाँ पठाउने
         }),
         content_type='application/json'
     )
@@ -641,7 +635,7 @@ import os
 import time
 from shared.state_manager import StateManager
 
-# क्लाइन्टहरू प्रारम्भ गर्नुहोस्
+# क्लाइंटहरू प्रारम्भ गर्नुहोस्
 state_manager = StateManager()
 servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
@@ -661,9 +655,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # अनुसन्धानका लागि Azure OpenAI लाई कल गर्नुहोस्
+    # अनुसन्धानका लागि Microsoft Foundry मोडेलहरू कल गर्नुहोस्
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -673,7 +667,7 @@ def process_research_task(message_data):
     
     research_results = response.choices[0].message.content
     
-    # अवस्था अद्यावधिक गर्नुहोस्
+    # स्थिति अद्यावधिक गर्नुहोस्
     state_manager.update_task_step(
         task_id=task_id,
         step_name='research',
@@ -750,9 +744,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # लेख लेख्न Azure OpenAI लाई कल गर्नुहोस्
+    # लेख लेख्न Microsoft Foundry मोडेलहरूलाई कल गर्नुहोस्
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -762,7 +756,7 @@ def process_writing_task(message_data):
     
     article_draft = response.choices[0].message.content
     
-    # स्थिति अद्यावधिक गर्नुहोस्
+    # राज्य अद्यावधिक गर्नुहोस्
     state_manager.update_task_step(
         task_id=task_id,
         step_name='writing',
@@ -837,9 +831,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # सम्पादनका लागि Azure OpenAI लाई कल गर्नुहोस्
+    # सम्पादन गर्न Microsoft Foundry मोडेलहरूलाई कल गर्नुहोस्
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -849,7 +843,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # कार्यलाई पूरा भएको रूपमा चिन्ह लगाउनुहोस्
+    # कार्यलाई पूरा भएको रूपमा चिन्हित गर्नुहोस्
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -886,10 +880,19 @@ if __name__ == '__main__':
 ### 8. डिप्लोय र परीक्षण
 
 ```bash
-# प्रारम्भ र परिनियोजन गर्नुहोस्
+# विकल्प A: टेम्पलेट-आधारित तैनाती
 azd init
 azd up
 
+# विकल्प B: एजेन्ट म्यानिफेस्ट मार्फत तैनाती (एक्सटेन्सन आवश्यक छ)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
+azd up
+```
+
+> हेर्नुहोस् [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) सबै `azd ai` फ्ल्यागहरू र अप्सनहरूको लागि।
+
+```bash
 # ओर्केस्ट्रेटरको URL प्राप्त गर्नुहोस्
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
@@ -910,13 +913,13 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
 }
 ```
 
-**कार्यको प्रगति जाँच्नुहोस्:**
+**कार्य प्रगति जाँच गर्नुहोस्:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ अपेक्षित आउटपुट (समाप्त):**
+**✅ अपेक्षित आउटपुट (पूरा भयो):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -948,7 +951,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ### कार्यान्वयन: बहु-स्रोत अनुसन्धान एग्रिगेटर
 
-हामी समानान्तर प्रणाली बनाउछौं जसले एकै समयमा बहु स्रोतहरूबाट जानकारी सङ्कलन गर्छ।
+आउनुहोस् एक समानान्तर प्रणाली बनाउने जसले एकै समयमा धेरै स्रोतहरूबाट जानकारी सङ्कलन गर्छ।
 
 ### समानान्तर ओर्केस्ट्रेटर
 
@@ -987,7 +990,7 @@ def research_parallel():
         }
     )
     
-    # फ्यान-आउट: सबै एजेन्टहरूलाई एकै पटक पठाउनुहोस्
+    # फ्यान-आउट: सबै एजेन्टहरूलाई एकैसाथ पठाउनुहोस्
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1022,7 +1025,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### समेकन तर्क
+### एग्रिगेसन तर्क
 
 **फाइल: `src/agents/aggregator/app.py`**
 
@@ -1038,7 +1041,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
 )
 
-# प्रत्येक कार्यका लागि नतिजाहरू ट्र्याक गर्नुहोस्
+# प्रत्येक कार्यको लागि परिणामहरू ट्र्याक गर्नुहोस्
 task_results = defaultdict(list)
 expected_agents = 4  # वेब, शैक्षिक, समाचार, सामाजिक
 
@@ -1048,7 +1051,7 @@ def process_result(message_data):
     agent_type = message_data['agent_type']
     result = message_data['result']
     
-    # नतिजा भण्डारण गर्नुहोस्
+    # परिणाम भण्डारण गर्नुहोस्
     task_results[task_id].append({
         'agent': agent_type,
         'data': result
@@ -1056,18 +1059,18 @@ def process_result(message_data):
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # जाँच गर्नुहोस् कि सबै एजेन्टहरूले सम्पन्न भएका छन् कि छैनन् (फ्यान-इन)
+    # सबै एजेन्टहरूले पूरा गरे कि छैनन् जाँच गर्नुहोस् (फ्यान-इन)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
-        # नतिजाहरू संयोजन गर्नुहोस्
+        # परिणामहरू मिलाउनुहोस्
         aggregated = {
             'query': message_data['query'],
             'sources': task_results[task_id],
             'summary': generate_summary(task_results[task_id])
         }
         
-        # सम्पन्न भनेर चिन्ह लगाउनुहोस्
+        # पूरा भएको चिन्ह लगाउनुहोस्
         state_manager.complete_task(task_id, aggregated)
         
         # सफाइ गर्नुहोस्
@@ -1104,8 +1107,8 @@ if __name__ == '__main__':
 
 **समानान्तर ढाँचाको फाइदाहरू:**
 - ⚡ **4x छिटो** (एजेन्टहरू एकैसाथ चल्छन्)
-- 🔄 **दोष सहिष्णु** (आंशिक परिणामहरू स्वीकार्य)
-- 📈 **स्केलेबल** (सहजै थप एजेन्टहरू थप्न सकिन्छ)
+- 🔄 **फॉल्ट-टोलरन्ट** (आंशिक परिणामहरू स्वीकार्य)
+- 📈 **स्केलेबल** (आसानीले थप एजेन्टहरू थप्न सकिन्छ)
 
 ---
 
@@ -1113,21 +1116,21 @@ if __name__ == '__main__':
 
 ### अभ्यास 1: टाइमआउट ह्यान्डलिङ थप्नुहोस् ⭐⭐ (मध्यम)
 
-**उद्देश्य**: एग्रिगेटरले ढिला गर्ने एजेन्टहरूका लागि सधैं पर्खेर बस्ने बन्द गर्ने टाइमआउट तर्क कार्यान्वयन गर्नुहोस्।
+**लक्ष्य**: एग्रिगेटरले ढिला एजेन्टहरूको लागि सधैं प्रतिक्षा नगरोस् भन्ने टाइमआउट तर्क लागू गर्नुहोस्।
 
-**कदमहरू**:
+**चरणहरू**:
 
 1. **एग्रिगेटरमा टाइमआउट ट्र्याकिङ थप्नुहोस्:**
 
 ```python
 from datetime import datetime, timedelta
 
-task_timeouts = {}  # task_id -> समाप्ति_समय
+task_timeouts = {}  # task_id -> expiration_time
 
 def process_result(message_data):
     task_id = message_data['task_id']
     
-    # पहिलो परिणाममा समयसीमा सेट गर्नुहोस्
+    # पहिलो नतिजामा टाइमआउट सेट गर्नुहोस्
     if task_id not in task_timeouts:
         task_timeouts[task_id] = datetime.utcnow() + timedelta(seconds=30)
     
@@ -1136,7 +1139,7 @@ def process_result(message_data):
         'data': message_data['result']
     })
     
-    # पूरा भयो वा टाइमआउट भयो कि जाँच गर्नुहोस्
+    # पूरा भएको छ वा टाइमआउट भएको छ कि छैन जाँच गर्नुहोस्
     if len(task_results[task_id]) == expected_agents or \
        datetime.utcnow() > task_timeouts[task_id]:
         
@@ -1161,39 +1164,39 @@ def process_result(message_data):
 ```python
 # एक एजेन्टमा सुस्त प्रशोधन अनुकरण गर्न ढिलाइ थप्नुहोस्
 import time
-time.sleep(35)  # ३०-सेकेन्डको समयसीमा नाघ्छ
+time.sleep(35)  # 30 सेकेन्डको समयसीमा नाघ्छ
 ```
 
-3. **डिप्लोय र प्रमाणीकरण गर्नुहोस्:**
+3. **डिप्लोय र प्रमाणित गर्नुहोस्:**
 
 ```bash
 azd deploy aggregator
 
-# कार्य प्रस्तुत गर्नुहोस्
+# कार्य पेश गर्नुहोस्
 curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
 
-# 30 सेकेन्ड पछि नतिजा जाँच गर्नुहोस्
+# 30 सेकेन्डपछि नतिजा जाँच गर्नुहोस्
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ सफलता मापदण्डहरू:**
-- ✅ यदि एजेन्टहरू अपूर्ण भए तापनि 30 सेकेन्डपछि टास्क पूरा हुन्छ
-- ✅ प्रतिक्रिया आंशिक परिणामहरू देखाउँछ (`"timed_out": true`)
+**✅ सफलताको मापदण्ड:**
+- ✅ एजेन्टहरू अपूर्ण भए पनि 30 सेकेन्डपछि कार्य पूरा हुन्छ
+- ✅ प्रतिक्रियाले आंशिक परिणामहरू सूचित गर्छ (`"timed_out": true`)
 - ✅ उपलब्ध परिणामहरू फिर्ता गरिन्छ (4 मध्ये 3 एजेन्टहरू)
 
 **समय**: 20-25 मिनेट
 
 ---
 
-### अभ्यास 2: पुन:प्रयास तर्क लागू गर्नुहोस् ⭐⭐⭐ (उन्नत)
+### अभ्यास 2: रे-ट्राइ तर्क लागू गर्नुहोस् ⭐⭐⭐ (उन्नत)
 
-**उद्देश्य**: असफल एजेन्ट कार्यहरू स्वचालित रूपमा पुन:प्रयास गरियोस् र त्यसपछि मात्र बन्द गरियोस्।
+**लक्ष्य**: असफल एजेन्ट कार्यहरू स्वतः फेरि प्रयास गर्नुपर्छ भन्ने लागू गर्नुहोस्।
 
-**कदमहरू**:
+**चरणहरू**:
 
-1. **ओर्केस्ट्रेटरमा पुन:प्रयास ट्र्याकिङ थप्नुहोस्:**
+1. **ओर्केस्ट्रेटरमा रे-ट्राइ ट्र्याकिङ थप्नुहोस्:**
 
 ```python
 from dataclasses import dataclass
@@ -1204,7 +1207,7 @@ class RetryConfig:
     max_retries: int = 3
     backoff_seconds: int = 5
 
-retry_counts: Dict[str, int] = {}  # message_id बाट retry_count
+retry_counts: Dict[str, int] = {}  # सन्देश_आईडी -> पुनःप्रयास_गिन्ती
 
 def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
     """Send message with retry metadata"""
@@ -1224,7 +1227,7 @@ def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConf
         sender.send_messages(message)
 ```
 
-2. **एजेन्टहरूमा पुन:प्रयास ह्यान्डलर थप्नुहोस्:**
+2. **एजेन्टहरूमा रे-ट्राइ ह्यान्डलर थप्नुहोस्:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1235,7 +1238,7 @@ def process_with_retry(message, receiver, process_func):
         # सन्देश प्रशोधन गर्नुहोस्
         process_func(message_data)
         
-        # सफलता - पूरा
+        # सफल - पूरा
         receiver.complete_message(message)
         
     except Exception as e:
@@ -1244,18 +1247,18 @@ def process_with_retry(message, receiver, process_func):
         max_retries = message_data.get('max_retries', 3)
         
         if retry_count < max_retries:
-            # पुनः प्रयास: परित्याग गरी गणना बढाएर पुनः कतारमा राख्नुहोस्
+            # पुन: प्रयास: परित्याग गरी बढेको गणनासहित फेरी कतारमा राख्नुहोस्
             print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
             
             message_data['retry_count'] = retry_count + 1
             
-            # उही कतारमा ढिलाइका साथ फिर्ता पठाउनुहोस्
-            time.sleep(5 * (retry_count + 1))  # घातीय ब्याकअफ
+            # उही कतारमा ढिलाइसहित फिर्ता पठाउनुहोस्
+            time.sleep(5 * (retry_count + 1))  # घातीय ढिलाइ
             send_with_retry(queue_name, message_data, RetryConfig())
             
             receiver.complete_message(message)  # मूल हटाउनुहोस्
         else:
-            # अधिकतम पुन: प्रयास सीमा पार भयो - डेड लेटर कतारमा सार्नुहोस्
+            # अधिकतम पुनःप्रयास नाघ्यो - डेड लेटर कतारमा सार्नुहोस्
             print(f"❌ Max retries exceeded for message {message_id}")
             receiver.dead_letter_message(
                 message,
@@ -1264,7 +1267,7 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **डेड लेटर क्यु अनुगमन गर्नुहोस्:**
+3. **डेड लेटर क्व्यू अनुगमन गर्नुहोस्:**
 
 ```python
 def monitor_dead_letters():
@@ -1282,11 +1285,11 @@ def monitor_dead_letters():
             print(f"Description: {message.dead_letter_error_description}")
 ```
 
-**✅ सफलता मापदण्डहरू:**
-- ✅ असफल टास्कहरू स्वचालित रूपमा पुन:प्रयास हुन्छन् (अधिकतम 3 पटक)
-- ✅ पुन:प्रयासबीच घातीय ब्याकअफ (5s, 10s, 15s)
-- ✅ अधिकतम प्रयासपछि मेसेजहरू डेड लेटर क्युमा जान्छन्
-- ✅ डेड लेटर क्यु अनुगमन र रि-प्ले गर्न सकिन्छ
+**✅ सफलताको मापदण्ड:**
+- ✅ असफल कार्यहरू स्वचालित रूपमा पुन: प्रयास गरिन्छ (अधिकतम 3 पटक)
+- ✅ पुन: प्रयासहरूबीच एक्सपोनेन्सियल ब्याकअफ (5s, 10s, 15s)
+- ✅ अधिकतम पुन: प्रयासपछि, मेसेजहरू डेड लेटर क्व्यूमा जान्छन्
+- ✅ डेड लेटर क्व्यू अनुगमन र पुन: प्ले गर्न सकिन्छ
 
 **समय**: 30-40 मिनेट
 
@@ -1294,11 +1297,11 @@ def monitor_dead_letters():
 
 ### अभ्यास 3: सर्किट ब्रेकर लागू गर्नुहोस् ⭐⭐⭐ (उन्नत)
 
-**उद्देश्य**: असफलता फैलनबाट रोक्नका लागि असफल हुँदै गरेको एजेन्टहरूमा अनुरोध रोक्ने।
+**लक्ष्य**: असफलता फैलिन नदिन असफल एजेन्टहरूमा अनुरोध रोक्ने।
 
-**कदमहरू**:
+**चरणहरू**:
 
-1. **सर्किट ब्रेकर क्लास बनाउनुहोस्:**
+1. **सर्किट ब्रेकर क्लास सिर्जना गर्नुहोस्:**
 
 ```python
 from enum import Enum
@@ -1306,8 +1309,8 @@ from datetime import datetime, timedelta
 
 class CircuitState(Enum):
     CLOSED = "closed"      # सामान्य सञ्चालन
-    OPEN = "open"          # विफल हुँदैछ, अनुरोधहरू अस्वीकृत गरिन्छ
-    HALF_OPEN = "half_open"  # पुनः सुचारु भएको छ कि परीक्षण गर्दै
+    OPEN = "open"          # विफल हुँदैछ, अनुरोधहरू अस्वीकार गर्नुहोस्
+    HALF_OPEN = "half_open"  # सुधारियो कि छैन जाँच गर्दै
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1320,7 +1323,7 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # समयसीमा समाप्त भएको छ कि जाँच गर्नुहोस्
+            # समयसीमा समाप्त भयो कि छैन जाँच गर्नुहोस्
             if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
@@ -1352,7 +1355,7 @@ class CircuitBreaker:
 2. **एजेन्ट कलहरूमा लागू गर्नुहोस्:**
 
 ```python
-# ओर्केस्ट्रेटरमा
+# समन्वयकमा
 agent_circuits = {
     'web': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
     'academic': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
@@ -1374,7 +1377,7 @@ def send_to_agent(agent_type, message_data):
 3. **सर्किट ब्रेकर परीक्षण गर्नुहोस्:**
 
 ```bash
-# पुनरावर्ती विफलताहरू अनुकरण गर्नुहोस् (एक एजेन्ट रोक्नुहोस्)
+# बारम्बार विफलता अनुकरण गर्नुहोस् (एक एजेन्ट रोक्नुहोस्)
 az containerapp stop --name web-research-agent --resource-group rg-agents
 
 # धेरै अनुरोधहरू पठाउनुहोस्
@@ -1385,24 +1388,24 @@ for i in {1..10}; do
   sleep 2
 done
 
-# लगहरू जाँच गर्नुहोस् - 5 असफलतापछि सर्किट खुलिरहेको देखिनु पर्छ
-# Container App का लगहरू हेर्न Azure CLI प्रयोग गर्नुहोस्:
+# लॉगहरू जाँच गर्नुहोस् - 5 विफलतापछि सर्किट खुल्ला भएको देखिनु पर्छ
+# कन्टेनर एपका लगहरूको लागि Azure CLI प्रयोग गर्नुहोस्:
 az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
 ```
 
-**✅ सफलता मापदण्डहरू:**
-- ✅ 5 असफलतापछि सर्किट खुलेर अनुरोधहरू अस्वीकार गर्छ
-- ✅ 60 सेकेन्डपछि सर्किट हाफ-ओपन अवस्थामा जान्छ (पुनरुत्थानको परीक्षण)
-- ✅ अन्य एजेन्टहरू सामान्य रूपमा काम गर्न जारी राख्छन्
-- ✅ एजेन्ट पुनःसञ्चालन हुँदा सर्किट स्वचालित रूपमा बन्द हुन्छ
+**✅ सफलताको मापदण्ड:**
+- ✅ 5 असफलतापछि सर्किट खुल्छ (अनुरोधहरू अस्वीकार हुन्छन्)
+- ✅ 60 सेकेन्डपछि सर्किट हाफ-ओपन हुन्छ (रिकवरी परीक्षण)
+- ✅ अन्य एजेन्टहरू सामान्य रूपमा काम जारी राख्छन्
+- ✅ एजेन्ट फेरी रिकभर गर्दा सर्किट स्वचालित रूपमा बन्द हुन्छ
 
 **समय**: 40-50 मिनेट
 
 ---
 
-## अनुगमन र डीबगिङ
+## अनुगमन र डिबगिङ
 
-### Application Insights सँग वितरित ट्रेसिङ
+### Application Insights सँग वितरण गरिएको ट्रेसिङ
 
 **फाइल: `src/shared/tracing.py`**
 
@@ -1491,9 +1494,9 @@ exceptions
 
 ## लागत विश्लेषण
 
-### बहु-एजेन्ट प्रणाली लागतहरू (मासिक अनुमानहरू)
+### बहु-एजेन्ट प्रणाली लागत (मासिक अनुमान)
 
-| घटक | कन्फिगरेसन | लागत |
+| Component | Configuration | Cost |
 |-----------|--------------|------|
 | **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
 | **4 Agents** | 4 Container Apps (0.5 vCPU, 1GB each) | $60-120 |
@@ -1501,12 +1504,12 @@ exceptions
 | **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
 | **Blob Storage** | 10GB storage, 100K operations | $5-10 |
 | **Application Insights** | 5GB ingestion | $10-15 |
-| **Azure OpenAI** | GPT-4, 10M tokens | $100-300 |
-| **कुल** | | **$240-565/month** |
+| **Microsoft Foundry Models** | gpt-4.1, 10M tokens | $100-300 |
+| **Total** | | **$240-565/month** |
 
 ### लागत अनुकूलन रणनीतिहरू
 
-1. **जहाँ सम्भव हो सर्भरलेस प्रयोग गर्नुहोस्:**
+1. **जहाँ सम्भव छ serverless प्रयोग गर्नुहोस्:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1515,7 +1518,7 @@ exceptions
    }
    ```
 
-2. **एजेन्टहरू आइडल हुँदा शून्यमा स्केल गर्नुहोस्:**
+2. **एजेन्टहरू idle हुँदा zero मा स्केल गर्नुहोस्:**
    ```bicep
    scale: {
      minReplicas: 0  // Scale to zero when no messages
@@ -1529,7 +1532,7 @@ exceptions
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **प्राय: प्रयोग हुने परिणामहरू क्यास गर्नुहोस्:**
+4. **बारम्बार प्रयोग हुने परिणामहरू क्यास गर्नुहोस्:**
    ```python
    # Azure Cache for Redis प्रयोग गर्नुहोस्
    if cache.exists(query_hash):
@@ -1538,42 +1541,42 @@ exceptions
 
 ---
 
-## सर्वोत्तम अभ्यासहरू
+## उत्तम अभ्यासहरू
 
 ### ✅ गर्नुहोस्:
 
-1. **आइडेम्पोटेन्ट अपरेसनहरू प्रयोग गर्नुहोस्**
+1. **Idempotent अपरेसनहरू प्रयोग गर्नुहोस्**
    ```python
-   # एजेन्टले एउटै सन्देशलाई धेरै पटक सुरक्षित रूपमा प्रशोधन गर्न सक्छ
+   # एजेन्टले उही सन्देशलाई धेरै पटक सुरक्षित रूपमा प्रक्रिया गर्न सक्छ
    def process_task(task_id):
        if state_manager.task_exists(task_id):
            print(f"Task {task_id} already processed, skipping")
            return
-       # कार्य प्रशोधन...
+       # कार्य प्रक्रिया गरिँदैछ...
    ```
 
-2. **व्यापक लगिङ कार्यान्वयन गर्नुहोस्**
+2. **व्यापक लगिङ लागू गर्नुहोस्**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **करेलेसन IDs प्रयोग गर्नुहोस्**
+3. **Correlation IDs प्रयोग गर्नुहोस्**
    ```python
-   # task_id लाई सम्पूर्ण कार्यप्रवाहभरि पठाउनुहोस्
+   # सम्पूर्ण कार्यप्रवाहभरि task_id लैजानुहोस्
    message_data = {
-       'task_id': task_id,  # सम्बन्ध आईडी
+       'task_id': task_id,  # सहसम्बन्ध ID
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
 
-4. **सन्देश TTL (time-to-live) सेट गर्नुहोस्**
+4. **मेसेज TTL (time-to-live) सेट गर्नुहोस्**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **डेड लेटर क्युहरू अनुगमन गर्नुहोस्**
+5. **डेड लेटर क्व्यूहरूको अनुगमन गर्नुहोस्**
    ```python
    # असफल सन्देशहरूको नियमित अनुगमन
    monitor_dead_letters()
@@ -1581,58 +1584,59 @@ exceptions
 
 ### ❌ नगर्नुहोस्:
 
-1. **परिपत्र निर्भरता सिर्जना नगर्नुहोस्**
+1. **रिङ्कुलर निर्भरताहरू सिर्जना नगर्नुहोस्**
    ```python
-   # ❌ खराब: Agent A → Agent B → Agent A (अनन्त लूप)
-   # ✅ राम्रो: एक स्पष्ट दिशात्मक चक्रीय-रहित ग्राफ (DAG) परिभाषित गर्नुहोस्
+   # ❌ खराब: एजेन्ट A → एजेन्ट B → एजेन्ट A (अनन्त लूप)
+   # ✅ राम्रो: स्पष्ट निर्देशित चक्ररहित ग्राफ (DAG) परिभाषित गर्नुहोस्
    ```
 
 2. **एजेन्ट थ्रेडहरू ब्लक नगर्नुहोस्**
    ```python
-   # ❌ खराब: समक्रमिक प्रतीक्षा
+   # ❌ खराब: समकालिक प्रतीक्षा
    while not task_complete:
        time.sleep(1)
    
-   # ✅ राम्रो: सन्देश पङ्क्तिको कलब्याकहरू प्रयोग गर्नुहोस्
+   # ✅ राम्रो: सन्देश कतारका कलब्याकहरू प्रयोग गर्नुहोस्
    ```
 
 3. **आंशिक असफलताहरूलाई बेवास्ता नगर्नुहोस्**
    ```python
-   # ❌ खराब: एउटै एजेन्ट असफल भएमा पूरै वर्कफ्लो असफल पार्ने
-   # ✅ राम्रो: त्रुटि सूचकहरूसहित आंशिक परिणामहरू फर्काउने
+   # ❌ खराब: यदि एउटा एजेन्ट असफल भयो भने सम्पूर्ण कार्यप्रवाह असफल गराउनुहोस्
+   # ✅ राम्रो: त्रुटि संकेतकहरूसँग आंशिक परिणाम फर्काउनुहोस्
    ```
 
-4. **असीमित पुन:प्रयासहरू प्रयोग नगर्नुहोस्**
+4. **अनन्त पुन:प्रयासहरू प्रयोग नगर्नुहोस्**
    ```python
-   # ❌ खराब: अनन्तसम्म पुनः प्रयास
-   # ✅ राम्रो: max_retries = 3, त्यसपछि डेड-लेटरमा पठाउनुहोस्
+   # ❌ खराब: अनन्तसम्म पुनःप्रयास गर्नु
+   # ✅ राम्रो: max_retries = 3, त्यसपछि डेड लेटर
    ```
 
 ---
+
 ## समस्या निवारण मार्गदर्शिका
 
-### समस्या: सन्देशहरू क्युमा अड्किएका छन्
+### समस्या: सन्देशहरू कतारमा अड्किएका छन्
 
 **लक्षणहरू:**
-- सन्देशहरू क्युमा जम्मा हुन्छन्
-- एजेन्टहरूले प्रक्रिया गरिरहेका छैनन्
-- टास्क स्थिति "pending" मा अड्किएको छ
+- सन्देशहरू कतारमा जम्मा हुन्छन्
+- एजेन्टहरूले प्रशोधन गरिरहेका छैनन्
+- टास्कको स्थिति "pending" मा अड्किएको
 
 **निदान:**
 ```bash
-# क्यूको गहिराइ जाँच गर्नुहोस्
+# कतारको गहिराइ जाँच गर्नुहोस्
 az servicebus queue show \
   --namespace-name mybus \
   --name research-tasks \
   --query "countDetails"
 
-# Azure CLI प्रयोग गरेर एजेन्टका लगहरू जाँच गर्नुहोस्
+# Azure CLI प्रयोग गरेर एजेन्ट लगहरू जाँच गर्नुहोस्
 az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
 **समाधानहरू:**
 
-1. **एजेन्ट रेप्लिकाहरू बढाउनुहोस्:**
+1. **एजेन्ट प्रतिलिपिहरू बढाउनुहोस्:**
    ```bash
    az containerapp update \
      --name research-agent \
@@ -1640,7 +1644,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
      --max-replicas 10
    ```
 
-2. **डेड लेटर क्यु जाँच गर्नुहोस्:**
+2. **डेड लेटर कतार जाँच गर्नुहोस्:**
    ```bash
    az servicebus queue show \
      --namespace-name mybus \
@@ -1650,16 +1654,16 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### समस्या: टास्क समयआउट/कहिल्यै पूरा हुँदैन
+### समस्या: टास्क टाइमआउट / कहिल्यै पूरा हुँदैन
 
 **लक्षणहरू:**
-- टास्क स्थिति "in_progress" मा रहन्छ
-- केही एजेन्टहरूले पूरा गर्छन्, अरूले गर्दैनन्
-- त्रुटि सन्देशहरू छैनन्
+- टास्कको स्थिति "in_progress" मा रहन्छ
+- केही एजेन्टहरूले काम पूरा गर्छन्, अन्यहरूले गर्दैनन्
+- कुनै त्रुटि सन्देशहरू छैनन्
 
 **निदान:**
 ```bash
-# टास्कको अवस्था जाँच्नुहोस्
+# टास्कको स्थिति जाँच गर्नुहोस्
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 # Application Insights जाँच गर्नुहोस्
@@ -1670,16 +1674,16 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 1. **एग्रिगेटरमा टाइमआउट लागू गर्नुहोस् (व्यायाम 1)**
 
-2. **Azure Monitor प्रयोग गरेर एजेन्ट विफलताहरू जाँच गर्नुहोस्:**
+2. **Azure Monitor प्रयोग गरी एजेन्ट त्रुटिहरू जाँच गर्नुहोस्:**
    ```bash
    # azd monitor मार्फत लगहरू हेर्नुहोस्
    azd monitor --logs
    
-   # वा Azure CLI प्रयोग गरेर विशिष्ट container app का लगहरू जाँच्नुहोस्
+   # वा विशिष्ट कन्टेनर एपका लगहरू जाँच्न Azure CLI प्रयोग गर्नुहोस्
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **सबै एजेन्टहरू चलिरहेका छन् कि छैनन् जाँच गर्नुहोस्:**
+3. **सबै एजेन्टहरू चलिरहेको छन् कि छैनन् जाँच गर्नुहोस्:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1696,42 +1700,42 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
 - [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
 
-### यस पाठ्यक्रमका लागि अर्को कदमहरू
+### यस कोर्सका अर्को चरणहरू
 - ← अघिल्लो: [क्षमता योजना](capacity-planning.md)
 - → अर्को: [SKU चयन](sku-selection.md)
-- 🏠 [पाठ्यक्रम गृह](../../README.md)
+- 🏠 [कोर्स गृह](../../README.md)
 
 ### सम्बन्धित उदाहरणहरू
-- [माइक्रोसर्भिस उदाहरण](../../../../examples/microservices) - सेवा सञ्चार ढाँचाहरू
-- [Azure OpenAI उदाहरण](../../../../examples/azure-openai-chat) - एआई एकीकरण
+- [Microservices Example](../../../../examples/microservices) - सेवा सञ्चार ढाँचा
+- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - AI एकीकरण
 
 ---
 
 ## सारांश
 
 **तपाईंले सिक्नुभयो:**
-- ✅ पाँच समन्वय ढाँचाहरू (क्रमिक, समानान्तर, पदानुक्रमिक, घटना-चालित, सहमति)
-- ✅ Azure मा बहु-एजेन्ट आर्किटेक्चर (Service Bus, Cosmos DB, Container Apps)
+- ✅ पाँच समन्वय ढाँचाहरू (अनुक्रमिक, समांतर, पदानुक्रमिक, घटना-आधारित, सहमति)
+- ✅ Azure मा मल्टि-एजेन्ट आर्किटेक्चर (Service Bus, Cosmos DB, Container Apps)
 - ✅ वितरित एजेन्टहरूमा राज्य व्यवस्थापन
-- ✅ टाइमआउट ह्यान्डलिङ, पुन:प्रयासहरू, र सर्किट ब्रेकरहरू
-- ✅ वितरित प्रणालीहरूको अनुगमन र डिबगिङ
+- ✅ टाइमआउट ह्यान्डलिङ, पुनःप्रयासहरू, र सर्किट ब्रेकरहरू
+- ✅ वितरित प्रणालीहरूको निगरानी र डिबगिङ
 - ✅ लागत अनुकूलन रणनीतिहरू
 
-**महत्त्वपूर्ण निष्कर्षहरू:**
-1. **सही ढाँचा चयन गर्नुहोस्** - क्रमबद्ध वर्कफ्लोहरूको लागि क्रमिक, गतिका लागि समानान्तर, लचकताका लागि घटना-चालित
+**मुख्य निष्कर्षहरू:**
+1. **सही ढाँचा छान्नुहोस्** - आदेशबद्ध वर्कफ्लोहरूको लागि अनुक्रमिक, गति का लागि समांतर, लचकताको लागि घटना-आधारित
 2. **राज्यलाई सावधानीपूर्वक व्यवस्थापन गर्नुहोस्** - साझा राज्यका लागि Cosmos DB वा समान प्रयोग गर्नुहोस्
-3. **त्रुटिहरूलाई शालीनतापूर्वक ह्यान्डल गर्नुहोस्** - टाइमआउट, पुन:प्रयासहरू, सर्किट ब्रेकरहरू, डेड लेटर क्युहरू
+3. **विफलताहरूलाई सुसज्जित तरिकाले सम्हाल्नुहोस्** - टाइमआउट, पुनःप्रयासहरू, सर्किट ब्रेकरहरू, डेड लेटर कतारहरू
 4. **सबै कुरा अनुगमन गर्नुहोस्** - डिबगिङका लागि वितरित ट्रेसिङ आवश्यक छ
-5. **लागत अनुकूलन गर्नुहोस्** - स्केल टु जीरो, सर्भरलेस प्रयोग गर्नुहोस्, क्याचिङ लागू गर्नुहोस्
+5. **लागत अनुकूलन गर्नुहोस्** - शून्यसम्म स्केल गर्नुहोस्, सर्वरलेस प्रयोग गर्नुहोस्, क्याचिङ लागू गर्नुहोस्
 
-**अर्को कदमहरू:**
+**अर्को चरणहरू:**
 1. व्यावहारिक अभ्यासहरू पूरा गर्नुहोस्
-2. आफ्नो प्रयोगको लागि बहु-एजेन्ट सिस्टम बनाउनुहोस्
+2. तपाईंको प्रयोग केसका लागि मल्टि-एजेन्ट प्रणाली निर्माण गर्नुहोस्
 3. प्रदर्शन र लागत अनुकूलन गर्न [SKU चयन](sku-selection.md) अध्ययन गर्नुहोस्
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 अस्वीकरण:
-यो दस्तावेज AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरी अनुवाद गरिएको हो। हामी यथासम्भव शुद्धता सुनिश्चित गर्न प्रयास गर्छौं, तर कृपया ध्यान दिनुहोस् कि स्वचालित अनुवादमा त्रुटि वा अशुद्धता हुन सक्छ। मूल दस्तावेजलाई यसको मूल भाषामा नै आधिकारिक स्रोत मानिनु पर्छ। महत्त्वपूर्ण जानकारीका लागि पेशेवर मानव अनुवादको सिफारिश गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न हुने कुनै पनि गलत बुझाइ वा गलत व्याख्याका लागि हामी जिम्मेवार छैनौं।
+यो दस्तावेज AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरी अनुवाद गरिएको हो। हामी शुद्धताको लागि प्रयास गर्छौं, तर कृपया ध्यान दिनुहोस् कि स्वचालित अनुवादमा त्रुटि वा अशुद्धता हुनसक्छ। मूल दस्तावेजलाई त्यसको मूल भाषामा अधिकारिक स्रोतको रूपमा लिनुहोस्। महत्त्वपूर्ण जानकारीका लागि व्यावसायिक मानवीय अनुवाद सिफारिस गरिन्छ। हामी यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलत बुझाइ वा गलत व्याख्याको लागि उत्तरदायी छैनौं।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

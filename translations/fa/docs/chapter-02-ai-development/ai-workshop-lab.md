@@ -1,52 +1,52 @@
-# AI Workshop Lab: Making Your AI Solutions AZD-Deployable
+# کارگاه آزمایشگاهی هوش مصنوعی: قابل استقرار کردن راه‌حل‌های هوش مصنوعی شما با AZD
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: فصل 2 - توسعه‌ی مبتنی بر هوش مصنوعی
-- **⬅️ Previous**: [AI Model Deployment](ai-model-deployment.md)
-- **➡️ Next**: [Production AI Best Practices](production-ai-practices.md)
-- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+**ناوبری فصل:**
+- **📚 صفحه دوره**: [AZD For Beginners](../../README.md)
+- **📖 فصل فعلی**: فصل 2 - توسعه اول هوش مصنوعی
+- **⬅️ قبلی**: [AI Model Deployment](ai-model-deployment.md)
+- **➡️ بعدی**: [Production AI Best Practices](production-ai-practices.md)
+- **🚀 فصل بعدی**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
-## Workshop Overview
+## مرور کارگاه
 
-این لابراتوار عملی توسعه‌دهندگان را در طی تبدیل یک قالب موجود هوش مصنوعی و استقرار آن با استفاده از Azure Developer CLI (AZD) راهنمایی می‌کند. شما الگوهای ضروری برای استقرارهای تولیدی هوش مصنوعی با استفاده از خدمات Microsoft Foundry را خواهید آموخت.
+این آزمایشگاه عملی توسعه‌دهندگان را در روند گرفتن یک قالب هوش مصنوعی موجود و استقرار آن با استفاده از Azure Developer CLI (AZD) راهنمایی می‌کند. شما الگوهای ضروری برای استقرارهای تولیدی هوش مصنوعی با استفاده از خدمات Microsoft Foundry را یاد خواهید گرفت.
 
-**Duration:** 2-3 hours  
-**Level:** Intermediate  
-**Prerequisites:** Basic Azure knowledge, familiarity with AI/ML concepts
+**مدت:** 2-3 ساعت  
+**سطح:** متوسط  
+**پیش‌نیازها:** دانش پایه Azure، آشنایی با مفاهیم AI/ML
 
-## 🎓 Learning Objectives
+## 🎓 اهداف یادگیری
 
 تا پایان این کارگاه، شما قادر خواهید بود:
-- ✅ تبدیل یک برنامهٔ هوش مصنوعی موجود به استفاده از قالب‌های AZD
+- ✅ تبدیل یک برنامه هوش مصنوعی موجود برای استفاده از قالب‌های AZD
 - ✅ پیکربندی خدمات Microsoft Foundry با AZD
-- ✅ پیاده‌سازی مدیریت امن اعتبارنامه‌ها برای سرویس‌های هوش مصنوعی
-- ✅ استقرار برنامه‌های هوش مصنوعی آمادهٔ تولید با مانیتورینگ
-- ✅ رفع اشکال مشکلات رایج در استقرار هوش مصنوعی
+- ✅ پیاده‌سازی مدیریت امن اعتبارنامه‌ها برای خدمات هوش مصنوعی
+- ✅ استقرار برنامه‌های هوش مصنوعی آماده تولید با مانیتورینگ
+- ✅ عیب‌یابی مشکلات رایج استقرار هوش مصنوعی
 
-## Prerequisites
+## پیش‌نیازها
 
-### Required Tools
+### ابزارهای مورد نیاز
 - [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) نصب‌شده
 - [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) نصب‌شده
 - [Git](https://git-scm.com/) نصب‌شده
-- ویرایشگر کد (پیشنهاد شده: VS Code)
+- ویرایشگر کد (توصیه شده: VS Code)
 
-### Azure Resources
+### منابع Azure
 - اشتراک Azure با دسترسی contributor
-- دسترسی به خدمات Azure OpenAI (یا امکان درخواست دسترسی)
-- مجوز ایجاد resource group
+- دسترسی به سرویس‌های Microsoft Foundry Models (یا امکان درخواست دسترسی)
+- مجوزهای ایجاد resource group
 
-### Knowledge Prerequisites
-- درک پایه‌ای از سرویس‌های Azure
-- آشنایی با خط فرمان
-- مفاهیم پایه‌ای AI/ML (APIها، مدل‌ها، پرامپت‌ها)
+### پیش‌نیازهای دانشی
+- درک پایه‌ای از خدمات Azure
+- آشنایی با رابط‌های خط فرمان
+- مفاهیم پایه AI/ML (APIها، مدل‌ها، پرامپت‌ها)
 
-## Lab Setup
+## راه‌اندازی آزمایشگاه
 
 ### Step 1: Environment Preparation
 
-1. **Verify tool installations:**
+1. **تأیید نصب ابزارها:**
 ```bash
 # بررسی نصب AZD
 azd version
@@ -59,7 +59,7 @@ az login
 azd auth login
 ```
 
-2. **Clone the workshop repository:**
+2. **کلون کردن مخزن کارگاه:**
 ```bash
 git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
@@ -69,7 +69,7 @@ cd azure-search-openai-demo
 
 ### Anatomy of an AI AZD Template
 
-به فایل‌های کلیدی در یک قالب AZD آماده برای هوش مصنوعی نگاهی بیندازید:
+کاوش در فایل‌های کلیدی در یک قالب AZD آماده برای هوش مصنوعی:
 
 ```
 azure-search-openai-demo/
@@ -78,7 +78,7 @@ azure-search-openai-demo/
 │   ├── main.bicep          # Main infrastructure template
 │   ├── main.parameters.json # Environment parameters
 │   └── modules/            # Reusable Bicep modules
-│       ├── openai.bicep    # Azure OpenAI configuration
+│       ├── openai.bicep    # Microsoft Foundry Models configuration
 │       ├── search.bicep    # Cognitive Search setup
 │       └── webapp.bicep    # Web app configuration
 ├── app/                    # Application code
@@ -86,48 +86,48 @@ azure-search-openai-demo/
 └── .azure/               # AZD environment files
 ```
 
-### **Lab Exercise 1.1: Explore the Configuration**
+### **تمرین آزمایشگاه 1.1: بررسی پیکربندی**
 
-1. **Examine the azure.yaml file:**
+1. **فایل azure.yaml را بررسی کنید:**
 ```bash
 cat azure.yaml
 ```
 
-**What to look for:**
-- تعاریف سرویس برای اجزای هوش مصنوعی
+**چه چیزهایی را جستجو کنید:**
+- تعریف سرویس‌ها برای مؤلفه‌های هوش مصنوعی
 - نگاشت متغیرهای محیطی
 - پیکربندی‌های میزبان
 
-2. **Review the main.bicep infrastructure:**
+2. **main.bicep زیرساخت را مرور کنید:**
 ```bash
 cat infra/main.bicep
 ```
 
-**Key AI patterns to identify:**
-- تهیه‌ی سرویس Azure OpenAI
-- یکپارچگی با Cognitive Search
+**الگوهای کلیدی هوش مصنوعی برای شناسایی:**
+- فراهم‌سازی سرویس Microsoft Foundry Models
+- یکپارچه‌سازی Cognitive Search
 - مدیریت امن کلیدها
 - پیکربندی‌های امنیت شبکه
 
-### **Discussion Point:** Why These Patterns Matter for AI
+### **نکته بحث:** چرا این الگوها برای هوش مصنوعی اهمیت دارند
 
-- **Service Dependencies**: برنامه‌های هوش مصنوعی اغلب به چندین سرویس هماهنگ نیاز دارند
-- **Security**: کلیدهای API و نقاط انتهایی نیاز به مدیریت امن دارند
-- **Scalability**: بارهای کاری هوش مصنوعی نیازهای مقیاس‌پذیری منحصربه‌فردی دارند
-- **Cost Management**: خدمات هوش مصنوعی می‌توانند هزینه‌بر باشند اگر به‌درستی پیکربندی نشوند
+- **وابستگی‌های سرویس**: برنامه‌های هوش مصنوعی اغلب نیاز به چندین سرویس هماهنگ‌شده دارند
+- **امنیت**: کلیدهای API و نقاط پایانی نیاز به مدیریت امن دارند
+- **مقیاس‌پذیری**: بارهای کاری هوش مصنوعی نیازهای مقیاس‌پذیری خاصی دارند
+- **مدیریت هزینه**: سرویس‌های هوش مصنوعی می‌توانند گران باشند اگر به‌درستی پیکربندی نشوند
 
 ## Module 2: Deploy Your First AI Application
 
 ### Step 2.1: Initialize the Environment
 
-1. **Create a new AZD environment:**
+1. **یک محیط AZD جدید ایجاد کنید:**
 ```bash
 azd env new myai-workshop
 ```
 
-2. **Set required parameters:**
+2. **پارامترهای مورد نیاز را تنظیم کنید:**
 ```bash
-# منطقهٔ دلخواه Azure خود را تنظیم کنید
+# ناحیهٔ Azure موردنظر خود را تنظیم کنید
 azd env set AZURE_LOCATION eastus
 
 # اختیاری: مدل مشخص OpenAI را تنظیم کنید
@@ -136,54 +136,54 @@ azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 
 ### Step 2.2: Deploy the Infrastructure and Application
 
-1. **Deploy with AZD:**
+1. **استقرار با AZD:**
 ```bash
 azd up
 ```
 
-**What happens during `azd up`:**
-- ✅ تهیه‌ی سرویس Azure OpenAI
+**چه اتفاقی در طول `azd up` می‌افتد:**
+- ✅ فراهم‌سازی سرویس Microsoft Foundry Models
 - ✅ ایجاد سرویس Cognitive Search
-- ✅ راه‌اندازی App Service برای برنامهٔ وب
+- ✅ راه‌اندازی App Service برای برنامه وب
 - ✅ پیکربندی شبکه و امنیت
 - ✅ استقرار کد برنامه
 - ✅ راه‌اندازی مانیتورینگ و لاگ‌گیری
 
-2. **Monitor the deployment progress** و منابعی که ایجاد می‌شوند را مشاهده کنید.
+2. **پیشرفت استقرار را نظارت کنید** و منابع ایجادشونده را یادداشت کنید.
 
 ### Step 2.3: Verify Your Deployment
 
-1. **Check the deployed resources:**
+1. **منابع مستقر شده را بررسی کنید:**
 ```bash
 azd show
 ```
 
-2. **Open the deployed application:**
+2. **برنامه مستقر شده را باز کنید:**
 ```bash
 azd show --output json | grep "webAppUrl"
 ```
 
-3. **Test the AI functionality:**
-   - به برنامهٔ وب مراجعه کنید
-   - پرس و جوهای نمونه را امتحان کنید
-   - بررسی کنید که پاسخ‌های هوش مصنوعی کار می‌کنند
+3. **قابلیت هوش مصنوعی را آزمایش کنید:**
+   - به برنامه وب بروید
+   - پرس‌وجوهای نمونه را امتحان کنید
+   - تأیید کنید پاسخ‌های هوش مصنوعی کار می‌کنند
 
-### **Lab Exercise 2.1: Troubleshooting Practice**
+### **تمرین آزمایشگاه 2.1: تمرین عیب‌یابی**
 
-**Scenario**: استقرار شما موفق بوده اما هوش مصنوعی پاسخ نمی‌دهد.
+**سناریو**: استقرار شما موفق بوده اما هوش مصنوعی پاسخ نمی‌دهد.
 
-**Common issues to check:**
-1. **OpenAI API keys**: بررسی کنید که به‌درستی تنظیم شده‌اند
-2. **Model availability**: بررسی کنید که منطقهٔ شما از مدل پشتیبانی می‌کند
-3. **Network connectivity**: اطمینان حاصل کنید که سرویس‌ها می‌توانند با هم ارتباط برقرار کنند
-4. **RBAC permissions**: بررسی کنید که برنامه بتواند به OpenAI دسترسی داشته باشد
+**مشکلات رایج برای بررسی:**
+1. **کلیدهای API OpenAI**: تأیید کنید که به‌درستی تنظیم شده‌اند
+2. **موجودیت مدل**: بررسی کنید آیا منطقه شما از مدل پشتیبانی می‌کند
+3. **اتصال شبکه**: اطمینان حاصل کنید سرویس‌ها می‌توانند ارتباط برقرار کنند
+4. **مجوزهای RBAC**: تأیید کنید برنامه می‌تواند به OpenAI دسترسی پیدا کند
 
-**Debugging commands:**
+**دستورات اشکال‌زدایی:**
 ```bash
-# متغیرهای محیطی را بررسی کنید
+# بررسی متغیرهای محیطی
 azd env get-values
 
-# لاگ‌های استقرار را مشاهده کنید
+# مشاهده گزارش‌های استقرار
 az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 
 # وضعیت استقرار OpenAI را بررسی کنید
@@ -194,18 +194,18 @@ az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-
 
 ### Step 3.1: Modify the AI Configuration
 
-1. **Update the OpenAI model:**
+1. **مدل OpenAI را به‌روزرسانی کنید:**
 ```bash
-# به یک مدل دیگر تغییر دهید (اگر در منطقهٔ شما در دسترس است)
-azd env set AZURE_OPENAI_MODEL gpt-4
+# به مدل دیگری تغییر دهید (اگر در منطقه شما در دسترس است)
+azd env set AZURE_OPENAI_MODEL gpt-4.1
 
 # با پیکربندی جدید مجدداً مستقر کنید
 azd deploy
 ```
 
-2. **Add additional AI services:**
+2. **اضافه کردن سرویس‌های اضافی هوش مصنوعی:**
 
-Edit `infra/main.bicep` to add Document Intelligence:
+فایل `infra/main.bicep` را برای افزودن Document Intelligence ویرایش کنید:
 
 ```bicep
 // Add to main.bicep
@@ -224,62 +224,62 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Step 3.2: Environment-Specific Configurations
 
-**Best Practice**: پیکربندی‌های متفاوت برای توسعه در برابر تولید.
+**بهترین رویه**: پیکربندی‌های متفاوت برای توسعه در مقابل تولید.
 
-1. **Create a production environment:**
+1. **یک محیط production ایجاد کنید:**
 ```bash
 azd env new myai-production
 ```
 
-2. **Set production-specific parameters:**
+2. **پارامترهای مخصوص production را تنظیم کنید:**
 ```bash
 # در محیط تولید معمولاً از SKUهای بالاتری استفاده می‌شود
 azd env set AZURE_OPENAI_SKU S0
 azd env set AZURE_SEARCH_SKU standard
 
-# قابلیت‌های امنیتی اضافی را فعال کنید
+# ویژگی‌های امنیتی اضافی را فعال کنید
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
-### **Lab Exercise 3.1: Cost Optimization**
+### **تمرین آزمایشگاه 3.1: بهینه‌سازی هزینه**
 
-**Challenge**: قالب را برای توسعهٔ مقرون‌به‌صرفه پیکربندی کنید.
+**چالش**: قالب را برای توسعه مقرون‌به‌صرفه پیکربندی کنید.
 
-**Tasks:**
-1. تعیین کنید کدام SKUها را می‌توان روی tierهای رایگان/ابتدایی تنظیم کرد
-2. متغیرهای محیطی را برای حداقل هزینه پیکربندی کنید
-3. استقرار دهید و هزینه‌ها را با پیکربندی تولید مقایسه کنید
+**وظایف:**
+1. تعیین کنید کدام SKUs را می‌توان روی tierهای free/basic قرار داد
+2. متغیرهای محیطی را برای کمترین هزینه پیکربندی کنید
+3. استقرار دهید و هزینه‌ها را با پیکربندی production مقایسه کنید
 
-**Solution hints:**
-- در صورت امکان از tier F0 (رایگان) برای Cognitive Services استفاده کنید
-- برای محیط توسعه از tier Basic برای Search Service استفاده کنید
-- در نظر بگیرید از برنامهٔ Consumption برای Functions استفاده کنید
+**راهنمایی‌های حل:**
+- هنگام امکان از tier F0 (رایگان) برای Cognitive Services استفاده کنید
+- از tier Basic برای Search Service در محیط توسعه استفاده کنید
+- در نظر بگیرید از طرح Consumption برای Functions استفاده کنید
 
 ## Module 4: Security and Production Best Practices
 
 ### Step 4.1: Secure Credential Management
 
-**Current challenge**: بسیاری از برنامه‌های هوش مصنوعی کلیدهای API را به‌صورت hardcode دارند یا از ذخیره‌سازی نا امن استفاده می‌کنند.
+**چالش کنونی**: بسیاری از برنامه‌های هوش مصنوعی کلیدهای API را به‌صورت سخت‌کد یا در ذخیره‌سازی ناامن نگه می‌دارند.
 
-**AZD Solution**: Managed Identity + یکپارچگی با Key Vault.
+**راه‌حل AZD**: یکپارچه‌سازی Managed Identity + Key Vault.
 
-1. **Review the security configuration in your template:**
+1. **پیکربندی امنیتی در قالب خود را مرور کنید:**
 ```bash
-# دنبال پیکربندی Key Vault و Managed Identity بگردید
+# پیکربندی Key Vault و هویت مدیریت‌شده را بررسی کنید
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
-2. **Verify Managed Identity is working:**
+2. **تأیید کنید Managed Identity کار می‌کند:**
 ```bash
-# بررسی کنید که برنامهٔ وب پیکربندی هویت صحیحی دارد
+# بررسی کنید که برنامه وب پیکربندی هویت صحیحی دارد
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
 ### Step 4.2: Network Security
 
-1. **Enable private endpoints** (if not already configured):
+1. **فعال‌سازی private endpoints** (اگر قبلاً پیکربندی نشده است):
 
-Add to your bicep template:
+به قالب bicep خود اضافه کنید:
 ```bicep
 // Private endpoint for OpenAI
 resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
@@ -304,16 +304,16 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ### Step 4.3: Monitoring and Observability
 
-1. **Configure Application Insights:**
+1. **پیکربندی Application Insights:**
 ```bash
 # Application Insights باید به‌طور خودکار پیکربندی شود
 # پیکربندی را بررسی کنید:
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-2. **Set up AI-specific monitoring:**
+2. **راه‌اندازی مانیتورینگ مخصوص هوش مصنوعی:**
 
-Add custom metrics for AI operations:
+متریک‌های سفارشی برای عملیات هوش مصنوعی اضافه کنید:
 ```bicep
 // In your web app configuration
 resource webApp 'Microsoft.Web/sites@2023-01-01' = {
@@ -334,44 +334,44 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-### **Lab Exercise 4.1: Security Audit**
+### **تمرین آزمایشگاه 4.1: حسابرسی امنیتی**
 
-**Task**: استقرار خود را از نظر بهترین شیوه‌های امنیتی بررسی کنید.
+**وظیفه**: استقرار خود را برای بهترین شیوه‌های امنیتی بررسی کنید.
 
-**Checklist:**
-- [ ] هیچ راز سخت‌رمزگذاری‌شده‌ای در کد یا پیکربندی وجود نداشته باشد
-- [ ] از Managed Identity برای احراز هویت سرویس‌به‌سرویس استفاده شود
-- [ ] Key Vault اطلاعات حساس پیکربندی را ذخیره کند
+**چک‌لیست:**
+- [ ] رازهای سخت‌کد‌شده در کد یا پیکربندی وجود نداشته باشد
+- [ ] برای احراز هویت سرویس‌به‌سرویس از Managed Identity استفاده شده باشد
+- [ ] Key Vault تنظیمات حساس را نگهداری کند
 - [ ] دسترسی شبکه به‌درستی محدود شده باشد
-- [ ] مانیتورینگ و لاگ‌گیری فعال شده باشد
+- [ ] مانیتورینگ و لاگ‌گیری فعال شده باشند
 
 ## Module 5: Converting Your Own AI Application
 
 ### Step 5.1: Assessment Worksheet
 
-**Before converting your app**, به این سوالات پاسخ دهید:
+**قبل از تبدیل برنامه‌تان**، به این سوالات پاسخ دهید:
 
-1. **Application Architecture:**
-   - برنامهٔ شما از چه سرویس‌های هوش مصنوعی استفاده می‌کند؟
+1. **معماری برنامه:**
+   - برنامه شما از چه سرویس‌های هوش مصنوعی استفاده می‌کند؟
    - چه منابع محاسباتی نیاز دارد؟
-   - آیا نیاز به پایگاه داده دارد؟
-   - وابستگی‌های بین سرویس‌ها چیست؟
+   - آیا به دیتابیس نیاز دارد؟
+   - وابستگی‌ها بین سرویس‌ها چه هستند؟
 
-2. **Security Requirements:**
-   - برنامهٔ شما چه داده‌های حساسی را مدیریت می‌کند؟
-   - چه الزامات انطباقی دارید؟
-   - آیا به شبکهٔ خصوصی نیاز دارید؟
+2. **نیازمندی‌های امنیتی:**
+   - برنامه شما با چه داده‌های حساس سروکار دارد؟
+   - نیازهای انطباق (compliance) شما چیست؟
+   - آیا به شبکه خصوصی نیاز دارید؟
 
-3. **Scaling Requirements:**
+3. **نیازمندی‌های مقیاس‌گذاری:**
    - بار مورد انتظار شما چقدر است؟
    - آیا به auto-scaling نیاز دارید؟
-   - آیا الزامات منطقه‌ای وجود دارد؟
+   - آیا محدودیت‌های منطقه‌ای وجود دارد؟
 
 ### Step 5.2: Create Your AZD Template
 
-**Follow this pattern to convert your app:**
+**این الگو را برای تبدیل برنامه خود دنبال کنید:**
 
-1. **Create the basic structure:**
+1. **ساختار پایه را ایجاد کنید:**
 ```bash
 mkdir my-ai-app-azd
 cd my-ai-app-azd
@@ -380,7 +380,7 @@ cd my-ai-app-azd
 azd init --template minimal
 ```
 
-2. **Create azure.yaml:**
+2. **ایجاد azure.yaml:**
 ```yaml
 # Metadata
 name: my-ai-app
@@ -403,9 +403,9 @@ hooks:
     run: echo "Preparing AI models..."
 ```
 
-3. **Create infrastructure templates:**
+3. **ایجاد قالب‌های زیرساخت:**
 
-**infra/main.bicep** - Main template:
+**infra/main.bicep** - قالب اصلی:
 ```bicep
 @description('Primary location for all resources')
 param location string = resourceGroup().location
@@ -423,7 +423,7 @@ module openAI 'modules/openai.bicep' = {
 }
 ```
 
-**infra/modules/openai.bicep** - OpenAI module:
+**infra/modules/openai.bicep** - ماژول OpenAI:
 ```bicep
 @description('Name of the OpenAI service')
 param name string
@@ -447,20 +447,20 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
-### **Lab Exercise 5.1: Template Creation Challenge**
+### **تمرین آزمایشگاه 5.1: چالش ایجاد قالب**
 
-**Challenge**: یک قالب AZD برای یک برنامهٔ پردازش اسناد مبتنی بر هوش مصنوعی ایجاد کنید.
+**چالش**: یک قالب AZD برای یک برنامه پردازش مدارک ایجاد کنید.
 
-**Requirements:**
-- Azure OpenAI برای تحلیل محتوا
+**نیازمندی‌ها:**
+- Microsoft Foundry Models برای تحلیل محتوا
 - Document Intelligence برای OCR
-- Storage Account برای بارگذاری اسناد
+- Storage Account برای بارگذاری مدارک
 - Function App برای منطق پردازش
-- Web app برای رابط کاربری
+- وب‌اپ برای رابط کاربری
 
-**Bonus points:**
-- افزودن هندلینگ مناسب خطا
-- شامل برآورد هزینه
+**امتیاز اضافی:**
+- افزودن هندلینگ خطای مناسب
+- شامل تخمین هزینه
 - راه‌اندازی داشبوردهای مانیتورینگ
 
 ## Module 6: Troubleshooting Common Issues
@@ -468,20 +468,20 @@ output name string = openAIAccount.name
 ### Common Deployment Issues
 
 #### Issue 1: OpenAI Service Quota Exceeded
-**Symptoms:** استقرار با خطای سهمیه شکست می‌خورد
-**Solutions:**
+**نشانه‌ها:** استقرار با خطای سهمیه شکست می‌خورد
+**راه‌حل‌ها:**
 ```bash
 # سهمیه‌های فعلی را بررسی کنید
 az cognitiveservices usage list --location eastus
 
-# درخواست افزایش سهمیه دهید یا منطقه‌ی دیگری را امتحان کنید
+# درخواست افزایش سهمیه دهید یا منطقهٔ دیگری را امتحان کنید
 azd env set AZURE_LOCATION westus2
 azd up
 ```
 
 #### Issue 2: Model Not Available in Region
-**Symptoms:** پاسخ‌های هوش مصنوعی ناموفق هستند یا استقرار مدل خطا می‌دهد
-**Solutions:**
+**نشانه‌ها:** پاسخ‌های هوش مصنوعی ناموفق یا خطاهای استقرار مدل
+**راه‌حل‌ها:**
 ```bash
 # بررسی در دسترس بودن مدل بر اساس منطقه
 az cognitiveservices model list --location eastus
@@ -492,13 +492,13 @@ azd deploy
 ```
 
 #### Issue 3: Permission Issues
-**Symptoms:** خطاهای 403 Forbidden هنگام فراخوانی سرویس‌های هوش مصنوعی
-**Solutions:**
+**نشانه‌ها:** خطاهای 403 Forbidden هنگام فراخوانی سرویس‌های هوش مصنوعی
+**راه‌حل‌ها:**
 ```bash
-# بررسی تخصیص نقش‌ها
+# تخصیص نقش‌ها را بررسی کنید
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# افزودن نقش‌های مفقود
+# نقش‌های مفقود را اضافه کنید
 az role assignment create \
   --assignee YOUR_PRINCIPAL_ID \
   --role "Cognitive Services OpenAI User" \
@@ -508,46 +508,46 @@ az role assignment create \
 ### Performance Issues
 
 #### Issue 4: Slow AI Responses
-**Investigation steps:**
-1. بررسی Application Insights برای معیارهای عملکرد
-2. بررسی معیارهای سرویس OpenAI در پرتال Azure
-3. تایید اتصال شبکه و تاخیر
+**گام‌های بررسی:**
+1. متریک‌های عملکرد را در Application Insights بررسی کنید
+2. متریک‌های سرویس OpenAI را در پورتال Azure مرور کنید
+3. اتصال شبکه و تأخیر را تأیید کنید
 
-**Solutions:**
-- پیاده‌سازی کش برای پرس‌وجوهای رایج
-- استفاده از مدل OpenAI مناسب برای مورد استفادهٔ شما
-- در نظر گرفتن read replicas برای سناریوهای بار بالا
+**راه‌حل‌ها:**
+- برای پرس‌وجوهای رایج کش پیاده‌سازی کنید
+- از مدل OpenAI مناسب برای مورد استفاده خود بهره ببرید
+- برای سناریوهای بار بالا از read replicaها استفاده کنید
 
-### **Lab Exercise 6.1: Debugging Challenge**
+### **تمرین آزمایشگاه 6.1: چالش اشکال‌زدایی**
 
-**Scenario**: استقرار شما موفق بوده، اما برنامه خطای 500 برمی‌گرداند.
+**سناریو**: استقرار شما موفق بوده اما برنامه خطای 500 برمی‌گرداند.
 
-**Debugging tasks:**
+**وظایف اشکال‌زدایی:**
 1. لاگ‌های برنامه را بررسی کنید
-2. اتصال سرویس‌ها را بررسی کنید
+2. اتصال سرویس‌ها را تأیید کنید
 3. احراز هویت را تست کنید
-4. پیکربندی را بازبینی کنید
+4. پیکربندی را مرور کنید
 
-**Tools to use:**
+**ابزارهای قابل استفاده:**
 - `azd show` برای نمای کلی استقرار
-- پرتال Azure برای لاگ‌های تفصیلی سرویس
+- پورتال Azure برای لاگ‌های دقیق سرویس
 - Application Insights برای تله‌متری برنامه
 
 ## Module 7: Monitoring and Optimization
 
 ### Step 7.1: Set Up Comprehensive Monitoring
 
-1. **Create custom dashboards:**
+1. **ایجاد داشبوردهای سفارشی:**
 
-به پرتال Azure بروید و یک داشبورد با موارد زیر ایجاد کنید:
-- تعداد درخواست‌ها و تاخیر OpenAI
+به پورتال Azure بروید و یک داشبورد با موارد زیر ایجاد کنید:
+- تعداد درخواست‌ها و تأخیر OpenAI
 - نرخ خطاهای برنامه
-- استفاده از منابع
-- پیگیری هزینه
+- استفاده منابع
+- ردیابی هزینه
 
-2. **Set up alerts:**
+2. **تنظیم هشدارها:**
 ```bash
-# هشدار دربارهٔ نرخ بالای خطا
+# هشدار برای نرخ بالای خطا
 az monitor metrics alert create \
   --name "AI-App-High-Error-Rate" \
   --resource-group YOUR_RG \
@@ -558,120 +558,120 @@ az monitor metrics alert create \
 
 ### Step 7.2: Cost Optimization
 
-1. **Analyze current costs:**
+1. **تحلیل هزینه‌های جاری:**
 ```bash
-# برای دریافت داده‌های هزینه از Azure CLI استفاده کنید.
+# از Azure CLI برای دریافت داده‌های هزینه استفاده کنید
 az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
-2. **Implement cost controls:**
+2. **اجرای کنترل‌های هزینه:**
 - تنظیم هشدارهای بودجه
 - استفاده از سیاست‌های autoscaling
-- پیاده‌سازی کش درخواست‌ها
-- مانیتور کردن مصرف توکن برای OpenAI
+- پیاده‌سازی کش برای درخواست‌ها
+- نظارت بر مصرف توکن برای OpenAI
 
-### **Lab Exercise 7.1: Performance Optimization**
+### **تمرین آزمایشگاه 7.1: بهینه‌سازی عملکرد**
 
-**Task**: برنامهٔ هوش مصنوعی خود را هم از لحاظ عملکرد و هم هزینه بهینه کنید.
+**وظیفه**: برنامه هوش مصنوعی خود را هم از نظر عملکرد و هم هزینه بهینه کنید.
 
-**Metrics to improve:**
-- کاهش میانگین زمان پاسخ 20%
-- کاهش هزینه‌های ماهانه 15%
-- حفظ 99.9% زمان بالا بودن
+**متریک‌هایی که باید بهبود یابند:**
+- کاهش زمان پاسخ متوسط به میزان 20%
+- کاهش هزینه‌های ماهانه به میزان 15%
+- حفظ 99.9% زمان در دسترس بودن
 
-**Strategies to try:**
-- پیاده‌سازی کش پاسخ
+**استراتژی‌هایی برای امتحان کردن:**
+- پیاده‌سازی کش پاسخ‌ها
 - بهینه‌سازی پرامپت‌ها برای کارایی توکن
-- استفاده از SKUهای محاسباتی مناسب
-- پیکربندی autoscaling مناسب
+- استفاده از SKUs محاسباتی مناسب
+- راه‌اندازی autoscaling صحیح
 
-## Final Challenge: End-to-End Implementation
+## چالش نهایی: پیاده‌سازی انتها تا انتها
 
-### Challenge Scenario
+### سناریوی چالش
 
-مسئولیت ایجاد یک چت‌بات خدمات مشتری مبتنی بر هوش مصنوعی آمادهٔ تولید با الزامات زیر به شما واگذار شده است:
+شما مأمور ایجاد یک چت‌بات خدمات مشتری مبتنی بر هوش مصنوعی آماده تولید با نیازهای زیر هستید:
 
-**Functional Requirements:**
-- رابط وب برای تعامل با مشتریان
-- یکپارچه‌سازی با Azure OpenAI برای پاسخ‌ها
+**نیازمندی‌های عملکردی:**
+- رابط وب برای تعاملات مشتری
+- یکپارچه‌سازی با Microsoft Foundry Models برای پاسخ‌ها
 - قابلیت جستجوی اسناد با استفاده از Cognitive Search
-- یکپارچه‌سازی با پایگاه دادهٔ مشتری موجود
-- پشتیبانی از چند زبان
+- یکپارچه‌سازی با دیتابیس مشتری موجود
+- پشتیبانی چندزبانگی
 
-**Non-Functional Requirements:**
+**نیازمندی‌های غیرعملکردی:**
 - پشتیبانی از 1000 کاربر همزمان
-- SLA با 99.9% زمان بالا بودن
+- SLA با دسترسی 99.9%
 - انطباق SOC 2
 - هزینه کمتر از $500/ماه
-- استقرار در چند محیط (dev, staging, prod)
+- استقرار در چندین محیط (dev, staging, prod)
 
-### Implementation Steps
+### گام‌های پیاده‌سازی
 
-1. **Design the architecture**
-2. **Create the AZD template**
-3. **Implement security measures**
-4. **Set up monitoring and alerting**
-5. **Create deployment pipelines**
-6. **Document the solution**
+1. **طراحی معماری**
+2. **ایجاد قالب AZD**
+3. **اجرای تدابیر امنیتی**
+4. **راه‌اندازی مانیتورینگ و هشدارها**
+5. **ایجاد خطوط لوله استقرار**
+6. **مستندسازی راه‌حل**
 
-### Evaluation Criteria
+### معیارهای ارزیابی
 
-- ✅ **Functionality**: آیا همهٔ الزامات را برآورده می‌کند؟
-- ✅ **Security**: آیا بهترین شیوه‌ها پیاده شده‌اند؟
-- ✅ **Scalability**: آیا می‌تواند بار را تحمل کند؟
-- ✅ **Maintainability**: آیا کد و زیرساخت سازمان‌دهی خوبی دارند؟
-- ✅ **Cost**: آیا در بودجه می‌ماند؟
+- ✅ **عملکرد**: آیا تمام نیازمندی‌ها را برآورده می‌کند؟
+- ✅ **امنیت**: آیا بهترین رویه‌ها پیاده‌سازی شده‌اند؟
+- ✅ **مقیاس‌پذیری**: آیا می‌تواند بار را مدیریت کند؟
+- ✅ **قابلیت نگهداری**: آیا کد و زیرساخت به‌خوبی سازمان‌دهی شده‌اند؟
+- ✅ **هزینه**: آیا در بودجه می‌گنجد؟
 
-## Additional Resources
+## منابع اضافی
 
-### Microsoft Documentation
+### مستندات مایکروسافت
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Azure OpenAI Service Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
+- [Microsoft Foundry Models Service Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
 - [Microsoft Foundry Documentation](https://learn.microsoft.com/azure/ai-studio/)
 
-### Sample Templates
-- [Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
+### قالب‌های نمونه
+- [Microsoft Foundry Models Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
 - [OpenAI Chat App Quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart)
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
-### Community Resources
+### منابع جامعه
 - [Microsoft Foundry Discord](https://discord.gg/microsoft-azure)
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
 - [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
 
-## 🎓 Completion Certificate
-تبریک! شما آزمایشگاه کارگاه هوش مصنوعی را به پایان رسانده‌اید. اکنون باید بتوانید:
+## 🎓 گواهی اتمام
 
-- ✅ تبدیل برنامه‌های موجود هوش مصنوعی به الگوهای AZD
-- ✅ استقرار برنامه‌های هوش مصنوعی آماده تولید
-- ✅ اجرای بهترین شیوه‌های امنیتی برای بارهای کاری هوش مصنوعی
+تبریک می‌گوییم! شما کارگاه آزمایشگاهی هوش مصنوعی را تکمیل کرده‌اید. اکنون باید بتوانید:
+- ✅ تبدیل برنامه‌های موجود هوش مصنوعی به قالب‌های AZD
+- ✅ استقرار برنامه‌های هوش مصنوعی آمادهٔ تولید
+- ✅ پیاده‌سازی بهترین شیوه‌های امنیتی برای بارهای کاری هوش مصنوعی
 - ✅ نظارت و بهینه‌سازی عملکرد برنامه‌های هوش مصنوعی
-- ✅ رفع عیب مشکلات متداول استقرار
+- ✅ رفع اشکال مشکلات رایج استقرار
 
 ### مراحل بعدی
-1. اعمال این الگوها در پروژه‌های هوش مصنوعی خود
-2. مشارکت با ارائهٔ الگوها به جامعه
-3. برای دریافت پشتیبانی مداوم به Discord Microsoft Foundry بپیوندید
-4. کاوش موضوعات پیشرفته مانند استقرار در چند منطقه
+1. این الگوها را در پروژه‌های هوش مصنوعی خود اعمال کنید
+2. قالب‌ها را به جامعه بازگردانید
+3. برای پشتیبانی مداوم، به سرور Discord مایکروسافت فاندری بپیوندید
+4. موضوعات پیشرفته‌ای مانند استقرار در چند منطقه را بررسی کنید
 
 ---
 
-**بازخورد کارگاه**: با به اشتراک‌گذاری تجربه‌تان در [کانال #Azure در Microsoft Foundry Discord](https://discord.gg/microsoft-azure) به ما در بهبود این کارگاه کمک کنید.
+**بازخورد کارگاه**: با به اشتراک گذاشتن تجربهٔ خود در [کانال #Azure در Microsoft Foundry Discord](https://discord.gg/microsoft-azure) به ما در بهبود این کارگاه کمک کنید.
 
 ---
 
 **ناوبری فصل:**
 - **📚 صفحهٔ دوره**: [AZD برای مبتدیان](../../README.md)
-- **📖 فصل فعلی**: فصل 2 - توسعه مبتنی بر هوش مصنوعی
+- **📖 فصل فعلی**: فصل 2 - توسعهٔ محور هوش مصنوعی
 - **⬅️ قبلی**: [استقرار مدل هوش مصنوعی](ai-model-deployment.md)
-- **➡️ بعدی**: [بهترین شیوه‌های هوش مصنوعی تولیدی](production-ai-practices.md)
-- **🚀 فصل بعدی**: [فصل 3: پیکربندی](../chapter-03-configuration/configuration.md)
+- **➡️ بعدی**: [بهترین شیوه‌های تولیدی هوش مصنوعی](production-ai-practices.md)
+- **🚀 فصل بعد**: [فصل 3: پیکربندی](../chapter-03-configuration/configuration.md)
 
-**نیاز به کمک دارید؟** برای دریافت پشتیبانی و گفتگو دربارهٔ استقرار AZD و هوش مصنوعی به جامعهٔ ما بپیوندید.
+**نیاز به کمک دارید؟** برای دریافت پشتیبانی و بحث دربارهٔ استقرارهای AZD و هوش مصنوعی به جامعهٔ ما بپیوندید.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-سلب مسئولیت:
-این سند با استفاده از سرویس ترجمهٔ مبتنی بر هوش مصنوعی Co-op Translator (https://github.com/Azure/co-op-translator) ترجمه شده است. اگرچه ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است شامل اشتباه یا نادرستی‌هایی باشند. سند اصلی به زبان مبدأ باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، توصیه می‌شود از ترجمهٔ حرفه‌ای انسانی استفاده شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرست ناشی از استفاده از این ترجمه مسئولیتی نداریم.
+**سلب مسئولیت**:
+این سند با استفاده از سرویس ترجمه هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما برای دقت تلاش می‌کنیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان مبدأ باید به‌عنوان منبع/مرجع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمه حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرست ناشی از استفاده از این ترجمه مسئول نیستیم.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

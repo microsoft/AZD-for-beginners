@@ -1,40 +1,40 @@
 # Kabanata 8: Mga Pattern sa Produksyon at Enterprise
 
-**📚 Kurso**: [AZD para sa mga Nagsisimula](../../README.md) | **⏱️ Tagal**: 2-3 oras | **⭐ Kompleksidad**: Mataas na Antas
+**📚 Course**: [AZD Para sa mga Nagsisimula](../../README.md) | **⏱️ Duration**: 2-3 oras | **⭐ Complexity**: Advanced
 
 ---
 
 ## Pangkalahatang-ideya
 
-Tinatalakay ng kabanatang ito ang mga pattern ng deployment na handa para sa enterprise, pagpapatibay ng seguridad, pagmamanman, at pag-optimize ng gastos para sa mga produksiyon na workload ng AI.
+Sinasaklaw ng kabanatang ito ang mga enterprise-ready na pattern ng deployment, pagpapatibay ng seguridad, pagmamanman, at pag-optimize ng gastos para sa mga production AI workload.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa pagtatapos ng kabanatang ito, makakaya mong:
-- Mag-deploy ng mga aplikasyon na matatag sa maraming rehiyon
-- Ipatupad ang mga pattern ng seguridad para sa enterprise
-- I-configure ang kumprehensibong pagmamanman
-- I-optimize ang gastos sa malaking sukat
-- Mag-set up ng mga CI/CD pipeline gamit ang AZD
+Sa pagtatapos ng kabanatang ito, magagawa mo:
+- Mag-deploy ng mga aplikasyong matatag sa maraming rehiyon
+- Magpatupad ng mga pattern ng seguridad para sa enterprise
+- I-configure ang komprehensibong pagmamanman
+- I-optimize ang mga gastos sa malakihang sukat
+- Itakda ang mga pipeline ng CI/CD gamit ang AZD
 
 ---
 
-## 📚 Mga Leksyon
+## 📚 Mga Aralin
 
-| # | Aralin | Deskripsyon | Oras |
+| # | Aralin | Paglalarawan | Oras |
 |---|--------|-------------|------|
-| 1 | [Mga Kasanayan sa Produksyon ng AI](production-ai-practices.md) | Mga pattern ng deployment para sa enterprise | 90 min |
+| 1 | [Mga Praktika sa Produksyon ng AI](production-ai-practices.md) | Mga pattern ng deployment para sa enterprise | 90 min |
 
 ---
 
 ## 🚀 Checklist para sa Produksyon
 
-- [ ] Deployment sa maraming rehiyon para sa pagiging matatag
-- [ ] Managed identity para sa authentication (walang mga key)
+- [ ] Pag-deploy sa maraming rehiyon para sa katatagan
+- [ ] Managed identity para sa authentication (walang mga susi)
 - [ ] Application Insights para sa pagmamanman
-- [ ] Mga budget ng gastos at mga alerto na naka-configure
+- [ ] Mga budget at alerto para sa gastos na naka-configure
 - [ ] Pinagana ang pag-scan ng seguridad
-- [ ] Integrasyon ng CI/CD pipeline
+- [ ] Integrasyon ng pipeline ng CI/CD
 - [ ] Plano para sa disaster recovery
 
 ---
@@ -43,28 +43,21 @@ Sa pagtatapos ng kabanatang ito, makakaya mong:
 
 ### Pattern 1: Microservices AI
 
+```mermaid
+graph LR
+    Gateway[Gatewáy ng API] --> AI[Serbisyo ng AI] --> Models[Mga Modelo ng Microsoft Foundry]
+    Gateway --> Auth[Serbisyo ng Awtentikasyon]
+    AI --> Data[Imbakan ng Datos]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
-
 ### Pattern 2: Event-Driven AI
 
+```mermaid
+graph LR
+    EventGrid[Grid ng Kaganapan] --> Functions[Mga Function] --> Pipeline[Pipeline ng AI]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
-## 🔐 Pinakamahusay na Kasanayan sa Seguridad
+## 🔐 Mga Pinakamahuhusay na Praktika sa Seguridad
 
 ```bicep
 // Use managed identity
@@ -85,12 +78,12 @@ properties: {
 
 ## 💰 Pag-optimize ng Gastos
 
-| Estratehiya | Pag-iipon |
+| Estratehiya | Tipid |
 |----------|---------|
 | I-scale hanggang zero (Container Apps) | 60-80% |
 | Gamitin ang consumption tiers para sa dev | 50-70% |
-| Naka-iskedyul na pag-scale | 30-50% |
-| Nakatalagang kapasidad | 20-40% |
+| Nakaiskedyul na scaling | 30-50% |
+| Nakareserbang kapasidad | 20-40% |
 
 ```bash
 # Itakda ang mga alerto sa badyet
@@ -103,7 +96,7 @@ az consumption budget create \
 
 ---
 
-## 📊 Pagsasaayos ng Pagmomonitor
+## 📊 Pagsasaayos ng Pagmamanman
 
 ```bash
 # I-stream ang mga log
@@ -112,31 +105,31 @@ azd monitor --logs
 # Suriin ang Application Insights
 azd monitor
 
-# Tingnan ang mga metric
+# Tingnan ang mga sukatan
 az monitor metrics list --resource <resource-id>
 ```
 
 ---
 
-## 🔗 Navigasyon
+## 🔗 Nabigasyon
 
 | Direksyon | Kabanata |
 |-----------|---------|
 | **Nakaraan** | [Kabanata 7: Pag-troubleshoot](../chapter-07-troubleshooting/README.md) |
-| **Kumpletong Kurso** | [Tahanan ng Kurso](../../README.md) |
+| **Kumpletong Kurso** | [Home ng Kurso](../../README.md) |
 
 ---
 
 ## 📖 Mga Kaugnay na Mapagkukunan
 
-- [Gabay sa Mga AI Agents](../chapter-02-ai-development/agents.md)
+- [Gabay sa AI Agents](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Mga Solusyon na Multi-Agent](../chapter-05-multi-agent/README.md)
+- [Mga Solusyon ng Multi-Agent](../chapter-05-multi-agent/README.md)
 - [Halimbawa ng Microservices](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Paunawa:
-Ang dokumentong ito ay isinalin gamit ang serbisyong AI sa pagsasalin [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, pakitandaan na ang awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatumpak. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na awtoritatibong sanggunian. Para sa mga kritikal na impormasyon, inirerekomenda ang propesyonal na pagsasaling ginawa ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
+**Paunawa**:
+Ang dokumentong ito ay isinalin gamit ang serbisyong pagsasalin ng AI na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi tumpak na impormasyon. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring bilang opisyal na sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaintindihan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

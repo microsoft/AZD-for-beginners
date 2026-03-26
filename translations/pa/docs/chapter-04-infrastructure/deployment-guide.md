@@ -1,104 +1,104 @@
-# Deployment Guide - Mastering AZD Deployments
+# ਡਿਪਲੋਇਮੈਂਟ ਗਾਈਡ - AZD ਡਿਪਲੋਇਮੈਂਟਸ ਵਿੱਚ ਮਾਹਰਤਾ
 
-**Chapter Navigation:**
-- **📚 ਕੋਰਸ ਮੁੱਖ**: [AZD For Beginners](../../README.md)
-- **📖 ਮੌਜੂਦਾ ਅਧਿਆਇ**: Chapter 4 - Infrastructure as Code & Deployment
-- **⬅️ ਪਿਛਲਾ ਅਧਿਆਇ**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
-- **➡️ ਅੱਗੇ**: [Provisioning Resources](provisioning.md)
-- **🚀 ਅਗਲਾ ਅਧਿਆਇ**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+**ਅਧਿਆਇ ਨੈਵੀਗੇਸ਼ਨ:**
+- **📚 ਕੋਰਸ ਹੋਮ**: [AZD ਸ਼ੁਰੂਆਤ ਲਈ](../../README.md)
+- **📖 ਮੌਜੂਦਾ ਅਧਿਆਇ**: ਅਧਿਆਇ 4 - ਕੋਡ ਵਜੋਂ ਢਾਂਚਾ ਅਤੇ ਤਾਇਨਾਤੀ
+- **⬅️ ਪਿਛਲਾ ਅਧਿਆਇ**: [ਅਧਿਆਇ 3: ਸੰਰਚਨਾ](../chapter-03-configuration/configuration.md)
+- **➡️ ਅਗਲਾ**: [ਰਿਸੋਰਸ ਪ੍ਰੋਵਿਜ਼ਨ](provisioning.md)
+- **🚀 ਅਗਲਾ ਅਧਿਆਇ**: [ਅਧਿਆਇ 5: ਬਹੁ-ਏਜੰਟ ਏਆਈ ਹੱਲ](../../examples/retail-scenario.md)
 
-## Introduction
+## ਪਰਿਚਯ
 
-This## Understanding the Deployment Processcomprehensive guide covers everything you need to know about deploying applications using Azure Developer CLI, from basic single-command deployments to advanced production scenarios with custom hooks, multiple environments, and CI/CD integration. Master the complete deployment lifecycle with practical examples and best practices.
+ਇਹ ਵਿਆਪਕ ਗਾਈਡ Azure Developer CLI ਦੀ ਵਰਤੋਂ ਨਾਲ ਐਪਲੀਕੇਸ਼ਨਾਂ ਦੀ ਤਾਇਨਾਤੀ ਬਾਰੇ ਸਾਰੀਆਂ ਲੋੜੀਂਦੀਆਂ ਜਾਣਕਾਰੀਆਂ ਦਿੰਦੀ ਹੈ, ਸਧਾਰਨ ਇਕ-ਕਮਾਂਡ ਤਾਇਨਾਤੀਆਂ ਤੋਂ ਲੈ ਕੇ ਕਸਟਮ ਹੁਕ, ਬਹੁ ਵਾਤਾਵਰਣ ਅਤੇ CI/CD ਏਕੀਕਰਨ ਦੇ ਨਾਲ ਉਤਪਾਦਨ ਸਥਿਤੀਆਂ ਤੱਕ। ਵਿਹਾਰਿਕ ਉਦਾਹਰਣਾਂ ਅਤੇ ਸਰਵੋਤਮ ਅਭਿਆਸਾਂ ਦੇ ਨਾਲ ਪੂਰੇ ਤਾਇਨਾਤੀ ਲਾਈਫਸਾਈਕਲ ਵਿੱਚ ਮਾਹਰ ਹੋਵੋ।
 
-## Learning Goals
+## ਸਿੱਖਣ ਦੇ ਲਕਸ਼
 
-By completing this guide, you will:
-- Master all Azure Developer CLI deployment commands and workflows
-- Understand the complete deployment lifecycle from provisioning to monitoring
-- Implement custom deployment hooks for pre and post-deployment automation
-- Configure multiple environments with environment-specific parameters
-- Set up advanced deployment strategies including blue-green and canary deployments
-- Integrate azd deployments with CI/CD pipelines and DevOps workflows
+ਇਸ ਗਾਈਡ ਨੂੰ ਪੂਰਾ ਕਰਨ ਤੋਂ ਬਾਅਦ ਤੁਸੀਂ:
+- Azure Developer CLI ਦੀਆਂ ਸਾਰੀਆਂ ਤਾਇਨਾਤੀ ਕਮਾਂਡਾਂ ਅਤੇ ਵਰਕਫਲੋਜ਼ ਵਿੱਚ ਮਾਹਰ ਹੋਵੋਗੇ
+- ਪ੍ਰੋਵਿਜ਼ਨ ਤੋਂ ਮਾਨੀਟਰਨਿੰਗ ਤੱਕ ਪੂਰੇ ਤਾਇਨਾਤੀ ਲਾਈਫਸਾਈਕਲ ਨੂੰ ਸਮਝੋਂਗੇ
+- ਪ੍ਰੀ ਅਤੇ ਪੋਸਟ-ਤਾਇਨਾਤੀ ਆਟੋਮੇਸ਼ਨ ਲਈ ਕਸਟਮ ਡਿਪਲੋਇਮੈਂਟ ਹੁਕਜ਼ ਲਾਗੂ ਕਰ ਰਹੋਗੇ
+- ਵਾਤਾਵਰਨ-ਖਾਸ ਪੈਰਾਮੀਟਰਾਂ ਨਾਲ ਬਹੁ ਵਾਤਾਵਰਣ ਸੰਰਚਨਾਵਾਂ ਨੂੰ ਸੰਰਚਿਤ ਕਰੋਗੇ
+- ਬਲੂ-ਗ੍ਰੀਨ ਅਤੇ ਕੈਨੇਰੀ ਸਮੇਤ ਉੱਨਤ ਤਾਇਨਾਤੀ ਰਣਨੀਤੀਆਂ ਸੈਟਅੱਪ ਕਰੋਗੇ
+- azd ਤਾਇਨਾਤੀਆਂ ਨੂੰ CI/CD ਪਾਈਪਲਾਈਨਾਂ ਅਤੇ DevOps ਵਰਕਫਲੋਜ਼ ਨਾਲ ਇਕੀਕ੍ਰਿਤ ਕਰੋਗੇ
 
-## Learning Outcomes
+## ਸਿੱਖਣ ਦੇ ਨਤੀਜੇ
 
-Upon completion, you will be able to:
-- Execute and troubleshoot all azd deployment workflows independently
-- Design and implement custom deployment automation using hooks
-- Configure production-ready deployments with proper security and monitoring
-- Manage complex multi-environment deployment scenarios
-- Optimize deployment performance and implement rollback strategies
-- Integrate azd deployments into enterprise DevOps practices
+ਪੂਰਾ ਕਰਨ 'ਤੇ, ਤੁਸੀਂ ਸਮਰੱਥ ਹੋਵੋਗੇ:
+- ਸਾਰੇ azd ਤਾਇਨਾਤੀ ਵਰਕਫਲੋਜ਼ ਨੂੰ ਸਵਤੰਤਰ ਤੌਰ 'ਤੇ ਚਲਾਉਣ ਅਤੇ ਸਮੱਸਿਆ ਹੱਲ ਕਰਨ
+- ਹੁਕਜ਼ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਕਸਟਮ ਤਾਇਨਾਤੀ ਆਟੋਮੇਸ਼ਨ డਿਜ਼ਾਈਨ ਅਤੇ ਲਾਗੂ ਕਰਨ
+- ਉਚਿੱਤ ਸੁਰੱਖਿਆ ਅਤੇ ਮਾਨੀਟਰਨਿੰਗ ਨਾਲ ਉਤਪਾਦਨ-ਤਿਆਰ ਤਾਇਨਾਤੀਆਂ ਸੰਰਚਿਤ ਕਰਨ
+- ਜਟਿਲ ਬਹੁ-ਵਾਤਾਵਰਣ ਤਾਇਨਾਤੀ ਸਥਿਤੀਆਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰਨ
+- ਤਾਇਨਾਤੀ ਕਾਰਗਿਰੀ ਨੂੰ ਅਪਟੀਮਾਈਜ਼ ਅਤੇ ਰੋਲਬੈਕ ਰਣਨੀਤੀਆਂ ਲਾਗੂ ਕਰਨ
+- azd ਤਾਇਨਾਤੀਆਂ ਨੂੰ ਐਂਟਰਪ੍ਰਾਈਜ਼ DevOps ਅਭਿਆਸ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰਨ
 
-## Deployment Overview
+## ਤਾਇਨਾਤੀ ਦਾ ਸਰਵੇਖਣ
 
-Azure Developer CLI provides several deployment commands:
-- `azd up` - Complete workflow (provision + deploy)
-- `azd provision` - Create/update Azure resources only
-- `azd deploy` - Deploy application code only
-- `azd package` - Build and package applications
+Azure Developer CLI ਕਈ ਤਾਇਨਾਤੀ ਕਮਾਂਡਾਂ ਮੁਹੱਈਆ ਕਰਦਾ ਹੈ:
+- `azd up` - ਪੂਰਾ ਵਰਕਫਲੋ (ਪ੍ਰੋਵਿਜ਼ਨ + ਤਾਇਨਾਤੀ)
+- `azd provision` - ਸਿਰਫ਼ Azure ਸਰੋਤ ਬਣਾਓ/ਅਪਡੇਟ ਕਰੋ
+- `azd deploy` - ਸਿਰਫ਼ ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ ਤਾਇਨਾਤੀ ਕਰੋ
+- `azd package` - ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਬਿਲਡ ਅਤੇ ਪੈਕੇਜ ਕਰੋ
 
-## Basic Deployment Workflows
+## ਬੁਨਿਆਦੀ ਤਾਇਨਾਤੀ ਵਰਕਫਲੋਜ਼
 
-### Complete Deployment (azd up)
-The most common workflow for new projects:
+### ਮੁਕੰਮਲ ਤਾਇਨਾਤੀ (azd up)
+ਨਵੀਆਂ ਪ੍ਰੋਜੈਕਟਾਂ ਲਈ ਸਭ ਤੋਂ ਆਮ ਵਰਕਫਲੋ:
 ```bash
-# ਸਭ ਕੁਝ ਸ਼ੁਰੂ ਤੋਂ ਤੈਨਾਤ ਕਰੋ
+# ਸ਼ੁਰੂ ਤੋਂ ਸਭ ਕੁਝ ਤੈਨਾਤ ਕਰੋ
 azd up
 
-# ਖਾਸ ਵਾਤਾਵਰਣ ਦੇ ਨਾਲ ਤੈਨਾਤ ਕਰੋ
+# ਨਿਰਧਾਰਤ ਵਾਤਾਵਰਨ ਨਾਲ ਤੈਨਾਤ ਕਰੋ
 azd up --environment production
 
-# ਕਸਟਮ ਪੈਰਾਮੀਟਰਾਂ ਦੇ ਨਾਲ ਤੈਨਾਤ ਕਰੋ
+# ਕਸਟਮ ਪੈਰਾਮੀਟਰਾਂ ਨਾਲ ਤੈਨਾਤ ਕਰੋ
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Infrastructure-Only Deployment
-When you only need to update Azure resources:
+### ਕੇਵਲ ਢਾਂਚਾ ਤਾਇਨਾਤੀ
+ਜਦੋਂ ਤੁਹਾਨੂੰ ਸਿਰਫ਼ Azure ਸਰੋਤ ਅਪਡੇਟ ਕਰਨੇ ਹੋਣ:
 ```bash
-# ਇੰਫਰਾਸਟ੍ਰਕਚਰ ਦੀ ਪ੍ਰੋਵਿਜ਼ਨ/ਅਪਡੇਟ ਕਰੋ
+# ਢਾਂਚੇ ਨੂੰ ਪ੍ਰੋਵਿਜ਼ਨ/ਅਪਡੇਟ ਕਰੋ
 azd provision
 
-# ਬਦਲਾਅ ਦਾ ਪੂਰਵ-ਦਰਸ਼ਨ ਕਰਨ ਲਈ ਡ੍ਰਾਈ-ਰਨ ਨਾਲ ਪ੍ਰੋਵਿਜ਼ਨ ਕਰੋ
+# ਬਦਲਾਵਾਂ ਦੀ ਪੂਰਵ-ਜਾਂਚ ਕਰਨ ਲਈ ਡ੍ਰਾਈ-ਰਨ ਨਾਲ ਪ੍ਰੋਵਿਜ਼ਨ ਕਰੋ
 azd provision --preview
 
-# ਨਿਰਧਾਰਿਤ ਸੇਵਾਵਾਂ ਦੀ ਪ੍ਰੋਵਿਜ਼ਨ ਕਰੋ
+# ਨਿਰਧਾਰਿਤ ਸੇਵਾਵਾਂ ਦਾ ਪ੍ਰੋਵਿਜ਼ਨ ਕਰੋ
 azd provision --service database
 ```
 
-### Code-Only Deployment
-For quick application updates:
+### ਕੋਡ-ਕੇਵਲ ਤਾਇਨਾਤੀ
+ਤੇਜ਼ ਐਪਲੀਕੇਸ਼ਨ ਅਪਡੇਟ ਲਈ:
 ```bash
-# ਸਾਰੀਆਂ ਸੇਵਾਵਾਂ ਤੈਨਾਤ ਕਰੋ
+# ਸਾਰੀਆਂ ਸੇਵਾਵਾਂ ਤਾਇਨਾਤ ਕਰੋ
 azd deploy
 
-# ਉਮੀਦਤ ਆਉਟਪੁੱਟ:
-# ਸੇਵਾਵਾਂ ਤੈਨਾਤ ਕੀਤੀਆਂ ਜਾ ਰਹੀਆਂ ਹਨ (azd deploy)
-# - web: ਤੈਨਾਤ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ... ਹੋ ਗਿਆ
-# - api: ਤੈਨਾਤ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ... ਹੋ ਗਿਆ
-# ਸਫਲਤਾ: ਤੁਹਾਡੀ ਤੈਨਾਤ 2 ਮਿੰਟ 15 ਸਕਿੰਟਾਂ ਵਿੱਚ ਪੂਰੀ ਹੋ ਗਈ
+# ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁੱਟ:
+# ਸੇਵਾਵਾਂ ਤਾਇਨਾਤ ਕੀਤੀਆਂ ਜਾ ਰਹੀਆਂ ਹਨ (azd deploy)
+# - web: ਤਾਇਨਾਤ ਕੀਤਾ ਜਾ ਰਿਹਾ... ਹੋ ਗਿਆ
+# - api: ਤਾਇਨਾਤ ਕੀਤਾ ਜਾ ਰਿਹਾ... ਹੋ ਗਿਆ
+# ਸਫਲਤਾ: ਤੁਹਾਡੀ ਤਾਇਨਾਤ 2 ਮਿੰਟ 15 ਸਕਿੰਟ ਵਿੱਚ ਪੂਰੀ ਹੋ ਗਈ
 
-# ਕਿਸੇ ਵਿਸ਼ੇਸ਼ ਸੇਵਾ ਨੂੰ ਤੈਨਾਤ ਕਰੋ
+# ਕਿਸੇ ਵਿਸ਼ੇਸ਼ ਸੇਵਾ ਨੂੰ ਤਾਇਨਾਤ ਕਰੋ
 azd deploy --service web
 azd deploy --service api
 
-# ਕਸਟਮ ਬਿਲਡ ਆਰਗੁਮੈਂਟਸ ਨਾਲ ਤੈਨਾਤ ਕਰੋ
+# ਕਸਟਮ ਬਿਲਡ ਪੈਰਾਮੀਟਰਾਂ ਨਾਲ ਤਾਇਨਾਤ ਕਰੋ
 azd deploy --service api --build-arg NODE_ENV=production
 
-# ਤੈਨਾਤ ਦੀ ਜਾਂਚ ਕਰੋ
+# ਤਾਇਨਾਤ ਦੀ ਜਾਂਚ ਕਰੋ
 azd show --output json | jq '.services'
 ```
 
-### ✅ Deployment Verification
+### ✅ ਤਾਇਨਾਤੀ ਦੀ ਪੁਸ਼ਟੀ
 
-After any deployment, verify success:
+ਕਿਸੇ ਵੀ ਤਾਇਨਾਤੀ ਤੋਂ ਬਾਅਦ, ਸਫਲਤਾ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ:
 
 ```bash
-# ਸਭ ਸੇਵਾਵਾਂ ਚੱਲ ਰਹੀਆਂ ਹਨ ਜਾਂ ਨਹੀਂ ਜਾਂਚੋ
+# ਸਾਰੀਆਂ ਸੇਵਾਵਾਂ ਚੱਲ ਰਹੀਆਂ ਹਨ ਕਿ ਨਹੀਂ ਜਾਂਚੋ
 azd show
 
-# ਹੈਲਥ ਐਂਡਪੌਇੰਟਾਂ ਦੀ ਜਾਂਚ ਕਰੋ
+# ਹੈਲਥ ਐਂਡਪੋਇੰਟਸ ਦੀ ਜਾਂਚ ਕਰੋ
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -109,15 +109,15 @@ curl -f "$API_URL/health" || echo "❌ API health check failed"
 azd monitor --logs
 ```
 
-**Success Criteria:**
-- ✅ All services show "Running" status
-- ✅ Health endpoints return HTTP 200
-- ✅ No error logs in the last 5 minutes
-- ✅ Application responds to test requests
+**ਸਫਲਤਾ ਦੇ ਮਿਆਰ:**
+- ✅ ਸਾਰੀਆਂ ਸੇਵਾਵਾਂ "ਚੱਲ ਰਹੀਆਂ" ਸਥਿਤੀ ਦਿਖਾਉਂਦੀਆਂ ਹਨ
+- ✅ ਹੈਲਥ ਐਂਡਪੌਇੰਟ HTTP 200 ਵਾਪਸ ਕਰਦੇ ਹਨ
+- ✅ ਪਿਛਲੇ 5 ਮਿੰਟਾਂ ਵਿੱਚ ਕੋਈ ਐਰਰ ਲੋਗ ਨਹੀਂ
+- ✅ ਐਪਲੀਕੇਸ਼ਨ ਟੈਸਟ ਰਿਕਵੇਸਟਾਂ ਦਾ ਜਵਾਬ ਦਿੰਦੀ ਹੈ
 
-## 🏗️ Understanding the Deployment Process
+## 🏗️ ਤਾਇਨਾਤੀ ਪ੍ਰਕਿਰਿਆ ਨੂੰ ਸਮਝਣਾ
 
-### Phase 1: Pre-Provision Hooks
+### ਚਰਣ 1: ਪ੍ਰੀ-ਪ੍ਰੋਵਿਜ਼ਨ ਹੁਕ
 ```yaml
 # azure.yaml
 hooks:
@@ -131,13 +131,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Phase 2: Infrastructure Provisioning
-- Reads infrastructure templates (Bicep/Terraform)
-- Creates or updates Azure resources
-- Configures networking and security
-- Sets up monitoring and logging
+### ਚਰਣ 2: ਢਾਂਚਾ ਪ੍ਰੋਵਿਜ਼ਨ
+- ਢਾਂਚਾ ਟੈਮਪਲੇਟ (Bicep/Terraform) ਨੂੰ ਪੜ੍ਹਦਾ ਹੈ
+- Azure ਸਰੋਤ ਬਣਾਉਂਦਾ ਜਾਂ ਅਪਡੇਟ ਕਰਦਾ ਹੈ
+- ਨੈੱਟਵਰਕਿੰਗ ਅਤੇ ਸੁਰੱਖਿਆ ਨੂੰ ਸੰਰਚਿਤ ਕਰਦਾ ਹੈ
+- ਨਿਗਰਾਨੀ ਅਤੇ ਲੋਗਿੰਗ ਸੈਟਅੱਪ ਕਰਦਾ ਹੈ
 
-### Phase 3: Post-Provision Hooks
+### ਚਰਣ 3: ਪੋਸਟ-ਪ੍ਰੋਵਿਜ਼ਨ ਹੁਕ
 ```yaml
 hooks:
   postprovision:
@@ -150,12 +150,12 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### Phase 4: Application Packaging
-- Builds application code
-- Creates deployment artifacts
-- Packages for target platform (containers, ZIP files, etc.)
+### ਚਰਣ 4: ਐਪਲੀਕੇਸ਼ਨ ਪੈਕੇਜਿੰਗ
+- ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ ਨੂੰ ਬਿਲਡ ਕਰਦਾ ਹੈ
+- ਤਾਇਨਾਤੀ ਆਰਟੀਫੈਕਟ ਬਣਾਉਂਦਾ ਹੈ
+- ਟਾਰਗੇਟ ਪਲੇਟਫਾਰਮ ਲਈ ਪੈਕੇਜ਼ ਬਣਾਉਂਦਾ ਹੈ (ਕੰਟੇਨਰ, ZIP ਫਾਇਲਾਂ ਆਦਿ)
 
-### Phase 5: Pre-Deploy Hooks
+### ਚਰਣ 5: ਪ੍ਰੀ-ਡਿਪਲੋਏ ਹੁਕ
 ```yaml
 hooks:
   predeploy:
@@ -168,12 +168,12 @@ hooks:
       npm run db:migrate
 ```
 
-### Phase 6: Application Deployment
-- Deploys packaged applications to Azure services
-- Updates configuration settings
-- Starts/restarts services
+### ਚਰਣ 6: ਐਪਲੀਕੇਸ਼ਨ ਤਾਇਨਾਤੀ
+- ਪੈਕੇਜ ਕੀਤੀਆਂ ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ Azure ਸੇਵਾਵਾਂ 'ਤੇ ਤਾਇਨਾਤੀ ਕਰਦਾ ਹੈ
+- ਕੰਫਿਗਰੇਸ਼ਨ ਸੈਟਿੰਗਜ਼ ਅਪਡੇਟ ਕਰਦਾ ਹੈ
+- ਸੇਵਾਵਾਂ ਨੂੰ ਸ਼ੁਰੂ/ਰੀਸਟਾਰਟ ਕਰਦਾ ਹੈ
 
-### Phase 7: Post-Deploy Hooks
+### ਚਰਣ 7: ਪੋਸਟ-ਡਿਪਲੋਏ ਹੁਕ
 ```yaml
 hooks:
   postdeploy:
@@ -186,9 +186,9 @@ hooks:
       curl https://${WEB_URL}/health
 ```
 
-## 🎛️ Deployment Configuration
+## 🎛️ ਤਾਇਨਾਤੀ ਸੰਰਚਨਾ
 
-### Service-Specific Deployment Settings
+### ਸੇਵਾ-ਖਾਸ ਤਾਇਨਾਤੀ ਸੈਟਿੰਗਾਂ
 ```yaml
 # azure.yaml
 services:
@@ -218,9 +218,9 @@ services:
     buildCommand: npm install --production
 ```
 
-### Environment-Specific Configurations
+### ਵਾਤਾਵਰਣ-ਖਾਸ ਸੰਰਚਨਾਵਾਂ
 ```bash
-# ਡਿਵੈਲਪਮੈਂਟ ਵਾਤਾਵਰਣ
+# ਵਿਕਾਸ ਵਾਤਾਵਰਣ
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
@@ -238,9 +238,9 @@ azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 Advanced Deployment Scenarios
+## 🔧 ਉੱਨਤ ਤਾਇਨਾਤੀ ਪਰਿਸਥਿਤੀਆਂ
 
-### Multi-Service Applications
+### ਬਹੁ-ਸੇਵਾ ਐਪਲੀਕੇਸ਼ਨ
 ```yaml
 # Complex application with multiple services
 services:
@@ -276,24 +276,24 @@ services:
     host: function
 ```
 
-### Blue-Green Deployments
+### ਬਲੂ-ਗ੍ਰੀਨ ਤਾਇਨਾਤੀਆਂ
 ```bash
-# ਨੀਲਾ ਵਾਤਾਵਰਣ ਬਣਾਓ
+# ਨੀਲਾ ਮਾਹੌਲ ਬਣਾਓ
 azd env new production-blue
 azd up --environment production-blue
 
-# ਨੀਲੇ ਵਾਤਾਵਰਣ ਦੀ ਜਾਂਚ ਕਰੋ
+# ਨੀਲੇ ਮਾਹੌਲ ਦੀ ਜਾਂਚ ਕਰੋ
 ./scripts/test-environment.sh production-blue
 
-# ਟ੍ਰੈਫਿਕ ਨੂੰ ਨੀਲੇ ਵੱਲ ਮੋੜੋ (ਮੈਨੁਅਲ DNS/ਲੋਡ ਬੈਲੈਂਸਰ ਅਪਡੇਟ)
+# ਟ੍ਰੈਫਿਕ ਨੂੰ ਨੀਲੇ ਮਾਹੌਲ ਵੱਲ ਬਦਲੋ (ਹੱਥੋਂ DNS/ਲੋਡ ਬੈਲੈਂਸਰ ਨੂੰ ਅਪਡੇਟ ਕਰੋ)
 ./scripts/switch-traffic.sh production-blue
 
-# ਹਰੇ ਵਾਤਾਵਰਣ ਨੂੰ ਸਾਫ਼ ਕਰੋ
+# ਹਰਾ ਮਾਹੌਲ ਸਾਫ ਕਰੋ
 azd env select production-green
 azd down --force
 ```
 
-### Canary Deployments
+### ਕੈਨੇਰੀ ਤਾਇਨਾਤੀਆਂ
 ```yaml
 # azure.yaml - Configure traffic splitting
 services:
@@ -307,10 +307,10 @@ services:
         percentage: 10
 ```
 
-### Staged Deployments
+### ਮੰਚ ਬਿਨੰਤੀ ਤਾਇਨਾਤੀਆਂ
 ```bash
-#!/bin/bash
-# deploy-staged.sh
+#!/ਬਿਨ/ਬੈਸ਼
+# ਡਿਪਲੋਇ-ਸਟੇਜਡ.sh
 
 echo "Deploying to development..."
 azd env select dev
@@ -338,9 +338,9 @@ if [[ $confirm == [yY] ]]; then
 fi
 ```
 
-## 🐳 Container Deployments
+## 🐳 ਕੰਟੇਨਰ ਤਾਇਨਾਤੀਆਂ
 
-### Container App Deployments
+### ਕੰਟੇਨਰ ਐਪ ਤਾਇਨਾਤੀਆਂ
 ```yaml
 services:
   api:
@@ -364,7 +364,7 @@ services:
       maxReplicas: 10
 ```
 
-### Multi-Stage Dockerfile Optimization
+### ਬਹੁ-ਚਰਣ Dockerfile ਅਪਟੀਮਾਈਜ਼ੇਸ਼ਨ
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -390,19 +390,19 @@ EXPOSE 3000
 CMD ["npm", "start"]
 ```
 
-## ⚡ Performance Optimization
+## ⚡ ਪ੍ਰਦਰਸ਼ਨ ਸੁਧਾਰ
 
-### Service-Specific Deployments
+### ਸੇਵਾ-ਖਾਸ ਤਾਇਨਾਤੀਆਂ
 ```bash
-# ਕਿਸੇ ਵਿਸ਼ੇਸ਼ ਸੇਵਾ ਨੂੰ ਤੇਜ਼ ਤਬਦੀਲੀ-ਚੱਕਰ ਲਈ ਤੈਨਾਤ ਕਰੋ
+# ਤੇਜ਼ ਦੁਹਰਾਈ ਲਈ ਇੱਕ ਵਿਸ਼ੇਸ਼ ਸੇਵਾ ਤਾਇਨਾਤ ਕਰੋ
 azd deploy --service web
 azd deploy --service api
 
-# ਸਾਰੀਆਂ ਸੇਵਾਵਾਂ ਨੂੰ ਤੈਨਾਤ ਕਰੋ
+# ਸਭ ਸੇਵਾਵਾਂ ਤਾਇਨਾਤ ਕਰੋ
 azd deploy
 ```
 
-### Build Caching
+### ਬਿਲਡ ਕੈਸ਼ਿੰਗ
 ```yaml
 # azure.yaml - Configure build commands
 services:
@@ -412,19 +412,19 @@ services:
     outputPath: dist
 ```
 
-### Efficient Code Deployments
+### ਕਾਰਗਰ ਕੋਡ ਤਾਇਨਾਤੀਆਂ
 ```bash
-# ਕੋਡ-ਮਾਤਰ ਬਦਲਾਵਾਂ ਲਈ azd deploy (azd up ਨਹੀਂ) ਵਰਤੋਂ
-# ਇਹ ਇੰਫਰਾਸਟਰਕਚਰ ਪ੍ਰੋਵਿਜ਼ਨਿੰਗ ਨੂੰ ਛੱਡ ਦਿੰਦਾ ਹੈ ਅਤੇ ਬਹੁਤ ਤੇਜ਼ ਹੈ
+# ਕੇਵਲ ਕੋਡ ਬਦਲਾਵਾਂ ਲਈ azd deploy (azd up ਨਹੀਂ) ਵਰਤੋ
+# ਇਹ ਇੰਫਰਾਸਟਰੱਕਚਰ ਪ੍ਰੋਵਿਜ਼ਨਿੰਗ ਨੂੰ ਛੱਡ ਦਿੰਦਾ ਹੈ ਅਤੇ ਬਹੁਤ ਤੇਜ਼ ਹੈ
 azd deploy
 
-# ਸਭ ਤੋਂ ਤੇਜ਼ ਇਟਰੇਸ਼ਨ ਲਈ ਖਾਸ ਸੇਵਾ ਨੂੰ ਡਿਪਲੋਇ ਕਰੋ
+# ਸਭ ਤੋਂ ਤੇਜ਼ ਇਟਰੇਸ਼ਨ ਲਈ ਕਿਸੇ ਵਿਸ਼ੇਸ਼ ਸੇਵਾ ਨੂੰ ਡਿਪਲੋਇ ਕਰੋ
 azd deploy --service api
 ```
 
-## 🔍 Deployment Monitoring
+## 🔍 ਤਾਇਨਾਤੀ ਨਿਗਰਾਨੀ
 
-### Real-Time Deployment Monitoring
+### ਰੀਅਲ-ਟਾਈਮ ਤਾਇਨਾਤੀ ਨਿਗਰਾਨੀ
 ```bash
 # ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਰੀਅਲ-ਟਾਈਮ ਵਿੱਚ ਨਿਗਰਾਨੀ ਕਰੋ
 azd monitor --live
@@ -436,7 +436,7 @@ azd monitor --logs
 azd show
 ```
 
-### Health Checks
+### ਹੈਲਥ ਚੈਕ
 ```yaml
 # azure.yaml - Configure health checks
 services:
@@ -450,7 +450,7 @@ services:
       retries: 3
 ```
 
-### Post-Deployment Validation
+### ਪੋਸਟ-ਤਾਇਨਾਤੀ ਸੰਗ੍ਰਹਿ / ਮਾਨਤਾ
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
@@ -483,16 +483,16 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 Security Considerations
+## 🔐 ਸੁਰੱਖਿਆ ਸੰਬੰਧੀ ਗੱਲਾਂ
 
-### Secrets Management
+### ਰਹੱਸ ਪ੍ਰਬੰਧਨ
 ```bash
-# ਰਹੱਸਾਂ ਨੂੰ ਸੁਰੱਖਿਅਤ ਤਰੀਕੇ ਨਾਲ ਸਟੋਰ ਕਰੋ
+# ਗੁਪਤ ਜਾਣਕਾਰੀਆਂ ਸੁਰੱਖਿਅਤ ਤਰੀਕੇ ਨਾਲ ਸਟੋਰ ਕਰੋ
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# azure.yaml ਵਿੱਚ ਰਹੱਸਾਂ ਦਾ ਹਵਾਲਾ ਦਿਓ
+# azure.yaml ਵਿੱਚ ਰਾਜ਼ਾਂ ਦਾ ਹਵਾਲਾ ਦਿਓ
 ```
 
 ```yaml
@@ -505,7 +505,7 @@ services:
         value: ${JWT_SECRET}
 ```
 
-### Network Security
+### ਨੈੱਟਵਰਕ ਸੁਰੱਖਿਆ
 ```yaml
 # azure.yaml - Configure network security
 infra:
@@ -516,7 +516,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### Identity and Access Management
+### ਪਹਚਾਨ ਅਤੇ ਐਕਸੈਸ ਪ੍ਰਬੰਧਨ
 ```yaml
 services:
   api:
@@ -531,37 +531,37 @@ services:
           - external-api-key
 ```
 
-## 🚨 Rollback Strategies
+## 🚨 ਰੋਲਬੈਕ ਰਣਨੀਤੀਆਂ
 
-### Quick Rollback
+### ਤੇਜ਼ ਰੋਲਬੈਕ
 ```bash
-# AZD ਵਿੱਚ ਬਿਲਟ-ਇਨ ਰੋਲਬੈਕ ਨਹੀਂ ਹੈ। ਸਿਫਾਰਸ਼ ਕੀਤੇ ਤਰੀਕੇ:
+# AZD ਵਿੱਚ ਅੰਦਰੂਨੀ ਰੋਲਬੈਕ ਨਹੀਂ ਹੈ। ਸਿਫਾਰਸ਼ ਕੀਤੀਆਂ ਵਿਧੀਆਂ:
 
-# ਵਿਕਲਪ 1: Git ਤੋਂ ਮੁੜ ਤਾਇਨਾਤ ਕਰੋ (ਸਿਫਾਰਸ਼ ਕੀਤੀ)
-git revert HEAD  # ਸਮੱਸਿਆ ਵਾਲੇ ਕਮੇਟ ਨੂੰ ਰਿਵਰਟ ਕਰੋ
+# ਵਿਕਲਪ 1: Git ਤੋਂ ਦੁਬਾਰਾ ਡਿਪਲੋਏ ਕਰੋ (ਸਿਫਾਰਸ਼ ਕੀਤੀ ਗਈ)
+git revert HEAD  # ਸਮੱਸਿਆਪੂਰਨ ਕਮਿਟ ਨੂੰ ਰਿਵਰਟ ਕਰੋ
 git push
 azd deploy
 
-# ਵਿਕਲਪ 2: ਖਾਸ ਕਮੇਟ ਨੂੰ ਮੁੜ ਤਾਇਨਾਤ ਕਰੋ
+# ਵਿਕਲਪ 2: ਨਿਰਧਾਰਿਤ ਕਮਿਟ ਨੂੰ ਦੁਬਾਰਾ ਡਿਪਲੋਏ ਕਰੋ
 git checkout <previous-commit-hash>
 azd deploy
 git checkout main
 ```
 
-### Infrastructure Rollback
+### ਢਾਂਚਾ ਰੋਲਬੈਕ
 ```bash
-# ਲਾਗੂ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਇੰਫ੍ਰਾਸਟਰੱਕਚਰ ਬਦਲਾਅ ਦੀ ਪੂਰਵ-ਦਿੱਖ ਕਰੋ
+# ਲਾਗੂ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਇੰਫ੍ਰਾਸਟਰੱਕਚਰ ਦੀਆਂ ਤਬਦੀਲੀਆਂ ਦਾ ਜਾਇਜ਼ਾ ਲਓ
 azd provision --preview
 
-# ਇੰਫ੍ਰਾਸਟਰੱਕਚਰ ਰੋਲਬੈਕ ਲਈ, ਵਰਜ਼ਨ ਕੰਟਰੋਲ ਵਰਤੋਂ:
-git revert HEAD  # ਇੰਫ੍ਰਾਸਟਰੱਕਚਰ ਬਦਲਾਅ ਨੂੰ ਵਾਪਸ ਕਰੋ
+# ਇੰਫ੍ਰਾਸਟਰੱਕਚर ਦੀ ਰੋਲਬੈਕ ਲਈ ਵਰਜਨ ਕੰਟਰੋਲ ਦੀ ਵਰਤੋਂ ਕਰੋ:
+git revert HEAD  # ਇੰਫ੍ਰਾਸਟਰੱਕਚਰ ਦੀਆਂ ਤਬਦੀਲੀਆਂ ਨੂੰ ਵਾਪਸ ਲਿਆਓ
 azd provision    # ਪਿਛਲੀ ਇੰਫ੍ਰਾਸਟਰੱਕਚਰ ਸਥਿਤੀ ਲਾਗੂ ਕਰੋ
 ```
 
-### Database Migration Rollback
+### ਡੇਟਾਬੇਸ ਮਾਈਗ੍ਰੇਸ਼ਨ ਰੋਲਬੈਕ
 ```bash
 #!/bin/bash
-# ਸਕ੍ਰਿਪਟਸ/ਰੋਲਬੈਕ-ਡੇਟਾਬੇਸ.sh
+# scripts/rollback-database.sh
 
 echo "Rolling back database migrations..."
 npm run db:rollback
@@ -572,11 +572,11 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 Deployment Metrics
+## 📊 ਤਾਇਨਾਤੀ ਮੈਟ੍ਰਿਕਸ
 
-### Track Deployment Performance
+### ਤਾਇਨਾਤੀ ਕਾਰਗਿਰਦਗੀ ਨੂੰ ਟਰੈਕ ਕਰੋ
 ```bash
-# ਮੌਜੂਦਾ ਡਿਪਲੋਇਮੈਂਟ ਦੀ ਸਥਿਤੀ ਵੇਖੋ
+# ਮੌਜੂਦਾ ਡਿਪਲੋਇਮੈਂਟ ਸਥਿਤੀ ਵੇਖੋ
 azd show
 
 # Application Insights ਨਾਲ ਐਪਲੀਕੇਸ਼ਨ ਦੀ ਨਿਗਰਾਨੀ ਕਰੋ
@@ -586,7 +586,7 @@ azd monitor --overview
 azd monitor --live
 ```
 
-### Custom Metrics Collection
+### ਕਸਟਮ ਮੈਟ੍ਰਿਕਸ ਇਕੱਤਰ ਕਰਨਾ
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -603,32 +603,32 @@ hooks:
         -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
 ```
 
-## 🎯 Best Practices
+## 🎯 ਸਰਵੋਤਮ ਅਭਿਆਸ
 
-### 1. Environment Consistency
+### 1. ਵਾਤਾਵਰਣ ਸਥਿਰਤਾ
 ```bash
-# ਇਕਸਾਰ ਨਾਮਕਰਨ ਦੀ ਵਰਤੋਂ ਕਰੋ
+# ਨਾਮਕਰਨ ਵਿੱਚ ਇੱਕਸਾਰਤਾ ਰੱਖੋ
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# ਵਾਤਾਵਰਨਾਂ ਦੀ ਸਮਾਨਤਾ ਬਰਕਰਾਰ ਰੱਖੋ
+# ਵਾਤਾਵਰਣਾਂ ਵਿੱਚ ਸਮਰੂਪਤਾ ਬਣਾਈ ਰੱਖੋ
 ./scripts/sync-environments.sh
 ```
 
-### 2. Infrastructure Validation
+### 2. ਢਾਂਚਾਗਤ ਤਸਦੀਕ
 ```bash
-# ਤੈਨਾਤੀ ਤੋਂ ਪਹਿਲਾਂ ਬੁਨਿਆਦੀ ਢਾਂਚੇ ਵਿੱਚ ਹੋਣ ਵਾਲੇ ਬਦਲਾਵਾਂ ਦਾ ਪ੍ਰੀਵਿਊ ਕਰੋ
+# ਤੈਨਾਤੀ ਤੋਂ ਪਹਿਲਾਂ ਢਾਂਚੇ ਵਿੱਚ ਹੋਣ ਵਾਲੇ ਬਦਲਾਅ ਦਾ ਪ੍ਰੀਵਿਊ ਕਰੋ
 azd provision --preview
 
-# ARM/Bicep ਲਿੰਟਿੰਗ ਦੀ ਵਰਤੋਂ ਕਰੋ
+# ARM/Bicep ਲਿੰਟਿੰਗ ਵਰਤੋ
 az bicep lint --file infra/main.bicep
 
 # Bicep ਸਿੰਟੈਕਸ ਦੀ ਜਾਂਚ ਕਰੋ
 az bicep build --file infra/main.bicep
 ```
 
-### 3. Testing Integration
+### 3. ਟੈਸਟਇੰਗ ਏਕੀਕਰਨ
 ```yaml
 hooks:
   predeploy:
@@ -657,74 +657,74 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. Documentation and Logging
+### 4. ਡੌਕਯੂਮੈਂਟੇਸ਼ਨ ਅਤੇ ਲੋਗਿੰਗ
 ```bash
-# ਤਾਇਨਾਤ ਕਰਨ ਦੀਆਂ ਪ੍ਰਕਿਰਿਆਵਾਂ ਨੂੰ ਦਸਤਾਵੇਜ਼ ਕਰੋ
+# ਡਿਪਲੋਇਮੈਂਟ ਦੀਆਂ ਪ੍ਰਕਿਰਿਆਵਾਂ ਦਸਤਾਵੇਜ਼ ਕਰੋ
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
 ```
 
-## Next Steps
+## ਅਗਲੇ ਕਦਮ
 
-- [Provisioning Resources](provisioning.md) - Deep dive into infrastructure management
-- [Pre-Deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - Plan your deployment strategy
-- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - Resolve deployment issues
-- [Best Practices](../chapter-07-troubleshooting/debugging.md) - Production-ready deployment strategies
+- [ਰਿਸੋਰਸ ਪ੍ਰੋਵਿਜ਼ਨ](provisioning.md) - ਢਾਂਚਾ ਪ੍ਰਬੰਧਨ ਵਿੱਚ ਡੂੰਘੀ ਛਾਨਬੀਨ
+- [ਪ੍ਰੀ-ਤਾਇਨਾਤੀ ਯੋਜਨਾ](../chapter-06-pre-deployment/capacity-planning.md) - ਆਪਣੀ ਤਾਇਨਾਤੀ ਰਣਨੀਤੀ ਦੀ ਯੋਜਨਾ ਬਣਾਓ
+- [ਆਮ ਸਮੱਸਿਆਵਾਂ](../chapter-07-troubleshooting/common-issues.md) - ਤਾਇਨਾਤੀ ਸਮੱਸਿਆਵਾਂ ਨੂੰ ਹੱਲ ਕਰੋ
+- [ਸਰਵੋਤਮ ਅਭਿਆਸ](../chapter-07-troubleshooting/debugging.md) - ਉਤਪਾਦਨ-ਤਿਆਰ ਤਾਇਨਾਤੀ ਰਣਨੀਤੀਆਂ
 
-## 🎯 Hands-On Deployment Exercises
+## 🎯 ਹੈਂਡਸ-ਆਨ ਤਾਇਨਾਤੀ ਅਭਿਆਸ
 
-### Exercise 1: Incremental Deployment Workflow (20 minutes)
-**Goal**: Master the difference between full and incremental deployments
+### ਅਭਿਆਸ 1: ਇੰਕਰੀਮੈਂਟਲ ਤਾਇਨਾਤੀ ਵਰਕਫਲੋ (20 ਮਿੰਟ)
+**ਉਦੇਸ਼**: ਪੂਰੀ ਅਤੇ ਇੰਕਰੀਮੈਂਟਲ ਤਾਇਨਾਤੀਆਂ ਦੇ ਵਿਚਕਾਰ ਫ਼ਰਕ ਵਿੱਚ ਮਾਹਰ ਹੋਣਾ
 
 ```bash
-# ਸ਼ੁਰੂਆਤੀ ਤੈਨਾਤੀ
+# ਸ਼ੁਰੂਆਤੀ ਡਿਪਲੌਇਮੈਂਟ
 mkdir deployment-practice && cd deployment-practice
 azd init --template todo-nodejs-mongo
 azd up
 
-# ਸ਼ੁਰੂਆਤੀ ਤੈਨਾਤੀ ਦਾ ਸਮਾਂ ਦਰਜ ਕਰੋ
+# ਸ਼ੁਰੂਆਤੀ ਡਿਪਲੌਇਮੈਂਟ ਦਾ ਸਮਾਂ ਦਰਜ ਕਰੋ
 echo "Full deployment: $(date)" > deployment-log.txt
 
-# ਕੋਡ ਵਿੱਚ ਬਦਲਾਅ ਕਰੋ
+# ਕੋਡ ਵਿੱਚ ਤਬਦੀਲੀ ਕਰੋ
 echo "// Updated $(date)" >> src/api/src/server.js
 
-# ਸਿਰਫ਼ ਕੋਡ ਤੈਨਾਤ ਕਰੋ (ਤੇਜ਼)
+# ਸਿਰਫ ਕੋਡ ਡਿਪਲੌਇਮੈਂਟ ਕਰੋ (ਤੇਜ਼)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
 # ਸਮਿਆਂ ਦੀ ਤੁਲਨਾ ਕਰੋ
 cat deployment-log.txt
 
-# ਸਾਫ਼-ਸਫਾਈ ਕਰੋ
+# ਸਾਫ਼-ਸੁਥਰਾ ਕਰੋ
 azd down --force --purge
 ```
 
-**Success Criteria:**
-- [ ] Full deployment takes 5-15 minutes
-- [ ] Code-only deployment takes 2-5 minutes
-- [ ] Code changes reflected in deployed app
-- [ ] Infrastructure unchanged after `azd deploy`
+**ਸਫਲਤਾ ਦੇ ਮਿਆਰ:**
+- [ ] ਪੂਰੀ ਤਾਇਨਾਤੀ 5-15 ਮਿੰਟ ਲੈਂਦੀ ਹੈ
+- [ ] ਕੋਡ-ਕੇਵਲ ਤਾਇਨਾਤੀ 2-5 ਮਿੰਟ ਲੈਂਦੀ ਹੈ
+- [ ] ਕੋਡ ਬਦਲਾਅ ਤਾਇਨਾਤ ਕੀਤੇ ਐਪ ਵਿੱਚ ਦਰਸਾਏ ਗਏ ਹਨ
+- [ ] `azd deploy` ਤੋਂ ਬਾਅਦ ਢਾਂਚਾ ਅਪਰਿਵਰਤਤ ਰਹਿੰਦਾ ਹੈ
 
-**Learning Outcome**: `azd deploy` is 50-70% faster than `azd up` for code changes
+**ਸਿੱਖਣ ਨਤੀਜਾ**: `azd deploy` ਕੋਡ ਬਦਲਾਅ ਲਈ `azd up` ਨਾਲੋਂ 50-70% ਤੇਜ਼ ਹੈ
 
-### Exercise 2: Custom Deployment Hooks (30 minutes)
-**Goal**: Implement pre and post-deployment automation
+### ਅਭਿਆਸ 2: ਕਸਟਮ ਤਾਇਨਾਤੀ ਹੁਕ (30 ਮਿੰਟ)
+**ਉਦੇਸ਼**: ਪ੍ਰੀ ਅਤੇ ਪੋਸਟ-ਤਾਇਨਾਤੀ ਆਟੋਮੇਸ਼ਨ ਲਾਗੂ ਕਰੋ
 
 ```bash
-# ਪ੍ਰੀ-ਡਿਪਲੋਇ ਵੈਰੀਫਿਕੇਸ਼ਨ ਸਕ੍ਰਿਪਟ ਬਣਾਓ
+# ਪ੍ਰੀ-ਡਿਪਲੌਇ ਵੈਲਿਡੇਸ਼ਨ ਸਕ੍ਰਿਪਟ ਬਣਾਓ
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
 echo "⚠️ Running pre-deployment checks..."
 
-# ਟੈਸਟ ਪਾਸ ਹਨ ਜਾਂ ਨਹੀਂ ਜਾਂਚੋ
+# ਜਾਂਚ ਕਰੋ ਕਿ ਟੈਸਟ ਪਾਸ ਹਨ
 if ! npm run test:unit; then
     echo "❌ Tests failed! Aborting deployment."
     exit 1
 fi
 
-# ਅਣ-ਕਮਿੱਟ ਕੀਤੀਆਂ ਤਬਦੀਲੀਆਂ ਲਈ ਜਾਂਚੋ
+# ਅਣਕਮਿਟ ਕੀਤੀਆਂ ਤਬਦੀਲੀਆਂ ਲਈ ਜਾਂਚ ਕਰੋ
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -734,7 +734,7 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# ਪੋਸਟ-ਡਿਪਲੋਇ ਸਮੋਕ ਟੈਸਟ ਬਣਾਓ
+# ਡਿਪਲੌਇ ਤੋਂ ਬਾਅਦ ਸਮੋਕ ਟੈਸਟ ਬਣਾਓ
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
 echo "💨 Running smoke tests..."
@@ -753,7 +753,7 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# azure.yaml ਵਿੱਚ ਹੁਕਸ ਜੋੜੋ
+# azure.yaml ਵਿੱਚ hooks ਸ਼ਾਮਲ ਕਰੋ
 cat >> azure.yaml << 'EOF'
 
 hooks:
@@ -766,18 +766,18 @@ hooks:
     run: ./scripts/post-deploy-test.sh
 EOF
 
-# ਹੁਕਸ ਨਾਲ ਡਿਪਲੋਇਮੈਂਟ ਦੀ ਜਾਂਚ ਕਰੋ
+# hooks ਨਾਲ ਡਿਪਲੌਇਮੈਂਟ ਦੀ ਜਾਂਚ ਕਰੋ
 azd deploy
 ```
 
-**Success Criteria:**
-- [ ] Pre-deploy script runs before deployment
-- [ ] Deployment aborts if tests fail
-- [ ] Post-deploy smoke test validates health
-- [ ] Hooks execute in correct order
+**ਸਫਲਤਾ ਦੇ ਮਿਆਰ:**
+- [ ] ਪ੍ਰੀ-ਡਿਪਲੋਏ ਸਕ੍ਰਿਪਟ ਤਾਇਨਾਤੀ ਤੋਂ ਪਹਿਲਾਂ ਚਲਦੀ ਹੈ
+- [ ] ਜੇ ਟੈਸਟ ਫੇਲ ਹੁੰਦੇ ਹਨ ਤਾਂ ਤਾਇਨਾਤੀ ਰੱਦ ਹੋ ਜਾਂਦੀ ਹੈ
+- [ ] ਪੋਸਟ-ਡਿਪਲੋਏ ਸਮੋਕ ਟੈਸਟ ਹੈਲਥ ਦੀ ਪੁਸ਼ਟੀ ਕਰਦਾ ਹੈ
+- [ ] ਹੁਕ ਸਹੀ ਕ੍ਰਮ ਵਿੱਚ ਚਲਦੇ ਹਨ
 
-### Exercise 3: Multi-Environment Deployment Strategy (45 minutes)
-**Goal**: Implement staged deployment workflow (dev → staging → production)
+### ਅਭਿਆਸ 3: ਬਹੁ-ਵਾਤਾਵਰਣ ਤਾਇਨਾਤੀ ਰਣਨੀਤੀ (45 ਮਿੰਟ)
+**ਉਦੇਸ਼**: ਮੰਚਿਤ ਤਾਇਨਾਤੀ ਵਰਕਫਲੋ ਲਾਗੂ ਕਰੋ (dev → staging → production)
 
 ```bash
 # ਡਿਪਲੋਇਮੈਂਟ ਸਕ੍ਰਿਪਟ ਬਣਾਓ
@@ -788,7 +788,7 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# ਕਦਮ 1: ਡੈਵ ਤੇ ਡਿਪਲੋਇ ਕਰੋ
+# ਕਦਮ 1: ਡੈਵ 'ਤੇ ਡਿਪਲੋਇ ਕਰੋ
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
@@ -797,7 +797,7 @@ azd up --no-prompt
 echo "Running dev tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# ਕਦਮ 2: ਸਟੇਜਿੰਗ ਤੇ ਡਿਪਲੋਇ ਕਰੋ
+# ਕਦਮ 2: ਸਟੇਜਿੰਗ 'ਤੇ ਡਿਪਲੋਇ ਕਰੋ
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
@@ -806,7 +806,7 @@ azd up --no-prompt
 echo "Running staging tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# ਕਦਮ 3: ਪ੍ਰੋਡਕਸ਼ਨ ਲਈ ਮੈਨੂਅਲ ਮਨਜ਼ੂਰੀ
+# ਕਦਮ 3: ਉਤਪਾਦਨ ਲਈ ਮੈਨੂਅਲ ਮਨਜ਼ੂਰੀ
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -834,30 +834,30 @@ azd env new dev
 azd env new staging
 azd env new production
 
-# ਸਟੇਜ ਕੀਤੀ ਡਿਪਲੋਇਮੈਂਟ ਚਲਾਓ
+# ਪੜਾਅਵਾਰ ਡਿਪਲੋਇਮੈਂਟ ਚਲਾਓ
 ./deploy-staged.sh
 ```
 
-**Success Criteria:**
-- [ ] Dev environment deploys successfully
-- [ ] Staging environment deploys successfully
-- [ ] Manual approval required for production
-- [ ] All environments have working health checks
-- [ ] Can roll back if needed
+**ਸਫਲਤਾ ਦੇ ਮਿਆਰ:**
+- [ ] Dev ਵਾਤਾਵਰਣ ਸਫਲਤਾਪੂਰਵਕ ਤਾਇਨਾਤ ਹੁੰਦੀ ਹੈ
+- [ ] Staging ਵਾਤਾਵਰਣ ਸਫਲਤਾਪੂਰਵਕ ਤਾਇਨਾਤ ਹੁੰਦੀ ਹੈ
+- [ ] ਉਤਪਾਦਨ ਲਈ ਮੈਨੂਅਲ ਮਨਜ਼ੂਰੀ ਲਾਜ਼ਮੀ ਹੈ
+- [ ] ਸਾਰੇ ਵਾਤਾਵਰਣਾਂ ਵਿੱਚ ਕੰਮ ਕਰਦੇ ਹੈਲਥ ਚੈਕ ਹਨ
+- [ ] ਜਰੂਰਤ ਪੈਣ 'ਤੇ ਰੋਲਬੈਕ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ
 
-### Exercise 4: Rollback Strategy (25 minutes)
-**Goal**: Implement and test deployment rollback using Git
+### ਅਭਿਆਸ 4: ਰੋਲਬੈਕ ਰਣਨੀਤੀ (25 ਮਿੰਟ)
+**ਉਦੇਸ਼**: Git ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਤਾਇਨਾਤੀ ਰੋਲਬੈਕ ਲਾਗੂ ਅਤੇ ਟੈਸਟ ਕਰੋ
 
 ```bash
-# v1 ਨੂੰ ਡਿਪਲੋਇ ਕਰੋ
+# v1 ਤਾਇਨਾਤ ਕਰੋ
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# v1 ਦੀ ਕਮਿਟ ਹੈਸ਼ ਨੂੰ ਸੇਵ ਕਰੋ
+# v1 ਕਮਿਟ ਹੈਸ਼ ਨੂੰ ਸੇਵ ਕਰੋ
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# v2 ਨੂੰ ਟੁੱਟਣ-ਵਾਲੇ ਬਦਲਾਅ ਦੇ ਨਾਲ ਡਿਪਲੋਇ ਕਰੋ
+# ਟੁੱਟਣ ਵਾਲੇ ਬਦਲਾਅ ਨਾਲ v2 ਤਾਇਨਾਤ ਕਰੋ
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
@@ -867,31 +867,31 @@ azd deploy
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # git ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਰੋਲਬੈਕ ਕਰੋ
+    # git ਦੀ ਵਰਤੋਂ ਕਰ ਕੇ ਰੋਲਬੈਕ ਕਰੋ
     git revert HEAD --no-edit
     
-    # ਇਨਵਾਇਰਨਮੈਂਟ ਨੂੰ ਰੋਲਬੈਕ ਕਰੋ
+    # ਵਾਤਾਵਰਣ ਨੂੰ ਰੋਲਬੈਕ ਕਰੋ
     azd env set APP_VERSION "1.0.0"
     
-    # v1 ਨੂੰ ਦੁਬਾਰਾ ਡਿਪਲੋਇ ਕਰੋ
+    # v1 ਨੂੰ ਦੁਬਾਰਾ ਤਾਇਨਾਤ ਕਰੋ
     azd deploy
     
     echo "✅ Rolled back to v1.0.0"
 fi
 ```
 
-**Success Criteria:**
-- [ ] Can detect deployment failures
-- [ ] Rollback script executes automatically
-- [ ] Application returns to working state
-- [ ] Health checks pass after rollback
+**ਸਫਲਤਾ ਦੇ ਮਿਆਰ:**
+- [ ] ਤਾਇਨਾਤੀ ਨਾਕਾਮੀਆਂ ਦੀ ਪਛਾਣ ਕੀਤੀ ਜਾ ਸਕਦੀ ਹੈ
+- [ ] ਰੋਲਬੈਕ ਸਕ੍ਰਿਪਟ ਆਟੋਮੈਟਿਕ ਤੌਰ 'ਤੇ ਚਲਦੀ ਹੈ
+- [ ] ਐਪਲੀਕੇਸ਼ਨ ਕੰਮ ਕਰਨ ਵਾਲੀ ਸਥਿਤੀ ਵਾਪਸ ਆ ਜਾਂਦੀ ਹੈ
+- [ ] ਰੋਲਬੈਕ ਤੋਂ ਬਾਅਦ ਹੈਲਥ ਚੈਕ ਪਾਸ ਹੋ ਜਾਂਦੇ ਹਨ
 
-## 📊 Deployment Metrics Tracking
+## 📊 ਤਾਇਨਾਤੀ ਮੈਟ੍ਰਿਕਸ ਟ੍ਰੈਕਿੰਗ
 
-### Track Your Deployment Performance
+### ਆਪਣੀ ਤਾਇਨਾਤੀ ਕਾਰਗਿਰਦਗੀ ਟਰੈਕ ਕਰੋ
 
 ```bash
-# ਡਿਪਲੋਇਮੈਂਟ ਮੈਟ੍ਰਿਕਸ ਸਕ੍ਰਿਪਟ ਬਣਾਓ
+# ਡਿਪਲੋਇਮੈਂਟ ਮੈਟ੍ਰਿਕਸ ਲਈ ਸਕ੍ਰਿਪਟ ਬਣਾਓ
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
@@ -914,20 +914,20 @@ EOF
 
 chmod +x track-deployment.sh
 
-# ਇਸ ਨੂੰ ਵਰਤੋ
+# ਇਸਨੂੰ ਵਰਤੋ
 ./track-deployment.sh
 ```
 
-**Analyze your metrics:**
+**ਆਪਣੇ ਮੈਟ੍ਰਿਕਸ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ ਕਰੋ:**
 ```bash
-# ਤੈਨਾਤੀ ਇਤਿਹਾਸ ਵੇਖੋ
+# ਡਿਪਲੋਇਮੈਂਟ ਇਤਿਹਾਸ ਵੇਖੋ
 cat deployment-metrics.csv
 
-# ਔਸਤ ਤੈਨਾਤੀ ਸਮਾਂ ਗਣਨਾ ਕਰੋ
+# ਔਸਤ ਡਿਪਲੋਇਮੈਂਟ ਸਮੇਂ ਦੀ ਗਣਨਾ ਕਰੋ
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
-## Additional Resources
+## ਵਾਧੂ ਸਰੋਤ
 
 - [Azure Developer CLI Deployment Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
@@ -936,14 +936,13 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Your First Project](../chapter-01-foundation/first-project.md)
-- **Next Lesson**: [Provisioning Resources](provisioning.md)
+**ਨੈਵੀਗੇਸ਼ਨ**
+- **ਪਿਛਲਾ ਪਾਠ**: [ਤੁਹਾਡਾ ਪਹਿਲਾ ਪ੍ਰੋਜੈਕਟ](../chapter-01-foundation/first-project.md)
+- **ਅਗਲਾ ਪਾਠ**: [ਰਿਸੋਰਸ ਪ੍ਰੋਵਿਜ਼ਨ](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-ਅਸਵੀਕਾਰ:
-
-ਇਸ ਦਸਤਾਵੇਜ਼ ਦਾ ਅਨੁਵਾਦ AI ਅਨੁਵਾਦ ਸੇਵਾ Co-op Translator (https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਕੀਤਾ ਗਿਆ ਹੈ। ਅਸੀਂ ਸ਼ੁੱਧਤਾ ਲਈ ਯਤਨਸ਼ੀਲ ਹਾਂ, ਪਰ ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਆਟੋਮੇਟਿਕ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਤ੍ਰੁਟੀਆਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਉਸ ਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਕ ਸਰੋਤ ਹੀ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫ਼ਾਰਿਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਨਾਲ ਪੈਦਾ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆ ਲਈ ਅਸੀਂ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+**ਅਸਵੀਕਾਰਨ**:
+ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਨਾਲ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸ਼ੁੱਧਤਾ ਲਈ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਆਟੋਮੇਟਿਕ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਣ-ਸਹੀਤੀਆਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਇਸ ਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਹੀ ਅਧਿਕਾਰਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਜਰੂਰੀ ਜਾਣਕਾਰੀ ਲਈ, ਪ੍ਰੋਫੈਸ਼ਨਲ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਿਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਕਾਰਨ ਪੈਦਾ਼ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫ਼ਹਿਮੀਆਂ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆਵਾਂ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

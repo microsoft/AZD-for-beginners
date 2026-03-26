@@ -2,41 +2,41 @@
 
 **تنقل الفصل:**
 - **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
-- **📖 الفصل الحالي**: الفصل 1 - الأساسيات والبدء السريع
+- **📖 الفصل الحالي**: الفصل 1 - الأساس والبدء السريع
 - **⬅️ السابق**: [التثبيت والإعداد](installation.md)
 - **➡️ التالي**: [التكوين](configuration.md)
-- **🚀 الفصل التالي**: [الفصل 2: التطوير المعتمد على الذكاء الاصطناعي](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 الفصل التالي**: [الفصل 2: تطوير يركز على الذكاء الاصطناعي](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-## المقدمة
+## مقدمة
 
-مرحبًا بك في مشروعك الأول باستخدام Azure Developer CLI! يقدم هذا الدرس العملي الشامل شرحًا كاملاً لإنشاء ونشر وإدارة تطبيق شامل على Azure باستخدام azd. ستعمل على تطبيق مهام حقيقي يتضمن واجهة أمامية React وواجهة برمجة تطبيقات Node.js وقاعدة بيانات MongoDB.
+مرحبًا بك في مشروعك الأول باستخدام Azure Developer CLI! يقدم هذا الدرس العملي الشامل شرحًا كاملًا لإنشاء ونشر وإدارة تطبيق متكامل على Azure باستخدام azd. ستعمل على تطبيق مهام حقيقي يتضمن واجهة أمامية React، وواجهة برمجة تطبيقات Node.js، وقاعدة بيانات MongoDB.
 
 ## أهداف التعلم
 
-بإكمال هذا الدرس، ستتمكن من:
+من خلال إكمال هذا الدرس، ستتمكن من:
 - إتقان سير عمل تهيئة مشروع azd باستخدام القوالب
-- فهم هيكل مشروع Azure Developer CLI وملفات التكوين
-- تنفيذ نشر كامل للتطبيق على Azure مع توفير البنية التحتية
-- تنفيذ استراتيجيات تحديث التطبيق وإعادة النشر
-- إدارة بيئات متعددة للتطوير والاختبار
-- تطبيق ممارسات تنظيف الموارد وإدارة التكلفة
+- فهم بنية مشروع Azure Developer CLI وملفات التكوين
+- تنفيذ نشر التطبيق الكامل إلى Azure مع توفير البنية التحتية
+- تنفيذ استراتيجيات تحديث وإعادة نشر التطبيق
+- إدارة بيئات متعددة للتطوير ومرحلة الاختبار
+- تطبيق ممارسات تنظيف الموارد وإدارة التكاليف
 
-## نتائج التعلم
+## مخرجات التعلم
 
-عند الانتهاء، ستتمكن من:
+عند الانتهاء، ستكون قادرًا على:
 - تهيئة وتكوين مشاريع azd من القوالب بشكل مستقل
-- التنقل وتعديل بنية مشاريع azd بفعالية
-- نشر تطبيقات كاملة الاستاك إلى Azure باستخدام أوامر واحدة
-- استكشاف المشكلات الشائعة في النشر ومشكلات المصادقة وإصلاحها
+- التنقل وتعديل هياكل مشاريع azd بفعالية
+- نشر تطبيقات متكاملة إلى Azure باستخدام أوامر واحدة
+- استكشاف أخطاء النشر الشائعة ومشاكل المصادقة وإصلاحها
 - إدارة بيئات Azure متعددة لمراحل نشر مختلفة
 - تنفيذ سير عمل النشر المستمر لتحديثات التطبيق
 
 ## البدء
 
-### قائمة متطلبات النظام
-- ✅ تم تثبيت Azure Developer CLI ([دليل التثبيت](installation.md))
-- ✅ تم تثبيت Azure CLI وتسجيل الدخول
-- ✅ تم تثبيت Git على نظامك
+### قائمة المتطلبات الأساسية
+- ✅ مثبت Azure Developer CLI ([دليل التثبيت](installation.md))
+- ✅ مثبت ومصادق عليه Azure CLI
+- ✅ Git مثبت على جهازك
 - ✅ Node.js 16+ (لهذا الدرس)
 - ✅ Visual Studio Code (موصى به)
 
@@ -51,14 +51,14 @@ azd version
 az account show
 ```
 
-### تحقق من إصدار Node.js
+### التحقق من إصدار Node.js
 ```bash
 node --version
 ```
 
 ## الخطوة 1: اختر وابدأ قالبًا
 
-لنبدأ بقالب تطبيق المهام الشائع الذي يتضمن واجهة أمامية React وواجهة برمجة تطبيقات Node.js.
+لنبدأ بقالب تطبيق مهام شائع يتضمن واجهة أمامية React وواجهة برمجة تطبيقات Node.js.
 
 ```bash
 # تصفح القوالب المتاحة
@@ -76,14 +76,14 @@ azd init --template todo-nodejs-mongo
 ```
 
 ### ماذا حدث للتو؟
-- تم تنزيل كود القالب إلى الدليل المحلي الخاص بك
-- تم إنشاء ملف `azure.yaml` يحتوي على تعريفات الخدمات
-- تم إعداد كود البنية التحتية في الدليل `infra/`
-- تم إنشاء تكوين بيئة
+- تم تنزيل كود القالب إلى دليلك المحلي
+- تم إنشاء ملف `azure.yaml` مع تعريفات الخدمات
+- تم إعداد كود البنية التحتية في دليل `infra/`
+- تم إنشاء تكوين البيئة
 
-## الخطوة 2: استكشف هيكل المشروع
+## الخطوة 2: استكشاف هيكل المشروع
 
-لنفحص ما أنشأه azd لنا:
+لنراجع ما أنشأه azd لنا:
 
 ```bash
 # عرض بنية المشروع
@@ -119,7 +119,7 @@ my-first-azd-app/
 └── README.md                   # Project documentation
 ```
 
-### الملفات الرئيسية التي يجب فهمها
+### الملفات الأساسية التي يجب فهمها
 
 **azure.yaml** - قلب مشروع azd الخاص بك:
 ```bash
@@ -160,24 +160,24 @@ azd env get-values
 
 ## الخطوة 4: النشر إلى Azure
 
-والآن الجزء المثير - قم بنشر كل شيء إلى Azure!
+حان الجزء المثير - انشر كل شيء إلى Azure!
 
 ```bash
 # نشر البنية التحتية والتطبيق
 azd up
 
 # سيقوم هذا الأمر بما يلي:
-# 1. توفير موارد Azure (App Service وCosmos DB، إلخ)
+# 1. توفير موارد Azure (خدمة التطبيقات، Cosmos DB، إلخ.)
 # 2. بناء تطبيقك
 # 3. النشر إلى الموارد التي تم توفيرها
-# 4. عرض عنوان URL للتطبيق
+# 4. عرض عنوان URL الخاص بالتطبيق
 ```
 
 ### ماذا يحدث أثناء النشر؟
 
-ينفذ أمر `azd up` هذه الخطوات:
+أمر `azd up` ينفذ هذه الخطوات:
 1. **Provision** (`azd provision`) - ينشئ موارد Azure
-2. **Package** - يبني كود تطبيقك
+2. **Package** - يبني كود التطبيق الخاص بك
 3. **Deploy** (`azd deploy`) - ينشر الكود إلى موارد Azure
 
 ### المخرجات المتوقعة
@@ -198,19 +198,19 @@ https://app-web-abc123def.azurewebsites.net
 ### الوصول إلى تطبيقك
 انقر على عنوان URL المقدم في مخرجات النشر، أو احصل عليه في أي وقت:
 ```bash
-# الحصول على نقاط النهاية للتطبيق
+# احصل على نقاط نهاية التطبيق
 azd show
 
 # افتح التطبيق في متصفحك
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### اختبر تطبيق المهام
-1. **أضف عنصرًا إلى المهام** - انقر على "Add Todo" وأدخل مهمة
-2. **وضع علامة كمكتمل** - ضع علامة على العناصر المكتملة
-3. **حذف العناصر** - قم بإزالة المهام التي لم تعد بحاجة إليها
+### اختبار تطبيق المهام
+1. **إضافة عنصر مهام** - انقر "Add Todo" وأدخل مهمة
+2. **وضع علامة كمكتمل** - علم العناصر المكتملة
+3. **حذف عناصر** - إزالة المهام التي لم تعد بحاجة إليها
 
-### رصد تطبيقك
+### مراقبة تطبيقك
 ```bash
 # افتح بوابة Azure لمواردك
 azd monitor
@@ -224,23 +224,23 @@ azd monitor --live
 
 ## الخطوة 6: إجراء تغييرات وإعادة النشر
 
-لنقم بإجراء تغيير ونرى مدى سهولة التحديث:
+لنجري تغييرًا ونرى مدى سهولة التحديث:
 
 ### تعديل واجهة برمجة التطبيقات
 ```bash
-# عدل كود واجهة برمجة التطبيقات
+# حرر شفرة واجهة برمجة التطبيقات
 code src/api/src/routes/lists.js
 ```
 
 أضف رأس استجابة مخصص:
 ```javascript
-// ابحث عن معالج المسار وأضف:
+// اعثر على معالج المسار وأضف:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
 ### نشر تغييرات الكود فقط
 ```bash
-# انشر كود التطبيق فقط (تجاوز البنية التحتية)
+# انشر كود التطبيق فقط (تخطي البنية التحتية)
 azd deploy
 
 # هذا أسرع بكثير من 'azd up' لأن البنية التحتية موجودة بالفعل
@@ -248,16 +248,16 @@ azd deploy
 
 ## الخطوة 7: إدارة بيئات متعددة
 
-أنشئ بيئة تجريبية لاختبار التغييرات قبل الإنتاج:
+قم بإنشاء بيئة staging لاختبار التغييرات قبل الإنتاج:
 
 ```bash
-# إنشاء بيئة مرحلية جديدة
+# إنشاء بيئة تجريبية جديدة
 azd env new staging
 
-# نشر إلى البيئة المرحلية
+# النشر إلى البيئة التجريبية
 azd up
 
-# التبديل مرة أخرى إلى بيئة التطوير
+# العودة إلى بيئة التطوير
 azd env select dev
 
 # عرض جميع البيئات
@@ -270,7 +270,7 @@ azd env list
 azd env select dev
 azd show
 
-# عرض بيئة الاختبار
+# عرض بيئة ما قبل الإنتاج
 azd env select staging
 azd show
 ```
@@ -280,10 +280,10 @@ azd show
 عندما تنتهي من التجربة، قم بالتنظيف لتجنب التكاليف المستمرة:
 
 ```bash
-# حذف جميع موارد Azure للبيئة الحالية
+# حذف كل موارد Azure للبيئة الحالية
 azd down
 
-# الحذف القسري دون تأكيد وإزالة نهائية للموارد المحذوفة مؤقتًا
+# الحذف بالقوة دون تأكيد ومسح الموارد المحذوفة مؤقتًا
 azd down --force --purge
 
 # حذف بيئة محددة
@@ -291,12 +291,32 @@ azd env select staging
 azd down --force --purge
 ```
 
-## ما تعلمته
+## تطبيق كلاسيكي مقابل تطبيق مدعوم بالذكاء الاصطناعي: نفس سير العمل
+
+لقد قمت للتو بنشر تطبيق ويب تقليدي. ولكن ماذا لو أردت نشر تطبيق مدعوم بالذكاء الاصطناعي بدلاً من ذلك—على سبيل المثال، تطبيق دردشة مدعوم بنماذج Microsoft Foundry؟
+
+الخبر الجيد: **سير العمل متماثل.**
+
+| Step | Classic Todo App | AI Chat App |
+|------|-----------------|-------------|
+| Initialize | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
+| Authenticate | `azd auth login` | `azd auth login` |
+| Deploy | `azd up` | `azd up` |
+| Monitor | `azd monitor` | `azd monitor` |
+| Clean up | `azd down --force --purge` | `azd down --force --purge` |
+
+الاختلاف الوحيد هو **القالب** الذي تبدأ منه. يتضمن قالب الذكاء الاصطناعي بنية تحتية إضافية (مثل مورد نماذج Microsoft Foundry أو فهرس AI Search)، لكن azd يتولى كل ذلك نيابة عنك. لست بحاجة لتعلم أوامر جديدة، أو اعتماد أداة مختلفة، أو تغيير طريقة تفكيرك حول النشر.
+
+هذا هو المبدأ الأساسي لـ azd: **سير عمل واحد، أي عبء عمل.** المهارات التي مارستها في هذا الدرس—التهيئة، والنشر، والمراقبة، وإعادة النشر، والتنظيف—تنطبق بنفس القدر على تطبيقات ووكلاء الذكاء الاصطناعي.
+
+---
+
+## ما الذي تعلمته
 
 تهانينا! لقد نجحت في:
 - ✅ تهيئة مشروع azd من قالب
-- ✅ استكشاف هيكل المشروع والملفات الرئيسية
-- ✅ نشر تطبيق كامل الاستاك إلى Azure
+- ✅ استكشاف هيكل المشروع والملفات الأساسية
+- ✅ نشر تطبيق متكامل إلى Azure
 - ✅ إجراء تغييرات على الكود وإعادة النشر
 - ✅ إدارة بيئات متعددة
 - ✅ تنظيف الموارد
@@ -304,15 +324,15 @@ azd down --force --purge
 ## 🎯 تمارين التحقق من المهارة
 
 ### التمرين 1: نشر قالب مختلف (15 دقيقة)
-**الهدف**: إثبات الإتقان في azd init وسير عمل النشر
+**الهدف**: إثبات الإتقان لأمر `azd init` وسير عمل النشر
 
 ```bash
-# جرّب مكدس بايثون + MongoDB
+# جرّب مكدس بايثون و MongoDB
 mkdir todo-python && cd todo-python
 azd init --template todo-python-mongo
 azd up
 
-# تحقق من النشر
+# تحقّق من النشر
 azd show
 curl $(azd show --output json | jq -r '.services.web.endpoint')
 
@@ -321,9 +341,9 @@ azd down --force --purge
 ```
 
 **معايير النجاح:**
-- [ ] يتم نشر التطبيق دون أخطاء
-- [ ] يمكن الوصول إلى عنوان URL الخاص بالتطبيق في المتصفح
-- [ ] يعمل التطبيق بشكل صحيح (إضافة/إزالة المهام)
+- [ ] يتم نشر التطبيق بدون أخطاء
+- [ ] يمكن الوصول إلى عنوان تطبيق في المتصفح
+- [ ] التطبيق يعمل بشكل صحيح (إضافة/إزالة المهام)
 - [ ] تم تنظيف جميع الموارد بنجاح
 
 ### التمرين 2: تخصيص التكوين (20 دقيقة)
@@ -357,34 +377,34 @@ azd up
 **الهدف**: إتقان إدارة البيئات واستراتيجيات النشر
 
 ```bash
-# إنشاء بيئة التطوير
+# أنشئ بيئة التطوير
 azd env new dev-$(whoami)
 azd env set ENVIRONMENT_TYPE dev
 azd env set LOG_LEVEL debug
 azd up
 
-# تدوين عنوان URL لبيئة التطوير
+# دوّن رابط بيئة التطوير
 DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Dev: $DEV_URL"
 
-# إنشاء بيئة الإعداد
+# أنشئ بيئة المعاينة
 azd env new staging-$(whoami)
 azd env set ENVIRONMENT_TYPE staging
 azd env set LOG_LEVEL info
 azd up
 
-# تدوين عنوان URL لبيئة الإعداد
+# دوّن رابط بيئة المعاينة
 STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Staging: $STAGING_URL"
 
-# مقارنة البيئات
+# قارن البيئات
 azd env list
 
-# اختبار كلتا البيئتين
+# اختبر البيئتين
 curl "$DEV_URL/health"
 curl "$STAGING_URL/health"
 
-# تنظيف كلتا البيئتين
+# نظف البيئتين
 azd env select dev-$(whoami) && azd down --force --purge
 azd env select staging-$(whoami) && azd down --force --purge
 ```
@@ -400,16 +420,16 @@ azd env select staging-$(whoami) && azd down --force --purge
 
 **الوقت المستثمر**: ~60-90 دقيقة  
 **المهارات المكتسبة**:
-- ✅ تهيئة المشروع بناءً على القوالب
+- ✅ تهيئة المشاريع بناءً على القوالب
 - ✅ توفير موارد Azure
 - ✅ سير عمل نشر التطبيقات
 - ✅ إدارة البيئات
 - ✅ إدارة التكوين
 - ✅ تنظيف الموارد وإدارة التكاليف
 
-**المستوى التالي**: أنت جاهز لـ [دليل التكوين](configuration.md) لتتعلم أنماط التكوين المتقدمة!
+**المستوى التالي**: أنت جاهز لقراءة [دليل التكوين](configuration.md) لتعلم أنماط التكوين المتقدمة!
 
-## استكشاف المشكلات الشائعة وإصلاحها
+## استكشاف المشكلات الشائعة
 
 ### أخطاء المصادقة
 ```bash
@@ -435,11 +455,11 @@ azd monitor --logs
 
 ### تعارض أسماء الموارد
 ```bash
-# استخدم اسمًا فريدًا للبيئة
+# استخدم اسم بيئة فريد
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
-### مشكلات المنفذ/الشبكة
+### مشاكل المنفذ/الشبكة
 ```bash
 # تحقق مما إذا كانت المنافذ متاحة
 netstat -an | grep :3000
@@ -448,17 +468,17 @@ netstat -an | grep :3100
 
 ## الخطوات التالية
 
-الآن بعد إكمال مشروعك الأول، استكشف هذه الموضوعات المتقدمة:
+الآن بعد أن أكملت مشروعك الأول، استكشف هذه الموضوعات المتقدمة:
 
 ### 1. تخصيص البنية التحتية
-- [البنية التحتية ككود](../chapter-04-infrastructure/provisioning.md)
+- [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md)
 - [إضافة قواعد بيانات وتخزين وخدمات أخرى](../chapter-04-infrastructure/provisioning.md#adding-services)
 
 ### 2. إعداد CI/CD
 - [دليل النشر](../chapter-04-infrastructure/deployment-guide.md) - سير عمل CI/CD الكامل
-- [توثيق Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - تكوين خطوط الأنابيب
+- [توثيق Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - تكوين الأنابيب
 
-### 3. ممارسات أفضل للإنتاج
+### 3. أفضل ممارسات الإنتاج
 - [دليل النشر](../chapter-04-infrastructure/deployment-guide.md) - الأمان والأداء والمراقبة
 
 ### 4. استكشاف المزيد من القوالب
@@ -477,19 +497,19 @@ azd init --template todo-java-mongo
 ## موارد إضافية
 
 ### مواد تعليمية
-- [توثيق Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [مركز معمارية Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [إطار العمل المعماري الجيد لـ Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### المجتمع والدعم
-- [مستودع Azure Developer CLI على GitHub](https://github.com/Azure/azure-dev)
-- [مجتمع مطوري Azure](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
+- [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### القوالب والأمثلة
-- [معرض القوالب الرسمي](https://azure.github.io/awesome-azd/)
-- [قوالب المجتمع](https://github.com/Azure-Samples/azd-templates)
-- [أنماط المؤسسة](https://github.com/Azure/azure-dev/tree/main/templates)
+- [Official Template Gallery](https://azure.github.io/awesome-azd/)
+- [Community Templates](https://github.com/Azure-Samples/azd-templates)
+- [Enterprise Patterns](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
@@ -499,15 +519,15 @@ azd init --template todo-java-mongo
 
 **تنقل الفصل:**
 - **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
-- **📖 الفصل الحالي**: الفصل 1 - الأساسيات والبدء السريع
+- **📖 الفصل الحالي**: الفصل 1 - الأساس والبدء السريع
 - **⬅️ السابق**: [التثبيت والإعداد](installation.md)
 - **➡️ التالي**: [التكوين](configuration.md)
-- **🚀 الفصل التالي**: [الفصل 2: التطوير المعتمد على الذكاء الاصطناعي](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 الفصل التالي**: [الفصل 2: تطوير يركز على الذكاء الاصطناعي](../chapter-02-ai-development/microsoft-foundry-integration.md)
 - **الدرس التالي**: [دليل النشر](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 إخلاء المسؤولية:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية Co-op Translator (https://github.com/Azure/co-op-translator). بينما نسعى إلى الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المعتمد. بالنسبة للمعلومات الحرجة، يوصى بالاستعانة بترجمة احترافية يقوم بها مترجم بشري. نحن غير مسؤولين عن أي سوء فهم أو تفسير خاطئ ينشأ عن استخدام هذه الترجمة.
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية بالذكاء الاصطناعي [Co-op Translator] (https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يُرجى ملاحظة أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار الوثيقة الأصلية بلغتها الأصلية المصدر المعتمد. للمعلومات الحرجة، يُنصح بالاستعانة بترجمة احترافية بشرية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة ناتجة عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

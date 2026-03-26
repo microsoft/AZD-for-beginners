@@ -1,54 +1,46 @@
-# Jednoduché Flask API - príklad Container App
+# Simple Flask API - Container App Example
 
-**Vzdelávacia cesta:** Začiatočník ⭐ | **Čas:** 25-35 minút | **Náklady:** $0-15/mesiac
+**Learning Path:** Začiatočník ⭐ | **Time:** 25-35 minutes | **Cost:** $0-15/month
 
-Kompletné, fungujúce Python Flask REST API nasadené do Azure Container Apps pomocou Azure Developer CLI (azd). Tento príklad demonštruje nasadenie kontajnera, automatické škálovanie a základy monitorovania.
+Úplné, fungujúce Python Flask REST API nasadené do Azure Container Apps pomocou Azure Developer CLI (azd). Tento príklad demonštruje nasadenie kontajnera, automatické škálovanie a základy monitorovania.
 
-## 🎯 Čo sa naučíte
+## 🎯 What You'll Learn
 
 - Nasadiť kontajnerizovanú Python aplikáciu do Azure
-- Nakonfigurovať automatické škálovanie so škálovaním na nulu
-- Implementovať health probe a readiness checky
+- Konfigurovať automatické škálovanie so škálovaním na nulu
+- Implementovať health probes a readiness kontroly
 - Monitorovať logy a metriky aplikácie
 - Použiť Azure Developer CLI pre rýchle nasadenie
 
-## 📦 Čo je zahrnuté
+## 📦 What's Included
 
 ✅ **Flask Application** - Kompletné REST API s CRUD operáciami (`src/app.py`)  
-✅ **Dockerfile** - Produkčná konfigurácia kontajnera  
+✅ **Dockerfile** - Konfigurácia kontajnera pripravená na produkciu  
 ✅ **Bicep Infrastructure** - Prostredie Container Apps a nasadenie API  
 ✅ **AZD Configuration** - Nasadenie jedným príkazom  
-✅ **Health Probes** - Nakonfigurované kontroly liveness a readiness  
+✅ **Health Probes** - Nakonfigurované liveness a readiness kontroly  
 ✅ **Auto-scaling** - 0-10 replík na základe HTTP záťaže  
 
-## Architektúra
+## Architecture
 
+```mermaid
+graph TD
+    subgraph ACA[Prostredie Azure Container Apps]
+        Flask[Kontajner Flask API<br/>Koncové body stavu<br/>REST API<br/>Automatické škálovanie 0-10 replík]
+        AppInsights[Služba Application Insights]
+    end
 ```
-┌─────────────────────────────────────────┐
-│   Azure Container Apps Environment      │
-│                                         │
-│  ┌───────────────────────────────────┐ │
-│  │   Flask API Container             │ │
-│  │   - Health endpoints              │ │
-│  │   - REST API                      │ │
-│  │   - Auto-scaling (0-10 replicas)  │ │
-│  └───────────────────────────────────┘ │
-│                                         │
-│  Application Insights ────────────────┐ │
-└────────────────────────────────────────┘
-```
+## Prerequisites
 
-## Predpoklady
+### Required
+- **Azure Developer CLI (azd)** - [Inštalačný návod](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
+- **Azure subscription** - [Bezpečný účet](https://azure.microsoft.com/free/)
+- **Docker Desktop** - [Install Docker](https://www.docker.com/products/docker-desktop/) (pre lokálne testovanie)
 
-### Požadované
-- **Azure Developer CLI (azd)** - [Návod na inštaláciu](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **Azure subscription** - [Bezplatný účet](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Inštalácia Dockeru](https://www.docker.com/products/docker-desktop/) (pre lokálne testovanie)
-
-### Overenie predpokladov
+### Verify Prerequisites
 
 ```bash
-# Skontrolujte verziu azd (potrebná verzia 1.5.0 alebo novšia)
+# Skontrolujte verziu azd (potrebujete verziu 1.5.0 alebo novšiu)
 azd version
 
 # Overte prihlásenie do Azure
@@ -58,17 +50,17 @@ azd auth login
 docker --version
 ```
 
-## ⏱️ Časový priebeh nasadenia
+## ⏱️ Deployment Timeline
 
-| Fáza | Trvanie | Čo sa deje |
+| Phase | Duration | What Happens |
 |-------|----------|--------------||
-| Nastavenie prostredia | 30 sekúnd | Vytvorenie azd prostredia |
-| Zostavenie kontajnera | 2-3 minúty | Docker build Flask aplikácie |
-| Zabezpečenie infraštruktúry | 3-5 minút | Vytvorenie Container Apps, registru, monitorovania |
-| Nasadenie aplikácie | 2-3 minúty | Push image a nasadenie do Container Apps |
-| **Spolu** | **8-12 minút** | Kompletné nasadenie pripravené |
+| Environment setup | 30 seconds | Create azd environment |
+| Build container | 2-3 minutes | Docker build Flask app |
+| Provision infrastructure | 3-5 minutes | Create Container Apps, registry, monitoring |
+| Deploy application | 2-3 minutes | Push image and deploy to Container Apps |
+| **Total** | **8-12 minutes** | Complete deployment ready |
 
-## Rýchly štart
+## Quick Start
 
 ```bash
 # Prejdite na príklad
@@ -77,21 +69,21 @@ cd examples/container-app/simple-flask-api
 # Inicializujte prostredie (zvoľte jedinečný názov)
 azd env new myflaskapi
 
-# Nasaďte všetko (infraštruktúra + aplikácia)
+# Nasaďte všetko (infrastruktúra + aplikácia)
 azd up
-# Budete vyzvaní:
+# Budete vyzvaní, aby ste:
 # 1. Vyberte predplatné Azure
-# 2. Vyberte umiestnenie (napr. eastus2)
+# 2. Zvoľte umiestnenie (napr. eastus2)
 # 3. Počkajte 8-12 minút na nasadenie
 
-# Získajte koncový bod svojho API
+# Získajte koncový bod API
 azd env get-values
 
 # Otestujte API
 curl $(azd env get-value API_ENDPOINT)/health
 ```
 
-**Očakávaný výstup:**
+**Expected Output:**
 ```json
 {
   "status": "healthy",
@@ -101,9 +93,9 @@ curl $(azd env get-value API_ENDPOINT)/health
 }
 ```
 
-## ✅ Overenie nasadenia
+## ✅ Verify Deployment
 
-### Krok 1: Skontrolujte stav nasadenia
+### Step 1: Check Deployment Status
 
 ```bash
 # Zobraziť nasadené služby
@@ -115,13 +107,13 @@ azd show
 # - Stav: Beží
 ```
 
-### Krok 2: Otestujte koncové body API
+### Step 2: Test API Endpoints
 
 ```bash
 # Získať koncový bod API
 API_URL=$(azd env get-value API_ENDPOINT)
 
-# Test stavu služby
+# Test stavu
 curl $API_URL/health
 
 # Test koreňového koncového bodu
@@ -136,28 +128,28 @@ curl -X POST $API_URL/api/items \
 curl $API_URL/api/items
 ```
 
-**Kritériá úspechu:**
+**Success Criteria:**
 - ✅ Koncový bod /health vracia HTTP 200
-- ✅ Koreňový koncový bod zobrazuje informácie o API
-- ✅ POST vytvorí položku a vráti HTTP 201
+- ✅ Root koncový bod zobrazuje informácie o API
+- ✅ POST vytvorí položku a vracia HTTP 201
 - ✅ GET vráti vytvorené položky
 
-### Krok 3: Zobraziť logy
+### Step 3: View Logs
 
 ```bash
-# Streamujte živé protokoly pomocou azd monitor
+# Streamujte živé logy pomocou azd monitor
 azd monitor --logs
 
 # Alebo použite Azure CLI:
 az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # Mali by ste vidieť:
-# - Správy pri spustení Gunicornu
-# - Protokoly HTTP požiadaviek
-# - Protokoly s informáciami o aplikácii
+# - Správy o spustení Gunicorn
+# - Záznamy HTTP požiadaviek
+# - Informačné záznamy aplikácie
 ```
 
-## Štruktúra projektu
+## Project Structure
 
 ```
 simple-flask-api/
@@ -174,20 +166,20 @@ simple-flask-api/
     └── Dockerfile
 ```
 
-## Koncové body API
+## API Endpoints
 
-| Koncový bod | Metóda | Popis |
+| Endpoint | Method | Description |
 |----------|--------|-------------|
-| `/health` | GET | Kontrola zdravia |
+| `/health` | GET | Kontrola stavu |
 | `/api/items` | GET | Zoznam všetkých položiek |
 | `/api/items` | POST | Vytvoriť novú položku |
 | `/api/items/{id}` | GET | Získať konkrétnu položku |
 | `/api/items/{id}` | PUT | Aktualizovať položku |
-| `/api/items/{id}` | DELETE | Vymazať položku |
+| `/api/items/{id}` | DELETE | Zmazať položku |
 
-## Konfigurácia
+## Configuration
 
-### Premenné prostredia
+### Environment Variables
 
 ```bash
 # Nastaviť vlastnú konfiguráciu
@@ -196,30 +188,30 @@ azd env set LOG_LEVEL info
 azd env set MAX_REPLICAS 20
 ```
 
-### Konfigurácia škálovania
+### Scaling Configuration
 
 API sa automaticky škáluje na základe HTTP prevádzky:
 - **Min Replicas**: 0 (škáluje na nulu, keď je nečinné)
 - **Max Replicas**: 10
-- **Počet súbežných požiadaviek na repliku**: 50
+- **Concurrent Requests per Replica**: 50
 
-## Vývoj
+## Development
 
-### Spustiť lokálne
+### Run Locally
 
 ```bash
-# Nainštalujte závislosti
+# Nainštalovať závislosti
 cd src
 pip install -r requirements.txt
 
-# Spustite aplikáciu
+# Spustiť aplikáciu
 python app.py
 
-# Otestujte lokálne
+# Otestovať lokálne
 curl http://localhost:8000/health
 ```
 
-### Zostavenie a testovanie kontajnera
+### Build and Test Container
 
 ```bash
 # Vytvoriť Docker obraz
@@ -232,23 +224,23 @@ docker run -p 8000:8000 flask-api:local
 curl http://localhost:8000/health
 ```
 
-## Nasadenie
+## Deployment
 
-### Plné nasadenie
+### Full Deployment
 
 ```bash
 # Nasadiť infraštruktúru a aplikáciu
 azd up
 ```
 
-### Nasadenie len kódu
+### Code-Only Deployment
 
 ```bash
-# Nasadiť len aplikačný kód (infraštruktúra nezmenená)
+# Nasadiť iba aplikačný kód (infraštruktúra zostáva nezmenená)
 azd deploy api
 ```
 
-### Aktualizovať konfiguráciu
+### Update Configuration
 
 ```bash
 # Aktualizovať premenné prostredia
@@ -258,12 +250,12 @@ azd env set API_KEY "new-api-key"
 azd deploy api
 ```
 
-## Monitorovanie
+## Monitoring
 
-### Zobraziť logy
+### View Logs
 
 ```bash
-# Streamujte živé logy pomocou azd monitor
+# Sledujte živé logy pomocou azd monitor
 azd monitor --logs
 
 # Alebo použite Azure CLI pre Container Apps:
@@ -273,10 +265,10 @@ az containerapp logs show --name api --resource-group $RG_NAME --follow
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ```
 
-### Monitorovať metriky
+### Monitor Metrics
 
 ```bash
-# Otvoriť panel služby Azure Monitor
+# Otvoriť informačný panel Azure Monitor
 azd monitor --overview
 
 # Zobraziť konkrétne metriky
@@ -285,15 +277,15 @@ az monitor metrics list \
   --metric "Requests,ResponseTime"
 ```
 
-## Testovanie
+## Testing
 
-### Kontrola zdravotného stavu
+### Health Check
 
 ```bash
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-Očakávaná odpoveď:
+Expected response:
 ```json
 {
   "status": "healthy",
@@ -301,7 +293,7 @@ Očakávaná odpoveď:
 }
 ```
 
-### Vytvoriť položku
+### Create Item
 
 ```bash
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/items \
@@ -309,21 +301,21 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/item
   -d '{"name": "Test Item", "description": "A test item"}'
 ```
 
-### Získať všetky položky
+### Get All Items
 
 ```bash
 curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 ```
 
-## Optimalizácia nákladov
+## Cost Optimization
 
-Toto nasadenie používa škálovanie na nulu, takže platíte len keď API spracúva požiadavky:
+Toto nasadenie používa škálovanie na nulu, takže platíte len keď API spracováva požiadavky:
 
-- **Náklady v nečinnosti**: ~$0/mesiac (škálované na nulu)
-- **Aktívne náklady**: ~$0.000024/sekundu za repliku
-- **Očakávané mesačné náklady** (ľahké používanie): $5-15
+- **Idle cost**: ~$0/month (škálované na nulu)
+- **Active cost**: ~$0.000024/second per replica
+- **Expected monthly cost** (light usage): $5-15
 
-### Ďalšie zníženie nákladov
+### Reduce Costs Further
 
 ```bash
 # Znížiť maximálny počet replík pre vývoj
@@ -333,112 +325,112 @@ azd env set MAX_REPLICAS 3
 azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 minút
 ```
 
-## Riešenie problémov
+## Troubleshooting
 
-### Kontajner sa nespustí
+### Container Won't Start
 
 ```bash
-# Skontrolujte protokoly kontajnera pomocou Azure CLI
+# Skontrolujte denníky kontajnera pomocou Azure CLI
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
-# Overte, či sa Docker obraz zostaví lokálne
+# Overte, či sa Docker image zostaví lokálne
 docker build -t test ./src
 ```
 
-### API nie je prístupné
+### API Not Accessible
 
 ```bash
-# Overiť, či je ingress externý
+# Overte, že ingress je externý
 az containerapp show --name api --resource-group rg-simple-flask-api \
   --query properties.configuration.ingress.external
 ```
 
-### Vysoké časy odozvy
+### High Response Times
 
 ```bash
-# Skontrolovať využitie CPU/pamäte
+# Skontrolujte využitie CPU a pamäte
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Zvýšiť zdroje podľa potreby
+# Navýšte zdroje, ak je to potrebné
 az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
 
-## Vyčistenie
+## Clean Up
 
 ```bash
 # Odstrániť všetky zdroje
 azd down --force --purge
 ```
 
-## Ďalšie kroky
+## Next Steps
 
-### Rozšíriť tento príklad
+### Expand This Example
 
-1. **Pridať databázu** - Integrovať Azure Cosmos DB alebo SQL Database
+1. **Add Database** - Integrate Azure Cosmos DB or SQL Database
    ```bash
    # Pridať modul Cosmos DB do infra/main.bicep
    # Aktualizovať app.py s pripojením k databáze
    ```
 
-2. **Pridať autentifikáciu** - Implementovať Azure AD alebo API kľúče
+2. **Add Authentication** - Implement Azure AD or API keys
    ```python
-   # Pridať middleware pre autentifikáciu do app.py
+   # Pridať autentifikačný middleware do app.py
    from functools import wraps
    ```
 
-3. **Nastaviť CI/CD** - GitHub Actions workflow
+3. **Set Up CI/CD** - GitHub Actions workflow
    ```yaml
    # Create .github/workflows/deploy.yml
    name: Deploy to Azure
    on: [push]
    ```
 
-4. **Pridať Managed Identity** - Zabezpečiť prístup k službám Azure
+4. **Add Managed Identity** - Secure access to Azure services
    ```bicep
    # Update infra/app/api.bicep
    identity: { type: 'SystemAssigned' }
    ```
 
-### Súvisiace príklady
+### Related Examples
 
-- **[Aplikácia s databázou](../../../../../examples/database-app)** - Kompletný príklad so SQL databázou
-- **[Mikroslužby](../../../../../examples/container-app/microservices)** - Architektúra s viacerými službami
-- **[Sprievodca Container Apps](../README.md)** - Všetky vzory pre kontajnery
+- **[Database App](../../../../../examples/database-app)** - Kompletný príklad s SQL databázou
+- **[Microservices](../../../../../examples/container-app/microservices)** - Architektúra viacerých služieb
+- **[Container Apps Master Guide](../README.md)** - Všetky vzory pre kontajnery
 
-### Vzdelávacie zdroje
+### Learning Resources
 
-- 📚 [Kurz AZD pre začiatočníkov](../../../README.md) - Hlavná stránka kurzu
-- 📚 [Vzory Container Apps](../README.md) - Viac vzorov nasadenia
-- 📚 [Galéria AZD šablón](https://azure.github.io/awesome-azd/) - Šablóny komunity
+- 📚 [AZD For Beginners Course](../../../README.md) - Hlavná stránka kurzu
+- 📚 [Container Apps Patterns](../README.md) - Ďalšie vzory nasadení
+- 📚 [AZD Templates Gallery](https://azure.github.io/awesome-azd/) - Šablóny komunity
 
-## Ďalšie zdroje
+## Additional Resources
 
-### Dokumentácia
-- **[Dokumentácia Flask](https://flask.palletsprojects.com/)** - Sprievodca frameworkom Flask
+### Documentation
+- **[Flask Documentation](https://flask.palletsprojects.com/)** - Sprievodca frameworkom Flask
 - **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Oficiálna dokumentácia Azure
 - **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - Referencia príkazov azd
 
-### Tutoriály
-- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Nasadiť vašu prvú aplikáciu
-- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Sprievodca vývojom v Pythone
+### Tutorials
+- **[Container Apps Quickstart](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Nasadte svoju prvú aplikáciu
+- **[Python on Azure](https://learn.microsoft.com/azure/developer/python/)** - Sprievodca vývojom v Pythone pre Azure
 - **[Bicep Language](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastruktúra ako kód
 
-### Nástroje
-- **[Azure Portal](https://portal.azure.com)** - Spravovanie zdrojov vizuálne
+### Tools
+- **[Azure Portal](https://portal.azure.com)** - Spravujte zdroje vizuálne
 - **[VS Code Azure Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - Integrácia do IDE
 
 ---
 
 **🎉 Gratulujeme!** Nasadili ste produkčne pripravené Flask API do Azure Container Apps s automatickým škálovaním a monitorovaním.
 
-**Máte otázky?** [Otvorte issue](https://github.com/microsoft/AZD-for-beginners/issues) alebo skontrolujte [FAQ](../../../resources/faq.md)
+**Questions?** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) or check the [FAQ](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vyhlásenie o vylúčení zodpovednosti**:
-Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, berte prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie odporúčame profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+**Upozornenie**:
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, vezmite prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by sa mal považovať za autoritatívny zdroj. Pre kritické informácie odporúčame profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z používania tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

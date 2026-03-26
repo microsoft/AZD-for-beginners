@@ -1,4 +1,4 @@
-# Capitolul 6: Planificare și validare înainte de implementare
+# Capitolul 6: Planificare și Validare Prealabilă Implementării
 
 **📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 1 oră | **⭐ Complexitate**: Intermediar
 
@@ -6,16 +6,16 @@
 
 ## Prezentare generală
 
-Acest capitol acoperă pașii esențiali de planificare și validare înainte de a implementa aplicația. Învățați cum să evitați greșelile costisitoare prin planificarea corectă a capacității, selectarea SKU-urilor și verificări prealabile.
+Acest capitol acoperă pași esențiali de planificare și validare înainte de a implementa aplicația ta. Învață să eviți greșelile costisitoare printr-o planificare corectă a capacității, selectarea SKU-urilor și verificări prealabile.
 
 ## Obiective de învățare
 
-Parcurgând acest capitol, veți:
+Prin finalizarea acestui capitol, vei:
 - Rula verificări prealabile înainte de implementare
 - Planifica capacitatea și estima cerințele de resurse
 - Selecta SKU-urile potrivite pentru optimizarea costurilor
 - Configura Application Insights pentru monitorizare
-- Înțelege modele de coordonare a echipei
+- Înțelege tiparele de coordonare în echipă
 
 ---
 
@@ -23,21 +23,21 @@ Parcurgând acest capitol, veți:
 
 | # | Lecție | Descriere | Timp |
 |---|--------|-----------|------|
-| 1 | [Verificări prealabile](preflight-checks.md) | Validați configurația înainte de implementare | 15 min |
-| 2 | [Planificarea capacității](capacity-planning.md) | Estimați cerințele de resurse | 20 min |
-| 3 | [Selecția SKU](sku-selection.md) | Alegeți nivelurile de preț potrivite | 15 min |
-| 4 | [Application Insights](application-insights.md) | Configurați monitorizarea | 20 min |
-| 5 | [Modele de coordonare](coordination-patterns.md) | Fluxuri de lucru de echipă pentru implementare | 15 min |
+| 1 | [Verificări prealabile](preflight-checks.md) | Validarea configurației înainte de implementare | 15 min |
+| 2 | [Planificarea capacității](capacity-planning.md) | Estimarea cerințelor de resurse | 20 min |
+| 3 | [Selectarea SKU-urilor](sku-selection.md) | Alegerea nivelurilor de preț adecvate | 15 min |
+| 4 | [Application Insights](application-insights.md) | Configurarea monitorizării | 20 min |
+| 5 | [Tipare de coordonare](coordination-patterns.md) | Fluxuri de lucru pentru echipa de implementare | 15 min |
 
 ---
 
-## 🚀 Pornire rapidă
+## 🚀 Început rapid
 
 ```bash
 # Verifică cotele abonamentului
 az vm list-usage --location eastus --output table
 
-# Previzualizare a implementării (nu se creează resurse)
+# Previzualizează implementarea (nu se creează resurse)
 azd provision --preview
 
 # Validează sintaxa Bicep
@@ -49,32 +49,32 @@ azd env get-values
 
 ---
 
-## ☑️ Lista de verificare înainte de implementare
+## ☑️ Listă de verificare pre-implementare
 
 ### Înainte de `azd provision`
 
-- [ ] Cotă verificată pentru regiune
+- [ ] Cota verificată pentru regiune
 - [ ] SKU-urile selectate corespunzător
 - [ ] Estimarea costurilor revizuită
-- [ ] Convenție de denumire consecventă
-- [ ] Securitate/RBAC configurate
+- [ ] Convenția de denumire consistentă
+- [ ] Securitatea/RBAC configurată
 
 ### Înainte de `azd deploy`
 
-- [ ] Variabile de mediu setate
+- [ ] Variabilele de mediu setate
 - [ ] Secrete în Key Vault
-- [ ] Șiruri de conexiune verificate
+- [ ] Șirurile de conexiune verificate
 - [ ] Verificări de sănătate configurate
 
 ---
 
-## 💰 Ghid de selecție SKU
+## 💰 Ghid pentru selectarea SKU-urilor
 
-| Sarcină | Dezvoltare | Producție |
-|---------|------------|-----------|
+| Sarcină de lucru | Dezvoltare | Producție |
+|------------------|------------|-----------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
-| Azure OpenAI | Standard | Standard + PTU |
+| Microsoft Foundry Models | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
 
 ---
@@ -97,6 +97,6 @@ azd env get-values
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Declinare de responsabilitate:
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original, în limba sa nativă, trebuie considerat sursa autorizată. Pentru informații critice se recomandă o traducere profesională realizată de un traducător uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite rezultând din utilizarea acestei traduceri.
+**Declinare a responsabilității**:  
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să aveți în vedere că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un om. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot rezulta din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,62 +1,62 @@
-# コマンド チートシート - 必須の AZD コマンド
+# コマンド チートシート - 必須 AZD コマンド
 
-**全章のクイックリファレンス**
-- **📚 コースホーム**: [AZD 入門](../README.md)
+<strong>すべての章のクイック参照</strong>
+- **📚 コース ホーム**: [AZD 入門](../README.md)
 - **📖 クイックスタート**: [第1章: 基礎とクイックスタート](../README.md#-chapter-1-foundation--quick-start)
 - **🤖 AI コマンド**: [第2章: AIファースト開発](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 高度**: [第4章: インフラをコード化](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **🔧 上級**: [第4章: インフラをコードとして](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
-## 導入
+## はじめに
 
-この包括的なチートシートは、カテゴリ別に整理され、実用的な例を含む、最も一般的に使用される Azure Developer CLI コマンドのクイックリファレンスを提供します。開発中、トラブルシューティング時、azd プロジェクトの日常運用で素早く参照するのに最適です。
+この包括的なチートシートは、最も一般的に使用される Azure Developer CLI コマンドをカテゴリ別に実用的な例とともに整理して、クイック参照を提供します。開発、トラブルシューティング、および azd プロジェクトの日常運用中の迅速な参照に最適です。
 
 ## 学習目標
 
-このチートシートを利用することで、次のことができます:
+このチートシートを使用することで、次のことができます:
 - 必須の Azure Developer CLI コマンドと構文に即座にアクセスできる
-- 機能別カテゴリやユースケースごとのコマンド構成を理解する
-- 一般的な開発およびデプロイのシナリオに対する実用的な例を参照できる
-- 問題解決のためのトラブルシューティングコマンドにアクセスできる
-- 高度な設定やカスタマイズオプションを効率的に見つける
-- 環境管理やマルチ環境ワークフローのコマンドを見つける
+- 機能カテゴリやユースケース別のコマンド構成を理解できる
+- 一般的な開発およびデプロイシナリオの実用的な例を参照できる
+- 迅速な問題解決のためのトラブルシューティングコマンドにアクセスできる
+- 高度な構成およびカスタマイズオプションを効率的に見つけることができる
+- 環境管理やマルチ環境ワークフロー用のコマンドを見つけることができる
 
 ## 学習成果
 
 このチートシートを定期的に参照することで、次のことができるようになります:
-- 完全なドキュメントを参照せずに azd コマンドを自信を持って実行できる
+- ドキュメント全体を参照せずに自信を持って azd コマンドを実行できる
 - 適切な診断コマンドを使用して一般的な問題を迅速に解決できる
 - 複数の環境やデプロイシナリオを効率的に管理できる
-- 必要に応じて高度な azd 機能や設定オプションを適用できる
-- 体系的なコマンドシーケンスを使用してデプロイの問題をトラブルシュートできる
-- azd のショートカットやオプションを効果的に使用してワークフローを最適化できる
+- 必要に応じて高度な azd 機能および構成オプションを適用できる
+- 体系的なコマンド手順を使用してデプロイの問題をトラブルシューティングできる
+- azd のショートカットとオプションを効果的に使用してワークフローを最適化できる
 
-## 開始コマンド
+## はじめにコマンド
 
 ### 認証
 ```bash
-# AZD 経由で Azure にログイン
+# AZD経由でAzureにログインする
 azd auth login
 
-# Azure CLI にログイン（AZD は内部的にこれを使用します）
+# Azure CLIにログインする（AZDは内部でこれを使用します）
 az login
 
-# 現在のアカウントを確認
+# 現在のアカウントを確認する
 az account show
 
-# 既定のサブスクリプションを設定
+# デフォルトのサブスクリプションを設定する
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 
-# AZD からログアウト
+# AZDからログアウトする
 azd auth logout
 
-# Azure CLI からログアウト
+# Azure CLIからログアウトする
 az logout
 ```
 
-### プロジェクトの初期化
+### プロジェクト初期化
 ```bash
-# 利用可能なテンプレートを閲覧
+# 利用可能なテンプレートを参照
 azd template list
 
 # テンプレートから初期化
@@ -70,20 +70,20 @@ azd init .
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## コアデプロイコマンド
+## コア デプロイ コマンド
 
 ### 完全なデプロイワークフロー
 ```bash
-# すべてをデプロイ（プロビジョニング＋デプロイ）
+# すべてをデプロイする（プロビジョニング + デプロイ）
 azd up
 
-# 確認プロンプトを無効にしてデプロイ
+# 確認プロンプトを無効にしてデプロイする
 azd up --confirm-with-no-prompt
 
-# 特定の環境にデプロイ
+# 特定の環境にデプロイする
 azd up --environment production
 
-# カスタムパラメータでデプロイ
+# カスタムパラメータを指定してデプロイする
 azd up --parameter location=westus2
 ```
 
@@ -92,15 +92,15 @@ azd up --parameter location=westus2
 # Azure リソースをプロビジョニングする
 azd provision
 
-# 🧪 インフラの変更をプレビューする
+# 🧪 インフラの変更をプレビュー
 azd provision --preview
-# 作成・変更・削除されるリソースをドライランで表示します
-# 'terraform plan' や 'bicep what-if' に似ています - 実行しても安全で、変更は適用されません
+# 作成/変更/削除されるリソースをドライランで表示します
+# 「terraform plan」や「bicep what-if」に似ています - 実行しても安全で、変更は適用されません
 ```
 
-### アプリケーションのみ
+### アプリのみ
 ```bash
-# アプリケーションのコードをデプロイする
+# アプリケーションコードをデプロイする
 azd deploy
 
 # 特定のサービスをデプロイする
@@ -113,10 +113,10 @@ azd deploy --all
 
 ### ビルドとパッケージ
 ```bash
-# アプリケーションを構築する
+# アプリケーションをビルドする
 azd package
 
-# 特定のサービスを構築する
+# 特定のサービスをビルドする
 azd package --service api
 ```
 
@@ -124,20 +124,20 @@ azd package --service api
 
 ### 環境操作
 ```bash
-# すべての環境を一覧表示する
+# すべての環境を一覧表示
 azd env list
 
-# 新しい環境を作成する
+# 新しい環境を作成
 azd env new development
 azd env new staging --location westus2
 
-# 環境を選択する
+# 環境を選択
 azd env select production
 
-# 現在の環境を表示する
+# 現在の環境を表示
 azd env show
 
-# 環境の状態を更新する
+# 環境の状態を更新
 azd env refresh
 ```
 
@@ -157,14 +157,14 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-## ⚙️ 構成コマンド
+## ⚙️ 設定コマンド
 
-### グローバル構成
+### グローバル設定
 ```bash
 # すべての設定を一覧表示
 azd config list
 
-# グローバルのデフォルトを設定
+# グローバルデフォルトを設定
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
@@ -175,7 +175,7 @@ azd config unset defaults.location
 azd config reset
 ```
 
-### プロジェクト構成
+### プロジェクト設定
 ```bash
 # azure.yaml を検証する
 azd config validate
@@ -187,14 +187,14 @@ azd show
 azd show --output json
 ```
 
-## 📊 監視と診断
+## 📊 モニタリングと診断
 
-### 監視ダッシュボード
+### モニタリングダッシュボード
 ```bash
 # Azure ポータルの監視ダッシュボードを開く
 azd monitor
 
-# Application Insights のライブメトリクスを開く
+# Application Insights のライブ メトリクスを開く
 azd monitor --live
 
 # Application Insights のログ ブレードを開く
@@ -206,7 +206,7 @@ azd monitor --overview
 
 ### コンテナログの表示
 ```bash
-# Azure CLI を使ってログを表示する（Container Apps 用）
+# Azure CLI を使用してログを表示する（コンテナー アプリ用）
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
 # ログをリアルタイムで追跡する
@@ -216,9 +216,9 @@ az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 azd monitor --logs
 ```
 
-### ログ分析クエリ
+### Log Analytics クエリ
 ```bash
-# Azure ポータルで Log Analytics にアクセスする
+# Azure ポータルから Log Analytics にアクセスする
 azd monitor --logs
 
 # Azure CLI を使用してログをクエリする
@@ -240,7 +240,7 @@ azd down --force
 # ソフト削除されたリソースを完全に削除する
 azd down --purge
 
-# 完全なクリーンアップ
+# クリーンアップを完了する
 azd down --force --purge
 ```
 
@@ -260,45 +260,100 @@ azd config list
 
 ### パイプラインと CI/CD
 ```bash
-# GitHub Actions を設定する
+# GitHub Actions を構成する
 azd pipeline config
 
-# Azure DevOps を設定する
+# Azure DevOps を構成する
 azd pipeline config --provider azdo
 
-# パイプラインの設定を表示する
+# パイプライン構成を表示する
 azd pipeline show
 ```
 
 ### インフラ管理
 ```bash
-# インフラテンプレートを生成する
+# インフラストラクチャのテンプレートを生成する
 azd infra generate
 
 # 🧪 インフラのプレビューと計画
 azd provision --preview
-# 展開せずにインフラのプロビジョニングをシミュレートします
-# Bicep/Terraform テンプレートを解析して以下を表示します:
-# - 追加されるリソース（緑 +）
-# - 変更されるリソース（黄色 ~）
-# - 削除されるリソース（赤 -）
-# 実行しても安全です - Azure 環境に実際の変更は加えられません
+# デプロイせずにインフラのプロビジョニングをシミュレートする
+# Bicep/Terraform テンプレートを解析して次を表示する:
+# - 追加されるリソース (緑 +)
+# - 変更されるリソース (黄 ~)
+# - 削除されるリソース (赤 -)
+# 実行しても安全です - Azure 環境には実際の変更は加えられません
 
-# azure.yaml からインフラを合成します
+# azure.yaml からインフラを合成する
 azd infra synth
 ```
 
 ### プロジェクト情報
 ```bash
-# プロジェクトのステータスとエンドポイントを表示する
+# プロジェクトのステータスとエンドポイントを表示
 azd show
 
-# プロジェクトの詳細情報をJSONで表示する
+# JSONでプロジェクトの詳細情報を表示
 azd show --output json
 
-# サービスのエンドポイントを取得する
+# サービスのエンドポイントを取得
 azd show --output json | jq '.services'
 ```
+
+## 🤖 AI と拡張コマンド
+
+### AZD 拡張
+```bash
+# 利用可能な拡張機能をすべて表示（AIを含む）
+azd extension list
+
+# Foundry agents 拡張機能をインストールする
+azd extension install azure.ai.agents
+
+# ファインチューニング拡張機能をインストールする
+azd extension install azure.ai.finetune
+
+# カスタムモデル拡張機能をインストールする
+azd extension install azure.ai.models
+
+# インストール済みのすべての拡張機能をアップグレードする
+azd extension upgrade --all
+```
+
+### AI エージェントコマンド
+```bash
+# マニフェストからエージェントプロジェクトを初期化する
+azd ai agent init -m <manifest-path-or-uri>
+
+# 特定のFoundryプロジェクトを対象にする
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# エージェントのソースディレクトリを指定する
+azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+
+# ホスティング先を選択する
+azd ai agent init -m agent-manifest.yaml --host containerapp
+```
+
+### MCP サーバー（アルファ）
+```bash
+# プロジェクトのMCPサーバーを起動する
+azd mcp start
+
+# MCP操作のためのツールの同意を管理する
+azd mcp consent
+```
+
+### インフラ生成
+```bash
+# プロジェクト定義からIaCファイルを生成する
+azd infra generate
+
+# azure.yamlからインフラを生成する
+azd infra synth
+```
+
+---
 
 ## 🎯 クイックワークフロー
 
@@ -321,7 +376,7 @@ azd monitor --live
 
 ### マルチ環境ワークフロー
 ```bash
-# 環境を構築する
+# 環境をセットアップする
 azd env new dev
 azd env new staging  
 azd env new production
@@ -330,7 +385,7 @@ azd env new production
 azd env select dev
 azd up
 
-# テストしてステージング環境へ移行する
+# テストしてステージングに昇格する
 azd env select staging
 azd up
 
@@ -365,7 +420,7 @@ azd show --output json
 export AZD_DEBUG=true
 azd <command> --debug
 
-# 出力を簡潔にするためテレメトリを無効にする
+# 出力を見やすくするためにテレメトリを無効にする
 export AZD_DISABLE_TELEMETRY=true
 
 # 現在の設定を確認する
@@ -377,21 +432,21 @@ az account show
 
 ### テンプレートデバッグ
 ```bash
-# 利用可能なテンプレートを詳細とともに一覧表示する
+# 利用可能なテンプレートを詳細付きで一覧表示する
 azd template list --output json
 
-# テンプレート情報を表示する
+# テンプレートの情報を表示する
 azd template show <template-name>
 
-# 初期化前にテンプレートを検証する
+# 初期化する前にテンプレートを検証する
 azd template validate <template-name>
 ```
 
-## 📁 ファイルとディレクトリのコマンド
+## 📁 ファイルおよびディレクトリコマンド
 
 ### プロジェクト構成
 ```bash
-# 現在のディレクトリ構成を表示する
+# 現在のディレクトリ構造を表示する
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
@@ -418,19 +473,19 @@ azd env get-values --output json | jq -r '.DATABASE_URL'
 
 ### テーブル出力
 ```bash
-# 表形式に整形する
+# 表形式で表示
 azd env list --output table
 
-# デプロイ済みのサービスを表示する
+# デプロイ済みサービスを表示
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 よく使うコマンドの組み合わせ
+## 🔧 よく使うコマンド組み合わせ
 
 ### ヘルスチェックスクリプト
 ```bash
 #!/bin/bash
-# 簡易的なヘルスチェック
+# 簡単なヘルスチェック
 azd show
 azd env show
 azd monitor --logs
@@ -441,7 +496,7 @@ azd monitor --logs
 #!/bin/bash
 # デプロイ前の検証
 azd show
-azd provision --preview  # デプロイ前に変更をプレビューする
+azd provision --preview  # デプロイする前に変更をプレビューする
 az account show
 ```
 
@@ -459,7 +514,7 @@ done
 ### リソースクリーンアップスクリプト
 ```bash
 #!/bin/bash
-# 古い環境をクリーンアップする
+# 古い環境をクリーンアップ
 azd env list | grep -E "(dev-|test-)" | while read env; do
     echo "Cleaning up $env"
     azd env select $env
@@ -488,38 +543,38 @@ export LOG_LEVEL="info"
 
 ## 🚨 緊急コマンド
 
-### クイック修正
+### クイックフィックス
 ```bash
-# 認証をリセットする
+# 認証をリセット
 az account clear
 az login
 
-# 環境を強制的にリフレッシュする
+# 環境を強制的にリフレッシュ
 azd env refresh
 
-# すべてのサービスを再デプロイする
+# すべてのサービスを再デプロイ
 azd deploy
 
-# デプロイの状態を確認する
+# デプロイの状態を確認
 azd show --output json
 ```
 
-### 復旧コマンド
+### リカバリーコマンド
 ```bash
-# デプロイ失敗から回復する - クリーンして再デプロイ
+# デプロイの失敗から復旧する - クリーンアップして再デプロイ
 azd down --force --purge
 azd up
 
-# インフラのみ再プロビジョニングする
+# インフラのみ再プロビジョニング
 azd provision
 
-# アプリケーションのみ再デプロイする
+# アプリケーションのみ再デプロイ
 azd deploy
 ```
 
 ## 💡 プロのヒント
 
-### ワークフローを高速化するエイリアス
+### 作業を速めるエイリアス
 ```bash
 # あなたの .bashrc または .zshrc に追加してください
 alias azdup='azd up'
@@ -530,7 +585,7 @@ alias azde='azd env'
 
 ### 関数ショートカット
 ```bash
-# 環境の素早い切り替え
+# 迅速な環境切り替え
 azd-env() {
     azd env select $1 && azd show
 }
@@ -551,13 +606,13 @@ azd-status() {
 
 ## 📖 ヘルプとドキュメント
 
-### ヘルプの取得
+### ヘルプを得る
 ```bash
 # 一般的なヘルプ
 azd --help
 azd help
 
-# コマンドごとのヘルプ
+# コマンド固有のヘルプ
 azd up --help
 azd env --help
 azd config --help
@@ -567,7 +622,7 @@ azd version
 azd version --output json
 ```
 
-### ドキュメントへのリンク
+### ドキュメントリンク
 ```bash
 # ブラウザでドキュメントを開く
 azd docs
@@ -578,17 +633,21 @@ azd template show <template-name> --docs
 
 ---
 
-**ヒント**: このチートシートをブックマークし、`Ctrl+F` を使って必要なコマンドを素早く見つけてください！
+<strong>ヒント</strong>: このチートシートをブックマークし、必要なコマンドを素早く見つけるには `Ctrl+F` を使用してください!
 
 ---
 
-**ナビゲーション**
-- **前のレッスン**: [事前チェック](../docs/pre-deployment/preflight-checks.md)
-- **次のレッスン**: [用語集](glossary.md)
+<strong>ナビゲーション</strong>
+- <strong>前のレッスン</strong>: [事前チェック](../docs/pre-deployment/preflight-checks.md)
+- <strong>次のレッスン</strong>: [用語集](glossary.md)
+
+---
+
+> **💡 エディタで Azure コマンドのヘルプが欲しいですか？** Install [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) with `npx skills add microsoft/github-copilot-for-azure` — AI、Foundry、デプロイ、診断など、37 のスキルが含まれます。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責事項：
-この文書は AI 翻訳サービス「Co‑op Translator」（https://github.com/Azure/co-op-translator）を使用して翻訳されました。正確性には努めていますが、自動翻訳には誤りや不正確な箇所が含まれる可能性があります。原文（元の言語による文書）を権威ある正本としてご参照ください。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じた誤解や解釈の相違について、当社は一切責任を負いません。
+**免責事項**:
+本書は AI 翻訳サービス [Co-op トランスレーター](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性の確保に努めていますが、自動翻訳には誤りや不正確な表現が含まれる可能性があることにご注意ください。原文（原言語の文書）を正式な出典としてご確認ください。重要な情報については、専門の人による翻訳を推奨します。本翻訳の使用により生じたいかなる誤解や誤訳についても、当社は責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

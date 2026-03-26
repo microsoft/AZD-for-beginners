@@ -1,48 +1,48 @@
 # Microsoft Foundry -integraatio AZD:n kanssa
 
 **Lukujen navigointi:**
-- **📚 Kurssin etusivu**: [AZD For Beginners](../../README.md)
-- **📖 Nykyinen luku**: Luku 2 - AI-ensimmäinen kehitys
+- **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Nykyinen luku**: Luku 2 - AI-Ensisijainen kehitys
 - **⬅️ Edellinen luku**: [Luku 1: Ensimmäinen projektisi](../chapter-01-foundation/first-project.md)
-- **➡️ Seuraava**: [AI Model Deployment](ai-model-deployment.md)
+- **➡️ Seuraava**: [AI-mallien käyttöönotto](ai-model-deployment.md)
 - **🚀 Seuraava luku**: [Luku 3: Konfigurointi](../chapter-03-configuration/configuration.md)
 
 ## Yleiskatsaus
 
-Tämä opas näyttää, miten Microsoft Foundry -palvelut integroidaan Azure Developer CLI:n (AZD) kanssa AI-sovellusten helppoon käyttöönottoon. Microsoft Foundry tarjoaa kattavan alustan AI-sovellusten rakentamiseen, käyttöönottoon ja hallintaan, kun taas AZD yksinkertaistaa infrastruktuuria ja julkaisuprosessia.
+Tämä opas näyttää, miten Microsoft Foundry -palvelut integroidaan Azure Developer CLI:n (AZD) kanssa sujuvoittaen tekoälysovellusten käyttöönottoa. Microsoft Foundry tarjoaa kattavan alustan tekoälysovellusten rakentamiseen, käyttöönottoon ja hallintaan, kun taas AZD yksinkertaistaa infrastruktuuri- ja käyttöönottoprosessia.
 
 ## Mikä on Microsoft Foundry?
 
-Microsoft Foundry on Microsoftin yhtenäinen alusta AI-kehitykseen, joka sisältää:
+Microsoft Foundry on Microsoftin yhtenäinen alusta tekoälyn kehitykseen, joka sisältää:
 
-- **Model Catalog**: Pääsy huipputason AI-malleihin
+- **Malliluettelo**: Pääsy huipputason tekoälymalleihin
 - **Prompt Flow**: Visuaalinen suunnittelija AI-työnkuluille
-- **AI Foundry Portal**: Integroitu kehitysympäristö AI-sovelluksille
-- **Deployment Options**: Useita isännöinti- ja skaalausvaihtoehtoja
-- **Safety and Security**: Sisäänrakennetut vastuullisen AI:n ominaisuudet
+- **Microsoft Foundry -portaali**: Integroitu kehitysympäristö tekoälysovelluksille
+- **Käyttöönottoasetukset**: Useita hosting- ja skaalausvaihtoehtoja
+- **Turvallisuus ja suojaus**: Sisäänrakennetut vastuullisen tekoälyn ominaisuudet
 
-## AZD + Microsoft Foundry: Parempia yhdessä
+## AZD + Microsoft Foundry: Paremmin yhdessä
 
-| Feature | Microsoft Foundry | AZD Integration Benefit |
+| Ominaisuus | Microsoft Foundry | AZD-integraation etu |
 |---------|-----------------|------------------------|
-| **Model Deployment** | Manual portal deployment | Automated, repeatable deployments |
-| **Infrastructure** | Click-through provisioning | Infrastructure as Code (Bicep) |
-| **Environment Management** | Single environment focus | Multi-environment (dev/staging/prod) |
-| **CI/CD Integration** | Limited | Native GitHub Actions support |
-| **Cost Management** | Basic monitoring | Environment-specific cost optimization |
+| **Mallien käyttöönotto** | Manuaalinen portaalin käyttöönotto | Automaattiset, toistettavat käyttöönotot |
+| **Infrastruktuuri** | Klikattava provisiointi | Infrastruktuuri koodina (Bicep) |
+| **Ympäristöhallinta** | Yhteen ympäristöön keskittyminen | Moni-ympäristö (dev/staging/prod) |
+| **CI/CD-integraatio** | Rajoitettu | Sisäänrakennettu GitHub Actions -tuki |
+| **Kustannusten hallinta** | Perustason valvonta | Ympäristökohtainen kustannusoptimointi |
 
 ## Esivaatimukset
 
 - Azure-tilaus sopivilla käyttöoikeuksilla
 - Azure Developer CLI asennettuna
-- Pääsy Azure OpenAI -palveluihin
-- Perustuntemus Microsoft Foundrysta
+- Pääsy Microsoft Foundry Models -palveluihin
+- Perusymmärrys Microsoft Foundrysta
 
 ## Keskeiset integraatiomallit
 
-### Malli 1: Azure OpenAI -integraatio
+### Malli 1: Microsoft Foundry Models -integraatio
 
-**Käyttötapaus**: Julkaise chat-sovelluksia Azure OpenAI -malleilla
+**Käyttötapaus**: Ota käyttöön chat-sovelluksia Microsoft Foundry Models -malleilla
 
 ```yaml
 # azure.yaml
@@ -56,9 +56,9 @@ services:
       - AZURE_OPENAI_API_KEY
 ```
 
-**Infrastruktuuri (main.bicep):**
+**Infrastructure (main.bicep):**
 ```bicep
-// Azure OpenAI Account
+// Microsoft Foundry Models Account
 resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
   name: openAIAccountName
   location: location
@@ -90,9 +90,9 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 }
 ```
 
-### Malli 2: AI-haku + RAG -integraatio
+### Malli 2: AI-haku + RAG-integraatio
 
-**Käyttötapaus**: Julkaise retrieval-augmented generation (RAG) -sovelluksia
+**Käyttötapaus**: Ota käyttöön retrieval-augmented generation (RAG) -sovelluksia
 
 ```bicep
 // Azure AI Search
@@ -120,9 +120,9 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### Malli 3: Dokumenttien älykkyys -integraatio
+### Malli 3: Document Intelligence -integraatio
 
-**Käyttötapaus**: Asiakirjojen käsittely- ja analyysityönkulut
+**Käyttötapaus**: Asiakirjojen käsittely- ja analytiikkatyönkulut
 
 ```bicep
 // Document Intelligence service
@@ -155,16 +155,16 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ## 🔧 Konfiguraatiomallit
 
-### Ympäristömuuttujien asetukset
+### Ympäristömuuttujien määritys
 
 **Tuotantokonfiguraatio:**
 ```bash
-# Tekoälyn keskeiset palvelut
+# Keskeiset tekoälypalvelut
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
-# Mallien kokoonpanot
+# Mallin määritykset
 azd env set AZURE_OPENAI_MODEL "gpt-35-turbo"
 azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-ada-002"
 
@@ -181,7 +181,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Ilmainen taso
 ```
 
-### Turvallinen konfigurointi Key Vaultin avulla
+### Suojattu konfiguraatio Key Vaultin avulla
 
 ```bicep
 // Key Vault for secrets
@@ -216,9 +216,41 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-## Julkaisutyönkulut
+## Käyttöönoton työnkulut
 
-### Yhden komennon julkaisu
+### AZD-laajennukset Foundrylle
+
+AZD tarjoaa laajennuksia, jotka lisäävät tekoälyyn liittyviä ominaisuuksia Microsoft Foundry -palveluiden kanssa työskentelyyn:
+
+```bash
+# Asenna Foundry agents -laajennus
+azd extension install azure.ai.agents
+
+# Asenna hienosäädön laajennus
+azd extension install azure.ai.finetune
+
+# Asenna mukautettujen mallien laajennus
+azd extension install azure.ai.models
+
+# Listaa asennetut laajennukset
+azd extension list
+```
+
+### Agentti-ensimmäinen käyttöönotto `azd ai`-komennolla
+
+Jos sinulla on agentin manifesti, käytä `azd ai agent init` -komentoa luodaksesi projektin, joka on kytketty Foundry Agent Serviceen:
+
+```bash
+# Alusta agentin manifestista
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Ota käyttöön Azureen
+azd up
+```
+
+Katso [AZD AI CLI -komennot](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) täydellistä komentoviitettä ja lippuja varten.
+
+### Yhden komennon käyttöönotto
 
 ```bash
 # Ota kaikki käyttöön yhdellä komennolla
@@ -229,7 +261,7 @@ azd provision  # Vain infrastruktuuri
 azd deploy     # Vain sovellus
 ```
 
-### Ympäristökohtaiset julkaisut
+### Ympäristökohtaiset käyttöönotot
 
 ```bash
 # Kehitysympäristö
@@ -281,7 +313,7 @@ resource customMetrics 'Microsoft.Insights/components/analyticsItems@2015-05-01'
 }
 ```
 
-### Kustannusseuranta
+### Kustannusten seuranta
 
 ```bicep
 // Budget alert for AI services
@@ -311,7 +343,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ## 🔐 Turvallisuuden parhaat käytännöt
 
-### Managed Identity -konfigurointi
+### Hallitun identiteetin määritys
 
 ```bicep
 // Managed identity for the web application
@@ -332,7 +364,7 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-### Verkon suojaus
+### Verkon turvallisuus
 
 ```bicep
 // Private endpoints for AI services
@@ -388,7 +420,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### Automaattisen skaalauksen konfiguraatio
+### Automaattisen skaalaamisen asetukset
 
 ```bicep
 // Container App with auto-scaling
@@ -422,115 +454,207 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## Yleisten ongelmien vianmääritys
+## Yleisten ongelmien vianetsintä
 
 ### Ongelma 1: OpenAI-kvota ylittynyt
 
 **Oireet:**
-- Julkaisu epäonnistuu kvota-virheiden vuoksi
-- 429-virheitä sovelluksen lokeissa
+- Käyttöönotto epäonnistuu kvota-virheillä
+- 429-virheitä sovelluslokissa
 
 **Ratkaisut:**
 ```bash
-# Tarkista kiintiön nykyinen käyttö
+# Tarkista nykyinen kiintiön käyttö
 az cognitiveservices usage list --location eastus
 
-# Kokeile eri aluetta
+# Kokeile toista aluetta
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Vähennä kapasiteettia väliaikaisesti
+# Vähennä kapasiteettia tilapäisesti
 azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
 
-### Ongelma 2: Autentikointivirheet
+### Ongelma 2: Todennusongelmat
 
 **Oireet:**
-- 401/403-virheitä AI-palveluita kutsuttaessa
-- "Pääsy estetty" -viestit
+- 401/403-virheitä AI-palveluja kutsuttaessa
+- "Access denied" -viestejä
 
 **Ratkaisut:**
 ```bash
 # Varmista roolien määritykset
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Tarkista hallinnoidun identiteetin määritys
+# Tarkista hallitun identiteetin määritys
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
 # Vahvista Key Vaultin käyttöoikeudet
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### Ongelma 3: Mallien julkaisuongelmat
+### Ongelma 3: Mallien käyttöönotto-ongelmat
 
 **Oireet:**
-- Mallit eivät ole saatavilla julkaisussa
-- Tiettyjen malliversioiden virheellinen toiminta
+- Mallit eivät ole saatavilla käyttöönotossa
+- Tiettyjen malliversioiden virheet
 
 **Ratkaisut:**
 ```bash
-# Luettele alueittain saatavilla olevat mallit
+# Listaa saatavilla olevat mallit alueittain
 az cognitiveservices model list --location eastus
 
-# Päivitä mallin versio Bicep-mallipohjaan
+# Päivitä mallin versio Bicep-templaattiin
 # Tarkista mallin kapasiteettivaatimukset
 ```
 
-## Esimerkkimallit
+## Esimerkkipohjat
 
-### Peruschat-sovellus
+### RAG-chat-sovellus (Python)
 
-**Arkisto**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+**Repositorio**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-**Palvelut**: Azure OpenAI + Cognitive Search + App Service
+**Palvelut**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-**Pika-aloitus**:
+**Kuvaus**: Suosituin Azure AI -esimerkki — tuotantovalmiiksi valmisteltu RAG-chat-sovellus, jonka avulla voit esittää kysymyksiä omien asiakirjojesi pohjalta. Käyttää GPT-4.1-miniä chattiin, text-embedding-ada-002:ta upotuksiin ja Azure AI Searchia hakuihin. Tukee multimodaalisia asiakirjoja, puheinput/outputia, Microsoft Entra -todennusta ja Application Insights -jäljitystä.
+
+**Nopea aloitus**:
 ```bash
 azd init --template azure-search-openai-demo
 azd up
 ```
 
-### Asiakirjakäsittelyputki
+### RAG-chat-sovellus (.NET)
 
-**Arkisto**: [ai-document-processing](https://github.com/Azure-Samples/ai-document-processing)
+**Repositorio**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
 
-**Palvelut**: Document Intelligence + Storage + Functions
+**Palvelut**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
 
-**Pika-aloitus**:
+**Kuvaus**: Python-esimerkin .NET/C#-vastine. Rakennettu ASP.NET Core Minimal API:lla ja Blazor WebAssembly -frontendilla. Sisältää äänichatin, GPT-4o-mini vision -tuet, sekä .NET MAUI Blazor Hybrid -työpöytä/mobiilisovelluksen kumppanisovelluksen.
+
+**Nopea aloitus**:
 ```bash
-azd init --template ai-document-processing
+azd init --template azure-search-openai-demo-csharp
 azd up
 ```
 
-### Yrityschat RAG:lla
+### RAG-chat-sovellus (Java)
 
-**Arkisto**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
+**Repositorio**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
 
-**Palvelut**: Azure OpenAI + Search + Container Apps + Cosmos DB
+**Palvelut**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
 
-**Pika-aloitus**:
+**Kuvaus**: Java-versio RAG-chat-esimerkistä, joka käyttää Langchain4J:ää tekoälyorkestrointiin. Tukee mikropalveluarkkitehtuuria, useita hakustrategioita (teksti, vektori, hybridi), asiakirjojen latausta Azure Document Intelligencen kanssa ja käyttöönottoa joko Azure Container Appsissa tai Azure Kubernetes Servicessä.
+
+**Nopea aloitus**:
+```bash
+azd init --template azure-search-openai-demo-java
+azd up
+```
+
+### Yritysmyynnin Copilot Azure AI Foundryn kanssa
+
+**Repositorio**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
+
+**Palvelut**: Azure OpenAI + Azure AI Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
+
+**Kuvaus**: End-to-end vähittäiskaupan RAG-copilot, joka käyttää Azure AI Foundrya ja Promptya. Contoso Outdoor -kaupan chatbot, joka perustaa vastaukset tuoteluettelo- ja asiakastilaustietoihin. Demonstroi täyden GenAIOps-työnkulun — prototyyppi Promptyllä, arviointi tekoälyn avustamilla arvioijilla, ja käyttöönotto AZD:llä Container Appsiin.
+
+**Nopea aloitus**:
 ```bash
 azd init --template contoso-chat
 azd up
 ```
 
-## Seuraavat askeleet
+### Luova kirjoittaminen -moni-agenttisovellus
 
-1. **Kokeile esimerkkejä**: Aloita valmiilla mallilla, joka vastaa käyttötapaustasi
-2. **Räätälöi tarpeisiisi**: Muokkaa infrastruktuuria ja sovelluskoodia
-3. **Lisää valvonta**: Ota käyttöön kattava observoitavuus
-4. **Optimoi kustannuksia**: Hienosäädä konfiguraatiot budjetillesi
-5. **Varmista käyttöönotto**: Ota käyttöön yritystason turvallisuuskäytännöt
-6. **Skaalaa tuotantoon**: Lisää moni-alueinen ja korkean käytettävyyden ominaisuudet
+**Repositorio**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
+
+**Palvelut**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
+
+**Kuvaus**: Moni-agenttinen esimerkki, joka demonstroi agenttien orkestrointia Promptyn avulla. Käyttää tutkimusagenttia (Bing Grounding Azure AI Agent Servicessä), tuoteagenttia (Azure AI Search), kirjoittaja-agenttia ja editori-agenttia tuottamaan yhdessä hyvin tutkittuja artikkeleita. Sisältää CI/CD:n ja arvioinnin GitHub Actionsissa.
+
+**Nopea aloitus**:
+```bash
+azd init --template contoso-creative-writer
+azd up
+```
+
+### Serverless RAG Chat (JavaScript/TypeScript)
+
+**Repositorio**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
+
+**Palvelut**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
+
+**Kuvaus**: Täysin serverless RAG-chatbot, joka käyttää LangChain.js:ää ja Azure Functionseja API:na sekä Azure Static Web Appsia hostingiin. Käyttää Azure Cosmos DB:tä vektorivarastona ja chat-historian tietokantana. Tukee paikallista kehitystä Ollaman kanssa nollakustannustestausta varten.
+
+**Nopea aloitus**:
+```bash
+azd init --template serverless-chat-langchainjs
+azd up
+```
+
+### Chat with Your Data -ratkaisukiihdytin
+
+**Repositorio**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
+
+**Palvelut**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
+
+**Kuvaus**: Yritysluokan RAG-ratkaisukiihdytin, jossa on ylläpitäjän portaali asiakirjojen latausta/hallintaa varten, useita orkestrointivaihtoehtoja (Semantic Kernel, LangChain, Prompt Flow), puheesta tekstiin -toiminto, Microsoft Teams -integraatio ja valinta PostgreSQL:n tai Cosmos DB:n välillä. Suunniteltu muokattavaksi lähtökohdaksi tuotantovalmiisiin RAG-skenaarioihin.
+
+**Nopea aloitus**:
+```bash
+azd init --template chat-with-your-data-solution-accelerator
+azd up
+```
+
+### AI-matkatoimistot — moni-agentti MCP-orkestrointi
+
+**Repositorio**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
+
+**Palvelut**: Azure OpenAI + Azure AI Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
+
+**Kuvaus**: Viitesovellus moni-agentti-orkestrointiin käyttäen kolmea kehystä (LangChain.js, LlamaIndex.TS ja Microsoft Agent Framework). Sisältää MCP (Model Context Protocol) -palvelimet neljällä kielellä, jotka on julkaistu serverless Azure Container Appseina OpenTelemetry-valvonnalla.
+
+**Nopea aloitus**:
+```bash
+azd init --template azure-ai-travel-agents
+azd up
+```
+
+### Azure AI Aloitus
+
+**Repositorio**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
+
+**Palvelut**: Azure AI Services + Azure OpenAI
+
+**Kuvaus**: Miniminen Bicep-malli, joka ottaa käyttöön Azure AI -palvelut konfiguroiduilla koneoppimismalleilla. Kevyt lähtökohta, kun tarvitset vain Azure AI -infrastruktuurin provisioituna ilman täydellistä sovelluspinon käyttöönottoa.
+
+**Nopea aloitus**:
+```bash
+azd init --template azd-ai-starter
+azd up
+```
+
+> **Selaa lisää malleja**: Vieraile [Upea AZD AI -malligalleria](https://azure.github.io/awesome-azd/?tags=ai) nähdäksesi yli 80 AI-spesifistä AZD-mallia eri kielille ja skenaarioihin.
+
+## Seuraavat vaiheet
+
+1. **Kokeile esimerkkejä**: Aloita valmiista mallista, joka vastaa käyttötapaustasi
+2. **Mukauta tarpeisiisi**: Muokkaa infrastruktuuria ja sovelluskoodia
+3. **Lisää valvonta**: Toteuta kattava havaittavuus
+4. **Optimoi kustannukset**: Hienosäädä asetuksia budjetillesi sopiviksi
+5. **Suojaa käyttöönotto**: Ota käyttöön yritystason suojausmallit
+6. **Skaalaa tuotantoon**: Lisää monialueisuus ja korkea käytettävyys
 
 ## 🎯 Käytännön harjoitukset
 
-### Harjoitus 1: Ota Azure OpenAI -chat-sovellus käyttöön (30 minuuttia)
-**Tavoite**: Ota käyttöön ja testaa tuotantovalmiiksi sovitettu AI-chat-sovellus
+### Harjoitus 1: Ota käyttöön Microsoft Foundry Models -chat-sovellus (30 minuuttia)
+**Tavoite**: Ota käyttöön ja testaa tuotantovalmiiksi valmisteltu tekoälychat-sovellus
 
 ```bash
-# Alusta mallipohja
+# Alusta malli
 mkdir ai-chat-demo && cd ai-chat-demo
 azd init --template azure-search-openai-demo
 
@@ -553,19 +677,19 @@ azd down --force --purge
 ```
 
 **Onnistumiskriteerit:**
-- [ ] Julkaisu suoritetaan ilman kvota-virheitä
-- [ ] Pääset chat-käyttöliittymään selaimessa
-- [ ] Voit esittää kysymyksiä ja saada AI-vastausten
-- [ ] Application Insights näyttää telemetriatietoja
-- [ ] Resurssit on onnistuneesti siivottu
+- [ ] Käyttöönotto suoritettu ilman kvota-virheitä
+- [ ] Pääsee käsiksi chat-käyttöliittymään selaimessa
+- [ ] Voi esittää kysymyksiä ja saada tekoälyn tuottamia vastauksia
+- [ ] Application Insights näyttää telemetriatiedot
+- [ ] Resurssit puhdistettu onnistuneesti
 
-**Arvioidut kustannukset**: $5-10 30 minuutin testaukselle
+**Arvioitu kustannus**: $5-10 30 minuutin testausta varten
 
-### Harjoitus 2: Määritä moni-mallien julkaisu (45 minuuttia)
-**Tavoite**: Julkaise useita AI-malleja eri konfiguraatioilla
+### Harjoitus 2: Määritä monimalli-käyttöönotto (45 minuuttia)
+**Tavoite**: Ota käyttöön useita tekoälymalleja eri konfiguraatioilla
 
 ```bash
-# Luo mukautettu Bicep-konfiguraatio
+# Luo mukautettu Bicep-määritys
 cat > infra/ai-models.bicep << 'EOF'
 param openAiAccountName string
 param location string
@@ -574,14 +698,14 @@ resource openAi 'Microsoft.CognitiveServices/accounts@2023-05-01' existing = {
   name: openAiAccountName
 }
 
-// GPT-4o-mini for general chat
+// gpt-4.1-mini for general chat
 resource gpt4omini 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'gpt-4o-mini'
+  name: 'gpt-4.1-mini'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
     scaleSettings: {
@@ -616,10 +740,10 @@ azd show
 ```
 
 **Onnistumiskriteerit:**
-- [ ] Useita malleja julkaistu onnistuneesti
-- [ ] Eri kapasiteettiasetukset käytössä
-- [ ] Mallit saatavilla API:n kautta
-- [ ] Sovelluksesta voidaan kutsua molempia malleja
+- [ ] Useita malleja käytössä onnistuneesti
+- [ ] Eri kapasiteettiasetukset sovellettu
+- [ ] Mallit saavutettavissa API:n kautta
+- [ ] Sovellus voi kutsua molempia malleja
 
 ### Harjoitus 3: Ota käyttöön kustannusseuranta (20 minuuttia)
 **Tavoite**: Määritä budjetti-ilmoitukset ja kustannusseuranta
@@ -665,49 +789,49 @@ az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-d
 
 **Onnistumiskriteerit:**
 - [ ] Budjettihälytys luotu Azureen
-- [ ] Sähköposti-ilmoitukset määritetty
+- [ ] Sähköposti-ilmoitukset konfiguroitu
 - [ ] Kustannustiedot näkyvissä Azure-portaalissa
-- [ ] Budjetin kynnykset asetettu sopivasti
+- [ ] Budjettirajat asetettu asianmukaisesti
 
 ## 💡 Usein kysytyt kysymykset
 
 <details>
-<summary><strong>Kuinka vähennän Azure OpenAI -kustannuksia kehityksen aikana?</strong></summary>
+<summary><strong>Kuinka vähennän Microsoft Foundry Models -kustannuksia kehityksen aikana?</strong></summary>
 
-1. **Käytä ilmaista tasoa**: Azure OpenAI tarjoaa 50 000 tokenia/kuukausi ilmaiseksi
-2. **Vähennä kapasiteettia**: Aseta kapasiteetti kehitystä varten 10 TPM:ään 30+:n sijaan
-3. **Käytä azd down**: Poista resurssien allokointi, kun et aktiivisesti kehitä
-4. **Välimuistita vastauksia**: Ota Redis-välimuisti käyttöön toistuviin kyselyihin
-5. **Käytä prompt-optimointia**: Vähennä tokenien käyttöä tehokkailla kehotteilla
+1. **Käytä ilmaista tasoa**: Microsoft Foundry Models tarjoaa 50,000 tokenia/kuukausi ilmaiseksi
+2. **Vähennä kapasiteettia**: Aseta kapasiteetti 10 TPM:ään 30+:n sijaan kehitystä varten
+3. **Käytä azd down -komentoa**: Poista resurssit käytöstä, kun et kehitä aktiivisesti
+4. **Välimuistita vastaukset**: Ota käyttöön Redis-välimuisti toistuvia kyselyjä varten
+5. **Käytä prompt-insinööritystä**: Vähennä tokenien käyttöä tehokkailla kehotteilla
 
 ```bash
-# Kehitysasetukset
+# Kehityskonfiguraatio
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set ENABLE_RESPONSE_CACHE true
 ```
 </details>
 
 <details>
-<summary><strong>Mikä on ero Azure OpenAI:n ja OpenAI API:n välillä?</strong></summary>
+<summary><strong>Mikä on ero Microsoft Foundry Modelsin ja OpenAI API:n välillä?</strong></summary>
 
-**Azure OpenAI**:
-- Yritystason turvallisuus ja vaatimustenmukaisuus
-- Yksityisen verkon integraatio
+**Microsoft Foundry Models**:
+- Yritysasteen turvallisuus ja vaatimustenmukaisuus
+- Yksityisen verkon integrointi
 - SLA-takuut
-- Managed identity -autentikointi
+- Hallinnoidun identiteetin todennus
 - Korkeammat kvotat saatavilla
 
 **OpenAI API**:
-- Nopeampi pääsy uusiin malleihin
+- Uusiin malleihin nopeampi pääsy
 - Yksinkertaisempi käyttöönotto
-- Matalampi aloituskynnys
-- Julkinen internet-yhteys ainoana vaihtoehtona
+- Matalampi kynnys aloittaa
+- Toimii vain julkisessa internetissä
 
-Tuotantosovelluksille **Azure OpenAI on suositeltava**.
+Tuotantosovelluksiin suositellaan **Microsoft Foundry Modelsia**.
 </details>
 
 <details>
-<summary><strong>Kuinka käsittelen Azure OpenAI -kvotan ylitykset?</strong></summary>
+<summary><strong>Miten käsittelen Microsoft Foundry -mallien käyttökiintiön ylittämiseen liittyviä virheitä?</strong></summary>
 
 ```bash
 # Tarkista nykyinen kiintiö
@@ -717,7 +841,7 @@ az cognitiveservices usage list --location eastus2
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Vähennä kapasiteettia väliaikaisesti
+# Vähennä kapasiteettia tilapäisesti
 azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
@@ -727,7 +851,7 @@ azd provision
 </details>
 
 <details>
-<summary><strong>Voinko käyttää omia tietojani Azure OpenAI:n kanssa?</strong></summary>
+<summary><strong>Voinko käyttää omia tietojani Microsoft Foundry -mallien kanssa?</strong></summary>
 
 Kyllä! Käytä **Azure AI Search** -palvelua RAG:iin (Retrieval Augmented Generation):
 
@@ -750,9 +874,9 @@ Katso [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-o
 **Parhaat käytännöt**:
 1. Käytä Managed Identityä (ei API-avaimia)
 2. Ota Private Endpoints käyttöön
-3. Konfiguroi verkon suojausryhmät
-4. Ota käyttöön rate limiting
-5. Käytä Azure Key Vaultia salasanoille
+3. Määritä verkkoturvaryhmät (network security groups)
+4. Ota käyttöön pyyntöjen rajoitus (rate limiting)
+5. Käytä Azure Key Vaultia salaisuuksien hallintaan
 
 ```bicep
 // Managed Identity authentication
@@ -776,22 +900,23 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 - **Microsoft Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Issues and discussions](https://github.com/Azure/azure-dev)
-- **Microsoft Learn**: [Virallinen dokumentaatio](https://learn.microsoft.com/azure/ai-studio/)
+- **Microsoft Learn**: [Official documentation](https://learn.microsoft.com/azure/ai-studio/)
+- **Agent Skills**: [Microsoft Foundry skill on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Install Azure + Foundry agent skills in your editor with `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Lukujen navigointi:**
+**Chapter Navigation:**
 - **📚 Kurssin etusivu**: [AZD For Beginners](../../README.md)
-- **📖 Nykyinen luku**: Luku 2 - AI-ensimmäinen kehitys
-- **⬅️ Edellinen luku**: [Luku 1: Ensimmäinen projektisi](../chapter-01-foundation/first-project.md)
+- **📖 Nykyinen luku**: Chapter 2 - AI-First Development
+- **⬅️ Edellinen luku**: [Chapter 1: Your First Project](../chapter-01-foundation/first-project.md)
 - **➡️ Seuraava**: [AI Model Deployment](ai-model-deployment.md)
-- **🚀 Seuraava luku**: [Luku 3: Konfigurointi](../chapter-03-configuration/configuration.md)
+- **🚀 Seuraava luku**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
-**Tarvitsetko apua?** Liity yhteisökeskusteluihin tai avaa issue arkistossa. Azure AI + AZD -yhteisö on täällä auttaakseen sinua menestymään!
+**Tarvitsetko apua?** Liity yhteisön keskusteluihin tai avaa issue repositorioon. Azure AI + AZD -yhteisö on täällä auttaakseen sinua onnistumaan!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vastuuvapauslauseke:
-Tämä asiakirja on käännetty tekoälykäännöspalvelulla Co-op Translator (https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulee pitää ensisijaisena ja sitovana lähteenä. Tärkeiden tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai virhetulkinnoista.
+**Vastuuvapauslauseke**:
+Tämä asiakirja on käännetty tekoälypohjaisella käännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, ota huomioon, että automaattisissa käännöksissä saattaa esiintyä virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulisi pitää auktoritatiivisena lähteenä. Tärkeiden tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä johtuvista väärinkäsityksistä tai virhetulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

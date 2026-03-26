@@ -1,49 +1,49 @@
-# Käskude Spikker - Olulised AZD Käsklused
+# Käskude Kiirviide - Olulised AZD käsud
 
-**Kiire viide kõikide peatükkide jaoks**
+**Kiire Viide Kõigi Peatükkide jaoks**
 - **📚 Kursuse Avaleht**: [AZD Algajatele](../README.md)
-- **📖 Kiirstart**: [1. Peatükk: Alus ja Kiirstart](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI Käsklused**: [2. Peatükk: AI-Esimene Arendus](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Täiustatud**: [4. Peatükk: Infrastruktuur Koodina](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **📖 Kiire Algus**: [Peatükk 1: Alused & Kiire Algus](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI Käsud**: [Peatükk 2: AI-Esimene Arendus](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 Täpsem**: [Peatükk 4: Infrastruktuur Koodina](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Sissejuhatus
 
-See põhjalik spikker pakub kiiret viidet kõige sagedamini kasutatavatele Azure Developer CLI käskudele, organiseerituna kategooriate kaupa koos praktiliste näidetega. Täiuslik kiireteks otsinguteks arenduse, tõrkeotsingu ja igapäevaste toimingute ajal azd projektidega.
+See põhjalik kiirviide pakub kiire ligipääsu kõige sagedamini kasutatavatele Azure Developer CLI käskudele, organiseeritud kategooriate kaupa koos praktiliste näidetega. Täiuslik kiireks otsimiseks arenduse, veaotsingu ja igapäevaste operatsioonide ajal azd projektidega.
 
 ## Õpieesmärgid
 
-Seda spikrit kasutades:
-- On teil kohene juurdepääs olulistele Azure Developer CLI käskudele ja süntaksile
-- Saate aru käskluste korraldusest funktsionaalsete kategooriate ja kasutusjuhtude järgi
-- Võite viidata praktilistele näidetele tavapärastes arendus- ja juurutusstseenarites
-- Saate kasutada tõrkeotsingu käske kiireks probleemide lahendamiseks
-- Leiate tõhusaid võimalusi täiustatud konfiguratsiooniks ja kohandamiseks
-- Leidke keskkonna halduse ja mitmekeskkondliku töövoo käsud
+Seda kiirviidet kasutades:
+- Saab kohe ligipääsu olulistele Azure Developer CLI käskudele ja süntaksile
+- Mõistab käskude korraldust funktsionaalsete kategooriate ja kasutusjuhtumite kaupa
+- Saab viidata praktilistele näidetele ühiste arendus- ja juurutusstsenaariumide puhul
+- Saab kasutada veaotsingu käske kiireks probleemide lahendamiseks
+- Leiab kiiresti täpsemad seade- ja kohandamisvalikud
+- Leiab keskkonnahaldus- ja mitme keskkonna töövoo käske
 
 ## Õpitulemused
 
-Seda spikrit regulaarselt kasutades suudate:
-- Käsklusi azd kasutada kindlalt ilma täismaterjali pideva kontrollita
-- Kiirelt lahendada levinud probleeme sobivate diagnostikakäskudega
-- Efektiivselt hallata mitut keskkonda ja juurutusstseene
-- Vajadusel rakendada täiustatud azd funktsioone ja konfiguratsioonivalikuid
-- Lahendada juurutusprobleeme süsteemsete käskluste jada abil
-- Optimeerida töövooge tõhusate azd otseteedega ja valikutega
+Seda kiirviidet regulaarselt kasutades suudad:
+- Täita azd käske kindlalt ilma põhjalikku dokumentatsiooni vaatamata
+- Kiiresti lahendada levinud probleeme sobivate diagnostikakäskude abil
+- Efektiivselt hallata mitut keskkonda ja juurutusstsenaariumi
+- Vajadusel rakendada täpsemaid azd funktsioone ja seadistamisvalikuid
+- Veaotsinguks kasutada süsteemseid käsujärjestusi juurutusprobleemide lahendamiseks
+- Optimeerida töövoogu, kasutades tõhusaid azd otseteid ja valikuid
 
-## Alustuskäsud
+## Algusjuhised
 
 ### Autentimine
 ```bash
-# Logi sisse Azure'i kaudu AZD-ga
+# Logi sisse Azure'i AZD kaudu
 azd auth login
 
-# Logi sisse Azure CLI-sse (AZD kasutab seda alltegevusena)
+# Logi sisse Azure CLI-sse (AZD kasutab seda tagaosas)
 az login
 
 # Kontrolli praegust kontot
 az account show
 
-# Sea vaike tellimus
+# Sea vaikimisi tellimus
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 
@@ -54,9 +54,9 @@ azd auth logout
 az logout
 ```
 
-### Projekti initsialiseerimine
+### Projekti Algatamine
 ```bash
-# Sirvi saadaolevaid malle
+# Sirvi saadaval olevaid malle
 azd template list
 
 # Algata mallist
@@ -70,14 +70,14 @@ azd init .
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## Põhijuhtimise käsud
+## Põhilised Juurutuskäsud
 
-### Täielik juurutusvoog
+### Täielik Juurutustöövoog
 ```bash
-# Käivita kõik (hankeprotsess + juurutus)
+# Rake kõik (varusta + juuruta)
 azd up
 
-# Juuruta ilma kinnitusviipadeta
+# Juuruta ilma kinnituskäsklusteta
 azd up --confirm-with-no-prompt
 
 # Juuruta konkreetsele keskkonnale
@@ -87,23 +87,23 @@ azd up --environment production
 azd up --parameter location=westus2
 ```
 
-### Ainult infrastruktuur
+### Ainult Infrastruktuur
 ```bash
-# Varusta Azure'i ressursid
+# Azure'i ressursside loomine
 azd provision
 
 # 🧪 Eelvaade infrastruktuuri muudatustest
 azd provision --preview
-# Kuvab kuivtöötluse vaate, milliseid ressursse luuakse/muudetakse/kustutatakse
+# Kuvab kuiv- jooksu vaate sellest, millised ressursid luuakse/muutakse/kustutatakse
 # Sarnane 'terraform plan' või 'bicep what-if' käsule - ohutu käivitada, muudatusi ei rakendata
 ```
 
-### Ainult rakendus
+### Ainult Rakendus
 ```bash
 # Rakenduse koodi juurutamine
 azd deploy
 
-# Spetsiifilise teenuse juurutamine
+# Konkreetse teenuse juurutamine
 azd deploy --service web
 azd deploy --service api
 
@@ -111,7 +111,7 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### Koosta ja paki
+### Ehitamine ja Pakendamine
 ```bash
 # Ehita rakendusi
 azd package
@@ -120,11 +120,11 @@ azd package
 azd package --service api
 ```
 
-## 🌍 Keskkonna haldus
+## 🌍 Keskkonna Haldus
 
-### Keskkonna toimingud
+### Keskkonna Tegevused
 ```bash
-# Loenda kõik keskkonnad
+# Loendi kõik keskkonnad
 azd env list
 
 # Loo uus keskkond
@@ -134,7 +134,7 @@ azd env new staging --location westus2
 # Vali keskkond
 azd env select production
 
-# Näita current keskkonda
+# Näita praegust keskkonda
 azd env show
 
 # Värskenda keskkonna olekut
@@ -157,14 +157,14 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-## ⚙️ Konfiguratsioonikäsud
+## ⚙️ Seadistuskäsud
 
-### Globaalne konfiguratsioon
+### Globaalne Seadistus
 ```bash
-# Loetle kõik konfiguratsioonid
+# Loenda kõik konfiguratsioonid
 azd config list
 
-# Määra globaalsed vaikeväärtused
+# Sea globaalsed vaikeseaded
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
@@ -175,36 +175,36 @@ azd config unset defaults.location
 azd config reset
 ```
 
-### Projekti konfiguratsioon
+### Projekti Seadistus
 ```bash
 # Kontrolli azure.yaml faili
 azd config validate
 
-# Näita projekti infot
+# Näita projekti teavet
 azd show
 
 # Hangi teenuse lõpp-punktid
 azd show --output json
 ```
 
-## 📊 Jälgimine ja diagnostika
+## 📊 Jälgimine ja Diagnostika
 
-### Jälgimisliides
+### Jälgimisarmatuurlaud
 ```bash
-# Ava Azure portaali jälgimise armatuurlaud
+# Ava Azure portaali seire armatuurlaud
 azd monitor
 
-# Ava Application Insights live-meetrika
+# Ava Application Insights reaalajas mõõdikud
 azd monitor --live
 
-# Ava Application Insights logide vahekaart
+# Ava Application Insights logide vaade
 azd monitor --logs
 
 # Ava Application Insights ülevaade
 azd monitor --overview
 ```
 
-### Konteinerilogide vaatamine
+### Konteineri Logide Vaade
 ```bash
 # Vaata logisid Azure CLI kaudu (Container Apps jaoks)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
@@ -216,31 +216,31 @@ az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 azd monitor --logs
 ```
 
-### Logianalüütika päringud
+### Logianalüüsi Päringud
 ```bash
-# Juurdepääs logianalüüsile Azure'i portaalis
+# Juurdepääs logianalüütikale Azure'i portaali kaudu
 azd monitor --logs
 
-# Logide päring Azure CLI abil
+# Päringulogi kasutamine Azure CLI abil
 az monitor log-analytics query \
   --workspace <workspace-id> \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
 ```
 
-## 🛠️ Hooldus
+## 🛠️ Hoolduskäsud
 
-### Puhastus
+### Puhastamine
 ```bash
 # Eemalda kõik Azure'i ressursid
 azd down
 
-# Sundkustuta kustutamine ilma kinnitamiseta
+# Sundkustuta kustutamine
 azd down --force
 
-# Puhasta pehmelt kustutatud ressursid
+# Pehmelt kustutatud ressursside puhastamine
 azd down --purge
 
-# Täielik korrastus
+# Täielik puhastus
 azd down --force --purge
 ```
 
@@ -256,9 +256,9 @@ azd version
 azd config list
 ```
 
-## 🔧 Täiustatud käsud
+## 🔧 Täpsemad Käsud
 
-### Pipelines ja CI/CD
+### Torujuhe ja CI/CD
 ```bash
 # Konfigureeri GitHub Actions
 azd pipeline config
@@ -270,76 +270,131 @@ azd pipeline config --provider azdo
 azd pipeline show
 ```
 
-### Infrastruktuuri haldus
+### Infrastruktuuri Haldus
 ```bash
 # Genereeri infrastruktuuri malle
 azd infra generate
 
 # 🧪 Infrastruktuuri eelvaade ja planeerimine
 azd provision --preview
-# Simuleerib infrastruktuuri loomist ilma juurutamiseta
-# Analüüsib Bicep/Terraform malle ja näitab:
+# Simuleerib infrastruktuuri loomist ilma juurutamata
+# Analüüsib Bicep/Terraform malle ja kuvab:
 # - Lisatavad ressursid (roheline +)
 # - Muudetavad ressursid (kollane ~)
 # - Kustutatavad ressursid (punane -)
-# Ohutu käivitada - Azure keskkonda ei muudeta tegelikult
+# Turvaline käivitada - Azure keskkonnas ei tehta tegelikke muudatusi
 
-# Sünteesi infrastruktuur azure.yaml-ist
+# Sünteesi infrastruktuur azure.yaml failist
 azd infra synth
 ```
 
-### Projekti info
+### Projekti Informatsioon
 ```bash
-# Näita projekti olekut ja lõpp-punkte
+# Näita projekti staatust ja lõpp-punkte
 azd show
 
-# Näita üksikasjalikku projekti teavet JSON-ina
+# Näita üksikasjalikku projekti infot JSON-formaadis
 azd show --output json
 
-# Hangi teenuste lõpp-punktid
+# Hangi teenuse lõpp-punktid
 azd show --output json | jq '.services'
 ```
 
-## 🎯 Kiired töövood
+## 🤖 AI & Laienduste Käsud
 
-### Arendustöövoog
+### AZD Laiendused
+```bash
+# Loetle kõik saadaval laiendused (sh AI)
+azd extension list
+
+# Paigalda Foundry agendi laiendus
+azd extension install azure.ai.agents
+
+# Paigalda täiustamise laiendus
+azd extension install azure.ai.finetune
+
+# Paigalda kohandatud mudelite laiendus
+azd extension install azure.ai.models
+
+# Uuenda kõik paigaldatud laiendused
+azd extension upgrade --all
+```
+
+### AI Agendi Käsud
+```bash
+# Initsialiseeri agendi projekt manifestist
+azd ai agent init -m <manifest-path-or-uri>
+
+# Suuna kindlale Foundry projektile
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Määra agendi lähtekaust
+azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+
+# Vali majutamise sihtkoht
+azd ai agent init -m agent-manifest.yaml --host containerapp
+```
+
+### MCP Server (Alfa)
+```bash
+# Käivita MCP server oma projekti jaoks
+azd mcp start
+
+# Halda tööriistade nõusolekut MCP operatsioonide jaoks
+azd mcp consent
+```
+
+### Infrastruktuuri Generatsioon
+```bash
+# Loo infrastruktuuri kui koodi failid oma projekti definitsioonist
+azd infra generate
+
+# Süntetiseeri infrastruktuur failist azure.yaml
+azd infra synth
+```
+
+---
+
+## 🎯 Kiired Töövood
+
+### Arenduse Töövoog
 ```bash
 # Alusta uut projekti
 azd init --template todo-nodejs-mongo
 cd my-project
 
-# Paiguta arenduskeskkonda
+# Paigalda arenduskeskkonda
 azd env new dev
 azd up
 
-# Tee muudatusi ja paiguta uuesti
+# Tee muudatused ja paigalda uuesti
 azd deploy
 
-# Ava jälgimise armatuurlaud
+# Ava jälgimisarmatuurlaud
 azd monitor --live
 ```
 
-### Mitme keskkonna töövoog
+### Mitme Keskkonna Töövoog
 ```bash
-# Keskkondade seadistamine
+# Loo keskkonnad
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Arenduskeskkonda juurutamine
+# Paigalda arenduskeskkonda
 azd env select dev
 azd up
 
-# Testimine ja edastamine eelvaatluskeskkonda
+# Testi ja vii eeltootmisse
 azd env select staging
 azd up
 
-# Tootmiskeskkonda juurutamine
+# Paigalda tootmiskeskkonda
 azd env select production
 azd up
 ```
 
-### Tõrkeotsingu töövoog
+### Veaotsingu Töövoog
 ```bash
 # Luba silumisrežiim
 export AZD_DEBUG=true
@@ -350,7 +405,7 @@ azd show
 # Kontrolli konfiguratsiooni kehtivust
 azd config list
 
-# Ava logide jälgimise armatuurlaud
+# Ava logide jälgimise juhtpaneel
 azd monitor --logs
 
 # Kontrolli ressursi olekut
@@ -359,13 +414,13 @@ azd show --output json
 
 ## 🔍 Silumine
 
-### Silumisinfo
+### Silumise Info
 ```bash
-# Luba silumise väljund
+# Luba silumisväljund
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Keela telemeetria paremaks väljundiks
+# Keela telemeetria puhtama väljundi jaoks
 export AZD_DISABLE_TELEMETRY=true
 
 # Kontrolli praegust konfiguratsiooni
@@ -375,23 +430,23 @@ azd config list
 az account show
 ```
 
-### Mallide silumine
+### Malli Silumine
 ```bash
-# Loetle saadaolevad mallid koos detailidega
+# Loetle saadaolevad mallid koos üksikasjadega
 azd template list --output json
 
 # Näita malli teavet
 azd template show <template-name>
 
-# Kontrolli malli enne algatamist
+# Kontrolli malli enne algust
 azd template validate <template-name>
 ```
 
-## 📁 Failide ja kaustade käsud
+## 📁 Failide ja Kaustade Käsud
 
-### Projekti struktuur
+### Projekti Struktuur
 ```bash
-# Näita praegust kataloogistruktuuri
+# Näita praeguse kataloogi struktuuri
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
@@ -402,32 +457,32 @@ cd $(azd root)
 echo $AZD_CONFIG_DIR  # Tavaliselt ~/.azd
 ```
 
-## 🎨 Väljundi vormindamine
+## 🎨 Väljundi Vormindamine
 
-### JSON väljund
+### JSON Väljund
 ```bash
 # Saa JSON väljund skriptimiseks
 azd show --output json
 azd env list --output json
 azd config list --output json
 
-# Parsida jq-iga
+# Analüüsi jq-ga
 azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Tabeli väljund
+### Tabeli Väljund
 ```bash
 # Vorminda tabelina
 azd env list --output table
 
-# Vaata kasutusele võetud teenuseid
+# Vaata juurutatud teenuseid
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Levinud käskluste kombinatsioonid
+## 🔧 Levinud Käsukombinatsioonid
 
-### Tervisekontrolli skript
+### Tervisekontrolli Skript
 ```bash
 #!/bin/bash
 # Kiire tervisekontroll
@@ -436,16 +491,16 @@ azd env show
 azd monitor --logs
 ```
 
-### Juurutuse valideerimine
+### Juurutuse Kontrollimine
 ```bash
 #!/bin/bash
-# Eelvalideerimine enne juurutamist
+# Eelkontroll enne juurutamist
 azd show
 azd provision --preview  # Muudatuste eelvaade enne juurutamist
 az account show
 ```
 
-### Keskkondade võrdlus
+### Keskkondade Võrdlus
 ```bash
 #!/bin/bash
 # Võrdle keskkondi
@@ -456,10 +511,10 @@ for env in dev staging production; do
 done
 ```
 
-### Ressursside puhastusskript
+### Ressursside Puhastamise Skript
 ```bash
 #!/bin/bash
-# Vanade keskkondade koristamine
+# Puhasta vanad keskkonnad
 azd env list | grep -E "(dev-|test-)" | while read env; do
     echo "Cleaning up $env"
     azd env select $env
@@ -469,9 +524,9 @@ done
 
 ## 📝 Keskkonnamuutujad
 
-### Levinud keskkonnamuutujad
+### Levinud Keskkonnamuutujad
 ```bash
-# Azure'i konfiguratsioon
+# Azure konfiguratsioon
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
@@ -486,40 +541,40 @@ export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
-## 🚨 Hädaolukorra käsud
+## 🚨 Hädaolukorra Käsud
 
-### Kiired parandused
+### Kiired Parandused
 ```bash
-# Lähtesta autentimine
+# Autentimise lähtestamine
 az account clear
 az login
 
-# Sundvärskenda keskkond
+# Käsitsi keskkonna värskendamine
 azd env refresh
 
-# Taaskäivita kõik teenused
+# Kõikide teenuste uuesti juurutamine
 azd deploy
 
-# Kontrolli juurutamise olekut
+# Juurutamise oleku kontrollimine
 azd show --output json
 ```
 
 ### Taastamiskäsud
 ```bash
-# Taasta ebaõnnestunud juurutamisest - puhasta ja juuruta uuesti
+# Taastumine ebaõnnestunud juurutamisest - puhasta ja juuruta uuesti
 azd down --force --purge
 azd up
 
-# Taasta ainult infrastruktuur
+# Taastamine ainult infrastruktuuri jaoks
 azd provision
 
-# Juuruta ainult rakendus uuesti
+# Rakenduse uuesti juurutamine ainult
 azd deploy
 ```
 
 ## 💡 Pro Nõuanded
 
-### Kiiremaks töövooguks aliased
+### Kiiremaks Töövooguks Aliased
 ```bash
 # Lisa oma .bashrc või .zshrc faili
 alias azdup='azd up'
@@ -528,14 +583,14 @@ alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Funktsioonide otseteed
+### Funktsioonide Otseteed
 ```bash
 # Kiire keskkonna vahetamine
 azd-env() {
     azd env select $1 && azd show
 }
 
-# Kiire juurutamine koos jälgimisega
+# Kiire juurutamine jälgimisega
 azd-deploy-watch() {
     azd deploy --service $1 && azd monitor --live
 }
@@ -549,25 +604,25 @@ azd-status() {
 }
 ```
 
-## 📖 Abi ja dokumentatsioon
+## 📖 Abi ja Dokumentatsioon
 
-### Abi saamine
+### Abi Saamine
 ```bash
 # Üldine abi
 azd --help
 azd help
 
-# Käsu-spetsiifiline abi
+# Käsklusepõhine abi
 azd up --help
 azd env --help
 azd config --help
 
-# Näita versiooni ja ehituse infot
+# Näita versiooni ja ehitusteavet
 azd version
 azd version --output json
 ```
 
-### Dokumentatsiooni lingid
+### Dokumentatsiooni Lingid
 ```bash
 # Ava dokumentatsioon brauseris
 azd docs
@@ -578,17 +633,21 @@ azd template show <template-name> --docs
 
 ---
 
-**Nõuanne**: Lisage see spikker järjehoidjaks ja kasutage `Ctrl+F`, et kiiresti leida vajalikud käsud!
+**Nõuanne**: Jäädvusta see kiirviide järjehoidjaks ja kasuta `Ctrl+F`, et kiiresti leida vajalikud käsud!
 
 ---
 
-**Navigeerimine**
-- **Eelmine õppetund**: [Ettevalmistuskontrollid](../docs/pre-deployment/preflight-checks.md)
-- **Järgmine õppetund**: [Glosaar](glossary.md)
+**Navigatsioon**
+- **Eelmine Tund**: [Eelsõidu Kontrollid](../docs/pre-deployment/preflight-checks.md)
+- **Järgmine Tund**: [Terminoloogia](glossary.md)
+
+---
+
+> **💡 Tahad Azure käsuabi oma redaktoris?** Paigalda [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) käsuga `npx skills add microsoft/github-copilot-for-azure` — 37 oskust AI, Foundry, juurutuse, diagnostika ja muude jaoks.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vastutusest loobumine**:
-See dokument on tõlgitud tehisintellekti tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, palun arvestage, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada usaldusväärseks allikaks. Olulise teabe puhul soovitame kasutada professionaalset inimtõlget. Meie vastutus ei laiene selliste arusaamatuste ega valesti tõlgenduste eest, mis võivad tekkida selle tõlke kasutamisel.
+**Vastutusest loobumine**:  
+See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame täpsust, palun arvestage, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle algkeeles on pidada autoriteetseks allikaks. Kriitilise tähtsusega teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti mõistmiste eest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

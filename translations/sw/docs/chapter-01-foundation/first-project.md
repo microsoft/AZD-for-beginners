@@ -1,51 +1,51 @@
 # Mradi Wako wa Kwanza - Mafunzo ya Vitendo
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD Kwa Waanzilishi](../../README.md)
-- **📖 Current Chapter**: Sura 1 - Msingi & Mwanzo wa Haraka
-- **⬅️ Previous**: [Ufungaji & Usanidi](installation.md)
-- **➡️ Next**: [Usanidi](configuration.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Uvinjari wa Sura:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Wanaoanza](../../README.md)
+- **📖 Sura ya Sasa**: Sura 1 - Msingi & Anza Haraka
+- **⬅️ Awali**: [Installation & Setup](installation.md)
+- **➡️ Ifuatayo**: [Configuration](configuration.md)
+- **🚀 Sura Ifuatayo**: [Sura 2: Maendeleo ya Kwanza ya AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Utangulizi
 
-Karibu kwenye mradi wako wa kwanza wa Azure Developer CLI! Mafunzo haya ya vitendo yanaonyesha hatua kwa hatua jinsi ya kuunda, kusakinisha, na kusimamia programu kamili kwenye Azure kwa kutumia azd. Utafanya kazi na programu halisi ya todo ambayo inajumuisha frontend ya React, backend ya API ya Node.js, na hifadhidata ya MongoDB.
+Karibu kwenye mradi wako wa kwanza wa Azure Developer CLI! Mafunzo haya ya vitendo ya kina yanatoa mwongozo kamili wa kuunda, kuweka, na kusimamia programu kamili kwenye Azure kwa kutumia azd. Utafanya kazi na programu halisi ya todo inayojumuisha frontend ya React, backend ya API ya Node.js, na hifadhidata ya MongoDB.
 
 ## Malengo ya Kujifunza
 
-Kwa kumaliza mafunzo haya, utakuwa:
-- Kupata ujuzi wa mtiririko wa kuanzisha mradi wa azd kwa kutumia violezo
-- Kuelewa muundo wa mradi wa Azure Developer CLI na mafaili ya usanidi
-- Kutekeleza usakinishaji kamili wa programu kwenye Azure pamoja na utoaji wa miundombinu
-- Kutekeleza masasisho ya programu na mikakati ya usakinishaji upya
+Kwa kumaliza mafunzo haya, utakuwa umeweza:
+- Kumaster mtiririko wa kuanzisha mradi wa azd kwa kutumia templeti
+- Kuelewa muundo wa mradi wa Azure Developer CLI na faili za usanidi
+- Kutekeleza uwekeaji kamili wa programu kuelekea Azure pamoja na upangaji wa miundombinu
+- Kutekeleza mikakati ya masasisho ya programu na kuweka tena
 - Kusimamia mazingira mengi kwa ajili ya maendeleo na staging
-- Kutumia mbinu za kusafisha rasilimali na usimamizi wa gharama
+- Kutumia taratibu za usafi wa rasilimali na usimamizi wa gharama
 
 ## Matokeo ya Kujifunza
 
 Baada ya kumaliza, utaweza:
-- Kuanzisha na kusanidi miradi ya azd kutoka kwa violezo kwa uhuru
-- Kupitia na kubadilisha miundo ya miradi ya azd kwa ufanisi
-- Kusakinisha programu za full-stack kwenye Azure kwa amri moja
-- Kutatua matatizo ya kawaida ya usakinishaji na matatizo ya uthibitishaji
-- Kusimamia mazingira mbalimbali ya Azure kwa hatua tofauti za usakinishaji
-- Kutumia mtiririko wa utumiaji endelevu wa kusakinisha masasisho ya programu
+- Kuanzisha na kusanidi miradi ya azd kutoka kwa templeti kwa kujitegemea
+- Kupitia na kubadilisha miundo ya mradi wa azd kwa ufanisi
+- Kuweka programu kamili kwenye Azure kwa kutumia amri moja
+- Kutatua matatizo ya kawaida ya uwekeaji na matatizo ya uthibitishaji
+- Kusimamia mazingira mbalimbali ya Azure kwa hatua tofauti za uwekeaji
+- Kutekeleza mtiririko wa utekelezaji wa kuendelea kwa masasisho ya programu
 
 ## Kuanzia
 
-### Orodha ya Mahitaji ya Awali
+### Orodha ya Mahitaji Kabla ya Kuanzia
 - ✅ Azure Developer CLI imewekwa ([Mwongozo wa Ufungaji](installation.md))
-- ✅ Azure CLI imewekwa na imeidhinishwa
+- ✅ Azure CLI imewekwa na umeingia (authenticated)
 - ✅ Git imewekwa kwenye mfumo wako
 - ✅ Node.js 16+ (kwa mafunzo haya)
-- ✅ Visual Studio Code (inayopendekezwa)
+- ✅ Visual Studio Code (inapendekezwa)
 
 ### Thibitisha Mipangilio Yako
 ```bash
 # Angalia usakinishaji wa azd
 azd version
 ```
-### Thibitisha uthibitishaji wa Azure
+### Thibitisha uthibitisho wa Azure
 
 ```bash
 az account show
@@ -56,12 +56,12 @@ az account show
 node --version
 ```
 
-## Hatua 1: Chagua na Anzisha Kiolezo
+## Hatua 1: Chagua na Anzisha Templeti
 
-Tuanze na kiolezo maarufu cha programu ya todo kinachojumuisha frontend ya React na backend ya API ya Node.js.
+Tuanze na templeti maarufu ya programu ya todo ambayo inajumuisha frontend ya React na backend ya API ya Node.js.
 
 ```bash
-# Vinjari templeti zinazopatikana
+# Vinjari templeti zilizopo
 azd template list
 
 # Anzisha templeti ya programu ya orodha ya kazi
@@ -72,18 +72,18 @@ azd init --template todo-nodejs-mongo
 # Fuata maelekezo:
 # - Ingiza jina la mazingira: "dev"
 # - Chagua usajili (ikiwa una zaidi ya moja)
-# - Chagua mkoa: "East US 2" (au mkoa unaoupendelea)
+# - Chagua eneo: "East US 2" (au eneo unalopendelea)
 ```
 
 ### Nini Kilitokea?
-- Imepakuliwa msimbo wa kiolezo kwenye saraka yako ya ndani
-- Iliundwa faili `azure.yaml` yenye ufafanuzi wa huduma
+- Ilipakua msimbo wa templeti kwenye saraka yako ya ndani
+- Iliunda faili `azure.yaml` yenye ufafanuzi wa huduma
 - Iliandaa msimbo wa miundombinu katika saraka `infra/`
-- Iliundwa usanidi wa mazingira
+- Iliunda usanidi wa mazingira
 
 ## Hatua 2: Chunguza Muundo wa Mradi
 
-Tuchunguze kile ambacho azd kilitutengenezea:
+Tuchunguze kile azd kilichotutengenezea:
 
 ```bash
 # Tazama muundo wa mradi
@@ -119,9 +119,9 @@ my-first-azd-app/
 └── README.md                   # Project documentation
 ```
 
-### Mafaili Muhimu ya Kuelewa
+### Faili Muhimu za Kuelewa
 
-**azure.yaml** - Msingi wa mradi wako wa azd:
+**azure.yaml** - Moyo wa mradi wako wa azd:
 ```bash
 # Tazama usanidi wa mradi
 cat azure.yaml
@@ -135,7 +135,7 @@ head -30 infra/main.bicep
 
 ## Hatua 3: Binafsisha Mradi Wako (Hiari)
 
-Kabla ya kusakinisha, unaweza kubinafsisha programu:
+Kabla ya kupeleka, unaweza kubinafsisha programu:
 
 ### Badilisha Frontend
 ```bash
@@ -145,7 +145,7 @@ code src/web/src/App.tsx
 
 Fanya mabadiliko rahisi:
 ```typescript
-// Tafuta kichwa na ubadilishe
+// Tafuta kichwa kisha ubadilishe.
 <h1>My Awesome Todo App</h1>
 ```
 
@@ -158,27 +158,27 @@ azd env set API_VERSION "v1.18"
 azd env get-values
 ```
 
-## Hatua 4: Sakinisha kwenye Azure
+## Hatua 4: Weka kwenye Azure
 
-Sasa sehemu ya kusisimua - sakinisha kila kitu kwenye Azure!
+Sasa sehemu ya kusisimua - weka kila kitu kwenye Azure!
 
 ```bash
 # Sambaza miundombinu na programu
 azd up
 
 # Amri hii itafanya:
-# 1. Kutayarisha rasilimali za Azure (App Service, Cosmos DB, n.k.)
+# 1. Kutayarisha rasilimali za Azure (App Service, Cosmos DB, na kadhalika)
 # 2. Kujenga programu yako
 # 3. Kusambaza kwenye rasilimali zilizotayarishwa
 # 4. Onyesha URL ya programu
 ```
 
-### Nini Kinatokea Wakati wa Kusakinisha?
+### Nini Kinafanyika Wakati wa Uwekaji?
 
-Amri `azd up` inatekeleza hatua hizi:
+Amri ya `azd up` inafanya hatua hizi:
 1. **Provision** (`azd provision`) - Inaunda rasilimali za Azure
 2. **Package** - Inajenga msimbo wa programu yako
-3. **Deploy** (`azd deploy`) - Inasakinisha msimbo kwenye rasilimali za Azure
+3. **Deploy** (`azd deploy`) - Inaweka msimbo kwenye rasilimali za Azure
 
 ### Matokeo Yanayotarajiwa
 ```
@@ -196,19 +196,19 @@ https://app-web-abc123def.azurewebsites.net
 ## Hatua 5: Jaribu Programu Yako
 
 ### Fikia Programu Yako
-Bonyeza kwenye URL iliyotolewa kwenye matokeo ya kusakinisha, au ipate wakati wowote:
+Bofya URL iliyotolewa kwenye matokeo ya uwekaji, au ipate wakati wowote:
 ```bash
-# Pata endpoints za programu
+# Pata vituo vya programu
 azd show
 
-# Fungua programu kwenye kivinjari chako
+# Fungua programu katika kivinjari chako
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
 ### Jaribu Programu ya Todo
-1. **Ongeza kipengee cha todo** - Bonyeza "Add Todo" na ingiza kazi
-2. **Mark as complete** - Weka tiki kwenye vitu vilivyokamilika
-3. **Delete items** - Ondoa todos ambazo huna tena
+1. **Ongeza kipengee cha todo** - Bofya "Add Todo" na ingiza kazi
+2. **Taja kama imekamilika** - Weka tiki kwa vitu vilivyokamilika
+3. **Futa vitu** - Ondoa vipengee vya todo usizohitaji tena
 
 ### Fuatilia Programu Yako
 ```bash
@@ -222,9 +222,9 @@ azd monitor --logs
 azd monitor --live
 ```
 
-## Hatua 6: Fanya Mabadiliko na Usakinishe Tena
+## Hatua 6: Fanya Mabadiliko na Uweke Tena
 
-Tufanye mabadiliko tuone jinsi ilivyo rahisi kusasisha:
+Tufanye mabadiliko na kuona jinsi ilivyo rahisi kusasisha:
 
 ### Badilisha API
 ```bash
@@ -232,29 +232,29 @@ Tufanye mabadiliko tuone jinsi ilivyo rahisi kusasisha:
 code src/api/src/routes/lists.js
 ```
 
-Ongeza kichwa cha mwitikio maalum:
+Ongeza kichwa maalum cha majibu:
 ```javascript
-// Tafuta mshughulikiaji wa njia na ongeza:
+// Tafuta mshughulikiaji wa njia na uongeze:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### Sakinisha Tu Mabadiliko ya Msimbo
+### Weka Tu Mabadiliko ya Msimbo
 ```bash
 # Sambaza tu msimbo wa programu (ruka miundombinu)
 azd deploy
 
-# Hii ni haraka zaidi kuliko 'azd up' kwa sababu miundombinu tayari ipo
+# Hii ni haraka zaidi kuliko 'azd up' kwa kuwa miundombinu tayari ipo
 ```
 
-## Hatua 7: Simamia Mazingira Nyingi
+## Hatua 7: Dhibiti Mazingira Mengi
 
-Unda mazingira ya staging kujaribu mabadiliko kabla ya uzalishaji:
+Unda mazingira ya staging ili kujaribu mabadiliko kabla ya uzalishaji:
 
 ```bash
-# Unda mazingira mapya ya kujaribu
+# Unda mazingira mapya ya maandalizi
 azd env new staging
 
-# Sambaza kwenye mazingira ya kujaribu
+# Sambaza kwenye mazingira ya maandalizi
 azd up
 
 # Rudi kwenye mazingira ya maendeleo
@@ -277,13 +277,13 @@ azd show
 
 ## Hatua 8: Safisha Rasilimali
 
-Unapomaliza kujaribu, safisha ili kuepuka malipo yanayoendelea:
+Ukimaliza kujaribu, safisha ili kuepuka malipo yanayoendelea:
 
 ```bash
-# Futa rasilimali zote za Azure kwa mazingira ya sasa
+# Futa rasilimali zote za Azure za mazingira ya sasa
 azd down
 
-# Futa kwa nguvu bila uthibitisho na ondoa kabisa rasilimali zilizofutwa kwa muda
+# Lazimisha kufuta bila uthibitisho na ondoa kabisa rasilimali zilizofutwa kwa muda
 azd down --force --purge
 
 # Futa mazingira maalum
@@ -291,20 +291,40 @@ azd env select staging
 azd down --force --purge
 ```
 
-## Mambo Uliyoyajifunza
+## Programu ya Klasiki dhidi ya Programu Iliyotumia AI: Njia Ile Ile ya Kazi
+
+Umeweka tu programu ya wavuti ya jadi. Lakini vipi kama ungependa kupeleka programu inayotumia AI badala yake — sema, programu ya mazungumzo inayosaidiwa na Microsoft Foundry Models?
+
+Habari njema: **mtiririko wa kazi ni sawa.**
+
+| Hatua | Programu ya Todo ya Klasiki | Programu ya Chat ya AI |
+|------|-----------------|-------------|
+| Initialize | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
+| Authenticate | `azd auth login` | `azd auth login` |
+| Deploy | `azd up` | `azd up` |
+| Monitor | `azd monitor` | `azd monitor` |
+| Clean up | `azd down --force --purge` | `azd down --force --purge` |
+
+Tofauti pekee ni **templeti** unayoanza nayo. Templeti ya AI inajumuisha miundombinu ya ziada (kama rasilimali ya Microsoft Foundry Models au faharasa ya AI Search), lakini azd inashughulikia yote hayo kwa niaba yako. Huhitaji kujifunza amri mpya, kutumia zana tofauti, au kubadilisha jinsi unavyofikiria kuhusu uwekaji.
+
+Hili ndilo kanuni kuu ya azd: **mtiririko mmoja, kazi yoyote.** Ujuzi uliofanya mazoezi katika mafunzo haya—kuzindua, kuwekeza, kufuatilia, kuweka tena, na kusafisha—unatumika sawia kwa programu za AI na mawakala.
+
+---
+
+## Ulichojifunza
 
 Hongera! Umefanikiwa:
-- ✅ Kuanzisha mradi wa azd kutoka kwa kiolezo
-- ✅ Kuchunguza muundo wa mradi na mafaili muhimu
-- ✅ Kusakinisha programu ya full-stack kwenye Azure
-- ✅ Kufanya mabadiliko ya msimbo na kusakinisha tena
+- ✅ Kuanzisha mradi wa azd kutoka kwa templeti
+- ✅ Kupitia muundo wa mradi na faili muhimu
+- ✅ Kuweka programu kamili kwenye Azure
+- ✅ Kufanya mabadiliko ya msimbo na kuweka tena
 - ✅ Kusimamia mazingira mengi
 - ✅ Kusafisha rasilimali
 
-## 🎯 Mazoezi ya Uthibitisho wa Ujuzi
+## 🎯 Mazoezi ya Kupima Ujuzi
 
-### Zoezi 1: Sakinisha Kiolezo Tofauti (dakika 15)
-**Lengo**: Onyesha umiliki wa azd init na mtiririko wa kusakinisha
+### Zoezi 1: Weka Templeti Tofauti (dakika 15)
+**Lengo**: Onyesha ustadi wa azd init na mtiririko wa uwekaji
 
 ```bash
 # Jaribu stack ya Python + MongoDB
@@ -312,7 +332,7 @@ mkdir todo-python && cd todo-python
 azd init --template todo-python-mongo
 azd up
 
-# Thibitisha utoaji
+# Thibitisha uanzishaji
 azd show
 curl $(azd show --output json | jq -r '.services.web.endpoint')
 
@@ -321,13 +341,13 @@ azd down --force --purge
 ```
 
 **Vigezo vya Mafanikio:**
-- [ ] Programu inasakinishwa bila makosa
-- [ ] Inaweza kufikiwa kupitia URL ya programu katika kivinjari
-- [ ] Programu inafanya kazi vizuri (ongeza/ondoa todos)
+- [ ] Programu imewekwa bila makosa
+- [ ] Inaweza kufikiwa kwa URL katika kivinjari
+- [ ] Programu inafanya kazi ipasavyo (ongeza/ondoa todos)
 - [ ] Imefanikiwa kusafisha rasilimali zote
 
 ### Zoezi 2: Binafsisha Usanidi (dakika 20)
-**Lengo**: Fanya mazoezi ya kusanidi vigezo vya mazingira
+**Lengo**: Fanya mazoezi ya usanidi wa vigezo vya mazingira
 
 ```bash
 cd my-first-azd-app
@@ -348,13 +368,13 @@ azd up
 ```
 
 **Vigezo vya Mafanikio:**
-- [ ] Mazingira maalum yameundwa kwa mafanikio
+- [ ] Mazingira maalum yaliundwa kwa mafanikio
 - [ ] Vigezo vya mazingira vimewekwa na vinaweza kupatikana
-- [ ] Programu inasakinishwa kwa usanidi maalum
-- [ ] Inaweza kuthibitisha mipangilio maalum katika programu iliyosakinishwa
+- [ ] Programu imewekwa kwa usanidi maalum
+- [ ] Inaweza kuthibitisha mipangilio maalum katika programu iliyowekwa
 
 ### Zoezi 3: Mtiririko wa Mazingira Nyingi (dakika 25)
-**Lengo**: Kuwa mtaalamu wa usimamizi wa mazingira na mikakati ya uenezaji
+**Lengo**: Kamilisha usimamizi wa mazingira na mbinu za uwekaji
 
 ```bash
 # Unda mazingira ya maendeleo
@@ -384,45 +404,45 @@ azd env list
 curl "$DEV_URL/health"
 curl "$STAGING_URL/health"
 
-# Safisha mazingira yote mawili
+# Safisha zote mbili
 azd env select dev-$(whoami) && azd down --force --purge
 azd env select staging-$(whoami) && azd down --force --purge
 ```
 
 **Vigezo vya Mafanikio:**
-- [ ] Mazingira mawili yalioundwa yenye usanidi tofauti
-- [ ] Mazingira yote yamesakinishwa kwa mafanikio
+- [ ] Mazingira mawili yaliundwa yenye usanidi tofauti
+- [ ] Mazingira yote yaliwekwa kwa mafanikio
 - [ ] Inaweza kubadilisha kati ya mazingira kwa kutumia `azd env select`
 - [ ] Vigezo vya mazingira vinatofautiana kati ya mazingira
-- [ ] Mazingira yote mawili yamesafishwa kwa mafanikio
+- [ ] Imefanikiwa kusafisha mazingira yote mawili
 
 ## 📊 Maendeleo Yako
 
-**Muda Uliowekezwa**: ~60-90 dakika  
+**Muda Uliotumika**: ~60-90 dakika  
 **Ujuzi Uliopatikana**:
-- ✅ Kuanzisha mradi kwa kutumia kiolezo
+- ✅ Kuanzisha mradi kwa kutumia templeti
 - ✅ Utoaji wa rasilimali za Azure
-- ✅ Mtiririko wa usakinishaji wa programu
+- ✅ Mtiririko wa uwekeaji wa programu
 - ✅ Usimamizi wa mazingira
-- ✅ Usanidi wa utekelezaji
-- ✅ Kusafisha rasilimali na usimamizi wa gharama
+- ✅ Usimamizi wa usanidi
+- ✅ Usafishaji wa rasilimali na usimamizi wa gharama
 
-**Ngazi Ifuatayo**: Uko tayari kwa [Mwongozo wa Usanidi](configuration.md) kujifunza mifumo ya juu ya usanidi!
+**Ngazi Ifuatayo**: Uko tayari kwa [Mwongozo wa Usanidi](configuration.md) kujifunza mifumo ya usanidi ya juu!
 
-## Kutatua Masuala Yanayojirudia
+## Kutatua Masuala ya Kawaida
 
 ### Makosa ya Uthibitishaji
 ```bash
-# Thibitisha tena kwa Azure
+# Thibitisha tena na Azure
 az login
 
 # Thibitisha ufikiaji wa usajili
 az account show
 ```
 
-### Kushindwa kwa Kusakinisha
+### Kushindwa kwa Uwekaji
 ```bash
-# Washa uandishi wa kumbukumbu za utatuzi
+# Washa kurekodi kumbukumbu za utatuzi
 export AZD_DEBUG=true
 azd up --debug
 
@@ -441,29 +461,29 @@ azd env new dev-$(whoami)-$(date +%s)
 
 ### Masuala ya Bandari/Mtandao
 ```bash
-# Angalia ikiwa bandari zinapatikana
+# Angalia kama bandari zinapatikana
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
 ## Hatua Zifuatazo
 
-Sasa baada ya kumaliza mradi wako wa kwanza, chunguza mada hizi za juu:
+Sasa umeimaliza mradi wako wa kwanza, chunguza mada hizi za juu zaidi:
 
 ### 1. Binafsisha Miundombinu
-- [Miundombinu Kama Msimbo](../chapter-04-infrastructure/provisioning.md)
+- [Miundombinu kama Msimbo](../chapter-04-infrastructure/provisioning.md)
 - [Ongeza hifadhidata, uhifadhi, na huduma nyingine](../chapter-04-infrastructure/provisioning.md#adding-services)
 
 ### 2. Sanidi CI/CD
-- [Mwongozo wa Uenezaji](../chapter-04-infrastructure/deployment-guide.md) - Mtiririko kamili wa CI/CD
-- [Nyaraka za Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - Usanidi wa pipeline
+- [Mwongozo wa Uwekaji](../chapter-04-infrastructure/deployment-guide.md) - Mtiririko kamili wa CI/CD
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - Usanidi wa pipeline
 
-### 3. Mifumo Bora kwa Uzalishaji
-- [Mwongozo wa Uenezaji](../chapter-04-infrastructure/deployment-guide.md) - Usalama, utendakazi, na ufuatiliaji
+### 3. Mazoezi Bora kwa Uzalishaji
+- [Mwongozo wa Uwekaji](../chapter-04-infrastructure/deployment-guide.md) - Usalama, utendaji, na ufuatiliaji
 
-### 4. Chunguza Violezo Zaidi
+### 4. Chunguza Templeti Zaidi
 ```bash
-# Pitia violezo kwa aina
+# Vinjari templeti kwa aina
 azd template list --filter web
 azd template list --filter api
 azd template list --filter database
@@ -474,40 +494,40 @@ azd init --template todo-csharp-sql
 azd init --template todo-java-mongo
 ```
 
-## Rasilimali Zaidi
+## Rasilimali Zingine
 
 ### Vifaa vya Kujifunzia
-- [Nyaraka za Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Kituo cha Miundo ya Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Jamii & Msaada
-- [GitHub ya Azure Developer CLI](https://github.com/Azure/azure-dev)
-- [Jamii ya Azure Developer](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
+- [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
-### Violezo & Mifano
-- [Gallery Rasmi ya Violezo](https://azure.github.io/awesome-azd/)
-- [Violezo vya Jamii](https://github.com/Azure-Samples/azd-templates)
-- [Miundo ya Shirika](https://github.com/Azure/azure-dev/tree/main/templates)
+### Templeti & Mifano
+- [Official Template Gallery](https://azure.github.io/awesome-azd/)
+- [Community Templates](https://github.com/Azure-Samples/azd-templates)
+- [Enterprise Patterns](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
-**Hongera kwa kumaliza mradi wako wa kwanza wa azd!** Sasa uko tayari kujenga na kusakinisha programu za kushangaza kwenye Azure kwa ujasiri.
+**Hongera kwa kumaliza mradi wako wa kwanza wa azd!** Sasa uko tayari kujenga na kupeleka programu za kusisimua kwenye Azure kwa ujasiri.
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD Kwa Waanzilishi](../../README.md)
-- **📖 Current Chapter**: Sura 1 - Msingi & Mwanzo wa Haraka
-- **⬅️ Previous**: [Ufungaji & Usanidi](installation.md)
-- **➡️ Next**: [Usanidi](configuration.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **Next Lesson**: [Mwongozo wa Uenezaji](../chapter-04-infrastructure/deployment-guide.md)
+**Uvinjari wa Sura:**
+- **📚 Nyumbani kwa Kozi**: [AZD Kwa Wanaoanza](../../README.md)
+- **📖 Sura ya Sasa**: Sura 1 - Msingi & Anza Haraka
+- **⬅️ Awali**: [Installation & Setup](installation.md)
+- **➡️ Ifuatayo**: [Configuration](configuration.md)
+- **🚀 Sura Ifuatayo**: [Sura 2: Maendeleo ya Kwanza ya AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **Somo Ifuatayo**: [Mwongozo wa Uwekaji](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Taarifa ya kutokuwajibika:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya utafsiri wa AI, Co-op Translator (https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Nyaraka ya awali katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, inapendekezwa kutumia tafsiri ya kitaalamu iliyofanywa na mtafsiri wa binadamu. Hatuwajibiki kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+**Taarifa ya kutokuwa na dhamana**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kufikia usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au ukosefu wa usahihi. Nyaraka ya asili katika lugha yake ya asili inapaswa kuzingatiwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatubebei wajibu kwa kutoelewana au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

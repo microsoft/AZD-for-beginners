@@ -1,97 +1,89 @@
 # Egyszerű Flask API - Container App példa
 
-**Tanulási út:** Kezdő ⭐ | **Idő:** 25-35 perc | **Költség:** 0-15 $/hó
+**Tanulási út:** Kezdő ⭐ | **Időtartam:** 25-35 perc | **Költség:** 0-15$/hó
 
-Egy teljes, működő Python Flask REST API telepítve Azure Container Apps-be az Azure Developer CLI (azd) használatával. Ez a példa bemutatja a konténer telepítést, az automatikus skálázást és az alapvető monitorozást.
+Egy teljesen működő Python Flask REST API, amely Azure Container Apps-re van telepítve az Azure Developer CLI (azd) segítségével. Ez a példa bemutatja a konténer telepítését, az automatikus skálázást és az alapvető megfigyelést.
 
 ## 🎯 Amit megtanulsz
 
-- Konténerizált Python alkalmazás telepítése Azure-ra
-- Automatikus skálázás konfigurálása scale-to-zero funkcióval
-- Health probe-ok és readiness ellenőrzések megvalósítása
-- Alkalmazás logok és metrikák monitorozása
-- Azure Developer CLI gyors telepítéshez használata
+- Konténerizált Python alkalmazás telepítése Azure-ra  
+- Automatikus skálázás konfigurálása scale-to-zero funkcióval  
+- Egészségügyi vizsgálatok és kész állapot ellenőrzések megvalósítása  
+- Alkalmazásnaplók és metrikák figyelése  
+- Gyors telepítés Azure Developer CLI használatával  
 
-## 📦 Mi tartozik hozzá
+## 📦 Mit tartalmaz
 
 ✅ **Flask alkalmazás** - Teljes REST API CRUD műveletekkel (`src/app.py`)  
-✅ **Dockerfile** - Gyártásra kész konténer konfiguráció  
+✅ **Dockerfile** - Termelési szintű konténer konfiguráció  
 ✅ **Bicep infrastruktúra** - Container Apps környezet és API telepítés  
 ✅ **AZD konfiguráció** - Egy parancsos telepítés beállítása  
-✅ **Health probe-ok** - Liveness és readiness ellenőrzések konfigurálva  
+✅ **Egészségügyi vizsgálatok** - Liveness és readiness ellenőrzések konfigurálva  
 ✅ **Automatikus skálázás** - 0-10 replika HTTP terhelés alapján  
 
 ## Architektúra
 
+```mermaid
+graph TD
+    subgraph ACA[Azure Konténeralkalmazások környezet]
+        Flask[Flask API Konténer<br/>Egészségügyi végpontok<br/>REST API<br/>Automatikus skálázás 0-10 példány]
+        AppInsights[Application Insights]
+    end
 ```
-┌─────────────────────────────────────────┐
-│   Azure Container Apps Environment      │
-│                                         │
-│  ┌───────────────────────────────────┐ │
-│  │   Flask API Container             │ │
-│  │   - Health endpoints              │ │
-│  │   - REST API                      │ │
-│  │   - Auto-scaling (0-10 replicas)  │ │
-│  └───────────────────────────────────┘ │
-│                                         │
-│  Application Insights ────────────────┐ │
-└────────────────────────────────────────┘
-```
-
 ## Előfeltételek
 
 ### Szükséges
 - **Azure Developer CLI (azd)** - [Telepítési útmutató](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
 - **Azure előfizetés** - [Ingyenes fiók](https://azure.microsoft.com/free/)
-- **Docker Desktop** - [Docker telepítése](https://www.docker.com/products/docker-desktop/) (helyi teszthez)
+- **Docker Desktop** - [Docker telepítése](https://www.docker.com/products/docker-desktop/) (helyi teszteléshez)
 
-### Ellenőrizd az előfeltételeket
+### Előfeltételek ellenőrzése
 
 ```bash
-# Az azd verzió ellenőrzése (1.5.0 vagy újabb szükséges)
+# Ellenőrizze az azd verziót (szükséges 1.5.0 vagy újabb)
 azd version
 
-# Azure bejelentkezés ellenőrzése
+# Ellenőrizze az Azure bejelentkezést
 azd auth login
 
-# Docker ellenőrzése (opcionális, helyi teszteléshez)
+# Ellenőrizze a Dockert (opcionális, helyi teszteléshez)
 docker --version
 ```
 
-## ⏱️ Telepítési idővonal
+## ⏱️ Telepítési ütemterv
 
 | Fázis | Időtartam | Mi történik |
 |-------|----------|--------------||
-| Környezet beállítása | 30 másodperc | azd környezet létrehozása |
-| Konténer építése | 2-3 perc | Docker build Flask app |
-| Infrastruktúra előkészítése | 3-5 perc | Container Apps, regisztráció, monitorozás |
-| Alkalmazás telepítése | 2-3 perc | Image feltöltése és deploy Container Apps-be |
+| Környezet létrehozása | 30 másodperc | azd környezet létrehozása |
+| Konténer buildelése | 2-3 perc | Docker build Flask alkalmazás |
+| Infrastruktúra biztosítása | 3-5 perc | Container Apps, registry, monitoring létrehozása |
+| Alkalmazás telepítése | 2-3 perc | Kép feltöltése és telepítése Container Apps-be |
 | **Összesen** | **8-12 perc** | Teljes telepítés kész |
 
-## Gyors kezdés
+## Gyors indulás
 
 ```bash
-# Navigáljon a példához
+# Navigálj a példához
 cd examples/container-app/simple-flask-api
 
-# Inicializálja a környezetet (válasszon egyedi nevet)
+# Inicializáld a környezetet (válassz egyedi nevet)
 azd env new myflaskapi
 
-# Telepítsen mindent (infrastruktúra + alkalmazás)
+# Telepíts mindent (infrastruktúra + alkalmazás)
 azd up
-# A következőkre fogják kérni:
-# 1. Válassza ki az Azure előfizetést
-# 2. Válasszon helyszínt (pl. eastus2)
-# 3. Várjon 8-12 percet a telepítésre
+# Kérni fogják, hogy:
+# 1. Válassz Azure előfizetést
+# 2. Válassz helyszínt (pl. eastus2)
+# 3. Várj 8-12 percet a telepítésre
 
-# Szerezze meg az API végpontját
+# Szerezd meg az API végpontodat
 azd env get-values
 
-# Tesztelje az API-t
+# Teszteld az API-t
 curl $(azd env get-value API_ENDPOINT)/health
 ```
 
-**Várt kimenet:**
+**Várt kimenet:**  
 ```json
 {
   "status": "healthy",
@@ -103,7 +95,7 @@ curl $(azd env get-value API_ENDPOINT)/health
 
 ## ✅ Telepítés ellenőrzése
 
-### 1. lépés: Telepítési státusz ellenőrzése
+### 1. lépés: Telepítés állapotának ellenőrzése
 
 ```bash
 # Telepített szolgáltatások megtekintése
@@ -121,7 +113,7 @@ azd show
 # API végpont lekérése
 API_URL=$(azd env get-value API_ENDPOINT)
 
-# Egészség tesztelése
+# Egészség ellenőrzése
 curl $API_URL/health
 
 # Gyökér végpont tesztelése
@@ -136,22 +128,22 @@ curl -X POST $API_URL/api/items \
 curl $API_URL/api/items
 ```
 
-**Siker kritériumok:**
-- ✅ A health végpont HTTP 200 választ ad
-- ✅ A gyökér végpont API információkat mutat
-- ✅ A POST létrehozza az elemet és HTTP 201 választ ad
-- ✅ A GET visszaadja a létrehozott elemeket
+**Siker kritériumok:**  
+- ✅ Egészségügyi végpont HTTP 200-as választ ad  
+- ✅ Gyökér végpont megjeleníti az API információkat  
+- ✅ POST kérés létrehoz egy elemet és HTTP 201-et ad vissza  
+- ✅ GET kérés visszaadja a létrehozott elemeket  
 
-### 3. lépés: Logok megtekintése
+### 3. lépés: Naplók megtekintése
 
 ```bash
 # Élő naplók folyamának megtekintése az azd monitor segítségével
 azd monitor --logs
 
-# Vagy használd az Azure CLI-t:
+# Vagy használja az Azure CLI-t:
 az containerapp logs show --name api --resource-group $RG_NAME --follow
 
-# Ezt kell látnod:
+# Ezt kell látnia:
 # - Gunicorn indítási üzenetek
 # - HTTP kérés naplók
 # - Alkalmazás információs naplók
@@ -178,8 +170,8 @@ simple-flask-api/
 
 | Végpont | Módszer | Leírás |
 |----------|--------|-------------|
-| `/health` | GET | Egészség-ellenőrzés |
-| `/api/items` | GET | Az összes elem lekérése |
+| `/health` | GET | Egészségügyi ellenőrzés |
+| `/api/items` | GET | Összes elem listázása |
 | `/api/items` | POST | Új elem létrehozása |
 | `/api/items/{id}` | GET | Egy adott elem lekérése |
 | `/api/items/{id}` | PUT | Elem frissítése |
@@ -190,18 +182,18 @@ simple-flask-api/
 ### Környezeti változók
 
 ```bash
-# Egyéni konfiguráció beállítása
+# Egyedi konfiguráció beállítása
 azd env set PORT 8000
 azd env set LOG_LEVEL info
 azd env set MAX_REPLICAS 20
 ```
 
-### Skálázási konfiguráció
+### Skálázási beállítások
 
 Az API automatikusan skálázódik a HTTP forgalom alapján:
-- **Minimális replika**: 0 (scale-to-zero, ha nincs terhelés)
-- **Maximális replika**: 10
-- **Egyidejű kérés replika szerint**: 50
+- **Minimális replika:** 0 (skálázás nullára tétel tétlenség esetén)  
+- **Maximális replika:** 10  
+- **Egy replika által párhuzamosan kezelhető kérések száma:** 50  
 
 ## Fejlesztés
 
@@ -212,7 +204,7 @@ Az API automatikusan skálázódik a HTTP forgalom alapján:
 cd src
 pip install -r requirements.txt
 
-# Alkalmazás futtatása
+# Az alkalmazás futtatása
 python app.py
 
 # Helyi tesztelés
@@ -222,7 +214,7 @@ curl http://localhost:8000/health
 ### Konténer építése és tesztelése
 
 ```bash
-# Docker kép készítése
+# Docker kép építése
 docker build -t flask-api:local ./src
 
 # Konténer futtatása helyben
@@ -244,7 +236,7 @@ azd up
 ### Csak kód telepítés
 
 ```bash
-# Csak az alkalmazáskód telepítése (az infrastruktúra változatlan)
+# Csak az alkalmazáskódot telepítse (infrastruktúra változatlan)
 azd deploy api
 ```
 
@@ -258,28 +250,28 @@ azd env set API_KEY "new-api-key"
 azd deploy api
 ```
 
-## Monitorozás
+## Megfigyelés
 
-### Logok megtekintése
+### Naplók megtekintése
 
 ```bash
-# Élő naplók folyam közvetítése az azd monitorral
+# Élő naplók streamelése az azd monitor segítségével
 azd monitor --logs
 
-# Vagy használd az Azure CLI-t a Container Apps-hez:
+# Vagy használd az Azure CLI-t Container Apps-hez:
 az containerapp logs show --name api --resource-group $RG_NAME --follow
 
 # Az utolsó 100 sor megtekintése
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 ```
 
-### Metrikák monitorozása
+### Metrikák figyelése
 
 ```bash
 # Azure Monitor műszerfal megnyitása
 azd monitor --overview
 
-# Specifikus mérőszámok megtekintése
+# Specifikus metrikák megtekintése
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "Requests,ResponseTime"
@@ -287,13 +279,13 @@ az monitor metrics list \
 
 ## Tesztelés
 
-### Egészség-ellenőrzés
+### Egészségügyi ellenőrzés
 
 ```bash
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-Várt válasz:
+Várt válasz:  
 ```json
 {
   "status": "healthy",
@@ -317,35 +309,35 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/api/items
 
 ## Költségoptimalizálás
 
-Ez a telepítés scale-to-zero-t használ, így csak akkor fizetsz, amikor az API kérdéseket dolgoz fel:
+Ez a telepítés scale-to-zero-t használ, így csak akkor fizetsz, amikor az API éppen kéréseket dolgoz fel:
 
-- **Tétlen költség**: kb. 0 $/hó (nullára skálázva)
-- **Aktív költség**: kb. 0,000024 $/másodperc replika során
-- **Várt havi költség** (könnyű használat): 5-15 $
+- **Tétlenségi költség**: kb. 0$/hó (nullára skálázva)  
+- **Aktív költség**: kb. 0.000024$/másodperc replika  
+- **Várt havi költség** (könnyű használat): 5-15$  
 
 ### További költségcsökkentés
 
 ```bash
-# Csökkentse a maximális replikák számát fejlesztéshez
+# Csökkentse a maximális replikák számát fejlesztésre
 azd env set MAX_REPLICAS 3
 
-# Használjon rövidebb inaktivitási időtúllépést
+# Rövidebb inaktivitási időkorlát használata
 azd env set SCALE_TO_ZERO_TIMEOUT 300  # 5 perc
 ```
 
 ## Hibakeresés
 
-### Nem indul el a konténer
+### A konténer nem indul el
 
 ```bash
 # Konténer naplók ellenőrzése Azure CLI használatával
 az containerapp logs show --name api --resource-group $RG_NAME --tail 100
 
-# Docker image-ek helyi buildelésének ellenőrzése
+# Docker kép helyi építésének ellenőrzése
 docker build -t test ./src
 ```
 
-### Az API nem elérhető
+### API nem elérhető
 
 ```bash
 # Ellenőrizze, hogy a bejövő forgalom külső-e
@@ -356,12 +348,12 @@ az containerapp show --name api --resource-group rg-simple-flask-api \
 ### Magas válaszidők
 
 ```bash
-# CPU/memória használat ellenőrzése
+# Ellenőrizze a CPU/memória használatát
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Erőforrások bővítése szükség esetén
+# Növelje az erőforrásokat, ha szükséges
 az containerapp update --name api --resource-group rg-simple-flask-api \
   --cpu 1.0 --memory 2Gi
 ```
@@ -369,23 +361,23 @@ az containerapp update --name api --resource-group rg-simple-flask-api \
 ## Takarítás
 
 ```bash
-# Minden erőforrás törlése
+# Töröld az összes erőforrást
 azd down --force --purge
 ```
 
-## További lépések
+## Következő lépések
 
 ### A példa bővítése
 
-1. **Adatbázis hozzáadása** - Integráld az Azure Cosmos DB-t vagy SQL adatbázist  
+1. **Adatbázis hozzáadása** - Integrálás Azure Cosmos DB-vel vagy SQL Adatbázissal  
    ```bash
-   # Add Cosmos DB modult az infra/main.bicep-hez
-   # Frissítsd az app.py-t az adatbázis kapcsolattal
+   # Add hozzá a Cosmos DB modult az infra/main.bicep fájlhoz
+   # Frissítsd az app.py fájlt az adatbázis csatlakozással
    ```
 
-2. **Hitelesítés hozzáadása** - Implementáld az Azure AD-t vagy API kulcsokat  
+2. **Hitelesítés hozzáadása** - Azure AD vagy API kulcsok megvalósítása  
    ```python
-   # Hitelesítési middleware hozzáadása az app.py-hez
+   # Adj hozzá hitelesítési middleware-t az app.py-hez
    from functools import wraps
    ```
 
@@ -396,7 +388,7 @@ azd down --force --purge
    on: [push]
    ```
 
-4. **Managed Identity hozzáadása** - Biztonságos hozzáférés az Azure szolgáltatásokhoz  
+4. **Managed Identity hozzáadása** - Biztonságos hozzáférés Azure szolgáltatásokhoz  
    ```bicep
    # Update infra/app/api.bicep
    identity: { type: 'SystemAssigned' }
@@ -404,41 +396,41 @@ azd down --force --purge
 
 ### Kapcsolódó példák
 
-- **[Adatbázis alkalmazás](../../../../../examples/database-app)** - Teljes példa SQL adatbázissal  
-- **[Microservices](../../../../../examples/container-app/microservices)** - Többszolgáltatásos architektúra  
-- **[Container Apps fő útmutató](../README.md)** - Minden konténer minta
+- **[Adatbázis alkalmazás](../../../../../examples/database-app)** - Teljes példa SQL Adatbázissal  
+- **[Mikroszolgáltatások](../../../../../examples/container-app/microservices)** - Több szolgáltatás architektúra  
+- **[Container Apps mesterguide](../README.md)** - Minden konténer minta  
 
 ### Tanulási források
 
-- 📚 [AZD kezdőknek tanfolyam](../../../README.md) - Fő tanfolyam  
-- 📚 [Container Apps minták](../README.md) - Több telepítési minta  
-- 📚 [AZD sablon galéria](https://azure.github.io/awesome-azd/) - Közösségi sablonok
+- 📚 [AZD kezdőknek kurzus](../../../README.md) - Fő kurzus kezdőlap  
+- 📚 [Container Apps minták](../README.md) - További telepítési minták  
+- 📚 [AZD sablonok galéria](https://azure.github.io/awesome-azd/) - Közösségi sablonok  
 
 ## További források
 
-### Dokumentáció
+### Dokumentáció  
 - **[Flask dokumentáció](https://flask.palletsprojects.com/)** - Flask keretrendszer útmutató  
 - **[Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)** - Hivatalos Azure dokumentáció  
-- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd parancs referencia
+- **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd parancsreferencia  
 
-### Oktatóanyagok
-- **[Container Apps gyors kezdés](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Első alkalmazás telepítése  
+### Oktatóanyagok  
+- **[Container Apps gyorsindító](https://learn.microsoft.com/azure/container-apps/quickstart-portal)** - Első alkalmazás telepítése  
 - **[Python Azure-on](https://learn.microsoft.com/azure/developer/python/)** - Python fejlesztési útmutató  
-- **[Bicep nyelv](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastruktúra kód formájában
+- **[Bicep nyelv](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)** - Infrastruktúra kód formájában  
 
-### Eszközök
-- **[Azure Portal](https://portal.azure.com)** - Erőforrások vizuális kezelése  
-- **[VS Code Azure bővítmény](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE integráció
+### Eszközök  
+- **[Azure portal](https://portal.azure.com)** - Erőforrások vizuális kezelése  
+- **[VS Code Azure kiterjesztés](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurecontainerapps)** - IDE integráció  
 
 ---
 
-**🎉 Gratulálunk!** Egy gyártásra kész Flask API-t telepítettél Azure Container Apps-be automatikus skálázással és monitorozással.
+**🎉 Gratulálunk!** Sikeresen telepítettél egy termelésre kész Flask API-t az Azure Container Apps-re automatikus skálázással és megfigyeléssel.
 
-**Kérdésed van?** [Nyiss egy hibajegyet](https://github.com/microsoft/AZD-for-beginners/issues) vagy nézd meg a [GYIK-et](../../../resources/faq.md)
+**Kérdésed van?** [Nyiss egy issue-t](https://github.com/microsoft/AZD-for-beginners/issues) vagy nézd meg a [GYIK-et](../../../resources/faq.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Felelősségkizárás**:
-Ezt a dokumentumot az AI fordító szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével fordítottuk le. Bár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti, anyanyelvi dokumentumot kell tekinteni a hiteles forrásnak. Fontos információk esetén javasolt szakmai, emberi fordítást igénybe venni. Nem vállalunk felelősséget az ebből a fordításból eredő félreértésekért vagy félreértelmezésekért.
+**Jogi nyilatkozat**:
+Ez a dokumentum az AI fordító szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hivatalos forrásnak. Kritikus információk esetén szakmai emberi fordítást javaslunk. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy félreértelmezésekért.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

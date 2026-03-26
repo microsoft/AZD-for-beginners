@@ -209,10 +209,10 @@ azd monitor --overview
 # View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
-# Follow logs in real-time
+# Tail logs in real-time
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# View logs from Azure Portal
+# View logs in Azure Portal
 azd monitor --logs
 ```
 
@@ -299,6 +299,61 @@ azd show --output json
 # Get service endpoints
 azd show --output json | jq '.services'
 ```
+
+## 🤖 AI & Extensions Commands
+
+### AZD Extensions
+```bash
+# List all available extensions (including AI)
+azd extension list
+
+# Install the Foundry agents extension
+azd extension install azure.ai.agents
+
+# Install the fine-tuning extension
+azd extension install azure.ai.finetune
+
+# Install the custom models extension
+azd extension install azure.ai.models
+
+# Upgrade all installed extensions
+azd extension upgrade --all
+```
+
+### AI Agent Commands
+```bash
+# Initialize an agent project from a manifest
+azd ai agent init -m <manifest-path-or-uri>
+
+# Target a specific Foundry project
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Specify the agent source directory
+azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
+
+# Choose a hosting target
+azd ai agent init -m agent-manifest.yaml --host containerapp
+```
+
+### MCP Server (Alpha)
+```bash
+# Start the MCP server for your project
+azd mcp start
+
+# Manage tool consent for MCP operations
+azd mcp consent
+```
+
+### Infrastructure Generation
+```bash
+# Generate IaC files from your project definition
+azd infra generate
+
+# Synthesize infrastructure from azure.yaml
+azd infra synth
+```
+
+---
 
 ## 🎯 Quick Workflows
 
@@ -588,7 +643,11 @@ azd template show <template-name> --docs
 
 ---
 
+> **💡 Want Azure command help in your editor?** Install [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) with `npx skills add microsoft/github-copilot-for-azure` — 37 skills for AI, Foundry, deployment, diagnostics, and more.
+
+---
+
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

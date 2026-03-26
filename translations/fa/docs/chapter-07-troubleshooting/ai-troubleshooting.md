@@ -1,30 +1,28 @@
-# راهنمای عیب‌یابی مخصوص هوش مصنوعی
+# راهنمای عیب‌یابی ویژه هوش مصنوعی
 
 **ناوبری فصل:**
-- **📚 Course Home**: [AZD برای مبتدیان](../../README.md)
-- **📖 Current Chapter**: فصل 7 - عیب‌یابی و اشکال‌زدایی
-- **⬅️ قبلی**: [راهنمای اشکال‌زدایی](debugging.md)
-- **➡️ فصل بعد**: [فصل 8: الگوهای تولید و سازمانی](../chapter-08-production/production-ai-practices.md)
-- **🤖 مرتبط**: [فصل 2: توسعه مبتنی بر هوش مصنوعی](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📚 صفحه دوره**: [AZD For Beginners](../../README.md)
+- **📖 فصل جاری**: فصل 7 - عیب‌یابی و رفع اشکال
+- **⬅️ قبلی**: [Debugging Guide](debugging.md)
+- **➡️ فصل بعد**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
+- **🤖 مرتبط**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**قبلی:** [الگوهای تولیدی هوش مصنوعی](../chapter-08-production/production-ai-practices.md) | **بعدی:** [مبانی AZD](../chapter-01-foundation/azd-basics.md)
-
-این راهنمای جامع عیب‌یابی به مسائل متداول هنگام استقرار راه‌حل‌های هوش مصنوعی با AZD می‌پردازد و راه‌حل‌ها و تکنیک‌های اشکال‌زدایی خاص سرویس‌های Azure AI را ارائه می‌دهد.
+این راهنمای جامع عیب‌یابی به مسائل رایج هنگام استقرار راه‌حل‌های هوش مصنوعی با AZD می‌پردازد و راه‌حل‌ها و تکنیک‌های رفع اشکال خاص سرویس‌های Azure AI را ارائه می‌دهد.
 
 ## فهرست مطالب
 
-- [مشکلات سرویس Azure OpenAI](../../../../docs/chapter-07-troubleshooting)
-- [مشکلات جستجوی Azure AI](../../../../docs/chapter-07-troubleshooting)
-- [مشکلات استقرار Container Apps](../../../../docs/chapter-07-troubleshooting)
-- [خطاهای احراز هویت و مجوز](../../../../docs/chapter-07-troubleshooting)
-- [شکست‌های استقرار مدل](../../../../docs/chapter-07-troubleshooting)
-- [مشکلات عملکرد و مقیاس‌پذیری](../../../../docs/chapter-07-troubleshooting)
-- [مدیریت هزینه و سهمیه](../../../../docs/chapter-07-troubleshooting)
-- [ابزارها و تکنیک‌های اشکال‌زدایی](../../../../docs/chapter-07-troubleshooting)
+- [مشکلات سرویس مدل‌های Microsoft Foundry](#azure-openai-service-issues)
+- [مشکلات Azure AI Search](#azure-ai-search-problems)
+- [مشکلات استقرار Container Apps](#container-apps-deployment-issues)
+- [خطاهای احراز هویت و دسترسی](#authentication-and-permission-errors)
+- [شکست‌های استقرار مدل](#model-deployment-failures)
+- [مشکلات عملکرد و مقیاس‌پذیری](#performance-and-scaling-issues)
+- [مدیریت هزینه و سهمیه](#cost-and-quota-management)
+- [ابزارها و تکنیک‌های اشکال‌زدایی](#debugging-tools-and-techniques)
 
-## مشکلات سرویس Azure OpenAI
+## Microsoft Foundry Models Service Issues
 
-### مشکل: سرویس OpenAI در منطقه در دسترس نیست
+### Issue: OpenAI Service Unavailable in Region
 
 **نشانه‌ها:**
 ```
@@ -32,15 +30,15 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **علت‌ها:**
-- Azure OpenAI در منطقه انتخاب‌شده در دسترس نیست
-- سهمیه در مناطق منتخب تمام شده است
+- مدل‌های Microsoft Foundry در منطقه انتخاب‌شده در دسترس نیستند
+- سهمیه در مناطق مورد نظر تمام شده است
 - محدودیت‌های ظرفیت منطقه‌ای
 
 **راه‌حل‌ها:**
 
-1. **بررسی در دسترس‌ بودن منطقه:**
+1. **بررسی در دسترس‌بودن منطقه:**
 ```bash
-# فهرست مناطق موجود برای OpenAI
+# فهرست مناطق در دسترس برای OpenAI
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
@@ -70,7 +68,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### مشکل: سهمیه استقرار مدل بیش از حد مجاز
+### Issue: Model Deployment Quota Exceeded
 
 **نشانه‌ها:**
 ```
@@ -79,9 +77,9 @@ Error: Deployment failed due to insufficient quota
 
 **راه‌حل‌ها:**
 
-1. **بررسی سهمیه فعلی:**
+1. **بررسی سهمیه کنونی:**
 ```bash
-# استفاده از سهمیه را بررسی کنید
+# میزان استفاده از سهمیه را بررسی کنید
 az cognitiveservices usage list \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG
@@ -89,7 +87,7 @@ az cognitiveservices usage list \
 
 2. **درخواست افزایش سهمیه:**
 ```bash
-# درخواست افزایش سهمیه را ارسال کنید
+# ارسال درخواست افزایش سهمیه
 az support tickets create \
   --ticket-name "OpenAI Quota Increase" \
   --description "Need increased quota for production deployment" \
@@ -104,7 +102,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -115,7 +113,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }
 ```
 
-### مشکل: نسخه API نامعتبر
+### Issue: Invalid API Version
 
 **نشانه‌ها:**
 ```
@@ -132,15 +130,15 @@ AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 
 2. **بررسی سازگاری نسخه API:**
 ```bash
-# فهرست نسخه‌های API پشتیبانی‌شده
+# نسخه‌های API پشتیبانی‌شده را فهرست کنید
 az rest --method get \
   --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
 ```
 
-## مشکلات جستجوی Azure AI
+## Azure AI Search Problems
 
-### مشکل: سطح قیمت‌گذاری سرویس جستجو ناکافی است
+### Issue: Search Service Pricing Tier Insufficient
 
 **نشانه‌ها:**
 ```
@@ -149,7 +147,7 @@ Error: Semantic search requires Basic tier or higher
 
 **راه‌حل‌ها:**
 
-1. **ارتقاء سطح قیمت‌گذاری:**
+1. **ارتقای لایه قیمتی:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -167,7 +165,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **غیرفعال کردن جستجوی معنایی (توسعه):**
+2. **غیرفعال‌سازی جستجوی معنایی (توسعه):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -181,7 +179,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### مشکل: شکست در ایجاد ایندکس
+### Issue: Index Creation Failures
 
 **نشانه‌ها:**
 ```
@@ -192,7 +190,7 @@ Error: Cannot create index, insufficient permissions
 
 1. **تأیید کلیدهای سرویس جستجو:**
 ```bash
-# دریافت کلید مدیریتی سرویس جستجو
+# کلید ادمین سرویس جستجو را دریافت کنید
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
@@ -200,7 +198,7 @@ az search admin-key show \
 
 2. **بررسی اسکیمای ایندکس:**
 ```python
-# اعتبارسنجی طرح‌واره شاخص
+# اعتبارسنجی طرح‌وارهٔ ایندکس
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
@@ -228,9 +226,9 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## مشکلات استقرار Container Apps
+## Container Apps Deployment Issues
 
-### مشکل: شکست در ساخت کانتینر
+### Issue: Container Build Failures
 
 **نشانه‌ها:**
 ```
@@ -275,7 +273,7 @@ azure-cosmos==4.5.1
 
 3. **افزودن بررسی سلامت:**
 ```python
-# main.py - افزودن نقطهٔ پایانی بررسی سلامت
+# main.py - افزودن نقطهٔ بررسی سلامت
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -285,7 +283,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### مشکل: شکست در راه‌اندازی Container App
+### Issue: Container App Startup Failures
 
 **نشانه‌ها:**
 ```
@@ -329,7 +327,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **بهینه‌سازی بارگذاری مدل:**
 ```python
-# بارگذاری تنبل مدل‌ها برای کاهش زمان راه‌اندازی
+# مدل‌ها را به‌صورت تنبل بارگذاری کنید تا زمان راه‌اندازی کاهش یابد
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -343,7 +341,7 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # اینجا کلاینت هوش مصنوعی را مقداردهی اولیه کنید
+        # در اینجا کلاینت هوش مصنوعی را مقداردهی اولیه کنید
         pass
 
 @asynccontextmanager
@@ -357,18 +355,18 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 ```
 
-## خطاهای احراز هویت و مجوز
+## Authentication and Permission Errors
 
-### مشکل: مجوز Managed Identity رد شد
+### Issue: Managed Identity Permission Denied
 
 **نشانه‌ها:**
 ```
-Error: Authentication failed for Azure OpenAI Service
+Error: Authentication failed for Microsoft Foundry Models Service
 ```
 
 **راه‌حل‌ها:**
 
-1. **بررسی تخصیص‌های نقش:**
+1. **تأیید انتساب‌های نقش:**
 ```bash
 # تخصیص‌های نقش فعلی را بررسی کنید
 az role assignment list \
@@ -376,7 +374,7 @@ az role assignment list \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **اختصاص نقش‌های موردنیاز:**
+2. **اختصاص نقش‌های مورد نیاز:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -393,9 +391,9 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-3. **آزمایش احراز هویت:**
+3. **آزمون احراز هویت:**
 ```python
-# آزمایش احراز هویت با شناسه مدیریت‌شده
+# تست احراز هویت با شناسه مدیریت‌شده
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
@@ -408,7 +406,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### مشکل: دسترسی به Key Vault رد شد
+### Issue: Key Vault Access Denied
 
 **نشانه‌ها:**
 ```
@@ -436,7 +434,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **استفاده از RBAC به‌جای Access Policies:**
+2. **استفاده از RBAC به‌جای سیاست‌های دسترسی:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -449,9 +447,9 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## شکست‌های استقرار مدل
+## Model Deployment Failures
 
-### مشکل: نسخه مدل در دسترس نیست
+### Issue: Model Version Not Available
 
 **نشانه‌ها:**
 ```
@@ -470,12 +468,12 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **استفاده از مدل‌های جایگزین:**
+2. **استفاده از مدل‌های پشتیبان (Fallbacks):**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
 param primaryModel object = {
-  name: 'gpt-4o-mini'
+  name: 'gpt-4.1-mini'
   version: '2024-07-18'
 }
 
@@ -501,7 +499,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 
 3. **اعتبارسنجی مدل قبل از استقرار:**
 ```python
-# اعتبارسنجی مدل قبل از استقرار
+# اعتبارسنجی مدل پیش از استقرار
 import httpx
 
 async def validate_model_availability(model_name: str, version: str) -> bool:
@@ -521,12 +519,12 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
         return False
 ```
 
-## مشکلات عملکرد و مقیاس‌پذیری
+## Performance and Scaling Issues
 
-### مشکل: پاسخ‌های با تأخیر بالا
+### Issue: High Latency Responses
 
 **نشانه‌ها:**
-- زمان‌های پاسخ > 30 ثانیه
+- زمان پاسخ > 30 ثانیه
 - خطاهای تایم‌اوت
 - تجربه کاربری ضعیف
 
@@ -567,7 +565,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **پیکربندی مقیاس‌گذاری خودکار:**
+3. **پیکربندی مقیاس خودکار:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -601,7 +599,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### مشکل: خطاهای تمام شدن حافظه
+### Issue: Memory Out of Errors
 
 **نشانه‌ها:**
 ```
@@ -631,7 +629,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **بهینه‌سازی استفاده از حافظه:**
 ```python
-# مدیریت مدل کارآمد از نظر مصرف حافظه
+# مدیریت مدل با صرفه‌جویی در حافظه
 import gc
 import psutil
 
@@ -641,32 +639,32 @@ class MemoryOptimizedAI:
         
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # قبل از پردازش، مصرف حافظه را بررسی کنید
+        # قبل از پردازش میزان استفاده از حافظه را بررسی کنید
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
             gc.collect()  # اجرای اجباری جمع‌آوری زباله
             
         result = await self._process_ai_request(request)
         
-        # پس از پردازش، پاکسازی کنید
+        # پاک‌سازی پس از پردازش
         gc.collect()
         return result
 ```
 
-## مدیریت هزینه و سهمیه
+## Cost and Quota Management
 
-### مشکل: هزینه‌های غیرمنتظره بالا
+### Issue: Unexpected High Costs
 
 **نشانه‌ها:**
-- صورتحساب Azure بیشتر از انتظار
-- استفاده از توکن‌ها بیش از برآوردها
+- صورتحساب Azure بالاتر از حد انتظار
+- مصرف توکن بیشتر از برآوردها
 - هشدارهای بودجه فعال شده
 
 **راه‌حل‌ها:**
 
 1. **اجرای کنترل‌های هزینه:**
 ```python
-# پیگیری مصرف توکن‌ها
+# پیگیری مصرف توکن
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -710,52 +708,72 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 3. **بهینه‌سازی انتخاب مدل:**
 ```python
-# انتخاب مدل آگاه به هزینه
+# انتخاب مدل با توجه به هزینه
 MODEL_COSTS = {
-    'gpt-4o-mini': 0.00015,  # به ازای هر ۱۰۰۰ توکن
-    'gpt-4': 0.03,          # به ازای هر ۱۰۰۰ توکن
-    'gpt-35-turbo': 0.0015  # به ازای هر ۱۰۰۰ توکن
+    'gpt-4.1-mini': 0.00015,  # به‌ازای هر ۱۰۰۰ توکن
+    'gpt-4.1': 0.03,          # به‌ازای هر ۱۰۰۰ توکن
+    'gpt-35-turbo': 0.0015  # به‌ازای هر ۱۰۰۰ توکن
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
     """Select model based on complexity and budget."""
     if complexity == 'simple' or budget_remaining < 10:
-        return 'gpt-4o-mini'
+        return 'gpt-4.1-mini'
     elif complexity == 'medium':
         return 'gpt-35-turbo'
     else:
-        return 'gpt-4'
+        return 'gpt-4.1'
 ```
 
-## ابزارها و تکنیک‌های اشکال‌زدایی
+## Debugging Tools and Techniques
 
-### دستورات اشکال‌زدایی AZD
+### AZD Debugging Commands
 
 ```bash
-# فعال‌سازی لاگ‌گیری با جزئیات
+# گزارش‌گیری مفصل را فعال کنید
 azd up --debug
 
-# بررسی وضعیت استقرار
+# وضعیت استقرار را بررسی کنید
 azd show
 
 # مشاهده لاگ‌های برنامه (داشبورد مانیتورینگ را باز می‌کند)
 azd monitor --logs
 
-# مشاهده متریک‌های زنده
+# مشاهده معیارهای زنده
 azd monitor --live
 
-# بررسی متغیرهای محیطی
+# متغیرهای محیطی را بررسی کنید
 azd env get-values
 ```
 
+### AZD AI Extension Commands for Diagnostics
+
+اگر عامل‌ها را با استفاده از `azd ai agent init` مستقر کردید، این ابزارهای اضافی در دسترس هستند:
+
+```bash
+# اطمینان حاصل کنید که افزونهٔ عامل‌ها نصب شده است
+azd extension install azure.ai.agents
+
+# عامل را از مانیفست مجدداً مقداردهی اولیه یا به‌روزرسانی کنید
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# از سرور MCP استفاده کنید تا ابزارهای هوش مصنوعی بتوانند وضعیت پروژه را پرس‌وجو کنند
+azd mcp start
+
+# فایل‌های زیرساخت را برای بازبینی و حسابرسی تولید کنید
+azd infra generate
+```
+
+> **نکته:** از `azd infra generate` استفاده کنید تا IaC را روی دیسک بنویسید تا بتوانید دقیقاً بررسی کنید چه منابعی فراهم شده‌اند. این مورد هنگام رفع اشکالات پیکربندی منابع بسیار ارزشمند است. برای جزئیات کامل به [مرجع AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) مراجعه کنید.
+
 ### اشکال‌زدایی برنامه
 
-1. **لاگ‌گذاری ساخت‌یافته:**
+1. **لاگ‌نویسی ساخت‌یافته:**
 ```python
 import logging
 import json
 
-# پیکربندی لاگ‌سازی ساختاریافته برای برنامه‌های هوش مصنوعی
+# پیکربندی لاگ‌نویسی ساخت‌یافته برای برنامه‌های هوش مصنوعی
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -838,38 +856,39 @@ def monitor_performance(func):
 
 | Error Code | Description | Solution |
 |------------|-------------|----------|
-| 401 | غیرمجاز | کلیدهای API و پیکربندی Managed Identity را بررسی کنید |
-| 403 | ممنوع | تخصیص‌های نقش RBAC را تأیید کنید |
-| 429 | محدودیت نرخ | منطق تلاش مجدد با تأخیر نمایی را پیاده‌سازی کنید |
+| 401 | احراز هویت نشده | کلیدهای API و پیکربندی Managed Identity را بررسی کنید |
+| 403 | ممنوع | انتساب‌های نقش RBAC را بررسی کنید |
+| 429 | محدودیت نرخ | منطق تکرار با تاخیر تصاعدی را پیاده‌سازی کنید |
 | 500 | خطای داخلی سرور | وضعیت استقرار مدل و لاگ‌ها را بررسی کنید |
-| 503 | سرویس در دسترس نیست | سلامت سرویس و در دسترس‌بودن منطقه‌ای را بررسی کنید |
+| 503 | سرویس در دسترس نیست | سلامت سرویس و دسترسی منطقه‌ای را بررسی کنید |
 
-## گام‌های بعدی
+## مراحل بعدی
 
-1. **مرور [راهنمای استقرار مدل‌های AI](../chapter-02-ai-development/ai-model-deployment.md)** برای بهترین شیوه‌های استقرار
-2. **تکمیل [الگوهای تولیدی هوش مصنوعی](../chapter-08-production/production-ai-practices.md)** برای راه‌حل‌های سازمانی آماده
-3. **به [Microsoft Foundry Discord](https://aka.ms/foundry/discord) بپیوندید** برای پشتیبانی جامعه
-4. **مسائل را در [مخزن GitHub AZD](https://github.com/Azure/azure-dev) ثبت کنید** برای مشکلات اختصاصی AZD
+1. **مرور [AI Model Deployment Guide](../chapter-02-ai-development/ai-model-deployment.md)** برای بهترین شیوه‌های استقرار
+2. **تکمیل [Production AI Practices](../chapter-08-production/production-ai-practices.md)** برای راه‌حل‌های آماده سازمانی
+3. **پیوستن به [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** برای پشتیبانی جامعه
+4. **ارسال اشکالات** به [مخزن GitHub AZD](https://github.com/Azure/azure-dev) برای مسائل مربوط به AZD
 
 ## منابع
 
-- [Azure OpenAI Service Troubleshooting](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [Microsoft Foundry Models Service Troubleshooting](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
 - [Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 - [Azure AI Search Troubleshooting](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - نصب مهارت‌های عیب‌یابی Azure در ویرایشگر شما: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **ناوبری فصل:**
-- **📚 Course Home**: [AZD برای مبتدیان](../../README.md)
-- **📖 Current Chapter**: فصل 7 - عیب‌یابی و اشکال‌زدایی
-- **⬅️ قبلی**: [راهنمای اشکال‌زدایی](debugging.md)
-- **➡️ فصل بعد**: [فصل 8: الگوهای تولید و سازمانی](../chapter-08-production/production-ai-practices.md)
-- **🤖 مرتبط**: [فصل 2: توسعه مبتنی بر هوش مصنوعی](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- [عیب‌یابی Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **📚 صفحه دوره**: [AZD For Beginners](../../README.md)
+- **📖 فصل جاری**: فصل 7 - عیب‌یابی و رفع اشکال
+- **⬅️ قبلی**: [Debugging Guide](debugging.md)
+- **➡️ فصل بعد**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
+- **🤖 مرتبط**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 مرجع**: [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-سلب مسئولیت:
-این سند با استفاده از سرویس ترجمهٔ هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است دارای خطا یا نادرستی باشند. سند اصلی به زبان بومی خود باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمهٔ انسانی و حرفه‌ای توصیه می‌شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرست ناشی از استفاده از این ترجمه مسئولیتی نداریم.
+**سلب مسئولیت**:
+این سند با استفاده از سرویس ترجمه‌ی هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما برای دقت تلاش می‌کنیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. نسخهٔ اصلی سند به زبان مادری آن باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمهٔ حرفه‌ای انسانی توصیه می‌شود. ما در برابر هرگونه سوءتفاهم یا تفسیر نادرست ناشی از استفاده از این ترجمه مسئولیتی نداریم.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

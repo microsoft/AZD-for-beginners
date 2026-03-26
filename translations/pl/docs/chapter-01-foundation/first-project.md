@@ -1,98 +1,98 @@
-# Your First Project - Hands-On Tutorial
+# Twój Pierwszy Projekt – Praktyczny Samouczek
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
-- **⬅️ Previous**: [Installation & Setup](installation.md)
-- **➡️ Next**: [Configuration](configuration.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Aktualny rozdział**: Rozdział 1 – Podstawy i szybki start
+- **⬅️ Poprzedni**: [Instalacja i konfiguracja](installation.md)
+- **➡️ Następny**: [Konfiguracja](configuration.md)
+- **🚀 Następny rozdział**: [Rozdział 2: Rozwój AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-## Introduction
+## Wprowadzenie
 
-Welcome to your first Azure Developer CLI project! This comprehensive hands-on tutorial provides a complete walkthrough of creating, deploying, and managing a full-stack application on Azure using azd. You'll work with a real todo application that includes a React frontend, Node.js API backend, and MongoDB database.
+Witamy w Twoim pierwszym projekcie Azure Developer CLI! Ten kompleksowy, praktyczny samouczek przeprowadzi Cię krok po kroku przez tworzenie, wdrażanie i zarządzanie pełnostackową aplikacją na Azure za pomocą azd. Pracować będziesz na prawdziwej aplikacji todo, która zawiera frontend w React, backend API w Node.js oraz bazę danych MongoDB.
 
-## Learning Goals
+## Cele nauki
 
-By completing this tutorial, you will:
-- Master the azd project initialization workflow using templates
-- Understand Azure Developer CLI project structure and configuration files
-- Execute complete application deployment to Azure with infrastructure provisioning
-- Implement application updates and redeployment strategies
-- Manage multiple environments for development and staging
-- Apply resource cleanup and cost management practices
+Po ukończeniu tego samouczka:
+- Opanujesz inicjalizację projektów azd za pomocą szablonów
+- Zrozumiesz strukturę projektu Azure Developer CLI i pliki konfiguracyjne
+- Wykonasz pełne wdrożenie aplikacji na Azure wraz z provisioningiem infrastruktury
+- Zaimplementujesz strategie aktualizacji aplikacji i redeployu
+- Zarządzisz wieloma środowiskami dla developmentu i stagingu
+- Zastosujesz praktyki sprzątania zasobów i zarządzania kosztami
 
-## Learning Outcomes
+## Oczekiwane efekty nauki
 
-Upon completion, you will be able to:
-- Initialize and configure azd projects from templates independently
-- Navigate and modify azd project structures effectively
-- Deploy full-stack applications to Azure using single commands
-- Troubleshoot common deployment issues and authentication problems
-- Manage multiple Azure environments for different deployment stages
-- Implement continuous deployment workflows for application updates
+Po ukończeniu będziesz potrafił/a:
+- Samodzielnie inicjalizować i konfigurować projekty azd ze szablonów
+- Skutecznie nawigować i modyfikować strukturę projektów azd
+- Wdrażać pełnostackowe aplikacje na Azure przy użyciu jednego polecenia
+- Rozwiązywać typowe problemy z wdrożeniem i uwierzytelnianiem
+- Zarządzać wieloma środowiskami Azure dla różnych etapów wdrożenia
+- Realizować ciągłe wdrażanie (CI/CD) dla aktualizacji aplikacji
 
-## Getting Started
+## Rozpoczęcie pracy
 
-### Prerequisites Checklist
-- ✅ Azure Developer CLI installed ([Przewodnik instalacji](installation.md))
-- ✅ Azure CLI installed and authenticated
-- ✅ Git installed on your system
-- ✅ Node.js 16+ (dla tego samouczka)
+### Lista wymagań wstępnych
+- ✅ Zainstalowany Azure Developer CLI ([Przewodnik instalacji](installation.md))
+- ✅ Zainstalowany i uwierzytelniony Azure CLI
+- ✅ Zainstalowany Git na twoim systemie
+- ✅ Node.js 16+ (na potrzeby tego samouczka)
 - ✅ Visual Studio Code (zalecane)
 
-### Verify Your Setup
+### Weryfikacja konfiguracji
 ```bash
 # Sprawdź instalację azd
 azd version
 ```
-### Zweryfikuj uwierzytelnienie w Azure
+### Weryfikacja uwierzytelnienia w Azure
 
 ```bash
 az account show
 ```
 
-### Sprawdź wersję Node.js
+### Sprawdzenie wersji Node.js
 ```bash
 node --version
 ```
 
 ## Krok 1: Wybierz i zainicjalizuj szablon
 
-Zacznijmy od popularnego szablonu aplikacji todo, który zawiera frontend React i backend API w Node.js.
+Zacznijmy od popularnego szablonu aplikacji todo z frontendem w React i backendem API w Node.js.
 
 ```bash
 # Przeglądaj dostępne szablony
 azd template list
 
-# Zainicjalizuj szablon aplikacji todo
+# Zainicjuj szablon aplikacji todo
 mkdir my-first-azd-app
 cd my-first-azd-app
 azd init --template todo-nodejs-mongo
 
 # Postępuj zgodnie z instrukcjami:
 # - Wprowadź nazwę środowiska: "dev"
-# - Wybierz subskrypcję (jeśli masz więcej niż jedną)
+# - Wybierz subskrypcję (jeśli masz ich kilka)
 # - Wybierz region: "East US 2" (lub preferowany region)
 ```
 
-### Co się właśnie stało?
-- Pobrano kod szablonu do lokalnego katalogu
-- Utworzono plik `azure.yaml` z definicjami usług
-- Skonfigurowano kod infrastruktury w katalogu `infra/`
-- Utworzono konfigurację środowiska
+### Co właśnie się stało?
+- Pobranie kodu szablonu do lokalnego folderu
+- Utworzenie pliku `azure.yaml` z definicjami usług
+- Skonfigurowanie kodu infrastruktury w katalogu `infra/`
+- Utworzenie konfiguracji środowiska
 
-## Krok 2: Zbadaj strukturę projektu
+## Krok 2: Zapoznaj się ze strukturą projektu
 
-Sprawdźmy, co azd dla nas utworzył:
+Przyjrzyjmy się, co azd dla nas stworzył:
 
 ```bash
-# Wyświetl strukturę projektu
+# Zobacz strukturę projektu
 tree /f   # Windows
 # lub
 find . -type f | head -20   # macOS/Linux
 ```
 
-Powinieneś zobaczyć:
+Powinieneś/powinnaś zobaczyć:
 ```
 my-first-azd-app/
 ├── .azd/
@@ -121,23 +121,23 @@ my-first-azd-app/
 
 ### Kluczowe pliki do zrozumienia
 
-**azure.yaml** - Serce Twojego projektu azd:
+**azure.yaml** – Serce twojego projektu azd:
 ```bash
-# Wyświetl konfigurację projektu
+# Zobacz konfigurację projektu
 cat azure.yaml
 ```
 
-**infra/main.bicep** - Definicja infrastruktury:
+**infra/main.bicep** – Definicja infrastruktury:
 ```bash
-# Wyświetl kod infrastruktury
+# Zobacz kod infrastruktury
 head -30 infra/main.bicep
 ```
 
-## Krok 3: Dostosuj projekt (opcjonalnie)
+## Krok 3: Dostosuj swój projekt (opcjonalnie)
 
-Zanim wdrożysz, możesz dostosować aplikację:
+Przed wdrożeniem możesz dostosować aplikację:
 
-### Zmodyfikuj frontend
+### Modyfikacja frontendu
 ```bash
 # Otwórz komponent aplikacji React
 code src/web/src/App.tsx
@@ -149,7 +149,7 @@ Wprowadź prostą zmianę:
 <h1>My Awesome Todo App</h1>
 ```
 
-### Skonfiguruj zmienne środowiskowe
+### Konfiguracja zmiennych środowiskowych
 ```bash
 # Ustaw niestandardowe zmienne środowiskowe
 azd env set WEBSITE_TITLE "My First AZD App"
@@ -158,27 +158,27 @@ azd env set API_VERSION "v1.18"
 azd env get-values
 ```
 
-## Krok 4: Wdróż do Azure
+## Krok 4: Wdrożenie na Azure
 
-A teraz ekscytująca część — wdroż wszystko do Azure!
+Teraz ekscytująca część – wdrożenie wszystkiego na Azure!
 
 ```bash
 # Wdróż infrastrukturę i aplikację
 azd up
 
 # To polecenie wykona:
-# 1. Utworzy zasoby Azure (App Service, Cosmos DB itp.)
-# 2. Zbuduje aplikację
-# 3. Wdroży do utworzonych zasobów
+# 1. Przydzieli zasoby Azure (App Service, Cosmos DB itp.)
+# 2. Zbuduje twoją aplikację
+# 3. Wdroży na przydzielone zasoby
 # 4. Wyświetli adres URL aplikacji
 ```
 
 ### Co dzieje się podczas wdrażania?
 
-Polecenie `azd up` wykonuje następujące kroki:
-1. **Provision** (`azd provision`) - Tworzy zasoby Azure
-2. **Package** - Buduje kod Twojej aplikacji
-3. **Deploy** (`azd deploy`) - Wdraża kod do zasobów Azure
+Polecenie `azd up` wykonuje te kroki:
+1. **Provisioning** (`azd provision`) – Tworzy zasoby Azure
+2. **Pakowanie** – Buduje kod aplikacji
+3. **Wdrożenie** (`azd deploy`) – Wdraża kod do zasobów Azure
 
 ### Oczekiwany wynik
 ```
@@ -193,26 +193,26 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## Krok 5: Przetestuj swoją aplikację
+## Krok 5: Testuj swoją aplikację
 
 ### Uzyskaj dostęp do aplikacji
-Kliknij adres URL podany w wyniku wdrożenia lub uzyskaj go w dowolnym momencie:
+Kliknij podany URL w wyniku wdrożenia lub uzyskaj go w dowolnym momencie:
 ```bash
 # Pobierz punkty końcowe aplikacji
 azd show
 
-# Otwórz aplikację w przeglądarce
+# Otwórz aplikację w swojej przeglądarce
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### Przetestuj aplikację Todo
-1. **Dodaj element todo** - Kliknij "Add Todo" i wpisz zadanie
-2. **Oznacz jako ukończone** - Zaznacz ukończone elementy
-3. **Usuń elementy** - Usuń zadania todo, których już nie potrzebujesz
+### Testowanie aplikacji Todo
+1. **Dodaj zadanie** – Kliknij „Add Todo” i wpisz zadanie
+2. **Oznacz jako ukończone** – Zaznacz wykonane zadania
+3. **Usuń elementy** – Usuń niepotrzebne zadania
 
-### Monitoruj swoją aplikację
+### Monitorowanie aplikacji
 ```bash
-# Otwórz portal Azure dla swoich zasobów
+# Otwórz portal Azure dla Twoich zasobów
 azd monitor
 
 # Wyświetl logi aplikacji
@@ -222,11 +222,11 @@ azd monitor --logs
 azd monitor --live
 ```
 
-## Krok 6: Wprowadź zmiany i wdroż ponownie
+## Krok 6: Wprowadzaj zmiany i redeployuj
 
-Wprowadźmy zmianę i zobaczmy, jak łatwo ją zaktualizować:
+Zróbmy zmianę i zobaczmy, jak łatwo ją zaktualizować:
 
-### Zmodyfikuj API
+### Modyfikacja API
 ```bash
 # Edytuj kod API
 code src/api/src/routes/lists.js
@@ -243,24 +243,24 @@ res.header('X-Powered-By', 'Azure Developer CLI');
 # Wdróż tylko kod aplikacji (pomiń infrastrukturę)
 azd deploy
 
-# Jest to znacznie szybsze niż 'azd up', ponieważ infrastruktura już istnieje
+# To jest znacznie szybsze niż 'azd up', ponieważ infrastruktura już istnieje
 ```
 
-## Krok 7: Zarządzaj wieloma środowiskami
+## Krok 7: Zarządzanie wieloma środowiskami
 
-Utwórz środowisko staging, aby przetestować zmiany przed produkcją:
+Utwórz środowisko staging, aby testować zmiany przed produkcją:
 
 ```bash
-# Utwórz nowe środowisko stagingowe
+# Utwórz nowe środowisko staging
 azd env new staging
 
-# Wdróż na środowisko stagingowe
+# Wdróż do środowiska staging
 azd up
 
-# Przełącz z powrotem na środowisko deweloperskie
+# Przełącz się z powrotem na środowisko deweloperskie
 azd env select dev
 
-# Wyświetl listę wszystkich środowisk
+# Wyświetl wszystkie środowiska
 azd env list
 ```
 
@@ -270,44 +270,64 @@ azd env list
 azd env select dev
 azd show
 
-# Wyświetl środowisko testowe
+# Wyświetl środowisko stagingowe
 azd env select staging
 azd show
 ```
 
-## Krok 8: Usuń zasoby
+## Krok 8: Sprzątanie zasobów
 
-Gdy skończysz eksperymentować, usuń zasoby, aby uniknąć dalszych opłat:
+Gdy skończysz eksperymentować, posprzątaj zasoby, aby uniknąć dalszych opłat:
 
 ```bash
 # Usuń wszystkie zasoby Azure dla bieżącego środowiska
 azd down
 
-# Wymuś usunięcie bez potwierdzenia i trwale usuń zasoby objęte miękkim usunięciem
+# Wymuś usunięcie bez potwierdzenia i oczyść miękko usunięte zasoby
 azd down --force --purge
 
-# Usuń określone środowisko
+# Usuń konkretne środowisko
 azd env select staging
 azd down --force --purge
 ```
 
-## Czego się nauczyłeś
+## Klasyczna aplikacja a aplikacja wspierana AI: ten sam workflow
+
+Właśnie wdrożyłeś(aś) tradycyjną aplikację webową. A co, gdybyś chciał(a) wdrożyć aplikację wspieraną przez AI – na przykład aplikację czatu opartą na modelach Microsoft Foundry?
+
+Dobra wiadomość: **workflow jest identyczny.**
+
+| Krok | Klasyczna aplikacja Todo | Aplikacja AI Chat |
+|------|--------------------------|-------------------|
+| Inicjalizacja | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
+| Uwierzytelnianie | `azd auth login` | `azd auth login` |
+| Wdrożenie | `azd up` | `azd up` |
+| Monitorowanie | `azd monitor` | `azd monitor` |
+| Sprzątanie | `azd down --force --purge` | `azd down --force --purge` |
+
+Jedyne, co się różni, to **szablon**, od którego zaczynasz. Szablon AI zawiera dodatkową infrastrukturę (np. zasób Microsoft Foundry Models lub indeks AI Search), ale azd zajmie się tym za Ciebie. Nie musisz uczyć się nowych poleceń, stosować innych narzędzi ani zmieniać sposobu myślenia o wdrażaniu.
+
+To jest podstawowa zasada azd: **jeden workflow, dowolne obciążenie.** Umiejętności praktykowane w tym samouczku – inicjalizacja, wdrożenie, monitorowanie, redeploy, sprzątanie – mają zastosowanie również do aplikacji i agentów AI.
+
+---
+
+## Czego się nauczyłeś/aś
 
 Gratulacje! Udało Ci się:
-- ✅ Zainicjalizować projekt azd z szablonu
-- ✅ Zbadać strukturę projektu i kluczowe pliki
-- ✅ Wdrożyć aplikację full-stack do Azure
-- ✅ Wprowadzić zmiany w kodzie i ponownie je wdrożyć
+- ✅ Zainicjalizować projekt azd ze szablonu
+- ✅ Poznać strukturę projektu i kluczowe pliki
+- ✅ Wdrożyć pełnostackową aplikację na Azure
+- ✅ Wprowadzić zmiany w kodzie i ponownie wdrożyć
 - ✅ Zarządzać wieloma środowiskami
-- ✅ Usunąć zasoby
+- ✅ Posprzątać zasoby
 
-## 🎯 Ćwiczenia sprawdzające umiejętności
+## 🎯 Ćwiczenia na potwierdzenie umiejętności
 
-### Ćwiczenie 1: Wdróż inny szablon (15 minut)
-**Cel**: Pokaż biegłość w użyciu azd init i procesie wdrażania
+### Ćwiczenie 1: Wdrożenie innego szablonu (15 minut)
+**Cel**: Udowodnij opanowanie inicjalizacji azd i workflow wdrożenia
 
 ```bash
-# Wypróbuj stos Python + MongoDB
+# Wypróbuj stack Python + MongoDB
 mkdir todo-python && cd todo-python
 azd init --template todo-python-mongo
 azd up
@@ -322,11 +342,11 @@ azd down --force --purge
 
 **Kryteria sukcesu:**
 - [ ] Aplikacja wdraża się bez błędów
-- [ ] Można uzyskać dostęp do adresu URL aplikacji w przeglądarce
-- [ ] Aplikacja działa prawidłowo (dodawanie/usuwanie zadań)
-- [ ] Pomyślnie usunięto wszystkie zasoby
+- [ ] Można uzyskać dostęp do URL aplikacji w przeglądarce
+- [ ] Aplikacja działa poprawnie (dodawanie/usuwanie todo)
+- [ ] Wszystkie zasoby zostały skutecznie posprzątane
 
-### Ćwiczenie 2: Dostosuj konfigurację (20 minut)
+### Ćwiczenie 2: Dostosowanie konfiguracji (20 minut)
 **Cel**: Przećwicz konfigurację zmiennych środowiskowych
 
 ```bash
@@ -340,7 +360,7 @@ azd env set APP_TITLE "My Custom Todo App"
 azd env set API_VERSION "2.0.0"
 azd env set ENABLE_DEBUG "true"
 
-# Zweryfikuj zmienne
+# Sprawdź zmienne
 azd env get-values | grep APP_TITLE
 
 # Wdróż z niestandardową konfiguracją
@@ -348,13 +368,13 @@ azd up
 ```
 
 **Kryteria sukcesu:**
-- [ ] Niestandardowe środowisko utworzone pomyślnie
-- [ ] Zmienne środowiskowe ustawione i możliwe do pobrania
+- [ ] Utworzono niestandardowe środowisko pomyślnie
+- [ ] Zmiennymi środowiskowymi można zarządzać i je odczytać
 - [ ] Aplikacja wdraża się z niestandardową konfiguracją
 - [ ] Można zweryfikować niestandardowe ustawienia w wdrożonej aplikacji
 
-### Ćwiczenie 3: Przepływ pracy z wieloma środowiskami (25 minut)
-**Cel**: Opanuj zarządzanie środowiskami i strategie wdrażania
+### Ćwiczenie 3: Workflow wielośrodowiskowy (25 minut)
+**Cel**: Opanuj zarządzanie środowiskami oraz strategie wdrożeń
 
 ```bash
 # Utwórz środowisko deweloperskie
@@ -367,13 +387,13 @@ azd up
 DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Dev: $DEV_URL"
 
-# Utwórz środowisko przedprodukcyjne
+# Utwórz środowisko testowe
 azd env new staging-$(whoami)
 azd env set ENVIRONMENT_TYPE staging
 azd env set LOG_LEVEL info
 azd up
 
-# Zanotuj URL środowiska przedprodukcyjnego
+# Zanotuj URL środowiska testowego
 STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Staging: $STAGING_URL"
 
@@ -384,30 +404,30 @@ azd env list
 curl "$DEV_URL/health"
 curl "$STAGING_URL/health"
 
-# Wyczyść oba środowiska
+# Wyczyść oba
 azd env select dev-$(whoami) && azd down --force --purge
 azd env select staging-$(whoami) && azd down --force --purge
 ```
 
 **Kryteria sukcesu:**
-- [ ] Utworzono dwa środowiska z różnymi konfiguracjami
+- [ ] Utworzone dwa środowiska z różną konfiguracją
 - [ ] Oba środowiska wdrożone pomyślnie
 - [ ] Można przełączać się między środowiskami za pomocą `azd env select`
 - [ ] Zmienne środowiskowe różnią się między środowiskami
-- [ ] Pomyślnie usunięto oba środowiska
+- [ ] Oba środowiska zostały skutecznie posprzątane
 
 ## 📊 Twój postęp
 
-**Zainwestowany czas**: ~60-90 minut  
+**Czas poświęcony**: ~60-90 minut  
 **Nabyte umiejętności**:
-- ✅ Inicjalizacja projektów na podstawie szablonów
+- ✅ Inicjalizacja projektu z szablonu
 - ✅ Provisioning zasobów Azure
-- ✅ Workflowy wdrażania aplikacji
+- ✅ Workflow wdrażania aplikacji
 - ✅ Zarządzanie środowiskami
 - ✅ Zarządzanie konfiguracją
-- ✅ Czyszczenie zasobów i kontrola kosztów
+- ✅ Sprzątanie zasobów i zarządzanie kosztami
 
-**Następny poziom**: Jesteś gotowy na [Przewodnik po konfiguracji](configuration.md), aby poznać zaawansowane wzorce konfiguracyjne!
+**Następny poziom**: Jesteś gotowy/a na [Przewodnik po konfiguracji](configuration.md), aby poznać zaawansowane wzorce konfiguracji!
 
 ## Rozwiązywanie typowych problemów
 
@@ -420,16 +440,16 @@ az login
 az account show
 ```
 
-### Błędy wdrożenia
+### Problemy z wdrożeniem
 ```bash
-# Włącz logowanie debugowe
+# Włącz rejestrowanie debugowania
 export AZD_DEBUG=true
 azd up --debug
 
-# Wyświetl logi aplikacji w Azure
+# Przeglądaj logi aplikacji w Azure
 azd monitor --logs
 
-# Dla Container Apps użyj Azure CLI:
+# Dla aplikacji kontenerowych użyj Azure CLI:
 # az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 ```
 
@@ -446,22 +466,22 @@ netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
-## Następne kroki
+## Kolejne kroki
 
-Po ukończeniu pierwszego projektu zapoznaj się z tymi zaawansowanymi tematami:
+Skoro ukończyłeś/aś pierwszy projekt, zapoznaj się z tymi zaawansowanymi tematami:
 
-### 1. Dostosuj infrastrukturę
-- [Infrastruktura jako kod](../chapter-04-infrastructure/provisioning.md)
-- [Dodaj bazy danych, magazyn i inne usługi](../chapter-04-infrastructure/provisioning.md#adding-services)
+### 1. Dostosowanie infrastruktury
+- [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md)
+- [Dodawanie baz danych, magazynów i innych usług](../chapter-04-infrastructure/provisioning.md#adding-services)
 
-### 2. Skonfiguruj CI/CD
-- [Przewodnik wdrożeń](../chapter-04-infrastructure/deployment-guide.md) - Kompleksowe workflowy CI/CD
-- [Dokumentacja Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - Konfiguracja pipeline'ów
+### 2. Konfiguracja CI/CD
+- [Przewodnik wdrożeń](../chapter-04-infrastructure/deployment-guide.md) – Kompleksowe workflow CI/CD
+- [Dokumentacja Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) – Konfiguracja pipeline’ów
 
 ### 3. Najlepsze praktyki produkcyjne
-- [Przewodnik wdrożeń](../chapter-04-infrastructure/deployment-guide.md) - Bezpieczeństwo, wydajność i monitorowanie
+- [Przewodnik wdrożeń](../chapter-04-infrastructure/deployment-guide.md) – Bezpieczeństwo, wydajność i monitorowanie
 
-### 4. Odkryj więcej szablonów
+### 4. Eksploruj więcej szablonów
 ```bash
 # Przeglądaj szablony według kategorii
 azd template list --filter web
@@ -474,40 +494,40 @@ azd init --template todo-csharp-sql
 azd init --template todo-java-mongo
 ```
 
-## Dodatkowe zasoby
+## Dodatkowe źródła informacji
 
-### Materiały szkoleniowe
+### Materiały edukacyjne
 - [Dokumentacja Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Społeczność i wsparcie
-- [Azure Developer CLI na GitHubie](https://github.com/Azure/azure-dev)
-- [Społeczność Azure Developer](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
-- [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
+- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
+- [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [Stack Overflow – azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### Szablony i przykłady
 - [Oficjalna galeria szablonów](https://azure.github.io/awesome-azd/)
-- [Szablony społeczności](https://github.com/Azure-Samples/azd-templates)
+- [Szablony społecznościowe](https://github.com/Azure-Samples/azd-templates)
 - [Wzorce dla przedsiębiorstw](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
-**Gratulacje z ukończenia pierwszego projektu azd!** Teraz jesteś gotowy, by z pewnością budować i wdrażać niesamowite aplikacje w Azure.
+**Gratulacje z ukończenia pierwszego projektu azd!** Teraz jesteś gotowy/a, aby z pewnością budować i wdrażać niesamowite aplikacje na Azure.
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
-- **⬅️ Previous**: [Installation & Setup](installation.md)
-- **➡️ Next**: [Configuration](configuration.md)
-- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **Next Lesson**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+**Nawigacja po rozdziałach:**
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Aktualny rozdział**: Rozdział 1 – Podstawy i szybki start
+- **⬅️ Poprzedni**: [Instalacja i konfiguracja](installation.md)
+- **➡️ Następny**: [Konfiguracja](configuration.md)
+- **🚀 Następny rozdział**: [Rozdział 2: Rozwój AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **Następna lekcja**: [Przewodnik wdrożeń](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Zastrzeżenie**:
-Niniejszy dokument został przetłumaczony przy użyciu usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Dokładamy starań, aby tłumaczenie było rzetelne, jednak prosimy pamiętać, że automatyczne przekłady mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku źródłowym należy traktować jako wersję wiążącą. W przypadku informacji o krytycznym znaczeniu zalecane jest skorzystanie z usług profesjonalnego tłumacza. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+**Zastrzeżenie**:  
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż staramy się o dokładność, należy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w języku źródłowym powinien być uważany za autorytatywne źródło. Dla informacji krytycznych zaleca się profesjonalne tłumaczenie wykonane przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,30 +1,28 @@
-# AI-கான குறிப்பிட்ட பிழைதிருத்த வழிகாட்டி
+# AI-சார்ந்த பிழைத் தீர்வு கையேடு
 
 **அத்தியாய வழிசெலுத்தல்:**
-- **📚 Course Home**: [AZD தொடக்கர்களுக்கான](../../README.md)
-- **📖 தற்போதைய அத்தியாயம்**: Chapter 7 - பிழைதிருத்தம் மற்றும் டீபக்கிங்
-- **⬅️ முந்தையது**: [டீபக்கிங் வழிகாட்டு](debugging.md)
-- **➡️ அடுத்த அத்தியாயம்**: [அத்தியாயம் 8: உற்பத்தி மற்றும் நிறுவன முறைபாடுகள்](../chapter-08-production/production-ai-practices.md)
-- **🤖 தொடர்புடையது**: [அத்தியாயம் 2: AI-முதலில் மேம்பாடு](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📚 பாடத்திற்கான முகப்பு**: [AZD For Beginners](../../README.md)
+- **📖 தற்போதைய அத்தியாயம்**: அத்தியாயம் 7 - பிழைத் தீர்வு மற்றும் டீபக்கிங்
+- **⬅️ முந்தையது**: [டீபக்கிங் வழிகாட்டி](debugging.md)
+- **➡️ அடுத்த அத்தியாயம்**: [அத்தியாயம் 8: தயாரிப்பு மற்றும் நிறுவன மாதிரிகள்](../chapter-08-production/production-ai-practices.md)
+- **🤖 தொடர்புடையது**: [அத்தியாயம் 2: AI-முதன்மை அபிவிருத்தி](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**முந்தையது:** [Production AI Practices](../chapter-08-production/production-ai-practices.md) | **அடுத்தது:** [AZD அடிப்படைகள்](../chapter-01-foundation/azd-basics.md)
-
-இக்கட்டுப்படுத்தப்பட்ட பிழைதிருத்தக் கையேடு AZD உடன் AI தீர்வுகளை உருவாக்கும்போது கூடுதலாக ஏற்படும் பொதுவான பிரச்சனைகளை முகாம்படுத்துகிறது மற்றும் Azure AI சேவைகளுக்கான தீர்வுகள் மற்றும் பிழைதிருத்த நுட்பங்களை வழங்குகிறது.
+AZD உபயோகித்து AI தீர்வுகளை வெளியிடும்போது ஏற்படும் பொதுவான சிக்கல்களை இந்த விரிவான பிழைத் தீர்வு கையேடு கையாள்கிறது, மேலும் Azure AI சேவைகளுக்கு சார்ந்த தீர்வுகள் மற்றும் டீபக்கிங் நுட்பங்களை வழங்குகிறது.
 
 ## உள்ளடக்க அட்டவணை
 
-- [Azure OpenAI சேவை பிரச்சனைகள்](../../../../docs/chapter-07-troubleshooting)
-- [Azure AI Search பிரச்சனைகள்](../../../../docs/chapter-07-troubleshooting)
-- [Container Apps டிப்பிளாய்மென்ட் பிரச்சனைகள்](../../../../docs/chapter-07-troubleshooting)
+- [Microsoft Foundry மாதிரிகள் சேவை பிரச்சினைகள்](../../../../docs/chapter-07-troubleshooting)
+- [Azure AI தேடல் பிரச்சினைகள்](../../../../docs/chapter-07-troubleshooting)
+- [Container Apps வெளியீட்டு பிரச்சினைகள்](../../../../docs/chapter-07-troubleshooting)
 - [அங்கீகாரம் மற்றும் அனுமதி பிழைகள்](../../../../docs/chapter-07-troubleshooting)
-- [மாதிரி டிப்பிளாய்மென்ட் தோல்விகள்](../../../../docs/chapter-07-troubleshooting)
-- [செயல்திறன் மற்றும் பரிமாணப் பிரச்சனைகள்](../../../../docs/chapter-07-troubleshooting)
-- [செலவு மற்றும் கொட்டா நிர்வாகம்](../../../../docs/chapter-07-troubleshooting)
-- [பிழைதிருத்த கருவிகள் மற்றும் நுட்பங்கள்](../../../../docs/chapter-07-troubleshooting)
+- [மாதிரி வெளியீட்டு தோல்விகள்](../../../../docs/chapter-07-troubleshooting)
+- [செயற்பாடு மற்றும் ஸ்கேலிங் பிரச்சினைகள்](../../../../docs/chapter-07-troubleshooting)
+- [செலவு மற்றும் குவோட்டா மேலாண்மை](../../../../docs/chapter-07-troubleshooting)
+- [டீபக்கிங் கருவிகள் மற்றும் தொழில்நுட்பங்கள்](../../../../docs/chapter-07-troubleshooting)
 
-## Azure OpenAI சேவை பிரச்சனைகள்
+## Microsoft Foundry மாதிரிகள் சேவை பிரச்சினைகள்
 
-### பிரச்சனை: OpenAI சேவை பிரதேசத்தில் கிடைக்கவில்லை
+### பிரச்சினை: OpenAI சேவை பிரதேசத்தில் கிடையாது
 
 **அறிகுறிகள்:**
 ```
@@ -32,15 +30,15 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **காரணங்கள்:**
-- தேர்ந்தெடுத்த பிராந்தியத்தில் Azure OpenAI கிடைக்கவில்லை
-- விருப்ப பிராந்தியங்களில் கொட்டா முடிந்தது
-- பிராந்திய திறன் கட்டுபாடுகள்
+- Microsoft Foundry மாதிரிகள் தேர்ந்தெடுக்கப்பட்ட பிராந்தியத்தில் கிடைக்கவில்லை
+- விருப்ப பிராந்தியங்களில் குவோட்டா முடிந்துவிட்டது
+- பிராந்திய திறன் வரம்புகள்
 
 **தீர்வுகள்:**
 
-1. **பிராந்திய கிடைக்கும் இருப்பை சரிபார்:**
+1. **பிராந்திய கிடைக்கும் நிலையைச் சரிபார்:**
 ```bash
-# OpenAIக்கான கிடைக்கும் பிரதேசங்களை பட்டியலிடவும்
+# OpenAI-க்கு கிடைக்கக்கூடிய பிரதேசங்களை பட்டியலிடு
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
@@ -58,7 +56,7 @@ parameters:
   location: "eastus2"  # Known working region
 ```
 
-3. **மாற்று பிராந்தியங்களை பயன்படுத்தவும்:**
+3. **மாற்று பிராந்தியங்களைப் பயன்படுத்தவும்:**
 ```bicep
 // infra/main.bicep - Multi-region fallback
 @allowed([
@@ -70,7 +68,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### பிரச்சனை: மாதிரி டிப்பிளாய்மென்ட் கொட்டா கடந்து விட்டது
+### பிரச்சினை: மாதிரி வெளியீட்டு குவோட்டா மீறப்பட்டுள்ளது
 
 **அறிகுறிகள்:**
 ```
@@ -79,7 +77,7 @@ Error: Deployment failed due to insufficient quota
 
 **தீர்வுகள்:**
 
-1. **தற்போதைய கொட்டாவை சரிபார்:**
+1. **நடப்பு குவோட்டாவைச் சரிபார்:**
 ```bash
 # கோட்டா பயன்பாட்டை சரிபார்க்கவும்
 az cognitiveservices usage list \
@@ -87,9 +85,9 @@ az cognitiveservices usage list \
   --resource-group YOUR_RG
 ```
 
-2. **கொட்டா அதிகரிப்பு கோரிக்கை செய்யவும்:**
+2. **குவோட்டா உயர்வுக்கு கோரிக்கை விடுங்கள்:**
 ```bash
-# குவோட்டாவை அதிகரிக்குமாறு கோரிக்கையை சமர்ப்பிக்கவும்
+# கோட்டா உயர்வு கோரிக்கையை சமர்ப்பிக்கவும்
 az support tickets create \
   --ticket-name "OpenAI Quota Increase" \
   --description "Need increased quota for production deployment" \
@@ -97,14 +95,14 @@ az support tickets create \
   --problem-classification "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/quota_service_problemClassification_guid"
 ```
 
-3. **மாதிரி திறனை 최பயோகப்படுத்தவும்:**
+3. **மாதிரி திறனைக் மேம்படுத்தவும்:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -115,7 +113,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }
 ```
 
-### பிரச்சனை: தவறான API பதிப்பு
+### பிரச்சினை: தவறான API பதிப்பு
 
 **அறிகுறிகள்:**
 ```
@@ -124,23 +122,23 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 **தீர்வுகள்:**
 
-1. **உயர்தர ஆதரவுள்ள API பதிப்பைப் பயன்படுத்தவும்:**
+1. **ஆதரிக்கப்பட்ட API பதிப்பைப் பயன்படுத்தவும்:**
 ```python
 # சமீபத்திய ஆதரிக்கப்பட்ட பதிப்பைப் பயன்படுத்தவும்
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
-2. **API பதிப்பு பொருத்தத்தைக் சரிபார்:**
+2. **API பதிப்பு பொருந்துதலினைச் சரிபார்:**
 ```bash
-# ஆதரிக்கப்படும் API பதிப்புகளை பட்டியலிடவும்
+# ஆதரிக்கப்படும் API பதிப்புகளை பட்டியலிடுக
 az rest --method get \
   --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
 ```
 
-## Azure AI Search பிரச்சனைகள்
+## Azure AI தேடல் பிரச்சினைகள்
 
-### பிரச்சனை: Search சேவை விலை நிலை போதாது
+### பிரச்சினை: தேடல் சேவை விலைத் தரம் போதாதது
 
 **அறிகுறிகள்:**
 ```
@@ -149,7 +147,7 @@ Error: Semantic search requires Basic tier or higher
 
 **தீர்வுகள்:**
 
-1. **விலை நிலையை மேம்படுத்தவும்:**
+1. **விலைத் தரத்தை மேம்படுத்தவும்:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -167,7 +165,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Semantic Search-ஐ (தகவல் உருவாக்க பொழுது) முடக்கு:**
+2. **Semantic Search ஐ (அபிவிருத்தி) தற்காலிகமாக முடக்கவும்:**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -181,7 +179,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### பிரச்சனை: Index உருவாக்க தோல்விகள்
+### பிரச்சினை: Index உருவாக்க தோல்விகள்
 
 **அறிகுறிகள்:**
 ```
@@ -190,7 +188,7 @@ Error: Cannot create index, insufficient permissions
 
 **தீர்வுகள்:**
 
-1. **Search சேவை சாவிகளை சரிபார்:**
+1. **Search சேவை கீகளை சரிபார்க்கவும்:**
 ```bash
 # தேடல் சேவையின் நிர்வாக விசையைப் பெறவும்
 az search admin-key show \
@@ -198,9 +196,9 @@ az search admin-key show \
   --resource-group YOUR_RG
 ```
 
-2. **Index ஸ்கீமாவை சரிபார்:**
+2. **Index வடிவமைப்பைச் சரிபார்:**
 ```python
-# இன்டெக்ஸ் ஸ்கீமாவை சரிபார்க்க
+# இன்டெக்ஸ் ஸ்கீமாவை சரிபார்க்கவும்
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
@@ -214,7 +212,7 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **Managed Identity-ஐப் பயன்படுத்தவும்:**
+3. **Managed Identity ஐ பயன்படுத்தவும்:**
 ```bicep
 // Grant search permissions to managed identity
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -228,9 +226,9 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Container Apps டிப்பிளாய்மென்ட் பிரச்சனைகள்
+## Container Apps வெளியீட்டு பிரச்சினைகள்
 
-### பிரச்சனை: Container கட்டுமானத் தோல்விகள்
+### பிரச்சினை: Container கட்டமைப்பு தோல்விகள்
 
 **அறிகுறிகள்:**
 ```
@@ -239,7 +237,7 @@ Error: Failed to build container image
 
 **தீர்வுகள்:**
 
-1. **Dockerfile இலக்கணத்தை சரிபார்:**
+1. **Dockerfile சொற்றுறை அமைப்பைச் சரிபார்க்கவும்:**
 ```dockerfile
 # Dockerfile - Python AI app example
 FROM python:3.11-slim
@@ -261,7 +259,7 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **உறுப்புகள் மற்றும் சார்புகளை சரிபார்:**
+2. **இணைநிலைகளை சரிபார்க்கவும்:**
 ```txt
 # requirements.txt - Pin versions for stability
 fastapi==0.104.1
@@ -273,9 +271,9 @@ azure-search-documents==11.4.0
 azure-cosmos==4.5.1
 ```
 
-3. **ஓய்வு சோதனை (Health Check) சேர்க்கவும்:**
+3. **Health Check ஐ சேர்க்கவும்:**
 ```python
-# main.py - ஆரோக்கியச் சரிபார்ப்பு எண்ட்பாயிண்டை சேர்க்கவும்
+# main.py - ஹெல்த் செக் எண்ட்பாயிண்ட் சேர்க்கவும்
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -285,7 +283,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### பிரச்சனை: Container App தொடக்க தோல்விகள்
+### பிரச்சினை: Container App துவக்கத் தோல்விகள்
 
 **அறிகுறிகள்:**
 ```
@@ -294,7 +292,7 @@ Error: Container failed to start within timeout period
 
 **தீர்வுகள்:**
 
-1. **தொடக்க நேர எல்லையை அதிகரிக்கவும்:**
+1. **துவக்க கால அவகாசத்தை அதிகரிக்கவும்:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -327,9 +325,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **மாதிரி ஏற்றத்தை 최பயோகப்படுத்தவும்:**
+2. **மாதிரி ஏற்றத்தை செயல்திறனாகச் சரிசெய்யவும்:**
 ```python
-# துவக்க நேரத்தை குறைக்க மாதிரிகளை சோம்பேறியாக ஏற்றவும்
+# தொடக்க நேரத்தை குறைக்க மாதிரிகளை தேவையான போது ஏற்றவும்
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -343,15 +341,15 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # இங்கு AI கிளையன்டை ஆரம்பிக்கவும்
+        # இங்கே AI கிளையண்டை ஆரம்பிக்கவும்
         pass
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # துவக்கம்
+    # தொடக்கம்
     app.state.model_manager = ModelManager()
     yield
-    # முடக்கம்
+    # நிறுத்தல்
     pass
 
 app = FastAPI(lifespan=lifespan)
@@ -359,24 +357,24 @@ app = FastAPI(lifespan=lifespan)
 
 ## அங்கீகாரம் மற்றும் அனுமதி பிழைகள்
 
-### பிரச்சனை: Managed Identity அனுமதி மறுக்கப்பட்டது
+### பிரச்சினை: Managed Identity அனுமதி மறுக்கப்பட்டது
 
 **அறிகுறிகள்:**
 ```
-Error: Authentication failed for Azure OpenAI Service
+Error: Authentication failed for Microsoft Foundry Models Service
 ```
 
 **தீர்வுகள்:**
 
-1. **பாத்திர ஒதுக்கீடுகளை சரிபார்:**
+1. **பங்கு ஒதுக்கீடுகளை சரிபார்க்கவும்:**
 ```bash
-# தற்போது உள்ள பங்கு ஒதுக்கீடுகளைச் சரிபார்க்கவும்
+# தற்போதைய பங்கு ஒதுக்கீடுகளை சரிபார்க்கவும்
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **தேவையான பத்திரங்களை ஒதுக்கவும்:**
+2. **தேவையான பங்குகளை ஒதுக்கவும்:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -395,7 +393,7 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 3. **அங்கீகாரத்தை சோதிக்கவும்:**
 ```python
-# நிர்வகிக்கப்பட்ட அடையாள அங்கீகாரத்தை சோதிக்கவும்
+# மேனேஜ் செய்யப்பட்ட அடையாளத்தின் அங்கீகாரத்தை சோதிக்கவும்
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
@@ -408,7 +406,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### பிரச்சனை: Key Vault அணுகல் மறுக்கப்பட்டது
+### பிரச்சினை: Key Vault அணுகல் மறுக்கப்பட்டது
 
 **அறிகுறிகள்:**
 ```
@@ -417,7 +415,7 @@ Error: The user, group or application does not have secrets get permission
 
 **தீர்வுகள்:**
 
-1. **Key Vault அனுமதிகளை வழங்கவும்:**
+1. **Key Vault அனுமதிகள் வழங்கவும்:**
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -436,7 +434,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Access Policies-வுக்கு பதிலாக RBAC ஐப் பயன்படுத்தவும்:**
+2. **Access Policies மாறாக RBAC ஐ பயன்படுத்தவும்:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -449,9 +447,9 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## மாதிரி டிப்பிளாய்மென்ட் தோல்விகள்
+## மாதிரி வெளியீட்டு தோல்விகள்
 
-### பிரச்சனை: மாதிரி பதிப்பு கிடைக்கவில்லை
+### பிரச்சினை: மாதிரி பதிப்பு கிடைக்கவில்லை
 
 **அறிகுறிகள்:**
 ```
@@ -460,7 +458,7 @@ Error: Model version 'gpt-4-32k' is not available
 
 **தீர்வுகள்:**
 
-1. **கிடைக்கும் மாதிரிகளை சரிபார்:**
+1. **கிடைக்கும் மாதிரிகளைச் சரிபார்க்கவும்:**
 ```bash
 # கிடைக்கும் மாதிரிகளை பட்டியலிடவும்
 az cognitiveservices account list-models \
@@ -470,12 +468,12 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **மாதிரிFallbacks ஐப் பயன்படுத்தவும்:**
+2. **மாற்று மாதிரிகளைப் பயன்படுத்தவும்:**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
 param primaryModel object = {
-  name: 'gpt-4o-mini'
+  name: 'gpt-4.1-mini'
   version: '2024-07-18'
 }
 
@@ -499,9 +497,9 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 }
 ```
 
-3. **டிப்பிளாய்மென்ட் முன் மாதிரியைச் சரிபார்:**
+3. **வெளியீட்டிற்கு முன்பு மாதிரியை சரிபார்க்கவும்:**
 ```python
-# விடுவிப்பிற்கு முன் மாடல் சரிபார்ப்பு
+# நிறுவுவதற்கு முன் மாடல் சரிபார்ப்பு
 import httpx
 
 async def validate_model_availability(model_name: str, version: str) -> bool:
@@ -521,18 +519,18 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
         return False
 ```
 
-## செயல்திறன் மற்றும் பரிமாணப் பிரச்சனைகள்
+## செயல்திறன் மற்றும் அளவீட்டு பிரச்சினைகள்
 
-### பிரச்சனை: அதிக மந்தமான பதில்கள்
+### பிரச்சினை: பதில்களின் உயர் தாமதம்
 
 **அறிகுறிகள்:**
-- பதில்களின் நேரம் > 30 நொடி
-- கால அவகாச பிழைகள்
-- பயன்படுத்துபவர் அனுபவத்தில் குறைவு
+- பதில் நேரம் > 30 வினாடிகள்
+- டைம்அவுட் பிழைகள்
+- பயனர் அனுபவம் மோசம்
 
 **தீர்வுகள்:**
 
-1. **கோரிக்கை நேர எல்லைகளை செயல்படுத்தவும்:**
+1. **கோரிக்கை காலஅவகாசங்களை அமல்படுத்தவும்:**
 ```python
 # சரியான காலாவதிகளை அமைக்கவும்
 import httpx
@@ -547,9 +545,9 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **பதில் கேட்சைச் சேர்க்கவும்:**
+2. **பதில்கள் கேஷிங் சேர்க்கவும்:**
 ```python
-# பதில்களுக்கு арналған Redis கேஷ்
+# பதில்களுக்கு Redis கேஷ்
 import redis.asyncio as redis
 import json
 
@@ -567,7 +565,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **தானாக அளவை கூடியாக்கலை (Auto-scaling) அமைக்கவும்:**
+3. **தானியங்கி அளவீட்டை கட்டமைக்கவும்:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -601,7 +599,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### பிரச்சனை: மெமரி வெளியேறுதல் பிழைகள்
+### பிரச்சினை: Out of Memory (நினைவக முடிவு) பிழைகள்
 
 **அறிகுறிகள்:**
 ```
@@ -610,7 +608,7 @@ Error: Container killed due to memory limit exceeded
 
 **தீர்வுகள்:**
 
-1. **மெமரி ஒதுக்கீட்டை அதிகரிக்கவும்:**
+1. **நினைவக ஒதுக்கீட்டை அதிகரிக்கவும்:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -629,9 +627,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **மெமரி பயன்பாட்டைக் 최பயோகப்படுத்தவும்:**
+2. **நினைவக பயன்பாட்டை மேம்படுத்தவும்:**
 ```python
-# நினைவகச் சேமிப்பை திறம்பட பயன்படுத்தும் மாதிரி கையாளல்
+# நினைவுத் திறன் கொண்ட மாடல் கையாளுதல்
 import gc
 import psutil
 
@@ -641,30 +639,30 @@ class MemoryOptimizedAI:
         
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # செயலாக்கத்திற்கு முன் நினைவக பயன்பாட்டை சரிபார்
+        # செயலாக்கம் முன்னதாக நினைவு பயன்பாட்டைச் சரிபார்க்கவும்
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # கழிவு சேகரிப்பை கட்டாயப்படுத்து
+            gc.collect()  # கார்பேஜ் கலெக்ஷனை கட்டாயமாக இயக்கவும்
             
         result = await self._process_ai_request(request)
         
-        # செயலாக்கத்திற்குப் பிறகு சுத்தப்படுத்து
+        # செயலாக்கம் முடிந்தவுடன் சுத்தப்படுத்தவும்
         gc.collect()
         return result
 ```
 
-## செலவு மற்றும் கொட்டா நிர்வாகம்
+## செலவு மற்றும் குவோட்டா மேலாண்மை
 
-### பிரச்சனை: எதிர்பாராத உயர் செலவுகள்
+### பிரச்சினை: எதிர்பாராத உயர்ந்த செலவுகள்
 
 **அறிகுறிகள்:**
-- Azure பில் எதிர்பார்த்ததைவிட உயர்
+- Azure பில் எதிர்பார்த்ததைவிட அதிகம் உள்ளது
 - டோக்கன் பயன்பாடு மதிப்பீடுகளை மீறுகிறது
-- பட்ஜெட் அறிவிப்புகள் 트ிரிகர்
+- பட்ஜெட் அலெர்ட்கள் செயல்பட்டுள்ளன
 
 **தீர்வுகள்:**
 
-1. **செலவு கட்டுப்பாடுகளை அமல்படுத்தவும்:**
+1. **செலவுக் கட்டுப்பாடுகளை அமல்படுத்தவும்:**
 ```python
 # டோக்கன் பயன்பாட்டு கண்காணிப்பு
 class TokenTracker:
@@ -683,7 +681,7 @@ class TokenTracker:
         return total_tokens
 ```
 
-2. **செலவு அறிவிப்புகளை அமைக்கவும்:**
+2. **செலவு அலெர்ட்களை அமைக்கவும்:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
@@ -708,54 +706,74 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-3. **மாதிரி தேர்வை 최பயோகப்படுத்தவும்:**
+3. **மாதிரி தேர்வை சிறப்பாக ஒழுங்குப்படுத்தவும்:**
 ```python
-# செலவைக் கருத்தில் கொள்ளும் மாடல் தேர்வு
+# செலவைக் கருத்தில் கொண்டு மாடல் தேர்வு
 MODEL_COSTS = {
-    'gpt-4o-mini': 0.00015,  # ஒவ்வொரு 1K டோக்கனுக்கும்
-    'gpt-4': 0.03,          # ஒவ்வொரு 1K டோக்கனுக்கும்
+    'gpt-4.1-mini': 0.00015,  # ஒவ்வொரு 1K டோக்கனுக்கும்
+    'gpt-4.1': 0.03,          # ஒவ்வொரு 1K டோக்கனுக்கும்
     'gpt-35-turbo': 0.0015  # ஒவ்வொரு 1K டோக்கனுக்கும்
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
     """Select model based on complexity and budget."""
     if complexity == 'simple' or budget_remaining < 10:
-        return 'gpt-4o-mini'
+        return 'gpt-4.1-mini'
     elif complexity == 'medium':
         return 'gpt-35-turbo'
     else:
-        return 'gpt-4'
+        return 'gpt-4.1'
 ```
 
-## பிழைதிருத்த கருவிகள் மற்றும் நுட்பங்கள்
+## டீபக்கிங் கருவிகள் மற்றும் தொழில்நுட்பங்கள்
 
-### AZD பிழைதிருத்த கட்டளைகள்
+### AZD டீபக்கிங் கட்டளைகள்
 
 ```bash
-# விரிவான பதிவுகளைச் செயல்படுத்தவும்
+# விரிவான பதிவு செயல்பாட்டை இயக்கவும்
 azd up --debug
 
 # வெளியீட்டு நிலையை சரிபார்க்கவும்
 azd show
 
-# செயலியின் பதிவுகளைப் பார்க்கவும் (கண்காணிப்பு டாஷ்போர்டை திறக்கும்)
+# விண்ணப்ப பதிவுகளைப் பார்க்கவும் (கண்காணிப்பு டாஷ்போர்டை திறக்கிறது)
 azd monitor --logs
 
-# நிகழ்நேர அளவுகோல்களைப் பார்க்கவும்
+# நேரடி அளவுகோல்களைப் பார்க்கவும்
 azd monitor --live
 
-# சூழல் மாறிலிகளைச் சரிபார்க்கவும்
+# சூழல் மாறிலிகளை சரிபார்க்கவும்
 azd env get-values
 ```
 
-### பயன்பாட்டு பிழைதிருத்தம்
+### AZD AI ஈக்ஸ்டென்ஷன் கண்டறிதலுக்கான கட்டளைகள்
 
-1. **மைமார்ந்த பதிவு (Structured Logging):**
+If you deployed agents using `azd ai agent init`, these additional tools are available:
+
+```bash
+# ஏஜென்ட்ஸ் விரிவாக்கம் நிறுவப்பட்டிருக்கிறது என்பதை உறுதி செய்யவும்
+azd extension install azure.ai.agents
+
+# மெனிபெஸ்ட் மூலம் ஒரு ஏஜெண்டை மீண்டும் தொடக்கவும் அல்லது புதுப்பிக்கவும்
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# MCP சேவையகத்தை பயன்படுத்தி AI கருவிகள் திட்டத்தின் நிலையை விசாரிக்க அனுமதிக்கவும்
+azd mcp start
+
+# மீளாய்வு மற்றும் தணிக்கைக்காக இன்ப்ராஸ்ட்ரக்சர் கோப்புகளை உருவாக்கவும்
+azd infra generate
+```
+
+> **குறிப்பு:** `azd infra generate` ஐப் பயன்படுத்தி IaC ஐ டிஸ்க்கிற்கு எழுதுங்கள், ஆகவே எந்த வளங்கள் வழங்கப்பட்டன என்பதை நீங்கள் துல்லியமாக ஆய்வு செய்ய முடியும். வளக் கட்டமைப்பு சிக்கல்களை டீபக் செய்யும் போது இதை பயன்படுத்துவது மிகவும் மதிப்புமிக்கது. முழு விவரங்களுக்கு [AZD AI CLI குறிப்புரை](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) ஐப் பார்க்கவும்.
+
+### பயன்பாடு டீபக்கிங்
+
+1. **வடிவமைக்கப்பட்ட பதிவு:**
 ```python
 import logging
 import json
 
-# ஏஐ பயன்பாடுகளுக்கான கட்டமைக்கப்பட்ட பதிவுகளை அமைக்கவும்
+# AI பயன்பாடுகளுக்கான கட்டமைக்கப்பட்ட பதிவை அமைக்கவும்
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -774,14 +792,14 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **Health Check Endpoints:**
+2. **ஆரோக்கியச் சோதனை Endpoints:**
 ```python
 @app.get("/debug/health")
 async def detailed_health_check():
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # OpenAI இணைப்பைச் சரிபார்க்கவும்
+    # OpenAI இணைப்பைச் சோதிக்கவும்
     try:
         client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
         await client.models.list()
@@ -789,7 +807,7 @@ async def detailed_health_check():
     except Exception as e:
         checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
     
-    # தேடல் சேவையைச் சரிபார்க்கவும்
+    # தேடல் சேவையைச் சோதிக்கவும்
     try:
         search_client = SearchIndexClient(
             endpoint=AZURE_SEARCH_ENDPOINT,
@@ -803,7 +821,7 @@ async def detailed_health_check():
     return checks
 ```
 
-3. **செயல்திறன் ஒளிவேடிப்பு (Performance Monitoring):**
+3. **செயற்பாடு கண்காணிப்பு:**
 ```python
 import time
 from functools import wraps
@@ -834,42 +852,43 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## பொதுவான பிழை குறியீடுகள் மற்றும் தீர்வுகள்
+## வழக்கமான பிழை குறியீடுகள் மற்றும் தீர்வுகள்
 
-| Error Code | Description | Solution |
+| பிழை குறியீடு | விளக்கம் | தீர்வு |
 |------------|-------------|----------|
-| 401 | அங்கீகாரம் இல்லை | API விசைகளையும் managed identity கட்டமைப்பையும் சரிபார் |
-| 403 | தடைசெய்யப்பட்டது | RBAC பத்திரஒதுக்கீடுகளை உறுதிசெய்க |
-| 429 | வீதக்குறைவு | எக்ஸ்போனென்ஷியல் பேக்க்அஃப் உடன் மீண்டும் முயற்சி லாஜிக் ஐ செயல்படுத்தவும் |
-| 500 | உள்நாட்டு சர்வர் பிழை | மாதிரி டிப்ளாய்மென்ட் நிலை மற்றும் லாக்களை சரிபார் |
-| 503 | சேவை கிடைக்கவில்லை | சேவை ஆரோக்கியமும் பிராந்திய கிடைக்கும் இருப்பையும் சரிபார் |
+| 401 | அனுமதி இல்லை | API விசைகள் மற்றும் managed identity கட்டமைப்பினை சரிபார்க்கவும் |
+| 403 | தடை செய்யப்பட்டு உள்ளது | RBAC பங்கு ஒதுக்கீடுகளை சரிபார்க்கவும் |
+| 429 | வரம்பு மீறப்பட்டது | எக்ஸ்போனென்ஷியல் பேக்க்ஆபுடன் மீண்டும் முயற்சி செய்யும் நெறிமுறையை அமல்படுத்தவும் |
+| 500 | உள் சேவையகம் பிழை | மாதிரி வெளியீட்டு நிலையும் பதிவுகளையும் சரிபார்க்கவும் |
+| 503 | சேவை கிடைக்கவில்லை | சேவை நிலை மற்றும் பிராந்திய கிடைக்கும் நிலையை சரிபார்க்கவும் |
 
 ## அடுத்த படிகள்
 
-1. **[AI Model Deployment Guide](../chapter-02-ai-development/ai-model-deployment.md)** ஐ டிப்பிளாய்மென்ட் சிறந்த நடைமுறைகளுக்காக மீட்டாய்வு செய்யவும்
-2. **[Production AI Practices](../chapter-08-production/production-ai-practices.md)** ஐ நிறுவனத் தயாரான தீர்வுகளுக்காக முடிக்கவும்
-3. **[Microsoft Foundry Discord](https://aka.ms/foundry/discord)** இல் சமூக ஆதரவிற்கு சேரவும்
-4. **AZD-சார்ந்த பிரச்சனைகளுக்கு [AZD GitHub சேமகம்](https://github.com/Azure/azure-dev)** இல் பிரச்சனைகளை சமர்ப்பிக்கவும்
+1. **பரிசீலனை செய்யவும் [AI மாதிரி வெளியீட்டு கையேடு](../chapter-02-ai-development/ai-model-deployment.md)** வெளியீட்டு சிறந்த நடைமுறைகளுக்காக
+2. **[தயாரிப்பு AI நடைமுறைகள்](../chapter-08-production/production-ai-practices.md) ஐ முடிக்கவும்** நிறுவனத் தயாரான தீர்வுகளுக்காக
+3. **[Microsoft Foundry Discord](https://aka.ms/foundry/discord) இல் இணைக** சமூக ஆதரவுக்காக
+4. **பிழைகளை சமர்ப்பிக்கவும்** AZD-சார்ந்த பிரச்சினைகள் தொடர்பாக [AZD GitHub repository](https://github.com/Azure/azure-dev)
 
 ## வளங்கள்
 
-- [Azure OpenAI Service Troubleshooting](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI Search Troubleshooting](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [Microsoft Foundry மாதிரிகள் சேவை பிழைத் தீர்வு](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [Container Apps பிழைத் தீர்வு](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Azure AI தேடல் பிழைத் தீர்வு](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - உங்கள் எடிட்டரில் Azure பிழைத் தீர்வு திறன்களை நிறுவுங்கள்: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **அத்தியாய வழிசெலுத்தல்:**
-- **📚 Course Home**: [AZD தொடக்கர்களுக்கான](../../README.md)
-- **📖 தற்போதைய அத்தியாயம்**: Chapter 7 - பிழைதிருத்தம் மற்றும் டீபக்கிங்
-- **⬅️ முந்தையது**: [டீபக்கிங் வழிகாட்டு](debugging.md)
-- **➡️ அடுத்த அத்தியாயம்**: [அத்தியாயம் 8: உற்பத்தி மற்றும் நிறுவன முறைபாடுகள்](../chapter-08-production/production-ai-practices.md)
-- **🤖 தொடர்புடையது**: [அத்தியாயம் 2: AI-முதலில் மேம்பாடு](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **📚 பாடத்திற்கான முகப்பு**: [AZD For Beginners](../../README.md)
+- **📖 தற்போதைய அத்தியாயம்**: அத்தியாயம் 7 - பிழைத் தீர்வு மற்றும் டீபக்கிங்
+- **⬅️ முந்தையது**: [டீபக்கிங் வழிகாட்டி](debugging.md)
+- **➡️ அடுத்த அத்தியாயம்**: [அத்தியாயம் 8: தயாரிப்பு மற்றும் நிறுவன மாதிரிகள்](../chapter-08-production/production-ai-practices.md)
+- **🤖 தொடர்புடையது**: [அத்தியாயம் 2: AI-முதன்மை அபிவிருத்தி](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 குறிப்புரை**: [Azure Developer CLI பிழைத் தீர்வு](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-தகவல் மறுப்பு:
-இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவையான [Co-op Translator](https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்குப் முயற்சித்தாலும், தானியங்கி மொழிபெயர்ப்புகளில் பிழைகள் அல்லது துல்லியக்குறைவுகள் இருக்கலாம் என்பதை கவனிக்கவும். மூல ஆவணம் அதன் சொந்த மொழியில் அதிகாரப்பூர்வ ஆதாரமாகக் கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பை பரிந்துரைக்கிறோம். இந்த மொழிபெயர்ப்பின் பயன்பாட்டால் ஏற்படக்கூடிய எந்த தவறான புரிதல்களுக்கும் அல்லது தவறான விளக்கங்களுக்கும் நாங்கள் பொறுப்பேற்கமாட்டோம்.
+மறுப்புக் குறிப்பு:
+இந்த ஆவணம் AI மொழி மொழிபெயர்ப்பு சேவையான [Co-op Translator](https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயல்வினாலும், தானியங்கி மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறுதல்கள் இருக்கலாம் என்பதை தயவுசெய்து கவனத்தில் கொள்ளவும். அசல் ஆவணம் அதன் தாய்மொழியில் அதிகாரபூர்வ மூலமாகக் கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பை பயன்படுத்த பரிந்துரைக்கப்படுகிறோம். இந்த மொழிபெயர்ப்பின் 사용த்தினால் ஏற்படும் எந்த புரிதல் பிழைகள் அல்லது தவறான விளக்கங்களுக்கும் நாங்கள் பொறுப்பேற்கமாட்டோம்.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -291,6 +291,26 @@ azd env select staging
 azd down --force --purge
 ```
 
+## Classic App vs. AI-Powered App: Same Workflow
+
+You just deployed a traditional web application. But what if you wanted to deploy an AI-powered app instead—say, a chat application backed by Microsoft Foundry Models?
+
+The good news: **the workflow is identical.**
+
+| Step | Classic Todo App | AI Chat App |
+|------|-----------------|-------------|
+| Initialize | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
+| Authenticate | `azd auth login` | `azd auth login` |
+| Deploy | `azd up` | `azd up` |
+| Monitor | `azd monitor` | `azd monitor` |
+| Clean up | `azd down --force --purge` | `azd down --force --purge` |
+
+The only difference is the **template** you start from. An AI template includes additional infrastructure (like an Microsoft Foundry Models resource or an AI Search index), but azd handles all of that for you. You don't need to learn new commands, adopt a different tool, or change how you think about deployment.
+
+This is the core principle of azd: **one workflow, any workload.** The skills you practiced in this tutorial—initializing, deploying, monitoring, redeploying, and cleaning up—apply equally to AI applications and agents.
+
+---
+
 ## What You've Learned
 
 Congratulations! You've successfully:
@@ -441,7 +461,7 @@ azd env new dev-$(whoami)-$(date +%s)
 
 ### Port/Network Issues
 ```bash
-# Check if ports are available
+# Verificar si los puertos están disponibles
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
@@ -508,6 +528,6 @@ azd init --template todo-java-mongo
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

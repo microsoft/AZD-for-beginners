@@ -1093,7 +1093,7 @@ azd up
 
 ### Exercise 3: Monitor AI/LLM Application ⭐⭐⭐ (Advanced)
 
-**Goal**: Track Azure OpenAI usage (tokens, costs, latency).
+**Goal**: Track Microsoft Foundry Models usage (tokens, costs, latency).
 
 **Steps:**
 
@@ -1107,7 +1107,7 @@ from openai import AzureOpenAI
 import time
 
 class MonitoredAzureOpenAI:
-    """Azure OpenAI client with automatic telemetry"""
+    """Microsoft Foundry Models client with automatic telemetry"""
     
     def __init__(self, api_key, endpoint, api_version="2024-02-01"):
         self.client = AzureOpenAI(
@@ -1121,7 +1121,7 @@ class MonitoredAzureOpenAI:
         start_time = time.time()
         
         try:
-            # Call Azure OpenAI
+            # Call Microsoft Foundry Models
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1136,7 +1136,7 @@ class MonitoredAzureOpenAI:
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # Calculate cost (GPT-4 pricing)
+            # Calculate cost (gpt-4.1 pricing)
             prompt_cost = (prompt_tokens / 1000) * 0.03  # $0.03 per 1K tokens
             completion_cost = (completion_tokens / 1000) * 0.06  # $0.06 per 1K tokens
             total_cost = prompt_cost + completion_cost
@@ -1204,7 +1204,7 @@ def chat():
     
     # Call with automatic monitoring
     response = openai_client.chat_completion(
-        model='gpt-4',
+        model='gpt-4.1',
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1485,7 +1485,7 @@ az containerapp show \
 
 **Diagnosis:**
 ```bash
-# Check data ingestion
+# Verify data import
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1513,7 +1513,7 @@ az monitor app-insights metrics show \
 - 🏠 [Course Home](../../README.md)
 
 ### Related Examples
-- [Azure OpenAI Example](../../../../examples/azure-openai-chat) - AI telemetry
+- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - AI telemetry
 - [Microservices Example](../../../../examples/microservices) - Distributed tracing
 
 ---
@@ -1530,22 +1530,22 @@ az monitor app-insights metrics show \
 - ✅ Cost optimization strategies
 
 **Key Takeaways:**
-1. **AZD provisions monitoring automatically** - No manual setup
-2. **Use structured logging** - Makes querying easier
-3. **Track business events** - Not just technical metrics
-4. **Monitor AI costs** - Track tokens and spending
-5. **Set up alerts** - Be proactive, not reactive
-6. **Optimize costs** - Use sampling and retention limits
+1. **AZD provisions monitoring automatically** - No manual setup  
+2. **Use structured logging** - Makes querying easier  
+3. **Track business events** - Not just technical metrics  
+4. **Monitor AI costs** - Track tokens and spending  
+5. **Set up alerts** - Be proactive, not reactive  
+6. **Optimize costs** - Use sampling and retention limits  
 
-**Next Steps:**
-1. Complete the practical exercises
-2. Add Application Insights to your AZD projects
-3. Create custom dashboards for your team
+**Next Steps:**  
+1. Complete the practical exercises  
+2. Add Application Insights to your AZD projects  
+3. Create custom dashboards for your team  
 4. Learn [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-This document has been translated using the AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

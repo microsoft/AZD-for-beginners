@@ -1,28 +1,26 @@
 # AI-specifieke probleemoplossingsgids
 
 **Hoofdstuknavigatie:**
-- **📚 Cursusstartpagina**: [AZD For Beginners](../../README.md)
-- **📖 Huidig hoofdstuk**: Hoofdstuk 7 - Probleemoplossing & Debugging
-- **⬅️ Vorige**: [Debugging Guide](debugging.md)
+- **📚 Cursusstart**: [AZD voor beginners](../../README.md)
+- **📖 Huidig hoofdstuk**: Hoofdstuk 7 - Foutopsporing & Debugging
+- **⬅️ Vorige**: [Foutopsporingsgids](debugging.md)
 - **➡️ Volgend hoofdstuk**: [Hoofdstuk 8: Productie- & Enterprise-patronen](../chapter-08-production/production-ai-practices.md)
-- **🤖 Gerelateerd**: [Hoofdstuk 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🤖 Gerelateerd**: [Hoofdstuk 2: AI-first ontwikkeling](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**Vorige:** [Productie AI-praktijken](../chapter-08-production/production-ai-practices.md) | **Volgende:** [AZD Basisprincipes](../chapter-01-foundation/azd-basics.md)
-
-Deze uitgebreide probleemoplossingsgids behandelt veelvoorkomende problemen bij het implementeren van AI-oplossingen met AZD en biedt oplossingen en debuggingtechnieken specifiek voor Azure AI-diensten.
+Deze uitgebreide probleemoplossingsgids behandelt veelvoorkomende problemen bij het uitrollen van AI-oplossingen met AZD en biedt oplossingen en foutopsporingsmethoden specifiek voor Azure AI-services.
 
 ## Inhoudsopgave
 
-- [Problemen met de Azure OpenAI-service](../../../../docs/chapter-07-troubleshooting)
-- [Problemen met Azure AI Search](../../../../docs/chapter-07-troubleshooting)
-- [Implementatieproblemen van Container Apps](../../../../docs/chapter-07-troubleshooting)
-- [Authenticatie- en machtigingsfouten](../../../../docs/chapter-07-troubleshooting)
-- [Fouten bij modelimplementatie](../../../../docs/chapter-07-troubleshooting)
-- [Prestatie- en schaalbaarheidsproblemen](../../../../docs/chapter-07-troubleshooting)
-- [Kosten- en quotabeheer](../../../../docs/chapter-07-troubleshooting)
-- [Debugtools en -technieken](../../../../docs/chapter-07-troubleshooting)
+- [Microsoft Foundry Models Service-problemen](#azure-openai-service-issues)
+- [Azure AI Search-problemen](#problemen-met-azure-ai-search)
+- [Container Apps implementatieproblemen](#container-apps-implementatieproblemen)
+- [Authenticatie- en machtigingsfouten](#authenticatie-en-machtigingsfouten)
+- [Fouten bij modelimplementatie](#fouten-bij-modelimplementatie)
+- [Prestatie- en schaalproblemen](#prestatie-en-schaalproblemen)
+- [Kosten- en quotabeheer](#kosten-en-quotabeheer)
+- [Foutopsporingshulpmiddelen en technieken](#foutopsporingshulpmiddelen-en-technieken)
 
-## Problemen met de Azure OpenAI-service
+## Problemen met Microsoft Foundry Models Service
 
 ### Probleem: OpenAI-service niet beschikbaar in regio
 
@@ -32,13 +30,13 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **Oorzaken:**
-- Azure OpenAI niet beschikbaar in de geselecteerde regio
-- Quota uitgeput in de voorkeursregio's
+- Microsoft Foundry Models niet beschikbaar in geselecteerde regio
+- Quota uitgeput in voorkeursregio's
 - Regionale capaciteitsbeperkingen
 
 **Oplossingen:**
 
-1. **Controleer beschikbaarheid per regio:**
+1. **Controleer regio-beschikbaarheid:**
 ```bash
 # Lijst met beschikbare regio's voor OpenAI
 az cognitiveservices account list-skus \
@@ -70,7 +68,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### Probleem: Quota voor modelimplementatie overschreden
+### Probleem: Modelimplementatiequota overschreden
 
 **Symptomen:**
 ```
@@ -81,15 +79,15 @@ Error: Deployment failed due to insufficient quota
 
 1. **Controleer huidige quota:**
 ```bash
-# Controleer het quotagebruik
+# Controleer quotagebruik
 az cognitiveservices usage list \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG
 ```
 
-2. **Vraag een quota-verhoging aan:**
+2. **Vraag om verhoging van quota:**
 ```bash
-# Dien een verzoek in voor een verhoging van de quota
+# Dien verzoek tot verhoging van de quota in
 az support tickets create \
   --ticket-name "OpenAI Quota Increase" \
   --description "Need increased quota for production deployment" \
@@ -104,7 +102,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -126,7 +124,7 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 1. **Gebruik een ondersteunde API-versie:**
 ```python
-# Gebruik de nieuwste ondersteunde versie
+# Gebruik de meest recente ondersteunde versie
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
@@ -140,7 +138,7 @@ az rest --method get \
 
 ## Problemen met Azure AI Search
 
-### Probleem: Prijsniveau van Search-service onvoldoende
+### Probleem: Prijstier van zoekservice onvoldoende
 
 **Symptomen:**
 ```
@@ -149,7 +147,7 @@ Error: Semantic search requires Basic tier or higher
 
 **Oplossingen:**
 
-1. **Upgrade het prijsniveau:**
+1. **Verhoog het prijstarief:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -167,7 +165,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Schakel semantische zoekopdracht uit (ontwikkeling):**
+2. **Schakel semantisch zoeken uit (ontwikkeling):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -181,7 +179,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Probleem: Fouten bij het aanmaken van index
+### Probleem: Indexcreatie mislukt
 
 **Symptomen:**
 ```
@@ -190,7 +188,7 @@ Error: Cannot create index, insufficient permissions
 
 **Oplossingen:**
 
-1. **Controleer sleutels van de Search-service:**
+1. **Controleer zoekservice-sleutels:**
 ```bash
 # Haal de beheerderssleutel van de zoekservice op
 az search admin-key show \
@@ -198,7 +196,7 @@ az search admin-key show \
   --resource-group YOUR_RG
 ```
 
-2. **Controleer het indexschema:**
+2. **Controleer indexschema:**
 ```python
 # Valideer indexschema
 from azure.search.documents.indexes import SearchIndexClient
@@ -228,9 +226,9 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Implementatieproblemen van Container Apps
+## Container Apps implementatieproblemen
 
-### Probleem: Fouten bij containerbouw
+### Probleem: Container-build mislukt
 
 **Symptomen:**
 ```
@@ -273,9 +271,9 @@ azure-search-documents==11.4.0
 azure-cosmos==4.5.1
 ```
 
-3. **Voeg een healthcheck toe:**
+3. **Voeg health check toe:**
 ```python
-# main.py - Voeg healthcheck-endpoint toe
+# main.py - Voeg een healthcheck-endpoint toe
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -285,7 +283,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Probleem: Fouten bij het opstarten van Container App
+### Probleem: Container App startfouten
 
 **Symptomen:**
 ```
@@ -329,7 +327,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Optimaliseer het laden van modellen:**
 ```python
-# Laad modellen pas in wanneer nodig om de opstarttijd te verkorten
+# Laad modellen lui om de opstarttijd te verkorten
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -359,18 +357,18 @@ app = FastAPI(lifespan=lifespan)
 
 ## Authenticatie- en machtigingsfouten
 
-### Probleem: Toegang geweigerd voor Managed Identity
+### Probleem: Machtiging voor Managed Identity geweigerd
 
 **Symptomen:**
 ```
-Error: Authentication failed for Azure OpenAI Service
+Error: Authentication failed for Microsoft Foundry Models Service
 ```
 
 **Oplossingen:**
 
 1. **Controleer roltoewijzingen:**
 ```bash
-# Controleer huidige roltoewijzingen
+# Controleer de huidige roltoewijzingen
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
@@ -395,7 +393,7 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 3. **Test authenticatie:**
 ```python
-# Test beheerde identiteitsauthenticatie
+# Test authenticatie met beheerde identiteit
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
@@ -417,7 +415,7 @@ Error: The user, group or application does not have secrets get permission
 
 **Oplossingen:**
 
-1. **Verleen Key Vault-machtigingen:**
+1. **Verleen Key Vault-permissies:**
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -436,7 +434,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Gebruik RBAC in plaats van toegangsbeleid:**
+2. **Gebruik RBAC in plaats van toegangspolicies:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -462,7 +460,7 @@ Error: Model version 'gpt-4-32k' is not available
 
 1. **Controleer beschikbare modellen:**
 ```bash
-# Beschikbare modellen weergeven
+# Lijst met beschikbare modellen
 az cognitiveservices account list-models \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG \
@@ -470,12 +468,12 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **Gebruik model-fallbacks:**
+2. **Gebruik modelfallbacks:**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
 param primaryModel object = {
-  name: 'gpt-4o-mini'
+  name: 'gpt-4.1-mini'
   version: '2024-07-18'
 }
 
@@ -521,20 +519,20 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
         return False
 ```
 
-## Prestatie- en schaalbaarheidsproblemen
+## Prestatie- en schaalproblemen
 
-### Probleem: Hoge reactietijden
+### Probleem: Hoge latentie van reacties
 
 **Symptomen:**
-- Reactietijden > 30 seconden
-- Timeout-fouten
+- Responstijden > 30 seconden
+- Time-outfouten
 - Slechte gebruikerservaring
 
 **Oplossingen:**
 
-1. **Implementeer verzoek-timeouts:**
+1. **Implementeer request-timeouts:**
 ```python
-# Stel de juiste time-outs in
+# Stel juiste time-outs in
 import httpx
 
 client = httpx.AsyncClient(
@@ -601,7 +599,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Probleem: Geheugenfouten
+### Probleem: Out-of-memory-fouten
 
 **Symptomen:**
 ```
@@ -610,7 +608,7 @@ Error: Container killed due to memory limit exceeded
 
 **Oplossingen:**
 
-1. **Verhoog geheugenallocatie:**
+1. **Verhoog geheugentoewijzing:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -629,7 +627,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **Optimaliseer geheugengebruik:**
+2. **Optimaliseer geheugenverbruik:**
 ```python
 # Geheugenefficiënte modelverwerking
 import gc
@@ -641,14 +639,14 @@ class MemoryOptimizedAI:
         
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # Controleer het geheugenverbruik voor verwerking
+        # Controleer het geheugengebruik vóór verwerking
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Forceer geheugenopruiming
+            gc.collect()  # Forceer garbage collection
             
         result = await self._process_ai_request(request)
         
-        # Ruim op na verwerking
+        # Opruimen na verwerking
         gc.collect()
         return result
 ```
@@ -658,15 +656,15 @@ class MemoryOptimizedAI:
 ### Probleem: Onverwacht hoge kosten
 
 **Symptomen:**
-- Hogere Azure-factuur dan verwacht
-- Tokengebruik dat de schattingen overschrijdt
+- Azure-factuur hoger dan verwacht
+- Tokengebruik overschrijdt schattingen
 - Budgetwaarschuwingen geactiveerd
 
 **Oplossingen:**
 
 1. **Implementeer kostenbeheersing:**
 ```python
-# Bijhouden van tokengebruik
+# Tokengebruik bijhouden
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -712,22 +710,22 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 ```python
 # Kostenbewuste modelselectie
 MODEL_COSTS = {
-    'gpt-4o-mini': 0.00015,  # per 1K tokens
-    'gpt-4': 0.03,          # per 1K tokens
+    'gpt-4.1-mini': 0.00015,  # per 1K tokens
+    'gpt-4.1': 0.03,          # per 1K tokens
     'gpt-35-turbo': 0.0015  # per 1K tokens
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
     """Select model based on complexity and budget."""
     if complexity == 'simple' or budget_remaining < 10:
-        return 'gpt-4o-mini'
+        return 'gpt-4.1-mini'
     elif complexity == 'medium':
         return 'gpt-35-turbo'
     else:
-        return 'gpt-4'
+        return 'gpt-4.1'
 ```
 
-## Debugtools en -technieken
+## Foutopsporingshulpmiddelen en technieken
 
 ### AZD-debugcommando's
 
@@ -735,18 +733,38 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
 # Schakel gedetailleerde logging in
 azd up --debug
 
-# Controleer de status van de implementatie
+# Controleer de uitrolstatus
 azd show
 
 # Bekijk applicatielogs (opent het monitoringdashboard)
 azd monitor --logs
 
-# Bekijk realtime statistieken
+# Bekijk live statistieken
 azd monitor --live
 
-# Controleer de omgevingsvariabelen
+# Controleer omgevingsvariabelen
 azd env get-values
 ```
+
+### AZD AI-extensiecommando's voor diagnostiek
+
+Als je agents hebt ingezet met `azd ai agent init`, zijn de volgende aanvullende tools beschikbaar:
+
+```bash
+# Zorg ervoor dat de agents-extensie is geïnstalleerd
+azd extension install azure.ai.agents
+
+# Initialiseer een agent opnieuw of werk deze bij vanaf een manifest
+azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
+
+# Gebruik de MCP-server zodat AI-tools de projectstatus kunnen opvragen
+azd mcp start
+
+# Genereer infrastructuurbestanden voor beoordeling en audit
+azd infra generate
+```
+
+> **Tip:** Gebruik `azd infra generate` om IaC naar schijf te schrijven zodat je precies kunt inspecteren welke resources zijn geprovisioneerd. Dit is van onschatbare waarde bij het debuggen van resourceconfiguratieproblemen. Zie de [AZD AI CLI-referentie](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) voor volledige details.
 
 ### Applicatie-debugging
 
@@ -774,7 +792,7 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **Healthcheck-endpoints:**
+2. **Health check-endpoints:**
 ```python
 @app.get("/debug/health")
 async def detailed_health_check():
@@ -836,40 +854,41 @@ def monitor_performance(func):
 
 ## Veelvoorkomende foutcodes en oplossingen
 
-| Foutcode | Beschrijving | Oplossing |
+| Error Code | Description | Solution |
 |------------|-------------|----------|
-| 401 | Niet geautoriseerd | Controleer API-sleutels en configuratie van Managed Identity |
+| 401 | Niet geautoriseerd | Controleer API-sleutels en de configuratie van Managed Identity |
 | 403 | Verboden | Controleer RBAC-roltoewijzingen |
-| 429 | Te veel aanvragen | Implementeer retry-logica met exponentiële back-off |
-| 500 | Interne serverfout | Controleer modelimplementatiestatus en logs |
+| 429 | Rate-limiet overschreden | Implementeer retry-logica met exponentiële backoff |
+| 500 | Interne serverfout | Controleer status van modelimplementatie en logs |
 | 503 | Service niet beschikbaar | Controleer servicegezondheid en regionale beschikbaarheid |
 
 ## Volgende stappen
 
-1. **Bekijk de [Gids voor AI-modelimplementatie](../chapter-02-ai-development/ai-model-deployment.md)** voor best practices bij implementatie
+1. **Bekijk [Gids voor AI-modelimplementatie](../chapter-02-ai-development/ai-model-deployment.md)** voor best practices bij implementatie
 2. **Voltooi [Productie AI-praktijken](../chapter-08-production/production-ai-practices.md)** voor enterprise-klare oplossingen
-3. **Word lid van de [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** voor community-ondersteuning
-4. **Dien issues in** bij de [AZD GitHub-repository](https://github.com/Azure/azure-dev) voor AZD-specifieke problemen
+3. **Sluit je aan bij de [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** voor communityondersteuning
+4. **Dien issues in** bij de [AZD GitHub repository](https://github.com/Azure/azure-dev) voor AZD-specifieke problemen
 
 ## Bronnen
 
-- [Probleemoplossing voor Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [Probleemoplossing Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Probleemoplossing Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [Probleemoplossing voor Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [Container Apps probleemoplossing](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Probleemoplossing voor Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Installeer Azure-troubleshootingskills in je editor: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Hoofdstuknavigatie:**
-- **📚 Cursusstartpagina**: [AZD For Beginners](../../README.md)
-- **📖 Huidig hoofdstuk**: Hoofdstuk 7 - Probleemoplossing & Debugging
-- **⬅️ Vorige**: [Debugging Guide](debugging.md)
+- **📚 Cursusstart**: [AZD voor beginners](../../README.md)
+- **📖 Huidig hoofdstuk**: Hoofdstuk 7 - Foutopsporing & Debugging
+- **⬅️ Vorige**: [Foutopsporingsgids](debugging.md)
 - **➡️ Volgend hoofdstuk**: [Hoofdstuk 8: Productie- & Enterprise-patronen](../chapter-08-production/production-ai-practices.md)
-- **🤖 Gerelateerd**: [Hoofdstuk 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- [Probleemoplossing Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **🤖 Gerelateerd**: [Hoofdstuk 2: AI-first ontwikkeling](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Referentie**: [Azure Developer CLI probleemoplossing](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vrijwaring:
-Dit document is vertaald met behulp van de AI-vertalingsdienst Co-op Translator (https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor cruciale informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+**Disclaimer**:
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onjuistheden kunnen bevatten. Het oorspronkelijke document in de oorspronkelijke taal dient als gezaghebbende bron te worden beschouwd. Voor cruciale informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

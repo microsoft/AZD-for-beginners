@@ -1,107 +1,101 @@
 # मल्टी-एजेंट समन्वय पैटर्न
 
-⏱️ **अनुमानित समय**: 60-75 minutes | 💰 **अनुमानित लागत**: ~$100-300/month | ⭐ **जटिलता**: उन्नत
+⏱️ **अनुमानित समय**: 60-75 मिनट | 💰 **अनुमानित लागत**: ~$100-300/महीना | ⭐ **जटिलता**: उन्नत
 
 **📚 सीखने का मार्ग:**
-- ← Previous: [क्षमता योजना](capacity-planning.md) - संसाधन आकार और स्केलिंग रणनीतियाँ
-- 🎯 **आप यहाँ हैं**: मल्टी-एजेंट समन्वय पैटर्न (ऑर्केस्ट्रेशन, संचार, स्टेट प्रबंधन)
-- → Next: [SKU चयन](sku-selection.md) - सही Azure सेवाओं का चयन
+- ← पिछला: [क्षमता योजना](capacity-planning.md) - संसाधन आकार निर्धारण और स्केलिंग रणनीतियाँ
+- 🎯 **आप यहाँ हैं**: मल्टी-एजेंट समन्वय पैटर्न (ऑर्केस्ट्रेशन, संचार, राज्य प्रबंधन)
+- → अगला: [SKU चयन](sku-selection.md) - सही Azure सेवाओं का चुनाव
 - 🏠 [कोर्स होम](../../README.md)
 
 ---
 
 ## आप क्या सीखेंगे
 
-इस लेसन को पूरा करने पर, आप:
-- समझें **मल्टी-एजेंट आर्किटेक्चर** पैटर्न और उन्हें कब उपयोग करना है
-- लागू करें **ऑर्केस्ट्रेशन पैटर्न** (केंद्रीकृत, विकेन्द्रीकृत, पदानुक्रमित)
-- डिजाइन करें **एजेंट संचार** रणनीतियाँ (समकालिक, असमकालिक, इवेंट-चालित)
-- प्रबंधित करें **साझा स्थिति** वितरित एजेंटों में
-- डिप्लॉय करें **मल्टी-एजेंट सिस्टम** Azure पर AZD के साथ
-- लागू करें **समन्वय पैटर्न** वास्तविक दुनिया के AI परिदृश्यों के लिए
-- निगरानी और डिबग करें वितरित एजेंट सिस्टम
+इस पाठ को पूरा करने पर आप:
+- समझेंगे **मल्टी-एजेंट आर्किटेक्चर** पैटर्न और कब इन्हें उपयोग करना चाहिए
+- लागू करेंगे **ऑर्केस्ट्रेशन पैटर्न** (केंद्रीकृत, विकेन्द्रित, पदानुक्रमित)
+- डिज़ाइन करेंगे **एजेंट संचार** रणनीतियाँ (सिंक्रोनस, असिंक्रोनस, इवेंट-ड्रिवन)
+- प्रबंधित करेंगे **वितरित एजेंट्स** के बीच साझा राज्य
+- Azure पर AZD के साथ **मल्टी-एजेंट सिस्टम** तैनात करेंगे
+- वास्तविक दुनिया के AI परिदृश्यों के लिए **समन्वय पैटर्न** लागू करेंगे
+- वितरित एजेंट सिस्टम की निगरानी और डिबगिंग करेंगे
 
-## मल्टी-एजेंट समन्वय क्यों महत्वपूर्ण है
+## क्यों मल्टी-एजेंट समन्वय महत्वपूर्ण है
 
-### विकास: सिंगल एजेंट से मल्टी-एजेंट तक
+### विकास: एकल एजेंट से मल्टी-एजेंट तक
 
-**सिंगल एजेंट (सरल):**
+**एकल एजेंट (सरल):**
 ```
 User → Agent → Response
 ```
 - ✅ समझने और लागू करने में आसान
 - ✅ सरल कार्यों के लिए तेज़
-- ❌ एकल मॉडल की क्षमताओं द्वारा सीमित
-- ❌ जटिल कार्यों को समानांतर नहीं कर सकता
-- ❌ कोई विशेषीकरण नहीं
+- ❌ एक ही मॉडल की क्षमताओं से सीमित
+- ❌ जटिल कार्यों का समांतर निष्पादन नहीं कर सकता
+- ❌ विशेषज्ञता नहीं
 
 **मल्टी-एजेंट सिस्टम (उन्नत):**
-```
-           ┌─────────────┐
-           │ Orchestrator│
-           └──────┬──────┘
-        ┌─────────┼─────────┐
-        │         │         │
-    ┌───▼──┐  ┌──▼───┐  ┌──▼────┐
-    │Agent1│  │Agent2│  │Agent3 │
-    │(Plan)│  │(Code)│  │(Review)│
-    └──────┘  └──────┘  └───────┘
-```
-- ✅ विशिष्ट कार्यों के लिए विशेषीकृत एजेंट
-- ✅ गति के लिए समानांतर निष्पादन
-- ✅ मॉड्यूलर और रखरखाव योग्य
-- ✅ जटिल वर्कफ़्लोज़ में बेहतर
-- ⚠️ समन्वय लॉजिक आवश्यक है
+```mermaid
+graph TD
+    Orchestrator[समन्वयक] --> Agent1[एजेंट1<br/>योजना]
+    Orchestrator --> Agent2[एजेंट2<br/>कोड]
+    Orchestrator --> Agent3[एजेंट3<br/>समीक्षा]
+```- ✅ विशिष्ट कार्यों के लिए विशेषज्ञ एजेंट
+- ✅ गति के लिए समांतर निष्पादन
+- ✅ मॉड्यूलर और मेंटेनेबल
+- ✅ जटिल वर्कफ़्लो में बेहतर
+- ⚠️ समन्वय लॉजिक की आवश्यकता
 
-**उपमा**: एकल एजेंट ऐसा है जैसे एक व्यक्ति सभी कार्य कर रहा हो। मल्टी-एजेंट ऐसा है जैसे एक टीम जहाँ प्रत्येक सदस्य के पास विशेष कौशल होते हैं (रिसर्चर, कोडर, समीक्षक, लेखक) जो मिलकर काम करते हैं।
+**उपमा**: एकल एजेंट ऐसे है जैसे एक ही व्यक्ति सभी कार्य कर रहा हो। मल्टी-एजेंट ऐसे है जैसे एक टीम जहाँ प्रत्येक सदस्य की विशिष्ट कौशल (अनुसंधानकर्ता, कोडर, समिक्षक, लेखक) हो और वे मिलकर काम करते हैं।
 
 ---
 
 ## मुख्य समन्वय पैटर्न
 
-### पैटर्न 1: क्रमिक समन्वय (चेन ऑफ रिस्पॉन्सिबिलिटी)
+### पैटर्न 1: क्रमिक समन्वय (Chain of Responsibility)
 
-**कब उपयोग करें**: कार्यों को विशिष्ट क्रम में पूरा होना चाहिए, प्रत्येक एजेंट पिछले आउटपुट पर निर्मित होता है।
+**कब उपयोग करें**: कार्यों को विशिष्ट क्रम में पूरा करना आवश्यक है, प्रत्येक एजेंट पूर्ववर्ती आउटपुट पर बनाता है।
 
 ```mermaid
 sequenceDiagram
-    participant User
-    participant Orchestrator
-    participant Agent1 as अनुसंधान एजेंट
+    participant User as उपयोगकर्ता
+    participant Orchestrator as समन्वयक
+    participant Agent1 as शोध एजेंट
     participant Agent2 as लेखक एजेंट
     participant Agent3 as संपादक एजेंट
     
-    User->>Orchestrator: "एआई के बारे में लेख लिखें"
-    Orchestrator->>Agent1: शोध विषय
+    User->>Orchestrator: "AI के बारे में लेख लिखें"
+    Orchestrator->>Agent1: विषय पर शोध करें
     Agent1-->>Orchestrator: शोध के परिणाम
-    Orchestrator->>Agent2: ड्राफ्ट लिखें (शोध का उपयोग करके)
-    Agent2-->>Orchestrator: लेख का ड्राफ्ट
+    Orchestrator->>Agent2: प्रारूप लिखें (शोध का उपयोग कर)
+    Agent2-->>Orchestrator: लेख का प्रारूप
     Orchestrator->>Agent3: संपादित और सुधारें
     Agent3-->>Orchestrator: अंतिम लेख
     Orchestrator-->>User: परिष्कृत लेख
     
-    Note over User,Agent3: क्रमिक: प्रत्येक चरण पिछले चरण के पूरा होने का इंतजार करता है
+    Note over User,Agent3: क्रमिक: प्रत्येक चरण पिछले चरण की प्रतीक्षा करता है
 ```
 **लाभ:**
 - ✅ स्पष्ट डेटा प्रवाह
-- ✅ डिबग करने में आसान
-- ✅ अनुमानित निष्पादन क्रम
+- ✅ डिबग करना आसान
+- ✅ पूर्वानुमानित निष्पादन क्रम
 
 **सीमाएँ:**
-- ❌ धीमा (कोई समानांतरता नहीं)
-- ❌ एक विफलता पूरी चेन को ब्लॉक कर देती है
-- ❌ आपसी निर्भर कार्यों को संभाल नहीं सकता
+- ❌ धीमा (कोई पैरेललिज़्म नहीं)
+- ❌ एक विफलता पूरी चेन को रोक देती है
+- ❌ परस्पर निर्भर कार्यों को संभाल नहीं सकता
 
-**उदाहरण उपयोग के मामलों:**
-- सामग्री निर्माण पाइपलाइन (रिसर्च → लिखना → संपादित → प्रकाशित)
-- कोड जनरेशन (योजना → कार्यान्वयन → परीक्षण → तैनाती)
-- रिपोर्ट जनरेशन (डेटा संग्रह → विश्लेषण → विजुअलाइज़ेशन → सारांश)
+**उदाहरण उपयोग मामले:**
+- सामग्री निर्माण पाइपलाइन (अनुसंधान → लिखें → संपादित करें → प्रकाशित)
+- कोड जेनरेशन (योजना → कार्यान्वयन → परीक्षण → तैनाती)
+- रिपोर्ट जनरेशन (डेटा संग्रह → विश्लेषण → विज़ुअलाइज़ेशन → सारांश)
 
 ---
 
-### पैटर्न 2: समानांतर समन्वय (फैन-आउट/फैन-इन)
+### पैटर्न 2: समानांतर समन्वय (Fan-Out/Fan-In)
 
-**कब उपयोग करें**: स्वतंत्र कार्य एक साथ चल सकते हैं, परिणाम अंत में संयोजित किए जाते हैं।
+**कब उपयोग करें**: स्वतंत्र कार्य एक साथ चल सकते हैं, अंत में परिणाम संयोजित किए जाते हैं।
 
 ```mermaid
 graph TB
@@ -126,25 +120,25 @@ graph TB
     style Aggregator fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
 **लाभ:**
-- ✅ तेज़ (समानांतर निष्पादन)
-- ✅ दोष सहिष्णु (आंशिक परिणाम स्वीकार्य)
-- ✅ क्षैतिज रूप से स्केल होता है
+- ✅ तेज़ (समांतर निष्पादन)
+- ✅ दोष-सहिष्णु (आंशिक परिणाम स्वीकार्य)
+- ✅ हॉरिजॉन्टली स्केलेबल
 
 **सीमाएँ:**
-- ⚠️ परिणाम क्रमभंग में आ सकते हैं
+- ⚠️ परिणाम क्रम से बाहर आ सकते हैं
 - ⚠️ समेकन लॉजिक की आवश्यकता
-- ⚠️ जटिल स्थिति प्रबंधन
+- ⚠️ जटिल राज्य प्रबंधन
 
-**उदाहरण उपयोग के मामलों:**
-- कई स्रोतों से डेटा एकत्रीकरण (APIs + databases + वेब स्क्रैपिंग)
-- प्रतिस्पर्धी विश्लेषण (कई मॉडल समाधान उत्पन्न करते हैं, सर्वश्रेष्ठ का चयन)
+**उदाहरण उपयोग मामले:**
+- मल्टी-सोर्स डेटा एकत्रण (APIs + डेटाबेस + वेब स्क्रैपिंग)
+- प्रतियोगी विश्लेषण (कई मॉडल समाधान उत्पन्न करते हैं, सर्वश्रेष्ठ चुना जाता है)
 - अनुवाद सेवाएँ (एक साथ कई भाषाओं में अनुवाद)
 
 ---
 
-### पैटर्न 3: पदानुक्रमिक समन्वय (प्रबंधक-कर्मचारी)
+### पैटर्न 3: पदानुक्रमित समन्वय (Manager-Worker)
 
-**कब उपयोग करें**: उप-कार्य वाले जटिल वर्कफ़्लोज़, delegation की आवश्यकता हो।
+**कब उपयोग करें**: उप-कार्य वाले जटिल वर्कफ़्लो में, प्रेषण आवश्यक हो।
 
 ```mermaid
 graph TB
@@ -168,74 +162,74 @@ graph TB
     style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
 ```
 **लाभ:**
-- ✅ जटिल वर्कफ़्लोज़ को संभालता है
-- ✅ मॉड्यूलर और रखरखाव योग्य
-- ✅ स्पष्ट जिम्मेदारी सीमाएँ
+- ✅ जटिल वर्कफ़्लो को संभालता है
+- ✅ मॉड्यूलर और मेंटेनेबल
+- ✅ स्पष्ट जिम्मेदारी की सीमाएँ
 
 **सीमाएँ:**
 - ⚠️ अधिक जटिल आर्किटेक्चर
-- ⚠️ उच्च लेटेंसी (कई समन्वय परतें)
-- ⚠️ परिष्कृत ऑर्केस्ट्रेशन की आवश्यकता
+- ⚠️ उच्च विलंबता (कई समन्वय परतें)
+- ⚠️ उन्नत ऑर्केस्ट्रेशन की आवश्यकता
 
-**उदाहरण उपयोग के मामले:**
-- एंटरप्राइज़ दस्तावेज़ प्रोसेसिंग (क्लासिफाई → रूट → प्रोसेस → आर्काइव)
-- मल्टी-स्टेज डेटा पाइपलाइंस (इंगेस्ट → क्लीन → ट्रांसफॉर्म → एनालाइज → रिपोर्ट)
-- जटिल ऑटोमेशन वर्कफ़्लोज़ (योजना → संसाधन आवंटन → निष्पादन → मॉनिटरिंग)
+**उदाहरण उपयोग मामले:**
+- एंटरप्राइज़ दस्तावेज़ प्रोसेसिंग (वर्गीकृत करें → मार्गदर्शन करें → प्रोसेस करें → आर्काइव)
+- बहु-चरण डेटा पाइपलाइन्स (इंजेस्ट → क्लीन → ट्रांसफॉर्म → विश्लेषण → रिपोर्ट)
+- जटिल ऑटोमेशन वर्कफ़्लो (योजना → संसाधन आवंटन → निष्पादन → निगरानी)
 
 ---
 
-### पैटर्न 4: इवेंट-ड्रिवन समन्वय (पब्लिश-सब्सक्राइब)
+### पैटर्न 4: इवेंट-ड्रिवन समन्वय (Publish-Subscribe)
 
-**कब उपयोग करें**: एजेंटों को इवेंट्स पर प्रतिक्रिया देने की आवश्यकता हो, ढीला कपलिंग वांछनीय हो।
+**कब उपयोग करें**: एजेंटों को इवेंट्स पर प्रतिक्रिया देनी होती है, लूज़ कपलिंग वांछनीय है।
 
 ```mermaid
 sequenceDiagram
     participant Agent1 as डेटा संग्रहकर्ता
-    participant EventBus as एज़्योर सर्विस बस
+    participant EventBus as Azure सेवा बस
     participant Agent2 as विश्लेषक
-    participant Agent3 as सूचनाकार
-    participant Agent4 as अभिलेखकर्ता
+    participant Agent3 as सूचनाप्रेषक
+    participant Agent4 as आर्काइवकर्ता
     
     Agent1->>EventBus: प्रकाशित करें "डेटा प्राप्त" घटना
-    EventBus->>Agent2: सदस्यता लें: डेटा का विश्लेषण करें
+    EventBus->>Agent2: सदस्यता लें: डेटा का विश्लेषण
     EventBus->>Agent3: सदस्यता लें: सूचना भेजें
-    EventBus->>Agent4: सदस्यता लें: डेटा अभिलेखित करें
+    EventBus->>Agent4: सदस्यता लें: डेटा को संग्रहित करें
     
-    Note over Agent1,Agent4: सभी सब्सक्राइबर स्वतंत्र रूप से प्रक्रिया करते हैं
+    Note over Agent1,Agent4: सभी सब्स्क्राइबर स्वतंत्र रूप से प्रोसेस करते हैं
     
-    Agent2->>EventBus: प्रकाशित करें "विश्लेषण पूर्ण" घटना
+    Agent2->>EventBus: प्रकाशित करें "विश्लेषण पूरा" घटना
     EventBus->>Agent3: सदस्यता लें: विश्लेषण रिपोर्ट भेजें
 ```
 **लाभ:**
-- ✅ एजेंटों के बीच ढीला कपलिंग
-- ✅ नए एजेंट जोड़ना आसान (बस सब्सक्राइब करें)
+- ✅ एजेंटों के बीच लूज़ कपलिंग
+- ✅ नए एजेंट जोड़ना आसान (बस सब्स्क्राइब करें)
 - ✅ असिंक्रोनस प्रोसेसिंग
-- ✅ रेज़िलिएंट (मैसेज पर्सिस्टेंस)
+- ✅ लचीला (मैसेज परसिस्टेंस)
 
 **सीमाएँ:**
-- ⚠️ आख़िरकार सुसंगतता (eventual consistency)
+- ⚠️ परिणामात्मक संगति (eventual consistency)
 - ⚠️ जटिल डिबगिंग
-- ⚠️ संदेश क्रम संबंधी चुनौतियाँ
+- ⚠️ संदेश क्रमबद्धता चुनौतियाँ
 
-**उदाहरण उपयोग के मामले:**
-- रीयल-टाइम मॉनिटरिंग सिस्टम (अलर्ट्स, डैशबोर्ड, लॉग्स)
-- मल्टी-चैनल नोटिफिकेशन्स (ईमेल, SMS, पुश, Slack)
-- डेटा प्रोसेसिंग पाइपलाइंस (एक ही डेटा के कई कंज्यूमर)
+**उदाहरण उपयोग मामले:**
+- रीयल-टाइम मॉनिटरिंग सिस्टम (अलर्ट, डैशबोर्ड, लॉग)
+- मल्टी-चैनल सूचनाएँ (ईमेल, SMS, पुश, Slack)
+- डेटा प्रोसेसिंग पाइपलाइन्स (एक ही डेटा के कई कंज्यूमर)
 
 ---
 
-### पैटर्न 5: कंसेंसस-आधारित समन्वय (वोटिंग/क्वोरम)
+### पैटर्न 5: सर्वसम्मति-आधारित समन्वय (Voting/Quorum)
 
 **कब उपयोग करें**: आगे बढ़ने से पहले कई एजेंटों से सहमति की आवश्यकता हो।
 
 ```mermaid
 graph TB
     Input[इनपुट कार्य]
-    Agent1[एजेंट 1: GPT-4]
+    Agent1[एजेंट 1: gpt-4.1]
     Agent2[एजेंट 2: Claude]
     Agent3[एजेंट 3: Gemini]
     Voter[सम्मति मतदाता]
-    Output[सहमत आउटपुट]
+    Output[सहमत परिणाम]
     
     Input --> Agent1
     Input --> Agent2
@@ -248,19 +242,19 @@ graph TB
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
 **लाभ:**
-- ✅ अधिक सटीकता (कई राय)
-- ✅ दोष सहिष्णु (अल्पसंख्यक विफलताएँ स्वीकार्य)
+- ✅ उच्च सटीकता (कई राय)
+- ✅ दोष-सहिष्णु (अल्पसंख्यक विफलताएँ स्वीकार्य)
 - ✅ गुणवत्ता आश्वासन अंतर्निर्मित
 
 **सीमाएँ:**
 - ❌ महंगा (कई मॉडल कॉल)
 - ❌ धीमा (सभी एजेंटों की प्रतीक्षा)
-- ⚠️ संघर्ष समाधान आवश्यक
+- ⚠️ विवाद समाधान आवश्यक
 
-**उदाहरण उपयोग के मामले:**
-- कंटेंट मॉडरेशन (कई मॉडल सामग्री की समीक्षा)
-- कोड समीक्षा (कई linters/analyzers)
-- मेडिकल डायग्नोसिस (कई AI मॉडल, विशेषज्ञ सत्यापन)
+**उदाहरण उपयोग मामले:**
+- सामग्री मॉडरेशन (कई मॉडल सामग्री की समीक्षा करें)
+- कोड समीक्षा (कई लिन्टर्स/एनालाइज़र्स)
+- चिकित्सा निदान (कई AI मॉडल, विशेषज्ञ सत्यापन)
 
 ---
 
@@ -270,18 +264,18 @@ graph TB
 
 ```mermaid
 graph TB
-    User[उपयोगकर्ता/API क्लाइंट]
+    User[उपयोगकर्ता/एपीआई क्लाइंट]
     APIM[Azure API प्रबंधन]
     Orchestrator[ऑर्केस्ट्रेटर सेवा<br/>कंटेनर ऐप]
     ServiceBus[Azure Service Bus<br/>इवेंट हब]
     
-    Agent1[अनुसंधान एजेंट<br/>कंटेनर ऐप]
+    Agent1[शोध एजेंट<br/>कंटेनर ऐप]
     Agent2[लेखक एजेंट<br/>कंटेनर ऐप]
     Agent3[विश्लेषक एजेंट<br/>कंटेनर ऐप]
     Agent4[समीक्षक एजेंट<br/>कंटेनर ऐप]
     
     CosmosDB[(Cosmos DB<br/>साझा स्थिति)]
-    Storage[Azure Storage<br/>आर्टिफैक्ट्स]
+    Storage[Azure Storage<br/>आर्टिफ़ैक्ट्स]
     AppInsights[Application Insights<br/>निगरानी]
     
     User --> APIM
@@ -313,17 +307,17 @@ graph TB
     style ServiceBus fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-**प्रमुख घटक:**
+**मुख्य घटक:**
 
 | घटक | उद्देश्य | Azure सेवा |
 |-----------|---------|---------------|
-| **API Gateway** | प्रवेश बिंदु, रेट लिमिटिंग, प्रमाणीकरण | API Management |
-| **ऑर्केस्ट्रेटर** | एजेंट वर्कफ़्लो का समन्वय करता है | Container Apps |
-| **मैसेज क्यू** | असिंक्रोनस संचार | Service Bus / Event Hubs |
-| **एजेंट** | विशेषीकृत AI वर्कर्स | Container Apps / Functions |
-| **स्टेट स्टोर** | साझा स्थिति, टास्क ट्रैकिंग | Cosmos DB |
-| **आर्टिफैक्ट स्टोरेज** | दस्तावेज़, परिणाम, लॉग | Blob Storage |
-| **मॉनिटरिंग** | वितरित ट्रेसिंग, लॉग | Application Insights |
+| **API Gateway** | प्रवेश बिंदु, दर-सीमा, प्रमाणीकरण | API Management |
+| **Orchestrator** | एजेंट वर्कफ़्लो का समन्वय करता है | Container Apps |
+| **Message Queue** | असिंक्रोनस संचार | Service Bus / Event Hubs |
+| **Agents** | विशेषज्ञ AI वर्कर | Container Apps / Functions |
+| **State Store** | साझा राज्य, कार्य ट्रैकिंग | Cosmos DB |
+| **Artifact Storage** | दस्तावेज़, परिणाम, लॉग | Blob Storage |
+| **Monitoring** | वितरित ट्रेसिंग, लॉग | Application Insights |
 
 ---
 
@@ -334,30 +328,30 @@ graph TB
 ```bash
 # Azure Developer CLI सत्यापित करें
 azd version
-# ✅ अपेक्षित: azd संस्करण 1.0.0 या उससे अधिक
+# ✅ अपेक्षित: azd संस्करण 1.0.0 या उससे ऊपर
 
 # Azure CLI सत्यापित करें
 az --version
-# ✅ अपेक्षित: azure-cli 2.50.0 या उससे अधिक
+# ✅ अपेक्षित: azure-cli 2.50.0 या उससे ऊपर
 
 # Docker सत्यापित करें (स्थानीय परीक्षण के लिए)
 docker --version
-# ✅ अपेक्षित: Docker संस्करण 20.10 या उससे अधिक
+# ✅ अपेक्षित: Docker संस्करण 20.10 या उससे ऊपर
 ```
 
 ### Azure आवश्यकताएँ
 
 - सक्रिय Azure सदस्यता
-- बनाने की अनुमतियाँ:
+- निर्माण करने की अनुमतियाँ:
   - Container Apps
   - Service Bus namespaces
   - Cosmos DB accounts
   - Storage accounts
   - Application Insights
 
-### ज्ञान की आवश्यकताएँ
+### ज्ञान आवश्यकताएँ
 
-आपको पूरा कर लिया होना चाहिए:
+आपने निम्न पूरा किया होना चाहिए:
 - [कॉन्फ़िगरेशन प्रबंधन](../chapter-03-configuration/configuration.md)
 - [प्रमाणीकरण और सुरक्षा](../chapter-03-configuration/authsecurity.md)
 - [माइक्रोसर्विसेज उदाहरण](../../../../examples/microservices)
@@ -366,7 +360,7 @@ docker --version
 
 ## कार्यान्वयन मार्गदर्शिका
 
-### प्रोजेक्ट संरचना
+### परियोजना संरचना
 
 ```
 multi-agent-system/
@@ -402,11 +396,11 @@ multi-agent-system/
 
 ### कार्यान्वयन: सामग्री निर्माण पाइपलाइन
 
-आइए एक क्रमिक पाइपलाइन बनाते हैं: रिसर्च → लिखना → संपादित → प्रकाशित
+आइए एक क्रमिक पाइपलाइन बनाते हैं: अनुसंधान → लिखें → संपादित करें → प्रकाशित
 
 ### 1. AZD कॉन्फ़िगरेशन
 
-**फ़ाइल: `azure.yaml`**
+**File: `azure.yaml`**
 
 ```yaml
 name: content-pipeline
@@ -437,7 +431,7 @@ services:
 
 ### 2. इन्फ्रास्ट्रक्चर: समन्वय के लिए Service Bus
 
-**फ़ाइल: `infra/core/servicebus.bicep`**
+**File: `infra/core/servicebus.bicep`**
 
 ```bicep
 param name string
@@ -494,7 +488,7 @@ output connectionString string = listKeys('${serviceBusNamespace.id}/Authorizati
 
 ### 3. साझा स्टेट मैनेजर
 
-**फ़ाइल: `src/shared/state_manager.py`**
+**File: `src/shared/state_manager.py`**
 
 ```python
 from azure.cosmos import CosmosClient, PartitionKey
@@ -554,7 +548,7 @@ class StateManager:
 
 ### 4. ऑर्केस्ट्रेटर सेवा
 
-**फ़ाइल: `src/orchestrator/app.py`**
+**File: `src/orchestrator/app.py`**
 
 ```python
 from flask import Flask, request, jsonify
@@ -567,7 +561,7 @@ from shared.state_manager import StateManager
 app = Flask(__name__)
 state_manager = StateManager()
 
-# Service Bus कनेक्शन
+# सर्विस बस कनेक्शन
 servicebus_connection_str = os.environ['SERVICEBUS_CONNECTION_STRING']
 servicebus_client = ServiceBusClient.from_connection_string(servicebus_connection_str)
 
@@ -594,7 +588,7 @@ def create_content():
         input_data={'topic': topic}
     )
     
-    # अनुसंधान एजेंट (पहला कदम) को संदेश भेजें
+    # अनुसंधान एजेंट को संदेश भेजें (पहला चरण)
     sender = servicebus_client.get_queue_sender('research-tasks')
     message = ServiceBusMessage(
         body=json.dumps({
@@ -631,7 +625,7 @@ if __name__ == '__main__':
 
 ### 5. रिसर्च एजेंट
 
-**फ़ाइल: `src/agents/research/app.py`**
+**File: `src/agents/research/app.py`**
 
 ```python
 from azure.servicebus import ServiceBusClient, ServiceBusMessage
@@ -641,7 +635,7 @@ import os
 import time
 from shared.state_manager import StateManager
 
-# क्लाइंट्स को प्रारंभ करें
+# क्लाइंट्स आरंभ करें
 state_manager = StateManager()
 servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
@@ -661,9 +655,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # शोध के लिए Azure OpenAI को कॉल करें
+    # रिसर्च के लिए Microsoft Foundry मॉडल्स को कॉल करें
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -719,9 +713,9 @@ if __name__ == '__main__':
     main()
 ```
 
-### 6. लेखक एजेंट
+### 6. राइटर एजेंट
 
-**फ़ाइल: `src/agents/writer/app.py`**
+**File: `src/agents/writer/app.py`**
 
 ```python
 from azure.servicebus import ServiceBusClient, ServiceBusMessage
@@ -750,9 +744,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # Azure OpenAI को कॉल करके लेख लिखें
+    # लेख लिखने के लिए Microsoft Foundry Models को कॉल करें
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -807,9 +801,9 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. संपादक एजेंट
+### 7. एडिटर एजेंट
 
-**फ़ाइल: `src/agents/editor/app.py`**
+**File: `src/agents/editor/app.py`**
 
 ```python
 from azure.servicebus import ServiceBusClient
@@ -837,9 +831,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # संशोधित करने के लिए Azure OpenAI को कॉल करें
+    # संपादन के लिए Microsoft Foundry मॉडलों को कॉल करें
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -849,7 +843,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # कार्य को पूरा के रूप में चिह्नित करें
+    # कार्य को पूर्ण के रूप में चिह्नित करें
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -886,10 +880,19 @@ if __name__ == '__main__':
 ### 8. डिप्लॉय और परीक्षण
 
 ```bash
-# प्रारंभ करें और तैनात करें
+# विकल्प A: टेम्पलेट-आधारित तैनाती
 azd init
 azd up
 
+# विकल्प B: एजेंट मैनिफेस्ट तैनाती (एक्सटेंशन आवश्यक है)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
+azd up
+```
+
+> देखें [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) सभी `azd ai` फ्लैग और विकल्पों के लिए।
+
+```bash
 # ऑर्केस्ट्रेटर का URL प्राप्त करें
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
@@ -910,13 +913,13 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
 }
 ```
 
-**टास्क प्रगति जांचें:**
+**कार्य प्रगति जाँचें:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ अपेक्षित आउटपुट (पूर्ण):**
+**✅ अपेक्षित आउटपुट (पूरा हुआ):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -948,11 +951,11 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ### कार्यान्वयन: मल्टी-सोर्स रिसर्च एग्रीगेटर
 
-आइए एक समानांतर सिस्टम बनाते हैं जो एक साथ कई स्रोतों से जानकारी एकत्र करता है।
+आइए एक समानांतर सिस्टम बनाएं जो एक ही समय में कई स्रोतों से जानकारी एकत्र करता है।
 
 ### समानांतर ऑर्केस्ट्रेटर
 
-**फ़ाइल: `src/orchestrator/parallel_workflow.py`**
+**File: `src/orchestrator/parallel_workflow.py`**
 
 ```python
 from flask import Flask, request, jsonify
@@ -1022,9 +1025,9 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### समेकन लॉजिक
+### एकत्रीकरण लॉजिक
 
-**फ़ाइल: `src/agents/aggregator/app.py`**
+**File: `src/agents/aggregator/app.py`**
 
 ```python
 from azure.servicebus import ServiceBusClient
@@ -1040,7 +1043,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 # प्रत्येक कार्य के लिए परिणाम ट्रैक करें
 task_results = defaultdict(list)
-expected_agents = 4  # वेब, अकादमिक, समाचार, सोशल
+expected_agents = 4  # वेब, शैक्षणिक, समाचार, सामाजिक
 
 def process_result(message_data):
     """Aggregate results from parallel agents"""
@@ -1048,7 +1051,7 @@ def process_result(message_data):
     agent_type = message_data['agent_type']
     result = message_data['result']
     
-    # परिणाम सहेजें
+    # परिणाम संग्रहीत करें
     task_results[task_id].append({
         'agent': agent_type,
         'data': result
@@ -1056,11 +1059,11 @@ def process_result(message_data):
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # जांचें कि क्या सभी एजेंट्स पूरा कर चुके हैं (फैन-इन)
+    # जांचें कि क्या सभी एजेंटों ने पूरा कर लिया है (फैन-इन)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
-        # परिणाम मिलाएँ
+        # परिणामों को संयोजित करें
         aggregated = {
             'query': message_data['query'],
             'sources': task_results[task_id],
@@ -1104,8 +1107,8 @@ if __name__ == '__main__':
 
 **समानांतर पैटर्न के लाभ:**
 - ⚡ **4x तेज़** (एजेंट एक साथ चलते हैं)
-- 🔄 **दोष सहिष्णु** (आंशिक परिणाम स्वीकार्य)
-- 📈 **स्केलेबल** (अधिक एजेंट आसानी से जोड़ें)
+- 🔄 **दोष-सहिष्णु** (आंशिक परिणाम स्वीकार्य)
+- 📈 **स्केलेबल** (आसानी से अधिक एजेंट जोड़ें)
 
 ---
 
@@ -1113,7 +1116,7 @@ if __name__ == '__main__':
 
 ### अभ्यास 1: टाइमआउट हैंडलिंग जोड़ें ⭐⭐ (मध्यम)
 
-**लक्ष्य**: टाइमआउट लॉजिक लागू करें ताकि एग्रीगेटर धीमे एजेंटों के लिए हमेशा प्रतीक्षा न करे।
+**लक्ष्य**: एक समेकक ऐसा टाइमआउट लॉजिक लागू करे ताकि धीमे एजेंटों के लिए एग्रीगेटर हमेशा प्रतीक्षा न करे।
 
 **कदम**:
 
@@ -1127,7 +1130,7 @@ task_timeouts = {}  # task_id -> expiration_time
 def process_result(message_data):
     task_id = message_data['task_id']
     
-    # पहले परिणाम पर टाइमआउट सेट करें
+    # पहले परिणाम पर समय-सीमा निर्धारित करें
     if task_id not in task_timeouts:
         task_timeouts[task_id] = datetime.utcnow() + timedelta(seconds=30)
     
@@ -1161,7 +1164,7 @@ def process_result(message_data):
 ```python
 # एक एजेंट में धीमी प्रोसेसिंग का अनुकरण करने के लिए देरी जोड़ें
 import time
-time.sleep(35)  # 30 सेकंड की समय-सीमा से अधिक
+time.sleep(35)  # 30-सेकंड की समयसीमा से अधिक
 ```
 
 3. **डिप्लॉय और सत्यापित करें:**
@@ -1179,21 +1182,21 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ सफलता मानदंड:**
-- ✅ टास्क 30 सेकंड के बाद पूरा हो जाता है भले ही एजेंट अधूरे हों
-- ✅ प्रतिक्रिया आंशिक परिणाम दर्शाती है (`"timed_out": true`)
+- ✅ एजेंट अधूरा होने पर भी 30 सेकंड के बाद कार्य पूरा हो जाता है
+- ✅ रिस्पॉन्स आंशिक परिणाम दर्शाता है (`"timed_out": true`)
 - ✅ उपलब्ध परिणाम लौटाए जाते हैं (4 में से 3 एजेंट)
 
 **समय**: 20-25 मिनट
 
 ---
 
-### अभ्यास 2: रीट्राय लॉजिक लागू करें ⭐⭐⭐ (उन्नत)
+### अभ्यास 2: पुन: प्रयास लॉजिक लागू करें ⭐⭐⭐ (उन्नत)
 
-**लक्ष्य**: असफल एजेंट टास्क को स्वचालित रूप से फिर से प्रयास करें उससे पहले कि छोड़ दिया जाए।
+**लक्ष्य**: विफल एजेंट कार्यों को स्वचालित रूप से पुन: प्रयास करें इससे पहले कि छोड़ दिया जाए।
 
 **कदम**:
 
-1. **ऑर्केस्ट्रेटर में रीट्राय ट्रैकिंग जोड़ें:**
+1. **ऑर्केस्ट्रेटर में पुन: प्रयास ट्रैकिंग जोड़ें:**
 
 ```python
 from dataclasses import dataclass
@@ -1204,7 +1207,7 @@ class RetryConfig:
     max_retries: int = 3
     backoff_seconds: int = 5
 
-retry_counts: Dict[str, int] = {}  # संदेश_आईडी -> पुनःप्रयास_गणना
+retry_counts: Dict[str, int] = {}  # message_id से retry_count
 
 def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
     """Send message with retry metadata"""
@@ -1224,7 +1227,7 @@ def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConf
         sender.send_messages(message)
 ```
 
-2. **एजेंट्स में रीट्राय हैंडलर जोड़ें:**
+2. **एजेंट्स में पुन: प्रयास हैंडलर जोड़ें:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1244,18 +1247,18 @@ def process_with_retry(message, receiver, process_func):
         max_retries = message_data.get('max_retries', 3)
         
         if retry_count < max_retries:
-            # पुनः प्रयास: परित्याग करें और बढ़ी हुई गिनती के साथ पुनः कतार में डालें
+            # पुनः प्रयास: परित्याग करें और बढ़ी हुई गणना के साथ फिर से कतार में डालें
             print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
             
             message_data['retry_count'] = retry_count + 1
             
-            # उसी कतार में देरी के साथ वापस भेजें
+            # देरी के साथ उसी कतार में वापस भेजें
             time.sleep(5 * (retry_count + 1))  # घातीय बैकऑफ
             send_with_retry(queue_name, message_data, RetryConfig())
             
-            receiver.complete_message(message)  # मूल हटाएँ
+            receiver.complete_message(message)  # मूल को हटाएँ
         else:
-            # अधिकतम पुनःप्रयास पार हो गया - डेड लेटर कतार में स्थानांतरित करें
+            # अधिकतम पुनःप्रयास पार हो गए - डेड लेटर कतार में स्थानांतरित करें
             print(f"❌ Max retries exceeded for message {message_id}")
             receiver.dead_letter_message(
                 message,
@@ -1264,7 +1267,7 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **डेड लेटर क्यू की निगरानी करें:**
+3. **डेड लेटर कतार की निगरानी करें:**
 
 ```python
 def monitor_dead_letters():
@@ -1283,10 +1286,10 @@ def monitor_dead_letters():
 ```
 
 **✅ सफलता मानदंड:**
-- ✅ असफल टास्क स्वचालित रूप से फिर से प्रयास होते हैं (अधिकतम 3 बार)
-- ✅ रीट्राय के बीच एक्सपोनेंशियल बैकऑफ (5s, 10s, 15s)
-- ✅ अधिकतम रीट्राय के बाद संदेश डेड लेटर क्यू में जाते हैं
-- ✅ डेड लेटर क्यू की निगरानी और रिप्ले संभव हो
+- ✅ विफल कार्य स्वचालित रूप से पुन: प्रयास होते हैं (अधिकतम 3 बार)
+- ✅ पुन: प्रयासों के बीच एक्सपोनेंशियल बैकऑफ (5s, 10s, 15s)
+- ✅ अधिकतम पुन: प्रयासों के बाद संदेश डेड लेटर कतार में जाते हैं
+- ✅ डेड लेटर कतार की निगरानी और रीप्ले की जा सकती है
 
 **समय**: 30-40 मिनट
 
@@ -1294,11 +1297,11 @@ def monitor_dead_letters():
 
 ### अभ्यास 3: सर्किट ब्रेकर लागू करें ⭐⭐⭐ (उन्नत)
 
-**लक्ष्य**: फैलते हुए विफलताओं को रोकने के लिए विफल एजेंट्स के अनुरोध रोकें।
+**लक्ष्य**: विफलता के कैस्केडिंग को रोकने के लिए विफल एजेंटों को अनुरोध रोककर बचाएं।
 
 **कदम**:
 
-1. **सर्किट ब्रेकर क्लास बनाएं:**
+1. **सर्किट ब्रेकर क्लास बनाएँ:**
 
 ```python
 from enum import Enum
@@ -1306,8 +1309,8 @@ from datetime import datetime, timedelta
 
 class CircuitState(Enum):
     CLOSED = "closed"      # सामान्य संचालन
-    OPEN = "open"          # विफल, अनुरोध अस्वीकार करें
-    HALF_OPEN = "half_open"  # पुनर्प्राप्ति की जांच कर रहा है
+    OPEN = "open"          # असफल हो रहा है, अनुरोध अस्वीकार करें
+    HALF_OPEN = "half_open"  # जाँचना कि क्या ठीक हो गया है
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1320,7 +1323,7 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # जांचें कि टाइमआउट समाप्त हुआ है या नहीं
+            # जाँचें कि टाइमआउट समाप्त हुआ है या नहीं
             if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
@@ -1374,7 +1377,7 @@ def send_to_agent(agent_type, message_data):
 3. **सर्किट ब्रेकर का परीक्षण करें:**
 
 ```bash
-# बार-बार की विफलताओं का अनुकरण करें (एक एजेंट को बंद करें)
+# बार-बार असफलताओं का अनुकरण करें (एक एजेंट को रोकें)
 az containerapp stop --name web-research-agent --resource-group rg-agents
 
 # कई अनुरोध भेजें
@@ -1385,16 +1388,16 @@ for i in {1..10}; do
   sleep 2
 done
 
-# लॉग जांचें - 5 विफलताओं के बाद सर्किट खुला दिखना चाहिए
+# लॉग्स जांचें - 5 असफलताओं के बाद सर्किट खुला दिखना चाहिए
 # कंटेनर ऐप लॉग्स के लिए Azure CLI का उपयोग करें:
 az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
 ```
 
 **✅ सफलता मानदंड:**
-- ✅ 5 विफलताओं के बाद सर्किट ओपन हो जाता है (अनुरोध अस्वीकार करता है)
-- ✅ 60 सेकंड के बाद सर्किट हाफ-ओपन होता है (रिकवरी का परीक्षण)
-- ✅ अन्य एजेंट सामान्य रूप से काम करना जारी रखते हैं
-- ✅ एजेंट के रिकवर होने पर सर्किट ऑटोमैटिक रूप से बंद हो जाता है
+- ✅ 5 विफलताओं के बाद सर्किट खुल जाता है (अनुरोधों को अस्वीकार करता है)
+- ✅ 60 सेकंड के बाद सर्किट हाफ-ओपन होता है (रिकवरी परीक्षण)
+- ✅ अन्य एजेंट सामान्य रूप से काम करते रहते हैं
+- ✅ एजेंट के ठीक होने पर सर्किट स्वचालित रूप से बंद हो जाता है
 
 **समय**: 40-50 मिनट
 
@@ -1404,7 +1407,7 @@ az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 5
 
 ### Application Insights के साथ वितरित ट्रेसिंग
 
-**फ़ाइल: `src/shared/tracing.py`**
+**File: `src/shared/tracing.py`**
 
 ```python
 from opencensus.ext.azure.log_exporter import AzureLogHandler
@@ -1450,7 +1453,7 @@ def trace_agent_call(agent_name, task_id, operation):
 
 ### Application Insights क्वेरीज़
 
-मल्टी-एजेंट वर्कफ़्लो को ट्रैक करें:
+**मल्टी-एजेंट वर्कफ़्लो ट्रैक करें:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1493,15 +1496,15 @@ exceptions
 
 ### मल्टी-एजेंट सिस्टम लागत (मासिक अनुमान)
 
-| घटक | कॉन्फ़िगरेशन | लागत |
+| घटक | विन्यास | लागत |
 |-----------|--------------|------|
-| **ऑर्केस्ट्रेटर** | 1 Container App (1 vCPU, 2GB) | $30-50 |
-| **4 एजेंट** | 4 Container Apps (0.5 vCPU, 1GB each) | $60-120 |
-| **Service Bus** | मानक स्तर, 10M संदेश | $10-20 |
-| **Cosmos DB** | सर्वरलेस, 5GB स्टोरेज, 1M RUs | $25-50 |
-| **Blob Storage** | 10GB स्टोरेज, 100K ऑपरेशंस | $5-10 |
-| **Application Insights** | 5GB ingest | $10-15 |
-| **Azure OpenAI** | GPT-4, 10M tokens | $100-300 |
+| **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
+| **4 Agents** | 4 Container Apps (0.5 vCPU, 1GB each) | $60-120 |
+| **Service Bus** | Standard tier, 10M messages | $10-20 |
+| **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
+| **Blob Storage** | 10GB storage, 100K operations | $5-10 |
+| **Application Insights** | 5GB ingestion | $10-15 |
+| **Microsoft Foundry Models** | gpt-4.1, 10M tokens | $100-300 |
 | **कुल** | | **$240-565/month** |
 
 ### लागत अनुकूलन रणनीतियाँ
@@ -1515,7 +1518,7 @@ exceptions
    }
    ```
 
-2. **एजेंट्स को जब आइडल हों तब शून्य तक स्केल करें:**
+2. **idle होने पर एजेंट्स को शून्य तक स्केल करें:**
    ```bicep
    scale: {
      minReplicas: 0  // Scale to zero when no messages
@@ -1529,7 +1532,7 @@ exceptions
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **अक्सर उपयोग किए जाने वाले परिणामों को कैश करें:**
+4. **बार-बार उपयोग होने वाले परिणामों को कैश करें:**
    ```python
    # Azure Cache for Redis का उपयोग करें
    if cache.exists(query_hash):
@@ -1538,42 +1541,42 @@ exceptions
 
 ---
 
-## सर्वोत्तम अभ्यास
+## सर्वोत्तम प्रथाएँ
 
 ### ✅ करें:
 
-1. **इडेम्पोटेंट ऑपरेशन्स का उपयोग करें**
+1. **Idempotent ऑपरेशनों का उपयोग करें**
    ```python
-   # एजेंट एक ही संदेश को कई बार सुरक्षित रूप से संसाधित कर सकता है
+   # एजेंट एक ही संदेश को सुरक्षित रूप से कई बार संसाधित कर सकता है
    def process_task(task_id):
        if state_manager.task_exists(task_id):
            print(f"Task {task_id} already processed, skipping")
            return
-       # कार्य संसाधित किया जा रहा है...
+       # कार्य संसाधित करें...
    ```
 
-2. **विस्तृत लॉगिंग लागू करें**
+2. **व्यापक लॉगिंग लागू करें**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **कोरिलेशन IDs का उपयोग करें**
+3. **Correlation IDs का उपयोग करें**
    ```python
-   # task_id को पूरे वर्कफ़्लो में पास करें
+   # पूरे वर्कफ़्लो में task_id पास करें
    message_data = {
-       'task_id': task_id,  # सह-संबंध आईडी
+       'task_id': task_id,  # सहसंबंध आईडी
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
 
-4. **मैसेज TTL (time-to-live) सेट करें**
+4. **संदेश TTL (time-to-live) सेट करें**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **डेड लेटर क्यू की निगरानी करें**
+5. **डेड लेटर कतारों की निगरानी करें**
    ```python
    # असफल संदेशों की नियमित निगरानी
    monitor_dead_letters()
@@ -1581,30 +1584,30 @@ exceptions
 
 ### ❌ न करें:
 
-1. **परिपत्र निर्भरताएँ न बनाएं**
+1. **सर्कुलर निर्भरताएँ न बनाएं**
    ```python
-   # ❌ खराब: Agent A → Agent B → Agent A (अनंत लूप)
-   # ✅ अच्छा: स्पष्ट निर्देशित चक्रहीन ग्राफ (DAG) परिभाषित करें
+   # ❌ खराब: एजेंट A → एजेंट B → एजेंट A (अनंत लूप)
+   # ✅ अच्छा: एक स्पष्ट निर्देशित चक्रीय-रहित ग्राफ (DAG) परिभाषित करें
    ```
 
 2. **एजेंट थ्रेड्स को ब्लॉक न करें**
    ```python
-   # ❌ खराब: समकालिक प्रतीक्षा
+   # ❌ खराब: सिंक्रोनस प्रतीक्षा
    while not task_complete:
        time.sleep(1)
    
-   # ✅ अच्छा: संदेश कतार कॉलबैक का उपयोग करें
+   # ✅ अच्छा: संदेश कतार कॉलबैक्स का उपयोग करें
    ```
 
-3. **आंशिक असफलताओं की अनदेखी न करें**
+3. **आंशिक विफलताओं की अनदेखी न करें**
    ```python
-   # ❌ खराब: यदि किसी एक एजेंट के विफल होने पर पूरे वर्कफ़्लो को विफल कर दें
-   # ✅ अच्छा: त्रुटि संकेतकों के साथ आंशिक परिणाम लौटाएँ
+   # ❌ खराब: अगर एक एजेंट विफल हो जाए तो पूरे वर्कफ़्लो को विफल कर दें
+   # ✅ अच्छा: त्रुटि संकेतों के साथ आंशिक परिणाम लौटाएँ
    ```
 
-4. **अनंत पुनःप्रयास का उपयोग न करें**
+4. **अनंत पुन:प्रयास का उपयोग न करें**
    ```python
-   # ❌ खराब: हमेशा पुनः प्रयास करें
+   # ❌ खराब: अनंत तक पुनः प्रयास
    # ✅ अच्छा: max_retries = 3, फिर डेड-लेटर
    ```
 
@@ -1616,8 +1619,8 @@ exceptions
 
 **लक्षण:**
 - संदेश कतार में जमा होते हैं
-- एजेंट प्रोसेस नहीं कर रहे हैं
-- टास्क स्थिति "pending" पर अटकी हुई
+- एजेंट संसाधित नहीं कर रहे हैं
+- कार्य की स्थिति "pending" पर अटकी हुई है
 
 **निदान:**
 ```bash
@@ -1633,7 +1636,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 **समाधान:**
 
-1. **एजेंट रेप्लिकास बढ़ाएँ:**
+1. **एजेंट रेप्लिका बढ़ाएँ:**
    ```bash
    az containerapp update \
      --name research-agent \
@@ -1641,7 +1644,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
      --max-replicas 10
    ```
 
-2. **डेड लेटर कतार की जाँच करें:**
+2. **Dead letter queue की जाँच करें:**
    ```bash
    az servicebus queue show \
      --namespace-name mybus \
@@ -1651,10 +1654,10 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### समस्या: टास्क टाइमआउट/कभी पूरा नहीं होता
+### समस्या: कार्य का टाइमआउट/कभी पूरा नहीं होता
 
 **लक्षण:**
-- टास्क स्थिति "in_progress" पर बनी रहती है
+- कार्य की स्थिति "in_progress" बनी रहती है
 - कुछ एजेंट पूरा करते हैं, अन्य नहीं
 - कोई त्रुटि संदेश नहीं
 
@@ -1664,7 +1667,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 # Application Insights की जांच करें
-# क्वेरी चलाएं: traces | where customDimensions.task_id == "..."
+# क्वेरी चलाएँ: traces | where customDimensions.task_id == "..."
 ```
 
 **समाधान:**
@@ -1673,10 +1676,10 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 2. **Azure Monitor का उपयोग करके एजेंट विफलताओं की जाँच करें:**
    ```bash
-   # azd monitor के माध्यम से लॉग देखें
+   # azd monitor के माध्यम से लॉग्स देखें
    azd monitor --logs
    
-   # या Azure CLI का उपयोग करके विशिष्ट कंटेनर ऐप के लॉग देखें
+   # या विशिष्ट कंटेनर ऐप लॉग्स की जाँच करने के लिए Azure CLI का उपयोग करें
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
@@ -1691,7 +1694,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ## और जानें
 
-### आधिकारिक दस्तावेज़ीकरण
+### आधिकारिक दस्तावेज़
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
@@ -1703,36 +1706,36 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - 🏠 [कोर्स होम](../../README.md)
 
 ### संबंधित उदाहरण
-- [Microservices Example](../../../../examples/microservices) - सेवा संचार पैटर्न
-- [Azure OpenAI Example](../../../../examples/azure-openai-chat) - AI एकीकरण
+- [माइक्रोसर्विस उदाहरण](../../../../examples/microservices) - सेवा संचार पैटर्न
+- [Microsoft Foundry मॉडल उदाहरण](../../../../examples/azure-openai-chat) - एआई एकीकरण
 
 ---
 
 ## सारांश
 
 **आपने सीखा:**
-- ✅ पाँच समन्वय पैटर्न (क्रमिक, समानांतर, पदानुक्रमिक, घटना-चालित, सर्वसम्मति)
+- ✅ पांच समन्वय पैटर्न (क्रमिक, समांतर, पदानुक्रमिक, घटना-चालित, सहमति)
 - ✅ Azure पर मल्टी-एजेंट आर्किटेक्चर (Service Bus, Cosmos DB, Container Apps)
 - ✅ वितरित एजेंटों में स्थिति प्रबंधन
-- ✅ टाइमआउट हैंडलिंग, पुनः प्रयास, और सर्किट ब्रेकर
-- ✅ वितरित प्रणालियों की निगरानी और डीबगिंग
+- ✅ टाइमआउट हैंडलिंग, पुन:प्रयास, और सर्किट ब्रेकर्स
+- ✅ वितरित प्रणालियों की निगरानी और डिबगिंग
 - ✅ लागत अनुकूलन रणनीतियाँ
 
 **मुख्य निष्कर्ष:**
-1. **सही पैटर्न चुनें** - ऑर्डर किए गए वर्कफ़्लोज़ के लिए क्रमिक, गति के लिए समानांतर, लचीलापन के लिए घटना-चालित
-2. **स्थिति को सावधानी से प्रबंधित करें** - साझा स्थिति के लिए Cosmos DB या समान का उपयोग करें
-3. **विफलताओं को सुशीलता से संभालें** - टाइमआउट, पुनः प्रयास, सर्किट ब्रेकर, डेड लेटर कतारें
-4. **सब कुछ मॉनिटर करें** - डीबगिंग के लिए वितरित ट्रेसिंग आवश्यक है
-5. **लागत अनुकूलित करें** - शून्य तक स्केल करें, सर्वरलेस का उपयोग करें, कैशिंग लागू करें
+1. **सही पैटर्न चुनें** - क्रमबद्ध वर्कफ़्लो के लिए क्रमिक, गति के लिए समांतर, लचीलापन के लिए घटना-चालित
+2. **स्थिति का सावधानीपूर्वक प्रबंधन करें** - साझा स्थिति के लिए Cosmos DB या समान उपयोग करें
+3. **विफलताओं को सहजता से संभालें** - टाइमआउट, पुन:प्रयास, सर्किट ब्रेकर्स, dead-letter कतारें
+4. **सब कुछ मॉनिटर करें** - डिबगिंग के लिए वितरित ट्रेसिंग आवश्यक है
+5. **लागत अनुकूलित करें** - स्केल टू ज़ीरो, सर्वरलेस का उपयोग करें, कैशिंग लागू करें
 
 **अगले कदम:**
-1. व्यावहारिक अभ्यास पूर्ण करें
-2. अपने उपयोग के मामले के लिए एक मल्टी-एजेंट सिस्टम बनाएँ
+1. व्यावहारिक अभ्यास पूरा करें
+2. अपने उपयोग के मामले के लिए एक मल्टी-एजेंट सिस्टम बनाएं
 3. प्रदर्शन और लागत को अनुकूलित करने के लिए [SKU चयन](sku-selection.md) का अध्ययन करें
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-अस्वीकरण:
-यह दस्तावेज़ AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) का उपयोग करके अनुवादित किया गया है। हम सटीकता के लिए प्रयासरत हैं, लेकिन कृपया ध्यान रखें कि स्वचालित अनुवादों में त्रुटियाँ या अशुद्धियाँ हो सकती हैं। मूल दस्तावेज़ अपनी मूल भाषा में अधिकारिक स्रोत माना जाना चाहिए। महत्वपूर्ण जानकारी के लिए, पेशेवर मानव अनुवाद की सलाह दी जाती है। हम इस अनुवाद के उपयोग से उत्पन्न किसी भी गलतफहमी या गलत व्याख्या के लिए उत्तरदायी नहीं हैं।
+**अस्वीकरण**:
+यह दस्तावेज़ AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) का उपयोग कर अनूदित किया गया है। जबकि हम सटीकता के लिए प्रयास करते हैं, कृपया ध्यान दें कि स्वचालित अनुवादों में त्रुटियाँ या अशुद्धियाँ हो सकती हैं। मूल दस्तावेज़ को उसकी मूल भाषा में अधिकृत स्रोत माना जाना चाहिए। महत्वपूर्ण जानकारी के लिए पेशेवर मानव अनुवाद की सलाह दी जाती है। इस अनुवाद के उपयोग से उत्पन्न किसी भी गलतफहमी या गलत व्याख्या के लिए हम उत्तरदायी नहीं हैं।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,6 +1,6 @@
-# Container App Deployment Examples wit AZD
+# Examples wey dey deploy Container Apps wit AZD
 
-Dis directory get complete examples wey show how to deploy containerized applications to Azure Container Apps using Azure Developer CLI (AZD). Dem examples dey show real-life patterns, best practices, and configurations wey ready for production.
+This directory get complete examples wey show how to deploy containerized applications go Azure Container Apps using Azure Developer CLI (AZD). Di examples dey demonstrate real-world patterns, beta practices, and production-ready configurations.
 
 ## 📚 Table of Contents
 
@@ -13,13 +13,13 @@ Dis directory get complete examples wey show how to deploy containerized applica
 
 ## Overview
 
-Azure Container Apps na fully managed serverless container platform wey allow you run microservices and containerized applications without to manage infrastructure. When you combine am with AZD, you go get:
+Azure Container Apps na fully managed serverless container platform wey allow you run microservices and containerized applications without the need to manage infrastructure. When you combine am with AZD, you go get:
 
-- **Simplified Deployment**: One command dey deploy containers plus the infrastructure
-- **Automatic Scaling**: E fit scale down to zero and scale out based on HTTP traffic or events
+- **Simplified Deployment**: One command dey deploy containers with infrastructure
+- **Automatic Scaling**: E fit scale to zero and scale out based on HTTP traffic or events
 - **Integrated Networking**: Built-in service discovery and traffic splitting
 - **Managed Identity**: Secure authentication to Azure resources
-- **Cost Optimization**: You go pay only for the resources wey you use
+- **Cost Optimization**: Pay only for resources wey you use
 
 ## Prerequisites
 
@@ -32,24 +32,24 @@ azd version
 # Make sure say Azure CLI don install
 az version
 
-# Make sure say Docker don install (to build custom image dem)
+# Make sure say Docker don install (to build custom images)
 docker --version
 
-# Make sure say you don login for Azure
+# Make sure say you don log in to Azure
 azd auth login
 az login
 ```
 
-**Azure resources wey you need:**
+**Required Azure Resources:**
 - Active Azure subscription
-- Permission to create resource groups
-- Access to Container Apps environment
+- Resource group creation permissions
+- Container Apps environment access
 
 ## Quick Start Examples
 
 ### 1. Simple Web API (Python Flask)
 
-Deploy one basic REST API to Azure Container Apps.
+Deploy basic REST API with Azure Container Apps.
 
 **Example: Python Flask API**
 
@@ -87,10 +87,10 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 
 ### 2. Node.js Express API
 
-Deploy Node.js backend wey get MongoDB integration.
+Deploy Node.js backend with MongoDB integration.
 
 ```bash
-# Set up di Node.js API template
+# Start Node.js API template
 azd init --template todo-nodejs-mongo
 
 # Set di environment variables
@@ -100,7 +100,7 @@ azd env set COLLECTION_NAME todos
 # Deploy am
 azd up
 
-# See di logs with Azure Monitor
+# See di logs through Azure Monitor
 azd monitor --logs
 ```
 
@@ -149,7 +149,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 3. Static Frontend + API Backend
 
-Deploy one full-stack app wey get React frontend and API backend.
+Deploy full-stack application with React frontend and API backend.
 
 ```bash
 # Set up di full-stack template
@@ -158,7 +158,7 @@ azd init --template todo-csharp-sql-swa-func
 # Check di configuration
 cat azure.yaml
 
-# Deploy both services dem
+# Deploy di two services
 azd up
 
 # Open di application
@@ -169,7 +169,7 @@ azd show --output json | jq -r '.services.web.endpoint' | xargs start
 
 ### Example 1: Microservices Architecture
 
-**Scenario**: E-commerce application wey get multiple microservices
+**Scenario**: E-commerce application wey get many microservices
 
 **Directory Structure:**
 ```
@@ -213,13 +213,13 @@ services:
 
 **Deployment:**
 ```bash
-# Start di project
+# Set up di project
 azd init
 
-# Set di production environment
+# Set up di production environment
 azd env new production
 
-# Set up di production settings
+# Configure di production settings
 azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
@@ -233,7 +233,7 @@ azd monitor --overview
 
 ### Example 2: AI-Powered Container App
 
-**Scenario**: AI chat application wey integrate with Azure OpenAI
+**Scenario**: AI chat application wey integrate Microsoft Foundry Models
 
 **File: src/ai-chat/app.py**
 ```python
@@ -253,12 +253,12 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # Comot OpenAI key from Key Vault
+    # Comot OpenAI key for Key Vault
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[{"role": "user", "content": user_message}]
     )
     
@@ -322,13 +322,13 @@ module aiChatApp './app/container-app.bicep' = {
 
 **Deployment Commands:**
 ```bash
-# Prepare di environment
+# Make di environment ready
 azd init --template ai-chat-app
 azd env new dev
 
-# Arrange OpenAI
+# Arrange di OpenAI settings
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
-azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
+azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4.1"
 
 # Put am for production
 azd up
@@ -341,7 +341,7 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
 
 ### Example 3: Background Worker with Queue Processing
 
-**Scenario**: Order processing system wey use message queue
+**Scenario**: Order processing system wey dey use message queue
 
 **Directory Structure:**
 ```
@@ -411,7 +411,7 @@ azd init
 # Deploy am wit queue configuration
 azd up
 
-# Change how many workers dem dey depending on how long di queue be
+# Change worker dem according to how long di queue be
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -425,19 +425,19 @@ az containerapp update \
 ### Pattern 1: Blue-Green Deployment
 
 ```bash
-# Make di new revision wey no get traffic
+# Make new revision wey no get traffic
 azd deploy api --revision-suffix blue --no-traffic
 
 # Test di new revision
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Split traffic (20% go blue, 80% go di current)
+# Split traffic (20% go blue, 80% go current)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# Complete switch go blue
+# Move all traffic go blue
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -463,7 +463,7 @@ az containerapp ingress traffic set \
 #!/bin/bash
 # deploy-canary.sh
 
-# Deploy di new revision wit 10% traffic
+# Deploy di new revision make e handle 10% traffic
 azd deploy api --revision-mode multiple
 
 # Monitor di metrics
@@ -529,10 +529,10 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 
 **Deployment:**
 ```bash
-# Deploy go all regions
+# Deploy am for all regions
 azd up
 
-# Check di endpoints
+# Confirm endpoints dem
 azd show --output json | jq '.services.api.endpoints'
 ```
 
@@ -595,11 +595,11 @@ def create_order():
 ### 1. Resource Organization
 
 ```bash
-# Make una dey use same naming style everywhere
+# Make una dey use one kain naming style
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# Tag resources make we fit track cost
+# Tag resources make una fit track di cost
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
@@ -668,9 +668,9 @@ services:
 # Make Application Insights dey
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
-# See logs as dem dey happen
+# See logs as e dey happen
 azd monitor --logs
-# Abi use Azure CLI for Container Apps:
+# Or try use Azure CLI for Container Apps:
 az containerapp logs show --name api --resource-group rg-myapp --follow
 
 # Keep eye on metrics
@@ -688,16 +688,16 @@ az monitor metrics alert create \
 ### 5. Cost Optimization
 
 ```bash
-# Make una scale am down to zero wen una no dey use am
+# Make am scale reach zero when e no dey used
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# Make una use spot instances for dev environments
+# Use spot instances for dev environment dem
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# Make una set up budget alerts
+# Set up budget alert dem
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
@@ -740,29 +740,29 @@ jobs:
 ## Common Commands Reference
 
 ```bash
-# Make new container app project
+# Set up new container app project
 azd init --template <template-name>
 
 # Deploy di infrastructure and di application
 azd up
 
-# Deploy only di application code (no deploy infrastructure)
+# Deploy only di app code (no deploy di infrastructure)
 azd deploy
 
-# Set up only di infrastructure
+# Provision only di infrastructure
 azd provision
 
-# View di resources wey don deploy
+# See resources wey dem don deploy
 azd show
 
-# Stream log dem wit azd monitor or Azure CLI
+# Make logs dey stream using azd monitor or Azure CLI
 azd monitor --logs
 # az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
 # Monitor di application
 azd monitor --overview
 
-# Clean up di resources
+# Clean up resource dem
 azd down --force --purge
 ```
 
@@ -780,7 +780,7 @@ az containerapp revision show \
   --resource-group rg-myapp \
   --revision latest
 
-# Test am for local machine
+# Test am locally
 docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
@@ -804,12 +804,12 @@ az containerapp ingress update \
 ### Issue: Performance problems
 
 ```bash
-# Check how resources dey used
+# Check how resource dem dey used
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Make resources plenty
+# Add more resource dem
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -827,21 +827,21 @@ az containerapp update \
 
 ## Contributing
 
-If you wan contribute new container app examples:
+To contribute new container app examples:
 
-1. Create a new subdirectory with your example
+1. Create new subdirectory with your example
 2. Include complete `azure.yaml`, `infra/`, and `src/` files
 3. Add comprehensive README with deployment instructions
 4. Test deployment with `azd up`
-5. Submit a pull request
+5. Submit pull request
 
 ---
 
-**You need help?** Join the [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) community for support and questions.
+**Need Help?** Join the [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) community for support and questions.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Abeg note:
-Dis document dem translate wit AI translation service [Co-op Translator] (https://github.com/Azure/co-op-translator). Even though we dey try make am correct, make you sabi sey automated translations fit get mistakes or no too accurate. Di original document for e own language suppose be di main and correct source. If na important information, e better make professional human translator do am. We no dey responsible for any misunderstanding or wrong interpretation wey fit happen from using this translation.
+Disclaimer:
+Dis document na AI wey translate am (Co-op Translator: https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, abeg note say automatic translation fit get errors or mistakes. The original document for e original language na di authority/di main source. For important information, better make person we sabi translate do am. We no go responsible for any misunderstanding or wrong interpretation wey fit happen from this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

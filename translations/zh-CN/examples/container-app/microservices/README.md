@@ -1,68 +1,43 @@
 # Microservices Architecture - Container App Example
 
-⏱️ **Estimated Time**: 25-35 minutes | 💰 **Estimated Cost**: ~$50-100/month | ⭐ **Complexity**: Advanced
+⏱️ <strong>预计时间</strong>：25-35 分钟 | 💰 <strong>估计费用</strong>：~$50-100/月 | ⭐ <strong>复杂度</strong>：高级
 
-一个部署到 Azure Container Apps 并使用 AZD CLI 的**简化但可运行**的微服务架构示例。此示例展示了服务间通信、容器编排和监控，采用一个实用的两服务设置。
+一个 <strong>简化但可运行</strong> 的微服务架构示例，使用 AZD CLI 部署到 Azure Container Apps。此示例演示服务间通信、容器编排和监控，采用一个实用的 2 服务设置。
 
-> **📚 学习方法**：本示例从一个最小的两服务架构（API 网关 + 后端服务）开始，你可以实际部署并学习。掌握此基础后，我们提供扩展到完整微服务生态系统的指导。
+> **📚 学习方法**：此示例从一个最小的 2 服务架构（API 网关 + 后端服务）开始，您可以实际部署并学习。掌握基础后，我们提供扩展到完整微服务生态的指南。
 
-## What You'll Learn
+## 你将学到什么
 
-通过完成本示例，你将：
+完成此示例后，你将能够：
 - 将多个容器部署到 Azure Container Apps
-- 使用内部网络实现服务间通信
-- 配置基于环境的扩展和健康检查
+- 使用内部网络实现服务到服务的通信
+- 配置基于环境的自动伸缩和健康检查
 - 使用 Application Insights 监控分布式应用
 - 理解微服务部署模式和最佳实践
-- 学习从简单到复杂的渐进式扩展
+- 学会从简单到复杂的渐进扩展方法
 
-## Architecture
+## 架构
 
-### Phase 1: What We're Building (Included in This Example)
+### 阶段 1：我们要构建的内容（包含在此示例中）
 
+```mermaid
+graph TD
+    Internet[互联网] -- HTTPS --> Gateway[API 网关<br/>Node.js 容器<br/>路由请求<br/>健康检查<br/>请求日志]
+    Gateway -- HTTP internal --> Product[产品服务<br/>Python 容器<br/>产品增删改查<br/>内存数据存储<br/>REST API]
+    Product --> Insights[应用程序洞察<br/>监控与日志]
 ```
-                    ┌─────────────────────────────┐
-                    │         Internet            │
-                    └──────────────┬──────────────┘
-                                   │
-                                   │ HTTPS
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │      API Gateway            │
-                    │   (Node.js Container)       │
-                    │   - Routes requests         │
-                    │   - Health checks           │
-                    │   - Request logging         │
-                    └──────────────┬──────────────┘
-                                   │
-                                   │ HTTP (internal)
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │    Product Service          │
-                    │   (Python Container)        │
-                    │   - Product CRUD            │
-                    │   - In-memory data store    │
-                    │   - REST API                │
-                    └──────────────┬──────────────┘
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │   Application Insights      │
-                    │   (Monitoring & Logs)       │
-                    └─────────────────────────────┘
-```
-
-**Why Start Simple?**
+**为什么从简单开始？**
 - ✅ 快速部署和理解（25-35 分钟）
-- ✅ 在没有复杂性的情况下学习核心微服务模式
-- ✅ 可修改和实验的工作代码
-- ✅ 学习成本更低（大约 $50-100/月 对比 $300-1400/月）
+- ✅ 在不增加复杂性的情况下学习核心微服务模式
+- ✅ 可修改和实验的可运行代码
+- ✅ 学习成本较低（约 $50-100/月 对比 $300-1400/月）
 - ✅ 在添加数据库和消息队列之前建立信心
 
-**类比**：把这比作学开车。你先从空旷的停车场（2 个服务）开始，掌握基础，然后再进阶到城市道路（5 个以上服务并含数据库）。
+<strong>类比</strong>：把这看作学开车。你从一个空的停车场（2 个服务）开始，掌握基础，然后再进阶到城市交通（5 个以上服务并带数据库）。
 
-### Phase 2: Future Expansion (Reference Architecture)
+### 阶段 2：未来扩展（参考架构）
 
-一旦掌握了两服务架构，你可以扩展到：
+一旦你掌握了 2 服务架构，就可以扩展为：
 
 ```
 Full Architecture (Not Included - For Reference)
@@ -77,38 +52,38 @@ Full Architecture (Not Included - For Reference)
 └── Azure Storage (🔜 For file storage)
 ```
 
-请参阅结尾的“Expansion Guide”部分获取逐步说明。
+查看文档末尾的“Expansion Guide”部分，获取逐步说明。
 
-## Features Included
+## 包含的功能
 
-✅ **服务发现**：容器间基于 DNS 的自动发现  
-✅ **负载均衡**：跨副本的内置负载均衡  
-✅ **自动扩缩**：基于 HTTP 请求的服务独立扩缩  
-✅ **健康监控**：为两个服务提供存活和就绪探针  
-✅ **分布式日志**：使用 Application Insights 的集中式日志  
-✅ **内部网络**：安全的服务间通信  
-✅ **容器编排**：自动部署和扩缩  
-✅ **零停机更新**：带修订管理的滚动更新  
+✅ <strong>服务发现</strong>：容器之间基于 DNS 的自动发现  
+✅ <strong>负载均衡</strong>：跨副本的内置负载均衡  
+✅ <strong>自动伸缩</strong>：基于 HTTP 请求对每个服务独立伸缩  
+✅ <strong>健康监控</strong>：两个服务的存活和就绪探针  
+✅ <strong>分布式日志</strong>：使用 Application Insights 的集中式日志记录  
+✅ <strong>内部网络</strong>：安全的服务间通信  
+✅ <strong>容器编排</strong>：自动部署和伸缩  
+✅ <strong>零停机更新</strong>：具有修订管理的滚动更新  
 
-## Prerequisites
+## 前置条件
 
-### Required Tools
+### 必需工具
 
-在开始之前，请确认已安装这些工具：
+开始之前，确认你已安装以下工具：
 
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (版本 1.0.0 或更高)
+1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)**（版本 1.0.0 或更高）
    ```bash
    azd version
    # 预期输出：azd 版本 1.0.0 或更高
    ```
 
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (版本 2.50.0 或更高)
+2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)**（版本 2.50.0 或更高）
    ```bash
    az --version
    # 预期输出：azure-cli 2.50.0 或更高版本
    ```
 
-3. **[Docker](https://www.docker.com/get-started)** (用于本地开发/测试 - 可选)
+3. **[Docker](https://www.docker.com/get-started)**（用于本地开发/测试 - 可选）
    ```bash
    docker --version
    # 预期输出：Docker 版本 20.10 或更高
@@ -116,78 +91,78 @@ Full Architecture (Not Included - For Reference)
 
 ### Azure 要求
 
-- 一个有效的 **Azure 订阅**（[创建免费账户](https://azure.microsoft.com/free/)）
+- 一个有效的 **Azure 订阅**（[create a free account](https://azure.microsoft.com/free/)）
 - 在订阅中创建资源的权限
-- 在订阅或资源组上具有 **Contributor** 角色
+- 在订阅或资源组上的 **Contributor** 角色
 
-### 知识先决条件
+### 知识前置条件
 
-这是一个**高级**示例。你应该具备：
+这是一个 <strong>高级</strong> 示例。你应该具备：
 - 已完成 [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) 
-- 对微服务架构的基本理解
+- 对微服务架构有基本理解
 - 熟悉 REST API 和 HTTP
-- 对容器概念有一定了解
+- 了解容器概念
 
-**容器应用新手？** 请先从 [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) 开始以学习基础知识。
+**刚接触 Container Apps？** 建议先查看 [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) 以学习基础知识。
 
-## Quick Start (Step-by-Step)
+## 快速开始（逐步指南）
 
-### Step 1: Clone and Navigate
+### 第 1 步：克隆并进入目录
 
 ```bash
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/container-app/microservices
 ```
 
-**✓ 成功检查**：确认你看到 `azure.yaml`:
+**✓ 成功检查**：确认你能看到 `azure.yaml`：
 ```bash
 ls
 # 预期：README.md、azure.yaml、infra/、src/
 ```
 
-### Step 2: Authenticate with Azure
+### 第 2 步：登录 Azure
 
 ```bash
 azd auth login
 ```
 
-这会在浏览器中打开 Azure 身份验证。使用你的 Azure 凭据登录。
+这会在浏览器中打开 Azure 身份验证页面。使用你的 Azure 凭据登录。
 
 **✓ 成功检查**：你应该看到：
 ```
 Logged in to Azure.
 ```
 
-### Step 3: Initialize the Environment
+### 第 3 步：初始化环境
 
 ```bash
 azd init
 ```
 
-**你会看到的提示**：
-- **Environment name**: 输入一个简短名称（例如 `microservices-dev`）
-- **Azure subscription**: 选择你的订阅
-- **Azure location**: 选择一个区域（例如 `eastus`, `westeurope`）
+<strong>你会看到的提示</strong>：
+- **Environment name**：输入一个简短名称（例如 `microservices-dev`）
+- **Azure subscription**：选择你的订阅
+- **Azure location**：选择一个区域（例如 `eastus`, `westeurope`）
 
 **✓ 成功检查**：你应该看到：
 ```
 SUCCESS: New project initialized!
 ```
 
-### Step 4: Deploy Infrastructure and Services
+### 第 4 步：部署基础设施和服务
 
 ```bash
 azd up
 ```
 
-**会发生什么**（需要 8-12 分钟）：
+<strong>将发生的事情</strong>（需要 8-12 分钟）：
 1. 创建 Container Apps 环境
 2. 创建用于监控的 Application Insights
-3. 构建 API Gateway 容器（Node.js）
+3. 构建 API 网关 容器（Node.js）
 4. 构建 Product Service 容器（Python）
 5. 将两个容器部署到 Azure
 6. 配置网络和健康检查
-7. 设置监控和日志
+7. 设置监控和日志记录
 
 **✓ 成功检查**：你应该看到：
 ```
@@ -197,25 +172,25 @@ Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
 
 **⏱️ 时间**：8-12 分钟
 
-### Step 5: Test the Deployment
+### 第 5 步：测试部署
 
 ```bash
 # 获取网关端点
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
 
-# 测试 API 网关健康状况
+# 测试 API 网关的健康状态
 curl $GATEWAY_URL/health
 
 # 预期输出:
 # {"status":"healthy","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
 ```
 
-**通过网关测试产品服务**：
+**通过网关测试 product service**：
 ```bash
 # 列出产品
 curl $GATEWAY_URL/api/products
 
-# 预期输出：
+# 预期输出:
 # [
 #   {"id":1,"name":"笔记本电脑","price":999.99,"stock":50},
 #   {"id":2,"name":"鼠标","price":29.99,"stock":200},
@@ -223,15 +198,15 @@ curl $GATEWAY_URL/api/products
 # ]
 ```
 
-**✓ 成功检查**：两个端点都返回 JSON 数据且无错误。
+**✓ 成功检查**：两个端点均返回 JSON 数据且无错误。
 
 ---
 
 **🎉 恭喜！** 你已将微服务架构部署到 Azure！
 
-## Project Structure
+## 项目结构
 
-所有实现文件均已包含——这是一个完整、可运行的示例：
+所有实现文件均已包含——这是一个完整的工作示例：
 
 ```
 microservices/
@@ -261,46 +236,46 @@ microservices/
         └── Dockerfile               # Container definition
 ```
 
-**各组件作用：**
+**各组件功能说明：**
 
-**Infrastructure (infra/)**:
+**Infrastructure (infra/)**：
 - `main.bicep`: 协调所有 Azure 资源及其依赖关系
 - `core/container-apps-environment.bicep`: 创建 Container Apps 环境和 Azure Container Registry
 - `core/monitor.bicep`: 为分布式日志设置 Application Insights
-- `app/*.bicep`: 带有扩缩和健康检查的各个容器应用定义
+- `app/*.bicep`: 带有伸缩和健康检查的各个 container app 定义
 
-**API Gateway (src/api-gateway/)**:
-- 面向公众的服务，负责将请求路由到后端服务
+**API Gateway (src/api-gateway/)**：
+- 面向公众的服务，将请求路由到后端服务
 - 实现日志记录、错误处理和请求转发
-- 演示服务间的 HTTP 通信
+- 演示服务到服务的 HTTP 通信
 
-**Product Service (src/product-service/)**:
-- 内部服务，带有产品目录（为简单起见使用内存存储）
-- 提供带健康检查的 REST API
+**Product Service (src/product-service/)**：
+- 内部服务，带有内存中的产品目录（为简单起见）
+- 带有健康检查的 REST API
 - 后端微服务模式示例
 
-## Services Overview
+## 服务概览
 
 ### API Gateway (Node.js/Express)
 
-**端口**：8080  
-**访问**：公开（外部入口）  
-**用途**：将传入请求路由到相应的后端服务  
+<strong>端口</strong>：8080  
+<strong>访问</strong>：公共（外部入口）  
+<strong>用途</strong>：将传入请求路由到相应的后端服务  
 
-**端点**：
+<strong>端点</strong>：
 - `GET /` - 服务信息
 - `GET /health` - 健康检查端点
-- `GET /api/products` - 转发到产品服务（列出所有）
-- `GET /api/products/:id` - 转发到产品服务（按 ID 获取）
+- `GET /api/products` - 转发到 product service（列出所有）
+- `GET /api/products/:id` - 转发到 product service（按 ID 获取）
 
-**关键特性**：
+<strong>主要特性</strong>：
 - 使用 axios 的请求路由
-- 集中式日志
+- 集中式日志记录
 - 错误处理和超时管理
-- 通过环境变量的服务发现
+- 通过环境变量进行服务发现
 - Application Insights 集成
 
-**代码亮点** (`src/api-gateway/app.js`):
+<strong>代码亮点</strong>（`src/api-gateway/app.js`）：
 ```javascript
 // 内部服务通信
 app.get('/api/products', async (req, res) => {
@@ -311,24 +286,24 @@ app.get('/api/products', async (req, res) => {
 
 ### Product Service (Python/Flask)
 
-**端口**：8000  
-**访问**：仅内部（无外部入口）  
-**用途**：使用内存数据管理产品目录  
+<strong>端口</strong>：8000  
+<strong>访问</strong>：仅内部（无外部入口）  
+<strong>用途</strong>：使用内存数据管理产品目录  
 
-**端点**：
+<strong>端点</strong>：
 - `GET /` - 服务信息
 - `GET /health` - 健康检查端点
 - `GET /products` - 列出所有产品
 - `GET /products/<id>` - 按 ID 获取产品
 
-**关键特性**：
-- 基于 Flask 的 RESTful API
+<strong>主要特性</strong>：
+- 使用 Flask 的 RESTful API
 - 内存产品存储（简单，无需数据库）
 - 带探针的健康监控
-- 结构化日志
+- 结构化日志记录
 - Application Insights 集成
 
-**数据模型**：
+<strong>数据模型</strong>：
 ```python
 {
   "id": 1,
@@ -339,17 +314,17 @@ app.get('/api/products', async (req, res) => {
 }
 ```
 
-**为什么仅内部？**
-产品服务不对外公开。所有请求必须通过 API 网关，这提供了：
-- 安全性：受控的访问点
-- 灵活性：可更改后端而不影响客户端
-- 监控：集中式请求日志
+**为什么仅限内部？**
+product service 不对外暴露。所有请求必须通过 API 网关，网关提供：
+- 安全性：受控制的访问入口
+- 灵活性：可以在不影响客户端的情况下更改后端
+- 监控：集中请求日志
 
-## Understanding Service Communication
+## 理解服务通信
 
-### How Services Talk to Each Other
+### 服务如何互相通信
 
-在此示例中，API 网关使用**内部 HTTP 调用**与产品服务通信：
+在此示例中，API 网关使用 **内部 HTTP 调用** 与 Product Service 通信：
 
 ```javascript
 // API 网关 (src/api-gateway/app.js)
@@ -359,53 +334,53 @@ const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
 const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 ```
 
-**关键点**：
+<strong>要点</strong>：
 
 1. **基于 DNS 的发现**：Container Apps 自动为内部服务提供 DNS
-   - 产品服务 FQDN：`product-service.internal.<environment>.azurecontainerapps.io`
+   - Product Service FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
    - 简化为：`http://product-service`（Container Apps 会解析它）
 
-2. **无公网暴露**：在 Bicep 中产品服务设置为 `external: false`
-   - 仅能在 Container Apps 环境内访问
+2. <strong>不对外暴露</strong>：在 Bicep 中 product service 的 `external: false`
+   - 仅在 Container Apps 环境内可访问
    - 无法从互联网直接访问
 
-3. **环境变量**：服务 URL 在部署时注入
+3. <strong>环境变量</strong>：服务 URL 在部署时注入
    - Bicep 将内部 FQDN 传递给网关
-   - 应用代码中没有硬编码的 URL
+   - 应用代码中没有硬编码 URL
 
-**类比**：把这比作办公室的房间。API 网关是前台（面向公众），产品服务是办公室（仅内部）。访客必须通过前台才能到达任何办公室。
+<strong>类比</strong>：把它想象成办公室房间。API 网关是接待处（面向公众），Product Service 是办公室（仅内部）。访客必须通过接待才能到达任何办公室。
 
-## Deployment Options
+## 部署选项
 
-### Full Deployment (Recommended)
+### 完整部署（推荐）
 
 ```bash
 # 部署基础设施和两个服务
 azd up
 ```
 
-这将部署：
+此部署包括：
 1. Container Apps 环境
 2. Application Insights
 3. Container Registry
-4. API Gateway 容器
+4. API 网关 容器
 5. Product Service 容器
 
-**时间**：8-12 分钟
+<strong>时间</strong>：8-12 分钟
 
-### Deploy Individual Service
+### 单独部署某个服务
 
 ```bash
-# 仅部署单个服务（在初始 azd up 之后）
+# 仅部署一个服务（在首次运行 azd up 之后）
 azd deploy api-gateway
 
-# 或者部署 product 服务
+# 或者部署产品服务
 azd deploy product-service
 ```
 
-**使用场景**：当你更新了某个服务的代码并且只想重新部署该服务时。
+<strong>使用场景</strong>：当你更新了某个服务的代码并只想重新部署该服务时使用。
 
-### Update Configuration
+### 更新配置
 
 ```bash
 # 更改缩放参数
@@ -415,23 +390,23 @@ azd env set GATEWAY_MAX_REPLICAS 30
 azd up
 ```
 
-## Configuration
+## 配置
 
-### Scaling Configuration
+### 伸缩配置
 
-两个服务都在它们的 Bicep 文件中配置了基于 HTTP 的自动扩缩：
+两个服务在它们的 Bicep 文件中都配置了基于 HTTP 的自动伸缩：
 
 **API Gateway**：
-- 最小副本数：2（为可用性始终至少 2 个）
+- 最小副本数：2（至少保持 2 个以确保可用性）
 - 最大副本数：20
-- 扩缩触发器：每副本 50 个并发请求
+- 伸缩触发器：每个副本 50 个并发请求
 
 **Product Service**：
-- 最小副本数：1（如果需要可以扩缩到零）
+- 最小副本数：1（如有需要可缩减为零）
 - 最大副本数：10
-- 扩缩触发器：每副本 100 个并发请求
+- 伸缩触发器：每个副本 100 个并发请求
 
-**自定义扩缩**（在 `infra/app/*.bicep` 中）：
+<strong>自定义伸缩</strong>（在 `infra/app/*.bicep` 中）：
 ```bicep
 scale: {
   minReplicas: 1
@@ -454,16 +429,16 @@ scale: {
 **API Gateway**：
 - CPU：1.0 vCPU
 - 内存：2 GiB
-- 原因：处理所有外部流量
+- 理由：处理所有外部流量
 
 **Product Service**：
 - CPU：0.5 vCPU
 - 内存：1 GiB
-- 原因：轻量级的内存操作
+- 理由：轻量的内存操作
 
 ### 健康检查
 
-两个服务都包含存活与就绪探针：
+两个服务都包含存活和就绪探针：
 
 ```bicep
 probes: [
@@ -488,13 +463,13 @@ probes: [
 ]
 ```
 
-**这意味着什么**：
-- **存活**：如果健康检查失败，Container Apps 会重启容器
-- **就绪**：如果未就绪，Container Apps 会停止将流量路由到该副本
+<strong>这意味着什么</strong>：
+- **存活性（Liveness）**：如果健康检查失败，Container Apps 会重启容器
+- **就绪性（Readiness）**：如果未就绪，Container Apps 会停止将流量路由到该副本
 
 
 
-## Monitoring & Observability
+## 监控与可观测性
 
 ### 查看服务日志
 
@@ -502,15 +477,15 @@ probes: [
 # 使用 azd monitor 查看日志
 azd monitor --logs
 
-# 或使用 Azure CLI 针对特定的容器应用：
-# 从 API 网关流式传输日志
+# 或使用 Azure CLI 针对特定的 Container Apps:
+# 从 API 网关实时流式查看日志
 az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 
 # 查看最近的产品服务日志
 az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
 
-**预期输出**：
+<strong>预期输出</strong>：
 ```
 [api-gateway] API Gateway listening on port 8080
 [api-gateway] Product Service URL: http://product-service
@@ -520,9 +495,9 @@ az containerapp logs show --name product-service --resource-group $RG_NAME --tai
 
 ### Application Insights 查询
 
-在 Azure 门户访问 Application Insights，然后运行这些查询：
+在 Azure 门户中访问 Application Insights，然后运行这些查询：
 
-**查找慢请求**：
+<strong>查找慢请求</strong>：
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -531,7 +506,7 @@ requests
 | order by count_ desc
 ```
 
-**跟踪服务间调用**：
+<strong>跟踪服务到服务的调用</strong>：
 ```kusto
 dependencies
 | where timestamp > ago(1h)
@@ -540,7 +515,7 @@ dependencies
 | order by timestamp desc
 ```
 
-**按服务统计错误率**：
+<strong>按服务统计错误率</strong>：
 ```kusto
 exceptions
 | where timestamp > ago(24h)
@@ -548,7 +523,7 @@ exceptions
 | order by errorCount desc
 ```
 
-**请求量随时间变化**：
+<strong>随时间的请求量</strong>：
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -556,13 +531,13 @@ requests
 | render timechart
 ```
 
-### 访问监控仪表板
+### 访问监控仪表盘
 
 ```bash
 # 获取 Application Insights 的详细信息
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# 打开 Azure 门户中的监视
+# 打开 Azure 门户的监控
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
@@ -571,18 +546,18 @@ az monitor app-insights component show \
 
 ### 实时指标
 
-1. 在 Azure 门户中导航到 Application Insights
-2. 点击“Live Metrics”
+1. 导航到 Azure 门户中的 Application Insights
+2. 点击 “Live Metrics”
 3. 查看实时请求、失败和性能
 4. 通过运行测试：`curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
 
-## Practical Exercises
+## 实践练习
 
-[Note: See full exercises above in the "Practical Exercises" section for detailed step-by-step exercises including deployment verification, data modification, autoscaling tests, error handling, and adding a third service.]
+[注：有关详细的逐步练习（包括部署验证、数据修改、自动伸缩测试、错误处理和添加第三个服务），请参阅上方的“Practical Exercises”部分。]
 
-## Cost Analysis
+## 成本分析
 
-### Estimated Monthly Costs (For This 2-Service Example)
+### 估计的月度费用（针对此 2 服务示例）
 
 | Resource | Configuration | Estimated Cost |
 |----------|--------------|----------------|
@@ -593,14 +568,14 @@ az monitor app-insights component show \
 | Log Analytics | 1 GB/month | $3 |
 | **Total** | | **$58-243/month** |
 
-**按使用情况的成本细分**：
-- **轻量流量**（测试/学习）：~$60/月
-- **中度流量**（小型生产）：~$120/月
-- **高流量**（繁忙期）：~$240/月
+<strong>按使用情况的成本细分</strong>：
+- <strong>轻量流量</strong>（测试/学习）：~$60/月
+- <strong>中等流量</strong>（小规模生产）：~$120/月
+- <strong>高流量</strong>（繁忙时段）：~$240/月
 
-### Cost Optimization Tips
+### 成本优化建议
 
-1. **开发时缩放到零**：
+1. **开发环境缩减到零（Scale to Zero）**：
    ```bicep
    scale: {
      minReplicas: 0  // Save $30-40/month when not in use
@@ -608,24 +583,25 @@ az monitor app-insights component show \
    }
    ```
 
-2. **为 Cosmos DB 使用按需消费计划**（当你添加它时）：
-   - 只为实际使用付费
-   - 无最低费用
+2. **在添加 Cosmos DB 时使用 Consumption 计划**：
+   - 仅为实际使用付费
+   - 无最低收费
 
 3. **设置 Application Insights 采样**：
    ```javascript
-   appInsights.defaultClient.config.samplingPercentage = 50; // 对 50% 的请求进行抽样
+   appInsights.defaultClient.config.samplingPercentage = 50; // 抽样 50% 的请求
    ```
 
-4. **不需要时清理资源**：
+4. <strong>不需要时清理资源</strong>：
    ```bash
    azd down
    ```
 
 ### 免费层选项
-用于学习/测试，请考虑：
+
+用于学习/测试时，可考虑：
 - 使用 Azure 免费额度（前 30 天）
-- 保持最小副本数
+- 将副本数保持在最低
 - 测试后删除（无持续费用）
 
 ---
@@ -638,14 +614,14 @@ az monitor app-insights component show \
 azd down --force --purge
 ```
 
-**确认提示**：
+<strong>确认提示</strong>：
 ```
 ? Total resources to delete: 6, are you sure you want to continue? (y/N)
 ```
 
-输入 `y` 确认。
+输入 `y` 以确认。
 
-**将被删除的内容**：
+<strong>将被删除的内容</strong>：
 - Container Apps 环境
 - 两个 Container Apps（网关和产品服务）
 - 容器注册表
@@ -662,15 +638,15 @@ az group list --query "[?starts_with(name,'rg-microservices')]" --output table
 
 ---
 
-## 扩展指南：从 2 个服务到 5 个以上
+## 扩展指南：从 2 个服务到 5 个及以上
 
-一旦掌握了这个由 2 个服务组成的架构，以下是扩展的方法：
+一旦你掌握了这个由 2 个服务组成的架构，以下是扩展的方法：
 
-### 阶段 1：添加数据库持久化（下一步）
+### 第 1 阶段：添加数据库持久化（下一步）
 
 **为产品服务添加 Cosmos DB**：
 
-1. 创建 `infra/core/cosmos.bicep`：
+1. Create `infra/core/cosmos.bicep`:
    ```bicep
    resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
      name: name
@@ -683,56 +659,56 @@ az group list --query "[?starts_with(name,'rg-microservices')]" --output table
    }
    ```
 
-2. 更新产品服务以使用 Cosmos DB 而不是内存数据
+2. 更新产品服务以使用 Cosmos DB，而不是内存数据
 
 3. 预计额外费用：约 $25/月（无服务器）
 
-### 阶段 2：添加第三个服务（订单管理）
+### 第 2 阶段：添加第三个服务（订单管理）
 
-**创建订单服务**：
+<strong>创建订单服务</strong>：
 
-1. 新建文件夹：`src/order-service/`（Python/Node.js/C#）
+1. 新文件夹：`src/order-service/`（Python/Node.js/C#）
 2. 新的 Bicep：`infra/app/order-service.bicep`
 3. 更新 API 网关以路由 `/api/orders`
-4. 为订单持久化添加 Azure SQL 数据库
+4. 添加 Azure SQL 数据库以持久化订单
 
-**架构变为**：
+<strong>架构变为</strong>：
 ```
 API Gateway → Product Service (Cosmos DB)
            → Order Service (Azure SQL)
 ```
 
-### 阶段 3：添加异步通信（Service Bus）
+### 第 3 阶段：添加异步通信（Service Bus）
 
-**实现事件驱动架构**：
+<strong>实现事件驱动架构</strong>：
 
 1. 添加 Azure Service Bus：`infra/core/servicebus.bicep`
 2. 产品服务发布 "ProductCreated" 事件
 3. 订单服务订阅产品事件
 4. 添加通知服务以处理事件
 
-**模式**：请求/响应（HTTP）+ 事件驱动（Service Bus）
+<strong>模式</strong>：请求/响应（HTTP）+ 事件驱动（Service Bus）
 
-### 阶段 4：添加用户身份验证
+### 第 4 阶段：添加用户认证
 
-**实现用户服务**：
+<strong>实现用户服务</strong>：
 
 1. 创建 `src/user-service/`（Go/Node.js）
-2. 添加 Azure AD B2C 或 自定义 JWT 身份验证
+2. 添加 Azure AD B2C 或自定义 JWT 认证
 3. API 网关验证令牌
 4. 服务检查用户权限
 
-### 阶段 5：生产就绪
+### 第 5 阶段：生产就绪
 
-**添加以下组件**：
+<strong>添加以下组件</strong>：
 - Azure Front Door（全局负载均衡）
-- Azure Key Vault（机密管理）
+- Azure Key Vault（密钥管理）
 - Azure Monitor Workbooks（自定义仪表板）
 - CI/CD 管道（GitHub Actions）
 - 蓝绿部署
-- 为所有服务配置托管身份
+- 为所有服务配置托管标识
 
-**完整生产架构成本**：约 $300-1,400/月
+<strong>完整生产架构成本</strong>：约 $300-1,400/月
 
 ---
 
@@ -745,50 +721,50 @@ API Gateway → Product Service (Cosmos DB)
 - [Azure Developer CLI 文档](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
 ### 本课程的下一步
-- ← 上一步: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - 入门单容器示例
-- → 下一步: [AI 集成指南](../../../../../examples/docs/ai-foundry) - 添加 AI 功能
-- 🏠 [课程首页](../../README.md)
+- ← 上一页: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - 初学者单容器示例
+- → 下一页: [AI Integration Guide](../../../../../examples/docs/ai-foundry) - 添加 AI 功能
+- 🏠 [课程主页](../../README.md)
 
-### 比较：何时使用何种方案
+### 对比：何时使用何种方案
 
-**单容器应用**（Simple Flask API 示例）：
+<strong>单容器应用</strong>（Simple Flask API 示例）：
 - ✅ 简单应用
 - ✅ 单体架构
-- ✅ 快速部署
+- ✅ 部署快速
 - ❌ 可扩展性有限
-- **成本**：约 $15-50/月
+- <strong>成本</strong>：约 $15-50/月
 
-**微服务**（本示例）：
-- ✅ 适用于复杂应用
-- ✅ 服务可独立伸缩
-- ✅ 团队自治（不同服务由不同团队）
+<strong>微服务</strong>（本示例）：
+- ✅ 复杂应用
+- ✅ 服务独立伸缩
+- ✅ 团队自治（不同服务，不同团队）
 - ❌ 管理更复杂
-- **成本**：约 $60-250/月
+- <strong>成本</strong>：约 $60-250/月
 
-**Kubernetes（AKS）**：
-- ✅ 最大程度的控制和灵活性
+**Kubernetes (AKS)**：
+- ✅ 最大的控制和灵活性
 - ✅ 多云可移植性
 - ✅ 高级网络功能
 - ❌ 需要 Kubernetes 专业知识
-- **成本**：最低约 $150-500/月
+- <strong>成本</strong>：最低约 $150-500/月
 
-**推荐**：从 Container Apps（本示例）开始，只有在需要 Kubernetes 特定功能时再迁移到 AKS。
+<strong>建议</strong>：从 Container Apps（本示例）开始，只有在需要 Kubernetes 特定功能时再迁移到 AKS。
 
 ---
 
 ## 常见问题
 
 **问：为什么只有 2 个服务而不是 5 个以上？**  
-答：逐步教学。先掌握基础（服务通信、监控、伸缩），使用简单示例再增加复杂性。这里学到的模式适用于拥有 100 个服务的架构。
+答：逐步教学。先用一个简单示例掌握基础（服务通信、监控、伸缩），再增加复杂性。你在这里学到的模式适用于 100 个服务的架构。
 
 **问：我可以自己添加更多服务吗？**  
-答：当然！请按照上面的扩展指南操作。每个新服务遵循相同模式：创建 src 文件夹，创建 Bicep 文件，更新 azure.yaml，部署。
+答：当然可以！按照上面的扩展指南操作。每个新服务遵循相同模式：创建 src 文件夹，创建 Bicep 文件，更新 azure.yaml，部署。
 
-**问：这可以用于生产吗？**  
-答：这是一个坚实的基础。要用于生产，请添加：托管身份、Key Vault、持久化数据库、CI/CD 管道、监控告警和备份策略。
+**问：这是可用于生产环境吗？**  
+答：这是一个坚实的基础。对于生产环境，需要添加：托管标识、Key Vault、持久化数据库、CI/CD 管道、监控告警和备份策略。
 
 **问：为什么不使用 Dapr 或其他服务网格？**  
-答：为便于学习保持简单。一旦了解了原生 Container Apps 网络，就可以在高级场景中加入 Dapr。
+答：为了学习保持简单。掌握原生 Container Apps 网络后，可以在高级场景中添加 Dapr。
 
 **问：如何在本地调试？**  
 答：使用 Docker 在本地运行服务：
@@ -799,24 +775,24 @@ docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gatew
 ```
 
 **问：我可以使用不同的编程语言吗？**  
-答：可以！本示例展示了 Node.js（网关）+ Python（产品服务）。您可以混合任何可以运行在容器中的语言。
+答：可以！本示例展示了 Node.js（网关）+ Python（产品服务）。你可以混合任何能在容器中运行的语言。
 
-**问：如果我没有 Azure 积分怎么办？**  
-答：使用 Azure 免费层（新账户前 30 天）或仅进行短期测试并立即删除。
+**问：如果我没有 Azure 额度怎么办？**  
+答：使用 Azure 免费额度（新帐户前 30 天）或仅短时间部署进行测试并立即删除。
 
 ---
 
-> **🎓 学习路径摘要**：您已学会部署具有自动伸缩、内部网络、集中监控和生产就绪模式的多服务架构。这个基础将使您为复杂的分布式系统和企业级微服务架构做好准备。
+> **🎓 学习路径摘要**：你已学会部署具有自动伸缩、内部网络、集中监控和生产就绪模式的多服务架构。这个基础将使你为复杂的分布式系统和企业级微服务架构做好准备。
 
 **📚 课程导航：**
-- ← 上一步: [Simple Flask API](../../../../../examples/container-app/simple-flask-api)
-- → 下一步: [数据库集成示例](../../../../../examples/database-app)
-- 🏠 [课程首页](../../../README.md)
+- ← 上一页: [Simple Flask API](../../../../../examples/container-app/simple-flask-api)
+- → 下一页: [数据库集成示例](../../../../../examples/database-app)
+- 🏠 [课程主页](../../../README.md)
 - 📖 [Container Apps 最佳实践](../../../docs/chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免责声明：
-本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们力求准确，但请注意自动翻译可能包含错误或不准确之处。原始语言的原文应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用本翻译而产生的任何误解或错误解释承担责任。
+**免责声明**:
+本文件已使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们力求准确，但请注意自动翻译可能包含错误或不准确之处。原始语言的文档应被视为权威来源。对于关键信息，建议使用专业人工翻译。对于因使用本翻译而产生的任何误解或曲解，我们不承担任何责任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

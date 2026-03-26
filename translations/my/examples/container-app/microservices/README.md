@@ -1,66 +1,43 @@
-# မိုက်ခရိုဆာဗစ် ပုံစံ - Container App ဥပမာ
+# Microservices Architecture - Container App Example
 
-⏱️ **ခန့်မှန်းချိန်**: 25-35 မိနစ် | 💰 **ခန့်မှန်းကုန်ကျမှု**: ~$50-100/လ | ⭐ **ခက်ခဲမှု**: Advanced
+⏱️ **Estimated Time**: 25-35 minutes | 💰 **Estimated Cost**: ~$50-100/month | ⭐ **Complexity**: Advanced
 
-AZD CLI ကို အသုံးပြု၍ Azure Container Apps သို့ တပ်ဆင်ထားသော **ရိုးရှင်းသော်လည်း လုပ်ဆောင်နိုင်သော** မိုက်ခရိုဆာဗစ် အင်ဂျင်နီယာစနစ်။ ဤဥပမာသည် ဝန်ဆောင်မှုမှ ဝန်ဆောင်မှု ဆက်သွယ်မှု၊ ကွန်တိန်နာ ကြပ်မတ်မှုနှင့် မော်နီတာလုပ်ငန်းများကို 2-ဝန်ဆောင်မှု အခြေခံ ပုံစံဖြင့် တက်တူးပြသသည်။
+A **simplified but functional** microservices architecture deployed to Azure Container Apps using AZD CLI. This example demonstrates service-to-service communication, container orchestration, and monitoring with a practical 2-service setup.
 
-> **📚 သင်ယူရန် နည်းလမ်း**: ဤဥပမာသည် အနည်းဆုံး 2-ဝန်ဆောင်မှု ဖွဲ့စည်းပုံ (API Gateway + Backend Service) ဖြင့် စတင်ပြီး သင်တတ်ပြီး တပ်ဆင်လေ့လာနိုင်သည်။ အခြေခံကို ကျွမ်းကျင်ပြီးနောက်၊ အပြည့်အစုံ မိုက်ခရိုဆာဗစ် စနစ်သို့ တိုးချဲ့ရန် လမ်းညွှန်ချက်များကို ပေးပါမည်။
+> **📚 Learning Approach**: This example starts with a minimal 2-service architecture (API Gateway + Backend Service) that you can actually deploy and learn from. After mastering this foundation, we provide guidance for expanding to a full microservices ecosystem.
 
-## သင်ဘာတွေ သင်ယူမလဲ
+## What You'll Learn
 
-ဤဥပမာကို ပြီးမြောက်စွာလုပ်ဆောင်ခြင်းအားဖြင့် သင်သည် -
-- Azure Container Apps သို့ ကွန်တိန်နာများ အများပြား တပ်ဆင်နိုင်မည်
-- အတွင်းကွန်ရက်ဖြင့် ဝန်ဆောင်မှုမှ ဝန်ဆောင်မှု ဆက်သွယ်မှု အကောင်အထည်ဖော်နိုင်မည်
-- ပတ်ဝန်းကျင်အလိုက် စကေးလုပ်ငန်းနှင့် ကျန်းမာရေး စစ်ဆေးမှုများ ဖော်ပြနိုင်မည်
-- Application Insights ဖြင့် ဖြန့်ပြားထားသည့် အက်ပ်များကို မော်နီတာ ပြုစုပေးနိုင်မည်
-- မိုက်ခရိုဆာဗစ် တပ်ဆင်မှု ပုံစံများနှင့် အကောင်းဆုံး လုပ်နည်းများကို နားလည်မည်
-- ရိုးရှင်းမှ ဖက်ရှင်နက် သို့ တိုးချဲ့သင်ယူနည်းများကို လေ့လာမည်
+By completing this example, you will:
+- Deploy multiple containers to Azure Container Apps
+- Implement service-to-service communication with internal networking
+- Configure environment-based scaling and health checks
+- Monitor distributed applications with Application Insights
+- Understand microservices deployment patterns and best practices
+- Learn progressive expansion from simple to complex architectures
 
-## ဖွဲ့စည်းပုံ
+## Architecture
 
-### အဆင့် 1: ကျွန်တော်တို့ တည်ဆောက်နေသည် (ဤဥပမာတွင် ပါဝင်သည်)
+### Phase 1: What We're Building (Included in This Example)
 
+```mermaid
+graph TD
+    Internet[အင်တာနက်] -- HTTPS --> Gateway[API ဂိတ်ဝေး<br/>Node.js ကွန်တိန်နာ<br/>တောင်းဆိုမှုများကို လမ်းကြောင်းပေးသည်<br/>အခြေအနေ စစ်ဆေးခြင်း<br/>တောင်းဆိုမှု မှတ်တမ်းတင်ခြင်း]
+    Gateway -- HTTP အတွင်းပိုင်း --> Product[ကုန်ပစ္စည်း ဝန်ဆောင်မှု<br/>Python ကွန်တိန်နာ<br/>ကုန်ပစ္စည်း CRUD<br/>မှတ်ဉာဏ်တွင်း ဒေတာသိုလှောင်မှု<br/>REST API]
+    Product --> Insights[Application Insights<br/>စောင့်ကြည့်ခြင်းနှင့် မှတ်တမ်းများ]
 ```
-                    ┌─────────────────────────────┐
-                    │         Internet            │
-                    └──────────────┬──────────────┘
-                                   │
-                                   │ HTTPS
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │      API Gateway            │
-                    │   (Node.js Container)       │
-                    │   - Routes requests         │
-                    │   - Health checks           │
-                    │   - Request logging         │
-                    └──────────────┬──────────────┘
-                                   │
-                                   │ HTTP (internal)
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │    Product Service          │
-                    │   (Python Container)        │
-                    │   - Product CRUD            │
-                    │   - In-memory data store    │
-                    │   - REST API                │
-                    └──────────────┬──────────────┘
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │   Application Insights      │
-                    │   (Monitoring & Logs)       │
-                    └─────────────────────────────┘
-```
+**Why Start Simple?**
+- ✅ Deploy and understand quickly (25-35 minutes)
+- ✅ Learn core microservices patterns without complexity
+- ✅ Working code you can modify and experiment with
+- ✅ Lower cost for learning (~$50-100/month vs $300-1400/month)
+- ✅ Build confidence before adding databases and message queues
 
-**ဘာကြောင့် ရိုးရှင်းစွာ စတင်ရသလဲ?**
-- ✅ မြန်ဆန်စွာ တပ်ဆင်ပြီး နားလည်နိုင်မည် (25-35 မိနစ်)
-- ✅ ရှုပ်ထွေးမှုမရှိပဲ မိုက်ခရိုဆာဗစ် အခြေခံ ပုံစံများကို သင်ယူနိုင်မည်
-- ✅ ပြင်ဆင်ပြီး လေ့လာနိုင်သော အလုပ်လုပ်သော ကုဒ်
-- ✅ သင်ယူရန် ကုန်ကျစရိတ် နည်း (ခန့်မှန်း ~$50-100/လ vs $300-1400/လ)
-- ✅ ဒေတာဘေ့စ်များနှင့် မက်ဆေ့ခ််ကွန်ယက်များ ထည့်မည်မဆို ယုံကြည်မှု တည်ဆောက်နိုင်ရန်
+**Analogy**: Think of this like learning to drive. You start with an empty parking lot (2 services), master the basics, then progress to city traffic (5+ services with databases).
 
-**နှိုင်းယှဉ်ချက်**: ဤကဲ့သို့ ယာဉ်မောင်းသင်ကြားမှုလိုပါသည်။ မူလတွင် ရပ်နားထားသော ကားတင်ဧက (2 ဝန်ဆောင်မှု) ဖြင့် စတင်ပြီး အခြေခံအချက်များကို ကျွမ်းကျင်ပါ၊ ထို့နောက် မြို့လမ်းများ (5+ ဝန်ဆောင်မှုများနှင့် ဒေတာဘေ့စ်များ) သို့ တိုးတက်ပါလိမ့်မည်။
+### Phase 2: Future Expansion (Reference Architecture)
 
-### အဆင့် 2: အနာဂတ် တိုးချဲ့ခြင်း (အညွှန်း ပုံစံ)
+Once you master the 2-service architecture, you can expand to:
 
 ```
 Full Architecture (Not Included - For Reference)
@@ -75,161 +52,161 @@ Full Architecture (Not Included - For Reference)
 └── Azure Storage (🔜 For file storage)
 ```
 
-နောက်ဆုံးတွင် "Expansion Guide" အပိုင်းတွင် အဆင့်ဆင့် ကိုပြသထားသော လမ်းညွှန်ချက်များကို ကြည့်ပါ။
+See "Expansion Guide" section at the end for step-by-step instructions.
 
-## ပါဝင်သော လက္ခဏာများ
+## Features Included
 
-✅ **Service Discovery**: ကွန်တိန်နာများအကြား အလိုအလျော့ DNS အခြေခံ ရှာဖွေရေး  ဖြစ်စေသည်။  
-✅ **Load Balancing**: မျိုးစုံသော ကူးစားမှုအလုံးအရ အလိုအလျော့ Load Balancing ရှိသည်။  
-✅ **Auto-scaling**: HTTP မေးခွန်းများအပေါ် အခြေခံ၍ ဝန်ဆောင်မှု တစ်ခုချင်းစီ သီးသန့် အလိုအလျော့ စကေးလုပ်သည်။  
-✅ **Health Monitoring**: နှစ်ဖက်လုံး အတွက် liveness နှင့် readiness probes များ။  
-✅ **Distributed Logging**: Application Insights ဖြင့် အစုစည်း မှတ်တမ်းစုစည်းမှု။  
-✅ **Internal Networking**: လုံခြုံသော ဝန်ဆောင်မှုမှ ဝန်ဆောင်မှု ဆက်သွယ်မှု။  
-✅ **Container Orchestration**: အလိုအလျော့ တပ်ဆင်ခြင်းနှင့် စကေးလုပ်ခြင်း။  
-✅ **Zero-Downtime Updates**: revision များကို စီမံခြင်းဖြင့် Rolling updates များ။
+✅ **Service Discovery**: Automatic DNS-based discovery between containers  
+✅ **Load Balancing**: Built-in load balancing across replicas  
+✅ **Auto-scaling**: Independent scaling per service based on HTTP requests  
+✅ **Health Monitoring**: Liveness and readiness probes for both services  
+✅ **Distributed Logging**: Centralized logging with Application Insights  
+✅ **Internal Networking**: Secure service-to-service communication  
+✅ **Container Orchestration**: Automatic deployment and scaling  
+✅ **Zero-Downtime Updates**: Rolling updates with revision management  
 
-## မလိုအပ်မီ
+## Prerequisites
 
-### လိုအပ်သော ကိရိယာများ
+### Required Tools
 
-စတင်မီအောက်ပါ ကိရိယာများ 설치 ရှိကြောင်း အတည်ပြုပါ။
+Before starting, verify you have these tools installed:
 
-1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 or higher)  
+1. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 or higher)
    ```bash
    azd version
-   # မျှော်မှန်းထားသော ထွက်: azd ဗားရှင်း 1.0.0 သို့မဟုတ် ထို့ထက်မြင့်
+   # မျှော်မှန်းထားသော အထွက်: azd ဗားရှင်း 1.0.0 သို့မဟုတ် အထက်
    ```
 
-2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 or higher)  
+2. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 or higher)
    ```bash
    az --version
-   # မျှော်လင့်ရသော ထွက်ရလဒ်: azure-cli 2.50.0 သို့မဟုတ် အထက်
+   # မျှော်မှန်းထားသော ထွက်ချက်: azure-cli 2.50.0 သို့မဟုတ် အထက်ဗားရှင်း
    ```
 
-3. **[Docker](https://www.docker.com/get-started)** (အခြေပြု ဖွံ့ဖြိုးမှု/စမ်းသပ်မှု အတွက် - ရွေးချယ်စရာ)  
+3. **[Docker](https://www.docker.com/get-started)** (for local development/testing - optional)
    ```bash
    docker --version
-   # မျှော်မှန်းထားသော အထွက်: Docker ဗားရှင်း 20.10 သို့မဟုတ် အထက်
+   # မျှော်မှန်းထားသော အထွက်: Docker ဗားရှင်း 20.10 သို့မဟုတ် ထက်မနည်း
    ```
 
-### Azure လိုအပ်ချက်များ
+### Azure Requirements
 
-- အသုံးပြုနိုင်သော **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))
-- သင့် subscription တွင် အရင်းအမြစ်များ ဖန်တီးနိုင်သော ခွင့်ပြုချက်များ
-- Subscription သို့ resource group ပေါ်တွင် **Contributor** အခွင့်အရေး
+- An active **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))
+- Permissions to create resources in your subscription
+- **Contributor** role on the subscription or resource group
 
-### အတတ်ပညာလိုအပ်ချက်များ
+### Knowledge Prerequisites
 
-ဤဥပမာသည် **အဆင့်မြင့်** ဖြစ်သည်။ သင့်တွင် -
-- [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) ကို လုပ်ဆောင်ပြီးဖြစ်ရမည်  
-- မိုက်ခရိုဆာဗစ် ဖွဲ့စည်းပုံ အခြေခံ နားလည်မှုရှိရမည်  
-- REST API များနှင့် HTTP အကြောင်း အခြေခံ အသိပညာရှိရမည်  
-- ကွန်တိန်နာ အခြေအနေများကို နားလည်ထားရမည်
+This is an **advanced-level** example. You should have:
+- Completed the [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) 
+- Basic understanding of microservices architecture
+- Familiarity with REST APIs and HTTP
+- Understanding of container concepts
 
-**Container Apps အတွက် အသစ်လား?** အခြေခံများကို သင်ယူရန် အရင်ဆုံး [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) ကို စတင်ပါ။
+**New to Container Apps?** Start with the [Simple Flask API example](../../../../../examples/container-app/simple-flask-api) first to learn the basics.
 
-## အမြန် စတင်ခြင်း (အဆင့်လိုက်)
+## Quick Start (Step-by-Step)
 
-### အဆင့် 1: Clone လုပ်၍ သွားပါ
+### Step 1: Clone and Navigate
 
 ```bash
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/container-app/microservices
 ```
 
-**✓ အောင်မြင်မှု စစ်ဆေးမှု**: `azure.yaml` ကို မြင်လား စစ်ဆေးပါ:
+**✓ Success Check**: Verify you see `azure.yaml`:
 ```bash
 ls
 # မျှော်မှန်းထားသည်: README.md, azure.yaml, infra/, src/
 ```
 
-### အဆင့် 2: Azure ဖြင့် အတည်ပြု၀င်မည်
+### Step 2: Authenticate with Azure
 
 ```bash
 azd auth login
 ```
 
-ဤသည်က သင့် browser ကို ဖွင့်၍ Azure အတည်ပြုခြင်းကို ဖိတ်ခေါ်ပါလိမ့်မည်။ သင့် Azure အချက်အလက်ဖြင့် サိုင်းအင်၀င်ပါ။
+This opens your browser for Azure authentication. Sign in with your Azure credentials.
 
-**✓ အောင်မြင်မှု စစ်ဆေးမှု**: သင်သည် ဖြစ်ရမည်:
+**✓ Success Check**: You should see:
 ```
 Logged in to Azure.
 ```
 
-### အဆင့် 3: ပတ်ဝန်းကျင် အစ သတ်မှတ်ခြင်း
+### Step 3: Initialize the Environment
 
 ```bash
 azd init
 ```
 
-**မေးခွန်းများ အဖြေများ**:
-- **Environment name**: အတိုချုပ် နာမည်ကို ထည့်ပါ (ဥပမာ `microservices-dev`)
-- **Azure subscription**: သင့် subscription ကို ရွေးပါ
-- **Azure location**: တစ်ဧရိယာကို ရွေးပါ (ဥပမာ `eastus`, `westeurope`)
+**Prompts you'll see**:
+- **Environment name**: Enter a short name (e.g., `microservices-dev`)
+- **Azure subscription**: Select your subscription
+- **Azure location**: Choose a region (e.g., `eastus`, `westeurope`)
 
-**✓ အောင်မြင်မှု စစ်ဆေးမှု**: သင်သည် မြင်ရမည်:
+**✓ Success Check**: You should see:
 ```
 SUCCESS: New project initialized!
 ```
 
-### အဆင့် 4: အခြေခံအဆောက်အအုံနှင့် ဝန်ဆောင်မှုများ တပ်ဆင်ခြင်း
+### Step 4: Deploy Infrastructure and Services
 
 ```bash
 azd up
 ```
 
-**ဘာများ ဖြစ်ပေါ်မလဲ** (8-12 မိနစ် ကြာပါသည်):
-1. Container Apps ပတ်ဝန်းကျင် ဖန်တီးသည်
-2. မော်နီတာလုပ်ဆောင်မှုအတွက် Application Insights ဖန်တီးသည်
-3. API Gateway ကွန်တိန်နာ (Node.js) ကို တည်ဆောက်သည်
-4. Product Service ကွန်တိန်နာ (Python) ကို တည်ဆောက်သည်
-5. နှစ်ဖက် ကွန်တိန်နာများကို Azure သို့ တပ်ဆင်သည်
-6. ကွန်ရက်နှင့် ကျန်းမာရေး စစ်ဆေးမှုများကို ဖော်စပ်သည်
-7. မော်နီတာနှင့် မှတ်တမ်းစုစည်းမှုကို သတ်မှတ်သည်
+**What happens** (takes 8-12 minutes):
+1. Creates Container Apps environment
+2. Creates Application Insights for monitoring
+3. Builds API Gateway container (Node.js)
+4. Builds Product Service container (Python)
+5. Deploys both containers to Azure
+6. Configures networking and health checks
+7. Sets up monitoring and logging
 
-**✓ အောင်မြင်မှု စစ်ဆေးမှု**: သင်သည် မြင်ရမည်:
+**✓ Success Check**: You should see:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 Endpoint: https://api-gateway-<unique-id>.azurecontainerapps.io
 ```
 
-**⏱️ เวลา**: 8-12 မိနစ်
+**⏱️ Time**: 8-12 minutes
 
-### အဆင့် 5: တပ်ဆင်မှု စမ်းသပ်ပါ
+### Step 5: Test the Deployment
 
 ```bash
-# ဂိတ်ဝေး အဆုံးနေရာကို ရယူပါ
+# ဂိတ်ဝေး၏ endpoint ကို ရယူပါ
 GATEWAY_URL=$(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')
 
-# API Gateway ၏ ကျန်းမာရေးကို စမ်းသပ်ပါ
+# API Gateway ၏ ကျန်းမာရေးကို စစ်ဆေးပါ
 curl $GATEWAY_URL/health
 
-# မျှော်လင့်ထားသော ရလဒ်:
-# {"အခြေအနေ":"ကျန်းမာ","ဝန်ဆောင်မှု":"API ဂိတ်ဝေး","အချိန်တံဆိပ်":"2025-11-19T10:30:00Z"}
+# မျှော်မှန်းထားသော အထွက်:
+# {"status":"ကျန်းမာ","service":"api-gateway","timestamp":"2025-11-19T10:30:00Z"}
 ```
 
-**Gateway မှတဆင့် product service ကို စမ်းသပ်ပါ**:
+**Test product service through gateway**:
 ```bash
-# ထုတ်ကုန်များစာရင်း
+# ထုတ်ကုန်များ စာရင်း
 curl $GATEWAY_URL/api/products
 
-# မျှော်မှန်းထားသော ရလဒ်:
+# မျှော်မှန်းထားသော ထွက်ရလဒ်:
 # [
-#   {"id":1,"name":"Laptop","price":999.99,"stock":50},
-#   {"id":2,"name":"Mouse","price":29.99,"stock":200},
-#   {"id":3,"name":"Keyboard","price":79.99,"stock":150}
+#   {"id":1,"name":"လက်ပ်တော့","price":999.99,"stock":50},
+#   {"id":2,"name":"မောက်စ်","price":29.99,"stock":200},
+#   {"id":3,"name":"ကီးဘုတ်","price":79.99,"stock":150}
 # ]
 ```
 
-**✓ အောင်မြင်မှု စစ်ဆေးမှု**: နှစ်ခုလုံး endpoints များသည် အမှားမရှိဘဲ JSON ဒေတာ ပြန်လည်ပေးရမည်။
+**✓ Success Check**: Both endpoints return JSON data without errors.
 
 ---
 
-**🎉 ဂုဏ်ပင်!** သင်သည် Azure သို့ မိုက်ခရိုဆာဗစ် ဖွဲ့စည်းပုံ တပ်ဆင်နိုင်ခဲ့ပါပြီ!
+**🎉 Congratulations!** You've deployed a microservices architecture to Azure!
 
-## project ဖွဲ့စည်းပုံ
+## Project Structure
 
-ဆောင်ရွက်ရန် ဖိုင်များအားလုံး ပါဝင်သည်—ဤသည်မှာ ပြီးမြောက်ပြီး အလုပ်လုပ်နိုင်သော ဥပမာတစ်ခုဖြစ်သည်။
+All implementation files are included—this is a complete, working example:
 
 ```
 microservices/
@@ -259,48 +236,48 @@ microservices/
         └── Dockerfile               # Container definition
 ```
 
-**ဧကရာဇ်တိုင်း၏ တာဝန်များ**:
+**What Each Component Does:**
 
 **Infrastructure (infra/)**:
-- `main.bicep`: Azure အရင်းအမြစ်များနှင့် သူတို့၏ အချိတ်ဆက်စီမံချက်ကို ညွှန်ကြားသည်
-- `core/container-apps-environment.bicep`: Container Apps ပတ်ဝန်းကျင်နှင့် Azure Container Registry ကို ဖန်တီးသည်
-- `core/monitor.bicep`: ဖြန့်ဖြူး မှတ်တမ်းစုစည်းမှုအတွက် Application Insights ကို သတ်မှတ်သည်
-- `app/*.bicep`: စကေးလုပ်ဆောင်မှုနှင့် ကျန်းမာရေးစစ်ဆေးမှုများပါသော တစ်ခုချင်းသော container app ကြေညာချက်များ
+- `main.bicep`: Orchestrates all Azure resources and their dependencies
+- `core/container-apps-environment.bicep`: Creates the Container Apps environment and Azure Container Registry
+- `core/monitor.bicep`: Sets up Application Insights for distributed logging
+- `app/*.bicep`: Individual container app definitions with scaling and health checks
 
 **API Gateway (src/api-gateway/)**:
-- ပြင်ပကို ကြည့်ရှုသူ ဝန်ဆောင်မှုဖြစ်ပြီး နောက်ခံ ဝန်ဆောင်မှုများသို့ လမ်းကြောင်းစီမံပေးသည်
-- မှတ်တမ်းစုစည်းမှု၊ အမှားကိုင်တွယ်မှုနှင့် တောင်းဆိုချက် ပို့ပေးမှုကို အကောင်အထည်ဖော်သည်
-- ဝန်ဆောင်မှုမှ ဝန်ဆောင်မှု HTTP ဆက်သွယ်မှုကို ပြသသည်
+- Public-facing service that routes requests to backend services
+- Implements logging, error handling, and request forwarding
+- Demonstrates service-to-service HTTP communication
 
 **Product Service (src/product-service/)**:
-- ပစ္စည်းစာရင်းကို ကိုင်တွယ်သော အတွင်းဝန်ဆောင်မှု (သက်သာစေရန် in-memory)
-- REST API နှင့် ကျန်းမာရေး စစ်ဆေးမှုများ
-- နောက်ခံ မိုက်ခရိုဆာဗစ် ပုံစံ အတွက် ဥပမာ
+- Internal service with product catalog (in-memory for simplicity)
+- REST API with health checks
+- Example of backend microservice pattern
 
-## ဝန်ဆောင်မှုများ အနှစ်ချုပ်
+## Services Overview
 
 ### API Gateway (Node.js/Express)
 
 **Port**: 8080  
-**Access**: ပြင်ပ (external ingress)  
-**ရည်ရွယ်ချက်**: ရောက်ရှိလာသော တောင်းဆိုမှုများကို သင့်တော်သလို နောက်ခံ ဝန်ဆောင်မှုများသို့ လမ်းကြောင်းပေးသည်။
+**Access**: Public (external ingress)  
+**Purpose**: Routes incoming requests to appropriate backend services  
 
 **Endpoints**:
-- `GET /` - ဝန်ဆောင်မှု အချက်အလက်
-- `GET /health` - ကျန်းမာရေး စစ်ဆေးမှု endpoint
-- `GET /api/products` - product service သို့ ရှေ့ပို့ (စာရင်း)
-- `GET /api/products/:id` - product service သို့ ရှေ့ပို့ (ID အလိုက် ရယူ)
+- `GET /` - Service information
+- `GET /health` - Health check endpoint
+- `GET /api/products` - Forward to product service (list all)
+- `GET /api/products/:id` - Forward to product service (get by ID)
 
-**အဓိက လက္ခဏာများ**:
-- axios ဖြင့် တောင်းဆိုမှု လမ်းကြောင်းသတ်မှတ်ခြင်း
-- အစုစည်း မှတ်တမ်းစုစည်းမှု
-- အမှားကိုင်တွယ်မှုနှင့် timeout စီမံခန့်ခွဲမှု
-- ပတ်ဝန်းကျင် အပြောင်းအလဲများမှ ဝန်ဆောင်မှု ရှာဖွေမှု
-- Application Insights အတွင်း ထည့်သွင်းထားခြင်း
+**Key Features**:
+- Request routing with axios
+- Centralized logging
+- Error handling and timeout management
+- Service discovery via environment variables
+- Application Insights integration
 
 **Code Highlight** (`src/api-gateway/app.js`):
 ```javascript
-// အတွင်းပိုင်း ဝန်ဆောင်မှု ဆက်သွယ်မှု
+// အတွင်းပိုင်း ဝန်ဆောင်မှုများအကြား ဆက်သွယ်မှု
 app.get('/api/products', async (req, res) => {
   const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
   res.json(response.data);
@@ -310,21 +287,21 @@ app.get('/api/products', async (req, res) => {
 ### Product Service (Python/Flask)
 
 **Port**: 8000  
-**Access**: အတွင်းမှသာ (ပြင်ပ ingress မရှိ)  
-**ရည်ရွယ်ချက်**: in-memory ဒေတာဖြင့် ပစ္စည်း စာရင်း ကိုင်တွယ်ပေးသည်။
+**Access**: Internal only (no external ingress)  
+**Purpose**: Manages product catalog with in-memory data  
 
 **Endpoints**:
-- `GET /` - ဝန်ဆောင်မှု အချက်အလက်
-- `GET /health` - ကျန်းမာရေး စစ်ဆေးမှု endpoint
-- `GET /products` - ပစ္စည်းများအားလုံးစာရင်း
-- `GET /products/<id>` - ID အလိုက် ပစ္စည်း ရယူရန်
+- `GET /` - Service information
+- `GET /health` - Health check endpoint
+- `GET /products` - List all products
+- `GET /products/<id>` - Get product by ID
 
-**အဓိက လက္ခဏာများ**:
-- Flask နှင့် RESTful API
-- in-memory ပစ္စည်း အချက်အလက် စတိုး (ရိုးရှင်းသည်၊ database မလိုအပ်)
-- probes များဖြင့် ကျန်းမာရေး မော်နီတာ
-- ဖွဲ့စည်းထားသော မှတ်တမ်းစုစည်းမှု
-- Application Insights ထည့်သွင်းခြင်း
+**Key Features**:
+- RESTful API with Flask
+- In-memory product store (simple, no database needed)
+- Health monitoring with probes
+- Structured logging
+- Application Insights integration
 
 **Data Model**:
 ```python
@@ -337,97 +314,97 @@ app.get('/api/products', async (req, res) => {
 }
 ```
 
-**ဘာကြောင့် အတွင်းမှသာလဲ?**
-Product service ကို ပြင်ပထံ ထွက်ပေးထားခြင်း မရှိပါ။ မည်သည့် တောင်းဆိုမှုမျှ API Gateway မှတဆင့် ဖြစ်ရမည်၊ ၎င်းက ဖော်ပြပေးသည်မှာ -
-- လုံခြုံရေး: ထိန်းချုပ်ထားသော ဝင်ရောက်ရေးချက်
-- ပြောင်းလဲနိုင်ခြင်း: မူလ client များအား ထိခိုက်စေခြင်းမရှိဘဲ နောက်ခံကို ပြောင်းလဲနိုင်ခြင်း
-- မော်နီတာ: တောင်းဆိုမှု များကို အစုစည်းစီမံ မှတ်တမ်းထားခြင်း
+**Why Internal Only?**
+The product service is not exposed publicly. All requests must go through the API Gateway, which provides:
+- Security: Controlled access point
+- Flexibility: Can change backend without affecting clients
+- Monitoring: Centralized request logging
 
-## ဝန်ဆောင်မှု ဆက်သွယ်မှု ကို နားလည်ခြင်း
+## Understanding Service Communication
 
-### ဝန်ဆောင်မှုများ ဘယ်လို ဆက်သွယ်ကြသလဲ
+### How Services Talk to Each Other
 
-ဤဥပမာတွင် API Gateway သည် Product Service နှင့် **အတွင်း HTTP ချိတ်ဆက်မှုများ** ဖြင့် ဆက်သွယ်သည်။
+In this example, the API Gateway communicates with the Product Service using **internal HTTP calls**:
 
 ```javascript
 // API ဂိတ်ဝေး (src/api-gateway/app.js)
 const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL;
 
-// အတွင်းပိုင်း HTTP တောင်းဆိုချက် တစ်ခု ပြုလုပ်ပါ
+// အတွင်းပိုင်း HTTP တောင်းဆိုချက် ပြုလုပ်သည်
 const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 ```
 
-**အဓိက အချက်များ**:
+**Key Points**:
 
-1. **DNS အခြေခံ ရှာဖွေမှု**: Container Apps သည် အတွင်း ဝန်ဆောင်မှုများအတွက် အလိုအလျော့ DNS ပံ့ပိုးပေးသည်
+1. **DNS-Based Discovery**: Container Apps automatically provides DNS for internal services
    - Product Service FQDN: `product-service.internal.<environment>.azurecontainerapps.io`
-   - ရိုးရှင်းစွာ: `http://product-service` (Container Apps က ယင်းကို ဖြေရှင်းပေးသည်)
+   - Simplified as: `http://product-service` (Container Apps resolves it)
 
-2. **ပြင်ပ ထုတ်ဖေါ်မှု မရှိခြင်း**: Product Service တွင် Bicep ထဲတွင် `external: false` ဖြစ်သည်
-   - Container Apps ပတ်ဝန်းကျင်အတွင်းထဲမှသာ ဝင်ရောက်နိုင်သည်
-   - အင်တာနက်မှ မရောက်နိုင်ပါ
+2. **No Public Exposure**: Product Service has `external: false` in Bicep
+   - Only accessible within the Container Apps environment
+   - Cannot be reached from the internet
 
-3. **ပတ်ဝန်းကျင် အပြောင်းအလဲများ**: ဝန်ဆောင်မှု URL များကို တပ်ဆင်ရာ အချိန်တွင် ထည့်ပေးသည်
-   - Bicep သည် API Gateway သို့ အတွင်း FQDN ကို ပေးပို့သည်
-   - အပလီကေးရှင်း ကုဒ်ထဲတွင် URL မဟုတ်သည့် hardcoded ဖိုင် မရှိပါ
+3. **Environment Variables**: Service URLs are injected at deployment time
+   - Bicep passes the internal FQDN to the gateway
+   - No hardcoded URLs in application code
 
-**နှိုင်းယှဉ်ချက်**: ဤသည်ကို ရုံးခန်းများလို တွေးပါ။ API Gateway သည် ရုံးဝန်ထမ်း စားပွဲ (ပြင်ပအသုံးပြုသူများအတွက်) ဖြစ်ပြီး Product Service သည် အခန်းတစ်ခန်း (အတွင်းမှသာ) ဖြစ်သည်။ ဧည့်သည်များသည် ရုံးဝန်ထမ်းဖြင့်သာ အခန်းများသို့ သွားရောက်နိုင်ပါသည်။
+**Analogy**: Think of this like office rooms. The API Gateway is the reception desk (public-facing), and the Product Service is an office room (internal only). Visitors must go through reception to reach any office.
 
-## တပ်ဆင်မှု စိတ်ကြိုက်ရွေးချယ်စရာများ
+## Deployment Options
 
-### အပြည့်အစုံ တပ်ဆင်ခြင်း (အကြံပြု)
+### Full Deployment (Recommended)
 
 ```bash
-# အခြေခံအဆောက်အအုံနှင့် နှစ်ခုစလုံး ဝန်ဆောင်မှုများကို တပ်ဆင်ပါ
+# အခြေခံအင်ဖရာနှင့် ဝန်ဆောင်မှုနှစ်ခုလုံးကို တပ်ဆင်ပါ
 azd up
 ```
 
-ဤသည်သည် တပ်ဆင်သည်:
-1. Container Apps ပတ်ဝန်းကျင်
+This deploys:
+1. Container Apps environment
 2. Application Insights
 3. Container Registry
-4. API Gateway ကွန်တိန်နာ
-5. Product Service ကွန်တိန်နာ
+4. API Gateway container
+5. Product Service container
 
-**ချိန်**: 8-12 မိနစ်
+**Time**: 8-12 minutes
 
-### တစ်ခုချင်း ဝန်ဆောင်မှု တပ်ဆင်ခြင်း
+### Deploy Individual Service
 
 ```bash
-# အစပိုင်း azd up လုပ်ပြီးနောက် ဝန်ဆောင်မှုတစ်ခုတည်းကိုသာ တပ်ဆင်ပါ
+# ဝန်ဆောင်မှု တစ်ခုတည်းကိုသာ တပ်ဆင်ပါ (အစပိုင်း azd up ပြီးနောက်)
 azd deploy api-gateway
 
 # သို့မဟုတ် product ဝန်ဆောင်မှုကို တပ်ဆင်ပါ
 azd deploy product-service
 ```
 
-**အသုံးချမှု**: ဝန်ဆောင်မှုတစ်ခု၏ ကုဒ်ကို ပြင်ဆင်ပြီး ထပ်မံ တပ်ဆင်လိုသောအခါ သာမက ချန်ထားနိုင်သည်။
+**Use Case**: When you've updated code in one service and want to redeploy only that service.
 
-### ဖွဲ့စည်းမှု အပ်ဒိတ်
+### Update Configuration
 
 ```bash
-# ချဲ့ထွင်မှု ပါရာမီတာများကို ပြောင်းလဲပါ
+# အရွယ်ချဲ့ခြင်း သတ်မှတ်ချက်များကို ပြောင်းပါ
 azd env set GATEWAY_MAX_REPLICAS 30
 
-# ဖွဲ့စည်းပုံအသစ်ဖြင့် ပြန်လည်တပ်ဆင်ပါ
+# ဖွဲ့စည်းပုံအသစ်နှင့် ပြန်တပ်ဆင်ပါ
 azd up
 ```
 
-## ဖွဲ့စည်းမှု
+## Configuration
 
-### စကေးဖွဲ့စည်းမှု ကို သတ်မှတ်ခြင်း
+### Scaling Configuration
 
-နှစ်ဖက်ဝန်ဆောင်မှုများသည် သူတို့၏ Bicep ဖိုင်များတွင် HTTP အခြေခံ အလိုအလျော့ စကေးဖြင့် သတ်မှတ်ထားသည်။
+Both services are configured with HTTP-based autoscaling in their Bicep files:
 
 **API Gateway**:
-- Min replicas: 2 (availability အတွက် အနည်းဆုံး 2)
+- Min replicas: 2 (always at least 2 for availability)
 - Max replicas: 20
-- Scale trigger: replica တစ်ခုလျှင် 50 concurrent requests
+- Scale trigger: 50 concurrent requests per replica
 
 **Product Service**:
-- Min replicas: 1 (လိုအပ်သည်ဆိုလျှင် zero သို့ စကေးချနိုင်)
+- Min replicas: 1 (can scale to zero if needed)
 - Max replicas: 10
-- Scale trigger: replica တစ်ခုလျှင် 100 concurrent requests
+- Scale trigger: 100 concurrent requests per replica
 
 **Customize Scaling** (in `infra/app/*.bicep`):
 ```bicep
@@ -447,21 +424,21 @@ scale: {
 }
 ```
 
-### အရင်းအမြစ် ချိန်ညှိမှု
+### Resource Allocation
 
 **API Gateway**:
 - CPU: 1.0 vCPU
 - Memory: 2 GiB
-- အကြောင်းပြချက်: ပြင်ပ traffic အားလုံး ကို ကိုင်တွယ်သည်
+- Reason: Handles all external traffic
 
 **Product Service**:
 - CPU: 0.5 vCPU
 - Memory: 1 GiB
-- အကြောင်းပြချက်: in-memory လည်ပတ်မှုများသည် ပိုမို ပေါ့ပါးသည်
+- Reason: Lightweight in-memory operations
 
-### ကျန်းမာရေး စစ်ဆေးမှုများ
+### Health Checks
 
-နှစ်ဖက် ဝန်ဆောင်မှုများတွင် liveness နှင့် readiness probes များ ပါဝင်သည်:
+Both services include liveness and readiness probes:
 
 ```bicep
 probes: [
@@ -486,29 +463,29 @@ probes: [
 ]
 ```
 
-**ဤသည်သည် ဘာကို ရည်ညွှန်းသလဲ**:
-- **Liveness**: ကျန်းမာရေး စစ်ဆေးမှု မအောင်မြင်ပါက Container Apps သည် container ကို ထပ်မံ စမည်
-- **Readiness**: ပြင်ဆင်မှုမဖြစ်ပါက Container Apps သည် ထို replica သို့ traffic မပို့မီ ရပ်ဆိုင်းမည်
+**What This Means**:
+- **Liveness**: If health check fails, Container Apps restarts the container
+- **Readiness**: If not ready, Container Apps stops routing traffic to that replica
 
 
 
-## မော်နီတာနှင့် မြင်သာမှု
+## Monitoring & Observability
 
-### ဝန်ဆောင်မှု မှတ်တမ်းများ ကြည့်ရန်
+### View Service Logs
 
 ```bash
-# azd monitor ကို အသုံးပြုပြီး လော့ဂ်များ ကြည့်ပါ
+# azd monitor ကို အသုံးပြု၍ လော့ဂ်များကို ကြည့်ပါ
 azd monitor --logs
 
-# သို့မဟုတ် သီးသန့် Container Apps များအတွက် Azure CLI ကို အသုံးပြုပါ:
-# API Gateway မှ လော့ဂ်များကို တိုက်ရိုက် စီးဆင်းကြည့်ပါ
+# သို့မဟုတ် သတ်မှတ်ထားသော Container Apps များအတွက် Azure CLI ကို အသုံးပြုပါ:
+# API Gateway မှ လော့ဂ်များကို စီးဆင်းထုတ်လွှင့်ပါ
 az containerapp logs show --name api-gateway --resource-group $RG_NAME --follow
 
-# မကြာသေးမီ ထုတ်ကုန် ဝန်ဆောင်မှု လော့ဂ်များကို ကြည့်ပါ
+# နောက်ဆုံးရ ထုတ်ကုန် ဝန်ဆောင်မှု လော့ဂ်များကို ကြည့်ပါ
 az containerapp logs show --name product-service --resource-group $RG_NAME --tail 100
 ```
 
-**မျှော်လင့်ရမည့် ထွက်လာမှု**:
+**Expected Output**:
 ```
 [api-gateway] API Gateway listening on port 8080
 [api-gateway] Product Service URL: http://product-service
@@ -516,11 +493,11 @@ az containerapp logs show --name product-service --resource-group $RG_NAME --tai
 [product-service] Retrieved 5 products
 ```
 
-### Application Insights မေးခွန်းများ
+### Application Insights Queries
 
-Azure Portal တွင် Application Insights ကို ဝင်ရောက်ပြီး ထို့နောက် ဤ မေးခွန်းများကို ဆောင်ရွက်ပါ။
+Access Application Insights in Azure Portal, then run these queries:
 
-**နောက်ကျသော တောင်းဆိုမှုပြင်းထန်မှုများကို ရှာဖွေပါ**:
+**Find Slow Requests**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -529,7 +506,7 @@ requests
 | order by count_ desc
 ```
 
-**ဝန်ဆောင်မှုမှ ဝန်ဆောင်မှု ခေါ်ဆိုမှုများကို မှတ်တမ်းတင်ပါ**:
+**Track Service-to-Service Calls**:
 ```kusto
 dependencies
 | where timestamp > ago(1h)
@@ -538,7 +515,7 @@ dependencies
 | order by timestamp desc
 ```
 
-**ဝန်ဆောင်မှု အလိုက် အမှားနှုန်း**:
+**Error Rate by Service**:
 ```kusto
 exceptions
 | where timestamp > ago(24h)
@@ -546,7 +523,7 @@ exceptions
 | order by errorCount desc
 ```
 
-**အချိန် အလိုက် တောင်းဆိုမှု အရေအတွက်**:
+**Request Volume Over Time**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -554,13 +531,13 @@ requests
 | render timechart
 ```
 
-### မော်နီတာ Dashboard သို့ ဝင်ရောက်ကြည့်ရှုခြင်း
+### Access Monitoring Dashboard
 
 ```bash
-# Application Insights အသေးစိတ်အချက်အလက်များ ရယူပါ
+# Application Insights အသေးစိတ် ရယူရန်
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Azure Portal အတွင်း စောင့်ကြည့်မှုကို ဖွင့်ပါ
+# Azure Portal ၏ မော်နီတာကို ဖွင့်ရန်
 az monitor app-insights component show \
   --app $(azd env get-values | grep APPLICATIONINSIGHTS_CONNECTION_STRING | cut -d '=' -f2) \
   --resource-group $(azd env get-values | grep AZURE_RESOURCE_GROUP | cut -d '=' -f2) \
@@ -569,18 +546,18 @@ az monitor app-insights component show \
 
 ### Live Metrics
 
-1. Application Insights ကို Azure Portal တွင် သွားပါ
-2. "Live Metrics" ကို နှိပ်ပါ
-3. အချိန်နှင့်တပြေးညီ တောင်းဆိုမှုများ၊ မအောင်မြင်မှုများနှင့် စွမ်းဆောင်ရည်ကို ကြည့်ရှုနိုင်သည်
-4. စမ်းသပ်ရန် အောက်ပါကို အသုံးပြုပါ: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
+1. Navigate to Application Insights in Azure Portal
+2. Click "Live Metrics"
+3. See real-time requests, failures, and performance
+4. Test by running: `curl $(azd env get-values | grep API_GATEWAY_URL | cut -d '=' -f2 | tr -d '"')/api/products`
 
-## လက်တွေ့ လေ့ကျင့်ခန်းများ
+## Practical Exercises
 
-[မှတ်ချက်: အပြည့်အစုံ လေ့ကျင့်ခန်းများကို "Practical Exercises" အပိုင်း၌ အဆင့်ဆင့် လမ်းညွှန်ချက်များ (deployment verification, data modification, autoscaling tests, error handling, နှင့် တတိယ ဝန်ဆောင်မှု ထည့်သွင်းခြင်း) ဖြင့် ကြည့်ပါ။]
+[Note: See full exercises above in the "Practical Exercises" section for detailed step-by-step exercises including deployment verification, data modification, autoscaling tests, error handling, and adding a third service.]
 
-## ကုန်ကျစရိတ် বিশ্লেষণ
+## Cost Analysis
 
-### ငွေပမာဏ ခန့်မှန်း (ဤ 2-ဝန်ဆောင်မှု ဥပမာအတွက်)
+### Estimated Monthly Costs (For This 2-Service Example)
 
 | Resource | Configuration | Estimated Cost |
 |----------|--------------|----------------|
@@ -591,14 +568,14 @@ az monitor app-insights component show \
 | Log Analytics | 1 GB/month | $3 |
 | **Total** | | **$58-243/month** |
 
-**သုံးစွဲမှု အလိုက် ကုန်ကျစရိတ် ခွဲခြမ်းမှု**:
-- **နည်းပမာဏ ဗဟိုဆောင်ရွက်မှု** (စမ်းသပ်ခြင်း/သင်ယူရန်): ~$60/လ
-- **အလယ်အလတ် သယ်ယူပေးမှု** (သေးငယ်သော production): ~$120/လ
-- **မြင့်မား သယ်ယူပေးမှု** (ပင်ပန်းသကြား အချိန်များ): ~$240/လ
+**Cost Breakdown by Usage**:
+- **Light traffic** (testing/learning): ~$60/month
+- **Moderate traffic** (small production): ~$120/month
+- **High traffic** (busy periods): ~$240/month
 
-### ကုန်ကျစရိတ် အကျိုးရှိဆုံး အကြံပြုချက်များ
+### Cost Optimization Tips
 
-1. **ဖွံ့ဖြိုးမှုအတွက် Scale to Zero အသုံးပြုပါ**:
+1. **Scale to Zero for Development**:
    ```bicep
    scale: {
      minReplicas: 0  // Save $30-40/month when not in use
@@ -606,69 +583,70 @@ az monitor app-insights component show \
    }
    ```
 
-2. **Cosmos DB ထည့်စဉ် Consumption Plan ကို အသုံးပြုပါ** (ထည့်သွင်းသောအခါ):
-   - သင်သုံးသလိုသာ ပေးဆောင်ပါ
-   - မည်သည့်အစအနည်းအကြောင်းလည်း မရှိ
+2. **Use Consumption Plan for Cosmos DB** (when you add it):
+   - Pay only for what you use
+   - No minimum charge
 
-3. **Application Insights Sampling ကို သတ်မှတ်ပါ**:
+3. **Set Application Insights Sampling**:
    ```javascript
    appInsights.defaultClient.config.samplingPercentage = 50; // တောင်းဆိုမှုများ၏ 50% ကို နမူနာယူပါ
    ```
 
-4. **အသုံးမလိုချိန် အတွင်း ဖယ်ရှားပါ**:
+4. **Clean Up When Not Needed**:
    ```bash
    azd down
    ```
 
-### အခမဲ့ ထပ်တိုး ရွေးချယ်စရာများ
+### Free Tier Options
+
 For learning/testing, consider:
-- Use Azure free credits (first 30 days)
-- Keep to minimum replicas
-- Delete after testing (no ongoing charges)
+- Azure အခမဲ့ ခရက်ဒစ်များကို အသုံးပြုပါ (ပထမ ၃၀ ရက်)
+- replicas များကို အနည်းဆုံးထားပါ
+- စမ်းသပ်ပြီးနောက် ဖျက်ပါ (ဆက်လက်ကုန်ကျစရိတ် မဖြစ်စေရန်)
 
 ---
 
-## Cleanup
+## ဖယ်ရှားခြင်း
 
-To avoid ongoing charges, delete all resources:
+ဆက်လက် ကုန်ကျစရိတ် မဖြစ်စေရန် အရင်းအမြစ်များအားလုံးကို ဖျက်ပါ။
 
 ```bash
 azd down --force --purge
 ```
 
-**Confirmation Prompt**:
+**အတည်ပြု မေးခွန်း**:
 ```
 ? Total resources to delete: 6, are you sure you want to continue? (y/N)
 ```
 
-Type `y` to confirm.
+အတည်ပြုရန် `y` ဟု ရိုက်ပါ။
 
-**What Gets Deleted**:
-- Container Apps Environment
-- Both Container Apps (gateway & product service)
+**ဖျက်မည့် အရာများ**:
+- Container Apps ပတ်ဝန်းကျင်
+- Container Apps နှစ်ခု (gateway နှင့် product service)
 - Container Registry
 - Application Insights
 - Log Analytics Workspace
 - Resource Group
 
-**✓ Verify Cleanup**:
+**✓ ရှင်းလင်းမှုကို အတည်ပြုပါ**:
 ```bash
 az group list --query "[?starts_with(name,'rg-microservices')]" --output table
 ```
 
-Should return empty.
+အလွတ် ပြန်လာရမည်။
 
 ---
 
-## Expansion Guide: From 2 to 5+ Services
+## တိုးချဲ့ လမ်းညွှန်: 2 မှ 5+ ဝန်ဆောင်မှုများသို့
 
-Once you've mastered this 2-service architecture, here's how to expand:
+ဤ 2-ဝန်ဆောင်မှု ဖွဲ့စည်းပုံကို ကျွမ်းကျင်ပြီးပါက တိုးချဲ့ရန် အောက်ပါအတိုင်း လုပ်နိုင်သည်။
 
-### Phase 1: Add Database Persistence (Next Step)
+### အဆင့် 1: ဒေတာသိုလှောင်မှု (နောက်တစ်ဆင့်)
 
-**Add Cosmos DB for Product Service**:
+**Product Service အတွက် Cosmos DB ထည့်ရန်**:
 
-1. Create `infra/core/cosmos.bicep`:
+1. `infra/core/cosmos.bicep` ဖိုင်ကို ဖန်တီးပါ။
    ```bicep
    resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
      name: name
@@ -681,132 +659,132 @@ Once you've mastered this 2-service architecture, here's how to expand:
    }
    ```
 
-2. Update product service to use Cosmos DB instead of in-memory data
+2. product service ကို in-memory data အစား Cosmos DB အသုံးပြုသည့်အတိုင်း အပ်ဒိတ်လုပ်ပါ။
 
-3. Estimated additional cost: ~$25/month (serverless)
+3. ခန့်မှန်း အပို ကုန်ကျစရိတ်: ~ $25/လ (serverless)
 
-### Phase 2: Add Third Service (Order Management)
+### အဆင့် 2: တတိယ ဝန်ဆောင်မှု ထည့်ရန် (Order Management)
 
-**Create Order Service**:
+**Order Service ဖန်တီးခြင်း**:
 
-1. New folder: `src/order-service/` (Python/Node.js/C#)
-2. New Bicep: `infra/app/order-service.bicep`
-3. Update API Gateway to route `/api/orders`
-4. Add Azure SQL Database for order persistence
+1. ဖိုလ်ဒါအသစ်: `src/order-service/` (Python/Node.js/C#)
+2. Bicep အသစ်: `infra/app/order-service.bicep`
+3. API Gateway ကို `/api/orders` သို့ ကြောင်းခွဲရန် အပ်ဒိတ်လုပ်ပါ
+4. အော်ဒါ သိုလှောင်မှုအတွက် Azure SQL Database ထည့်ပါ
 
-**Architecture becomes**:
+**ဖွဲ့စည်းပုံ ရလာမည်**:
 ```
 API Gateway → Product Service (Cosmos DB)
            → Order Service (Azure SQL)
 ```
 
-### Phase 3: Add Async Communication (Service Bus)
+### အဆင့် 3: အစဉ်မရှိ ဆက်သွယ်မှု (Service Bus)
 
-**Implement Event-Driven Architecture**:
+**Event-Driven Architecture ကို အကောင်အထည်ဖော်ပါ**:
 
-1. Add Azure Service Bus: `infra/core/servicebus.bicep`
-2. Product Service publishes "ProductCreated" events
-3. Order Service subscribes to product events
-4. Add Notification Service to process events
+1. Azure Service Bus ထည့်ပါ: `infra/core/servicebus.bicep`
+2. Product Service မှ "ProductCreated" events များကို ပျံ့နှံ့ပို့ပါ
+3. Order Service သည် product events များကို subscribe လုပ်ပါ
+4. အဖြစ်အပျက်များကို ဆောင်ရွက်ရန် Notification Service ထည့်ပါ
 
-**Pattern**: Request/Response (HTTP) + Event-Driven (Service Bus)
+**ပုံစံ**: Request/Response (HTTP) + Event-Driven (Service Bus)
 
-### Phase 4: Add User Authentication
+### အဆင့် 4: အသုံးပြုသူ အတည်ပြုခြင်း ထည့်သွင်းခြင်း
 
-**Implement User Service**:
+**User Service ကို တည်ဆောက်ပါ**:
 
-1. Create `src/user-service/` (Go/Node.js)
-2. Add Azure AD B2C or custom JWT authentication
-3. API Gateway validates tokens
-4. Services check user permissions
+1. `src/user-service/` ဖိုလ်ဒါကို ဖန်တီးပါ (Go/Node.js)
+2. Azure AD B2C သို့မဟုတ် custom JWT authentication ထည့်ပါ
+3. API Gateway သည် token များကို အတည်ပြုသည်
+4. ဝန်ဆောင်မှုများသည် အသုံးပြုသူ ခွင့်ပြုချက်များကို စစ်ဆေးသည်
 
-### Phase 5: Production Readiness
+### အဆင့် 5: ထုတ်လုပ်မှု အဆင်ပြေစေရန်
 
-**Add These Components**:
-- Azure Front Door (global load balancing)
-- Azure Key Vault (secret management)
-- Azure Monitor Workbooks (custom dashboards)
+**ဤ အစိတ်အပိုင်းများ ထည့်ပါ**:
+- Azure Front Door (ကမ္ဘာလုံးဆိုင်ရာ load balancing)
+- Azure Key Vault (လျှို့ဝှက် အရာများ စီမံခန့်ခွဲခြင်း)
+- Azure Monitor Workbooks (စိတ်ကြိုက် dashboards)
 - CI/CD Pipeline (GitHub Actions)
 - Blue-Green Deployments
-- Managed Identity for all services
+- ဝန်ဆောင်မှုအားလုံးအတွက် Managed Identity
 
-**Full Production Architecture Cost**: ~$300-1,400/month
+**ထုတ်လုပ်မှု အပြည့်အစုံ ဖွဲ့စည်းပုံ ကုန်ကျစရိတ်**: ~ $300-1,400/လ
 
 ---
 
-## Learn More
+## ပိုမိုလေ့လာရန်
 
-### Related Documentation
-- [Azure Container Apps Documentation](https://learn.microsoft.com/azure/container-apps/)
-- [Microservices Architecture Guide](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
-- [Application Insights for Distributed Tracing](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+### ဆက်စပ်စာရွက်စာတမ်းများ
+- [Azure Container Apps စာရွက်စာတမ်း](https://learn.microsoft.com/azure/container-apps/)
+- [Microservices ဖွဲ့စည်းပုံ လမ်းညွှန်](https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices)
+- [Distributed Tracing အတွက် Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/distributed-tracing)
+- [Azure Developer CLI စာရွက်စာတမ်း](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 
-### Next Steps in This Course
-- ← Previous: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - Beginner single-container example
-- → Next: [AI Integration Guide](../../../../../examples/docs/ai-foundry) - Add AI capabilities
+### ဒီသင်တန်း၏ နောက်တစ်ဆင့်များ
+- ← Previous: [Simple Flask API](../../../../../examples/container-app/simple-flask-api) - စတင်လေ့လာသူများအတွက် တစ်-ကွန်တိန်နာ ဥပမာ
+- → Next: [AI Integration Guide](../../../../../examples/docs/ai-foundry) - AI လုပ်ဆောင်ချက်များ ထည့်သွင်းခြင်း
 - 🏠 [Course Home](../../README.md)
 
-### Comparison: When to Use What
+### နှိုင်းယှဉ်ချက်: ဘယ်အချိန် ဘာကို အသုံးပြုသင့်သလဲ
 
-**Single Container App** (Simple Flask API example):
-- ✅ Simple applications
-- ✅ Monolithic architecture
-- ✅ Fast to deploy
-- ❌ Limited scalability
-- **Cost**: ~$15-50/month
+**Single Container App** (ရိုးရှင်းသော Flask API ဥပမာ):
+- ✅ ရိုးရှင်းသော အက်ပလီကေးရှင်းများ
+- ✅ Monolithic ဖွဲ့စည်းပုံ
+- ✅ မြန်ဆန်စွာ တင်သွင်းနိုင်သည်
+- ❌ တိုးချဲ့နိုင်စွမ်း ကန့်သတ်ချက်ရှိသည်
+- **ကုန်ကျစရိတ်**: ~ $15-50/လ
 
-**Microservices** (This example):
-- ✅ Complex applications
-- ✅ Independent scaling per service
-- ✅ Team autonomy (different services, different teams)
-- ❌ More complex to manage
-- **Cost**: ~$60-250/month
+**Microservices** (ဤဥပမာ):
+- ✅ အပြင်းထန်ရှုပ်ထွေးသော အက်ပလီကေးရှင်းများ
+- ✅ ဝန်ဆောင်မှု တစ်ခုချင်းစီ အလိုက် လွတ်လပ်စွာ ချဲ့နိုင်မှု
+- ✅ အသင်းအလိုက် လွတ်လပ်မှု (ဝန်ဆောင်မှု မတူ၊ အသင်းများ မတူ)
+- ❌ စီမံခန့်ခွဲရန် ပိုမိုရှုပ်ထွေးသည်
+- **ကုန်ကျစရိတ်**: ~ $60-250/လ
 
 **Kubernetes (AKS)**:
-- ✅ Maximum control and flexibility
-- ✅ Multi-cloud portability
-- ✅ Advanced networking
-- ❌ Requires Kubernetes expertise
-- **Cost**: ~$150-500/month minimum
+- ✅ ထိန်းချုပ်နိုင်မှုနှင့် အပြောင်းလဲခံနိုင်မှု အများဆုံး
+- ✅ မျိုးစုံ cloud သို့ ဆောင်ရွက်နိုင်မှု
+- ✅ အဆင့်မြင့် နက်ဝက်ကွန်ယက်
+- ❌ Kubernetes ကျွမ်းကျင်မှု လိုအပ်သည်
+- **ကုန်ကျစရိတ်**: ~ $150-500/လ အနည်းဆုံး
 
-**Recommendation**: Start with Container Apps (this example), move to AKS only if you need Kubernetes-specific features.
+**အကြံပေးချက်**: အစမှာ Container Apps (ဤဥပမာ) ဖြင့် စတင်ပါ၊ Kubernetes အထူး လုပ်ဆောင်ချက်များ လိုအပ်ပါကသာ AKS သို့ ရွေ့ပါ။
 
 ---
 
-## Frequently Asked Questions
+## မကြာခဏ မေးသောမေးခွန်းများ
 
-**Q: Why only 2 services instead of 5+?**  
-A: Educational progression. Master the fundamentals (service communication, monitoring, scaling) with a simple example before adding complexity. The patterns you learn here apply to 100-service architectures.
+**Q: 5+ ဝန်ဆောင်မှုများမဟုတ်ဘဲ ဘာကြောင့် 2 ဝန်ဆောင်မှုသာထားတာလဲ?**  
+A: သင်ယူရေးဆိုင်ရာ တိုးတက်မှုအတွက် ဖြစ်သည်။ ရိုးရှင်းသော ဥပမာဖြင့် ဝန်ဆောင်မှုဆက်သွယ်ခြင်း၊ မော်နီတာခြင်းနှင့် ချဲ့နိုင်စွမ်းတို့ကို ကျွမ်းကျင်နိုင်ရန် စတင်ပါ။ ဤနေရာတွင် သင်လေ့လာသည့် ပုံစံများကို 100-ဝန်ဆောင်မှု ဖွဲ့စည်းပုံများတွင်လည်း အသုံးချနိုင်ပါသည်။
 
-**Q: Can I add more services myself?**  
-A: Absolutely! Follow the expansion guide above. Each new service follows the same pattern: create src folder, create Bicep file, update azure.yaml, deploy.
+**Q: ကိုယ်တိုင် ဝန်ဆောင်မှုများ ပိုထည့်နိုင်မလား?**  
+A: ဟုတ်ပါတယ်! အပေါ်က တိုးချဲ့လမ်းညွှန်ကို လိုက်နာပါ။ ဝန်ဆောင်မှုအသစ်တိုင်းသည် အတူတူပုံစံကို လိုက်နာသည်: src ဖိုလ်ဒါ ဖန်တီး၊ Bicep ဖိုင် ဖန်တီး၊ azure.yaml ကို အပ်ဒိတ်၊ deploy လုပ်ပါ။
 
-**Q: Is this production-ready?**  
-A: It's a solid foundation. For production, add: managed identity, Key Vault, persistent databases, CI/CD pipeline, monitoring alerts, and backup strategy.
+**Q: ဤသည် သည် ထုတ်လုပ်ရေးအတွက် အသင့်ပါသလား?**  
+A: ဤသည် သည် ခိုင်မာသော အခြေခံ လက်ခံခြင်းဖြစ်သည်။ ထုတ်လုပ်ရေးအတွက် managed identity, Key Vault, persistent databases, CI/CD pipeline, monitoring alerts, backup strategy များကို ထည့်သွင်းပါ။
 
-**Q: Why not use Dapr or other service mesh?**  
-A: Keep it simple for learning. Once you understand native Container Apps networking, you can layer on Dapr for advanced scenarios.
+**Q: Dapr သို့မဟုတ် အခြား service mesh မသုံးဘူးလား?**  
+A: သင်ယူရန် ရိုးရှင်းစေရန် ဖြစ်သည်။ Container Apps ၏ မူလ ကွန်ရက်နည်းပညာကို နားလည်သည့်အခါ Dapr ကို အလွှာတင်၍ အသုံးပြုနိုင်ပါသည်။
 
-**Q: How do I debug locally?**  
-A: Run services locally with Docker:
+**Q: ဒေသတွင်း (locally) ဘယ်လို debug လုပ်မလဲ?**  
+A: Docker ဖြင့် ဝန်ဆောင်မှုများကို ဒေသတွင်းတွင် ပြေးဆောင် လေ့လာနိုင်သည်။
 ```bash
 cd src/api-gateway
 docker build -t local-gateway .
 docker run -p 8080:8080 -e PRODUCT_SERVICE_URL=http://localhost:8000 local-gateway
 ```
 
-**Q: Can I use different programming languages?**  
-A: Yes! This example shows Node.js (gateway) + Python (product service). You can mix any languages that run in containers.
+**Q: မတူသော programming languages များကို သုံးလို့ ရမလား?**  
+A: ဟုတ်ပါတယ်! ဤဥပမာတွင် Node.js (gateway) + Python (product service) ကို ပြထားသည်။ ကွန်တိန်နာတွင်း ဆောင်ရွက်နိုင်သည့် ဘာသာစကား များကို မည်သို့ပဲ ပေါင်းစပ်အသုံးပြုနိုင်သည်။
 
-**Q: What if I don't have Azure credits?**  
-A: Use Azure free tier (first 30 days with new accounts) or deploy for short testing periods and delete immediately.
+**Q: Azure ခရက်ဒစ် မရှိရင်ဘာလဲ?**  
+A: Azure အခမဲ့ အဆင့်ကို အသုံးပြုပါ (အကောင့်အသစ်များအတွက် ပထမ ၃၀ ရက်) သို့မဟုတ် စမ်းသပ်ရန် ကြာချိန်တိုတိုအတွက် တင်ပြီး ချက်ချင်း ဖျက်ပါ။
 
 ---
 
-> **🎓 Learning Path Summary**: You've learned to deploy a multi-service architecture with automatic scaling, internal networking, centralized monitoring, and production-ready patterns. This foundation prepares you for complex distributed systems and enterprise microservices architectures.
+> **🎓 သင်ယူရေးလမ်းစဉ် အကျဉ်းချုပ်**: သင်သည် အလိုအလျောက် ချဲ့နိုင်မှု၊ အတွင်းပိုင်း ကြိုးနက်ကွန်ယက်၊ ဗဟိုစီမံမော်နီတာခြင်းနှင့် ထုတ်လုပ်မှုသင့် ပုံစံများပါသော multi-service ဖွဲ့စည်းပုံ တင်သွင်းနည်းကို လေ့လာပြီး ကျင့်သုံးနိုင်သည်။ ဤအခြေခံသည် ရှုပ်ထွေးသော ဖြန့်ဖြူးစနစ်များနှင့် စီးပွားရေး microservices ဖွဲ့စည်းပုံများအတွက် သင့်ကို အဆင်ပြေစေပါသည်။
 
-**📚 Course Navigation:**
+**📚 သင်တန်း လမ်းညွှန်:**
 - ← Previous: [Simple Flask API](../../../../../examples/container-app/simple-flask-api)
 - → Next: [Database Integration Example](../../../../../examples/database-app)
 - 🏠 [Course Home](../../../README.md)
@@ -815,6 +793,6 @@ A: Use Azure free tier (first 30 days with new accounts) or deploy for short tes
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-အသိပေးချက်:
-ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးစားပါသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် မှန်ကန်မှုမလုံလောက်မှုများ ရှိနိုင်ကြောင်း ကျေးဇူးပြု၍ သိထားပါ။ မူရင်းစာတမ်းကို မူလဘာသာစကားဖြင့်သာ တရားဝင် အရင်းအမြစ်အဖြစ် ယူဆရမည် ဖြစ်ပါသည်။ အရေးကြီးသော သတင်းအချက်အလက်များအတွက် လူသားဘာသာပြန်ကျွမ်းကျင်သူမှ ဘာသာပြန်ရန် အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းကြောင့် ဖြစ်ပေါ်လာနိုင်သည့် နားမလည်မှုများ သို့မဟုတ် မမှန်ကန်စွာ ဖော်ပြခြင်းများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+**Disclaimer**:
+ဤစာရွက်ကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးစားပေမယ့် အလိုအလျောက် ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း ကျေးဇူးပြု၍ သတိပြုပါ။ မူလစာရွက်ကို မိခင်ဘာသာဖြင့်ရှိသော မူရင်း ကိုယ်စားလှယ်အရင်းအမြစ်ဟု သတ်မှတ်ရန် လိုအပ်ပါသည်။ အရေးကြီးသော သတင်းအချက်အလက်များအတွက် ကျွမ်းကျင် လူသား ဘာသာပြန်သူတို့၏ ဘာသာပြန်ချက်ကို ထောက်ခံအပ်ပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းကြောင့် ဖြစ်ပေါ်လာသည့် နားလည်မှုလွဲခြင်းများ သို့မဟုတ် မှားသုညချက်များအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

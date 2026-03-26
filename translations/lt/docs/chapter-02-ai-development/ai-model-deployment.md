@@ -1,28 +1,28 @@
 # AI modelių diegimas su Azure Developer CLI
 
-**Skyrių naršymas:**
-- **📚 Kursų pradžia**: [AZD pradedantiesiems](../../README.md)
-- **📖 Dabartinis skyrius**: 2 skyrius – AI pirmumo kūrimas
-- **⬅️ Ankstesnis**: [Microsoft Foundry integracija](microsoft-foundry-integration.md)
-- **➡️ Kitas**: [AI praktikos laboratorija](ai-workshop-lab.md)
-- **🚀 Kitas skyrius**: [3 skyrius: Konfigūracija](../chapter-03-configuration/configuration.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD Pradedantiesiems](../../README.md)
+- **📖 Current Chapter**: 2 skyrius - AI-pirmasis vystymas
+- **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Next Chapter**: [3 skyrius: Konfigūracija](../chapter-03-configuration/configuration.md)
 
-Šis vadovas pateikia išsamias instrukcijas, kaip diegti AI modelius naudojant AZD šablonus, apimančias viską nuo modelio pasirinkimo iki gamybinio diegimo modelių.
+Šis vadovas pateikia išsamius nurodymus, kaip diegti AI modelius naudojant AZD šablonus, apimant viską nuo modelio pasirinkimo iki gamybos diegimo modelių.
 
 ## Turinys
 
-- [Modelio parinkimo strategija](../../../../docs/chapter-02-ai-development)
-- [AZD konfigūravimas AI modeliams](../../../../docs/chapter-02-ai-development)
-- [Diegimo modeliai](../../../../docs/chapter-02-ai-development)
-- [Modelio valdymas](../../../../docs/chapter-02-ai-development)
-- [Produkcijos aspektai](../../../../docs/chapter-02-ai-development)
-- [Stebėjimas ir observabilumas](../../../../docs/chapter-02-ai-development)
+- [Modelio pasirinkimo strategija](#modelio-pasirinkimo-strategija)
+- [AZD konfigūracija AI modeliui](#azd-konfigūracija-ai-modeliams)
+- [Diegimo modeliai](#diegimo-modeliai)
+- [Modelių valdymas](#modeliu-valdymas)
+- [Produkcijos svarstymai](#produkcijos-svarstymai)
+- [Stebėjimas ir matomumas](#stebejimas-ir-matomumas)
 
-## Modelio parinkimo strategija
+## Modelio pasirinkimo strategija
 
-### Azure OpenAI modeliai
+### Microsoft Foundry modeliai
 
-Pasirinkite tinkamą modelį pagal jūsų naudojimo atvejį:
+Pasirinkite tinkamą modelį savo naudojimo atvejui:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -34,9 +34,9 @@ services:
       AZURE_OPENAI_MODELS: |
         [
           {
-            "name": "gpt-4o-mini",
+            "name": "gpt-4.1-mini",
             "version": "2024-07-18",
-            "deployment": "gpt-4o-mini",
+            "deployment": "gpt-4.1-mini",
             "capacity": 10,
             "format": "OpenAI"
           },
@@ -52,28 +52,28 @@ services:
 
 ### Modelio pajėgumų planavimas
 
-| Modelio tipas | Panaudojimo atvejis | Rekomenduojamas pajėgumas | Kainų aspektai |
-|------------|----------|---------------------|-------------------|
-| GPT-4o-mini | Pokalbiai, klausimai ir atsakymai | 10-50 TPM | Kaštų efektyvus daugumai darbo krūvių |
-| GPT-4 | Sudėtingas samprotavimas | 20-100 TPM | Brangesnis, naudokite aukščiausios klasės funkcijoms |
+| Modelio tipas | Naudojimo atvejis | Rekomenduojama pajėga | Sąnaudų aspektai |
+|---------------|-------------------|------------------------|------------------|
+| gpt-4.1-mini | Pokalbiai, Q&A | 10-50 TPM | Ekonomiškas daugumai darbo krūvių |
+| gpt-4.1 | Sudėtingas samprotavimas | 20-100 TPM | Didesnės sąnaudos, naudokite premium funkcijoms |
 | Text-embedding-ada-002 | Paieška, RAG | 30-120 TPM | Būtinas semantinei paieškai |
-| Whisper | Balso į tekstą | 10-50 TPM | Garso apdorojimo užduotims |
+| Whisper | Kalbos atpažinimas | 10-50 TPM | Garso apdorojimo darbo krūviai |
 
-## AZD konfigūravimas AI modeliams
+## AZD konfigūracija AI modeliui
 
 ### Bicep šablono konfigūracija
 
-Sukurkite modelių diegimus naudodami Bicep šablonus:
+Sukurkite modelio diegimus per Bicep šablonus:
 
 ```bicep
 // infra/main.bicep
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
-    name: 'gpt-4o-mini'
+    name: 'gpt-4.1-mini'
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
     sku: {
@@ -124,19 +124,19 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Aplinkos kintamieji
 
-Sukonfigūruokite savo programos aplinką:
+Konfigūruokite savo programos aplinką:
 
 ```bash
 # .env konfigūracija
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
-AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
+AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
 ## Diegimo modeliai
 
-### Modelis 1: Diegimas viename regione
+### Modelis 1: diegimas viename regione
 
 ```yaml
 # azure.yaml - Single region
@@ -146,15 +146,15 @@ services:
     host: containerapp
     config:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
-      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
+      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
 Geriausiai tinka:
 - Vystymui ir testavimui
-- Vienos rinkos programėlėms
+- Vienos rinkos programoms
 - Sąnaudų optimizavimui
 
-### Modelis 2: Diegimas keliose regionuose
+### Modelis 2: diegimas keliuose regionuose
 
 ```bicep
 // Multi-region deployment
@@ -170,11 +170,11 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 Geriausiai tinka:
 - Pasaulinėms programoms
 - Aukšto prieinamumo reikalavimams
-- Krovos paskirstymui
+- Apkrovos paskirstymui
 
-### Modelis 3: Hibridinis diegimas
+### Modelis 3: hibridinis diegimas
 
-Suderinkite Azure OpenAI su kitomis AI paslaugomis:
+Derinkite Microsoft Foundry modelius su kitomis AI paslaugomis:
 
 ```bicep
 // Hybrid AI services
@@ -203,17 +203,17 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Modelio valdymas
+## Modelių valdymas
 
 ### Versijų valdymas
 
-Sekite modelio versijas savo AZD konfigūracijoje:
+Sekite modelių versijas savo AZD konfigūracijoje:
 
 ```json
 {
   "models": {
     "chat": {
-      "name": "gpt-4o-mini",
+      "name": "gpt-4.1-mini",
       "version": "2024-07-18",
       "fallback": "gpt-35-turbo"
     },
@@ -225,9 +225,9 @@ Sekite modelio versijas savo AZD konfigūracijoje:
 }
 ```
 
-### Modelio atnaujinimai
+### Modelių atnaujinimai
 
-Naudokite AZD hooks modelio atnaujinimams:
+Naudokite AZD kablius (hooks) modelių atnaujinimams:
 
 ```bash
 #!/bin/bash
@@ -237,23 +237,23 @@ echo "Checking model availability..."
 az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
-  --query "[?name=='gpt-4o-mini']"
+  --query "[?name=='gpt-4.1-mini']"
 ```
 
 ### A/B testavimas
 
-Diegti kelias modelio versijas:
+Diegkite kelias modelio versijas:
 
 ```bicep
 param enableABTesting bool = false
 
 resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'gpt-4o-mini-${enableABTesting ? 'v1' : 'prod'}'
+  name: 'gpt-4.1-mini-${enableABTesting ? 'v1' : 'prod'}'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -264,9 +264,9 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Produkcijos aspektai
+## Produkcijos svarstymai
 
-### Pajėgumų planavimas
+### Talpos planavimas
 
 Apskaičiuokite reikiamą pajėgumą pagal naudojimo modelius:
 
@@ -295,7 +295,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### Automatinio skalavimo konfigūracija
 
-Sukonfigūruokite automatinį skalavimą Container Apps:
+Konfigūruokite automatinį skalavimą Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -333,7 +333,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Sąnaudų optimizavimas
 
-Įgyvendinkite kaštų valdymą:
+Įgyvendinkite sąnaudų kontrolę:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -363,11 +363,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Stebėjimas ir observabilumas
+## Stebėjimas ir matomumas
 
 ### Application Insights integracija
 
-Sukonfigūruokite stebėjimą AI darbo krūviams:
+Konfigūruokite stebėjimą AI darbo krūviams:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -403,12 +403,12 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Pasirinktini metrikai
+### Individualios metrikos
 
 Sekite AI specifines metrikas:
 
 ```python
-# Pritaikyta telemetrija dirbtinio intelekto modeliams
+# Individualizuota telemetrija dirbtinio intelekto modeliams
 import logging
 from applicationinsights import TelemetryClient
 
@@ -440,7 +440,7 @@ class AITelemetry:
         )
 ```
 
-### Būklės patikrinimai
+### Sveikatos patikrinimai
 
 Įdiekite AI paslaugų sveikatos stebėjimą:
 
@@ -471,32 +471,32 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## Tolimesni žingsniai
+## Kiti žingsniai
 
 1. **Peržiūrėkite [Microsoft Foundry integracijos vadovą](microsoft-foundry-integration.md)** dėl paslaugų integracijos modelių
-2. **Atlikite [AI praktikos laboratoriją](ai-workshop-lab.md)**, kad įgytumėte praktinės patirties
-3. **Įdiekite [Produkcijos AI praktikas](production-ai-practices.md)** įmonių diegimams
+2. **Užbaikite [AI praktikos laboratoriją](ai-workshop-lab.md)** praktinei patirčiai
+3. **Įgyvendinkite [Produkcinės AI praktikas](production-ai-practices.md)** įmonių diegimams
 4. **Išnagrinėkite [AI trikčių šalinimo vadovą](../chapter-07-troubleshooting/ai-troubleshooting.md)** dėl dažnų problemų
 
 ## Ištekliai
 
-- [Azure OpenAI modelių prieinamumas](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Microsoft Foundry modelių prieinamumas](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Azure Developer CLI dokumentacija](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Container Apps skalavimas](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [AI modelių sąnaudų optimizavimas](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Skyrių naršymas:**
-- **📚 Kursų pradžia**: [AZD pradedantiesiems](../../README.md)
-- **📖 Dabartinis skyrius**: 2 skyrius – AI pirmumo kūrimas
-- **⬅️ Ankstesnis**: [Microsoft Foundry integracija](microsoft-foundry-integration.md)
-- **➡️ Kitas**: [AI praktikos laboratorija](ai-workshop-lab.md)
-- **🚀 Kitas skyrius**: [3 skyrius: Konfigūracija](../chapter-03-configuration/configuration.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD Pradedantiesiems](../../README.md)
+- **📖 Current Chapter**: 2 skyrius - AI-pirmasis vystymas
+- **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Next Chapter**: [3 skyrius: Konfigūracija](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Atsakomybės apribojimas**:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų arba netikslumų. Originalus dokumentas gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios ar kritinės informacijos rekomenduojamas profesionalus žmogaus vertimas. Mes neatsakome už jokius nesusipratimus ar neteisingus aiškinimus, atsiradusius dėl šio vertimo naudojimo.
+**Disclaimer**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipkite dėmesį, kad automatizuotos vertimai gali turėti klaidų arba netikslumų. Originalus dokumentas gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Esant kritinei informacijai rekomenduojama kreiptis į profesionalius žmogaus vertėjus. Mes neatsakome už bet kokius nesusipratimus ar neteisingus aiškinimus, kilusius dėl šio vertimo naudojimo.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

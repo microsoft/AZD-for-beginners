@@ -6,12 +6,12 @@
 
 ## Oversigt
 
-Dette kapitel dækker enterprise-klar udrulningsmønstre, sikkerhedshærdning, overvågning og omkostningsoptimering for produktions-AI-arbejdsbelastninger.
+Dette kapitel dækker enterprise-klar udrulningsmønstre, sikkerhedshærdning, overvågning og omkostningsoptimering for produktions-AI-workloads.
 
 ## Læringsmål
 
-Når du har gennemført dette kapitel, vil du:
-- Udrulle multi-region modstandsdygtige applikationer
+Ved at gennemføre dette kapitel vil du:
+- Udrulle modstandsdygtige applikationer på tværs af flere regioner
 - Implementere enterprise-sikkerhedsmønstre
 - Konfigurere omfattende overvågning
 - Optimere omkostninger i stor skala
@@ -29,42 +29,35 @@ Når du har gennemført dette kapitel, vil du:
 
 ## 🚀 Produktionscheckliste
 
-- [ ] Multi-region-udrulning for modstandsdygtighed
+- [ ] Udrulning i flere regioner for modstandsdygtighed
 - [ ] Administreret identitet til autentificering (ingen nøgler)
 - [ ] Application Insights til overvågning
 - [ ] Omkostningsbudgetter og advarsler konfigureret
 - [ ] Sikkerhedsscanning aktiveret
 - [ ] Integration af CI/CD-pipeline
-- [ ] Katastrofeberedskabsplan
+- [ ] Katastrofegenopretningsplan
 
 ---
 
 ## 🏗️ Arkitekturmønstre
 
-### Mønster 1: Microservices AI
+### Mønster 1: Microservices-AI
 
+```mermaid
+graph LR
+    Gateway[API-gateway] --> AI[AI-tjeneste] --> Models[Microsoft Foundry-modeller]
+    Gateway --> Auth[Autentificeringstjeneste]
+    AI --> Data[Datalager]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
+### Mønster 2: Event-drevet AI
 
-### Mønster 2: Begivenhedsdrevet AI
-
+```mermaid
+graph LR
+    EventGrid[Begivenhedsnetværk] --> Functions[Funktioner] --> Pipeline[AI-pipeline]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
-## 🔐 Sikkerhedspraksis
+## 🔐 Bedste sikkerhedspraksis
 
 ```bicep
 // Use managed identity
@@ -85,15 +78,15 @@ properties: {
 
 ## 💰 Omkostningsoptimering
 
-| Strategi | Besparelse |
+| Strategi | Besparelser |
 |----------|---------|
-| Skalér til nul (Container Apps) | 60-80% |
-| Brug forbrugsplaner til udvikling | 50-70% |
+| Skalér ned til nul (Container Apps) | 60-80% |
+| Brug forbrugsniveauer til udvikling | 50-70% |
 | Planlagt skalering | 30-50% |
 | Reserveret kapacitet | 20-40% |
 
 ```bash
-# Indstil budgetadvarsler
+# Indstil budgetalarmer
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -131,12 +124,12 @@ az monitor metrics list --resource <resource-id>
 
 - [Guide til AI-agenter](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Multi-agent-løsninger](../chapter-05-multi-agent/README.md)
+- [Løsninger med flere agenter](../chapter-05-multi-agent/README.md)
 - [Microservices-eksempel](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Ansvarsfraskrivelse**:
-Dette dokument er oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritiske oplysninger anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
+**Disclaimer**:
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på dets originalsprog bør betragtes som den autoritative kilde. For kritiske oplysninger anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

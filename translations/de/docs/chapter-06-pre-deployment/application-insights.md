@@ -1,30 +1,30 @@
-# Application Insights-Integration mit AZD
+# Integration von Application Insights mit AZD
 
-⏱️ **Geschätzte Zeit**: 40–50 Minuten | 💰 **Kostenwirkung**: ~5–15 $/Monat | ⭐ **Komplexität**: Mittel
+⏱️ **Geschätzte Zeit**: 40-50 Minuten | 💰 **Kostenaufwand**: ~\$5-15/Monat | ⭐ **Komplexität**: Mittel
 
 **📚 Lernpfad:**
-- ← Vorherige: [Vorabprüfungen](preflight-checks.md) - Vorbereitungsprüfungen vor der Bereitstellung
-- 🎯 **Sie sind hier**: Application Insights-Integration (Monitoring, Telemetrie, Debugging)
-- → Nächste: [Bereitstellungsanleitung](../chapter-04-infrastructure/deployment-guide.md) - In Azure bereitstellen
-- 🏠 [Kursübersicht](../../README.md)
+- ← Vorherige: [Vorabprüfungen](preflight-checks.md) - Validierung vor der Bereitstellung
+- 🎯 **Sie sind hier**: Application Insights-Integration (Überwachung, Telemetrie, Debugging)
+- → Nächste: [Bereitstellungsanleitung](../chapter-04-infrastructure/deployment-guide.md) - Bereitstellung in Azure
+- 🏠 [Kurs-Startseite](../../README.md)
 
 ---
 
 ## Was Sie lernen werden
 
-Durch Abschluss dieser Lektion werden Sie:
-- Application Insights automatisch in AZD-Projekte integrieren
-- Verteiltes Tracing für Microservices konfigurieren
-- Benutzerdefinierte Telemetrie implementieren (Metriken, Ereignisse, Abhängigkeiten)
-- Live Metrics für Echtzeitüberwachung einrichten
-- Alarme und Dashboards aus AZD-Bereitstellungen erstellen
-- Produktionsprobleme mit Telemetrieabfragen debuggen
-- Kosten- und Sampling-Strategien optimieren
-- AI/LLM-Anwendungen überwachen (Tokens, Latenz, Kosten)
+Durch den Abschluss dieser Lektion werden Sie:
+- Integrieren Sie **Application Insights** automatisch in AZD-Projekte
+- Konfigurieren Sie **verteiltes Tracing** für Microservices
+- Implementieren Sie **benutzerdefinierte Telemetrie** (Metriken, Ereignisse, Abhängigkeiten)
+- Richten Sie **Live-Metriken** für die Echtzeitüberwachung ein
+- Erstellen Sie **Warnungen und Dashboards** aus AZD-Bereitstellungen
+- Debuggen Sie Produktionsprobleme mit **Telemetrieabfragen**
+- Optimieren Sie **Kosten- und Sampling-Strategien**
+- Überwachen Sie **KI/LLM-Anwendungen** (Tokens, Latenz, Kosten)
 
 ## Warum Application Insights mit AZD wichtig ist
 
-### Die Herausforderung: Observability in der Produktion
+### Die Herausforderung: Produktionsbeobachtbarkeit
 
 **Ohne Application Insights:**
 ```
@@ -47,11 +47,11 @@ Durch Abschluss dieser Lektion werden Sie:
 ✅ AZD provisions everything automatically
 ```
 
-**Analogie**: Application Insights ist wie ein "Black-Box"-Flugschreiber + Cockpit-Dashboard für Ihre Anwendung. Sie sehen in Echtzeit alles, was passiert, und können jeden Vorfall rekonstruieren.
+**Analogie**: Application Insights ist wie ein "Black-Box"-Flugschreiber plus Cockpit-Armaturenbrett für Ihre Anwendung. Sie sehen alles, was in Echtzeit passiert, und können jeden Vorfall wiedergeben.
 
 ---
 
-## Architekturüberblick
+## Architekturübersicht
 
 ### Application Insights in der AZD-Architektur
 
@@ -59,13 +59,13 @@ Durch Abschluss dieser Lektion werden Sie:
 graph TB
     User[Benutzer/Client]
     App1[Container-App 1<br/>API-Gateway]
-    App2[Container-App 2<br/>Produktservice]
+    App2[Container-App 2<br/>Produktdienst]
     App3[Container-App 3<br/>Bestellservice]
     
     AppInsights[Application Insights<br/>Telemetrie-Hub]
     LogAnalytics[(Log Analytics<br/>Arbeitsbereich)]
     
-    Portal[Azure-Portal<br/>Dashboards & Warnungen]
+    Portal[Azure Portal<br/>Dashboards & Warnungen]
     Query[Kusto-Abfragen<br/>Benutzerdefinierte Analyse]
     
     User --> App1
@@ -85,26 +85,26 @@ graph TB
 ```
 ### Was automatisch überwacht wird
 
-| Telemetrie-Typ | Was er erfasst | Anwendungsfall |
-|----------------|----------------|----------------|
-| **Requests** | HTTP-Anfragen, Statuscodes, Dauer | API-Leistungsüberwachung |
-| **Dependencies** | Externe Aufrufe (DB, APIs, Storage) | Engpässe identifizieren |
-| **Exceptions** | Nicht abgefangene Fehler mit Stacktraces | Fehlerbehebung |
-| **Custom Events** | Business-Ereignisse (Signup, Kauf) | Analytics und Funnels |
-| **Metrics** | Performance-Counter, benutzerdefinierte Metriken | Kapazitätsplanung |
-| **Traces** | Lognachrichten mit Schweregrad | Debugging und Auditing |
-| **Availability** | Uptime- und Antwortzeit-Tests | SLA-Überwachung |
+| Telemetrie-Typ | Erfasste Daten | Anwendungsfall |
+|----------------|------------------|----------|
+| **Requests** | HTTP-Anfragen, Statuscodes, Dauer | Überwachung der API-Leistung |
+| **Dependencies** | Externe Aufrufe (DB, APIs, Speicher) | Engpässe identifizieren |
+| **Exceptions** | Unbehandelte Fehler mit Stacktraces | Debugging von Fehlern |
+| **Custom Events** | Geschäftliche Ereignisse (Registrierung, Kauf) | Analysen und Funnels |
+| **Metrics** | Leistungszähler, benutzerdefinierte Metriken | Kapazitätsplanung |
+| **Traces** | Protokollnachrichten mit Schweregrad | Debugging und Audit |
+| **Availability** | Verfügbarkeits- und Antwortzeitprüfungen | SLA-Überwachung |
 
 ---
 
 ## Voraussetzungen
 
-### Erforderliche Tools
+### Benötigte Tools
 
 ```bash
 # Azure Developer CLI überprüfen
 azd version
-# ✅ Erwartet: azd Version 1.0.0 oder höher
+# ✅ Erwartet: azd version 1.0.0 oder höher
 
 # Azure CLI überprüfen
 az --version
@@ -120,20 +120,20 @@ az --version
   - Container Apps
   - Ressourcengruppen
 
-### Fachliche Voraussetzungen
+### Vorkenntnisse
 
 Sie sollten abgeschlossen haben:
-- [AZD Basics](../chapter-01-foundation/azd-basics.md) - Kernkonzepte von AZD
-- [Configuration](../chapter-03-configuration/configuration.md) - Umgebungskonfiguration
-- [First Project](../chapter-01-foundation/first-project.md) - Basisbereitstellung
+- [AZD-Grundlagen](../chapter-01-foundation/azd-basics.md) - Kernkonzepte von AZD
+- [Konfiguration](../chapter-03-configuration/configuration.md) - Umgebungseinrichtung
+- [Erstes Projekt](../chapter-01-foundation/first-project.md) - Grundlegende Bereitstellung
 
 ---
 
-## Lektion 1: Automatische Application Insights mit AZD
+## Lektion 1: Automatische Application Insights-Integration mit AZD
 
 ### Wie AZD Application Insights bereitstellt
 
-AZD erstellt und konfiguriert Application Insights automatisch beim Deploy. Sehen wir uns an, wie das funktioniert.
+AZD erstellt und konfiguriert Application Insights automatisch, wenn Sie bereitstellen. Schauen wir uns an, wie es funktioniert.
 
 ### Projektstruktur
 
@@ -172,7 +172,7 @@ services:
 # AZD automatically provisions monitoring!
 ```
 
-**Das war's!** AZD erstellt Application Insights standardmäßig. Für grundlegendes Monitoring ist keine zusätzliche Konfiguration erforderlich.
+**Das war's!** AZD erstellt standardmäßig Application Insights. Keine zusätzliche Konfiguration für grundlegendes Monitoring erforderlich.
 
 ---
 
@@ -308,10 +308,10 @@ if connection_string:
     middleware = FlaskMiddleware(
         app,
         exporter=AzureExporter(connection_string=connection_string),
-        sampler=ProbabilitySampler(rate=1.0)  # 100% Sampling für die Entwicklung
+        sampler=ProbabilitySampler(rate=1.0)  # 100%-Sampling für die Entwicklung
     )
     
-    # Protokollierung konfigurieren
+    # Logging konfigurieren
     logger = logging.getLogger(__name__)
     logger.addHandler(AzureLogHandler(connection_string=connection_string))
     logger.setLevel(logging.INFO)
@@ -331,7 +331,7 @@ def health():
 def get_products():
     logger.info('Fetching products')
     
-    # Datenbankaufruf simulieren (wird automatisch als Abhängigkeit verfolgt)
+    # Datenbankaufruf simulieren (wird automatisch als Abhängigkeit erfasst)
     products = [
         {'id': 1, 'name': 'Laptop', 'price': 999.99},
         {'id': 2, 'name': 'Mouse', 'price': 29.99},
@@ -375,7 +375,7 @@ gunicorn==21.2.0
 
 ---
 
-### Schritt 5: Bereitstellen und Verifizieren
+### Schritt 5: Bereitstellen und Überprüfen
 
 ```bash
 # AZD initialisieren
@@ -404,10 +404,10 @@ curl $APP_URL/api/slow
 
 ---
 
-### Schritt 6: Telemetrie im Azure-Portal ansehen
+### Schritt 6: Telemetrie im Azure-Portal anzeigen
 
 ```bash
-# Details zu Application Insights abrufen
+# Application Insights-Details abrufen
 azd env get-values | grep APPLICATIONINSIGHTS
 
 # Im Azure-Portal öffnen
@@ -419,17 +419,17 @@ az monitor app-insights component show \
 
 **Navigieren Sie im Azure-Portal → Application Insights → Transaktionssuche**
 
-Sie sollten sehen:
+Sie sollten Folgendes sehen:
 - ✅ HTTP-Anfragen mit Statuscodes
-- ✅ Anfragedauer (3+ Sekunden für `/api/slow`)
-- ✅ Ausnahmedetails von `/api/error-test`
-- ✅ Benutzerdefinierte Lognachrichten
+- ✅ Anfrage-Dauer (3+ Sekunden für `/api/slow`)
+- ✅ Ausnahme-Details von `/api/error-test`
+- ✅ Benutzerdefinierte Protokollmeldungen
 
 ---
 
 ## Lektion 2: Benutzerdefinierte Telemetrie und Ereignisse
 
-### Geschäftsereignisse erfassen
+### Geschäftsereignisse verfolgen
 
 Fügen wir benutzerdefinierte Telemetrie für geschäftskritische Ereignisse hinzu.
 
@@ -538,7 +538,7 @@ def purchase():
     quantity = data.get('quantity', 1)
     price = data.get('price', 0)
     
-    # Geschäftsereignis verfolgen
+    # Geschäftsereignis protokollieren
     telemetry.track_event('Purchase', {
         'product_id': product_id,
         'quantity': quantity,
@@ -546,7 +546,7 @@ def purchase():
         'user_id': request.headers.get('X-User-Id', 'anonymous')
     })
     
-    # Umsatzkennzahl verfolgen
+    # Umsatzmetrik protokollieren
     telemetry.track_metric('Revenue', price * quantity, {
         'product_id': product_id,
         'currency': 'USD'
@@ -570,14 +570,14 @@ def search():
     
     duration = (time.time() - start_time) * 1000  # In ms umrechnen
     
-    # Suchereignis verfolgen
+    # Suchereignis protokollieren
     telemetry.track_event('Search', {
         'query': query,
         'results_count': len(results),
         'duration_ms': duration
     })
     
-    # Leistungskennzahl der Suche verfolgen
+    # Suchleistungsmetrik protokollieren
     telemetry.track_metric('SearchDuration', duration, {
         'query_length': len(query)
     })
@@ -593,7 +593,7 @@ def external_call():
     success = True
     
     try:
-        # Externe API-Anfrage simulieren
+        # Externen API-Aufruf simulieren
         response = requests.get('https://api.example.com/data', timeout=5)
         result = response.json()
     except Exception as e:
@@ -602,7 +602,7 @@ def external_call():
     
     duration = (time.time() - start_time) * 1000
     
-    # Abhängigkeit verfolgen
+    # Abhängigkeit protokollieren
     telemetry.track_dependency(
         name='ExternalAPI',
         dependency_type='HTTP',
@@ -634,7 +634,7 @@ curl $APP_URL/api/external-call
 
 **Im Azure-Portal anzeigen:**
 
-Navigieren Sie zu Application Insights → Logs und führen Sie dann aus:
+Navigieren Sie zu Application Insights → Protokolle, und führen Sie dann aus:
 
 ```kusto
 // View purchase events
@@ -667,9 +667,9 @@ traces
 
 ## Lektion 3: Verteiltes Tracing für Microservices
 
-### Cross-Service Tracing aktivieren
+### Dienstübergreifendes Tracing aktivieren
 
-Für Microservices korreliert Application Insights Anfragen über Services hinweg automatisch.
+Bei Microservices korreliert Application Insights Anfragen automatisch über Services hinweg.
 
 **Datei: `infra/main.bicep`**
 
@@ -739,15 +739,15 @@ output APPLICATIONINSIGHTS_CONNECTION_STRING string = monitoring.outputs.applica
 output GATEWAY_URL string = apiGateway.outputs.uri
 ```
 
-### End-to-End-Transaktion ansehen
+### End-to-End-Transaktion anzeigen
 
 ```mermaid
 sequenceDiagram
     participant User as Benutzer
     participant Gateway as API-Gateway<br/>(Trace-ID: abc123)
-    participant Product as Produkt-Service<br/>(Übergeordnete ID: abc123)
-    participant Order as Bestell-Service<br/>(Übergeordnete ID: abc123)
-    participant AppInsights as Application Insights
+    participant Product as Produktservice<br/>(Übergeordnete ID: abc123)
+    participant Order as Bestellservice<br/>(Übergeordnete ID: abc123)
+    participant AppInsights as Anwendungs-Insights
     
     User->>Gateway: POST /api/checkout
     Note over Gateway: Trace starten: abc123
@@ -766,7 +766,7 @@ sequenceDiagram
     Gateway-->>User: Checkout abgeschlossen
     Gateway->>AppInsights: Antwort protokollieren (Dauer: 450ms)
     
-    Note over AppInsights: Korrelation anhand der Trace-ID
+    Note over AppInsights: Korrelation durch Trace-ID
 ```
 **End-to-End-Trace abfragen:**
 
@@ -788,13 +788,13 @@ dependencies
 
 ---
 
-## Lektion 4: Live Metrics und Echtzeitüberwachung
+## Lektion 4: Live-Metriken und Echtzeitüberwachung
 
-### Live Metrics Stream aktivieren
+### Live-Metrik-Stream aktivieren
 
-Live Metrics liefert Echtzeit-Telemetrie mit <1 Sekunde Latenz.
+Live-Metriken liefern Telemetrie in Echtzeit mit <1 Sekunde Latenz.
 
-**Zugriff auf Live Metrics:**
+**Auf Live-Metriken zugreifen:**
 
 ```bash
 # Application Insights-Ressource abrufen
@@ -807,37 +807,37 @@ echo "Navigate to: Azure Portal → Resource Groups → $RG_NAME → $APPI_NAME 
 ```
 
 **Was Sie in Echtzeit sehen:**
-- ✅ Eingehende Anforderungsrate (requests/sec)
+- ✅ Eingehende Anforderungsrate (Anfragen/Sekunde)
 - ✅ Ausgehende Abhängigkeitsaufrufe
-- ✅ Anzahl der Ausnahmen
-- ✅ CPU- und Speicherverbrauch
-- ✅ Aktive Serveranzahl
-- ✅ Beispieltelemetrie
+- ✅ Anzahl von Ausnahmen
+- ✅ CPU- und Speicherauslastung
+- ✅ Anzahl aktiver Server
+- ✅ Stichproben-Telemetrie
 
 ### Last zum Testen erzeugen
 
 ```bash
-# Erzeugen Sie Last, um Live-Metriken zu sehen
+# Erzeuge Last, um Live-Metriken zu sehen
 for i in {1..100}; do
   curl $APP_URL/api/products &
   curl $APP_URL/api/search?q=test$i &
 done
 
-# Beobachten Sie Live-Metriken im Azure-Portal
-# Sie sollten einen Anstieg der Anfragerate sehen
+# Beobachte Live-Metriken im Azure-Portal
+# Sie sollten einen starken Anstieg der Anforderungsrate sehen
 ```
 
 ---
 
 ## Praktische Übungen
 
-### Übung 1: Alarme einrichten ⭐⭐ (Mittel)
+### Übung 1: Warnungen einrichten ⭐⭐ (Mittel)
 
-**Ziel**: Erstellen Sie Alarme für hohe Fehlerraten und langsame Antworten.
+**Ziel**: Warnungen für hohe Fehlerquoten und langsame Antworten erstellen.
 
 **Schritte:**
 
-1. **Alarm für Fehlerrate erstellen:**
+1. **Warnung für Fehlerquote erstellen:**
 
 ```bash
 # Application Insights-Ressourcen-ID abrufen
@@ -857,7 +857,7 @@ az monitor metrics alert create \
   --description "Alert when error rate exceeds 10 per 5 minutes"
 ```
 
-2. **Alarm für langsame Antworten erstellen:**
+2. **Warnung für langsame Antworten erstellen:**
 
 ```bash
 az monitor metrics alert create \
@@ -870,7 +870,7 @@ az monitor metrics alert create \
   --description "Alert when average response time exceeds 3 seconds"
 ```
 
-3. **Alarm via Bicep erstellen (bevorzugt für AZD):**
+3. **Warnung mittels Bicep erstellen (vorzugsweise für AZD):**
 
 **Datei: `infra/core/alerts.bicep`**
 
@@ -944,7 +944,7 @@ output errorAlertId string = errorRateAlert.id
 output slowResponseAlertId string = slowResponseAlert.id
 ```
 
-4. **Alarme testen:**
+4. **Warnungen testen:**
 
 ```bash
 # Fehler erzeugen
@@ -965,34 +965,34 @@ az monitor metrics alert list \
 ```
 
 **✅ Erfolgskriterien:**
-- ✅ Alarme wurden erfolgreich erstellt
-- ✅ Alarme lösen aus, wenn Schwellwerte überschritten werden
-- ✅ Alarmhistorie im Azure-Portal einsehbar
+- ✅ Warnungen erfolgreich erstellt
+- ✅ Warnungen lösen aus, wenn Schwellenwerte überschritten werden
+- ✅ Warnverlauf im Azure-Portal einsehbar
 - ✅ In AZD-Bereitstellung integriert
 
-**Zeit**: 20–25 Minuten
+**Zeit**: 20-25 Minuten
 
 ---
 
-### Übung 2: Benutzerdefiniertes Dashboard erstellen ⭐⭐ (Mittel)
+### Übung 2: Eigenes Dashboard erstellen ⭐⭐ (Mittel)
 
-**Ziel**: Erstellen Sie ein Dashboard mit wichtigen Anwendungsmetriken.
+**Ziel**: Ein Dashboard erstellen, das wichtige Anwendungsmetriken anzeigt.
 
 **Schritte:**
 
-1. **Dashboard über Azure-Portal erstellen:**
+1. **Dashboard über das Azure-Portal erstellen:**
 
 Navigieren zu: Azure-Portal → Dashboards → Neues Dashboard
 
-2. **Kacheln für Schlüsselmetriken hinzufügen:**
+2. **Kacheln für wichtige Kennzahlen hinzufügen:**
 
-- Anfrageanzahl (letzte 24 Stunden)
+- Anzahl der Anfragen (letzte 24 Stunden)
 - Durchschnittliche Antwortzeit
-- Fehlerrate
+- Fehlerquote
 - Top 5 langsamste Operationen
-- Geografische Verteilung der Nutzer
+- Geografische Verteilung der Benutzer
 
-3. **Dashboard via Bicep erstellen:**
+3. **Dashboard per Bicep erstellen:**
 
 **Datei: `infra/core/dashboard.bicep`**
 
@@ -1082,22 +1082,22 @@ azd up
 ```
 
 **✅ Erfolgskriterien:**
-- ✅ Dashboard zeigt Schlüsselmetriken an
-- ✅ Kann an Azure-Portal-Startseite angeheftet werden
+- ✅ Dashboard zeigt wichtige Kennzahlen an
+- ✅ Kann im Azure-Portal angeheftet werden
 - ✅ Aktualisiert sich in Echtzeit
-- ✅ Per AZD bereitstellbar
+- ✅ Über AZD bereitstellbar
 
-**Zeit**: 25–30 Minuten
+**Zeit**: 25-30 Minuten
 
 ---
 
-### Übung 3: AI/LLM-Anwendung überwachen ⭐⭐⭐ (Fortgeschritten)
+### Übung 3: KI/LLM-Anwendung überwachen ⭐⭐⭐ (Fortgeschritten)
 
-**Ziel**: Verfolgen Sie Azure OpenAI-Nutzung (Tokens, Kosten, Latenz).
+**Ziel**: Nutzung von Microsoft Foundry-Modellen verfolgen (Tokens, Kosten, Latenz).
 
 **Schritte:**
 
-1. **AI-Monitoring-Wrapper erstellen:**
+1. **Überwachungs-Wrapper für KI erstellen:**
 
 **Datei: `src/ai_telemetry.py`**
 
@@ -1107,7 +1107,7 @@ from openai import AzureOpenAI
 import time
 
 class MonitoredAzureOpenAI:
-    """Azure OpenAI client with automatic telemetry"""
+    """Microsoft Foundry Models client with automatic telemetry"""
     
     def __init__(self, api_key, endpoint, api_version="2024-02-01"):
         self.client = AzureOpenAI(
@@ -1121,7 +1121,7 @@ class MonitoredAzureOpenAI:
         start_time = time.time()
         
         try:
-            # Azure OpenAI aufrufen
+            # Microsoft Foundry-Modelle aufrufen
             response = self.client.chat.completions.create(
                 model=model,
                 messages=messages,
@@ -1136,9 +1136,9 @@ class MonitoredAzureOpenAI:
             completion_tokens = usage.completion_tokens
             total_tokens = usage.total_tokens
             
-            # Kosten berechnen (GPT-4-Preise)
-            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0,03 pro 1K Token
-            completion_cost = (completion_tokens / 1000) * 0.06  # $0,06 pro 1K Token
+            # Kosten berechnen (gpt-4.1-Preise)
+            prompt_cost = (prompt_tokens / 1000) * 0.03  # $0,03 pro 1.000 Token
+            completion_cost = (completion_tokens / 1000) * 0.06  # $0,06 pro 1.000 Token
             total_cost = prompt_cost + completion_cost
             
             # Benutzerdefiniertes Ereignis verfolgen
@@ -1204,7 +1204,7 @@ def chat():
     
     # Aufruf mit automatischer Überwachung
     response = openai_client.chat_completion(
-        model='gpt-4',
+        model='gpt-4.1',
         messages=[
             {'role': 'user', 'content': user_message}
         ]
@@ -1216,7 +1216,7 @@ def chat():
     })
 ```
 
-3. **AI-Metriken abfragen:**
+3. **KI-Metriken abfragen:**
 
 ```kusto
 // Total AI spend over time
@@ -1254,9 +1254,9 @@ traces
 - ✅ Jeder OpenAI-Aufruf wird automatisch verfolgt
 - ✅ Tokenverbrauch und Kosten sichtbar
 - ✅ Latenz überwacht
-- ✅ Budgetalarme einstellbar
+- ✅ Budget-Warnungen konfigurierbar
 
-**Zeit**: 35–45 Minuten
+**Zeit**: 35-45 Minuten
 
 ---
 
@@ -1264,15 +1264,15 @@ traces
 
 ### Sampling-Strategien
 
-Steuern Sie die Kosten durch Sampling der Telemetrie:
+Kontrollieren Sie Kosten durch Sampling der Telemetrie:
 
 ```python
 from opencensus.trace.samplers import ProbabilitySampler
 
-# Entwicklung: 100% Sampling
+# Entwicklung: 100 % Sampling
 sampler = ProbabilitySampler(rate=1.0)
 
-# Produktion: 10% Sampling (Kosten um 90% reduzieren)
+# Produktion: 10 % Sampling (reduziert die Kosten um 90 %)
 sampler = ProbabilitySampler(rate=0.1)
 
 # Adaptives Sampling (passt sich automatisch an)
@@ -1307,36 +1307,36 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 
 | Datenvolumen | Aufbewahrung | Monatliche Kosten |
 |-------------|-----------|--------------|
-| 1 GB/Monat | 30 Tage | ~2–5 $ |
-| 5 GB/Monat | 30 Tage | ~10–15 $ |
-| 10 GB/Monat | 90 Tage | ~25–40 $ |
-| 50 GB/Monat | 90 Tage | ~100–150 $ |
+| 1 GB/Monat | 30 Tage | ~\$2-5 |
+| 5 GB/Monat | 30 Tage | ~\$10-15 |
+| 10 GB/Monat | 90 Tage | ~\$25-40 |
+| 50 GB/Monat | 90 Tage | ~\$100-150 |
 
-**Free-Tier**: 5 GB/Monat inklusive
+**Kostenlose Stufe**: 5 GB/Monat inklusive
 
 ---
 
-## Wissens-Checkpoint
+## Wissensüberprüfung
 
 ### 1. Grundlegende Integration ✓
 
-Testen Sie Ihr Verständnis:
+Überprüfen Sie Ihr Verständnis:
 
-- [ ] **Q1**: Wie provisioniert AZD Application Insights?
-  - **A**: Automatisch über Bicep-Templates in `infra/core/monitoring.bicep`
+- [ ] **Q1**: Wie stellt AZD Application Insights bereit?
+  - **A**: Automatisch über Bicep-Vorlagen in `infra/core/monitoring.bicep`
 
 - [ ] **Q2**: Welche Umgebungsvariable aktiviert Application Insights?
   - **A**: `APPLICATIONINSIGHTS_CONNECTION_STRING`
 
-- [ ] **Q3**: Welche drei Haupttelemetrietypen gibt es?
+- [ ] **Q3**: Welche drei Haupt-Telemetriearten gibt es?
   - **A**: Requests (HTTP-Aufrufe), Dependencies (externe Aufrufe), Exceptions (Fehler)
 
-**Hands-On-Verifikation:**
+**Praktische Überprüfung:**
 ```bash
-# Prüfen, ob Application Insights konfiguriert ist
+# Überprüfen, ob Application Insights konfiguriert ist
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Prüfen, ob Telemetrie übertragen wird
+# Überprüfen, ob Telemetrie fließt
 az monitor app-insights metrics show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1347,18 +1347,18 @@ az monitor app-insights metrics show \
 
 ### 2. Benutzerdefinierte Telemetrie ✓
 
-Testen Sie Ihr Verständnis:
+Überprüfen Sie Ihr Verständnis:
 
-- [ ] **Q1**: Wie verfolgen Sie benutzerdefinierte Business-Ereignisse?
-  - **A**: Verwenden Sie Logger mit `custom_dimensions` oder `TelemetryClient.track_event()`
+- [ ] **Q1**: Wie verfolgen Sie benutzerdefinierte Geschäftsvorfälle?
+  - **A**: Verwenden Sie den Logger mit `custom_dimensions` oder `TelemetryClient.track_event()`
 
-- [ ] **Q2**: Was ist der Unterschied zwischen Events und Metriken?
-  - **A**: Events sind diskrete Ereignisse, Metriken sind numerische Messwerte
+- [ ] **Q2**: Was ist der Unterschied zwischen Ereignissen und Metriken?
+  - **A**: Ereignisse sind diskrete Vorkommnisse, Metriken sind numerische Messwerte
 
 - [ ] **Q3**: Wie korrelieren Sie Telemetrie über Services hinweg?
   - **A**: Application Insights verwendet automatisch `operation_Id` zur Korrelation
 
-**Hands-On-Verifikation:**
+**Praktische Überprüfung:**
 ```kusto
 // Verify custom events
 traces
@@ -1370,20 +1370,20 @@ traces
 
 ### 3. Produktionsüberwachung ✓
 
-Testen Sie Ihr Verständnis:
+Überprüfen Sie Ihr Verständnis:
 
 - [ ] **Q1**: Was ist Sampling und warum verwendet man es?
   - **A**: Sampling reduziert das Datenvolumen (und die Kosten), indem nur ein Prozentsatz der Telemetrie erfasst wird
 
-- [ ] **Q2**: Wie richten Sie Alarme ein?
-  - **A**: Verwenden Sie Metrikalarm-Regeln in Bicep oder im Azure-Portal basierend auf Application Insights-Metriken
+- [ ] **Q2**: Wie richten Sie Warnungen ein?
+  - **A**: Verwenden Sie Metrik-Warnungen in Bicep oder im Azure-Portal basierend auf Application Insights-Metriken
 
 - [ ] **Q3**: Was ist der Unterschied zwischen Log Analytics und Application Insights?
-  - **A**: Application Insights speichert Daten in einem Log Analytics-Arbeitsbereich; App Insights bietet anwendungsspezifische Ansichten
+  - **A**: Application Insights speichert Daten im Log Analytics-Arbeitsbereich; App Insights bietet anwendungsspezifische Ansichten
 
-**Hands-On-Verifikation:**
+**Praktische Überprüfung:**
 ```bash
-# Überprüfe die Sampling-Konfiguration
+# Sampling-Konfiguration prüfen
 az monitor app-insights component show \
   --app $APPI_NAME \
   --resource-group $RG_NAME \
@@ -1392,11 +1392,11 @@ az monitor app-insights component show \
 
 ---
 
-## Best Practices
+## Bewährte Vorgehensweisen
 
-### ✅ TUN:
+### ✅ TUN SIE:
 
-1. **Verwenden Sie Korrelation-IDs**
+1. **Verwenden Sie Korrelations-IDs**
    ```python
    logger.info('Processing order', extra={
        'custom_dimensions': {
@@ -1406,7 +1406,7 @@ az monitor app-insights component show \
    })
    ```
 
-2. **Richten Sie Alarme für kritische Metriken ein**
+2. **Richten Sie Warnungen für kritische Metriken ein**
    ```bicep
    // Error rate, slow responses, availability
    ```
@@ -1422,14 +1422,14 @@ az monitor app-insights component show \
 
 4. **Überwachen Sie Abhängigkeiten**
    ```python
-   # Automatisch Datenbankaufrufe, HTTP-Anfragen usw. verfolgen.
+   # Datenbankaufrufe, HTTP-Anfragen usw. automatisch verfolgen.
    ```
 
-5. **Nutzen Sie Live Metrics während Deployments**
+5. **Verwenden Sie Live-Metriken während der Bereitstellung**
 
-### ❌ NICHT:
+### ❌ NICHT TUN:
 
-1. **Keine sensiblen Daten protokollieren**
+1. **Protokollieren Sie keine sensiblen Daten**
    ```python
    # ❌ SCHLECHT
    logger.info(f'Login: {username}:{password}')
@@ -1438,7 +1438,7 @@ az monitor app-insights component show \
    logger.info('Login attempt', extra={'custom_dimensions': {'username': username}})
    ```
 
-2. **Verwenden Sie nicht 100% Sampling in der Produktion**
+2. **Verwenden Sie in der Produktion kein 100%-Sampling**
    ```python
    # ❌ Teuer
    sampler = ProbabilitySampler(rate=1.0)
@@ -1447,25 +1447,25 @@ az monitor app-insights component show \
    sampler = ProbabilitySampler(rate=0.1)
    ```
 
-3. **Vernachlässigen Sie nicht Dead-Letter-Queues**
+3. **Ignorieren Sie keine Dead-Letter-Queues**
 
-4. **Vergessen Sie nicht, Aufbewahrungsgrenzen für Daten zu setzen**
+4. **Vergessen Sie nicht, Aufbewahrungsgrenzen festzulegen**
 
 ---
 
 ## Fehlerbehebung
 
-### Problem: Keine Telemetrie vorhanden
+### Problem: Keine Telemetrie sichtbar
 
 **Diagnose:**
 ```bash
-# Überprüfen, ob die Verbindungszeichenfolge gesetzt ist
+# Überprüfen Sie, ob die Verbindungszeichenfolge gesetzt ist
 azd env get-values | grep APPLICATIONINSIGHTS
 
-# Anwendungsprotokolle über Azure Monitor überprüfen
+# Überprüfen Sie die Anwendungsprotokolle über Azure Monitor
 azd monitor --logs
 
-# Oder die Azure CLI für Container-Apps verwenden:
+# Oder verwenden Sie die Azure CLI für Container-Apps:
 az containerapp logs show --name $APP_NAME --resource-group $RG_NAME --tail 50
 ```
 
@@ -1494,7 +1494,7 @@ az monitor app-insights metrics show \
 
 **Lösung:**
 - Sampling-Rate reduzieren
-- Aufbewahrungszeitraum verkürzen
+- Aufbewahrungszeitraum verringern
 - Ausführliches Logging entfernen
 
 ---
@@ -1510,10 +1510,10 @@ az monitor app-insights metrics show \
 ### Nächste Schritte in diesem Kurs
 - ← Vorherige: [Vorabprüfungen](preflight-checks.md)
 - → Nächste: [Bereitstellungsanleitung](../chapter-04-infrastructure/deployment-guide.md)
-- 🏠 [Kursübersicht](../../README.md)
+- 🏠 [Kurs-Startseite](../../README.md)
 
 ### Verwandte Beispiele
-- [Azure OpenAI Example](../../../../examples/azure-openai-chat) - AI-Telemetrie
+- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - KI-Telemetrie
 - [Microservices Example](../../../../examples/microservices) - Verteiltes Tracing
 
 ---
@@ -1526,26 +1526,26 @@ az monitor app-insights metrics show \
 - ✅ Verteiltes Tracing über Microservices
 - ✅ Live-Metriken und Echtzeitüberwachung
 - ✅ Warnungen und Dashboards
-- ✅ Überwachung von AI/LLM-Anwendungen
+- ✅ Überwachung von KI/LLM-Anwendungen
 - ✅ Strategien zur Kostenoptimierung
 
 **Wichtigste Erkenntnisse:**
-1. **AZD richtet die Überwachung automatisch ein** - Keine manuelle Einrichtung
-2. **Verwenden Sie strukturierte Protokollierung** - Macht Abfragen einfacher
-3. **Verfolgen Sie Geschäftsereignisse** - Nicht nur technische Metriken
-4. **Überwachen Sie AI-Kosten** - Verfolgen Sie Token und Ausgaben
-5. **Richten Sie Warnungen ein** - Seien Sie proaktiv, nicht reaktiv
-6. **Optimieren Sie die Kosten** - Verwenden Sie Sampling und Aufbewahrungsgrenzen
+1. **AZD stellt Monitoring automatisch bereit** - Keine manuelle Einrichtung
+2. **Verwende strukturiertes Logging** - Macht Abfragen einfacher
+3. **Verfolge Geschäftsereignisse** - Nicht nur technische Metriken
+4. **Überwache KI-Kosten** - Verfolge Token und Ausgaben
+5. **Richte Alarme ein** - Sei proaktiv, nicht reaktiv
+6. **Optimiere Kosten** - Verwende Stichproben und Aufbewahrungsgrenzen
 
 **Nächste Schritte:**
-1. Schließen Sie die praktischen Übungen ab
-2. Fügen Sie Application Insights zu Ihren AZD-Projekten hinzu
-3. Erstellen Sie benutzerdefinierte Dashboards für Ihr Team
-4. Lesen Sie die [Bereitstellungsanleitung](../chapter-04-infrastructure/deployment-guide.md)
+1. Schließe die praktischen Übungen ab
+2. Füge Application Insights zu deinen AZD-Projekten hinzu
+3. Erstelle benutzerdefinierte Dashboards für dein Team
+4. Lerne [Bereitstellungsanleitung](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Haftungsausschluss**:
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, weisen wir darauf hin, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Originalsprache ist als maßgebliche Quelle zu betrachten. Für wichtige Informationen wird eine professionelle menschliche Übersetzung empfohlen. Für Missverständnisse oder Fehlinterpretationen, die sich aus der Nutzung dieser Übersetzung ergeben, übernehmen wir keine Haftung.
+Haftungsausschluss:
+Dieses Dokument wurde mithilfe des KI-Übersetzungsdienstes Co‑op Translator (https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ausgangssprache ist als maßgebliche Quelle zu betrachten. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Nutzung dieser Übersetzung entstehen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

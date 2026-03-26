@@ -7,7 +7,7 @@
 - **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
-Dis guide dey give full instructions on how to deploy AI models using AZD templates, e cover everything from how to choose model reach production deployment patterns.
+Dis guide dey give complete instructions on how to deploy AI models using AZD templates, and e cover everything from how to choose model to how to deploy for production.
 
 ## Table of Contents
 
@@ -20,9 +20,9 @@ Dis guide dey give full instructions on how to deploy AI models using AZD templa
 
 ## Model Selection Strategy
 
-### Azure OpenAI Models
+### Microsoft Foundry Models Models
 
-Choose the correct model for your use case:
+Choose di correct model for wetin you want do:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -34,9 +34,9 @@ services:
       AZURE_OPENAI_MODELS: |
         [
           {
-            "name": "gpt-4o-mini",
+            "name": "gpt-4.1-mini",
             "version": "2024-07-18",
-            "deployment": "gpt-4o-mini",
+            "deployment": "gpt-4.1-mini",
             "capacity": 10,
             "format": "OpenAI"
           },
@@ -54,8 +54,8 @@ services:
 
 | Model Type | Use Case | Recommended Capacity | Cost Considerations |
 |------------|----------|---------------------|-------------------|
-| GPT-4o-mini | Chat, Q&A | 10-50 TPM | Cost-effective for most workloads |
-| GPT-4 | Complex reasoning | 20-100 TPM | Higher cost, use for premium features |
+| gpt-4.1-mini | Chat, Q&A | 10-50 TPM | Cost-effective for most workloads |
+| gpt-4.1 | Complex reasoning | 20-100 TPM | Higher cost, use for premium features |
 | Text-embedding-ada-002 | Search, RAG | 30-120 TPM | Essential for semantic search |
 | Whisper | Speech-to-text | 10-50 TPM | Audio processing workloads |
 
@@ -70,10 +70,10 @@ Create model deployments through Bicep templates:
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
-    name: 'gpt-4o-mini'
+    name: 'gpt-4.1-mini'
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
     sku: {
@@ -124,13 +124,13 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Environment Variables
 
-Configure your application environment:
+Set up your application environment variables:
 
 ```bash
 # .env konfigureshon
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
-AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
+AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
@@ -146,7 +146,7 @@ services:
     host: containerapp
     config:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
-      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
+      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
 Best for:
@@ -174,7 +174,7 @@ Best for:
 
 ### Pattern 3: Hybrid Deployment
 
-Combine Azure OpenAI with other AI services:
+Combine Microsoft Foundry Models with other AI services:
 
 ```bicep
 // Hybrid AI services
@@ -207,13 +207,13 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Version Control
 
-Track model versions in your AZD configuration:
+Track model versions inside your AZD configuration:
 
 ```json
 {
   "models": {
     "chat": {
-      "name": "gpt-4o-mini",
+      "name": "gpt-4.1-mini",
       "version": "2024-07-18",
       "fallback": "gpt-35-turbo"
     },
@@ -227,7 +227,7 @@ Track model versions in your AZD configuration:
 
 ### Model Updates
 
-Use AZD hooks for model updates:
+Use AZD hooks to perform model updates:
 
 ```bash
 #!/bin/bash
@@ -237,23 +237,23 @@ echo "Checking model availability..."
 az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
-  --query "[?name=='gpt-4o-mini']"
+  --query "[?name=='gpt-4.1-mini']"
 ```
 
 ### A/B Testing
 
-Deploy multiple model versions:
+Deploy multiple model versions to run A/B tests:
 
 ```bicep
 param enableABTesting bool = false
 
 resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'gpt-4o-mini-${enableABTesting ? 'v1' : 'prod'}'
+  name: 'gpt-4.1-mini-${enableABTesting ? 'v1' : 'prod'}'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -268,10 +268,10 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### Capacity Planning
 
-Calculate required capacity based on usage patterns:
+Calculate the capacity wey you go need based on how users dey use am:
 
 ```python
-# Example wey show how to calculate capacity
+# Example wey dey show how to calculate capacity
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -283,7 +283,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example wey show how to use am
+# Example how to use am
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -333,7 +333,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Cost Optimization
 
-Implement cost controls:
+Put cost controls for reduce spending:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -367,7 +367,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Application Insights Integration
 
-Configure monitoring for AI workloads:
+Set up monitoring for your AI workloads:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -405,10 +405,10 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### Custom Metrics
 
-Track AI-specific metrics:
+Track metrics wey relate to AI workloads:
 
 ```python
-# Telemetry wey dem customize for AI models.
+# Telemetry wey dem customize for AI models
 import logging
 from applicationinsights import TelemetryClient
 
@@ -442,10 +442,10 @@ class AITelemetry:
 
 ### Health Checks
 
-Implement AI service health monitoring:
+Implement health monitoring for AI services:
 
 ```python
-# endpoints wey dey check di health
+# Endpoints wey dey check service health
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -455,7 +455,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test di OpenAI connection
+        # Test if OpenAI connection dey work
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -480,7 +480,7 @@ async def check_ai_models():
 
 ## Resources
 
-- [Azure OpenAI Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Microsoft Foundry Models Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Container Apps Scaling](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [AI Model Cost Optimization](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
@@ -497,7 +497,6 @@ async def check_ai_models():
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Make una sabi:
-
-Dis document don translate by AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg sabi say automated translations fit get mistakes or no too correct. Original document wey dey the original language suppose be di correct/authority source. If na important information, we dey advise make una use professional human translator. We no dey responsible for any misunderstanding or wrong interpretation wey fit arise from the use of dis translation.
+Abeg note:
+Dis document na AI translate do am wit de help of [Co-op Translator] (https://github.com/Azure/co-op-translator). Even though we dey try make everything correct, abeg sabi say automatic translation fit get mistakes or wrong parts. Di original document for im own language na di main correct source. If na important information, make professional human translator check am. We no go responsible for any misunderstanding or wrong interpretation wey fit follow from using dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

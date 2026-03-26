@@ -1,57 +1,57 @@
 # Παραδείγματα ανάπτυξης Container App με AZD
 
-Αυτός ο κατάλογος περιέχει ολοκληρωμένα παραδείγματα για την ανάπτυξη εφαρμογών σε containers στο Azure Container Apps χρησιμοποιώντας το Azure Developer CLI (AZD). Αυτά τα παραδείγματα δείχνουν πραγματικά πρότυπα, βέλτιστες πρακτικές και ρυθμίσεις έτοιμες για παραγωγή.
+Αυτός ο κατάλογος περιέχει ολοκληρωμένα παραδείγματα για την ανάπτυξη εφαρμογών σε κοντέινερ στο Azure Container Apps χρησιμοποιώντας το Azure Developer CLI (AZD). Αυτά τα παραδείγματα δείχνουν πραγματικά μοτίβα, βέλτιστες πρακτικές και ρυθμίσεις έτοιμες για παραγωγή.
 
-## 📚 Πίνακας περιεχομένων
+## 📚 Περιεχόμενα
 
 - [Επισκόπηση](../../../../examples/container-app)
-- [Απαιτούμενα](../../../../examples/container-app)
+- [Προαπαιτούμενα](../../../../examples/container-app)
 - [Παραδείγματα γρήγορης εκκίνησης](../../../../examples/container-app)
 - [Παραδείγματα παραγωγής](../../../../examples/container-app)
-- [Προηγμένα πρότυπα](../../../../examples/container-app)
+- [Προχωρημένα μοτίβα](../../../../examples/container-app)
 - [Καλές πρακτικές](../../../../examples/container-app)
 
 ## Overview
 
-Το Azure Container Apps είναι μια πλήρως διαχειριζόμενη serverless πλατφόρμα για containers που σας επιτρέπει να εκτελείτε μικροϋπηρεσίες και εφαρμογές σε containers χωρίς να διαχειρίζεστε την υποδομή. Όταν συνδυάζεται με το AZD, αποκτάτε:
+Το Azure Container Apps είναι μια πλήρως διαχειριζόμενη serverless πλατφόρμα κοντέινερ που σας επιτρέπει να εκτελείτε μικροϋπηρεσίες και εφαρμογές σε κοντέινερ χωρίς να διαχειρίζεστε την υποδομή. Όταν συνδυάζεται με το AZD, αποκτάτε:
 
-- **Simplified Deployment**: Μια εντολή αναπτύσσει κοντέινερ μαζί με την υποδομή
-- **Automatic Scaling**: Αυτόματη κλιμάκωση σε μηδέν και κλιμάκωση με βάση την κίνηση HTTP ή γεγονότα
-- **Integrated Networking**: Ενσωματωμένη ανακάλυψη υπηρεσιών και διαχωρισμός κίνησης
-- **Managed Identity**: Ασφαλής έλεγχος ταυτότητας σε πόρους Azure
-- **Cost Optimization**: Πληρώστε μόνο για τους πόρους που χρησιμοποιείτε
+- **Απλοποιημένη Ανάπτυξη**: Ένα εντολή αναπτύσσει κοντέινερ μαζί με την υποδομή
+- **Αυτόματη Κλιμάκωση**: Κλιμάκωση στο μηδέν και κλιμάκωση ανάλογα με την HTTP κίνηση ή γεγονότα
+- **Ενσωματωμένη Δικτύωση**: Ενσωματωμένη ανίχνευση υπηρεσιών και διαίρεση κυκλοφορίας
+- **Διαχειριζόμενη Ταυτότητα**: Ασφαλής αυθεντικοποίηση σε πόρους Azure
+- **Βελτιστοποίηση Κόστους**: Πληρώνετε μόνο για τους πόρους που χρησιμοποιείτε
 
-## Prerequisites
+## Προαπαιτούμενα
 
 Πριν ξεκινήσετε, βεβαιωθείτε ότι έχετε:
 
 ```bash
-# Ελέγξτε την εγκατάσταση του AZD
+# Έλεγχος εγκατάστασης του AZD
 azd version
 
-# Ελέγξτε το Azure CLI
+# Έλεγχος Azure CLI
 az version
 
-# Ελέγξτε το Docker (για τη δημιουργία προσαρμοσμένων εικόνων)
+# Έλεγχος Docker (για τη δημιουργία προσαρμοσμένων εικόνων)
 docker --version
 
-# Συνδεθείτε στο Azure
+# Σύνδεση στο Azure
 azd auth login
 az login
 ```
 
-**Required Azure Resources:**
+**Απαιτούμενοι πόροι Azure:**
 - Ενεργή συνδρομή Azure
 - Δικαιώματα δημιουργίας ομάδας πόρων
 - Πρόσβαση στο περιβάλλον Container Apps
 
-## Quick Start Examples
+## Παραδείγματα γρήγορης εκκίνησης
 
-### 1. Simple Web API (Python Flask)
+### 1. Απλό Web API (Python Flask)
 
-Αναπτύξτε ένα βασικό REST API με Azure Container Apps.
+Αναπτύξτε ένα βασικό REST API με το Azure Container Apps.
 
-**Example: Python Flask API**
+**Παράδειγμα: Python Flask API**
 
 ```yaml
 # azure.yaml
@@ -65,13 +65,13 @@ services:
     host: containerapp
 ```
 
-**Deployment Steps:**
+**Βήματα ανάπτυξης:**
 
 ```bash
 # Αρχικοποίηση από πρότυπο
 azd init --template todo-python-mongo
 
-# Δημιουργία υποδομής και ανάπτυξη
+# Παροχή υποδομής και ανάπτυξη
 azd up
 
 # Δοκιμή της ανάπτυξης
@@ -79,11 +79,11 @@ azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-**Key Features:**
+**Βασικά χαρακτηριστικά:**
 - Αυτόματη κλιμάκωση από 0 έως 10 αντίγραφα
-- Έλεγχοι υγείας και ελέγχοι ζωντάνιας
+- Έλεγχοι υγείας (health probes) και έλεγχοι liveness
 - Έγχυση μεταβλητών περιβάλλοντος
-- Ενσωμάτωση με το Application Insights
+- Ενσωμάτωση με Application Insights
 
 ### 2. Node.js Express API
 
@@ -93,18 +93,18 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 # Αρχικοποίηση προτύπου API Node.js
 azd init --template todo-nodejs-mongo
 
-# Ρύθμιση μεταβλητών περιβάλλοντος
+# Διαμόρφωση μεταβλητών περιβάλλοντος
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
 # Ανάπτυξη
 azd up
 
-# Προβολή αρχείων καταγραφής μέσω Azure Monitor
+# Προβολή αρχείων καταγραφής μέσω του Azure Monitor
 azd monitor --logs
 ```
 
-**Infrastructure Highlights:**
+**Βασικά στοιχεία υποδομής:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -149,29 +149,29 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 3. Static Frontend + API Backend
 
-Αναπτύξτε μια πλήρους στοίβας εφαρμογή με React frontend και API backend.
+Αναπτύξτε μια εφαρμογή full-stack με React frontend και API backend.
 
 ```bash
-# Αρχικοποιήστε το πρότυπο πλήρους στοίβας
+# Αρχικοποίηση προτύπου πλήρους στοίβας
 azd init --template todo-csharp-sql-swa-func
 
-# Ελέγξτε τη διαμόρφωση
+# Επανεξέταση διαμόρφωσης
 cat azure.yaml
 
-# Αναπτύξτε και τις δύο υπηρεσίες
+# Ανάπτυξη και των δύο υπηρεσιών
 azd up
 
-# Ανοίξτε την εφαρμογή
+# Άνοιγμα της εφαρμογής
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
-## Production Examples
+## Παραδείγματα παραγωγής
 
-### Example 1: Microservices Architecture
+### Παράδειγμα 1: Αρχιτεκτονική μικροϋπηρεσιών
 
-**Scenario**: Εφαρμογή ηλεκτρονικού εμπορίου με πολλαπλές μικροϋπηρεσίες
+**Σενάριο**: Εφαρμογή ηλεκτρονικού εμπορίου με πολλαπλές μικροϋπηρεσίες
 
-**Directory Structure:**
+**Δομή καταλόγου:**
 ```
 microservices-demo/
 ├── azure.yaml
@@ -191,7 +191,7 @@ microservices-demo/
     └── payment-service/
 ```
 
-**azure.yaml Configuration:**
+**Διαμόρφωση azure.yaml:**
 ```yaml
 name: microservices-ecommerce
 services:
@@ -211,31 +211,31 @@ services:
     host: containerapp
 ```
 
-**Deployment:**
+**Ανάπτυξη:**
 ```bash
-# Αρχικοποιήστε το έργο
+# Αρχικοποίηση έργου
 azd init
 
-# Ορίστε το περιβάλλον παραγωγής
+# Ορισμός περιβάλλοντος παραγωγής
 azd env new production
 
-# Διαμορφώστε τις ρυθμίσεις παραγωγής
+# Διαμόρφωση ρυθμίσεων παραγωγής
 azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
 
-# Αναπτύξτε όλες τις υπηρεσίες
+# Ανάπτυξη όλων των υπηρεσιών
 azd up
 
-# Παρακολουθήστε την ανάπτυξη
+# Παρακολούθηση ανάπτυξης
 azd monitor --overview
 ```
 
-### Example 2: AI-Powered Container App
+### Παράδειγμα 2: Container App με δυνατότητες AI
 
-**Scenario**: Εφαρμογή συνομιλίας με AI με ενσωμάτωση Azure OpenAI
+**Σενάριο**: Εφαρμογή συνομιλίας AI με ενσωμάτωση Microsoft Foundry Models
 
-**File: src/ai-chat/app.py**
+**Αρχείο: src/ai-chat/app.py**
 ```python
 from flask import Flask, request, jsonify
 from azure.identity import DefaultAzureCredential
@@ -244,7 +244,7 @@ import openai
 
 app = Flask(__name__)
 
-# Χρησιμοποιήστε διαχειριζόμενη ταυτότητα για ασφαλή πρόσβαση
+# Χρησιμοποιήστε Διαχειριζόμενη Ταυτότητα για ασφαλή πρόσβαση
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -253,12 +253,12 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # Λάβετε το κλειδί OpenAI από την Αποθήκη Κλειδιών
+    # Αποκτήστε το κλειδί OpenAI από το Key Vault
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[{"role": "user", "content": user_message}]
     )
     
@@ -268,7 +268,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-**File: azure.yaml**
+**Αρχείο: azure.yaml**
 ```yaml
 name: ai-chat-app
 services:
@@ -278,7 +278,7 @@ services:
     host: containerapp
 ```
 
-**File: infra/main.bicep**
+**Αρχείο: infra/main.bicep**
 ```bicep
 param location string = resourceGroup().location
 param environmentName string
@@ -320,15 +320,15 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**Deployment Commands:**
+**Εντολές ανάπτυξης:**
 ```bash
 # Ρύθμιση περιβάλλοντος
 azd init --template ai-chat-app
 azd env new dev
 
-# Διαμόρφωση OpenAI
+# Διαμόρφωση του OpenAI
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
-azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
+azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4.1"
 
 # Ανάπτυξη
 azd up
@@ -339,11 +339,11 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Example 3: Background Worker with Queue Processing
+### Παράδειγμα 3: Εργαζόμενος φόντου με επεξεργασία ουρών
 
-**Scenario**: Σύστημα επεξεργασίας παραγγελιών με ουρά μηνυμάτων
+**Σενάριο**: Σύστημα επεξεργασίας παραγγελιών με ουρά μηνυμάτων
 
-**Directory Structure:**
+**Δομή καταλόγου:**
 ```
 queue-worker/
 ├── azure.yaml
@@ -360,7 +360,7 @@ queue-worker/
     └── worker/
 ```
 
-**File: src/worker/processor.py**
+**Αρχείο: src/worker/processor.py**
 ```python
 import os
 from azure.storage.queue import QueueClient
@@ -381,14 +381,14 @@ def process_orders():
             # Επεξεργασία παραγγελίας
             print(f"Processing order: {message.content}")
             
-            # Πλήρες μήνυμα
+            # Ολοκληρωμένο μήνυμα
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
     process_orders()
 ```
 
-**File: azure.yaml**
+**Αρχείο: azure.yaml**
 ```yaml
 name: order-processing
 services:
@@ -403,7 +403,7 @@ services:
     host: containerapp
 ```
 
-**Deployment:**
+**Ανάπτυξη:**
 ```bash
 # Αρχικοποίηση
 azd init
@@ -411,7 +411,7 @@ azd init
 # Ανάπτυξη με διαμόρφωση ουράς
 azd up
 
-# Κλιμάκωση εργαζομένου ανάλογα με το μήκος της ουράς
+# Κλιμάκωση του εργάτη με βάση το μήκος της ουράς
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -420,33 +420,33 @@ az containerapp update \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
 
-## Advanced Patterns
+## Προχωρημένα μοτίβα
 
-### Pattern 1: Blue-Green Deployment
+### Μοτίβο 1: Blue-Green ανάπτυξη
 
 ```bash
-# Δημιουργήστε νέα έκδοση χωρίς κυκλοφορία
+# Δημιουργήστε νέα αναθεώρηση χωρίς κυκλοφορία
 azd deploy api --revision-suffix blue --no-traffic
 
-# Δοκιμάστε τη νέα έκδοση
+# Δοκιμάστε τη νέα αναθεώρηση
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Καταμερίστε την κυκλοφορία (20% στο μπλε, 80% στην τρέχουσα έκδοση)
+# Διαμοιράστε την κυκλοφορία (20% στο μπλε, 80% στην τρέχουσα)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# Πλήρης μεταγωγή στο μπλε
+# Πλήρης μετάβαση στο μπλε
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
 
-### Pattern 2: Canary Deployment with AZD
+### Μοτίβο 2: Canary deployment με AZD
 
-**File: .azure/dev/config.json**
+**Αρχείο: .azure/dev/config.json**
 ```json
 {
   "deploymentStrategy": "canary",
@@ -458,15 +458,15 @@ az containerapp ingress traffic set \
 }
 ```
 
-**Deployment Script:**
+**Σενάριο ανάπτυξης:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
 
-# Αναπτύξτε νέα έκδοση με 10% της κυκλοφορίας
+# Αναπτύξτε νέα αναθεώρηση με 10% της κυκλοφορίας
 azd deploy api --revision-mode multiple
 
-# Παρακολουθήστε τις μετρικές
+# Παρακολουθήστε μετρικές
 azd monitor --service api --duration 5m
 
 # Αυξήστε την κυκλοφορία σταδιακά
@@ -481,9 +481,9 @@ for i in {20..100..10}; do
 done
 ```
 
-### Pattern 3: Multi-Region Deployment
+### Μοτίβο 3: Ανάπτυξη σε πολλαπλές περιοχές
 
-**File: azure.yaml**
+**Αρχείο: azure.yaml**
 ```yaml
 name: global-app
 services:
@@ -497,7 +497,7 @@ services:
       - southeastasia
 ```
 
-**File: infra/multi-region.bicep**
+**Αρχείο: infra/multi-region.bicep**
 ```bicep
 param regions array = ['eastus', 'westeurope', 'southeastasia']
 
@@ -527,7 +527,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-**Deployment:**
+**Ανάπτυξη:**
 ```bash
 # Αναπτύξτε σε όλες τις περιοχές
 azd up
@@ -536,9 +536,9 @@ azd up
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### Pattern 4: Dapr Integration
+### Μοτίβο 4: Ενσωμάτωση Dapr
 
-**File: infra/app/dapr-enabled.bicep**
+**Αρχείο: infra/app/dapr-enabled.bicep**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: 'dapr-app'
@@ -563,7 +563,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-**Application Code with Dapr:**
+**Κώδικας εφαρμογής με Dapr:**
 ```python
 from flask import Flask
 from dapr.clients import DaprClient
@@ -590,20 +590,20 @@ def create_order():
     return {'status': 'created'}
 ```
 
-## Best Practices
+## Καλές πρακτικές
 
-### 1. Resource Organization
+### 1. Οργάνωση πόρων
 
 ```bash
-# Χρησιμοποιήστε συνεπείς συμβάσεις ονοματοδοσίας
+# Χρησιμοποιήστε συνεπείς κανόνες ονοματοδοσίας
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# Επισημάνετε πόρους για παρακολούθηση κόστους
+# Επισημάνετε πόρους με ετικέτες για την παρακολούθηση του κόστους
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. Security Best Practices
+### 2. Καλές πρακτικές ασφάλειας
 
 ```bicep
 // Always use managed identity
@@ -642,7 +642,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
 }
 ```
 
-### 3. Performance Optimization
+### 3. Βελτιστοποίηση απόδοσης
 
 ```yaml
 # azure.yaml with performance settings
@@ -662,7 +662,7 @@ services:
             concurrent: 100
 ```
 
-### 4. Monitoring and Observability
+### 4. Παρακολούθηση και παρατηρησιμότητα
 
 ```bash
 # Ενεργοποιήστε το Application Insights
@@ -670,10 +670,10 @@ azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
 # Δείτε τα αρχεία καταγραφής σε πραγματικό χρόνο
 azd monitor --logs
-# Ή χρησιμοποιήστε το Azure CLI για Container Apps:
+# Ή χρησιμοποιήστε το Azure CLI για τις Container Apps:
 az containerapp logs show --name api --resource-group rg-myapp --follow
 
-# Παρακολουθήστε μετρήσεις
+# Παρακολουθήστε μετρικές
 azd monitor --live
 
 # Δημιουργήστε ειδοποιήσεις
@@ -685,10 +685,10 @@ az monitor metrics alert create \
   --description "Alert when CPU exceeds 80%"
 ```
 
-### 5. Cost Optimization
+### 5. Βελτιστοποίηση κόστους
 
 ```bash
-# Κλιμάκωση σε μηδέν όταν δεν χρησιμοποιείται
+# Κλιμάκωση στο μηδέν όταν δεν χρησιμοποιείται
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -705,9 +705,9 @@ az consumption budget create \
   --threshold 80
 ```
 
-### 6. CI/CD Integration
+### 6. Ενσωμάτωση CI/CD
 
-**GitHub Actions Example:**
+**Παράδειγμα GitHub Actions:**
 ```yaml
 name: Deploy to Azure Container Apps
 
@@ -737,44 +737,44 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Common Commands Reference
+## Αναφορά κοινών εντολών
 
 ```bash
-# Αρχικοποιήστε νέο έργο εφαρμογής Container App
+# Αρχικοποίηση νέου έργου εφαρμογής container
 azd init --template <template-name>
 
-# Αναπτύξτε την υποδομή και την εφαρμογή
+# Ανάπτυξη υποδομής και εφαρμογής
 azd up
 
-# Αναπτύξτε μόνο τον κώδικα της εφαρμογής (παράλειψη υποδομής)
+# Ανάπτυξη μόνο του κώδικα εφαρμογής (παράλειψη υποδομής)
 azd deploy
 
-# Δημιουργήστε μόνο την υποδομή
+# Παροχή μόνο υποδομής
 azd provision
 
-# Δείτε τους αναπτυγμένους πόρους
+# Προβολή αναπτυγμένων πόρων
 azd show
 
-# Παρακολουθήστε ροή καταγραφών χρησιμοποιώντας το azd monitor ή το Azure CLI
+# Ροή καταγραφών χρησιμοποιώντας azd monitor ή το Azure CLI
 azd monitor --logs
 # az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
-# Παρακολουθήστε την εφαρμογή
+# Παρακολούθηση εφαρμογής
 azd monitor --overview
 
-# Καθαρίστε τους πόρους
+# Καθαρισμός πόρων
 azd down --force --purge
 ```
 
-## Troubleshooting
+## Επίλυση προβλημάτων
 
-### Issue: Container fails to start
+### Πρόβλημα: Το container δεν ξεκινά
 
 ```bash
 # Ελέγξτε τα αρχεία καταγραφής χρησιμοποιώντας το Azure CLI
 az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# Προβάλετε τα συμβάντα του κοντέινερ
+# Δείτε τα συμβάντα του κοντέινερ
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
@@ -785,23 +785,23 @@ docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Issue: Can't access container app endpoint
+### Πρόβλημα: Δεν είναι δυνατή η πρόσβαση στο endpoint της εφαρμογής container
 
 ```bash
-# Επαλήθευση διαμόρφωσης Ingress
+# Επαληθεύστε τη διαμόρφωση του ingress
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# Ελέγξτε εάν ο εσωτερικός Ingress είναι ενεργοποιημένος
+# Ελέγξτε αν το εσωτερικό ingress είναι ενεργοποιημένο
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
   --external true
 ```
 
-### Issue: Performance problems
+### Πρόβλημα: Προβλήματα απόδοσης
 
 ```bash
 # Ελέγξτε τη χρήση πόρων
@@ -817,31 +817,31 @@ az containerapp update \
   --memory 4Gi
 ```
 
-## Additional Resources and Examples
+## Πρόσθετοι πόροι και παραδείγματα
 - [Παράδειγμα μικροϋπηρεσιών](./microservices/README.md)
-- [Απλό παράδειγμα Flash API](./simple-flask-api/README.md)
+- [Παράδειγμα Simple Flash API](./simple-flask-api/README.md)
 - [Τεκμηρίωση Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
 - [Συλλογή προτύπων AZD](https://azure.github.io/awesome-azd/)
 - [Δείγματα Container Apps](https://github.com/Azure-Samples/container-apps-samples)
 - [Πρότυπα Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-## Contributing
+## Συνεισφορά
 
-Για να συνεισφέρετε νέα παραδείγματα container app:
+Για να συνεισφέρετε νέα παραδείγματα εφαρμογών container:
 
-1. Δημιουργήστε έναν νέο υποκατάλογο με το παράδειγμά σας
-2. Συμπεριλάβετε πλήρη αρχεία `azure.yaml`, `infra/` και `src/`
-3. Προσθέστε ένα ολοκληρωμένο README με οδηγίες ανάπτυξης
+1. Δημιουργήστε έναν νέο υποκατάλογο με το παράδείγμά σας
+2. Περιλάβετε πλήρη αρχεία `azure.yaml`, `infra/` και `src/`
+3. Προσθέστε ένα αναλυτικό README με οδηγίες ανάπτυξης
 4. Δοκιμάστε την ανάπτυξη με `azd up`
 5. Υποβάλετε ένα pull request
 
 ---
 
-**Χρειάζεστε βοήθεια;** Ελάτε στην κοινότητα [Microsoft Foundry στο Discord](https://discord.gg/microsoft-azure) για υποστήριξη και ερωτήσεις.
+**Χρειάζεστε βοήθεια;** Ελάτε στην κοινότητα [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) για υποστήριξη και ερωτήσεις.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Αποποίηση ευθυνών:
-Αυτό το έγγραφο έχει μεταφραστεί με τη χρήση της υπηρεσίας μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που καταβάλλουμε προσπάθειες για την ακρίβεια, παρακαλείστε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στη γλώσσα του πρέπει να θεωρείται η επίσημη πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+Αποποίηση ευθύνης:
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία αυτόματης μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που επιδιώκουμε την ακρίβεια, να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στη γλώσσα του πρέπει να θεωρείται η αυθεντική/επίσημη πηγή. Για κρίσιμες πληροφορίες συνιστάται επαγγελματική μετάφραση από ανθρώπινο μεταφραστή. Δεν φέρουμε ευθύνη για οποιεσδήποτε παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

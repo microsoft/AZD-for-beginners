@@ -1,73 +1,73 @@
 # Παραδείγματα - Πρακτικά Πρότυπα και Διαμορφώσεις AZD
 
-**Μάθηση Μέσω Παραδείγματος - Οργανωμένα κατά Κεφάλαιο**
-- **📚 Αρχική Μαθήματος**: [AZD For Beginners](../README.md)
+**Μάθηση μέσω Παραδείγματος - Οργανωμένο κατά Κεφάλαιο**
+- **📚 Αρχική Μαθήματος**: [AZD για Αρχάριους](../README.md)
 - **📖 Χάρτης Κεφαλαίων**: Παραδείγματα οργανωμένα κατά πολυπλοκότητα μάθησης
-- **🚀 Τοπικό Παράδειγμα**: [Λύση Πολυ-Πράκτορα Λιανεμπορίου](retail-scenario.md)
-- **🤖 Εξωτερικά Παραδείγματα AI**: Σύνδεσμοι σε αποθετήρια Azure Samples
+- **🚀 Τοπικό Παράδειγμα**: [Λύση Retail Multi-Agent](retail-scenario.md)
+- **🤖 Εξωτερικά Παραδείγματα AI**: Σύνδεσμοι προς αποθετήρια Azure Samples
 
-> **📍 ΣΗΜΑΝΤΙΚΟ: Τοπικά έναντι Εξωτερικών Παραδειγμάτων**  
+> **📍 ΣΗΜΑΝΤΙΚΟ: Τοπικά vs Εξωτερικά Παραδείγματα**  
 > Αυτό το αποθετήριο περιέχει **4 πλήρη τοπικά παραδείγματα** με πλήρεις υλοποιήσεις:  
-> - **Azure OpenAI Chat** (υλοποίηση GPT-4 με διεπαφή chat)  
-> - **Container Apps** (Απλό Flask API + Μικροϋπηρεσίες)  
-> - **Database App** (Ιστός + SQL Database)  
+> - **Microsoft Foundry Models Chat** (ανάπτυξη gpt-4.1 με διεπαφή συνομιλίας)  
+> - **Container Apps** (Απλό Flask API + Microservices)  
+> - **Εφαρμογή Βάσης Δεδομένων** (Web + SQL Database)  
 > - **Retail Multi-Agent** (Επιχειρησιακή λύση AI)  
 >  
-> Πρόσθετα παραδείγματα είναι **εξωτερικές αναφορές** σε αποθετήρια Azure-Samples που μπορείτε να κλωνοποιήσετε.
+> Επιπλέον παραδείγματα είναι **εξωτερικές αναφορές** σε αποθετήρια Azure-Samples που μπορείτε να κλωνοποιήσετε.
 
 ## Εισαγωγή
 
-Αυτός ο κατάλογος παρέχει πρακτικά παραδείγματα και αναφορές για να σας βοηθήσει να μάθετε το Azure Developer CLI μέσω πρακτικής εξάσκησης. Το σενάριο Retail Multi-Agent είναι μια πλήρης, έτοιμη για παραγωγή υλοποίηση που περιλαμβάνεται σε αυτό το αποθετήριο. Πρόσθετα παραδείγματα αναφέρονται σε επίσημα Azure Samples που επιδεικνύουν διάφορα μοτίβα AZD.
+Αυτός ο κατάλογος παρέχει πρακτικά παραδείγματα και αναφορές για να σας βοηθήσει να μάθετε το Azure Developer CLI μέσω πρακτικής εξάσκησης. Το σενάριο Retail Multi-Agent είναι μια πλήρης, έτοιμη για παραγωγή υλοποίηση που περιλαμβάνεται σε αυτό το αποθετήριο. Επιπλέον παραδείγματα αναφέρονται σε επίσημα Azure Samples που επιδεικνύουν διάφορα μοτίβα AZD.
 
-### Υπόμνημα Βαθμολογίας Πολυπλοκότητας
+### Υπόμνημα Βαθμολόγησης Πολυπλοκότητας
 
 - ⭐ **Αρχάριος** - Βασικές έννοιες, μία υπηρεσία, 15-30 λεπτά
-- ⭐⭐ **Μεσαίο Επίπεδο** - Πολλαπλές υπηρεσίες, ενσωμάτωση βάσης δεδομένων, 30-60 λεπτά
-- ⭐⭐⭐ **Προχωρημένο** - Πολύπλοκη αρχιτεκτονική, ενσωμάτωση AI, 1-2 ώρες
-- ⭐⭐⭐⭐ **Ειδικός** - Έτοιμο για παραγωγή, επιχειρηματικά μοτίβα, 2+ ώρες
+- ⭐⭐ **Ενδιάμεσος** - Πολλαπλές υπηρεσίες, ενσωμάτωση βάσης δεδομένων, 30-60 λεπτά
+- ⭐⭐⭐ **Προχωρημένος** - Πολυσύνθετη αρχιτεκτονική, ενσωμάτωση AI, 1-2 ώρες
+- ⭐⭐⭐⭐ **Ειδικός** - Έτοιμο για παραγωγή, επιχειρησιακά μοτίβα, 2+ ώρες
 
 ## 🎯 Τι Περιέχει Πραγματικά Αυτό το Αποθετήριο
 
 ### ✅ Τοπική Υλοποίηση (Έτοιμη για Χρήση)
 
-#### [Εφαρμογή Azure OpenAI Chat](azure-openai-chat/README.md) 🆕
-**Πλήρης ανάπτυξη GPT-4 με διεπαφή συνομιλίας περιλαμβάνεται σε αυτό το αποθετήριο**
+#### [Εφαρμογή συνομιλίας Microsoft Foundry Models](azure-openai-chat/README.md) 🆕
+**Πλήρης ανάπτυξη gpt-4.1 με διεπαφή συνομιλίας συμπεριλαμβάνεται σε αυτό το αποθετήριο**
 
 - **Τοποθεσία:** `examples/azure-openai-chat/`
-- **Πολυπλοκότητα:** ⭐⭐ (Μεσαίο Επίπεδο)
+- **Πολυπλοκότητα:** ⭐⭐ (Ενδιάμεσο)
 - **Τι Περιλαμβάνεται:**
-  - Πλήρης ανάπτυξη Azure OpenAI (GPT-4)
+  - Πλήρης ανάπτυξη Microsoft Foundry Models (gpt-4.1)
   - Διεπαφή συνομιλίας γραμμής εντολών Python
-  - Ενσωμάτωση Key Vault για ασφαλή API κλειδιά
+  - Ενσωμάτωση Key Vault για ασφαλή κλειδιά API
   - Πρότυπα υποδομής Bicep
   - Παρακολούθηση χρήσης token και κόστους
-  - Περιορισμός ρυθμού και χειρισμός σφαλμάτων
+  - Περιορισμός ρυθμού και διαχείριση σφαλμάτων
 
 **Γρήγορη Εκκίνηση:**
 ```bash
-# Μεταβείτε στο παράδειγμα
+# Πλοηγηθείτε στο παράδειγμα
 cd examples/azure-openai-chat
 
 # Αναπτύξτε τα πάντα
 azd up
 
-# Εγκαταστήστε τις εξαρτήσεις και αρχίστε να συνομιλείτε
+# Εγκαταστήστε τις εξαρτήσεις και ξεκινήστε να συνομιλείτε
 pip install -r src/requirements.txt
 python src/chat.py
 ```
 
-**Τεχνολογίες:** Azure OpenAI, GPT-4, Key Vault, Python, Bicep
+**Τεχνολογίες:** Microsoft Foundry Models, gpt-4.1, Key Vault, Python, Bicep
 
 #### [Παραδείγματα Container App](container-app/README.md) 🆕
-**Περιεκτικά παραδείγματα ανάπτυξης container περιλαμβάνονται σε αυτό το αποθετήριο**
+**Πληρέστατα παραδείγματα ανάπτυξης containers περιλαμβάνονται σε αυτό το αποθετήριο**
 
 - **Τοποθεσία:** `examples/container-app/`
-- **Πολυπλοκότητα:** ⭐-⭐⭐⭐⭐ (Αρχάριος έως Ειδικός)
+- **Πολυπλοκότητα:** ⭐-⭐⭐⭐⭐ (Από Αρχάριο έως Προχωρημένο)
 - **Τι Περιλαμβάνεται:**
-  - [Οδηγός Master](container-app/README.md) - Πλήρης επισκόπηση αναπτύξεων container
+  - [Κύριος Οδηγός](container-app/README.md) - Πλήρης επισκόπηση των αναπτύξεων containers
   - [Απλό Flask API](../../../examples/container-app/simple-flask-api) - Βασικό παράδειγμα REST API
-  - [Αρχιτεκτονική Μικροϋπηρεσιών](../../../examples/container-app/microservices) - Παραγωγική ανάπτυξη πολλαπλών υπηρεσιών
-  - Γρήγορη Εκκίνηση, Παραγωγή και Προχωρημένα μοτίβα
+  - [Αρχιτεκτονική Microservices](../../../examples/container-app/microservices) - Παραγωγική ανάπτυξη πολλαπλών υπηρεσιών
+  - Γρήγορη εκκίνηση, πρότυπα παραγωγής και προχωρημένα μοτίβα
   - Παρακολούθηση, ασφάλεια και βελτιστοποίηση κόστους
 
 **Γρήγορη Εκκίνηση:**
@@ -75,7 +75,7 @@ python src/chat.py
 # Προβολή κύριου οδηγού
 cd examples/container-app
 
-# Ανάπτυξη απλού API Flask
+# Ανάπτυξη απλού API με Flask
 cd simple-flask-api
 azd up
 
@@ -86,15 +86,15 @@ azd up
 
 **Τεχνολογίες:** Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights
 
-#### [Λύση Πολυ-Πράκτορα Λιανεμπορίου](retail-scenario.md) 🆕
+#### [Λύση Retail Multi-Agent](retail-scenario.md) 🆕
 **Πλήρης υλοποίηση έτοιμη για παραγωγή περιλαμβάνεται σε αυτό το αποθετήριο**
 
 - **Τοποθεσία:** `examples/retail-multiagent-arm-template/`
 - **Πολυπλοκότητα:** ⭐⭐⭐⭐ (Προχωρημένο)
 - **Τι Περιλαμβάνεται:**
   - Πλήρες πρότυπο ανάπτυξης ARM
-  - Αρχιτεκτονική πολλαπλών πρακτόρων (Πελάτης + Αποθέματα)
-  - Ενσωμάτωση Azure OpenAI
+  - Αρχιτεκτονική πολλαπλών πρακτόρων (Customer + Inventory)
+  - Ενσωμάτωση Microsoft Foundry Models
   - AI Search με RAG
   - Ολοκληρωμένη παρακολούθηση
   - Σενάριο ανάπτυξης με ένα κλικ
@@ -105,11 +105,11 @@ cd examples/retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-**Τεχνολογίες:** Azure OpenAI, AI Search, Container Apps, Cosmos DB, Application Insights
+**Τεχνολογίες:** Microsoft Foundry Models, AI Search, Container Apps, Cosmos DB, Application Insights
 
 ---
 
-## 🔗 Εξωτερικά Azure Samples (Κλωνοποιήστε για Χρήση)
+## 🔗 Εξωτερικά Παραδείγματα Azure Samples (Κλωνοποιήστε για Χρήση)
 
 Τα ακόλουθα παραδείγματα διατηρούνται σε επίσημα αποθετήρια Azure-Samples. Κλωνοποιήστε τα για να εξερευνήσετε διαφορετικά μοτίβα AZD:
 
@@ -137,40 +137,40 @@ azd up
 
 | Πρότυπο | Αποθετήριο | Πολυπλοκότητα | Εστίαση |
 |:---------|:-----------|:-----------|:------|
-| **Azure OpenAI Chat** | [Τοπικό: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | Υλοποίηση GPT-4 |
+| **Microsoft Foundry Models Chat** | [Τοπικό: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | ανάπτυξη gpt-4.1 |
 | **AI Chat Quickstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Βασική συνομιλία AI |
 | **AI Agents** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Πλαίσιο πρακτόρων |
-| **Search + OpenAI Demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | Πρότυπο RAG |
+| **Search + OpenAI Demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | μοτίβο RAG |
 | **Contoso Chat** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | Επιχειρησιακό AI |
 
-### Βάσεις Δεδομένων & Προχωρημένα Μοτίβα (Κεφάλαια 3-8)
+### Βάσεις Δεδομένων & Προχωρημένα Πρότυπα (Κεφάλαια 3-8)
 
 | Πρότυπο | Αποθετήριο | Πολυπλοκότητα | Εστίαση |
 |:---------|:-----------|:-----------|:------|
 | **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | Ενσωμάτωση βάσης δεδομένων |
-| **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | Serverless NoSQL |
+| **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | NoSQL serverless |
 | **Java Microservices** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | Πολλαπλές υπηρεσίες |
 | **ML Pipeline** | [mlops-v2](https://github.com/Azure-Samples/mlops-v2) | ⭐⭐⭐⭐ | MLOps |
 
 ## Στόχοι Μάθησης
 
-Με την εργασία σε αυτά τα παραδείγματα, θα:
-- Εξασκήσετε ροές εργασίας Azure Developer CLI με ρεαλιστικά σενάρια εφαρμογών
-- Κατανοήσετε διαφορετικές αρχιτεκτονικές εφαρμογών και τις υλοποιήσεις τους με azd
-- Κατακτήσετε μοτίβα Infrastructure as Code για διάφορες υπηρεσίες Azure
-- Εφαρμόσετε διαχείριση διαμορφώσεων και στρατηγικές ανάπτυξης ειδικές για περιβάλλον
-- Υλοποιήσετε μοτίβα παρακολούθησης, ασφάλειας και κλιμάκωσης σε πρακτικά περιβάλλοντα
-- Αποκτήσετε εμπειρία με αντιμετώπιση προβλημάτων και αποσφαλμάτωση πραγματικών σεναρίων ανάπτυξης
+Εργαζόμενοι με αυτά τα παραδείγματα, θα:
+- Εξασκηθείτε στις ροές εργασίας του Azure Developer CLI με ρεαλιστικά σενάρια εφαρμογών
+- Κατανοήσετε διαφορετικές αρχιτεκτονικές εφαρμογών και τις αντίστοιχες υλοποιήσεις azd
+- Εξοικειωθείτε με τα μοτίβα Infrastructure as Code για διάφορες υπηρεσίες Azure
+- Εφαρμόσετε διαχείριση διαμόρφωσης και στρατηγικές ανάπτυξης ανά περιβάλλον
+- Υλοποιήσετε πρότυπα παρακολούθησης, ασφάλειας και κλιμάκωσης σε πρακτικά πλαίσια
+- Αποκτήσετε εμπειρία στην αντιμετώπιση προβλημάτων και τον εντοπισμό σφαλμάτων σε πραγματικά σενάρια ανάπτυξης
 
-## Αποτελέσματα Μάθησης
+## Μαθησιακά Αποτελέσματα
 
 Με την ολοκλήρωση αυτών των παραδειγμάτων, θα μπορείτε να:
-- Αναπτύξετε διάφορους τύπους εφαρμογών χρησιμοποιώντας Azure Developer CLI με αυτοπεποίθηση
-- Προσαρμόσετε τα παρεχόμενα πρότυπα στις δικές σας απαιτήσεις εφαρμογής
-- Σχεδιάσετε και υλοποιήσετε προσαρμοσμένα μοτίβα υποδομής χρησιμοποιώντας Bicep
-- Διαμορφώσετε πολύπλοκες εφαρμογές πολλαπλών υπηρεσιών με σωστές εξαρτήσεις
-- Εφαρμόσετε βέλτιστες πρακτικές ασφάλειας, παρακολούθησης και απόδοσης σε πραγματικά σενάρια
-- Αντιμετωπίσετε προβλήματα και βελτιστοποιήσετε αναπτύξεις βάσει πρακτικής εμπειρίας
+- Αναπτύσσετε διάφορους τύπους εφαρμογών χρησιμοποιώντας το Azure Developer CLI με αυτοπεποίθηση
+- Προσαρμόζετε τα παρεχόμενα πρότυπα στις δικές σας απαιτήσεις εφαρμογής
+- Σχεδιάζετε και υλοποιείτε προσαρμοσμένα μοτίβα υποδομής χρησιμοποιώντας Bicep
+- Διαμορφώνετε πολύπλοκες εφαρμογές πολλαπλών υπηρεσιών με σωστές εξαρτήσεις
+- Εφαρμόζετε βέλτιστες πρακτικές ασφάλειας, παρακολούθησης και απόδοσης σε πραγματικά σενάρια
+- Εντοπίζετε και βελτιστοποιείτε αναπτύξεις βάσει πρακτικής εμπειρίας
 
 ## Δομή Καταλόγου
 
@@ -190,100 +190,99 @@ Azure Samples AZD Templates (linked externally):
 
 ## Παραδείγματα Γρήγορης Εκκίνησης
 
-> **💡 Νέος/α στο AZD;** Ξεκινήστε με το παράδειγμα #1 (Flask API) - διαρκεί ~20 λεπτά και διδάσκει βασικές έννοιες.
+> **💡 Νέος στο AZD;** Ξεκινήστε με το παράδειγμα #1 (Flask API) - παίρνει ~20 λεπτά και διδάσκει βασικές έννοιες.
 
 ### Για Αρχάριους
-1. **[Container App - Python Flask API](../../../examples/container-app/simple-flask-api)** (Local) ⭐  
+1. **[Container App - Python Flask API](../../../examples/container-app/simple-flask-api)** (Τοπικό) ⭐  
    Αναπτύξτε ένα απλό REST API με scale-to-zero  
-   **Χρόνος:** 20-25 λεπτά | **Κόστος:** $0-5/μήνα  
-   **Θα Μάθετε:** Βασική ροή εργασίας azd, containerization, health probes  
-   **Αναμενόμενο Αποτέλεσμα:** Λειτουργικό endpoint API που επιστρέφει "Hello, World!" με παρακολούθηση
+   **Χρόνος:** 20-25 λεπτά | **Κόστος:** $0-5/month  
+   **Τι θα μάθετε:** Βασική ροή εργασίας azd, containerization, health probes  
+   **Αναμενόμενο αποτέλεσμα:** Λειτουργικό endpoint API που επιστρέφει "Hello, World!" με παρακολούθηση
 
 2. **[Simple Web App - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
    Αναπτύξτε μια εφαρμογή Node.js Express με MongoDB  
-   **Χρόνος:** 25-35 λεπτά | **Κόστος:** $10-30/μήνα  
-   **Θα Μάθετε:** Ενσωμάτωση βάσης δεδομένων, μεταβλητές περιβάλλοντος, σειρές σύνδεσης  
-   **Αναμενόμενο Αποτέλεσμα:** Εφαρμογή λίστας υποχρεώσεων με δυνατότητες δημιουργίας/ανάγνωσης/ενημέρωσης/διαγραφής
+   **Χρόνος:** 25-35 λεπτά | **Κόστος:** $10-30/month  
+   **Τι θα μάθετε:** Ενσωμάτωση βάσης δεδομένων, μεταβλητές περιβάλλοντος, connection strings  
+   **Αναμενόμενο αποτέλεσμα:** Εφαρμογή Todo με λειτουργίες δημιουργίας/ανάγνωσης/ενημέρωσης/διαγραφής
 
 3. **[Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
    Φιλοξενήστε ένα React στατικό website με Azure Static Web Apps  
-   **Χρόνος:** 20-30 λεπτά | **Κόστος:** $0-10/μήνα  
-   **Θα Μάθετε:** Στατική φιλοξενία, serverless functions, ανάπτυξη CDN  
-   **Αναμενόμενο Αποτέλεσμα:** React UI με backend API, αυτόματο SSL, παγκόσμιο CDN
+   **Χρόνος:** 20-30 λεπτά | **Κόστος:** $0-10/month  
+   **Τι θα μάθετε:** Στατική φιλοξενία, serverless functions, ανάπτυξη μέσω CDN  
+   **Αναμενόμενο αποτέλεσμα:** React UI με backend API, αυτόματο SSL, παγκόσμιο CDN
 
-### Για Μεσαίο Επίπεδο Χρηστών
-4. **[Azure OpenAI Chat Application](../../../examples/azure-openai-chat)** (Local) ⭐⭐  
-   Αναπτύξτε GPT-4 με διεπαφή συνομιλίας και ασφαλή διαχείριση κλειδιών API  
-   **Χρόνος:** 35-45 λεπτά | **Κόστος:** $50-200/μήνα  
-   **Θα Μάθετε:** Ανάπτυξη Azure OpenAI, ενσωμάτωση Key Vault, παρακολούθηση token  
-   **Αναμενόμενο Αποτέλεσμα:** Λειτουργική εφαρμογή συνομιλίας με GPT-4 και παρακολούθηση κόστους
+### Για Ενδιάμεσους Χρήστες
+4. **[Microsoft Foundry Models Chat Application](../../../examples/azure-openai-chat)** (Τοπικό) ⭐⭐  
+   Αναπτύξτε gpt-4.1 με διεπαφή συνομιλίας και ασφαλή διαχείριση κλειδιών API  
+   **Χρόνος:** 35-45 λεπτά | **Κόστος:** $50-200/month  
+   **Τι θα μάθετε:** Ανάπτυξη Microsoft Foundry Models, ενσωμάτωση Key Vault, παρακολούθηση token  
+   **Αναμενόμενο αποτέλεσμα:** Λειτουργική εφαρμογή συνομιλίας με gpt-4.1 και παρακολούθηση κόστους
 
-5. **[Container App - Microservices](../../../examples/container-app/microservices)** (Local) ⭐⭐⭐⭐  
-   Αρχιτεκτονική πολλαπλών υπηρεσιών έτοιμη για παραγωγή  
-   **Χρόνος:** 45-60 λεπτά | **Κόστος:** $50-150/μήνα  
-   **Θα Μάθετε:** Επικοινωνία υπηρεσιών, ουρές μηνυμάτων, κατανεμημένη ιχνηλασία  
-   **Αναμενόμενο Αποτέλεσμα:** Σύστημα 2 υπηρεσιών (API Gateway + Product Service) με παρακολούθηση
+5. **[Container App - Microservices](../../../examples/container-app/microservices)** (Τοπικό) ⭐⭐⭐⭐  
+   Παραγωγική αρχιτεκτονική πολλαπλών υπηρεσιών  
+   **Χρόνος:** 45-60 λεπτά | **Κόστος:** $50-150/month  
+   **Τι θα μάθετε:** Επικοινωνία υπηρεσιών, ουρά μηνυμάτων, κατανεμημένη παρακολούθηση (tracing)  
+   **Αναμενόμενο αποτέλεσμα:** Σύστημα 2 υπηρεσιών (API Gateway + Product Service) με παρακολούθηση
 
 6. **[Database App - C# with Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
-   Εφαρμογή ιστού με C# API και Azure SQL Database  
-   **Χρόνος:** 30-45 λεπτά | **Κόστος:** $20-80/μήνα  
-   **Θα Μάθετε:** Entity Framework, μεταναστεύσεις βάσης δεδομένων, ασφάλεια σύνδεσης  
-   **Αναμενόμενο Αποτέλεσμα:** C# API με Azure SQL backend, αυτόματη ανάπτυξη σχήματος
+   Web εφαρμογή με C# API και Azure SQL Database  
+   **Χρόνος:** 30-45 λεπτά | **Κόστος:** $20-80/month  
+   **Τι θα μάθετε:** Entity Framework, database migrations, ασφάλεια συνδέσεων  
+   **Αναμενόμενο αποτέλεσμα:** C# API με Azure SQL backend, αυτόματη ανάπτυξη σχήματος
 
 7. **[Serverless Function - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
    Python Azure Functions με HTTP triggers και Cosmos DB  
-   **Χρόνος:** 30-40 λεπτά | **Κόστος:** $10-40/μήνα  
-   **Θα Μάθετε:** Αρχιτεκτονική event-driven, serverless κλιμάκωση, ενσωμάτωση NoSQL  
-   **Αναμενόμενο Αποτέλεσμα:** Function app που ανταποκρίνεται σε HTTP αιτήματα με αποθήκευση Cosmos DB
+   **Χρόνος:** 30-40 λεπτά | **Κόστος:** $10-40/month  
+   **Τι θα μάθετε:** Event-driven αρχιτεκτονική, serverless scaling, ενσωμάτωση NoSQL  
+   **Αναμενόμενο αποτέλεσμα:** Function app που ανταποκρίνεται σε HTTP αιτήματα με αποθήκευση σε Cosmos DB
 
 8. **[Microservices - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** ⭐⭐⭐  
-   Πολυϋπηρεσιακή Java εφαρμογή με Container Apps και API gateway  
-   **Χρόνος:** 60-90 λεπτά | **Κόστος:** $80-200/μήνα  
-   **Θα Μάθετε:** Ανάπτυξη Spring Boot, service mesh, load balancing  
-   **Αναμενόμενο Αποτέλεσμα:** Πολυϋπηρεσιακό Java σύστημα με ανακάλυψη υπηρεσιών και δρομολόγηση
+   Πολυυπηρεσιακή Java εφαρμογή με Container Apps και API gateway  
+   **Χρόνος:** 60-90 λεπτά | **Κόστος:** $80-200/month  
+   **Τι θα μάθετε:** Ανάπτυξη Spring Boot, service mesh, load balancing  
+   **Αναμενόμενο αποτέλεσμα:** Πολυυπηρεσιακό σύστημα Java με ανακάλυψη υπηρεσιών και δρομολόγηση
 
 ### Πρότυπα Microsoft Foundry
 
-1. **[Azure OpenAI Chat App - Local Example](../../../examples/azure-openai-chat)** ⭐⭐  
-   Πλήρης ανάπτυξη GPT-4 με διεπαφή συνομιλίας  
-   **Χρόνος:** 35-45 λεπτά | **Κόστος:** $50-200/μήνα  
-   **Αναμενόμενο Αποτέλεσμα:** Λειτουργική εφαρμογή συνομιλίας με παρακολούθηση token και κόστους
+1. **[Microsoft Foundry Models Chat App - Τοπικό Παράδειγμα](../../../examples/azure-openai-chat)** ⭐⭐  
+   Πλήρης ανάπτυξη gpt-4.1 με διεπαφή συνομιλίας  
+   **Χρόνος:** 35-45 λεπτά | **Κόστος:** $50-200/month  
+   **Αναμενόμενο αποτέλεσμα:** Λειτουργική εφαρμογή συνομιλίας με παρακολούθηση token και κόστους
 
 2. **[Azure Search + OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
-   Ευφυής εφαρμογή συνομιλίας με αρχιτεκτονική RAG  
-   **Χρόνος:** 60-90 λεπτά | **Κόστος:** $100-300/μήνα  
-   **Αναμενόμενο Αποτέλεσμα:** Διεπαφή συνομιλίας με RAG, αναζήτηση εγγράφων και αναφορές
+   Έξυπνη εφαρμογή συνομιλίας με αρχιτεκτονική RAG  
+   **Χρόνος:** 60-90 λεπτά | **Κόστος:** $100-300/month  
+   **Αναμενόμενο αποτέλεσμα:** Διεπαφή συνομιλίας με RAG, αναζήτηση εγγράφων και παραπομπές
 
 3. **[AI Document Processing](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
    Ανάλυση εγγράφων χρησιμοποιώντας υπηρεσίες Azure AI  
-   **Χρόνος:** 40-60 λεπτά | **Κόστος:** $20-80/μήνα  
-   **Αναμενόμενο Αποτέλεσμα:** API που εξάγει κείμενο, πίνακες και οντότητες από ανεβασμένα έγγραφα
+   **Χρόνος:** 40-60 λεπτά | **Κόστος:** $20-80/month  
+   **Αναμενόμενο αποτέλεσμα:** API που εξάγει κείμενο, πίνακες και οντότητες από ανεβασμένα έγγραφα
 
 4. **[Machine Learning Pipeline](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
-   Ροή εργασίας MLOps με Azure Machine Learning  
-   **Χρόνος:** 2-3 ώρες | **Κόστος:** $150-500/μήνα  
-   **Αναμενόμενο Αποτέλεσμα:** Αυτοματοποιημένη ML pipeline με εκπαίδευση, ανάπτυξη και παρακολούθηση
+   MLOps ροή εργασίας με Azure Machine Learning  
+   **Χρόνος:** 2-3 ώρες | **Κόστος:** $150-500/month  
+   **Αναμενόμενο αποτέλεσμα:** Αυτοματοποιημένη ML pipeline με εκπαίδευση, ανάπτυξη και παρακολούθηση
 
-### Πραγματικά Σενάρια
+### Σενάρια Πραγματικού Κόσμου
 
-#### **Λύση Πολυ-Πράκτορα Λιανεμπορίου** 🆕
+#### **Λύση Retail Multi-Agent** 🆕  
 **[Οδηγός Πλήρους Υλοποίησης](./retail-scenario.md)**
 
-Μια ολοκληρωμένη, έτοιμη για παραγωγή λύση πολλαπλών πρακτόρων για υποστήριξη πελατών που επιδεικνύει την ανάπτυξη επιχειρησιακής κλάσης εφαρμογών AI με AZD. Αυτό το σενάριο παρέχει:
-
+Μια ολοκληρωμένη, έτοιμη για παραγωγή λύση πολλαπλών πρακτόρων για υποστήριξη πελατών που επιδεικνύει ανάπτυξη επιχειρησιακής κλάσης εφαρμογών AI με AZD. Αυτό το σενάριο παρέχει:
 - **Πλήρης Αρχιτεκτονική**: Σύστημα πολλαπλών πρακτόρων με εξειδικευμένους πράκτορες εξυπηρέτησης πελατών και διαχείρισης αποθεμάτων
-- **Υποδομή Παραγωγής**: Αναπτύξεις Azure OpenAI σε πολλαπλές περιοχές, AI Search, Container Apps, και ολοκληρωμένη παρακολούθηση
-- **Έτοιμο για Ανάπτυξη ARM Template**: Ανάπτυξη με ένα κλικ με πολλαπλές λειτουργίες διαμόρφωσης (Minimal/Standard/Premium)
-- **Προηγμένα Χαρακτηριστικά**: red teaming επικύρωση ασφάλειας, πλαίσιο αξιολόγησης πρακτόρων, βελτιστοποίηση κόστους, και οδηγοί αντιμετώπισης προβλημάτων
-- **Πραγματικό Επιχειρηματικό Πλαίσιο**: Περίπτωση χρήσης υποστήριξης πελατών λιανικής με ανέβασμα αρχείων, ενσωμάτωση αναζήτησης, και δυναμική κλιμάκωση
+- **Υποδομή Παραγωγής**: Αναπτύξεις Microsoft Foundry Models σε πολλαπλές περιοχές, AI Search, Container Apps, και ολοκληρωμένη παρακολούθηση
+- **Έτοιμο ARM Template για Ανάπτυξη**: Ανάπτυξη με ένα κλικ με πολλαπλές λειτουργίες διαμόρφωσης (Minimal/Standard/Premium)
+- **Προηγμένα Χαρακτηριστικά**: Έλεγχος ασφάλειας red teaming, πλαίσιο αξιολόγησης πρακτόρων, βελτιστοποίηση κόστους και οδηγοί αντιμετώπισης προβλημάτων
+- **Πραγματικό Επιχειρηματικό Πλαίσιο**: Περίπτωση χρήσης υποστήριξης πελατών λιανέμπορου με ανέβασμα αρχείων, ενσωμάτωση αναζήτησης και δυναμική κλιμάκωση
 
-**Τεχνολογίες**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
+**Τεχνολογίες**: Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
 
-**Πολυπλοκότητα**: ⭐⭐⭐⭐ (Προχωρημένο - Έτοιμο για Επιχειρησιακή Παραγωγή)
+**Πολυπλοκότητα**: ⭐⭐⭐⭐ (Προχωρημένο - Έτοιμο για Παραγωγή Επιχειρήσεων)
 
-**Ιδανικό για**: προγραμματιστές AI, αρχιτέκτονες λύσεων, και ομάδες που χτίζουν παραγωγικά συστήματα πολλαπλών πρακτόρων
+**Κατάλληλο για**: προγραμματιστές AI, αρχιτέκτονες λύσεων, και ομάδες που δημιουργούν συστήματα πολλαπλών πρακτόρων για παραγωγή
 
-**Γρήγορη Έναρξη**: Αναπτύξτε την πλήρη λύση σε λιγότερο από 30 λεπτά χρησιμοποιώντας το συνημμένο ARM template με `./deploy.sh -g myResourceGroup`
+**Γρήγορη Εκκίνηση**: Αναπτύξτε την πλήρη λύση σε λιγότερο από 30 λεπτά χρησιμοποιώντας το συμπεριλαμβανόμενο ARM template με `./deploy.sh -g myResourceGroup`
 
 ## 📋 Οδηγίες Χρήσης
 
@@ -291,11 +290,11 @@ Azure Samples AZD Templates (linked externally):
 
 Πριν εκτελέσετε οποιοδήποτε παράδειγμα:
 - ✅ Συνδρομή Azure με δικαιώματα Owner ή Contributor
-- ✅ Εγκατεστημένο Azure Developer CLI ([Οδηγός Εγκατάστασης](../docs/chapter-01-foundation/installation.md))
-- ✅ Docker Desktop σε λειτουργία (για παραδείγματα κοντέινερ)
-- ✅ Κατάλληλα όρια πόρων Azure (ελέγξτε τις απαιτήσεις συγκεκριμένου παραδείγματος)
+- ✅ Το Azure Developer CLI εγκατεστημένο ([Οδηγός Εγκατάστασης](../docs/chapter-01-foundation/installation.md))
+- ✅ Docker Desktop σε λειτουργία (για παραδείγματα με containers)
+- ✅ Κατάλληλα όρια πόρων Azure (ελέγξτε τις απαιτήσεις συγκεκριμένων παραδειγμάτων)
 
-> **💰 Προειδοποίηση Κόστους:** Όλα τα παραδείγματα δημιουργούν πραγματικούς πόρους Azure που συνεπάγονται χρεώσεις. Δείτε τα μεμονωμένα αρχεία README για εκτιμήσεις κόστους. Θυμηθείτε να εκτελέσετε `azd down` όταν τελειώσετε για να αποφύγετε συνεχιζόμενες χρεώσεις.
+> **💰 Προειδοποίηση Κόστους:** Όλα τα παραδείγματα δημιουργούν πραγματικούς πόρους Azure που επιφέρουν χρεώσεις. Δείτε τα επιμέρους αρχεία README για εκτιμήσεις κόστους. Θυμηθείτε να εκτελέσετε `azd down` όταν τελειώσετε για να αποφύγετε συνεχείς χρεώσεις.
 
 ### Εκτέλεση Παραδειγμάτων Τοπικά
 
@@ -323,22 +322,22 @@ Azure Samples AZD Templates (linked externally):
 
 4. **Ανάπτυξη**
    ```bash
-   # Αναπτύξτε την υποδομή και την εφαρμογή
+   # Ανάπτυξη υποδομής και εφαρμογής
    azd up
    ```
 
 5. **Επαλήθευση Ανάπτυξης**
    ```bash
-   # Λήψη τελικών σημείων υπηρεσίας
+   # Λήψη σημείων τερματισμού υπηρεσίας
    azd env get-values
    
-   # Δοκιμή του τελικού σημείου (παράδειγμα)
+   # Δοκιμή του σημείου τερματισμού (παράδειγμα)
    curl https://your-app-url.azurecontainer.io/health
    ```
    
-   **Αναμενόμενοι Δείκτες Επιτυχίας:**
-   - ✅ Το `azd up` ολοκληρώνεται χωρίς σφάλματα
-   - ✅ Το endpoint υπηρεσίας επιστρέφει HTTP 200
+   **Δείκτες Επιτυχίας που Αναμένονται:**
+   - ✅ `azd up` ολοκληρώνεται χωρίς σφάλματα
+   - ✅ Το endpoint της υπηρεσίας επιστρέφει HTTP 200
    - ✅ Το Azure Portal εμφανίζει κατάσταση "Running"
    - ✅ Το Application Insights λαμβάνει τηλεμετρία
 
@@ -347,11 +346,11 @@ Azure Samples AZD Templates (linked externally):
 ### Προσαρμογή Παραδειγμάτων
 
 Κάθε παράδειγμα περιλαμβάνει:
-- **README.md** - Λεπτομερείς οδηγίες ρύθμισης και προσαρμογής
-- **azure.yaml** - Ρύθμιση AZD με σχόλια
-- **infra/** - Πρότυπα Bicep με επεξηγήσεις παραμέτρων
+- **README.md** - Λεπτομερείς οδηγίες εγκατάστασης και προσαρμογής
+- **azure.yaml** - Διαμόρφωση AZD με σχόλια
+- **infra/** - Πρότυπα Bicep με εξηγήσεις παραμέτρων
 - **src/** - Δείγμα κώδικα εφαρμογής
-- **scripts/** - Βοηθητικά σενάρια για κοινές εργασίες
+- **scripts/** - Βοηθητικά scripts για κοινές εργασίες
 
 ## 🎯 Στόχοι Μάθησης
 
@@ -360,43 +359,43 @@ Azure Samples AZD Templates (linked externally):
 #### **Βασικές Αναπτύξεις**
 - Εφαρμογές μίας υπηρεσίας
 - Απλά πρότυπα υποδομής
-- Βασική διαχείριση ρυθμίσεων
+- Βασική διαχείριση διαμόρφωσης
 - Οικονομικά αποδοτικές ρυθμίσεις ανάπτυξης
 
-#### **Προηγμένα Σενάρια**
+#### **Προχωρημένα Σενάρια**
 - Αρχιτεκτονικές πολλαπλών υπηρεσιών
-- Πολύπλοκες ρυθμίσεις δικτύωσης
-- Πρότυπα ενσωμάτωσης βάσεων δεδομένων
+- Σύνθετες ρυθμίσεις δικτύωσης
+- Πρότυπα ενσωμάτωσης βάσης δεδομένων
 - Υλοποιήσεις ασφάλειας και συμμόρφωσης
 
 #### **Πρότυπα Έτοιμα για Παραγωγή**
 - Ρυθμίσεις υψηλής διαθεσιμότητας
 - Παρακολούθηση και παρατηρησιμότητα
 - Ενσωμάτωση CI/CD
-- Ρυθμίσεις ανάκαμψης από καταστροφές
+- Διατάξεις ανάκτησης από καταστροφή
 
 ## 📖 Περιγραφές Παραδειγμάτων
 
 ### Απλή Web Εφαρμογή - Node.js Express
 **Τεχνολογίες**: Node.js, Express, MongoDB, Container Apps  
 **Πολυπλοκότητα**: Αρχάριος  
-**Έννοιες**: Βασική ανάπτυξη, REST API, ενσωμάτωση βάσης NoSQL
+**Έννοιες**: Βασική ανάπτυξη, REST API, ενσωμάτωση NoSQL βάσης δεδομένων
 
-### Στατικός Ιστότοπος - React SPA
+### Στατική Ιστοσελίδα - React SPA
 **Τεχνολογίες**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
 **Πολυπλοκότητα**: Αρχάριος  
-**Έννοιες**: Στατική φιλοξενία, serverless backend, σύγχρονη ανάπτυξη ιστοσελίδων
+**Έννοιες**: Στατική φιλοξενία, serverless backend, σύγχρονη ανάπτυξη web
 
 ### Container App - Python Flask
 **Τεχνολογίες**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
 **Πολυπλοκότητα**: Αρχάριος  
-**Έννοιες**: Containerization, REST API, scale-to-zero, health probes, monitoring  
+**Έννοιες**: Containerization, REST API, scale-to-zero, health probes, παρακολούθηση  
 **Τοποθεσία**: [Τοπικό Παράδειγμα](../../../examples/container-app/simple-flask-api)
 
 ### Container App - Αρχιτεκτονική Microservices
 **Τεχνολογίες**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
 **Πολυπλοκότητα**: Προχωρημένο  
-**Έννοιες**: Αρχιτεκτονική πολλαπλών υπηρεσιών, επικοινωνία υπηρεσιών, ουρές μηνυμάτων, κατανεμημένη ιχνηλάτηση  
+**Έννοιες**: Αρχιτεκτονική πολλαπλών υπηρεσιών, επικοινωνία υπηρεσιών, ουρά μηνυμάτων, κατανεμημένη ιχνηλασιμότητα  
 **Τοποθεσία**: [Τοπικό Παράδειγμα](../../../examples/container-app/microservices)
 
 ### Εφαρμογή Βάσης Δεδομένων - C# με Azure SQL
@@ -407,7 +406,7 @@ Azure Samples AZD Templates (linked externally):
 ### Serverless Function - Python Azure Functions
 **Τεχνολογίες**: Python, Azure Functions, Cosmos DB, Static Web Apps  
 **Πολυπλοκότητα**: Ενδιάμεσο  
-**Έννοιες**: Event-driven architecture, serverless computing, full-stack ανάπτυξη
+**Έννοιες**: Αρχιτεκτονική καθοδηγούμενη από γεγονότα, serverless computing, full-stack ανάπτυξη
 
 ### Microservices - Java Spring Boot
 **Τεχνολογίες**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
@@ -416,10 +415,10 @@ Azure Samples AZD Templates (linked externally):
 
 ### Παραδείγματα Microsoft Foundry
 
-#### Εφαρμογή Azure OpenAI Chat
-**Τεχνολογίες**: Azure OpenAI, Cognitive Search, App Service  
+#### Εφαρμογή Chat Microsoft Foundry Models
+**Τεχνολογίες**: Microsoft Foundry Models, Cognitive Search, App Service  
 **Πολυπλοκότητα**: Ενδιάμεσο  
-**Έννοιες**: Αρχιτεκτονική RAG, vector search, ενσωμάτωση LLM
+**Έννοιες**: RAG αρχιτεκτονική, vector search, ενσωμάτωση LLM
 
 #### Επεξεργασία Εγγράφων με AI
 **Τεχνολογίες**: Azure AI Document Intelligence, Storage, Functions  
@@ -433,155 +432,155 @@ Azure Samples AZD Templates (linked externally):
 
 ## 🛠 Παραδείγματα Διαμόρφωσης
 
-Ο φάκελος `configurations/` περιέχει επαναχρησιμοποιήσιμα συστατικά:
+Ο φάκελος `configurations/` περιέχει επαναχρησιμοποιήσιμα στοιχεία:
 
-### Ρυθμίσεις Περιβάλλοντος
+### Διαμορφώσεις Περιβάλλοντος
 - Ρυθμίσεις περιβάλλοντος ανάπτυξης
-- Ρυθμίσεις περιβάλλοντος staging
+- Διαμορφώσεις περιβάλλοντος staging
 - Ρυθμίσεις έτοιμες για παραγωγή
-- Ρυθμίσεις ανάπτυξης σε πολλαπλές περιοχές
+- Ρυθμίσεις ανάπτυξης πολλαπλών περιοχών
 
 ### Μονάδες Bicep
-- Επαναχρησιμοποιήσιμα στοιχεία υποδομής
-- Συνηθισμένα πρότυπα πόρων
-- Πρότυπα με αυξημένη ασφάλεια
+- Επαναχρησιμοποιήσιμα συστατικά υποδομής
+- Συνήθη πρότυπα πόρων
+- Πρότυπα με ενισχυμένη ασφάλεια
 - Διαμορφώσεις βελτιστοποιημένες για κόστος
 
-### Βοηθητικά Σενάρια
+### Βοηθητικά Scripts
 - Αυτοματοποίηση ρύθμισης περιβάλλοντος
 - Σενάρια μετανάστευσης βάσης δεδομένων
-- Εργαλεία επαλήθευσης ανάπτυξης
+- Εργαλεία επικύρωσης ανάπτυξης
 - Εργαλεία παρακολούθησης κόστους
 
 ## 🔧 Οδηγός Προσαρμογής
 
-### Προσαρμογή Παραδειγμάτων για τη Δική σας Περίπτωση Χρήσης
+### Προσαρμογή Παραδειγμάτων στο Σενάριό σας
 
 1. **Επανεξέταση Προαπαιτούμενων**
    - Ελέγξτε τις απαιτήσεις υπηρεσιών Azure
-   - Επαληθεύστε τα όρια της συνδρομής
-   - Κατανοήστε τις οικονομικές επιπτώσεις
+   - Επαληθεύστε τα όρια συνδρομής
+   - Κατανοήστε τις επιπτώσεις κόστους
 
-2. **Τροποποίηση Διαμόρφωσης**
+2. **Τροποποιήστε τη Διαμόρφωση**
    - Ενημερώστε τους ορισμούς υπηρεσιών στο `azure.yaml`
    - Προσαρμόστε τα πρότυπα Bicep
-   - Ρυθμίστε τις μεταβλητές περιβάλλοντος
+   - Προσαρμόστε τις μεταβλητές περιβάλλοντος
 
-3. **Ελέγξτε Εξονυχιστικά**
+3. **Δοκιμάστε Ενδελεχώς**
    - Αναπτύξτε πρώτα στο περιβάλλον ανάπτυξης
    - Επαληθεύστε τη λειτουργικότητα
    - Δοκιμάστε την κλιμάκωση και την απόδοση
 
-4. **Έλεγχος Ασφαλείας**
+4. **Έλεγχος Ασφάλειας**
    - Ελέγξτε τους ελέγχους πρόσβασης
    - Υλοποιήστε διαχείριση μυστικών
    - Ενεργοποιήστε παρακολούθηση και ειδοποιήσεις
 
-## 📊 Πίνακας Συγκρίσεων
+## 📊 Πίνακας Σύγκρισης
 
-| Παράδειγμα | Υπηρεσίες | Βάση Δεδομένων | Έλεγχος ταυτότητας | Παρακολούθηση | Πολυπλοκότητα |
+| Παράδειγμα | Υπηρεσίες | Βάση Δεδομένων | Αυθεντικοποίηση | Παρακολούθηση | Πολυπλοκότητα |
 |---------|----------|----------|------|------------|------------|
-| **Azure OpenAI Chat** (Τοπικό) | 2 | ❌ | Key Vault | Πλήρης | ⭐⭐ |
-| **Python Flask API** (Τοπικό) | 1 | ❌ | Βασικό | Πλήρης | ⭐ |
-| **Microservices** (Τοπικό) | 5+ | ✅ | Επιχειρησιακό | Προχωρημένο | ⭐⭐⭐⭐ |
+| **Microsoft Foundry Models Chat** (Τοπικό) | 2 | ❌ | Key Vault | Πλήρες | ⭐⭐ |
+| **Python Flask API** (Τοπικό) | 1 | ❌ | Βασικό | Πλήρες | ⭐ |
+| **Microservices** (Τοπικό) | 5+ | ✅ | Επιχειρησιακή | Προχωρημένο | ⭐⭐⭐⭐ |
 | Node.js Express Todo | 2 | ✅ | Βασικό | Βασικό | ⭐ |
-| React SPA + Functions | 3 | ✅ | Βασικό | Πλήρης | ⭐ |
-| Python Flask Container | 2 | ❌ | Βασικό | Πλήρης | ⭐ |
-| C# Web API + SQL | 2 | ✅ | Πλήρης | Πλήρης | ⭐⭐ |
-| Python Functions + SPA | 3 | ✅ | Πλήρης | Πλήρης | ⭐⭐ |
-| Java Microservices | 5+ | ✅ | Πλήρης | Πλήρης | ⭐⭐ |
-| Azure OpenAI Chat | 3 | ✅ | Πλήρης | Πλήρης | ⭐⭐⭐ |
-| AI Document Processing | 2 | ❌ | Βασικό | Πλήρης | ⭐⭐ |
-| ML Pipeline | 4+ | ✅ | Πλήρης | Πλήρης | ⭐⭐⭐⭐ |
-| **Retail Multi-Agent** (Τοπικό) | **8+** | **✅** | **Επιχειρησιακό** | **Προχωρημένο** | **⭐⭐⭐⭐** |
+| React SPA + Functions | 3 | ✅ | Βασικό | Πλήρες | ⭐ |
+| Python Flask Container | 2 | ❌ | Βασικό | Πλήρες | ⭐ |
+| C# Web API + SQL | 2 | ✅ | Πλήρες | Πλήρες | ⭐⭐ |
+| Python Functions + SPA | 3 | ✅ | Πλήρες | Πλήρες | ⭐⭐ |
+| Java Microservices | 5+ | ✅ | Πλήρες | Πλήρες | ⭐⭐ |
+| Microsoft Foundry Models Chat | 3 | ✅ | Πλήρες | Πλήρες | ⭐⭐⭐ |
+| AI Document Processing | 2 | ❌ | Βασικό | Πλήρες | ⭐⭐ |
+| ML Pipeline | 4+ | ✅ | Πλήρες | Πλήρες | ⭐⭐⭐⭐ |
+| **Retail Multi-Agent** (Τοπικό) | **8+** | **✅** | **Επιχειρησιακή** | **Προχωρημένο** | **⭐⭐⭐⭐** |
 
 ## 🎓 Διαδρομή Μάθησης
 
-### Συνιστώμενη Σειρά Βημάτων
+### Συνιστώμενη Σειρά
 
 1. **Ξεκινήστε με Απλή Web Εφαρμογή**
-   - Μάθετε βασικές έννοιες AZD
+   - Μάθετε τα βασικά του AZD
    - Κατανοήστε τη ροή εργασίας ανάπτυξης
    - Εξασκηθείτε στη διαχείριση περιβάλλοντος
 
-2. **Δοκιμάστε Στατικό Ιστότοπο**
+2. **Δοκιμάστε Στατική Ιστοσελίδα**
    - Εξερευνήστε διαφορετικές επιλογές φιλοξενίας
    - Μάθετε για την ενσωμάτωση CDN
    - Κατανοήστε τη διαμόρφωση DNS
 
 3. **Μεταβείτε σε Container App**
-   - Μάθετε τα βασικά της containerization
+   - Μάθετε τις βασικές αρχές containerization
    - Κατανοήστε τις έννοιες κλιμάκωσης
    - Εξασκηθείτε με Docker
 
 4. **Προσθέστε Ενσωμάτωση Βάσης Δεδομένων**
-   - Μάθετε παροχή βάσης δεδομένων
+   - Μάθετε την προμήθεια/παροχή βάσεων δεδομένων
    - Κατανοήστε τα connection strings
    - Εξασκηθείτε στη διαχείριση μυστικών
 
 5. **Εξερευνήστε το Serverless**
-   - Κατανοήστε την event-driven αρχιτεκτονική
+   - Κατανοήστε την αρχιτεκτονική καθοδηγούμενη από γεγονότα
    - Μάθετε για triggers και bindings
    - Εξασκηθείτε με APIs
 
-6. **Δημιουργήστε Microservices**
+6. **Κατασκευάστε Microservices**
    - Μάθετε επικοινωνία υπηρεσιών
    - Κατανοήστε κατανεμημένα συστήματα
-   - Εξασκηθείτε σε πολύπλοκες αναπτύξεις
+   - Εξασκηθείτε σε σύνθετες αναπτύξεις
 
 ## 🔍 Εύρεση του Κατάλληλου Παραδείγματος
 
-### Ανά Στοίβα Τεχνολογιών
+### Ανά Στοίβα Τεχνολογίας
 - **Container Apps**: [Python Flask API (Τοπικό)](../../../examples/container-app/simple-flask-api), [Microservices (Τοπικό)](../../../examples/container-app/microservices), Java Microservices
-- **Node.js**: Node.js Express Todo App, [Πύλη API Microservices (Τοπικό)](../../../examples/container-app/microservices)
+- **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Τοπικό)](../../../examples/container-app/microservices)
 - **Python**: [Python Flask API (Τοπικό)](../../../examples/container-app/simple-flask-api), [Microservices Product Service (Τοπικό)](../../../examples/container-app/microservices), Python Functions + SPA
-- **C#**: [Microservices Order Service (Τοπικό)](../../../examples/container-app/microservices), C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
+- **C#**: [Microservices Order Service (Τοπικό)](../../../examples/container-app/microservices), C# Web API + SQL Database, Microsoft Foundry Models Chat App, ML Pipeline
 - **Go**: [Microservices User Service (Τοπικό)](../../../examples/container-app/microservices)
 - **Java**: Java Spring Boot Microservices
 - **React**: React SPA + Functions
 - **Containers**: [Python Flask (Τοπικό)](../../../examples/container-app/simple-flask-api), [Microservices (Τοπικό)](../../../examples/container-app/microservices), Java Microservices
 - **Databases**: [Microservices (Τοπικό)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
-- **AI/ML**: **[Azure OpenAI Chat (Τοπικό)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Λύση Retail Multi-Agent**
-- **Συστήματα Πολλαπλών Πρακτόρων**: **Λύση Retail Multi-Agent**
-- **Ενσωμάτωση OpenAI**: **[Azure OpenAI Chat (Τοπικό)](../../../examples/azure-openai-chat)**, Λύση Retail Multi-Agent
-- **Επιχειρησιακή Παραγωγή**: [Microservices (Τοπικό)](../../../examples/container-app/microservices), **Λύση Retail Multi-Agent**
+- **AI/ML**: **[Microsoft Foundry Models Chat (Τοπικό)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Multi-Agent Systems**: **Retail Multi-Agent Solution**
+- **OpenAI Integration**: **[Microsoft Foundry Models Chat (Τοπικό)](../../../examples/azure-openai-chat)**, Retail Multi-Agent Solution
+- **Για Παραγωγή Επιχειρήσεων**: [Microservices (Τοπικό)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
 ### Ανά Πρότυπο Αρχιτεκτονικής
-- **Απλό REST API**: [Python Flask API (Τοπικό)](../../../examples/container-app/simple-flask-api)
-- **Μονολιθική**: Node.js Express Todo, C# Web API + SQL
-- **Στατική + Serverless**: React SPA + Functions, Python Functions + SPA
+- **Simple REST API**: [Python Flask API (Τοπικό)](../../../examples/container-app/simple-flask-api)
+- **Μονολιθικό**: Node.js Express Todo, C# Web API + SQL
+- **Στατικό + Serverless**: React SPA + Functions, Python Functions + SPA
 - **Microservices**: [Production Microservices (Τοπικό)](../../../examples/container-app/microservices), Java Spring Boot Microservices
 - **Containerized**: [Python Flask (Τοπικό)](../../../examples/container-app/simple-flask-api), [Microservices (Τοπικό)](../../../examples/container-app/microservices), Java Microservices
-- **Με δυνατότητα AI**: **[Azure OpenAI Chat (Τοπικό)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Λύση Retail Multi-Agent**
-- **Αρχιτεκτονική Πολλαπλών Πρακτόρων**: **Λύση Retail Multi-Agent**
-- **Επιχειρησιακό Πολλαπλών Υπηρεσιών**: [Microservices (Τοπικό)](../../../examples/container-app/microservices), **Λύση Retail Multi-Agent**
+- **AI-Powered**: **[Microsoft Foundry Models Chat (Τοπικό)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
+- **Αρχιτεκτονική Πολλαπλών Πρακτόρων**: **Retail Multi-Agent Solution**
+- **Επιχειρησιακό Πολλαπλών Υπηρεσιών**: [Microservices (Τοπικό)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
 
 ### Ανά Επίπεδο Πολυπλοκότητας
 - **Αρχάριος**: [Python Flask API (Τοπικό)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions
-- **Ενδιάμεσο**: **[Azure OpenAI Chat (Τοπικό)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
+- **Ενδιάμεσο**: **[Microsoft Foundry Models Chat (Τοπικό)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Microsoft Foundry Models Chat App, AI Document Processing
 - **Προχωρημένο**: ML Pipeline
-- **Έτοιμο για Επιχειρησιακή Παραγωγή**: [Microservices (Τοπικό)](../../../examples/container-app/microservices) (Πολλαπλές υπηρεσίες με ουρές μηνυμάτων), **Λύση Retail Multi-Agent** (Πλήρες σύστημα πολλαπλών πρακτόρων με ανάπτυξη μέσω ARM template)
+- **Έτοιμο για Παραγωγή Επιχειρήσεων**: [Microservices (Τοπικό)](../../../examples/container-app/microservices) (Πολλαπλές υπηρεσίες με ουρά μηνυμάτων), **Retail Multi-Agent Solution** (Πλήρες σύστημα πολλαπλών πρακτόρων με ανάπτυξη μέσω ARM template)
 
-## 📚 Πρόσθετοι Πόροι
+## 📚 Επιπλέον Πόροι
 
-### Συνδέσεις Τεκμηρίωσης
+### Σύνδεσμοι Τεκμηρίωσης
 - [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
 - [Microsoft Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
 - [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 
-### Κοινοτικά Παραδείγματα
-- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
-- [Microsoft Foundry Templates](https://github.com/Azure/ai-foundry-templates)
-- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
-- [Todo App with C# and Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
-- [Todo App with Python and MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
+### Παραδείγματα Κοινότητας
+- [Πρότυπα AZD Azure Samples](https://github.com/Azure-Samples/azd-templates)
+- [Πρότυπα Microsoft Foundry](https://github.com/Azure/ai-foundry-templates)
+- [Συλλογή Azure Developer CLI](https://azure.github.io/awesome-azd/)
+- [Εφαρμογή Todo με C# και Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [Εφαρμογή Todo με Python και MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
 - [Εφαρμογή Todo με Node.js και PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
-- [React Web εφαρμογή με API σε C#](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+- [Εφαρμογή Web React με API C#](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
 - [Εργασία Azure Container Apps](https://github.com/Azure-Samples/container-apps-jobs)
 - [Azure Functions με Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
-### Βέλτιστες Πρακτικές
+### Καλές Πρακτικές
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 - [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
@@ -591,9 +590,9 @@ Azure Samples AZD Templates (linked externally):
 
 ### Οδηγίες Υποβολής
 1. Ακολουθήστε την καθιερωμένη δομή καταλόγων
-2. Συμπεριλάβετε αναλυτικό README.md
+2. Συμπεριλάβετε ένα πλήρες README.md
 3. Προσθέστε σχόλια στα αρχεία ρυθμίσεων
-4. Δοκιμάστε ενδελεχώς πριν την υποβολή
+4. Δοκιμάστε διεξοδικά πριν υποβάλετε
 5. Συμπεριλάβετε εκτιμήσεις κόστους και προαπαιτούμενα
 
 ### Δομή Προτύπου Παραδείγματος
@@ -612,46 +611,46 @@ example-name/
 
 ---
 
-**Συμβουλή**: Ξεκινήστε με το πιο απλό παράδειγμα που ταιριάζει στην τεχνολογική σας στοίβα, στη συνέχεια προχωρήστε σταδιακά σε πιο σύνθετα σενάρια. Κάθε παράδειγμα βασίζεται σε έννοιες από τα προηγούμενα!
+**Συμβουλή Επαγγελματία**: Ξεκινήστε με το πιο απλό παράδειγμα που ταιριάζει στη στοίβα τεχνολογιών σας, και στη συνέχεια εργαστείτε σταδιακά προς πιο σύνθετα σενάρια. Κάθε παράδειγμα βασίζεται σε έννοιες από τα προηγούμενα!
 
 ## 🚀 Έτοιμοι να ξεκινήσετε;
 
 ### Η Διαδρομή Μάθησής σας
 
-1. **Εντελώς αρχάριος;** → Ξεκινήστε με [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 λεπτά)
+1. **Εντελώς Αρχάριος;** → Ξεκινήστε με [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 λεπτά)
 2. **Έχετε βασικές γνώσεις AZD;** → Δοκιμάστε [Microservices](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 λεπτά)
-3. **Αναπτύσσετε εφαρμογές AI;** → Ξεκινήστε με [Azure OpenAI Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 λεπτά) ή εξερευνήστε [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ ώρες)
-4. **Χρειάζεστε συγκεκριμένη τεχνολογική στοίβα;** → Χρησιμοποιήστε την ενότητα [Εύρεση του κατάλληλου παραδείγματος](../../../examples) παραπάνω
+3. **Δημιουργείτε εφαρμογές AI;** → Ξεκινήστε με [Microsoft Foundry Models Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 λεπτά) ή εξερευνήστε [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ ώρες)
+4. **Χρειάζεστε συγκεκριμένη στοίβα τεχνολογιών;** → Χρησιμοποιήστε την ενότητα [Εύρεση του κατάλληλου παραδείγματος](../../../examples) παραπάνω
 
 ### Επόμενα Βήματα
 
-- ✅ Ελέγξτε τα [Προαπαιτούμενα](../../../examples) παραπάνω
-- ✅ Επιλέξτε ένα παράδειγμα που ταιριάζει στο επίπεδο δεξιοτήτων σας (βλέπε [Υπόμνημα πολυπλοκότητας](../../../examples))
+- ✅ Επανεξετάστε τα [Προαπαιτούμενα](../../../examples) παραπάνω
+- ✅ Επιλέξτε ένα παράδειγμα που ταιριάζει στο επίπεδο δεξιοτήτων σας (βλ. [Υπόμνημα Πολυπλοκότητας](../../../examples))
 - ✅ Διαβάστε προσεκτικά το README του παραδείγματος πριν την ανάπτυξη
-- ✅ Ορίστε μια υπενθύμιση να εκτελέσετε `azd down` μετά τις δοκιμές
+- ✅ Ορίστε υπενθύμιση να εκτελέσετε `azd down` μετά τις δοκιμές
 - ✅ Μοιραστείτε την εμπειρία σας μέσω GitHub Issues ή Discussions
 
-### Χρειάζεστε βοήθεια;
+### Χρειάζεστε Βοήθεια;
 
-- 📖 [FAQ](../resources/faq.md) - Συνηθισμένες ερωτήσεις με απαντήσεις
-- 🐛 [Οδηγός Επίλυσης Προβλημάτων](../docs/chapter-07-troubleshooting/common-issues.md) - Επιλύστε ζητήματα ανάπτυξης
-- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Ρωτήστε την κοινότητα
+- 📖 [Συχνές Ερωτήσεις (FAQ)](../resources/faq.md) - Συνηθισμένες ερωτήσεις απαντημένες
+- 🐛 [Οδηγός Αντιμετώπισης Προβλημάτων](../docs/chapter-07-troubleshooting/common-issues.md) - Διορθώστε προβλήματα ανάπτυξης
+- 💬 [Συζητήσεις GitHub](https://github.com/microsoft/AZD-for-beginners/discussions) - Ρωτήστε την κοινότητα
 - 📚 [Οδηγός Μελέτης](../resources/study-guide.md) - Ενισχύστε τη μάθησή σας
 
 ---
 
 **Πλοήγηση**
-- **📚 Αρχική Σελίδα Μαθήματος**: [AZD For Beginners](../README.md)
-- **📖 Υλικό Μελέτης**: [Οδηγός Μελέτης](../resources/study-guide.md) | [Συνοπτικός Οδηγός](../resources/cheat-sheet.md) | [Γλωσσάρι](../resources/glossary.md)
-- **🔧 Πόροι**: [FAQ](../resources/faq.md) | [Επίλυση Προβλημάτων](../docs/chapter-07-troubleshooting/common-issues.md)
+- **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../README.md)
+- **📖 Υλικό Μελέτης**: [Οδηγός Μελέτης](../resources/study-guide.md) | [Σύντομος Οδηγός](../resources/cheat-sheet.md) | [Γλωσσάριο](../resources/glossary.md)
+- **🔧 Πόροι**: [Συχνές Ερωτήσεις (FAQ)](../resources/faq.md) | [Αντιμετώπιση προβλημάτων](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ---
 
-*Τελευταία ενημέρωση: Νοέμβριος 2025 | [Αναφέρετε Προβλήματα](https://github.com/microsoft/AZD-for-beginners/issues) | [Συνεισφέρετε Παραδείγματα](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
+*Τελευταία Ενημέρωση: Νοέμβριος 2025 | [Αναφέρετε Προβλήματα](https://github.com/microsoft/AZD-for-beginners/issues) | [Συνεισφέρετε Παραδείγματα](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Αποποίηση ευθυνών:
-Το παρόν έγγραφο έχει μεταφραστεί με χρήση της υπηρεσίας μετάφρασης με τεχνητή νοημοσύνη Co-op Translator (https://github.com/Azure/co-op-translator). Παρόλο που επιδιώκουμε την ακρίβεια, παρακαλούμε να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το αρχικό έγγραφο στην πρωτότυπη γλώσσα του πρέπει να θεωρείται η επίσημη πηγή. Για κρίσιμες πληροφορίες συνιστάται επαγγελματική μετάφραση από ανθρώπινο μεταφραστή. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+Αποποίηση ευθύνης:
+Το παρόν έγγραφο έχει μεταφραστεί με τη χρήση της υπηρεσίας μετάφρασης με τεχνητή νοημοσύνη Co-op Translator (https://github.com/Azure/co-op-translator). Παρά τις προσπάθειές μας για ακρίβεια, παρακαλούμε λάβετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στην αρχική του γλώσσα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε καμία ευθύνη για τυχόν παρανοήσεις ή εσφαλμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

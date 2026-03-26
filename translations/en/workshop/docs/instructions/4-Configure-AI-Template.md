@@ -9,7 +9,7 @@
 
 ---
 
-!!! prompt "What is the `azure.yaml` file do? Use a codefence and explain it line by line"
+!!! prompt "What does the `azure.yaml` file do? Use a codefence and explain it line by line"
 
       The `azure.yaml` file is the **configuration file for Azure Developer CLI (azd)**. It defines how your application should be deployed to Azure, including infrastructure, services, deployment hooks, and environment variables.
 
@@ -281,7 +281,7 @@ pipeline:
 This section defines environment variables used **during deployment**, organized by category:
 
 - **Azure Resource Names (Lines 51-60)**:
-      - Core Azure service resource names e.g, Resource Group, AI Hub, AI Project, etc.- 
+      - Core Azure service resource names e.g., Resource Group, AI Hub, AI Project, etc.- 
 - **Feature Flags (Lines 61-63)**:
       - Boolean variables to enable/disable specific Azure services
 - **AI Agent Configuration (Lines 64-71)**:
@@ -318,7 +318,7 @@ AZURE_KEYVAULT_NAME               # Key Vault name (if used)
 ### 3.2 Model Configuration 
 ```bash title="" linenums="0"
 # Chat Model Configuration
-AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_NAME         # Default: gpt-4.1-mini
 AZURE_AI_AGENT_MODEL_FORMAT       # Default: OpenAI (or Microsoft)
 AZURE_AI_AGENT_MODEL_VERSION      # Default: latest available
 AZURE_AI_AGENT_DEPLOYMENT_NAME    # Deployment name for chat model
@@ -382,6 +382,6 @@ azd env set --from-file .env
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-This document has been translated using the AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,6 +1,6 @@
 # Capítulo 8: Padrões de Produção e Empresariais
 
-**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 2-3 horas | **⭐ Complexidade**: Avançado
+**📚 Curso**: [AZD For Beginners](../../README.md) | **⏱️ Duração**: 2-3 horas | **⭐ Complexidade**: Avançado
 
 ---
 
@@ -10,20 +10,20 @@ Este capítulo aborda padrões de implantação prontos para empresas, fortaleci
 
 ## Objetivos de Aprendizagem
 
-Ao concluir este capítulo, você irá:
+Ao concluir este capítulo, você:
 - Implantar aplicações resilientes em múltiplas regiões
-- Implementar padrões de segurança corporativa
+- Implementar padrões de segurança empresariais
 - Configurar monitoramento abrangente
-- Otimizar custos em escala
-- Configurar pipelines de CI/CD com AZD
+- Otimizar custos em larga escala
+- Configurar pipelines CI/CD com AZD
 
 ---
 
-## 📚 Aulas
+## 📚 Lessons
 
-| # | Aula | Descrição | Tempo |
-|---|------|-----------|------|
-| 1 | [Práticas de IA para Produção](production-ai-practices.md) | Padrões de implantação empresarial | 90 min |
+| # | Lesson | Description | Time |
+|---|--------|-------------|------|
+| 1 | [Production AI Practices](production-ai-practices.md) | Enterprise deployment patterns | 90 min |
 
 ---
 
@@ -32,8 +32,8 @@ Ao concluir este capítulo, você irá:
 - [ ] Implantação multi-região para resiliência
 - [ ] Identidade gerenciada para autenticação (sem chaves)
 - [ ] Application Insights para monitoramento
-- [ ] Orçamentos e alertas de custo configurados
-- [ ] Varredura de segurança ativada
+- [ ] Orçamentos de custos e alertas configurados
+- [ ] Escaneamento de segurança ativado
 - [ ] Integração com pipeline CI/CD
 - [ ] Plano de recuperação de desastres
 
@@ -41,27 +41,20 @@ Ao concluir este capítulo, você irá:
 
 ## 🏗️ Padrões de Arquitetura
 
-### Padrão 1: Microserviços de IA
+### Padrão 1: Microsserviços de IA
 
+```mermaid
+graph LR
+    Gateway[Gateway de API] --> AI[Serviço de IA] --> Models[Modelos do Microsoft Foundry]
+    Gateway --> Auth[Serviço de Autenticação]
+    AI --> Data[Armazenamento de Dados]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
-
 ### Padrão 2: IA Orientada a Eventos
 
+```mermaid
+graph LR
+    EventGrid[Grade de Eventos] --> Functions[Funções] --> Pipeline[Pipeline de IA]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
 ## 🔐 Melhores Práticas de Segurança
@@ -85,9 +78,9 @@ properties: {
 
 ## 💰 Otimização de Custos
 
-| Estratégia | Economia |
-|-----------|---------|
-| Escalar até zero (Container Apps) | 60-80% |
+| Strategy | Savings |
+|----------|---------|
+| Escalonar para zero (Container Apps) | 60-80% |
 | Usar níveis de consumo para dev | 50-70% |
 | Escalonamento agendado | 30-50% |
 | Capacidade reservada | 20-40% |
@@ -112,7 +105,7 @@ azd monitor --logs
 # Verificar o Application Insights
 azd monitor
 
-# Ver métricas
+# Visualizar métricas
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -120,10 +113,10 @@ az monitor metrics list --resource <resource-id>
 
 ## 🔗 Navegação
 
-| Direção | Capítulo |
-|---------|---------|
-| **Anterior** | [Capítulo 7: Solução de Problemas](../chapter-07-troubleshooting/README.md) |
-| **Curso Completo** | [Início do Curso](../../README.md) |
+| Direction | Chapter |
+|-----------|---------|
+| **Anterior** | [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/README.md) |
+| **Curso Concluído** | [Início do Curso](../../README.md) |
 
 ---
 
@@ -132,11 +125,11 @@ az monitor metrics list --resource <resource-id>
 - [Guia de Agentes de IA](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Soluções Multi-Agente](../chapter-05-multi-agent/README.md)
-- [Exemplo de Microserviços](../../examples/microservices/README.md)
+- [Exemplo de Microsserviços](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Isenção de responsabilidade**:
-Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução humana profissional. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

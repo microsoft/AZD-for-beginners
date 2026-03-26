@@ -1,118 +1,111 @@
-# பல-ஏஜென்ட் ஒருங்கிணைப்பு மாதிரிகள்
+# Multi-Agent Coordination Patterns
 
-⏱️ **எடுத்துக்காட்டான நேரம்**: 60-75 நிமிடங்கள் | 💰 **எடுத்துக்காட்டான செலவு**: ~$100-300/மாதம் | ⭐ **சிக்கல் நிலை**: உயர்ந்தது
+⏱️ **Estimated Time**: 60-75 minutes | 💰 **Estimated Cost**: ~$100-300/month | ⭐ **Complexity**: Advanced
 
-**📚 கற்றல் பாதை:**
-- ← முந்தைய: [திறன் திட்டமிடல்](capacity-planning.md) - வளங்கள் அளவிடுதல் மற்றும் அளவைப் பெருக்குதல் உத்திகள்
-- 🎯 **நீங்கள் இங்கே**: பல-ஏஜென்ட் ஒருங்கிணைப்பு மாதிரிகள் (ஒர்க்கஸ்ட்ரேஷன், தொடர்பு, நிலை மேலாண்மை)
-- → அடுத்து: [SKU தேர்வு](sku-selection.md) - சரியான Azure சேவைகளை தேர்ந்தெடுப்பது
-- 🏠 [பாடநெறி முகப்பு](../../README.md)
+**📚 Learning Path:**
+- ← Previous: [Capacity Planning](capacity-planning.md) - Resource sizing and scaling strategies
+- 🎯 **You Are Here**: Multi-Agent Coordination Patterns (Orchestration, communication, state management)
+- → Next: [SKU Selection](sku-selection.md) - Choosing the right Azure services
+- 🏠 [Course Home](../../README.md)
 
 ---
 
-## நீங்கள் என்ன கற்றுக்கொள்வீர்கள்
+## What You'll Learn
 
-இந்தப் பாடத்தினை முடித்தால், நீங்கள்:
-- **பல-ஏஜென்ட் கட்டமைப்பு** மாதிரிகள் மற்றும் அவற்றை எப்போது பயன்படுத்துவது என்பதைப் புரிந்துகொண்டிருப்பீர்கள்
-- **ஒர்க்கஸ்ட்ரேஷன் மாதிரிகள்** (மையமிட்டது, மையமில்லாதது, அடுக்குக்கட்டமைப்பு) ஐ அமல்படுத்துவீர்கள்
-- **ஏஜென்ட் தொடர்பு** रणनीதிகள் (ஒத்திசைவு, ஒத்திசைவை இல்லாதது, நிகழ்வு சார்ந்தவை) வடிவமைப்பீர்கள்
-- விநியோகிக்கப்பட்ட ஏஜென்டுகள் இடையே **பகிரப்பட்ட நிலையை** நிர்வகிப்பீர்கள்
-- AZD உடன் Azure இல் **பல-ஏஜென்ட் அமைப்புகளை** despleய் செய்யப்படுவீர்கள்
-- நிஜ உலக AI சூழல்களுக்கு **ஒத்துழைப்பு மாதிரிகளை** প্রয়োগிப்பீர்கள்
-- விநியோகிக்கப்பட்ட ஏஜென்ட் அமைப்புகளை கண்காணித்து பிழைதிருத்துதல் கற்றுக்கொள்வீர்கள்
+By completing this lesson, you will:
+- Understand **multi-agent architecture** patterns and when to use them
+- Implement **orchestration patterns** (centralized, decentralized, hierarchical)
+- Design **agent communication** strategies (synchronous, asynchronous, event-driven)
+- Manage **shared state** across distributed agents
+- Deploy **multi-agent systems** on Azure with AZD
+- Apply **coordination patterns** for real-world AI scenarios
+- Monitor and debug distributed agent systems
 
-## ஏன் பல-ஏஜென்ட் ஒருங்கிணைப்பு முக்கியம்
+## Why Multi-Agent Coordination Matters
 
-### மேம்பாடு: ஒரே ஏஜென்டிலிருந்து பல-ஏஜென்டுக்கு
+### The Evolution: From Single Agent to Multi-Agent
 
-**ஒற்றை ஏஜென்ட் (எளியது):**
+**Single Agent (Simple):**
 ```
 User → Agent → Response
 ```
-- ✅ புரிந்துகொள்ளவும் அமல்படுத்தவும் எளிது
-- ✅ எளிய பணிகளுக்கு விரைவு
-- ❌ ஒற்றை மாடலின் திறனால் வரம்பு
-- ❌ சிக்கலான பணிகளை இணையாக செயல்படுத்த முடியாது
-- ❌ சிறப்பு நிபுணத்துவம் இல்லை
+- ✅ Easy to understand and implement
+- ✅ Fast for simple tasks
+- ❌ Limited by single model's capabilities
+- ❌ Cannot parallelize complex tasks
+- ❌ No specialization
 
-**பல-ஏஜென்ட் அமைப்பு (முன்னேறிய):**
-```
-           ┌─────────────┐
-           │ Orchestrator│
-           └──────┬──────┘
-        ┌─────────┼─────────┐
-        │         │         │
-    ┌───▼──┐  ┌──▼───┐  ┌──▼────┐
-    │Agent1│  │Agent2│  │Agent3 │
-    │(Plan)│  │(Code)│  │(Review)│
-    └──────┘  └──────┘  └───────┘
-```
-- ✅ குறிப்பிட்ட பணிகளுக்கான சிறப்பு ஏஜென்டுகள்
-- ✅ வேகத்திற்காக ஒத்தநேர நிறைவு
-- ✅ தொகுதியாக அமைந்திருக்கும் மற்றும் பராமரிக்க எளிது
-- ✅ சிக்கலான பணிச்சுழற்சிகளில் சிறந்தது
-- ⚠️ ஒருங்கிணைப்பு தர்க்கம் தேவை
+**Multi-Agent System (Advanced):**
+```mermaid
+graph TD
+    Orchestrator[ஒழுங்குபடுத்தி] --> Agent1[ஏஜென்ட்1<br/>திட்டம்]
+    Orchestrator --> Agent2[ஏஜென்ட்2<br/>குறியீடு]
+    Orchestrator --> Agent3[ஏஜென்ட்3<br/>மீளாய்வு]
+```- ✅ Specialized agents for specific tasks
+- ✅ Parallel execution for speed
+- ✅ Modular and maintainable
+- ✅ Better at complex workflows
+- ⚠️ Requires coordination logic
 
-**உரை**: ஒரே ஏஜென்ட் என்பது ஒரு நபர் எல்லா பணியையும் செய்வதைப் போன்றது. பல-ஏஜென்ட் என்பது ஒவ்வொருவரும் சிறப்புப் திறன்களை கொண்ட (ஆராய்ச்சியாளர், குறியீட்டாளர், மதிப்பாய்வாளர், எழுத்தாளர்) ஒரு குழு போல ஒன்றாக வேலை செய்கிறார்கள்.
+**Analogy**: Single agent is like one person doing all tasks. Multi-agent is like a team where each member has specialized skills (researcher, coder, reviewer, writer) working together.
 
 ---
 
-## முக்கிய ஒருங்கிணைப்பு மாதிரிகள்
+## Core Coordination Patterns
 
-### மாதிரி 1: தொடர்ச்சியான ஒருங்கிணைப்பு (பொறுப்பு சங்கிலி)
+### Pattern 1: Sequential Coordination (Chain of Responsibility)
 
-**பயன்படுத்துவது எப்போது**: பணிகள் குறிப்பிட்ட வரிசையில் முடிக்கப்பட வேண்டும்; ஒவ்வொரு ஏஜென்டும் முந்தைய வெளியீட்டின் அடிப்படையில் கட்டமைக்கப்படும்.
+**When to use**: Tasks must complete in specific order, each agent builds on previous output.
 
 ```mermaid
 sequenceDiagram
-    participant User as பயனர்
-    participant Orchestrator as ஒழுங்குபடுத்துநர்
+    participant User
+    participant Orchestrator
     participant Agent1 as ஆராய்ச்சி முகவர்
     participant Agent2 as எழுத்தாளர் முகவர்
-    participant Agent3 as திருத்தும் முகவர்
+    participant Agent3 as திருத்தி முகவர்
     
-    User->>Orchestrator: "AI பற்றி கட்டுரை எழுதவும்"
-    Orchestrator->>Agent1: ஆராய்ச்சி தலைப்பு
+    User->>Orchestrator: "ஏ.ஐ. பற்றி கட்டுரை எழுதவும்"
+    Orchestrator->>Agent1: தலைப்பை ஆராயுங்கள்
     Agent1-->>Orchestrator: ஆராய்ச்சி முடிவுகள்
-    Orchestrator->>Agent2: வரைவு எழுதுக (ஆராய்ச்சியைப் பயன்படுத்தி)
+    Orchestrator->>Agent2: வரைவு எழுதவும் (ஆராய்ச்சியை பயன்படுத்தி)
     Agent2-->>Orchestrator: வரைவு கட்டுரை
-    Orchestrator->>Agent3: திருத்தி மேம்படுத்தவும்
+    Orchestrator->>Agent3: திருத்தவும் மற்றும் மேம்படுத்தவும்
     Agent3-->>Orchestrator: இறுதி கட்டுரை
     Orchestrator-->>User: மெருகூட்டப்பட்ட கட்டுரை
     
-    Note over User,Agent3: வரிசையாக: ஒவ்வொரு படியும் முந்தையதை காத்திருக்கும்
-```
+    Note over User,Agent3: வரிசை: ஒவ்வொரு படியும் முந்தையதை காத்திருக்கும்
+```}
+**Benefits:**
+- ✅ Clear data flow
+- ✅ Easy to debug
+- ✅ Predictable execution order
 
-**நன்மைகள்:**
-- ✅ தரவு ஓட்டம் தெளிவானது
-- ✅ பிழையறிதல் எளிது
-- ✅ நிர்ணயிக்கப்பட்ட நிறைவேற்ற வரிசை
+**Limitations:**
+- ❌ Slower (no parallelism)
+- ❌ One failure blocks entire chain
+- ❌ Cannot handle interdependent tasks
 
-**வரம்புகள்:**
-- ❌ மெதுவாகும் (ஒத்த செயல்பாடு இல்லை)
-- ❌ ஒரு தோல்வி முழு சங்கிலியை முடக்குகிறது
-- ❌ பரஸ்பர சார்ந்த பணிகளை கையாள முடியாது
-
-**உதாரண பயன்பாடுகள்:**
-- உள்ளடக்கம் உருவாக்கும் குழாய் (ஆராய்ச்சி → எழுது → திருத்து → வெளியிடு)
-- குறியீடு உருவாக்கம் (திட்டமிடு → அமல்படுத்து → சோதனை → உருப்பாடு)
-- அறிக்கை உருவாக்கம் (தரவிறக்கம் → பகுப்பாய்வு → காட்சிப்படுத்தல் → சுருக்கம்)
+**Example Use Cases:**
+- Content creation pipeline (research → write → edit → publish)
+- Code generation (plan → implement → test → deploy)
+- Report generation (data collection → analysis → visualization → summary)
 
 ---
 
-### மாதிரி 2: 병렬 ஒருங்கிணைப்பு (Fan-Out/Fan-In)
+### Pattern 2: Parallel Coordination (Fan-Out/Fan-In)
 
-**பயன்படுத்துவது எப்போது**: சுதந்திர பணிகள் ஒன்றே நேரத்தில் இயங்க முடியும்; முடிவுகள் இறுதியில் ஒன்றிணைக்கப்படுகின்றன.
+**When to use**: Independent tasks can run simultaneously, results combined at the end.
 
 ```mermaid
 graph TB
     User[பயனர் கோரிக்கை]
-    Orchestrator[ஒழுங்கமைப்பாளர்]
+    Orchestrator[ஒழுங்குபடுத்துநர்]
     Agent1[பகுப்பாய்வு முகவர்]
     Agent2[ஆய்வு முகவர்]
     Agent3[தரவு முகவர்]
-    Aggregator[முடிவுகள் ஒருங்கிணைப்பாளர்]
-    Response[ஒருங்கிணைந்த பதில்]
+    Aggregator[முடிவு ஒருங்கிணைப்பாளர்]
+    Response[கலந்த பதில்]
     
     User --> Orchestrator
     Orchestrator --> Agent1
@@ -126,33 +119,33 @@ graph TB
     style Orchestrator fill:#2196F3,stroke:#1976D2,stroke-width:3px,color:#fff
     style Aggregator fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-**நன்மைகள்:**
-- ✅ வேகமாக (ஒத்தநேர நிறைவேற்று)
-- ✅ தவறுகளுக்கு பொறுப்பானது (பகுதி முடிவுகள் ஏற்றுக்கொள்ளப்படும்)
-- ✅ அளவில் الأفقي விரிவடையக்கூடியது
+**Benefits:**
+- ✅ Fast (parallel execution)
+- ✅ Fault-tolerant (partial results acceptable)
+- ✅ Scales horizontally
 
-**வரம்புகள்:**
-- ⚠️ முடிவுகள் வரிசை தவிர் வரலாம்
-- ⚠️ ஒருங்கூட்டல் தர்க்கம் தேவை
-- ⚠️ நிலை மேலாண்மை சிக்கலானது
+**Limitations:**
+- ⚠️ Results may arrive out-of-order
+- ⚠️ Need aggregation logic
+- ⚠️ Complex state management
 
-**உதாரண பயன்பாடுகள்:**
-- பல மூலங்களிலிருந்து தரவு சேகரிப்பு (APIs + தரவுத்தளங்கள் + வலை ஸ்கிரேப்பிங்)
-- போட்டிப்போன்று பகுப்பாய்வு (பல மாடல்கள் தீர்வுகளை உருவாக்கி சிறந்தது தேர்வு செய்யப்படும்)
-- மொழிபெயர்ப்பு சேவைகள் (பல மொழிகளுக்கு ஒரே நேரத்தில் மொழிபெயர்த்து)
+**Example Use Cases:**
+- Multi-source data gathering (APIs + databases + web scraping)
+- Competitive analysis (multiple models generate solutions, best selected)
+- Translation services (translate to multiple languages simultaneously)
 
 ---
 
-### மாதிரி 3: அடுக்குமுறை ஒருங்கிணைப்பு (மேலாளர்-பணியாளர்)
+### Pattern 3: Hierarchical Coordination (Manager-Worker)
 
-**பயன்படுத்துவது எப்போது**: துணைப் பணிகளுடன் கூடிய சிக்கலான பணிச்சுழற்சிகள், делегேஷன் தேவைப்படும் போது.
+**When to use**: Complex workflows with sub-tasks, delegation needed.
 
 ```mermaid
 graph TB
-    Master[முதன்மை ஒருங்கிணைப்பாளர்]
-    Manager1[ஆராய்ச்சி மேலாளர்]
-    Manager2[உள்ளடக்க மேலாளர்]
-    W1[இணைய ஸ்க்ரேப்பர்]
+    Master[மாஸ்டர் ஒர்கஸ்ட்ரேட்டர்]
+    Manager1[ஆய்வு மேலாளர்]
+    Manager2[உள்ளடக்கம் மேலாளர்]
+    W1[வெப் ஸ்க்ரேப்பர்]
     W2[காகித பகுப்பாய்வாளர்]
     W3[எழுத்தாளர்]
     W4[தொகுப்பாளர்]
@@ -168,75 +161,75 @@ graph TB
     style Manager1 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
 ```
-**நன்மைகள்:**
-- ✅ சிக்கலான பணிச்சுழற்சிகளை கையாளும்
-- ✅ தொகுதி வடிவமைப்பு மற்றும் பராமரிக்கக்கூடியது
-- ✅ பொறுப்புத் எல்லைகள் தெளிவு
+**Benefits:**
+- ✅ Handles complex workflows
+- ✅ Modular and maintainable
+- ✅ Clear responsibility boundaries
 
-**வரம்புகள்:**
-- ⚠️ கட்டமைப்பு மேலும் சிக்கலாகும்
-- ⚠️ உயர்ந்த தாமதம் (பல ஒருங்கிணைப்பு அடுக்குகள்)
-- ⚠️ சிக்கலான ஒர்க்கஸ்ட்ரேஷன் தேவை
+**Limitations:**
+- ⚠️ More complex architecture
+- ⚠️ Higher latency (multiple coordination layers)
+- ⚠️ Requires sophisticated orchestration
 
-**உதாரண பயன்பாடுகள்:**
-- நிறுவன ஆவணம் செயலாக்கம் (வகைப்படுத்து → வழிமாற்று → செயலாக்கு → காப்பகம்)
-- பல கட்ட நடவடிக்கைகள் தரவு குழாய் (சமர்ப்பி → சுத்தம் → மாற்று → பகுப்பாய்வு → அறிக்கை)
-- சிக்கலான தானியக்க பணிச் செயல்முறைகள் (திட்டமிடல் → வள ஒதுக்கம் → அமல்படுத்தல் → கண்காணிப்பு)
+**Example Use Cases:**
+- Enterprise document processing (classify → route → process → archive)
+- Multi-stage data pipelines (ingest → clean → transform → analyze → report)
+- Complex automation workflows (planning → resource allocation → execution → monitoring)
 
 ---
 
-### மாதிரி 4: நிகழ்வு சார்ந்த ஒருங்கிணைப்பு (பப்ளிஷ்-சப்ஸ்க்ரைப்)
+### Pattern 4: Event-Driven Coordination (Publish-Subscribe)
 
-**பயன்படுத்துவது எப்போது**: ஏஜென்டுகள் நிகழவுகளைப் பதிலளிக்க வேண்டிய போது, இணைப்பு தளர்ந்திருப்பது விரும்பப்படும் போது.
+**When to use**: Agents need to react to events, loose coupling desired.
 
 ```mermaid
 sequenceDiagram
-    participant Agent1 as தரவு சேகரிப்பாளர்
+    participant Agent1 as தரவு திரட்டியாளர்
     participant EventBus as Azure சேவை பஸ்
     participant Agent2 as பகுப்பாய்வாளர்
     participant Agent3 as அறிவிப்பாளர்
-    participant Agent4 as ஆவண சேமிப்பாளர்
+    participant Agent4 as ஆர்கைவர்
     
-    Agent1->>EventBus: வெளியிடு "தரவு கிடைத்தது" நிகழ்வு
-    EventBus->>Agent2: சந்தா ஆகு: தரவை பகுப்பாய்வு செய்
-    EventBus->>Agent3: சந்தா ஆகு: அறிவிப்பை அனுப்பு
-    EventBus->>Agent4: சந்தா ஆகு: தரவை காப்பிடு
+    Agent1->>EventBus: "தரவு பெற்றது" நிகழ்வை வெளியிடு
+    EventBus->>Agent2: சந்தா எடு: தரவை பகுப்பாய்வு செய்
+    EventBus->>Agent3: சந்தா எடு: அறிவிப்பை அனுப்பு
+    EventBus->>Agent4: சந்தா எடு: தரவை காப்பு செய்
     
-    Note over Agent1,Agent4: அனைத்து சந்தாதாரர்களும் தனி-தனியாக செயல்படுகின்றனர்
+    Note over Agent1,Agent4: அனைத்து சந்தாதாரர்கள் தனித்தனியாக செயலாக்கப்படுகின்றனர்
     
-    Agent2->>EventBus: வெளியிடு "பகுப்பாய்வு முடிந்தது" நிகழ்வு
-    EventBus->>Agent3: சந்தா ஆகு: பகுப்பாய்வு அறிக்கையை அனுப்பு
+    Agent2->>EventBus: "பகுப்பாய்வு முடிந்தது" நிகழ்வை வெளியிடு
+    EventBus->>Agent3: சந்தா எடு: பகுப்பாய்வு அறிக்கையை அனுப்பு
 ```
-**நன்மைகள்:**
-- ✅ ஏஜென்டுகளுக்கு இடையில் தளர்ந்த இணைப்பு
-- ✅ புதிய ஏஜென்டுகளை சேர்த்தெடுக்க எளிது (பதிவுசெய்தல் போதும்)
-- ✅ ஒத்திசைவை இல்லாத செயலாக்கம்
-- ✅ தரவின் நிலைத்தன்மை மூலம் இலக்கணத்தன்மை
+**Benefits:**
+- ✅ Loose coupling between agents
+- ✅ Easy to add new agents (just subscribe)
+- ✅ Asynchronous processing
+- ✅ Resilient (message persistence)
 
-**வரம்புகள்:**
-- ⚠️ இறுதிக் குறிப்பில் ஒத்திசைவு (eventual consistency)
-- ⚠️ பிழைதிருத்தம் சிக்கலானது
-- ⚠️ செய்தி வரிசை சவால்கள்
+**Limitations:**
+- ⚠️ Eventual consistency
+- ⚠️ Complex debugging
+- ⚠️ Message ordering challenges
 
-**உதாரண பயன்பாடுகள்:**
-- நேரடி கண்காணிப்பு அமைப்புகள் (எச்சரிக்கை, டாஷ்போர்டுகள், பதிவுகள்)
-- பல-चெனல்அறிவிப்புகள் (மின்னஞ்சல், SMS, புஷ், Slack)
-- தரவு செயலாக்க குழாய்கள் (ஒரே தரவிற்கான பல பயனர்கள்)
+**Example Use Cases:**
+- Real-time monitoring systems (alerts, dashboards, logs)
+- Multi-channel notifications (email, SMS, push, Slack)
+- Data processing pipelines (multiple consumers of same data)
 
 ---
 
-### மாதிரி 5: கருத்து-அடிப்படையிலான ஒருங்கிணைப்பு (வாக்களிப்பு/குவோரம்)
+### Pattern 5: Consensus-Based Coordination (Voting/Quorum)
 
-**பயன்படுத்துவது எப்போது**: தொடர்வதற்கு முன்னர் பல ஏஜென்டுகளிடமிருந்து ஒப்புதல் தேவைப்படும் போது.
+**When to use**: Need agreement from multiple agents before proceeding.
 
 ```mermaid
 graph TB
     Input[உள்ளீட்டு பணி]
-    Agent1[ஏஜென்ட் 1: GPT-4]
+    Agent1[ஏஜென்ட் 1: gpt-4.1]
     Agent2[ஏஜென்ட் 2: Claude]
     Agent3[ஏஜென்ட் 3: Gemini]
-    Voter[ஒத்துக் கொள்ளும் வாக்காளர்]
-    Output[ஒப்புக்கொண்ட வெளியீடு]
+    Voter[ஒற்றுமை வாக்காளர்]
+    Output[ஒப்புக்கொள்ளப்பட்ட வெளியீடு]
     
     Input --> Agent1
     Input --> Agent2
@@ -248,42 +241,42 @@ graph TB
     
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
-**நன்மைகள்:**
-- ✅ உயர்ந்த துல்லியம் (பல கருத்துகள்)
-- ✅ தவறுகளுக்கு பொறுப்பானது (சிறு தொகுதி தோல்விகள் ஏற்றுக்கொள்ளக்கூடியவை)
-- ✅ தர நிர்வாகம் அவுட்-ஆஃப்-தி பாக்ஸ்
+**Benefits:**
+- ✅ Higher accuracy (multiple opinions)
+- ✅ Fault-tolerant (minority failures acceptable)
+- ✅ Quality assurance built-in
 
-**வரம்புகள்:**
-- ❌ செலவானது (பல மாடல் அழைப்புகள்)
-- ❌ மெதுவாகும் (எல்லா ஏஜென்டுகளின் பதிலுக்காக காத்திருக்கும்)
-- ⚠️ மோதலை தீர்க்கும் நடைமுறை தேவை
+**Limitations:**
+- ❌ Expensive (multiple model calls)
+- ❌ Slower (waiting for all agents)
+- ⚠️ Conflict resolution needed
 
-**உதாரண பயன்பாடுகள்:**
-- உள்ளடக்கம் மாதிரியாக்கம் (பல மாடல்கள் உள்ளடக்கத்தை மதிப்பீடு செய்கின்றன)
-- குறியீடு சோதனை (பல லின்டர்கள்/பரிசோதகர்கள்)
-- மருத்துவ تشخیص (பல AI மாடல்கள், நிபுணர் சரிபார்ப்பு)
+**Example Use Cases:**
+- Content moderation (multiple models review content)
+- Code review (multiple linters/analyzers)
+- Medical diagnosis (multiple AI models, expert validation)
 
 ---
 
-## வடிவமைப்பு மேற்பார்வை
+## Architecture Overview
 
-### Azure இல் முழுமையான பல-ஏஜென்ட் அமைப்பு
+### Complete Multi-Agent System on Azure
 
 ```mermaid
 graph TB
     User[பயனர்/API கிளையன்ட்]
     APIM[Azure API மேலாண்மை]
-    Orchestrator[Orchestrator சேவை<br/>கொண்டெய்னர் செயலி]
-    ServiceBus[Azure சேவை பஸ்<br/>இவென்ட் ஹப்]
+    Orchestrator[ஒர்கஸ்ட்ரேட்டர் சேவை<br/>கொண்டெய்னர் செயலி]
+    ServiceBus[Azure சேவை பஸ்<br/>இவேன்ட் ஹப்]
     
-    Agent1[ஆராய்ச்சி ஏஜென்ட்<br/>கொண்டெய்னர் செயலி]
-    Agent2[எழுத்தாளர் ஏஜென்ட்<br/>கொண்டெய்னர் செயலி]
-    Agent3[பகுப்பாய்வு ஏஜென்ட்<br/>கொண்டெய்னர் செயலி]
-    Agent4[பரிசீலகர் ஏஜென்ட்<br/>கொண்டெய்னர் செயலி]
+    Agent1[ஆராய்ச்சி முகவர்<br/>கொண்டெய்னர் செயலி]
+    Agent2[எழுத்தாளர் முகவர்<br/>கொண்டெய்னர் செயலி]
+    Agent3[பகுப்பாய்வு முகவர்<br/>கொண்டெய்னர் செயலி]
+    Agent4[பரிசீலகர் முகவர்<br/>கொண்டெய்னர் செயலி]
     
     CosmosDB[(Cosmos DB<br/>பகிரப்பட்ட நிலை)]
-    Storage[Azure சேமிப்பு<br/>ஆர்டிஃபாக்ட்கள்]
-    AppInsights[Application Insights<br/>கண்காணிப்பு]
+    Storage[Azure சேமிப்பு<br/>அர்டிஃபாக்டுகள்]
+    AppInsights[அப்ளிகேஷன் இன்சைட்ஸ்<br/>கண்காணிப்பு]
     
     User --> APIM
     APIM --> Orchestrator
@@ -314,23 +307,23 @@ graph TB
     style ServiceBus fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-**முக்கிய கூறுகள்:**
+**Key Components:**
 
-| கூறு | நோக்கம் | Azure சேவை |
+| Component | Purpose | Azure Service |
 |-----------|---------|---------------|
-| **API Gateway** | நுழைவு புள்ளி, விகிதக் கட்டுப்பாடு, அங்கீகாரம் | API Management |
-| **Orchestrator** | ஏஜென்ட் பணிச்சுழற்சிகளை ஒருங்கிணைக்கிறது | Container Apps |
-| **Message Queue** | ஒத்திசைக்காத தொடர்பு | Service Bus / Event Hubs |
-| **Agents** | சிறப்பு AI பணியாளர்கள் | Container Apps / Functions |
-| **State Store** | பகிரப்பட்ட நிலை, பணித் தொடக்க கண்காணிப்பு | Cosmos DB |
-| **Artifact Storage** | ஆவணங்கள், முடிவுகள், பதிவுகள் | Blob Storage |
-| **Monitoring** | விநியோகப்பட்ட டிரேசிங், பதிவுகள் | Application Insights |
+| **API Gateway** | Entry point, rate limiting, auth | API Management |
+| **Orchestrator** | Coordinates agent workflows | Container Apps |
+| **Message Queue** | Asynchronous communication | Service Bus / Event Hubs |
+| **Agents** | Specialized AI workers | Container Apps / Functions |
+| **State Store** | Shared state, task tracking | Cosmos DB |
+| **Artifact Storage** | Documents, results, logs | Blob Storage |
+| **Monitoring** | Distributed tracing, logs | Application Insights |
 
 ---
 
-## முன் தேவைகள்
+## Prerequisites
 
-### தேவைப்படும் கருவிகள்
+### Required Tools
 
 ```bash
 # Azure Developer CLI ஐ சரிபார்க்கவும்
@@ -341,33 +334,33 @@ azd version
 az --version
 # ✅ எதிர்பார்க்கப்படுகிறது: azure-cli பதிப்பு 2.50.0 அல்லது அதற்கு மேல்
 
-# Docker ஐ (உள்ளூர் சோதனைகளுக்காக) சரிபார்க்கவும்
+# Docker (உள்ளூர் சோதனைக்காக) ஐ சரிபார்க்கவும்
 docker --version
 # ✅ எதிர்பார்க்கப்படுகிறது: Docker பதிப்பு 20.10 அல்லது அதற்கு மேல்
 ```
 
-### Azure தேவைகள்
+### Azure Requirements
 
-- செயல்பாட்டில் இருக்கும் Azure subscription
-- உருவாக்க அனுமதிகள்:
+- Active Azure subscription
+- Permissions to create:
   - Container Apps
   - Service Bus namespaces
   - Cosmos DB accounts
   - Storage accounts
   - Application Insights
 
-### அறிவுத் தேவைகள்
+### Knowledge Prerequisites
 
-நீங்கள் முடித்திருக்க வேண்டியது:
-- [கட்டமைப்பு மேலாண்மை](../chapter-03-configuration/configuration.md)
-- [அங்கீகாரம் & பாதுகாப்பு](../chapter-03-configuration/authsecurity.md)
-- [மைக்ரோசெர்விஸஸ் உதாரணம்](../../../../examples/microservices)
+You should have completed:
+- [Configuration Management](../chapter-03-configuration/configuration.md)
+- [Authentication & Security](../chapter-03-configuration/authsecurity.md)
+- [Microservices Example](../../../../examples/microservices)
 
 ---
 
-## செயலாக்க வழிகாட்டு
+## Implementation Guide
 
-### திட்ட அமைப்பு
+### Project Structure
 
 ```
 multi-agent-system/
@@ -399,15 +392,15 @@ multi-agent-system/
 
 ---
 
-## பாடம் 1: தொடர்ச்சியான ஒருங்கிணைப்பு மாதிரி
+## Lesson 1: Sequential Coordination Pattern
 
-### செயல்படுத்தல்: உள்ளடக்கம் உருவாக்கும் குழாய்
+### Implementation: Content Creation Pipeline
 
-ஒரு தொடர் குழாயை உருவாக்குவோம்: ஆராய்ச்சி → எழுது → திருத்து → வெளியிடு
+Let's build a sequential pipeline: Research → Write → Edit → Publish
 
-### 1. AZD கட்டமைப்பு
+### 1. AZD Configuration
 
-**கோப்பு: `azure.yaml`**
+**File: `azure.yaml`**
 
 ```yaml
 name: content-pipeline
@@ -436,9 +429,9 @@ services:
     host: containerapp
 ```
 
-### 2. கட்டமைப்பு: ஒருங்கிணைப்புக்கான Service Bus
+### 2. Infrastructure: Service Bus for Coordination
 
-**கோப்பு: `infra/core/servicebus.bicep`**
+**File: `infra/core/servicebus.bicep`**
 
 ```bicep
 param name string
@@ -493,9 +486,9 @@ output namespace string = serviceBusNamespace.name
 output connectionString string = listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString
 ```
 
-### 3. பகிரப்பட்ட நிலை மேலாளர்
+### 3. Shared State Manager
 
-**கோப்பு: `src/shared/state_manager.py`**
+**File: `src/shared/state_manager.py`**
 
 ```python
 from azure.cosmos import CosmosClient, PartitionKey
@@ -553,9 +546,9 @@ class StateManager:
         return self.container.read_item(task_id, partition_key=task_id)
 ```
 
-### 4. ஒர்க்கஸ்ட்ரேட்டர் சேவை
+### 4. Orchestrator Service
 
-**கோப்பு: `src/orchestrator/app.py`**
+**File: `src/orchestrator/app.py`**
 
 ```python
 from flask import Flask, request, jsonify
@@ -587,7 +580,7 @@ def create_content():
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # நிலைச் சேமிப்பகத்தில் ஒரு பணியை உருவாக்கு
+    # நிலை சேமிப்பகத்தில் ஒரு பணியை உருவாக்கு
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -595,13 +588,13 @@ def create_content():
         input_data={'topic': topic}
     )
     
-    # ஆராய்ச்சி ஏஜெண்டிற்கு செய்தி அனுப்பு (முதல் படி)
+    # ஆராய்ச்சி முகவருக்கு செய்தி அனுப்பு (முதல் படி)
     sender = servicebus_client.get_queue_sender('research-tasks')
     message = ServiceBusMessage(
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # முடிவுகளை எங்கே அனுப்புவது
+            'next_queue': 'writer-tasks'  # முடிவுகளை எங்கு அனுப்ப வேண்டும்
         }),
         content_type='application/json'
     )
@@ -630,9 +623,9 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### 5. ஆராய்ச்சித் ஏஜென்ட்
+### 5. Research Agent
 
-**கோப்பு: `src/agents/research/app.py`**
+**File: `src/agents/research/app.py`**
 
 ```python
 from azure.servicebus import ServiceBusClient, ServiceBusMessage
@@ -642,7 +635,7 @@ import os
 import time
 from shared.state_manager import StateManager
 
-# கிளையண்டுகளை ஆரம்பிக்கவும்
+# கிளையன்டுகளை ஆரம்பிக்கவும்
 state_manager = StateManager()
 servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
@@ -662,9 +655,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # ஆராய்ச்சிக்காக Azure OpenAI-ஐ அழைக்கவும்
+    # ஆராய்ச்சிக்காக Microsoft Foundry மாடல்களை அழைக்கவும்
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -681,7 +674,7 @@ def process_research_task(message_data):
         result={'research': research_results}
     )
     
-    # அடுத்த ஏஜென்டிற்கு (எழுத்தாளர்) அனுப்பவும்
+    # அடுத்த ஏஜெண்ட் (எழுத்தாளர்)க்கு அனுப்பவும்
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -720,9 +713,9 @@ if __name__ == '__main__':
     main()
 ```
 
-### 6. எழுத்தாளர் ஏஜென்ட்
+### 6. Writer Agent
 
-**கோப்பு: `src/agents/writer/app.py`**
+**File: `src/agents/writer/app.py`**
 
 ```python
 from azure.servicebus import ServiceBusClient, ServiceBusMessage
@@ -751,9 +744,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # கட்டுரை எழுத Azure OpenAI-ஐ அழைக்கவும்
+    # Microsoft Foundry Models-ஐ அழைத்து கட்டுரை எழுதவும்
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -770,7 +763,7 @@ def process_writing_task(message_data):
         result={'draft': article_draft}
     )
     
-    # திருத்துநருக்கு அனுப்பவும்
+    # எடிட்டருக்கு அனுப்பவும்
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -808,9 +801,9 @@ if __name__ == '__main__':
     main()
 ```
 
-### 7. ஆசிரியர் ஏஜென்ட்
+### 7. Editor Agent
 
-**கோப்பு: `src/agents/editor/app.py`**
+**File: `src/agents/editor/app.py`**
 
 ```python
 from azure.servicebus import ServiceBusClient
@@ -838,9 +831,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # திருத்தம் செய்ய Azure OpenAI-ஐ அழைக்கவும்
+    # Microsoft Foundry Models-ஐ திருத்தத்திற்காக அழைக்கவும்
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -850,7 +843,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # பணியை முடிந்ததாக குறிக்கவும்
+    # பணியை முடிக்கப்பட்டதாக குறிக்கவும்
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -884,23 +877,32 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. அமல்படுத்தி சோதனை
+### 8. Deploy and Test
 
 ```bash
-# துவக்கவும் மற்றும் வெளியிடவும்
+# விருப்பம் A: வார்ப்புரு அடிப்படையிலான நிறுவல்
 azd init
 azd up
 
-# ஒர்கெஸ்ட்ரேட்டரின் URL ஐ பெறவும்
+# விருப்பம் B: முகவர் மனிபெஸ்ட் அடிப்படையிலான நிறுவல் (விரிவாக்கம் தேவை)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
+azd up
+```
+
+> See [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for all `azd ai` flags and options.
+
+```bash
+# orchestrator URL ஐப் பெறவும்
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
-# உள்ளடக்கத்தை உருவாக்கவும்
+# உள்ளடக்கம் உருவாக்கவும்
 curl -X POST $ORCHESTRATOR_URL/create-content \
   -H "Content-Type: application/json" \
   -d '{"topic": "The Future of AI in Healthcare"}'
 ```
 
-**✅ எதிர்பார்க்கப்படும் வெளியீடு:**
+**✅ Expected output:**
 ```json
 {
   "task_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -911,13 +913,13 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
 }
 ```
 
-**பணியின் முன்னேற்றத்தைச் சரிபார்க்கவும்:**
+**Check task progress:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ எதிர்பார்க்கப்படும் வெளியீடு (முடிந்தது):**
+**✅ Expected output (completed):**
 ```json
 {
   "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
@@ -945,15 +947,15 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## பாடம் 2: பரலல் ஒருங்கிணைப்பு மாதிரி
+## Lesson 2: Parallel Coordination Pattern
 
-### செயல்படுத்தல்: பல மூல ஆய்வு தொகுப்பாளர்
+### Implementation: Multi-Source Research Aggregator
 
-பல மூலங்களிலிருந்து தகவல்களை ஒரே நேரத்தில் சேகரிக்கும் ஒரு பரலல் அமைப்பை உருவாக்குவோம்.
+Let's build a parallel system that gathers information from multiple sources simultaneously.
 
 ### Parallel Orchestrator
 
-**கோப்பு: `src/orchestrator/parallel_workflow.py`**
+**File: `src/orchestrator/parallel_workflow.py`**
 
 ```python
 from flask import Flask, request, jsonify
@@ -988,7 +990,7 @@ def research_parallel():
         }
     )
     
-    # அனைத்து ஏஜென்ட்களுக்கும் ஒரே நேரத்தில் அனுப்பவும்
+    # பகிர்தல்: அனைத்து முகவரிகளுக்கும் ஒரே நேரத்தில் அனுப்பு
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1023,9 +1025,9 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-###Aggregation Logic
+### Aggregation Logic
 
-**கோப்பு: `src/agents/aggregator/app.py`**
+**File: `src/agents/aggregator/app.py`**
 
 ```python
 from azure.servicebus import ServiceBusClient
@@ -1039,9 +1041,9 @@ servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
 )
 
-# ஒவ்வொரு பணிக்குமான முடிவுகளை கண்காணிக்கவும்
+# ஒவ்வொரு பணிக்கும் பெறுபேறுகளை கண்காணிக்க
 task_results = defaultdict(list)
-expected_agents = 4  # இணையம், கல்வி, செய்திகள், சமூக
+expected_agents = 4  # வலை, கல்வி, செய்தி, சமூக
 
 def process_result(message_data):
     """Aggregate results from parallel agents"""
@@ -1049,7 +1051,7 @@ def process_result(message_data):
     agent_type = message_data['agent_type']
     result = message_data['result']
     
-    # முடிவை சேமிக்கவும்
+    # முடிவை சேமிக்க
     task_results[task_id].append({
         'agent': agent_type,
         'data': result
@@ -1057,21 +1059,21 @@ def process_result(message_data):
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # எல்லா ஏஜென்ட்களும் முடித்துள்ளதா என்பதைச் சரிபார்க்கவும் (fan-in)
+    # அனைத்து ஏஜென்டுகளும் முடித்துள்ளனவா என்பதை சரிபார்க்க (fan-in)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
-        # முடிவுகளை ஒருங்கிணைக்கவும்
+        # முடிவுகளை ஒன்றிணைக்க
         aggregated = {
             'query': message_data['query'],
             'sources': task_results[task_id],
             'summary': generate_summary(task_results[task_id])
         }
         
-        # முடிந்ததாக குறிக்கவும்
+        # முடிக்கப்பட்டதாக குறிக்க
         state_manager.complete_task(task_id, aggregated)
         
-        # சுத்தம் செய்யவும்
+        # சுத்தம் செய்ய
         del task_results[task_id]
         
         print(f"✅ Aggregation complete for task {task_id}")
@@ -1103,32 +1105,32 @@ if __name__ == '__main__':
     main()
 ```
 
-**பரவல் மாதிரியின் நன்மைகள்:**
-- ⚡ **4x வேகமாக** (ஏஜென்ட் ஒன்றே நேரத்தில் இயங்கும்)
-- 🔄 **தவறுகள் பொறுப்பீடு** (பகுதி முடிவுகள் ஏற்றுக்கொள்ளப்படலாம்)
-- 📈 **அளவிடக்கூடியது** (மேலும் ஏஜென்டுகளை எளிதாக சேர்க்கலாம்)
+**Benefits of Parallel Pattern:**
+- ⚡ **4x faster** (agents run simultaneously)
+- 🔄 **Fault-tolerant** (partial results acceptable)
+- 📈 **Scalable** (add more agents easily)
 
 ---
 
-## நடைமுறை பயிற்சிகள்
+## Practical Exercises
 
-### பயிற்சி 1: Timeout கையாளுதலைச் சேர்க்கவும் ⭐⭐ (இடைநிலை)
+### Exercise 1: Add Timeout Handling ⭐⭐ (Medium)
 
-**நோக்கம்**: aggregartor மெதுவாக இருக்கும் ஏஜென்டுகளுக்காக எப்போதும் காத்திருக்காமலிருக்க timeout தர்க்கத்தை செயல்படுத்துதல்.
+**Goal**: Implement timeout logic so aggregator doesn't wait forever for slow agents.
 
-**படி பட்டியல்**:
+**Steps**:
 
-1. **aggregator இல் timeout கண்காணிப்பைச் சேர்க்கவும்:**
+1. **Add timeout tracking to aggregator:**
 
 ```python
 from datetime import datetime, timedelta
 
-task_timeouts = {}  # பணி_அடையாளம் -> காலாவதி_நேரம்
+task_timeouts = {}  # task_id -> expiration_time
 
 def process_result(message_data):
     task_id = message_data['task_id']
     
-    # முதல் முடிவுக்கு நேர வரம்பை அமைக்க
+    # முதல் முடிவுக்கு நேர எல்லையை அமைக்கவும்
     if task_id not in task_timeouts:
         task_timeouts[task_id] = datetime.utcnow() + timedelta(seconds=30)
     
@@ -1137,7 +1139,7 @@ def process_result(message_data):
         'data': message_data['result']
     })
     
-    # முழுமையானதா அல்லது காலாவதியாகியதா என்பதை சரிபார்க்க
+    # முழுமையானதா அல்லது காலாவதி ஆனதா என்பதைச் சரிபார்க்கவும்
     if len(task_results[task_id]) == expected_agents or \
        datetime.utcnow() > task_timeouts[task_id]:
         
@@ -1152,20 +1154,20 @@ def process_result(message_data):
         
         state_manager.complete_task(task_id, aggregated)
         
-        # சுத்தப்படுத்துதல்
+        # சுத்திகரிப்பு
         del task_results[task_id]
         del task_timeouts[task_id]
 ```
 
-2. **செயற்கை தாமதங்களை கொண்டு சோதிக்கவும்:**
+2. **Test with artificial delays:**
 
 ```python
-# ஒரு ஏஜெண்டில், மந்தமான செயலாக்கத்தை மாதிரிப்படுத்த தாமதம் சேர்க்கவும்
+# ஒரு ஏஜென்டில், மெதுவாக செயல்படுவதைக் காட்ட தாமதத்தைச் சேர்க்கவும்
 import time
-time.sleep(35)  # 30 விநாடி காலவெளியை மீறுகிறது
+time.sleep(35)  # 30-வினாடிகள் கால அவகாசத்தை மீறுகிறது
 ```
 
-3. **பயன்படுத்து மற்றும் சரிபார்க்கவும்:**
+3. **Deploy and verify:**
 
 ```bash
 azd deploy aggregator
@@ -1175,26 +1177,26 @@ curl -X POST $ORCHESTRATOR_URL/research-parallel \
   -H "Content-Type: application/json" \
   -d '{"query": "AI safety research"}'
 
-# 30 விநாடிகளுக்குப் பிறகு முடிவுகளை சரிபாரிக்கவும்
+# 30 விநாடிகள் கழித்து முடிவுகளை சரிபார்க்கவும்
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
-**✅ வெற்றி அளவுகோல்கள்:**
-- ✅ ஏஜென்டுகள் முழுமையற்றிருந்தாலும் 30 வினாடிகளுக்குப் பிறகு பணி முடிவடையும்
-- ✅ பதில் பகுதி முடிவுகளை குறிக்கும் (`"timed_out": true`)
-- ✅ கிடைக்கும் முடிவுகள் திருப்பி வழங்கப்படுகின்றன (4 இல் 3 ஏஜென்டுகள்)
+**✅ Success Criteria:**
+- ✅ Task completes after 30 seconds even if agents incomplete
+- ✅ Response indicates partial results (`"timed_out": true`)
+- ✅ Available results are returned (3 out of 4 agents)
 
-**நேரம்**: 20-25 நிமிடங்கள்
+**Time**: 20-25 minutes
 
 ---
 
-### பயிற்சி 2: Retry தர்க்கத்தை அமல்படுத்தவும் ⭐⭐⭐ (முன்னேறிய)
+### Exercise 2: Implement Retry Logic ⭐⭐⭐ (Advanced)
 
-**நோக்கம்**: தோல்வியடைந்த ஏஜென்ட் பணிகளை கைவிடும் முன் தானாக மறுபயற்சிகளை செய்யவும்.
+**Goal**: Retry failed agent tasks automatically before giving up.
 
-**படி பட்டியல்**:
+**Steps**:
 
-1. **ஒற்க்ஸ்ட்ரேட்டரில் retry கண்காணிப்பைச் சேர்க்கவும்:**
+1. **Add retry tracking to orchestrator:**
 
 ```python
 from dataclasses import dataclass
@@ -1205,7 +1207,7 @@ class RetryConfig:
     max_retries: int = 3
     backoff_seconds: int = 5
 
-retry_counts: Dict[str, int] = {}  # செய்தி_அடையாளம் -> மீள்முயற்சி_எண்ணிக்கை
+retry_counts: Dict[str, int] = {}  # செய்தி_அடையாளம் -> மறுமுயற்சி_எண்ணிக்கை
 
 def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
     """Send message with retry metadata"""
@@ -1225,7 +1227,7 @@ def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConf
         sender.send_messages(message)
 ```
 
-2. **ஏஜென்ட்களில் retry ஹேண்ட்லரைச் சேர்க்கவும்:**
+2. **Add retry handler to agents:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1233,7 +1235,7 @@ def process_with_retry(message, receiver, process_func):
     try:
         message_data = json.loads(str(message))
         
-        # செய்தியை செயலாக்கு
+        # செய்தியை செயலாக்கவும்
         process_func(message_data)
         
         # வெற்றி - முடிந்தது
@@ -1245,18 +1247,18 @@ def process_with_retry(message, receiver, process_func):
         max_retries = message_data.get('max_retries', 3)
         
         if retry_count < max_retries:
-            # மீண்டும் முயற்சி: விட்டு வைக்கவும் மற்றும் எண்ணிக்கையை அதிகரித்து மீண்டும் வரிசையில் சேர்க்கவும்
+            # மீண்டும் முயற்சி: தற்போதையதை விட்டு, எண்ணிக்கையை ஒரு கட்ட உயர்த்தி மீண்டும் வரிசையில் சேர்க்கவும்
             print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
             
             message_data['retry_count'] = retry_count + 1
             
-            # அதே வரிசைக்கு தாமதத்துடன் அனுப்பவும்
-            time.sleep(5 * (retry_count + 1))  # எக்ஸ்போனென்ஷியல் பின்தள்ளல்
+            # அதே வரிசைக்கு தாமதத்துடன் திருப்பி அனுப்பவும்
+            time.sleep(5 * (retry_count + 1))  # மடங்கு அடைவான தாமதம்
             send_with_retry(queue_name, message_data, RetryConfig())
             
             receiver.complete_message(message)  # மூலத்தை அகற்று
         else:
-            # அதிகபட்ச மீண்டும் முயற்சிகள் மீறியுள்ளன - இறந்த கடித வரிசைக்கு நகர்த்தவும்
+            # அதிகபட்ச மீண்டும் முயற்சிகள் மீறியது - மரணக் கடித வரிசைக்கு நகர்த்தவும்
             print(f"❌ Max retries exceeded for message {message_id}")
             receiver.dead_letter_message(
                 message,
@@ -1265,7 +1267,7 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **dead letter queue ஐ கண்காணிக்கவும்:**
+3. **Monitor dead letter queue:**
 
 ```python
 def monitor_dead_letters():
@@ -1283,23 +1285,23 @@ def monitor_dead_letters():
             print(f"Description: {message.dead_letter_error_description}")
 ```
 
-**✅ வெற்றி அளவுகோல்கள்:**
-- ✅ தோல்வியடைந்த பணிகள் தானாக மறுபயிற்சி செய்யப்படும் (அதிகம் 3 முறை வரை)
-- ✅ மறுபயிற்சிகளுக்கு இடையில் உயர்ந்த விகிதமான பின்னடைவு (5s, 10s, 15s)
-- ✅ அதிகபட்ச retry பிறகு, செய்திகள் dead letter queue க்கு செல்கின்றன
-- ✅ dead letter queue கண்காணிக்கவும் மறுகிடைக்கும் திறன் உள்ளது
+**✅ Success Criteria:**
+- ✅ Failed tasks retry automatically (up to 3 times)
+- ✅ Exponential backoff between retries (5s, 10s, 15s)
+- ✅ After max retries, messages go to dead letter queue
+- ✅ Dead letter queue can be monitored and replayed
 
-**நேரம்**: 30-40 நிமிடங்கள்
+**Time**: 30-40 minutes
 
 ---
 
-### பயிற்சி 3: Circuit Breaker ஐ செயல்படுத்தவும் ⭐⭐⭐ (முன்னேறிய)
+### Exercise 3: Implement Circuit Breaker ⭐⭐⭐ (Advanced)
 
-**நோக்கம்**: தோல்வி அடிக்கடி நிகழும்போது ஒற்றை ஏஜென்டுக்கு கோரிக்கைகளை நிறுத்தி சங்கிலி தோல்விகளைத் தடுக்க circuit breaker ஐ உருவாக்குதல்.
+**Goal**: Prevent cascading failures by stopping requests to failing agents.
 
-**படி பட்டியல்**:
+**Steps**:
 
-1. **circuit breaker வகுப்பை உருவாக்கவும்:**
+1. **Create circuit breaker class:**
 
 ```python
 from enum import Enum
@@ -1307,8 +1309,8 @@ from datetime import datetime, timedelta
 
 class CircuitState(Enum):
     CLOSED = "closed"      # சாதாரண செயல்பாடு
-    OPEN = "open"          # தோல்வி நிலையில், கோரிக்கைகளை நிராகரிக்கவும்
-    HALF_OPEN = "half_open"  # மீண்டியதா என்பதை சோதிக்கவும்
+    OPEN = "open"          # தோல்வியில் உள்ளது, கோரிக்கைகளை நிராகரிக்கவும்
+    HALF_OPEN = "half_open"  # மீண்டு உள்ளதா என்பதை சோதிக்கிறது
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1321,7 +1323,7 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # டைம்அவுட் காலம் முடிந்ததா என்பதைச் சரிபார்க்கவும்
+            # நேர எல்லை காலாவதானதா என்பதை சரிபார்க்கவும்
             if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
@@ -1350,10 +1352,10 @@ class CircuitBreaker:
             raise e
 ```
 
-2. **ஏஜென்ட் அழைப்புகளில் பயன்படுத்தவும்:**
+2. **Apply to agent calls:**
 
 ```python
-# ஆர்கெஸ்ட்ரேட்டரில்
+# ஒழுங்குபடுத்தியில்
 agent_circuits = {
     'web': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
     'academic': CircuitBreaker(failure_threshold=5, timeout_seconds=60),
@@ -1372,13 +1374,13 @@ def send_to_agent(agent_type, message_data):
         # மற்ற ஏஜென்ட்களுடன் தொடரவும்
 ```
 
-3. **circuit breaker ஐ சோதிக்கவும்:**
+3. **Test circuit breaker:**
 
 ```bash
 # மீண்டும் மீண்டும் தோல்விகளை சிமுலேட் செய்யவும் (ஒரு ஏஜெண்டை நிறுத்தவும்)
 az containerapp stop --name web-research-agent --resource-group rg-agents
 
-# பல கோரிக்கைகளை அனுப்பவும்
+# பல கோரிக்கைகள் அனுப்பவும்
 for i in {1..10}; do
   curl -X POST $ORCHESTRATOR_URL/research-parallel \
     -H "Content-Type: application/json" \
@@ -1386,26 +1388,26 @@ for i in {1..10}; do
   sleep 2
 done
 
-# பதிவுகளை சரிபார்க்கவும் - 5 தோல்விகளுக்குப் பிறகு சர்க்கெட் திறந்துவிடுவதை காண வேண்டும்
-# Container App பதிவுகளுக்கு Azure CLI ஐ பயன்படுத்தவும்:
+# லாக்களை சரிபார்க்கவும் - 5 தோல்விகளுக்குப் பிறகு சர்க்யூட் திறந்திருப்பதை காண வேண்டும்
+# Container App பதிவுகளுக்கு Azure CLI-ஐப் பயன்படுத்தவும்:
 az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
 ```
 
-**✅ வெற்றி அளவுகோல்கள்:**
-- ✅ 5 தோல்விகளுக்குப் பிறகு circuit திறக்கப்படும் (கோரிக்கைகளை நிராகரிக்கும்)
-- ✅ 60 வினாடிகள் கழித்தால் circuit ஒரு அரை-திறப்பு நிலைக்கு வந்து மீட்பை சோதிக்கும்
-- ✅ மற்ற ஏஜென்டுகள் சாதாரணமாகவே தொடர்ந்தும் செயல்படுகின்றன
-- ✅ ஏஜென்ட் மீண்டதும் circuit தானாக மூடப்படும்
+**✅ Success Criteria:**
+- ✅ After 5 failures, circuit opens (rejects requests)
+- ✅ After 60 seconds, circuit goes half-open (tests recovery)
+- ✅ Other agents continue working normally
+- ✅ Circuit closes automatically when agent recovers
 
-**நேரம்**: 40-50 நிமிடங்கள்
+**Time**: 40-50 minutes
 
 ---
 
-## கண்காணிப்பு மற்றும் பிழைதிருத்தல்
+## Monitoring and Debugging
 
-### Application Insights மூலம் விநியோகப்பட்ட டிரேசிங்
+### Distributed Tracing with Application Insights
 
-**கோப்பு: `src/shared/tracing.py`**
+**File: `src/shared/tracing.py`**
 
 ```python
 from opencensus.ext.azure.log_exporter import AzureLogHandler
@@ -1416,7 +1418,7 @@ from opencensus.trace.samplers import AlwaysOnSampler
 import logging
 import os
 
-# டிரேசிங்கை கட்டமைக்கவும்
+# டிரேசிங்கை அமைக்கவும்
 config_integration.trace_integrations(['requests', 'logging'])
 
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
@@ -1427,7 +1429,7 @@ tracer = Tracer(
     sampler=AlwaysOnSampler()
 )
 
-# லாகிங்கை கட்டமைக்கவும்
+# லாக்கிங்கை அமைக்கவும்
 logger = logging.getLogger(__name__)
 logger.addHandler(AzureLogHandler(connection_string=connection_string))
 logger.setLevel(logging.INFO)
@@ -1449,9 +1451,9 @@ def trace_agent_call(agent_name, task_id, operation):
             raise
 ```
 
-### Application Insights கேள்விகள்
+### Application Insights Queries
 
-**பல-ஏஜென்ட் பணிச்சுழற்சிகளை கண்காணிக்க:**
+**Track multi-agent workflows:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1461,7 +1463,7 @@ traces
 | order by timestamp asc
 ```
 
-**ஏஜென்ட் செயல்திறன் ஒப்புமை:**
+**Agent performance comparison:**
 
 ```kusto
 // Compare agent execution times
@@ -1475,7 +1477,7 @@ dependencies
 | order by avg_duration desc
 ```
 
-**தோல்வி பகுப்பாய்வு:**
+**Failure analysis:**
 
 ```kusto
 // Find which agents fail most
@@ -1490,11 +1492,11 @@ exceptions
 
 ---
 
-## செலவு பகுப்பாய்வு
+## Cost Analysis
 
-### பல-ஏஜென்ட் அமைப்பு செலவுகள் (மாதாந்திர மதிப்பீடுகள்)
+### Multi-Agent System Costs (Monthly Estimates)
 
-| கூறு | கட்டமைப்பு | செலவு |
+| Component | Configuration | Cost |
 |-----------|--------------|------|
 | **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
 | **4 Agents** | 4 Container Apps (0.5 vCPU, 1GB each) | $60-120 |
@@ -1502,12 +1504,12 @@ exceptions
 | **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
 | **Blob Storage** | 10GB storage, 100K operations | $5-10 |
 | **Application Insights** | 5GB ingestion | $10-15 |
-| **Azure OpenAI** | GPT-4, 10M tokens | $100-300 |
-| **மொத்தம்** | | **$240-565/மாதம்** |
+| **Microsoft Foundry Models** | gpt-4.1, 10M tokens | $100-300 |
+| **Total** | | **$240-565/month** |
 
-### செலவு மிச்சப்படுத்தும் தந்திரங்கள்
+### Cost Optimization Strategies
 
-1. **சாத்தியமான இடங்களில் serverless ஐ பயன்படுத்தவும்:**
+1. **Use serverless where possible:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1516,7 +1518,7 @@ exceptions
    }
    ```
 
-2. **ஏஜென்டுகளை idle இருக்கும் போது பூஜ்யத்துக்கு அளவை மாற்றவும்:**
+2. **Scale agents to zero when idle:**
    ```bicep
    scale: {
      minReplicas: 0  // Scale to zero when no messages
@@ -1524,102 +1526,103 @@ exceptions
    }
    ```
 
-3. **Service Bus க்கு பேட்சிங் பயன்படுத்தவும்:**
+3. **Use batching for Service Bus:**
    ```python
-   # செய்திகளை தொகுதியாக அனுப்பவும் (குறைந்த செலவு)
+   # செய்திகளை தொகுதியாக அனுப்புங்கள் (குறைந்த செலவு)
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **அடிக்கடி பயன்படும் முடிவுகளை கேஷ் செய்யவும்:**
+4. **Cache frequently used results:**
    ```python
-   # Azure Cache for Redis ஐப் பயன்படுத்தவும்
+   # Azure Cache for Redis-ஐ பயன்படுத்தவும்
    if cache.exists(query_hash):
        return cache.get(query_hash)
    ```
 
 ---
 
-## சிறந்த நடைமுறைகள்
+## Best Practices
 
-### ✅ செய்யவேண்டியது:
+### ✅ DO:
 
-1. **மறுநடமை (idempotent) செயல்பாடுகளைப் பயன்படுத்தவும்**
+1. **Use idempotent operations**
    ```python
-   # ஏஜென்ட் ஒரே செய்தியை பலமுறை பாதுகாப்பாக செயலாக்கலாம்
+   # ஏஜென்ட் ஒரே செய்தியை பலமுறை பாதுகாப்பாக செயலாக்க முடியும்
    def process_task(task_id):
        if state_manager.task_exists(task_id):
            print(f"Task {task_id} already processed, skipping")
            return
-       # பணியை செயலாக்குகிறேன்...
+       # பணியை செயலாக்க...
    ```
 
-2. **விரிவான லாகிங் அமைப்பை செயல்படுத்தவும்**
+2. **Implement comprehensive logging**
    ```python
    logger.info(f"Agent: {agent_name}, Task: {task_id}, Action: {action}")
    ```
 
-3. **பிணைப்பு ID களை (correlation IDs) பயன்படுத்தவும்**
+3. **Use correlation IDs**
    ```python
-   # task_id ஐ முழு வேலை ஓட்டத்தின் வழியாக கடத்தவும்
+   # task_id ஐ முழு வேலைநெறியில் கடத்தவும்
    message_data = {
-       'task_id': task_id,  # ஒத்திசைப்பு அடையாளம்
+       'task_id': task_id,  # இணைப்புக் குறியீடு
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
 
-4. **செய்திகளுக்கான TTL (time-to-live) அமைக்கவும்**
+4. **Set message TTL (time-to-live)**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **dead letter queues களை கண்காணிக்கவும்**
+5. **Monitor dead letter queues**
    ```python
-   # தோல்வியடைந்த செய்திகள் பற்றிய சீரான கண்காணிப்பு
+   # தோல்வியடைந்த செய்திகளின் வழக்கமான கண்காணிப்பு
    monitor_dead_letters()
    ```
 
-### ❌ செய்ய வேண்டாம்:
+### ❌ DON'T:
 
-1. **சுழற்சி சார்ந்த சார்புகளை (circular dependencies) உருவாக்காதீர்கள்**
+1. **Don't create circular dependencies**
    ```python
-   # ❌ தவறு: ஏஜென்ட் A → ஏஜென்ட் B → ஏஜென்ட் A (முடிவற்ற சுற்று)
-   # ✅ நல்லது: தெளிவான திசைபடுத்தப்பட்ட சுழற்சி இல்லா வரைபடத்தை (DAG) வரையுங்கள்
+   # ❌ தவறு: ஏஜென்ட் A → ஏஜென்ட் B → ஏஜென்ட் A (முடிவில்லா சுழற்சி)
+   # ✅ சிறந்தது: தெளிவான திசையிடப்பட்ட சுழற்சி இல்லாத வரைபடத்தை வரையறுக்கவும் (DAG)
    ```
 
-2. **ஏஜென்ட் த்ரெட்களை தடுத்துவிடாதீர்கள்**
+2. **Don't block agent threads**
    ```python
-   # ❌ தவறு: ஒத்திசை காத்திருத்தல்
+   # ❌ மோசம்: ஒத்திசையாக காத்திருதல்
    while not task_complete:
        time.sleep(1)
    
    # ✅ நல்லது: செய்தி வரிசை கால்பேக்குகளை பயன்படுத்தவும்
    ```
 
-3. **பகுதி தோல்விகளை புறக்கணிக்காதீர்கள்**
+3. **Don't ignore partial failures**
    ```python
-   # ❌ மோசம்: ஒரு ஏஜென்ட் தோல்வியடைந்தால் முழு வேலைநடை தோல்வியாகும்
-   # ✅ நல்லது: பிழை குறியீடுகளுடன் பகுதி முடிவுகளை திருப்பி வழங்கவும்
+   # ❌ மோசம்: ஒரு ஏஜெண்ட் தோல்வியடையும் போது முழு செயல்முறையை தோல்வியாக்குவது
+   # ✅ நல்லது: பிழை குறியீடுகளுடன் பகுதி முடிவுகளை வழங்குதல்
    ```
 
-4. **முடிவில்லா மறுபயிற்சிகளை பயன்படுத்தாதீர்கள்**
+4. **முடிவற்ற மீண்டும் முயற்சிகளை பயன்படுத்த வேண்டாம்**
    ```python
-   # ❌ மோசம்: முடிவில்லாமல் மீண்டும் முயற்சி செய்வது
-   # ✅ நல்லது: max_retries = 3, பின்னர் dead-letter க்கு அனுப்புக
+   # ❌ மோசம்: நிரந்தரமாக மீண்டும் முயற்சி செய்யும்
+   # ✅ நல்லது: max_retries = 3, பின்னர் dead-letter க்கு நகர்க்கப்படும்
    ```
 
 ---
-## பிரச்சனை தீர்க்கும் கையேடு
 
-### பிரச்சனை: செய்திகள் வரிசையில் சிக்கியது
+## பிரச்சனை தீர்க்கும் வழிகாட்டி
+
+### பிரச்சனை: செய்திகள் வரிசையில் சிக்கியிருக்கின்றன
 
 **அறிகுறிகள்:**
-- செய்திகள் வரிசையில் சேகரிக்கின்றன
-- ஏஜென்டுகள் செயல்படவில்லை
-- பணி நிலை "pending" இல் சிக்கியுள்ளது
+- செய்திகள் வரிசையில் சேர்ந்து நிற்கின்றன
+- ஏஜெண்ட்கள் செயல்படவில்லை
+- பணியின் நிலை "pending"-இல் சிக்கியுள்ளது
 
-**காரணம்:**
+**பரிசோதனை:**
 ```bash
 # வரிசை ஆழத்தை சரிபார்க்கவும்
 az servicebus queue show \
@@ -1627,13 +1630,13 @@ az servicebus queue show \
   --name research-tasks \
   --query "countDetails"
 
-# Azure CLIஐ பயன்படுத்தி ஏஜென்ட் பதிவுகளை சரிபார்க்கவும்
+# Azure CLI பயன்படுத்தி ஏஜென்ட் பதிவுகளை சரிபார்க்கவும்
 az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
 **தீர்வுகள்:**
 
-1. **ஏஜென்ட் நகல்களை அதிகப்படுத்தவும்:**
+1. **ஏஜெண்ட் பிரதிகளை அதிகரிக்கவும்:**
    ```bash
    az containerapp update \
      --name research-agent \
@@ -1641,7 +1644,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
      --max-replicas 10
    ```
 
-2. **dead letter queue ஐ சரிபார்க்கவும்:**
+2. **டெட்-லெட்டர் வரிசையை சரிபார்க்கவும்:**
    ```bash
    az servicebus queue show \
      --namespace-name mybus \
@@ -1651,14 +1654,14 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### பிரச்சனை: பணி நேரஅவரம் அல்லது முடிவடையாதது
+### பிரச்சனை: பணி நேரஅவகாசம்/எப்போதும் முடிவடையவில்லை
 
 **அறிகுறிகள்:**
-- பணி நிலை "in_progress" நிலையில் தங்கியிருக்கும்
-- சில ஏஜென்டுகள் முடிகின்றன, மற்றவை முடிகவில்லை
-- பிழை செய்திகள் எதுவும் இல்லை
+- பணியின் நிலை "in_progress" தான் இருந்து கொண்டிருக்கிறது
+- சில ஏஜெண்ட்கள் முடிவடைகின்றன, மற்றவை முடியவில்லை
+- பிழை செய்திகள் இல்லை
 
-**காரணம்:**
+**பரிசோதனை:**
 ```bash
 # பணியின் நிலையை சரிபார்க்கவும்
 curl $ORCHESTRATOR_URL/task/$TASK_ID
@@ -1669,18 +1672,18 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 **தீர்வுகள்:**
 
-1. **aggregator-இல் timeout ஐ அமல்படுத்தவும் (Exercise 1)**
+1. **ஒருங்கிணைப்பாளியில் நேரஅவகாசத்தை செயல்படுத்தவும் (Exercise 1)**
 
-2. **Azure Monitor பயன்படுத்தி ஏஜென்ட் தோல்விகளை சரிபார்க்கவும்:**
+2. **Azure Monitor பயன்படுத்தி ஏஜெண்ட் தோல்விகளுக்கு சரிபார்க்கவும்:**
    ```bash
-   # azd monitor மூலம் பதிவுகளை பார்க்கவும்
+   # azd monitor மூலம் பதிவுகளைப் பார்க்கவும்
    azd monitor --logs
    
-   # அல்லது குறிப்பிட்ட container app பதிவுகளை சரிபார்க்க Azure CLI ஐப் பயன்படுத்தவும்
+   # அல்லது Azure CLI-ஐ பயன்படுத்தி குறிப்பிட்ட கண்டெய்னர் செயலியின் பதிவுகளைச் சரிபார்க்கவும்
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
-3. **அனைத்து ஏஜென்ட்களும் இயங்குகின்றன என்பதை சரிபார்க்கவும்:**
+3. **அனைத்து ஏஜெண்ட்களும் இயங்குகின்றனவா என்பதை உறுதிப்படுத்தவும்:**
    ```bash
    az containerapp list \
      --resource-group rg-agents \
@@ -1689,7 +1692,7 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## மேலும் படிக்க
+## மேலும் அறிய
 
 ### அதிகாரப்பூர்வ ஆவணங்கள்
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
@@ -1697,42 +1700,42 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
 - [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
 
-### இந்த பாடத்திட்டத்தில் அடுத்த படிகள்
+### இந்த பாடநெறியில் அடுத்த படிகள்
 - ← முந்தையது: [Capacity Planning](capacity-planning.md)
-- → அடுத்து: [SKU Selection](sku-selection.md)
+- → அடுத்தது: [SKU Selection](sku-selection.md)
 - 🏠 [பாடநெறி முகப்பு](../../README.md)
 
-### தொடர்புடைய எடுத்துக்காட்டுகள்
-- [Microservices Example](../../../../examples/microservices) - சேவை தொடர்பு வடிவங்கள்
-- [Azure OpenAI Example](../../../../examples/azure-openai-chat) - AI ஒருங்கிணைப்பு
+### தொடர்புடைய உதாரணங்கள்
+- [Microservices Example](../../../../examples/microservices) - சேவை தொடர்பு மாதிரிகள்
+- [Microsoft Foundry Models Example](../../../../examples/azure-openai-chat) - AI ஒருங்கிணைப்பு
 
 ---
 
 ## சுருக்கம்
 
-**நீங்கள் கற்றுக்கொண்டவை:**
-- ✅ ஐந்து ஒருங்குமுறை மாதிரிகள் (sequential, parallel, hierarchical, event-driven, consensus)
+**நீங்கள் கற்றுக்கொண்டீர்கள்:**
+- ✅ ஐந்து ஒத்துழைப்பு மாதிரிகள் (sequential, parallel, hierarchical, event-driven, consensus)
 - ✅ Azure இல் பல-ஏஜென்ட் கட்டமைப்பு (Service Bus, Cosmos DB, Container Apps)
-- ✅ விநியோகிக்கப்பட்ட ஏஜென்டுகளுக்கு இடையிலான நிலை நிர்வகிப்பு
-- ✅ Timeout நிர்வாகம், retries, மற்றும் circuit breakers
-- ✅ விநியோகிக்கப்பட்ட அமைப்புகளை கண்காணித்தலும் பிழைநிருத்தலும்
-- ✅ செலவு மேம்படுத்தும் நெறிமுறைகள்
+- ✅ பங்குபடுத்தப்பட்ட ஏஜெண்டுகளுக்கு இடையே நிலை மேலாண்மை
+- ✅ நேரஅவகாசம் கையாளுதல், மீண்டும் முயற்சிகள், மற்றும் circuit breakers
+- ✅ பகிரப்பட்ட அமைப்புகளை கண்காணித்து பிழைதிருத்தல்
+- ✅ செலவு சிறப்பித்தல் வழிமுறைகள்
 
-**முக்கியமான அம்சங்கள்:**
-1. **சரியான மாதிரியை தேர்ந்தெடுக்கவும்** - ஒழுங்குபடுத்தப்பட்ட வேலைபட்டிகளுக்கு sequential, வேகத்திற்கு parallel, நெகிழ்வுத்திறனுக்காக event-driven
-2. **நிலையை கவனமாக நிர்வகிக்கவும்** - பகிரப்பட்ட நிலைக்காக Cosmos DB அல்லது இதரவற்றைப் பயன்படுத்துங்கள்
-3. **தோல்விகளை மென்மையாக கையாளுங்கள்** - Timeouts, retries, circuit breakers, dead letter queues
-4. **எல்லாவற்றையும் கண்காணிக்கவும்** - விநியோகிக்கப்பட்ட தடயங்கள் (distributed tracing) பிழைநிருத்தத்திற்கு அவசியம்
-5. **செலவுகளை சிறப்பாக்கவும்** - Scale to zero, use serverless, implement caching
+**முக்கிய எடுத்துக்காட்டுக்கள்:**
+1. **சரியான முறைமையை தேர்ந்தெடுங்கள்** - ஒழுங்கு செய்யப்பட்ட வேலைப்பாய்ச்சலுக்கு sequential, வேகத்திற்கு parallel, நெகிழ்விற்கு event-driven
+2. **நிலையை கவனமாக நிர்வகிக்கவும்** - பகிரப்பட்ட நிலைக்கு Cosmos DB அல்லது இதரவை பயன்படுத்தவும்
+3. **தோல்விகளை மிதமாக கையாளவும்** - Timeouts, retries, circuit breakers, dead-letter queues
+4. **எல்லாவற்றையும் கண்காணிக்கவும்** - பிழைதிருத்தத்திற்காக distributed tracing அவசியம்
+5. **செலவுகளை சிறப்பிக்கவும்** - Scale to zero, serverless பயன்படுத்தவும், caching செயல்படுத்தவும்
 
 **அடுத்த படிகள்:**
-1. நடைமுறைப் பயிற்சிகளை முடிக்கவும்
-2. உங்கள் பயன்பாட்டு நிலைக்கு ஒரு பல-ஏஜென்ட் அமைப்பை கட்டியமைக்கவும்
-3. செயல்திறன் மற்றும் செலவை மேம்படுத்த [SKU Selection](sku-selection.md) ஐப் படியுங்கள்
+1. பணிசார் பயிற்சிகளை முடிக்கவும்
+2. உங்கள் பயன்பாட்டிற்காக பல-ஏஜெண்ட் சிஸ்டத்தை உருவாக்கவும்
+3. செயல்திறன் மற்றும் செலவை சிறப்பிக்க [SKU Selection](sku-selection.md) ஐ படியுங்கள்
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-அறிவுறுத்தல்:
-இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவை [Co-op Translator](https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டது. நாங்கள் துல்லியத்திற்காக முயற்சிக்கிறோம்; இருந்தாலும், தானாக செய்யப்பட்ட மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறுகள் இருக்கலாம் என்பதை தயவுசெய்து கவனத்தில் கொள்ளுங்கள். சொந்த மொழியில் உள்ள அசல் ஆவணம் அதிகாரப்பூர்வ ஆதாரம் என கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பை பயன்படுத்த பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பைப் பயன்படுத்துவதால் ஏற்பட்ட எந்தவொரு தவறான புரிதல்கள் அல்லது தவறான விளக்கங்களுக்கு நாங்கள் பொறுப்பேற்க மாட்டோம்.
+மறுப்பு:
+இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவை Co‑op Translator (https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயற்சித்தாலும், தானியங்கி மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறான பொருள் விளைவுகள் இருக்கலாம் என்பதை தயவுசெய்து கவனிக்கவும். அசல் ஆவணம் அதன் சொந்த மொழியில் அதிகாரபூர்வ ஆதாரமாக கருதப்படும். முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பாளர் மூலம் மொழிபெயர்ப்பு செய்ய பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பைப் பயன்படுத்துவதால் ஏற்பட்டுவிடக்கூடிய எந்தவொரு தவறான புரிதல்களுக்கும் அல்லது தவறான விளக்கங்களுக்குமான பொறுப்பேற்பதற்கு நாங்கள் பொறுப்பல்ல.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

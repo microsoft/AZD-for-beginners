@@ -1,51 +1,51 @@
 # Ejemplos - Plantillas y Configuraciones Prácticas de AZD
 
-**Aprender por Ejemplo - Organizado por Capítulo**
-- **📚 Inicio del Curso**: [AZD Para Principiantes](../README.md)
-- **📖 Mapeo por Capítulos**: Ejemplos organizados por complejidad de aprendizaje
-- **🚀 Ejemplo Local**: [Solución Minorista Multi-Agente](retail-scenario.md)
-- **🤖 Ejemplos Externos de IA**: Enlaces a repositorios de Azure Samples
+**Aprender con Ejemplos - Organizado por Capítulo**
+- **📚 Inicio del curso**: [AZD para principiantes](../README.md)
+- **📖 Mapeo de capítulos**: Ejemplos organizados por complejidad de aprendizaje
+- **🚀 Ejemplo local**: [Solución minorista multiagente](retail-scenario.md)
+- **🤖 Ejemplos externos de IA**: Enlaces a repositorios de Azure Samples
 
-> **📍 IMPORTANTE: Ejemplos Locales vs Externos**  
+> **📍 IMPORTANTE: Ejemplos locales vs externos**  
 > Este repositorio contiene **4 ejemplos locales completos** con implementaciones completas:  
-> - **Azure OpenAI Chat** (implementación de GPT-4 con interfaz de chat)  
-> - **Container Apps** (API Flask simple + Microservicios)  
-> - **Aplicación con Base de Datos** (Web + Base de Datos SQL)  
-> - **Retail Multi-Agent** (Solución de IA empresarial)  
+> - **Microsoft Foundry Models Chat** (despliegue gpt-4.1 con interfaz de chat)  
+> - **Container Apps** (API Flask simple + microservicios)  
+> - **Aplicación de base de datos** (Web + base de datos SQL)  
+> - **Retail Multi-Agent** (solución empresarial de IA)  
 >  
-> Ejemplos adicionales son **referencias externas** a repositorios de Azure-Samples que puedes clonar.
+> Ejemplos adicionales son **referencias externas** a repositorios Azure-Samples que puedes clonar.
 
 ## Introducción
 
-Este directorio proporciona ejemplos prácticos y referencias para ayudarte a aprender Azure Developer CLI mediante práctica práctica. El escenario Retail Multi-Agent es una implementación completa y lista para producción incluida en este repositorio. Ejemplos adicionales hacen referencia a Azure Samples oficiales que demuestran varios patrones de AZD.
+Este directorio proporciona ejemplos prácticos y referencias para ayudarte a aprender Azure Developer CLI mediante práctica directa. El escenario Retail Multi-Agent es una implementación completa y lista para producción incluida en este repositorio. Ejemplos adicionales hacen referencia a Azure Samples oficiales que demuestran varios patrones de AZD.
 
-### Leyenda de Clasificación de Complejidad
+### Leyenda de valoración de complejidad
 
 - ⭐ **Principiante** - Conceptos básicos, servicio único, 15-30 minutos
 - ⭐⭐ **Intermedio** - Múltiples servicios, integración de base de datos, 30-60 minutos
 - ⭐⭐⭐ **Avanzado** - Arquitectura compleja, integración de IA, 1-2 horas
 - ⭐⭐⭐⭐ **Experto** - Listo para producción, patrones empresariales, 2+ horas
 
-## 🎯 Qué Hay Realmente en Este Repositorio
+## 🎯 Qué hay realmente en este repositorio
 
-### ✅ Implementación Local (Lista para Usar)
+### ✅ Implementación local (lista para usar)
 
-#### [Aplicación de Chat Azure OpenAI](azure-openai-chat/README.md) 🆕
-**Implementación completa de GPT-4 con interfaz de chat incluida en este repo**
+#### [Aplicación de chat Microsoft Foundry Models](azure-openai-chat/README.md) 🆕
+**Despliegue completo de gpt-4.1 con interfaz de chat incluido en este repo**
 
 - **Ubicación:** `examples/azure-openai-chat/`
 - **Complejidad:** ⭐⭐ (Intermedio)
 - **Incluye:**
-  - Implementación completa de Azure OpenAI (GPT-4)
-  - Interfaz de chat de línea de comandos en Python
-  - Integración con Key Vault para claves de API seguras
-  - Plantillas de infraestructura en Bicep
-  - Uso de tokens y seguimiento de costos
+  - Despliegue completo de Microsoft Foundry Models (gpt-4.1)
+  - Interfaz de chat por línea de comandos en Python
+  - Integración con Key Vault para claves API seguras
+  - Plantillas de infraestructura Bicep
+  - Seguimiento de uso de tokens y costos
   - Limitación de tasa y manejo de errores
 
-**Inicio Rápido:**
+**Inicio rápido:**
 ```bash
-# Navegar al ejemplo
+# Navegar a ejemplo
 cd examples/azure-openai-chat
 
 # Desplegar todo
@@ -56,64 +56,64 @@ pip install -r src/requirements.txt
 python src/chat.py
 ```
 
-**Tecnologías:** Azure OpenAI, GPT-4, Key Vault, Python, Bicep
+**Tecnologías:** Microsoft Foundry Models, gpt-4.1, Key Vault, Python, Bicep
 
 #### [Ejemplos de Container App](container-app/README.md) 🆕
-**Ejemplos integrales de despliegue de contenedores incluidos en este repo**
+**Ejemplos completos de despliegue de contenedores incluidos en este repo**
 
 - **Ubicación:** `examples/container-app/`
-- **Complejidad:** ⭐-⭐⭐⭐⭐ (Principiante a Avanzado)
+- **Complejidad:** ⭐-⭐⭐⭐⭐ (De principiante a avanzado)
 - **Incluye:**
-  - [Guía Maestra](container-app/README.md) - Visión completa de despliegues de contenedores
-  - [Simple Flask API](../../../examples/container-app/simple-flask-api) - Ejemplo básico de API REST
-  - [Arquitectura de Microservicios](../../../examples/container-app/microservices) - Despliegue multi-servicio listo para producción
-  - Patrones de Inicio Rápido, Producción y Avanzados
-  - Monitoreo, seguridad y optimización de costos
+  - [Guía maestra](container-app/README.md) - Vista general completa de despliegues de contenedores
+  - [API Flask simple](../../../examples/container-app/simple-flask-api) - Ejemplo básico de API REST
+  - [Arquitectura de microservicios](../../../examples/container-app/microservices) - Despliegue multi-servicio listo para producción
+  - Inicio rápido, patrones de producción y avanzados
+  - Monitorización, seguridad y optimización de costos
 
-**Inicio Rápido:**
+**Inicio rápido:**
 ```bash
-# Ver la guía maestra
+# Ver guía principal
 cd examples/container-app
 
-# Desplegar una API simple de Flask
+# Desplegar API simple de Flask
 cd simple-flask-api
 azd up
 
-# Desplegar un ejemplo de microservicios
+# Ejemplo de despliegue de microservicios
 cd ../microservices
 azd up
 ```
 
 **Tecnologías:** Azure Container Apps, Docker, Python Flask, Node.js, C#, Go, Application Insights
 
-#### [Solución Minorista Multi-Agente](retail-scenario.md) 🆕
+#### [Solución minorista multiagente](retail-scenario.md) 🆕
 **Implementación completa lista para producción incluida en este repo**
 
 - **Ubicación:** `examples/retail-multiagent-arm-template/`
 - **Complejidad:** ⭐⭐⭐⭐ (Avanzado)
 - **Incluye:**
-  - Plantilla de despliegue ARM completa
-  - Arquitectura multi-agente (Cliente + Inventario)
-  - Integración con Azure OpenAI
+  - Plantilla ARM completa para despliegue
+  - Arquitectura multiagente (Cliente + Inventario)
+  - Integración Microsoft Foundry Models
   - Búsqueda AI con RAG
-  - Monitoreo integral
-  - Script de despliegue con un solo clic
+  - Monitorización integral
+  - Script de despliegue con un clic
 
-**Inicio Rápido:**
+**Inicio rápido:**
 ```bash
 cd examples/retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-**Tecnologías:** Azure OpenAI, AI Search, Container Apps, Cosmos DB, Application Insights
+**Tecnologías:** Microsoft Foundry Models, AI Search, Container Apps, Cosmos DB, Application Insights
 
 ---
 
-## 🔗 Ejemplos Externos de Azure Samples (Clonar para Usar)
+## 🔗 Azure Samples externos (Clonar para usar)
 
-Los siguientes ejemplos se mantienen en repositorios oficiales de Azure-Samples. Clónalos para explorar diferentes patrones de AZD:
+Los siguientes ejemplos se mantienen en repositorios oficiales Azure-Samples. Clónalos para explorar diferentes patrones de AZD:
 
-### Aplicaciones Simples (Capítulos 1-2)
+### Aplicaciones simples (Capítulos 1-2)
 
 | Plantilla | Repositorio | Complejidad | Servicios |
 |:---------|:-----------|:-----------|:---------|
@@ -125,7 +125,7 @@ Los siguientes ejemplos se mantienen en repositorios oficiales de Azure-Samples.
 
 **Cómo usar:**
 ```bash
-# Clonar cualquier ejemplo
+# Clona cualquier ejemplo
 git clone https://github.com/Azure-Samples/todo-nodejs-mongo
 cd todo-nodejs-mongo
 
@@ -133,46 +133,46 @@ cd todo-nodejs-mongo
 azd up
 ```
 
-### Ejemplos de Aplicaciones de IA (Capítulos 2, 5, 8)
+### Ejemplos de aplicaciones de IA (Capítulos 2, 5, 8)
 
 | Plantilla | Repositorio | Complejidad | Enfoque |
 |:---------|:-----------|:-----------|:------|
-| **Azure OpenAI Chat** | [Local: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | Implementación GPT-4 |
-| **AI Chat Quickstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | Chat de IA básico |
-| **AI Agents** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | Framework de agentes |
-| **Search + OpenAI Demo** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | Patrón RAG |
+| **Microsoft Foundry Models Chat** | [Local: azure-openai-chat](../../../examples/azure-openai-chat) | ⭐⭐ | despliegue gpt-4.1 |
+| **AI Chat Quickstart** | [get-started-with-ai-chat](https://github.com/Azure-Samples/get-started-with-ai-chat) | ⭐⭐ | chat básico de IA |
+| **Agentes IA** | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ⭐⭐ | framework de agentes |
+| **Demo Search + OpenAI** | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | ⭐⭐⭐ | patrón RAG |
 | **Contoso Chat** | [contoso-chat](https://github.com/Azure-Samples/contoso-chat) | ⭐⭐⭐⭐ | IA empresarial |
 
-### Base de Datos y Patrones Avanzados (Capítulos 3-8)
+### Base de datos y patrones avanzados (Capítulos 3-8)
 
 | Plantilla | Repositorio | Complejidad | Enfoque |
 |:---------|:-----------|:-----------|:------|
-| **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | Integración de base de datos |
+| **C# + SQL** | [todo-csharp-sql](https://github.com/Azure-Samples/todo-csharp-sql) | ⭐⭐ | integración de base de datos |
 | **Python + Cosmos** | [todo-python-mongo-swa-func](https://github.com/Azure-Samples/todo-python-mongo-swa-func) | ⭐⭐ | NoSQL serverless |
-| **Microservicios Java** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | Multi-servicio |
-| **Pipeline de ML** | [mlops-v2](https://github.com/Azure-Samples/mlops-v2) | ⭐⭐⭐⭐ | MLOps |
+| **Microservicios Java** | [java-microservices-aca-lab](https://github.com/Azure-Samples/java-microservices-aca-lab) | ⭐⭐⭐ | multi-servicio |
+| **Pipeline ML** | [mlops-v2](https://github.com/Azure-Samples/mlops-v2) | ⭐⭐⭐⭐ | MLOps |
 
-## Objetivos de Aprendizaje
+## Objetivos de aprendizaje
 
 Al trabajar con estos ejemplos, podrás:
-- Practicar flujos de trabajo de Azure Developer CLI con escenarios de aplicaciones realistas
+- Practicar los flujos de trabajo de Azure Developer CLI con escenarios realistas de aplicaciones
 - Comprender diferentes arquitecturas de aplicaciones y sus implementaciones con azd
-- Dominar patrones de Infrastructure as Code para varios servicios de Azure
-- Aplicar gestión de configuración y estrategias de despliegue específicas por entorno
-- Implementar patrones de monitoreo, seguridad y escalado en contextos prácticos
-- Adquirir experiencia en resolución de problemas y depuración de escenarios de despliegue reales
+- Dominar patrones de Infraestructura como Código para varios servicios de Azure
+- Aplicar gestión de configuración y estrategias de despliegue específicas para entornos
+- Implementar patrones prácticos de monitorización, seguridad y escalado
+- Adquirir experiencia en resolución de problemas y depuración de escenarios reales de despliegue
 
-## Resultados de Aprendizaje
+## Resultados del aprendizaje
 
-Al completar estos ejemplos, serás capaz de:
-- Desplegar varios tipos de aplicaciones usando Azure Developer CLI con confianza
-- Adaptar las plantillas proporcionadas a los requisitos de tu propia aplicación
+Al completar estos ejemplos, podrás:
+- Desplegar con confianza distintos tipos de aplicaciones usando Azure Developer CLI
+- Adaptar plantillas proporcionadas a los requerimientos de tus propias aplicaciones
 - Diseñar e implementar patrones de infraestructura personalizados usando Bicep
-- Configurar aplicaciones complejas multi-servicio con dependencias adecuadas
-- Aplicar prácticas recomendadas de seguridad, monitoreo y rendimiento en escenarios reales
-- Solucionar y optimizar despliegues basándote en experiencia práctica
+- Configurar aplicaciones multi-servicios complejas con dependencias adecuadas
+- Aplicar buenas prácticas de seguridad, monitorización y rendimiento en escenarios reales
+- Diagnosticar y optimizar despliegues basándote en experiencia práctica
 
-## Estructura del Directorio
+## Estructura del directorio
 
 ```
 Azure Samples AZD Templates (linked externally):
@@ -188,124 +188,123 @@ Azure Samples AZD Templates (linked externally):
     └── scripts/
 ```
 
-## Ejemplos de Inicio Rápido
+## Ejemplos de inicio rápido
 
-> **💡 ¿Nuevo en AZD?** Comienza con el ejemplo #1 (Flask API) - toma ~20 minutos y enseña conceptos clave.
+> **💡 ¿Nuevo en AZD?** Comienza con el ejemplo #1 (API Flask) - toma ~20 minutos y enseña conceptos básicos.
 
-### Para Principiantes
-1. **[Container App - Python Flask API](../../../examples/container-app/simple-flask-api)** (Local) ⭐  
+### Para principiantes
+1. **[Container App - API Python Flask](../../../examples/container-app/simple-flask-api)** (Local) ⭐  
    Despliega una API REST simple con escala a cero  
    **Tiempo:** 20-25 minutos | **Costo:** $0-5/mes  
-   **Aprenderás:** Flujo de trabajo básico de azd, conteinerización, probes de salud  
-   **Resultado Esperado:** Endpoint de API funcional que devuelve "Hello, World!" con monitoreo
+   **Aprenderás:** Flujo básico de azd, containerización, pruebas de sanidad  
+   **Resultado esperado:** Punto final API funcionando que devuelve "Hello, World!" con monitorización
 
-2. **[Aplicación Web Simple - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
+2. **[Aplicación web simple - Node.js Express](https://github.com/Azure-Samples/todo-nodejs-mongo)** ⭐  
    Despliega una aplicación web Node.js Express con MongoDB  
    **Tiempo:** 25-35 minutos | **Costo:** $10-30/mes  
    **Aprenderás:** Integración de base de datos, variables de entorno, cadenas de conexión  
-   **Resultado Esperado:** Aplicación de lista de tareas con funcionalidad de crear/leer/actualizar/eliminar
+   **Resultado esperado:** App de lista de tareas con funcionalidades de crear/leer/actualizar/eliminar
 
-3. **[Sitio Estático - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
-   Aloja un sitio estático React con Azure Static Web Apps  
+3. **[Sitio web estático - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func)** ⭐  
+   Hospeda sitio web estático React con Azure Static Web Apps  
    **Tiempo:** 20-30 minutos | **Costo:** $0-10/mes  
-   **Aprenderás:** Alojamiento estático, funciones serverless, despliegue en CDN  
-   **Resultado Esperado:** Interfaz React con backend API, SSL automático, CDN global
+   **Aprenderás:** Hospedaje estático, funciones serverless, despliegue CDN  
+   **Resultado esperado:** UI React con backend API, SSL automático, CDN global
 
-### Para Usuarios Intermedios
-4. **[Aplicación de Chat Azure OpenAI](../../../examples/azure-openai-chat)** (Local) ⭐⭐  
-   Despliega GPT-4 con interfaz de chat y gestión segura de claves de API  
+### Para usuarios intermedios
+4. **[Aplicación de chat Microsoft Foundry Models](../../../examples/azure-openai-chat)** (Local) ⭐⭐  
+   Despliegue gpt-4.1 con interfaz de chat y gestión segura de claves API  
    **Tiempo:** 35-45 minutos | **Costo:** $50-200/mes  
-   **Aprenderás:** Despliegue de Azure OpenAI, integración con Key Vault, seguimiento de tokens  
-   **Resultado Esperado:** Aplicación de chat funcional con GPT-4 y monitoreo de costos
+   **Aprenderás:** Despliegue de Microsoft Foundry Models, integración Key Vault, seguimiento de tokens  
+   **Resultado esperado:** Aplicación de chat funcional con gpt-4.1 y monitorización de costos
 
 5. **[Container App - Microservicios](../../../examples/container-app/microservices)** (Local) ⭐⭐⭐⭐  
    Arquitectura multi-servicio lista para producción  
    **Tiempo:** 45-60 minutos | **Costo:** $50-150/mes  
-   **Aprenderás:** Comunicación entre servicios, encolamiento de mensajes, trazado distribuido  
-   **Resultado Esperado:** Sistema de 2 servicios (API Gateway + Servicio de Productos) con monitoreo
+   **Aprenderás:** Comunicación de servicios, colas de mensajes, trazabilidad distribuida  
+   **Resultado esperado:** Sistema de 2 servicios (API Gateway + Product Service) con monitorización
 
-6. **[Aplicación con Base de Datos - C# con Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
-   Aplicación web con API en C# y Azure SQL Database  
+6. **[Aplicación de base de datos - C# con Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)** ⭐⭐  
+   Aplicación web con API C# y base de datos Azure SQL  
    **Tiempo:** 30-45 minutos | **Costo:** $20-80/mes  
-   **Aprenderás:** Entity Framework, migraciones de base de datos, seguridad de conexión  
-   **Resultado Esperado:** API en C# con backend en Azure SQL, despliegue automático de esquema
+   **Aprenderás:** Entity Framework, migraciones de base de datos, seguridad en conexiones  
+   **Resultado esperado:** API C# con backend Azure SQL, despliegue automático de esquemas
 
-7. **[Serverless Function - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
-   Azure Functions en Python con triggers HTTP y Cosmos DB  
+7. **[Función serverless - Python Azure Functions](https://github.com/Azure-Samples/todo-python-mongo-swa-func)** ⭐⭐  
+   Azure Functions en Python con disparadores HTTP y Cosmos DB  
    **Tiempo:** 30-40 minutos | **Costo:** $10-40/mes  
-   **Aprenderás:** Arquitectura orientada a eventos, escalado serverless, integración NoSQL  
-   **Resultado Esperado:** Aplicación Function que responde a solicitudes HTTP con almacenamiento en Cosmos DB
+   **Aprenderás:** Arquitectura basada en eventos, escalado serverless, integración NoSQL  
+   **Resultado esperado:** App de función que responde a peticiones HTTP con almacenamiento en Cosmos DB
 
 8. **[Microservicios - Java Spring Boot](https://github.com/Azure-Samples/java-microservices-aca-lab)** ⭐⭐⭐  
    Aplicación Java multi-servicio con Container Apps y gateway API  
    **Tiempo:** 60-90 minutos | **Costo:** $80-200/mes  
-   **Aprenderás:** Despliegue de Spring Boot, malla de servicios, balanceo de carga  
-   **Resultado Esperado:** Sistema Java multi-servicio con descubrimiento de servicios y enrutamiento
+   **Aprenderás:** Despliegue Spring Boot, malla de servicios, balanceo de carga  
+   **Resultado esperado:** Sistema Java multi-servicio con descubrimiento y enrutamiento de servicios
 
 ### Plantillas Microsoft Foundry
 
-1. **[Aplicación de Chat Azure OpenAI - Ejemplo Local](../../../examples/azure-openai-chat)** ⭐⭐  
-   Implementación completa de GPT-4 con interfaz de chat  
+1. **[App de chat Microsoft Foundry Models - Ejemplo local](../../../examples/azure-openai-chat)** ⭐⭐  
+   Despliegue completo gpt-4.1 con interfaz de chat  
    **Tiempo:** 35-45 minutos | **Costo:** $50-200/mes  
-   **Resultado Esperado:** Aplicación de chat funcional con seguimiento de tokens y monitoreo de costos
+   **Resultado esperado:** Aplicación de chat funcionando con seguimiento de tokens y costos
 
-2. **[Azure Search + OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
-   Aplicación de chat inteligente con arquitectura RAG  
+2. **[Demo Azure Search + OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)** ⭐⭐⭐  
+   Aplicación inteligente de chat con arquitectura RAG  
    **Tiempo:** 60-90 minutos | **Costo:** $100-300/mes  
-   **Resultado Esperado:** Interfaz de chat potenciada por RAG con búsqueda de documentos y citas
+   **Resultado esperado:** Interfaz de chat potenciada por RAG con búsqueda de documentos y citas
 
-3. **[Procesamiento de Documentos con IA](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
-   Análisis de documentos usando servicios de Azure AI  
+3. **[Procesamiento de documentos IA](https://github.com/Azure-Samples/azure-ai-document-processing)** ⭐⭐  
+   Análisis de documentos usando servicios de Azure IA  
    **Tiempo:** 40-60 minutos | **Costo:** $20-80/mes  
-   **Resultado Esperado:** API que extrae texto, tablas y entidades de documentos subidos
+   **Resultado esperado:** API que extrae texto, tablas y entidades de documentos cargados
 
 4. **[Pipeline de Machine Learning](https://github.com/Azure-Samples/mlops-v2)** ⭐⭐⭐⭐  
-   Flujo de trabajo MLOps con Azure Machine Learning  
+   Flujo MLOps con Azure Machine Learning  
    **Tiempo:** 2-3 horas | **Costo:** $150-500/mes  
-   **Resultado Esperado:** Pipeline de ML automatizado con entrenamiento, despliegue y monitoreo
+   **Resultado esperado:** Pipeline ML automatizado con entrenamiento, despliegue y monitorización
 
-### Escenarios del Mundo Real
+### Escenarios del mundo real
 
-#### **Solución Minorista Multi-Agente** 🆕
-**[Guía de Implementación Completa](./retail-scenario.md)**
+#### **Solución minorista multiagente** 🆕
+**[Guía completa de implementación](./retail-scenario.md)**
 
-Una solución integral, lista para producción, de atención al cliente multi-agente que demuestra el despliegue de aplicaciones de IA de nivel empresarial con AZD. Este escenario proporciona:
+Una solución completa y lista para producción de soporte al cliente multiagente que demuestra despliegue de aplicaciones IA empresariales con AZD. Este escenario ofrece:
+- **Arquitectura Completa**: Sistema multiagente con agentes especializados en atención al cliente y gestión de inventario  
+- **Infraestructura de Producción**: Despliegues de Microsoft Foundry Models en múltiples regiones, Azure AI Search, Container Apps y monitoreo integral  
+- **Plantilla ARM Lista para Desplegar**: Despliegue con un solo clic con múltiples modos de configuración (Mínimo/Estándar/Premium)  
+- **Características Avanzadas**: Validación de seguridad red teaming, marco de evaluación de agentes, optimización de costos y guías de solución de problemas  
+- **Contexto Empresarial Real**: Caso de uso de soporte al cliente minorista con carga de archivos, integración de búsquedas y escalado dinámico  
 
-- **Arquitectura Completa**: Sistema multi-agente con agentes especializados en servicio al cliente y gestión de inventario
-- **Production Infrastructure**: Implementaciones multi-región de Azure OpenAI, Azure AI Search, Container Apps y monitorización completa
-- **Ready-to-Deploy ARM Template**: Implementación con un clic con múltiples modos de configuración (Minimal/Standard/Premium)
-- **Advanced Features**: Validación de seguridad red teaming, marco de evaluación de agentes, optimización de costos y guías de solución de problemas
-- **Real Business Context**: Caso de uso de soporte al cliente para minoristas con cargas de archivos, integración de búsqueda y escalado dinámico
+**Tecnologías**: Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API  
 
-**Technologies**: Azure OpenAI (GPT-4o, GPT-4o-mini), Azure AI Search, Container Apps, Cosmos DB, Application Insights, Document Intelligence, Bing Search API
+**Complejidad**: ⭐⭐⭐⭐ (Avanzado - Listo para Producción Empresarial)  
 
-**Complexity**: ⭐⭐⭐⭐ (Avanzado - Listo para Producción Empresarial)
+**Ideal para**: Desarrolladores de IA, arquitectos de soluciones y equipos que construyen sistemas multiagente en producción  
 
-**Perfect for**: Desarrolladores de IA, arquitectos de soluciones y equipos que construyen sistemas multi-agente en producción
+**Inicio Rápido**: Despliegue la solución completa en menos de 30 minutos usando la plantilla ARM incluida con `./deploy.sh -g myResourceGroup`  
 
-**Quick Start**: Despliega la solución completa en menos de 30 minutos usando la plantilla ARM incluida con `./deploy.sh -g myResourceGroup`
+## 📋 Instrucciones de Uso  
 
-## 📋 Instrucciones de uso
+### Prerrequisitos  
 
-### Prerrequisitos
+Antes de ejecutar cualquier ejemplo:  
+- ✅ Suscripción de Azure con acceso de Propietario o Colaborador  
+- ✅ Azure Developer CLI instalado ([Guía de Instalación](../docs/chapter-01-foundation/installation.md))  
+- ✅ Docker Desktop en ejecución (para ejemplos con contenedores)  
+- ✅ Cuotas apropiadas en Azure (ver requisitos específicos de cada ejemplo)  
 
-Antes de ejecutar cualquier ejemplo:
-- ✅ Suscripción de Azure con acceso de Owner o Contributor
-- ✅ Azure Developer CLI instalado ([Guía de instalación](../docs/chapter-01-foundation/installation.md))
-- ✅ Docker Desktop ejecutándose (para ejemplos con contenedores)
-- ✅ Cuotas de Azure apropiadas (ver requisitos específicos del ejemplo)
+> **💰 Advertencia de Costos:** Todos los ejemplos crean recursos reales en Azure que generan cargos. Consulte los archivos README individuales para estimaciones de costos. Recuerde ejecutar `azd down` cuando termine para evitar costos continuos.  
 
-> **💰 Advertencia de costos:** Todos los ejemplos crean recursos reales en Azure que generan cargos. Consulta los README individuales para estimaciones de costos. Recuerda ejecutar `azd down` cuando termines para evitar costos continuos.
+### Ejecutar Ejemplos Localmente  
 
-### Ejecutar ejemplos localmente
-
-1. **Clonar o copiar el ejemplo**
+1. **Clonar o Copiar Ejemplo**  
    ```bash
    # Navegar al ejemplo deseado
    cd examples/simple-web-app
    ```
-
-2. **Inicializar el entorno AZD**
+  
+2. **Inicializar Entorno AZD**  
    ```bash
    # Inicializar con plantilla existente
    azd init
@@ -313,21 +312,21 @@ Antes de ejecutar cualquier ejemplo:
    # O crear un nuevo entorno
    azd env new my-environment
    ```
-
-3. **Configurar el entorno**
+  
+3. **Configurar Entorno**  
    ```bash
-   # Establecer las variables requeridas
+   # Establecer variables requeridas
    azd env set AZURE_LOCATION eastus
    azd env set AZURE_SUBSCRIPTION_ID your-subscription-id
    ```
-
-4. **Desplegar**
+  
+4. **Desplegar**  
    ```bash
-   # Desplegar la infraestructura y la aplicación
+   # Desplegar infraestructura y aplicación
    azd up
    ```
-
-5. **Verificar el despliegue**
+  
+5. **Verificar Despliegue**  
    ```bash
    # Obtener puntos finales del servicio
    azd env get-values
@@ -335,268 +334,268 @@ Antes de ejecutar cualquier ejemplo:
    # Probar el punto final (ejemplo)
    curl https://your-app-url.azurecontainer.io/health
    ```
-   
-   **Indicadores de éxito esperados:**
-   - ✅ `azd up` se completa sin errores
-   - ✅ El endpoint del servicio devuelve HTTP 200
-   - ✅ El Portal de Azure muestra estado "Running"
-   - ✅ Application Insights recibiendo telemetría
+  
+   **Indicadores de Éxito Esperados:**  
+   - ✅ `azd up` finaliza sin errores  
+   - ✅ El endpoint del servicio devuelve HTTP 200  
+   - ✅ Azure Portal muestra el estado "Running"  
+   - ✅ Application Insights recibe telemetría  
 
-> **⚠️ ¿Problemas?** Consulta [Problemas comunes](../docs/chapter-07-troubleshooting/common-issues.md) para la solución de problemas de despliegue
+> **⚠️ ¿Problemas?** Consulte [Problemas Comunes](../docs/chapter-07-troubleshooting/common-issues.md) para solución de problemas de despliegue  
 
-### Adaptar los ejemplos
+### Adaptar Ejemplos  
 
-Cada ejemplo incluye:
-- **README.md** - Instrucciones detalladas de configuración y personalización
-- **azure.yaml** - Configuración AZD con comentarios
-- **infra/** - Plantillas Bicep con explicación de parámetros
-- **src/** - Código de la aplicación de ejemplo
-- **scripts/** - Scripts auxiliares para tareas comunes
+Cada ejemplo incluye:  
+- **README.md** - Instrucciones detalladas de configuración y personalización  
+- **azure.yaml** - Configuración AZD con comentarios  
+- **infra/** - Plantillas Bicep con explicaciones de parámetros  
+- **src/** - Código de aplicación de ejemplo  
+- **scripts/** - Scripts auxiliares para tareas comunes  
 
-## 🎯 Objetivos de aprendizaje
+## 🎯 Objetivos de Aprendizaje  
 
-### Categorías de ejemplos
+### Categorías de Ejemplos  
 
-#### **Despliegues básicos**
-- Aplicaciones de servicio único
-- Patrones de infraestructura simples
-- Gestión de configuración básica
-- Entornos de desarrollo económicos
+#### **Despliegues Básicos**  
+- Aplicaciones de servicio único  
+- Patrones simples de infraestructura  
+- Gestión básica de configuración  
+- Configuraciones económicas para desarrollo  
 
-#### **Escenarios avanzados**
-- Arquitecturas multi-servicio
-- Configuraciones de red complejas
-- Patrones de integración de bases de datos
-- Implementaciones de seguridad y cumplimiento
+#### **Escenarios Avanzados**  
+- Arquitecturas multi-servicio  
+- Configuraciones de redes complejas  
+- Patrones de integración con bases de datos  
+- Implementaciones de seguridad y cumplimiento  
 
-#### **Patrones listos para producción**
-- Configuraciones de alta disponibilidad
-- Monitorización y observabilidad
-- Integración CI/CD
-- Planes de recuperación ante desastres
+#### **Patrones Listos para Producción**  
+- Configuraciones de alta disponibilidad  
+- Monitoreo y observabilidad  
+- Integración CI/CD  
+- Configuraciones de recuperación ante desastres  
 
-## 📖 Descripciones de ejemplos
+## 📖 Descripciones de Ejemplos  
 
-### Simple Web App - Node.js Express
-**Technologies**: Node.js, Express, MongoDB, Container Apps  
-**Complexity**: Principiante  
-**Concepts**: Despliegue básico, API REST, integración con base de datos NoSQL
+### Aplicación Web Simple - Node.js Express  
+**Tecnologías**: Node.js, Express, MongoDB, Container Apps  
+**Complejidad**: Principiante  
+**Conceptos**: Despliegue básico, API REST, integración con base de datos NoSQL  
 
-### Static Website - React SPA
-**Technologies**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
-**Complexity**: Principiante  
-**Concepts**: Hosting estático, backend serverless, desarrollo web moderno
+### Sitio Web Estático - React SPA  
+**Tecnologías**: React, Azure Static Web Apps, Azure Functions, Cosmos DB  
+**Complejidad**: Principiante  
+**Conceptos**: Hosting estático, backend serverless, desarrollo web moderno  
 
-### Container App - Python Flask
-**Technologies**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
-**Complexity**: Principiante  
-**Concepts**: Contenerización, API REST, scale-to-zero, health probes, monitorización  
-**Location**: [Ejemplo local](../../../examples/container-app/simple-flask-api)
+### Container App - Python Flask  
+**Tecnologías**: Python Flask, Docker, Container Apps, Container Registry, Application Insights  
+**Complejidad**: Principiante  
+**Conceptos**: Contenerización, API REST, escala a cero, sondas de salud, monitoreo  
+**Ubicación**: [Ejemplo Local](../../../examples/container-app/simple-flask-api)  
 
-### Container App - Microservices Architecture
-**Technologies**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
-**Complexity**: Avanzado  
-**Concepts**: Arquitectura multi-servicio, comunicación entre servicios, encolado de mensajes, trazado distribuido  
-**Location**: [Ejemplo local](../../../examples/container-app/microservices)
+### Container App - Arquitectura de Microservicios  
+**Tecnologías**: Python, Node.js, C#, Go, Service Bus, Cosmos DB, Azure SQL, Container Apps  
+**Complejidad**: Avanzado  
+**Conceptos**: Arquitectura multi-servicio, comunicación entre servicios, colas de mensajes, trazabilidad distribuida  
+**Ubicación**: [Ejemplo Local](../../../examples/container-app/microservices)  
 
-### Database App - C# with Azure SQL
-**Technologies**: C# ASP.NET Core, Azure SQL Database, App Service  
-**Complexity**: Intermedio  
-**Concepts**: Entity Framework, conexiones a bases de datos, desarrollo de API web
+### Aplicación con Base de Datos - C# con Azure SQL  
+**Tecnologías**: C# ASP.NET Core, Azure SQL Database, App Service  
+**Complejidad**: Intermedio  
+**Conceptos**: Entity Framework, conexiones a base de datos, desarrollo de API web  
 
-### Serverless Function - Python Azure Functions
-**Technologies**: Python, Azure Functions, Cosmos DB, Static Web Apps  
-**Complexity**: Intermedio  
-**Concepts**: Arquitectura orientada a eventos, computación serverless, desarrollo full-stack
+### Función Serverless - Python Azure Functions  
+**Tecnologías**: Python, Azure Functions, Cosmos DB, Static Web Apps  
+**Complejidad**: Intermedio  
+**Conceptos**: Arquitectura orientada a eventos, computación serverless, desarrollo full-stack  
 
-### Microservices - Java Spring Boot
-**Technologies**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
-**Complexity**: Intermedio  
-**Concepts**: Comunicación entre microservicios, sistemas distribuidos, patrones empresariales
+### Microservicios - Java Spring Boot  
+**Tecnologías**: Java Spring Boot, Container Apps, Service Bus, API Gateway  
+**Complejidad**: Intermedio  
+**Conceptos**: Comunicación entre microservicios, sistemas distribuidos, patrones empresariales  
 
-### Microsoft Foundry Examples
+### Ejemplos de Microsoft Foundry  
 
-#### Azure OpenAI Chat App
-**Technologies**: Azure OpenAI, Cognitive Search, App Service  
-**Complexity**: Intermedio  
-**Concepts**: Arquitectura RAG, búsqueda vectorial, integración de LLM
+#### Aplicación de Chat con Microsoft Foundry Models  
+**Tecnologías**: Microsoft Foundry Models, Cognitive Search, App Service  
+**Complejidad**: Intermedio  
+**Conceptos**: Arquitectura RAG, búsqueda vectorial, integración con LLM  
 
-#### AI Document Processing
-**Technologies**: Azure AI Document Intelligence, Storage, Functions  
-**Complexity**: Intermedio  
-**Concepts**: Análisis de documentos, OCR, extracción de datos
+#### Procesamiento de Documentos con IA  
+**Tecnologías**: Azure AI Document Intelligence, Storage, Functions  
+**Complejidad**: Intermedio  
+**Conceptos**: Análisis de documentos, OCR, extracción de datos  
 
-#### Machine Learning Pipeline
-**Technologies**: Azure ML, MLOps, Container Registry  
-**Complexity**: Avanzado  
-**Concepts**: Entrenamiento de modelos, pipelines de despliegue, monitorización
+#### Pipeline de Machine Learning  
+**Tecnologías**: Azure ML, MLOps, Container Registry  
+**Complejidad**: Avanzado  
+**Conceptos**: Entrenamiento de modelos, pipelines de despliegue, monitoreo  
 
-## 🛠 Ejemplos de configuración
+## 🛠 Ejemplos de Configuraciones  
 
-El directorio `configurations/` contiene componentes reutilizables:
+El directorio `configurations/` contiene componentes reutilizables:  
 
-### Configuraciones de entorno
-- Configuraciones para entorno de desarrollo
-- Configuraciones para entorno de staging
-- Configuraciones listas para producción
-- Configuraciones de despliegue multi-región
+### Configuraciones de Entorno  
+- Ajustes para entorno de desarrollo  
+- Configuraciones para entorno de pruebas (staging)  
+- Configuraciones listas para producción  
+- Configuraciones para despliegue multi-región  
 
-### Módulos Bicep
-- Componentes de infraestructura reutilizables
-- Patrones comunes de recursos
-- Plantillas con endurecimiento de seguridad
-- Configuraciones optimizadas para costos
+### Módulos Bicep  
+- Componentes reutilizables de infraestructura  
+- Patrones comunes de recursos  
+- Plantillas reforzadas en seguridad  
+- Configuraciones optimizadas en costos  
 
-### Scripts auxiliares
-- Automatización de configuración de entorno
-- Scripts de migración de base de datos
-- Herramientas de validación de despliegue
-- Utilidades de monitorización de costos
+### Scripts de Ayuda  
+- Automatización de configuración de entornos  
+- Scripts de migración de bases de datos  
+- Herramientas para validación de despliegues  
+- Utilidades para monitoreo de costos  
 
-## 🔧 Guía de personalización
+## 🔧 Guía de Personalización  
 
-### Adaptar los ejemplos a tu caso de uso
+### Adaptar Ejemplos a Tu Caso de Uso  
 
-1. **Revisar prerrequisitos**
-   - Verificar requisitos de servicios de Azure
-   - Comprobar límites de suscripción
-   - Entender implicaciones de costos
+1. **Revisar Prerrequisitos**  
+   - Verificar requerimientos de servicios de Azure  
+   - Confirmar límites de suscripción  
+   - Entender implicaciones de costos  
 
-2. **Modificar la configuración**
-   - Actualizar definiciones de servicios en `azure.yaml`
-   - Personalizar plantillas Bicep
-   - Ajustar variables de entorno
+2. **Modificar Configuración**  
+   - Actualizar definiciones de servicio en `azure.yaml`  
+   - Personalizar plantillas Bicep  
+   - Ajustar variables de entorno  
 
-3. **Probar exhaustivamente**
-   - Desplegar primero en entorno de desarrollo
-   - Validar funcionalidad
-   - Probar escalado y rendimiento
+3. **Probar Exhaustivamente**  
+   - Desplegar primero en entorno de desarrollo  
+   - Validar funcionalidad  
+   - Probar escalabilidad y desempeño  
 
-4. **Revisión de seguridad**
-   - Revisar controles de acceso
-   - Implementar gestión de secretos
-   - Habilitar monitorización y alertas
+4. **Revisar Seguridad**  
+   - Revisar controles de acceso  
+   - Implementar gestión de secretos  
+   - Activar monitoreo y alertas  
 
-## 📊 Matriz comparativa
+## 📊 Matriz de Comparación  
 
-| Example | Services | Database | Auth | Monitoring | Complexity |
-|---------|----------|----------|------|------------|------------|
-| **Azure OpenAI Chat** (Local) | 2 | ❌ | Key Vault | Completo | ⭐⭐ |
-| **Python Flask API** (Local) | 1 | ❌ | Básico | Completo | ⭐ |
-| **Microservices** (Local) | 5+ | ✅ | Empresarial | Avanzado | ⭐⭐⭐⭐ |
-| Node.js Express Todo | 2 | ✅ | Básico | Básico | ⭐ |
-| React SPA + Functions | 3 | ✅ | Básico | Completo | ⭐ |
-| Python Flask Container | 2 | ❌ | Básico | Completo | ⭐ |
-| C# Web API + SQL | 2 | ✅ | Completo | Completo | ⭐⭐ |
-| Python Functions + SPA | 3 | ✅ | Completo | Completo | ⭐⭐ |
-| Java Microservices | 5+ | ✅ | Completo | Completo | ⭐⭐ |
-| Azure OpenAI Chat | 3 | ✅ | Completo | Completo | ⭐⭐⭐ |
-| AI Document Processing | 2 | ❌ | Básico | Completo | ⭐⭐ |
-| ML Pipeline | 4+ | ✅ | Completo | Completo | ⭐⭐⭐⭐ |
-| **Retail Multi-Agent** (Local) | **8+** | **✅** | **Empresarial** | **Avanzado** | **⭐⭐⭐⭐** |
+| Ejemplo | Servicios | Base de Datos | Auth | Monitoreo | Complejidad |  
+|---------|-----------|--------------|------|-----------|-------------|  
+| **Microsoft Foundry Models Chat** (Local) | 2 | ❌ | Key Vault | Completo | ⭐⭐ |  
+| **Python Flask API** (Local) | 1 | ❌ | Básico | Completo | ⭐ |  
+| **Microservicios** (Local) | 5+ | ✅ | Empresarial | Avanzado | ⭐⭐⭐⭐ |  
+| Node.js Express Todo | 2 | ✅ | Básico | Básico | ⭐ |  
+| React SPA + Functions | 3 | ✅ | Básico | Completo | ⭐ |  
+| Python Flask Container | 2 | ❌ | Básico | Completo | ⭐ |  
+| C# Web API + SQL | 2 | ✅ | Completo | Completo | ⭐⭐ |  
+| Python Functions + SPA | 3 | ✅ | Completo | Completo | ⭐⭐ |  
+| Java Microservicios | 5+ | ✅ | Completo | Completo | ⭐⭐ |  
+| Microsoft Foundry Models Chat | 3 | ✅ | Completo | Completo | ⭐⭐⭐ |  
+| AI Document Processing | 2 | ❌ | Básico | Completo | ⭐⭐ |  
+| ML Pipeline | 4+ | ✅ | Completo | Completo | ⭐⭐⭐⭐ |  
+| **Retail Multi-Agent** (Local) | **8+** | **✅** | **Empresarial** | **Avanzado** | **⭐⭐⭐⭐** |  
 
-## 🎓 Ruta de aprendizaje
+## 🎓 Ruta de Aprendizaje  
 
-### Progresión recomendada
+### Progresión Recomendada  
 
-1. **Comienza con la Simple Web App**
-   - Aprender conceptos básicos de AZD
-   - Entender el flujo de despliegue
-   - Practicar gestión de entornos
+1. **Comenzar con Aplicación Web Simple**  
+   - Aprender conceptos básicos de AZD  
+   - Entender flujo de despliegue  
+   - Practicar gestión de entornos  
 
-2. **Prueba el sitio estático**
-   - Explorar diferentes opciones de hosting
-   - Aprender sobre integración con CDN
-   - Entender la configuración DNS
+2. **Probar Sitio Web Estático**  
+   - Explorar opciones de hosting  
+   - Aprender integración con CDN  
+   - Entender configuración DNS  
 
-3. **Avanza al Container App**
-   - Aprender conceptos básicos de contenerización
-   - Entender conceptos de escalado
-   - Practicar con Docker
+3. **Pasar a Container App**  
+   - Aprender fundamentos de contenerización  
+   - Comprender conceptos de escalamiento  
+   - Practicar con Docker  
 
-4. **Añade integración de base de datos**
-   - Aprender aprovisionamiento de bases de datos
-   - Entender cadenas de conexión
-   - Practicar gestión de secretos
+4. **Agregar Integración de Base de Datos**  
+   - Aprender aprovisionamiento de bases de datos  
+   - Entender cadenas de conexión  
+   - Practicar gestión de secretos  
 
-5. **Explora Serverless**
-   - Entender arquitectura orientada a eventos
-   - Aprender sobre triggers y bindings
-   - Practicar con APIs
+5. **Explorar Serverless**  
+   - Comprender arquitectura orientada a eventos  
+   - Aprender sobre triggers y bindings  
+   - Practicar con APIs  
 
-6. **Construye microservicios**
-   - Aprender comunicación entre servicios
-   - Entender sistemas distribuidos
-   - Practicar despliegues complejos
+6. **Construir Microservicios**  
+   - Aprender comunicación entre servicios  
+   - Entender sistemas distribuidos  
+   - Practicar despliegues complejos  
 
-## 🔍 Encontrar el ejemplo adecuado
+## 🔍 Encontrar el Ejemplo Correcto  
 
-### Por stack tecnológico
-- **Container Apps**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices), Java Microservices
-- **Node.js**: Node.js Express Todo App, [Microservices API Gateway (Local)](../../../examples/container-app/microservices)
-- **Python**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservices Product Service (Local)](../../../examples/container-app/microservices), Python Functions + SPA
-- **C#**: [Microservices Order Service (Local)](../../../examples/container-app/microservices), C# Web API + SQL Database, Azure OpenAI Chat App, ML Pipeline
-- **Go**: [Microservices User Service (Local)](../../../examples/container-app/microservices)
-- **Java**: Java Spring Boot Microservices
-- **React**: React SPA + Functions
-- **Containers**: [Python Flask (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices), Java Microservices
-- **Bases de datos**: [Microservices (Local)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB
-- **AI/ML**: **[Azure OpenAI Chat (Local)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
-- **Sistemas Multi-Agente**: **Retail Multi-Agent Solution**
-- **Integración OpenAI**: **[Azure OpenAI Chat (Local)](../../../examples/azure-openai-chat)**, Retail Multi-Agent Solution
-- **Producción empresarial**: [Microservices (Local)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
+### Por Stack Tecnológico  
+- **Container Apps**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservicios (Local)](../../../examples/container-app/microservices), Java Microservicios  
+- **Node.js**: Node.js Express Todo App, [Microservicios API Gateway (Local)](../../../examples/container-app/microservices)  
+- **Python**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), [Microservicios Product Service (Local)](../../../examples/container-app/microservices), Python Functions + SPA  
+- **C#**: [Microservicios Order Service (Local)](../../../examples/container-app/microservices), C# Web API + SQL Database, Microsoft Foundry Models Chat App, ML Pipeline  
+- **Go**: [Microservicios User Service (Local)](../../../examples/container-app/microservices)  
+- **Java**: Java Spring Boot Microservicios  
+- **React**: React SPA + Functions  
+- **Contenedores**: [Python Flask (Local)](../../../examples/container-app/simple-flask-api), [Microservicios (Local)](../../../examples/container-app/microservices), Java Microservicios  
+- **Bases de Datos**: [Microservicios (Local)](../../../examples/container-app/microservices), Node.js + MongoDB, C# + Azure SQL, Python + Cosmos DB  
+- **IA/ML**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**  
+- **Sistemas Multiagente**: **Retail Multi-Agent Solution**  
+- **Integración OpenAI**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, Retail Multi-Agent Solution  
+- **Producción Empresarial**: [Microservicios (Local)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**  
 
-### Por patrón de arquitectura
-- **API REST simple**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api)
-- **Monolítico**: Node.js Express Todo, C# Web API + SQL
-- **Estático + Serverless**: React SPA + Functions, Python Functions + SPA
-- **Microservicios**: [Production Microservices (Local)](../../../examples/container-app/microservices), Java Spring Boot Microservices
-- **Contenerizado**: [Python Flask (Local)](../../../examples/container-app/simple-flask-api), [Microservices (Local)](../../../examples/container-app/microservices)
-- **Potenciado por IA**: **[Azure OpenAI Chat (Local)](../../../examples/azure-openai-chat)**, Azure OpenAI Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**
-- **Arquitectura multi-agente**: **Retail Multi-Agent Solution**
-- **Servicios empresariales multi-servicio**: [Microservices (Local)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**
+### Por Patrón de Arquitectura  
+- **API REST Simple**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api)  
+- **Monolítico**: Node.js Express Todo, C# Web API + SQL  
+- **Estático + Serverless**: React SPA + Functions, Python Functions + SPA  
+- **Microservicios**: [Microservicios en Producción (Local)](../../../examples/container-app/microservices), Java Spring Boot Microservicios  
+- **Contenerizado**: [Python Flask (Local)](../../../examples/container-app/simple-flask-api), [Microservicios (Local)](../../../examples/container-app/microservices)  
+- **Impulsado por IA**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, Microsoft Foundry Models Chat App, AI Document Processing, ML Pipeline, **Retail Multi-Agent Solution**  
+- **Arquitectura Multiagente**: **Retail Multi-Agent Solution**  
+- **Multi-servicio Empresarial**: [Microservicios (Local)](../../../examples/container-app/microservices), **Retail Multi-Agent Solution**  
 
-### Por nivel de complejidad
-- **Principiante**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions
-- **Intermedio**: **[Azure OpenAI Chat (Local)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservices, Azure OpenAI Chat App, AI Document Processing
-- **Avanzado**: ML Pipeline
-- **Listo para producción empresarial**: [Microservices (Local)](../../../examples/container-app/microservices) (Multi-servicio con encolado de mensajes), **Retail Multi-Agent Solution** (Sistema multi-agente completo con despliegue mediante plantilla ARM)
+### Por Nivel de Complejidad  
+- **Principiante**: [Python Flask API (Local)](../../../examples/container-app/simple-flask-api), Node.js Express Todo, React SPA + Functions  
+- **Intermedio**: **[Microsoft Foundry Models Chat (Local)](../../../examples/azure-openai-chat)**, C# Web API + SQL, Python Functions + SPA, Java Microservicios, Microsoft Foundry Models Chat App, AI Document Processing  
+- **Avanzado**: ML Pipeline  
+- **Listo para Producción Empresarial**: [Microservicios (Local)](../../../examples/container-app/microservices) (Multi-servicio con colas de mensajes), **Retail Multi-Agent Solution** (Sistema multiagente completo con plantilla ARM para despliegue)  
 
-## 📚 Recursos adicionales
+## 📚 Recursos Adicionales  
 
-### Enlaces de documentación
-- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)
-- [Microsoft Foundry AZD Templates](https://github.com/Azure/ai-foundry-templates)
-- [Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+### Enlaces a Documentación  
+- [Azure-Samples/awesome-azd](https://github.com/Azure-Samples/awesome-azd)  
+- [Plantillas Microsoft Foundry AZD](https://github.com/Azure/ai-foundry-templates)  
+- [Documentación Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)  
+- [Centro de Arquitectura Azure](https://learn.microsoft.com/en-us/azure/architecture/)  
 
-### Ejemplos de la comunidad
-- [Azure Samples AZD Templates](https://github.com/Azure-Samples/azd-templates)
-- [Microsoft Foundry Templates](https://github.com/Azure/ai-foundry-templates)
-- [Azure Developer CLI Gallery](https://azure.github.io/awesome-azd/)
-- [Todo App with C# and Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
-- [Todo App with Python and MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
-- [Aplicación Todo con Node.js y PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
-- [Aplicación Web React con API en C#](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
+### Ejemplos de la Comunidad  
+- [Plantillas AZD de Azure Samples](https://github.com/Azure-Samples/azd-templates)
+- [Plantillas Microsoft Foundry](https://github.com/Azure/ai-foundry-templates)
+- [Galería Azure Developer CLI](https://azure.github.io/awesome-azd/)
+- [App de tareas con C# y Azure SQL](https://github.com/Azure-Samples/todo-csharp-sql)
+- [App de tareas con Python y MongoDB](https://github.com/Azure-Samples/todo-python-mongo)
+- [App de tareas con Node.js y PostgreSQL](https://github.com/Azure-Samples/todo-nodejs-mongo)
+- [App web React con API en C#](https://github.com/Azure-Samples/todo-csharp-cosmos-sql)
 - [Trabajo de Azure Container Apps](https://github.com/Azure-Samples/container-apps-jobs)
-- [Funciones de Azure con Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
+- [Azure Functions con Java](https://github.com/Azure-Samples/azure-functions-java-flex-consumption-azd)
 
-### Buenas prácticas
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
-- [Cloud Adoption Framework](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
+### Mejores Prácticas
+- [Marco de trabajo Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Marco de adopción de la nube](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/)
 
-## 🤝 Contribuir con ejemplos
+## 🤝 Contribuir con Ejemplos
 
-¿Tienes un ejemplo útil para compartir? ¡Aceptamos contribuciones!
+¿Tienes un ejemplo útil para compartir? ¡Damos la bienvenida a las contribuciones!
 
-### Directrices de envío
+### Pautas para Envío
 1. Sigue la estructura de directorios establecida
 2. Incluye un README.md completo
-3. Agrega comentarios a los archivos de configuración
+3. Añade comentarios en los archivos de configuración
 4. Prueba exhaustivamente antes de enviar
-5. Incluye estimaciones de costos y requisitos previos
+5. Incluye estimaciones de costos y prerrequisitos
 
-### Estructura de plantilla de ejemplo
+### Estructura del Ejemplo de Plantilla
 ```
 example-name/
 ├── README.md           # Detailed setup instructions
@@ -612,46 +611,46 @@ example-name/
 
 ---
 
-**Consejo profesional**: Comienza con el ejemplo más simple que se ajuste a tu stack tecnológico, luego avanza gradualmente hacia escenarios más complejos. ¡Cada ejemplo se basa en conceptos de los anteriores!
+**Consejo Profesional**: Comienza con el ejemplo más simple que coincida con tu stack tecnológico, luego avanza gradualmente hacia escenarios más complejos. ¡Cada ejemplo se basa en conceptos del anterior!
 
 ## 🚀 ¿Listo para comenzar?
 
-### Tu ruta de aprendizaje
+### Tu Ruta de Aprendizaje
 
-1. **¿Principiante completo?** → Comienza con [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 min)
-2. **¿Tienes conocimientos básicos de AZD?** → Prueba [Microservicios](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 min)
-3. **¿Construyendo aplicaciones de IA?** → Comienza con [Azure OpenAI Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 min) o explora [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ horas)
-4. **¿Necesitas una pila tecnológica específica?** → Usa la sección [Encontrar el ejemplo adecuado](../../../examples) arriba
+1. **¿Principiante completo?** → Comienza con [Flask API](../../../examples/container-app/simple-flask-api) (⭐, 20 mins)
+2. **¿Tienes conocimientos básicos de AZD?** → Prueba [Microservicios](../../../examples/container-app/microservices) (⭐⭐⭐⭐, 60 mins)
+3. **¿Construyendo aplicaciones de IA?** → Comienza con [Microsoft Foundry Models Chat](../../../examples/azure-openai-chat) (⭐⭐, 35 mins) o explora [Retail Multi-Agent](retail-scenario.md) (⭐⭐⭐⭐, 2+ horas)
+4. **¿Necesitas un stack tecnológico específico?** → Usa la sección de [Encontrar el Ejemplo Correcto](../../../examples) más arriba
 
-### Próximos pasos
+### Próximos Pasos
 
-- ✅ Revisa [Requisitos previos](../../../examples) arriba
-- ✅ Elige un ejemplo que coincida con tu nivel de habilidad (ver [Leyenda de complejidad](../../../examples))
-- ✅ Lee el README del ejemplo detenidamente antes de desplegar
-- ✅ Programa un recordatorio para ejecutar `azd down` después de las pruebas
-- ✅ Comparte tu experiencia mediante Issues o Discussions de GitHub
+- ✅ Revisa los [Prerrequisitos](../../../examples) más arriba
+- ✅ Elige un ejemplo que coincida con tu nivel de habilidad (ver [Leyenda de Complejidad](../../../examples))
+- ✅ Lee cuidadosamente el README del ejemplo antes de desplegar
+- ✅ Programa un recordatorio para ejecutar `azd down` tras las pruebas
+- ✅ Comparte tu experiencia vía Issues o Discussions de GitHub
 
-### ¿Necesitas ayuda?
+### ¿Necesitas Ayuda?
 
-- 📖 [FAQ](../resources/faq.md) - Preguntas frecuentes respondidas
-- 🐛 [Guía de solución de problemas](../docs/chapter-07-troubleshooting/common-issues.md) - Soluciona problemas de despliegue
-- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - Pregunta a la comunidad
-- 📚 [Guía de estudio](../resources/study-guide.md) - Refuerza tu aprendizaje
+- 📖 [Preguntas Frecuentes](../resources/faq.md) - Respuestas a preguntas comunes
+- 🐛 [Guía de Resolución de Problemas](../docs/chapter-07-troubleshooting/common-issues.md) - Soluciona problemas de despliegue
+- 💬 [Discusiones en GitHub](https://github.com/microsoft/AZD-for-beginners/discussions) - Pregunta a la comunidad
+- 📚 [Guía de Estudio](../resources/study-guide.md) - Refuerza tu aprendizaje
 
 ---
 
 **Navegación**
-- **📚 Inicio del curso**: [AZD For Beginners](../README.md)
-- **📖 Materiales de estudio**: [Guía de estudio](../resources/study-guide.md) | [Hoja de referencia](../resources/cheat-sheet.md) | [Glosario](../resources/glossary.md)
-- **🔧 Recursos**: [FAQ](../resources/faq.md) | [Solución de problemas](../docs/chapter-07-troubleshooting/common-issues.md)
+- **📚 Inicio del Curso**: [AZD Para Principiantes](../README.md)
+- **📖 Materiales de Estudio**: [Guía de Estudio](../resources/study-guide.md) | [Hoja de Referencia](../resources/cheat-sheet.md) | [Glosario](../resources/glossary.md)
+- **🔧 Recursos**: [Preguntas Frecuentes](../resources/faq.md) | [Resolución de Problemas](../docs/chapter-07-troubleshooting/common-issues.md)
 
 ---
 
-*Última actualización: noviembre de 2025 | [Informar problemas](https://github.com/microsoft/AZD-for-beginners/issues) | [Contribuir con ejemplos](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
+*Última actualización: noviembre de 2025 | [Reportar problemas](https://github.com/microsoft/AZD-for-beginners/issues) | [Contribuir con ejemplos](https://github.com/microsoft/AZD-for-beginners/blob/main/CONTRIBUTING.md)*
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Descargo de responsabilidad:
-Este documento ha sido traducido mediante el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por personas. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan derivarse del uso de esta traducción.
+**Aviso legal**:
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de malentendidos o interpretaciones erróneas derivados del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

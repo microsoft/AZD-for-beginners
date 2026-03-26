@@ -1,13 +1,13 @@
-# 5. Bir Şablonu Özelleştirin
+# 5. Bir Şablonu Özelleştirme
 
-!!! tip "BU MODÜLÜN SONUNDA AŞAĞIDAKİLERİ YAPABİLİRSİNİZ"
+!!! tip "BU MODÜLÜN SONUNDA ŞUNLARI YAPABİLECEKSİNİZ"
 
-    - [ ] Varsayılan AI Ajan Yeteneklerini keşfettiniz
-    - [ ] Kendi dizininizle AI Aramayı eklediniz
-    - [ ] İzleme metriklerini etkinleştirip analiz ettiniz
+    - [ ] Varsayılan AI Ajan Yeteneklerini incelediniz
+    - [ ] Kendi indeksinizle AI Arama eklediniz
+    - [ ] İzleme (Tracing) metriklerini etkinleştirdiniz ve analiz ettiniz
     - [ ] Bir değerlendirme çalıştırması gerçekleştirdiniz
     - [ ] Bir red-teaming taraması gerçekleştirdiniz
-    - [ ] **Lab 5: Bir Özelleştirme Planı Oluşturuldu** 
+    - [ ] **Lab 5: Özelleştirme Planı Oluşturdu** 
 
 ---
 
@@ -15,16 +15,16 @@
 
 !!! success "Bunu Lab 01'de tamamladık"
 
-- **Dosya Arama**: Bilgi edinme için OpenAI'nin yerleşik dosya araması
-- **Atıflar**: Yanıtlarda otomatik kaynak ataması
-- **Özelleştirilebilir Talimatlar**: Ajan davranışını ve kişiliğini değiştirin
+- **Dosya Araması**: Bilgi edinimi için OpenAI'nin yerleşik dosya araması
+- **Atıflar**: Yanıtlarda otomatik kaynak gösterimi
+- **Özelleştirilebilir Talimatlar**: Ajan davranışı ve kişiliğini değiştirin
 - **Araç Entegrasyonu**: Özelleştirilmiş yetenekler için genişletilebilir araç sistemi
 
 ---
 
 ## 5.2 Bilgi Getirme Seçenekleri
 
-!!! task "Bunu tamamlamak için değişiklik yapıp yeniden dağıtım yapmamız gerekiyor"    
+!!! task "Bunu tamamlamak için değişiklikler yapıp yeniden dağıtım yapmamız gerekiyor"    
     
     ```bash title=""
     # Set environment variables
@@ -40,41 +40,41 @@
 
 ---
 
-**OpenAI File Search (Default):**
+**OpenAI Dosya Araması (Varsayılan):**
 
-- Foundry Ajanlarına yerleşik
+- Foundry Ajanlarına entegre
 - Otomatik belge işleme ve indeksleme
-- Ek yapılandırma gerektirmez
+- Ek yapılandırma gerekmez
 
-**Azure AI Search (Optional):**
+**Azure AI Search (İsteğe Bağlı):**
 
-- Hibrit semantik ve vektör arama
+- Hibrit anlamsal ve vektör arama
 - Özel indeks yönetimi
 - Gelişmiş arama yetenekleri
-- `USE_AZURE_AI_SEARCH_SERVICE=true` gerektirir
+- Gerektirir `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
-## 5.3 [İzleme ve Takip](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [İzleme & Monitörleme](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "Bunu tamamlamak için değişiklik yapıp yeniden dağıtım yapmamız gerekiyor"    
+!!! task "Bunu tamamlamak için değişiklikler yapıp yeniden dağıtım yapmamız gerekiyor"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
     azd deploy
     ```
 
-**İzleme:**
+**İzleme (Tracing):**
 
 - OpenTelemetry entegrasyonu
 - İstek/yanıt takibi
 - Performans metrikleri
 - Microsoft Foundry portalında mevcut
 
-**Günlükleme:**
+**Günlükleme (Logging):**
 
-- Container Apps içinde uygulama günlükleri
-- Korelasyon kimlikleri ile yapılandırılmış günlükleme
+- Container Apps'te uygulama günlükleri
+- Korelasyon ID'leri ile yapılandırılmış günlükleme
 - Gerçek zamanlı ve geçmişe dönük günlük görüntüleme
 
 ---
@@ -89,9 +89,9 @@
 
 **Sürekli İzleme:**
 
-- Canlı etkileşimlerin otomatik değerlendirmesi
+- Canlı etkileşimlerin otomatik değerlendirilmesi
 - Kalite metriklerinin takibi
-- Performans regresyon tespiti
+- Performans gerilemesi tespiti
 
 **CI/CD Entegrasyonu:**
 
@@ -113,40 +113,42 @@
 
 - Azure hizmetleri için Yönetilen Kimlik
 - İsteğe bağlı Azure App Service kimlik doğrulaması
-- Geliştirme için temel kimlik doğrulama geri dönüşü
+- Geliştirme için temel kimlik doğrulama (basic auth) yedek seçeneği
 
-!!! quote "BU LAB'IN SONUNDA AŞAĞIDAKİLERE SAHİP OLMALISINIZ"
+
+
+!!! quote "BU LABIN SONUNDA ŞUNLARA SAHİP OLMALISINIZ"
     - [ ] Senaryo gereksinimlerinizi tanımladınız
-    - [ ] Ortam değişkenlerini özelleştirdiniz (config)
-    - [ ] Ajan talimatlarını özelleştirdiniz (görev)
-    - [ ] Özelleştirilmiş şablonu dağıttınız (uygulama)
+    - [ ] Ortam değişkenlerini (config) özelleştirdiniz
+    - [ ] Ajan talimatlarını (görev) özelleştirdiniz
+    - [ ] Özelleştirilmiş şablonu dağıttınız (app)
     - [ ] Dağıtım sonrası görevleri tamamladınız (manuel)
     - [ ] Bir test değerlendirmesi çalıştırdınız
 
-Bu örnek, iki uzmanlaşmış ajan ve birden fazla model dağıtımı ile kurumsal perakende kullanım durumuna yönelik şablonun nasıl özelleştirileceğini gösterir.
+This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
 
 ---
 
-## 5.6 Sizin İçin Özelleştirin!
+## 5.6 Kendiniz İçin Özelleştirin!
 
 ### 5.6.1. Senaryo Gereksinimleri
 
 #### **Ajan Dağıtımları:** 
 
-   - Shopper Ajanı: Müşterilerin ürünleri bulmasına ve karşılaştırmasına yardımcı olur
-   - Loyalty Ajanı: Müşteri ödüllerini ve promosyonları yönetir
+   - Shopper Agent: Müşterilerin ürünleri bulmasına ve karşılaştırmasına yardımcı olur
+   - Loyalty Agent: Müşteri ödüllerini ve promosyonlarını yönetir
 
 #### **Model Dağıtımları:**
 
    - `gpt-4.1`: Birincil sohbet modeli
    - `o3`: Karmaşık sorgular için akıl yürütme modeli
    - `gpt-4.1-nano`: Basit etkileşimler için hafif model
-   - `text-embedding-3-large`: Arama için yüksek kaliteli embedding'ler
+   - `text-embedding-3-large`: Arama için yüksek kaliteli gömme vektörleri
 
 #### **Özellikler:**
 
-   - İzleme ve takip etkin
-   - Ürün kataloğu için AI Search
+   - İzleme ve monitörleme etkinleştirildi
+   - Ürün kataloğu için AI Arama
    - Kalite güvencesi için değerlendirme çerçevesi
    - Güvenlik doğrulaması için red teaming
 
@@ -155,7 +157,7 @@ Bu örnek, iki uzmanlaşmış ajan ve birden fazla model dağıtımı ile kurums
 ### 5.6.2 Senaryo Uygulaması
 
 
-#### 5.6.2.1. Dağıtımdan Önce Yapılandırma
+#### 5.6.2.1. Dağıtım Öncesi Yapılandırma
 
 Bir kurulum betiği oluşturun (`setup-retail.sh`)
 
@@ -165,7 +167,7 @@ Bir kurulum betiği oluşturun (`setup-retail.sh`)
 # Ortam adını ayarla
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Bölgeyi yapılandır (model kullanılabilirliğine göre seçin)
+# Bölgeyi yapılandır (modelin kullanılabilirliğine göre seç)
 azd env set AZURE_LOCATION "eastus2"
 
 # Tüm isteğe bağlı hizmetleri etkinleştir
@@ -173,8 +175,8 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Birincil sohbet modelini yapılandır (gpt-4.1'e en yakın mevcut model olarak gpt-4o)
-azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4o"
+# Birincil sohbet modelini yapılandır (gpt-4.1, gpt-4.1'e en yakın mevcut olan)
+azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
@@ -187,7 +189,7 @@ azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 # Ajan adını ayarla (ilk ajanı oluşturacak)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# Arama indeksini yapılandır
+# Arama dizinini yapılandır
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -256,7 +258,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# Önkoşulları doğrula
+# Ön koşulları doğrulayın
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -268,17 +270,17 @@ if ! az account show &> /dev/null; then
     exit 1
 fi
 
-# Ortamı ayarla
+# Ortamı ayarlayın
 echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Seçilen bölgedeki kotayı kontrol et
+# Seçilen bölgedeki kotayı kontrol edin
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
 echo "⚠️  Please verify you have 300,000+ TPM quota for:"
-echo "   - gpt-4o: 150,000 TPM"
+echo "   - gpt-4.1: 150,000 TPM"
 echo "   - text-embedding-3-large: 75,000 TPM"
 echo "   - Additional models: 75,000+ TPM"
 
@@ -289,15 +291,15 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Altyapıyı ve uygulamayı dağıt
+# Altyapıyı ve uygulamayı dağıtın
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Dağıtım çıktılarını yakala
+# Dağıtım çıktılarını alın
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Web uygulamasının URL'sini al
+# Web uygulamasının URL'sini alın
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 
 if [ ! -z "$APP_URL" ]; then
@@ -319,7 +321,7 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Dağıtımdan Sonra Yapılandırma
+#### 5.6.2.4: Dağıtım Sonrası Yapılandırma
 
 Oluşturun `configure-retail-agents.sh`:
 
@@ -385,11 +387,11 @@ Oluşturun `test-retail-deployment.sh`:
 
 echo "🧪 Testing retail deployment..."
 
-# Ortam değişkenlerinin ayarlandığını doğrula
+# Ortam değişkenlerinin ayarlı olduğunu doğrulayın
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Web uygulamasının kullanılabilirliğini test et
+# Web uygulamasının kullanılabilirliğini test edin
 APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
@@ -403,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Yapılandırıldıysa değerlendirmeyi çalıştır
+# Yapılandırıldıysa değerlendirmeyi çalıştırın
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -433,7 +435,7 @@ Bu uygulama kılavuzunu izledikten sonra şunlara sahip olacaksınız:
 
 1. **Dağıtılmış Altyapı:**
 
-      - Model dağıtımları ile Microsoft Foundry projesi
+      - Microsoft Foundry projesi ile model dağıtımları
       - Web uygulamasını barındıran Container Apps
       - Ürün kataloğu için AI Search servisi
       - İzleme için Application Insights
@@ -441,28 +443,28 @@ Bu uygulama kılavuzunu izledikten sonra şunlara sahip olacaksınız:
 2. **İlk Ajan:**
 
       - Temel talimatlarla yapılandırılmış Shopper Agent
-      - Dosya arama yeteneği etkinleştirilmiş
-      - İzleme ve takip yapılandırılmış
+      - Dosya arama yeteneği etkin
+      - İzleme ve monitörleme yapılandırıldı
 
 3. **Özelleştirmeye Hazır:**
 
-      - Loyalty Agent eklemek için altyapı
+      - Loyalty Agent eklemek için çerçeve
       - Özel talimat şablonları
       - Test ve doğrulama betikleri
       - İzleme ve değerlendirme kurulumu
 
-4. **Üretime Hazır:**
+4. **Prodüksiyon Hazırlığı:**
 
       - Red teaming ile güvenlik taraması
       - Performans izleme
       - Kalite değerlendirme çerçevesi
       - Ölçeklenebilir mimari
 
-Bu örnek, AZD şablonunun güvenlik, izleme ve ölçeklenebilirlik için en iyi uygulamaları korurken belirli kurumsal senaryolar için nasıl genişletilip özelleştirilebileceğini gösterir.
+This example demonstrates how the AZD template can be extended and customized for specific enterprise scenarios while maintaining best practices for security, monitoring, and scalability.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Sorumluluk Reddi**:
-Bu belge, yapay zekâ çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilindeki hâliyle yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucunda ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumdan sorumlu değiliz.
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğu sağlamak için çaba göstermemize rağmen, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilindeki hâliyle yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkan herhangi bir yanlış anlaşılma veya yanlış yorumdan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

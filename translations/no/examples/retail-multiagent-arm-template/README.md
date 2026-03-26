@@ -1,104 +1,104 @@
-# Retail Multi-Agent Løsning - Infrastrukturmal
+# Retail Multi-Agent Solution - Infrastrukturmal
 
 **Kapittel 5: Produksjonsdistribusjonspakke**
-- **📚 Kursoversikt**: [AZD For Nybegynnere](../../README.md)
-- **📖 Relatert Kapittel**: [Kapittel 5: Multi-Agent AI-løsninger](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **📝 Scenario Guide**: [Komplett Arkitektur](../retail-scenario.md)
-- **🎯 Rask Distribusjon**: [Ett-Klikk Distribusjon](../../../../examples/retail-multiagent-arm-template)
+- **📚 Kurs Hjem**: [AZD For Beginners](../../README.md)
+- **📖 Relatert Kapittel**: [Kapittel 5: Multi-Agent AI Løsninger](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **📝 Scenario Guide**: [Full Arkitektur](../retail-scenario.md)
+- **🎯 Rask Distribusjon**: [Enkeltklikk Distribusjon](#-quick-deployment)
 
 > **⚠️ KUN INFRASTRUKTURMAL**  
 > Denne ARM-malen distribuerer **Azure-ressurser** for et multi-agent system.  
 >  
 > **Hva som distribueres (15-25 minutter):**
-> - ✅ Azure OpenAI (GPT-4o, GPT-4o-mini, embeddings på tvers av 3 regioner)
-> - ✅ AI Søketjeneste (tom, klar for opprettelse av indeks)
+> - ✅ Microsoft Foundry Modeller (gpt-4.1, gpt-4.1-mini, embeddings i 3 regioner)
+> - ✅ AI Search-tjeneste (tom, klar for indeksopprettelse)
 > - ✅ Container Apps (plassholderbilder, klar for din kode)
 > - ✅ Lagring, Cosmos DB, Key Vault, Application Insights
 >  
 > **Hva som IKKE er inkludert (krever utvikling):**
-> - ❌ Agentimplementeringskode (Kundeagent, Lageragent)
-> - ❌ Rutelogikk og API-endepunkter
+> - ❌ Agent-implementasjonskode (Kunde Agent, Lager Agent)
+> - ❌ Rutinglogikk og API-endepunkter
 > - ❌ Frontend chat UI
-> - ❌ Søkeindeksskjemaer og datapipelines
+> - ❌ Søk indeks skjemaer og datapipelines
 > - ❌ **Estimert utviklingsinnsats: 80-120 timer**
 >  
 > **Bruk denne malen hvis:**
-> - ✅ Du ønsker å klargjøre Azure-infrastruktur for et multi-agent prosjekt
-> - ✅ Du planlegger å utvikle agentimplementeringen separat
-> - ✅ Du trenger en produksjonsklar infrastruktur som grunnlag
+> - ✅ Du vil opprette Azure infrastruktur for et multi-agent prosjekt
+> - ✅ Du planlegger å utvikle agentimplementasjon separat
+> - ✅ Du trenger et produksjonsklart infrastrukturbaseline
 >  
 > **Ikke bruk hvis:**
 > - ❌ Du forventer en fungerende multi-agent demo umiddelbart
-> - ❌ Du ser etter komplette eksempler på applikasjonskode
+> - ❌ Du er ute etter komplett applikasjonskodeeksempler
 
 ## Oversikt
 
-Denne katalogen inneholder en omfattende Azure Resource Manager (ARM)-mal for å distribuere **infrastrukturgrunnlaget** til et multi-agent kundestøttesystem. Malen klargjør alle nødvendige Azure-tjenester, riktig konfigurert og sammenkoblet, klar for din applikasjonsutvikling.
+Denne katalogen inneholder en omfattende Azure Resource Manager (ARM) mal for å distribuere **infrastrukturbasisen** til et multi-agent kundestøttesystem. Malen oppretter alle nødvendige Azure-tjenester, riktig konfigurert og sammenkoblet, klar for din applikasjonsutvikling.
 
-**Etter distribusjon har du:** Produksjonsklar Azure-infrastruktur  
-**For å fullføre systemet trenger du:** Agentkode, frontend UI og datakonfigurasjon (se [Arkitekturguide](../retail-scenario.md))
+**Etter distribusjon vil du ha:** Produksjonsklar Azure-infrastruktur  
+**For å fullføre systemet trenger du:** Agentkode, frontend UI og datakonfigurasjon (se [Arkitektur Guide](../retail-scenario.md))
 
-## 🎯 Hva som distribueres
+## 🎯 Hva Distribueres
 
-### Kjerneinfrastruktur (Status etter distribusjon)
+### Kjerneinfrastruktur (Status Etter Distribusjon)
 
-✅ **Azure OpenAI-tjenester** (Klar for API-kall)
-  - Primærregion: GPT-4o-distribusjon (20K TPM kapasitet)
-  - Sekundærregion: GPT-4o-mini-distribusjon (10K TPM kapasitet)
-  - Tertiærregion: Tekstembeddingsmodell (30K TPM kapasitet)
-  - Evalueringsregion: GPT-4o graderingsmodell (15K TPM kapasitet)
-  - **Status:** Fullt funksjonell - kan gjøre API-kall umiddelbart
+✅ **Microsoft Foundry Models Tjenester** (Klar for API-kall)
+  - Primær region: gpt-4.1 distribusjon (20K TPM kapasitet)
+  - Sekundær region: gpt-4.1-mini distribusjon (10K TPM kapasitet)
+  - Tertiær region: Tekst-embeddingsmodell (30K TPM kapasitet)
+  - Evalueringsregion: gpt-4.1 graderingsmodell (15K TPM kapasitet)
+  - **Status:** Fullt funksjonell - kan utføre API-kall umiddelbart
 
-✅ **Azure AI Søketjeneste** (Tom - klar for konfigurasjon)
-  - Vektorsøkeegenskaper aktivert
-  - Standardnivå med 1 partisjon, 1 replika
-  - **Status:** Tjenesten kjører, men krever opprettelse av indeks
+✅ **Azure AI Search** (Tom - klar for konfigurasjon)
+  - Vektor-søk funksjonalitet aktivert
+  - Standard nivå med 1 partisjon, 1 replika
+  - **Status:** Tjeneste kjører, men krever indeksopprettelse
   - **Handling nødvendig:** Opprett søkeindeks med ditt skjema
 
-✅ **Azure Lagringskonto** (Tom - klar for opplastinger)
+✅ **Azure Storage Konto** (Tom - klar for opplastinger)
   - Blob-containere: `documents`, `uploads`
   - Sikker konfigurasjon (kun HTTPS, ingen offentlig tilgang)
   - **Status:** Klar til å motta filer
-  - **Handling nødvendig:** Last opp produktdataene og dokumentene dine
+  - **Handling nødvendig:** Last opp produktdata og dokumenter
 
 ⚠️ **Container Apps Miljø** (Plassholderbilder distribuert)
   - Agent router app (nginx standardbilde)
   - Frontend app (nginx standardbilde)
-  - Auto-skalering konfigurert (0-10 instanser)
+  - Autoskalering konfigurert (0-10 instanser)
   - **Status:** Kjører plassholdercontainere
   - **Handling nødvendig:** Bygg og distribuer dine agentapplikasjoner
 
 ✅ **Azure Cosmos DB** (Tom - klar for data)
   - Database og container forhåndskonfigurert
-  - Optimalisert for lav-latens operasjoner
+  - Optimalisert for lav ventetid
   - TTL aktivert for automatisk opprydding
-  - **Status:** Klar til å lagre chathistorikk
+  - **Status:** Klar til å lagre chatthistorikk
 
-✅ **Azure Key Vault** (Valgfritt - klar for hemmeligheter)
-  - Myk sletting aktivert
+✅ **Azure Key Vault** (Valgfri - klar for hemmeligheter)
+  - Soft delete aktivert
   - RBAC konfigurert for administrerte identiteter
   - **Status:** Klar til å lagre API-nøkler og tilkoblingsstrenger
 
-✅ **Application Insights** (Valgfritt - overvåking aktiv)
-  - Koblet til Log Analytics arbeidsområde
-  - Tilpassede metrikker og varsler konfigurert
+✅ **Application Insights** (Valgfri - overvåking aktiv)
+  - Tilkoblet Log Analytics arbeidsområde
+  - Tilpassede målinger og varsler konfigurert
   - **Status:** Klar til å motta telemetri fra dine apper
 
-✅ **Dokumentintelligens** (Klar for API-kall)
-  - S0-nivå for produksjonsarbeidsbelastninger
+✅ **Document Intelligence** (Klar for API-kall)
+  - S0 nivå for produksjonsarbeidsmengder
   - **Status:** Klar til å behandle opplastede dokumenter
 
-✅ **Bing Søke-API** (Klar for API-kall)
-  - S1-nivå for sanntidssøk
-  - **Status:** Klar for websøkforespørsler
+✅ **Bing Search API** (Klar for API-kall)
+  - S1 nivå for sanntidssøk
+  - **Status:** Klar for websøke-forespørsler
 
-### Distribusjonsmoduser
+### Distribusjonsmodi
 
 | Modus | OpenAI Kapasitet | Container Instanser | Søkenivå | Lagringsredundans | Best For |
-|-------|------------------|---------------------|----------|-------------------|----------|
-| **Minimal** | 10K-20K TPM | 0-2 replikaer | Basic | LRS (Lokal) | Utvikling/test, læring, proof-of-concept |
+|------|-----------------|---------------------|-------------|-------------------|----------|
+| **Minimal** | 10K-20K TPM | 0-2 replikaer | Basis | LRS (Lokal) | Utvikling/test, læring, proof-of-concept |
 | **Standard** | 30K-60K TPM | 2-5 replikaer | Standard | ZRS (Sone) | Produksjon, moderat trafikk (<10K brukere) |
-| **Premium** | 80K-150K TPM | 5-10 replikaer, sone-redundant | Premium | GRS (Geo) | Enterprise, høy trafikk (>10K brukere), 99.99% SLA |
+| **Premium** | 80K-150K TPM | 5-10 replikaer, sone-redundant | Premium | GRS (Geo) | Enterprise, høy trafikk (>10K brukere), 99,99% SLA |
 
 **Kostnadseffekt:**
 - **Minimal → Standard:** ~4x kostnadsøkning ($100-370/mnd → $420-1,450/mnd)
@@ -106,8 +106,8 @@ Denne katalogen inneholder en omfattende Azure Resource Manager (ARM)-mal for å
 - **Velg basert på:** Forventet belastning, SLA-krav, budsjettbegrensninger
 
 **Kapasitetsplanlegging:**
-- **TPM (Tokens Per Minute):** Totalt på tvers av alle modellimplementeringer
-- **Container Instanser:** Auto-skalering rekkevidde (min-maks replikaer)
+- **TPM (Tokens Per Minute):** Totalt for alle modell-distribusjoner
+- **Container Instanser:** Autoskaleringsområde (min-maks replikaer)
 - **Søkenivå:** Påvirker spørringsytelse og indeksstørrelsesgrenser
 
 ## 📋 Forutsetninger
@@ -119,50 +119,50 @@ Denne katalogen inneholder en omfattende Azure Resource Manager (ARM)-mal for å
    az login      # Autentiser
    ```
 
-2. **Aktivt Azure-abonnement** med Eier- eller Bidragsytertilgang
+2. **Aktivt Azure-abonnement** med Eier eller Bidragsyter-tilgang
    ```bash
    az account show  # Bekreft abonnement
    ```
 
 ### Nødvendige Azure Kvoter
 
-Før distribusjon, verifiser tilstrekkelige kvoter i dine målregioner:
+Før distribusjon, kontroller at tilstrekkelige kvoter finnes i dine målregioner:
 
 ```bash
-# Sjekk tilgjengeligheten av Azure OpenAI i din region
+# Sjekk tilgjengeligheten til Microsoft Foundry-modeller i ditt område
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus2
 
-# Verifiser OpenAI-kvoten (eksempel for gpt-4o)
+# Verifiser OpenAI-kvote (eksempel for gpt-4.1)
 az cognitiveservices usage list \
   --location eastus2 \
-  --query "[?name.value=='OpenAI.Standard.gpt-4o']"
+  --query "[?name.value=='OpenAI.Standard.gpt-4.1']"
 
-# Sjekk kvoten for Container Apps
+# Sjekk kvote for Container Apps
 az provider show \
   --namespace Microsoft.App \
   --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
 ```
 
-**Minimumskrav til kvoter:**
-- **Azure OpenAI:** 3-4 modellimplementeringer på tvers av regioner
-  - GPT-4o: 20K TPM (Tokens Per Minute)
-  - GPT-4o-mini: 10K TPM
+**Minimumskvoter som kreves:**
+- **Microsoft Foundry Modeller:** 3-4 modell-distribusjoner på tvers av regioner
+  - gpt-4.1: 20K TPM (Tokens Per Minute)
+  - gpt-4.1-mini: 10K TPM
   - text-embedding-ada-002: 30K TPM
-  - **Merk:** GPT-4o kan ha venteliste i noen regioner - sjekk [modelltilgjengelighet](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- **Container Apps:** Administrert miljø + 2-10 containerinstanser
-- **AI Søketjeneste:** Standardnivå (Basic utilstrekkelig for vektorsøk)
-- **Cosmos DB:** Standard forhåndsbestemt gjennomstrømning
+  - **Merk:** gpt-4.1 kan ha venteliste i enkelte regioner - sjekk [modelltilgjengelighet](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- **Container Apps:** Administrert miljø + 2-10 container-instanser
+- **AI Search:** Standard nivå (Basis utilstrekkelig for vektor-søk)
+- **Cosmos DB:** Standard provisionert gjennomstrømming
 
-**Hvis kvoten er utilstrekkelig:**
+**Hvis kvote er utilstrekkelig:**
 1. Gå til Azure Portal → Kvoter → Be om økning
 2. Eller bruk Azure CLI:
    ```bash
    az support tickets create \
      --ticket-name "OpenAI-Quota-Increase" \
      --severity "minimal" \
-     --description "Request quota increase for Azure OpenAI GPT-4o in eastus2"
+     --description "Request quota increase for Microsoft Foundry Models gpt-4.1 in eastus2"
    ```
 3. Vurder alternative regioner med tilgjengelighet
 
@@ -181,7 +181,7 @@ chmod +x deploy.sh
 # Distribuer med standardinnstillinger
 ./deploy.sh -g myResourceGroup
 
-# Distribuer for produksjon med premiumfunksjoner
+# Distribuer for produksjon med premium-funksjoner
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 ```
 
@@ -204,35 +204,35 @@ az deployment group create \
 
 ## ⏱️ Distribusjonstidslinje
 
-### Hva du kan forvente
+### Hva Du Kan Forvente
 
-| Fase | Varighet | Hva skjer |
-|------|----------|-----------||
-| **Validering av mal** | 30-60 sekunder | Azure validerer ARM-malens syntaks og parametere |
-| **Oppsett av ressursgruppe** | 10-20 sekunder | Oppretter ressursgruppe (hvis nødvendig) |
-| **OpenAI Klargjøring** | 5-8 minutter | Oppretter 3-4 OpenAI-kontoer og distribuerer modeller |
+| Fase | Varighet | Hva Skjer |
+|-------|----------|--------------||
+| **Malsyntaksvalidering** | 30-60 sekunder | Azure validerer ARM-malsyntaks og parametere |
+| **Opprettelse av ressursgruppe** | 10-20 sekunder | Oppretter ressursgruppe (om nødvendig) |
+| **OpenAI Opprettelse** | 5-8 minutter | Oppretter 3-4 OpenAI-kontoer og distribuerer modeller |
 | **Container Apps** | 3-5 minutter | Oppretter miljø og distribuerer plassholdercontainere |
-| **Søk & Lagring** | 2-4 minutter | Klargjør AI Søketjeneste og lagringskontoer |
+| **Søk & Lagring** | 2-4 minutter | Oppretter AI Search-tjeneste og lagringskontoer |
 | **Cosmos DB** | 2-3 minutter | Oppretter database og konfigurerer containere |
 | **Overvåkingsoppsett** | 2-3 minutter | Setter opp Application Insights og Log Analytics |
-| **RBAC Konfigurasjon** | 1-2 minutter | Konfigurerer administrerte identiteter og tillatelser |
-| **Total Distribusjon** | **15-25 minutter** | Komplett infrastruktur klar |
+| **RBAC-konfigurasjon** | 1-2 minutter | Konfigurerer administrerte identiteter og tillatelser |
+| **Total distribusjon** | **15-25 minutter** | Komplett infrastruktur klar |
 
-**Etter Distribusjon:**
-- ✅ **Infrastruktur Klar:** Alle Azure-tjenester klargjort og kjører
-- ⏱️ **Applikasjonsutvikling:** 80-120 timer (ditt ansvar)
+**Etter distribusjon:**
+- ✅ **Infrastruktur Klar:** Alle Azure-tjenester opprettet og kjører
+- ⏱️ **Applikasjonsutvikling:** 80-120 timer (brukeransvar)
 - ⏱️ **Indekskonfigurasjon:** 15-30 minutter (krever ditt skjema)
-- ⏱️ **Dataopplasting:** Varierer etter datasettstørrelse
+- ⏱️ **Dataopplasting:** Varierer med datasettstørrelse
 - ⏱️ **Testing & Validering:** 2-4 timer
 
 ---
 
 ## ✅ Verifiser Distribusjonssuksess
 
-### Steg 1: Sjekk Ressursklargjøring (2 minutter)
+### Steg 1: Sjekk Ressursopprettelse (2 minutter)
 
 ```bash
-# Verifiser at alle ressurser er distribuert vellykket
+# Bekreft at alle ressurser ble distribuert vellykket
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
@@ -241,16 +241,16 @@ az resource list \
 
 **Forventet:** Tom tabell (alle ressurser viser "Succeeded"-status)
 
-### Steg 2: Verifiser Azure OpenAI Implementeringer (3 minutter)
+### Steg 2: Verifiser Microsoft Foundry Models Distribusjoner (3 minutter)
 
 ```bash
-# List alle OpenAI-kontoer
+# Liste alle OpenAI-kontoer
 az cognitiveservices account list \
   --resource-group myResourceGroup \
   --query "[?kind=='OpenAI'].{Name:name, Location:location, Status:properties.provisioningState}" \
   --output table
 
-# Sjekk modellutplasseringer for primærregion
+# Sjekk modellimplementeringer for primærregion
 OPENAI_NAME=$(az cognitiveservices account list \
   --resource-group myResourceGroup \
   --query "[?kind=='OpenAI'] | [0].name" -o tsv)
@@ -263,18 +263,18 @@ az cognitiveservices account deployment list \
 
 **Forventet:** 
 - 3-4 OpenAI-kontoer (primær, sekundær, tertiær, evalueringsregioner)
-- 1-2 modellimplementeringer per konto (gpt-4o, gpt-4o-mini, text-embedding-ada-002)
+- 1-2 modell-distribusjoner per konto (gpt-4.1, gpt-4.1-mini, text-embedding-ada-002)
 
-### Steg 3: Test Infrastrukturendepunkter (5 minutter)
+### Steg 3: Test Infrastruktur Endepunkter (5 minutter)
 
 ```bash
-# Hent Container App URLer
+# Hent URL-er for Container App
 az containerapp list \
   --resource-group myResourceGroup \
   --query "[].{Name:name, URL:properties.configuration.ingress.fqdn, Status:properties.runningStatus}" \
   --output table
 
-# Test router endepunkt (plassholderbilde vil svare)
+# Test ruterenes endepunkt (plassholderbilde vil svare)
 ROUTER_URL=$(az containerapp show \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -286,9 +286,9 @@ curl -I https://$ROUTER_URL || echo "Container running (placeholder image - expe
 
 **Forventet:** 
 - Container Apps viser "Running"-status
-- Plassholder nginx svarer med HTTP 200 eller 404 (ingen applikasjonskode ennå)
+- Plassholder nginx svarer med HTTP 200 eller 404 (ingen applikasjonskode enda)
 
-### Steg 4: Verifiser Azure OpenAI API-tilgang (3 minutter)
+### Steg 4: Verifiser Microsoft Foundry Models API-tilgang (3 minutter)
 
 ```bash
 # Hent OpenAI-endepunkt og nøkkel
@@ -302,8 +302,8 @@ OPENAI_KEY=$(az cognitiveservices account keys list \
   --resource-group myResourceGroup \
   --query "key1" -o tsv)
 
-# Test GPT-4o-utplassering
-curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview" \
+# Test gpt-4.1 distribusjon
+curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
   -d '{
@@ -312,27 +312,27 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
   }'
 ```
 
-**Forventet:** JSON-respons med chat fullføring (bekrefter at OpenAI fungerer)
+**Forventet:** JSON-svar med chat fullføring (bekrefter at OpenAI er funksjonell)
 
-### Hva som fungerer vs. hva som ikke fungerer
+### Hva Virker vs. Hva Virker Ikke
 
-**✅ Fungerer etter distribusjon:**
-- Azure OpenAI-modeller distribuert og aksepterer API-kall
-- AI Søketjeneste kjører (tom, ingen indekser ennå)
+**✅ Virker Etter Distribusjon:**
+- Microsoft Foundry Modeller distribuert og mottar API-kall
+- AI Search-tjeneste kjører (tom, ingen indekser enda)
 - Container Apps kjører (plassholder nginx-bilder)
-- Lagringskontoer tilgjengelige og klare for opplastinger
+- Lagringskontoer tilgjengelige og klare for opplasting
 - Cosmos DB klar for dataoperasjoner
 - Application Insights samler infrastrukturtelemetri
-- Key Vault klar for lagring av hemmeligheter
+- Key Vault klar for hemmelighetslagring
 
-**❌ Fungerer ikke ennå (krever utvikling):**
-- Agentendepunkter (ingen applikasjonskode distribuert)
-- Chatfunksjonalitet (krever frontend + backend implementering)
-- Søkeforespørsler (ingen søkeindeks opprettet ennå)
-- Dokumentbehandlingspipeline (ingen data opplastet)
-- Tilpasset telemetri (krever applikasjonsinstrumentering)
+**❌ Virker Ikke Enda (Krever Utvikling):**
+- Agent endepunkter (ingen applikasjonskode distribuert)
+- Chat-funksjonalitet (krever frontend + backend implementasjon)
+- Søkespørringer (ingen søkeindeks opprettet enda)
+- Dokumentbehandlingspipeline (ingen data lastet opp)
+- Egendefinert telemetri (krever applikasjonsinstrumentering)
 
-**Neste Steg:** Se [Post-Distribusjonskonfigurasjon](../../../../examples/retail-multiagent-arm-template) for å utvikle og distribuere din applikasjon
+**Neste Steg:** Se [Post-Deploy Konfigurasjon](#-post-deployment-next-steps) for å utvikle og distribuere applikasjonen din
 
 ---
 
@@ -341,18 +341,18 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
 ### Malparametere
 
 | Parameter | Type | Standard | Beskrivelse |
-|-----------|------|----------|-------------|
+|-----------|------|---------|-------------|
 | `projectName` | string | "retail" | Prefiks for alle ressursnavn |
 | `location` | string | Ressursgruppens plassering | Primær distribusjonsregion |
-| `secondaryLocation` | string | "westus2" | Sekundærregion for multi-region distribusjon |
-| `tertiaryLocation` | string | "francecentral" | Region for embeddingsmodell |
+| `secondaryLocation` | string | "westus2" | Sekundær region for multiregionsdistribusjon |
+| `tertiaryLocation` | string | "francecentral" | Region for embeddings-modell |
 | `environmentName` | string | "dev" | Miljøbetegnelse (dev/staging/prod) |
 | `deploymentMode` | string | "standard" | Distribusjonskonfigurasjon (minimal/standard/premium) |
-| `enableMultiRegion` | bool | true | Aktiver multi-region distribusjon |
+| `enableMultiRegion` | bool | true | Aktiver multiregionsdistribusjon |
 | `enableMonitoring` | bool | true | Aktiver Application Insights og logging |
-| `enableSecurity` | bool | true | Aktiver Key Vault og forbedret sikkerhet |
+| `enableSecurity` | bool | true | Aktiver Key Vault og utvidet sikkerhet |
 
-### Tilpasning av Parametere
+### Tilpasse Parametere
 
 Rediger `azuredeploy.parameters.json`:
 
@@ -377,30 +377,21 @@ Rediger `azuredeploy.parameters.json`:
 }
 ```
 
-## 🏗️ Arkitekturoversikt
+## 🏗️ Arkitektur Oversikt
 
+```mermaid
+graph TD
+    Frontend[Frontend<br/>Container App] --> Router[Agent Router<br/>Container App] --> Agents[Agenter<br/>Kunde + Inv]
+    Router --> Search[AI Søk<br/>Vektor DB]
+    Router --> Models[Microsoft Foundry Modeller<br/>Multi-region]
+    Agents --> Storage[Lagring<br/>Dokumenter]
+    Search --> CosmosDB[Cosmos DB<br/>Chathistorikk]
+    Models --> AppInsights[App Insights<br/>Overvåkning]
+    Storage --> KeyVault[Key Vault<br/>Hemmelige nøkler]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │  Agent Router   │    │     Agents      │
-│ (Container App) │───▶│ (Container App) │───▶│ Customer + Inv  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   AI Search     │    │  Azure OpenAI   │    │    Storage      │
-│   (Vector DB)   │    │ (Multi-region)  │    │   (Documents)   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│  Cosmos DB      │    │ App Insights    │    │   Key Vault     │
-│ (Chat History)  │    │  (Monitoring)   │    │   (Secrets)     │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
+## 📖 Distribusjonsskriptets Bruk
 
-## 📖 Bruk av Distribusjonsskript
-
-`deploy.sh`-skriptet gir en interaktiv distribusjonsopplevelse:
+Skriptet `deploy.sh` gir en interaktiv distribusjonsopplevelse:
 
 ```bash
 # Vis hjelp
@@ -409,7 +400,7 @@ Rediger `azuredeploy.parameters.json`:
 # Grunnleggende distribusjon
 ./deploy.sh -g myResourceGroup
 
-# Avansert distribusjon med tilpassede innstillinger
+# Avansert distribusjon med egendefinerte innstillinger
 ./deploy.sh \
   -g myProductionRG \
   -p companyname \
@@ -417,7 +408,7 @@ Rediger `azuredeploy.parameters.json`:
   -m premium \
   -l eastus2
 
-# Utviklingsdistribusjon uten multi-region
+# Utviklingsdistribusjon uten flerregion
 ./deploy.sh \
   -g myDevRG \
   -e dev \
@@ -429,18 +420,18 @@ Rediger `azuredeploy.parameters.json`:
 ### Skriptfunksjoner
 
 - ✅ **Validering av forutsetninger** (Azure CLI, innloggingsstatus, malfiler)
-- ✅ **Administrasjon av ressursgrupper** (oppretter hvis ikke eksisterer)
-- ✅ **Validering av mal** før distribusjon
-- ✅ **Fremdriftsovervåking** med fargekodet utdata
-- ✅ **Visning av distribusjonsutdata**
+- ✅ **Håndtering av ressursgruppe** (oppretter hvis ikke eksisterer)
+- ✅ **Malvalidering** før distribusjon
+- ✅ **Overvåking av fremgang** med fargeutskrift
+- ✅ **Visning av distribusjonsresultater**
 - ✅ **Veiledning etter distribusjon**
 
-## 📊 Overvåking av Distribusjon
+## 📊 Overvåk Distribusjon
 
 ### Sjekk Distribusjonsstatus
 
 ```bash
-# Liste distribusjoner
+# List distribusjoner
 az deployment group list --resource-group myResourceGroup --output table
 
 # Hent distribusjonsdetaljer
@@ -448,7 +439,7 @@ az deployment group show \
   --resource-group myResourceGroup \
   --name retail-deployment-YYYYMMDD-HHMMSS
 
-# Se distribusjonsfremgang
+# Overvåk distribusjonsfremdrift
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -456,49 +447,49 @@ az deployment group create \
   --verbose
 ```
 
-### Distribusjonsutdata
+### Distribusjonsresultater
 
-Etter vellykket distribusjon er følgende utdata tilgjengelige:
+Etter vellykket distribusjon er følgende resultater tilgjengelige:
 
 - **Frontend URL**: Offentlig endepunkt for webgrensesnittet
-- **Router URL**: API-endepunkt for agentrouteren
-- **OpenAI Endepunkter**: Primære og sekundære OpenAI-tjenesteendepunkter
-- **Søketjeneste**: Azure AI Søketjenesteendepunkt
-- **Lagringskonto**: Navn på lagringskontoen for dokumenter
-- **Key Vault**: Navn på Key Vault (hvis aktivert)
-- **Application Insights**: Navn på overvåkingstjenesten (hvis aktivert)
+- **Router URL**: API-endepunkt for agent router
+- **OpenAI Endepunkter**: Primær og sekundær OpenAI tjeneste endepunkter
+- **Søk Tjeneste**: Azure AI Search tjeneste endepunkt
+- **Lagringskonto**: Navn på lagringskonto for dokumenter
+- **Key Vault**: Navn på Key Vault (om aktivert)
+- **Application Insights**: Navn på overvåkningstjeneste (om aktivert)
 
 ## 🔧 Etter Distribusjon: Neste Steg
 > **📝 Viktig:** Infrastruktur er distribuert, men du må utvikle og distribuere applikasjonskode.
 
-### Fase 1: Utvikle agentapplikasjoner (Din ansvar)
+### Fase 1: Utvikle Agent-applikasjoner (Ditt Ansvar)
 
 ARM-malen oppretter **tomme Container Apps** med plassholder nginx-bilder. Du må:
 
-**Påkrevd utvikling:**
+**Nødvendig utvikling:**
 1. **Agentimplementering** (30-40 timer)
-   - Kundeserviceagent med GPT-4o-integrasjon
-   - Lageragent med GPT-4o-mini-integrasjon
-   - Logikk for agentruting
+   - Kundeserviceagent med gpt-4.1-integrasjon
+   - Lageragent med gpt-4.1-mini-integrasjon
+   - Agent rutingslogikk
 
 2. **Frontend-utvikling** (20-30 timer)
    - Chatgrensesnitt UI (React/Vue/Angular)
    - Filopplastingsfunksjonalitet
-   - Gjengivelse og formatering av svar
+   - Responsrendering og formatering
 
 3. **Backend-tjenester** (12-16 timer)
-   - FastAPI eller Express router
+   - FastAPI eller Express-ruter
    - Autentiseringsmiddleware
-   - Telemetriintegrasjon
+   - Telemetri-integrasjon
 
 **Se:** [Arkitekturguide](../retail-scenario.md) for detaljerte implementeringsmønstre og kodeeksempler
 
-### Fase 2: Konfigurer AI-søkeindeks (15-30 minutter)
+### Fase 2: Konfigurer AI Søkeindeks (15-30 minutter)
 
-Opprett en søkeindeks som samsvarer med datamodellen din:
+Opprett en søkeindeks som matcher din datamodell:
 
 ```bash
-# Hent detaljer om søketjenesten
+# Hent detaljene for søketjenesten
 SEARCH_NAME=$(az search service list \
   --resource-group myResourceGroup \
   --query "[0].name" -o tsv)
@@ -508,7 +499,7 @@ SEARCH_KEY=$(az search admin-key show \
   --resource-group myResourceGroup \
   --query "primaryKey" -o tsv)
 
-# Opprett indeks med ditt skjema (eksempel)
+# Opprett indeks med skjemaet ditt (eksempel)
 curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: ${SEARCH_KEY}" \
@@ -530,10 +521,10 @@ curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023
 ```
 
 **Ressurser:**
-- [AI Search Index Schema Design](https://learn.microsoft.com/azure/search/search-what-is-an-index)
-- [Vector Search Configuration](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
+- [AI Søkeindeks Skjema Design](https://learn.microsoft.com/azure/search/search-what-is-an-index)
+- [Vector Search Konfigurasjon](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
 
-### Fase 3: Last opp dataene dine (Tidsbruk varierer)
+### Fase 3: Last opp dine data (Tid varierer)
 
 Når du har produktdata og dokumenter:
 
@@ -564,7 +555,7 @@ az storage blob upload \
   --account-key $STORAGE_KEY
 ```
 
-### Fase 4: Bygg og distribuer applikasjonene dine (8-12 timer)
+### Fase 4: Bygg og distribuer dine applikasjoner (8-12 timer)
 
 Når du har utviklet agentkoden din:
 
@@ -575,7 +566,7 @@ az acr create \
   --resource-group myResourceGroup \
   --sku Basic
 
-# 2. Bygg og push agent router-bilde
+# 2. Bygg og push agent-rutebilde
 docker build -t myregistry.azurecr.io/agent-router:v1 /path/to/your/router/code
 az acr login --name myregistry
 docker push myregistry.azurecr.io/agent-router:v1
@@ -584,7 +575,7 @@ docker push myregistry.azurecr.io/agent-router:v1
 docker build -t myregistry.azurecr.io/frontend:v1 /path/to/your/frontend/code
 docker push myregistry.azurecr.io/frontend:v1
 
-# 4. Oppdater Container Apps med bildene dine
+# 4. Oppdater Container Apps med dine bilder
 az containerapp update \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -609,13 +600,13 @@ az containerapp update \
 ### Fase 5: Test applikasjonen din (2-4 timer)
 
 ```bash
-# Få applikasjons-URL-en din
+# Få URL-en til applikasjonen din
 ROUTER_URL=$(az containerapp show \
   --name retail-router \
   --resource-group myResourceGroup \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# Test agentens endepunkt (når koden din er distribuert)
+# Test agent-endepunktet (når koden din er distribuert)
 curl -X POST "https://${ROUTER_URL}/chat" \
   -H "Content-Type: application/json" \
   -d '{
@@ -632,54 +623,54 @@ az containerapp logs show \
 
 ### Implementeringsressurser
 
-**Arkitektur og design:**
-- 📖 [Komplett arkitekturguide](../retail-scenario.md) - Detaljerte implementeringsmønstre
-- 📖 [Multi-agent designmønstre](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
+**Arkitektur & Design:**
+- 📖 [Fullstendig Arkitekturguide](../retail-scenario.md) - Detaljerte implementeringsmønstre
+- 📖 [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
 
 **Kodeeksempler:**
-- 🔗 [Azure OpenAI Chat Sample](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG-mønster
-- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Agentrammeverk (C#)
+- 🔗 [Microsoft Foundry Models Chat Example](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG-mønster
+- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Agent-rammeverk (C#)
 - 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - Agentorkestrering (Python)
 - 🔗 [AutoGen](https://github.com/microsoft/autogen) - Multi-agent samtaler
 
 **Estimert total innsats:**
-- Distribusjon av infrastruktur: 15-25 minutter (✅ Fullført)
-- Applikasjonsutvikling: 80-120 timer (🔨 Din jobb)
-- Testing og optimalisering: 15-25 timer (🔨 Din jobb)
+- Infrastrukturdistribusjon: 15-25 minutter (✅ Fullført)
+- Applikasjonsutvikling: 80-120 timer (🔨 Ditt arbeid)
+- Testing og optimalisering: 15-25 timer (🔨 Ditt arbeid)
 
 ## 🛠️ Feilsøking
 
 ### Vanlige problemer
 
-#### 1. Azure OpenAI-kvote overskredet
+#### 1. Microsoft Foundry Models Kvote Overskredet
 
 ```bash
 # Sjekk nåværende kvotebruk
 az cognitiveservices usage list --location eastus2
 
-# Be om økning av kvote
+# Be om å øke kvoten
 az support tickets create \
   --ticket-name "OpenAI-Quota-Increase" \
   --severity "minimal" \
-  --description "Request quota increase for Azure OpenAI in region X"
+  --description "Request quota increase for Microsoft Foundry Models in region X"
 ```
 
-#### 2. Distribusjon av Container Apps mislyktes
+#### 2. Container Apps Distribusjon Mislyktes
 
 ```bash
-# Sjekk containerappens logger
+# Sjekk containere app logger
 az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
   --follow
 
-# Start containerappen på nytt
+# Start containere app på nytt
 az containerapp revision restart \
   --name retail-router \
   --resource-group myResourceGroup
 ```
 
-#### 3. Initialisering av søketjeneste
+#### 3. Søketjeneste Initialisering
 
 ```bash
 # Verifiser status for søketjenesten
@@ -687,37 +678,37 @@ az search service show \
   --name <search-service-name> \
   --resource-group myResourceGroup
 
-# Test søketjenestens tilkobling
+# Test tilkoblingen til søketjenesten
 curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-version=2023-11-01" \
   -H "api-key: <search-admin-key>"
 ```
 
-### Validering av distribusjon
+### Distribusjonsvalidering
 
 ```bash
-# Valider at alle ressurser er opprettet
+# Bekreft at alle ressurser er opprettet
 az resource list \
   --resource-group myResourceGroup \
   --output table
 
-# Sjekk ressursenes tilstand
+# Sjekk ressurshelse
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
   --output table
 ```
 
-## 🔐 Sikkerhetsvurderinger
+## 🔐 Sikkerhetshensyn
 
-### Nøkkelhåndtering
+### Nøkkeladministrasjon
 - Alle hemmeligheter lagres i Azure Key Vault (når aktivert)
-- Container Apps bruker administrert identitet for autentisering
-- Lagringskontoer har sikre standarder (kun HTTPS, ingen offentlig blobtilgang)
+- Container-apper bruker administrert identitet for autentisering
+- Storage-kontoer har sikre standarder (kun HTTPS, ingen offentlig blob-tilgang)
 
 ### Nettverkssikkerhet
-- Container Apps bruker intern nettverkskonfigurasjon der det er mulig
-- Søketjenesten er konfigurert med private endepunkter
-- Cosmos DB er konfigurert med minimale nødvendige tillatelser
+- Container-apper bruker internt nettverk der det er mulig
+- Søketjeneste konfigurert med alternativ for private endepunkter
+- Cosmos DB konfigurert med minimale nødvendige tillatelser
 
 ### RBAC-konfigurasjon
 ```bash
@@ -730,10 +721,10 @@ az role assignment create \
 
 ## 💰 Kostnadsoptimalisering
 
-### Kostnadsestimater (Månedlig, USD)
+### Kostnadsestimater (månedlig, USD)
 
-| Modus | OpenAI | Container Apps | Søketjeneste | Lagring | Total Est. |
-|-------|--------|----------------|--------------|---------|------------|
+| Modus | OpenAI | Container Apps | Search | Storage | Total Est. |
+|------|--------|----------------|--------|---------|------------|
 | Minimal | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
 | Standard | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
 | Premium | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
@@ -751,11 +742,11 @@ az consumption budget create \
   --end-date 2024-12-31
 ```
 
-## 🔄 Oppdateringer og vedlikehold
+## 🔄 Oppdateringer og Vedlikehold
 
 ### Maloppdateringer
 - Versjonskontroller ARM-malfilene
-- Test endringer i utviklingsmiljøet først
+- Test endringer i utviklingsmiljø først
 - Bruk inkrementell distribusjonsmodus for oppdateringer
 
 ### Ressursoppdateringer
@@ -768,10 +759,10 @@ az deployment group create \
   --mode Incremental
 ```
 
-### Sikkerhetskopiering og gjenoppretting
-- Cosmos DB automatisk sikkerhetskopiering aktivert
+### Backup og Gjenoppretting
+- Automatisk backup for Cosmos DB aktivert
 - Key Vault myk sletting aktivert
-- Container App-revisjoner opprettholdt for tilbakestilling
+- Container-app revisjoner opprettholdes for tilbakestilling
 
 ## 📞 Support
 
@@ -789,5 +780,5 @@ Start med: `./deploy.sh -g myResourceGroup`
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på sitt opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på originalspråket bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi påtar oss ikke ansvar for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

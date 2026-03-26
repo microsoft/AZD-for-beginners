@@ -6,13 +6,13 @@
 
 ## Pregled
 
-To poglavje zajema bistvene korake načrtovanja in preverjanja pred uvajanjem vaše aplikacije. Naučite se, kako se izogniti dragim napakam z ustreznim načrtovanjem zmogljivosti, izbiro SKU-jev in predhodnimi (preflight) pregledi.
+To poglavje pokriva ključne korake načrtovanja in preverjanja pred uvajanjem vaše aplikacije. Naučite se, kako se izogniti dragim napakam z ustreznim načrtovanjem zmogljivosti, izbiro SKU-jev in predhodnimi preverjanji.
 
 ## Cilji učenja
 
-Po zaključenem poglavju boste:
-- Izvesti preflight preglede pred uvajanjem
-- Načrtovati zmogljivost in oceniti potrebne vire
+By completing this chapter, you will:
+- Izvesti predhodna preverjanja pred uvajanjem
+- Načrtovati zmogljivosti in oceniti potrebne vire
 - Izbrati ustrezne SKU-je za optimizacijo stroškov
 - Konfigurirati Application Insights za spremljanje
 - Razumeti vzorce koordinacije ekipe
@@ -23,24 +23,24 @@ Po zaključenem poglavju boste:
 
 | # | Lekcija | Opis | Čas |
 |---|--------|-------------|------|
-| 1 | [Preflight Checks](preflight-checks.md) | Preveriti konfiguracijo pred uvajanjem | 15 min |
-| 2 | [Capacity Planning](capacity-planning.md) | Oceniti potrebe po virih | 20 min |
-| 3 | [SKU Selection](sku-selection.md) | Izbrati ustrezne cenovne razrede | 15 min |
-| 4 | [Application Insights](application-insights.md) | Konfigurirati spremljanje | 20 min |
-| 5 | [Coordination Patterns](coordination-patterns.md) | Delovni tokovi ekipe pri uvajanju | 15 min |
+| 1 | [Predhodna preverjanja](preflight-checks.md) | Preverite konfiguracijo pred uvajanjem | 15 min |
+| 2 | [Načrtovanje zmogljivosti](capacity-planning.md) | Oceniti potrebne vire | 20 min |
+| 3 | [Izbira SKU-jev](sku-selection.md) | Izberite ustrezne cenovne stopnje | 15 min |
+| 4 | [Application Insights](application-insights.md) | Konfigurirajte spremljanje | 20 min |
+| 5 | [Vzorce koordinacije](coordination-patterns.md) | Delovni procesi uvajanja ekipe | 15 min |
 
 ---
 
 ## 🚀 Hitri začetek
 
 ```bash
-# Preveri kvote naročnine
+# Preveri kvote za naročnino
 az vm list-usage --location eastus --output table
 
-# Predogled uvajanja (ne bodo ustvarjeni viri)
+# Predogled razmestitve (ne ustvarja virov)
 azd provision --preview
 
-# Preveri sintakso Bicepa
+# Preveri sintakso Bicep
 az bicep build --file infra/main.bicep
 
 # Preveri konfiguracijo okolja
@@ -54,27 +54,27 @@ azd env get-values
 ### Pred `azd provision`
 
 - [ ] Kvota preverjena za regijo
-- [ ] Ustrezno izbrani SKU-ji
+- [ ] SKU-ji ustrezno izbrani
 - [ ] Ocena stroškov pregledana
-- [ ] Dosledna konvencija poimenovanja
+- [ ] Poimenovalna konvencija skladna
 - [ ] Varnost/RBAC konfigurirana
 
 ### Pred `azd deploy`
 
 - [ ] Okoljske spremenljivke nastavljene
-- [ ] Skrivnosti v Key Vaultu
+- [ ] Skrivnosti v Key Vault
 - [ ] Nizi povezav preverjeni
-- [ ] Preverjanja zdravja (health checks) konfigurirana
+- [ ] Health checks konfigurirani
 
 ---
 
 ## 💰 Vodnik za izbiro SKU-jev
 
-| Workload | Development | Production |
+| Delovna obremenitev | Razvoj | Produkcija |
 |----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
-| Azure OpenAI | Standard | Standard + PTU |
+| Microsoft Foundry Models | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
 
 ---
@@ -83,12 +83,12 @@ azd env get-values
 
 | Smer | Poglavje |
 |-----------|---------|
-| **Prejšnje** | [Poglavje 5: Večagentni](../chapter-05-multi-agent/README.md) |
+| **Prejšnje** | [Poglavje 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
 | **Naslednje** | [Poglavje 7: Odpravljanje težav](../chapter-07-troubleshooting/README.md) |
 
 ---
 
-## 📖 Povezani viri
+## 📖 Sorodni viri
 
 - [Vodnik za konfiguracijo](../chapter-03-configuration/configuration.md)
 - [Vodnik za uvajanje](../chapter-04-infrastructure/deployment-guide.md)
@@ -97,6 +97,6 @@ azd env get-values
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Izjava o omejitvi odgovornosti:
-Ta dokument je bil preveden z uporabo storitve za strojno prevajanje z umetno inteligenco Co-op Translator (https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Za avtoritativni vir velja izvirni dokument v izvirnem jeziku. Za pomembne informacije priporočamo strokovni človeški prevod. Ne odgovarjamo za morebitne nesporazume ali napačne razlage, ki bi izhajale iz uporabe tega prevoda.
+**Izjava o omejitvi odgovornosti**:
+Ta dokument je bil preveden s storitvijo za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, prosimo, upoštevajte, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku velja za avtoritativni vir. Za ključne informacije priporočamo strokovni človeški prevod. Nismo odgovorni za nobene nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

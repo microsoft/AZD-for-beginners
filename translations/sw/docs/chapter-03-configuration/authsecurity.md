@@ -1,30 +1,30 @@
-# Mifumo ya Uthibitishaji na Utambulisho uliosimamiwa
+# Mifumo ya Uthibitishaji na Utambulisho Ulioendeshwa
 
-⏱️ **Muda wa Makadirio**: 45-60 dakika | 💰 **Athari ya Gharama**: Bila malipo (hakuna malipo ya ziada) | ⭐ **Ugumu**: Wastani
+⏱️ **Muda Unaokadirwa**: 45-60 minutes | 💰 **Athari ya Gharama**: Free (no additional charges) | ⭐ **Ugumu**: Intermediate
 
 **📚 Njia ya Kujifunza:**
-- ← Iliopita: [Usimamizi wa Mipangilio](configuration.md) - Kusimamia vigezo vya mazingira na siri
-- 🎯 **Uko Hapa**: Uthibitishaji & Usalama (Utambulisho uliosimamiwa, Key Vault, mifumo salama)
-- → Ifuatayo: [Mradi wa Kwanza](first-project.md) - Jenga programu yako ya kwanza ya AZD
-- 🏠 [Nyumbani kwa Kozi](../../README.md)
+- ← Previous: [Usimamizi wa Mipangilio](configuration.md) - Kusimamia environment variables na secrets
+- 🎯 **Uko Hapa**: Uthibitishaji & Usalama (Managed Identity, Key Vault, mbinu salama)
+- → Next: [First Project](first-project.md) - Build your first AZD application
+- 🏠 [Course Home](../../README.md)
 
 ---
 
-## Utakachojifunza
+## Unachotajifunza
 
-Kwa kumaliza somo hili, utakuwa umeweza:
-- Elewa mifumo ya uthibitishaji ya Azure (vifunguo, mfululizo wa muunganisho, utambulisho uliosimamiwa)
-- Tekeleza **Utambulisho uliosimamiwa** kwa uthibitishaji bila nywila
-- Linda siri kwa kuunganisha na **Azure Key Vault**
-- Sanidi **udhibiti wa upatikanaji kulingana na majukumu (RBAC)** kwa uenezaji wa AZD
-- Tumia mbinu bora za usalama katika Container Apps na huduma za Azure
-- Hamisha kutoka kwenye uthibitishaji unaotegemea funguo hadi uthibitishaji unaotegemea utambulisho
+Kwa kumaliza somo hili, utapata:
+- Kuelewa mifumo ya uthibitishaji ya Azure (vifunguo, connection strings, managed identity)
+- Kutekeleza **Managed Identity** kwa uthibitishaji bila nywila
+- Kuweka siri salama kwa ushirikiano wa **Azure Key Vault**
+- Kusanidi **udhibiti wa ufikiaji kwa msingi wa majukumu (RBAC)** kwa utumeaji wa AZD
+- Kutumia mbinu bora za usalama katika Container Apps na huduma za Azure
+- Kuhamisha kutoka uthibitishaji kwa kutumia funguo hadi uthibitishaji kwa kutumia utambulisho
 
-## Kwa Nini Utambulisho uliosimamiwa ni Muhimu
+## Kwa Nini Utambulisho Ulioendeshwa Ni Muhimu
 
-### Tatizo: Uthibitishaji wa Kawaida
+### Tatizo: Uthibitishaji wa Kizamani
 
-**Kabla ya Utambulisho uliosimamiwa:**
+**Kabla ya Utambulisho Ulioendeshwa:**
 ```javascript
 // ❌ HATARI YA USALAMA: Siri zilizowekwa moja kwa moja ndani ya msimbo
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
@@ -33,15 +33,15 @@ const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
 **Matatizo:**
-- 🔴 **Siri zilizo wazi** katika msimbo, faili za usanidi, vigezo vya mazingira
-- 🔴 **Mzunguko wa cheo** unahitaji mabadiliko ya msimbo na uenezaji upya
-- 🔴 **Maumivu ya ukaguzi** - nani alifikia nini, lini?
-- 🔴 **Usambazaji ulioenea** - siri zimesambaa katika mifumo mingi
-- 🔴 **Hatari za uzingatiaji** - hupitisha ukaguzi wa usalama
+- 🔴 **Siri zimetangazwa** kwenye msimbo, faili za usanidi, environment variables
+- 🔴 **Mzunguko wa vitambulisho** unahitaji mabadiliko ya msimbo na utangazaji upya
+- 🔴 **Kuwaza kwa ukaguzi** - nani alifikia nini, lini?
+- 🔴 **Usambazaji** - siri zimeenea kwenye mifumo mingi
+- 🔴 **Hatari za ufuataji wa kanuni** - kushindwa katika ukaguzi wa usalama
 
-### Suluhisho: Utambulisho uliosimamiwa
+### Suluhisho: Utambulisho Ulioendeshwa
 
-**Baada ya Utambulisho uliosimamiwa:**
+**Baada ya Utambulisho Ulioendeshwa:**
 ```javascript
 // ✅ SALAMA: Hakuna siri katika msimbo
 const credential = new DefaultAzureCredential();
@@ -52,138 +52,138 @@ const client = new BlobServiceClient(
 ```
 
 **Manufaa:**
-- ✅ **Hakuna siri** katika msimbo au usanidi
-- ✅ **Mzunguko wa cheo wa moja kwa moja** - Azure inashughulikia
-- ✅ **Rekodi kamili ya ukaguzi** katika kumbukumbu za Azure AD
-- ✅ **Usalama uliolengwa katikati** - simamia kwenye Azure Portal
-- ✅ **Tayari kwa uzingatiaji** - inakidhi viwango vya usalama
+- ✅ **Hakuna siri** kwenye msimbo au usanidi
+- ✅ **Mzunguko wa moja kwa moja** - Azure inashughulikia
+- ✅ **Rekodi kamili ya ukaguzi** kwenye kumbukumbu za Azure AD
+- ✅ **Usalama uliokusanywa** - simamia kwenye Azure Portal
+- ✅ **Tayari kwa ufuataji wa kanuni** - inakidhi viwango vya usalama
 
-**Tamko**: Uthibitishaji wa jadi ni kama kubeba funguo nyingi za kimwili kwa milango tofauti. Utambulisho uliosimamiwa ni kama kuwa na kadi ya usalama inayotoa ufikiaji kiotomatiki kulingana na wewe—hakuna funguo za kupoteza, kunakili, au kuzungusha.
+**Metafora**: Uthibitishaji wa jadi ni kama kubeba funguo nyingi za kimwili kwa milango tofauti. Utambulisho Ulioendeshwa ni kama kuwa na kadi ya usalama inayoruhusu ufikiaji kiotomatiki kulingana na wewe—hakuna funguo za kupoteza, kunakili, au kuzungusha.
 
 ---
 
-## Muhtasari wa Miundo
+## Muhtasari wa Miundombinu
 
-### Mtiririko wa Uthibitishaji na Utambulisho uliosimamiwa
+### Mtiririko wa Uthibitishaji na Utambulisho Ulioendeshwa
 
 ```mermaid
 sequenceDiagram
     participant App as Programu Yako<br/>(Programu ya Kontena)
-    participant MI as Utambulisho Ulioasimamiwa<br/>(Azure AD)
-    participant KV as Hifadhi ya Funguo
+    participant MI as Utambulisho Ulioendeshwa<br/>(Azure AD)
+    participant KV as Hazina ya Funguo
     participant Storage as Hifadhi ya Azure
     participant DB as SQL ya Azure
     
-    App->>MI: Omba tokeni ya ufikiaji<br/>(kiotomatiki)
-    MI->>MI: Thibitisha utambulisho<br/>(hakuna nenosiri linahitajika)
+    App->>MI: Omba tokeni ya upatikanaji<br/>(kiotomatiki)
+    MI->>MI: Thibitisha utambulisho<br/>(hakuna nywila inahitajika)
     MI-->>App: Rudisha tokeni<br/>(inayofaa kwa saa 1)
     
     App->>KV: Pata siri<br/>(ukitumia tokeni)
-    KV->>KV: Kagua ruhusa za RBAC
+    KV->>KV: Angalia ruhusa za RBAC
     KV-->>App: Rudisha thamani ya siri
     
     App->>Storage: Pakia blob<br/>(ukitumia tokeni)
-    Storage->>Storage: Kagua ruhusa za RBAC
+    Storage->>Storage: Angalia ruhusa za RBAC
     Storage-->>App: Imefanikiwa
     
-    App->>DB: Ombi la data<br/>(ukitumia tokeni)
-    DB->>DB: Kagua ruhusa za SQL
+    App->>DB: Fanya uchunguzi wa data<br/>(ukitumia tokeni)
+    DB->>DB: Angalia ruhusa za SQL
     DB-->>App: Rudisha matokeo
     
-    Note over App,DB: Uthibitishaji wote bila nenosiri!
+    Note over App,DB: Uthibitishaji wote bila nywila!
 ```
-### Aina za Utambulisho uliosimamiwa
+### Aina za Utambulisho Ulioendeshwa
 
 ```mermaid
 graph TB
     MI[Utambulisho uliosimamiwa]
-    SystemAssigned[Utambulisho uliotengwa na mfumo]
-    UserAssigned[Utambulisho uliotengwa na mtumiaji]
+    SystemAssigned[Utambulisho uliotengwa na Mfumo]
+    UserAssigned[Utambulisho uliotengwa na Mtumiaji]
     
     MI --> SystemAssigned
     MI --> UserAssigned
     
-    SystemAssigned --> SA1[Mzunguko wa maisha umeunganishwa na rasilimali]
-    SystemAssigned --> SA2[Uundaji na ufutaji wa moja kwa moja]
+    SystemAssigned --> SA1[Mzunguko wa maisha umeambatana na rasilimali]
+    SystemAssigned --> SA2[Uundaji/ufutaji wa kiotomatiki]
     SystemAssigned --> SA3[Inafaa zaidi kwa rasilimali moja]
     
     UserAssigned --> UA1[Mzunguko wa maisha huru]
-    UserAssigned --> UA2[Uundaji na ufutaji kwa mkono]
+    UserAssigned --> UA2[Uundaji/ufutaji kwa mkono]
     UserAssigned --> UA3[Inashirikiwa kati ya rasilimali]
     
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
-| Kipengele | System-Assigned | User-Assigned |
+| Feature | System-Assigned | User-Assigned |
 |---------|----------------|---------------|
-| **Mzunguko wa Maisha** | Inahusishwa na rasilimali | Haina uhusiano wa maisha |
-| **Uundaji** | Moja kwa moja na rasilimali | Uundaji wa mkono |
-| **Ufutaji** | Inafutwa pamoja na rasilimali | Hushikilia baada ya kufutwa kwa rasilimali |
-| **Kushirikishwa** | Rasilimali moja tu | Rasilimali nyingi |
-| **Tumia Kesi** | Hali rahisi | Hali za muundo wa rasilimali nyingi |
-| **Chaguo-msingi AZD** | ✅ Inapendekezwa | Hiari |
+| **Lifecycle** | Tied to resource | Independent |
+| **Creation** | Automatic with resource | Manual creation |
+| **Deletion** | Deleted with resource | Persists after resource deletion |
+| **Sharing** | One resource only | Multiple resources |
+| **Use Case** | Simple scenarios | Complex multi-resource scenarios |
+| **AZD Default** | ✅ Recommended | Optional |
 
 ---
 
-## Mahitaji ya Msingi
+## Masharti ya Awali
 
 ### Vifaa Vinavyohitajika
 
-Unapaswa tayari kuwa umeweka hivi kutoka masomo yaliyopita:
+Unapaswa tayari kuwa umeweka hizi kutoka kwa masomo yaliyopita:
 
 ```bash
-# Thibitisha CLI ya Azure Developer
+# Thibitisha Azure Developer CLI
 azd version
-# ✅ Inatarajiwa: azd toleo 1.0.0 au zaidi
+# ✅ Inatarajiwa: azd toleo 1.0.0 au juu zaidi
 
-# Thibitisha CLI ya Azure
+# Thibitisha Azure CLI
 az --version
-# ✅ Inatarajiwa: azure-cli 2.50.0 au zaidi
+# ✅ Inatarajiwa: azure-cli toleo 2.50.0 au juu zaidi
 ```
 
 ### Mahitaji ya Azure
 
-- Michango ya Azure hai
-- Ruhusa za:
-  - Kuunda utambulisho uliopewa usimamizi
-  - Kutoa majukumu ya RBAC
-  - Kuunda rasilimali za Key Vault
-  - Kueneza Container Apps
+- Active Azure subscription
+- Permissions to:
+  - Create managed identities
+  - Assign RBAC roles
+  - Create Key Vault resources
+  - Deploy Container Apps
 
 ### Maarifa Yanayohitajika
 
 Unapaswa kuwa umemaliza:
-- [Mwongozo wa Ufungaji](installation.md) - usanidi wa AZD
-- [Misingi ya AZD](azd-basics.md) - dhana za msingi
-- [Usimamizi wa Mipangilio](configuration.md) - vigezo vya mazingira
+- [Installation Guide](installation.md) - AZD setup
+- [AZD Basics](azd-basics.md) - Core concepts
+- [Configuration Management](configuration.md) - Environment variables
 
 ---
 
 ## Somo 1: Kuelewa Mifumo ya Uthibitishaji
 
-### Mfumo 1: Mifumo ya Muunganisho (Ya Kale - Epuka)
+### Mfano 1: Connection Strings (Legacy - Avoid)
 
-**Inavyofanya kazi:**
+**Jinsi inavyofanya kazi:**
 ```bash
-# Mstari wa muunganisho una vitambulisho.
+# Mstari wa muunganisho una vitambulisho
 STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=myaccount;AccountKey=xK7mN9pQ2wR5..."
 COSMOS_CONNECTION_STRING="AccountEndpoint=https://myaccount.documents.azure.com:443/;AccountKey=C2x7..."
 SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=P@ssw0rd..."
 ```
 
 **Matatizo:**
-- ❌ Siri zinavyoonekana katika vigezo vya mazingira
-- ❌ Zinarekodiwa katika mifumo ya uenezaji
-- ❌ Zinasumbua kuzungusha
-- ❌ Hakuna rekodi ya ukaguzi ya ufikiaji
+- ❌ Secrets visible in environment variables
+- ❌ Logged in deployment systems
+- ❌ Difficult to rotate
+- ❌ No audit trail of access
 
-**Wakati wa kutumia:** Kwa maendeleo ya ndani tu, si kwa uzalishaji.
+**Wakati wa kutumia:** Kwa maendeleo ya ndani pekee, kamwe sio kwa uzalishaji.
 
 ---
 
-### Mfumo 2: Marejeleo ya Key Vault (Bora)
+### Mfano 2: Key Vault References (Better)
 
-**Inavyofanya kazi:**
+**Jinsi inavyofanya kazi:**
 ```bicep
 // Store secret in Key Vault
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
@@ -203,21 +203,21 @@ env: [
 ```
 
 **Manufaa:**
-- ✅ Siri zinalindwa kwa usalama katika Key Vault
-- ✅ Usimamizi wa siri uliolengwa katikati
-- ✅ Kuizungusha bila mabadiliko ya msimbo
+- ✅ Secrets stored securely in Key Vault
+- ✅ Centralized secret management
+- ✅ Rotation without code changes
 
-**Marekebisho:**
-- ⚠️ Bado inatumia funguo/nywila
-- ⚠️ Inahitaji kusimamia upatikanaji wa Key Vault
+**Mipaka:**
+- ⚠️ Still using keys/passwords
+- ⚠️ Need to manage Key Vault access
 
-**Wakati wa kutumia:** Hatua ya mpito kutoka kwenye mfululizo wa muunganisho hadi utambulisho uliosimamiwa.
+**Wakati wa kutumia:** Hatua ya mpito kutoka connection strings kwenda managed identity.
 
 ---
 
-### Mfumo 3: Utambulisho uliosimamiwa (Mbinu Bora)
+### Mfano 3: Managed Identity (Best Practice)
 
-**Inavyofanya kazi:**
+**Jinsi inavyofanya kazi:**
 ```bicep
 // Enable managed identity
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -239,7 +239,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 **Msimbo wa programu:**
 ```javascript
-// Hakuna siri zinahitajika!
+// Hakuna siri zinazohitajika!
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -251,21 +251,21 @@ const blobServiceClient = new BlobServiceClient(
 ```
 
 **Manufaa:**
-- ✅ Hakuna siri katika msimbo/usanidi
-- ✅ Mzunguko wa cheo wa moja kwa moja
-- ✅ Rekodi kamili ya ukaguzi
-- ✅ Ruhusa kwa msingi wa RBAC
-- ✅ Tayari kwa uzingatiaji
+- ✅ Zero secrets in code/config
+- ✅ Automatic credential rotation
+- ✅ Full audit trail
+- ✅ RBAC-based permissions
+- ✅ Compliance ready
 
 **Wakati wa kutumia:** Daima, kwa programu za uzalishaji.
 
 ---
 
-## Somo 2: Kutekeleza Utambulisho uliosimamiwa kwa AZD
+## Somo 2: Kutekeleza Utambulisho Ulioendeshwa na AZD
 
-### Hatua kwa Hatua ya Utekelezaji
+### Utekelezaji Hatua kwa Hatua
 
-Tuanze kuunda Container App salama inayotumia utambulisho uliosimamiwa kufikia Azure Storage na Key Vault.
+Tujenge Container App salama inayotumia utambulisho ulioendeshwa kufikia Azure Storage na Key Vault.
 
 ### Muundo wa Mradi
 
@@ -302,7 +302,7 @@ services:
 # Enable managed identity (AZD handles this automatically)
 ```
 
-### 2. Miundombinu: Omba Utambulisho uliosimamiwa
+### 2. Miundombinu: Wezesha Utambulisho Ulioendeshwa
 
 **Faili: `infra/main.bicep`**
 
@@ -384,7 +384,7 @@ output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
 output APP_URL string = containerApp.outputs.url
 ```
 
-### 3. Container App na Utambulisho uliowekwa kwa Mfumo
+### 3. Container App yenye Utambulisho Ulioteuliwa na Mfumo
 
 **Faili: `infra/app/container-app.bicep`**
 
@@ -441,7 +441,7 @@ output id string = containerApp.id
 output url string = 'https://${containerApp.properties.configuration.ingress.fqdn}'
 ```
 
-### 4. Moduli ya Ugawaji wa Majukumu ya RBAC
+### 4. Moduli ya Kuteua Majukumu ya RBAC
 
 **Faili: `infra/core/role-assignment.bicep`**
 
@@ -463,7 +463,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 output id string = roleAssignment.id
 ```
 
-### 5. Msimbo wa Programu unaotumia Utambulisho uliosimamiwa
+### 5. Msimbo wa Programu na Utambulisho Ulioendeshwa
 
 **Faili: `src/app.js`**
 
@@ -476,7 +476,7 @@ const { SecretClient } = require('@azure/keyvault-secrets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔑 Anzisha idhinishaji (inafanya kazi moja kwa moja na kitambulisho kilichosimamiwa)
+// 🔑 Anzisha uthibitisho (inafanya kazi kiotomatiki na utambulisho ulioendeshwa)
 const credential = new DefaultAzureCredential();
 
 // Usanidi wa Azure Storage
@@ -486,7 +486,7 @@ const blobServiceClient = new BlobServiceClient(
   credential  // Hakuna funguo zinazohitajika!
 );
 
-// Usanidi wa Key Vault
+// Usanidi wa Hazina ya Funguo
 const keyVaultName = process.env.AZURE_KEY_VAULT_NAME;
 const secretClient = new SecretClient(
   `https://${keyVaultName}.vault.azure.net`,
@@ -520,7 +520,7 @@ app.post('/upload', async (req, res) => {
   }
 });
 
-// Pata siri kutoka Key Vault
+// Pata siri kutoka Hazina ya Funguo
 app.get('/secret/:name', async (req, res) => {
   try {
     const secretName = req.params.name;
@@ -537,7 +537,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// Orodhesha makontena ya blob (inaonyesha ruhusa ya kusoma)
+// Orodhesha kontena za blob (inaonyesha ufikiaji wa kusoma)
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -580,13 +580,13 @@ app.listen(PORT, () => {
 }
 ```
 
-### 6. Eneza na Jaribu
+### 6. Tengeneza na Jaribu
 
 ```bash
 # Anzisha mazingira ya AZD
 azd init
 
-# Sambaza miundombinu na programu
+# Weka miundombinu na programu
 azd up
 
 # Pata URL ya programu
@@ -596,7 +596,7 @@ APP_URL=$(azd env get-values | grep APP_URL | cut -d '=' -f2 | tr -d '"')
 curl $APP_URL/health
 ```
 
-**✅ Matokeo yanayotarajiwa:**
+**✅ Matokeo Yanayotarajiwa:**
 ```json
 {
   "status": "healthy",
@@ -604,12 +604,12 @@ curl $APP_URL/health
 }
 ```
 
-**Jaribio la kupakia blob:**
+**Jaribu kupakia blob:**
 ```bash
 curl -X POST $APP_URL/upload
 ```
 
-**✅ Matokeo yanayotarajiwa:**
+**✅ Matokeo Yanayotarajiwa:**
 ```json
 {
   "success": true,
@@ -618,12 +618,12 @@ curl -X POST $APP_URL/upload
 }
 ```
 
-**Orodha ya vyombo vya kontena:**
+**Jaribu kuorodhesha kontena:**
 ```bash
 curl $APP_URL/containers
 ```
 
-**✅ Matokeo yanayotarajiwa:**
+**✅ Matokeo Yanayotarajiwa:**
 ```json
 {
   "containers": ["uploads"],
@@ -634,46 +634,46 @@ curl $APP_URL/containers
 
 ---
 
-## Majukumu ya RBAC ya Azure yanayotumika sana
+## Majukumu ya RBAC ya Azure Yanayotumika Mara kwa Mara
 
-### Vitambulisho vya Majukumu vilivyomo kwa Utambulisho uliosimamiwa
+### Vitambulisho vya Majukumu Vilivyojengwa kwa Utambulisho Ulioendeshwa
 
-| Huduma | Jina la Nafasi | Role ID | Ruhusa |
+| Service | Role Name | Role ID | Permissions |
 |---------|-----------|---------|-------------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Soma blobs na vyombo |
-| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Soma, andika, futa blobs |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Soma, andika, futa ujumbe wa foleni |
-| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Soma siri |
-| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Soma, andika, futa siri |
-| **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Soma data za Cosmos DB |
-| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Soma, andika data za Cosmos DB |
-| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Dhibiti hifadhidata za SQL |
-| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Tuma, pokea, dhibiti ujumbe |
+| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Read blobs and containers |
+| **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Read, write, delete blobs |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Read, write, delete queue messages |
+| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Read secrets |
+| **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Read, write, delete secrets |
+| **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Read Cosmos DB data |
+| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Read, write Cosmos DB data |
+| **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Manage SQL databases |
+| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Send, receive, manage messages |
 
-### Jinsi ya Kupata Role IDs
+### Jinsi ya Kupata Vitambulisho vya Nafasi
 
 ```bash
-# Orodhesha nafasi zote zilizojengwa
+# Orodhesha majukumu yote yaliyojengwa
 az role definition list --query "[].{Name:roleName, ID:name}" --output table
 
-# Tafuta nafasi maalum
+# Tafuta jukumu maalum
 az role definition list --query "[?contains(roleName, 'Storage Blob')].{Name:roleName, ID:name}" --output table
 
-# Pata maelezo ya nafasi
+# Pata maelezo ya jukumu
 az role definition list --name "Storage Blob Data Contributor"
 ```
 
 ---
 
-## Mazoezi ya Kivitendo
+## Mazoezi ya Vitendo
 
-### Zoezi 1: Washa Utambulisho uliosimamiwa kwa App Iliyopo ⭐⭐ (Wastani)
+### Zoef 1: Wezesha Utambulisho Ulioendeshwa kwa App Iliyopo ⭐⭐ (Wastani)
 
-**Lengo**: Ongeza utambulisho uliosimamiwa kwa uenezaji uliopo wa Container App
+**Lengo**: Ongeza utambulisho ulioendeshwa kwa utangazaji wa Container App uliopo
 
-**Tukio**: Una Container App inayotumia mfululizo wa muunganisho. Geuza hadi utambulisho uliosimamiwa.
+**Senario**: Una Container App inayotumia connection strings. Ibadili hadi managed identity.
 
-**Mahali pa Kuanzia**: Container App na usanidi huu:
+**Mahali pa Kuanza**: Container App yenye usanidi huu:
 
 ```bicep
 // ❌ Current: Using connection string
@@ -687,7 +687,7 @@ env: [
 
 **Hatua**:
 
-1. **Washa utambulisho uliosimamiwa katika Bicep:**
+1. **Wezesha utambulisho ulioendeshwa katika Bicep:**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -699,7 +699,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **Toa upatikanaji wa Storage:**
+2. **Toa ufikiaji wa Storage:**
 
 ```bicep
 // Get storage account reference
@@ -721,7 +721,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 3. **Sasisha msimbo wa programu:**
 
-**Kabla (mfululizo wa muunganisho):**
+**Kabla (connection string):**
 ```javascript
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -730,7 +730,7 @@ const blobServiceClient = BlobServiceClient.fromConnectionString(
 );
 ```
 
-**Baada (utambulisho uliosimamiwa):**
+**Baada (managed identity):**
 ```javascript
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
@@ -742,7 +742,7 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-4. **Sasisha vigezo vya mazingira:**
+4. **Sasisha environment variables:**
 
 ```bicep
 env: [
@@ -754,10 +754,10 @@ env: [
 ]
 ```
 
-5. **Eneza na jaribu:**
+5. **Tangaza na jaribu:**
 
 ```bash
-# Weka tena
+# Sambaza tena
 azd up
 
 # Jaribu kwamba bado inafanya kazi
@@ -765,41 +765,41 @@ curl https://myapp.azurecontainerapps.io/upload
 ```
 
 **✅ Vigezo vya Mafanikio:**
-- ✅ Programu inaeza kusambazwa bila makosa
-- ✅ Operesheni za Storage zinafanya kazi (kupakia, kuorodhesha, kupakua)
-- ✅ Hakuna mfululizo wa muunganisho katika vigezo vya mazingira
-- ✅ Utambulisho unaonekana katika Azure Portal chini ya kipengele "Identity"
+- ✅ Application deploys without errors
+- ✅ Storage operations work (upload, list, download)
+- ✅ No connection strings in environment variables
+- ✅ Identity visible in Azure Portal under "Identity" blade
 
 **Uthibitisho:**
 
 ```bash
-# Hakikisha kitambulisho kilichosimamiwa kimewezeshwa
+# Angalia utambulisho uliosimamiwa umewezeshwa
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 # ✅ Inatarajiwa: "SystemAssigned"
 
-# Angalia ugawaji wa jukumu
+# Angalia uteuzi wa jukumu
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv) \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.Storage/storageAccounts/mystorageaccount
 # ✅ Inatarajiwa: Inaonyesha jukumu la "Storage Blob Data Contributor"
 ```
 
-**Muda**: 20-30 dakika
+**Muda**: 20-30 minutes
 
 ---
 
-### Zoezi 2: Ufikiaji wa Huduma Nyingi kwa Utambulisho uliotolewa kwa Mtumiaji ⭐⭐⭐ (Kiwango cha Juu)
+### Zoef 2: Ufikiaji wa Huduma Nyingi kwa Utambulisho Ulioteuliwa na Mtumiaji ⭐⭐⭐ (Advanced)
 
-**Lengo**: Tengeneza utambulisho uliotolewa kwa mtumiaji unaoshirikiwa kati ya Container Apps nyingi
+**Lengo**: Unda utambulisho ulioteuliwa na mtumiaji unaoshirikiwa kati ya Container Apps nyingi
 
-**Tukio**: Una huduma ndogo 3 ambazo zote zinahitaji ufikiaji wa akaunti ya Storage na Key Vault ile ile.
+**Senario**: Una microservices 3 ambazo zote zinahitaji ufikiaji kwenye akaunti moja ya Storage na Key Vault.
 
 **Hatua**:
 
-1. **Tengeneza utambulisho uliotolewa kwa mtumiaji:**
+1. **Unda utambulisho ulioteuliwa na mtumiaji:**
 
 **Faili: `infra/core/identity.bicep`**
 
@@ -819,7 +819,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **Weka majukumu kwa utambulisho uliotolewa kwa mtumiaji:**
+2. **Toa majukumu kwa utambulisho ulioteuliwa na mtumiaji:**
 
 ```bicep
 // In main.bicep
@@ -856,7 +856,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **Weka utambulisho kwa Container Apps nyingi:**
+3. **Teua utambulisho kwa Container Apps nyingi:**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -893,17 +893,17 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-4. **Msimbo wa programu (huduma zote zinatumia muundo ule ule):**
+4. **Msimbo wa programu (huduma zote zinatumia muundo mmoja):**
 
 ```javascript
 const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
 
-// Kwa utambulisho uliotengwa na mtumiaji, taja ID ya mteja
+// Kwa kitambulisho kilichoteuliwa na mtumiaji, taja ID ya mteja
 const credential = new ManagedIdentityCredential(
-  process.env.AZURE_CLIENT_ID  // ID ya mteja ya utambulisho uliotengwa na mtumiaji
+  process.env.AZURE_CLIENT_ID  // ID ya mteja ya kitambulisho kilichoteuliwa na mtumiaji
 );
 
-// Au tumia DefaultAzureCredential (inagundua moja kwa moja)
+// Au tumia DefaultAzureCredential (huigundua kiotomatiki)
 const credential = new DefaultAzureCredential();
 
 const blobServiceClient = new BlobServiceClient(
@@ -912,42 +912,42 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-5. **Eneza na thibitisha:**
+5. **Tangaza na hakiki:**
 
 ```bash
 azd up
 
-# Thibitisha kwamba huduma zote zinaweza kufikia hifadhi.
+# Jaribu kama huduma zote zinaweza kufikia uhifadhi
 curl https://api-gateway.azurecontainerapps.io/upload
 curl https://product-service.azurecontainerapps.io/upload
 curl https://order-service.azurecontainerapps.io/upload
 ```
 
 **✅ Vigezo vya Mafanikio:**
-- ✅ Utambulisho mmoja unasheheshwa kwa huduma 3
-- ✅ Huduma zote zinaweza kufikia Storage na Key Vault
-- ✅ Utambulisho unaendelea kuwapo ikiwa utafuta huduma moja
-- ✅ Usimamizi wa ruhusa uliolengwa katikati
+- ✅ One identity shared across 3 services
+- ✅ All services can access Storage and Key Vault
+- ✅ Identity persists if you delete one service
+- ✅ Centralized permission management
 
-**Manufaa ya Utambulisho uliotolewa kwa Mtumiaji:**
+**Manufaa ya Utambulisho Ulioteuliwa na Mtumiaji:**
 - Utambulisho mmoja wa kusimamia
-- Ruhusa sawia kwa huduma zote
-- Hushikilia baada ya kufutwa kwa huduma
-- Bora kwa usanifu tata wa miradi
+- Ruhusa zinabaki sawa kwa huduma zote
+- Inaendelea kuwepo ikiwa unaifuta huduma moja
+- Bora kwa miundombinu tata
 
-**Muda**: 30-40 dakika
+**Muda**: 30-40 minutes
 
 ---
 
-### Zoezi 3: Tekeleza Mzunguko wa Siri za Key Vault ⭐⭐⭐ (Kiwango cha Juu)
+### Zoef 3: Tekeleza Mzunguko wa Siri za Key Vault ⭐⭐⭐ (Advanced)
 
-**Lengo**: Hifadhi funguo za API za wahudumu wa tatu katika Key Vault na uzipate kwa kutumia utambulisho uliosimamiwa
+**Lengo**: Hifadhi funguo za API za wahusika wa tatu katika Key Vault na uzifikie kwa kutumia managed identity
 
-**Tukio**: Programu yako inahitaji kuita API ya nje (OpenAI, Stripe, SendGrid) inayohitaji funguo za API.
+**Senario**: App yako inahitaji kuita API ya nje (OpenAI, Stripe, SendGrid) inayohitaji funguo za API.
 
 **Hatua**:
 
-1. **Tengeneza Key Vault kwa RBAC:**
+1. **Unda Key Vault na RBAC:**
 
 **Faili: `infra/core/keyvault.bicep`**
 
@@ -984,7 +984,7 @@ output uri string = keyVault.properties.vaultUri
 # Pata jina la Key Vault
 KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Hifadhi funguo za API za wahusika wa tatu
+# Hifadhi funguo za API za pande za tatu
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1052,7 +1052,7 @@ class Config {
 module.exports = new Config();
 ```
 
-4. **Tumia siri katika programu:**
+4. **Tumia siri kwenye programu:**
 
 **Faili: `src/app.js`**
 
@@ -1063,7 +1063,7 @@ const { OpenAI } = require('openai');
 
 const app = express();
 
-// Anzisha OpenAI kwa kutumia ufunguo kutoka Key Vault
+// Anzisha OpenAI kwa ufunguo kutoka Key Vault
 let openaiClient;
 
 async function initializeServices() {
@@ -1072,13 +1072,13 @@ async function initializeServices() {
   console.log('✅ Services initialized with secrets from Key Vault');
 }
 
-// Iitwe wakati wa uzinduzi
+// Iite wakati wa kuanza
 initializeServices().catch(console.error);
 
 app.post('/chat', async (req, res) => {
   try {
     const completion = await openaiClient.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-4.1',
       messages: [{ role: 'user', content: 'Hello!' }]
     });
     
@@ -1096,22 +1096,22 @@ app.listen(3000, () => {
 });
 ```
 
-5. **Eneza na jaribu:**
+5. **Tangaza na jaribu:**
 
 ```bash
 azd up
 
-# Jaribu kuona kama funguo za API zinafanya kazi
+# Thibitisha kwamba funguo za API zinafanya kazi
 curl -X POST https://myapp.azurecontainerapps.io/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello AI"}'
 ```
 
 **✅ Vigezo vya Mafanikio:**
-- ✅ Hakuna funguo za API katika msimbo au vigezo vya mazingira
-- ✅ Programu inapokea funguo kutoka Key Vault
-- ✅ API za wahudumu wa tatu zinafanya kazi vizuri
-- ✅ Unaweza kuzungusha funguo bila mabadiliko ya msimbo
+- ✅ No API keys in code or environment variables
+- ✅ Application retrieves keys from Key Vault
+- ✅ Third-party APIs work correctly
+- ✅ Can rotate keys without code changes
 
 **Zungusha siri:**
 
@@ -1122,40 +1122,40 @@ az keyvault secret set \
   --name "OpenAI-ApiKey" \
   --value "sk-proj-NEW_KEY_HERE"
 
-# Washa upya programu ili kupokea ufunguo mpya
+# Washa upya programu ili ipokee ufunguo mpya
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
 ```
 
-**Muda**: 25-35 dakika
+**Muda**: 25-35 minutes
 
 ---
 
-## Sehemu ya Kupima Maarifa
+## Kituo cha Kuangalia Maarifa
 
 ### 1. Mifumo ya Uthibitishaji ✓
 
 Jaribu uelewa wako:
 
-- [ ] **Q1**: Ni mifumo gani mitatu kuu ya uthibitishaji? 
-  - **A**: Mifano ya mfululizo wa muunganisho (ya zamani), Marejeleo ya Key Vault (mpito), Utambulisho uliosimamiwa (bora)
+- [ ] **Q1**: Ni mifumo gani mitatu mkuu ya uthibitishaji? 
+  - **A**: Connection strings (legacy), Key Vault references (transition), Managed Identity (best)
 
-- [ ] **Q2**: Kwa nini utambulisho uliosimamiwa ni bora kuliko mfululizo wa muunganisho?
-  - **A**: Hakuna siri katika msimbo, mzunguko wa cheo wa moja kwa moja, rekodi kamili ya ukaguzi, ruhusa za RBAC
+- [ ] **Q2**: Kwa nini utambulisho ulioendeshwa ni bora kuliko connection strings?
+  - **A**: No secrets in code, automatic rotation, full audit trail, RBAC permissions
 
-- [ ] **Q3**: Wakati gani unatumia utambulisho uliotolewa kwa mtumiaji badala ya uliowekwa kwa mfumo?
-  - **A**: Unaposhiriki utambulisho kwenye rasilimali nyingi au wakati maisha ya utambulisho ni huru na maisha ya rasilimali
+- [ ] **Q3**: Utatumia utambulisho ulioteuliwa na mtumiaji badala ya ule ulioteuliwa na mfumo lini?
+  - **A**: Wakati wa kushiriki utambulisho kati ya rasilimali nyingi au wakati maisha ya utambulisho hayategemei maisha ya rasilimali
 
-**Uthibitisho wa Vitendo:**
+**Hands-On Verification:**
 ```bash
-# Angalia ni aina gani ya utambulisho inayotumika na programu yako
+# Angalia ni aina gani ya utambulisho ambayo programu yako inaitumia
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
   --query "identity.type"
 
-# Orodhesha uteuzi wote wa majukumu kwa utambulisho huo
+# Orodhesha uteuzi wote wa jukumu kwa utambulisho
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 ```
@@ -1166,46 +1166,46 @@ az role assignment list \
 
 Jaribu uelewa wako:
 
-- [ ] **Q1**: Ni role ID ipi kwa "Storage Blob Data Contributor"?
+- [ ] **Q1**: Ni ID gani ya nafasi kwa "Storage Blob Data Contributor"?
   - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
-- [ ] **Q2**: Ni ruhusa gani "Key Vault Secrets User" inatoa?
-  - **A**: Upatikanaji wa kusoma tu kwa siri (haiwezi kuunda, kusasisha, au kufuta)
+- [ ] **Q2**: Ruhusa gani zinapewa na "Key Vault Secrets User"?
+  - **A**: Read-only access to secrets (cannot create, update, or delete)
 
-- [ ] **Q3**: Unawezaje kumpa Container App upatikanaji wa Azure SQL?
-  - **A**: Mpe jukumu la "SQL DB Contributor" au sanidi uthibitishaji wa Azure AD kwa SQL
+- [ ] **Q3**: Unamruhusu Container App kupata Azure SQL vipi?
+  - **A**: Assign "SQL DB Contributor" role or configure Azure AD authentication for SQL
 
-**Uthibitisho wa Vitendo:**
+**Hands-On Verification:**
 ```bash
 # Tafuta jukumu maalum
 az role definition list --name "Storage Blob Data Contributor"
 
-# Angalia ni majukumu gani yamepewa utambulisho wako
+# Angalia majukumu yaliyowekwa kwa utambulisho wako
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
 
 ---
 
-### 3. Uunganisho wa Key Vault ✓
-- [ ] **Q1**: Je, unaiwezeshaje RBAC kwa Key Vault badala ya sera za ufikiaji?
+### 3. Uingiliano wa Key Vault ✓
+- [ ] **Q1**: Je, unaleta vipi RBAC kwa Key Vault badala ya sera za ufikiaji?
   - **A**: Weka `enableRbacAuthorization: true` katika Bicep
 
 - [ ] **Q2**: Ni maktaba gani ya Azure SDK inayoshughulikia uthibitishaji wa managed identity?
-  - **A**: `@azure/identity` with `DefaultAzureCredential` class
+  - **A**: `@azure/identity` na darasa `DefaultAzureCredential`
 
-- [ ] **Q3**: Siri za Key Vault hudumu kwa muda gani kwenye kache?
-  - **A**: Inategemea programu; tekeleza mkakati wako wa kache
+- [ ] **Q3**: Siri za Key Vault huendelea kwenye kache kwa muda gani?
+  - **A**: Inategemea programu; tekeleza mkakati wako wa kuweka kache
 
 **Hands-On Verification:**
 ```bash
-# Jaribu upatikanaji wa Key Vault
+# Jaribio la ufikiaji wa Key Vault
 az keyvault secret show \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
   --query "value"
 
-# Angalia kuwa RBAC imewezeshwa
+# Angalia RBAC imewezeshwa
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
@@ -1218,16 +1218,16 @@ az keyvault show \
 
 ### ✅ FANYA:
 
-1. **Daima tumia kitambulisho kilichosimamiwa katika uzalishaji**
+1. **Tumia kimutambulisho kilichosimamiwa kila wakati katika uzalishaji**
    ```bicep
    identity: {
      type: 'SystemAssigned'
    }
    ```
 
-2. **Tumia majukumu ya RBAC ya kiwango cha chini cha ruhusa**
+2. **Tumia nafasi za RBAC zenye ruhusa ndogo kabisa**
    - Tumia "Reader" roles inapowezekana
-   - Epuka "Owner" au "Contributor" isipokuwa inapohitajika
+   - Epuka "Owner" au "Contributor" isipokuwa inahitajika
 
 3. **Hifadhi funguo za wahusika wa tatu katika Key Vault**
    ```javascript
@@ -1241,7 +1241,7 @@ az keyvault show \
    }
    ```
 
-5. **Tumia vitambulisho tofauti kwa dev/staging/prod**
+5. **Tumia vitambulisho tofauti kwa dev/staging/uzalishaji**
    ```bash
    azd env new dev
    azd env new staging
@@ -1250,11 +1250,11 @@ az keyvault show \
 
 6. **Badilisha siri mara kwa mara**
    - Weka tarehe za kumalizika kwa siri za Key Vault
-   - Otomatisha mzunguko kwa Azure Functions
+   - Fanya mzunguko kiotomatiki kwa kutumia Azure Functions
 
 ### ❌ USIFANYE:
 
-1. **Kamwe usiweke siri moja kwa moja katika msimbo**
+1. **Usiweka siri moja kwa moja ndani ya msimbo**
    ```javascript
    // ❌ MBAYA
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
@@ -1266,7 +1266,7 @@ az keyvault show \
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
    ```
 
-3. **Usitoe ruhusa kupita kiasi**
+3. **Usitoe ruhusa nyingi kupita kiasi**
    ```bicep
    // ❌ BAD - too much access
    roleDefinitionId: 'Owner'
@@ -1280,7 +1280,7 @@ az keyvault show \
    // ❌ MBAYA
    console.log('API Key:', apiKey);
    
-   // ✅ BORA
+   // ✅ NZURI
    console.log('API Key retrieved successfully');
    ```
 
@@ -1294,7 +1294,7 @@ az keyvault show \
 
 ## Mwongozo wa Utatuzi wa Matatizo
 
-### Tatizo: "Unauthorized" unapotaka kufikia Azure Storage
+### Tatizo: "Unauthorized" wakati wa kufikia Azure Storage
 
 **Dalili:**
 ```
@@ -1305,7 +1305,7 @@ AuthorizationPermissionMismatch: This request is not authorized to perform this 
 **Uchambuzi:**
 
 ```bash
-# Angalia ikiwa utambulisho unaosimamiwa umewezeshwa
+# Angalia ikiwa utambulisho uliosimamiwa umewezeshwa
 az containerapp show \
   --name myapp \
   --resource-group rg-myapp \
@@ -1330,13 +1330,13 @@ az role assignment create \
   --scope $STORAGE_ID
 ```
 
-2. **Subiri kusambaa (inaweza kuchukua dakika 5-10):**
+2. **Subiri kusambazwa (inaweza kuchukua dakika 5-10):**
 ```bash
 # Angalia hali ya ugawaji wa jukumu
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
 
-3. **Thibitisha msimbo wa programu unatumia kredenshali sahihi:**
+3. **Thibitisha msimbo wa programu unatumia vitambulisho sahihi:**
 ```javascript
 // Hakikisha unatumia DefaultAzureCredential
 const credential = new DefaultAzureCredential();
@@ -1355,13 +1355,13 @@ The user, group or application does not have secrets get permission
 **Uchambuzi:**
 
 ```bash
-# Angalia RBAC ya Key Vault imewezeshwa
+# Angalia kama RBAC ya Key Vault imewezeshwa
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
 # ✅ Inatarajiwa: kweli
 
-# Angalia uteuzi wa majukumu
+# Angalia ugawaji wa majukumu
 az role assignment list \
   --assignee $PRINCIPAL_ID \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.KeyVault/vaults/$KV_NAME
@@ -1369,7 +1369,7 @@ az role assignment list \
 
 **Suluhisho:**
 
-1. **Washa RBAC kwenye Key Vault:**
+1. **Wezesha RBAC kwenye Key Vault:**
 ```bash
 az keyvault update \
   --name $KV_NAME \
@@ -1387,7 +1387,7 @@ az role assignment create \
 
 ---
 
-### Tatizo: DefaultAzureCredential inashindwa katika mazingira ya ndani
+### Tatizo: DefaultAzureCredential inashindwa kwa mazingira ya ndani
 
 **Dalili:**
 ```
@@ -1398,7 +1398,7 @@ CredentialUnavailableError: No credential available
 **Uchambuzi:**
 
 ```bash
-# Angalia ikiwa umeingia
+# Angalia kama umeingia
 az account show
 
 # Angalia uthibitishaji wa Azure CLI
@@ -1412,19 +1412,19 @@ az ad signed-in-user show
 az login
 ```
 
-2. **Weka Azure subscription:**
+2. **Weka subscription ya Azure:**
 ```bash
 az account set --subscription "Your Subscription Name"
 ```
 
-3. **Kwa maendeleo ya ndani, tumia vigezo vya mazingira:**
+3. **Kwa ukuzaji wa ndani, tumia variable za mazingira:**
 ```bash
 export AZURE_TENANT_ID="your-tenant-id"
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
 
-4. **Au tumia kredenshali tofauti kwa ndani:**
+4. **Au tumia vitambulisho tofauti wakati wa maendeleo ya ndani:**
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
@@ -1439,17 +1439,17 @@ const credential = process.env.NODE_ENV === 'production'
 ### Tatizo: Uteuzi wa jukumu unachukua muda mrefu kusambaa
 
 **Dalili:**
-- Jukumu limepewa kwa mafanikio
+- Jukumu limeteuliwa kwa mafanikio
 - Bado unapata makosa ya 403
-- Ufikiaji usio thabiti (mara hufanya kazi, mara haufanyi kazi)
+- Ufikiaji wa mara kwa mara (wakati mwingine hufanya kazi, wakati mwingine haufanyi)
 
 **Maelezo:**
-Mabadiliko ya Azure RBAC yanaweza kuchukua dakika 5-10 kusambaa duniani kote.
+Azure RBAC changes can take 5-10 minutes to propagate globally.
 
 **Suluhisho:**
 
 ```bash
-# Subiri kisha ujaribu tena
+# Subiri na jaribu tena
 echo "Waiting for RBAC propagation..."
 sleep 300  # Subiri dakika 5
 
@@ -1464,7 +1464,7 @@ az containerapp revision restart \
 
 ---
 
-## Mambo ya Kuzingatia Kuhusu Gharama
+## Mambo ya Kuzingatia kwa Gharama
 
 ### Gharama za Managed Identity
 
@@ -1472,29 +1472,29 @@ az containerapp revision restart \
 |----------|------|
 | **Managed Identity** | 🆓 **BURE** - Hakuna malipo |
 | **RBAC Role Assignments** | 🆓 **BURE** - Hakuna malipo |
-| **Azure AD Token Requests** | 🆓 **BURE** - Imewemo |
-| **Key Vault Operations** | $0.03 per 10,000 operations |
-| **Key Vault Storage** | $0.024 per secret per month |
+| **Azure AD Token Requests** | 🆓 **BURE** - Imejumuishwa |
+| **Key Vault Operations** | $0.03 kwa 10,000 operesheni |
+| **Key Vault Storage** | $0.024 kwa siri kwa mwezi |
 
-Kitambulisho kilichosimamiwa kinaokoa pesa kwa:
-- ✅ Kuondoa operesheni za Key Vault kwa uthibitishaji kati ya huduma
-- ✅ Kupunguza matukio ya usalama (hakuna kredenshali zilizomwagika)
-- ✅ Kupunguza mzigo wa uendeshaji (hakuna mzunguko wa mikono)
+**Managed identity inaokoa pesa kwa:**
+- ✅ Kuondoa operesheni za Key Vault kwa uthibitisho kati ya huduma
+- ✅ Kupunguza matukio ya usalama (hakuna vitambulisho vilivyovuja)
+- ✅ Kupunguza mzigo wa kiutendaji (hakuna mzunguko wa mikono)
 
-**Mfano wa Ulinganifu wa Gharama (kwa mwezi):**
+**Mfano wa Ulinganisho wa Gharama (kwa mwezi):**
 
-| Senario | Connection Strings | Managed Identity | Savings |
+| Senario | Connection Strings | Managed Identity | Akiba |
 |----------|-------------------|-----------------|---------|
-| Programu ndogo (1M requests) | ~$50 (Key Vault + operesheni) | ~$0 | $50/month |
-| Programu ya kati (10M requests) | ~$200 | ~$0 | $200/month |
-| Programu kubwa (100M requests) | ~$1,500 | ~$0 | $1,500/month |
+| Programu ndogo (maombi 1M) | ~$50 (Key Vault + operesheni) | ~$0 | $50/mwezi |
+| Programu ya kati (maombi 10M) | ~$200 | ~$0 | $200/mwezi |
+| Programu kubwa (maombi 100M) | ~$1,500 | ~$0 | $1,500/mwezi |
 
 ---
 
 ## Jifunze Zaidi
 
 ### Nyaraka Rasmi
-- [Utambulisho wa Azure uliosimamiwa](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
+- [Kimutambulisho cha Azure](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
 - [RBAC ya Azure](https://learn.microsoft.com/azure/role-based-access-control/overview)
 - [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
 - [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
@@ -1504,42 +1504,42 @@ Kitambulisho kilichosimamiwa kinaokoa pesa kwa:
 - [Azure.Identity (C#)](https://www.nuget.org/packages/Azure.Identity/)
 - [azure-identity (Python)](https://pypi.org/project/azure-identity/)
 
-### Hatua Zinazofuata katika Kozi Hii
+### Hatua Zifuatazo katika Kozi Hii
 - ← Iliyopita: [Usimamizi wa Mipangilio](configuration.md)
 - → Ifuatayo: [Mradi wa Kwanza](first-project.md)
 - 🏠 [Nyumbani kwa Kozi](../../README.md)
 
 ### Mifano Inayohusiana
-- [Azure OpenAI Chat Example](../../../../examples/azure-openai-chat) - Inatumia kitambulisho kilichosimamiwa kwa Azure OpenAI
-- [Microservices Example](../../../../examples/microservices) - Mifumo ya uthibitishaji kwa huduma nyingi
+- [Mfano wa Mazungumzo wa Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Inatumia managed identity kwa Microsoft Foundry Models
+- [Mfano wa Microservices](../../../../examples/microservices) - Mifumo ya uthibitishaji ya huduma nyingi
 
 ---
 
 ## Muhtasari
 
 **Umejifunza:**
-- ✅ Mifumo mitatu ya uthibitishaji (connection strings, Key Vault, kitambulisho kilichosimamiwa)
+- ✅ Aina tatu za uthibitishaji (connection strings, Key Vault, managed identity)
 - ✅ Jinsi ya kuwezesha na kusanidi managed identity katika AZD
-- ✅ Ugawaji wa majukumu ya RBAC kwa huduma za Azure
+- ✅ Uteuzi wa majukumu ya RBAC kwa huduma za Azure
 - ✅ Uingizaji wa Key Vault kwa siri za wahusika wa tatu
-- ✅ Vitambulisho vilivyotengwa na mtumiaji dhidi ya vilivyotengwa na mfumo
+- ✅ Vitambulisho vinavyoteuliwa na mtumiaji dhidi ya vilivyoteuliwa na mfumo
 - ✅ Mbinu bora za usalama na utatuzi wa matatizo
 
-**Mambo Muhimu ya Kuchukuliwa:**
-1. **Daima tumia kitambulisho kilichosimamiwa katika uzalishaji** - Hakuna siri, mzunguko wa moja kwa moja
-2. **Tumia majukumu ya RBAC ya kiwango cha chini cha ruhusa** - Toa ruhusa zitakazohitajika tu
-3. **Hifadhi funguo za wahusika wa tatu katika Key Vault** - Usimamizi wa siri uliowezeshwa katikati
-4. **Tofautisha vitambulisho kwa kila mazingira** - Kutenganishwa kwa Dev, staging, prod
+**Vidokezo Muhimu:**
+1. **Tumia kimutambulisho kilichosimamiwa kila wakati katika uzalishaji** - Hakuna siri, mzunguko wa moja kwa moja
+2. **Tumia nafasi za RBAC zenye ruhusa ndogo kabisa** - Toa ruhusa muhimu tu
+3. **Hifadhi funguo za wahusika wa tatu katika Key Vault** - Usimamizi wa siri uliojumuishwa
+4. **Tambanisha vitambulisho kwa kila mazingira** - Kutengwa kwa Dev, staging, prod
 5. **Washa uandishi wa ukaguzi** - Fuata nani alifikia nini
 
-**Hatua Zinazofuata:**
-1. Kamilisha mazoezi ya vitendo yaliyotajwa hapo juu
-2. Hamisha programu iliyopo kutoka connection strings kwenda kitambulisho kilichosimamiwa
+**Hatua Zifuatazo:**
+1. Kamilisha mazoezi ya vitendo hapo juu
+2. Hamisha programu iliyopo kutoka connection strings kwenda managed identity
 3. Jenga mradi wako wa kwanza wa AZD ukiwa na usalama tangu siku ya kwanza: [Mradi wa Kwanza](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Taarifa ya kutowajibika:
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuwa sahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au ukosefu wa usahihi. Hati ya awali katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo cha kuaminika. Kwa taarifa muhimu, inashauriwa kutumia tafsiri ya mtaalamu wa kibinadamu. Hatuwajibiki kwa kutoelewana au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
+**Tamko la kutokuwajibika**:
+Nyaraka hii imetafsiriwa kwa kutumia huduma ya utafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Wakati tunajitahidi kuhakikisha usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au ukosefu wa usahihi. Nyaraka ya awali kwa lugha yake ya asili inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa habari muhimu, inapendekezwa tafsiri ya kitaalamu ya binadamu. Hatuwajibiki kwa kutokuelewana au tafsiri zisizofaa zinazotokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

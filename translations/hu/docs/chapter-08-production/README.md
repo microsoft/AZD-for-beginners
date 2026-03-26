@@ -1,70 +1,63 @@
-# 8. fejezet: Éles üzem és vállalati minták
+# 8. fejezet: Termelési és vállalati minták
 
-**📚 Course**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 2-3 óra | **⭐ Nehézségi szint**: Haladó
+**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 2-3 óra | **⭐ Bonyolultság**: Haladó
 
 ---
 
 ## Áttekintés
 
-Ez a fejezet vállalati szintű telepítési mintákat, biztonsági megerősítést, megfigyelést és költségoptimalizálást tárgyal éles AI munkaterhelésekhez.
+Ez a fejezet a vállalati szintű telepítési mintákat, biztonsági megerősítést, monitorozást és költségoptimalizálást tárgyalja a termelési AI munkaterhelésekhez.
 
 ## Tanulási célok
 
 A fejezet elvégzése után képes leszel:
-- Több régióra kiterjedő, rugalmas alkalmazások telepítése
-- Vállalati szintű biztonsági minták megvalósítása
-- Átfogó megfigyelés konfigurálása
-- Költségek optimalizálása nagy léptékben
-- CI/CD csővezetékek beállítása AZD-vel
+- Több régióra kiterjedő, ellenálló alkalmazások telepítésére
+- Vállalati biztonsági minták megvalósítására
+- Átfogó monitorozás beállítására
+- Nagy léptékű költségoptimalizálásra
+- AZD-vel CI/CD pipeline-ok létrehozására
 
 ---
 
-## 📚 Leckék
+## 📚 Tanórák
 
-| # | Lecke | Leírás | Idő |
+| # | Tanóra | Leírás | Idő |
 |---|--------|-------------|------|
-| 1 | [Éles AI gyakorlatok](production-ai-practices.md) | Vállalati telepítési minták | 90 min |
+| 1 | [Termelési AI gyakorlatok](production-ai-practices.md) | Vállalati telepítési minták | 90 perc |
 
 ---
 
-## 🚀 Éles üzem ellenőrzőlista
+## 🚀 Termelési Ellenőrzőlista
 
-- [ ] Több régiós telepítés a rugalmasság érdekében
-- [ ] Hitelesítéshez felügyelt identitás (nincsenek kulcsok)
-- [ ] Application Insights a megfigyeléshez
-- [ ] Költségvetések és riasztások konfigurálva
-- [ ] Biztonsági vizsgálatok engedélyezve
-- [ ] CI/CD csővezeték integráció
-- [ ] Katasztrófa utáni helyreállítási terv
+- [ ] Több régióra kiterjedő telepítés a rugalmasságért
+- [ ] Kezelhető identitás hitelesítéshez (kulcsok nélkül)
+- [ ] Application Insights a monitorozáshoz
+- [ ] Költségkeretek és riasztások konfigurálva
+- [ ] Biztonsági szkennelés engedélyezve
+- [ ] CI/CD pipeline integráció
+- [ ] Katasztrófa-helyreállítási terv
 
 ---
 
 ## 🏗️ Architektúra minták
 
-### Pattern 1: Mikroszolgáltatások AI
+### Minta 1: Mikroszolgáltatások AI
 
+```mermaid
+graph LR
+    Gateway[API átjáró] --> AI[Mesterséges Intelligencia Szolgáltatás] --> Models[Microsoft Foundry Modellek]
+    Gateway --> Auth[Hitelesítési Szolgáltatás]
+    AI --> Data[Adattár]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
+### Minta 2: Eseményvezérelt AI
 
-### Pattern 2: Eseményvezérelt AI
-
+```mermaid
+graph LR
+    EventGrid[Event Grid] --> Functions[Függvények] --> Pipeline[Mesterséges Intelligencia Feldolgozás]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
-## 🔐 Biztonsági bevált gyakorlatok
+## 🔐 Biztonsági Legjobb Gyakorlatok
 
 ```bicep
 // Use managed identity
@@ -87,13 +80,13 @@ properties: {
 
 | Stratégia | Megtakarítás |
 |----------|---------|
-| Skálázás nullára (Container Apps) | 60-80% |
-| Fejlesztéshez fogyasztási rétegek használata | 50-70% |
+| Nulla méretre skálázás (Container Apps) | 60-80% |
+| Fogyasztás szerinti rétegek használata fejlesztéshez | 50-70% |
 | Ütemezett skálázás | 30-50% |
-| Fenntartott kapacitás | 20-40% |
+| Foglalt kapacitás | 20-40% |
 
 ```bash
-# Költségvetési riasztások beállítása
+# Költségkeret figyelmeztetések beállítása
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -103,16 +96,16 @@ az consumption budget create \
 
 ---
 
-## 📊 Monitorozás beállítása
+## 📊 Monitorozási Beállítás
 
 ```bash
-# Naplók folyamatos megjelenítése
+# Folyamatosan jelenítse meg a naplókat
 azd monitor --logs
 
-# Application Insights ellenőrzése
+# Ellenőrizze az Application Insights szolgáltatást
 azd monitor
 
-# Metrikák megtekintése
+# Méretek megtekintése
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -122,21 +115,21 @@ az monitor metrics list --resource <resource-id>
 
 | Irány | Fejezet |
 |-----------|---------|
-| **Előző** | [7. fejezet: Hibaelhárítás](../chapter-07-troubleshooting/README.md) |
-| **Tanfolyam befejezése** | [Tanfolyam kezdőlapja](../../README.md) |
+| **Előző** | [7. fejezet: Hibakeresés](../chapter-07-troubleshooting/README.md) |
+| **Tanfolyam vége** | [Tanfolyam kezdőlap](../../README.md) |
 
 ---
 
-## 📖 Kapcsolódó források
+## 📖 Kapcsolódó Források
 
-- [AI ügynökök útmutatója](../chapter-02-ai-development/agents.md)
+- [AI Ügynökök útmutatója](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Többügynökös megoldások](../chapter-05-multi-agent/README.md)
+- [Több ügynökös megoldások](../chapter-05-multi-agent/README.md)
 - [Mikroszolgáltatások példa](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Felelősségkizárás:
-Ez a dokumentum a mesterséges intelligencia alapú fordító szolgáltatás, a Co-op Translator (https://github.com/Azure/co-op-translator) segítségével készült. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatizált fordítások hibákat vagy pontatlanságokat tartalmazhatnak. A dokumentum eredeti, anyanyelvi változatát tekintendő a hiteles forrásnak. Kritikus fontosságú információk esetén szakmai, emberi fordítást javaslunk. Nem vállalunk felelősséget az ezen fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+**Nyilatkozat**:  
+Ez a dokumentum az AI fordító szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő irányadónak. Fontos információk esetén szakképzett emberi fordítás igénybevétele javasolt. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy félreértelmezésekért.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

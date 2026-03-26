@@ -1,48 +1,100 @@
-# Muutokset - AZD For Beginners
+# Muutospäiväkirja - AZD Aloittelijoille
 
 ## Johdanto
 
-Tämä muutosloki dokumentoi kaikki merkittävät muutokset, päivitykset ja parannukset AZD For Beginners -repositoriolle. Noudatamme semanttisen versionhallinnan periaatteita ja ylläpidämme tätä lokia auttaaksemme käyttäjiä ymmärtämään, mitä versioiden välillä on muuttunut.
+Tämä muutospäiväkirja dokumentoi kaikki merkittävät muutokset, päivitykset ja parannukset AZD For Beginners -repossa. Noudatamme semanttisen versionhallinnan periaatteita ja ylläpidämme tätä lokia auttaaksemme käyttäjiä ymmärtämään, mitä versioiden välillä on muuttunut.
 
 ## Oppimistavoitteet
 
-Tarkastelemalla tätä muutoslokia, pystyt:
-- Pysymään ajan tasalla uusista ominaisuuksista ja sisällön lisäyksistä
-- Ymmärtämään olemassa olevan dokumentaation parannuksia
-- Seuraamaan korjauksia ja virheiden korjaustoimia tarkkuuden varmistamiseksi
-- Seuraamaan oppimateriaalien kehitystä ajan myötä
+Tarkastelemalla tätä muutospäiväkirjaa:
+- Pysyt ajan tasalla uusista ominaisuuksista ja sisällön lisäyksistä
+- Ymmärrät olemassa olevan dokumentaation parannukset
+- Seuraat virheiden korjauksia ja tarkistuksia varmistaaksesi tarkkuuden
+- Seuraat oppimateriaalien kehittymistä ajan myötä
 
 ## Oppimistulokset
 
-Muutosloki-merkintöjen tarkastelun jälkeen pystyt:
-- Tunnistamaan uuden sisällön ja oppimiseen saatavilla olevat resurssit
-- Ymmärtämään, mitä osioita on päivitetty tai parannettu
-- Suunnittelemaan oppimispolkusi ajantasaisen materiaalin perusteella
-- Antamaan palautetta ja ehdotuksia tulevia parannuksia varten
+Muutospäiväkirjan merkintöjä tarkasteltuasi osaat:
+- Tunnistaa uutta oppimiseen saatavilla olevaa sisältöä ja resursseja
+- Ymmärtää, mitä osioita on päivitetty tai parannettu
+- Suunnitella oppimispolkusi ajantasaisimman materiaalin perusteella
+- Antaa palautetta ja ehdotuksia tulevia parannuksia varten
 
 ## Versiohistoria
+
+### [v3.18.0] - 2026-03-16
+
+#### AZD AI CLI -komennot, sisällön validointi & mallien laajennus
+**Tässä versiossa lisätään `azd ai`, `azd extension` ja `azd mcp` -komentojen kattavuus kaikkiin AI:hin liittyviin lukuihin, korjataan rikkinäisiä linkkejä ja vanhentunutta koodia agents.md:ssä, päivitetään pikatiedot, ja uudistetaan Esimerkkimallit-osio validoiduilla kuvauksilla ja uusilla Azure AI AZD -malleilla.**
+
+#### Lisätty
+- **🤖 AZD AI CLI -kattavuus** 7 tiedostossa (aiemmin vain Luku 8):
+  - `docs/chapter-01-foundation/azd-basics.md` — Uusi "Extensions and AI Commands" -osio, joka esittelee `azd extension`, `azd ai agent init` ja `azd mcp`
+  - `docs/chapter-02-ai-development/agents.md` — Vaihtoehto 4: `azd ai agent init` vertailutaulukolla (template vs manifest -lähestymistapa)
+  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — "AZD Extensions for Foundry" ja "Agent-First Deployment" -aliosiokset
+  - `docs/chapter-05-multi-agent/README.md` — Quick Start näyttää nyt sekä template- että manifest-pohjaiset käyttöönotot
+  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — Deploy-osio sisältää nyt `azd ai agent init` -vaihtoehdon
+  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — "AZD AI Extension Commands for Diagnostics" -aliohjelma
+  - `resources/cheat-sheet.md` — Uusi "AI & Extensions Commands" -osio sisältäen `azd extension`, `azd ai agent init`, `azd mcp` ja `azd infra generate`
+- **📦 Uudet AZD AI -esimerkkimallit** tiedostossa `microsoft-foundry-integration.md`:
+  - **azure-search-openai-demo-csharp** — .NET RAG -keskustelu Blazor WebAssemblyllä, Semantic Kernelilla ja puhechatin tuella
+  - **azure-search-openai-demo-java** — Java RAG -keskustelu käyttäen Langchain4J:ta ACA/AKS käyttöönotto-optioilla
+  - **contoso-creative-writer** — Moni-agenttinen luovan kirjoittamisen sovellus käyttäen Azure AI Agent Servicea, Bing Groundingia ja Promptyä
+  - **serverless-chat-langchainjs** — Serverless RAG käyttäen Azure Functions + LangChain.js + Cosmos DB ja Ollama paikallinen kehitystuki
+  - **chat-with-your-data-solution-accelerator** — Yritys-tason RAG-kiihdytin ylläpitoportaalilla, Teams-integraatiolla ja PostgreSQL/Cosmos DB -vaihtoehdoilla
+  - **azure-ai-travel-agents** — Moni-agenttinen MCP-orchestraatio referenssisovellus .NET-, Python-, Java- ja TypeScript-palvelimilla
+  - **azd-ai-starter** — Miniminen Azure AI -infrastruktuurin Bicep-aloitusmalli
+  - **🔗 Awesome AZD AI Gallery -linkki** — Viittaus [awesome-azd AI -galleriaan](https://azure.github.io/awesome-azd/?tags=ai) (80+ mallia)
+
+#### Korjattu
+- **🔗 agents.md navigaatio**: Previous/Next -linkit vastaavat nyt Luku 2 README -opetuksen järjestystä (Microsoft Foundry Integration → Agents → AI Model Deployment)
+- **🔗 agents.md rikkinäiset linkit**: `production-ai-practices.md` korjattu muotoon `../chapter-08-production/production-ai-practices.md` (3 esiintymää)
+- **📦 agents.md vanhentunut koodi**: Korvattu `opencensus` paketilla `azure-monitor-opentelemetry` + OpenTelemetry SDK
+- **🐛 agents.md virheellinen API**: Siirretty `max_tokens` `create_agent()`-kutsusta `create_run()`-kutsuun nimeksi `max_completion_tokens`
+- **🔢 agents.md token-laskenta**: Korvattu karkea `len//4` -arvio `tiktoken.encoding_for_model()` -käytöllä
+- **azure-search-openai-demo**: Palvelut korjattu muotoon "Azure AI Search + Azure Container Apps" aiemman "Cognitive Search + App Service" sijaan (oletus-isäntä muuttui lokakuussa 2024)
+- **contoso-chat**: Kuvausta päivitetty viittaamaan Azure AI Foundryyn + Promptyyn, vastaamaan repositorion todellista otsikkoa ja teknologiaa
+
+#### Poistettu
+- **ai-document-processing**: Poistettu ei-toimiva malliviittaus (repo ei ole julkisesti saatavilla AZD-mallina)
+
+#### Parannettu
+- **📝 agents.md harjoitukset**: Harjoitus 1 näyttää nyt odotetun tulosteen ja `azd monitor` -vaiheen; Harjoitus 2 sisältää täydellisen `FunctionTool`-rekisteröintikoodin; Harjoitus 3 korvaa epämääräisen ohjeistuksen konkreettisilla `prepdocs.py` -komennoilla
+- **📚 agents.md resurssit**: Päivitetyt dokumentaatiolinkit nykyisiin Azure AI Agent Service -dokumentteihin ja quickstartiin
+- **📋 agents.md Next Steps -taulukko**: Lisätty AI Workshop Lab -linkki koko luvun kattavuuteen
+
+#### Päivitetyt tiedostot
+- `docs/chapter-01-foundation/azd-basics.md`
+- `docs/chapter-02-ai-development/agents.md`
+- `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
+- `docs/chapter-05-multi-agent/README.md`
+- `docs/chapter-06-pre-deployment/coordination-patterns.md`
+- `docs/chapter-07-troubleshooting/ai-troubleshooting.md`
+- `resources/cheat-sheet.md`
+
+---
 
 ### [v3.17.0] - 2026-02-05
 
 #### Kurssin navigoinnin parannus
-**Tässä versiossa parannetaan README.md:n lukujen navigointia parannetulla taulukkomuodolla.**
+**Tässä versiossa parannetaan README.md -lukujen navigointia laajennetulla taulukkomuodolla.**
 
-#### Muutokset
-- **Kurssikarttataulukko**: Parannettu suoriin oppitunti-linkkeihin, kestoarvioihin ja vaikeustason arvioihin
-- **Kansioiden siivous**: Poistettu ylimääräiset vanhat kansiot (deployment/, getting-started/, pre-deployment/, troubleshooting/)
-- **Linkkien validointi**: Kaikki 21+ sisäistä linkkiä Kurssikartan taulukossa tarkistettu
+#### Muutettu
+- **Kurssikarttataulukko**: Parannettu suorin oppituntilinkein, kestoarvioin ja vaikeustasoarvioin
+- **Kansiopuhdistus**: Poistettu päällekkäisiä vanhoja kansioita (deployment/, getting-started/, pre-deployment/, troubleshooting/)
+- **Linkin validointi**: Kaikki yli 21 sisäistä linkkiä Kurssikartta-taulukossa varmistettu
 
 ### [v3.16.0] - 2026-02-05
 
 #### Tuotenimen päivitykset
-**Tässä versiossa päivitetään tuotereferenssit vastaamaan nykyistä Microsoftin brändäystä.**
+**Tässä versiossa päivitetään tuoteviittaukset nykyiseen Microsoftin brändäykseen.**
 
-#### Muutokset
-- **Azure AI Foundry → Microsoft Foundry**: Kaikki viittaukset päivitetty ei-käännöstiedostoissa
+#### Muutettu
+- **Microsoft Foundry → Microsoft Foundry**: Kaikki viittaukset päivitetty käännös-tiedostojen ulkopuolella
 - **Azure AI Agent Service → Foundry Agents**: Palvelun nimi päivitetty vastaamaan nykyistä brändäystä
 
 #### Päivitetyt tiedostot
-- `README.md` - Pääkurssin aloitussivu
+- `README.md` - Kurssin pääsivu
 - `changelog.md` - Versiohistoria
 - `course-outline.md` - Kurssin rakenne
 - `docs/chapter-02-ai-development/agents.md` - AI-agenttien opas
@@ -55,20 +107,20 @@ Muutosloki-merkintöjen tarkastelun jälkeen pystyt:
 
 ### [v3.15.0] - 2026-02-05
 
-#### Merkittävä repositorion uudelleenjärjestely: Lukuperusteiset kansiot
-**Tässä versiossa dokumentaatio järjestellään uudelleen omiin luku-kansioihinsa selkeämmän navigoinnin vuoksi.**
+#### Suuri repositorion uudelleenjärjestely: Kansioiden nimeäminen lukujen mukaisesti
+**Tässä versiossa dokumentaatio on jäsennelty omiin luku-kansioihin selkeämmän navigoinnin vuoksi.**
 
-#### Kansioiden uudelleennimeäminen
-Vanhat kansiot on korvattu luku-numeroiduilla kansioilla:
+#### Kansionimet muuttuneet
+Vanhojen kansioiden tilalle on tullut luku-numeroidut kansiot:
 - `docs/getting-started/` → `docs/chapter-01-foundation/` + `docs/chapter-03-configuration/`
 - `docs/microsoft-foundry/` → `docs/chapter-02-ai-development/` + `docs/chapter-08-production/`
 - `docs/deployment/` → `docs/chapter-04-infrastructure/`
 - `docs/pre-deployment/` → `docs/chapter-06-pre-deployment/`
 - `docs/troubleshooting/` → `docs/chapter-07-troubleshooting/`
-- Added new: `docs/chapter-05-multi-agent/`
+- Lisätty uusi: `docs/chapter-05-multi-agent/`
 
-#### Tiedostojen siirrot
-| Tiedosto | Lähde | Kohde |
+#### Tiedostomigraatiot
+| File | From | To |
 |------|------|---|
 | azd-basics.md | getting-started/ | chapter-01-foundation/ |
 | installation.md | getting-started/ | chapter-01-foundation/ |
@@ -86,16 +138,16 @@ Vanhat kansiot on korvattu luku-numeroiduilla kansioilla:
 | All troubleshooting files | troubleshooting/ | chapter-07-troubleshooting/ |
 
 #### Lisätty
-- **📚 Luku-README-tiedostot**: Luotu README.md jokaisen luku-kansion sisälle, sisältäen:
-  - Learning objectives and duration
-  - Lesson table with descriptions
-  - Quick start commands
-  - Navigation to other chapters
+- **📚 Luku-README-tiedostot**: Luotu README.md jokaiseen luku-kansioon sisältäen:
+  - Oppimistavoitteet ja arvioitu kesto
+  - Oppituntitaulukko kuvauksineen
+  - Pika-aloituskäskyt
+  - Navigointi muihin lukuihin
 
-#### Muutokset
-- **🔗 Päivitetty kaikki sisäiset linkit**: 78+ polkua päivitetty kaikkien dokumentaatiotiedostojen läpi
-- **🗺️ Pää-README.md**: Päivitetty Kurssikartta uuteen luku-rakenteeseen
-- **📝 examples/README.md**: Päivitetty ristiviittaukset luku-kansioihin
+#### Muutettu
+- **🔗 Kaikkien sisäisten linkkien päivitys**: Yli 78 polkua päivitetty dokumentaation eri tiedostoissa
+- **🗺️ Pää-README.md**: Kurssikartta päivitetty uuteen luku-rakenteeseen
+- **📝 examples/README.md**: Päivitetyt viittaukset luku-kansioihin
 
 #### Poistettu
 - Vanha kansiorakenne (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/)
@@ -104,56 +156,56 @@ Vanhat kansiot on korvattu luku-numeroiduilla kansioilla:
 
 ### [v3.14.0] - 2026-02-05
 
-#### Repositorion uudelleenjärjestely: Lukujen navigointi
-**Tässä versiossa lisättiin luku-navigoinnin README-tiedostot (korvattu versiossa v3.15.0).**
+#### Repositorion uudelleenjärjestely: Luku-navigointi
+**Tässä versiossa lisättiin lukujen navigointi-README-tiedostoja (korvattu v3.15.0:ssa).**
 
 ---
 
 ### [v3.13.0] - 2026-02-05
 
-#### Uusi AI-agenttien opas
-**Tässä versiossa lisätään kattava opas AI-agenttien käyttöönottoon Azure Developer CLI:llä.**
+#### Uusi AI Agenttien opas
+**Tässä versiossa lisätään kattava opas AI-agenttien käyttöönotosta Azure Developer CLI:llä.**
 
 #### Lisätty
-- **🤖 docs/microsoft-foundry/agents.md**: Täydellinen opas, joka käsittelee:
-  - Mitä AI-agentit ovat ja miten ne poikkeavat chatboteista
-  - Kolme pika-aloitusagenttipohjaa (Foundry Agents, Prompty, RAG)
-  - Agentin arkkitehtuurimallit (yksittäinen agentti, RAG, monen agentin)
-  - Työkalun konfigurointi ja räätälöinti
-  - Valvonta ja mittarien seuranta
-  - Kustannuksiin liittyvät näkökohdat ja optimointi
-  - Yleiset vianmääritystilanteet
+- **🤖 docs/microsoft-foundry/agents.md**: Täydellinen opas, joka kattaa:
+  - Mitä AI-agentit ovat ja miten ne eroavat chatbot:eista
+  - Kolme pika-aloitus agenttimallia (Foundry Agents, Prompty, RAG)
+  - Agenttiarkkitehtuurimallit (yksi agentti, RAG, moni-agentti)
+  - Työkalujen konfigurointi ja räätälöinti
+  - Monitorointi ja metriikkojen seuranta
+  - Kustannusnäkökohdat ja optimointi
+  - Yleiset vianetsintätilanteet
   - Kolme käytännön harjoitusta onnistumiskriteereineen
 
 #### Sisällön rakenne
-- **Johdanto**: Agenttikäsitteet aloittelijoille
-- **Pika-aloitus**: Ota agentit käyttöön komennolla `azd init --template get-started-with-ai-agents`
+- **Johdanto**: Agenttikonseptit aloittelijoille
+- **Pika-aloitus**: Agenttien käyttöönotto `azd init --template get-started-with-ai-agents` -komennolla
 - **Arkkitehtuurimallit**: Visuaaliset kaaviot agenttimalleista
-- **Konfigurointi**: Työkalun asennus ja ympäristömuuttujat
-- **Valvonta**: Application Insights -integraatio
-- **Harjoitukset**: Asteittainen käytännön oppiminen (20-45 minuuttia kukin)
+- **Konfigurointi**: Työkalujen asennus ja ympäristömuuttujat
+- **Monitorointi**: Application Insights -integraatio
+- **Harjoitukset**: Portaittain etenevä käytännön oppiminen (20–45 minuuttia kukin)
 
 ---
 
 ### [v3.12.0] - 2026-02-05
 
 #### DevContainer-ympäristön päivitys
-**Tässä versiossa päivitetään kehityskontin kokoonpanoa moderneilla työkaluilla ja paremmilla oletuksilla AZD-opiskelukokemusta varten.**
+**Tässä versiossa päivitetään kehityssäiliön konfiguraatio moderneilla työkaluilla ja paremmilla oletusasetuksilla AZD-oppimiskokemusta varten.**
 
-#### Muutokset
+#### Muutettu
 - **🐳 Peruskuva**: Päivitetty `python:3.12-bullseye` → `python:3.12-bookworm` (uusin Debian stable)
-- **📛 Kontin nimi**: Nimetty uudelleen "Python 3" -> "AZD for Beginners" selkeyden vuoksi
+- **📛 Säiliön nimi**: Nimetty uudelleen "Python 3" → "AZD for Beginners" selkeyden vuoksi
 
 #### Lisätty
-- **🔧 Uudet Dev Container -ominaisuudet**:
-  - `azure-cli` Bicep-tuen kanssa
+- **🔧 Uudet kehityssäiliöominaisuudet**:
+  - `azure-cli` with Bicep support enabled
   - `node:20` (LTS-versio AZD-malleille)
-  - `github-cli` mallien hallintaan
-  - `docker-in-docker` säilösovellusten käyttöönottoa varten
+  - `github-cli` for template management
+  - `docker-in-docker` for container app deployments
 
 - **🔌 Porttien edelleenlähetys**: Esikonfiguroidut portit yleiseen kehitykseen:
   - 8000 (MkDocs-esikatselu)
-  - 3000 (Web-sovellukset)
+  - 3000 (Verkkosovellukset)
   - 5000 (Python Flask)
   - 8080 (API:t)
 
@@ -161,52 +213,52 @@ Vanhat kansiot on korvattu luku-numeroiduilla kansioilla:
   - `ms-python.vscode-pylance` - Parannettu Python IntelliSense
   - `ms-azuretools.vscode-azurefunctions` - Azure Functions -tuki
   - `ms-azuretools.vscode-docker` - Docker-tuki
-  - `ms-azuretools.vscode-bicep` - Bicep-kielituki
+  - `ms-azuretools.vscode-bicep` - Bicep-kielen tuki
   - `ms-azure-devtools.azure-resource-groups` - Azure-resurssien hallinta
   - `yzhang.markdown-all-in-one` - Markdownin muokkaus
-  - `DavidAnson.vscode-markdownlint` - Markdown-linttaus
+  - `DavidAnson.vscode-markdownlint` - Markdownin tarkistus
   - `bierner.markdown-mermaid` - Mermaid-kaavioiden tuki
   - `redhat.vscode-yaml` - YAML-tuki (azure.yaml:lle)
   - `eamodio.gitlens` - Gitin visualisointi
   - `mhutchie.git-graph` - Git-historia
 
-- **⚙️ VS Code -asetukset**: Lisätty oletusasetukset Python-tulkille, tallennettaessa muotoilu ja välilyöntien trimmaus
+- **⚙️ VS Code -asetukset**: Lisätty oletusasetuksia Python-tulkille, tallennettaessa muotoilu ja välilyöntien poisto
 
 - **📦 Päivitetty requirements-dev.txt**:
   - Lisätty MkDocs minify -lisäosa
-  - Lisätty pre-commit koodin laadun varmistukseen
+  - Lisätty pre-commit koodin laadunvarmistukseen
   - Lisätty Azure SDK -paketteja (azure-identity, azure-mgmt-resource)
 
 #### Korjattu
-- **Post-Create -komento**: Varmistaa nyt AZD:n ja Azure CLI:n asennuksen kontin käynnistyksessä
+- **Post-Create-komento**: Nyt tarkistaa AZD- ja Azure CLI -asennuksen säiliön käynnistyessä
 
 ---
 
 ### [v3.11.0] - 2026-02-05
 
-#### Aloittelijaystävällisen README-tiedoston uudistus
-**Tässä versiossa README.md parannetaan merkittävästi aloittelijoille helpommaksi ja lisätään olennaisia resursseja AI-kehittäjille.**
+#### Aloittelijaystävällinen README-uudistus
+**Tämä versio parantaa README.md:tä merkittävästi tekemällä siitä saavutettavamman aloittelijoille ja lisää olennaisia resursseja tekoälykehittäjille.**
 
 #### Lisätty
-- **🆚 Azure CLI vs AZD -vertailu**: Selkeä selitys siitä, milloin käyttää kumpaakin työkalua käytännön esimerkkien kanssa
-- **🌟 Mahtavat AZD-linkit**: Suorat linkit yhteisön malligalleriaan ja kontribuutiolähteisiin:
-  - [Awesome AZD-galleria](https://azure.github.io/awesome-azd/) - yli 200 valmista käyttöönotettavaa mallia
-  - [Lähetä malli](https://github.com/Azure/awesome-azd/issues) - Yhteisön kontribuutio
-- **🎯 Pika-aloitusopas**: Yksinkertaistettu 3-vaiheinen aloitusosio (Asenna → Kirjaudu sisään → Ota käyttöön)
-- **📊 Kokemukseen perustuva navigaatiotaulukko**: Selkeä opastus siitä, mistä aloittaa kehittäjän kokemustason perusteella
+- **🆚 Azure CLI vs AZD -vertailu**: Selkeä selitys siitä, milloin käyttää kumpaakin työkalua käytännön esimerkkien kera
+- **🌟 Huippu AZD -linkit**: Suorat linkit yhteisön malligalleriaan ja osallistumisresursseihin:
+  - [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) - yli 200 valmista käyttöön otettavaa mallia
+  - [Submit a Template](https://github.com/Azure/awesome-azd/issues) - Yhteisön osallistuminen
+- **🎯 Pika-aloitusopas**: Yksinkertaistettu kolmen vaiheen aloitusosio (Asenna → Kirjaudu sisään → Ota käyttöön)
+- **📊 Kokemukseen perustuva navigaatiotaulukko**: Selkeä ohjeistus mistä aloittaa kehittäjän kokemuksen perusteella
 
 #### Muutokset
-- **README-rakenne**: Järjestetty uudelleen progressiiviseen paljastukseen - tärkeimmät tiedot ensin
-- **Johdanto-osio**: Uudistettu selittämään "The Magic of `azd up`" täydellisille aloittelijoille
-- **Poistettu päällekkäinen sisältö**: Poistettu päällekkäinen vianmääritykseen liittyvä osio
-- **Vianmäärityskomennot**: Korjattu `azd logs`-viittaus käyttämään validia `azd monitor --logs`-komentoa
+- **README-rakenne**: Uudelleenjärjestetty vaiheittaiseen paljastukseen — tärkeimmät tiedot ensin
+- **Esittelyosio**: Uudelleenkirjoitettu selittämään `azd up`-komennon taika täydellisille aloittelijoille
+- **Poistettu päällekkäinen vianmääritysosio**
+- **Vianmäärityskomennot**: Korjattu `azd logs` -viittaus käyttämään kelvollista `azd monitor --logs`
 
 #### Korjattu
-- **🔐 Autentikointikomennot**: Lisätty `azd auth login` ja `azd auth logout` cheat-sheet.md:ään
-- **Virheelliset komentoviittaukset**: Poistettu jäljellä olleet `azd logs`-viittaukset README:n vianmääritysosiosta
+- **🔐 Autentikointikomennot**: Lisätty `azd auth login` ja `azd auth logout` tiedostoon cheat-sheet.md
+- **Virheelliset komennon viittaukset**: Poistettu jäljellä olevat `azd logs` README:n vianmääritysosiosta
 
-#### Huomautuksia
-- **Laajuus**: Muutokset sovellettu pää-README.md:ään ja resources/cheat-sheet.md:ään
+#### Huomiot
+- **Laajuus**: Muutokset sovellettiin pää-README.md:ään ja resources/cheat-sheet.md:ään
 - **Kohdeyleisö**: Parannukset kohdistettu erityisesti AZD:hen tutustuville kehittäjille
 
 ---
@@ -214,303 +266,299 @@ Vanhat kansiot on korvattu luku-numeroiduilla kansioilla:
 ### [v3.10.0] - 2026-02-05
 
 #### Azure Developer CLI -komentojen tarkkuuspäivitys
-**Tässä versiossa korjataan dokumentaation läpi esiintyviä olemattomia AZD-komentoja, jotta kaikki koodiesimerkit käyttävät kelvollista Azure Developer CLI -syntaksia.**
+**Tämä versio korjaa dokumentaation läpi esiintyneet olemattomat AZD-komennot, varmistaen että kaikki koodiesimerkit käyttävät kelvollista Azure Developer CLI -syntaksia.**
 
 #### Korjattu
-- **🔧 Olemattomat AZD-komennot poistettu**: Laaja auditointi ja virheellisten komentojen korjaus:
-  - `azd logs` (ei ole olemassa) → korvattu komennolla `azd monitor --logs` tai Azure CLI -vaihtoehdoilla
-  - `azd service`-alikomennot (eivät ole olemassa) → korvattu `azd show`- ja Azure CLI -komennoilla
+- **🔧 Ei-olemassa olevat AZD-komennot poistettu**: Kattava auditointi ja virheellisten komentojen korjaus:
+  - `azd logs` (ei ole olemassa) → korvattu `azd monitor --logs`-komennolla tai Azure CLI -vaihtoehdoilla
+  - `azd service`-alikäskyt (eivät ole olemassa) → korvattu `azd show`-komennolla ja Azure CLI:llä
   - `azd infra import/export/validate` (eivät ole olemassa) → poistettu tai korvattu kelvollisilla vaihtoehdoilla
-  - `azd deploy --rollback/--incremental/--parallel/--detect-changes` liput (eivät ole olemassa) → poistettu
-  - `azd provision --what-if/--rollback` liput (eivät ole olemassa) → päivitetty käyttämään `--preview`
-  - `azd config validate` (ei ole olemassa) → korvattu `azd config list`-komennolla
+  - `azd deploy --rollback/--incremental/--parallel/--detect-changes`-liput (eivät ole olemassa) → poistettu
+  - `azd provision --what-if/--rollback`-liput (eivät ole olemassa) → päivitetty käyttämään `--preview`
+  - `azd config validate` (ei ole olemassa) → korvattu `azd config list`
   - `azd info`, `azd history`, `azd metrics` (eivät ole olemassa) → poistettu
 
 - **📚 Tiedostot päivitetty komentokorjauksilla**:
   - `resources/cheat-sheet.md`: Suuri uudistus komentoviitteeseen
-  - `docs/deployment/deployment-guide.md`: Korjattu rollback- ja käyttöönotto-strategioita
-  - `docs/troubleshooting/debugging.md`: Korjattu lokianalyysi-osioita
-  - `docs/troubleshooting/common-issues.md`: Päivitetty vianmäärityskomennot
+  - `docs/deployment/deployment-guide.md`: Korjatut palautus- ja käyttöönotto-strategiat
+  - `docs/troubleshooting/debugging.md`: Korjatut lokien analysointi -osiot
+  - `docs/troubleshooting/common-issues.md`: Päivitetyt vianmäärityskomennot
   - `docs/troubleshooting/ai-troubleshooting.md`: Korjattu AZD-debuggausosio
-  - `docs/getting-started/azd-basics.md`: Korjattu valvontakomennot
-  - `docs/getting-started/first-project.md`: Päivitetty valvonta- ja debug-esimerkit
-  - `docs/getting-started/installation.md`: Korjattu help- ja versioviittaukset
-  - `docs/pre-deployment/application-insights.md`: Korjattu lokien katseluohjeita
-  - `docs/pre-deployment/coordination-patterns.md`: Korjattu agenttien debuggauskomennot
-
-- **📝 Versioviittaus päivitetty**:
-  - `docs/getting-started/installation.md`: Vaihdettu kovakoodattu `1.5.0` generiseen `1.x.x`-viittaukseen ja lisätty linkki julkaisuihin
+  - `docs/getting-started/azd-basics.md`: Korjatut monitorointikomennot
+  - `docs/getting-started/first-project.md`: Päivitetyt monitorointi- ja debuggausesimerkit
+  - `docs/getting-started/installation.md`: Korjatut ohje- ja versioesimerkit
+  - `docs/pre-deployment/application-insights.md`: Korjatut lokien katselumiskomennot
+  - `docs/pre-deployment/coordination-patterns.md`: Korjatut agenttien debuggauskomennot
 
 #### Muutokset
-- **Rollback-strategiat**: Päivitetty dokumentaatio käyttämään Git-pohjaista rollbackia (AZD:llä ei ole natiivista rollback-toimintoa)
-- **Lokien katselu**: Korvattu `azd logs` -viittaukset komentoilla `azd monitor --logs`, `azd monitor --live` ja Azure CLI -komennoilla
-- **Suorituskykyo-osa**: Poistettu olemattomat parallel/incremental -deploy-liput ja annettu kelvollisia vaihtoehtoja
+- **Palautusstrategiat**: Päivitetty dokumentaatio käyttämään Git-pohjaista palautusta (AZD:llä ei ole natiivia palautusta)
+- **Lokin katselu**: Korvattu `azd logs`-viittaukset komentoilla `azd monitor --logs`, `azd monitor --live` ja Azure CLI -komennoilla
+- **Suorituskykyosio**: Poistettu olemattomat rinnakkais-/inkrementaaliset käyttöönotto-liput, tarjottu kelvolliset vaihtoehdot
 
-#### Teknisiä yksityiskohtia
+#### Tekniset tiedot
 - **Kelvolliset AZD-komennot**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
 - **Kelvolliset azd monitor -liput**: `--live`, `--logs`, `--overview`
 - **Poistetut ominaisuudet**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
 
-#### Huomautuksia
-- **Varmistus**: Komennot validoitu Azure Developer CLI v1.23.x:llä
+#### Huomiot
+- **Varmistus**: Komennot validoitu Azure Developer CLI v1.23.x:ää vastaan
 
 ---
 
 ### [v3.9.0] - 2026-02-05
 
 #### Työpajan valmistuminen ja dokumentaation laadun päivitys
-**Tämä versio täydentää interaktiiviset työpajamoduulit, korjaa kaikki rikkinäiset dokumentaatiolinkit ja parantaa yleistä sisältölaatua tekoälykehittäjille, jotka käyttävät Microsoft AZD:tä.**
+**Tämä versio viimeistelee interaktiiviset työpajamoduulit, korjaa kaikki rikkinäiset dokumentaatiolinkit ja parantaa yleistä sisältölaatua Microsoft AZD:tä käyttäville tekoälykehittäjille.**
 
 #### Lisätty
-- **📝 CONTRIBUTING.md**: Uusi kontribuutioprotokolladokumentti, joka sisältää:
-  - Selkeät ohjeet ongelmien ilmoittamiseen ja muutosehdotuksiin
-  - Dokumentaatiostandardit uudelle sisällölle
-  - Koodiesimerkkiohjeet ja commit-viestikonventiot
+- **📝 CONTRIBUTING.md**: Uusi ohjeistus osallistumista varten, sisältäen:
+  - Selkeät ohjeet virheiden raportointiin ja muutosehdotuksiin
+  - Dokumentaation standardit uudelle sisällölle
+  - Koodiesimerkkien ohjeet ja commit-viestien käytännöt
   - Tietoa yhteisön osallistumisesta
 
 #### Valmistunut
-- **🎯 Työpajamoduuli 7 (Yhteenveto)**: Täysin valmis yhteenvetomoduuli, joka sisältää:
-  - Kattavan yhteenvedon työpajan saavutuksista
-  - Avainkäsitteet -osio, joka kattaa AZD:n, templatet ja AI Foundryn
+- **🎯 Työpajan moduuli 7 (Yhteenveto)**: Täysin valmis yhteenvetomoduuli, joka sisältää:
+  - Kattava yhteenveto työpajan saavutuksista
+  - Keskeiset opitut käsitteet -osio, joka kattaa AZD:n, mallit ja Microsoft Foundryn
   - Suositukset oppimispolun jatkamiseksi
   - Työpajan haasteharjoituksia vaikeustasoilla
-  - Yhteisön palaute- ja tukilinkkejä
+  - Yhteisön palaute- ja tukilinkit
 
-- **📚 Työpajamoduuli 3 (Purku)**: Päivitetyt oppimistavoitteet, jotka sisältävät:
-  - GitHub Copilotin aktivointiohjeet MCP-palvelimilla
-  - AZD-templaten kansiorakenteen ymmärtäminen
+- **📚 Työpajan moduuli 3 (Deconstruct)**: Päivitetyt oppimistavoitteet, sisältäen:
+  - Ohjeet GitHub Copilotin ja MCP-palvelimien aktivointiin
+  - Ymmärrys AZD-mallikansiorakenteesta
   - Infrastructure-as-code (Bicep) -järjestelymallit
   - Käytännön lab-ohjeet
 
-- **🔧 Työpajamoduuli 6 (Tpurku)**: Valmistunut sisältäen:
-  - Resurssien siivous- ja kustannustenhallintatavoitteet
-  - `azd down` -käyttö turvalliseen infrastruktuurin poistamiseen
-  - Ohjeistus pehmeästi poistettujen kognitiivisten palveluiden palauttamiseen
-  - Bonus-tutkimusaiheita GitHub Copilotille ja Azure Portalille
+- **🔧 Työpajan moduuli 6 (Teardown)**: Valmistunut, sisältäen:
+  - Resurssien siivous ja kustannusten hallinnan tavoitteet
+  - `azd down`-komennon käyttö turvalliseen infrastruktuurin poistoon
+  - Cognitive Servicesin pehmeästi poistettujen resurssien palautusohjeet
+  - Lisätehtäviä GitHub Copilotille ja Azure Portalille
 
 #### Korjattu
-- **🔗 Rikkoutuneiden linkkien korjaukset**: Korjattiin yli 15 rikkinäistä sisäistä dokumentaatiolinkkiä:
-  - `docs/ai-foundry/ai-model-deployment.md`: Korjattu polut microsoft-foundry-integration.md:hen
-  - `docs/troubleshooting/ai-troubleshooting.md`: Korjattu ai-model-deployment.md ja production-ai-practices.md polut
-  - `docs/getting-started/first-project.md`: Korvattu puuttuva cicd-integration.md deployment-guide.md:llä
-  - `examples/retail-scenario.md`: Korjattu UKK- ja vianmääritysohjeiden polut
-  - `examples/container-app/microservices/README.md`: Korjattu kurssin kotisivu- ja deployment-opas-polut
-  - `resources/faq.md` ja `resources/glossary.md`: Päivitetyt AI-lukujen viittaukset
-  - `course-outline.md`: Korjattu ohjaajan opas- ja AI-työpajalab-viittaukset
+- **🔗 Rikkinäisten linkkien korjaukset**: Korjattu yli 15 rikkinäistä sisäistä dokumentaatiolinkkiä:
+  - `docs/ai-foundry/ai-model-deployment.md`: Korjattu polut tiedostoon microsoft-foundry-integration.md
+  - `docs/troubleshooting/ai-troubleshooting.md`: Korjattu ai-model-deployment.md ja production-ai-practices.md -polut
+  - `docs/getting-started/first-project.md`: Korvattu olematon cicd-integration.md tiedostolla deployment-guide.md
+  - `examples/retail-scenario.md`: Korjattu FAQ- ja vianmääritysoppaan polut
+  - `examples/container-app/microservices/README.md`: Korjattu kurssin kotisivu- ja deployment guide -polut
+  - `resources/faq.md` ja `resources/glossary.md`: Päivitetyt AI-lukuviitteet
+  - `course-outline.md`: Korjattu ohjaajan opas- ja AI-työpajalab-viitteet
 
-- **📅 Työpajan tilabanneri**: Päivitetty "Under Construction" -tilasta aktiiviseksi työpajaksi, päivämääränä helmikuu 2026
+- **📅 Työpajan tila-banneri**: Päivitetty 'Under Construction' -tilasta aktiiviseksi työpajaksi helmikuulle 2026
+- **🔗 Työpajan navigaatio**: Korjattu rikkinäiset navigaatiolinkit workshop README.md:ssä, jotka osoittivat olemattomaan lab-1-azd-basics -kansioon
 
-- **🔗 Työpajan navigointi**: Korjattu rikkinäiset navigointilinkit työpajan README.md:ssä, jotka osoittivat olemattomaan lab-1-azd-basics -kansioon
-
-#### Muutettu
+#### Muutokset
 - **Työpajan esitys**: Poistettu "under construction" -varoitus, työpaja on nyt valmis ja käyttövalmis
-- **Navigoinnin yhdenmukaisuus**: Varmistettu, että kaikilla työpajamoduuleilla on asianmukainen moduulien välinen navigointi
-- **Oppimispolun viittaukset**: Päivitetty lukujen poikkiviittaukset käyttämään oikeita microsoft-foundry-polkuja
+- **Navigaation johdonmukaisuus**: Varmistettu, että kaikilla työpajamoduuleilla on asianmukainen moduulien välinen navigaatio
+- **Oppimispolun viitteet**: Päivitetty lukujen ristiviitteet käyttämään oikeita microsoft-foundry-polkuja
 
 #### Varmennettu
-- ✅ Kaikilla englanninkielisillä markdown-tiedostoilla on kelvolliset sisäiset linkit
+- ✅ Kaikilla englanninkielisillä Markdown-tiedostoilla on kelvolliset sisäiset linkit
 - ✅ Työpajamoduulit 0–7 ovat valmiita oppimistavoitteineen
-- ✅ Luku- ja moduulinavigointi toimii oikein
-- ✅ Sisältö on sopivaa tekoälykehittäjille, jotka käyttävät Microsoft AZD:tä
-- ✅ Kielenkäyttö ja rakenne on aloittelijaystävällinen läpi dokumentaation
-- ✅ CONTRIBUTING.md tarjoaa selkeät ohjeet yhteisön kontribuuttoreille
+- ✅ Luku- ja moduulinavigaatio toimii oikein
+- ✅ Sisältö on sopivaa Microsoft AZD:tä käyttäville tekoälykehittäjille
+- ✅ Aloittelijaystävällinen kieli ja rakenne säilytetty
+- ✅ CONTRIBUTING.md tarjoaa selkeät ohjeet yhteisön kontribuutiolle
 
 #### Tekninen toteutus
-- **Linkin validointi**: Automaattinen PowerShell-skripti tarkisti kaikki .md-tiedostojen sisäiset linkit
-- **Sisältöauditointi**: Manuaalinen tarkastus työpajan täydellisyyden ja aloittelijaystävällisyyden varmistamiseksi
-- **Navigointijärjestelmä**: Yhtenäiset luku- ja moduulinavigointimallit otettiin käyttöön
+- **Linkkien validointi**: Automaattinen PowerShell-skripti varmisti kaikki .md-tiedostojen sisäiset linkit
+- **Sisällön auditointi**: Manuaalinen tarkastus työpajan täydellisyyden ja aloittelijaystävällisyyden varmistamiseksi
+- **Navigaatiojärjestelmä**: Johdonmukaiset luku- ja moduulinavigaatiomallit otettu käyttöön
 
-#### Huomautuksia
-- **Soveltamisala**: Muutokset on tehty vain englanninkieliseen dokumentaatioon
+#### Huomiot
+- **Laajuus**: Muutokset sovellettiin vain englanninkieliseen dokumentaatioon
 - **Käännökset**: Käännöskansiot eivät päivittyneet tässä versiossa (automaattinen käännös synkronoidaan myöhemmin)
-- **Työpajan kesto**: Täydellinen työpaja tarjoaa nyt 3–4 tuntia käytännön oppimista
+- **Työpajan kesto**: Täysi työpaja tarjoaa nyt 3–4 tuntia käytännön oppimista
 
 ---
 
 ### [v3.8.0] - 2025-11-19
 
-#### Edistynyt dokumentaatio: monitorointi, turvallisuus ja moni-agenttipatternit
-**Tämä versio lisää kattavat A-tason oppitunnit Application Insights -integraatiosta, autentikointimalleista ja moni-agentin koordinoinnista tuotantokäyttöön.**
+#### Edistynyt dokumentaatio: monitorointi, turvallisuus ja moni-agenttien mallit
+**Tämä versio lisää kattavat A-tason oppitunnit Application Insights -integraatiosta, autentikointimalleista ja moni-agenttien koordinoinnista tuotantokäyttöön.**
 
 #### Lisätty
-- **📊 Application Insights -integraation oppitunti**: tiedostoon `docs/pre-deployment/application-insights.md`:
+- **📊 Application Insights -integraatio-opetus**: tiedostossa `docs/pre-deployment/application-insights.md`:
   - AZD-keskeinen käyttöönotto automaattisella provisioinnilla
-  - Täydelliset Bicep-templatet Application Insightsille + Log Analyticsille
+  - Täydelliset Bicep-mallit Application Insightsille + Log Analyticsille
   - Toimivat Python-sovellukset mukautetulla telemetrialla (yli 1 200 riviä)
-  - AI/LLM-monitorointimallit (Azure OpenAI -tokenien/kustannusten seuranta)
-  - 6 Mermaid-kaaviota (arkkitehtuuri, hajautettu jäljitys, telemetriavirta)
+  - AI/LLM-monitorointimallit (Microsoft Foundry -mallien token-/kustannusseuranta)
+  - 6 Mermaid-kaaviota (arkkitehtuuri, hajautettu jäljitys, telemetrian virtaus)
   - 3 käytännön harjoitusta (hälytykset, dashboardit, AI-monitorointi)
-  - Kusto-kyselyesimerkkejä ja kustannusoptimointistrategioita
-  - Live-mittarivirtaus ja reaaliaikainen vianetsintä
-  - 40–50 minuutin oppimisaika tuotantovalmiilla malleilla
+  - Kusto-kyselyesimerkit ja kustannusten optimointistrategiat
+  - Live-mittarivirtaus ja reaaliaikainen debuggaus
+  - 40–50 minuutin oppimisaika tuotantovalmiiden mallien kanssa
 
-- **🔐 Autentikointi- ja turvallisuusmallit -oppitunti**: tiedostoon `docs/getting-started/authsecurity.md`:
+- **🔐 Autentikointi- ja turvallisuusmallit**: tiedostossa `docs/getting-started/authsecurity.md`:
   - 3 autentikointimallia (yhteysmerkkijonot, Key Vault, hallittu identiteetti)
-  - Täydelliset Bicep-infrastruktuuritemplat turvallisille käyttöönottoille
+  - Täydelliset Bicep-infrastruktuurimallit turvallisiin käyttöönottoihin
   - Node.js-sovelluskoodi Azure SDK -integraatiolla
-  - 3 täydellistä harjoitusta (hallittu identiteetti, käyttäjän määrittämä identiteetti, Key Vaultin kierto)
-  - Turvallisuuden parhaat käytännöt ja RBAC-määritykset
-  - Vianmääritysohje ja kustannusanalyysi
+  - 3 täydellistä harjoitusta (hallitun identiteetin ottaminen käyttöön, käyttäjälle osoitettu identiteetti, Key Vaultin kierto)
+  - Turvallisuuden parhaat käytännöt ja RBAC-konfiguraatiot
+  - Vianmääritysopas ja kustannusanalyysi
   - Tuotantovalmiit salasanattomat autentikointimallit
 
-- **🤖 Moni-agentin koordinointimallit -oppitunti**: tiedostoon `docs/pre-deployment/coordination-patterns.md`:
+- **🤖 Moni-agenttien koordinointimallit**: tiedostossa `docs/pre-deployment/coordination-patterns.md`:
   - 5 koordinointimallia (sekventiaalinen, rinnakkainen, hierarkkinen, tapahtumapohjainen, konsensus)
-  - Täydellinen orkestrointipalvelun toteutus (Python/Flask, yli 1 500 riviä)
-  - 3 erikoistettua agenttitoteutusta (Research, Writer, Editor)
-  - Service Bus -integraatio viestijonotukseen
-  - Cosmos DB tilanhallinta hajautetuissa järjestelmissä
+  - Täydellinen orkestroijapalvelun toteutus (Python/Flask, yli 1 500 riviä)
+  - 3 erikoistettua agenttitoteutusta (Tutkija, Kirjoittaja, Editori)
+  - Service Bus -integraatio viestijonitusta varten
+  - Cosmos DB:n tilanhallinta hajautetuille järjestelmille
   - 6 Mermaid-kaaviota, jotka näyttävät agenttien vuorovaikutukset
-  - 3 edistynyttä harjoitusta (aikarajankäsittely, uudelleenyrittomekanismi, circuit breaker)
+  - 3 edistynyttä harjoitusta (aikakatkaisujen käsittely, uudelleenyrityslogiikka, circuit breaker)
   - Kustannuserittely (240–565 $/kk) optimointistrategioineen
   - Application Insights -integraatio monitorointia varten
 
-#### Laajennettu
-- **Pre-deployment-luku**: Sisältää nyt kattavan monitoroinnin ja koordinointimallit
-- **Getting Started -luku**: Laajennettu ammattimaisilla autentikointimalleilla
-- **Tuotantovalmius**: Täysi kattavuus turvallisuudesta observabilityyn
-- **Kurssin rakenne**: Päivitetty viittaamaan uusiin oppitunteihin lukuihin 3 ja 6
+#### Parannettu
+- **Ennakkovalmistelu-luku**: Sisältää nyt kattavat monitorointi- ja koordinointimallit
+- **Aloitus-luku**: Parannettu ammatillisilla autentikointimalleilla
+- **Tuotantovalmius**: Täydellinen kattavuus turvallisuudesta havaittavuuteen
+- **Kurssin sisältö**: Päivitetty viittaamaan uusiin oppitunteihin luvuissa 3 ja 6
 
-#### Muutettu
-- **Oppimisen eteneminen**: Turvallisuuden ja monitoroinnin parempi integrointi koko kurssin ajan
+#### Muutokset
+- **Oppimisen eteneminen**: Parempi turvallisuuden ja monitoroinnin integrointi koko kurssiin
 - **Dokumentaation laatu**: Johdonmukaiset A-tason standardit (95–97 %) uusissa oppitunneissa
-- **Tuotantomallit**: Täydellinen end-to-end -kattavuus yritystason käyttöönottoihin
+- **Tuotantokaaviot**: Täydellinen päästä päähän kattavuus yritystason käyttöönottoihin
 
 #### Parannettu
-- **Kehittäjäkokemus**: Selkeä polku kehityksestä tuotantovalvontaan
-- **Turvallisuusstandardit**: Ammattimaiset mallit autentikointiin ja salaisuuksien hallintaan
-- **Observability**: Täysi Application Insights -integraatio AZD:n kanssa
-- **AI-kuormat**: Erikoistunut monitorointi Azure OpenAI:lle ja moni-agenttijärjestelmille
+- **Developer Experience**: Selkeä polku kehityksestä tuotantovalvontaan
+- **Security Standards**: Ammattimaisia malleja todennukseen ja salaisuuksien hallintaan
+- **Observability**: Täydellinen Application Insights -integraatio AZD:n kanssa
+- **AI Workloads**: Erikoistunut valvonta Microsoft Foundry Models -malleille ja moni-agenttijärjestelmille
 
-#### Varmennettu
-- ✅ Kaikilla oppitunneilla on täydelliset toimivat koodit (ei pelkkiä pätkiä)
-- ✅ Mermaid-kaaviot visuaaliseen oppimiseen (yhteensä 19 kolmella oppitunnilla)
-- ✅ Käytännön harjoitukset vahvistusvaiheineen (yhteensä 9)
-- ✅ Tuotantovalmiit Bicep-templatet, jotka voi ottaa käyttöön `azd up` -komennolla
+#### Vahvistettu
+- ✅ Kaikilla oppitunneilla on kokonainen toimiva koodi (ei katkelmia)
+- ✅ Mermaid-kaaviot visuaalista oppimista varten (19 yhteensä 3 oppitunnissa)
+- ✅ Käytännön harjoituksia verifiointivaiheineen (9 yhteensä)
+- ✅ Tuotantovalmiit Bicep-mallit, jotka voi ottaa käyttöön `azd up` -komennolla
 - ✅ Kustannusanalyysi ja optimointistrategiat
-- ✅ Vianmääritysohjeet ja parhaat käytännöt
-- ✅ Tietotarkastuskohtia vahvistuskomentteineen
+- ✅ Vianetsintäoppaat ja parhaat käytännöt
+- ✅ Tietopisteet verifiointikomennoilla
 
 #### Dokumentaation arviointitulokset
-- **docs/pre-deployment/application-insights.md**: - Kattava monitorointiohje
+- **docs/pre-deployment/application-insights.md**: - Kattava valvontaopas
 - **docs/getting-started/authsecurity.md**: - Ammattimaiset turvallisuusmallit
-- **docs/pre-deployment/coordination-patterns.md**: - Edistyneet moni-agenttiarkkitehtuurit
-- **Kaikki uudet sisällöt**: - Johdonmukaisesti korkeatasoiset standardit
+- **docs/pre-deployment/coordination-patterns.md**: - Kehittyneet moni-agenttiarkkitehtuurit
+- **Overall New Content**: - Johdonmukaiset korkealaatuiset standardit
 
 #### Tekninen toteutus
 - **Application Insights**: Log Analytics + mukautettu telemetria + hajautettu jäljitys
-- **Autentikointi**: Hallittu identiteetti + Key Vault + RBAC-mallit
-- **Moni-agentti**: Service Bus + Cosmos DB + Container Apps + orkestrointi
-- **Monitorointi**: Live-mittarit + Kusto-kyselyt + hälytykset + dashboardit
-- **Kustannusten hallinta**: Näytteenottostrategiat, säilytysasetukset, budjettikontrollit
+- **Authentication**: Managed Identity + Key Vault + RBAC-mallit
+- **Multi-Agent**: Service Bus + Cosmos DB + Container Apps + orkestrointi
+- **Monitoring**: Live-metriikat + Kusto-kyselyt + hälytykset + kojelaudat
+- **Cost Management**: Näytemenetelmät, säilytyskäytännöt, budjettivalvonta
 
 ### [v3.7.0] - 2025-11-19
 
-#### Dokumentaation laatupäivitykset ja uusi Azure OpenAI -esimerkki
-**Tämä versio parantaa dokumentaation laatua koko repositoriossa ja lisää täydellisen Azure OpenAI -käyttöönottoesimerkin GPT-4-keskustelukäyttöliittymällä.**
+#### Dokumentaation laadun parannukset ja uusi Microsoft Foundry Models -esimerkki
+**Tämä versio parantaa dokumentaation laatua koko arkistossa ja lisää täydellisen Microsoft Foundry Models -käyttöönottoesimerkin, jossa on gpt-4.1 chat-käyttöliittymä.**
 
 #### Lisätty
-- **🤖 Azure OpenAI -keskusteluesimerkki**: Täydellinen GPT-4-käyttöönotto toimivalla toteutuksella kansiossa `examples/azure-openai-chat/`:
-  - Täydellinen Azure OpenAI -infrastruktuuri (GPT-4-mallin käyttöönotto)
-  - Python-komentorivikeskusteluliittymä keskusteluhistorialla
+- **🤖 Microsoft Foundry Models Chat Example**: Täydellinen gpt-4.1 -käyttöönotto toimivalla toteutuksella kansiossa `examples/azure-openai-chat/`:
+  - Täydellinen Microsoft Foundry Models -infrastruktuuri (gpt-4.1 -mallin käyttöönotto)
+  - Python-pohjainen komentorivichat-käyttöliittymä keskusteluhistorialla
   - Key Vault -integraatio API-avainten turvalliseen säilytykseen
   - Tokenien käytön seuranta ja kustannusarviointi
-  - Nopeudenrajaus ja virheenkäsittely
-  - Kattava README, 35–45 minuutin käyttöönotto-opas
-  - 11 tuotantovalmista tiedostoa (Bicep-templatet, Python-sovellus, konfiguraatio)
+  - Nopeusrajoitus ja virheenkäsittely
+  - Kattava README, jossa 35–45 minuutin käyttöönotto-opas
+  - 11 tuotantovalmista tiedostoa (Bicep-mallit, Python-sovellus, konfiguraatio)
 - **📚 Dokumentaation harjoitukset**: Lisätty käytännön harjoituksia konfiguraatio-oppaaseen:
   - Harjoitus 1: Moni-ympäristökonfiguraatio (15 minuuttia)
   - Harjoitus 2: Salaisuuksien hallinnan harjoitus (10 minuuttia)
-  - Selkeät onnistumiskriteerit ja vahvistusvaiheet
-- **✅ Käyttöönoton varmennus**: Lisätty varmennusosio käyttöönotto-oppaaseen:
-  - Terveyden tarkistusmenettelyt
+  - Selkeät onnistumiskriteerit ja verifiointivaiheet
+- **✅ Käyttöönoton verifiointi**: Lisätty verifiointiosio käyttöönotto-oppaaseen:
+  - Terveystarkastusmenettelyt
   - Onnistumiskriteerien tarkistuslista
-  - Odotetut tulosteet kaikille käyttöönotto komennoille
-  - Pikaviankorjauslista
+  - Odotetut tulosteet kaikille käyttöönotto-komennoille
+  - Vianetsinnän pikaopas
 
-#### Laajennettu
-- **examples/README.md**: Päivitetty A-tason laatuun (93 %):
+#### Parannettu
+- **examples/README.md**: Päivitetty A-tason laatuun (93%):
   - Lisätty azure-openai-chat kaikkiin asiaankuuluviin osioihin
-  - Paikallisten esimerkkien määrä päivitetty 3 -> 4
-  - Lisätty AI-sovellus-esimerkkitaulukkoon
-  - Integroidu Intermediate User Quick Startiin
+  - Paikallisten esimerkkien määrä päivitetty 3:sta 4:ään
+  - Lisätty AI Application Examples -taulukkoon
+  - Integroitu Quick Start -osioon keskitasoisille käyttäjille
   - Lisätty Microsoft Foundry Templates -osioon
-  - Päivitetty vertailumatriisi ja teknologiaosiot
-- **Dokumentaation laatu**: Parantunut B+ (87 %) → A- (92 %) koko docs-kansiossa:
+  - Päivitetty vertailumatriisi- ja teknologialöytöosioita
+- **Documentation Quality**: Parannettu B+ (87%) → A- (92%) koko docs-kansiossa:
   - Lisätty odotetut tulosteet kriittisiin komentoesimerkkeihin
-  - Sisällytetty vahvistusvaiheet konfiguraatiomuutoksiin
-  - Lisää käytännön harjoittelua selkeillä tuloksilla
+  - Sisällytetty verifiointivaiheet konfiguraatiomuutoksiin
+  - Parannettu käytännön oppimista käytännön harjoituksilla
 
 #### Muutettu
 - **Oppimisen eteneminen**: Parempi AI-esimerkkien integrointi keskitasoisille oppijoille
-- **Dokumentaation rakenne**: Toiminnallisempia harjoituksia selkeillä lopputuloksilla
-- **Varmennusprosessi**: Eksplisiittiset onnistumiskriteerit lisätty keskeisiin työnkulkuihin
+- **Documentation Structure**: Toiminnallisempia harjoituksia selkeillä tuloksilla
+- **Verification Process**: Selkeät onnistumiskriteerit lisätty keskeisiin työnkulkuihin
 
 #### Parannettu
-- **Kehittäjäkokemus**: Azure OpenAI -käyttöönotto kestää nyt 35–45 minuuttia (aiemmin 60–90 minuuttia monimutkaisemmissa vaihtoehdoissa)
-- **Kustannusten läpinäkyvyys**: Selkeät kustannusarviot (50–200 $/kk) Azure OpenAI -esimerkille
-- **Oppimispolku**: AI-kehittäjille selkeä aloituspiste azure-openai-chatilla
-- **Dokumentaatiostandardit**: Johdonmukaiset odotetut tulosteet ja vahvistusvaiheet
+- **Developer Experience**: Microsoft Foundry Models -käyttöönotto nyt 35–45 minuuttia (vs. 60–90 monimutkaisille vaihtoehdoille)
+- **Cost Transparency**: Selkeät kustannusarviot ($50–200/kk) Microsoft Foundry Models -esimerkille
+- **Learning Path**: AI-kehittäjille selkeä sisäänpääsy azure-openai-chatin avulla
+- **Documentation Standards**: Johdonmukaiset odotetut tulosteet ja verifiointivaiheet
 
-#### Varmennettu
-- ✅ Azure OpenAI -esimerkki toimii täysin `azd up` -komennolla
+#### Vahvistettu
+- ✅ Microsoft Foundry Models -esimerkki täysin toimiva `azd up` -komennolla
 - ✅ Kaikki 11 toteutustiedostoa syntaksiltaan oikein
-- ✅ README-ohjeet vastaavat todellista käyttöönottoa
-- ✅ Dokumentaatiolinkit päivitetty yli 8 eri paikkaan
-- ✅ Esimerkkien indeksi heijastaa 4 paikallista esimerkkiä oikein
+- ✅ README-ohjeet vastaavat todellista käyttöönotto­kokemusta
+- ✅ Dokumentaatiolinkit päivitetty yli 8 paikkaan
+- ✅ Esimerkkien indeksi vastaa tarkasti 4 paikallista esimerkkiä
 - ✅ Ei päällekkäisiä ulkoisia linkkejä taulukoissa
 - ✅ Kaikki navigointiviittaukset oikeita
 
 #### Tekninen toteutus
-- **Azure OpenAI -arkkitehtuuri**: GPT-4 + Key Vault + Container Apps -malli
-- **Turvallisuus**: Hallittu identiteetti valmis, salaisuudet Key Vaultissa
-- **Monitorointi**: Application Insights -integraatio
-- **Kustannusten hallinta**: Tokenien seuranta ja käytön optimointi
-- **Käyttöönotto**: Yksi `azd up` -komento koko asetukselle
+- **Microsoft Foundry Models Architecture**: gpt-4.1 + Key Vault + Container Apps -malli
+- **Security**: Managed Identity valmiina, salaisuudet Key Vaultissa
+- **Monitoring**: Application Insights -integraatio
+- **Cost Management**: Token-seuranta ja käytön optimointi
+- **Deployment**: Yksi `azd up` -komento koko käyttöönottoon
 
 ### [v3.6.0] - 2025-11-19
 
-#### Suuri päivitys: Container App -käyttöönottoesimerkit
+#### Merkittävä päivitys: Container App -käyttöönotto-esimerkit
 **Tämä versio esittelee kattavat, tuotantovalmiit konttisovellusten käyttöönottoesimerkit Azure Developer CLI:n (AZD) avulla, täydellisellä dokumentaatiolla ja integroinnilla oppimispolkuun.**
 
 #### Lisätty
-- **🚀 Container App -esimerkit**: Uudet paikalliset esimerkit kansioon `examples/container-app/`:
-  - [Pääopas](examples/container-app/README.md): Täydellinen yleiskatsaus konttikäyttöönotoista, pika-aloituksesta, tuotantokäytöstä ja edistyneistä malleista
-  - [Yksinkertainen Flask-API](../../examples/container-app/simple-flask-api): Aloittelijaystävällinen REST-API, jolla on scale-to-zero, health probe -tarkistukset, monitorointi ja vianmääritys
-  - [Mikropalveluarkkitehtuuri](../../examples/container-app/microservices): Tuotantovalmiiksi hiottu monipalvelukäyttöönotto (API Gateway, Product, Order, User, Notification), asynkroninen viestitys, Service Bus, Cosmos DB, Azure SQL, hajautettu jäljitys, blue-green/canary-käyttöönotto
-- **Parhaat käytännöt**: Turvallisuus, monitorointi, kustannusoptimointi ja CI/CD-ohjeet konttityökuormille
-- **Koodiesimerkit**: Täydelliset `azure.yaml`, Bicep-templatet ja monikieliset palvelutoteutukset (Python, Node.js, C#, Go)
-- **Testaus & vianmääritys**: End-to-end -testiskenaariot, monitorointikomennot, vianmääritysohjeet
+- **🚀 Container App Examples**: Uudet paikalliset esimerkit kansiossa `examples/container-app/`:
+  - [Master Guide](examples/container-app/README.md): Kattava yleiskatsaus kontitetuista käyttöönotosta, pika-aloitus, tuotanto ja edistyneet mallit
+  - [Simple Flask API](../../examples/container-app/simple-flask-api): Aloittelijaystävällinen REST-rajapinta, jossa scale-to-zero, terveystarkastukset, valvonta ja vianetsintä
+  - [Microservices Architecture](../../examples/container-app/microservices): Tuotantovalmis monipalvelukäyttöönotto (API Gateway, Product, Order, User, Notification), asynkroninen viestintä, Service Bus, Cosmos DB, Azure SQL, hajautettu jäljitys, blue-green/canary-käyttöönotto
+- **Best Practices**: Turvallisuus, valvonta, kustannusoptimointi ja CI/CD-ohjeistus konttikuormille
+- **Code Samples**: Täydellinen `azure.yaml`, Bicep-mallit ja monikieliset palvelutoteutukset (Python, Node.js, C#, Go)
+- **Testing & Troubleshooting**: End-to-end -testiskenaariot, valvontakomennot, vianetsintäohjeet
 
 #### Muutettu
-- **README.md**: Päivitetty sisältämään ja linkittämään uudet container app -esimerkit osion "Local Examples - Container Applications" alle
-- **examples/README.md**: Päivitetty korostamaan container app -esimerkkejä, lisätty vertailumatriisin rivit ja päivitetty teknologia-/arkkitehtuuriviittaukset
-- **Kurssin rakenne ja opiskeluopas**: Päivitetty viittaamaan uusiin container app -esimerkkeihin ja käyttöönotto-malleihin asiaankuuluvissa luvuissa
+- **README.md**: Päivitetty esittelemään ja linkittämään uudet container app -esimerkit osion "Local Examples - Container Applications" alla
+- **examples/README.md**: Päivitetty korostamaan container app -esimerkkejä, lisäämään vertailumatriisin rivejä ja päivittämään teknologia-/arkkitehtuuriviittauksia
+- **Course Outline & Study Guide**: Päivitetty viittaamaan uusiin container app -esimerkkeihin ja käyttöönotto-malleihin asiaankuuluvissa luvuissa
 
 #### Vahvistettu
-- ✅ Kaikki uudet esimerkit voidaan ottaa käyttöön `azd up` -komennolla ja ne noudattavat parhaita käytäntöjä
+- ✅ Kaikki uudet esimerkit otettavissa käyttöön `azd up` -komennolla ja noudattavat parhaita käytäntöjä
 - ✅ Dokumentaation ristiinlinkitykset ja navigaatio päivitetty
-- ✅ Esimerkit kattavat aloittelijoista edistyneisiin skenaarioihin, mukaan lukien tuotannon mikropalvelut
+- ✅ Esimerkit kattavat aloittelija- ja edistyneet skenaariot, mukaan lukien tuotantomonipalvelut
 
-#### Muistiinpanot
-- **Laajuus**: Vain englanninkielinen dokumentaatio ja esimerkit
-- **Seuraavat askeleet**: Laajenna lisätyillä edistyneillä container-malleilla ja CI/CD-automaatioilla tulevissa julkaisuissa
+#### Huomautuksia
+- **Scope**: Vain englanninkielinen dokumentaatio ja esimerkit
+- **Next Steps**: Laajentaa lisätyillä edistyneillä konttimalleilla ja CI/CD-automaatioilla tulevissa julkaisuissa
 
 ### [v3.5.0] - 2025-11-19
 
-#### Tuotteen uudelleennimeäminen: Microsoft Foundry
-**Tässä versiossa toteutetaan kattava tuotteen nimen muutos "Microsoft Foundry" → "Microsoft Foundry" kaikessa englanninkielisessä dokumentaatiossa, heijastaen Microsoftin virallista uudelleenbrändäystä.**
+#### Tuotteen nimeämisen uudistus: Microsoft Foundry
+**Tämä versio toteuttaa kattavan tuotteen nimen muutoksen "Microsoft Foundry" → "Microsoft Foundry" kaikessa englanninkielisessä dokumentaatiossa, heijastaen Microsoftin virallista uudelleenbrändäystä.**
 
 #### Muutettu
-- **🔄 Tuotteen nimen päivitys**: Kattava uudelleennimeäminen "Microsoft Foundry" → "Microsoft Foundry"
+- **🔄 Product Name Update**: Täydellinen uudelleennimeäminen "Microsoft Foundry" → "Microsoft Foundry"
   - Päivitetty kaikki viittaukset englanninkielisessä dokumentaatiossa kansiossa `docs/`
-  - Nimetty kansio uudelleen: `docs/ai-foundry/` → `docs/microsoft-foundry/`
-  - Nimetty tiedosto uudelleen: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - Yhteensä: 23 sisältoviittausta päivitetty seitsemässä dokumentaatiotiedostossa
+  - Uudelleennimetty kansio: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+  - Uudelleennimetty tiedosto: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+  - Yhteensä: 23 sisältöviittausta päivitetty 7 dokumentaatiotiedostossa
 
-- **📁 Kansion rakenteen muutokset**:
-  - `docs/ai-foundry/` nimetty uudelleen `docs/microsoft-foundry/`
-  - Kaikki ristiviittaukset päivitetty vastaamaan uutta kansiorakennetta
-  - Navigointilinkit validoitu kaikessa dokumentaatiossa
+- **📁 Folder Structure Changes**:
+  - `docs/ai-foundry/` uudelleennimetty `docs/microsoft-foundry/`
+  - Kaikki ristiinviittaukset päivitetty heijastamaan uutta kansiorakennetta
+  - Navigointilinkit validoitu koko dokumentaatiossa
 
 - **📄 Tiedostojen uudelleennimeäminen**:
   - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
@@ -519,33 +567,33 @@ Vanhat kansiot on korvattu luku-numeroiduilla kansioilla:
 #### Päivitetyt tiedostot
 - **Lukudokumentaatio** (7 tiedostoa):
   - `docs/microsoft-foundry/ai-model-deployment.md` - 3 navigointilinkin päivitystä
-  - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 tuotteen nimen viittausta päivitetty
-  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Käytössä jo Microsoft Foundry (aiemmista päivityksistä)
-  - `docs/microsoft-foundry/production-ai-practices.md` - 3 viitettä päivitetty (yleiskatsaus, yhteisön palaute, dokumentaatio)
-  - `docs/getting-started/azd-basics.md` - 4 ristiviittauslinkkiä päivitetty
-  - `docs/getting-started/first-project.md` - 2 luvunavigointilinkkiä päivitetty
-  - `docs/getting-started/installation.md` - 2 seuraavan luvun linkkiä päivitetty
-  - `docs/troubleshooting/ai-troubleshooting.md` - 3 viitettä päivitetty (navigointi, Discord-yhteisö)
-  - `docs/troubleshooting/common-issues.md` - 1 navigointilinkki päivitetty
-  - `docs/troubleshooting/debugging.md` - 1 navigointilinkki päivitetty
+  - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 tuotteenimen viittauksen päivitystä
+  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Jo käyttää Microsoft Foundry'ta (aikaisemmista päivityksistä)
+  - `docs/microsoft-foundry/production-ai-practices.md` - 3 viittauksen päivitystä (yleiskatsaus, yhteisöpalautteet, dokumentaatio)
+  - `docs/getting-started/azd-basics.md` - 4 ristiinviittauksen päivitystä
+  - `docs/getting-started/first-project.md` - 2 luvunavigaation päivitystä
+  - `docs/getting-started/installation.md` - 2 seuraavan luvun linkin päivitystä
+  - `docs/troubleshooting/ai-troubleshooting.md` - 3 viittauksen päivitystä (navigaatio, Discord-yhteisö)
+  - `docs/troubleshooting/common-issues.md` - 1 navigointilinkin päivitys
+  - `docs/troubleshooting/debugging.md` - 1 navigointilinkin päivitys
 
-- **Kurssin rakenteen tiedostot** (2 tiedostoa):
-  - `README.md` - 17 viittausta päivitetty (kurssin yleiskatsaus, lukujen otsikot, malliosio, yhteisön näkemykset)
-  - `course-outline.md` - 14 viittausta päivitetty (yleiskatsaus, oppimistavoitteet, lukujen resurssit)
+- **Kurssirakenteen tiedostot** (2 tiedostoa):
+  - `README.md` - 17 viittauksen päivitystä (kurssin yleiskatsaus, luvun otsikot, malliosio, yhteisön näkemykset)
+  - `course-outline.md` - 14 viittauksen päivitystä (yleiskatsaus, oppimistavoitteet, luvun resurssit)
 
 #### Vahvistettu
-- ✅ Ei jäljellä "ai-foundry" -kansiopolkuviittauksia englanninkielisissä dokumenteissa
-- ✅ Ei jäljellä "Microsoft Foundry" -tuotteen nimen viittauksia englanninkielisissä dokumenteissa
-- ✅ Kaikki navigointilinkit toimivat uuden kansiorakenteen kanssa
-- ✅ Tiedostojen ja kansioiden uudelleennimeämiset suoritettu onnistuneesti
-- ✅ Lukujen väliset ristiviittaukset validoitu
+- ✅ Nolla jäljellä olevaa "ai-foundry" kansiopolun viittausta englanninkielisissä docs-tiedostoissa
+- ✅ Nolla jäljellä olevaa "Microsoft Foundry" tuotteenimen viittausta englanninkielisessä dokumentaatiossa
+- ✅ Kaikki navigointilinkit toiminnassa uuden kansiorakenteen kanssa
+- ✅ Tiedosto- ja kansioiden uudelleennimeämiset suoritettu onnistuneesti
+- ✅ Ristiinviittaukset lukujen välillä validoitu
 
-#### Huomautukset
-- **Laajuus**: Muutokset sovellettu vain englanninkieliseen dokumentaatioon kansiossa `docs/`
-- **Käännökset**: Käännöskansiot (`translations/`) eivät ole päivitetty tässä versiossa
-- **Työpaja**: Työpajamateriaalit (`workshop/`) eivät ole päivitetty tässä versiossa
-- **Esimerkit**: Esimerkkitiedostot saattavat edelleen viitata vanhentuneeseen nimeämiseen (käsitellään tulevassa päivityksessä)
-- **Ulkoiset linkit**: Ulkoiset URL-osoitteet ja GitHub-repositorion viittaukset pysyvät muuttumattomina
+#### Huomautuksia
+- **Scope**: Muutokset sovellettu vain englanninkieliseen dokumentaatioon kansiossa `docs/`
+- **Translations**: Käännöskansiot (`translations/`) eivät päivittyneet tässä versiossa
+- **Workshop**: Workshop-materiaaleja (`workshop/`) ei päivitetty tässä versiossa
+- **Examples**: Esimerkkitiedostot saattavat edelleen viitata vanhaan nimeämiseen (korjataan tulevassa päivityksessä)
+- **External Links**: Ulkoiset URL-osoitteet ja GitHub-repositorion viittaukset pysyvät muuttumattomina
 
 #### Siirtymäopas kontribuuttoreille
 Jos sinulla on paikallisia haaroja tai dokumentaatiota, jotka viittaavat vanhaan rakenteeseen:
@@ -559,228 +607,228 @@ Jos sinulla on paikallisia haaroja tai dokumentaatiota, jotka viittaavat vanhaan
 ### [v3.4.0] - 2025-10-24
 
 #### Infrastruktuurin esikatselu- ja validointiparannukset
-**Tämä versio lisää kattavan tuen uudelle Azure Developer CLI -esikatseluominaisuudelle ja parantaa työpajan käyttäjäkokemusta.**
+**Tämä versio lisää kattavan tuen uudelle Azure Developer CLI -esikatseluominaisuudelle ja parantaa workshopin käyttäjäkokemusta.**
 
 #### Lisätty
-- **🧪 azd provision --preview -ominaisuuden dokumentaatio**: Kattava käsittely uudesta infrastruktuurin esikatseluominaisuudesta
-  - Komentoviite ja käyttöesimerkit cheat sheetissä
-  - Yksityiskohtainen integrointi provisiointioppaassa käyttötapauksineen ja hyötyineen
-  - Ennalta tehtävän tarkistuksen integrointi turvallisempaa käyttöönoton validointia varten
-  - Aloitusoppaan päivitykset turvallisuutta korostavilla käyttöönotto-käytännöillä
-- **🚧 Työpajan tilabanneri**: Ammattimainen HTML-banneri, joka osoittaa työpajan kehitystilanteen
-  - Liukuväripohjainen muotoilu rakennustilamerkinnöillä selkeää käyttäjäviestintää varten
-  - Viimeisimmän päivityksen aikaleima läpinäkyvyyden vuoksi
-  - Mobiiliresponsiivinen muotoilu kaikille laitteille
+- **🧪 azd provision --preview Feature Documentation**: Kattava kuvaus uudesta infrastruktuurin esikatseluominaisuudesta
+  - Komentoviite ja käyttöesimerkit pikalistassa
+  - Yksityiskohtainen integrointi provisioning-oppaassa käyttötapauksineen ja hyötyineen
+  - Pre-flight -tarkistuksen integrointi turvallisemman käyttöönoton validointiin
+  - Aloitusoppaan päivitykset turvallisuutta ensisijaisesti korostavilla käyttöönotto­käytännöillä
+- **🚧 Workshop Status Banner**: Ammattimainen HTML-banneri, joka ilmoittaa workshopin kehitystilasta
+  - Liukuvärisuunnittelu ja rakennusilmaisimet selkeään käyttäjäviestintään
+  - Viimeksi päivitetty -aikaleima läpinäkyvyyden vuoksi
+  - Mobiiliystävällinen responsiivinen suunnittelu kaikille laitteille
 
 #### Parannettu
-- **Infrastruktuurin turvallisuus**: Esikatseluominaisuus integroitu käyttöönotto-dokumentaatioon
-- **Ennen käyttöönottoa tehtävä validointi**: Automaattiset skriptit sisältävät nyt infrastruktuurin esikatselutestauksen
-- **Kehittäjän työnkulku**: Päivitetyt komentojonot sisältävät esikatselun parhaana käytäntönä
-- **Työpajan kokemus**: Käyttäjille asetetut selkeät odotukset sisällön kehitystilanteesta
+- **Infrastructure Safety**: Esikatseluominaisuus integroituna koko käyttöönoton dokumentaatioon
+- **Pre-deployment Validation**: Automaattiskriptit sisältävät nyt infrastruktuurin esikatselutestauksen
+- **Developer Workflow**: Päivitetyt komentojonot sisällyttävät esikatselun parhaana käytäntönä
+- **Workshop Experience**: Käyttäjille asetetaan selkeät odotukset sisällön kehitystilasta
 
 #### Muutettu
-- **Käyttöönoton parhaat käytännöt**: Esikatselu-ensimmäinen työnkulku nyt suositeltu lähestymistapa
-- **Dokumentaation kulku**: Infrastruktuurin validointi siirretty aiemmaksi oppimisprosessissa
-- **Työpajan esitys**: Ammattimainen tilaviestintä selkeällä kehitysaikataululla
+- **Deployment Best Practices**: Esikatselu-ensimmäinen työnkulku suositeltavana lähestymistapana
+- **Documentation Flow**: Infrastruktuurin validointi siirretty aiemmin oppimisprosessissa
+- **Workshop Presentation**: Ammattimainen tilaviestintä selkeällä kehitysaikataululla
 
 #### Parannettu
-- **Turvallisuus edellä**: Infrastruktuurimuutokset voidaan nyt validoida ennen käyttöönottoa
-- **Tiimiyhteistyö**: Esikatselutuloksia voidaan jakaa tarkastelua ja hyväksyntää varten
-- **Kustannustietoisuus**: Parempi ymmärrys resurssikustannuksista ennen provisiointia
-- **Riskin lieventäminen**: Vähemmän käyttöönoton epäonnistumisia ennakkovalidoinnin avulla
+- **Safety-First Approach**: Infrastruktuurimuutokset voidaan nyt validoida ennen käyttöönottoa
+- **Team Collaboration**: Esikatselutuloksia voidaan jakaa tarkistusta ja hyväksyntää varten
+- **Cost Awareness**: Parempi ymmärrys resurssikustannuksista ennen provisioningia
+- **Risk Mitigation**: Vähemmän käyttöönoton virheitä ennakkovalidoinnin kautta
 
 #### Tekninen toteutus
-- **Monidokumenttinen integrointi**: Esikatseluominaisuus dokumentoitu neljässä keskeisessä tiedostossa
-- **Komentomallit**: Johdonmukainen syntaksi ja esimerkit koko dokumentaatiossa
-- **Parhaiden käytäntöjen integrointi**: Esikatselu sisällytetty validointityönkulkuihin ja skripteihin
-- **Visuaaliset indikaattorit**: Selkeät UUSIEN ominaisuuksien merkinnät helpottamaan löydettävyyttä
+- **Multi-document Integration**: Esikatseluominaisuus dokumentoitu neljässä keskeisessä tiedostossa
+- **Command Patterns**: Johdonmukainen syntaksi ja esimerkit koko dokumentaatiossa
+- **Best Practice Integration**: Esikatselu sisällytetty validointityönkulkuihin ja skripteihin
+- **Visual Indicators**: Selkeät UUSIEN ominaisuuksien merkinnät löydettävyyden parantamiseksi
 
-#### Työpajan infrastruktuuri
-- **Tilaviestintä**: Ammattimainen HTML-banneri liukuvärityylillä
-- **Käyttäjäkokemus**: Selkeä kehitystila estää sekaannusta
-- **Ammattimainen esitys**: Säilyttää repositorion uskottavuuden samalla kun asettaa odotukset
-- **Aikataulun läpinäkyvyys**: Lokakuu 2025 viimeisimmän päivityksen aikaleima vastuullisuuden vuoksi
+#### Workshopin infrastruktuuri
+- **Status Communication**: Ammattimainen HTML-banneri liukuvärityylillä
+- **User Experience**: Selkeä kehitystila estää sekaannuksen
+- **Professional Presentation**: Säilyttää repositorion uskottavuuden samalla kun asettaa odotukset
+- **Timeline Transparency**: Lokakuu 2025 viimeksi päivitetyn aikaleiman näkyvyys vastuullisuuden vuoksi
 
 ### [v3.3.0] - 2025-09-24
 
-#### Parannettu työpajamateriaali ja interaktiivinen oppimiskokemus
-**Tämä versio tuo kattavat työpajamateriaalit selaimella toimivine interaktiivisine oppaineen ja rakenteellisine oppimispolkuineen.**
+#### Parannettu workshop-materiaali ja interaktiivinen oppimiskokemus
+**Tämä versio esittelee kattavat workshop-materiaalit selainpohjaisilla interaktiivisilla oppailla ja jäsennellyillä oppimispoluilla.**
 
 #### Lisätty
-- **🎥 Interaktiivinen työpajaopas**: Selaimessa toimiva työpajakokemus MkDocs-esikatselutoiminnolla
-- **📝 Rakenettu työpajaohjeistus**: 7-vaiheinen ohjattu oppimispolku löydöstä räätälöintiin
-  - 0-Introduction: Työpajan yleiskatsaus ja asennus
-  - 1-Select-AI-Template: Mallin löytäminen ja valintaprosessi
-  - 2-Validate-AI-Template: Käyttöönotto- ja validointimenettelyt
-  - 3-Deconstruct-AI-Template: Mallin arkkitehtuurin ymmärtäminen
-  - 4-Configure-AI-Template: Konfigurointi ja räätälöinti
+- **🎥 Interaktiivinen työpajaopas**: Selaimessa suoritettava työpajan kokemus, jossa MkDocs-esikatselutoiminto
+- **📝 Rakenteelliset työpajaohjeet**: 7-vaiheinen ohjattu oppimispolku löytämisestä muokkaamiseen
+  - 0-Introduction: Työpajan yleiskatsaus ja käyttöönotto
+  - 1-Select-AI-Template: Mallipohjien etsimis- ja valintaprosessi
+  - 2-Validate-AI-Template: Julkaisu- ja validointimenettelyt
+  - 3-Deconstruct-AI-Template: Mallipohjan arkkitehtuurin ymmärtäminen
+  - 4-Configure-AI-Template: Konfigurointi ja mukauttaminen
   - 5-Customize-AI-Template: Edistyneet muokkaukset ja iteroinnit
   - 6-Teardown-Infrastructure: Siivous ja resurssien hallinta
   - 7-Wrap-up: Yhteenveto ja seuraavat askeleet
 - **🛠️ Työpajan työkalut**: MkDocs-konfiguraatio Material-teemalla parannetun oppimiskokemuksen vuoksi
-- **🎯 Käytännön oppimispolku**: 3-vaiheinen metodologia (Löytäminen → Käyttöönotto → Räätälöinti)
-- **📱 GitHub Codespaces -integraatio**: Saumaton kehitysympäristön asennus
+- **🎯 Käytännön oppimispolku**: 3-vaiheinen metodologia (Löytö → Käyttöönotto → Mukauttaminen)
+- **📱 GitHub Codespaces -integraatio**: Saumaton kehitysympäristön käyttöönotto
 
 #### Parannettu
-- **AI-työpajalaboratorio**: Laajennettu kattavalla 2–3 tunnin rakennetulla oppimiskokemuksella
-- **Työpajan dokumentaatio**: Ammattimainen esitys navigaatiolla ja visuaalisilla apuvälineillä
-- **Oppimisen eteneminen**: Selkeä vaiheittainen ohjaus mallin valinnasta tuotantokäyttöön siirtymiseen
-- **Kehittäjäkokemus**: Integroituja työkaluja virtaviivaisten kehitystyönkulkujen tueksi
+- **AI Workshop Lab**: Laajennettu kattavalla 2–3 tunnin rakenteellisella oppimiskokemuksella
+- **Workshop Documentation**: Ammattimainen esitys navigoinnilla ja visuaalisilla apuvälineillä
+- **Learning Progression**: Selkeä vaiheittainen ohjeistus mallipohjan valinnasta tuotantokäyttöönottoon
+- **Developer Experience**: Integroituja työkaluja kehitysprosessien sujuvoittamiseen
 
-#### Parannettu
-- **Saavutettavuus**: Selainpohjainen käyttöliittymä hakutoiminnolla, kopiointiominaisuudella ja teeman vaihtamisella
-- **Itsenäinen oppiminen**: Joustava työpajarakenne, joka mukautuu eri oppimisvauhteihin
-- **Käytännön sovellukset**: Todellisen maailman AI-mallien käyttöönotto-skenaariot
-- **Yhteisöintegraatio**: Discord-integraatio työpajatukea ja yhteistyötä varten
+#### Parannuksia
+- **Saavutettavuus**: Selaimessa toimiva käyttöliittymä, jossa on haku, kopiointiominaisuus ja teeman vaihtaminen
+- **Itsenäinen oppiminen**: Joustava työpajarakenne, joka mukautuu eri oppimisnopeuksiin
+- **Käytännön soveltaminen**: Reaaliaikaiset AI-mallipohjien käyttöönoton skenaariot
+- **Yhteisöintegraatio**: Discord-integraatio työpajan tukea ja yhteistyötä varten
 
 #### Työpajan ominaisuudet
-- **Sisäänrakennettu haku**: Nopea avainsanojen ja oppituntien löytäminen
-- **Kopioi koodilohkot**: Vie kursori päälle -kopiointitoiminto kaikille koodiesimerkeille
-- **Teeman vaihto**: Tuki tumma/vaalea -tilalle eri mieltymyksille
-- **Visuaaliset aineistot**: Kuvakaappaukset ja kaaviot paremman ymmärryksen tukena
-- **Ohjeintegraatio**: Suora Discord-yhteys yhteisön tukeen
+- **Sisäänrakennettu haku**: Nopea avainsana- ja oppitunnin löytäminen
+- **Koodilohkojen kopiointi**: Vie-hiiri-päälle-kopioi -toiminto kaikille koodiesimerkeille
+- **Teeman vaihtaminen**: Tumma/vaalea-tila tuettuna eri mieltymyksiin
+- **Visuaaliset aineistot**: Kuvakaappaukset ja kaaviot ymmärryksen parantamiseksi
+- **Ohjeintegraatio**: Suora Discord-yhteys yhteisötukea varten
 
 ### [v3.2.0] - 2025-09-17
 
-#### Merkittävä navigoinnin uudelleenjärjestely ja luku-pohjainen oppimisjärjestelmä
-**Tämä versio esittelee kattavan luku-pohjaisen oppimisrakenteen ja parannetun navigoinnin koko arkistossa.**
+#### Suuri navigoinnin uudelleenjärjestely ja lukuperusteinen oppimisjärjestelmä
+**Tässä versiossa otetaan käyttöön kattava lukuperusteinen oppimisrakenne ja parannettu navigointi koko repositoriossa.**
 
 #### Lisätty
-- **📚 Luku-pohjainen oppimisjärjestelmä**: Kurssi järjestetty uudelleen 8 etenevään oppimislukuun
-  - Luku 1: Perusteet ja pika-aloitus (⭐ - 30–45 min)
-  - Luku 2: AI-lähtöinen kehitys (⭐⭐ - 1–2 tuntia)
-  - Luku 3: Konfigurointi ja autentikointi (⭐⭐ - 45–60 min)
-  - Luku 4: Infrastruktuuri koodina & käyttöönotto (⭐⭐⭐ - 1–1,5 tuntia)
-  - Luku 5: Moni-agenttiset AI-ratkaisut (⭐⭐⭐⭐ - 2–3 tuntia)
-  - Luku 6: Ennen käyttöönottoa tehtävä validointi & suunnittelu (⭐⭐ - 1 tunti)
-  - Luku 7: Vianmääritys & debuggaus (⭐⭐ - 1–1,5 tuntia)
-  - Luku 8: Tuotanto- & yritystason mallit (⭐⭐⭐⭐ - 2–3 tuntia)
-- **📚 Kattava navigointijärjestelmä**: Johdonmukaiset ylätunnisteet ja alatunnisteet kaikessa dokumentaatiossa
-- **🎯 Edistymisen seuranta**: Kurssin suorituschecklista ja oppimisen varmistusjärjestelmä
-- **🗺️ Oppimispolun ohjaus**: Selkeät aloituspisteet eri kokemustasoille ja tavoitteille
-- **🔗 Ristiviittausnavigointi**: Liittyvät luvut ja ennakkoedellytykset selkeästi linkitettyinä
+- **📚 Lukuperusteinen oppimisjärjestelmä**: Koko kurssi järjestelty 8 etenevään oppilukuun
+  - Chapter 1: Perusta & Pikakäynnistys (⭐ - 30–45 min)
+  - Chapter 2: AI-keskeinen kehitys (⭐⭐ - 1–2 tuntia)
+  - Chapter 3: Konfigurointi & Todennus (⭐⭐ - 45–60 min)
+  - Chapter 4: Infrastruktuuri koodina & Käyttöönotto (⭐⭐⭐ - 1–1.5 tuntia)
+  - Chapter 5: Moniagenttiset AI-ratkaisut (⭐⭐⭐⭐ - 2–3 tuntia)
+  - Chapter 6: Ennen käyttöönottoa tapahtuva validointi & Suunnittelu (⭐⭐ - 1 tunti)
+  - Chapter 7: Vianmääritys & Virheenkorjaus (⭐⭐ - 1–1.5 tuntia)
+  - Chapter 8: Tuotanto- & Yrityskäytännöt (⭐⭐⭐⭐ - 2–3 tuntia)
+- **📚 Kattava navigaatiojärjestelmä**: Johdonmukaiset navigaatiopääotsikot ja alatunnisteet kaikessa dokumentaatiossa
+- **🎯 Edistymisen seuranta**: Kurssin suorituschecklist ja oppimisen vahvistusjärjestelmä
+- **🗺️ Oppimispolun ohjeistus**: Selkeät sisäänpääsypisteet eri osaamistasoille ja tavoitteille
+- **🔗 Ristiinviittausten navigointi**: Liittyvät luvut ja ennakkoedellytykset selkeästi linkitettyinä
 
 #### Parannettu
-- **README-rakenne**: Muutettu rakenteelliseksi oppimisalustaksi luku-pohjaisella organisoinnilla
-- **Dokumentaation navigointi**: Jokaisella sivulla on nyt luvun konteksti ja etenemisen ohjaus
-- **Mallien organisointi**: Esimerkit ja mallit kohdennettu sopiviin oppimislukuihin
-- **Resurssien integrointi**: Cheat sheetit, UKK:t ja opiskeluoppaat yhdistetty asiaankuuluviin lukuihin
-- **Työpajan integrointi**: Käytännön laboratoriot kohdennettu useisiin lukujen oppimistavoitteisiin
+- **README-rakenne**: Muutettu rakenteelliseksi oppimisalustaksi lukujaottelulla
+- **Dokumentaation navigaatio**: Jokaisella sivulla on nyt lukukonteksti ja etenemisohjeet
+- **Mallipohjien järjestely**: Esimerkit ja mallipohjat yhdistetty sopiviin oppilukuihin
+- **Resurssien integrointi**: Pikaohjeet, FAQ:t ja opiskelumateriaalit liitetty relevantteihin lukuihin
+- **Työpaja-integraatio**: Käytännön laboratoriot liitetty useisiin lukuoppimistavoitteisiin
 
 #### Muutettu
-- **Oppimisen eteneminen**: Siirretty lineaarisesta dokumentaatiosta joustavaan luku-pohjaiseen oppimiseen
-- **Konfiguraation sijoitus**: Konfigurointiopas siirretty Luvuksi 3 paremman oppimisvirran vuoksi
-- **AI-sisällön integrointi**: Parempi AI-spesifisen sisällön integrointi koko oppimispolun ajan
-- **Tuotantosisältö**: Edistyneet mallit yhdistetty Lukuun 8 yrityskäyttäjille
+- **Oppimisen eteneminen**: Siirrytty lineaarisesta dokumentaatiosta joustavaan lukuperusteiseen oppimiseen
+- **Konfiguraation sijoittaminen**: Konfiguraatio-opas siirretty luvuksi 3 paremman oppimiskulun vuoksi
+- **AI-sisällön integrointi**: AI-spesifinen sisältö paremmassa asemassa koko oppimismatkalla
+- **Tuotantosisältö**: Edistyneet mallit koottu lukuun 8 yrityskäyttäjille
 
-#### Parannettu
-- **Käyttäjäkokemus**: Selkeät navigointimurupolut ja luvun etenemisen indikaattorit
-- **Saavutettavuus**: Johdonmukaiset navigointikuvioinnit helpottavat kurssin läpikäyntiä
+#### Parannuksia
+- **Käyttäjäkokemus**: Selkeät navigointipolut ja lukujen etenemisen indikaattorit
+- **Saavutettavuus**: Johdonmukaiset navigointimallit helpottavat kurssin läpikäyntiä
 - **Ammattimainen esitys**: Yliopistotyyppinen kurssirakenne sopii akateemiseen ja yrityskoulutukseen
-- **Oppimisen tehokkuus**: Vähemmän aikaa relevantin sisällön löytämiseen parannetun organisoinnin ansiosta
+- **Oppimisen tehokkuus**: Parantunut tiedonlöydettävyys ja organisaatio vähentävät aikaa relevantin sisällön löytämiseen
 
 #### Tekninen toteutus
-- **Navigointiylätunnisteet**: Standardisoitu luvunavigointi yli 40 dokumentaatiotiedostossa
-- **Alatunnisteen navigointi**: Johdonmukainen etenemisen ohjaus ja luvun suoritusindikaattorit
-- **Ristilinkitys**: Kattava sisäinen linkitysjärjestelmä yhdistämässä liittyviä käsitteitä
-- **Lukukartoitus**: Mallit ja esimerkit selkeästi yhdistetty oppimistavoitteisiin
+- **Navigaatiopääotsikot**: Standardoitu lukualueiden navigaatio yli 40+ dokumentaatiotiedostossa
+- **Alatunnisteen navigaatio**: Johdonmukaiset etenemisohjeet ja lukujen suoritusindikattorit
+- **Ristiinlinkitys**: Kattava sisäinen linkitysjärjestelmä yhdistää aiheita
+- **Lukukartoitus**: Mallipohjat ja esimerkit selkeästi sidottu oppimistavoitteisiin
 
-#### Opiskeluoppaan parannus
-- **📚 Kattavat oppimistavoitteet**: Opiskeluopas uudelleenjärjestetty vastaamaan 8-lukuista järjestelmää
-- **🎯 Luku-pohjainen arviointi**: Jokainen luku sisältää erityiset oppimistavoitteet ja käytännön harjoitukset
-- **📋 Edistymisen seuranta**: Viikoittainen oppimisaikataulu mitattavilla tuloksilla ja suorituschecklisteillä
-- **❓ Arviointikysymykset**: Tietämyksen validointikysymykset jokaiselle luvulle ammatillisilla tuloksilla
-- **🛠️ Käytännön harjoitukset**: Käytännön aktiviteetteja todellisilla käyttöönotto-skenaarioilla ja vianmäärityksellä
-- **📊 Taitojen eteneminen**: Selkeä eteneminen perustason käsitteistä yritystason malleihin urakehitykseen keskittyen
-- **🎓 Sertifiointikehys**: Ammatillisen kehityksen tulokset ja yhteisön tunnustusjärjestelmä
-- **⏱️ Aikataulun hallinta**: Rakenteellinen 10-viikkoinen oppimissuunnitelma virstanpylväiden laadintatarkastuksin
+#### Opintomateriaalien parannus
+- **📚 Kattavat oppimistavoitteet**: Opintomateriaali uudelleenjärjestetty vastaamaan 8-luvun järjestelmää
+- **🎯 Lukuun perustuva arviointi**: Jokaisessa luvussa on omat oppimistavoitteet ja käytännön tehtävät
+- **📋 Edistymisen seuranta**: Viikoittainen oppimisaikataulu mitattavilla tuloksilla ja tarkistuslistoilla
+- **❓ Arviointikysymykset**: Tietojen varmistuskysymyksiä joka luvulle ammatillisilla tavoitteilla
+- **🛠️ Käytännön harjoitukset**: Kädessä-kokeiltavat tehtävät todellisilla käyttöönottojen skenaarioilla ja vianetsinnällä
+- **📊 Osaamisen eteneminen**: Selkeä eteneminen peruskonsepteista yritystason malleihin ja uraohjaukseen
+- **🎓 Sertifiointikehys**: Ammatilliset kehitystulokset ja yhteisön tunnustamisjärjestelmä
+- **⏱️ Aikataulun hallinta**: Rakenettu 10-viikkoinen oppimissuunnitelma välitarkastuksineen
 
 ### [v3.1.0] - 2025-09-17
 
-#### Parannettu moni-agenttinen AI-ratkaisu
-**Tässä versiossa parannetaan moni-agenttista vähittäiskaupan ratkaisua paremmilla agenttien nimillä ja parannetulla dokumentaatiolla.**
+#### Laajennetut moniagenttiset AI-ratkaisut
+**Tämä versio parantaa moniagenttista vähittäiskaupan ratkaisua selkeämmällä agenttien nimeämisellä ja parannetulla dokumentaatiolla.**
 
 #### Muutettu
-- **Moni-agenttiterminologia**: Korvattu "Cora agent" termillä "Customer agent" koko vähittäiskaupan moni-agenttiratkaisussa selkeämmän ymmärryksen vuoksi
-- **Agenttien arkkitehtuuri**: Päivitetty kaikki dokumentaatio, ARM-mallit ja koodiesimerkit käyttämään yhtenäistä "Customer agent" -nimitystä
-- **Konfiguraatioesimerkit**: Modernisoitu agentin konfigurointimallit päivitettyjen nimeämiskäytäntöjen kanssa
-- **Dokumentaation yhdenmukaisuus**: Varmistettu, että kaikki viittaukset käyttävät ammatillisia, kuvailevia agenttinimiä
+- **Multi-Agent Terminology**: Korvattu "Cora agent" arvolla "Customer agent" koko vähittäiskaupan moniagenttiratkaisussa selkeämmän ymmärryksen vuoksi
+- **Agent Architecture**: Päivitetty kaikki dokumentaatiot, ARM-mallit ja koodiesimerkit käyttämään johdonmukaista "Customer agent" -nimeämistä
+- **Configuration Examples**: Modernisoidut agenttikonfiguraatiomallit päivitettyine nimeämiskäytänteineen
+- **Documentation Consistency**: Varmistettu, että kaikki viittaukset käyttävät ammattimaisia, kuvaavia agenttinimiä
 
 #### Parannettu
-- **ARM-mallipaketti**: Päivitetty retail-multiagent-arm-template Customer agent -viittauksilla
-- **Arkkitehtuurikaaviot**: Päivitetyt Mermaid-kaaviot päivitettyjen agenttinimien kanssa
-- **Koodiesimerkit**: Python-luokat ja toteutusesimerkit käyttävät nyt CustomerAgent-nimeämistä
-- **Ympäristömuuttujat**: Päivitetty kaikki käyttöönotto-skriptit käyttämään CUSTOMER_AGENT_NAME-käytäntöjä
+- **ARM Template Package**: Päivitetty retail-multiagent-arm-template Customer agent -viittauksilla
+- **Architecture Diagrams**: Päivitetyt Mermaid-kaaviot uusilla agenttinimillä
+- **Code Examples**: Python-luokat ja toteutusesimerkit käyttävät nyt CustomerAgent-nimeämistä
+- **Environment Variables**: Päivitetty kaikki käyttöönotto-skriptit käyttämään CUSTOMER_AGENT_NAME -käytäntöä
 
-#### Parannettu
-- **Developer Experience**: Selkeämmät agentin roolit ja vastuut dokumentaatiossa
-- **Production Readiness**: Parempi yhdenmukaistaminen yrityksen nimeämiskäytäntöihin
-- **Learning Materials**: Intuitiivisempi agenttien nimeäminen opetustarkoituksiin
-- **Template Usability**: Yksinkertaistettu ymmärrys agenttien toiminnoista ja käyttöönotto-malleista
+#### Parantunut
+- **Developer Experience**: Selkeämmät agenttien roolit ja vastuut dokumentaatiossa
+- **Production Readiness**: Parempi linjaus yritystason nimeämiskäytäntöihin
+- **Learning Materials**: Intuitiivisempi agenttinimeäminen opetustarkoituksiin
+- **Template Usability**: Yksinkertaisempi agenttien toimintojen ja käyttöönottojen ymmärtäminen
 
 #### Tekniset tiedot
-- Päivitetyt Mermaid-arkkitehtuurikaaviot, joissa CustomerAgent-viittaukset
-- Korvattiin CoraAgent-luokkien nimet CustomerAgentilla Python-esimerkeissä
-- Muokattiin ARM-mallin JSON-konfiguraatioita käyttämään "customer"-agenttityyppiä
-- Päivitettiin ympäristömuuttujia CORA_AGENT_* → CUSTOMER_AGENT_* -mallien mukaisesti
-- Päivitettiin kaikki käyttöönotto-komennot ja konttikonfiguraatiot
+- Päivitetyt Mermaid-arkkitehtuurikaaviot CustomerAgent-viittauksilla
+- Korvattu CoraAgent-luokkien nimet CustomerAgent-nimisillä luokilla Python-esimerkeissä
+- Muokattu ARM-template JSON -konfiguraatioita käyttämään "customer" agent-tyyppiä
+- Päivitetty ympäristömuuttujat CORA_AGENT_* -malleista CUSTOMER_AGENT_* -malleihin
+- Päivitetty kaikki käyttöönotto-komennot ja konttikonfiguraatiot
 
 ### [v3.0.0] - 2025-09-12
 
-#### Suuret muutokset - AI-kehittäjäkeskeisyys ja Microsoft Foundry -integraatio
-**Tämä versio muuttaa repositorion kattavaksi tekoälykeskeiseksi oppimateriaaliresurssiksi, jossa on Microsoft Foundry -integraatio.**
+#### Suuret muutokset - AI-kehittäjäfokus ja Microsoft Foundry -integraatio
+**Tämä versio muuttaa reposton kattavaksi AI-keskittyneeksi oppimisresurssiksi, jossa on Microsoft Foundryn integraatio.**
 
 #### Lisätty
-- **🤖 AI-First Learning Path**: Täydellinen uudelleenjärjestely, jossa etusijalla ovat tekoälykehittäjät ja -insinöörit
-- **Microsoft Foundry Integration Guide**: Kattava dokumentaatio AZD:n yhdistämisestä Microsoft Foundry -palveluihin
-- **AI Model Deployment Patterns**: Yksityiskohtainen opas, joka kattaa mallin valinnan, konfiguroinnin ja tuotantokäyttöönoton strategiat
-- **AI Workshop Lab**: 2–3 tunnin käytännön työpaja AI-sovellusten muuttamisesta AZD:llä otettaviksi ratkaisuiksi
-- **Production AI Best Practices**: Yrityskäyttöön valmiit mallit AI-kuormien skaalaamiseen, monitorointiin ja suojaamiseen
-- **AI-Specific Troubleshooting Guide**: Kattava vikadiagnostiikka Azure OpenAI:lle, Cognitive Servicesille ja AI-käyttöönotto-ongelmille
-- **AI Template Gallery**: Esitelty kokoelma Microsoft Foundry -malleja monimutkaisuusluokituksineen
-- **Workshop Materials**: Täydellinen työpajan rakenne käytännön laboratorioineen ja viitemateriaaleineen
+- **🤖 AI-ensijainen oppimispolku**: Kattava uudelleenjärjestely, joka priorisoi AI-kehittäjiä ja -insinöörejä
+- **Microsoft Foundry Integration Guide**: Kattava dokumentaatio AZD:n yhdistämisestä Microsoft Foundryn palveluihin
+- **AI Model Deployment Patterns**: Yksityiskohtainen opas mallien valintaan, konfigurointiin ja tuotantoon siirtoon
+- **AI Workshop Lab**: 2–3 tunnin käytännön työpaja AI-sovellusten muuntamisesta AZD-deployattaviksi ratkaisuiksi
+- **Production AI Best Practices**: Yritysvalmiit mallit skaalaamiseen, monitorointiin ja suojaamiseen
+- **AI-Specific Troubleshooting Guide**: Kattava vianetsintäopas Microsoft Foundry -malleille, Cognitive Servicesille ja AI-käyttöönotto-ongelmille
+- **AI Template Gallery**: Esittely Microsoft Foundryn mallipohjakokoelmasta kompleksisuustasoineen
+- **Workshop Materials**: Täydellinen työpajarakenne käytännön laboratorioineen ja tukimateriaaleineen
 
 #### Parannettu
-- **README Structure**: Tekoälykehittäjäkeskeinen, 45 % yhteisön kiinnostusdatalla Microsoft Foundry Discordista
-- **Learning Paths**: Omistettu tekoälykehittäjän polku rinnakkain perinteisten polkujen opiskelijoille ja DevOps-insinööreille
-- **Template Recommendations**: Esiteltyjä tekoälymalleja, kuten azure-search-openai-demo, contoso-chat ja openai-chat-app-quickstart
-- **Community Integration**: Parannettu Discord-yhteisötuki tekoälykohtaisilla kanavilla ja keskusteluilla
+- **README Structure**: AI-kehittäjäkeskeinen rakenne, jossa 45 % yhteisön kiinnostusdatan tuesta Microsoft Foundry Discordista
+- **Learning Paths**: Dedikoitu AI-kehittäjän polku perinteisten opiskelija- ja DevOps-polkujen rinnalle
+- **Template Recommendations**: Esitellyt AI-mallipohjasuositukset, mukaan lukien azure-search-openai-demo, contoso-chat ja openai-chat-app-quickstart
+- **Community Integration**: Parannettu Discord-yhteisötuki AI-spesifisille kanaville ja keskusteluille
 
-#### Turvallisuus ja tuotantokeskeisyys
-- **Managed Identity Patterns**: Tekoälykohtaiset todennus- ja suojauskonfiguraatiot
-- **Cost Optimization**: Tokenien käytön seuranta ja budjettikontrollit AI-kuormille
-- **Multi-Region Deployment**: Strategiat maailmanlaajuiseen AI-sovellusten käyttöönottoon
-- **Performance Monitoring**: Tekoälykohtaiset mittarit ja Application Insights -integraatio
+#### Turvallisuus & Tuotantokeskeisyys
+- **Managed Identity Patterns**: AI-spesifiset todennus- ja suojauskonfiguraatiot
+- **Cost Optimization**: Tokenien käyttöseuranta ja budjettiohjaus AI-kuormituksille
+- **Multi-Region Deployment**: Strategiat globaaleihin AI-sovellusten käyttöönottoihin
+- **Performance Monitoring**: AI-spesifiset mittarit ja Application Insights -integraatio
 
 #### Dokumentaation laatu
-- **Linear Course Structure**: Looginen eteneminen aloittelijasta edistyneisiin AI-käyttöönoton malleihin
-- **Validated URLs**: Kaikki ulkoiset repository-linkit tarkistettu ja saavutettavissa
-- **Complete Reference**: Kaikki sisäiset dokumentaatiolinkit validoitu ja toimivia
-- **Production Ready**: Yrityskäyttöön valmiit käyttöönoton mallit todellisilla esimerkeillä
+- **Lineaarinen kurssirakenne**: Looginen eteneminen aloittelijasta edistyneisiin AI-käyttöönottoihin
+- **Varmennetut URL-osoitteet**: Kaikki ulkoiset repositoriolinkit tarkastettu ja saavutettavissa
+- **Täydellinen viite**: Kaikki sisäiset dokumentaatiolinkit validoitu ja toimivia
+- **Valmis tuotantoon**: Yritysvalmiit käyttöönotto-mallit todellisilla esimerkeillä
 
 ### [v2.0.0] - 2025-09-09
 
-#### Suuret muutokset - Repositorion uudelleenjärjestely ja ammattimainen parannus
-**Tämä versio edustaa merkittävää uudistusta repositorion rakenteessa ja sisällön esittämisessä.**
+#### Suuret muutokset - Repositorion uudelleenjärjestely ja ammatillinen parannus
+**Tämä versio edustaa merkittävää uudistusta repositorion rakenteessa ja sisällön esitystavassa.**
 
 #### Lisätty
-- **Structured Learning Framework**: Kaikilla dokumentaatioluvuilla on nyt Johdanto-, Oppimistavoitteet- ja Oppimistulokset-osiot
-- **Navigation System**: Lisätty Edellinen/Seuraava-oppituntolinkit koko dokumentaatioon ohjatun oppimisen etenemiseksi
-- **Study Guide**: Kattava study-guide.md oppimistavoitteineen, harjoitustehtävineen ja arviointimateriaaleineen
-- **Professional Presentation**: Poistettiin kaikki emojit parannetun saavutettavuuden ja ammattimaisen ulkonäön vuoksi
-- **Enhanced Content Structure**: Paranneltu organisointi ja oppimateriaalien rakenne
+- **Rakenteellinen oppimiskehys**: Kaikilla dokumentaatiopareilla on nyt Johdanto-, Oppimistavoitteet- ja Oppimistulokset-osiot
+- **Navigaatiopalvelu**: Edellinen/Seuraava -oppitunnelinkit lisätty ohjatun oppimisen etenemiseen dokumentaatioon
+- **Study Guide**: Kattava study-guide.md sisältäen oppimistavoitteet, harjoitustehtävät ja arviointimateriaalit
+- **Ammatillinen esitys**: Emojeiden poistaminen parantaen saavutettavuutta ja ammattimaista ulkoasua
+- **Paranneltu sisällön rakenne**: Parempi järjestys ja oppimateriaalien sujuvuus
 
 #### Muutettu
-- **Documentation Format**: Standardisoitiin kaikki dokumentaatio johdonmukaisella oppimiskeskeisellä rakenteella
-- **Navigation Flow**: Toteutettiin looginen eteneminen kaikkien oppimateriaalien läpi
-- **Content Presentation**: Poistettiin koristeelliset elementit selkeämmän, ammattimaisemman muotoilun hyväksi
-- **Link Structure**: Päivitettiin kaikki sisäiset linkit tukemaan uutta navigaatiojärjestelmää
+- **Dokumentaation muoto**: Kaikki dokumentaatio standardisoitu johdonmukaisella oppimiskeskeisellä rakenteella
+- **Navigaatiovirtaus**: Looginen eteneminen oppimateriaalien läpi toteutettu
+- **Sisällön esitys**: Koriste-elementit poistettu selkeän, ammatillisen esityksen hyväksi
+- **Linkkirakenne**: Kaikki sisäiset linkit päivitetty tukemaan uutta navigaatiojärjestelmää
 
 #### Parannettu
-- **Accessibility**: Poistettiin emoji-riippuvuudet parantaen ruudunlukija-yhteensopivuutta
-- **Professional Appearance**: Siisti, akateeminen esitystyyli yrityskäyttöön sopivana
-- **Learning Experience**: Jäsennelty lähestymistapa selkeillä tavoitteilla ja tuloksilla jokaista oppituntia varten
-- **Content Organization**: Parempi looginen eteneminen ja yhteydet aiheiden välillä
+- **Saavutettavuus**: Emojien poistaminen parantaa ruudunlukijan yhteensopivuutta
+- **Ammatillinen ulkoasu**: Puhdas, akateeminen tyyli sopii yrityskoulutukseen
+- **Oppimiskokemus**: Rakenne ja selkeät tavoitteet parantavat oppimistuloksia
+- **Sisällön organisointi**: Loogisempi virtaus ja yhteydet aiheiden välillä
 
 ### [v1.0.0] - 2025-09-09
 
@@ -788,163 +836,163 @@ Jos sinulla on paikallisia haaroja tai dokumentaatiota, jotka viittaavat vanhaan
 
 #### Lisätty
 - **Ydindokumentaation rakenne**
-  - Täydellinen aloitusopassarja
+  - Täydellinen getting-started -opassarja
   - Kattava käyttöönotto- ja provisiointidokumentaatio
   - Yksityiskohtaiset vianetsintäresurssit ja virheenkorjausoppaat
-  - Ennen käyttöönottoa suoritettavat validointi-työkalut ja -menettelyt
+  - Pre-deployment -validointityökalut ja menettelyt
 
 - **Aloitusmoduuli**
-  - AZD:n perusteet: Ydinkäsitteet ja terminologia
-  - Asennusopas: Alustakohtaiset asennusohjeet
-  - Konfiguraatio-opas: Ympäristön asetukset ja todennus
-  - Ensimmäinen projektitutorial: Vaiheittainen käytännön oppiminen
+  - AZD Basics: Peruskäsitteet ja terminologia
+  - Installation Guide: Alustakohtaiset asennusohjeet
+  - Configuration Guide: Ympäristön asennus ja todennus
+  - First Project Tutorial: Askel askeleelta -käytännön opetus
 
 - **Käyttöönotto- ja provisiointimoduuli**
-  - Käyttöönotto-opas: Täydellinen työnkulun dokumentaatio
-  - Provisiointiopas: Infrastructure as Code Bicepillä
-  - Parhaat käytännöt tuotantokäyttöönottoon
+  - Deployment Guide: Koko työnkulun dokumentaatio
+  - Provisioning Guide: Infrastruktuuri koodina Bicepillä
+  - Parhaat käytännöt tuotantokäyttöönottoihin
   - Monipalveluarkkitehtuurin mallit
 
-- **Ennakkovalidointimoduuli**
-  - Kapasiteettisuunnittelu: Azure-resurssien saatavuuden tarkistus
-  - SKU-valinta: Kattava opastus palvelutasojen valintaan
-  - Esitarkistukset: Automaattiset validointiskriptit (PowerShell ja Bash)
-  - Kustannusarviointi- ja budjetointityökalut
+- **Pre-deployment -validointimoduuli**
+  - Kapasiteettisuunnittelu: Azure-resurssien saatavuuden validointi
+  - SKU-valinta: Palvelutasovalinnat kattavasti
+  - Pre-flight-tarkastukset: Automaattiset validointiskriptit (PowerShell ja Bash)
+  - Kustannusarviot ja budjetointityökalut
 
-- **Vianmääritysmoduuli**
-  - Yleiset ongelmat: Usein kohdattavat ongelmat ja ratkaisut
-  - Virheenkorjausopas: Systemaattiset vianetsintämenetelmät
-  - Edistyneet diagnostiikkatekniikat ja -työkalut
+- **Vianetsintämoduuli**
+  - Yleiset ongelmat: Usein kohtaavat ongelmat ja ratkaisut
+  - Virheenkorjausopas: Järjestelmällinen vianetsintämenetelmä
+  - Edistyneet diagnostiikkatekniikat ja työkalut
   - Suorituskyvyn seuranta ja optimointi
 
-- **Resurssit ja viitteet**
-  - Komentojen pikaopas: Nopea viite olennaisille komennoille
-  - Sanasto: Kattavat termi- ja lyhenneluettelot
+- **Resurssit ja viitelähteet**
+  - Komentojen pikaopas: Nopeat viittaukset tärkeisiin komentoihin
+  - Sanasto: Kattavat termien ja lyhenteiden selitykset
   - FAQ: Yksityiskohtaiset vastaukset yleisiin kysymyksiin
   - Ulkoiset resurssilinkit ja yhteisöyhteydet
 
-- **Esimerkit ja mallit**
-  - Yksinkertainen verkkosovellus-esimerkki
+- **Esimerkit ja mallipohjat**
+  - Yksinkertainen web-sovellus-esimerkki
   - Staattisen sivuston käyttöönotto-malli
   - Konttisovelluskonfiguraatio
-  - Tietokantaintegraatiomallit
-  - Mikropalveluarkkitehtuurin esimerkit
+  - Tietokanta-integraation mallit
+  - Mikropalveluarkkitehtuuriesimerkit
   - Serverless-funktioiden toteutukset
 
 #### Ominaisuudet
-- **Multi-Platform Support**: Asennus- ja konfigurointioppaat Windowsille, macOS:lle ja Linuxille
-- **Multiple Skill Levels**: Sisältö suunniteltu opiskelijoista ammattilaiskehittäjiin
-- **Practical Focus**: Käytännön esimerkit ja todelliset skenaariot
-- **Comprehensive Coverage**: Peruskäsitteistä edistyneisiin yritysmalleihin
-- **Security-First Approach**: Turvallisuuden parhaat käytännöt integroituina läpi
-- **Cost Optimization**: Ohjeet kustannustehokkaisiin käyttöönottoihin ja resurssien hallintaan
+- **Monialustatuki**: Asennus- ja konfigurointioppaat Windowsille, macOS:lle ja Linuxille
+- **Useita taitotasoja**: Sisältöä opiskelijoista ammattilaiskehittäjiin
+- **Käytännönläheisyys**: Kädessä-kokeiltavat esimerkit ja todelliset skenaariot
+- **Kattavuus**: Peruskonsepteista edistyneisiin yrityskäytäntöihin
+- **Turvallisuus ensin**: Turvallisuuden parhaat käytännöt integroitu kautta linjan
+- **Kustannusten optimointi**: Ohjeistus kustannustehokkaaseen käyttöönottoon ja resurssien hallintaan
 
 #### Dokumentaation laatu
-- **Detailed Code Examples**: Käytännölliset, testatut koodiesimerkit
-- **Step-by-Step Instructions**: Selkeät, toteuttamiskelpoiset ohjeet
-- **Comprehensive Error Handling**: Vianetsintä yleisille ongelmille
-- **Best Practices Integration**: Alan standardit ja suositukset
-- **Version Compatibility**: Päivitetty uusimpien Azure-palveluiden ja azd-ominaisuuksien mukaiseksi
+- **Yksityiskohtaiset koodiesimerkit**: Käytännön, testatut koodinäytteet
+- **Askel askeleelta -ohjeet**: Selkeät, toteutuskelpoiset ohjeet
+- **Kattava virheenkäsittely**: Vianetsintä yleisille ongelmille
+- **Parhaat käytännöt**: Alan standardit ja suositukset
+- **Versi yhteensopivuus**: Päivitetty uusimpien Azure-palveluiden ja azd-ominaisuuksien mukaiseksi
 
 ## Suunnitellut tulevat parannukset
 
-### Versio 3.1.0 (Suunniteltu)
+### Version 3.1.0 (Suunnitteilla)
 #### AI-alustan laajentaminen
-- **Multi-Model Support**: Integraatiomallit Hugging Face:lle, Azure Machine Learningille ja räätälöidyille malleille
-- **AI Agent Frameworks**: Mallipohjat LangChain-, Semantic Kernel- ja AutoGen-käyttöönottoihin
-- **Advanced RAG Patterns**: Vaihtoehdot vektoridatabasesille Azure AI Searchin lisäksi (Pinecone, Weaviate jne.)
-- **AI Observability**: Parannettu monitorointi mallin suorituskyvylle, tokenien käytölle ja vastausten laadulle
+- **Multi-Model Support**: Integraatiomallit Hugging Face:lle, Azure Machine Learningille ja mukautetuille malleille
+- **AI Agent Frameworks**: Mallipohjat LangChainin, Semantic Kernelin ja AutoGenin käyttöönottoon
+- **Advanced RAG Patterns**: Vektoripohjaiset tietokantavaihtoehdot Azure AI Searchin lisäksi (Pinecone, Weaviate, jne.)
+- **AI Observability**: Parannettu valvonta mallin suorituskyvylle, tokenien käytölle ja vastausten laadulle
 
 #### Kehittäjäkokemus
-- **VS Code Extension**: Integroitu AZD + AI Foundry -kehityskokemus
-- **GitHub Copilot Integration**: Copilotin avulla avustettu AZD-mallien generointi
-- **Interactive Tutorials**: Interaktiiviset käytännön koodausharjoitukset automaattisella validoinnilla AI-skenaarioissa
-- **Video Content**: Lisämateriaali video-opastuksia visuaalisille oppijoille, keskittyen AI-käyttöönottoihin
+- **VS Code Extension**: Integroitu AZD + Microsoft Foundry -kehityskokemus
+- **GitHub Copilot Integration**: AI-avusteinen AZD-mallipohjien generointi
+- **Interactive Tutorials**: Käytännön koodausharjoituksia automatisoidulla validoinnilla AI-skenaarioihin
+- **Video Content**: Täydentävät video-oppaat visuaalisille oppijoille, keskittyen AI-käyttöönottoihin
 
-### Versio 4.0.0 (Suunniteltu)
+### Versio 4.0.0 (Suunnitteilla)
 #### Yritys-AI-mallit
-- **Governance Framework**: AI-mallien hallinta, vaatimustenmukaisuus ja audit-lokit
-- **Multi-Tenant AI**: Mallit monen asiakkaan palvelemiseen erillisten AI-palveluiden avulla
-- **Edge AI Deployment**: Integraatio Azure IoT Edgeen ja kontti-instanseihin
-- **Hybrid Cloud AI**: Monipilvi- ja hybridikäyttöönoton mallit AI-kuormille
+- **Governance Framework**: AI-mallien hallinta, säädösten noudattaminen ja auditointilokit
+- **Multi-Tenant AI**: Mallit useiden asiakkaiden palvelemiseen eristetyillä AI-palveluilla
+- **Edge AI Deployment**: Integrointi Azure IoT Edgen ja kontti-instaanssien kanssa
+- **Hybrid Cloud AI**: Monipilvi- ja hybridi-käyttöönottojen mallit AI-kuormituksille
 
-#### Edistyneet ominaisuudet
-- **AI Pipeline Automation**: MLOps-integraatio Azure Machine Learning -putkistoihin
-- **Advanced Security**: Zero-trust -mallit, private endpointit ja kehittynyt uhkasuojaus
-- **Performance Optimization**: Kehittyneet viritys- ja skaalausstrategiat suurilukuisille AI-sovelluksille
-- **Global Distribution**: Sisällön jakelu- ja reunacaching-mallit AI-sovelluksille
+#### Kehittyneet ominaisuudet
+- **AI Pipeline Automation**: MLOps-integraatio Azure Machine Learning -putkien kanssa
+- **Advanced Security**: Zero-trust-mallit, yksityiset päätepisteet ja kehittynyt uhkasuojaus
+- **Performance Optimization**: Kehittyneet säätö- ja skaalausstrategiat korkean läpimenon AI-sovelluksille
+- **Global Distribution**: Sisällön toimitus- ja reunavälimuistimallit AI-sovelluksille
 
-### Versio 3.0.0 (Suunniteltu) - Korvattu nykyisellä julkaisulla
+### Versio 3.0.0 (Suunnitteilla) - Korvattu nykyisellä julkaisulla
 #### Ehdotetut lisäykset - Nyt toteutettu versiossa v3.0.0
-- ✅ **AI-Focused Content**: Kattava Microsoft Foundry -integraatio (Valmis)
-- ✅ **Interactive Tutorials**: Käytännön AI-työpaja (Valmis)
-- ✅ **Advanced Security Module**: Tekoälykohtaiset suojausmallit (Valmis)
-- ✅ **Performance Optimization**: AI-kuormien viritysstrategiat (Valmis)
+- ✅ **AI-keskeinen sisältö**: Kattava Microsoft Foundry -integraatio (Valmis)
+- ✅ **Interaktiiviset opastukset**: Käytännön AI-työpajalaboratorio (Valmis)
+- ✅ **Kehittynyt turvallisuusmoduuli**: AI-kohtaiset turvallisuusmallit (Valmis)
+- ✅ **Suorituskyvyn optimointi**: AI-kuormituksen säätöstrategiat (Valmis)
 
-### Versio 2.1.0 (Suunniteltu) - Osittain toteutettu versiossa v3.0.0
-#### Pienet parannukset - Osa toteutettu nykyjulkaisussa
-- ✅ **Additional Examples**: AI-keskeiset käyttöönotto-skenaariot (Valmis)
-- ✅ **Extended FAQ**: AI-kohtaiset kysymykset ja vianetsintä (Valmis)
-- **Tool Integration**: Parannetut IDE- ja editor-integraatio-oppaat
-- ✅ **Monitoring Expansion**: AI-kohtaiset monitorointi- ja hälytysmallit (Valmis)
+### Versio 2.1.0 (Suunnitteilla) - Osittain toteutettu versiossa v3.0.0
+#### Pienet parannukset - Osa toteutettu nykyisessä julkaisussa
+- ✅ **Lisää esimerkkejä**: AI-keskeisiä käyttöönotto-skenaarioita (Valmis)
+- ✅ **Laajennettu UKK**: AI-kohtaiset kysymykset ja vianmääritys (Valmis)
+- **Työkalujen integrointi**: Parannetut IDE- ja editori-integraatio-ohjeet
+- ✅ **Valvonnan laajennus**: AI-kohtaiset valvonta- ja hälytysmallit (Valmis)
 
-#### Vielä suunnitteilla tuleville julkaisuille
-- **Mobile-Friendly Documentation**: Responsiivinen suunnittelu mobiilioppimiseen
-- **Offline Access**: Ladattavat dokumentaatiopaketit
-- **Enhanced IDE Integration**: VS Code -laajennus AZD + AI -työnkuluille
-- **Community Dashboard**: Reaaliaikaiset yhteisön mittarit ja kontribuutioseuranta
+#### Vielä suunnitteilla tulevalle julkaisulle
+- **Mobiiliystävällinen dokumentaatio**: Responsiivinen muotoilu mobiiliopiskeluun
+- **Offline-käyttö**: Ladattavat dokumentaatiopaketit
+- **Parannettu IDE-integraatio**: VS Code -laajennus AZD + AI-työnkulkuihin
+- **Yhteisön kojelauta**: Reaaliaikaiset yhteisön mittarit ja kontribuutioiden seuranta
 
-## Osallistuminen muutoslokiin
+## Osallistuminen muutosten lokiin
 
 ### Muutosten raportointi
-Kun kontribuoit tähän repositorioon, varmista että muutoslokimerkinnät sisältävät:
+Kun osallistut tähän repositorioon, varmista, että muutosten lokimerkinnät sisältävät:
 
-1. **Version Number**: Noudata semanttista versiointia (major.minor.patch)
-2. **Date**: Julkaisun tai päivityksen päivämäärä muodossa YYYY-MM-DD
-3. **Category**: Added, Changed, Deprecated, Removed, Fixed, Security
-4. **Clear Description**: Ytimekäs kuvaus siitä, mitä muutettiin
-5. **Impact Assessment**: Kuvaus siitä, miten muutokset vaikuttavat nykyisiin käyttäjiin
+1. **Versiotunnus**: Seuraa semanttista versionumeroa (major.minor.patch)
+2. **Päivämäärä**: Julkaisun tai päivityksen päivämäärä muodossa YYYY-MM-DD
+3. **Kategoria**: Lisätty, Muutettu, Vanhentunut, Poistettu, Korjattu, Turvallisuus
+4. **Selkeä kuvaus**: Ytimekäs kuvaus siitä, mitä muutettiin
+5. **Vaikutusarvio**: Kuvaus siitä, miten muutokset vaikuttavat nykyisiin käyttäjiin
 
 ### Muutoskategoriat
 
 #### Lisätty
-- Uudet ominaisuudet, dokumentaatioluvut tai toiminnot
-- Uudet esimerkit, mallit tai oppimateriaalit
-- Lisätyt työkalut, skriptit tai apuohjelmat
+- Uudet ominaisuudet, dokumentaatio-osiot tai toiminnallisuudet
+- Uudet esimerkit, mallipohjat tai oppimateriaalit
+- Lisätyökalut, skriptit tai apuohjelmat
 
 #### Muutettu
 - Muutokset olemassa olevaan toiminnallisuuteen tai dokumentaatioon
 - Päivitykset selkeyden tai tarkkuuden parantamiseksi
-- Sisällön tai organisaation uudelleenjärjestelyt
+- Sisällön tai organisaation uudelleenjärjestely
 
 #### Vanhentunut
-- Ominaisuudet tai lähestymistavat, joita asteittain poistetaan
-- Dokumentaatio-osiot, jotka on suunniteltu poistettaviksi
+- Ominaisuudet tai käytännöt, jotka ovat poistumassa käytöstä
+- Dokumentaatio-osiot, jotka on aikataulutettu poistettavaksi
 - Menetelmät, joille on parempia vaihtoehtoja
 
 #### Poistettu
-- Ominaisuudet, dokumentaatio tai esimerkit, jotka eivät ole enää relevantteja
-- Vanhentunut tieto tai vanhentuneet lähestymistavat
+- Ominaisuudet, dokumentaatio tai esimerkit, jotka eivät ole enää ajankohtaisia
+- Vanhentunut tieto tai poistumassa olevat käytännöt
 - Päällekkäinen tai yhdistetty sisältö
 
 #### Korjattu
-- Korjauksia dokumentaation tai koodin virheisiin
-- Raportoitujen ongelmien tai vikojen ratkaisut
-- Parannuksia tarkkuuteen tai toiminnallisuuteen
+- Korjaukset dokumentaation tai koodin virheisiin
+- Raportoituja ongelmia tai vikoja ratkaistu
+- Parannukset tarkkuuteen tai toiminnallisuuteen
 
 #### Turvallisuus
 - Turvallisuuteen liittyvät parannukset tai korjaukset
-- Päivitykset turvallisen käytännön suosituksiin
-- Turvahaavoittuvuuksien korjaukset
+- Päivitykset turvallisuuden parhaisiin käytäntöihin
+- Haavoittuvuuksien korjaaminen
 
-### Semanttisen versioinnin ohjeet
+### Semanttisen versionhallinnan ohjeet
 
-#### Suuri versio (X.0.0)
-- Taaksepäin yhteensopimattomat muutokset, jotka vaativat käyttäjän toimenpiteitä
-- Merkittävä sisällön tai organisaation uudelleenjärjestely
-- Muutokset, jotka muuttavat perustavanlaatuista lähestymistapaa tai metodologiaa
+#### Pääversio (X.0.0)
+- Yhteensopimattomat muutokset, jotka vaativat käyttäjän toimenpiteitä
+- Merkittävä sisällön tai organisoinnin uudelleenjärjestely
+- Muutokset, jotka muuttavat peruslähtökohtaa tai metodologiaa
 
-#### Pieni versio (X.Y.0)
+#### Pienempi versio (X.Y.0)
 - Uudet ominaisuudet tai sisällön lisäykset
 - Parannukset, jotka säilyttävät taaksepäin yhteensopivuuden
 - Lisäesimerkit, työkalut tai resurssit
@@ -959,65 +1007,65 @@ Kun kontribuoit tähän repositorioon, varmista että muutoslokimerkinnät sisä
 Kannustamme aktiivisesti yhteisön palautteeseen tämän oppimateriaalin parantamiseksi:
 
 ### Miten antaa palautetta
-- **GitHub Issues**: Ilmoita ongelmista tai ehdota parannuksia (AI-kohtaiset ongelmat tervetulleita)
+- **GitHub Issues**: Ilmoita ongelmista tai ehdota parannuksia (AI-kohtaiset ongelmat ovat tervetulleita)
 - **Discord Discussions**: Jaa ideoita ja osallistu Microsoft Foundry -yhteisöön
-- **Pull Requests**: Tee suoria parannuksia sisältöön, erityisesti AI-malleihin ja oppaisiin
-- **Microsoft Foundry Discord**: Osallistu kanavaan #Azure AZD + AI -keskusteluihin
-- **Community Forums**: Osallistu laajempiin Azure-kehittäjien keskusteluihin
+- **Pull Requests**: Tee suoria parannuksia sisältöön, erityisesti AI-mallipohjiin ja ohjeisiin
+- **Microsoft Foundry Discord**: Osallistu #Azure-kanavalla AZD + AI -keskusteluihin
+- **Community Forums**: Osallistu laajempiin Azure-kehittäjäkeskusteluihin
 
-### Palautekategoriat
-- **AI Content Accuracy**: Korjaukset AI-palveluiden integraatioon ja käyttöönottoon liittyvään tietoon
-- **Learning Experience**: Ehdotukset AI-kehittäjäoppimisen virtauksen parantamiseksi
-- **Missing AI Content**: Pyynnöt lisätä AI-mallipohjia, -malleja tai esimerkkejä
-- **Accessibility**: Parannuksia monipuolisiin oppimistarpeisiin
-- **AI Tool Integration**: Ehdotuksia AI-kehitystyönkulun paremman integraation saavuttamiseksi
-- **Production AI Patterns**: Pyyntöjä yritys-AI-käyttöönoton mallien lisäämiseksi
+### Palautteen kategoriat
+- **AI-sisällön tarkkuus**: Korjaukset AI-palvelujen integraatio- ja käyttöönotto-tietoihin
+- **Oppimiskokemus**: Ehdotuksia AI-kehittäjän oppimiskokemuksen parantamiseksi
+- **Puuttuva AI-sisältö**: Pyynnöt lisätä AI-mallipohjia, malleja tai esimerkkejä
+- **Saavutettavuus**: Parannuksia monipuolisten oppijoiden tarpeisiin
+- **AI-työkalujen integrointi**: Ehdotuksia AI-kehitysprosessin integraation parantamiseksi
+- **Tuotantotason AI-mallit**: Pyyntöjä yritystason AI-käyttöönottojen malleista
 
 ### Vastauslupaus
-- **Issue Response**: Vastataan ilmoitettuihin ongelmiin 48 tunnin kuluessa
-- **Feature Requests**: Arvioidaan viikon sisällä
-- **Community Contributions**: Tarkastellaan viikon kuluessa
-- **Security Issues**: Korkea prioriteetti, nopeutettu reagointi
+- **Ongelmiin vastaus**: Raportoituihin ongelmiin vastataan 48 tunnin kuluessa
+- **Ominaisuuspyynnöt**: Ominaisuuspyynnöt arvioidaan viikon kuluessa
+- **Yhteisön kontribuutiot**: Yhteisön kontribuutiot tarkastetaan viikon kuluessa
+- **Turvallisuusongelmat**: Turvallisuusongelmat ovat ensisijaisia ja niihin vastataan kiireellisesti
 
 ## Ylläpitosuunnitelma
 
 ### Säännölliset päivitykset
-- **Monthly Reviews**: Sisällön tarkkuuden ja linkkien validointi kuukausittain
-- **Quarterly Updates**: Merkittäviä sisällön lisäyksiä ja parannuksia neljännesvuosittain
-- **Semi-Annual Reviews**: Kattavat uudelleenjärjestelyt ja parannukset puolen vuoden välein
-- **Annual Releases**: Vuotuiset julkaisut merkittävin versiopäivityksin ja parannuksin
+- **Kuukausittaiset katsaukset**: Sisällön tarkkuuden ja linkkien validoinnin tarkistukset kuukausittain
+- **Neljännesvuosittaiset päivitykset**: Suuret sisällön lisäykset ja parannukset neljännesvuosittain
+- **Puolivuosittaiset tarkistukset**: Laaja-alainen uudelleenjärjestely ja parannukset puolivuosittain
+- **Vuosittaiset julkaisut**: Suuret versiopäivitykset merkittävillä parannuksilla
 
-### Seuranta ja laadunvarmistus
-- **Automated Testing**: Säännöllinen koodiesimerkkien ja linkkien validointi
-- **Community Feedback Integration**: Käyttäjäehdotusten säännöllinen sisällyttäminen
-- **Technology Updates**: Yhdenmukaistus uusimpien Azure-palveluiden ja azd-julkaisujen kanssa
-- **Accessibility Audits**: Säännölliset tarkastukset inklusiivisen suunnittelun periaatteille
+### Valvonta ja laadunvarmistus
+- **Automaattinen testaus**: Automaattinen koodiesimerkkien ja linkkien validointi säännöllisesti
+- **Yhteisön palautteen integrointi**: Käyttäjäehdotusten säännöllinen integrointi
+- **Teknologiapäivitykset**: Yhdenmukaistaminen uusimpien Azure-palveluiden ja azd-julkaisujen kanssa
+- **Saavutettavuusauditoinnit**: Säännöllinen tarkastus inklusiivisen suunnittelun periaatteiden mukaisesti
 
 ## Versiotukipolitiikka
 
-### Nykyversion tuki
-- **Latest Major Version**: Täysi tuki säännöllisillä päivityksillä
-- **Previous Major Version**: Turvapäivitykset ja kriittiset korjaukset 12 kuukauden ajan
-- **Legacy Versions**: Vain yhteisön tuki, ei virallisia päivityksiä
+### Nykyisen version tuki
+- **Uusin pääversio**: Täysi tuki säännöllisillä päivityksillä
+- **Edellinen pääversio**: Turvapäivitykset ja kriittiset korjaukset 12 kuukauden ajan
+- **Perintöversiot**: Vain yhteisön tuki, ei virallisia päivityksiä
 
 ### Migraatio-ohjeet
-Kun suuret versiot julkaistaan, tarjoamme:
-- **Siirtymäoppaat**: Vaiheittaiset siirtymäohjeet
-- **Yhteensopivuustiedot**: Tiedot yhteensopivuuden rikkovista muutoksista
-- **Työkalutuki**: Skriptit tai apuohjelmat siirtymän avuksi
-- **Yhteisön tuki**: Omistetut foorumit siirtymäkysymyksille
+Kun uusia pääversioita julkaistaan, tarjoamme:
+- **Migraatio-oppaat**: Vaiheittaiset siirtymisohjeet
+- **Yhteensopivuusmuistiinpanot**: Tiedot yhteensopivuuteen vaikuttavista muutoksista
+- **Työkalutuki**: Skriptit tai apuohjelmat migraation avuksi
+- **Yhteisön tuki**: Omistautuneet foorumit migraatiokysymyksiin
 
 ---
 
 **Navigointi**
-- **Edellinen oppitunti**: [Opas](resources/study-guide.md)
-- **Seuraava oppitunti**: Palaa kohtaan [Pää-README](README.md)
+- **Edellinen oppitunti**: [Study Guide](resources/study-guide.md)
+- **Seuraava oppitunti**: Palaa kohtaan [Main README](README.md)
 
 **Pysy ajan tasalla**: Seuraa tätä repositoriota saadaksesi ilmoituksia uusista julkaisuista ja tärkeistä päivityksistä oppimateriaaleihin.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vastuuvapauslauseke:
-Tämä asiakirja on käännetty tekoälypohjaisella käännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Pyrimme tarkkuuteen, mutta huomioithan, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulee pitää auktoritatiivisena lähteenä. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinkäsityksistä tai virhetulkinnoista.
+**Vastuuvapauslauseke**:
+Tämä asiakirja on käännetty käyttämällä tekoälykäännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, ota huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää virallisena lähteenä. Tärkeiden tietojen osalta suosittelemme ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä johtuvista väärinymmärryksistä tai virhetulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

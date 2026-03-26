@@ -1,13 +1,13 @@
 # Déploiement de modèles d'IA avec Azure Developer CLI
 
 **Navigation du chapitre :**
-- **📚 Accueil du cours**: [AZD For Beginners](../../README.md)
-- **📖 Chapitre actuel**: Chapitre 2 - Développement axé IA
-- **⬅️ Précédent**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Suivant**: [AI Workshop Lab](ai-workshop-lab.md)
+- **📚 Accueil du cours**: [AZD pour débutants](../../README.md)
+- **📖 Chapitre actuel**: Chapitre 2 - Développement axé sur l'IA
+- **⬅️ Précédent**: [Intégration Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Suivant**: [Atelier sur l'IA](ai-workshop-lab.md)
 - **🚀 Chapitre suivant**: [Chapitre 3 : Configuration](../chapter-03-configuration/configuration.md)
 
-Ce guide fournit des instructions complètes pour déployer des modèles d'IA en utilisant les modèles AZD, couvrant tout, de la sélection du modèle aux modèles de déploiement en production.
+Ce guide fournit des instructions complètes pour déployer des modèles d'IA en utilisant les templates AZD, couvrant tout, du choix du modèle aux modèles de déploiement en production.
 
 ## Table des matières
 
@@ -20,7 +20,7 @@ Ce guide fournit des instructions complètes pour déployer des modèles d'IA en
 
 ## Stratégie de sélection de modèle
 
-### Modèles Azure OpenAI
+### Microsoft Foundry Modèles Modèles
 
 Choisissez le bon modèle pour votre cas d'utilisation :
 
@@ -34,9 +34,9 @@ services:
       AZURE_OPENAI_MODELS: |
         [
           {
-            "name": "gpt-4o-mini",
+            "name": "gpt-4.1-mini",
             "version": "2024-07-18",
-            "deployment": "gpt-4o-mini",
+            "deployment": "gpt-4.1-mini",
             "capacity": 10,
             "format": "OpenAI"
           },
@@ -52,12 +52,12 @@ services:
 
 ### Planification de la capacité des modèles
 
-| Model Type | Use Case | Recommended Capacity | Cost Considerations |
+| Type de modèle | Cas d'utilisation | Capacité recommandée | Considérations de coût |
 |------------|----------|---------------------|-------------------|
-| GPT-4o-mini | Chat, Q&A | 10-50 TPM | Rentable pour la plupart des charges de travail |
-| GPT-4 | Raisonnement complexe | 20-100 TPM | Coût plus élevé, à utiliser pour les fonctionnalités premium |
+| gpt-4.1-mini | Chat, Q&R | 10-50 TPM | Rentable pour la plupart des charges de travail |
+| gpt-4.1 | Raisonnement complexe | 20-100 TPM | Coût plus élevé, à utiliser pour des fonctionnalités premium |
 | Text-embedding-ada-002 | Recherche, RAG | 30-120 TPM | Essentiel pour la recherche sémantique |
-| Whisper | Reconnaissance vocale | 10-50 TPM | Charges de traitement audio |
+| Whisper | Parole vers texte | 10-50 TPM | Charges de traitement audio |
 
 ## Configuration AZD pour les modèles d'IA
 
@@ -70,10 +70,10 @@ Créez des déploiements de modèles via des templates Bicep :
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
-    name: 'gpt-4o-mini'
+    name: 'gpt-4.1-mini'
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
     sku: {
@@ -130,7 +130,7 @@ Configurez l'environnement de votre application :
 # Configuration du fichier .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
-AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
+AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
@@ -146,15 +146,15 @@ services:
     host: containerapp
     config:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
-      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
+      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
 Idéal pour :
 - Développement et tests
-- Applications ciblant un seul marché
+- Applications pour un seul marché
 - Optimisation des coûts
 
-### Modèle 2 : Déploiement multi-régions
+### Modèle 2 : Déploiement multi-région
 
 ```bicep
 // Multi-region deployment
@@ -174,7 +174,7 @@ Idéal pour :
 
 ### Modèle 3 : Déploiement hybride
 
-Combinez Azure OpenAI avec d'autres services d'IA :
+Combinez les modèles Microsoft Foundry avec d'autres services d'IA :
 
 ```bicep
 // Hybrid AI services
@@ -213,7 +213,7 @@ Suivez les versions des modèles dans votre configuration AZD :
 {
   "models": {
     "chat": {
-      "name": "gpt-4o-mini",
+      "name": "gpt-4.1-mini",
       "version": "2024-07-18",
       "fallback": "gpt-35-turbo"
     },
@@ -225,9 +225,9 @@ Suivez les versions des modèles dans votre configuration AZD :
 }
 ```
 
-### Mises à jour du modèle
+### Mises à jour des modèles
 
-Utilisez les hooks AZD pour les mises à jour de modèles :
+Utilisez les hooks AZD pour les mises à jour des modèles :
 
 ```bash
 #!/bin/bash
@@ -237,23 +237,23 @@ echo "Checking model availability..."
 az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
-  --query "[?name=='gpt-4o-mini']"
+  --query "[?name=='gpt-4.1-mini']"
 ```
 
 ### Tests A/B
 
-Déployez plusieurs versions de modèles :
+Déployez plusieurs versions du modèle :
 
 ```bicep
 param enableABTesting bool = false
 
 resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'gpt-4o-mini-${enableABTesting ? 'v1' : 'prod'}'
+  name: 'gpt-4.1-mini-${enableABTesting ? 'v1' : 'prod'}'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -295,7 +295,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### Configuration de l'auto-scaling
 
-Configurez l'auto-scaling pour Container Apps :
+Configurez l'auto-scaling pour les Container Apps :
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -333,7 +333,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Optimisation des coûts
 
-Mettez en place des contrôles de coûts :
+Mettez en place des contrôles des coûts :
 
 ```bicep
 @description('Enable cost management alerts')
@@ -405,7 +405,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### Métriques personnalisées
 
-Suivez des métriques spécifiques à l'IA :
+Suivez les métriques spécifiques à l'IA :
 
 ```python
 # Télémétrie personnalisée pour les modèles d'IA
@@ -440,12 +440,12 @@ class AITelemetry:
         )
 ```
 
-### Vérifications d'état
+### Vérifications de santé
 
-Mettez en place la surveillance de l'état des services d'IA :
+Mettez en œuvre la surveillance de l'état des services d'IA :
 
 ```python
-# Points de terminaison de vérification de l'état
+# Points de terminaison pour la vérification de l'état
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -455,7 +455,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test de connexion à OpenAI
+        # Test de la connexion à OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -473,30 +473,30 @@ async def check_ai_models():
 
 ## Étapes suivantes
 
-1. **Consultez le [Guide d'intégration Microsoft Foundry](microsoft-foundry-integration.md)** pour les modèles d'intégration des services
-2. **Complétez le [AI Workshop Lab](ai-workshop-lab.md)** pour une expérience pratique
-3. **Implémentez les [Bonnes pratiques IA en production](production-ai-practices.md)** pour les déploiements en entreprise
-4. **Explorez le [Guide de dépannage IA](../chapter-07-troubleshooting/ai-troubleshooting.md)** pour les problèmes courants
+1. **Consultez le [Guide d'intégration Microsoft Foundry](microsoft-foundry-integration.md)** pour les modèles d'intégration de services
+2. **Complétez l'[atelier pratique sur l'IA](ai-workshop-lab.md)** pour une expérience pratique
+3. **Mettez en œuvre les [pratiques d'IA en production](production-ai-practices.md)** pour les déploiements en entreprise
+4. **Consultez le [guide de dépannage IA](../chapter-07-troubleshooting/ai-troubleshooting.md)** pour les problèmes courants
 
 ## Ressources
 
-- [Disponibilité des modèles Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Disponibilité des modèles Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Documentation Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Mise à l'échelle des Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [Optimisation des coûts des modèles IA](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Optimisation des coûts des modèles d'IA](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **Navigation du chapitre :**
-- **📚 Accueil du cours**: [AZD For Beginners](../../README.md)
-- **📖 Chapitre actuel**: Chapitre 2 - Développement axé IA
-- **⬅️ Précédent**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Suivant**: [AI Workshop Lab](ai-workshop-lab.md)
+- **📚 Accueil du cours**: [AZD pour débutants](../../README.md)
+- **📖 Chapitre actuel**: Chapitre 2 - Développement axé sur l'IA
+- **⬅️ Précédent**: [Intégration Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Suivant**: [Atelier sur l'IA](ai-workshop-lab.md)
 - **🚀 Chapitre suivant**: [Chapitre 3 : Configuration](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Avertissement :
-Ce document a été traduit à l'aide du service de traduction par IA [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent comporter des erreurs ou des inexactitudes. Le document original, dans sa langue d'origine, doit être considéré comme la source faisant foi. Pour les informations critiques, il est recommandé de recourir à une traduction humaine professionnelle. Nous ne saurions être tenus responsables des malentendus ou des interprétations erronées résultant de l'utilisation de cette traduction.
+**Avertissement** :
+Ce document a été traduit à l'aide du service de traduction par IA [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatiques peuvent contenir des erreurs ou des inexactitudes. Le document original, dans sa langue d'origine, doit être considéré comme la source faisant foi. Pour les informations critiques, il est recommandé de recourir à une traduction professionnelle effectuée par un traducteur humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

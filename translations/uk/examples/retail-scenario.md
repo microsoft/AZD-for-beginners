@@ -1,76 +1,76 @@
-# Рішення багатокористувацької служби підтримки клієнтів - сценарій для роздрібної торгівлі
+# Багатоагентне рішення для підтримки клієнтів – сценарій ритейлера
 
-**Розділ 5: Рішення AI з багатьма агентами**  
-- **📚 Головна сторінка курсу**: [AZD для початківців](../README.md)  
-- **📖 Поточний розділ**: [Розділ 5: Рішення AI з багатьма агентами](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)  
-- **⬅️ Попередні знання**: [Розділ 2: AI-перший розвиток](../docs/microsoft-foundry/microsoft-foundry-integration.md)  
-- **➡️ Наступний розділ**: [Розділ 6: Перевірка перед розгортанням](../docs/pre-deployment/capacity-planning.md)  
-- **🚀 Шаблони ARM**: [Пакет розгортання](retail-multiagent-arm-template/README.md)  
+**Розділ 5: Багатоагентні AI-рішення**  
+- **📚 Домашня сторінка курсу**: [AZD For Beginners](../README.md)  
+- **📖 Поточний розділ**: [Розділ 5: Багатоагентні AI-рішення](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)  
+- **⬅️ Передумови**: [Розділ 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)  
+- **➡️ Наступний розділ**: [Розділ 6: Попередня валідація перед розгортанням](../docs/pre-deployment/capacity-planning.md)  
+- **🚀 ARM шаблони**: [Пакет для розгортання](retail-multiagent-arm-template/README.md)  
 
-> **⚠️ КЕРІВНИЦТВО З АРХІТЕКТУРИ - НЕ РОБОЧА ІМПЛЕМЕНТАЦІЯ**  
-> Цей документ містить **детальний архітектурний план** для побудови багатокористувацької системи.  
-> **Що є:** шаблон ARM для розгортання інфраструктури (Azure OpenAI, AI Search, Container Apps тощо)  
-> **Що потрібно створити:** код агентів, логіку маршрутизації, фронтенд UI, конвеєри даних (орієнтовно 80-120 годин)  
+> **⚠️ КЕРІВНИЦТВО З АРХІТЕКТУРИ – НЕ ПРАЦЮЮЧА РЕАЛІЗАЦІЯ**  
+> Цей документ містить **вичерпний архітектурний план** для побудови системи з кількома агентами.  
+> **Що є:** ARM шаблон для розгортання інфраструктури (Microsoft Foundry Models, AI Search, Container Apps тощо)  
+> **Що потрібно створити:** код агентів, логіку маршрутизації, фронтенд UI, канали даних (приблизно 80-120 годин)  
 >  
-> **Використовуйте це як:**  
-> - ✅ Архітектурний референс для вашого проєкту багатьох агентів  
-> - ✅ Посібник для вивчення дизайну багатокористувацьких моделей  
+> **Використовуйте як:**  
+> - ✅ Посилання на архітектуру для вашого проєкту з багатоагентною системою  
+> - ✅ Навчальний посібник по патернам дизайну для багатоагентних систем  
 > - ✅ Шаблон інфраструктури для розгортання ресурсів Azure  
-> - ❌ НЕ готовий для запуску застосунок (потребує значної розробки)  
+> - ❌ НЕ готовий до запуску застосунок (потрібна суттєва розробка)  
 
 ## Огляд
 
-**Мета навчання:** Зрозуміти архітектуру, проектні рішення та підхід до імплементації для створення виробничого багатокористувацького чат-бота підтримки клієнтів роздрібної торгівлі з складними можливостями AI, зокрема керування запасами, обробка документів та інтелектуальні взаємодії з клієнтами.
+**Мета навчання:** Зрозуміти архітектуру, дизайнерські рішення та підхід до реалізації виробничої багатоагентної системи підтримки клієнтів для ритейлера з просунутими можливостями AI, включно з управлінням запасами, обробкою документів і розумною взаємодією з клієнтами.
 
-**Час на виконання:** Читання + розуміння (2-3 години) | Розробка повної імплементації (80-120 годин)
+**Час на вивчення:** читання + розуміння (2-3 години) | повна розробка системи (80-120 годин)
 
-**Що ви навчитеся:**
-- Шаблони архітектури багатьох агентів та принципи дизайну  
-- Стратегії розгортання Azure OpenAI в кількох регіонах  
-- Інтеграція AI Search з RAG (генерація з підсиленням пошуком)  
-- Оцінка агентів та фреймворки безпеки  
-- Врахування для виробничого розгортання та оптимізація вартості  
+**Що ви навчитесь:**  
+- Патерни архітектури багатоагентних систем та принципи дизайну  
+- Стратегії розгортання Microsoft Foundry Models у кількох регіонах  
+- Інтеграція AI Search з RAG (Retrieval-Augmented Generation)  
+- Фреймворки оцінки агентів і безпеки  
+- Розгортання у виробництві та оптимізація витрат  
 
 ## Цілі архітектури
 
-**Освітній акцент:** Ця архітектура демонструє корпоративні шаблони багатокористувацьких систем.
+**Освітній фокус:** ця архітектура демонструє корпоративні патерни для багатоагентних систем.
 
-### Вимоги до системи (для вашої імплементації)
+### Вимоги системи (для вашої реалізації)
 
-Виробнича служба підтримки клієнтів вимагає:  
-- **Декілька спеціалізованих агентів** для різних потреб клієнтів (підтримка + управління запасами)  
-- **Багатомодельне розгортання** з належним плануванням потужностей (GPT-4o, GPT-4o-mini, embeddings у різних регіонах)  
-- **Динамічна інтеграція даних** з AI Search та завантаженням файлів (векторний пошук + обробка документів)  
-- **Комплексний моніторинг** та оцінка (Application Insights + власні метрики)  
-- **Безпека виробничого рівня** з валідацією червоною командою (сканування вразливостей + оцінка агентів)  
+Рішення для підтримки клієнтів у виробництві потребує:  
+- **Кілька спеціалізованих агентів** для різних потреб клієнтів (підтримка + управління запасами)  
+- **Розгортання з кількома моделями** із правильним плануванням потужностей (gpt-4.1, gpt-4.1-mini, ембеддінги у різних регіонах)  
+- **Динамічна інтеграція даних** з AI Search та завантаження файлів (векторний пошук + опрацювання документів)  
+- **Всебічний моніторинг** та оцінка (Application Insights + власні метрики)  
+- **Безпека виробничого рівня** з red teaming перевіркою (сканування вразливостей + оцінка агентів)  
 
-### Що дає це керівництво
+### Що надає цей посібник
 
-✅ **Шаблони архітектури** - перевірений дизайн масштабованих систем багатьох агентів  
-✅ **Шаблони інфраструктури** - ARM-шаблони для розгортання всіх сервісів Azure  
-✅ **Приклади коду** - зразки реалізації ключових компонентів  
-✅ **Інструкції з налаштування** - покрокові вказівки  
-✅ **Кращі практики** - безпека, моніторинг, оптимізація вартості  
+✅ **Архітектурні патерни** – доведений дизайн для масштабованих багатоагентних систем  
+✅ **Інфраструктурні шаблони** – ARM шаблони для розгортання всіх сервісів Azure  
+✅ **Приклади коду** – зразки реалізації ключових компонентів  
+✅ **Інструкції конфігурації** – покрокові налаштування  
+✅ **Кращі практики** – стратегії безпеки, моніторингу, оптимізації витрат  
 
-❌ **Не включено** - повноцінний робочий застосунок (потрібна розробка)  
+❌ **НЕ включено** – повний робочий застосунок (потрібна розробка)  
 
-## 🗺️ Дорожня карта імплементації
+## 🗺️ Дорожня карта впровадження
 
-### Фаза 1: Вивчення архітектури (2-3 години) - ПОЧИНАЙТЕ З ЦЬОГО
+### Фаза 1: Вивчення архітектури (2-3 години) – ПОЧАТОК
 
-**Мета:** Зрозуміти дизайн системи та взаємодію компонентів
+**Мета:** Зрозуміти дизайн системи і взаємодії компонентів
 
-- [ ] Прочитати цей документ повністю  
-- [ ] Ознайомитись з діаграмою архітектури і зв’язками компонентів  
-- [ ] Зрозуміти патерни багатьох агентів та проектні рішення  
-- [ ] Вивчити приклади коду для інструментів агентів та маршрутизації  
-- [ ] Переглянути оцінки вартості та рекомендації з планування потужностей  
+- [ ] Прочитати весь документ  
+- [ ] Ознайомитися з діаграмою архітектури та взаємозв’язками компонентів  
+- [ ] Вивчити багатоагентні патерни і дизайнерські рішення  
+- [ ] Оглянути приклади коду для інструментів агентів та маршрутизації  
+- [ ] Ознайомитися з оцінкою вартості та плануванням потужностей  
 
-**Результат:** Чітке розуміння того, що треба побудувати
+**Результат:** Чітке розуміння того, що потрібно реалізувати  
 
 ### Фаза 2: Розгортання інфраструктури (30-45 хвилин)
 
-**Мета:** Забезпечити ресурси Azure за допомогою ARM-шаблону
+**Мета:** Забезпечити ресурси Azure за допомогою ARM шаблону
 
 ```bash
 cd retail-multiagent-arm-template
@@ -78,59 +78,59 @@ cd retail-multiagent-arm-template
 ```
   
 **Що розгортається:**  
-- ✅ Azure OpenAI (3 регіони: GPT-4o, GPT-4o-mini, embeddings)  
-- ✅ Сервіс AI Search (порожній, потрібно налаштувати індекс)  
-- ✅ Середовище Container Apps (заготовки зображень)  
-- ✅ Облікові записи зберігання, Cosmos DB, Key Vault  
-- ✅ Моніторинг Application Insights  
+- ✅ Microsoft Foundry Models (3 регіони: gpt-4.1, gpt-4.1-mini, ембеддінги)  
+- ✅ Сервіс AI Search (порожній, потрібна конфігурація індексу)  
+- ✅ Container Apps середовище (заглушки образів)  
+- ✅ Сховища, Cosmos DB, Key Vault  
+- ✅ Моніторинг через Application Insights  
 
-**Що відсутнє:**  
-- ❌ Код реалізації агентів  
-- ❌ Логіка маршрутизації  
+**Чого немає:**  
+- ❌ Коду реалізації агентів  
+- ❌ Логіки маршрутизації  
 - ❌ Фронтенд UI  
-- ❌ Схема індексу пошуку  
-- ❌ Конвеєри даних  
+- ❌ Схема пошукового індексу  
+- ❌ Канали обробки даних  
 
 ### Фаза 3: Розробка застосунку (80-120 годин)
 
-**Мета:** Реалізувати систему багатьох агентів відповідно до цієї архітектури
+**Мета:** Реалізувати багатоагентну систему за цією архітектурою
 
 1. **Реалізація агентів** (30-40 годин)  
-   - Базовий клас агента та інтерфейси  
-   - Агент служби підтримки з GPT-4o  
-   - Агент запасів з GPT-4o-mini  
+   - Базовий клас та інтерфейси агента  
+   - Агент служби підтримки з gpt-4.1  
+   - Агент управління запасами з gpt-4.1-mini  
    - Інтеграції інструментів (AI Search, Bing, обробка файлів)  
 
 2. **Сервіс маршрутизації** (12-16 годин)  
    - Логіка класифікації запитів  
-   - Вибір агента та оркестрація  
+   - Вибір і оркестрація агентів  
    - Backend на FastAPI/Express  
 
 3. **Розробка фронтенду** (20-30 годин)  
    - Інтерфейс чату  
-   - Функціонал завантаження файлів  
+   - Завантаження файлів  
    - Відображення відповідей  
 
-4. **Конвеєр даних** (8-12 годин)  
+4. **Канали обробки даних** (8-12 годин)  
    - Створення індексу AI Search  
-   - Обробка документів з Document Intelligence  
-   - Генерація embeddings та індексація  
+   - Обробка документів із Document Intelligence  
+   - Генерація ембеддінгів та індексація  
 
 5. **Моніторинг та оцінка** (10-15 годин)  
-   - Власна телеметрія  
+   - Реалізація кастомної телеметрії  
    - Фреймворк оцінки агентів  
-   - Сканер безпеки "червона команда"  
+   - Security сканер red team  
 
 ### Фаза 4: Розгортання та тестування (8-12 годин)
 
-- Створення образів Docker для всіх сервісів  
-- Завантаження в Azure Container Registry  
-- Оновлення Container Apps з робочими образами  
-- Конфігурація змінних середовища та секретів  
-- Запуск тестового набору оцінювання  
-- Проведення перевірки безпеки  
+- Збірка Docker образів усіх сервісів  
+- Публікація в Azure Container Registry  
+- Оновлення Container Apps реальними образами  
+- Налаштування змінних середовища і секретів  
+- Запуск тестів оцінки  
+- Проведення сканування безпеки  
 
-**Загальні орієнтовні витрати часу:** 80-120 годин для досвідчених розробників
+**Загальна орієнтовна тривалість:** 80-120 годин для досвідчених розробників  
 
 ## Архітектура рішення
 
@@ -139,31 +139,31 @@ cd retail-multiagent-arm-template
 ```mermaid
 graph TB
     User[👤 Клієнт] --> LB[Azure Front Door]
-    LB --> WebApp[Веб інтерфейс<br/>Контейнерний додаток]
+    LB --> WebApp[Веб-фронтенд<br/>Контейнерний додаток]
     
-    WebApp --> Router[Роутер агентів<br/>Контейнерний додаток]
+    WebApp --> Router[Маршрутизатор агента<br/>Контейнерний додаток]
     Router --> CustomerAgent[Агент клієнта<br/>Обслуговування клієнтів]
-    Router --> InvAgent[Агент інвентаризації<br/>Управління запасами]
+    Router --> InvAgent[Агент інвентарю<br/>Управління запасами]
     
-    CustomerAgent --> OpenAI1[Azure OpenAI<br/>GPT-4o<br/>Схід США 2]
-    InvAgent --> OpenAI2[Azure OpenAI<br/>GPT-4o-mini<br/>Захід США 2]
+    CustomerAgent --> OpenAI1[Моделі Microsoft Foundry<br/>gpt-4.1<br/>East US 2]
+    InvAgent --> OpenAI2[Моделі Microsoft Foundry<br/>gpt-4.1-mini<br/>West US 2]
     
-    CustomerAgent --> AISearch[Azure AI Search<br/>Каталог продукції]
+    CustomerAgent --> AISearch[Azure AI Пошук<br/>Каталог продукції]
     CustomerAgent --> BingSearch[Bing Search API<br/>Інформація в реальному часі]
     InvAgent --> AISearch
     
-    AISearch --> Storage[Azure Storage<br/>Документи та файли]
-    Storage --> DocIntel[Інтелект документів<br/>Обробка вмісту]
+    AISearch --> Storage[Azure Storage<br/>Документи і файли]
+    Storage --> DocIntel[Інтелект документів<br/>Обробка контенту]
     
-    OpenAI1 --> Embeddings[Текстові вбудовування<br/>ada-002<br/>Франція Центр]
+    OpenAI1 --> Embeddings[Текстові вбудовування<br/>ada-002<br/>France Central]
     OpenAI2 --> Embeddings
     
     Router --> AppInsights[Application Insights<br/>Моніторинг]
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[Оцінювач GPT-4o<br/>Північ Швейцарії] --> Evaluation[Рамки оцінювання]
-    RedTeam[Сканер червоної команди] --> SecurityReports[Звіти про безпеку]
+    GraderModel[gpt-4.1 Оцінювач<br/>Switzerland North] --> Evaluation[Оцінювальна платформа]
+    RedTeam[Red Team Сканер] --> SecurityReports[Звіти про безпеку]
     
     subgraph "Шар даних"
         Storage
@@ -171,7 +171,7 @@ graph TB
         CosmosDB[Cosmos DB<br/>Історія чатів]
     end
     
-    subgraph "AI сервіси"
+    subgraph "AI Сервіси"
         OpenAI1
         OpenAI2
         Embeddings
@@ -180,10 +180,10 @@ graph TB
         BingSearch
     end
     
-    subgraph "Моніторинг та безпека"
+    subgraph "Моніторинг і безпека"
         AppInsights
-        LogAnalytics[Простір Log Analytics]
-        KeyVault[Azure Key Vault<br/>Секрети та конфігурації]
+        LogAnalytics[Log Analytics Робочий простір]
+        KeyVault[Azure Key Vault<br/>Секрети і конфігурації]
         RedTeam
         Evaluation
     end
@@ -199,23 +199,23 @@ graph TB
 ```  
 ### Огляд компонентів
 
-| Компонент | Призначення | Технологія | Регіон |  
-|-----------|-------------|------------|---------|  
-| **Веб-фронтенд** | Інтерфейс користувача для взаємодії | Container Apps | Основний регіон |  
-| **Маршрутизатор агентів** | Направляє запити до відповідного агента | Container Apps | Основний регіон |  
-| **Агент підтримки клієнтів** | Обробка запитів служби підтримки | Container Apps + GPT-4o | Основний регіон |  
-| **Агент запасів** | Керує запасами та виконанням | Container Apps + GPT-4o-mini | Основний регіон |  
-| **Azure OpenAI** | Інференс LLM для агентів | Cognitive Services | Багаторегіонально |  
-| **AI Search** | Векторний пошук і RAG | AI Search Service | Основний регіон |  
-| **Обліковий запис зберігання** | Завантаження файлів і документи | Blob Storage | Основний регіон |  
-| **Application Insights** | Моніторинг і телеметрія | Monitor | Основний регіон |  
-| **Grader Model** | Система оцінки агентів | Azure OpenAI | Вторинний регіон |  
+| Компонент                  | Призначення                              | Технологія          | Регіон         |
+|----------------------------|-----------------------------------------|---------------------|----------------|
+| **Веб-фронтенд**           | Інтерфейс користувача для взаємодії     | Container Apps      | Основний       |
+| **Маршрутизатор агентів**  | Направляє запити до відповідного агента| Container Apps      | Основний       |
+| **Агент підтримки клієнтів**| Обробка запитів служби підтримки       | Container Apps + gpt-4.1 | Основний       |
+| **Агент управління запасами**| Керує запасами і виконанням замовлень  | Container Apps + gpt-4.1-mini | Основний  |
+| **Microsoft Foundry Models**| Імплементація глибокого навчання        | Cognitive Services  | Багаторегіонально|
+| **AI Search**              | Векторний пошук і RAG                   | AI Search Service   | Основний       |
+| **Обліковий запис сховища**| Завантаження файлів та документів       | Blob Storage        | Основний       |
+| **Application Insights**   | Моніторинг і телеметрія                  | Monitor             | Основний       |
+| **Модель Grader**          | Система оцінювання агентів               | Microsoft Foundry Models | Вторинний      |
 
 ## 📁 Структура проєкту
 
-> **📍 Легенда статусу:**  
+> **📍 Легенда статусів:**  
 > ✅ = Існує в репозиторії  
-> 📝 = Приклад реалізації (код в цьому документі)  
+> 📝 = Приклад реалізації (код у цьому документі)  
 > 🔨 = Потрібно створити  
 
 ```
@@ -235,7 +235,7 @@ retail-multiagent-solution/              🔨 Your project directory
 │   ├── main.bicep                      🔨 Main Bicep template (optional, ARM exists)
 │   ├── main.parameters.json            🔨 Parameters file
 │   ├── modules/                        📝 Bicep modules (reference examples below)
-│   │   ├── ai-services.bicep           📝 Azure OpenAI deployments
+│   │   ├── ai-services.bicep           📝 Microsoft Foundry Models deployments
 │   │   ├── search.bicep                📝 AI Search configuration
 │   │   ├── storage.bicep               📝 Storage accounts
 │   │   ├── container-apps.bicep        📝 Container Apps environment
@@ -365,9 +365,9 @@ retail-multiagent-solution/              🔨 Your project directory
 
 ## 🚀 Швидкий старт: що можна зробити прямо зараз
 
-### Варіант 1: Лише розгортання інфраструктури (30 хвилин)
+### Варіант 1: Розгорнути тільки інфраструктуру (30 хвилин)
 
-**Що отримаєте:** Всі сервіси Azure готові до розробки
+**Що отримаєте:** усі сервіси Azure готові до розробки  
 
 ```bash
 # Клонувати репозиторій
@@ -382,60 +382,60 @@ az resource list --resource-group myResourceGroup --output table
 ```
   
 **Очікуваний результат:**  
-- ✅ Розгорнуті служби Azure OpenAI (3 регіони)  
-- ✅ Створений сервіс AI Search (порожній)  
+- ✅ Розгорнуто служби Microsoft Foundry Models (3 регіони)  
+- ✅ Створено сервіс AI Search (порожній)  
 - ✅ Готове середовище Container Apps  
 - ✅ Налаштовані Storage, Cosmos DB, Key Vault  
-- ❌ Робочі агенти відсутні (тільки інфраструктура)  
+- ❌ Агентів поки немає (тільки інфраструктура)  
 
 ### Варіант 2: Вивчення архітектури (2-3 години)
 
-**Що отримаєте:** Глибоке розуміння патернів багатьох агентів
+**Що отримаєте:** глибоке розуміння багатоагентних патернів
 
 1. Прочитати цей документ повністю  
-2. Ознайомитись з прикладами коду для кожного компонента  
-3. Зрозуміти проектні рішення та компроміси  
-4. Вивчити стратегії оптимізації вартості  
-5. Спланувати підхід до імплементації  
+2. Ознайомитися з прикладами коду для кожного компонента  
+3. Зрозуміти дизайнерські рішення і компроміси  
+4. Вивчити стратегії оптимізації витрат  
+5. Спланувати підхід до реалізації  
 
 **Очікуваний результат:**  
-- ✅ Чітка ментальна модель архітектури системи  
+- ✅ Чітка модель системної архітектури  
 - ✅ Розуміння необхідних компонентів  
-- ✅ Реалістичні оцінки зусиль  
-- ✅ План імплементації  
+- ✅ Реалістична оцінка зусиль  
+- ✅ План реалізації  
 
-### Варіант 3: Створення повної системи (80-120 годин)
+### Варіант 3: Побудувати повну систему (80-120 годин)
 
-**Що отримаєте:** Виробнича багатокористувацька система
+**Що отримаєте:** продукт для запуску в продакшн із багатоагентною архітектурою
 
-1. **Фаза 1:** Розгортання інфраструктури (виконано вище)  
-2. **Фаза 2:** Реалізація агентів за прикладами (30-40 годин)  
-3. **Фаза 3:** Побудова сервісу маршрутизації (12-16 годин)  
-4. **Фаза 4:** Створення фронтенду (20-30 годин)  
-5. **Фаза 5:** Налаштування конвеєрів даних (8-12 годин)  
+1. **Фаза 1:** Розгортання інфраструктури (описано вище)  
+2. **Фаза 2:** Реалізація агентів за прикладами знизу (30-40 годин)  
+3. **Фаза 3:** Розробка сервісу маршрутизації (12-16 годин)  
+4. **Фаза 4:** Створення фронтенд UI (20-30 годин)  
+5. **Фаза 5:** Налаштування обробки даних (8-12 годин)  
 6. **Фаза 6:** Додавання моніторингу та оцінки (10-15 годин)  
 
 **Очікуваний результат:**  
-- ✅ Повністю функціональна система багатьох агентів  
-- ✅ Виробничий моніторинг  
-- ✅ Валідація безпеки  
-- ✅ Оптимізоване з точки зору вартості розгортання  
+- ✅ Повністю функціональна багатоагентна система  
+- ✅ Моніторинг виробничого рівня  
+- ✅ Перевірка безпеки  
+- ✅ Оптимізоване за вартістю розгорнення  
 
 ---
 
-## 📚 Архітектурний референс та керівництво з імплементації
+## 📚 Довідник архітектури та посібник з реалізації
 
-Наступні розділи надають детальні шаблони архітектури, приклади конфігурації та код для допомоги в імплементації.
+У наступних розділах надані детальні шаблони архітектури, приклади конфігурацій та коду для вашої реалізації.
 
 ## Початкові вимоги до конфігурації
 
-### 1. Кілька агентів та конфігурація
+### 1. Кілька агентів і конфігурація
 
-**Мета**: Розгорнути 2 спеціалізованих агенти - "Агент підтримки" (обслуговування клієнтів) та "Запаси" (управління запасами)
+**Мета:** Розгорнути 2 спеціалізовані агенти – "Customer Agent" (підтримка клієнтів) і "Inventory Agent" (керування запасами)
 
-> **📝 Примітка:** azure.yaml та Bicep-конфігурації нижче - **приклади**, що показують структуру багатокористувацького розгортання. Вам потрібно створити ці файли та реалізації агентів.
+> **📝 Примітка:** azure.yaml та Bicep конфігурації, наведені нижче, є **референсними прикладами**, що показують структуру багатоагентного розгортання. Вам потрібно створити ці файли й відповідний код агентів.
 
-#### Кроки з конфігурації:
+#### Кроки конфігурації:
 
 ```yaml
 # azure.yaml - Agent Configuration
@@ -450,7 +450,7 @@ services:
             "name": "Customer",
             "role": "Customer Service Representative",
             "description": "Handles general customer inquiries, returns, and support",
-            "model": "gpt-4o",
+            "model": "gpt-4.1",
             "temperature": 0.7,
             "max_tokens": 500,
             "tools": ["search", "file_retrieval", "bing_search"]
@@ -459,7 +459,7 @@ services:
             "name": "Inventory",
             "role": "Inventory Management Specialist", 
             "description": "Manages stock levels, product availability, and fulfillment",
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-mini",
             "temperature": 0.3,
             "max_tokens": 300,
             "tools": ["search", "database_query"]
@@ -474,12 +474,12 @@ services:
 param agentsConfig object = {
   customer: {
     name: 'Customer'
-    model: 'gpt-4o'
+    model: 'gpt-4.1'
     capacity: 20
   }
   inventory: {
     name: 'Inventory'
-    model: 'gpt-4o-mini'
+    model: 'gpt-4.1-mini'
     capacity: 10
   }
 }
@@ -507,9 +507,9 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 }]
 ```
   
-### 2. Кілька моделей з плануванням потужностей
+### 2. Кілька моделей із плануванням потужності
 
-**Мета**: Розгорнути модель для чату (підтримка), модель ембеддінгів (пошук) та модель оцінки (grader) з керуванням квотами
+**Мета:** Розгорнути чат-модель (підтримка), модель ембеддінгів (пошук) і модель оцінювання (grader) з коректним контролем квот
 
 #### Стратегія багаторегіонального розгортання:
 
@@ -517,7 +517,7 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 // infra/models.bicep
 param modelDeployments array = [
   {
-    name: 'gpt-4o'
+    name: 'gpt-4.1'
     region: 'eastus2'
     capacity: 20
     usage: 'chat'
@@ -531,7 +531,7 @@ param modelDeployments array = [
     priority: 'medium'
   }
   {
-    name: 'gpt-4o'
+    name: 'gpt-4.1'
     region: 'francecentral'
     capacity: 15
     usage: 'grading'
@@ -546,7 +546,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
   properties: {
     scriptContent: '''
       #!/bin/bash
-      for model in "gpt-4o" "text-embedding-ada-002"; do
+      for model in "gpt-4.1" "text-embedding-ada-002"; do
         available=$(az cognitiveservices usage list --location ${location} --query "[?name.value=='$model'].{current:currentValue,limit:limit}" -o tsv)
         echo "Model: $model, Available capacity: $available"
       done
@@ -555,18 +555,18 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
 }
 ```
   
-#### Конфігурація резервного регіону:
+#### Конфігурація fallback для регіонів:
 
 ```yaml
 # .azure/env/.env.production
 AZURE_OPENAI_REGIONS='["eastus2", "westus2", "francecentral"]'
 AZURE_OPENAI_FALLBACK_ENABLED=true
-MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
+MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 ```
   
 ### 3. AI Search з налаштуванням індексу даних
 
-**Мета**: Налаштувати AI Search для оновлення даних та автоматичного індексування
+**Мета:** Налаштувати AI Search для оновлення даних та автоматизованої індексації
 
 #### Хук перед розгортанням:
 
@@ -576,7 +576,7 @@ MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 
 echo "Setting up AI Search configuration..."
 
-# Створити службу пошуку з певним SKU
+# Створити пошуковий сервіс з певним SKU
 az search service create \
   --name "$AZURE_SEARCH_SERVICE_NAME" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -593,7 +593,7 @@ az search service create \
 
 echo "Configuring AI Search indexes and uploading initial data..."
 
-# Отримати ключ сервісу пошуку
+# Отримати ключ пошукової служби
 SEARCH_KEY=$(az search admin-key show --service-name "$AZURE_SEARCH_SERVICE_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query primaryKey -o tsv)
 
 # Створити схему індексу
@@ -634,11 +634,11 @@ python ./scripts/upload_search_data.py \
 }
 ```
   
-### 4. Конфігурація інструментів агента для AI Search
+### 4. Інструмент AI Search для агента
 
-**Мета**: Налаштувати агентів для використання AI Search як інструменту джерела знань
+**Мета:** Налаштувати агентів для використання AI Search як базового інструменту
 
-#### Реалізація інструменту пошуку агента:
+#### Реалізація пошукового інструменту агента:
 
 ```python
 # src/agents/tools/search_tool.py
@@ -682,7 +682,7 @@ class SearchTool:
         return [doc async for doc in results]
 ```
   
-#### Інтеграція агентів:
+#### Інтеграція агента:
 
 ```python
 # src/agents/customer_agent.py
@@ -695,15 +695,15 @@ class CustomerAgent:
         self.search_tool = search_tool
         
     async def process_query(self, user_query: str) -> str:
-        # Спочатку знайдіть відповідний контекст
+        # Спершу знайдіть відповідний контекст
         search_results = await self.search_tool.search_products(user_query)
         
         # Підготуйте контекст для LLM
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # Згенеруйте відповідь із прив’язкою до даних
+        # Згенеруйте відповідь із підґрунтям
         response = await self.openai_client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4.1",
             messages=[
                 {"role": "system", "content": f"You are Customer, a helpful customer service agent. Use this context to answer questions: {context}"},
                 {"role": "user", "content": user_query}
@@ -713,9 +713,9 @@ class CustomerAgent:
         return response.choices[0].message.content
 ```
   
-### 5. Інтеграція зберігання файлів для завантажень
+### 5. Інтеграція зберігання для завантаження файлів
 
-**Мета**: Дозволити агентам опрацьовувати завантажені файли (керівництва, документи) для контексту RAG
+**Мета:** Дозволити агентам обробляти завантажені файли (інструкції, документи) для контексту RAG
 
 #### Конфігурація сховища:
 
@@ -756,7 +756,7 @@ resource eventGridTopic 'Microsoft.EventGrid/topics@2023-12-15-preview' = {
 }
 ```
   
-#### Конвеєр обробки документів:
+#### Канал обробки документів:
 
 ```python
 # src/document_processor.py
@@ -796,7 +796,7 @@ class DocumentProcessor:
             for line in page.lines:
                 text_content += line.content + "\n"
         
-        # Згенерувати вбудовування
+        # Створити вбудовування
         embedding_response = await self.openai_client.embeddings.create(
             model="text-embedding-ada-002",
             input=text_content
@@ -816,9 +816,9 @@ class DocumentProcessor:
   
 ### 6. Інтеграція Bing Search
 
-**Мета**: Додати можливості пошуку Bing для інформації в реальному часі
+**Мета:** Додати можливості пошуку Bing для інформації в реальному часі
 
-#### Додавання ресурсу у Bicep:
+#### Додавання ресурсу Bicep:
 
 ```bicep
 // infra/bing-search.bicep
@@ -836,7 +836,7 @@ output bingSearchKey string = bingSearchService.listKeys().key1
 output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 ```
   
-#### Інструмент Bing Search:
+#### Пошуковий інструмент Bing:
 
 ```python
 # src/agents/tools/bing_search_tool.py
@@ -884,7 +884,7 @@ class BingSearchTool:
 
 ### 7. Трасування та Application Insights
 
-**Мета**: Комплексний моніторинг із логами трасування та Application Insights
+**Мета:** Всебічний моніторинг із логами трасування та Application Insights
 
 #### Конфігурація Application Insights:
 
@@ -939,7 +939,7 @@ resource agentPerformanceAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
   
-#### Впровадження власної телеметрії:
+#### Власна реалізація телеметрії:
 
 ```python
 # src/telemetry/agent_telemetry.py
@@ -984,7 +984,7 @@ class AgentTelemetry:
         """Track search operation performance"""
         properties = {
             'search_type': search_type,
-            'query': query[:100],  # Обрізати для конфіденційності
+            'query': query[:100],  # Обрізати заради конфіденційності
             'results_found': str(results_count > 0)
         }
         
@@ -1045,11 +1045,11 @@ class AgentTelemetry:
         return len(text) // 4
 ```
   
-### 8. Валідація безпеки "червона команда"
+### 8. Валідація безпеки red team
 
-**Мета**: Автоматизоване тестування безпеки агентів та моделей
+**Мета:** Автоматизоване тестування безпеки для агентів і моделей
 
-#### Конфігурація червоної команди:
+#### Конфігурація red teaming:
 
 ```python
 # src/security/red_team_scanner.py
@@ -1097,7 +1097,7 @@ class RedTeamScanner:
                     'details': strategy_result['details']
                 })
         
-        # Обчислити загальний рейтинг безпеки
+        # Обчислити загальний бал безпеки
         scan_results['overall_score'] = self._calculate_security_score(scan_results)
         
         return scan_results
@@ -1165,7 +1165,7 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # Реалізація передбачала б відправку HTTP-запиту до кінцевої точки агента
+        # Реалізація надішле HTTP-запит до кінцевої точки агента
         # Для демонстраційних цілей повертається заповнювач
         import aiohttp
         
@@ -1230,7 +1230,7 @@ class RedTeamScanner:
         vulnerability_ratio = vulnerabilities / total_strategies
         base_score = max(0, 100 - (vulnerability_ratio * 100))
         
-        # Зменшити рейтинг залежно від серйозності
+        # Зменшити бал залежно від рівня серйозності
         severity_penalty = 0
         for vuln in scan_results['vulnerabilities_found']:
             severity_weights = {'low': 5, 'medium': 15, 'high': 30, 'critical': 50}
@@ -1240,7 +1240,7 @@ class RedTeamScanner:
         return round(final_score, 2)
 ```
   
-#### Автоматизований конвеєр безпеки:
+#### Автоматизований pipeline безпеки:
 
 ```bash
 #!/bin/bash
@@ -1254,7 +1254,7 @@ AGENT_ENDPOINT=$(az containerapp show \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# Запустити сканування безпеки
+# Запустити безпекове сканування
 python -m src.security.red_team_scanner \
   --endpoint "https://$AGENT_ENDPOINT" \
   --api-key "$AGENT_API_KEY" \
@@ -1264,16 +1264,16 @@ python -m src.security.red_team_scanner \
 echo "Security scan completed. Check security_reports/ for results."
 ```
   
-### 9. Оцінка агентів з моделлю Grader
+### 9. Оцінка агентів із моделлю Grader
 
-**Мета**: Розгорнути систему оцінювання з виділеною моделлю grader
+**Мета:** Розгорнути систему оцінювання з виділеною моделлю grader
 
-#### Конфігурація моделі grader:
+#### Конфігурація моделі Grader:
 
 ```bicep
 // infra/evaluation.bicep
 param graderModelConfig object = {
-  name: 'gpt-4o'
+  name: 'gpt-4.1'
   version: '2024-11-20'
   capacity: 30
   region: 'switzerlandnorth'  // Different region for separation
@@ -1296,7 +1296,7 @@ resource graderOpenAI 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
 
 resource graderDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: graderOpenAI
-  name: 'gpt-4o-grader'
+  name: 'gpt-4.1-grader'
   properties: {
     model: {
       format: 'OpenAI'
@@ -1341,7 +1341,7 @@ class AgentEvaluator:
             case_result = await self._evaluate_single_case(test_case)
             evaluation_results['results'].append(case_result)
         
-        # Обчислити підсумкові метрики
+        # Обчислити зведені метрики
         evaluation_results['summary'] = self._calculate_summary(evaluation_results['results'])
         
         return evaluation_results
@@ -1416,7 +1416,7 @@ class AgentEvaluator:
         
         try:
             grader_response = await self.grader_client.chat.completions.create(
-                model="gpt-4o-grader",
+                model="gpt-4.1-grader",
                 messages=[
                     {"role": "system", "content": "You are an expert AI evaluation assistant. Always respond with valid JSON."},
                     {"role": "user", "content": grading_prompt}
@@ -1425,7 +1425,7 @@ class AgentEvaluator:
                 max_tokens=500
             )
             
-            # Розпарсити JSON-відповідь
+            # Розібрати JSON-відповідь
             grading_text = grader_response.choices[0].message.content
             grading_result = json.loads(grading_text)
             
@@ -1487,7 +1487,7 @@ class AgentEvaluator:
         return summary
 ```
   
-#### Конфігурація тестових кейсів:
+#### Конфігурація тестових випадків:
 
 ```json
 // tests/evaluation_test_cases.json
@@ -1528,9 +1528,9 @@ class AgentEvaluator:
 
 ## Налаштування та оновлення
 
-### 10. Налаштування Container App
+### 10. Кастомізація Container App
 
-**Мета**: Оновити конфігурацію container app та замінити на кастомний UI
+**Мета:** Оновити налаштування контейнерів та замінити на кастомний UI
 
 #### Динамічна конфігурація:
 
@@ -1548,7 +1548,7 @@ services:
       CUSTOM_LOGO_URL: ${LOGO_URL}
 ```
   
-#### Кастомна збірка фронтенду:
+#### Збірка кастомного фронтенда:
 
 ```dockerfile
 # src/frontend/Dockerfile
@@ -1575,7 +1575,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 ```
   
-#### Скрипт збірки та розгортання:
+#### Скрипт збірки та деплою:
 
 ```bash
 #!/bin/bash
@@ -1583,7 +1583,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# Побудова користувацького образу з змінними оточення
+# Створити власний образ з змінними середовища
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1591,13 +1591,13 @@ docker build \
   -t retail-frontend:latest \
   ./src/frontend
 
-# Відправка в реєстр контейнерів Azure
+# Надіслати до Azure Container Registry
 az acr build \
   --registry "$AZURE_CONTAINER_REGISTRY" \
   --image "retail-frontend:latest" \
   ./src/frontend
 
-# Оновлення контейнерного додатку
+# Оновити контейнерний додаток
 az containerapp update \
   --name "retail-frontend" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1614,11 +1614,11 @@ echo "Frontend deployed successfully!"
 
 #### 1. Ліміти квот Container Apps
 
-**Проблема:** Розгортання не вдається через регіональні обмеження квот
+**Проблема:** Збій розгортання через ліміти квот у регіоні
 
 **Рішення:**  
 ```bash
-# Перевірити поточне використання квоти
+# Перевірте поточне використання квоти
 az containerapp env show \
   --name "$CONTAINER_APPS_ENVIRONMENT" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -1635,9 +1635,9 @@ az support tickets create \
   --description "Request quota increase for Container Apps in region X"
 ```
   
-#### 2. Прострочене розгортання моделі
+#### 2. Закінчення терміну дії розгортання моделі
 
-**Проблема:** Розгортання моделі не вдається через прострочену версію API
+**Проблема:** Розгортання не вдалося через прострочену версію API
 
 **Рішення:**  
 ```python
@@ -1647,11 +1647,11 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # Це викликатиме API Azure OpenAI для отримання поточних версій
+    # Це виконає виклик API Microsoft Foundry Models, щоб отримати поточні версії
     latest_versions = {
-        "gpt-4o": "2024-11-20",
+        "gpt-4.1": "2024-11-20",
         "text-embedding-ada-002": "2", 
-        "gpt-4o-mini": "2024-07-18"
+        "gpt-4.1-mini": "2024-07-18"
     }
     
     print("Latest model versions:")
@@ -1669,7 +1669,7 @@ def update_bicep_templates(latest_versions):
         content = f.read()
     
     for model, version in latest_versions.items():
-        # Оновити версію в шаблоні
+        # Оновити версію у шаблоні
         old_pattern = f"version: '[^']*'  // {model}"
         new_pattern = f"version: '{version}'  // {model}"
         content = content.replace(old_pattern, new_pattern)
@@ -1684,9 +1684,9 @@ if __name__ == "__main__":
     update_bicep_templates(versions)
 ```
   
-#### 3. Інтеграція донастроювання моделей
+#### 3. Інтеграція тонкого налаштування (fine-tuning)
 
-**Проблема:** Як інтегрувати навчання з підгонкою в розгортання AZD
+**Проблема:** Як інтегрувати тонко налаштовані моделі у розгортання через AZD
 
 **Рішення:**  
 ```python
@@ -1698,7 +1698,7 @@ class FineTuningPipeline:
     def __init__(self, openai_client: AsyncOpenAI):
         self.client = openai_client
     
-    async def start_fine_tuning_job(self, training_file_id: str, model: str = "gpt-4o-mini"):
+    async def start_fine_tuning_job(self, training_file_id: str, model: str = "gpt-4.1-mini"):
         """Start a fine-tuning job"""
         job = await self.client.fine_tuning.jobs.create(
             training_file=training_file_id,
@@ -1740,9 +1740,9 @@ class FineTuningPipeline:
 
 ### Часті запитання
 
-#### Питання: Чи є простий спосіб розгорнути кілька агентів (патерн)?
+#### П: Чи є простий спосіб розгорнути кілька агентів (патрерн дизайну)?
 
-**Відповідь: Так! Використовуйте патерн мульті-агента:**  
+**В:** Так! Використовуйте патерн Multi-Agent:  
 
 ```yaml
 # azure.yaml - Multi-Agent Configuration
@@ -1753,23 +1753,23 @@ services:
     config:
       AGENTS: |
         {
-          "customer": {"type": "customer_service", "model": "gpt-4o", "capacity": 20},
-          "inventory": {"type": "inventory_management", "model": "gpt-4o-mini", "capacity": 10},
-          "returns": {"type": "returns_processing", "model": "gpt-4o-mini", "capacity": 5}
+          "customer": {"type": "customer_service", "model": "gpt-4.1", "capacity": 20},
+          "inventory": {"type": "inventory_management", "model": "gpt-4.1-mini", "capacity": 10},
+          "returns": {"type": "returns_processing", "model": "gpt-4.1-mini", "capacity": 5}
         }
 ```
   
-#### Питання: Чи можна розгорнути "маршрутизатор моделей" як модель (з урахуванням вартості)?
+#### П: Чи можна розгорнути "model router" як модель (які витрати)?
 
-**Відповідь: Так, з обережністю:**  
+**В:** Так, з обережністю:  
 
 ```python
 # Реалізація маршрутизатора моделі
 class ModelRouter:
     def __init__(self):
         self.routing_rules = {
-            "simple_queries": {"model": "gpt-4o-mini", "cost_per_1k": 0.00015},
-            "complex_reasoning": {"model": "gpt-4o", "cost_per_1k": 0.03},
+            "simple_queries": {"model": "gpt-4.1-mini", "cost_per_1k": 0.00015},
+            "complex_reasoning": {"model": "gpt-4.1", "cost_per_1k": 0.03},
             "embeddings": {"model": "text-embedding-ada-002", "cost_per_1k": 0.0001}
         }
     
@@ -1788,32 +1788,32 @@ class ModelRouter:
         pass
 ```
   
-**Вплив на вартість:**  
-- **Економія:** 60-80% зниження вартості для простих запитів  
-- **Компроміси:** Невелике збільшення затримки логіки маршрутизації  
-- **Моніторинг:** Відстеження точності проти вартості  
+**Вартість:**  
+- **Збереження**: зниження вартості на 60-80% для простих запитів  
+- **Компроміси**: трохи більша затримка через логіку маршрутизації  
+- **Моніторинг:** відстежуйте точність та вартість  
 
-#### Питання: Чи можу я ініціювати донастроювання моделі з azd шаблону?
+#### П: Чи можна почати задачу тонкого налаштування з шаблону azd?
 
-**Відповідь: Так, використовуючи хуки після розгортання:**  
+**В:** Так, за допомогою post-provisioning hook:  
 
 ```bash
 #!/bin/bash
-# hooks/postprovision.sh - Налаштування інтеграції
+# hooks/postprovision.sh - інтеграція тонкого налаштування
 
 echo "Starting fine-tuning pipeline..."
 
-# Завантаження навчальних даних
+# Завантажити навчальні дані
 TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
 
-# Запуск завдання тонкого налаштування
+# Запустити завдання тонкого налаштування
 FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
-  --model "gpt-4o-mini")
+  --model "gpt-4.1-mini")
 
-# Збереження ID завдання для моніторингу
+# Зберегти ID завдання для моніторингу
 echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
 
 echo "Fine-tuning job started: $FINE_TUNE_JOB_ID"
@@ -1858,7 +1858,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
   
-#### Фреймворк оптимізації вартості
+#### Фреймворк оптимізації витрат
 
 ```python
 # src/optimization/cost_optimizer.py
@@ -1882,7 +1882,7 @@ class CostOptimizer:
                     'estimated_savings': usage['monthly_cost'] * 0.3
                 })
         
-        # Аналіз пікового часу
+        # Аналіз пікових годин
         peak_patterns = self.analytics.get_peak_patterns()
         if peak_patterns['variance'] > 0.6:
             recommendations.append({
@@ -1903,65 +1903,65 @@ class CostOptimizer:
 ```
   
 ---
-## ✅ Шаблон ARM для готового до розгортання
+## ✅ ARM шаблон готовий до розгортання
 
-> **✨ ЦЕ СПРАВЖНЄ І ПРАЦЮЄ!**  
-> На відміну від концептуальних прикладів коду вище, ARM-шаблон — це **реальне, робоче розгортання інфраструктури**, включене у цей репозиторій.
+> **✨ ЦЕ НАСПРАВДІ ІСНУЄ ТА ПРАЦЮЄ!**  
+> На відміну від концептуальних прикладів коду вище, ARM шаблон є **реальним, робочим розгортанням інфраструктури**, включеним у цей репозиторій.
 
-### Що цей шаблон фактично робить
+### Що цей шаблон насправді робить
 
-ARM-шаблон за адресою [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) створює **всю інфраструктуру Azure**, потрібну для багатоагентної системи. Це **єдиний готовий до запуску компонент** — усе інше потребує розробки.
+ARM шаблон у каталозі [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) забезпечує **всю необхідну інфраструктуру Azure** для мультіагентної системи. Це **єдиний готовий до запуску компонент** – все інше потребує розробки.
 
-### Що включено у ARM-шаблон
+### Що включено у ARM шаблон
 
-ARM-шаблон, розташований у [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template), включає:
+ARM шаблон, розташований у [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template), містить:
 
 #### **Повна інфраструктура**
-- ✅ **Багаторегіональні розгортання Azure OpenAI** (GPT-4o, GPT-4o-mini, embeddings, grader)
-- ✅ **Azure AI Search** із можливістю векторного пошуку
-- ✅ **Azure Storage** із контейнерами для документів і завантажень
-- ✅ **Оточення Container Apps** з автоматичним масштабуванням
-- ✅ **Agent Router & Frontend** контейнерні додатки
-- ✅ **Cosmos DB** для збереження історії чату
-- ✅ **Application Insights** для комплексного моніторингу
-- ✅ **Key Vault** для безпечного керування секретами
+- ✅ **Розгортання Microsoft Foundry Models у кількох регіонах** (gpt-4.1, gpt-4.1-mini, embeddings, grader)
+- ✅ **Azure AI Search** з можливістю векторного пошуку
+- ✅ **Azure Storage** з контейнерами для документів і завантажень
+- ✅ **Container Apps Environment** з автозмасштабуванням
+- ✅ **Agent Router & Frontend** у вигляді контейнерних додатків
+- ✅ **Cosmos DB** для збереження історії чатів
+- ✅ **Application Insights** для повного моніторингу
+- ✅ **Key Vault** для безпечного управління секретами
 - ✅ **Document Intelligence** для обробки файлів
-- ✅ **Bing Search API** для інформації в реальному часі
+- ✅ **Bing Search API** для отримання інформації в режимі реального часу
 
 #### **Режими розгортання**
-| Режим | Випадок використання | Ресурси | Орієнтовна вартість/місяць |
-|------|----------|-----------|---------------------|
-| **Мінімальний** | Розробка, тестування | Базові SKU, один регіон | $100-370 |
-| **Стандартний** | Продуктивність, середній масштаб | Стандартні SKU, багаторегіональний | $420-1,450 |
-| **Преміум** | Підприємство, великий масштаб | Преміум SKU, HA налаштування | $1,150-3,500 |
+| Режим | Використання | Ресурси | Оціночна вартість/місяць |
+|-------|--------------|---------|--------------------------|
+| **Мінімальний** | Розробка, Тестування | Базові SKU, один регіон | $100-370 |
+| **Стандартний** | Продакшен, Середній масштаб | Стандартні SKU, кілька регіонів | $420-1,450 |
+| **Преміумний** | Підприємство, Високий масштаб | Преміумні SKU, HA-налаштування | $1,150-3,500 |
 
-### 🎯 Опції швидкого розгортання
+### 🎯 Швидкі варіанти розгортання
 
-#### Варіант 1: Розгортання Azure одним кліком
+#### Варіант 1: Одноклікове розгортання в Azure
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
 #### Варіант 2: Розгортання через Azure CLI
 
 ```bash
-# Клонуйте репозиторій
+# Клонувати репозиторій
 git clone https://github.com/microsoft/azd-for-beginners.git
 cd azd-for-beginners/examples/retail-multiagent-arm-template
 
-# Зробіть скрипт розгортання виконуваним
+# Зробити скрипт розгортання виконуваним
 chmod +x deploy.sh
 
-# Розгорніть з налаштуваннями за замовчуванням (стандартний режим)
+# Розгорнути з налаштуваннями за замовчуванням (стандартний режим)
 ./deploy.sh -g myResourceGroup
 
-# Розгорніть для виробництва з преміум-функціями
+# Розгорнути для продакшн з преміум-функціями
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# Розгорніть мінімальну версію для розробки
+# Розгорнути мінімальну версію для розробки
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
-#### Варіант 3: Пряме розгортання ARM-шаблону
+#### Варіант 3: Пряме розгортання ARM шаблону
 
 ```bash
 # Створити групу ресурсів
@@ -1991,9 +1991,9 @@ az deployment group create \
 }
 ```
 
-### 🔧 Конфігурація після розгортання
+### 🔧 Налаштування після розгортання
 
-ARM-шаблон виконує створення інфраструктури. Після розгортання:
+ARM шаблон відповідає за створення інфраструктури. Після розгортання:
 
 1. **Налаштуйте індекс пошуку**:
    ```bash
@@ -2006,7 +2006,7 @@ ARM-шаблон виконує створення інфраструктури.
 
 2. **Завантажте початкові документи**:
    ```bash
-   # Завантажте посібники продукту та базу знань
+   # Завантажте посібники з продукції та базу знань
    az storage blob upload-batch \
      --destination documents \
      --source ../data/initial-docs \
@@ -2015,7 +2015,7 @@ ARM-шаблон виконує створення інфраструктури.
 
 3. **Розгорніть код агентів**:
    ```bash
-   # Створення та розгортання реальних агентських додатків
+   # Створюйте та розгортайте реальні агентські застосунки
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -2023,9 +2023,9 @@ ARM-шаблон виконує створення інфраструктури.
      --image myregistry.azurecr.io/agent-router:latest
    ```
 
-### 🎛️ Опції налаштування
+### 🎛️ Варіанти налаштувань
 
-Редагуйте `azuredeploy.parameters.json` для налаштування розгортання:
+Відредагуйте `azuredeploy.parameters.json`, щоб налаштувати розгортання:
 
 ```json
 {
@@ -2039,80 +2039,80 @@ ARM-шаблон виконує створення інфраструктури.
 }
 ```
 
-### 📊 Функції розгортання
+### 📊 Особливості розгортання
 
-- ✅ **Перевірка передумов** (Azure CLI, квоти, права доступу)
-- ✅ **Багаторегіональна висока доступність** з автоматичним переключенням
-- ✅ **Комплексний моніторинг** через Application Insights і Log Analytics
-- ✅ **Кращі практики безпеки** з Key Vault та RBAC
-- ✅ **Оптимізація вартості** за допомогою конфігурованих режимів розгортання
-- ✅ **Автоматичне масштабування** за потребою
+- ✅ **Перевірка передумов** (Azure CLI, квоти, дозволи)
+- ✅ **Висока доступність у кількох регіонах** з автоматичним перемиканням
+- ✅ **Повний моніторинг** з Application Insights і Log Analytics
+- ✅ **Безпека за найкращими практиками** з Key Vault та RBAC
+- ✅ **Оптимізація витрат** з конфігурованими режимами розгортання
+- ✅ **Автоматичне масштабування** залежно від навантаження
 - ✅ **Оновлення без простоїв** за допомогою ревізій Container Apps
 
-### 🔍 Моніторинг і управління
+### 🔍 Моніторинг і керування
 
-Після розгортання відстежуйте рішення через:
+Після розгортання контролюйте рішення через:
 
-- **Application Insights**: метрики продуктивності, відстеження залежностей, кастомна телеметрія
-- **Log Analytics**: централізоване логування зі всіх компонентів
-- **Azure Monitor**: стан ресурсів та моніторинг доступності
-- **Cost Management**: моніторинг витрат у реальному часі та оповіщення про бюджет
-
----
-
-## 📚 Повний посібник з реалізації
-
-Цей документ із сценарієм у поєднанні з ARM-шаблоном дає все необхідне для розгортання готового до виробництва багатоагентного рішення підтримки клієнтів. Реалізація охоплює:
-
-✅ **Проектування архітектури** – комплексне дизайн-схема системи з відносинами компонентів  
-✅ **Створення інфраструктури** – повний ARM-шаблон для розгортання в один клік  
-✅ **Конфігурація агентів** – докладне налаштування агентів Customer та Inventory  
-✅ **Розгортання мульти-моделі** – стратегічне розміщення моделей по регіонах  
-✅ **Інтеграція пошуку** – AI Search із векторними можливостями та індексацією даних  
-✅ **Забезпечення безпеки** – Red teaming, сканування вразливостей та безпечні практики  
-✅ **Моніторинг і оцінка** – комплексна телеметрія та фреймворк для оцінки агентів  
-✅ **Готовність до виробництва** – корпоративне розгортання з HA і відновленням після аварій  
-✅ **Оптимізація вартості** – інтелектуальне перенаправлення і масштабування за використанням  
-✅ **Посібник з усунення несправностей** – типові проблеми і шляхи їх вирішення
+- **Application Insights**: Показники продуктивності, відстеження залежностей та користувацька телеметрія
+- **Log Analytics**: Централізований збір журналів зі всіх компонентів
+- **Azure Monitor**: Моніторинг стану ресурсів і доступності
+- **Cost Management**: Відстеження витрат у реальному часі з оповіщеннями по бюджету
 
 ---
 
-## 📊 Підсумок: Що ви дізналися
+## 📚 Повний посібник із впровадження
 
-### Охоплені архітектурні патерни
+Цей сценарій разом із ARM шаблоном забезпечує все необхідне для розгортання мультіагентної системи підтримки клієнтів, готової до продакшену. Впровадження охоплює:
 
-✅ **Дизайн багатоагентної системи** – спеціалізовані агенти (Customer + Inventory) з виділеними моделями  
-✅ **Багаторегіональне розгортання** – стратегічне розміщення моделей для оптимізації вартості і відмовостійкості  
-✅ **Архітектура RAG** – AI Search із векторними embeddings для відповіді на базі джерел  
-✅ **Оцінка агентів** – присвячена модель grader для контролю якості  
-✅ **Фреймворк безпеки** – патерни red teaming і сканування вразливостей  
-✅ **Оптимізація витрат** – маршрутизація моделей і планування потужностей  
-✅ **Моніторинг у виробництві** – Application Insights із кастомною телеметрією  
+✅ **Проектування архітектури** - Детальний дизайн системи з взаємозв’язками компонентів  
+✅ **Забезпечення інфраструктури** - Повний ARM шаблон для розгортання в один клік  
+✅ **Налаштування агентів** - Детальна конфігурація для агентів Customer та Inventory  
+✅ **Розгортання кількох моделей** - Стратегічне розміщення моделей за регіонами  
+✅ **Інтеграція пошуку** - AI Search з векторними можливостями та індексацією даних  
+✅ **Реалізація безпеки** - Red teaming, сканування вразливостей, безпечні практики  
+✅ **Моніторинг і оцінка** - Повна телеметрія та фреймворк оцінки агентів  
+✅ **Готовність до продакшену** - Підприємницький рівень з HA та відновленням після збоїв  
+✅ **Оптимізація витрат** - Інтелектуальний роутинг і масштабування за використанням  
+✅ **Посібник з усунення проблем** - Типові проблеми та стратегії їхнього вирішення
+
+---
+
+## 📊 Підсумок: Чому ви навчились
+
+### Розглянуті архітектурні патерни
+
+✅ **Дизайн мультіагентної системи** - Спеціалізовані агенти (Customer + Inventory) з виділеними моделями  
+✅ **Розгортання в кількох регіонах** - Стратегічне розміщення моделей для оптимізації вартості й надійності  
+✅ **Архітектура RAG** - Інтеграція AI Search з векторними ембеддінгами для достовірних відповідей  
+✅ **Оцінка агентів** - Виділена модель grader для контролю якості  
+✅ **Безпековий фреймворк** - Патерни red teaming і сканування вразливостей  
+✅ **Оптимізація витрат** - Стратегії маршрутизації моделей і планування потужностей  
+✅ **Моніторинг у продакшені** - Application Insights з користувацькою телеметрією  
 
 ### Що надає цей документ
 
 | Компонент | Статус | Де знайти |
 |-----------|--------|----------|
-| **Шаблон інфраструктури** | ✅ Готовий до розгортання | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
-| **Діаграми архітектури** | ✅ Повні | Mermaid-діаграма вище |
-| **Приклади коду** | ✅ Зразки реалізації | По всьому документу |
+| **Інфраструктурний шаблон** | ✅ Готовий до розгортання | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **Архітектурні діаграми** | ✅ Повні | Діаграма Mermaid вище |
+| **Приклади коду** | ✅ Референсні реалізації | По всьому документу |
 | **Патерни конфігурації** | ✅ Детальні рекомендації | Розділи 1-10 вище |
-| **Реалізації агентів** | 🔨 Ви розробляєте | ~40 годин розробки |
-| **Frontend UI** | 🔨 Ви розробляєте | ~25 годин розробки |
-| **Потоки даних** | 🔨 Ви розробляєте | ~10 годин розробки |
+| **Реалізації агентів** | 🔨 Ви розробляєте | Приблизно 40 годин розробки |
+| **Frontend UI** | 🔨 Ви розробляєте | Приблизно 25 годин розробки |
+| **Дані потоки** | 🔨 Ви розробляєте | Приблизно 10 годин розробки |
 
-### Перевірка реальності: що насправді існує
+### Фактичний стан речей
 
-**У репозиторії (готове зараз):**
-- ✅ ARM-шаблон розгортання понад 15 сервісів Azure (azuredeploy.json)
+**У репозиторії (готово зараз):**
+- ✅ ARM шаблон з розгортанням понад 15 сервісів Azure (azuredeploy.json)
 - ✅ Скрипт розгортання з перевіркою (deploy.sh)
-- ✅ Конфігурація параметрів (azuredeploy.parameters.json)
+- ✅ Конфігураційні параметри (azuredeploy.parameters.json)
 
-**Згадане у документі (ви створюєте):**
-- 🔨 Код агентів (~30-40 годин)
+**В документі згадується (ви створюєте):**
+- 🔨 Код реалізації агентів (~30-40 годин)
 - 🔨 Сервіс маршрутизації (~12-16 годин)
-- 🔨 Фронтенд додаток (~20-30 годин)
-- 🔨 Скрипти налаштування даних (~8-12 годин)
+- 🔨 Frontend-додаток (~20-30 годин)
+- 🔨 Скрипти підготовки даних (~8-12 годин)
 - 🔨 Фреймворк моніторингу (~10-15 годин)
 
 ### Ваші наступні кроки
@@ -2124,62 +2124,62 @@ cd retail-multiagent-arm-template
 ```
 
 #### Якщо хочете побудувати повну систему (80-120 годин)
-1. ✅ Прочитати та зрозуміти цей документ архітектури (2-3 години)  
-2. ✅ Розгорнути інфраструктуру за допомогою ARM-шаблону (30 хвилин)  
-3. 🔨 Реалізувати агентів за зразками коду (~40 годин)  
-4. 🔨 Побудувати сервіс маршрутизації з FastAPI/Express (~15 годин)  
-5. 🔨 Створити фронтенд UI на React/Vue (~25 годин)  
-6. 🔨 Налаштувати потік даних і індекс пошуку (~10 годин)  
-7. 🔨 Додати моніторинг і оцінку (~15 годин)  
-8. ✅ Провести тестування, забезпечити безпеку і оптимізацію (~10 годин)
+1. ✅ Прочитайте і зрозумійте цей архітектурний документ (2-3 години)
+2. ✅ Розгорніть інфраструктуру за допомогою ARM шаблону (30 хвилин)
+3. 🔨 Реалізуйте агентів за прикладами коду (~40 годин)
+4. 🔨 Побудуйте сервіс маршрутизації на FastAPI/Express (~15 годин)
+5. 🔨 Створіть frontend UI на React/Vue (~25 годин)
+6. 🔨 Налаштуйте потік даних і індекс пошуку (~10 годин)
+7. 🔨 Додайте моніторинг і оцінку (~15 годин)
+8. ✅ Тестуйте, захищайте і оптимізуйте (~10 годин)
 
-#### Якщо хочете вивчати багатоагентні патерни (для навчання)
-- 📖 Ознайомитися з діаграмою архітектури та відносинами компонентів  
-- 📖 Вивчити приклади коду для SearchTool, BingTool, AgentEvaluator  
-- 📖 Зрозуміти стратегію багаторегіонального розгортання  
-- 📖 Вивчити фреймворки оцінювання та безпеки  
-- 📖 Застосувати патерни у власних проєктах
+#### Якщо хочете вивчати мультіагентні патерни (самоосвіта)
+- 📖 Ознайомтеся з архітектурною діаграмою і зв’язками компонентів
+- 📖 Вивчайте приклади SearchTool, BingTool, AgentEvaluator
+- 📖 Розберіться в стратегії розгортання по регіонах
+- 📖 Вивчайте фреймворки оцінки та безпеки
+- 📖 Застосовуйте патерни у власних проєктах
 
-### Ключові висновки
+### Основні висновки
 
-1. **Інфраструктура проти застосунку** – ARM-шаблон створює інфраструктуру; агенти потребують розробки  
-2. **Багаторегіональна стратегія** – стратегічне розміщення моделей зменшує витрати й підвищує надійність  
-3. **Фреймворк оцінки** – присвячена модель grader забезпечує безперервну оцінку якості  
-4. **Безпека на першому місці** – red teaming і сканування вразливостей є необхідними для виробництва  
-5. **Оптимізація вартості** – інтелектуальна маршрутизація між GPT-4o і GPT-4o-mini економить 60-80%
+1. **Інфраструктура проти програми** - ARM шаблон забезпечує інфраструктуру; агенти потребують розробки  
+2. **Стратегія розгортання в кількох регіонах** - Зменшує витрати і підвищує надійність  
+3. **Фреймворк оцінювання** - Відокремлена модель grader дозволяє постійно контролювати якість  
+4. **Безпека на першому місці** - Red teaming і сканування вразливостей необхідні для продакшену  
+5. **Оптимізація витрат** - Інтелектуальний роутинг між gpt-4.1 та gpt-4.1-mini економить 60-80%
 
-### Орієнтовні витрати
+### Оціночні витрати
 
-| Режим розгортання | Інфраструктура/місяць | Розробка (один раз) | Всього за перший місяць |
-|-----------------|---------------------|---------------------|-------------------------|
-| **Мінімальний** | $100-370 | $15K-25K (80-120 годин) | $15.1K-25.4K |
-| **Стандартний** | $420-1,450 | $15K-25K (той же обсяг) | $15.4K-26.5K |
-| **Преміум** | $1,150-3,500 | $15K-25K (той же обсяг) | $16.2K-28.5K |
+| Режим розгортання | Інфраструктура/місяць | Розробка (одноразово) | Всього за перший місяць |
+|-------------------|-----------------------|-----------------------|------------------------|
+| **Мінімальний** | $100-370 | $15К-25К (80-120 год) | $15,1К-25,4К |
+| **Стандартний** | $420-1,450 | $15К-25К (така ж праця) | $15,4К-26,5К |
+| **Преміумний** | $1,150-3,500 | $15К-25К (така ж праця) | $16,2К-28,5К |
 
-**Примітка:** Інфраструктура становить <5% від загальної вартості нових впроваджень. Основні інвестиції — це зусилля розробки.
+**Примітка:** Інфраструктура – менш як 5% від загальних витрат; основні інвестиції – розробка.
 
 ### Пов’язані ресурси
 
-- 📚 [Посібник з розгортання ARM-шаблону](retail-multiagent-arm-template/README.md) – налаштування інфраструктури  
-- 📚 [Кращі практики Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/) – розгортання моделей  
-- 📚 [Документація AI Search](https://learn.microsoft.com/azure/search/) – конфігурація векторного пошуку  
-- 📚 [Патерни Container Apps](https://learn.microsoft.com/azure/container-apps/) – розгортання мікросервісів  
-- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) – налаштування моніторингу
+- 📚 [Посібник із розгортання ARM шаблону](retail-multiagent-arm-template/README.md) – Налаштування інфраструктури  
+- 📚 [Кращі практики Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/) – Розгортання моделей  
+- 📚 [Документація AI Search](https://learn.microsoft.com/azure/search/) – Налаштування векторного пошуку  
+- 📚 [Патерни Container Apps](https://learn.microsoft.com/azure/container-apps/) – Розгортання мікросервісів  
+- 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) – Налаштування моніторингу  
 
-### Питання або проблеми?
+### Запитання чи проблеми?
 
-- 🐛 [Повідомити про помилки](https://github.com/microsoft/AZD-for-beginners/issues) – баги шаблона або помилки документації  
-- 💬 [Обговорення на GitHub](https://github.com/microsoft/AZD-for-beginners/discussions) – питання щодо архітектури  
-- 📖 [FAQ](../resources/faq.md) – відповіді на поширені запитання  
-- 🔧 [Посібник з усунення несправностей](../docs/troubleshooting/common-issues.md) – проблеми розгортання
+- 🐛 [Повідомити про проблеми](https://github.com/microsoft/AZD-for-beginners/issues) – Помилки шаблону чи документації  
+- 💬 [Дискусії GitHub](https://github.com/microsoft/AZD-for-beginners/discussions) – Питання по архітектурі  
+- 📖 [FAQ](../resources/faq.md) – Відповіді на поширені запитання  
+- 🔧 [Посібник з усунення проблем](../docs/troubleshooting/common-issues.md) – Проблеми розгортання  
 
 ---
 
-**Цей комплексний сценарій надає архітектурний план корпоративного рівня для багатоагентних AI-систем, включаючи шаблони інфраструктури, керівництво з реалізації та найкращі практики виробництва для створення складних рішень підтримки клієнтів за допомогою Azure Developer CLI.**
+**Цей всебічний сценарій надає архітектурний план корпоративного рівня для мультіагентних AI-систем із готовими шаблонами інфраструктури, керівництвом з впровадження та найкращими практиками продакшену для створення складних рішень підтримки клієнтів за допомогою Azure Developer CLI.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Застереження**:
-Цей документ був перекладений із використанням сервісу автоматичного перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, просимо врахувати, що автоматичні переклади можуть містити помилки чи неточності. Оригінальний документ рідною мовою слід вважати авторитетним джерелом. Для критично важливої інформації рекомендується професійний переклад людиною. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникли внаслідок використання цього перекладу.
+**Відмова від відповідальності**:
+Цей документ було перекладено за допомогою сервісу автоматичного перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, будь ласка, майте на увазі, що автоматичні переклади можуть містити помилки чи неточності. Оригінальний документ рідною мовою слід вважати авторитетним джерелом. Для критично важливої інформації рекомендується професійний людський переклад. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникли внаслідок використання цього перекладу.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

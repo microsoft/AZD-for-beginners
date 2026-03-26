@@ -1,127 +1,127 @@
-# Maloobchodní řešení s více agenty - Šablona infrastruktury
+# Retail víceagentní řešení - šablona infrastruktury
 
-**Kapitola 5: Balíček pro nasazení do produkce**
-- **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../../README.md)
-- **📖 Související kapitola**: [Kapitola 5: Řešení s více agenty](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+**Kapitola 5: Balík nasazení do produkce**
+- **📚 Domov kurzu**: [AZD For Beginners](../../README.md)
+- **📖 Související kapitola**: [Kapitola 5: Víceagentní AI řešení](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
 - **📝 Průvodce scénářem**: [Kompletní architektura](../retail-scenario.md)
-- **🎯 Rychlé nasazení**: [Jedno kliknutí na nasazení](../../../../examples/retail-multiagent-arm-template)
+- **🎯 Rychlé nasazení**: [Jedním kliknutím](#-quick-deployment)
 
 > **⚠️ POUZE ŠABLONA INFRASTRUKTURY**  
-> Tento ARM template nasazuje **Azure zdroje** pro systém s více agenty.  
+> Tato ARM šablona nasazuje **Azure zdroje** pro víceagentní systém.  
 >  
-> **Co se nasazuje (15-25 minut):**
-> - ✅ Azure OpenAI (GPT-4o, GPT-4o-mini, embeddings ve 3 regionech)
-> - ✅ AI Search služba (prázdná, připravena na vytvoření indexu)
-> - ✅ Container Apps (zástupné obrázky, připravené na váš kód)
-> - ✅ Úložiště, Cosmos DB, Key Vault, Application Insights
+> **Co se nasadí (15-25 minut):**
+> - ✅ Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini, embeddings ve 3 regionech)
+> - ✅ Služba Azure AI Search (prázdná, připravená pro vytvoření indexu)
+> - ✅ Container Apps (zástupné image, připravené pro váš kód)
+> - ✅ Storage, Cosmos DB, Key Vault, Application Insights
 >  
 > **Co NENÍ zahrnuto (vyžaduje vývoj):**
-> - ❌ Kód implementace agentů (Agent zákazníka, Agent inventáře)
+> - ❌ Kód implementace agentů (Customer Agent, Inventory Agent)
 > - ❌ Logika směrování a API endpointy
 > - ❌ Frontend chat UI
-> - ❌ Schémata indexů vyhledávání a datové pipeline
+> - ❌ Schémata vyhledávacích indexů a datové pipeline
 > - ❌ **Odhadovaná doba vývoje: 80-120 hodin**
 >  
-> **Použijte tuto šablonu, pokud:**
-> - ✅ Chcete připravit Azure infrastrukturu pro projekt s více agenty
-> - ✅ Plánujete samostatně vyvíjet implementaci agentů
-> - ✅ Potřebujete základní infrastrukturu připravenou pro produkci
+> **Použijte tuto šablonu pokud:**
+> - ✅ Chcete vytvořit Azure infrastrukturu pro víceagentní projekt
+> - ✅ Plánujete vyvíjet implementaci agentů samostatně
+> - ✅ Potřebujete základ infrastruktury připravený pro produkci
 >  
-> **Nepoužívejte, pokud:**
-> - ❌ Očekáváte okamžitě funkční demo systému s více agenty
-> - ❌ Hledáte kompletní příklady aplikačního kódu
+> **Nepoužívejte pokud:**
+> - ❌ Očekáváte okamžitě funkční víceagentní demo
+> - ❌ Hledáte kompletní ukázky aplikačního kódu
 
 ## Přehled
 
-Tento adresář obsahuje komplexní šablonu Azure Resource Manager (ARM) pro nasazení **základní infrastruktury** systému zákaznické podpory s více agenty. Šablona připraví všechny potřebné Azure služby, správně nakonfigurované a propojené, připravené pro váš aplikační vývoj.
+Tento adresář obsahuje komplexní Azure Resource Manager (ARM) šablonu pro nasazení **základu infrastruktury** víceagentního zákaznického podpůrného systému. Šablona provisionuje všechny potřebné Azure služby, správně nakonfigurované a propojené, připravené pro vývoj vaší aplikace.
 
 **Po nasazení budete mít:** Infrastrukturu Azure připravenou pro produkci  
 **Pro dokončení systému potřebujete:** Kód agentů, frontend UI a konfiguraci dat (viz [Průvodce architekturou](../retail-scenario.md))
 
-## 🎯 Co se nasazuje
+## 🎯 Co se nasadí
 
-### Základní infrastruktura (stav po nasazení)
+### Jádrová infrastruktura (stav po nasazení)
 
-✅ **Azure OpenAI Services** (Připraveno na API volání)
-  - Primární region: GPT-4o nasazení (kapacita 20K TPM)
-  - Sekundární region: GPT-4o-mini nasazení (kapacita 10K TPM)
-  - Třetí region: Model textových embeddings (kapacita 30K TPM)
-  - Evaluační region: GPT-4o grader model (kapacita 15K TPM)
-  - **Stav:** Plně funkční - API volání možné ihned
+✅ **Služby Microsoft Foundry Models** (připravené pro volání API)
+  - Primární region: nasazení gpt-4.1 (kapacita 20K TPM)
+  - Sekundární region: nasazení gpt-4.1-mini (kapacita 10K TPM)
+  - Terciární region: model pro textové embeddingy (kapacita 30K TPM)
+  - Evaluační region: grader model gpt-4.1 (kapacita 15K TPM)
+  - **Stav:** Plně funkční — lze okamžitě volat API
 
-✅ **Azure AI Search** (Prázdné - připraveno na konfiguraci)
-  - Aktivována schopnost vektorového vyhledávání
-  - Standardní úroveň s 1 oddílem, 1 replikou
+✅ **Azure AI Search** (prázdné - připraveno ke konfiguraci)
+  - Vektorové vyhledávání povoleno
+  - Standardní úroveň s 1 partition, 1 replikou
   - **Stav:** Služba běží, ale vyžaduje vytvoření indexu
-  - **Nutná akce:** Vytvořte vyhledávací index podle vašeho schématu
+  - **Nutná akce:** Vytvořit vyhledávací index se svým schématem
 
-✅ **Azure Storage Account** (Prázdné - připraveno na nahrávání)
+✅ **Azure Storage Account** (prázdný - připraven pro nahrávání)
   - Blob kontejnery: `documents`, `uploads`
-  - Bezpečná konfigurace (pouze HTTPS, žádný veřejný přístup)
-  - **Stav:** Připraveno na příjem souborů
-  - **Nutná akce:** Nahrajte data o produktech a dokumenty
+  - Zabezpečené nastavení (pouze HTTPS, bez veřejného přístupu)
+  - **Stav:** Připraven přijímat soubory
+  - **Nutná akce:** Nahrajte svá produktová data a dokumenty
 
-⚠️ **Container Apps Environment** (Nasazeny zástupné obrázky)
-  - Aplikace pro směrování agentů (výchozí obrázek nginx)
-  - Frontend aplikace (výchozí obrázek nginx)
+⚠️ **Prostředí Container Apps** (nasazeny zástupné image)
+  - Aplikace routeru agentů (výchozí image nginx)
+  - Frontend aplikace (výchozí image nginx)
   - Automatické škálování nakonfigurováno (0-10 instancí)
   - **Stav:** Běží zástupné kontejnery
-  - **Nutná akce:** Vytvořte a nasazte aplikace vašich agentů
+  - **Nutná akce:** Sestavte a nasaďte své aplikace agentů
 
-✅ **Azure Cosmos DB** (Prázdné - připraveno na data)
-  - Databáze a kontejner předkonfigurovány
+✅ **Azure Cosmos DB** (prázdné - připraveno pro data)
+  - Databáze a kontejnery předkonfigurovány
   - Optimalizováno pro operace s nízkou latencí
   - TTL povoleno pro automatické čištění
-  - **Stav:** Připraveno na ukládání historie chatu
+  - **Stav:** Připraveno ukládat historii chatu
 
-✅ **Azure Key Vault** (Volitelné - připraveno na tajemství)
-  - Aktivováno měkké mazání
+✅ **Azure Key Vault** (volitelné - připraveno pro ukládání tajemství)
+  - Soft delete povoleno
   - RBAC nakonfigurováno pro spravované identity
-  - **Stav:** Připraveno na ukládání API klíčů a připojovacích řetězců
+  - **Stav:** Připraveno ukládat API klíče a connection stringy
 
-✅ **Application Insights** (Volitelné - monitoring aktivní)
-  - Připojeno k Log Analytics workspace
-  - Nakonfigurovány vlastní metriky a upozornění
-  - **Stav:** Připraveno na příjem telemetrie z vašich aplikací
+✅ **Application Insights** (volitelné - monitoring aktivní)
+  - Připojeno k Log Analytics pracovnímu prostoru
+  - Vlastní metriky a upozornění nakonfigurovány
+  - **Stav:** Připraveno přijímat telemetrii z vašich aplikací
 
-✅ **Document Intelligence** (Připraveno na API volání)
-  - Úroveň S0 pro produkční zátěže
-  - **Stav:** Připraveno na zpracování nahraných dokumentů
+✅ **Document Intelligence** (připraveno pro volání API)
+  - S0 úroveň pro produkční zátěže
+  - **Stav:** Připraveno zpracovávat nahrané dokumenty
 
-✅ **Bing Search API** (Připraveno na API volání)
-  - Úroveň S1 pro vyhledávání v reálném čase
-  - **Stav:** Připraveno na dotazy webového vyhledávání
+✅ **Bing Search API** (připraveno pro volání API)
+  - S1 úroveň pro vyhledávání v reálném čase
+  - **Stav:** Připraveno pro webové dotazy
 
 ### Režimy nasazení
 
-| Režim | Kapacita OpenAI | Instance kontejnerů | Úroveň vyhledávání | Redundance úložiště | Nejvhodnější pro |
-|-------|-----------------|---------------------|--------------------|---------------------|------------------|
-| **Minimální** | 10K-20K TPM | 0-2 repliky | Základní | LRS (lokální) | Vývoj/testování, učení, proof-of-concept |
-| **Standardní** | 30K-60K TPM | 2-5 replik | Standardní | ZRS (zónová) | Produkce, střední provoz (<10K uživatelů) |
-| **Prémiový** | 80K-150K TPM | 5-10 replik, zónová redundance | Prémiový | GRS (geografická) | Podnikové, vysoký provoz (>10K uživatelů), SLA 99,99 % |
+| Mode | OpenAI Capacity | Container Instances | Search Tier | Storage Redundancy | Best For |
+|------|-----------------|---------------------|-------------|-------------------|----------|
+| **Minimální** | 10K-20K TPM | 0-2 repliky | Základní | LRS (lokální) | Vývoj/test, učení, proof-of-concept |
+| **Standardní** | 30K-60K TPM | 2-5 replik | Standardní | ZRS (zónové) | Produkce, střední provoz (<10K uživatelů) |
+| **Prémiový** | 80K-150K TPM | 5-10 replik, zónově redundantní | Prémiový | GRS (geo) | Enterprise, vysoký provoz (>10K uživatelů), SLA 99,99% |
 
 **Dopad na náklady:**
-- **Minimální → Standardní:** ~4x zvýšení nákladů ($100-370/měsíc → $420-1,450/měsíc)
-- **Standardní → Prémiový:** ~3x zvýšení nákladů ($420-1,450/měsíc → $1,150-3,500/měsíc)
-- **Vyberte podle:** Očekávané zátěže, požadavků na SLA, rozpočtových omezení
+- **Minimální → Standardní:** ~4× nárůst nákladů ($100-370/mo → $420-1,450/mo)
+- **Standardní → Prémiový:** ~3× nárůst nákladů ($420-1,450/mo → $1,150-3,500/mo)
+- **Volba podle:** Očekávané zátěže, požadavků na SLA, rozpočtových omezení
 
 **Plánování kapacity:**
-- **TPM (Tokens Per Minute):** Celkem napříč všemi nasazeními modelů
-- **Instance kontejnerů:** Rozsah automatického škálování (min-max repliky)
+- **TPM (tokens za minutu):** Celkově napříč všemi nasazeními modelů
+- **Instance kontejnerů:** Rozsah automatického škálování (min-max replik)
 - **Úroveň vyhledávání:** Ovlivňuje výkon dotazů a limity velikosti indexu
 
-## 📋 Předpoklady
+## 📋 Požadavky
 
 ### Požadované nástroje
-1. **Azure CLI** (verze 2.50.0 nebo vyšší)
+1. **Azure CLI** (verze 2.50.0 nebo novější)
    ```bash
-   az --version  # Zkontrolujte verzi
-   az login      # Ověřte přihlašovací údaje
+   az --version  # Zkontrolovat verzi
+   az login      # Ověřit
    ```
 
-2. **Aktivní předplatné Azure** s přístupem vlastníka nebo přispěvatele
+2. **Aktivní Azure předplatné** s přístupem Owner nebo Contributor
    ```bash
-   az account show  # Ověřte předplatné
+   az account show  # Ověřit předplatné
    ```
 
 ### Požadované kvóty Azure
@@ -129,40 +129,40 @@ Tento adresář obsahuje komplexní šablonu Azure Resource Manager (ARM) pro na
 Před nasazením ověřte dostatečné kvóty ve vašich cílových regionech:
 
 ```bash
-# Zkontrolujte dostupnost Azure OpenAI ve vašem regionu
+# Zkontrolujte dostupnost modelů Microsoft Foundry ve vašem regionu
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus2
 
-# Ověřte kvótu OpenAI (příklad pro gpt-4o)
+# Ověřte kvótu OpenAI (příklad pro gpt-4.1)
 az cognitiveservices usage list \
   --location eastus2 \
-  --query "[?name.value=='OpenAI.Standard.gpt-4o']"
+  --query "[?name.value=='OpenAI.Standard.gpt-4.1']"
 
-# Zkontrolujte kvótu Container Apps
+# Zkontrolujte kvótu pro Container Apps
 az provider show \
   --namespace Microsoft.App \
   --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
 ```
 
 **Minimální požadované kvóty:**
-- **Azure OpenAI:** 3-4 nasazení modelů napříč regiony
-  - GPT-4o: 20K TPM (Tokens Per Minute)
-  - GPT-4o-mini: 10K TPM
+- **Microsoft Foundry Models:** 3–4 nasazení modelů napříč regiony
+  - gpt-4.1: 20K TPM (tokens za minutu)
+  - gpt-4.1-mini: 10K TPM
   - text-embedding-ada-002: 30K TPM
-  - **Poznámka:** GPT-4o může být na čekací listině v některých regionech - ověřte [dostupnost modelů](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+  - **Poznámka:** gpt-4.1 může mít v některých regionech čekací listinu - zkontrolujte [dostupnost modelů](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - **Container Apps:** Spravované prostředí + 2-10 instancí kontejnerů
-- **AI Search:** Standardní úroveň (Základní nedostatečná pro vektorové vyhledávání)
+- **AI Search:** Standardní úroveň (Basic nestačí pro vektorové vyhledávání)
 - **Cosmos DB:** Standardní přidělená propustnost
 
-**Pokud jsou kvóty nedostatečné:**
-1. Přejděte na Azure Portal → Kvóty → Požádejte o zvýšení
+**Pokud kvóta není dostatečná:**
+1. Přejděte do Azure Portal → Quotas → Request increase
 2. Nebo použijte Azure CLI:
    ```bash
    az support tickets create \
      --ticket-name "OpenAI-Quota-Increase" \
      --severity "minimal" \
-     --description "Request quota increase for Azure OpenAI GPT-4o in eastus2"
+     --description "Request quota increase for Microsoft Foundry Models gpt-4.1 in eastus2"
    ```
 3. Zvažte alternativní regiony s dostupností
 
@@ -171,25 +171,25 @@ az provider show \
 ### Možnost 1: Použití Azure CLI
 
 ```bash
-# Klonujte nebo stáhněte soubory šablony
+# Naklonujte nebo stáhněte šablonové soubory
 git clone <repository-url>
 cd examples/retail-multiagent-arm-template
 
-# Udělejte skript nasazení spustitelným
+# Označte nasazovací skript jako spustitelný
 chmod +x deploy.sh
 
-# Nasazení s výchozím nastavením
+# Nasadit s výchozím nastavením
 ./deploy.sh -g myResourceGroup
 
-# Nasazení pro produkci s prémiovými funkcemi
+# Nasadit do produkce s prémiovými funkcemi
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 ```
 
 ### Možnost 2: Použití Azure Portal
 
-[![Nasadit na Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
+[![Nasadit do Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-### Možnost 3: Přímé použití Azure CLI
+### Možnost 3: Použití Azure CLI přímo
 
 ```bash
 # Vytvořit skupinu prostředků
@@ -206,33 +206,33 @@ az deployment group create \
 
 ### Co očekávat
 
-| Fáze | Doba trvání | Co se děje |
-|------|-------------|------------||
+| Phase | Duration | What Happens |
+|-------|----------|--------------||
 | **Validace šablony** | 30-60 sekund | Azure ověřuje syntaxi ARM šablony a parametry |
-| **Nastavení Resource Group** | 10-20 sekund | Vytvoří Resource Group (pokud je potřeba) |
-| **Nasazení OpenAI** | 5-8 minut | Vytvoří 3-4 OpenAI účty a nasadí modely |
-| **Container Apps** | 3-5 minut | Vytvoří prostředí a nasadí zástupné kontejnery |
-| **Vyhledávání a úložiště** | 2-4 minuty | Nasadí AI Search službu a úložiště |
-| **Cosmos DB** | 2-3 minuty | Vytvoří databázi a nakonfiguruje kontejnery |
-| **Nastavení monitoringu** | 2-3 minuty | Nastaví Application Insights a Log Analytics |
-| **Konfigurace RBAC** | 1-2 minuty | Nakonfiguruje spravované identity a oprávnění |
+| **Vytvoření resource group** | 10-20 sekund | Vytvoří resource group (pokud je potřeba) |
+| **Provisioning OpenAI** | 5-8 minut | Vytváří 3-4 OpenAI účty a nasazuje modely |
+| **Container Apps** | 3-5 minut | Vytváří prostředí a nasazuje zástupné kontejnery |
+| **Search & Storage** | 2-4 minuty | Provisionuje AI Search službu a storage účty |
+| **Cosmos DB** | 2-3 minuty | Vytváří databázi a konfiguruje kontejnery |
+| **Nastavení monitoringu** | 2-3 minuty | Zakládá Application Insights a Log Analytics |
+| **RBAC konfigurace** | 1-2 minuty | Nakonfiguruje spravované identity a oprávnění |
 | **Celkové nasazení** | **15-25 minut** | Kompletní infrastruktura připravena |
 
 **Po nasazení:**
-- ✅ **Infrastruktura připravena:** Všechny Azure služby nasazeny a běží
+- ✅ **Infrastruktura připravena:** Všechny Azure služby provisionovány a běží
 - ⏱️ **Vývoj aplikace:** 80-120 hodin (vaše odpovědnost)
 - ⏱️ **Konfigurace indexu:** 15-30 minut (vyžaduje vaše schéma)
-- ⏱️ **Nahrávání dat:** Závisí na velikosti datasetu
-- ⏱️ **Testování a validace:** 2-4 hodiny
+- ⏱️ **Nahrání dat:** Záleží na velikosti datasetu
+- ⏱️ **Testování & validace:** 2-4 hodiny
 
 ---
 
 ## ✅ Ověření úspěšnosti nasazení
 
-### Krok 1: Zkontrolujte nasazení zdrojů (2 minuty)
+### Krok 1: Zkontrolujte provisioning zdrojů (2 minuty)
 
 ```bash
-# Ověřte, zda byly všechny prostředky úspěšně nasazeny
+# Ověřte, že všechny prostředky byly úspěšně nasazeny.
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
@@ -241,16 +241,16 @@ az resource list \
 
 **Očekáváno:** Prázdná tabulka (všechny zdroje ukazují stav "Succeeded")
 
-### Krok 2: Ověřte nasazení Azure OpenAI (3 minuty)
+### Krok 2: Ověřte nasazení Microsoft Foundry Models (3 minuty)
 
 ```bash
-# Seznam všech účtů OpenAI
+# Vypsat všechny účty OpenAI
 az cognitiveservices account list \
   --resource-group myResourceGroup \
   --query "[?kind=='OpenAI'].{Name:name, Location:location, Status:properties.provisioningState}" \
   --output table
 
-# Zkontrolujte nasazení modelů pro primární region
+# Zkontrolovat nasazení modelů pro primární region
 OPENAI_NAME=$(az cognitiveservices account list \
   --resource-group myResourceGroup \
   --query "[?kind=='OpenAI'] | [0].name" -o tsv)
@@ -263,18 +263,18 @@ az cognitiveservices account deployment list \
 
 **Očekáváno:** 
 - 3-4 OpenAI účty (primární, sekundární, terciární, evaluační regiony)
-- 1-2 nasazení modelů na účet (gpt-4o, gpt-4o-mini, text-embedding-ada-002)
+- 1-2 nasazení modelů na účet (gpt-4.1, gpt-4.1-mini, text-embedding-ada-002)
 
 ### Krok 3: Otestujte koncové body infrastruktury (5 minut)
 
 ```bash
-# Získejte URL adresy aplikace Container
+# Získat URL adresy Container App
 az containerapp list \
   --resource-group myResourceGroup \
   --query "[].{Name:name, URL:properties.configuration.ingress.fqdn, Status:properties.runningStatus}" \
   --output table
 
-# Otestujte koncový bod routeru (odpoví zástupný obrázek)
+# Otestovat koncový bod routeru (odpoví zástupný obrázek)
 ROUTER_URL=$(az containerapp show \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -286,12 +286,12 @@ curl -I https://$ROUTER_URL || echo "Container running (placeholder image - expe
 
 **Očekáváno:** 
 - Container Apps ukazují stav "Running"
-- Zástupný nginx odpovídá HTTP 200 nebo 404 (zatím žádný aplikační kód)
+- Zástupný nginx odpovídá s HTTP 200 nebo 404 (aplikační kód zatím není nasazen)
 
-### Krok 4: Ověřte přístup k Azure OpenAI API (3 minuty)
+### Krok 4: Ověřte přístup k API Microsoft Foundry Models (3 minuty)
 
 ```bash
-# Získejte koncový bod OpenAI a klíč
+# Získat koncový bod a klíč OpenAI
 OPENAI_ENDPOINT=$(az cognitiveservices account show \
   --name $OPENAI_NAME \
   --resource-group myResourceGroup \
@@ -302,8 +302,8 @@ OPENAI_KEY=$(az cognitiveservices account keys list \
   --resource-group myResourceGroup \
   --query "key1" -o tsv)
 
-# Otestujte nasazení GPT-4o
-curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview" \
+# Otestovat nasazení gpt-4.1
+curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
   -d '{
@@ -314,25 +314,25 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
 
 **Očekáváno:** JSON odpověď s dokončením chatu (potvrzuje funkčnost OpenAI)
 
-### Co funguje vs. co ne
+### Co funguje vs. co nefunguje
 
 **✅ Funguje po nasazení:**
-- Modely Azure OpenAI nasazeny a přijímají API volání
-- AI Search služba běží (prázdná, bez indexů)
-- Container Apps běží (zástupné nginx obrázky)
-- Úložiště přístupné a připravené na nahrávání
-- Cosmos DB připraveno na datové operace
+- Modely Microsoft Foundry Models nasazeny a přijímají volání API
+- Služba AI Search běží (prázdná, bez indexů)
+- Container Apps běží (zástupné nginx image)
+- Storage účty přístupné a připravené k nahrávání
+- Cosmos DB připraveno pro operace s daty
 - Application Insights sbírá telemetrii infrastruktury
-- Key Vault připraven na ukládání tajemství
+- Key Vault připraven pro ukládání tajemství
 
-**❌ Zatím nefunguje (vyžaduje vývoj):**
-- Endpointy agentů (zatím žádný aplikační kód)
+**❌ Ještě nefunkční (vyžaduje vývoj):**
+- Endpointy agentů (není nasazen aplikační kód)
 - Funkčnost chatu (vyžaduje frontend + backend implementaci)
-- Dotazy vyhledávání (zatím žádný vytvořený index)
-- Pipeline zpracování dokumentů (zatím žádná nahraná data)
+- Dotazy do vyhledávání (není vytvořen vyhledávací index)
+- Pipeline zpracování dokumentů (data nejsou nahraná)
 - Vlastní telemetrie (vyžaduje instrumentaci aplikace)
 
-**Další kroky:** Viz [Konfigurace po nasazení](../../../../examples/retail-multiagent-arm-template) pro vývoj a nasazení vaší aplikace
+**Další kroky:** Viz [Post-Deployment Configuration](#-post-deployment-next-steps) pro vývoj a nasazení vaší aplikace
 
 ---
 
@@ -340,17 +340,17 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
 
 ### Parametry šablony
 
-| Parametr | Typ | Výchozí | Popis |
-|----------|-----|---------|-------|
-| `projectName` | string | "retail" | Prefix pro všechny názvy zdrojů |
-| `location` | string | Umístění Resource Group | Primární region nasazení |
-| `secondaryLocation` | string | "westus2" | Sekundární region pro nasazení ve více regionech |
-| `tertiaryLocation` | string | "francecentral" | Region pro model embeddings |
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `projectName` | string | "retail" | Prefix pro všechna jména zdrojů |
+| `location` | string | Resource group location | Primární region nasazení |
+| `secondaryLocation` | string | "westus2" | Sekundární region pro multi-region nasazení |
+| `tertiaryLocation` | string | "francecentral" | Region pro embeddingy |
 | `environmentName` | string | "dev" | Označení prostředí (dev/staging/prod) |
-| `deploymentMode` | string | "standard" | Konfigurace nasazení (minimální/standardní/prémiový) |
-| `enableMultiRegion` | bool | true | Povolit nasazení ve více regionech |
+| `deploymentMode` | string | "standard" | Konfigurace nasazení (minimal/standard/premium) |
+| `enableMultiRegion` | bool | true | Povolit multi-region nasazení |
 | `enableMonitoring` | bool | true | Povolit Application Insights a logování |
-| `enableSecurity` | bool | true | Povolit Key Vault a zvýšenou bezpečnost |
+| `enableSecurity` | bool | true | Povolit Key Vault a rozšířené zabezpečení |
 
 ### Přizpůsobení parametrů
 
@@ -379,28 +379,19 @@ Upravte `azuredeploy.parameters.json`:
 
 ## 🏗️ Přehled architektury
 
+```mermaid
+graph TD
+    Frontend[Frontend<br/>Kontejnerová aplikace] --> Router[Směrovač agentů<br/>Kontejnerová aplikace] --> Agents[Agenti<br/>Zákazník + Inventář]
+    Router --> Search[AI vyhledávání<br/>Vektorová DB]
+    Router --> Models[Modely Microsoft Foundry<br/>Víceregionální]
+    Agents --> Storage[Úložiště<br/>Dokumenty]
+    Search --> CosmosDB[Cosmos DB<br/>Historie chatu]
+    Models --> AppInsights[App Insights<br/>Monitorování]
+    Storage --> KeyVault[Key Vault<br/>Tajné hodnoty]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │  Agent Router   │    │     Agents      │
-│ (Container App) │───▶│ (Container App) │───▶│ Customer + Inv  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   AI Search     │    │  Azure OpenAI   │    │    Storage      │
-│   (Vector DB)   │    │ (Multi-region)  │    │   (Documents)   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                                │                        │
-                                ▼                        ▼
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│  Cosmos DB      │    │ App Insights    │    │   Key Vault     │
-│ (Chat History)  │    │  (Monitoring)   │    │   (Secrets)     │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ## 📖 Použití skriptu pro nasazení
 
-Skript `deploy.sh` poskytuje interaktivní zážitek z nasazení:
+Skript `deploy.sh` poskytuje interaktivní zážitek nasazení:
 
 ```bash
 # Zobrazit nápovědu
@@ -429,13 +420,13 @@ Skript `deploy.sh` poskytuje interaktivní zážitek z nasazení:
 ### Funkce skriptu
 
 - ✅ **Validace předpokladů** (Azure CLI, stav přihlášení, soubory šablony)
-- ✅ **Správa Resource Group** (vytvoří, pokud neexistuje)
+- ✅ **Správa resource group** (vytvoří, pokud neexistuje)
 - ✅ **Validace šablony** před nasazením
-- ✅ **Monitoring průběhu** s barevným výstupem
-- ✅ **Zobrazení výstupů nasazení**
+- ✅ **Sledování průběhu** s barevným výstupem
+- ✅ **Výstupy nasazení** zobrazovány
 - ✅ **Pokyny po nasazení**
 
-## 📊 Monitoring nasazení
+## 📊 Sledování nasazení
 
 ### Zkontrolujte stav nasazení
 
@@ -443,7 +434,7 @@ Skript `deploy.sh` poskytuje interaktivní zážitek z nasazení:
 # Seznam nasazení
 az deployment group list --resource-group myResourceGroup --output table
 
-# Získat podrobnosti o nasazení
+# Zobrazit podrobnosti nasazení
 az deployment group show \
   --resource-group myResourceGroup \
   --name retail-deployment-YYYYMMDD-HHMMSS
@@ -461,34 +452,34 @@ az deployment group create \
 Po úspěšném nasazení jsou dostupné následující výstupy:
 
 - **Frontend URL**: Veřejný endpoint pro webové rozhraní
-- **Router URL**: API endpoint pro směrování agentů
-- **OpenAI Endpointy**: Primární a sekundární endpointy OpenAI služeb
+- **Router URL**: API endpoint pro router agentů
+- **OpenAI Endpoints**: Primární a sekundární koncové body služby OpenAI
 - **Search Service**: Endpoint služby Azure AI Search
-- **Storage Account**: Název úložiště pro dokumenty
+- **Storage Account**: Název storage účtu pro dokumenty
 - **Key Vault**: Název Key Vault (pokud povoleno)
 - **Application Insights**: Název monitorovací služby (pokud povoleno)
 
 ## 🔧 Po nasazení: Další kroky
-> **📝 Důležité:** Infrastruktura je nasazena, ale je potřeba vyvinout a nasadit aplikační kód.
+> **📝 Důležité:** Infrastruktura je nasazena, ale musíte vyvinout a nasadit kód aplikace.
 
-### Fáze 1: Vývoj aplikací agentů (Vaše odpovědnost)
+### Fáze 1: Vyvinout agentní aplikace (vaše odpovědnost)
 
-ARM šablona vytvoří **prázdné Container Apps** s dočasnými nginx obrázky. Musíte:
+Šablona ARM vytvoří **prázdné Container Apps** se zástupnými nginx obrazy. Musíte:
 
 **Požadovaný vývoj:**
 1. **Implementace agentů** (30-40 hodin)
-   - Agent zákaznické podpory s integrací GPT-4o
-   - Agent inventáře s integrací GPT-4o-mini
+   - Agent zákaznické podpory s integrací gpt-4.1
+   - Agent správy zásob s integrací gpt-4.1-mini
    - Logika směrování agentů
 
-2. **Frontend vývoj** (20-30 hodin)
-   - Uživatelské rozhraní pro chat (React/Vue/Angular)
+2. **Vývoj frontendu** (20-30 hodin)
+   - Uživatelské rozhraní chatu (React/Vue/Angular)
    - Funkce nahrávání souborů
-   - Zobrazení a formátování odpovědí
+   - Zpracování a formátování odpovědí
 
 3. **Backend služby** (12-16 hodin)
    - FastAPI nebo Express router
-   - Middleware pro autentizaci
+   - Middleware pro ověřování
    - Integrace telemetrie
 
 **Viz:** [Průvodce architekturou](../retail-scenario.md) pro podrobné implementační vzory a příklady kódu
@@ -498,7 +489,7 @@ ARM šablona vytvoří **prázdné Container Apps** s dočasnými nginx obrázky
 Vytvořte vyhledávací index odpovídající vašemu datovému modelu:
 
 ```bash
-# Získejte podrobnosti o vyhledávací službě
+# Získejte informace o vyhledávací službě
 SEARCH_NAME=$(az search service list \
   --resource-group myResourceGroup \
   --query "[0].name" -o tsv)
@@ -508,7 +499,7 @@ SEARCH_KEY=$(az search admin-key show \
   --resource-group myResourceGroup \
   --query "primaryKey" -o tsv)
 
-# Vytvořte index podle svého schématu (příklad)
+# Vytvořte index podle vašeho schématu (příklad)
 curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: ${SEARCH_KEY}" \
@@ -531,14 +522,14 @@ curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023
 
 **Zdroje:**
 - [Návrh schématu AI vyhledávacího indexu](https://learn.microsoft.com/azure/search/search-what-is-an-index)
-- [Konfigurace vektorového vyhledávání](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
+- [Konfigurace vyhledávání vektorů](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
 
-### Fáze 3: Nahrání vašich dat (Doba se liší)
+### Fáze 3: Nahrajte svá data (doba se liší)
 
-Jakmile máte produktová data a dokumenty:
+Jakmile budete mít data o produktech a dokumenty:
 
 ```bash
-# Získejte podrobnosti o úložišti
+# Získat podrobnosti o účtu úložiště
 STORAGE_NAME=$(az storage account list \
   --resource-group myResourceGroup \
   --query "[0].name" -o tsv)
@@ -555,7 +546,7 @@ az storage blob upload-batch \
   --account-name $STORAGE_NAME \
   --account-key $STORAGE_KEY
 
-# Příklad: Nahrajte jeden soubor
+# Příklad: Nahrání jednoho souboru
 az storage blob upload \
   --container-name documents \
   --name "product-manual.pdf" \
@@ -564,27 +555,27 @@ az storage blob upload \
   --account-key $STORAGE_KEY
 ```
 
-### Fáze 4: Vytvoření a nasazení vašich aplikací (8-12 hodin)
+### Fáze 4: Sestavte a nasadte své aplikace (8-12 hodin)
 
 Jakmile vyvinete kód agentů:
 
 ```bash
-# 1. Vytvořte Azure Container Registry (pokud je potřeba)
+# 1. Vytvořte Azure Container Registry (pokud je to potřeba)
 az acr create \
   --name myregistry \
   --resource-group myResourceGroup \
   --sku Basic
 
-# 2. Vytvořte a pushněte image agent routeru
+# 2. Sestavte a nahrajte obraz směrovače agenta
 docker build -t myregistry.azurecr.io/agent-router:v1 /path/to/your/router/code
 az acr login --name myregistry
 docker push myregistry.azurecr.io/agent-router:v1
 
-# 3. Vytvořte a pushněte image frontendu
+# 3. Sestavte a nahrajte obraz frontendu
 docker build -t myregistry.azurecr.io/frontend:v1 /path/to/your/frontend/code
 docker push myregistry.azurecr.io/frontend:v1
 
-# 4. Aktualizujte Container Apps pomocí vašich imagí
+# 4. Aktualizujte Container Apps pomocí vašich obrazů
 az containerapp update \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -606,16 +597,16 @@ az containerapp update \
     SEARCH_KEY=secretref:search-key
 ```
 
-### Fáze 5: Testování vaší aplikace (2-4 hodiny)
+### Fáze 5: Otestujte svou aplikaci (2-4 hodiny)
 
 ```bash
-# Získejte URL vaší aplikace
+# Získejte adresu URL vaší aplikace
 ROUTER_URL=$(az containerapp show \
   --name retail-router \
   --resource-group myResourceGroup \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# Otestujte koncový bod agenta (jakmile je váš kód nasazen)
+# Otestujte koncový bod agenta (jakmile bude váš kód nasazen)
 curl -X POST "https://${ROUTER_URL}/chat" \
   -H "Content-Type: application/json" \
   -d '{
@@ -623,71 +614,71 @@ curl -X POST "https://${ROUTER_URL}/chat" \
     "agent": "customer"
   }'
 
-# Zkontrolujte logy aplikace
+# Zkontrolujte protokoly aplikace
 az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
   --follow
 ```
 
-### Zdroje pro implementaci
+### Implementační zdroje
 
 **Architektura a návrh:**
 - 📖 [Kompletní průvodce architekturou](../retail-scenario.md) - Podrobné implementační vzory
 - 📖 [Vzorové návrhy pro více agentů](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
 
 **Příklady kódu:**
-- 🔗 [Azure OpenAI Chat Sample](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG vzor
-- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Framework pro agenty (C#)
+- 🔗 [Microsoft Foundry Models Chat Sample](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG vzor
+- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - Agentní framework (C#)
 - 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - Orchestrace agentů (Python)
 - 🔗 [AutoGen](https://github.com/microsoft/autogen) - Konverzace více agentů
 
-**Odhad celkové náročnosti:**
-- Nasazení infrastruktury: 15-25 minut (✅ Hotovo)
-- Vývoj aplikací: 80-120 hodin (🔨 Vaše práce)
+**Odhadovaná celková náročnost:**
+- Nasazení infrastruktury: 15-25 minut (✅ Dokončeno)
+- Vývoj aplikace: 80-120 hodin (🔨 Vaše práce)
 - Testování a optimalizace: 15-25 hodin (🔨 Vaše práce)
 
 ## 🛠️ Řešení problémů
 
 ### Běžné problémy
 
-#### 1. Překročená kvóta Azure OpenAI
+#### 1. Překročena kvóta Microsoft Foundry Models
 
 ```bash
-# Zkontrolujte aktuální využití kvóty
+# Zkontrolovat aktuální využití kvóty
 az cognitiveservices usage list --location eastus2
 
-# Požádejte o zvýšení kvóty
+# Požádat o zvýšení kvóty
 az support tickets create \
   --ticket-name "OpenAI-Quota-Increase" \
   --severity "minimal" \
-  --description "Request quota increase for Azure OpenAI in region X"
+  --description "Request quota increase for Microsoft Foundry Models in region X"
 ```
 
-#### 2. Selhání nasazení Container Apps
+#### 2. Nasazení Container Apps selhalo
 
 ```bash
-# Zkontrolujte logy aplikace kontejneru
+# Zkontrolujte logy kontejnerové aplikace
 az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
   --follow
 
-# Restartujte aplikaci kontejneru
+# Restartujte kontejnerovou aplikaci
 az containerapp revision restart \
   --name retail-router \
   --resource-group myResourceGroup
 ```
 
-#### 3. Inicializace vyhledávací služby
+#### 3. Inicializace služby Search
 
 ```bash
-# Ověřte stav vyhledávací služby
+# Ověřit stav vyhledávací služby
 az search service show \
   --name <search-service-name> \
   --resource-group myResourceGroup
 
-# Otestujte připojení k vyhledávací službě
+# Ověřit připojení k vyhledávací službě
 curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-version=2023-11-01" \
   -H "api-key: <search-admin-key>"
 ```
@@ -695,12 +686,12 @@ curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-versio
 ### Validace nasazení
 
 ```bash
-# Ověřte, že všechny zdroje byly vytvořeny
+# Ověřit, že všechny zdroje byly vytvořeny
 az resource list \
   --resource-group myResourceGroup \
   --output table
 
-# Zkontrolujte stav zdrojů
+# Zkontrolovat stav zdroje
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
@@ -710,18 +701,18 @@ az resource list \
 ## 🔐 Bezpečnostní aspekty
 
 ### Správa klíčů
-- Všechny tajné klíče jsou uloženy v Azure Key Vault (pokud je povoleno)
-- Container Apps používají spravovanou identitu pro autentizaci
-- Účty úložiště mají bezpečné výchozí nastavení (pouze HTTPS, žádný veřejný přístup k blobům)
+- Všechna tajemství jsou uložena v Azure Key Vault (pokud je povoleno)
+- Container apps používají spravovanou identitu pro ověřování
+- Účty úložiště mají bezpečné výchozí nastavení (pouze HTTPS, bez veřejného přístupu k blobům)
 
 ### Síťová bezpečnost
-- Container Apps používají interní síťové propojení, kde je to možné
-- Vyhledávací služba je nakonfigurována s možností privátních koncových bodů
-- Cosmos DB je nakonfigurována s minimálními potřebnými oprávněními
+- Container apps používají interní síťování, kde je to možné
+- Služba Search nakonfigurována s možností privátních koncových bodů
+- Cosmos DB nakonfigurováno s minimálními nezbytnými oprávněními
 
 ### Konfigurace RBAC
 ```bash
-# Přiřaďte potřebné role pro spravovanou identitu
+# Přiřaďte potřebné role spravované identitě
 az role assignment create \
   --assignee <container-app-managed-identity> \
   --role "Cognitive Services OpenAI User" \
@@ -730,11 +721,11 @@ az role assignment create \
 
 ## 💰 Optimalizace nákladů
 
-### Odhady nákladů (měsíčně, USD)
+### Odhad nákladů (měsíčně, USD)
 
-| Režim | OpenAI | Container Apps | Vyhledávání | Úložiště | Celkem odhad. |
-|-------|--------|----------------|-------------|----------|---------------|
-| Minimální | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
+| Mode | OpenAI | Container Apps | Search | Storage | Total Est. |
+|------|--------|----------------|--------|---------|------------|
+| Minimizovaný | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
 | Standardní | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
 | Prémiový | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
 
@@ -755,12 +746,12 @@ az consumption budget create \
 
 ### Aktualizace šablon
 - Verzujte soubory ARM šablon
-- Testujte změny nejprve v vývojovém prostředí
-- Používejte režim inkrementálního nasazení pro aktualizace
+- Nejdříve otestujte změny ve vývojovém prostředí
+- Pro aktualizace používejte režim inkrementálního nasazení
 
-### Aktualizace zdrojů
+### Aktualizace prostředků
 ```bash
-# Aktualizovat s novými parametry
+# Aktualizujte s novými parametry
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
@@ -769,25 +760,25 @@ az deployment group create \
 ```
 
 ### Zálohování a obnova
-- Cosmos DB má povolené automatické zálohování
-- Key Vault má povolené soft delete
-- Revidované verze Container Apps jsou uchovávány pro případné vrácení změn
+- Automatické zálohování Cosmos DB je povoleno
+- Funkce soft delete v Key Vault je povolena
+- Revize container aplikací jsou uchovávány pro obnovení
 
 ## 📞 Podpora
 
 - **Problémy se šablonou**: [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
-- **Podpora Azure**: [Azure Support Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
+- **Portál podpory Azure**: [Azure Support Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
 - **Komunita**: [Azure AI Discord](https://discord.gg/microsoft-azure)
 
 ---
 
-**⚡ Připraveni nasadit vaše řešení s více agenty?**
+**⚡ Připraveno nasadit vaše multiagentní řešení?**
 
 Začněte s: `./deploy.sh -g myResourceGroup`
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Prohlášení**:  
-Tento dokument byl přeložen pomocí služby AI pro překlady [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho rodném jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
+**Prohlášení o vyloučení odpovědnosti**:
+Tento dokument byl přeložen s využitím AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho rodném jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo chybné interpretace vyplývající z použití tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

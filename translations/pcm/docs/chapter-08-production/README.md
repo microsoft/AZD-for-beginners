@@ -1,40 +1,40 @@
 # Chapter 8: Production & Enterprise Patterns
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 2-3 awa | **⭐ Complexity**: Advanced
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 2-3 hours | **⭐ Complexity**: Advanced
 
 ---
 
 ## Overview
 
-Dis chapter dey cover deployment pattern wey enterprise fit use, security hardening, monitoring, and how to optimize cost for production AI workloads.
+Dis chapter dey cover deployment patterns wey ready for enterprise, how to harden security, monitoring, an how to optimize cost for production AI workloads.
 
 ## Learning Objectives
 
-By completing this chapter, you will:
-- Deploy app wey resilient across many regions
-- Apply enterprise-level security patterns
-- Setup comprehensive monitoring
-- Optimize costs when you scale
+By finishing dis chapter, you go:
+- Deploy multi-region resilient applications
+- Implement enterprise security patterns
+- Configure comprehensive monitoring
+- Optimize costs at scale
 - Set up CI/CD pipelines with AZD
 
 ---
 
 ## 📚 Lessons
 
-| # | Lesson | Description | Time |
+| # | Leson | Deskripsion | Taem |
 |---|--------|-------------|------|
-| 1 | [Production AI Practices](production-ai-practices.md) | Deployment pattern dem wey enterprise dey use | 90 min |
+| 1 | [Production AI Practices](production-ai-practices.md) | Deployment patterns wey enterprise dey use | 90 min |
 
 ---
 
 ## 🚀 Production Checklist
 
-- [ ] Deploy for many regions make e resilient
-- [ ] Make managed identity dey for authentication (no keys)
+- [ ] Deploy for many regions make e dey resilient
+- [ ] Use managed identity for authentication (no keys)
 - [ ] Use Application Insights for monitoring
-- [ ] Configure cost budgets and alerts
-- [ ] Enable security scanning
-- [ ] Integrate CI/CD pipeline
+- [ ] Cost budgets and alerts don set
+- [ ] Security scanning don enable
+- [ ] CI/CD pipeline integration
 - [ ] Get disaster recovery plan
 
 ---
@@ -43,25 +43,18 @@ By completing this chapter, you will:
 
 ### Pattern 1: Microservices AI
 
+```mermaid
+graph LR
+    Gateway[API Gatewey] --> AI[AI Sabis] --> Models[Microsoft Foundry model dem]
+    Gateway --> Auth[Auth Sabis]
+    AI --> Data[Data Sto]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
-
 ### Pattern 2: Event-Driven AI
 
+```mermaid
+graph LR
+    EventGrid[Grid wey dey handle events] --> Functions[Function dem] --> Pipeline[Pipeline wey dey run AI]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
 ## 🔐 Security Best Practices
@@ -93,7 +86,7 @@ properties: {
 | Reserved capacity | 20-40% |
 
 ```bash
-# Make budget alert dem
+# Put alert dem for budget
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -106,7 +99,7 @@ az consumption budget create \
 ## 📊 Monitoring Setup
 
 ```bash
-# Stream di log dem
+# Stream di logs
 azd monitor --logs
 
 # Check di Application Insights
@@ -138,5 +131,5 @@ az monitor metrics list --resource <resource-id>
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 Disclaimer:
-Dis document don translate by AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, abeg sabi say automatic translations fit get mistakes or no too correct. Di original document for im original language na di main/authoritative source. If na important info, make una use professional human translator. We no go responsible for any misunderstanding or wrong interpretation Wey fit come from this translation.
+Dis document na AI translation wey dem do with Co-op Translator (https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg note say machine translations fit get mistakes or no too correct. Di original document for im own language suppose be di main authority. If na serious or critical information, make you use professional human translator. We no dey liable for any misunderstanding or wrong interpretation wey fit follow from dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

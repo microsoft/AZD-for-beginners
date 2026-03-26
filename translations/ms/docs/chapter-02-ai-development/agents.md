@@ -1,121 +1,145 @@
 # Ejen AI dengan Azure Developer CLI
 
 **Navigasi Bab:**
-- **📚 Laman Kursus**: [AZD For Beginners](../../README.md)
+- **📚 Laman Utama Kursus**: [AZD Untuk Pemula](../../README.md)
 - **📖 Bab Semasa**: Bab 2 - Pembangunan AI-Pertama
-- **⬅️ Sebelumnya**: [AI Model Deployment](ai-model-deployment.md)
-- **➡️ Seterusnya**: [Production AI Practices](production-ai-practices.md)
-- **🚀 Lanjutan**: [Multi-Agent Solutions](../../examples/retail-scenario.md)
+- **⬅️ Sebelumnya**: [Integrasi Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Seterusnya**: [Penggunaan Model AI](ai-model-deployment.md)
+- **🚀 Lanjutan**: [Penyelesaian Multi-Ejen](../../examples/retail-scenario.md)
 
 ---
 
 ## Pengenalan
 
-Ejen AI adalah program autonomi yang boleh melihat persekitaran mereka, membuat keputusan, dan mengambil tindakan untuk mencapai matlamat tertentu. Berbeza dengan chatbot ringkas yang memberi respons kepada arahan, ejen boleh:
+Ejen AI adalah program autonomi yang boleh memerhati persekitarannya, membuat keputusan, dan mengambil tindakan untuk mencapai matlamat tertentu. Berbeza dengan chatbot mudah yang hanya memberi balasan berdasarkan arahan, ejen boleh:
 
-- **Menggunakan alat** - Memanggil API, mencari dalam pangkalan data, menjalankan kod
-- **Merancang dan berfikir** - Memecahkan tugasan kompleks kepada langkah-langkah
-- **Belajar dari konteks** - Mengekalkan memori dan menyesuaikan tingkah laku
-- **Berkerjasama** - Bekerja dengan ejen lain (sistem berbilang ejen)
+- **Menggunakan alat** - Memanggil API, mencari pangkalan data, melaksanakan kod
+- **Merancang dan berfikir** - Memecahkan tugas kompleks kepada langkah-langkah
+- **Belajar daripada konteks** - Menyimpan memori dan menyesuaikan tingkah laku
+- **Bekerjasama** - Bekerja dengan ejen lain (sistem multi-ejen)
 
-Panduan ini menunjukkan cara untuk melancarkan ejen AI ke Azure menggunakan Azure Developer CLI (azd).
+Panduan ini menunjukkan cara menggunakan Azure Developer CLI (azd) untuk guna ejen AI ke Azure.
 
 ## Matlamat Pembelajaran
 
-Dengan menyelesaikan panduan ini, anda akan:
+Dengan menyiapkan panduan ini, anda akan:
 - Memahami apa itu ejen AI dan bagaimana ia berbeza daripada chatbot
-- Melancarkan templat ejen pra-bina menggunakan AZD
+- Mengguna tema ejen AI sedia ada menggunakan AZD
 - Mengkonfigurasi Foundry Agents untuk ejen tersuai
-- Melaksanakan corak ejen asas (penggunaan alat, RAG, multi-ejen)
-- Memantau dan menyahpepijat ejen yang dilancarkan
+- Melaksanakan corak asas ejen (penggunaan alat, RAG, multi-ejen)
+- Memantau dan menyahpepijat ejen yang digunakan
 
 ## Hasil Pembelajaran
 
-Selepas selesai, anda akan dapat:
-- Melancarkan aplikasi ejen AI ke Azure dengan satu arahan
-- Mengkonfigurasi alat dan kebolehan ejen
-- Melaksanakan retrieval-augmented generation (RAG) dengan ejen
+Selepas selesai, anda akan boleh:
+- Mengguna aplikasi ejen AI ke Azure dengan satu arahan
+- Mengkonfigurasi alat dan keupayaan ejen
+- Melaksanakan penghasilan berpandukan carian (RAG) dengan ejen
 - Mereka bentuk seni bina multi-ejen untuk aliran kerja kompleks
-- Menyelesaikan isu biasa semasa pelancaran ejen
+- Menyelesaikan masalah biasa dalam penggunaan ejen
 
 ---
 
-## 🤖 Apa yang Membezakan Ejen daripada Chatbot?
+## 🤖 Apa Yang Membezakan Ejen daripada Chatbot?
 
 | Ciri | Chatbot | Ejen AI |
 |---------|---------|----------|
-| **Tingkah laku** | Memberi respons kepada arahan | Mengambil tindakan secara autonomi |
-| **Alat** | Tiada | Boleh memanggil API, mencari, menjalankan kod |
-| **Memori** | Hanya berasaskan sesi | Memori berterusan merentas sesi |
-| **Perancangan** | Respons tunggal | Penalaran berbilang langkah |
+| **Tingkah Laku** | Memberi balasan berdasarkan arahan | Mengambil tindakan secara autonomi |
+| **Alat** | Tiada | Boleh memanggil API, mencari, melaksanakan kod |
+| **Memori** | Hanya berdasarkan sesi | Memori berterusan merentas sesi |
+| **Perancangan** | Balasan tunggal | Pemikiran berbilang langkah |
 | **Kerjasama** | Entiti tunggal | Boleh bekerjasama dengan ejen lain |
 
-### Analogi Ringkas
+### Analogi Mudah
 
 - **Chatbot** = Seorang yang membantu menjawab soalan di kaunter maklumat
-- **Ejen AI** = Pembantu peribadi yang boleh membuat panggilan, menempah temu janji, dan menyelesaikan tugasan untuk anda
+- **Ejen AI** = Pembantu peribadi yang boleh membuat panggilan, menempah janji, dan menyelesaikan tugas untuk anda
 
 ---
 
-## 🚀 Permulaan Pantas: Lancarkan Ejen Pertama Anda
+## 🚀 Mula Cepat: Gunakan Ejen Pertama Anda
 
-### Pilihan 1: Templat Ejen Foundry (Disyorkan)
+### Pilihan 1: Templet Foundry Agents (Disyorkan)
 
 ```bash
-# Inisialisasikan templat ejen AI
+# Mulakan templat ejen AI
 azd init --template get-started-with-ai-agents
 
 # Sebarkan ke Azure
 azd up
 ```
 
-**Yang akan dilancarkan:**
+**Apa yang digunakan:**
 - ✅ Foundry Agents
-- ✅ Azure OpenAI (GPT-4o)
+- ✅ Model Microsoft Foundry (gpt-4.1)
 - ✅ Azure AI Search (untuk RAG)
 - ✅ Azure Container Apps (antara muka web)
 - ✅ Application Insights (pemantauan)
 
-**Masa:** ~15-20 minit
+**Masa:** ~15-20 minit  
 **Kos:** ~$100-150/bulan (pembangunan)
 
 ### Pilihan 2: Ejen OpenAI dengan Prompty
 
 ```bash
-# Inisialisasikan templat ejen berasaskan Prompty
+# Inisialisasi templat agen berasaskan Prompty
 azd init --template agent-openai-python-prompty
 
-# Sebarkan ke Azure
+# Lancarkan ke Azure
 azd up
 ```
 
-**Yang akan dilancarkan:**
+**Apa yang digunakan:**
 - ✅ Azure Functions (pelaksanaan ejen tanpa pelayan)
-- ✅ Azure OpenAI
+- ✅ Model Microsoft Foundry
 - ✅ Fail konfigurasi Prompty
-- ✅ Pelaksanaan ejen contoh
+- ✅ Contoh pelaksanaan ejen
 
-**Masa:** ~10-15 minit
+**Masa:** ~10-15 minit  
 **Kos:** ~$50-100/bulan (pembangunan)
 
-### Pilihan 3: Ejen Sembang RAG
+### Pilihan 3: Ejen RAG Chat
 
 ```bash
-# Inisialisasikan templat sembang RAG
+# Inisialisasi templat sembang RAG
 azd init --template azure-search-openai-demo
 
-# Sebarkan ke Azure
+# Hantar ke Azure
 azd up
 ```
 
-**Yang akan dilancarkan:**
-- ✅ Azure OpenAI
+**Apa yang digunakan:**
+- ✅ Model Microsoft Foundry
 - ✅ Azure AI Search dengan data contoh
-- ✅ Rantaian pemprosesan dokumen
-- ✅ Antara muka sembang dengan petikan
+- ✅ Saluran pemprosesan dokumen
+- ✅ Antara muka sembang dengan sitasi
 
-**Masa:** ~15-25 minit
+**Masa:** ~15-25 minit  
 **Kos:** ~$80-150/bulan (pembangunan)
+
+### Pilihan 4: AZD AI Agent Init (Berdasarkan Manifest)
+
+Jika anda mempunyai fail manifest ejen, anda boleh gunakan arahan `azd ai` untuk membuat rangka projek Foundry Agent terus:
+
+```bash
+# Pasang sambungan ejen AI
+azd extension install azure.ai.agents
+
+# Mulakan dari manifest ejen
+azd ai agent init -m agent-manifest.yaml
+
+# Lancarkan ke Azure
+azd up
+```
+
+**Bila menggunakan `azd ai agent init` vs `azd init --template`:**
+
+| Pendekatan | Sesuai untuk | Cara Ia Berfungsi |
+|----------|----------|------|
+| `azd init --template` | Memulakan dari aplikasi contoh berfungsi | Mengklon repo templat penuh dengan kod + infrastruktur |
+| `azd ai agent init -m` | Membangun dari manifest ejen sendiri | Membina struktur projek dari definisi ejen anda |
+
+> **Petua:** Gunakan `azd init --template` untuk pembelajaran (Pilihan 1-3 di atas). Gunakan `azd ai agent init` untuk membina ejen produksi dengan manifest anda. Lihat [Arahan AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) untuk maklumat penuh.
 
 ---
 
@@ -123,87 +147,53 @@ azd up
 
 ### Corak 1: Ejen Tunggal dengan Alat
 
-Corak ejen paling ringkas - satu ejen yang boleh menggunakan pelbagai alat.
+Corak ejen paling mudah - satu ejen yang boleh menggunakan pelbagai alat.
 
+```mermaid
+graph TD
+    UI[Antara Muka Pengguna] --> Agent[Ejen AI<br/>gpt-4.1]
+    Agent --> Search[Alat Carian]
+    Agent --> Database[Alat Pangkalan Data]
+    Agent --> API[Alat API]
 ```
-┌─────────────────────────────────────┐
-│           User Interface            │
-└─────────────────┬───────────────────┘
-                  │
-          ┌───────▼───────┐
-          │  AI Agent     │
-          │  (GPT-4o)     │
-          └───────┬───────┘
-                  │
-    ┌─────────────┼─────────────┐
-    │             │             │
-┌───▼───┐   ┌────▼────┐   ┌───▼───┐
-│Search │   │Database │   │ API   │
-│ Tool  │   │  Tool   │   │ Tool  │
-└───────┘   └─────────┘   └───────┘
-```
-
-**Terbaik untuk:**
+**Sesua untuk:**
 - Bot sokongan pelanggan
 - Pembantu penyelidikan
 - Ejen analisis data
 
 **Templat AZD:** `azure-search-openai-demo`
 
-### Corak 2: Ejen RAG (Retrieval-Augmented Generation)
+### Corak 2: Ejen RAG (Penghasilan Berpandukan Carian)
 
-Ejen yang mengambil dokumen yang berkaitan sebelum menjana respons.
+Ejen yang mengambil dokumen berkaitan sebelum menjana balasan.
 
+```mermaid
+graph TD
+    Query[Pertanyaan Pengguna] --> RAG[Ejen RAG]
+    RAG --> Vector[Carian Vektor]
+    RAG --> LLM[LLM<br/>gpt-4.1]
+    Vector -- Dokumen --> LLM
+    LLM --> Response[Respons dengan Petikan]
 ```
-┌──────────────────────────────────────────────┐
-│                User Query                     │
-└─────────────────────┬────────────────────────┘
-                      │
-              ┌───────▼───────┐
-              │  RAG Agent    │
-              └───────┬───────┘
-                      │
-         ┌────────────┴────────────┐
-         │                         │
-    ┌────▼────┐              ┌────▼────┐
-    │ Vector  │              │  LLM    │
-    │ Search  │──Documents──►│ (GPT-4) │
-    └─────────┘              └────┬────┘
-                                  │
-                          ┌───────▼───────┐
-                          │ Response with │
-                          │  Citations    │
-                          └───────────────┘
-```
-
-**Terbaik untuk:**
+**Sesua untuk:**
 - Pangkalan pengetahuan perusahaan
-- Sistem Soalan & Jawapan dokumen
+- Sistem soalan-jawab dokumen
 - Penyelidikan pematuhan dan undang-undang
 
 **Templat AZD:** `azure-search-openai-demo`
 
 ### Corak 3: Sistem Multi-Ejen
 
-Berbilang ejen khusus yang bekerjasama pada tugasan kompleks.
+Beberapa ejen khusus yang bekerjasama dalam tugasan kompleks.
 
+```mermaid
+graph TD
+    Orchestrator[Ejen Orkestrator] --> Research[Ejen Penyelidikan<br/>gpt-4.1]
+    Orchestrator --> Writer[Ejen Penulis<br/>gpt-4.1-mini]
+    Orchestrator --> Reviewer[Ejen Penilai<br/>gpt-4.1]
 ```
-                ┌─────────────────┐
-                │  Orchestrator   │
-                │    Agent        │
-                └────────┬────────┘
-                         │
-        ┌────────────────┼────────────────┐
-        │                │                │
-┌───────▼───────┐ ┌─────▼──────┐ ┌───────▼───────┐
-│   Research    │ │   Writer   │ │   Reviewer    │
-│    Agent      │ │   Agent    │ │    Agent      │
-│  (GPT-4o)     │ │(GPT-4o-mini│ │   (GPT-4o)    │
-└───────────────┘ └────────────┘ └───────────────┘
-```
-
-**Terbaik untuk:**
-- Penjanaan kandungan kompleks
+**Sesua untuk:**
+- Penghasilan kandungan kompleks
 - Aliran kerja berbilang langkah
 - Tugasan yang memerlukan kepakaran berbeza
 
@@ -213,7 +203,7 @@ Berbilang ejen khusus yang bekerjasama pada tugasan kompleks.
 
 ## ⚙️ Mengkonfigurasi Alat Ejen
 
-Ejen menjadi berkuasa apabila mereka boleh menggunakan alat. Ini cara untuk mengkonfigurasi alat biasa:
+Ejen menjadi kuat apabila boleh menggunakan alat. Ini cara mengkonfigurasi alat biasa:
 
 ### Konfigurasi Alat dalam Foundry Agents
 
@@ -222,7 +212,7 @@ Ejen menjadi berkuasa apabila mereka boleh menggunakan alat. Ini cara untuk meng
 from azure.ai.projects import AIProjectClient
 from azure.ai.projects.models import FunctionTool, CodeInterpreterTool
 
-# Definisikan alat tersuai
+# Tetapkan alat tersuai
 search_tool = FunctionTool(
     name="search_knowledge_base",
     description="Search the company knowledge base for relevant documents",
@@ -238,9 +228,9 @@ search_tool = FunctionTool(
     }
 )
 
-# Cipta ejen dengan alat-alat
+# Cipta ejen dengan alat
 agent = project_client.agents.create_agent(
-    model="gpt-4o",
+    model="gpt-4.1",
     name="Support Agent",
     instructions="You are a helpful support agent. Use the search tool to find relevant information.",
     tools=[search_tool, CodeInterpreterTool()]
@@ -250,13 +240,13 @@ agent = project_client.agents.create_agent(
 ### Konfigurasi Persekitaran
 
 ```bash
-# Sediakan pembolehubah persekitaran khusus untuk ejen
-azd env set AZURE_OPENAI_MODEL "gpt-4o"
+# Tetapkan pembolehubah persekitaran khusus ejen
+azd env set AZURE_OPENAI_MODEL "gpt-4.1"
 azd env set AGENT_INSTRUCTIONS "You are a helpful assistant..."
 azd env set ENABLE_CODE_INTERPRETER "true"
 azd env set ENABLE_FILE_SEARCH "true"
 
-# Sebarkan dengan konfigurasi yang dikemas kini
+# Lancarkan dengan konfigurasi yang dikemas kini
 azd deploy
 ```
 
@@ -269,7 +259,7 @@ azd deploy
 Semua templat ejen AZD termasuk Application Insights untuk pemantauan:
 
 ```bash
-# Buka papan pemantauan
+# Buka papan pemuka pemantauan
 azd monitor --overview
 
 # Lihat log langsung
@@ -279,45 +269,49 @@ azd monitor --logs
 azd monitor --live
 ```
 
-### Metrik Utama untuk Jejak
+### Metrik Utama untuk Dipantau
 
-| Metrik | Perihalan | Sasaran |
+| Metrik | Penerangan | Sasaran |
 |--------|-------------|--------|
 | Kelewatan Respons | Masa untuk menjana respons | < 5 saat |
-| Penggunaan Token | Token setiap permintaan | Pantau untuk kos |
-| Kadar Kejayaan Panggilan Alat | % pelaksanaan alat berjaya | > 95% |
+| Penggunaan Token | Token per permintaan | Pemantauan kos |
+| Kadar Kejayaan Panggilan Alat | % panggilan alat berjaya | > 95% |
 | Kadar Ralat | Permintaan ejen gagal | < 1% |
 | Kepuasan Pengguna | Skor maklum balas | > 4.0/5.0 |
 
-### Pelogan Tersuai untuk Ejen
+### Log Khusus untuk Ejen
 
 ```python
-import logging
-from opencensus.ext.azure.log_exporter import AzureLogHandler
+import os
+from azure.monitor.opentelemetry import configure_azure_monitor
+from opentelemetry import trace
 
-logger = logging.getLogger(__name__)
-logger.addHandler(AzureLogHandler(
+# Konfigurasikan Azure Monitor dengan OpenTelemetry
+configure_azure_monitor(
     connection_string=os.environ["APPLICATIONINSIGHTS_CONNECTION_STRING"]
-))
+)
+
+tracer = trace.get_tracer(__name__)
 
 def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
-    logger.info("agent_interaction", extra={
-        "custom_dimensions": {
+    with tracer.start_as_current_span("agent_interaction") as span:
+        span.set_attributes({
             "user_query": user_query,
             "response_length": len(agent_response),
             "tools_used": tools_used,
             "latency_ms": latency_ms
-        }
-    })
+        })
 ```
+
+> **Nota:** Pasang pakej yang diperlukan: `pip install azure-monitor-opentelemetry opentelemetry`
 
 ---
 
 ## 💰 Pertimbangan Kos
 
-### Anggaran Kos Bulanan mengikut Corak
+### Anggaran Kos Bulanan Mengikut Corak
 
-| Corak | Persekitaran Pembangunan | Pengeluaran |
+| Corak | Persekitaran Pembangunan | Produksi |
 |---------|-----------------|------------|
 | Ejen Tunggal | $50-100 | $200-500 |
 | Ejen RAG | $80-150 | $300-800 |
@@ -326,12 +320,12 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 
 ### Petua Pengoptimuman Kos
 
-1. **Gunakan GPT-4o-mini untuk tugasan ringkas**
+1. **Gunakan gpt-4.1-mini untuk tugasan mudah**
    ```bash
-   azd env set AZURE_OPENAI_MODEL "gpt-4o-mini"
+   azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
 
-2. **Laksanakan caching untuk pertanyaan berulang**
+2. **Laksanakan penimbanan untuk pertanyaan berulang**
    ```python
    from functools import lru_cache
    
@@ -340,17 +334,19 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
        return agent.run(query_hash)
    ```
 
-3. **Tetapkan had token**
+3. **Tetapkan had token bagi setiap sesi**
    ```python
-   agent = project_client.agents.create_agent(
-       model="gpt-4o",
-       max_tokens=1000  # Hadkan panjang respons
+   # Tetapkan max_completion_tokens semasa menjalankan ejen, bukan semasa penciptaan
+   run = project_client.agents.create_run(
+       thread_id=thread.id,
+       agent_id=agent.id,
+       max_completion_tokens=1000  # Hadkan panjang respons
    )
    ```
 
-4. **Skalakan ke sifar apabila tidak digunakan**
+4. **Skala ke sifar apabila tidak digunakan**
    ```bash
-   # Aplikasi Kontena secara automatik diskalakan ke sifar
+   # Aplikasi Kontena secara automatik menskala ke sifar
    azd env set MIN_REPLICAS "0"
    ```
 
@@ -358,50 +354,50 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 
 ## 🔧 Menyelesaikan Masalah Ejen
 
-### Isu dan Penyelesaian Biasa
+### Isu Biasa dan Penyelesaian
 
 <details>
-<summary><strong>❌ Ejen tidak memberi respons kepada panggilan alat</strong></summary>
+<summary><strong>❌ Ejen tidak memberi balasan kepada panggilan alat</strong></summary>
 
 ```bash
-# Periksa sama ada alat telah didaftarkan dengan betul
+# Semak jika alat telah didaftarkan dengan betul
 azd show
 
-# Sahkan penyebaran OpenAI
+# Sahkan penempatan OpenAI
 az cognitiveservices account deployment list \
   --name $AZURE_OPENAI_NAME \
   --resource-group $RG_NAME
 
-# Periksa log ejen
+# Semak log agen
 azd monitor --logs
 ```
 
-**Punca biasa:**
-- Ketidakpadanan tandatangan fungsi alat
+**Sebab biasa:**
+- Tanda fungsi alat tidak sepadan
 - Kebenaran diperlukan hilang
-- Titik akhir API tidak dapat diakses
+- Titik akhir API tidak boleh capaian
 </details>
 
 <details>
-<summary><strong>❌ Kelewatan tinggi dalam respons ejen</strong></summary>
+<summary><strong>❌ Kelewatan tinggi dalam balasan ejen</strong></summary>
 
 ```bash
-# Periksa Application Insights untuk mengenal pasti kesesakan
+# Semak Application Insights untuk halangan prestasi
 azd monitor --live
 
 # Pertimbangkan menggunakan model yang lebih pantas
-azd env set AZURE_OPENAI_MODEL "gpt-4o-mini"
+azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd deploy
 ```
 
 **Petua pengoptimuman:**
-- Gunakan respons penstriman
-- Laksanakan caching respons
+- Gunakan balasan penstriman
+- Laksanakan penimbanan balasan
 - Kurangkan saiz tetingkap konteks
 </details>
 
 <details>
-<summary><strong>❌ Ejen memulangkan maklumat yang tidak betul atau halusinasi</strong></summary>
+<summary><strong>❌ Ejen memberi maklumat tidak tepat atau halusinasi</strong></summary>
 
 ```python
 # Tingkatkan dengan arahan sistem yang lebih baik
@@ -413,27 +409,29 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# Tambah pengambilan untuk membumikan
+# Tambah pengambilan untuk perkasaan
 agent = project_client.agents.create_agent(
-    model="gpt-4o",
+    model="gpt-4.1",
     instructions=instructions,
-    tools=[FileSearchTool()]  # Asaskan respons pada dokumen
+    tools=[FileSearchTool()]  # Perkasakan jawapan dalam dokumen
 )
 ```
 </details>
 
 <details>
-<summary><strong>❌ Ralat had token terlampau</strong></summary>
+<summary><strong>❌ Ralat melebihi had token</strong></summary>
 
 ```python
 # Laksanakan pengurusan tetingkap konteks
-def truncate_context(messages, max_tokens=8000):
+def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
     """Keep only recent messages within token limit."""
+    import tiktoken
+    encoding = tiktoken.encoding_for_model(model)
     total_tokens = 0
     truncated = []
     
     for msg in reversed(messages):
-        msg_tokens = len(msg.content) // 4  # Anggaran kasar
+        msg_tokens = len(encoding.encode(msg.content))
         if total_tokens + msg_tokens > max_tokens:
             break
         truncated.insert(0, msg)
@@ -445,14 +443,14 @@ def truncate_context(messages, max_tokens=8000):
 
 ---
 
-## 🎓 Latihan Amali
+## 🎓 Latihan Praktikal
 
-### Latihan 1: Lancarkan Ejen Asas (20 minit)
+### Latihan 1: Guna Ejen Asas (20 minit)
 
-**Matlamat:** Lancarkan ejen AI pertama anda menggunakan AZD
+**Matlamat:** Gunakan ejen AI pertama anda menggunakan AZD
 
 ```bash
-# Langkah 1: Inisialisasikan templat
+# Langkah 1: Inisialisasi templat
 azd init --template get-started-with-ai-agents
 
 # Langkah 2: Log masuk ke Azure
@@ -461,99 +459,146 @@ azd auth login
 # Langkah 3: Sebarkan
 azd up
 
-# Langkah 4: Uji ejen
-# Buka URL yang ditunjukkan dalam output
+# Langkah 4: Uji agen
+# Output yang dijangka selepas penyebaran:
+#   Penyebaran Selesai!
+#   Titik akhir: https://<nama-aplikasi>.<wilayah>.azurecontainerapps.io
+# Buka URL yang ditunjukkan dalam output dan cuba ajukan soalan
 
-# Langkah 5: Bersihkan
+# Langkah 5: Lihat pemantauan
+azd monitor --overview
+
+# Langkah 6: Bersihkan
 azd down --force --purge
 ```
 
 **Kriteria Kejayaan:**
-- [ ] Ejen memberi respons kepada soalan
-- [ ] Boleh mengakses papan pemuka pemantauan
+- [ ] Ejen memberi balasan kepada soalan
+- [ ] Boleh akses papan pemantauan melalui `azd monitor`
 - [ ] Sumber dibersihkan dengan jayanya
 
 ### Latihan 2: Tambah Alat Tersuai (30 minit)
 
 **Matlamat:** Kembangkan ejen dengan alat tersuai
 
-1. Lancarkan templat ejen
-2. Buat fungsi alat baru:
+1. Gunakan templat ejen:  
+   ```bash
+   azd init --template get-started-with-ai-agents
+   azd up
+   ```
+2. Cipta fungsi alat baru dalam kod ejen anda:  
    ```python
    def get_weather(location: str) -> str:
        """Get current weather for a location."""
        # Panggilan API ke perkhidmatan cuaca
        return f"Weather in {location}: Sunny, 72°F"
    ```
-3. Daftarkan alat dengan ejen
-4. Uji bahawa ejen menggunakan alat baru
+3. Daftar alat dengan ejen:  
+   ```python
+   from azure.ai.projects.models import FunctionTool
+
+   weather_tool = FunctionTool(
+       name="get_weather",
+       description="Get current weather for a location",
+       parameters={
+           "type": "object",
+           "properties": {
+               "location": {"type": "string", "description": "City name"}
+           },
+           "required": ["location"]
+       }
+   )
+
+   agent = project_client.agents.create_agent(
+       model="gpt-4.1",
+       name="Weather Agent",
+       tools=[weather_tool]
+   )
+   ```
+4. Gunakan semula dan uji:  
+   ```bash
+   azd deploy
+   # Tanya: "Bagaimana cuaca di Seattle?"
+   # Dijangka: Ejen memanggil get_weather("Seattle") dan mengembalikan maklumat cuaca
+   ```
 
 **Kriteria Kejayaan:**
-- [ ] Ejen mengenali pertanyaan berkaitan cuaca
+- [ ] Ejen mengenal pasti pertanyaan berkaitan cuaca
 - [ ] Alat dipanggil dengan betul
-- [ ] Respons termasuk maklumat cuaca
+- [ ] Balasan mengandungi maklumat cuaca
 
 ### Latihan 3: Bina Ejen RAG (45 minit)
 
-**Matlamat:** Cipta ejen yang menjawab soalan dari dokumen anda
+**Matlamat:** Cipta ejen yang menjawab soalan daripada dokumen anda
 
 ```bash
-# Laksanakan templat RAG
+# Langkah 1: Pasang templat RAG
 azd init --template azure-search-openai-demo
 azd up
 
-# Muat naik dokumen anda
-# (Ikuti panduan pengambilan data templat)
+# Langkah 2: Muat naik dokumen anda
+# Letakkan fail PDF/TXT dalam direktori data/, kemudian jalankan:
+python scripts/prepdocs.py
 
-# Uji dengan soalan khusus domain
+# Langkah 3: Uji dengan soalan khusus domain
+# Buka URL aplikasi web dari output azd up
+# Tanyakan soalan mengenai dokumen yang anda muat naik
+# Tindak balas harus termasuk rujukan sitasi seperti [doc.pdf]
 ```
 
 **Kriteria Kejayaan:**
-- [ ] Ejen menjawab dari dokumen yang dimuat naik
-- [ ] Respons termasuk petikan
-- [ ] Tiada halusinasi pada soalan di luar skop
+- [ ] Ejen menjawab soalan dari dokumen dimuat naik
+- [ ] Balasan mengandungi sitasi
+- [ ] Tiada halusinasi pada soalan luar skop
 
 ---
 
 ## 📚 Langkah Seterusnya
 
-Kini anda memahami ejen AI, terokai topik lanjutan berikut:
+Kini anda telah memahami ejen AI, terokai topik lanjutan ini:
 
-| Topik | Perihalan | Pautan |
+| Topik | Penerangan | Pautan |
 |-------|-------------|------|
-| **Sistem Multi-Ejen** | Bina sistem dengan pelbagai ejen yang bekerjasama | [Retail Multi-Agent Example](../../examples/retail-scenario.md) |
-| **Corak Penyelarasan** | Pelajari orkestrasi dan corak komunikasi | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **Pengeluaran** | Pelaksanaan ejen bersedia perusahaan | [Production AI Practices](production-ai-practices.md) |
-| **Penilaian Ejen** | Uji dan nilai prestasi ejen | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **Sistem Multi-Ejen** | Bina sistem dengan ejen yang bekerjasama | [Contoh Multi-Ejen Runcit](../../examples/retail-scenario.md) |
+| **Corak Penyelarasan** | Pelajari corak orkestra dan komunikasi | [Corak Penyelarasan](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Penggunaan Produksi** | Penggunaan ejen sedia produksi | [Amalan AI Produksi](../chapter-08-production/production-ai-practices.md) |
+| **Penilaian Ejen** | Uji dan nilai prestasi ejen | [Penyelesaian Masalah AI](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **Makmal Bengkel AI** | Praktikal: Sediakan penyelesaian AI anda dengan AZD | [Makmal Bengkel AI](ai-workshop-lab.md) |
 
 ---
 
 ## 📖 Sumber Tambahan
 
 ### Dokumentasi Rasmi
-- [Foundry Agents](https://learn.microsoft.com/azure/ai-services/agents/)
-- [Azure OpenAI Assistants API](https://learn.microsoft.com/azure/ai-services/openai/how-to/assistant)
-- [Semantic Kernel (Agent Framework)](https://learn.microsoft.com/semantic-kernel/)
+- [Azure AI Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
+- [Azure AI Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
+- [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
 
 ### Templat AZD untuk Ejen
-- [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents)
-- [Agent OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
-- [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+- [Mulakan dengan Ejen AI](https://github.com/Azure-Samples/get-started-with-ai-agents)
+- [Ejen OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
+- [Demo Azure Search OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)
 
 ### Sumber Komuniti
-- [Awesome AZD - Agent Templates](https://azure.github.io/awesome-azd/?tags=ai-agents)
+- [Awesome AZD - Templat Ejen](https://azure.github.io/awesome-azd/?tags=ai-agents)
 - [Azure AI Discord](https://discord.gg/microsoft-azure)
 - [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
+
+### Kemahiran Ejen untuk Editor Anda
+- [**Kemahiran Ejen Microsoft Azure**](https://skills.sh/microsoft/github-copilot-for-azure) - Pasang kemahiran ejen AI boleh guna semula untuk pembangunan Azure dalam GitHub Copilot, Cursor, atau mana-mana agen yang disokong. Termasuk kemahiran untuk [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [penggunaan](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), dan [diagnostik](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
+  ```bash
+  npx skills add microsoft/github-copilot-for-azure
+  ```
 
 ---
 
 **Navigasi**
-- **Pelajaran Sebelumnya**: [AI Model Deployment](ai-model-deployment.md)
-- **Pelajaran Seterusnya**: [Production AI Practices](production-ai-practices.md)
+- **Pelajaran Sebelumnya**: [Integrasi Microsoft Foundry](microsoft-foundry-integration.md)
+- **Pelajaran Seterusnya**: [Penggunaan Model AI](ai-model-deployment.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Penafian:
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan penterjemahan AI Co-op Translator (https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidakakuratan. Dokumen asal dalam bahasa asalnya hendaklah dianggap sebagai sumber yang sahih. Untuk maklumat kritikal, disyorkan menggunakan penterjemah profesional manusia. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+**Penafian**:  
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidakakuratan. Dokumen asal dalam bahasa asalnya hendaklah dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan profesional oleh manusia adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

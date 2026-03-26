@@ -1,4 +1,4 @@
-# 6. fejezet: Telepítés előtti tervezés és érvényesítés
+# 6. fejezet: Előtelepítési tervezés és érvényesítés
 
 **📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 1 óra | **⭐ Bonyolultság**: Középhaladó
 
@@ -6,35 +6,35 @@
 
 ## Áttekintés
 
-Ez a fejezet a telepítés előtt szükséges alapvető tervezési és érvényesítési lépéseket tárgyalja. Tanuld meg, hogyan kerüld el a költséges hibákat megfelelő kapacitástervezéssel, SKU kiválasztással és előzetes ellenőrzésekkel.
+Ez a fejezet alapvető tervezési és érvényesítési lépéseket tárgyal az alkalmazás telepítése előtt. Tanulja meg, hogyan kerülheti el a költséges hibákat megfelelő kapacitástervezéssel, SKU kiválasztással és előzetes ellenőrzésekkel.
 
 ## Tanulási célok
 
-A fejezet elvégzése után képes leszel:
-- Előzetes ellenőrzések futtatása a telepítés előtt
-- Kapacitás tervezése és erőforrásigények becslése
-- Megfelelő SKU-k kiválasztása a költségoptimalizálás érdekében
-- Application Insights konfigurálása a monitorozáshoz
-- A csapatkoordinációs minták megértése
+A fejezet elvégzésével Ön képes lesz:
+- Elvégezni telepítés előtti ellenőrzéseket
+- Tervezni a kapacitást és becsülni az erőforrásigényeket
+- Megfelelő SKU-kat választani a költséghatékonyság érdekében
+- Konfigurálni az Application Insights-et a megfigyeléshez
+- Megérteni a csapat együttműködési mintáit
 
 ---
 
-## 📚 Leckék
+## 📚 Tananyagok
 
-| # | Lecke | Leírás | Idő |
-|---|--------|-------------|------|
-| 1 | [Előzetes ellenőrzések](preflight-checks.md) | Konfiguráció érvényesítése telepítés előtt | 15 min |
-| 2 | [Kapacitástervezés](capacity-planning.md) | Erőforrásigények becslése | 20 min |
-| 3 | [SKU-k kiválasztása](sku-selection.md) | Megfelelő árazási szintek kiválasztása | 15 min |
-| 4 | [Application Insights](application-insights.md) | Monitorozás konfigurálása | 20 min |
-| 5 | [Koordinációs minták](coordination-patterns.md) | Csapat telepítési munkafolyamatai | 15 min |
+| # | Tananyag | Leírás | Idő |
+|---|----------|--------|-----|
+| 1 | [Előzetes ellenőrzések](preflight-checks.md) | Konfiguráció érvényesítése telepítés előtt | 15 perc |
+| 2 | [Kapacitástervezés](capacity-planning.md) | Erőforrásigények becslése | 20 perc |
+| 3 | [SKU kiválasztás](sku-selection.md) | Megfelelő árképzési szintek kiválasztása | 15 perc |
+| 4 | [Application Insights](application-insights.md) | Monitorozás konfigurálása | 20 perc |
+| 5 | [Koordinációs minták](coordination-patterns.md) | Csapat telepítési munkafolyamatai | 15 perc |
 
 ---
 
-## 🚀 Gyors indítás
+## 🚀 Gyorsindítás
 
 ```bash
-# Előfizetés kvótáinak ellenőrzése
+# Ellenőrizze az előfizetési kvótákat
 az vm list-usage --location eastus --output table
 
 # Telepítés előnézete (nem hoz létre erőforrásokat)
@@ -43,23 +43,23 @@ azd provision --preview
 # Bicep szintaxis ellenőrzése
 az bicep build --file infra/main.bicep
 
-# Környezeti konfiguráció ellenőrzése
+# Környezet konfigurációjának ellenőrzése
 azd env get-values
 ```
 
 ---
 
-## ☑️ Telepítés előtti ellenőrzőlista
+## ☑️ Előtelepítési ellenőrzőlista
 
-### Mielőtt `azd provision`
+### Az `azd provision` előtt
 
 - [ ] Kvóta ellenőrizve a régióban
-- [ ] SKU-k megfelelő kiválasztása
-- [ ] Költségbecslés áttekintve
-- [ ] Elnevezési konvenció egységes
-- [ ] Biztonság/RBAC konfigurálva
+- [ ] SKU-k megfelelően kiválasztva
+- [ ] Költségbecslés átnézve
+- [ ] Névkonvenció egységes
+- [ ] Biztonság/RBAC beállítva
 
-### Mielőtt `azd deploy`
+### Az `azd deploy` előtt
 
 - [ ] Környezeti változók beállítva
 - [ ] Titkok a Key Vaultban
@@ -70,11 +70,11 @@ azd env get-values
 
 ## 💰 SKU kiválasztási útmutató
 
-| Munkaterhelés | Fejlesztés | Éles |
-|----------|-------------|------------|
+| Munkaterhelés | Fejlesztés | Termelés |
+|---------------|------------|----------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
-| Azure OpenAI | Standard | Standard + PTU |
+| Microsoft Foundry Models | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
 
 ---
@@ -82,9 +82,9 @@ azd env get-values
 ## 🔗 Navigáció
 
 | Irány | Fejezet |
-|-----------|---------|
-| **Előző** | [Chapter 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Következő** | [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/README.md) |
+|-------|---------|
+| **Előző** | [5. fejezet: Több ügynök](../chapter-05-multi-agent/README.md) |
+| **Következő** | [7. fejezet: Hibakeresés](../chapter-07-troubleshooting/README.md) |
 
 ---
 
@@ -97,6 +97,6 @@ azd env get-values
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Felelősségkizáró nyilatkozat:
-Ez a dokumentum a Co-op Translator (https://github.com/Azure/co-op-translator) nevű mesterséges intelligencián alapuló fordítószolgáltatás segítségével készült. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti, anyanyelvi dokumentum tekintendő hiteles forrásnak. Kritikus fontosságú információk esetén professzionális, emberi fordítást javasolunk. Nem vállalunk felelősséget az ezen fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+**Jogi nyilatkozat**:  
+Ezt a dokumentumot az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordító szolgáltatás segítségével fordítottuk le. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum anyanyelvén tekintendő a hiteles forrásnak. Fontos információk esetén professzionális emberi fordítást javasolunk. Nem vállalunk felelősséget az ebből a fordításból eredő félreértésekért vagy félreértelmezésekért.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

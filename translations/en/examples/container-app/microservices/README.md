@@ -20,37 +20,12 @@ By completing this example, you will:
 
 ### Phase 1: What We're Building (Included in This Example)
 
+```mermaid
+graph TD
+    Internet[Internet] -- HTTPS --> Gateway[API Gateway<br/>Node.js Container<br/>Routes requests<br/>Health checks<br/>Request logging]
+    Gateway -- HTTP internal --> Product[Product Service<br/>Python Container<br/>Product CRUD<br/>In-memory data store<br/>REST API]
+    Product --> Insights[Application Insights<br/>Monitoring & Logs]
 ```
-                    ┌─────────────────────────────┐
-                    │         Internet            │
-                    └──────────────┬──────────────┘
-                                   │
-                                   │ HTTPS
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │      API Gateway            │
-                    │   (Node.js Container)       │
-                    │   - Routes requests         │
-                    │   - Health checks           │
-                    │   - Request logging         │
-                    └──────────────┬──────────────┘
-                                   │
-                                   │ HTTP (internal)
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │    Product Service          │
-                    │   (Python Container)        │
-                    │   - Product CRUD            │
-                    │   - In-memory data store    │
-                    │   - REST API                │
-                    └──────────────┬──────────────┘
-                                   │
-                    ┌──────────────▼──────────────┐
-                    │   Application Insights      │
-                    │   (Monitoring & Logs)       │
-                    └─────────────────────────────┘
-```
-
 **Why Start Simple?**
 - ✅ Deploy and understand quickly (25-35 minutes)
 - ✅ Learn core microservices patterns without complexity
@@ -302,7 +277,7 @@ microservices/
 
 **Code Highlight** (`src/api-gateway/app.js`):
 ```javascript
-// Internal service communication
+// Comunicación interna del servicio
 app.get('/api/products', async (req, res) => {
   const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
   res.json(response.data);
@@ -380,7 +355,7 @@ const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`);
 ### Full Deployment (Recommended)
 
 ```bash
-# Deploy infrastructure and both services
+# Deploy the infrastructure and both services
 azd up
 ```
 
@@ -396,10 +371,10 @@ This deploys:
 ### Deploy Individual Service
 
 ```bash
-# Deploy only one service (after initial azd up)
+# Déployez un seul service (après le premier azd up)
 azd deploy api-gateway
 
-# Or deploy product service
+# Ou déployez le service produit
 azd deploy product-service
 ```
 
@@ -623,7 +598,9 @@ az monitor app-insights component show \
    ```
 
 ### Free Tier Options
+
 For learning/testing, consider:
+
 - Use Azure free credits (first 30 days)
 - Keep to minimum replicas
 - Delete after testing (no ongoing charges)
@@ -817,6 +794,6 @@ A: Use Azure free tier (first 30 days with new accounts) or deploy for short tes
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-This document has been translated using the AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

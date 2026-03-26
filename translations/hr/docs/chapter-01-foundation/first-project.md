@@ -1,64 +1,64 @@
-# Vaš prvi projekt - praktični vodič
+# Vaš Prvi Projekt - Praktični Vodič
 
 **Navigacija poglavljima:**
-- **📚 Početna stranica tečaja**: [AZD For Beginners](../../README.md)
-- **📖 Trenutačno poglavlje**: Poglavlje 1 - Osnove i brzi početak
-- **⬅️ Prethodno**: [Installation & Setup](installation.md)
-- **➡️ Sljedeće**: [Configuration](configuration.md)
-- **🚀 Sljedeće poglavlje**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📚 Početak tečaja**: [AZD Za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 1 - Osnove i Brzi početak
+- **⬅️ Prethodno**: [Instalacija i postavljanje](installation.md)
+- **➡️ Sljedeće**: [Konfiguracija](configuration.md)
+- **🚀 Sljedeće poglavlje**: [Poglavlje 2: AI-prvi razvoj](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Uvod
 
-Dobrodošli u vaš prvi Azure Developer CLI projekt! Ovaj sveobuhvatni praktični vodič pruža potpuni korak-po-korak pregled stvaranja, implementacije i upravljanja full-stack aplikacijom na Azureu koristeći azd. Radit ćete s pravom todo aplikacijom koja uključuje React frontend, Node.js API backend i MongoDB bazu podataka.
+Dobrodošli u vaš prvi Azure Developer CLI projekt! Ovaj sveobuhvatni praktični vodič pruža potpuni pregled kreiranja, implementacije i upravljanja full-stack aplikacijom na Azureu koristeći azd. Radit ćete s pravom todo aplikacijom koja uključuje React frontend, Node.js API backend i MongoDB bazu podataka.
 
 ## Ciljevi učenja
 
-Nakon završetka ovog vodiča, naučit ćete:
-- Ovladati tijekovima inicijalizacije azd projekta pomoću predložaka
-- Razumjeti strukturu projekta Azure Developer CLI i konfiguracijske datoteke
-- Izvesti kompletnu implementaciju aplikacije na Azure s provisioningom infrastrukture
-- Implementirati strategije ažuriranja aplikacije i ponovne implementacije
-- Upravljati više okruženja za razvoj i staging
+Nakon završetka ovog vodiča moći ćete:
+- Ovladati procesom inicijalizacije azd projekta korištenjem predložaka
+- Razumjeti strukturu Azure Developer CLI projekta i konfiguracijske datoteke
+- Izvršiti kompletnu implementaciju aplikacije na Azure uključujući pružanje infrastrukture
+- Primijeniti strategije ažuriranja aplikacije i ponovne implementacije
+- Upravljati višestrukim okruženjima za razvoj i fazu testiranja
 - Primijeniti postupke čišćenja resursa i upravljanja troškovima
 
 ## Ishodi učenja
 
-Po dovršetku bit ćete sposobni:
+Po završetku moći ćete:
 - Samostalno inicijalizirati i konfigurirati azd projekte iz predložaka
-- Učinkovito se snalaziti i mijenjati strukturu azd projekata
-- Implementirati full-stack aplikacije na Azure s jednom naredbom
-- Rješavati uobičajene probleme s implementacijom i autentifikacijom
-- Upravljati više Azure okruženja za različite faze implementacije
-- Implementirati tijekove kontinuirane implementacije za ažuriranja aplikacije
+- Učinkovito pregledavati i mijenjati strukture azd projekata
+- Implementirati full-stack aplikacije na Azure jednim naredbama
+- Rješavati uobičajene probleme u implementaciji i autentifikaciji
+- Upravljati različitim Azure okruženjima za razne faze implementacije
+- Provoditi kontinuirane radne tokove za implementaciju ažuriranja aplikacije
 
 ## Početak rada
 
 ### Popis preduvjeta
-- ✅ Azure Developer CLI instaliran ([Vodič za instalaciju](installation.md))
-- ✅ Azure CLI instaliran i autentificiran
-- ✅ Git instaliran na vašem sustavu
+- ✅ Instaliran Azure Developer CLI ([Vodič za instalaciju](installation.md))
+- ✅ Instaliran i autentificiran Azure CLI
+- ✅ Instaliran Git na vašem sustavu
 - ✅ Node.js 16+ (za ovaj vodič)
 - ✅ Visual Studio Code (preporučeno)
 
-### Provjerite postavke
+### Provjera vašeg okruženja
 ```bash
 # Provjerite instalaciju azd
 azd version
 ```
-### Provjerite Azure autentifikaciju
+### Provjera Azure autentifikacije
 
 ```bash
 az account show
 ```
 
-### Provjerite verziju Node.js
+### Provjera verzije Node.js
 ```bash
 node --version
 ```
 
-## Korak 1: Odaberite i inicijalizirajte predložak
+## Korak 1: Odaberite i Inicijalizirajte Predložak
 
-Počnimo s popularnim predloškom todo aplikacije koji uključuje React frontend i Node.js API backend.
+Započnimo s popularnim predloškom todo aplikacije koja uključuje React frontend i Node.js API backend.
 
 ```bash
 # Pregledajte dostupne predloške
@@ -71,22 +71,22 @@ azd init --template todo-nodejs-mongo
 
 # Slijedite upute:
 # - Unesite naziv okruženja: "dev"
-# - Odaberite pretplatu (ako imate više pretplata)
-# - Odaberite regiju: "East US 2" (ili željenu regiju)
+# - Odaberite pretplatu (ako imate više)
+# - Odaberite regiju: "East US 2" (ili vašu željenu regiju)
 ```
 
 ### Što se upravo dogodilo?
-- Preuzeli ste kôd predloška u svoj lokalni direktorij
-- Stvorili `azure.yaml` datoteku s definicijama servisa
-- Postavili infrastrukturni kôd u direktoriju `infra/`
-- Stvorili konfiguraciju okruženja
+- Preuzeli ste predložak koda u vaš lokalni direktorij
+- Kreirali ste `azure.yaml` datoteku sa definicijama servisa
+- Postavili ste kod infrastrukture u direktorij `infra/`
+- Kreirali ste konfiguraciju okruženja
 
-## Korak 2: Istražite strukturu projekta
+## Korak 2: Istražite Strukturu Projekta
 
-Pogledajmo što je azd stvorio za nas:
+Pogledajmo što je azd kreirao za nas:
 
 ```bash
-# Prikaži strukturu projekta
+# Pogledajte strukturu projekta
 tree /f   # Windows
 # ili
 find . -type f | head -20   # macOS/Linux
@@ -123,23 +123,23 @@ my-first-azd-app/
 
 **azure.yaml** - Srž vašeg azd projekta:
 ```bash
-# Prikaži konfiguraciju projekta
+# Pogledajte konfiguraciju projekta
 cat azure.yaml
 ```
 
 **infra/main.bicep** - Definicija infrastrukture:
 ```bash
-# Pogledajte kôd infrastrukture
+# Pogledajte kod infrastrukture
 head -30 infra/main.bicep
 ```
 
 ## Korak 3: Prilagodite svoj projekt (opcionalno)
 
-Prije implementacije možete prilagoditi aplikaciju:
+Prije implementacije, možete prilagoditi aplikaciju:
 
-### Izmijenite frontend
+### Izmjena Frontenda
 ```bash
-# Otvori komponentu React aplikacije
+# Otvorite React komponentu aplikacije
 code src/web/src/App.tsx
 ```
 
@@ -149,38 +149,38 @@ Napravite jednostavnu promjenu:
 <h1>My Awesome Todo App</h1>
 ```
 
-### Konfigurirajte varijable okruženja
+### Konfiguracija varijabli okruženja
 ```bash
-# Postavite prilagođene varijable okruženja
+# Postavi prilagođene varijable okoliša
 azd env set WEBSITE_TITLE "My First AZD App"
 azd env set API_VERSION "v1.18"
-# Prikaži sve varijable okruženja
+# Prikaži sve varijable okoliša
 azd env get-values
 ```
 
 ## Korak 4: Implementirajte na Azure
 
-Sada dolazi uzbudljivi dio - implementirajte sve na Azure!
+Sada slijedi uzbudljivi dio - implementirajte sve na Azure!
 
 ```bash
-# Rasporedi infrastrukturu i aplikaciju
+# Postavi infrastrukturu i aplikaciju
 azd up
 
 # Ova naredba će:
-# 1. Osigurati Azure resurse (App Service, Cosmos DB itd.)
+# 1. Nabaviti Azure resurse (App Service, Cosmos DB, itd.)
 # 2. Izgraditi vašu aplikaciju
-# 3. Rasporediti na pripremljene resurse
+# 3. Implementirati na nabavljene resurse
 # 4. Prikazati URL aplikacije
 ```
 
 ### Što se događa tijekom implementacije?
 
-Naredba `azd up` izvodi ove korake:
-1. **Provision** (`azd provision`) - Stvara Azure resurse
-2. **Package** - Gradi vaš kôd aplikacije
-3. **Deploy** (`azd deploy`) - Implementira kôd na Azure resurse
+Komanda `azd up` izvršava ove korake:
+1. **Provision** (`azd provision`) - Kreira Azure resurse
+2. **Package** - Izgrađuje vaš aplikacijski kod
+3. **Deploy** (`azd deploy`) - Implementira kod na Azure resurse
 
-### Očekivani izlaz
+### Očekivani ispis
 ```
 Packaging services (azd package)
 
@@ -196,21 +196,21 @@ https://app-web-abc123def.azurewebsites.net
 ## Korak 5: Testirajte svoju aplikaciju
 
 ### Pristupite svojoj aplikaciji
-Kliknite na URL naveden u izlazu implementacije, ili ga dohvatite u bilo kojem trenutku:
+Kliknite na URL dan u ispisu implementacije ili ga dohvatite u bilo kojem trenutku:
 ```bash
 # Dohvati krajnje točke aplikacije
 azd show
 
-# Otvori aplikaciju u pregledniku
+# Otvorite aplikaciju u svom pregledniku
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
 ### Testirajte Todo aplikaciju
-1. **Dodajte stavku** - Kliknite "Dodaj zadatak" i unesite zadatak
+1. **Dodajte stavku u todo** - Kliknite "Add Todo" i unesite zadatak
 2. **Označite kao dovršeno** - Označite dovršene stavke
-3. **Obrišite stavke** - Uklonite zadatke koje više ne trebate
+3. **Izbrišite stavke** - Uklonite todose koje vam više nisu potrebne
 
-### Nadzirite svoju aplikaciju
+### Pratite svoju aplikaciju
 ```bash
 # Otvorite Azure portal za vaše resurse
 azd monitor
@@ -226,64 +226,64 @@ azd monitor --live
 
 Napravimo promjenu i vidimo koliko je lako ažurirati:
 
-### Izmijenite API
+### Promijenite API
 ```bash
 # Uredi API kod
 code src/api/src/routes/lists.js
 ```
 
-Dodajte prilagođeni response header:
+Dodajte prilagođeni naslov u odgovor:
 ```javascript
-// Pronađite obrađivača rute i dodajte:
+// Pronađite obrađivač rute i dodajte:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### Implementirajte samo promjene koda
+### Implementirajte samo izmjene koda
 ```bash
-# Rasporedi samo aplikacijski kod (preskoči infrastrukturu)
+# Samo implementirajte kod aplikacije (preskočite infrastrukturu)
 azd deploy
 
 # Ovo je puno brže od 'azd up' jer infrastruktura već postoji
 ```
 
-## Korak 7: Upravljanje višestrukim okruženjima
+## Korak 7: Upravljajte višestrukim okruženjima
 
-Stvorite staging okruženje za testiranje promjena prije produkcije:
+Kreirajte oblikovno okruženje za testiranje promjena prije proizvodnje:
 
 ```bash
-# Kreiraj novo staging okruženje
+# Kreiraj novo testno okruženje
 azd env new staging
 
-# Rasporedi u staging okruženje
+# Postavi na testno okruženje
 azd up
 
-# Prebaci natrag na dev okruženje
+# Vratite se na razvojno okruženje
 azd env select dev
 
-# Prikaži sva okruženja
+# Popis svih okruženja
 azd env list
 ```
 
 ### Usporedba okruženja
 ```bash
-# Prikaži razvojno okruženje
+# Pogledajte razvojno okruženje
 azd env select dev
 azd show
 
-# Prikaži pripremno okruženje
+# Pogledajte pripremno okruženje
 azd env select staging
 azd show
 ```
 
 ## Korak 8: Očistite resurse
 
-Kada završite s eksperimentiranjem, očistite resurse kako biste izbjegli stalne troškove:
+Kad završite s eksperimentiranjem, očistite resurse kako biste izbjegli daljnje troškove:
 
 ```bash
 # Izbriši sve Azure resurse za trenutno okruženje
 azd down
 
-# Prisilno izbriši bez potvrde i trajno ukloni soft-obrisane resurse
+# Prisilno brisanje bez potvrde i trajno uklanjanje privremeno izbrisanih resursa
 azd down --force --purge
 
 # Izbriši određeno okruženje
@@ -291,48 +291,68 @@ azd env select staging
 azd down --force --purge
 ```
 
+## Klasična aplikacija vs. AI-pogonjena aplikacija: Isti radni tijek
+
+Upravo ste implementirali tradicionalnu web aplikaciju. Ali što ako želite implementirati AI-pogonjenu aplikaciju - na primjer, chat aplikaciju podržanu Microsoft Foundry Modelima?
+
+Dobre vijesti: **radni tijek je identičan.**
+
+| Korak | Klasična Todo aplikacija | AI Chat aplikacija |
+|------|-----------------|-------------|
+| Inicijalizacija | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
+| Autentifikacija | `azd auth login` | `azd auth login` |
+| Implementacija | `azd up` | `azd up` |
+| Praćenje | `azd monitor` | `azd monitor` |
+| Čišćenje | `azd down --force --purge` | `azd down --force --purge` |
+
+Jedina razlika je **predložak** od kojeg počinjete. AI predložak uključuje dodatnu infrastrukturu (poput resursa Microsoft Foundry Modela ili AI Search indeksa), ali azd to sve rješava za vas. Ne trebate učiti nove naredbe, koristiti drugi alat ili mijenjati način razmišljanja o implementaciji.
+
+Ovo je temeljni princip azd: **jedan radni tijek, bilo koji zadatak.** Vještine koje ste uvježbali u ovom vodiču — inicijalizaciju, implementaciju, praćenje, ponovnu implementaciju i čišćenje — jednako se primjenjuju na AI aplikacije i agente.
+
+---
+
 ## Što ste naučili
 
 Čestitamo! Uspješno ste:
 - ✅ Inicijalizirali azd projekt iz predloška
 - ✅ Istražili strukturu projekta i ključne datoteke
 - ✅ Implementirali full-stack aplikaciju na Azure
-- ✅ Napravili promjene u kôdu i ponovno implementirali
+- ✅ Napravili promjene u kodu i ponovno implementirali
 - ✅ Upravljali višestrukim okruženjima
 - ✅ Očistili resurse
 
-## 🎯 Vježbe za provjeru vještina
+## 🎯 Vježbe za potvrdu vještina
 
-### Vježba 1: Implementirajte drugi predložak (15 minuta)
-**Cilj**: Demonstrirati ovladavanje azd init i tijekovima implementacije
+### Vježba 1: Implementirajte Drugi Predložak (15 minuta)
+**Cilj**: Demonstrirati ovladavanje azd init i radnim tokom implementacije
 
 ```bash
-# Isprobaj Python + MongoDB tehnološki stack
+# Isprobajte Python + MongoDB stog
 mkdir todo-python && cd todo-python
 azd init --template todo-python-mongo
 azd up
 
-# Provjeri postavljanje
+# Provjerite implementaciju
 azd show
 curl $(azd show --output json | jq -r '.services.web.endpoint')
 
-# Očisti
+# Očistite
 azd down --force --purge
 ```
 
 **Kriteriji uspjeha:**
-- [ ] Aplikacija se implementira bez pogrešaka
-- [ ] Moguće je pristupiti URL-u aplikacije u pregledniku
-- [ ] Aplikacija funkcionira ispravno (dodavanje/brisanje zadataka)
+- [ ] Aplikacija se implementira bez grešaka
+- [ ] Možete pristupiti URL-u aplikacije u pregledniku
+- [ ] Aplikacija ispravno radi (dodavanje/uklanjanje todo stavki)
 - [ ] Uspješno ste očistili sve resurse
 
-### Vježba 2: Prilagodite konfiguraciju (20 minuta)
+### Vježba 2: Prilagodite Konfiguraciju (20 minuta)
 **Cilj**: Vježbati konfiguraciju varijabli okruženja
 
 ```bash
 cd my-first-azd-app
 
-# Kreiraj prilagođeno okruženje
+# Stvori prilagođeno okruženje
 azd env new custom-config
 
 # Postavi prilagođene varijable
@@ -343,17 +363,17 @@ azd env set ENABLE_DEBUG "true"
 # Provjeri varijable
 azd env get-values | grep APP_TITLE
 
-# Implementiraj s prilagođenom konfiguracijom
+# Postavi s prilagođenom konfiguracijom
 azd up
 ```
 
 **Kriteriji uspjeha:**
-- [ ] Prilagođeno okruženje uspješno stvoreno
-- [ ] Varijable okruženja postavljene i dohvatljive
+- [ ] Prilagođeno okruženje je uspješno kreirano
+- [ ] Varijable okruženja su postavljene i moguće ih je dohvatiti
 - [ ] Aplikacija se implementira s prilagođenom konfiguracijom
-- [ ] Moguće je provjeriti prilagođene postavke u implementiranoj aplikaciji
+- [ ] Moguće je potvrditi prilagođene postavke u implementiranoj aplikaciji
 
-### Vježba 3: Tijek rada s više okruženja (25 minuta)
+### Vježba 3: Radni tijek s Višestrukim Okruženjima (25 minuta)
 **Cilj**: Ovladati upravljanjem okruženjima i strategijama implementacije
 
 ```bash
@@ -367,13 +387,13 @@ azd up
 DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Dev: $DEV_URL"
 
-# Kreiraj pripremno okruženje
+# Kreiraj testno okruženje
 azd env new staging-$(whoami)
 azd env set ENVIRONMENT_TYPE staging
 azd env set LOG_LEVEL info
 azd up
 
-# Zabilježi pripremni URL
+# Zabilježi testni URL
 STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Staging: $STAGING_URL"
 
@@ -384,16 +404,16 @@ azd env list
 curl "$DEV_URL/health"
 curl "$STAGING_URL/health"
 
-# Očisti oba okruženja
+# Očisti oba
 azd env select dev-$(whoami) && azd down --force --purge
 azd env select staging-$(whoami) && azd down --force --purge
 ```
 
 **Kriteriji uspjeha:**
-- [ ] Stvorena su dva okruženja s različitim konfiguracijama
-- [ ] Oba okruženja uspješno implementirana
-- [ ] Moguće je prebacivati se između okruženja koristeći `azd env select`
-- [ ] Varijable okruženja razlikuju se između okruženja
+- [ ] Kreirana su dva okruženja s različitim konfiguracijama
+- [ ] Oba okruženja su uspješno implementirana
+- [ ] Moguće je prebacivati između okruženja koristeći `azd env select`
+- [ ] Varijable okruženja se razlikuju između okruženja
 - [ ] Uspješno ste očistili oba okruženja
 
 ## 📊 Vaš napredak
@@ -401,45 +421,45 @@ azd env select staging-$(whoami) && azd down --force --purge
 **Uloženo vrijeme**: ~60-90 minuta  
 **Stečene vještine**:
 - ✅ Inicijalizacija projekata na temelju predložaka
-- ✅ Provisioning Azure resursa
-- ✅ Tijekovi implementacije aplikacija
+- ✅ Pružanje Azure resursa
+- ✅ Radni tokovi implementacije aplikacija
 - ✅ Upravljanje okruženjima
 - ✅ Upravljanje konfiguracijom
 - ✅ Čišćenje resursa i upravljanje troškovima
 
-**Sljedeća razina**: Spremni ste za [Configuration Guide](configuration.md) da naučite napredne obrasce konfiguracije!
+**Sljedeći korak**: Spremni ste za [Vodič za konfiguraciju](configuration.md) da naučite napredne obrasce konfiguracije!
 
 ## Rješavanje uobičajenih problema
 
-### Pogreške autentifikacije
+### Pogreške prijave
 ```bash
-# Ponovno se prijavite u Azure
+# Ponovno se autentificirajte s Azureom
 az login
 
 # Provjerite pristup pretplati
 az account show
 ```
 
-### Neuspjesi implementacije
+### Neuspjele implementacije
 ```bash
-# Omogući debug zapisivanje
+# Omogući zapisivanje zapisa za otklanjanje pogrešaka
 export AZD_DEBUG=true
 azd up --debug
 
-# Pregledajte zapisnike aplikacije u Azureu
+# Pregledajte dnevnike aplikacije u Azureu
 azd monitor --logs
 
 # Za Container Apps, koristite Azure CLI:
 # az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 ```
 
-### Sukobi imena resursa
+### Sukobi u imenima resursa
 ```bash
 # Koristite jedinstveno ime okruženja
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
-### Problemi s portom/mrežom
+### Problemi s portovima/mrežom
 ```bash
 # Provjerite jesu li portovi dostupni
 netstat -an | grep :3000
@@ -448,18 +468,18 @@ netstat -an | grep :3100
 
 ## Sljedeći koraci
 
-Sada kad ste dovršili svoj prvi projekt, istražite ove napredne teme:
+Sada kada ste završili prvi projekt, istražite ove napredne teme:
 
-### 1. Prilagodite infrastrukturu
-- [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md)
-- [Add databases, storage, and other services](../chapter-04-infrastructure/provisioning.md#adding-services)
+### 1. Prilagodba infrastrukture
+- [Infrastruktura kao kod](../chapter-04-infrastructure/provisioning.md)
+- [Dodavanje baza podataka, pohrane i drugih servisa](../chapter-04-infrastructure/provisioning.md#adding-services)
 
-### 2. Postavite CI/CD
-- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Kompletni CI/CD tijekovi rada
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - Konfiguracija pipelinea
+### 2. Postavljanje CI/CD
+- [Vodič za implementaciju](../chapter-04-infrastructure/deployment-guide.md) - potpuni CI/CD radni tokovi
+- [Dokumentacija Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - konfiguracija pipeline-a
 
 ### 3. Najbolje prakse za produkciju
-- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Sigurnost, performanse i nadzor
+- [Vodič za implementaciju](../chapter-04-infrastructure/deployment-guide.md) - sigurnost, performanse i nadzor
 
 ### 4. Istražite više predložaka
 ```bash
@@ -468,7 +488,7 @@ azd template list --filter web
 azd template list --filter api
 azd template list --filter database
 
-# Isprobajte različite tehnološke stackove
+# Isprobajte različite tehnološke skupove
 azd init --template todo-python-mongo
 azd init --template todo-csharp-sql
 azd init --template todo-java-mongo
@@ -477,37 +497,37 @@ azd init --template todo-java-mongo
 ## Dodatni resursi
 
 ### Materijali za učenje
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Dokumentacija Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ### Zajednica i podrška
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
+- [Azure Developer Zajednica](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
 ### Predlošci i primjeri
-- [Official Template Gallery](https://azure.github.io/awesome-azd/)
-- [Community Templates](https://github.com/Azure-Samples/azd-templates)
-- [Enterprise Patterns](https://github.com/Azure/azure-dev/tree/main/templates)
+- [Službena galerija predložaka](https://azure.github.io/awesome-azd/)
+- [Zajednički predlošci](https://github.com/Azure-Samples/azd-templates)
+- [Enterprise Obrasci](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
-**Čestitamo na dovršetku vašeg prvog azd projekta!** Sada ste spremni graditi i implementirati izvrsne aplikacije na Azureu s povjerenjem.
+**Čestitamo na završetku vašeg prvog azd projekta!** Spremni ste sada s povjerenjem graditi i implementirati izvrsne aplikacije na Azure.
 
 ---
 
 **Navigacija poglavljima:**
-- **📚 Početna stranica tečaja**: [AZD For Beginners](../../README.md)
-- **📖 Trenutačno poglavlje**: Poglavlje 1 - Osnove i brzi početak
-- **⬅️ Prethodno**: [Installation & Setup](installation.md)
-- **➡️ Sljedeće**: [Configuration](configuration.md)
-- **🚀 Sljedeće poglavlje**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **Sljedeća lekcija**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+- **📚 Početak tečaja**: [AZD Za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 1 - Osnove i Brzi početak
+- **⬅️ Prethodno**: [Instalacija i postavljanje](installation.md)
+- **➡️ Sljedeće**: [Konfiguracija](configuration.md)
+- **🚀 Sljedeće poglavlje**: [Poglavlje 2: AI-prvi razvoj](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **Sljedeća lekcija**: [Vodič za implementaciju](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Izjava o odricanju odgovornosti:
-Ovaj dokument je preveden pomoću AI usluge prevođenja Co-op Translator (https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku smatra se službenim (autoritativnim) izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Ne snosimo odgovornost za bilo kakve nesporazume ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
+**Odricanje od odgovornosti**:
+Ovaj je dokument preveden korištenjem AI prijevodnog servisa [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo postići točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni ljudski prijevod. Nismo odgovorni za bilo kakve nesporazume ili pogrešne interpretacije koje proizlaze iz korištenja ovog prijevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

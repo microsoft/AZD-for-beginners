@@ -1,4 +1,4 @@
-# Chapitre 6 : Planification et validation pré-déploiement
+# Chapitre 6 : Planification et validation avant le déploiement
 
 **📚 Cours**: [AZD pour débutants](../../README.md) | **⏱️ Durée**: 1 heure | **⭐ Complexité**: Intermédiaire
 
@@ -6,12 +6,12 @@
 
 ## Aperçu
 
-Ce chapitre couvre les étapes essentielles de planification et de validation avant de déployer votre application. Apprenez à éviter des erreurs coûteuses grâce à une planification adéquate de la capacité, une sélection appropriée des SKU et des vérifications préalables.
+Ce chapitre couvre les étapes essentielles de planification et de validation avant le déploiement de votre application. Apprenez à éviter des erreurs coûteuses grâce à une planification de capacité appropriée, le choix des SKU et des contrôles préalables.
 
 ## Objectifs d'apprentissage
 
-En complétant ce chapitre, vous pourrez :
-- Effectuer des vérifications préalables avant le déploiement
+En terminant ce chapitre, vous serez capable de :
+- Effectuer les vérifications préalables avant le déploiement
 - Planifier la capacité et estimer les besoins en ressources
 - Sélectionner des SKU appropriés pour optimiser les coûts
 - Configurer Application Insights pour la surveillance
@@ -23,18 +23,18 @@ En complétant ce chapitre, vous pourrez :
 
 | # | Leçon | Description | Durée |
 |---|--------|-------------|------|
-| 1 | [Vérifications préalables](preflight-checks.md) | Valider la configuration avant le déploiement | 15 min |
-| 2 | [Planification de la capacité](capacity-planning.md) | Estimer les besoins en ressources | 20 min |
-| 3 | [Sélection des SKU](sku-selection.md) | Choisir les niveaux de tarification appropriés | 15 min |
+| 1 | [Preflight Checks](preflight-checks.md) | Valider la configuration avant le déploiement | 15 min |
+| 2 | [Capacity Planning](capacity-planning.md) | Estimer les besoins en ressources | 20 min |
+| 3 | [SKU Selection](sku-selection.md) | Choisir les niveaux de tarification appropriés | 15 min |
 | 4 | [Application Insights](application-insights.md) | Configurer la surveillance | 20 min |
-| 5 | [Modèles de coordination](coordination-patterns.md) | Flux de travail de déploiement en équipe | 15 min |
+| 5 | [Coordination Patterns](coordination-patterns.md) | Flux de travail d'équipe pour le déploiement | 15 min |
 
 ---
 
 ## 🚀 Démarrage rapide
 
 ```bash
-# Vérifier les quotas de l'abonnement
+# Vérifier les quotas d'abonnement
 az vm list-usage --location eastus --output table
 
 # Aperçu du déploiement (aucune ressource créée)
@@ -49,7 +49,7 @@ azd env get-values
 
 ---
 
-## ☑️ Liste de vérification pré-déploiement
+## ☑️ Liste de contrôle avant déploiement
 
 ### Avant `azd provision`
 
@@ -57,24 +57,24 @@ azd env get-values
 - [ ] SKUs sélectionnés de manière appropriée
 - [ ] Estimation des coûts revue
 - [ ] Convention de nommage cohérente
-- [ ] Sécurité/RBAC configurée
+- [ ] Sécurité/RBAC configurés
 
 ### Avant `azd deploy`
 
 - [ ] Variables d'environnement définies
 - [ ] Secrets dans Key Vault
 - [ ] Chaînes de connexion vérifiées
-- [ ] Vérifications d'état configurées
+- [ ] Contrôles de santé configurés
 
 ---
 
 ## 💰 Guide de sélection des SKU
 
-| Charge de travail | Développement | Production |
+| Workload | Development | Production |
 |----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
-| Azure OpenAI | Standard | Standard + PTU |
+| Microsoft Foundry Models | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
 
 ---
@@ -83,12 +83,12 @@ azd env get-values
 
 | Direction | Chapitre |
 |-----------|---------|
-| **Previous** | [Chapitre 5 : Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Next** | [Chapitre 7 : Dépannage](../chapter-07-troubleshooting/README.md) |
+| **Précédent** | [Chapitre 5 : Multi-Agent](../chapter-05-multi-agent/README.md) |
+| **Suivant** | [Chapitre 7 : Dépannage](../chapter-07-troubleshooting/README.md) |
 
 ---
 
-## 📖 Ressources liées
+## 📖 Ressources associées
 
 - [Guide de configuration](../chapter-03-configuration/configuration.md)
 - [Guide de déploiement](../chapter-04-infrastructure/deployment-guide.md)
@@ -97,6 +97,6 @@ azd env get-values
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Avis de non-responsabilité :
-Ce document a été traduit à l'aide du service de traduction par IA [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatiques peuvent comporter des erreurs ou des inexactitudes. Le document original, dans sa langue d'origine, doit être considéré comme la source faisant foi. Pour les informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un traducteur humain. Nous ne pouvons être tenus responsables des malentendus ou des interprétations erronées résultant de l'utilisation de cette traduction.
+Clause de non-responsabilité :
+Ce document a été traduit à l'aide du service de traduction automatique par IA Co-op Translator (https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatiques peuvent comporter des erreurs ou des inexactitudes. Le document original, dans sa langue d'origine, doit être considéré comme la source faisant foi. Pour les informations critiques, une traduction professionnelle réalisée par un traducteur humain est recommandée. Nous déclinons toute responsabilité en cas de malentendus ou de mauvaises interprétations résultant de l'utilisation de cette traduction.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

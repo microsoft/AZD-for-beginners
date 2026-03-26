@@ -1,112 +1,90 @@
-# Azure OpenAI 聊天應用程式
+# Microsoft Foundry Models Chat Application
 
-**學習路徑：** 中級 ⭐⭐ | **時間：** 35-45 分鐘 | **成本：** 每月 $50-200
+**Learning Path:** Intermediate ⭐⭐ | **Time:** 35-45 minutes | **Cost:** $50-200/month
 
-使用 Azure Developer CLI (azd) 部署完整的 Azure OpenAI 聊天應用程式。本範例展示了 GPT-4 部署、安全的 API 存取以及簡單的聊天介面。
+一個完整的 Microsoft Foundry Models 聊天應用程式，使用 Azure Developer CLI (azd) 部署。此範例示範 gpt-4.1 部署、API 安全存取，以及一個簡單的聊天介面。
 
-## 🎯 學習目標
+## 🎯 你將學到的內容
 
-- 部署 Azure OpenAI Service 並使用 GPT-4 模型
+- 部署 Microsoft Foundry Models Service 與 gpt-4.1 模型
 - 使用 Key Vault 保護 OpenAI API 金鑰
-- 使用 Python 建立簡單的聊天介面
-- 監控 Token 使用量及成本
-- 實現速率限制及錯誤處理
+- 使用 Python 建立簡單聊天介面
+- 監控 token 使用量與成本
+- 實作速率限制與錯誤處理
 
-## 📦 包含內容
+## 📦 內容包括
 
-✅ **Azure OpenAI Service** - GPT-4 模型部署  
-✅ **Python 聊天應用程式** - 簡單的命令列聊天介面  
-✅ **Key Vault 整合** - 安全的 API 金鑰存儲  
-✅ **ARM Templates** - 完整的基礎架構程式碼  
-✅ **成本監控** - Token 使用量追蹤  
-✅ **速率限制** - 防止配額耗盡  
+✅ **Microsoft Foundry Models Service** - gpt-4.1 模型部署  
+✅ **Python Chat App** - 簡單命令列聊天介面  
+✅ **Key Vault Integration** - 安全的 API 金鑰儲存  
+✅ **ARM Templates** - 完整的基礎架構即程式碼  
+✅ **Cost Monitoring** - 追蹤 token 使用量  
+✅ **Rate Limiting** - 防止配額耗盡  
 
-## 架構
+## Architecture
 
+```mermaid
+graph TD
+    App[Python 聊天應用程式<br/>本地/雲端<br/>命令列介面<br/>對話紀錄<br/>Token 使用追蹤] -- "HTTPS（API 金鑰）" --> Foundry[Microsoft Foundry 模型服務<br/>gpt-4.1 模型<br/>每分鐘 20K tokens 容量<br/>多區域故障轉移]
+    Foundry --> KV[Azure 金鑰保管庫<br/>OpenAI API 金鑰<br/>端點 URL]
+    Foundry -. 託管身分識別 .-> KV
 ```
-┌─────────────────────────────────────────────┐
-│   Python Chat Application (Local/Cloud)    │
-│   - Command-line interface                 │
-│   - Conversation history                   │
-│   - Token usage tracking                   │
-└──────────────────┬──────────────────────────┘
-                   │ HTTPS (API Key)
-                   ▼
-┌─────────────────────────────────────────────┐
-│   Azure OpenAI Service                      │
-│   ┌───────────────────────────────────────┐ │
-│   │   GPT-4 Model                         │ │
-│   │   - 20K tokens/min capacity           │ │
-│   │   - Multi-region failover (optional)  │ │
-│   └───────────────────────────────────────┘ │
-│                                             │
-│   Managed Identity ───────────────────────┐ │
-└────────────────────────────────────────────┘
-                   │
-                   ▼
-┌─────────────────────────────────────────────┐
-│   Azure Key Vault                           │
-│   - OpenAI API Key (secret)                 │
-│   - Endpoint URL (secret)                   │
-└─────────────────────────────────────────────┘
-```
+## Prerequisites
 
-## 先決條件
-
-### 必須具備
+### Required
 
 - **Azure Developer CLI (azd)** - [安裝指南](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)
-- **具有 OpenAI 存取權的 Azure 訂閱** - [申請存取權](https://aka.ms/oai/access)
-- **Python 3.9+** - [安裝 Python](https://www.python.org/downloads/)
+- **Azure subscription** with OpenAI access - [Request access](https://aka.ms/oai/access)
+- **Python 3.9+** - [Install Python](https://www.python.org/downloads/)
 
-### 驗證先決條件
+### Verify Prerequisites
 
 ```bash
-# 檢查 azd 版本（需要 1.5.0 或更高版本）
+# 檢查 azd 版本（需要 1.5.0 或更高）
 azd version
 
-# 驗證 Azure 登入
+# 確認 Azure 登入
 azd auth login
 
 # 檢查 Python 版本
 python --version  # 或 python3 --version
 
-# 驗證 OpenAI 存取權（在 Azure Portal 中檢查）
+# 驗證 OpenAI 存取權（在 Azure 入口網站檢查）
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus
 ```
 
-> **⚠️ 重要：** Azure OpenAI 需要申請批准。如果尚未申請，請造訪 [aka.ms/oai/access](https://aka.ms/oai/access)。批准通常需要 1-2 個工作日。
+> **⚠️ Important:** Microsoft Foundry Models requires application approval. If you haven't applied, visit [aka.ms/oai/access](https://aka.ms/oai/access). Approval typically takes 1-2 business days.
 
-## ⏱️ 部署時間表
+## ⏱️ 部署時程
 
-| 階段 | 時間 | 發生的事情 |
-|------|------|------------|
-| 驗證先決條件 | 2-3 分鐘 | 確認 OpenAI 配額可用性 |
-| 部署基礎架構 | 8-12 分鐘 | 建立 OpenAI、Key Vault、模型部署 |
-| 配置應用程式 | 2-3 分鐘 | 設定環境及依賴項 |
-| **總計** | **12-18 分鐘** | 準備好與 GPT-4 聊天 |
+| Phase | Duration | What Happens |
+|-------|----------|--------------|
+| Prerequisites check | 2-3 minutes | Verify OpenAI quota availability |
+| Deploy infrastructure | 8-12 minutes | Create OpenAI, Key Vault, model deployment |
+| Configure application | 2-3 minutes | Set up environment and dependencies |
+| **Total** | **12-18 minutes** | Ready to chat with gpt-4.1 |
 
-**注意：** 第一次部署 OpenAI 可能需要更長時間，因為模型需要配置。
+**注意：** 第一次部署 OpenAI 服務可能因模型佈建而需要更長時間。
 
 ## 快速開始
 
 ```bash
-# 導航至範例
+# 導覽至範例
 cd examples/azure-openai-chat
 
 # 初始化環境
 azd env new myopenai
 
-# 部署所有內容（基礎設施 + 配置）
+# 部署所有（基礎架構 + 設定）
 azd up
-# 您將被提示：
+# 系統會提示您：
 # 1. 選擇 Azure 訂閱
-# 2. 選擇具有 OpenAI 可用性的地點（例如，eastus、eastus2、westus）
-# 3. 等待 12-18 分鐘完成部署
+# 2. 選擇有 OpenAI 可用性的地區（例如：eastus、eastus2、westus）
+# 3. 等待部署約 12-18 分鐘
 
-# 安裝 Python 依賴項
+# 安裝 Python 相依套件
 pip install -r requirements.txt
 
 # 開始聊天！
@@ -115,12 +93,12 @@ python chat.py
 
 **預期輸出：**
 ```
-🤖 Azure OpenAI Chat Application
-Connected to: GPT-4 (eastus)
+🤖 Microsoft Foundry Models Chat Application
+Connected to: gpt-4.1 (eastus)
 Type your message (or 'quit' to exit)
 
-You: Hello! Tell me about Azure OpenAI.
-Assistant: Azure OpenAI Service provides REST API access to OpenAI's powerful language models including GPT-4, GPT-3.5-Turbo, and Embeddings...
+You: Hello! Tell me about Microsoft Foundry Models.
+Assistant: Microsoft Foundry Models Service provides REST API access to OpenAI's powerful language models including gpt-4.1, GPT-3.5-Turbo, and Embeddings...
 
 [Tokens used: 145 | Estimated cost: $0.0044]
 ```
@@ -130,25 +108,25 @@ Assistant: Azure OpenAI Service provides REST API access to OpenAI's powerful la
 ### 步驟 1：檢查 Azure 資源
 
 ```bash
-# 查看已部署的資源
+# 檢視已部署的資源
 azd show
 
 # 預期輸出顯示：
-# - OpenAI 服務: (資源名稱)
-# - 金鑰保管庫: (資源名稱)
-# - 部署: gpt-4
-# - 位置: eastus (或您選擇的地區)
+# - OpenAI 服務：（資源名稱）
+# - 金鑰保管庫：（資源名稱）
+# - 部署：gpt-4.1
+# - 位置：eastus（或您選擇的區域）
 ```
 
 ### 步驟 2：測試 OpenAI API
 
 ```bash
-# 獲取 OpenAI 端點和密鑰
+# 取得 OpenAI 端點與金鑰
 OPENAI_ENDPOINT=$(azd env get-value AZURE_OPENAI_ENDPOINT)
 OPENAI_KEY=$(azd env get-value AZURE_OPENAI_API_KEY)
 
 # 測試 API 呼叫
-curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4/chat/completions?api-version=2024-08-01-preview" \
+curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
   -d '{
@@ -179,7 +157,7 @@ curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4/chat/completions?api-version=202
 ### 步驟 3：驗證 Key Vault 存取
 
 ```bash
-# 列出 Key Vault 中的秘密
+# 列出 Key Vault 中的機密
 KV_NAME=$(azd env get-value AZURE_KEY_VAULT_NAME)
 
 az keyvault secret list \
@@ -188,15 +166,15 @@ az keyvault secret list \
   --output table
 ```
 
-**預期的秘密：**
+**預期的 Secrets:**
 - `openai-api-key`
 - `openai-endpoint`
 
 **成功標準：**
-- ✅ 使用 GPT-4 部署的 OpenAI 服務
-- ✅ API 呼叫返回有效的完成結果
-- ✅ 秘密存儲於 Key Vault
-- ✅ Token 使用量追蹤正常運作
+- ✅ 已部署包含 gpt-4.1 的 OpenAI 服務
+- ✅ API 呼叫回傳有效的完成結果
+- ✅ Secrets 已儲存在 Key Vault
+- ✅ Token 使用追蹤運作正常
 
 ## 專案結構
 
@@ -217,32 +195,32 @@ azure-openai-chat/
 
 ## 應用程式功能
 
-### 聊天介面 (`chat.py`)
+### Chat Interface (`chat.py`)
 
-聊天應用程式包含：
+聊天應用包含：
 
-- **對話歷史記錄** - 保持訊息間的上下文
-- **Token 計數** - 追蹤使用量並估算成本
-- **錯誤處理** - 優雅地處理速率限制及 API 錯誤
-- **成本估算** - 每則訊息的即時成本計算
-- **串流支援** - 可選的串流回應
+- **Conversation History** - 在訊息之間維持上下文
+- **Token Counting** - 追蹤使用量並估算成本
+- **Error Handling** - 優雅處理速率限制與 API 錯誤
+- **Cost Estimation** - 每則訊息的即時成本計算
+- **Streaming Support** - 選用的串流回應支援
 
 ### 指令
 
-在聊天過程中，您可以使用：
-- `quit` 或 `exit` - 結束會話
-- `clear` - 清除對話歷史記錄
-- `tokens` - 顯示總 Token 使用量
-- `cost` - 顯示估算的總成本
+聊天時，你可以使用：
+- `quit` or `exit` - 結束會話
+- `clear` - 清除對話記錄
+- `tokens` - 顯示總 token 使用量
+- `cost` - 顯示估算總成本
 
-### 配置 (`config.py`)
+### Configuration (`config.py`)
 
-從環境變數載入配置：
+從環境變數載入設定：
 ```python
-AZURE_OPENAI_ENDPOINT  # 從金鑰保管庫
-AZURE_OPENAI_API_KEY   # 從金鑰保管庫
-AZURE_OPENAI_MODEL     # 預設值：gpt-4
-AZURE_OPENAI_MAX_TOKENS # 預設值：800
+AZURE_OPENAI_ENDPOINT  # 來自金鑰保管庫
+AZURE_OPENAI_API_KEY   # 來自金鑰保管庫
+AZURE_OPENAI_MODEL     # 預設值: gpt-4.1
+AZURE_OPENAI_MAX_TOKENS # 預設值: 800
 ```
 
 ## 使用範例
@@ -260,7 +238,7 @@ export AZURE_OPENAI_MODEL=gpt-35-turbo
 python chat.py
 ```
 
-### 使用串流聊天
+### 串流聊天
 
 ```bash
 python chat.py --stream
@@ -269,17 +247,17 @@ python chat.py --stream
 ### 範例對話
 
 ```
-You: Explain Azure OpenAI Service in 3 sentences.
-Assistant: Azure OpenAI Service is Microsoft Azure's cloud platform offering 
+You: Explain Microsoft Foundry Models Service in 3 sentences.
+Assistant: Microsoft Foundry Models Service is Microsoft Azure's cloud platform offering 
 that provides access to OpenAI's powerful language models. It enables developers 
-to integrate capabilities like GPT-4 into their applications with enterprise-grade 
+to integrate capabilities like gpt-4.1 into their applications with enterprise-grade 
 security and compliance. The service includes features for content filtering, 
 abuse monitoring, and responsible AI practices.
 
 [Tokens used: 89 | Estimated cost: $0.0027]
 
 You: What models are available?
-Assistant: Azure OpenAI Service offers several model families including GPT-4 
+Assistant: Microsoft Foundry Models Service offers several model families including gpt-4.1 
 (most capable), GPT-3.5-Turbo (faster and cost-effective), and Embeddings models 
 for vector search. Each model has different capabilities, pricing, and token limits.
 
@@ -290,38 +268,38 @@ Total session: 156 tokens | $0.0047
 
 ## 成本管理
 
-### Token 價格 (GPT-4)
+### Token 價格 (gpt-4.1)
 
-| 模型 | 輸入 (每 1K tokens) | 輸出 (每 1K tokens) |
-|------|---------------------|---------------------|
-| GPT-4 | $0.03 | $0.06 |
+| Model | Input (per 1K tokens) | Output (per 1K tokens) |
+|-------|----------------------|------------------------|
+| gpt-4.1 | $0.03 | $0.06 |
 | GPT-3.5-Turbo | $0.0015 | $0.002 |
 
-### 每月成本估算
+### 估算的每月成本
 
-基於使用模式：
+根據使用模式：
 
-| 使用級別 | 每日訊息數 | 每日 Token 數 | 每月成本 |
-|----------|------------|---------------|----------|
-| **輕量** | 20 則訊息 | 3,000 tokens | $3-5 |
-| **中度** | 100 則訊息 | 15,000 tokens | $15-25 |
-| **重度** | 500 則訊息 | 75,000 tokens | $75-125 |
+| Usage Level | Messages/Day | Tokens/Day | Monthly Cost |
+|-------------|--------------|------------|--------------|
+| **Light** | 20 messages | 3,000 tokens | $3-5 |
+| **Moderate** | 100 messages | 15,000 tokens | $15-25 |
+| **Heavy** | 500 messages | 75,000 tokens | $75-125 |
 
-**基礎架構成本：** 每月 $1-2 (Key Vault + 最低計算資源)
+**基礎基礎設施成本：** $1-2/month (Key Vault + minimal compute)
 
-### 成本優化提示
+### 成本優化建議
 
 ```bash
-# 1. 使用 GPT-3.5-Turbo 處理較簡單的任務（便宜 20 倍）
+# 1. 對於較簡單的任務，使用 GPT-3.5-Turbo（便宜 20 倍）
 export AZURE_OPENAI_MODEL=gpt-35-turbo
 
-# 2. 減少最大 token 數以獲得較短的回應
+# 2. 減少最大 token 數以縮短回應
 export AZURE_OPENAI_MAX_TOKENS=400
 
-# 3. 監控 token 使用情況
+# 3. 監控 token 使用量
 python chat.py --show-tokens
 
-# 4. 設定預算警示
+# 4. 設定預算提醒
 az consumption budget create \
   --budget-name "openai-budget" \
   --amount 50 \
@@ -330,10 +308,10 @@ az consumption budget create \
 
 ## 監控
 
-### 查看 Token 使用量
+### 檢視 Token 使用量
 
 ```bash
-# 在 Azure Portal 中：
+# 在 Azure 入口網站：
 # OpenAI 資源 → 指標 → 選擇「Token Transaction」
 
 # 或透過 Azure CLI：
@@ -344,10 +322,10 @@ az monitor metrics list \
   --interval PT1M
 ```
 
-### 查看 API 日誌
+### 檢視 API 日誌
 
 ```bash
-# 流式診斷日誌
+# 串流診斷日誌
 az monitor diagnostic-settings create \
   --resource $(azd env get-value AZURE_OPENAI_RESOURCE_ID) \
   --name openai-logs \
@@ -362,13 +340,13 @@ az monitor log-analytics query \
 
 ## 疑難排解
 
-### 問題："存取被拒" 錯誤
+### 問題：出現 "Access Denied" 錯誤
 
-**症狀：** 呼叫 API 時出現 403 Forbidden
+**症狀：** 呼叫 API 時回傳 403 Forbidden
 
-**解決方案：**
+**解決方法：**
 ```bash
-# 1. 確認 OpenAI 訪問已獲批准
+# 1. 驗證 OpenAI 存取權限是否已獲批准
 az cognitiveservices account show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP)
@@ -376,35 +354,35 @@ az cognitiveservices account show \
 # 2. 檢查 API 金鑰是否正確
 azd env get-value AZURE_OPENAI_API_KEY
 
-# 3. 確認端點 URL 格式
+# 3. 驗證端點 URL 格式
 azd env get-value AZURE_OPENAI_ENDPOINT
-# 應為: https://[name].openai.azure.com/
+# 應該是： https://[name].openai.azure.com/
 ```
 
-### 問題："超出速率限制"
+### 問題：出現 "Rate Limit Exceeded"
 
-**症狀：** 出現 429 Too Many Requests
+**症狀：** 429 Too Many Requests
 
-**解決方案：**
+**解決方法：**
 ```bash
 # 1. 檢查目前配額
 az cognitiveservices account deployment show \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
-  --deployment-name gpt-4
+  --deployment-name gpt-4.1
 
-# 2. 申請增加配額（如果需要）
-# 前往 Azure Portal → OpenAI 資源 → 配額 → 申請增加
+# 2. 申請提高配額（如有需要）
+# 前往 Azure 入口網站 → OpenAI 資源 → 配額 → 申請增加
 
-# 3. 實現重試邏輯（已在 chat.py 中）
-# 應用程式會自動使用指數回退進行重試
+# 3. 實作重試邏輯（已在 chat.py 中實作）
+# 應用程式會自動以指數退避重試
 ```
 
-### 問題："找不到模型"
+### 問題：出現 "Model Not Found"
 
-**症狀：** 部署時出現 404 錯誤
+**症狀：** 部署回傳 404 錯誤
 
-**解決方案：**
+**解決方法：**
 ```bash
 # 1. 列出可用的部署
 az cognitiveservices account deployment list \
@@ -415,14 +393,14 @@ az cognitiveservices account deployment list \
 echo $AZURE_OPENAI_MODEL
 
 # 3. 更新為正確的部署名稱
-export AZURE_OPENAI_MODEL=gpt-4  # 或 gpt-35-turbo
+export AZURE_OPENAI_MODEL=gpt-4.1  # 或 gpt-35-turbo
 ```
 
 ### 問題：高延遲
 
-**症狀：** 回應時間過慢 (>5 秒)
+**症狀：** 回應時間過慢（>5 秒）
 
-**解決方案：**
+**解決方法：**
 ```bash
 # 1. 檢查區域延遲
 # 部署到最接近使用者的區域
@@ -430,41 +408,41 @@ export AZURE_OPENAI_MODEL=gpt-4  # 或 gpt-35-turbo
 # 2. 減少 max_tokens 以加快回應速度
 export AZURE_OPENAI_MAX_TOKENS=400
 
-# 3. 使用串流以改善使用者體驗
+# 3. 使用串流以提升使用者體驗
 python chat.py --stream
 ```
 
-## 安全最佳實踐
+## 安全最佳實務
 
 ### 1. 保護 API 金鑰
 
 ```bash
-# 切勿將密鑰提交到版本控制
-# 使用密鑰保管庫（已配置）
+# 切勿將金鑰提交到原始碼版本控制系統
+# 使用 Key Vault (已配置)
 
-# 定期輪替密鑰
+# 定期輪換金鑰
 az cognitiveservices account keys regenerate \
   --name $(azd env get-value AZURE_OPENAI_NAME) \
   --resource-group $(azd env get-value AZURE_RESOURCE_GROUP) \
   --key-name key1
 ```
 
-### 2. 實施內容過濾
+### 2. 實作內容過濾
 
 ```python
-# Azure OpenAI 包含內建的內容過濾功能
-# 在 Azure Portal 中設定：
-# OpenAI 資源 → 內容過濾器 → 建立自訂過濾器
+# Microsoft Foundry Models 包含內建的內容過濾功能
+# 在 Azure 入口網站設定：
+# OpenAI 資源 → 內容篩選 → 建立自訂篩選器
 
-# 類別：仇恨、性、暴力、自我傷害
-# 等級：低、中、高過濾
+# 類別：仇恨、性相關、暴力、自我傷害
+# 過濾等級：低、中、高
 ```
 
-### 3. 使用受管理的身份 (生產環境)
+### 3. 在生產環境使用 Managed Identity
 
 ```bash
-# 對於生產部署，使用受管理的身份
-# 而不是 API 金鑰（需要在 Azure 上託管應用程式）
+# 在生產環境部署時，請使用受管身分識別
+# 而非使用 API 金鑰（需要將應用程式託管於 Azure）
 
 # 更新 infra/openai.bicep 以包含：
 # identity: { type: 'SystemAssigned' }
@@ -472,16 +450,16 @@ az cognitiveservices account keys regenerate \
 
 ## 開發
 
-### 本地執行
+### 本機執行
 
 ```bash
-# 安裝依賴項
+# 安裝相依套件
 pip install -r src/requirements.txt
 
 # 設定環境變數
 export AZURE_OPENAI_ENDPOINT="https://[name].openai.azure.com/"
 export AZURE_OPENAI_API_KEY="your-api-key"
-export AZURE_OPENAI_MODEL="gpt-4"
+export AZURE_OPENAI_MODEL="gpt-4.1"
 
 # 執行應用程式
 python src/chat.py
@@ -490,7 +468,7 @@ python src/chat.py
 ### 執行測試
 
 ```bash
-# 安裝測試依賴項
+# 安裝測試相依套件
 pip install pytest pytest-cov
 
 # 執行測試
@@ -515,94 +493,94 @@ az cognitiveservices account deployment create \
   --sku-name "Standard"
 ```
 
-## 清理
+## 清理資源
 
 ```bash
 # 刪除所有 Azure 資源
 azd down --force --purge
 
-# 這將移除：
+# 這會移除：
 # - OpenAI 服務
-# - 金鑰保存庫（具有 90 天軟刪除）
+# - 金鑰保管庫（含 90 天軟刪除）
 # - 資源群組
-# - 所有部署和配置
+# - 所有部署與設定
 ```
 
 ## 下一步
 
-### 擴展此範例
+### 擴充此範例
 
-1. **新增網頁介面** - 建立 React/Vue 前端
+1. **Add Web Interface** - 建立 React/Vue 前端
    ```bash
-   # 將前端服務添加到 azure.yaml
-   # 部署到 Azure 靜態網頁應用
+   # 在 azure.yaml 中新增前端服務
+   # 部署到 Azure Static Web Apps
    ```
 
-2. **實現 RAG** - 使用 Azure AI Search 增加文件搜尋功能
+2. **Implement RAG** - 加入 Azure AI Search 的文件搜尋
    ```python
    # 整合 Azure 認知搜尋
    # 上傳文件並建立向量索引
    ```
 
-3. **新增功能呼叫** - 啟用工具使用
+3. **Add Function Calling** - 啟用工具使用
    ```python
-   # 定義函數於 chat.py
-   # 讓 GPT-4 呼叫外部 API
+   # 在 chat.py 中定義函式
+   # 讓 gpt-4.1 呼叫外部 API
    ```
 
-4. **多模型支援** - 部署多個模型
+4. **Multi-Model Support** - 部署多個模型
    ```bash
-   # 添加 gpt-35-turbo，嵌入模型
-   # 實現模型路由邏輯
+   # 新增 gpt-35-turbo 與 embeddings 模型
+   # 實作模型路由邏輯
    ```
 
 ### 相關範例
 
-- **[零售多代理](../retail-scenario.md)** - 高級多代理架構
-- **[資料庫應用程式](../../../../examples/database-app)** - 增加持久存儲
-- **[容器應用程式](../../../../examples/container-app)** - 部署為容器化服務
+- **[Retail Multi-Agent](../retail-scenario.md)** - 進階多代理架構
+- **[Database App](../../../../examples/database-app)** - 新增持久化儲存
+- **[Container Apps](../../../../examples/container-app)** - 部署為容器化服務
 
 ### 學習資源
 
-- 📚 [AZD 初學者課程](../../README.md) - 主課程首頁
-- 📚 [Azure OpenAI 文件](https://learn.microsoft.com/azure/ai-services/openai/) - 官方文件
-- 📚 [OpenAI API 參考](https://platform.openai.com/docs/api-reference) - API 詳細資訊
-- 📚 [負責任的 AI](https://www.microsoft.com/ai/responsible-ai) - 最佳實踐
+- 📚 [AZD For Beginners Course](../../README.md) - 主課程首頁
+- 📚 [Microsoft Foundry Models Documentation](https://learn.microsoft.com/azure/ai-services/openai/) - 官方文件
+- 📚 [OpenAI API Reference](https://platform.openai.com/docs/api-reference) - API 詳細資料
+- 📚 [Responsible AI](https://www.microsoft.com/ai/responsible-ai) - 最佳實務
 
-## 其他資源
+## 附加資源
 
 ### 文件
-- **[Azure OpenAI Service](https://learn.microsoft.com/azure/ai-services/openai/)** - 完整指南
-- **[GPT-4 模型](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - 模型功能
-- **[內容過濾](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - 安全功能
+- **[Microsoft Foundry Models Service](https://learn.microsoft.com/azure/ai-services/openai/)** - 完整指南
+- **[gpt-4.1 Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** - 模型能力
+- **[Content Filtering](https://learn.microsoft.com/azure/ai-services/openai/concepts/content-filter)** - 安全功能
 - **[Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)** - azd 參考
 
-### 教程
-- **[OpenAI 快速入門](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - 第一次部署
-- **[聊天完成](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - 建立聊天應用程式
-- **[功能呼叫](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - 高級功能
+### 教學
+- **[OpenAI Quickstart](https://learn.microsoft.com/azure/ai-services/openai/quickstart)** - 第一次部署
+- **[Chat Completions](https://learn.microsoft.com/azure/ai-services/openai/how-to/chatgpt)** - 建置聊天應用
+- **[Function Calling](https://learn.microsoft.com/azure/ai-services/openai/how-to/function-calling)** - 進階功能
 
 ### 工具
-- **[Azure OpenAI Studio](https://oai.azure.com/)** - 基於網頁的操作平台
-- **[提示工程指南](https://platform.openai.com/docs/guides/prompt-engineering)** - 撰寫更好的提示
-- **[Token 計算器](https://platform.openai.com/tokenizer)** - 預估 Token 使用量
+- **[Microsoft Foundry Models Studio](https://oai.azure.com/)** - 基於網頁的 playground
+- **[Prompt Engineering Guide](https://platform.openai.com/docs/guides/prompt-engineering)** - 編寫更好提示的指南
+- **[Token Calculator](https://platform.openai.com/tokenizer)** - 估算 token 使用量
 
 ### 社群
-- **[Azure AI Discord](https://discord.gg/azure)** - 從社群獲得幫助
-- **[GitHub 討論](https://github.com/Azure-Samples/openai/discussions)** - 問答論壇
-- **[Azure 部落格](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - 最新更新
+- **[Azure AI Discord](https://discord.gg/azure)** - 向社群尋求協助
+- **[GitHub Discussions](https://github.com/Azure-Samples/openai/discussions)** - 問答討論區
+- **[Azure Blog](https://azure.microsoft.com/blog/tag/azure-openai-service/)** - 最新更新
 
 ---
 
-**🎉 成功！** 您已部署 Azure OpenAI 並建立了一個可運作的聊天應用程式。開始探索 GPT-4 的功能並嘗試不同的提示及使用案例。
+**🎉 成功！** 你已部署 Microsoft Foundry Models 並建立了一個可運作的聊天應用程式。開始探索 gpt-4.1 的能力，並嘗試不同的提示與使用情境。
 
-**有問題嗎？** [提出問題](https://github.com/microsoft/AZD-for-beginners/issues) 或查看 [FAQ](../../resources/faq.md)
+**有問題嗎？** [Open an issue](https://github.com/microsoft/AZD-for-beginners/issues) 或查看 [FAQ](../../resources/faq.md)
 
-**成本提醒：** 測試完成後記得執行 `azd down` 以避免持續費用（活躍使用約 $50-100/月）。
+**成本提醒：** 測試完成後記得執行 `azd down` 以避免持續費用（活躍使用約 $50-100/month）。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責聲明**：  
-本文件使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提供準確的翻譯，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應被視為權威來源。對於重要資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引起的任何誤解或誤釋不承擔責任。
+**Disclaimer**:
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們努力追求準確性，但請注意自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為具權威性的來源。對於重要資訊，建議採用專業人工翻譯。我們不對因使用本翻譯而產生的任何誤解或誤譯負責。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,98 +1,98 @@
-# Mwongozo wa Utekelezaji - Kufanikiwa na Usambazaji wa AZD
+# Mwongozo wa Ueneaji - Kufanya Uwezo wa Ueneaji wa AZD
 
 **Chapter Navigation:**
-- **📚 Nyumbani kwa Kozi**: [AZD Kwa Waanzilishi](../../README.md)
-- **📖 Sura ya Sasa**: Sura 4 - Miundombinu kama Kanuni & Usambazaji
-- **⬅️ Previous Chapter**: [Sura 3: Mipangilio](../chapter-03-configuration/configuration.md)
-- **➡️ Next**: [Kuweka Rasilimali](provisioning.md)
-- **🚀 Next Chapter**: [Sura 5: Suluhisho za AI kwa Wakala Wengi](../../examples/retail-scenario.md)
+- **📚 Mwanzo wa Kozi**: [AZD Kwa Waanzilishi](../../README.md)
+- **📖 Sura ya Sasa**: Sura ya 4 - Miundombinu kama Msimbo & Ueneaji
+- **⬅️ Sura Iliyopita**: [Sura 3: Usanidi](../chapter-03-configuration/configuration.md)
+- **➡️ Ifuatayo**: [Utayarishaji wa Rasilimali](provisioning.md)
+- **🚀 Sura Ifuatayo**: [Sura 5: Suluhisho za AI Zenye Wawakilishi Wengi](../../examples/retail-scenario.md)
 
 ## Utangulizi
 
-Huu## Understanding the Deployment Processmwongozo kamili unafunika kila unachohitaji kujua kuhusu kusambaza programu kwa kutumia Azure Developer CLI, kutoka usambazaji wa amri moja rahisi hadi matukio ya uzalishaji ya juu yenye hooks maalum, mazingira mengi, na muunganisho wa CI/CD. Fuzu mzunguko mzima wa usambazaji kwa mifano ya vitendo na mbinu bora.
+Mwongozo huu kamili unashughulikia kila kitu unachohitaji kujua kuhusu kueneza programu kwa kutumia Azure Developer CLI, kuanzia ueneaji wa msingi kwa amri moja hadi hali za uzalishaji zilizoendelea zinazo, hooks za kibinafsi, mazingira mengi, na uunganisho wa CI/CD. Jifunze mzunguko mzima wa ueneaji kwa mifano ya vitendo na mbinu bora.
 
 ## Malengo ya Kujifunza
 
-By completing this guide, you will:
-- Pata umiliki wa amri na mitiririko yote ya usambazaji ya Azure Developer CLI
-- Elewa mzunguko mzima wa usambazaji kutoka utayarishaji (provisioning) hadi ufuatiliaji
-- Tekeleza hooks maalum za usambazaji kwa automatisering kabla na baada ya usambazaji
-- Sanidi mazingira mengi na vigezo maalum kwa kila mazingira
-- Weka mikakati ya juu ya usambazaji ikijumuisha blue-green na canary usambazaji
-- Unganisha azd deployments na mabomba ya CI/CD na mitiririko ya kazi ya DevOps
+Kwa kumaliza mwongozo huu, utakuwa:
+- Mtaalamu wa amri zote za ueneaji na mtiririko wa kazi za Azure Developer CLI
+- Uelewa wa mzunguko mzima wa ueneaji kutoka utayarishaji hadi ufuatiliaji
+- Utekelezaji wa hooks za ueneaji za kibinafsi kwa otomatiki kabla na baada ya ueneaji
+- Kusanidi mazingira mengi na vigezo maalum kwa kila mazingira
+- Kuanzisha mikakati ya ueneaji iliyosoma mfano kama blue-green na canary
+- Kuingiza ueneaji wa azd katika pipelines za CI/CD na mtiririko wa kazi wa DevOps
 
 ## Matokeo ya Kujifunza
 
-Upon completion, you will be able to:
-- Tekeleza na kutatua matatizo katika mitiririko yote ya usambazaji ya azd kwa uhuru
-- Buni na tekeleza automatisering maalum ya usambazaji ukitumia hooks
-- Sanidi usambazaji unaofaa uzalishaji kwa usalama sahihi na ufuatiliaji
-- Dhibiti matukio changamano ya usambazaji kwa mazingira mengi
-- Boresha utendaji wa usambazaji na tekeleza mikakati ya kurudisha (rollback)
-- Unganisha usambazaji wa azd katika mbinu za DevOps za kampuni
+Mara baada ya kumaliza, utaweza:
+- Kutekeleza na kutatua matatizo ya mtiririko wote wa ueneaji wa azd kwa kujitegemea
+- Kubuni na kutekeleza otomatiki za ueneaji za kibinafsi kwa kutumia hooks
+- Kusanidi ueneaji tayari kwa uzalishaji kwa usalama na ufuatiliaji sahihi
+- Kusimamia mazingira tata za ueneaji nyingi
+- Kuboresha utendaji wa ueneaji na kutekeleza mikakati ya kurejesha (rollback)
+- Kuingiza ueneaji wa azd kwenye mbinu za DevOps za shirika
 
-## Muhtasari wa Usambazaji
+## Muhtasari wa Ueneaji
 
-Azure Developer CLI inatoa amri kadhaa za usambazaji:
-- `azd up` - Complete workflow (provision + deploy)
-- `azd provision` - Create/update Azure resources only
-- `azd deploy` - Deploy application code only
-- `azd package` - Build and package applications
+Azure Developer CLI inatoa amri kadhaa za ueneaji:
+- `azd up` - Mtiririko kamili (provision + deploy)
+- `azd provision` - Tengeneza/update rasilimali za Azure pekee
+- `azd deploy` - Eneza nambari ya programu pekee
+- `azd package` - Jenga na pakia programu
 
-## Mitiririko Msingi ya Usambazaji
+## Mtiririko Msingi wa Ueneaji
 
-### Usambazaji Kamili (azd up)
-The most common workflow for new projects:
+### Ueneaji Kamili (azd up)
+Mtiririko wa kawaida kwa miradi mipya:
 ```bash
-# Peleka kila kitu kutoka mwanzo
+# Anzisha kila kitu kutoka mwanzo
 azd up
 
-# Peleka kwa mazingira maalum
+# Anzisha kwa mazingira maalum
 azd up --environment production
 
-# Peleka kwa vigezo maalum
+# Anzisha kwa vigezo maalum
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Usambazaji wa Miundombinu Pekee
-When you only need to update Azure resources:
+### Ueneaji wa Miundombinu Pekee
+Wakati unahitaji tu kusasisha rasilimali za Azure:
 ```bash
-# Tayarisha/sasisha miundombinu
+# Kuandaa/sasisha miundombinu
 azd provision
 
-# Tayarisha kwa jaribio la kavu ili kutazama mabadiliko kabla ya kufanywa
+# Kuandaa kwa jaribio la kavu ili kutazama mabadiliko
 azd provision --preview
 
-# Tayarisha huduma maalum
+# Kuandaa huduma maalum
 azd provision --service database
 ```
 
-### Usambazaji wa Msimbo Pekee
-For quick application updates:
+### Ueneaji wa Msimbo Pekee
+Kwa masasisho ya haraka ya programu:
 ```bash
-# Weka huduma zote
+# Sambaza huduma zote
 azd deploy
 
 # Matokeo yanayotarajiwa:
-# Inasambaza huduma (azd deploy)
+# Kusambaza huduma (azd deploy)
 # - web: Inasambazwa... Imekamilika
 # - api: Inasambazwa... Imekamilika
-# MAFANIKIO: Utekelezaji wako ulikamilika katika dakika 2 na sekunde 15
+# MAFANIKIO: Utekelezaji wako ulikamilika kwa dakika 2 na sekunde 15
 
 # Sambaza huduma maalum
 azd deploy --service web
 azd deploy --service api
 
-# Sambaza kwa hoja za kujenga maalum
+# Sambaza kwa hoja za kujenga zilizobinafsishwa
 azd deploy --service api --build-arg NODE_ENV=production
 
-# Thibitisha usambazaji
+# Thibitisha utekelezaji
 azd show --output json | jq '.services'
 ```
 
-### ✅ Uhakiki wa Usambazaji
+### ✅ Uthibitisho wa Ueneaji
 
-After any deployment, verify success:
+Baada ya ueneaji wowote, thibitisha mafanikio:
 
 ```bash
 # Angalia huduma zote zinaendesha
@@ -105,19 +105,19 @@ API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
 curl -f "$API_URL/health" || echo "❌ API health check failed"
 
-# Fuatilia makosa (hufunguka katika kivinjari kwa chaguo-msingi)
+# Fuatilia makosa (hufunguka kwenye kivinjari kwa chaguo-msingi)
 azd monitor --logs
 ```
 
 **Vigezo vya Mafanikio:**
-- ✅ Huduma zote zinaonyesha hali "Inakimbia"
+- ✅ Huduma zote zinaonyesha hali ya "Running"
 - ✅ Endpoints za afya zinarejesha HTTP 200
-- ✅ Hakuna rekodi za makosa katika dakika 5 zilizopita
-- ✅ Programu inajibu maombi ya mtihani
+- ✅ Hakuna kumbukumbu za makosa katika dakika 5 zilizopita
+- ✅ Programu inajibu maombi ya majaribio
 
-## 🏗️ Kuelewa Mchakato wa Usambazaji
+## 🏗️ Kuelewa Mchakato wa Ueneaji
 
-### Awamu 1: Hooks za Kabla ya Utayarishaji
+### Hatua 1: Hooks za Kabla ya Utayarishaji
 ```yaml
 # azure.yaml
 hooks:
@@ -131,13 +131,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Awamu 2: Utayarishaji wa Miundombinu
-- Inasoma template za miundombinu (Bicep/Terraform)
+### Hatua 2: Utayarishaji wa Miundombinu
+- Inasoma templeti za miundombinu (Bicep/Terraform)
 - Inaunda au kusasisha rasilimali za Azure
 - Inasanidi mtandao na usalama
-- Inaanzisha ufuatiliaji na kurekodi kumbukumbu
+- Inaweka ufuatiliaji na uandishi wa kumbukumbu
 
-### Awamu 3: Hooks za Baada ya Utayarishaji
+### Hatua 3: Hooks za Baada ya Utayarishaji
 ```yaml
 hooks:
   postprovision:
@@ -150,12 +150,12 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### Awamu 4: Ufungashaji wa Programu
+### Hatua 4: Ufungashaji wa Programu
 - Inajenga msimbo wa programu
-- Inaunda vitu vya usambazaji
-- Inafunga kwa jukwaa lengwa (containers, faili za ZIP, n.k.)
+- Inaunda artefakti za ueneaji
+- Inafungasha kwa jukwaa lengwa (kontena, faili za ZIP, n.k.)
 
-### Awamu 5: Hooks za Kabla ya Usambazaji
+### Hatua 5: Hooks za Kabla ya Ueneaji
 ```yaml
 hooks:
   predeploy:
@@ -168,12 +168,12 @@ hooks:
       npm run db:migrate
 ```
 
-### Awamu 6: Usambazaji wa Programu
-- Inasambaza programu zilizofungwa kwa huduma za Azure
+### Hatua 6: Ueneaji wa Programu
+- Inaeza programu zilizofungashwa kwa huduma za Azure
 - Inasasisha mipangilio ya usanidi
-- Inaanzisha/kuanzisha upya huduma
+- Inaanzisha/kurejesha huduma
 
-### Awamu 7: Hooks za Baada ya Usambazaji
+### Hatua 7: Hooks za Baada ya Ueneaji
 ```yaml
 hooks:
   postdeploy:
@@ -186,9 +186,9 @@ hooks:
       curl https://${WEB_URL}/health
 ```
 
-## 🎛️ Usanidi wa Usambazaji
+## 🎛️ Usanidi wa Ueneaji
 
-### Mipangilio ya Usambazaji Maalum kwa Huduma
+### Mipangilio ya Ueneaji Maalum kwa Huduma
 ```yaml
 # azure.yaml
 services:
@@ -225,7 +225,7 @@ azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Mazingira ya maandalizi
+# Mazingira ya majaribio
 azd env new staging
 azd env set NODE_ENV staging
 azd env set DEBUG false
@@ -238,9 +238,9 @@ azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 Matukio ya Juu ya Usambazaji
+## 🔧 Senario Zinazoendelea za Ueneaji
 
-### Programu za Huduma Nyingi
+### Programu zenye Huduma Nyingi
 ```yaml
 # Complex application with multiple services
 services:
@@ -276,7 +276,7 @@ services:
     host: function
 ```
 
-### Usambazaji wa Blue-Green
+### Ueneaji wa Blue-Green
 ```bash
 # Unda mazingira ya bluu
 azd env new production-blue
@@ -285,7 +285,7 @@ azd up --environment production-blue
 # Jaribu mazingira ya bluu
 ./scripts/test-environment.sh production-blue
 
-# Hamisha trafiki kwa bluu (sasisha DNS/kigawaji mzigo kwa mkono)
+# Badilisha trafiki kwenda bluu (sasisho la DNS/msawazishaji mzigo kwa mkono)
 ./scripts/switch-traffic.sh production-blue
 
 # Safisha mazingira ya kijani
@@ -293,7 +293,7 @@ azd env select production-green
 azd down --force
 ```
 
-### Usambazaji wa Canary
+### Ueneaji wa Canary
 ```yaml
 # azure.yaml - Configure traffic splitting
 services:
@@ -307,7 +307,7 @@ services:
         percentage: 10
 ```
 
-### Usambazaji Kwa Hatua
+### Ueneaji wa Hatua
 ```bash
 #!/bin/bash
 # deploy-staged.sh
@@ -338,9 +338,9 @@ if [[ $confirm == [yY] ]]; then
 fi
 ```
 
-## 🐳 Usambazaji wa Containers
+## 🐳 Ueneaji wa Kontena
 
-### Usambazaji wa Programu za Container
+### Ueneaji wa Container App
 ```yaml
 services:
   api:
@@ -392,17 +392,17 @@ CMD ["npm", "start"]
 
 ## ⚡ Uboreshaji wa Utendaji
 
-### Usambazaji Maalum kwa Huduma
+### Ueneaji Maalum kwa Huduma
 ```bash
-# Weka huduma maalum ili kurudia kwa haraka
+# Peleka huduma maalumu ili kurahisisha mizunguko ya maendeleo
 azd deploy --service web
 azd deploy --service api
 
-# Weka huduma zote
+# Peleka huduma zote
 azd deploy
 ```
 
-### Uhifadhi wa Ujenzi
+### Caching ya Ujenzi
 ```yaml
 # azure.yaml - Configure build commands
 services:
@@ -412,31 +412,31 @@ services:
     outputPath: dist
 ```
 
-### Usambazaji wa Msimbo kwa Ufanisi
+### Ueneaji wa Msimbo Ufanisi
 ```bash
-# Tumia azd deploy (si azd up) kwa mabadiliko ya msimbo pekee
-# Hii inaepuka utoaji wa miundombinu na ni kasi zaidi sana
+# Tumia azd deploy (si azd up) kwa mabadiliko ya msimbo tu
+# Hii inaepuka utoaji wa miundombinu na ni ya haraka zaidi
 azd deploy
 
 # Weka huduma maalum kwa mzunguko wa haraka zaidi
 azd deploy --service api
 ```
 
-## 🔍 Ufuatiliaji wa Usambazaji
+## 🔍 Ufuatiliaji wa Ueneaji
 
-### Ufuatiliaji wa Usambazaji kwa Wakati Halisi
+### Ufuatiliaji wa Ueneaji kwa Wakati Halisi
 ```bash
 # Fuatilia programu kwa wakati halisi
 azd monitor --live
 
-# Tazama kumbukumbu za programu
+# Tazama rejista za programu
 azd monitor --logs
 
-# Angalia hali ya uwekaji
+# Angalia hali ya utoaji wa programu
 azd show
 ```
 
-### Ukaguzi wa Afya
+### Uchunguzi wa Afya
 ```yaml
 # azure.yaml - Configure health checks
 services:
@@ -450,7 +450,7 @@ services:
       retries: 3
 ```
 
-### Uthibitisho Baada ya Usambazaji
+### Uhakiki Baada ya Ueneaji
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
@@ -516,7 +516,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### Usimamizi wa Utambulisho na Ufikiaji
+### Usimamizi wa Utambulisho na Upatikanaji
 ```yaml
 services:
   api:
@@ -531,18 +531,18 @@ services:
           - external-api-key
 ```
 
-## 🚨 Mikakati ya Kurudisha (Rollback)
+## 🚨 Mikakati ya Kurudisha
 
 ### Kurudisha Haraka
 ```bash
-# AZD haina uwezo wa kurejesha toleo (rollback) uliojengwa ndani. Mbinu zilizopendekezwa:
+# AZD haina uwezo wa kurejesha hali ya awali uliojengwa ndani. Mbinu zinazopendekezwa:
 
-# Chaguo 1: Tuma tena kutoka kwa Git (inayopendekezwa)
-git revert HEAD  # Rudisha commit yenye tatizo
+# Chaguo 1: Weka upya kutoka Git (inayopendekezwa)
+git revert HEAD  # Rudisha commit yenye shida
 git push
 azd deploy
 
-# Chaguo 2: Tuma tena commit maalum
+# Chaguo 2: Weka upya commit maalum
 git checkout <previous-commit-hash>
 azd deploy
 git checkout main
@@ -550,15 +550,15 @@ git checkout main
 
 ### Kurudisha Miundombinu
 ```bash
-# Angalia mabadiliko ya miundombinu kabla ya kuyatekeleza
+# Kagua mabadiliko ya miundombinu kabla ya kuyatekeleza
 azd provision --preview
 
-# Kwa marejesho ya miundombinu, tumia udhibiti wa matoleo:
+# Kwa kurejesha miundombinu, tumia udhibiti wa matoleo:
 git revert HEAD  # Rejesha mabadiliko ya miundombinu
 azd provision    # Tekeleza hali ya awali ya miundombinu
 ```
 
-### Kurudisha Uhamishaji wa Hifadhidata
+### Kurudisha Uhamisho wa Hifadhidata
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -572,21 +572,21 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 Metriki za Usambazaji
+## 📊 Vipimo vya Ueneaji
 
-### Fuatilia Utendaji wa Usambazaji
+### Fuata Utendaji wa Ueneaji
 ```bash
-# Tazama hali ya sasa ya uenezaji
+# Tazama hali ya sasa ya uzinduzi
 azd show
 
-# Fuatilia programu kwa Application Insights
+# Fuatilia programu kwa kutumia Application Insights
 azd monitor --overview
 
-# Tazama takwimu za wakati halisi
+# Tazama takwimu za moja kwa moja
 azd monitor --live
 ```
 
-### Ukusanyaji wa Metriki Maalum
+### Ukusanyaji wa Vipimo Maalum
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -616,12 +616,12 @@ azd env new production-v1
 ./scripts/sync-environments.sh
 ```
 
-### 2. Uthibitishaji wa Miundombinu
+### 2. Uhakiki wa Miundombinu
 ```bash
-# Pitia mabadiliko ya miundombinu kabla ya utekelezaji
+# Angalia mabadiliko ya miundombinu kabla ya kupeleka
 azd provision --preview
 
-# Tumia ukaguzi wa ARM/Bicep
+# Tumia linting ya ARM/Bicep
 az bicep lint --file infra/main.bicep
 
 # Thibitisha sintaksia ya Bicep
@@ -657,9 +657,9 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. Nyaraka na Urekodi (Logging)
+### 4. Uandishi wa Nyaraka na Uandishi wa Kumbukumbu
 ```bash
-# Andika nyaraka za taratibu za uwekaji
+# Andika nyaraka za taratibu za usambazaji
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
 echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
@@ -667,33 +667,33 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## Hatua Zifuatazo
 
-- [Kuweka Rasilimali](provisioning.md) - Uchunguzi wa kina wa usimamizi wa miundombinu
-- [Mipango ya Kabla ya Usambazaji](../chapter-06-pre-deployment/capacity-planning.md) - Panga mkakati wako wa usambazaji
-- [Masuala ya Kawaida](../chapter-07-troubleshooting/common-issues.md) - Tatua matatizo ya usambazaji
-- [Mbinu Bora](../chapter-07-troubleshooting/debugging.md) - Mikakati ya usambazaji tayari kwa uzalishaji
+- [Utayarishaji wa Rasilimali](provisioning.md) - Uchunguzi wa kina wa usimamizi wa miundombinu
+- [Mipango ya Kabla ya Ueneaji](../chapter-06-pre-deployment/capacity-planning.md) - Panga mkakati wako wa ueneaji
+- [Masuala ya Kawaida](../chapter-07-troubleshooting/common-issues.md) - Suluhisha masuala ya ueneaji
+- [Mbinu Bora](../chapter-07-troubleshooting/debugging.md) - Mikakati ya ueneaji tayari kwa uzalishaji
 
-## 🎯 Mazoezi ya Vitendo ya Usambazaji
+## 🎯 Mafunzo ya Vitendo ya Ueneaji
 
-### Zoezi 1: Mtiririko wa Usambazaji wa Hatua-Hatua (dakika 20)
-**Lengo**: Tumia tofauti kati ya usambazaji kamili na hatua-hatua
+### Mazoezi 1: Mtiririko wa Ueneaji wa Hatua-hatua (20 dakika)
+**Lengo**: Elewa tofauti kati ya ueneaji kamili na ueneaji wa hatua-hatua
 
 ```bash
-# Utoaji wa awali
+# Utekelezaji wa awali
 mkdir deployment-practice && cd deployment-practice
 azd init --template todo-nodejs-mongo
 azd up
 
-# Rekodi wakati wa utoaji wa awali
+# Rekodi wakati wa utekelezaji wa awali
 echo "Full deployment: $(date)" > deployment-log.txt
 
 # Fanya mabadiliko ya msimbo
 echo "// Updated $(date)" >> src/api/src/server.js
 
-# Toa msimbo tu (haraka)
+# Weka tu msimbo (haraka)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
-# Linganishe nyakati
+# Linganisisha nyakati
 cat deployment-log.txt
 
 # Safisha
@@ -701,30 +701,30 @@ azd down --force --purge
 ```
 
 **Vigezo vya Mafanikio:**
-- [ ] Usambazaji kamili unachukua dakika 5-15
-- [ ] Usambazaji wa msimbo pekee unachukua dakika 2-5
-- [ ] Mabadiliko ya msimbo yanaonekana katika programu iliyosambazwa
-- [ ] Miundombinu haibadiliki baada ya `azd deploy`
+- [ ] Ueneaji kamili unachukua dakika 5-15
+- [ ] Ueneaji wa msimbo pekee unachukua dakika 2-5
+- [ ] Mabadiliko ya msimbo yanaonekana katika programu iliyowekwa
+- [ ] Miundombinu haijabadilika baada ya `azd deploy`
 
-**Matokeo ya Kujifunza**: `azd deploy` ni 50-70% haraka kuliko `azd up` kwa mabadiliko ya msimbo
+**Matokeo ya Kujifunza**: `azd deploy` ni 50-70% ya haraka kuliko `azd up` kwa mabadiliko ya msimbo
 
-### Zoezi 2: Hooks Maalum za Usambazaji (dakika 30)
-**Lengo**: Tekeleza automatisering kabla na baada ya usambazaji
+### Mazoezi 2: Hooks Maalum za Ueneaji (30 dakika)
+**Lengo**: Tekeleza otomatiki za kabla na baada ya ueneaji
 
 ```bash
-# Unda skripti ya uthibitishaji kabla ya kusambaza
+# Tegeneza skripti ya uhakiki kabla ya kupeleka
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
 echo "⚠️ Running pre-deployment checks..."
 
-# Angalia kama majaribio yanafaulu
+# Angalia kama majaribio yanapita
 if ! npm run test:unit; then
     echo "❌ Tests failed! Aborting deployment."
     exit 1
 fi
 
-# Angalia mabadiliko yasiyohifadhiwa
+# Angalia mabadiliko ambayo hayajakomitiwa
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -734,7 +734,7 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# Unda mtihani wa awali baada ya kusambaza
+# Tegeneza mtihani mfupi baada ya kupeleka
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
 echo "💨 Running smoke tests..."
@@ -753,7 +753,7 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# Ongeza hooks kwenye azure.yaml
+# Ongeza hooks katika azure.yaml
 cat >> azure.yaml << 'EOF'
 
 hooks:
@@ -766,21 +766,21 @@ hooks:
     run: ./scripts/post-deploy-test.sh
 EOF
 
-# Jaribu ueneaji kwa kutumia hooks
+# Jaribu upeleka kwa kutumia hooks
 azd deploy
 ```
 
 **Vigezo vya Mafanikio:**
-- [ ] Script ya kabla ya usambazaji inaendeshwa kabla ya usambazaji
-- [ ] Usambazaji unasitishwa ikiwa majaribio yanashindwa
-- [ ] Mtihani wa haraka baada ya usambazaji unathibitisha afya
+- [ ] Skripti ya kabla ya ueneaji inakimbia kabla ya ueneaji
+- [ ] Ueneaji unakatizwa ikiwa majaribio yanashindwa
+- [ ] Jaribio la uchujaji baada ya ueneaji linathibitisha afya
 - [ ] Hooks zinafanywa kwa mpangilio sahihi
 
-### Zoezi 3: Mkakati wa Usambazaji kwa Mazingira Nyingi (dakika 45)
-**Lengo**: Tekeleza mtiririko wa usambazaji kwa hatua (dev → staging → production)
+### Mazoezi 3: Mkakati wa Ueneaji kwa Mazingira Nyingi (45 dakika)
+**Lengo**: Tekeleza mtiririko wa ueneaji wa hatua (dev → staging → production)
 
 ```bash
-# Unda skripti ya kupeleka
+# Tengeneza skripti ya uzinduzi
 cat > deploy-staged.sh << 'EOF'
 #!/bin/bash
 set -e
@@ -806,7 +806,7 @@ azd up --no-prompt
 echo "Running staging tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# Hatua 3: Uidhinishaji wa mkono kwa uzalishaji
+# Hatua 3: Idhini ya mtu kwa uzalishaji
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -829,27 +829,27 @@ EOF
 
 chmod +x deploy-staged.sh
 
-# Unda mazingira
+# Tengeneza mazingira
 azd env new dev
 azd env new staging
 azd env new production
 
-# Endesha utoaji uliopangwa
+# Endesha uzinduzi kwa awamu
 ./deploy-staged.sh
 ```
 
 **Vigezo vya Mafanikio:**
-- [ ] Mazingira ya Dev yanasambazwa kwa mafanikio
-- [ ] Mazingira ya Staging yanasambazwa kwa mafanikio
-- [ ] Uidhinishaji wa mkono unahitajika kwa uzalishaji
+- [ ] Mazingira ya Dev yanaweka kwa mafanikio
+- [ ] Mazingira ya Staging yanaweka kwa mafanikio
+- [ ] Uidhinishaji wa mkono unahitajika kwa Production
 - [ ] Mazingira yote yana ukaguzi wa afya unaofanya kazi
-- [ ] Inawezekana kurudisha kurudi ikiwa inahitajika
+- [ ] Inawezekana kurudisha ikiwa inahitajika
 
-### Zoezi 4: Mkakati wa Kurudisha (dakika 25)
-**Lengo**: Tekeleza na jaribu kurudisha usambazaji kwa kutumia Git
+### Mazoezi 4: Mkakati wa Kurudisha (25 dakika)
+**Lengo**: Tekeleza na kujaribu kurudisha ueneaji kwa kutumia Git
 
 ```bash
-# Sambaza v1
+# Zindua v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
@@ -857,23 +857,23 @@ azd up
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# Sambaza v2 yenye mabadiliko yanayovunja
+# Zindua v2 yenye mabadiliko yanayovunja utangamano
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
 azd deploy
 
-# Gundua hitilafu na rudisha
+# Gundua hitilafu na rudi nyuma
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # Rudisha kwa kutumia git
+    # Rudi nyuma ukitumia git
     git revert HEAD --no-edit
     
     # Rudisha mazingira
     azd env set APP_VERSION "1.0.0"
     
-    # Sambaza tena v1
+    # Zindua tena v1
     azd deploy
     
     echo "✅ Rolled back to v1.0.0"
@@ -881,17 +881,17 @@ fi
 ```
 
 **Vigezo vya Mafanikio:**
-- [ ] Inaweza kugundua kushindwa kwa usambazaji
-- [ ] Script ya kurudisha inaendeshwa kiotomatiki
-- [ ] Programu inarudi kwenye hali inayofanya kazi
-- [ ] Ukaguzi wa afya unafaulu baada ya kurudisha
+- [ ] Inaweza kugundua kushindwa kwa ueneaji
+- [ ] Skripti ya kurudisha inatekelezwa moja kwa moja
+- [ ] Programu inarudi katika hali ya kazi
+- [ ] Ukaguzi wa afya unapita baada ya kurudisha
 
-## 📊 Ufuatiliaji wa Metriki za Usambazaji
+## 📊 Ufuatiliaji wa Vipimo vya Ueneaji
 
-### Fuatilia Utendaji wa Usambazaji Wako
+### Fuata Utendaji wa Ueneaji Wako
 
 ```bash
-# Tegeneza skiripti ya vipimo vya utoaji
+# Unda skripti ya vipimo vya uwekaji
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
@@ -914,36 +914,35 @@ EOF
 
 chmod +x track-deployment.sh
 
-# Tumia
+# Itumie
 ./track-deployment.sh
 ```
 
-**Chambua metrikia zako:**
+**Chambua vipimo vyako:**
 ```bash
-# Tazama historia ya utoaji
+# Tazama historia ya usambazaji
 cat deployment-metrics.csv
 
-# Hesabu muda wa wastani wa utoaji
+# Hesabu muda wa wastani wa usambazaji
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
-## Rasilimali Zaidi
+## Rasilimali Zingine
 
-- [Marejeo ya Usambazaji ya Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Usambazaji wa Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Usambazaji wa Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Usambazaji wa Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Rejea ya Ueneaji ya Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Ueneaji wa Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Ueneaji wa Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Ueneaji wa Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
-**Uvinjari**
-- **Somo lililopita**: [Mradi Wako wa Kwanza](../chapter-01-foundation/first-project.md)
-- **Somo Lifuatao**: [Kuweka Rasilimali](provisioning.md)
+**Uelekeo**
+- **Somo Lililopita**: [Mradi Wako wa Kwanza](../chapter-01-foundation/first-project.md)
+- **Somo Linalofuata**: [Utayarishaji wa Rasilimali](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Taarifa ya kutokuwa na dhamana:
-
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Wakati tunajitahidi kuhakikisha usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokukamilika kwa usahihi. Nyaraka ya awali katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, inashauriwa kutumia tafsiri ya kitaalamu iliyofanywa na binadamu. Hatuwajibiki kwa kutokuelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+**Angalizo**:
+Nyaraka hii imetafsiriwa kwa kutumia huduma ya kutafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Wakati tunajitahidi kufikia usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au zisizo sahihi. Nyaraka ya asili kwa lugha yake ya asili inapaswa kutambulika kama chanzo chenye mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na mtafsiri wa binadamu inashauriwa. Hatuwezi kuwajibishwa kwa kutoelewana au tafsiri potofu zitokanazo na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

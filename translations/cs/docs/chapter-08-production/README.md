@@ -1,19 +1,19 @@
 # Kapitola 8: Produkční a podnikové vzory
 
-**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 2-3 hodin | **⭐ Složitost**: Pokročilá
+**📚 Kurz**: [AZD For Beginners](../../README.md) | **⏱️ Doba trvání**: 2-3 hodiny | **⭐ Složitost**: Pokročilá
 
 ---
 
 ## Přehled
 
-Tato kapitola pokrývá podnikově připravené vzory nasazení, zpřísnění bezpečnosti, monitorování a optimalizaci nákladů pro produkční AI pracovní zátěže.
+Tato kapitola pokrývá podnikové vzory nasazení připravené do produkce, zpevnění zabezpečení, monitorování a optimalizaci nákladů pro produkční AI zátěže.
 
-## Cíle učení
+## Výukové cíle
 
 Po dokončení této kapitoly budete:
-- Nasazovat odolné aplikace v několika regionech
+- Nasadit víceregionální odolné aplikace
 - Implementovat podnikové bezpečnostní vzory
-- Konfigurovat komplexní monitorování
+- Nakonfigurovat komplexní monitorování
 - Optimalizovat náklady ve velkém měřítku
 - Nastavit CI/CD pipeline s AZD
 
@@ -21,19 +21,19 @@ Po dokončení této kapitoly budete:
 
 ## 📚 Lekce
 
-| # | Lekce | Popis | Doba |
+| # | Lekce | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Produkční postupy AI](production-ai-practices.md) | Podnikové vzory nasazení | 90 min |
+| 1 | [Production AI Practices](production-ai-practices.md) | Podnikové vzory nasazení | 90 min |
 
 ---
 
-## 🚀 Kontrolní seznam pro produkci
+## 🚀 Produkční kontrolní seznam
 
-- [ ] Nasazení do více regionů pro odolnost
+- [ ] Víceregionální nasazení pro odolnost
 - [ ] Spravovaná identita pro autentizaci (bez klíčů)
 - [ ] Application Insights pro monitorování
-- [ ] Nastavené rozpočty a upozornění na náklady
-- [ ] Zapnuté bezpečnostní skenování
+- [ ] Rozpočty nákladů a upozornění nakonfigurovány
+- [ ] Skenování bezpečnosti povoleno
 - [ ] Integrace CI/CD pipeline
 - [ ] Plán obnovy po havárii
 
@@ -43,28 +43,21 @@ Po dokončení této kapitoly budete:
 
 ### Vzor 1: AI založená na mikroslužbách
 
+```mermaid
+graph LR
+    Gateway[API brána] --> AI[Služba AI] --> Models[Modely Microsoft Foundry]
+    Gateway --> Auth[Autentizační služba]
+    AI --> Data[Datové úložiště]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
+### Vzor 2: AI založená na událostech
 
-### Vzor 2: Event-Driven AI
-
+```mermaid
+graph LR
+    EventGrid[Síť událostí] --> Functions[Funkce] --> Pipeline[Pipeline pro AI]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
-## 🔐 Doporučené bezpečnostní postupy
+## 🔐 Nejlepší bezpečnostní postupy
 
 ```bicep
 // Use managed identity
@@ -85,15 +78,15 @@ properties: {
 
 ## 💰 Optimalizace nákladů
 
-| Strategie | Úspora |
+| Strategie | Úspory |
 |----------|---------|
 | Škálování na nulu (Container Apps) | 60-80% |
-| Používat spotřební úrovně pro vývoj | 50-70% |
+| Použít spotřební tarify pro vývoj | 50-70% |
 | Plánované škálování | 30-50% |
 | Rezervovaná kapacita | 20-40% |
 
 ```bash
-# Nastavit upozornění na rozpočet
+# Nastavit rozpočtová upozornění
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -123,20 +116,20 @@ az monitor metrics list --resource <resource-id>
 | Směr | Kapitola |
 |-----------|---------|
 | **Předchozí** | [Kapitola 7: Řešení problémů](../chapter-07-troubleshooting/README.md) |
-| **Dokončení kurzu** | [Domovská stránka kurzu](../../README.md) |
+| **Kurz dokončen** | [Domov kurzu](../../README.md) |
 
 ---
 
 ## 📖 Související zdroje
 
-- [Průvodce AI agenty](../chapter-02-ai-development/agents.md)
+- [AI Agents Guide](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Řešení s více agenty](../chapter-05-multi-agent/README.md)
+- [Víceagentní řešení](../chapter-05-multi-agent/README.md)
 - [Příklad mikroslužeb](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vyloučení odpovědnosti:
-Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoliv usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho mateřském jazyce by měl být považován za závazný zdroj. Pro zásadní informace doporučujeme profesionální lidský překlad. Neodpovídáme za žádná nedorozumění nebo chybné výklady vyplývající z použití tohoto překladu.
+**Prohlášení o vyloučení odpovědnosti**:
+Tento dokument byl přeložen pomocí služby pro automatický překlad [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Za žádná nedorozumění nebo mylné výklady vyplývající z použití tohoto překladu neneseme odpovědnost.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

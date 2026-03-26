@@ -1,20 +1,20 @@
-# Kapitola 8: Produkčné a podnikové vzory
+# Kapitola 8: Produkčné & podnikové vzory
 
-**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Dĺžka**: 2-3 hodiny | **⭐ Zložitosť**: Pokročilé
+**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Trvanie**: 2-3 hodiny | **⭐ Náročnosť**: Pokročilá
 
 ---
 
 ## Prehľad
 
-Táto kapitola pokrýva nasadzovacie vzory pripravené pre podniky, spevnenie bezpečnosti, monitorovanie a optimalizáciu nákladov pre produkčné AI pracovné záťaže.
+Táto kapitola pokrýva produkčné nasadzovacie vzory pripravené pre podniky, spevňovanie bezpečnosti, monitoring a optimalizáciu nákladov pre produkčné AI pracovné záťaže.
 
 ## Ciele učenia
 
-Po dokončení tejto kapitoly budete:
-- Nasadzovať odolné aplikácie v multi-regiónoch
+Po dokončení tejto kapitoly budete vedieť:
+- Nasadiť odolné aplikácie naprieč viacerými regiónmi
 - Implementovať podnikové bezpečnostné vzory
-- Nakonfigurovať komplexné monitorovanie
-- Optimalizovať náklady pri škálovaní
+- Konfigurovať komplexné monitorovanie
+- Optimalizovať náklady vo veľkom meradle
 - Nastaviť CI/CD pipeline s AZD
 
 ---
@@ -23,17 +23,17 @@ Po dokončení tejto kapitoly budete:
 
 | # | Lekcia | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Produkčné AI postupy](production-ai-practices.md) | Podnikové nasadzovacie vzory | 90 min |
+| 1 | [Produkčné AI postupy](production-ai-practices.md) | Podnikové vzory nasadenia | 90 min |
 
 ---
 
-## 🚀 Produkčný kontrolný zoznam
+## 🚀 Kontrolný zoznam pre produkciu
 
-- [ ] Nasadenie v multi-regiónoch pre odolnosť
-- [ ] Managed identity pre autentifikáciu (žiadne kľúče)
-- [ ] Application Insights pre monitorovanie
-- [ ] Nastavené rozpočty nákladov a upozornenia
-- [ ] Povolené skenovanie bezpečnosti
+- [ ] Nasadenie v niekoľkých regiónoch pre odolnosť
+- [ ] Spravovaná identita na overovanie (bez kľúčov)
+- [ ] Application Insights na monitorovanie
+- [ ] Nastavené rozpočty a upozornenia
+- [ ] Povolené bezpečnostné skenovanie
 - [ ] Integrácia CI/CD pipeline
 - [ ] Plán obnovy po havárii
 
@@ -43,25 +43,18 @@ Po dokončení tejto kapitoly budete:
 
 ### Vzor 1: AI s mikroslužbami
 
+```mermaid
+graph LR
+    Gateway[API brána] --> AI[Služba AI] --> Models[Modely Microsoft Foundry]
+    Gateway --> Auth[Autentifikačná služba]
+    AI --> Data[Úložisko dát]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   API Gateway   │───▶│   AI Service    │───▶│   Azure OpenAI  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                      │
-         ▼                      ▼
-┌─────────────────┐    ┌─────────────────┐
-│   Auth Service  │    │   Data Store    │
-└─────────────────┘    └─────────────────┘
-```
+### Vzor 2: AI riadená udalosťami
 
-### Vzor 2: AI riadené udalosťami
-
+```mermaid
+graph LR
+    EventGrid[Mriežka udalostí] --> Functions[Funkcie] --> Pipeline[AI pracovný tok]
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Event Grid    │───▶│  Functions      │───▶│   AI Pipeline   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-```
-
 ---
 
 ## 🔐 Najlepšie bezpečnostné postupy
@@ -93,7 +86,7 @@ properties: {
 | Rezervovaná kapacita | 20-40% |
 
 ```bash
-# Nastaviť rozpočtové upozornenia
+# Nastaviť upozornenia na rozpočet
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -137,6 +130,6 @@ az monitor metrics list --resource <resource-id>
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vylúčenie zodpovednosti:
-Tento dokument bol preložený pomocou služby prekladu založenej na umelej inteligencii [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, majte prosím na pamäti, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Originálny dokument v jeho pôvodnom jazyku by mal byť považovaný za rozhodujúci zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nezodpovedáme za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z využitia tohto prekladu.
+**Vyhlásenie o vylúčení zodpovednosti**:
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, majte prosím na pamäti, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v originálnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie odporúčame profesionálny preklad vykonaný človekom. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z používania tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

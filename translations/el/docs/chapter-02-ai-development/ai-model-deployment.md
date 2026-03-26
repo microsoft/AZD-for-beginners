@@ -1,15 +1,15 @@
 # Ανάπτυξη Μοντέλων AI με το Azure Developer CLI
 
-**Πλοήγηση Κεφαλαίου:**
+**Chapter Navigation:**
 - **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
-- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 2 - Ανάπτυξη με προτεραιότητα AI
+- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 2 - Ανάπτυξη με προτεραιότητα στο AI
 - **⬅️ Προηγούμενο**: [Ενσωμάτωση Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Επόμενο**: [Εργαστήριο AI](ai-workshop-lab.md)
 - **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 3: Διαμόρφωση](../chapter-03-configuration/configuration.md)
 
-Αυτός ο οδηγός παρέχει ολοκληρωμένες οδηγίες για την ανάπτυξη μοντέλων AI χρησιμοποιώντας πρότυπα AZD, καλύπτοντας τα πάντα από την επιλογή μοντέλου έως τα πρότυπα ανάπτυξης σε παραγωγή.
+Αυτός ο οδηγός παρέχει ολοκληρωμένες οδηγίες για την ανάπτυξη μοντέλων AI χρησιμοποιώντας πρότυπα AZD, καλύπτοντας τα πάντα από την επιλογή μοντέλου μέχρι τα πρότυπα ανάπτυξης στην παραγωγή.
 
-## Πίνακας Περιεχομένων
+## Περιεχόμενα
 
 - [Στρατηγική Επιλογής Μοντέλου](../../../../docs/chapter-02-ai-development)
 - [Διαμόρφωση AZD για Μοντέλα AI](../../../../docs/chapter-02-ai-development)
@@ -20,9 +20,9 @@
 
 ## Στρατηγική Επιλογής Μοντέλου
 
-### Μοντέλα Azure OpenAI
+### Μοντέλα Microsoft Foundry
 
-Επιλέξτε το κατάλληλο μοντέλο για την περίπτωσή σας:
+Επιλέξτε το κατάλληλο μοντέλο για την περίπτωση χρήσης σας:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -34,9 +34,9 @@ services:
       AZURE_OPENAI_MODELS: |
         [
           {
-            "name": "gpt-4o-mini",
+            "name": "gpt-4.1-mini",
             "version": "2024-07-18",
-            "deployment": "gpt-4o-mini",
+            "deployment": "gpt-4.1-mini",
             "capacity": 10,
             "format": "OpenAI"
           },
@@ -52,28 +52,28 @@ services:
 
 ### Σχεδιασμός Χωρητικότητας Μοντέλου
 
-| Τύπος Μοντέλου | Περίπτωση Χρήσης | Συνιστώμενη Χωρητικότητα | Παράγοντες Κόστους |
+| Model Type | Use Case | Recommended Capacity | Cost Considerations |
 |------------|----------|---------------------|-------------------|
-| GPT-4o-mini | Συνομιλία, Ερωτήσεις & Απαντήσεις | 10-50 TPM | Οικονομικά αποδοτικό για τις περισσότερες εργασίες |
-| GPT-4 | Σύνθετη λογική | 20-100 TPM | Υψηλότερο κόστος, να χρησιμοποιείται για premium λειτουργίες |
+| gpt-4.1-mini | Συνομιλία, Ερωτήσεις και Απαντήσεις | 10-50 TPM | Οικονομικά αποδοτικό για τις περισσότερες εργασίες |
+| gpt-4.1 | Σύνθετη λογική | 20-100 TPM | Υψηλότερο κόστος, να χρησιμοποιείται για χαρακτηριστικά premium |
 | Text-embedding-ada-002 | Αναζήτηση, RAG | 30-120 TPM | Απαραίτητο για σημασιολογική αναζήτηση |
-| Whisper | Μετατροπή ομιλίας σε κείμενο | 10-50 TPM | Εργασίες επεξεργασίας ήχου |
+| Whisper | Ομιλία σε κείμενο | 10-50 TPM | Φορτία εργασίας επεξεργασίας ήχου |
 
 ## Διαμόρφωση AZD για Μοντέλα AI
 
 ### Διαμόρφωση Προτύπου Bicep
 
-Δημιουργήστε αναπτύξεις μοντέλων μέσω προτύπων Bicep:
+Create model deployments through Bicep templates:
 
 ```bicep
 // infra/main.bicep
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
-    name: 'gpt-4o-mini'
+    name: 'gpt-4.1-mini'
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
     sku: {
@@ -124,13 +124,13 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Μεταβλητές Περιβάλλοντος
 
-Διαμορφώστε το περιβάλλον της εφαρμογής σας:
+Configure your application environment:
 
 ```bash
-# Διαμόρφωση .env
+# .env διαμόρφωση
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
-AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
+AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
@@ -146,15 +146,15 @@ services:
     host: containerapp
     config:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
-      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
+      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Κατάλληλο για:
+Best for:
 - Ανάπτυξη και δοκιμές
 - Εφαρμογές για μία αγορά
 - Βελτιστοποίηση κόστους
 
-### Πρότυπο 2: Ανάπτυξη σε Πολλαπλές Περιοχές
+### Πρότυπο 2: Ανάπτυξη σε Πολλές Περιοχές
 
 ```bicep
 // Multi-region deployment
@@ -167,14 +167,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Κατάλληλο για:
+Best for:
 - Παγκόσμιες εφαρμογές
 - Απαιτήσεις υψηλής διαθεσιμότητας
 - Κατανομή φόρτου
 
 ### Πρότυπο 3: Υβριδική Ανάπτυξη
 
-Συνδυάστε το Azure OpenAI με άλλες υπηρεσίες AI:
+Combine Microsoft Foundry Models with other AI services:
 
 ```bicep
 // Hybrid AI services
@@ -203,17 +203,17 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Διαχείριση Μοντέλων
+## Διαχείριση Μοντέλου
 
 ### Έλεγχος Εκδόσεων
 
-Παρακολουθήστε τις εκδόσεις μοντέλων στη ρύθμιση AZD σας:
+Track model versions in your AZD configuration:
 
 ```json
 {
   "models": {
     "chat": {
-      "name": "gpt-4o-mini",
+      "name": "gpt-4.1-mini",
       "version": "2024-07-18",
       "fallback": "gpt-35-turbo"
     },
@@ -225,35 +225,35 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-### Ενημερώσεις Μοντέλων
+### Ενημερώσεις Μοντέλου
 
-Χρησιμοποιήστε hooks του AZD για ενημερώσεις μοντέλων:
+Use AZD hooks for model updates:
 
 ```bash
 #!/bin/bash
-# hooks/predeploy.sh
+# hooks/προ-ανάπτυξη.sh
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
-  --query "[?name=='gpt-4o-mini']"
+  --query "[?name=='gpt-4.1-mini']"
 ```
 
 ### Δοκιμές A/B
 
-Αναπτύξτε πολλαπλές εκδόσεις μοντέλων:
+Deploy multiple model versions:
 
 ```bicep
 param enableABTesting bool = false
 
 resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'gpt-4o-mini-${enableABTesting ? 'v1' : 'prod'}'
+  name: 'gpt-4.1-mini-${enableABTesting ? 'v1' : 'prod'}'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -268,7 +268,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### Σχεδιασμός Χωρητικότητας
 
-Υπολογίστε την απαιτούμενη χωρητικότητα βάσει προτύπων χρήσης:
+Calculate required capacity based on usage patterns:
 
 ```python
 # Παράδειγμα υπολογισμού χωρητικότητας
@@ -295,7 +295,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### Διαμόρφωση Αυτόματης Κλιμάκωσης
 
-Διαμορφώστε αυτόματη κλιμάκωση για Container Apps:
+Configure auto-scaling for Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -333,7 +333,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Βελτιστοποίηση Κόστους
 
-Εφαρμόστε μέτρα ελέγχου κόστους:
+Implement cost controls:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -365,9 +365,9 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ## Παρακολούθηση και Παρατηρησιμότητα
 
-### Ενσωμάτωση Application Insights
+### Ενσωμάτωση του Application Insights
 
-Διαμορφώστε την παρακολούθηση για φόρτους εργασίας AI:
+Configure monitoring for AI workloads:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -403,9 +403,9 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Προσαρμοσμένες Μετρικές
+### Προσαρμοσμένα Μετρικά
 
-Παρακολουθήστε μετρικές ειδικές για AI:
+Track AI-specific metrics:
 
 ```python
 # Προσαρμοσμένη τηλεμετρία για μοντέλα τεχνητής νοημοσύνης
@@ -442,7 +442,7 @@ class AITelemetry:
 
 ### Έλεγχοι Υγείας
 
-Υλοποιήστε παρακολούθηση υγείας υπηρεσιών AI:
+Implement AI service health monitoring:
 
 ```python
 # Σημεία τερματισμού ελέγχου υγείας
@@ -473,23 +473,23 @@ async def check_ai_models():
 
 ## Επόμενα Βήματα
 
-1. **Επισκοπήστε τον [Οδηγό Ενσωμάτωσης Microsoft Foundry](microsoft-foundry-integration.md)** για πρότυπα ενσωμάτωσης υπηρεσιών
+1. **Επανεξετάστε τον [Οδηγό Ενσωμάτωσης Microsoft Foundry](microsoft-foundry-integration.md)** για πρότυπα ενσωμάτωσης υπηρεσιών
 2. **Ολοκληρώστε το [Εργαστήριο AI](ai-workshop-lab.md)** για πρακτική εμπειρία
-3. **Εφαρμόστε τις [Πρακτικές Παραγωγής AI](production-ai-practices.md)** για επιχειρησιακές αναπτύξεις
-4. **Εξερευνήστε τον [Οδηγό Αντιμετώπισης Προβλημάτων AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** για κοινά ζητήματα
+3. **Εφαρμόστε τις [Πρακτικές Παραγωγής για AI](production-ai-practices.md)** για αναπτύξεις σε επιχειρησιακό επίπεδο
+4. **Διερευνήστε τον [Οδηγό Επίλυσης Προβλημάτων AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** για κοινά ζητήματα
 
 ## Πόροι
 
-- [Διαθεσιμότητα Μοντέλων Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Διαθεσιμότητα Μοντέλων Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Τεκμηρίωση Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Κλιμάκωση Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Βελτιστοποίηση Κόστους Μοντέλων AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Πλοήγηση Κεφαλαίου:**
+**Chapter Navigation:**
 - **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
-- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 2 - Ανάπτυξη με προτεραιότητα AI
+- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 2 - Ανάπτυξη με προτεραιότητα στο AI
 - **⬅️ Προηγούμενο**: [Ενσωμάτωση Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Επόμενο**: [Εργαστήριο AI](ai-workshop-lab.md)
 - **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 3: Διαμόρφωση](../chapter-03-configuration/configuration.md)
@@ -497,6 +497,6 @@ async def check_ai_models():
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Αποποίηση ευθυνών:
-Αυτό το έγγραφο έχει μεταφραστεί με χρήση της υπηρεσίας αυτόματης μετάφρασης με τεχνητή νοημοσύνη Co-op Translator (https://github.com/Azure/co-op-translator). Παρόλο που επιδιώκουμε την ακρίβεια, παρακαλούμε λάβετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το αρχικό έγγραφο στην πρωτότυπη γλώσσα του πρέπει να θεωρείται η επίσημη πηγή. Για κρίσιμες πληροφορίες συνιστάται επαγγελματική μετάφραση από άνθρωπο. Δεν φέρουμε ευθύνη για τυχόν παρανοήσεις ή παρερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+Αποποίηση ευθύνης:
+Το παρόν έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης τεχνητής νοημοσύνης Co-op Translator (https://github.com/Azure/co-op-translator). Παρά τις προσπάθειές μας για ακρίβεια, λάβετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στη γλώσσα του πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες συνιστάται η μετάφραση από επαγγελματία μεταφραστή. Δεν φέρουμε ευθύνη για οποιεσδήποτε παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

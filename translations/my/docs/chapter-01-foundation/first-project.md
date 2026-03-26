@@ -1,98 +1,98 @@
-# သင့် ပထမဆုံး ပရောဂျက် - လက်တွေ့ လမ်းညွှန်
+# Your First Project - Hands-On Tutorial
 
-**အခန်း လမ်းညွှန်:**
-- **📚 သင်တန်း မူလ စာမျက်နှာ**: [AZD For Beginners](../../README.md)
-- **📖 ယခု အခန်း**: အခန်း 1 - အခြေခံနှင့် အမြန် စတင်ခြင်း
-- **⬅️ ယခင်**: [Installation & Setup](installation.md)
-- **➡️ နောက်တစ်ခု**: [Configuration](configuration.md)
-- **🚀 နောက်အခန်း**: [အခန်း 2: AI-ဦးစားပေး ဖွံ့ဖြိုးရေး](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
+- **⬅️ Previous**: [Installation & Setup](installation.md)
+- **➡️ Next**: [Configuration](configuration.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-## နိဒါန်း
+## Introduction
 
-Azure Developer CLI ပရောဂျက်သို့ ကြိုဆိုပါတယ်! ဒီလက်တွေ့ လေ့ကျင့်ခန်းက azd ကို အသုံးပြုပြီး Azure ပေါ်မှာ full-stack application တစ်ခုကို ဖန်တီး၊ တင်ပို့၊ စီမံခန့်ခွဲခြင်းကို အပြည့်အစုံ လမ်းညွှန်ပေးပါသည်။ သင်သည် React frontend, Node.js API backend နှင့် MongoDB database ပါဝင်သည့် လက်တွေ့ todo application နဲ့ အလုပ်လုပ်မည်ဖြစ်သည်။
+သင့်ရဲ့ ပထမဆုံး Azure Developer CLI စီမံကိန်းသို့ ကြိုဆိုပါတယ်! ဒီလက်တွေ့ အသုဘက်သင်တန်းမှာ azd ကို အသုံးပြုပြီး React frontend, Node.js API backend, နှင့် MongoDB ဒေတာဘေ့စ်ပါဝင်သော ပြီးပြည့်စုံသော full-stack အက်ပလီကေးရှင်းတစ်ခုကို ဖန်တီး၊ deploy နှင့် စီမံခန့်ခွဲခြင်းကို အပြည့်အစုံ လမ်းပြပေးမှာ ဖြစ်ပါတယ်။
 
-## သင်ယူရမည့် ရည်မှန်းချက်များ
+## Learning Goals
 
-ဖြေဆိုပြီးနောက် သင်သည် -
-- Template များဖြင့် azd ပရောဂျက် စတင်ဖန်တီးရေး လုပ်ငန်းစဉ်ကို ကျွမ်းကျင်စွာ ပြုလုပ်နိုင်မည်
-- Azure Developer CLI ပရောဂျက် ဖွဲ့စည်းပုံနှင့် ဖိုင်ဆက်တင် များကို နားလည်သိရှိမည်
-- အင်ဖရာစထရပ်ချာ ဆောက်လုပ်ပေးခြင်းနှင့်အတူ အက်ပလီကေးရှင်းကို Azure သို့ စုံလင်စွာ တင်ပို့နိုင်မည်
-- အက်ပလီကေးရှင်း အပ်ဒိတ်များနှင့် ပြန်လည် တင်ပို့ရေး မဟာဗျူဟာများကို အကောင်အထည်ဖော်နိုင်မည်
-- ဖွံ့ဖြိုးရေးနှင့် staging အဆင့်များအတွက် ပတ်ဝန်းကျင်များ ကို စီမံခန့်ခွဲနိုင်မည်
-- အရင်းအမြစ် ရှင်းလင်းခြင်းနှင့် ကုန်ကျစရိတ် စီမံခန့်ခွဲမှု လေ့ကျင့်နည်းများကို အကောင်အထည်ဖော်နိုင်မည်
+ဤသင်တန်းကို ပြီးမြောက်ပါက သင်မှာ:
+- azd project initialization workflow ကို template များဖြင့် ကျွမ်းကျင်စွာ ပြုလုပ်နိုင်မည်
+- Azure Developer CLI စီမံကိန်း ဖွဲ့စည်းပုံနှင့် configuration ဖိုင်များကို နားလည်နိုင်မည်
+- အပြည့်အစုံ application ကို infrastructure provisioning အပါအဝင် Azure သို့ deploy ပြုလုပ်နိုင်မည်
+- application update များနှင့် redeployment များကို အကောင်အထည်ဖော်နိုင်မည်
+- development နှင့် staging အတွက် အခြေအနေ(environment) များကို စီမံနိုင်မည်
+- resource cleanup နှင့် ကုန်ကျစရိတ်စီမံခန့်ခွဲမှုမျာ်ကို အသုံးချနိုင်မည်
 
-## သင်ယူပြီး ရရှိမည့် အကျိုးရလဒ်များ
+## Learning Outcomes
 
-ပြီးဆုံးသောအခါ သင်သည် -
-- Template များမှ azd ပရောဂျက်များကို လွတ်လပ်စွာ စတင်ဖန်တီး၍ ဖော်ပြနိုင်မည်
-- azd ပရောဂျက် ဖွဲ့စည်းပုံများကို ထိရောက်စွာ လေ့လာ၊ ပြင်ဆင်နိုင်မည်
-- တစ်ချက်ချင်း command များဖြင့် full-stack အက်ပလီကေးရှင်းများကို Azure သို့ တင်ပို့နိုင်မည်
-- ဖြစ်လေ့ရှိသော deploy ပြဿနာများနှင့် authentication ပြဿနာများကို ဖြေရှင်းနိုင်မည်
-- အမျိုးမျိုးသော deployment အဆင့်များအတွက် Azure ပတ်ဝန်းကျင်များကို စီမံနိုင်မည်
-- အက်ပလီကေးရှင်း အပ်ဒိတ်များအတွက် စဉ်ဆက်မပြတ် deployment လုပ်ငန်းစဉ်များကို အကောင်အထည်ဖော်နိုင်မည်
+ပြီးမြောက်ပြီးနောက် သင်သည် အောက်ပါအရာများကို လုပ်ဆောင်နိုင်မည်:
+- templates ထဲမှ azd projects များကို သီးခြား initialize နှင့် configure ပြုလုပ်နိုင်မည်
+- azd project ဖိုင်စုကို ထိထိရောက်ရောက် လမ်းပြနိုင်ပြီး ပြင်ဆင်နိုင်မည်
+- တစ်ချက်တည်း command နဲ့ full-stack applications ကို Azure သို့ deploy ပြုလုပ်နိုင်မည်
+- deployment အခက်အခဲများနှင့် authentication ပြဿနာများကို အချိုးကျဖြေရှင်းနိုင်မည်
+- deployment အဆင့်အမျိုးမျိုးအတွက် Azure environments များကို စီမံနိုင်မည်
+- application updates အတွက် continuous deployment workflows များကို အကောင်အထည်ဖော်နိုင်မည်
 
-## စတင်ရန်
+## Getting Started
 
-### မလိုအပ်မီ စစ်ဆေးရန် စာရင်း
-- ✅ Azure Developer CLI တပ်ဆင်ပြီးပြီ ([Installation Guide](installation.md))
-- ✅ Azure CLI တပ်ဆင်ပြီး authentication ပြုလုပ်ထားပြီ
-- ✅ သင့် စက်ပေါ်တွင် Git တပ်ဆင်ထားပြီ
-- ✅ Node.js 16+ (ဤသင်ခန်းစာအတွက်)
-- ✅ Visual Studio Code (အကြံပြု)
+### Prerequisites Checklist
+- ✅ Azure Developer CLI installed ([Installation Guide](installation.md))
+- ✅ Azure CLI installed and authenticated
+- ✅ Git installed on your system
+- ✅ Node.js 16+ (for this tutorial)
+- ✅ Visual Studio Code (recommended)
 
-### သင့် စနစ်ကို စစ်ဆေးပါ
+### Verify Your Setup
 ```bash
-# azd တပ်ဆင်ခြင်းကို စစ်ဆေးပါ
+# azd တပ်ဆင်မှုကို စစ်ဆေးပါ
 azd version
 ```
-### Azure အတည်ပြုခြင်း စစ်ဆေးပါ
+### Verify Azure authentication
 
 ```bash
 az account show
 ```
 
-### Node.js ဗားရှင်း စစ်ဆေးပါ
+### Check Node.js version
 ```bash
 node --version
 ```
 
-## အဆင့် 1: Template ကို ရွေးချယ်ပြီး စတင်ဖွင့်ပါ
+## Step 1: Choose and Initialize a Template
 
-ပရိသတ်များကြားကျော်ကြားသော todo application template တစ်ခုဖြင့် စတင်လိုက်ပါ၊ ၎င်းတွင် React frontend နှင့် Node.js API backend ပါဝင်သည်။
+ကျွန်တော်တို့ စတင်မှာ React frontend နဲ့ Node.js API backend ပါဝင်တဲ့ နာမည်ကြီး todo application template ကို ရွေးယူ initialization လုပ်မယ်။
 
 ```bash
-# ရရှိနိုင်သော နမူနာများကို ကြည့်ရှုပါ
+# ရနိုင်သော ပုံစံများကို ကြည့်ပါ
 azd template list
 
-# Todo အက်ပ် နမူနာကို စတင်ထည့်သွင်းပါ
+# todo အက်ပ် ပုံစံကို စတင် ပြုလုပ်ပါ
 mkdir my-first-azd-app
 cd my-first-azd-app
 azd init --template todo-nodejs-mongo
 
-# ပြသထားသော အချက်များကို လိုက်နာပါ:
-# - ပတ်ဝန်းကျင်အမည် ထည့်ပါ: "dev"
-# - စာရင်းသွင်းမှုတစ်ခုကို ရွေးချယ်ပါ (အများပြားရှိပါက)
-# - ဒေသတစ်ခုကို ရွေးချယ်ပါ: "East US 2" (သို့မဟုတ် သင်နှစ်သက်သည့် ဒေသ)
+# အကြောင်းကြားချက်များကို လိုက်နာပါ:
+# - ပတ်ဝန်းကျင် နာမည် ထည့်ပါ: "dev"
+# - subscription ကို ရွေးချယ်ပါ (အကယ်၍ သင်မှာ များစွာရှိပါက)
+# - တိုင်းဒေသကို ရွေးချယ်ပါ: "East US 2" (သို့မဟုတ် သင်နှစ်သက်သော တိုင်းဒေသ)
 ```
 
-### ဘာတွေ ဖြစ်သွားပြီးလဲ?
-- Template ကုဒ်ကို သင့်ဒိုက်ရက်ထရီသို့ ဒေါင်းလုတ်လုပ်ခဲ့သည်
-- ဝန်ဆောင်မှု သတ်မှတ်ချက်များဖြင့် `azure.yaml` ဖိုင်ကို ဖန်တီးခဲ့သည်
-- `infra/` ဒိုင်ရက်ထရီ၌ အင်ဖရာစထရပ်ချာ ကုဒ်ကို စတင်ပြင်ဆင်ခဲ့သည်
-- ပတ်ဝန်းကျင် ဖော်ပြချက်ကို ဖန်တီးခဲ့သည်
+### What Just Happened?
+- သင့် local directory ထဲသို့ template ကုဒ်ကို ဒေါင်းလုပ်လုပ်ခဲ့သည်
+- `azure.yaml` ဖိုင်ကို service သတ်မှတ်ချက်များနှင့် ဖန်တီးထားသည်
+- `infra/` directory အတွင်း infrastructure ကုဒ်ကို သတ်မှတ်ထားသည်
+- environment configuration တစ်ခုကို ပြင်ဆင်ထားသည်
 
-## အဆင့် 2: ပရောဂျက် ဖွဲ့စည်းပုံ လေ့လာပါ
+## Step 2: Explore the Project Structure
 
-azd က ကျွန်တော်တို့အတွက် ဘာတွေ ဖန်တီးပေးထားသလဲဆိုတာ စစ်ဆေးကြပါစို့။
+azd က ကျွန်တော်တို့အတွက် ဖန်တီးပေးခဲ့တာတွေကို ကြည့်ရှုကြမယ်။
 
 ```bash
-# ပရောဂျက်ဖွဲ့စည်းမှုကို ကြည့်ပါ
-tree /f   # Windows
+# ပရောဂျက် ဖွဲ့စည်းပုံကို ကြည့်ပါ
+tree /f   # ဝင်းဒိုး
 # သို့မဟုတ်
-find . -type f | head -20   # macOS/Linux
+find . -type f | head -20   # မက်အိုအက်စ်/လင်းနပ်စ်
 ```
 
-သင်မြင်ရမည့်အရာများ:
+You should see:
 ```
 my-first-azd-app/
 ├── .azd/
@@ -119,68 +119,68 @@ my-first-azd-app/
 └── README.md                   # Project documentation
 ```
 
-### နားလည်ရန် အဓိက ဖိုင်များ
+### Key Files to Understand
 
-**azure.yaml** - သင်၏ azd ပရောဂျက်၏ နှလုံးသား:
+**azure.yaml** - The heart of your azd project:
 ```bash
-# ပရောဂျက်၏ ဖွဲ့စည်းမှုကို ကြည့်ပါ
+# ပရောဂျက် ဆက်တင်များကို ကြည့်ပါ
 cat azure.yaml
 ```
 
-**infra/main.bicep** - အင်ဖရာစထရပ်ချာ ဖော်ပြချက်:
+**infra/main.bicep** - Infrastructure definition:
 ```bash
-# အခြေခံအဆောက်အအုံ၏ ကုဒ်ကို ကြည့်ပါ
+# အခြေခံအဆောက်အအုံဆိုင်ရာကုဒ်ကို ကြည့်ပါ
 head -30 infra/main.bicep
 ```
 
-## အဆင့် 3: သင့် ပရောဂျက်ကို စိတ်ကြိုက် ပြင်ဆင်ပါ (စိတ်ကြိုက်)
+## Step 3: Customize Your Project (Optional)
 
-deploy မလုပ်ခင် သင့် အက်ပလီကေးရှင်းကို စိတ်ကြိုက် ပြင်ဆင်နိုင်သည်။
+deploy မလုပ်ခင်မှာ application ကို ကောင်းကောင်းပြင်ဆင်နိုင်ပါတယ်။
 
-### Frontend ကို ပြင်ဆင်ပါ
+### Modify the Frontend
 ```bash
-# React အက်ပ် ကွန်ပိုနင့်ကို ဖွင့်ပါ
+# React အက်ပ်အစိတ်အပိုင်းကို ဖွင့်ပါ
 code src/web/src/App.tsx
 ```
 
-ရိုးရှင်းသော ပြောင်းလဲမှုတစ်ခု ပြုလုပ်ပါ:
+Make a simple change:
 ```typescript
 // ခေါင်းစဉ်ကို ရှာပြီး ပြောင်းပါ
 <h1>My Awesome Todo App</h1>
 ```
 
-### ပတ်ဝန်းကျင် အပြောင်းလဲများ (environment variables) ကို ပြင်ဆင်ပါ
+### Configure Environment Variables
 ```bash
 # စိတ်ကြိုက် ပတ်ဝန်းကျင် တန်ဖိုးများကို သတ်မှတ်ပါ
 azd env set WEBSITE_TITLE "My First AZD App"
 azd env set API_VERSION "v1.18"
-# ပတ်ဝန်းကျင် တန်ဖိုးများအားလုံးကို ကြည့်ရှုပါ
+# ပတ်ဝန်းကျင် တန်ဖိုးအားလုံးကို ကြည့်ပါ
 azd env get-values
 ```
 
-## အဆင့် 4: Azure သို့ Deploy ပြုလုပ်ခြင်း
+## Step 4: Deploy to Azure
 
-အခုတော့ စိတ်လှုပ်ရှားစရာ အပိုင်း — အားလုံးကို Azure သို့ deploy ပြုလုပ်ကြပါစို့!
+ယခု စိတ်လှုပ်ရှားဖွယ် ကိစ္စ — အားလုံးကို Azure သို့ deploy လုပ်ကြမယ်!
 
 ```bash
-# အခြေခံအဆောက်အအုံနှင့် အက်ပလီကေးရှင်းကို တပ်ဆင်ပါ
+# အောက်ခံဖွဲ့စည်းပုံနှင့် အက်ပလီကေးရှင်းကို တပ်ဆင်ခြင်း
 azd up
 
-# ဤ အမိန့်သည် အောက်ပါများကို လုပ်ဆောင်မည်။
-# 1. Azure အရင်းအမြစ်များ (App Service, Cosmos DB အစရှိသဖြင့်) ကို စီစဉ်ထောက်ပံ့သည်။
-# 2. သင့် အက်ပလီကေးရှင်းကို တည်ဆောက်သည်။
-# 3. ထောက်ပံ့ထားသော အရင်းအမြစ်များသို့ တပ်ဆင်သည်။
-# 4. အက်ပလီကေးရှင်း၏ URL ကို ပြသမည်။
+# ဤအမိန့်သည်:
+# 1. Azure မှ ဝန်ဆောင်မှုများ (App Service, Cosmos DB စသည်) ကို ထူထောင်ပေးမည်
+# 2. သင်၏ အက်ပလီကေးရှင်းကို တည်ဆောက်မည်
+# 3. ထူထောင်ထားသော ရင်းမြစ်များသို့ တပ်ဆင်မည်
+# 4. အက်ပလီကေးရှင်း URL ကို ပြသမည်
 ```
 
-### Deploy လုပ်စဉ် အတွင်း ဘာတွေ ဖြစ်နေလဲ?
+### What's Happening During Deployment?
 
-The `azd up` command သည် အောက်ပါ အဆင့်များကို ဆောင်ရွက်သည်:
-1. **Provision** (`azd provision`) - Azure အရင်းအမြစ်များကို ဖန်တီးသည်
-2. **Package** - သင့် အက်ပလီကေးရှင်း ကုဒ်ကို ဆောက်တည်သည်
-3. **Deploy** (`azd deploy`) - ကုဒ်ကို Azure အရင်းအမြစ်များသို့ တင်ပို့သည်
+The `azd up` command performs these steps:
+1. **Provision** (`azd provision`) - Creates Azure resources
+2. **Package** - Builds your application code
+3. **Deploy** (`azd deploy`) - Deploys code to Azure resources
 
-### မျှော်မှန်းထားသည့် ရလဒ်
+### Expected Output
 ```
 Packaging services (azd package)
 
@@ -193,95 +193,97 @@ Navigate to the Todo app at:
 https://app-web-abc123def.azurewebsites.net
 ```
 
-## အဆင့် 5: သင့် အက်ပလီကေးရှင်းကို စမ်းသပ်ပါ
+## Step 5: Test Your Application
 
-### သင့် အက်ပလီကေးရှင်းကို ဝင်ရောက်ကြည့်ရှုပါ
-deployment ထုတ်လွှင့်ချက်၌ ဖေါ်ပြထားသည့် URL ကို နှိပ်ပါ၊ သို့မဟုတ် မည်သည့်အချိန်တွင်မဆို ထပ်မံ ရယူနိုင်သည်။
+### Access Your Application
+deployment output ထဲမှာပေးထားသော URL ကို နှိပ်၍ သို့မဟုတ် အချိန်မရွေး ရယူနိုင်သည်။
 ```bash
-# အက်ပလီကေးရှင်း၏ endpoint များ ရယူပါ
+# အက်ပ်၏ endpoints များကို ရယူပါ
 azd show
 
-# ဘရောက်ဇာတွင် အက်ပလီကေးရှင်းကို ဖွင့်ပါ
+# ဘရောက်ဇာတွင် အက်ပ်ကို ဖွင့်ပါ
 azd show --output json | jq -r '.services.web.endpoint'
 ```
 
-### Todo အက်ပလီကေးရှင်း စမ်းသပ်ခြင်း
-1. **Todo အသစ် ထည့်ပါ** - "Add Todo" ကို နှိပ်ပြီး တာဝန်တစ်ခု ထည့်ပါ
-2. **ပြီးဆုံးအဖြစ် သတ်မှတ်ပါ** - ပြီးဆုံးခဲ့သော အရာများကို အမှတ် အသား ပေးပါ
-3. **အရာများ ဖျက်ပါ** - မလိုအပ်တော့သော todo များကို ဖယ်ရှားပါ
+### Test the Todo App
+1. **Add a todo item** - "Add Todo" ကို နှိပ်ပြီး တာဝန်တစ်ခု ထည့်ရန်
+2. **Mark as complete** - ပြီးဆုံးသည့် အရာများကို စစ်မှတ်ချက်ထည့်ရန်
+3. **Delete items** - မလိုအပ်တော့သော todos များကို ဖျက်ရန်
 
-### သင့် အက်ပလီကေးရှင်းကို ကြည့်ကြပ်ပါ
+### Monitor Your Application
 ```bash
-# သင့်အရင်းအမြစ်များအတွက် Azure Portal ကို ဖွင့်ပါ
+# သင်၏ အရင်းအမြစ်များအတွက် Azure Portal ကို ဖွင့်ပါ
 azd monitor
 
-# အက်ပလီကေးရှင်း လော့ဂ်များကို ကြည့်ပါ
+# အက်ပလီကေးရှင်းမှတ်တမ်းများကို ကြည့်ရှုပါ
 azd monitor --logs
 
-# လက်တလော အတိုင်းအတာများကို ကြည့်ပါ
+# တိုက်ရိုက် မီထရစ်များကို ကြည့်ရှုပါ
 azd monitor --live
 ```
 
-## အဆင့် 6: ပြင်ဆင်မှုများ လုပ်ပြီး ပြန်လည် Deploy ပြုလုပ်ပါ
+## Step 6: Make Changes and Redeploy
 
-တစ်ခုခု ပြင်ဆင်ပြီး အပ်ဒိတ်ပြုလုပ်ရတာ ဘယ်လောက်လွယ်ကူသလဲ ဆိုတာ ကြည့်ပါ။
+ပြင်ဆင်မှုတစ်ခုလုပ်ပြီး ပြန်တင်ပို့ရတာ 얼마나 လွယ်ကူတယ်ဆိုတာ ကြည့်ကြမယ်။
 
-### API ကို ပြင်ဆင်ပါ
+### Modify the API
 ```bash
 # API ကုဒ်ကို တည်းဖြတ်ပါ
 code src/api/src/routes/lists.js
 ```
 
-ကိုယ်ပိုင် response header တစ်ခု ထည့်ပါ:
+Add a custom response header:
 ```javascript
 // route handler ကို ရှာပြီး အောက်ပါအတိုင်း ထည့်ပါ:
 res.header('X-Powered-By', 'Azure Developer CLI');
 ```
 
-### ကုဒ် ပြောင်းလဲမှုများကိုသာ Deploy ပြုလုပ်ပါ
+### Deploy Just the Code Changes
 ```bash
-# အက်ပလီကေးရှင်း ကုဒ်ကိုပဲ တပ်ဆင်ပါ (အင်ဖရာစထရပ်ချာကို ကျော်လွှားပါ)
+# အောက်ခံအင်ဖရာကို ကျော်လွှားပြီး အက်ပလီကေးရှင်းကုဒ်ပဲ တပ်ဆင်ပါ
 azd deploy
 
-# အင်ဖရာစထရပ်ချာရှိပြီးသားကြောင့် 'azd up' ထက် အများကြီးပိုလျင်မြန်ပါတယ်
+# အောက်ခံအင်ဖရာ ရှိပြီးသားဖြစ်သောကြောင့် 'azd up' ထက် အလွန်လျင်မြန်သည်
 ```
 
-## အဆင့် 7: ပတ်ဝန်းကျင် များ အများအပြား ကို စီမံပါ
+## Step 7: Manage Multiple Environments
 
-ထုတ်လုပ်မှုမလုပ်မီ ပြင်ဆင်မှုများကို စမ်းသပ်ရန် staging ပတ်ဝန်းကျင် တစ်ခု ဖန်တီးပါ။
+production မတင်ခင်ပြောင်းလဲမှုများကို စမ်းသပ်ရန် staging environment တစ်ခု ဖန်တီးပါ။
+
 ```bash
-# staging ပတ်ဝန်းကျင်အသစ် တစ်ခု ဖန်တီးပါ
+# staging ပတ်ဝန်းကျင် အသစ်တစ်ခု ဖန်တီးပါ
 azd env new staging
 
-# staging သို့ တင်ပါ
+# staging ပတ်ဝန်းကျင်သို့ ဖြန့်ချိပါ
 azd up
 
 # dev ပတ်ဝန်းကျင်သို့ ပြန်ပြောင်းပါ
 azd env select dev
 
-# ပတ်ဝန်းကျင်အားလုံးကို စာရင်းပြပါ
+# ပတ်ဝန်းကျင်များအားလုံးကို စာရင်းပြပါ
 azd env list
 ```
 
-### ပတ်ဝန်းကျင်များ နှိုင်းယှဉ်ချက်
+### Environment Comparison
 ```bash
-# dev ပတ်ဝန်းကျင်ကို ကြည့်ပါ
+# ဖွံ့ဖြိုးရေး ပတ်ဝန်းကျင် ကြည့်ရန်
 azd env select dev
 azd show
 
-# staging ပတ်ဝန်းကျင်ကို ကြည့်ပါ
+# စတေဂျ် ပတ်ဝန်းကျင် ကြည့်ရန်
 azd env select staging
 azd show
 ```
 
-## အဆင့် 8: အရင်းအမြစ်များ ကို ရှင်းလင်းဖျက်သိမ်းခြင်း
+## Step 8: Clean Up Resources
 
-စမ်းသပ်မှုများ ပြီးဆုံးသွားပါက ဆက်လက်ကျန်ရှိမည့် ကုန်ကျစရိတ်များ မဖြစ်အောင် အရင်းအမြစ်များကို ရှင်းလင်းပါ။
+စမ်းသပ်ခြင်းပြီးသွားပါက ဆက်လက်ကြေးစရိတ်မထွက်စေရန် ရင်းမြစ်များကို ဖျက်ပစ်ပါ။
+
 ```bash
 # လက်ရှိ ပတ်ဝန်းကျင်အတွက် Azure အရင်းအမြစ်များအားလုံးကို ဖျက်ပါ
 azd down
 
-# အတည်ပြုချက်မမေးဘဲ အကြမ်းဖျက်၍ နူးညံ့စွာ ဖျက်ထားသော အရင်းအမြစ်များကို အပြီးအစီး ဖျက်ရှင်းပါ
+# အတည်ပြုချက်မမေးပဲ တိုက်ရိုက် ဖျက်၍ soft-deleted အရင်းအမြစ်များကိုလည်း ဖယ်ရှားပါ
 azd down --force --purge
 
 # သတ်မှတ်ထားသော ပတ်ဝန်းကျင်ကို ဖျက်ပါ
@@ -289,27 +291,48 @@ azd env select staging
 azd down --force --purge
 ```
 
-## သင် သင်ယူပြီး ရရှိထားသည့် အရာများ
+## Classic App vs. AI-Powered App: Same Workflow
 
-ဂုဏ်ယူပါသည်! သင် အောင်မြင်စွာ –
-- ✅ Template မှ azd ပရောဂျက် စတင် ဖန်တီးခဲ့သည်
-- ✅ ပရောဂျက် ဖွဲ့စည်းပုံနှင့် အဓိက ဖိုင်များကို လေ့လာခဲ့သည်
-- ✅ full-stack အက်ပလီကေးရှင်းကို Azure သို့ တင်ပို့ခဲ့သည်
-- ✅ ကုဒ် ပြင်ဆင်မှုများ ပြုလုပ်ပြီး ပြန်လည် တင်ပို့ခဲ့သည်
-- ✅ ပတ်ဝန်းကျင်များ အများအပြားကို စီမံခန့်ခွဲခဲ့သည်
-- ✅ အရင်းအမြစ်များကို ရှင်းလင်းဖျက်ခဲ့သည်
+သင်အခု ခေတ်မီ web application တစ်ခုကို deploy လုပ်ခဲ့ပြီ။ ဒါပေမယ့် AI အခြေပြု app တစ်ခု—ဥပမာ Microsoft Foundry Models တွေထောက်ခံတဲ့ chat အက်ပလီကေးရှင်းတစ်ခုကို သင် deploy လုပ်ချင်ရင်မှာတော့?
 
-## 🎯 ကျွမ်းကျင်မှု စစ်ဆေးခြင်း လေ့ကျင့်ခန်းများ
+ကောင်းချီး: **workflow က တူတယ်။**
 
-### လေ့ကျင့်ခန်း 1: မတူညီသော Template တစ်ခု Deploy ပြုလုပ်ပါ (15 မိနစ်)
-**ရည်ရွယ်ချက်**: azd init နှင့် deployment အလုပ်ဖြစ်စဉ်တွင် ကျွမ်းကျင်မှုကို ပြသပါ
+| Step | Classic Todo App | AI Chat App |
+|------|-----------------|-------------|
+| Initialize | `azd init --template todo-nodejs-mongo` | `azd init --template azure-search-openai-demo` |
+| Authenticate | `azd auth login` | `azd auth login` |
+| Deploy | `azd up` | `azd up` |
+| Monitor | `azd monitor` | `azd monitor` |
+| Clean up | `azd down --force --purge` | `azd down --force --purge` |
+
+ဘာသာကွာခြားချက်တစ်ခုသာ ရှိတာက စတင်အသုံးပြုမယ့် **template** ဖြစ်ပါတယ်။ AI template တစ်ခုတွင် Microsoft Foundry Models resource သို့မဟုတ် AI Search index ကဲ့သို့သော ထပ်ဆောင်း infrastructure များပါဝင်နိုင်ပေမယ့် azd က အထက်ပါအားလုံးကို ကိုင်တွယ်ပေးပါသည်။ သင့်အနေဖြင့် အာဏာအသစ် command မတွေ့ဖို့၊ တခြား tool ကို အသုံးမပြုရပါ၊ deployment အပေါ် မှတ်ယူပုံကို ပြောင်းလဲစရာ မလိုပါ။
+
+azd ရဲ့ မူလ လက်တွဲအဓိပ္ပာယ်ကတော့: **one workflow, any workload.** ဤသင်တန်းမှာ လေ့ကျင့်ထားသော ကျွမ်းကျင်မှုများ — initialization, deployment, monitoring, redeploying, cleanup — တို့ဟာ AI applications နှင့် agents များတွင်လည်း တူညီစွာ သက်ရောက်ပါသည်။
+
+---
+
+## What You've Learned
+
+ကြိုဆိုပါတယ်! သင် အောင်မြင်စွာ ပြီးမြောက်ခဲ့သည်:
+- ✅ template မှ azd project ကို initialize လုပ်နိုင်ခဲ့သည်
+- ✅ project ဖွဲ့စည်းပုံနှင့် အဓိကဖိုင်များကို လေ့လာနိုင်ခဲ့သည်
+- ✅ full-stack application ကို Azure သို့ deploy လုပ်နိုင်ခဲ့သည်
+- ✅ code ပြင်ဆင်မှုများ ပြုလုပ်ပြီး ပြန် deploy လုပ်နိုင်ခဲ့သည်
+- ✅ environments များစီမံနိုင်ခဲ့သည်
+- ✅ ရင်းမြစ်များကို ဖယ်ရှားစစ်ဆေးပြီး စုဆောင်းမှုများ ပြုလုပ်နိုင်ခဲ့သည်
+
+## 🎯 Skill Validation Exercises
+
+### Exercise 1: Deploy a Different Template (15 minutes)
+**Goal**: Demonstrate mastery of azd init and deployment workflow
+
 ```bash
-# Python + MongoDB စတက်ကို စမ်းကြည့်ပါ
+# Python နှင့် MongoDB စတက်ကို စမ်းကြည့်ပါ
 mkdir todo-python && cd todo-python
 azd init --template todo-python-mongo
 azd up
 
-# ဖြန့်ချိမှုကို စစ်ဆေးပါ
+# တပ်ဆင်မှုကို အတည်ပြုပါ
 azd show
 curl $(azd show --output json | jq -r '.services.web.endpoint')
 
@@ -317,21 +340,22 @@ curl $(azd show --output json | jq -r '.services.web.endpoint')
 azd down --force --purge
 ```
 
-**အောင်မြင်မှု ချက်များ:**
-- [ ] အက်ပလီကေးရှင်းသည် အမှားများမရှိဘဲ တင်ပို့နိုင်သည်
-- [ ] ဘရောက်ဇာတွင် အက်ပလီကေးရှင်း URL ကို ဝင်ရောက် ကြည့်ရှုနိုင်သည်
-- [ ] အက်ပလီကေးရှင်းသည် မှန်ကန်စွာ လုပ်ဆောင်နိုင်သည် (todo များ ထည့်/ဖယ်ရန်)
-- [ ] အရင်းအမြစ်များအားလုံးကို အောင်မြင်စွာ ရှင်းလင်းဖျက်ခဲ့သည်
+**Success Criteria:**
+- [ ] Application deploys without errors
+- [ ] Can access application URL in browser
+- [ ] Application functions correctly (add/remove todos)
+- [ ] Successfully cleaned up all resources
 
-### လေ့ကျင့်ခန်း 2: ဖော်ပြချက် ကို စိတ်ကြိုက် ပြင်ဆင်ပါ (20 မိနစ်)
-**ရည်ရွယ်ချက်**: ပတ်ဝန်းကျင် အပြောင်းအလဲ (environment variable) သတ်မှတ်ခြင်း လေ့ကျင့်ပါ
+### Exercise 2: Customize Configuration (20 minutes)
+**Goal**: Practice environment variable configuration
+
 ```bash
 cd my-first-azd-app
 
 # စိတ်ကြိုက် ပတ်ဝန်းကျင် ဖန်တီးပါ
 azd env new custom-config
 
-# စိတ်ကြိုက် ပြောင်းလဲနိုင်သော တန်ဖိုးများ သတ်မှတ်ပါ
+# စိတ်ကြိုက် တန်ဖိုးများ သတ်မှတ်ပါ
 azd env set APP_TITLE "My Custom Todo App"
 azd env set API_VERSION "2.0.0"
 azd env set ENABLE_DEBUG "true"
@@ -343,14 +367,15 @@ azd env get-values | grep APP_TITLE
 azd up
 ```
 
-**အောင်မြင်မှု ချက်များ:**
-- [ ] ကိုယ်ပိုင် ပတ်ဝန်းကျင် ကို အောင်မြင်စွာ ဖန်တီးနိုင်ခဲ့သည်
-- [ ] ပတ်ဝန်းကျင် အပြောင်းအလဲများကို သတ်မှတ်ပြီး ပြန်လည် ရယူနိုင်သည်
-- [ ] ကိုယ်ပိုင် configuration ဖြင့် အက်ပလီကေးရှင်း ကို တင်ပို့နိုင်သည်
-- [ ] တင်ပို့ပြီး အက်ပလီကေးရှင်းတွင် ကိုယ်ပိုင် ဆက်တင်များကို စစ်ဆေးနိုင်သည်
+**Success Criteria:**
+- [ ] Custom environment created successfully
+- [ ] Environment variables set and retrievable
+- [ ] Application deploys with custom configuration
+- [ ] Can verify custom settings in deployed app
 
-### လေ့ကျင့်ခန်း 3: ပတ်ဝန်းကျင် များစွာအတွက် လုပ်ငန်းစဉ် (25 မိနစ်)
-**ရည်ရွယ်ချက်**: ပတ်ဝန်းကျင် စီမံခန့်ခွဲမှုနှင့် deployment မဟာဗျူဟာများတွင် ကျွမ်းကျင်ပါ
+### Exercise 3: Multi-Environment Workflow (25 minutes)
+**Goal**: Master environment management and deployment strategies
+
 ```bash
 # dev ပတ်ဝန်းကျင် ဖန်တီးပါ
 azd env new dev-$(whoami)
@@ -358,7 +383,7 @@ azd env set ENVIRONMENT_TYPE dev
 azd env set LOG_LEVEL debug
 azd up
 
-# dev URL ကို မှတ်ထားပါ
+# dev URL ကို မှတ်သားပါ
 DEV_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Dev: $DEV_URL"
 
@@ -368,14 +393,14 @@ azd env set ENVIRONMENT_TYPE staging
 azd env set LOG_LEVEL info
 azd up
 
-# staging URL ကို မှတ်ထားပါ
+# staging URL ကို မှတ်သားပါ
 STAGING_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Staging: $STAGING_URL"
 
 # ပတ်ဝန်းကျင်များကို နှိုင်းယှဉ်ပါ
 azd env list
 
-# နှစ်ခုလုံး ပတ်ဝန်းကျင်များကို စမ်းသပ်ပါ
+# ပတ်ဝန်းကျင်နှစ်ခုလုံးကို စမ်းသပ်ပါ
 curl "$DEV_URL/health"
 curl "$STAGING_URL/health"
 
@@ -384,125 +409,125 @@ azd env select dev-$(whoami) && azd down --force --purge
 azd env select staging-$(whoami) && azd down --force --purge
 ```
 
-**အောင်မြင်မှု ချက်များ:**
-- [ ] ကွာခြားသော configuration များနှင့် ပတ်ဝန်းကျင် နှစ်ခု ဖန်တီးထားသည်
-- [ ] နှစ်ခုစလုံးကို အောင်မြင်စွာ တင်ပို့နိုင်ခဲ့သည်
-- [ ] `azd env select` ကို အသုံးပြု၍ ပတ်ဝန်းကျင်များအကြား ပြောင်းနိုင်သည်
-- [ ] ပတ်ဝန်းကျင်များကြားတွင် environment variables များ ကွာခြားသည်
-- [ ] နှစ်ခုစလုံးကို အောင်မြင်စွာ ရှင်းလင်းဖျက်ခဲ့သည်
+**Success Criteria:**
+- [ ] Two environments created with different configurations
+- [ ] Both environments deployed successfully
+- [ ] Can switch between environments using `azd env select`
+- [ ] Environment variables differ between environments
+- [ ] Successfully cleaned up both environments
 
-## 📊 သင့် တိုးတက်မှု
+## 📊 Your Progress
 
-**ကြာမြင့်ချိန်**: ~60-90 မိနစ်  
-**သင်ရရှိသည့် ကျွမ်းကျင်မှုများ**:
-- ✅ Template အခြေခံ ပရောဂျက် စတင်ဖန်တီးခြင်း
-- ✅ Azure အရင်းအမြစ် ပံ့ပိုးပေးခြင်း
-- ✅ အက်ပလီကေးရှင်း တင်ပို့ခြင်း အလုပ်ဖြစ်စဉ်များ
-- ✅ ပတ်ဝန်းကျင် စီမံခန့်ခွဲမှု
-- ✅ ဆက်တင် စီမံခန့်ခွဲမှု
-- ✅ အရင်းအမြစ် ရှင်းလင်းခြင်းနှင့် ကုန်ကျစရိတ် စီမံခြင်း
+**Time Invested**: ~60-90 minutes  
+**Skills Acquired**:
+- ✅ Template-based project initialization
+- ✅ Azure resource provisioning
+- ✅ Application deployment workflows
+- ✅ Environment management
+- ✅ Configuration management
+- ✅ Resource cleanup and cost management
 
-**နောက်တက်အဆင့်**: သင်သည် [Configuration Guide](configuration.md) သို့ သွား၍ အဆင့်မြင့် configuration ပုံစံများကို လေ့လာရန် အဆင်သင့်ဖြစ်ပါပြီ!
+**Next Level**: You're ready for [Configuration Guide](configuration.md) to learn advanced configuration patterns!
 
-## ဖြစ်တတ်သော ပြဿနာများ ဖြေရှင်းနည်း
+## Troubleshooting Common Issues
 
-### အတည်ပြုခြင်း (Authentication) အမှားများ
+### Authentication Errors
 ```bash
-# Azure နှင့် ပြန်လည် အတည်ပြုပါ
+# Azure သို့ ပြန်လက်မှတ်အတည်ပြုပါ
 az login
 
-# Subscription လက်ဝင်ခွင့်ကို စစ်ဆေးပါ
+# စာရင်းဝင်ခွင့်ကို စစ်ဆေးပါ
 az account show
 ```
 
-### Deployment မအောင်မြင်ခြင်းများ
+### Deployment Failures
 ```bash
-# debug မှတ်တမ်းရေးခြင်းကို ဖွင့်ပါ
+# debug logging ကို ဖွင့်ပါ
 export AZD_DEBUG=true
 azd up --debug
 
-# Azure တွင် အက်ပလီကေးရှင်းမှတ်တမ်းများကို ကြည့်ရှုပါ
+# Azure တွင် အက်ပလီကေးရှင်း မှတ်တမ်းများကို ကြည့်ပါ
 azd monitor --logs
 
 # Container Apps များအတွက် Azure CLI ကို အသုံးပြုပါ:
 # az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 ```
 
-### အရင်းအမြစ် အမည် တင်းကျပ်မှုများ
+### Resource Name Conflicts
 ```bash
-# ထူးခြားသော ပတ်ဝန်းကျင် အမည်ကို အသုံးပြုပါ
+# ထူးခြားသော ပတ်ဝန်းကျင် အမည် တစ်ခုကို အသုံးပြုပါ
 azd env new dev-$(whoami)-$(date +%s)
 ```
 
-### Port/Network ပြဿနာများ
+### Port/Network Issues
 ```bash
-# ports များ အသုံးပြုနိုင်/ရရှိနိုင်ခြင်းကို စစ်ဆေးပါ
+# ဆိပ်ကမ်းများ အသုံးပြုနိုင်ကြောင်း စစ်ဆေးပါ
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
 
-## နောက်ဆက်တွဲ အဆင့်များ
+## Next Steps
 
-သင့် ပထမဆုံး ပရောဂျက်ကို ပြီးမြောက်လိုက်ပြီဖြစ်သောကြောင့် အောက်ပါ အဆင့်မြင့် အကြောင်းအရာများကို ရှာဖွေလိုက်ပါ။
+ယခု သင့်ရဲ့ ပထမဆုံး project ကိုပြီးမြောက်လိုက်ပြီဆိုလျှင် အထက်တန်းအကြောင်းအရာများကို ရှာဖွေနိုင်ပါပြီ။
 
-### 1. အင်ဖရာစထရပ်ချာ ကို စိတ်ကြိုက် ပြင်ဆင်ခြင်း
-- [အင်ဖရာစထရပ်ချာအား ကုဒ်ဖြင့် ထိန်းချုပ်ခြင်း](../chapter-04-infrastructure/provisioning.md)
-- [ဒေတာဘေ့စ်များ၊ storage များနှင့် အခြား ဝန်ဆောင်မှုများ ထည့်ရန်](../chapter-04-infrastructure/provisioning.md#adding-services)
+### 1. Customize Infrastructure
+- [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md)
+- [Add databases, storage, and other services](../chapter-04-infrastructure/provisioning.md#adding-services)
 
-### 2. CI/CD တပ်ဆင်ခြင်း
-- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - CI/CD လုပ်ငန်းစဉ်များ အပြည့်အစုံ
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - Pipeline ဖော်ပြချက်
+### 2. Set Up CI/CD
+- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Complete CI/CD workflows
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/configure-devops-pipeline) - Pipeline configuration
 
-### 3. ထုတ်လုပ်ရေး အကောင်းဆုံး လမ်းလည်မှုများ
-- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - လုံခြုံရေး၊ ဆောင်လက်မှုနှင့် မော်နီတာလုပ်ငန်း
+### 3. Production Best Practices
+- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Security, performance, and monitoring
 
-### 4. Template များ ပိုမို ရှာဖွေပါ
+### 4. Explore More Templates
 ```bash
 # အမျိုးအစားအလိုက် နမူနာများကို ကြည့်ရှုပါ
 azd template list --filter web
 azd template list --filter api
 azd template list --filter database
 
-# အမျိုးမျိုးသော နည်းပညာ စနစ်များကို စမ်းကြည့်ပါ
+# အမျိုးမျိုးသော နည်းပညာ ပေါင်းစပ်မှုများကို စမ်းကြည့်ပါ
 azd init --template todo-python-mongo
 azd init --template todo-csharp-sql
 azd init --template todo-java-mongo
 ```
 
-## ထပ်ဆင့် အရင်းအမြစ်များ
+## Additional Resources
 
-### သင်ယူရန် ပစ္စည်းများ
+### Learning Materials
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
 - [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
-### အသိုင်းအဝိုင်း & အထောက်အပံ့
+### Community & Support
 - [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
 - [Azure Developer Community](https://techcommunity.microsoft.com/t5/azure-developer-community/ct-p/AzureDevCommunity)
 - [Stack Overflow - azure-developer-cli](https://stackoverflow.com/questions/tagged/azure-developer-cli)
 
-### Template များနှင့် နမူနာများ
-- [တရားဝင် Template ပြခန်း](https://azure.github.io/awesome-azd/)
-- [အသိုင်းအဝိုင်း Template များ](https://github.com/Azure-Samples/azd-templates)
-- [ကုမ္ပဏီ များအတွက် ပုံစံများ](https://github.com/Azure/azure-dev/tree/main/templates)
+### Templates & Examples
+- [Official Template Gallery](https://azure.github.io/awesome-azd/)
+- [Community Templates](https://github.com/Azure-Samples/azd-templates)
+- [Enterprise Patterns](https://github.com/Azure/azure-dev/tree/main/templates)
 
 ---
 
-**သင့် ပထမဆုံး azd ပရောဂျက် ကို ပြီးမြောက်လိုက်ရကြောင်း ဂုဏ်ယူပါတယ်!** ယခု သင်သည် ယုံကြည်စိတ်ချစွာဖြင့် Azure ပေါ်တွင် အံ့သြစရာ အက်ပလီကေးရှင်းများ ဆောက်လုပ်ပြီး တင်ပို့နိုင်ရန် ပြင်ဆင်ပြီးဖြစ်ပါသည်။
+**Congratulations on completing your first azd project!** သင်ယခု Azure တွင် မျှော်လင့်ရသော application များကို ယုံကြည်စိတ်ချစွာ ဖန်တီး၊ deploy ပြုလုပ်နိုင်ပါပြီ။
 
 ---
 
-**အခန်း လမ်းညွှန်:**
-- **📚 သင်တန်း မူလ စာမျက်နှာ**: [AZD For Beginners](../../README.md)
-- **📖 ယခု အခန်း**: အခန်း 1 - အခြေခံနှင့် အမြန် စတင်ခြင်း
-- **⬅️ ယခင်**: [Installation & Setup](installation.md)
-- **➡️ နောက်တစ်ခု**: [Configuration](configuration.md)
-- **🚀 နောက်အခန်း**: [အခန်း 2: AI-ဦးစားပေး ဖွံ့ဖြိုးရေး](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **နောက်သင်ခန်းစာ**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
+- **⬅️ Previous**: [Installation & Setup](installation.md)
+- **➡️ Next**: [Configuration](configuration.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **Next Lesson**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-မှတ်ချက်:
-ဤစာရွက်ကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးပမ်းပါသည် သော်လည်း အလိုအလျောက် ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် တိကျမှုမရှိမှုများ ရှိနိုင်ကြောင်း သတိထားပါ။ မူလစာရွက်ကို မိမိဘာသာစကားဖြင့် ရှိသည့် အရာကို တရားဝင် အချက်အလက် အရင်းအမြစ်အဖြစ် ထည့်သွင်းစဉ်းစားသင့်သည်။ အရေးပါသော သတင်းအချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူ့ဘာသာပြန်ဆောင်ရွက်မှုကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းကြောင့် ဖြစ်ပေါ်လာနိုင်သည့် နားမလည်မှုများ သို့မဟုတ် မှားယွင်းဖော်ပြမှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မရှိပါ။
+**Disclaimer**:
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ တိကျမှန်ကန်ရန် ကြိုးစားသော်လည်း အလိုအလျောက် ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း ဂရုပြုပါ။ မူလစာရွက်စာတမ်းကို ထို၏ မူရင်းဘာသာစကားဖြင့် အာဏာအရင်းအမြစ်အဖြစ် ယူဆသင့်သည်။ အရေးကြီးသော အချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူ့ဘာသာပြန်ကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းမှ ဖြစ်ပေါ်နိုင်သည့် မနားလည်မှုများ သို့မဟုတ် အဖြစ်မမှန်သတ်မှတ်ချက်များအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

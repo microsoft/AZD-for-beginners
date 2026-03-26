@@ -1,32 +1,32 @@
 # 3. Mengurai Template
 
-!!! tip "DI AKHIR MODUL INI ANDA AKAN BISA"
+!!! tip "PADA AKHIR MODUL INI ANDA AKAN MAMPU"
 
     - [ ] Mengaktifkan GitHub Copilot dengan server MCP untuk bantuan Azure
     - [ ] Memahami struktur folder dan komponen template AZD
-    - [ ] Mengeksplor pola organisasi infrastructure-as-code (Bicep)
-    - [ ] **Lab 3:** Menggunakan GitHub Copilot untuk mengeksplorasi dan memahami arsitektur repositori 
+    - [ ] Menjelajahi pola organisasi infrastruktur-sebagai-kode (Bicep)
+    - [ ] **Lab 3:** Menggunakan GitHub Copilot untuk menjelajahi dan memahami arsitektur repositori 
 
 ---
 
 
-Dengan template AZD dan Azure Developer CLI (`azd`) kita dapat dengan cepat memulai perjalanan pengembangan AI kita dengan repositori terstandarisasi yang menyediakan contoh kode, infrastruktur dan file konfigurasi - dalam bentuk proyek _starter_ siap-deploy.
+Dengan template AZD dan Azure Developer CLI (`azd`) kita dapat dengan cepat memulai perjalanan pengembangan AI kita dengan repositori standar yang menyediakan kode contoh, infrastruktur dan file konfigurasi - dalam bentuk proyek _starter_ yang siap untuk dideploy.
 
-**Tetapi sekarang, kita perlu memahami struktur proyek dan basis kode - dan dapat menyesuaikan template AZD - tanpa pengalaman atau pemahaman AZD sebelumnya!**
+**Tetapi sekarang, kita perlu memahami struktur proyek dan basis kode - dan mampu menyesuaikan template AZD - tanpa pengalaman atau pemahaman sebelumnya tentang AZD!**
 
 ---
 
 ## 1. Mengaktifkan GitHub Copilot
 
-### 1.1 Pasang GitHub Copilot Chat
+### 1.1 Instal GitHub Copilot Chat
 
-Saatnya mengeksplor [GitHub Copilot with Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Sekarang, kita bisa menggunakan bahasa alami untuk menggambarkan tugas pada tingkat tinggi, dan mendapatkan bantuan dalam pelaksanaannya. Untuk lab ini, kita akan menggunakan [Copilot Free plan](https://github.com/github-copilot/signup) yang memiliki batas bulanan untuk completions dan interaksi obrolan.
+Saatnya menjelajahi [GitHub Copilot dengan Mode Agen](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Sekarang, kita bisa menggunakan bahasa alami untuk menjelaskan tugas kita secara garis besar, dan mendapatkan bantuan dalam pelaksanaannya. Untuk lab ini, kita akan menggunakan [paket Copilot Gratis](https://github.com/github-copilot/signup) yang memiliki batas bulanan untuk penyelesaian dan interaksi obrolan.
 
-Ekstensi dapat diinstal dari marketplace, tetapi seharusnya sudah tersedia di lingkungan Codespaces Anda. _Klik `Open Chat` dari menu drop-down ikon Copilot - dan ketikkan prompt seperti `What can you do?`_ - Anda mungkin akan diminta untuk masuk. **GitHub Copilot Chat siap digunakan**.
+Ekstensi dapat diinstal dari marketplace, tetapi seharusnya sudah tersedia di lingkungan Codespaces Anda. _Klik `Open Chat` dari menu turun ikon Copilot - dan ketik prompt seperti `What can you do?`_ - Anda mungkin akan diminta untuk masuk. **GitHub Copilot Chat siap digunakan**.
 
-### 1.2. Pasang Server MCP
+### 1.2. Instal MCP Servers
 
-Untuk Agent mode agar efektif, ia membutuhkan akses ke alat yang tepat untuk membantu mengambil pengetahuan atau melakukan tindakan. Di sinilah server MCP dapat membantu. Kita akan mengonfigurasi server berikut:
+Agar mode Agen efektif, ia memerlukan akses ke alat yang tepat untuk membantunya mengambil pengetahuan atau melakukan tindakan. Di sinilah server MCP dapat membantu. Kita akan mengonfigurasi server berikut:
 
 1. [Azure MCP Server](../../../../../workshop/docs/instructions)
 1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
@@ -34,7 +34,7 @@ Untuk Agent mode agar efektif, ia membutuhkan akses ke alat yang tepat untuk mem
 Untuk mengaktifkan ini:
 
 1. Buat file bernama `.vscode/mcp.json` jika belum ada
-1. Salin yang berikut ke dalam file tersebut - dan mulai servernya!
+1. Salin yang berikut ke file tersebut - dan jalankan server!
    ```json title=".vscode/mcp.json"
    {
       "servers": {
@@ -55,9 +55,9 @@ Untuk mengaktifkan ini:
    }
    ```
 
-??? warning "Anda mungkin mendapatkan kesalahan bahwa `npx` tidak terpasang (klik untuk memperluas perbaikan)"
+??? warning "Anda mungkin mendapatkan kesalahan bahwa `npx` tidak terinstal (klik untuk memperluas perbaikan)"
 
-      Untuk memperbaiki ini, buka file `.devcontainer/devcontainer.json` dan tambahkan baris ini ke bagian features. Kemudian rebuild container. Anda sekarang seharusnya memiliki `npx` terpasang.
+      Untuk memperbaiki ini, buka file `.devcontainer/devcontainer.json` dan tambahkan baris ini ke bagian features. Kemudian bangun ulang container. Sekarang Anda seharusnya memiliki `npx` terinstal.
 
       ```title="" linenums="0"
          "features": {
@@ -70,25 +70,25 @@ Untuk mengaktifkan ini:
 
 ### 1.3. Uji GitHub Copilot Chat
 
-**Pertama gunakan `az login` untuk mengautentikasi ke Azure dari baris perintah VS Code.**
+**Pertama gunakan `az login` untuk mengautentikasi dengan Azure dari command line VS Code.**
 
-Sekarang Anda seharusnya dapat menanyakan status langganan Azure Anda, dan mengajukan pertanyaan tentang sumber daya yang dideploy atau konfigurasi. Coba prompt ini:
+Anda sekarang seharusnya bisa menanyakan status langganan Azure Anda, dan mengajukan pertanyaan tentang sumber daya atau konfigurasi yang telah dideploy. Coba prompt berikut:
 
 1. `List my Azure resource groups`
 1. `#foundry list my current deployments`
 
-Anda juga dapat menanyakan dokumentasi Azure dan mendapatkan respons yang didasarkan pada server Microsoft Docs MCP. Coba prompt ini:
+Anda juga dapat menanyakan dokumentasi Azure dan mendapatkan respons yang berbasis pada server Microsoft Docs MCP. Coba prompt berikut:
 
 1. `#microsoft_docs_search What is Azure Developer CLI?`
 1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
 
-Atau Anda bisa meminta snippet kode untuk menyelesaikan tugas. Coba prompt ini.
+Atau Anda dapat meminta potongan kode untuk menyelesaikan tugas. Coba prompt ini.
 
 1. `Give me a Python code example that uses AAD for an interactive chat client`
 
-Dalam mode `Ask`, ini akan memberikan kode yang bisa Anda salin-tempel dan coba. Dalam mode `Agent`, ini bisa melangkah lebih jauh dan membuat sumber daya terkait untuk Anda - termasuk skrip setup dan dokumentasi - untuk membantu Anda mengeksekusi tugas tersebut.
+Dalam mode `Ask`, ini akan memberikan kode yang dapat Anda salin-tempel dan coba. Dalam mode `Agent`, ini mungkin melangkah lebih jauh dan membuat sumber daya terkait untuk Anda - termasuk skrip pengaturan dan dokumentasi - untuk membantu Anda mengeksekusi tugas tersebut.
 
-**Anda sekarang siap untuk mulai mengeksplor repositori template**
+**Anda sekarang siap untuk mulai menjelajahi repositori template**
 
 ---
 
@@ -96,13 +96,13 @@ Dalam mode `Ask`, ini akan memberikan kode yang bisa Anda salin-tempel dan coba.
 
 ??? prompt "TANYA: Jelaskan arsitektur aplikasi di docs/images/architecture.png dalam 1 paragraf"
 
-      Aplikasi ini adalah aplikasi chat bertenaga AI yang dibangun di Azure yang menunjukkan arsitektur berbasis agen modern. Solusi berpusat pada Azure Container App yang menampung kode aplikasi utama, yang memproses input pengguna dan menghasilkan respons cerdas melalui agen AI.
+      Aplikasi ini adalah aplikasi obrolan bertenaga AI yang dibangun di Azure yang menunjukkan arsitektur berbasis agen modern. Solusi berpusat pada Azure Container App yang menjadi host kode aplikasi utama, yang memproses input pengguna dan menghasilkan respons cerdas melalui agen AI.
       
-      Arsitektur memanfaatkan Microsoft Foundry Project sebagai dasar kemampuan AI, menghubungkan ke Azure AI Services yang menyediakan model bahasa dasar (seperti GPT-4o-mini) dan fungsionalitas agen. Interaksi pengguna mengalir melalui frontend berbasis React ke backend FastAPI yang berkomunikasi dengan layanan agen AI untuk menghasilkan respons kontekstual.
+      Arsitektur memanfaatkan Microsoft Foundry Project sebagai fondasi untuk kemampuan AI, yang terhubung ke Azure AI Services yang menyediakan model bahasa dasar (seperti gpt-4.1-mini) dan fungsi agen. Interaksi pengguna mengalir melalui frontend berbasis React ke backend FastAPI yang berkomunikasi dengan layanan agen AI untuk menghasilkan respons kontekstual.
       
-      Sistem ini menggabungkan kemampuan pengambilan pengetahuan melalui pencarian file atau layanan Azure AI Search, memungkinkan agen mengakses dan mengutip informasi dari dokumen yang diunggah. Untuk keunggulan operasional, arsitektur mencakup pemantauan komprehensif melalui Application Insights dan Log Analytics Workspace untuk tracing, logging, dan optimisasi performa.
+      Sistem ini menggabungkan kemampuan pengambilan pengetahuan melalui pencarian file atau layanan Azure AI Search, memungkinkan agen mengakses dan mengutip informasi dari dokumen yang diunggah. Untuk keunggulan operasional, arsitektur mencakup pemantauan komprehensif melalui Application Insights dan Log Analytics Workspace untuk pelacakan, logging, dan optimalisasi kinerja.
       
-      Azure Storage menyediakan blob storage untuk data aplikasi dan unggahan file, sementara Managed Identity memastikan akses aman antar sumber daya Azure tanpa menyimpan kredensial. Seluruh solusi dirancang untuk skalabilitas dan pemeliharaan, dengan aplikasi ter-container yang otomatis menyesuaikan skala berdasarkan permintaan sambil menyediakan keamanan bawaan, pemantauan, dan kemampuan CI/CD melalui ekosistem layanan terkelola Azure.
+      Azure Storage menyediakan penyimpanan blob untuk data aplikasi dan unggahan file, sementara Managed Identity memastikan akses aman antar sumber daya Azure tanpa menyimpan kredensial. Seluruh solusi dirancang untuk skalabilitas dan pemeliharaan, dengan aplikasi yang dikontainerisasi secara otomatis menskalakan berdasarkan permintaan sambil menyediakan keamanan, pemantauan, dan kemampuan CI/CD bawaan melalui ekosistem layanan terkelola Azure.
 
 ![Arsitektur](../../../../../translated_images/id/architecture.48d94861e6e6cdc0.webp)
 
@@ -110,83 +110,83 @@ Dalam mode `Ask`, ini akan memberikan kode yang bisa Anda salin-tempel dan coba.
 
 ## 3. Struktur Repositori
 
-!!! prompt "TANYA: Jelaskan struktur folder template. Mulai dengan diagram hierarki visual."
+!!! prompt "TANYA: Jelaskan struktur folder template. Mulailah dengan diagram hierarki visual."
 
 ??? info "JAWABAN: Diagram Hierarki Visual"
 
       ```bash title="" 
       get-started-with-ai-agents/
-      ├── 📋 Konfigurasi & Pengaturan
-      │   ├── azure.yaml                    # Konfigurasi Azure Developer CLI
-      │   ├── docker-compose.yaml           # Kontainer pengembangan lokal
-      │   ├── pyproject.toml                # Konfigurasi proyek Python
-      │   ├── requirements-dev.txt          # Dependensi pengembangan
-      │   └── .devcontainer/                # Pengaturan dev container VS Code
+      ├── 📋 Configuration & Setup
+      │   ├── azure.yaml                    # Azure Developer CLI configuration
+      │   ├── docker-compose.yaml           # Local development containers
+      │   ├── pyproject.toml                # Python project configuration
+      │   ├── requirements-dev.txt          # Development dependencies
+      │   └── .devcontainer/                # VS Code dev container setup
       │
-      ├── 🏗️ Infrastruktur (infra/)
-      │   ├── main.bicep                    # Template infrastruktur utama
-      │   ├── api.bicep                     # Sumber daya khusus API
-      │   ├── main.parameters.json          # Parameter infrastruktur
-      │   └── core/                         # Komponen infrastruktur modular
-      │       ├── ai/                       # Konfigurasi layanan AI
-      │       ├── host/                     # Infrastruktur hosting
-      │       ├── monitor/                  # Monitoring dan logging
-      │       ├── search/                   # Pengaturan Azure AI Search
-      │       ├── security/                 # Keamanan dan identitas
-      │       └── storage/                  # Konfigurasi akun penyimpanan
+      ├── 🏗️ Infrastructure (infra/)
+      │   ├── main.bicep                    # Main infrastructure template
+      │   ├── api.bicep                     # API-specific resources
+      │   ├── main.parameters.json          # Infrastructure parameters
+      │   └── core/                         # Modular infrastructure components
+      │       ├── ai/                       # AI service configurations
+      │       ├── host/                     # Hosting infrastructure
+      │       ├── monitor/                  # Monitoring and logging
+      │       ├── search/                   # Azure AI Search setup
+      │       ├── security/                 # Security and identity
+      │       └── storage/                  # Storage account configs
       │
-      ├── 💻 Sumber Aplikasi (src/)
+      ├── 💻 Application Source (src/)
       │   ├── api/                          # Backend API
-      │   │   ├── main.py                   # Entry aplikasi FastAPI
-      │   │   ├── routes.py                 # Definisi rute API
-      │   │   ├── search_index_manager.py   # Fungsionalitas pencarian
-      │   │   ├── data/                     # Penanganan data API
-      │   │   ├── static/                   # Aset web statis
-      │   │   └── templates/                # Template HTML
-      │   ├── frontend/                     # Frontend React/TypeScript
-      │   │   ├── package.json              # Dependensi Node.js
-      │   │   ├── vite.config.ts            # Konfigurasi build Vite
-      │   │   └── src/                      # Kode sumber frontend
-      │   ├── data/                         # File data contoh
-      │   │   └── embeddings.csv            # Embedding yang sudah dihitung sebelumnya
-      │   ├── files/                        # File basis pengetahuan
-      │   │   ├── customer_info_*.json      # Contoh data pelanggan
-      │   │   └── product_info_*.md         # Dokumentasi produk
-      │   ├── Dockerfile                    # Konfigurasi container
-      │   └── requirements.txt              # Dependensi Python
+      │   │   ├── main.py                   # FastAPI application entry
+      │   │   ├── routes.py                 # API route definitions
+      │   │   ├── search_index_manager.py   # Search functionality
+      │   │   ├── data/                     # API data handling
+      │   │   ├── static/                   # Static web assets
+      │   │   └── templates/                # HTML templates
+      │   ├── frontend/                     # React/TypeScript frontend
+      │   │   ├── package.json              # Node.js dependencies
+      │   │   ├── vite.config.ts            # Vite build configuration
+      │   │   └── src/                      # Frontend source code
+      │   ├── data/                         # Sample data files
+      │   │   └── embeddings.csv            # Pre-computed embeddings
+      │   ├── files/                        # Knowledge base files
+      │   │   ├── customer_info_*.json      # Customer data samples
+      │   │   └── product_info_*.md         # Product documentation
+      │   ├── Dockerfile                    # Container configuration
+      │   └── requirements.txt              # Python dependencies
       │
-      ├── 🔧 Otomasi & Skrip (scripts/)
-      │   ├── postdeploy.sh/.ps1           # Pengaturan pasca-deploy
-      │   ├── setup_credential.sh/.ps1     # Konfigurasi kredensial
-      │   ├── validate_env_vars.sh/.ps1    # Validasi lingkungan
-      │   └── resolve_model_quota.sh/.ps1  # Manajemen kuota model
+      ├── 🔧 Automation & Scripts (scripts/)
+      │   ├── postdeploy.sh/.ps1           # Post-deployment setup
+      │   ├── setup_credential.sh/.ps1     # Credential configuration
+      │   ├── validate_env_vars.sh/.ps1    # Environment validation
+      │   └── resolve_model_quota.sh/.ps1  # Model quota management
       │
-      ├── 🧪 Pengujian & Evaluasi
-      │   ├── tests/                        # Unit dan pengujian integrasi
+      ├── 🧪 Testing & Evaluation
+      │   ├── tests/                        # Unit and integration tests
       │   │   └── test_search_index_manager.py
-      │   ├── evals/                        # Kerangka evaluasi agen
-      │   │   ├── evaluate.py               # Runner evaluasi
-      │   │   ├── eval-queries.json         # Query pengujian
+      │   ├── evals/                        # Agent evaluation framework
+      │   │   ├── evaluate.py               # Evaluation runner
+      │   │   ├── eval-queries.json         # Test queries
       │   │   └── eval-action-data-path.json
-      │   ├── sandbox/                      # Tempat bermain pengembangan
-      │   │   ├── 1-quickstart.py           # Contoh memulai cepat
-      │   │   └── aad-interactive-chat.py   # Contoh autentikasi
-      │   └── airedteaming/                 # Evaluasi keamanan AI
-      │       └── ai_redteaming.py          # Pengujian tim merah
+      │   ├── sandbox/                      # Development playground
+      │   │   ├── 1-quickstart.py           # Getting started examples
+      │   │   └── aad-interactive-chat.py   # Authentication examples
+      │   └── airedteaming/                 # AI safety evaluation
+      │       └── ai_redteaming.py          # Red team testing
       │
-      ├── 📚 Dokumentasi (docs/)
-      │   ├── deployment.md                 # Panduan deployment
-      │   ├── local_development.md          # Instruksi pengaturan lokal
-      │   ├── troubleshooting.md            # Masalah umum & perbaikan
-      │   ├── azure_account_setup.md        # Prasyarat Azure
-      │   └── images/                       # Aset dokumentasi
+      ├── 📚 Documentation (docs/)
+      │   ├── deployment.md                 # Deployment guide
+      │   ├── local_development.md          # Local setup instructions
+      │   ├── troubleshooting.md            # Common issues & fixes
+      │   ├── azure_account_setup.md        # Azure prerequisites
+      │   └── images/                       # Documentation assets
       │
-      └── 📄 Metadata Proyek
-         ├── README.md                     # Ringkasan proyek
-         ├── CODE_OF_CONDUCT.md           # Pedoman komunitas
-         ├── CONTRIBUTING.md              # Panduan kontribusi
-         ├── LICENSE                      # Ketentuan lisensi
-         └── next-steps.md                # Panduan pasca-deploy
+      └── 📄 Project Metadata
+         ├── README.md                     # Project overview
+         ├── CODE_OF_CONDUCT.md           # Community guidelines
+         ├── CONTRIBUTING.md              # Contribution guide
+         ├── LICENSE                      # License terms
+         └── next-steps.md                # Post-deployment guidance
       ```
 
 ### 3.1. Arsitektur Aplikasi Inti
@@ -195,18 +195,18 @@ Template ini mengikuti pola **aplikasi web full-stack** dengan:
 
 - **Backend**: Python FastAPI dengan integrasi Azure AI
 - **Frontend**: TypeScript/React dengan sistem build Vite
-- **Infrastructure**: Template Azure Bicep untuk sumber daya cloud
-- **Containerization**: Docker untuk deployment yang konsisten
+- **Infrastruktur**: template Azure Bicep untuk sumber daya cloud
+- **Kontainerisasi**: Docker untuk penyebaran yang konsisten
 
-### 3.2 Infrastruktur sebagai Kode (Bicep)
+### 3.2 Infrastruktur Sebagai Kode (Bicep)
 
 Lapisan infrastruktur menggunakan template **Azure Bicep** yang diorganisir secara modular:
 
    - **`main.bicep`**: Mengorkestrasi semua sumber daya Azure
-   - **`core/` modules**: Komponen yang dapat digunakan ulang untuk layanan yang berbeda
-      - Layanan AI (Azure OpenAI, AI Search)
+   - **`core/` modules**: Komponen yang dapat digunakan kembali untuk berbagai layanan
+      - Layanan AI (Microsoft Foundry Models, AI Search)
       - Hosting kontainer (Azure Container Apps)
-      - Monitoring (Application Insights, Log Analytics)
+      - Pemantauan (Application Insights, Log Analytics)
       - Keamanan (Key Vault, Managed Identity)
 
 ### 3.3 Sumber Aplikasi (`src/`)
@@ -220,9 +220,9 @@ Lapisan infrastruktur menggunakan template **Azure Bicep** yang diorganisir seca
 
 **Frontend (`src/frontend/`)**:
 
-- SPA modern React/TypeScript
-- Vite untuk pengembangan cepat dan build yang optimal
-- Antarmuka chat untuk interaksi agen
+- SPA modern dengan React/TypeScript
+- Vite untuk pengembangan cepat dan build yang dioptimalkan
+- Antarmuka obrolan untuk interaksi agen
 
 **Basis Pengetahuan (`src/files/`)**:
 
@@ -233,16 +233,16 @@ Lapisan infrastruktur menggunakan template **Azure Bicep** yang diorganisir seca
 
 ### 3.4 DevOps & Otomasi
 
-**Skrip (`scripts/`)**:
+**Scripts (`scripts/`)**:
 
 - Skrip PowerShell dan Bash lintas platform
-- Validasi dan pengaturan lingkungan
+- Validasi lingkungan dan pengaturan
 - Konfigurasi pasca-deploy
 - Manajemen kuota model
 
 **Integrasi Azure Developer CLI**:
 
-- Konfigurasi `azure.yaml` untuk alur kerja `azd`
+- Konfigurasi `azure.yaml` untuk workflow `azd`
 - Provisioning dan deployment otomatis
 - Manajemen variabel lingkungan
 
@@ -250,13 +250,13 @@ Lapisan infrastruktur menggunakan template **Azure Bicep** yang diorganisir seca
 
 **Kerangka Evaluasi (`evals/`)**:
 
-- Evaluasi performa agen
-- Pengujian kualitas respons query
+- Evaluasi kinerja agen
+- Pengujian kualitas respons kueri
 - Pipeline penilaian otomatis
 
 **Keamanan AI (`airedteaming/`)**:
 
-- Pengujian tim merah untuk keamanan AI
+- Pengujian red team untuk keamanan AI
 - Pemindaian kerentanan keamanan
 - Praktik AI yang bertanggung jawab
 
@@ -264,17 +264,17 @@ Lapisan infrastruktur menggunakan template **Azure Bicep** yang diorganisir seca
 
 ## 4. Selamat 🏆
 
-Anda berhasil menggunakan GitHub Copilot Chat dengan server MCP untuk mengeksplor repositori.
+Anda berhasil menggunakan GitHub Copilot Chat dengan server MCP, untuk menjelajahi repositori.
 
 - [X] Mengaktifkan GitHub Copilot untuk Azure
 - [X] Memahami Arsitektur Aplikasi
-- [X] Mengeksplor struktur template AZD
+- [X] Menjelajahi struktur template AZD
 
-Ini memberi Anda gambaran tentang aset _infrastructure as code_ untuk template ini. Selanjutnya, kita akan melihat file konfigurasi untuk AZD.
+Ini memberi Anda gambaran tentang aset _infrastruktur sebagai kode_ untuk template ini. Selanjutnya, kita akan melihat file konfigurasi untuk AZD.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya mencapai akurasi, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat penting, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber otoritatif. Untuk informasi yang penting, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

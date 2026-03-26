@@ -35,6 +35,21 @@ After completing this lesson, you will be able to:
 
 Azure Developer CLI (azd) is a command-line tool designed to accelerate your journey from local development to Azure deployment. It simplifies the process of building, deploying, and managing cloud-native applications on Azure.
 
+### What Can You Deploy with azd?
+
+azd supports a wide range of workloads—and the list keeps growing. Today, you can use azd to deploy:
+
+| Workload Type | Examples | Same Workflow? |
+|---------------|----------|----------------|
+| **Traditional applications** | Web apps, REST APIs, static sites | ✅ `azd up` |
+| **Services and microservices** | Container Apps, Function Apps, multi-service backends | ✅ `azd up` |
+| **AI-powered applications** | Chat apps with Microsoft Foundry Models, RAG solutions with AI Search | ✅ `azd up` |
+| **Intelligent agents** | Foundry-hosted agents, multi-agent orchestrations | ✅ `azd up` |
+
+The key insight is that **the azd lifecycle stays the same regardless of what you're deploying**. You initialize a project, provision infrastructure, deploy your code, monitor your app, and clean up—whether it's a simple website or a sophisticated AI agent.
+
+This continuity is by design. azd treats AI capabilities as another kind of service your application can use, not as something fundamentally different. A chat endpoint backed by Microsoft Foundry Models is, from azd's perspective, just another service to configure and deploy.
+
 ### 🎯 Why Use AZD? A Real-World Comparison
 
 Let's compare deploying a simple web app with database:
@@ -290,6 +305,26 @@ azd env new <environment-name>
 azd env select <environment-name>
 azd env list
 ```
+
+### 5. Extensions and AI Commands
+
+azd uses an extension system to add capabilities beyond the core CLI. This is especially useful for AI workloads:
+
+```bash
+# List available extensions
+azd extension list
+
+# Install the Foundry agents extension
+azd extension install azure.ai.agents
+
+# Initialize an AI agent project from a manifest
+azd ai agent init -m agent-manifest.yaml
+
+# Start the MCP server for AI-assisted development (Alpha)
+azd mcp start
+```
+
+> Extensions are covered in detail in [Chapter 2: AI-First Development](../chapter-02-ai-development/agents.md) and the [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) reference.
 
 ## 📁 Project Structure
 
@@ -711,7 +746,6 @@ azd up
 ```
 
 ### Security Considerations
-
 1. **Credential Storage**: Never store credentials in source code
 2. **Scope Limitation**: Use least-privilege principle for service principals
 3. **Token Rotation**: Regularly rotate service principal secrets
@@ -867,13 +901,13 @@ A: Costs vary by template. Most development templates cost $50-150/month:
 # Preview costs before deploying
 azd provision --preview
 
-# Always cleanup when not using
+# Always clean up when not using
 azd down --force --purge  # Removes all resources
 ```
 
 **Pro tip:** Use free tiers where available:
 - App Service: F1 (Free) tier
-- Azure OpenAI: 50,000 tokens/month free
+- Microsoft Foundry Models: Azure OpenAI 50,000 tokens/month free
 - Cosmos DB: 1000 RU/s free tier
 
 ---
@@ -1160,6 +1194,6 @@ You now understand AZD fundamentals. Choose your path:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-This document has been translated using the AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

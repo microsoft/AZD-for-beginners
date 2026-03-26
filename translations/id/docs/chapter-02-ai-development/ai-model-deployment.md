@@ -1,26 +1,26 @@
 # Penerapan Model AI dengan Azure Developer CLI
 
 **Navigasi Bab:**
-- **📚 Beranda Kursus**: [AZD For Beginners](../../README.md)
-- **📖 Bab Saat Ini**: Chapter 2 - AI-First Development
-- **⬅️ Sebelumnya**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Selanjutnya**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Bab Berikutnya**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 2 - Pengembangan Berorientasi AI
+- **⬅️ Sebelumnya**: [Integrasi Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Selanjutnya**: [Lab Workshop AI](ai-workshop-lab.md)
+- **🚀 Bab Berikutnya**: [Bab 3: Konfigurasi](../chapter-03-configuration/configuration.md)
 
-Panduan ini memberikan instruksi komprehensif untuk menerapkan model AI menggunakan template AZD, mencakup segala sesuatu dari pemilihan model hingga pola penerapan produksi.
+Panduan ini memberikan instruksi komprehensif untuk menerapkan model AI menggunakan template AZD, mencakup segala hal dari pemilihan model hingga pola penerapan produksi.
 
 ## Daftar Isi
 
-- [Strategi Pemilihan Model](../../../../docs/chapter-02-ai-development)
-- [Konfigurasi AZD untuk Model AI](../../../../docs/chapter-02-ai-development)
-- [Pola Penerapan](../../../../docs/chapter-02-ai-development)
-- [Manajemen Model](../../../../docs/chapter-02-ai-development)
-- [Pertimbangan Produksi](../../../../docs/chapter-02-ai-development)
-- [Pemantauan dan Observabilitas](../../../../docs/chapter-02-ai-development)
+- [Strategi Pemilihan Model](#strategi-pemilihan-model)
+- [Konfigurasi AZD untuk Model AI](#konfigurasi-azd-untuk-model-ai)
+- [Pola Penerapan](#pola-penerapan)
+- [Manajemen Model](#manajemen-model)
+- [Pertimbangan Produksi](#pertimbangan-produksi)
+- [Pemantauan dan Observabilitas](#pemantauan-dan-observabilitas)
 
 ## Strategi Pemilihan Model
 
-### Azure OpenAI Models
+### Model Microsoft Foundry
 
 Pilih model yang tepat untuk kasus penggunaan Anda:
 
@@ -34,9 +34,9 @@ services:
       AZURE_OPENAI_MODELS: |
         [
           {
-            "name": "gpt-4o-mini",
+            "name": "gpt-4.1-mini",
             "version": "2024-07-18",
-            "deployment": "gpt-4o-mini",
+            "deployment": "gpt-4.1-mini",
             "capacity": 10,
             "format": "OpenAI"
           },
@@ -52,16 +52,16 @@ services:
 
 ### Perencanaan Kapasitas Model
 
-| Jenis Model | Kasus Penggunaan | Kapasitas yang Disarankan | Pertimbangan Biaya |
+| Model Type | Use Case | Recommended Capacity | Cost Considerations |
 |------------|----------|---------------------|-------------------|
-| GPT-4o-mini | Obrolan, Tanya Jawab | 10-50 TPM | Hemat biaya untuk sebagian besar beban kerja |
-| GPT-4 | Penalaran kompleks | 20-100 TPM | Biaya lebih tinggi, gunakan untuk fitur premium |
+| gpt-4.1-mini | Obrolan, Tanya Jawab | 10-50 TPM | Hemat biaya untuk sebagian besar beban kerja |
+| gpt-4.1 | Penalaran kompleks | 20-100 TPM | Biaya lebih tinggi, gunakan untuk fitur premium |
 | Text-embedding-ada-002 | Pencarian, RAG | 30-120 TPM | Penting untuk pencarian semantik |
-| Whisper | Pengenalan ucapan ke teks | 10-50 TPM | Beban kerja pemrosesan audio |
+| Whisper | Transkripsi suara | 10-50 TPM | Beban kerja pemrosesan audio |
 
 ## Konfigurasi AZD untuk Model AI
 
-### Bicep Template Configuration
+### Konfigurasi Template Bicep
 
 Buat penerapan model melalui template Bicep:
 
@@ -70,10 +70,10 @@ Buat penerapan model melalui template Bicep:
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
-    name: 'gpt-4o-mini'
+    name: 'gpt-4.1-mini'
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
     sku: {
@@ -122,7 +122,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
-### Environment Variables
+### Variabel Lingkungan
 
 Konfigurasikan lingkungan aplikasi Anda:
 
@@ -130,13 +130,13 @@ Konfigurasikan lingkungan aplikasi Anda:
 # konfigurasi .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
-AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
+AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
 ## Pola Penerapan
 
-### Pola 1: Penerapan Satu-Wilayah
+### Pola 1: Penerapan Satu Wilayah
 
 ```yaml
 # azure.yaml - Single region
@@ -146,13 +146,13 @@ services:
     host: containerapp
     config:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
-      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
+      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Terbaik untuk:
+Cocok untuk:
 - Pengembangan dan pengujian
 - Aplikasi untuk satu pasar
-- Optimisasi biaya
+- Optimasi biaya
 
 ### Pola 2: Penerapan Multi-Wilayah
 
@@ -167,14 +167,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Terbaik untuk:
+Cocok untuk:
 - Aplikasi global
 - Persyaratan ketersediaan tinggi
 - Distribusi beban
 
 ### Pola 3: Penerapan Hibrida
 
-Gabungkan Azure OpenAI dengan layanan AI lainnya:
+Gabungkan Model Microsoft Foundry dengan layanan AI lainnya:
 
 ```bicep
 // Hybrid AI services
@@ -213,7 +213,7 @@ Lacak versi model dalam konfigurasi AZD Anda:
 {
   "models": {
     "chat": {
-      "name": "gpt-4o-mini",
+      "name": "gpt-4.1-mini",
       "version": "2024-07-18",
       "fallback": "gpt-35-turbo"
     },
@@ -237,7 +237,7 @@ echo "Checking model availability..."
 az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
-  --query "[?name=='gpt-4o-mini']"
+  --query "[?name=='gpt-4.1-mini']"
 ```
 
 ### Pengujian A/B
@@ -249,11 +249,11 @@ param enableABTesting bool = false
 
 resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'gpt-4o-mini-${enableABTesting ? 'v1' : 'prod'}'
+  name: 'gpt-4.1-mini-${enableABTesting ? 'v1' : 'prod'}'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -293,9 +293,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Konfigurasi Penskalaan Otomatis
+### Konfigurasi Penskalakan Otomatis
 
-Konfigurasikan penskalaan otomatis untuk Container Apps:
+Konfigurasikan penskalakan otomatis untuk Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -331,7 +331,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Optimisasi Biaya
+### Optimasi Biaya
 
 Terapkan kontrol biaya:
 
@@ -474,29 +474,29 @@ async def check_ai_models():
 ## Langkah Selanjutnya
 
 1. **Tinjau [Panduan Integrasi Microsoft Foundry](microsoft-foundry-integration.md)** untuk pola integrasi layanan
-2. **Selesaikan [AI Workshop Lab](ai-workshop-lab.md)** untuk pengalaman langsung
-3. **Terapkan [Praktik AI Produksi](production-ai-practices.md)** untuk penerapan di perusahaan
+2. **Selesaikan [Lab Workshop AI](ai-workshop-lab.md)** untuk pengalaman praktis
+3. **Terapkan [Praktik AI Produksi](production-ai-practices.md)** untuk penerapan perusahaan
 4. **Jelajahi [Panduan Pemecahan Masalah AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** untuk masalah umum
 
 ## Sumber Daya
 
-- [Ketersediaan Model Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Ketersediaan Model Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Dokumentasi Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Penskalaan Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [Optimisasi Biaya Model AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Penskalakan Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Optimasi Biaya Model AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **Navigasi Bab:**
-- **📚 Beranda Kursus**: [AZD For Beginners](../../README.md)
-- **📖 Bab Saat Ini**: Chapter 2 - AI-First Development
-- **⬅️ Sebelumnya**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Selanjutnya**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Bab Berikutnya**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 2 - Pengembangan Berorientasi AI
+- **⬅️ Sebelumnya**: [Integrasi Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Selanjutnya**: [Lab Workshop AI](ai-workshop-lab.md)
+- **🚀 Bab Berikutnya**: [Bab 3: Konfigurasi](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Penafian:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI Co-op Translator (https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memberikan terjemahan yang akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan jasa penerjemah profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk akurasi, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidaktepatan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat krusial, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul akibat penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

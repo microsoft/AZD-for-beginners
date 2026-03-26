@@ -1,238 +1,238 @@
-# ரீட்டெயில் மல்டி-ஏஜென்ட் தீர்வு - உள்கட்டமைப்பு டெம்ப்ளேட்
+# Retail Multi-Agent Solution - Infrastructure Template
 
-**அத்தியாயம் 5: உற்பத்தி பிரயோக தொகுப்பு**
-- **📚 பாடநெறி முகப்பு**: [AZD ஆரம்பத்திற்கான வழிகாட்டி](../../README.md)
-- **📖 தொடர்புடைய அத்தியாயம்**: [அத்தியாயம் 5: மல்டி-ஏஜென்ட் AI தீர்வுகள்](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **📝 சூழல் வழிகாட்டி**: [முழுமையான கட்டமைப்பு](../retail-scenario.md)
-- **🎯 விரைவான பிரயோகம்**: [ஒரே கிளிக் பிரயோகம்](../../../../examples/retail-multiagent-arm-template)
+**அத்தியாயம் 5: உற்பத்தி பதிவேற்றத் தொகுப்பு**
+- **📚 பாடநூல் முகப்பு**: [AZD For Beginners](../../README.md)
+- **📖 தொடர்புடைய அத்தியாயம்**: [அத்தியாயம் 5: பன்முக்கிய ஏஜென்ட் AI தீர்வுகள்](../../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **📝 காட்சி காரிய வழிகாட்டு**: [முழுமையான கட்டமைப்பு](../retail-scenario.md)
+- **🎯 விரைவு பதிவேற்றம்**: [ஒரே-கிளிக் பதிவேற்றம்](../../../../examples/retail-multiagent-arm-template)
 
-> **⚠️ உள்கட்டமைப்பு டெம்ப்ளேட் மட்டும்**  
-> இந்த ARM டெம்ப்ளேட் **Azure வளங்களை** மல்டி-ஏஜென்ட் அமைப்பிற்காக பிரயோகிக்கிறது.  
+> **⚠️ INFRASTRUCTURE TEMPLATE ONLY**  
+> இந்த ARM டெம்ப்ளேட் பல-ஏஜென்ட் குறியமைப்பிற்கு தேவையான **Azure வளங்களை** பதிவேற்றுகிறது.  
 >  
-> **பிரயோகத்தில் என்ன கிடைக்கும் (15-25 நிமிடங்கள்):**
-> - ✅ Azure OpenAI (GPT-4o, GPT-4o-mini, மூன்று பிராந்தியங்களில் embeddings)
-> - ✅ AI தேடல் சேவை (காலியாக, குறியீடு உருவாக்கத்திற்குத் தயாராக உள்ளது)
-> - ✅ Container Apps (placeholder images, உங்கள் குறியீட்டிற்குத் தயாராக உள்ளது)
-> - ✅ சேமிப்பு, Cosmos DB, Key Vault, Application Insights
+> **என்னவை பதிவேற்றப்படுகின்றன (15-25 நிமிடங்கள்):**
+> - ✅ Microsoft Foundry Models (gpt-4.1, gpt-4.1-mini, embeddings across 3 regions)
+> - ✅ AI Search சேவை (காலியானது, குறியீட்டுப்படுத்தலுக்கு தயாராக உள்ளது)
+> - ✅ Container Apps (தற்காலிக இமேஜ்கள், உங்கள் குறியீட்டிற்கு தயாராக உள்ளது)
+> - ✅ Storage, Cosmos DB, Key Vault, Application Insights
 >  
-> **என்ன சேர்க்கப்படவில்லை (உங்கள் மேம்பாடு தேவை):**
-> - ❌ ஏஜென்ட் செயல்பாட்டு குறியீடு (வாடிக்கையாளர் ஏஜென்ட், இன்வென்டரி ஏஜென்ட்)
-> - ❌ வழிமாற்று தர்க்கம் மற்றும் API முடிவுகள்
-> - ❌ முன்னணி உரையாடல் UI
-> - ❌ தேடல் குறியீடு அமைப்புகள் மற்றும் தரவுப் குழாய்கள்
-> - ❌ **மதிப்பிடப்பட்ட மேம்பாட்டு முயற்சி: 80-120 மணி நேரங்கள்**
+> **என்ன வழங்கப்படவில்லை (விவசாயம் தேவை):**
+> - ❌ ஏஜென்ட் செயலாக்கக் குறியீடு (Customer Agent, Inventory Agent)
+> - ❌ நடையில் மாற்றல் மற்றும் API எண்ட்பாயின்டுகள்
+> - ❌ முன்னணிப் பேச்சு UI
+> - ❌ Search குறியீட்டு ஸ்கீம்கள் மற்றும் தரவு குழாய்கள்
+> - ❌ **எண்ணிக்கையான வளர்ச்சி நேரம்: 80-120 மணிநேரம்**
 >  
-> **இந்த டெம்ப்ளேட்டை பயன்படுத்தவும்:**
-> - ✅ மல்டி-ஏஜென்ட் திட்டத்திற்கான Azure உள்கட்டமைப்பை நீங்கள் உருவாக்க விரும்பினால்
-> - ✅ ஏஜென்ட் செயல்பாட்டை தனியாக மேம்படுத்த திட்டமிட்டால்
-> - ✅ உற்பத்தி-தயாரான உள்கட்டமைப்பு அடிப்படை தேவைப்பட்டால்
+> **இந்த டெம்ப்ளேட்டை பயன்படுத்த வேண்டியவர்கள்:**
+> - ✅ பன்முக ஏஜென்ட் திட்டத்திற்கான Azure கட்டமைப்பை வழங்க விரும்புகிறீர்கள்
+> - ✅ ஏஜென்ட் செயலாக்கத்தை தனியாக உருவாக்க திட்டமிட்டுள்ளீர்கள்
+> - ✅ உற்பத்தி-தயார் கட்டமைப்பு அடிப்படை தேவைப்படுகிறது
 >  
-> **பயன்படுத்த வேண்டாம்:**
-> - ❌ உடனடி செயல்படும் மல்டி-ஏஜென்ட் டெமோவை எதிர்பார்த்தால்
-> - ❌ முழுமையான பயன்பாட்டு குறியீடு எடுத்துக்காட்டுகளைத் தேடினால்
+> **பயன்படுத்த வேண்டாம் என்றால்:**
+> - ❌ உடனடி செயல்படும் பன்முக-ஏஜென்ட் டெமோ எதிர்பார்க்கிறீர்கள்
+> - ❌ முழுமையான செயலி குறியீட்டு உதாரணங்களைத் தேடுகிறீர்கள்
 
-## மேற்பார்வை
+## கண்ணோட்டம்
 
-இந்த அடைவு மல்டி-ஏஜென்ட் வாடிக்கையாளர் ஆதரவு அமைப்பின் **உள்கட்டமைப்பு அடித்தளத்தை** பிரயோகிக்க ஒரு விரிவான Azure Resource Manager (ARM) டெம்ப்ளேட்டை கொண்டுள்ளது. இந்த டெம்ப்ளேட் தேவையான அனைத்து Azure சேவைகளையும் சரியாக உள்ளமைக்கப்பட்டு இணைக்கப்பட்டு, உங்கள் பயன்பாட்டு மேம்பாட்டிற்குத் தயாராக பிரயோகிக்கிறது.
+இந்த அடைவு பன்முக வாடிக்கையாளர் ஆதரவு அமைப்பிற்கு தேவையான அடிப்படை Azure Resource Manager (ARM) டெம்ப்ளேட்டை வழங்குகிறது. டெம்ப்ளேட் அனைத்து தேவையான Azure சேவைகளையும் வேண்டியவாறு அமைக்கப்பட்டு, இணைக்கப்பட்டவையாக வழங்குகிறது, உங்கள் செயலி வளர்ச்சிக்கு தயாராக உள்ளது.
 
-**பிரயோகத்திற்குப் பிறகு, நீங்கள் பெறுவீர்கள்:** உற்பத்தி-தயாரான Azure உள்கட்டமைப்பு  
-**அமைப்பை முடிக்க, உங்களுக்கு தேவை:** ஏஜென்ட் குறியீடு, முன்னணி UI, மற்றும் தரவின் உள்ளமைப்பு (பார்க்கவும் [கட்டமைப்பு வழிகாட்டி](../retail-scenario.md))
+**பதிவேற்றத்திற்குப் பின்னர், உங்களுக்கு இருக்கும்:** உற்பத்தி-தயார் Azure கட்டமைப்பு  
+**கணினியை முழுமையாகச் செய்வதற்கு, நீங்கள் தேவையுடையவை:** ஏஜென்ட் குறியீடு, முன் பகுதியில் UI, மற்றும் தரவு கட்டமைப்பு (பாருங்கள் [Architecture Guide](../retail-scenario.md))
 
-## 🎯 என்ன பிரயோகிக்கப்படுகிறது
+## 🎯 என்னவை பதிவேற்றப்படுகின்றன
 
-### மைய உள்கட்டமைப்பு (பிரயோகத்திற்குப் பிறகு நிலை)
+### முக்கிய கட்டமைப்பு (பதிவேற்றத்தின் பின் நிலை)
 
-✅ **Azure OpenAI சேவைகள்** (API அழைப்புகளுக்குத் தயாராக உள்ளது)
-  - முதன்மை பிராந்தியம்: GPT-4o பிரயோகம் (20K TPM திறன்)
-  - இரண்டாம் நிலை பிராந்தியம்: GPT-4o-mini பிரயோகம் (10K TPM திறன்)
-  - மூன்றாம் நிலை பிராந்தியம்: உரை embeddings மாடல் (30K TPM திறன்)
-  - மதிப்பீட்டு பிராந்தியம்: GPT-4o grader மாடல் (15K TPM திறன்)
-  - **நிலை:** முழுமையாக செயல்படுகிறது - உடனடியாக API அழைப்புகளைச் செய்ய முடியும்
+✅ **Microsoft Foundry Models சேவைகள்** (API அழைப்புகளுக்கு தயாராக)
+  - முதன்மை பிராந்தியம்: gpt-4.1 உருவாக்கம் (20K TPM திறன்)
+  - இரண்டாம் பிராந்தியம்: gpt-4.1-mini உருவாக்கம் (10K TPM திறன்)
+  - மூன்றாம் பிராந்தியம்: உரை எம்பெடிங் மாதிரி (30K TPM திறன்)
+  - மதிப்பீட்டு பிராந்தியம்: gpt-4.1 grader மாதிரி (15K TPM திறன்)
+  - **நிலை:** முற்றிலும் செயல்பாடானது - உடனடி API அழைப்புகள் செய்ய முடியும்
 
-✅ **Azure AI தேடல்** (காலியாக - உள்ளமைப்புக்குத் தயாராக உள்ளது)
-  - வெக்டர் தேடல் திறன்கள் இயக்கப்பட்டுள்ளன
-  - 1 பகுதி, 1 பிரதியுடன் நிலையான நிலை
-  - **நிலை:** சேவை இயங்குகிறது, ஆனால் குறியீடு உருவாக்கம் தேவை
-  - **செயல் தேவை:** உங்கள் அமைப்புடன் தேடல் குறியீட்டை உருவாக்கவும்
+✅ **Azure AI Search** (காலியானது - கட்டமைக்க தயாராக)
+  - வெக்டர் தேடல் திறன்கள் செயல்படுத்தப்பட்டன
+  - ஸ்டாண்டர்டு டியர் 1 பகுதி, 1 பிரதிபலிப்பு
+  - **நிலை:** சேவை இயங்குகிறது, ஆனால் குறியீடு உருவாக்குவதற்கு தேவை
+  - **செயல் தேவை:** உங்கள் ஸ்கீமுடன் தேடல் குறியீட்டை உருவாக்கவும்
 
-✅ **Azure சேமிப்பு கணக்கு** (காலியாக - பதிவேற்றத்திற்குத் தயாராக உள்ளது)
-  - Blob கொள்கலன்கள்: `documents`, `uploads`
-  - பாதுகாப்பான உள்ளமைப்பு (HTTPS மட்டும், பொது அணுகல் இல்லை)
-  - **நிலை:** கோப்புகளைப் பெற தயாராக உள்ளது
-  - **செயல் தேவை:** உங்கள் தயாரிப்பு தரவுகள் மற்றும் ஆவணங்களைப் பதிவேற்றவும்
+✅ **Azure Storage Account** (காலியானது - பதிவேற்றங்களுக்கு தயார்)
+  - Blob கட்டளையாளர்: `documents`, `uploads`
+  - பாதுகாப்பான கட்டமைப்பு (HTTPS மட்டும், பொதுக் அணுகல் இல்லை)
+  - **நிலை:** கோப்புகளை பெற தயாராக உள்ளது
+  - **செயல் தேவை:** உங்கள் பொருள் தரவுகளை மற்றும் ஆவணங்களை பதிவேற்றவும்
 
-⚠️ **Container Apps சூழல்** (Placeholder images பிரயோகிக்கப்பட்டுள்ளது)
-  - ஏஜென்ட் வழிமாற்று பயன்பாடு (nginx இயல்புநிலை படம்)
-  - முன்னணி பயன்பாடு (nginx இயல்புநிலை படம்)
-  - தானியங்கி அளவீடு உள்ளமைக்கப்பட்டுள்ளது (0-10 பிரதிகள்)
-  - **நிலை:** Placeholder containers இயங்குகிறது
-  - **செயல் தேவை:** உங்கள் ஏஜென்ட் பயன்பாடுகளை உருவாக்கி பிரயோகிக்கவும்
+⚠️ **Container Apps சுற்றுச்சூழல்** (தற்காலிக இமேஜ்கள் பதிவேற்றப்பட்டன)
+  - ஏஜென்ட் ராட்டர் செயலி (nginx default image)
+  - முன் பகுதியில் செயலி (nginx default image)
+  - தானாக அளவிடல் அமைக்கப்பட்டது (0-10 உட்பட இடரிகள்)
+  - **நிலை:** தற்காலிக கொண்டெய்னர்கள் இயங்கி வருகின்றன
+  - **செயல் தேவை:** உங்கள் ஏஜென்ட் செயலிகளை உருவாக்கி பதிவேற்றவும்
 
-✅ **Azure Cosmos DB** (காலியாக - தரவிற்குத் தயாராக உள்ளது)
-  - தரவுத்தொகுதி மற்றும் கொள்கலன் முன்-உள்ளமைக்கப்பட்டுள்ளது
-  - குறைந்த-தாமத செயல்பாடுகளுக்காக மேம்படுத்தப்பட்டுள்ளது
-  - TTL இயங்குகிறது தானியங்கி சுத்தம் செய்ய
-  - **நிலை:** உரையாடல் வரலாற்றைச் சேமிக்க தயாராக உள்ளது
+✅ **Azure Cosmos DB** (காலியானது - தரவிற்கு தயார்)
+  - தரவுத்தளம் மற்றும் கன்டெய்னர் முன்-கட்டமைக்கப்பட்டன
+  - குறைந்த தாமத செயல்பாடுகளுக்கு உகந்ததாக ஒப்டிமைஸ் செய்யப்பட்டன
+  - TTL இயக்கப்பட்டுள்ளது தானாக சுத்தம் செய்ய
+  - **நிலை:** அரட்டைய குறும்படம் சேமிக்க தயாராக உள்ளது
 
-✅ **Azure Key Vault** (விருப்பத்தேர்வு - ரகசியங்களுக்குத் தயாராக உள்ளது)
-  - மென்மையான நீக்கம் இயங்குகிறது
-  - RBAC மேலாண்மை அடையாளங்களுக்காக உள்ளமைக்கப்பட்டுள்ளது
-  - **நிலை:** API விசைகள் மற்றும் இணைப்பு சரங்களைச் சேமிக்க தயாராக உள்ளது
+✅ **Azure Key Vault** (விருப்பம் - ரகசியங்களுக்கு தயாராக)
+  - மென்மையான நீக்கு செயல்படுத்தப்பட்டது
+  - மேலாண்மைக் அடையாளங்களுக்கான RBAC கட்டமைக்கப்பட்டது
+  - **நிலை:** API விசைகள் மற்றும் இணைப்பு கயாணங்களை சேமிக்க தயாராக உள்ளது
 
-✅ **Application Insights** (விருப்பத்தேர்வு - கண்காணிப்பு செயல்படுகிறது)
-  - Log Analytics பணிமனையுடன் இணைக்கப்பட்டுள்ளது
-  - தனிப்பயன் அளவுகோல்கள் மற்றும் எச்சரிக்கைகள் உள்ளமைக்கப்பட்டுள்ளது
-  - **நிலை:** உங்கள் பயன்பாடுகளிலிருந்து தொலைநோக்குகளைப் பெற தயாராக உள்ளது
+✅ **Application Insights** (விருப்பம் - கண்காணிப்பு செயலில்)
+  - Log Analytics வேலைநிரலுடன் இணைக்கப்பட்டது
+  - தனிப்பயன் அளவைகள் மற்றும் எச்சரிக்கைகள் அமைக்கப்பட்டன
+  - **நிலை:** உங்கள் செயலிகளிலிருந்து டெலிமெட்ரியை பெற தயாராக உள்ளது
 
-✅ **ஆவண நுண்ணறிவு** (API அழைப்புகளுக்குத் தயாராக உள்ளது)
-  - S0 நிலை உற்பத்தி வேலைப்பாடுகளுக்காக
-  - **நிலை:** பதிவேற்றப்பட்ட ஆவணங்களை செயல்படுத்த தயாராக உள்ளது
+✅ **Document Intelligence** (API அழைப்புகளுக்கு தயாராக)
+  - S0 டியர் உற்பத்தி பணிகளுக்கு
+  - **நிலை:** பதிவேற்றப்பட்ட ஆவணங்களை செயலாக்க தயாராக உள்ளது
 
-✅ **Bing தேடல் API** (API அழைப்புகளுக்குத் தயாராக உள்ளது)
-  - S1 நிலை நேரடி தேடல்களுக்காக
-  - **நிலை:** வலை தேடல் கேள்விகளுக்குத் தயாராக உள்ளது
+✅ **Bing Search API** (API அழைப்புகளுக்கு தயாராக)
+  - S1 டியர் நேரடி தேடல்களுக்கு
+  - **நிலை:** வலை தேடல் கேள்விகளுக்கு தயாராக உள்ளது
 
-### பிரயோக முறைகள்
+### பதிவேற்ற முறைமைகள்
 
-| முறை | OpenAI திறன் | Container பிரதிகள் | தேடல் நிலை | சேமிப்பு மீள்நிரப்பு | சிறந்தது |
-|------|--------------|---------------------|-------------|-------------------|----------|
-| **குறைந்தது** | 10K-20K TPM | 0-2 பிரதிகள் | அடிப்படை | LRS (உள்ளூர்) | மேம்பாடு/சோதனை, கற்றல், சான்று |
-| **நிலையானது** | 30K-60K TPM | 2-5 பிரதிகள் | நிலையானது | ZRS (மண்டலம்) | உற்பத்தி, மிதமான போக்கு (<10K பயனர்கள்) |
-| **பிரீமியம்** | 80K-150K TPM | 5-10 பிரதிகள், மண்டல மீள்நிரப்பு | பிரீமியம் | GRS (புவி) | நிறுவன, அதிக போக்கு (>10K பயனர்கள்), 99.99% SLA |
+| Mode | OpenAI Capacity | Container Instances | Search Tier | Storage Redundancy | Best For |
+|------|-----------------|---------------------|-------------|-------------------|----------|
+| **Minimal** | 10K-20K TPM | 0-2 replicas | Basic | LRS (Local) | Dev/test, learning, proof-of-concept |
+| **Standard** | 30K-60K TPM | 2-5 replicas | Standard | ZRS (Zone) | Production, moderate traffic (<10K users) |
+| **Premium** | 80K-150K TPM | 5-10 replicas, zone-redundant | Premium | GRS (Geo) | Enterprise, high traffic (>10K users), 99.99% SLA |
 
-**செலவின் தாக்கம்:**
-- **குறைந்தது → நிலையானது:** ~4 மடங்கு செலவின் அதிகரிப்பு ($100-370/மாதம் → $420-1,450/மாதம்)
-- **நிலையானது → பிரீமியம்:** ~3 மடங்கு செலவின் அதிகரிப்பு ($420-1,450/மாதம் → $1,150-3,500/மாதம்)
-- **தேர்வு செய்ய:** எதிர்பார்க்கப்படும் சுமை, SLA தேவைகள், பட்ஜெட் கட்டுப்பாடுகள்
+**செலவு தாக்கம்:**
+- **Minimal → Standard:** ~4x செலவுப் பெருக்கம் ($100-370/mo → $420-1,450/mo)
+- **Standard → Premium:** ~3x செலவுப் பெருக்கம் ($420-1,450/mo → $1,150-3,500/mo)
+- **தெரிவுசெய்யும் அடிப்படை:** எதிர்பார்க்கப்படும் ஏற்றம், SLA தேவைகள், பட்ஜெட் கட்டுப்பாடுகள்
 
 **திறன் திட்டமிடல்:**
-- **TPM (நிமிடத்திற்கு டோக்கன்கள்):** அனைத்து மாடல் பிரயோகங்களின் மொத்தம்
-- **Container பிரதிகள்:** தானியங்கி அளவீட்டு வரம்பு (குறைந்தது-அதிகபட்ச பிரதிகள்)
-- **தேடல் நிலை:** கேள்வி செயல்திறன் மற்றும் குறியீடு அளவின் வரம்புகளை பாதிக்கிறது
+- **TPM (Tokens Per Minute):** அனைத்து மாதிரி பதிவேற்றங்களின் மொத்தம்
+- **Container Instances:** தானாக அளவிடும் வரம்பு ( குறைந்த-அதிக இடரிகள் )
+- **Search Tier:** கேள்வி செயல்திறன் மற்றும் குறியீட்டு அளவு வரம்புகளை பாதிக்கிறது
 
-## 📋 முன்னேற்பாடுகள்
+## 📋 முன்-தேவைகள்
 
 ### தேவையான கருவிகள்
-1. **Azure CLI** (பதிப்பு 2.50.0 அல்லது அதற்கு மேல்)
+1. **Azure CLI** (பதிப்பு 2.50.0 அல்லது மேல்)
    ```bash
    az --version  # பதிப்பை சரிபார்க்கவும்
    az login      # அங்கீகரிக்கவும்
    ```
 
-2. **செயலில் Azure சந்தா** உரிமையாளர் அல்லது பங்களிப்பாளர் அணுகலுடன்
+2. **செயலில் இருக்கும் Azure சந்தா** Owner அல்லது Contributor அணுகலுடன்
    ```bash
-   az account show  # சந்தாவை சரிபார்க்கவும்
+   az account show  # சப்ஸ்கிரிப்ஷனை சரிபார்க்கவும்
    ```
 
 ### தேவையான Azure ஒதுக்கீடுகள்
 
-பிரயோகத்திற்கு முன், உங்கள் இலக்கு பிராந்தியங்களில் போதுமான ஒதுக்கீடுகளை சரிபார்க்கவும்:
+பதிவேற்றத்திற்கு முன், உங்கள் குறிக்கோள் பிராந்தியங்களில் போதுமான ஒதுக்கீடுகள் உள்ளதா என்பதை சரிபார்க்கவும்:
 
 ```bash
-# உங்கள் பிராந்தியத்தில் Azure OpenAI கிடைப்பதை சரிபார்க்கவும்
+# உங்கள் பிராந்தியத்தில் Microsoft Foundry Models கிடைக்கிறதா என்பதை சரிபார்க்கவும்
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --location eastus2
 
-# OpenAI ஒதுக்கீட்டை சரிபார்க்கவும் (உதாரணமாக gpt-4o க்கு)
+# OpenAI குவோட்டாவை சரிபார்க்கவும் (gpt-4.1 உதாரணமாக)
 az cognitiveservices usage list \
   --location eastus2 \
-  --query "[?name.value=='OpenAI.Standard.gpt-4o']"
+  --query "[?name.value=='OpenAI.Standard.gpt-4.1']"
 
-# Container Apps ஒதுக்கீட்டை சரிபார்க்கவும்
+# Container Apps குவோட்டாவை சரிபார்க்கவும்
 az provider show \
   --namespace Microsoft.App \
   --query "resourceTypes[?resourceType=='managedEnvironments'].locations"
 ```
 
 **குறைந்தபட்ச தேவையான ஒதுக்கீடுகள்:**
-- **Azure OpenAI:** 3-4 மாடல் பிரயோகங்கள் பிராந்தியங்களுக்கிடையே
-  - GPT-4o: 20K TPM
-  - GPT-4o-mini: 10K TPM
+- **Microsoft Foundry Models:** பிராந்தியங்களாக 3-4 மாதிரி பதிவேற்றங்கள்
+  - gpt-4.1: 20K TPM (Tokens Per Minute)
+  - gpt-4.1-mini: 10K TPM
   - text-embedding-ada-002: 30K TPM
-  - **குறிப்பு:** சில பிராந்தியங்களில் GPT-4o காத்திருப்பு பட்டியலில் இருக்கலாம் - [மாடல் கிடைப்பை](https://learn.microsoft.com/azure/ai-services/openai/concepts/models) சரிபார்க்கவும்
-- **Container Apps:** மேலாண்மை சூழல் + 2-10 container பிரதிகள்
-- **AI தேடல்:** நிலையான நிலை (வெக்டர் தேடலுக்கு அடிப்படை போதுமானது இல்லை)
-- **Cosmos DB:** நிலையான ஒதுக்கீடு செய்யப்பட்ட திறன்
+  - **குறிப்பு:** gpt-4.1 சில பிராந்தியங்களில் வெயிட் லிஸ்டில் இருக்கலாம் - பார்க்க [model availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- **Container Apps:** மேலாண்மையிடப்பட்ட சுற்றுச்சூழல் + 2-10 கொண்டெய்னர் இடரிகள்
+- **AI Search:** ஸ்டாண்டர்டு டியர் (வெக்டர் தேடலுக்கு Basic போதாது)
+- **Cosmos DB:** ஸ்டாண்டர்டுProvisioned throughput
 
-**ஒதுக்கீடு போதுமானதாக இல்லையெனில்:**
-1. Azure Portal → Quotas → அதிகரிப்பு கோரிக்கை செல்லவும்
+**ஒதுக்கீடு போதாது என்றால்:**
+1. Azure போர்டலை → Quotas → Request increase சென்று கோரிக்கை விடுங்கள்
 2. அல்லது Azure CLI பயன்படுத்தவும்:
    ```bash
    az support tickets create \
      --ticket-name "OpenAI-Quota-Increase" \
      --severity "minimal" \
-     --description "Request quota increase for Azure OpenAI GPT-4o in eastus2"
+     --description "Request quota increase for Microsoft Foundry Models gpt-4.1 in eastus2"
    ```
-3. கிடைப்புடன் மாற்று பிராந்தியங்களை பரிசீலிக்கவும்
+3. கிடைக்கும் பிராந்தியங்களை மாற்ற அணுகுங்கள்
 
-## 🚀 விரைவான பிரயோகம்
+## 🚀 விரைவு பதிவேற்றம்
 
 ### விருப்பம் 1: Azure CLI பயன்படுத்தி
 
 ```bash
-# டெம்ப்ளேட் கோப்புகளை நகலெடுக்க அல்லது பதிவிறக்கவும்
+# டெம்ப்ளேட் கோப்புகளை கிளோன் செய்யவும் அல்லது பதிவிறக்கம் செய்யவும்
 git clone <repository-url>
 cd examples/retail-multiagent-arm-template
 
-# பிரயோகப்படுத்தும் ஸ்கிரிப்டை செயல்படுத்தக்கூடியதாக மாற்றவும்
+# டெப்ளாய்மெண்ட் ஸ்கிரிப்டை இயக்கக்கூடியதாக மாற்றவும்
 chmod +x deploy.sh
 
-# இயல்புநிலை அமைப்புகளுடன் பிரயோகப்படுத்தவும்
+# இயல்புநிலை அமைப்புகளுடன் நிறுவவும்
 ./deploy.sh -g myResourceGroup
 
-# உற்பத்திக்காக பிரீமியம் அம்சங்களுடன் பிரயோகப்படுத்தவும்
+# உற்பத்திக்காக பிரீமியம் அம்சங்களுடன் நிறுவவும்
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 ```
 
-### விருப்பம் 2: Azure Portal பயன்படுத்தி
+### விருப்பம் 2: Azure போர்டல் பயன்படுத்தி
 
-[![Azure-க்கு பிரயோகிக்கவும்](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
+[![Azure-க்கு பதிவேற்றம்](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-### விருப்பம் 3: நேரடியாக Azure CLI பயன்படுத்தி
+### விருப்பம் 3: Azure CLI ஐ நேரடியாக பயன்படுத்தி
 
 ```bash
 # வளக் குழுவை உருவாக்கவும்
 az group create --name myResourceGroup --location eastus2
 
-# வார்ப்புருவை பிரயோகிக்கவும்
+# டெம்ப்ளேட்டை அமல்படுத்தவும்
 az deployment group create \
   --resource-group myResourceGroup \
   --template-file azuredeploy.json \
   --parameters azuredeploy.parameters.json
 ```
 
-## ⏱️ பிரயோக காலக்கட்டம்
+## ⏱️ பதிவேற்ற நேரக்குவியல்
 
 ### எதிர்பார்க்க வேண்டியது
 
-| கட்டம் | கால அளவு | என்ன நடக்கிறது |
+| Phase | Duration | What Happens |
 |-------|----------|--------------||
-| **டெம்ப்ளேட் சரிபார்ப்பு** | 30-60 விநாடிகள் | Azure ARM டெம்ப்ளேட் வடிவமைப்பு மற்றும் அளவுருக்களை சரிபார்க்கிறது |
-| **வளக் குழு அமைப்பு** | 10-20 விநாடிகள் | (தேவைப்பட்டால்) வளக் குழுவை உருவாக்குகிறது |
-| **OpenAI பிரயோகம்** | 5-8 நிமிடங்கள் | 3-4 OpenAI கணக்குகளை உருவாக்கி மாடல்களை பிரயோகிக்கிறது |
-| **Container Apps** | 3-5 நிமிடங்கள் | சூழலை உருவாக்கி placeholder containers பிரயோகிக்கிறது |
-| **தேடல் & சேமிப்பு** | 2-4 நிமிடங்கள் | AI தேடல் சேவையை மற்றும் சேமிப்பு கணக்குகளை பிரயோகிக்கிறது |
-| **Cosmos DB** | 2-3 நிமிடங்கள் | தரவுத்தொகுதியை உருவாக்கி கொள்கலன்களை உள்ளமைக்கிறது |
-| **கண்காணிப்பு அமைப்பு** | 2-3 நிமிடங்கள் | Application Insights மற்றும் Log Analytics அமைக்கிறது |
-| **RBAC உள்ளமைப்பு** | 1-2 நிமிடங்கள் | மேலாண்மை அடையாளங்களுக்கான அனுமதிகளை உள்ளமைக்கிறது |
-| **மொத்த பிரயோகம்** | **15-25 நிமிடங்கள்** | முழுமையான உள்கட்டமைப்பு தயாராக உள்ளது |
+| **Template Validation** | 30-60 seconds | Azure validates ARM template syntax and parameters |
+| **Resource Group Setup** | 10-20 seconds | Creates resource group (if needed) |
+| **OpenAI Provisioning** | 5-8 minutes | Creates 3-4 OpenAI accounts and deploys models |
+| **Container Apps** | 3-5 minutes | Creates environment and deploys placeholder containers |
+| **Search & Storage** | 2-4 minutes | Provisions AI Search service and storage accounts |
+| **Cosmos DB** | 2-3 minutes | Creates database and configures containers |
+| **Monitoring Setup** | 2-3 minutes | Sets up Application Insights and Log Analytics |
+| **RBAC Configuration** | 1-2 minutes | Configures managed identities and permissions |
+| **Total Deployment** | **15-25 minutes** | Complete infrastructure ready |
 
-**பிரயோகத்திற்குப் பிறகு:**
-- ✅ **உள்கட்டமைப்பு தயாராக உள்ளது:** அனைத்து Azure சேவைகளும் பிரயோகிக்கப்பட்டு இயங்குகிறது
-- ⏱️ **பயன்பாட்டு மேம்பாடு:** 80-120 மணி நேரங்கள் (உங்கள் பொறுப்பு)
-- ⏱️ **குறியீடு உள்ளமைப்பு:** 15-30 நிமிடங்கள் (உங்கள் அமைப்பு தேவை)
-- ⏱️ **தரவு பதிவேற்றம்:** தரவுத்தொகுதி அளவின் அடிப்படையில் மாறுபடும்
-- ⏱️ **சோதனை & சரிபார்ப்பு:** 2-4 மணி நேரங்கள்
+**பதிவேற்றத்துக்குப் பிறகு:**
+- ✅ **கட்டமைப்பு தயாராக உள்ளது:** அனைத்து Azure சேவைகளும் Provision செய்யப்பட்டு இயங்குகின்றன
+- ⏱️ **செயலி உருவாக்கம்:** 80-120 மணிநேரம் (உங்கள் பொறுப்பு)
+- ⏱️ **குறியீடு கட்டமைப்பு:** 15-30 நிமிடங்கள் (உங்கள் ஸ்கீமுடன் தேவையுள்ளது)
+- ⏱️ **தரவு பதிவேற்றம்:** தரவுக் அளவை பொறுத்து மாறுபடும்
+- ⏱️ **சோதனை & சரிபார்ப்பு:** 2-4 மணி
 
 ---
 
-## ✅ பிரயோக வெற்றியை சரிபார்க்கவும்
+## ✅ பதிவேற்ற வெற்றி சோதனை
 
-### படி 1: வள பிரயோகத்தை சரிபார்க்கவும் (2 நிமிடங்கள்)
+### படி 1: வள ஒதுக்கீடு சரிபார்க்கவும் (2 நிமிடங்கள்)
 
 ```bash
-# அனைத்து வளங்களும் வெற்றிகரமாக பிரயோகிக்கப்பட்டுள்ளதா என்பதை சரிபார்க்கவும்
+# அனைத்து வளங்களும் வெற்றிகரமாக நிறுவப்பட்டுள்ளதா என்பதை சரிபார்க்கவும்
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
@@ -241,16 +241,16 @@ az resource list \
 
 **எதிர்பார்ப்பு:** காலியான அட்டவணை (அனைத்து வளங்களும் "Succeeded" நிலையை காட்டும்)
 
-### படி 2: Azure OpenAI பிரயோகங்களை சரிபார்க்கவும் (3 நிமிடங்கள்)
+### படி 2: Microsoft Foundry Models பதிவேற்றங்களை சரிபார்க்கவும் (3 நிமிடங்கள்)
 
 ```bash
-# அனைத்து OpenAI கணக்குகளையும் பட்டியலிடவும்
+# அனைத்து OpenAI கணக்குகளை பட்டியலிடு
 az cognitiveservices account list \
   --resource-group myResourceGroup \
   --query "[?kind=='OpenAI'].{Name:name, Location:location, Status:properties.provisioningState}" \
   --output table
 
-# முதன்மை பிராந்தியத்திற்கான மாதிரி பிரயோகங்களை சரிபார்க்கவும்
+# முதன்மை பிராந்தியத்திற்கான மாடல் ஒதுக்கீடுகளைச் சரிபார்க்கவும்
 OPENAI_NAME=$(az cognitiveservices account list \
   --resource-group myResourceGroup \
   --query "[?kind=='OpenAI'] | [0].name" -o tsv)
@@ -262,19 +262,19 @@ az cognitiveservices account deployment list \
 ```
 
 **எதிர்பார்ப்பு:** 
-- 3-4 OpenAI கணக்குகள் (முதன்மை, இரண்டாம் நிலை, மூன்றாம் நிலை, மதிப்பீட்டு பிராந்தியங்கள்)
-- கணக்குக்கு 1-2 மாடல் பிரயோகங்கள் (gpt-4o, gpt-4o-mini, text-embedding-ada-002)
+- 3-4 OpenAI கணக்குகள் (முதன்மை, இரண்டாம், மூன்றாம், மதிப்பீட்டுப் பிராந்தியங்கள்)
+- 1-2 மாதிரி பதிவேற்றங்கள் ஒரு கணக்கிற்கு (gpt-4.1, gpt-4.1-mini, text-embedding-ada-002)
 
-### படி 3: உள்கட்டமைப்பு முடிவுகளை சோதிக்கவும் (5 நிமிடங்கள்)
+### படி 3: கட்டமைப்பு எண்ட்பாயின்டுகளை சோதிக்கவும் (5 நிமிடங்கள்)
 
 ```bash
-# கண்டெய்னர் பயன்பாட்டு URLகளை பெறவும்
+# கண்டெய்னர் பயன்பாட்டு URL-களைப் பெறுக
 az containerapp list \
   --resource-group myResourceGroup \
   --query "[].{Name:name, URL:properties.configuration.ingress.fqdn, Status:properties.runningStatus}" \
   --output table
 
-# ரவுட்டர் இறுதிப்புள்ளியை சோதிக்கவும் (பிளேஸ்ஹோல்டர் படம் பதிலளிக்கும்)
+# ரூட்டர் எண்ட்பாயிண்டை சோதிக்கவும் (தற்காலிக படம் பதிலளிக்கும்)
 ROUTER_URL=$(az containerapp show \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -285,13 +285,13 @@ curl -I https://$ROUTER_URL || echo "Container running (placeholder image - expe
 ```
 
 **எதிர்பார்ப்பு:** 
-- Container Apps "Running" நிலையை காட்டும்
-- Placeholder nginx HTTP 200 அல்லது 404 பதிலளிக்கிறது (பயன்பாட்டு குறியீடு இல்லை)
+- Container Apps "Running" நிலையை காட்டுகின்றன
+- தற்காலிக nginx HTTP 200 அல்லது 404 உடன் பதிலளிக்கிறது (இன்னும் செயலி குறியீடு இல்லை)
 
-### படி 4: Azure OpenAI API அணுகலை சரிபார்க்கவும் (3 நிமிடங்கள்)
+### படி 4: Microsoft Foundry Models API அணுகலை சரிபார்க்கவும் (3 நிமிடங்கள்)
 
 ```bash
-# OpenAI இறுதிப்புள்ளி மற்றும் விசையை பெறவும்
+# OpenAI எண்ட்பாயிண்ட் மற்றும் கீயை பெறவும்
 OPENAI_ENDPOINT=$(az cognitiveservices account show \
   --name $OPENAI_NAME \
   --resource-group myResourceGroup \
@@ -302,8 +302,8 @@ OPENAI_KEY=$(az cognitiveservices account keys list \
   --resource-group myResourceGroup \
   --query "key1" -o tsv)
 
-# GPT-4o பிரிவினையை சோதிக்கவும்
-curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2024-08-01-preview" \
+# gpt-4.1 அமர்த்தலை சோதிக்கவும்
+curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
   -d '{
@@ -312,73 +312,184 @@ curl "${OPENAI_ENDPOINT}openai/deployments/gpt-4o/chat/completions?api-version=2
   }'
 ```
 
-**எதிர்பார்ப்பு:** JSON பதில் உரையாடல் முடிவுடன் (OpenAI செயல்படுகிறது என்பதை உறுதிப்படுத்துகிறது)
+**எதிர்பார்ப்பு:** JSON பதில் சாட் சமাপ্তி இணைப்பு உடன் (OpenAI செயல்படுகிறது என்பதை உறுதிசெய்கிறது)
 
 ### என்ன செயல்படுகிறது மற்றும் என்ன செயல்படவில்லை
 
-**✅ பிரயோகத்திற்குப் பிறகு செயல்படுகிறது:**
-- Azure OpenAI மாடல்கள் பிரயோகிக்கப்பட்டு API அழைப்புகளை ஏற்கிறது
-- AI தேடல் சேவை இயங்குகிறது (காலியாக, குறியீடுகள் இல்லை)
-- Container Apps இயங்குகிறது (placeholder nginx images)
-- சேமிப்பு கணக்குகள் அணுகக்கூடியவை மற்றும் பதிவேற்றத்திற்குத் தயாராக உள்ளன
-- Cosmos DB தரவுச் செயல்பாடுகளுக்குத் தயாராக உள்ளது
-- Application Insights உள்கட்டமைப்பு தொலைநோக்குகளைச் சேகரிக்கிறது
-- Key Vault ரகசிய சேமிப்பிற்குத் தயாராக உள்ளது
+**✅ பதிவேற்றத்திற்கு பிறகு செயல்படும்:**
+- Microsoft Foundry Models மாதிரிகள் பதிவேற்றப்பட்டு API அழைப்புகளை ஏற்றுக்கொள்ளுகின்றன
+- AI Search சேவை இயங்குகிறது (காலியானது, இன்னும் குறியீடுகள் இல்லை)
+- Container Apps இயங்குகின்றன (தற்காலிக nginx இமேஜ்கள்)
+- Storage கணக்குகள் அணுகக்கூடியவை மற்றும் பதிவேற்றங்களுக்கு தயாராக உள்ளன
+- Cosmos DB தரவு செயல்பாடுகளுக்கு தயாராக உள்ளது
+- Application Insights கட்டமைப்பு டெலிமெட்ரியை சேகரிக்கிறது
+- Key Vault ரகசிய சேமிப்பிற்கு தயாராக உள்ளது
 
-**❌ இன்னும் செயல்படவில்லை (மேம்பாடு தேவை):**
-- ஏஜென்ட் முடிவுகள் (பயன்பாட்டு குறியீடு பிரயோகிக்கப்படவில்லை)
-- உரையாடல் செயல்பாடு (முன்னணி + பின்னணி செயல்பாடு தேவை)
-- தேடல் கேள்விகள் (தேடல் குறியீடு உருவாக்கப்படவில்லை)
-- ஆவண செயல்பாட்டு குழாய் (தரவு பதிவேற்றப்படவில்லை)
-- தனிப்பயன் தொலைநோக்குகள் (பயன்பாட்டு கருவிகள் தேவை)
+**❌ இன்னும் செயல்படவில்லை (வளர்ச்சி தேவை):**
+- ஏஜென்ட் எண்ட்பாயின்டுகள் (செயலி குறியீடு இன்னும் இல்லாதது)
+- சாட் செயல்பாடு (முன் + பின்னணி அமலாக்கம் தேவை)
+- தேடல் வினாக்கள் (இன்னும் தேடல் குறியீடு உருவாக்கப்படவில்லை)
+- ஆவண செயலாக்க குழாய் (தரவு பதிவேற்றம் இல்லாததால்)
+- தனிப்பயன் டெலிமெட்ரி (செயலி இன்ஸ்ட்ருமேண்டேஷன் தேவை)
 
-**அடுத்த படிகள்:** [பிரயோகத்திற்குப் பிறகு உள்ளமைப்பு](../../../../examples/retail-multiagent-arm-template) பார்க்கவும் உங்கள் பயன்பாட்டை உருவாக்கி பிரயோகிக்க
+**அடுத்த படிகள்:** உங்கள் செயலியை உருவாக்கி பதிவேற்றுவதற்கு [Post-Deployment Configuration](../../../../examples/retail-multiagent-arm-template) பார்க்கவும்
 
 ---
 
-## ⚙️ உள்ளமைப்பு விருப்பங்கள்
+## ⚙️ கட்டமைப்பு விருப்பங்கள்
 
 ### டெம்ப்ளேட் அளவுருக்கள்
 
-| அளவுரு | வகை | இயல்புநிலை | விளக்கம் |
-|--------|------|------------|----------|
-| `projectName` | string | "retail" | அனைத்து வளங்களின் முன்னொட்டு |
-| `location` | string | வளக் குழு இடம் | முதன்மை பிரயோக பிராந்தியம் |
-| `secondaryLocation` | string | "westus2" | இரண்டாம் நிலை பிராந்தியம் |
-| `tertiaryLocation` | string | "francecentral" | embeddings மாடலுக்கான பிராந்தியம் |
-| `environmentName` | string | "dev" | சூழல் அடையாளம் (dev/staging/prod) |
-| `deploymentMode` | string | "standard" | பிரயோக அமைப்பு (minimal/standard/premium) |
-| `enableMultiRegion` | bool | true | பல பிராந்திய பிரயோகத்தை இயக்க
-> **📝 முக்கியம்:** உள்கட்டமைப்பு நிறுவப்பட்டுள்ளது, ஆனால் நீங்கள் பயன்பாட்டு குறியீட்டை உருவாக்கி நிறுவ வேண்டும்.
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `projectName` | string | "retail" | அனைத்து வள பெயர்களுக்கும் முன்னொட்டு |
+| `location` | string | Resource group location | முதன்மையான பதிவேற்ற பிராந்தியம் |
+| `secondaryLocation` | string | "westus2" | பல-பிராந்திய பதிவேற்றத்திற்கான இரண்டாம் பிராந்தியம் |
+| `tertiaryLocation` | string | "francecentral" | எம்பெடிங் மாதிரிக்கான பிராந்தியம் |
+| `environmentName` | string | "dev" | சுற்றுச்சூழல்( dev/staging/prod ) குறிக்கிறது |
+| `deploymentMode` | string | "standard" | பதிவேற்ற கட்டமைப்பு (minimal/standard/premium) |
+| `enableMultiRegion` | bool | true | பல-பிராந்திய பதிவேற்றத்தை செயல்படுத்தவும் |
+| `enableMonitoring` | bool | true | Application Insights மற்றும் பதிவு செயலாக்கத்தை செயல்படுத்தவும் |
+| `enableSecurity` | bool | true | Key Vault மற்றும் அதிகபட்ச பாதுகாப்பை செயல்படுத்தவும் |
 
-### கட்டம் 1: முகவர் பயன்பாடுகளை உருவாக்குதல் (உங்கள் பொறுப்பு)
+### அளவுருக்களை தனிப்பயன் செய்தல்
 
-ARM டெம்ப்ளேட் **காலியான Container Apps**-ஐ placeholder nginx படங்களுடன் உருவாக்குகிறது. நீங்கள் செய்ய வேண்டியது:
+மாற்ற எடுக்க `azuredeploy.parameters.json`:
 
-**தேவையான வளர்ச்சி:**
-1. **முகவர் செயல்பாடு** (30-40 மணி நேரம்)
-   - GPT-4o ஒருங்கிணைப்புடன் வாடிக்கையாளர் சேவை முகவர்
-   - GPT-4o-mini ஒருங்கிணைப்புடன் சரக்கு முகவர்
-   - முகவர் வழிமாற்று தார்மீகங்கள்
+```json
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "projectName": {
+      "value": "mycompany"
+    },
+    "environmentName": {
+      "value": "prod"
+    },
+    "deploymentMode": {
+      "value": "premium"
+    },
+    "location": {
+      "value": "eastus2"
+    }
+  }
+}
+```
 
-2. **Frontend வளர்ச்சி** (20-30 மணி நேரம்)
-   - உரையாடல் இடைமுக UI (React/Vue/Angular)
-   - கோப்பு பதிவேற்ற செயல்பாடு
-   - பதில்களை வடிவமைத்து காட்டுதல்
+## 🏗️ கட்டமைப்பு கண்ணோட்டம்
 
-3. **பின்புற சேவைகள்** (12-16 மணி நேரம்)
-   - FastAPI அல்லது Express router
-   - அங்கீகார மிடில்வேர்
-   - Telemetry ஒருங்கிணைப்பு
+```mermaid
+graph TD
+    Frontend[முன்ன் தரப்பு<br/>கொண்டெய்னர் செயலி] --> Router[ஏஜென்ட் ரவுட்டர்<br/>கொண்டெய்னர் செயலி] --> Agents[ஏஜென்கள்<br/>வாடிக்கையாளர் + கையிருப்பு]
+    Router --> Search[AI தேடல்<br/>வெக்டர் தரவுத்தளம்]
+    Router --> Models[Microsoft Foundry மாதிரிகள்<br/>பல மண்டலங்கள்]
+    Agents --> Storage[சேமிப்பு<br/>ஆவணங்கள்]
+    Search --> CosmosDB[Cosmos DB<br/>அரட்டை வரலாறு]
+    Models --> AppInsights[App Insights<br/>மேற்பார்வை]
+    Storage --> KeyVault[Key Vault<br/>ரகசியங்கள்]
+```
+## 📖 பதிவேற்ற ஸ்கிரிப்ட் பயன்பாடு
 
-**பாருங்கள்:** [Architecture Guide](../retail-scenario.md) விரிவான செயல்பாட்டு முறைமைகள் மற்றும் குறியீட்டு உதாரணங்களுக்கு
-
-### கட்டம் 2: AI தேடல் குறியீட்டை அமைத்தல் (15-30 நிமிடங்கள்)
-
-உங்கள் தரவுப் மாதிரிக்கு பொருந்தும் தேடல் குறியீட்டை உருவாக்கவும்:
+`deploy.sh` ஸ்கிரிப்ட் ஒரு இடைநிலை பதிவேற்ற அனுபவத்தை வழங்குகிறது:
 
 ```bash
-# தேடல் சேவை விவரங்களை பெறுங்கள்
+# உதவியை காட்டு
+./deploy.sh --help
+
+# அடிப்படை செயல்படுத்தல்
+./deploy.sh -g myResourceGroup
+
+# தனிப்பயன் அமைப்புகளுடன் மேம்பட்ட செயல்படுத்தல்
+./deploy.sh \
+  -g myProductionRG \
+  -p companyname \
+  -e prod \
+  -m premium \
+  -l eastus2
+
+# பல பிராந்தியங்கள் இல்லாமல் வளர்ச்சி செயல்படுத்தல்
+./deploy.sh \
+  -g myDevRG \
+  -e dev \
+  -m minimal \
+  --no-multi-region \
+  --no-security
+```
+
+### ஸ்கிரிப்ட் அம்சங்கள்
+
+- ✅ **முன்-தேவைகள் சோதனை** (Azure CLI, லாகின் நிலை, டெம்ப்ளேட் கோப்புகள்)
+- ✅ **வள குழும மேலாண்மை** (இல்லையெனில் உருவாக்குகிறது)
+- ✅ **டெம்ப்ளேட் சரிபார்ப்பு** பதிவேற்றத்திற்கு முன்
+- ✅ **முன்னேற்ற கண்காணிப்பு** வண்ணப்படுத்தப்பட்ட வெளியீட்டுடன்
+- ✅ **பதிவேற்ற வெளியீடுகள்** காட்சி
+- ✅ **பதிவேற்றத்திற்கு பிறகு வழிகாட்டுதல்**
+
+## 📊 பதிவேற்ற கண்காணிப்பு
+
+### பதிவேற்ற நிலையைச் சரிபார்க்கவும்
+
+```bash
+# நிறுவல்களை பட்டியலிடு
+az deployment group list --resource-group myResourceGroup --output table
+
+# நிறுவலின் விவரங்களைப் பெறு
+az deployment group show \
+  --resource-group myResourceGroup \
+  --name retail-deployment-YYYYMMDD-HHMMSS
+
+# நிறுவலின் முன்னேற்றத்தை பின்தொடரு
+az deployment group create \
+  --resource-group myResourceGroup \
+  --template-file azuredeploy.json \
+  --parameters azuredeploy.parameters.json \
+  --verbose
+```
+
+### பதிவேற்ற வெளியீடுகள்
+
+வெற்றிகரமாக பதிவேற்றப்பட்ட பிறகு, பின்வரும் வெளியீடுகள் கிடைக்கும்:
+
+- **முன் பகுதி URL**: வலை இடைமுகத்திற்கான பொது எண்ட்பாயிண்ட்
+- **ரூட்டர் URL**: ஏஜென்ட் ராட்டருக்கான API எண்ட்பாயிண்ட்
+- **OpenAI Endpoints**: முதன்மை மற்றும் இரண்டாம் OpenAI சேவை எண்ட்பாயிண்டுகள்
+- **Search Service**: Azure AI Search சேவை எண்ட்பாயிண்ட்
+- **Storage Account**: ஆவணங்களுக்கு பயன்படும் storage கணக்கின் பெயர்
+- **Key Vault**: Key Vault-இன் பெயர் (தெரிந்திருந்தால்)
+- **Application Insights**: கண்காணிப்பு சேவையின் பெயர் (தெரிந்திருந்தால்)
+
+## 🔧 பதிவேற்றத்திற்கு பிறகு: அடுத்த படிகள்
+> **📝 முக்கியம்:** அடிப்படை அமைப்பு அமல்படுத்தப்பட்டுள்ளது, ஆனால் நீங்கள் பயன்பாட்டு குறியீட்டை உருவாக்கி மற்றும் வெளியிட வேண்டியது அவசியம்.
+
+### கட்டம் 1: ஏஜென்ட் பயன்பாடுகள் உருவாக்குதல் (உங்கள் பொறுப்பு)
+
+The ARM template creates **empty Container Apps** with placeholder nginx images. You must:
+
+**தேவையான மேம்பாடு:**
+1. **Agent Implementation** (30-40 மணி நேரம்)
+   - gpt-4.1 ஒருங்கிணைப்புடன் வாடிக்கையாளர் சேவை ஏஜென்ட்
+   - gpt-4.1-mini ஒருங்கிணைப்புடன் இன்வெண்டரி ஏஜென்ட்
+   - ஏஜென்ட் வழிமாற்று லாஜிக்
+
+2. **Frontend Development** (20-30 மணி நேரம்)
+   - Chat இடைமுக UI (React/Vue/Angular)
+   - கோப்பு பதிவேற்ற செயல்பாடு
+   - பதில் காட்சிப்படுத்தல் மற்றும் வடிவமைத்தல்
+
+3. **Backend Services** (12-16 மணி நேரம்)
+   - FastAPI அல்லது Express router
+   - அங்கீகார மிடில்வேர்
+   - டெலிமெட்ரி ஒருங்கிணைப்பு
+
+See: [கட்டமைப்பு வழிகாட்டி](../retail-scenario.md) for detailed implementation patterns and code examples
+
+### Phase 2: Configure AI Search Index (15-30 minutes)
+
+Create a search index matching your data model:
+
+```bash
+# தேடல் சேவை விவரங்களைப் பெறவும்
 SEARCH_NAME=$(az search service list \
   --resource-group myResourceGroup \
   --query "[0].name" -o tsv)
@@ -388,7 +499,7 @@ SEARCH_KEY=$(az search admin-key show \
   --resource-group myResourceGroup \
   --query "primaryKey" -o tsv)
 
-# உங்கள் திட்டவமைப்புடன் குறியீட்டை உருவாக்குங்கள் (உதாரணம்)
+# உங்கள் ஸ்கீமாவுடன் இன்டெக்ஸை உருவாக்கவும் (உதாரணம்)
 curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: ${SEARCH_KEY}" \
@@ -410,15 +521,15 @@ curl -X POST "https://${SEARCH_NAME}.search.windows.net/indexes?api-version=2023
 ```
 
 **வளங்கள்:**
-- [AI Search Index Schema Design](https://learn.microsoft.com/azure/search/search-what-is-an-index)
-- [Vector Search Configuration](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
+- [AI தேடல் இன்டெக்ஸ் ஸ்கீமா வடிவமைப்பு](https://learn.microsoft.com/azure/search/search-what-is-an-index)
+- [வெக்டர் தேடல் கட்டமைப்பு](https://learn.microsoft.com/azure/search/vector-search-how-to-create-index)
 
-### கட்டம் 3: உங்கள் தரவுகளை பதிவேற்றுதல் (நேரம் மாறுபடும்)
+### Phase 3: Upload Your Data (Time varies)
 
-தயாரிப்பு தரவுகள் மற்றும் ஆவணங்கள் கிடைத்தவுடன்:
+Once you have product data and documents:
 
 ```bash
-# சேமிப்பு கணக்கு விவரங்களை பெறுங்கள்
+# சேமிப்பு கணக்கு விவரங்களைப் பெறவும்
 STORAGE_NAME=$(az storage account list \
   --resource-group myResourceGroup \
   --query "[0].name" -o tsv)
@@ -435,7 +546,7 @@ az storage blob upload-batch \
   --account-name $STORAGE_NAME \
   --account-key $STORAGE_KEY
 
-# உதாரணம்: ஒற்றை கோப்பை பதிவேற்றவும்
+# உதாரணம்: ஒரு கோப்பை பதிவேற்றவும்
 az storage blob upload \
   --container-name documents \
   --name "product-manual.pdf" \
@@ -444,27 +555,27 @@ az storage blob upload \
   --account-key $STORAGE_KEY
 ```
 
-### கட்டம் 4: உங்கள் பயன்பாடுகளை உருவாக்கி நிறுவுதல் (8-12 மணி நேரம்)
+### Phase 4: Build and Deploy Your Applications (8-12 hours)
 
-முகவர் குறியீட்டை உருவாக்கியவுடன்:
+Once you've developed your agent code:
 
 ```bash
-# 1. Azure Container Registry ஐ உருவாக்கவும் (தேவையானால்)
+# 1. Azure Container Registry உருவாக்கவும் (தேவைப்பட்டால்)
 az acr create \
   --name myregistry \
   --resource-group myResourceGroup \
   --sku Basic
 
-# 2. ஏஜென்ட் ரவுட்டர் படத்தை உருவாக்கி புஷ் செய்யவும்
+# 2. ஏஜெண்ட் ரூட்டர் படிமத்தை உருவாக்கி மற்றும் புஷ் செய்யவும்
 docker build -t myregistry.azurecr.io/agent-router:v1 /path/to/your/router/code
 az acr login --name myregistry
 docker push myregistry.azurecr.io/agent-router:v1
 
-# 3. முன்புற படத்தை உருவாக்கி புஷ் செய்யவும்
+# 3. ஃப்ரன்டெண்ட் படிமத்தை உருவாக்கி மற்றும் புஷ் செய்யவும்
 docker build -t myregistry.azurecr.io/frontend:v1 /path/to/your/frontend/code
 docker push myregistry.azurecr.io/frontend:v1
 
-# 4. உங்கள் படங்களுடன் Container Apps ஐ புதுப்பிக்கவும்
+# 4. உங்கள் படிமங்களுடன் Container Apps-ஐ புதுப்பிக்கவும்
 az containerapp update \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -475,7 +586,7 @@ az containerapp update \
   --resource-group myResourceGroup \
   --image myregistry.azurecr.io/frontend:v1
 
-# 5. சூழல் மாறிகளை அமைக்கவும்
+# 5. சுற்றுச்சூழல் மாறிலிகளை கட்டமைக்கவும்
 az containerapp update \
   --name retail-router \
   --resource-group myResourceGroup \
@@ -486,16 +597,16 @@ az containerapp update \
     SEARCH_KEY=secretref:search-key
 ```
 
-### கட்டம் 5: உங்கள் பயன்பாட்டை சோதித்தல் (2-4 மணி நேரம்)
+### Phase 5: Test Your Application (2-4 hours)
 
 ```bash
-# உங்கள் பயன்பாட்டு URL ஐ பெறுங்கள்
+# உங்கள் பயன்பாட்டின் URL ஐப் பெறவும்
 ROUTER_URL=$(az containerapp show \
   --name retail-router \
   --resource-group myResourceGroup \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# முகவர் இறுதிப்புள்ளியை சோதிக்கவும் (உங்கள் குறியீடு பிரயோகிக்கப்பட்ட பிறகு)
+# ஏஜெண்ட் எண்ட்பாயிண்டை சோதிக்கவும் (உங்கள் குறியீடு வெளியிடப்பட்டபோது)
 curl -X POST "https://${ROUTER_URL}/chat" \
   -H "Content-Type: application/json" \
   -d '{
@@ -503,57 +614,57 @@ curl -X POST "https://${ROUTER_URL}/chat" \
     "agent": "customer"
   }'
 
-# பயன்பாட்டு பதிவுகளை சரிபார்க்கவும்
+# பயன்பாட்டின் பதிவுகளை சரிபார்க்கவும்
 az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
   --follow
 ```
 
-### செயல்பாட்டு வளங்கள்
+### Implementation Resources
 
-**கட்டமைப்பு மற்றும் வடிவமைப்பு:**
-- 📖 [Complete Architecture Guide](../retail-scenario.md) - விரிவான செயல்பாட்டு முறைமைகள்
+**Architecture & Design:**
+- 📖 [Complete Architecture Guide](../retail-scenario.md) - விரிவான அமல்படுத்தல் மாதிரிகள் மற்றும் குறியீட்டு உதாரணங்கள்
 - 📖 [Multi-Agent Design Patterns](https://learn.microsoft.com/azure/architecture/ai-ml/guide/multi-agent-systems)
 
-**குறியீட்டு உதாரணங்கள்:**
-- 🔗 [Azure OpenAI Chat Sample](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG முறை
-- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - முகவர் கட்டமைப்பு (C#)
-- 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - முகவர் ஒருங்கிணைப்பு (Python)
-- 🔗 [AutoGen](https://github.com/microsoft/autogen) - பல முகவர் உரையாடல்கள்
+**Code Examples:**
+- 🔗 [Microsoft Foundry Models Chat Sample](https://github.com/Azure-Samples/azure-search-openai-demo) - RAG மாதிரி
+- 🔗 [Semantic Kernel](https://github.com/microsoft/semantic-kernel) - ஏஜென்ட் கட்டமைப்பு (C#)
+- 🔗 [LangChain Azure](https://github.com/langchain-ai/langchain) - ஏஜென்ட் ஒருங்கட்டமைப்பு (Python)
+- 🔗 [AutoGen](https://github.com/microsoft/autogen) - பல-ஏஜென்ட் உரையாடல்கள்
 
-**மொத்த முயற்சியின் மதிப்பீடு:**
-- உள்கட்டமைப்பு நிறுவல்: 15-25 நிமிடங்கள் (✅ முடிந்தது)
-- பயன்பாட்டு வளர்ச்சி: 80-120 மணி நேரம் (🔨 உங்கள் வேலை)
-- சோதனை மற்றும் மேம்பாடு: 15-25 மணி நேரம் (🔨 உங்கள் வேலை)
+**Estimated Total Effort:**
+- Infrastructure deployment: 15-25 minutes (✅ Complete)
+- Application development: 80-120 மணி நேரம் (🔨 உங்கள் பணி)
+- Testing and optimization: 15-25 மணி நேரம் (🔨 உங்கள் பணி)
 
-## 🛠️ சிக்கல்களை சரிசெய்தல்
+## 🛠️ Troubleshooting
 
-### பொதுவான பிரச்சினைகள்
+### Common Issues
 
-#### 1. Azure OpenAI Quota Exceeded
+#### 1. Microsoft Foundry Models Quota Exceeded
 
 ```bash
-# தற்போதைய ஒதுக்கீட்டு பயன்பாட்டை சரிபார்க்கவும்
+# தற்போதைய குவோட்டா பயன்பாட்டை சரிபார்க்கவும்
 az cognitiveservices usage list --location eastus2
 
-# ஒதுக்கீட்டு அதிகரிப்பை கோரவும்
+# குவோட்டாவை அதிகரிக்க கோரவும்
 az support tickets create \
   --ticket-name "OpenAI-Quota-Increase" \
   --severity "minimal" \
-  --description "Request quota increase for Azure OpenAI in region X"
+  --description "Request quota increase for Microsoft Foundry Models in region X"
 ```
 
 #### 2. Container Apps Deployment Failed
 
 ```bash
-# கண்டெய்னர் பயன்பாட்டு பதிவுகளை சரிபார்க்கவும்
+# கண்டெய்னர் செயலியின் பதிவுகளை சரிபார்க்கவும்
 az containerapp logs show \
   --name retail-router \
   --resource-group myResourceGroup \
   --follow
 
-# கண்டெய்னர் பயன்பாட்டை மீண்டும் தொடங்கவும்
+# கண்டெய்னர் செயலியை மீண்டும் துவக்கவும்
 az containerapp revision restart \
   --name retail-router \
   --resource-group myResourceGroup
@@ -562,63 +673,63 @@ az containerapp revision restart \
 #### 3. Search Service Initialization
 
 ```bash
-# தேடல் சேவை நிலையை சரிபார்க்கவும்
+# தேடல் சேவையின் நிலையை சரிபார்க்கவும்
 az search service show \
   --name <search-service-name> \
   --resource-group myResourceGroup
 
-# தேடல் சேவை இணைப்பை சோதிக்கவும்
+# தேடல் சேவையின் இணைப்பை சோதிக்கவும்
 curl -X GET "https://<search-service-name>.search.windows.net/indexes?api-version=2023-11-01" \
   -H "api-key: <search-admin-key>"
 ```
 
-### நிறுவல் சரிபார்ப்பு
+### Deployment Validation
 
 ```bash
-# அனைத்து வளங்களும் உருவாக்கப்பட்டுள்ளன என்பதை சரிபார்க்கவும்
+# எல்லா வளங்களும் உருவாக்கப்பட்டுள்ளதா என்பதைச் சரிபார்க்கவும்
 az resource list \
   --resource-group myResourceGroup \
   --output table
 
-# வளத்தின் ஆரோக்கியத்தை சரிபார்க்கவும்
+# வளங்களின் நலனைக் சோதிக்கவும்
 az resource list \
   --resource-group myResourceGroup \
   --query "[?provisioningState!='Succeeded'].{Name:name, Status:provisioningState, Type:type}" \
   --output table
 ```
 
-## 🔐 பாதுகாப்பு கருத்துக்கள்
+## 🔐 Security Considerations
 
-### முக்கிய மேலாண்மை
-- அனைத்து ரகசியங்களும் Azure Key Vault-ல் சேமிக்கப்படும் (இயக்கப்பட்டால்)
-- Container apps நிர்வகிக்கப்பட்ட அடையாளத்தை அங்கீகரிப்புக்கு பயன்படுத்துகிறது
-- சேமிப்பு கணக்குகள் பாதுகாப்பான இயல்புகளை கொண்டுள்ளது (HTTPS மட்டும், பொது blob அணுகல் இல்லை)
+### Key Management
+- எல்லா ரகசியங்களும் Azure Key Vault-இல் சேமிக்கப்படுகின்றன (செயலில் இருந்தால்)
+- Container apps அங்கீகாரத்திற்காக managed identity பயன்படுத்துகின்றன
+- சேமிப்பு கணக்குகளுக்கு பாதுகாப்பான இயல்புகள் உள்ளன (HTTPS மட்டும், பொது blob அணுகல் இல்லை)
 
-### நெட்வொர்க் பாதுகாப்பு
-- Container apps உள் நெட்வொர்க்கை wherever சாத்தியமானது பயன்படுத்துகிறது
-- தேடல் சேவை தனிப்பட்ட முடுக்கம் விருப்பத்துடன் அமைக்கப்பட்டுள்ளது
-- Cosmos DB குறைந்த தேவையான அனுமதிகளுடன் அமைக்கப்பட்டுள்ளது
+### Network Security
+- Container apps சாத்தியமான இடங்களில் உள்ளக நெட்வொர்க்கை பயன்படுத்துகின்றன
+- தேடல் சேவை private endpoints விருப்பத்துடன் கட்டமைக்கப்பட்டுள்ளது
+- Cosmos DB குறைந்தபட்ச அவசியமான அனுமதிகளுடன் கட்டமைக்கப்பட்டுள்ளது
 
-### RBAC அமைப்பு
+### RBAC Configuration
 ```bash
-# மேலாண்மை அடையாளத்திற்கான தேவையான பங்குகளை ஒதுக்கவும்
+# கையாளப்படும் அடையாளத்திற்கான தேவையான பங்குகளை ஒதுக்கவும்
 az role assignment create \
   --assignee <container-app-managed-identity> \
   --role "Cognitive Services OpenAI User" \
   --scope <openai-resource-id>
 ```
 
-## 💰 செலவு மேம்பாடு
+## 💰 Cost Optimization
 
-### செலவு மதிப்பீடுகள் (மாதாந்திரம், USD)
+### Cost Estimates (Monthly, USD)
 
-| முறை | OpenAI | Container Apps | Search | Storage | மொத்த மதிப்பீடு |
-|------|--------|----------------|--------|---------|------------------|
-| குறைந்தது | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
-| நிலையான | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
-| பிரீமியம் | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
+| Mode | OpenAI | Container Apps | Search | Storage | Total Est. |
+|------|--------|----------------|--------|---------|------------|
+| Minimal | $50-200 | $20-50 | $25-100 | $5-20 | $100-370 |
+| Standard | $200-800 | $100-300 | $100-300 | $20-50 | $420-1450 |
+| Premium | $500-2000 | $300-800 | $300-600 | $50-100 | $1150-3500 |
 
-### செலவு கண்காணிப்பு
+### Cost Monitoring
 
 ```bash
 # பட்ஜெட் எச்சரிக்கைகளை அமைக்கவும்
@@ -631,14 +742,14 @@ az consumption budget create \
   --end-date 2024-12-31
 ```
 
-## 🔄 புதுப்பிப்புகள் மற்றும் பராமரிப்பு
+## 🔄 Updates and Maintenance
 
-### டெம்ப்ளேட் புதுப்பிப்புகள்
-- ARM டெம்ப்ளேட் கோப்புகளை பதிப்பு கட்டுப்பாட்டில் வைத்திருங்கள்
-- முதலில் மேம்பாட்டு சூழலில் மாற்றங்களை சோதிக்கவும்
-- புதுப்பிப்புகளுக்கு incremental deployment mode பயன்படுத்தவும்
+### Template Updates
+- ARM template கோப்புகளை பதிப்பு கட்டுப்பாட்டில் வைக்கவும்
+- மாற்றங்களை முதலில் development சூழலில் சோதிக்கவும்
+- புதுப்பிப்புகளுக்கான incremental deployment முறை பயன்படுத்தவும்
 
-### வள புதுப்பிப்புகள்
+### Resource Updates
 ```bash
 # புதிய அளவுருக்களுடன் புதுப்பிக்கவும்
 az deployment group create \
@@ -648,26 +759,26 @@ az deployment group create \
   --mode Incremental
 ```
 
-### காப்புப்பிரதி மற்றும் மீட்பு
-- Cosmos DB தானியங்கி காப்புப்பிரதி இயக்கப்பட்டுள்ளது
-- Key Vault soft delete இயக்கப்பட்டுள்ளது
-- Container app திருத்தங்கள் திரும்ப பெறுவதற்கு பராமரிக்கப்படுகின்றன
+### Backup and Recovery
+- Cosmos DB தானாக பின்நகல் இயலுமைப்படுத்தப்பட்டுள்ளது
+- Key Vault soft delete இயலுமைப்படுத்தப்பட்டுள்ளது
+- Container app பதிப்புகள் ரோல்பேக்குக்காக பராமரிக்கப்படுகின்றன
 
-## 📞 ஆதரவு
+## 📞 Support
 
-- **டெம்ப்ளேட் பிரச்சினைகள்**: [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
-- **Azure ஆதரவு**: [Azure Support Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
-- **சமூகங்கள்**: [Azure AI Discord](https://discord.gg/microsoft-azure)
+- **Template Issues**: [GitHub Issues](https://github.com/microsoft/azd-for-beginners/issues)
+- **Azure Support**: [Azure Support Portal](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade)
+- **Community**: [Azure AI Discord](https://discord.gg/microsoft-azure)
 
 ---
 
-**⚡ உங்கள் பல முகவர் தீர்வை நிறுவ தயாராக உள்ளீர்களா?**
+**⚡ உங்கள் பல-ஏஜென்ட் தீர்வை வெளியிடத் தயாரா?**
 
-தொடங்குங்கள்: `./deploy.sh -g myResourceGroup`
+தொடங்கவும்: `./deploy.sh -g myResourceGroup`
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**அறிவிப்பு**:  
-இந்த ஆவணம் [Co-op Translator](https://github.com/Azure/co-op-translator) என்ற AI மொழிபெயர்ப்பு சேவையை பயன்படுத்தி மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயற்சிக்கிறோம், ஆனால் தானியங்கி மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறுகள் இருக்கக்கூடும் என்பதை கவனத்தில் கொள்ளவும். அதன் சொந்த மொழியில் உள்ள மூல ஆவணம் அதிகாரப்பூர்வ ஆதாரமாக கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பு பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பைப் பயன்படுத்துவதால் ஏற்படும் எந்த தவறான புரிதல்களுக்கும் அல்லது தவறான விளக்கங்களுக்கும் நாங்கள் பொறுப்பல்ல.
+நிராகரிப்பு அறிக்கை:
+இக்கோப்பு AI மொழிபெயர்ப்பு சேவையான [Co-op Translator](https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டுள்ளது. நாம் துல்லியத்திற்காக முயற்சித்தாலும், தானாக உருவாக்கப்பட்ட மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறான பொருள் விளைவுகள் இருக்கக்கூடும் என்பதை தயவுசெய்து கருத்தில் கொள்ளுங்கள். மூல ஆவணம் அதன் சொந்த மொழியிலேயே அதிகாரப் பெறும் ஆதாரமாகக் கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு தொழில்முறை மனித மொழிபெயர்ப்பாளர் மூலம் மொழிபெயர்ப்பு செய்வது பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பைப் பயன்படுத்துவதனால் ஏற்படும் எந்த தவறான புரிதல்களுக்கோ அல்லது பொருள் தவறுகளுக்கோ நாங்கள் பொறுப்பேற்கமாட்டோம்.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

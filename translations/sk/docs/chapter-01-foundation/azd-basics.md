@@ -1,45 +1,60 @@
-# AZD Základy - Porozumenie Azure Developer CLI
+# AZD Základy - Pochopenie Azure Developer CLI
 
-# AZD Základy - Hlavné koncepty a základy
+# AZD Základy - Kľúčové koncepty a základy
 
-**Chapter Navigation:**
+**Navigácia kapitoly:**
 - **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
-- **📖 Aktuálna kapitola**: Kapitola 1 - Základy a rýchly štart
+- **📖 Aktuálna kapitola**: Kapitola 1 - Základy & Rýchly štart
 - **⬅️ Predchádzajúca**: [Prehľad kurzu](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Ďalej**: [Inštalácia a nastavenie](installation.md)
+- **➡️ Ďalšia**: [Inštalácia a nastavenie](installation.md)
 - **🚀 Ďalšia kapitola**: [Kapitola 2: Vývoj orientovaný na AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Úvod
 
-Táto lekcia vás oboznámi s Azure Developer CLI (azd), výkonným nástrojom príkazového riadku, ktorý urýchľuje vašu cestu od lokálneho vývoja po nasadenie v Azure. Naučíte sa základné koncepty, hlavné funkcie a pochopíte, ako azd zjednodušuje nasadzovanie cloud-native aplikácií.
+Táto lekcia vás zoznámi s Azure Developer CLI (azd), výkonným nástrojom príkazového riadku, ktorý zrýchľuje váš prechod od lokálneho vývoja k nasadeniu v Azure. Naučíte sa základné koncepty, hlavné funkcie a pochopíte, ako azd zjednodušuje nasadenie cloud-native aplikácií.
 
 ## Ciele učenia
 
 Na konci tejto lekcie budete:
-- Rozumieť tomu, čo je Azure Developer CLI a jeho hlavný účel
+- Rozumieť, čo je Azure Developer CLI a jeho primárnemu účelu
 - Naučiť sa základné koncepty šablón, prostredí a služieb
-- Preskúmať kľúčové funkcie vrátane vývoja riadeného šablónami a Infrastruktúry ako kódu
-- Pochopiť štruktúru projektu azd a pracovný tok
-- Byť pripravení nainštalovať a nakonfigurovať azd pre svoje vývojové prostredie
+- Preskúmať kľúčové funkcie vrátane vývoja založeného na šablónach a Infrastruktúry ako kódu
+- Pochopiť štruktúru projektu azd a pracovný postup
+- Byť pripravení nainštalovať a nakonfigurovať azd pre vaše vývojové prostredie
 
-## Výstupy učenia
+## Výsledky učenia
 
 Po dokončení tejto lekcie budete schopní:
-- Vysvetliť úlohu azd v moderných cloudových pracovných tokoch
+- Vysvetliť rolu azd v moderných workflowoch cloudového vývoja
 - Identifikovať komponenty štruktúry projektu azd
-- Opísať, ako spolupracujú šablóny, prostredia a služby
+- Opísať, ako šablóny, prostredia a služby spolupracujú
 - Pochopiť výhody Infrastruktúry ako kódu s azd
-- Rozpoznať rôzne azd príkazy a ich účely
+- Rozpoznať rôzne príkazy azd a ich účel
 
 ## Čo je Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) je nástroj príkazového riadku navrhnutý na urýchlenie vašej cesty od lokálneho vývoja po nasadenie v Azure. Zjednodušuje proces zostavovania, nasadzovania a správy cloud-native aplikácií v Azure.
+Azure Developer CLI (azd) je nástroj príkazového riadku navrhnutý na zrýchlenie vášho prechodu od lokálneho vývoja k nasadeniu v Azure. Zjednodušuje proces zostavovania, nasadzovania a správy cloud-native aplikácií v Azure.
+
+### Čo môžete nasadiť pomocou azd?
+
+azd podporuje širokú škálu pracovných záťaží — a zoznam sa neustále rozrastá. Dnes môžete pomocou azd nasadiť:
+
+| Typ pracovnej záťaže | Príklady | Rovnaký pracovný postup? |
+|---------------|----------|----------------|
+| **Tradičné aplikácie** | Webové aplikácie, REST API, statické stránky | ✅ `azd up` |
+| **Služby a mikroslužby** | Container Apps, Function Apps, backendy s viacerými službami | ✅ `azd up` |
+| **Aplikácie s podporou AI** | Chat aplikácie s modelmi Microsoft Foundry, RAG riešenia s AI Search | ✅ `azd up` |
+| **Inteligentní agenti** | Agenti hostovaní v Foundry, viacagentová orchestrácia | ✅ `azd up` |
+
+Kľúčovým poznatkom je, že **životný cyklus azd zostáva rovnaký bez ohľadu na to, čo nasadzujete**. Inicializujete projekt, pripravíte infraštruktúru, nasadíte svoj kód, sledujete aplikáciu a upracete — či už ide o jednoduchú webovú stránku alebo sofistikovaného AI agenta.
+
+Táto kontinuita je zámerná. azd považuje AI schopnosti za ďalší druh služby, ktorú vaša aplikácia môže využívať, nie za niečo zásadne odlišné. Chat endpoint napájaný modelmi Microsoft Foundry je z pohľadu azd len ďalšia služba, ktorú treba nakonfigurovať a nasadiť.
 
 ### 🎯 Prečo používať AZD? Porovnanie z reálneho sveta
 
 Porovnajme nasadenie jednoduchej webovej aplikácie s databázou:
 
-#### ❌ BEZ AZD: manuálne nasadenie v Azure (30+ minút)
+#### ❌ BEZ AZD: Manuálne nasadenie do Azure (30+ minút)
 
 ```bash
 # Krok 1: Vytvorte skupinu prostriedkov
@@ -99,7 +114,7 @@ az monitor app-insights component create \
   --location eastus \
   --resource-group myapp-rg
 
-# Krok 11: Prepojte Application Insights s webovou aplikáciou
+# Krok 11: Pripojte App Insights k webovej aplikácii
 INSTRUMENTATION_KEY=$(az monitor app-insights component show \
   --app myapp-insights \
   --resource-group myapp-rg \
@@ -114,29 +129,29 @@ az webapp config appsettings set \
 npm install
 npm run build
 
-# Krok 13: Vytvorte balík na nasadenie
+# Krok 13: Vytvorte balík nasadenia
 zip -r app.zip . -x "*.git*" "node_modules/*"
 
-# Krok 14: Nasadiť aplikáciu
+# Krok 14: Nasadenie aplikácie
 az webapp deployment source config-zip \
   --resource-group myapp-rg \
   --name myapp-web-unique123 \
   --src app.zip
 
-# Krok 15: Počkajte a modlite sa, aby to fungovalo 🙏
-# (Žiadna automatizovaná validácia, je potrebné manuálne testovanie)
+# Krok 15: Počkajte a modlite sa, nech to funguje 🙏
+# (Žiadna automatizovaná validácia, vyžaduje sa manuálne testovanie)
 ```
 
 **Problémy:**
-- ❌ 15+ príkazov, ktoré si treba zapamätať a vykonať v správnom poradí
+- ❌ 15+ príkazov na zapamätanie a vykonanie v správnom poradí
 - ❌ 30-45 minút manuálnej práce
-- ❌ Ľahko sa urobia chyby (preklepy, nesprávne parametre)
+- ❌ Ľahko sa robiť chyby (preklepy, nesprávne parametre)
 - ❌ Pripojovacie reťazce vystavené v histórii terminálu
-- ❌ Žiadne automatické vrátenie zmien pri zlyhaní
-- ❌ Ťažké zopakovať pre členov tímu
-- ❌ Rôzne zakaždým (nereprodukovateľné)
+- ❌ Žiadne automatické vrátenie zmien pri chybe
+- ❌ Ťažké replikovať pre členov tímu
+- ❌ Každé nasadenie je iné (nereprodukovateľné)
 
-#### ✅ S AZD: automatizované nasadenie (5 príkazov, 10-15 minút)
+#### ✅ S AZD: Automatizované nasadenie (5 príkazov, 10-15 minút)
 
 ```bash
 # Krok 1: Inicializovať zo šablóny
@@ -159,56 +174,56 @@ azd up
 
 **Výhody:**
 - ✅ **5 príkazov** vs. 15+ manuálnych krokov
-- ✅ **10-15 minút** celkom (väčšinou čakanie na Azure)
-- ✅ **Žiadne chyby** - automatizované a otestované
+- ✅ **10-15 minút** celkový čas (väčšinou čakanie na Azure)
+- ✅ **Žiadne chyby** - automatizované a testované
 - ✅ **Tajomstvá bezpečne spravované** cez Key Vault
-- ✅ **Automatické vrátenie zmien** pri zlyhaniach
-- ✅ **Úplne reprodukovateľné** - rovnaký výsledok zakaždým
-- ✅ **Pripravené pre tím** - ktokoľvek môže nasadiť rovnakými príkazmi
-- ✅ **Infrastruktúra ako kód** - šablóny Bicep pod verziovacou kontrolou
-- ✅ **Vstavané monitorovanie** - Application Insights nakonfigurované automaticky
+- ✅ **Automatické vrátenie zmien** pri zlyhaní
+- ✅ **Úplná reprodukovateľnosť** - rovnaký výsledok zakaždým
+- ✅ **Pripravené pre tím** - ktokoľvek môže nasadiť s rovnakými príkazmi
+- ✅ **Infrastruktúra ako kód** - verziované Bicep šablóny
+- ✅ **Vstavané sledovanie** - Application Insights nakonfigurovaný automaticky
 
 ### 📊 Zníženie času a chýb
 
-| Metric | Manual Deployment | AZD Deployment | Improvement |
+| Metrika | Manuálne nasadenie | Nasadenie pomocou AZD | Zlepšenie |
 |:-------|:------------------|:---------------|:------------|
-| **Commands** | 15+ | 5 | 67% fewer |
-| **Time** | 30-45 min | 10-15 min | 60% faster |
-| **Error Rate** | ~40% | <5% | 88% reduction |
-| **Consistency** | Low (manual) | 100% (automated) | Perfect |
-| **Team Onboarding** | 2-4 hours | 30 minutes | 75% faster |
-| **Rollback Time** | 30+ min (manual) | 2 min (automated) | 93% faster |
+| **Príkazy** | 15+ | 5 | 67% menej |
+| **Čas** | 30-45 min | 10-15 min | 60% rýchlejšie |
+| **Miera chýb** | ~40% | <5% | 88% zníženie |
+| **Konzistencia** | Nízka (manuálne) | 100% (automatizované) | Dokonalá |
+| **Zavádzanie tímu** | 2-4 hodiny | 30 minút | 75% rýchlejšie |
+| **Čas vrátenia zmien** | 30+ min (manuálne) | 2 min (automatizované) | 93% rýchlejšie |
 
-## Kľúčové koncepty
+## Základné koncepty
 
 ### Šablóny
 Šablóny sú základom azd. Obsahujú:
 - **Kód aplikácie** - Váš zdrojový kód a závislosti
-- **Definície infraštruktúry** - Azure zdroje definované v Bicep alebo Terraform
+- **Definície infraštruktúry** - Azure prostriedky definované v Bicep alebo Terraform
 - **Konfiguračné súbory** - Nastavenia a premenné prostredia
-- **Skripty nasadenia** - Automatizované pracovné postupy nasadenia
+- **Nasadzovacie skripty** - Automatizované workflowy nasadenia
 
 ### Prostredia
 Prostredia predstavujú rôzne ciele nasadenia:
-- **Development** - Pre testovanie a vývoj
+- **Vývoj** - Pre testovanie a vývoj
 - **Staging** - Predprodukčné prostredie
-- **Production** - Produkčné prostredie
+- **Produkcia** - Živé produkčné prostredie
 
-Každé prostredie si udržiava svoje vlastné:
-- Azure resource group
+Každé prostredie si udržiava svoje:
+- Skupinu prostriedkov Azure
 - Konfiguračné nastavenia
 - Stav nasadenia
 
 ### Služby
-Služby sú stavebnými kameňmi vašej aplikácie:
+Služby sú stavebné kamene vašej aplikácie:
 - **Frontend** - Webové aplikácie, SPA
-- **Backend** - API, mikroservisy
-- **Database** - Riešenia na ukladanie dát
-- **Storage** - Ukladanie súborov a blobov
+- **Backend** - API, mikroslužby
+- **Databáza** - Riešenia ukladania dát
+- **Úložisko** - Súborové a blob úložisko
 
 ## Kľúčové funkcie
 
-### 1. Vývoj riadený šablónami
+### 1. Vývoj založený na šablónach
 ```bash
 # Prehliadať dostupné šablóny
 azd template list
@@ -218,52 +233,52 @@ azd init --template <template-name>
 ```
 
 ### 2. Infrastruktúra ako kód
-- **Bicep** - Doménovo špecifický jazyk Azure
-- **Terraform** - Nástroj infraštruktúry multi-cloud
-- **ARM Templates** - Šablóny Azure Resource Manager
+- **Bicep** - doménovo špecifický jazyk Azure
+- **Terraform** - nástroj pre infraštruktúru naprieč cloudmi
+- **ARM Templates** - Azure Resource Manager šablóny
 
 ### 3. Integrované pracovné postupy
 ```bash
 # Kompletný pracovný postup nasadenia
-azd up            # Provision + Deploy — toto je automatické pri počiatočnom nastavení
+azd up            # Zabezpečenie zdrojov a nasadenie — bezobslužné pri prvom nastavení
 
 # 🧪 NOVÉ: Náhľad zmien infraštruktúry pred nasadením (BEZPEČNÉ)
 azd provision --preview    # Simulovať nasadenie infraštruktúry bez vykonania zmien
 
-azd provision     # Vytvorte zdroje Azure; ak aktualizujete infraštruktúru, použite toto
-azd deploy        # Nasadiť aplikačný kód alebo ho znovu nasadiť po aktualizácii
+azd provision     # Vytvoriť zdroje Azure — ak aktualizujete infraštruktúru, použite toto
+azd deploy        # Nasadiť kód aplikácie alebo znovu nasadiť kód aplikácie po aktualizácii
 azd down          # Vyčistiť zdroje
 ```
 
 #### 🛡️ Bezpečné plánovanie infraštruktúry s náhľadom
-Príkaz `azd provision --preview` je prelomový pre bezpečné nasadenia:
-- **Analýza suchého behu** - Ukazuje, čo bude vytvorené, zmenené alebo odstránené
-- **Žiadne riziko** - Do vášho Azure prostredia sa nevykonajú žiadne skutočné zmeny
+Príkaz `azd provision --preview` je zásadná pomôcka pre bezpečné nasadenia:
+- **Analýza suchého behu** - Ukazuje, čo bude vytvorené, zmenené alebo zmazané
+- **Žiadne riziko** - Skutočné zmeny nie sú vykonané vo vašom Azure prostredí
 - **Spolupráca tímu** - Zdieľajte výsledky náhľadu pred nasadením
-- **Odhad nákladov** - Pochopte náklady na zdroje pred záväzkom
+- **Odhad nákladov** - Zistite náklady prostriedkov pred záväzkom
 
 ```bash
-# Príklad náhľadového pracovného postupu
+# Ukážkový pracovný postup pre náhľad
 azd provision --preview           # Pozrite si, čo sa zmení
-# Skontrolujte výstup, prediskutujte ho s tímom
-azd provision                     # Aplikujte zmeny s istotou
+# Skontrolujte výstup, prediskutujte to s tímom
+azd provision                     # Použite zmeny s istotou
 ```
 
-### 📊 Vizualizácia: AZD vývojový pracovný tok
+### 📊 Vizualizácia: Pracovný postup vývoja v AZD
 
 ```mermaid
 graph LR
     A[azd init] -->|Inicializovať projekt| B[azd auth login]
-    B -->|Autentifikovať| C[azd env new]
+    B -->|Overiť| C[azd env new]
     C -->|Vytvoriť prostredie| D{Prvé nasadenie?}
     D -->|Áno| E[azd up]
     D -->|Nie| F[azd provision --preview]
     F -->|Skontrolovať zmeny| G[azd provision]
-    E -->|Zabezpečí a nasadí| H[Zdroje spustené]
+    E -->|Zabezpečí zdroje a nasadí| H[Bežiace zdroje]
     G -->|Aktualizuje infraštruktúru| H
     H -->|Monitorovať| I[azd monitor]
     I -->|Urobiť zmeny v kóde| J[azd deploy]
-    J -->|Znovu nasadiť iba kód| H
+    J -->|Znova nasadiť len kód| H
     H -->|Vyčistiť| K[azd down]
     
     style A fill:#e1f5fe
@@ -275,13 +290,13 @@ graph LR
 **Vysvetlenie pracovného postupu:**
 1. **Init** - Začnite so šablónou alebo novým projektom
 2. **Auth** - Overte sa v Azure
-3. **Environment** - Vytvorte izolované prostredie nasadenia
-4. **Preview** - 🆕 Vždy najprv prehliadnite zmeny infraštruktúry (bezpečná prax)
-5. **Provision** - Vytvoriť/aktualizovať Azure zdroje
-6. **Deploy** - Nahrajte kód svojej aplikácie
+3. **Environment** - Vytvorte izolované nasadzovacie prostredie
+4. **Preview** - 🆕 Vždy najprv prezrite zmeny infraštruktúry (bezpečná prax)
+5. **Provision** - Vytvorte/aktualizujte Azure prostriedky
+6. **Deploy** - Nahrajte svoj aplikačný kód
 7. **Monitor** - Sledujte výkon aplikácie
-8. **Iterate** - Upravujte a znovu nasadzujte kód
-9. **Cleanup** - Odstráňte zdroje po dokončení
+8. **Iterate** - Robte zmeny a znovu nasadzujte kód
+9. **Cleanup** - Odstráňte prostriedky po dokončení
 
 ### 4. Správa prostredí
 ```bash
@@ -290,6 +305,26 @@ azd env new <environment-name>
 azd env select <environment-name>
 azd env list
 ```
+
+### 5. Rozšírenia a AI príkazy
+
+azd používa systém rozšírení na pridanie schopností nad rámec jadra CLI. To je obzvlášť užitočné pre AI pracovné zaťaženia:
+
+```bash
+# Zobraziť dostupné rozšírenia
+azd extension list
+
+# Nainštalovať rozšírenie Foundry agents
+azd extension install azure.ai.agents
+
+# Inicializovať projekt AI agenta z manifestu
+azd ai agent init -m agent-manifest.yaml
+
+# Spustiť MCP server pre vývoj asistovaný AI (Alfa)
+azd mcp start
+```
+
+> Rozšírenia sú podrobne pokryté v [Kapitola 2: Vývoj orientovaný na AI](../chapter-02-ai-development/agents.md) a v referencii [AZD AI CLI príkazy](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
 
 ## 📁 Štruktúra projektu
 
@@ -355,51 +390,51 @@ Konfigurácia špecifická pre prostredie:
 
 ## 🎪 Bežné pracovné postupy s praktickými cvičeniami
 
-> **💡 Tip na učenie:** Postupujte podľa týchto cvičení v poradí, aby ste si postupne vybudovali zručnosti v AZD.
+> **💡 Tip učenia:** Postupujte podľa týchto cvičení v poradí, aby ste si postupne vybudovali zručnosti v AZD.
 
 ### 🎯 Cvičenie 1: Inicializujte svoj prvý projekt
 
-**Cieľ:** Vytvoriť AZD projekt a preskúmať jeho štruktúru
+**Cieľ:** Vytvoriť projekt AZD a preskúmať jeho štruktúru
 
 **Kroky:**
 ```bash
-# Použite overenú šablónu
+# Použite osvedčenú šablónu
 azd init --template todo-nodejs-mongo
 
 # Preskúmajte vygenerované súbory
 ls -la  # Zobrazte všetky súbory vrátane skrytých
 
-# Hlavné vytvorené súbory:
+# Vytvorené kľúčové súbory:
 # - azure.yaml (hlavná konfigurácia)
 # - infra/ (kód infraštruktúry)
 # - src/ (kód aplikácie)
 ```
 
-**✅ Úspech:** Máte azure.yaml, infra/, a src/ adresáre
+**✅ Úspech:** Máte azure.yaml, infra/ a src/ adresáre
 
 ---
 
 ### 🎯 Cvičenie 2: Nasadiť do Azure
 
-**Cieľ:** Dokončiť end-to-end nasadenie
+**Cieľ:** Kompletné end-to-end nasadenie
 
 **Kroky:**
 ```bash
-# 1. Overiť totožnosť
+# 1. Autentifikovať sa
 az login && azd auth login
 
 # 2. Vytvoriť prostredie
 azd env new dev
 azd env set AZURE_LOCATION eastus
 
-# 3. Náhľad zmien (ODPORÚČANÉ)
+# 3. Prezrieť zmeny (ODPORÚČANÉ)
 azd provision --preview
 
 # 4. Nasadiť všetko
 azd up
 
 # 5. Overiť nasadenie
-azd show    # Zobraziť URL vašej aplikácie
+azd show    # 6. Zobraziť URL vašej aplikácie
 ```
 
 **Očakávaný čas:** 10-15 minút  
@@ -423,7 +458,7 @@ azd env list
 azd env select dev
 ```
 
-**✅ Úspech:** Dve samostatné skupiny prostriedkov v Azure Portáli
+**✅ Úspech:** Dve samostatné skupiny prostriedkov v Azure portáli
 
 ---
 
@@ -437,72 +472,74 @@ azd down --force --purge
 
 **Čo to robí:**
 - `--force`: Žiadne výzvy na potvrdenie
-- `--purge`: Odstráni všetok lokálny stav a Azure zdroje
+- `--purge`: Odstráni všetok lokálny stav a Azure prostriedky
 
-**Použiť keď:**
-- Nasadenie zlyhalo v strede procesu
-- Prechod medzi projektmi
+**Použite keď:**
+- Nasadenie zlyhalo v polovici
+- Prechod medzi projektami
 - Potrebujete nový začiatok
 
 ---
 
-## 🎪 Pôvodný pracovný postup - referencia
+## 🎪 Pôvodná referencia pracovného postupu
 
-### Starting a New Project
+### Začatie nového projektu
 ```bash
-# Metóda 1: Použiť existujúcu šablónu
+# Metóda 1: Použite existujúcu šablónu
 azd init --template todo-nodejs-mongo
 
-# Metóda 2: Začať od nuly
+# Metóda 2: Začnite od nuly
 azd init
 
-# Metóda 3: Použiť aktuálny adresár
+# Metóda 3: Použite aktuálny priečinok
 azd init .
 ```
 
-### Development Cycle
+### Vývojový cyklus
 ```bash
-# Nastavenie vývojového prostredia
+# Nastaviť vývojové prostredie
 azd auth login
 azd env new dev
 azd env select dev
 
-# Nasadenie všetkého
+# Nasadiť všetko
 azd up
 
-# Urobiť zmeny a znova nasadiť
+# Urobiť zmeny a znovu nasadiť
 azd deploy
 
 # Vyčistiť po dokončení
-azd down --force --purge # Príkaz v Azure Developer CLI je **tvrdý reset** pre vaše prostredie — obzvlášť užitočný, keď riešite zlyhané nasadenia, odstraňujete opustené prostriedky alebo sa pripravujete na nové nasadenie
+azd down --force --purge # Príkaz v Azure Developer CLI je **tvrdý reset** vášho prostredia—obzvlášť užitočný, keď riešite zlyhané nasadenia, odstraňujete opustené zdroje alebo sa pripravujete na čisté opätovné nasadenie.
 ```
 
 ## Pochopenie `azd down --force --purge`
-Príkaz `azd down --force --purge` je silný spôsob, ako úplne rozobrať vaše azd prostredie a všetky s tým spojené zdroje. Tu je rozpis toho, čo každý flag robí:
+Príkaz `azd down --force --purge` je silný spôsob, ako úplne rozobrať vaše azd prostredie a všetky s tým spojené prostriedky. Tu je rozpis toho, čo jednotlivé flagy robia:
 ```
 --force
 ```
-- Preskakuje výzvy na potvrdenie.
-- Užitočné pre automatizáciu alebo skriptovanie, kde manuálny vstup nie je možný.
-- Zabezpečuje, že demontáž prebehne bez prerušenia, aj keď CLI zistí nekonzistencie.
+- Preskočí výzvy na potvrdenie.
+- Užitečné pre automatizáciu alebo skriptovanie, kde manuálny vstup nie je možný.
+- Zabezpečí, že rozobratie prebehne bez prerušenia, aj keď CLI zistí nezrovnalosti.
 
 ```
 --purge
 ```
-Odstráni **všetky súvisiace metadata**, vrátane:
+Odstraňuje **všetky súvisiace metadáta**, vrátane:
 Stav prostredia
-Lokálny `.azure` priečinok
-Uložené informácie o nasadení
-Zabraňuje azd, aby si "pamätal" predchádzajúce nasadenia, čo môže spôsobiť problémy ako nezodpovedajúce skupiny prostriedkov alebo zastarané odkazy na register.
+Lokálna zložka `.azure`
+Cacheované informácie o nasadení
+Zabraňuje tomu, aby si azd "pamätal" predchádzajúce nasadenia, čo môže spôsobiť problémy ako nezhodné skupiny prostriedkov alebo zastarané odkazy do registru.
 
-### Prečo používať obidva?
-Keď narazíte na problém s `azd up` kvôli pretrvávajúcemu stavu alebo čiastočným nasadeniam, táto kombinácia zabezpečí **čistý štart**.
 
-Je to obzvlášť užitočné po manuálnych odstráneniach zdrojov v Azure portáli alebo pri prepínaní šablón, prostredí alebo konvencií pomenovania skupín prostriedkov.
+### Prečo použiť obidva?
+Keď narazíte na problém s `azd up` spôsobený pretrvávajúcim stavom alebo čiastočnými nasadeniami, táto kombinácia zabezpečí **čistý štart**.
+
+Je to obzvlášť užitočné po manuálnych mazaniach prostriedkov v Azure portáli alebo pri zmene šablón, prostredí alebo konvencií pomenovania skupín prostriedkov.
+
 
 ### Správa viacerých prostredí
 ```bash
-# Vytvoriť stagingové prostredie
+# Vytvoriť prípravné prostredie
 azd env new staging
 azd env select staging
 azd up
@@ -516,11 +553,11 @@ azd env list
 
 ## 🔐 Autentifikácia a poverenia
 
-Pochopenie autentifikácie je kľúčové pre úspešné nasadenia azd. Azure používa viacero metód autentifikácie a azd využíva rovnaký reťazec poverení ako ostatné nástroje Azure.
+Pochopenie autentifikácie je kľúčové pre úspešné nasadenia azd. Azure používa viac metód autentifikácie a azd využíva rovnaký reťazec poverení ako ostatné Azure nástroje.
 
-### Overenie Azure CLI (`az login`)
+### Autentifikácia Azure CLI (`az login`)
 
-Pred použitím azd sa musíte autentifikovať v Azure. Najbežnejšia metóda je použitie Azure CLI:
+Pred použitím azd sa musíte overiť v Azure. Najbežnejšia metóda je pomocou Azure CLI:
 
 ```bash
 # Interaktívne prihlásenie (otvorí prehliadač)
@@ -543,19 +580,19 @@ az account set --subscription <subscription-id>
 ```
 
 ### Priebeh autentifikácie
-1. **Interaktívne prihlásenie**: Otvorí váš predvolený prehliadač na autentifikáciu
+1. **Interaktívne prihlásenie**: Otvorí váš predvolený prehliadač pre autentifikáciu
 2. **Device Code Flow**: Pre prostredia bez prístupu k prehliadaču
 3. **Service Principal**: Pre scenáre automatizácie a CI/CD
-4. **Managed Identity**: Pre aplikácie hostované v Azure
+4. **Managed Identity**: Pre aplikácie hosťované v Azure
 
 ### Reťazec DefaultAzureCredential
 
-`DefaultAzureCredential` je typ poverení, ktorý poskytuje zjednodušenú skúsenosť s autentifikáciou tým, že automaticky skúša viacero zdrojov poverení v konkrétnom poradí:
+`DefaultAzureCredential` je typ poverenia, ktorý poskytuje zjednodušený zážitok z autentifikácie tým, že automaticky skúša viacero zdrojov poverení v špecifickom poradí:
 
 #### Poradie reťazca poverení
 ```mermaid
 graph TD
-    A[DefaultAzureCredential] --> B[Premenné prostredia]
+    A[Predvolené poverenia Azure] --> B[Premenné prostredia]
     B --> C[Identita pracovnej záťaže]
     C --> D[Spravovaná identita]
     D --> E[Visual Studio]
@@ -573,20 +610,20 @@ export AZURE_TENANT_ID="<tenant-id>"
 ```
 
 #### 2. Workload Identity (Kubernetes/GitHub Actions)
-Používa sa automaticky v:
+Automaticky sa používa v:
 - Azure Kubernetes Service (AKS) s Workload Identity
 - GitHub Actions s OIDC federáciou
 - Iné scenáre federovanej identity
 
 #### 3. Managed Identity
-Pre Azure zdroje ako:
+Pre Azure prostriedky ako:
 - Virtuálne stroje
 - App Service
 - Azure Functions
-- Kontajnerové inštancie
+- Container Instances
 
 ```bash
-# Skontroluje, či beží na zdroji Azure so spravovanou identitou
+# Skontrolovať, či beží na Azure prostriedku so spravovanou identitou
 az account show --query "user.type" --output tsv
 # Vracia: "servicePrincipal" ak sa používa spravovaná identita
 ```
@@ -596,40 +633,40 @@ az account show --query "user.type" --output tsv
 - **VS Code**: Používa poverenia rozšírenia Azure Account
 - **Azure CLI**: Používa poverenia z `az login` (najbežnejšie pre lokálny vývoj)
 
-### Nastavenie autentifikácie pre AZD
+### Nastavenie autentifikácie AZD
 
 ```bash
-# Metóda 1: Použite Azure CLI (odporúčané pre vývoj)
+# Metóda 1: Použiť Azure CLI (Odporúčané pre vývoj)
 az login
-azd auth login  # Používa existujúce poverenia Azure CLI
+azd auth login  # Používa existujúce prihlasovacie údaje Azure CLI
 
-# Metóda 2: Priama autentifikácia azd
-azd auth login --use-device-code  # Pre bezhlavové prostredia
+# Metóda 2: Priama autentifikácia pomocou azd
+azd auth login --use-device-code  # Pre bezhlavé prostredia
 
-# Metóda 3: Skontrolujte stav autentifikácie
+# Metóda 3: Skontrolovať stav autentifikácie
 azd auth login --check-status
 
-# Metóda 4: Odhlásiť sa a znovu sa autentifikovať
+# Metóda 4: Odhlásiť sa a znovu sa prihlásiť
 azd auth logout
 azd auth login
 ```
 
-### Najlepšie postupy pre autentifikáciu
+### Najlepšie praktiky autentifikácie
 
 #### Pre lokálny vývoj
 ```bash
 # 1. Prihláste sa pomocou Azure CLI
 az login
 
-# 2. Skontrolujte správne predplatné
+# 2. Overte správne predplatné
 az account show
 az account set --subscription "Your Subscription Name"
 
-# 3. Použite azd s existujúcimi povereniami
+# 3. Použite azd s existujúcimi prihlasovacími údajmi
 azd auth login
 ```
 
-#### Pre CI/CD pipeline
+#### Pre CI/CD pipelines
 ```yaml
 # GitHub Actions example
 - name: Azure Login
@@ -646,16 +683,16 @@ azd auth login
 ```
 
 #### Pre produkčné prostredia
-- Používajte **Managed Identity** pri behu na Azure zdrojoch
-- Používajte **Service Principal** pre scenáre automatizácie
+- Použite **Managed Identity**, keď bežíte na Azure prostriedkoch
+- Použite **Service Principal** pre automatizačné scenáre
 - Vyhnite sa ukladaniu poverení v kóde alebo konfiguračných súboroch
-- Používajte **Azure Key Vault** pre citlivú konfiguráciu
+- Použite **Azure Key Vault** pre citlivú konfiguráciu
 
 ### Bežné problémy s autentifikáciou a riešenia
 
 #### Problém: "No subscription found"
 ```bash
-# Riešenie: Nastaviť predvolené predplatné
+# Riešenie: Nastavte predvolené predplatné
 az account list --output table
 az account set --subscription "<subscription-id>"
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
@@ -663,17 +700,17 @@ azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 
 #### Problém: "Insufficient permissions"
 ```bash
-# Riešenie: Skontrolujte a priraďte požadované role
+# Riešenie: Skontrolujte a priraďte požadované roly
 az role assignment list --assignee $(az account show --query user.name --output tsv)
 
-# Bežné požadované role:
+# Bežné požadované roly:
 # - Contributor (pre správu prostriedkov)
-# - User Access Administrator (pre priraďovanie rolí)
+# - User Access Administrator (pre priraďovanie ról)
 ```
 
 #### Problém: "Token expired"
 ```bash
-# Riešenie: Znova sa prihláste.
+# Riešenie: Znovu overiť identitu
 az logout
 az login
 azd auth logout
@@ -684,66 +721,65 @@ azd auth login
 
 #### Lokálny vývoj
 ```bash
-# Účet osobného rozvoja
+# Účet na osobný rozvoj
 az login
 azd auth login
 ```
 
 #### Tímový vývoj
 ```bash
-# Použiť konkrétneho tenanta pre organizáciu
+# Použite konkrétneho tenanta pre organizáciu
 az login --tenant contoso.onmicrosoft.com
 azd auth login
 ```
 
-#### Scenáre s viacerými nájomníkmi
+#### Scenáre s viacerými tenantmi
 ```bash
-# Prepnúť medzi nájomníkmi
+# Prepnúť medzi nájomcami
 az login --tenant tenant1.onmicrosoft.com
-# Nasadiť do nájomníka 1
+# Nasadiť do nájomcu 1
 azd up
 
 az login --tenant tenant2.onmicrosoft.com  
-# Nasadiť do nájomníka 2
+# Nasadiť do nájomcu 2
 azd up
 ```
 
 ### Bezpečnostné úvahy
-
 1. **Ukladanie poverení**: Nikdy neukladajte poverenia v zdrojovom kóde
-2. **Obmedzenie rozsahu**: Používajte princíp najmenších práv pre service principals
-3. **Rotácia tokenov**: Pravidelne rotujte tajomstvá service principalov
-4. **Audit**: Monitorujte autentifikáciu a aktivity nasadenia
-5. **Sieťová bezpečnosť**: Používajte súkromné koncové body, keď je to možné
+2. **Obmedzenie rozsahu**: Používajte princíp minimálnych práv pre služobné identity (service principals)
+3. **Rotácia tokenov**: Pravidelne rotujte tajomstvá služobných identít
+4. **Auditné záznamy**: Monitorujte aktivity overenia a nasadzovania
+5. **Sieťové zabezpečenie**: Používajte súkromné koncové body, keď je to možné
 
 ### Riešenie problémov s autentifikáciou
 
 ```bash
-# Ladiť problémy s autentifikáciou
+# Ladenie problémov s overovaním
 azd auth login --check-status
 az account show
 az account get-access-token
 
 # Bežné diagnostické príkazy
-whoami                          # Aktuálny kontext používateľa
-az ad signed-in-user show      # Podrobnosti o používateľovi Azure AD
-az group list                  # Otestovať prístup k zdrojom
+whoami                          # Kontext aktuálneho používateľa
+az ad signed-in-user show      # Podrobnosti používateľa Azure AD
+az group list                  # Otestovať prístup k zdroju
 ```
 
 ## Pochopenie `azd down --force --purge`
 
-### Discovery
+### Objavovanie
 ```bash
 azd template list              # Prehliadať šablóny
 azd template show <template>   # Podrobnosti šablóny
 azd init --help               # Možnosti inicializácie
 ```
 
-### Správa projektov
+### Správa projektu
 ```bash
 azd show                     # Prehľad projektu
 azd env show                 # Aktuálne prostredie
-azd config list             # Nastavenia konfigurácie
+azd config list             # Konfiguračné nastavenia
 ```
 
 ### Monitorovanie
@@ -754,63 +790,63 @@ azd monitor --live           # Zobraziť metriky v reálnom čase
 azd pipeline config          # Nastaviť CI/CD
 ```
 
-## Najlepšie postupy
+## Odporúčané postupy
 
 ### 1. Používajte zmysluplné názvy
 ```bash
-# Dobrý
+# Dobré
 azd env new production-east
 azd init --template web-app-secure
 
-# Vyhnúť sa
+# Vyhnite sa
 azd env new env1
 azd init --template template1
 ```
 
 ### 2. Využívajte šablóny
 - Začnite s existujúcimi šablónami
-- Prispôsobte podľa vašich potrieb
-- Vytvorte opakovane použiteľné šablóny pre vašu organizáciu
+- Prispôsobte podľa svojich potrieb
+- Vytvorte znovupoužiteľné šablóny pre vašu organizáciu
 
 ### 3. Izolácia prostredí
 - Používajte oddelené prostredia pre dev/staging/prod
-- Nikdy nenasadzujte priamo do produkcie z lokálneho stroja
-- Používajte CI/CD pipeline pre produkčné nasadenia
+- Nikdy nenasadzujte priamo do produkcie z lokálneho počítača
+- Používajte CI/CD pipeliny na nasadzovanie do produkcie
 
 ### 4. Správa konfigurácie
 - Používajte premenné prostredia pre citlivé údaje
-- Udržujte konfiguráciu v správe verzií
+- Uchovávajte konfiguráciu v verzovacom systéme
 - Dokumentujte nastavenia špecifické pre prostredie
 
 ## Postup učenia
 
-### Začiatočník (1.–2. týždeň)
-1. Nainštalovať azd a autentifikovať sa
+### Začiatočník (Týždeň 1-2)
+1. Nainštalujte azd a autentifikujte sa
 2. Nasadiť jednoduchú šablónu
-3. Pochopiť štruktúru projektu
-4. Naučiť sa základné príkazy (up, down, deploy)
+3. Pochopte štruktúru projektu
+4. Naučte sa základné príkazy (up, down, deploy)
 
-### Stredne pokročilý (3.–4. týždeň)
-1. Prispôsobiť šablóny
-2. Spravovať viacero prostredí
-3. Pochopiť infraštruktúrny kód
-4. Nastaviť CI/CD pipeline
+### Stredne pokročilý (Týždeň 3-4)
+1. Prispôsobte šablóny
+2. Spravujte viacero prostredí
+3. Pochopte infraštruktúrny kód
+4. Nastavte CI/CD pipeliny
 
-### Pokročilý (5. týždeň+)
-1. Vytvárať vlastné šablóny
-2. Pokročilé infraštruktúrne vzory
-3. Nasadenia v viac regiónoch
-4. Podnikové konfigurácie
+### Pokročilý (Týždeň 5+)
+1. Vytvorte vlastné šablóny
+2. Pokročilé vzory infraštruktúry
+3. Nasadenia v mnohých regiónoch
+4. Konfigurácie na úrovni podniku
 
 ## Ďalšie kroky
 
-**📖 Pokračovať v učení kapitoly 1:**
+**📖 Pokračujte v štúdiu kapitoly 1:**
 - [Inštalácia a nastavenie](installation.md) - Nainštalujte a nakonfigurujte azd
-- [Váš prvý projekt](first-project.md) - Kompletný praktický návod
-- [Príručka konfigurácie](configuration.md) - Pokročilé možnosti konfigurácie
+- [Váš prvý projekt](first-project.md) - Dokončite praktický tutoriál
+- [Sprievodca konfiguráciou](configuration.md) - Pokročilé konfiguračné možnosti
 
 **🎯 Pripravení na ďalšiu kapitolu?**
-- [Kapitola 2: Vývoj zameraný na AI](../chapter-02-ai-development/microsoft-foundry-integration.md) - Začnite vytvárať aplikácie s AI
+- [Kapitola 2: Vývoj orientovaný na AI](../chapter-02-ai-development/microsoft-foundry-integration.md) - Začnite vytvárať AI aplikácie
 
 ## Ďalšie zdroje
 
@@ -826,25 +862,25 @@ azd init --template template1
 
 **Q: Aký je rozdiel medzi AZD a Azure CLI?**
 
-A: Azure CLI (`az`) slúži na správu jednotlivých Azure prostriedkov. AZD (`azd`) slúži na správu celých aplikácií:
+A: Azure CLI (`az`) slúži na správu jednotlivých Azure zdrojov. AZD (`azd`) slúži na správu celých aplikácií:
 
 ```bash
-# Azure CLI - Správa prostriedkov na nízkej úrovni
+# Azure CLI - nízkoúrovňová správa zdrojov
 az webapp create --name myapp --resource-group rg
 az sql server create --name myserver --resource-group rg
 # ...je potrebných oveľa viac príkazov
 
-# AZD - Správa na úrovni aplikácie
-azd up  # Nasadí celú aplikáciu so všetkými prostriedkami
+# AZD - správa na úrovni aplikácie
+azd up  # Nasadí celú aplikáciu so všetkými zdrojmi
 ```
 
 **Myslite na to takto:**
-- `az` = Práca s jednotlivými Lego kockami
+- `az` = Operovanie s jednotlivými Lego kockami
 - `azd` = Práca s kompletnými Lego súpravami
 
 ---
 
-**Q: Musím poznať Bicep alebo Terraform, aby som používal AZD?**
+**Q: Musím poznať Bicep alebo Terraform, aby som mohol používať AZD?**
 
 A: Nie! Začnite so šablónami:
 ```bash
@@ -853,39 +889,39 @@ azd init --template todo-nodejs-mongo
 azd up
 ```
 
-Neskôr sa môžete naučiť Bicep, aby ste prispôsobili infraštruktúru. Šablóny poskytujú pracovné príklady, z ktorých sa môžete učiť.
+Bicep sa môžete naučiť neskôr, aby ste si prispôsobili infraštruktúru. Šablóny poskytujú funkčné príklady, z ktorých sa môžete učiť.
 
 ---
 
-**Q: Koľko stojí používanie AZD šablón?**
+**Q: Koľko stojí prevádzka AZD šablón?**
 
 A: Náklady sa líšia podľa šablóny. Väčšina vývojových šablón stojí $50-150/mesiac:
 
 ```bash
-# Náhľad nákladov pred nasadením
+# Prezrite si náklady pred nasadením
 azd provision --preview
 
-# Vždy vykonajte čistenie, keď to nepoužívate
+# Vždy vyčistite, keď to nepoužívate
 azd down --force --purge  # Odstráni všetky zdroje
 ```
 
-**Tip:** Použite bezplatné úrovne tam, kde sú dostupné:
-- App Service: F1 (Free) tier
-- Azure OpenAI: 50,000 tokenov/mesiac zadarmo
-- Cosmos DB: 1000 RU/s (bezplatná úroveň)
+**Praktický tip:** Používajte bezplatné úrovne, kde sú dostupné:
+- App Service: úroveň F1 (Free)
+- Microsoft Foundry Models: Azure OpenAI 50,000 tokenov/mesiac zadarmo
+- Cosmos DB: bezplatná úroveň 1000 RU/s
 
 ---
 
-**Q: Môžem používať AZD s existujúcimi Azure prostriedkami?**
+**Q: Môžem používať AZD s existujúcimi Azure zdrojmi?**
 
-A: Áno, ale je jednoduchšie začať od začiatku. AZD funguje najlepšie, keď spravuje celý životný cyklus. Pre existujúce prostriedky:
+A: Áno, ale jednoduchšie je začať od nuly. AZD funguje najlepšie, keď spravuje celý životný cyklus. Pre existujúce zdroje:
 
 ```bash
-# Možnosť 1: Importovať existujúce zdroje (pokročilé)
+# Možnosť 1: Importovať existujúce zdroje (pre pokročilých)
 azd init
-# Potom upravte infra/, aby odkazovalo na existujúce zdroje
+# Potom upravte infra/, aby odkazoval na existujúce zdroje
 
-# Možnosť 2: Začať odznova (odporúčané)
+# Možnosť 2: Začať od začiatku (odporúčané)
 azd init --template matching-your-stack
 azd up  # Vytvorí nové prostredie
 ```
@@ -894,7 +930,7 @@ azd up  # Vytvorí nové prostredie
 
 **Q: Ako zdieľam svoj projekt s kolegami?**
 
-A: Commitnite AZD projekt do Gitu (ale NIE priečinok .azure):
+A: Commitnite projekt AZD do Gitu (ale NIE priečinok .azure):
 
 ```bash
 # Už predvolene v .gitignore
@@ -908,36 +944,36 @@ azd env new <their-name>-dev
 azd up
 ```
 
-Každý získa identickú infraštruktúru z tých istých šablón.
+Každý získa identickú infraštruktúru z rovnakých šablón.
 
 ---
 
-### Otázky pri riešení problémov
+### Otázky k riešeniu problémov
 
-**Q: Príkaz "azd up" zlyhal v polovici. Čo mám robiť?**
+**Q: "azd up" zlyhalo v polovici. Čo mám robiť?**
 
 A: Skontrolujte chybu, opravte ju, a potom skúste znova:
 
 ```bash
-# Zobraziť podrobné protokoly
+# Zobraziť podrobné záznamy
 azd show
 
 # Bežné opravy:
 
 # 1. Ak je prekročená kvóta:
-azd env set AZURE_LOCATION "westus2"  # Skúste iný región
+azd env set AZURE_LOCATION "westus2"  # Vyskúšajte iný región
 
-# 2. Ak je konflikt názvu zdroja:
-azd down --force --purge  # Začať od nuly
+# 2. Ak je názov zdroja v konflikte:
+azd down --force --purge  # Začať odznova
 azd up  # Skúsiť znova
 
-# 3. Ak vypršala platnosť autentifikácie:
+# 3. Ak vypršal token:
 az login
 azd auth login
 azd up
 ```
 
-**Najčastejší problém:** Nesprávne zvolené predplatné Azure
+**Najčastejší problém:** Vybrané nesprávne Azure predplatné
 ```bash
 az account list --output table
 az account set --subscription "<correct-subscription>"
@@ -945,7 +981,7 @@ az account set --subscription "<correct-subscription>"
 
 ---
 
-**Q: Ako nasadím len zmeny v kóde bez opätovného nasadzovania infraštruktúry?**
+**Q: Ako nasadím iba zmeny v kóde bez reprovizionovania?**
 
 A: Použite `azd deploy` namiesto `azd up`:
 
@@ -954,7 +990,7 @@ azd up          # Prvýkrát: zriadenie + nasadenie (pomalé)
 
 # Urobte zmeny v kóde...
 
-azd deploy      # Pri ďalších spusteniach: len nasadenie (rýchle)
+azd deploy      # Pri ďalších spusteniach: iba nasadenie (rýchle)
 ```
 
 Porovnanie rýchlosti:
@@ -963,9 +999,9 @@ Porovnanie rýchlosti:
 
 ---
 
-**Q: Môžem prispôsobiť infraštruktúrne šablóny?**
+**Q: Môžem prispôsobiť šablóny infraštruktúry?**
 
-A: Áno! Upravte Bicep súbory v `infra/`:
+A: Áno! Upravte súbory Bicep v `infra/`:
 
 ```bash
 # Po spustení azd init
@@ -979,7 +1015,7 @@ azd provision --preview
 azd provision
 ```
 
-**Tip:** Začnite zľahka - najprv zmeňte SKUs:
+**Tip:** Začnite s malými zmenami – najprv zmeňte SKUs:
 ```bicep
 // infra/main.bicep
 sku: {
@@ -989,33 +1025,32 @@ sku: {
 
 ---
 
-**Q: Ako odstránim všetko, čo AZD vytvoril?**
+**Q: Ako vymažem všetko, čo AZD vytvorilo?**
 
-A: Jeden príkaz odstráni všetky prostriedky:
+A: Jeden príkaz odstráni všetky zdroje:
 
 ```bash
 azd down --force --purge
 
 # Toto odstráni:
-# - Všetky Azure zdroje
+# - Všetky prostriedky Azure
 # - Skupina prostriedkov
 # - Stav lokálneho prostredia
-# - Údaje nasadenia v medzipamäti
+# - Kešované údaje nasadenia
 ```
 
-**Vždy to spustite, keď:**
+**Vždy spustite toto, keď:**
 - Dokončili ste testovanie šablóny
 - Prechádzate na iný projekt
-- Chcete začať odznova
+- Chcete začať od začiatku
 
-**Úspora nákladov:** Odstránenie nepoužitých prostriedkov = $0 poplatkov
+**Úspora nákladov:** Odstránenie nepoužívaných zdrojov = žiadne poplatky
 
 ---
 
-**Q: Čo ak som omylom odstránil prostriedky v Azure Portal?**
+**Q: Čo ak som omylom vymazal zdroje v Azure Portáli?**
 
-A: Stav AZD sa môže dostať do nesúladu. Postup úplného vyčistenia:
-
+A: Stav AZD sa môže dostať do nesúladu. Prístup 'čistý štart':
 ```bash
 # 1. Odstrániť lokálny stav
 azd down --force --purge
@@ -1031,7 +1066,7 @@ azd provision  # Vytvorí chýbajúce zdroje
 
 ### Pokročilé otázky
 
-**Q: Môžem používať AZD v CI/CD pipelines?**
+**Q: Môžem používať AZD v CI/CD pipelínach?**
 
 A: Áno! Príklad pre GitHub Actions:
 
@@ -1065,9 +1100,9 @@ jobs:
 
 ---
 
-**Q: Ako riešim tajomstvá a citlivé údaje?**
+**Q: Ako spravujem tajomstvá a citlivé údaje?**
 
-A: AZD sa automaticky integruje s Azure Key Vault:
+A: AZD sa integruje s Azure Key Vault automaticky:
 
 ```bash
 # Tajomstvá sú uložené v Key Vaulte, nie v kóde
@@ -1076,23 +1111,23 @@ azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
 # AZD automaticky:
 # 1. Vytvorí Key Vault
 # 2. Uloží tajomstvo
-# 3. Udelí aplikácii prístup pomocou spravovanej identity
-# 4. Vloží za behu
+# 3. Udelí aplikácii prístup prostredníctvom spravovanej identity
+# 4. Vloží počas behu
 ```
 
-**Nikdy necommitujte:**
-- `.azure/` priečinok (obsahuje údaje o prostredí)
-- `.env` súbory (lokálne tajomstvá)
-- Pripojovacie reťazce
+**Nikdy do commitu nepridávajte:**
+- priečinok `.azure/` (obsahuje údaje prostredia)
+- súbory `.env` (lokálne tajomstvá)
+- reťazce pripojenia
 
 ---
 
 **Q: Môžem nasadiť do viacerých regiónov?**
 
-A: Áno, vytvorte prostredie pre každý región:
+A: Áno, vytvorte pre každý región prostredie:
 
 ```bash
-# Prostredie východnej časti USA
+# Prostredie východného USA
 azd env new prod-eastus
 azd env set AZURE_LOCATION eastus
 azd up
@@ -1106,24 +1141,24 @@ azd up
 azd env list
 ```
 
-Pre skutočné multi-region aplikácie prispôsobte Bicep šablóny tak, aby nasadzovali do viacerých regiónov súčasne.
+Pre skutočné aplikácie s viacerými regiónmi upravte Bicep šablóny tak, aby sa nasadzovali do viacerých regiónov súčasne.
 
 ---
 
-**Q: Kde môžem získať pomoc, ak uviaznem?**
+**Q: Kde môžem získať pomoc, ak sa zaseknem?**
 
 1. **Dokumentácia AZD:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
 2. **GitHub Issues:** https://github.com/Azure/azure-dev/issues
 3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - kanál #azure-developer-cli
-4. **Stack Overflow:** Označte značkou `azure-developer-cli`
+4. **Stack Overflow:** Tag `azure-developer-cli`
 5. **Tento kurz:** [Sprievodca riešením problémov](../chapter-07-troubleshooting/common-issues.md)
 
-**Tip:** Predtým, než sa opýtate, spustite:
+**Praktický tip:** Pred pýtaním sa spustite:
 ```bash
 azd show       # Zobrazuje aktuálny stav
 azd version    # Zobrazuje vašu verziu
 ```
-Priložte tieto informácie do svojej otázky pre rýchlejšiu pomoc.
+Zahrňte tieto informácie do vašej otázky pre rýchlejšiu pomoc.
 
 ---
 
@@ -1132,32 +1167,32 @@ Priložte tieto informácie do svojej otázky pre rýchlejšiu pomoc.
 Teraz rozumiete základom AZD. Vyberte si svoju cestu:
 
 ### 🎯 Pre začiatočníkov:
-1. **Ďalej:** [Inštalácia a nastavenie](installation.md) - Nainštalujte AZD na svoj počítač
-2. **Potom:** [Váš prvý projekt](first-project.md) - Nasadiť svoju prvú aplikáciu
+1. **Ďalej:** [Inštalácia a nastavenie](installation.md) - Nainštalujte AZD na svoj stroj
+2. **Potom:** [Váš prvý projekt](first-project.md) - Nasadte svoju prvú aplikáciu
 3. **Precvičovanie:** Dokončite všetky 3 cvičenia v tejto lekcii
 
-### 🚀 Pre vývojárov AI:
-1. **Preskočiť na:** [Kapitola 2: Vývoj zameraný na AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+### 🚀 Pre AI vývojárov:
+1. **Prejdite na:** [Kapitola 2: Vývoj orientovaný na AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 2. **Nasadiť:** Začnite s `azd init --template get-started-with-ai-chat`
 3. **Učte sa:** Budujte počas nasadzovania
 
 ### 🏗️ Pre skúsených vývojárov:
-1. **Preštudujte si:** [Príručka konfigurácie](configuration.md) - Pokročilé nastavenia
-2. **Preskúmajte:** [Infrastruktúra ako kód](../chapter-04-infrastructure/provisioning.md) - Hlboký ponor do Bicep
-3. **Vytvorte:** Vytvorte vlastné šablóny pre svoj stack
+1. **Preštudujte si:** [Sprievodca konfiguráciou](configuration.md) - Pokročilé nastavenia
+2. **Preskúmajte:** [Infrastruktúra ako kód](../chapter-04-infrastructure/provisioning.md) - Hĺbkový ponor do Bicepu
+3. **Vytvorte:** Vytvorte vlastné šablóny pre váš stack
 
 ---
 
-**Navigácia medzi kapitolami:**
+**Navigácia kapitol:**
 - **📚 Domov kurzu**: [AZD pre začiatočníkov](../../README.md)
-- **📖 Aktuálna kapitola**: Kapitola 1 - Základy & Rýchly začiatok  
-- **⬅️ Predošlé**: [Prehľad kurzu](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Ďalšie**: [Inštalácia a nastavenie](installation.md)
-- **🚀 Ďalšia kapitola**: [Kapitola 2: Vývoj zameraný na AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Aktuálna kapitola**: Kapitola 1 - Základy & Rýchly štart  
+- **⬅️ Predchádzajúca**: [Prehľad kurzu](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Ďalšia**: [Inštalácia a nastavenie](installation.md)
+- **🚀 Ďalšia kapitola**: [Kapitola 2: Vývoj orientovaný na AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Upozornenie:
-Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, vezmite prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za rozhodujúci zdroj. V prípade kritických informácií sa odporúča profesionálny preklad vykonaný človekom. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne výklady vyplývajúce z použitia tohto prekladu.
+**Vylúčenie zodpovednosti**:
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa usilujeme o presnosť, majte, prosím, na pamäti, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne výklady vyplývajúce z použitia tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

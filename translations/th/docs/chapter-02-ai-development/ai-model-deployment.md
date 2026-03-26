@@ -1,28 +1,28 @@
-# AI Model Deployment with Azure Developer CLI
+# การติดตั้งโมเดล AI ด้วย Azure Developer CLI
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD สำหรับผู้เริ่มต้น](../../README.md)
-- **📖 Current Chapter**: Chapter 2 - AI-First Development
-- **⬅️ Previous**: [การผสาน Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Next**: [ห้องฝึกปฏิบัติ AI](ai-workshop-lab.md)
-- **🚀 Next Chapter**: [บทที่ 3: การกำหนดค่า](../chapter-03-configuration/configuration.md)
+**การนำทางบทเรียน:**
+- **📚 หน้าแรกคอร์ส**: [AZD สำหรับผู้เริ่มต้น](../../README.md)
+- **📖 บทปัจจุบัน**: บทที่ 2 - การพัฒนา AI-First
+- **⬅️ ก่อนหน้า**: [การรวม Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ ถัดไป**: [ห้องปฏิบัติการเวิร์กช็อป AI](ai-workshop-lab.md)
+- **🚀 บทถัดไป**: [บทที่ 3: การกำหนดค่า](../chapter-03-configuration/configuration.md)
 
-This guide provides comprehensive instructions for deploying AI models using AZD templates, covering everything from model selection to production deployment patterns.
+คำแนะนำนี้ให้ข้อมูลอย่างครบถ้วนสำหรับการติดตั้งโมเดล AI โดยใช้เทมเพลต AZD ครอบคลุมตั้งแต่การเลือกโมเดลจนถึงรูปแบบการติดตั้งสู่สภาพแวดล้อมการผลิต
 
-## Table of Contents
+## สารบัญ
 
-- [Model Selection Strategy](../../../../docs/chapter-02-ai-development)
-- [AZD Configuration for AI Models](../../../../docs/chapter-02-ai-development)
-- [Deployment Patterns](../../../../docs/chapter-02-ai-development)
-- [Model Management](../../../../docs/chapter-02-ai-development)
-- [Production Considerations](../../../../docs/chapter-02-ai-development)
-- [Monitoring and Observability](../../../../docs/chapter-02-ai-development)
+- [กลยุทธ์การเลือกโมเดล](../../../../docs/chapter-02-ai-development)
+- [การกำหนดค่า AZD สำหรับโมเดล AI](../../../../docs/chapter-02-ai-development)
+- [รูปแบบการติดตั้ง](../../../../docs/chapter-02-ai-development)
+- [การจัดการโมเดล](../../../../docs/chapter-02-ai-development)
+- [พิจารณาสำหรับการผลิต](../../../../docs/chapter-02-ai-development)
+- [การตรวจสอบและการสังเกตการณ์](../../../../docs/chapter-02-ai-development)
 
-## Model Selection Strategy
+## กลยุทธ์การเลือกโมเดล
 
-### Azure OpenAI Models
+### โมเดล Microsoft Foundry
 
-Choose the right model for your use case:
+เลือกโมเดลที่เหมาะสมกับกรณีการใช้งานของคุณ:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -34,9 +34,9 @@ services:
       AZURE_OPENAI_MODELS: |
         [
           {
-            "name": "gpt-4o-mini",
+            "name": "gpt-4.1-mini",
             "version": "2024-07-18",
-            "deployment": "gpt-4o-mini",
+            "deployment": "gpt-4.1-mini",
             "capacity": 10,
             "format": "OpenAI"
           },
@@ -50,30 +50,30 @@ services:
         ]
 ```
 
-### Model Capacity Planning
+### การวางแผนความจุของโมเดล
 
-| Model Type | Use Case | Recommended Capacity | Cost Considerations |
+| ประเภทโมเดล | กรณีการใช้งาน | ความจุที่แนะนำ | การพิจารณาค่าใช้จ่าย |
 |------------|----------|---------------------|-------------------|
-| GPT-4o-mini | แชท, ถาม-ตอบ | 10-50 TPM | คุ้มค่าสำหรับงานส่วนใหญ่ |
-| GPT-4 | การให้เหตุผลที่ซับซ้อน | 20-100 TPM | ต้นทุนสูงกว่า ใช้สำหรับฟีเจอร์พรีเมียม |
-| Text-embedding-ada-002 | การค้นหา, RAG | 30-120 TPM | จำเป็นสำหรับการค้นหาเชิงความหมาย |
-| Whisper | คำพูดเป็นข้อความ | 10-50 TPM | งานประมวลผลเสียง |
+| gpt-4.1-mini | การแชท, ถาม-ตอบ | 10-50 TPM | ประหยัดสำหรับงานส่วนใหญ่ |
+| gpt-4.1 | การให้เหตุผลซับซ้อน | 20-100 TPM | ค่าใช้จ่ายสูงกว่า ใช้สำหรับฟีเจอร์พรีเมียม |
+| Text-embedding-ada-002 | การค้นหา, RAG | 30-120 TPM | สำคัญสำหรับการค้นหาความหมาย |
+| Whisper | การแปลงเสียงเป็นข้อความ | 10-50 TPM | งานประมวลผลเสียง |
 
-## AZD Configuration for AI Models
+## การกำหนดค่า AZD สำหรับโมเดล AI
 
-### Bicep Template Configuration
+### การกำหนดค่าเทมเพลต Bicep
 
-Create model deployments through Bicep templates:
+สร้างการติดตั้งโมเดลผ่านเทมเพลต Bicep:
 
 ```bicep
 // infra/main.bicep
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
-    name: 'gpt-4o-mini'
+    name: 'gpt-4.1-mini'
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
     sku: {
@@ -122,21 +122,21 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
-### Environment Variables
+### ตัวแปรสภาพแวดล้อม
 
-Configure your application environment:
+กำหนดค่าสภาพแวดล้อมของแอปพลิเคชันของคุณ:
 
 ```bash
 # การกำหนดค่า .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
-AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
+AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
-## Deployment Patterns
+## รูปแบบการติดตั้ง
 
-### Pattern 1: Single-Region Deployment
+### รูปแบบที่ 1: การติดตั้งในภูมิภาคเดียว
 
 ```yaml
 # azure.yaml - Single region
@@ -146,15 +146,15 @@ services:
     host: containerapp
     config:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
-      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
+      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Best for:
+เหมาะสำหรับ:
 - การพัฒนาและทดสอบ
-- แอปพลิเคชันสำหรับตลาดเดียว
-- การปรับให้ต้นทุนเหมาะสม
+- แอปพลิเคชันตลาดเดียว
+- การประหยัดต้นทุน
 
-### Pattern 2: Multi-Region Deployment
+### รูปแบบที่ 2: การติดตั้งหลายภูมิภาค
 
 ```bicep
 // Multi-region deployment
@@ -167,14 +167,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Best for:
+เหมาะสำหรับ:
 - แอปพลิเคชันระดับโลก
 - ความต้องการความพร้อมใช้งานสูง
 - การกระจายโหลด
 
-### Pattern 3: Hybrid Deployment
+### รูปแบบที่ 3: การติดตั้งแบบผสมผสาน
 
-Combine Azure OpenAI with other AI services:
+รวมโมเดล Microsoft Foundry กับบริการ AI อื่นๆ:
 
 ```bicep
 // Hybrid AI services
@@ -203,17 +203,17 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Model Management
+## การจัดการโมเดล
 
-### Version Control
+### การควบคุมเวอร์ชัน
 
-Track model versions in your AZD configuration:
+ติดตามเวอร์ชันโมเดลในกำหนดค่า AZD ของคุณ:
 
 ```json
 {
   "models": {
     "chat": {
-      "name": "gpt-4o-mini",
+      "name": "gpt-4.1-mini",
       "version": "2024-07-18",
       "fallback": "gpt-35-turbo"
     },
@@ -225,9 +225,9 @@ Track model versions in your AZD configuration:
 }
 ```
 
-### Model Updates
+### การอัปเดตโมเดล
 
-Use AZD hooks for model updates:
+ใช้ hooks ของ AZD สำหรับการอัปเดตโมเดล:
 
 ```bash
 #!/bin/bash
@@ -237,23 +237,23 @@ echo "Checking model availability..."
 az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
-  --query "[?name=='gpt-4o-mini']"
+  --query "[?name=='gpt-4.1-mini']"
 ```
 
-### A/B Testing
+### การทดสอบ A/B
 
-Deploy multiple model versions:
+ติดตั้งเวอร์ชันโมเดลหลายเวอร์ชัน:
 
 ```bicep
 param enableABTesting bool = false
 
 resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'gpt-4o-mini-${enableABTesting ? 'v1' : 'prod'}'
+  name: 'gpt-4.1-mini-${enableABTesting ? 'v1' : 'prod'}'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -264,11 +264,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Production Considerations
+## พิจารณาสำหรับการผลิต
 
-### Capacity Planning
+### การวางแผนความจุ
 
-Calculate required capacity based on usage patterns:
+คำนวณความจุที่ต้องการตามรูปแบบการใช้งาน:
 
 ```python
 # ตัวอย่างการคำนวณความจุ
@@ -293,9 +293,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Auto-scaling Configuration
+### การกำหนดค่าอัตโนมัติการปรับขนาด
 
-Configure auto-scaling for Container Apps:
+กำหนดค่าอัตโนมัติการปรับขนาดสำหรับ Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -331,9 +331,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Cost Optimization
+### การเพิ่มประสิทธิภาพค่าใช้จ่าย
 
-Implement cost controls:
+ดำเนินมาตรการควบคุมค่าใช้จ่าย:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -363,11 +363,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Monitoring and Observability
+## การตรวจสอบและการสังเกตการณ์
 
-### Application Insights Integration
+### การบูรณาการ Application Insights
 
-Configure monitoring for AI workloads:
+กำหนดค่าการตรวจสอบสำหรับงาน AI:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -403,9 +403,9 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Custom Metrics
+### เมตริกแบบกำหนดเอง
 
-Track AI-specific metrics:
+ติดตามเมตริกเฉพาะ AI:
 
 ```python
 # เทเลเมทรีที่กำหนดเองสำหรับโมเดล AI
@@ -440,12 +440,12 @@ class AITelemetry:
         )
 ```
 
-### Health Checks
+### การตรวจสอบสุขภาพบริการ
 
-Implement AI service health monitoring:
+ดำเนินการตรวจสอบสุขภาพของบริการ AI:
 
 ```python
-# เอ็นด์พอยต์การตรวจสอบสถานะ
+# จุดตรวจสอบสุขภาพ
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -455,7 +455,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # ทดสอบการเชื่อมต่อกับ OpenAI
+        # ทดสอบการเชื่อมต่อ OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -471,32 +471,32 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## Next Steps
+## ขั้นตอนถัดไป
 
-1. **ตรวจสอบ [คู่มือการผสาน Microsoft Foundry](microsoft-foundry-integration.md)** สำหรับรูปแบบการผสานบริการ
-2. **ทำ [ห้องฝึกปฏิบัติ AI](ai-workshop-lab.md)** เพื่อประสบการณ์ลงมือปฏิบัติ
-3. **นำ [แนวปฏิบัติ AI สำหรับการใช้งานจริง](production-ai-practices.md)** ไปใช้สำหรับการปรับใช้ในองค์กร
-4. **สำรวจ [คู่มือการแก้ปัญหา AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** สำหรับปัญหาที่พบบ่อย
+1. **ทบทวน [คู่มือการรวม Microsoft Foundry](microsoft-foundry-integration.md)** สำหรับรูปแบบการรวมบริการ
+2. **ทำ [ห้องปฏิบัติการเวิร์กช็อป AI](ai-workshop-lab.md)** เพื่อประสบการณ์ปฏิบัติจริง
+3. **ดำเนินการ [แนวทางปฏิบัติ AI ในการผลิต](production-ai-practices.md)** สำหรับการติดตั้งในองค์กร
+4. **สำรวจ [คู่มือแก้ไขปัญหา AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** สำหรับปัญหาที่พบบ่อย
 
-## Resources
+## แหล่งข้อมูล
 
-- [ความพร้อมใช้งานของโมเดล Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [ความพร้อมใช้งานโมเดล Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [เอกสาร Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [การสเกล Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [การปรับให้ต้นทุนของโมเดล AI เหมาะสม](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [การปรับขนาด Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [การเพิ่มประสิทธิภาพค่าใช้จ่ายโมเดล AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD สำหรับผู้เริ่มต้น](../../README.md)
-- **📖 Current Chapter**: Chapter 2 - AI-First Development
-- **⬅️ Previous**: [การผสาน Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Next**: [ห้องฝึกปฏิบัติ AI](ai-workshop-lab.md)
-- **🚀 Next Chapter**: [บทที่ 3: การกำหนดค่า](../chapter-03-configuration/configuration.md)
+**การนำทางบทเรียน:**
+- **📚 หน้าแรกคอร์ส**: [AZD สำหรับผู้เริ่มต้น](../../README.md)
+- **📖 บทปัจจุบัน**: บทที่ 2 - การพัฒนา AI-First
+- **⬅️ ก่อนหน้า**: [การรวม Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ ถัดไป**: [ห้องปฏิบัติการเวิร์กช็อป AI](ai-workshop-lab.md)
+- **🚀 บทถัดไป**: [บทที่ 3: การกำหนดค่า](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-ข้อจำกัดความรับผิดชอบ:
-เอกสารฉบับนี้ได้รับการแปลโดยใช้บริการแปลด้วยปัญญาประดิษฐ์ (AI) [Co-op Translator](https://github.com/Azure/co-op-translator). แม้เราจะพยายามให้การแปลมีความถูกต้อง โปรดทราบว่าการแปลอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง ควรถือเอกสารต้นฉบับเป็นแหล่งข้อมูลหลัก สำหรับข้อมูลที่สำคัญ แนะนำให้ใช้บริการแปลโดยนักแปลมืออาชีพ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความผิดใดๆ ที่เกิดจากการใช้การแปลฉบับนี้.
+**ข้อจำกัดความรับผิดชอบ**:
+เอกสารนี้ได้รับการแปลโดยใช้บริการแปลด้วย AI [Co-op Translator](https://github.com/Azure/co-op-translator) แม้ว่าเราจะพยายามให้ความถูกต้อง โปรดทราบว่าการแปลอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาต้นทางควรถือเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลสำคัญ ขอแนะนำให้ใช้บริการแปลโดยมนุษย์มืออาชีพ เราจะไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความผิดใด ๆ ที่เกิดจากการใช้การแปลนี้
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

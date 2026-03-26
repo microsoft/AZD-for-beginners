@@ -1,50 +1,50 @@
-# デプロイガイド - AZD デプロイの習得
+# Deployment Guide - Mastering AZD Deployments
 
-**章のナビゲーション:**
-- **📚 コースホーム**: [AZD 入門](../../README.md)
-- **📖 現在の章**: 第4章 - Infrastructure as Code とデプロイ
-- **⬅️ 前の章**: [第3章：構成](../chapter-03-configuration/configuration.md)
+**チャプター ナビゲーション:**
+- **📚 コースホーム**: [AZD入門](../../README.md)
+- **📖 現在の章**: 第4章 - Infrastructure as Code & Deployment
+- **⬅️ 前の章**: [第3章: 設定](../chapter-03-configuration/configuration.md)
 - **➡️ 次へ**: [リソースのプロビジョニング](provisioning.md)
-- **🚀 次の章**: [第5章：マルチエージェントAIソリューション](../../examples/retail-scenario.md)
+- **🚀 次の章**: [第5章: マルチエージェントAIソリューション](../../examples/retail-scenario.md)
 
 ## はじめに
 
-この## デプロイプロセスの理解総合ガイドは、Azure Developer CLIを使用したアプリケーションのデプロイについて、基本的なワンコマンドデプロイからカスタムフック、複数環境、CI/CD統合を伴う高度な本番シナリオまで、知っておくべきすべてを網羅します。実践的な例とベストプラクティスで完全なデプロイライフサイクルを習得しましょう。
+この包括的なガイドは、Azure Developer CLI を使用したアプリケーションのデプロイに関する基本的なワンコマンドデプロイから、カスタムフック、複数環境、CI/CD 統合を伴う高度な本番シナリオまで、必要なあらゆる事項をカバーします。実践的な例とベストプラクティスでデプロイのライフサイクルを習得します。
 
 ## 学習目標
 
-By completing this guide, you will:
-- Azure Developer CLI の全てのデプロイコマンドとワークフローを習得する
-- プロビジョニングからモニタリングまでの完全なデプロイライフサイクルを理解する
-- 事前・事後デプロイの自動化のためのカスタムデプロイフックを実装する
-- 環境固有のパラメータを用いた複数環境の構成を設定する
-- ブルーグリーンやカナリアデプロイを含む高度なデプロイ戦略を設定する
-- azd デプロイを CI/CD パイプラインと DevOps ワークフローに統合する
+このガイドを完了することで、あなたは次のことができるようになります:
+- Azure Developer CLI のすべてのデプロイコマンドとワークフローを習得する
+- プロビジョニングから監視までの完全なデプロイライフサイクルを理解する
+- デプロイ前後の自動化のためのカスタムデプロイフックを実装する
+- 環境固有のパラメーターを持つ複数環境を構成する
+- ブルーグリーンやカナリアなどの高度なデプロイ戦略を設定する
+- azd デプロイを CI/CD パイプラインや DevOps ワークフローに統合する
 
 ## 学習成果
 
-Upon completion, you will be able to:
-- azd の全てのデプロイワークフローを独力で実行およびトラブルシュートできる
-- フックを用いたカスタムデプロイ自動化を設計・実装する
+完了後、あなたは次のことができるようになります:
+- すべての azd デプロイワークフローを独立して実行およびトラブルシュートする
+- フックを使用したカスタムデプロイ自動化を設計および実装する
 - 適切なセキュリティと監視を備えた本番対応のデプロイを構成する
 - 複雑なマルチ環境デプロイシナリオを管理する
-- デプロイ性能を最適化し、ロールバック戦略を実装する
-- azd デプロイをエンタープライズの DevOps プラクティスに統合する
+- デプロイパフォーマンスを最適化し、ロールバック戦略を実装する
+- azd デプロイを企業の DevOps プラクティスに統合する
 
 ## デプロイ概要
 
 Azure Developer CLI はいくつかのデプロイコマンドを提供します:
-- `azd up` - Complete workflow (provision + deploy)
-- `azd provision` - Create/update Azure resources only
-- `azd deploy` - Deploy application code only
-- `azd package` - Build and package applications
+- `azd up` - 完全なワークフロー（プロビジョン + デプロイ）
+- `azd provision` - Azure リソースの作成/更新のみ
+- `azd deploy` - アプリケーションコードのデプロイのみ
+- `azd package` - アプリケーションのビルドとパッケージ
 
 ## 基本的なデプロイワークフロー
 
 ### 完全なデプロイ (azd up)
-新規プロジェクトで最も一般的なワークフロー:
+新しいプロジェクトで最も一般的なワークフロー:
 ```bash
-# 最初からすべてをデプロイする
+# ゼロからすべてをデプロイする
 azd up
 
 # 特定の環境でデプロイする
@@ -57,7 +57,7 @@ azd up --parameter location=westus2 --parameter sku=P1v2
 ### インフラのみのデプロイ
 Azure リソースのみを更新する必要がある場合:
 ```bash
-# インフラをプロビジョニング/更新する
+# インフラをプロビジョニング／更新する
 azd provision
 
 # 変更をプレビューするためにドライランでプロビジョニングする
@@ -68,13 +68,13 @@ azd provision --service database
 ```
 
 ### コードのみのデプロイ
-迅速なアプリ更新のため:
+アプリケーションの迅速な更新向け:
 ```bash
 # すべてのサービスをデプロイする
 azd deploy
 
-# 期待される出力:
-# サービスをデプロイ中 (azd deploy)
+# 予想される出力:
+# サービスをデプロイしています（azd deploy）
 # - web: デプロイ中... 完了
 # - api: デプロイ中... 完了
 # 成功: デプロイは2分15秒で完了しました
@@ -83,7 +83,7 @@ azd deploy
 azd deploy --service web
 azd deploy --service api
 
-# カスタムビルド引数を指定してデプロイする
+# カスタムビルド引数でデプロイする
 azd deploy --service api --build-arg NODE_ENV=production
 
 # デプロイを検証する
@@ -92,7 +92,7 @@ azd show --output json | jq '.services'
 
 ### ✅ デプロイ検証
 
-デプロイ後は必ず成功を確認してください:
+任意のデプロイ後に、成功を検証します:
 
 ```bash
 # すべてのサービスが稼働していることを確認する
@@ -105,7 +105,7 @@ API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
 curl -f "$API_URL/health" || echo "❌ API health check failed"
 
-# エラーを監視する（デフォルトではブラウザで開く）
+# エラーを監視する（デフォルトではブラウザで開きます）
 azd monitor --logs
 ```
 
@@ -131,11 +131,11 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### フェーズ2: インフラストラクチャのプロビジョニング
-- インフラテンプレート（Bicep/Terraform）を読み込む
+### フェーズ2: インフラのプロビジョニング
+- インフラテンプレート（Bicep/Terraform）を読み取る
 - Azure リソースを作成または更新する
-- ネットワークとセキュリティを構成する
-- 監視とログ収集を設定する
+- ネットワーキングとセキュリティを構成する
+- 監視とログを設定する
 
 ### フェーズ3: プロビジョン後フック
 ```yaml
@@ -150,10 +150,10 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### フェーズ4: アプリケーションのパッケージ化
+### フェーズ4: アプリケーションのパッケージング
 - アプリケーションコードをビルドする
-- デプロイ成果物を作成する
-- ターゲットプラットフォーム向けにパッケージ化する（コンテナ、ZIPファイルなど）
+- デプロイアーティファクトを作成する
+- 対象プラットフォーム向けにパッケージする（コンテナ、ZIP ファイルなど）
 
 ### フェーズ5: デプロイ前フック
 ```yaml
@@ -168,8 +168,8 @@ hooks:
       npm run db:migrate
 ```
 
-### フェーズ6: アプリケーションデプロイ
-- パッケージ化されたアプリを Azure サービスへデプロイする
+### フェーズ6: アプリケーションのデプロイ
+- パッケージ化されたアプリケーションを Azure サービスにデプロイする
 - 設定を更新する
 - サービスを起動/再起動する
 
@@ -218,7 +218,7 @@ services:
     buildCommand: npm install --production
 ```
 
-### 環境固有の構成
+### 環境ごとの構成
 ```bash
 # 開発環境
 azd env set NODE_ENV development
@@ -285,7 +285,7 @@ azd up --environment production-blue
 # ブルー環境をテストする
 ./scripts/test-environment.sh production-blue
 
-# トラフィックをブルーに切り替える (DNS/ロードバランサーの手動更新)
+# トラフィックをブルーに切り替える（DNS/ロードバランサーを手動で更新）
 ./scripts/switch-traffic.sh production-blue
 
 # グリーン環境をクリーンアップする
@@ -307,7 +307,7 @@ services:
         percentage: 10
 ```
 
-### ステージドデプロイ
+### 段階的デプロイ
 ```bash
 #!/bin/bash
 # deploy-staged.sh
@@ -394,7 +394,7 @@ CMD ["npm", "start"]
 
 ### サービス固有のデプロイ
 ```bash
-# 反復を高速化するために特定のサービスをデプロイする
+# より速い反復のために特定のサービスをデプロイする
 azd deploy --service web
 azd deploy --service api
 
@@ -402,7 +402,7 @@ azd deploy --service api
 azd deploy
 ```
 
-### ビルドキャッシュ
+### ビルドキャッシング
 ```yaml
 # azure.yaml - Configure build commands
 services:
@@ -414,11 +414,11 @@ services:
 
 ### 効率的なコードデプロイ
 ```bash
-# コードのみの変更には azd deploy を使用してください（azd up ではなく）
-# これによりインフラのプロビジョニングをスキップし、はるかに高速です
+# コードのみの変更には azd deploy（azd up ではなく）を使用する
+# これによりインフラのプロビジョニングをスキップし、はるかに高速になる
 azd deploy
 
-# 最速の反復には特定のサービスのみをデプロイしてください
+# 最速の反復のために特定のサービスだけをデプロイする
 azd deploy --service api
 ```
 
@@ -450,14 +450,14 @@ services:
       retries: 3
 ```
 
-### ポストデプロイ検証
+### デプロイ後の検証
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
 
 echo "Validating deployment..."
 
-# アプリケーションの正常性を確認する
+# アプリケーションの正常性を確認
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -483,7 +483,7 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 セキュリティに関する考慮事項
+## 🔐 セキュリティ上の考慮事項
 
 ### シークレット管理
 ```bash
@@ -516,7 +516,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### アイデンティティとアクセス管理
+### IDおよびアクセス管理
 ```yaml
 services:
   api:
@@ -537,12 +537,12 @@ services:
 ```bash
 # AZDには組み込みのロールバック機能がありません。推奨されるアプローチ:
 
-# オプション1: Gitから再デプロイ（推奨）
+# オプション 1: Gitから再デプロイ（推奨）
 git revert HEAD  # 問題のあるコミットを元に戻す
 git push
 azd deploy
 
-# オプション2: 特定のコミットを再デプロイ
+# オプション 2: 特定のコミットを再デプロイ
 git checkout <previous-commit-hash>
 azd deploy
 git checkout main
@@ -553,12 +553,12 @@ git checkout main
 # 適用する前にインフラの変更をプレビューする
 azd provision --preview
 
-# インフラのロールバックにはバージョン管理を使用してください:
+# インフラのロールバックにはバージョン管理を使用してください：
 git revert HEAD  # インフラの変更を元に戻す
 azd provision    # 以前のインフラの状態を適用する
 ```
 
-### データベースマイグレーションのロールバック
+### データベース移行のロールバック
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -574,15 +574,15 @@ echo "Database rollback completed"
 
 ## 📊 デプロイ指標
 
-### デプロイパフォーマンスの追跡
+### デプロイのパフォーマンスを追跡
 ```bash
 # 現在のデプロイ状況を表示
 azd show
 
-# Application Insightsでアプリケーションを監視する
+# Application Insights でアプリケーションを監視
 azd monitor --overview
 
-# ライブメトリクスを表示
+# ライブ メトリクスを表示
 azd monitor --live
 ```
 
@@ -607,18 +607,18 @@ hooks:
 
 ### 1. 環境の一貫性
 ```bash
-# 命名を一貫させる
+# 一貫した命名を使用する
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# 環境の整合性を保つ
+# 環境間の整合性を維持する
 ./scripts/sync-environments.sh
 ```
 
 ### 2. インフラ検証
 ```bash
-# デプロイ前にインフラストラクチャの変更をプレビューする
+# デプロイ前にインフラの変更をプレビューする
 azd provision --preview
 
 # ARM/Bicep のリンティングを使用する
@@ -657,7 +657,7 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. ドキュメントとログ記録
+### 4. ドキュメントとログ
 ```bash
 # デプロイ手順を文書化する
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
@@ -667,15 +667,15 @@ echo "Services deployed: $(azd show --output json | jq -r '.services | keys | jo
 
 ## 次のステップ
 
-- [リソースのプロビジョニング](provisioning.md) - インフラ管理の詳細
-- [事前デプロイ計画](../chapter-06-pre-deployment/capacity-planning.md) - デプロイ戦略を計画する
+- [リソースのプロビジョニング](provisioning.md) - インフラ管理の詳細解説
+- [デプロイ前の計画](../chapter-06-pre-deployment/capacity-planning.md) - デプロイ戦略を計画する
 - [一般的な問題](../chapter-07-troubleshooting/common-issues.md) - デプロイの問題を解決する
 - [ベストプラクティス](../chapter-07-troubleshooting/debugging.md) - 本番対応のデプロイ戦略
 
-## 🎯 ハンズオン デプロイ演習
+## 🎯 ハンズオンデプロイ演習
 
 ### 演習1: インクリメンタルデプロイワークフロー（20分）
-**目的**: 完全デプロイとインクリメンタルデプロイの違いを習得する
+<strong>目標</strong>: フルデプロイとインクリメンタルデプロイの違いを習得する
 
 ```bash
 # 初期デプロイ
@@ -683,7 +683,7 @@ mkdir deployment-practice && cd deployment-practice
 azd init --template todo-nodejs-mongo
 azd up
 
-# 初期デプロイ時間を記録
+# 初期デプロイ時間を記録する
 echo "Full deployment: $(date)" > deployment-log.txt
 
 # コードを変更する
@@ -701,30 +701,30 @@ azd down --force --purge
 ```
 
 **成功基準:**
-- [ ] 完全デプロイに5〜15分かかる
-- [ ] コードのみのデプロイに2〜5分かかる
-- [ ] コードの変更がデプロイ済みアプリに反映される
+- [ ] フルデプロイが5～15分かかる
+- [ ] コードのみのデプロイが2～5分かかる
+- [ ] コード変更がデプロイ済みアプリに反映される
 - [ ] `azd deploy` 実行後にインフラが変更されない
 
-**学習成果**: `azd deploy` はコード変更に対して `azd up` より50〜70%高速である
+<strong>学習成果</strong>: `azd deploy` はコード変更時に `azd up` より50～70%高速です
 
 ### 演習2: カスタムデプロイフック（30分）
-**目的**: デプロイ前後の自動化を実装する
+<strong>目標</strong>: デプロイ前後の自動化を実装する
 
 ```bash
-# デプロイ前の検証スクリプトを作成
+# デプロイ前の検証スクリプトを作成する
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
 echo "⚠️ Running pre-deployment checks..."
 
-# テストが通るか確認
+# テストが通るか確認する
 if ! npm run test:unit; then
     echo "❌ Tests failed! Aborting deployment."
     exit 1
 fi
 
-# コミットされていない変更を確認
+# コミットされていない変更がないか確認する
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -734,7 +734,7 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# デプロイ後のスモークテストを作成
+# デプロイ後のスモークテストを作成する
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
 echo "💨 Running smoke tests..."
@@ -753,7 +753,7 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# azure.yaml にフックを追加
+# azure.yamlにフックを追加する
 cat >> azure.yaml << 'EOF'
 
 hooks:
@@ -766,18 +766,18 @@ hooks:
     run: ./scripts/post-deploy-test.sh
 EOF
 
-# フックを使ったデプロイをテスト
+# フック付きでデプロイをテストする
 azd deploy
 ```
 
 **成功基準:**
 - [ ] デプロイ前スクリプトがデプロイ前に実行される
 - [ ] テストが失敗した場合、デプロイが中止される
-- [ ] デプロイ後のスモークテストで正常性が検証される
+- [ ] デプロイ後のスモークテストがヘルスを検証する
 - [ ] フックが正しい順序で実行される
 
 ### 演習3: マルチ環境デプロイ戦略（45分）
-**目的**: ステージングされたデプロイワークフローを実装する（dev → staging → production）
+<strong>目標</strong>: 段階的デプロイワークフロー（dev → staging → production）を実装する
 
 ```bash
 # デプロイ用スクリプトを作成する
@@ -788,7 +788,7 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# ステップ1: 開発環境にデプロイ
+# ステップ1: 開発環境へデプロイする
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
@@ -797,7 +797,7 @@ azd up --no-prompt
 echo "Running dev tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# ステップ2: ステージング環境にデプロイ
+# ステップ2: ステージング環境へデプロイする
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
@@ -839,14 +839,14 @@ azd env new production
 ```
 
 **成功基準:**
-- [ ] Dev 環境が正常にデプロイされる
-- [ ] Staging 環境が正常にデプロイされる
-- [ ] 本番には手動承認が必要である
-- [ ] すべての環境に有効なヘルスチェックがある
+- [ ] 開発環境が正常にデプロイされる
+- [ ] ステージング環境が正常にデプロイされる
+- [ ] 本番環境には手動承認が必要である
+- [ ] すべての環境でヘルスチェックが機能している
 - [ ] 必要に応じてロールバックできる
 
 ### 演習4: ロールバック戦略（25分）
-**目的**: Git を使用したデプロイのロールバックを実装してテストする
+<strong>目標</strong>: Git を使用したデプロイのロールバックを実装およびテストする
 
 ```bash
 # v1 をデプロイ
@@ -857,13 +857,13 @@ azd up
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# 破壊的変更を伴う v2 をデプロイ
+# 破壊的変更を含む v2 をデプロイ
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
 azd deploy
 
-# 失敗を検出してロールバック
+# 障害を検出してロールバック
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
@@ -881,17 +881,17 @@ fi
 ```
 
 **成功基準:**
-- [ ] デプロイ失敗を検知できる
+- [ ] デプロイ失敗を検出できる
 - [ ] ロールバックスクリプトが自動的に実行される
-- [ ] アプリケーションが正常な状態に戻る
+- [ ] アプリケーションが動作する状態に戻る
 - [ ] ロールバック後にヘルスチェックが通る
 
 ## 📊 デプロイ指標の追跡
 
-### デプロイパフォーマンスを追跡する
+### デプロイのパフォーマンスを追跡する
 
 ```bash
-# デプロイメントメトリクス用のスクリプトを作成する
+# デプロイのメトリクス用スクリプトを作成する
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
@@ -914,11 +914,11 @@ EOF
 
 chmod +x track-deployment.sh
 
-# これを使う
+# 使用する
 ./track-deployment.sh
 ```
 
-**指標を解析する:**
+**メトリクスを分析する:**
 ```bash
 # デプロイ履歴を表示
 cat deployment-metrics.csv
@@ -930,19 +930,19 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 ## 追加リソース
 
 - [Azure Developer CLI デプロイリファレンス](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Azure App Service デプロイ](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Azure App Service のデプロイ](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
 - [Azure Container Apps のデプロイ](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
 - [Azure Functions のデプロイ](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
-**ナビゲーション**
-- **前のレッスン**: [最初のプロジェクト](../chapter-01-foundation/first-project.md)
-- **次のレッスン**: [リソースのプロビジョニング](provisioning.md)
+<strong>ナビゲーション</strong>
+- <strong>前のレッスン</strong>: [最初のプロジェクト](../chapter-01-foundation/first-project.md)
+- <strong>次のレッスン</strong>: [リソースのプロビジョニング](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責事項:
-本書はAI翻訳サービス「Co‑op Translator」(https://github.com/Azure/co-op-translator)を用いて翻訳されました。正確性には努めていますが、自動翻訳には誤りや不正確な箇所が含まれる可能性があることをご承知おきください。原文（原言語の文書）を権威ある情報源とみなしてください。重要な情報については、専門の人間による翻訳をお勧めします。本翻訳の利用により生じた誤解や誤訳について、当社は一切責任を負いません。
+**免責事項**:
+この文書は、AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性には努めていますが、自動翻訳には誤りや不正確さが含まれる可能性があることにご留意ください。原文（母語版）の文書を正本として扱ってください。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の使用に起因する誤解や誤訳について、当方は一切の責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

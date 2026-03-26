@@ -1,55 +1,55 @@
-# Приклади розгортання Container App за допомогою AZD
+# Приклади розгортання контейнерних додатків за допомогою AZD
 
-Цей каталог містить комплексні приклади розгортання контейнеризованих застосунків у Azure Container Apps за допомогою Azure Developer CLI (AZD). Ці приклади демонструють реальні шаблони, найкращі практики та конфігурації, готові для виробництва.
+Ця директорія містить детальні приклади розгортання контейнеризованих додатків в Azure Container Apps за допомогою Azure Developer CLI (AZD). Ці приклади демонструють реальні патерни, найкращі практики та конфігурації, готові для продуктивного використання.
 
 ## 📚 Зміст
 
-- [Огляд](../../../../examples/container-app)
-- [Вимоги](../../../../examples/container-app)
-- [Приклади швидкого старту](../../../../examples/container-app)
-- [Приклади для виробництва](../../../../examples/container-app)
-- [Розширені шаблони](../../../../examples/container-app)
-- [Найкращі практики](../../../../examples/container-app)
+- [Огляд](#огляд)
+- [Вимоги](#вимоги)
+- [Приклади швидкого запуску](#приклади-швидкого-запуску)
+- [Приклади для продуктивного використання](#приклади-для-продуктивного-використання)
+- [Розширені патерни](#розширені-патерни)
+- [Найкращі практики](#найкращі-практики)
 
 ## Огляд
 
-Azure Container Apps — це повністю керована серверлес-контейнерна платформа, яка дозволяє запускати мікросервіси та контейнеризовані застосунки без управління інфраструктурою. У поєднанні з AZD ви отримуєте:
+Azure Container Apps — це повністю керована серверлесс платформа для контейнерів, яка дозволяє запускати мікросервіси та контейнеризовані додатки без управління інфраструктурою. У поєднанні з AZD ви отримуєте:
 
-- **Спрощене розгортання**: один командний запуск розгортає контейнери з інфраструктурою
-- **Автоматичне масштабування**: масштабування до нуля та масштабування вгору залежно від HTTP-трафіку або подій
-- **Інтегрована мережа**: вбудоване виявлення сервісів та розподіл трафіку
-- **Керовані ідентичності**: безпечна автентифікація до ресурсів Azure
-- **Оптимізація витрат**: оплата лише за використані ресурси
+- **Спрощене розгортання**: Одинa команда для розгортання контейнерів з інфраструктурою
+- **Автоматичне масштабування**: Масштабування до нуля і масштабування за HTTP-трафіком або подіями
+- **Інтегроване мережеве взаємодія**: Вбудоване відкриття сервісів і розподіл трафіку
+- **Керована ідентифікація**: Захищена аутентифікація до ресурсів Azure
+- **Оптимізація вартості**: Оплата лише за використані ресурси
 
 ## Вимоги
 
-Перед початком роботи переконайтеся, що у вас є:
+Перед початком переконайтеся, що у вас є:
 
 ```bash
-# Перевірте встановлення AZD
+# Перевірка встановлення AZD
 azd version
 
-# Перевірте Azure CLI
+# Перевірка Azure CLI
 az version
 
-# Перевірте Docker (для створення власних образів)
+# Перевірка Docker (для створення власних образів)
 docker --version
 
-# Увійдіть в Azure
+# Вхід в Azure
 azd auth login
 az login
 ```
 
 **Необхідні ресурси Azure:**
 - Активна підписка Azure
-- Дозволи на створення групи ресурсів
+- Права на створення груп ресурсів
 - Доступ до середовища Container Apps
 
-## Приклади швидкого старту
+## Приклади швидкого запуску
 
-### 1. Проста Web API (Python Flask)
+### 1. Простий Web API (Python Flask)
 
-Розгорніть базовий REST API за допомогою Azure Container Apps.
+Розгорніть базовий REST API з Azure Container Apps.
 
 **Приклад: Python Flask API**
 
@@ -79,15 +79,15 @@ azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-**Основні характеристики:**
-- Автоматичне масштабування від 0 до 10 екземплярів
-- Перевірки стану та життєздатності
-- Впровадження змінних середовища
+**Ключові можливості:**
+- Автоматичне масштабування від 0 до 10 реплік
+- Перевірки здоров'я та живучості
+- Інжекція змінних середовища
 - Інтеграція з Application Insights
 
 ### 2. Node.js Express API
 
-Розгорніть бекенд на Node.js із інтеграцією MongoDB.
+Розгорніть бекенд Node.js з інтеграцією MongoDB.
 
 ```bash
 # Ініціалізувати шаблон API Node.js
@@ -104,7 +104,7 @@ azd up
 azd monitor --logs
 ```
 
-**Основи інфраструктури:**
+**Особливості інфраструктури:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -149,29 +149,29 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 3. Статичний фронтенд + API бекенд
 
-Розгорніть повноцінний застосунок із фронтендом на React та API бекендом.
+Розгорніть повнофункціональний додаток з React фронтендом і API бекендом.
 
 ```bash
-# Ініціалізувати шаблон full-stack
+# Ініціалізувати шаблон повного стеку
 azd init --template todo-csharp-sql-swa-func
 
-# Перевірити конфігурацію
+# Переглянути конфігурацію
 cat azure.yaml
 
 # Розгорнути обидва сервіси
 azd up
 
-# Відкрити додаток
+# Відкрити застосунок
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
-## Приклади для виробництва
+## Приклади для продуктивного використання
 
 ### Приклад 1: Архітектура мікросервісів
 
-**Сценарій**: застосунок електронної комерції з кількома мікросервісами
+**Сценарій**: E-commerce додаток з кількома мікросервісами
 
-**Структура каталогу:**
+**Структура директорії:**
 ```
 microservices-demo/
 ├── azure.yaml
@@ -224,16 +224,16 @@ azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
 
-# Розгорнути всі служби
+# Розгорнути всі сервіси
 azd up
 
 # Моніторинг розгортання
 azd monitor --overview
 ```
 
-### Приклад 2: Контейнерний застосунок із ШІ
+### Приклад 2: AI-контейнерний додаток
 
-**Сценарій**: чат-застосунок із інтеграцією Azure OpenAI
+**Сценарій**: AI чат-додаток з інтеграцією Microsoft Foundry Models
 
 **Файл: src/ai-chat/app.py**
 ```python
@@ -258,7 +258,7 @@ def chat():
     openai.api_key = openai_key
     
     response = openai.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[{"role": "user", "content": user_message}]
     )
     
@@ -328,22 +328,22 @@ azd env new dev
 
 # Налаштувати OpenAI
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
-azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4"
+azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4.1"
 
 # Розгорнути
 azd up
 
-# Перевірити API
+# Протестувати API
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat \
   -H "Content-Type: application/json" \
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Приклад 3: Фоновий воркер із обробкою черги
+### Приклад 3: Фоновий воркер з обробкою черги
 
-**Сценарій**: система обробки замовлень із чергою повідомлень
+**Сценарій**: Система обробки замовлень з чергою повідомлень
 
-**Структура каталогу:**
+**Структура директорії:**
 ```
 queue-worker/
 ├── azure.yaml
@@ -381,7 +381,7 @@ def process_orders():
             # Обробити замовлення
             print(f"Processing order: {message.content}")
             
-            # Завершити повідомлення
+            # Повідомлення завершено
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -411,7 +411,7 @@ azd init
 # Розгорнути з конфігурацією черги
 azd up
 
-# Масштабувати працівника залежно від довжини черги
+# Масштабувати робітника залежно від довжини черги
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -420,31 +420,31 @@ az containerapp update \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
 
-## Розширені шаблони
+## Розширені патерни
 
-### Шаблон 1: Blue-Green розгортання
+### Патерн 1: Blue-Green розгортання
 
 ```bash
-# Створити нову ревізію без трафіку
+# Створити нову версію без трафіку
 azd deploy api --revision-suffix blue --no-traffic
 
-# Протестувати нову ревізію
+# Протестувати нову версію
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Розподілити трафік (20% на синій, 80% на поточний)
+# Розділити трафік (20% до синьої, 80% до поточної)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# Повний перехід на синій
+# Повне переключення на синю
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
 
-### Шаблон 2: Canary розгортання з AZD
+### Патерн 2: Canary розгортання з AZD
 
 **Файл: .azure/dev/config.json**
 ```json
@@ -458,12 +458,12 @@ az containerapp ingress traffic set \
 }
 ```
 
-**Сценарій розгортання:**
+**Скрипт розгортання:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
 
-# Розгортання нової ревізії з 10% трафіку
+# Розгорнути нову версію з 10% трафіку
 azd deploy api --revision-mode multiple
 
 # Моніторинг метрик
@@ -477,11 +477,11 @@ for i in {20..100..10}; do
     --resource-group rg-myapp \
     --revision-weight latest=$i
   
-  sleep 300  # Очікуйте 5 хвилин
+  sleep 300  # Почекати 5 хвилин
 done
 ```
 
-### Шаблон 3: Розгортання в багатьох регіонах
+### Патерн 3: Розгортання в декількох регіонах
 
 **Файл: azure.yaml**
 ```yaml
@@ -529,14 +529,14 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 
 **Розгортання:**
 ```bash
-# Розгорнути у всіх регіонах
+# Розгорнути у всі регіони
 azd up
 
 # Перевірити кінцеві точки
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### Шаблон 4: Інтеграція Dapr
+### Патерн 4: Інтеграція Dapr
 
 **Файл: infra/app/dapr-enabled.bicep**
 ```bicep
@@ -563,7 +563,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-**Код застосунку з Dapr:**
+**Код додатка з Dapr:**
 ```python
 from flask import Flask
 from dapr.clients import DaprClient
@@ -595,7 +595,7 @@ def create_order():
 ### 1. Організація ресурсів
 
 ```bash
-# Використовуйте послідовні правила найменування
+# Використовуйте узгоджені конвенції найменування
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
@@ -662,7 +662,7 @@ services:
             concurrent: 100
 ```
 
-### 4. Моніторинг та спостережливість
+### 4. Моніторинг та спостереження
 
 ```bash
 # Увімкнути Application Insights
@@ -670,10 +670,10 @@ azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
 # Переглядати журнали в режимі реального часу
 azd monitor --logs
-# Або використовувати Azure CLI для контейнерних додатків:
+# Або використовуйте Azure CLI для Container Apps:
 az containerapp logs show --name api --resource-group rg-myapp --follow
 
-# Моніторити метрики
+# Моніторинг метрик
 azd monitor --live
 
 # Створювати сповіщення
@@ -685,10 +685,10 @@ az monitor metrics alert create \
   --description "Alert when CPU exceeds 80%"
 ```
 
-### 5. Оптимізація витрат
+### 5. Оптимізація вартості
 
 ```bash
-# Зменшувати масштаб до нуля, коли не використовується
+# Масштабуйте до нуля, коли не використовується
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -737,7 +737,7 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Загальний довідник команд
+## Загальні команди
 
 ```bash
 # Ініціалізувати новий проект контейнерного додатка
@@ -755,7 +755,7 @@ azd provision
 # Переглянути розгорнуті ресурси
 azd show
 
-# Потокове передавання журналів за допомогою azd monitor або Azure CLI
+# Потокове відображення логів за допомогою azd monitor або Azure CLI
 azd monitor --logs
 # az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
@@ -766,7 +766,7 @@ azd monitor --overview
 azd down --force --purge
 ```
 
-## Вирішення проблем
+## Усунення неполадок
 
 ### Проблема: Контейнер не запускається
 
@@ -785,16 +785,16 @@ docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Проблема: Неможливо отримати доступ до кінцевої точки контейнерного застосунку
+### Проблема: Не вдається отримати доступ до кінцевої точки контейнерного додатку
 
 ```bash
-# Перевірте конфігурацію приходу
+# Перевірити конфігурацію ingress
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# Перевірте, чи увімкнено внутрішній прихід
+# Перевірити, чи увімкнено внутрішній ingress
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
@@ -819,20 +819,20 @@ az containerapp update \
 
 ## Додаткові ресурси та приклади
 - [Приклад мікросервісів](./microservices/README.md)
-- [Приклад простого Flask API](./simple-flask-api/README.md)
+- [Простий Flash API приклад](./simple-flask-api/README.md)
 - [Документація Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
 - [Галерея шаблонів AZD](https://azure.github.io/awesome-azd/)
 - [Приклади Container Apps](https://github.com/Azure-Samples/container-apps-samples)
-- [Шаблони Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+- [Bicep шаблони](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-## Участь у розробці
+## Внесок
 
-Щоб додати нові приклади контейнерних застосунків:
+Щоб додати нові приклади контейнерних додатків:
 
-1. Створіть новий підкаталог із вашим прикладом
+1. Створіть нову піддиректорію з вашим прикладом
 2. Включіть повні файли `azure.yaml`, `infra/` та `src/`
-3. Додайте повний README з інструкціями з розгортання
-4. Протестуйте розгортання за допомогою `azd up`
+3. Додайте докладний README з інструкціями з розгортання
+4. Перевірте розгортання за допомогою `azd up`
 5. Надішліть pull request
 
 ---
@@ -842,6 +842,6 @@ az containerapp update \
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Відмова від відповідальності**:
-Цей документ було перекладено за допомогою сервісу автоматичного перекладу штучного інтелекту [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, зверніть увагу, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ мовою оригіналу слід вважати авторитетним джерелом. Для критичної інформації рекомендується звертатися до професійного людського перекладу. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникають у результаті використання цього перекладу.
+**Відмова від відповідальності**:  
+Цей документ було перекладено за допомогою сервісу автоматичного перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, будь ласка, враховуйте, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ рідною мовою слід вважати авторитетним джерелом. Для критично важливої інформації рекомендується звертатися до професійного людського перекладу. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникли внаслідок використання цього перекладу.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

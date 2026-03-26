@@ -1,86 +1,80 @@
-# Multi-Agent Coordination Patterns
+# Mitmeagendi koordineerimise mustrid
 
-⏱️ **Estimated Time**: 60-75 minutes | 💰 **Estimated Cost**: ~$100-300/month | ⭐ **Complexity**: Advanced
+⏱️ **Eeldatav aeg**: 60–75 minutit | 💰 **Eeldatav maksumus**: ~$100-300/kuus | ⭐ **Kompleksus**: Täiustatud
 
-**📚 Learning Path:**
-- ← Eelmine: [Võimsuse planeerimine](capacity-planning.md) - Resource sizing and scaling strategies
-- 🎯 **Sa oled siin**: Multi-Agent Coordination Patterns (Orchestration, communication, state management)
-- → Järgmine: [SKU valik](sku-selection.md) - Choosing the right Azure services
+**📚 Õppeteek:**
+- ← Eelmine: [Võimsuse planeerimine](capacity-planning.md) – Ressursside mõõtmise ja skaleerimise strateegiad
+- 🎯 **Sa oled siin**: Mitmeagendi koordineerimise mustrid (orkestreerimine, suhtlus, oleku haldus)
+- → Järgmine: [SKU valik](sku-selection.md) – Õigete Azure teenuste valimine
 - 🏠 [Kursuse avaleht](../../README.md)
 
 ---
 
 ## Mida sa õpid
 
-Selle õppetunni läbimisel sa:
-- Mõistad **mitmeagendilise arhitektuuri** mustreid ja millal neid kasutada
+Selle tunni läbimisel:
+- Mõistad **mitmeagendi arhitektuuri** mustreid ja millal neid kasutada
 - Rakendad **orkestreerimise mustreid** (tsentraliseeritud, detsentraliseeritud, hierarhiline)
-- Kujundad **agentide suhtlemise** strateegiaid (sünkroonne, asünkroonne, sündmuste-põhine)
-- Haldad **jagamist olekut** hajutatud agentide vahel
-- Paigaldad **mitmeagendilisi süsteeme** Azure'is kasutades AZD
-- Rakendad **koordineerimismustreid** reaalmaailma AI-stseenides
+- Kujundad **agentide suhtluse** strateegiaid (sünkroonne, asünkroonne, sündmuspõhine)
+- Haldate **jagatud olekut** hajutatud agentide vahel
+- Paigaldad **mitmeagendi süsteeme** Azure’is AZD abil
+- Rakendad **koordineerimise mustreid** pärismaailma tehisintellekti stsenaariumide jaoks
 - Jälgid ja silud hajutatud agentide süsteeme
 
-## Miks mitmeagendiline koordinatsioon on oluline
+## Miks mitmeagendi koordineerimine on oluline
 
-### Evolutsioon: ühe agendi süsteemist mitmeagendi süsteemini
+### Evolutsioon: Ühe agendi süsteemilt mitme agendi süsteemile
 
 **Üks agent (lihtne):**
 ```
 User → Agent → Response
 ```
 - ✅ Lihtne mõista ja rakendada
-- ✅ Kiire lihtsate ülesannete puhul
-- ❌ Piiratud ühe mudeli võimetega
-- ❌ Ei saa paralleelselt töödelda keerukaid ülesandeid
-- ❌ Pole spetsialiseerumist
+- ✅ Kiire lihtsate ülesannete jaoks
+- ❌ Piiratud ühe mudeli võimekusega
+- ❌ Ei saa keerukaid ülesandeid paralleelselt töödelda
+- ❌ Puudub spetsialiseerumine
 
-**Mitmeagendi süsteem (edasijõudnud):**
-```
-           ┌─────────────┐
-           │ Orchestrator│
-           └──────┬──────┘
-        ┌─────────┼─────────┐
-        │         │         │
-    ┌───▼──┐  ┌──▼───┐  ┌──▼────┐
-    │Agent1│  │Agent2│  │Agent3 │
-    │(Plan)│  │(Code)│  │(Review)│
-    └──────┘  └──────┘  └───────┘
-```
-- ✅ Spetsialiseerunud agendid konkreetsete ülesannete jaoks
-- ✅ Paralleelne täitmine kiiruse saavutamiseks
+**Mitme agendi süsteem (edasijõudnud):**
+```mermaid
+graph TD
+    Orchestrator[Orchestrator] --> Agent1[Agent1<br/>Plaani]
+    Orchestrator --> Agent2[Agent2<br/>Kood]
+    Orchestrator --> Agent3[Agent3<br/>Ülevaata]
+```- ✅ Spetsialiseerunud agentid konkreetseteks ülesanneteks
+- ✅ Paralleelne täitmine kiiruse jaoks
 - ✅ Modulaarne ja hooldatav
-- ✅ Parem keerukate töövoogude puhul
+- ✅ Väga tõhus keerukate töövoogude puhul
 - ⚠️ Vajab koordineerimisloogikat
 
-**Analoogia**: Üks agent on nagu üks inimene, kes teeb kõiki ülesandeid. Mitmeagendi süsteem on nagu meeskond, kus iga liige on spetsialiseerunud (uurija, arendaja, retsensent, kirjutaja) ja töötab koos.
+**Analoogia**: Üks agent on nagu üks inimene, kes teeb kõik tööd. Mitme agenti süsteem on nagu meeskond, kus iga liige on spetsialist (uurija, programmeerija, ülevaataja, kirjanik) ja nad teevad koostööd.
 
 ---
 
-## Põhilised koordineerimismustrid
+## Põhilised koordineerimise mustrid
 
 ### Muster 1: Järjestikune koordineerimine (Vastutusahela muster)
 
-**Millal kasutada**: Ülesanded peavad toimuma kindlas järjekorras, iga agent kasutab eelneva väljundit.
+**Millal kasutada**: ülesanded peavad valmima kindlas järjekorras, iga agent kasutab eelneva väljundit.
 
 ```mermaid
 sequenceDiagram
-    participant User as Kasutaja
-    participant Orchestrator as Orkestreerija
+    participant User
+    participant Orchestrator
     participant Agent1 as Uurimisagent
-    participant Agent2 as Kirjutajaagent
-    participant Agent3 as Toimetajaagent
+    participant Agent2 as Kirjutamisagent
+    participant Agent3 as Toimetamisagent
     
     User->>Orchestrator: "Kirjuta artikkel tehisintellektist"
     Orchestrator->>Agent1: Uuri teemat
     Agent1-->>Orchestrator: Uurimistulemused
-    Orchestrator->>Agent2: Kirjuta mustand (kasutades uurimistulemusi)
+    Orchestrator->>Agent2: Kirjuta mustand (kasutades uurimist)
     Agent2-->>Orchestrator: Artikli mustand
-    Orchestrator->>Agent3: Toimeta ja täiusta
+    Orchestrator->>Agent3: Toimeta ja paranda
     Agent3-->>Orchestrator: Lõplik artikkel
     Orchestrator-->>User: Viimistletud artikkel
     
-    Note over User,Agent3: Järjestikune: iga samm ootab eelmist
+    Note over User,Agent3: Järjestikune: Iga samm ootab eelmist
 ```
 **Eelised:**
 - ✅ Selge andmevoog
@@ -90,28 +84,28 @@ sequenceDiagram
 **Piirangud:**
 - ❌ Aeglasem (puudub paralleelsus)
 - ❌ Üks tõrge blokeerib kogu ahela
-- ❌ Ei saa käsitleda omavahel sõltuvaid ülesandeid
+- ❌ Ei suuda töödelda omavahel sõltuvaid ülesandeid
 
-**Näited kasutusjuhtudest:**
-- Sisu loomise torujuhe (uurimine → kirjutamine → redigeerimine → avaldamine)
-- Koodi genereerimine (planeeri → implementeeri → testi → juuruta)
-- Aruannete genereerimine (andmete kogumine → analüüs → visualiseerimine → kokkuvõte)
+**Näited:**
+- Sisutootmise torujuhe (uurimine → kirjutamine → toimetamine → avaldamine)
+- Koodi genereerimine (planeerimine → rakendamine → testimine → juurutamine)
+- Aruannete koostamine (andmete kogumine → analüüs → visualiseerimine → kokkuvõte)
 
 ---
 
-### Muster 2: Paralleelne koordineerimine (Fan-Out/Fan-In)
+### Muster 2: Paralleelne koordineerimine (Ventilaator-väljaminek/ventilaator-sissevool)
 
-**Millal kasutada**: Sõltumatud ülesanded saavad töötada samaaegselt, tulemused kombineeritakse lõpus.
+**Millal kasutada**: sõltumatud ülesanded võivad samaaegselt toimuda, tulemused koondatakse lõpus.
 
 ```mermaid
 graph TB
     User[Kasutaja päring]
     Orchestrator[Orkestreerija]
-    Agent1[Analüüsi agent]
+    Agent1[Analüüsiagent]
     Agent2[Uurimisagent]
     Agent3[Andmeagent]
-    Aggregator[Tulemuste koondaja]
-    Response[Koondatud vastus]
+    Aggregator[Tulemuste koguj]
+    Response[Kombineeritud vastus]
     
     User --> Orchestrator
     Orchestrator --> Agent1
@@ -127,32 +121,32 @@ graph TB
 ```
 **Eelised:**
 - ✅ Kiire (paralleelne täitmine)
-- ✅ Vigurkindel (osa tulemusi aktsepteeritakse)
-- ✅ Horisontaalselt skaleeritav
+- ✅ Tõrketaluvus (osalised tulemused aktsepteeritavad)
+- ✅ Horisontaalne skaleerimine
 
 **Piirangud:**
-- ⚠️ Tulemused võivad saabuda väljaspool järjekorda
-- ⚠️ Vajalik agregatsiooni loogika
-- ⚠️ Keeruline olekuhalduses
+- ⚠️ Tulemused võivad saabuda vales järjekorras
+- ⚠️ Vajab agregaadi loogikat
+- ⚠️ Keerukas oleku haldus
 
-**Näited kasutusjuhtudest:**
-- Mitme allika andmete kogumine (API-d + andmebaasid + veebipõhine kraapimine)
+**Näited:**
+- Mitme allika andmete kogumine (API-d + andmebaasid + veebikraapimine)
 - Konkurentsianalüüs (mitmed mudelid genereerivad lahendusi, valitakse parim)
-- Tõlke teenused (tõlkimine mitmesse keelde samaaegselt)
+- Tõlketeenused (samal ajal mitmesse keelde tõlkimine)
 
 ---
 
-### Muster 3: Hierarhiline koordineerimine (Juhataja-Töötaja)
+### Muster 3: Hierarhiline koordineerimine (Juht-tööline)
 
-**Millal kasutada**: Keerukad töövood koos alamülesannetega, vaja delegatsiooni.
+**Millal kasutada**: keerukad töövood koos alamülesannetega, vaja delegeerimist.
 
 ```mermaid
 graph TB
-    Master[Peamine orkestreerija]
-    Manager1[Uurimisjuht]
-    Manager2[Sisuhaldur]
+    Master[Peamine Orkestreerija]
+    Manager1[Uuringute Halduse Juht]
+    Manager2[Sisu Halduse Juht]
     W1[Veebikraapija]
-    W2[Artikli analüüsija]
+    W2[Artikli Analüütik]
     W3[Kirjutaja]
     W4[Toimetaja]
     
@@ -168,73 +162,73 @@ graph TB
     style Manager2 fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
 ```
 **Eelised:**
-- ✅ Haldab keerukaid töövooge
+- ✅ Suudab hallata keerukaid töövooge
 - ✅ Modulaarne ja hooldatav
 - ✅ Selged vastutuspiirid
 
 **Piirangud:**
 - ⚠️ Keerulisem arhitektuur
-- ⚠️ Suurem latentsus (mitu koordineerimiskihi)
-- ⚠️ Vajab keerukat orkestreerimist
+- ⚠️ Kõrgem latentsus (mitu koordineerimise tasandit)
+- ⚠️ Nõuab keerukat orkestreerimist
 
-**Näited kasutusjuhtudest:**
-- Ettevõtte dokumendi töötlemine (klasifitseeri → suuna → töötlus → arhiiv)
-- Mitmeastmelised andmekanalid (ingest → puhasta → muuda → analüüsi → aruanne)
-- Keerukad automatiseeritud töövood (planeerimine → ressursijaotus → täideviimine → jälgimine)
+**Näited:**
+- Ettevõtte dokumenditöötlus (klasifitseeri → suuna → töödelda → arhiveeri)
+- Mitmeastmelised andmepildid (ingestimine → puhastamine → transformeerimine → analüüs → aruanne)
+- Keerukad automatiseerimise töövood (planeerimine → ressursside jaotus → täitmine → jälgimine)
 
 ---
 
-### Muster 4: Sündmustepõhine koordineerimine (Publish-Subscribe)
+### Muster 4: Sündmusjuhitud koordineerimine (Avalda- telli)
 
-**Millal kasutada**: Agendid peavad reageerima sündmustele, soovitakse lahtist koppelduvust.
+**Millal kasutada**: agentidel tuleb reageerida sündmustele, soovitav lahtine sidusus.
 
 ```mermaid
 sequenceDiagram
-    participant Agent1 as Andmete koguja
-    participant EventBus as Azure teenusebuss
-    participant Agent2 as Analüsaator
+    participant Agent1 as Andmekoguja
+    participant EventBus as Azure Teenusebuss
+    participant Agent2 as Analüütik
     participant Agent3 as Teavitaja
-    participant Agent4 as Arhiveerija
+    participant Agent4 as Arhivaator
     
-    Agent1->>EventBus: Avalda "Andmed vastuvõetud" sündmus
-    EventBus->>Agent2: Telli: Analüüsi andmeid
-    EventBus->>Agent3: Telli: Saada teavitus
-    EventBus->>Agent4: Telli: Arhiveeri andmed
+    Agent1->>EventBus: Avalda "AndmedVõetud" sündmus
+    EventBus->>Agent2: Tellimine: Analüüsi andmeid
+    EventBus->>Agent3: Tellimine: Saada teavitus
+    EventBus->>Agent4: Tellimine: Arhiveeri andmed
     
     Note over Agent1,Agent4: Kõik tellijad töötlevad iseseisvalt
     
-    Agent2->>EventBus: Avalda "Analüüs lõpetatud" sündmus
-    EventBus->>Agent3: Telli: Saada analüüsi aruanne
+    Agent2->>EventBus: Avalda "AnalüüsValmis" sündmus
+    EventBus->>Agent3: Tellimine: Saada analüüsiaruanne
 ```
 **Eelised:**
-- ✅ Lahtine koppelduvus agentide vahel
+- ✅ Agentide vaheline lahtine sidusus
 - ✅ Lihtne lisada uusi agente (lihtsalt telli)
 - ✅ Asünkroonne töötlemine
-- ✅ Vastupidav (sõnumite püsivus)
+- ✅ Vastupidavus (sõnumite püsivus)
 
 **Piirangud:**
-- ⚠️ Lõplik ühtlustavus (eventual consistency)
+- ⚠️ Lõppjärguline järjepidevus
 - ⚠️ Keeruline silumine
-- ⚠️ Sõnumite tellimuse väljakutsed
+- ⚠️ Sõnumite järjekorra probleemid
 
-**Näited kasutusjuhtudest:**
-- Reaalajas jälgimissüsteemid (hoiatused, armatuurlauad, logid)
-- Mitme kanali teavitused (e-post, SMS, push, Slack)
-- Andmetöötluse torujuhtmed (mitmed tarbijad sama andmevoo jaoks)
+**Näited:**
+- Reaalajas jälgimissüsteemid (häired, infomonitorid, logid)
+- Mitme kanaliga teavitused (e-post, SMS, push, Slack)
+- Andmetöötluse torud (mitmed sama andme tarbijad)
 
 ---
 
-### Muster 5: Konsensusel põhinev koordineerimine (Häälestamine/Quorum)
+### Muster 5: Konsensuspõhine koordineerimine (Hääletus/kvorum)
 
-**Millal kasutada**: Vajatakse mitme agendi nõusolekut enne jätkamist.
+**Millal kasutada**: vaja on mitme agendi kokkulepet enne jätkamist.
 
 ```mermaid
 graph TB
-    Input[Sisendülesanne]
-    Agent1[Agent 1: GPT-4]
+    Input[Sisestusülesanne]
+    Agent1[Agent 1: gpt-4.1]
     Agent2[Agent 2: Claude]
     Agent3[Agent 3: Gemini]
-    Voter[Konsensus-hääletaja]
+    Voter[Konsensusvalija]
     Output[Kokkulepitud väljund]
     
     Input --> Agent1
@@ -248,41 +242,41 @@ graph TB
     style Voter fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
 ```
 **Eelised:**
-- ✅ Suurem täpsus (mitu arvamust)
-- ✅ Vigurkindlus (väike vähemus võib ebaõnnestuda)
-- ✅ Sisseehitatud kvalitatiivne kontroll
+- ✅ Kõrgem täpsus (mitmed arvamused)
+- ✅ Tõrketaluvus (väiksemad rikete osakaalud aktsepteeritavad)
+- ✅ Sisseehitatud kvaliteedi tagamine
 
 **Piirangud:**
-- ❌ Kulukas (mitmed mudelikutsed)
-- ❌ Aeglasem (ootamine kõigi agentide jaoks)
-- ⚠️ Vajan konfliktide lahendamist
+- ❌ Kulukas (mitmeid mudelitöötlusi)
+- ❌ Aeglasem (ootab kõiki agente)
+- ⚠️ Vajab konfliktide lahendamist
 
-**Näited kasutusjuhtudest:**
-- Sisu modereerimine (mitu mudelit hindavad sisu)
-- Koodirevisjon (mitmed linterid/analüsaatorid)
-- Meditsiiniline diagnoos (mitu AI-mudelit, ekspertide valideerimine)
+**Näited:**
+- Sisu modereerimine (mitmed mudelid hindavad sisu)
+- Koodülevaatus (mitmed linters/analyüsid)
+- Meditsiiniline diagnoos (mitmed tehisintellekti mudelid, ekspertide valideerimine)
 
 ---
 
 ## Arhitektuuri ülevaade
 
-### Täielik mitmeagendi süsteem Azure'is
+### Täielik mitme agendi süsteem Azure’is
 
 ```mermaid
 graph TB
     User[Kasutaja/API klient]
     APIM[Azure API haldus]
-    Orchestrator[Orkestreerimisteenus<br/>Konteinerirakendus]
-    ServiceBus[Azure Service Bus<br/>Sündmuste keskpunkt]
+    Orchestrator[Koorduseenus<br/>Konteinerirakendus]
+    ServiceBus[Azure teenusebuss<br/>Sündmuste jaam]
     
     Agent1[Uurimisagent<br/>Konteinerirakendus]
-    Agent2[Kirjutajaagent<br/>Konteinerirakendus]
+    Agent2[Kirjutamisagent<br/>Konteinerirakendus]
     Agent3[Analüütikuagent<br/>Konteinerirakendus]
     Agent4[Ülevaatajaagent<br/>Konteinerirakendus]
     
     CosmosDB[(Cosmos DB<br/>Jagatud olek)]
-    Storage[Azure Storage<br/>Artefaktid]
-    AppInsights[Application Insights<br/>Jälgimine]
+    Storage[Azure salvestus<br/>Artefaktid]
+    AppInsights[Rakenduse Insights<br/>Jälgimine]
     
     User --> APIM
     APIM --> Orchestrator
@@ -313,17 +307,17 @@ graph TB
     style ServiceBus fill:#9C27B0,stroke:#7B1FA2,stroke-width:3px,color:#fff
     style CosmosDB fill:#4CAF50,stroke:#388E3C,stroke-width:3px,color:#fff
 ```
-**Põhikomponendid:**
+**Peamised komponendid:**
 
-| Component | Purpose | Azure Service |
-|-----------|---------|---------------|
-| **API Gateway** | Sisenemispunkt, päringute piiramine, autentimine | API Management |
-| **Orchestrator** | Koordineerib agentide töövooge | Container Apps |
-| **Message Queue** | Asünkroonne suhtlus | Service Bus / Event Hubs |
-| **Agents** | Spetsialiseerunud AI-töötlusüksused | Container Apps / Functions |
-| **State Store** | Jagatud olek, ülesannete jälgimine | Cosmos DB |
-| **Artifact Storage** | Dokumendid, tulemused, logid | Blob Storage |
-| **Monitoring** | Hajutatud jälgimine, logid | Application Insights |
+| Komponent | Eesmärk | Azure teenus |
+|-----------|---------|--------------|
+| **API värav** | Sissepääsupunkt, kiiruse piiramine, autentimine | API Management |
+| **Orkestreerija** | Agentide töövoogude koordineerimine | Container Apps |
+| **Sõnumijärjekord** | Asünkroonne suhtlus | Service Bus / Event Hubs |
+| **Agentid** | Spetsialiseerunud tehisintellekti töötajad | Container Apps / Functions |
+| **Olekuhoidla** | Jagatud olek, ülesannete jälgimine | Cosmos DB |
+| **Artefaktide hoidla** | Dokumendid, tulemused, logid | Blob Storage |
+| **Monitooring** | Hajutatud jälgimine, logid | Application Insights |
 
 ---
 
@@ -332,39 +326,39 @@ graph TB
 ### Nõutavad tööriistad
 
 ```bash
-# Kontrolli Azure Developer CLI
+# Kontrolli Azure arendaja CLI
 azd version
-# ✅ Oodatav: azd versioon 1.0.0 või uuem
+# ✅ Oodatud: azd versioon 1.0.0 või kõrgem
 
 # Kontrolli Azure CLI
 az --version
-# ✅ Oodatav: azure-cli 2.50.0 või uuem
+# ✅ Oodatud: azure-cli 2.50.0 või kõrgem
 
 # Kontrolli Dockerit (kohalikuks testimiseks)
 docker --version
-# ✅ Oodatav: Dockeri versioon 20.10 või uuem
+# ✅ Oodatud: Docker versioon 20.10 või kõrgem
 ```
 
-### Azure nõuded
+### Azure nõudmised
 
 - Aktiivne Azure tellimus
 - Õigused luua:
   - Container Apps
-  - Service Bus namespaces
+  - Service Bus nimedepesad
   - Cosmos DB kontod
-  - Storage kontod
+  - Salvesta kontod
   - Application Insights
 
 ### Eelteadmised
 
-Sul peaks olema läbitud:
-- [Configuration Management](../chapter-03-configuration/configuration.md)
-- [Authentication & Security](../chapter-03-configuration/authsecurity.md)
-- [Microservices Example](../../../../examples/microservices)
+Peaksid olema läbinud:
+- [Konfiguratsiooni haldus](../chapter-03-configuration/configuration.md)
+- [Autentimine ja turvalisus](../chapter-03-configuration/authsecurity.md)
+- [Mikroteenuste näide](../../../../examples/microservices)
 
 ---
 
-## Rakenduse juhend
+## Rakendamise juhend
 
 ### Projekti struktuur
 
@@ -398,11 +392,11 @@ multi-agent-system/
 
 ---
 
-## Õppetund 1: Järjestikune koordineerimise muster
+## Õppetund 1: Järjestikuse koordineerimise muster
 
-### Rakendus: sisu loomise torujuhe
+### Rakendamine: sisutootmise torujuhe
 
-Loome järjestikuse kanali: Uurimine → Kirjutamine → Redigeerimine → Avaldamine
+Loom terve järjestikune torujuhe: Uurimine → Kirjutamine → Toimetamine → Avaldamine
 
 ### 1. AZD konfiguratsioon
 
@@ -492,7 +486,7 @@ output namespace string = serviceBusNamespace.name
 output connectionString string = listKeys('${serviceBusNamespace.id}/AuthorizationRules/RootManageSharedAccessKey', serviceBusNamespace.apiVersion).primaryConnectionString
 ```
 
-### 3. Jagatud oleku haldur
+### 3. Jagatud olekuga haldur
 
 **Fail: `src/shared/state_manager.py`**
 
@@ -567,7 +561,7 @@ from shared.state_manager import StateManager
 app = Flask(__name__)
 state_manager = StateManager()
 
-# Service Busi ühendus
+# Teenuse bussi ühendus
 servicebus_connection_str = os.environ['SERVICEBUS_CONNECTION_STRING']
 servicebus_client = ServiceBusClient.from_connection_string(servicebus_connection_str)
 
@@ -586,7 +580,7 @@ def create_content():
     if not topic:
         return jsonify({'error': 'Topic required'}), 400
     
-    # Loo ülesanne olekuhoidlasse
+    # Loo ülesanne olekute poes
     task_id = str(uuid.uuid4())
     task = state_manager.create_task(
         task_id=task_id,
@@ -600,7 +594,7 @@ def create_content():
         body=json.dumps({
             'task_id': task_id,
             'topic': topic,
-            'next_queue': 'writer-tasks'  # Kuhu saata tulemused
+            'next_queue': 'writer-tasks'  # Kuhu tulemused saata
         }),
         content_type='application/json'
     )
@@ -641,7 +635,7 @@ import os
 import time
 from shared.state_manager import StateManager
 
-# Initsialiseeri kliendid
+# Algatage kliendid
 state_manager = StateManager()
 servicebus_client = ServiceBusClient.from_connection_string(
     os.environ['SERVICEBUS_CONNECTION_STRING']
@@ -661,9 +655,9 @@ def process_research_task(message_data):
     
     print(f"🔬 Researching: {topic}")
     
-    # Kutsu Azure OpenAI uurimistööks
+    # Helistage Microsoft Foundry mudelitele uurimiseks
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a research assistant. Provide comprehensive research on the given topic."},
             {"role": "user", "content": f"Research this topic thoroughly: {topic}"}
@@ -673,14 +667,14 @@ def process_research_task(message_data):
     
     research_results = response.choices[0].message.content
     
-    # Uuenda olekut
+    # Uuendage olekut
     state_manager.update_task_step(
         task_id=task_id,
         step_name='research',
         result={'research': research_results}
     )
     
-    # Saada järgmisele agendile (kirjutajale)
+    # Saada järgmisele agendile (kirjutaja)
     sender = servicebus_client.get_queue_sender(next_queue)
     message = ServiceBusMessage(
         body=json.dumps({
@@ -750,9 +744,9 @@ def process_writing_task(message_data):
     
     print(f"✍️ Writing article: {topic}")
     
-    # Kutsu Azure OpenAI-d artikli kirjutamiseks
+    # Helista Microsoft Foundry mudelitele artikli kirjutamiseks
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are a professional writer. Write engaging, well-structured articles."},
             {"role": "user", "content": f"Based on this research:\n\n{research}\n\nWrite a comprehensive article about: {topic}"}
@@ -837,9 +831,9 @@ def process_editing_task(message_data):
     
     print(f"📝 Editing article: {topic}")
     
-    # Kutsu Azure OpenAI redigeerima
+    # Helistage Microsoft Foundry mudelitele redigeerimiseks
     response = openai_client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-4.1",
         messages=[
             {"role": "system", "content": "You are an expert editor. Improve grammar, clarity, and structure."},
             {"role": "user", "content": f"Edit and improve this article:\n\n{draft}"}
@@ -849,7 +843,7 @@ def process_editing_task(message_data):
     
     final_article = response.choices[0].message.content
     
-    # Märgi ülesanne lõpetatuks
+    # Märkige ülesanne lõpetatuks
     state_manager.complete_task(
         task_id=task_id,
         final_result={
@@ -883,13 +877,22 @@ if __name__ == '__main__':
     main()
 ```
 
-### 8. Juurutamine ja testimine
+### 8. Paigalda ja testi
 
 ```bash
-# Initsialiseeri ja juuruta
+# Valik A: Mallipõhine juurutamine
 azd init
 azd up
 
+# Valik B: Agendi manifesti juurutamine (nõuab laiendust)
+azd extension install azure.ai.agents
+azd ai agent init -m agent-manifest.yaml
+azd up
+```
+
+> Vaata [AZD AI CLI käsud](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) kõiki `azd ai` lippude ja võimaluste kohta.
+
+```bash
 # Hangi orkestreerija URL
 ORCHESTRATOR_URL=$(azd env get-values | grep ORCHESTRATOR_URL | cut -d '=' -f2 | tr -d '"')
 
@@ -910,7 +913,7 @@ curl -X POST $ORCHESTRATOR_URL/create-content \
 }
 ```
 
-**Kontrolli ülesande edenemist:**
+**Jälgi ülesande edenemist:**
 ```bash
 TASK_ID="a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 curl $ORCHESTRATOR_URL/task/$TASK_ID
@@ -944,13 +947,13 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 ---
 
-## Õppetund 2: Paralleelne koordineerimise muster
+## Õppetund 2: Paralleelse koordineerimise muster
 
-### Rakendus: mitme allika uurimise koondaja
+### Rakendamine: mitme allika uurimisagregaat
 
-Loome paralleelse süsteemi, mis kogub teavet samaaegselt mitmest allikast.
+Loom paralleelne süsteem, mis kogub infot mitmelt allikalt samaaegselt.
 
-### Paralleelorkestreerija
+### Paralleelne orkestreerija
 
 **Fail: `src/orchestrator/parallel_workflow.py`**
 
@@ -987,7 +990,7 @@ def research_parallel():
         }
     )
     
-    # Hajutamine: Saada kõigile agentidele samaaegselt
+    # Fänniväljund: Saada samaaegselt kõigile agendidele
     agents = [
         ('web-research-queue', 'web'),
         ('academic-research-queue', 'academic'),
@@ -1022,7 +1025,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
 ```
 
-### Agregeerimise loogika
+### Agregaadilogiika
 
 **Fail: `src/agents/aggregator/app.py`**
 
@@ -1040,7 +1043,7 @@ servicebus_client = ServiceBusClient.from_connection_string(
 
 # Jälgi tulemusi iga ülesande kohta
 task_results = defaultdict(list)
-expected_agents = 4  # veeb, akadeemiline, uudised, sotsiaalmeedia
+expected_agents = 4  # veeb, akadeemiline, uudised, sotsiaalne
 
 def process_result(message_data):
     """Aggregate results from parallel agents"""
@@ -1056,11 +1059,11 @@ def process_result(message_data):
     
     print(f"📊 Received result from {agent_type} agent ({len(task_results[task_id])}/{expected_agents})")
     
-    # Kontrolli, kas kõik agendid on lõpetanud (fan-in)
+    # Kontrolli, kas kõik agendid on lõpetanud (koondus)
     if len(task_results[task_id]) == expected_agents:
         print(f"✅ All agents completed for task {task_id}. Aggregating...")
         
-        # Kombineeri tulemused
+        # Koonda tulemused
         aggregated = {
             'query': message_data['query'],
             'sources': task_results[task_id],
@@ -1070,7 +1073,7 @@ def process_result(message_data):
         # Märgi lõpetatuks
         state_manager.complete_task(task_id, aggregated)
         
-        # Puhasta
+        # Puhasta üles
         del task_results[task_id]
         
         print(f"✅ Aggregation complete for task {task_id}")
@@ -1103,31 +1106,31 @@ if __name__ == '__main__':
 ```
 
 **Paralleelse mustri eelised:**
-- ⚡ **4x kiirem** (agendid töötavad samaaegselt)
-- 🔄 **Vigurkindel** (osa tulemusi võib aktsepteerida)
-- 📈 **Skaleeritav** (lihtne lisada rohkem agente)
+- ⚡ **4x kiirem** (agentide samaaegne töö)
+- 🔄 **Tõrketaluv** (osalised tulemused aktsepteeritavad)
+- 📈 **Skaalautuv** (lisa lihtsalt rohkem agente)
 
 ---
 
 ## Praktilised harjutused
 
-### Harjutus 1: Lisa ajapiiri käsitlemine ⭐⭐ (Keskmine)
+### Harjutus 1: Lisa ajapiirangu haldus ⭐⭐ (keskmine)
 
-**Eesmärk**: Rakenda ajapiiri loogika, nii et koondaja ei oota aegumatult aeglaseid agente.
+**Eesmärk**: Rakendada ajapiirangu loogika, et agregaat ei ootaks lõputult aeglaseid agente.
 
 **Sammud**:
 
-1. **Lisa ajapiiri jälgimine koondajasse:**
+1. **Lisa ajapiirangu jälgimine agregaati:**
 
 ```python
 from datetime import datetime, timedelta
 
-task_timeouts = {}  # task_id -> expiration_time
+task_timeouts = {}  # task_id -> aegumisaeg
 
 def process_result(message_data):
     task_id = message_data['task_id']
     
-    # Määra ajapiirang esimese tulemuse jaoks
+    # Määra ajalimiit esimesele tulemusele
     if task_id not in task_timeouts:
         task_timeouts[task_id] = datetime.utcnow() + timedelta(seconds=30)
     
@@ -1136,7 +1139,7 @@ def process_result(message_data):
         'data': message_data['result']
     })
     
-    # Kontrolli, kas on valmis või aegunud
+    # Kontrolli, kas lõpetatud VÕI aeg on otsa saanud
     if len(task_results[task_id]) == expected_agents or \
        datetime.utcnow() > task_timeouts[task_id]:
         
@@ -1151,15 +1154,15 @@ def process_result(message_data):
         
         state_manager.complete_task(task_id, aggregated)
         
-        # Puhastamine
+        # Puhasta üles
         del task_results[task_id]
         del task_timeouts[task_id]
 ```
 
-2. **Testi kunstlike viivitustega:**
+2. **Testi tehislike viivitustega:**
 
 ```python
-# Ühes agendis lisa viivitus, et simuleerida aeglast töötlemist
+# Ühes agendis lisa viivitust aeglase töötlemise simuleerimiseks
 import time
 time.sleep(35)  # Ületab 30-sekundilise ajalõpu
 ```
@@ -1179,21 +1182,21 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 ```
 
 **✅ Edu kriteeriumid:**
-- ✅ Ülesanne lõpeb pärast 30 sekundit isegi kui agentide töö pole lõpetatud
-- ✅ Vastus näitab osalist tulemust (`"timed_out": true`)
-- ✅ Saadaval tulemused tagastatakse (3 neljast agentist)
+- ✅ Ülesanne lõpetatakse 30 sekundi pärast ka täitmata agentide puhul
+- ✅ Vastus näitab osalist tulemit (`"timed_out": true`)
+- ✅ Tagastatakse olemasolevad tulemused (3 neljast agendist)
 
-**Aeg**: 20-25 minutit
+**Aeg**: 20–25 minutit
 
 ---
 
-### Harjutus 2: Rakenda taaskatsetamise loogika ⭐⭐⭐ (Edasijõudnud)
+### Harjutus 2: Rakenda uuenemise loogika ⭐⭐⭐ (edasijõudnud)
 
-**Eesmärk**: Taaskäivita ebaõnnestunud agentide ülesanded automaatselt enne loobumist.
+**Eesmärk**: Ebaõnnestunud agentide ülesanded taaskäivitatakse automaatselt enne loobumist.
 
 **Sammud**:
 
-1. **Lisa taaskatsete jälgimine orkestreerijasse:**
+1. **Lisa uuenemise jälgimine orkestreerijale:**
 
 ```python
 from dataclasses import dataclass
@@ -1204,7 +1207,7 @@ class RetryConfig:
     max_retries: int = 3
     backoff_seconds: int = 5
 
-retry_counts: Dict[str, int] = {}  # sõnumi_id -> taaskatsete_arv
+retry_counts: Dict[str, int] = {}  # sõnumi_id -> korduskatsete_arv
 
 def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConfig):
     """Send message with retry metadata"""
@@ -1224,7 +1227,7 @@ def send_with_retry(queue_name: str, message_data: dict, retry_config: RetryConf
         sender.send_messages(message)
 ```
 
-2. **Lisa taaskatsete käsitleja agentidesse:**
+2. **Lisa taaskäivituse haldur agentidele:**
 
 ```python
 def process_with_retry(message, receiver, process_func):
@@ -1244,18 +1247,18 @@ def process_with_retry(message, receiver, process_func):
         max_retries = message_data.get('max_retries', 3)
         
         if retry_count < max_retries:
-            # Proovi uuesti: loobu ja pane uuesti järjekorda suurendatud loendiga
+            # Proovi uuesti: loobu ja pane järjekorda nö. arvuga
             print(f"⚠️ Retry {retry_count + 1}/{max_retries} for message {message_id}")
             
             message_data['retry_count'] = retry_count + 1
             
-            # Saada tagasi samasse järjekorda viivitusega
-            time.sleep(5 * (retry_count + 1))  # Eksponentsiaalne taandumine
+            # Saada tagasi samale järjekorrale viivitusega
+            time.sleep(5 * (retry_count + 1))  # Eksponentsiaalne tagasilükkamine
             send_with_retry(queue_name, message_data, RetryConfig())
             
-            receiver.complete_message(message)  # Eemalda originaal
+            receiver.complete_message(message)  # Eemalda algne
         else:
-            # Maksimaalne katsete arv ületatud - teisalda surnud sõnumite järjekorda
+            # Maksimaalse próbide arv ületatud - vii surnud sõnumite järjekorda
             print(f"❌ Max retries exceeded for message {message_id}")
             receiver.dead_letter_message(
                 message,
@@ -1264,7 +1267,7 @@ def process_with_retry(message, receiver, process_func):
             )
 ```
 
-3. **Jälgi dead letter järjekorda:**
+3. **Jälgi surnud kirja järjekorda:**
 
 ```python
 def monitor_dead_letters():
@@ -1283,31 +1286,31 @@ def monitor_dead_letters():
 ```
 
 **✅ Edu kriteeriumid:**
-- ✅ Ebaõnnestunud ülesanded taaskasutatakse automaatselt (kuni 3 korda)
-- ✅ Eksponentsiaalne tagasilöök taaskatsete vahel (5s, 10s, 15s)
-- ✅ Pärast maksimaalseid taaskatseid lähevad sõnumid dead letter järjekorda
-- ✅ Dead letter järjekorda saab jälgida ja sõnumeid uuesti esitada
+- ✅ Ebaõnnestunud ülesanded taaskäivitatakse automaatselt (kuni 3 korda)
+- ✅ Eksponentsiaalne tagasilöök taaskäivituste vahel (5s, 10s, 15s)
+- ✅ Maksimaalsete ürituste järel sõnumid lähevad surnud kirja järjekorda
+- ✅ Surnud kirja järjekorda saab jälgida ja vajadusel uuesti esitada
 
-**Aeg**: 30-40 minutit
+**Aeg**: 30–40 minutit
 
 ---
 
-### Harjutus 3: Rakenda tõrkekatkestaja ⭐⭐⭐ (Edasijõudnud)
+### Harjutus 3: Rakenda katkestuslüliti ⭐⭐⭐ (edasijõudnud)
 
-**Eesmärk**: Vältida kaskaadseid tõrkeid, peatades päringud ebaõnnestuvatele agentidele.
+**Eesmärk**: Vältida järjestikuseid rikete levikut, peatades päringud rikete korral agentidele.
 
 **Sammud**:
 
-1. **Loo tõrkekatkestaja klass:**
+1. **Loo katkestuslüliti klass:**
 
 ```python
 from enum import Enum
 from datetime import datetime, timedelta
 
 class CircuitState(Enum):
-    CLOSED = "closed"      # Normaalne toimimine
-    OPEN = "open"          # Rikkeolek, taotlused lükatakse tagasi
-    HALF_OPEN = "half_open"  # Kontrollitakse, kas on taastunud
+    CLOSED = "closed"      # Tavaline toimimine
+    OPEN = "open"          # Ebaõnnestub, keelduda taotlustest
+    HALF_OPEN = "half_open"  # Testimine, kas taastunud
 
 class CircuitBreaker:
     def __init__(self, failure_threshold=5, timeout_seconds=60):
@@ -1320,7 +1323,7 @@ class CircuitBreaker:
     def call(self, func):
         """Execute function with circuit breaker protection"""
         if self.state == CircuitState.OPEN:
-            # Kontrolli, kas ajalimiit on möödunud
+            # Kontrolli, kas aegumine on möödunud
             if datetime.utcnow() - self.last_failure_time > timedelta(seconds=self.timeout_seconds):
                 self.state = CircuitState.HALF_OPEN
                 print("🔄 Circuit breaker: HALF_OPEN (testing)")
@@ -1349,7 +1352,7 @@ class CircuitBreaker:
             raise e
 ```
 
-2. **Rakenda agentide kutsumisel:**
+2. **Rakenda agente kutsudes:**
 
 ```python
 # Orkestreerijas
@@ -1368,10 +1371,10 @@ def send_to_agent(agent_type, message_data):
         circuit.call(lambda: send_message(agent_type, message_data))
     except Exception as e:
         print(f"⚠️ Skipping {agent_type} agent: {e}")
-        # Jätkake teiste agentidega
+        # Jätka teiste agentidega
 ```
 
-3. **Testi tõrkekatkestajat:**
+3. **Testi katkestuslülitit:**
 
 ```bash
 # Simuleeri korduvaid tõrkeid (peata üks agent)
@@ -1385,18 +1388,18 @@ for i in {1..10}; do
   sleep 2
 done
 
-# Kontrolli logisid - peaks nägema 'circuit open' pärast 5 tõrget
-# Kasuta Azure CLI-d Container Appi logide jaoks:
+# Kontrolli logisid - pärast 5 ebaõnnestumist peaks nägema avatud vooluringi
+# Kasuta Azure CLI-d konteinerirakenduse logide jaoks:
 az containerapp logs show --name orchestrator --resource-group $RG_NAME --tail 50
 ```
 
 **✅ Edu kriteeriumid:**
-- ✅ Pärast 5 ebaõnnestumist avatakse vool (keeldub päringutest)
-- ✅ Pärast 60 sekundit läheb vool pool-avatuks (testib taastumist)
-- ✅ Teised agendid jätkavad normaalselt töötamist
-- ✅ Vool suletakse automaatselt, kui agent taastub
+- ✅ Pärast 5 ebaõnnestumist lülitub katkestuslüliti avatud olekusse (keeldub päringutest)
+- ✅ Pärast 60 sekundit läheb katkestuslüliti poolavasse olekusse (testib taastumist)
+- ✅ Teised agentid jätkavad tavapärast tööd
+- ✅ Katkestuslüliti sulgub automaatselt, kui agent taastub
 
-**Aeg**: 40-50 minutit
+**Aeg**: 40–50 minutit
 
 ---
 
@@ -1415,7 +1418,7 @@ from opencensus.trace.samplers import AlwaysOnSampler
 import logging
 import os
 
-# Seadista jälgimine
+# Konfigureeri jälgimine
 config_integration.trace_integrations(['requests', 'logging'])
 
 connection_string = os.environ.get('APPLICATIONINSIGHTS_CONNECTION_STRING')
@@ -1426,7 +1429,7 @@ tracer = Tracer(
     sampler=AlwaysOnSampler()
 )
 
-# Seadista logimine
+# Konfigureeri logimine
 logger = logging.getLogger(__name__)
 logger.addHandler(AzureLogHandler(connection_string=connection_string))
 logger.setLevel(logging.INFO)
@@ -1450,7 +1453,7 @@ def trace_agent_call(agent_name, task_id, operation):
 
 ### Application Insights päringud
 
-Jälgi mitmeagendilisi töövooge:
+**Jälgi mitme agendi töövooge:**
 
 ```kusto
 // Trace complete workflow for a task
@@ -1474,7 +1477,7 @@ dependencies
 | order by avg_duration desc
 ```
 
-**Rikete analüüs:**
+**Riketuvastus:**
 
 ```kusto
 // Find which agents fail most
@@ -1489,24 +1492,24 @@ exceptions
 
 ---
 
-## Kuluanalüüs
+## Kulude analüüs
 
-### Mitmeagendi süsteemi kulud (kuueelarvud)
+### Mitmeagendi süsteemi kulud (kuised hinnangud)
 
-| Component | Configuration | Cost |
-|-----------|--------------|------|
-| **Orchestrator** | 1 Container App (1 vCPU, 2GB) | $30-50 |
-| **4 Agents** | 4 Container Apps (0.5 vCPU, 1GB each) | $60-120 |
-| **Service Bus** | Standard tier, 10M messages | $10-20 |
-| **Cosmos DB** | Serverless, 5GB storage, 1M RUs | $25-50 |
-| **Blob Storage** | 10GB storage, 100K operations | $5-10 |
-| **Application Insights** | 5GB ingestion | $10-15 |
-| **Azure OpenAI** | GPT-4, 10M tokens | $100-300 |
-| **Total** | | **$240-565/month** |
+| Komponent | Konfiguratsioon | Kulu |
+|-----------|-----------------|------|
+| **Orkestreerija** | 1 Container App (1 vCPU, 2GB) | $30-50 |
+| **4 Agent** | 4 Container Apps (0.5 vCPU, 1GB iga) | $60-120 |
+| **Service Bus** | Standard tase, 10M sõnumit | $10-20 |
+| **Cosmos DB** | Serverless, 5 GB salvestus, 1M RU-d | $25-50 |
+| **Blob Storage** | 10 GB salvestus, 100K operatsiooni | $5-10 |
+| **Application Insights** | 5 GB andmete vastuvõtt | $10-15 |
+| **Microsoft Foundry mudelid** | gpt-4.1, 10M tokenit | $100-300 |
+| **Kokku** | | **$240-565/kuus** |
 
-### Kulu optimeerimise strateegiad
+### Kulude optimeerimise strateegiad
 
-1. **Kasuta serverless’i seal, kus võimalik:**
+1. **Kasuta serverless-tehnoloogiaid, kus võimalik:**
    ```bicep
    // Cosmos DB serverless (no minimum cost)
    properties: {
@@ -1515,7 +1518,7 @@ exceptions
    }
    ```
 
-2. **Skaleeri agendid nulli, kui tühikäigul:**
+2. **Skaleeri agentide arv nullini, kui nad on passiivsed:**
    ```bicep
    scale: {
      minReplicas: 0  // Scale to zero when no messages
@@ -1523,28 +1526,28 @@ exceptions
    }
    ```
 
-3. **Kasuta Service Bus jaoks partiitöötlust:**
+3. **Kasuta Service Bus vahendusel partiide saatmist:**
    ```python
    # Saada sõnumeid partiidena (odavam)
    sender.send_messages([message1, message2, message3])
    ```
 
-4. **Cache'i tihti kasutatavad tulemused:**
+4. **Vahemälu kasutamine sagedasti kasutatavate tulemuste jaoks:**
    ```python
-   # Kasutage Azure Cache for Redis
+   # Kasutage Azure Cache for Redis'i
    if cache.exists(query_hash):
        return cache.get(query_hash)
    ```
 
 ---
 
-## Parimad tavad
+## Parimad praktikad
 
-### ✅ TEE:
+### ✅ Tee järgmist:
 
 1. **Kasuta idempotentseid operatsioone**
    ```python
-   # Agent suudab sama sõnumit mitu korda turvaliselt töödelda
+   # Agent saab sama sõnumit mitu korda turvaliselt töödelda
    def process_task(task_id):
        if state_manager.task_exists(task_id):
            print(f"Task {task_id} already processed, skipping")
@@ -1559,35 +1562,35 @@ exceptions
 
 3. **Kasuta korrelatsiooni ID-sid**
    ```python
-   # Edasta task_id läbi kogu töövoo
+   # Edasta task_id kogu töövoo jooksul
    message_data = {
-       'task_id': task_id,  # Korrelatsiooni-ID
+       'task_id': task_id,  # Sõltuvuse ID
        'timestamp': datetime.utcnow().isoformat()
    }
    ```
 
-4. **Sea sõnumitele TTL (time-to-live)**
+4. **Määra sõnumi kehtivusaeg (TTL)**
    ```bicep
    properties: {
      defaultMessageTimeToLive: 'PT1H'  // 1 hour max
    }
    ```
 
-5. **Jälgi dead letter järjekordi**
+5. **Jälgi surnud kirja järjekordi**
    ```python
    # Ebaõnnestunud sõnumite regulaarne jälgimine
    monitor_dead_letters()
    ```
 
-### ❌ ÄRA TEE:
+### ❌ Ära tee järgmist:
 
-1. **Ära loo tsüklilisi sõltuvusi**
+1. **Ära loo tsirkulaarseid sõltuvusi**
    ```python
-   # ❌ HALB: Agent A → Agent B → Agent A (lõputu tsükkel)
-   # ✅ HEA: Määrake selge suunatud tsüklivaba graaf (DAG)
+   # ❌ HALB: Agent A → Agent B → Agent A (lõpmatu tsükkel)
+   # ✅ HEA: Määratle selge suunaga tsüklivaba graaf (DAG)
    ```
 
-2. **Ära blokeeri agentide lõime**
+2. **Ära blokeeri agentide töötluslõime**
    ```python
    # ❌ HALB: Sünkroonne ootamine
    while not task_complete:
@@ -1596,27 +1599,28 @@ exceptions
    # ✅ HEA: Kasuta sõnumijärjekorra tagasikutsumisi
    ```
 
-3. **Ära ignoreeri osalisi tõrkeid**
+3. **Ära ignoreeri osalisi ebaõnnestumisi**
    ```python
-   # ❌ HALB: Katkesta kogu töövoog, kui üks agent ebaõnnestub
-   # ✅ HEA: Tagasta osalised tulemused koos veanäitajatega
+   # ❌ HALB: Tõrge kogu töövoos, kui üks agent ebaõnnestub
+   # ✅ HEA: Tagasta osalised tulemused koos veateadetega
    ```
 
-4. **Ära kasuta lõputuid taaskatseid**
+4. **Ärge kasutage lõpmatut kordust**
    ```python
-   # ❌ HALB: püüab lõputult uuesti
-   # ✅ HEA: max_retries = 3, siis dead-letterisse
+   # ❌ HALB: proovi uuesti igavesti
+   # ✅ HEA: max_retries = 3, siis surmakiri
    ```
 
 ---
+
 ## Tõrkeotsingu juhend
 
-### Probleem: sõnumid jäävad järjekorda
+### Probleem: Sõnumid kinni järjekorras
 
 **Sümptomid:**
 - Sõnumid kogunevad järjekorda
-- Agendid ei tööta
-- Ülesande olek kinni "pending"
+- Agendid ei tööta sõnumeid läbi
+- Ülesande olek jääb "ootavale"
 
 **Diagnoos:**
 ```bash
@@ -1626,13 +1630,13 @@ az servicebus queue show \
   --name research-tasks \
   --query "countDetails"
 
-# Kontrolli agendi logisid, kasutades Azure CLI-d
+# Kontrolli agendi logisid Azure CLI abil
 az containerapp logs show --name research-agent --resource-group $RG_NAME --tail 50
 ```
 
 **Lahendused:**
 
-1. **Suurendage agentide replikaate:**
+1. **Suurendage agentide koopiate arvu:**
    ```bash
    az containerapp update \
      --name research-agent \
@@ -1640,7 +1644,7 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
      --max-replicas 10
    ```
 
-2. **Kontrollige dead-letter-järjekorda:**
+2. **Kontrollige surnud kirja järjekorda:**
    ```bash
    az servicebus queue show \
      --namespace-name mybus \
@@ -1650,12 +1654,12 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 
 ---
 
-### Probleem: ülesande aegumine/ei lõpeta kunagi
+### Probleem: Ülesande aegumine/ei lõpeta kunagi
 
 **Sümptomid:**
-- Ülesande olek jääb "in_progress"
+- Ülesande olek püsib "täitmisel"
 - Mõned agendid lõpetavad, teised mitte
-- Vea teateid pole
+- Vigu ei ilmu
 
 **Diagnoos:**
 ```bash
@@ -1663,19 +1667,19 @@ az containerapp logs show --name research-agent --resource-group $RG_NAME --tail
 curl $ORCHESTRATOR_URL/task/$TASK_ID
 
 # Kontrolli Application Insightsi
-# Käivita päring: traces | where customDimensions.task_id == "..."
+# Käivita päring: traces | kus customDimensions.task_id == "..."
 ```
 
 **Lahendused:**
 
-1. **Rakendage ajapiirang agregaatoris (Harjutus 1)**
+1. **Rakendage aggregeerijas ajapiirang (Harjutus 1)**
 
-2. **Kontrollige agentide rikkeid Azure Monitori abil:**
+2. **Kontrollige agentide tõrkeid Azure Monitoriga:**
    ```bash
-   # Vaata logisid azd monitori abil
+   # Vaadake logisid azd monitori kaudu
    azd monitor --logs
    
-   # Või kasuta Azure CLI-d, et vaadata konkreetse konteinerirakenduse logisid
+   # Või kasutage Azure CLI-d konkreetsete konteinerirakenduse logide kontrollimiseks
    az containerapp logs show --name <agent-name> --resource-group $RG_NAME --follow | grep "ERROR\|FAIL"
    ```
 
@@ -1694,44 +1698,44 @@ curl $ORCHESTRATOR_URL/task/$TASK_ID
 - [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-messaging-overview)
 - [Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/introduction)
 - [Container Apps DAPR](https://learn.microsoft.com/azure/container-apps/dapr-overview)
-- [Mitmeagendi disainimustrid](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
+- [Mitme agendi disainimustrid](https://learn.microsoft.com/azure/architecture/guide/ai/multi-agent-systems)
 
-### Järgmised sammud selles kursuses
+### Järgmisena kursusel
 - ← Eelmine: [Võimsuse planeerimine](capacity-planning.md)
 - → Järgmine: [SKU valik](sku-selection.md)
-- 🏠 [Kursuse avaleht](../../README.md)
+- 🏠 [Kursus kodu](../../README.md)
 
 ### Seotud näited
-- [Mikroteenuste näide](../../../../examples/microservices) - Teenuste kommunikatsioonimustrid
-- [Azure OpenAI näide](../../../../examples/azure-openai-chat) - AI integratsioon
+- [Mikroteenuste näide](../../../../examples/microservices) - Teenuste suhtlusmustrid
+- [Microsoft Foundry mudelite näide](../../../../examples/azure-openai-chat) - Tehisintellekti integreerimine
 
 ---
 
 ## Kokkuvõte
 
-**Olete õppinud:**
+**Õppisite:**
 - ✅ Viis koordineerimismustrit (järjestikune, paralleelne, hierarhiline, sündmustepõhine, konsensus)
-- ✅ Mitmeagendi arhitektuur Azure'is (Service Bus, Cosmos DB, Container Apps)
-- ✅ Olekute haldamine jaotatud agentide vahel
-- ✅ Ajalõppude käsitlemine, kordused ja circuit-breakerid
-- ✅ Jälgimine ja silumine jaotatud süsteemides
-- ✅ Kulude optimeerimise strateegiad
+- ✅ Mitme agendi arhitektuur Azure’is (Service Bus, Cosmos DB, Container Apps)
+- ✅ Oleku haldamist jaotatud agentide vahel
+- ✅ Aegumiskäsitlust, kordusi ja lülitusseadmeid
+- ✅ Jaotatud süsteemide jälgimist ja silumist
+- ✅ Kulude optimeerimise strateegiaid
 
-**Peamised järeldused:**
-1. **Valige õige muster** - järjestikune järjestatud töövoogude jaoks, paralleelne kiiruse jaoks, sündmustepõhine paindlikkuse jaoks
-2. **Haldage olekuid hoolikalt** - kasutage Cosmos DB-d või sarnast jagatud oleku jaoks
-3. **Käsitlege rikkeid sujuvalt** - ajalõpud, kordused, circuit-breakerid, dead-letter-järjekorrad
-4. **Jälgige kõike** - jaotatud jälgimine on silumise jaoks hädavajalik
-5. **Optimeerige kulusid** - skaleerige nullini, kasutage serveritut, rakendage vahemällu salvestamist
+**Peamised õppetunnid:**
+1. **Vali õige muster** – Järjestikune tellitud töövoo jaoks, paralleelne kiiruse jaoks, sündmustepõhine paindlikkuse jaoks
+2. **Halda olekut hoolikalt** – Kasuta Cosmos DB-d või sarnast jagatud oleku jaoks
+3. **Käsitle tõrkeid sujuvalt** – Aegumised, kordused, lülitid, surnud kirja järjekorrad
+4. **Jälgi kõike** – Jaotatud jälgimine on silumise jaoks hädavajalik
+5. **Optimeeri kulusid** – Skaala nullini, kasuta serverivaba ja vahemällu salvestamist
 
 **Järgmised sammud:**
-1. Lõpetage praktilised harjutused
-2. Looge mitmeagendi süsteem oma kasutusjuhtumi jaoks
-3. Uurige [SKU valikut](sku-selection.md) jõudluse ja kulude optimeerimiseks
+1. Tee praktilised harjutused lõpuni
+2. Ehita mitme agendi süsteem oma kasutusjuhtumile
+3. Õpi [SKU valik](sku-selection.md) optimaalse jõudluse ja kulu saavutamiseks
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Lahtiütlus:
-See dokument on tõlgitud tehisintellekti (AI) tõlketeenuse Co-op Translator (https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada tõlke täpsust, tuleb arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algkeeles olevat originaaldokumenti tuleks pidada autoriteetseks allikaks. Kriitilise tähtsusega teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta ühegi arusaamatuse või väärtõlgenduse eest, mis võivad tuleneda selle tõlke kasutamisest.
+**Tähelepanek**:
+See dokument on tõlgitud kasutades AI tõlke teenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüame olla täpsed, palun arvestage, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise informatsiooni puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti tõlgendamise eest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

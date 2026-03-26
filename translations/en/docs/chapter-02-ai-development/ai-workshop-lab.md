@@ -34,7 +34,7 @@ By the end of this workshop, you will be able to:
 
 ### Azure Resources
 - Azure subscription with contributor access
-- Access to Azure OpenAI services (or ability to request access)
+- Access to Microsoft Foundry Models services (or ability to request access)
 - Resource group creation permissions
 
 ### Knowledge Prerequisites
@@ -78,7 +78,7 @@ azure-search-openai-demo/
 │   ├── main.bicep          # Main infrastructure template
 │   ├── main.parameters.json # Environment parameters
 │   └── modules/            # Reusable Bicep modules
-│       ├── openai.bicep    # Azure OpenAI configuration
+│       ├── openai.bicep    # Microsoft Foundry Models configuration
 │       ├── search.bicep    # Cognitive Search setup
 │       └── webapp.bicep    # Web app configuration
 ├── app/                    # Application code
@@ -104,7 +104,7 @@ cat infra/main.bicep
 ```
 
 **Key AI patterns to identify:**
-- Azure OpenAI service provisioning
+- Microsoft Foundry Models service provisioning
 - Cognitive Search integration
 - Secure key management
 - Network security configurations
@@ -142,7 +142,7 @@ azd up
 ```
 
 **What happens during `azd up`:**
-- ✅ Provisions Azure OpenAI service
+- ✅ Provisions Microsoft Foundry Models service
 - ✅ Creates Cognitive Search service
 - ✅ Sets up App Service for the web application
 - ✅ Configures networking and security
@@ -197,7 +197,7 @@ az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-
 1. **Update the OpenAI model:**
 ```bash
 # Change to a different model (if available in your region)
-azd env set AZURE_OPENAI_MODEL gpt-4
+azd env set AZURE_OPENAI_MODEL gpt-4.1
 
 # Redeploy with the new configuration
 azd deploy
@@ -452,7 +452,7 @@ output name string = openAIAccount.name
 **Challenge**: Create an AZD template for a document processing AI app.
 
 **Requirements:**
-- Azure OpenAI for content analysis
+- Microsoft Foundry Models for content analysis
 - Document Intelligence for OCR
 - Storage Account for document uploads
 - Function App for processing logic
@@ -593,7 +593,7 @@ You're tasked with creating a production-ready AI-powered customer service chatb
 
 **Functional Requirements:**
 - Web interface for customer interactions
-- Integration with Azure OpenAI for responses
+- Integration with Microsoft Foundry Models for responses
 - Document search capability using Cognitive Search
 - Integration with existing customer database
 - Multi-language support
@@ -626,11 +626,11 @@ You're tasked with creating a production-ready AI-powered customer service chatb
 
 ### Microsoft Documentation
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Azure OpenAI Service Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
+- [Microsoft Foundry Models Service Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
 - [Microsoft Foundry Documentation](https://learn.microsoft.com/azure/ai-studio/)
 
 ### Sample Templates
-- [Azure OpenAI Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
+- [Microsoft Foundry Models Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
 - [OpenAI Chat App Quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart)
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
@@ -640,8 +640,8 @@ You're tasked with creating a production-ready AI-powered customer service chatb
 - [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
 
 ## 🎓 Completion Certificate
-Congratulations! You've completed the AI Workshop Lab. You should now be able to:
 
+Congratulations! You've completed the AI Workshop Lab. You should now be able to:
 - ✅ Convert existing AI applications to AZD templates
 - ✅ Deploy production-ready AI applications
 - ✅ Implement security best practices for AI workloads
@@ -672,6 +672,6 @@ Congratulations! You've completed the AI Workshop Lab. You should now be able to
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

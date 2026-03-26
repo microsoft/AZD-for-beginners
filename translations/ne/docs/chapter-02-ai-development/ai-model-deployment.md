@@ -1,28 +1,28 @@
-# Azure Developer CLI सँग AI मोडेल तैनाती
+# Azure Developer CLI सँग AI मोडेल परिनियोजन
 
 **अध्याय नेभिगेसन:**
-- **📚 कोर्स होम**: [AZD सुरु गर्नेहरूको लागि](../../README.md)
-- **📖 हालको अध्याय**: अध्याय 2 - एआई-प्रथम विकास
+- **📚 कोर्स होम**: [AZD - आरम्भिकहरूको लागि](../../README.md)
+- **📖 वर्तमान अध्याय**: अध्याय 2 - AI-प्रथम विकास
 - **⬅️ अघिल्लो**: [Microsoft Foundry एकीकरण](microsoft-foundry-integration.md)
 - **➡️ अर्को**: [AI कार्यशाला ल्याब](ai-workshop-lab.md)
 - **🚀 अर्को अध्याय**: [अध्याय 3: कन्फिगरेसन](../chapter-03-configuration/configuration.md)
 
-यस मार्गदर्शिकाले AZD टेम्प्लेटहरू प्रयोग गरी AI मोडेलहरू तैनाथ गर्ने समग्र निर्देशनहरू प्रदान गर्दछ, मोडेल छनौटदेखि उत्पादन तैनाती ढाँचाहरू सम्म सबै कुराहरू समेट्दै।
+यो मार्गदर्शकले AZD टेम्प्लेटहरू प्रयोग गरेर AI मोडेलहरू तैनाथ गर्ने व्यापक निर्देशनहरू प्रदान गर्छ, मोडेल छनोटदेखि उत्पादन तैनाथी ढाँचाहरू सम्म सबै कुरा समेट्छ।
 
-## विषय सूची
+## सामग्री सूची
 
 - [मोडेल छनौट रणनीति](../../../../docs/chapter-02-ai-development)
-- [AZD कन्फिगरेसन AI मोडेलहरूको लागि](../../../../docs/chapter-02-ai-development)
-- [तैनाती ढाँचाहरू](../../../../docs/chapter-02-ai-development)
+- [AZD कन्फिगरेशन AI मोडेलहरूको लागि](../../../../docs/chapter-02-ai-development)
+- [तैनाथी ढाँचाहरू](../../../../docs/chapter-02-ai-development)
 - [मोडेल व्यवस्थापन](../../../../docs/chapter-02-ai-development)
-- [उत्पादनका विचारहरू](../../../../docs/chapter-02-ai-development)
-- [निगरानी र अवलोकनयोग्यता](../../../../docs/chapter-02-ai-development)
+- [उत्पादन विचारहरू](../../../../docs/chapter-02-ai-development)
+- [अनुगमन र अवलोकनीयता](../../../../docs/chapter-02-ai-development)
 
 ## मोडेल छनौट रणनीति
 
-### Azure OpenAI मोडेलहरू
+### Microsoft Foundry मोडेलहरू
 
-आफ्नो प्रयोग मामलाका लागि सहि मोडेल छनौट गर्नुहोस्:
+तपाईंको प्रयोग केसको लागि सही मोडेल छान्नुहोस्:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -34,9 +34,9 @@ services:
       AZURE_OPENAI_MODELS: |
         [
           {
-            "name": "gpt-4o-mini",
+            "name": "gpt-4.1-mini",
             "version": "2024-07-18",
-            "deployment": "gpt-4o-mini",
+            "deployment": "gpt-4.1-mini",
             "capacity": 10,
             "format": "OpenAI"
           },
@@ -52,28 +52,28 @@ services:
 
 ### मोडेल क्षमता योजना
 
-| मोडेल प्रकार | प्रयोग मामला | सिफारिस गरिएको क्षमता | लागत विचारहरू |
+| Model Type | Use Case | Recommended Capacity | Cost Considerations |
 |------------|----------|---------------------|-------------------|
-| GPT-4o-mini | च्याट, प्रश्नोत्तर | 10-50 TPM | अधिकांश कामहरूको लागि लागत-कुशल |
-| GPT-4 | जटिल तर्क | 20-100 TPM | उच्च लागत, प्रिमियम सुविधाहरूका लागि प्रयोग गर्नुहोस् |
-| Text-embedding-ada-002 | खोज, RAG | 30-120 TPM | अर्थपूर्ण खोजका लागि आवश्यक |
-| Whisper | भाषण-देखि-पाठ | 10-50 TPM | अडियो प्रोसेसिङ कार्यभारहरूको लागि |
+| gpt-4.1-mini | च्याट, प्रश्नोत्तर | 10-50 TPM | धेरै कार्यभारका लागि लागत-प्रभावी |
+| gpt-4.1 | जटिल तर्क | 20-100 TPM | उच्च लागत, प्रिमियम सुविधाहरूको लागि प्रयोग गर्नुहोस् |
+| Text-embedding-ada-002 | सर्च, RAG | 30-120 TPM | सिमेन्टिक सर्चका लागि आवश्यक |
+| Whisper | भाषण-देखि-पाठ | 10-50 TPM | अडियो प्रशोधन कार्यभार |
 
-## AZD कन्फिगरेसन AI मोडेलहरूको लागि
+## AZD कन्फिगरेशन AI मोडेलहरूको लागि
 
-### Bicep टेम्पलेट कन्फिगरेसन
+### Bicep टेम्प्लेट कन्फिगरेशन
 
-Bicep टेम्प्लेटहरू मार्फत मोडेल तैनातीहरू सिर्जना गर्नुहोस्:
+Bicep टेम्प्लेटहरू मार्फत मोडेल तैनाथीहरू सिर्जना गर्नुहोस्:
 
 ```bicep
 // infra/main.bicep
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
-    name: 'gpt-4o-mini'
+    name: 'gpt-4.1-mini'
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
     sku: {
@@ -130,13 +130,13 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 # .env विन्यास
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
-AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
+AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
-## तैनाती ढाँचाहरू
+## तैनाथी ढाँचाहरू
 
-### ढाँचा 1: एक-क्षेत्र तैनाती
+### ढाँचा 1: एकल-क्षेत्र तैनाथी
 
 ```yaml
 # azure.yaml - Single region
@@ -146,15 +146,15 @@ services:
     host: containerapp
     config:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
-      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
+      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-उपयुक्त:
+लागि उपयुक्त:
 - विकास र परीक्षण
-- एक- बजार अनुप्रयोगहरू
+- एकल-बजार अनुप्रयोगहरू
 - लागत अनुकूलन
 
-### ढाँचा 2: बहु-क्षेत्र तैनाती
+### ढाँचा 2: बहु-क्षेत्र तैनाथी
 
 ```bicep
 // Multi-region deployment
@@ -167,14 +167,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-उपयुक्त:
-- विश्वव्यापी अनुप्रयोगहरू
+लागि उपयुक्त:
+- वैश्विक अनुप्रयोगहरू
 - उच्च उपलब्धता आवश्यकताहरू
-- लोड वितरण
+- लोड विभाजन
 
-### ढाँचा 3: हाइब्रिड तैनाती
+### ढाँचा 3: हाइब्रिड तैनाथी
 
-Azure OpenAI लाई अन्य AI सेवाहरू सँग संयुक्त गर्नुहोस्:
+Microsoft Foundry मोडेलहरूलाई अन्य AI सेवाहरू सँग संयोजन गर्नुहोस्:
 
 ```bicep
 // Hybrid AI services
@@ -205,15 +205,15 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ## मोडेल व्यवस्थापन
 
-### संस्करण नियन्त्रण
+### भर्सन नियन्त्रण
 
-आफ्नो AZD कन्फिगरेसनमा मोडेल संस्करणहरू ट्रयाक गर्नुहोस्:
+आफ्नो AZD कन्फिगरेसनमा मोडेल भर्सनहरू ट्र्याक गर्नुहोस्:
 
 ```json
 {
   "models": {
     "chat": {
-      "name": "gpt-4o-mini",
+      "name": "gpt-4.1-mini",
       "version": "2024-07-18",
       "fallback": "gpt-35-turbo"
     },
@@ -227,7 +227,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### मोडेल अपडेटहरू
 
-मोडेल अपडेटहरूका लागि AZD हुकहरू प्रयोग गर्नुहोस्:
+मोডेल अपडेटहरूको लागि AZD हुकहरू प्रयोग गर्नुहोस्:
 
 ```bash
 #!/bin/bash
@@ -237,23 +237,23 @@ echo "Checking model availability..."
 az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
-  --query "[?name=='gpt-4o-mini']"
+  --query "[?name=='gpt-4.1-mini']"
 ```
 
 ### A/B परीक्षण
 
-एकाधिक मोडेल संस्करणहरू तैनाथ गर्नुहोस्:
+धेरै मोडेल भर्सनहरू तैनाथ गर्नुहोस्:
 
 ```bicep
 param enableABTesting bool = false
 
 resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'gpt-4o-mini-${enableABTesting ? 'v1' : 'prod'}'
+  name: 'gpt-4.1-mini-${enableABTesting ? 'v1' : 'prod'}'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -264,7 +264,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## उत्पादनका विचारहरू
+## उत्पादन विचारहरू
 
 ### क्षमता योजना
 
@@ -283,7 +283,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# प्रयोगको उदाहरण
+# उदाहरण प्रयोग
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -293,9 +293,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### आटो-स्केलिङ कन्फिगरेसन
+### अटो-स्केलिङ कन्फिगरेशन
 
-Container Apps का लागि आटो-स्केलिङ कन्फिगर गर्नुहोस्:
+Container Apps का लागि अटो-स्केलिङ कन्फिगर गर्नुहोस्:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -333,7 +333,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### लागत अनुकूलन
 
-लागत नियन्त्रणहरू कार्यान्वयन गर्नुहोस्:
+लागत नियन्त्रणहरू लागू गर्नुहोस्:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -363,11 +363,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## निगरानी र अवलोकनयोग्यता
+## अनुगमन र अवलोकनीयता
 
 ### Application Insights एकीकरण
 
-AI वर्कलोडहरूका लागि निगरानी कन्फिगर गर्नुहोस्:
+AI कार्यभारका लागि अनुगमन कन्फिगर गर्नुहोस्:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -405,10 +405,10 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### अनुकूलित मेट्रिक्स
 
-AI-विशेष मेट्रिक्स ट्रयाक गर्नुहोस्:
+AI-विशिष्ट मेट्रिक्स ट्र्याक गर्नुहोस्:
 
 ```python
-# एआई मोडेलहरूको लागि अनुकूलित टेलिमेट्री
+# एआई मोडेलहरूको लागि अनुकूलित टेलीमेट्री
 import logging
 from applicationinsights import TelemetryClient
 
@@ -442,7 +442,7 @@ class AITelemetry:
 
 ### हेल्थ चेकहरू
 
-AI सेवा स्वास्थ्य निगरानी कार्यान्वयन गर्नुहोस्:
+AI सेवा स्वास्थ्य अनुगमन लागू गर्नुहोस्:
 
 ```python
 # स्वास्थ्य जाँच एन्डपोइन्टहरू
@@ -455,7 +455,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # OpenAI कनेक्शन परीक्षण
+        # OpenAI कनेक्शन जाँच
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -473,23 +473,23 @@ async def check_ai_models():
 
 ## अर्को कदमहरू
 
-1. **[Microsoft Foundry एकीकरण गाइड](microsoft-foundry-integration.md) समीक्षा गर्नुहोस्** सेवा एकीकरण ढाँचाहरूका लागि
-2. **[AI कार्यशाला ल्याब](ai-workshop-lab.md) पूरा गर्नुहोस्** प्रत्यक्ष अनुभवका लागि
-3. **[उत्पादन AI अभ्यासहरू](production-ai-practices.md) कार्यान्वयन गर्नुहोस्** एन्त्रप्राइज तैनातीहरूका लागि
-4. **[AI ट्रबलशुटिङ गाइड](../chapter-07-troubleshooting/ai-troubleshooting.md) अन्वेषण गर्नुहोस्** सामान्य समस्याहरूका लागि
+1. **सेवा एकीकरण ढाँचाहरूको लागि [Microsoft Foundry एकीकरण](microsoft-foundry-integration.md) समीक्षा गर्नुहोस्**
+2. **हातेमालो अनुभवका लागि [AI कार्यशाला ल्याब](ai-workshop-lab.md) पूरा गर्नुहोस्**
+3. **उद्यम परिनियोजनहरूका लागि [उत्पादन AI अभ्यासहरू](production-ai-practices.md) कार्यान्वयन गर्नुहोस्**
+4. **साधारण समस्याहरूको लागि [AI समस्यासमाधान मार्गदर्शिका](../chapter-07-troubleshooting/ai-troubleshooting.md) अन्वेषण गर्नुहोस्**
 
 ## स्रोतहरू
 
-- [Azure OpenAI मोडेल उपलब्धता](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI दस्तावेजीकरण](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Microsoft Foundry मोडेल उपलब्धता](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI प्रलेखन](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Container Apps स्केलिङ](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [AI मोडेल लागत अनुकूलन](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **अध्याय नेभिगेसन:**
-- **📚 कोर्स होम**: [AZD सुरु गर्नेहरूको लागि](../../README.md)
-- **📖 हालको अध्याय**: अध्याय 2 - एआई-प्रथम विकास
+- **📚 कोर्स होम**: [AZD - आरम्भिकहरूको लागि](../../README.md)
+- **📖 वर्तमान अध्याय**: अध्याय 2 - AI-प्रथम विकास
 - **⬅️ अघिल्लो**: [Microsoft Foundry एकीकरण](microsoft-foundry-integration.md)
 - **➡️ अर्को**: [AI कार्यशाला ल्याब](ai-workshop-lab.md)
 - **🚀 अर्को अध्याय**: [अध्याय 3: कन्फिगरेसन](../chapter-03-configuration/configuration.md)
@@ -498,5 +498,5 @@ async def check_ai_models():
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 अस्वीकरण:
-यो दस्तावेज AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरेर अनुवाद गरिएको हो। हामी स्पष्टताको लागि प्रयास गर्छौं, तर कृपया ध्यान दिनुहोस् कि स्वचालित अनुवादमा त्रुटि वा अशुद्धता हुन सक्छ। मूल भाषामा रहेको दस्तावेजलाई अधिकारिक स्रोत मान्नुपर्छ। महत्वपूर्ण जानकारीका लागि व्यावसायिक मानव अनुवाद सिफारिश गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलतफहमी वा गलत व्याख्याका लागि हामी जिम्मेवार छैनौं।
+यस दस्तावेजलाई AI अनुवाद सेवा Co-op Translator (https://github.com/Azure/co-op-translator) प्रयोग गरेर अनुवाद गरिएको हो। हामी शुद्धताका लागि प्रयासरत छौं, तर कृपया ध्यान दिनुहोस् कि स्वचालित अनुवादमा त्रुटि वा अशुद्धता हुन सक्छ। मूल भाषामा रहेको दस्तावेजलाई अधिकारिक स्रोत मानिनु पर्छ। महत्त्वपूर्ण जानकारीका लागि पेशेवर मानव अनुवाद सिफारिश गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न हुने कुनै पनि गलतफहमी वा गलत व्याख्याका लागि हामी उत्तरदायी छैनौं।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

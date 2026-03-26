@@ -1,17 +1,17 @@
-# 4. Configure a Template
+# 4. Cấu hình một Mẫu
 
-!!! tip "ĐẾN CUỐI MODULE NÀY BẠN SẼ CÓ THỂ"
+!!! tip "KẾT THÚC MÔ-ĐUN NÀY BẠN SẼ CÓ THỂ"
 
     - [ ] Hiểu mục đích của `azure.yaml`
     - [ ] Hiểu cấu trúc của `azure.yaml`
-    - [ ] Hiểu giá trị của chu kỳ sống azd `hooks`
-    - [ ] **Lab 4:** Khám phá và sửa đổi các biến môi trường
+    - [ ] Hiểu giá trị của các `hooks` trong vòng đời azd
+    - [ ] **Bài Lab 4:** Khám phá và chỉnh sửa các biến môi trường
 
 ---
 
-!!! prompt "Tệp `azure.yaml` làm gì? Sử dụng khung mã và giải thích nó từng dòng một"
+!!! prompt "Tệp `azure.yaml` dùng để làm gì? Dùng một khối mã và giải thích nó từng dòng"
 
-      Tệp `azure.yaml` là **tệp cấu hình cho Azure Developer CLI (azd)**. Nó định nghĩa cách ứng dụng của bạn nên được triển khai lên Azure, bao gồm hạ tầng, dịch vụ, hooks triển khai và biến môi trường.
+      Tệp `azure.yaml` là **tệp cấu hình cho Azure Developer CLI (azd)**. Nó định nghĩa cách ứng dụng của bạn nên được triển khai lên Azure, bao gồm hạ tầng, dịch vụ, các hook khi triển khai và các biến môi trường.
 
 ---
 
@@ -20,23 +20,23 @@
 Tệp `azure.yaml` này đóng vai trò như **bản thiết kế triển khai** cho một ứng dụng tác nhân AI mà:
 
 1. **Xác thực môi trường** trước khi triển khai
-2. **Cấp phát dịch vụ AI Azure** (AI Hub, AI Project, Search, v.v.)
-3. **Triển khai một ứng dụng Python** lên Azure Container Apps
+2. **Cấp phát các dịch vụ Azure AI** (AI Hub, AI Project, Search, v.v.)
+3. **Triển khai ứng dụng Python** lên Azure Container Apps
 4. **Cấu hình các mô hình AI** cho cả chức năng chat và embedding
 5. **Thiết lập giám sát và theo dõi** cho ứng dụng AI
-6. **Xử lý cả kịch bản dự án AI mới và dự án AI đã tồn tại**
+6. **Xử lý cả kịch bản tạo mới và sẵn có** của Azure AI project
 
-Tệp cho phép **triển khai bằng một lệnh** (`azd up`) cho một giải pháp tác nhân AI hoàn chỉnh với xác thực, cấp phát và cấu hình sau triển khai phù hợp.
+Tệp cho phép **triển khai bằng một lệnh** (`azd up`) của một giải pháp tác nhân AI hoàn chỉnh với việc xác thực, cấp phát và cấu hình sau triển khai phù hợp.
 
-??? info "Mở để xem: `azure.yaml`"
+??? info "Mở rộng để xem: `azure.yaml`"
 
-      Tệp `azure.yaml` định nghĩa cách Azure Developer CLI nên triển khai và quản lý ứng dụng Tác nhân AI này trên Azure. Hãy phân tích nó từng dòng một.
+      Tệp `azure.yaml` định nghĩa cách Azure Developer CLI nên triển khai và quản lý ứng dụng AI Agent này trên Azure. Hãy cùng phân tích từng dòng.
 
       ```yaml title="" linenums="0"
 
       # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
-      # TODO: chúng ta có cần hooks không? 
-      # TODO: chúng ta có cần tất cả các biến này không?
+      # TODO: do we need hooks? 
+      # TODO: do we need all of the variables?
 
       name: azd-get-started-with-ai-agents
       metadata:
@@ -128,17 +128,17 @@ Tệp cho phép **triển khai bằng một lệnh** (`azd up`) cho một giải
 
 ## 2. Phân tích Tệp
 
-Hãy đi qua tệp từng phần một, để hiểu nó làm gì - và tại sao.
+Hãy đi qua tệp theo từng phần để hiểu nó làm gì — và tại sao.
 
-### 2.1 **Tiêu đề và Lược đồ (1-3)**
+### 2.1 **Tiêu đề và Schema (1-3)**
 
 ```yaml title="" linenums="0"
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Dòng 1**: Cung cấp xác thực lược đồ cho YAML language server để hỗ trợ IDE và IntelliSense
+- **Line 1**: Cung cấp schema cho YAML language server để hỗ trợ IDE và IntelliSense
 
-### 2.2 Siêu dữ liệu Dự án (5-10)
+### 2.2 Siêu dữ liệu dự án (5-10)
 
 ```yaml title="" linenums="0"
 name: azd-get-started-with-ai-agents
@@ -148,11 +148,11 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **Dòng 5**: Định nghĩa tên dự án được Azure Developer CLI sử dụng
-- **Dòng 6-7**: Chỉ rõ rằng đây dựa trên một mẫu phiên bản 1.0.2
-- **Dòng 8-9**: Yêu cầu phiên bản Azure Developer CLI 1.14.0 hoặc cao hơn
+- **Line 5**: Định nghĩa tên dự án được Azure Developer CLI sử dụng
+- **Lines 6-7**: Chỉ ra rằng đây dựa trên một template phiên bản 1.0.2
+- **Lines 8-9**: Yêu cầu phiên bản Azure Developer CLI 1.14.0 trở lên
 
-### 2.3 Hooks Triển khai (11-40)
+### 2.3 Các Hook khi Triển khai (11-40)
 
 ```yaml title="" linenums="0"
 hooks:
@@ -169,9 +169,9 @@ hooks:
       continueOnError: false      
 ```
 
-- **Dòng 11-20**: **Hook trước triển khai** - chạy trước `azd up`
+- **Lines 11-20**: **Hook trước khi triển khai** - chạy trước `azd up`
 
-      - Trên Unix/Linux: Làm cho script xác thực có thể thực thi và chạy nó
+      - Trên Unix/Linux: Đặt script xác thực thành có quyền thực thi và chạy nó
       - Trên Windows: Chạy script xác thực PowerShell
       - Cả hai đều tương tác và sẽ dừng triển khai nếu chúng thất bại
 
@@ -188,7 +188,7 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Dòng 21-30**: **Hook sau khi cung cấp** - chạy sau khi các tài nguyên Azure được tạo
+- **Lines 21-30**: **Hook sau khi cấp phát** - chạy sau khi tài nguyên Azure được tạo
 
   - Thực thi các script ghi biến môi trường
   - Tiếp tục triển khai ngay cả khi các script này thất bại (`continueOnError: true`)
@@ -206,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Dòng 31-40**: **Hook sau triển khai** - chạy sau khi ứng dụng được triển khai
+- **Lines 31-40**: **Hook sau khi triển khai** - chạy sau khi ứng dụng được triển khai
 
   - Thực thi các script thiết lập cuối cùng
   - Tiếp tục ngay cả khi các script thất bại
 
 ### 2.4 Cấu hình Dịch vụ (41-48)
 
-Cấu hình này thiết lập dịch vụ ứng dụng mà bạn đang triển khai.
+Cấu hình này định nghĩa dịch vụ ứng dụng mà bạn đang triển khai.
 
 ```yaml title="" linenums="0"
 services:
@@ -226,18 +226,18 @@ services:
       remoteBuild: true
 ```
 
-- **Dòng 42**: Định nghĩa một dịch vụ tên là "api_and_frontend"
-- **Dòng 43**: Trỏ đến thư mục `./src` cho mã nguồn
-- **Dòng 44**: Chỉ định Python là ngôn ngữ lập trình
-- **Dòng 45**: Sử dụng Azure Container Apps làm nền tảng hosting
-- **Dòng 46-48**: Cấu hình Docker
+- **Line 42**: Định nghĩa một dịch vụ tên "api_and_frontend"
+- **Line 43**: Trỏ tới thư mục nguồn `./src`
+- **Line 44**: Chỉ định Python là ngôn ngữ lập trình
+- **Line 45**: Sử dụng Azure Container Apps làm nền tảng lưu trữ
+- **Lines 46-48**: Cấu hình Docker
 
       - Sử dụng "api_and_frontend" làm tên image
-      - Xây dựng image Docker từ xa trên Azure (không phải cục bộ)
+      - Xây dựng image Docker từ xa trên Azure (không phải trên máy local)
 
-### 2.5 Biến pipeline (49-76)
+### 2.5 Biến Pipeline (49-76)
 
-Đây là các biến giúp bạn chạy `azd` trong CI/CD pipelines để tự động hóa
+Đây là các biến giúp bạn chạy `azd` trong CI/CD để tự động hóa
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -280,26 +280,26 @@ pipeline:
 
 Phần này định nghĩa các biến môi trường được sử dụng **trong quá trình triển khai**, được tổ chức theo danh mục:
 
-- **Tên tài nguyên Azure (Dòng 51-60)**:
-      - Tên các tài nguyên dịch vụ cốt lõi của Azure, ví dụ: Resource Group, AI Hub, AI Project, v.v.- 
-- **Cờ tính năng (Dòng 61-63)**:
+- **Tên tài nguyên Azure (Lines 51-60)**:
+      - Tên các dịch vụ cốt lõi của Azure, ví dụ: Resource Group, AI Hub, AI Project, v.v.
+- **Cờ Tính năng (Lines 61-63)**:
       - Các biến boolean để bật/tắt các dịch vụ Azure cụ thể
-- **Cấu hình Tác nhân AI (Dòng 64-71)**:
-      - Cấu hình cho tác nhân AI chính bao gồm tên, ID, cài đặt triển khai, chi tiết mô hình- 
-- **Cấu hình Embedding AI (Dòng 72-79)**:
+- **Cấu hình AI Agent (Lines 64-71)**:
+      - Cấu hình cho tác nhân AI chính bao gồm tên, ID, cài đặt triển khai, thông tin mô hình
+- **Cấu hình Embedding AI (Lines 72-79)**:
       - Cấu hình cho mô hình embedding dùng cho tìm kiếm vector
-- **Tìm kiếm và Giám sát (Dòng 80-84)**:
-      - Tên chỉ mục tìm kiếm, ID tài nguyên hiện có, và cài đặt giám sát/theo dõi
+- **Tìm kiếm và Giám sát (Lines 80-84)**:
+      - Tên chỉ mục tìm kiếm, ID tài nguyên hiện có và thiết lập giám sát/theo dõi
 
 ---
 
-## 3. Biết về Biến Môi trường
-Các biến môi trường sau điều khiển cấu hình và hành vi triển khai của bạn, được tổ chức theo mục đích chính của chúng. Hầu hết các biến có giá trị mặc định hợp lý, nhưng bạn có thể tùy chỉnh chúng để phù hợp với yêu cầu cụ thể hoặc các tài nguyên Azure tồn tại của bạn.
+## 3. Biết về các Biến Môi Trường
+Các biến môi trường sau kiểm soát cấu hình và hành vi triển khai của bạn, được tổ chức theo mục đích chính. Hầu hết các biến có giá trị mặc định hợp lý, nhưng bạn có thể tùy chỉnh chúng để khớp với yêu cầu cụ thể hoặc các tài nguyên Azure hiện có của bạn.
 
-### 3.1 Các biến bắt buộc 
+### 3.1 Các Biến Bắt Buộc 
 
 ```bash title="" linenums="0"
-# Cấu hình cốt lõi của Azure
+# Cấu hình cốt lõi Azure
 AZURE_ENV_NAME                    # Tên môi trường (sử dụng trong đặt tên tài nguyên)
 AZURE_LOCATION                    # Khu vực triển khai
 AZURE_SUBSCRIPTION_ID             # Đăng ký đích
@@ -312,13 +312,13 @@ AZURE_AIPROJECT_NAME              # Tên dự án AI
 AZURE_AISERVICES_NAME             # Tên tài khoản dịch vụ AI
 AZURE_STORAGE_ACCOUNT_NAME        # Tên tài khoản lưu trữ
 AZURE_CONTAINER_REGISTRY_NAME     # Tên đăng ký container
-AZURE_KEYVAULT_NAME               # Tên Key Vault (nếu được sử dụng)
+AZURE_KEYVAULT_NAME               # Tên Key Vault (nếu sử dụng)
 ```
 
 ### 3.2 Cấu hình Mô hình 
 ```bash title="" linenums="0"
 # Cấu hình mô hình chat
-AZURE_AI_AGENT_MODEL_NAME         # Mặc định: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_NAME         # Mặc định: gpt-4.1-mini
 AZURE_AI_AGENT_MODEL_FORMAT       # Mặc định: OpenAI (hoặc Microsoft)
 AZURE_AI_AGENT_MODEL_VERSION      # Mặc định: mới nhất có sẵn
 AZURE_AI_AGENT_DEPLOYMENT_NAME    # Tên triển khai cho mô hình chat
@@ -333,9 +333,9 @@ AZURE_AI_EMBED_DEPLOYMENT_NAME    # Tên triển khai cho embeddings
 AZURE_AI_EMBED_DEPLOYMENT_SKU     # Mặc định: Tiêu chuẩn
 AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # Mặc định: 50 (nghìn TPM)
 
-# Cấu hình agent
-AZURE_AI_AGENT_NAME               # Tên hiển thị của agent
-AZURE_EXISTING_AGENT_ID           # Sử dụng agent hiện có (tùy chọn)
+# Cấu hình tác nhân
+AZURE_AI_AGENT_NAME               # Tên hiển thị của tác nhân
+AZURE_EXISTING_AGENT_ID           # Sử dụng tác nhân hiện có (tùy chọn)
 ```
 
 ### 3.3 Chuyển đổi Tính năng
@@ -345,7 +345,7 @@ USE_APPLICATION_INSIGHTS         # Mặc định: true
 USE_AZURE_AI_SEARCH_SERVICE      # Mặc định: false
 USE_CONTAINER_REGISTRY           # Mặc định: true
 
-# Giám sát và theo dõi
+# Giám sát và truy vết
 ENABLE_AZURE_MONITOR_TRACING     # Mặc định: false
 AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # Mặc định: false
 
@@ -354,14 +354,14 @@ AZURE_AI_SEARCH_INDEX_NAME       # Tên chỉ mục tìm kiếm
 AZURE_SEARCH_SERVICE_NAME        # Tên dịch vụ tìm kiếm
 ```
 
-### 3.4 Cấu hình Dự án AI 
+### 3.4 Cấu hình AI Project 
 ```bash title="" linenums="0"
 # Sử dụng tài nguyên hiện có
 AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # ID tài nguyên đầy đủ của dự án AI hiện có
-AZURE_EXISTING_AIPROJECT_ENDPOINT       # URL điểm cuối của dự án hiện có
+AZURE_EXISTING_AIPROJECT_ENDPOINT       # URL endpoint của dự án hiện có
 ```
 
-### 3.5 Kiểm tra các biến của bạn
+### 3.5 Kiểm tra các Biến của Bạn
 
 Sử dụng Azure Developer CLI để xem và quản lý các biến môi trường của bạn:
 
@@ -375,13 +375,13 @@ azd env get-value AZURE_ENV_NAME
 # Đặt một biến môi trường
 azd env set AZURE_LOCATION eastus
 
-# Đặt nhiều biến từ một tệp .env
+# Đặt nhiều biến từ tệp .env
 azd env set --from-file .env
 ```
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Miễn trừ trách nhiệm:
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo tính chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ nguyên bản nên được coi là nguồn chính thức. Đối với thông tin quan trọng, nên sử dụng bản dịch do chuyên gia dịch thuật thực hiện. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu nhầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+**Disclaimer**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực để đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa sai sót hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ nguyên bản nên được coi là nguồn có thẩm quyền. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm cho bất kỳ sự hiểu nhầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
