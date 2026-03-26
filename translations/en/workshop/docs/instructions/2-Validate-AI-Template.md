@@ -1,5 +1,7 @@
 # 2. Validate a Template
 
+> Validated against `azd 1.23.12` in March 2026.
+
 !!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
 
     - [ ] Analyze the AI Solution Architecture
@@ -29,7 +31,7 @@ Before we begin, let's make sure you have the Azure Developer CLI installed.
 1. You should see something like this!
 
       ```bash title="" linenums="0"
-      azd version 1.19.0 (commit b3d68cea969b2bfbaa7b7fa289424428edb93e97)
+      azd version 1.23.12 (commit <current-build>)
       ```
 
 **You are now ready to select and deploy a template with azd**
@@ -61,9 +63,12 @@ Visit the second link in a new browser tab (or click `Open in GitHub` for the re
 
 Let's try to deploy this template and make sure it is valid. We'll follow the guidelines in the [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) section.
 
-1. Click [this link](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) - confirm the default action to `Create codespace`
-1. This opens a new browser tab - wait for the GitHub Codespaces session to complete loading
-1. Open the VS Code terminal in Codespaces - type the following command:
+1. Choose a working environment for the template repository:
+
+      - **GitHub Codespaces**: Click [this link](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) and confirm `Create codespace`
+      - **Local clone or dev container**: Clone `Azure-Samples/get-started-with-ai-agents` and open it in VS Code
+
+1. Wait until the VS Code terminal is ready, then type the following command:
 
    ```bash title="" linenums="0"
    azd up
@@ -282,7 +287,7 @@ Let's try out a few commands:
 You just completed an end-to-end workflow where you:
 
 - [X] Selected the AZD Template You Want To Use
-- [X] Launched The Template With GitHub Codespaces 
+- [X] Opened the template in a supported development environment
 - [X] Deployed the Template and validated it works
 
 ---

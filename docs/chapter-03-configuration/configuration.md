@@ -80,7 +80,7 @@ azd config set defaults.location "eastus2"
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
 # View all global configuration
-azd config list
+azd config show
 
 # Remove a configuration
 azd config unset defaults.location

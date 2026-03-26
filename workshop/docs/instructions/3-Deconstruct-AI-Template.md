@@ -22,7 +22,7 @@ With AZD templates and the Azure Developer CLI (`azd`) we can quickly jumpstart 
 
 It's time to explore [GitHub Copilot with Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Now, we can use natural language to describe our task at a high level, and get assistance in execution. For this lab, we'll use the [Copilot Free plan](https://github.com/github-copilot/signup) which has a monthly limit for completions and chat interactions.
 
-The extension can be installed from the marketplace, but should already be available in your Codespaces environment. _Click `Open Chat` from the Copilot icon drop-down - and type a prompt like `What can you do?`_ - you may be prompted to log in. **GitHub Copilot Chat is ready**.
+The extension can be installed from the marketplace, and it is often already available in Codespaces or dev container environments. _Click `Open Chat` from the Copilot icon drop-down - and type a prompt like `What can you do?`_ - you may be prompted to log in. **GitHub Copilot Chat is ready**.
 
 ### 1.2. Install MCP Servers
 
@@ -70,7 +70,7 @@ To activate these:
 
 ### 1.3. Test GitHub Copilot Chat
 
-**First use `az login` to authenticate with Azure from VS Code command line.**
+**First use `azd auth login` to authenticate with Azure from the VS Code command line. Use `az login` as well only if you plan to run Azure CLI commands directly.**
 
 You should now be able to query your Azure subscription status, and ask questions about deployed resources or configuration. Try these prompts:
 

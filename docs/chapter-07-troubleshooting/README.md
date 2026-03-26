@@ -8,6 +8,8 @@
 
 This chapter helps you diagnose and resolve common issues when working with Azure Developer CLI. From deployment failures to AI-specific problems.
 
+> Validated against `azd 1.23.12` in March 2026.
+
 ## Learning Objectives
 
 By completing this chapter, you will:
@@ -34,7 +36,7 @@ By completing this chapter, you will:
 ```bash
 azd auth login
 az login
-azd auth whoami
+azd auth status
 ```
 
 ### Provisioning Failures

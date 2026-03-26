@@ -9,7 +9,7 @@
     </p>
     <div style="margin-top: 15px;">
       <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
-        📅 Last Updated: February 2026
+        📅 Last Updated: March 2026
       </span>
     </div>
   </div>
@@ -34,6 +34,8 @@ The workshop lessons are in Markdown. You can navigate them directly in GitHub -
 ![Workshop](../../../translated_images/en/workshop.75906f133e6f8ba0.webp)
 
 To use this option - fork the repository to your profile, and launch GitHub Codespaces. Once the VS Code terminal is active, type this command:
+
+This browser preview works in GitHub Codespaces, dev containers, or a local clone with Python and MkDocs installed.
 
 ```bash title="" linenums="0"
 mkdocs serve > /dev/null 2>&1 &
@@ -93,7 +95,7 @@ The workshop is structured to take you on a journey from template discovery, to 
 - What are AI Templates?
 - Where can I find AI Templates?
 - How can I get started building AI Agents?
-- **Lab**: Quickstart with GitHub Codespaces
+- **Lab**: Quickstart in Codespaces or a dev container
 
 ### [Module 2: Validate AI Template](docs/instructions/2-Validate-AI-Template.md) (30 mins)
 

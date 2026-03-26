@@ -20,6 +20,8 @@ AI agents are autonomous programs that can perceive their environment, make deci
 
 This guide shows you how to deploy AI agents to Azure using Azure Developer CLI (azd).
 
+> **Validation note (2026-03-25):** This guide was reviewed against `azd` `1.23.12` and `azure.ai.agents` `0.1.18-preview`. The `azd ai` experience is still preview-driven, so check extension help if your installed flags differ.
+
 ## Learning Goals
 
 By completing this guide, you will:
@@ -117,13 +119,16 @@ azd up
 **Time:** ~15-25 minutes
 **Cost:** ~$80-150/month (development)
 
-### Option 4: AZD AI Agent Init (Manifest-Based)
+### Option 4: AZD AI Agent Init (Manifest- or Template-Based Preview)
 
-If you have an agent manifest file, you can use the `azd ai` command to scaffold a Foundry Agent Service project directly:
+If you have an agent manifest file, you can use the `azd ai` command to scaffold a Foundry Agent Service project directly. Recent preview releases also added template-based initialization support, so the exact prompt flow may differ slightly depending on your installed extension version.
 
 ```bash
 # Install the AI agents extension
 azd extension install azure.ai.agents
+
+# Optional: verify the installed preview version
+azd extension show azure.ai.agents
 
 # Initialize from an agent manifest
 azd ai agent init -m agent-manifest.yaml
@@ -458,6 +463,7 @@ azd init --template get-started-with-ai-agents
 
 # Step 2: Login to Azure
 azd auth login
+# If you work across tenants, add --tenant-id <tenant-id>
 
 # Step 3: Deploy
 azd up

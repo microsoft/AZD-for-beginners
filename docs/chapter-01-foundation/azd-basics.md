@@ -781,8 +781,8 @@ azd init --help               # Initialization options
 ### Project Management
 ```bash
 azd show                     # Project overview
-azd env show                 # Current environment
-azd config list             # Configuration settings
+azd env list                # Available environments and selected default
+azd config show            # Configuration settings
 ```
 
 ### Monitoring

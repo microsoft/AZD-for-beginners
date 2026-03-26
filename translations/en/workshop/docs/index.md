@@ -1,7 +1,9 @@
 # AZD for AI Developers Workshop
 
+> Validated against `azd 1.23.12` in March 2026.
+
 > [!IMPORTANT]  
-> **This workshop is instrumented with a workshop guide that you can preview in your local browser. To get started, you must launch GitHub Codespaces on the repo—then wait until you see an active VS Code terminal and type:**  
+> **This workshop is instrumented with a workshop guide that you can preview in your local browser. To get started, open the repo in GitHub Codespaces, a dev container, or a local clone with MkDocs installed—then wait until you see an active VS Code terminal and type:**  
 > `mkdocs serve > /dev/null 2>&1 &`  
 > **You should see a pop-up dialog to open the preview page in a browser.**
 

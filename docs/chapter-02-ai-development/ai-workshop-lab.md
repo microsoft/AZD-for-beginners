@@ -11,6 +11,8 @@
 
 This hands-on lab guides developers through the process of taking an existing AI template and deploying it using Azure Developer CLI (AZD). You'll learn essential patterns for production AI deployments using Microsoft Foundry services.
 
+> **Validation note (2026-03-25):** This workshop was reviewed against `azd` `1.23.12`. If your local installation is older, update AZD before starting so the auth, template, and deployment workflow matches the steps below.
+
 **Duration:** 2-3 hours  
 **Level:** Intermediate  
 **Prerequisites:** Basic Azure knowledge, familiarity with AI/ML concepts
@@ -54,10 +56,14 @@ azd version
 # Check Azure CLI
 az --version
 
-# Login to Azure
-az login
+# Login to Azure for AZD workflows
 azd auth login
+
+# Login to Azure CLI only if you plan to run az commands during diagnostics
+az login
 ```
+
+If you work across multiple tenants or your subscription is not detected automatically, retry with `azd auth login --tenant-id <tenant-id>`.
 
 2. **Clone the workshop repository:**
 ```bash
@@ -131,7 +137,7 @@ azd env new myai-workshop
 azd env set AZURE_LOCATION eastus
 
 # Optional: Set specific OpenAI model
-azd env set AZURE_OPENAI_MODEL gpt-35-turbo
+azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
 ```
 
 ### Step 2.2: Deploy the Infrastructure and Application
@@ -160,8 +166,10 @@ azd show
 
 2. **Open the deployed application:**
 ```bash
-azd show --output json | grep "webAppUrl"
+azd show
 ```
+
+Open the web endpoint shown in the `azd show` output.
 
 3. **Test the AI functionality:**
    - Navigate to the web application
@@ -487,7 +495,7 @@ azd up
 az cognitiveservices model list --location eastus
 
 # Update to available model
-azd env set AZURE_OPENAI_MODEL gpt-35-turbo-16k
+azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
 azd deploy
 ```
 

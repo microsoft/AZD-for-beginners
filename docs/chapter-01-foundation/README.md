@@ -8,6 +8,8 @@
 
 This chapter introduces Azure Developer CLI (azd) fundamentals. You'll learn core concepts, install the tools, and deploy your first application to Azure.
 
+> Validated against `azd 1.23.12` in March 2026.
+
 ## Learning Objectives
 
 By completing this chapter, you will:

@@ -8,6 +8,8 @@
 
 This chapter covers Infrastructure as Code (IaC) patterns with Bicep templates, resource provisioning, and deployment strategies using Azure Developer CLI.
 
+> Validated against `azd 1.23.12` in March 2026.
+
 ## Learning Objectives
 
 By completing this chapter, you will:

@@ -38,14 +38,14 @@ Before diving into specific issues, run these commands to gather diagnostic info
 ```bash
 # Check azd version and health
 azd version
-azd config list
+azd config show
 
 # Verify Azure authentication
 az account show
 az account list
 
 # Check current environment
-azd env show
+azd env list
 azd env get-values
 
 # Enable debug logging
@@ -348,7 +348,7 @@ azd env list
 azd env select production
 
 # 3. Verify current environment
-azd env show
+azd env list
 
 # 4. Create new environment if corrupted
 azd env new production-new
@@ -437,7 +437,7 @@ azd up --debug 2>&1 | tee debug.log
 azd version
 
 # View current configuration
-azd config list
+azd config show
 
 # Test connectivity
 curl -v https://myapp.azurewebsites.net/health
@@ -496,11 +496,11 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 ### Information to Gather
 Before contacting support, collect:
 - `azd version` output
-- `azd config list` output
+- `azd config show` output
 - `azd show` output (current deployment status)
 - Error messages (full text)
 - Steps to reproduce the issue
-- Environment details (`azd env show`)
+- Environment details (`azd env get-values`)
 - Timeline of when issue started
 
 ### Log Collection Script
@@ -516,8 +516,8 @@ azd version >> debug-logs/system-info.txt
 az --version >> debug-logs/system-info.txt
 
 echo "Configuration:" > debug-logs/config.txt
-azd config list >> debug-logs/config.txt
-azd env show >> debug-logs/config.txt
+azd config show >> debug-logs/config.txt
+azd env list >> debug-logs/config.txt
 azd env get-values >> debug-logs/config.txt
 
 echo "Current deployment status:" > debug-logs/status.txt

@@ -9,6 +9,8 @@
 
 This guide provides comprehensive instructions for deploying AI models using AZD templates, covering everything from model selection to production deployment patterns.
 
+> **Validation note (2026-03-25):** The AZD workflow in this guide was checked against `azd` `1.23.12`. For AI deployments that take longer than the default service deployment window, current AZD releases support `azd deploy --timeout <seconds>`.
+
 ## Table of Contents
 
 - [Model Selection Strategy](#model-selection-strategy)
@@ -41,9 +43,9 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
@@ -56,7 +58,7 @@ services:
 |------------|----------|---------------------|-------------------|
 | gpt-4.1-mini | Chat, Q&A | 10-50 TPM | Cost-effective for most workloads |
 | gpt-4.1 | Complex reasoning | 20-100 TPM | Higher cost, use for premium features |
-| Text-embedding-ada-002 | Search, RAG | 30-120 TPM | Essential for semantic search |
+| text-embedding-3-large | Search, RAG | 30-120 TPM | Strong default choice for semantic search and retrieval |
 | Whisper | Speech-to-text | 10-50 TPM | Audio processing workloads |
 
 ## AZD Configuration for AI Models
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -131,7 +133,7 @@ Configure your application environment:
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
 ## Deployment Patterns
@@ -215,11 +217,11 @@ Track model versions in your AZD configuration:
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
@@ -238,6 +240,9 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# If the deployment takes longer than the default timeout
+azd deploy --timeout 1800
 ```
 
 ### A/B Testing

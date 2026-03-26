@@ -22,6 +22,72 @@ After reviewing changelog entries, you will be able to:
 
 ## Version History
 
+### [v3.19.0] - 2026-03-26
+
+#### AZD 1.23.12 Validation, Workshop Environment Expansion & AI Model Refresh
+**This version performs a documentation validation sweep against `azd` `1.23.12`, updates outdated AZD command examples, refreshes AI model guidance to current defaults, and broadens the workshop instructions beyond GitHub Codespaces to also support dev containers and local clones.**
+
+#### Added
+- **✅ Validation notes across core chapters and workshop docs** to make the tested AZD baseline explicit for learners using newer or older CLI builds
+- **⏱️ Deployment timeout guidance** for long-running AI app deployments using `azd deploy --timeout 1800`
+- **🔎 Extension inspection steps** with `azd extension show azure.ai.agents` in AI workflow docs
+- **🌐 Broader workshop environment guidance** covering GitHub Codespaces, dev containers, and local clones with MkDocs
+
+#### Changed
+- **📚 Chapter intro READMEs** now consistently note validation against `azd 1.23.12` across foundation, configuration, infrastructure, multi-agent, pre-deployment, troubleshooting, and production sections
+- **🛠️ AZD command references** updated to current forms across the docs:
+  - `azd config list` → `azd config show`
+  - `azd env show` → `azd env list` or `azd env get-value(s)` depending on context
+  - `azd auth whoami` → `azd auth status`
+  - `azd monitor` → `azd monitor --overview` where Application Insights overview is intended
+- **🧪 Provision preview examples** simplified to current supported usage such as `azd provision --preview` and `azd provision --preview -e production`
+- **🧭 Workshop flow** updated so learners can complete the labs in Codespaces, a dev container, or a local clone instead of assuming Codespaces-only execution
+- **🔐 Authentication guidance** now prefers `azd auth login` for AZD workflows, with `az login` positioned as optional when Azure CLI commands are used directly
+
+#### Fixed
+- **🪟 Windows install commands** normalized to current `winget` package casing in the installation guide
+- **🐧 Linux install guidance** corrected to avoid unsupported distro-specific `azd` package manager instructions and instead point to release assets where appropriate
+- **📦 AI model examples** refreshed from older defaults like `gpt-35-turbo` and `text-embedding-ada-002` to current examples such as `gpt-4.1-mini`, `gpt-4.1`, and `text-embedding-3-large`
+- **📋 Deployment and diagnostics snippets** corrected to use current environment and status commands in logs, scripts, and troubleshooting steps
+- **⚙️ GitHub Actions guidance** updated from `Azure/setup-azd@v1.0.0` to `Azure/setup-azd@v2`
+- **🤖 MCP/Copilot consent guidance** updated from `azd mcp consent` to `azd copilot consent list`
+
+#### Improved
+- **🧠 AI chapter guidance** now better explains preview-sensitive `azd ai` behavior, tenant-specific login, current extension usage, and updated model deployment recommendations
+- **🧪 Workshop instructions** now use more realistic version examples and clearer environment setup language for hands-on labs
+- **📈 Production and troubleshooting docs** now align better with current monitoring, fallback model, and cost-tier examples
+
+#### Files Updated
+- `docs/chapter-01-foundation/README.md`
+- `docs/chapter-01-foundation/azd-basics.md`
+- `docs/chapter-01-foundation/installation.md`
+- `docs/chapter-02-ai-development/README.md`
+- `docs/chapter-02-ai-development/agents.md`
+- `docs/chapter-02-ai-development/ai-model-deployment.md`
+- `docs/chapter-02-ai-development/ai-workshop-lab.md`
+- `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
+- `docs/chapter-03-configuration/README.md`
+- `docs/chapter-03-configuration/configuration.md`
+- `docs/chapter-04-infrastructure/README.md`
+- `docs/chapter-04-infrastructure/deployment-guide.md`
+- `docs/chapter-04-infrastructure/provisioning.md`
+- `docs/chapter-05-multi-agent/README.md`
+- `docs/chapter-06-pre-deployment/README.md`
+- `docs/chapter-06-pre-deployment/preflight-checks.md`
+- `docs/chapter-07-troubleshooting/README.md`
+- `docs/chapter-07-troubleshooting/ai-troubleshooting.md`
+- `docs/chapter-07-troubleshooting/common-issues.md`
+- `docs/chapter-08-production/README.md`
+- `docs/chapter-08-production/production-ai-practices.md`
+- `workshop/README.md`
+- `workshop/docs/index.md`
+- `workshop/docs/instructions/1-Select-AI-Template.md`
+- `workshop/docs/instructions/2-Validate-AI-Template.md`
+- `workshop/docs/instructions/3-Deconstruct-AI-Template.md`
+- `workshop/docs/instructions/5-Customize-AI-Template.md`
+
+---
+
 ### [v3.18.0] - 2026-03-16
 
 #### AZD AI CLI Commands, Content Validation & Template Expansion

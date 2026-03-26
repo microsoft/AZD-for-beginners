@@ -8,6 +8,8 @@
 
 This chapter covers enterprise-ready deployment patterns, security hardening, monitoring, and cost optimization for production AI workloads.
 
+> Validated against `azd 1.23.12` in March 2026.
+
 ## Learning Objectives
 
 By completing this chapter, you will:
@@ -105,7 +107,7 @@ az consumption budget create \
 azd monitor --logs
 
 # Check Application Insights
-azd monitor
+azd monitor --overview
 
 # View metrics
 az monitor metrics list --resource <resource-id>

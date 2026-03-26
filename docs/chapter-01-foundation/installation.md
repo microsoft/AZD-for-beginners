@@ -43,15 +43,15 @@ Before installing azd, ensure you have:
 
 ### Windows
 
-#### Option 1: PowerShell (Recommended)
-```powershell
-# Run as Administrator or with elevated privileges
-powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
+#### Option 1: Windows Package Manager (Recommended)
+```cmd
+winget install microsoft.azd
 ```
 
-#### Option 2: Windows Package Manager (winget)
-```cmd
-winget install Microsoft.Azd
+#### Option 2: PowerShell Install Script
+```powershell
+# Useful when winget is unavailable
+powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
 #### Option 3: Chocolatey
@@ -92,27 +92,22 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 #### Option 2: Package Managers
 
-**Ubuntu/Debian:**
+**Manual installation from release assets:**
 ```bash
-# Add Microsoft package repository
-curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-
-# Install azd
-sudo apt-get update
-sudo apt-get install azd
-```
-
-**RHEL/CentOS/Fedora:**
-```bash
-# Add Microsoft package repository
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-sudo dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/azure-cli
-sudo dnf install azd
+# Download the latest archive for your Linux architecture from:
+# https://github.com/Azure/azure-dev/releases
+# Then extract it and add the azd binary to your PATH.
 ```
 
 ### GitHub Codespaces
 
-azd comes pre-installed in GitHub Codespaces. Simply create a codespace and start using azd immediately.
+Some Codespaces and dev container environments already include `azd`, but you should verify that rather than assume it:
+
+```bash
+azd version
+```
+
+If `azd` is missing, install it with the standard script for the environment.
 
 ### Docker
 
@@ -162,7 +157,7 @@ azd version 1.x.x (commit xxxxxx)
 # Install Azure CLI if not already installed
 # Windows: winget install Microsoft.AzureCLI
 # macOS: brew install azure-cli
-# Linux: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+# Linux: see the Azure CLI install docs for your distribution
 
 # Login to Azure
 az login
@@ -197,7 +192,7 @@ azd config set defaults.subscription <subscription-id>
 azd config set defaults.location eastus2
 
 # View all configuration
-azd config list
+azd config show
 ```
 
 ### Environment Variables
@@ -282,9 +277,9 @@ azd config set http.insecure true
 #### Version Conflicts
 ```bash
 # Remove old installations
-# Windows: winget uninstall Microsoft.Azd
+# Windows: winget uninstall microsoft.azd
 # macOS: brew uninstall azd
-# Linux: sudo apt remove azd
+# Linux: remove the previous azd binary or symlink before reinstalling
 
 # Clean configuration
 rm -rf ~/.azd
@@ -297,7 +292,7 @@ export AZD_DEBUG=true
 azd <command> --debug
 
 # View current configuration
-azd config list
+azd config show
 
 # View current deployment status
 azd show
@@ -305,17 +300,17 @@ azd show
 
 ## Updating azd
 
-### Automatic Updates
-azd will notify you when updates are available:
+### Update Check
+azd warns when a newer release is available, and you can confirm your current build with:
 ```bash
-azd version --check-for-updates
+azd version
 ```
 
 ### Manual Updates
 
 **Windows (winget):**
 ```cmd
-winget upgrade Microsoft.Azd
+winget upgrade microsoft.azd
 ```
 
 **macOS (Homebrew):**

@@ -5,7 +5,7 @@
     - [ ] Describe what AZD templates are
     - [ ] Discover and use AZD templates for AI
     - [ ] Get started with the AI Agents template
-    - [ ] **Lab 1:** AZD Quickstart with GitHub Codespaces
+    - [ ] **Lab 1:** AZD Quickstart in Codespaces or a dev container
 
 ---
 
@@ -37,7 +37,7 @@ With `azd`, your deployment journey can be as simple as:
 - `azd monitor` - Get real-time monitoring and diagnostics for your deployed application.
 - `azd pipeline config` - Setup CI/CD pipelines to automate deployment to Azure.
 
-**🎯 | EXERCISE**: <br/> Explore the `azd` commandline tool in your GitHub Codespaces environment now. Start by typing this command to see what the tool can do:
+**🎯 | EXERCISE**: <br/> Explore the `azd` commandline tool in your current workshop environment now. This can be GitHub Codespaces, a dev container, or a local clone with the prerequisites installed. Start by typing this command to see what the tool can do:
 
 ```bash title="" linenums="0"
 azd help

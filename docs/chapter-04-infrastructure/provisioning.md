@@ -766,16 +766,13 @@ The `azd provision --preview` feature lets you **simulate infrastructure provisi
 - **Shows a preview of resource changes**: additions, deletions, updates
 - **Does not apply changes** — it's read-only and safe to run
 
-#### � Use Cases
+#### Use Cases
 ```bash
 # Preview infrastructure changes before deployment
 azd provision --preview
 
-# Preview with detailed output
-azd provision --preview --output json
-
 # Preview for specific environment
-azd provision --preview --environment production
+azd provision --preview -e production
 ```
 
 This command helps you:
@@ -791,6 +788,8 @@ It's especially useful when:
 - Training new team members on infrastructure patterns
 
 ### Example Preview Output
+Exact preview output varies by provider and project structure, but the result should clearly identify proposed changes before anything is applied.
+
 ```bash
 $ azd provision --preview
 
@@ -809,7 +808,6 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
