@@ -138,6 +138,20 @@ azd init --template get-started-with-ai-agents
 
 ## 🎯 Getting Started in 3 Steps
 
+Before you start, make sure your machine is ready for the template you want to deploy:
+
+**Windows:**
+```powershell
+.\validate-setup.ps1
+```
+
+**macOS / Linux:**
+```bash
+bash ./validate-setup.sh
+```
+
+If any required check fails, fix that first and then continue with the quick start.
+
 ### Step 1: Install AZD (2 minutes)
 
 **Windows:**
@@ -155,11 +169,17 @@ brew tap azure/azd && brew install azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-### Step 2: Login to Azure
+### Step 2: Authenticate for AZD
 
 ```bash
+# Optional if you plan to use Azure CLI commands directly in this course
+az login
+
+# Required for AZD workflows
 azd auth login
 ```
+
+If you are not sure which one you need, follow the full setup flow in [Installation & Setup](docs/chapter-01-foundation/installation.md#authentication-setup).
 
 ### Step 3: Deploy Your First App
 
@@ -241,6 +261,7 @@ Before you begin Chapter 1, make sure you have the following in place. The insta
 - **An Azure subscription**: You can use an existing subscription from work or your own account, or create a [free trial](https://aka.ms/azurefreetrial) to get started.
 - **Permission to create Azure resources**: For most exercises, you should have at least **Contributor** access on the target subscription or resource group. Some chapters may also assume you can create resource groups, managed identities, and RBAC assignments.
 - [**A GitHub account**](https://github.com): This is useful for forking the repository, tracking your own changes, and using GitHub Codespaces for the workshop.
+- **Template runtime prerequisites**: Some templates need local tools such as Node.js, Python, Java, or Docker. Run the setup validator before starting so you catch missing tools early.
 - **Basic terminal familiarity**: You do not need to be an expert, but you should be comfortable running commands such as `git clone`, `azd auth login`, and `azd up`.
 
 > **Working in an enterprise subscription?**
@@ -826,12 +847,13 @@ azd monitor --logs
 <summary><strong>❌ "Authentication failed" or "Token expired"</strong></summary>
 
 ```bash
-# Re-authenticate
-az logout
-az login
-
+# Re-authenticate for AZD
 azd auth logout
 azd auth login
+
+# Optional: refresh Azure CLI too if you are running az commands
+az logout
+az login
 
 # Verify authentication
 az account show
@@ -864,7 +886,7 @@ azd up
 azd show
 
 # If stuck >30 minutes, check Azure Portal:
-azd monitor
+azd monitor --overview
 # Look for failed deployments
 ```
 </details>

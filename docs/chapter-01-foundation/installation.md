@@ -145,14 +145,27 @@ azd version 1.x.x (commit xxxxxx)
 - [ ] `azd version` shows version number without errors
 - [ ] `azd --help` displays command documentation
 - [ ] `azd template list` shows available templates
-- [ ] `az account show` displays your Azure subscription
 - [ ] You can create a test directory and run `azd init` successfully
 
 **If all checks pass, you're ready to proceed to [Your First Project](first-project.md)!**
 
 ## Authentication Setup
 
-### Azure CLI Authentication (Recommended)
+### Recommended Beginner Setup
+
+For AZD-first workflows, sign in with `azd auth login`.
+
+```bash
+# Required for AZD commands such as azd up
+azd auth login
+
+# Verify AZD authentication status
+azd auth login --check-status
+```
+
+Use Azure CLI sign-in only when you plan to run `az` commands yourself during the course.
+
+### Azure CLI Authentication (Optional)
 ```bash
 # Install Azure CLI if not already installed
 # Windows: winget install Microsoft.AzureCLI
@@ -166,19 +179,39 @@ az login
 az account show
 ```
 
+### Which Sign-In Flow Should You Use?
+
+- Use `azd auth login` if you are following the beginner AZD path and mainly running `azd` commands.
+- Use `az login` as well when you want to run Azure CLI commands such as `az account show` or inspect resources directly.
+- If an exercise includes both `azd` and `az` commands, run both sign-in commands once at the start.
+
 ### Device Code Authentication
 If you're on a headless system or having browser issues:
 ```bash
-az login --use-device-code
+azd auth login --use-device-code
 ```
 
 ### Service Principal (CI/CD)
 For automated environments:
 ```bash
-az login --service-principal \
-  --username <client-id> \
-  --password <client-secret> \
-  --tenant <tenant-id>
+azd auth login \
+  --client-id <client-id> \
+  --client-secret <client-secret> \
+  --tenant-id <tenant-id>
+```
+
+### Validate Your Complete Setup
+
+If you want a quick readiness check before starting Chapter 1:
+
+**Windows:**
+```powershell
+.\validate-setup.ps1
+```
+
+**macOS / Linux:**
+```bash
+bash ./validate-setup.sh
 ```
 
 ## Configuration

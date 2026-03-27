@@ -67,12 +67,16 @@ AZD applies settings in this order (later overrides earlier):
 # Use managed identity (recommended)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Check authentication status
+# Check AZD authentication status
 azd auth status
+
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
 # Re-authenticate if needed
 azd auth login
+
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 

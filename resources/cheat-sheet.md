@@ -134,8 +134,8 @@ azd env new staging --location westus2
 # Select environment
 azd env select production
 
-# Show current environment
-azd env show
+# Show available environments
+azd env list
 
 # Refresh environment state
 azd env refresh
@@ -162,7 +162,7 @@ azd env unset DEBUG
 ### Global Configuration
 ```bash
 # List all configuration
-azd config list
+azd config show
 
 # Set global defaults
 azd config set defaults.location eastus2
@@ -253,7 +253,7 @@ azd version
 azd version
 
 # View current configuration
-azd config list
+azd config show
 ```
 
 ## 🔧 Advanced Commands
@@ -341,7 +341,7 @@ azd ai agent init -m agent-manifest.yaml --host containerapp
 azd mcp start
 
 # Manage tool consent for MCP operations
-azd mcp consent
+azd copilot consent list
 ```
 
 ### Infrastructure Generation
@@ -403,7 +403,7 @@ export AZD_DEBUG=true
 azd show
 
 # Validate configuration
-azd config list
+azd config show
 
 # Open monitoring dashboard for logs
 azd monitor --logs
@@ -424,7 +424,7 @@ azd <command> --debug
 export AZD_DISABLE_TELEMETRY=true
 
 # Check current configuration
-azd config list
+azd config show
 
 # Check authentication status
 az account show
@@ -464,7 +464,7 @@ echo $AZD_CONFIG_DIR  # Usually ~/.azd
 # Get JSON output for scripting
 azd show --output json
 azd env list --output json
-azd config list --output json
+azd config show --output json
 
 # Parse with jq
 azd show --output json | jq '.services.web.endpoint'
@@ -487,7 +487,7 @@ azd show --output json | jq '.services | keys'
 #!/bin/bash
 # Quick health check
 azd show
-azd env show
+azd env get-values
 azd monitor --logs
 ```
 
@@ -598,7 +598,7 @@ azd-deploy-watch() {
 # Environment status
 azd-status() {
     echo "Current environment:"
-    azd env show
+    azd env get-values
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }

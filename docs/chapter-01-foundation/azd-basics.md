@@ -175,9 +175,9 @@ azd up
 **Benefits:**
 - ✅ **5 commands** vs. 15+ manual steps
 - ✅ **10-15 minutes** total time (mostly waiting for Azure)
-- ✅ **Zero errors** - automated and tested
-- ✅ **Secrets managed securely** via Key Vault
-- ✅ **Automatic rollback** on failures
+- ✅ **Fewer manual mistakes** - consistent, template-driven workflow
+- ✅ **Secure secret handling** - many templates use Azure-managed secret storage
+- ✅ **Repeatable deployments** - same workflow every time
 - ✅ **Fully reproducible** - same result every time
 - ✅ **Team-ready** - anyone can deploy with same commands
 - ✅ **Infrastructure as Code** - version controlled Bicep templates

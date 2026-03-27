@@ -34,8 +34,12 @@ By completing this chapter, you will:
 
 ### Authentication Issues
 ```bash
+# Required for AZD workflows
 azd auth login
+
+# Optional if you are also using Azure CLI commands directly
 az login
+
 azd auth status
 ```
 

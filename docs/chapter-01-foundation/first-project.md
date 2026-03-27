@@ -35,17 +35,27 @@ Upon completion, you will be able to:
 
 ### Prerequisites Checklist
 - ✅ Azure Developer CLI installed ([Installation Guide](installation.md))
-- ✅ Azure CLI installed and authenticated
+- ✅ AZD authentication completed with `azd auth login`
 - ✅ Git installed on your system
 - ✅ Node.js 16+ (for this tutorial)
 - ✅ Visual Studio Code (recommended)
+
+Before you continue, run the setup validator from the repository root:
+
+**Windows:** `./validate-setup.ps1`
+
+**macOS / Linux:** `bash ./validate-setup.sh`
 
 ### Verify Your Setup
 ```bash
 # Check azd installation
 azd version
+
+# Check AZD authentication
+azd auth login --check-status
 ```
-### Verify Azure authentication
+
+### Verify optional Azure CLI authentication
 
 ```bash
 az account show

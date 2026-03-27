@@ -35,8 +35,10 @@ az version
 # Check Docker (for building custom images)
 docker --version
 
-# Login to Azure
+# Authenticate for AZD deployments
 azd auth login
+
+# Optional: sign in to Azure CLI if you plan to run az commands directly
 az login
 ```
 

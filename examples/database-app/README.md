@@ -600,7 +600,10 @@ ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have auth
 **Solution**:
 Re-authenticate with Azure:
 ```sh
+# Required for AZD workflows
 azd auth login
+
+# Optional if you are also using Azure CLI commands directly
 az login
 ```
 
