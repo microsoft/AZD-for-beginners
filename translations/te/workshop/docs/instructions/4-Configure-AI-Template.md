@@ -1,36 +1,36 @@
-# 4. టెంప్లేట్‌ను కాన్ఫిగర్ చేయండి
+# 4. టెంప్లేట్‌ని కాన్ఫిగర్ చేయండి
 
-!!! tip "ఈ మాడ్యూల్ చివరికి మీరు చేయగలుగుతారు"
+!!! tip "ఈ మాడ్యూల్ చివరిలో మీరు ఏమి చేయగలరో"
 
-    - [ ] `azure.yaml` యొక్క ఉద్దేశ్యాన్ని అర్థం చేసుకోవడం
-    - [ ] `azure.yaml` యొక్క నిర్మాణాన్ని అర్థం చేసుకోవడం
-    - [ ] azd లైఫ్‌సైకిల్ `hooks` విలువను అర్థం చేసుకోవడం
-    - [ ] **Lab 4:** పర్యావరణ వేరియబుల్స్‌ను పరిశీలించడం మరియు మార్చడం
-
----
-
-!!! prompt "`azure.yaml` ఫైల్ ఏమి చేస్తుంది? ఒక కోడ్ బాక్స్ ఉపయోగించి దాన్ని పంక్తివారీగా వివరించండి"
-
-      The `azure.yaml` file is the **configuration file for Azure Developer CLI (azd)**. It defines how your application should be deployed to Azure, including infrastructure, services, deployment hooks, and environment variables.
+    - [ ] `azure.yaml` యొక్క ప్రయోజనం అర్థం చేసుకోగలరు
+    - [ ] `azure.yaml` నిర్మాణాన్ని అర్థం చేసుకోగలరు
+    - [ ] azd yaşam చక్రం `hooks` విలువను అర్థం చేసుకోగలరు
+    - [ ] **ల్యాబ్ 4:** పరిసర వేరియబుల్స్‌ను అన్వేషించండి మరియు మార్చండి
 
 ---
 
-## 1. ఉద్దేశ్యము మరియు ఫంక్షనాలిటీ
+!!! prompt "`azure.yaml` ఫైల్ ఏమి చేస్తుంది? ఒక కోడ్ ఫెన్స్ ఉపయోగించి దాని ప్రతి లైన్‌ను వివరిస్తూ వివరించండి"
 
-This `azure.yaml` file serves as the **deployment blueprint** for an AI agent application that:
+      `azure.yaml` ఫైల్ అనేది **Azure Developer CLI (azd)** కోసం కాన్ఫిగరేషన్ ఫైల్. ఇది మీ అప్లికేషన్‌ను Azureలో ఎలా డిప్లయ్ చేయాలో నిర్వచిస్తుంది, అందులో ఇన్ఫ్రాస్ట్రక్చర్, సేవలు, డిప్లాయ్‌మెంట్ హుక్స్ మరియు పరిసర వేరియబుల్స్ ఉంటాయి.
 
-1. **డిప్లాయ్‌మెంట్‌కు ముందు పర్యావరణాన్ని ధృవీకరిస్తుంది**
+---
+
+## 1. ఉద్దేశ్యం మరియు ఫంక్షనాలిటీ
+
+ఈ `azure.yaml` ఫైల్ ఒక AI ఏజెంట్ అప్లికేషన్ కోసం **డిప్లాయ్‌మెంట్ బ్లూప్రింట్** గా పనిచేస్తుంది, ఇది:
+
+1. డిప్లాయ్‌మెంట్ ముందు **పరిసరాలను ధృవీకరిస్తుంది**
 2. **Azure AI సేవలను ప్రొవిజన్ చేస్తుంది** (AI Hub, AI Project, Search, మొదలైనవి)
-3. **Python అప్లికేషన్‌ను** Azure Container Apps లో డిప్లాయ్ చేస్తుంది
+3. **Python అప్లికేషన్‌ను Azure Container Apps‌ కు డిప్లాయ్ చేస్తుంది**
 4. చాట్ మరియు ఎంబెడ్డింగ్ ఫంక్షనాలిటీ కోసం **AI మోడల్స్‌ను కాన్ఫిగర్ చేస్తుంది**
-5. AI అప్లికేషన్ కోసం **మానిటరింగ్ మరియు ట్రేసింగ్‌ను సెట్ చేస్తుంది**
-6. కొత్త மற்றும் ఇప్పటికే ఉన్న రెండింటిపైనా Azure AI ప్రాజెక్ట్ సన్నివేశాలను నిర్వహిస్తుంది
+5. AI అప్లికేషన్ కోసం **మానిటరింగ్ మరియు ట్రేసింగ్ సెటప్ చేస్తుంది**
+6. క్రియేట్ చేయబడే కొత్త లేదా ఉన్నదైన Azure AI ప్రాజెక్ట్ పరిస్థితులను **నిర్వహిస్తుంది**
 
-The file enables **one-command deployment** (`azd up`) of a complete AI agent solution with proper validation, provisioning, and post-deployment configuration.
+ఈ ఫైల్ సరైన వాలిడేషన్, ప్రొవిజనింగ్ మరియు పోస్ట్-డిప్లాయ్‌మెంట్ కాన్ఫిగరేషన్‌తో పూర్తి AI ఏజెంట్ సొల్యూషన్‌ను ఒక కమాండ్‌తో (`azd up`) డిప్లాయ్ చేయడానికి సాధ్యంగా చేస్తుంది.
 
-??? info "వివరాల కోసం విస్తరించండి: `azure.yaml`"
+??? info "బహిర్గతి కోసం విస్తరించండి: `azure.yaml`"
 
-      The `azure.yaml` file defines how Azure Developer CLI should deploy and manage this AI Agent application in Azure. Let's break it down line-by-line.
+      `azure.yaml` ఫైల్ Azure Developer CLI ఈ AI ఏజెంట్ అప్లికేషన్‌ను Azureలో ఎలా డిప్లాయ్ చేసుకోవాలో మరియు నిర్వహించడాన్ని నిర్వచిస్తుంది. దీన్ని పంక్తి-ప్రతి-పంక్తిగా విడగొట్టుకుందాం.
 
       ```yaml title="" linenums="0"
 
@@ -126,17 +126,17 @@ The file enables **one-command deployment** (`azd up`) of a complete AI agent so
 
 ---
 
-## 2. ఫైల్‌ను విశ్లేషించడం
+## 2. ఫైల్‌ను విచ్ఛిన్నం చేయడం
 
-Let's go through the file section by section, to understand what it does - and why.
+దీనిని సెక్షన్ ప్రకారం చూద్దాం, ఏమి చేస్తుంది మరియు ఎందుకు అని అర్థం చేసుకోవడానికి.
 
-### 2.1 **శీర్షిక మరియు స్కీమా (1-3)**
+### 2.1 **హెడ్డర్ మరియు స్కీమా (1-3)**
 
 ```yaml title="" linenums="0"
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
 ```
 
-- **Line 1**: IDE మద్దతు మరియు IntelliSense కోసం YAML లాంగ్వేజ్ సర్వర్ స్కీమా నిర్ధారణను అందిస్తుంది
+- **లైన్ 1**: IDE సహాయానికి మరియు IntelliSense కోసం YAML లాంగ్వేజ్ సర్వర్ స్కీమా వాలిడేషన్‌ను అందిస్తుంది
 
 ### 2.2 ప్రాజెక్ట్ మెటాడేటా (5-10)
 
@@ -148,9 +148,9 @@ requiredVersions:
   azd: ">=1.14.0"
 ```
 
-- **Line 5**: Azure Developer CLI ద్వారా ఉపయోగించబడే ప్రాజెక్ట్ పేరును నిర్వచిస్తుంది
-- **Lines 6-7**: ఇది template వెర్షన్ 1.0.2 ఆధారంగా ఉందని సూచిస్తుంది
-- **Lines 8-9**: Azure Developer CLI వెర్షన్ 1.14.0 లేదా అందులోకి మరిన్ని అవసరం
+- **లైన్ 5**: Azure Developer CLI ద్వారా ఉపయోగించే ప్రాజెక్ట్ పేరు నిర్వచిస్తుంది
+- **లైన్స్ 6-7**: ఇది template సంస్కరణ 1.0.2 ఆధారంగా ఉందని సూచిస్తుంది
+- **లైన్స్ 8-9**: Azure Developer CLI సంస్కరణ 1.14.0 లేదా అంతకంటే పైగా అవసరం
 
 ### 2.3 డిప్లాయ్ హుక్స్ (11-40)
 
@@ -169,11 +169,11 @@ hooks:
       continueOnError: false      
 ```
 
-- **Lines 11-20**: **Pre-deployment hook** - `azd up` ముందు నడుస్తుంది
+- **లైన్స్ 11-20**: **ప్రీ-డిప్లాయ్‌మెంట్ హుక్** - `azd up` ముందు నడుస్తుంది
 
-      - Unix/Linuxలో: ధృవీకరణ స్క్రిప్ట్‌ను అమలుకు అనువుగా చేసుకుని, దాన్ని నడిపిస్తుంది
-      - Windowsలో: PowerShell ధృవీకరణ స్క్రిప్ట్‌ను నడిపిస్తుంది
-      - రెండూ ఇంటరాక్టివ్‌గా ఉంటాయి మరియు అవి విఫలమైతే డిప్లాయ్‌మెంట్‌ను ఆపేస్తాయి
+      - Unix/Linux పై: వాలిడేషన్ స్క్రిప్ట్‌ను ఎక్సిక్యూటబుల్‌గా మార్చి నడిపిస్తుంది
+      - Windows పై: PowerShell వాలిడేషన్ స్క్రిప్ట్ నడపబడుతుంది
+      - రెండింటూ ఇంటరాక్టివ్ మరియు అవి విఫలమైతే డిప్లాయ్‌మెంట్ నిలిపివేస్తాయి
 
 ```yaml  title="" linenums="0"
   postprovision:
@@ -188,10 +188,10 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Lines 21-30**: **Post-provision hook** - Azure వనరులు సృష్టించబడిన తర్వాత నడుస్తుంది
+- **లైన్స్ 21-30**: **పోస్ట్-ప్రొవిజన్ హుక్** - Azure రిసోర్సులు క్రియేట్ చేసిన తర్వాత నడుస్తుంది
 
-  - పర్యావరణ వేరియబుల్స్ రాయడానికి స్క్రిప్ట్‌లను అమలుపరుస్తుంది
-  - ఈ స్క్రిప్ట్‌లు విఫలమైతే కూడా డిప్లాయ్‌మెంట్ కొనసాగుతుంది (`continueOnError: true`)
+  - పరిసర వేరియబుల్స్ రాయడం స్క్రిప్ట్‌లు అమలు చేస్తుంది
+  - ఈ స్క్రిప్ట్‌లు విఫలమైనా డిప్లాయ్‌మెంట్ కొనసాగుతుంది (`continueOnError: true`)
 
 ```yaml title="" linenums="0"
   postdeploy:
@@ -206,14 +206,14 @@ hooks:
       continueOnError: true
       interactive: true
 ```
-- **Lines 31-40**: **Post-deploy hook** - అప్లికేషన్ డిప్లాయ్ అయిన తర్వాత నడుస్తుంది
+- **లైన్స్ 31-40**: **పోస్ట్-డిప్లॉय్ హుక్** - అప్లికేషన్ డిప్లాయ్ అయిన తర్వాత నడుస్తుంది
 
-  - తుది సెట్టప్ స్క్రిప్ట్‌లను అమలుపరుస్తుంది
-  - స్క్రిప్ట్‌లు విఫలమైనప్పటికీ కూడా కొనసాగుతుంది
+  - ఫైనల్ సెటప్ స్క్రిప్ట్‌లను అమలు చేస్తుంది
+  - స్క్రిప్ట్‌లు విఫలమైనా కొనసాగుతుంది
 
-### 2.4 సేవ కాన్ఫిగరేషన్ (41-48)
+### 2.4 సర్వీస్ కాన్ఫిగరేషన్ (41-48)
 
-This configures the application service you are deploying.
+ఇది మీరు డిప్లాయ్ చేస్తున్న అప్లికేషన్ సర్వీస్‌ను కాన్ఫిగర్ చేస్తుంది.
 
 ```yaml title="" linenums="0"
 services:
@@ -226,18 +226,18 @@ services:
       remoteBuild: true
 ```
 
-- **Line 42**: "api_and_frontend" అనే సేవను నిర్వచిస్తుంది
-- **Line 43**: మూల కోడ్ కోసం `./src` డైరెక్టరీను సూచిస్తుంది
-- **Line 44**: ప్రోగ్రామింగ్ భాషగా Pythonని పేర్కొంటుంది
-- **Line 45**: హోస్టింగ్ ప్లాట్‌ఫార్మ్‌గా Azure Container Apps ను ఉపయోగిస్తుంది
-- **Lines 46-48**: Docker కాన్ఫిగరేషన్
+- **లైన్ 42**: "api_and_frontend" అనే సర్వీస్‌ను నిర్వచిస్తుంది
+- **లైన్ 43**: సోర్సు కోడ్ కోసం `./src` డైరెక్టరీని సూచిస్తుంది
+- **లైన్ 44**: ప్రోగ్రామింగ్ భాషగా Pythonని సూచిస్తుంది
+- **లైన్ 45**: హోస్టింగ్ ప్లాట్‌‌ఫార్మ్‌గా Azure Container Apps‌ని ఉపయోగిస్తుంది
+- **లైన్స్ 46-48**: Docker కాన్ఫిగరేషన్
 
       - "api_and_frontend" ను ఇమేజ్ పేరుగా ఉపయోగిస్తుంది
       - Docker ఇమేజ్‌ను స్థానికంగా కాకుండా Azureలో రిమోట్‌గా బిల్డ్ చేస్తుంది
 
 ### 2.5 పైప్‌లైన్ వేరియబుల్స్ (49-76)
 
-These are variables to help you run `azd` in CI/CD pipelines for automation
+ఇవి ఆటోమేషన్ కోసం CI/CD పైప్లైన్‌లలో `azd` ను నడపడానికి ఉపయోగించే వేరియబుల్స్
 
 ```yaml title="" linenums="0"
 pipeline:
@@ -278,67 +278,67 @@ pipeline:
     - AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED
 ```
 
-This section defines environment variables used **during deployment**, organized by category:
+ఈ సెక్షన్ డిప్లాయ్‌మెంట్ సమయంలో ఉపయోగించే పరిసర వేరియబుల్స్‌ను నిర్వచిస్తుంది, వర్గాలుగా ఏర్పాటుచేసి:
 
-- **Azure వనరు పేర్లు (Lines 51-60)**:
-      - ప్రధాన Azure సేవల వనరు పేర్లు, ఉదా., Resource Group, AI Hub, AI Project మొదలైనవి
-- **ఫీచర్ ఫ్లాగ్స్ (Lines 61-63)**:
-      - నిర్దిష్ట Azure సేవలను ఎనేబుల్/డిజేబుల్ చేయడానికి boolean వేరియబుల్స్
-- **AI ఏజెంట్ కాన్ఫిగరేషన్ (Lines 64-71)**:
-      - ప్రధాన AI ఏజెంట్ కోసం కాన్ఫిగరేషన్, అందులో పేరు, ID, డిప్లాయ్‌మెంట్ సెట్టింగ్స్, మోడల్ వివరాలు ఉన్నాయి
-- **AI ఎంబెడ్డింగ్ కాన్ఫిగరేషన్ (Lines 72-79)**:
-      - వెక్టర్ సెర్చ్ కోసం ఉపయోగించే ఎంబెడ్డింగ్ మోడల్ కోసం కాన్ఫిగరేషన్
-- **సెర్చ్ మరియు మానిటరింగ్ (Lines 80-84)**:
-      - సెర్చ్ ఇండెక్స్ పేరు, ప్రస్తుతం ఉన్న వనరు IDలు, మరియు మానిటరింగ్/ట్రేసింగ్ సెట్టింగ్స్
+- **Azure రిసోర్స్ పేర్లు (లైన్స్ 51-60)**:
+      - ప్రధాన Azure సేవ రిసోర్స్ పేర్లు ఉదా., Resource Group, AI Hub, AI Project మొదలైనవి
+- **ఫీచర్ ఫ్లాగ్స్ (లైన్స్ 61-63)**:
+      - నిర్దిష్ట Azure సేవలను ఎనేబుల్/డిసేబుల్ చేయడానికి బూలియన్ వేరియబుల్స్
+- **AI ఏజెంట్ కాన్ఫిగరేషన్ (లైన్స్ 64-71)**:
+      - ప్రధాన AI ఏజెంట్ కోసం పేరు, ID, డిప్లాయ్‌మెంట్ సెట్టింగ్స్, మోడల్ వివరాలు
+- **AI ఎంబెడ్ కాన్ఫిగరేషన్ (లైన్స్ 72-79)**:
+      - వెక్టర్ సెర్చ్ కోసం ఉపయోగించే ఎంబెడ్డింగ్ మోడల్ యొక్క కాన్ఫిగరేషన్
+- **సర్చ్ మరియు మానిటరింగ్ (లైన్స్ 80-84)**:
+      - సర్చ్ ఇండెక్స్ పేరు, ఉన్న రిసోర్స్ IDలు, మరియు మానిటరింగ్/ట్రేసింగ్ సెట్టింగ్స్
 
 ---
 
-## 3. పర్యావరణ వేరియబుల్స్‌ను తెలుసుకోండి
-The following environment variables control your deployment's configuration and behavior, organized by their primary purpose. Most variables have sensible defaults, but you can customize them to match your specific requirements or existing Azure resources.
+## 3. పరిసర వేరియబుల్స్‌ను తెలుసుకోండి
+కింది పరిసర వేరియబుల్స్ మీ డిప్లాయ్‌మెంట్ కాన్ఫిగరేషన్ మరియు ప్రవర్తనను నియంత్రిస్తాయి, అవి వారి ప్రాథమిక ఉద్దేశ్యాన్ని ఆధారంగా ఏర్పాటు చేయబడ్డాయి. చాలా వేరియబుల్స్‌కు సాధారణ డీఫాల్ట్స్ ఉంటాయి, కానీ మీరు వాటిని మీ నిర్దిష్ట అవసరాలు లేదా ఉన్న Azure రిసోర్స్‌లకు నమోదుచేసుకోవడానికి అనుసృజించవచ్చు.
 
 ### 3.1 అవసరమైన వేరియబుల్స్ 
 
 ```bash title="" linenums="0"
 # ప్రధాన Azure కాన్ఫిగరేషన్
-AZURE_ENV_NAME                    # పర్యావరణం పేరు (వనరుల పేరులలో ఉపయోగించబడుతుంది)
+AZURE_ENV_NAME                    # పరిసర పేరు (సంపత్తి పేర్లలో ఉపయోగించబడుతుంది)
 AZURE_LOCATION                    # డిప్లాయ్‌మెంట్ ప్రాంతం
 AZURE_SUBSCRIPTION_ID             # లక్ష్య సబ్‌స్క్రిప్షన్
-AZURE_RESOURCE_GROUP              # వనరు గ్రూపు పేరు
+AZURE_RESOURCE_GROUP              # రీసోర్స్ గ్రూప్ పేరు
 AZURE_PRINCIPAL_ID                # RBAC కోసం వినియోగదారు ప్రిన్సిపల్
 
-# వనరు పేర్లు (నిర్దేశించకపోతే స్వయంచాలకంగా ఉత్పత్తి చేయబడతాయి)
+# రీసోర్స్ పేర్లు (సూచించనివ్వబడకపోతే ఆటోగా రూపొందించబడతాయి)
 AZURE_AIHUB_NAME                  # Microsoft Foundry హబ్ పేరు
 AZURE_AIPROJECT_NAME              # AI ప్రాజెక్ట్ పేరు
 AZURE_AISERVICES_NAME             # AI సేవల ఖాతా పేరు
 AZURE_STORAGE_ACCOUNT_NAME        # స్టోరేజ్ ఖాతా పేరు
 AZURE_CONTAINER_REGISTRY_NAME     # కంటైనర్ రిజిస్ట్రీ పేరు
-AZURE_KEYVAULT_NAME               # కీ వాల్ట్ పేరు (ఉపయోగిస్తే)
+AZURE_KEYVAULT_NAME               # కీ వాల్ట్ పేరు (ఉపయోగించబడితే)
 ```
 
 ### 3.2 మోడల్ కాన్ఫిగరేషన్ 
 ```bash title="" linenums="0"
 # చాట్ మోడల్ కాన్ఫిగరేషన్
-AZURE_AI_AGENT_MODEL_NAME         # డిఫాల్ట్: gpt-4o-mini
+AZURE_AI_AGENT_MODEL_NAME         # డిఫాల్ట్: gpt-4.1-mini
 AZURE_AI_AGENT_MODEL_FORMAT       # డిఫాల్ట్: OpenAI (లేదా Microsoft)
-AZURE_AI_AGENT_MODEL_VERSION      # డిఫాల్ట్: అందుబాటులో ఉన్న తాజా వెర్షన్
+AZURE_AI_AGENT_MODEL_VERSION      # డిఫాల్ట్: అందుబాటులో తాజా
 AZURE_AI_AGENT_DEPLOYMENT_NAME    # చాట్ మోడల్ కోసం డిప్లాయ్‌మెంట్ పేరు
-AZURE_AI_AGENT_DEPLOYMENT_SKU     # డిఫాల్ట్: స్టాండర్డ్
-AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # డిఫాల్ట్: 80 (TPM వేలల్లో)
+AZURE_AI_AGENT_DEPLOYMENT_SKU     # డిఫాల్ట్: Standard
+AZURE_AI_AGENT_DEPLOYMENT_CAPACITY # డిఫాల్ట్: 80 (వేలలుగా TPM)
 
 # ఎంబెడ్డింగ్ మోడల్ కాన్ఫిగరేషన్
 AZURE_AI_EMBED_MODEL_NAME         # డిఫాల్ట్: text-embedding-3-small
 AZURE_AI_EMBED_MODEL_FORMAT       # డిఫాల్ట్: OpenAI
-AZURE_AI_EMBED_MODEL_VERSION      # డిఫాల్ట్: అందుబాటులో ఉన్న తాజా వెర్షన్
+AZURE_AI_EMBED_MODEL_VERSION      # డిఫాల్ట్: అందుబాటులో తాజా
 AZURE_AI_EMBED_DEPLOYMENT_NAME    # ఎంబెడ్డింగ్స్ కోసం డిప్లాయ్‌మెంట్ పేరు
-AZURE_AI_EMBED_DEPLOYMENT_SKU     # డిఫాల్ట్: స్టాండర్డ్
-AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # డిఫాల్ట్: 50 (TPM వేలల్లో)
+AZURE_AI_EMBED_DEPLOYMENT_SKU     # డిఫాల్ట్: Standard
+AZURE_AI_EMBED_DEPLOYMENT_CAPACITY # డిఫాల్ట్: 50 (వేలలుగా TPM)
 
 # ఏజెంట్ కాన్ఫిగరేషన్
 AZURE_AI_AGENT_NAME               # ఏజెంట్ ప్రదర్శన పేరు
-AZURE_EXISTING_AGENT_ID           # ఉన్న ఏజెంట్‌ను ఉపయోగించండి (ఐచ్ఛికం)
+AZURE_EXISTING_AGENT_ID           # ఇప్పటికే ఉన్న ఏజెంట్‌ను ఉపయోగించండి (ఐచ్చికం)
 ```
 
-### 3.3 ఫీచర్ టోగుల్
+### 3.3 ఫీచర్ టోగ్గల్
 ```bash title="" linenums="0"
 # ఐచ్ఛిక సేవలు
 USE_APPLICATION_INSIGHTS         # డిఫాల్ట్: true
@@ -349,7 +349,7 @@ USE_CONTAINER_REGISTRY           # డిఫాల్ట్: true
 ENABLE_AZURE_MONITOR_TRACING     # డిఫాల్ట్: false
 AZURE_TRACING_GEN_AI_CONTENT_RECORDING_ENABLED # డిఫాల్ట్: false
 
-# శోధన విన్యాసం
+# శోధన కాన్ఫిగరేషన్
 AZURE_AI_SEARCH_INDEX_NAME       # శోధన సూచిక పేరు
 AZURE_SEARCH_SERVICE_NAME        # శోధన సేవ పేరు
 ```
@@ -357,32 +357,31 @@ AZURE_SEARCH_SERVICE_NAME        # శోధన సేవ పేరు
 ### 3.4 AI ప్రాజెక్ట్ కాన్ఫిగరేషన్ 
 ```bash title="" linenums="0"
 # ఉన్న వనరులను ఉపయోగించండి
-AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # ఇప్పటికే ఉన్న AI ప్రాజెక్ట్ యొక్క పూర్తి వనరు ID
+AZURE_EXISTING_AIPROJECT_RESOURCE_ID    # ఉన్న AI ప్రాజెక్ట్ యొక్క పూర్తి వనరు ID
 AZURE_EXISTING_AIPROJECT_ENDPOINT       # ఉన్న ప్రాజెక్ట్ యొక్క ఎండ్‌పాయింట్ URL
 ```
 
-### 3.5 మీ వేరియబుల్స్‌ను తనిఖీ చేయండి
+### 3.5 మీ వేరియబుల్స్‌ని తనిఖీ చేయండి
 
-మీ పర్యావరణ వేరియబుల్స్‌ను చూడటానికి మరియు నిర్వహించడానికి Azure Developer CLI ను ఉపయోగించండి:
+మీ పరిసర వేరియబుల్స్‌ను వీక్షించడానికి మరియు నిర్వహించడానికి Azure Developer CLIను ఉపయోగించండి:
 
 ```bash title="" linenums="0"
-# ప్రస్తుత పర్యావరణానికి సంబంధించిన అన్ని పర్యావరణ చరాలు చూడండి
+# ప్రస్తుత ఎన్విరాన్‌మెంట్‌కు సంబంధించిన అన్ని పర్యావరణ వేరియబుల్స్‌ను వీక్షించండి
 azd env get-values
 
-# ఒక నిర్దిష్ట పర్యావరణ చరాన్ని పొందండి
+# ఒక నిర్దిష్ట పర్యావరణ వేరియబుల్‌ను పొందండి
 azd env get-value AZURE_ENV_NAME
 
-# ఒక పర్యావరణ చరాన్ని అమర్చండి
+# ఒక పర్యావరణ వేరియబుల్‌ను సెట్ చేయండి
 azd env set AZURE_LOCATION eastus
 
-# .env ఫైల్ నుండి అనేక పర్యావరణ చరాలను అమర్చండి
+# .env ఫైల్ నుండి బహుళ పర్యావరణ వేరియబుల్స్‌ను సెట్ చేయండి
 azd env set --from-file .env
 ```
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-నివారణ:
-
-ఈ పత్రం AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నించినప్పటికీ, స్వయంచాలక అనువాదాల్లో తప్పిదాలు లేదా లోపాలు ఉండవచ్చు అని దయచేసి గమనించండి. మూల పత్రాన్ని దాని మూల భాషలోని అధికారిక మూలంగా పరిగణించాలి. కీలకమైన సమాచారానికి వృత్తిపరమైన మానవ అనువాదం చేయించుకోవాలని సూచించబడుతుంది. ఈ అనువాదాన్ని ఉపయోగించడం వల్ల ఏర్పడిన ఏవైనా అపార్థాలు లేదా తప్పుగా అర్థం చేసుకోవడాలకై మేము బాధ్యత వహించము.
+**అవగాహన ప్రకటన**:
+ఈ పత్రాన్ని AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నించినప్పటికీ, ఆటోమెటెడ్ అనువాదాలలో తప్పులు లేదా లోపాలు ఉండవచ్చునని దయచేసి గమనించండి. దాని మాతృభాషలో ఉన్న మూల పత్రాన్ని అధికారిక మూలంగా పరిగణించాలి. ఆవశ్యకమైన సమాచారం కోసం, ప్రొఫెషనల్ మానవ అనువాదం సిఫార్సు చేయబడుతుంది. ఈ అనువాదాన్ని ఉపయోగించడంవలన కలిగే ఏవైనా అవగాహన లోపాలు లేదా తప్పుగా అర్థం చేసుకోవడాల కోసం మేము బాధ్యులు కాదము.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
