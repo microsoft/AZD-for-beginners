@@ -1,28 +1,30 @@
-# Pag-deploy ng Modelo ng AI gamit ang Azure Developer CLI
+# Pag-deploy ng AI Model gamit ang Azure Developer CLI
 
 **Pag-navigate ng Kabanata:**
-- **📚 Course Home**: [AZD Para sa Mga Nagsisimula](../../README.md)
-- **📖 Current Chapter**: Kabanata 2 - Pag-develop na Inuuna ang AI
-- **⬅️ Previous**: [Integrasyon ng Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Next Chapter**: [Kabanata 3: Konfigurasyon](../chapter-03-configuration/configuration.md)
+- **📚 Tahanan ng Kurso**: [AZD For Beginners](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 2 - AI-Unang Pag-unlad
+- **⬅️ Nakaraan**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ Susunod**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 3: Konfigurasyon](../chapter-03-configuration/configuration.md)
 
-Ang gabay na ito ay nagbibigay ng komprehensibong mga tagubilin para sa pag-deploy ng mga modelo ng AI gamit ang mga AZD template, na sumasaklaw mula sa pagpili ng modelo hanggang sa mga pattern ng deployment para sa produksyon.
+Ang gabay na ito ay nagbibigay ng komprehensibong mga tagubilin para sa pag-deploy ng mga AI model gamit ang mga AZD template, na sumasaklaw mula sa pagpili ng modelo hanggang sa pattern ng produksyon na pag-deploy.
+
+> **Tala ng Pagpapatunay (2026-03-25):** Sinuri ang workflow ng AZD sa gabay na ito laban sa `azd` `1.23.12`. Para sa mga AI deployment na tumatagal nang mas mahaba kaysa sa default na window ng deployment ng serbisyo, sinusuportahan ng kasalukuyang mga release ng AZD ang `azd deploy --timeout <seconds>`.
 
 ## Talaan ng Nilalaman
 
-- [Estratehiya sa Pagpili ng Modelo](#estratehiya-sa-pagpili-ng-modelo)
-- [Konfigurasyon ng AZD para sa Mga Modelo ng AI](#konfigurasyon-ng-azd-para-sa-mga-modelo-ng-ai)
+- [Strategiya sa Pagpili ng Modelo](#strategiya-sa-pagpili-ng-modelo)
+- [Konfigurasyon ng AZD para sa Mga Modelong AI](#konfigurasyon-ng-azd-para-sa-mga-modelong-ai)
 - [Mga Pattern ng Deployment](#mga-pattern-ng-deployment)
 - [Pamamahala ng Modelo](#pamamahala-ng-modelo)
 - [Mga Pagsasaalang-alang sa Produksyon](#mga-pagsasaalang-alang-sa-produksyon)
-- [Pagmo-monitor at Obserbabilidad](#pagmo-monitor-at-obserbabilidad)
+- [Pagmamanman at Obserbabilidad](#pagmamanman-at-obserbabilidad)
 
-## Estratehiya sa Pagpili ng Modelo
+## Strategiya sa Pagpili ng Modelo
 
-### Mga Modelo ng Microsoft Foundry
+### Mga Modelong Microsoft Foundry
 
-Piliin ang tamang modelo para sa iyong kaso ng paggamit:
+Piliin ang tamang modelo para sa iyong use case:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -41,9 +43,9 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
@@ -52,18 +54,18 @@ services:
 
 ### Pagpaplano ng Kapasidad ng Modelo
 
-| Uri ng Modelo | Gamit | Inirerekomendang Kapasidad | Mga Pagsasaalang-alang sa Gastos |
+| Model Type | Use Case | Recommended Capacity | Cost Considerations |
 |------------|----------|---------------------|-------------------|
 | gpt-4.1-mini | Chat, Q&A | 10-50 TPM | Matipid para sa karamihan ng mga workload |
-| gpt-4.1 | Komplikadong pangangatwiran | 20-100 TPM | Mas mataas ang gastos, gamitin para sa mga premium na tampok |
-| Text-embedding-ada-002 | Paghahanap, RAG | 30-120 TPM | Mahalagang bahagi para sa semantikong paghahanap |
+| gpt-4.1 | Komplikadong pangangatwiran | 20-100 TPM | Mas mataas ang gastos, gamitin para sa premium na mga tampok |
+| text-embedding-3-large | Paghahanap, RAG | 30-120 TPM | Malakas na default na pagpipilian para sa semantikong paghahanap at pagkuha |
 | Whisper | Pagsasalita-sa-teksto | 10-50 TPM | Mga workload ng pagproseso ng audio |
 
-## Konfigurasyon ng AZD para sa Mga Modelo ng AI
+## Konfigurasyon ng AZD para sa Mga Modelong AI
 
-### Konfigurasyon ng Bicep Template
+### Bicep Template Configuration
 
-Gumawa ng mga deployment ng modelo gamit ang mga Bicep template:
+Gumawa ng mga deployment ng modelo gamit ang mga template ng Bicep:
 
 ```bicep
 // infra/main.bicep
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -122,16 +124,16 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
-### Mga Variable ng Kapaligiran
+### Mga Environment Variable
 
-I-configure ang kapaligiran ng iyong aplikasyon:
+I-configure ang environment ng iyong aplikasyon:
 
 ```bash
-# Konfigurasyon ng .env
+# konfigurasyon ng .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
 ## Mga Pattern ng Deployment
@@ -150,7 +152,7 @@ services:
 ```
 
 Pinakamainam para sa:
-- Pag-develop at pagsubok
+- Pag-unlad at pagsubok
 - Mga aplikasyon para sa iisang merkado
 - Pag-optimize ng gastos
 
@@ -168,13 +170,13 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 ```
 
 Pinakamainam para sa:
-- Mga global na aplikasyon
+- Pandaigdigang mga aplikasyon
 - Mataas na pangangailangan sa availability
 - Pamamahagi ng load
 
 ### Pattern 3: Hybrid na Pag-deploy
 
-Pagsamahin ang Microsoft Foundry Models sa iba pang mga serbisyo ng AI:
+Pagsamahin ang mga Modelong Microsoft Foundry sa iba pang mga serbisyo ng AI:
 
 ```bicep
 // Hybrid AI services
@@ -205,7 +207,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ## Pamamahala ng Modelo
 
-### Kontrol sa Bersyon
+### Kontrol ng Bersyon
 
 Subaybayan ang mga bersyon ng modelo sa iyong konfigurasyon ng AZD:
 
@@ -215,19 +217,19 @@ Subaybayan ang mga bersyon ng modelo sa iyong konfigurasyon ng AZD:
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
 ```
 
-### Mga Pag-update ng Modelo
+### Mga Update ng Modelo
 
-Gamitin ang mga AZD hook para sa mga pag-update ng modelo:
+Gumamit ng mga AZD hook para sa mga update ng modelo:
 
 ```bash
 #!/bin/bash
@@ -238,9 +240,12 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# Kung ang pag-deploy ay tumagal nang mas matagal kaysa sa default na timeout
+azd deploy --timeout 1800
 ```
 
-### Pagsubok na A/B
+### Pagsusuri ng A/B
 
 I-deploy ang maramihang bersyon ng modelo:
 
@@ -333,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Pag-optimize ng Gastos
 
-Ipatupad ang mga kontrol sa gastos:
+Magpatupad ng kontrol sa gastos:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -363,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Pagmo-monitor at Obserbabilidad
+## Pagmamanman at Obserbabilidad
 
 ### Integrasyon ng Application Insights
 
-I-configure ang pagmo-monitor para sa mga AI workload:
+I-configure ang pagmamanman para sa mga AI workload:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -405,10 +410,10 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### Mga Pasadyang Sukatan
 
-Subaybayan ang mga sukatan na partikular sa AI:
+Subaybayan ang mga sukatan na tiyak sa AI:
 
 ```python
-# Pasadyang telemetri para sa mga modelo ng AI
+# Pasadyang telemetriya para sa mga modelo ng artipisyal na intelihensiya
 import logging
 from applicationinsights import TelemetryClient
 
@@ -440,12 +445,12 @@ class AITelemetry:
         )
 ```
 
-### Mga Health Check
+### Mga Pagsusuri ng Kalusugan
 
-Ipatupad ang pagmo-monitor ng kalusugan ng serbisyo ng AI:
+Magpatupad ng pagmamanman ng kalusugan ng serbisyo ng AI:
 
 ```python
-# Mga endpoint para sa pagsuri ng katayuan
+# Mga endpoint para sa pagsusuri ng kalusugan
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -473,14 +478,14 @@ async def check_ai_models():
 
 ## Mga Susunod na Hakbang
 
-1. **Suriin ang [Patnubay sa Integrasyon ng Microsoft Foundry](microsoft-foundry-integration.md)** para sa mga pattern ng integrasyon ng serbisyo
+1. **Suriin ang [Gabay sa Integrasyon ng Microsoft Foundry](microsoft-foundry-integration.md)** para sa mga pattern ng integrasyon ng serbisyo
 2. **Kumpletuhin ang [AI Workshop Lab](ai-workshop-lab.md)** para sa praktikal na karanasan
-3. **Ipatupad ang [Mga Praktika sa Produksyon ng AI](production-ai-practices.md)** para sa mga enterprise deployment
-4. **Suriin ang [Patnubay sa Pag-troubleshoot ng AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** para sa karaniwang mga isyu
+3. **Ipatupad ang [Mga Praktika ng Produksyon ng AI](production-ai-practices.md)** para sa mga enterprise deployment
+4. **Galugarin ang [Gabay sa Pag-troubleshoot ng AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** para sa mga karaniwang isyu
 
-## Mga Mapagkukunan
+## Mga Sanggunian
 
-- [Pagkakaroon ng Mga Modelo ng Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Pagkakaroon ng mga Modelong Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Dokumentasyon ng Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Pag-scale ng Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Pag-optimize ng Gastos ng AI Model](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
@@ -488,15 +493,15 @@ async def check_ai_models():
 ---
 
 **Pag-navigate ng Kabanata:**
-- **📚 Course Home**: [AZD Para sa Mga Nagsisimula](../../README.md)
-- **📖 Current Chapter**: Kabanata 2 - Pag-develop na Inuuna ang AI
-- **⬅️ Previous**: [Integrasyon ng Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Next Chapter**: [Kabanata 3: Konfigurasyon](../chapter-03-configuration/configuration.md)
+- **📚 Tahanan ng Kurso**: [AZD For Beginners](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 2 - AI-Unang Pag-unlad
+- **⬅️ Nakaraan**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ Susunod**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 3: Konfigurasyon](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Isinalin ang dokumentong ito gamit ang AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Habang nagsusumikap kami para sa katumpakan, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatumpak. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na opisyal na sanggunian. Para sa kritikal na impormasyon, inirerekomenda ang propesyonal na pagsasaling-tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
+**Paunawa**:
+Ang dokumentong ito ay isinalin gamit ang serbisyo ng pagsasalin na pinapagana ng AI [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagiging tumpak. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na opisyal na sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

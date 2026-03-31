@@ -1,65 +1,65 @@
-# Patnubay sa Konfigurasyon
+# Gabay sa Konfigurasyon
 
 **Pag-navigate ng Kabanata:**
-- **📚 Pangunahing Pahina ng Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md)
-- **📖 Kasalukuyang Kabanata**: Kabanata 3 - Konfigurasyon & Autentikasyon
-- **⬅️ Nakaraang**: [Ang Iyong Unang Proyekto](first-project.md)
-- **➡️ Susunod**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 Susunod na Kabanata**: [Kabanata 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
+- **📚 Tahanan ng Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 3 - Konfigurasyon at Pagpapatotoo
+- **⬅️ Nakaraan**: [Ang Iyong Unang Proyekto](first-project.md)
+- **➡️ Susunod**: [Gabay sa Pag-deploy](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 4: Imprastruktura bilang Code](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Panimula
 
-Saklaw ng komprehensibong gabay na ito ang lahat ng aspeto ng pagkonpigura ng Azure Developer CLI para sa pinakamainam na mga workflow ng pag-develop at deployment. Matutuhan mo ang tungkol sa hierarchy ng konfigurasyon, pamamahala ng kapaligiran, mga paraan ng autentikasyon, at mga advanced na pattern ng konfigurasyon na nagpapahintulot ng mahusay at ligtas na mga deployment sa Azure.
+Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng aspeto ng pagsasaayos ng Azure Developer CLI para sa optimal na mga workflow ng pag-develop at pag-deploy. Matututuhan mo ang tungkol sa hierarkiya ng konfigurasyon, pamamahala ng kapaligiran, mga pamamaraan ng pagpapatotoo, at mga advanced na pattern ng konfigurasyon na nagpapahintulot ng mahusay at ligtas na pag-deploy sa Azure.
 
 ## Mga Layunin ng Pagkatuto
 
 Sa pagtatapos ng araling ito, magagawa mong:
-- Masterin ang hirarkiya ng konfigurasyon ng azd at maunawaan kung paano pinaprayoridad ang mga setting
+- Masterin ang hierarkiya ng konfigurasyon ng azd at maunawaan kung paano inuuna ang mga setting
 - I-configure nang epektibo ang mga global at project-specific na setting
-- Pamahalaan ang maramihang mga kapaligiran na may magkakaibang konfigurasyon
-- Magpatupad ng ligtas na mga pattern ng autentikasyon at awtorisasyon
-- Unawain ang mga advanced na pattern ng konfigurasyon para sa mga kumplikadong senaryo
+- Pamahalaan ang maramihang kapaligiran na may magkakaibang konfigurasyon
+- Ipatupad ang ligtas na mga pattern ng pagpapatotoo at awtorisasyon
+- Maunawaan ang mga advanced na pattern ng konfigurasyon para sa mga kumplikadong senaryo
 
 ## Mga Kinalabasan ng Pagkatuto
 
-Pagkatapos makumpleto ang araling ito, magagawa mong:
-- I-configure ang azd para sa pinakamainam na mga workflow ng pag-develop
-- Mag-set up at pamahalaan ang maramihang mga deployment environment
-- Magpatupad ng ligtas na mga kasanayan sa pamamahala ng konfigurasyon
+Matapos makumpleto ang araling ito, magagawa mong:
+- I-configure ang azd para sa optimal na mga workflow ng pag-develop
+- Mag-set up at pamahalaan ang maramihang deployment na kapaligiran
+- Ipatupad ang ligtas na mga kasanayan sa pamamahala ng konfigurasyon
 - Mag-troubleshoot ng mga isyung may kaugnayan sa konfigurasyon
 - I-customize ang pag-uugali ng azd para sa mga partikular na pangangailangan ng organisasyon
 
-Saklaw ng komprehensibong gabay na ito ang lahat ng aspeto ng pagkonpigura ng Azure Developer CLI para sa pinakamainam na mga workflow ng pag-develop at deployment.
+Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng aspeto ng pagsasaayos ng Azure Developer CLI para sa optimal na mga workflow ng pag-develop at pag-deploy.
 
-## Pag-unawa sa mga AI Agent sa isang azd Project
+## Pag-unawa sa mga AI agent sa isang proyektong azd
 
-Kung bago ka sa mga AI agent, narito ang isang simpleng paraan ng pag-iisip tungkol sa kanila sa loob ng mundo ng azd.
+Kung bago ka sa mga AI agent, narito ang isang simpleng paraan upang isipin ang mga ito sa loob ng mundo ng azd.
 
-### Ano ang Agent?
+### Ano ang isang Ahente?
 
-Ang agent ay isang piraso ng software na maaaring tumanggap ng kahilingan, mag-reason tungkol dito, at kumilos—madalas sa pamamagitan ng pagtawag sa isang AI model, pagtingin sa datos, o pag-invoke ng ibang mga serbisyo. Sa isang azd project, ang agent ay isa lamang pang **serbisyo** kasama ng iyong web frontend o API backend.
+Ang isang ahente ay isang piraso ng software na maaaring tumanggap ng kahilingan, mag-analisa tungkol dito, at gumawa ng mga aksyon—madalas sa pamamagitan ng pagtawag sa isang AI model, pagtingin sa data, o pag-invoke ng iba pang mga serbisyo. Sa isang proyektong azd, ang isang ahente ay isa lamang pang **serbisyo** kasabay ng iyong web frontend o API backend.
 
-### Paano Nagkakasya ang Mga Agent sa Istruktura ng azd Project
+### Paano Naaangkop ang mga Agent sa Estruktura ng Proyektong azd
 
-Ang isang azd project ay binubuo ng tatlong layer: **infrastructure**, **code**, at **configuration**. Ang mga agent ay kumakabit sa mga layer na ito sa parehong paraan ng ibang serbisyo:
+Ang isang proyektong azd ay binubuo ng tatlong layer: **imprastruktura**, **code**, at **konfigurasyon**. Ang mga agent ay kumokonekta sa mga layer na ito sa parehong paraan ng anumang ibang serbisyo:
 
-| Antas | Ano ang Ginagawa Nito para sa Tradisyonal na App | Ano ang Ginagawa Nito para sa isang Agent |
+| Antas | Ano ang Ginagawa Nito para sa Tradisyunal na App | Ano ang Ginagawa Nito para sa isang Ahente |
 |-------|-------------------------------------|---------------------------|
-| **Infrastructure** (`infra/`) | Nagpo-provision ng web app at database | Nagpo-provision ng endpoint ng AI model, search index, o host para sa agent |
-| **Code** (`src/`) | Naglalaman ng iyong frontend at API source code | Naglalaman ng iyong agent logic at mga definisyon ng prompt |
-| **Configuration** (`azure.yaml`) | Nagsasaad ng iyong mga serbisyo at kanilang hosting targets | Nagsasaad ng iyong agent bilang isang serbisyo, na tumutukoy sa kanyang code at host |
+| **Imprastruktura** (`infra/`) | Naghahanda ng web app at database | Naghahanda ng endpoint ng AI model, search index, o host para sa ahente |
+| **Code** (`src/`) | Naglalaman ng iyong frontend at API source code | Naglalaman ng lohika ng iyong ahente at mga kahulugan ng prompt |
+| **Konfigurasyon** (`azure.yaml`) | Nagtatala ng iyong mga serbisyo at kanilang hosting targets | Nagtatala ng iyong ahente bilang isang serbisyo, na nagtuturo sa code at host nito |
 
-### Ang Papel ng `azure.yaml`
+### Papel ng `azure.yaml`
 
-Hindi mo kailangang matandaan ang syntax ngayon. Sa konsepto, ang `azure.yaml` ang file kung saan sinasabi mo sa azd: *"Narito ang mga serbisyo na bumubuo sa aking aplikasyon, at narito kung saan hahanapin ang kanilang code."*
+Hindi mo kailangang kabisaduhin ang syntax ngayon. Sa konsepto, ang `azure.yaml` ang file kung saan sinasabi mo sa azd: *"Narito ang mga serbisyo na bumubuo sa aking application, at narito kung saan mahahanap ang kanilang code."*
 
-Kapag ang iyong proyekto ay may kasama na AI agent, simpleng inililista ng `azure.yaml` ang agent bilang isa sa mga serbisyo. Alam ng azd na magpo-provision ng tamang imprastruktura (tulad ng isang endpoint ng Microsoft Foundry Models o isang Container App para i-host ang agent) at ide-deploy ang iyong agent code—katulad ng gagawin nito para sa isang web app o API.
+Kapag kasama sa iyong proyekto ang isang AI agent, simpleng inililista ng `azure.yaml` ang agent bilang isa sa mga serbisyo. Alam ng azd na mag-provision ng tamang imprastruktura (tulad ng isang Microsoft Foundry Models endpoint o isang Container App para i-host ang ahente) at i-deploy ang iyong agent code—gaya ng ginagawa nito para sa isang web app o API.
 
-Ibig sabihin, wala talagang bagong bagay na kailangang matutunan. Kung naiintindihan mo kung paano pinamamahalaan ng azd ang isang web service, naiintindihan mo na kung paano nito pinamamahalaan ang isang agent.
+Ibig sabihin wala nang bago na kailangang matutunan sa pinaka-pundamental na antas. Kung naiintindihan mo kung paano pinamamahalaan ng azd ang isang web service, naiintindihan mo na kung paano nito pinamamahalaan ang isang ahente.
 
-## Hirarkiya ng Konfigurasyon
+## Hierarkiya ng Konfigurasyon
 
-Gumagamit ang azd ng hierarchical na system ng konfigurasyon:
+Gumagamit ang azd ng isang hierarchical na sistema ng konfigurasyon:
 1. **Command-line flags** (pinakamataas na prayoridad)
 2. **Environment variables**
 3. **Local project configuration** (`.azd/config.json`)
@@ -68,7 +68,7 @@ Gumagamit ang azd ng hierarchical na system ng konfigurasyon:
 
 ## Global na Konfigurasyon
 
-### Pagtatakda ng Global na Default
+### Pagtatakda ng Mga Global na Default
 ```bash
 # Itakda ang default na subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -76,17 +76,17 @@ azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 # Itakda ang default na lokasyon
 azd config set defaults.location "eastus2"
 
-# Itakda ang default na pamantayan sa pagpapangalan ng resource group
+# Itakda ang default na kombensiyon sa pagpangalang ng resource group
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
 # Tingnan ang lahat ng global na konfigurasyon
-azd config list
+azd config show
 
 # Alisin ang isang konfigurasyon
 azd config unset defaults.location
 ```
 
-### Karaniwang Global na Mga Setting
+### Karaniwang Mga Global na Setting
 ```bash
 # Mga kagustuhan sa pag-develop
 azd config set alpha.enable true                    # Paganahin ang mga alpha na tampok
@@ -98,14 +98,14 @@ azd config set auth.useAzureCliCredential true     # Gamitin ang Azure CLI para 
 azd config set tls.insecure false                  # Ipatupad ang pag-verify ng TLS
 
 # Pagpapahusay ng pagganap
-azd config set provision.parallelism 5             # Sabayang paglikha ng mga resource
+azd config set provision.parallelism 5             # Paralel na paglikha ng mga resource
 azd config set deploy.timeout 30m                  # Timeout ng deployment
 ```
 
 ## 🏗️ Konfigurasyon ng Proyekto
 
-### Istruktura ng `azure.yaml`
-Ang file na `azure.yaml` ang puso ng iyong azd project:
+### Estruktura ng `azure.yaml`
+Ang `azure.yaml` file ang puso ng iyong proyektong azd:
 
 ```yaml
 # Minimum configuration
@@ -228,12 +228,12 @@ services:
 
 ## 🌟 Pamamahala ng Kapaligiran
 
-### Paglikha ng Mga Kapaligiran
+### Paglikha ng mga Kapaligiran
 ```bash
 # Lumikha ng bagong kapaligiran
 azd env new development
 
-# Lumikha gamit ang tiyak na lokasyon
+# Lumikha sa partikular na lokasyon
 azd env new staging --location "westus2"
 
 # Lumikha mula sa template
@@ -278,16 +278,16 @@ azd env get-values
 # API_KEY=secret-api-key
 # DEBUG=true
 
-# Tanggalin ang variable ng kapaligiran
+# Alisin ang variable ng kapaligiran
 azd env unset DEBUG
 
-# Patunayan ang pagtanggal
+# Tiyakin ang pagtanggal
 azd env get-values | grep DEBUG
-# (hindi dapat magbalik ng anuman)
+# (dapat walang ibalik)
 ```
 
 ### Mga Template ng Kapaligiran
-Gumawa ng `.azure/env.template` para sa pare-parehong setup ng kapaligiran:
+Gumawa ng `.azure/env.template` para sa magkakatugmang pag-set up ng kapaligiran:
 ```bash
 # Mga kinakailangang variable
 AZURE_SUBSCRIPTION_ID=
@@ -303,24 +303,24 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 Konfigurasyon ng Autentikasyon
+## 🔐 Konfigurasyon ng Pagpapatotoo
 
 ### Integrasyon ng Azure CLI
 ```bash
 # Gamitin ang mga kredensyal ng Azure CLI (default)
 azd config set auth.useAzureCliCredential true
 
-# Mag-log in gamit ang tukoy na tenant
+# Mag-login gamit ang partikular na tenant
 az login --tenant <tenant-id>
 
 # Itakda ang default na subscription
 az account set --subscription <subscription-id>
 ```
 
-### Autentikasyon ng Service Principal
-Para sa mga CI/CD pipeline:
+### Pagpapatotoo gamit ang Service Principal
+Para sa CI/CD pipelines:
 ```bash
-# Itakda ang mga environment variables
+# Itakda ang mga variable ng kapaligiran
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
@@ -331,9 +331,9 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Managed Identity
-Para sa mga kapaligirang naka-host sa Azure:
+Para sa mga kapaligirang hinahosti sa Azure:
 ```bash
-# Paganahin ang awtentikasyon ng managed identity
+# Paganahin ang pagpapatunay gamit ang pinamamahalaang pagkakakilanlan.
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
@@ -364,7 +364,7 @@ I-configure ang mga parameter ng imprastruktura sa `infra/main.parameters.json`:
 ```
 
 ### Konfigurasyon ng Terraform
-Para sa mga Terraform project, i-configure sa `infra/terraform.tfvars`:
+Para sa mga proyekto ng Terraform, i-configure sa `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -372,7 +372,7 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Konfigurasyon ng Deployment
+## 🚀 Konfigurasyon ng Pag-deploy
 
 ### Konfigurasyon ng Build
 ```yaml
@@ -411,13 +411,13 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
-Halimbawa ng `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+Halimbawa `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Mga Advanced na Konfigurasyon
 
-### Pasadyang Pagpapangalan ng Resource
+### Pasadyang Pagpapangalan ng mga Resource
 ```bash
-# Itakda ang mga alituntunin sa pagpangalan
+# Itakda ang mga panuntunan sa pagbibigay ng pangalan
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -434,7 +434,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Konfigurasyon ng Pagsubaybay
+### Konfigurasyon ng Pagmomonitor
 ```yaml
 # In azure.yaml
 monitoring:
@@ -446,11 +446,11 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Mga Konfigurasyong Espesipiko sa Kapaligiran
+## 🎯 Mga Konfigurasyong Tiyak sa Kapaligiran
 
-### Kapaligiran ng Development
+### Kapaligiran ng Pag-develop
 ```bash
-# .azure/pagpapaunlad/.env
+# .azure/development/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
@@ -477,7 +477,7 @@ ENABLE_SECURITY_HEADERS=true
 
 ## 🔍 Pagpapatunay ng Konfigurasyon
 
-### I-validate ang Konfigurasyon
+### Pag-validate ng Konfigurasyon
 ```bash
 # Suriin ang sintaks ng konfigurasyon
 azd config validate
@@ -490,7 +490,7 @@ azd provision --dry-run
 ```
 
 ### Mga Script ng Konfigurasyon
-Gumawa ng mga validation script sa `scripts/`:
+Gumawa ng mga script ng pagpapatunay sa `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -504,7 +504,7 @@ if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   exit 1
 fi
 
-# I-validate ang sintaks ng azure.yaml
+# Suriin ang sintaks ng azure.yaml
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -513,9 +513,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Mga Pinakamahusay na Kasanayan
+## 🎓 Pinakamahusay na Kasanayan
 
-### 1. Gumamit ng Mga Variable ng Kapaligiran
+### 1. Gamitin ang Mga Variable ng Kapaligiran
 ```yaml
 # Good: Use environment variables
 database:
@@ -526,7 +526,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Ayusin ang mga File ng Konfigurasyon
+### 2. Ayusin ang Mga File ng Konfigurasyon
 ```
 .azure/
 ├── config.json              # Global project config
@@ -542,11 +542,11 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Mga Pagsasaalang-alang sa Version Control
+### 3. Mga Dapat Isaalang-alang sa Version Control
 ```bash
 # .gitignore
 .azure/*/config.json         # Mga config ng kapaligiran (naglalaman ng mga ID ng resource)
-.azure/*/.env               # Mga variable ng kapaligiran (maaaring maglaman ng mga lihim)
+.azure/*/.env               # Mga variable ng kapaligiran (maaaring maglaman ng mga sekreto)
 .env                        # Lokal na file ng kapaligiran
 ```
 
@@ -568,30 +568,30 @@ Idokumento ang iyong konfigurasyon sa `CONFIG.md`:
 
 ## 🎯 Mga Praktikal na Ehersisyo
 
-### Ehersisyo 1: Multi-Environment Configuration (15 minuto)
+### Ehersisyo 1: Konfigurasyon ng Maramihang Kapaligiran (15 minuto)
 
-**Layunin**: Lumikha at i-configure ang tatlong kapaligiran na may magkakaibang mga setting
+**Layunin**: Lumikha at i-configure ang tatlong kapaligiran na may magkakaibang setting
 
 ```bash
-# Lumikha ng development na kapaligiran
+# Lumikha ng development environment
 azd env new dev
 azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# Lumikha ng staging na kapaligiran
+# Lumikha ng staging environment
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 50
 
-# Lumikha ng production na kapaligiran
+# Lumikha ng production environment
 azd env new production
 azd env set LOG_LEVEL error
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 10
 
-# Suriin ang bawat kapaligiran
+# Suriin ang bawat environment
 azd env select dev && azd env get-values
 azd env select staging && azd env get-values
 azd env select production && azd env get-values
@@ -600,58 +600,58 @@ azd env select production && azd env get-values
 **Mga Pamantayan ng Tagumpay:**
 - [ ] Tatlong kapaligiran ang matagumpay na nalikha
 - [ ] Bawat kapaligiran ay may natatanging konfigurasyon
-- [ ] Maaaring mag-switch sa pagitan ng mga kapaligiran nang walang error
+- [ ] Maaaring magpalit-palit sa pagitan ng mga kapaligiran nang walang mga error
 - [ ] `azd env list` ay nagpapakita ng lahat ng tatlong kapaligiran
 
-### Ehersisyo 2: Pamamahala ng Mga Secret (10 minuto)
+### Ehersisyo 2: Pamamahala ng Sekreto (10 minuto)
 
-**Layunin**: Magsanay ng ligtas na konfigurasyon para sa sensitibong data
+**Layunin**: Sanayin ang ligtas na konfigurasyon gamit ang sensitibong data
 
 ```bash
 # Itakda ang mga lihim (hindi ipinapakita sa output)
 azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 
-# Itakda ang hindi-sikretong konfigurasyon
+# Itakda ang hindi-lihim na konfigurasyon
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# Tingnan ang kapaligiran (dapat itinatakpan ang mga lihim)
+# Tingnan ang kapaligiran (dapat maitago ang mga lihim)
 azd env get-values
 
-# Tiyakin na naka-imbak ang mga lihim
+# Tiyakin na ang mga lihim ay naka-imbak
 azd env get DB_PASSWORD  # Dapat ipakita ang aktwal na halaga
 ```
 
 **Mga Pamantayan ng Tagumpay:**
-- [ ] Ang mga secret ay naimbak nang hindi ipinapakita sa terminal
-- [ ] `azd env get-values` ay nagpapakita ng mga redacted na secret
-- [ ] Ang indibidwal na `azd env get <SECRET_NAME>` ay kumukuha ng aktwal na halaga
+- [ ] Ang mga sikreto ay naka-imbak nang hindi ipinapakita sa terminal
+- [ ] `azd env get-values` ay nagpapakita ng mga nire-redact na sikreto
+- [ ] Indibidwal na `azd env get <SECRET_NAME>` ay kumukuha ng aktwal na halaga
 
 ## Mga Susunod na Hakbang
 
-- [Ang Iyong Unang Proyekto](first-project.md) - I-apply ang konfigurasyon sa praktika
-- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Gamitin ang konfigurasyon para sa deployment
-- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Mga konfigurasyong handa na para sa produksyon
+- [Ang Iyong Unang Proyekto](first-project.md) - Ilapat ang konfigurasyon sa praktika
+- [Gabay sa Pag-deploy](../chapter-04-infrastructure/deployment-guide.md) - Gamitin ang konfigurasyon para sa pag-deploy
+- [Pag-provision ng Mga Resource](../chapter-04-infrastructure/provisioning.md) - Mga konfigurasyong handa para sa produksyon
 
-## Mga Sanggunian
+## Sanggunian
 
-- [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Environment Variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [Sanggunian ng Konfigurasyon ng azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Skema ng azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [Mga Variable ng Kapaligiran](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
 **Pag-navigate ng Kabanata:**
-- **📚 Pangunahing Pahina ng Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md)
-- **📖 Kasalukuyang Kabanata**: Kabanata 3 - Konfigurasyon & Autentikasyon
-- **⬅️ Nakaraang**: [Ang Iyong Unang Proyekto](first-project.md)
-- **➡️ Susunod na Kabanata**: [Kabanata 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
+- **📚 Tahanan ng Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 3 - Konfigurasyon at Pagpapatotoo
+- **⬅️ Nakaraan**: [Ang Iyong Unang Proyekto](first-project.md)
+- **➡️ Susunod**: [Kabanata 4: Imprastruktura bilang Code](../chapter-04-infrastructure/deployment-guide.md)
 - **Susunod na Aralin**: [Ang Iyong Unang Proyekto](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Paunawa**:
-Ang dokumentong ito ay isinalin gamit ang AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Bagama't nagsusumikap kami para sa katumpakan, mangyaring tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatumpak. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na awtoritatibong pinagmulan. Para sa kritikal na impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaintindihan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
+**Disclaimer**:
+Isinalin ang dokumentong ito gamit ang serbisyong pagsasalin na AI [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatumpak. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na mapagkakatiwalaang sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot para sa anumang hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

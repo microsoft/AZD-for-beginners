@@ -1,20 +1,22 @@
-# Kabanata 3: Konfigurasyon at Autentikasyon
+# Kabanata 3: Konfigurasyon at Pagpapatunay
 
-**📚 Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md) | **⏱️ Tagal**: 45-60 minuto | **⭐ Antas ng Kahirapan**: Katamtaman
+**📚 Kurso**: [AZD For Beginners](../../README.md) | **⏱️ Tagal**: 45-60 minuto | **⭐ Antas ng Kahirapan**: Katamtaman
 
 ---
 
 ## Pangkalahatang-ideya
 
-Ang kabanatang ito ay sumasaklaw sa konfigurasyon ng kapaligiran, mga pattern ng autentikasyon, at pinakamahuhusay na kasanayan sa seguridad para sa mga deployment gamit ang Azure Developer CLI.
+Tinutukoy ng kabanatang ito ang konfigurasyon ng environment, mga pattern ng pagpapatunay, at pinakamahusay na kasanayan sa seguridad para sa mga deployment gamit ang Azure Developer CLI.
+
+> Na-validate gamit ang `azd 1.23.12` noong Marso 2026.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa pagtatapos ng kabanatang ito, magagawa mong:
-- Maging bihasa sa hierarkiya ng konfigurasyon ng AZD
-- Pamahalaan ang maramihang kapaligiran (dev, staging, prod)
-- Magpatupad ng ligtas na autentikasyon gamit ang mga pinamahalaang identidad
-- I-configure ang mga setting na tiyak sa kapaligiran
+Sa pagtatapos ng kabanatang ito, makakaya mong:
+- Makabisado ang hierarchy ng konfigurasyon ng AZD
+- Pamahalaan ang maramihang mga environment (dev, staging, prod)
+- Magpatupad ng ligtas na pagpapatunay gamit ang managed identities
+- I-configure ang mga setting na partikular sa bawat environment
 
 ---
 
@@ -22,8 +24,8 @@ Sa pagtatapos ng kabanatang ito, magagawa mong:
 
 | # | Aralin | Paglalarawan | Oras |
 |---|--------|-------------|------|
-| 1 | [Gabay sa Konfigurasyon](configuration.md) | Pagsasaayos at pamamahala ng kapaligiran | 30 min |
-| 2 | [Autentikasyon at Seguridad](authsecurity.md) | Mga pattern ng pinamahalaang identidad at RBAC | 30 min |
+| 1 | [Gabay sa Konfigurasyon](configuration.md) | Pagsasaayos at pamamahala ng environment | 30 min |
+| 2 | [Pagpapatunay at Seguridad](authsecurity.md) | Managed identity at mga pattern ng RBAC | 30 min |
 
 ---
 
@@ -48,13 +50,13 @@ azd env get-values
 
 ---
 
-## 🔧 Hierarkiya ng Konfigurasyon
+## 🔧 Herarkiya ng Konfigurasyon
 
-Ang AZD ay inaaplay ang mga setting sa pagkakasunod na ito (ang huli ay nagsasapawan sa nauna):
+Inilalapat ng AZD ang mga setting sa pagkakasunod na ito (ang mas huli ay ini-override ang mas mauna):
 
 1. **Mga default na halaga** (nakapaloob sa mga template)
 2. **azure.yaml** (konfigurasyon ng proyekto)
-3. **Mga variable ng kapaligiran** (`azd env set`)
+3. **Mga environment variable** (`azd env set`)
 4. **Mga flag ng command-line** (`--location eastus`)
 
 ---
@@ -62,37 +64,41 @@ Ang AZD ay inaaplay ang mga setting sa pagkakasunod na ito (ang huli ay nagsasap
 ## 🔐 Pinakamahusay na Kasanayan sa Seguridad
 
 ```bash
-# Gumamit ng pinamamahalaang identidad (inirerekomenda)
+# Gumamit ng managed identity (inirerekomenda)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Suriin ang katayuan ng awtentikasyon
-azd auth whoami
+# Suriin ang katayuan ng autentikasyon ng AZD
+azd auth status
+
+# Opsyonal: suriin ang konteksto ng Azure CLI kung plano mong magpatakbo ng mga utos na az
 az account show
 
-# Muling magpatunay ng pagkakakilanlan kung kinakailangan
+# Muling mag-authenticate kung kinakailangan
 azd auth login
+
+# Opsyonal: i-refresh ang autentikasyon ng Azure CLI para sa mga utos na az
 az login
 ```
 
 ---
 
-## 🔗 Navigasyon
+## 🔗 Nabigasyon
 
-| Direksyon | Kabanata |
+| Direction | Chapter |
 |-----------|---------|
 | **Nakaraan** | [Kabanata 2: Pag-unlad ng AI](../chapter-02-ai-development/README.md) |
 | **Susunod** | [Kabanata 4: Imprastruktura](../chapter-04-infrastructure/README.md) |
 
 ---
 
-## 📖 Kaugnay na Mga Mapagkukunan
+## 📖 Kaugnay na Mga Sanggunian
 
-- [Pagsusuri Bago Pag-deploy](../chapter-06-pre-deployment/README.md)
-- [Paglutas ng Problema](../chapter-07-troubleshooting/common-issues.md)
+- [Pagsusuri bago mag-deploy](../chapter-06-pre-deployment/README.md)
+- [Pag-troubleshoot](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Paunawa:
-Isinalin ang dokumentong ito gamit ang AI translation service na Co-op Translator (https://github.com/Azure/co-op-translator). Bagaman nagsisikap kami na maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o di-tumpak na bahagi. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pinakapinagkakatiwalaang sanggunian. Para sa mga kritikal na impormasyon, inirerekomenda ang propesyonal na pagsasaling ng tao. Hindi kami mananagot para sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmula sa paggamit ng pagsasaling ito.
+**Disclaimer**:
+Ang dokumentong ito ay isinalin gamit ang AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa kawastuhan, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatumpak. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na pinagmumulan ng awtoridad. Para sa mahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

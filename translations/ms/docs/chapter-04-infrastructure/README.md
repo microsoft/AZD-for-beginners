@@ -1,48 +1,50 @@
-# Bab 4: Infrastruktur sebagai Kod & Penyebaran
+# Chapter 4: Infrastruktur sebagai Kod & Penghantaran
 
-**📚 Kursus**: [AZD For Beginners](../../README.md) | **⏱️ Tempoh**: 1-1.5 hours | **⭐ Kerumitan**: Intermediate
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 1-1.5 jam | **⭐ Tahap Kesukaran**: Pertengahan
 
 ---
 
 ## Gambaran Keseluruhan
 
-Bab ini merangkumi corak Infrastruktur sebagai Kod (IaC) dengan templat Bicep, penyediaan sumber, dan strategi penyebaran menggunakan Azure Developer CLI.
+Bab ini merangkumi corak Infrastruktur sebagai Kod (IaC) dengan templat Bicep, penyediaan sumber, dan strategi penghantaran menggunakan Azure Developer CLI.
+
+> Disahkan menggunakan `azd 1.23.12` pada Mac 2026.
 
 ## Objektif Pembelajaran
 
-Dengan menyelesaikan bab ini, anda akan:
+Dengan menamatkan bab ini, anda akan:
 - Memahami struktur dan sintaks templat Bicep
 - Menyediakan sumber Azure dengan `azd provision`
-- Menyebarkan aplikasi dengan `azd deploy`
-- Melaksanakan strategi penyebaran blue-green dan rolling
+- Menghantar aplikasi dengan `azd deploy`
+- Melaksanakan strategi penghantaran biru-hijau dan bergulung
 
 ---
 
 ## 📚 Pelajaran
 
 | # | Pelajaran | Penerangan | Masa |
-|---|--------|-------------|------|
-| 1 | [Provisioning Resources](provisioning.md) | Pengurusan sumber Azure dengan AZD | 45 min |
-| 2 | [Deployment Guide](deployment-guide.md) | Strategi penyebaran aplikasi | 45 min |
+|---|-----------|------------|------|
+| 1 | [Penyediaan Sumber](provisioning.md) | Pengurusan sumber Azure dengan AZD | 45 min |
+| 2 | [Panduan Penghantaran](deployment-guide.md) | Strategi penghantaran aplikasi | 45 min |
 
 ---
 
 ## 🚀 Mula Pantas
 
 ```bash
-# Inisialisasi daripada templat
+# Mulakan dari templat
 azd init --template azure-functions-python-v2-http
 
-# Pratonton apa yang akan dibuat
+# Pratonton apa yang akan dicipta
 azd provision --preview
 
 # Sediakan infrastruktur sahaja
 azd provision
 
-# Terapkan kod sahaja
+# Hantar kod sahaja
 azd deploy
 
-# Atau kedua-duanya serentak
+# Atau kedua-duanya bersama-sama
 azd up
 ```
 
@@ -71,8 +73,8 @@ my-project/
 |---------|-------------|
 | `azd init` | Inisialisasi projek |
 | `azd provision` | Membuat sumber Azure |
-| `azd deploy` | Menyebarkan kod aplikasi |
-| `azd up` | sediakan + sebarkan |
+| `azd deploy` | Menghantar kod aplikasi |
+| `azd up` | sediakan + hantar |
 | `azd down` | Padam semua sumber |
 
 ---
@@ -80,21 +82,21 @@ my-project/
 ## 🔗 Navigasi
 
 | Arah | Bab |
-|-----------|---------|
-| **Sebelumnya** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
-| **Seterusnya** | [Chapter 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md) |
+|-------|---------|
+| **Sebelumnya** | [Bab 3: Konfigurasi](../chapter-03-configuration/README.md) |
+| **Seterusnya** | [Bab 5: Penyelesaian Multi-Ejen](../chapter-05-multi-agent/README.md) |
 
 ---
 
 ## 📖 Sumber Berkaitan
 
-- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
-- [Container App Examples](../../examples/container-app/README.md)
-- [Database App Example](../../examples/database-app/README.md)
+- [Pemeriksaan Pra-Penghantaran](../chapter-06-pre-deployment/README.md)
+- [Contoh Aplikasi Kontena](../../examples/container-app/README.md)
+- [Contoh Aplikasi Pangkalan Data](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Penafian:
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi ralat atau ketidaktepatan. Dokumen asal dalam bahasa asalnya hendaklah dianggap sebagai sumber yang sahih. Bagi maklumat penting, terjemahan profesional oleh penterjemah manusia adalah disyorkan. Kami tidak bertanggungjawab ke atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+**Penafian**:  
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan profesional oleh manusia adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

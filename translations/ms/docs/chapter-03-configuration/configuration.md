@@ -1,68 +1,68 @@
-# Configuration Guide
+# Panduan Konfigurasi
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Bab 3 - Konfigurasi & Pengesahan
-- **⬅️ Previous**: [Projek Pertama Anda](first-project.md)
-- **➡️ Next**: [Panduan Penyebaran](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 Next Chapter**: [Bab 4: Infrastruktur sebagai Kod](../chapter-04-infrastructure/deployment-guide.md)
+**Navigasi Bab:**
+- **📚 Laman Utama Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 3 - Konfigurasi & Pengesahan
+- **⬅️ Sebelum**: [Projek Pertama Anda](first-project.md)
+- **➡️ Seterusnya**: [Panduan Penempatan](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 Bab Seterusnya**: [Bab 4: Infrastruktur sebagai Kod](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Pengenalan
 
-Panduan menyeluruh ini merangkumi semua aspek konfigurasi Azure Developer CLI untuk aliran kerja pembangunan dan penyebaran yang optimum. Anda akan mempelajari hierarki konfigurasi, pengurusan persekitaran, kaedah pengesahan, dan corak konfigurasi lanjutan yang membolehkan penyebaran Azure yang cekap dan selamat.
+Panduan komprehensif ini merangkumi semua aspek konfigurasi Azure Developer CLI untuk aliran kerja pembangunan dan penempatan yang optimum. Anda akan mempelajari hierarki konfigurasi, pengurusan persekitaran, kaedah pengesahan, dan pola konfigurasi lanjutan yang membolehkan penempatan Azure yang cekap dan selamat.
 
-## Objektif Pembelajaran
+## Matlamat Pembelajaran
 
 Menjelang akhir pelajaran ini, anda akan:
-- Menguasai hierarki konfigurasi azd dan memahami bagaimana tetapan diutamakan
+- Menguasai hierarki konfigurasi azd dan memahami cara tetapan diprioritaskan
 - Mengkonfigurasi tetapan global dan khusus projek dengan berkesan
-- Mengurus pelbagai persekitaran dengan konfigurasi berbeza
-- Melaksanakan corak pengesahan dan kebenaran yang selamat
-- Memahami corak konfigurasi lanjutan untuk senario kompleks
+- Menguruskan pelbagai persekitaran dengan konfigurasi berbeza
+- Menerapkan pola pengesahan dan kebenaran yang selamat
+- Memahami pola konfigurasi lanjutan untuk senario kompleks
 
 ## Hasil Pembelajaran
 
-Selepas melengkapkan pelajaran ini, anda akan dapat:
+Selepas menyelesaikan pelajaran ini, anda akan dapat:
 - Mengkonfigurasi azd untuk aliran kerja pembangunan yang optimum
-- Menyediakan dan mengurus pelbagai persekitaran penyebaran
-- Melaksanakan amalan pengurusan konfigurasi yang selamat
+- Menyediakan dan mengurus pelbagai persekitaran penempatan
+- Menerapkan amalan pengurusan konfigurasi yang selamat
 - Menyelesaikan masalah berkaitan konfigurasi
 - Menyesuaikan tingkah laku azd mengikut keperluan organisasi tertentu
 
-Panduan menyeluruh ini merangkumi semua aspek konfigurasi Azure Developer CLI untuk aliran kerja pembangunan dan penyebaran yang optimum.
+Panduan komprehensif ini merangkumi semua aspek konfigurasi Azure Developer CLI untuk aliran kerja pembangunan dan penempatan yang optimum.
 
 ## Memahami Ejen AI dalam Projek azd
 
-Jika anda baru kepada ejen AI, berikut cara mudah untuk memahaminya dalam dunia azd.
+Jika anda baru dengan ejen AI, ini adalah cara mudah untuk memikirkan mereka dalam dunia azd.
 
-### Apa Itu Ejen?
+### Apakah Ejen?
 
-Ejen adalah perisian yang boleh menerima permintaan, berfikir mengenainya, dan mengambil tindakan—sering dengan memanggil model AI, mencari data, atau menggunakan perkhidmatan lain. Dalam projek azd, ejen ialah satu lagi **perkhidmatan** bersama frontend web atau backend API anda.
+Ejen ialah sejenis perisian yang boleh menerima permintaan, berfikir mengenainya, dan mengambil tindakan—sering dengan memanggil model AI, mencari data, atau menggunakan perkhidmatan lain. Dalam projek azd, ejen hanyalah **perkhidmatan** lain bersama frontend web atau API backend anda.
 
 ### Bagaimana Ejen Sesuai Dalam Struktur Projek azd
 
 Projek azd terdiri daripada tiga lapisan: **infrastruktur**, **kod**, dan **konfigurasi**. Ejen disambungkan ke lapisan ini sama seperti mana-mana perkhidmatan lain:
 
-| Lapisan | Apa Ia Lakukan untuk Aplikasi Tradisional | Apa Ia Lakukan untuk Ejen |
-|---------|--------------------------------------------|---------------------------|
+| Lapisan | Fungsi Untuk Aplikasi Tradisional | Fungsi Untuk Ejen |
+|-------|-------------------------------------|---------------------------|
 | **Infrastruktur** (`infra/`) | Menyediakan aplikasi web dan pangkalan data | Menyediakan titik akhir model AI, indeks carian, atau hos ejen |
 | **Kod** (`src/`) | Mengandungi kod sumber frontend dan API anda | Mengandungi logik ejen dan definisi arahan |
-| **Konfigurasi** (`azure.yaml`) | Menyenaraikan perkhidmatan dan sasaran hosnya | Menyenaraikan ejen anda sebagai perkhidmatan, menunjuk ke kod dan hosnya |
+| **Konfigurasi** (`azure.yaml`) | Menyenaraikan perkhidmatan anda dan sasaran hosting mereka | Menyenaraikan ejen anda sebagai perkhidmatan, merujuk kepada kod dan hosnya |
 
 ### Peranan `azure.yaml`
 
-Anda tidak perlu menghafal sintaks sekarang. Secara konsep, `azure.yaml` ialah fail di mana anda memberitahu azd: *"Ini adalah perkhidmatan yang membentuk aplikasi saya, dan ini tempat kod mereka."*
+Anda tidak perlu menghafal sintaks sekarang. Secara konsep, `azure.yaml` adalah fail di mana anda memberitahu azd: *"Ini adalah perkhidmatan yang membentuk aplikasi saya, dan ini tempat untuk mendapatkan kod mereka."*
 
-Apabila projek anda termasuk ejen AI, `azure.yaml` hanya menyenaraikan ejen itu sebagai salah satu perkhidmatan. azd kemudian tahu untuk menyediakan infrastruktur yang betul (seperti titik akhir Model Microsoft Foundry atau Aplikasi Kontena untuk hos ejen) dan menyebarkan kod ejen anda—sama seperti ia lakukan untuk aplikasi web atau API.
+Apabila projek anda termasuk ejen AI, `azure.yaml` hanya menyenaraikan ejen sebagai salah satu perkhidmatan. azd kemudian tahu untuk menyediakan infrastruktur yang betul (seperti titik akhir Microsoft Foundry Models atau Container App untuk menghos ejen) dan menempatkan kod ejen anda—sama seperti untuk aplikasi web atau API.
 
-Ini bermakna tiada yang benar-benar baru untuk dipelajari. Jika anda faham bagaimana azd mengurus perkhidmatan web, anda sudah faham bagaimana ia mengurus ejen.
+Ini bermakna tiada apa-apa yang benar-benar baru untuk dipelajari. Jika anda faham bagaimana azd menguruskan perkhidmatan web, anda sudah faham bagaimana ia menguruskan ejen.
 
 ## Hierarki Konfigurasi
 
-azd menggunakan sistem konfigurasi hierarki:
-1. **Flag baris arahan** (keutamaan tertinggi)
+azd menggunakan sistem konfigurasi berhierarki:
+1. **Flag baris perintah** (keutamaan tertinggi)
 2. **Pembolehubah persekitaran**
-3. **Konfigurasi projek tempatan** (`.azd/config.json`)
+3. **Konfigurasi projek setempat** (`.azd/config.json`)
 4. **Konfigurasi pengguna global** (`~/.azd/config.json`)
 5. **Nilai lalai** (keutamaan terendah)
 
@@ -80,16 +80,16 @@ azd config set defaults.location "eastus2"
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
 # Lihat semua konfigurasi global
-azd config list
+azd config show
 
 # Alih keluar konfigurasi
 azd config unset defaults.location
 ```
 
-### Tetapan Global Biasa
+### Tetapan Global Lazim
 ```bash
 # Keutamaan pembangunan
-azd config set alpha.enable true                    # Aktifkan ciri alfa
+azd config set alpha.enable true                    # Aktifkan ciri alpha
 azd config set telemetry.enabled false             # Lumpuhkan telemetri
 azd config set output.format json                  # Tetapkan format output
 
@@ -98,14 +98,14 @@ azd config set auth.useAzureCliCredential true     # Gunakan Azure CLI untuk pen
 azd config set tls.insecure false                  # Paksa pengesahan TLS
 
 # Penalaan prestasi
-azd config set provision.parallelism 5             # Penciptaan sumber selari
-azd config set deploy.timeout 30m                  # Tamat masa penyebaran
+azd config set provision.parallelism 5             # Penciptaan sumber secara selari
+azd config set deploy.timeout 30m                  # Had masa penyebaran
 ```
 
 ## 🏗️ Konfigurasi Projek
 
 ### Struktur azure.yaml
-Fail `azure.yaml` adalah nadi projek azd anda:
+Fail `azure.yaml` adalah teras projek azd anda:
 
 ```yaml
 # Minimum configuration
@@ -202,7 +202,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Tetapan Bahasa Khusus
+#### Tetapan Khusus Bahasa
 ```yaml
 services:
   node-app:
@@ -241,7 +241,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### Konfigurasi Persekitaran
-Setiap persekitaran mempunyai konfigurasi tersendiri dalam `.azure/<env-name>/config.json`:
+Setiap persekitaran mempunyai konfigurasi tersendiri di `.azure/<env-name>/config.json`:
 
 ```json
 {
@@ -273,23 +273,23 @@ azd env set DEBUG "true"
 # Lihat pembolehubah persekitaran
 azd env get-values
 
-# Output yang dijangka:
+# Jangkaan output:
 # DATABASE_URL=postgresql://user:pass@host:5432/db
 # API_KEY=kunci-api-rahsia
-# DEBUG=true
+# DEBUG=benar
 
-# Alih keluar pembolehubah persekitaran
+# Buang pembolehubah persekitaran
 azd env unset DEBUG
 
-# Sahkan penghapusan
+# Sahkan pengeluaran
 azd env get-values | grep DEBUG
-# (sepatutnya tiada apa-apa dikembalikan)
+# (sepatutnya tidak memulangkan apa-apa)
 ```
 
 ### Templat Persekitaran
-Buat `.azure/env.template` untuk penyediaan persekitaran yang konsisten:
+Buat `.azure/env.template` untuk penetapan persekitaran yang konsisten:
 ```bash
-# Pembolehubah diperlukan
+# Pembolehubah yang diperlukan
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
@@ -307,20 +307,20 @@ LOG_LEVEL=info
 
 ### Integrasi Azure CLI
 ```bash
-# Gunakan kelayakan Azure CLI (lalai)
+# Gunakan kelayakan Azure CLI (default)
 azd config set auth.useAzureCliCredential true
 
 # Log masuk dengan penyewa tertentu
 az login --tenant <tenant-id>
 
-# Tetapkan langganan lalai
+# Tetapkan langganan default
 az account set --subscription <subscription-id>
 ```
 
-### Pengesahan Perkhidmatan Prinsipal
+### Pengesahan Principal Perkhidmatan
 Untuk saluran CI/CD:
 ```bash
-# Tetapkan pemboleh ubah persekitaran
+# Tetapkan pembolehubah persekitaran
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
@@ -330,10 +330,10 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Identiti Terurus
+### Identiti Terkawal
 Untuk persekitaran hos Azure:
 ```bash
-# Dayakan pengesahan identiti terurus
+# Dayakan pengesahan identiti yang diuruskan
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
@@ -364,7 +364,7 @@ Konfigurasi parameter infrastruktur dalam `infra/main.parameters.json`:
 ```
 
 ### Konfigurasi Terraform
-Untuk projek Terraform, konfigurasi dalam `infra/terraform.tfvars`:
+Untuk projek Terraform, tetapkan dalam `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -372,7 +372,7 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Konfigurasi Penyebaran
+## 🚀 Konfigurasi Penempatan
 
 ### Konfigurasi Pembinaan
 ```yaml
@@ -415,7 +415,7 @@ Contoh `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azur
 
 ## 🔧 Konfigurasi Lanjutan
 
-### Penamaan Sumber Khusus
+### Penamaan Sumber Tersuai
 ```bash
 # Tetapkan konvensyen penamaan
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -446,7 +446,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Konfigurasi Spesifik Persekitaran
+## 🎯 Konfigurasi Mengikut Persekitaran
 
 ### Persekitaran Pembangunan
 ```bash
@@ -457,9 +457,9 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Persekitaran Peringkat Uji
+### Persekitaran Staging
 ```bash
-# .azure/pentas/.env
+# .azure/staging/.env
 DEBUG=false
 LOG_LEVEL=info
 ENABLE_MONITORING=true
@@ -526,7 +526,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Susun Fail Konfigurasi
+### 2. Atur Fail Konfigurasi
 ```
 .azure/
 ├── config.json              # Global project config
@@ -551,7 +551,7 @@ database:
 ```
 
 ### 4. Dokumentasi Konfigurasi
-Dokumenkan konfigurasi anda dalam `CONFIG.md`:
+Dokumentasikan konfigurasi anda dalam `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -568,9 +568,9 @@ Dokumenkan konfigurasi anda dalam `CONFIG.md`:
 
 ## 🎯 Latihan Amali
 
-### Latihan 1: Konfigurasi Berbilang Persekitaran (15 minit)
+### Latihan 1: Konfigurasi Pelbagai Persekitaran (15 minit)
 
-**Objektif**: Bina dan konfigurasikan tiga persekitaran dengan tetapan berbeza
+**Matlamat**: Cipta dan konfigurasi tiga persekitaran dengan tetapan berbeza
 
 ```bash
 # Cipta persekitaran pembangunan
@@ -598,14 +598,14 @@ azd env select production && azd env get-values
 ```
 
 **Kriteria Kejayaan:**
-- [ ] Tiga persekitaran berjaya dibuat
+- [ ] Tiga persekitaran berjaya dicipta
 - [ ] Setiap persekitaran mempunyai konfigurasi unik
 - [ ] Boleh bertukar antara persekitaran tanpa ralat
 - [ ] `azd env list` menunjukkan ketiga-tiga persekitaran
 
 ### Latihan 2: Pengurusan Rahsia (10 minit)
 
-**Objektif**: Amalkan konfigurasi selamat dengan data sensitif
+**Matlamat**: Amalkan konfigurasi selamat dengan data sensitif
 
 ```bash
 # Tetapkan rahsia (tidak dipaparkan dalam output)
@@ -620,19 +620,19 @@ azd env set DB_NAME "production_db"
 azd env get-values
 
 # Sahkan rahsia disimpan
-azd env get DB_PASSWORD  # Harus menunjukkan nilai sebenar
+azd env get DB_PASSWORD  # Patut menunjukkan nilai sebenar
 ```
 
 **Kriteria Kejayaan:**
-- [ ] Rahsia disimpan tanpa dipaparkan dalam terminal
-- [ ] `azd env get-values` menunjukkan rahsia yang disembunyi
+- [ ] Rahsia disimpan tanpa dipaparkan di terminal
+- [ ] `azd env get-values` menunjukkan rahsia yang disensor
 - [ ] `azd env get <SECRET_NAME>` individu memaparkan nilai sebenar
 
 ## Langkah Seterusnya
 
 - [Projek Pertama Anda](first-project.md) - Gunakan konfigurasi dalam praktik
-- [Panduan Penyebaran](../chapter-04-infrastructure/deployment-guide.md) - Gunakan konfigurasi untuk penyebaran
-- [Penyediaan Sumber](../chapter-04-infrastructure/provisioning.md) - Konfigurasi sedia produksi
+- [Panduan Penempatan](../chapter-04-infrastructure/deployment-guide.md) - Gunakan konfigurasi untuk penempatan
+- [Penyediaan Sumber](../chapter-04-infrastructure/provisioning.md) - Konfigurasi untuk sedia pengeluaran
 
 ## Rujukan
 
@@ -642,16 +642,16 @@ azd env get DB_PASSWORD  # Harus menunjukkan nilai sebenar
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Bab 3 - Konfigurasi & Pengesahan
-- **⬅️ Previous**: [Projek Pertama Anda](first-project.md)
-- **➡️ Next Chapter**: [Bab 4: Infrastruktur sebagai Kod](../chapter-04-infrastructure/deployment-guide.md)
-- **Next Lesson**: [Projek Pertama Anda](first-project.md)
+**Navigasi Bab:**
+- **📚 Laman Utama Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 3 - Konfigurasi & Pengesahan
+- **⬅️ Sebelum**: [Projek Pertama Anda](first-project.md)
+- **➡️ Bab Seterusnya**: [Bab 4: Infrastruktur sebagai Kod](../chapter-04-infrastructure/deployment-guide.md)
+- **Pelajaran Seterusnya**: [Projek Pertama Anda](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk mencapai ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat kritikal, terjemahan profesional oleh manusia adalah disyorkan. Kami tidak bertanggungjawab ke atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidakakuratan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber rujukan yang sah. Untuk maklumat penting, terjemahan profesional oleh manusia adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

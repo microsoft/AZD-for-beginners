@@ -1,40 +1,40 @@
-# 3. Suriin ang Template
+# 3. I-deconstruct ang Template
 
-!!! tip "PAGKATAPOS NG MODULONG ITO AY MAGAGAWA MO ANG MGA SUMUSUNOD"
+!!! tip "SA PAGWAKAS NG MÓDULONG ITO, MAAARI MONG"
 
-    - [ ] I-activate ang GitHub Copilot gamit ang MCP servers para sa tulong sa Azure
-    - [ ] Unawain ang istruktura ng folder ng template ng AZD at ang mga bahagi nito
-    - [ ] Suriin ang mga pattern ng organisasyon ng infrastructure-as-code (Bicep)
+    - [ ] I-activate ang GitHub Copilot kasama ang MCP servers para sa tulong sa Azure
+    - [ ] Maunawaan ang AZD template folder structure at mga komponent
+    - [ ] Suriin ang mga pattern ng organisasyon para sa infrastructure-as-code (Bicep)
     - [ ] **Lab 3:** Gamitin ang GitHub Copilot para tuklasin at unawain ang arkitektura ng repositoryo 
 
 ---
 
 
-Sa mga AZD template at ang Azure Developer CLI (`azd`) maaari nating mabilis na simulan ang ating paglalakbay sa AI development gamit ang mga standardized na repositoryo na nagbibigay ng sample na code, infrastructure at mga configuration file - sa anyo ng isang handa-na-i-deploy na _panimulang_ proyekto.
+Sa mga AZD template at ang Azure Developer CLI (`azd`) mabilis nating masisimulan ang ating AI development journey gamit ang standardized na mga repository na nagbibigay ng sample code, imprastruktura at mga configuration file - sa anyo ng handa nang i-deploy na _starter_ project.
 
-**Ngayon, kailangan nating unawain ang istruktura ng proyekto at ang codebase - at maging kakayahang i-customize ang AZD template - kahit walang naunang karanasan o pag-unawa sa AZD!**
+**Ngunit ngayon, kailangan nating unawain ang istruktura ng proyekto at codebase - at magawang i-customize ang AZD template - kahit walang naunang karanasan o pag-unawa sa AZD!**
 
 ---
 
 ## 1. I-activate ang GitHub Copilot
 
-### 1.1 I-install ang GitHub Copilot Chat
+### 1.1 Install GitHub Copilot Chat
 
-Panahon na para tuklasin ang [GitHub Copilot with Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Ngayon, maaari nating gamitin ang natural na wika upang ilarawan ang ating gawain sa mataas na antas, at makakuha ng tulong sa pagpapatupad. Para sa lab na ito, gagamitin natin ang [Copilot Free plan](https://github.com/github-copilot/signup) na may buwanang limitasyon para sa completions at chat interactions.
+Panahon na para tuklasin ang [GitHub Copilot with Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Ngayon, maaari nating gamitin ang natural na wika para ilarawan ang ating gawain sa mataas na antas, at makakuha ng tulong sa pagpapatupad. Para sa lab na ito, gagamitin natin ang [Copilot Free plan](https://github.com/github-copilot/signup) na may buwanang limit para sa completions at chat interactions.
 
-Ang extension ay maaaring i-install mula sa marketplace, ngunit dapat ay mayroon na ito sa iyong Codespaces environment. _I-click ang `Open Chat` mula sa Copilot icon drop-down - at mag-type ng prompt tulad ng `What can you do?`_ - maaaring hilingin sa iyo na mag-login. **Handa na ang GitHub Copilot Chat**.
+Ang extension ay maaaring i-install mula sa marketplace, at madalas na naka-available na sa Codespaces o dev container environments. _I-click ang `Open Chat` mula sa Copilot icon drop-down - at mag-type ng prompt tulad ng `What can you do?`_ - maaaring hilingin sa iyo na mag-log in. **Handa na ang GitHub Copilot Chat**.
 
-### 1.2. I-install ang MCP Servers
+### 1.2. Install MCP Servers
 
-Para maging epektibo ang Agent mode, kailangan nito ng access sa tamang mga tool upang makatulong sa pagkuha ng kaalaman o gumawa ng mga aksyon. Dito nakakatulong ang mga MCP servers. Ia-configure natin ang mga sumusunod na server:
+Para maging epektibo ang Agent mode, kailangan nito ng access sa mga tamang tool upang matulungan itong kunin ang kaalaman o magsagawa ng aksyon. Dito makakatulong ang MCP servers. Iko-configure natin ang mga sumusunod na servers:
 
 1. [Azure MCP Server](../../../../../workshop/docs/instructions)
 1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
 
-Upang i-activate ang mga ito:
+Para i-activate ang mga ito:
 
-1. Gumawa ng file na pinangalanang `.vscode/mcp.json` kung wala pa ito
-1. Kopyahin ang sumusunod sa file na iyon - at simulan ang mga server!
+1. Gumawa ng file na pinangalanang `.vscode/mcp.json` kung wala pa
+1. Kopyahin ang sumusunod sa file na iyon - at simulan ang mga servers!
    ```json title=".vscode/mcp.json"
    {
       "servers": {
@@ -55,9 +55,9 @@ Upang i-activate ang mga ito:
    }
    ```
 
-??? warning "Maaaring makakita ka ng error na hindi naka-install ang `npx` (i-click para palawakin at ayusin)"
+??? warning "Maaaring makakuha ka ng error na `npx` ay hindi naka-install (i-click para palawakin ang ayos)"
 
-      Upang ayusin ito, buksan ang file na `.devcontainer/devcontainer.json` at idagdag ang linyang ito sa features section. Pagkatapos, i-rebuild ang container. Dapat mayroon ka nang naka-install na `npx`.
+      Para ayusin ito, buksan ang file na `.devcontainer/devcontainer.json` at idagdag ang linyang ito sa seksyon ng features. Pagkatapos ay i-rebuild ang container. Dapat ay naka-install na ang `npx`.
 
       ```title="" linenums="0"
          "features": {
@@ -70,49 +70,49 @@ Upang i-activate ang mga ito:
 
 ### 1.3. Subukan ang GitHub Copilot Chat
 
-**Una gamitin ang `az login` para mag-authenticate sa Azure mula sa VS Code command line.**
+**Gamitin muna ang `azd auth login` para mag-authenticate sa Azure mula sa VS Code command line. Gamitin din ang `az login` kung balak mong magpatakbo ng mga Azure CLI commands nang direkta.**
 
-Dapat ngayon ay maaari mo nang i-query ang status ng iyong Azure subscription, at magtanong tungkol sa mga deployed na resources o configuration. Subukan ang mga prompt na ito:
+Dapat mo nang ma-query ang status ng iyong Azure subscription, at magtanong tungkol sa mga na-deploy na resources o configuration. Subukan ang mga prompts na ito:
 
 1. `List my Azure resource groups`
 1. `#foundry list my current deployments`
 
-Maaari ka ring magtanong tungkol sa dokumentasyon ng Azure at makakuha ng mga sagot na naka-base sa Microsoft Docs MCP server. Subukan ang mga prompt na ito:
+Maaari ka ring magtanong tungkol sa dokumentasyon ng Azure at makatanggap ng mga sagot na naka-ugat sa Microsoft Docs MCP server. Subukan ang mga prompts na ito:
 
 1. `#microsoft_docs_search What is Azure Developer CLI?`
 1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
 
-O maaari kang humingi ng mga code snippet upang kumpletuhin ang isang gawain. Subukan ang prompt na ito.
+O maaari kang humingi ng mga code snippet para kumpletuhin ang isang gawain. Subukan ang prompt na ito.
 
 1. `Give me a Python code example that uses AAD for an interactive chat client`
 
-Sa `Ask` mode, magbibigay ito ng code na maaari mong kopyahin at subukan. Sa `Agent` mode, maaaring gawin nito ang isang hakbang pa at likhain ang mga kaugnay na resources para sa iyo - kasama ang setup scripts at dokumentasyon - upang tulungan kang isakatuparan ang gawain.
+Sa `Ask` mode, magbibigay ito ng code na maaari mong i-copy-paste at subukan. Sa `Agent` mode, maaari nitong gawin ang isang hakbang pa at lumikha ng mga kaugnay na resources para sa iyo - kabilang ang setup scripts at dokumentasyon - upang tulungan kang isakatuparan ang gawain.
 
-**Handa ka na ngayon upang simulan ang pagtuklas sa template repositoryo**
+**Kasalukuyan kang handa upang simulan ang pag-explore ng template repository**
 
 ---
 
-## 2. Suriin ang Arkitektura
+## 2. I-deconstruct ang Arkitektura
 
-??? prompt "HILING: Ipaliwanag ang arkitektura ng aplikasyon sa docs/images/architecture.png sa 1 talata"
+??? prompt "HILING: Ipaliwanag ang application architecture sa docs/images/architecture.png sa 1 talata"
 
-      Ang aplikasyon na ito ay isang AI-powered chat application na itinayo sa Azure na nagpapakita ng modernong agent-based na arkitektura. Ang solusyon ay nakasentro sa isang Azure Container App na nagho-host ng pangunahing code ng aplikasyon, na nagpo-proseso ng input ng user at bumubuo ng matalinong mga tugon sa pamamagitan ng isang AI agent. 
+      Ang application na ito ay isang AI-powered chat application na itinayo sa Azure na nagpapakita ng makabagong agent-based na arkitektura. Nakapaloob sa solusyon ang isang Azure Container App na nagho-host ng pangunahing application code, na nagpo-proseso ng input ng user at bumubuo ng mga intelligent na sagot sa pamamagitan ng isang AI agent. 
       
-      Pinapakinabangan ng arkitektura ang Microsoft Foundry Project bilang pundasyon para sa mga kakayahan ng AI, na kumokonekta sa Azure AI Services na nagbibigay ng mga underlying language models (tulad ng gpt-4.1-mini) at agent functionality. Dumadaloy ang interaksyon ng user mula sa isang React-based frontend papunta sa isang FastAPI backend na nakikipag-ugnayan sa AI agent service para bumuo ng mga contextual na tugon. 
+      Ang arkitektura ay gumagamit ng Microsoft Foundry Project bilang pundasyon para sa AI capabilities, na kumokonekta sa Azure AI Services na nagpo-provide ng mga underlying language models (tulad ng gpt-4.1-mini) at functionality ng agent. Ang interaksyon ng user ay dumadaloy mula sa isang React-based frontend papunta sa isang FastAPI backend na nakikipag-ugnayan sa AI agent service para bumuo ng mga kontekstwal na tugon. 
       
-      May kakayahan ang sistema na magsagawa ng knowledge retrieval sa pamamagitan ng file search o Azure AI Search service, na nagpapahintulot sa agent na ma-access at mag-cite ng impormasyon mula sa mga na-upload na dokumento. Para sa operational excellence, kasama sa arkitektura ang komprehensibong monitoring gamit ang Application Insights at Log Analytics Workspace para sa tracing, logging, at pag-optimize ng performance. 
+      Naglalaman ang sistema ng kakayahan para sa pag-retrieve ng kaalaman sa pamamagitan ng file search o Azure AI Search service, na nagpapahintulot sa agent na ma-access at mag-sipi ng impormasyon mula sa mga in-upload na dokumento. Para sa operational excellence, kabilang sa arkitektura ang komprehensibong monitoring gamit ang Application Insights at Log Analytics Workspace para sa tracing, logging, at performance optimization. 
       
-      Ang Azure Storage ay nagbibigay ng blob storage para sa data ng aplikasyon at file uploads, habang tinitiyak ng Managed Identity ang secure na access sa pagitan ng mga Azure resources nang hindi nag-iimbak ng mga kredensyal. Dinisenyo ang buong solusyon para sa scalability at maintainability, na ang containerized na aplikasyon ay awtomatikong nag-scale base sa demand habang nagbibigay ng built-in na seguridad, monitoring, at CI/CD capabilities sa pamamagitan ng Azure's managed services ecosystem.
+      Nagbibigay ang Azure Storage ng blob storage para sa application data at mga file upload, habang tinitiyak ng Managed Identity ang secure na access sa pagitan ng mga Azure resources nang hindi nag-iimbak ng mga kredensyal. Dinisenyo ang buong solusyon para sa scalability at maintainability, kung saan awtomatikong nagsuscale ang containerized application base sa demand habang nagbibigay ng built-in na seguridad, monitoring, at CI/CD capabilities sa pamamagitan ng managed services ecosystem ng Azure.
 
 ![Arkitektura](../../../../../translated_images/tl/architecture.48d94861e6e6cdc0.webp)
 
 ---
 
-## 3. Istruktura ng Repositoryo
+## 3. Repository Structure
 
-!!! prompt "HILING: Ipaliwanag ang istruktura ng folder ng template. Magsimula sa isang biswal na hierarkikal na diagram."
+!!! prompt "HILING: Ipaliwanag ang template folder structure. Magsimula sa isang biswal na hierarchical na diagram."
 
-??? info "SAGOT: Biswal na Hierarkikal na Diagram"
+??? info "SAGOT: Biswal na Hierarchical na Diagram"
 
       ```bash title="" 
       get-started-with-ai-agents/
@@ -191,7 +191,7 @@ Sa `Ask` mode, magbibigay ito ng code na maaari mong kopyahin at subukan. Sa `Ag
 
 ### 3.1. Pangunahing Arkitektura ng App
 
-Sinasunod ng template na ito ang isang **full-stack web application** na pattern na may:
+Sinusunod ng template na ito ang isang **full-stack web application** pattern na may:
 
 - **Backend**: Python FastAPI na may Azure AI integration
 - **Frontend**: TypeScript/React na may Vite build system
@@ -200,35 +200,35 @@ Sinasunod ng template na ito ang isang **full-stack web application** na pattern
 
 ### 3.2 Infra As Code (bicep)
 
-Ang infrastructure layer ay gumagamit ng **Azure Bicep** templates na nakaayos nang modular:
+Gumagamit ang infrastructure layer ng **Azure Bicep** templates na naka-organisa nang modular:
 
-   - **`main.bicep`**: Nag-orchestrate ng lahat ng Azure resources
-   - **`core/` modules**: Reusable na mga component para sa iba't ibang serbisyo
+   - **`main.bicep`**: Nagsasaayos ng lahat ng Azure resources
+   - **`core/` modules**: Reusable na mga komponent para sa iba't ibang serbisyo
       - AI services (Microsoft Foundry Models, AI Search)
       - Container hosting (Azure Container Apps)
       - Monitoring (Application Insights, Log Analytics)
       - Security (Key Vault, Managed Identity)
 
-### 3.3 Pinagmulan ng Aplikasyon (`src/`)
+### 3.3 Application Source (`src/`)
 
 **Backend API (`src/api/`)**:
 
-- REST API na naka-base sa FastAPI
-- Integrasyon sa Foundry Agents
-- Management ng search index para sa knowledge retrieval
-- Kakayahang mag-upload at mag-proseso ng mga file
+- FastAPI-based REST API
+- Foundry Agents integration
+- Pamamahala ng search index para sa knowledge retrieval
+- Kakayahan sa pag-upload at pag-proseso ng mga file
 
 **Frontend (`src/frontend/`)**:
 
 - Modernong React/TypeScript SPA
 - Vite para sa mabilis na development at optimized builds
-- Chat interface para sa interaksyon sa agent
+- Chat interface para sa pakikipag-ugnayan sa agent
 
 **Knowledge Base (`src/files/`)**:
 
-- Mga sample na data ng customer at produkto
+- Sample na customer at product data
 - Nagpapakita ng file-based na knowledge retrieval
-- Mga halimbawa sa JSON at Markdown format
+- Mga halimbawa sa JSON at Markdown na format
 
 
 ### 3.4 DevOps & Automation
@@ -236,45 +236,45 @@ Ang infrastructure layer ay gumagamit ng **Azure Bicep** templates na nakaayos n
 **Scripts (`scripts/`)**:
 
 - Cross-platform PowerShell at Bash scripts
-- Pag-validate at pagsesetup ng environment
-- Post-deployment na configuration
+- Environment validation at setup
+- Post-deployment configuration
 - Pamamahala ng model quota
 
-**Integrasyon ng Azure Developer CLI**:
+**Azure Developer CLI Integration**:
 
 - `azure.yaml` configuration para sa `azd` workflows
 - Awtomatikong provisioning at deployment
 - Pamamahala ng environment variables
 
-### 3.5 Pagsusulit at Pagtiyak ng Kalidad
+### 3.5 Testing & Quality Assurance
 
 **Evaluation Framework (`evals/`)**:
 
 - Pagsusuri ng performance ng agent
-- Pagsubok sa kalidad ng query-response
+- Pagsubok ng kalidad ng query-response
 - Awtomatikong assessment pipeline
 
 **AI Safety (`airedteaming/`)**:
 
 - Red team testing para sa AI safety
 - Pag-scan ng security vulnerabilities
-- Responsible AI practices
+- Mga responsableng kasanayan sa AI
 
 ---
 
-## 4. Binabati Kita 🏆
+## 4. Congratulations 🏆
 
-Matagumpay mong nagamit ang GitHub Copilot Chat kasama ang MCP servers upang tuklasin ang repositoryo.
+Matagumpay mong ginamit ang GitHub Copilot Chat kasama ang MCP servers, upang tuklasin ang repository.
 
 - [X] Na-activate ang GitHub Copilot para sa Azure
-- [X] Naunawaan ang Arkitektura ng Aplikasyon
-- [X] Naituklas ang istruktura ng AZD template
+- [X] Naunawaan ang Arkitektura ng Application
+- [X] Nasuri ang AZD template structure
 
-Ipinapakita nito sa iyo ang mga _infrastructure as code_ na mga asset para sa template na ito. Sunod, titingnan natin ang configuration file para sa AZD.
+Binibigyan ka nito ng ideya tungkol sa mga _infrastructure as code_ asset para sa template na ito. Susunod, titingnan natin ang configuration file para sa AZD.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Ang dokumentong ito ay isinalin gamit ang serbisyo ng pagsasalin ng AI na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi tumpak na impormasyon. Ang orihinal na dokumento sa katutubong wika nito ang dapat ituring bilang may awtoridad. Para sa kritikal na impormasyon, inirerekomenda ang propesyonal na pagsasalin na ginawa ng tao. Hindi kami mananagot para sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
+Ang dokumentong ito ay isinalin gamit ang serbisyo ng AI na pagsasalin [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsisikap kami para sa katumpakan, mangyaring tandaan na ang awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o kamalian. Ang orihinal na dokumento sa katutubong wika nito ang dapat ituring na awtoritatibong pinagkukunan. Para sa kritikal na impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

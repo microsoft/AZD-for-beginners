@@ -1,83 +1,83 @@
-# Deployment Guide - Mastering AZD Deployments
+# Gabay sa Pag-deploy - Pagpapahusay sa AZD Deployments
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Kabanata 4 - Imprastruktura bilang Code at Pag-deploy
-- **⬅️ Previous Chapter**: [Kabanata 3: Konfigurasyon](../chapter-03-configuration/configuration.md)
-- **➡️ Next**: [Paglalaan ng Mga Resource](provisioning.md)
-- **🚀 Next Chapter**: [Kabanata 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+**Pag-navigate ng Kabanata:**
+- **📚 Tahanan ng Kurso**: [AZD Para sa Mga Nagsisimula](../../README.md)
+- **📖 Kasalukuyang Kabanata**: Kabanata 4 - Imprastruktura bilang Code at Pag-deploy
+- **⬅️ Nakaraang Kabanata**: [Kabanata 3: Konfigurasyon](../chapter-03-configuration/configuration.md)
+- **➡️ Susunod**: [Pagpo-provision ng Mga Resource](provisioning.md)
+- **🚀 Susunod na Kabanata**: [Kabanata 5: Mga Solusyon ng Multi-Agent AI](../../examples/retail-scenario.md)
 
 ## Panimula
 
-Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng kailangan mong malaman tungkol sa pag-deploy ng mga aplikasyon gamit ang Azure Developer CLI, mula sa mga simpleng single-command deployment hanggang sa mga advanced na production scenario na may custom hooks, maramihang kapaligiran, at CI/CD integration. Pag-masterin ang buong lifecycle ng pag-deploy gamit ang praktikal na mga halimbawa at pinakamahusay na mga kasanayan.
+Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng kailangan mong malaman tungkol sa pag-deploy ng mga aplikasyon gamit ang Azure Developer CLI, mula sa mga pangunahing pag-deploy na isang utos lamang hanggang sa mga advanced na senaryo sa produksyon na may custom hooks, maramihang kapaligiran, at integrasyon ng CI/CD. Masterin ang kumpletong lifecycle ng pag-deploy gamit ang mga praktikal na halimbawa at pinakamahuhusay na kasanayan.
 
 ## Mga Layunin sa Pagkatuto
 
-Sa pagtatapos ng gabay na ito, ikaw ay:
-- Magmamaster ng lahat ng Azure Developer CLI deployment commands at workflows
-- Mauunawaan ang buong lifecycle ng pag-deploy mula provisioning hanggang monitoring
-- Makakapagpatupad ng custom deployment hooks para sa pre at post-deployment automation
-- Makakapag-configure ng maramihang kapaligiran na may mga parameter na espesipiko sa kapaligiran
-- Makakapag-set up ng advanced deployment strategies kabilang ang blue-green at canary deployments
-- Maiintegrate ang azd deployments sa CI/CD pipelines at DevOps workflows
+Sa pagtatapos ng gabay na ito, magagawa mong:
+- Masterin ang lahat ng Azure Developer CLI deployment commands at workflows
+- Maunawaan ang kumpletong lifecycle ng pag-deploy mula provisioning hanggang pagmo-monitor
+- Magpatupad ng custom deployment hooks para sa pre at post-deployment automation
+- I-configure ang maramihang kapaligiran na may mga parameter na partikular sa kapaligiran
+- Mag-set up ng mga advanced na estratehiya sa pag-deploy kabilang ang blue-green at canary deployments
+- I-integrate ang azd deployments sa CI/CD pipelines at DevOps workflows
 
-## Mga Resulta ng Pagkatuto
+## Mga Kinalabasan ng Pagkatuto
 
 Pagkatapos makumpleto, magagawa mong:
-- Ipatupad at i-troubleshoot ang lahat ng azd deployment workflows nang mag-isa
+- Magpatakbo at mag-troubleshoot ng lahat ng azd deployment workflows nang mag-isa
 - Magdisenyo at magpatupad ng custom deployment automation gamit ang hooks
-- Mag-configure ng production-ready deployments na may tamang seguridad at monitoring
-- Pamahalaan ang kumplikadong mga senaryo ng pag-deploy para sa maramihang kapaligiran
-- I-optimize ang performance ng pag-deploy at magpatupad ng rollback strategies
+- I-configure ang production-ready na mga deployment na may tamang seguridad at monitoring
+- Pamahalaan ang kumplikadong mga senaryo ng pag-deploy na may maramihang kapaligiran
+- I-optimize ang performance ng pag-deploy at magpatupad ng mga estratehiya sa rollback
 - I-integrate ang azd deployments sa enterprise DevOps practices
 
 ## Pangkalahatang-ideya ng Pag-deploy
 
-Nagbibigay ang Azure Developer CLI ng ilang mga deployment command:
-- `azd up` - Kumpletong workflow (paglalaan + pag-deploy)
-- `azd provision` - Lumikha/i-update lamang ang mga Azure resource
-- `azd deploy` - I-deploy lamang ang application code
+Azure Developer CLI ay nagbibigay ng ilang deployment commands:
+- `azd up` - Kumpletong daloy ng trabaho (provision + deploy)
+- `azd provision` - Lumikha/i-update lamang ng mga resource ng Azure
+- `azd deploy` - I-deploy lamang ang code ng aplikasyon
 - `azd package` - I-build at i-package ang mga aplikasyon
 
-## Mga Pangunahing Workflow ng Pag-deploy
+## Mga Pangunahing Daloy ng Pag-deploy
 
 ### Kumpletong Pag-deploy (azd up)
-Ang pinakakaraniwang workflow para sa mga bagong proyekto:
+Ang pinakakaraniwang daloy ng trabaho para sa mga bagong proyekto:
 ```bash
 # I-deploy ang lahat mula sa simula
 azd up
 
-# I-deploy gamit ang tinukoy na kapaligiran
+# I-deploy gamit ang partikular na kapaligiran
 azd up --environment production
 
 # I-deploy gamit ang mga pasadyang parameter
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Pag-deploy ng Imprastruktura Lamang
-Kapag kailangan mo lamang i-update ang mga Azure resource:
+### Pag-deploy na Imprastruktura Lamang
+Kapag kailangan mo lamang i-update ang mga resource ng Azure:
 ```bash
-# Maglaan/i-update ang imprastruktura
+# Magtustos/i-update ang imprastruktura
 azd provision
 
-# Maglaan gamit ang dry-run upang makita ang mga pagbabago
+# Magtustos gamit ang dry-run upang matingnan ang mga pagbabago
 azd provision --preview
 
-# Maglaan ng partikular na mga serbisyo
+# Magtustos ng mga tiyak na serbisyo
 azd provision --service database
 ```
 
-### Pag-deploy ng Code Lamang
-Para sa mabilisang mga update ng aplikasyon:
+### Pag-deploy na Code Lamang
+Para sa mabilisang pag-update ng aplikasyon:
 ```bash
 # I-deploy ang lahat ng serbisyo
 azd deploy
 
 # Inaasahang output:
 # Nagde-deploy ng mga serbisyo (azd deploy)
-# - web: Nagde-deploy... Tapos na
-# - api: Nagde-deploy... Tapos na
-# TAGUMPAY: Nakumpleto ang iyong deployment sa loob ng 2 minuto 15 segundo
+# - web: Nagde-deploy... Tapos
+# - api: Nagde-deploy... Tapos
+# TAGUMPAY: Nakumpleto ang iyong deployment sa loob ng 2 minuto at 15 segundo
 
 # I-deploy ang partikular na serbisyo
 azd deploy --service web
@@ -86,11 +86,11 @@ azd deploy --service api
 # I-deploy gamit ang pasadyang mga argumento ng build
 azd deploy --service api --build-arg NODE_ENV=production
 
-# Beripikahin ang deployment
+# Suriin ang deployment
 azd show --output json | jq '.services'
 ```
 
-### ✅ Pag-beripika ng Pag-deploy
+### ✅ Pagpapatunay ng Pag-deploy
 
 Pagkatapos ng anumang pag-deploy, tiyakin ang tagumpay:
 
@@ -98,26 +98,26 @@ Pagkatapos ng anumang pag-deploy, tiyakin ang tagumpay:
 # Suriin na tumatakbo ang lahat ng serbisyo
 azd show
 
-# Subukan ang mga health endpoint
+# Subukan ang mga endpoint ng kalusugan
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
 curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
 curl -f "$API_URL/health" || echo "❌ API health check failed"
 
-# I-monitor ang mga error (bubukas sa browser bilang default)
+# Bantayan ang mga error (bubukas sa browser bilang default)
 azd monitor --logs
 ```
 
 **Pamantayan ng Tagumpay:**
-- ✅ Lahat ng serbisyo ay nagpapakita ng status na "Tumatakbo"
-- ✅ Nagbabalik ang mga health endpoint ng HTTP 200
-- ✅ Walang mga error log sa nakaraang 5 minuto
-- ✅ Tumugon ang aplikasyon sa mga test request
+- ✅ Lahat ng serbisyo ay nagpapakita ng status na "Running"
+- ✅ Ang mga health endpoint ay nagbabalik ng HTTP 200
+- ✅ Walang error logs sa huling 5 minuto
+- ✅ Tumutugon ang aplikasyon sa mga test request
 
 ## 🏗️ Pag-unawa sa Proseso ng Pag-deploy
 
-### Yugto 1: Mga Hook bago ang Paglalaan
+### Yugto 1: Pre-Provision Hooks
 ```yaml
 # azure.yaml
 hooks:
@@ -131,13 +131,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Yugto 2: Paglalaan ng Imprastruktura
-- Binabasa ang mga template ng imprastruktura (Bicep/Terraform)
-- Lumilikha o nag-a-update ng mga Azure resource
+### Yugto 2: Pagpo-provision ng Imprastruktura
+- Nagbabasa ng mga template ng imprastruktura (Bicep/Terraform)
+- Lumilikha o nag-a-update ng mga resource ng Azure
 - Nagko-configure ng networking at seguridad
 - Nagse-set up ng monitoring at logging
 
-### Yugto 3: Mga Hook pagkatapos ng Paglalaan
+### Yugto 3: Post-Provision Hooks
 ```yaml
 hooks:
   postprovision:
@@ -150,12 +150,12 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### Yugto 4: Pagpapakete ng Aplikasyon
-- Ibinubuo ang application code
-- Gumagawa ng mga deployment artifact
+### Yugto 4: Pagba-package ng Aplikasyon
+- Binubuild ang code ng aplikasyon
+- Lumilikha ng mga deployment artifact
 - Nagpa-package para sa target na platform (containers, ZIP files, atbp.)
 
-### Yugto 5: Mga Hook bago i-Deploy
+### Yugto 5: Pre-Deploy Hooks
 ```yaml
 hooks:
   predeploy:
@@ -169,11 +169,11 @@ hooks:
 ```
 
 ### Yugto 6: Pag-deploy ng Aplikasyon
-- Ina-deploy ang mga packaged application sa Azure services
-- Ina-update ang mga configuration setting
-- Sinisimulan/muli sinisimulan ang mga serbisyo
+- Ina-deploy ang mga na-package na aplikasyon sa mga serbisyo ng Azure
+- Ina-update ang mga setting ng konfigurasyon
+- Sinisimulan/muling sinisimulan ang mga serbisyo
 
-### Yugto 7: Mga Hook pagkatapos ng Pag-deploy
+### Yugto 7: Post-Deploy Hooks
 ```yaml
 hooks:
   postdeploy:
@@ -188,7 +188,7 @@ hooks:
 
 ## 🎛️ Konfigurasyon ng Pag-deploy
 
-### Mga Setting ng Pag-deploy na Espesipiko sa Serbisyo
+### Mga Setting ng Pag-deploy para sa Tiyak na Serbisyo
 ```yaml
 # azure.yaml
 services:
@@ -218,7 +218,7 @@ services:
     buildCommand: npm install --production
 ```
 
-### Mga Konfigurasyon na Espesipiko sa Kapaligiran
+### Mga Konfigurasyong Partikular sa Kapaligiran
 ```bash
 # Kapaligiran ng pag-unlad
 azd env set NODE_ENV development
@@ -240,7 +240,7 @@ azd env set LOG_LEVEL error
 
 ## 🔧 Mga Advanced na Senaryo ng Pag-deploy
 
-### Mga Aplikasyong Maramihang Serbisyo
+### Mga Aplikasyong Multi-Serbisyo
 ```yaml
 # Complex application with multiple services
 services:
@@ -278,14 +278,14 @@ services:
 
 ### Blue-Green na Pag-deploy
 ```bash
-# Lumikha ng asul na kapaligiran
+# Gumawa ng asul na kapaligiran
 azd env new production-blue
 azd up --environment production-blue
 
 # Subukan ang asul na kapaligiran
 ./scripts/test-environment.sh production-blue
 
-# Ilipat ang trapiko sa asul (manwal na pag-update ng DNS/load balancer)
+# Ilipat ang trapiko sa asul na kapaligiran (manwal na pag-update ng DNS/load balancer)
 ./scripts/switch-traffic.sh production-blue
 
 # Linisin ang berdeng kapaligiran
@@ -307,7 +307,7 @@ services:
         percentage: 10
 ```
 
-### Yugtong Pag-deploy
+### Staged na Pag-deploy
 ```bash
 #!/bin/bash
 # deploy-staged.sh
@@ -392,7 +392,7 @@ CMD ["npm", "start"]
 
 ## ⚡ Pag-optimize ng Pagganap
 
-### Mga Pag-deploy na Espesipiko sa Serbisyo
+### Pag-deploy para sa Tiyak na Serbisyo
 ```bash
 # I-deploy ang isang partikular na serbisyo para sa mas mabilis na iterasyon
 azd deploy --service web
@@ -402,7 +402,7 @@ azd deploy --service api
 azd deploy
 ```
 
-### Caching ng Build
+### Build Caching
 ```yaml
 # azure.yaml - Configure build commands
 services:
@@ -414,17 +414,17 @@ services:
 
 ### Mabisang Pag-deploy ng Code
 ```bash
-# Gamitin ang azd deploy (hindi azd up) para sa mga pagbabago lamang sa code
-# Nilalaktawan nito ang provisioning ng imprastruktura at mas mabilis ito
+# Gamitin ang azd deploy (huwag ang azd up) para sa mga pagbabago na puro code lang
+# Nilalaktawan nito ang pag-set up ng imprastruktura at mas mabilis
 azd deploy
 
-# I-deploy ang partikular na serbisyo para sa pinakamabilis na iterasyon
+# I-deploy ang partikular na serbisyo para sa pinakamabilis na pag-uulit
 azd deploy --service api
 ```
 
-## 🔍 Pagmomonitor ng Pag-deploy
+## 🔍 Pagmo-monitor ng Pag-deploy
 
-### Real-time na Pagmomonitor ng Pag-deploy
+### Real-Time na Pagmo-monitor ng Pag-deploy
 ```bash
 # Subaybayan ang aplikasyon nang real-time
 azd monitor --live
@@ -432,11 +432,11 @@ azd monitor --live
 # Tingnan ang mga log ng aplikasyon
 azd monitor --logs
 
-# Suriin ang katayuan ng deployment
+# Suriin ang katayuan ng pag-deploy
 azd show
 ```
 
-### Pagsusuri ng Kalusugan
+### Mga Health Check
 ```yaml
 # azure.yaml - Configure health checks
 services:
@@ -485,14 +485,14 @@ echo "✅ Deployment validation completed successfully"
 
 ## 🔐 Mga Pagsasaalang-alang sa Seguridad
 
-### Pamamahala ng Mga Lihim
+### Pamamahala ng Mga Sekreto
 ```bash
-# I-imbak nang ligtas ang mga lihim
+# Mag-imbak ng mga lihim nang ligtas
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# Itukoy ang mga lihim sa azure.yaml
+# Tukuyin ang mga lihim sa azure.yaml
 ```
 
 ```yaml
@@ -516,7 +516,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### Pamamahala ng Identidad at Access
+### Pamamahala ng Pagkakakilanlan at Access
 ```yaml
 services:
   api:
@@ -531,18 +531,18 @@ services:
           - external-api-key
 ```
 
-## 🚨 Mga Estratehiya sa Rollback
+## 🚨 Mga Estratehiya para sa Rollback
 
 ### Mabilis na Rollback
 ```bash
-# Walang built-in na rollback ang AZD. Mga inirerekomendang paraan:
+# Walang built-in na rollback ang AZD. Inirerekomendang mga paraan:
 
-# Opsyon 1: Muling i-deploy mula sa Git (inirerekomenda)
+# Opsyon 1: I-deploy muli mula sa Git (inirerekomenda)
 git revert HEAD  # I-revert ang problemadong commit
 git push
 azd deploy
 
-# Opsyon 2: Muling i-deploy ang partikular na commit
+# Opsyon 2: I-deploy muli ang partikular na commit
 git checkout <previous-commit-hash>
 azd deploy
 git checkout main
@@ -550,12 +550,12 @@ git checkout main
 
 ### Rollback ng Imprastruktura
 ```bash
-# I-preview ang mga pagbabago sa imprastruktura bago ilapat
+# Suriin muna ang mga pagbabago sa imprastruktura bago ipatupad
 azd provision --preview
 
-# Para sa pag-rollback ng imprastruktura, gamitin ang kontrol ng bersyon:
+# Para sa pagbabalik ng imprastruktura, gamitin ang kontrol ng bersyon:
 git revert HEAD  # Ibalik ang mga pagbabago sa imprastruktura
-azd provision    # Ilapat ang naunang estado ng imprastruktura
+azd provision    # Ipatupad ang naunang estado ng imprastruktura
 ```
 
 ### Rollback ng Database Migration
@@ -572,7 +572,7 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 Mga Metro ng Pag-deploy
+## 📊 Mga Sukatan ng Pag-deploy
 
 ### Subaybayan ang Pagganap ng Pag-deploy
 ```bash
@@ -586,7 +586,7 @@ azd monitor --overview
 azd monitor --live
 ```
 
-### Pagkolekta ng Pasadyang Metrics
+### Pagtitipon ng Mga Pasadyang Sukatan
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -603,28 +603,28 @@ hooks:
         -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
 ```
 
-## 🎯 Mga Pinakamahusay na Praktis
+## 🎯 Mga Pinakamahusay na Kasanayan
 
 ### 1. Konsistensi ng Kapaligiran
 ```bash
-# Gumamit ng pare-parehong pangalan
+# Gumamit ng pare-parehong pagpapangalan
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Panatilihin ang pagkakapareho ng mga kapaligiran
+# Panatilihin ang pagkakapareho ng mga environment
 ./scripts/sync-environments.sh
 ```
 
 ### 2. Pagpapatunay ng Imprastruktura
 ```bash
-# I-preview ang mga pagbabago sa imprastruktura bago i-deploy
+# Suriin ang mga pagbabago sa imprastruktura bago i-deploy
 azd provision --preview
 
 # Gumamit ng linting para sa ARM/Bicep
 az bicep lint --file infra/main.bicep
 
-# I-validate ang sintaks ng Bicep
+# Suriin ang syntax ng Bicep
 az bicep build --file infra/main.bicep
 ```
 
@@ -659,23 +659,23 @@ hooks:
 
 ### 4. Dokumentasyon at Pag-log
 ```bash
-# Idokumento ang mga pamamaraan ng pag-deploy.
+# Idokumento ang mga pamamaraan ng pag-deploy
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
-echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
+echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
 ```
 
-## Mga Susunod na Hakbang
+## Susunod na Mga Hakbang
 
-- [Paglalaan ng Mga Resource](provisioning.md) - Mas malalim na pagtalakay sa pamamahala ng imprastruktura
-- [Pagpaplano Bago ang Pag-deploy](../chapter-06-pre-deployment/capacity-planning.md) - Planuhin ang iyong deployment strategy
+- [Pagpo-provision ng Mga Resource](provisioning.md) - Mas malalim na pagtalakay sa pamamahala ng imprastruktura
+- [Pagpaplano Bago ang Pag-deploy](../chapter-06-pre-deployment/capacity-planning.md) - Planuhin ang iyong estratehiya sa pag-deploy
 - [Mga Karaniwang Isyu](../chapter-07-troubleshooting/common-issues.md) - Lutasin ang mga isyu sa pag-deploy
-- [Pinakamahusay na Praktis](../chapter-07-troubleshooting/debugging.md) - Mga production-ready na estratehiya sa pag-deploy
+- [Pinakamahusay na Kasanayan](../chapter-07-troubleshooting/debugging.md) - Mga estratehiya sa pag-deploy na handa para sa produksyon
 
-## 🎯 Mga Praktikal na Ehersisyo sa Pag-deploy
+## 🎯 Mga Gawain sa Pag-deploy na May Praktikal na Pagsasanay
 
-### Ehersisyo 1: Incremental Deployment Workflow (20 minuto)
-**Layunin**: Masanay sa pagkakaiba sa pagitan ng kumpletong at incremental na pag-deploy
+### Ehersisyo 1: Incremental na Daloy ng Pag-deploy (20 minuto)
+**Layunin**: Maging bihasa sa pagkakaiba ng kumpleto at incremental na pag-deploy
 
 ```bash
 # Paunang pag-deploy
@@ -702,29 +702,29 @@ azd down --force --purge
 
 **Pamantayan ng Tagumpay:**
 - [ ] Ang kumpletong pag-deploy ay tumatagal ng 5-15 minuto
-- [ ] Ang code-only na pag-deploy ay tumatagal ng 2-5 minuto
-- [ ] Ang mga pagbabago sa code ay makikita sa naka-deploy na app
+- [ ] Ang pag-deploy na code-lamang ay tumatagal ng 2-5 minuto
+- [ ] Ang mga pagbabago sa code ay nakikita sa na-deploy na app
 - [ ] Hindi nagbago ang imprastruktura pagkatapos ng `azd deploy`
 
-**Resulta ng Pagkatuto**: `azd deploy` ay 50-70% mas mabilis kaysa sa `azd up` para sa mga pagbabago sa code
+**Kinalabasan ng Pagkatuto**: `azd deploy` ay 50-70% mas mabilis kaysa sa `azd up` para sa mga pagbabago sa code
 
-### Ehersisyo 2: Custom Deployment Hooks (30 minuto)
+### Ehersisyo 2: Mga Custom na Deployment Hook (30 minuto)
 **Layunin**: Ipatupad ang pre at post-deployment automation
 
 ```bash
-# Gumawa ng script para sa pag-validate bago mag-deploy
+# Gumawa ng pre-deploy na validation script
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
 echo "⚠️ Running pre-deployment checks..."
 
-# Suriin kung pumapasa ang mga test
+# Suriin kung pumasa ang mga pagsubok
 if ! npm run test:unit; then
     echo "❌ Tests failed! Aborting deployment."
     exit 1
 fi
 
-# Suriin kung may hindi pa naka-commit na pagbabago
+# Suriin kung may hindi pa na-commit na mga pagbabago
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -753,7 +753,7 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# Magdagdag ng hooks sa azure.yaml
+# Magdagdag ng mga hook sa azure.yaml
 cat >> azure.yaml << 'EOF'
 
 hooks:
@@ -766,21 +766,21 @@ hooks:
     run: ./scripts/post-deploy-test.sh
 EOF
 
-# Subukan ang pag-deploy gamit ang mga hooks
+# Subukan ang pag-deploy gamit ang mga hook
 azd deploy
 ```
 
 **Pamantayan ng Tagumpay:**
-- [ ] Nagpapatakbo ang pre-deploy script bago ang deployment
-- [ ] Humihinto ang deployment kung may pumalpak na tests
-- [ ] Nagva-validate ang post-deploy smoke test ng kalusugan
-- [ ] Naaayon ang pagkakasunod-sunod ng pag-execute ng mga hooks
+- [ ] Ang pre-deploy script ay tumatakbo bago ang pag-deploy
+- [ ] Humihinto ang pag-deploy kung mabibigo ang mga test
+- [ ] Ang post-deploy smoke test ay nagpapatunay ng kalusugan
+- [ ] Ang mga hook ay tumatakbo sa tamang pagkakasunod-sunod
 
-### Ehersisyo 3: Estratehiya ng Pag-deploy para sa Maramihang Kapaligiran (45 minuto)
-**Layunin**: Ipatupad ang staged na workflow ng pag-deploy (dev → staging → production)
+### Ehersisyo 3: Estratehiya ng Pag-deploy sa Maramihang Kapaligiran (45 minuto)
+**Layunin**: Ipatupad ang staged na daloy ng pag-deploy (dev → staging → production)
 
 ```bash
-# Gumawa ng script ng deployment
+# Gumawa ng script para sa deployment
 cat > deploy-staged.sh << 'EOF'
 #!/bin/bash
 set -e
@@ -806,7 +806,7 @@ azd up --no-prompt
 echo "Running staging tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# Hakbang 3: Manwal na pag-apruba para sa produksyon
+# Hakbang 3: Manwal na pag-apruba para sa production
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -839,17 +839,17 @@ azd env new production
 ```
 
 **Pamantayan ng Tagumpay:**
-- [ ] Matagumpay na nade-deploy ang dev environment
-- [ ] Matagumpay na nade-deploy ang staging environment
-- [ ] Kinakailangan ang manual approval para sa production
-- [ ] May gumaganang health checks ang lahat ng kapaligiran
+- [ ] Matagumpay na na-deploy ang dev environment
+- [ ] Matagumpay na na-deploy ang staging environment
+- [ ] Kinakailangan ang manu-manong pag-apruba para sa production
+- [ ] Lahat ng environment ay may gumaganang health checks
 - [ ] Maaaring mag-roll back kung kinakailangan
 
-### Ehersisyo 4: Estratehiya sa Rollback (25 minuto)
+### Ehersisyo 4: Estratehiya ng Rollback (25 minuto)
 **Layunin**: Ipatupad at subukan ang rollback ng pag-deploy gamit ang Git
 
 ```bash
-# I-deploy ang v1
+# I-deploy v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
@@ -857,13 +857,13 @@ azd up
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# I-deploy ang v2 na may breaking change
+# I-deploy v2 na may breaking change
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
 azd deploy
 
-# Tuklasin ang pagkabigo at i-rollback
+# Tukuyin ang pagkabigo at i-rollback
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
@@ -873,7 +873,7 @@ if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; 
     # I-rollback ang environment
     azd env set APP_VERSION "1.0.0"
     
-    # Muling i-deploy ang v1
+    # I-deploy muli ang v1
     azd deploy
     
     echo "✅ Rolled back to v1.0.0"
@@ -881,17 +881,17 @@ fi
 ```
 
 **Pamantayan ng Tagumpay:**
-- [ ] Kayang matukoy ang mga pagkabigo sa pag-deploy
-- [ ] Awtomatikong nagpapatakbo ang rollback script
-- [ ] Bumabalik ang aplikasyon sa gumaganang estado
-- [ ] Pumapasa ang health checks pagkatapos ng rollback
+- [ ] Kayang matukoy ang mga pagkabigo ng pag-deploy
+- [ ] Ang rollback script ay tumatakbo nang awtomatiko
+- [ ] Bumabalik sa gumaganang estado ang aplikasyon
+- [ ] Nagpapasa ang mga health check pagkatapos ng rollback
 
-## 📊 Pagsubaybay ng Mga Metro ng Pag-deploy
+## 📊 Pagsubaybay ng Mga Sukatan ng Pag-deploy
 
 ### Subaybayan ang Pagganap ng Iyong Pag-deploy
 
 ```bash
-# Gumawa ng script para sa mga metric ng deployment
+# Gumawa ng script para sa mga sukatan ng deployment
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
@@ -905,11 +905,11 @@ echo "
 📊 Deployment Metrics:"
 echo "Duration: ${DURATION}s"
 echo "Timestamp: $(date)"
-echo "Environment: $(azd env show --output json | jq -r '.name')"
+echo "Environment: $(azd env get-value AZURE_ENV_NAME)"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
 # I-log sa file
-echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
+echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
 EOF
 
 chmod +x track-deployment.sh
@@ -918,7 +918,7 @@ chmod +x track-deployment.sh
 ./track-deployment.sh
 ```
 
-**Suriin ang iyong mga metric:**
+**Suriin ang iyong mga sukatan:**
 ```bash
 # Tingnan ang kasaysayan ng pag-deploy
 cat deployment-metrics.csv
@@ -929,20 +929,20 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 
 ## Karagdagang Mga Mapagkukunan
 
-- [Sanggunian sa Pag-deploy ng Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Sanggunian para sa Pag-deploy ng Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Pag-deploy ng Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
 - [Pag-deploy ng Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
 - [Pag-deploy ng Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
-**Navigation**
+**Navigasyon**
 - **Nakaraang Aralin**: [Ang Iyong Unang Proyekto](../chapter-01-foundation/first-project.md)
-- **Susunod na Aralin**: [Paglalaan ng Mga Resource](provisioning.md)
+- **Susunod na Aralin**: [Pagpo-provision ng Mga Resource](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Ang dokumentong ito ay isinalin gamit ang serbisyo ng AI para sa pagsasalin na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o pagkukulang sa katumpakan. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pinagmumulan ng awtoridad. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaintindihan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
+**Paunawa**:
+Ang dokumentong ito ay isinalin gamit ang serbisyong AI na pagsasalin na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, pakitandaan na ang awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi tumpak na impormasyon. Dapat ituring na awtoritatibong sanggunian ang orihinal na dokumento sa katutubong wika nito. Para sa kritikal na impormasyon, inirerekomenda ang propesyonal na pagsasalin na ginawa ng tao. Hindi kami mananagot sa anumang hindi pagkakaintindihan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

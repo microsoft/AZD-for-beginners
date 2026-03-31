@@ -1,19 +1,21 @@
 # Bab 8: Pola Produksi & Perusahaan
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Durasi**: 2-3 jam | **⭐ Kompleksitas**: Lanjutan
+**📚 Kursus**: [AZD untuk Pemula](../../README.md) | **⏱️ Durasi**: 2-3 hours | **⭐ Kompleksitas**: Lanjutan
 
 ---
 
 ## Ikhtisar
 
-Bab ini membahas pola penyebaran siap-enterprise, penguatan keamanan, pemantauan, dan optimisasi biaya untuk beban kerja AI produksi.
+Bab ini membahas pola penerapan yang siap untuk perusahaan, penguatan keamanan, pemantauan, dan optimisasi biaya untuk beban kerja AI produksi.
+
+> Validated against `azd 1.23.12` in March 2026.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan bab ini, Anda akan:
-- Menyebarkan aplikasi yang tangguh multi-wilayah
-- Menerapkan pola keamanan perusahaan
-- Mengonfigurasi pemantauan menyeluruh
+- Menerapkan aplikasi yang tahan gangguan multi-wilayah
+- Mengimplementasikan pola keamanan untuk perusahaan
+- Mengonfigurasi pemantauan komprehensif
 - Mengoptimalkan biaya dalam skala besar
 - Menyiapkan pipeline CI/CD dengan AZD
 
@@ -21,16 +23,16 @@ Dengan menyelesaikan bab ini, Anda akan:
 
 ## 📚 Pelajaran
 
-| # | Pelajaran | Deskripsi | Durasi |
+| # | Pelajaran | Deskripsi | Waktu |
 |---|--------|-------------|------|
-| 1 | [Praktik AI Produksi](production-ai-practices.md) | Pola penyebaran perusahaan | 90 menit |
+| 1 | [Praktik AI Produksi](production-ai-practices.md) | Pola penerapan perusahaan | 90 menit |
 
 ---
 
 ## 🚀 Daftar Periksa Produksi
 
-- [ ] Penyebaran multi-wilayah untuk ketahanan
-- [ ] Identitas terkelola untuk otentikasi (tanpa kunci)
+- [ ] Penerapan multi-wilayah untuk ketahanan
+- [ ] Identitas terkelola untuk autentikasi (tanpa kunci)
 - [ ] Application Insights untuk pemantauan
 - [ ] Anggaran biaya dan peringatan dikonfigurasi
 - [ ] Pemindaian keamanan diaktifkan
@@ -41,7 +43,7 @@ Dengan menyelesaikan bab ini, Anda akan:
 
 ## 🏗️ Pola Arsitektur
 
-### Pola 1: Microservices AI
+### Pola 1: Microservices untuk AI
 
 ```mermaid
 graph LR
@@ -49,11 +51,11 @@ graph LR
     Gateway --> Auth[Layanan Otentikasi]
     AI --> Data[Penyimpanan Data]
 ```
-### Pola 2: Event-Driven AI
+### Pola 2: AI Berbasis Peristiwa
 
 ```mermaid
 graph LR
-    EventGrid[Grid Peristiwa] --> Functions[Fungsi] --> Pipeline[Alur AI]
+    EventGrid[Grid Acara] --> Functions[Fungsi] --> Pipeline[Alur AI]
 ```
 ---
 
@@ -81,7 +83,7 @@ properties: {
 | Strategi | Penghematan |
 |----------|---------|
 | Skalakan ke nol (Container Apps) | 60-80% |
-| Gunakan tingkatan konsumsi untuk pengembangan | 50-70% |
+| Gunakan tier konsumsi untuk pengembangan | 50-70% |
 | Skalasi terjadwal | 30-50% |
 | Kapasitas cadangan | 20-40% |
 
@@ -103,7 +105,7 @@ az consumption budget create \
 azd monitor --logs
 
 # Periksa Application Insights
-azd monitor
+azd monitor --overview
 
 # Lihat metrik
 az monitor metrics list --resource <resource-id>
@@ -130,6 +132,6 @@ az monitor metrics list --resource <resource-id>
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Penafian**:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya menjaga akurasi, harap diperhatikan bahwa terjemahan otomatis dapat mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang salah yang timbul dari penggunaan terjemahan ini.
+**Disclaimer**:
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya mencapai akurasi, harap disadari bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi penting, disarankan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas setiap kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

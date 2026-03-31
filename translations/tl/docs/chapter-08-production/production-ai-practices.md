@@ -1,35 +1,35 @@
-# Mga Pinakamahuhusay na Gawain para sa Production AI Workloads gamit ang AZD
+# Pinakamahusay na Kasanayan para sa Production AI Workloads gamit ang AZD
 
-**Chapter Navigation:**
+**Pag-navigate ng Kabanata:**
 - **📚 Tahanan ng Kurso**: [AZD Para sa mga Nagsisimula](../../README.md)
 - **📖 Kasalukuyang Kabanata**: Kabanata 8 - Mga Pattern para sa Produksyon at Enterprise
 - **⬅️ Nakaraang Kabanata**: [Kabanata 7: Pag-troubleshoot](../chapter-07-troubleshooting/debugging.md)
 - **⬅️ Kaugnay din**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎯 Kumpletuhin ang Kurso**: [AZD Para sa mga Nagsisimula](../../README.md)
+- **🎯 Kumpletong Kurso**: [AZD Para sa mga Nagsisimula](../../README.md)
 
 ## Pangkalahatang-ideya
 
-Ang gabay na ito ay nagbibigay ng komprehensibong pinakamahusay na mga gawi para sa pag-deploy ng production-ready na AI workloads gamit ang Azure Developer CLI (AZD). Batay sa feedback mula sa Microsoft Foundry Discord community at mga tunay na deployment ng customer, tinutugunan ng mga gawi na ito ang mga pinaka-karaniwang hamon sa production AI systems.
+Ang gabay na ito ay nagbibigay ng komprehensibong pinakamahusay na kasanayan para sa pag-deploy ng production-ready AI workloads gamit ang Azure Developer CLI (AZD). Batay sa feedback mula sa komunidad ng Microsoft Foundry Discord at mga tunay na deployment ng customer, tinutugunan ng mga kasanayang ito ang mga pinaka-karaniwang hamon sa production AI systems.
 
-## Pangunahing Mga Hamong Tinugunan
+## Mga Pangunahing Hamong Tinugunan
 
-Batay sa resulta ng aming poll sa komunidad, ito ang mga nangungunang hamon na kinakaharap ng mga developer:
+Batay sa resulta ng aming poll sa komunidad, ito ang mga pangunahing hamon na kinakaharap ng mga developer:
 
-- **45%** nahihirapan sa pag-deploy ng multi-service na AI
-- **38%** may mga isyu sa pamamahala ng credential at mga secret  
-- **35%** nahihirapan sa pagiging production-ready at scaling
-- **32%** nangangailangan ng mas mahusay na mga estratehiya sa pag-optimize ng gastos
-- **29%** nangangailangan ng pinahusay na pagmo-monitor at pag-troubleshoot
+- **45%** nahihirapan sa multi-service AI deployments
+- **38%** may isyu sa pamamahala ng kredensyal at mga lihim  
+- **35%** nahihirapan sa pagiging handa para sa produksyon at pag-scale
+- **32%** kailangan ng mas mahusay na mga estratehiya sa pag-optimize ng gastos
+- **29%** nangangailangan ng pinahusay na pagsubaybay at pag-troubleshoot
 
-## Mga Pattern ng Arkitektura para sa Production AI
+## Mga Arkitekturang Pattern para sa Production AI
 
-### Pattern 1: Arkitekturang Microservices para sa AI
+### Pattern 1: Microservices AI Architecture
 
-**Kung kailan gagamitin**: Mga komplikadong AI na aplikasyon na may maraming kakayahan
+**Kailan gagamitin**: Mga komplikadong AI application na may maraming kakayahan
 
 ```mermaid
 graph TD
-    Frontend[Frontend ng Web] --- Gateway[Gateway ng API] --- LB[Tagapantimbang ng Load]
+    Frontend[Frontend ng Web] --- Gateway[Gateway ng API] --- LB[Tagapantay ng Load]
     Gateway --> Chat[Serbisyo ng Chat]
     Gateway --> Image[Serbisyo ng Imahe]
     Gateway --> Text[Serbisyo ng Teksto]
@@ -37,7 +37,7 @@ graph TD
     Image --> Vision[Paningin ng Kompyuter]
     Text --> DocIntel[Intelihensiya ng Dokumento]
 ```
-**Implementasyon sa AZD**:
+**AZD Implementation**:
 
 ```yaml
 # azure.yaml
@@ -60,9 +60,9 @@ services:
     host: containerapp
 ```
 
-### Pattern 2: Pagpoproseso ng AI na Pinapatakbo ng Kaganapan
+### Pattern 2: Event-Driven AI Processing
 
-**Kung kailan gagamitin**: Batch na pagpoproseso, pagsusuri ng dokumento, mga asynchronous na workflow
+**Kailan gagamitin**: Batch processing, pagsusuri ng dokumento, async workflows
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -109,46 +109,46 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Pag-iisip tungkol sa Kalusugan ng AI Agent
+## Pag-iisip Tungkol sa Kalusugan ng AI Agent
 
-Kapag ang isang tradisyunal na web app ay nasira, pamilyar ang mga sintomas: hindi naglo-load ang pahina, nagbabalik ng error ang API, o nabigo ang deployment. Maaaring masira ang mga AI-powered na aplikasyon sa lahat ng parehong paraan—ngunit maaari rin silang kumilos nang hindi tama sa mga mas pinong paraan na hindi naglalabas ng malinaw na mga mensahe ng error.
+Kapag ang tradisyonal na web app ay nagkakaroon ng sira, pamilyar ang mga sintomas: hindi naglo-load ang pahina, nagbabalik ang API ng error, o nabibigo ang deployment. Ang mga AI-powered na aplikasyon ay maaaring masira sa lahat ng mga parehong paraan—ngunit maaari rin silang gumalaw nang hindi gaanong halata na hindi nagpapakita ng maliwanag na mga mensahe ng error.
 
-Tinutulungan ka ng seksyong ito na bumuo ng mental model para sa pagmo-monitor ng AI workloads upang malaman mo kung saan tumingin kapag may hindi mukhang tama.
+Tinutulungan ka ng seksyong ito na bumuo ng mental model para sa pagsubaybay ng AI workloads para malaman mo kung saan titingnan kapag may hindi tama.
 
-### Paano Naiiba ang Kalusugan ng Agent mula sa Kalusugan ng Tradisyunal na App
+### Paano Naiiba ang Kalusugan ng Agent mula sa Tradisyonal na Kalusugan ng App
 
-Ang tradisyunal na app ay gumagana o hindi. Maaaring mukhang gumagana ang isang AI agent ngunit magbigay ng mahinang resulta. Isipin ang kalusugan ng agent sa dalawang layer:
+Ang tradisyonal na app ay gumagana o hindi. Ang AI agent ay maaaring magmukhang gumagana ngunit magbigay ng mahihinang resulta. Isipin ang kalusugan ng agent sa dalawang layer:
 
-| Antas | Ano ang Obserbahan | Saan Titingnan |
-|-------|--------------|---------------|
-| **Kalusugan ng imprastruktura** | Nakatakbo ba ang serbisyo? Na-provision ba ang mga resource? Maabot ba ang mga endpoint? | `azd monitor`, Azure Portal resource health, container/app logs |
+| Patong | Ano ang Bantayan | Saan Tingnan |
+|-------|------------------|---------------|
+| **Kalusugan ng imprastruktura** | Tumatakbo ba ang serbisyo? Na-provision ba ang mga resource? Maaabot ba ang mga endpoint? | `azd monitor`, Azure Portal resource health, container/app logs |
 | **Kalusugan ng pag-uugali** | Tumutugon ba ang agent nang tama? Napapanahon ba ang mga tugon? Tama bang tinatawag ang modelo? | Application Insights traces, model call latency metrics, response quality logs |
 
 Pamilyar ang kalusugan ng imprastruktura—pareho ito para sa anumang azd app. Ang kalusugan ng pag-uugali ang bagong layer na ipinakikilala ng AI workloads.
 
-### Saan Titingnan Kapag Hindi Kumilos ang AI na mga App ayon sa Inaasahan
+### Saan Titingnan Kapag Hindi Gumagana ayon sa Inaasahan ang AI Apps
 
-Kung hindi nagbibigay ang iyong AI application ng inaasahang resulta, narito ang isang konseptwal na checklist:
+Kung ang iyong AI application ay hindi nagbibigay ng inaasahang resulta, narito ang isang konseptwal na checklist:
 
-1. **Magsimula sa mga batayan.** Nakatakbo ba ang app? Maaabot ba nito ang mga dependencies nito? Suriin ang `azd monitor` at resource health tulad ng gagawin mo para sa anumang app.
-2. **Suriin ang koneksyon sa modelo.** Tinatawag ba ng iyong aplikasyon nang matagumpay ang AI model? Ang mga nabigong o nag-timeout na tawag sa modelo ang pinaka-karaniwang sanhi ng mga isyu sa AI app at makikita sa iyong application logs.
-3. **Tingnan kung ano ang natanggap ng modelo.** Nakadepende ang mga tugon ng AI sa input (ang prompt at anumang narekober na context). Kung mali ang output, kadalasan mali ang input. Suriin kung nagpapadala ba ang iyong aplikasyon ng tamang data sa modelo.
-4. **Suriin ang latency ng tugon.** Mas mabagal ang mga tawag sa AI model kaysa sa karaniwang API calls. Kung mabagal ang pakiramdam ng iyong app, tingnan kung tumaas ang oras ng tugon ng modelo—ito ay maaaring magpahiwatig ng throttling, limitasyon ng kapasidad, o congestion sa antas ng rehiyon.
-5. **Magbantay para sa mga signal ng gastos.** Ang hindi inaasahang pagtaas sa paggamit ng token o API calls ay maaaring magpahiwatig ng loop, maling pagkokonpigura ng prompt, o sobrang retries.
+1. **Magsimula sa mga batayan.** Tumakbo ba ang app? Maaabot ba ang mga dependency nito? Suriin ang `azd monitor` at resource health tulad ng gagawin mo sa anumang app.
+2. **Suriin ang koneksyon sa modelo.** Matagumpay bang tinatawag ng iyong aplikasyon ang AI model? Ang nabigong o nag-timeout na mga tawag sa modelo ang pinaka-karaniwang dahilan ng mga isyu sa AI app at lalabas ito sa iyong application logs.
+3. **Tingnan kung ano ang natanggap ng modelo.** Nakadepende ang mga tugon ng AI sa input (ang prompt at anumang nakuha na konteksto). Kung mali ang output, karaniwan ay mali ang input. Suriin kung ang iyong aplikasyon ay nagpapadala ng tamang data sa modelo.
+4. **Review-in ang latency ng tugon.** Mas mabagal ang mga tawag sa AI model kaysa karaniwang mga API call. Kung mabagal ang app, suriin kung tumaas ang oras ng tugon ng modelo—maaaring magpahiwatig ito ng throttling, limitasyon sa kapasidad, o congestion sa antas ng rehiyon.
+5. **Bantayan ang mga senyales ng gastos.** Ang hindi inaasahang pagtaas sa paggamit ng token o mga API call ay maaaring magpahiwatig ng loop, maling naka-configure na prompt, o labis na retries.
 
-Hindi mo kailangang maging eksperto agad sa mga observability tooling. Ang pangunahing takeaway ay may dagdag na layer ng pag-uugali na dapat imonitor ang mga AI application, at ang built-in na monitoring ng azd (`azd monitor`) ay nagbibigay ng panimulang punto para imbestigahan ang parehong layer.
+Hindi mo kailangang maging dalubhasa sa mga observability tooling agad. Ang pangunahing aral ay may dagdag na layer ng pag-uugali na dapat subaybayan ang mga AI application, at ang built-in na pagsubaybay ng azd (`azd monitor`) ay nagbibigay sa iyo ng panimulang punto para imbestigahan ang parehong mga layer.
 
 ---
 
-## Mga Pinakamahuhusay na Gawi sa Seguridad
+## Pinakamahusay na Kasanayan sa Seguridad
 
 ### 1. Zero-Trust Security Model
 
-**Istratehiya ng Implementasyon**:
-- Walang komunikasyon sa pagitan ng serbisyo nang walang authentication
-- Lahat ng API calls gumagamit ng managed identities
-- Network isolation gamit ang private endpoints
-- Mga access control na naka-least privilege
+**Estratehiya ng Implementasyon**:
+- Walang komunikasyon ng serbisyo-sa-serbisyo nang walang awtentikasyon
+- Lahat ng tawag sa API ay gumagamit ng managed identities
+- Isolasyon ng network gamit ang private endpoints
+- Kontrol ng access na may pinakamababang pribilehiyo
 
 ```bicep
 // Managed Identity for each service
@@ -171,7 +171,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 ### 2. Secure Secret Management
 
-**Key Vault Integration Pattern**:
+**Pattern ng Integrasyon ng Key Vault**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -206,7 +206,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### 3. Network Security
 
-**Private Endpoint Configuration**:
+**Konfigurasyon ng Private Endpoint**:
 
 ```bicep
 // Virtual Network for AI services
@@ -264,11 +264,11 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Pagganap at Scaling
+## Pagganap at Pag-scale
 
-### 1. Mga Estratehiya ng Auto-Scaling
+### 1. Mga Estratehiya sa Auto-Scaling
 
-**Container Apps Auto-scaling**:
+**Auto-scaling para sa Container Apps**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -314,7 +314,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 2. Mga Estratehiya sa Caching
 
-**Redis Cache para sa Mga Tugon ng AI**:
+**Redis Cache para sa mga Tugon ng AI**:
 
 ```bicep
 // Redis Premium for production workloads
@@ -342,7 +342,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Load Balancing at Traffic Management
+### 3. Load Balancing at Pamamahala ng Trapiko
 
 **Application Gateway na may WAF**:
 
@@ -380,11 +380,11 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 💰 Optimisasyon ng Gastos
+## 💰 Pag-optimize ng Gastos
 
-### 1. Tamang Sukat ng mga Resource
+### 1. Pagtatakda ng Tamang Sukat ng mga Resource
 
-**Mga Konfigurasyon na Nakabatay sa Kapaligiran**:
+**Mga Konfigurasyon Batay sa Kapaligiran**:
 
 ```bash
 # Kapaligiran ng pag-unlad
@@ -404,7 +404,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Pagmo-monitor ng Gastos at mga Badyet
+### 2. Pagsubaybay ng Gastos at mga Badyet
 
 ```bicep
 // Cost management and budgets
@@ -460,7 +460,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Putulin ang konteksto, hindi ang input ng gumagamit
+      // Paikliin ang konteksto, hindi ang input ng gumagamit
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -468,13 +468,13 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Tinatayang magaspang: 1 token ≈ 4 na karakter
+    // Tinatayang: 1 token ≈ 4 na karakter
     return Math.ceil(text.length / 4);
   }
 }
 ```
 
-## Pagmo-monitor at Observabilidad
+## Pagsubaybay at Kakayahang Masubaybayan
 
 ### 1. Komprehensibong Application Insights
 
@@ -521,9 +521,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. AI-Specific Monitoring
+### 2. Monitoring na Espesipiko sa AI
 
-**Custom Dashboards para sa Mga Metrika ng AI**:
+**Mga Custom Dashboard para sa AI Metrics**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -552,7 +552,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Health Checks at Uptime Monitoring
+### 3. Health Checks at Pagsubaybay ng Uptime
 
 ```bicep
 // Application Insights availability tests
@@ -621,9 +621,9 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Disaster Recovery at High Availability
+## Pagbawi sa Sakuna at Mataas na Availability
 
-### 1. Multi-Region Deployment
+### 1. Deployment sa Maramihang Rehiyon
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -685,7 +685,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Data Backup at Recovery
+### 2. Pag-backup at Pagbawi ng Data
 
 ```bicep
 // Backup configuration for critical data
@@ -736,7 +736,7 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 }
 ```
 
-## DevOps at CI/CD Integration
+## DevOps at Integrasyon ng CI/CD
 
 ### 1. GitHub Actions Workflow
 
@@ -782,7 +782,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup AZD
-        uses: Azure/setup-azd@v1.0.0
+        uses: Azure/setup-azd@v2
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -802,7 +802,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup AZD
-        uses: Azure/setup-azd@v1.0.0
+        uses: Azure/setup-azd@v2
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -819,7 +819,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. Infrastructure Validation
+### 2. Pag-validate ng Imprastruktura
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -837,76 +837,76 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Suriin ang mga deployment ng modelong OpenAI
+# Suriin ang mga deployment ng modelo ng OpenAI
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
-if [[ ! $models == *"gpt-35-turbo"* ]]; then
-    echo "ERROR: Required model gpt-35-turbo not deployed"
+if [[ ! $models == *"gpt-4.1-mini"* ]]; then
+  echo "ERROR: Required model gpt-4.1-mini not deployed"
     exit 1
 fi
 
-# Subukan ang koneksyon ng serbisyo ng AI
+# Subukan ang konektividad ng serbisyo ng AI
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Production Readiness Checklist
+## Checklist para sa Kahandaan sa Produksyon
 
 ### Seguridad ✅
 - [ ] Lahat ng serbisyo ay gumagamit ng managed identities
-- [ ] Mga sekretong naka-imbak sa Key Vault
-- [ ] Na-konpigura ang private endpoints
-- [ ] Naipatupad ang network security groups
-- [ ] RBAC na may least privilege
-- [ ] WAF naka-enable sa mga public endpoint
+- [ ] Mga lihim naka-imbak sa Key Vault
+- [ ] Mga private endpoint na naka-configure
+- [ ] Mga network security group na ipinatupad
+- [ ] RBAC na may pinakamababang pribilehiyo
+- [ ] WAF enabled sa mga public endpoint
 
 ### Pagganap ✅
-- [ ] Na-konpigura ang auto-scaling
-- [ ] Naipatupad ang caching
-- [ ] Na-set up ang load balancing
-- [ ] CDN para sa static content
+- [ ] Auto-scaling na naka-configure
+- [ ] Implementado ang caching
+- [ ] Load balancing na naka-setup
+- [ ] CDN para sa static na nilalaman
 - [ ] Database connection pooling
 - [ ] Pag-optimize ng paggamit ng token
 
-### Pagmo-monitor ✅
-- [ ] Na-konpigura ang Application Insights
-- [ ] Nadefine ang custom metrics
-- [ ] Na-set up ang alerting rules
-- [ ] Nalikha ang dashboard
-- [ ] Naipatupad ang health checks
-- [ ] Mga patakaran sa pag-retain ng logs
+### Pagsubaybay ✅
+- [ ] Application Insights na naka-configure
+- [ ] Mga custom metric na nakadefine
+- [ ] Mga alerting rule na naka-setup
+- [ ] Dashboard na ginawa
+- [ ] Mga health check na ipinatupad
+- [ ] Mga patakaran sa log retention
 
-### Kalidad ng Serbisyo (Reliability) ✅
-- [ ] Multi-region deployment
-- [ ] Plano para sa backup at recovery
-- [ ] Naipatupad ang circuit breakers
-- [ ] Na-konpigura ang retry policies
+### Katatagan ✅
+- [ ] Deployment sa maramihang rehiyon
+- [ ] Plano para sa backup at pagbawi
+- [ ] Mga circuit breaker na ipinatupad
+- [ ] Mga retry policy na naka-configure
 - [ ] Graceful degradation
 - [ ] Mga health check endpoint
 
 ### Pamamahala ng Gastos ✅
-- [ ] Na-konpigura ang mga alert para sa badyet
+- [ ] Mga alerto sa badyet na naka-configure
 - [ ] Tamang sukat ng mga resource
-- [ ] Na-apply ang dev/test discounts
-- [ ] Nakabili ng reserved instances
-- [ ] Dashboard sa pagmo-monitor ng gastos
+- [ ] Nalapat ang mga diskwento para sa dev/test
+- [ ] Mga reserved instance na binili
+- [ ] Dashboard para sa pagsubaybay ng gastos
 - [ ] Regular na pagsusuri ng gastos
 
 ### Pagsunod (Compliance) ✅
-- [ ] Natugunan ang mga kinakailangan sa data residency
-- [ ] Na-enable ang audit logging
-- [ ] Na-apply ang mga compliance policy
-- [ ] Naipatupad ang security baselines
-- [ ] Regular na security assessments
+- [ ] Natutugunan ang mga kinakailangan sa residency ng data
+- [ ] Naka-enable ang audit logging
+- [ ] Naipatutupad ang mga patakaran ng pagsunod
+- [ ] Naipatupad ang mga security baseline
+- [ ] Regular na security assessment
 - [ ] Plano para sa incident response
 
 ## Mga Benchmark ng Pagganap
 
-### Karaniwang Mga Metrika sa Produksyon
+### Tipikal na Mga Metric sa Produksyon
 
-| Metric | Target | Monitoring |
+| Sukat | Target | Pagsubaybay |
 |--------|--------|------------|
 | **Response Time** | < 2 seconds | Application Insights |
 | **Availability** | 99.9% | Uptime monitoring |
@@ -918,7 +918,7 @@ echo "Infrastructure validation completed successfully!"
 ### Load Testing
 
 ```bash
-# Script para sa pagsubok ng load ng mga aplikasyon ng AI
+# Script para sa load testing ng mga aplikasyon ng AI
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -926,42 +926,45 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Mga Pinakamahuhusay na Gawi ng Komunidad
+## 🤝 Mga Pinakamahusay na Kasanayan ng Komunidad
 
-Batay sa feedback mula sa Microsoft Foundry Discord community:
+Batay sa feedback mula sa komunidad ng Microsoft Foundry Discord:
 
-### Nangungunang mga Rekomendasyon mula sa Komunidad:
+### Nangungunang Rekomendasyon mula sa Komunidad:
 
-1. **Magsimula nang Maliit, Mag-scale Nang Paunti-unti**: Magsimula sa mga pangunahing SKU at mag-scale pataas batay sa aktwal na paggamit
-2. **I-monitor ang Lahat**: Mag-set up ng komprehensibong pagmo-monitor mula pa sa unang araw
-3. **I-automate ang Seguridad**: Gumamit ng infrastructure as code para sa pare-parehong seguridad
-4. **Subukan nang Mabuti**: Isama ang AI-specific na testing sa iyong pipeline
-5. **Magplano para sa Mga Gastos**: I-monitor ang paggamit ng token at mag-set ng budget alerts nang maaga
+1. **Magsimula nang Maliit, I-scale Nang Paunti-unti**: Magsimula sa mga basic na SKU at i-scale pataas base sa aktwal na paggamit
+2. **I-monitor ang Lahat**: Mag-set up ng komprehensibong pagsubaybay mula sa unang araw
+3. **I-automate ang Seguridad**: Gamitin ang infrastructure as code para sa consistent na seguridad
+4. **Subukan nang Mabuti**: Isama ang AI-specific testing sa iyong pipeline
+5. **Magplano para sa Mga Gastos**: Subaybayan ang paggamit ng token at mag-set ng budget alerts agad
 
-### Karaniwang mga Pitfalls na Iwasan:
+### Karaniwang Mga Pagkakamaling Iwasan:
 
-- ❌ Hardcoding ng API keys sa code
-- ❌ Hindi pag-set up ng tamang pagmo-monitor
-- ❌ Pagsasantabi sa pag-optimize ng gastos
-- ❌ Hindi pagsusuri ng mga failure scenario
+- ❌ Pag-hardcode ng API keys sa code
+- ❌ Hindi pagsasaayos ng tamang pagsubaybay
+- ❌ Pagpapabaya sa pag-optimize ng gastos
+- ❌ Hindi pagsubok ng mga failure scenario
 - ❌ Pag-deploy nang walang health checks
 
-## Mga AZD AI CLI na Utos at Extensions
+## Mga AZD AI CLI Command at Extensions
 
-Kasama sa AZD ang lumalawak na hanay ng mga AI-specific na utos at extension na nagpapasimple sa production AI workflows. Binubuo ng mga tool na ito ang agwat sa pagitan ng lokal na development at production deployment para sa AI workloads.
+Kasama sa AZD ang lumalawak na set ng AI-specific na command at extension na nagpapadali sa production AI workflows. Nilalagay ng mga tool na ito ang tulay sa pagitan ng lokal na development at production deployment para sa mga AI workload.
 
 ### Mga Extension ng AZD para sa AI
 
-Gumagamit ang AZD ng extension system upang magdagdag ng AI-specific na kakayahan. I-install at i-manage ang mga extension gamit ang:
+Gumagamit ang AZD ng extension system para magdagdag ng AI-specific na kakayahan. I-install at i-manage ang mga extension gamit ang:
 
 ```bash
 # Ilista ang lahat ng magagamit na extension (kasama ang AI)
 azd extension list
 
-# I-install ang extension na Foundry agents
+# Suriin ang mga detalye ng naka-install na extension
+azd extension show azure.ai.agents
+
+# I-install ang Foundry agents extension
 azd extension install azure.ai.agents
 
-# I-install ang extension para sa fine-tuning
+# I-install ang fine-tuning extension
 azd extension install azure.ai.finetune
 
 # I-install ang extension para sa mga pasadyang modelo
@@ -971,30 +974,30 @@ azd extension install azure.ai.models
 azd extension upgrade --all
 ```
 
-**Available AI extensions:**
+**Available na AI extensions:**
 
-| Extension | Purpose | Status |
+| Extension | Layunin | Katayuan |
 |-----------|---------|--------|
 | `azure.ai.agents` | Foundry Agent Service management | Preview |
 | `azure.ai.finetune` | Foundry model fine-tuning | Preview |
 | `azure.ai.models` | Foundry custom models | Preview |
 | `azure.coding-agent` | Coding agent configuration | Available |
 
-### Pag-iinitialize ng mga Agent Project gamit ang `azd ai agent init`
+### Pag-initialize ng Mga Proyektong Agent gamit ang `azd ai agent init`
 
-Ang `azd ai agent init` na utos ay nag-scaffold ng production-ready na AI agent project na naka-integrate sa Microsoft Foundry Agent Service:
+Ang utos na `azd ai agent init` ay nag-scaffold ng production-ready AI agent project na naka-integrate sa Microsoft Foundry Agent Service:
 
 ```bash
-# Mag-initialize ng bagong proyekto ng agent mula sa agent manifest
+# I-initialize ang bagong proyekto ng agent mula sa manifest ng agent
 azd ai agent init -m <manifest-path-or-uri>
 
-# Mag-initialize at i-target ang isang partikular na proyekto ng Foundry
+# I-initialize at i-target ang isang partikular na Foundry na proyekto
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# Mag-initialize gamit ang pasadyang direktoryo ng source
+# I-initialize gamit ang pasadyang direktoryo ng source
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
-# I-target ang Container Apps bilang host
+# Itarget ang Container Apps bilang host
 azd ai agent init -m agent-manifest.yaml --host containerapp
 ```
 
@@ -1002,50 +1005,50 @@ azd ai agent init -m agent-manifest.yaml --host containerapp
 
 | Flag | Paglalarawan |
 |------|-------------|
-| `-m, --manifest` | Path o URI sa agent manifest na idaragdag sa iyong proyekto |
-| `-p, --project-id` | Existing Microsoft Foundry Project ID para sa iyong azd environment |
-| `-s, --src` | Direktoryo para i-download ang agent definition (default sa `src/<agent-id>`) |
-| `--host` | I-override ang default host (hal., `containerapp`) |
-| `-e, --environment` | Ang azd environment na gagamitin |
+| `-m, --manifest` | Path o URI patungo sa isang agent manifest na idaragdag sa iyong proyekto |
+| `-p, --project-id` | Umiiral na Microsoft Foundry Project ID para sa iyong azd kapaligiran |
+| `-s, --src` | Direktoryo para i-download ang definisyon ng agent (default ay `src/<agent-id>`) |
+| `--host` | I-override ang default na host (hal., `containerapp`) |
+| `-e, --environment` | Ang kapaligiran ng azd na gagamitin |
 
-**Tip para sa produksyon**: Gamitin ang `--project-id` upang kumonekta nang direkta sa isang umiiral na Foundry project, pinananatiling naka-link ang iyong agent code at cloud resources mula pa sa simula.
+**Tip para sa Produksyon**: Gamitin ang `--project-id` para kumonekta nang direkta sa umiiral na Foundry project, na pinananatiling naka-link ang iyong agent code at cloud resources mula pa sa simula.
 
 ### Model Context Protocol (MCP) gamit ang `azd mcp`
 
-Kasama sa AZD ang built-in MCP server support (Alpha), na nagpapahintulot sa mga AI agent at tool na makipag-ugnayan sa iyong Azure resources sa pamamagitan ng isang standardized na protocol:
+Kasama sa AZD ang built-in na suporta ng MCP server (Alpha), na nagpapahintulot sa mga AI agent at tool na makipag-interact sa iyong mga Azure resource sa pamamagitan ng isang standard na protocol:
 
 ```bash
-# Simulan ang server ng MCP para sa iyong proyekto
+# Simulan ang MCP server para sa iyong proyekto
 azd mcp start
 
-# Pamahalaan ang mga pahintulot ng tool para sa mga operasyon ng MCP
-azd mcp consent
+# Suriin ang kasalukuyang mga patakaran sa pahintulot ng Copilot para sa pagpapatupad ng mga tool
+azd copilot consent list
 ```
 
-Inilalantad ng MCP server ang konteksto ng iyong azd project—mga environment, serbisyo, at Azure resources—sa mga tool na ginagamitan ng AI. Ito ay nagtitiyak ng:
+Ipinapakita ng MCP server ang konteksto ng iyong azd project—mga kapaligiran, serbisyo, at mga Azure resource—sa mga AI-powered na development tool. Ito ay nagpapahintulot ng:
 
-- **AI-assisted deployment**: Hayaan ang coding agents na i-query ang estado ng iyong proyekto at mag-trigger ng deployments
-- **Resource discovery**: Maaaring madiskubre ng AI tools kung anong Azure resources ang ginagamit ng iyong proyekto
-- **Environment management**: Maaaring lumipat ang mga agent sa pagitan ng dev/staging/production environments
+- **AI-assisted deployment**: Hayaan ang mga coding agent na i-query ang estado ng iyong proyekto at mag-trigger ng deployments
+- **Resource discovery**: Maaaring tuklasin ng mga AI tool kung anong Azure resources ang ginagamit ng iyong proyekto
+- **Pamamahala ng kapaligiran**: Maaaring lumipat ang mga agent sa pagitan ng dev/staging/production na mga kapaligiran
 
-### Pagbuo ng Infrastructure gamit ang `azd infra generate`
+### Pag-generate ng Imprastruktura gamit ang `azd infra generate`
 
-Para sa production AI workloads, maaari mong i-generate at i-customize ang Infrastructure as Code sa halip na umasa sa awtomatikong provisioning:
+Para sa production AI workloads, maaari mong i-generate at i-customize ang Infrastructure as Code sa halip na umasa sa automatic provisioning:
 
 ```bash
-# Gumawa ng mga Bicep/Terraform na file mula sa depinisyon ng iyong proyekto
+# Gumawa ng mga Bicep/Terraform na file mula sa iyong paglalarawan ng proyekto
 azd infra generate
 ```
 
-Isinusulat nito ang IaC sa disk upang maaari mong:
+Ito ay nagsusulat ng IaC sa disk upang maaari mong:
 - Suriin at i-audit ang imprastruktura bago mag-deploy
-- Magdagdag ng custom security policies (mga network rule, private endpoints)
+- Magdagdag ng custom na security policy (network rules, private endpoints)
 - I-integrate sa umiiral na IaC review processes
-- I-version control ang mga pagbabago sa imprastruktura nang hiwalay sa application code
+- I-version control ang mga pagbabago sa imprastruktura nang hiwalay mula sa application code
 
-### Production Lifecycle Hooks
+### Mga Hook ng Lifecycle para sa Produksyon
 
-Pinapayagan ng AZD hooks na mag-inject ng custom na lohika sa bawat yugto ng deployment lifecycle—kritikal para sa production AI workflows:
+Pinapayagan ka ng mga AZD hook na mag-inject ng custom na lohika sa bawat yugto ng deployment lifecycle—kritikal para sa production AI workflows:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1074,22 +1077,22 @@ services:
 ```
 
 ```bash
-# Ipatakbo nang manu-mano ang isang partikular na hook habang nagde-develop
+# Patakbuhin nang manu-mano ang isang partikular na hook habang nagde-develop
 azd hooks run predeploy
 ```
 
 **Inirerekomendang production hooks para sa AI workloads:**
 
-| Hook | Use Case |
+| Hook | Gamit |
 |------|----------|
 | `preprovision` | I-validate ang subscription quotas para sa kapasidad ng AI model |
 | `postprovision` | I-configure ang private endpoints, i-deploy ang model weights |
-| `predeploy` | Patakbuhin ang AI safety tests, i-validate ang mga prompt template |
-| `postdeploy` | Smoke test ng mga tugon ng agent, i-verify ang konektividad ng modelo |
+| `predeploy` | Patakbuhin ang AI safety tests, i-validate ang prompt templates |
+| `postdeploy` | Smoke test ng mga tugon ng agent, i-verify ang koneksyon sa modelo |
 
 ### Konfigurasyon ng CI/CD Pipeline
 
-Gamitin ang `azd pipeline config` upang i-konekta ang iyong proyekto sa GitHub Actions o Azure Pipelines na may secure na Azure authentication:
+Gamitin ang `azd pipeline config` para ikonekta ang iyong proyekto sa GitHub Actions o Azure Pipelines na may secure na Azure authentication:
 
 ```bash
 # I-configure ang CI/CD pipeline (interaktibo)
@@ -1100,59 +1103,59 @@ azd pipeline config --provider github
 ```
 
 Ang utos na ito:
-- Lumilikha ng service principal na may least-privilege access
-- Nagko-configure ng federated credentials (walang naka-store na secrets)
-- Gumagawa o nag-a-update ng pipeline definition file
+- Lumilikha ng service principal na may pinakamababang pribilehiyo
+- Nagko-configure ng federated credentials (walang naka-store na lihim)
+- Nagge-generate o nag-a-update ng iyong pipeline definition file
 - Nagse-set ng kinakailangang environment variables sa iyong CI/CD system
 
-**Production workflow gamit ang pipeline config:**
+**Produksyon na workflow gamit ang pipeline config:**
 
 ```bash
-# 1. Ihanda ang production na kapaligiran
+# 1. Ihanda ang production environment
 azd env new production
 azd env set AZURE_OPENAI_CAPACITY 100
 
 # 2. I-configure ang pipeline
 azd pipeline config --provider github
 
-# 3. Ang pipeline ay nagpapatakbo ng azd deploy sa bawat push sa main
+# 3. Pinapatakbo ng pipeline ang azd deploy sa bawat push sa main
 ```
 
 ### Pagdaragdag ng Mga Komponent gamit ang `azd add`
 
-Dahan-dahang magdagdag ng mga Azure service sa umiiral na proyekto:
+Paunti-unting magdagdag ng mga Azure service sa umiiral na proyekto:
 
 ```bash
 # Magdagdag ng bagong komponent ng serbisyo nang interaktibo
 azd add
 ```
 
-Partikular na kapaki-pakinabang ito para sa pagpapalawak ng production AI applications—halimbawa, pagdagdag ng vector search service, bagong agent endpoint, o monitoring component sa isang umiiral na deployment.
+Labis itong kapaki-pakinabang para sa pagpapalawak ng production AI applications—halimbawa, pagdaragdag ng vector search service, bagong agent endpoint, o monitoring component sa umiiral na deployment.
 
-## Karagdagang Mga Sanggunian
-- **Azure Well-Architected Framework**: [Patnubay para sa mga workload ng AI](https://learn.microsoft.com/azure/well-architected/ai/)
+## Karagdagang Mga Mapagkukunan
+- **Azure Well-Architected Framework**: [Patnubay sa workload ng AI](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Microsoft Foundry Documentation**: [Opisyal na dokumentasyon](https://learn.microsoft.com/azure/ai-studio/)
-- **Community Templates**: [Azure Samples](https://github.com/Azure-Samples)
-- **Discord Community**: [#Azure channel](https://discord.gg/microsoft-azure)
-- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 bukas na agent skills para sa Azure AI, Foundry, deployment, pag-optimize ng gastos, at diagnostics. I-install sa iyong editor:
+- **Mga Template ng Komunidad**: [Azure Samples](https://github.com/Azure-Samples)
+- **Komunidad ng Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
+- **Mga Kasanayan ng Ahente para sa Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 bukas na mga kasanayan ng ahente para sa Azure AI, Foundry, pag-deploy, pag-optimize ng gastos, at diagnostiko. I-install sa iyong editor:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**Nabigasyon ng Kabanata:**
+**Pag-navigate ng Kabanata:**
 - **📚 Tahanan ng Kurso**: [AZD For Beginners](../../README.md)
 - **📖 Kasalukuyang Kabanata**: Kabanata 8 - Mga Pattern para sa Produksyon at Enterprise
 - **⬅️ Nakaraang Kabanata**: [Kabanata 7: Pag-troubleshoot](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Kaugnay din**: [AI Workshop Lab](ai-workshop-lab.md)
+- **⬅️ Kaugnay Din**: [AI Workshop Lab](ai-workshop-lab.md)
 - **� Kumpletong Kurso**: [AZD For Beginners](../../README.md)
 
-**Tandaan**: Ang mga production na workload ng AI ay nangangailangan ng maingat na pagpaplano, pagsubaybay, at patuloy na pag-optimize. Magsimula sa mga pattern na ito at iangkop ang mga ito sa iyong partikular na mga kinakailangan.
+**Tandaan**: Ang mga workload ng AI sa produksyon ay nangangailangan ng maingat na pagpaplano, pagmamanman, at patuloy na pag-optimize. Magsimula sa mga pattern na ito at iangkop ang mga ito sa iyong mga partikular na pangangailangan.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Ang dokumentong ito ay isinalin gamit ang serbisyong pagsasalin ng AI na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi tumpak na impormasyon. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na awtoritatibong sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin na ginawa ng tao. Hindi kami mananagot para sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
+**Paunawa**:
+Ang dokumentong ito ay isinalin gamit ang serbisyong AI para sa pagsasalin na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kaming maging tumpak, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi eksaktong pagsasalin. Ang orihinal na dokumento sa sarili nitong wika ang dapat ituring bilang opisyal na pinagmulan. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin na ginawa ng tao. Hindi kami mananagot sa anumang hindi pagkakaintindihan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

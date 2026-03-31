@@ -1,43 +1,43 @@
-# Provisioning Azure Resources with AZD
+# Penyediaan Sumber Azure dengan AZD
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD Untuk Pemula](../../README.md)
-- **📖 Current Chapter**: Bab 4 - Infrastruktur sebagai Kod & Penghantaran
-- **⬅️ Previous**: [Deployment Guide](deployment-guide.md)
-- **➡️ Next Chapter**: [Bab 5: Penyelesaian AI Berbilang Ejen](../../examples/retail-scenario.md)
-- **🔧 Related**: [Bab 6: Pra-Penyebaran Pengesahan](../chapter-06-pre-deployment/capacity-planning.md)
+**Navigasi Bab:**
+- **📚 Laman Utama Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Semasa**: Bab 4 - Infrastruktur sebagai Kod & Penyebaran
+- **⬅️ Sebelumnya**: [Panduan Penyebaran](deployment-guide.md)
+- **➡️ Bab Seterusnya**: [Bab 5: Penyelesaian AI Pelbagai Ejen](../../examples/retail-scenario.md)
+- **🔧 Berkaitan**: [Bab 6: Pengesahan Pra-Penyebaran](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Pengenalan
 
-Panduan komprehensif ini merangkumi segala yang anda perlu tahu tentang penyediaan dan pengurusan sumber Azure menggunakan Azure Developer CLI. Pelajari cara melaksanakan corak Infrastruktur sebagai Kod (IaC) dari penciptaan sumber asas hingga seni bina infrastruktur peringkat perusahaan yang lanjutan menggunakan Bicep, templat ARM, Terraform, dan Pulumi.
+Panduan menyeluruh ini merangkumi segala yang anda perlu tahu tentang penyediaan dan pengurusan sumber Azure menggunakan Azure Developer CLI. Pelajari cara melaksanakan corak Infrastruktur sebagai Kod (IaC) dari penciptaan sumber asas hingga seni bina infrastruktur tahap perusahaan yang maju menggunakan Bicep, templat ARM, Terraform, dan Pulumi.
 
 ## Matlamat Pembelajaran
 
-Dengan menyelesaikan panduan ini, anda akan:
+Dengan menyiapkan panduan ini, anda akan:
 - Menguasai prinsip Infrastruktur sebagai Kod dan penyediaan sumber Azure
-- Memahami pelbagai pembekal IaC yang disokong oleh Azure Developer CLI
-- Mereka bentuk dan melaksanakan templat Bicep untuk seni bina aplikasi biasa
-- Mengkonfigurasi parameter sumber, pembolehubah, dan tetapan khusus persekitaran
-- Melaksanakan corak infrastruktur lanjutan termasuk rangkaian dan keselamatan
-- Mengurus kitaran hayat sumber, kemas kini, dan penyelesaian pergantungan
+- Memahami pelbagai penyedia IaC yang disokong oleh Azure Developer CLI
+- Merekabentuk dan melaksanakan templat Bicep untuk seni bina aplikasi biasa
+- Mengkonfigurasi parameter sumber, pemboleh ubah, dan tetapan khusus persekitaran
+- Melaksanakan corak infrastruktur maju termasuk rangkaian dan keselamatan
+- Mengurus kitaran hidup sumber, kemas kini, dan penyelesaian pergantungan
 
 ## Hasil Pembelajaran
 
 Setelah selesai, anda akan dapat:
-- Mereka bentuk dan menyediakan infrastruktur Azure menggunakan Bicep dan templat ARM
-- Mengkonfigurasi seni bina berbilang perkhidmatan yang kompleks dengan pergantungan sumber yang betul
-- Melaksanakan templat berparameter untuk pelbagai persekitaran dan konfigurasi
-- Menyelesaikan masalah penyediaan infrastruktur dan memperbaiki kegagalan penghantaran
-- Mengaplikasikan prinsip Azure Well-Architected Framework kepada reka bentuk infrastruktur
-- Mengurus kemas kini infrastruktur dan melaksanakan strategi pengversian infrastruktur
+- Merekabentuk dan menyediakan infrastruktur Azure menggunakan Bicep dan templat ARM
+- Mengkonfigurasi seni bina pelbagai perkhidmatan yang kompleks dengan pergantungan sumber yang betul
+- Melaksanakan templat parameter untuk beberapa persekitaran dan konfigurasi
+- Menyelesaikan masalah penyediaan infrastruktur dan memperbaiki kegagalan penyebaran
+- Menerapkan prinsip Kerangka Kerja Arkitek Azure yang Baik pada reka bentuk infrastruktur
+- Mengurus kemas kini infrastruktur dan melaksanakan strategi versi infrastruktur
 
 ## Gambaran Keseluruhan Penyediaan Infrastruktur
 
-Azure Developer CLI menyokong pelbagai pembekal Infrastruktur sebagai Kod (IaC):
-- **Bicep** (disyorkan) - bahasa khusus domain Azure
-- **ARM Templates** - templat Azure Resource Manager berasaskan JSON
-- **Terraform** - alat infrastruktur berbilang awan
-- **Pulumi** - infrastruktur sebagai kod moden dengan bahasa pengaturcaraan
+Azure Developer CLI menyokong pelbagai penyedia Infrastruktur sebagai Kod (IaC):
+- **Bicep** (disyorkan) - bahasa domain khusus Azure
+- **Templat ARM** - templat Pengurus Sumber Azure berasaskan JSON
+- **Terraform** - alat infrastruktur pelbagai awan
+- **Pulumi** - infrastruktur moden sebagai kod dengan bahasa pengaturcaraan
 
 ## Memahami Sumber Azure
 
@@ -50,11 +50,11 @@ Azure Account
 ```
 
 ### Perkhidmatan Azure Biasa untuk Aplikasi
-- **Compute**: App Service, Container Apps, Functions, Virtual Machines
-- **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Networking**: Virtual Network, Application Gateway, CDN
-- **Security**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
+- **Pengkomputeran**: App Service, Container Apps, Functions, Mesin Maya
+- **Storan**: Akaun Storan, Cosmos DB, Pangkalan Data SQL, PostgreSQL
+- **Rangkaian**: Rangkaian Maya, Gateway Aplikasi, CDN
+- **Keselamatan**: Key Vault, Application Insights, Log Analytics
+- **AI/ML**: Perkhidmatan Kognitif, OpenAI, Pembelajaran Mesin
 
 ## Templat Infrastruktur Bicep
 
@@ -128,7 +128,7 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Corak Bicep Lanjutan
+### Corak Bicep Maju
 
 #### Infrastruktur Modular
 ```bicep
@@ -342,7 +342,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Konfigurasi Identiti yang Diurus
+### Konfigurasi Identiti Terurus
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -368,7 +368,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Rangkaian dan Kesesakan
+## 🌍 Rangkaian dan Kesalinghubungan
 
 ### Konfigurasi Rangkaian Maya
 ```bicep
@@ -433,7 +433,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### Application Gateway dengan SSL
+### Gateway Aplikasi dengan SSL
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -527,7 +527,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Metrik Tersuai dan Amaran
+### Metrik dan Amaran Tersuai
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -649,9 +649,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Corak Penyediaan Lanjutan
+## 🚀 Corak Penyediaan Maju
 
-### Penyebaran Berbilang Wilayah
+### Penyebaran Pelbagai Wilayah
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -719,7 +719,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### Pengujian Infrastruktur
+### Ujian Infrastruktur
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -755,42 +755,41 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 Pratonton & Pengesahan Infrastruktur (BAHARU)
+## 🧪 Pratonton & Pengesahan Infrastruktur (BARU)
 
 ### Pratonton Perubahan Infrastruktur Sebelum Penyebaran
 
-Perintah `azd provision --preview` membolehkan anda **mensimulasikan penyediaan infrastruktur** sebelum benar-benar menghantar sumber. Ia serupa dengan `terraform plan` atau `bicep what-if`, memberi anda paparan **dry-run** tentang perubahan yang akan dibuat pada persekitaran Azure anda.
+Ciri `azd provision --preview` membolehkan anda **mensimulasikan penyediaan infrastruktur** sebelum benar-benar menyebarkan sumber. Ia serupa dengan `terraform plan` atau `bicep what-if`, memberikan anda **tinjauan larian kering** tentang perubahan yang akan dibuat ke persekitaran Azure anda.
 
 #### 🛠️ Apa Yang Dilakukan
 - **Menganalisis templat IaC anda** (Bicep atau Terraform)
 - **Menunjukkan pratonton perubahan sumber**: penambahan, penghapusan, kemas kini
-- **Tidak menerapkan perubahan** — ia hanya baca dan selamat dijalankan
+- **Tidak melaksanakan perubahan** — cuma baca dan selamat untuk dijalankan
 
 #### Kes Penggunaan
 ```bash
 # Pratonton perubahan infrastruktur sebelum penyebaran
 azd provision --preview
 
-# Pratonton dengan output terperinci
-azd provision --preview --output json
-
 # Pratonton untuk persekitaran tertentu
-azd provision --preview --environment production
+azd provision --preview -e production
 ```
 
 Perintah ini membantu anda:
-- **Mengesahkan perubahan infrastruktur** sebelum mengkomit sumber
-- **Mengesan salah konfigurasi awal** dalam kitaran pembangunan
-- **Berkolaborasi dengan selamat** dalam persekitaran pasukan
-- **Memastikan penyebaran keizinan minimum** tanpa kejutan
+- **Mengesahkan perubahan infrastruktur** sebelum mengesahkan sumber
+- **Mengesan kesilapan konfigurasi lebih awal** dalam kitaran pembangunan
+- **Bekerjasama dengan selamat** dalam persekitaran pasukan
+- **Memastikan penyebaran keistimewaan minimum** tanpa kejutan
 
-Ia amat berguna apabila:
-- Bekerja dengan persekitaran berbilang perkhidmatan yang kompleks
-- Melakukan perubahan pada infrastruktur pengeluaran
-- Mengesahkan pengubahsuaian templat sebelum kelulusan PR
+Ia sangat berguna apabila:
+- Bekerja dengan persekitaran pelbagai perkhidmatan yang kompleks
+- Membuat perubahan pada infrastruktur produksi
+- Mengesah pengubahsuaian templat sebelum kelulusan PR
 - Melatih ahli pasukan baru mengenai corak infrastruktur
 
 ### Contoh Output Pratonton
+Output pratonton tepat berbeza mengikut penyedia dan struktur projek, tetapi hasilnya sepatutnya jelas menunjukkan perubahan yang dicadangkan sebelum apa-apa dilaksanakan.
+
 ```bash
 $ azd provision --preview
 
@@ -809,24 +808,23 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
 ```
 
-## 🔄 Kemas Kini dan Migrasi Sumber
+## �🔄 Kemas Kini dan Migrasi Sumber
 
 ### Kemas Kini Sumber Selamat
 ```bash
-# Pratonton perubahan infrastruktur terlebih dahulu (DISYORKAN)
+# Pratonton perubahan infrastruktur dahulu (DISYORKAN)
 azd provision --preview
 
 # Terapkan perubahan selepas pengesahan pratonton
 azd provision --confirm-with-no-prompt
 
 # Untuk rollback, gunakan Git untuk membalikkan perubahan infrastruktur:
-git revert HEAD  # Balikkan commit infrastruktur terakhir
+git revert HEAD  # Balikkan komit infrastruktur terakhir
 azd provision    # Terapkan keadaan infrastruktur sebelumnya
 ```
 
@@ -918,27 +916,27 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Langkah Seterusnya
 
-- [Perancangan Pra-penyebaran](../chapter-06-pre-deployment/capacity-planning.md) - Sahkan ketersediaan sumber
+- [Perancangan Pra-penyebaran](../chapter-06-pre-deployment/capacity-planning.md) - Mengesahkan ketersediaan sumber
 - [Isu Biasa](../chapter-07-troubleshooting/common-issues.md) - Menyelesaikan masalah infrastruktur
-- [Panduan Penyahpepijat](../chapter-07-troubleshooting/debugging.md) - Nyahpepijat isu penyediaan
-- [Pemilihan SKU](../chapter-06-pre-deployment/sku-selection.md) - Pilih tahap perkhidmatan yang sesuai
+- [Panduan Debugging](../chapter-07-troubleshooting/debugging.md) - Menjejak isu penyediaan
+- [Pemilihan SKU](../chapter-06-pre-deployment/sku-selection.md) - Memilih tahap perkhidmatan yang sesuai
 
 ## Sumber Tambahan
 
 - [Dokumentasi Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Templat Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Templat Pengurus Sumber Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [Pusat Seni Bina Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Kerangka Kerja Azure Yang Baik](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Deployment Guide](deployment-guide.md)
-- **Next Lesson**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
+**Navigasi**
+- **Pelajaran Sebelumnya**: [Panduan Penyebaran](deployment-guide.md)
+- **Pelajaran Seterusnya**: [Perancangan Kapasiti](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Penafian**:
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi ralat atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber rujukan yang sah. Untuk maklumat yang kritikal, terjemahan oleh penterjemah manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsiran yang timbul daripada penggunaan terjemahan ini.
+**Penafian**:  
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sah. Untuk maklumat kritikal, terjemahan profesional oleh manusia adalah disyorkan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

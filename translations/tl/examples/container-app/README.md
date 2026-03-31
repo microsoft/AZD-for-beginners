@@ -1,57 +1,59 @@
 # Mga Halimbawa ng Pag-deploy ng Container App gamit ang AZD
 
-Ang direktoryong ito ay naglalaman ng mga komprehensibong halimbawa para sa pag-deploy ng mga containerized na aplikasyon sa Azure Container Apps gamit ang Azure Developer CLI (AZD). Ipinapakita ng mga halimbawang ito ang mga totoong pattern, pinakamahusay na kasanayan, at mga konfigurasyong handa para sa produksyon.
+Ang direktoryong ito ay naglalaman ng komprehensibong mga halimbawa para sa pag-deploy ng mga containerized na aplikasyon sa Azure Container Apps gamit ang Azure Developer CLI (AZD). Ipinapakita ng mga halimbawang ito ang mga pattern na ginagamit sa totoong buhay, pinakamahusay na kasanayan, at mga konfigurasyong handa para sa produksyon.
 
-## 📚 Table of Contents
+## 📚 Talaan ng Nilalaman
 
-- [Overview](#overview)
-- [Prerequisites](#prerequisites)
-- [Quick Start Examples](#quick-start-examples)
-- [Production Examples](#production-examples)
-- [Advanced Patterns](#advanced-patterns)
-- [Best Practices](#best-practices)
+- [Pangkalahatang-ideya](#overview)
+- [Mga Kinakailangan](#prerequisites)
+- [Mabilis na Mga Halimbawa](#quick-start-examples)
+- [Mga Halimbawa para sa Produksyon](#production-examples)
+- [Mga Advanced na Pattern](#advanced-patterns)
+- [Mga Pinakamahusay na Kasanayan](#mga-pinakamahusay-na-kasanayan)
 
 ## Overview
 
-Ang Azure Container Apps ay isang fully managed serverless container platform na nagbibigay-daan sa iyo upang patakbuhin ang mga microservice at containerized na aplikasyon nang hindi pinamamahalaan ang imprastraktura. Kapag pinagsama sa AZD, makakakuha ka ng:
+Ang Azure Container Apps ay isang fully managed na serverless container platform na nagbibigay-daan sa iyo na magpatakbo ng microservices at containerized na mga aplikasyon nang hindi pinamamahalaan ang imprastruktura. Kapag pinagsama sa AZD, makakakuha ka ng:
 
-- **Simplified Deployment**: Isang utos lang para mag-deploy ng mga container kasama ang imprastraktura
-- **Automatic Scaling**: Mag-scale hanggang zero at mag-scale out batay sa HTTP traffic o mga event
-- **Integrated Networking**: Built-in na service discovery at traffic splitting
-- **Managed Identity**: Secure na authentication sa mga Azure resource
-- **Cost Optimization**: Magbayad lamang para sa mga resource na ginagamit mo
+- **Pinadaling Pag-deploy**: Isang utos lang ang nagde-deploy ng mga container kasama ang imprastruktura
+- **Awtomatikong Pag-scale**: Mag-scale hanggang zero at mag-scale out base sa HTTP traffic o mga event
+- **Pinagsamang Networking**: Built-in na service discovery at traffic splitting
+- **Managed Identity**: Secure na authentication sa mga Azure na resource
+- **Pag-optimize ng Gastos**: Magbabayad lamang para sa mga resource na ginagamit mo
 
 ## Prerequisites
 
-Bago magsimula, tiyakin na mayroon ka ng:
+Bago magsimula, tiyaking mayroon ka ng:
 
 ```bash
-# Suriin kung naka-install ang AZD
+# Suriin ang pag-install ng AZD
 azd version
 
-# Suriin kung naka-install ang Azure CLI
+# Suriin ang Azure CLI
 az version
 
-# Suriin ang Docker (para sa pagbuo ng mga custom na imahe)
+# Suriin ang Docker (para sa pagbuo ng mga pasadyang imahe)
 docker --version
 
-# Mag-login sa Azure
+# Mag-authenticate para sa mga deployment ng AZD
 azd auth login
+
+# Opsyonal: mag-sign in sa Azure CLI kung plano mong patakbuhin ang mga az command nang direkta
 az login
 ```
 
-**Required Azure Resources:**
-- Active Azure subscription
-- Resource group creation permissions
-- Container Apps environment access
+**Mga Kinakailangang Azure na Resource:**
+- Aktibong Azure subscription
+- Mga permiso para gumawa ng resource group
+- Pag-access sa Container Apps environment
 
 ## Quick Start Examples
 
 ### 1. Simple Web API (Python Flask)
 
-I-deploy ang isang basic na REST API gamit ang Azure Container Apps.
+I-deploy ang isang pangunahing REST API sa Azure Container Apps.
 
-**Example: Python Flask API**
+**Halimbawa: Python Flask API**
 
 ```yaml
 # azure.yaml
@@ -65,29 +67,29 @@ services:
     host: containerapp
 ```
 
-**Deployment Steps:**
+**Mga Hakbang sa Pag-deploy:**
 
 ```bash
-# Simulan mula sa template
+# I-initialize mula sa template
 azd init --template todo-python-mongo
 
-# Maglaan ng imprastruktura at mag-deploy
+# Mag-provision ng imprastruktura at mag-deploy
 azd up
 
-# Subukan ang deployment
+# Subukan ang pag-deploy
 azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-**Key Features:**
+**Mga Pangunahing Tampok:**
 - Auto-scaling mula 0 hanggang 10 replicas
-- Health probes at liveness checks
-- Pag-inject ng environment variables
+- Mga probe ng kalusugan at liveness checks
+- Iniksyon ng mga environment variable
 - Integrasyon ng Application Insights
 
 ### 2. Node.js Express API
 
-I-deploy ang isang Node.js backend na may MongoDB integration.
+I-deploy ang Node.js backend na may integrasyon sa MongoDB.
 
 ```bash
 # I-initialize ang template ng Node.js API
@@ -104,7 +106,7 @@ azd up
 azd monitor --logs
 ```
 
-**Infrastructure Highlights:**
+**Mga Tampok ng Imprastruktura:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -152,7 +154,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 I-deploy ang isang full-stack na aplikasyon na may React frontend at API backend.
 
 ```bash
-# I-inisyalisa ang full-stack na template
+# I-initialize ang full-stack na template
 azd init --template todo-csharp-sql-swa-func
 
 # Suriin ang konfigurasyon
@@ -167,11 +169,11 @@ azd show --output json | jq -r '.services.web.endpoint' | xargs start
 
 ## Production Examples
 
-### Example 1: Microservices Architecture
+### Halimbawa 1: Arkitektura ng Microservices
 
-**Scenario**: E-commerce na aplikasyon na may maramihang microservices
+**Senaryo**: Aplikasyong e-commerce na may maraming microservices
 
-**Directory Structure:**
+**Estruktura ng Direktoryo:**
 ```
 microservices-demo/
 ├── azure.yaml
@@ -191,7 +193,7 @@ microservices-demo/
     └── payment-service/
 ```
 
-**azure.yaml Configuration:**
+**Konfigurasyon ng azure.yaml:**
 ```yaml
 name: microservices-ecommerce
 services:
@@ -211,15 +213,15 @@ services:
     host: containerapp
 ```
 
-**Deployment:**
+**Pag-deploy:**
 ```bash
-# I-initialize ang proyekto
+# I-inisyalisa ang proyekto
 azd init
 
 # Itakda ang kapaligiran ng produksyon
 azd env new production
 
-# I-configure ang mga setting ng produksyon
+# Isaayos ang mga setting ng produksyon
 azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
@@ -231,9 +233,9 @@ azd up
 azd monitor --overview
 ```
 
-### Example 2: AI-Powered Container App
+### Halimbawa 2: Container App na Pinapagana ng AI
 
-**Scenario**: AI chat application na may integrasyon ng Microsoft Foundry Models
+**Senaryo**: AI chat application na may integrasyon ng Microsoft Foundry Models
 
 **File: src/ai-chat/app.py**
 ```python
@@ -320,7 +322,7 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**Deployment Commands:**
+**Mga Utos sa Pag-deploy:**
 ```bash
 # Ihanda ang kapaligiran
 azd init --template ai-chat-app
@@ -339,11 +341,11 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Example 3: Background Worker with Queue Processing
+### Halimbawa 3: Background Worker with Queue Processing
 
-**Scenario**: Order processing system gamit ang message queue
+**Senaryo**: Order processing system na may message queue
 
-**Directory Structure:**
+**Estruktura ng Direktoryo:**
 ```
 queue-worker/
 ├── azure.yaml
@@ -378,10 +380,10 @@ def process_orders():
     while True:
         messages = queue_client.receive_messages(max_messages=10)
         for message in messages:
-            # Proseso ng order
+            # Iproseso ang order
             print(f"Processing order: {message.content}")
             
-            # Kumpletong mensahe
+            # Kumpletuhin ang mensahe
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -403,9 +405,9 @@ services:
     host: containerapp
 ```
 
-**Deployment:**
+**Pag-deploy:**
 ```bash
-# I-initialize
+# Simulan
 azd init
 
 # I-deploy gamit ang konfigurasyon ng pila
@@ -425,7 +427,7 @@ az containerapp update \
 ### Pattern 1: Blue-Green Deployment
 
 ```bash
-# Lumikha ng bagong rebisyon nang walang trapiko
+# Gumawa ng bagong rebisyon nang walang trapiko
 azd deploy api --revision-suffix blue --no-traffic
 
 # Subukan ang bagong rebisyon
@@ -458,18 +460,18 @@ az containerapp ingress traffic set \
 }
 ```
 
-**Deployment Script:**
+**Script ng Pag-deploy:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
 
-# I-deploy ang bagong rebisyon na may 10% ng trapiko
+# I-deploy ang bagong bersyon na may 10% ng trapiko
 azd deploy api --revision-mode multiple
 
-# Subaybayan ang mga sukatan
+# Subaybayan ang mga metric
 azd monitor --service api --duration 5m
 
-# Unti-unting dagdagan ang trapiko
+# Dahan-dahang dagdagan ang trapiko
 for i in {20..100..10}; do
   echo "Increasing traffic to $i%"
   az containerapp revision set-traffic \
@@ -481,7 +483,7 @@ for i in {20..100..10}; do
 done
 ```
 
-### Pattern 3: Multi-Region Deployment
+### Pattern 3: Pag-deploy sa Maramihang Rehiyon
 
 **File: azure.yaml**
 ```yaml
@@ -527,7 +529,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-**Deployment:**
+**Pag-deploy:**
 ```bash
 # I-deploy sa lahat ng rehiyon
 azd up
@@ -536,7 +538,7 @@ azd up
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### Pattern 4: Dapr Integration
+### Pattern 4: Integrasyon ng Dapr
 
 **File: infra/app/dapr-enabled.bicep**
 ```bicep
@@ -563,7 +565,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-**Application Code with Dapr:**
+**Code ng Aplikasyon na may Dapr:**
 ```python
 from flask import Flask
 from dapr.clients import DaprClient
@@ -590,12 +592,12 @@ def create_order():
     return {'status': 'created'}
 ```
 
-## Best Practices
+## Mga Pinakamahusay na Kasanayan
 
-### 1. Resource Organization
+### 1. Organisasyon ng Mga Resource
 
 ```bash
-# Gumamit ng pare-parehong pamantayan sa pagbibigay ng pangalan
+# Gumamit ng pare-parehong konbensiyon sa pagpapangalan
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
@@ -603,7 +605,7 @@ azd env set AZURE_LOCATION "eastus"
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. Security Best Practices
+### 2. Mga Pinakamahusay na Kasanayan sa Seguridad
 
 ```bicep
 // Always use managed identity
@@ -642,7 +644,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
 }
 ```
 
-### 3. Performance Optimization
+### 3. Pag-optimize ng Pagganap
 
 ```yaml
 # azure.yaml with performance settings
@@ -662,7 +664,7 @@ services:
             concurrent: 100
 ```
 
-### 4. Monitoring and Observability
+### 4. Pagmamanman at Observability
 
 ```bash
 # Paganahin ang Application Insights
@@ -673,7 +675,7 @@ azd monitor --logs
 # O gamitin ang Azure CLI para sa Container Apps:
 az containerapp logs show --name api --resource-group rg-myapp --follow
 
-# Subaybayan ang mga sukatan
+# Subaybayan ang mga metriko
 azd monitor --live
 
 # Lumikha ng mga alerto
@@ -685,19 +687,19 @@ az monitor metrics alert create \
   --description "Alert when CPU exceeds 80%"
 ```
 
-### 5. Cost Optimization
+### 5. Pag-optimize ng Gastos
 
 ```bash
-# I-scale pababa sa zero kapag hindi ginagamit
+# I-scale hanggang zero kapag hindi ginagamit
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# Gumamit ng mga spot instance para sa mga development environment
+# Gumamit ng spot instances para sa mga dev na kapaligiran
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# Magtakda ng mga alerto sa badyet
+# Mag-set up ng mga alerto sa badyet
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
@@ -705,9 +707,9 @@ az consumption budget create \
   --threshold 80
 ```
 
-### 6. CI/CD Integration
+### 6. Integrasyon ng CI/CD
 
-**GitHub Actions Example:**
+**Halimbawa ng GitHub Actions:**
 ```yaml
 name: Deploy to Azure Container Apps
 
@@ -737,7 +739,7 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Common Commands Reference
+## Karaniwang Sanggunian ng Mga Utos
 
 ```bash
 # I-initialize ang bagong proyekto ng container app
@@ -746,13 +748,13 @@ azd init --template <template-name>
 # I-deploy ang imprastruktura at aplikasyon
 azd up
 
-# I-deploy lamang ang code ng aplikasyon (laktawan ang imprastruktura)
+# I-deploy lamang ang kodigo ng aplikasyon (laktawan ang imprastruktura)
 azd deploy
 
 # I-provision lamang ang imprastruktura
 azd provision
 
-# Tingnan ang mga naka-deploy na resource
+# Tingnan ang mga na-deploy na resources
 azd show
 
 # I-stream ang mga log gamit ang azd monitor o Azure CLI
@@ -762,13 +764,13 @@ azd monitor --logs
 # I-monitor ang aplikasyon
 azd monitor --overview
 
-# Tanggalin ang mga resource
+# Linisin ang mga resources
 azd down --force --purge
 ```
 
-## Troubleshooting
+## Pag-troubleshoot
 
-### Issue: Container fails to start
+### Isyu: Nabibigo ang container na magsimula
 
 ```bash
 # Suriin ang mga log gamit ang Azure CLI
@@ -785,7 +787,7 @@ docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Issue: Can't access container app endpoint
+### Isyu: Hindi ma-access ang endpoint ng container app
 
 ```bash
 # Suriin ang konfigurasyon ng ingress
@@ -794,14 +796,14 @@ az containerapp show \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# Suriin kung pinagana ang internal ingress
+# Tingnan kung pinagana ang internal ingress
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
   --external true
 ```
 
-### Issue: Performance problems
+### Isyu: Mga problema sa pagganap
 
 ```bash
 # Suriin ang paggamit ng mga mapagkukunan
@@ -809,7 +811,7 @@ az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Dagdagan ang mga mapagkukunan
+# Palakihin ang mga mapagkukunan
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -817,31 +819,31 @@ az containerapp update \
   --memory 4Gi
 ```
 
-## Additional Resources and Examples
-- [Microservices Example](./microservices/README.md)
-- [Simpleng Flask API na Halimbawa](./simple-flask-api/README.md)
+## Karagdagang Mga Resource at Mga Halimbawa
+- [Halimbawa ng Microservices](./microservices/README.md)
+- [Halimbawa ng Simpleng Flask API](./simple-flask-api/README.md)
 - [Dokumentasyon ng Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
-- [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
+- [Galeria ng AZD Templates](https://azure.github.io/awesome-azd/)
 - [Mga Sample ng Container Apps](https://github.com/Azure-Samples/container-apps-samples)
 - [Mga Template ng Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-## Contributing
+## Pag-aambag
 
-Upang mag-ambag ng bagong mga halimbawa ng container app:
+Upang mag-ambag ng mga bagong halimbawa ng container app:
 
 1. Gumawa ng bagong subdirectory para sa iyong halimbawa
-2. Isama ang kumpletong `azure.yaml`, `infra/`, at `src/` files
+2. Isama ang kumpletong `azure.yaml`, `infra/`, at `src/` na mga file
 3. Magdagdag ng komprehensibong README na may mga tagubilin sa pag-deploy
 4. Subukan ang pag-deploy gamit ang `azd up`
 5. Mag-submit ng pull request
 
 ---
 
-**Need Help?** Join the [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) community for support and questions.
+**Kailangan ng Tulong?** Sumali sa [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) na komunidad para sa suporta at mga katanungan.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Paunawa**:
-Isinalin ang dokumentong ito gamit ang serbisyong pagsasalin ng AI [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi tumpak na impormasyon. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na awtoritatibong sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot para sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
+**Disclaimer**:
+Ang dokumentong ito ay naisalin gamit ang serbisyong AI na pagsasalin na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, pakitandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatumpak. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na pinagmumulan ng awtoridad. Para sa kritikal na impormasyon, inirerekomenda ang propesyonal na salin na ginawa ng tao. Hindi kami mananagot sa anumang mga hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

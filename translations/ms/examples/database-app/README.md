@@ -1,30 +1,30 @@
-# Menerapkan Pangkalan Data Microsoft SQL dan Aplikasi Web dengan AZD
+# Menyebarkan Pangkalan Data Microsoft SQL dan Aplikasi Web dengan AZD
 
 ⏱️ **Anggaran Masa**: 20-30 minit | 💰 **Anggaran Kos**: ~$15-25/bulan | ⭐ **Kerumitan**: Pertengahan
 
-**Contoh lengkap dan berfungsi ini** menunjukkan cara menggunakan [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) untuk menerapkan aplikasi web Python Flask dengan Pangkalan Data Microsoft SQL ke Azure. Semua kod disertakan dan diuji—tiada kebergantungan luaran diperlukan.
+**Contoh lengkap dan berfungsi** ini menunjukkan cara menggunakan [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) untuk menyebarkan aplikasi web Python Flask dengan Pangkalan Data Microsoft SQL ke Azure. Semua kod disertakan dan telah diuji—tiada kebergantungan luaran diperlukan.
 
-## Apa yang Akan Anda Pelajari
+## Apa Yang Akan Anda Pelajari
 
 Dengan menyelesaikan contoh ini, anda akan:
-- Menerapkan aplikasi berbilang lapisan (aplikasi web + pangkalan data) menggunakan infrastruktur sebagai kod
-- Mengkonfigurasi sambungan pangkalan data yang selamat tanpa menyimpan rahsia secara keras
+- Menyebarkan aplikasi berbilang lapisan (aplikasi web + pangkalan data) menggunakan infrastruktur sebagai kod
+- Mengkonfigurasi sambungan pangkalan data yang selamat tanpa menyulitkan rahsia dalam kod
 - Memantau kesihatan aplikasi dengan Application Insights
 - Mengurus sumber Azure dengan cekap menggunakan AZD CLI
-- Mengikuti amalan terbaik Azure untuk keselamatan, pengoptimuman kos, dan pemerhatian
+- Mengikuti amalan terbaik Azure untuk keselamatan, pengoptimuman kos, dan kebolehperhimpunan
 
 ## Gambaran Keseluruhan Senario
-- **Aplikasi Web**: Python Flask REST API dengan sambungan pangkalan data
+- **Aplikasi Web**: API REST Python Flask dengan sambungan pangkalan data
 - **Pangkalan Data**: Azure SQL Database dengan data contoh
-- **Infrastruktur**: Disediakan menggunakan Bicep (templat modular, boleh guna semula)
-- **Penerapan**: Terautomasi sepenuhnya dengan arahan `azd`
+- **Infrastruktur**: Disediakan menggunakan Bicep (templat modular dan boleh guna semula)
+- **Penyebaran**: Automatik sepenuhnya dengan arahan `azd`
 - **Pemantauan**: Application Insights untuk log dan telemetri
 
 ## Prasyarat
 
 ### Alat Diperlukan
 
-Sebelum bermula, sahkan anda mempunyai alat-alat ini dipasang:
+Sebelum bermula, pastikan anda mempunyai alat ini dipasang:
 
 1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (versi 2.50.0 atau lebih tinggi)
    ```sh
@@ -35,24 +35,24 @@ Sebelum bermula, sahkan anda mempunyai alat-alat ini dipasang:
 2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (versi 1.0.0 atau lebih tinggi)
    ```sh
    azd version
-   # Output yang dijangka: versi azd 1.0.0 atau lebih tinggi
+   # Output yang dijangkakan: versi azd 1.0.0 atau lebih tinggi
    ```
 
 3. **[Python 3.8+](https://www.python.org/downloads/)** (untuk pembangunan tempatan)
    ```sh
    python --version
-   # Output yang dijangkakan: Python 3.8 atau lebih tinggi
+   # Jangkaan output: Python 3.8 atau lebih tinggi
    ```
 
-4. **[Docker](https://www.docker.com/get-started)** (pilihan, untuk pembangunan berkontena tempatan)
+4. **[Docker](https://www.docker.com/get-started)** (pilihan, untuk pembangunan berbekas tempatan)
    ```sh
    docker --version
-   # Jangkaan output: Versi Docker 20.10 atau lebih tinggi
+   # Hasil dijangka: Versi Docker 20.10 atau lebih tinggi
    ```
 
 ### Keperluan Azure
 
-- Langganan **Azure aktif** ([buat akaun percuma](https://azure.microsoft.com/free/))
+- **Langganan Azure** yang aktif ([buat akaun percuma](https://azure.microsoft.com/free/))
 - Kebenaran untuk mencipta sumber dalam langganan anda
 - Peranan **Pemilik** atau **Penyumbang** pada langganan atau kumpulan sumber
 
@@ -61,33 +61,33 @@ Sebelum bermula, sahkan anda mempunyai alat-alat ini dipasang:
 Ini adalah contoh **peringkat pertengahan**. Anda harus biasa dengan:
 - Operasi asas baris arahan
 - Konsep awan asas (sumber, kumpulan sumber)
-- Pemahaman asas tentang aplikasi web dan pangkalan data
+- Pemahaman asas aplikasi web dan pangkalan data
 
-**Baru dalam AZD?** Mula dengan panduan [Memulakan](../../docs/chapter-01-foundation/azd-basics.md) terlebih dahulu.
+**Baru dengan AZD?** Mulakan dengan panduan [Memulakan](../../docs/chapter-01-foundation/azd-basics.md).
 
 ## Seni Bina
 
-Contoh ini menerapkan seni bina dua lapisan dengan aplikasi web dan pangkalan data SQL:
+Contoh ini menyebarkan seni bina dua lapisan dengan aplikasi web dan pangkalan data SQL:
 
 ```mermaid
 graph TD
-    Browser[Pelayar Pengguna] <--> WebApp[Aplikasi Web Azure<br/>API Flask<br/>/health<br/>/products]
-    WebApp -- Sambungan Selamat<br/>Terenkripsi --> SQL[Pangkalan Data Azure SQL<br/>Jadual Produk<br/>Data sampel]
+    Browser[Pelayar Pengguna] <--> WebApp[Azure Web App<br/>Flask API<br/>/kesihatan<br/>/produk]
+    WebApp -- Sambungan Selamat<br/>Tersulit --> SQL[Azure SQL Database<br/>Jadual Produk<br/>Data contoh]
 ```
-**Penerapan Sumber:**
-- **Kumpulan Sumber**: Penampung untuk semua sumber
-- **Pelan Perkhidmatan Aplikasi**: Hosting berasaskan Linux (peringkat B1 untuk kecekapan kos)
+**Penyebaran Sumber:**
+- **Kumpulan Sumber**: Tempat semua sumber disimpan
+- **Pelan Perkhidmatan Aplikasi**: Hos berasaskan Linux (tier B1 untuk kos efisien)
 - **Aplikasi Web**: Runtime Python 3.11 dengan aplikasi Flask
 - **Pelayan SQL**: Pelayan pangkalan data terurus dengan TLS 1.2 minimum
-- **Pangkalan Data SQL**: Peringkat asas (2GB, sesuai untuk pembangunan/ujian)
-- **Application Insights**: Pemantauan dan log
-- **Workspace Log Analytics**: Penyimpanan log berpusat
+- **Pangkalan Data SQL**: Tier Basic (2GB, sesuai untuk pembangunan/ujian)
+- **Application Insights**: Pemantauan dan pelog
+- **Ruang Kerja Log Analytics**: Penyimpanan log berpusat
 
-**Analogi**: Fikirkan ini seperti sebuah restoran (aplikasi web) dengan peti sejuk berjalan (pangkalan data). Pelanggan memesan dari menu (titik akhir API), dan dapur (aplikasi Flask) mengambil bahan (data) dari peti sejuk. Pengurus restoran (Application Insights) memantau semua yang berlaku.
+**Analogi**: Anggap ia seperti restoran (aplikasi web) dengan peti sejuk berjalan (pangkalan data). Pelanggan memesan dari menu (titik akhir API), dan dapur (aplikasi Flask) mendapatkan bahan (data) dari peti sejuk. Pengurus restoran (Application Insights) memantau semua yang berlaku.
 
 ## Struktur Folder
 
-Semua fail disertakan dalam contoh ini—tiada kebergantungan luaran diperlukan:
+Semua fail dimasukkan dalam contoh ini—tiada kebergantungan luaran diperlukan:
 
 ```
 examples/database-app/
@@ -115,37 +115,37 @@ examples/database-app/
 ```
 
 **Fungsi Setiap Fail:**
-- **azure.yaml**: Memberitahu AZD apa yang akan diterapkan dan di mana
+- **azure.yaml**: Beritahu AZD apa yang hendak disebarkan dan ke mana
 - **infra/main.bicep**: Mengatur semua sumber Azure
-- **infra/resources/*.bicep**: Definisi sumber individu (modular untuk guna semula)
+- **infra/resources/*.bicep**: Definisi sumber individu (modular untuk kegunaan semula)
 - **src/web/app.py**: Aplikasi Flask dengan logik pangkalan data
 - **requirements.txt**: Kebergantungan pakej Python
-- **Dockerfile**: Arahan pengkontena bagi penerapan
+- **Dockerfile**: Arahan pengbekasan untuk penyebaran
 
-## Bermula Pantas (Langkah demi Langkah)
+## Mula Pantas (Langkah demi Langkah)
 
-### Langkah 1: Klon dan Navigasi
+### Langkah 1: Clone dan Navigasi
 
 ```sh
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/database-app
 ```
 
-**✓ Semak Kejayaan**: Sahkan anda melihat `azure.yaml` dan folder `infra/`:
+**✓ Semakan Kejayaan**: Pastikan anda melihat `azure.yaml` dan folder `infra/`:
 ```sh
 ls
 # Dijangka: README.md, azure.yaml, infra/, src/
 ```
 
-### Langkah 2: Pengesahan dengan Azure
+### Langkah 2: Log Masuk ke Azure
 
 ```sh
 azd auth login
 ```
 
-Ini membuka pelayar anda untuk pengesahan Azure. Log masuk dengan kelayakan Azure anda.
+Ini membuka pelayar anda untuk pengesahan Azure. Log masuk menggunakan kelayakan Azure anda.
 
-**✓ Semak Kejayaan**: Anda harus melihat:
+**✓ Semakan Kejayaan**: Anda sepatutnya melihat:
 ```
 Logged in to Azure.
 ```
@@ -156,14 +156,14 @@ Logged in to Azure.
 azd init
 ```
 
-**Apa yang berlaku**: AZD mencipta konfigurasi tempatan untuk penerapan anda.
+**Apa yang berlaku**: AZD mencipta konfigurasi tempatan untuk penyebaran anda.
 
-**Arahan yang anda akan lihat**:
-- **Nama persekitaran**: Masukkan nama pendek (contoh: `dev`, `myapp`)
+**Arahan yang akan dijawab**:
+- **Nama persekitaran**: Masukkan nama singkat (contoh, `dev`, `myapp`)
 - **Langganan Azure**: Pilih langganan anda dari senarai
-- **Lokasi Azure**: Pilih rantau (contoh: `eastus`, `westeurope`)
+- **Lokasi Azure**: Pilih rantau (contoh, `eastus`, `westeurope`)
 
-**✓ Semak Kejayaan**: Anda harus melihat:
+**✓ Semakan Kejayaan**: Anda sepatutnya melihat:
 ```
 SUCCESS: New project initialized!
 ```
@@ -174,19 +174,19 @@ SUCCESS: New project initialized!
 azd provision
 ```
 
-**Apa yang berlaku**: AZD menerapkan semua infrastruktur (ambil masa 5-8 minit):
-1. Mencipta kumpulan sumber
-2. Mencipta Pelayan SQL dan Pangkalan Data
-3. Mencipta Pelan Perkhidmatan Aplikasi
-4. Mencipta Aplikasi Web
-5. Mencipta Application Insights
+**Apa yang berlaku**: AZD menyebarkan semua infrastruktur (ambil masa 5-8 minit):
+1. Membuat kumpulan sumber
+2. Membuat Pelayan SQL dan Pangkalan Data
+3. Membuat Pelan Perkhidmatan Aplikasi
+4. Membuat Aplikasi Web
+5. Membuat Application Insights
 6. Mengkonfigurasi rangkaian dan keselamatan
 
 **Anda akan diminta untuk**:
-- **Nama pengguna admin SQL**: Masukkan nama pengguna (contoh: `sqladmin`)
-- **Kata laluan admin SQL**: Masukkan kata laluan yang kuat (simpan ini!)
+- **Nama pengguna pentadbir SQL**: Masukkan nama pengguna (contoh, `sqladmin`)
+- **Kata laluan pentadbir SQL**: Masukkan kata laluan yang kuat (simpan ini!)
 
-**✓ Semak Kejayaan**: Anda harus melihat:
+**✓ Semakan Kejayaan**: Anda sepatutnya melihat:
 ```
 SUCCESS: Your application was provisioned in Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
@@ -195,20 +195,20 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 
 **⏱️ Masa**: 5-8 minit
 
-### Langkah 5: Terapkan Aplikasi
+### Langkah 5: Sebarkan Aplikasi
 
 ```sh
 azd deploy
 ```
 
-**Apa yang berlaku**: AZD membina dan menerapkan aplikasi Flask anda:
-1. Membungkus aplikasi Python
+**Apa yang berlaku**: AZD membina dan menyebarkan aplikasi Flask anda:
+1. Mengepak aplikasi Python
 2. Membina kontena Docker
 3. Mendorong ke Azure Web App
 4. Memulakan pangkalan data dengan data contoh
 5. Memulakan aplikasi
 
-**✓ Semak Kejayaan**: Anda harus melihat:
+**✓ Semakan Kejayaan**: Anda sepatutnya melihat:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
@@ -223,9 +223,9 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 azd browse
 ```
 
-Ini membuka aplikasi web yang anda terapkan di pelayar pada `https://app-<unique-id>.azurewebsites.net`
+Ini membuka aplikasi web yang disebarkan dalam pelayar di `https://app-<unique-id>.azurewebsites.net`
 
-**✓ Semak Kejayaan**: Anda harus melihat output JSON:
+**✓ Semakan Kejayaan**: Anda sepatutnya melihat output JSON:
 ```json
 {
   "message": "Welcome to the Database App API",
@@ -240,12 +240,12 @@ Ini membuka aplikasi web yang anda terapkan di pelayar pada `https://app-<unique
 
 ### Langkah 7: Uji Titik Akhir API
 
-**Pemeriksaan Kesihatan** (sahkan sambungan pangkalan data):
+**Semakan Kesihatan** (sahkan sambungan pangkalan data):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/health
 ```
 
-**Respon Dijangkakan**:
+**Balasan Dijangka**:
 ```json
 {
   "status": "healthy",
@@ -253,12 +253,12 @@ curl https://app-<your-id>.azurewebsites.net/health
 }
 ```
 
-**Senaraikan Produk** (data contoh):
+**Senarai Produk** (data contoh):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/products
 ```
 
-**Respon Dijangkakan**:
+**Balasan Dijangka**:
 ```json
 [
   {
@@ -277,41 +277,41 @@ curl https://app-<your-id>.azurewebsites.net/products
 curl https://app-<your-id>.azurewebsites.net/products/1
 ```
 
-**✓ Semak Kejayaan**: Semua titik akhir mengembalikan data JSON tanpa ralat.
+**✓ Semakan Kejayaan**: Semua titik akhir mengembalikan data JSON tanpa ralat.
 
 ---
 
-**🎉 Tahniah!** Anda telah berjaya menerapkan aplikasi web dengan pangkalan data ke Azure menggunakan AZD.
+**🎉 Tahniah!** Anda telah berjaya menyebarkan aplikasi web dengan pangkalan data ke Azure menggunakan AZD.
 
-## Penerangan Konfigurasi
+## Penyelaman Konfigurasi
 
-### Pemboleh Ubah Persekitaran
+### Pembolehubah Persekitaran
 
-Rahsia diuruskan dengan selamat melalui konfigurasi Azure App Service—**tidak pernah disimpan keras dalam kod sumber**.
+Rahsia dikendalikan dengan selamat melalui konfigurasi Azure App Service—**jangan sesekali menyulitkannya dalam kod sumber**.
 
 **Dikonfigurasi Secara Automatik oleh AZD**:
-- `SQL_CONNECTION_STRING`: Sambungan pangkalan data dengan kelayakan disulitkan
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Titik telemetri pemantauan
-- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Menghidupkan pemasangan kebergantungan automatik
+- `SQL_CONNECTION_STRING`: Sambungan pangkalan data dengan kelayakan disulit
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Titik akhir telemetri pemantauan
+- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Mengaktifkan pemasangan kebergantungan automatik
 
-**Di Mana Rahsia Disimpan**:
-1. Semasa `azd provision`, anda menyediakan kelayakan SQL melalui arahan selamat
-2. AZD menyimpannya dalam fail `.azure/<env-name>/.env` tempatan anda (diabaikan Git)
-3. AZD menyuntiknya ke dalam konfigurasi Azure App Service (disulitkan ketika disimpan)
-4. Aplikasi membacanya melalui `os.getenv()` semasa runtime
+**Lokasi Penyimpanan Rahsia**:
+1. Semasa `azd provision`, anda menyediakan kelayakan SQL melalui arahan yang selamat
+2. AZD menyimpannya dalam fail `.azure/<env-name>/.env` tempatan anda (diabaikan oleh git)
+3. AZD menyuntiknya ke konfigurasi Azure App Service (disulitkan ketika disimpan)
+4. Aplikasi membaca melalui `os.getenv()` semasa waktu jalan
 
 ### Pembangunan Tempatan
 
-Untuk ujian tempatan, buat fail `.env` daripada sampel:
+Untuk ujian tempatan, cipta fail `.env` dari contoh:
 
 ```sh
 cp .env.sample .env
 # Edit .env dengan sambungan pangkalan data tempatan anda
 ```
 
-**Aliran Kerja Pembangunan Tempatan**:
+**Alir Kerja Pembangunan Tempatan**:
 ```sh
-# Pasang pergantungan
+# Pasang kebergantungan
 cd src/web
 pip install -r requirements.txt
 
@@ -325,20 +325,20 @@ python app.py
 **Uji secara tempatan**:
 ```sh
 curl http://localhost:8000/health
-# Dijangka: {"status": "sihat", "database": "bersambung"}
+# Dijangka: {"status": "sehat", "database": "bersambung"}
 ```
 
 ### Infrastruktur sebagai Kod
 
-Semua sumber Azure didefinisikan dalam **templat Bicep** (`infra/` folder):
+Semua sumber Azure ditakrifkan dalam **templat Bicep** (`infra/` folder):
 
-- **Reka Bentuk Modular**: Setiap jenis sumber ada fail sendiri untuk guna semula
-- **Berparameter**: Sesuaikan SKU, lokasi, konvensi penamaan
-- **Amalan Terbaik**: Mengikuti piawaian penamaan dan keselamatan Azure
-- **Kawalan Versi**: Perubahan infrastruktur ditjejak dalam Git
+- **Reka Bentuk Modular**: Setiap jenis sumber mempunyai fail sendiri untuk kegunaan semula
+- **Diparameterkan**: Sesuaikan SKU, rantau, konvensyen penamaan
+- **Amalan Terbaik**: Mengikuti piawaian penamaan dan sekuriti Azure
+- **Kawalan Versi**: Perubahan infrastruktur direkod dalam Git
 
-**Contoh Penyesuaian**:
-Untuk menukar peringkat pangkalan data, edit `infra/resources/sql-database.bicep`:
+**Contoh Pengubahsuaian**:
+Untuk menukar tier pangkalan data, sunting `infra/resources/sql-database.bicep`:
 ```bicep
 sku: {
   name: 'Standard'  // Changed from 'Basic'
@@ -352,86 +352,86 @@ sku: {
 Contoh ini mengikuti amalan terbaik keselamatan Azure:
 
 ### 1. **Tiada Rahsia dalam Kod Sumber**
-- ✅ Kelayakan disimpan dalam konfigurasi Azure App Service (disulitkan)
+- ✅ Kelayakan disimpan dalam konfigurasi Azure App Service (disulit)
 - ✅ Fail `.env` dikecualikan dari Git melalui `.gitignore`
 - ✅ Rahsia dihantar melalui parameter selamat semasa penyediaan
 
-### 2. **Sambungan Disulitkan**
+### 2. **Sambungan Disulit**
 - ✅ TLS 1.2 minimum untuk Pelayan SQL
-- ✅ HTTPS sahaja dipaksa untuk Aplikasi Web
-- ✅ Sambungan pangkalan data menggunakan saluran disulitkan
+- ✅ HTTPS sahaja diwajibkan untuk Aplikasi Web
+- ✅ Sambungan pangkalan data menggunakan saluran disulit
 
 ### 3. **Keselamatan Rangkaian**
-- ✅ Firewall pelayan SQL dikonfigurasi untuk membenarkan perkhidmatan Azure sahaja
-- ✅ Akses rangkaian awam dihadkan (boleh diketatkan lagi dengan Private Endpoints)
-- ✅ FTPS dimatikan pada Aplikasi Web
+- ✅ Firewall Pelayan SQL dikonfigurasi membenarkan servis Azure sahaja
+- ✅ Akses rangkaian awam terhad (boleh dikekang dengan Private Endpoints)
+- ✅ FTPS dimatikan di Aplikasi Web
 
 ### 4. **Pengesahan & Kebenaran**
 - ⚠️ **Semasa**: Pengesahan SQL (nama pengguna/kata laluan)
-- ✅ **Cadangan Produksi**: Gunakan Identiti Terurus Azure untuk pengesahan tanpa kata laluan
+- ✅ **Cadangan Produksi**: Gunakan Azure Managed Identity untuk pengesahan tanpa kata laluan
 
-**Untuk Meningkatkan ke Identiti Terurus** (untuk produksi):
-1. Aktifkan identiti terurus pada Aplikasi Web
-2. Beri kebenaran identiti ke SQL
-3. Kemas kini rentetan sambungan untuk guna identiti terurus
-4. Buang pengesahan berasaskan kata laluan
+**Untuk Naik Taraf ke Managed Identity** (untuk produksi):
+1. Aktifkan managed identity pada Aplikasi Web
+2. Beri kebenaran SQL kepada identity
+3. Kemas kini rentetan sambungan untuk guna managed identity
+4. Keluarkan pengesahan berasaskan kata laluan
 
 ### 5. **Audit & Pematuhan**
-- ✅ Application Insights merekodkan semua permintaan dan ralat
+- ✅ Application Insights mencatat semua permintaan dan ralat
 - ✅ Audit Pangkalan Data SQL diaktifkan (boleh dikonfigurasi untuk pematuhan)
-- ✅ Semua sumber ditag untuk tadbir urus
+- ✅ Semua sumber diberi tag untuk tadbir urus
 
 **Senarai Semak Keselamatan Sebelum Produksi**:
 - [ ] Aktifkan Azure Defender untuk SQL
-- [ ] Konfigurasi Private Endpoints untuk Pangkalan Data SQL
+- [ ] Konfigurasikan Private Endpoints untuk Pangkalan Data SQL
 - [ ] Aktifkan Web Application Firewall (WAF)
-- [ ] Laksanakan Azure Key Vault untuk pertukaran rahsia
-- [ ] Konfigurasi pengesahan Azure AD
-- [ ] Aktifkan log diagnostik untuk semua sumber
+- [ ] Laksanakan Azure Key Vault untuk putaran rahsia
+- [ ] Konfigurasikan pengesahan Azure AD
+- [ ] Aktifkan pencatatan diagnostik untuk semua sumber
 
 ## Pengoptimuman Kos
 
-**Anggaran Kos Bulanan** (setakat November 2025):
+**Anggaran Kos Bulanan** (sehingga November 2025):
 
-| Sumber | SKU/Peringkat | Anggaran Kos |
+| Sumber | SKU/Tier | Anggaran Kos |
 |----------|----------|----------------|
-| Pelan Perkhidmatan Aplikasi | B1 (Asas) | ~$13/bulan |
-| Pangkalan Data SQL | Asas (2GB) | ~$5/bulan |
+| Pelan Perkhidmatan Aplikasi | B1 (Basic) | ~$13/bulan |
+| Pangkalan Data SQL | Basic (2GB) | ~$5/bulan |
 | Application Insights | Bayar ikut guna | ~$2/bulan (trafik rendah) |
 | **Jumlah** | | **~$20/bulan** |
 
 **💡 Petua Penjimatan Kos**:
 
-1. **Gunakan Peringkat Percuma untuk Pembelajaran**:
-   - App Service: peringkat F1 (percuma, jam terhad)
-   - Pangkalan Data SQL: Gunakan serverless Azure SQL Database
+1. **Gunakan Tier Percuma untuk Pembelajaran**:
+   - Perkhidmatan Aplikasi: tier F1 (percuma, jam terhad)
+   - Pangkalan Data SQL: Gunakan Azure SQL Database serverless
    - Application Insights: 5GB/bulan pengambilan percuma
 
 2. **Hentikan Sumber Apabila Tidak Digunakan**:
    ```sh
-   # Hentikan aplikasi web (pangkalan data masih mengenakan bayaran)
+   # Hentikan aplikasi web (pangkalan data masih dikenakan caj)
    az webapp stop --name <app-name> --resource-group <rg-name>
    
-   # Mulakan semula apabila diperlukan
+   # Mulakan semula apabila perlu
    az webapp start --name <app-name> --resource-group <rg-name>
    ```
 
-3. **Padamkan Semua Selepas Ujian**:
+3. **Padam Semua Selepas Ujian**:
    ```sh
    azd down
    ```
-   Ini membuang SEMUA sumber dan memberhentikan caj.
+   Ini membuang SEMUA sumber dan menghentikan caj.
 
 4. **SKU Pembangunan vs Produksi**:
-   - **Pembangunan**: peringkat asas (digunakan dalam contoh ini)
-   - **Produksi**: peringkat Standard/Premium dengan redundansi
+   - **Pembangunan**: tier Basic (digunakan dalam contoh ini)
+   - **Produksi**: tier Standard/Premium dengan redundansi
 
 **Pemantauan Kos**:
 - Lihat kos di [Pengurusan Kos Azure](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
-- Tetapkan amaran kos untuk mengelakkan kejutan
-- Tag semua sumber dengan `azd-env-name` untuk penjejakan
+- Tetapkan amaran kos untuk elakkan kejutan
+- Tag semua sumber dengan `azd-env-name` untuk tujuan penjejakan
 
-**Alternatif Peringkat Percuma**:
+**Alternatif Tier Percuma**:
 Untuk tujuan pembelajaran, anda boleh ubah `infra/resources/app-service-plan.bicep`:
 ```bicep
 sku: {
@@ -439,25 +439,25 @@ sku: {
   tier: 'Free'
 }
 ```
-**Nota**: Peringkat percuma mempunyai had (60 minit/CPU sehari, tiada selalu aktif).
+**Nota**: Tier percuma mempunyai had (CPU 60 min/hari, tiada sentiasa aktif).
 
-## Pemantauan & Pemerhatian
+## Pemantauan & Kebolehperhimpunan
 
 ### Integrasi Application Insights
 
-Contoh ini termasuk **Application Insights** untuk pemantauan menyeluruh:
+Contoh ini merangkumi **Application Insights** untuk pemantauan menyeluruh:
 
-**Apa yang Dipantau**:
-- ✅ Permintaan HTTP (kelajuan, kod status, titik akhir)
-- ✅ Ralat aplikasi dan pengecualian
-- ✅ Log tersuai dari aplikasi Flask
+**Apa Yang Dipantau**:
+- ✅ Permintaan HTTP (kelewatan, kod status, titik akhir)
+- ✅ Ralat dan pengecualian aplikasi
+- ✅ Pelog kustom dari aplikasi Flask
 - ✅ Kesihatan sambungan pangkalan data
 - ✅ Metik prestasi (CPU, memori)
 
 **Akses Application Insights**:
-1. Buka [Azure Portal](https://portal.azure.com)
+1. Buka [Portal Azure](https://portal.azure.com)
 2. Navigasi ke kumpulan sumber anda (`rg-<env-name>`)
-3. Klik pada sumber Application Insights (`appi-<unique-id>`)
+3. Klik sumber Application Insights (`appi-<unique-id>`)
 
 **Pertanyaan Berguna** (Application Insights → Log):
 
@@ -477,7 +477,7 @@ exceptions
 | project timestamp, type, outerMessage, operation_Name
 ```
 
-**Semak Titik Akhir Kesihatan**:
+**Semak Titik Kesihatan**:
 ```kusto
 requests
 | where name contains "health"
@@ -486,29 +486,29 @@ requests
 
 ### Audit Pangkalan Data SQL
 
-**Audit Pangkalan Data SQL diaktifkan** untuk mengesan:
+**Audit Pangkalan Data SQL diaktifkan** untuk merakam:
 - Corak akses pangkalan data
-- Percubaan login gagal
+- Percubaan log masuk gagal
 - Perubahan skema
 - Akses data (untuk pematuhan)
 
 **Akses Log Audit**:
-1. Azure Portal → Pangkalan Data SQL → Audit
-2. Lihat log dalam workspace Log Analytics
+1. Portal Azure → Pangkalan Data SQL → Audit
+2. Lihat log dalam ruang kerja Log Analytics
 
 ### Pemantauan Masa Nyata
 
 **Lihat Metik Langsung**:
-1. Application Insights → Live Metrics
+1. Application Insights → Metik Langsung
 2. Lihat permintaan, kegagalan, dan prestasi masa nyata
 
 **Tetapkan Amaran**:
-Buat amaran untuk kejadian kritikal:
+Buat amaran untuk acara kritikal:
 - Ralat HTTP 500 > 5 dalam 5 minit
 - Kegagalan sambungan pangkalan data
-- Masa respons tinggi (>2 saat)
+- Masa tindak balas tinggi (>2 saat)
 
-**Contoh Penciptaan Amaran**:
+**Contoh Cipta Amaran**:
 ```sh
 az monitor metrics alert create \
   --name "High-Response-Time" \
@@ -519,43 +519,43 @@ az monitor metrics alert create \
 ```
 
 ## Penyelesaian Masalah
-### Isu dan Penyelesaian Lazim
+### Isu dan Penyelesaian Biasa
 
 #### 1. `azd provision` gagal dengan "Lokasi tidak tersedia"
 
-**Gejala**:  
+**Simptom**:  
 ```
 Error: The subscription is not registered for the resource type 'components' in the location 'centralus'.
 ```
   
 **Penyelesaian**:  
-Pilih wilayah Azure yang berbeza atau daftar penyedia sumber:  
+Pilih wilayah Azure yang lain atau daftar penyedia sumber:  
 ```sh
 az provider register --namespace Microsoft.Insights
 ```
   
-#### 2. Sambungan SQL Gagal Semasa Penyebaran
+#### 2. Sambungan SQL Gagal Semasa Penghantaran
 
-**Gejala**:  
+**Simptom**:  
 ```
 pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]TCP Provider...')
 ```
   
 **Penyelesaian**:  
-- Sahkan firewall SQL Server membenarkan perkhidmatan Azure (diatur secara automatik)  
+- Sahkan firewall SQL Server membenarkan perkhidmatan Azure (dikonfigurasi secara automatik)  
 - Semak kata laluan admin SQL dimasukkan dengan betul semasa `azd provision`  
-- Pastikan SQL Server sudah sepenuhnya disediakan (boleh mengambil masa 2-3 minit)  
+- Pastikan SQL Server telah siap sepenuhnya (boleh mengambil masa 2-3 minit)
 
 **Sahkan Sambungan**:  
 ```sh
-# Dari Portal Azure, pergi ke SQL Database → Penyunting pertanyaan
+# Dari Portal Azure, pergi ke Pangkalan Data SQL → Penyunting pertanyaan
 # Cuba untuk menyambung dengan kelayakan anda
 ```
   
-#### 3. Web App Memaparkan "Ralat Aplikasi"
+#### 3. Aplikasi Web Memaparkan "Ralat Aplikasi"
 
-**Gejala**:  
-Pelayar menunjukkan halaman ralat yang umum.
+**Simptom**:  
+Pelayar memaparkan halaman ralat umum.
 
 **Penyelesaian**:  
 Semak log aplikasi:  
@@ -564,33 +564,33 @@ Semak log aplikasi:
 az webapp log tail --name <app-name> --resource-group <rg-name>
 ```
   
-**Punca umum**:  
-- Pembolehubah persekitaran hilang (semak App Service → Konfigurasi)  
-- Pemasangan pakej Python gagal (semak log penyebaran)  
-- Ralat inisialisasi pangkalan data (semak kesambungan SQL)  
+**Punca biasa**:  
+- Pembolehubah persekitaran hilang (semak App Service → Configuration)  
+- Pemasangan pakej Python gagal (semak log penghantaran)  
+- Ralat inisialisasi pangkalan data (semak sambungan SQL)
 
-#### 4. `azd deploy` Gagal dengan "Ralat Kompilasi"
+#### 4. `azd deploy` Gagal dengan "Ralat Pembinaan"
 
-**Gejala**:  
+**Simptom**:  
 ```
 Error: Failed to build project
 ```
   
 **Penyelesaian**:  
 - Pastikan `requirements.txt` tiada ralat sintaks  
-- Semak Python 3.11 ditetapkan dalam `infra/resources/web-app.bicep`  
-- Sahkan Dockerfile mempunyai imej asas yang betul  
+- Semak bahawa Python 3.11 disebutkan dalam `infra/resources/web-app.bicep`  
+- Sahkan Dockerfile menggunakan imej asas yang betul
 
-**Debug secara tempatan**:  
+**Uji debug secara tempatan**:  
 ```sh
 cd src/web
 docker build -t test-app .
 docker run -p 8000:8000 test-app
 ```
   
-#### 5. "Tidak Sah" Semasa Menjalankan Arahan AZD
+#### 5. "Tidak Dibenarkan" Semasa Menjalankan Arahan AZD
 
-**Gejala**:  
+**Simptom**:  
 ```
 ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have authorization
 ```
@@ -598,7 +598,10 @@ ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have auth
 **Penyelesaian**:  
 Log masuk semula dengan Azure:  
 ```sh
+# Diperlukan untuk aliran kerja AZD
 azd auth login
+
+# Pilihan jika anda juga menggunakan arahan Azure CLI secara langsung
 az login
 ```
   
@@ -606,14 +609,14 @@ Sahkan anda mempunyai kebenaran yang betul (peranan Contributor) pada langganan.
 
 #### 6. Kos Pangkalan Data Tinggi
 
-**Gejala**:  
-Bil Azure yang tidak dijangka.
+**Simptom**:  
+Bil Azure tidak dijangka.
 
 **Penyelesaian**:  
-- Semak jika anda terlupa jalankan `azd down` selepas ujian  
-- Sahkan SQL Database menggunakan tier Basic (bukan Premium)  
+- Semak jika anda terlupa menjalankan `azd down` selepas ujian  
+- Sahkan Pangkalan Data SQL menggunakan tier Basic (bukan Premium)  
 - Semak kos dalam Pengurusan Kos Azure  
-- Tetapkan amaran kos  
+- Tetapkan amaran kos
 
 ### Mendapatkan Bantuan
 
@@ -622,7 +625,7 @@ Bil Azure yang tidak dijangka.
 azd env get-values
 ```
   
-**Semak Status Penyebaran**:  
+**Semak Status Penghantaran**:  
 ```sh
 az webapp show --name <app-name> --resource-group <rg-name> --query state
 ```
@@ -632,23 +635,23 @@ az webapp show --name <app-name> --resource-group <rg-name> --query state
 az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
 ```
   
-**Perlukan Bantuan Tambahan?**  
+**Perlu Bantuan Lagi?**  
 - [Panduan Penyelesaian Masalah AZD](../../docs/chapter-07-troubleshooting/common-issues.md)  
 - [Penyelesaian Masalah Azure App Service](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)  
-- [Penyelesaian Masalah Azure SQL](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)  
+- [Penyelesaian Masalah Azure SQL](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
 
 ## Latihan Praktikal
 
-### Latihan 1: Sahkan Penyebaran Anda (Pemula)
+### Latihan 1: Sahkan Penghantaran Anda (Pemula)
 
-**Matlamat**: Sahkan semua sumber telah disebarkan dan aplikasi berfungsi.
+**Matlamat**: Sahkan semua sumber telah dihantar dan aplikasi berfungsi.
 
 **Langkah**:  
 1. Senaraikan semua sumber dalam kumpulan sumber anda:  
    ```sh
    az resource list --resource-group rg-<env-name> --output table
    ```
-   **Jangkaan**: 6-7 sumber (Web App, SQL Server, SQL Database, Pelan Perkhidmatan App, Application Insights, Log Analytics)  
+   **Dijangka**: 6-7 sumber (Web App, SQL Server, Pangkalan Data SQL, Pelan App Service, Application Insights, Log Analytics)
 
 2. Uji semua titik akhir API:  
    ```sh
@@ -657,15 +660,15 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    curl https://app-<your-id>.azurewebsites.net/products
    curl https://app-<your-id>.azurewebsites.net/products/1
    ```
-   **Jangkaan**: Semua mengembalikan JSON sah tanpa ralat  
+   **Dijangka**: Semua mengembalikan JSON sah tanpa ralat
 
 3. Semak Application Insights:  
    - Navigasi ke Application Insights dalam Azure Portal  
-   - Pergi ke "Metrik Langsung"  
-   - Muat semula pelayar anda pada web app  
-   **Jangkaan**: Lihat permintaan muncul secara waktu nyata  
+   - Pergi ke "Live Metrics"  
+   - Segarkan pelayar anda pada aplikasi web  
+   **Dijangka**: Lihat permintaan muncul secara masa nyata  
 
-**Kriteria Kejayaan**: Semua 6-7 sumber wujud, semua titik akhir mengembalikan data, Metrik Langsung menunjukkan aktiviti.  
+**Kriteria Kejayaan**: Semua 6-7 sumber wujud, semua titik akhir mengembalikan data, Live Metrics menunjukkan aktiviti.
 
 ---
 
@@ -673,10 +676,10 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 **Matlamat**: Kembangkan aplikasi Flask dengan titik akhir baru.
 
-**Kod Permulaan**: Titik akhir semasa dalam `src/web/app.py`
+**Kod Permulaan**: Titik akhir semasa di `src/web/app.py`
 
 **Langkah**:  
-1. Sunting `src/web/app.py` dan tambah titik akhir baru selepas fungsi `get_product()`:
+1. Edit `src/web/app.py` dan tambah titik akhir baru selepas fungsi `get_product()`:  
    ```python
    @app.route('/products/search/<keyword>')
    def search_products(keyword):
@@ -710,7 +713,7 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
            return jsonify({'error': str(e)}), 500
    ```
   
-2. Sebarkan aplikasi yang dikemas kini:  
+2. Hantar aplikasi yang dikemas kini:  
    ```sh
    azd deploy
    ```
@@ -719,9 +722,9 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    ```sh
    curl https://app-<your-id>.azurewebsites.net/products/search/laptop
    ```
-   **Jangkaan**: Mengembalikan produk yang sepadan dengan "laptop"  
+   **Dijangka**: Mengembalikan produk yang sepadan dengan "laptop"
 
-**Kriteria Kejayaan**: Titik akhir baru berfungsi, mengembalikan hasil yang ditapis, muncul dalam log Application Insights.  
+**Kriteria Kejayaan**: Titik akhir baru berfungsi, mengembalikan hasil yang ditapis, muncul dalam log Application Insights.
 
 ---
 
@@ -730,7 +733,7 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 **Matlamat**: Sediakan pemantauan proaktif dengan amaran.
 
 **Langkah**:  
-1. Buat amaran untuk ralat HTTP 500:  
+1. Cipta amaran untuk ralat HTTP 500:  
    ```sh
    # Dapatkan ID sumber Application Insights
    AI_ID=$(az monitor app-insights component show \
@@ -749,26 +752,26 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
      --description "Alert when >5 failed requests in 5 minutes"
    ```
   
-2. Picu amaran dengan menyebabkan ralat:  
+2. Picu amaran dengan mengakibatkan ralat:  
    ```sh
-   # Meminta produk yang tidak wujud
+   # Minta produk yang tidak wujud
    for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
    ```
   
-3. Semak jika amaran dipicu:  
-   - Azure Portal → Amaran → Peraturan Amaran  
-   - Semak emel anda (jika disediakan)  
+3. Semak jika amaran berjaya dipicu:  
+   - Azure Portal → Alerts → Alert Rules  
+   - Semak emel anda (jika dikonfigurasikan)
 
-**Kriteria Kejayaan**: Peraturan amaran dibuat, tercetus pada ralat, notifikasi diterima.  
+**Kriteria Kejayaan**: Peraturan amaran dicipta, dipicu pada ralat, pemberitahuan diterima.
 
 ---
 
 ### Latihan 4: Perubahan Skema Pangkalan Data (Lanjutan)
 
-**Matlamat**: Tambah jadual baru dan kemas kini aplikasi untuk menggunakannya.
+**Matlamat**: Tambah jadual baru dan ubah aplikasi untuk menggunakannya.
 
 **Langkah**:  
-1. Sambung ke SQL Database melalui Azure Portal Query Editor
+1. Sambung ke Pangkalan Data SQL melalui Editor Kuiri Azure Portal
 
 2. Cipta jadual `categories` baru:  
    ```sql
@@ -787,33 +790,33 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    UPDATE products SET category_id = 1; -- Set all to Electronics
    ```
   
-3. Kemas kini `src/web/app.py` untuk termasuk maklumat kategori dalam respons  
+3. Kemas kini `src/web/app.py` untuk memasukkan maklumat kategori dalam respons
 
-4. Sebarkan dan uji  
+4. Hantar dan uji
 
-**Kriteria Kejayaan**: Jadual baru wujud, produk memaparkan maklumat kategori, aplikasi masih berfungsi.  
+**Kriteria Kejayaan**: Jadual baru wujud, produk menunjukkan maklumat kategori, aplikasi masih berfungsi.
 
 ---
 
-### Latihan 5: Laksanakan Caching (Pakar)
+### Latihan 5: Laksanakan Penimbalan (Pakarpakar)
 
 **Matlamat**: Tambah Azure Redis Cache untuk meningkatkan prestasi.
 
 **Langkah**:  
 1. Tambah Redis Cache ke `infra/main.bicep`  
-2. Kemas kini `src/web/app.py` untuk menyimpan cache bagi pertanyaan produk  
+2. Kemas kini `src/web/app.py` untuk menimbalkan pertanyaan produk  
 3. Ukur peningkatan prestasi dengan Application Insights  
-4. Bandingkan masa respon sebelum/selepas caching  
+4. Bandingkan masa tindak balas sebelum/selepas penimbalan
 
-**Kriteria Kejayaan**: Redis disebarkan, caching berfungsi, masa respon bertambah baik >50%.
+**Kriteria Kejayaan**: Redis dihantar, penimbalan berfungsi, masa tindak balas bertambah baik >50%.
 
-**Petua**: Mula dengan [dokumentasi Azure Cache for Redis](https://learn.microsoft.com/azure/azure-cache-for-redis/).  
+**Petua**: Mula dengan [dokumentasi Azure Cache for Redis](https://learn.microsoft.com/azure/azure-cache-for-redis/).
 
 ---
 
 ## Pembersihan
 
-Untuk mengelakkan caj berterusan, padam semua sumber selepas selesai:
+Untuk mengelakkan caj berterusan, padam semua sumber apabila selesai:
 
 ```sh
 azd down
@@ -824,14 +827,14 @@ azd down
 ? Total resources to delete: 7, are you sure you want to continue? (y/N)
 ```
   
-Taip `y` untuk sahkan.
+Taip `y` untuk mengesahkan.
 
 **✓ Semakan Kejayaan**:  
 - Semua sumber dipadam dari Azure Portal  
 - Tiada caj berterusan  
-- Folder `.azure/<env-name>` tempatan boleh dihapuskan  
+- Folder `.azure/<env-name>` tempatan boleh dipadam
 
-**Alternatif** (simpan infrastruktur, padam data):  
+**Alternatif** (simpannya infrastruktur, padam data):  
 ```sh
 # Padam hanya kumpulan sumber (simpan konfigurasi AZD)
 az group delete --name rg-<env-name> --yes
@@ -843,53 +846,53 @@ az group delete --name rg-<env-name> --yes
 - [Dokumentasi Azure SQL Database](https://learn.microsoft.com/azure/azure-sql/database/)  
 - [Dokumentasi Azure App Service](https://learn.microsoft.com/azure/app-service/)  
 - [Dokumentasi Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)  
-- [Rujukan Bahasa Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)  
+- [Rujukan Bahasa Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-### Langkah Seterusnya Dalam Kursus Ini
-- **[Contoh Aplikasi Kontena](../../../../examples/container-app)**: Sebarkan mikroservis dengan Azure Container Apps  
+### Langkah Seterusnya dalam Kursus Ini
+- **[Contoh Container Apps](../../../../examples/container-app)**: Hantar mikroservis dengan Azure Container Apps  
 - **[Panduan Integrasi AI](../../../../docs/ai-foundry)**: Tambah keupayaan AI ke aplikasi anda  
-- **[Amalan Terbaik Penyebaran](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Corak penyebaran produksi  
+- **[Amalan Terbaik Penghantaran](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Corak penghantaran produksi
 
 ### Topik Lanjutan
-- **Identiti Terkawal**: Alih keluar kata laluan dan gunakan pengesahan Azure AD  
-- **Endpoint Peribadi**: Lindungi sambungan pangkalan data dalam rangkaian maya  
-- **Integrasi CI/CD**: Automasi penyebaran dengan GitHub Actions atau Azure DevOps  
-- **Multi-Persekitaran**: Tetapkan persekitaran dev, staging, dan produksi  
-- **Migrasi Pangkalan Data**: Gunakan Alembic atau Entity Framework untuk versi skema  
+- **Identiti Terurus**: Keluarkan kata laluan dan guna pengesahan Azure AD  
+- **Private Endpoints**: Amankan sambungan pangkalan data dalam rangkaian maya  
+- **Integrasi CI/CD**: Automatikkan penghantaran dengan GitHub Actions atau Azure DevOps  
+- **Multi-Alam Sekitar**: Sediakan persekitaran dev, staging, dan produksi  
+- **Migrasi Pangkalan Data**: Gunakan Alembic atau Entity Framework untuk versi skema
 
-### Perbandingan Dengan Pendekatan Lain
+### Perbandingan dengan Pendekatan Lain
 
-**AZD vs. ARM Templates**:  
+**AZD vs. Templat ARM**:  
 - ✅ AZD: Abstraksi tahap tinggi, arahan lebih mudah  
-- ⚠️ ARM: Lebih verbose, kawalan terperinci  
+- ⚠️ ARM: Lebih panjang, kawalan granular
 
 **AZD vs. Terraform**:  
-- ✅ AZD: Asli Azure, terintegrasi dengan perkhidmatan Azure  
-- ⚠️ Terraform: Sokongan multi-cloud, ekosistem lebih besar  
+- ✅ AZD: Asli Azure, integrasi dengan perkhidmatan Azure  
+- ⚠️ Terraform: Sokongan multi-cloud, ekosistem lebih besar
 
-**AZD vs. Portal Azure**:  
-- ✅ AZD: Boleh diulang, versi terkawal, boleh automasi  
-- ⚠️ Portal: Klik manual, sukar untuk diulang  
+**AZD vs. Azure Portal**:  
+- ✅ AZD: Boleh ulang, dikawal versi, boleh automasi  
+- ⚠️ Portal: Klik manual, sukar diulang
 
-**Fikirkan AZD sebagai**: Docker Compose untuk Azure—konfigurasi dipermudahkan untuk penyebaran kompleks.  
+**Fikirkan AZD sebagai**: Docker Compose untuk Azure—konfigurasi dipermudahkan untuk penghantaran kompleks.
 
 ---
 
 ## Soalan Lazim
 
-**S: Bolehkah saya guna bahasa pengaturcaraan lain?**  
-J: Ya! Gantikan `src/web/` dengan Node.js, C#, Go, atau bahasa lain. Kemas kini `azure.yaml` dan Bicep mengikut keperluan.  
+**S: Bolehkah saya gunakan bahasa pengaturcaraan lain?**  
+J: Ya! Gantikan `src/web/` dengan Node.js, C#, Go, atau mana-mana bahasa. Kemas kini `azure.yaml` dan Bicep mengikutnya.
 
-**S: Bagaimana untuk tambah lebih banyak pangkalan data?**  
-J: Tambah modul SQL Database lain dalam `infra/main.bicep` atau gunakan PostgreSQL/MySQL dari perkhidmatan Azure Database.  
+**S: Bagaimana nak tambah lebih banyak pangkalan data?**  
+J: Tambah modul Pangkalan Data SQL lain dalam `infra/main.bicep` atau guna PostgreSQL/MySQL daripada perkhidmatan Pangkalan Data Azure.
 
 **S: Bolehkah saya guna ini untuk produksi?**  
-J: Ini permulaan. Untuk produksi, tambah: identiti terkawal, endpoint peribadi, redundansi, strategi sandaran, WAF, dan pemantauan lanjutan.  
+J: Ini permulaan. Untuk produksi, tambah: identiti terurus, private endpoints, kebergantungan, strategi sandaran, WAF, dan pemantauan lanjutan.
 
-**S: Bagaimana jika saya mahu guna kontena dan bukan penyebaran kod?**  
-J: Lihat [Contoh Aplikasi Kontena](../../../../examples/container-app) yang menggunakan kontena Docker sepenuhnya.  
+**S: Bagaimana jika saya mahu guna kontena bukan penghantaran kod?**  
+J: Semak [Contoh Container Apps](../../../../examples/container-app) yang menggunakan kontena Docker sepanjangnya.
 
-**S: Bagaimana saya sambung ke pangkalan data dari mesin tempatan saya?**  
+**S: Bagaimana nak sambung ke pangkalan data dari mesin tempatan saya?**  
 J: Tambah IP anda ke firewall SQL Server:  
 ```sh
 az sql server firewall-rule create \
@@ -900,21 +903,21 @@ az sql server firewall-rule create \
   --end-ip-address <your-ip>
 ```
   
-**S: Bolehkah saya gunakan pangkalan data sedia ada dan bukannya mencipta baru?**  
-J: Ya, sunting `infra/main.bicep` untuk rujuk SQL Server yang sedia ada dan kemas kini parameter rentetan sambungan.  
+**S: Bolehkah saya guna pangkalan data sedia ada bukan cipta baru?**  
+J: Ya, ubah `infra/main.bicep` untuk rujuk SQL Server sedia ada dan kemas kini parameter rentetan sambungan.
 
 ---
 
-> **Nota:** Contoh ini menunjukkan amalan terbaik untuk menyebarkan aplikasi web dengan pangkalan data menggunakan AZD. Ia termasuk kod yang berfungsi, dokumentasi lengkap, dan latihan praktikal untuk mengukuhkan pembelajaran. Untuk penyebaran produksi, tinjau keselamatan, penskalaan, pematuhan, dan keperluan kos khusus organisasi anda.  
+> **Nota:** Contoh ini menunjukkan amalan terbaik untuk menghantar aplikasi web dengan pangkalan data menggunakan AZD. Ia merangkumi kod berfungsi, dokumentasi lengkap, dan latihan praktikal untuk memperkukuh pembelajaran. Untuk penghantaran produksi, semak keselamatan, penskalaan, pematuhan, dan keperluan kos khusus organisasi anda.
 
 **📚 Navigasi Kursus:**  
-- ← Sebelumnya: [Contoh Aplikasi Kontena](../../../../examples/container-app)  
+- ← Sebelumnya: [Contoh Container Apps](../../../../examples/container-app)  
 - → Seterusnya: [Panduan Integrasi AI](../../../../docs/ai-foundry)  
-- 🏠 [Laman Utama Kursus](../../README.md)
+- 🏠 [Rumah Kursus](../../README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, disarankan terjemahan profesional oleh manusia. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, harap maklum bahawa terjemahan automatik mungkin mengandungi ralat atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, disarankan terjemahan oleh manusia profesional. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
