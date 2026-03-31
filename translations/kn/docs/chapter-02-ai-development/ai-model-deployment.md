@@ -1,28 +1,28 @@
-# AI ಮಾದರಿ ನಿಯೋಜನೆ Azure Developer CLI ಬಳಸಿ
+# AI Model Deployment with Azure Developer CLI
 
-**ಚಾಪ್ಟರ್ ನ್ಯಾವಿಗೇಶನ್:**
-- **📚 ಕೋರ್ಸ್ ಮನೆ**: [ಆರಂಭಿಕರಿಗೆ AZD](../../README.md)
-- **📖 ಪ್ರಸ್ತುತ ಅಧ್ಯಾಯ**: ಅಧ್ಯಾಯ 2 - ಎಐ-ಪ್ರಥಮ ಅಭಿವೃದ್ಧಿ
-- **⬅️ ಹಿಂದಿನದು**: [Microsoft Foundry ಸಂಯೋಜನೆ](microsoft-foundry-integration.md)
-- **➡️ ಮುಂದಿನದು**: [ಎಐ ವರ್ಕ್‌ಶಾಪ್ ಲ್ಯಾಬ್](ai-workshop-lab.md)
-- **🚀 ಮುಂದಿನ ಅಧ್ಯಾಯ**: [ಅಧ್ಯಾಯ 3: ಸಂರಚನೆ](../chapter-03-configuration/configuration.md)
+**ಅಧ್ಯಾಯ ನ್ಯಾವಿಗೇಶನ್:**
+- **📚 ಕೋರ್ಸ್ ಹೋಮ್**: [AZD For Beginners](../../README.md)
+- **📖 ಪ್ರಸ್ತುತ ಅಧ್ಯಾಯ**: ಅಧ್ಯಾಯ 2 - AI-ಪ್ರಥಮ ಅಭಿವೃದ್ಧಿ
+- **⬅️ ಹಿಂದಿನದು**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ ಮುಂದಿನದು**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 ಮುಂದಿನ ಅಧ್ಯಾಯ**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
-ಈ ಮಾರ್ಗದರ್ಶಿ AZD ಟೆಂಪ್ಲೇಟ್ಗಳನ್ನು ಬಳಸಿ ಎಐ ಮಾದರಿಗಳನ್ನು ನಿಯೋಜಿಸುವ ಕುರಿತು ಸಮಗ್ರ ಸೂಚನೆಗಳನ್ನು ಒದಗಿಸುತ್ತದೆ, ಮಾದರಿ ಆಯ್ಕೆ ಇಂದ ಉತ್ಪಾದನಾ ನಿಯೋಜನೆ ಮಾದರಿಗಳವರೆಗೆ ಎಲ್ಲವನ್ನೂ ಒಳಗೊಂಡಿದೆ.
+ಈ ಮಾರ್ಗದರ್ಶಿಯು AZD ಟೆಂಪ್ಲೇಟ್‌ಗಳನ್ನು ಬಳಸಿಕೊಂಡು AI ಮಾದರಿಗಳನ್ನು ನಿಯೋಜಿಸುವ ಸಂಪೂರ್ಣ ಸೂಚನೆಗಳನ್ನು ಒದಗಿಸುತ್ತದೆ, ಮಾದರಿ ಆಯ್ಕೆಗಿಂದ ಉತ್ಪಾದನಾ ನಿಯೋಜನೆವರೆಗೆ ಎಲ್ಲಾ ವಿಷಯಗಳನ್ನು ಒಳಗೊಂಡಿದೆ.
 
-## ವಿಷಯ ಸೂಚಿ
+## ವಿಷಯದ ಪಟ್ಟಿ
 
-- [ಮಾದರಿ ಆಯ್ಕೆ ತಂತ್ರ](../../../../docs/chapter-02-ai-development)
-- [AI ಮಾದರಿಗಳಿಗಾಗಿ AZD ಸಂರಚನೆ](../../../../docs/chapter-02-ai-development)
-- [ನಿಯೋಜನೆ ಮಾದರಿಗಳು](../../../../docs/chapter-02-ai-development)
-- [ಮಾದರಿ ನಿರ್ವಹಣೆ](../../../../docs/chapter-02-ai-development)
-- [ಉತ್ಪಾದನಾ ಪರಿಗಣನೆಗಳು](../../../../docs/chapter-02-ai-development)
-- [ಮೋನಿಟರಿಂಗ್ ಮತ್ತು ದೃಶ್ಯತೆ](../../../../docs/chapter-02-ai-development)
+- [ಮಾದರಿ ಆಯ್ಕೆ ನಿರ್ಧಾರ ತಂತ್ರಶಾಸ್ತ್ರ](#model-selection-strategy)
+- [AI ಮಾದರಿಗಳಿಗಾಗಿ AZD ಸಂರಚನೆ](#azd-configuration-for-ai-models)
+- [ನಿಯೋಜನೆ ಮಾದರಿಗಳು](#deployment-patterns)
+- [ಮಾದರಿ ನಿರ್ವಹಣೆ](#model-management)
+- [ಉತ್ಪಾದನಾ ಪರಿಗಣನೆಗಳು](#production-considerations)
+- [ನಿಗಾವಲು ಮತ್ತು ಗಮನಾರ್ಹತೆ](#monitoring-and-observability)
 
-## ಮಾದರಿ ಆಯ್ಕೆ ತಂತ್ರ
+## Model Selection Strategy
 
-### Azure OpenAI ಮಾದರಿಗಳು
+### Microsoft Foundry Models Models
 
-ನಿಮ್ಮ ಬಳಕೆಯ ಪ್ರಕರಣಕ್ಕಾಗಿ ಸರಿಯಾದ ಮಾದರಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ:
+ನಿಮ್ಮ ಬಳಕೆಯ ಪ್ರಕರಣಕ್ಕಾಗಿ ಸೂಕ್ತ ಮಾದರಿಯನ್ನು ಆರಿಸಿಕೊಳ್ಳಿ:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -34,9 +34,9 @@ services:
       AZURE_OPENAI_MODELS: |
         [
           {
-            "name": "gpt-4o-mini",
+            "name": "gpt-4.1-mini",
             "version": "2024-07-18",
-            "deployment": "gpt-4o-mini",
+            "deployment": "gpt-4.1-mini",
             "capacity": 10,
             "format": "OpenAI"
           },
@@ -50,30 +50,30 @@ services:
         ]
 ```
 
-### ಮಾದರಿ ಸಾಮರ್ಥ್ಯ ಯೋಜನೆ
+### Model Capacity Planning
 
-| ಮಾದರಿ ಪ್ರಕಾರ | ಉಪಯೋಗದ ಪ್ರಕರಣ | ಶಿಫಾರಸು ಮಾಡಿದ ಸಾಮರ್ಥ್ಯ | ಖರ್ಚಿನ ಪರಿಗಣನೆಗಳು |
+| Model Type | Use Case | Recommended Capacity | Cost Considerations |
 |------------|----------|---------------------|-------------------|
-| GPT-4o-mini | ಚಾಟ್, ಪ್ರಶ್ನೆ ಮತ್ತು ಉತ್ತರ | 10-50 TPM | ಬಹುಮಟ್ಟಿನ ಕೆಲಸಭಾರಗಳಿಗೆ ವೆಚ್ಚ-ಕಾರ್ಯಕ್ಷಮ |
-| GPT-4 | ಸಂಕೀರ್ಣ ತರ್ಕ | 20-100 TPM | ಹೆಚ್ಚಿನ ವೆಚ್ಚ, ಪ್ರೀಮಿಯಂ ವೈಶಿಷ್ಟ್ಯಗಳಿಗೆ ಬಳಸಿ |
-| Text-embedding-ada-002 | ಹುಡುಕಾಟ, RAG | 30-120 TPM | ಅರ್ಥಾತ್ಮಕ ಹುಡುಕಾಟಕ್ಕೆ ಅಗತ್ಯ |
-| Whisper | ಭಾಷಣದಿಂದ ಪಠ್ಯಕ್ಕೆ | 10-50 TPM | ಆಡಿಯೊ ಪ್ರಕ್ರಿಯೆ ಕೆಲಸಭಾರಗಳು |
+| gpt-4.1-mini | ಚಾಟ್, ಪ್ರಶ್ನೆ-ಉತ್ತರ | 10-50 TPM | ಬಹುತೇಕ ಕಾರ್ಯಭಾರಗಳಿಗೆ ವೆಚ್ಚ-ಪ್ರಭಾವಿ |
+| gpt-4.1 | ಸಂಕೀರ್ಣ ತರ್ಕಶಕ್ತಿ | 20-100 TPM | ಹೆಚ್ಚಿನ ವೆಚ್ಚ, ಪ್ರೀಮಿಯಂ ವೈಶಿಷ್ಟ್ಯಗಳಿಗೆ ಉಪಯುಕ್ತ |
+| Text-embedding-ada-002 | ಹುಡುಕಾಟ, RAG | 30-120 TPM | ಸೆಮ್ಯಾಂಟಿಕ್ ಹುಡುಕಾಟಕ್ಕಾಗಿ ಅಗತ್ಯ |
+| Whisper | ಭಾಷ್ಯ-ವಿಷಯಕ್ಕೆ (Speech-to-text) | 10-50 TPM | ಆಡಿಯೋ ಪ್ರಕ್ರಿಯೆಗಳ ಕಾರ್ಯಭಾರಗಳು |
 
-## AI ಮಾದರಿಗಳಿಗಾಗಿ AZD ಸಂರಚನೆ
+## AZD Configuration for AI Models
 
-### Bicep ಟೆಂಪ್ಲೇಟು ಸಂರಚನೆ
+### Bicep Template Configuration
 
-Bicep ಟೆಂಪ್ಲೇಟ್ಗಳ ಮೂಲಕ ಮಾದರಿ ನಿಯೋಜನೆಗಳನ್ನು ರಚಿಸಿ:
+Bicep ಟೆಂಪ್ಲೇಟ್‌ಗಳ ಮೂಲಕ ಮಾದರಿ ನಿಯೋಜನೆಗಳನ್ನು ರಚಿಸಿ:
 
 ```bicep
 // infra/main.bicep
 @description('OpenAI model deployments')
 param openAiModelDeployments array = [
   {
-    name: 'gpt-4o-mini'
+    name: 'gpt-4.1-mini'
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
     sku: {
@@ -122,21 +122,21 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
-### ಪರಿಸರ ಚರಗಳು
+### Environment Variables
 
-ನಿಮ್ಮ ಅಪ್ಲಿಕೇಷನ್ ಪರಿಸರವನ್ನು ಸಂರಚಿಸಿ:
+ನಿಮ್ಮ ಅಪ್ಲಿಕೇಶನ್ ಪರಿಸರವನ್ನು ಕಾನ್ಫಿಗರ್ ಮಾಡಿ:
 
 ```bash
 # .env ಸಂರಚನೆ
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
-AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4o-mini
+AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
 AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
 ```
 
-## ನಿಯೋಜನೆ ಮಾದರಿಗಳು
+## Deployment Patterns
 
-### ಮಾದರಿ 1: ಏಕ-ಪ್ರದೇಶ ನಿಯೋಜನೆ
+### Pattern 1: Single-Region Deployment
 
 ```yaml
 # azure.yaml - Single region
@@ -146,15 +146,15 @@ services:
     host: containerapp
     config:
       AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT}
-      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4o-mini
+      AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
 ಉತ್ತಮವಾಗಿದೆ:
-- ವಿಕಾಸ ಮತ್ತು ಪರೀಕ್ಷೆ
-- ಏಕ-ಮಾರುಕಟ್ಟೆ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು
-- ವೆಚ್ಚ ಅನुकूलನೆ
+- ಅಭಿವೃದ್ಧಿ ಮತ್ತು ಪರೀಕ್ಷೆ
+- ಏಕ-ಮಾರ್ಕೆಟ್ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು
+- ವೆಚ್ಚದ ಅನ್ವಯಾತ್ಮಕತೆ
 
-### ಮಾದರಿ 2: ಬಹು-ಪ್ರದೇಶ ನಿಯೋಜನೆ
+### Pattern 2: Multi-Region Deployment
 
 ```bicep
 // Multi-region deployment
@@ -168,13 +168,13 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 ```
 
 ಉತ್ತಮವಾಗಿದೆ:
-- ವಿಶ್ವ ವ್ಯಾಪ್ತಿಯ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು
-- ಉನ್ನತ ಲಭ್ಯತೆ ಅಗತ್ಯಗಳು
-- ಭಾರ ಹಂಚಿಕೆ
+- वैश್ವಿಕ (Global) ಅಪ್ಲಿಕೇಶನ್‌ಗಳು
+- ಎತ್ತರದ ಲಭ್ಯತೆ ಅಗತ್ಯಗಳು
+- ಲೋಡ್ ವಿತರಣೆ
 
-### ಮಾದರಿ 3: ಹೈಬ್ರಿಡ್ ನಿಯೋಜನೆ
+### Pattern 3: Hybrid Deployment
 
-Azure OpenAI ಅನ್ನು ಇತರ ಎಐ ಸೇವೆಗಳೊಡನೆ ಸಂಯೋಜಿಸಿ:
+Microsoft Foundry Models ಅನ್ನು ಇತರೆ AI ಸೇವೆಗಳೊಂದಿಗೆ ಸಂಯೋಜಿಸಿ:
 
 ```bicep
 // Hybrid AI services
@@ -203,9 +203,9 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## ಮಾದರಿ ನಿರ್ವಹಣೆ
+## Model Management
 
-### ಆವೃತ್ತಿ ನಿಯಂತ್ರಣ
+### Version Control
 
 ನಿಮ್ಮ AZD ಸಂರಚನೆಯಲ್ಲಿ ಮಾದರಿ ಆವೃತ್ತಿಗಳನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡಿ:
 
@@ -213,7 +213,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 {
   "models": {
     "chat": {
-      "name": "gpt-4o-mini",
+      "name": "gpt-4.1-mini",
       "version": "2024-07-18",
       "fallback": "gpt-35-turbo"
     },
@@ -225,9 +225,9 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-### ಮಾದರಿ ನವೀಕರಣಗಳು
+### Model Updates
 
-ಮಾದರಿ ನವೀಕರಣಗಳಿಗೆ AZD ಹುಕ್ಸ್ ಅನ್ನು ಬಳಸಿ:
+ಮಾದರಿ ನವೀಕರಣಗಳಿಗಾಗಿ AZD/hooks ಬಳಸಿ:
 
 ```bash
 #!/bin/bash
@@ -237,23 +237,23 @@ echo "Checking model availability..."
 az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
-  --query "[?name=='gpt-4o-mini']"
+  --query "[?name=='gpt-4.1-mini']"
 ```
 
-### A/B ಪರೀಕ್ಷೆ
+### A/B Testing
 
-ಬಹುಆವೃತ್ತಿ ಮಾದರಿಗಳನ್ನು ನಿಯೋಜಿಸಿ:
+ಬಹು-ಆವೃತ್ತಿ ಮಾದರಿಗಳನ್ನು ನಿಯೋಜಿಸಿ:
 
 ```bicep
 param enableABTesting bool = false
 
 resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'gpt-4o-mini-${enableABTesting ? 'v1' : 'prod'}'
+  name: 'gpt-4.1-mini-${enableABTesting ? 'v1' : 'prod'}'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-4o-mini'
+      name: 'gpt-4.1-mini'
       version: '2024-07-18'
     }
   }
@@ -264,14 +264,14 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## ಉತ್ಪಾದನಾ ಪರಿಗಣನೆಗಳು
+## Production Considerations
 
-### ಸಾಮರ್ಥ್ಯ ಯೋಜನೆ
+### Capacity Planning
 
-ಬಳಕೆ ಮಾದರಿಗಳ ಆಧಾರದ ಮೇಲೆ ಅಗತ್ಯ ಸಾಮರ್ಥ್ಯವನ್ನು ಲೆಕ್ಕಿಸಿ:
+ಬಳಕೆದಾರ ಮಾದರಿಗಳ ಆಧಾರದ ಮೇಲೆ ಅಗತ್ಯ ಸಾಮರ್ಥ್ಯವನ್ನು ಲೆಕ್ಕಹಾಕಿ:
 
 ```python
-# ಸಾಮರ್ಥ್ಯ ಲೆಕ್ಕಾಚಾರ ಉದಾಹರಣೆ
+# ಸಾಮರ್ಥ್ಯದ ಲೆಕ್ಕಾಚಾರದ ಉದಾಹರಣೆ
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -293,7 +293,7 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### ಸ್ವಯಂ-ಸ್ಕೇಲಿಂಗ್ ಸಂರಚನೆ
+### Auto-scaling Configuration
 
 Container Apps ಗಾಗಿ ಸ್ವಯಂ-ಸ್ಕೇಲಿಂಗ್ ಅನ್ನು ಕಾನ್ಫಿಗರ್ ಮಾಡಿ:
 
@@ -331,9 +331,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### ವೆಚ್ಚ ಅನುಕೂಲನ
+### Cost Optimization
 
-ಅನುಷ್ಟಾನ ವೆಚ್ಚ ನಿಯಂತ್ರಣಗಳನ್ನು ಅನುಷ್ಠಾನಗೊಳಿಸಿ:
+ವೆಚ್ಚ ನಿಯಂತ್ರಣವನ್ನು ಅನ್ವಯಿಸಿ:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -363,11 +363,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## ಮೇಲ್ವಿಚಾರಣೆ ಮತ್ತು ದೃಶ್ಯತೆ
+## Monitoring and Observability
 
-### Application Insights ಏಕೀಕರಣ
+### Application Insights Integration
 
-ಎಐ ಕೆಲಸಭಾರಗಳಿಗೆ ನಿಗಾವನ್ನು ಸಂರಚಿಸಿ:
+AI ಕಾರ್ಯಭಾರಗಳಿಗಾಗಿ ಮಾನಿಟರಿಂಗ್ ಅನ್ನು ಕಾನ್ಫಿಗರ್ ಮಾಡಿ:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -403,9 +403,9 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### ಕಸ್ಟಮ್ ಮೆಟ್ರಿಕ್‌ಗಳು
+### Custom Metrics
 
-ಎಐ-ನಿರ್ದಿಷ್ಟ ಮೆಟ್ರಿಕ್‌ಗಳನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡಿ:
+AI-ನಿರ್ದಿಷ್ಟ ಮೆಟ್ರಿಕ್‌ಗಳನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡಿ:
 
 ```python
 # ಎಐ ಮಾದರಿಗಳಿಗಾಗಿ ಕಸ್ಟಮ್ ಟೆಲಿಮೆಟ್ರಿ
@@ -440,12 +440,12 @@ class AITelemetry:
         )
 ```
 
-### ಆರೋಗ್ಯ ತಪಾಸಣೆಗಳು
+### Health Checks
 
-ಎಐ ಸೇವೆಯ ಆರೋಗ್ಯ ನಿಗಾವನ್ನು ಅನುಷ್ಠಾನಗೊಳಿಸಿ:
+AI ಸೇವೆಗಳ ಆರೋಗ್ಯ ಮಾನಿಟರಿಂಗ್ ಅನ್ನು ಜಾರಿಗೆ ತರುವಿರಿ:
 
 ```python
-# ಆರೋಗ್ಯ ಪರಿಶೀಲನೆ ಎಂಡ್ಪಾಯಿಂಟ್‌ಗಳು
+# ಆರೋಗ್ಯ ಪರಿಶೀಲನಾ ಎಂಡ್ಪಾಯಿಂಟ್‌ಗಳು
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -471,32 +471,32 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## ಮುಂದಿನ ಕ್ರಮಗಳು
+## Next Steps
 
-1. **ಸೇವಾ ಸಂಯೋಜನೆ ಮಾದರಿಗಳಿಗಾಗಿ [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md) ಪರಿಶೀಲಿಸಿ**
-2. **ಪ್ರಾಯೋಗಿಕ ಅನುಭವಕ್ಕಾಗಿ [AI Workshop Lab](ai-workshop-lab.md) ಪೂರ್ಣಗೊಳ್ಳಿ**
-3. **ಉದ್ಯಮ ನಿಯೋಜನೆಗಳಿಗಾಗಿ [Production AI Practices](production-ai-practices.md) ಜಾರಿಗೆ ತರ하세요**
-4. **ಸಾಮಾನ್ಯ ಸಮಸ್ಯೆಗಳಿಗಾಗಿ [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md) ಅನ್ವೇಷಿಸಿ**
+1. **[Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** ಅನ್ನು ಸೇವಾ ինտಿಗ್ರೇಶನ್ ಮಾದರಿಗಳಿಗಾಗಿ ಪರಿಶೀಲಿಸಿ
+2. **[AI Workshop Lab](ai-workshop-lab.md)** ಅನ್ನು ಕೈಯಿಂದ ಅನುಭವಕ್ಕಾಗಿ ಪೂರ್ಣಗೊಳಿಸಿ
+3. **[Production AI Practices](production-ai-practices.md)** ಅನ್ನು ಎಂಟರ್ಪ್ರೈಸ್ ನಿಯೋಜನೆಗಳಿಗಾಗಿ ಜಾರಿಗೆ ತರುವಿರಿ
+4. **[AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** ಅನ್ನು ಸಾಮಾನ್ಯ ಸಮಸ್ಯೆಗಳಿಗಾಗಿ ಅನ್ವೇಷಿಸಿ
 
-## ಸಂಪನ್ಮೂಲಗಳು
+## Resources
 
-- [Azure OpenAI Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Microsoft Foundry Models Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Container Apps Scaling](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [AI Model Cost Optimization](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**ಚಾಪ್ಟರ್ ನ್ಯಾವಿಗೇಶನ್:**
-- **📚 ಕೋರ್ಸ್ ಮನೆ**: [ಆರಂಭಿಕರಿಗೆ AZD](../../README.md)
-- **📖 ಪ್ರಸ್ತುತ ಅಧ್ಯಾಯ**: ಅಧ್ಯಾಯ 2 - ಎಐ-ಪ್ರಥಮ ಅಭಿವೃದ್ಧಿ
-- **⬅️ ಹಿಂದಿನದು**: [Microsoft Foundry ಸಂಯೋಜನೆ](microsoft-foundry-integration.md)
-- **➡️ ಮುಂದಿನದು**: [ಎಐ ವರ್ಕ್‌ಶಾಪ್ ಲ್ಯಾಬ್](ai-workshop-lab.md)
-- **🚀 ಮುಂದಿನ ಅಧ್ಯಾಯ**: [ಅಧ್ಯಾಯ 3: ಸಂರಚನೆ](../chapter-03-configuration/configuration.md)
+**ಅಧ್ಯಾಯ ನ್ಯಾವಿಗೇಶನ್:**
+- **📚 ಕೋರ್ಸ್ ಹೋಮ್**: [AZD For Beginners](../../README.md)
+- **📖 ಪ್ರಸ್ತುತ ಅಧ್ಯಾಯ**: ಅಧ್ಯಾಯ 2 - AI-ಪ್ರಥಮ ಅಭಿವೃದ್ಧಿ
+- **⬅️ ಹಿಂದಿನದು**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ ಮುಂದಿನದು**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 ಮುಂದಿನ ಅಧ್ಯಾಯ**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-ನಿರಾಕರಣೆ:
-ಈ ದಾಖಲೆ AI ಅನುವಾದ ಸೇವೆ [Co-op Translator](https://github.com/Azure/co-op-translator) ಬಳಸಿ ಅನuvadಿಸಲಾಗಿದೆ. ನಾವು ನಿಖರತೆಯನ್ನು ಕಾಯ್ದುಕೊಳ್ಳಲು ಪ್ರಯತ್ನಿಸಿದರೂ, ಸ್ವಯಂ-ಅನುವಾದಗಳಲ್ಲಿ ದೋಷಗಳು ಅಥವಾ ಅಸ್ಪಷ್ಟತೆಗಳು ಇರಬಹುದೆಂದು ದಯವಿಟ್ಟು ಗಮನಿಸಿ. ಮೂಲ ದಾಖಲೆ ಅದರ ಮೂಲ ಭಾಷೆಯಲ್ಲಿರುವುದು ಅಧಿಕೃತ ಮೂಲವೆಂದು ಪರಿಗಣಿಸಬೇಕು. ಪ್ರಮುಖ ಮಾಹಿತಿಗಾಗಿ ವೃತ್ತಿಪರ ಮಾನವ ಅನುವಾದವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಅನುವಾದದ ಬಳಕೆಯಿಂದ ಉಂಟಾದ ಯಾವುದೇ ಅರ್ಥತಪ್ಪುಗಳು ಅಥವಾ ತಪ್ಪು ವ್ಯಾಖ್ಯಾನಗಳಿಗಾಗಿ ನಾವು ಹೊಣೆಗಾರರಾಗುವುದಿಲ್ಲ.
+**Disclaimer**:
+ಈ ದಾಖಲೆವನ್ನು AI ಅನuvad ಸೇವೆ [Co-op Translator](https://github.com/Azure/co-op-translator) ಬಳಸಿ ಅನuvadಿಸಲಾಗಿದೆ. ನಾವು ನಿಖರತೆಗೆ ಪ್ರಯತ್ನಿಸಿದರೂ, ಸ್ವಯಂಚಾಲಿತ ಅನuvadಗಳಲ್ಲಿ ದೋಷಗಳು ಅಥವಾ ಅಸ್ಪಷ್ಟತೆಗಳಿರಬಹುದು ಎಂದು ದಯವಿಟ್ಟು ಗಮನಿಸಿ. ಮೂಲ ಭಾಷೆಯಲ್ಲಿನ ಮೂಲ ದಾಖಲೆ ಅನ್ನು ಅಧಿಕೃತ ಮೂಲವೆಂದು ಪರಿಗಣಿಸಬೇಕು. ಗಂಭೀರ ಮಾಹಿತಿಗಾಗಿ ವೃತ್ತಿಪರ ಮಾನವ ಅನuvadವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಅನuvadವನ್ನು ಬಳಸುವುದರಿಂದ ಉಂಟಾಗುವ ಯಾವುದೇ ತಪ್ಪು ಗ್ರಹಿಕೆಗಳು ಅಥವಾ ತಪ್ಪು ವ್ಯಾಖ್ಯಾನಗಳಿಗಾಗಿ ನಾವು ಜವಾಬ್ದಾರರಲ್ಲ.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

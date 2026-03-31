@@ -1,82 +1,108 @@
-# ക്രമീകരണ ഗൈഡ്
+# ഘടകീകരണം മാർഗ്ഗനിർദേശം
 
-**അദ്ധ്യായ നാവിഗേഷൻ:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
-- **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
+**അധ്യായത്തിൽ നാവിഗേഷൻ:**
+- **📚 കോഴ്സ് ഹോം**: [AZD For Beginners](../../README.md)
+- **📖 നിലവിലുള്ള അധ്യായം**: അധ്യായം 3 - ഘടകീകരണം & ഓത്തന്റിക്കേഷൻ
+- **⬅️ മുൻപ്**: [Your First Project](first-project.md)
+- **➡️ അടുത്തത്**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 അടുത്ത അധ്യായം**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
 
 ## പരിചയം
 
-ഈ സമഗ്ര ഗൈഡ് Azure Developer CLI യെ (azd) മികച്ച ഡെവലപ്പ്മെന്റും ഡിപ്ലോയ്‌മെന്റും പ്രവൃത്തികളுக்கும் അനുയോജ്യമായി ക്രമീകരിക്കുന്നതിനെക്കുറിച്ച് എല്ലാ аспектുകളും ഉൾക്കൊള്ളുന്നു. നിങ്ങൾക്ക് ക്രമീകരണ തലക്രമം, പരിസ്ഥിതി കൈകാര്യം ചെയൽ, പ്രാമാണീകരണമാർഗങ്ങൾ, സുരക്ഷിതവും കാര്യക്ഷമവുമായ Azure ഡിപ്ലോയ്‌മെന്റുകൾ സാധ്യമാക്കുന്ന ഉയർന്ന നിലക്കുള്ള ക്രമീകരണ മാതൃകകൾ എന്നിവയെക്കുറിച്ച് പഠിക്കാൻ സാധിക്കും.
+ഇത് സമഗ്രമായ മാർഗ്ഗനിർദേശമാണ്, Azure Developer CLI യെ ഏറ്റവും മികച്ച ഡവലപ്പ്മെന്റ്, ഡിപ്ലോയ്മെന്റ് പ്രവാഹങ്ങൾക്കായി ഘടകീകരിക്കുന്ന എല്ലാ ദിശ നിർദേശങ്ങളും ഉൾക്കൊള്ളിച്ചിരിക്കുന്നു. ഘടകീകരണ അതളവ്, പരിസ്ഥിതി മാനേജ്‌മെന്റ്, ഓത്തന്റിക്കേഷൻ വിദ്യകൾ, സുരക്ഷിതവും കാര്യക്ഷമവുമായ Azure ഡിപ്പ്ലോയ്മെന്റുകൾ സാധ്യമാക്കുന്ന ഉയർന്ന ഘടകീകരണ രീതികൾ എന്നിവയെക്കുറിച്ച് നിങ്ങൾ പഠിക്കും.
 
 ## പഠന ലക്ഷ്യങ്ങൾ
 
-ഈ പാഠം അവസാനിയ്ക്കുമ്പോൾ, നിങ്ങൾ:
-- azd ക്രമീകരണ തലക്രമം നന്നായി കൈകാര്യം ചെയ്യാനും സെറ്റിംഗുകൾ എന്ത順ധിക്കാണ് മുൻഗണന നൽകപ്പെടുന്നത് എന്ന് മനസിലാക്കാനും
-- ആഗോളവും പ്രോജക്റ്റ്-നിർദ്ദിഷ്ടവും ആയ സെറ്റിംഗുകൾ ഫലപ്രദമായി ക്രമീകരിക്കാനും
-- വ്യത്യസ്ത ക്രമീകരണങ്ങളുള്ള നിരവധി പരിസ്ഥിതികളിൽ മാനേജ് ചെയ്യാനയും
-- സുരക്ഷിതമായ പ്രാമാണികതയും അനുമതിയുമുള്ള മാതൃകകൾ നടപ്പിൽ വരുത്താനുമ
-- സങ്കീര്‍ണ്ണ السينാരിയോക്കൾക്കായുള്ള ഉയർന്ന നില ക്രമീകരണ മാതൃകകൾ മനസ്സിലാക്കാനുമാകും
+ഈ പാഠം പൂർത്തിയാക്കുന്നതോടെ, നിങ്ങൾക്ക് കഴിയും:
+- azd ഘടകീകരണ അതളവും ക്രമക്രമീരുത്തലും അറിയുക
+- ഗ്ലോബൽ, പ്രോജക്റ്റ്-പ്രത്യേക ഘടകീകരണങ്ങൾ ഫലപ്രദമായി ക്രമീകരിക്കുക
+- വ്യത്യസ്ത ഘടകീകരണങ്ങളുള്ള ഒട്ടേറെ പരിസ്ഥിതികൾ കൈകാര്യം ചെയ്യുക
+- സുരക്ഷിതമായ ഓത്തന്റിക്കേഷൻ, അംഗീകാരം പ്രക്രിയകൾ നടപ്പിലാക്കുക
+- സങ്കീർണതയുള്ള സാഹചര്യങ്ങൾക്കായി ഉയർന്ന ഘടകീകരണ രീതികൾ മനസ്സിലാക്കുക
 
-## പഠന ഫലങ്ങൾ
+## പഠന ഫലം
 
-ഈ പാഠം പൂർത്തിയാക്കിയശേഷം, നിങ്ങൾ കഴിയും:
-- വികസന പ്രവൃത്തിവൈഭവങ്ങൾക്ക് ഉചിതമായ വിധത്തിൽ azd ക്രമീകരിക്കുക
-- বহু ഡിപ്ലോയ്മെന്റ് പരിസ്ഥിതികൾ സജ്ജമാക്കി നിയന്ത്രിക്കുക
-- സുരക്ഷിത ക്രമീകരണ മാനേജുമെന്റ് പ്രാക്ടിസുകൾ നടപ്പിലാക്കുക
-- ക്രമീകരണ-സംബന്ധിയായ പ്രശ്‌നങ്ങൾ ട്രബിൾഷൂട്ട് ചെയ്യുക
-- പ്രത്യേക സംഘടനാതmwശ്യങ്ങൾക്ക് അനുയോജ്യമായി azd പെരുമാറ്റം ഇഷ്ടാനുസൃതമാക്കുക
+ഈ പാഠം കഴിയുമ്പോൾ, നിങ്ങൾക്ക് കഴിയും:
+- azd മികച്ച ഡവലപ്പ്മെന്റ് പ്രവാഹങ്ങൾക്ക് ക്രമീകരിക്കുക
+- ഒന്നിലധികം ഡിപ്ലോയ്മെന്റ് പരിസ്ഥിതികൾ ക്രമീകരിച്ച് നിയന്ത്രിക്കുക
+- സുരക്ഷിതമായ ഘടകീകരണ മാനേജ്‌മെന്റ് പ്രാക്ടീസുകൾ നടപ്പിലാക്കുക
+- ഘടകീകരണ സംബന്ധമായ പ്രശ്നങ്ങൾ നിറുത്തിവയ്ക്കുക
+- പ്രത്യേക സംഘടനാ ആവശ്യങ്ങൾക്കായി azd പെരുമാറ്റം ഇഷ്ടാനുസൃതമാക്കുക
 
-ഈ സമഗ്ര ഗൈഡ് Azure Developer CLI ഫലപ്രദമായ ഡെവലപ്പ്മെന്റ് மற்றும் ഡിപ്ലോയ്‌മെന്റ് പ്രവർത്തനങ്ങൾക്കായി ക്രമീകരിക്കുന്നതിന്റെ എല്ലാ ഘടകങ്ങളും ഉൾക്കൊള്ളുന്നു.
+ഇത് സമഗ്രമായ മാർഗ്ഗനിർദേശമാണ്, Azure Developer CLI യെ ഏറ്റവും മികച്ച ഡവലപ്പ്മെന്റ്, ഡിപ്ലോയ്മെന്റ് പ്രവാഹങ്ങൾക്കായി ഘടകീകരിക്കുന്ന എല്ലാ പാഠങ്ങളും ഉൾക്കൊള്ളിച്ചിരിക്കുന്നു.
 
-## ക്രമീകരണ തലക്രമം
+## azd പ്രോജക്റ്റിലെ AI ഏജന്റ്മാർക്കുള്ള ബോധ്യം
 
-azd ഒരു തലക്രമ സിസ്റ്റം ഉപയോഗിക്കുന്നു:
-1. **Command-line flags** (ഏറ്റവും ഉയർന്ന പ്രാധാന്യം)
-2. **Environment variables**
-3. **Local project configuration** (`.azd/config.json`)
-4. **Global user configuration** (`~/.azd/config.json`)
-5. **Default values** (കുറഞ്ഞ പ്രാധാന്യം)
+AI ഏജന്റ്മാരെ നിങ്ങൾ പരിചയപ്പെടുത്താത്തവരാണ് എങ്കിൽ, azd ലോകത്തു അവയെപ്പറ്റി ഒരു സുലഭമായ ധാരണ ഇങ്ങനെ:
 
-## ആഗോള ക്രമീകരണം
+### ഏജന്റ് എന്താണ്?
 
-### ആഗോള ഡിഫോൾട്ടുകൾ ക്രമീകരിക്കൽ
+ഒരു ഏജന്റ് ഒരു സോഫ്റ്റ്‌വെയർ ഭാഗമാണ്, അവയുള്ള ഒഴിവുകൾ സ്വീകരിക്കുകയും, വാദം നടത്തിയും, നടപടി സ്വീകരിക്കുകയുമാണ്—പലപ്പോഴും AI മോഡൽ കാള്‍ ചെയ്യലിലൂടെ, ഡാറ്റ തിരയലിലൂടെ, അല്ലെങ്കിൽ മറ്റ് സേവനങ്ങൾ വിളിക്കുന്നതിലൂടെ. azd പ്രോജക്റ്റിൽ, ഏജന്റ് വെബ് ഫ്രണ്ട്‌എന്റ് അല്ലെങ്കിൽ API ബാക്ക്‌എന്റ് മുറ്റംപോലെ മറ്റൊരു **സേവനമാണ്**.
+
+### ഏജന്റുമാർ azd പ്രോജക്റ്റ് ഘടനയിൽ എങ്ങനെ ഫിറ്റ് ചെയ്യുന്നു
+
+azd പ്രോജക്റ്റ് മൂന്നു ശ്രേണികളിൽ നിന്ന് രൂപപ്പെട്ടിരിക്കുന്നു: **ഇൻഫ്രാസ്ട്രക്ചർ**, **കോഡ്**, **ഘടകീകരണം**. ഏജന്റുമാർ ഇത്തരം എല്ലാ ലെയറുകളിലുമായി മറ്റു സേവനങ്ങളുപോലെ ചേർക്കപ്പെടുന്നു:
+
+| ലെയർ | ഒരു പരമ്പരാഗത ആപ്പ് ചെയ്യുന്നത് | ഒരു ഏജന്റ് ചെയ്യുന്നത് |
+|-------|---------------------------|-------------------------|
+| **ഇൻഫ്രാസ്ട്രക്ചർ** (`infra/`) | വെബ് ആപ്പ്, ഡാറ്റാബേസ് പ്രൊവിഷൻ ചെയ്യുന്നു | AI മോഡൽ എന്റ്പോയിന്റ്, ഷേർച്ച് ഇൻഡക്സ്, അല്ലെങ്കിൽ ഏജന്റ് ഹോസ്റ്റ് പ്രൊവിഷൻ ചെയ്യുന്നു |
+| **കോഡ്** (`src/`) | നിങ്ങളുടെ ഫ്രന്റ്‌എന്റ്, API സോഴ്സ് കോഡ് ഉൾക്കൊള്ളുന്നു | ഏജന്റ് ലLogic, പ്രോമ്പ്റ്റ് നിർവചനങ്ങൾ ഉൾക്കൊള്ളുന്നു |
+| **ഘടകീകരണം** (`azure.yaml`) | നിങ്ങളുടെ സേവനങ്ങളും അവയുടെ ഹോസ്റ്റിംഗ് ടാർഗെറ്റുകളും ലിസ്റ്റ് ചെയ്യുന്നു | ഏജന്റ് ഒരു സേവനമായി ലിസ്റ്റ് ചെയ്ത് അതിന്റെ കോഡ്, ഹോസ്റ്റ് സൂചിപ്പിക്കുന്നു |
+
+### `azure.yaml` ന്റെ പങ്ക്
+
+ഇപ്പോൾ സിന്താക്സ് അടങ്ങിയിരിക്കാൻ നിങ്ങളൊരു ആവശ്യമില്ല. ധാരണയായി, `azure.yaml` എന്നത് azd-ന് പറയാനുള്ള ഫയൽ ആണ്: *"ഇവ ഇവ സംയോജിപ്പിച്ചിരിക്കുന്ന അനുഭവങ്ങളാണ്, അവയുടെ കോഡ് എവിടെ എന്ന്"*.
+
+നിങ്ങളുടെ പ്രോജക്റ്റിൽ AI ഏജന്റ് ഉൾക്കൊള്ളുമ്പോൾ, `azure.yaml` ആ ഏജന്റിനെ ഒരു സേവനമായി ലിസ്റ്റ് ചെയ്യുന്നു. തുടർന്ന് azd Microsoft Foundry Models ഇന്റ്പോയിന്റ്, അല്ലെങ്കിൽ ഏജന്റ് ഹോസ്റ്റ് ചെയ്യാൻ ഒരു കോൺറ്റൈനർ ആപ്പ് പോലെയുള്ള ശരിയായ ഇൻഫ്രാസ്ട്രക്ചർ പതിപ്പിക്കുകയും ഏജന്റ് കോഡ് ഡിപ്പ്ലോയ് ചെയ്യുന്നുമാണ്.
+
+ഇത് അടിസ്ഥാനപരമായി പുതിയ ഒന്നും പഠിക്കേണ്ടതില്ലെന്ന് സൂചിപ്പിക്കുന്നു. വെബ് സേവനം azd.എന്തുപോലെയാണ് ഏജന്റിനെ azd കൈകാര്യം ചെയ്യുന്നത് മനസിലാക്കുന്നതെങ്കിൽ, ഏകദേശം അവിടെയും ഇതുപോലെയാണ്.
+
+## ഘടകീകരണ അധികാരക്രമം
+
+azd ഒരു ശ്രേണീകൃത ഘടകീകരണ സിസ്റ്റം ഉപയോഗിക്കുന്നു:
+1. **കമാൻഡ്-ലൈൻ ഫ്‌ളാഗുകൾ** (ഊന്നൽ ഉയർന്നത്)
+2. **പരിസ്ഥിതി വ്യത്യാസങ്ങൾ**
+3. **സ്ഥലീയ പ്രോജക്റ്റ് ഘടകീകരണം** (`.azd/config.json`)
+4. **ഗ്ലോബൽ ഉപയോക്തൃ ഘടകീകരണം** (`~/.azd/config.json`)
+5. **ഡീഫോൾട്ട് മൂല്യങ്ങൾ** (ഊന്നൽ കുറഞ്ഞത്)
+
+## ഗ്ലോബൽ ഘടകീകരണം
+
+### ഗ്ലോബൽ ഡീഫോൾട്ട്സ് സജ്ജമാക്കൽ
 ```bash
-# ഡിഫോൾട്ട് സബ്സ്ക്രിപ്ഷൻ സജ്ജമാക്കുക
+# മൾസെലക്ഷൻ സബ്‌സ്‌ക്രിപ്ഷൻ സജ്ജീകരിക്കുക
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# ഡിഫോൾട്ട് ലൊക്കേഷൻ സജ്ജമാക്കുക
+# മൾസെലക്ഷൻ സ്ഥലം സജ്ജീകരിക്കുക
 azd config set defaults.location "eastus2"
 
-# ഡിഫോൾട്ട് റിസോഴ്‌സ് ഗ്രൂപ്പ് നാമകരണം സജ്ജമാക്കുക
+# മൾസെലക്ഷൻ റിസോഴ്‌സ് ഗ്രൂപ്പ് നാമകരണം നിരൂപണം സജ്ജീകരിക്കുക
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# എല്ലാ ആഗോള ക്രമീകരണങ്ങളും കാണുക
+# എല്ലാ ആഗോള കോൺഫിഗറേഷൻ likewise കാണുക
 azd config list
 
-# ഒരു ക്രമീകരണം നീക്കം ചെയ്യുക
+# ഒരു കോൺഫിഗറേഷൻ നീക്കം ചെയ്യുക
 azd config unset defaults.location
 ```
 
-### സാധാരണ ആഗോള ക്രമീകരണങ്ങൾ
+### പൊതുവായ ഗ്ലോബൽ സെറ്റിംഗുകൾ
 ```bash
 # വികസന മുൻഗണനകൾ
-azd config set alpha.enable true                    # ആൽഫാ സവിശേഷതകൾ സജീവമാക്കുക
-azd config set telemetry.enabled false             # ടെലിമെട്രി നിഷ്ക്രിയമാക്കുക
-azd config set output.format json                  # ഔട്ട്പുട്ട് ഫോർമാറ്റ് ക്രമീകരിക്കുക
+azd config set alpha.enable true                    # ആൽഫാ ഫീച്ചറുകൾ ആക്റ്റിവേറ്റ് ചെയ്യുക
+azd config set telemetry.enabled false             # ടെലിമെട്രി അപ്രാപ്യം ആക്കുക
+azd config set output.format json                  # ഔട്ട്‌പുട്ട് ഫോർമാറ്റ് സെറ്റ് ചെയ്യുക
 
 # സുരക്ഷാ ക്രമീകരണങ്ങൾ
-azd config set auth.useAzureCliCredential true     # പ്രാമാണീകരണത്തിന് Azure CLI ഉപയോഗിക്കുക
-azd config set tls.insecure false                  # TLS പരിശോധന നിർബന്ധമാക്കുക
+azd config set auth.useAzureCliCredential true     # ഓത്തന്റിക്കേഷനിന് Azure CLI ഉപയോഗിക്കുക
+azd config set tls.insecure false                  # TLS പരിശോധന നിർബന്ധിതമാക്കുക
 
-# പ്രകടന മെച്ചപ്പെടുത്തൽ
-azd config set provision.parallelism 5             # സമാന്തര റിസോഴ്‌സ് സൃഷ്ടി
-azd config set deploy.timeout 30m                  # ഡിപ്ലോയ്‌മെന്റ് സമയാവധി
+# പ്രകടന ട്യൂണിംഗ്
+azd config set provision.parallelism 5             # സമകല്പിത റിസോഴ്‌സ് സൃഷ്ടി
+azd config set deploy.timeout 30m                  # ഡിപ്ലോയ്മെന്റ് ടൈംഔട്ട്
 ```
 
-## 🏗️ പ്രോജക്റ്റ് ക്രമീകരണം
+## 🏗️ പ്രോജക്ട് ഘടകീകരണം
 
 ### azure.yaml ഘടന
 `azure.yaml` ഫയൽ നിങ്ങളുടെ azd പ്രോജക്റ്റിന്റെ ഹൃദയമാണ്:
@@ -155,9 +181,9 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### സർവീസ് ക്രമീകരണ ഓപ്ഷനുകൾ
+### സേവന ഘടകീകരണ ഓപ്ഷനുകൾ
 
-#### ഹോസ്റ്റ് തരങ്ങൾ
+#### ഹോസ്റ്റ് ടൈപ്പുകൾ
 ```yaml
 services:
   web-static:
@@ -176,7 +202,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### ഭാഷാ-നിർദ്ദിഷ്ട ക്രമീകരണങ്ങൾ
+#### ഭാഷ-പ്രത്യേക സെറ്റിംഗുകൾ
 ```yaml
 services:
   node-app:
@@ -200,22 +226,22 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 പരിസ്ഥിതി മാനേജുമെന്റ്
+## 🌟 പരിസ്ഥിതി മാനേജ്‌മെന്റ്
 
 ### പരിസ്ഥിതികൾ സൃഷ്ടിക്കൽ
 ```bash
-# ഒരു പുതിയ പരിസ്ഥിതി സൃഷ്ടിക്കുക
+# പുതിയ പരിസരം സൃഷ്ടിക്കുക
 azd env new development
 
-# നിശ്ചിത സ്ഥലത്തോടുകൂടി സൃഷ്ടിക്കുക
+# പ്രത്യേക സ്ഥലം ഉപയോഗിച്ച് സൃഷ്ടിക്കുക
 azd env new staging --location "westus2"
 
-# ടെംപ്ലേറ്റിൽ നിന്ന് സൃഷ്ടിക്കുക
+# ടെംപ്ലേറ്റ് ഉപയോഗിച്ച് സൃഷ്ടിക്കുക
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### പരിസ്ഥിതി ക്രമീകരണം
-ഓരോ പരിസ്ഥിതിയ്ക്കുംതന്നെ സ്വന്തമായ ക്രമീകരണം `.azure/<env-name>/config.json` ൽ ഉണ്ട്:
+### പരിസ്ഥിതി ഘടകീകരണം
+ഓരോ പരിസ്ഥിതിക്കും `.azure/<env-name>/config.json` എന്ന വ്യത്യസ്ത ഘടകീകരണം ഉണ്ട്:
 
 ```json
 {
@@ -237,33 +263,33 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 }
 ```
 
-### പരിസ്ഥിതി വേരിയബിളുകൾ
+### പരിസ്ഥിതി വ്യത്യാസങ്ങൾ
 ```bash
-# പരിസ്ഥിതി നിർദ്ദിഷ്ട വേരിയബിളുകൾ സജ്ജമാക്കുക
+# പരിസരവുമായി ബന്ധപ്പെട്ട വേരിയബിളുകൾ സജ്ജീകരിക്കുക
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# പരിസ്ഥിതി വേരിയബിളുകൾ കാണുക
+# പരിസര വേരിയബിളുകൾ കാണുക
 azd env get-values
 
-# പ്രതീക്ഷിച്ച ഔട്ട്‌പുട്ട്:
+# പ്രതീക്ഷിക്കുന്ന ഔട്ട്‌പുട്ട്:
 # DATABASE_URL=postgresql://user:pass@host:5432/db
 # API_KEY=secret-api-key
 # DEBUG=true
 
-# പരിസ്ഥിതി വേരിയബിള്‍ നീക്കം ചെയ്യുക
+# പരിസര വേരിയബിള്‍ നീക്കം ചെയ്യുക
 azd env unset DEBUG
 
-# നീക്കം സ്ഥിരീകരിക്കുക
+# നീക്കം ശരിയായി നടന്നതായി പരിശോധിക്കുക
 azd env get-values | grep DEBUG
-# (ഏതും തിരികെ ലഭിക്കരുത്)
+# (ഇതിൽ ഒന്നും തിരികെ നൽകേണ്ടതില്ല)
 ```
 
-### പരിസ്ഥിതി ടെംപ്ലേറ്റുകൾ
-സുസ്ഥിരമായ പരിസ്ഥിതി സെറ്റപ്പിന് `.azure/env.template` സൃഷ്ടിക്കുക:
+### പരിസ്ഥിതി ടേംപ്ലേറ്റുകൾ
+സമാനമായ പരിസ്ഥിതി ക്രമീകരണത്തിന് `.azure/env.template` സൃഷ്ടിക്കുക:
 ```bash
-# ആവശ്യമായ വേരിയബിളുകൾ
+# ആവശ്യമായ മാറ്റികൾ
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
@@ -277,24 +303,24 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 പ്രാമാണീകരണ ക്രമീകരണം
+## 🔐 ഓത്തന്റിക്കേഷൻ ഘടകീകരണം
 
-### Azure CLI സംയോജനം
+### Azure CLI ഇന്റഗ്രേഷൻ
 ```bash
-# Azure CLI ക്രെഡൻഷ്യലുകൾ ഉപയോഗിക്കുക (ഡീഫോൾട്ട്)
+# ആസ്യൂർ CLI അംഗീകാരങ്ങൾ ഉപയോഗിക്കുക (ഡീഫോൾട്ട്)
 azd config set auth.useAzureCliCredential true
 
-# നിശ്ചിത ടെന്നന്റുമായി ലോഗിൻ ചെയ്യുക
+# പ്രത്യേക ടെനന്റിനായി ലോഗിൻ ചെയ്യുക
 az login --tenant <tenant-id>
 
-# ഡീഫോൾട്ട് സബ്സ്ക്രിപ്ഷൻ നിശ്ചയിക്കുക
+# ഡീഫോൾട്ട് സബ്സ്ക്രിപ്ഷൻ ക്രമീകരിക്കുക
 az account set --subscription <subscription-id>
 ```
 
-### Service Principal പ്രാമാണീകരണം
-CI/CD പൈപ്പ്‌ലൈൻകൾക്കായി:
+### സർവീസ് പ്രിൻസിപ്പൽ ഓത്തന്റിക്കേഷൻ
+CI/CD പൈപ്പ്ലൈനിലേക്ക്:
 ```bash
-# പരിസ്ഥിതി വ്യരിയബിളുകൾ ക്രമീകരിക്കുക
+# പരിസ്ഥിതി വ്യത്യാസങ്ങൾ സ്ഥാപിക്കുക
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
@@ -304,18 +330,18 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Managed Identity
-Azure-ആധാരിത(hosted) പരിസ്ഥിതികളിൽ:
+### മാനേജുചെയ്ത ഐഡന്റിറ്റി
+Azure-ഹോസ്റ്റ് ചെയ്ത പരിസ്ഥിതികൾക്കായി:
 ```bash
-# മാനേജ്ഡ് ഐഡന്റിറ്റി പ്രാമാണീകരണം സജീവമാക്കുക
+# മാനേജുചെയ്യുന്ന ഐഡന്റിറ്റി പ്രാമാണീകരണം സജ്ജമാക്കുക
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ ഇൻഫ്രാസ്റ്റ്രക്ചർ ക്രമീകരണം
+## 🏗️ ഇൻഫ്രാസ്ട്രക്ചർ ഘടകീകരണം
 
 ### Bicep പാരാമീറ്ററുകൾ
-ഇൻഫ്രാമൊട് പാരാമീറ്ററുകൾ `infra/main.parameters.json` ൽ ക്രമീകരിക്കുക:
+`infra/main.parameters.json`-ൽ ഇൻഫ്രാസ്ട്രക്ചർ പാരാമീറ്ററുകൾ ക്രമീകരിക്കുക:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -337,8 +363,8 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 }
 ```
 
-### Terraform ക്രമീകരണം
-Terraform പ്രോജക്റ്റുകൾക്കായി, `infra/terraform.tfvars` ൽ ക്രമീകരിക്കുക:
+### ടെറാഫോം ഘടകീകരണം
+ടെറാഫോം പ്രോജക്റ്റുകൾക്ക് `infra/terraform.tfvars` ക്രമീകരിക്കുക:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -346,9 +372,9 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 ഡിപ്ലോയ്മെന്റ് ക്രമീകരണം
+## 🚀 ഡിപ്ലോയ്മെന്റ് ഘടകീകരണം
 
-### ബിൽഡ് ക്രമീകരണം
+### ബിൽഡ് ഘടകീകരണം
 ```yaml
 # In azure.yaml
 services:
@@ -371,7 +397,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Docker ക്രമീകരണം
+### ഡോക്കർ ഘടകീകരണം
 ```yaml
 services:
   api:
@@ -387,17 +413,17 @@ services:
 ```
 ഉദാഹരണ `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 ഉയർന്ന ക്രമീകരണങ്ങൾ
+## 🔧 ഉയർന്ന ഘടകീകരണം
 
-### കസ്റ്റം റിസോഴ്സ് നാമകരണം
+### അനുകൂല-ഉപകരണ നാമകരണം
 ```bash
-# നാമകരണ നിബന്ധനകൾ സജ്ജീകരിക്കുക
+# നാമകരണ രീതികൾ സജ്ജമാക്കുക
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### നെറ്റ്‌വർക്ക് ക്രമീകരണം
+### നെറ്റ്‌വർക്ക് ഘടകീകരണം
 ```yaml
 # In azure.yaml
 infra:
@@ -408,7 +434,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### മോണിറ്ററിംഗ് ക്രമീകരണം
+### മേൽനോട്ട ഘടകീകരണം
 ```yaml
 # In azure.yaml
 monitoring:
@@ -420,11 +446,11 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 പരിസ്ഥിതി-നിർദ്ദിഷ്ട ക്രമീകരണങ്ങൾ
+## 🎯 പരിസ്ഥിതി-പ്രത്യേക ഘടകീകരണങ്ങൾ
 
-### ഡെവലപ്‌മെന്റ് പരിസ്ഥിതി
+### ഡവലപ്പ്മെന്റ് പരിസ്ഥിതി
 ```bash
-# .azure/വികസനം/.env
+# .azure/development/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
@@ -433,7 +459,7 @@ MOCK_EXTERNAL_APIS=true
 
 ### സ്റ്റേജിംഗ് പരിസ്ഥിതി
 ```bash
-# .azure/സ്റ്റേജിംഗ്/.env
+# .azure/staging/.env
 DEBUG=false
 LOG_LEVEL=info
 ENABLE_MONITORING=true
@@ -449,22 +475,22 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 ക്രമീകരണ പരിശോധന
+## 🔍 ഘടകീകരണ പരിശോധന
 
-### ക്രമീകരണ പരിശോധന
+### ഘടകീകരണം സ്ഥിരീകരിക്കുക
 ```bash
-# കോൺഫിഗറേഷൻ സിന്റാക്സ് പരിശോധിക്കുക
+# കോൺഫിഗറേഷൻ സിന്റാക്സു പരിശോധിക്കുക
 azd config validate
 
-# പരിസ്ഥിതി വേരിയബിളുകൾ പരീക്ഷിക്കുക
+# ടെസ്റ്റ് പരിസ്ഥിതി വ്യത്യാസങ്ങൾ
 azd env get-values
 
 # ഇൻഫ്രാസ്ട്രക്ചർ സാധൂകരിക്കുക
 azd provision --dry-run
 ```
 
-### ക്രമീകരണ സ്ക്രിപ്റ്റുകൾ
-വാലിഡേഷൻ സ്ക്രിപറ്റുകൾ `scripts/` ൽ സൃഷ്ടിക്കുക:
+### ഘടകീകരണ സ്ക്രിപ്റ്റുകൾ
+`script/` dir-ൽ പരിശോധനാ സ്ക്രിപ്റ്റുകൾ സൃഷ്ടിക്കുക:
 
 ```bash
 #!/bin/bash
@@ -472,13 +498,13 @@ azd provision --dry-run
 
 echo "Validating configuration..."
 
-# ആവശ്യമായ പരിസ്ഥിതി വേരിയബിളുകൾ പരിശോധിക്കുക
+# ആവശ്യമായ പരിസ്ഥിതി വാരിയബിളുകൾ പരിശോധിക്കുക
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# azure.yaml സിന്റാക്സ് സാധുവാണോ എന്ന് പരിശോധിക്കുക
+# azure.yaml സിന്താക്സ് സാധുവാണോ എന്ന് പരിശോധിക്കുക
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -487,9 +513,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 മികച്ച രീതികൾ
+## 🎓 മികച്ച പ്രാക്ടീസുകൾ
 
-### 1. പരിസ്ഥിതി വേരിയബിളുകൾ ഉപയോഗിക്കുക
+### 1. പരിസ്ഥിതി വ്യത്യാസങ്ങൾ ഉപയോഗിക്കുക
 ```yaml
 # Good: Use environment variables
 database:
@@ -500,7 +526,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. ക്രമീകരണ ഫയലുകൾ ഉറവിടവത്കരണം
+### 2. ഘടകീകരണ ഫയലുകൾ ക്രമീകരിക്കുക
 ```
 .azure/
 ├── config.json              # Global project config
@@ -516,16 +542,16 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. വേർഷൻ കൺട്രോൾ പരിഗണനകൾ
+### 3. വേർഷൻ നിയന്ത്രണ പരിഗണനകൾ
 ```bash
 # .gitignore
-.azure/*/config.json         # പരിസ്ഥിതി ക്രമീകരണങ്ങൾ (റിസോഴ്‌സ് ഐഡികൾ ഉൾക്കൊള്ളുന്നു)
-.azure/*/.env               # പരിസ്ഥിതി വേരിയബിളുകൾ (രഹസ്യങ്ങൾ അടങ്ങിയിരിക്കാം)
+.azure/*/config.json         # പരിസരക്രമങ്ങൾ (റിസോഴ്‌സ് ഐഡികൾ ഉൾക്കൊള്ളുന്നു)
+.azure/*/.env               # പരിസ്ഥിതി variávelകൾ (രഹസ്യങ്ങൾ ഉൾക്കൊള്ളാവുന്നതാണ്)
 .env                        # പ്രാദേശിക പരിസ്ഥിതി ഫയൽ
 ```
 
-### 4. ക്രമീകരണ ഡോക്യുമെന്റേഷൻ
-നിങ്ങളുടെ ക്രമീകരണം `CONFIG.md` ൽ രേഖപ്പെടുത്തുക:
+### 4. ഘടകീകരണ ഡോക്യുമെന്റേഷൻ
+`CONFIG.md` -ൽ നിങ്ങളുടെ ഘടകീകരണം രേഖപ്പെടുത്തുക:
 ```markdown
 # Configuration Guide
 
@@ -540,92 +566,92 @@ database:
 - Production: Uses production database, error logging only
 ```
 
-## 🎯 പ്രായോഗിക അഭ്യാസങ്ങൾ
+## 🎯 ഹാൻഡ്സ്-ഓൺ പ്രാക്ടീസ് വ്യായാമങ്ങൾ
 
-### അഭ്യാസം 1: ബഹു-പരിസ്ഥിതി ക്രമീകരണം (15 മിനിറ്റ്)
+### വ്യായാമം 1: മൾട്ടി-എൻവയോൺമെന്റ് ഘടകീകരണം (15 മിനിറ്റ്)
 
-**ലക്ഷ്യം**: വ്യത്യസ്ത സെറ്റിംഗ്‌സുകളിലൂടെ മൂന്ന് പരിസ്ഥിതികൾ സൃഷ്ടിക്കുകയും ക്രമീകരിക്കുകയും ചെയ്യുക
+**ലക്ഷ്യം**: വ്യത്യസ്ത സെറ്റിങ്ങുകളുമായി മൂന്ന് പരിസ്ഥിതികൾ സൃഷ്ടിച്ച് ക്രമീകരിക്കുക
 
 ```bash
-# ഡെവലപ്പ്മെന്റ് പരിസ്ഥിതി സൃഷ്ടിക്കുക
+# വികസന പരിസ്ഥിതി സൃഷ്‌ടിക്കുക
 azd env new dev
 azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# സ്റ്റേജിംഗ് പരിസ്ഥിതി സൃഷ്ടിക്കുക
+# സ്റ്റേജിംഗ് പരിസ്ഥിതി സൃഷ്‌ടിക്കുക
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 50
 
-# പ്രൊഡക്ഷൻ പരിസ്ഥിതി സൃഷ്ടിക്കുക
+# പ്രൊഡക്ഷന്‍ പരിസ്ഥിതി സൃഷ്‌ടിക്കുക
 azd env new production
 azd env set LOG_LEVEL error
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 10
 
-# ഓരോ പരിസ്ഥിതിയും പരിശോധിക്കുക
+# ഓരോ പരിസ്ഥിതിയും സ്ഥിരീകരിക്കുക
 azd env select dev && azd env get-values
 azd env select staging && azd env get-values
 azd env select production && azd env get-values
 ```
 
 **വിജയ മാനദണ്ഡങ്ങൾ:**
-- [ ] മൂന്ന് പരിസ്ഥിതികൾ വിജയകരമായി സൃഷ്ടിച്ചു
-- [ ] ഓരോ പരിസ്ഥിതിക്കും വ്യത്യസ്ത ക്രമീകരണമുണ്ട്
-- [ ] പിശകുകൾ കൂടാതെ പരിസ്ഥിതികൾ തമ്മിൽ മാറാൻ കഴിയും
+- [ ] മൂന്ന് പരിസ്ഥിതികളും വിജയകരമായി സൃഷ്ടിച്ചു
+- [ ] ഓരോ പരിസ്ഥിതിക്കും വ്യത്യസ്ത ഘടകീകരണം ഉണ്ടായിരിക്കുന്നു
+- [ ] പരിസ്ഥിതികൾ തമ്മിൽ പകരംവെക്കാൻ പിഴവ് സംഭവിക്കാതെ
 - [ ] `azd env list` മൂന്ന് പരിസ്ഥിതികളും കാണിക്കുന്നു
 
-### അഭ്യാസം 2: രഹസ്യ മാനേജുമെന്റ് (10 മിനിട്ട്)
+### വ്യായാമം 2: രഹസ്യ മാനേജ്‌മെന്റ് (10 മിനിറ്റ്)
 
-**ലക്ഷ്യം**: সংവേദനশീല ഡാറ്റയോടെയുള്ള സുരക്ഷിത ക്രമീകരണം പ്രായോഗികമാക്കുക
+**ലക്ഷ്യം**: സങ്കീർണമായ ഡാറ്റ ഉപയോഗിച്ച് സുരക്ഷിത ഘടകീകരണം പ്രാക്ടീസ് ചെയ്യുക
 
 ```bash
-# രഹസ്യങ്ങൾ സജ്ജീകരിക്കുക (ഔട്ട്പുട്ടിൽ പ്രദർശിപ്പിക്കില്ല)
+# രഹസ്യങ്ങൾ സജ്ജമാക്കുക (ഔട്ട്‌പുട്ടിൽ കാണിക്കുന്നില്ല)
 azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 
-# രഹസ്യമല്ലാത്ത കോൺഫിഗ് സജ്ജീകരിക്കുക
+# രഹസ്യമല്ലാത്ത ക്രമീകരണങ്ങൾ സജ്ജമാക്കുക
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# പരിസ്ഥിതി കാണുക (രഹസ്യങ്ങൾ മറച്ചിരിക്കണം)
+# പരിസ്ഥിതി കാണുക (രഹസ്യങ്ങൾ മറച്ചു കാണിക്കണം)
 azd env get-values
 
-# രഹസ്യങ്ങൾ സംഭരിച്ചിട്ടുണ്ടെന്ന് സ്ഥിരീകരിക്കുക
+# രഹസ്യങ്ങൾ സഞ്ചിതമാക്കിയിട്ടുണ്ടെന്ന് സ്ഥിരീകരിക്കുക
 azd env get DB_PASSWORD  # യഥാർത്ഥ മൂല്യം കാണിക്കണം
 ```
 
 **വിജയ മാനദണ്ഡങ്ങൾ:**
-- [ ] സീക്രെറ്റുകൾ ടെർമിനലിൽ പ്രദർശിപ്പിക്കാതെ സംഭരിക്കുന്നു
-- [ ] `azd env get-values` റെഡാക്ടുചെയ്തിരിക്കുന്ന സീക്രെറ്റുകൾ കാണിക്കുന്നു
-- [ ] വ്യക്തിഗത `azd env get <SECRET_NAME>` യഥാർത്ഥ മൂല്യം വീണ്ടെടുക്കുന്നു
+- [ ] രഹസ്യങ്ങൾ ടെർമിനലിൽ കാണാതെ സൂക്ഷിക്കപ്പെട്ടിരിക്കുന്നു
+- [ ] `azd env get-values` ഇവയുടെ രഹസ്യങ്ങൾ റെഡാക്ടുചെയ്‌താക്ഷരങ്ങളിൽ കാണിക്കുന്നു
+- [ ] വ്യക്തിഗതമായി `azd env get <SECRET_NAME>` യഥാർത്ഥ മൂല്യം കൊണ്ടുവരുന്നു
 
-## അടുത്ത ഘട്ടങ്ങൾ
+## അടുത്ത ചുവട്
 
-- [Your First Project](first-project.md) - പ്രായോഗികമായി ക്രമീകരണം പ്രയോഗിക്കുക
-- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - ഡിപ്ലോയ്മെന്റിന് ക്രമീകരണം ഉപയോഗിക്കുക
-- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - പ്രൊഡക്ഷൻ-സജ്ജമായ ക്രമീകരണങ്ങൾ
+- [Your First Project](first-project.md) - പ്രായോഗികമായി ഘടകീകരണം ഉപയോഗിക്കുക
+- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - ഡിപ്ലോയ്മെന്റ് വേണ്ടി ഘടകീകരണം ഉപയോഗിക്കുക
+- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - പ്രൊഡക്ഷൻ-റെഡിയുടെ ഘടകീകരണങ്ങൾ
 
 ## റഫറൻസുകൾ
 
-- [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Environment Variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [azd ഘടകീകരണ റഫറൻസ്](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml സ്കീമ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [പരിസ്ഥിതി വ്യത്യാസങ്ങൾ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**അദ്ധ്യായ നാവിഗേഷൻ:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
-- **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
-- **Next Lesson**: [Your First Project](first-project.md)
+**അധ്യായത്തിൽ നാവിഗേഷൻ:**
+- **📚 കോഴ്സ് ഹോം**: [AZD For Beginners](../../README.md)
+- **📖 നിലവിലുള്ള അധ്യായം**: അധ്യായം 3 - ഘടകീകരണം & ഓത്തന്റിക്കേഷൻ
+- **⬅️ മുൻപ്**: [Your First Project](first-project.md)
+- **➡️ അടുത്ത അധ്യായം**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
+- **അടുത്ത പാഠം**: [Your First Project](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-വിമുക്തി അറിയിപ്പ്:
-ഈ രേഖ AI വിവർത്തന സേവനം Co-op Translator (https://github.com/Azure/co-op-translator) ഉപയോഗിച്ച് വിവർത്തനമാക്കിയതാണ്. ഞങ്ങൾ കൃത്യതയ്ക്ക് പരിശ്രമിച്ചെങ്കിലും ഓട്ടോമേറ്റഡ് വിവർത്തനങ്ങളിൽ പിഴവുകൾ അല്ലെങ്കിൽ അസാധുതകൾ ഉണ്ടാകുമെന്ന് ദയവായി ശ്രദ്ധിക്കുക. ഈ രേഖയുടെ സ്വദേശീഭാഷയിലെ മൂല പതിപ്പാണ് പ്രാമാണിക സ്രോതസ്സായി പരിഗണിക്കേണ്ടത്. നിർണായകമായ വിവരങ്ങൾക്കായി പ്രൊഫഷണൽ മനുഷ്യ വിവർത്തനം നിർദേശിക്കുന്നു. ഈ വിവർത്തനം ഉപയോഗിച്ചതിൽ നിന്നുണ്ടാകുന്ന ഏതൊരു തെറ്റിദ്ധാരണയ്ക്കും വ്യാഖ്യാനക്കേടും我们 (we) ഞങ്ങൾക്ക് ഉത്തരവാദിത്വം ഉണ്ടാകില്ല.
+**ഒഴിവുവരുത്തൽ**:  
+ഈ പ്രമാണം AI പരിഭാഷാ സേവനമായ [Co-op Translator](https://github.com/Azure/co-op-translator) ഉപയോഗിച്ച് പരിഭാഷപ്പെടുത്തപ്പെട്ടതാണ്. നാം درستതയ്ക്കായി ശ്രമിച്ചിട്ടും, സ്വയം പ്രവർത്തിക്കുന്ന പരിഭാഷകളിൽ പിശകുകൾ അല്ലെങ്കിൽ തെറ്റുകൾ ഉണ്ടാകാൻ സാധ്യതയുണ്ട് എന്നും ദയവായി ശ്രദ്ധിച്ചുകൊള്ളുക. അതിന്റെ സ്വദേശീയ ഭാഷയിൽ ഉള്ള മൃല പ്രമാണം സാക്ഷ്യപ്രമാണമായി കണക്കാക്കണം. പ്രധാന വിവരങ്ങൾക്ക്, പ്രൊഫഷണൽ മനുഷ്യ പരിഭാഷ ശുപാർശ ചെയ്യുന്നു. ഈ പരിഭാഷയുടെ ഉപയോഗത്തിൽ നിന്നുണ്ടാകുന്ന തെറ്റിദ്ധാരണകൾക്കും വ്യാഖ്യാന പിഴവുകൾക്കും ഞങ്ങൾ ഉത്തരവാദികളല്ല.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

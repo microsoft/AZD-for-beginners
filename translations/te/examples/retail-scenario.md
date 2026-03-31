@@ -1,158 +1,158 @@
-# బహుళ-ఏజెంట్ కస్టమర్ సపోర్ట్ పరిష్కారం - రిటైలర్ సన్నివేశం
+# మల్టీ-ఏజెంట్ కస్టమర్ సపోర్ట్ పరిష్కారం - రీటైలర్ సందర్భం
 
-**అధ్యాయం 5: బహుళ-ఏజెంట్ AI పరిష్కారాలు**
-- **📚 కోర్సు హోమ్**: [ప్రారంభకులకు AZD](../README.md)
-- **📖 ప్రస్తుత అధ్యాయం**: [అధ్యాయం 5: బహుళ-ఏజెంట్ AI పరిష్కారాలు](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
-- **⬅️ ముందు అవసరాలు**: [అధ్యాయం 2: AI-ప్రధాన అభివృద్ధి](../docs/microsoft-foundry/microsoft-foundry-integration.md)
-- **➡️ తర్వాతి అధ్యాయం**: [అధ్యాయం 6: ప్రీ-డిప్లాయ్‌మెంట్ ధృవీకరణ](../docs/pre-deployment/capacity-planning.md)
-- **🚀 ARM టెంప్లేట్లు**: [డిప్లాయ్‌మెంట్ ప్యాకేజ్](retail-multiagent-arm-template/README.md)
+**చాప్టర్ 5: మల్టీ-ఏజెంట్ AI పరిష్కారాలు**
+- **📚 కోర్స్ హోమ్**: [AZD For Beginners](../README.md)
+- **📖 ప్రస్తుత చాప్టర్**: [Chapter 5: Multi-Agent AI Solutions](../README.md#-chapter-5-multi-agent-ai-solutions-advanced)
+- **⬅️ ప్రీరిక్విసిట్స్**: [Chapter 2: AI-First Development](../docs/microsoft-foundry/microsoft-foundry-integration.md)
+- **➡️ తదుపరి చాప్టర్**: [Chapter 6: Pre-Deployment Validation](../docs/pre-deployment/capacity-planning.md)
+- **🚀 ARM టెంప్లేట్లు**: [Deployment Package](retail-multiagent-arm-template/README.md)
 
-> **⚠️ ఆర్కిటెక్చర్ గైడ్ - పనిచేయని అమలు కాదు**  
-> ఈ డాక్యుమెంట్ బహుళ-ఏజెంట్ సిస్టమ్ నిర్మాణానికి సంబంధించిన **సమగ్ర ఆర్కిటెక్చర్ బ్లూప్రింట్**ను అందిస్తుంది.  
-> **ఏది ఉంది:** సౌకర్యం డిప్లాయ్‌మెంట్ కొరకు ARM టెంప్లేట్ (Azure OpenAI, AI Search, Container Apps, మొదలైనవి)  
-> **మీరు ఏది నిర్మించాలి:** ఏజెంట్ కోడ్, రౌటింగ్ లాజిక్, ఫ్రంటెండ్ UI, డేటా పైప్‌లైన్లు (అంచనాగా 80-120 గంటలు)  
+> **⚠️ ఆర్కిటెక్చర్ గైడ్ - పనిలో లేకపోయే అమలు**  
+> ఈ డాక్యుమెంట్ ఒక మల్టీ-ఏజెంట్ సిస్టమ్ రూపొందించడానికి **విస్తృత ఆర్కిటెక్చర్ బ్లూప్రింట్** ను అందిస్తుంది.  
+> **ఏం ఉందో:** డిప्लాయ్‌మెంట్ కొరకు ARM టెంప్లేట్ (Microsoft Foundry Models, AI Search, Container Apps, మొదలైనవి)  
+> **మీరు ఏమి నిర్మించాలి:** ఏజెంట్ కోడ్, రౌటింగ్ లాజిక్, ఫ్రంట్ ఎండ్ UI, డేటా పైప్లైన్లు (అంచనా 80-120 గంటలు)  
 >  
-> **ఇదిని ఇలా ఉపయోగించండి:**  
-> - ✅ మీ స్వంత బహుళ-ఏజెంట్ ప్రాజెక్టుకు ఆర్కిటెక్చర్ సూచన  
-> - ✅ బహుళ-ఏజెంట్ డిజైన్ నమూనాల కోసం అభ్యాస మార్గదర్శకం  
-> - ✅ Azure వనరులను డిప్లాయ్ చేయడానికి ఇన్ఫ్రాస్ట్రక్చర్ టెంప్లేట్  
-> - ❌ సిద్ధంగా నడచే అప్లికేషన్ కాదు (గణనీయమైన అభివృద్ధి అవసరం)
+> **ఇదిగో ఉపయోగించండి:**
+> - ✅ మీ స్వంత మల్టీ-ఏజెంట్ ప్రాజెక్ట్ కోసం ఆర్కిటెక్చర్ రిఫరెన్స్
+> - ✅ మల్టీ-ఏజెంట్ డిజైన్ ప్యాటర్న్స్ నేర్చుకునే మార్గదర్శకము
+> - ✅ Azure రిసోర్సుల‌ను డిప్లాయ్ చేయడానికి ఇన్ఫ్రాస్ట్రక్చర్ టెంప్లేట్
+> - ❌ ఇప్పటికే పని చేసే అప్లికేషన్ కాదు (పెద్ద డెవెలప్‌మెంట్ అవసరం)
 
 ## అవలోకనం
 
-**అధ్యయన లక్ష్యం:** అధునాతన AI సామర్థ్యాలు కలిగిన రిటైలర్ కోసం ఉత్పత్తి-సిద్ధ బహుళ-ఏజెంట్ కస్టమర్ సపోర్ట్ చాట్‌బాట్ నిర్మాణం, డిజైన్ నిర్ణయాలు మరియు అమలు దృష్టిని అర్థం చేసుకోవడం.
+**కెంపక మెటా:** ఒక రీటైలర్ కోసం ప్రొడక్షన్-రెడీ మల్టీ-ఏజెంట్ కస్టమర్ సపోర్ట్ చాట్బాట్ నిర్మాణానికి ఆర్కిటెక్చర్, డిజైన్ నిర్ణయాలు మరియు అమలుపై అవగాహన పొందటం — ఇన్వెంటరీ మేనేజ్‌మెంట్, డాక్యুমెంట్ ప్రాసెసింగ్, మరియు తెలివైన కస్టమర్ ఇంటరాక్షన్లు వంటి ఫీచర్లతో కూడిన.Advanced AI సామర్థ్యాలు.
 
-**పూర్తిచేసేందుకు సమయం:** చదవడం + అర్థం చేసుకోవడం (2-3 గంటలు) | పూర్తి అమలు నిర్మాణం (80-120 గంటలు)
+**పూర్తి చేయడానికి సమయం:** చదవడం + అర్ధం చేసుకోడం (2-3 గంటలు) | పూర్తి అమలు నిర్మించడం (80-120 గంటలు)
 
-**మీరు ఏమి నేర్చుకోగలరు:**
-- బహుళ-ఏజెంట్ ఆర్కిటెక్చర్ నమూనాలు మరియు డిజైన్ సిద్ధాంతాలు
-- బహుళ-ప్రాంత Azure OpenAI డిప్లాయ్‌మెంట్ వ్యూహాలు
-- RAG (రిట్రీవల్-ఆగ్మెంటెడ్ జెనరేషన్)తో AI Search ఇంటిగ్రేషన్
-- ఏజెంట్ మూల్యాంకనం మరియు సెక్యూరిటీ టెస్టింగ్ ఫ్రేమ్‌వర్క్లు
-- ఉత్పత్తి-డిప్లాయ్‌మెంట్ పర్యవేక్షణలు మరియు ఖర్చు ఆప్టిమైజేషన్
+**మీరు ఏమి నేర్చుకుంటారు:**
+- మల్టీ-ఏజెంట్ ఆర్కిటెక్చర్ ప్యాటర్న్స్ మరియు డిజైన్ సూత్రాలు
+- మల్టీ-రీజియన్ Microsoft Foundry Models డిప్లాయ్‌మెంట్ వ్యూహాలు
+- RAG (Retrieval-Augmented Generation) తో AI Search ఇంటిగ్రేషన్
+- ఏజెంట్ మూల్యాంకనం మరియు సెక్యూరిటీ టెస్టింగ్ ఫ్రేమ్‌వర్క్స్
+- ప్రొడక్షన్ డిప్లాయ్‌మెంట్ పరిగణనలు మరియు ఖర్చు ఆప్టిమైజేషన్
 
 ## ఆర్కిటెక్చర్ లక్ష్యాలు
 
-**శిక్షణా దృష్టి:** ఈ ఆర్కిటెక్చర్ బహుళ-ఏజెంట్ సిస్టమ్‌ల కోసం ఎంటర్ప్రైజ్ నమూనాలను ప్రదర్శిస్తుంది.
+**విద్యాత్మక ఫోకస్:** ఈ ఆర్కిటెక్చర్ మల్టీ-ఏజెంట్ సిస్టమ్‌ల కోసం ఎంటర్‌ప్రైస్ నమూనాలను ప్రదర్శిస్తుంది.
 
 ### సిస్టమ్ అవసరాలు (మీ అమలు కోసం)
 
-ఒక ఉత్పత్తి-స్థాయి కస్టమర్ సపోర్ట్ పరిష్కారం కావలసినది:
-- **అనేక ప్రత్యేక ఏజెంట్లు** వివిధ కస్టమర్ అవసరాల కోసం (కస్టమర్ సర్వీస్ + ఇన్వెంటరీ మేనేజ్‌మెంట్)
-- **బహు-మోడల్ డిప్లాయ్‌మెంట్** సరైన సామర్థ్య ప్లానింగ్‌తో (GPT-4o, GPT-4o-mini, embeddings బహుళ ప్రాంతాలలో)
-- **డైనమిక్ డేటా ఇంటిగ్రేషన్** AI Search మరియు ఫైల్ అప్లోడ్స్ ద్వారా (వెక్టర్ శోధన + డాక్యుమెంట్ ప్రాసెసింగ్)
-- **వ్యాప్తమైన మానిటరింగ్** మరియు మూల్యాంకన సామర్థ్యాలు (Application Insights + కస్టమ్ మెట్రిక్స్)
-- **ఉత్పత్తి-గ్రేడ్ భద్రత** రెడ్ టీమింగ్ ధృవీకరణతో (దుర్బలత స్క్యానింగ్ + ఏజెంట్ మూల్యాంకనం)
+ప్రొడక్షన్ కస్టమర్ సపోర్ట్ పరిష్కారం అవసరమవుతుంది:
+- **విభిన్న కస్టమర్ అవసరాల కోసం బహుళ ప్రత్యేక ఏజెంట్‌లు** (కస్టమర్ సర్వీస్ + ఇన్వెంటరీ మేనేజ్‌మెంట్)
+- **సరైన కెపాసిటీ ప్లానింగ్ తో బహుళ-మోడల్ డిప్లాయ్‌మెంట్** (gpt-4.1, gpt-4.1-mini, embeddings across regions)
+- **డైనామిక్ డేటా ఇంటిగ్రేషన్** AI Search మరియు ఫైల్ అప్‌లోడ్‌లతో (వెక్టర్ సెర్చ్ + డాక్యుమెంట్ ప్రాసెసింగ్)
+- **విస్తృత మానిటరింగ్** మరియు మూల్యాంకనం సామర్థ్యాలు (Application Insights + కస్టమ్ మెట్రిక్స్)
+- **ప్రొడక్షన్-గ్రేడ్ సెక్యూరిటీ** రెడ్-టీమింగ్ ధృవీకరణతో (వల్నరబిలిటీ స్కానింగ్ + ఏజెంట్ మూల్యాంకనం)
 
-### ఈ మార్గదర్శకము ఏమి అందిస్తుంది
+### ఈ గైడ్ ఏమి అందిస్తోంది
 
-✅ **ఆర్కిటెక్చర్ నమూనాలు** - స్కేలబుల్ బహుళ-ఏజెంట్ సిస్టమ్‌ల కోసం పరీక్షించబడిన డిజైన్  
-✅ **ఇన్ఫ్రాస్ట్రక్చర్ టెంప్లేట్లు** - అన్ని Azure సేవలను డిప్లాయ్ చేసే ARM టెంప్లేట్లు  
-✅ **కోడ్ ఉదాహరణలు** - కీలక కాంపొనెంట్‌లకు సూచనాత్మక అమలు  
+✅ **ఆర్కిటెక్చర్ ప్యాటర్న్స్** - స్కేలబుల్ మల్టీ-ఏజెంట్ సిస్టమ్‌లకు సబ్యమైన డిజైన్  
+✅ **ఇన్ఫ్రాస్ట్రక్చర్ టెంప్లేట్స్** - అన్ని Azure సర్వీసులను డిప్లాయ్ చేయువటానికి ARM టెంప్లేట్స్  
+✅ **కోడ్ ఉదాహరణలు** - కీలక భాగాల కోసం రిఫరెన్స్ అమలులు  
 ✅ **కాన్ఫిగరేషన్ మార్గదర్శకాలు** - దశలవారీ సెటప్ సూచనలు  
-✅ **ఉత్తమ పద్ధతులు** - భద్రత, మానిటరింగ్, ఖర్చు ఆప్టిమైజేషన్ వ్యూహాలు  
+✅ **బెస్ట్ ప్రాక్టీసెస్** - సెక్యూరిటీ, మానిటరింగ్, ఖర్చు ఆప్టిమైజేషన్ వ్యూహాలు  
 
-❌ **సమగ్రంగా ఇవ్వబడలేదు** - పూర్తి పని చేసేసే అప్లికేషన్ (గణనీయమైన అభివృద్ధి అవసరం)
+❌ **చేర్చబడలేదు** - పూర్తి పని చేసే అప్లికేషన్ (అతిరేక అభివృద్ధి అవసరం)
 
 ## 🗺️ అమలు రోడ్‌మ్యాప్
 
-### దశ 1: ఆర్కిటెక్చర్ అధ్యయనం (2-3 గంటలు) - ఇక్కడి నుంచి ప్రారంభించండి
+### దశ 1: ఆర్కిటెక్చర్ అధ్యయనం (2-3 గంటలు) - ఇక్కడ ప్రారంభించండి
 
-**లక్ష్యం:** సిస్టమ్ డిజైన్ మరియు కాంపొనెంట్ పరస్పర చర్యలను అర్థం చేసుకోవడం
+**లక్ష్యం:** సిస్టమ్ డిజైన్ మరియు కంపోనెంట్ పరస్పర సంబంధాలు అర్థం చేసుకోవడం
 
 - [ ] ఈ పూర్తి డాక్యుమెంట్ను చదవండి
-- [ ] ఆర్కిటెక్చర్ డయాగ్రామ్ మరియు కాంపొనెంట్ సంబంధాలను సమీక్షించండి
-- [ ] బహుళ-ఏజెంట్ నమూనాలు మరియు డిజైన్ నిర్ణయాలను అర్థం చేసుకోండి
-- [ ] ఏజెంట్ టూల్స్ మరియు రౌటింగ్ కోసం కోడ్ ఉదాహరణలను అధ్యయనం చేయండి
-- [ ] ఖర్చు అంచనాలు మరియు సామర్థ్య ప్లానింగ్ మార్గదర్శకాలను సమీక్షించండి
+- [ ] ఆర్కిటెక్చర్ డయాగ్రామ్ మరియు కంపోనెంట్ సంబంధాలను సమీక్షించండి
+- [ ] మల్టీ-ఏజెంట్ ప్యాటర్న్లు మరియు డిజైన్ నిర్ణయాలను అర్థం చేసుకోండి
+- [ ] ఏజెంట్ టూల్‌లు మరియు రౌటింగ్ కోసం కోడ్ ఉదాహరణలు అధ్యయనం చేయండి
+- [ ] ఖర్చు అంచనాలు మరియు కెపాసిటీ ప్లానింగ్ మార్గదర్శకాలను సమీక్షించండి
 
 **ఫలితం:** మీరు ఏమి నిర్మించాలో స్పష్టమైన అవగాహన
 
-### దశ 2: ఇన్ఫ్రాస్ట్రక్చర్ ను డిప్లాయ్ చేయడం (30-45 నిమిషాలు)
+### దశ 2: ఇన్ఫ్రాస్ట్రక్చర్ డిప్లాయ్ చేయండి (30-45 నిమిషాలు)
 
-**లక్ష్యం:** ARM టెంప్లేట్ ఉపయోగించి Azure వనరులను ప్రావిజన్ చేయండి
+**లక్ష్యం:** ARM టెంప్లేట్ ఉపయోగించి Azure రిసోర్సులను ప్రావిజన్ చేయండి
 
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup -m standard
 ```
 
-**ఏది డిప్లాయ్ అవుతుంది:**
-- ✅ Azure OpenAI (3 ప్రాంతాలు: GPT-4o, GPT-4o-mini, embeddings)
-- ✅ AI Search సేవ (ఖాళీ, ఇండెక్స్ కాన్ఫిగరేషన్ అవసరం)
-- ✅ Container Apps పరిసరాలు (ప్లేస్హోల్డర్ ఇమేజ్‌లు)
-- ✅ స్టోరేజ్ అకౌంట్లు, Cosmos DB, Key Vault
-- ✅ Application Insights మానిటరింగ్
+**ఏం డిప్లాయ్ అవుతుందో:**
+- ✅ Microsoft Foundry Models (3 regions: gpt-4.1, gpt-4.1-mini, embeddings)
+- ✅ AI Search service (empty, needs index configuration)
+- ✅ Container Apps environment (placeholder images)
+- ✅ Storage accounts, Cosmos DB, Key Vault
+- ✅ Application Insights monitoring
 
-**ఏమి లేదు:**
+**ఏం లేమి:**
 - ❌ ఏజెంట్ అమలు కోడ్
 - ❌ రౌటింగ్ లాజిక్
-- ❌ ఫ్రొంట్‌ఎండ్ UI
-- ❌ సెర్చ్ ఇండెక్స్ స్కీమా
-- ❌ డేటా పైప్‌లైన్లు
+- ❌ ఫ్రంట్‌ఎండ్ UI
+- ❌ Search index schema
+- ❌ డేటా పైప్లైన్లు
 
 ### దశ 3: అప్లికేషన్ నిర్మాణం (80-120 గంటలు)
 
-**లక్ష్యం:** ఈ ఆర్కిటెక్చర్ ఆధారంగా బహుళ-ఏజెంట్ సిస్టమ్‌ను అమలు చేయండి
+**లక్ష్యం:** ఈ ఆర్కిటెక్చర్ ఆధారంగా మల్టీ-ఏజెంట్ సిస్టమ్ అమలు చేయండి
 
 1. **ఏజెంట్ అమలు** (30-40 గంటలు)
    - బేస్ ఏజెంట్ క్లాస్ మరియు ఇంటర్‌ఫేస్‌లు
-   - GPT-4o కలిగిన కస్టమర్ సర్వీస్ ఏజెంట్
-   - GPT-4o-mini కలిగిన ఇన్వెంటరీ ఏజెంట్
-   - టూల్ ఇంటిగ్రేషన్లు (AI Search, Bing, ఫైల్ ప్రాసెసింగ్)
+   - కస్టమర్ సర్వీస్ ఏజెంట్ gpt-4.1 తో
+   - ఇన్వెంటరీ ఏజెంట్ gpt-4.1-mini తో
+   - టూల్ సమగ్రీకరణలు (AI Search, Bing, ఫైల్ ప్రాసెసింగ్)
 
 2. **రౌటింగ్ సర్వీస్** (12-16 గంటలు)
-   - రిక్వెస్ట్ వర్గీకరణ లాజిక్
+   - రిక్వెస్ట్ క్లాసిఫికేషన్ లాజిక్
    - ఏజెంట్ ఎంపిక మరియు ఆర్కెస్ట్రేషన్
-   - FastAPI/Express బ్యాకెండ్
+   - FastAPI/Express బ్యాక్‌ఎండ్
 
-3. **ఫ్రంట్‌ఎండ్ అభివృద్ధి** (20-30 గంటలు)
+3. **ఫ్రంట్‌ఎండ్ డెవలప్‌మెంట్** (20-30 గంటలు)
    - చాట్ ఇంటర్‌ఫేస్ UI
-   - ఫైల్ అప్లోడ్ ఫంక్షనాలిటీ
-   - స్పందన రెండరింగ్
+   - ఫైల్ అప్‌లోడ్ ఫంక్షనాలిటీ
+   - రెస్పాన్స్ రెండరింగ్
 
-4. **డేటా పైప్‌లైన్** (8-12 గంటలు)
+4. **డేటా పైప్లైన్** (8-12 గంటలు)
    - AI Search ఇండెక్స్ సృష్టి
    - Document Intelligence తో డాక్యుమెంట్ ప్రాసెసింగ్
-   - ఎంబెడ్డింగ్ ఉత్పత్తి మరియు ఇండెక్సింగ్
+   - ఎంబెడ్డింగ్ జనరేషన్ మరియు ఇండెక్సింగ్
 
 5. **మానిటరింగ్ & మూల్యాంకనం** (10-15 గంటలు)
-   - కస్టమ్ టెలిమేట్రీ అమలు
-   - ఏజెంట్ మూల్యాంకన ఫ్రేమ్‌వర్క్
+   - కస్టమ్ టెలిమెట్రీ అమలు
+   - ఏజెంట్ మూల్యాంకనం ఫ్రేమ్‌వర్క్
    - రెడ్ టీం సెక్యూరిటీ స్కానర్
 
-### దశ 4: డిప్లాయ్ & టెస్ట్ చేయండి (8-12 గంటలు)
+### దశ 4: డిప్లాయ్ & టెస్ట్ (8-12 గంటలు)
 
-- అన్ని సర్వీసుల కోసం Docker ఇమేజ్‌లను నిర్మించండి
-- Azure Container Registryకి పుష్ చేయండి
-- Container Apps ను నిజమైన ఇమేజ్‌లతో నవీకరించండి
-- ఎన్విరాన్‌మెంట్ వేరియబుల్స్ మరియు సీక్రెట్స్ కాన్ఫిగర్ చేయండి
-- మూల్యాంకన టెస్ట్ సూట్ నడపండి
-- సెక్యూరిటీ స్కానింగ్ నిర్వహించండి
+- అన్ని సర్వీసుల కోసం Docker ఇమేజ్లను బిల్డ్ చేయండి
+- Azure Container Registry కి పుష్ చేయండి
+- Container Apps ను నిజమైన ఇమేజ్లతో అప్‌డేట్ చేయండి
+- ఎన్విరాన్‌మెంట్ వేరియబుల్స్ మరియు సీక్రెట్స్ ని కాన్పిగర్ చేయండి
+- మూల్యాంకన టెస్ట్ సూట్ నిర్వహించండి
+- సెక్యూరిటీ స్కానింగ్ చేయండి
 
-**మొత్తం అంచనా చేసిన శ్రమ:** అనుభవజ్ఞుల అభివృద్ధిదారులకు 80-120 గంటలు
+**మొత్తం అంచనా ప్రయత్నం:** అనుభవజ్ఞులైన డెవలపర్లు కోసం 80-120 గంటలు
 
-## పరిష్కారం ఆర్కిటెక్చర్
+## పరిష్కార ఆర్కిటెక్చర్
 
 ### ఆర్కిటెక్చర్ డయాగ్రామ్
 
 ```mermaid
 graph TB
-    User[👤 గ్రాహకుడు] --> LB[ఆజ్యూర్ ఫ్రంట్ డోర్]
-    LB --> WebApp[వెబ్ ఫ్రంట్ ఎండ్<br/>కంటెయినర్ యాప్]
+    User[👤 బ్రాహకుడు] --> LB[Azure ఫ్రంట్ డోర్]
+    LB --> WebApp[వెబ్ ఫ్రంట్‌ఎండ్<br/>కంటెయినర్ యాప్]
     
     WebApp --> Router[ఏజెంట్ రౌటర్<br/>కంటెయినర్ యాప్]
-    Router --> CustomerAgent[గ్రాహక ఏజెంట్<br/>గ్రాహక సేవ]
-    Router --> InvAgent[ఇన్వెంటరీ ఏజెంట్<br/>స్టాక్ నిర్వహణ]
+    Router --> CustomerAgent[కస్టమర్ ఏజెంట్<br/>కస్టమర్ సేవ]
+    Router --> InvAgent[ఇన్వెంటరీ ఏజెంట్<br/>స్టాక్ మేనేజ్‌మెంట్]
     
-    CustomerAgent --> OpenAI1[ఆజ్యూర్ ఓపెన్‌ఎఐ<br/>GPT-4o<br/>ఈస్ట్ యుఎస్ 2]
-    InvAgent --> OpenAI2[ఆజ్యూర్ ఓపెన్‌ఎఐ<br/>GPT-4o-mini<br/>వెస్ట్ యుఎస్ 2]
+    CustomerAgent --> OpenAI1[Microsoft Foundry మోడల్స్<br/>gpt-4.1<br/>ఈస్ట్ యుఎస్ 2]
+    InvAgent --> OpenAI2[Microsoft Foundry మోడల్స్<br/>gpt-4.1-mini<br/>వెస్ట్ యుఎస్ 2]
     
-    CustomerAgent --> AISearch[ఆజ్యూర్ ఏఐ సెర్చ్<br/>ఉత్పత్తి క్యాటలాగ్]
-    CustomerAgent --> BingSearch[బింగ్ సెర్చ్ API<br/>రియల్-టైమ్ సమాచారం]
+    CustomerAgent --> AISearch[Azure AI సెర్చ్<br/>ఉత్పత్తి క్యాటలాగ్]
+    CustomerAgent --> BingSearch[బింగ్ సెర్చ్ API<br/>సకాలిక సమాచారం]
     InvAgent --> AISearch
     
-    AISearch --> Storage[ఆజ్యూర్ స్టోరేజ్<br/>డాక్యుమెంట్లు & ఫైళ్లు]
+    AISearch --> Storage[Azure Storage<br/>డాక్యుమెంట్లు & ఫైళ్లు]
     Storage --> DocIntel[డాక్యుమెంట్ ఇంటెలిజెన్స్<br/>కంటెంట్ ప్రాసెసింగ్]
     
     OpenAI1 --> Embeddings[టెక్స్ట్ ఎంబెడ్డింగ్స్<br/>ada-002<br/>ఫ్రాన్స్ సెంట్రల్]
@@ -162,16 +162,16 @@ graph TB
     CustomerAgent --> AppInsights
     InvAgent --> AppInsights
     
-    GraderModel[GPT-4o గ్రేడర్<br/>స్విట్జర్లాండ్ నార్త్] --> Evaluation[ఇవాల్యుయేషన్ ఫ్రేమ్‌వర్క్]
-    RedTeam[రెడ్ టీమ్ اسکానర్] --> SecurityReports[భద్రతా నివేదికలు]
+    GraderModel[gpt-4.1 గ్రేడర్<br/>స్విట్జర్లాండ్ నార్త్] --> Evaluation[మూల్యాంకన ఫ్రేమ్‌వర్క్]
+    RedTeam[రెడ్ టీమ్ స్కానర్] --> SecurityReports[భద్రత నివేదికలు]
     
     subgraph "డేటా లేయర్"
         Storage
         AISearch
-        CosmosDB[కాస్మోస్ DB<br/>చాట్ చరిత్ర]
+        CosmosDB[Cosmos DB<br/>చాట్ చరిత్ర]
     end
     
-    subgraph "ఏఐ సేవలు"
+    subgraph "AI సేవలు"
         OpenAI1
         OpenAI2
         Embeddings
@@ -180,10 +180,10 @@ graph TB
         BingSearch
     end
     
-    subgraph "నిరీక్షణ మరియు భద్రత"
+    subgraph "మానిటరింగ్ & భద్రత"
         AppInsights
         LogAnalytics[లాగ్ అనలిటిక్స్ వర్క్‌స్పేస్]
-        KeyVault[ఆజ్యూర్ కీ వాల్ట్<br/>రహస్యాలు & కాన్ఫిగ్]
+        KeyVault[Azure Key Vault<br/>రహస్యాలు & కాన్ఫిగరేషన్]
         RedTeam
         Evaluation
     end
@@ -197,26 +197,26 @@ graph TB
     style AISearch fill:#fce4ec
     style Storage fill:#f1f8e9
 ```
-### కంపొనెంట్ అవలోకనం
+### కంపోనెంట్ అవలోకనం
 
-| భాగం | ప్రయోజనం | సాంకేతికత | ప్రాంతం |
+| Component | Purpose | Technology | Region |
 |-----------|---------|------------|---------|
-| **వెబ్ ఫ్రంట్‌ఎండ్** | కస్టమర్ పరస్పర చర్యల కోసం యూజర్ ఇంటర్‌ఫేస్ | Container Apps | ప్రాథమిక ప్రాంతం |
-| **ఏజెంట్ రౌటర్** | అభ్యర్థనలను తగిన ఏజెంట్‌కి దారితీస్తుంది | Container Apps | ప్రాథమిక ప్రాంతం |
-| **కస్టమర్ ఏజెంట్** | కస్టమర్ సర్వీస్ ప్రశ్నలను నిర్వర్తిస్తుంది | Container Apps + GPT-4o | ప్రాథమిక ప్రాంతం |
-| **ఇన్వెంటరీ ఏజెంట్** | స్టాక్ మరియు ఫుల్‌ఫిల్‌మెంట్ ను నిర్వహిస్తుంది | Container Apps + GPT-4o-mini | ప్రాథమిక ప్రాంతం |
-| **Azure OpenAI** | ఏజెంట్స్ కోసం LLM ఇన్ఫరెన్స్ | Cognitive Services | బహుళ-ప్రాంతాలు |
-| **AI Search** | వెక్టర్ శోధన మరియు RAG | AI Search Service | ప్రాథమిక ప్రాంతం |
-| **స్టోరేజ్ అకౌంట్** | ఫైల్ అప్లోడ్స్ మరియు డాక్యుమెంట్లు | Blob Storage | ప్రాథమిక ప్రాంతం |
-| **Application Insights** | మానిటరింగ్ మరియు టెలిమెట్రీ | Monitor | ప్రాథమిక ప్రాంతం |
-| **గ్రేడర్ మోడల్** | ఏజెంట్ మూల్యాంకన సిస్టమ్ | Azure OpenAI | రెండవ ప్రాంతం |
+| **Web Frontend** | User interface for customer interactions | Container Apps | Primary Region |
+| **Agent Router** | Routes requests to appropriate agent | Container Apps | Primary Region |
+| **Customer Agent** | Handles customer service queries | Container Apps + gpt-4.1 | Primary Region |
+| **Inventory Agent** | Manages stock and fulfillment | Container Apps + gpt-4.1-mini | Primary Region |
+| **Microsoft Foundry Models** | LLM inference for agents | Cognitive Services | Multi-region |
+| **AI Search** | Vector search and RAG | AI Search Service | Primary Region |
+| **Storage Account** | File uploads and documents | Blob Storage | Primary Region |
+| **Application Insights** | Monitoring and telemetry | Monitor | Primary Region |
+| **Grader Model** | Agent evaluation system | Microsoft Foundry Models | Secondary Region |
 
 ## 📁 ప్రాజెక్ట్ నిర్మాణం
 
 > **📍 స్థితి లెజెండ్:**  
 > ✅ = రిపోజిటరీలో ఉంది  
-> 📝 = సూచనాత్మక అమలు (ఈ డాక్యుమెంట్లో కోడ్ ఉదాహరణ)  
-> 🔨 = మీరు దీన్ని సృష్టించవలసి ఉంటుంది
+> 📝 = రిఫరెన్స్ అమలు (ఈ డాక్యుమెంట్లో కోడ్ ఉదాహరణ)  
+> 🔨 = మీరు సృష్టించవలసి ఉంటుంది
 
 ```
 retail-multiagent-solution/              🔨 Your project directory
@@ -235,7 +235,7 @@ retail-multiagent-solution/              🔨 Your project directory
 │   ├── main.bicep                      🔨 Main Bicep template (optional, ARM exists)
 │   ├── main.parameters.json            🔨 Parameters file
 │   ├── modules/                        📝 Bicep modules (reference examples below)
-│   │   ├── ai-services.bicep           📝 Azure OpenAI deployments
+│   │   ├── ai-services.bicep           📝 Microsoft Foundry Models deployments
 │   │   ├── search.bicep                📝 AI Search configuration
 │   │   ├── storage.bicep               📝 Storage accounts
 │   │   ├── container-apps.bicep        📝 Container Apps environment
@@ -363,77 +363,77 @@ retail-multiagent-solution/              🔨 Your project directory
 
 ---
 
-## 🚀 క్విక్ స్టార్ట్: మీరు ఇప్పుడే ఏమి చేయవచ్చు
+## 🚀 క్విక్ స్టార్ట్: మీరు ఇప్పుడే చేయగలిగిందే
 
-### ఎంపిక 1: ఇన్ఫ్రాస్ట్రక్చర్ మాత్రమే డిప్లాయ్ చేయండి (30 నిమిషాలు)
+### ఎంపిక 1: కేవలం ఇన్ఫ్రాస్ట్రక్చర్ ను డిప్లాయ్ చేయండి (30 నిమిషాలు)
 
-**మీకు ఏమి లభిస్తుంది:** అన్ని Azure సేవలు ప్రావిజన్ చేసి అభివృద్ధికి సిద్ధంగా ఉంటాయి
+**మీకు ఏమి లభిస్తుంది:** అన్ని Azure సర్వీసులు ప్రావిజన్డ్ చేయబడి డెవలప్‌మెంట్‌కు సిద్ధంగా ఉంటాయి
 
 ```bash
-# రిపోజిటరీని క్లోన్ చేయండి
+# రిపాజిటరీని క్లోన్ చేయండి
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/retail-multiagent-arm-template
 
-# మౌలిక నిర్మాణాన్ని ఏర్పాటు చేయండి
+# ఇన్‌ఫ్రాస్ట్రక్చర్‌ను డిప్లాయ్ చేయండి
 ./deploy.sh -g myResourceGroup -m standard
 
-# ఏర్పాటు చేసినదాన్ని ధృవీకరించండి
+# డిప్లాయ్‌మెంట్‌ను ధృవీకరించండి
 az resource list --resource-group myResourceGroup --output table
 ```
 
-**ప్రత్యాశిత ఫలితం:**
-- ✅ Azure OpenAI సేవలు డిప్లాయ్ చేయబడ్డాయి (3 ప్రాంతాలు)
-- ✅ AI Search సేవతో కూడిన సర్వీస్ తయారయింది (ఖాళీ)
-- ✅ Container Apps పరిసరాలు సిద్ధంగా ఉన్నవి
-- ✅ స్టోరేజ్, Cosmos DB, Key Vault కాన్ఫిగర్ చేయబడ్డాయి
-- ❌ ఇంకా పని చేసే ఏజెంట్లు లేవు (కేవలం ఇన్ఫ్రాస్ట్రక్చర్)
+**అంచనా ఫలితం:**
+- ✅ Microsoft Foundry Models సేవలు డిప్లాయ్ చేయబడ్డాయి (3 regions)
+- ✅ AI Search సర్వీస్ సృష్టించబడింది (ఖాళీ)
+- ✅ Container Apps పరిసరాలు సిద్ధంగా ఉన్నాయి
+- ✅ Storage, Cosmos DB, Key Vault కాన్ఫిగర్ చేయబడ్డాయి
+- ❌ ఇంకా పని చేసే ఏజెంట్‌లు లేవు (కేవలం ఇన్ఫ్రాస్ట్రక్చర్)
 
-### ఎంపిక 2: ఆర్కిటెక్చర్ చదవండి (2-3 గంటలు)
+### ఎంపిక 2: ఆర్కిటెక్చర్ అధ్యయనం (2-3 గంటలు)
 
-**మీకు ఏమి లభిస్తుంది:** బహుళ-ఏజెంట్ నమూనాల లోతైన అవగాహన
+**మీకు ఏమి లభిస్తుంది:** మల్టీ-ఏజెంట్ ప్యాటర్న్లపై లోతైన అర్థం
 
-1. ఈ పూర్తి డాక్యుమెంట్ను చదవండి
-2. ప్రతి కాంపొనెంట్‌కు సంబంధించిన కోడ్ ఉదాహరణలను సమీక్షించండి
-3. డిజైన్ నిర్ణయాలు మరియు ట్రేడ్-ఆఫ్లను అర్థం చేసుకోండి
+1. ఈ పూర్తి డాక్యుమెంట్ చదవండి
+2. ప్రతి కంపోనెంట్ కోసం కోడ్ ఉదాహరణలను సమీక్షించండి
+3. డిజైన్ నిర్ణయాలు మరియు ట్రేడ్-ఆఫ్స్ అర్థం చేసుకోండి
 4. ఖర్చు ఆప్టిమైజేషన్ వ్యూహాలను అధ్యయనం చేయండి
-5. మీ అమలు వ్యూహాన్ని ప్రణాళిక చేయండి
+5. మీ అమలు దృష్టिकोణాన్ని ప్లాన్ చేయండి
 
-**ప్రత్యాశిత ఫలితం:**
-- ✅ సిస్టమ్ ఆర్కిటెక్చర్ యొక్క స్పష్టమైన మానసిక నమూనా
-- ✅ అవసరమైన కాంపొనెంట్‌ల గురించి అవగాహన
-- ✅ వాస్తవిక శ్రమ అంచనాలు
-- ✅ అమలు ప్రణాళిక
+**అంచనా ఫలితం:**
+- ✅ సిస్టమ్ ఆర్కిటెక్చర్ మీద సూటు మానసిక నమూనా
+- ✅ అవసరమైన కంపోనెంట్‌ల పై అవగాహన
+- ✅ వాస్తవిక ప్రయాస అంచనాలు
+- ✅ అమలు పథకం
 
 ### ఎంపిక 3: పూర్తి సిస్టమ్ నిర్మించండి (80-120 గంటలు)
 
-**మీకు ఏమి లభిస్తుంది:** ఉత్పత్తి-సిద్ధ బహుళ-ఏజెంట్ పరిష్కారం
+**మీకు ఏమి లభిస్తుంది:** ప్రొడక్షన్-రెడీ మల్టీ-ఏజెంట్ పరిష్కారం
 
-1. **దశ 1:** ఇన్ఫ్రాస్ట్రక్చర్ డిప్లాయ్ చేయండి (ఇప్పటికే పైగా)
-2. **దశ 2:** క్రింది కోడ్ ఉదాహరణలను ఉపయోగించి ఏజెంట్లను అమలు చేయండి (30-40 గంటలు)
-3. **దశ 3:** రౌటింగ్ సర్వీస్ రూపొందించండి (12-16 గంటలు)
-4. **దశ 4:** ఫ్రంట్‌ఎండ్ UI రూపొందించండి (20-30 గంటలు)
-5. **దశ 5:** డేటా పైప్‌లైన్లను కాన్ఫిగర్ చేయండి (8-12 గంటలు)
+1. **దశ 1:** ఇన్ఫ్రాస్ట్రక్చర్ డిప్లాయ్ చేయండి (పైన చేయబడినది)
+2. **దశ 2:** క్రింది కోడ్ ఉదాహరణల ఉపయోగించి ఏజెంట్‌లను అమలు చేయండి (30-40 గంటలు)
+3. **దశ 3:** రౌటింగ్ సర్వీస్ నిర్మించండి (12-16 గంటలు)
+4. **దశ 4:** ఫ్రంట్‌ఎండ్ UI తయారు చేయండి (20-30 గంటలు)
+5. **దశ 5:** డేటా పైప్లైన్లు కాన్ఫిగర్ చేయండి (8-12 గంటలు)
 6. **దశ 6:** మానిటరింగ్ & మూల్యాంకనం జోడించండి (10-15 గంటలు)
 
-**ప్రత్యాశిత ఫలితం:**
-- ✅ పూర్తి పని చేసే బహుళ-ఏజెంట్ సిస్టమ్
-- ✅ ఉత్పత్తి-శ్రేణి మానిటరింగ్
-- ✅ భద్రతాత్మక ధృవీకరణ
-- ✅ ఖర్చు ఆప్టిమైజ్డ్ డిప్లాయ్‌మెంట్
+**అంచనా ఫలితం:**
+- ✅ పూర్తిగా పనిచేసే మల్టీ-ఏజెంట్ సిస్టమ్
+- ✅ ప్రొడక్షన్-గ్రేడ్ మానిటరింగ్
+- ✅ సెక్యూరిటీ ధృవీకరణ
+- ✅ ఖర్చు-ఆప్టిమైజ్డ్ డిప్లాయ్‌మెంట్
 
 ---
 
-## 📚 ఆర్కిటెక్చర్ మార్గదర్శకం & అమలు గైడ్
+## 📚 ఆర్కిటెక్చర్ రిఫరెన్స్ & అమలు గైడ్
 
-క్రింది సెక్షన్లు మీ అమలు కోసం వివరణాత్మక ఆర్కిటెక్చర్ నమూనాలు, కాన్ఫిగరేషన్ ఉదాహరణలు మరియు సూచనాత్మక కోడ్‌ను అందిస్తాయి.
+క్రిందివి వివరమైన ఆర్కిటెక్చర్ ప్యాటర్న్లు, కాన్ఫిగరేషన్ ఉదాహరణలు, మరియు మీ అమలుకు దారితీసే రిఫరెన్స్ కోడ్‌ని అందిస్తాయి.
 
-## మొదటి కాన్ఫిగరేషన్ అవసరాలు
+## ప్రారంభ కాన్ఫిగరేషన్ అవసరాలు
 
 ### 1. బహుళ ఏజెంట్లు & కాన్ఫిగరేషన్
 
-**లక్ష్యం**: 2 ప్రత్యేక ఏజెంట్లను డిప్లాయ్ చేయండి - "Customer Agent" (కస్టమర్ సర్వీస్) మరియు "Inventory" (స్టాక్ నిర్వహణ)
+**లక్ష్యం**: 2 ప్రత్యేక ఏజెంట్లను డిప్లాయ్ చేయండి - "Customer Agent" (కస్టమర్ సర్వీస్) మరియు "Inventory" (స్టాక్ మేనేజ్‌మెంట్)
 
-> **📝 గమనిక:** క్రింది azure.yaml మరియు Bicep కాన్ఫిగరేషన్లు బహుళ-ఏజెంట్ డిప్లాయ్‌మెంట్‌లను ఎలా నిర్మించాలో చూపించే **సూచనాత్మక ఉదాహరణలు**. మీరు ఈ ఫైల్స్ మరియు సంబంధిత ఏజెంట్ అమలులను సృష్టించాలి.
+> **📝 నోటు:** క్రింది azure.yaml మరియు Bicep కాన్ఫిగరేషన్‌లు మల్టీ-ఏజెంట్ డిప్లాయ్‌మెంట్‌లను ఎలా నిర్మించాలో చూపించే **రిఫరెన్స్ ఉదాహరణలు**. మీరు ఈ ఫైళ్లు మరియు సంబంధిత ఏజెంట్ అమలులని సృష్టించాలి.
 
 #### కాన్ఫిగరేషన్ దశలు:
 
@@ -450,7 +450,7 @@ services:
             "name": "Customer",
             "role": "Customer Service Representative",
             "description": "Handles general customer inquiries, returns, and support",
-            "model": "gpt-4o",
+            "model": "gpt-4.1",
             "temperature": 0.7,
             "max_tokens": 500,
             "tools": ["search", "file_retrieval", "bing_search"]
@@ -459,7 +459,7 @@ services:
             "name": "Inventory",
             "role": "Inventory Management Specialist", 
             "description": "Manages stock levels, product availability, and fulfillment",
-            "model": "gpt-4o-mini",
+            "model": "gpt-4.1-mini",
             "temperature": 0.3,
             "max_tokens": 300,
             "tools": ["search", "database_query"]
@@ -474,12 +474,12 @@ services:
 param agentsConfig object = {
   customer: {
     name: 'Customer'
-    model: 'gpt-4o'
+    model: 'gpt-4.1'
     capacity: 20
   }
   inventory: {
     name: 'Inventory'
-    model: 'gpt-4o-mini'
+    model: 'gpt-4.1-mini'
     capacity: 10
   }
 }
@@ -507,17 +507,17 @@ resource agentDeployments 'Microsoft.App/containerApps@2024-03-01' = [for agent 
 }]
 ```
 
-### 2. సామర్థ్య ప్లానింగ్‌తో బహుళ మోడళ్లు
+### 2. కెపాసిటీ ప్లానింగ్ తో బహుళ మోడల్స్
 
-**లక్ష్యం**: చాట్ మోడల్ (Customer), ఎంబెడ్డింగ్స్ మోడల్ (search), మరియు రీజనింగ్ మోడల్ (grader) సరైన కోటా నిర్వహణతో డిప్లాయ్ చేయండి
+**లక్ష్యం**: చాట్ మోడల్ (Customer), ఎంబెడ్డింగ్స్ మోడల్ (search), మరియు reasoning మోడల్ (grader) కు సరైన కోటా మేనేజ్‌మెంట్ తో డిప్లాయ్ చేయండి
 
-#### బహుళ-ప్రాంత వ్యూహం:
+#### బహుళ-రీజియన్ వ్యూహం:
 
 ```bicep
 // infra/models.bicep
 param modelDeployments array = [
   {
-    name: 'gpt-4o'
+    name: 'gpt-4.1'
     region: 'eastus2'
     capacity: 20
     usage: 'chat'
@@ -531,7 +531,7 @@ param modelDeployments array = [
     priority: 'medium'
   }
   {
-    name: 'gpt-4o'
+    name: 'gpt-4.1'
     region: 'francecentral'
     capacity: 15
     usage: 'grading'
@@ -546,7 +546,7 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
   properties: {
     scriptContent: '''
       #!/bin/bash
-      for model in "gpt-4o" "text-embedding-ada-002"; do
+      for model in "gpt-4.1" "text-embedding-ada-002"; do
         available=$(az cognitiveservices usage list --location ${location} --query "[?name.value=='$model'].{current:currentValue,limit:limit}" -o tsv)
         echo "Model: $model, Available capacity: $available"
       done
@@ -555,20 +555,20 @@ resource capacityCheck 'Microsoft.Resources/deploymentScripts@2023-08-01' = {
 }
 ```
 
-#### ప్రాంత ఫాల్‌బ్యాక్ కాన్ఫిగరేషన్:
+#### రీజియన్ ఫ్యాల్బ్యాక్ కాన్ఫిగరేషన్:
 
 ```yaml
 # .azure/env/.env.production
 AZURE_OPENAI_REGIONS='["eastus2", "westus2", "francecentral"]'
 AZURE_OPENAI_FALLBACK_ENABLED=true
-MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
+MODEL_CAPACITY_REQUIREMENTS='{"gpt-4.1": 35, "text-embedding-ada-002": 30}'
 ```
 
-### 3. డేటా ఇండెక్స్ కాన్ఫిగరేషన్‌తో AI Search
+### 3. AI Search తో డేటా ఇండెక్స్ కాన్ఫిగరేషన్
 
-**లక్ష్యం**: డేటా అప్‌డేట్స్ మరియు ఆటోమేటెడ్ ఇండెక్సింగ్ కోసం AI Search ను కాన్ఫిగర్ చేయండి
+**లక్ష్యం**: డేటా అప్డేట్స్ మరియు ఆటోమేటెడ్ ఇండెక్సింగ్ కొరకు AI Search ని కాన్ఫిగర్ చేయండి
 
-#### ప్రీ-ప్రావిజనింగ్ హుక్:
+#### ప్రీ-ప్రొవిజనింగ్ హుక్:
 
 ```bash
 #!/bin/bash
@@ -576,7 +576,7 @@ MODEL_CAPACITY_REQUIREMENTS='{"gpt-4o": 35, "text-embedding-ada-002": 30}'
 
 echo "Setting up AI Search configuration..."
 
-# నిర్దిష్ట SKU తో శోధన సేవను సృష్టించండి
+# నిర్దిష్ట SKUతో శోధనా సేవను సృష్టించండి
 az search service create \
   --name "$AZURE_SEARCH_SERVICE_NAME" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
@@ -585,7 +585,7 @@ az search service create \
   --replica-count 1
 ```
 
-#### పోస్ట్-ప్రావిజనింగ్ డేటా సెటప్:
+#### పోస్ట్-ప్రొవిజనింగ్ డేటా సెటప్:
 
 ```bash
 #!/bin/bash
@@ -593,23 +593,23 @@ az search service create \
 
 echo "Configuring AI Search indexes and uploading initial data..."
 
-# శోధన సేవా కీ పొందండి
+# శోధన సేవ కీ పొందండి
 SEARCH_KEY=$(az search admin-key show --service-name "$AZURE_SEARCH_SERVICE_NAME" --resource-group "$AZURE_RESOURCE_GROUP" --query primaryKey -o tsv)
 
-# ఇండెక్స్ స్కీమా సృష్టించండి
+# ఇన్డెక్స్ స్కీమాను సృష్టించండి
 curl -X POST "https://$AZURE_SEARCH_SERVICE_NAME.search.windows.net/indexes?api-version=2023-11-01" \
   -H "Content-Type: application/json" \
   -H "api-key: $SEARCH_KEY" \
   -d @"./infra/search-schema.json"
 
-# ప్రారంభ డాక్యుమెంట్లను అప్లోడ్ చేయండి
+# ప్రాథమిక డాక్యుమెంట్లు అప్లోడ్ చేయండి
 python ./scripts/upload_search_data.py \
   --search-service "$AZURE_SEARCH_SERVICE_NAME" \
   --search-key "$SEARCH_KEY" \
   --data-path "./data/initial-docs"
 ```
 
-#### సెర్చ్ ఇండెక్స్ స్కీమా:
+#### Search ఇండెక్స్ స్కీమా:
 
 ```json
 {
@@ -636,12 +636,12 @@ python ./scripts/upload_search_data.py \
 
 ### 4. AI Search కోసం ఏజెంట్ టూల్ కాన్ఫిగరేషన్
 
-**లక్ష్యం**: AI Search ను గ్రౌండింగ్ టూల్‌గా ఉపయోగించడానికి ఏజెంట్లను కాన్ఫిగర్ చేయండి
+**లక్ష్యం**: ఏజెంట్లు AI Search ను గ్రౌండింగ్ టూల్ గా ఉపయోగించేలా కాన్ఫిగర్ చేయండి
 
-#### ఏజెంట్ సెర్చ్ టూల్ అమలుచేయడం:
+#### ఏజెంట్ సెర్చ్ టూల్ అమలు:
 
 ```python
-# src/ఏజెంట్లు/సాధనాలు/శోధన_సాధనం.py
+# src/ఏజెంట్లు/పరికరాలు/శోధన_పరికరం.py
 import asyncio
 from azure.search.documents.aio import SearchClient
 from azure.core.credentials import AzureKeyCredential
@@ -695,15 +695,15 @@ class CustomerAgent:
         self.search_tool = search_tool
         
     async def process_query(self, user_query: str) -> str:
-        # మొదట, సంబంధిత సందర్భాన్ని శోధించండి
+        # మొదట సంబంధిత సందర్భాన్ని వెతకండి
         search_results = await self.search_tool.search_products(user_query)
         
         # LLM కోసం సందర్భాన్ని సిద్ధం చేయండి
         context = "\n".join([doc['content'] for doc in search_results[:3]])
         
-        # ఆధారంతో సమాధానాన్ని రూపొందించండి
+        # ఆధారంతో స్పందన ఉత్పత్తి చేయండి
         response = await self.openai_client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4.1",
             messages=[
                 {"role": "system", "content": f"You are Customer, a helpful customer service agent. Use this context to answer questions: {context}"},
                 {"role": "user", "content": user_query}
@@ -713,9 +713,9 @@ class CustomerAgent:
         return response.choices[0].message.content
 ```
 
-### 5. ఫైల్ అప్లోడ్ స్టోరేజ్ ఇంటిగ్రేషన్
+### 5. ఫైల్ అప్‌లోడ్ స్టోరేజ్ ఇంటిగ్రేషన్
 
-**లక్ష్యం**: ఏజెంట్లు RAG కాంటెక్స్ట్ కోసం అప్లోడ్ చేసిన ఫైళ్లను (మాన్యువల్స్, డాక్యుమెంట్లు) ప్రాసెస్ చేయగలిగేలా చేయండి
+**లక్ష్యం**: ఏజెంట్లు అప్‌లోడ్ చేయబడిన ఫైళ్లను (మాన్యువల్స్, డాక్యుమెంట్లు) RAG కాంటెక్స్ట్ కోసం ప్రాసెస్ చేయగలగటం
 
 #### స్టోరేజ్ కాన్ఫిగరేషన్:
 
@@ -756,7 +756,7 @@ resource eventGridTopic 'Microsoft.EventGrid/topics@2023-12-15-preview' = {
 }
 ```
 
-#### డాక్యుమెంట్ ప్రాసెసింగ్ పైప్‌లైన్:
+#### డాక్యుమెంట్ ప్రాసెసింగ్ పైప్లైన్:
 
 ```python
 # src/document_processor.py
@@ -776,13 +776,13 @@ class DocumentProcessor:
     async def process_uploaded_file(self, container_name: str, blob_name: str):
         """Process uploaded file and add to search index"""
         
-        # blob నిల్వ నుండి ఫైల్‌ను డౌన్లోడ్ చేయండి
+        # బ్లాబ్ స్టోరేజ్ నుండి ఫైల్‌ను డౌన్లోడ్ చేయండి
         blob_client = self.storage_client.get_blob_client(
             container=container_name, 
             blob=blob_name
         )
         
-        # డాక్యుమెంట్ ఇన్టెలిజెన్స్ ద్వారా పాఠ్యాన్ని వెలికితీయండి
+        # డాక్యుమెంట్ ఇంటెలిజెన్స్ ఉపయోగించి పాఠ్యాన్ని పొందండి
         blob_url = blob_client.url
         poller = await self.doc_intel_client.begin_analyze_document(
             "prebuilt-read", 
@@ -790,19 +790,19 @@ class DocumentProcessor:
         )
         result = await poller.result()
         
-        # పాఠ్య కంటెంట్‌ను వెలికితీయండి
+        # పాఠ్యాన్ని వెలికితీయండి
         text_content = ""
         for page in result.pages:
             for line in page.lines:
                 text_content += line.content + "\n"
         
-        # ఎంబెడ్డింగ్స్ సృష్టించండి
+        # ఎంబెడింగ్‌లను రూపొందించండి
         embedding_response = await self.openai_client.embeddings.create(
             model="text-embedding-ada-002",
             input=text_content
         )
         
-        # AI శోధనలో సూచిక చేయండి
+        # AI Searchలో సూచికలో చేర్చండి
         document = {
             "id": blob_name.replace(".", "_"),
             "title": blob_name,
@@ -814,7 +814,7 @@ class DocumentProcessor:
         await self.search_client.upload_documents([document])
 ```
 
-### 6. Bing Search ఇంటిగ్రేషన్
+### 6. Bing సెర్చ్ ఇంటిగ్రేషన్
 
 **లక్ష్యం**: రియల్-టైమ్ సమాచారం కోసం Bing Search సామర్థ్యాలను జోడించండి
 
@@ -836,10 +836,10 @@ output bingSearchKey string = bingSearchService.listKeys().key1
 output bingSearchEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
 ```
 
-#### Bing Search టూల్:
+#### Bing సెర్చ్ టూల్:
 
 ```python
-# src/ఏజెంట్లు/సాధనాలు/బింగ్_శోధన_సాధనం.py
+# src/ఏజెంట్లు/సాధనాలు/bing_శోధన_సాధనం.py
 import aiohttp
 import asyncio
 
@@ -880,11 +880,11 @@ class BingSearchTool:
 
 ---
 
-## మానిటరింగ్ & అవలోకనం
+## మానిటరింగ్ & ఆబ్సర్బబిలిటీ
 
 ### 7. ట్రేసింగ్ మరియు Application Insights
 
-**లక్ష్యం**: ట్రేస్ లాగ్స్ మరియు Application Insights తో సమగ్ర మానిటరింగ్
+**లక్ష్యం**: ట్రేస్ లాగ్స్ మరియు Application Insights తో విస్తృత మానిటరింగ్
 
 #### Application Insights కాన్ఫిగరేషన్:
 
@@ -939,7 +939,7 @@ resource agentPerformanceAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-#### కస్టమ్ టెలిమేట్రీ అమలు:
+#### కస్టమ్ టెలిమెట్రీ అమలు:
 
 ```python
 # src/telemetry/agent_telemetry.py
@@ -984,7 +984,7 @@ class AgentTelemetry:
         """Track search operation performance"""
         properties = {
             'search_type': search_type,
-            'query': query[:100],  # గోప్యత కోసం కోత చేయండి
+            'query': query[:100],  # గోప్యత కోసం సంక్షిప్తం చేయండి
             'results_found': str(results_count > 0)
         }
         
@@ -1045,14 +1045,14 @@ class AgentTelemetry:
         return len(text) // 4
 ```
 
-### 8. రెడ్ టీమింగ్ సెక్యూరిటీ ధృవీకరణ
+### 8. రెడ్-టిమింగ్ సెక్యూరిటీ ధృవీకరణ
 
-**లక్ష్యం**: ఏజెంట్లు మరియు మోడల్‌ల కోసం ఆటోమెటెడ్ సెక్యూరిటీ టెస్టింగ్
+**లక్ష్యం**: ఏజెంట్‌లు మరియు మోడల్‌ల కోసం ఆటోమేటెడ్ సెక్యూరిటీ టెస్టింగ్
 
-#### రెడ్ టీమింగ్ కాన్ఫిగరేషన్:
+#### రెడ్-టిమింగ్ కాన్ఫిగరేషన్:
 
 ```python
-# src/security/red_team_scanner.py
+# src/భద్రత/రెడ్_టీమ్_స్కానర్.py
 import asyncio
 from typing import List, Dict
 import json
@@ -1097,7 +1097,7 @@ class RedTeamScanner:
                     'details': strategy_result['details']
                 })
         
-        # మొత్తం భద్రత స్కోర్‌ను లెక్కించండి
+        # మొత్తం భద్రతా స్కోరును గణించండి
         scan_results['overall_score'] = self._calculate_security_score(scan_results)
         
         return scan_results
@@ -1165,8 +1165,8 @@ class RedTeamScanner:
     
     async def _send_test_prompt(self, prompt: str) -> str:
         """Send test prompt to target agent"""
-        # అమలు ఏజెంట్ ఎండ్‌పాయింట్‌కు HTTP అభ్యర్థనను పంపుతుంది
-        # డెమో కోసం ప్లేస్‌హోల్డర్‌ను తిరిగి ఇస్తుంది
+        # అమలు ఏజెంట్ ఎండ్‌పాయింట్‌కు HTTP అభ్యర్థనను పంపిస్తుంది
+        # డెమో ఉద్ధేశ్యాల కోసం తాత్కాలిక విలువను తిరిగి అందిస్తుంది
         import aiohttp
         
         async with aiohttp.ClientSession() as session:
@@ -1223,14 +1223,14 @@ class RedTeamScanner:
         total_strategies = len(scan_results['strategies_tested'])
         vulnerabilities = len(scan_results['vulnerabilities_found'])
         
-        # ప్రాథమిక స్కోరింగ్: 100 - (vulnerabilities / total * 100)
+        # ప్రాథమిక స్కోరింగ్: 100 - (దుర్బలతలు / మొత్తం * 100)
         if total_strategies == 0:
             return 100.0
         
         vulnerability_ratio = vulnerabilities / total_strategies
         base_score = max(0, 100 - (vulnerability_ratio * 100))
         
-        # తీవ్రత ఆధారంగా స్కోర్‌ను తగ్గించండి
+        # గంభీరత ఆధారంగా స్కోరును తగ్గించండి
         severity_penalty = 0
         for vuln in scan_results['vulnerabilities_found']:
             severity_weights = {'low': 5, 'medium': 15, 'high': 30, 'critical': 50}
@@ -1240,7 +1240,7 @@ class RedTeamScanner:
         return round(final_score, 2)
 ```
 
-#### ఆటోమెటెడ్ సెక్యూరిటీ పైప్‌లైన్:
+#### ఆటోమేటెడ్ సెక్యూరిటీ పైప్‌లైన్:
 
 ```bash
 #!/bin/bash
@@ -1248,13 +1248,13 @@ class RedTeamScanner:
 
 echo "Starting Red Team Security Scan..."
 
-# డిప్లాయ్‌మెంట్ నుండి ఏజెంట్ ఎండ్‌పాయింట్‌ను పొందండి
+# డిప్లాయ్‌మెంట్ నుండి ఏజెంట్ ఎండ్‌పాయింట్ పొందండి
 AGENT_ENDPOINT=$(az containerapp show \
   --name "agent-customer" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.configuration.ingress.fqdn" -o tsv)
 
-# భద్రతా స్కాన్‌ను నడపండి
+# భద్రతా స్కాన్ నడపండి
 python -m src.security.red_team_scanner \
   --endpoint "https://$AGENT_ENDPOINT" \
   --api-key "$AGENT_API_KEY" \
@@ -1264,16 +1264,16 @@ python -m src.security.red_team_scanner \
 echo "Security scan completed. Check security_reports/ for results."
 ```
 
-### 9. గ్రేడర్ మోడల్‌తో ఏజెంట్ మూల్యాంకనం
+### 9. గ్రాడర్ మోడల్‌తో ఏజెంట్ మూల్యాంకనం
 
-**లక్ష్యం**: ప్రత్యేక గ్రేడర్ మోడల్‌తో మూల్యాంకన వ్యవస్థను డిప్లాయ్ చేయండి
+**లక్ష్యం**: డెడికేటెడ్ గ్రాడర్ మోడల్‌తో మూల్యాంకనం సిస్టమ్ డిప్లాయ్ చేయండి
 
-#### గ్రేడర్ మోడల్ కాన్ఫిగరేషన్:
+#### గ్రాడర్ మోడల్ కాన్ఫిగరేషన్:
 
 ```bicep
 // infra/evaluation.bicep
 param graderModelConfig object = {
-  name: 'gpt-4o'
+  name: 'gpt-4.1'
   version: '2024-11-20'
   capacity: 30
   region: 'switzerlandnorth'  // Different region for separation
@@ -1296,7 +1296,7 @@ resource graderOpenAI 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
 
 resource graderDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: graderOpenAI
-  name: 'gpt-4o-grader'
+  name: 'gpt-4.1-grader'
   properties: {
     model: {
       format: 'OpenAI'
@@ -1311,7 +1311,7 @@ resource graderDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023
 }
 ```
 
-#### మూల్యాంకన ఫ్రేమ్‌వర్క్:
+#### మూల్యాంకనం ఫ్రేమ్‌వర్క్:
 
 ```python
 # src/evaluation/agent_evaluator.py
@@ -1341,7 +1341,7 @@ class AgentEvaluator:
             case_result = await self._evaluate_single_case(test_case)
             evaluation_results['results'].append(case_result)
         
-        # సారాంశ ప్రమాణాలను లెక్కించండి
+        # సారాంశ మెట్రిక్‌లను లెక్కించండి
         evaluation_results['summary'] = self._calculate_summary(evaluation_results['results'])
         
         return evaluation_results
@@ -1351,7 +1351,7 @@ class AgentEvaluator:
         user_query = test_case['input']
         expected_criteria = test_case.get('criteria', {})
         
-        # ఏజెంట్ ప్రతిస్పందన పొందండి
+        # ఏజెంట్ స్పందనను పొందండి
         agent_response = await self._get_agent_response(user_query)
         
         # స్పందనను మూల్యాంకనం చేయండి
@@ -1416,7 +1416,7 @@ class AgentEvaluator:
         
         try:
             grader_response = await self.grader_client.chat.completions.create(
-                model="gpt-4o-grader",
+                model="gpt-4.1-grader",
                 messages=[
                     {"role": "system", "content": "You are an expert AI evaluation assistant. Always respond with valid JSON."},
                     {"role": "user", "content": grading_prompt}
@@ -1425,7 +1425,7 @@ class AgentEvaluator:
                 max_tokens=500
             )
             
-            # JSON ప్రతిస్పందనను పార్స్ చేయండి
+            # JSON స్పందనను పార్స్ చేయండి
             grading_text = grader_response.choices[0].message.content
             grading_result = json.loads(grading_text)
             
@@ -1471,7 +1471,7 @@ class AgentEvaluator:
             if criterion_scores:
                 summary['criteria_averages'][criterion] = sum(criterion_scores) / len(criterion_scores)
         
-        # ప్రదర్శన రేటింగ్
+        # పనితీరు రేటింగ్
         avg_score = summary['average_overall_score']
         if avg_score >= 4.5:
             summary['performance_rating'] = 'Excellent'
@@ -1487,7 +1487,7 @@ class AgentEvaluator:
         return summary
 ```
 
-#### టెస్ట్ కేస్‌లు కాన్ఫిగరేషన్:
+#### టెస్ట్ కేసుల కాన్ఫిగరేషన్:
 
 ```json
 // tests/evaluation_test_cases.json
@@ -1526,13 +1526,13 @@ class AgentEvaluator:
 
 ---
 
-## అనుకూలీకరణ & నవీకరణలు
+## అనుకూలీకరణ & అప్డేట్స్
 
-### 10. Container App అనుకూలీకరణ
+### 10. కంటెయినర్ అప్లికేషన్ అనుకూలీకరణ
 
-**లక్ష్యం**: కంటెయినర్ యాప్ కాన్ఫిగరేషన్ ను నవీకరించి కస్టమ్ UI తో మార్చండి
+**లక్ష్యం**: కంటెయినర్ అప్లికేషన్ కాన్ఫిగరేషన్‌ను అప్‌డేట్ చేసి కస్టమ్ UI తో మార్చండి
 
-#### డైనమిక్ కాన్ఫిగరేషన్:
+#### డైనామిక్ కాన్ఫిగరేషన్:
 
 ```yaml
 # azure.yaml - Container App Configuration
@@ -1583,7 +1583,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 echo "Building and deploying custom frontend..."
 
-# పర్యావరణ వేరియబుల్స్‌తో కస్టమ్ ఇమేజ్‌ను నిర్మించండి
+# పర్యావరణ చరాలతో కస్టమ్ ఇమేజ్‌ను నిర్మించడం
 docker build \
   --build-arg AGENT_NAME="$CUSTOMER_AGENT_NAME" \
   --build-arg COMPANY_NAME="retail Retail" \
@@ -1591,7 +1591,7 @@ docker build \
   -t retail-frontend:latest \
   ./src/frontend
 
-# Azure Container Registryకి పుష్ చేయండి
+# Azure కంటైనర్ రిజిస్ట్రీలోకి పుష్ చేయండి
 az acr build \
   --registry "$AZURE_CONTAINER_REGISTRY" \
   --image "retail-frontend:latest" \
@@ -1608,23 +1608,23 @@ echo "Frontend deployed successfully!"
 
 ---
 
-## 🔧 సమస్య పరిష్కార మార్గదర్శి
+## 🔧 సమస్య పరిష్కార మార్గదర్శకం
 
 ### సాధారణ సమస్యలు మరియు పరిష్కారాలు
 
-#### 1. Container Apps కోటా పరిమితులు
+#### 1. Container Apps క్వోటా పరిమితులు
 
-**సమస్య**: ప్రాంతీయ కోటా పరిమితుల వలన డిప్లాయ్‌మెంట్ విఫలమవుతుంది
+**సమస్య**: రీజియన్ క్వోటా పరిమితుల వల్ల డిప్లాయ్ విఫలమవుతుంది
 
 **పరిష్కారం**:
 ```bash
-# ప్రస్తుత క్వోటా వినియోగాన్ని తనిఖీ చేయండి
+# ప్రస్తుత కోటా వినియోగాన్ని తనిఖీ చేయండి
 az containerapp env show \
   --name "$CONTAINER_APPS_ENVIRONMENT" \
   --resource-group "$AZURE_RESOURCE_GROUP" \
   --query "properties.workloadProfiles"
 
-# క్వోటా పెంచడానికి అభ్యర్థించండి
+# కోటా పెంపును అభ్యర్థించండి
 az support tickets create \
   --ticket-name "ContainerApps-Quota-Increase" \
   --severity "minimal" \
@@ -1635,9 +1635,9 @@ az support tickets create \
   --description "Request quota increase for Container Apps in region X"
 ```
 
-#### 2. మోడల్ డిప్లాయ్‌మెంట్ గడువు ముగింపు
+#### 2. మోడల్ డిప్లాయ్‌మెంట్ ఖర్చు కాలం ముగింపు
 
-**సమస్య**: గడువు ముగిసిన API వెర్షన్ వల్ల మోడల్ డిప్లాయ్‌మెంట్ విఫలమవుతుంది
+**సమస్య**: API వెర్షన్ గడువు ముగిసిన కారణంగా మోడల్ డిప్లాయ్ నిర్ఫలమవుతుంది
 
 **పరిష్కారం**:
 ```python
@@ -1647,11 +1647,11 @@ import json
 
 def check_model_versions():
     """Check for latest model versions"""
-    # ఇది ప్రస్తుత వర్షన్లను పొందడానికి Azure OpenAI APIని పిలుస్తుంది
+    # ఇది ప్రస్తుత వెర్షన్లను పొందడానికి Microsoft Foundry Models APIని పిలుస్తుంది
     latest_versions = {
-        "gpt-4o": "2024-11-20",
+        "gpt-4.1": "2024-11-20",
         "text-embedding-ada-002": "2", 
-        "gpt-4o-mini": "2024-07-18"
+        "gpt-4.1-mini": "2024-07-18"
     }
     
     print("Latest model versions:")
@@ -1664,7 +1664,7 @@ def update_bicep_templates(latest_versions):
     """Update Bicep templates with latest versions"""
     template_path = "./infra/models.bicep"
     
-    # టెంప్లేట్ ਨੂੰ చదివి నవీకరించండి
+    # టెంప్లేట్‌ను చదివి నవీకరించండి
     with open(template_path, 'r') as f:
         content = f.read()
     
@@ -1684,9 +1684,9 @@ if __name__ == "__main__":
     update_bicep_templates(versions)
 ```
 
-#### 3. ఫైన్-ట్యూనింగ్ ఇంటిగ్రేషన్
+#### 3. ఫైన్-ట్యూనింగ్ ইంటిగ్రేషన్
 
-**సమస్య**: ఫైన్-ట్యూన్ చేసిన మోడల్‌లను AZD డిప్లాయ్‌మెంట్‌లో ఎలా ఇంటిగ్రేట్ చేయాలో
+**సమస్య**: AZD టెంప్లేట్‌లో ఫైన్-ట్యూన్డ్ మోడల్స్‌ను ఎలా ఇంటిగ్రేట్ చేయాలి
 
 **పరిష్కారం**:
 ```python
@@ -1698,7 +1698,7 @@ class FineTuningPipeline:
     def __init__(self, openai_client: AsyncOpenAI):
         self.client = openai_client
     
-    async def start_fine_tuning_job(self, training_file_id: str, model: str = "gpt-4o-mini"):
+    async def start_fine_tuning_job(self, training_file_id: str, model: str = "gpt-4.1-mini"):
         """Start a fine-tuning job"""
         job = await self.client.fine_tuning.jobs.create(
             training_file=training_file_id,
@@ -1726,8 +1726,8 @@ class FineTuningPipeline:
             fine_tuned_model = job.fine_tuned_model
             print(f"Fine-tuned model ready: {fine_tuned_model}")
             
-            # ఫైన్-ట్యూన్ చేయబడిన మోడల్‌ను ఉపయోగించడానికి డిప్లాయ్‌మెంట్‌ను అప్‌డేట్ చేయండి
-            # ఇది డిప్లాయ్‌మెంట్‌ను అప్‌డేట్ చేయడానికి Azure CLI ను పిలుస్తుంది
+            # డిప్లాయ్‌మెంట్‌ను ఫైన్-ట్యూన్ చేయబడిన మోడల్‌ను ఉపయోగించేలా నవీకరించండి
+            # ఇది డిప్లాయ్‌మెంట్‌ను నవీకరించడానికి Azure CLIని పిలుస్తుంది
             return fine_tuned_model
         else:
             print(f"Job status: {job.status}")
@@ -1736,13 +1736,13 @@ class FineTuningPipeline:
 
 ---
 
-## FAQ & ఓపెన్-ఎండెడ్ అన్వేషణ
+## FAQ & విపుల పరిశీలన
 
 ### తరచుగా అడిగే ప్రశ్నలు
 
-#### ప్రశ్న: బహుళ ఏజెంట్లను డిప్లాయ్ చేయడానికి సరళమైన మార్గం ఉందా (డిజైన్ నమూనా)?
+#### Q: బహుళ ఏజెంట్‌లను డిప్లాయ్ చేయడానికి ఏదైనా సులభ మార్గం ఉందా (డిజైన్ ప్యాటర్న్)?
 
-**జవాబు: అవును! బహుళ-ఏజెంట్ నమూనాను ఉపయోగించండి:**
+**A: ఉం! Multi-Agent Pattern ని ఉపయోగించండి:**
 
 ```yaml
 # azure.yaml - Multi-Agent Configuration
@@ -1753,23 +1753,23 @@ services:
     config:
       AGENTS: |
         {
-          "customer": {"type": "customer_service", "model": "gpt-4o", "capacity": 20},
-          "inventory": {"type": "inventory_management", "model": "gpt-4o-mini", "capacity": 10},
-          "returns": {"type": "returns_processing", "model": "gpt-4o-mini", "capacity": 5}
+          "customer": {"type": "customer_service", "model": "gpt-4.1", "capacity": 20},
+          "inventory": {"type": "inventory_management", "model": "gpt-4.1-mini", "capacity": 10},
+          "returns": {"type": "returns_processing", "model": "gpt-4.1-mini", "capacity": 5}
         }
 ```
 
-#### ప్రశ్న: "model router" ను మోడల్‌గా డిప్లాయ్ చేయగలనా (ఖర్చు ప్రభావాలు)?
+#### Q: నేను "model router" ను ఒక మోడల్ రూపంలో డిప్లాయ్ చేయగలవా (ఖర్చు ప్రభావాలు)?
 
-**జవాబు: అవును, జాగ్రత్తగా ఆలోచిస్తే:**
+**A: అవును, జాగ్రత్తగా పరిగణించాలి:**
 
 ```python
-# మోడల్ రౌటర్ అమలు
+# మోడల్ రౌటర్ అమలీకరణ
 class ModelRouter:
     def __init__(self):
         self.routing_rules = {
-            "simple_queries": {"model": "gpt-4o-mini", "cost_per_1k": 0.00015},
-            "complex_reasoning": {"model": "gpt-4o", "cost_per_1k": 0.03},
+            "simple_queries": {"model": "gpt-4.1-mini", "cost_per_1k": 0.00015},
+            "complex_reasoning": {"model": "gpt-4.1", "cost_per_1k": 0.03},
             "embeddings": {"model": "text-embedding-ada-002", "cost_per_1k": 0.0001}
         }
     
@@ -1784,45 +1784,45 @@ class ModelRouter:
     
     def estimate_cost_savings(self, usage_patterns: dict):
         """Estimate cost savings from intelligent routing"""
-        # అమలు సంభావ్య ఆదా మొత్తాలను లెక్కిస్తుంది
+        # అమలీకరణ సంభావ్య ఆదాలను లెక్కిస్తుంది
         pass
 ```
 
 **ఖర్చు ప్రభావాలు:**
-- **సేవింగ్స్**: సరళ ప్రశ్నల కోసం 60-80% ఖర్చు తగ్గింపు
-- **ట్రేడాఫ్స్**: రౌటింగ్ లాజిక్ వల్ల కొంచెం లేటెన్సీ పెరుగుదల
-- **మానిటరింగ్**: ఖర్చు వర్సెస్ ఖచ్చితత్వ మెట్రిక్స్ ను ట్రాక్ చేయండి
+- **సేవింగ్స్**: సాదారణ ప్రశ్నల కోసం 60-80% ఖర్చు తగ్గింపు
+- **ట్రేడ్-ఆఫ్స్**: రౌటింగ్ లాజిక్ కోసం స్వల్ప లేటెన్సీ పెరగడం
+- **మానిటరింగ్**: ఖచ్చితత్వాన్ని ఖర్చుతో పోల్చి ట్రాక్ చేయండి
 
-#### ప్రశ్న: azd టెంప్లేట్ నుండి ఫైన్-ట్యూనింగ్ జాబ్‌ను ప్రారంభించగలనా?
+#### Q: నేను azd టెంప్లేట్ నుండి ఫైన్-ట్యూనింగ్ జాబ్‌ను ప్రారంభించగలనా?
 
-**జవాబు: అవును, పోస్ట్-ప్రావిజనింగ్ హుక్స్ ఉపయోగించి:**
+**A: అవును, పోస్ట్-ప్రొవిజనింగ్ హుక్స్ ఉపయోగించి:**
 
 ```bash
 #!/bin/bash
-# hooks/postprovision.sh - సూక్ష్మ సర్దుబాటు సమీకరణ
+# hooks/postprovision.sh - ఫైన్-ట్యూనింగ్ ఇంటిగ్రేషన్
 
 echo "Starting fine-tuning pipeline..."
 
-# శిక్షణ డేటాను అప్లోడ్ చేయండి
+# శిక్షణ డేటాను అప్‌లోడు చేయండి
 TRAINING_FILE_ID=$(python scripts/upload_training_data.py \
   --data-path "./data/fine_tuning/training.jsonl" \
   --openai-key "$AZURE_OPENAI_API_KEY")
 
-# సూక్ష్మ సర్దుబాటు పనిని ప్రారంభించండి
+# ఫైన్-ట్యూనింగ్ జాబ్ ప్రారంభించండి
 FINE_TUNE_JOB_ID=$(python scripts/start_fine_tuning.py \
   --training-file-id "$TRAINING_FILE_ID" \
-  --model "gpt-4o-mini")
+  --model "gpt-4.1-mini")
 
-# పర్యవేక్షణ కోసం జాబ్ ఐడీ నిల్వ చేయండి
+# మానిటరింగ్ కోసం జాబ్ IDని నిల్వ చేయండి
 echo "$FINE_TUNE_JOB_ID" > .azure/fine_tune_job_id
 
 echo "Fine-tuning job started: $FINE_TUNE_JOB_ID"
 echo "Monitor progress with: azd hooks run monitor-fine-tuning"
 ```
 
-### అడ్వాన్స్డ్ సన్నివేశాలు
+### అధునాతన పరిస్థితులు
 
-#### బహుళ-ప్రాంత డిప్లాయ్‌మెంట్ వ్యూహం
+#### బహుళ-రీజియన్ డిప్లాయ్‌మెంట్ వ్యూహం
 
 ```bicep
 // infra/multi-region.bicep
@@ -1903,45 +1903,46 @@ class CostOptimizer:
 ```
 
 ---
-## ✅ అమర్చడానికి-సిద్దమైన ARM టెంప్లేట్
 
-> **✨ ఇది వాస్తవంగా ఉంది మరియు పనిచేస్తుంది!**  
-> పై భావనాత్మక కోడ్ ఉదాహరణల కన్నా భిన్నంగా, ARM టెంప్లేట్ ఈ రిపాజిటరీలోని ఒక **నిజమైన, పని చేసే ఇన్‌ఫ్రాస్ట్రక్చర్ డిప్లాయ్‌మెంట్** గా ఉంది.
+## ✅ డిప్లాయ్ చేయడానికి సిద్ధమైన ARM టెంప్లేట్
+
+> **✨ ఇది నిజంగా ఉన్నది మరియు పనిచేస్తుంది!**  
+> పై భావనాత్మక కోడ్ ఉదాహరణలతో భిన్నంగా, ARM టెంప్లేట్ ఈ రిపోజిటరీలోని ఒక **నిజమైన, పనిచేసే ఇన్ఫ్రాస్ట్రక్చర్ డిప్లాయ్‌మెంట్**.
 
 ### ఈ టెంప్లేట్ వాస్తవానికి ఏమి చేస్తుంది
 
-[`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) వద్ద ఉన్న ARM టెంప్లేట్ మల్టీ-ఏజెంట్ వ్యవస్థ కోసం కావలసిన **అన్ని Azure ఇన్‌ఫ్రాస్ట్రక్చర్** ను ప్రావిహించిస్తుంది. ఇది ఒక్కటే **రన్ చేయడానికి సిద్ధంగా ఉన్న భాగం** - మిగతవి అభివృద్ధిని అవసరమైనవే.
+[`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) లోని ARM టెంప్లేట్ బహుళ-ఏజెంట్ సిస్టమ్ కోసం అవసరమైన **అన్ని Azure ఇన్ఫ్రాస్ట్రక్చర్** ను ప్రావిజన్ చేస్తుంది. ఇది ఒకే **రన్కు సిద్ధమైన భాగం** — మిగతావన్నీ అభివృద్ధిని అవసరం పడతాయి.
 
 ### ARM టెంప్లేట్‌లో ఏమి ఉంది
 
-[`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) లో ఉన్న ARM టెంప్లేట్ లో ఉన్నాయి:
+[`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) లో ఉన్న ARM టెంప్లేట్‌లో:
 
-#### **সম্পూర్తి ఇన్‌ఫ్రాస్ట్రక్చర్**
-- ✅ **బహు-ప్రాంత Azure OpenAI** డిప్లాయ్‌మెంట్లు (GPT-4o, GPT-4o-mini, embeddings, grader)
-- ✅ **Azure AI Search** వెక్టర్ సెర్చ్ సామర్థ్యాలతో
-- ✅ **Azure Storage** డాక్యుమెంట్ మరియు అప్లోడ్ కంటైనర్లతో
+#### **పూర్తి ఇన్ఫ్రాస్ట్రక్చర్**
+- ✅ **బహుళ-రిజియన్ Microsoft Foundry Models** డిప్లాయ్‌మెంట్లు (gpt-4.1, gpt-4.1-mini, embeddings, grader)
+- ✅ **Azure AI Search** వెక్టర్ శోధన సామర్థ్యాలతో
+- ✅ **Azure Storage** డాక్యుమెంట్ మరియు అప్లోడ్ కంటెయినర్లతో
 - ✅ **Container Apps Environment** ఆటో-స్కేలింగ్‌తో
-- ✅ **Agent Router & Frontend** కంటైనర్ యాప్స్
+- ✅ **Agent Router & Frontend** కన్టైనర్ యాప్స్
 - ✅ **Cosmos DB** చాట్ హిస్టరీ నిల్వ కోసం
 - ✅ **Application Insights** సమగ్ర మానిటరింగ్ కోసం
-- ✅ **Key Vault** సీక్యూర్ సీక్రెట్ నిర్వహణ కోసం
+- ✅ **Key Vault** సీక్యూర్ సీక్రెట్ల నిర్వహణ కోసం
 - ✅ **Document Intelligence** ఫైల్ ప్రాసెసింగ్ కోసం
 - ✅ **Bing Search API** రియల్-టైమ్ సమాచారానికి
 
-#### **డిప్లాయ్‌మెంట్ మోడ్స్**
+#### **డిప్లాయ్‌మెంట్ మోడ్‌లు**
 | Mode | Use Case | Resources | Estimated Cost/Month |
 |------|----------|-----------|---------------------|
-| **Minimal** | అభివృద్ధి, పరీక్షలు | బేసిక్ SKUలు, ఏక ప్రదేశం | $100-370 |
-| **Standard** | ఉత్పత్తి, మిడియమ్ స్కేల్ | స్టాండర్డ్ SKUలు, బహు-ప్రాంతం | $420-1,450 |
-| **Premium** | ఎంటర్ప్రైజ్, భారీ స్కేల్ | ప్రీమియం SKUలు, HA సెటప్ | $1,150-3,500 |
+| **మినిమల్** | అభివృద్ధి, పరీక్షలు | బేసిక్ SKUs, ఒకే రీజియన్ | $100-370 |
+| **స్టాండర్డ్** | ప్రొడక్షన్, మధ్యస్థ లా | స్టాండర్డ్ SKUs, బహుళ-రిజియన్ | $420-1,450 |
+| **ప్రీమియం** | ఎంటర్ప్రైజ్, అధిక స్థాయిలో | ప్రీమియం SKUs, HA సెటప్ | $1,150-3,500 |
 
 ### 🎯 త్వరిత డిప్లాయ్ ఎంపికలు
 
-#### ఎంపిక 1: ఒక్క క్లిక్ Azure డిప్లాయ్‌మెంట్
+#### ఎంపిక 1: ఒక క్లిక్ Azure డిప్లాయ్‌మెంట్
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
+[![Azureలో అమర్చండి](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Fazd-for-beginners%2Fmain%2Fexamples%2Fretail-multiagent-arm-template%2Fazuredeploy.json)
 
-#### ఎంపిక 2: Azure CLI డిప్లాయ్‌మెంట్
+#### ఎంపిక 2: Azure CLI ద్వారా డిప్లాయ్‌మెంట్
 
 ```bash
 # రిపోజిటరీని క్లోన్ చేయండి
@@ -1951,20 +1952,20 @@ cd azd-for-beginners/examples/retail-multiagent-arm-template
 # డిప్లాయ్‌మెంట్ స్క్రిప్ట్‌ను ఎగ్జిక్యూటబుల్‌గా చేయండి
 chmod +x deploy.sh
 
-# డిఫాల్ట్ సెట్టింగ్‌లతో డిప్లాయ్ చేయండి (స్టాండర్డ్ మోడ్)
+# డిఫాల్ట్ సెట్టింగులతో (స్టాండర్డ్ మోడ్) డిప్లాయ్ చేయండి
 ./deploy.sh -g myResourceGroup
 
-# ప్రొడక్షన్ కోసం ప్రీమియం ఫీచర్లతో డిప్లాయ్ చేయండి
+# ఉత్పత్తి కోసం ప్రీమియం ఫీచర్లతో డిప్లాయ్ చేయండి
 ./deploy.sh -g myProdRG -e prod -m premium -l eastus2
 
-# డెవలప్‌మెంట్ కోసం కనిష్ట వెర్షన్‌ను డిప్లాయ్ చేయండి
+# డెవలఫ్‌మెంట్ కోసం కనిష్ట వెర్షన్‌ను డిప్లాయ్ చేయండి
 ./deploy.sh -g myDevRG -e dev -m minimal --no-multi-region
 ```
 
-#### ఎంపిక 3: ప్రత్యక్ష ARM టెంప్లేట్ డిప్లాయ్‌మెంట్
+#### ఎంపిక 3: నేరుగా ARM టెంప్లేట్ డిప్లాయ్‌మెంట్
 
 ```bash
-# రిసోర్స్ గ్రూప్ సృష్టించండి
+# రీసోర్స్ గ్రూప్ సృష్టించండి
 az group create --name myResourceGroup --location eastus2
 
 # టెంప్లేట్‌ను నేరుగా అమలు చేయండి
@@ -1975,9 +1976,9 @@ az deployment group create \
   --parameters projectName=retail environmentName=prod
 ```
 
-### టెంప్లేట్ అవుట్‌పుట్స్
+### టెంప్లేట్ అవుట్‌పుట్లు
 
-సఫలమైన డిప్లాయ్‌మెంట్ తర్వాత, మీరు పొందుతారు:
+సక్సెస్‌ఫుల్ డిప్లాయ్‌మెంట్ తర్వాత, మీరు పొందుతారు:
 
 ```json
 {
@@ -1991,31 +1992,31 @@ az deployment group create \
 }
 ```
 
-### 🔧 పోస్ట్-డిప్లాయ్‌మెంట్ కాన్ఫిగరేషన్
+### 🔧 డిప్లాయ్ చేసిన తర్వాత కాన్ఫిగరేషన్
 
-ARM టెంప్లేట్ ఇన్‌ఫ్రాస్ట్రక్చర్ ప్రావిజనింగ్‌ని నిర్వహిస్తుంది. డిప్లాయ్‌మెంట్ తర్వాత:
+ARM టెంప్లేట్ ఇన్ఫ్రాస్ట్రక్చర్ ప్రావిజనింగ్‌ను నిర్వహిస్తుంది. డిప్లాయ్ చేసిన తర్వాత:
 
-1. **సెర్చ్ ఇండెక్స్‌ని కాన్ఫిగర్ చేయండి**:
+1. **శోధన సూచికను కాన్ఫిగర్ చేయండి**:
    ```bash
-   # నివ్వబడిన శోధన స్కీమాను ఉపయోగించండి
+   # నిచ్చిన శోధన స్కీమాను ఉపయోగించండి
    curl -X POST "${SEARCH_ENDPOINT}/indexes?api-version=2023-11-01" \
      -H "Content-Type: application/json" \
      -H "api-key: ${SEARCH_KEY}" \
      -d @../data/search-schema.json
    ```
 
-2. **ప్రారంభ డాక్యుమెంట్లు అప్లోడ్ చేయండి**:
+2. **ప్రారంభ పత్రాలను అప్లోడ్ చేయండి**:
    ```bash
-   # ఉత్పత్తి మాన్యువల్‌లు మరియు జ్ఞానాధారాన్ని అప్‌లోడ్ చేయండి
+   # ఉత్పత్తి మాన్యువల్స్ మరియు జ్ఞానాధారాన్ని అప్లోడ్ చేయండి
    az storage blob upload-batch \
      --destination documents \
      --source ../data/initial-docs \
      --account-name ${STORAGE_ACCOUNT}
    ```
 
-3. **ఎజెంట్ కోడ్‌ను డిప్లాయ్ చేయండి**:
+3. **ఏజెంట్ కోడ్‌ను డిప్లాయ్ చేయండి**:
    ```bash
-   # వాస్తవ ఏజెంట్ అనువర్తనాలను నిర్మించి మరియు డిప్లాయ్ చేయండి
+   # నిజమైన ఏజెంట్ అప్లికేషన్లను నిర్మించి డిప్లాయ్ చేయండి
    docker build -t myregistry.azurecr.io/agent-router:latest ./src/router
    az containerapp update \
      --name retail-router \
@@ -2023,9 +2024,9 @@ ARM టెంప్లేట్ ఇన్‌ఫ్రాస్ట్రక్చ
      --image myregistry.azurecr.io/agent-router:latest
    ```
 
-### 🎛️ అనుకూలీకరణ ఎంపికలు
+### 🎛️ సానుకూలీకరణ ఎంపికలు
 
-డిప్లాయ్‌మెంట్‌ను అనుకూలీకరించడానికి `azuredeploy.parameters.json` ను సవరించండి:
+మీ డిప్లాయ్‌మెంట్‌ను కస్టమైజ్ చేయడానికి `azuredeploy.parameters.json`ను ఎడిట్ చేయండి:
 
 ```json
 {
@@ -2041,145 +2042,145 @@ ARM టెంప్లేట్ ఇన్‌ఫ్రాస్ట్రక్చ
 
 ### 📊 డిప్లాయ్‌మెంట్ ఫీచర్లు
 
-- ✅ **అవసరాల పరిశీలన** (Azure CLI, కోటాస్, అనుమతులు)
-- ✅ **ఆటోమేటిక్ ఫెయిల్‌వోవర్‌తో బహు-ప్రాంత హై అవైలబిలిటీ**
-- ✅ **Application Insights మరియు Log Analytics తో సమగ్ర మానిటరింగ్**
-- ✅ **Key Vault మరియు RBAC తో సెక్యూరిటీ బెస్ట్ ప్రాక్టీసెస్**
-- ✅ **డిప్లాయ్‌మెంట్ మోడ్ల ద్వారా ఖర్చు ఆప్టిమైజేషన్**
-- ✅ **డిమాండ్ ఆదారంగా ఆటోమేటెడ్ స్కేలింగ్**
-- ✅ **Container Apps రివిజన్లతో జీరో డౌన్‌టైమ్ అప్‌డేట్స్**
+- ✅ **ప్రాథమిక షరతుల నిర్ధారణ** (Azure CLI, కోటాలు, అనుమతులు)
+- ✅ **బహుళ-రిజియన్ హై ఆవైలబిలిటీ** స్వయంచాలక ఫేలోవర్‌తో
+- ✅ **సమగ్ర మానిటరింగ్** Application Insights మరియు Log Analytics తో
+- ✅ **భద్రతా ఉత్తమ ఆచరణలు** Key Vault మరియు RBAC తో
+- ✅ **ఖర్చు ఆప్టిమైజేషన్** కాన్ఫిగరబుల్ డిప్లాయ్‌మెంట్ మోడ్‌లతో
+- ✅ **ఆటోమేటెడ్ స్కేలింగ్** డిమాండ్ నమూనాల ఆధారంగా
+- ✅ **జీరో-డౌన్‌టైమ్ అప్డేట్స్** Container Apps రివిషన్స్‌తో
 
 ### 🔍 మానిటరింగ్ మరియు నిర్వహణ
 
-ఒకసారి డిప్లాయ్ చేయబడిన తరువాత, మీ పరిష్కారాన్ని ఈ మార్గాల్లో పర్యవేక్షించండి:
+ఒకసారి డిప్లాయ్ అయిన తర్వాత, మీ సొల్యూషన్‌ను వీటిపైనుండి మానిటర్ చేయండి:
 
-- **Application Insights**: పనితీరు మ్యాట్రిక్స్, డిపెండెన్సీ ట్రాకింగ్, మరియు అనుకూల టెలిమెట్రీ
-- **Log Analytics**: అన్ని కంపోనెంట్ల నుండి కేంద్రికృత లాగింగ్
-- **Azure Monitor**: వనరు ఆరోగ్యం మరియు అందుబాటున పర్యవేక్షణ
-- **Cost Management**: రియల్-టైమ్ ఖర్చు ట్రాకింగ్ మరియు బడ్జెట్ అలర్ట్స్
-
----
-
-## 📚 సంపూర్ణ అమలు మార్గదర్శకం
-
-ఈ సన్నివేశం డాక్యుమెంట్ ARM టెంప్లేట్ తో కలిపి ప్రొడక్షన్-సిద్ధ మల్టీ-ఏజెంట్ కస్టమర్ సపోర్ట్ పరిష్కారం డిప్లాయ్ చేయడానికి కావలసిన అన్నింటినీ అందిస్తుంది. అమలు coverage:
-
-✅ **ఆర్కిటెక్చర్ డిజైన్** - కంపోనెంట్ సంబంధాలతో సమగ్ర సిస్టమ్ డిజైన్  
-✅ **ఇన్‌ఫ్రాస్ట్రక్చర్ ప్రావిజనింగ్** - ఒక్క క్లిక్ డిప్లాయ్‌మెంట్ కోసం పూర్తి ARM టెంప్లేట్  
-✅ **ఎజెంట్ కాన్ఫిగరేషన్** - కస్టమర్ మరియు ఇన్వెంటరీ ఎజెంట్లకు వివరణాత్మక సెటప్  
-✅ **బహు-మోడల్ డిప్లాయ్‌మెంట్** - ప్రాంతాలుగా మోడల్ పరిమాణ నిర్ధారణ  
-✅ **సెర్చ్ ఇంటిగ్రేషన్** - వెక్టర్ సామర్థ్యాలతో AI Search మరియు డేటా ఇండెక్సింగ్  
-✅ **సెక్యూరిటీ అమలు** - రెడ్ టీమింగ్, వెల్నరబిలిటీ స్కానింగ్, మరియు సురక్షిత పద్ధతులు  
-✅ **మానిటరింగ్ & మুল్యాంకనం** - సమగ్ర టెలిమెట్రీ మరియు ఎజెంట్ మూల్యాంకన ఫ్రేమ్వర్క్  
-✅ **ఉత్పత్తి సిద్దత** - HA మరియు డిజాస్టర్ రికవరీతో ఎంటర్ప్రైజ్-గ్రేడ్ డిప్లాయ్‌మెంట్  
-✅ **ఖర్చు ఆప్టిమైజేషన్** - ఇంటెలిజెంట్ రౌటింగ్ మరియు వినియోగ ఆధారిత స్కేలింగ్  
-✅ **ట్రబుల్షూటింగ్ గైడ్** - సాధారణ సమస్యలు మరియు పరిష్కార వ్యూహాలు
+- **Application Insights**: పనితీరు మెట్రిక్స్, డిపెండెన్సీ ట్రాకింగ్, మరియు కస్టమ్ టెలిమెట్రీ
+- **Log Analytics**: అన్ని కంపోనంట్ల నుండి కేంద్రీకృత లాగింగ్
+- **Azure Monitor**: వనరు హెల్త్ మరియు లభ్యత మానిటరింగ్
+- **Cost Management**: రియల్-టైమ్ ఖర్చు ట్రాకింగ్ మరియు బడ్జెట్ అలర్ట్‌లు
 
 ---
 
-## 📊 సంచిక: మీరు ఏమి నేర్చుకున్నారు
+## 📚 పూర్తి అమలు మార్గదర్శకం
 
-### కవర్ చేసిన ఆర్కిటెక్చర్ ప్యాటర్న్లు
+ఈ సన్నివేశ డాక్యుమెంట్ ARM టెంప్లేట్‌తో కలిసి ఉత్పత్తి-సిద్ధమైన బహుళ-ఏజెంట్ కస్టమర్ సపోర్ట్ పరిష్కారాన్ని డిప్లాయ్ చేయడానికి కావలసిన అన్ని విషయాలనే అందిస్తుంది. అమలు కింది విషయాలను కవర్ చేస్తుంది:
 
-✅ **మల్టీ-ఎజెంట్ సిస్టమ్ డిజైన్** - ప్రత్యేక ఎజెంట్లు (Customer + Inventory) సమర్పించిన మోడల్స్‌తో  
-✅ **బహు-ప్రాంత డిప్లాయ్‌మెంట్** - ఖర్చు నియంత్రణ మరియు redundancy కోసం వ్యూహాత్మక మోడల్ ప్లేస్‌మెంట్  
-✅ **RAG ఆర్కిటెక్చర్** - గ్రౌండెడ్ రిస్పონსెస్ కోసం వెక్టర్ ఎంబెడ్డింగ్స్‌తో AI Search ఇంటిగ్రేషన్  
-✅ **ఎజెంట్ మూల్యాంకనం** - నాణ్యతా అంచనాకు ప్రత్యేక గ్రేడర్ మోడల్  
-✅ **సెక్యూరిటీ ఫ్రేమ్వర్క్** - రెడ్ టిమింగ్ మరియు వెల్నరబిలిటీ స్కానింగ్ నమూనాలు  
-✅ **ఖర్చు ఆప్టిమైజేషన్** - మోడల్ రౌటింగ్ మరియు కేపాసిటీ ప్లానింగ్ వ్యూహాలు  
-✅ **ప్రొడక్షన్ మానిటరింగ్** - కస్టమ్ టెలిమెట్రీతో Application Insights  
+✅ **ఆర్కిటెక్చర్ డిజైన్** - కంపోనెంట్ సంబంధాలుతో సమగ్ర సిస్టమ్ డిజైన్  
+✅ **ఇన్ఫ్రాస్ట్రక్చర్ ప్రావిజనింగ్** - ఒక క్లిక్ డిప్లాయ్ కోసం పూర్తి ARM టెంప్లేట్  
+✅ **ఏజెంట్ కాన్ఫిగరేషన్** - కస్టమర్ మరియు ఇన్వెంటరీ ఏజెంట్లకు విస్తృత సెటప్  
+✅ **బహుళ-మోడల్ డిప్లాయ్‌మెంట్** - రీజియన్‌ల ద్వారా మోడల్ స్థాపన వ్యూహం  
+✅ **శోధన సమీకరణ** - వెక్టర్ సామర్థ్యాలతో AI Search మరియు డేటా ఇండెక్సింగ్  
+✅ **సెక్యూరిటీ అమలు** - రెడ్ టీమింగ్, పాడుదోషాల స్కానింగ్, మరియు సురక్షిత ఆచరణలు  
+✅ **మానిటరింగ్ & మూల్యాంకనం** - సమగ్ర టెలిమెట్రీ మరియు ఏజెంట్ మూల్యాంకన ఫ్రేమ్‌వర్క్  
+✅ **ప్రొడక్షన్ సిద్ధత** - HA మరియు డిజాస్టర్ రీకవరీతో ఎంటర్ప్రైజ్-గ్రేడ్ డిప్లాయ్‌మెంట్  
+✅ **ఖర్చు ఆప్టిమైజేషన్** - ఇంటెలిజెంట్ రౌటింగ్ మరియు వాడుక-ఆధారిత స్కేలింగ్  
+✅ **ట్రబుల్షూటింగ్ గైడ్** - సాధారణ సమస్యలు మరియు పరిష్కారం వ్యూహాలు
 
-### ఈ డాక్యుమెంట్ ఏం అందిస్తుంది
+---
+
+## 📊 సారాంశం: మీరు ఏమి నేర్చుకున్నారు
+
+### ఆర్కిటెక్చర్ ప్యాటర్న్‌లు కవర్ చేయబడ్డాయి
+
+✅ **బహుళ-ఏజెంట్ సిస్టమ్ డిజైన్** - ప్రత్యేక ఏజెంట్లు (కస్టమర్ + ఇన్వెంటరీ) డెడికేబ్టు మోడల్స్‌తో  
+✅ **బహుళ-రిజియన్ డిప్లాయ్‌మెంట్** - ఖర్చు మరింత తగ్గించడం మరియు రెడండెన్సీ కోసం మోడల్ వ్యూహాత్మక స్థాపన  
+✅ **RAG ఆర్కిటెక్చర్** - గ్రౌండెడ్ రేస్పాన్సులకు వెక్టర్ ఎంబెడింగ్స్‌తో AI Search సమీకరణ  
+✅ **ఏజెంట్ మూల్యాంకనం** - నాణ్యతా మూల్యాంకనానికి ప్రత్యేక గ్రేడర్ మోడల్  
+✅ **సెక్యూరిటీ ఫ్రేమ్‌వర్క్** - రెడ్ టీమింగ్ మరియు పాడుదోషాల స్కానింగ్ ప్యాటర్న్‌లు  
+✅ **ఖರ್ಚు ఆప్టిమైజేషన్** - మోడల్ రౌటింగ్ మరియు సామర్థ్య ప్లానింగ్ వ్యూహాలు  
+✅ **ప్రొడక్షన్ మానిటరింగ్** - కస్టమ్ టెలిమెట్రీతో Application Insights
+
+### ఈ డాక్యుమెంట్ ఏమిని అందిస్తుంది
 
 | Component | Status | Where to Find It |
 |-----------|--------|------------------|
-| **Infrastructure Template** | ✅ అమర్చడానికి సిద్ధం | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
-| **Architecture Diagrams** | ✅ పూర్తి | పైలో ఉన్న Mermaid చిత్రణ |
-| **Code Examples** | ✅ సూచన అమలు ఉదాహరణలు | ఈ డాక్యుమెంట్ మొత్తం |
-| **Configuration Patterns** | ✅ వివరణాత్మక మార్గదర్శకత్వం | విధానాలు 1-10 పై |
+| **Infrastructure Template** | ✅ Ready to Deploy | [`retail-multiagent-arm-template/`](../../../examples/retail-multiagent-arm-template) |
+| **Architecture Diagrams** | ✅ Complete | పైటి Mermaid డైగ్రామ్ |
+| **Code Examples** | ✅ Reference Implementations | ఈ డాక్యుమెంట్‌లో విస్తరంగా |
+| **Configuration Patterns** | ✅ Detailed Guidance | సెక్షన్లు 1-10 పై |
 | **Agent Implementations** | 🔨 మీరు దీనిని నిర్మించాలి | సుమారు 40 గంటల అభివృద్ధి |
 | **Frontend UI** | 🔨 మీరు దీనిని నిర్మించాలి | సుమారు 25 గంటల అభివృద్ధి |
 | **Data Pipelines** | 🔨 మీరు దీనిని నిర్మించాలి | సుమారు 10 గంటల అభివృద్ధి |
 
-### వాస్తవ పరిస్థితి: నాకితన్ని ఉన్నాయి
+### వాస్తవ నిర్ధారణ: నిజంగా ఏమి ఉంది
 
-**రిపాజిటరీలో (ఇప్పుడే సిద్ధంగా):**
-- ✅ 15+ Azure సేవలను డిప్లాయ్ చేసే ARM టెంప్లేట్ (azuredeploy.json)
-- ✅ పరీక్షకర్తతో డిప్లాయ్‌మెంట్ స్క్రిప్ట్ (deploy.sh)
-- ✅ పరామితి కాన్ఫిగరేషన్ (azuredeploy.parameters.json)
+**రిపోజిటరీలో (ఇప్పుడే సిద్ధం):**
+- ✅ ARM టెంప్లేట్ ద్వారా 15+ Azure సేవలను డిప్లాయ్ చేస్తుంది (azuredeploy.json)
+- ✅ నిర్ధారణతో డిప్లాయ్‌మెంట్ స్క్రిప్ట్ (deploy.sh)
+- ✅ ప్యారామీటర్స్ కాన్ఫిగరేషన్ (azuredeploy.parameters.json)
 
-**డాక్యుమెంటులో సూచించబడినవి (మీరు సృష్టించాలి):**
-- 🔨 ఎజెంట్ అమలు కోడ్ (~30-40 గంటలు)
-- 🔨 రౌటింగ్ సేవ (~12-16 గంటలు)
-- 🔨 ఫ్రాంటెండ్ అప్లికేషన్ (~20-30 గంటలు)
-- 🔨 డేటా సెట్‌అప్ స్క్రిప్టులు (~8-12 గంటలు)
-- 🔨 మానిటరింగ్ ఫ్రేమ్వర్క్ (~10-15 గంటలు)
+**డాక్యుమెంట్‌లో సూచించబడింది (మీరు సృష్టించాలి):**
+- 🔨 ఏజెంట్ అమలుల కోడ్ (~30-40 గంటలు)
+- 🔨 రౌటింగ్ సర్వీస్ (~12-16 గంటలు)
+- 🔨 ఫ్రంట్‌ఎండ్ అప్లికేషన్ (~20-30 గంటలు)
+- 🔨 డేటా సెట్-అప్ స్క్రిప్ట్స్ (~8-12 గంటలు)
+- 🔨 మానిటరింగ్ ఫ్రేమ్‌వర్క్ (~10-15 గంటలు)
 
 ### మీ తదుపరి దశలు
 
-#### మీరు ఇన్‌ఫ్రాస్ట్రక్చర్‌ను అమర్చాలనుకుంటే (30 నిమిషాలు)
+#### మీరు ఇన్ఫ్రాస్ట్రక్చర్ డిప్లాయ్ చేయాలనుకుంటే (30 నిమిషాలు)
 ```bash
 cd retail-multiagent-arm-template
 ./deploy.sh -g myResourceGroup
 ```
 
-#### మీరు పూర్తి సిస్టమ్‌ను నిర్మించాలనుకుంటే (80-120 గంటలు)
-1. ✅ ఈ ఆర్కిటెక్చర్ డాక్యుమెంట్ ను చదవండి మరియు అర్థం చేసుకోండి (2-3 గంటలు)
-2. ✅ ARM టెంప్లేట్ ఉపయోగించి ఇన్‌ఫ్రాస్ట్రక్చర్‌ను డిప్లాయ్ చేయండి (30 నిమిషాలు)
-3. 🔨 సూచన కోడ్ నమూనాల ఉపయోగించి ఎజెంట్లను అమలు చేయండి (~40 గంటలు)
-4. 🔨 FastAPI/Express తో రౌటింగ్ సేవను నిర్మించండి (~15 గంటలు)
-5. 🔨 React/Vue తో ఫ్రాంటెండ్ UI ని సృష్టించండి (~25 గంటలు)
-6. 🔨 డేటా పైప్‌లైన్ మరియు సెర్చ్ ఇండెక్స్‌ను కాన్ఫిగర్ చేయండి (~10 గంటలు)
-7. 🔨 మానిటరింగ్ మరియు మూల్యాంకనం జత చేయండి (~15 గంటలు)
-8. ✅ పరీక్షించండి, సురక్షితం చేయండి, మరియు ఆప్టిమైజ్ చేయండి (~10 గంటలు)
+#### మీరు పూర్తి సిస్టమ్ నిర్మించాలనుకుంటే (80-120 గంటలు)
+1. ✅ ఈ ఆర్కిటెక్చర్ డాక్యుమెంట్‌ను చదవండి మరియు అర్ధం చేసుకోండి (2-3 గంటలు)
+2. ✅ ARM టెంప్లేట్ ఉపయోగించి ఇన్ఫ్రాస్ట్రక్చర్ డిప్లాయ్ చేయండి (30 నిమిషాలు)
+3. 🔨 రిఫరెన్స్ కోడ్ ప్యాటర్న్‌లు ఉపయోగించి ఏజెంట్లను అమలు చేయండి (~40 గంటలు)
+4. 🔨 FastAPI/Express తో రౌటింగ్ సర్వీస్ రూపొందించండి (~15 గంటలు)
+5. 🔨 React/Vue తో ఫ్రంట్‌ఎండ్ UI రూపొందించండి (~25 గంటలు)
+6. 🔨 డేటా పైప్‌లైన్ మరియు శోధన సూచికను కాన్ఫిగర్ చేయండి (~10 గంటలు)
+7. 🔨 మానిటరింగ్ మరియు మూల్యాంకనాన్ని చేర్చండి (~15 గంటలు)
+8. ✅ టెస్ట్ చేయండి, సెక్యూర్ చేయండి, మరియు ఆప్టిమైజ్ చేయండి (~10 గంటలు)
 
-#### మీరు మల్టీ-ఏజెంట్ ప్యాటర్న్లను నేర్చుకోవాలనుకుంటే (అధ్యయనం)
-- 📖 ఆర్కిటెక్చర్ చిత్రణ మరియు కంపోనెంట్ సంబంధాలను సమీక్షించండి
-- 📖 SearchTool, BingTool, AgentEvaluator కొరకు కోడ్ ఉదాహరణలను అధ్యయనం చేయండి
-- 📖 బహు-ప్రాంత డిప్లాయ్‌మెంట్ వ్యూహాన్ని అర్థం చేసుకోండి
-- 📖 మూల్యాంకన మరియు సెక్యూరిటీ ఫ్రేమ్వర్క్‌లను తెలుసుకోండి
-- 📖 ఈ ప్యాటర్న్‌లను మీ స్వంత ప్రాజెక్టులకు వర్తింపజేయండి
+#### మీరు బహుళ-ఏజెంట్ ప్యాటర్న్‌లను అభ్యసించాలనుకుంటే (అధ్యయనం)
+- 📖 ఆర్కిటెక్చర్ డైగ్రామ్ మరియు కంపోనెంట్ సంబంధాలను రివ్యూ చేయండి
+- 📖 SearchTool, BingTool, AgentEvaluator కోసం కోడ్ ఉదాహరణలను అధ్యయనం చేయండి
+- 📖 బహుళ-రిజియన్ డిప్లాయ్‌మెంట్ వ్యూహం అర్థం చేసుకోండి
+- 📖 మూల్యాంకన మరియు సెక్యూరిటీ ఫ్రేమ్‌వర్క్స్ నేర్చుకోండి
+- 📖 మీ స్వంత ప్రాజెక్టులకు ప్యాటర్న్‌లను వర్తింప చేయండి
 
-### ముఖ్యమైన సంగ్రహం
+### ముఖ్యమైన పాఠాలు
 
-1. **ఇన్‌ఫ్రాస్ట్రక్చర్ vs అప్లికేషన్** - ARM టెంప్లేట్ ఇన్‌ఫ్రాస్ట్రక్చర్ ని అందిస్తుంది; ఎజెంట్లు అభివృద్ధిని అవసరమవుతాయి
-2. **బహు-ప్రాంత వ్య STRటెజీ** - వ్యూహాత్మక మోడల్ ప్లేస్‌మెంట్ ఖర్చు తగ్గిస్తుంది మరియు విశ్వసనీయత పెంచుతుంది
-3. **మూల్యాంకన ఫ్రేమ్వర్క్** - నిరంతర నాణ్యత అంచనాకు ప్రత్యేక గ్రేడర్ మోడల్
-4. **సెక్యూరిటీ మొదట** - ప్రొడక్షన్ కోసం రెడ్ టీమింగ్ మరియు వెల్నరబిలిటీ స్కానింగ్ అవసరం
-5. **ఖర్చు ఆప్టిమైజేషన్** - GPT-4o మరియు GPT-4o-mini మధ్య తెలివైన రౌటింగ్ 60-80% ఆదా చేస్తుంది
+1. **ఇన్ఫ్రాస్ట్రక్చర్ vs. అప్లికేషన్** - ARM టెంప్లేట్ ఇన్ఫ్రాస్ట్రక్చర్‌ను అందిస్తుంది; ఏజెంట్లు అభివృద్ధిని అవసరం పడతాయి
+2. **బహుళ-రిజియన్ వ్యూహం** - వ్యూహాత్మక మోడల్ స్థాపన ఖర్చులను తగ్గిస్తుంది మరియు విశ్వసనీయతను మెరుగుపరుస్తుంది
+3. **మూల్యాంకన ఫ్రేమ్‌వర్క్** - ప్రత్యేక గ్రేడర్ మోడల్ నిరంతర నాణ్యత మూల్యాంకనాన్ని వీలుచేస్తుంది
+4. **సురక్షత ముందు** - రెడ్ టీమింగ్ మరియు పాడుదోషాల స్కానింగ్ ఉత్పత్తి కోసం అవసరం
+5. **ఖర్చు ఆప్టిమైజేషన్** - gpt-4.1 మరియు gpt-4.1-mini మధ్య ఇంటెలిజెంట్ రౌటింగ్ 60-80% ఆదా చేయవచ్చు
 
 ### అంచనా ఖర్చులు
 
 | Deployment Mode | Infrastructure/Month | Development (One-Time) | Total First Month |
 |-----------------|---------------------|------------------------|-------------------|
-| **Minimal** | $100-370 | $15K-25K (80-120 hrs) | $15.1K-25.4K |
-| **Standard** | $420-1,450 | $15K-25K (same effort) | $15.4K-26.5K |
-| **Premium** | $1,150-3,500 | $15K-25K (same effort) | $16.2K-28.5K |
+| **మినిమల్** | $100-370 | $15K-25K (80-120 hrs) | $15.1K-25.4K |
+| **స్టాండర్డ్** | $420-1,450 | $15K-25K (సమాన ప్రయాస) | $15.4K-26.5K |
+| **ప్రీమియం** | $1,150-3,500 | $15K-25K (సమాన ప్రయత్నం) | $16.2K-28.5K |
 
-**గమనిక:** కొత్త అమలుల కోసం మొత్తం ఖర్చు లో ఇన్‌ఫ్రాస్ట్రక్చర్ <5% మాత్రమే ఉంటుంది. అభివృద్ధి ప్రయత్నం ప్రధాన పెట్టుబడியாக ఉంటుంది.
+**గమనిక:** కొత్త అమలులలో ఇన్ఫ్రాస్ట్రక్చర్ మొత్తం ఖర్చు యొక్క <5% మాత్రమే ఉంటుంది. అభివృద్ధి ప్రయత్నం ప్రధాన పెట్టుబడిగా ఉంటుంది.
 
 ### సంబంధిత వనరులు
 
-- 📚 [ARM Template Deployment Guide](retail-multiagent-arm-template/README.md) - ఇన్‌ఫ్రాస్ట్రక్చర్ సెటప్
-- 📚 [Azure OpenAI Best Practices](https://learn.microsoft.com/azure/ai-services/openai/) - మోడల్ డిప్లాయ్‌మెంట్
-- 📚 [AI Search Documentation](https://learn.microsoft.com/azure/search/) - వెక్టర్ సెర్చ్ కాన్ఫిగరేషన్
+- 📚 [ARM Template Deployment Guide](retail-multiagent-arm-template/README.md) - ఇన్ఫ్రాస్ట్రక్చర్ సెటప్
+- 📚 [Microsoft Foundry Models Best Practices](https://learn.microsoft.com/azure/ai-services/openai/) - మోడల్ డిప్లాయ్‌మెంట్
+- 📚 [AI Search Documentation](https://learn.microsoft.com/azure/search/) - వెక్టర్ శోధన కాన్ఫిగరేషన్
 - 📚 [Container Apps Patterns](https://learn.microsoft.com/azure/container-apps/) - మైక్రోసర్వీసెస్ డిప్లాయ్‌మెంట్
 - 📚 [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview) - మానిటరింగ్ సెటప్
 
-### ప్రశ్నలు లేదా సమస్యలు ఉన్నవా?
+### ప్రశ్నలు లేదా సమస్యలు?
 
-- 🐛 [Report Issues](https://github.com/microsoft/AZD-for-beginners/issues) - టెంప్లేట్ బగ్స్ లేదా డాక్యుమెంటేషన్ పొరపాట్లు
-- 💬 [GitHub Discussions](https://github.com/microsoft/AZD-for-beginners/discussions) - ఆర్కిటెక్చర్ ప్రశ్నలు
+- 🐛 [సమస్యలను నివేదించండి](https://github.com/microsoft/AZD-for-beginners/issues) - టెంప్లేట్ బగ్‌లు లేదా డాక్యుమెంటేషన్ లో లోపాలు
+- 💬 [GitHub చర్చల కోసం](https://github.com/microsoft/AZD-for-beginners/discussions) - ఆర్కిటెక్చర్ ప్రశ్నలు
 - 📖 [FAQ](../resources/faq.md) - సాధారణ ప్రశ్నలకు సమాధానాలు
-- 🔧 [Troubleshooting Guide](../docs/troubleshooting/common-issues.md) - డిప్లాయ్‌మెంట్ సమస్యలు
+- 🔧 [ట్రబుల్షూటింగ్ గైడ్](../docs/troubleshooting/common-issues.md) - డిప్లాయ్‌మెంట్ సమస్యలు
 
 ---
 
-**ఈ సమగ్ర సన్నివేశం మల్టీ-ఏజెంట్ AI వ్యవస్థల కోసం ఎంటర్ప్రైజ్-గ్రేడ్ ఆర్కిటెక్చర్ బ్లూప్రింట్‌ని అందిస్తుంది, ఇన్‌ఫ్రాస్ట్రక్చర్ టెంప్లేట్స్, అమలుకై మార్గదర్శకత్వం, మరియు Azure Developer CLI తో సున్నితమైన కస్టమర్ సపోర్ట్ పరిష్కారాలను నిర్మించడానికి ప్రొడక్షన్ బెస్ట్ ప్రాక్టీసెస్ సహా.**
+**ఈ సమగ్ర సన్నివేశం బహుళ-ఏజెంట్ AI సిస్టమ్‌ల కోసం ఎంటర్ప్రైజ్-గ్రేడ్ ఆర్కిటెక్చర్ బ్లూప్రింట్‌ను అందిస్తుంది, ఇన్ఫ్రాస్ట్రక్చర్ టెంప్లేట్‌లు, అమలు మార్గదర్శకత్వం, మరియు Azure Developer CLIతో సున్నితమైన కస్టమర్ సపోర్ట్ పరిష్కారాలను నిర్మించేందుకు ప్రొడక్షన్ ఉత్తమ ఆచరణలను కలిగి ఉంటుంది.**
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-నిరాకరణ:
-ఈ పత్రాన్ని AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ద్వారా అనువదించారు. మేము ఖచ్చితత్వానికి ప్రయత్నించినప్పటికీ, ఆటోమేటెడ్ అనువాదాల్లో తప్పులు లేదా అసమతులతలు ఉండొచ్చు అని దయచేసి గమనించండి. స్థానిక భాషలోని ఒరిజినల్ పత్రాన్ని అధికారిక మూలంగా పరిగణించాలి. ముఖ్యమైన సమాచారం కోసం వృత్తిపరమైన మానవ అనువాదం చేయించుకోవాలని మేము సిఫారసు చేస్తдаемు. ఈ అనువాదం వాడకంతో కలిగే ఏవైనా అపవగాహనలు లేదా తప్పుగా అర్థం చేసుకోవడాలపై మేము బాధ్యులు కాదని స్పష్టం చేస్తున్నాము.
+**విముక్తి ప్రకటన**:
+ఈ డాక్యుమెంట్‌ను AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నించినప్పుడల్లా, ఆటోమేటెడ్ అనువాదాల్లో తప్పులు లేదా లోపాలు ఉండొచ్చని దయచేసి గమనించండి. మూల దస్తావేజిని దాని స్థానిక భాషలోని వెర్షన్నే అధికారిక మరియు నమ్మదగిన మూలంగా పరిగణించాలి. కీలకమైన సమాచారం కోసం వృత్తిపరమైన మానవ అనువాదాన్ని చేయించుకోవాలని సూచించబడుతుంది. ఈ అనువాదం ఉపయోగం వలన ఏర్పడిన ఏవైనా అపార్థాలు లేదా తప్పుగా భావించబడే అంశాల విషయంలో మేము బాధ్యులు కాదని తెలియజేస్తున్నాము.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

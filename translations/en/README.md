@@ -6,7 +6,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/microsoft/azd-for-beginners.svg?style=social&label=Fork)](https://GitHub.com/microsoft/azd-for-beginners/network/)
 [![GitHub stars](https://img.shields.io/github/stars/microsoft/azd-for-beginners.svg?style=social&label=Star)](https://GitHub.com/microsoft/azd-for-beginners/stargazers/)
 
-[![Azure Discord](https://dcbadge.limes.pink/api/server/https://discord.gg/microsoft-azure)](https://discord.gg/microsoft-azure)
+[![Azure Discord](https://dcbadge.limes.pink/api/server/nkVh3dp)](https://discord.com/invite/nkVh3dp)
 [![Microsoft Foundry Discord](https://dcbadge.limes.pink/api/server/nTYy5BXMWG)](https://discord.gg/nTYy5BXMWG)
 
 ---
@@ -188,11 +188,11 @@ This course is designed for **progressive learning** - start where you're comfor
 
 | Your Experience | Start Here |
 |-----------------|------------|
-| **Brand new to Azure** | [Chapter 1: Foundation](../..) |
-| **Know Azure, new to AZD** | [Chapter 1: Foundation](../..) |
-| **Want to deploy AI apps** | [Chapter 2: AI-First Development](../..) |
+| **Brand new to Azure** | [Chapter 1: Foundation](#-chapter-1-foundation--quick-start) |
+| **Know Azure, new to AZD** | [Chapter 1: Foundation](#-chapter-1-foundation--quick-start) |
+| **Want to deploy AI apps** | [Chapter 2: AI-First Development](#-chapter-2-ai-first-development-recommended-for-ai-developers) |
 | **Want hands-on practice** | [🎓 Interactive Workshop](workshop/README.md) - 3-4 hour guided lab |
-| **Need production patterns** | [Chapter 8: Production & Enterprise](../..) |
+| **Need production patterns** | [Chapter 8: Production & Enterprise](#-chapter-8-production--enterprise-patterns) |
 
 ### Quick Setup
 
@@ -269,7 +269,7 @@ Each chapter has a dedicated README with learning objectives, quick starts, and 
 - Your first successful deployment
 
 #### Learning Resources
-- **🎯 Start Here**: [What is Azure Developer CLI?](../..)
+- **🎯 Start Here**: [What is Azure Developer CLI?](#what-is-azure-developer-cli)
 - **📖 Theory**: [AZD Basics](docs/chapter-01-foundation/azd-basics.md) - Core concepts and terminology
 - **⚙️ Setup**: [Installation & Setup](docs/chapter-01-foundation/installation.md) - Platform-specific guides
 - **🛠️ Hands-On**: [Your First Project](docs/chapter-01-foundation/first-project.md) - Step-by-step tutorial
@@ -300,6 +300,7 @@ azd down --force --purge  # Cleans up resources
 
 **📊 Time Investment:** 30-45 minutes  
 **📈 Skill Level After:** Can deploy basic applications independently
+**📈 Skill Level After:** Can deploy basic applications independently
 
 ---
 
@@ -319,7 +320,7 @@ azd down --force --purge  # Cleans up resources
 - **📖 Patterns**: [AI Model Deployment](docs/chapter-02-ai-development/ai-model-deployment.md) - Deploy and manage AI models
 - **🛠️ Workshop**: [AI Workshop Lab](docs/chapter-02-ai-development/ai-workshop-lab.md) - Make your AI solutions AZD-ready
 - **🎥 Interactive Guide**: [Workshop Materials](workshop/README.md) - Browser-based learning with MkDocs * DevContainer Environment
-- **📋 Templates**: [Microsoft Foundry Templates](../..)
+- **📋 Templates**: [Microsoft Foundry Templates](#deep-dive-azd-capabilities)
 - **📝 Examples**: [AZD Deployment Examples](examples/README.md)
 
 #### Practical Exercises
@@ -360,7 +361,7 @@ azd down --force --purge
 - Storage (Standard): $1-5/month
 
 **Production Environment (Estimated $300-3,500+/month):**
-- Microsoft Foundry Models (PTU for consistent performance): $3,000+/month OR Pay-as-you-go with high volume
+- Microsoft Foundry Models (PTU for consistent performance): $3,000+/month OR Pay-as-go with high volume
 - AI Search (Standard tier): $250/month
 - Container Apps (Dedicated): $50-100/month
 - Application Insights: $5-50/month
@@ -518,8 +519,6 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - Production deployment strategies
 - Enterprise security patterns
 - Monitoring and cost optimization
-
-#### Learning Resources
 - **🏭 Production**: [Production AI Best Practices](docs/chapter-08-production/production-ai-practices.md) - Enterprise patterns
 - **📝 Examples**: [Microservices Example](../../examples/microservices) - Complex architectures
 - **📊 Monitoring**: [Application Insights integration](docs/chapter-06-pre-deployment/application-insights.md) - Monitoring
@@ -791,17 +790,17 @@ azd up
 <summary><strong>❌ "azd up" fails halfway through</strong></summary>
 
 ```bash
-# Opcion 1: Limpiar y reintentar
+# Option 1: Clean and retry
 azd down --force --purge
 azd up
 
-# Opcion 2: Solo arreglar la infraestructura
+# Option 2: Just fix infrastructure
 azd provision
 
-# Opcion 3: Comprobar el estado detallado
+# Option 3: Check detailed status
 azd show
 
-# Opcion 4: Revisar los registros en Azure Monitor
+# Option 4: Check logs in Azure Monitor
 azd monitor --logs
 ```
 </details>
@@ -966,7 +965,7 @@ Our team produces other comprehensive learning courses:
 ### LangChain
 [![LangChain4j for Beginners](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
 [![LangChain.js for Beginners](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
-[![LangChain for Beginners](https://img.shields.io/badge/LangChain%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://github.com/microsoft/langchain-for-beginners?WT.mc_id=m365-94501-dwahlin)
+[![LangChain for Beginners](https://img.shields.io/badge/LangChain%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://github.com/microsoft/langchain-for-beginners?WT.mc_id=m365-94501-dwahlin)
 ---
 
 ### Azure / Edge / MCP / Agents
@@ -1008,9 +1007,9 @@ Our team produces other comprehensive learning courses:
 
 **🚀 Ready to Start Learning?**
 
-**Beginners**: Start with [Chapter 1: Foundation & Quick Start](../..)  
-**AI Developers**: Jump to [Chapter 2: AI-First Development](../..)  
-**Experienced Developers**: Begin with [Chapter 3: Configuration & Authentication](../..)
+**Beginners**: Start with [Chapter 1: Foundation & Quick Start](#-chapter-1-foundation--quick-start)  
+**AI Developers**: Jump to [Chapter 2: AI-First Development](#-chapter-2-ai-first-development-recommended-for-ai-developers)  
+**Experienced Developers**: Begin with [Chapter 3: Configuration & Authentication](#️-chapter-3-configuration--authentication)
 
 **Next Steps**: [Begin Chapter 1 - AZD Basics](docs/chapter-01-foundation/azd-basics.md) →
 
@@ -1018,5 +1017,5 @@ Our team produces other comprehensive learning courses:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
