@@ -1,28 +1,30 @@
-# Despliegue de Modelos de IA con Azure Developer CLI
+# Despliegue de modelos de IA con Azure Developer CLI
 
-**Navegación del Capítulo:**
-- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
-- **📖 Capítulo Actual**: Capítulo 2 - Desarrollo AI-First
-- **⬅️ Anterior**: [Integración Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Siguiente**: [Taller de IA](ai-workshop-lab.md)
-- **🚀 Próximo Capítulo**: [Capítulo 3: Configuración](../chapter-03-configuration/configuration.md)
+**Navegación del capítulo:**
+- **📚 Inicio del curso**: [AZD For Beginners](../../README.md)
+- **📖 Capítulo actual**: Capítulo 2 - Desarrollo centrado en IA
+- **⬅️ Anterior**: [Integración de Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Siguiente**: [Laboratorio práctico de IA](ai-workshop-lab.md)
+- **🚀 Siguiente capítulo**: [Capítulo 3: Configuración](../chapter-03-configuration/configuration.md)
 
-Esta guía proporciona instrucciones completas para desplegar modelos de IA utilizando plantillas AZD, cubriendo todo desde la selección del modelo hasta los patrones de despliegue en producción.
+Esta guía ofrece instrucciones completas para desplegar modelos de IA utilizando plantillas AZD, cubriendo desde la selección del modelo hasta los patrones de despliegue en producción.
 
-## Tabla de Contenidos
+> **Nota de validación (2026-03-25):** El flujo de trabajo de AZD en esta guía se comprobó con `azd` `1.23.12`. Para implementaciones de IA que tarden más que la ventana de implementación predeterminada del servicio, las versiones actuales de AZD admiten `azd deploy --timeout <seconds>`.
 
-- [Estrategia de Selección de Modelos](../../../../docs/chapter-02-ai-development)
-- [Configuración AZD para Modelos de IA](../../../../docs/chapter-02-ai-development)
-- [Patrones de Despliegue](../../../../docs/chapter-02-ai-development)
-- [Gestión de Modelos](../../../../docs/chapter-02-ai-development)
-- [Consideraciones de Producción](../../../../docs/chapter-02-ai-development)
-- [Monitoreo y Observabilidad](../../../../docs/chapter-02-ai-development)
+## Tabla de contenidos
 
-## Estrategia de Selección de Modelos
+- [Estrategia de selección de modelos](#estrategia-de-selección-de-modelos)
+- [Configuración de AZD para modelos de IA](#configuración-de-azd-para-modelos-de-ia)
+- [Patrones de despliegue](#patrones-de-despliegue)
+- [Gestión de modelos](#gestión-de-modelos)
+- [Consideraciones para producción](#consideraciones-para-producción)
+- [Monitorización y observabilidad](#monitorización-y-observabilidad)
 
-### Modelos Microsoft Foundry 
+## Estrategia de selección de modelos
 
-Elija el modelo correcto para su caso de uso:
+### Microsoft Foundry Modelos Modelos
+
+Elija el modelo adecuado para su caso de uso:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -41,29 +43,29 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
         ]
 ```
 
-### Planificación de Capacidad del Modelo
+### Planificación de capacidad del modelo
 
-| Tipo de Modelo | Caso de Uso | Capacidad Recomendada | Consideraciones de Costo |
+| Tipo de modelo | Caso de uso | Capacidad recomendada | Consideraciones de costo |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Chat, Preguntas y Respuestas | 10-50 TPM | Rentable para la mayoría de cargas de trabajo |
-| gpt-4.1 | Razonamiento complejo | 20-100 TPM | Costo más alto, usar para funciones premium |
-| Text-embedding-ada-002 | Búsqueda, RAG | 30-120 TPM | Esencial para búsqueda semántica |
+| gpt-4.1-mini | Chat, preguntas y respuestas (Q&A) | 10-50 TPM | Rentable para la mayoría de las cargas de trabajo |
+| gpt-4.1 | Razonamiento complejo | 20-100 TPM | Mayor costo; utilizar para funciones premium |
+| text-embedding-3-large | Búsqueda, RAG | 30-120 TPM | Elección predeterminada sólida para búsqueda semántica y recuperación |
 | Whisper | Voz a texto | 10-50 TPM | Cargas de trabajo de procesamiento de audio |
 
-## Configuración AZD para Modelos de IA
+## Configuración de AZD para modelos de IA
 
-### Configuración de Plantilla Bicep
+### Configuración de plantillas Bicep
 
-Cree despliegues de modelos mediante plantillas Bicep:
+Cree implementaciones de modelos mediante plantillas Bicep:
 
 ```bicep
 // infra/main.bicep
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -122,7 +124,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
-### Variables de Entorno
+### Variables de entorno
 
 Configure el entorno de su aplicación:
 
@@ -131,12 +133,12 @@ Configure el entorno de su aplicación:
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Patrones de Despliegue
+## Patrones de despliegue
 
-### Patrón 1: Despliegue en Una Sola Región
+### Patrón 1: Despliegue en una sola región
 
 ```yaml
 # azure.yaml - Single region
@@ -151,10 +153,10 @@ services:
 
 Ideal para:
 - Desarrollo y pruebas
-- Aplicaciones en un solo mercado
+- Aplicaciones para un único mercado
 - Optimización de costos
 
-### Patrón 2: Despliegue Multirregional
+### Patrón 2: Despliegue multirregión
 
 ```bicep
 // Multi-region deployment
@@ -172,9 +174,9 @@ Ideal para:
 - Requisitos de alta disponibilidad
 - Distribución de carga
 
-### Patrón 3: Despliegue Híbrido
+### Patrón 3: Despliegue híbrido
 
-Combine Modelos Microsoft Foundry con otros servicios de IA:
+Combine los modelos de Microsoft Foundry con otros servicios de IA:
 
 ```bicep
 // Hybrid AI services
@@ -203,11 +205,11 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Gestión de Modelos
+## Gestión de modelos
 
-### Control de Versiones
+### Control de versiones
 
-Realice seguimiento de las versiones del modelo en su configuración AZD:
+Realice un seguimiento de las versiones de modelos en su configuración de AZD:
 
 ```json
 {
@@ -215,19 +217,19 @@ Realice seguimiento de las versiones del modelo en su configuración AZD:
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
 ```
 
-### Actualizaciones de Modelos
+### Actualizaciones de modelos
 
-Utilice hooks AZD para actualizaciones de modelos:
+Use hooks de AZD para actualizaciones de modelos:
 
 ```bash
 #!/bin/bash
@@ -238,11 +240,14 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# Si el despliegue tarda más que el tiempo de espera predeterminado
+azd deploy --timeout 1800
 ```
 
 ### Pruebas A/B
 
-Despliegue múltiples versiones de modelos:
+Implemente múltiples versiones del modelo:
 
 ```bicep
 param enableABTesting bool = false
@@ -264,11 +269,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Consideraciones de Producción
+## Consideraciones para producción
 
-### Planificación de Capacidad
+### Planificación de capacidad
 
-Calcule la capacidad necesaria según los patrones de uso:
+Calcule la capacidad requerida según los patrones de uso:
 
 ```python
 # Ejemplo de cálculo de capacidad
@@ -293,9 +298,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Configuración de Autoescalado
+### Configuración de escalado automático
 
-Configure el autoescalado para Container Apps:
+Configure el escalado automático para Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -331,7 +336,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Optimización de Costos
+### Optimización de costos
 
 Implemente controles de costos:
 
@@ -363,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Monitoreo y Observabilidad
+## Monitorización y observabilidad
 
 ### Integración con Application Insights
 
-Configure monitoreo para cargas de trabajo de IA:
+Configure la monitorización para cargas de trabajo de IA:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -403,7 +408,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Métricas Personalizadas
+### Métricas personalizadas
 
 Realice seguimiento de métricas específicas de IA:
 
@@ -440,12 +445,12 @@ class AITelemetry:
         )
 ```
 
-### Verificaciones de Estado
+### Comprobaciones de estado
 
-Implemente monitorización de salud para servicios de IA:
+Implemente la monitorización de estado de los servicios de IA:
 
 ```python
-# Endpoints de verificación de estado
+# Puntos finales de comprobación de estado
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -455,7 +460,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Probar conexión con OpenAI
+        # Probar la conexión con OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -471,32 +476,32 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## Próximos Pasos
+## Próximos pasos
 
-1. **Revise la [Guía de Integración Microsoft Foundry](microsoft-foundry-integration.md)** para patrones de integración de servicios
-2. **Complete el [Taller de IA](ai-workshop-lab.md)** para experiencia práctica
-3. **Implemente las [Prácticas de IA en Producción](production-ai-practices.md)** para despliegues empresariales
-4. **Explore la [Guía de Solución de Problemas de IA](../chapter-07-troubleshooting/ai-troubleshooting.md)** para problemas comunes
+1. **Revise la [Guía de integración de Microsoft Foundry](microsoft-foundry-integration.md)** para patrones de integración de servicios
+2. **Complete el [Laboratorio práctico de IA](ai-workshop-lab.md)** para experiencia práctica
+3. **Implemente [Prácticas de IA para producción](production-ai-practices.md)** para implementaciones empresariales
+4. **Explore la [Guía de solución de problemas de IA](../chapter-07-troubleshooting/ai-troubleshooting.md)** para problemas comunes
 
 ## Recursos
 
-- [Disponibilidad de Modelos Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Documentación Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Disponibilidad de modelos de Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Documentación de Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Escalado de Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [Optimización de Costos de Modelos de IA](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Optimización de costos de modelos de IA](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Navegación del Capítulo:**
-- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
-- **📖 Capítulo Actual**: Capítulo 2 - Desarrollo AI-First
-- **⬅️ Anterior**: [Integración Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Siguiente**: [Taller de IA](ai-workshop-lab.md)
-- **🚀 Próximo Capítulo**: [Capítulo 3: Configuración](../chapter-03-configuration/configuration.md)
+**Navegación del capítulo:**
+- **📚 Inicio del curso**: [AZD For Beginners](../../README.md)
+- **📖 Capítulo actual**: Capítulo 2 - Desarrollo centrado en IA
+- **⬅️ Anterior**: [Integración de Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Siguiente**: [Laboratorio práctico de IA](ai-workshop-lab.md)
+- **🚀 Siguiente capítulo**: [Capítulo 3: Configuración](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Aviso Legal**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No somos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
+**Descargo de responsabilidad**:
+Este documento ha sido traducido mediante el servicio de traducción por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por la precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por traductores humanos. No nos hacemos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

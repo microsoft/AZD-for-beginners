@@ -4,12 +4,12 @@ This directory contains comprehensive examples for deploying containerized appli
 
 ## 📚 Table of Contents
 
-- [Overview](../../../../examples/container-app)
-- [Prerequisites](../../../../examples/container-app)
-- [Quick Start Examples](../../../../examples/container-app)
-- [Production Examples](../../../../examples/container-app)
-- [Advanced Patterns](../../../../examples/container-app)
-- [Best Practices](../../../../examples/container-app)
+- [Overview](#overview)
+- [Prerequisites](#prerequisites)
+- [Quick Start Examples](#quick-start-examples)
+- [Production Examples](#production-examples)
+- [Advanced Patterns](#advanced-patterns)
+- [Best Practices](#best-practices)
 
 ## Overview
 
@@ -35,8 +35,10 @@ az version
 # Check Docker (for building custom images)
 docker --version
 
-# Login to Azure
+# Authenticate for AZD deployments
 azd auth login
+
+# Optional: sign in to Azure CLI if you plan to run az commands directly
 az login
 ```
 
@@ -843,5 +845,5 @@ To contribute new container app examples:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

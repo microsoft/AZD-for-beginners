@@ -14,7 +14,7 @@
 ### Automated Translations (Always Up-to-Date)
 
 <!-- CO-OP TRANSLATOR LANGUAGES TABLE START -->
-[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh-CN/README.md) | [Chinese (Traditional, Hong Kong)](../zh-HK/README.md) | [Chinese (Traditional, Macau)](../zh-MO/README.md) | [Chinese (Traditional, Taiwan)](../zh-TW/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../pt-BR/README.md) | [Portuguese (Portugal)](../pt-PT/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
+[Arabic](../ar/README.md) | [Bengali](../bn/README.md) | [Bulgarian](../bg/README.md) | [Burmese (Myanmar)](../my/README.md) | [Chinese (Simplified)](../zh-CN/README.md) | [Chinese (Traditional, Hong Kong)](../zh-HK/README.md) | [Chinese (Traditional, Macau)](../zh-MO/README.md) | [Chinese (Traditional, Taiwan)](../zh-TW/README.md) | [Croatian](../hr/README.md) | [Czech](../cs/README.md) | [Danish](../da/README.md) | [Dutch](../nl/README.md) | [Estonian](../et/README.md) | [Finnish](../fi/README.md) | [French](../fr/README.md) | [German](../de/README.md) | [Greek](../el/README.md) | [Hebrew](../he/README.md) | [Hindi](../hi/README.md) | [Hungarian](../hu/README.md) | [Indonesian](../id/README.md) | [Italian](../it/README.md) | [Japanese](../ja/README.md) | [Kannada](../kn/README.md) | [Khmer](../km/README.md) | [Korean](../ko/README.md) | [Lithuanian](../lt/README.md) | [Malay](../ms/README.md) | [Malayalam](../ml/README.md) | [Marathi](../mr/README.md) | [Nepali](../ne/README.md) | [Nigerian Pidgin](../pcm/README.md) | [Norwegian](../no/README.md) | [Persian (Farsi)](../fa/README.md) | [Polish](../pl/README.md) | [Portuguese (Brazil)](../pt-BR/README.md) | [Portuguese (Portugal)](../pt-PT/README.md) | [Punjabi (Gurmukhi)](../pa/README.md) | [Romanian](../ro/README.md) | [Russian](../ru/README.md) | [Serbian (Cyrillic)](../sr/README.md) | [Slovak](../sk/README.md) | [Slovenian](../sl/README.md) | [Spanish](../es/README.md) | [Swahili](../sw/README.md) | [Swedish](../sv/README.md) | [Tagalog (Filipino)](../tl/README.md) | [Tamil](../ta/README.md) | [Telugu](../te/README.md) | [Thai](../th/README.md) | [Turkish](../tr/README.md) | [Ukrainian](../uk/README.md) | [Urdu](../ur/README.md) | [Vietnamese](../vi/README.md)
 
 > **Prefer to Clone Locally?**
 >
@@ -138,6 +138,20 @@ azd init --template get-started-with-ai-agents
 
 ## 🎯 Getting Started in 3 Steps
 
+Before you start, make sure your machine is ready for the template you want to deploy:
+
+**Windows:**
+```powershell
+.\validate-setup.ps1
+```
+
+**macOS / Linux:**
+```bash
+bash ./validate-setup.sh
+```
+
+If any required check fails, fix that first and then continue with the quick start.
+
 ### Step 1: Install AZD (2 minutes)
 
 **Windows:**
@@ -155,11 +169,17 @@ brew tap azure/azd && brew install azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-### Step 2: Login to Azure
+### Step 2: Authenticate for AZD
 
 ```bash
+# Optional if you plan to use Azure CLI commands directly in this course
+az login
+
+# Required for AZD workflows
 azd auth login
 ```
+
+If you are not sure which one you need, follow the full setup flow in [Installation & Setup](docs/chapter-01-foundation/installation.md#authentication-setup).
 
 ### Step 3: Deploy Your First App
 
@@ -233,6 +253,21 @@ By completing this structured course, you will:
 - **Troubleshoot Deployments**: Resolve common issues and debug problems
 - **Optimize for Production**: Security, scaling, monitoring, and cost management
 - **Build Multi-Agent Solutions**: Deploy complex AI architectures
+
+## Before You Start: Accounts, Access, and Assumptions
+
+Before you begin Chapter 1, make sure you have the following in place. The installation steps later in this guide assume these basics are already handled.
+- **An Azure subscription**: You can use an existing subscription from work or your own account, or create a [free trial](https://aka.ms/azurefreetrial) to get started.
+- **Permission to create Azure resources**: For most exercises, you should have at least **Contributor** access on the target subscription or resource group. Some chapters may also assume you can create resource groups, managed identities, and RBAC assignments.
+- [**A GitHub account**](https://github.com): This is useful for forking the repository, tracking your own changes, and using GitHub Codespaces for the workshop.
+- **Template runtime prerequisites**: Some templates need local tools such as Node.js, Python, Java, or Docker. Run the setup validator before starting so you catch missing tools early.
+- **Basic terminal familiarity**: You do not need to be an expert, but you should be comfortable running commands such as `git clone`, `azd auth login`, and `azd up`.
+
+> **Working in an enterprise subscription?**
+> If your Azure environment is managed by an administrator, confirm ahead of time that you can deploy resources in the subscription or resource group you plan to use. If not, ask for a sandbox subscription or Contributor access before you start.
+
+> **New to Azure?**
+> Start with your own Azure trial or pay-as-you-go subscription at https://aka.ms/azurefreetrial so you can complete the exercises end to end without waiting on tenant-level approvals.
 
 ## 🗺️ Course Map: Quick Navigation by Chapter
 
@@ -320,7 +355,7 @@ azd down --force --purge  # Cleans up resources
 - **📖 Patterns**: [AI Model Deployment](docs/chapter-02-ai-development/ai-model-deployment.md) - Deploy and manage AI models
 - **🛠️ Workshop**: [AI Workshop Lab](docs/chapter-02-ai-development/ai-workshop-lab.md) - Make your AI solutions AZD-ready
 - **🎥 Interactive Guide**: [Workshop Materials](workshop/README.md) - Browser-based learning with MkDocs * DevContainer Environment
-- **📋 Templates**: [Microsoft Foundry Templates](#deep-dive-azd-capabilities)
+- **📋 Templates**: [Microsoft Foundry Templates](#workshop-resources)
 - **📝 Examples**: [AZD Deployment Examples](examples/README.md)
 
 #### Practical Exercises
@@ -466,7 +501,6 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 **Prerequisites**: Chapter 4 completed  
 **Duration**: 1 hour  
 **Complexity**: ⭐⭐
-
 #### What You'll Learn
 - Capacity planning and resource validation
 - SKU selection strategies
@@ -519,6 +553,8 @@ az deployment group show --resource-group <rg-name> --name <deployment-name>
 - Production deployment strategies
 - Enterprise security patterns
 - Monitoring and cost optimization
+
+#### Learning Resources
 - **🏭 Production**: [Production AI Best Practices](docs/chapter-08-production/production-ai-practices.md) - Enterprise patterns
 - **📝 Examples**: [Microservices Example](../../examples/microservices) - Complex architectures
 - **📊 Monitoring**: [Application Insights integration](docs/chapter-06-pre-deployment/application-insights.md) - Monitoring
@@ -686,7 +722,7 @@ Beyond the basics, AZD provides powerful features for production deployments:
 - [Static Website - React SPA](https://github.com/Azure-Samples/todo-csharp-sql-swa-func) - Static content deployment
 - [Container App - Python Flask](https://github.com/Azure-Samples/container-apps-store-api-microservice) - REST API deployment
 
-#### External Examples - Database Integration (Chapter 3-4)  
+#### External Examples - Database Integration (Chapter 3-4)
 - [Database App - C# + SQL](https://github.com/Azure-Samples/todo-csharp-sql) - Database connectivity patterns
 - [Functions + Cosmos DB](https://github.com/Azure-Samples/todo-python-mongo-swa-func) - Serverless data workflow
 
@@ -809,12 +845,13 @@ azd monitor --logs
 <summary><strong>❌ "Authentication failed" or "Token expired"</strong></summary>
 
 ```bash
-# Re-authenticate
-az logout
-az login
-
+# Re-authenticate for AZD
 azd auth logout
 azd auth login
+
+# Optional: refresh Azure CLI too if you are running az commands
+az logout
+az login
 
 # Verify authentication
 az account show
@@ -847,7 +884,7 @@ azd up
 azd show
 
 # If stuck >30 minutes, check Azure Portal:
-azd monitor
+azd monitor --overview
 # Look for failed deployments
 ```
 </details>
@@ -965,7 +1002,7 @@ Our team produces other comprehensive learning courses:
 ### LangChain
 [![LangChain4j for Beginners](https://img.shields.io/badge/LangChain4j%20for%20Beginners-22C55E?style=for-the-badge&&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchain4j-for-beginners)
 [![LangChain.js for Beginners](https://img.shields.io/badge/LangChain.js%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://aka.ms/langchainjs-for-beginners?WT.mc_id=m365-94501-dwahlin)
-[![LangChain for Beginners](https://img.shields.io/badge/LangChain%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=22C55E)](https://github.com/microsoft/langchain-for-beginners?WT.mc_id=m365-94501-dwahlin)
+[![LangChain for Beginners](https://img.shields.io/badge/LangChain%20for%20Beginners-22C55E?style=for-the-badge&labelColor=E5E7EB&color=0553D6)](https://github.com/microsoft/langchain-for-beginners?WT.mc_id=m365-94501-dwahlin)
 ---
 
 ### Azure / Edge / MCP / Agents

@@ -1,74 +1,74 @@
 # Guía de Configuración
 
-**Navegación del Capítulo:**
-- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
-- **📖 Capítulo Actual**: Capítulo 3 - Configuración y Autenticación
-- **⬅️ Anterior**: [Tu Primer Proyecto](first-project.md)
-- **➡️ Siguiente**: [Guía de Despliegue](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 Siguiente Capítulo**: [Capítulo 4: Infraestructura como Código](../chapter-04-infrastructure/deployment-guide.md)
+**Chapter Navigation:**
+- **📚 Inicio del curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo actual**: Capítulo 3 - Configuración y Autenticación
+- **⬅️ Anterior**: [Tu primer proyecto](first-project.md)
+- **➡️ Siguiente**: [Guía de despliegue](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 Siguiente capítulo**: [Capítulo 4: Infraestructura como Código](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Introducción
 
-Esta guía integral cubre todos los aspectos para configurar Azure Developer CLI para flujos de trabajo óptimos de desarrollo y despliegue. Aprenderás sobre la jerarquía de configuración, gestión de entornos, métodos de autenticación y patrones avanzados de configuración que permiten despliegues eficientes y seguros en Azure.
+Esta guía integral cubre todos los aspectos de la configuración de Azure Developer CLI para flujos de trabajo de desarrollo y despliegue óptimos. Aprenderás sobre la jerarquía de configuración, la gestión de entornos, los métodos de autenticación y patrones de configuración avanzados que permiten despliegues en Azure eficientes y seguros.
 
-## Objetivos de Aprendizaje
+## Objetivos de aprendizaje
 
-Al terminar esta lección, podrás:
+Al final de esta lección, podrás:
 - Dominar la jerarquía de configuración de azd y entender cómo se priorizan las configuraciones
-- Configurar ajustes globales y específicos de proyectos efectivamente
-- Gestionar múltiples entornos con diferentes configuraciones
+- Configurar ajustes globales y específicos del proyecto de manera efectiva
+- Gestionar múltiples entornos con configuraciones diferentes
 - Implementar patrones seguros de autenticación y autorización
-- Entender patrones avanzados de configuración para escenarios complejos
+- Entender patrones de configuración avanzados para escenarios complejos
 
-## Resultados de Aprendizaje
+## Resultados de aprendizaje
 
 Después de completar esta lección, podrás:
 - Configurar azd para flujos de trabajo de desarrollo óptimos
 - Configurar y gestionar múltiples entornos de despliegue
 - Implementar prácticas seguras de gestión de configuración
-- Resolver problemas relacionados con la configuración
-- Personalizar el comportamiento de azd para requerimientos específicos de la organización
+- Solucionar problemas relacionados con la configuración
+- Personalizar el comportamiento de azd para requisitos organizacionales específicos
 
-Esta guía integral cubre todos los aspectos para configurar Azure Developer CLI para flujos de trabajo óptimos de desarrollo y despliegue.
+Esta guía integral cubre todos los aspectos de la configuración de Azure Developer CLI para flujos de trabajo de desarrollo y despliegue óptimos.
 
-## Entendiendo los Agentes de IA en un Proyecto azd
+## Comprendiendo a los agentes de IA en un proyecto azd
 
-Si eres nuevo en agentes de IA, aquí tienes una forma simple de entenderlos dentro del mundo azd.
+Si eres nuevo en los agentes de IA, aquí tienes una forma sencilla de pensar en ellos dentro del mundo azd.
 
-### ¿Qué es un Agente?
+### ¿Qué es un agente?
 
-Un agente es un software que puede recibir una solicitud, razonar sobre ella y tomar acciones—frecuentemente llamando a un modelo de IA, consultando datos o invocando otros servicios. En un proyecto azd, un agente es simplemente otro **servicio** junto a tu frontend web o backend API.
+Un agente es una pieza de software que puede recibir una solicitud, razonar sobre ella y tomar acciones—a menudo llamando a un modelo de IA, consultando datos o invocando otros servicios. En un proyecto azd, un agente es simplemente otro **servicio** junto a tu frontend web o backend de API.
 
-### Cómo Encajan los Agentes en la Estructura de un Proyecto azd
+### Cómo encajan los agentes en la estructura del proyecto azd
 
-Un proyecto azd está compuesto por tres capas: **infraestructura**, **código** y **configuración**. Los agentes se conectan a estas capas igual que cualquier otro servicio:
+Un proyecto azd está compuesto por tres capas: **infrastructure**, **code**, y **configuration**. Los agentes se integran en estas capas de la misma manera que cualquier otro servicio:
 
-| Capa | Lo que hace para una App Tradicional | Lo que hace para un Agente |
+| Layer | What It Does for a Traditional App | What It Does for an Agent |
 |-------|-------------------------------------|---------------------------|
-| **Infraestructura** (`infra/`) | Provee una app web y base de datos | Provee un endpoint de modelo de IA, índice de búsqueda o host de agente |
-| **Código** (`src/`) | Contiene el código fuente de frontend y API | Contiene la lógica del agente y definiciones de prompts |
-| **Configuración** (`azure.yaml`) | Lista tus servicios y sus destinos de hosting | Lista tu agente como servicio, apuntando a su código y host |
+| **Infrastructure** (`infra/`) | Proporciona una aplicación web y una base de datos | Proporciona un endpoint de modelo de IA, un índice de búsqueda o un host para el agente |
+| **Code** (`src/`) | Contiene el código fuente de tu frontend y API | Contiene la lógica de tu agente y las definiciones de prompts |
+| **Configuration** (`azure.yaml`) | Enumera tus servicios y sus destinos de hospedaje | Enumera tu agente como un servicio, apuntando a su código y host |
 
-### El Rol de `azure.yaml`
+### El papel de `azure.yaml`
 
-No necesitas memorizar la sintaxis ahora mismo. Conceptualmente, `azure.yaml` es el archivo donde le dices a azd: *"Aquí están los servicios que componen mi aplicación, y aquí está dónde encontrar su código."*
+No necesitas memorizar la sintaxis ahora mismo. Conceptualmente, `azure.yaml` es el archivo donde le dices a azd: *"Aquí están los servicios que componen mi aplicación, y aquí es donde se encuentra su código."*
 
-Cuando tu proyecto incluye un agente de IA, `azure.yaml` simplemente enumera ese agente como uno de los servicios. azd entonces sabe provisionar la infraestructura correcta (como un endpoint de Microsoft Foundry Models o una Container App para hospedar el agente) y desplegar el código de tu agente—igual que lo haría para una app web o API.
+Cuando tu proyecto incluye un agente de IA, `azure.yaml` simplemente lista ese agente como uno de los servicios. azd entonces sabe aprovisionar la infraestructura adecuada (como un Microsoft Foundry Models endpoint o una Container App para alojar el agente) y desplegar el código de tu agente—tal como lo haría para una aplicación web o una API.
 
 Esto significa que no hay nada fundamentalmente nuevo que aprender. Si entiendes cómo azd gestiona un servicio web, ya entiendes cómo gestiona un agente.
 
-## Jerarquía de Configuración
+## Jerarquía de configuración
 
-azd usa un sistema jerárquico de configuración:
-1. **Flags de línea de comandos** (mayor prioridad)
+azd usa un sistema de configuración jerárquico:
+1. **Opciones de línea de comandos** (prioridad más alta)
 2. **Variables de entorno**
-3. **Configuración local del proyecto** (`.azd/config.json`)
+3. **Configuración del proyecto local** (`.azd/config.json`)
 4. **Configuración global del usuario** (`~/.azd/config.json`)
-5. **Valores por defecto** (menor prioridad)
+5. **Valores predeterminados** (prioridad más baja)
 
-## Configuración Global
+## Configuración global
 
-### Estableciendo Valores Globales Predeterminados
+### Establecer valores predeterminados
 ```bash
 # Establecer suscripción predeterminada
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -76,33 +76,33 @@ azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 # Establecer ubicación predeterminada
 azd config set defaults.location "eastus2"
 
-# Establecer convención predeterminada para nombres de grupos de recursos
+# Establecer la convención de nombres predeterminada para grupos de recursos
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
 # Ver toda la configuración global
-azd config list
+azd config show
 
 # Eliminar una configuración
 azd config unset defaults.location
 ```
 
-### Configuraciones Globales Comunes
+### Configuraciones globales comunes
 ```bash
 # Preferencias de desarrollo
 azd config set alpha.enable true                    # Habilitar funciones alfa
 azd config set telemetry.enabled false             # Desactivar telemetría
 azd config set output.format json                  # Establecer formato de salida
 
-# Configuraciones de seguridad
+# Configuración de seguridad
 azd config set auth.useAzureCliCredential true     # Usar Azure CLI para autenticación
 azd config set tls.insecure false                  # Forzar verificación TLS
 
-# Optimización de rendimiento
+# Ajuste de rendimiento
 azd config set provision.parallelism 5             # Creación paralela de recursos
 azd config set deploy.timeout 30m                  # Tiempo de espera de despliegue
 ```
 
-## 🏗️ Configuración del Proyecto
+## 🏗️ Configuración del proyecto
 
 ### Estructura de azure.yaml
 El archivo `azure.yaml` es el corazón de tu proyecto azd:
@@ -181,9 +181,9 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Opciones de Configuración del Servicio
+### Opciones de configuración del servicio
 
-#### Tipos de Host
+#### Tipos de host
 ```yaml
 services:
   web-static:
@@ -202,7 +202,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Configuraciones Específicas por Lenguaje
+#### Configuraciones específicas por lenguaje
 ```yaml
 services:
   node-app:
@@ -226,9 +226,9 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 Gestión de Entornos
+## 🌟 Gestión de entornos
 
-### Creando Entornos
+### Creación de entornos
 ```bash
 # Crear un nuevo entorno
 azd env new development
@@ -236,12 +236,12 @@ azd env new development
 # Crear con ubicación específica
 azd env new staging --location "westus2"
 
-# Crear desde plantilla
+# Crear a partir de una plantilla
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Configuración del Entorno
-Cada entorno tiene su propia configuración en `.azure/<nombre-del-entorno>/config.json`:
+### Configuración del entorno
+Cada entorno tiene su propia configuración en `.azure/<env-name>/config.json`:
 
 ```json
 {
@@ -263,7 +263,7 @@ Cada entorno tiene su propia configuración en `.azure/<nombre-del-entorno>/conf
 }
 ```
 
-### Variables de Entorno
+### Variables de entorno
 ```bash
 # Establecer variables específicas del entorno
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
@@ -275,25 +275,25 @@ azd env get-values
 
 # Salida esperada:
 # DATABASE_URL=postgresql://user:pass@host:5432/db
-# API_KEY=clave-api-secreta
+# API_KEY=secret-api-key
 # DEBUG=true
 
 # Eliminar variable de entorno
 azd env unset DEBUG
 
-# Verificar eliminación
+# Verificar la eliminación
 azd env get-values | grep DEBUG
-# (debería no devolver nada)
+# (no debería devolver nada)
 ```
 
-### Plantillas de Entorno
-Crea `.azure/env.template` para configuración consistente de entornos:
+### Plantillas de entorno
+Crea `.azure/env.template` para una configuración coherente del entorno:
 ```bash
 # Variables requeridas
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Configuraciones de la aplicación
+# Configuración de la aplicación
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
@@ -303,7 +303,7 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 Configuración de Autenticación
+## 🔐 Configuración de autenticación
 
 ### Integración con Azure CLI
 ```bash
@@ -317,8 +317,8 @@ az login --tenant <tenant-id>
 az account set --subscription <subscription-id>
 ```
 
-### Autenticación con Service Principal
-Para pipelines CI/CD:
+### Autenticación con principal de servicio
+Para pipelines de CI/CD:
 ```bash
 # Establecer variables de entorno
 export AZURE_CLIENT_ID="your-client-id"
@@ -330,18 +330,18 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Identidad Gestionada
+### Identidad administrada
 Para entornos alojados en Azure:
 ```bash
-# Habilitar la autenticación de identidad administrada
+# Habilitar la autenticación con identidad administrada
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ Configuración de Infraestructura
+## 🏗️ Configuración de infraestructura
 
 ### Parámetros de Bicep
-Configura parámetros de infraestructura en `infra/main.parameters.json`:
+Configura los parámetros de infraestructura en `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -364,7 +364,7 @@ Configura parámetros de infraestructura en `infra/main.parameters.json`:
 ```
 
 ### Configuración de Terraform
-Para proyectos Terraform, configura en `infra/terraform.tfvars`:
+Para proyectos con Terraform, configura en `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -372,9 +372,9 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Configuración de Despliegue
+## 🚀 Configuración de despliegue
 
-### Configuración de Build
+### Configuración de compilación
 ```yaml
 # In azure.yaml
 services:
@@ -411,19 +411,19 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
-Ejemplo de `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+Ejemplo `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 Configuración Avanzada
+## 🔧 Configuración avanzada
 
-### Nombres Personalizados para Recursos
+### Nomenclatura personalizada de recursos
 ```bash
-# Establecer convenciones de nombres
+# Establecer convenciones de nomenclatura
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### Configuración de Red
+### Configuración de red
 ```yaml
 # In azure.yaml
 infra:
@@ -434,7 +434,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Configuración de Monitoreo
+### Configuración de monitoreo
 ```yaml
 # In azure.yaml
 monitoring:
@@ -446,9 +446,9 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Configuraciones Específicas por Entorno
+## 🎯 Configuraciones específicas por entorno
 
-### Entorno de Desarrollo
+### Entorno de desarrollo
 ```bash
 # .azure/desarrollo/.env
 DEBUG=true
@@ -457,7 +457,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Entorno de Staging
+### Entorno de preproducción
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -466,7 +466,7 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### Entorno de Producción
+### Entorno de producción
 ```bash
 # .azure/producción/.env
 DEBUG=false
@@ -475,21 +475,21 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Validación de Configuración
+## 🔍 Validación de configuración
 
-### Validar Configuración
+### Validar configuración
 ```bash
 # Comprobar la sintaxis de la configuración
 azd config validate
 
-# Probar variables de entorno
+# Probar las variables de entorno
 azd env get-values
 
 # Validar la infraestructura
 azd provision --dry-run
 ```
 
-### Scripts de Configuración
+### Scripts de configuración
 Crea scripts de validación en `scripts/`:
 
 ```bash
@@ -498,7 +498,7 @@ Crea scripts de validación en `scripts/`:
 
 echo "Validating configuration..."
 
-# Verificar variables de entorno requeridas
+# Comprobar las variables de entorno requeridas
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
@@ -513,9 +513,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Mejores Prácticas
+## 🎓 Mejores prácticas
 
-### 1. Usa Variables de Entorno
+### 1. Usar variables de entorno
 ```yaml
 # Good: Use environment variables
 database:
@@ -526,7 +526,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organiza los Archivos de Configuración
+### 2. Organizar archivos de configuración
 ```
 .azure/
 ├── config.json              # Global project config
@@ -542,15 +542,15 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Consideraciones para Control de Versiones
+### 3. Consideraciones de control de versiones
 ```bash
 # .gitignore
-.azure/*/config.json         # Configuraciones del entorno (contienen IDs de recursos)
+.azure/*/config.json         # Configuraciones de entorno (contienen identificadores de recursos)
 .azure/*/.env               # Variables de entorno (pueden contener secretos)
-.env                        # Archivo del entorno local
+.env                        # Archivo de entorno local
 ```
 
-### 4. Documentación de Configuración
+### 4. Documentación de la configuración
 Documenta tu configuración en `CONFIG.md`:
 ```markdown
 # Configuration Guide
@@ -566,11 +566,11 @@ Documenta tu configuración en `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
-## 🎯 Ejercicios Prácticos
+## 🎯 Ejercicios prácticos
 
-### Ejercicio 1: Configuración Multi-Entorno (15 minutos)
+### Ejercicio 1: Configuración multientorno (15 minutos)
 
-**Objetivo**: Crear y configurar tres entornos con diferentes ajustes
+**Objetivo**: Crear y configurar tres entornos con configuraciones diferentes
 
 ```bash
 # Crear entorno de desarrollo
@@ -579,7 +579,7 @@ azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# Crear entorno de pruebas
+# Crear entorno de preproducción
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
@@ -597,15 +597,15 @@ azd env select staging && azd env get-values
 azd env select production && azd env get-values
 ```
 
-**Criterios de Éxito:**
-- [ ] Tres entornos creados exitosamente
+**Criterios de éxito:**
+- [ ] Tres entornos creados con éxito
 - [ ] Cada entorno tiene configuración única
 - [ ] Se puede cambiar entre entornos sin errores
 - [ ] `azd env list` muestra los tres entornos
 
-### Ejercicio 2: Gestión de Secretos (10 minutos)
+### Ejercicio 2: Gestión de secretos (10 minutos)
 
-**Objetivo**: Practicar configuración segura con datos sensibles
+**Objetivo**: Practicar la configuración segura con datos sensibles
 
 ```bash
 # Establecer secretos (no se muestran en la salida)
@@ -616,42 +616,42 @@ azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# Ver entorno (los secretos deben ser redactados)
+# Ver el entorno (los secretos deben estar redactados)
 azd env get-values
 
 # Verificar que los secretos estén almacenados
-azd env get DB_PASSWORD  # Debe mostrar el valor real
+azd env get DB_PASSWORD  # Debería mostrar el valor real
 ```
 
-**Criterios de Éxito:**
-- [ ] Secretos almacenados sin mostrarse en el terminal
+**Criterios de éxito:**
+- [ ] Los secretos se almacenan sin mostrarse en la terminal
 - [ ] `azd env get-values` muestra secretos enmascarados
-- [ ] `azd env get <SECRET_NAME>` individual recupera el valor real
+- [ ] `azd env get <SECRET_NAME>` recupera el valor real
 
-## Próximos Pasos
+## Próximos pasos
 
-- [Tu Primer Proyecto](first-project.md) - Aplica la configuración en práctica
-- [Guía de Despliegue](../chapter-04-infrastructure/deployment-guide.md) - Usa la configuración para despliegue
-- [Provisionamiento de Recursos](../chapter-04-infrastructure/provisioning.md) - Configuraciones listas para producción
+- [Tu primer proyecto](first-project.md) - Aplicar la configuración en la práctica
+- [Guía de despliegue](../chapter-04-infrastructure/deployment-guide.md) - Usar la configuración para el despliegue
+- [Aprovisionamiento de recursos](../chapter-04-infrastructure/provisioning.md) - Configuraciones listas para producción
 
 ## Referencias
 
-- [Referencia de Configuración de azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Referencia de configuración de azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Esquema de azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Variables de Entorno](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [Variables de entorno](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Navegación del Capítulo:**
-- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
-- **📖 Capítulo Actual**: Capítulo 3 - Configuración y Autenticación
-- **⬅️ Anterior**: [Tu Primer Proyecto](first-project.md)
-- **➡️ Siguiente Capítulo**: [Capítulo 4: Infraestructura como Código](../chapter-04-infrastructure/deployment-guide.md)
-- **Siguiente Lección**: [Tu Primer Proyecto](first-project.md)
+**Chapter Navigation:**
+- **📚 Inicio del curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo actual**: Capítulo 3 - Configuración y Autenticación
+- **⬅️ Anterior**: [Tu primer proyecto](first-project.md)
+- **➡️ Siguiente capítulo**: [Capítulo 4: Infraestructura como Código](../chapter-04-infrastructure/deployment-guide.md)
+- **Próxima lección**: [Tu primer proyecto](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Descargo de responsabilidad**:
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por lograr precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de ningún malentendido o interpretación errónea derivada del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la exactitud, tenga en cuenta que las traducciones automáticas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por un humano. No nos hacemos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

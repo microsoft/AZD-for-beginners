@@ -8,6 +8,8 @@
 
 This chapter covers enterprise-ready deployment patterns, security hardening, monitoring, and cost optimization for production AI workloads.
 
+> Validated against `azd 1.23.12` in March 2026.
+
 ## Learning Objectives
 
 By completing this chapter, you will:
@@ -103,7 +105,7 @@ az consumption budget create \
 azd monitor --logs
 
 # Check Application Insights
-azd monitor
+azd monitor --overview
 
 # View metrics
 az monitor metrics list --resource <resource-id>
@@ -131,5 +133,5 @@ az monitor metrics list --resource <resource-id>
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

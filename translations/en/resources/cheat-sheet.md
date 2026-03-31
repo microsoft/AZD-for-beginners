@@ -134,8 +134,8 @@ azd env new staging --location westus2
 # Select environment
 azd env select production
 
-# Show current environment
-azd env show
+# Show available environments
+azd env list
 
 # Refresh environment state
 azd env refresh
@@ -162,7 +162,7 @@ azd env unset DEBUG
 ### Global Configuration
 ```bash
 # List all configuration
-azd config list
+azd config show
 
 # Set global defaults
 azd config set defaults.location eastus2
@@ -209,10 +209,10 @@ azd monitor --overview
 # View logs via Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
-# Tail logs in real-time
+# Follow logs in real-time
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# View logs in Azure Portal
+# View logs from Azure Portal
 azd monitor --logs
 ```
 
@@ -253,7 +253,7 @@ azd version
 azd version
 
 # View current configuration
-azd config list
+azd config show
 ```
 
 ## 🔧 Advanced Commands
@@ -341,7 +341,7 @@ azd ai agent init -m agent-manifest.yaml --host containerapp
 azd mcp start
 
 # Manage tool consent for MCP operations
-azd mcp consent
+azd copilot consent list
 ```
 
 ### Infrastructure Generation
@@ -403,7 +403,7 @@ export AZD_DEBUG=true
 azd show
 
 # Validate configuration
-azd config list
+azd config show
 
 # Open monitoring dashboard for logs
 azd monitor --logs
@@ -424,7 +424,7 @@ azd <command> --debug
 export AZD_DISABLE_TELEMETRY=true
 
 # Check current configuration
-azd config list
+azd config show
 
 # Check authentication status
 az account show
@@ -464,7 +464,7 @@ echo $AZD_CONFIG_DIR  # Usually ~/.azd
 # Get JSON output for scripting
 azd show --output json
 azd env list --output json
-azd config list --output json
+azd config show --output json
 
 # Parse with jq
 azd show --output json | jq '.services.web.endpoint'
@@ -487,7 +487,7 @@ azd show --output json | jq '.services | keys'
 #!/bin/bash
 # Quick health check
 azd show
-azd env show
+azd env get-values
 azd monitor --logs
 ```
 
@@ -598,7 +598,7 @@ azd-deploy-watch() {
 # Environment status
 azd-status() {
     echo "Current environment:"
-    azd env show
+    azd env get-values
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }
@@ -649,5 +649,5 @@ azd template show <template-name> --docs
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -35,17 +35,27 @@ Upon completion, you will be able to:
 
 ### Prerequisites Checklist
 - ✅ Azure Developer CLI installed ([Installation Guide](installation.md))
-- ✅ Azure CLI installed and authenticated
+- ✅ AZD authentication completed with `azd auth login`
 - ✅ Git installed on your system
 - ✅ Node.js 16+ (for this tutorial)
 - ✅ Visual Studio Code (recommended)
+
+Before you continue, run the setup validator from the repository root:
+
+**Windows:** `./validate-setup.ps1`
+
+**macOS / Linux:** `bash ./validate-setup.sh`
 
 ### Verify Your Setup
 ```bash
 # Check azd installation
 azd version
+
+# Check AZD authentication
+azd auth login --check-status
 ```
-### Verify Azure authentication
+
+### Verify optional Azure CLI authentication
 
 ```bash
 az account show
@@ -461,7 +471,7 @@ azd env new dev-$(whoami)-$(date +%s)
 
 ### Port/Network Issues
 ```bash
-# Verificar si los puertos están disponibles
+# Check if ports are available
 netstat -an | grep :3000
 netstat -an | grep :3100
 ```
@@ -529,5 +539,5 @@ azd init --template todo-java-mongo
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

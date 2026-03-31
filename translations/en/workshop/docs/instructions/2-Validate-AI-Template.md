@@ -40,7 +40,7 @@ Before we begin, let's make sure you have the Azure Developer CLI installed.
 
 ## 2. Template Selection
 
-The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow automation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
+The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
 
 1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
@@ -201,7 +201,7 @@ Observability is about instrumenting your application to generate data that can 
       ![Agent](../../../../../translated_images/en/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 
-1. Click the `Evaluations` tab to see auto-assessments made on the agent response. These include safety evaluations (e.g., Self-harm) and agent-specific evaluations (e.g., Intent resolution, Task adherence).
+1. Click the `Evaluations` tab to see auto-assessments made on the agent response. These include safety evaluations (e.g., Self-harm) and agent-specifc evaluations (e.g., Intent resolution, Task adherence).
 
       ![Agent](../../../../../translated_images/en/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
@@ -209,7 +209,7 @@ Observability is about instrumenting your application to generate data that can 
 
       - Select `Resource usage` tab in the displayed page - and view the metrics.
       - Track application usage in terms of costs (tokens) and load (requests).
-      - Track application latency to first byte (input processing) and last byte (output).
+      - Track applicaton latency to first byte (input processing) and last byte (output).
 
       ![Agent](../../../../../translated_images/en/13-monitoring-resources.5148015f7311807f.webp)
 
@@ -294,5 +294,5 @@ You just completed an end-to-end workflow where you:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

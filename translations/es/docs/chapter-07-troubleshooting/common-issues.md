@@ -1,51 +1,51 @@
 # Problemas y soluciones comunes
 
-**Navegación del capítulo:**
-- **📚 Inicio del curso**: [AZD Para Principiantes](../../README.md)
-- **📖 Capítulo actual**: Capítulo 7 - Solución de problemas y depuración
-- **⬅️ Capítulo anterior**: [Capítulo 6: Pre-flight Checks](../chapter-06-pre-deployment/preflight-checks.md)
-- **➡️ Siguiente**: [Guía de depuración](debugging.md)
-- **🚀 Próximo capítulo**: [Capítulo 8: Patrones de producción y empresariales](../chapter-08-production/production-ai-practices.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD para principiantes](../../README.md)
+- **📖 Current Chapter**: Capítulo 7 - Solución de problemas y depuración
+- **⬅️ Previous Chapter**: [Capítulo 6: Verificaciones previas al despliegue](../chapter-06-pre-deployment/preflight-checks.md)
+- **➡️ Next**: [Guía de depuración](debugging.md)
+- **🚀 Next Chapter**: [Capítulo 8: Patrones de producción y empresariales](../chapter-08-production/production-ai-practices.md)
 
 ## Introducción
 
-Esta completa guía de solución de problemas cubre los problemas más frecuentemente encontrados al usar Azure Developer CLI. Aprenda a diagnosticar, solucionar y resolver problemas comunes relacionados con autenticación, despliegue, aprovisionamiento de infraestructura y configuración de aplicaciones. Cada problema incluye síntomas detallados, causas raíz y procedimientos de resolución paso a paso.
+Esta guía de solución de problemas abarca los problemas más frecuentes al usar Azure Developer CLI. Aprende a diagnosticar, solucionar y resolver problemas comunes con autenticación, despliegue, aprovisionamiento de infraestructura y configuración de aplicaciones. Cada problema incluye síntomas detallados, causas raíz y procedimientos de resolución paso a paso.
 
 ## Objetivos de aprendizaje
 
 Al completar esta guía, usted:
-- Dominará técnicas de diagnóstico para problemas del Azure Developer CLI
-- Comprenderá problemas comunes de autenticación y permisos y sus soluciones
+- Dominará técnicas de diagnóstico para problemas con Azure Developer CLI
+- Entenderá problemas comunes de autenticación y permisos y sus soluciones
 - Resolverá fallos de despliegue, errores de aprovisionamiento de infraestructura y problemas de configuración
-- Implementará estrategias proactivas de monitorización y depuración
-- Aplicará metodologías sistemáticas de solución de problemas para casos complejos
-- Configurará registros y monitorización adecuados para prevenir problemas futuros
+- Implementará estrategias proactivas de monitoreo y depuración
+- Aplicará metodologías sistemáticas de solución de problemas para problemas complejos
+- Configurará el registro y monitoreo adecuados para prevenir problemas futuros
 
-## Resultados de aprendizaje
+## Resultados del aprendizaje
 
 Al finalizar, podrá:
-- Diagnosticar problemas del Azure Developer CLI usando las herramientas de diagnóstico integradas
-- Resolver de forma independiente problemas relacionados con autenticación, suscripción y permisos
-- Solucionar eficazmente fallos de despliegue y errores en el aprovisionamiento de infraestructura
-- Depurar problemas de configuración de la aplicación y problemas específicos del entorno
-- Implementar monitorización y alertas para identificar proactivamente posibles problemas
+- Diagnosticar problemas de Azure Developer CLI usando herramientas diagnósticas incorporadas
+- Resolver problemas de autenticación, suscripción y permisos de forma independiente
+- Solucionar fallos de despliegue y errores de aprovisionamiento de infraestructura de manera efectiva
+- Depurar problemas de configuración de aplicaciones y problemas específicos del entorno
+- Implementar monitoreo y alertas para identificar proactivamente problemas potenciales
 - Aplicar buenas prácticas para registro, depuración y flujos de trabajo de resolución de problemas
 
 ## Diagnósticos rápidos
 
-Antes de entrar en problemas específicos, ejecute estos comandos para recopilar información diagnóstica:
+Antes de profundizar en problemas específicos, ejecute estos comandos para recopilar información diagnóstica:
 
 ```bash
 # Comprobar la versión y el estado de azd
 azd version
-azd config list
+azd config show
 
 # Verificar la autenticación de Azure
 az account show
 az account list
 
 # Comprobar el entorno actual
-azd env show
+azd env list
 azd env get-values
 
 # Habilitar el registro de depuración
@@ -55,91 +55,91 @@ azd <command> --debug
 
 ## Problemas de autenticación
 
-### Problema: "Failed to get access token"
+### Issue: "Failed to get access token"
 **Síntomas:**
 - `azd up` falla con errores de autenticación
 - Los comandos devuelven "unauthorized" o "access denied"
 
 **Soluciones:**
 ```bash
-# 1. Reautenticar con Azure CLI
+# 1. Vuelva a autenticarse con Azure CLI
 az login
 az account show
 
-# 2. Borrar credenciales en caché
+# 2. Borre las credenciales en caché
 az account clear
 az login
 
-# 3. Usar el flujo de código de dispositivo (para sistemas sin interfaz gráfica)
+# 3. Utilice el flujo de código de dispositivo (para sistemas sin interfaz gráfica)
 az login --use-device-code
 
-# 4. Establecer suscripción explícita
+# 4. Establezca la suscripción explícita
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### Problema: "Insufficient privileges" durante el despliegue
+### Issue: "Insufficient privileges" during deployment
 **Síntomas:**
 - El despliegue falla con errores de permisos
 - No se pueden crear ciertos recursos de Azure
 
 **Soluciones:**
 ```bash
-# 1. Compruebe sus asignaciones de roles en Azure
+# 1. Comprueba tus asignaciones de roles en Azure
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Asegúrese de tener los roles requeridos
-# - Contributor (para la creación de recursos)
-# - User Access Administrator (para las asignaciones de roles)
+# 2. Asegúrate de tener los roles requeridos
+# - Colaborador (para la creación de recursos)
+# - Administrador de acceso de usuario (para asignaciones de roles)
 
-# 3. Contacte a su administrador de Azure para obtener los permisos adecuados
+# 3. Contacta a tu administrador de Azure para obtener los permisos adecuados
 ```
 
-### Problema: Problemas de autenticación multiinquilino
+### Issue: Multi-tenant authentication problems
 **Soluciones:**
 ```bash
-# 1. Iniciar sesión con un inquilino específico
+# 1. Iniciar sesión con un tenant específico
 az login --tenant "your-tenant-id"
 
-# 2. Establecer el inquilino en la configuración
+# 2. Establecer el tenant en la configuración
 azd config set auth.tenantId "your-tenant-id"
 
-# 3. Borrar la caché al cambiar de inquilino
+# 3. Borrar la caché del tenant si se cambia de tenant
 az account clear
 ```
 
 ## 🏗️ Errores de aprovisionamiento de infraestructura
 
-### Problema: Conflictos de nombres de recursos
+### Issue: Resource name conflicts
 **Síntomas:**
-- Errores "The resource name already exists"
+- Errores de "The resource name already exists"
 - El despliegue falla durante la creación de recursos
 
 **Soluciones:**
 ```bash
-# 1. Use nombres de recursos únicos con tokens
-# En su plantilla de Bicep:
+# 1. Usa nombres de recursos únicos con tokens
+# En tu plantilla Bicep:
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 name: '${applicationName}-${resourceToken}'
 
-# 2. Cambie el nombre del entorno
+# 2. Cambia el nombre del entorno
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. Limpie los recursos existentes
+# 3. Limpia los recursos existentes
 azd down --force --purge
 ```
 
-### Problema: Ubicación/Región no disponible
+### Issue: Location/Region not available
 **Síntomas:**
 - "The location 'xyz' is not available for resource type"
-- Algunas SKUs no están disponibles en la región seleccionada
+- Ciertos SKUs no están disponibles en la región seleccionada
 
 **Soluciones:**
 ```bash
 # 1. Compruebe las ubicaciones disponibles para los tipos de recursos
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Use regiones comúnmente disponibles
+# 2. Utilice regiones comúnmente disponibles
 azd config set defaults.location eastus2
 # o
 azd env set AZURE_LOCATION eastus2
@@ -148,20 +148,20 @@ azd env set AZURE_LOCATION eastus2
 # Visite: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### Problema: Errores por cuota excedida
+### Issue: Quota exceeded errors
 **Síntomas:**
 - "Quota exceeded for resource type"
 - "Maximum number of resources reached"
 
 **Soluciones:**
 ```bash
-# 1. Comprobar el uso actual de la cuota
+# 1. Verificar el uso actual de la cuota
 az vm list-usage --location eastus2 -o table
 
-# 2. Solicitar aumento de cuota a través del portal de Azure
+# 2. Solicitar un aumento de cuota a través del portal de Azure
 # Ir a: Suscripciones > Uso + cuotas
 
-# 3. Usar SKUs más pequeñas para desarrollo
+# 3. Usar SKUs más pequeños para desarrollo
 # En main.parameters.json:
 {
   "appServiceSku": {
@@ -173,9 +173,9 @@ az vm list-usage --location eastus2 -o table
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
-### Problema: Errores en plantillas Bicep
+### Issue: Bicep template errors
 **Síntomas:**
-- Fallos en la validación de plantillas
+- Fallos de validación de plantillas
 - Errores de sintaxis en archivos Bicep
 
 **Soluciones:**
@@ -189,20 +189,20 @@ az bicep lint --file infra/main.bicep
 # 3. Comprobar la sintaxis del archivo de parámetros
 cat infra/main.parameters.json | jq '.'
 
-# 4. Previsualizar los cambios de la implementación
+# 4. Previsualizar los cambios de implementación
 azd provision --preview
 ```
 
-## 🚀 Fallos en el despliegue
+## 🚀 Fallos de despliegue
 
-### Problema: Fallos de compilación
+### Issue: Build failures
 **Síntomas:**
 - La aplicación no se compila durante el despliegue
-- Errores en la instalación de paquetes
+- Errores al instalar paquetes
 
 **Soluciones:**
 ```bash
-# 1. Comprobar la salida de la compilación con la opción de depuración
+# 1. Revisar la salida de la compilación con la bandera de depuración
 azd deploy --service web --debug
 
 # 2. Ver el estado del servicio desplegado
@@ -221,12 +221,12 @@ python --version
 rm -rf node_modules package-lock.json
 npm install
 
-# 5. Comprobar el Dockerfile si se usan contenedores
+# 5. Revisar el Dockerfile si se usan contenedores
 docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Problema: Fallos en el despliegue de contenedores
+### Issue: Container deployment failures
 **Síntomas:**
 - Las aplicaciones en contenedores no arrancan
 - Errores al extraer la imagen
@@ -237,7 +237,7 @@ docker run --rm test-image
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Comprobar los registros del contenedor usando Azure CLI
+# 2. Verificar los registros del contenedor usando Azure CLI
 az containerapp logs show --name my-app --resource-group my-rg --follow
 
 # 3. Supervisar la aplicación a través de azd
@@ -246,18 +246,18 @@ azd monitor --logs
 # 3. Verificar el acceso al registro de contenedores
 az acr login --name myregistry
 
-# 4. Comprobar la configuración de la aplicación de contenedor
+# 4. Comprobar la configuración de la aplicación de contenedores
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### Problema: Fallos de conexión a la base de datos
+### Issue: Database connection failures
 **Síntomas:**
 - La aplicación no puede conectarse a la base de datos
 - Errores de tiempo de espera de conexión
 
 **Soluciones:**
 ```bash
-# 1. Comprueba las reglas del cortafuegos de la base de datos
+# 1. Comprueba las reglas de firewall de la base de datos
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
 # 2. Prueba la conectividad desde la aplicación
@@ -273,7 +273,7 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 ## 🔧 Problemas de configuración
 
-### Problema: Variables de entorno que no funcionan
+### Issue: Environment variables not working
 **Síntomas:**
 - La aplicación no puede leer valores de configuración
 - Las variables de entorno aparecen vacías
@@ -290,14 +290,14 @@ cat azure.yaml | grep -A 5 env:
 # 3. Reiniciar la aplicación
 azd deploy --service web
 
-# 4. Comprobar la configuración del servicio de la aplicación
+# 4. Comprobar la configuración del servicio de aplicaciones
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
-### Problema: Problemas con certificados SSL/TLS
+### Issue: SSL/TLS certificate problems
 **Síntomas:**
 - HTTPS no funciona
-- Errores de validación de certificados
+- Errores de validación del certificado
 
 **Soluciones:**
 ```bash
@@ -307,18 +307,18 @@ az webapp config ssl list --resource-group myrg
 # 2. Habilitar solo HTTPS
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Agregar dominio personalizado (si es necesario)
+# 3. Añadir dominio personalizado (si es necesario)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
-### Problema: Problemas de configuración de CORS
+### Issue: CORS configuration problems
 **Síntomas:**
 - El frontend no puede llamar a la API
-- Solicitud cross-origin bloqueada
+- Solicitud de origen cruzado bloqueada
 
 **Soluciones:**
 ```bash
-# 1. Configurar CORS para el servicio de aplicaciones
+# 1. Configurar CORS para App Service
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
 # 2. Actualizar la API para manejar CORS
@@ -328,15 +328,15 @@ app.use(cors({
   credentials: true
 }));
 
-# 3. Verificar si se está ejecutando en las URLs correctas
+# 3. Comprobar si se está ejecutando en las URL correctas
 azd show
 ```
 
 ## 🌍 Problemas de gestión de entornos
 
-### Problema: Problemas al cambiar de entorno
+### Issue: Environment switching problems
 **Síntomas:**
-- Se está usando el entorno equivocado
+- Se está usando el entorno incorrecto
 - La configuración no cambia correctamente
 
 **Soluciones:**
@@ -348,14 +348,14 @@ azd env list
 azd env select production
 
 # 3. Verificar el entorno actual
-azd env show
+azd env list
 
 # 4. Crear un nuevo entorno si está corrupto
 azd env new production-new
 azd env select production-new
 ```
 
-### Problema: Corrupción del entorno
+### Issue: Environment corruption
 **Síntomas:**
 - El entorno muestra un estado inválido
 - Los recursos no coinciden con la configuración
@@ -371,15 +371,15 @@ azd env new production-reset
 azd env set DATABASE_URL "your-value"
 
 # 3. Importar recursos existentes (si es posible)
-# Actualizar manualmente .azure/production/config.json con los IDs de recursos
+# Actualizar manualmente .azure/production/config.json con los identificadores de recursos
 ```
 
 ## 🔍 Problemas de rendimiento
 
-### Problema: Tiempos de despliegue lentos
+### Issue: Slow deployment times
 **Síntomas:**
 - Los despliegues tardan demasiado
-- Tiempos de espera durante el despliegue
+- Timeouts durante el despliegue
 
 **Soluciones:**
 ```bash
@@ -387,7 +387,7 @@ azd env set DATABASE_URL "your-value"
 azd deploy --service web
 azd deploy --service api
 
-# 2. Usa despliegue solo de código cuando la infraestructura no haya cambiado
+# 2. Usa despliegue solo de código cuando la infraestructura no cambie
 azd deploy  # Más rápido que azd up
 
 # 3. Optimiza el proceso de compilación
@@ -400,34 +400,34 @@ azd deploy  # Más rápido que azd up
 azd config set defaults.location eastus2
 ```
 
-### Problema: Problemas de rendimiento de la aplicación
+### Issue: Application performance problems
 **Síntomas:**
-- Tiempos de respuesta lentos
+- Respuestas lentas
 - Alto uso de recursos
 
 **Soluciones:**
 ```bash
-# 1. Escalar los recursos
-# Actualizar el SKU en main.parameters.json:
+# 1. Escala los recursos
+# Actualiza el SKU en main.parameters.json:
 "appServiceSku": {
   "value": "S2"  // Scale up from B1
 }
 
-# 2. Habilitar el monitoreo de Application Insights
+# 2. Habilita el monitoreo de Application Insights
 azd monitor --overview
 
-# 3. Revisar los registros de la aplicación en Azure
+# 3. Revisa los registros de la aplicación en Azure
 az webapp log tail --name myapp --resource-group myrg
 # o para Container Apps:
 az containerapp logs show --name myapp --resource-group myrg --follow
 
-# 4. Implementar almacenamiento en caché
-# Agregar una caché de Redis a su infraestructura
+# 4. Implementa la caché
+# Agrega caché Redis a tu infraestructura
 ```
 
-## 🛠️ Herramientas y comandos para solucionar problemas
+## 🛠️ Herramientas y comandos para la solución de problemas
 
-### Comandos de depuración
+### Debug Commands
 ```bash
 # Depuración exhaustiva
 export AZD_DEBUG=true
@@ -437,15 +437,15 @@ azd up --debug 2>&1 | tee debug.log
 azd version
 
 # Ver la configuración actual
-azd config list
+azd config show
 
 # Probar la conectividad
 curl -v https://myapp.azurewebsites.net/health
 ```
 
-### Análisis de registros
+### Log Analysis
 ```bash
-# Registros de la aplicación a través de Azure CLI
+# Registros de la aplicación mediante Azure CLI
 az webapp log tail --name myapp --resource-group myrg
 
 # Supervisar la aplicación con azd
@@ -459,7 +459,7 @@ az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
-### Investigación de recursos
+### Resource Investigation
 ```bash
 # Listar todos los recursos
 az resource list --resource-group myrg -o table
@@ -467,7 +467,7 @@ az resource list --resource-group myrg -o table
 # Comprobar el estado del recurso
 az webapp show --name myapp --resource-group myrg --query state
 
-# Diagnósticos de red
+# Diagnóstico de red
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
@@ -475,38 +475,38 @@ az network watcher test-connectivity --source-resource myvm --dest-address myapp
 
 ### Cuándo escalar
 - Los problemas de autenticación persisten después de intentar todas las soluciones
-- Problemas de infraestructura con los servicios de Azure
+- Problemas de infraestructura con servicios de Azure
 - Problemas relacionados con facturación o suscripción
-- Incidentes o problemas de seguridad
+- Preocupaciones o incidentes de seguridad
 
 ### Canales de soporte
 ```bash
-# 1. Compruebe el estado de Azure Service Health
+# 1. Comprobar el estado de Azure Service Health
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
 # 2. Crear un ticket de soporte de Azure
-# Vaya a: https://portal.azure.com -> Ayuda y soporte
+# Ir a: https://portal.azure.com -> Ayuda y soporte
 
-# 3. Recursos de la comunidad
+# 3. Recursos comunitarios
 # - Stack Overflow: etiqueta azure-developer-cli
-# - Incidencias de GitHub: https://github.com/Azure/azure-dev/issues
+# - Incidencias en GitHub: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
-### Información a recopilar
+### Información para recopilar
 Antes de contactar con soporte, recopile:
-- `azd version` (salida)
-- `azd config list` (salida)
-- `azd show` (salida) (estado actual del despliegue)
+- `azd version` output
+- `azd config show` output
+- `azd show` output (estado actual del despliegue)
 - Mensajes de error (texto completo)
 - Pasos para reproducir el problema
-- Detalles del entorno (`azd env show`)
+- Detalles del entorno (`azd env get-values`)
 - Cronología de cuándo comenzó el problema
 
 ### Script de recopilación de registros
 ```bash
 #!/bin/bash
-# recopilar-información-de-depuración.sh
+# collect-debug-info.sh
 
 echo "Collecting azd debug information..."
 mkdir -p debug-logs
@@ -516,8 +516,8 @@ azd version >> debug-logs/system-info.txt
 az --version >> debug-logs/system-info.txt
 
 echo "Configuration:" > debug-logs/config.txt
-azd config list >> debug-logs/config.txt
-azd env show >> debug-logs/config.txt
+azd config show >> debug-logs/config.txt
+azd env list >> debug-logs/config.txt
 azd env get-values >> debug-logs/config.txt
 
 echo "Current deployment status:" > debug-logs/status.txt
@@ -528,12 +528,12 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 Prevención de problemas
 
-### Lista de comprobación previa al despliegue
+### Lista de verificación previa al despliegue
 ```bash
 # 1. Validar la autenticación
 az account show
 
-# 2. Verificar cuotas y límites
+# 2. Revisar cuotas y límites
 az vm list-usage --location eastus2
 
 # 3. Validar plantillas
@@ -547,7 +547,7 @@ npm run test
 azd provision --preview
 ```
 
-### Configuración de monitorización
+### Configuración de monitoreo
 ```bash
 # Habilitar Application Insights
 # Agregar a main.bicep:
@@ -571,30 +571,30 @@ az monitor metrics alert create \
 # Revisión mensual de costos
 az consumption usage list --billing-period-name 202401
 
-# Revisión de seguridad trimestral
+# Revisión trimestral de seguridad
 az security assessment list --resource-group myrg
 ```
 
 ## Recursos relacionados
 
 - [Guía de depuración](debugging.md) - Técnicas avanzadas de depuración
-- [Aprovisionamiento de recursos](../chapter-04-infrastructure/provisioning.md) - Solución de problemas de infraestructura
-- [Planificación de capacidad](../chapter-06-pre-deployment/capacity-planning.md) - Orientación para planificación de recursos
-- [Selección de SKU](../chapter-06-pre-deployment/sku-selection.md) - Recomendaciones de nivel de servicio
+- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Resolución de problemas de infraestructura
+- [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md) - Orientación sobre planificación de recursos
+- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Recomendaciones de niveles de servicio
 
 ---
 
-**Consejo**: Mantenga esta guía en marcadores y consúltela siempre que encuentre problemas. La mayoría de los problemas ya se han visto antes y tienen soluciones establecidas!
+**Consejo**: Mantenga esta guía marcada y consúltela siempre que encuentre problemas. ¡La mayoría de los problemas ya se han visto antes y tienen soluciones establecidas!
 
 ---
 
-**Navegación**
-- **Lección anterior**: [Aprovisionamiento de recursos](../chapter-04-infrastructure/provisioning.md)
-- **Siguiente lección**: [Guía de depuración](debugging.md)
+**Navigation**
+- **Previous Lesson**: [Provisioning Resources](../chapter-04-infrastructure/provisioning.md)
+- **Next Lesson**: [Guía de depuración](debugging.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Descargo de responsabilidad**:
-Este documento ha sido traducido mediante el servicio de traducción automática con IA [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por un traductor humano. No nos hacemos responsables de ningún malentendido o interpretación errónea derivada del uso de esta traducción.
+Este documento ha sido traducido utilizando el servicio de traducción por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la exactitud, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por un traductor humano. No nos hacemos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

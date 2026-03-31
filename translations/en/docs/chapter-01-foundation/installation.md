@@ -43,15 +43,15 @@ Before installing azd, ensure you have:
 
 ### Windows
 
-#### Option 1: PowerShell (Recommended)
-```powershell
-# Run as Administrator or with elevated privileges
-powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
+#### Option 1: Windows Package Manager (Recommended)
+```cmd
+winget install microsoft.azd
 ```
 
-#### Option 2: Windows Package Manager (winget)
-```cmd
-winget install Microsoft.Azd
+#### Option 2: PowerShell Install Script
+```powershell
+# Useful when winget is unavailable
+powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
 #### Option 3: Chocolatey
@@ -92,27 +92,22 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 
 #### Option 2: Package Managers
 
-**Ubuntu/Debian:**
+**Manual installation from release assets:**
 ```bash
-# Add Microsoft package repository
-curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-
-# Install azd
-sudo apt-get update
-sudo apt-get install azd
-```
-
-**RHEL/CentOS/Fedora:**
-```bash
-# Add Microsoft package repository
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-sudo dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/azure-cli
-sudo dnf install azd
+# Download the latest archive for your Linux architecture from:
+# https://github.com/Azure/azure-dev/releases
+# Then extract it and add the azd binary to your PATH.
 ```
 
 ### GitHub Codespaces
 
-azd comes pre-installed in GitHub Codespaces. Simply create a codespace and start using azd immediately.
+Some Codespaces and dev container environments already include `azd`, but you should verify that rather than assume it:
+
+```bash
+azd version
+```
+
+If `azd` is missing, install it with the standard script for the environment.
 
 ### Docker
 
@@ -150,19 +145,32 @@ azd version 1.x.x (commit xxxxxx)
 - [ ] `azd version` shows version number without errors
 - [ ] `azd --help` displays command documentation
 - [ ] `azd template list` shows available templates
-- [ ] `az account show` displays your Azure subscription
 - [ ] You can create a test directory and run `azd init` successfully
 
 **If all checks pass, you're ready to proceed to [Your First Project](first-project.md)!**
 
 ## Authentication Setup
 
-### Azure CLI Authentication (Recommended)
+### Recommended Beginner Setup
+
+For AZD-first workflows, sign in with `azd auth login`.
+
+```bash
+# Required for AZD commands such as azd up
+azd auth login
+
+# Verify AZD authentication status
+azd auth login --check-status
+```
+
+Use Azure CLI sign-in only when you plan to run `az` commands yourself during the course.
+
+### Azure CLI Authentication (Optional)
 ```bash
 # Install Azure CLI if not already installed
 # Windows: winget install Microsoft.AzureCLI
 # macOS: brew install azure-cli
-# Linux: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+# Linux: see the Azure CLI install docs for your distribution
 
 # Login to Azure
 az login
@@ -171,19 +179,39 @@ az login
 az account show
 ```
 
+### Which Sign-In Flow Should You Use?
+
+- Use `azd auth login` if you are following the beginner AZD path and mainly running `azd` commands.
+- Use `az login` as well when you want to run Azure CLI commands such as `az account show` or inspect resources directly.
+- If an exercise includes both `azd` and `az` commands, run both sign-in commands once at the start.
+
 ### Device Code Authentication
 If you're on a headless system or having browser issues:
 ```bash
-az login --use-device-code
+azd auth login --use-device-code
 ```
 
 ### Service Principal (CI/CD)
 For automated environments:
 ```bash
-az login --service-principal \
-  --username <client-id> \
-  --password <client-secret> \
-  --tenant <tenant-id>
+azd auth login \
+  --client-id <client-id> \
+  --client-secret <client-secret> \
+  --tenant-id <tenant-id>
+```
+
+### Validate Your Complete Setup
+
+If you want a quick readiness check before starting Chapter 1:
+
+**Windows:**
+```powershell
+.\validate-setup.ps1
+```
+
+**macOS / Linux:**
+```bash
+bash ./validate-setup.sh
 ```
 
 ## Configuration
@@ -196,8 +224,8 @@ azd config set defaults.subscription <subscription-id>
 # Set default location
 azd config set defaults.location eastus2
 
-# View all configurations
-azd config list
+# View all configuration
+azd config show
 ```
 
 ### Environment Variables
@@ -282,9 +310,9 @@ azd config set http.insecure true
 #### Version Conflicts
 ```bash
 # Remove old installations
-# Windows: winget uninstall Microsoft.Azd
+# Windows: winget uninstall microsoft.azd
 # macOS: brew uninstall azd
-# Linux: sudo apt remove azd
+# Linux: remove the previous azd binary or symlink before reinstalling
 
 # Clean configuration
 rm -rf ~/.azd
@@ -297,7 +325,7 @@ export AZD_DEBUG=true
 azd <command> --debug
 
 # View current configuration
-azd config list
+azd config show
 
 # View current deployment status
 azd show
@@ -305,17 +333,17 @@ azd show
 
 ## Updating azd
 
-### Automatic Updates
-azd will notify you when updates are available:
+### Update Check
+azd warns when a newer release is available, and you can confirm your current build with:
 ```bash
-azd version --check-for-updates
+azd version
 ```
 
 ### Manual Updates
 
 **Windows (winget):**
 ```cmd
-winget upgrade Microsoft.Azd
+winget upgrade microsoft.azd
 ```
 
 **macOS (Homebrew):**
@@ -425,5 +453,5 @@ If you encounter issues:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

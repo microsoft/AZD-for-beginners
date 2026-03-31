@@ -1,43 +1,43 @@
-# Provisioning Azure Resources with AZD
+# Provisionnement des ressources Azure avec AZD
 
-**Navigation du chapitre :**
-- **📚 Accueil du cours**: [AZD For Beginners](../../README.md)
-- **📖 Chapitre actuel**: Chapitre 4 - Infrastructure as Code & Deployment
-- **⬅️ Précédent**: [Deployment Guide](deployment-guide.md)
-- **➡️ Chapitre suivant**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
-- **🔧 Connexe**: [Chapter 6: Pre-Deployment Validation](../chapter-06-pre-deployment/capacity-planning.md)
+**Navigation du chapitre :**
+- **📚 Accueil du cours** : [AZD Pour les débutants](../../README.md)
+- **📖 Chapitre actuel** : Chapitre 4 - Infrastructure as Code & Déploiement
+- **⬅️ Précédent** : [Guide de déploiement](deployment-guide.md)
+- **➡️ Chapitre suivant** : [Chapitre 5 : Solutions IA multi-agents](../../examples/retail-scenario.md)
+- **🔧 Connexe** : [Chapitre 6 : Validation pré-déploiement](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Introduction
 
-Ce guide complet couvre tout ce que vous devez savoir sur le provisionnement et la gestion des ressources Azure à l'aide de l'Azure Developer CLI. Apprenez à appliquer des modèles Infrastructure en tant que code (IaC) allant de la création de ressources de base à des architectures d'infrastructure de niveau entreprise avancées en utilisant Bicep, ARM templates, Terraform et Pulumi.
+Ce guide complet couvre tout ce que vous devez savoir sur le provisionnement et la gestion des ressources Azure en utilisant Azure Developer CLI. Apprenez à implémenter des modèles d'Infrastructure as Code (IaC) depuis la création basique de ressources jusqu'aux architectures d'infrastructure avancées de niveau entreprise en utilisant Bicep, ARM templates, Terraform et Pulumi.
 
-## Objectifs d'apprentissage
+## Objectifs d’apprentissage
 
 En complétant ce guide, vous allez :
-- Maîtriser les principes de l'Infrastructure en tant que code et le provisionnement des ressources Azure
-- Comprendre les différents fournisseurs IaC pris en charge par Azure Developer CLI
-- Concevoir et implémenter des modèles Bicep pour des architectures d'application courantes
-- Configurer les paramètres de ressources, variables et réglages spécifiques aux environnements
-- Mettre en œuvre des modèles d'infrastructure avancés incluant mise en réseau et sécurité
+- Maîtriser les principes d'Infrastructure as Code et le provisionnement des ressources Azure
+- Comprendre les multiples fournisseurs IaC pris en charge par Azure Developer CLI
+- Concevoir et implémenter des templates Bicep pour des architectures applicatives courantes
+- Configurer les paramètres, variables et configurations spécifiques à l’environnement des ressources
+- Mettre en œuvre des modèles avancés d'infrastructure incluant le réseau et la sécurité
 - Gérer le cycle de vie des ressources, les mises à jour et la résolution des dépendances
 
-## Résultats d'apprentissage
+## Résultats d’apprentissage
 
-À la fin, vous serez capable de :
-- Concevoir et provisionner l'infrastructure Azure en utilisant Bicep et des modèles ARM
-- Configurer des architectures multi-services complexes avec des dépendances de ressources appropriées
-- Mettre en œuvre des modèles paramétrés pour plusieurs environnements et configurations
-- Dépanner les problèmes de provisionnement d'infrastructure et résoudre les échecs de déploiement
-- Appliquer les principes du Azure Well-Architected Framework à la conception d'infrastructure
-- Gérer les mises à jour d'infrastructure et mettre en œuvre des stratégies de versioning de l'infrastructure
+À l'issue, vous serez capable de :
+- Concevoir et provisionner une infrastructure Azure en utilisant Bicep et les ARM templates
+- Configurer des architectures multi-services complexes avec les dépendances appropriées entre ressources
+- Implémenter des templates paramétrés pour plusieurs environnements et configurations
+- Diagnostiquer les problèmes de provisionnement d’infrastructure et résoudre les échecs de déploiement
+- Appliquer les principes du cadre Azure Well-Architected Framework à la conception d'infrastructure
+- Gérer les mises à jour d'infrastructure et mettre en place des stratégies de versionnage d'infrastructure
 
-## Aperçu du provisionnement d'infrastructure
+## Vue d’ensemble du provisionnement d’infrastructure
 
-Azure Developer CLI prend en charge plusieurs fournisseurs Infrastructure as Code (IaC) :
-- **Bicep** (recommandé) - le langage spécifique au domaine d'Azure
-- **ARM Templates** - modèles Azure Resource Manager basés sur JSON
-- **Terraform** - outil d'infrastructure multi-cloud
-- **Pulumi** - Infrastructure as Code moderne avec des langages de programmation
+Azure Developer CLI prend en charge plusieurs fournisseurs d’Infrastructure as Code (IaC) :
+- **Bicep** (recommandé) - le langage spécifique à Azure
+- **ARM Templates** - templates JSON basés sur Azure Resource Manager
+- **Terraform** - outil multi-cloud pour l'infrastructure
+- **Pulumi** - infrastructure moderne as code avec des langages de programmation
 
 ## Comprendre les ressources Azure
 
@@ -50,15 +50,15 @@ Azure Account
 ```
 
 ### Services Azure courants pour les applications
-- **Compute** : App Service, Container Apps, Functions, Virtual Machines
-- **Storage** : Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Networking** : Virtual Network, Application Gateway, CDN
-- **Security** : Key Vault, Application Insights, Log Analytics
-- **AI/ML** : Cognitive Services, OpenAI, Machine Learning
+- **Calcul** : App Service, Container Apps, Functions, Machines Virtuelles
+- **Stockage** : Compte de stockage, Cosmos DB, Base de données SQL, PostgreSQL
+- **Réseau** : Réseau virtuel, Application Gateway, CDN
+- **Sécurité** : Key Vault, Application Insights, Log Analytics
+- **IA/ML** : Cognitive Services, OpenAI, Machine Learning
 
-## Modèles d'infrastructure Bicep
+## Templates d’infrastructure Bicep
 
-### Structure de base d'un modèle Bicep
+### Structure de base d’un template Bicep
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -342,7 +342,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Configuration des identités gérées
+### Configuration des identités managées
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -368,7 +368,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Mise en réseau et connectivité
+## 🌍 Réseau et connectivité
 
 ### Configuration du réseau virtuel
 ```bicep
@@ -496,7 +496,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Surveillance et observabilité
+## 📊 Monitoring et observabilité
 
 ### Application Insights
 ```bicep
@@ -561,7 +561,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Configurations spécifiques à l'environnement
+## 🔧 Configurations spécifiques à l’environnement
 
 ### Fichiers de paramètres pour différents environnements
 ```json
@@ -617,7 +617,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Provisionnement conditionnel des ressources
+### Provisionnement conditionnel de ressources
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,9 +649,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Modèles de provisionnement avancés
+## 🚀 Modèles avancés de provisionnement
 
-### Déploiement multi-régions
+### Déploiement multi-région
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -719,7 +719,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### Tests d'infrastructure
+### Tests d’infrastructure
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -755,42 +755,41 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 Aperçu et validation de l'infrastructure (NOUVEAU)
+## 🧪 Aperçu & validation d’infrastructure (NOUVEAU)
 
-### Aperçu des modifications d'infrastructure avant le déploiement
+### Prévisualiser les changements d’infrastructure avant le déploiement
 
-La fonctionnalité `azd provision --preview` vous permet de **simuler le provisionnement de l'infrastructure** avant de déployer réellement des ressources. C'est similaire à `terraform plan` ou `bicep what-if`, et vous offre une **vue en simulation** des modifications qui seraient apportées à votre environnement Azure.
+La commande `azd provision --preview` vous permet de **simuler le provisionnement d’infrastructure** avant de déployer réellement les ressources. C’est similaire à `terraform plan` ou `bicep what-if`, offrant une **vue à blanc** des modifications qui seraient appliquées à votre environnement Azure.
 
-#### 🛠️ Ce que cela fait
-- **Analyse vos modèles IaC** (Bicep ou Terraform)
-- **Affiche un aperçu des modifications de ressources** : ajouts, suppressions, mises à jour
-- **N'applique pas les modifications** — c'est en lecture seule et sûr à exécuter
+#### 🛠️ Ce que ça fait
+- **Analyse vos templates IaC** (Bicep ou Terraform)
+- **Affiche un aperçu des changements de ressources** : ajouts, suppressions, mises à jour
+- **N’applique pas les changements** — c'est une opération en lecture seule, sécurisée à exécuter
 
-#### � Cas d'utilisation
+#### Cas d’utilisation
 ```bash
-# Aperçu des modifications d'infrastructure avant le déploiement
+# Prévisualiser les modifications de l'infrastructure avant le déploiement
 azd provision --preview
 
-# Aperçu avec sortie détaillée
-azd provision --preview --output json
-
-# Aperçu pour un environnement spécifique
-azd provision --preview --environment production
+# Prévisualisation pour un environnement spécifique
+azd provision --preview -e production
 ```
 
 Cette commande vous aide à :
-- **Valider les modifications d'infrastructure** avant d'engager des ressources
-- **Repérer les mauvaises configurations tôt** dans le cycle de développement
-- **Collaborer en toute sécurité** dans des environnements d'équipe
+- **Valider les modifications d’infrastructure** avant de valider les ressources
+- **Détecter rapidement les mauvaises configurations** dans le cycle de développement
+- **Collaborer en toute sécurité** dans les environnements d’équipe
 - **Garantir des déploiements au moindre privilège** sans surprises
 
-C'est particulièrement utile lorsque :
-- Vous travaillez avec des environnements multi-services complexes
-- Vous apportez des modifications à une infrastructure de production
-- Vous validez des modifications de modèle avant l'approbation d'une PR
-- Vous formez de nouveaux membres d'équipe aux modèles d'infrastructure
+C’est particulièrement utile lorsque :
+- Vous travaillez sur des environnements multi-services complexes
+- Vous modifiez une infrastructure en production
+- Vous validez des modifications de templates avant approbation d’une PR
+- Vous formez de nouveaux membres sur les modèles d’infrastructure
 
-### Exemple de sortie d'aperçu
+### Exemple de sortie de prévisualisation
+La sortie exacte varie par fournisseur et structure de projet, mais le résultat doit clairement identifier les changements proposés avant toute application.
+
 ```bash
 $ azd provision --preview
 
@@ -809,28 +808,27 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
 ```
 
-## �🔄 Mises à jour et migrations des ressources
+## �🔄 Mises à jour et migrations de ressources
 
-### Mises à jour sûres des ressources
+### Mises à jour sécurisées des ressources
 ```bash
-# Prévisualisez d'abord les modifications d'infrastructure (RECOMMANDÉ)
+# Prévisualisez d'abord les changements d'infrastructure (RECOMMANDÉ)
 azd provision --preview
 
-# Appliquez les modifications après confirmation de la prévisualisation
+# Appliquez les changements après confirmation de prévisualisation
 azd provision --confirm-with-no-prompt
 
-# Pour revenir en arrière, utilisez Git pour annuler les modifications d'infrastructure:
-git revert HEAD  # Annulez le dernier commit d'infrastructure
-azd provision    # Appliquez l'état d'infrastructure précédent
+# Pour revenir en arrière, utilisez Git pour annuler les changements d'infrastructure :
+git revert HEAD  # Annuler le dernier commit d'infrastructure
+azd provision    # Appliquer l'état précédent de l'infrastructure
 ```
 
-### Migrations de base de données
+### Migrations de bases de données
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -872,7 +870,7 @@ var naming = {
 }
 ```
 
-### 2. Stratégie d'étiquetage (Tagging)
+### 2. Stratégie de tagging
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -901,7 +899,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Organisation des outputs
+### 4. Organisation des sorties
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -918,27 +916,27 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Étapes suivantes
 
-- [Pre-deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - Valider la disponibilité des ressources
-- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - Résoudre les problèmes d'infrastructure
-- [Debugging Guide](../chapter-07-troubleshooting/debugging.md) - Déboguer les problèmes de provisionnement
-- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Choisir les niveaux de service appropriés
+- [Planification avant déploiement](../chapter-06-pre-deployment/capacity-planning.md) - Valider la disponibilité des ressources
+- [Problèmes courants](../chapter-07-troubleshooting/common-issues.md) - Résoudre les problèmes d’infrastructure
+- [Guide de débogage](../chapter-07-troubleshooting/debugging.md) - Déboguer les problèmes de provisionnement
+- [Sélection des SKU](../chapter-06-pre-deployment/sku-selection.md) - Choisir les niveaux de service appropriés
 
 ## Ressources supplémentaires
 
-- [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Documentation Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Templates Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Centre d’architecture Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Cadre Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **Navigation**
-- **Leçon précédente**: [Deployment Guide](deployment-guide.md)
-- **Leçon suivante**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
+- **Leçon précédente** : [Guide de déploiement](deployment-guide.md)
+- **Leçon suivante** : [Planification de capacité](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Clause de non-responsabilité** :
-Ce document a été traduit à l'aide du service de traduction par IA [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatiques peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant foi. Pour les informations critiques, une traduction professionnelle réalisée par un traducteur humain est recommandée. Nous déclinons toute responsabilité en cas de malentendus ou de mauvaises interprétations résultant de l'utilisation de cette traduction.
+**Avertissement** :  
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous fassions tout notre possible pour garantir l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue native doit être considéré comme la source faisant foi. Pour des informations critiques, une traduction humaine professionnelle est recommandée. Nous déclinons toute responsabilité en cas de malentendus ou de mauvaises interprétations résultant de l'utilisation de cette traduction.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

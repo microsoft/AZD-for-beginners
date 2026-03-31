@@ -118,7 +118,7 @@
 
 
 !!! quote "BY THE END OF THIS LAB YOU SHOULD HAVE"
-    - [ ] Defined your scenario requirements
+    - [ ] Defind your scenario requirements
     - [ ] Customized env variables (config)
     - [ ] Customized agent instructions (task)
     - [ ] Deployed the customized template (app)
@@ -466,5 +466,5 @@ This example demonstrates how the AZD template can be extended and customized fo
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

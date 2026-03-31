@@ -1,18 +1,20 @@
-# Chapitre 8 : Modèles de production et d'entreprise
+# Chapitre 8 : Modèles de Production et d’Entreprise
 
-**📚 Cours**: [AZD For Beginners](../../README.md) | **⏱️ Durée**: 2-3 heures | **⭐ Complexité**: Avancé
+**📚 Cours** : [AZD Pour Débutants](../../README.md) | **⏱️ Durée** : 2-3 heures | **⭐ Complexité** : Avancé
 
 ---
 
 ## Aperçu
 
-Ce chapitre couvre les modèles de déploiement prêts pour l'entreprise, le durcissement de la sécurité, la surveillance et l'optimisation des coûts pour les charges de travail IA en production.
+Ce chapitre couvre les modèles de déploiement prêts pour l’entreprise, le renforcement de la sécurité, la surveillance et l’optimisation des coûts pour les charges de travail IA en production.
 
-## Objectifs d'apprentissage
+> Validé avec `azd 1.23.12` en mars 2026.
 
-En terminant ce chapitre, vous pourrez :
+## Objectifs d’apprentissage
+
+En complétant ce chapitre, vous allez :
 - Déployer des applications résilientes multi-régions
-- Implémenter des modèles de sécurité d'entreprise
+- Mettre en œuvre des modèles de sécurité pour l’entreprise
 - Configurer une surveillance complète
 - Optimiser les coûts à grande échelle
 - Mettre en place des pipelines CI/CD avec AZD
@@ -22,42 +24,42 @@ En terminant ce chapitre, vous pourrez :
 ## 📚 Leçons
 
 | # | Leçon | Description | Durée |
-|---|--------|-------------|------|
-| 1 | [Pratiques d'IA en production](production-ai-practices.md) | Modèles de déploiement en entreprise | 90 min |
+|---|--------|-------------|-------|
+| 1 | [Pratiques IA en Production](production-ai-practices.md) | Modèles de déploiement pour l’entreprise | 90 min |
 
 ---
 
-## 🚀 Liste de contrôle de production
+## 🚀 Liste de Contrôle Production
 
 - [ ] Déploiement multi-régions pour la résilience
-- [ ] Identité gérée pour l'authentification (sans clés)
+- [ ] Identité managée pour l’authentification (sans clés)
 - [ ] Application Insights pour la surveillance
 - [ ] Budgets de coûts et alertes configurés
 - [ ] Analyse de sécurité activée
-- [ ] Intégration de pipelines CI/CD
+- [ ] Intégration du pipeline CI/CD
 - [ ] Plan de reprise après sinistre
 
 ---
 
-## 🏗️ Modèles d'architecture
+## 🏗️ Modèles d’Architecture
 
-### Modèle 1 : IA en microservices
+### Modèle 1 : IA Microservices
 
 ```mermaid
 graph LR
-    Gateway[Passerelle API] --> AI[Service d'IA] --> Models[Modèles Microsoft Foundry]
-    Gateway --> Auth[Service d'authentification]
-    AI --> Data[Stockage de données]
+    Gateway[Passerelle API] --> AI[Service IA] --> Models[Modèles Microsoft Foundry]
+    Gateway --> Auth[Service d'Authentification]
+    AI --> Data[Magasin de Données]
 ```
-### Modèle 2 : IA pilotée par les événements
+### Modèle 2 : IA Événementielle
 
 ```mermaid
 graph LR
-    EventGrid[Grille d'événements] --> Functions[Fonctions] --> Pipeline[Pipeline IA]
+    EventGrid[Grille d'Événements] --> Functions[Fonctions] --> Pipeline[Pipeline IA]
 ```
 ---
 
-## 🔐 Meilleures pratiques de sécurité
+## 🔐 Meilleures Pratiques de Sécurité
 
 ```bicep
 // Use managed identity
@@ -76,14 +78,14 @@ properties: {
 
 ---
 
-## 💰 Optimisation des coûts
+## 💰 Optimisation des Coûts
 
 | Stratégie | Économies |
-|----------|---------|
-| Mise à l'échelle à zéro (Container Apps) | 60-80% |
-| Utiliser des niveaux de consommation pour l'environnement de dev | 50-70% |
-| Mise à l'échelle programmée | 30-50% |
-| Capacité réservée | 20-40% |
+|-----------|-----------|
+| Mise à l’échelle à zéro (Container Apps) | 60-80 % |
+| Utiliser les niveaux consommation pour dev | 50-70 % |
+| Mise à l’échelle planifiée | 30-50 % |
+| Capacité réservée | 20-40 % |
 
 ```bash
 # Définir des alertes budgétaires
@@ -96,16 +98,16 @@ az consumption budget create \
 
 ---
 
-## 📊 Configuration de la surveillance
+## 📊 Configuration de la Surveillance
 
 ```bash
-# Afficher les journaux en continu
+# Flux de journaux
 azd monitor --logs
 
-# Consulter Application Insights
-azd monitor
+# Vérifier Application Insights
+azd monitor --overview
 
-# Afficher les métriques
+# Voir les métriques
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -114,22 +116,22 @@ az monitor metrics list --resource <resource-id>
 ## 🔗 Navigation
 
 | Direction | Chapitre |
-|-----------|---------|
+|-----------|----------|
 | **Précédent** | [Chapitre 7 : Dépannage](../chapter-07-troubleshooting/README.md) |
-| **Cours terminé** | [Accueil du cours](../../README.md) |
+| **Cours Terminé** | [Accueil du Cours](../../README.md) |
 
 ---
 
-## 📖 Ressources connexes
+## 📖 Ressources Associées
 
-- [Guide des agents IA](../chapter-02-ai-development/agents.md)
+- [Guide des Agents IA](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Solutions multi-agents](../chapter-05-multi-agent/README.md)
-- [Exemple de microservices](../../examples/microservices/README.md)
+- [Solutions Multi-Agents](../chapter-05-multi-agent/README.md)
+- [Exemple Microservices](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Clause de non-responsabilité :
-Ce document a été traduit à l'aide du service de traduction automatique Co-op Translator (https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant foi. Pour les informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un traducteur humain. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+**Avertissement** :  
+Ce document a été traduit à l’aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous fassions tout notre possible pour garantir l’exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des imprécisions. Le document original dans sa langue d’origine doit être considéré comme la source faisant foi. Pour les informations critiques, une traduction professionnelle réalisée par un humain est recommandée. Nous ne pouvons être tenus responsables des malentendus ou interprétations erronées résultant de l’utilisation de cette traduction.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

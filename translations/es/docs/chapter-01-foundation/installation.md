@@ -1,57 +1,57 @@
-# Guía de Instalación y Configuración
+# Guía de instalación y configuración
 
-**Navegación del Capítulo:**
-- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
-- **📖 Capítulo Actual**: Capítulo 1 - Fundamentos y Comienzo Rápido
-- **⬅️ Anterior**: [Conceptos Básicos de AZD](azd-basics.md)
-- **➡️ Siguiente**: [Tu Primer Proyecto](first-project.md)
-- **🚀 Próximo Capítulo**: [Capítulo 2: Desarrollo con IA Primero](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Navegación del capítulo:**
+- **📚 Inicio del curso**: [AZD para principiantes](../../README.md)
+- **📖 Capítulo actual**: Capítulo 1 - Fundamentos y inicio rápido
+- **⬅️ Anterior**: [Conceptos básicos de AZD](azd-basics.md)
+- **➡️ Siguiente**: [Tu primer proyecto](first-project.md)
+- **🚀 Siguiente capítulo**: [Capítulo 2: Desarrollo centrado en IA](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Introducción
 
-Esta guía completa te guiará a través de la instalación y configuración de Azure Developer CLI (azd) en tu sistema. Aprenderás múltiples métodos de instalación para diferentes sistemas operativos, configuración de autenticación y configuración inicial para preparar tu entorno de desarrollo para despliegues en Azure.
+Esta guía completa te guiará a través de la instalación y configuración de Azure Developer CLI (azd) en tu sistema. Aprenderás múltiples métodos de instalación para diferentes sistemas operativos, la configuración de autenticación y la configuración inicial para preparar tu entorno de desarrollo para implementaciones en Azure.
 
-## Objetivos de Aprendizaje
+## Objetivos de aprendizaje
 
 Al final de esta lección, podrás:
-- Instalar correctamente Azure Developer CLI en tu sistema operativo
-- Configurar la autenticación con Azure usando varios métodos
+- Instalar con éxito Azure Developer CLI en tu sistema operativo
+- Configurar la autenticación con Azure usando múltiples métodos
 - Configurar tu entorno de desarrollo con los prerequisitos necesarios
 - Entender las diferentes opciones de instalación y cuándo usar cada una
-- Solucionar problemas comunes de instalación y configuración
+- Resolver problemas comunes de instalación y configuración
 
-## Resultados de Aprendizaje
+## Resultados de aprendizaje
 
-Después de completar esta lección, serás capaz de:
-- Instalar azd utilizando el método apropiado para tu plataforma
+Después de completar esta lección, podrás:
+- Instalar azd usando el método apropiado para tu plataforma
 - Autenticarte con Azure usando azd auth login
-- Verificar la instalación y probar comandos básicos de azd
+- Verificar tu instalación y probar comandos básicos de azd
 - Configurar tu entorno de desarrollo para un uso óptimo de azd
 - Resolver problemas comunes de instalación de forma independiente
 
-Esta guía te ayudará a instalar y configurar Azure Developer CLI en tu sistema, sin importar tu sistema operativo o entorno de desarrollo.
+Esta guía te ayudará a instalar y configurar Azure Developer CLI en tu sistema, independientemente de tu sistema operativo o entorno de desarrollo.
 
 ## Prerrequisitos
 
 Antes de instalar azd, asegúrate de tener:
-- **Suscripción a Azure** - [Crea una cuenta gratuita](https://azure.microsoft.com/free/)
+- **Suscripción de Azure** - [Crear una cuenta gratuita](https://azure.microsoft.com/free/)
 - **Azure CLI** - Para autenticación y gestión de recursos
 - **Git** - Para clonar plantillas y control de versiones
 - **Docker** (opcional) - Para aplicaciones en contenedores
 
-## Métodos de Instalación
+## Métodos de instalación
 
 ### Windows
 
-#### Opción 1: PowerShell (Recomendado)
-```powershell
-# Ejecutar como administrador o con privilegios elevados
-powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
+#### Opción 1: Windows Package Manager (recomendado)
+```cmd
+winget install microsoft.azd
 ```
 
-#### Opción 2: Windows Package Manager (winget)
-```cmd
-winget install Microsoft.Azd
+#### Opción 2: Script de instalación de PowerShell
+```powershell
+# Útil cuando winget no está disponible
+powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
 #### Opción 3: Chocolatey
@@ -59,25 +59,25 @@ winget install Microsoft.Azd
 choco install azd
 ```
 
-#### Opción 4: Instalación Manual
+#### Opción 4: Instalación manual
 1. Descarga la última versión desde [GitHub](https://github.com/Azure/azure-dev/releases)
 2. Extrae a `C:\Program Files\azd\`
-3. Añade a la variable de entorno PATH
+3. Agrégalo a la variable de entorno PATH
 
 ### macOS
 
-#### Opción 1: Homebrew (Recomendado)
+#### Opción 1: Homebrew (recomendado)
 ```bash
 brew tap azure/azd
 brew install azd
 ```
 
-#### Opción 2: Script de Instalación
+#### Opción 2: Script de instalación
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Opción 3: Instalación Manual
+#### Opción 3: Instalación manual
 ```bash
 # Descargar e instalar
 curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.com/Azure/azure-dev/releases/latest/download --verbose
@@ -85,34 +85,29 @@ curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.
 
 ### Linux
 
-#### Opción 1: Script de Instalación (Recomendado)
+#### Opción 1: Script de instalación (recomendado)
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Opción 2: Gestores de Paquetes
+#### Opción 2: Gestores de paquetes
 
-**Ubuntu/Debian:**
+**Instalación manual desde los archivos de la versión:**
 ```bash
-# Agregar el repositorio de paquetes de Microsoft
-curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-
-# Instalar azd
-sudo apt-get update
-sudo apt-get install azd
-```
-
-**RHEL/CentOS/Fedora:**
-```bash
-# Agregar repositorio de paquetes de Microsoft
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-sudo dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/azure-cli
-sudo dnf install azd
+# Descargue el último archivo para su arquitectura de Linux desde:
+# https://github.com/Azure/azure-dev/releases
+# Luego extráigalo y agregue el binario azd a su PATH.
 ```
 
 ### GitHub Codespaces
 
-azd viene preinstalado en GitHub Codespaces. Simplemente crea un codespace y comienza a usar azd inmediatamente.
+Algunos Codespaces y entornos de contenedores de desarrollo ya incluyen `azd`, pero deberías verificarlo en lugar de asumirlo:
+
+```bash
+azd version
+```
+
+Si falta `azd`, instálalo con el script estándar para el entorno.
 
 ### Docker
 
@@ -120,11 +115,11 @@ azd viene preinstalado en GitHub Codespaces. Simplemente crea un codespace y com
 # Ejecutar azd en un contenedor
 docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest
 
-# Crear un alias para un uso más sencillo
+# Crear un alias para facilitar su uso
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-## ✅ Verificar Instalación
+## ✅ Verificar la instalación
 
 Después de la instalación, verifica que azd funcione correctamente:
 
@@ -144,51 +139,84 @@ Salida esperada:
 azd version 1.x.x (commit xxxxxx)
 ```
 
-**Nota**: El número de versión real variará. Consulta [lanzamientos de Azure Developer CLI](https://github.com/Azure/azure-dev/releases) para la versión más reciente.
+**Nota**: El número de versión real variará. Consulta [Azure Developer CLI releases](https://github.com/Azure/azure-dev/releases) para la última versión.
 
-**✅ Lista de Verificación de Instalación Exitosa:**
+**✅ Lista de comprobación de instalación exitosa:**
 - [ ] `azd version` muestra el número de versión sin errores
 - [ ] `azd --help` muestra la documentación de comandos
 - [ ] `azd template list` muestra las plantillas disponibles
-- [ ] `az account show` muestra tu suscripción de Azure
-- [ ] Puedes crear un directorio de prueba y ejecutar `azd init` correctamente
+- [ ] Puedes crear un directorio de prueba y ejecutar `azd init` con éxito
 
-**Si todas las comprobaciones funcionan, ¡estás listo para continuar a [Tu Primer Proyecto](first-project.md)!**
+**Si todas las comprobaciones pasan, ¡estás listo para continuar con [Tu primer proyecto](first-project.md)!**
 
-## Configuración de Autenticación
+## Configuración de autenticación
 
-### Autenticación con Azure CLI (Recomendado)
+### Configuración recomendada para principiantes
+
+Para flujos de trabajo centrados en AZD, inicia sesión con `azd auth login`.
+
 ```bash
-# Instalar Azure CLI si no está instalado
+# Requerido para comandos de AZD como azd up
+azd auth login
+
+# Verificar el estado de autenticación de AZD
+azd auth login --check-status
+```
+
+Usa el inicio de sesión de Azure CLI solo cuando planees ejecutar comandos `az` tú mismo durante el curso.
+
+### Autenticación con Azure CLI (opcional)
+```bash
+# Instale la CLI de Azure si aún no está instalada
 # Windows: winget install Microsoft.AzureCLI
 # macOS: brew install azure-cli
-# Linux: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+# Linux: consulte la documentación de instalación de la CLI de Azure para su distribución
 
-# Iniciar sesión en Azure
+# Inicie sesión en Azure
 az login
 
-# Verificar autenticación
+# Verifique la autenticación
 az account show
 ```
 
-### Autenticación con Código de Dispositivo
-Si estás en un sistema sin interfaz gráfica o con problemas de navegador:
+### ¿Qué flujo de inicio de sesión debes usar?
+
+- Usa `azd auth login` si sigues la ruta para principiantes de AZD y ejecutas principalmente comandos `azd`.
+- Usa `az login` también cuando quieras ejecutar comandos de Azure CLI como `az account show` o inspeccionar recursos directamente.
+- Si un ejercicio incluye comandos `azd` y `az`, ejecuta ambos comandos de inicio de sesión una vez al principio.
+
+### Autenticación por código de dispositivo
+Si estás en un sistema sin interfaz gráfica o tienes problemas con el navegador:
 ```bash
-az login --use-device-code
+azd auth login --use-device-code
 ```
 
-### Principal de Servicio (CI/CD)
+### Principal de servicio (CI/CD)
 Para entornos automatizados:
 ```bash
-az login --service-principal \
-  --username <client-id> \
-  --password <client-secret> \
-  --tenant <tenant-id>
+azd auth login \
+  --client-id <client-id> \
+  --client-secret <client-secret> \
+  --tenant-id <tenant-id>
+```
+
+### Valida tu configuración completa
+
+Si quieres una verificación rápida de preparación antes de comenzar el Capítulo 1:
+
+**Windows:**
+```powershell
+.\validate-setup.ps1
+```
+
+**macOS / Linux:**
+```bash
+bash ./validate-setup.sh
 ```
 
 ## Configuración
 
-### Configuración Global
+### Configuración global
 ```bash
 # Establecer suscripción predeterminada
 azd config set defaults.subscription <subscription-id>
@@ -197,10 +225,10 @@ azd config set defaults.subscription <subscription-id>
 azd config set defaults.location eastus2
 
 # Ver toda la configuración
-azd config list
+azd config show
 ```
 
-### Variables de Entorno
+### Variables de entorno
 Añade a tu perfil de shell (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
 # Configuración de Azure
@@ -209,10 +237,10 @@ export AZURE_LOCATION="eastus2"
 
 # Configuración de azd
 export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
-export AZD_DEBUG=true  # Habilitar registro de depuración
+export AZD_DEBUG=true  # Habilitar el registro de depuración
 ```
 
-## Integración con IDE
+## Integración con el IDE
 
 ### Visual Studio Code
 Instala la extensión Azure Developer CLI:
@@ -221,14 +249,14 @@ Instala la extensión Azure Developer CLI:
 3. Busca "Azure Developer CLI"
 4. Instala la extensión
 
-Características:
+Funciones:
 - IntelliSense para azure.yaml
-- Comandos integrados en terminal
-- Navegación de plantillas
-- Monitoreo de despliegues
+- Comandos integrados en el terminal
+- Exploración de plantillas
+- Monitorización de despliegues
 
 ### GitHub Codespaces
-Crea un archivo `.devcontainer/devcontainer.json`:
+Crea un `.devcontainer/devcontainer.json`:
 ```json
 {
   "name": "Azure Developer CLI",
@@ -243,15 +271,15 @@ Crea un archivo `.devcontainer/devcontainer.json`:
 ### IntelliJ/JetBrains
 1. Instala el plugin de Azure
 2. Configura las credenciales de Azure
-3. Usa la terminal integrada para comandos azd
+3. Usa el terminal integrado para comandos azd
 
-## 🐛 Solución de Problemas de Instalación
+## 🐛 Solución de problemas de instalación
 
-### Problemas Comunes
+### Problemas comunes
 
-#### Permiso Denegado (Windows)
+#### Permiso denegado (Windows)
 ```powershell
-# Ejecutar PowerShell como Administrador
+# Ejecute PowerShell como administrador
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
@@ -269,53 +297,53 @@ echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-#### Problemas de Red/Proxy
+#### Problemas de red/proxy
 ```bash
 # Configurar proxy
 azd config set http.proxy http://proxy:8080
 azd config set https.proxy https://proxy:8080
 
-# Omitir verificación SSL (no recomendado para producción)
+# Omitir la verificación SSL (no recomendado en producción)
 azd config set http.insecure true
 ```
 
-#### Conflictos de Versión
+#### Conflictos de versión
 ```bash
 # Eliminar instalaciones antiguas
-# Windows: winget uninstall Microsoft.Azd
+# Windows: winget uninstall microsoft.azd
 # macOS: brew uninstall azd
-# Linux: sudo apt remove azd
+# Linux: eliminar el binario azd anterior o el enlace simbólico antes de reinstalar
 
-# Limpiar configuración
+# Limpiar la configuración
 rm -rf ~/.azd
 ```
 
-### Obtener Más Ayuda
+### Obtener más ayuda
 ```bash
-# Habilitar registro de depuración
+# Habilitar el registro de depuración
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Ver configuración actual
-azd config list
+# Ver la configuración actual
+azd config show
 
-# Ver estado actual de la implementación
+# Ver el estado actual del despliegue
 azd show
 ```
 
-## Actualización de azd
+## Actualizar azd
 
-### Actualizaciones Automáticas
-azd te notificará cuando haya actualizaciones disponibles:
+### Comprobación de actualizaciones
+azd avisa cuando hay una nueva versión disponible, y puedes confirmar tu compilación actual con:
 ```bash
-azd version --check-for-updates
+azd version
 ```
 
-### Actualizaciones Manuales
+### Actualizaciones manuales
 
 **Windows (winget):**
 ```cmd
-winget upgrade Microsoft.Azd
+winget upgrade microsoft.azd
 ```
 
 **macOS (Homebrew):**
@@ -328,39 +356,39 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-## 💡 Preguntas Frecuentes
+## 💡 Preguntas frecuentes
 
 <details>
-<summary><strong>¿Cuál es la diferencia entre azd y az CLI?</strong></summary>
+<summary><strong>¿Cuál es la diferencia entre azd y Azure CLI (az)?</strong></summary>
 
 **Azure CLI (az)**: Herramienta de bajo nivel para gestionar recursos individuales de Azure
 - `az webapp create`, `az storage account create`
 - Un recurso a la vez
-- Enfoque en gestión de infraestructura
+- Enfoque en la gestión de infraestructura
 
-**Azure Developer CLI (azd)**: Herramienta de alto nivel para despliegues completos de aplicaciones
+**Azure Developer CLI (azd)**: Herramienta de alto nivel para implementaciones completas de aplicaciones
 - `azd up` despliega toda la aplicación con todos los recursos
 - Flujos de trabajo basados en plantillas
-- Enfoque en productividad del desarrollador
+- Enfoque en la productividad del desarrollador
 
-**Necesitas ambos**: azd usa az CLI para la autenticación
+**Necesitas ambos**: azd usa Azure CLI (az) para la autenticación
 </details>
 
 <details>
-<summary><strong>¿Puedo usar azd con recursos de Azure existentes?</strong></summary>
+<summary><strong>¿Puedo usar azd con recursos existentes de Azure?</strong></summary>
 
 ¡Sí! Puedes:
 1. Importar recursos existentes a entornos azd
 2. Referenciar recursos existentes en tus plantillas Bicep
-3. Usar azd para nuevos despliegues junto con infraestructura existente
+3. Usar azd para nuevas implementaciones junto con la infraestructura existente
 
-Consulta la [Guía de Configuración](configuration.md) para más detalles.
+Consulta la [Guía de configuración](configuration.md) para más detalles.
 </details>
 
 <details>
 <summary><strong>¿Funciona azd con Azure Government o Azure China?</strong></summary>
 
-Sí, configura el cloud:
+Sí, configura la nube:
 ```bash
 # Azure Gobierno
 az cloud set --name AzureUSGovernment
@@ -373,7 +401,7 @@ az login
 </details>
 
 <details>
-<summary><strong>¿Puedo usar azd en pipelines CI/CD?</strong></summary>
+<summary><strong>¿Puedo usar azd en pipelines de CI/CD?</strong></summary>
 
 ¡Absolutamente! azd está diseñado para la automatización:
 - Integración con GitHub Actions
@@ -381,49 +409,49 @@ az login
 - Autenticación con principal de servicio
 - Modo no interactivo
 
-Consulta la [Guía de Despliegue](../chapter-04-infrastructure/deployment-guide.md) para patrones CI/CD.
+Consulta la [Guía de despliegue](../chapter-04-infrastructure/deployment-guide.md) para patrones de CI/CD.
 </details>
 
 <details>
 <summary><strong>¿Cuál es el costo de usar azd?</strong></summary>
 
 azd en sí es **completamente gratuito** y de código abierto. Solo pagas por:
-- Recursos de Azure que despliegues
+- Los recursos de Azure que despliegues
 - Costos de consumo de Azure (cómputo, almacenamiento, etc.)
 
 Usa `azd provision --preview` para estimar costos antes del despliegue.
 </details>
 
-## Próximos Pasos
+## Próximos pasos
 
 1. **Completa la autenticación**: Asegúrate de poder acceder a tu suscripción de Azure
-2. **Prueba tu primer despliegue**: Sigue la [Guía del Primer Proyecto](first-project.md)
-3. **Explora plantillas**: Navega las plantillas disponibles con `azd template list`
+2. **Prueba tu primer despliegue**: Sigue la [Guía del primer proyecto](first-project.md)
+3. **Explora plantillas**: Examina las plantillas disponibles con `azd template list`
 4. **Configura tu IDE**: Prepara tu entorno de desarrollo
 
 ## Soporte
 
 Si encuentras problemas:
-- [Documentación Oficial](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Reportar Problemas](https://github.com/Azure/azure-dev/issues)
-- [Discusiones Comunitarias](https://github.com/Azure/azure-dev/discussions)
-- [Soporte Azure](https://azure.microsoft.com/support/)
-- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Obtén ayuda con comandos Azure directamente en tu editor con `npx skills add microsoft/github-copilot-for-azure`
+- [Documentación oficial](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Reportar problemas](https://github.com/Azure/azure-dev/issues)
+- [Discusiones de la comunidad](https://github.com/Azure/azure-dev/discussions)
+- [Soporte de Azure](https://azure.microsoft.com/support/)
+- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Obtén orientación de comandos de Azure directamente en tu editor con `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Navegación del Capítulo:**
-- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
-- **📖 Capítulo Actual**: Capítulo 1 - Fundamentos y Comienzo Rápido
-- **⬅️ Anterior**: [Conceptos Básicos de AZD](azd-basics.md) 
-- **➡️ Siguiente**: [Tu Primer Proyecto](first-project.md)
-- **🚀 Próximo Capítulo**: [Capítulo 2: Desarrollo con IA Primero](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Navegación del capítulo:**
+- **📚 Inicio del curso**: [AZD para principiantes](../../README.md)
+- **📖 Capítulo actual**: Capítulo 1 - Fundamentos y inicio rápido
+- **⬅️ Anterior**: [Conceptos básicos de AZD](azd-basics.md) 
+- **➡️ Siguiente**: [Tu primer proyecto](first-project.md)
+- **🚀 Siguiente capítulo**: [Capítulo 2: Desarrollo centrado en IA](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**✅ ¡Instalación Completa!** Continúa a [Tu Primer Proyecto](first-project.md) para comenzar a construir con azd.
+**✅ ¡Instalación completa!** Continúa con [Tu primer proyecto](first-project.md) para comenzar a construir con azd.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Aviso legal**:
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la exactitud, tenga en cuenta que las traducciones automáticas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables por malentendidos o interpretaciones erróneas derivados del uso de esta traducción.
+**Descargo de responsabilidad**:
+Este documento ha sido traducido utilizando el servicio de traducción automática por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la exactitud, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por traductores humanos. No nos hacemos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

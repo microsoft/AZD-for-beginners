@@ -11,14 +11,14 @@ This comprehensive troubleshooting guide addresses common issues when deploying 
 
 ## Table of Contents
 
-- [Microsoft Foundry Models Service Issues](../../../../docs/chapter-07-troubleshooting)
-- [Azure AI Search Problems](../../../../docs/chapter-07-troubleshooting)
-- [Container Apps Deployment Issues](../../../../docs/chapter-07-troubleshooting)
-- [Authentication and Permission Errors](../../../../docs/chapter-07-troubleshooting)
-- [Model Deployment Failures](../../../../docs/chapter-07-troubleshooting)
-- [Performance and Scaling Issues](../../../../docs/chapter-07-troubleshooting)
-- [Cost and Quota Management](../../../../docs/chapter-07-troubleshooting)
-- [Debugging Tools and Techniques](../../../../docs/chapter-07-troubleshooting)
+- [Microsoft Foundry Models Service Issues](#azure-openai-service-issues)
+- [Azure AI Search Problems](#azure-ai-search-problems)
+- [Container Apps Deployment Issues](#container-apps-deployment-issues)
+- [Authentication and Permission Errors](#authentication-and-permission-errors)
+- [Model Deployment Failures](#model-deployment-failures)
+- [Performance and Scaling Issues](#performance-and-scaling-issues)
+- [Cost and Quota Management](#cost-and-quota-management)
+- [Debugging Tools and Techniques](#debugging-tools-and-techniques)
 
 ## Microsoft Foundry Models Service Issues
 
@@ -479,8 +479,8 @@ param primaryModel object = {
 
 @description('Fallback model configuration')
 param fallbackModel object = {
-  name: 'gpt-35-turbo'
-  version: '0125'
+  name: 'gpt-4.1'
+  version: '2024-08-06'
 }
 
 // Try primary model first, fallback if unavailable
@@ -709,18 +709,15 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 3. **Optimize Model Selection:**
 ```python
 # Cost-aware model selection
-MODEL_COSTS = {
-    'gpt-4.1-mini': 0.00015,  # per 1K tokens
-    'gpt-4.1': 0.03,          # per 1K tokens
-    'gpt-35-turbo': 0.0015  # per 1K tokens
+MODEL_COST_TIERS = {
+  'gpt-4.1-mini': 'low',
+  'gpt-4.1': 'high'
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
     """Select model based on complexity and budget."""
     if complexity == 'simple' or budget_remaining < 10:
         return 'gpt-4.1-mini'
-    elif complexity == 'medium':
-        return 'gpt-35-turbo'
     else:
         return 'gpt-4.1'
 ```
@@ -889,6 +886,6 @@ def monitor_performance(func):
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:  
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please note that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, a professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
