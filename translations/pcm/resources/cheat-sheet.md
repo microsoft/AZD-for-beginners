@@ -1,6 +1,6 @@
-# Command Cheat Sheet - Di Main AZD Commands
+# Command Cheat Sheet - Di Important AZD Commands
 
-**Quick Reference for All Chapters**
+**Quick Reference Wey Cover All Chapters**
 - **📚 Course Home**: [AZD For Beginners](../README.md)
 - **📖 Quick Start**: [Chapter 1: Foundation & Quick Start](../README.md#-chapter-1-foundation--quick-start)
 - **🤖 AI Commands**: [Chapter 2: AI-First Development](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
@@ -8,36 +8,36 @@
 
 ## Introduction
 
-This comprehensive cheat sheet provides quick reference for the most commonly used Azure Developer CLI commands, organized by category with practical examples. Perfect for quick lookups during development, troubleshooting, and daily operations with azd projects.
+Dis complete cheat sheet dey give quick reference for di commands wey people dey use pass for Azure Developer CLI. Dem organize am by category and put practical examples. E perfect for quick lookups during development, troubleshooting, and everyday operations with azd projects.
 
 ## Learning Goals
 
-By using this cheat sheet, you will:
-- Get quick access to the important Azure Developer CLI commands and syntax
-- Understand how commands dem dey organized by function and use case
-- See practical examples for common development and deployment waka
-- Find troubleshooting commands wey go help quick solve wahala
-- Discover advanced configuration and customization options sharp-sharp
-- Manage environment dem and multi-environment workflow easier
+By using dis cheat sheet, you go:
+- Get instant access to di important Azure Developer CLI commands and di syntax
+- Understand how commands dey organized by functional categories and use cases
+- Get practical examples for common development and deployment scenarios
+- Access troubleshooting commands to quickly fix wahala
+- Find advanced configuration and customization options fast
+- Locate environment management and multi-environment workflow commands
 
 ## Learning Outcomes
 
-With regular reference to this cheat sheet, you will be able to:
-- Run azd commands with confidence without dey check full documentation every time
-- Quickly clear common problems using the right diagnostic commands
+If you dey use dis cheat sheet regular, you go fit:
+- Run azd commands with confidence without dey always check full documentation
+- Quickly solve common problems using correct diagnostic commands
 - Manage multiple environments and deployment scenarios well
-- Use advanced azd features and configuration options when you need am
-- Troubleshoot deployment gbege via systematic command steps
-- Make your workflow better using azd shortcuts and options
+- Apply advanced azd features and configuration options when you need am
+- Troubleshoot deployment issues with systematic command steps
+- Make your workflow better by using azd shortcuts and options well
 
 ## Getting Started Commands
 
 ### Authentication
 ```bash
-# Log in go Azure wit AZD
+# Sign in to Azure wit AZD
 azd auth login
 
-# Log in go Azure CLI (AZD dey use am for background)
+# Sign in to Azure CLI (AZD dey use am behind di scenes)
 az login
 
 # Check di current account
@@ -56,17 +56,17 @@ az logout
 
 ### Project Initialization
 ```bash
-# Browse di templates wey dey
+# See all di templates wey dey
 azd template list
 
-# Start from di template
+# Set up from di template
 azd init --template todo-nodejs-mongo
 azd init --template <template-name>
 
-# Start inside di current folder
+# Set up inside dis current folder
 azd init .
 
-# Start wit di name wey you choose
+# Set up wit custom name
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
@@ -74,13 +74,13 @@ azd init --template todo-nodejs-mongo my-awesome-app
 
 ### Complete Deployment Workflow
 ```bash
-# Deploy everytin (provision + deploy)
+# Deploy evritin (set up + deploy)
 azd up
 
-# Deploy wey confirmation prompts don disable
+# Deploy wey no go ask you to confirm
 azd up --confirm-with-no-prompt
 
-# Deploy go specific environment
+# Deploy go one particular environment
 azd up --environment production
 
 # Deploy wit custom parameters
@@ -89,21 +89,21 @@ azd up --parameter location=westus2
 
 ### Infrastructure Only
 ```bash
-# Make Azure resources ready
+# Make Azure resources
 azd provision
 
 # 🧪 See wetin go change for infrastructure
 azd provision --preview
-# E dey show test-run view of which resources dem go create, modify or delete
-# Like 'terraform plan' or 'bicep what-if' - e safe to run, no changes go apply
+# E dey show dry-run view of wetin resources dem go be created, changed or deleted
+# E be like 'terraform plan' or 'bicep what-if' - e safe to run, no changes go apply
 ```
 
 ### Application Only
 ```bash
-# Deploy di app code
+# Deploy di application code
 azd deploy
 
-# Deploy di service wey you want
+# Deploy di particular service
 azd deploy --service web
 azd deploy --service api
 
@@ -113,10 +113,10 @@ azd deploy --all
 
 ### Build and Package
 ```bash
-# Make app dem
+# Make apps dem
 azd package
 
-# Make di specific service
+# Make dat specific service
 azd package --service api
 ```
 
@@ -134,10 +134,10 @@ azd env new staging --location westus2
 # Choose environment
 azd env select production
 
-# Show di current environment
-azd env show
+# Show environment dem wey dey available
+azd env list
 
-# Refresh di environment state
+# Refresh how environment dey
 azd env refresh
 ```
 
@@ -150,7 +150,7 @@ azd env set DEBUG true
 # Get di environment variable
 azd env get API_KEY
 
-# Show all di environment variables
+# Make list of all di environment variables
 azd env get-values
 
 # Comot di environment variable
@@ -161,14 +161,14 @@ azd env unset DEBUG
 
 ### Global Configuration
 ```bash
-# List all di configuration dem
-azd config list
+# Show all configuration dem
+azd config show
 
 # Set di global defaults
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Remove di configuration
+# Comot di configuration
 azd config unset defaults.location
 
 # Reset all di configuration dem
@@ -177,13 +177,13 @@ azd config reset
 
 ### Project Configuration
 ```bash
-# Check say azure.yaml dey correct
+# Confirm say azure.yaml dey valid
 azd config validate
 
-# Show di project info
+# Make e show project info
 azd show
 
-# Find di service endpoints
+# Get di service endpoints
 azd show --output json
 ```
 
@@ -206,22 +206,22 @@ azd monitor --overview
 
 ### Viewing Container Logs
 ```bash
-# See logs with Azure CLI (for Container Apps)
+# See logs wit Azure CLI (for Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
-# Follow di logs as dem dey happen
+# Follow logs as dem dey happen
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# See logs from Azure Portal
+# See logs from inside Azure Portal
 azd monitor --logs
 ```
 
 ### Log Analytics Queries
 ```bash
-# Open Log Analytics through di Azure Portal
+# Go open Log Analytics for Azure Portal
 azd monitor --logs
 
-# Use Azure CLI to query di logs
+# Run queries on logs wit Azure CLI
 az monitor log-analytics query \
   --workspace <workspace-id> \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
@@ -231,16 +231,16 @@ az monitor log-analytics query \
 
 ### Cleanup
 ```bash
-# Comot all Azure resources
+# Comot all Azure resources dem
 azd down
 
-# Comot by force, no confirmation
+# Force delete no need confirm
 azd down --force
 
-# Comot finish all resources wey dem soft-delete
+# Comot finish all resource dem wey dem soft-delete
 azd down --purge
 
-# Finish di cleanup
+# Cleanup don finish
 azd down --force --purge
 ```
 
@@ -253,7 +253,7 @@ azd version
 azd version
 
 # See di current configuration
-azd config list
+azd config show
 ```
 
 ## 🔧 Advanced Commands
@@ -266,23 +266,23 @@ azd pipeline config
 # Make Azure DevOps ready
 azd pipeline config --provider azdo
 
-# Show di pipeline configuration
+# Show how di pipeline dey set
 azd pipeline show
 ```
 
 ### Infrastructure Management
 ```bash
-# Make infrastructure templates
+# Make infrastructure template dem
 azd infra generate
 
-# 🧪 Preview & plan how infrastructure go be
+# 🧪 Preview and planning for infrastructure
 azd provision --preview
-# E dey simulate infrastructure provisioning but e no dey deploy anything
-# E dey analyze Bicep/Terraform templates and go show:
+# E dey simulate infrastructure provisioning without deploying
+# E dey analyze Bicep/Terraform template dem and show:
 # - Resources wey dem go add (green +)
 # - Resources wey dem go change (yellow ~)
 # - Resources wey dem go delete (red -)
-# Safe to run - e no go make any real changes for Azure environment
+# E safe to run - no real change go happen for Azure environment
 
 # Make infrastructure from azure.yaml
 azd infra synth
@@ -290,13 +290,13 @@ azd infra synth
 
 ### Project Information
 ```bash
-# Show di project status and endpoints dem
+# Make e show how project dey and di endpoints
 azd show
 
-# Show di full project info as JSON
+# Make e show di detailed project info as JSON
 azd show --output json
 
-# Get di service endpoints dem
+# Make e get di service endpoints
 azd show --output json | jq '.services'
 ```
 
@@ -304,7 +304,7 @@ azd show --output json | jq '.services'
 
 ### AZD Extensions
 ```bash
-# Make list of all di extensions wey dey (including AI)
+# List all extensions wey dey available (including AI)
 azd extension list
 
 # Install di Foundry agents extension
@@ -322,16 +322,16 @@ azd extension upgrade --all
 
 ### AI Agent Commands
 ```bash
-# Make one agent project from di manifest
+# Start wan agent project from manifest
 azd ai agent init -m <manifest-path-or-uri>
 
-# Point am to one particular Foundry project
+# Target one specific Foundry project
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# Show where di agent source directory dey
+# Set which folder be the agent source
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
-# Pick where to host am
+# Pick where to host
 azd ai agent init -m agent-manifest.yaml --host containerapp
 ```
 
@@ -340,13 +340,13 @@ azd ai agent init -m agent-manifest.yaml --host containerapp
 # Start di MCP server for your project
 azd mcp start
 
-# Manage di tool consent wey MCP operations need
-azd mcp consent
+# Manage di tool permission for MCP operations
+azd copilot consent list
 ```
 
 ### Infrastructure Generation
 ```bash
-# Make IaC file dem from di project definition wey you don write
+# Make IaC files from di way wey you define your project
 azd infra generate
 
 # Make di infrastructure from azure.yaml
@@ -359,7 +359,7 @@ azd infra synth
 
 ### Development Workflow
 ```bash
-# Make we start di new project
+# Start new project
 azd init --template todo-nodejs-mongo
 cd my-project
 
@@ -367,7 +367,7 @@ cd my-project
 azd env new dev
 azd up
 
-# Change tins den deploy again
+# Make changes den deploy again
 azd deploy
 
 # Open di monitoring dashboard
@@ -376,7 +376,7 @@ azd monitor --live
 
 ### Multi-Environment Workflow
 ```bash
-# Prepare di environment dem
+# Make di environments ready
 azd env new dev
 azd env new staging  
 azd env new production
@@ -402,8 +402,8 @@ export AZD_DEBUG=true
 # Check how deployment dey
 azd show
 
-# Confirm say configuration correct
-azd config list
+# Check say configuration dey correct
+azd config show
 
 # Open monitoring dashboard make you fit see logs
 azd monitor --logs
@@ -416,29 +416,29 @@ azd show --output json
 
 ### Debug Information
 ```bash
-# Make debug output dey on
+# Turn on debug output
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Turn telemetry off so output go clean
+# Turn off telemetry so output go clean
 export AZD_DISABLE_TELEMETRY=true
 
-# Check how configuration dey now
-azd config list
+# Check di current configuration
+azd config show
 
-# Check if authentication don happen
+# Check di authentication status
 az account show
 ```
 
 ### Template Debugging
 ```bash
-# Show di templates wey dey available wit details
+# List di templates wey dey available wit details
 azd template list --output json
 
 # Show di template information
 azd template show <template-name>
 
-# Make sure say template correct before init
+# Check di template before init
 azd template validate <template-name>
 ```
 
@@ -446,25 +446,25 @@ azd template validate <template-name>
 
 ### Project Structure
 ```bash
-# Show di current directory structure
+# Show how di current directory structure be
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Waka go azd project root
+# Go reach di azd project root
 cd $(azd root)
 
-# Show di azd configuration directory
-echo $AZD_CONFIG_DIR  # Normally na ~/.azd
+# Show where di azd configuration dey
+echo $AZD_CONFIG_DIR  # Most times na ~/.azd
 ```
 
 ## 🎨 Output Formatting
 
 ### JSON Output
 ```bash
-# Comot JSON output make script fit use am
+# Make e produce JSON output wey you fit use for scripts
 azd show --output json
 azd env list --output json
-azd config list --output json
+azd config show --output json
 
 # Use jq take parse am
 azd show --output json | jq '.services.web.endpoint'
@@ -473,10 +473,10 @@ azd env get-values --output json | jq -r '.DATABASE_URL'
 
 ### Table Output
 ```bash
-# Arrange am as table
+# Put am like table
 azd env list --output table
 
-# See di services wey dem don deploy
+# See services wey dem don deploy
 azd show --output json | jq '.services | keys'
 ```
 
@@ -485,18 +485,18 @@ azd show --output json | jq '.services | keys'
 ### Health Check Script
 ```bash
 #!/bin/bash
-# Small check make we see say everytin dey ok
+# Small check make sure say everytin dey okay
 azd show
-azd env show
+azd env get-values
 azd monitor --logs
 ```
 
 ### Deployment Validation
 ```bash
 #!/bin/bash
-# Check wey you dey do bifo deployment
+# Check bifo you deploy
 azd show
-azd provision --preview  # See di changes bifo you deploy dem
+azd provision --preview  # See di changes bifo you deploy
 az account show
 ```
 
@@ -514,7 +514,7 @@ done
 ### Resource Cleanup Script
 ```bash
 #!/bin/bash
-# Comot old environment dem
+# Comot di old environment dem
 azd env list | grep -E "(dev-|test-)" | while read env; do
     echo "Cleaning up $env"
     azd env select $env
@@ -526,17 +526,17 @@ done
 
 ### Common Environment Variables
 ```bash
-# Azure konfig
+# Azure setup
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# AZD konfig
+# AZD setup
 export AZD_DEBUG=true
 export AZD_DISABLE_TELEMETRY=true
 export AZD_CONFIG_DIR="~/.azd"
 
-# Aplikeshon konfig
+# Application setup
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
@@ -549,10 +549,10 @@ export LOG_LEVEL="info"
 az account clear
 az login
 
-# Force refresh di environment
+# Force make di environment refresh
 azd env refresh
 
-# Redeploy all di services
+# Make all services deploy again
 azd deploy
 
 # Check di deployment status
@@ -561,14 +561,14 @@ azd show --output json
 
 ### Recovery Commands
 ```bash
-# Make we recover from failed deployment - clean everything and redeploy
+# Fix deployment wey don fail - clean am, then deploy again
 azd down --force --purge
 azd up
 
-# Just set up infrastructure again
+# Na only set up di infrastructure again
 azd provision
 
-# Just redeploy the application
+# Na only deploy di application again
 azd deploy
 ```
 
@@ -576,7 +576,7 @@ azd deploy
 
 ### Aliases for Faster Workflow
 ```bash
-# Put am for your .bashrc or .zshrc
+# Add am for your .bashrc or .zshrc
 alias azdup='azd up'
 alias azdm='azd monitor --live'
 alias azds='azd show --output json'
@@ -585,7 +585,7 @@ alias azde='azd env'
 
 ### Function Shortcuts
 ```bash
-# Change environment quick-quick
+# Switch between environments quick-quick
 azd-env() {
     azd env select $1 && azd show
 }
@@ -598,7 +598,7 @@ azd-deploy-watch() {
 # How environment dey
 azd-status() {
     echo "Current environment:"
-    azd env show
+    azd env get-values
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }
@@ -608,16 +608,16 @@ azd-status() {
 
 ### Getting Help
 ```bash
-# General help
+# Help wey general
 azd --help
 azd help
 
-# Help wey dey for di specific command
+# Help wey special for particular command
 azd up --help
 azd env --help
 azd config --help
 
-# Show di version and how e bin build
+# Show which version dey and how dem build am
 azd version
 azd version --output json
 ```
@@ -633,7 +633,7 @@ azd template show <template-name> --docs
 
 ---
 
-**Tip**: Bookmark this cheat sheet and use `Ctrl+F` to quickly find the commands you need!
+**Tip**: Bookmark dis cheat sheet and use `Ctrl+F` to quickly find di commands wey you need!
 
 ---
 
@@ -643,11 +643,11 @@ azd template show <template-name> --docs
 
 ---
 
-> **💡 Want Azure command help in your editor?** Install [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) with `npx skills add microsoft/github-copilot-for-azure` — 37 skills for AI, Foundry, deployment, diagnostics, and more.
+> **💡 You wan make editor help you with Azure commands?** Install [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) with `npx skills add microsoft/github-copilot-for-azure` — 37 skills for AI, Foundry, deployment, diagnostics, and more.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg note say automatic translations fit get mistakes or inaccuracies. Di original document for im native language suppose be di official source. If na important/critical information, you suppose use professional human translator. We no go responsible for any misunderstanding or wrong interpretation wey fit come from dis translation.
+**Disclaimer**:
+Dis document don translate using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am accurate, abeg sabi say automated translations fit get errors or inaccuracies. The original document for im native language suppose be the authoritative source. For critical information, professional human translation dey recommended. We no dey liable for any misunderstandings or misinterpretations wey fit come from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

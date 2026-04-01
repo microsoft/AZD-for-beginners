@@ -1,55 +1,57 @@
-# AZD உடன் கொண்டெய்னர் செயலி வழங்கல் உதாரணங்கள்
+# AZD உடன் கன்டெய்னர் செயலி வினியோக உதாரணங்கள்
 
-இந்த அடைவு Azure Developer CLI (AZD) பயன்படுத்தி Azure Container Apps இற்கு கொண்டெய்னரை கொண்ட பயன்பாடுகளை வழங்குவதற்கான விரிவான உதாரணங்களை கொண்டுள்ளது. இவை நிஜ உலக மாதிரிகள், சிறந்த நடைமுறைகள் மற்றும் உற்பத்திக்கு தயாரான அமைப்புகளைக் காட்டுகின்றன.
+இந்த கோப்புறையில் Azure Developer CLI (AZD) பயன்படுத்தி Azure Container Apps-க்கு கன்டெய்னரைப்படுத்திய பயன்பாடுகளை வினியோகிப்பதற்கான விரிவான உதாரணங்கள் உள்ளன. இந்த உதாரணங்கள் உண்மைப் பயன்பாட்டு மாதிரிகள், சிறந்த நடைமுறைகள் மற்றும் உற்பத்தி ரெடியான கட்டமைப்புகளை காட்டுகின்றன.
 
-## 📚 உள்ளடக்க அட்டவணை
+## 📚 உள்ளடக்க பட்டியல்
 
-- [கண்ணோட்டம்](../../../../examples/container-app)
-- [முன் தேவைகள்](../../../../examples/container-app)
-- [விரைவு தொடக்க உதாரணங்கள்](../../../../examples/container-app)
-- [உற்பத்தி உதாரணங்கள்](../../../../examples/container-app)
-- [மேம்பட்ட மாதிரிகள்](../../../../examples/container-app)
-- [சிறந்த நடைமுறைகள்](../../../../examples/container-app)
+- [கண்ணோட்டம்](#கண்ணோட்டம்)
+- [முன்-அவசியங்கள்](#முன்-அவசியங்கள்)
+- [விரைவு தொடக்க உதாரணங்கள்](#விரைவு-தொடக்க-உதாரணங்கள்)
+- [உற்பத்தி உதாரணங்கள்](#உற்பத்தி-உதாரணங்கள்)
+- [மேம்பட்ட வடிவமைப்புகள்](#மேம்பட்ட-வடிவமைப்புகள்)
+- [சிறந்த நடைமுறைங்கள்](#சிறந்த-நடைமுறைைகள்)
 
 ## கண்ணோட்டம்
 
-Azure Container Apps என்பது நிர்வகிக்கப்பட்ட முழு நிர்வகிக்கப்பட்ட சர்வர் இல்லாத கொண்டெய்னர் தளம் ஆகும், இது ஊடகமான சேவைகள் மற்றும் கொண்டெய்னர் செய்யப்பட்ட பயன்பாடுகளை அடங்கிய அமைப்புகளை நிர்வகிக்காமல் இயக்குவதற்கு உதவுகிறது. AZD உடன் இணைந்த போது, நீங்கள் பெறுகிறீர்கள்:
+Azure Container Apps என்பது கட்டமைப்பு மேலாண்மையை தேவையாக்காமலே மைക്രோசெர்விஸ்கள் மற்றும் கன்டெய்னரைப்படுத்திய பயன்பாடுகளை இயக்க அனுமதிக்கும் முழுமையாக நிர்வகிக்கப்படும் சர்வர்-இலைய கன்டெய்னர் தளம் ஆகும். AZD உடன் இணைத்தால், நீங்கள் பெறுகிறீர்கள்:
 
-- **எளிமையான வெளியீடு**: ஒரே கட்டளை மூலம் கட்டமைப்புடன் கொண்டெய்னர்களை வெளியிடுகிறது
-- **தானியங்கி அளவுரு**: HTTP போக்குவரத்து அல்லது நிகழ்வுகளின் அடிப்படையில் பூஜ்ஜியத்திற்கு வரை மற்றும் வெளியே அளவுரு செய்கிறது
-- **ஐக்கியலான நெட்வொர்க்கிங்**: உட்படுத்தப்பட்ட சேவை கண்டுபிடித்தல் மற்றும் போக்குவரத்து பிரிப்பு
-- **மேலாண்மை செய்யப்பட்ட அடையாளம்**: Azure வளங்களுக்கு பாதுகாப்பான அங்கீகாரம்
-- **செலவு சிற்றாக்கம்**: நீங்கள் பயன்படுத்தும் வளங்களுக்கே மட்டும் கட்டணம்
+- **எளிதாக்கப்பட்ட வெளியீடு**: ஒரே கட்டளையால் அமைப்புச் சூழலுடன் கூடிய கன்டெய்னர்கள் வெளியிடப்படுகின்றன
+- **தானியங்கி அளவீடு**: HTTP போக்குவரத்து அல்லது நிகழ்வுகளின் அடிப்படையில் பூஜ்யத்துக்கு சுருங்கவும் மற்றும் வெளியே பரவவும்
+- **ஒருங்கிணைக்கப்பட்ட நெட்வொர்க்கிங்**: உள்ளடக்கமான சேவை கண்டறிதலும் போக்குவரத்து பிரிப்பும்
+- **நிர்வகிக்கப்படும் அடையாளம்**: Azure வளங்களுக்கு பாதுகாப்பான அங்கீகாரம்
+- **செலவு மேம்படுத்துதல்**: நீங்கள் பயன்படுத்தும் வளங்களுக்கே மட்டுமே கட்டணம் செலுத்துங்கள்
 
-## முன் தேவைகள்
+## முன்-அவசியங்கள்
 
-தொடங்குவதற்கு முன், உங்களிடம் கீழ்க்கண்டவை உள்ளதா என்பதை உறுதிசெய்யவும்:
+ஆரம்பிப்பதற்கு முன், உங்களிடம் கீழ்காணும் விஷயங்கள் இருப்பதை உறுதிசெய்க:
 
 ```bash
-# AZD நிறுவல் சரிபார்க்கவும்
+# AZD நிறுவலைச் சரிபார்க்கவும்
 azd version
 
-# Azure CLI சரிபார்க்கவும்
+# Azure CLI-ஐச் சரிபார்க்கவும்
 az version
 
-# Docker சரிபார்க்கவும் (தனிப்பயன் இமேஜ்களை கட்டுவதற்காக)
+# Docker-ஐச் சரிபார்க்கவும் (தனிப்பயன் இமேஜ்களை உருவாக்குவதற்கு)
 docker --version
 
-# Azure இல் உள்நுழையவும்
+# AZD டெபிளாய்மென்டுகளுக்காக அடையாளம் உறுதிப்படுத்தவும்
 azd auth login
+
+# விருப்பமானது: நேரடியாக az கட்டளைகளை இயக்க திட்டமிட்டால் Azure CLI-யில் உள்நுழையவும்
 az login
 ```
 
 **தேவையான Azure வளங்கள்:**
-- செயல்பாட்டில் உள்ள Azure சந்தா
-- Resource group உருவாக்க அனுமதிகள்
-- Container Apps சூழலுக்கு அணுகல்
+- Active Azure subscription
+- Resource group creation permissions
+- Container Apps environment access
 
 ## விரைவு தொடக்க உதாரணங்கள்
 
 ### 1. எளிய வலை API (Python Flask)
 
-Azure Container Apps உடன் ஒரு அடிப்படை REST API ஐ வெளியிடவும்.
+Azure Container Apps மூலம் அடிப்படை REST API ஒன்றை வெளியிடுங்கள்.
 
 **உதாரணம்: Python Flask API**
 
@@ -68,10 +70,10 @@ services:
 **வெளியீட்டு படிகள்:**
 
 ```bash
-# டெம்ப்ளேட்டிலிருந்து ஆரம்பிக்கவும்
+# வார்ப்புருவிலிருந்து தொடங்கவும்
 azd init --template todo-python-mongo
 
-# அடித்தள அமைப்புகளை வழங்கி, பயன்பாட்டை நிறுவவும்
+# அடித்தள வளங்களை ஏற்பாடு செய்து, நிறுவு
 azd up
 
 # நிறுவலை சோதிக்கவும்
@@ -80,31 +82,31 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
 **முக்கிய அம்சங்கள்:**
-- 0 முதல் 10 நகல்களுக்கான தானியங்கி அளவீடு
-- சுகாதார சோதனைகள் மற்றும் உயிர்நிலை சரிபார்ப்புகள்
-- சுற்றுச்சூழல் மாறிலி ஊட்டுதல்
-- Application Insights இணைப்பு
+- 0 முதல் 10 பிரதிகளுக்கு தானாக அளவிடுதல்
+- ஆரோக்கிய பரிசோதனைகள் மற்றும் உயிருள்ள தன்மை சோதனைகள்
+- சுற்றுச்சூழல் மாறிலிகள் ஊற்றுதல்
+- Application Insights ஒருங்கிணைப்பு
 
 ### 2. Node.js Express API
 
-MongoDB இணைப்புடன் Node.js பின்னணியை வெளியிடவும்.
+MongoDB ஒருங்கிணைப்புடன் ஒரு Node.js பின்னணியை வெளியிடுதல்.
 
 ```bash
-# Node.js API மாதிரியை ஆரம்பிக்கவும்
+# Node.js API வார்ப்புருவை துவக்கவும்
 azd init --template todo-nodejs-mongo
 
-# சுற்றுச்சூழல் மாறிலிகளை அமைக்கவும்
+# சூழல் மாறிலிகளை அமைக்கவும்
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
 # பயன்படுத்தவும்
 azd up
 
-# Azure Monitor மூலம் பதிவுகளை பார்க்கவும்
+# Azure Monitor வழியாக பதிவுகளைப் பார்க்கவும்
 azd monitor --logs
 ```
 
-**அமைப்பமைப்பு சிறப்பம்சங்கள்:**
+**அடித்தள முக்கிய அம்சங்கள்:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -147,18 +149,18 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 3. நிலையான முன்முகம் + API பின்னணி
+### 3. நிலையான முன்னணி + API பின்னணி
 
-React முன்முகத்தோடு API பின்னணியைக் கொண்ட முழு-ஸ்டாக் செயலியை வெளியிடவும்.
+React முன்னணி மற்றும் API பின்னணி கொண்ட முழு-ஸ்டாக் பயன்பாட்டை வெளியிடுதல்.
 
 ```bash
-# முழு-ஸ்டாக் டெம்ப்ளேட்டை தொடங்கவும்
+# முழு-ஸ்டாக் டெம்ப்ளேட்டை ஆரம்பிக்கவும்
 azd init --template todo-csharp-sql-swa-func
 
-# அமைப்புகளை பரிசீலிக்கவும்
+# கட்டமைப்பை பரிசீலிக்கவும்
 cat azure.yaml
 
-# இரு சேவைகளையும் வெளியிடவும்
+# இரு சேவைகளையும் நிறுவவும்
 azd up
 
 # பயன்பாட்டை திறக்கவும்
@@ -167,11 +169,11 @@ azd show --output json | jq -r '.services.web.endpoint' | xargs start
 
 ## உற்பத்தி உதாரணங்கள்
 
-### உதாரணம் 1: மைக்ரோசேவைகள் கட்டமைப்பு
+### உதாரணம் 1: மைக்ரோசர்விஸ்கள் கட்டமைப்பு
 
-**நிகழ்வு**: பல மைக்ரோசேவைகளுடன் ஒரு இ-காமர்ஸ் செயலி
+**நிலமை**: பல மைக்ரோசர்விஸ்களை கொண்ட மின்னணு வணிக பயன்பாடு
 
-**அடைவு அமைப்பு:**
+**கோப்புறைக் கட்டமைப்பு:**
 ```
 microservices-demo/
 ├── azure.yaml
@@ -224,18 +226,18 @@ azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
 
-# அனைத்து சேவைகளையும் வெளியிடவும்
+# அனைத்து சேவைகளையும் வினியோகிக்கவும்
 azd up
 
-# வெளியீட்டை கண்காணிக்கவும்
+# வினியோகத்தை கண்காணிக்கவும்
 azd monitor --overview
 ```
 
-### உதாரணம் 2: செயற்கை நுண்ணறியால் இயக்கப்படும் கொண்டெய்னர் செயலி
+### உதாரணம் 2: AI-சக்தியூட்டும் கன்டெய்னர் செயலி
 
-**நிகழ்வு**: Microsoft Foundry Models இணைப்புடன் AI உரையாடல் செயலி
+**நிலமை**: Microsoft Foundry Models ஒருங்கிணைப்புடன் AI அரட்டை செயலி
 
-**கோப்பு: src/ai-chat/app.py**
+**File: src/ai-chat/app.py**
 ```python
 from flask import Flask, request, jsonify
 from azure.identity import DefaultAzureCredential
@@ -244,7 +246,7 @@ import openai
 
 app = Flask(__name__)
 
-# பாதுகாப்பான அணுகலுக்காக நிர்வகிக்கப்பட்ட அடையாளத்தைப் பயன்படுத்தவும்
+# பாதுகாப்பான அணுகலுக்காக நிர்வகிக்கப்பட்ட அடையாளத்தை பயன்படுத்தவும்
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -253,7 +255,7 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # OpenAI விசையை Key Vault-இலிருந்து பெறவும்
+    # Key Vault-இலிருந்து OpenAI விசையைப் பெறவும்
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
@@ -268,7 +270,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-**கோப்பு: azure.yaml**
+**File: azure.yaml**
 ```yaml
 name: ai-chat-app
 services:
@@ -278,7 +280,7 @@ services:
     host: containerapp
 ```
 
-**கோப்பு: infra/main.bicep**
+**File: infra/main.bicep**
 ```bicep
 param location string = resourceGroup().location
 param environmentName string
@@ -320,30 +322,30 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**வெளியீடு கட்டளைகள்:**
+**வெளியீட்டு கட்டளைகள்:**
 ```bash
-# சுற்றுச்சூழலை அமைக்கவும்
+# சுற்றுச்சூழலை அமைக்க
 azd init --template ai-chat-app
 azd env new dev
 
-# OpenAI ஐ கட்டமைக்கவும்
+# OpenAI-ஐ அமைக்க
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4.1"
 
-# விநியோகிக்கவும்
+# வெளியிடு
 azd up
 
-# API ஐ சோதிக்கவும்
+# API-ஐ சோதிக்க
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat \
   -H "Content-Type: application/json" \
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### உதாரணம் 3: க்யூ செயலாக்கத்துடன் பின்னணி ஊழியர்
+### உதாரணம் 3: வரிசை செயலாக்கத்துடன் பின்புல பணியாளர்
 
-**நிகழ்வு**: மெசேஜ் க்யூவுடன் ஆர்டர் செயலாக்க அமைப்பு
+**நிலமை**: செய்தி வரிசை கொண்ட ஆர்டர் செயலாக்க அமைப்பு
 
-**அடைவு அமைப்பு:**
+**கோப்புறைக் கட்டமைப்பு:**
 ```
 queue-worker/
 ├── azure.yaml
@@ -360,7 +362,7 @@ queue-worker/
     └── worker/
 ```
 
-**கோப்பு: src/worker/processor.py**
+**File: src/worker/processor.py**
 ```python
 import os
 from azure.storage.queue import QueueClient
@@ -378,7 +380,7 @@ def process_orders():
     while True:
         messages = queue_client.receive_messages(max_messages=10)
         for message in messages:
-            # ஆர்டரை செயலாக்கு
+            # கட்டளையை செயலாக்குதல்
             print(f"Processing order: {message.content}")
             
             # முழுமையான செய்தி
@@ -388,7 +390,7 @@ if __name__ == '__main__':
     process_orders()
 ```
 
-**கோப்பு: azure.yaml**
+**File: azure.yaml**
 ```yaml
 name: order-processing
 services:
@@ -405,10 +407,10 @@ services:
 
 **வெளியீடு:**
 ```bash
-# ஆரம்பப்படுத்து
+# ஆரம்பிக்கவும்
 azd init
 
-# வரிசை கட்டமைப்புடன் வெளியிடு
+# வரிசை கட்டமைப்போடு வெளியிடுக
 azd up
 
 # வரிசை நீளத்தின் அடிப்படையில் பணியாளர் எண்ணிக்கையை மாற்று
@@ -420,33 +422,33 @@ az containerapp update \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
 
-## மேம்பட்ட மாதிரிகள்
+## மேம்பட்ட வடிவமைப்புகள்
 
-### முறை 1: நீலம்-பச்சை வெளியீடு
+### வடிவமைப்பு 1: ப்ளூ-க்ரீன் வெளியீடு
 
 ```bash
-# புதிய திருத்தத்தை போக்குவரத்தின்றி உருவாக்கு
+# போக்குவரத்து இல்லாமல் புதிய திருத்தத்தை உருவாக்கவும்
 azd deploy api --revision-suffix blue --no-traffic
 
-# புதிய திருத்தத்தை சோதி
+# புதிய திருத்தத்தை சோதிக்கவும்
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# போக்குவரத்தைப் பிரி (20% நீலத்திற்கு, 80% தற்போதையத்திற்கு)
+# போக்குவரத்தை பிரிக்கவும் (20% நீலத்திற்கு, 80% தற்போதையதிற்கு)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# முழு போக்குவரத்தை நீலத்துக்கு மாற்று
+# அனைத்து போக்குவரத்தையும் முழுமையாக நீலத்திற்கு மாற்றவும்
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
 
-### முறை 2: AZD உடன் கேனரி வெளியீடு
+### வடிவமைப்பு 2: AZD உடன் கானரி வெளியீடு
 
-**கோப்பு: .azure/dev/config.json**
+**File: .azure/dev/config.json**
 ```json
 {
   "deploymentStrategy": "canary",
@@ -458,18 +460,18 @@ az containerapp ingress traffic set \
 }
 ```
 
-**வெளியீட்டு ஸ்கிரிப்ட்:**
+**வெளியீட்டு ஸ்க்ரிப்ட்:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
 
-# புதிய பதிப்பை 10% போக்குவரத்துடன் வெளியிடுங்கள்
+# புதிய திருத்தத்தை 10% போக்குவரத்துடன் வெளியிடவும்
 azd deploy api --revision-mode multiple
 
-# அளவுகோல்களை கண்காணிக்கவும்
+# அளவுகுறியீடுகளை கண்காணிக்கவும்
 azd monitor --service api --duration 5m
 
-# போக்குவரத்தினை படிப்படியாக அதிகரிக்கவும்
+# போக்குவரத்தைக் படிப்படியாக அதிகரிக்கவும்
 for i in {20..100..10}; do
   echo "Increasing traffic to $i%"
   az containerapp revision set-traffic \
@@ -481,9 +483,9 @@ for i in {20..100..10}; do
 done
 ```
 
-### முறை 3: பன்மண்டல வெளியீடு
+### வடிவமைப்பு 3: பல பிராந்திய வெளியீடு
 
-**கோப்பு: azure.yaml**
+**File: azure.yaml**
 ```yaml
 name: global-app
 services:
@@ -497,7 +499,7 @@ services:
       - southeastasia
 ```
 
-**கோப்பு: infra/multi-region.bicep**
+**File: infra/multi-region.bicep**
 ```bicep
 param regions array = ['eastus', 'westeurope', 'southeastasia']
 
@@ -529,16 +531,16 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 
 **வெளியீடு:**
 ```bash
-# அனைத்து பிராந்தியங்களிலும் வெளியிடவும்
+# அனைத்து மண்டலங்களிலும் அமல்படுத்தவும்
 azd up
 
-# எண்ட்பாயிண்ட்களை சரிபார்க்கவும்
+# என்ட்பாயிண்டுகளை சரிபார்க்கவும்
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### முறை 4: Dapr இணைப்பு
+### வடிவமைப்பு 4: Dapr ஒருங்கிணைப்பு
 
-**கோப்பு: infra/app/dapr-enabled.bicep**
+**File: infra/app/dapr-enabled.bicep**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: 'dapr-app'
@@ -563,7 +565,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-**Dapr உடன் பயன்பாட்டு குறியீடு:**
+**Application Code with Dapr:**
 ```python
 from flask import Flask
 from dapr.clients import DaprClient
@@ -590,16 +592,16 @@ def create_order():
     return {'status': 'created'}
 ```
 
-## சிறந்த நடைமுறைகள்
+## சிறந்த நடைமுறைைகள்
 
-### 1. வள ஒழுங்கமைப்பு
+### 1. வள அமைப்பு
 
 ```bash
-# ஒற்றுமையான பெயரிடல் நடைமுறைகளைப் பயன்படுத்தவும்
+# ஒத்த பெயரிடும் நெறிமுறைகளைப் பயன்படுத்தவும்
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# செலவு கண்காணிப்பிற்காக வளங்களுக்கு குறிச்சொற்கள் ஒதுக்கவும்
+# செலவுக் கணக்குக்காக வளங்களை குறிச்சொற்களால் குறியிடவும்
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
@@ -642,7 +644,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
 }
 ```
 
-### 3. செயல்திறன் சிற்றாக்கம்
+### 3. செயல்திறன் மேம்படுத்துதல்
 
 ```yaml
 # azure.yaml with performance settings
@@ -662,21 +664,21 @@ services:
             concurrent: 100
 ```
 
-### 4. கண்காணிப்பு மற்றும் கண்ணோட்டம்
+### 4. கண்காணிப்பு மற்றும் காணும் திறன்
 
 ```bash
-# Application Insights ஐ செயல்படுத்தவும்
+# Application Insightsஐ செயல்படுத்தவும்
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
 # பதிவுகளை நேரடியாகப் பார்க்கவும்
 azd monitor --logs
-# அல்லது Container Apps க்கான Azure CLI ஐ பயன்படுத்தவும்:
+# அல்லது Container Apps க்கான Azure CLI ஐப் பயன்படுத்தவும்:
 az containerapp logs show --name api --resource-group rg-myapp --follow
 
-# மெட்ரிக்குகளை கண்காணிக்கவும்
+# அளவுருக்களை கண்காணிக்கவும்
 azd monitor --live
 
-# அலெர்ட்களை உருவாக்கவும்
+# எச்சரிக்கைகளை உருவாக்கவும்
 az monitor metrics alert create \
   --name high-cpu-alert \
   --resource-group rg-myapp \
@@ -685,19 +687,19 @@ az monitor metrics alert create \
   --description "Alert when CPU exceeds 80%"
 ```
 
-### 5. செலவு சிற்றாக்கம்
+### 5. செலவு மேம்படுத்துதல்
 
 ```bash
-# பயன்படுத்தப்படாத போது அளவை பூஜ்ஜியமாகக் குறைக்கவும்
+# பயன்பாடில்லாத போது அளவை பூஜ்ஜியமாக மாற்றவும்
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# வளர்ச்சி சூழல்களுக்கு ஸ்பாட் இன்ஸ்டன்ஸ்களை பயன்படுத்தவும்
+# வளர்ச்சி சூழல்களுக்கு ஸ்பாட் இன்ஸ்டான்ஸ்களை பயன்படுத்தவும்
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# பட்ஜெட் எச்சரிக்கைகளை அமைக்கவும்
+# பட்ஜெட் எச்சரிக்கைகள் அமைக்கவும்
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
@@ -705,7 +707,7 @@ az consumption budget create \
   --threshold 80
 ```
 
-### 6. CI/CD இணைப்பு
+### 6. CI/CD ஒருங்கிணைப்பு
 
 **GitHub Actions உதாரணம்:**
 ```yaml
@@ -740,71 +742,71 @@ jobs:
 ## பொதுவான கட்டளைகள் குறிப்பு
 
 ```bash
-# புதிய கன்டெய்னர் அப் திட்டத்தை ஆரம்பிக்கவும்
+# புதிய கன்டெய்னர் பயன்பாட்டு திட்டத்தை தொடங்கவும்
 azd init --template <template-name>
 
-# அடித்தள அமைப்பையும் பயன்பாட்டையும் வெளியிடவும்
+# அடித்தளமும் பயன்பாட்டையும் வெளியிடவும்
 azd up
 
-# பயன்பாட்டு குறியீட்டையே மட்டும் வெளியிடவும் (அடித்தளத்தைத் தவிர்க்கவும்)
+# அடித்தளத்தை தவிர்த்து மட்டும் பயன்பாட்டு குறியீட்டை வெளியிடவும்
 azd deploy
 
-# அடித்தள அமைப்பையே மட்டும் வழங்கவும்
+# அடித்தளத்தை மட்டும் ஏற்பாடு செய்யவும்
 azd provision
 
 # வெளியிடப்பட்ட வளங்களைப் பார்க்கவும்
 azd show
 
-# azd monitor அல்லது Azure CLI பயன்படுத்தி பதிவுகளை தொடர்ச்சியாக பார்க்கவும்
+# azd monitor அல்லது Azure CLI பயன்படுத்தி லாக்களை தொடர்ச்சியாகப் பார்க்கவும்
 azd monitor --logs
 # az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
-# பயன்பாட்டைக் கண்காணிக்கவும்
+# பயன்பாட்டை கண்காணிக்கவும்
 azd monitor --overview
 
-# வளங்களை நீக்கவும்
+# வளங்களை அகற்று
 azd down --force --purge
 ```
 
-## சிக்கல் தீர்க்கல்
+## பிரச்சினை தீர்வு
 
-### பிழை: கொண்டெய்னர் துவங்குவதில் தோல்வி
+### சிக்கல்: கன்டெய்னர் துவங்க முடியவில்லை
 
 ```bash
-# Azure CLI மூலம் பதிவுகளைச் சரிபார்க்கவும்
+# Azure CLI பயன்படுத்தி பதிவுகளைச் சரிபார்க்கவும்
 az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# கொண்டெய்னர் நிகழ்வுகளைப் பார்க்கவும்
+# கொன்டெய்னர் நிகழ்வுகளைப் பார்க்கவும்
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
   --revision latest
 
-# உள்ளூரில் சோதிக்கவும்
+# உள்ளூர் முறையில் சோதிக்கவும்
 docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### பிழை: கொண்டெய்னர் செயலியின் endpoint-ஐ அணுக முடியவில்லை
+### சிக்கல்: கன்டெய்னர் செயலியின் என்ட்பாயிண்டை அணுக முடியவில்லை
 
 ```bash
-# இன்கிரெஸ் கட்டமைப்பை சரிபார்க்கவும்
+# Ingress கட்டமைப்பை சரிபார்க்கவும்
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# உள்ளக இன்கிரெஸ் செயல்படுத்தப்பட்டுள்ளதா என்பதை சரிபார்க்கவும்
+# உள்ளக Ingress செயல்படுத்தப்பட்டுள்ளதா என்பதை சரிபார்க்கவும்
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
   --external true
 ```
 
-### பிழை: செயல்திறன் சிக்கல்கள்
+### சிக்கல்: செயல்திறன் பிரச்சினைகள்
 
 ```bash
-# வள பயன்பாட்டை சரிபார்க்கவும்
+# வள பயன்பாட்டைச் சரிபார்க்கவும்
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
@@ -818,30 +820,30 @@ az containerapp update \
 ```
 
 ## கூடுதல் வளங்கள் மற்றும் உதாரணங்கள்
-- [மைக்ரோசேவைகள் உதாரணம்](./microservices/README.md)
+- [மைக்ரோசர்விஸ்கள் உதாரணம்](./microservices/README.md)
 - [எளிய Flash API உதாரணம்](./simple-flask-api/README.md)
-- [Azure Container Apps ஆவணங்கள்](https://learn.microsoft.com/azure/container-apps/)
-- [AZD வார்ப்புரு காட்சியகம்](https://azure.github.io/awesome-azd/)
+- [Azure Container Apps ஆவணம்](https://learn.microsoft.com/azure/container-apps/)
+- [AZD டெம்ப்ளேட் காட்சி](https://azure.github.io/awesome-azd/)
 - [Container Apps மாதிரிகள்](https://github.com/Azure-Samples/container-apps-samples)
-- [Bicep வார்ப்புருக்கள்](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+- [Bicep டெம்ப்ளேட்ஸ்](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ## பங்களிப்பு
 
-புதிய கொண்டெய்னர் செயலி உதாரணங்களை பங்களிக்க:
+புதிய கன்டெய்னர் செயலி உதாரணங்களை பங்களிக்க:
 
-1. உங்கள் உதாரணத்துடன் புதிய துணை அடைவை உருவாக்கவும்
+1. உங்கள் உதாரணத்திற்கான புதிய உப-கோப்புறையை உருவாக்கவும்
 2. முழுமையான `azure.yaml`, `infra/`, மற்றும் `src/` கோப்புகளை சேர்க்கவும்
-3. வெளியீட்டு அறிவுறுத்தல்களுடன் முழுமையான README ஐ சேர்க்கவும்
-4. `azd up` உடன் வெளியீட்டை சோதிக்கவும்
-5. ஒரு pull request சமர்ப்பிக்கவும்
+3. வெளியீட்டு அறிவுரைகளுடன் விரிவான README ஐச் சேர்க்கவும்
+4. `azd up` மூலம் வெளியீட்டை சோதிக்கவும்
+5. Pull request ஐ சமர்ப்பிக்கவும்
 
 ---
 
-**உதவி வேண்டுமா?** ஆதரவு மற்றும் கேள்விகளுக்கு [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) சமூகத்தில் சேருங்கள்.
+**உதவி வேண்டுமா?** [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) சமூகத்தில் ஆதரவு மற்றும் கேள்விகளுக்காக இணையுங்கள்.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-மறுப்பு அறிவிப்பு:
-இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவையான [Co-op Translator](https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயற்சித்தாலும், தானியங்கி மொழிபெயர்ப்புகளில் தவறுகள் அல்லது துல்லியக்குறைபாடுகள் இருக்கக்கூடும் என்பதை தயவுசெய்து கருத்தில் கொள்ளவும். இதன் மூல மொழியில் உள்ள அசல் ஆவணம் அதிகாரபூர்வ மூலமாகக் கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பை பரிந்துரைக்கிறோம். இந்த மொழிபெயர்ப்பைப் பயன்படுத்துவதால் ஏற்படும் எந்தவொரு தவறான புரிதலுக்கும் அல்லது தவறான விளக்கங்களுக்கும் நாங்கள் பொறுப்பேற்கமாட்டோம்.
+**Disclaimer**:
+இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவையான [Co-op Translator](https://github.com/Azure/co-op-translator) மூலம் மொழிமாற்றம் செய்யப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயற்சித்தாலும், தானியங்கி மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறான தகவல்கள் இருக்கக்கூடும் என்பதை தயவுசெய்து கவனத்தில் கொள்ளவும். அசல் ஆவணம் அதன் சொந்த மொழியிலேயே அதிகாரப்பூர்வ மூலமாக கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பை பரிந்துரைக்கிறோம். இந்த மொழிபெயர்ப்பைப் பயன்படுத்துவதால் ஏற்பட்ட எந்தவொரு தவறான புரிதலிற்கான அல்லது தவறான விளக்கங்களுக்கான பொறுப்பையும் நாங்கள் ஏற்க மாட்டோம்.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

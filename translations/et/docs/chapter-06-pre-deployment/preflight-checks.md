@@ -1,73 +1,73 @@
-# Eelselennukontrollid AZD juurutuste jaoks
+# Eelkontrollid AZD juurutusteks
 
-**Peatükkide navigeerimine:**
+**Peatüki navigeerimine:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
-- **📖 Praegune peatükk**: Peatükk 6 - Eelseisva valideerimine ja planeerimine
+- **📖 Praegune peatükk**: Peatükk 6 - Eeljärjekorras valideerimine ja planeerimine
 - **⬅️ Eelmine**: [SKU valik](sku-selection.md)
 - **➡️ Järgmine peatükk**: [Peatükk 7: Tõrkeotsing](../chapter-07-troubleshooting/common-issues.md)
 - **🔧 Seotud**: [Peatükk 4: Juurutuse juhend](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Sissejuhatus
 
-See põhjalik juhend pakub eellekkasutuse valideerimise skripte ja protseduure, et tagada Azure Developer CLI juurutuste edukus enne nende alustamist. Õpi rakendama automatiseeritud kontrollpunkte autentimise, ressursside kättesaadavuse, kvootide, turvanõuetele vastavuse ja jõudlusnõuete jaoks, et vältida juurutuse ebaõnnestumisi ja optimeerida juurutuste õnnestumise määra.
+See põhjalik juhend pakub eeljärjekorras valideerimise skripte ja protseduure, et tagada Azure Developer CLI juurutuste edukus enne nende algust. Õpi rakendama automatiseeritud kontrollimisi autentimise, ressursside saadavuse, kvantitatiivsete piirangute, turvalisuse vastavuse ja jõudlusnõuete osas, et vältida juurutuse ebaõnnestumist ja optimeerida juurutuse edukuse määra.
 
 ## Õpieesmärgid
 
-Selle juhendi läbimisega sa:
-- Valdad automatiseeritud eelselennukontrolli tehnikad ja skriptid
-- Mõistad põhjalikke kontrollistrateegiaid autentimise, õiguste ja kvootide jaoks
-- Rakendad ressursside kättesaadavuse ja mahtuvuse valideerimise protseduure
-- Konfigureerid turva- ja vastavuskontrolle organisatsiooni poliitikatele
-- Kujundad kuluarvestuse ja eelarve valideerimise töövood
-- Loovad kohandatud eelselennukontrolli automaatika CI/CD torujuhtmetele
+Selle juhendi lõpetades:
+- Omandad automatiseeritud eeljärjekorra valideerimise tehnikad ja skriptid
+- Mõistad terviklikke kontrollistrateegiaid autentimise, õiguste ja kvantitatiivsete piirangute jaoks
+- Rakendad ressursside saadavuse ja mahtuvuse valideerimise protseduure
+- Konfigureerid turvalisuse ja vastavuse kontrollid organisatsiooni poliitikate jaoks
+- Kavandad kulude hindamise ja eelarve valideerimise töövooge
+- Loovad kohandatud eeljärjekorra kontrollimise automatiseerimise CI/CD torujuhtmike jaoks
 
 ## Õpitulemused
 
-Pärast juhendi lõpetamist suudad:
-- Luua ja käivitada põhjalikke eelselennukontrolli skripte
-- Kujundada automatiseeritud kontrollitöövooge erinevate juurutussituatsioonide jaoks
-- Rakendada keskkonnapõhiseid valideerimisprotseduure ja -poliitikaid
-- Konfigureerida proaktiivset monitooringut ja alarmimist juurutuse valmisoleku jaoks
-- Tõrkeotsida eellekkasutuse probleeme ja rakendada parandusmeetmeid
-- Integreerida eelselennukontrolle DevOps torujuhtmetesse ja automaatikasse
+Pärast lõpetamist suudad:
+- Luua ja käivitada põhjalikke eeljärjekorra valideerimise skripte
+- Kavandada automatiseeritud kontrollimise töövooge erinevatele juurutusstsenaariumitele
+- Rakendada keskkonnaspetsiifilisi valideerimisprotseduure ja poliitikaid
+- Konfigureerida proaktiivset järelevalvet ja teavitusi juurutuse valmiduse kohta
+- Lahendada eeljuurutuse probleeme ja rakendada parandavaid meetmeid
+- Integreerida eeljärjekorra kontrollid DevOpsi torujuhtmetesse ja automatiseerimisprotsessidesse
 
 ## Sisukord
 
-- [Ülevaade](../../../../docs/chapter-06-pre-deployment)
-- [Automatiseeritud eelselennukontrolli skript](../../../../docs/chapter-06-pre-deployment)
-- [Käsitsi valideerimise kontrollnimekiri](../../../../docs/chapter-06-pre-deployment)
-- [Keskkonna valideerimine](../../../../docs/chapter-06-pre-deployment)
-- [Ressursside valideerimine](../../../../docs/chapter-06-pre-deployment)
-- [Turvalisuse ja vastavuse kontrollid](../../../../docs/chapter-06-pre-deployment)
-- [Jõudluse ja mahtuvuse planeerimine](../../../../docs/chapter-06-pre-deployment)
-- [Levinud probleemide tõrkeotsing](../../../../docs/chapter-06-pre-deployment)
+- [Ülevaade](#ülevaade)
+- [Automatiseeritud eeljärjekorra skript](#automatiseeritud-eeljärjekorra-skript)
+- [Manuaalne valideerimisnimekiri](#codeblock1)
+- [Keskkonna valideerimine](#✅-varundamine-ja-taastamine)
+- [Ressursside valideerimine](#tootmiskeskkonna-valideerimine)
+- [Turvalisuse ja vastavuse kontrollid](#security--compliance-checks)
+- [Jõudluse ja mahtuvuse planeerimine](#performance--capacity-planning)
+- [Tavaliste probleemide tõrkeotsing](#troubleshooting-common-issues)
 
 ---
 
 ## Ülevaade
 
-Eelselennukontrollid on olulised valideerimised, mis viiakse läbi enne juurutamist, et tagada:
+Eelkontrollid on olulised valideerimised, mis tehakse enne juurutust tagamaks:
 
-- **Ressursside kättesaadavus** ja kvoodid sihtregioonides
-- **Autentimine ja õigused** on õigesti seadistatud
-- **Mallide kehtivus** ja parameetrite õigsus
-- **Võrguga ühenduvus** ja sõltuvused
-- **Turvalisuse vastavus** organisatsiooni poliitikatega
-- **Kuluarvutus** vastavalt eelarvepiirangutele
+- **Ressursside saadavus** ja kvantiteedid sihtriikondades
+- **Autentimine ja õigused** on korrektselt seadistatud
+- **Mallide kehtivus** ja parameetrite täpsus
+- **Võrguühendus** ja sõltuvused
+- **Turvalisuse vastavus** organisatsiooni poliitikatele
+- **Kulude hinnang** eelarve piirmäära sees
 
-### Millal käivitada eelselennukontrolle
+### Millal käivitada eelkontrollid
 
 - **Enne esimest juurutust** uude keskkonda
-- **Pärast olulisi mallimuudatusi**
-- **Enne tootmisse juurutamist**
-- **Regioonide muutmisel**
-- **Osa CI/CD töövoogudest**
+- **Pärast olulisi malli muudatusi**
+- **Enne tootmise juurutusi**
+- **Azure'i piirkondade vahetusel**
+- **CI/CD torujuhtmike osana**
 
 ---
 
-## Automatiseeritud eelselennukontrolli skript
+## Automatiseeritud eeljärjekorra skript
 
-### PowerShell eelselennukontrollija
+### PowerShelli eeljärjekorra kontrollija
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -100,7 +100,7 @@ param(
     [switch]$Detailed
 )
 
-# Väljundi värvikoodimine
+# Väljundi värvikoodistus
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -128,7 +128,7 @@ function Write-Status {
 function Test-Prerequisites {
     Write-Host "${Blue}=== Prerequisites Check ===${Reset}"
     
-    # Kontrolli AZD-i installatsiooni
+    # Kontrolli AZD paigaldust
     try {
         $azdVersion = azd version --output json | ConvertFrom-Json
         Write-Status "AZD CLI installed" "Success" "Version: $($azdVersion.azd.version)"
@@ -138,7 +138,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Kontrolli Azure CLI installatsiooni
+    # Kontrolli Azure CLI paigaldust
     try {
         $azVersion = az version --output json | ConvertFrom-Json
         Write-Status "Azure CLI installed" "Success" "Version: $($azVersion.'azure-cli')"
@@ -177,7 +177,7 @@ function Test-Authentication {
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # Valideeri tellimuse juurdepääs
+        # Kontrolli tellimuse juurdepääsu
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -217,7 +217,7 @@ function Test-Permissions {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # Testi võimet luua ressursigrupp
+                # Testi ressursigrupi loomise võimekust
                 try {
                     az group create --name "preflight-test-rg" --location $Location --output none
                     az group delete --name "preflight-test-rg" --yes --output none
@@ -242,10 +242,10 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # Kontrolli compute-ressursside kvotasid
+        # Kontrolli arvutuspiiranguid
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # Kontrolli konkreetseid kvotasid
+        # Kontrolli konkreetseid piiranguid
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
         if ($coreQuota) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
@@ -257,7 +257,7 @@ function Test-QuotasAndLimits {
             }
         }
         
-        # Kontrolli App Service'i piiranguid
+        # Kontrolli App Service'i limiite
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
             if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
@@ -271,7 +271,7 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # Kontrolli salvestuskonto piiranguid
+        # Kontrolli salvestuskonto limiite
         $storageAccounts = az storage account list --output json | ConvertFrom-Json
         $accountCount = ($storageAccounts | Measure-Object).Count
         if ($accountCount -lt 200) {
@@ -292,7 +292,7 @@ function Test-QuotasAndLimits {
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # Testi Azure'i lõpp-punkte
+    # Testi Azure lõpp-punkte
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -310,7 +310,7 @@ function Test-NetworkConnectivity {
         }
     }
     
-    # Testi DNS-i lahendamist
+    # Testi DNS lahendust
     try {
         $dnsResult = Resolve-DnsName "management.azure.com" -ErrorAction Stop
         Write-Status "DNS resolution" "Success" "Resolved successfully"
@@ -326,16 +326,16 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # Kontrolli, kas azure.yaml on olemas
+    # Kontrolli, kas azure.yaml eksisteerib
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # Parsi azure.yaml
+        # Analüüsi azure.yaml
         try {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # Valideeri teenused
+            # Kontrolli teenuseid
             if ($azureYaml.services) {
                 $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
@@ -360,7 +360,7 @@ function Test-TemplateValidation {
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # Valideeri main.bicep, kui see on olemas
+            # Kontrolli main.bicep kehtivust, kui see eksisteerib
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 UUS: Testi infrastruktuuri eelvaadet (ohutu kuivkäik)
+    # 🧪 UUS: Testi infrastruktuuri eelvaadet (ohutu kuivkäivitus)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -415,7 +415,7 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # Kontrolli teenuse saadavust regioonis
+        # Kontrolli teenuste saadavust piirkonnas
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
@@ -446,11 +446,11 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Põhiline kulude hinnang (täpsemate hinnangute jaoks on vaja Azure Pricing API-d)
+    # Põhikulukalkulatsioon (täpseks hinnanguks on vaja Azure hinnapakkumise API-d)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # Kontrolli, kas eelarve on olemas
+    # Kontrolli, kas eelarve eksisteerib
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -470,7 +470,7 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # Kontrolli levinumaid turvapraktikaid
+    # Kontrolli tavalisi turvapraktikaid
     try {
         # Kontrolli, kas Key Vault on konfigureeritud
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # Kontrolli hallatud identiteedi kasutust
+        # Kontrolli hallatavat identiteedi kasutust
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +488,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # Kontrolli HTTPS-i jõustamist
+        # Kontrolli HTTPS kohustuslikkust
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -504,7 +504,7 @@ function Test-SecurityCompliance {
     }
 }
 
-# Peamine täitmine
+# Põhikäivitus
 function Invoke-PreflightCheck {
     Write-Host "${Green}AZD Pre-flight Check${Reset}" -ForegroundColor Green
     Write-Host "Environment: $EnvironmentName"
@@ -557,15 +557,15 @@ function Invoke-PreflightCheck {
     }
 }
 
-# Käivita eelkontroll
+# Käivita lennueelse kontrolli
 Invoke-PreflightCheck
 ```
 
-### Bash eelselennukontrollija
+### Bash eeljärjekorra kontrollija
 
 ```bash
 #!/bin/bash
-# Bashi versioon eelkontrollidest Unix/Linux süsteemide jaoks
+# Bash versioon eelkontrollide jaoks Unix/Linux süsteemidel
 
 set -euo pipefail
 
@@ -576,7 +576,7 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # Ilma värvita
 
-# Globaalsed muutujad
+# Globaalmuutujad
 ENVIRONMENT_NAME=""
 LOCATION=""
 RESOURCE_GROUP=""
@@ -665,7 +665,7 @@ check_template_validation() {
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
-        # Põhiline YAML-i valideerimine
+        # Põhiline YAML valideerimine
         if python3 -c "import yaml; yaml.safe_load(open('azure.yaml'))" 2>/dev/null; then
             print_status "azure.yaml parsing" "success"
         else
@@ -683,7 +683,7 @@ check_template_validation() {
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # Valideeri main.bicep, kui see on olemas
+            # Valideeri main.bicep, kui see olemas on
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -714,7 +714,7 @@ check_regional_availability() {
         return 1
     fi
     
-    # Kontrolli teenuse saadavust
+    # Kontrolli teenuse kättesaadavust
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
     for service in "${services[@]}"; do
@@ -729,7 +729,7 @@ check_regional_availability() {
 }
 
 main() {
-    # Analüüsi käsurea argumendid
+    # Tõlgi käsurea argumendid
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -790,71 +790,71 @@ main() {
     fi
 }
 
-# Käivita põhifunktsioon
+# Käivita main funktsioon
 main "$@"
 ```
 
 ---
 
-## Käsitsi valideerimise kontrollnimekiri
+## Manuaalne valideerimisnimekiri
 
-### Eeljuurutuse kontrollnimekiri
+### Eeljärjekorras kontrollnimekiri
 
-Trüki see kontrollnimekiri välja ja kontrolli iga punkti enne juurutamist:
+Trüki see nimekiri ja kontrolli iga punkti enne juurutust:
 
 #### ✅ Keskkonna seadistamine
 - [ ] AZD CLI installitud ja uuendatud uusimale versioonile
 - [ ] Azure CLI installitud ja autentitud
 - [ ] Õige Azure tellimus valitud
-- [ ] Keskkonna nimi on ainulaadne ja järgib nimetamisreegleid
-- [ ] Sihtressursside grupp on tuvastatud või selle saab luua
+- [ ] Keskkonna nimi on ainulaadne ja järgib nimetamise konventsioone
+- [ ] Sihtriigiressursside grupp on määratletud või selle saab luua
 
 #### ✅ Autentimine ja õigused
-- [ ] Edukalt autentitud käsuga `azd auth login`
-- [ ] Kasutajal on Contributor roll siht-tellimusel/ressurssigrupil
-- [ ] Service principal konfigureeritud CI/CD jaoks (kui rakendub)
-- [ ] Pole aegunud sertifikaate ega mandaale
+- [ ] Edukas sisselogimine käsuga `azd auth login`
+- [ ] Kasutajal on panustaja roll sihtriigi tellimuses/ressursside grupis
+- [ ] Teenuspäring on seadistatud CI/CD jaoks (vajadusel)
+- [ ] Ühtki aegunud sertifikaati ega mandaati ei ole
 
 #### ✅ Mallide valideerimine
 - [ ] `azure.yaml` eksisteerib ja on kehtiv YAML
-- [ ] Kõigil `azure.yaml`-s määratletud teenustel on vastavad lähtekoodid
-- [ ] `infra/` kataloogis olevad Bicep-mallid on olemas
+- [ ] Kõigil azure.yaml-s määratletud teenustel on vastav lähtekood
+- [ ] `infra/` kataloogis on olemas Bicep mallid
 - [ ] `main.bicep` kompileerub ilma vigadeta (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Infrastruktuuri eelvaade jookseb edukalt (`azd provision --preview`)
-- [ ] Kõik nõutud parameetrid on kas vaikimisi määratud või need esitatakse
-- [ ] Mallides pole kõvasti kodeeritud saladusi
+- [ ] 🧪 Infrastruktuuri eelvaade töötab edukalt (`azd provision --preview`)
+- [ ] Kõigil nõutud parameetritel on vaikeväärtused või need antakse üle
+- [ ] Mallides ei ole kõvakodeeritud salasõnu
 
 #### ✅ Ressursside planeerimine
-- [ ] Siht-Azure regiooni on valitud ja valideeritud
-- [ ] Nõutavad Azure teenused on saadaval sihtregioonis
-- [ ] Planeeritud ressursside jaoks on piisavad kvoodid
-- [ ] Ressursside nimede konfliktid on kontrollitud
+- [ ] Sihtriigi Azure piirkond on valitud ja valideeritud
+- [ ] Nõutavad Azure teenused on valitud piirkonnas saadaval
+- [ ] Plaanitavate ressursside jaoks on piisavad kvantitatiivsed piirangud olemas
+- [ ] Ressursside nimetuste konfliktid on kontrollitud
 - [ ] Ressurssidevahelised sõltuvused on mõistetud
 
 #### ✅ Võrk ja turvalisus
-- [ ] Ühenduvus Azure lõpp-punktidega on kontrollitud
+- [ ] Võrguühendus Azure lõpp-punktidega on kontrollitud
 - [ ] Vajadusel on tulemüüri/proxy seaded konfigureeritud
-- [ ] Key Vault on konfigureeritud saladuste haldamiseks
-- [ ] Haldatud identiteete (managed identities) kasutatakse, kus võimalik
-- [ ] Veebirakenduste jaoks on HTTPS jõustamine lubatud
+- [ ] Key Vault on seadistatud salajaste haldamiseks
+- [ ] Kasutatakse hallatud identiteete, kus võimalik
+- [ ] Veebirakenduste jaoks on HTTPS nõutud
 
-#### ✅ Kulujuhtimine
-- [ ] Kuluhinnangud arvutatud Azure Pricing Calculator abil
-- [ ] Eelarvehoiatused konfigureeritud, kui vaja
-- [ ] Keskkonna tüübile on valitud sobivad SKU-d
-- [ ] Tootmiskoormuste puhul on arvestatud reserveeritud mahtuvusega
+#### ✅ Kulude juhtimine
+- [ ] Kulude hinnangud on tehtud Azure Pricing Calculatori abil
+- [ ] Eelarvehoiatused on vajadusel seadistatud
+- [ ] Keskkonnatüübile sobivad SKU-d on valitud
+- [ ] Tootmiskoormuste jaoks on kaalutud reserveeritud mahtuvust
 
-#### ✅ Jälgimine ja jälgitavus
-- [ ] Application Insights on konfigureeritud mallides
-- [ ] Log Analytics tööruum planeeritud
-- [ ] Häirereeglid määratletud kriitiliste mõõdikute jaoks
-- [ ] Rakendustes on rakendatud tervisekontrolli lõpp-punktid
+#### ✅ Järelevalve ja vaatlus
+- [ ] Rakenduse Insights on mallides konfigureeritud
+- [ ] Log Analytics tööruum on planeeritud
+- [ ] Kriitiliste mõõdikutega seotud häire reeglid on määratletud
+- [ ] Rakendustes on tervisekontrolli lõpp-punktid rakendatud
 
 #### ✅ Varundamine ja taastamine
-- [ ] Andmeressursside varundamisstrateegia määratletud
-- [ ] Taastamisaja eesmärgid (RTO) dokumenteeritud
-- [ ] Taastamispunkti eesmärgid (RPO) dokumenteeritud
-- [ ] Tootmise jaoks on olemas ärikatastroofi taastamise plaan
+- [ ] Andmeressursside varundamise strateegia on määratletud
+- [ ] Taastamisaegade eesmärgid (RTO) on dokumenteeritud
+- [ ] Taastamispunkti eesmärgid (RPO) on dokumenteeritud
+- [ ] Tootmise jaoks on olemas katastroofitaasteplaan
 
 ---
 
@@ -864,26 +864,26 @@ Trüki see kontrollnimekiri välja ja kontrolli iga punkti enne juurutamist:
 
 ```bash
 #!/bin/bash
-# Arenduskeskkonnale spetsiifilised kontrollid
+# Arenduskeskkonna spetsiifilised valideerimised
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # Kontrolli arendussõbralike konfiguratsioonide olemasolu
+    # Kontrolli arendussõbralikke seadistusi
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # Kontrolli automaatse väljalülituse konfiguratsioone
+    # Kontrolli automaatse väljalülitamise seadistusi
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # Valideeri arenduskeskkonna andmebaasi konfiguratsioonid
+    # Valideeri arenduse andmebaasi seadistused
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -896,7 +896,7 @@ validate_dev_environment() {
 
 ```bash
 #!/bin/bash
-# Tootmiskeskkonna spetsiifilised kontrollid
+# Tootmiskeskkonna spetsiifilised valideerimised
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
@@ -908,14 +908,14 @@ validate_prod_environment() {
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # Kontrolli varunduse konfiguratsioone
+    # Kontrolli varundamise konfiguratsioone
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # Valideeri monitooringu seadistus
+    # Kontrolli jälgimissätteid
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
@@ -935,7 +935,7 @@ validate_prod_environment() {
 
 ## Ressursside valideerimine
 
-### Kvootide valideerimise skript
+### Kvantitatiivsete piirangute valideerimisskript
 
 ```python
 #!/usr/bin/env python3
@@ -990,7 +990,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # Hangi salvestuskontod tellimuses
+    # Hangi tellimuse salvestuskontod
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -998,7 +998,7 @@ def check_storage_limits(location: str) -> bool:
         return False
     
     account_count = len(accounts)
-    max_accounts = 250  # Azure'i vaikimisi piirang
+    max_accounts = 250  # Vaikimisi Azure'i piirang
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1060,18 +1060,18 @@ if __name__ == "__main__":
 
 ## Turvalisuse ja vastavuse kontrollid
 
-### Turvavalideerimise skript
+### Turvalisuse valideerimisskript
 
 ```bash
 #!/bin/bash
-# AZD-juurutuste turbe- ja vastavuse kontroll
+# Turvalisuse ja vastavuse kontroll AZD juurutusteks
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
     
     local issues_found=0
     
-    # Kontrolli Key Vaulti kasutamist
+    # Kontrolli Key Vaulti kasutust
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1079,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Kontrolli hallatud identiteedi kasutamist
+    # Kontrolli hallatud identiteedi kasutust
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Kontrolli HTTPS-i sundimist
+    # Kontrolli HTTPS nõude kehtestamist
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1095,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Kontrolli TLS-i minimaalset versiooni
+    # Kontrolli minimaalset TLS versiooni
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1111,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Kontrolli võrgu turvarühmi
+    # Kontrolli võrgu turvagruppide olemasolu
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1131,14 +1131,14 @@ check_compliance_requirements() {
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # Kontrolli auditeerimise logimist
+    # Kontrolli auditeerimislogimist
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # Kontrolli varundamise ja säilituspoliitikate olemasolu
+    # Kontrolli varunduse ja säilituspoliitikaid
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1146,7 +1146,7 @@ check_compliance_requirements() {
     fi
 }
 
-# Põhiline täitmine
+# Peamine täitmine
 main() {
     echo "🔒 Security and Compliance Validation"
     echo "📁 Checking infra/ directory for security best practices"
@@ -1177,9 +1177,9 @@ main "$@"
 
 ---
 
-## Integratsioon CI/CD-ga
+## Integreerimine CI/CD-ga
 
-### GitHub Actions integratsioon
+### GitHub Actions integreerimine
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1238,7 +1238,7 @@ jobs:
         path: preflight-results.json
 ```
 
-### Azure DevOps integratsioon
+### Azure DevOps integreerimine
 
 ```yaml
 trigger: none
@@ -1290,58 +1290,58 @@ steps:
 
 ---
 
-## Parimate tavade kokkuvõte
+## Parimad praktikad kokkuvõte
 
-### ✅ Eelselennukontrolli parimad tavad
+### ✅ Eeljärjekorra kontrollide parimad praktikad
 
 1. **Automatiseeri, kus võimalik**
-   - Integreeri kontrollid CI/CD töövoogudesse
+   - Integreeri kontrollid CI/CD torujuhtmetesse
    - Kasuta skripte korduvate valideerimiste jaoks
-   - Salvesta tulemused auditeerimise tarbeks
+   - Säilita tulemusi auditeerimise jälgede jaoks
 
-2. **Keskkonnapõhine valideerimine**
-   - Erinevad kontrollid arendus-/staging-/tootmiskeskkondadele
-   - Sobivad turvanõuded iga keskkonna jaoks
-   - Kuluoptimeerimine mitte-tootmiskeskkondade jaoks
+2. **Keskkonnaspetsiifiline valideerimine**
+   - Erinevad kontrollid arendus-, katse- ja tootmiskeskkondade jaoks
+   - Sobivad turvanõuded vastavalt keskkonnale
+   - Kulude optimeerimine mitte-tootmiskeskkondadele
 
-3. **Põhjalik katvus**
+3. **Terviklik uurimine**
    - Autentimine ja õigused
-   - Ressursside kvoodid ja kättesaadavus
+   - Ressursside kvantumid ja saadavus
    - Mallide valideerimine ja süntaks
-   - Turva- ja vastavusnõuded
+   - Turvalisuse ja vastavuse nõuded
 
 4. **Selge aruandlus**
    - Värvikoodiga olekuindikaatorid
-   - Üksikasjalikud veateated parandusmeetmetega
-   - Kokkuvõtlikud aruanded kiireks hindamiseks
+   - Detailsete vigade sõnumid parandusmeetmetega
+   - Kiireks hinnanguks kokkuvõtlikud aruanded
 
-5. **Katkesta varakult**
-   - Tühista juurutus, kui kriitilised kontrollid ebaõnnestuvad
-   - Paku selged juhised lahendamiseks
-   - Luba kontrollide lihtne uuesti käivitamine
+5. **Ebaõnnestumine kiiresti**
+   - Peata juurutus, kui kriitilised kontrollid ebaõnnestuvad
+   - Paku selget juhendamist lahendamiseks
+   - Võimalda kontrollide mugav kordusjooks
 
-### Levinud eelselennukontrollide lõksud
+### Levinud eeljärjekorra lõksud
 
-1. **Valideerimise vahele jätmine** "kiirete" juurutuste puhul
-2. **Ebapiisav õiguste kontroll** enne juurutust
-3. **Kvootide piiride ignoreerimine** kuni juurutus ebaõnnestub
-4. **Mallide mittevalideerimine** CI/CD töövoogudes
-5. **Turvavalideerimise puudumine** tootmiskeskkondade jaoks
-6. **Ebapiisav kuluarvestus**, mis viib eelarveüllatusteni
+1. **Valideerimise vahele jätmine** „kiirete“ juurutuste korral
+2. **Ebapiisavad õiguste kontrollid** enne juurutust
+3. **Kvantitatiivsete piirangute ignoreerimine** kuni juurutuse ebaõnnestumiseni
+4. **Mallide valideerimata jätmine** CI/CD torujuhtmetes
+5. **Turvalisuse valideerimise puudumine** tootmiskeskkondades
+6. **Ebapiisav kulude hindamine**, mis viib eelarve ootusteni
 
 ---
 
-**Pro Tip**: Käivita eelselennukontrollid eraldi tööna oma CI/CD töövoos enne tegelikku juurutustööd. See võimaldab varakult probleemid tabada ja annab arendajatele kiirema tagasiside.
+**Pro nipp**: Käivita eelkontrollid CI/CD torujuhtmikus eraldi töökorrana enne tegelikku juurutustööd. See võimaldab varakult probleeme tabada ja annab arendajatele kiirema tagasiside.
 
 ---
 
 **Navigeerimine**
-- **Eelmine õppetükk**: [SKU valik](sku-selection.md)
-- **Järgmine õppetükk**: [Kiirjuhend](../../resources/cheat-sheet.md)
+- **Eelmine õppetund**: [SKU valik](sku-selection.md)
+- **Järgmine õppetund**: [Kiirjuhend](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vastutusest loobumine:
-See dokument on tõlgitud tehisintellekti tõlketeenuse Co-op Translator (https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, pidage meeles, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokumenti selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste ega valesti tõlgendamise eest.
+**Vastutusest loobumine**:
+See dokument on tõlgitud kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüame täpsust, palun arvestage, et automatiseeritud tõlgetes võib esineda vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada usaldusväärseks allikaks. Olulise teabe puhul on soovitatav kasutada professionaalset inimtõlget. Me ei vastuta selle tõlkega seotud arusaamatuste või valesti mõistmiste eest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,24 +1,24 @@
 # Troubleshooting Guide wey concern AI
 
-**Chapter Navigation:**
+**How to waka between Chapters:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 7 - Troubleshooting & Debugging
 - **⬅️ Previous**: [Debugging Guide](debugging.md)
 - **➡️ Next Chapter**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
 - **🤖 Related**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-Dis kompleit troubleshooting guide dey cover common wahala wey fit show when you dey deploy AI solutions wit AZD, and e go show solutions and debugging teknik wey just dey for Azure AI services.
+Dis full troubleshooting guide dey cover common wahala wey fit show when you dey deploy AI solutions with AZD, an e de give solutions and debugging techniques wey specific to Azure AI services.
 
 ## Table of Contents
 
-- [Microsoft Foundry Models Service Issues](../../../../docs/chapter-07-troubleshooting)
-- [Azure AI Search Problems](../../../../docs/chapter-07-troubleshooting)
-- [Container Apps Deployment Issues](../../../../docs/chapter-07-troubleshooting)
-- [Authentication and Permission Errors](../../../../docs/chapter-07-troubleshooting)
-- [Model Deployment Failures](../../../../docs/chapter-07-troubleshooting)
-- [Performance and Scaling Issues](../../../../docs/chapter-07-troubleshooting)
-- [Cost and Quota Management](../../../../docs/chapter-07-troubleshooting)
-- [Debugging Tools and Techniques](../../../../docs/chapter-07-troubleshooting)
+- [Microsoft Foundry Models Service Issues](#azure-openai-service-issues)
+- [Azure AI Search Problems](#azure-ai-search-problems)
+- [Container Apps Deployment Issues](#container-apps-deployment-issues)
+- [Authentication and Permission Errors](#authentication-and-permission-errors)
+- [Model Deployment Failures](#model-deployment-failures)
+- [Performance and Scaling Issues](#performance-and-scaling-issues)
+- [Cost and Quota Management](#cost-and-quota-management)
+- [Debugging Tools and Techniques](#debugging-tools-and-techniques)
 
 ## Microsoft Foundry Models Service Issues
 
@@ -30,15 +30,15 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **Causes:**
-- Microsoft Foundry Models no dey available for the region wey you select
-- Quota don finish for the regions wey you prefer
-- Regional capacity get restriction
+- Microsoft Foundry Models no dey for the region wey you select
+- Quota don finish for the regions wey you dey prefer
+- Regional capacity dey tight
 
 **Solutions:**
 
 1. **Check Region Availability:**
 ```bash
-# List di regions wey dey available for OpenAI
+# List di regions wey OpenAI get
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
@@ -79,7 +79,7 @@ Error: Deployment failed due to insufficient quota
 
 1. **Check Current Quota:**
 ```bash
-# Check how much of the quota don use
+# Check how di quota dey used
 az cognitiveservices usage list \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG
@@ -87,7 +87,7 @@ az cognitiveservices usage list \
 
 2. **Request Quota Increase:**
 ```bash
-# Send request make dem increase quota
+# Send request make dem increase your quota
 az support tickets create \
   --ticket-name "OpenAI Quota Increase" \
   --description "Need increased quota for production deployment" \
@@ -124,13 +124,13 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 1. **Use Supported API Version:**
 ```python
-# Use di latest version wey dem dey support
+# Use di latest version wey dem support
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
 2. **Check API Version Compatibility:**
 ```bash
-# List API versions wey dem dey support
+# Show di API versions wey we dey support
 az rest --method get \
   --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
@@ -190,7 +190,7 @@ Error: Cannot create index, insufficient permissions
 
 1. **Verify Search Service Keys:**
 ```bash
-# Get di search service admin key
+# Go collect di search service admin key
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
@@ -198,7 +198,7 @@ az search admin-key show \
 
 2. **Check Index Schema:**
 ```python
-# Make sure say di index schema correct
+# Make sure say index schema correct
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
@@ -273,7 +273,7 @@ azure-cosmos==4.5.1
 
 3. **Add Health Check:**
 ```python
-# main.py - Add endpoint wey go check if app dey healthy
+# main.py - Add endpoint wey go check say app dey okay
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -327,7 +327,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Optimize Model Loading:**
 ```python
-# Load models small small make startup time short
+# Make models dey load only when dem need am so startup time go short
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -341,7 +341,7 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # Na here we go set up the AI client
+        # Start di AI client here
         pass
 
 @asynccontextmanager
@@ -368,7 +368,7 @@ Error: Authentication failed for Microsoft Foundry Models Service
 
 1. **Verify Role Assignments:**
 ```bash
-# Check di current roles wey dem don give
+# Check di role assignments wey dey now
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
@@ -393,7 +393,7 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 3. **Test Authentication:**
 ```python
-# Try di managed identity authentication
+# Make we test di managed identity authentication
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
@@ -460,7 +460,7 @@ Error: Model version 'gpt-4-32k' is not available
 
 1. **Check Available Models:**
 ```bash
-# List di models wey dey available
+# List models wey dey available
 az cognitiveservices account list-models \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG \
@@ -479,8 +479,8 @@ param primaryModel object = {
 
 @description('Fallback model configuration')
 param fallbackModel object = {
-  name: 'gpt-35-turbo'
-  version: '0125'
+  name: 'gpt-4.1'
+  version: '2024-08-06'
 }
 
 // Try primary model first, fallback if unavailable
@@ -499,7 +499,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 
 3. **Validate Model Before Deployment:**
 ```python
-# Make sure say model correct before dem deploy am.
+# Check di model before dem deploy am
 import httpx
 
 async def validate_model_availability(model_name: str, version: str) -> bool:
@@ -532,7 +532,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 1. **Implement Request Timeouts:**
 ```python
-# Set correct timeout dem
+# Set di correct timeout dem
 import httpx
 
 client = httpx.AsyncClient(
@@ -629,7 +629,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Optimize Memory Usage:**
 ```python
-# Model handling wey dey save memory
+# Handle model wey dey use small memori
 import gc
 import psutil
 
@@ -639,14 +639,14 @@ class MemoryOptimizedAI:
         
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # Check how memory dey used before you start process
+        # Check how memori dey used before you start process
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Force garbage collector make e run
+            gc.collect()  # Force make garbage collector run
             
         result = await self._process_ai_request(request)
         
-        # Clean up after you don finish processing
+        # Clear tings after you don process
         gc.collect()
         return result
 ```
@@ -657,14 +657,14 @@ class MemoryOptimizedAI:
 
 **Symptoms:**
 - Azure bill pass wetin you expect
-- Token usage don pass estimate
+- Token usage dey pass estimate
 - Budget alerts don fire
 
 **Solutions:**
 
 1. **Implement Cost Controls:**
 ```python
-# Dey track how dem dey use tokens
+# Dey track how token dem dey used
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -709,18 +709,15 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 3. **Optimize Model Selection:**
 ```python
 # Model selection wey dey consider cost
-MODEL_COSTS = {
-    'gpt-4.1-mini': 0.00015,  # for every 1K tokens
-    'gpt-4.1': 0.03,          # for every 1K tokens
-    'gpt-35-turbo': 0.0015  # for every 1K tokens
+MODEL_COST_TIERS = {
+  'gpt-4.1-mini': 'low',
+  'gpt-4.1': 'high'
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
     """Select model based on complexity and budget."""
     if complexity == 'simple' or budget_remaining < 10:
         return 'gpt-4.1-mini'
-    elif complexity == 'medium':
-        return 'gpt-35-turbo'
     else:
         return 'gpt-4.1'
 ```
@@ -730,41 +727,41 @@ def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
 ### AZD Debugging Commands
 
 ```bash
-# Make logging dey show every small tin
+# Make verbose logging dey
 azd up --debug
 
 # Check how deployment dey
 azd show
 
-# See application logs (e go open monitoring dashboard)
+# See app logs (e go open monitoring dashboard)
 azd monitor --logs
 
-# See live metrics wey dey now
+# See metrics wey dey live
 azd monitor --live
 
-# Check di environment variables
+# Check wetin dey for environment variables
 azd env get-values
 ```
 
 ### AZD AI Extension Commands for Diagnostics
 
-If you deploy agents using `azd ai agent init`, these extra tools go dey available:
+If you deploy agents using `azd ai agent init`, these additional tools dey available:
 
 ```bash
 # Make sure say the agents extension don install
 azd extension install azure.ai.agents
 
-# Initialize the agent again or update am from a manifest
+# Start the agent again or update am from the manifest
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# Use the MCP server make AI tools fit ask about project status
+# Use the MCP server make AI tools fit ask about the project state
 azd mcp start
 
-# Generate infrastructure files so dem fit review and audit
+# Create infrastructure files so dem fit review and audit
 azd infra generate
 ```
 
-> **Tip:** Use `azd infra generate` to write IaC to disk so you fit inspeckt exactly wetin resources dem provision put. Dis one base wella when you dey debug resource configuration wahala. See the [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full details.
+> **Tip:** Use `azd infra generate` to write IaC to disk so you fit inspect exactly wetin resources dem provision. Dis one dey very useful when you dey debug resource configuration wahala. See the [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full details.
 
 ### Application Debugging
 
@@ -773,7 +770,7 @@ azd infra generate
 import logging
 import json
 
-# Make structured logging dey work for AI apps
+# Set up structured logging wey get structure for AI apps.
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -878,7 +875,7 @@ def monitor_performance(func):
 
 ---
 
-**Chapter Navigation:**
+**How to waka between Chapters:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 7 - Troubleshooting & Debugging
 - **⬅️ Previous**: [Debugging Guide](debugging.md)
@@ -889,6 +886,6 @@ def monitor_performance(func):
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dis document don translate with AI translation service wey dem dey call Co-op Translator (https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg sabi say automated translations fit get errors or no too accurate. Di original document for im native language suppose be di authoritative source. If na important matter, e better make professional human translator handle am. We no dey responsible for any misunderstanding or wrong interpretation wey fit arise from using this translation.
+**Disclaimer**:
+Dis document don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg sabi say automated translations fit get errors or inaccuracies. The original document for e native language na di authoritative source. For critical information, e better make professional human translation handle am. We no go responsible for any misunderstanding or misinterpretation wey fit arise from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

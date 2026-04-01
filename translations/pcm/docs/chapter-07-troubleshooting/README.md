@@ -1,43 +1,49 @@
-# Chapter 7: Troubleshootin & Debuggin
+# Chapter 7: Find & Fix Wahala (Troubleshooting & Debugging)
 
-**📚 Kọs**: [AZD For Beginners](../../README.md) | **⏱️ Taim**: 1-1.5 hours | **⭐ Level**: Intermediate
+**📚 Kɔs**: [AZD For Beginners](../../README.md) | **⏱️ Taim**: 1-1.5 hours | **⭐ Level**: Medium
 
 ---
 
 ## Overview
 
-Dis chapter go help you diagnose an solve common wahala wey fit show when you dey work wit Azure Developer CLI. E cover from deployment failures reach AI-specific problems.
+Dis chapter go help you find and resolve common wahala wen you dey work with Azure Developer CLI. E cover things from deployment wey fail reach AI-specific problems.
+
+> Validated against `azd 1.23.12` in March 2026.
 
 ## Learning Objectives
 
-After you finish dis chapter, you go fit:
-- Diagnose common AZD deployment wahala
-- Debug authentication an permission wahala
-- Solve AI service connectivity wahala
-- Use Azure Portal an CLI to troubleshoot
+By finish dis chapter, you go fit:
+- Find common AZD deployment failures
+- Debug authentication and permission wahala
+- Solve AI service connectivity problems
+- Use Azure Portal and CLI for troubleshooting
 
 ---
 
 ## 📚 Lessons
 
-| # | Lekshon | Wetin e cover | Taim |
+| # | Lekshon | Tori | Time |
 |---|--------|-------------|------|
-| 1 | [Common Issues](common-issues.md) | Problems wey you dey see often | 30 min |
-| 2 | [Debugging Guide](debugging.md) | Step-by-step debugging ways | 45 min |
-| 3 | [AI Troubleshooting](ai-troubleshooting.md) | AI-specific wahala | 30 min |
+| 1 | [Common Issues](common-issues.md) | Problems wey people dey meet often | 30 min |
+| 2 | [Debugging Guide](debugging.md) | Step-by-step ways to debug | 45 min |
+| 3 | [AI Troubleshooting](ai-troubleshooting.md) | AI-specific problems | 30 min |
 
 ---
 
 ## 🚨 Quick Fixes
 
-### Authentication Wahala
+### Authentication Issues
 ```bash
+# E necessary for AZD workflows
 azd auth login
+
+# E optional if you sef dey use Azure CLI commands direct
 az login
-azd auth whoami
+
+azd auth status
 ```
 
-### Provisioning Wahala
+### Provisioning Failures
 ```bash
 azd show
 azd monitor --logs
@@ -51,7 +57,7 @@ azd env new different-name
 azd up
 ```
 
-### Quota Don Pass
+### Quota Exceeded
 ```bash
 az vm list-usage --location eastus --output table
 azd env set AZURE_LOCATION westus2
@@ -64,22 +70,22 @@ azd up
 
 | Error | Cause | Solution |
 |-------|-------|----------|
-| `AuthenticationError` | You no don log in | `azd auth login` |
-| `ResourceNotFound` | Resource no dey | Check the resource names |
-| `QuotaExceeded` | Subscription limits don reach | Ask for quota increase |
-| `InvalidTemplate` | Bicep syntax wahala | `az bicep build` |
-| `Conflict` | Resource don already dey | Use new name or delete am |
-| `Forbidden` | Permission no reach | Check RBAC roles |
+| `AuthenticationError` | You never log in | `azd auth login` |
+| `ResourceNotFound` | Resource no dey | Check resource names |
+| `QuotaExceeded` | Subscription get limit | Request quota increase |
+| `InvalidTemplate` | Bicep syntax error | `az bicep build` |
+| `Conflict` | Resource don already dey | Use new name or delete |
+| `Forbidden` | You no get enough permission | Check RBAC roles |
 
 ---
 
 ## 🔄 Reset and Recovery
 
 ```bash
-# Soft reset (no go delete anything, keep di resources, deploy di code again)
+# Soft reset (resources go still dey, just redeploy di code)
 azd deploy --force
 
-# Hard reset (go delete everything, start again from scratch)
+# Hard reset (delete everytin, start again from scratch)
 azd down --force --purge
 azd up
 ```
@@ -104,6 +110,6 @@ azd up
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dis dokument don translate with AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg note say automated translations fit get mistakes or no too accurate. The original dokument for im original language na the correct source wey you suppose trust. If na serious or important information, make person wey sabi (professional human translator) do the translation. We no dey responsible for any misunderstanding or wrong meaning wey fit come from using this translation.
+**Disclaimer**:
+Dis document don translate using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make everything correct, abeg note say automated translations fit get errors or inaccuracies. Di original document for im native language suppose be di authoritative source. For critical information, make you use professional human translation. We no dey liable for any misunderstandings or misinterpretations wey fit arise from di use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

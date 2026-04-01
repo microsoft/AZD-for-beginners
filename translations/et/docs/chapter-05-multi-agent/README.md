@@ -1,34 +1,36 @@
-# Chapter 5: Mitme agendi AI lahendused
+# 5. peatükk: Mitme agendi AI lahendused
 
-**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 2-3 tundi | **⭐ Tõsidusaste**: Edasijõudnu
+**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 2–3 tundi | **⭐ Raskeusaste**: Edasijõudnud
 
 ---
 
 ## Ülevaade
 
-See peatükk käsitleb täiustatud mitme agendi arhitektuuri mustreid, agendihaldust ja tootmiskõlblikke AI lahendusi keerukate stsenaariumide jaoks.
+See peatükk käsitleb keerukaid mitme agendi arhitektuurimustreid, agentide koordineerimist ja tootmiskõlblikke AI lahendusi keeruliste stsenaariumite jaoks.
+
+> Kontrollitud versiooniga `azd 1.23.12` märts 2026.
 
 ## Õpieesmärgid
 
-Selle peatüki läbimise järel:
-- Mõistate mitme agendi arhitektuuri mustreid
-- Paigaldage koordineeritud AI agentide süsteemid
-- Rakendage agentidevaheline suhtlus
-- Ehitate tootmiskõlblikke mitme agendi lahendusi
+Selle peatüki lõpetamisega saad:
+- Mõista mitme agendi arhitektuurimustreid
+- Juurutada koordineeritud AI agendite süsteeme
+- Rakendada agendi-agnedi suhtlust
+- Luua tootmiskõlblikke mitme agendi lahendusi
 
 ---
 
-## 📚 Õppetunnid
+## 📚 Tunnid
 
-| # | Õppetund | Kirjeldus | Aeg |
-|---|--------|-------------|------|
-| 1 | [Jaekauplemise mitme agendi lahendus](../../examples/retail-scenario.md) | Täielik rakenduse samm-sammuline selgitus | 90 min |
+| # | Tund | Kirjeldus | Aeg |
+|---|------|-----------|-----|
+| 1 | [Jaekaubanduse mitme agendi lahendus](../../examples/retail-scenario.md) | Täielik rakenduse läbivaatus | 90 min |
 | 2 | [Koordineerimise mustrid](../chapter-06-pre-deployment/coordination-patterns.md) | Agentide orkestreerimise strateegiad | 30 min |
-| 3 | [ARM i mallide juurutamine](../../examples/retail-multiagent-arm-template/README.md) | Ühe klõpsuga juurutamine | 30 min |
+| 3 | [ARM malle juurutamine](../../examples/retail-multiagent-arm-template/README.md) | Ühe klõpsuga juurutamine | 30 min |
 
 ---
 
-## 🚀 Kiire algus
+## 🚀 Kiiralgus
 
 ```bash
 # Valik 1: Paigalda mallist
@@ -41,7 +43,7 @@ azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Milline lähenemine?** Kasutage `azd init --template`, et alustada töökohast näidismallist. Kasutage `azd ai agent init`, kui teil on oma agendi manifest. Vaadake täielike juhiste saamiseks [AZD AI CLI viidet](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
+> **Millist lähenemist kasutada?** Kasuta `azd init --template`, et alustada toimiva näiteks. Kasuta `azd ai agent init`, kui sul on olemas oma agendi manifest. Täpse info saamiseks vaata [AZD AI CLI juhendit](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
 
 ---
 
@@ -49,50 +51,50 @@ azd up
 
 ```mermaid
 graph TD
-    Orchestrator[Orkestreerija Agent<br/>Suunab päringuid, haldab töövoogu] --> Customer[Kliendi Agent<br/>Kasutaja päringud, eelistused]
-    Orchestrator --> Inventory[Laovarude Agent<br/>Laoseisud, tellimused]
+    Orchestrator[Orkestreerija Agendi<br/>Jyude marsruutimine, töövoogude haldamine] --> Customer[Kliendiagent<br/>Kasutajapäringud, eelistused]
+    Orchestrator --> Inventory[Laoseis Agendi<br/>Laoseis, tellimused]
 ```
 ---
 
-## 🎯 Esile tõstetud lahendus: Jaekauplemise mitme agendi lahendus
+## 🎯 Esiletõstetud lahendus: Jaekaubanduse mitme agendi lahendus
 
-[Jaekauplemise mitme agendi lahendus](../../examples/retail-scenario.md) demonstreerib:
+[Jaekaubanduse mitme agendi lahendus](../../examples/retail-scenario.md) demonstreerib:
 
-- **Kliendiagent**: Haldab kasutajate interaktsioone ja eelistusi
-- **Laohaldusagent**: Juhtimise all varud ja tellimuste töötlemine
+- **Kliendi agent**: Käsitleb kasutajate suhtlust ja eelistusi
+- **Varude agent**: Halda lao ja tellimuste töötlemist
 - **Orkestreerija**: Koordineerib agentide tööd
-- **Jagatud mälu**: Konteksti haldamine agentide vahel
+- **Jagatud mälu**: Agenditevaheline konteksti haldus
 
 ### Kasutatud teenused
 
-| Teenus | Otstarve |
-|---------|---------|
+| Teenus | Eesmärk |
+|--------|---------|
 | Microsoft Foundry mudelid | Keele mõistmine |
-| Azure AI otsing | Tootekataloog |
-| Cosmos DB | Agendi olek ja mälu |
-| Container Apps | Agendi majutamine |
+| Azure AI Search | Toodete kataloog |
+| Cosmos DB | Agendi seisund ja mälu |
+| Container Apps | Agentide majutamine |
 | Application Insights | Jälgimine |
 
 ---
 
-## 🔗 Navigatsioon
+## 🔗 Navigeerimine
 
 | Suund | Peatükk |
-|-----------|---------|
+|-------|---------|
 | **Eelmine** | [4. peatükk: Taristu](../chapter-04-infrastructure/README.md) |
-| **Järgmine** | [6. peatükk: Eeljärkud](../chapter-06-pre-deployment/README.md) |
+| **Järgmine** | [6. peatükk: Eeljätkusuunamine](../chapter-06-pre-deployment/README.md) |
 
 ---
 
 ## 📖 Seotud ressursid
 
-- [AI agendid: juhend](../chapter-02-ai-development/agents.md)
-- [Tootmise AI praktikad](../chapter-08-production/production-ai-practices.md)
+- [AI agentide juhend](../chapter-02-ai-development/agents.md)
+- [Tootmise AI tavad](../chapter-08-production/production-ai-practices.md)
 - [AI tõrkeotsing](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastutusest loobumine**:
-See dokument on tõlgitud kasutades tehisintellektil põhinevat tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüame tagada täpsust, olge teadlikud, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument oma emakeeles tuleks lugeda usaldusväärseks allikaks. Olulise info puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta tõlke kasutamisest tingitud arusaamatuste või valesti tõlgendamise eest.
+See dokument on tõlgitud kasutades AI tõlke teenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüame täpsust, palun pidage meeles, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Tähtsa teabe puhul on soovitatav kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tingitud arusaamatuste või valesti mõistmiste eest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

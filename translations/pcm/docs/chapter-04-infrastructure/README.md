@@ -1,39 +1,41 @@
-# Chapta 4: Infrastructure as Code & Deployment
+# Chapter 4: Infrastructure as Code & Deployment
 
-**📚 Kɔɔs**: [AZD For Beginners](../../README.md) | **⏱️ Taim**: 1-1.5 hours | **⭐ Kompleksiti**: Medium
+**📚 Kọs**: [AZD For Beginners](../../README.md) | **⏱️ Taim**: 1-1.5 hours | **⭐ Komplesiti**: Medium
 
 ---
 
-## Wetin Dis Chapta Dey Cover
+## Wetin dis chapter dey cover
 
-Dis chapta go cover Infrastructure as Code (IaC) patern dem wit Bicep templates, resource provisioning, an deployment strategies wey dey use Azure Developer CLI.
+Dis chapter go show Infrastructure as Code (IaC) patterns wit Bicep templates, how to provision resources, an deployment strategies wey you fit use wit Azure Developer CLI.
+
+> Dem validate am wit `azd 1.23.12` for March 2026.
 
 ## Wetin You Go Learn
 
-If you finish dis chapta, you go:
-- Sabi Bicep template structure and syntax
-- Provision Azure resource dem with `azd provision`
+By finish dis chapter, you go:
+- Understand how Bicep templates take arrangement and how the syntax dey work
+- Provision Azure resources with `azd provision`
 - Deploy application dem with `azd deploy`
 - Implement blue-green and rolling deployment strategies
 
 ---
 
-## 📚 Lesons
+## 📚 Lekshon dem
 
-| # | Leson | Tok | Taim |
+| # | Lekshon | Tok | Taim |
 |---|--------|-------------|------|
-| 1 | [Provision Resource dem](provisioning.md) | Azure resource management wit AZD | 45 min |
-| 2 | [Deployment Guide](deployment-guide.md) | Application deployment strategies | 45 min |
+| 1 | [Provisioning Resources](provisioning.md) | How to manage Azure resources wit AZD | 45 min |
+| 2 | [Deployment Guide](deployment-guide.md) | Strategy wey you go take deploy apps | 45 min |
 
 ---
 
 ## 🚀 Quick Start
 
 ```bash
-# Set up from di template
+# Start from di template
 azd init --template azure-functions-python-v2-http
 
-# Preview wetin dem go create
+# See wetin dem go create
 azd provision --preview
 
 # Just set up di infrastructure
@@ -42,13 +44,13 @@ azd provision
 # Just deploy di code
 azd deploy
 
-# Or do both togeda
+# Or do both together
 azd up
 ```
 
 ---
 
-## 📁 AZD Project Struktur
+## 📁 AZD Project Structure
 
 ```
 my-project/
@@ -65,15 +67,15 @@ my-project/
 
 ---
 
-## 🔧 Essential Commands
+## 🔧 Commands Wey You Need
 
 | Command | Description |
 |---------|-------------|
-| `azd init` | Set up project |
-| `azd provision` | Create Azure resource dem |
-| `azd deploy` | Deploy application code |
+| `azd init` | Initialize di project |
+| `azd provision` | Create Azure resources |
+| `azd deploy` | Deploy di app code |
 | `azd up` | provision + deploy |
-| `azd down` | Delete all resource dem |
+| `azd down` | Delete all resources |
 
 ---
 
@@ -81,8 +83,8 @@ my-project/
 
 | Direction | Chapter |
 |-----------|---------|
-| **Previous** | [Chapta 3: Configuration](../chapter-03-configuration/README.md) |
-| **Next** | [Chapta 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md) |
+| **Previous** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
+| **Next** | [Chapter 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md) |
 
 ---
 
@@ -95,6 +97,6 @@ my-project/
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dis dokument don translate by AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg make you sabi sey automated translations fit get mistakes or no correct finish. Di original dokument for im original language suppose be di main authority. For important matter, e better make professional human translator check am. We no dey liable for any misunderstanding or wrong interpretation wey fit come from using dis translation.
+**Disclaimer**:
+Dis dokument don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am accurate, abeg sabi say automated translations fit get errors or inaccuracies. Di original dokument for im native language suppose be di authoritative source. If na critical information, we recommend make professional human translator do am. We no dey liable for any misunderstanding or misinterpretation wey fit arise from di use of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

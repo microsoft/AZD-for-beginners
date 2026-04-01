@@ -1,43 +1,49 @@
-# Chapter 7: Troubleshooting & Debugging
+# Chapter 7: Tõrkeotsing & Silumine
 
-**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 1-1.5 tundi | **⭐ Raskusaste**: Kesktase
+**📚 Kursus**: [AZD Algajatele](../../README.md) | **⏱️ Kestus**: 1-1.5 tundi | **⭐ Tase**: Kesktase
 
 ---
 
 ## Ülevaade
 
-See peatükk aitab teil tuvastada ja lahendada levinud probleeme Azure Developer CLI kasutamisel. Alates juurutuse tõrgetest kuni AI-spetsiifiliste probleemideni.
+See peatükk aitab sul diagnoosida ja lahendada tavalisi probleeme Azure Developer CLI-ga töötamisel. Alates juurutuse ebaõnnestumistest kuni tehisintellekti spetsiifiliste probleemideni.
+
+> Testitud versiooniga `azd 1.23.12` märtsis 2026.
 
 ## Õpieesmärgid
 
-Selle peatüki lõpetamisel suudate:
-- Diagnoosida tavalisi AZD juurutuse tõrkeid
-- Tõrkeotsida autentimise ja õiguste probleeme
-- Lahendada AI-teenuste ühenduvuse probleeme
-- Kasutada Azure'i portaali ja CLI-d tõrkeotsinguks
+Selle peatüki läbimisel sa:
+- Diagnoosid tavalisi AZD juurutuse ebaõnnestumisi
+- Silud autentimis- ja õigustega seotud probleeme
+- Lahendad tehisintellekti teenuste ühenduse probleeme
+- Kasutad tõrkeotsinguks Azure Portaali ja CLI-d
 
 ---
 
-## 📚 Õppetunnid
+## 📚 Tunnid
 
-| # | Õppetund | Kirjeldus | Aeg |
+| # | Tund | Kirjeldus | Aeg |
 |---|--------|-------------|------|
-| 1 | [Levinud probleemid](common-issues.md) | Sageli esinevad probleemid | 30 min |
-| 2 | [Tõrkeotsingu juhend](debugging.md) | Samm-sammult tõrkeotsingu strateegiad | 45 min |
-| 3 | [AI tõrkeotsing](ai-troubleshooting.md) | AI-spetsiifilised probleemid | 30 min |
+| 1 | [Tavalised probleemid](common-issues.md) | Sageli esinevad vead | 30 min |
+| 2 | [Silumise juhend](debugging.md) | Samm-sammult silumisstrateegiad | 45 min |
+| 3 | [Tehisintellekti tõrkeotsing](ai-troubleshooting.md) | Tehisintellekti spetsiifilised probleemid | 30 min |
 
 ---
 
-## 🚨 Kiirparandused
+## 🚨 Kiired parandused
 
 ### Autentimisprobleemid
 ```bash
+# Nõutav AZD töövoogude jaoks
 azd auth login
+
+# Valikuline, kui kasutate ka Azure CLI käske otse
 az login
-azd auth whoami
+
+azd auth status
 ```
 
-### Provisionimise tõrked
+### Provisioneerimise ebaõnnestumised
 ```bash
 azd show
 azd monitor --logs
@@ -51,7 +57,7 @@ azd env new different-name
 azd up
 ```
 
-### Kvoodi ületamine
+### Kvoot ületatud
 ```bash
 az vm list-usage --location eastus --output table
 azd env set AZURE_LOCATION westus2
@@ -60,50 +66,50 @@ azd up
 
 ---
 
-## 📋 Veakoodide viide
+## 📋 Veakoodide reference
 
-| Error | Põhjus | Lahendus |
+| Viga | Põhjus | Lahendus |
 |-------|-------|----------|
-| `AuthenticationError` | Pole sisse logitud | `azd auth login` |
-| `ResourceNotFound` | Ressurss puudub | Kontrolli ressursi nimesid |
-| `QuotaExceeded` | Tellimuse piirangud | Taotle limiidi suurendamist |
+| `AuthenticationError` | Pole sisselogitud | `azd auth login` |
+| `ResourceNotFound` | Puuduv ressurss | Kontrolli ressursi nimesid |
+| `QuotaExceeded` | Tellimuse piirangud | Palu kvoodi tõstmist |
 | `InvalidTemplate` | Bicep süntaksi viga | `az bicep build` |
-| `Conflict` | Ressurss juba olemas | Kasuta uut nime või kustuta olemasolev |
-| `Forbidden` | Ebapiisavad õigused | Kontrolli RBAC rolle |
+| `Conflict` | Ressurss juba olemas | Kasuta uut nime või kustuta |
+| `Forbidden` | Puuduvad õigused | Kontrolli RBAC rolle |
 
 ---
 
-## 🔄 Lähtestamine ja taastamine
+## 🔄 Lähtesta ja taasta
 
 ```bash
-# Pehme lähtestus (säilita ressursid, juuruta kood uuesti)
+# Pehme lähtestus (säilita ressursid, paigalda kood uuesti)
 azd deploy --force
 
-# Tugev lähtestus (kustuta kõik, alusta puhtalt)
+# Tugev lähtestus (kustuta kõik, alusta uuesti)
 azd down --force --purge
 azd up
 ```
 
 ---
 
-## 🔗 Navigeerimine
+## 🔗 Navigatsioon
 
 | Suund | Peatükk |
 |-----------|---------|
-| **Eelmine** | [Peatükk 6: Enne juurutamist](../chapter-06-pre-deployment/README.md) |
+| **Eelmine** | [Peatükk 6: Enne juurutust](../chapter-06-pre-deployment/README.md) |
 | **Järgmine** | [Peatükk 8: Tootmine](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Seotud ressursid
 
-- [Eeljuurutamise kontrollid](../chapter-06-pre-deployment/preflight-checks.md)
-- [Seadistuse juhend](../chapter-03-configuration/configuration.md)
-- [AZD GitHubi probleemid](https://github.com/Azure/azure-dev/issues)
+- [Enne juurutust kontrollimine](../chapter-06-pre-deployment/preflight-checks.md)
+- [Konfiguratsiooni juhend](../chapter-03-configuration/configuration.md)
+- [AZD GitHub probleemid](https://github.com/Azure/azure-dev/issues)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vastutusest loobumine:
-See dokument on tõlgitud tehisintellekti tõlke teenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsust, pidage palun meeles, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleb pidada autoriteetseks allikaks. Olulise teabe puhul on soovitatav kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste ega vääritõlgenduste eest.
+**Vastutusest loobumine**:
+See dokument on tõlgitud kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüame täpsust, tuleb arvestada, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Kriitilise info puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta tõlgendamisvigade ega arusaamatuste eest, mis tulenevad selle tõlke kasutamisest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

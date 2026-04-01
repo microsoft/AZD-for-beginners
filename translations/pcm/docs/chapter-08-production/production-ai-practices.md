@@ -1,6 +1,6 @@
 # Best Practices for Production AI Workloads wit AZD
 
-**How to find chapters:**
+**Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 8 - Production & Enterprise Patterns
 - **⬅️ Previous Chapter**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
@@ -9,33 +9,33 @@
 
 ## Overview
 
-Dis guide de give correct best practices wey you fit use to deploy production-ready AI workloads wit Azure Developer CLI (AZD). Na from feedback we collect for Microsoft Foundry Discord community and real customer deployments, so dis practices dey solve wetin developers dey face most for production AI systems.
+Dis guide dey give complete best practices for how to deploy production-ready AI workloads using Azure Developer CLI (AZD). Based on feedback from the Microsoft Foundry Discord community and real-world customer deployments, these practices dey tackle di common wahalas wey dey happen for production AI systems.
 
 ## Key Challenges Addressed
 
-Based on our community poll results, these are the top challenges developers face:
+Based on our community poll results, these na di main challenges wey developers dey face:
 
 - **45%** dey struggle wit multi-service AI deployments
-- **38%** get wahala wit credential and secret management  
-- **35%** dey find production readiness and scaling hard
+- **38%** get issues wit credential and secret management  
+- **35%** find production readiness and scaling hard
 - **32%** need better cost optimization strategies
-- **29%** need beta monitoring and troubleshooting
+- **29%** require improved monitoring and troubleshooting
 
 ## Architecture Patterns for Production AI
 
 ### Pattern 1: Microservices AI Architecture
 
-**When to use**: Complex AI applications wey get plenti capabilities
+**When to use**: Complex AI applications wey get multiple capabilities
 
 ```mermaid
 graph TD
-    Frontend[Web wey user dey see] --- Gateway[API Gatewey] --- LB[Load Balancer]
-    Gateway --> Chat[Chat service]
-    Gateway --> Image[Image service]
-    Gateway --> Text[Text service]
+    Frontend[Web wey people dey use] --- Gateway[Gateway wey dey handle API] --- LB[Load Balancer wey dey share traffic]
+    Gateway --> Chat[Chat Sabis]
+    Gateway --> Image[Image Sabis]
+    Gateway --> Text[Text Sabis]
     Chat --> OpenAI[Microsoft Foundry Models]
-    Image --> Vision[Computer vision]
-    Text --> DocIntel[Document intelligence]
+    Image --> Vision[Komputa wey dey see]
+    Text --> DocIntel[Dokument Sabi]
 ```
 **AZD Implementation**:
 
@@ -111,32 +111,32 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 
 ## Thinking About AI Agent Health
 
-When ordinary web app break, the symptoms dey normal: page no go load, API return error, or deployment fail. AI-powered applications fit break the same way— but dem fit also dey misbehave for subtle ways wey no go show obvious error messages.
+When traditional web app break, di signs dey obvious: page no go load, API go return error, or deployment go fail. AI-powered applications fit break for all those same ways—but dem fit also misbehave for subtle ways wey no dey give clear error message.
 
-Dis section go help you build mental model for monitoring AI workloads so you sabi where to check when thing no dey right.
+Dis section go help you build mental model for how to monitor AI workloads so you go sabi where to check when things no balance.
 
 ### How Agent Health Differs from Traditional App Health
 
-Normal app either dey work or e no dey work. AI agent fit look like say e dey work but e fit dey produce bad results. Think of agent health like two layers:
+Traditional app either dey work or e no dey work. AI agent fit look like e dey work but e dey produce bad results. Think of agent health like two layers:
 
 | Layer | What to Watch | Where to Look |
 |-------|--------------|---------------|
-| **Infrastructure health** | Service dey run? Resources dey provision? Endpoints dey reachable? | `azd monitor`, Azure Portal resource health, container/app logs |
-| **Behavior health** | Agent dey respond correct? Responses dey on time? Model dey get called correct? | Application Insights traces, model call latency metrics, response quality logs |
+| **Infrastructure health** | Na the service dey run? Resources don provision? Endpoints dey reachable? | `azd monitor`, Azure Portal resource health, container/app logs |
+| **Behavior health** | Agent dey respond correct? Responses dey on time? Model dey call correct? | Application Insights traces, model call latency metrics, response quality logs |
 
-Infrastructure health na wetin dey familiar—e be same tin for any azd app. Behavior health na the new layer wey AI workloads bring come.
+Infrastructure health na wetin we sabi—e same for any azd app. Behavior health na the new layer wey AI workloads bring.
 
 ### Where to Look When AI Apps Don't Behave as Expected
 
-If your AI application no dey produce the results wey you expect, here na conceptual checklist:
+If your AI application no dey produce di results wey you expect, below na conceptual checklist:
 
-1. **Start with the basics.** App dey run? Fit reach im dependencies? Check `azd monitor` and resource health like you go do for any app.
-2. **Check the model connection.** Your application dey call the AI model successfully? Failed or timed-out model calls na the common cause for AI app wahala and dem go show for your application logs.
-3. **Look at what the model received.** AI responses dey depend on the input (the prompt and any retrieved context). If output wrong, usually input wrong. Check if your application dey send the correct data to the model.
-4. **Review response latency.** AI model calls slow pass normal API calls. If app dey slow, check if model response times don increase—this fit mean throttling, capacity limits, or region-level congestion.
-5. **Watch for cost signals.** Unexpected spikes in token usage or API calls fit mean say you get loop, misconfigured prompt, or too many retries.
+1. **Start with the basics.** App dey run? E fit reach dia dependencies? Check `azd monitor` and resource health like you go do for any app.
+2. **Check the model connection.** Your application dey call the AI model successfully? Failed or timed-out model calls na di commonest cause for AI app issues and dem go show for your application logs.
+3. **Look at what the model received.** AI responses depend on di input (di prompt and any retrieved context). If output wrong, usually input wrong. Check whether your application dey send di right data to di model.
+4. **Review response latency.** AI model calls dey slower pass normal API calls. If your app dey feel slow, check whether model response times don increase—this fit mean throttling, capacity limits, or region-level congestion.
+5. **Watch for cost signals.** Unexpected spike for token usage or API calls fit mean say you get loop, misconfigured prompt, or plenty retries.
 
-You no need sabi all observability tooling immediately. The main koko na say AI applications get one extra layer of behavior wey you must monitor, and azd built-in monitoring (`azd monitor`) fit give you starting point to investigate both layers.
+You no need sabi all observability tools subito. Main point be say AI apps get extra behavior layer wey you must monitor, and azd built-in monitoring (`azd monitor`) na good place to start to investigate both layers.
 
 ---
 
@@ -147,7 +147,7 @@ You no need sabi all observability tooling immediately. The main koko na say AI 
 **Implementation Strategy**:
 - No service-to-service communication without authentication
 - All API calls use managed identities
-- Network isolation wit private endpoints
+- Network isolation with private endpoints
 - Least privilege access controls
 
 ```bicep
@@ -450,7 +450,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 **OpenAI Cost Management**:
 
 ```typescript
-// Optimize token for di app level
+// Optimize tokens for di app level
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -460,7 +460,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Shorten di context, no touch di user input
+      // Cut di context, no chop user input
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -782,7 +782,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup AZD
-        uses: Azure/setup-azd@v1.0.0
+        uses: Azure/setup-azd@v2
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -802,7 +802,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup AZD
-        uses: Azure/setup-azd@v1.0.0
+        uses: Azure/setup-azd@v2
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -827,7 +827,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Make sure say all di services wey we need dey run
+# Make e check say all di services wey dem need dey run
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -837,15 +837,15 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Check say OpenAI models wey dem don deploy dey okay
+# Make e check say OpenAI models don deploy correct
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
-if [[ ! $models == *"gpt-35-turbo"* ]]; then
-    echo "ERROR: Required model gpt-35-turbo not deployed"
+if [[ ! $models == *"gpt-4.1-mini"* ]]; then
+  echo "ERROR: Required model gpt-4.1-mini not deployed"
     exit 1
 fi
 
-# Test if AI service connection dey work
+# Test if AI service fit connect
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
@@ -918,7 +918,7 @@ echo "Infrastructure validation completed successfully!"
 ### Load Testing
 
 ```bash
-# Script wey dey test how AI apps dey handle load.
+# Skript wey dey do load test for AI apps
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -932,31 +932,34 @@ Based on Microsoft Foundry Discord community feedback:
 
 ### Top Recommendations from the Community:
 
-1. **Start Small, Scale Gradually**: Start wit small SKUs and scale up based on wetin real usage show
-2. **Monitor Everything**: Put comprehensive monitoring from day one
-3. **Automate Security**: Use infrastructure-as-code make security consistent
-4. **Test Thoroughly**: Add AI-specific testing for your pipeline
+1. **Start Small, Scale Gradually**: Begin with basic SKUs and scale up based on actual usage
+2. **Monitor Everything**: Set up comprehensive monitoring from day one
+3. **Automate Security**: Use infrastructure as code for consistent security
+4. **Test Thoroughly**: Include AI-specific testing in your pipeline
 5. **Plan for Costs**: Monitor token usage and set budget alerts early
 
 ### Common Pitfalls to Avoid:
 
-- ❌ Hardcoding API keys inside code
-- ❌ No proper monitoring setup
+- ❌ Hardcoding API keys in code
+- ❌ Not setting up proper monitoring
 - ❌ Ignoring cost optimization
-- ❌ No testing of failure scenarios
+- ❌ Not testing failure scenarios
 - ❌ Deploying without health checks
 
 ## AZD AI CLI Commands and Extensions
 
-AZD get plenti AI-specific commands and extensions wey dey make production AI workflows easier. These tools dey bridge gap between local development and production deployment for AI workloads.
+AZD get set of AI-specific commands and extensions wey go help streamline production AI workflows. These tools dey bridge between local development and production deployment for AI workloads.
 
 ### AZD Extensions for AI
 
-AZD dey use extension system to add AI-specific capabilities. Install and manage extensions wit:
+AZD dey use extension system to add AI-specific capabilities. Install and manage extensions with:
 
 ```bash
-# List all extensions wey dey available (even AI sef)
+# Show all di extensions wey dey (including AI)
 azd extension list
+
+# Check di details of di extensions wey don install
+azd extension show azure.ai.agents
 
 # Install di Foundry agents extension
 azd extension install azure.ai.agents
@@ -982,16 +985,16 @@ azd extension upgrade --all
 
 ### Initializing Agent Projects with `azd ai agent init`
 
-The `azd ai agent init` command dey scaffold production-ready AI agent project wey don integrate wit Microsoft Foundry Agent Service:
+The `azd ai agent init` command go scaffold production-ready AI agent project wey don integrate with Microsoft Foundry Agent Service:
 
 ```bash
-# Set up wan new agent project from agent manifest
+# Set up new agent project from di agent manifest
 azd ai agent init -m <manifest-path-or-uri>
 
-# Set up and point to wan specific Foundry project
+# Set up and point e to one specific Foundry project
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# Set up wit wan custom source directory
+# Set up make e use custom source directory
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
 # Make Container Apps di host
@@ -1008,36 +1011,36 @@ azd ai agent init -m agent-manifest.yaml --host containerapp
 | `--host` | Override the default host (e.g., `containerapp`) |
 | `-e, --environment` | The azd environment to use |
 
-**Production tip**: Use `--project-id` to connect direct to existing Foundry project, make your agent code and cloud resources dey linked from the start.
+**Production tip**: Use `--project-id` to connect directly to an existing Foundry project, make your agent code and cloud resources linked from di start.
 
 ### Model Context Protocol (MCP) with `azd mcp`
 
-AZD get built-in MCP server support (Alpha), wey enable AI agents and tools to interact wit your Azure resources through standardized protocol:
+AZD get built-in MCP server support (Alpha), wey allow AI agents and tools to interact wit your Azure resources through standard protocol:
 
 ```bash
-# Start di MCP server for di project wey you dey run
+# Start di MCP server for ya project
 azd mcp start
 
-# Manage di tool permission dem for MCP operations
-azd mcp consent
+# Check di current Copilot permission rules wey dey now for when tools dey run
+azd copilot consent list
 ```
 
-The MCP server go expose your azd project context—environments, services, and Azure resources—to AI-powered development tools. Dis one enable:
+The MCP server dey expose your azd project context—environments, services, and Azure resources—to AI-powered development tools. This one enable:
 
 - **AI-assisted deployment**: Make coding agents fit query your project state and trigger deployments
-- **Resource discovery**: AI tools fit discover wetin Azure resources your project dey use
+- **Resource discovery**: AI tools fit discover which Azure resources your project dey use
 - **Environment management**: Agents fit switch between dev/staging/production environments
 
 ### Infrastructure Generation with `azd infra generate`
 
-For production AI workloads, you fit generate and customize Infrastructure as Code instead of relying on automatic provisioning:
+For production AI workloads, you fit generate and customize Infrastructure as Code instead of rely on automatic provisioning:
 
 ```bash
-# Make Bicep/Terraform files based on wetin you don define for your project
+# Make Bicep/Terraform files from the project definition wey you give.
 azd infra generate
 ```
 
-This one go write IaC to disk so you fit:
+This one go write IaC to disk make you fit:
 - Review and audit infrastructure before you deploy
 - Add custom security policies (network rules, private endpoints)
 - Integrate with existing IaC review processes
@@ -1045,7 +1048,7 @@ This one go write IaC to disk so you fit:
 
 ### Production Lifecycle Hooks
 
-AZD hooks make you fit inject custom logic at every stage of the deployment lifecycle—dis one dey critical for production AI workflows:
+AZD hooks make you fit inject custom logic for every stage of deployment lifecycle—this one crucial for production AI workflows:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1074,7 +1077,7 @@ services:
 ```
 
 ```bash
-# Run one particular hook by hand while you dey develop
+# Run one particular hook by hand when you dey develop
 azd hooks run predeploy
 ```
 
@@ -1089,18 +1092,18 @@ azd hooks run predeploy
 
 ### CI/CD Pipeline Configuration
 
-Use `azd pipeline config` to connect your project to GitHub Actions or Azure Pipelines wit secure Azure authentication:
+Use `azd pipeline config` to connect your project to GitHub Actions or Azure Pipelines with secure Azure authentication:
 
 ```bash
-# Konfigure CI/CD pipeline (wey you go dey interact)
+# Set up CI/CD pipeline (wey you go dey interact)
 azd pipeline config
 
-# Konfigure wit one particular provider
+# Set up wit one particular provider
 azd pipeline config --provider github
 ```
 
 This command:
-- Creates a service principal wit least-privilege access
+- Creates a service principal with least-privilege access
 - Configures federated credentials (no stored secrets)
 - Generates or updates your pipeline definition file
 - Sets required environment variables in your CI/CD system
@@ -1115,22 +1118,22 @@ azd env set AZURE_OPENAI_CAPACITY 100
 # 2. Set up di pipeline
 azd pipeline config --provider github
 
-# 3. Di pipeline dey run azd deploy every time dem push to main
+# 3. Di pipeline dey run azd deploy for every push to main
 ```
 
 ### Adding Components with `azd add`
 
-Add Azure services small-small to existing project:
+Incrementally add Azure services to existing project:
 
 ```bash
-# Add one new servis komponent wey you go do am interactively
+# Make new service component wey you go set up step-by-step
 azd add
 ```
 
-Dis one dey especially useful when you dey expand production AI applications—for example, to add vector search service, new agent endpoint, or monitoring component to wetin you already deploy.
+Dis one dey especially useful when you wan expand production AI applications—for example, add vector search service, new agent endpoint, or monitoring component to wetin don already deploy.
 
 ## Additional Resources
-- **Azure Well-Architected Framework**: [guide wey dey for AI workload](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Azure Well-Architected Framework**: [Guide wey dey for AI workloads](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Microsoft Foundry Documentation**: [Ofishal docs](https://learn.microsoft.com/azure/ai-studio/)
 - **Community Templates**: [Azure Samples](https://github.com/Azure-Samples)
 - **Discord Community**: [#Azure channel](https://discord.gg/microsoft-azure)
@@ -1148,11 +1151,11 @@ Dis one dey especially useful when you dey expand production AI applications—f
 - **⬅️ Also Related**: [AI Workshop Lab](ai-workshop-lab.md)
 - **� Course Complete**: [AZD For Beginners](../../README.md)
 
-**Remember**: Production AI workloads need make you plan well, dey monitor dem, and dey always optimize dem. Start with these patterns, then change dem to fit wetin you specifically need.
+**No forget**: Production AI workloads need make you plan well, dey monitor dem, and dey always optimize dem. Start with these patterns and adapt dem to wetin your specific project need.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dis dokument na wetin we translate wit AI translation service [Co-op Translator] (https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg sabi say automatic translations fit get errors or mistakes. The original dokument for im own language still be the main/authority source. If na important matter, better make person wey sabi translate am by human do am. We no dey responsible for any misunderstanding or wrong interpretation wey fit come from dis translation.
+**Disclaimer**:
+Dis dokument don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even tho we dey try make am correct, make you sabi say automatic translations fit get mistakes or wrong parts. The original dokument for im native language suppose be the main authoritative source. If na important information, make you use professional human translator. We no dey liable for any misunderstanding or misinterpretation wey fit arise from de use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

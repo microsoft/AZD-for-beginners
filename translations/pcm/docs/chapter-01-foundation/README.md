@@ -6,15 +6,17 @@
 
 ## Overview
 
-Dis chapta dey introduce Azure Developer CLI (azd) fundamentals. You go learn di main koncepts, how to install di tools, an how to deploy your first application go Azure.
+Dis chapta dey introduce Azure Developer CLI (azd) basics. You go learn the main koncepts, how to install the tools, an how to deploy your first application to Azure.
+
+> Validated against `azd 1.23.12` in March 2026.
 
 ## Learning Objectives
 
 If you finish dis chapta, you go:
-- Sabi wetin Azure Developer CLI be an how e different from Azure CLI
+- Understand wetin Azure Developer CLI be an how e different from Azure CLI
 - Install an configure AZD for your platform
-- Deploy your first application go Azure wit `azd up`
-- Clean up resources wit `azd down`
+- Deploy your first application to Azure with `azd up`
+- Clean up resources with `azd down`
 
 ---
 
@@ -22,26 +24,45 @@ If you finish dis chapta, you go:
 
 | # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [AZD Basics](azd-basics.md) | Main koncepts, di tok wey dem dey use, an project structure | 15 min |
-| 2 | [Installation & Setup](installation.md) | Installation guide wey fit each platform | 10 min |
-| 3 | [Your First Project](first-project.md) | Hands-on: Deploy web app go Azure | 20 min |
+| 1 | [AZD Basics](azd-basics.md) | Main concepts, common terms, and how project dey structured | 15 min |
+| 2 | [Installation & Setup](installation.md) | How to install for each platform | 10 min |
+| 3 | [Your First Project](first-project.md) | Practical: Deploy a web app go Azure | 20 min |
+
+---
+
+## ✅ Start Here: Validate Your Setup
+
+Before you begin, check say your local machine don ready for the Chapter 1 template:
+
+**Windows:**
+```powershell
+.\validate-setup.ps1
+```
+
+**macOS / Linux:**
+```bash
+bash ./validate-setup.sh
+```
+
+If the script show say tools dey missing, install those tools first before you continue the chapta.
 
 ---
 
 ## 🚀 Quick Start
 
 ```bash
-# Check di installation
+# Make sure say installation don finish
 azd version
 
-# Login go Azure
+# Make sure say you authenticate for AZD
+# Optional: run 'az login' if you wan run Azure CLI commands direct
 azd auth login
 
-# Deploy di first app wey you build
+# Deploy your first app
 azd init --template todo-nodejs-mongo
 azd up
 
-# Clear up wen you don finish
+# Clean up when you don finish
 azd down --force --purge
 ```
 
@@ -49,14 +70,14 @@ azd down --force --purge
 
 ## ✅ Success Criteria
 
-After you finish dis chapta, you suppose fit:
+After you finish dis chapta, you go fit:
 
 ```bash
-azd version              # Dey show di version wey don install
-azd init --template todo-nodejs-mongo  # Dey initialize di project
-azd up                   # Dey deploy go Azure
-azd show                 # Dey show di URL of di app wey dey run
-azd down --force --purge # Dey clean up di resources
+azd version              # E dey show di version wey don install
+azd init --template todo-nodejs-mongo  # E dey set up di project
+azd up                   # E dey deploy go Azure
+azd show                 # E dey show di URL wey di app dey run
+azd down --force --purge # E dey clean up di resources
 ```
 
 ---
@@ -79,6 +100,6 @@ azd down --force --purge # Dey clean up di resources
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dis document don translate with AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). Even though we dey try make am accurate, abeg sabi say automated translations fit get mistakes or wrong parts. Di original document for im original language suppose be di correct source. If na important information, e better make you use professional human translation. We no go responsible for any misunderstanding or wrong interpretation wey fit come from dis translation.
+**Disclaimer**:
+Dis document don translate using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am accurate, abeg note say automated translations fit get errors or inaccuracies. The original document for im native language suppose be di authoritative source. For critical information, we recommend say una use professional human translation. We no go responsible for any misunderstandings or misinterpretations wey fit arise from the use of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

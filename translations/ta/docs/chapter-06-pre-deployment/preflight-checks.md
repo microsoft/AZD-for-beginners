@@ -1,67 +1,67 @@
-# AZD வினியோகங்களுக்கு முன்-விமான சோதனைகள்
+# AZD ஒப்படைப்புகளுக்கான முன்-பரிசோதனைகள்
 
 **அத்தியாய வழிசெலுத்தல்:**
-- **📚 பாடநெறி முகப்பு**: [AZD For Beginners](../../README.md)
-- **📖 தற்போதைய அத்தியாயம்**: அத்தியாயம் 6 - முன்-வினியோகச் சோதனை மற்றும் திட்டமிடல்
-- **⬅️ முந்தைய**: [SKU தேர்வு](sku-selection.md)
-- **➡️ அடுத்த அத்தியாயம்**: [அத்தியாயம் 7: பிழைதிருத்தம்](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 தொடர்புடைய**: [அத்தியாயம் 4: வினியோக வழிகாட்டு](../chapter-04-infrastructure/deployment-guide.md)
+- **📚 Course Home**: [ஆரம்பத்திற்கான AZD](../../README.md)
+- **📖 Current Chapter**: அத்தியாயம் 6 - முன்-ஒப்படைப்பு சரிபார்ப்பு மற்றும் திட்டமிடல்
+- **⬅️ Previous**: [SKU தேர்வு](sku-selection.md)
+- **➡️ Next Chapter**: [அத்தியாயம் 7: பிழைத் தீர்வு](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 Related**: [அத்தியாயம் 4: ஒப்படைப்பு வழிகாட்டி](../chapter-04-infrastructure/deployment-guide.md)
 
 ## அறிமுகம்
 
-இந்த விரிவான வழிகாட்டி, Azure Developer CLI வினியோகங்கள் தொடங்குவதற்கு முன் வெற்றிகரமாக நடைபெற உறுதி செய்ய முன்-வினியோகச் சோதனை ஸ்கிரிப்டுகள் மற்றும் செயல்முறைகளை வழங்குகிறது. அங்கீகாரம், வளக் கிடைக்கும் தன்மை, குறியீட்டு வரம்புகள், பாதுகாப்பு அமையுதல் மற்றும் செயல்திறன் தேவைகள் ஆகியவற்றுக்கு தானியங்கி சரிபார்ப்புகளை எவ்வாறு செயல்படுத்துவது என்று கற்று, வினியோக தோல்விகளை தவிர்த்து வெற்றிகரமான வினியோகங்களை அதிகரிக்கவும்.
+இந்த விரிவான வழிகாட்டி துவங்குமுன் Azure Developer CLI ஒப்படைப்புகள் வெற்றியடைய உறுதி செய்ய முன்-ஒப்படைப்பு சரிபார்ப்பு ஸ்கிரிப்டுகள் மற்றும் நடைமுறைகளை வழங்குகிறது. அங்கீகாரம், வளங்கள் கிடைக்கும் நிலை, ஒதுக்கீடுகள், பாதுகாப்பு இணக்கம் மற்றும் செயல்திறன் தேவைகளுக்கான தானியக்க சோதனைகளை செயல்படுத்துவது மூலம் ஒப்படைப்பு தோல்விகளைத் தடுக்கும் மற்றும் ஒப்படைப்பு வெற்றியைக் உயர்த்த கற்றுக்கொள்ளுங்கள்.
 
-## கற்றல் நோக்கங்கள்
+## கற்றல் இலக்குகள்
 
-இந்த வழிகாட்டியை முடித்தவுடன் நீங்கள்:
-- தானியங்கி முன்-வினியோகச் சோதனை நுட்பங்கள் மற்றும் ஸ்கிரிப்டுகளைக் கையாளteren
-- அங்கீகாரம், அனுமதிகள் மற்றும் குறியீட்டு வரம்புகளுக்கு விரிவான சரிபார்ப்பு தந்திரங்க்களை புரிந்துகொள்வீர்கள்
-- வளக் கிடைக்கும் தன்மை மற்றும் கொள்ளளவு சரிபார்ப்பு செயல்முறைகளை செயல்படுத்துவீர்கள்
-- நிறுவனக் கொள்கைகள் படி பாதுகாப்பு மற்றும் அமையுதல் சோதனைகளை கட்டமைப்பீர்கள்
-- செலவியல் மதிப்பீடு மற்றும் பட்ஜெட் சரிபார்ப்பு வேலைப்பாடுகளை வடிவமைப்பீர்கள்
-- CI/CD குழாய்களில் தனிப்பயன் முன்-விமானச் சோதனை தானியக்கங்களை உருவாக்குவீர்கள்
+By completing this guide, you will:
+- தானியக்கமான முன்-ஒப்படைப்பு சரிபார்ப்பு நுட்பங்கள் மற்றும் ஸ்கிரிப்ட்களில் திறமை பெற்றிடுங்கள்
+- அங்கீகாரம், அனுமதிகள் மற்றும் ஒதுக்கீடுகளுக்கான விரிவான சோதனை ஸ்ட்ராட்டஜிகளை புரிந்துகொள்ளுங்கள்
+- வளங்களின் கிடைக்குமை மற்றும் திறன் சரிபார்ப்பு நடைமுறைகளை செயல்படுத்துங்கள்
+- நிறுவனக் கொள்கைகளுக்கான பாதுகாப்பு மற்றும் இணக்கம் சோதனைகளை கட்டமைக்கவும்
+- செலவு மதிப்பீடு மற்றும் பட்ஜெட் சரிபார்ப்பு வேலைப்பாடுகளை வடிவமைக்கவும்
+- CI/CD குழாய்வழிகளில் தனிப்பயன் முன்-பரிசோதனை தானியக்கங்களை உருவாக்கவும்
 
-## கற்றல் விளைவுகள்
+## கற்றல் முடிவுகள்
 
-முடிவில், நீங்கள்:
-- விரிவான முன்-விமானச் சோதனை ஸ்கிரிப்டுகளை உருவாக்கி இயக்க முடியும்
-- வித்தியாசமான வினியோக السينாரெயோக்களுக்கு தானியங்கி சரிபார்ப்பு வேலைப்பாடுகளை வடிவமைக்க முடியும்
-- சூழல்-சுட்டி சரிபார்ப்பு செயல்முறைகள் மற்றும் கொள்கைகளை செயல்படுத்த முடியும்
-- வினியோக தயார்ச்சிக்கான முன்கணிப்பு மற்றும் எச்சரிக்கை அமைப்புகளை கட்டமைக்க முடியும்
-- முன்-வினியோக பிரச்சினைகளை பிழைதிருத்தி சரிசெய்ய முடியும்
-- முன்-விமானச் சோதனைகளை DevOps குழாய்கள் மற்றும் தானியக்க வேலைப்பாடுகளில் இணைக்க முடியும்
+Upon completion, you will be able to:
+- முழுமையான முன்-பரிசோதனை சரிபார்ப்பு ஸ்கிரிப்ட்களை உருவாக்கி இயக்க முடியும்
+- வெவ்வேறு ஒப்படைப்பு சூழ்நிலைகளுக்கான தானியக்க சோதனை வேலைப்பாடுகளை வடிவமைக்க முடியும்
+- சூழல்-சார்ந்த சரிபார்ப்பு நடைமுறைகள் மற்றும் கொள்கைகளை செயல்படுத்த முடியும்
+- ஒப்படைப்பு தயார் நிலைக்கான முன்நிலை கண்காணிப்பு மற்றும் அறிவிப்புகளை கட்டமைக்க முடியும்
+- முன்னர்-ஒப்படைப்பு பிரச்சனைகளை கண்டறிந்து திருத்த நடவடிக்கைகளை செயல்படுத்த முடியும்
+- DevOps குழாய்வழிகள் மற்றும் தானியக்க வேலைப்பாடுகளில் முன்-பரிசோதனைகளை ஒருங்கிணைக்க முடியும்
 
-## உள்ளடக்க பட்டியல்
+## உள்ளடக்க அட்டவணை
 
-- [Overview](../../../../docs/chapter-06-pre-deployment)
-- [Automated Pre-flight Script](../../../../docs/chapter-06-pre-deployment)
-- [Manual Validation Checklist](../../../../docs/chapter-06-pre-deployment)
-- [Environment Validation](../../../../docs/chapter-06-pre-deployment)
-- [Resource Validation](../../../../docs/chapter-06-pre-deployment)
-- [Security & Compliance Checks](../../../../docs/chapter-06-pre-deployment)
-- [Performance & Capacity Planning](../../../../docs/chapter-06-pre-deployment)
-- [Troubleshooting Common Issues](../../../../docs/chapter-06-pre-deployment)
+- [கண்ணோட்டம்](#overview)
+- [தானியக்க முன்-பரிசோதனை ஸ்கிரிப்ட்](#automated-pre-flight-script)
+- [கைமுறை சரிபார்ப்பு பட்டியல்](#codeblock1)
+- [சூழல் சரிபார்ப்பு](#✅-காப்பு-மற்றும்-மீட்பு)
+- [வள சரிபார்ப்பு](#production-environment-validation)
+- [பாதுகாப்பு மற்றும் இணக்கம் சோதனைகள்](#security--compliance-checks)
+- [செயல்திறன் மற்றும் திறன் திட்டமிடல்](#performance--capacity-planning)
+- [பொதுவான பிரச்சனைகள் தீர்வு](#troubleshooting-common-issues)
 
 ---
 
 ## Overview
 
-முன்-விமான சோதனைகள் என்பதன் நோக்கம் வினியோகத்திற்கு முன்னர் நடக்கும் அவசியமான சரிபார்ப்புகள்:
+Pre-flight checks are essential validations performed before deploying to ensure:
 
-- **இலக்கு பிரதேசங்களில் உள்ள வளக் கிடைமையின்மையும் குறியீட்டு வரம்புகளும்**
+- **வள கிடைப்புத்தன்மை** மற்றும் இலக்கு பகுதிகளில் உள்ள ஒதுக்கீடுகள்
 - **அங்கீகாரம் மற்றும் அனுமதிகள்** சரியாக அமைக்கப்பட்டுள்ளன
-- **அச்சு மாதிரியின் செல்லுபடைத்தன்மை** மற்றும் அளவுருக்களின் துல்லியம்
-- **வரையறைத் தொடர்பு** மற்றும் சார்புகள்
-- **நிறுவன கொள்கைகளுடன் ஏற்புடைய பாதுகாப்பு அமையுதல்**
-- **பட்ஜெட்டுக்குள் செலவுக் கணக்கீடு**
+- **டெம்ப்ளேட் செல்லுபடித்தன்மை** மற்றும் அளவுருக்கள் சரியானவை
+- **நெட்வொர்க் இணைப்பு** மற்றும் சார்புகள்
+- **பாதுகாப்பு இணக்கம்** நிறுவனக் கொள்கைகளுடன்
+- **செலவு மதிப்பீடு** பட்ஜெட் வரம்புகளுக்குள்
 
 ### When to Run Pre-flight Checks
 
-- **புது சூழலுக்கு** முதன் முறையாக வினியோகத்திற்கு முன்
-- **முக்கியமான அச்சு மாதிரி மாற்றங்களுக்குப் பிறகு**
-- **உற்பத்தி (production) வினியோகங்களுக்கு முன்**
-- **Azure பிரதேசங்களை மாற்றும்போது**
-- **CI/CD குழாய் பகுதியாக**
+- **புதிய சூழலில் முதன் முறையாக ஒப்படைப்பு செய்வதற்கு முன்**
+- **முக்கிய டெம்ப்ளேட் மாற்றங்களுக்குப் பிறகு**
+- **உற்பத்தி ஒப்படைப்புகளுக்கு முன்**
+- **Azure பிரிவுகளை மாற்றும் பொழுதில்**
+- **CI/CD குழாய்வழிகளின் ஒரு பகுதியாக**
 
 ---
 
@@ -100,7 +100,7 @@ param(
     [switch]$Detailed
 )
 
-# வெளியீட்டிற்கான வண்ண குறியீடு
+# வெளியீட்டுக்கான நிறக் குறியீடு
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -128,7 +128,7 @@ function Write-Status {
 function Test-Prerequisites {
     Write-Host "${Blue}=== Prerequisites Check ===${Reset}"
     
-    # AZD நிறுவலைச் சரிபார்
+    # AZD நிறுவலை சரிபார்க்கவும்
     try {
         $azdVersion = azd version --output json | ConvertFrom-Json
         Write-Status "AZD CLI installed" "Success" "Version: $($azdVersion.azd.version)"
@@ -138,7 +138,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Azure CLI நிறுவலைச் சரிபார்
+    # Azure CLI நிறுவலை சரிபார்க்கவும்
     try {
         $azVersion = az version --output json | ConvertFrom-Json
         Write-Status "Azure CLI installed" "Success" "Version: $($azVersion.'azure-cli')"
@@ -148,7 +148,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # PowerShell பதிப்பைச் சரிபார்
+    # PowerShell பதிப்பு சரிபார்க்கவும்
     if ($PSVersionTable.PSVersion.Major -ge 7) {
         Write-Status "PowerShell version" "Success" "Version: $($PSVersionTable.PSVersion)"
     }
@@ -163,7 +163,7 @@ function Test-Authentication {
     Write-Host "`n${Blue}=== Authentication Check ===${Reset}"
     
     try {
-        # AZD அங்கீகாரத்தைச் சரிபார்
+        # AZD அங்கீகாரத்தை சரிபார்க்கவும்
         $azdAuth = azd auth login --check-status --output json 2>$null | ConvertFrom-Json
         if ($azdAuth.status -eq "Logged-in") {
             Write-Status "AZD authentication" "Success" "User: $($azdAuth.principalName)"
@@ -173,11 +173,11 @@ function Test-Authentication {
             return $false
         }
         
-        # Azure CLI அங்கீகாரத்தைச் சரிபார்
+        # Azure CLI அங்கீகாரத்தை சரிபார்க்கவும்
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # சப்ஸ்கிரிப்ஷன் அணுகலைச் சரிபார்
+        # சப்ஸ்கிரிப்ஷன் அணுகலை சரிபார்க்கவும்
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -194,7 +194,7 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # தற்போதைய பயனரின் பங்கு ஒதுக்கீடுகளைப் பெறுக
+        # தற்போதைய பயனரின் பங்கு ஒதுக்கீடுகளைப் பெறவும்
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
@@ -210,14 +210,14 @@ function Test-Permissions {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # வள குழு உருவாக்கத்தை சோதிக்கவும் (குறிக்கப்பட்டிருந்தால்)
+        # ரிசோர்ஸ் குழு உருவாக்கத்தை (குறிப்பிக்கப்பட்டால்) சோதிக்கவும்
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # வள குழு உருவாக்கும் திறனை சோதிக்கவும்
+                # ரிசோர்ஸ் குழுவை உருவாக்கும் திறன் சோதிக்கவும்
                 try {
                     az group create --name "preflight-test-rg" --location $Location --output none
                     az group delete --name "preflight-test-rg" --yes --output none
@@ -242,10 +242,10 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # கணினி (compute) வரம்புகளைச் சரிபார்
+        # Compute ஒதுக்கீடு வரம்புகளைச் சரிபார்க்கவும்
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # குறிப்பிட்ட வரம்புகளைச் சரிபார்
+        # குறிப்பிட்ட ஒதுக்கீடுகளைச் சரிபார்க்கவும்
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
         if ($coreQuota) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
@@ -257,7 +257,7 @@ function Test-QuotasAndLimits {
             }
         }
         
-        # App Service வரம்புகளைச் சரிபார்
+        # App Service வரம்புகளைச் சரிபார்க்கவும்
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
             if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
@@ -271,7 +271,7 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # சேமிப்பு கணக்கு வரம்புகளைச் சரிபார்
+        # சேமிப்பு கணக்கு வரம்புகளைச் சரிபார்க்கவும்
         $storageAccounts = az storage account list --output json | ConvertFrom-Json
         $accountCount = ($storageAccounts | Measure-Object).Count
         if ($accountCount -lt 200) {
@@ -285,14 +285,14 @@ function Test-QuotasAndLimits {
     }
     catch {
         Write-Status "Quota check failed" "Warning" $_.Exception.Message
-        return $true # தடையின்றி
+        return $true # தடை இல்லாத
     }
 }
 
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # Azure எண்ட்பாயின்ட்களைச் சோதிக்கவும்
+    # Azure endpoint-களை சோதிக்கவும்
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -310,7 +310,7 @@ function Test-NetworkConnectivity {
         }
     }
     
-    # DNS தீர்வை சோதிக்கவும்
+    # DNS தீர்மானத்தை சோதிக்கவும்
     try {
         $dnsResult = Resolve-DnsName "management.azure.com" -ErrorAction Stop
         Write-Status "DNS resolution" "Success" "Resolved successfully"
@@ -326,16 +326,16 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # azure.yaml உள்ளது என்பதைச் சரிபார்
+    # azure.yaml உள்ளது என்பதை சரிபார்க்கவும்
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # azure.yaml ஐ பகுப்பாய்வு செய்க
+        # azure.yaml ஐ பகுப்பாய்வு செய்யவும்
         try {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # சேவைகள் செல்லுபடியாக உள்ளதா எனச் சரிபார்
+            # சேவைகளை சரிபார்க்கவும்
             if ($azureYaml.services) {
                 $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
@@ -354,13 +354,13 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # இன்ஃப்ராஸ்ட்ரக்சர் கோப்புகள் உள்ளதா எனச் சரிபார்
+    # அடித்தளக் கோப்புகளைச் சரிபார்க்கவும்
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # main.bicep உள்ளது என்றால் அதைச் சரிபார்க்கவும்
+            # main.bicep இருந்தால் அதை சரிபார்க்கவும்
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 புதியது: அடித்தள முன்னோட்டத்தைச் சோதிக்கவும் (பாதுகாப்பான ட்ரை-ரன்)
+    # 🧪 புதிய: அடித்தள முன்னோட்டத்தை (பாதுகாப்பான டிரை-ரன்) சோதிக்கவும்
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -403,7 +403,7 @@ function Test-RegionalAvailability {
     Write-Host "`n${Blue}=== Regional Availability Check ===${Reset}"
     
     try {
-        # இடம் செல்லுபடியாக உள்ளதா எனச் சரிபார்
+        # இலோக்கேஷன் செல்லுபடியாகுமா எனச் சரிபார்க்கவும்
         $locations = az account list-locations --output json | ConvertFrom-Json
         $validLocation = $locations | Where-Object { $_.name -eq $Location -or $_.displayName -eq $Location }
         
@@ -415,7 +415,7 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # பிராந்தியத்தில் சேவை கிடைக்கிறதா எனச் சரிபார்
+        # மண்டலத்தில் சேவை கிடைப்பைச் சரிபார்க்கவும்
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
@@ -446,11 +446,11 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # அடிப்படை செலவுக் கணக்கீடு (சரியான மதிப்புகளுக்கு Azure Pricing API தேவைப்படும்)
+    # அடிப்படை செலவு மதிப்பீடு (துல்லியமான கணிப்புகளுக்கு Azure Pricing API தேவை)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # பட்ஜெட் உள்ளதா என்பதைச் சரிபார்
+    # பட்ஜெட் உள்ளது என்பதை சரிபார்க்கவும்
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -470,9 +470,9 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # பொதுவான பாதுகாப்பு நடைமுறைகள் உள்ளனவா எனச் சரிபார்
+    # பொதுவான பாதுகாப்பு நடைமுறைகளைக் சரிபார்க்கவும்
     try {
-        # Key Vault அமைக்கப்பட்டுள்ளதா என்பதைச் சரிபார்
+        # Key Vault அமைக்கப்பட்டுள்ளதா என்பதைச் சரிபார்க்கவும்
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
             Write-Status "Key Vault usage" "Success" "Key Vault detected in templates"
         }
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # மேலாண்மை அடையாளம் பயன்படுத்தப்படுகிறதா என்பதைச் சரிபார்
+        # Managed Identity பயன்பாடு உள்ளதா என்பதைச் சரிபார்க்கவும்
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +488,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # HTTPS கட்டாயப்படுத்தப்பட்டுள்ளதா எனச் சரிபார்
+        # HTTPS கட்டாயப்படுத்தல் உண்டா என்பதைச் சரிபார்க்கவும்
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -504,7 +504,7 @@ function Test-SecurityCompliance {
     }
 }
 
-# முக்கிய செயல்பாடு
+# முதன்மை இயக்கம்
 function Invoke-PreflightCheck {
     Write-Host "${Green}AZD Pre-flight Check${Reset}" -ForegroundColor Green
     Write-Host "Environment: $EnvironmentName"
@@ -516,7 +516,7 @@ function Invoke-PreflightCheck {
     $allPassed = $true
     $results = @{}
     
-    # எல்லா சோதனைகளையும் இயக்கவும்
+    # அனைத்து சோதனைகளையும் இயக்கவும்
     $results["Prerequisites"] = Test-Prerequisites
     $results["Authentication"] = Test-Authentication
     $results["Permissions"] = Test-Permissions
@@ -557,7 +557,7 @@ function Invoke-PreflightCheck {
     }
 }
 
-# முன்-சோதனை (pre-flight) சரிபார்ப்பை இயக்கவும்
+# முன்-பரிசோதனை சோதனையை இயக்கவும்
 Invoke-PreflightCheck
 ```
 
@@ -565,7 +565,7 @@ Invoke-PreflightCheck
 
 ```bash
 #!/bin/bash
-# யுனிக்ஸ்/லினக்ஸ் அமைப்புகளுக்கான முன்-சோதனை சரிபார்ப்புகளுக்கான Bash பதிப்பு
+# Unix/Linux அமைப்புகளுக்கான முன்-சோதனைகளுக்கான Bash பதிப்பு
 
 set -euo pipefail
 
@@ -576,7 +576,7 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # நிறம் இல்லை
 
-# உலகளாவிய மாறிலிகள்
+# உலகளாவிய மாறிகள்
 ENVIRONMENT_NAME=""
 LOCATION=""
 RESOURCE_GROUP=""
@@ -606,7 +606,7 @@ print_status() {
 check_prerequisites() {
     echo -e "${BLUE}=== Prerequisites Check ===${NC}"
     
-    # AZD நிறுவல் சரிபார்க்கவும்
+    # AZD நிறுவலைச் சரிபார்க்கவும்
     if command -v azd >/dev/null 2>&1; then
         local azd_version=$(azd version --output json | jq -r '.azd.version')
         print_status "AZD CLI installed" "success" "Version: $azd_version"
@@ -615,7 +615,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # Azure CLI நிறுவல் சரிபார்க்கவும்
+    # Azure CLI நிறுவலைச் சரிபார்க்கவும்
     if command -v az >/dev/null 2>&1; then
         local az_version=$(az version --output json | jq -r '."azure-cli"')
         print_status "Azure CLI installed" "success" "Version: $az_version"
@@ -624,7 +624,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # jq நிறுவல் சரிபார்க்கவும்
+    # jq நிறுவலைச் சரிபார்க்கவும்
     if command -v jq >/dev/null 2>&1; then
         print_status "jq installed" "success"
     else
@@ -661,7 +661,7 @@ check_authentication() {
 check_template_validation() {
     echo -e "\n${BLUE}=== Template Validation ===${NC}"
     
-    # azure.yaml-ஐ சரிபார்க்கவும்
+    # azure.yaml ஐச் சரிபார்க்கவும்
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
@@ -677,13 +677,13 @@ check_template_validation() {
         return 1
     fi
     
-    # அடித்தளக் கோப்புகளைச் சரிபார்க்கவும்
+    # அடித்தள அமைப்பு கோப்புகளைச் சரிபார்க்கவும்
     if [[ -d "infra" ]]; then
         local bicep_count=$(find infra -name "*.bicep" | wc -l)
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # main.bicep இருந்தால் செல்லுபடுத்தவும்
+            # main.bicep இருந்தால் சரிபார்க்கவும்
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +706,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # இடம் செல்லுபடியாகிறதா என்று சரிபார்க்கவும்
+    # இருப்பிடம் செல்லுபடியாகிறதா என்பதைச் சரிபார்க்கவும்
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -714,7 +714,7 @@ check_regional_availability() {
         return 1
     fi
     
-    # சேவை கிடைப்பதைச் சரிபார்க்கவும்
+    # சேவையின் கிடைக்கும் நிலையைச் சரிபார்க்கவும்
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
     for service in "${services[@]}"; do
@@ -729,7 +729,7 @@ check_regional_availability() {
 }
 
 main() {
-    # கட்டளை வரி வாதங்களைப் பகுப்பாய்வு செய்யவும்
+    # கட்டளை வரி வாதங்களைப் பகுப்பாய்வு செய்க
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -755,7 +755,7 @@ main() {
         esac
     done
     
-    # தேவையான அளவுருக்களைச் செல்லுபடுத்தவும்
+    # தேவையான அளவுருக்களைச் சரிபார்க்கவும்
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -768,7 +768,7 @@ main() {
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
     
-    # சரிபார்ப்புகளை இயக்கவும்
+    # சோதனைகளை இயக்கவும்
     local all_passed=true
     
     check_prerequisites || all_passed=false
@@ -790,7 +790,7 @@ main() {
     fi
 }
 
-# முதன்மை செயல்பாட்டை இயக்கவும்
+# முக்கிய செயல்பாட்டை இயக்கவும்
 main "$@"
 ```
 
@@ -800,61 +800,61 @@ main "$@"
 
 ### Pre-Deployment Checklist
 
-இந்த சோதனைப் பட்டியலை அச்சிடி, ஒவ்வொரு பொருளையும் வினியோகத்திற்கு முன் சரிபார்க்கவும்:
+Print this checklist and verify each item before deployment:
 
-#### ✅ Environment Setup
-- [ ] AZD CLI நிறுவப்பட்டு சமீபத்திய பதிப்பிற்கு புதுப்பிக்கப்பட்டது
-- [ ] Azure CLI நிறுவப்பட்டு அங்கீகாரம் செய்யப்பட்டுள்ளது
-- [ ] சரியான Azure subscription தேர்ந்தெடுக்கப்பட்டுள்ளது
-- [ ] சுற்றுச்சூழல் பெயர் தனிச்சிறப்பாகவும் பெயரிடுதல் விதிகளை பின்பற்றுவதுமாக உள்ளது
-- [ ] இலக்கு resource group அடையாளம் காணப்பட்டுள்ளதோ அல்லது உருவாக்கக்கூடியதோ ஆக உள்ளது
+#### ✅ சூழல் அமைப்பு
+- [ ] AZD CLI நிறுவப்பட்டு சமீபத்திய பதிப்பிற்கு புதுப்பிக்கப்பட்டுள்ளது
+- [ ] Azure CLI நிறுவப்பட்டு அங்கீகரிக்கப்பட்டது
+- [ ] சரியான Azure சப்ஸ்கிரிப்ஷன் தேர்ந்தெடுக்கப்பட்டது
+- [ ] சூழல் பெயர் தனித்துவமானதும் பெயரிடுதலின் வழிகாட்டுதலின்படி இருக்க வேண்டும்
+- [ ] இலக்கு வள குழு அடையாளம் காணப்பட்டது அல்லது உருவாக்க முடியும்
 
-#### ✅ Authentication & Permissions
-- [ ] `azd auth login` இல் வெற்றிகரமாக அங்கீகாரம் செய்யப்பட்டிருக்கிறீர்கள்
-- [ ] பயனருக்கு இலக்கு subscription/resource group மீது Contributor பங்கு உள்ளது
-- [ ] CI/CD க்கான service principal கட்டமைக்கப்பட்டிருக்கிறது (பொருந்துமானால்)
-- [ ] காலாவதியாகி போன சான்றிதழ்கள் அல்லது அங்கீகாரத் தரவுகள் இல்லை
+#### ✅ அங்கீகாரம் மற்றும் அனுமதிகள்
+- [ ] `azd auth login` மூலம் வெற்றிகரமாக அங்கீகரிக்கப்பட்டது
+- [ ] பயனர் இலக்கு சப்ஸ்கிரிப்ஷனில்/வள குழுவில் Contributor பாத்திரம் கொண்டிருக்கிறார்
+- [ ] CI/CD க்காக Service principal அமைக்கப்பட்டிருக்கிறது (பொறுத்தவரை)
+- [ ] காலாவதியான சான்றிதழ்கள் அல்லது அளவுரு அங்கீகாரங்கள் இல்லை
 
-#### ✅ Template Validation
-- [ ] `azure.yaml` உள்ளது மற்றும் செல்லுபடியாகும் YAML ஆக உள்ளது
-- [ ] azure.yaml இல் வரையறுக்கப்பட்ட அனைத்து சேவைகளுக்கும் தொடர்புடைய மூலக் கோப்புகள் உள்ளன
-- [ ] `infra/` அடைவில் Bicep templates உள்ளன
-- [ ] `main.bicep` பிழைகள் இல்லாமல் ஆன்-கம்பைல் ஆகிறது (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 கட்டமைப்பு முன்னோட்டம் வெற்றிகரமாக இயங்குகிறது (`azd provision --preview`)
-- [ ] தேவையான அனைத்து அளவுருக்களுக்கும் இயல்பான மதிப்புகள் உள்ளன அல்லது வழங்கப்பட உள்ளன
-- [ ] டெம்ப்ளேட்களில் கடினமாக ஒட்டியுள்ள ரகசியங்கள் இல்லை
+#### ✅ டெம்ப்ளேட் சரிபார்ப்பு
+- [ ] `azure.yaml` உள்ளது மற்றும் செல்லுபடியாகும் YAML ஆகும்
+- [ ] `azure.yaml` இல் வரையப்பட்ட அனைத்து சேவைகளுக்கும் தொடர்புடைய மூலக் குறியீடு உள்ளது
+- [ ] `infra/` அடைவை உள்ள Bicep டெம்ப்ளேட்கள் உள்ளன
+- [ ] `main.bicep` பிழைகள் இல்லாமல் தொகுக்கப்படுகிறது (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Infrastructure முன்னோட்டம் வெற்றிகரமாக இயக்கப்படுகிறது (`azd provision --preview`)
+- [ ] தேவையான அனைத்து அளவுருக்களுக்கும் இயல்புநிலை மதிப்புகள் உள்ளன அல்லது வழங்கப்படுவதாக இருக்கின்றன
+- [ ] டெம்ப்ளேட்டுகளில் கடினமாக ஏற்றப்பட்ட ரகசியங்கள் இல்லை
 
-#### ✅ Resource Planning
-- [ ] இலக்கு Azure பிரதேசம் தேர்ந்தெடுக்கப்பட்டு சரிபார்க்கப்பட்டுள்ளது
-- [ ] இலக்கு பிரதேசத்தில் தேவையான Azure சேவைகள் கிடைக்கும்
-- [ ] திட்டமிடப்பட்ட வளங்களுக்கு போதுமான குறியீட்டு வரம்புகள் உள்ளன
-- [ ] வள பெயரிடப்படலில் மோதல்கள் சோதிக்கப்பட்டுள்ளன
-- [ ] வளங்களிடையிலான சார்புகள் புரிந்துகொள்ளப்பட்டுள்ளன
+#### ✅ வள திட்டமிடல்
+- [ ] இலக்கு Azure பிரதேசம் தேர்ந்தெடுக்கப்பட்டு சரிபார்க்கப்பட்டது
+- [ ] இலக்கு பிரதேசத்தில் தேவையான Azure சேவைகள் கிடைக்கின்றன
+- [ ] திட்டமிடப்பட்ட வளங்களுக்கு போதுமான ஒதுக்கீடுகள் உள்ளன
+- [ ] வள பெயரிடல் மோதல்கள் சரிபார்க்கப்பட்டன
+- [ ] வளங்களுக்கிடையிலான சார்புகள் புரிந்துகொள்ளப்பட்டன
 
-#### ✅ Network & Security
-- [ ] Azure முடிவுகளை நோக்கி நெட்வொர்க் இணைப்பு சரிபார்க்கப்பட்டுள்ளது
-- [ ] தேவையானபடி firewall/proxy அமைப்புகள் கட்டமைக்கப்பட்டுள்ளன
-- [ ] ரகசிய மேலாண்மைக்காக Key Vault கட்டமைக்கப்பட்டுள்ளது
-- [ ] சாத்தியமான இடங்களில் நிர்வகிக்கப்பட்ட அடையாளங்கள் (managed identities) பயன்படுத்தப்படுகிறன
-- [ ] வலை பயன்பாடுகளுக்கு HTTPS கட்டாயம் செய்துள்ளது
+#### ✅ நெட்வொர்க் மற்றும் பாதுகாப்பு
+- [ ] Azure எண்ட்பாயிண்ட்களுடன் நெட்வொர்க் இணைப்பு சரிபார்க்கப்பட்டது
+- [ ] தேவையானால் ஃபைர்வால்/ப்ராக்ஸி அமைப்புகள் கட்டமைக்கப்பட்டுள்ளன
+- [ ] ரகசிய மேலாண்மைக்காக Key Vault அமைக்கப்பட்டுள்ளது
+- [ ] சாத்தியமான இடங்களில் Managed identities பயன்படுத்தப்பட்டுள்ளன
+- [ ] வலை பயன்பாடுகளுக்கு HTTPS கட்டாயப்படுத்தல் இயல்பூட்டப்பட்டுள்ளது
 
-#### ✅ Cost Management
-- [ ] Azure Pricing Calculator பயன்படுத்தி செலவு மதிப்பீடுகள் கணக்கிடப்பட்டுள்ளன
-- [ ] தேவையானபடி பட்ஜெட் எச்சரிக்கை கணக்குகள் அமைக்கப்பட்டுள்ளன
-- [ ] சூழல் வகைக்கேற்ற SKU-கள் தேர்ந்தெடுக்கப்பட்டுள்ளன
-- [ ] உற்பத்தி பணிகளுக்காக முன்பதிவு திறன் (reserved capacity) பரிசீலிக்கப்பட்டுள்ளது
+#### ✅ செலவு மேலாண்மை
+- [ ] செலவு மதிப்பீடுகள் Azure Pricing Calculator பயன்படுத்தி கணக்கிடப்பட்டன
+- [ ] தேவையானால் பட்ஜெட் எச்சரிக்கைகள் கட்டமைக்கப்பட்டுள்ளன
+- [ ] சூழல் வகைக்கு ஏற்ற SKUs தேர்ந்தெடுக்கப்பட்டுள்ளன
+- [ ] உற்பத்தி பணிகளுக்காக ஒதுக்கி வைக்கப்பட்ட திறன் பரிசீலிக்கப்பட்டது
 
-#### ✅ Monitoring & Observability
-- [ ] Application Insights டெம்ப்ளேட்டுகளில் சேர்க்கப்பட்டுள்ளது
+#### ✅ கண்காணிப்பு மற்றும் கண்டறிதல்
+- [ ] டெம்ப்ளேட்டுகளில் Application Insights கட்டமைக்கப்பட்டுள்ளது
 - [ ] Log Analytics workspace திட்டமிடப்பட்டுள்ளது
-- [ ] முக்கிய அளவுகாறுகளுக்கான எச்சரிக்கை விதிகள் வரையறுக்கப்பட்டுள்ளன
-- [ ] பயன்பாடுகளில் ஆரோக்கியச் சோதனை (health check) எண்ட்பாய்ண்டுகள் அமல்படுத்தப்பட்டுள்ளன
+- [ ] முக்கிய அளவுகோல்களுக்கு எச்சரிக்கை விதிகள் வரையறுக்கப்பட்டுள்ளன
+- [ ] செயலிகளில் Health check endpoints செயல்படுத்தப்பட்டுள்ளன
 
-#### ✅ Backup & Recovery
-- [ ] தரவுப் வளங்களுக்கு காப்புப்பிரதி (backup) நெறிமுறை வரையறுக்கப்பட்டுள்ளது
-- [ ] மீட்பு நேர நோக்கங்கள் (RTO) பதிவாக உள்ளன
-- [ ] மீட்பு பாயிண்ட் நோக்கங்கள் (RPO) பதிவாக உள்ளன
-- [ ] உற்பத்திக்கான பேரருவ மீட்டெடுக்கும் திட்டம் (disaster recovery) உள்ளதா என உறுதி
+#### ✅ காப்பு மற்றும் மீட்பு
+- [ ] தரவுப் வளங்களுக்கான காப்பு திட்டம் வரையறுக்கப்பட்டுள்ளது
+- [ ] மீட்பு நேர நோக்கங்கள் (RTO) ஆவணப்படுத்தப்பட்டுள்ளன
+- [ ] மீட்பு புள்ளி நோக்கங்கள் (RPO) ஆவணப்படுத்தப்பட்டுள்ளன
+- [ ] உற்பத்திக்கான பேரழிவு மீட்பு திட்டம் இருக்கும்
 
 ---
 
@@ -864,26 +864,26 @@ main "$@"
 
 ```bash
 #!/bin/bash
-# மேம்பாட்டு சூழலுக்கான குறிப்பிட்ட சரிபார்ப்புகள்
+# வளர்ச்சி சுற்றுச்சூழலுக்கு தனித்துவமான சரிபார்ப்புகள்
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # மேம்பாட்டிற்கு உகந்த கட்டமைப்புகளை சரிபார்க்கவும்
+    # வளர்ச்சிக்கு உகந்த கட்டமைப்புகள் உள்ளதா எனச் சரிபார்க்கவும்
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # தானியக்க அணைப்பு அமைப்புகளை சரிபார்க்கவும்
+    # தானாக மூடப்படும் கட்டமைப்புகள் உள்ளதா எனச் சரிபார்க்கவும்
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # மேம்பாட்டு தரவுத்தள அமைப்புகளை சரிபார்க்கவும்
+    # வளர்ச்சி தரவுத்தள கட்டமைப்புகளைச் சரிபார்க்கவும்
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -896,33 +896,33 @@ validate_dev_environment() {
 
 ```bash
 #!/bin/bash
-# உற்பத்தி சூழலுக்கான குறிப்பிட்ட சரிபார்ப்புகள்
+# உற்பத்தி சூழலுக்கு குறிப்பிட்ட சரிபார்ப்புகள்
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # உயர்கிடைக்கும் தன்மை கொண்ட கட்டமைப்புகளைச் சரிபார்க்கவும்
+    # உயர் கிடைப்புத்தன்மை கட்டமைப்புகளை சரிபார்க்கவும்
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # காப்பு கட்டமைப்புகளைச் சரிபார்க்கவும்
+    # காப்பு கட்டமைப்புகளை சரிபார்க்கவும்
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # மேற்பார்வை அமைப்பைச் சரிபார்க்கவும்
+    # மேற்பார்வை அமைப்பை சரிபார்க்கவும்
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # பாதுகாப்பு கட்டமைப்புகளைச் சரிபார்க்கவும்
+    # பாதுகாப்பு கட்டமைப்புகளை சரிபார்க்கவும்
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -990,7 +990,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # சப்ஸ்கிரிப்ஷனில் உள்ள சேமிப்பு கணக்குகளைப் பெறவும்
+    # சப்ஸ்கிரிப்ஷனில் சேமிப்பு கணக்குகளை பெறுக
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -1011,13 +1011,13 @@ def check_network_limits(location: str) -> bool:
     """Check network-related limits"""
     print(f"\n=== Network Limits Check ({location}) ===")
     
-    # மெய்நிகர் நெட்வொர்க்குகளை சரிபார்க்கவும்
+    # மெய்நிகர் நெட்வொர்க்குகளைச் சரிபார்க்கவும்
     vnets = run_command(['az', 'network', 'vnet', 'list'])
     if vnets is not None:
         vnet_count = len(vnets)
         print(f"✅ Virtual Networks: {vnet_count}/1000")
     
-    # பொது IP முகவரிகளை சரிபார்க்கவும்
+    # பொதுப் IP முகவரிகளைச் சரிபார்க்கவும்
     public_ips = run_command(['az', 'network', 'public-ip', 'list'])
     if public_ips is not None:
         ip_count = len(public_ips)
@@ -1064,14 +1064,14 @@ if __name__ == "__main__":
 
 ```bash
 #!/bin/bash
-# AZD டெப்ளாய்மெண்டுகளுக்கான பாதுகாப்பு மற்றும் இணக்கத்தன்மை சரிபார்ப்பு
+# AZD வினியோகங்களுக்கு பாதுகாப்பு மற்றும் இணக்கச் சரிபார்ப்பு
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
     
     local issues_found=0
     
-    # Key Vault பயன்பாடு உள்ளதா என்பதை சரிபார்
+    # Key Vault பயன்பாட்டை சரிபாரிக்கவும்
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1079,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Managed identity பயன்பாடு உள்ளதா என்பதை சரிபார்
+    # Managed identity பயன்பாட்டை சரிபாரிக்கவும்
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # HTTPS கட்டாயப்படுத்தல் உள்ளதா என்பதை சரிபார்
+    # HTTPS அமல்படுத்தலை சரிபாரிக்கவும்
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1095,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # குறைந்தபட்ச TLS பதிப்பு இருப்பதா என்பதை சரிபார்
+    # குறைந்தபட்ச TLS பதிப்பைச் சரிபாரிக்கவும்
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1103,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # பொது அணுகல் வரம்புகள் உள்ளதா என்பதை சரிபார்
+    # பொதுமுக அணுகல் வரம்புகளைச் சரிபாரிக்கவும்
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1111,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # நெட்வொர்க் பாதுகாப்பு குழுக்களை சரிபார்
+    # நெட்வொர்க் பாதுகாப்பு குழுக்களைச் சரிபாரிக்கவும்
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1124,21 +1124,21 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # தரவு எन्क்ரிப்ஷன் உள்ளதா என்பதை சரிபார்
+    # தரவு குறியாக்கத்தைச் சரிபாரிக்கவும்
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # ஆடிட் பதிவு உள்ளதா என்பதை சரிபார்
+    # ஆடிட் பதிவு அமைப்பைச் சரிபாரிக்கவும்
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # காப்புப் பிரதிகள் மற்றும் தக்கவைத்தல் கொள்கைகள் உள்ளதா என்பதை சரிபார்
+    # காப்பு மற்றும் காப்பாற்றல் கொள்கைகளைச் சரிபாரிக்கவும்
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1290,58 +1290,58 @@ steps:
 
 ---
 
-## சிறந்த நடைமுறைகள் சுருக்கம்
+## Best Practices Summary
 
-### ✅ முன்-விமானச் சோதனை சிறந்த நடைமுறைகள்
+### ✅ முன்-பரிசோதனை சிறந்த நடைமுறைகள்
 
-1. **சாத்தியமான இடங்களில் தானியக்கமாக்கவும்**
+1. **சாத்தியம் உள்ள இடங்களில் தானியக்கப்படுத்துங்கள்**
    - சோதனைகளை CI/CD குழாய்களில் இணைக்கவும்
-   - மீண்டும் பயன்படுத்தக்கூடிய சரிபார்ப்புக்காக ஸ்கிரிப்டுகளை பயன்படுத்தவும்
-   - கணக்கெடுப்பு பாதைகளுக்காக முடிவுகளை சேமிக்கவும்
+   - மறு-மீண்டும் செய்யக்கூடிய சரிபார்ப்புகளுக்கு ஸ்கிரிப்ட்களை பயன்படுத்தவும்
+   - ஆடிட் தடங்களை varten முடிவுகளை சேமிக்கவும்
 
-2. **சூழல்-சூழலால் தனியாக சரிபார்ப்பு**
-   - dev/staging/prod ஆகியவற்றுக்கு வெவ்வேறு சோதனைகள்
-   - சூழல் ஒவ்வொன்றிற்கும் ஏற்ற பாதுகாப்பு தேவைகள்
-   - production அல்லாத சூழல்களுக்கு செலவுக் குறைத்தல்
+2. **சூழல்-சார்ந்த சரிபார்ப்பு**
+   - dev/staging/prod சூழல்களுக்கு வெவ்வேறு சோதனைகள்
+   - ஒவ்வொரு சூழலுக்கும் பொருத்தமான பாதுகாப்பு தேவைகள்
+   - உற்பத்தி அல்லாத சூழல்களுக்கு செலவு சிறப்பித்தல்
 
-3. **விரிவான கவரேஜ்**
+3. **முழுமையான பரிசோதனை**
    - அங்கீகாரம் மற்றும் அனுமதிகள்
-   - வள குறியீட்டு வரம்புகள் மற்றும் கிடைமையின்மை
-   - டெம்ப்ளேட் செல்லுபடித்தன்மை மற்றும் சொற்றுணர்ச்சி
-   - பாதுகாப்பு மற்றும் அமையுதல் தேவைகள்
+   - வள ஒதுக்கீடுகள் மற்றும் கிடைப்புத்தன்மை
+   - டெம்ப்ளேட் சரிபார்ப்பு மற்றும் உரை வடிவம் (syntax)
+   - பாதுகாப்பு மற்றும் இணக்கம் தேவைகள்
 
-4. **தெளிவான அறிக்கை**
-   - வண்ண-குறியிடப்பட்ட நிலை சொல்லிகள்
-   - தீர்வு படிகளுடன் விரிவான பிழை செய்திகள்
-   - விரைந்த மதிப்பீட்டிற்கு சுருக்க அறிக்கைகள்
+4. **தெளிவான அறிக்கைகள்**
+   - நிறமுறைப்பட்ட நிலைக் குறியீடுகள்
+   - தீர்வு படிகளுடன் கூடிய விரிவான பிழை செய்திகள்
+   - விரைவான மதிப்பீட்டிற்கான சுருக்க அறிக்கைகள்
 
-5. **விரைந்து தோல்வி அடையவும் (Fail Fast)**
-   - முக்கிய சோதனைகள் தோல்வியளித்தால் வினியோகத்தை நிறுத்தவும்
-   - தீர்விற்கான தெளிவான வழிகாட்டுதலை வழங்கவும்
-   - சோதனைகளை எளிதில் மீண்டும் இயக்க வசதியை உள் நுழையச் செய்யவும்
+5. **விரைவில் தோல்வி**
+   - முக்கிய சோதனைகள் தோல்வியடைந்தால் ஒப்படைப்பை நிறுத்தவும்
+   - தீர்வுக்கான தெளிவான வழிகாட்டுதலை வழங்கவும்
+   - சோதனைகளை எளிதில் மீண்டும் இயக்கும் வசதியை இயக்கு
 
-### பொதுவான முன்-விமான பிழைகள்
+### பொதுவான முன்-பரிசோதனை தவறுகள்
 
-1. "விரைவு" வினியோகங்களுக்கு சரிபார்ப்பை தள்ளிப் போடுதல்
-2. வினியோகத்திற்கு முன்னர் போதுமான அனுமதிகள் சரிபார்க்கப்படாமை
-3. நிலைமை தோல்வியடையும் வரை குறியீட்டு வரம்புகளை கவனிக்காமல் இருப்பது
-4. CI/CD குழாய்களில் டெம்ப்ளேட்டுகளை சரிபார்க்காதது
-5. உற்பத்தி சூழலுக்கு பாதுகாப்பு சரிபார்ப்பை தவறவிடுதல்
-6. போதிய செலவு மதிப்பீடு இல்லாததால் பட்ஜெட் அதிர்ச்சிகள்
-
----
-
-**Pro Tip**: உண்மையான வினியோக வேலைக்கு முன் உங்கள் CI/CD குழாயில் முன்-விமான சோதனைகளை தனித்த வேலைவாய்ப்பாக இயக்கவும். இது பிழைகளை முதலில் பிடிக்க உதவுகிறது மற்றும் டெவலப்பர்களுக்கு அதிவிரைவான கருத்துகளைக் கொடுக்கின்றது.
+1. "விரைவான" ஒப்படைப்புகளுக்கு சரிபார்ப்பை தவிர்த்தல்
+2. ஒப்படைப்பு முந்தைய போதுமான அனுமதிகள் சரிபார்க்கப்படாமை
+3. ஒதுக்கீடு வரம்புகளை புறக்கணித்தல் வரை ஒப்படைப்பு தோல்வியடையும்போது
+4. CI/CD குழாய்களில் டெம்ப்ளேட்களை சரிபார்க்காமை
+5. உற்பத்தி சூழல்களுக்கு பாதுகாப்பு சரிபார்ப்பை தவறவிடுதல்
+6. போதுமானமற்ற செலவு மதிப்பீடு பட்ஜெட் அதிர்ச்சிகளை உண்டாக்கும்
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [SKU தேர்வு](sku-selection.md)
-- **Next Lesson**: [Cheat Sheet](../../resources/cheat-sheet.md)
+**சிறந்த ஆலோசனை**: உண்மையான ஒப்படைப்பு வேலைக்கு முன்பு உங்கள் CI/CD குழாயில் முன்-பரிசோதனைகளை தனித்த வேலைவாக இயக்குங்கள். இது பிரச்சனைகளை முன்கூட்டியே கண்டறிய உதவுகிறது மற்றும் டெவலப்பர்களுக்கு வேகமான பின்னூட்டத்தை வழங்குகிறது.
+
+---
+
+**வழிசெலுத்தல்**
+- **முந்தைய பாடம்**: [SKU தேர்வு](sku-selection.md)
+- **அடுத்த பாடம்**: [சுருக்க குறிப்புகள்](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-மறுப்பு குறிப்பு:
-இந்த ஆவணம் செயற்கை நுண்ணறிவு மொழிபெயர்ப்பு சேவை Co-op Translator (https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்கு முயற்சி செய்தாலும், தானியங்கி மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறுகள் இருக்கலாம் என்பதை தயவுசெய்து கவனத்தில் கொள்ளுங்கள். ஆவணத்தின் மூல மொழியில் உள்ள பதிப்பே அதிகாரபூர்வமான மூலமாக கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழிற்முறை மனித மொழிபெயர்ப்பை பரிந்துரைக்கிறோம். இந்த மொழிபெயர்ப்பைப் பயன்படுத்துவதனால் ஏற்படும் எந்தவொரு தவறான புரிதலுக்கும் அல்லது தவறான விளக்கங்களுக்கும் நாங்கள் பொறுப்பேற்க மாட்டோம்.
+**மறுப்பு அறிவிப்பு**:
+இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவையான [Co-op Translator](https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்திற்காக முயன்றாலும், தானியங்கி மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறுகள் இருக்கலாம் என்பதை தயவுசெய்து கருத்தில் கொள்ளவும். மூல ஆவணம் அதன் சொந்த மொழியிலேயே அதிகாரபூர்வ ஆதாரமாக கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்கு, தொழில்முறை மனித மொழிபெயர்ப்பு பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பைப் பயன்படுத்துவதால் ஏற்படும் எந்தவொரு தவறான புரிதலுக்கோ அல்லது தவறான விளக்கங்களுக்கோ நாங்கள் பொறுப்பேற்கமாட்டோம்.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

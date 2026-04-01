@@ -1,4 +1,4 @@
-# Provisioning Azure Resources wit AZD
+# Provisioning Azure Resources with AZD
 
 **Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
@@ -9,35 +9,35 @@
 
 ## Introduction
 
-Dis full guide go cover everything wey you need sabi about how to provision an manage Azure resources using Azure Developer CLI. You go learn how to implement Infrastructure as Code (IaC) patterns from basic resource creation go reach advanced enterprise-grade infrastructure architectures using Bicep, ARM templates, Terraform, an Pulumi.
+Dis complete guide go cover everything wey you need sabi about how to provision and manage Azure resources with Azure Developer CLI. You go learn how to implement Infrastructure as Code (IaC) patterns from simple resource creation go reach advanced enterprise-grade infrastructure architectures using Bicep, ARM templates, Terraform, and Pulumi.
 
 ## Learning Goals
 
-By the time you finish dis guide, you go:
-- Master Infrastructure as Code principles an how to provision Azure resources
-- Understand the different IaC providers wey Azure Developer CLI dey support
-- Design an implement Bicep templates for common application architectures
-- Configure resource parameters, variables, an environment-specific settings
-- Implement advanced infrastructure patterns like networking an security
-- Manage resource lifecycle, updates, an dependency resolution
+If you finish dis guide, you go:
+- Become pro for Infrastructure as Code principles and provisioning Azure resources
+- Understand the different IaC providers wey Azure Developer CLI support
+- Design and implement Bicep templates for common application architectures
+- Configure resource parameters, variables, and environment-specific settings
+- Implement advanced infrastructure patterns like networking and security
+- Manage resource lifecycle, updates, and resolve dependency issues
 
 ## Learning Outcomes
 
-After you finish, you go fit:
-- Design an provision Azure infrastructure using Bicep an ARM templates
+After you don complete, you go fit:
+- Design and provision Azure infrastructure using Bicep and ARM templates
 - Configure complex multi-service architectures with correct resource dependencies
-- Implement parameterized templates for multiple environments an configurations
-- Troubleshoot infrastructure provisioning issues an resolve deployment failures
-- Apply Azure Well-Architected Framework principles to infrastructure design
-- Manage infrastructure updates an implement infrastructure versioning strategies
+- Implement parameterized templates for different environments and configurations
+- Troubleshoot provisioning issues and solve deployment failures
+- Apply Azure Well-Architected Framework principles to your infrastructure design
+- Manage infrastructure updates and apply infrastructure versioning strategies
 
 ## Infrastructure Provisioning Overview
 
-Azure Developer CLI support multiple Infrastructure as Code (IaC) providers:
-- **Bicep** (recommended) - Azure domain-specific language
+Azure Developer CLI support plenty Infrastructure as Code (IaC) providers:
+- **Bicep** (recommended) - Azure's domain-specific language
 - **ARM Templates** - JSON-based Azure Resource Manager templates
 - **Terraform** - Multi-cloud infrastructure tool
-- **Pulumi** - Modern infrastructure as code wey use programming languages
+- **Pulumi** - Modern infrastructure as code with programming languages
 
 ## Understanding Azure Resources
 
@@ -759,38 +759,37 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ### Preview Infrastructure Changes Before Deployment
 
-Di `azd provision --preview` feature dey allow you **simulate di provisioning of infrastructure** before you actually deploy resources. E resemble `terraform plan` or `bicep what-if`, and e go give you a **dry-run view** of wetin go change for your Azure environment.
+Di `azd provision --preview` feature dey allow you **simulate di provisioning of infrastructure** before you actually deploy resources. E dey similar to `terraform plan` or `bicep what-if`, and e go give you a **dry-run view** of wetin dem go change for your Azure environment.
 
 #### 🛠️ What It Does
-- **Analyzes your IaC templates** (Bicep or Terraform)
-- **Shows a preview of resource changes**: additions, deletions, updates
-- **Does not apply changes** — e read-only an safe to run
+- **E go analyze your IaC templates** (Bicep or Terraform)
+- **Dey show preview of resource changes**: additions, deletions, updates
+- **No dey apply changes** — e read-only and safe to run
 
-#### � Use Cases
+#### Use Cases
 ```bash
-# See changes wey go happen for infrastructure before dem deploy am
+# See wetin don change for infrastructure before dem deploy am
 azd provision --preview
 
-# See wey show all di details
-azd provision --preview --output json
-
-# See for particular environment
-azd provision --preview --environment production
+# See am for particular environment
+azd provision --preview -e production
 ```
 
-This command go help you:
+Dis command dey help you:
 - **Validate infrastructure changes** before you commit resources
-- **Catch misconfigurations early** for the development cycle
+- **Catch misconfigurations early** for your development cycle
 - **Collaborate safely** when you dey work as team
-- **Ensure least-privilege deployments** without unexpected surprises
+- **Ensure least-privilege deployments** make e no shock anybody
 
-E dey especially useful when:
+E especially useful when:
 - You dey work with complex multi-service environments
 - You dey make changes to production infrastructure
-- You wan validate template modifications before PR approval
-- You dey train new team members about infrastructure patterns
+- You dey validate template modifications before PR approval
+- You dey train new team members for infrastructure patterns
 
 ### Example Preview Output
+Exact preview output fit change based on provider and project structure, but the result suppose clear show the proposed changes before anything dey applied.
+
 ```bash
 $ azd provision --preview
 
@@ -809,17 +808,16 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
 ```
 
-## �🔄 Resource Updates and Migrations
+## �🔄 How to update resources and migrate dem
 
 ### Safe Resource Updates
 ```bash
-# Preview di infrastructure changes first (DEY RECOMMEND)
+# First make you preview di infrastructure changes (DEY REKOMEND)
 azd provision --preview
 
 # Apply di changes after you don confirm di preview
@@ -921,7 +919,7 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 - [Pre-deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - Validate resource availability
 - [Common Issues](../chapter-07-troubleshooting/common-issues.md) - Troubleshoot infrastructure problems
 - [Debugging Guide](../chapter-07-troubleshooting/debugging.md) - Debug provisioning issues
-- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Choose correct service tiers
+- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Choose appropriate service tiers
 
 ## Additional Resources
 
@@ -939,6 +937,6 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dis document dem translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg note say automated translations fit get errors or no too accurate. Di original document for im own language suppose be di main authority. If na important matter, make you use professional human translation. We no dey liable for any misunderstanding or wrong interpretation wey fit come from di use of dis translation.
+**Disclaimer**:
+Dis document don translate by AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make everything accurate, abeg sabi say automated translations fit get errors or inaccuracies. Di original document for im native language suppose be di authoritative source. If na critical information, we recommend make professional human translation do am. We no dey liable for any misunderstandings or misinterpretations wey fit arise from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,93 +1,95 @@
 # 2. peatükk: AI-esimene arendus
 
-**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 1-2 tundi | **⭐ Keerukus**: Keskmine
+**📚 Kursus**: [AZD algajatele](../../README.md) | **⏱️ Kestus**: 1–2 tundi | **⭐ Tase**: Kesktase
 
 ---
 
 ## Ülevaade
 
-See peatükk keskendub AI-ga täiustatud rakenduste juurutamisele, kasutades Azure Developer CLI-d ja Microsoft Foundry teenuseid. Alates lihtsatest AI-vestlusrakendustest kuni tööriistadega varustatud intelligentsete agentideni.
+See peatükk keskendub AI-põhiste rakenduste juurutamisele kasutades Azure Developer CLI-d ja Microsoft Foundry teenuseid. Alates lihtsatest AI vestlusrakendustest kuni tööriistadega intelligentsete agentideni.
+
+> **Kinnitamise märkus (2026-03-25):** Selle peatüki käsujada ja laienduse juhendi üle vaadati `azd` versiooniga `1.23.12` ning praeguse eelvaate AI agentide laienduse `azure.ai.agents` `0.1.18-preview`. Kui kasutate vanemat AZD versiooni, uuendage esmalt ning jätkake siis harjutustega.
 
 ## Õpieesmärgid
 
-Selle peatüki lõpetamisel saate:
-- Juurutada AI-rakendusi, kasutades eelnevalt valmistatud AZD-malle
-- Mõista Microsoft Foundry integreerimist AZD-ga
-- Konfigureerida ja kohandada AI-agente tööriistadega
-- Juurutada RAG (Retrieval-Augmented Generation) rakendusi
+Selle peatüki lõpetades:
+- Juurutate AI rakendusi, kasutades eelvalmiste AZD mallide põhjal
+- Mõistate Microsoft Foundry integreerimist AZD-ga
+- Konfigureerite ja kohandate AI agente tööriistadega
+- Juurutate RAG (otsingu-tugevdusel põhinevaid) rakendusi
 
 ---
 
 ## 📚 Õppetunnid
 
 | # | Õppetund | Kirjeldus | Aeg |
-|---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Ühenda AZD Foundry teenustega | 30 min |
-| 2 | [AI Agents Guide](agents.md) | Juuruta nutikaid agente tööriistadega | 45 min |
-| 3 | [AI Model Deployment](ai-model-deployment.md) | Juuruta ja konfigureeri AI-mudeleid | 30 min |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Praktiline: tee oma AI-lahendus AZD-valmis | 60 min |
+|---|----------|-----------|-----|
+| 1 | [Microsoft Foundry integreerimine](microsoft-foundry-integration.md) | Ühendage AZD Foundry teenustega | 30 min |
+| 2 | [AI agentide juhend](agents.md) | Juurutage tööriistadega intelligentseid agente | 45 min |
+| 3 | [AI mudelite juurutamine](ai-model-deployment.md) | Juurutage ja seadistage AI mudeleid | 30 min |
+| 4 | [AI töötoa labor](ai-workshop-lab.md) | Praktikum: Tehke oma AI lahendus AZD-valmis | 60 min |
 
 ---
 
 ## 🚀 Kiire algus
 
 ```bash
-# Valik 1: RAG-vestlusrakendus
+# Valik 1: RAG vestlusrakendus
 azd init --template azure-search-openai-demo
 azd up
 
-# Valik 2: tehisintellekti agendid
+# Valik 2: Tehisintellekti agendid
 azd init --template get-started-with-ai-agents
 azd up
 
-# Valik 3: kiire vestlusrakendus
+# Valik 3: Kiire vestlusrakendus
 azd init --template openai-chat-app-quickstart
 azd up
 ```
 
 ---
 
-## 🤖 Esiletõstetud AI-mallid
+## 🤖 Esile tõstetud AI mallid
 
 | Mall | Kirjeldus | Teenused |
-|----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG-vestlus viidetega | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI-agent tööriistadega | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Põhiline AI-vestlus | OpenAI + Container Apps |
+|------|-----------|----------|
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG vestlus tsitaatidega | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI agent tööriistadega | AI Agent Service |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Lihtne AI vestlus | OpenAI + Container Apps |
 
 ---
 
-## 💰 Kuluteadlikkus
+## 💰 Kulu teadlikkus
 
-| Keskkond | Hinnanguline igakuine kulu |
-|-------------|----------------------|
-| Arendus | $80-150 |
-| Testkeskkond | $150-300 |
-| Tootmine | $300-3,500+ |
+| Keskkond | Hinnanguline kuukulu |
+|----------|---------------------|
+| Arendus | $80–150 |
+| Testkeskkond | $150–300 |
+| Tootmine | $300–3,500+ |
 
-**Vihje:** Käivitage `azd down` pärast testimist, et vältida tasusid.
+**Nipp:** Käivitage pärast testimist käsuga `azd down`, et vältida tasusid.
 
 ---
 
 ## 🔗 Navigeerimine
 
 | Suund | Peatükk |
-|-----------|---------|
-| **Eelmine** | [1. peatükk: Põhitõed](../chapter-01-foundation/README.md) |
-| **Järgmine** | [3. peatükk: Konfiguratsioon](../chapter-03-configuration/README.md) |
-| **Hüppa** | [8. peatükk: Tootmismustrid](../chapter-08-production/README.md) |
+|--------|---------|
+| **Eelmine** | [1. peatükk: Alused](../chapter-01-foundation/README.md) |
+| **Järgmine** | [3. peatükk: Seadistamine](../chapter-03-configuration/README.md) |
+| **Hüppa** | [8. peatükk: Tootmise mustrid](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Seotud ressursid
 
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
+- [AI tõrkeotsing](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Tootmise AI tavad](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vastutusest loobumine:
-See dokument on tõlgitud tehisintellekti tõlketeenuse Co-op Translator (https://github.com/Azure/co-op-translator) abil. Kuigi me püüame tagada täpsust, pidage meeles, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle algkeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta ühegi arusaamatuse ega väärtõlgenduse eest, mis tuleneb selle tõlke kasutamisest.
+**Lahtiütlemine**:  
+See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame täpsust, palun pange tähele, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument oma algkeeles tuleks pidada autoriteetseks allikaks. Olulise info puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta ühegi arusaamatuse või valesti mõistmise eest, mis tuleneb selle tõlke kasutamisest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

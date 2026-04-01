@@ -1,43 +1,43 @@
-# Tootevalmis AI töökoormuse parimad praktikad AZD-ga
+# Tootmise AI töökoormuste parimad tavad AZD-ga
 
-**Peatüki navigeerimine:**
-- **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
-- **📖 Praegune peatükk**: Peatükk 8 - Toodang & Ettevõtte mustrid
+**Kursuse navigeerimine:**
+- **📚 Kursuse koduleht**: [AZD algajatele](../../README.md)
+- **📖 Praegune peatükk**: Peatükk 8 - Tootmine & Ettevõtte mustrid
 - **⬅️ Eelmine peatükk**: [Peatükk 7: Tõrkeotsing](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Samuti seotud**: [AI töötuba labor](ai-workshop-lab.md)
+- **⬅️ Samuti seotud**: [AI töötoa labor](ai-workshop-lab.md)
 - **🎯 Kursus lõpetatud**: [AZD algajatele](../../README.md)
 
 ## Ülevaade
 
-See juhend pakub põhjalikke parimaid praktikaid tootmiskõlblike AI töökoormuste juurutamiseks, kasutades Azure Developer CLI-d (AZD). Tuginedes Microsoft Foundry Discordi kogukonna tagasisidele ja pärismaailma klientide juurutustele, käsitlevad need praktikad kõige tavalisemaid väljakutseid tootmis AI süsteemides.
+See juhend annab põhjalikke parimaid tavasid tootmisvalmis AI töökoormuste juurutamiseks kasutades Azure Developer CLI-d (AZD). Tuginedes Microsoft Foundry Discord kogukonna tagasisidele ja päris klientide juurutustele, käsitlevad need tavad kõige tavalisemaid väljakutseid tootmis-AI süsteemides.
 
-## Peamised lahendatavad väljakutsed
+## Peamised käsitletud väljakutsed
 
-Kogukonna küsitluse tulemuste põhjal on need arendajate peamised väljakutsed:
+Meie kogukonna küsitluse tulemustel on arendajatel järgmised peamised väljakutsed:
 
-- **45%** võitleb mitme teenuse AI juurutustega
-- **38%** seisab silmitsi mandaadi- ja saladuste halduse probleemidega  
-- **35%** leiavad tootmiskõlblikkuse ja skaleerimise keerulisena
+- **45%** võitlevad mitme teenusega AI juurutustega
+- **38%** on probleeme volituste ja saladuste haldamisega  
+- **35%** leiavad tootmisvalmiduse ja skaleerimise keeruliseks
 - **32%** vajavad paremaid kulude optimeerimise strateegiaid
-- **29%** soovivad parendatud jälgimise ja tõrkeotsingu lahendusi
+- **29%** nõuavad paremat jälgimist ja tõrkeotsingut
 
-## Tootmis AI arhitektuurimustrid
+## Tootmis-AI arhitektuurimustrid
 
-### Muster 1: Mikroteenuste AI arhitektuur
+### Muster 1: Mikroteenused AI arhitektuur
 
-**Millal kasutada**: keerukad AI rakendused mitme võimekusega
+**Millal kasutada**: Mitme võimekusega keerulised AI rakendused
 
 ```mermaid
 graph TD
-    Frontend[Veebi Esikülg] --- Gateway[API Värav] --- LB[Koormuse Tasakaalustaja]
+    Frontend[Veebiliides] --- Gateway[API Värav] --- LB[Koormuse Tasakaalustaja]
     Gateway --> Chat[Vestlusteenus]
     Gateway --> Image[Pilditeenus]
-    Gateway --> Text[Tekstiteenus]
+    Gateway --> Text[Tekstimisteenus]
     Chat --> OpenAI[Microsoft Foundry Mudelid]
     Image --> Vision[Arvutinägemine]
-    Text --> DocIntel[Dokumendi Intellekt]
+    Text --> DocIntel[Dokumendi Intelligentsus]
 ```
-**AZD rakendus:**
+**AZD rakendus**:
 
 ```yaml
 # azure.yaml
@@ -60,9 +60,9 @@ services:
     host: containerapp
 ```
 
-### Muster 2: Sündmuspõhine AI töötlemine
+### Muster 2: Sündmustepõhine AI töötlemine
 
-**Millal kasutada**: partiitöötlus, dokumendianalüüs, asünkroonsed töövood
+**Millal kasutada**: Pakettprotsessid, dokumendianalüüs, asünkroonsed töövood
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -109,46 +109,46 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Mõtiskledes AI agendi tervise üle
+## Mõtlemine AI agendi tervise üle
 
-Kui traditsiooniline veebirakendus rikub, on sümptomid tuntud: leht ei laadi, API tagastab vea või juurutus ebaõnnestub. AI-põhised rakendused võivad puruneda kõigis neis samades viisides — kuid võivad käituda ka peenetemalt, ilma ilmsete veateadeteta.
+Kui traditsiooniline veebirakendus katki läheb, on sümptomid tuttavad: leht ei laadi, API annab vea või juurutus ebaõnnestub. AI-põhised rakendused võivad katki minna kõigil neil viisidel — kuid võivad käituda ka peenemalt, ilma ilmsete veateadeteta.
 
-See jaotis aitab teil luua mentaliteedi AI töökoormuste jälgimiseks, et te teaksite, kuhu vaadata, kui midagi tundub valesti.
+See lõik aitab sul luua vaimse mudeli AI töökoormuste jälgimiseks, et sa teaksid, kuhu vaadata, kui tundub, et midagi on paigast ära.
 
-### Kuidas AI agendi tervis erineb traditsioonilise rakenduse tervisest
+### Kuidas agentide tervis erineb traditsioonilise rakenduse tervisest
 
-Traditsiooniline rakendus kas töötab või ei tööta. AI agent võib näida töötavat, kuid anda kehva tulemust. Mõelge agendi tervisele kahe kihina:
+Tavaline rakendus kas töötab või ei tööta. AI agent võib tunduda töötavat, kuid anda halbu tulemusi. Mõtle agendi tervisele kahe kihina:
 
 | Kiht | Mida jälgida | Kuhu vaadata |
 |-------|--------------|--------------|
-| **Taristu tervis** | Kas teenus töötab? Kas ressursid on provisioneeritud? Kas lõpp-punktid on kättesaadavad? | `azd monitor`, Azure portaalressursside tervis, konteineri/rakenduse logid |
-| **Käitumise tervis** | Kas agent reageerib täpselt? Kas vastused on aegsad? Kas mudelit kutsutakse õigesti? | Application Insights jäljed, mudeli kõnede latentsusmeetmed, vastuse kvaliteedi logid |
+| **Tarkvara- ja infrastruktuuri tervis** | Kas teenus töötab? Kas ressursid on eraldatud? Kas lõpp-punktid on kättesaadavad? | `azd monitor`, Azure portaali ressursi tervis, konteineri/rakenduse logid |
+| **Käitumise tervis** | Kas agent vastab täpselt? Kas vastused on õigeaegsed? Kas mudelit kutsutakse korrektselt? | Application Insights jäljed, mudeli kutsumise latentsuse mõõdikud, vastuste kvaliteedi logid |
 
-Taristu tervis on tuttav—see on sama iga azd rakenduse puhul. Käitumise tervis on uus kiht, mille AI töökoormused lisavad.
+Infrastruktuuri tervis on tuttav — see on sama mis igas azd rakenduses. Käitumise tervis on uus kiht, mida AI töökoormused lisavad.
 
-### Kuhu vaadata, kui AI rakendused ei käitu ootuspäraselt
+### Kuhu vaadata, kui AI rakendused ei käitu ettenähtud moel
 
-Kui teie AI rakendus ei anna oodatud tulemusi, on siin kontseptuaalne kontrollnimekiri:
+Kui sinu AI rakendus ei anna ootuspäraseid tulemusi, on siin kontseptuaalne kontrollnimekiri:
 
-1. **Alustage põhiasjadest.** Kas rakendus töötab? Kas ta pääseb oma sõltuvustele ligi? Kontrollige `azd monitor` ja ressursside tervist nagu iga tavalise rakenduse puhul.
-2. **Kontrollige mudeli ühendust.** Kas teie rakendus kutsub edukalt AI mudelit? Ebaõnnestunud või aegunud mudeli kõned on AI rakenduste probleemide kõige tavalisem põhjus ja ilmuvad rakenduse logides.
-3. **Vaadake, mida mudel sai.** AI vastused sõltuvad sisendist (käsklus ja kõik leitud kontekst). Kui väljund on vale, on tavaliselt sisend vale. Kontrollige, kas teie rakendus saadab mudelile õigeid andmeid.
-4. **Vaadake vastuse latentsust.** AI mudeli kõned on tavapärastest API kõnedest aeglasemad. Kui teie rakendus tundub aeglane, kontrollige, kas mudeli vastuse aeg on kasvanud—see võib viidata piirangutele, mahtudele või regiooni tasandi ummikutele.
-5. **Jälgige kulusignaale.** Ettearvamatud kõikumised märksõnade kasutamises või API kõnedes võivad viidata tsüklile, valesti seadistatud käsklusele või liigsetele kordustele.
+1. **Alusta põhitõdedest.** Kas rakendus töötab? Kas see pääseb ligi sõltuvustele? Kontrolli `azd monitorit` ja ressursi tervist nagu iga teise rakenduse puhul.
+2. **Kontrolli mudeli ühendust.** Kas rakendus kutsub AI mudelit edukalt? Ebaõnnestunud või ajapiiranguga mudeli kutsed on kõige sagedasem AI rakenduse probleemide põhjus ning ilmnevad sinu rakenduse logides.
+3. **Vaata, mida mudel sai.** AI vastused sõltuvad sisendist (käsklus ja saanud kontekst). Kui väljund on vale, on sisend tavaliselt vale. Kontrolli, kas su rakendus saadab mudelile õigeid andmeid.
+4. **Vaata vastuste latentsust.** AI mudeli kutsed on aeglasemad kui tavalised API kutse. Kui rakendus tundub aeglane, kontrolli, kas mudeli vastuse aeg on kasvanud — see võib viidata piirangutele, mahupiiridele või piirkonnale omasele ummikule.
+5. **Jälgi kulusignaale.** Ootamatud märkimisväärsed tõusud tokeni kasutuses või API kutsudes võivad viidata lõimule, valesti seadistatud käsule või liigselt korduvatele katsetele.
 
-Te ei pea kohe olekusnähtavuse tööriistu valdavaks õppima. Peamine on see, et AI rakendustel on jälgitav lisakäitumise kiht ja azd sisseehitatud jälgimine (`azd monitor`) annab teile lähtepunkti mõlema kihi uurimiseks.
+Sul ei ole vaja kohe kohe observability tööriistu päris meisterlikult osata. Peamine on, et AI rakendustel on täiendav käitumiskihi jälgimine ja azd sisseehitatud jälgimine (`azd monitor`) annab alust mõlema kihi uurimiseks.
 
 ---
 
-## Turvalisuse parimad praktikad
+## Turvalisuse parimad tavad
 
-### 1. Nullusaldusmudel (Zero-Trust)
+### 1. Nullus usaldus turvamudel
 
-**Rakendusstrateegia:**
+**Rakendamise strateegia**:
 - Teenustevaheline suhtlus ainult autentimisega
-- Kõik API kõned kasutavad juhitud identiteete
-- Võrgu isolatsioon privaatsete lõpp-punktidega
-- Väikseimad õigused ligipääsu kontrollides
+- Kõik API kutsed kasutavad haldussubjekti (managed identity)
+- Võrgu isoleerimine privaatsete lõpp-punktidega
+- Vähemtähtsuse juurdepääsuõigused
 
 ```bicep
 // Managed Identity for each service
@@ -171,7 +171,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 ### 2. Turvaline saladuste haldus
 
-**Key Vault integreerimismuster**:
+**Key Vault integratsiooni muster**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -206,7 +206,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### 3. Võrgu turvalisus
 
-**Privaatse lõpp-punkti seadistamine**:
+**Privaatsete lõpp-punktide seadistus**:
 
 ```bicep
 // Virtual Network for AI services
@@ -264,11 +264,11 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Jõudlus ja skaleerimine
+## Jõudluse ja skaleerimise tavad
 
-### 1. Automaatskaleerimise strateegiad
+### 1. Automaatse skaleerimise strateegiad
 
-**Konteinerite rakenduste automaatskaleerimine**:
+**Container Apps automaatne skaleerimine**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -344,7 +344,7 @@ var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${r
 
 ### 3. Koormuse tasakaalustamine ja liikluse juhtimine
 
-**Rakenduse värav koos WAF-iga**:
+**Application Gateway koos WAF-iga**:
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -380,9 +380,9 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 💰 Kuluoptimeerimine
+## 💰 Kulude optimeerimine
 
-### 1. Ressursside sobitamine
+### 1. Resursside õigesti suurendamine
 
 **Keskkonnapõhised konfiguratsioonid**:
 
@@ -404,7 +404,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Kulu jälgimine ja eelarved
+### 2. Kulude jälgimine ja eelarved
 
 ```bicep
 // Cost management and budgets
@@ -445,12 +445,12 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. Märksõnade kasutuse optimeerimine
+### 3. Tokeni kasutuse optimeerimine
 
-**OpenAI kulu haldus**:
+**OpenAI kulude haldus**:
 
 ```typescript
-// Rakenduse taseme märgisoptimeerimine
+// Rakenduse tasandi tokenite optimeerimine
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -468,13 +468,13 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Umbkaudne hinnang: 1 märgis ≈ 4 tähemärki
+    // Umbkõige hinnang: 1 token ≈ 4 tähemärki
     return Math.ceil(text.length / 4);
   }
 }
 ```
 
-## Jälgimine ja olekusnähtavus
+## Jälgimine ja nähtavus
 
 ### 1. Põhjalik Application Insights
 
@@ -521,9 +521,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. AI spetsiifiline jälgimine
+### 2. AI-spetsiifiline jälgimine
 
-**Kohandatud armatuurlaudad AI meetmetele**:
+**Kohandatud armatuurlauad AI mõõdikutele**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -621,9 +621,9 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Katastroofitaastamine ja kõrge kättesaadavus
+## Katastroofide taastumine ja kõrge kättesaadavus
 
-### 1. Mitmeregiooni juurutus
+### 1. Mitme regiooni juurutus
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -782,7 +782,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup AZD
-        uses: Azure/setup-azd@v1.0.0
+        uses: Azure/setup-azd@v2
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -802,7 +802,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup AZD
-        uses: Azure/setup-azd@v1.0.0
+        uses: Azure/setup-azd@v2
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -819,7 +819,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. Taristu valideerimine
+### 2. Infrastruktuuri valideerimine
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -827,7 +827,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Kontrolli, kas kõik nõutud teenused töötavad
+# Kontrolli, kas kõik vajalikud teenused töötavad
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -840,85 +840,85 @@ done
 # Kontrolli OpenAI mudelite juurutusi
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
-if [[ ! $models == *"gpt-35-turbo"* ]]; then
-    echo "ERROR: Required model gpt-35-turbo not deployed"
+if [[ ! $models == *"gpt-4.1-mini"* ]]; then
+  echo "ERROR: Required model gpt-4.1-mini not deployed"
     exit 1
 fi
 
-# Testi tehisintellekti teenuse ühenduvust
+# Testi AI teenuse ühenduvust
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Tootmiskõlblikkuse kontrollnimekiri
+## Tootmise valmisoleku kontrollnimekiri
 
 ### Turvalisus ✅
-- [ ] Kõik teenused kasutavad juhitud identiteete
-- [ ] Saladused hoiustatud Key Vaultis
-- [ ] Privaatseid lõpp-punkte seadistatud
-- [ ] Rakendatud võrgu turvagruppide reeglid
-- [ ] RBAC väikseimate privileegidega
-- [ ] WAF lubatud avalikel lõpp-punktidel
+- [ ] Kõik teenused kasutavad haldussubjekte
+- [ ] Saladused salvestatud Key Vaultis
+- [ ] Privaatseid lõpp-punkte konfigureeritud
+- [ ] Rakendatud võrgu turvarühmad
+- [ ] RBAC vähima õigusega
+- [ ] WAF avalikel lõpp-punktidel lubatud
 
 ### Jõudlus ✅
-- [ ] Automaatskaleerimine seadistatud
-- [ ] Vahemälu rakendatud
-- [ ] Koormuse tasakaalustamine seadistatud
+- [ ] Automaatne skaleerimine seadistatud
+- [ ] Vahemällu salvestamine kasutusel
+- [ ] Koormuse tasakaalustamine seatud
 - [ ] CDN staatilise sisu jaoks
-- [ ] Andmebaasi ühenduste puhvrites
-- [ ] Märksõnade kasutuse optimeerimine
+- [ ] Andmebaasi ühenduste grupeerimine
+- [ ] Tokeni kasutuse optimeerimine
 
 ### Jälgimine ✅
-- [ ] Application Insights konfigureeritud
+- [ ] Application Insights seadistatud
 - [ ] Kohandatud mõõdikud määratletud
-- [ ] Hoiatusreeglid seadistatud
+- [ ] Häire reeglid seadistatud
 - [ ] Armatuurlaud loodud
 - [ ] Tervisekontrollid rakendatud
 - [ ] Logide säilituspoliitikad
 
 ### Usaldusväärsus ✅
-- [ ] Mitmeregiooni juurutus
+- [ ] Mitme regiooni juurutus
 - [ ] Varundamise ja taastamise plaan
-- [ ] Elektrikäivitite rakendamine
-- [ ] Taastuskatsed seadistatud
-- [ ] Pehme degradeerimine
+- [ ] Katkestusskeemid rakendatud
+- [ ] Korduskatsete poliitikad seadistatud
+- [ ] Graatsiline degradeerumine
 - [ ] Tervisekontrolli lõpp-punktid
 
 ### Kulujuhtimine ✅
-- [ ] Eelarvehüüded seadistatud
-- [ ] Ressursside sobiv suurus
-- [ ] Arendus/test soodustused rakendatud
-- [ ] Reserveeritud instantsid ostetud
-- [ ] Kulu jälgimise armatuurlaud
-- [ ] Regulaarne kulu ülevaatus
+- [ ] Eelarvehäired konfigureeritud
+- [ ] Ressursside õige suurus
+- [ ] Arendus/test allahindlused rakendatud
+- [ ] Eeldatud instantsid ostetud
+- [ ] Kulude jälgimise armatuurlaud
+- [ ] Regulaarne kulude ülevaatus
 
 ### Vastavus ✅
-- [ ] Andmete asukohanõuded täidetud
-- [ ] Auditilogimine lubatud
-- [ ] Vastavuspõhimõtted rakendatud
-- [ ] Turvapõhimõtete alused kehtestatud
-- [ ] Regulaarne turvalisuse hindamine
-- [ ] Intsidendijuhtimise plaan
+- [ ] Andmekohalolu nõuded täidetud
+- [ ] Auditlogimine lubatud
+- [ ] Vastavuspoliitikad rakendatud
+- [ ] Turvabaasid rakendatud
+- [ ] Regulaarne turva-audit
+- [ ] Intsidentidele reageerimise plaan
 
-## Jõudluse mõõdikud
+## Jõudlustestide näitajad
 
-### Tüüpilised tootmisnäitajad
+### Tüüpilised tootmismõõdikud
 
-| Näitaja | Eesmärk | Jälgimine |
-|--------|--------|------------|
-| **Vastuse aeg** | < 2 sekundit | Application Insights |
-| **Saadavus** | 99.9% | Tööaja jälgimine |
-| **Vigade määr** | < 0.1% | Rakenduse logid |
-| **Märksõnade kasutus** | < 500$/kuu | Kulujuhtimine |
+| Mõõdik | Siht | Jälgimine |
+|--------|-------|-----------|
+| **Vastus aeg** | < 2 sekundit | Application Insights |
+| **Kättesaadavus** | 99,9% | Tööaja jälgimine |
+| **Vigade määr** | < 0,1% | Rakenduse logid |
+| **Tokenite kasutus** | < 500 $ kuus | Kulude haldus |
 | **Samaaegsed kasutajad** | 1000+ | Koormustestimine |
-| **Taasteaeg** | < 1 tund | Katastroofitaaste testid |
+| **Taastumisaeg** | < 1 tund | Katastroofi taastamise testid |
 
 ### Koormustestimine
 
 ```bash
-# AI-rakenduste laadimistestimise skript
+# Laadimise testimise skript tehisintellekti rakenduste jaoks
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -926,42 +926,45 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Kogukonna parimad praktikad
+## 🤝 Kogukonna parimad tavad
 
-Põhinedes Microsoft Foundry Discordi kogukonna tagasisidel:
+Põhinedes Microsoft Foundry Discord kogukonna tagasisidel:
 
 ### Kogukonna peamised soovitused:
 
-1. **Alustage väikeselt, skaleeruge järk-järgult**: alustage põhiliste SKU-dega ja skaleerige tegeliku kasutuse põhjal
-2. **Jälgige kõike**: seadistage põhjalik jälgimine juba esimesest päevast
-3. **Automatiseerige turvalisus**: kasutage infrastruktuuri koodina järjepideva turvalisuse tagamiseks
-4. **Testige põhjalikult**: kaasake AI-spetsiifilised testid oma töövoogu
-5. **Planeerige kulud**: jälgige märksõnade kasutust ja seadke varakult eelarvehüüded
+1. **Alusta väikeselt, skaleeri järk-järgult**: Alusta põhiliste SKU-dega ja skaleeri vastavalt tegelikule kasutusele
+2. **Jälgi kõike**: Loo põhjalik jälgimine esimesest päevast
+3. **Automatiseeri turvalisus**: Kasuta infrastruktuuri koodina järjepideva turvalisuse tagamiseks
+4. **Testi põhjalikult**: Kaasa AI-spetsiifilised testid oma töövoogu
+5. **Plaani kulud**: Jälgi tokeni kasutust ja sea varakult eelarvehäired
 
-### Vältida tuleks tavapäraseid lõkse:
+### Sageli vältimatud vead:
 
-- ❌ API võtmete kõvakodeerimine koodis
-- ❌ Ebapiisav jälgimissüsteem
-- ❌ Kuluoptimeerimise ignoreerimine
-- ❌ Ebaõnnestumise stsenaariumite mitte testimine
-- ❌ Juurutus ilma tervisekontrollita
+- ❌ API võtmepõhised väärtused koodis
+- ❌ Ebapiisava jälgimise seadistamine
+- ❌ Kulude optimeerimise ignoreerimine
+- ❌ Ebaõnnestumise stsenaariumite testimata jätmine
+- ❌ Juurutus ilma tervisekontrollideta
 
 ## AZD AI CLI käsud ja laiendused
 
-AZD sisaldab kasvavat hulka AI-spetsiifilisi käske ja laiendusi, mis lihtsustavad tootmiskõlblikke AI töövooge. Need tööriistad sillutavad teed kohaliku arenduse ja tootmisjuurutuse vahel AI töökoormustes.
+AZD sisaldab kasvavat komplekti AI-spetsiifilisi käske ja laiendusi, mis sujuvdavad tootmise AI töövooge. Need tööriistad täidavad silda lokaalse arenduse ja tootmise juurutuse vahel AI töökoormustele.
 
 ### AI laiendused AZD jaoks
 
-AZD kasutab laiendussüsteemi AI-spetsiifiliste võimete lisamiseks. Laienduste installimiseks ja haldamiseks kasutage:
+AZD kasutab laiendussüsteemi AI-spetsiifiliste funktsioonide lisamiseks. Paigalda ja halda laiendusi käsuga:
 
 ```bash
-# Loetle kõik saadaolevad laiendused (sh AI)
+# Loetle kõik saadaolevad laiendused (sh tehisintellekt)
 azd extension list
+
+# Uuri paigaldatud laienduse üksikasju
+azd extension show azure.ai.agents
 
 # Paigalda Foundry agentide laiendus
 azd extension install azure.ai.agents
 
-# Paigalda täpsustamise laiendus
+# Paigalda peenhäälestamise laiendus
 azd extension install azure.ai.finetune
 
 # Paigalda kohandatud mudelite laiendus
@@ -974,27 +977,27 @@ azd extension upgrade --all
 **Saadaval olevad AI laiendused:**
 
 | Laiendus | Eesmärk | Staatus |
-|----------|---------|---------|
-| `azure.ai.agents` | Foundry agenditeenuse haldus | Eelvaade |
-| `azure.ai.finetune` | Foundry mudelite peenhäälestus | Eelvaade |
+|-----------|---------|---------|
+| `azure.ai.agents` | Foundry agendi teenuse haldus | Eelvaade |
+| `azure.ai.finetune` | Foundry mudeli peenhäälestus | Eelvaade |
 | `azure.ai.models` | Foundry kohandatud mudelid | Eelvaade |
-| `azure.coding-agent` | Koodiakendi konfiguratsioon | Saadaval |
+| `azure.coding-agent` | Koodimise agendi seadistamine | Saadaval |
 
-### Agendiprojektide algatamine käsuga `azd ai agent init`
+### Agentide projektide initsialiseerimine käsuga `azd ai agent init`
 
-Käsk `azd ai agent init` loob tootmiskõlbuliku AI agendi projekti, mis on integreeritud Microsoft Foundry Agent Teenusega:
+`azd ai agent init` käsk genereerib tootmisvalmis AI agendi projekti, mis on integreeritud Microsoft Foundry Agent Teenusega:
 
 ```bash
 # Algata uus agendi projekt agendi manifestist
 azd ai agent init -m <manifest-path-or-uri>
 
-# Algata ja sihi kindlat Foundry projekti
+# Algata ja suuna konkreetsele Foundry projektile
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# Algata kohandatud allika kataloogiga
+# Algata kohandatud lähtekaustaga
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
-# Sihi hostina Container Apps'i
+# Suuna Container Appsidele hostina
 azd ai agent init -m agent-manifest.yaml --host containerapp
 ```
 
@@ -1003,49 +1006,49 @@ azd ai agent init -m agent-manifest.yaml --host containerapp
 | Lipp | Kirjeldus |
 |------|-----------|
 | `-m, --manifest` | Tee või URI agendi manifestile, mida lisada projekti |
-| `-p, --project-id` | Olemasolev Microsoft Foundry projekti ID teie azd keskkonnale |
-| `-s, --src` | Kaust, kuhu agent definitsioon alla laaditakse (vaikeväärtus `src/<agent-id>`) |
-| `--host` | Vaikimisi host'i ülekirjutus (nt `containerapp`) |
+| `-p, --project-id` | Olemasoleva Microsoft Foundry projekti ID sinu azd keskkonna jaoks |
+| `-s, --src` | Kaust agendi definitsiooni allalaadimiseks (vaikimisi `src/<agent-id>`) |
+| `--host` | Vaheta vaikimisi hosti (nt `containerapp`) |
 | `-e, --environment` | Kasutatav azd keskkond |
 
-**Tootmisnipinurk**: Kasutage `--project-id`, et ühendada otse olemasoleva Foundry projektiga, hoides nii agent koodi ja pilveresursse alates algusest sidusana.
+**Tootmise näpunäide**: Kasuta `--project-id`, et otse ühendada olemasoleva Foundry projektiga, hoides oma agendi koodi ja pilveressursid algusest sidusana.
 
 ### Mudeli konteksti protokoll (MCP) käsuga `azd mcp`
 
-AZD sisaldab sisseehitatud MCP serveri tuge (Alfa), mis võimaldab AI agentidel ja tööriistadel suhelda teie Azure ressurssidega standardiseeritud protokolli kaudu:
+AZD sisaldab sisseehitatud MCP serveri tuge (Alfa), mis võimaldab AI agentidel ja tööriistadel suhelda sinu Azure ressurssidega standardiseeritud protokolli kaudu:
 
 ```bash
-# Käivita oma projekti MCP server
+# Käivita MCP server oma projekti jaoks
 azd mcp start
 
-# Halda tööriista nõusolekut MCP toiminguteks
-azd mcp consent
+# Ülevaatamine kehtivatest Copiloti nõusoleku reeglitest tööriista käivitamiseks
+azd copilot consent list
 ```
 
-MCP server avaldab teie azd projekti konteksti — keskkonnad, teenused ja Azure ressursid — AI-põhistele arendustööriistadele. See võimaldab:
+MCP server eksponeerib sinu azd projekti konteksti — keskkonnad, teenused ja Azure ressursid — AI-põhistele arendustööriistadele. See võimaldab:
 
-- **AI abistatud juurutus**: lasta koodiaagentidel pärida teie projekti olekut ja käivitada juurutusi
-- **Resursside avastamine**: AI tööriistad saavad avastada, milliseid Azure ressursse teie projekt kasutab
-- **Keskkonna haldus**: agendid saavad vahetada arendus-/test-/tootmiskeskkondade vahel
+- **AI abistatud juurutus**: Las koodimise agentidel on võimalik pärida sinu projekti olekut ja käivitada juurutusi
+- **Ressursside avastamine**: AI tööriistad saavad avastada, mida sinu projekt Azure's kasutab
+- **Keskkondade haldus**: Agendid saavad lülituda arendus-/testimis-/tootmiskeskkondade vahel
 
 ### Infrastruktuuri genereerimine käsuga `azd infra generate`
 
-Tootmiskõlblike AI töökoormuste jaoks saate generaatorite abil luua ja kohandada infrastruktuuri koodina, asemel et toetuda automaatsele provisioningule:
+Tootmisvalmis AI töökoormuste jaoks võid genereerida ja kohandada Infrastructure as Code'i, selle asemel et toetuda automaatsele provisjonimisele:
 
 ```bash
 # Genereeri Bicep/Terraform failid oma projekti definitsioonist
 azd infra generate
 ```
 
-See kirjutab IaC kettale, et saaksite:
-- Taristut üle vaadata ja auditeerida enne juurutust
-- Lisada kohandatud turvapoliitikaid (võrgureeglid, privaatseid lõpp-punkte)
-- Integreerida olemasolevate IaC ülevaatusprotsessidega
-- Versioonikontrollida taristu muudatusi eraldiseisvalt rakenduskoodist
+See kirjutab IaC kõvakettale, et sa saaksid:
+- Ülevaadata ja auditeerida infrastruktuuri enne juurutust
+- Lisada kohandatud turvapoliitikaid (võrgu reeglid, privaatväljad)
+- Integreerida olemasolevatesse IaC ülevaatusprotsessidesse
+- Versioonikontrollida infrastruktuuri muudatusi eraldi rakenduse koodist
 
-### Tootmistsükli konksud
+### Tootmise elutsükli konksud
 
-AZD konksud lubavad teil süstida kohandatud loogikat juurutustsükli igas etapis — kriitiline tootmis AI töövoogudes:
+AZD konksud lubavad sul süstida kohandatud loogikat iga juurutusetapi ajal — mis on kriitiline tootmise AI töövoogudes:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1074,67 +1077,67 @@ services:
 ```
 
 ```bash
-# Käivita arendamise ajal käsitsi kindel konks
+# Käivitage konkreetne konks käsitsi arendamise ajal
 azd hooks run predeploy
 ```
 
-**Soovitatavad tootmis konksud AI töökoormustele:**
+**Soovitatud tootmise konksud AI töökoormustele:**
 
-| Kork | Kasutusjuhtum |
-|------|---------------|
-| `preprovision` | Kontrolli tellimuse ressurssid ja piirangud AI mudelite mahule |
-| `postprovision` | Privaatsete lõpp-punktide seadistamine, mudeli kaalude juurutus |
-| `predeploy` | Käivita AI ohutustestid, valideeri käsklusmallid |
-| `postdeploy` | Pistikutest agentide vastused, kontrolli mudeli ühenduvust |
+| Konks | Kasutusjuhtum |
+|-------|---------------|
+| `preprovision` | Kontrolli tellimuse kvotasid AI mudeli mahtude jaoks |
+| `postprovision` | Konfigureeri privaatpäised, juuruta mudeli kaalu failid |
+| `predeploy` | Käivita AI ohutustestid, valideeri käsklustemplatid |
+| `postdeploy` | Tee suitsutest agendi vastustele, kontrolli mudeli ühenduvust |
 
-### CI/CD torujuhtme konfiguratsioon
+### CI/CD torujuhtme seadistamine
 
-Kasutage `azd pipeline config`, et ühendada projekt GitHub Actions või Azure Pipelines-ga turvalise Azure autentimisega:
+Kasuta `azd pipeline config` oma projekti ühendamiseks GitHub Actions või Azure Pipelines'iga, turvalise Azure autentimisega:
 
 ```bash
 # Konfigureeri CI/CD torujuhe (interaktiivne)
 azd pipeline config
 
-# Konfigureeri kindla pakkujaga
+# Konfigureeri konkreetse pakkujaga
 azd pipeline config --provider github
 ```
 
 See käsk:
-- Loob teenuse kontoga väikseimate privileegidega juurdepääsu
-- Seadistab föderatsioonitud mandaadid (ilma salvestatud saladusteta)
-- Genereerib või uuendab teie torujuhtme definitsioonifaili
-- Määrab vajalikud keskkonnamuutujad teie CI/CD süsteemis
+- Loob teenusobjekti vähima õigusega ligipääsuga
+- Seadistab föderatiivsed volitused (ilma salvestatud salasõnadeta)
+- Genereerib või uuendab torujuhtme definitsiooni faili
+- Seadistab vajalikke keskkonnamuutujaid su CI/CD süsteemis
 
-**Tootmistöövoog torujuhtme konfiguratsiooniga:**
+**Tootmise töövoog koos torujuhtme seadistusega:**
 
 ```bash
-# 1. Seadista tootmiskeskkond
+# 1. Seadistage tootmiskeskkond
 azd env new production
 azd env set AZURE_OPENAI_CAPACITY 100
 
-# 2. Konfigureeri torujuhe
+# 2. Konfigureerige pipeline
 azd pipeline config --provider github
 
-# 3. Torujuhe käivitab azd deploy iga kord, kui tehakse push main harusse
+# 3. Pipeline käivitab azd deploy iga kord, kui tehakse push main harusse
 ```
 
 ### Komponentide lisamine käsuga `azd add`
 
-Järk-järgult lisage Azure teenuseid olemasolevasse projekti:
+Lisa järk-järgult Azure teenuseid olemasolevale projektile:
 
 ```bash
 # Lisa uus teenusekomponent interaktiivselt
 azd add
 ```
 
-See on eriti kasulik tootmiskõlblike AI rakenduste laiendamiseks — näiteks vektoriotsingu teenuse lisamine, uue agendi lõpp-punkti rajamine või jälgimiskomponendi lisamine olemasolevale juurutusele.
+See on eriti kasulik tootmis-AI rakenduste laiendamisel — näiteks vektoriotsingu teenuse, uue agendi lõpp-punkti või jälgimise komponendi lisamiseks olemasolevale juurutusele.
 
-## Täiendavad ressursid
-- **Azure hästi arhitektuuritud raamistik**: [AI töökoormuse juhised](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Microsoft Foundry dokumentatsioon**: [Ametlikud juhendid](https://learn.microsoft.com/azure/ai-studio/)
-- **Kogukonna mallid**: [Azure näited](https://github.com/Azure-Samples)
+## Lisamaterjalid
+- **Azure hästi arhitektuurne raamistik**: [AI töökoormuse juhised](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Microsoft Foundry dokumentatsioon**: [Ametlikud dokumendid](https://learn.microsoft.com/azure/ai-studio/)
+- **Kogukonna mallid**: [Azure näidised](https://github.com/Azure-Samples)
 - **Discordi kogukond**: [#Azure kanal](https://discord.gg/microsoft-azure)
-- **Agentide oskused Azure jaoks**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 avatud agentide oskust Azure AI, Foundry, paigalduse, kulude optimeerimise ja diagnostika jaoks. Paigalda oma redaktoris:
+- **Agentide oskused Azure jaoks**: [microsoft/github-copilot-for-azure aadressil skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 avatud agendi oskust Azure AI, Foundry, juurutamise, kulude optimeerimise ja diagnostika jaoks. Paigalda oma redaktoris:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
@@ -1142,17 +1145,17 @@ See on eriti kasulik tootmiskõlblike AI rakenduste laiendamiseks — näiteks v
 ---
 
 **Peatüki navigeerimine:**
-- **📚 Kursuse avaleht**: [AZD Algajatele](../../README.md)
-- **📖 Praegune peatükk**: Peatükk 8 - Tootmine ja ettevõtte mustrid
-- **⬅️ Eelmine peatükk**: [Peatükk 7: Tõrkeotsing](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Samuti seotud**: [AI töötuba](ai-workshop-lab.md)
-- **� Kursus lõpetatud**: [AZD Algajatele](../../README.md)
+- **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
+- **📖 Praegune peatükk**: Peatükk 8 - Tootmise ja ettevõtte mustrid
+- **⬅️ Eelmine peatükk**: [Peatükk 7: Probleemide lahendamine](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Samuti seotud**: [AI töötuba labor](ai-workshop-lab.md)
+- **� Kursus lõpetatud**: [AZD algajatele](../../README.md)
 
-**Pea meeles**: Tootmisvalmid AI töökoormused nõuavad hoolikat planeerimist, jälgimist ja pidevat optimeerimist. Alusta nende mustritega ja kohanda need vastavalt oma konkreetsetele nõudmistele.
+**Pea meeles**: tootmises kasutatavad AI töökoormused vajavad hoolikat planeerimist, jälgimist ja pidevat optimeerimist. Alusta nende mustritega ja kohanda neid oma konkreetsetele nõuetele.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vastutusest loobumine**:
-See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame saavutada täpsust, palun arvestage, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument tema emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti mõistmiste eest.
+**Vastutusest loobumine**:  
+See dokument on tõlgitud tehisintellekti tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame tagada täpsuse, palun arvestage, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise info korral soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta tõlkest tulenevate arusaamatuste või valesti mõistmiste eest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

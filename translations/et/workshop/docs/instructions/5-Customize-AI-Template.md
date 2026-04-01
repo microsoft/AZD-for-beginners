@@ -1,54 +1,54 @@
-# 5. Kohanda mall
+# 5. Kohanda malli
 
-!!! tip "SELLE MÕÕDIKU LÕPUS OLETE VÕIMELI"
+!!! tip "SELLE MUIDUVALDUSE LÕPUS SUUDAD SA"
 
-    - [ ] Uuritud vaikimisi AI agendi võimeid
-    - [ ] Lisatud AI otsing oma indeksiga
-    - [ ] Aktiveeritud ja analüüsitud jälgimismõõdikuid
-    - [ ] Tehtud hindamise käivitamine
-    - [ ] Läbitud red-teaming skaneerimine
-    - [ ] **Lab 5: Koostatud kohandamisplaan**
-
----
-
-## 5.1 AI agendi võimed
-
-!!! success "Selle lõpetasime laboris 01"
-
-- **Failide otsing**: OpenAI sisseehitatud failide otsing teadmiste leidmiseks
-- **Tsitaadid**: Vastustes automaatne allikate viitamine
-- **Kohandatavad juhised**: Muuda agendi käitumist ja isiksust
-- **Tööriistade integratsioon**: Laiendatav tööriistade süsteem kohandatud võimete jaoks
+    - [ ] Avastada vaikimisi AI-agendi võimekused
+    - [ ] Lisada AI-otsing oma indeksi abil
+    - [ ] Aktiveerida ja analüüsida jälgimismõõdikuid
+    - [ ] Teostada hindamisjooks
+    - [ ] Teostada red-teaming skann
+    - [ ] **Labor 5: Koostada kohandamiskava** 
 
 ---
 
-## 5.2 Teadmiste leidmise võimalused
+## 5.1 AI-agendi võimekused
 
-!!! task "Selle täitmiseks peame tegema muudatusi ja uuesti juurutama"
+!!! success "Seda tegime Labor 01-s"
+
+- **Failiotsing**: OpenAI sisseehitatud failiotsing teadmiste hankimiseks
+- **Viited**: Automaatne allikaviitamine vastustes
+- **Kohandatavad juhised**: Agendi käitumise ja isiksuse muutmine
+- **Tööriistade integreerimine**: Laiendatav tööriistasüsteem kohandatud võimekuste jaoks
+
+---
+
+## 5.2 Teadmiste hankimise võimalused
+
+!!! task "Selle lõpetamiseks tuleb teha muudatusi ja uuesti juurutada"    
     
     ```bash title=""
-    # Määra keskkonnamuutujad
+    # Keskkonnamuutujate seadistamine
     azd env set USE_AZURE_AI_SEARCH_SERVICE true
     azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
-    # Andmete üleslaadimine ja oma indeksi loomine
+    # Andmete üleslaadimine ja indeksi loomine
 
     ```
 
 ---
 
-**OpenAI failiotsing (vaikimisi):**
+**OpenAI failiotsing (vaikeväärtus):**
 
-- Sisseehitatud Foundry Agentidesse
-- Automaatne dokumentide töötlemine ja indekseerimine
-- Ei vaja täiendavat konfiguratsiooni
+- Sisseehitatud Foundry agentidesse
+- Automaatne dokumendi töötlemine ja indekseerimine
+- Täiendavat konfiguratsiooni ei nõuta
 
 **Azure AI otsing (valikuline):**
 
-- Hübridne semantiline ja vektorotsing
+- Hübriidne semantiline ja vektorotsing
 - Kohandatud indeksi haldus
 - Täiustatud otsinguvõimalused
 - Nõuab `USE_AZURE_AI_SEARCH_SERVICE=true`
@@ -57,7 +57,7 @@
 
 ## 5.3 [Jälgimine ja monitooring](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "Selle täitmiseks peame tegema muudatusi ja uuesti juurutama"
+!!! task "Selle lõpetamiseks tuleb teha muudatusi ja uuesti juurutada"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
@@ -68,14 +68,14 @@
 
 - OpenTelemetry integratsioon
 - Päringu/vastuse jälgimine
-- Jõudlusmõõdikud
+- Töökindluse mõõdikud
 - Saadaval Microsoft Foundry portaalis
 
 **Logimine:**
 
-- Rakenduse logid Container Apps-is
-- Struktureeritud logimine korrelatsioonituvastustega
-- Reaalajas ja ajalooline logi vaatamine
+- Rakenduse logid Container Appsis
+- Struktureeritud logimine koostoime ID-dega
+- Reaalaja ja ajalooliste logide vaade
 
 ---
 
@@ -83,79 +83,79 @@
 
 **Kohalik hindamine:**
 
-- Sisseehitatud hindajad kvaliteedi hindamiseks
+- Sisseehitatud hinnangu andjad kvaliteedi hindamiseks
 - Kohandatud hindamisskriptid
-- Jõudluse võrdlemine
+- Töökindluse võrreldavus
 
-**Pidev monitooring:**
+**Pidev jälgimine:**
 
-- Automaatne elusate interaktsioonide hindamine
-- Kvaliteedi mõõdikute jälgimine
-- Jõudluse regressiooni avastamine
+- Automaatne elava suhtluse hindamine
+- Kvaliteedimõõdikute jälgimine
+- Jõudluse regressiooni tuvastamine
 
 **CI/CD integratsioon:**
 
 - GitHub Actions töövoog
-- Automatiseeritud testimine ja hindamine
+- Automaatne testimine ja hindamine
 - Statistiline võrdlev testimine
 
 ---
 
-## 5.5 [AI red teaming agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [AI red-teaming agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**AI red teaming:**
+**AI red-teaming:**
 
-- Automaatne turvaskaneerimine
-- AI süsteemide riskihindamine
-- Ohutuse hindamine mitmes kategoorias
+- Automaatne turvakontroll
+- AI süsteemide riskihinnang
+- Ohutuse hindamine mitmetes kategooriates
 
 **Autentimine:**
 
-- Managed Identity Azure teenuste jaoks
+- Hallatud identiteet Azure teenuste jaoks
 - Valikuline Azure App Service autentimine
-- Arenduseks baasautentimise fallback
+- Põhiline auth arenguks
 
-!!! quote "SELLE LABI LÕPUS PEAKSITE OLEMA"
+!!! quote "SEDE LÕPP LABORIL PEAKSID SA OLEMA"
     - [ ] Määratlenud oma stsenaariumi nõuded
     - [ ] Kohandanud keskkonnamuutujad (config)
-    - [ ] Kohandanud agendi juhiseid (task)
+    - [ ] Kohandanud agentide juhised (task)
     - [ ] Juurutanud kohandatud malli (app)
-    - [ ] Läbinud post-juurutamise ülesanded (manuaalne)
-    - [ ] Käivitanud testhindamise
+    - [ ] Läbinud post-juurutamise toimingud (käsitsi)
+    - [ ] Teostanud hindamistesti
 
-See näide demonstreerib malli kohandamist ettevõtte jaemüügikasutuse jaoks kahe spetsialiseeritud agendi ja mitme mudelijuurutusega.
+See näide demonstreerib malli kohandamist suurettevõtte jaekaubanduse kasutusjuhtumi jaoks kahe spetsialiseeritud agendiga ja mitme mudelijuurutusega.
 
 ---
 
 ## 5.6 Kohanda seda enda jaoks!
 
-### 5.6.1 Stsenaariumi nõuded
+### 5.6.1. Stsenaariumi nõuded
 
 #### **Agendi juurutused:** 
 
-   - Ostja agent: Aitab klientidel tooteid leida ja võrrelda
-   - Lojaalsusagent: Halda kliendi boonuseid ja kampaaniaid
+   - Ostja agent: aitab klientidel tooteid leida ja võrrelda
+   - Lojaalsusagent: haldab klientide preemiaid ja kampaaniaid
 
-#### **Mudelijuurutused:**
+#### **Mudeli juurutused:**
 
-   - `gpt-4.1`: Põhimudel vestlusteks
-   - `o3`: Põhjendusmudel keerukate päringute jaoks
-   - `gpt-4.1-nano`: Kerge mudel lihtsateks vestlusteks
-   - `text-embedding-3-large`: Kvaliteetsed embedid otsinguks
+   - `gpt-4.1`: Peamine vestlusmudel
+   - `o3`: Põhjendamise mudel keerukate päringute jaoks
+   - `gpt-4.1-nano`: Kergem moodul lihtsate suhtluste jaoks
+   - `text-embedding-3-large`: Kõrgekvaliteedilised embedid otsinguks
 
 #### **Funktsioonid:**
 
    - Jälgimine ja monitooring lubatud
-   - AI otsing tooteloendile
-   - Hindamisraamistik kvaliteedi tagamiseks
-   - Red teaming turvakontrolliks
+   - AI otsing tootekataloogile
+   - Hindamisraamistik kvaliteedikontrolliks
+   - Red-teaming turvakontrolliks
 
 ---
 
-### 5.6.2 Stsenaariumi teostus
+### 5.6.2 Stsenaariumi rakendamine
 
 
-#### 5.6.2.1. Eeljuurutuse konfiguratsioon
+#### 5.6.2.1. Eeljuurutuskonfiguratsioon
 
 Loo seadistusskript (`setup-retail.sh`)
 
@@ -165,7 +165,7 @@ Loo seadistusskript (`setup-retail.sh`)
 # Määra keskkonna nimi
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Sea piirkond (vali mudeli saadavuse alusel)
+# Sea piirkond (vali vastavalt mudeli kättesaadavusele)
 azd env set AZURE_LOCATION "eastus2"
 
 # Luba kõik valikulised teenused
@@ -173,18 +173,18 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Konfigureeri põhijutu mudel (gpt-4.1 kui lähim saadaval olev gpt-4.1-le)
+# Konfigureeri peamine vestlusmudel (gpt-4.1 kui lähim saadaval olev gpt-4.1-le)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Määra manustamismudel täiustatud otsinguks
+# Konfigureeri manustamismudel täiustatud otsingu jaoks
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Sea agendi nimi (loodab esimese agendi)
+# Määra agendi nimi (loodakse esimene agent)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
 # Konfigureeri otsinguindeks
@@ -246,7 +246,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: Juurutamise skript
+#### 5.6.2.3: Juurutusskript
 
 Loo `deploy-retail.sh`:
 
@@ -256,7 +256,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# Kontrolli eeltingimusi
+# Kontrolli eeltingimuste olemasolu
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -268,12 +268,12 @@ if ! az account show &> /dev/null; then
     exit 1
 fi
 
-# Sea üles keskkond
+# Keskkonna seadistamine
 echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Kontrolli kvota valitud regioonis
+# Kontrolli kvooti valitud piirkonnas
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -289,16 +289,16 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Paigalda infrastruktuur ja rakendus
+# Infrastruktuuri ja rakenduse juurutamine
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Kogu paigalduse väljundid
+# Juurutuse väljundite salvestamine
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Hangi veebi rakenduse URL
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# Saa veebirakenduse URL
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -319,7 +319,7 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Post-juurutuse konfiguratsioon
+#### 5.6.2.4: Post-juurutuskonfiguratsioon
 
 Loo `configure-retail-agents.sh`:
 
@@ -328,7 +328,7 @@ Loo `configure-retail-agents.sh`:
 
 echo "🔧 Configuring retail agents..."
 
-# Võtke kasutusele võtmise teave
+# Hangi juurutusteavet
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
@@ -389,8 +389,8 @@ echo "🧪 Testing retail deployment..."
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Testi veebirakenduse kättesaadavust
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# Testi veebi rakenduse saadavust
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -403,7 +403,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Käivita hindamine, kui on seadistatud
+# Käivita hindamine, kui see on konfigureeritud
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -429,40 +429,40 @@ Next steps:
 
 ### 5.6.4 Oodatavad tulemused
 
-Pärast selle juhendi järgimist on sul:
+Pärast selle rakendusjuhendi järgimist on sul:
 
 1. **Juurutatud infrastruktuur:**
 
       - Microsoft Foundry projekt mudelijuurutustega
-      - Container Apps veebirakenduse majutamiseks
-      - AI otsing tooteloendile
+      - Container Apps veebirakenduse hostimiseks
+      - AI otsing tootekataloogile
       - Application Insights monitooringuks
 
-2. **Esialgne agent:**
+2. **Algne agent:**
 
-      - Ostja agent konfigureeritud põhijuhistega
-      - Failide otsing võimelistega
-      - Jälgimine ja monitooring seadistatud
+      - Ostja agent, konfigureeritud põhijuhistega
+      - Failide otsingu võimalus aktiveeritud
+      - Jälgimise ja monitooringu seadistus
 
-3. **Valmis kohandamiseks:**
+3. **Kohandamiseks valmis:**
 
-      - Raamistik lojaalsusagendi lisamiseks
+      - Raamistik Lojaalsusagendi lisamiseks
       - Kohandatud juhiste mallid
       - Testimise ja valideerimise skriptid
       - Monitooringu ja hindamise seadistus
 
-4. **Tootmisvalmidus:**
+4. **Tootmiskõlblikkus:**
 
-      - Turvaskaneerimine red teaminguga
+      - Turvaskaneerimine red-teaminguga
       - Jõudluse monitooring
-      - Kvaliteedi hindamise raamistik
-      - Skaleeritav arhitektuur
+      - Kvaliteedia hindamise raamistik
+      - Skaalautuv arhitektuur
 
-See näide demonstreerib, kuidas AZD malli saab laiendada ja kohandada spetsiifiliste ettevõtte stsenaariumite jaoks, säilitades parimad tavad turvalisuse, monitooringu ja skaleeritavuse osas.
+See näide demonstreerib, kuidas AZD mall saab laiendada ja kohandada konkreetsete ettevõtte stsenaariumide jaoks, hoides samal ajal parimaid tavasid turvalisuse, monitooringu ja skaleeritavuse osas.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastutusest loobumine**:  
-See dokument on tõlgitud kasutades tehisintellekti tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüame tõlgete täpsuse eest, tuleb arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleb pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate valearusaamade ega moonutuste eest.
+See dokument on tõlgitud kasutades tehisintellektil põhinevat tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi me püüame täpsust, palun arvestage, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument oma algses keeles tuleks pidada autoriteetseks allikaks. Olulise info puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste ega valesti tõlgenduste eest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
