@@ -1,43 +1,43 @@
-# Command Cheat Sheet - Essential AZD Commands
+# Komentopikaopas - Olennaiset AZD-komennot
 
-**Nopeat viitteet kaikille luvuillesi**
-- **📚 Kurssin etusivu**: [AZD For Beginners](../README.md)
-- **📖 Pika-aloitus**: [Luku 1: Perusteet & Pika-aloitus](../README.md#-chapter-1-foundation--quick-start)
+**Nopea viite kaikille luvuillesi**
+- **📚 Kurssin kotisivu**: [AZD For Beginners](../README.md)
+- **📖 Pika-aloitus**: [Luku 1: Perusta & pika-aloitus](../README.md#-chapter-1-foundation--quick-start)
 - **🤖 AI-komennot**: [Luku 2: AI-ensimmäinen kehitys](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Edistynyt**: [Luku 4: Infrastructure as Code](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **🔧 Edistynyt**: [Luku 4: Infrastruktuuri koodina](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Johdanto
 
-Tämä kattava pikalista tarjoaa nopean viitteen yleisimmin käytetyille Azure Developer CLI -komennoille, järjestettynä kategorioittain käytännön esimerkkien kera. Täydellinen pikaosoitus kehityksen, vianmäärityksen ja päivittäisten toimintojen aikana azd-projektien kanssa.
+Tämä kattava pikaopas tarjoaa nopean viitteen yleisimmin käytetyistä Azure Developer CLI -komennoista, järjestettynä kategorioittain käytännön esimerkkien kanssa. Täydellinen pikaista hakua varten kehityksen, vianmäärityksen ja päivittäisten azd-projektien operaatioiden aikana.
 
 ## Oppimistavoitteet
 
-Tämän pikalistan avulla:
+Tämän pikaoppaan avulla:
 - Saat välittömän pääsyn olennaisiin Azure Developer CLI -komentoihin ja syntaksiin
-- Ymmärrät komentojen järjestämisen toiminnallisten kategorioiden ja käyttötapausten mukaan
-- Löydät käytännön esimerkkejä yleisille kehitys- ja käyttöönototilanteille
-- Pääset käsiksi vianmäärityskomentoihin nopeaa ongelmanratkaisua varten
+- Ymmärrät komentojen järjestelyn toiminnallisten kategorioiden ja käyttötapausten mukaan
+- Löydät käytännön esimerkkejä yleisistä kehitys- ja käyttöönotto-skenaarioista
+- Saat käyttöösi vianmäärityskomennot nopeaan ongelmanratkaisuun
 - Löydät tehokkaasti edistyneet konfigurointi- ja mukautusvaihtoehdot
-- Löydät ympäristöhallinnan ja monen ympäristön työnkulut
+- Löydät ympäristöhallinnan ja monen ympäristön työnkulun komennot
 
 ## Oppimistulokset
 
-Kun viittaat tähän pikalistaan säännöllisesti, pystyt:
-- Suorittamaan azd-komentoja luottavaisin mielin ilman täydellistä dokumentaatiota
-- Ratkaisemaan nopeasti yleisiä ongelmia sopivilla diagnostiikkakomennoilla
-- Hallinnoimaan tehokkaasti useita ympäristöjä ja käyttöönotto-tilanteita
-- Soveltamaan tarvittaessa azd:n edistyneitä ominaisuuksia ja konfiguraatioita
-- Vianmäärityksessä käyttämään systemaattisia komentojonoja
-- Optimoimaan työnkulkuja azd-pikanäppäinten ja vaihtoehtojen avulla
+Kun viittaat säännöllisesti tähän pikaoppaaseen, pystyt:
+- Suorittamaan azd-komentoja luottavaisesti ilman koko dokumentaation tarkistamista
+- Ratkaisemaan nopeasti yleisiä ongelmia asianmukaisilla diagnostiikk komennoilla
+- Hallitsemaan tehokkaasti useita ympäristöjä ja käyttöönotto-skenaarioita
+- Käyttämään edistyneitä azd-ominaisuuksia ja konfiguraatioasetuksia tarpeen mukaan
+- Vianmäärityksessä systemaattisesti käytettävien komentojonojen avulla
+- Optimisoimaan työnkulkuja azd-pikanäppäinten ja -asetusten avulla
 
 ## Aloituskomennot
 
-### Autentikointi
+### Todennus
 ```bash
 # Kirjaudu Azureen AZD:n kautta
 azd auth login
 
-# Kirjaudu Azure CLI:hin (AZD käyttää tätä taustalla)
+# Kirjaudu Azure CLI:iin (AZD käyttää tätä taustalla)
 az login
 
 # Tarkista nykyinen tili
@@ -54,7 +54,7 @@ azd auth logout
 az logout
 ```
 
-### Projektin alustus
+### Projektin alustaminen
 ```bash
 # Selaa saatavilla olevia malleja
 azd template list
@@ -77,7 +77,7 @@ azd init --template todo-nodejs-mongo my-awesome-app
 # Ota kaikki käyttöön (provisiointi + käyttöönotto)
 azd up
 
-# Ota käyttöön ilman vahvistuskehotteita
+# Ota käyttöön vahvistuskehotukset pois käytöstä
 azd up --confirm-with-no-prompt
 
 # Ota käyttöön tiettyyn ympäristöön
@@ -87,20 +87,20 @@ azd up --environment production
 azd up --parameter location=westus2
 ```
 
-### Vain infrastruktuuri
+### Pelkkä infrastruktuuri
 ```bash
-# Provisionoi Azure-resursseja
+# Ota Azure-resurssit käyttöön
 azd provision
 
 # 🧪 Esikatsele infrastruktuurin muutoksia
 azd provision --preview
-# Näyttää simuloidun näkymän siitä, mitä resursseja luotaisiin/muutettaisiin/poistettaisiin
-# Vastaava kuin 'terraform plan' tai 'bicep what-if' - turvallinen suorittaa, muutoksia ei tehdä
+# Näyttää simuloidun näkymän siitä, mitä resursseja luotaisiin, muokattaisiin tai poistettaisiin
+# Vastaava kuin 'terraform plan' tai 'bicep what-if' - turvallinen ajaa, ei tee muutoksia
 ```
 
-### Vain sovellus
+### Pelkkä sovellus
 ```bash
-# Ota sovelluskoodi käyttöön
+# Ota sovelluksen koodi käyttöön
 azd deploy
 
 # Ota tietty palvelu käyttöön
@@ -120,11 +120,11 @@ azd package
 azd package --service api
 ```
 
-## 🌍 Ympäristöhallinta
+## 🌍 Ympäristön hallinta
 
 ### Ympäristötoiminnot
 ```bash
-# Listaa kaikki ympäristöt
+# Näytä kaikki ympäristöt
 azd env list
 
 # Luo uusi ympäristö
@@ -134,8 +134,8 @@ azd env new staging --location westus2
 # Valitse ympäristö
 azd env select production
 
-# Näytä nykyinen ympäristö
-azd env show
+# Näytä saatavilla olevat ympäristöt
+azd env list
 
 # Päivitä ympäristön tila
 azd env refresh
@@ -147,7 +147,7 @@ azd env refresh
 azd env set API_KEY "your-secret-key"
 azd env set DEBUG true
 
-# Hae ympäristömuuttuja
+# Hae ympäristömuuttujan arvo
 azd env get API_KEY
 
 # Listaa kaikki ympäristömuuttujat
@@ -157,33 +157,33 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-## ⚙️ Asetuskomennot
+## ⚙️ Konfigurointikomennot
 
-### Globaalit asetukset
+### Globaali konfigurointi
 ```bash
-# Listaa kaikki asetukset
-azd config list
+# Listaa kaikki konfiguraatiot
+azd config show
 
 # Aseta globaalit oletusarvot
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
-# Poista asetukset
+# Poista konfiguraatio
 azd config unset defaults.location
 
-# Nollaa kaikki asetukset
+# Nollaa kaikki konfiguraatiot
 azd config reset
 ```
 
-### Projektin asetukset
+### Projektin konfigurointi
 ```bash
-# Tarkista azure.yaml
+# Validoi azure.yaml
 azd config validate
 
 # Näytä projektin tiedot
 azd show
 
-# Hae palvelun päätepisteet
+# Hae palveluiden päätepisteet
 azd show --output json
 ```
 
@@ -204,9 +204,9 @@ azd monitor --logs
 azd monitor --overview
 ```
 
-### Konttien lokien katselu
+### Säiliölokien katselu
 ```bash
-# Näytä lokit Azure CLI:n kautta (Container Appsille)
+# Näytä lokit Azure CLI:llä (Container Appsille)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
 # Seuraa lokeja reaaliajassa
@@ -216,12 +216,12 @@ az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 azd monitor --logs
 ```
 
-### Lokianalytiikkakyselyt
+### Lokianalytiikan kyselyt
 ```bash
 # Käytä Log Analyticsia Azure-portaalin kautta
 azd monitor --logs
 
-# Suorita lokikyselyjä Azure CLI:n avulla
+# Suorita lokikyselyt Azure CLI:llä
 az monitor log-analytics query \
   --workspace <workspace-id> \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
@@ -237,7 +237,7 @@ azd down
 # Pakota poisto ilman vahvistusta
 azd down --force
 
-# Poista pysyvästi pehmeästi poistetut resurssit
+# Poista lopullisesti pehmeästi poistetut resurssit
 azd down --purge
 
 # Täydellinen siivous
@@ -252,13 +252,13 @@ azd version
 # Hae nykyinen versio
 azd version
 
-# Näytä nykyinen kokoonpano
-azd config list
+# Näytä nykyinen konfiguraatio
+azd config show
 ```
 
 ## 🔧 Edistyneet komennot
 
-### CI/CD-putket
+### Putkisto ja CI/CD
 ```bash
 # Määritä GitHub Actions
 azd pipeline config
@@ -266,13 +266,13 @@ azd pipeline config
 # Määritä Azure DevOps
 azd pipeline config --provider azdo
 
-# Näytä putkiasetukset
+# Näytä putkiston määritys
 azd pipeline show
 ```
 
 ### Infrastruktuurin hallinta
 ```bash
-# Luo infrastruktuuripohjia
+# Luo infrastruktuurimalleja
 azd infra generate
 
 # 🧪 Infrastruktuurin esikatselu ja suunnittelu
@@ -280,11 +280,11 @@ azd provision --preview
 # Simuloi infrastruktuurin provisiointia ilman käyttöönottoa
 # Analysoi Bicep/Terraform-malleja ja näyttää:
 # - Lisättävät resurssit (vihreä +)
-# - Muutettavat resurssit (keltainen ~)
+# - Muokattavat resurssit (keltainen ~)
 # - Poistettavat resurssit (punainen -)
-# Turvallinen ajaa - ei todellisia muutoksia Azure-ympäristöön
+# Turvallinen suorittaa - ei tee todellisia muutoksia Azure-ympäristöön
 
-# Synteesaa infrastruktuurin tiedostosta azure.yaml
+# Syntetisoi infrastruktuuri azure.yaml-tiedostosta
 azd infra synth
 ```
 
@@ -293,7 +293,7 @@ azd infra synth
 # Näytä projektin tila ja päätepisteet
 azd show
 
-# Näytä yksityiskohtaiset projektitiedot JSON-muodossa
+# Näytä projektin yksityiskohtaiset tiedot JSON-muodossa
 azd show --output json
 
 # Hae palvelun päätepisteet
@@ -335,27 +335,27 @@ azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 azd ai agent init -m agent-manifest.yaml --host containerapp
 ```
 
-### MCP-palvelin (Alpha)
+### MCP-palvelin (Alfa)
 ```bash
-# Käynnistä MCP-palvelin projektillesi
+# Käynnistä projektisi MCP-palvelin
 azd mcp start
 
-# Hallitse työkalun suostumusta MCP-toimintoja varten
-azd mcp consent
+# Hallitse työkalun suostumusta MCP-toimintoihin
+azd copilot consent list
 ```
 
 ### Infrastruktuurin generointi
 ```bash
-# Luo IaC-tiedostot projektimääritelmästäsi
+# Luo IaC-tiedostot projektisi määritelmästä
 azd infra generate
 
-# Syntetisoi infrastruktuuri azure.yaml-tiedostosta
+# Luo infrastruktuuri azure.yaml-tiedostosta
 azd infra synth
 ```
 
 ---
 
-## 🎯 Nopeat työnkulut
+## 🎯 Pikatyönkulut
 
 ### Kehitystyönkulku
 ```bash
@@ -363,25 +363,25 @@ azd infra synth
 azd init --template todo-nodejs-mongo
 cd my-project
 
-# Julkaise kehitykseen
+# Ota käyttöön kehitysympäristöön
 azd env new dev
 azd up
 
-# Tee muutoksia ja julkaise uudelleen
+# Tee muutoksia ja ota uudelleen käyttöön
 azd deploy
 
 # Avaa valvontapaneeli
 azd monitor --live
 ```
 
-### Moniympäristöinen työnkulku
+### Moniympäristötyönkulku
 ```bash
 # Määritä ympäristöt
 azd env new dev
 azd env new staging  
 azd env new production
 
-# Julkaise kehitykseen
+# Ota käyttöön kehitysympäristöön
 azd env select dev
 azd up
 
@@ -389,12 +389,12 @@ azd up
 azd env select staging
 azd up
 
-# Julkaise tuotantoon
+# Ota käyttöön tuotantoympäristöön
 azd env select production
 azd up
 ```
 
-### Vianetsintätyönkulku
+### Vianmääritystyönkulku
 ```bash
 # Ota virheenkorjaustila käyttöön
 export AZD_DEBUG=true
@@ -403,28 +403,28 @@ export AZD_DEBUG=true
 azd show
 
 # Tarkista kokoonpano
-azd config list
+azd config show
 
-# Avaa valvontapaneeli lokeille
+# Avaa valvontapaneeli lokien tarkastelua varten
 azd monitor --logs
 
-# Tarkista resurssien tila
+# Tarkista resurssin tila
 azd show --output json
 ```
 
-## 🔍 Virheenkorjauskomennot
+## 🔍 Debuggauskomennot
 
 ### Virheenkorjaustiedot
 ```bash
-# Ota virheenkorjaustulostus käyttöön
+# Ota debug-tulostus käyttöön
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Poista telemetria käytöstä selkeämmän tulostuksen saamiseksi
+# Poista telemetria käytöstä selkeämmän tulosteen saamiseksi
 export AZD_DISABLE_TELEMETRY=true
 
-# Tarkista nykyinen kokoonpano
-azd config list
+# Tarkista nykyinen konfiguraatio
+azd config show
 
 # Tarkista todennuksen tila
 az account show
@@ -432,19 +432,19 @@ az account show
 
 ### Mallin virheenkorjaus
 ```bash
-# Luettele saatavilla olevat mallipohjat yksityiskohtineen
+# Listaa saatavilla olevat mallit yksityiskohtineen
 azd template list --output json
 
-# Näytä mallipohjan tiedot
+# Näytä mallin tiedot
 azd template show <template-name>
 
-# Validoi mallipohja ennen alustusta
+# Tarkista malli ennen alustusta
 azd template validate <template-name>
 ```
 
-## 📁 Tiedosto- ja hakemistokomennot
+## 📁 Tiedosto- ja kansiokomennot
 
-### Projektin rakenne
+### Projektirakenne
 ```bash
 # Näytä nykyinen hakemistorakenne
 tree /f  # Windows
@@ -453,48 +453,48 @@ find . -type f  # Linux/macOS
 # Siirry azd-projektin juureen
 cd $(azd root)
 
-# Näytä azd:n asetuskansio
+# Näytä azd:n konfiguraatiohakemisto
 echo $AZD_CONFIG_DIR  # Yleensä ~/.azd
 ```
 
 ## 🎨 Tulosteen muotoilu
 
-### JSON-tuloste
+### JSON-tulos
 ```bash
-# Hanki JSON-ulostulo skriptausta varten
+# Hanki JSON-muotoinen tuloste skriptausta varten
 azd show --output json
 azd env list --output json
-azd config list --output json
+azd config show --output json
 
-# Jäsennä jq:llä
+# Jäsennä jq:lla
 azd show --output json | jq '.services.web.endpoint'
 azd env get-values --output json | jq -r '.DATABASE_URL'
 ```
 
-### Taulukkotuloste
+### Taulukkomuoto
 ```bash
 # Muotoile taulukoksi
 azd env list --output table
 
-# Näytä käyttöön otetut palvelut
+# Näytä käyttöönotetut palvelut
 azd show --output json | jq '.services | keys'
 ```
 
 ## 🔧 Yleiset komentoyhdistelmät
 
-### Terveystarkistus-skripti
+### Terveystarkastusskripti
 ```bash
 #!/bin/bash
-# Nopea terveystarkastus
+# Nopea kunnon tarkistus
 azd show
-azd env show
+azd env get-values
 azd monitor --logs
 ```
 
 ### Käyttöönoton validointi
 ```bash
 #!/bin/bash
-# Ennen käyttöönottoa tehtävä tarkastus
+# Ennakkotarkastus ennen käyttöönottoa
 azd show
 azd provision --preview  # Esikatsele muutokset ennen käyttöönottoa
 az account show
@@ -526,24 +526,24 @@ done
 
 ### Yleiset ympäristömuuttujat
 ```bash
-# Azure-konfiguraatio
+# Azure-asetukset
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 export AZURE_ENV_NAME="development"
 
-# AZD-konfiguraatio
+# AZD-asetukset
 export AZD_DEBUG=true
 export AZD_DISABLE_TELEMETRY=true
 export AZD_CONFIG_DIR="~/.azd"
 
-# Sovelluksen konfiguraatio
+# Sovelluksen asetukset
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
 
 ## 🚨 Hätäkomennot
 
-### Pikakorjaukset
+### Nopeat korjaukset
 ```bash
 # Nollaa todennus
 az account clear
@@ -565,27 +565,27 @@ azd show --output json
 azd down --force --purge
 azd up
 
-# Provisioi vain infrastruktuuri uudelleen
+# Uudelleenprovisionoi vain infrastruktuuri
 azd provision
 
 # Ota vain sovellus uudelleen käyttöön
 azd deploy
 ```
 
-## 💡 Vinkkejä
+## 💡 Pro-vinkit
 
-### Alias-komennot nopeampaan työnkulkuun
+### Aliakset nopeampaan työnkulkuun
 ```bash
-# Lisää omaan .bashrc- tai .zshrc-tiedostoosi
+# Lisää .bashrc- tai .zshrc-tiedostoosi
 alias azdup='azd up'
 alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### Funktion pikanäppäimet
+### Funktiopikanäppäimet
 ```bash
-# Nopea ympäristöjen vaihtaminen
+# Nopea ympäristön vaihtaminen
 azd-env() {
     azd env select $1 && azd show
 }
@@ -598,7 +598,7 @@ azd-deploy-watch() {
 # Ympäristön tila
 azd-status() {
     echo "Current environment:"
-    azd env show
+    azd env get-values
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }
@@ -606,7 +606,7 @@ azd-status() {
 
 ## 📖 Ohje ja dokumentaatio
 
-### Apua
+### Ohjeen saaminen
 ```bash
 # Yleinen ohje
 azd --help
@@ -617,37 +617,37 @@ azd up --help
 azd env --help
 azd config --help
 
-# Näytä versio- ja koontitiedot
+# Näytä versio- ja rakennustiedot
 azd version
 azd version --output json
 ```
 
-### Dokumentaatio-linkit
+### Dokumentaatiolinkit
 ```bash
 # Avaa dokumentaatio selaimessa
 azd docs
 
-# Näytä mallin dokumentaatio
+# Näytä mallipohjan dokumentaatio
 azd template show <template-name> --docs
 ```
 
 ---
 
-**Vinkki**: Tallenna tämä pikalista kirjanmerkkeihin ja käytä `Ctrl+F` löytääksesi nopeasti tarvitsemasi komennot!
+**Vinkki**: Lisää tämä pikaopas kirjanmerkkeihin ja käytä `Ctrl+F` löytääksesi nopeasti tarvitsemasi komennot!
 
 ---
 
 **Navigointi**
-- **Edellinen oppitunti**: [Esitarkistukset](../docs/pre-deployment/preflight-checks.md)
+- **Edellinen oppitunti**: [Preflight Checks](../docs/pre-deployment/preflight-checks.md)
 - **Seuraava oppitunti**: [Sanasto](glossary.md)
 
 ---
 
-> **💡 Haluatko apua Azure-komennoissa editorissasi?** Asenna [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) komennolla `npx skills add microsoft/github-copilot-for-azure` — 37 skilliä AI:ta, Foundrya, käyttöönottoa, diagnostiikkaa ja muuta varten.
+> **💡 Haluatko Azure-komentoapua editorissasi?** Asenna [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) komennolla `npx skills add microsoft/github-copilot-for-azure` — 37 taitoa tekoälyyn, Foundryyn, käyttöönottoon, diagnostiikkaan ja muihin.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vastuuvapauslauseke**:
-Tämä asiakirja on käännetty tekoälykäännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, ota huomioon, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen omalla kielellä tulisi pitää auktoritatiivisena lähteenä. Tärkeitä tietoja koskien suositellaan ammattimaista ihmisen tekemää käännöstä. Emme ole vastuussa tämän käännöksen käytöstä johtuvista väärinkäsityksistä tai virhetulkinnoista.
+**Disclaimer**:
+Tämä asiakirja on käännetty tekoälykäännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, on hyvä tiedostaa, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulee pitää ensisijaisena lähteenä. Kriittisten tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinkäsityksistä tai virhetulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

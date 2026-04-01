@@ -1,35 +1,35 @@
-# Provisionering af Azure-ressourcer med AZD
+# Provisioning Azure Resources with AZD
 
 **Chapter Navigation:**
-- **📚 Kursusforside**: [AZD For Beginners](../../README.md)
-- **📖 Nuværende Kapitel**: Kapitel 4 - Infrastruktur som kode & Udrulning
-- **⬅️ Forrige**: [Udrulningsguide](deployment-guide.md)
-- **➡️ Næste Kapitel**: [Kapitel 5: Multi-agent AI-løsninger](../../examples/retail-scenario.md)
-- **🔧 Relateret**: [Kapitel 6: Validering før udrulning](../chapter-06-pre-deployment/capacity-planning.md)
+- **📚 Course Home**: [AZD for begyndere](../../README.md)
+- **📖 Current Chapter**: Kapitel 4 - Infrastruktur som kode & Udrulning
+- **⬅️ Previous**: [Udrulningsvejledning](deployment-guide.md)
+- **➡️ Next Chapter**: [Kapitel 5: Multi-agent AI-løsninger](../../examples/retail-scenario.md)
+- **🔧 Related**: [Kapitel 6: Validering før udrulning](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Introduktion
 
-Denne omfattende vejledning dækker alt, du behøver at vide om provisionering og styring af Azure-ressourcer ved hjælp af Azure Developer CLI. Lær at implementere Infrastructure as Code (IaC)-mønstre fra grundlæggende oprettelse af ressourcer til avancerede enterprise-infrastrukturer ved hjælp af Bicep, ARM-skabeloner, Terraform og Pulumi.
+Denne omfattende guide dækker alt, du skal vide om at provisionere og administrere Azure-ressourcer ved hjælp af Azure Developer CLI. Lær at implementere Infrastructure as Code (IaC)-mønstre fra grundlæggende oprettelse af ressourcer til avancerede infrastrukturer i virksomhedsklasse ved hjælp af Bicep, ARM-skabeloner, Terraform og Pulumi.
 
 ## Læringsmål
 
-Ved at gennemføre denne vejledning vil du:
-- Mestre principperne for Infrastructure as Code og provisionering af Azure-ressourcer
-- Forstå flere IaC-udbydere understøttet af Azure Developer CLI
+Ved at gennemføre denne guide vil du:
+- Mestre Infrastructure as Code-principper og provisioning af Azure-ressourcer
+- Forstå de forskellige IaC-udbydere, som Azure Developer CLI understøtter
 - Designe og implementere Bicep-skabeloner til almindelige applikationsarkitekturer
-- Konfigurere ressourceparametre, variabler og miljøspecifikke indstillinger
+- Konfigurere resourceparametre, variabler og miljøspecifikke indstillinger
 - Implementere avancerede infrastrukturmønstre inklusive netværk og sikkerhed
-- Styre ressourcelivscyklus, opdateringer og afhængighedsløsning
+- Administrere ressourcelivscyklus, opdateringer og afhængighedsopløsning
 
 ## Læringsudbytte
 
-Når du er færdig, vil du kunne:
+Efter gennemførelsen vil du kunne:
 - Designe og provisionere Azure-infrastruktur ved hjælp af Bicep og ARM-skabeloner
-- Konfigurere komplekse multi-service-arkitekturer med korrekte ressourceafhængigheder
+- Konfigurere komplekse multi-service arkitekturer med korrekte ressourceafhængigheder
 - Implementere parameteriserede skabeloner til flere miljøer og konfigurationer
 - Fejlsøge problemer med infrastrukturprovisionering og løse udrulningsfejl
 - Anvende Azure Well-Architected Framework-principper til infrastrukturoptimering
-- Administrere infrastrukturopdateringer og implementere versioneringsstrategier for infrastruktur
+- Administrere infrastrukturopdateringer og implementere strategier for versionering af infrastruktur
 
 ## Oversigt over infrastrukturprovisionering
 
@@ -37,9 +37,9 @@ Azure Developer CLI understøtter flere Infrastructure as Code (IaC)-udbydere:
 - **Bicep** (anbefalet) - Azures domænespecifikke sprog
 - **ARM Templates** - JSON-baserede Azure Resource Manager-skabeloner
 - **Terraform** - Multi-cloud infrastrukturværktøj
-- **Pulumi** - Moderne Infrastructure as Code med programmeringssprog
+- **Pulumi** - Moderne infrastructure as code med programmeringssprog
 
-## Forståelse af Azure-ressourcer
+## Forstå Azure-ressourcer
 
 ### Ressourcehierarki
 ```
@@ -298,9 +298,9 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Sikkerhed og håndtering af hemmeligheder
+## 🔒 Sikkerhed og hemmelighedshåndtering
 
-### Integration med Key Vault
+### Key Vault-integration
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -342,7 +342,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Konfiguration af Managed Identity
+### Konfiguration af managed identity
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -368,9 +368,9 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Netværk og tilslutning
+## 🌍 Netværk og forbindelser
 
-### Konfiguration af Virtual Network
+### Virtual Network-konfiguration
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -496,7 +496,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Overvågning og observabilitet
+## 📊 Overvågning og observerbarhed
 
 ### Application Insights
 ```bicep
@@ -527,7 +527,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Tilpassede metrics og advarsler
+### Tilpassede metrics og alerts
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -563,7 +563,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ## 🔧 Miljøspecifikke konfigurationer
 
-### Parameterfiler for forskellige miljøer
+### Parameterfiler til forskellige miljøer
 ```json
 // infra/main.parameters.dev.json
 {
@@ -617,7 +617,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Betinget oprettelse af ressourcer
+### Betinget resource-provisionering
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,9 +649,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Avancerede provisioneringsmønstre
+## 🚀 Avancerede provisioning-mønstre
 
-### Udrulning på tværs af flere regioner
+### Multi-region udrulning
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -755,42 +755,41 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 Infrastrukturforhåndsvisning og validering (NYT)
+## 🧪 Infrastrukturforhåndsvisning & validering (NY)
 
-### Forhåndsvis ændringer i infrastrukturen før udrulning
+### Forhåndsvis infrastrukturændringer før udrulning
 
-The `azd provision --preview` feature lader dig **simulere provisionering af infrastruktur** før du faktisk udruller ressourcer. Det er i stil med `terraform plan` eller `bicep what-if`, og giver dig en **tørkørselsvisning** af, hvilke ændringer der ville blive foretaget i dit Azure-miljø.
+Funktionen `azd provision --preview` lader dig **simulere infrastrukturprovisionering** før du rent faktisk deployer ressourcer. Den minder om `terraform plan` eller `bicep what-if` og giver dig et **dry-run overblik** over, hvilke ændringer der ville blive foretaget i dit Azure-miljø.
 
-#### 🛠️ Hvad det gør
+#### 🛠️ Hvad den gør
 - **Analyserer dine IaC-skabeloner** (Bicep eller Terraform)
-- **Viser en forhåndsvisning af ressourceændringer**: tilføjelser, sletninger, opdateringer
-- **Anvender ikke ændringer** — det er skrivebeskyttet og sikkert at køre
+- **Viser en forhåndsvisning af resourceændringer**: tilføjelser, sletninger, opdateringer
+- **Anvender ikke ændringer** — den er skrivebeskyttet og sikker at køre
 
-#### � Brugstilfælde
+#### Anvendelsestilfælde
 ```bash
-# Forhåndsvis ændringer i infrastrukturen før udrulning
+# Forhåndsvis infrastrukturændringer før udrulning
 azd provision --preview
 
-# Forhåndsvis med detaljeret output
-azd provision --preview --output json
-
-# Forhåndsvis for et specifikt miljø
-azd provision --preview --environment production
+# Forhåndsvisning for et specifikt miljø
+azd provision --preview -e production
 ```
 
-Denne kommando hjælper dig:
-- **Validere infrastrukturændringer** før du forpligter ressourcer
-- **Fange fejlkonstruktioner tidligt** i udviklingscyklussen
+Denne kommando hjælper dig med at:
+- **Validere infrastrukturændringer** før du commit'er ressourcer
+- **Fange fejlkonfigurationer tidligt** i udviklingscyklussen
 - **Samarbejde sikkert** i teammiljøer
-- **Sikre mindst-privilegium-udrulninger** uden overraskelser
+- **Sikre least-privilege udrulninger** uden overraskelser
 
-Det er især nyttigt når:
-- Du arbejder med komplekse multi-service-miljøer
+Den er især nyttig når:
+- Du arbejder med komplekse multi-service miljøer
 - Du foretager ændringer i produktionsinfrastruktur
 - Du validerer skabelonændringer før PR-godkendelse
 - Du træner nye teammedlemmer i infrastrukturmønstre
 
 ### Eksempel på forhåndsvisningsoutput
+Det nøjagtige preview-output varierer efter udbyder og projektstruktur, men resultatet bør klart identificere de foreslåede ændringer, før noget anvendes.
+
 ```bash
 $ azd provision --preview
 
@@ -809,28 +808,27 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
 ```
 
-## �🔄 Ressourceopdateringer og migreringer
+## �🔄 Ressourceopdateringer og migrationer
 
-### Sikre opdateringer af ressourcer
+### Sikker resourceopdatering
 ```bash
-# Forhåndsvis infrastrukturændringer først (ANBEFALET)
+# Forhåndsvis infrastrukturændringer først (ANBEFALES)
 azd provision --preview
 
 # Anvend ændringer efter bekræftelse af forhåndsvisningen
 azd provision --confirm-with-no-prompt
 
-# Ved tilbagerulning, brug Git til at tilbageføre infrastrukturændringer:
-git revert HEAD  # Fortryd sidste infrastrukturcommit
+# For at rulle tilbage, brug Git til at tilbageføre infrastrukturændringer:
+git revert HEAD  # Tilbagefør det sidste infrastrukturcommit
 azd provision    # Anvend tidligere infrastrukturtilstand
 ```
 
-### Databasemigreringer
+### Database-migrationer
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -861,7 +859,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🎯 Bedste praksis
 
-### 1. Navngivningskonventioner for ressourcer
+### 1. Konventioner for ressourcenavne
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -918,27 +916,27 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Næste skridt
 
-- [Planlægning før udrulning](../chapter-06-pre-deployment/capacity-planning.md) - Valider tilgængelighed af ressourcer
-- [Almindelige problemer](../chapter-07-troubleshooting/common-issues.md) - Fejlfind infrastrukturproblemer
-- [Fejlsøgningsvejledning](../chapter-07-troubleshooting/debugging.md) - Debug provisioning-problemer
-- [Valg af SKU](../chapter-06-pre-deployment/sku-selection.md) - Vælg passende servicetier
+- [Pre-deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - Valider tilgængelighed af ressourcer
+- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - Fejlsøg infrastrukturproblemer
+- [Debugging Guide](../chapter-07-troubleshooting/debugging.md) - Debug provisioning-problemer
+- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Vælg passende servicetier
 
 ## Yderligere ressourcer
 
-- [Azure Bicep-dokumentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager-skabeloner](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure Arkitekturcenter](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **Navigation**
-- **Forrige lektion**: [Udrulningsguide](deployment-guide.md)
-- **Næste lektion**: [Kapacitetsplanlægning](../chapter-06-pre-deployment/capacity-planning.md)
+- **Previous Lesson**: [Udrulningsvejledning](deployment-guide.md)
+- **Next Lesson**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfraskrivelse:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi stræber efter nøjagtighed, skal du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. Ved kritisk information anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+**Ansvarsfraskrivelse**:
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi stræber efter nøjagtighed, skal du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på originalsproget bør betragtes som den autoritative kilde. For kritiske oplysninger anbefales professionel menneskelig oversættelse. Vi påtager os intet ansvar for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

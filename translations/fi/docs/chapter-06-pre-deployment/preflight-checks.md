@@ -1,73 +1,73 @@
-# Esivalmistelutarkastukset AZD-käyttöönottoihin
+# Esivalmistustarkistukset AZD-käyttöönottoihin
 
 **Chapter Navigation:**
-- **📚 Course Home**: [AZD aloittelijoille](../../README.md)
-- **📖 Current Chapter**: Luku 6 - Ennen käyttöönottoa tehtävä validointi ja suunnittelu
-- **⬅️ Previous**: [SKU-valinta](sku-selection.md)
-- **➡️ Next Chapter**: [Luku 7: Vianmääritys](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 Related**: [Luku 4: Käyttöönotto-opas](../chapter-04-infrastructure/deployment-guide.md)
+- **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
+- **📖 Tämän luvun aihe**: Luku 6 - Esivalmistelujen validointi ja suunnittelu
+- **⬅️ Edellinen**: [SKU-valinta](sku-selection.md)
+- **➡️ Seuraava luku**: [Luku 7: Vianmääritys](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 Liittyvä**: [Luku 4: Käyttöönotto-opas](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Johdanto
 
-Tämä kattava opas tarjoaa esiasennuksen validointiskriptit ja -menettelyt varmistaaksesi Azure Developer CLI:n käyttöönottojen onnistumisen ennen aloittamista. Opit toteuttamaan automatisoituja tarkastuksia autentikointia, resurssien saatavuutta, kiintiöitä, tietoturvan vaatimustenmukaisuutta ja suorituskykyvaatimuksia varten estääksesi käyttöönottojen epäonnistumiset ja optimoidaksesi onnistumisprosentteja.
+Tämä kattava opas tarjoaa esivalmistelujen validointiskriptit ja -menettelyt varmistaaksesi Azure Developer CLI -käyttöönottojen onnistumisen ennen niiden aloittamista. Opi toteuttamaan automatisoituja tarkastuksia todennukselle, resurssien saatavuudelle, kiintiöille, tietoturvan vaatimustenmukaisuudelle ja suorituskykyvaatimuksille estääksesi käyttöönottojen epäonnistumiset ja optimoidaksesi käyttöönottojen onnistumisprosentin.
 
 ## Oppimistavoitteet
 
-Tämän oppaan läpikäytyäsi:
-- Hallitset automatisoidut esiasennuksen validointitekniikat ja skriptit
-- Ymmärrät kattavat tarkastusstrategiat autentikointia, käyttöoikeuksia ja kiintiöitä varten
-- Toteutat resurssien saatavuuden ja kapasiteetin validointimenettelyt
-- Konfiguroit tietoturva- ja vaatimustenmukaisuustarkastukset organisaation politiikoille
-- Suunnittelet kustannusarvioinnit ja budjetin validointityönkulut
-- Luo omia esivalmistelutarkastusten automaatioita CI/CD-putkiin
+Tämän oppaan suorittamisen jälkeen osaat:
+- Hallita automatisoituja esivalmistelujen validointitekniikoita ja -skriptejä
+- Ymmärtää kattavat tarkastusstrategiat todennukselle, oikeuksille ja kiintiöille
+- Toteuttaa resurssien saatavuuden ja kapasiteetin validointimenettelyt
+- Konfiguroida tietoturva- ja vaatimustenmukaisuustarkastuksia organisaation politiikoille
+- Suunnitella kustannusarviointi- ja budjetin validointityönkulkuja
+- Luoda mukautettuja esivalmistelutarkastusautomaatioita CI/CD-putkiin
 
 ## Oppimistulokset
 
 Oppaan suorittamisen jälkeen pystyt:
-- Luomaan ja suorittamaan kattavia esilähtötarkastus-skriptejä
-- Suunnittelemaan automatisoituja tarkastusworkflown eri käyttöönotto­skenaarioille
+- Luomaan ja suorittamaan kattavia esivalmistelujen validointiskriptejä
+- Suunnittelemaan automatisoituja tarkastustyönkulkuja eri käyttöönottojen skenaarioille
 - Toteuttamaan ympäristökohtaisia validointimenettelyjä ja -politiikkoja
-- Konfiguroimaan proaktiivisen valvonnan ja hälytykset käyttöönoton valmiudesta
-- Vianmääritykseen ennen käyttöönottoa ja toteuttamaan korjaavat toimenpiteet
-- Integroimaan esilähtötarkastukset DevOps-putkiin ja automaatiotyönkulkuihin
+- Konfiguroimaan ennakoivaa valvontaa ja hälytyksiä käyttöönoton valmiuden seuraamiseksi
+- Vianmäärityksen suorittamiseen ennen käyttöönottoa ja korjaavien toimenpiteiden toteuttamiseen
+- Integroimaan esivalmistelutarkastukset DevOps-putkiin ja automaatiotyönkulkuihin
 
 ## Sisällysluettelo
 
-- [Yleiskatsaus](../../../../docs/chapter-06-pre-deployment)
-- [Automaattinen esilähtötarkistusskripti](../../../../docs/chapter-06-pre-deployment)
-- [Manuaalinen tarkistuslista](../../../../docs/chapter-06-pre-deployment)
-- [Ympäristön validointi](../../../../docs/chapter-06-pre-deployment)
-- [Resurssien validointi](../../../../docs/chapter-06-pre-deployment)
-- [Tietoturva ja vaatimustenmukaisuus](../../../../docs/chapter-06-pre-deployment)
-- [Suorituskyky ja kapasiteettisuunnittelu](../../../../docs/chapter-06-pre-deployment)
-- [Yleiset vianmääritystapaukset](../../../../docs/chapter-06-pre-deployment)
+- [Overview](#overview)
+- [Automated Pre-flight Script](#automated-pre-flight-script)
+- [Manual Validation Checklist](#codeblock1)
+- [Environment Validation](#✅-backup-recovery)
+- [Resource Validation](#production-environment-validation)
+- [Security & Compliance Checks](#security--compliance-checks)
+- [Performance & Capacity Planning](#performance--capacity-planning)
+- [Troubleshooting Common Issues](#troubleshooting-common-issues)
 
 ---
 
-## Yleiskatsaus
+## Overview
 
-Esivalmistelutarkastukset ovat olennaisia tarkastuksia, jotka suoritetaan ennen käyttöönottoa varmistaakseen:
+Esivalmistustarkastukset ovat oleellisia validointeja, jotka suoritetaan ennen käyttöönottoa varmistaakseen:
 
 - **Resurssien saatavuus** ja kiintiöt kohdealueilla
-- **Autentikointi ja käyttöoikeudet** on konfiguroitu oikein
-- **Mallien pätevyys** ja parametrien oikeellisuus
+- **Todennus ja oikeudet** on konfiguroitu oikein
+- **Mallien kelvollisuus** ja parametrien oikeellisuus
 - **Verkkoyhteydet** ja riippuvuudet
-- **Tietoturvan vaatimustenmukaisuus** organisaation politiikoille
-- **Kustannusarviointi** budjettirajoissa
+- **Tietoturvan vaatimustenmukaisuus** organisaation politiikoiden mukaisesti
+- **Kustannusarviot** budjettirajoissa
 
-### Milloin suorittaa esilähtötarkastukset
+### Milloin suorittaa esivalmistustarkastukset
 
 - **Ennen ensimmäistä käyttöönottoa** uuteen ympäristöön
 - **Merkittävien mallimuutosten jälkeen**
-- **Ennen tuotantokäyttöönottoja**
-- **Azure-alueita vaihdettaessa**
+- **Ennen tuotantokäyttöönottuja**
+- **Alueita vaihdettaessa**
 - **Osana CI/CD-putkia**
 
 ---
 
-## Automaattinen esilähtötarkistusskripti
+## Automated Pre-flight Script
 
-### PowerShell-esilähtötarkastaja
+### PowerShell Pre-flight Checker
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -100,7 +100,7 @@ param(
     [switch]$Detailed
 )
 
-# Värikoodaus tulostukselle
+# Tulostuksen värikoodaus
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -128,7 +128,7 @@ function Write-Status {
 function Test-Prerequisites {
     Write-Host "${Blue}=== Prerequisites Check ===${Reset}"
     
-    # Tarkista AZD:n asennus
+    # Tarkista AZD-asennus
     try {
         $azdVersion = azd version --output json | ConvertFrom-Json
         Write-Status "AZD CLI installed" "Success" "Version: $($azdVersion.azd.version)"
@@ -138,7 +138,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Tarkista Azure CLI:n asennus
+    # Tarkista Azure CLI -asennus
     try {
         $azVersion = az version --output json | ConvertFrom-Json
         Write-Status "Azure CLI installed" "Success" "Version: $($azVersion.'azure-cli')"
@@ -163,7 +163,7 @@ function Test-Authentication {
     Write-Host "`n${Blue}=== Authentication Check ===${Reset}"
     
     try {
-        # Tarkista AZD:n todennus
+        # Tarkista AZD-autentikointi
         $azdAuth = azd auth login --check-status --output json 2>$null | ConvertFrom-Json
         if ($azdAuth.status -eq "Logged-in") {
             Write-Status "AZD authentication" "Success" "User: $($azdAuth.principalName)"
@@ -173,11 +173,11 @@ function Test-Authentication {
             return $false
         }
         
-        # Tarkista Azure CLI:n todennus
+        # Tarkista Azure CLI -autentikointi
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # Varmista tilauksen käyttöoikeudet
+        # Vahvista tilauksen käyttöoikeudet
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -217,7 +217,7 @@ function Test-Permissions {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # Testaa kyky luoda resurssiryhmä
+                # Testaa mahdollisuus luoda resurssiryhmä
                 try {
                     az group create --name "preflight-test-rg" --location $Location --output none
                     az group delete --name "preflight-test-rg" --yes --output none
@@ -242,7 +242,7 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # Tarkista laskentaresurssien kiintiöt
+        # Tarkista laskentakiintiöt
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
         # Tarkista tietyt kiintiöt
@@ -257,7 +257,7 @@ function Test-QuotasAndLimits {
             }
         }
         
-        # Tarkista App Servicen rajoitukset
+        # Tarkista App Service -rajoitukset
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
             if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
@@ -335,7 +335,7 @@ function Test-TemplateValidation {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # Tarkista palvelut
+            # Vahvista palvelut
             if ($azureYaml.services) {
                 $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
@@ -360,7 +360,7 @@ function Test-TemplateValidation {
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # Tarkista main.bicep, jos se on olemassa
+            # Vahvista main.bicep, jos se on olemassa
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 UUSI: Testaa infrastruktuurin esikatselu (turvallinen kuivaharjoitus)
+    # 🧪 UUSI: Testaa infrastruktuurin esikatselu (turvallinen koeajo)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -446,7 +446,7 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Perustason kustannusarvio (tarkkoihin arvioihin tarvittaisiin Azure Pricing API)
+    # Peruskustannusarvio (tarkkoihin arvioihin tarvittaisiin Azure Pricing API:n)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
@@ -470,9 +470,9 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # Tarkista yleiset turvallisuuskäytännöt
+    # Tarkista yleiset tietoturvakäytännöt
     try {
-        # Tarkista, onko Key Vault määritetty
+        # Tarkista, onko Key Vault konfiguroitu
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
             Write-Status "Key Vault usage" "Success" "Key Vault detected in templates"
         }
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # Tarkista hallinnoidun identiteetin käyttö
+        # Tarkista hallitun identiteetin käyttö
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +488,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # Tarkista, onko HTTPS pakotettu
+        # Tarkista HTTPS:n pakottaminen
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -557,15 +557,15 @@ function Invoke-PreflightCheck {
     }
 }
 
-# Suorita ennakkotarkastus
+# Suorita ennakkotarkistus
 Invoke-PreflightCheck
 ```
 
-### Bash-esilähtötarkastaja
+### Bash Pre-flight Checker
 
 ```bash
 #!/bin/bash
-# Bash-versio ennakkotarkastuksista Unix-/Linux-järjestelmille
+# Bash-versio esitarkistuksista Unix-/Linux-järjestelmille
 
 set -euo pipefail
 
@@ -606,7 +606,7 @@ print_status() {
 check_prerequisites() {
     echo -e "${BLUE}=== Prerequisites Check ===${NC}"
     
-    # Tarkista AZD-asennus
+    # Tarkista AZD:n asennus
     if command -v azd >/dev/null 2>&1; then
         local azd_version=$(azd version --output json | jq -r '.azd.version')
         print_status "AZD CLI installed" "success" "Version: $azd_version"
@@ -615,7 +615,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # Tarkista Azure CLI -asennus
+    # Tarkista Azure CLI:n asennus
     if command -v az >/dev/null 2>&1; then
         local az_version=$(az version --output json | jq -r '."azure-cli"')
         print_status "Azure CLI installed" "success" "Version: $az_version"
@@ -624,7 +624,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # Tarkista jq-asennus
+    # Tarkista jq:n asennus
     if command -v jq >/dev/null 2>&1; then
         print_status "jq installed" "success"
     else
@@ -637,7 +637,7 @@ check_prerequisites() {
 check_authentication() {
     echo -e "\n${BLUE}=== Authentication Check ===${NC}"
     
-    # Tarkista AZD-tunnistus
+    # Tarkista AZD:n todennus
     if azd auth login --check-status >/dev/null 2>&1; then
         local principal_name=$(azd auth login --check-status --output json 2>/dev/null | jq -r '.principalName // "Unknown"')
         print_status "AZD authentication" "success" "User: $principal_name"
@@ -646,7 +646,7 @@ check_authentication() {
         return 1
     fi
     
-    # Tarkista Azure CLI -tunnistus
+    # Tarkista Azure CLI:n todennus
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -755,7 +755,7 @@ main() {
         esac
     done
     
-    # Tarkista vaaditut parametrit
+    # Tarkista tarvittavat parametrit
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -768,7 +768,7 @@ main() {
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
     
-    # Suorita tarkastukset
+    # Suorita tarkistukset
     local all_passed=true
     
     check_prerequisites || all_passed=false
@@ -796,71 +796,71 @@ main "$@"
 
 ---
 
-## Manuaalinen tarkistuslista
+## Manual Validation Checklist
 
-### Ennen käyttöönottoa - tarkistuslista
+### Pre-Deployment Checklist
 
 Tulosta tämä tarkistuslista ja varmista jokainen kohta ennen käyttöönottoa:
 
-#### ✅ Ympäristön määrittely
-- [ ] AZD CLI asennettuna ja päivitetty uusimpaan versioon
-- [ ] Azure CLI asennettuna ja kirjautuneena
-- [ ] Oikea Azure-tilaus valittuna
-- [ ] Ympäristön nimi on yksilöllinen ja noudattaa nimeämiskäytäntöjä
-- [ ] Kohderesurssiryhmä tunnistettu tai se voidaan luoda
+#### ✅ Environment Setup
+- [ ] AZD CLI asennettu ja päivitetty uusimpaan versioon
+- [ ] Azure CLI asennettu ja kirjautunut
+- [ ] Oikea Azure-tilaus valittu
+- [ ] Ympäristön nimi on ainutlaatuinen ja noudattaa nimeämiskäytäntöjä
+- [ ] Kohderesurssiryhmä on tunnistettu tai voidaan luoda
 
-#### ✅ Autentikointi ja käyttöoikeudet
-- [ ] Onnistuneesti autentikoitu `azd auth login`-komennolla
-- [ ] Käyttäjällä on Contributor-rooli kohdetilauksessa/resurssiryhmässä
-- [ ] Palvelutili (service principal) konfiguroitu CI/CD:lle (jos tarpeen)
+#### ✅ Authentication & Permissions
+- [ ] Successfully authenticated with `azd auth login`
+- [ ] Käyttäjällä on Contributor-rooli kohdetilauksessa/ -resurssiryhmässä
+- [ ] Service principal konfiguroitu CI/CD:lle (jos sovellettavissa)
 - [ ] Ei vanhentuneita sertifikaatteja tai tunnistetietoja
 
-#### ✅ Mallien validointi
-- [ ] `azure.yaml` on olemassa ja on kelvollista YAML-muotoa
-- [ ] Kaikilla tiedostossa azure.yaml määritellyillä palveluilla on vastaava lähdekoodi
+#### ✅ Template Validation
+- [ ] `azure.yaml` exists and is valid YAML
+- [ ] Kaikilla `azure.yaml`:ssa määritellyillä palveluilla on vastaava lähdekoodi
 - [ ] Bicep-mallit `infra/`-hakemistossa ovat paikallaan
-- [ ] `main.bicep` kääntyy ilman virheitä (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Infrastructure preview suorittuu onnistuneesti (`azd provision --preview`)
+- [ ] `main.bicep` compiles without errors (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Infrastructure preview runs successfully (`azd provision --preview`)
 - [ ] Kaikilla vaadituilla parametreilla on oletusarvot tai ne annetaan
 - [ ] Ei kovakoodattuja salaisuuksia malleissa
 
-#### ✅ Resurssien suunnittelu
-- [ ] Kohde Azure -alue valittu ja vahvistettu
-- [ ] Tarvittavat Azure-palvelut saatavilla kohdealueella
-- [ ] Riittävästi kiintiöitä suunnitelluille resursseille
+#### ✅ Resource Planning
+- [ ] Kohde-Azure-alue valittu ja validoitu
+- [ ] Vaaditut Azure-palvelut saatavilla kohdealueella
+- [ ] Tarvittavat kiintiöt saatavilla suunnitelluille resursseille
 - [ ] Resurssien nimeämiskonfliktit tarkistettu
-- [ ] Riippuvuudet resurssien välillä selvitetty
+- [ ] Resurssien väliset riippuvuudet ymmärretty
 
-#### ✅ Verkko ja suojaus
-- [ ] Verkkoyhteydet Azure-päätepisteisiin varmennettu
-- [ ] Palomuuri/välityspalvelinasetukset konfiguroitu tarvittaessa
-- [ ] Key Vault konfiguroitu salaisuuksien hallintaan
-- [ ] Hallinnoidut identiteetit käytössä mahdollisuuksien mukaan
-- [ ] HTTPS-pakotus käytössä web-sovelluksille
+#### ✅ Network & Security
+- [ ] Verkkoyhteydet Azure-päätteisiin vahvistettu
+- [ ] Palomuuri-/proxy-asetukset konfiguroitu tarvittaessa
+- [ ] Key Vault konfiguroitu salaisuuksien hallintaa varten
+- [ ] Managed identities käytössä missä mahdollista
+- [ ] HTTPS-vaatimus otettu käyttöön web-sovelluksissa
 
-#### ✅ Kustannusten hallinta
+#### ✅ Cost Management
 - [ ] Kustannusarviot laskettu Azure Pricing Calculatorilla
-- [ ] Budjettihälytykset konfiguroitu tarvittaessa
-- [ ] Sopivat SKU:t valittu ympäristön tyypille
-- [ ] Varattu kapasiteetti otettu huomioon tuotantokuormille
+- [ ] Budjetti-ilmoitukset konfiguroitu tarvittaessa
+- [ ] Sopivat SKU:t valittu ympäristön tyypin mukaan
+- [ ] Varauskapasiteetti huomioitu tuotantokuormille
 
-#### ✅ Valvonta ja havaittavuus
+#### ✅ Monitoring & Observability
 - [ ] Application Insights konfiguroitu malleihin
 - [ ] Log Analytics -työtila suunniteltu
 - [ ] Hälytyssäännöt määritelty kriittisille mittareille
 - [ ] Terveystarkastus-päätepisteet toteutettu sovelluksissa
 
-#### ✅ Varmuuskopiointi ja palautus
+#### ✅ Backup & Recovery
 - [ ] Varmuuskopiointistrategia määritelty tietoresursseille
 - [ ] Palautusaikatavoitteet (RTO) dokumentoitu
 - [ ] Palautuspistetavoitteet (RPO) dokumentoitu
-- [ ] Vikatilannesuunnitelma olemassa tuotannolle
+- [ ] Katastrofipalautussuunnitelma olemassa tuotantoympäristölle
 
 ---
 
-## Ympäristön validointi
+## Environment Validation
 
-### Kehitysympäristön validointi
+### Development Environment Validation
 
 ```bash
 #!/bin/bash
@@ -869,7 +869,7 @@ Tulosta tämä tarkistuslista ja varmista jokainen kohta ennen käyttöönottoa:
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # Tarkista kehitysystävälliset asetukset
+    # Tarkista kehitystä suosivat asetukset
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
@@ -892,16 +892,16 @@ validate_dev_environment() {
 }
 ```
 
-### Tuotantoympäristön validointi
+### Production Environment Validation
 
 ```bash
 #!/bin/bash
-# Tuotantoympäristökohtaiset tarkistukset
+# Tuotantoympäristökohtaiset validoinnit
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # Tarkista korkean käytettävyyden määritykset
+    # Tarkista korkean käytettävyyden kokoonpanot
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
@@ -915,7 +915,7 @@ validate_prod_environment() {
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # Tarkista valvonnan asetukset
+    # Validoi valvontakokoonpano
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
@@ -933,9 +933,9 @@ validate_prod_environment() {
 
 ---
 
-## Resurssien validointi
+## Resource Validation
 
-### Kiintiöiden validointiskripti
+### Quota Validation Script
 
 ```python
 #!/usr/bin/env python3
@@ -990,7 +990,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # Hae tallennustilit tilauksesta
+    # Hae tallennustilejä tilauksesta
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -1058,13 +1058,13 @@ if __name__ == "__main__":
 
 ---
 
-## Tietoturva ja vaatimustenmukaisuus
+## Security & Compliance Checks
 
-### Tietoturvan validointiskripti
+### Security Validation Script
 
 ```bash
 #!/bin/bash
-# Turvallisuus- ja vaatimustenmukaisuuden tarkastus AZD-julkaisuja varten
+# Turvallisuus- ja vaatimustenmukaisuuden tarkistus AZD-käyttöönottoja varten
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Tarkista HTTPS-pakko
+    # Tarkista HTTPS:n pakottaminen
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1095,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Tarkista vähimmäis-TLS-versio
+    # Tarkista TLS:n vähimmäisversio
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1103,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Tarkista julkisen käytön rajoitukset
+    # Tarkista julkisen pääsyn rajoitukset
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1111,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Tarkista verkkoturvaryhmät
+    # Tarkista verkon suojausryhmät
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1124,7 +1124,7 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # Tarkista tiedon salaus
+    # Tarkista datan salaus
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
@@ -1177,9 +1177,9 @@ main "$@"
 
 ---
 
-## Integrointi CI/CD:hen
+## Integration with CI/CD
 
-### GitHub Actions -integraatio
+### GitHub Actions Integration
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1238,7 +1238,7 @@ jobs:
         path: preflight-results.json
 ```
 
-### Azure DevOps -integraatio
+### Azure DevOps Integration
 
 ```yaml
 trigger: none
@@ -1290,58 +1290,58 @@ steps:
 
 ---
 
-## Parhaat käytännöt - yhteenveto
+## Best Practices Summary
 
-### ✅ Esilähtötarkastusten parhaat käytännöt
+### ✅ Pre-flight-tarkastusten parhaat käytännöt
 
 1. **Automatisoi aina kun mahdollista**
    - Integroi tarkastukset CI/CD-putkiin
-   - Käytä skriptejä toistettaville validoinneille
-   - Tallenna tulokset auditointilokeja varten
+   - Käytä skriptejä toistettavien validointien suorittamiseen
+   - Tallenna tulokset auditointeja varten
 
 2. **Ympäristökohtainen validointi**
-   - Eri tarkastukset dev/staging/prod-ympäristöille
-   - Sopivat suojausvaatimukset ympäristökohtaisesti
-   - Kustannusoptimointi ei-tuotantoympäristöille
+   - Eri tarkastukset kehitys/testi/tuotanto-ympäristöille
+   - Sopivat turvallisuusvaatimukset kullekin ympäristölle
+   - Kustannusten optimointi ei-tuotantoympäristöissä
 
-3. **Kattava kattavuus**
-   - Autentikointi ja käyttöoikeudet
+3. **Laaja kattavuus**
+   - Todennus ja käyttöoikeudet
    - Resurssikiintiöt ja saatavuus
    - Mallien validointi ja syntaksi
-   - Tietoturva ja vaatimustenmukaisuus
+   - Turvallisuus- ja vaatimustenmukaisuusvaatimukset
 
 4. **Selkeä raportointi**
-   - Väriin koodatut tilailmaisimet
-   - Yksityiskohtaiset virheilmoitukset korjausohjeineen
-   - Yhteenvedot nopeaan arviointiin
+   - Värikoodatut tilailmaisimet
+   - Yksityiskohtaiset virheilmoitukset korjaustoimenpiteineen
+   - Yhteenvetoraportit nopeaan arviointiin
 
 5. **Keskeytä nopeasti**
    - Keskeytä käyttöönotto, jos kriittiset tarkastukset epäonnistuvat
-   - Tarjoa selkeät ohjeet korjaukseen
+   - Anna selkeät ohjeet korjaamiseen
    - Mahdollista tarkastusten helppo uudelleenkäynnistys
 
-### Yleiset esilähtötarkastusten sudenkuopat
+### Yleisimmät pre-flight-ansat
 
-1. **Validoinnin ohittaminen** "nopeiden" käyttöönottojen takia
-2. **Riittämättömät käyttöoikeustarkistukset** ennen käyttöönottoa
-3. **Kiintiöiden huomiotta jättäminen** kunnes käyttöönotto epäonnistuu
-4. **Malleja ei validoida** CI/CD-putkissa
-5. **Tietoturvatarkastusten puute** tuotantoympäristöissä
-6. **Puuttellinen kustannusarviointi** johtaa budjettiyllätyksiin
+1. **Validoinnin ohittaminen** "nopeiden" käyttöönottojen vuoksi
+2. **Riittämätön käyttöoikeuksien tarkistus** ennen käyttöönottoa
+3. **Kiintiörajojen laiminlyönti** kunnes käyttöönotto epäonnistuu
+4. **Mallien validoinnin laiminlyönti** CI/CD-putkissa
+5. **Turvallisuustarkastusten puuttuminen** tuotantoympäristöissä
+6. **Puuttellinen kustannusarviointi**, joka johtaa budjettiyllätyksiin
 
 ---
 
-**Vinkki**: Suorita esilähtötarkastukset erillisenä työnä CI/CD-putkessa ennen varsinaista käyttöönotto-työtä. Tämä auttaa löytämään ongelmat aikaisessa vaiheessa ja antaa nopeamman palautteen kehittäjille.
+**Vinkki**: Suorita pre-flight-tarkastukset erillisenä työnä CI/CD-putkessasi ennen varsinaista käyttöönotto-työtä. Tämä auttaa havaitsemaan ongelmat aikaisessa vaiheessa ja antaa kehittäjille nopeampaa palautetta.
 
 ---
 
 **Navigation**
-- **Previous Lesson**: [SKU-valinta](sku-selection.md)
-- **Next Lesson**: [Pikaopas](../../resources/cheat-sheet.md)
+- **Edellinen oppitunti**: [SKU-valinta](sku-selection.md)
+- **Seuraava oppitunti**: [Pikaohje](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vastuuvapauslauseke:
-Tämä asiakirja on käännetty tekoälykäännöspalvelulla Co-op Translator (https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomaa, että automatisoiduissa käännöksissä voi esiintyä virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä on pidettävä lopullisena ja määräävänä lähteenä. Kriittisten tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa mistään tämän käännöksen käytöstä aiheutuvista väärinkäsityksistä tai virheellisistä tulkinnoista.
+**Disclaimer**:
+Tämä asiakirja on käännetty tekoälypohjaisella käännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, ota huomioon, että automatisoiduissa käännöksissä saattaa esiintyä virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulisi pitää auktoritatiivisena lähteenä. Kriittisten tietojen osalta suositellaan ammattimaista ihmiskääntäjän tekemää käännöstä. Emme ole vastuussa tämän käännöksen käytöstä mahdollisesti aiheutuvista väärinymmärryksistä tai virhetulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

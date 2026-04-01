@@ -1,19 +1,21 @@
-# Luku 7: Vianmääritys & Virheenkorjaus
+# Luku 7: Vianmääritys ja virheenkorjaus
 
-**📚 Kurssi**: [AZD aloittelijoille](../../README.md) | **⏱️ Kesto**: 1-1.5 hours | **⭐ Vaikeustaso**: Keskitaso
+**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 1-1,5 tuntia | **⭐ Vaikeustaso**: Keskitaso
 
 ---
 
 ## Yleiskatsaus
 
-Tämä luku auttaa sinua diagnosoimaan ja ratkaisemaan yleisiä ongelmia, joita esiintyy työskenneltäessä Azure Developer CLI:n kanssa. Mukana on kaikkea käyttöönoton epäonnistumisista AI-spesifisiin ongelmiin.
+Tämä luku auttaa sinua diagnosoimaan ja ratkaisemaan yleisiä ongelmia, kun työskentelet Azure Developer CLI:n kanssa. Julkaisun epäonnistumisista tekoälykohtaisiin ongelmiin.
+
+> Vahvistettu versiolla `azd 1.23.12` maaliskuussa 2026.
 
 ## Oppimistavoitteet
 
-Suorittamalla tämän luvun osaat:
-- Diagnoisoida yleisiä AZD:n käyttöönoton epäonnistumisia
-- Vianmääritystä todennuksen ja käyttöoikeuksien ongelmissa
-- Ratkaista AI-palveluiden yhteysongelmia
+By completing this chapter, you will:
+- Diagnoida yleisiä AZD-julkaisuvirheitä
+- Virheenkorjata todennus- ja käyttöoikeusongelmia
+- Ratkaista tekoälypalveluihin liittyviä yhteysongelmia
 - Käyttää Azure-portaalia ja CLI:tä vianmääritykseen
 
 ---
@@ -22,22 +24,26 @@ Suorittamalla tämän luvun osaat:
 
 | # | Oppitunti | Kuvaus | Aika |
 |---|--------|-------------|------|
-| 1 | [Yleiset ongelmat](common-issues.md) | Usein kohtaavat ongelmat | 30 min |
-| 2 | [Vianmääritysohje](debugging.md) | Askel askeleelta vianmääritysstrategiat | 45 min |
-| 3 | [AI-vianmääritys](ai-troubleshooting.md) | AI-spesifiset ongelmat | 30 min |
+| 1 | [Yleisimmät ongelmat](common-issues.md) | Usein esiintyvät ongelmat | 30 min |
+| 2 | [Vianmääritysohje](debugging.md) | Vaiheittaiset vianmääritysstrategiat | 45 min |
+| 3 | [Tekoälyn vianmääritys](ai-troubleshooting.md) | Tekoälykohtaiset ongelmat | 30 min |
 
 ---
 
-## 🚨 Pikakorjaukset
+## 🚨 Nopeat korjaukset
 
 ### Todennusongelmat
 ```bash
+# Vaaditaan AZD-työnkuluille
 azd auth login
+
+# Valinnainen, jos käytät myös Azure CLI -komentoja suoraan
 az login
-azd auth whoami
+
+azd auth status
 ```
 
-### Provisiointivirheet
+### Provisioinnin epäonnistumiset
 ```bash
 azd show
 azd monitor --logs
@@ -64,22 +70,22 @@ azd up
 
 | Virhe | Syy | Ratkaisu |
 |-------|-------|----------|
-| `AuthenticationError` | Ei kirjautunut sisään | `azd auth login` |
+| `AuthenticationError` | Ei ole kirjautunut sisään | `azd auth login` |
 | `ResourceNotFound` | Puuttuva resurssi | Tarkista resurssien nimet |
-| `QuotaExceeded` | Tilausrajoitukset | Pyydä käyttökiintiön korotusta |
+| `QuotaExceeded` | Tilauksen rajoitukset | Pyydä kiintiön korotusta |
 | `InvalidTemplate` | Bicep-syntaksivirhe | `az bicep build` |
-| `Conflict` | Resurssi on olemassa | Käytä uutta nimeä tai poista |
+| `Conflict` | Resurssi on olemassa | Käytä uutta nimeä tai poista se |
 | `Forbidden` | Riittämättömät käyttöoikeudet | Tarkista RBAC-roolit |
 
 ---
 
-## 🔄 Nollaus ja palautus
+## 🔄 Nollaus ja palautuminen
 
 ```bash
 # Pehmeä nollaus (säilytä resurssit, ota koodi uudelleen käyttöön)
 azd deploy --force
 
-# Täydellinen nollaus (poista kaikki, aloita alusta)
+# Kova nollaus (poista kaikki, aloita alusta)
 azd down --force --purge
 azd up
 ```
@@ -90,20 +96,20 @@ azd up
 
 | Suunta | Luku |
 |-----------|---------|
-| **Previous** | [Luku 6: Ennen käyttöönottoa](../chapter-06-pre-deployment/README.md) |
-| **Next** | [Luku 8: Tuotanto](../chapter-08-production/README.md) |
+| **Edellinen** | [Luku 6: Esivalmistelut](../chapter-06-pre-deployment/README.md) |
+| **Seuraava** | [Luku 8: Tuotanto](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Aiheeseen liittyvät resurssit
+## 📖 Liittyvät resurssit
 
-- [Ennen käyttöönottoa -tarkastukset](../chapter-06-pre-deployment/preflight-checks.md)
-- [Konfigurointiohje](../chapter-03-configuration/configuration.md)
-- [AZD GitHub Issues](https://github.com/Azure/azure-dev/issues)
+- [Esijulkaisun tarkistukset](../chapter-06-pre-deployment/preflight-checks.md)
+- [Konfigurointiopas](../chapter-03-configuration/configuration.md)
+- [AZD:n GitHub-ongelmat](https://github.com/Azure/azure-dev/issues)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vastuuvapauslauseke:
-Tämä asiakirja on käännetty tekoälykäännöspalvelulla Co-op Translator (https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automatisoiduissa käännöksissä saattaa esiintyä virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulee pitää auktoriteettisena lähteenä. Tärkeiden tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä johtuvista väärinymmärryksistä tai virhetulkintojen seurauksista.
+**Disclaimer**:
+Tämä asiakirja on käännetty käyttäen tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme täsmällisyyteen, huomioithan, että automatisoiduissa käännöksissä saattaa esiintyä virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää määräävänä lähteenä. Tärkeää tietoa varten suositellaan ammattimaista, ihmisen tekemää käännöstä. Emme ole vastuussa tästä käännöksestä aiheutuvista väärinymmärryksistä tai virhetulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

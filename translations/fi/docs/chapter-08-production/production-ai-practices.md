@@ -1,43 +1,43 @@
-# Production AI Workload Best Practices with AZD
+# Parhaat käytännöt tuotantotason tekoäintyökuormille AZD:llä
 
-**Luku Navigointi:**
+**Lukujen navigointi:**
 - **📚 Kurssin etusivu**: [AZD Aloittelijoille](../../README.md)
-- **📖 Nykyinen luku**: Luku 8 - Production & Enterprise Patterns
+- **📖 Nykyinen luku**: Luku 8 - Tuotanto- ja yritysmallit
 - **⬅️ Edellinen luku**: [Luku 7: Vianmääritys](../chapter-07-troubleshooting/debugging.md)
 - **⬅️ Myös liittyvää**: [AI-työpaja](ai-workshop-lab.md)
-- **🎯 Kurssi suoritettu**: [AZD Aloittelijoille](../../README.md)
+- **🎯 Kurssi valmis**: [AZD Aloittelijoille](../../README.md)
 
 ## Yleiskatsaus
 
-Tämä opas tarjoaa kattavat parhaat käytännöt tuotantovalmiiden AI-työkuormien käyttöönottoon Azure Developer CLI:llä (AZD). Näihin käytäntöihin on koottu Microsoft Foundry Discord -yhteisön palautetta ja todellisia asiakasprojekteja koskevia oppeja, ja ne käsittelevät yleisimpiä tuotantotason AI-järjestelmien haasteita.
+Tämä opas tarjoaa kattavat parhaat käytännöt tuotantovalmiiden tekoäintyökuormien käyttöönottoon Azure Developer CLI:llä (AZD). Perustuen Microsoft Foundry Discord -yhteisön palautteeseen ja todellisiin asiakaskäyttöönottoihin, nämä käytännöt käsittelevät yleisimpiä haasteita tuotantotekoälyjärjestelmissä.
 
-## Keskeiset ratkaistavat haasteet
+## Ratkaistavat keskeiset haasteet
 
-Yhteisökyselymme tulosten perusteella kehittäjät kohtaavat seuraavia tärkeimpiä haasteita:
+Yhteisökyselymme tulosten perusteella kehittäjien yleisimmät haasteet ovat:
 
-- **45%** kamppailee monipalveluisten AI-järjestelmien käyttöönotossa
-- **38%** kohtaa haasteita tunnistetietojen ja salaisten arvojen hallinnassa  
+- **45%** kamppailee monipalveluisten tekoälyasennusten kanssa
+- **38%** kohtaa ongelmia tunnistetietojen ja salaisuuksien hallinnassa  
 - **35%** pitää tuotantovalmiutta ja skaalausta vaikeina
 - **32%** tarvitsee parempia kustannusoptimointistrategioita
-- **29%** vaatii parannuksia valvontaan ja vianmääritykseen
+- **29%** tarvitsee parannettua valvontaa ja vianmääritystä
 
-## Arkkitehtuurimallit tuotantotason AI:lle
+## Arkkitehtuurimallit tuotantotekoälylle
 
-### Malli 1: Mikropalvelupohjainen AI-arkkitehtuuri
+### Malli 1: Mikropalveluinen tekoälyarkkitehtuuri
 
-**Milloin käyttää**: Monimutkaisiin AI-sovelluksiin, joissa on useita ominaisuuksia
+**Milloin käyttää**: Monimutkaisiin tekoälysovelluksiin, joissa on useita toiminnallisuuksia
 
 ```mermaid
 graph TD
-    Frontend[Verkkokäyttöliittymä] --- Gateway[API-väylä] --- LB[Kuormantasaaja]
-    Gateway --> Chat[Chat-palvelu]
+    Frontend[Web-käyttöliittymä] --- Gateway[API-väylä] --- LB[Kuormantasaaja]
+    Gateway --> Chat[Keskustelupalvelu]
     Gateway --> Image[Kuvapalvelu]
     Gateway --> Text[Tekstipalvelu]
     Chat --> OpenAI[Microsoft Foundry -mallit]
-    Image --> Vision[Tietokonenäkö]
+    Image --> Vision[Konenäkö]
     Text --> DocIntel[Asiakirjaäly]
 ```
-**AZD Implementation**:
+**AZD-toteutus**:
 
 ```yaml
 # azure.yaml
@@ -60,9 +60,9 @@ services:
     host: containerapp
 ```
 
-### Malli 2: Tapahtumaohjattu AI-käsittely
+### Malli 2: Tapahtumapohjainen tekoälykäsittely
 
-**Milloin käyttää**: Eräajot, dokumenttianalyysi, asynkroniset työnkulut
+**Milloin käyttää**: Eräajot, asiakirja-analyysi, asynkroniset työnkulut
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -109,46 +109,46 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Ajatuksia AI-agentin tilasta
+## Tekoälyagentin kunnon tarkastelu
 
-Kun perinteinen verkkosovellus rikkoontuu, oireet ovat tuttuja: sivu ei lataudu, API palauttaa virheen tai käyttöönotto epäonnistuu. AI-vetoiset sovellukset voivat rikkoutua kaikilla samoilla tavoilla — mutta ne voivat myös käyttäytyä väärin hienovaraisemmin, ilman ilmeisiä virheilmoituksia.
+Kun perinteinen web-sovellus rikkoutuu, oireet ovat tuttuja: sivu ei lataudu, API palauttaa virheen tai käyttöönotto epäonnistuu. Tekoälypohjaiset sovellukset voivat rikkoutua kaikilla näillä tavoilla—mutta ne voivat myös käyttäytyä huonosti hienovaraisemmilla tavoilla, jotka eivät tuota ilmeisiä virheilmoituksia.
 
-Tämä osio auttaa rakentamaan mentaalisen mallin AI-työkuormien valvontaan, jotta tiedät mistä etsiä, kun asiat eivät tunnu olevan kunnossa.
+Tämä osio auttaa rakentamaan mentaalisen mallin tekoäintyökuormien valvontaan, jotta tiedät mistä etsiä, kun asiat eivät vaikuta olevan kunnossa.
 
 ### Miten agentin kunto eroaa perinteisen sovelluksen kunnosta
 
-Perinteinen sovellus joko toimii tai ei toimi. AI-agentti voi vaikuttaa toimivan, mutta tuottaa huonoja tuloksia. Ajattele agentin kuntoa kahdella tasolla:
+Perinteinen sovellus joko toimii tai ei toimi. Tekoälyagentti voi näyttää toimivan mutta tuottaa huonoja tuloksia. Ajattele agentin kuntoa kahdessa kerroksessa:
 
-| Taso | Mitä tarkkailla | Minne katsoa |
+| Kerros | Mitä seurata | Missä etsiä |
 |-------|--------------|---------------|
-| **Infrastruktuurin kunto** | Toimiiko palvelu? Onko resurssit provisioitu? Ovatko päätepisteet saavutettavissa? | `azd monitor`, Azure Portal resource health, container/app logs |
-| **Käyttäytymisen kunto** | Vastaako agentti tarkasti? Ovatko vastaukset ajallaan? Kutsutaanko mallia oikein? | Application Insights -jäljet, model call latency metrics, response quality logs |
+| **Infrastruktuurin kunto** | Toimiiko palvelu? Onko resurssit provisioitu? Ovatko päätepisteet saavutettavissa? | `azd monitor`, Azure-portaalin resurssien terveydentila, kontti-/sovelluslokit |
+| **Käytöksen kunto** | Vastaako agentti tarkasti? Ovatko vastaukset ajoissa? Kutsutaanko mallia oikein? | Application Insights -jäljet, mallikutsujen viiveen mittarit, vastausten laadun lokit |
 
-Infrastruktuurin kunto on tuttu — se on sama mille tahansa azd-sovellukselle. Käyttäytymisen kunto on uusi kerros, jonka AI-työkuormat tuovat mukanaan.
+Infrastruktuurin kunto on tuttu—se on sama mille tahansa azd-sovellukselle. Käytöksen kunto on uusi kerros, jonka tekoälytyökuormat tuovat mukanaan.
 
-### Minne katsoa, kun AI-sovellukset eivät toimi odotetusti
+### Missä etsiä, kun tekoälysovellukset eivät käyttäydy odotetusti
 
-Jos AI-sovelluksesi ei tuota odotettuja tuloksia, tässä on käsitteellinen tarkistuslista:
+Jos tekoälysovelluksesi ei tuota odotettuja tuloksia, tässä on käsitteellinen tarkistuslista:
 
-1. **Aloita perusteista.** Toimiiko sovellus? Pääseekö se riippuvuuksiinsa? Tarkista `azd monitor` ja resurssien kunto kuten tekisit missä tahansa sovelluksessa.
-2. **Tarkista malliyhteys.** Kutsutaanko sovelluksesi AI-mallia onnistuneesti? Epäonnistuneet tai aikakatkaistut mallikutsut ovat yleisin AI-sovellusten ongelmien syy ja näkyvät sovelluslokeissa.
-3. **Katso mitä malli sai syötteenä.** AI-vastaukset riippuvat syötteestä (promptista ja mahdollisesta haetusta kontekstista). Jos tulos on väärä, syöte on yleensä väärä. Tarkista, lähettääkö sovelluksesi mallille oikeat tiedot.
-4. **Tarkista vasteviive.** AI-mallikutsut ovat hitaampia kuin tyypilliset API-kutsut. Jos sovellus tuntuu hitaalta, tarkista onko mallivasteaikojen kasvu — se voi viitata rajoituksiin, kapasiteettiin tai aluekohtaiseen ruuhkaan.
-5. **Seuraa kustannussignaaleja.** Odottamattomat piikit token-käytössä tai API-kutsuissa voivat viitata silmukkaan, väärin konfiguroituun promptiin tai liiallisiin uudelleenyrityksiin.
+1. **Aloita perusteista.** Toimiiko sovellus? Pääseekö se riippuvuuksiinsa? Tarkista `azd monitor` ja resurssien kunto kuten tekisit minkä tahansa sovelluksen kanssa.
+2. **Tarkista malliyhteys.** Kutsutaanko sovelluksestasi onnistuneesti tekoälymallia? Epäonnistuneet tai aikakatkaistut mallikutsut ovat yleisin tekoälysovellusten ongelmien syy ja näkyvät sovelluksen lokeissa.
+3. **Katso, mitä mallille lähetettiin.** Tekoälyn vastaukset riippuvat syötteestä (kehotteesta ja palautetusta kontekstista). Jos tulos on väärä, syöte on yleensä väärä. Tarkista, lähettääkö sovelluksesi mallille oikeat tiedot.
+4. **Tarkista vastausten viive.** Tekoälymallikutsut ovat hitaampia kuin tyypilliset API-kutsut. Jos sovelluksesi tuntuu hitaalta, tarkista, ovatko mallin vasteajat kasvaneet—tämä voi viitata rajoituksiin, kapasiteettirajoihin tai alueen tason ruuhkautumiseen.
+5. **Seuraa kustannussignaaleja.** Odottamattomat piikit token-käytössä tai API-kutsuissa voivat viitata silmukkaan, väärin konfiguroituun kehotteeseen tai liiallisiin uudelleenyrityksiin.
 
-Sinun ei tarvitse hallita havaittavuustyökaluja heti. Avain on ymmärtää, että AI-sovelluksilla on ylimääräinen käyttäytymisen kerros seurattavana, ja azd:n sisäänrakennettu valvonta (`azd monitor`) antaa lähtökohdan molempien tasojen tutkimiseen.
+Sinun ei tarvitse hallita havaittavuustyökaluja heti. Tärkein opittu asia on, että tekoälysovelluksilla on ylimääräinen käyttäytymisen kerros seurattavana, ja azd:n sisäänrakennettu valvonta (`azd monitor`) antaa sinulle lähtökohdan molempien kerrosten tutkimiseen.
 
 ---
 
 ## Turvallisuuden parhaat käytännöt
 
-### 1. Zero-Trust -turvamalli
+### 1. Zero-trust -turvamalli
 
 **Toteutusstrategia**:
-- Ei palvelu-palvelu -viestintää ilman autentikointia
+- Ei palvelujen välistä viestintää ilman todennusta
 - Kaikki API-kutsut käyttävät hallittuja identiteettejä
-- Verkon eristys yksityisillä päätepisteillä
-- Vähimmän oikeuden käyttöoikeudet
+- Verkon eristäminen yksityisillä päätepisteillä
+- Vähimmän etuoikeuden periaate
 
 ```bicep
 // Managed Identity for each service
@@ -171,7 +171,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 ### 2. Turvallinen salaisuuksien hallinta
 
-**Key Vault -integraatiomalli**:
+**Key Vault -integrointimalli**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -206,7 +206,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### 3. Verkon turvallisuus
 
-**Yksityisten päätepisteiden konfigurointi**:
+**Yksityisen päätepisteen määritys**:
 
 ```bicep
 // Virtual Network for AI services
@@ -314,7 +314,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 2. Välimuististrategiat
 
-**Redis-välimuisti AI-vastauksille**:
+**Redis-välimuisti tekoälyn vastauksille**:
 
 ```bicep
 // Redis Premium for production workloads
@@ -344,7 +344,7 @@ var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${r
 
 ### 3. Kuormantasapainotus ja liikenteen hallinta
 
-**Application Gateway WAF:llä**:
+**Application Gateway WAF:n kanssa**:
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -382,9 +382,9 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ## 💰 Kustannusoptimointi
 
-### 1. Resurssien oikea mitoitus
+### 1. Resurssien oikea mitoittaminen
 
-**Ympäristökohtaiset määritykset**:
+**Ympäristökohtaiset asetukset**:
 
 ```bash
 # Kehitysympäristö
@@ -404,7 +404,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Kustannusseuranta ja budjetit
+### 2. Kustannusten seuranta ja budjetit
 
 ```bicep
 // Cost management and budgets
@@ -445,9 +445,9 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. Tokenien käytön optimointi
+### 3. Token-käytön optimointi
 
-**OpenAI kustannusten hallinta**:
+**OpenAI-kustannusten hallinta**:
 
 ```typescript
 // Sovellustason tokenien optimointi
@@ -474,7 +474,7 @@ class TokenOptimizer {
 }
 ```
 
-## Valvonta ja havaittavuus
+## Seuranta ja havaittavuus
 
 ### 1. Kattava Application Insights -seuranta
 
@@ -521,9 +521,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. AI-kohtainen valvonta
+### 2. Tekoälykohtainen seuranta
 
-**Mukautetut kojelaudat AI-metrisille**:
+**Mukautetut kojetaulut tekoälymittareille**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -782,7 +782,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup AZD
-        uses: Azure/setup-azd@v1.0.0
+        uses: Azure/setup-azd@v2
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -802,7 +802,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup AZD
-        uses: Azure/setup-azd@v1.0.0
+        uses: Azure/setup-azd@v2
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -827,7 +827,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Tarkista, että kaikki vaaditut palvelut ovat käynnissä
+# Tarkista, että kaikki tarvittavat palvelut ovat käynnissä
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -840,12 +840,12 @@ done
 # Tarkista OpenAI-mallien käyttöönotot
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
-if [[ ! $models == *"gpt-35-turbo"* ]]; then
-    echo "ERROR: Required model gpt-35-turbo not deployed"
+if [[ ! $models == *"gpt-4.1-mini"* ]]; then
+  echo "ERROR: Required model gpt-4.1-mini not deployed"
     exit 1
 fi
 
-# Testaa yhteys tekoälypalveluun
+# Testaa tekoälypalvelun yhteydet
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
@@ -854,66 +854,66 @@ echo "Infrastructure validation completed successfully!"
 
 ## Tuotantovalmiuden tarkistuslista
 
-### Tietoturva ✅
+### Turvallisuus ✅
 - [ ] Kaikki palvelut käyttävät hallittuja identiteettejä
 - [ ] Salaisuudet tallennettu Key Vaultiin
-- [ ] Yksityiset päätepisteet konfiguroitu
-- [ ] Verkon turvaryhmät otettu käyttöön
-- [ ] RBAC vähimmän oikeuden periaatteella
-- [ ] WAF otettu käyttöön julkisilla päätepisteillä
+- [ ] Yksityiset päätepisteet määritetty
+- [ ] Verkon suojausryhmät toteutettu
+- [ ] RBAC pienimmän etuoikeuden periaatteella
+- [ ] WAF otettu käyttöön julkisissa päätepisteissä
 
 ### Suorituskyky ✅
 - [ ] Automaattinen skaalaus konfiguroitu
-- [ ] Välimuisti toteutettu
-- [ ] Kuormantasapainotus asetettu
+- [ ] Välimuisti otettu käyttöön
+- [ ] Kuormantasapainotus määritetty
 - [ ] CDN staattiselle sisällölle
-- [ ] Tietokantayhteyksien yhteyspoolaus
-- [ ] Tokenien käytön optimointi
+- [ ] Tietokantayhteyksien poolaus
+- [ ] Token-käytön optimointi
 
-### Valvonta ✅
+### Seuranta ✅
 - [ ] Application Insights konfiguroitu
-- [ ] Mukautetut metriikat määritelty
-- [ ] Hälytys säännöt asetettu
+- [ ] Mukautetut mittarit määritelty
+- [ ] Hälytyssäännöt määritetty
 - [ ] Kojelauta luotu
 - [ ] Terveystarkastukset toteutettu
-- [ ] Lokien säilytyspolitiikat
+- [ ] Lokien säilytyskäytännöt
 
 ### Luotettavuus ✅
 - [ ] Monialueinen käyttöönotto
 - [ ] Varmuuskopiointi- ja palautussuunnitelma
-- [ ] Circuit breaker -mekanismit otettu käyttöön
-- [ ] Uudelleenyritysasetukset konfiguroitu
+- [ ] Circuit breakerit toteutettu
+- [ ] Uudelleenyritysperiaatteet määritetty
 - [ ] Hallittu degradaatio
-- [ ] Terveystarkastus-päätepisteet
+- [ ] Terveystarkastus‑päätepisteet
 
 ### Kustannusten hallinta ✅
-- [ ] Budjetti-ilmoitukset konfiguroitu
-- [ ] Resurssien oikea mitoitus
-- [ ] Dev/test-alennukset käytössä
-- [ ] Varatut instanssit ostettu
+- [ ] Budjettihälytykset määritetty
+- [ ] Resurssien oikea mitoittaminen
+- [ ] Kehitys/testaus-alennukset käytössä
+- [ ] Varatut instanssit hankittu
 - [ ] Kustannusseurannan kojelauta
-- [ ] Säännölliset kustannusarvioinnit
+- [ ] Säännölliset kustannuskatselmukset
 
-### Säädösten noudattaminen ✅
-- [ ] Tietojen sijaintivaatimukset täytetty
-- [ ] Tarkastuslokitus otettu käyttöön
-- [ ] Noudattamispolitiikat sovellettu
-- [ ] Turvallisuusperuslinjat toteutettu
+### Säännösten noudattaminen ✅
+- [ ] Datan sijaintivaatimukset täytetty
+- [ ] Tarkastuslokitus käytössä
+- [ ] Vaatimustenmukaisuuskäytännöt otettu käyttöön
+- [ ] Turvallisuuden perusasetukset toteutettu
 - [ ] Säännölliset turvallisuusarvioinnit
-- [ ] Häiriötilanteiden toimintasuunnitelma
+- [ ] Tapahtumien käsittelysuunnitelma
 
-## Suorituskykyvertailut
+## Suorituskyvyn vertailuarvot
 
 ### Tyypilliset tuotantomittarit
 
 | Mittari | Tavoite | Seuranta |
 |--------|--------|------------|
 | **Vasteaika** | < 2 sekuntia | Application Insights |
-| **Käytettävyys** | 99.9% | Uptime monitoring |
+| **Käytettävyys** | 99.9% | Käyttöajan seuranta |
 | **Virheprosentti** | < 0.1% | Sovelluslokit |
-| **Token-käyttö** | < $500/month | Cost management |
+| **Token-käyttö** | < $500/kk | Kustannusten hallinta |
 | **Samanaikaiset käyttäjät** | 1000+ | Kuormitustestaus |
-| **Palautumisaika** | < 1 tunti | Disaster recovery tests |
+| **Palautumisaika** | < 1 tunti | Toipumistestit |
 
 ### Kuormitustestaus
 
@@ -928,37 +928,40 @@ python scripts/load_test.py \
 
 ## 🤝 Yhteisön parhaat käytännöt
 
-Perustuu Microsoft Foundry Discord -yhteisön palautteeseen:
+Perustuen Microsoft Foundry Discord -yhteisön palautteeseen:
 
 ### Yhteisön tärkeimmät suositukset:
 
-1. **Aloita pienestä, skaalaa vähitellen**: Aloita perus-SKU:lla ja skaalaa käyttöasteen perusteella
-2. **Valvo kaikkea**: Ota kattava valvonta käyttöön heti alusta alkaen
-3. **Automatisoi turvallisuus**: Käytä infrastruktuuria koodina johdonmukaisen turvallisuuden varmistamiseksi
-4. **Testaa perusteellisesti**: Sisällytä AI-kohtaiset testit työnkulkuusi
-5. **Suunnittele kustannuksia varten**: Seuraa token-käyttöä ja ota budjetti-ilmoitukset käyttöön varhain
+1. **Aloita pienesti, skaalaa asteittain**: Aloita perus-SKUilla ja skaalaa käyttömäärän perusteella
+2. **Valvo kaikkea**: Ota kattava seuranta käyttöön heti alusta lähtien
+3. **Automatisoi turvallisuus**: Käytä infrastruktuuria koodina yhdenmukaisen turvallisuuden varmistamiseksi
+4. **Testaa perusteellisesti**: Sisällytä tekoälykohtaiset testit putkeesi
+5. **Suunnittele kustannukset**: Seuraa token-käyttöä ja määritä budjettihälytykset ajoissa
 
-### Yleisiä sudenkuoppia, joita tulee välttää:
+### Yleiset sudenkuopat, joita välttää:
 
 - ❌ API-avainten kovakoodaus koodiin
-- ❌ Asianmukaisen valvonnan puuttuminen
+- ❌ Oikean seurannan puuttuminen
 - ❌ Kustannusoptimoinnin laiminlyönti
-- ❌ Virhetilojen testaamisen laiminlyönti
-- ❌ Käyttöönotto ilman terveystarkastuksia
+- ❌ Virhetilanteiden testaamatta jättäminen
+- ❌ Julkaiseminen ilman terveystarkastuksia
 
-## AZD AI CLI -komennot ja laajennukset
+## AZD AI -CLI-komennot ja laajennukset
 
-AZD sisältää kasvavan joukon AI-kohtaisia komentoja ja laajennuksia, jotka virtaviivaistavat tuotantotason AI-työnkulkuja. Nämä työkalut yhdistävät paikallisen kehityksen ja tuotantokäytön välisen aukon AI-työkuormissa.
+AZD sisältää kasvavan joukon tekoälykohtaisia komentoja ja laajennuksia, jotka virtaviivaistavat tuotantotekoälytyönkulkuja. Nämä työkalut yhdistävät paikallisen kehityksen ja tuotantokäyttöönoton tekoälykuormille.
 
-### AZD-laajennukset AI:lle
+### AZD-laajennukset tekoälylle
 
-AZD käyttää laajennusjärjestelmää lisätäkseen AI-kohtaisia kyvykkyyksiä. Asenna ja hallitse laajennuksia:
+AZD käyttää laajennusjärjestelmää lisätäkseen tekoälykohtaisia ominaisuuksia. Asenna ja hallinnoi laajennuksia seuraavasti:
 
 ```bash
 # Luettele kaikki saatavilla olevat laajennukset (mukaan lukien tekoäly)
 azd extension list
 
-# Asenna Foundry Agents -laajennus
+# Tarkastele asennettujen laajennusten tietoja
+azd extension show azure.ai.agents
+
+# Asenna Foundryn agenttien laajennus
 azd extension install azure.ai.agents
 
 # Asenna hienosäätölaajennus
@@ -971,81 +974,81 @@ azd extension install azure.ai.models
 azd extension upgrade --all
 ```
 
-**Saatavilla olevat AI-laajennukset:**
+**Saatavilla olevat tekoälylaajennukset:**
 
 | Laajennus | Tarkoitus | Tila |
 |-----------|---------|--------|
 | `azure.ai.agents` | Foundry Agent Service -palvelun hallinta | Esikatselu |
 | `azure.ai.finetune` | Foundry-mallin hienosäätö | Esikatselu |
 | `azure.ai.models` | Foundry-kustomoidut mallit | Esikatselu |
-| `azure.coding-agent` | Koodaamisagentin konfigurointi | Saatavilla |
+| `azure.coding-agent` | Koodausagentin konfigurointi | Saatavilla |
 
 ### Agenttiprojektien alustaminen komennolla `azd ai agent init`
 
-Komento `azd ai agent init` luo valmiin tuotantovalmiin AI-agenttiprojektin, joka on integroitu Microsoft Foundry Agent Serviceen:
+Komento `azd ai agent init` luo tuotantovalmiin tekoälyagenttiprojektin, joka on integroitu Microsoft Foundry Agent Serviceen:
 
 ```bash
-# Alusta uusi agenttiprojekti agenttimanifestista
+# Alusta uusi agenttiprojekti agentin manifestista
 azd ai agent init -m <manifest-path-or-uri>
 
-# Alusta ja kohdenna tiettyyn Foundry-projektiin
+# Alusta ja valitse tietty Foundry-projekti
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
 # Alusta mukautetulla lähdekansiolla
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
-# Aseta Container Apps isännäksi
+# Valitse Container Apps isännäksi
 azd ai agent init -m agent-manifest.yaml --host containerapp
 ```
 
-**Tärkeät valitsimet:**
+**Tärkeimmät valitsimet:**
 
 | Valitsin | Kuvaus |
 |------|-------------|
-| `-m, --manifest` | Polku tai URI agentin manifestiin lisättäväksi projektiisi |
-| `-p, --project-id` | Olemassa oleva Microsoft Foundry Project ID azd-ympäristöllesi |
-| `-s, --src` | Hakemisto agenttimäärittelyn lataamista varten (oletus `src/<agent-id>`) |
-| `--host` | Ylikirjoita oletushost (esim. `containerapp`) |
+| `-m, --manifest` | Polku tai URI agentin manifestille, joka lisätään projektiisi |
+| `-p, --project-id` | Olemassa olevan Microsoft Foundry -projektin tunnus azd-ympäristöllesi |
+| `-s, --src` | Hakemisto agentin määritelmän lataamista varten (oletus `src/<agent-id>`) |
+| `--host` | Ylikirjoita oletusisäntä (esim. `containerapp`) |
 | `-e, --environment` | Käytettävä azd-ympäristö |
 
-**Tuotantovinkki**: Käytä `--project-id`-valitsinta yhdistääksesi suoraan olemassa olevaan Foundry-projektiin, pitäen agenttikoodisi ja pilviresurssit linkitettyinä alusta alkaen.
+**Tuotantovinkki**: Käytä `--project-id`-valitsinta yhdistääksesi suoraan olemassa olevaan Foundry-projektiin, jolloin agenttikoodisi ja pilviresurssit ovat linkitetty heti alusta lähtien.
 
 ### Model Context Protocol (MCP) komennolla `azd mcp`
 
-AZD sisältää sisäänrakennetun MCP-palvelimen tuen (Alpha), joka mahdollistaa AI-agenttien ja työkalujen vuorovaikutuksen Azure-resurssiesi kanssa standardoidun protokollan kautta:
+AZD sisältää sisäänrakennetun MCP-palvelintuen (Alpha), joka mahdollistaa tekoälyagenttien ja -työkalujen vuorovaikutuksen Azure-resurssiesi kanssa standardoidun protokollan kautta:
 
 ```bash
-# Käynnistä MCP-palvelin projektillesi
+# Käynnistä projektisi MCP-palvelin
 azd mcp start
 
-# Hallitse työkalun suostumusta MCP-toimintoihin
-azd mcp consent
+# Tarkista nykyiset Copilotin suostumussäännöt työkalujen suorittamista varten
+azd copilot consent list
 ```
 
-MCP-palvelin paljastaa azd-projektisi kontekstin — ympäristöt, palvelut ja Azure-resurssit — AI-pohjaisille kehitystyökaluille. Tämä mahdollistaa:
+MCP-palvelin paljastaa azd-projektisi kontekstin—ympäristöt, palvelut ja Azure-resurssit—tekoälyllä tehostetuille kehitystyökaluille. Tämä mahdollistaa:
 
-- **AI-avusteiset käyttöönotot**: Anna koodausagenteille mahdollisuus kysyä projektisi tilaa ja laukaista käyttöönottoja
-- **Resurssien löytäminen**: AI-työkalut voivat löytää, mitä Azure-resursseja projektisi käyttää
-- **Ympäristönhallinta**: Agentit voivat vaihtaa dev/staging/production -ympäristöjen välillä
+- **Tekoälyavusteinen käyttöönotto**: Anna koodausagenteille mahdollisuus kysyä projektisi tilaa ja käynnistää käyttöönottoja
+- **Resurssien löytäminen**: Tekoälytyökalut voivat löytää, mitä Azure-resursseja projektisi käyttää
+- **Ympäristöjen hallinta**: Agentit voivat vaihtaa kehitys/staging/tuotanto-ympäristöjen välillä
 
 ### Infrastruktuurin generointi komennolla `azd infra generate`
 
-Tuotantotason AI-työkuormille voit generoida ja mukauttaa Infrastructure as Code -määrittelyitä sen sijaan, että luottaisit automaattiseen provisiointiin:
+Tuotantotekoälykuormille voit generoida ja mukauttaa Infrastructure as Code -malleja sen sijaan, että luottaisit automaattiseen provisiointiin:
 
 ```bash
-# Luo Bicep/Terraform-tiedostot projektisi määritelmän perusteella
+# Luo Bicep/Terraform-tiedostot projektimääritelmästäsi
 azd infra generate
 ```
 
 Tämä kirjoittaa IaC:n levylle, jotta voit:
-- Tarkistaa ja auditoida infrastruktuurin ennen käyttöönottoa
-- Lisätä mukautettuja turvallisuuspolitiikkoja (verkkosäännöt, yksityiset päätepisteet)
-- Integroida olemassa oleviin IaC-arviointiprosesseihin
-- Versionhallita infrastruktuurin muutoksia erillään sovelluskoodista
+- Tarkastella ja auditoida infrastruktuuria ennen käyttöönottoa
+- Lisätä mukautettuja turvallisuuskäytäntöjä (verkkosäännöt, yksityiset päätepisteet)
+- Integroida olemassa oleviin IaC-tarkastusprosesseihin
+- Versioida infrastruktuurimuutokset erillään sovelluskoodista
 
-### Tuotannon elinkaaron hookit
+### Tuotantokierron koukut
 
-AZD-hookit antavat mahdollisuuden lisätä mukautettua logiikkaa jokaiseen käyttöönoton elinkaaren vaiheeseen — kriittistä tuotantotason AI-työnkuluissa:
+AZD-koukut antavat mahdollisuuden lisätä mukautettua logiikkaa jokaisessa käyttöönoton elinkaaren vaiheessa—kriittistä tuotantotekoälytyönkuluissa:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1078,63 +1081,63 @@ services:
 azd hooks run predeploy
 ```
 
-**Suositellut tuotantohookit AI-työkuormille:**
+**Suositellut tuotantokoukut tekoälytyökuormille:**
 
-| Hook | Käyttötapaus |
+| Koukku | Käyttötapaus |
 |------|----------|
-| `preprovision` | Vahvista tilauksen kiintiöt AI-mallien kapasiteetille |
-| `postprovision` | Konfiguroi yksityiset päätepisteet, ota mallipainot käyttöön |
-| `predeploy` | Suorita AI-turvallisuustestit, validoi prompt-mallit |
-| `postdeploy` | Suorita smoke-testit agentin vastauksille, varmista malliyhteydet |
+| `preprovision` | Vahvista tilauksen kvotat AI-mallien kapasiteetille |
+| `postprovision` | Konfiguroi yksityisiä päätepisteitä, ota mallipainot käyttöön |
+| `predeploy` | Suorita tekoälyturvatestit, validoi kehotteiden mallit |
+| `postdeploy` | Tee perustoimintotesti agentin vastauksille, varmista malliyhteydet |
 
-### CI/CD-putken konfigurointi
+### CI/CD-putken kokoonpano
 
-Käytä `azd pipeline config` -komentoa yhdistääksesi projektisi GitHub Actionsiin tai Azure Pipelinesiin turvallisella Azure-autentikoinnilla:
+Käytä `azd pipeline config` -komentoa yhdistääksesi projektisi GitHub Actionsiin tai Azure Pipelinesiin turvallisen Azure-todennuksen avulla:
 
 ```bash
 # Määritä CI/CD-putki (interaktiivinen)
 azd pipeline config
 
-# Määritä tietyn tarjoajan avulla
+# Määritä tietyn palveluntarjoajan kanssa
 azd pipeline config --provider github
 ```
 
 Tämä komento:
-- Luo service principalin vähimmän oikeuden periaatteella
+- Luo palveluperiaatteen (service principal) vähimmän etuoikeuden pääsyllä
 - Konfiguroi federoidut tunnistetiedot (ei tallennettuja salaisuuksia)
-- Generoi tai päivittää putken määrittelytiedoston
-- Asettaa tarvittavat ympäristömuuttujat CI/CD-järjestelmääsi
+- Generoi tai päivittää putkikuvaustiedostosi
+- Asettaa vaaditut ympäristömuuttujat CI/CD-järjestelmääsi
 
 **Tuotantotyönkulku pipeline-konfiguraatiolla:**
 
 ```bash
-# 1. Ota tuotantoympäristö käyttöön
+# 1. Määritä tuotantoympäristö
 azd env new production
 azd env set AZURE_OPENAI_CAPACITY 100
 
 # 2. Määritä putkisto
 azd pipeline config --provider github
 
-# 3. Putkisto suorittaa azd deploy -komennon aina, kun main-haaraan tehdään push
+# 3. Putkisto suorittaa azd deploy -komennon aina, kun mainiin pusketaan
 ```
 
 ### Komponenttien lisääminen komennolla `azd add`
 
-Lisää inkrementaalisesti Azure-palveluja olemassa olevaan projektiin:
+Lisää vaiheittain Azure-palveluita olemassa olevaan projektiin:
 
 ```bash
 # Lisää uusi palvelukomponentti interaktiivisesti
 azd add
 ```
 
-Tämä on erityisen hyödyllinen tuotantotason AI-sovellusten laajentamisessa — esimerkiksi vektorihakupalvelun, uuden agenttipäätepisteen tai valvontakomponentin lisääminen olemassa olevaan käyttöönottoon.
+Tämä on erityisen hyödyllistä tuotantotekoälysovellusten laajentamiseen—for example, adding a vector search service, a new agent endpoint, or a monitoring component to an existing deployment.
 
 ## Lisäresurssit
-- **Azure Well-Architected Framework**: [AI-työkuormien ohjeistus](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Microsoft Foundry -dokumentaatio**: [Viralliset ohjeet](https://learn.microsoft.com/azure/ai-studio/)
-- **Yhteisön mallipohjat**: [Azure Samples](https://github.com/Azure-Samples)
-- **Discord-yhteisö**: [#Azure channel](https://discord.gg/microsoft-azure)
-- **Agenttitaidot Azurelle**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 avointa agenttitaitoa Azure AI:lle, Foundrylle, käyttöönottoon, kustannusoptimointiin ja diagnostiikkaan. Asenna editoriisi:
+- **Azure Well-Architected Framework**: [AI workload guidance](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Microsoft Foundry Documentation**: [Official docs](https://learn.microsoft.com/azure/ai-studio/)
+- **Community Templates**: [Azure Samples](https://github.com/Azure-Samples)
+- **Discord Community**: [#Azure channel](https://discord.gg/microsoft-azure)
+- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 avointa agenttitaitoa Azure AI:lle, Foundrylle, käyttöönottoon, kustannusoptimointiin ja diagnostiikkaan. Asenna editoriisi:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
@@ -1144,15 +1147,15 @@ Tämä on erityisen hyödyllinen tuotantotason AI-sovellusten laajentamisessa �
 **Lukujen navigointi:**
 - **📚 Kurssin etusivu**: [AZD For Beginners](../../README.md)
 - **📖 Nykyinen luku**: Luku 8 - Tuotanto- ja yritysmallit
-- **⬅️ Edellinen luku**: [Luku 7: Vianmääritys](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Edellinen luku**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
 - **⬅️ Myös liittyvää**: [AI Workshop Lab](ai-workshop-lab.md)
 - **� Kurssi suoritettu**: [AZD For Beginners](../../README.md)
 
-**Muista**: tuotantotason tekoälytyökuormat vaativat huolellista suunnittelua, seurantaa ja jatkuvaa optimointia. Aloita näillä malleilla ja mukauta ne omiin vaatimuksiisi.
+**Muista**: Tuotannon AI-työkuormat vaativat huolellista suunnittelua, valvontaa ja jatkuvaa optimointia. Aloita näillä malleilla ja mukauta niitä omiin vaatimuksiisi.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vastuuvapauslauseke**:
-Tämä asiakirja on käännetty käyttäen tekoälykäännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä on pidettävä auktoritatiivisena lähteenä. Tärkeää tietoa varten suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä johtuvista väärinymmärryksistä tai virheellisistä tulkinnoista.
+**Disclaimer**:
+Tämä asiakirja on käännetty tekoälykäännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulee pitää auktoritatiivisena lähteenä. Kriittisten tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai virheellisistä tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

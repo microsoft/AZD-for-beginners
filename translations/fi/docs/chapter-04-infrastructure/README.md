@@ -1,19 +1,21 @@
-# Luku 4: Infrastruktuuri koodina (IaC) & Käyttöönotto
+# Luku 4: Infrastruktuuri koodina ja käyttöönotto
 
-**📚 Kurssi**: [AZD Aloittelijoille](../../README.md) | **⏱️ Kesto**: 1-1.5 tuntia | **⭐ Vaikeustaso**: Keskitaso
+**📚 Kurssi**: [AZD For Beginners](../../README.md) | **⏱️ Kesto**: 1–1,5 tuntia | **⭐ Vaativuus**: Keskitaso
 
 ---
 
-## Yhteenveto
+## Yleiskatsaus
 
-Tässä luvussa käsitellään Infrastructure as Code (IaC) -malleja Bicep-malleilla, resurssien provisiointia ja käyttöönotto-strategioita Azure Developer CLI:n avulla.
+Tässä luvussa käsitellään Infrastructure as Code (IaC) -malleja Bicep-mallien avulla, resurssien provisiointia sekä käyttöönotto-strategioita Azure Developer CLI:n avulla.
+
+> Vahvistettu `azd 1.23.12`:lla maaliskuussa 2026.
 
 ## Oppimistavoitteet
 
-Suoritettuasi tämän luvun, osaat:
-- Ymmärtää Bicep-mallin rakenteen ja syntaksin
+Tämän luvun suorittamisen jälkeen osaat:
+- Ymmärtää Bicep-mallien rakenteen ja syntaksin
 - Provisionoida Azure-resursseja komennolla `azd provision`
-- Ota sovellus käyttöön komennolla `azd deploy`
+- Ota sovellukset käyttöön komennolla `azd deploy`
 - Toteuttaa blue-green- ja rolling-käyttöönotto-strategioita
 
 ---
@@ -23,11 +25,11 @@ Suoritettuasi tämän luvun, osaat:
 | # | Oppitunti | Kuvaus | Aika |
 |---|--------|-------------|------|
 | 1 | [Resurssien provisiointi](provisioning.md) | Azure-resurssien hallinta AZD:llä | 45 min |
-| 2 | [Käyttöönotto-opas](deployment-guide.md) | Sovelluksen käyttöönoton strategiat | 45 min |
+| 2 | [Käyttöönotto-opas](deployment-guide.md) | Sovelluksen käyttöönotto-strategiat | 45 min |
 
 ---
 
-## 🚀 Nopea aloitus
+## 🚀 Pika-aloitus
 
 ```bash
 # Alusta mallipohjasta
@@ -65,13 +67,13 @@ my-project/
 
 ---
 
-## 🔧 Olennaiset komennot
+## 🔧 Tärkeät komennot
 
 | Komento | Kuvaus |
 |---------|-------------|
 | `azd init` | Alusta projekti |
 | `azd provision` | Luo Azure-resursseja |
-| `azd deploy` | Ota sovellus käyttöön |
+| `azd deploy` | Ota sovelluskoodi käyttöön |
 | `azd up` | provisiointi + käyttöönotto |
 | `azd down` | Poista kaikki resurssit |
 
@@ -88,13 +90,13 @@ my-project/
 
 ## 📖 Aiheeseen liittyvät resurssit
 
-- [Tarkistukset ennen käyttöönottoa](../chapter-06-pre-deployment/README.md)
-- [Container App -esimerkit](../../examples/container-app/README.md)
+- [Ennen käyttöönottoa tehtävät tarkastukset](../chapter-06-pre-deployment/README.md)
+- [Container-sovellus-esimerkit](../../examples/container-app/README.md)
 - [Tietokantasovellus-esimerkki](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vastuuvapauslauseke:
-Tämä asiakirja on käännetty tekoälykäännöspalvelulla Co-op Translator (https://github.com/Azure/co-op-translator). Pyrimme tarkkuuteen, mutta automaattisissa käännöksissä voi esiintyä virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulee pitää määräävänä lähteenä. Tärkeiden tietojen osalta suosittelemme ammattimaisen ihmiskääntäjän tekemää käännöstä. Emme vastaa tämän käännöksen käytöstä aiheutuvista väärinkäsityksistä tai virhetulkinnoista.
+**Vastuuvapauslauseke**:
+Tämä asiakirja on käännetty tekoälypohjaisella käännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisessä kielessä tulee pitää auktoriteettina. Kriittisen tiedon osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä johtuvista väärinymmärryksistä tai virhetulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

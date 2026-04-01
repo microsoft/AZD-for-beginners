@@ -1,89 +1,89 @@
 # Deploying a Microsoft SQL Database and Web App with AZD
 
-⏱️ **Arvioitu aika**: 20–30 minuuttia | 💰 **Arvioidut kustannukset**: ~15–25 $/kk | ⭐ **Monimutkaisuus**: Keskitaso
+⏱️ **Arvioitu aika**: 20–30 minuuttia | 💰 **Arvioidut kustannukset**: ~15–25 $/kk | ⭐ **Vaikeustaso**: Keskitaso
 
-Tämä **täydellinen, toimiva esimerkki** näyttää, miten käyttää [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) -työkalua Python Flask -web-sovelluksen ja Microsoft SQL -tietokannan julkaisuun Azureen. Kaikki koodi on mukana ja testattu—ei ulkoisia riippuvuuksia.
+Tämä **täydellinen, toimiva esimerkki** näyttää, miten voit käyttää [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) -työkalua Python Flask -verkkosovelluksen ja Microsoft SQL -tietokannan käyttöönottoon Azureen. Kaikki koodi sisältyy ja on testattu—ei ulkoisia riippuvuuksia vaadita.
 
 ## Mitä opit
 
-Tämän esimerkin suorittamalla:
-- Julkaiset monikerroksisen sovelluksen (web-sovellus + tietokanta) infrastruktuurina-koodina
-- Määrität turvalliset tietokantayhteydet ilman kovakoodattuja salaisuuksia
-- Seuraat sovelluksen terveyttä Application Insightsin avulla
-- Hallitset Azuren resursseja tehokkaasti azd CLI:llä
-- Seuraat Azuren parhaita käytäntöjä turvallisuudessa, kustannusoptimoinnissa ja observabilityssä
+Suorittamalla tämän esimerkin opit:
+- Ottamaan käyttöön monikerroksisen sovelluksen (web-sovellus + tietokanta) infrastruktuuri-koodina
+- Konfiguroimaan turvalliset tietokantayhteydet ilman kovakoodattuja salaisuuksia
+- Valvomaan sovelluksen terveyttä Application Insightsilla
+- Hallitsemaan Azure-resursseja tehokkaasti AZD CLI:llä
+- Noudattamaan Azuren parhaita käytäntöjä tietoturvan, kustannusten optimoinnin ja havaittavuuden osalta
 
-## Tapausseloste
-- **Web-sovellus**: Python Flask REST API tietokantayhteydellä
-- **Tietokanta**: Azure SQL Database esimerkkidatalla
-- **Infrastruktuuri**: Provisionoidaan Bicepillä (modulaariset, uudelleenkäytettävät template:t)
-- **Julkaisu**: Täysin automatisoitu `azd`-komennoilla
+## Tilannekuvaus
+- **Web App**: Python Flask REST API tietokantayhteydellä
+- **Database**: Azure SQL Database esimerkkidatalla
+- **Infrastructure**: Provisionoitu Bicepillä (modulaariset, uudelleenkäytettävät templatet)
+- **Deployment**: Täysin automatisoitu `azd`-komennoilla
 - **Monitoring**: Application Insights lokitukseen ja telemetriaan
 
 ## Esivaatimukset
 
-### Vaaditut työkalut
+### Tarvittavat työkalut
 
-Ennen aloittamista varmista, että sinulla on asennettuna nämä työkalut:
+Ennen aloittamista varmista, että sinulla on seuraavat työkalut asennettuna:
 
 1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (versio 2.50.0 tai uudempi)
    ```sh
    az --version
-   # Odotettu tulostus: azure-cli 2.50.0 tai uudempi
+   # Odotettu tuloste: azure-cli 2.50.0 tai uudempi
    ```
 
 2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (versio 1.0.0 tai uudempi)
    ```sh
    azd version
-   # Odotettu tuloste: azd-versio 1.0.0 tai uudempi
+   # Odotettu tulos: azd versio 1.0.0 tai uudempi
    ```
 
 3. **[Python 3.8+](https://www.python.org/downloads/)** (paikalliseen kehitykseen)
    ```sh
    python --version
-   # Odotettu tuloste: Python 3.8 tai uudempi
+   # Odotettu tulostus: Python 3.8 tai uudempi
    ```
 
 4. **[Docker](https://www.docker.com/get-started)** (valinnainen, paikalliseen konttikehitykseen)
    ```sh
    docker --version
-   # Odotettu tulostus: Docker-versio 20.10 tai uudempi
+   # Odotettu tulostus: Dockerin versio 20.10 tai uudempi
    ```
 
 ### Azure-vaatimukset
 
 - Aktiivinen **Azure-tilaus** ([luo ilmainen tili](https://azure.microsoft.com/free/))
-- Oikeudet luoda resursseja tililläsi
+- Oikeudet resurssien luomiseen tilauksessasi
 - **Owner** tai **Contributor** -rooli tilauksessa tai resurssiryhmässä
 
-### Tietopohja
+### Osaamisvaatimukset
 
 Tämä on **keskitasoinen** esimerkki. Sinun tulisi tuntea:
-- Peruskäyttö komentorivillä
-- Pilvipalvelun peruskäsitteet (resurssit, resurssiryhmät)
-- Peruskäsitys web-sovelluksista ja tietokannoista
+- Perustason komentorivin käyttö
+- Pilvipalveluiden peruskäsitteet (resurssit, resurssiryhmät)
+- Perusymmärrys web-sovelluksista ja tietokannoista
 
-**Uusi AZD:lle?** Aloita [Getting Started guide](../../docs/chapter-01-foundation/azd-basics.md) -oppaasta ensin.
+**Uusi AZD:lle?** Aloita [Aloitusopas](../../docs/chapter-01-foundation/azd-basics.md) -osiosta ensin.
 
 ## Arkkitehtuuri
 
-Tämä esimerkki julkaisee kaksikerroksisen arkkitehtuurin web-sovelluksella ja SQL-tietokannalla:
+Tämä esimerkki ottaa käyttöön kaksikerroksisen arkkitehtuurin web-sovelluksella ja SQL-tietokannalla:
 
 ```mermaid
 graph TD
-    Browser[Käyttäjän selain] <--> WebApp[Azure Web App<br/>Flask API<br/>/health<br/>/products]
-    WebApp -- Suojattu yhteys<br/>Salattu --> SQL[Azure SQL -tietokanta<br/>Tuotteet-taulu<br/>Esimerkkidata]
+    Browser[Käyttäjän selain] <--> WebApp[Azure Web App<br/>Flask-rajapinta<br/>/health<br/>/products]
+    WebApp -- Suojattu yhteys<br/>Salattu --> SQL[Azure SQL Database<br/>Products-taulu<br/>Esimerkkidata]
 ```
 **Resurssien käyttöönotto:**
 - **Resource Group**: Kaikkien resurssien säilö
-- **App Service Plan**: Linux-pohjainen hosting (B1-taso kustannustehokkuuden vuoksi)
-- **Web App**: Python 3.11 runtime Flask-sovelluksella
-- **SQL Server**: Hallittu tietokantapalvelin, TLS 1.2 vähintään
+- **App Service Plan**: Linux-pohjainen hosting (B1-taso kustannustehokkuutta varten)
+- **Web App**: Python 3.11 -ympäristö Flask-sovelluksella
+- **SQL Server**: Hallinnoitu tietokantapalvelin, vähintään TLS 1.2
 - **SQL Database**: Basic-taso (2GB, sopii kehitykseen/testaukseen)
-- **Application Insights**: Monitorointi ja lokitus
-- **Log Analytics Workspace**: Keskitetty lokisäilytys
+- **Application Insights**: Valvonta ja lokitus
+- **Log Analytics Workspace**: Keskitetty lokitallennus
 
-**Analogia**: Ajattele tätä ravintolana (web-sovellus) ja walk-in -pakastimena (tietokanta). Asiakkaat tilaavat ruokalistalta (API-päätepisteet), ja keittiö (Flask-sovellus) hakee ainesosia (dataa) pakastimesta. Ravintolan johtaja (Application Insights) seuraa kaikkea mitä tapahtuu.
+**Analogiana**: Ajattele tätä kuin ravintolaa (web-sovellus) ja keittiön kylmävarastoa (tietokanta). Asiakkaat tilaavat ruokalistalta (API-päätepisteet), ja keittiö (Flask-sovellus) hakee ainekset (data) kylmävarastosta. Ravintolapäällikkö (Application Insights) seuraa kaikkea tapahtuvaa.
 
 ## Kansiorakenne
 
@@ -115,12 +115,12 @@ examples/database-app/
 ```
 
 **Mitä kukin tiedosto tekee:**
-- **azure.yaml**: Kertoo AZD:lle mitä julkaista ja mihin
+- **azure.yaml**: Ilmoittaa AZD:lle mitä ottaa käyttöön ja mihin
 - **infra/main.bicep**: Orkestroi kaikki Azure-resurssit
-- **infra/resources/*.bicep**: Yksittäiset resurssimäärittelyt (modulaarisia uudelleenkäyttöön)
-- **src/web/app.py**: Flask-sovellus tietokantalogikalla
-- **requirements.txt**: Python-riippuvuudet
-- **Dockerfile**: Kontitusohjeet julkaisuun
+- **infra/resources/*.bicep**: Yksittäiset resurssimäärittelyt (modulaarisia uudelleenkäyttöä varten)
+- **src/web/app.py**: Flask-sovellus tietokantalogiiikalla
+- **requirements.txt**: Python-pakettien riippuvuudet
+- **Dockerfile**: Kontitusohjeet käyttöönottoa varten
 
 ## Pikakäynnistys (vaihe vaiheelta)
 
@@ -131,21 +131,21 @@ git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/database-app
 ```
 
-**✓ Onnistumisen tarkistus**: Varmista, että näet `azure.yaml` ja `infra/`-kansion:
+**✓ Onnistumistarkistus**: Varmista, että näet `azure.yaml` ja `infra/`-kansion:
 ```sh
 ls
 # Odotetaan: README.md, azure.yaml, infra/, src/
 ```
 
-### Vaihe 2: Kirjaudu Azureen
+### Vaihe 2: Todennus Azureen
 
 ```sh
 azd auth login
 ```
 
-Tämä avaa selaimen Azuren todennusta varten. Kirjaudu sisään Azure-tunnuksillasi.
+Tämä avaa selaimesi Azuren todennusta varten. Kirjaudu sisään Azure-kirjautumistiedoillasi.
 
-**✓ Onnistumisen tarkistus**: Sinun pitäisi nähdä:
+**✓ Onnistumistarkistus**: Sinun pitäisi nähdä:
 ```
 Logged in to Azure.
 ```
@@ -156,14 +156,14 @@ Logged in to Azure.
 azd init
 ```
 
-**Mitä tapahtuu**: AZD luo paikallisen konfiguraation julkaisuasi varten.
+**Mitä tapahtuu**: AZD luo paikallisen konfiguraation käyttöönotollesi.
 
-**Kehoteet joita näet**:
+**Kehoteet, jotka näet**:
 - **Environment name**: Anna lyhyt nimi (esim. `dev`, `myapp`)
 - **Azure subscription**: Valitse tilauksesi listasta
 - **Azure location**: Valitse alue (esim. `eastus`, `westeurope`)
 
-**✓ Onnistumisen tarkistus**: Sinun pitäisi nähdä:
+**✓ Onnistumistarkistus**: Sinun pitäisi nähdä:
 ```
 SUCCESS: New project initialized!
 ```
@@ -174,19 +174,19 @@ SUCCESS: New project initialized!
 azd provision
 ```
 
-**Mitä tapahtuu**: AZD ottaa käyttöön kaikki infrastruktuurit (kesto 5–8 minuuttia):
+**Mitä tapahtuu**: AZD ottaa käyttöön kaiken infrastruktuurin (kestää 5–8 minuuttia):
 1. Luo resurssiryhmän
 2. Luo SQL Serverin ja tietokannan
 3. Luo App Service Planin
 4. Luo Web Appin
 5. Luo Application Insightsin
-6. Konfiguroi verkotus ja turvallisuus
+6. Konfiguroi verkotus ja tietoturva
 
-**Sinulta saatetaan kysyä**:
+**Sinulta kysytään**:
 - **SQL admin username**: Anna käyttäjänimi (esim. `sqladmin`)
 - **SQL admin password**: Anna vahva salasana (tallenna tämä!)
 
-**✓ Onnistumisen tarkistus**: Sinun pitäisi nähdä:
+**✓ Onnistumistarkistus**: Sinun pitäisi nähdä:
 ```
 SUCCESS: Your application was provisioned in Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
@@ -195,20 +195,20 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 
 **⏱️ Aika**: 5–8 minuuttia
 
-### Vaihe 5: Julkaise sovellus
+### Vaihe 5: Ota sovellus käyttöön
 
 ```sh
 azd deploy
 ```
 
-**Mitä tapahtuu**: AZD rakentaa ja julkaisee Flask-sovelluksesi:
+**Mitä tapahtuu**: AZD rakentaa ja ottaa Flask-sovelluksesi käyttöön:
 1. Pakkaa Python-sovellus
 2. Rakentaa Docker-kontin
 3. Työntää sen Azure Web Appiin
 4. Alustaa tietokannan esimerkkidatalla
 5. Käynnistää sovelluksen
 
-**✓ Onnistumisen tarkistus**: Sinun pitäisi nähdä:
+**✓ Onnistumistarkistus**: Sinun pitäisi nähdä:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
@@ -223,9 +223,9 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 azd browse
 ```
 
-Tämä avaa julkaistun web-sovelluksesi selaimeen osoitteeseen `https://app-<unique-id>.azurewebsites.net`
+Tämä avaa käyttöön otetun web-sovelluksesi selaimessa osoitteessa `https://app-<unique-id>.azurewebsites.net`
 
-**✓ Onnistumisen tarkistus**: Sinun pitäisi nähdä JSON-tuloste:
+**✓ Onnistumistarkistus**: Sinun pitäisi nähdä JSON-tulostus:
 ```json
 {
   "message": "Welcome to the Database App API",
@@ -240,7 +240,7 @@ Tämä avaa julkaistun web-sovelluksesi selaimeen osoitteeseen `https://app-<uni
 
 ### Vaihe 7: Testaa API-päätepisteet
 
-**Health Check** (vahvista tietokantayhteys):
+**Health Check** (varmista tietokantayhteys):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/health
 ```
@@ -277,36 +277,36 @@ curl https://app-<your-id>.azurewebsites.net/products
 curl https://app-<your-id>.azurewebsites.net/products/1
 ```
 
-**✓ Onnistumisen tarkistus**: Kaikki päätepisteet palauttavat JSON-dataa ilman virheitä.
+**✓ Onnistumistarkistus**: Kaikki päätepisteet palauttavat JSON-dataa ilman virheitä.
 
 ---
 
-**🎉 Onnittelut!** Olet onnistuneesti ottanut web-sovelluksen ja tietokannan käyttöön Azureen käyttäen AZD:tä.
+**🎉 Onnittelut!** Olet onnistuneesti ottanut web-sovelluksen tietokannan kanssa käyttöön Azureen käyttäen AZD:tä.
 
 ## Konfiguraation syväluotaus
 
 ### Ympäristömuuttujat
 
-Salaisuuksia hallitaan turvallisesti Azure App Servicen konfiguraation kautta—**älä koskaan kovakoodaa lähdekoodiin**.
+Salaisuuksia hallitaan turvallisesti Azure App Servicen konfiguraatiolla—**älä koskaan kovakoodaa lähdekoodiin**.
 
-**Automaattisesti AZD:n toimesta konfiguroitavat**:
-- `SQL_CONNECTION_STRING`: Tietokantayhteys salatuilla tunnistetiedoilla
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Monitoroinnin telemetriapäätepiste
+**AZD konfiguroi automaattisesti**:
+- `SQL_CONNECTION_STRING`: Tietokantayhteys salatuilla tunnuksilla
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Telemetrian seurantaosoite
 - `SCM_DO_BUILD_DURING_DEPLOYMENT`: Mahdollistaa riippuvuuksien automaattisen asennuksen
 
-**Missä salaisuudet tallennetaan**:
-1. `azd provision`-komennon aikana annat SQL-tilitiedot turvakyselyllä
-2. AZD tallentaa nämä paikalliseen `.azure/<env-name>/.env`-tiedostoon (git-ignored)
-3. AZD injektoi ne Azure App Service -konfiguraatioon (salattuna at rest)
-4. Sovellus lukee ne `os.getenv()`-kutsulla suoritusaikana
+**Missä salaisuudet säilytetään**:
+1. `azd provision`-komennon aikana annat SQL-tunnukset turvallisesti kehotteessa
+2. AZD tallentaa ne paikalliseen `.azure/<env-name>/.env`-tiedostoon (git-ignored)
+3. AZD lisää ne Azure App Service -konfiguraatioon (salattu levossa)
+4. Sovellus lukee ne `os.getenv()`-kutsuin ajon aikana
 
 ### Paikallinen kehitys
 
-Paikallista testausta varten luo `.env`-tiedosto mallista:
+Paikallista testausta varten luo `.env`-tiedosto esimerkistä:
 
 ```sh
 cp .env.sample .env
-# Muokkaa .env-tiedostoa paikallista tietokantayhteyttäsi varten.
+# Muokkaa .env-tiedostoa paikallisella tietokantayhteydelläsi
 ```
 
 **Paikallisen kehityksen työnkulku**:
@@ -318,7 +318,7 @@ pip install -r requirements.txt
 # Aseta ympäristömuuttujat
 export SQL_CONNECTION_STRING="your-local-connection-string"
 
-# Käynnistä sovellus
+# Suorita sovellus
 python app.py
 ```
 
@@ -328,17 +328,17 @@ curl http://localhost:8000/health
 # Odotettu: {"status": "healthy", "database": "connected"}
 ```
 
-### Infrastruktuuri koodina
+### Infrastructure as Code
 
-Kaikki Azure-resurssit määritellään **Bicep-templateissä** (`infra/`-kansio):
+Kaikki Azure-resurssit on määritelty **Bicep-templaten** tiedostoissa (`infra/`-kansio):
 
-- **Modulaarinen rakenne**: Jokaisella resurssityypillä oma tiedosto uudelleenkäyttöä varten
+- **Modulaarinen suunnittelu**: Jokaisella resurssityypillä on oma tiedosto uudelleenkäytettävyyttä varten
 - **Parametrisoitu**: Mukauta SKUja, alueita, nimeämiskäytäntöjä
-- **Parhaat käytännöt**: Noudattaa Azuren nimeämis- ja turvallisuusasetuksia
-- **Versiohallittu**: Infrastruktuurin muutokset seurataan Gitissä
+- **Parhaat käytännöt**: Seuraa Azuren nimeämisstandardeja ja tietoturva-asetuksia
+- **Versiohallinta**: Infrastruktuurin muutokset seurataan Gitissä
 
-**Esimerkki muokkaamisesta**:
-Tietokantatason muuttamiseksi muokkaa `infra/resources/sql-database.bicep`:
+**Mukautusesimerkki**:
+Muuta tietokannan tasoa muokkaamalla `infra/resources/sql-database.bicep`:
 ```bicep
 sku: {
   name: 'Standard'  // Changed from 'Basic'
@@ -347,69 +347,69 @@ sku: {
 }
 ```
 
-## Turvallisuuden parhaat käytännöt
+## Tietoturvan parhaat käytännöt
 
-Tämä esimerkki noudattaa Azuren turvallisuuden parhaita käytäntöjä:
+Tämä esimerkki noudattaa Azuren tietoturvan parhaita käytäntöjä:
 
 ### 1. **Ei salaisuuksia lähdekoodissa**
-- ✅ Tunnukset tallennetaan Azure App Service -konfiguraatioon (salattuna)
-- ✅ `.env`-tiedostot jätetty Gitin ulkopuolelle `.gitignore`-tiedoston avulla
-- ✅ Salaisuudet välitetään turvallisina parametreina provisioinnin aikana
+- ✅ Tunnukset säilytetään Azure App Service -konfiguraatiossa (salattu)
+- ✅ `.env`-tiedostot on suljettu Gitistä `.gitignore`-asetuksella
+- ✅ Salaisuudet annetaan turvallisesti parametrina provisioinnin aikana
 
 ### 2. **Salatut yhteydet**
 - ✅ TLS 1.2 vähintään SQL Serverille
-- ✅ HTTPS-only pakotettu Web Appille
+- ✅ HTTPS-vaatimuksen pakottaminen Web Appissa
 - ✅ Tietokantayhteydet käyttävät salattuja kanavia
 
-### 3. **Verkkoturvallisuus**
+### 3. **Verkon suojaus**
 - ✅ SQL Serverin palomuuri konfiguroitu sallimaan vain Azure-palvelut
-- ✅ Julkinen verkkoyhteys rajoitettu (voidaan tiukentaa Private Endpointeilla)
-- ✅ FTPS poistettu käytöstä Web Appilla
+- ✅ Julkinen verkkoyhteys rajoitettu (voidaan lukita lisää Private Endpointeilla)
+- ✅ FTPS poistettu käytöstä Web Appissa
 
 ### 4. **Todennus & valtuutus**
-- ⚠️ **Tällä hetkellä**: SQL-todennus (käyttäjätunnus/salasana)
-- ✅ **Tuotantosuositus**: Käytä Azure Managed Identitya salasanattomaan todennukseen
+- ⚠️ **Tällä hetkellä**: SQL-autentikaatio (käyttäjätunnus/salasana)
+- ✅ **Tuotantosuositus**: Käytä Azure Managed Identityä salasanojen sijaan
 
-**Managed Identityyn päivitys** (tuotantoon):
-1. Ota Managed Identity käyttöön Web Appilla
-2. Myönnä identiteetille SQL-oikeudet
-3. Päivitä connection string käyttämään managed identitya
-4. Poista salasanaan perustuva todennus
+**Päivitys Managed Identityyn** (tuotantoon):
+1. Ota hallinnoitu identiteetti käyttöön Web Appissa
+2. Anna identiteetille SQL-oikeudet
+3. Päivitä yhteysmerkkijono käyttämään hallittua identiteettiä
+4. Poista salasanaan perustuva autentikointi
 
 ### 5. **Auditointi & vaatimustenmukaisuus**
 - ✅ Application Insights kirjaa kaikki pyynnöt ja virheet
-- ✅ SQL Database -auditointi käytössä (säädettävissä vaatimustenmukaisuuteen)
-- ✅ Kaikki resurssit tagattu hallintaa varten
+- ✅ SQL Database -auditointi otettu käyttöön (voidaan konfiguroida vaatimustenmukaisuuteen)
+- ✅ Kaikki resurssit on tagattu hallintaa varten
 
-**Turvallisuustarkistuslista ennen tuotantoa**:
+**Tietoturvalista ennen tuotantoon siirtymistä**:
 - [ ] Ota Azure Defender for SQL käyttöön
-- [ ] Konfiguroi Private Endpoints SQL-tietokannalle
+- [ ] Konfiguroi Private Endpointit SQL-tietokannalle
 - [ ] Ota Web Application Firewall (WAF) käyttöön
-- [ ] Implementoi Azure Key Vault salaisuuksien kierrätykseen
+- [ ] Ota käyttöön Azure Key Vault salaisuuksien kiertoa varten
 - [ ] Konfiguroi Azure AD -todennus
 - [ ] Ota diagnostiikkalokit käyttöön kaikille resursseille
 
-## Kustannusoptimointi
+## Kustannusten optimointi
 
 **Arvioidut kuukausikustannukset** (tilanne marraskuu 2025):
 
-| Resource | SKU/Tier | Estimated Cost |
-|----------|----------|----------------|
-| App Service Plan | B1 (Basic) | ~$13/month |
-| SQL Database | Basic (2GB) | ~$5/month |
-| Application Insights | Pay-as-you-go | ~$2/month (low traffic) |
-| **Total** | | **~$20/month** |
+| Resurssi | SKU/Taso | Arvioitu kustannus |
+|----------|----------|--------------------|
+| App Service Plan | B1 (Basic) | ~13 $/kk |
+| SQL Database | Basic (2GB) | ~5 $/kk |
+| Application Insights | Pay-as-you-go | ~2 $/kk (vähäinen liikenne) |
+| **Yhteensä** | | **~20 $/kk** |
 
-**💡 Säästövinkkejä**:
+**💡 Kustannussäästövinkkejä**:
 
-1. **Käytä ilmaista tasoa oppimiseen**:
-   - App Service: F1-taso (ilmainen, rajoitetusti tunteja)
+1. **Käytä ilmaistasoa oppimiseen**:
+   - App Service: F1-taso (ilmainen, rajoitetut tunnit)
    - SQL Database: Käytä Azure SQL Database serverless -vaihtoehtoa
-   - Application Insights: 5GB/kk ilmainen ingestiö
+   - Application Insights: 5GB/kk ilmaista ingestiota
 
-2. **Pysäytä resurssit kun et käytä niitä**:
+2. **Pysäytä resurssit, kun et käytä niitä**:
    ```sh
-   # Pysäytä web-sovellus (tietokannasta veloitetaan edelleen)
+   # Pysäytä web-sovellus (tietokanta kuitenkin veloittaa edelleen)
    az webapp stop --name <app-name> --resource-group <rg-name>
    
    # Käynnistä uudelleen tarvittaessa
@@ -420,18 +420,18 @@ Tämä esimerkki noudattaa Azuren turvallisuuden parhaita käytäntöjä:
    ```sh
    azd down
    ```
-   Tämä poistaa KAIKKI resurssit ja lopettaa veloitukset.
+   Tämä poistaa KAIKKI resurssit ja lopettaa laskutuksen.
 
-4. **Kehitys vs. tuotanto SKUt**:
+4. **Kehitys- vs. tuotantotason SKUt**:
    - **Kehitys**: Basic-taso (käytetty tässä esimerkissä)
    - **Tuotanto**: Standard/Premium-taso redundanssilla
 
-**Kustannusten seuranta**:
+**Kustannusseuranta**:
 - Tarkastele kustannuksia [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
-- Aseta kustannushälytyksiä välttääksesi yllätykset
-- Merkitse kaikki resurssit `azd-env-name`-tagilla seurattavuuden vuoksi
+- Määritä kustannushälytykset yllätyksien välttämiseksi
+- Taggaa kaikki resurssit `azd-env-name`-tagilla seurannan helpottamiseksi
 
-**Ilmainen vaihtoehto oppimiseen**:
+**Ilmaisen tason vaihtoehto**:
 Oppimista varten voit muokata `infra/resources/app-service-plan.bicep`:
 ```bicep
 sku: {
@@ -441,17 +441,17 @@ sku: {
 ```
 **Huom**: Ilmaistasolla on rajoituksia (60 min/vrk CPU, ei always-on).
 
-## Monitorointi & observability
+## Valvonta & havaittavuus
 
-### Application Insights -integrointi
+### Application Insights -integraatio
 
-Tämä esimerkki sisältää **Application Insightsin** kattavaan monitorointiin:
+Tämä esimerkki sisältää **Application Insightsin** kattavaan valvontaan:
 
-**Mitä seurataan**:
+**Mitä valvotaan**:
 - ✅ HTTP-pyynnöt (latenssi, tilakoodit, päätepisteet)
 - ✅ Sovellusvirheet ja poikkeukset
-- ✅ Mukautettu lokitus Flask-sovelluksesta
-- ✅ Tietokantayhteyden terveys
+- ✅ Räätälöity lokitus Flask-sovelluksesta
+- ✅ Tietokantayhteyden tila
 - ✅ Suorituskykymittarit (CPU, muisti)
 
 **Pääsy Application Insightsiin**:
@@ -459,7 +459,7 @@ Tämä esimerkki sisältää **Application Insightsin** kattavaan monitorointiin
 2. Siirry resurssiryhmääsi (`rg-<env-name>`)
 3. Klikkaa Application Insights -resurssia (`appi-<unique-id>`)
 
-**Hyödyllisiä kyselyjä** (Application Insights → Logs):
+**Hyödylliset kyselyt** (Application Insights → Logs):
 
 **Näytä kaikki pyynnöt**:
 ```kusto
@@ -486,29 +486,29 @@ requests
 
 ### SQL-tietokannan auditointi
 
-**SQL-tietokannan auditointi on käytössä** seuraamaan:
-- Tietokannan käyttökuvioita
-- Epäonnistuneita kirjautumisyrityksiä
-- Skeeman muutoksia
-- Datakäyttöä (vaatimustenmukaisuutta varten)
+**SQL Database -auditointi on käytössä** seurannan vuoksi:
+- Tietokannan käyttökuviot
+- Epäonnistuneet kirjautumisyritykset
+- Skeeman muutokset
+- Datan käyttö (vaatimustenmukaisuutta varten)
 
 **Pääsy audit-lokeihin**:
 1. Azure Portal → SQL Database → Auditing
-2. Katso lokit Log Analytics -työtilassa
+2. Katso lokit Log Analytics -workspaceissa
 
-### Reaaliaikainen monitorointi
+### Reaaliaikainen valvonta
 
 **Näytä Live Metrics**:
 1. Application Insights → Live Metrics
 2. Näet pyynnöt, virheet ja suorituskyvyn reaaliajassa
 
-**Aseta hälytyksiä**:
+**Määritä hälytykset**:
 Luo hälytyksiä kriittisille tapahtumille:
-- HTTP 500 -virheitä > 5 viidessä minuutissa
-- Tietokantayhteyden epäonnistumiset
+- HTTP 500 -virheet > 5 viidessä minuutissa
+- Tietokantayhteyksien epäonnistumiset
 - Korkeat vasteajat (>2 sekuntia)
 
-**Esimerkkihälytyksen luonti**:
+**Esimerkkihälytyksen luominen**:
 ```sh
 az monitor metrics alert create \
   --name "High-Response-Time" \
@@ -518,10 +518,10 @@ az monitor metrics alert create \
   --description "Alert when response time exceeds 2 seconds"
 ```
 
-## Vianetsintä
-### Yleiset ongelmat ja ratkaisut
+## Vianmääritys
+### Yleisiä ongelmia ja ratkaisuja
 
-#### 1. `azd provision` epäonnistuu virheellä "Location not available"
+#### 1. `azd provision` epäonnistuu ilmoituksella "Location not available"
 
 **Oire**:
 ```
@@ -529,7 +529,7 @@ Error: The subscription is not registered for the resource type 'components' in 
 ```
 
 **Ratkaisu**:
-Valitse eri Azure-alue tai rekisteröi resurssitarjoaja:
+Valitse toinen Azure-alue tai rekisteröi resurssitoimittaja:
 ```sh
 az provider register --namespace Microsoft.Insights
 ```
@@ -542,17 +542,17 @@ pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL S
 ```
 
 **Ratkaisu**:
-- Varmista, että SQL Serverin palomuuri sallii Azure-palvelut (konfiguroidaan automaattisesti)
-- Tarkista, että SQL-ylläpitäjän salasana syötettiin oikein suorittaessasi `azd provision`
+- Varmista, että SQL Serverin palomuuri sallii Azure-palvelut (määritetään automaattisesti)
+- Tarkista, että SQL-järjestelmänvalvojan salasana syötettiin oikein `azd provision` -komennon aikana
 - Varmista, että SQL Server on täysin provisioitu (voi kestää 2–3 minuuttia)
 
-**Varmista yhteys**:
+**Vahvista yhteys**:
 ```sh
-# Azure-portaalissa siirry kohtaan SQL Database → Query editor
+# Azure-portaalista siirry SQL Database → Query editoriin
 # Yritä muodostaa yhteys tunnistetiedoillasi
 ```
 
-#### 3. Web-sovellus näyttää "Application Error"
+#### 3. Web App Shows "Application Error"
 
 **Oire**:
 Selain näyttää yleisen virhesivun.
@@ -564,10 +564,10 @@ Tarkista sovelluksen lokit:
 az webapp log tail --name <app-name> --resource-group <rg-name>
 ```
 
-**Yleiset syyt**:
+**Yleisiä syitä**:
 - Puuttuvat ympäristömuuttujat (tarkista App Service → Configuration)
-- Python-pakettien asennus epäonnistui (tarkista deployment-lokit)
-- Tietokannan alustusvirhe (tarkista SQL-yhteydet)
+- Python-pakettien asennus epäonnistui (tarkista käyttöönoton lokit)
+- Tietokannan alustuksen virhe (tarkista SQL-yhteydet)
 
 #### 4. `azd deploy` epäonnistuu virheellä "Build Error"
 
@@ -577,9 +577,9 @@ Error: Failed to build project
 ```
 
 **Ratkaisu**:
-- Varmista, että `requirements.txt` ei sisällä syntaksivirheitä
+- Varmista, että `requirements.txt`-tiedostossa ei ole syntaksivirheitä
 - Tarkista, että Python 3.11 on määritetty tiedostossa `infra/resources/web-app.bicep`
-- Varmista, että Dockerfile käyttää oikeaa peruskuvaa
+- Varmista, että Dockerfilessä on oikea peruskuva
 
 **Vianmääritys paikallisesti**:
 ```sh
@@ -588,7 +588,7 @@ docker build -t test-app .
 docker run -p 8000:8000 test-app
 ```
 
-#### 5. "Unauthorized" AZD-komentojen ajon yhteydessä
+#### 5. "Unauthorized" AZD-komentojen suorittamisen yhteydessä
 
 **Oire**:
 ```
@@ -598,21 +598,24 @@ ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have auth
 **Ratkaisu**:
 Kirjaudu uudelleen Azureen:
 ```sh
+# Pakollinen AZD-työnkuluissa
 azd auth login
+
+# Valinnainen, jos käytät myös Azure CLI -komentoja suoraan
 az login
 ```
 
-Varmista, että sinulla on oikeat oikeudet (Contributor-rooli) tilaukseen.
+Varmista, että sinulla on oikeat käyttöoikeudet (Contributor-rooli) tilaukseen.
 
-#### 6. Korkeat tietokantakulut
+#### 6. Korkeat tietokantakustannukset
 
 **Oire**:
-Yllättävä Azure-lasku.
+Odottamaton Azure-lasku.
 
 **Ratkaisu**:
-- Tarkista, ettet unohtanut ajaa `azd down` testauksen jälkeen
+- Tarkista, ettet unohtanut suorittaa `azd down`-komentoa testauksen jälkeen
 - Varmista, että SQL Database käyttää Basic-tasoa (ei Premium)
-- Tarkastele kustannuksia Azure Cost Managementissa
+- Tarkista kulut Azure Cost Managementissa
 - Ota käyttöön kustannushälytykset
 
 ### Apua
@@ -633,15 +636,15 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 ```
 
 **Tarvitsetko lisää apua?**
-- [AZD Troubleshooting Guide](../../docs/chapter-07-troubleshooting/common-issues.md)
-- [Azure App Service Troubleshooting](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
-- [Azure SQL Troubleshooting](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
+- [AZD-vianmääritysohje](../../docs/chapter-07-troubleshooting/common-issues.md)
+- [Azure App Service -vianmääritys](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
+- [Azure SQL -vianmääritys](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
 
 ## Käytännön harjoitukset
 
 ### Harjoitus 1: Vahvista käyttöönotto (Aloittelija)
 
-**Tavoite**: Vahvista, että kaikki resurssit on otettu käyttöön ja sovellus toimii.
+**Tavoite**: Varmistaa, että kaikki resurssit on otettu käyttöön ja sovellus toimii.
 
 **Vaiheet**:
 1. Listaa kaikki resurssit resurssiryhmässäsi:
@@ -660,12 +663,12 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    **Odotettu**: Kaikki palauttavat kelvollista JSONia ilman virheitä
 
 3. Tarkista Application Insights:
-   - Siirry Application Insights -kohteeseen Azure-portaalissa
-   - Mene "Live Metrics" -näkymään
-   - Päivitä selaimesi web-sovellossa
-   **Odotettu**: Näet pyynnöt ilmestyvän reaaliajassa
+   - Siirry Application Insightsiin Azure-portaalissa
+   - Siirry "Live Metrics" -näkymään
+   - Päivitä selaimesi web-sovelluksen sivulla
+   **Odotettu**: Näet pyyntöjen ilmestyvän reaaliajassa
 
-**Onnistumisen kriteerit**: Kaikki 6–7 resurssia ovat olemassa, kaikki päätepisteet palauttavat dataa, Live Metrics näyttää aktiivisuutta.
+**Onnistumisen kriteerit**: Kaikki 6–7 resurssia ovat olemassa, kaikki päätepisteet palauttavat dataa, Live Metrics näyttää toimintaa.
 
 ---
 
@@ -673,10 +676,10 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 **Tavoite**: Laajenna Flask-sovellusta uudella päätepisteellä.
 
-**Aloituskoodi**: Nykyiset päätepisteet tiedostossa `src/web/app.py`
+**Alkukoodi**: Nykyiset päätepisteet tiedostossa `src/web/app.py`
 
 **Vaiheet**:
-1. Muokkaa `src/web/app.py` ja lisää uusi päätepiste `get_product()`-funktion jälkeen:
+1. Muokkaa `src/web/app.py`-tiedostoa ja lisää uusi päätepiste `get_product()`-funktion jälkeen:
    ```python
    @app.route('/products/search/<keyword>')
    def search_products(keyword):
@@ -719,20 +722,20 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    ```sh
    curl https://app-<your-id>.azurewebsites.net/products/search/laptop
    ```
-   **Odotettu**: Palauttaa tuotteet, jotka vastaavat hakusanaa "laptop"
+   **Odotettu**: Palauttaa tuotteet, jotka vastaavat hakua "laptop"
 
-**Onnistumisen kriteerit**: Uusi päätepiste toimii, palauttaa suodatettuja tuloksia ja näkyy Application Insights -lokeissa.
+**Onnistumisen kriteerit**: Uusi päätepiste toimii, palauttaa suodatetut tulokset, näkyy Application Insights -lokitiedoissa.
 
 ---
 
-### Harjoitus 3: Lisää valvonta ja hälytyksiä (Edistynyt)
+### Harjoitus 3: Lisää valvonta ja hälytykset (Edistynyt)
 
-**Tavoite**: Ota käyttöön proaktiivinen valvonta hälytyksineen.
+**Tavoite**: Ota käyttöön proaktiivinen valvonta hälytyksillä.
 
 **Vaiheet**:
 1. Luo hälytys HTTP 500 -virheille:
    ```sh
-   # Hae Application Insights -resurssin tunnus
+   # Hae Application Insights -resurssin tunniste
    AI_ID=$(az monitor app-insights component show \
      --app appi-<your-id> \
      --resource-group rg-<env-name> \
@@ -755,20 +758,20 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
    ```
 
-3. Tarkista, laukaistiinko hälytys:
+3. Tarkista, laukesiko hälytys:
    - Azure Portal → Alerts → Alert Rules
    - Tarkista sähköpostisi (jos konfiguroitu)
 
-**Onnistumisen kriteerit**: Hälytys sääntö luotu, laukeaa virheiden yhteydessä, ilmoitukset vastaanotetaan.
+**Onnistumisen kriteerit**: Hälyssääntö on luotu, laukeaa virheissä, ilmoitukset vastaanotetaan.
 
 ---
 
-### Harjoitus 4: Tietokantakaavion muutokset (Edistynyt)
+### Harjoitus 4: Tietokannan skeeman muutokset (Edistynyt)
 
 **Tavoite**: Lisää uusi taulu ja muokkaa sovellusta käyttämään sitä.
 
 **Vaiheet**:
-1. Yhdistä SQL Databaseen Azure-portaalin Query Editorin kautta
+1. Yhdistä SQL-tietokantaan Azure-portaalin Query Editorin kautta
 
 2. Luo uusi `categories`-taulu:
    ```sql
@@ -787,33 +790,33 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    UPDATE products SET category_id = 1; -- Set all to Electronics
    ```
 
-3. Päivitä `src/web/app.py` sisällyttämään kategorioiden tiedot vastauksiin
+3. Päivitä `src/web/app.py` lisäämään kategorian tiedot vastauksiin
 
 4. Ota käyttöön ja testaa
 
-**Onnistumisen kriteerit**: Uusi taulu on olemassa, tuotteet näyttävät kategoria-tiedot, sovellus toimii edelleen.
+**Onnistumisen kriteerit**: Uusi taulu on olemassa, tuotteet näyttävät kategorian tiedot, sovellus toimii edelleen.
 
 ---
 
 ### Harjoitus 5: Ota välimuisti käyttöön (Asiantuntija)
 
-**Tavoite**: Lisää Azure Redis Cache suorituskyvyn parantamiseksi.
+**Tavoite**: Lisää Azure Redis Cache parantamaan suorituskykyä.
 
 **Vaiheet**:
 1. Lisää Redis Cache tiedostoon `infra/main.bicep`
-2. Päivitä `src/web/app.py` välimuistittamaan tuotetietokyselyjä
-3. Mittaa suorituskyvyn parannus Application Insightsilla
-4. Vertaa vasteaikoja ennen ja jälkeen välimuistin
+2. Päivitä `src/web/app.py` välimuistitusta varten tuotteiden kyselyille
+3. Mittaa suorituskyvyn parannus Application Insightsin avulla
+4. Vertaa vastauksen aikoja ennen ja jälkeen välimuistin
 
-**Onnistumisen kriteerit**: Redis on otettu käyttöön, välimuisti toimii, vasteajat paranevat yli 50 %.
+**Onnistumisen kriteerit**: Redis on otettu käyttöön, välimuistitus toimii, vasteajat paranevat yli 50 %.
 
-**Vinkki**: Aloita [Azure Cache for Redis -dokumentaatiosta](https://learn.microsoft.com/azure/azure-cache-for-redis/).
+**Vinkki**: Aloita [Azure Cache for Redis -dokumentaatio](https://learn.microsoft.com/azure/azure-cache-for-redis/).
 
 ---
 
 ## Siivous
 
-Välttääksesi jatkuvia kustannuksia, poista kaikki resurssit käytön jälkeen:
+Jatkuvien kulujen välttämiseksi poista kaikki resurssit, kun olet valmis:
 
 ```sh
 azd down
@@ -828,50 +831,50 @@ Kirjoita `y` vahvistaaksesi.
 
 **✓ Onnistumisen tarkistus**: 
 - Kaikki resurssit on poistettu Azure-portaalista
-- Ei jatkuvia kustannuksia
-- Paikallinen kansio `.azure/<env-name>` voidaan poistaa
+- Ei jatkuvia kuluja
+- Paikallinen `.azure/<env-name>`-kansio voidaan poistaa
 
 **Vaihtoehto** (pidä infrastruktuuri, poista data):
 ```sh
 # Poista vain resurssiryhmä (säilytä AZD-konfiguraatio)
 az group delete --name rg-<env-name> --yes
 ```
-## Lue lisää
+## Lisätietoja
 
-### Asiaankuuluva dokumentaatio
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Azure SQL Database Documentation](https://learn.microsoft.com/azure/azure-sql/database/)
-- [Azure App Service Documentation](https://learn.microsoft.com/azure/app-service/)
-- [Application Insights Documentation](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Bicep Language Reference](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+### Liittyvä dokumentaatio
+- [Azure Developer CLI -dokumentaatio](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Azure SQL Database -dokumentaatio](https://learn.microsoft.com/azure/azure-sql/database/)
+- [Azure App Service -dokumentaatio](https://learn.microsoft.com/azure/app-service/)
+- [Application Insights -dokumentaatio](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Bicep-kielen viite](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ### Seuraavat askeleet tässä kurssissa
-- **[Container Apps Example](../../../../examples/container-app)**: Ota käyttöön mikropalveluita Azure Container Appsilla
-- **[AI Integration Guide](../../../../docs/ai-foundry)**: Lisää AI-ominaisuuksia sovellukseesi
-- **[Deployment Best Practices](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Tuotantokäyttöönoton mallit
+- **[Container Apps -esimerkki](../../../../examples/container-app)**: Ota käyttöön mikropalvelut Azure Container Appsin avulla
+- **[AI-integraatio-opas](../../../../docs/ai-foundry)**: Lisää sovellukseesi tekoälyominaisuuksia
+- **[Käyttöönoton parhaat käytännöt](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Tuotantokäyttöönoton mallit
 
 ### Edistyneet aiheet
-- **Managed Identity**: Poista salasanat käytöstä ja käytä Azure AD -todennusta
+- **Managed Identity**: Poista salasanat ja käytä Azure AD -todennusta
 - **Private Endpoints**: Suojaa tietokantayhteydet virtuaaliverkon sisällä
-- **CI/CD Integration**: Automatisoi julkaisut GitHub Actionsilla tai Azure DevOpsilla
-- **Multi-Environment**: Ota käyttöön kehitys-, staging- ja tuotantoympäristöt
-- **Database Migrations**: Käytä Alembicia tai Entity Frameworkia skeeman versiointiin
+- **CI/CD Integration**: Automatisoi käyttöönotot GitHub Actionsilla tai Azure DevOpsilla
+- **Multi-Environment**: Määritä kehitys-, testi- ja tuotantoympäristöt
+- **Database Migrations**: Käytä Alembicia tai Entity Frameworkiä skeeman versiointiin
 
 ### Vertailu muihin lähestymistapoihin
 
 **AZD vs. ARM Templates**:
 - ✅ AZD: Korkeamman tason abstraktio, yksinkertaisemmat komennot
-- ⚠️ ARM: Monisanaisempi, tarjoaa yksityiskohtaisempaa hallintaa
+- ⚠️ ARM: Yksityiskohtaisempi, hienojakoisempi hallinta
 
 **AZD vs. Terraform**:
-- ✅ AZD: Azure-native, integroitu Azure-palveluihin
+- ✅ AZD: Azure-lähtöinen, integroitu Azure-palveluihin
 - ⚠️ Terraform: Monipilvituki, laajempi ekosysteemi
 
 **AZD vs. Azure Portal**:
 - ✅ AZD: Toistettavissa, versionhallittu, automatisoitavissa
-- ⚠️ Portaalin käyttö: Manuaalisia klikkauksia, vaikea toistaa
+- ⚠️ Portal: Manuaaliset klikkaukset, vaikea toistaa
 
-**Ajattele AZD:ta**: Docker Compose Azuren kohdalla — yksinkertaistettu konfigurointi monimutkaisille käyttöönottoihin.
+Ajattele AZD:ta kuten Docker Composea Azuren varten—yksinkertaistettu konfiguraatio monimutkaisille käyttöönotolle.
 
 ---
 
@@ -881,13 +884,13 @@ az group delete --name rg-<env-name> --yes
 V: Kyllä! Korvaa `src/web/` Node.js:llä, C#:lla, Go:lla tai millä tahansa kielellä. Päivitä `azure.yaml` ja Bicep vastaavasti.
 
 **K: Kuinka lisään lisää tietokantoja?**  
-V: Lisää toinen SQL Database -moduuli tiedostoon `infra/main.bicep` tai käytä PostgreSQL/MySQL:tä Azure Database -palveluista.
+V: Lisää toinen SQL Database -moduuli tiedostoon `infra/main.bicep` tai käytä PostgreSQL/MySQL:ää Azure Database -palveluista.
 
 **K: Voinko käyttää tätä tuotannossa?**  
-V: Tämä on lähtökohta. Tuotantoon lisää: managed identity, private endpoints, redundanssi, varmistusstrategia, WAF ja parannettu valvonta.
+V: Tämä on lähtökohta. Tuotantoon lisää: managed identity, private endpoints, redundanssi, varmuuskopiointistrategia, WAF ja laajennettu valvonta.
 
-**K: Entä jos haluan käyttää kontteja koodijakelun sijaan?**  
-V: Tutustu [Container Apps Example](../../../../examples/container-app), joka käyttää Docker-kontteja läpi koko prosessin.
+**K: Entä jos haluan käyttää kontteja koodin sijaan?**  
+V: Tutustu [Container Apps -esimerkkiin](../../../../examples/container-app), joka käyttää Docker-kontteja kauttaaltaan.
 
 **K: Kuinka yhdistän tietokantaan paikalliselta koneeltani?**  
 V: Lisää IP-osoitteesi SQL Serverin palomuuriin:
@@ -901,20 +904,18 @@ az sql server firewall-rule create \
 ```
 
 **K: Voinko käyttää olemassa olevaa tietokantaa uuden luomisen sijaan?**  
-V: Kyllä, muokkaa `infra/main.bicep` viittaamaan olemassa olevaan SQL Serveriin ja päivitä yhteysmerkkijonon parametrit.
+V: Kyllä, muokkaa `infra/main.bicep`-tiedostoa viittaamaan olemassa olevaan SQL Serveriin ja päivitä yhteysmerkkijonomuuttujat.
 
----
-
-> **Huom:** Tämä esimerkki demonstroi parhaita käytäntöjä web-sovelluksen ja tietokannan käyttöönotossa AZD:llä. Se sisältää toimivan koodin, kattavan dokumentaation ja käytännön harjoituksia oppimisen vahvistamiseksi. Tuotantokäyttöönottoja varten tarkista organisaatiosi vaatimukset turvallisuudesta, skaalaamisesta, vaatimustenmukaisuudesta ja kustannuksista.
+> **Huom:** Tässä esimerkissä esitellään parhaat käytännöt web-sovelluksen ja tietokannan käyttöönottoon AZD:n avulla. Se sisältää toimivan koodin, kattavan dokumentaation ja käytännön harjoituksia oppimisen vahvistamiseksi. Tuotantokäyttöönottoa varten tarkista organisaatiollesi ominaiset turvallisuus-, skaalautuvuus-, vaatimustenmukaisuus- ja kustannusvaatimukset.
 
 **📚 Kurssin navigointi:**
-- ← Edellinen: [Container Apps Example](../../../../examples/container-app)
-- → Seuraava: [AI Integration Guide](../../../../docs/ai-foundry)
+- ← Edellinen: [Container Apps -esimerkki](../../../../examples/container-app)
+- → Seuraava: [AI-integraatio-opas](../../../../docs/ai-foundry)
 - 🏠 [Kurssin etusivu](../../README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastuuvapauslauseke**:
-Tämä asiakirja on käännetty tekoälykäännöspalvelulla [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulee pitää auktoritatiivisena lähteenä. Kriittisten tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa mistään tästä käännöksestä johtuvista väärinymmärryksistä tai virheellisistä tulkinnoista.
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, on syytä huomioida, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäiskielellä tulee pitää virallisena lähteenä. Tärkeiden tietojen osalta suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä aiheutuvista väärinymmärryksistä tai virheellisistä tulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

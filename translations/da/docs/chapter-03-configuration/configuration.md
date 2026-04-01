@@ -1,61 +1,61 @@
-# Konfigurationsvejledning
+# Konfigurationsguide
 
-**Kapitelnavigation:**
-- **📚 Kursusforside**: [AZD For Beginners](../../README.md)
-- **📖 Nuværende kapitel**: Kapitel 3 - Konfiguration & Autentificering
+**Chapter Navigation:**
+- **📚 Kursusforside**: [AZD for begyndere](../../README.md)
+- **📖 Nuværende kapitel**: Kapitel 3 - Konfiguration & Godkendelse
 - **⬅️ Forrige**: [Dit første projekt](first-project.md)
 - **➡️ Næste**: [Udrulningsvejledning](../chapter-04-infrastructure/deployment-guide.md)
 - **🚀 Næste kapitel**: [Kapitel 4: Infrastruktur som kode](../chapter-04-infrastructure/deployment-guide.md)
 
-## Introduktion
+## Introduction
 
-Denne omfattende guide dækker alle aspekter af konfiguration af Azure Developer CLI for optimale udviklings- og udrulningsarbejdsgange. Du vil lære om konfigurationshierarkiet, miljøstyring, autentificeringsmetoder og avancerede konfigurationsmønstre, der muliggør effektive og sikre Azure-udrulninger.
+Denne omfattende vejledning dækker alle aspekter af konfiguration af Azure Developer CLI til optimale udviklings- og udrulningsarbejdsgange. Du vil lære om konfigurationshierarkiet, miljøstyring, godkendelsesmetoder og avancerede konfigurationsmønstre, der muliggør effektive og sikre Azure-udrulninger.
 
-## Læringsmål
+## Learning Goals
 
-Når du er færdig med denne lektion, vil du:
-- Mestre azd-konfigurationshierarkiet og forstå, hvordan indstillinger prioriteres
+By the end of this lesson, you will:
+- Beherske azd-konfigurationshierarkiet og forstå, hvordan indstillinger prioriteres
 - Konfigurere globale og projektspecifikke indstillinger effektivt
 - Administrere flere miljøer med forskellige konfigurationer
 - Implementere sikre autentificerings- og autorisationsmønstre
-- Forstå avancerede konfigurationsmønstre til komplekse scenarier
+- Forstå avancerede konfigurationsmønstre for komplekse scenarier
 
-## Læringsudbytte
+## Learning Outcomes
 
-Efter at have gennemført denne lektion vil du kunne:
+After completing this lesson, you will be able to:
 - Konfigurere azd til optimale udviklingsarbejdsgange
 - Opsætte og administrere flere udrulningsmiljøer
-- Implementere sikre konfigurationsstyringspraksisser
-- Fejlfinde konfigurationsrelaterede problemer
+- Implementere sikre praksisser for konfigurationsstyring
+- Fejlsøge konfigurationsrelaterede problemer
 - Tilpasse azd-adfærd til specifikke organisatoriske krav
 
-Denne omfattende guide dækker alle aspekter af konfiguration af Azure Developer CLI for optimale udviklings- og udrulningsarbejdsgange.
+Denne omfattende vejledning dækker alle aspekter af konfiguration af Azure Developer CLI til optimale udviklings- og udrulningsarbejdsgange.
 
-## Forståelse af AI-agenter i et azd-projekt
+## Understanding AI Agents in an azd Project
 
-Hvis du er ny med AI-agenter, er her en enkel måde at tænke på dem i azd-verdenen.
+If you're new to AI agents, here's a simple way to think about them within the azd world.
 
-### Hvad er en agent?
+### What Is an Agent?
 
-En agent er et softwarestykke, der kan modtage en anmodning, ræsonnere over den og udføre handlinger — ofte ved at kalde en AI-model, slå data op eller påkalde andre tjenester. I et azd-projekt er en agent blot en anden **service** ved siden af dit webfrontend eller API-backend.
+En agent er et stykke software, der kan modtage en anmodning, ræsonnere over den og tage handlinger—ofte ved at kalde en AI-model, slå op i data eller påkalde andre tjenester. I et azd-projekt er en agent blot en anden **service** ved siden af din webfrontend eller API-backend.
 
-### Hvordan agenter passer ind i azd-projektstrukturen
+### How Agents Fit Into the azd Project Structure
 
-Et azd-projekt består af tre lag: **infrastruktur**, **kode**, og **konfiguration**. Agenter integreres i disse lag på samme måde som enhver anden service:
+Et azd-projekt består af tre lag: **infrastruktur**, **kode** og **konfiguration**. Agenter tilsluttes disse lag på samme måde som enhver anden service:
 
-| Layer | What It Does for a Traditional App | What It Does for an Agent |
+| Lag | Hvad det gør for en traditionel app | Hvad det gør for en agent |
 |-------|-------------------------------------|---------------------------|
-| **Infrastructure** (`infra/`) | Provisionerer en webapp og en database | Provisionerer et Microsoft Foundry Models-endpoint, en søgeindeks eller en agent-vært |
-| **Code** (`src/`) | Indeholder din frontend- og API-kildekode | Indeholder din agentlogik og promptdefinitioner |
-| **Configuration** (`azure.yaml`) | Oplistning af dine services og deres hostingmål | Oplistning af din agent som en service, der peger på dens kode og vært |
+| **Infrastruktur** (`infra/`) | Provisionerer en webapp og en database | Provisionerer et Microsoft Foundry Models-endpoint, et søgeindeks eller en agent-vært |
+| **Kode** (`src/`) | Indeholder din frontend- og API-kildekode | Indeholder din agentlogik og promptdefinitioner |
+| **Konfiguration** (`azure.yaml`) | Oplister dine services og deres hostingmål | Oplister din agent som en service, der peger på dens kode og vært |
 
-### Rollen for `azure.yaml`
+### The Role of `azure.yaml`
 
-Du behøver ikke at memorere syntaksen lige nu. Konceptuelt er `azure.yaml` filen, hvor du fortæller azd: *"Her er tjenesterne, der udgør min applikation, og her er, hvor deres kode findes."*
+Du behøver ikke at memorere syntaksen lige nu. Konceptuelt er `azure.yaml` filen, hvor du fortæller azd: *"Her er de services, der udgør min applikation, og her er hvor man finder deres kode."*
 
-Når dit projekt inkluderer en AI-agent, opregner `azure.yaml` blot den agent som en af tjenesterne. azd ved så, at den skal provisionere den rigtige infrastruktur (som et Microsoft Foundry Models-endpoint eller en Container App til at hoste agenten) og udrulle din agentkode — på samme måde som det ville for en webapp eller API.
+Når dit projekt inkluderer en AI-agent, lister `azure.yaml` blot den agent som en af services. azd ved derefter at provisionere den rigtige infrastruktur (som et Microsoft Foundry Models-endpoint eller en Container App til at hoste agenten) og udrulle din agentkode—lige som det ville for en webapp eller et API.
 
-Det betyder, at der ikke er noget fundamentalt nyt at lære. Hvis du forstår, hvordan azd håndterer en webservice, forstår du allerede, hvordan det håndterer en agent.
+Det betyder, at der ikke er noget grundlæggende nyt at lære. Hvis du forstår, hvordan azd håndterer en webservice, forstår du allerede, hvordan det håndterer en agent.
 
 ## Konfigurationshierarki
 
@@ -63,12 +63,12 @@ azd bruger et hierarkisk konfigurationssystem:
 1. **Kommandolinjeflag** (højeste prioritet)
 2. **Miljøvariabler**
 3. **Lokal projektkonfiguration** (`.azd/config.json`)
-4. **Global bruger-konfiguration** (`~/.azd/config.json`)
+4. **Global brugerkonfiguration** (`~/.azd/config.json`)
 5. **Standardværdier** (laveste prioritet)
 
 ## Global konfiguration
 
-### Indstille globale standardværdier
+### Indstilling af globale standardværdier
 ```bash
 # Angiv standardabonnement
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -79,8 +79,8 @@ azd config set defaults.location "eastus2"
 # Angiv standardnavngivningskonvention for ressourcegrupper
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# Vis alle globale konfigurationer
-azd config list
+# Vis alle globale indstillinger
+azd config show
 
 # Fjern en konfiguration
 azd config unset defaults.location
@@ -88,8 +88,8 @@ azd config unset defaults.location
 
 ### Almindelige globale indstillinger
 ```bash
-# Udviklingsindstillinger
-azd config set alpha.enable true                    # Aktiver alfa-funktioner
+# Udviklingspræferencer
+azd config set alpha.enable true                    # Aktivér alfa-funktioner
 azd config set telemetry.enabled false             # Deaktiver telemetri
 azd config set output.format json                  # Indstil outputformat
 
@@ -97,15 +97,15 @@ azd config set output.format json                  # Indstil outputformat
 azd config set auth.useAzureCliCredential true     # Brug Azure CLI til godkendelse
 azd config set tls.insecure false                  # Håndhæv TLS-verifikation
 
-# Ydelsesoptimering
+# Ydelsesjustering
 azd config set provision.parallelism 5             # Parallel oprettelse af ressourcer
-azd config set deploy.timeout 30m                  # Timeout for udrulning
+azd config set deploy.timeout 30m                  # Tidsgrænse for implementering
 ```
 
 ## 🏗️ Projektkonfiguration
 
-### Strukturen i `azure.yaml`
-Filen `azure.yaml` er hjertet i dit azd-projekt:
+### azure.yaml Struktur
+The `azure.yaml` file is the heart of your azd project:
 
 ```yaml
 # Minimum configuration
@@ -181,9 +181,9 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Indstillinger for servicekonfiguration
+### Servicekonfigurationsmuligheder
 
-#### Værttyper
+#### Hosttyper
 ```yaml
 services:
   web-static:
@@ -228,7 +228,7 @@ services:
 
 ## 🌟 Miljøstyring
 
-### Oprettelse af miljøer
+### Oprette miljøer
 ```bash
 # Opret et nyt miljø
 azd env new development
@@ -287,30 +287,30 @@ azd env get-values | grep DEBUG
 ```
 
 ### Miljøskabeloner
-Opret `.azure/env.template` for konsekvent miljøopsætning:
+Opret `.azure/env.template` for ensartet miljøopsætning:
 ```bash
 # Påkrævede variabler
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Programindstillinger
+# Applikationsindstillinger
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Valgfri udviklingsindstillinger
+# Valgfrie udviklingsindstillinger
 DEBUG=false
 LOG_LEVEL=info
 ```
 
 ## 🔐 Autentificeringskonfiguration
 
-### Integration med Azure CLI
+### Azure CLI-integration
 ```bash
 # Brug Azure CLI-legitimationsoplysninger (standard)
 azd config set auth.useAzureCliCredential true
 
-# Log ind med en specifik lejer
+# Log ind med en bestemt lejer
 az login --tenant <tenant-id>
 
 # Indstil standardabonnement
@@ -318,9 +318,9 @@ az account set --subscription <subscription-id>
 ```
 
 ### Service Principal-godkendelse
-Til CI/CD-pipelines:
+For CI/CD-pipelines:
 ```bash
-# Indstil miljøvariabler
+# Angiv miljøvariabler
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
@@ -331,7 +331,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Administreret identitet
-Til Azure-hostede miljøer:
+For Azure-hostede miljøer:
 ```bash
 # Aktivér autentificering med administreret identitet
 azd config set auth.useMsi true
@@ -374,7 +374,7 @@ database_sku = "GP_Gen5_2"
 
 ## 🚀 Udrulningskonfiguration
 
-### Byggekonfiguration
+### Build-konfiguration
 ```yaml
 # In azure.yaml
 services:
@@ -415,9 +415,9 @@ Eksempel `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/az
 
 ## 🔧 Avanceret konfiguration
 
-### Brugerdefineret ressourcenavngivning
+### Tilpasset resourcenavngivning
 ```bash
-# Sæt navngivningskonventioner
+# Angiv navngivningskonventioner
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -450,7 +450,7 @@ monitoring:
 
 ### Udviklingsmiljø
 ```bash
-# .azure/development/.env
+# .azure/udvikling/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
@@ -490,7 +490,7 @@ azd provision --dry-run
 ```
 
 ### Konfigurationsscripts
-Opret valideringsscripts i `scripts/`:
+Opret valideringsskripter i `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -526,7 +526,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organiser konfigurationsfiler
+### 2. Organisér konfigurationsfiler
 ```
 .azure/
 ├── config.json              # Global project config
@@ -542,7 +542,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Overvejelser ved versionsstyring
+### 3. Overvejelser ved versionskontrol
 ```bash
 # .gitignore
 .azure/*/config.json         # Miljøkonfigurationer (indeholder ressource-ID'er)
@@ -570,7 +570,7 @@ Dokumentér din konfiguration i `CONFIG.md`:
 
 ### Øvelse 1: Multi-miljøkonfiguration (15 minutter)
 
-**Mål**: Oprette og konfigurere tre miljøer med forskellige indstillinger
+**Mål**: Opret og konfigurer tre miljøer med forskellige indstillinger
 
 ```bash
 # Opret udviklingsmiljø
@@ -599,7 +599,7 @@ azd env select production && azd env get-values
 
 **Succeskriterier:**
 - [ ] Tre miljøer oprettet med succes
-- [ ] Hvert miljø har unik konfiguration
+- [ ] Hvert miljø har en unik konfiguration
 - [ ] Kan skifte mellem miljøer uden fejl
 - [ ] `azd env list` viser alle tre miljøer
 
@@ -608,43 +608,43 @@ azd env select production && azd env get-values
 **Mål**: Øv sikker konfiguration med følsomme data
 
 ```bash
-# Indstil hemmeligheder (vises ikke i output)
+# Angiv hemmeligheder (vises ikke i output)
 azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 
-# Indstil ikke-hemmelig konfiguration
+# Angiv ikke-hemmelig konfiguration
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# Vis miljø (hemmeligheder bør sløres)
+# Vis miljø (hemmeligheder bør være skjult)
 azd env get-values
 
-# Bekræft, at hemmeligheder er gemt
-azd env get DB_PASSWORD  # Skal vise den faktiske værdi
+# Bekræft at hemmeligheder er gemt
+azd env get DB_PASSWORD  # Bør vise den faktiske værdi
 ```
 
 **Succeskriterier:**
 - [ ] Hemmelige værdier gemt uden at blive vist i terminalen
-- [ ] `azd env get-values` viser udviskede hemmeligheder
-- [ ] Individuel `azd env get <SECRET_NAME>` henter den faktiske værdi
+- [ ] `azd env get-values` viser slørede hemmeligheder
+- [ ] Individuelt `azd env get <SECRET_NAME>` henter den faktiske værdi
 
 ## Næste skridt
 
-- [Dit første projekt](first-project.md) - Anvend konfiguration i praksis
-- [Udrulningsvejledning](../chapter-04-infrastructure/deployment-guide.md) - Brug konfiguration til udrulning
+- [Dit første projekt](first-project.md) - Anvend konfigurationen i praksis
+- [Udrulningsvejledning](../chapter-04-infrastructure/deployment-guide.md) - Brug konfigurationen til udrulning
 - [Provisionering af ressourcer](../chapter-04-infrastructure/provisioning.md) - Produktionsklare konfigurationer
 
 ## Referencer
 
-- [azd konfigurationsreference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml-skema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [azd Konfigurationsreference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml Skema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [Miljøvariabler](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Kapitelnavigation:**
-- **📚 Kursusforside**: [AZD For Beginners](../../README.md)
-- **📖 Nuværende kapitel**: Kapitel 3 - Konfiguration & Autentificering
+**Chapter Navigation:**
+- **📚 Kursusforside**: [AZD for begyndere](../../README.md)
+- **📖 Nuværende kapitel**: Kapitel 3 - Konfiguration & Godkendelse
 - **⬅️ Forrige**: [Dit første projekt](first-project.md)
 - **➡️ Næste kapitel**: [Kapitel 4: Infrastruktur som kode](../chapter-04-infrastructure/deployment-guide.md)
 - **Næste lektion**: [Dit første projekt](first-project.md)
@@ -653,5 +653,5 @@ azd env get DB_PASSWORD  # Skal vise den faktiske værdi
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det originale dokument på dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales en professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på originalsproget bør betragtes som den autoritative kilde. For kritisk information anbefales en professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
