@@ -1,20 +1,22 @@
-# Poglavlje 7: Otklanjanje poteškoća i ispravljanje pogrešaka
+# Poglavlje 7: Rješavanje problema i ispravljanje pogrešaka
 
-**📚 Tečaj**: [AZD For Beginners](../../README.md) | **⏱️ Trajanje**: 1-1.5 hours | **⭐ Složenost**: Intermediate
+**📚 Tečaj**: [AZD za početnike](../../README.md) | **⏱️ Trajanje**: 1-1.5 sati | **⭐ Kompleksnost**: Srednja
 
 ---
 
 ## Pregled
 
-Ovo poglavlje pomaže vam dijagnosticirati i riješiti uobičajene probleme pri radu s Azure Developer CLI. Od neuspjeha implementacije do problema specifičnih za AI.
+Ovo poglavlje pomaže vam dijagnosticirati i riješiti uobičajene probleme pri radu s Azure Developer CLI. Od neuspjeha u implementaciji do problema specifičnih za umjetnu inteligenciju.
+
+> Validirano na `azd 1.23.12` u ožujku 2026.
 
 ## Ciljevi učenja
 
-Nakon dovršetka ovog poglavlja, moći ćete:
-- Dijagnosticirati uobičajene AZD neuspjehe implementacije
-- Otkloniti probleme s autentikacijom i dopuštenjima
-- Riješiti probleme s povezivošću AI servisa
-- Koristiti Azure Portal i CLI za otklanjanje poteškoća
+Nakon završetka ovog poglavlja, moći ćete:
+- Dijagnosticirati uobičajene neuspjehe implementacije AZD-a
+- Ispravljati probleme s autentifikacijom i dozvolama
+- Riješiti probleme s povezivanjem AI usluga
+- Koristiti Azure Portal i CLI za rješavanje problema
 
 ---
 
@@ -22,22 +24,26 @@ Nakon dovršetka ovog poglavlja, moći ćete:
 
 | # | Lekcija | Opis | Vrijeme |
 |---|--------|-------------|------|
-| 1 | [Česti problemi](common-issues.md) | Učestalo susretani problemi | 30 min |
-| 2 | [Vodič za ispravljanje pogrešaka](debugging.md) | Korak-po-korak strategije za ispravljanje pogrešaka | 45 min |
-| 3 | [Rješavanje AI problema](ai-troubleshooting.md) | Problemi specifični za AI | 30 min |
+| 1 | [Uobičajeni problemi](common-issues.md) | Često susretani problemi | 30 min |
+| 2 | [Vodič za ispravljanje pogrešaka](debugging.md) | Strategije korak-po-korak | 45 min |
+| 3 | [Rješavanje problema s AI](ai-troubleshooting.md) | Problemi specifični za AI | 30 min |
 
 ---
 
-## 🚨 Brze popravke
+## 🚨 Brza rješenja
 
-### Problemi s autentikacijom
+### Problemi s autentifikacijom
 ```bash
+# Potrebno za AZD radne tokove
 azd auth login
+
+# Opcionalno ako također izravno koristite Azure CLI naredbe
 az login
-azd auth whoami
+
+azd auth status
 ```
 
-### Pogreške pri provisioniranju
+### Neuspjesi u provisioningu
 ```bash
 azd show
 azd monitor --logs
@@ -51,7 +57,7 @@ azd env new different-name
 azd up
 ```
 
-### Kvota premašena
+### Prekoračenje kvote
 ```bash
 az vm list-usage --location eastus --output table
 azd env set AZURE_LOCATION westus2
@@ -64,22 +70,22 @@ azd up
 
 | Pogreška | Uzrok | Rješenje |
 |-------|-------|----------|
-| `AuthenticationError` | Nije prijavljen | `azd auth login` |
+| `AuthenticationError` | Niste prijavljeni | `azd auth login` |
 | `ResourceNotFound` | Nedostaje resurs | Provjerite nazive resursa |
 | `QuotaExceeded` | Ograničenja pretplate | Zatražite povećanje kvote |
-| `InvalidTemplate` | Sintaksna pogreška u Bicep | `az bicep build` |
-| `Conflict` | Resurs postoji | Koristite novo ime ili obrišite |
-| `Forbidden` | Nedovoljna dopuštenja | Provjerite RBAC uloge |
+| `InvalidTemplate` | Pogreška u Bicep sintaksi | `az bicep build` |
+| `Conflict` | Resurs već postoji | Koristite novi naziv ili izbrisati postojeći |
+| `Forbidden` | Nedostatak dozvola | Provjerite RBAC uloge |
 
 ---
 
 ## 🔄 Resetiranje i oporavak
 
 ```bash
-# Meki reset (zadržati resurse, ponovno rasporediti kod)
+# Soft reset (zadrži resurse, ponovno postavi kod)
 azd deploy --force
 
-# Tvrdi reset (izbrisati sve, početi ispočetka)
+# Hard reset (izbriši sve, počni ispočetka)
 azd down --force --purge
 azd up
 ```
@@ -99,12 +105,11 @@ azd up
 
 - [Provjere prije implementacije](../chapter-06-pre-deployment/preflight-checks.md)
 - [Vodič za konfiguraciju](../chapter-03-configuration/configuration.md)
-- [Problemi na GitHubu za AZD](https://github.com/Azure/azure-dev/issues)
+- [AZD GitHub Issues](https://github.com/Azure/azure-dev/issues)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Odricanje odgovornosti:
-
-Ovaj dokument preveden je pomoću AI usluge za prevođenje Co-op Translator (https://github.com/Azure/co-op-translator). Iako nastojimo osigurati točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Ne snosimo odgovornost za bilo kakve nesporazume ili pogrešna tumačenja koja proizađu iz upotrebe ovog prijevoda.
+**Odricanje od odgovornosti**:
+Ovaj dokument je preveden korištenjem AI prevoditeljskog servisa [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatizirani prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na njegovom izvornom jeziku treba smatrati autoritativnim izvorom. Za ključne informacije preporučuje se profesionalni ljudski prijevod. Ne snosimo odgovornost za bilo kakva kriva tumačenja ili nesporazume koji proizlaze iz korištenja ovog prijevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -3,41 +3,41 @@
 !!! tip "NA KRAJU OVOG MODULA MOĆI ĆETE"
 
     - [ ] Opisati što su AZD predlošci
-    - [ ] Otkriti i koristiti AZD predloške za AI
-    - [ ] Početi s predloškom AI agenata
-    - [ ] **Lab 1:** Brzi početak s AZD-om u GitHub Codespaces
+    - [ ] Pronaći i koristiti AZD predloške za AI
+    - [ ] Započeti s predloškom AI agenata
+    - [ ] **Lab 1:** AZD Quickstart u Codespaces ili razvojnom kontejneru
 
 ---
 
 ## 1. Analogija graditelja
 
-Izgradnja modernih AI aplikacija spremnih za poduzeće _od nule_ može biti zastrašujuća. To je malo kao da sami gradite svoj novi dom, ciglu po ciglu. Da, može se napraviti! Ali to nije najučinkovitiji način da se dođe do željenog rezultata! 
+Izgradnja moderne, spremne za poduzeće AI aplikacije _od nule_ može biti zastrašujuća. To je malo kao graditi svoju novu kuću sam, ciglu po ciglu. Da, može se napraviti! Ali to nije najučinkovitiji način za postizanje željenog krajnjeg rezultata!
 
-Umjesto toga, često počinjemo s postojećim _dizajnerskim nacrtom_ i radimo s arhitektom na prilagodbi prema našim osobnim zahtjevima. I upravo je to pristup koji treba primijeniti pri izgradnji inteligentnih aplikacija. Prvo pronađite dobar dizajn arhitekture koji odgovara vašem području problema. Zatim surađujte sa rješenjskim arhitektom kako biste prilagodili i razvili rješenje za vaš specifični scenarij.
+Umjesto toga, često počinjemo s postojećim _dizajnerskim planom_, i radimo s arhitektom kako bismo ga prilagodili našim osobnim zahtjevima. I upravo je to pristup koji treba primijeniti pri izgradnji inteligentnih aplikacija. Prvo pronađite dobar dizajn arhitekture koja odgovara vašem problemu. Zatim surađujte s arhitektom rješenja koji će prilagoditi i razviti rješenje za vaš specifični scenarij.
 
-Ali gdje možemo pronaći te dizajnerske nacrte? I kako pronaći arhitekta koji je spreman naučiti nas kako samostalno prilagoditi i implementirati te nacrte? U ovom radionici odgovaramo na ta pitanja predstavljajući vam tri tehnologije:
+Ali gdje možemo pronaći te dizajnerske planove? I kako pronaći arhitekta koji je voljan naučiti nas kako prilagoditi i implementirati te planove samostalno? U ovom radionici odgovaramo na ta pitanja predstavljajući vam tri tehnologije:
 
-1. [Azure Developer CLI](https://aka.ms/azd) - alat otvorenog koda koji ubrzava razvojni put od lokalnog razvoja (izgradnje) do implementacije u oblaku (isporuke).
-1. [Microsoft Foundry Predlošci](https://ai.azure.com/templates) - standardizirani repozitoriji otvorenog koda koji sadrže uzorke koda, infrastrukture i konfiguracijskih datoteka za implementaciju AI arhitekture rješenja.
-1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - kodirajući agent temeljen na Azure znanju koji nas može voditi kroz kodnu bazu i pomagati u izmjenama - koristeći prirodni jezik.
+1. [Azure Developer CLI](https://aka.ms/azd) - open-source alat koji ubrzava razvojni put od lokalnog razvoja (build) do implementacije u oblaku (ship).
+1. [Microsoft Foundry Templates](https://ai.azure.com/templates) - standardizirani open-source repozitoriji koji sadrže uzorke koda, infrastrukture i konfiguracijske datoteke za implementaciju AI arhitekture rješenja.
+1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - kodirajući agent utemeljen na Azure znanju, koji nas može voditi u navigaciji kroz bazu koda i izvođenju promjena - koristeći prirodni jezik.
 
-S ovim alatima u ruci sada možemo _otkriti_ pravi predložak, _implementirati_ ga kako bismo provjerili da radi i _prilagoditi_ ga tako da odgovara našim specifičnim scenarijima. Krenimo i saznajmo kako ti alati funkcioniraju.
+S ovim alatima u rukama, sada možemo _otkriti_ odgovarajući predložak, _implementirati_ ga da bismo potvrdili da radi i _prilagoditi_ ga za naše specifične scenarije. Krenimo i naučimo kako to funkcionira.
 
 
 ---
 
 ## 2. Azure Developer CLI
 
-[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (ili `azd`) je alat otvorenog koda za naredbenu liniju koji može ubrzati vaš put od koda do oblaka s nizom naredbi prilagođenih programerima, koje dosljedno rade u vašem IDE-u (razvojnom okruženju) i CI/CD (devops) okruženjima.
+[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (ili `azd`) je open-source alat naredbenog retka koji može ubrzati vaš put od koda do oblaka s nizom korisnički prilagođenih naredbi koje dosljedno rade u vašem IDE-u (razvojnom okruženju) i CI/CD (devops) okruženjima.
 
-Sa `azd`, vaš put implementacije može biti jednostavan kao:
+S `azd` vaš put implementacije može biti jednostavan kao:
 
-- `azd init` - Inicijalizira novi AI projekt iz postojećeg AZD predloška.
-- `azd up` - Priprema infrastrukturu i implementira vašu aplikaciju u jednom koraku.
-- `azd monitor` - Prikazuje nadzor u stvarnom vremenu i dijagnostiku za vašu implementiranu aplikaciju.
-- `azd pipeline config` - Postavlja CI/CD cjevovode za automatizaciju implementacije u Azure.
+- `azd init` - inicijalizira novi AI projekt iz postojećeg AZD predloška.
+- `azd up` - u jednom koraku osigurava infrastrukturu i implementira vašu aplikaciju.
+- `azd monitor` - daje nadzor i dijagnostiku u stvarnom vremenu za vašu implementiranu aplikaciju.
+- `azd pipeline config` - postavlja CI/CD pipelineove za automatiziranu implementaciju u Azure.
 
-**🎯 | VJEŽBA**: <br/> Istražite `azd` alat naredbene linije sada u svom GitHub Codespaces okruženju. Počnite upisivanjem ove naredbe da vidite što alat može učiniti:
+**🎯 | VJEŽBA**: <br/> Istražite alat naredbenog retka `azd` u vašem trenutnom radnom okruženju. To može biti GitHub Codespaces, razvojni kontejner ili lokalna kopija s instaliranim preduvjetima. Počnite tako da upišete ovu naredbu i vidite što alat može učiniti:
 
 ```bash title="" linenums="0"
 azd help
@@ -49,58 +49,58 @@ azd help
 
 ## 3. AZD predložak
 
-Da bi `azd` to postigao, treba znati koju infrastrukturu treba pripremiti, koje konfiguracijske postavke primijeniti i koju aplikaciju implementirati. Tu dolaze [AZD predlošci](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp). 
+Da bi `azd` to postigao, treba znati koju infrastrukturu treba osigurati, koja konfiguracijska podešavanja primijeniti i koju aplikaciju implementirati. Tu dolaze do izražaja [AZD predlošci](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp).
 
-AZD predlošci su repozitoriji otvorenog koda koji kombiniraju uzorak koda s infrastrukturnim i konfiguracijskim datotekama potrebnim za implementaciju arhitekture rješenja.
-Korištenjem pristupa _Infrastruktura-kao-kod_ (IaC), dopuštaju verzioniranje definicija resursa i konfiguracijskih postavki (kao i izvorni kod aplikacije) - stvarajući ponovljive i dosljedne tijekove rada za korisnike tog projekta.
+AZD predlošci su open-source repozitoriji koji kombiniraju uzorak koda s infrastrukturnim i konfiguracijskim datotekama potrebnim za implementaciju arhitekture rješenja.
+Korištenjem pristupa _Infrastructure-as-Code_ (IaC), oni omogućuju definicije resursa i konfiguracijska podešavanja predloška da budu verzionirana (kao i izvorni kôd aplikacije) - stvarajući ponovljive i dosljedne radne tijekove među korisnicima tog projekta.
 
-Prilikom izrade ili ponovne upotrebe AZD predloška za _vaš_ scenarij, razmotrite ova pitanja:
+Prilikom stvaranja ili ponovne upotrebe AZD predloška za _vaš_ scenarij, razmotrite ova pitanja:
 
 1. Što gradite? → Postoji li predložak koji ima početni kod za taj scenarij?
-1. Kako je vaše rješenje arhitektonski postavljeno? → Postoji li predložak koji sadrži potrebne resurse?
-1. Kako je vaše rješenje implementirano? → Razmislite o `azd deploy` s pre/post-obradnim koracima!
-1. Kako ga možete dodatno optimizirati? → Razmislite o ugrađenom nadzoru i automatiziranim cjevovodima!
+1. Kako je vaše rješenje arhitektirano? → Postoji li predložak s potrebnim resursima?
+1. Kako se vaše rješenje implementira? → Razmislite o `azd deploy` s pre/post-obrambenim skriptama!
+1. Kako ga možete dodatno optimizirati? → Razmislite o ugrađenom nadzoru i automatiziranim pipelineovima!
 
-**🎯 | VJEŽBA**: <br/> 
-Posjetite [Awesome AZD](https://azure.github.io/awesome-azd/) galeriju i koristite filtre da istražite preko 250 predložaka koji su trenutno dostupni. Provjerite možete li pronaći onaj koji odgovara _vašim_ zahtjevima.
+**🎯 | VJEŽBA**: <br/>
+Posjetite galeriju [Awesome AZD](https://azure.github.io/awesome-azd/) i koristite filtere da istražite preko 250 trenutno dostupnih predložaka. Pokušajte pronaći onaj koji odgovara _vašim_ scenarijskim zahtjevima.
 
 ![Code](../../../../../translated_images/hr/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 
-## 4. Predlošci AI aplikacija
+## 4. AI predlošci aplikacija
 
-Za aplikacije pogonjene AI-jem, Microsoft pruža specijalizirane predloške koji sadrže **Microsoft Foundry** i **Foundry Agents**. Ovi predlošci ubrzavaju vaš put do izgradnje inteligentnih aplikacija spremnih za produkciju.
+Za AI aplikacije, Microsoft pruža specijalizirane predloške koji koriste **Microsoft Foundry** i **Foundry Agents**. Ovi predlošci ubrzavaju vaš put do gradnje inteligentnih, spremnih za produkciju aplikacija.
 
-### Microsoft Foundry i Foundry Agents Predlošci
+### Microsoft Foundry & Foundry Agents predlošci
 
-Odaberite predložak u nastavku za implementaciju. Svaki predložak dostupan je na [Awesome AZD](https://azure.github.io/awesome-azd/) i može se inicijalizirati jednom naredbom.
+Odaberite predložak ispod za implementaciju. Svaki je predložak dostupan na [Awesome AZD](https://azure.github.io/awesome-azd/) i može se inicijalizirati jednom naredbom.
 
 | Predložak | Opis | Naredba za implementaciju |
 |----------|-------------|----------------|
-| **[AI Chat s RAG](https://azure.github.io/awesome-azd/?tags=ai&tags=rag)** | Chat aplikacija s Retrieval Augmented Generation koristeći Microsoft Foundry | `azd init -t azure-samples/azure-search-openai-demo` |
-| **[Foundry Agent Service Starter](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Izgradite AI agente s Foundry Agents za autonomnu izvedbu zadataka | `azd init -t azure-samples/foundry-agent-service-starter` |
-| **[Orkestracija Više Agenata](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Koordinirajte više Foundry Agenata za složene radne tokove | `azd init -t azure-samples/multi-agent-orchestration` |
-| **[Inteligencija za Dokumente AI](https://azure.github.io/awesome-azd/?tags=ai&tags=document)** | Izvlačite i analizirajte dokumente putem Microsoft Foundry modela | `azd init -t azure-samples/ai-document-processing` |
-| **[Razgovorni AI Bot](https://azure.github.io/awesome-azd/?tags=ai&tags=bot)** | Izgradite inteligentne chat botove s Microsoft Foundry integracijom | `azd init -t azure-samples/ai-chat-protocol` |
-| **[Generiranje AI Slika](https://azure.github.io/awesome-azd/?tags=ai&tags=dalle)** | Generirajte slike koristeći DALL-E putem Microsoft Foundry | `azd init -t azure-samples/ai-image-generation` |
+| **[AI Chat with RAG](https://azure.github.io/awesome-azd/?tags=ai&tags=rag)** | Chat aplikacija s Retrieval Augmented Generation koristeći Microsoft Foundry | `azd init -t azure-samples/azure-search-openai-demo` |
+| **[Foundry Agent Service Starter](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Izgradite AI agente s Foundry Agents za autonomno izvršavanje zadataka | `azd init -t azure-samples/foundry-agent-service-starter` |
+| **[Multi-Agent Orchestration](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Koordinirajte više Foundry Agenata za složene radne tijekove | `azd init -t azure-samples/multi-agent-orchestration` |
+| **[AI Document Intelligence](https://azure.github.io/awesome-azd/?tags=ai&tags=document)** | Izvlačenje i analiza dokumenata korištenjem Microsoft Foundry modela | `azd init -t azure-samples/ai-document-processing` |
+| **[Conversational AI Bot](https://azure.github.io/awesome-azd/?tags=ai&tags=bot)** | Izgradnja inteligentnih chatbota s integracijom Microsoft Foundry | `azd init -t azure-samples/ai-chat-protocol` |
+| **[AI Image Generation](https://azure.github.io/awesome-azd/?tags=ai&tags=dalle)** | Generiranje slika pomoću DALL-E preko Microsoft Foundry | `azd init -t azure-samples/ai-image-generation` |
 | **[Semantic Kernel Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=semantic-kernel)** | AI agenti koristeći Semantic Kernel s Foundry Agents | `azd init -t azure-samples/semantic-kernel-agent` |
-| **[AutoGen Multi-Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=autogen)** | Multi-agent sustavi koristeći AutoGen okvir | `azd init -t azure-samples/autogen-multi-agent` |
+| **[AutoGen Multi-Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=autogen)** | Višestruki agentski sustavi koristeći AutoGen okvir | `azd init -t azure-samples/autogen-multi-agent` |
 
 ### Brzi početak
 
-1. **Pregledajte predloške**: Posjetite [https://azure.github.io/awesome-azd/](https://azure.github.io/awesome-azd/) i filtrirajte prema `AI`, `Agents` ili `Microsoft Foundry`
-2. **Odaberite predložak**: Izaberite onaj koji odgovara vašem slučaju
-3. **Inicijalizirajte**: Pokrenite `azd init` naredbu za odabrani predložak
-4. **Implementirajte**: Pokrenite `azd up` za pripremu i implementaciju
+1. **Pregledajte predloške**: Posjetite [https://azure.github.io/awesome-azd/](https://azure.github.io/awesome-azd/) i filtrirajte po `AI`, `Agents` ili `Microsoft Foundry`
+2. **Odaberite predložak**: Izaberite onaj koji odgovara vašem slučaju upotrebe
+3. **Inicijalizirajte**: Pokrenite naredbu `azd init` za odabrani predložak
+4. **Implementirajte**: Pokrenite `azd up` za osiguranje i implementaciju
 
 **🎯 | VJEŽBA**: <br/>
-Odaberite jedan od predložaka gore prema vašem scenariju:
+Odaberite jedan od gornjih predložaka na temelju svog scenarija:
 
-- **Gradite chatbota?** → Počnite s **AI Chat s RAG** ili **Razgovorni AI Bot**
-- **Trebate autonomne agente?** → Isprobajte **Foundry Agent Service Starter** ili **Orkestraciju Više Agenata**
-- **Obrađujete dokumente?** → Koristite **Inteligenciju za Dokumente AI**
-- **Želite AI pomoć u kodiranju?** → Istražite **Semantic Kernel Agent** ili **AutoGen Multi-Agent**
+- **Gradite chatbota?** → Počnite s **AI Chat with RAG** ili **Conversational AI Bot**
+- **Trebate autonomne agente?** → Isprobajte **Foundry Agent Service Starter** ili **Multi-Agent Orchestration**
+- **Obradjujete dokumente?** → Koristite **AI Document Intelligence**
+- **Želite pomoć u kodiranju AI-em?** → Istražite **Semantic Kernel Agent** ili **AutoGen Multi-Agent**
 
 ```bash title="Example: Deploy the AI Chat with RAG template" linenums="0"
 azd init -t azure-samples/azure-search-openai-demo
@@ -108,11 +108,11 @@ azd up
 ```
 
 !!! info "Istražite Više Predložaka"
-    Galerija [Awesome AZD](https://azure.github.io/awesome-azd/) sadrži više od 250 predložaka. Koristite filtre da pronađete predloške koji odgovaraju vašim specifičnim zahtjevima za jezik, okvir i Azure usluge.
+    Galerija [Awesome AZD](https://azure.github.io/awesome-azd/) sadrži preko 250 predložaka. Koristite filtere da pronađete predloške koji odgovaraju vašim specifičnim zahtjevima za jezik, okvir i Azure usluge.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Odricanje od odgovornosti**:
-Ovaj dokument je preveden korištenjem AI usluge prevođenja [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati ovlaštenim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Ne snosimo odgovornost za bilo kakve nesporazume ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
+Ovaj dokument je preveden korištenjem AI usluge za prijevod [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, molimo imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Nismo odgovorni za bilo kakve nesporazume ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

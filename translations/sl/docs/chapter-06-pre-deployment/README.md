@@ -1,21 +1,23 @@
 # Poglavje 6: Načrtovanje in preverjanje pred uvajanjem
 
-**📚 Tečaj**: [AZD For Beginners](../../README.md) | **⏱️ Trajanje**: 1 ura | **⭐ Kompleksnost**: Srednje
+**📚 Tečaj**: [AZD za začetnike](../../README.md) | **⏱️ Trajanje**: 1 ura | **⭐ Kompleksnost**: Srednje zahtevno
 
 ---
 
 ## Pregled
 
-To poglavje pokriva ključne korake načrtovanja in preverjanja pred uvajanjem vaše aplikacije. Naučite se, kako se izogniti dragim napakam z ustreznim načrtovanjem zmogljivosti, izbiro SKU-jev in predhodnimi preverjanji.
+To poglavje zajema ključne korake načrtovanja in preverjanja pred uvajanjem vaše aplikacije. Naučite se, kako se izogniti dragim napakam z ustreznim načrtovanjem zmogljivosti, izborom SKU-jev in preflight preverjanji.
+
+> Preverjeno z `azd 1.23.12` v marcu 2026.
 
 ## Cilji učenja
 
-By completing this chapter, you will:
-- Izvesti predhodna preverjanja pred uvajanjem
-- Načrtovati zmogljivosti in oceniti potrebne vire
-- Izbrati ustrezne SKU-je za optimizacijo stroškov
-- Konfigurirati Application Insights za spremljanje
-- Razumeti vzorce koordinacije ekipe
+Z zaključkom tega poglavja boste:
+- Zagnali preflight preverjanja pred uvajanjem
+- Načrtovali zmogljivost in ocenili potrebne vire
+- Izbrali ustrezne SKU-je za optimizacijo stroškov
+- Konfigurirali Application Insights za spremljanje
+- Razumeli vzorce koordinacije ekipe
 
 ---
 
@@ -23,21 +25,21 @@ By completing this chapter, you will:
 
 | # | Lekcija | Opis | Čas |
 |---|--------|-------------|------|
-| 1 | [Predhodna preverjanja](preflight-checks.md) | Preverite konfiguracijo pred uvajanjem | 15 min |
-| 2 | [Načrtovanje zmogljivosti](capacity-planning.md) | Oceniti potrebne vire | 20 min |
-| 3 | [Izbira SKU-jev](sku-selection.md) | Izberite ustrezne cenovne stopnje | 15 min |
+| 1 | [Preflight preverjanja](preflight-checks.md) | Preverite konfiguracijo pred uvajanjem | 15 min |
+| 2 | [Načrtovanje zmogljivosti](capacity-planning.md) | Ocenite potrebne vire | 20 min |
+| 3 | [Izbira SKU-jev](sku-selection.md) | Izberite ustrezne cenovne razrede | 15 min |
 | 4 | [Application Insights](application-insights.md) | Konfigurirajte spremljanje | 20 min |
-| 5 | [Vzorce koordinacije](coordination-patterns.md) | Delovni procesi uvajanja ekipe | 15 min |
+| 5 | [Koordinacijski vzorci](coordination-patterns.md) | Delovni poteki ekipe pri uvajanju | 15 min |
 
 ---
 
-## 🚀 Hitri začetek
+## 🚀 Hiter začetek
 
 ```bash
-# Preveri kvote za naročnino
+# Preveri kvote naročnine
 az vm list-usage --location eastus --output table
 
-# Predogled razmestitve (ne ustvarja virov)
+# Predogled uvajanja (brez ustvarjenih virov)
 azd provision --preview
 
 # Preveri sintakso Bicep
@@ -49,26 +51,26 @@ azd env get-values
 
 ---
 
-## ☑️ Kontrolni seznam pred uvajanjem
+## ☑️ Seznam za preverjanje pred uvajanjem
 
 ### Pred `azd provision`
 
 - [ ] Kvota preverjena za regijo
 - [ ] SKU-ji ustrezno izbrani
 - [ ] Ocena stroškov pregledana
-- [ ] Poimenovalna konvencija skladna
+- [ ] Konvencija poimenovanja usklajena
 - [ ] Varnost/RBAC konfigurirana
 
 ### Pred `azd deploy`
 
-- [ ] Okoljske spremenljivke nastavljene
-- [ ] Skrivnosti v Key Vault
-- [ ] Nizi povezav preverjeni
-- [ ] Health checks konfigurirani
+- [ ] Nastavljene spremenljivke okolja
+- [ ] Skrivnosti v Key Vaultu
+- [ ] Nizi povezave preverjeni
+- [ ] Preverjanja stanja konfigurirana
 
 ---
 
-## 💰 Vodnik za izbiro SKU-jev
+## 💰 Vodič za izbiro SKU-jev
 
 | Delovna obremenitev | Razvoj | Produkcija |
 |----------|-------------|------------|
@@ -98,5 +100,5 @@ azd env get-values
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Izjava o omejitvi odgovornosti**:
-Ta dokument je bil preveden s storitvijo za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, prosimo, upoštevajte, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku velja za avtoritativni vir. Za ključne informacije priporočamo strokovni človeški prevod. Nismo odgovorni za nobene nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v izvirnem jeziku velja za avtoritativni vir. Za kritične informacije priporočamo strokovni človeški prevod. Za morebitne nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda, ne odgovarjamo.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

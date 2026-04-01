@@ -1,57 +1,57 @@
-# Namestitev in vodnik za nastavitev
+# Namestitev in vodič za nastavitev
 
-**Navigacija po poglavjih:**
-- **📚 Domov tečaja**: [AZD za začetnike](../../README.md)
-- **📖 Trenutno poglavje**: Poglavje 1 - Osnove in hiter začetek
-- **⬅️ Prejšnje**: [Osnove AZD](azd-basics.md)
-- **➡️ Naslednje**: [Vaš prvi projekt](first-project.md)
-- **🚀 Naslednje poglavje**: [Poglavje 2: Razvoj, usmerjen na AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD za začetnike](../../README.md)
+- **📖 Current Chapter**: Poglavje 1 - Osnove in hiter začetek
+- **⬅️ Previous**: [Osnove AZD](azd-basics.md)
+- **➡️ Next**: [Vaš prvi projekt](first-project.md)
+- **🚀 Next Chapter**: [Poglavje 2: Razvoj, usmerjen v AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Uvod
 
-Ta celovit vodnik vas bo popeljal skozi namestitev in konfiguracijo Azure Developer CLI (azd) na vašem sistemu. Naučili se boste več načinov namestitve za različne operacijske sisteme, nastavitve overjanja in začetno konfiguracijo, da pripravite razvojno okolje za uvajanje v Azure.
+Ta obsežen vodič vas bo popeljal skozi namestitev in konfiguracijo Azure Developer CLI (azd) na vašem sistemu. Naučili se boste več načinov namestitve za različne operacijske sisteme, nastavitve prijave in začetne konfiguracije, da pripravite svoje razvojno okolje za nameščanje v Azure.
 
 ## Cilji učenja
 
 Do konca te lekcije boste:
 - Uspešno namestili Azure Developer CLI na vaš operacijski sistem
-- Konfigurirali overjanje z Azure z več metodami
-- Nastavili razvojno okolje s potrebnimi predpogoji
+- Konfigurirali avtentikacijo z Azure z uporabo več metod
+- Nastavili razvojno okolje z vsemi potrebnimi predpogoji
 - Razumeli različne možnosti namestitve in kdaj uporabiti katero
-- Odpravljali pogoste težave pri namestitvi in nastavitvi
+- Odpravili pogoste težave pri namestitvi in konfiguraciji
 
 ## Rezultati učenja
 
-Po zaključku te lekcije boste sposobni:
-- Namestiti azd z ustrezno metodo za vašo platformo
-- Avtenticirati z Azure z ukazom azd auth login
-- Preveriti namestitev in preizkusiti osnovne azd ukaze
-- Konfigurirati razvojno okolje za optimalno uporabo azd
-- Samostojno rešiti pogoste težave pri namestitvi
+Po zaključku te lekcije boste lahko:
+- Namestili azd z ustrezno metodo za vašo platformo
+- Avtenticirali z Azure z uporabo `azd auth login`
+- Preverili namestitev in preizkusili osnovne ukaze azd
+- Konfigurirali svoje razvojno okolje za optimalno uporabo azd
+- Samostojno rešili pogoste težave pri namestitvi
 
-Ta vodnik vam bo pomagal namestiti in konfigurirati Azure Developer CLI na vašem sistemu, ne glede na operacijski sistem ali razvojno okolje.
+Ta vodič vam bo pomagal namestiti in konfigurirati Azure Developer CLI na vašem sistemu, ne glede na operacijski sistem ali razvojno okolje.
 
 ## Predpogoji
 
-Pred namestitvijo azd poskrbite, da imate:
-- **Azure subscription** - [Ustvarite brezplačen račun](https://azure.microsoft.com/free/)
-- **Azure CLI** - za overjanje in upravljanje virov
-- **Git** - za kloniranje predlog in nadzor različic
-- **Docker** (neobvezno) - za aplikacije v vsebnikih
+Pred namestitvijo azd se prepričajte, da imate:
+- **Naročnina na Azure** - [Ustvarite brezplačen račun](https://azure.microsoft.com/free/)
+- **Azure CLI** - Za avtentikacijo in upravljanje virov
+- **Git** - Za kloniranje predlog in nadzor različic
+- **Docker** (izbirno) - Za kontejnerizirane aplikacije
 
 ## Metode namestitve
 
 ### Windows
 
-#### Možnost 1: PowerShell (priporočeno)
-```powershell
-# Zaženi kot skrbnik ali z povišanimi pravicami
-powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
+#### Možnost 1: Windows Package Manager (priporočeno)
+```cmd
+winget install microsoft.azd
 ```
 
-#### Možnost 2: Windows Package Manager (winget)
-```cmd
-winget install Microsoft.Azd
+#### Možnost 2: PowerShell skripta za namestitev
+```powershell
+# Uporabno, ko winget ni na voljo
+powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
 #### Možnost 3: Chocolatey
@@ -90,29 +90,24 @@ curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### Možnost 2: Upravitelji paketov
+#### Možnost 2: Paketni upravitelji
 
-**Ubuntu/Debian:**
+**Ročna namestitev iz gradiv izdaje:**
 ```bash
-# Dodaj Microsoftov repozitorij paketov
-curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-
-# Namesti azd
-sudo apt-get update
-sudo apt-get install azd
-```
-
-**RHEL/CentOS/Fedora:**
-```bash
-# Dodaj Microsoftov repozitorij paketov
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-sudo dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/azure-cli
-sudo dnf install azd
+# Prenesite najnovejši arhiv za vašo Linux arhitekturo s:
+# https://github.com/Azure/azure-dev/releases
+# Nato ga razpakirajte in dodajte izvršljivo datoteko azd v svojo spremenljivko PATH.
 ```
 
 ### GitHub Codespaces
 
-azd je predhodno nameščen v GitHub Codespaces. Preprosto ustvarite codespace in začnite takoj uporabljati azd.
+Nekateri Codespaces in dev container okolja že vključujejo `azd`, vendar to preverite, namesto da bi domnevali:
+
+```bash
+azd version
+```
+
+Če `azd` manjka, ga namestite s standardnim skriptom za okolje.
 
 ### Docker
 
@@ -139,7 +134,7 @@ azd --help
 azd template list
 ```
 
-Pričakovan izhod:
+Pričakovani izhod:
 ```
 azd version 1.x.x (commit xxxxxx)
 ```
@@ -150,40 +145,73 @@ azd version 1.x.x (commit xxxxxx)
 - [ ] `azd version` prikaže številko različice brez napak
 - [ ] `azd --help` prikaže dokumentacijo ukazov
 - [ ] `azd template list` prikaže razpoložljive predloge
-- [ ] `az account show` prikaže vašo Azure naročnino
 - [ ] Lahko ustvarite testno mapo in uspešno zaženete `azd init`
 
-**Če vsi preverki uspejo, ste pripravljeni nadaljevati na [Vaš prvi projekt](first-project.md)!**
+**Če vsi preverjalni koraki uspejo, ste pripravljeni nadaljevati na [Vaš prvi projekt](first-project.md)!**
 
-## Nastavitev overjanja
+## Nastavitev avtentikacije
 
-### Overjanje z Azure CLI (priporočeno)
+### Priporočena nastavitev za začetnike
+
+Za delovne tokove, usmerjene na AZD, se prijavite z `azd auth login`.
+
+```bash
+# Potrebno za AZD ukaze, kot je azd up
+azd auth login
+
+# Preveri stanje overitve AZD
+azd auth login --check-status
+```
+
+Uporabljajte prijavo Azure CLI le, če nameravate med tečajem sami uporabljati ukaze `az`.
+
+### Avtentikacija z Azure CLI (izbirno)
 ```bash
 # Namestite Azure CLI, če še ni nameščen
 # Windows: winget install Microsoft.AzureCLI
 # macOS: brew install azure-cli
-# Linux: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+# Linux: oglejte si dokumentacijo za namestitev Azure CLI za vašo distribucijo
 
 # Prijavite se v Azure
 az login
 
-# Preverite overitev
+# Preverite overjanje pristnosti
 az account show
 ```
 
-### Overjanje z vnosom kode na napravi
-Če uporabljate strežnik brez grafičnega vmesnika ali imate težave z brskalnikom:
+### Kateri način prijave naj uporabim?
+
+- Uporabite `azd auth login`, če sledite začetni poti AZD in večinoma izvajate ukaze `azd`.
+- Uporabite tudi `az login`, ko želite zagnati Azure CLI ukaze, kot je `az account show`, ali neposredno pregledovati vire.
+- Če vaja vključuje tako ukaze `azd` kot `az`, zaženite obe prijavni ukazi ob začetku.
+
+### Avtentikacija z uporabo kode naprave
+Če ste na sistemu brez grafičnega vmesnika ali imate težave z brskalnikom:
 ```bash
-az login --use-device-code
+azd auth login --use-device-code
 ```
 
-### Servisni principal (CI/CD)
+### Service Principal (CI/CD)
 Za avtomatizirana okolja:
 ```bash
-az login --service-principal \
-  --username <client-id> \
-  --password <client-secret> \
-  --tenant <tenant-id>
+azd auth login \
+  --client-id <client-id> \
+  --client-secret <client-secret> \
+  --tenant-id <tenant-id>
+```
+
+### Preverite celotno nastavitev
+
+Če želite hitro preverjanje pripravljenosti pred začetkom poglavja 1:
+
+**Windows:**
+```powershell
+.\validate-setup.ps1
+```
+
+**macOS / Linux:**
+```bash
+bash ./validate-setup.sh
 ```
 
 ## Konfiguracija
@@ -197,17 +225,17 @@ azd config set defaults.subscription <subscription-id>
 azd config set defaults.location eastus2
 
 # Prikaži vso konfiguracijo
-azd config list
+azd config show
 ```
 
-### Okoljske spremenljivke
-Dodajte v profil lupine (`.bashrc`, `.zshrc`, `.profile`):
+### Spremenljivke okolja
+Dodajte v vaš profil lupine (`.bashrc`, `.zshrc`, `.profile`):
 ```bash
 # Konfiguracija Azure
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 
-# konfiguracija azd
+# Konfiguracija azd
 export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # Omogoči beleženje za odpravljanje napak
 ```
@@ -217,13 +245,13 @@ export AZD_DEBUG=true  # Omogoči beleženje za odpravljanje napak
 ### Visual Studio Code
 Namestite razširitev Azure Developer CLI:
 1. Odprite VS Code
-2. Pojdite na Extensions (Ctrl+Shift+X)
+2. Pojdite na Razširitve (Ctrl+Shift+X)
 3. Poiščite "Azure Developer CLI"
 4. Namestite razširitev
 
 Funkcije:
 - IntelliSense za azure.yaml
-- Ukazi v integriranem terminalu
+- Integrirani terminalski ukazi
 - Brskanje po predlogah
 - Spremljanje nameščanja
 
@@ -243,7 +271,7 @@ Ustvarite `.devcontainer/devcontainer.json`:
 ### IntelliJ/JetBrains
 1. Namestite Azure vtičnik
 2. Konfigurirajte Azure poverilnice
-3. Uporabljajte integriran terminal za azd ukaze
+3. Uporabljajte integrirano konzolo za ukaze azd
 
 ## 🐛 Odpravljanje težav pri namestitvi
 
@@ -251,7 +279,7 @@ Ustvarite `.devcontainer/devcontainer.json`:
 
 #### Dostop zavrnjen (Windows)
 ```powershell
-# Zaženite PowerShell kot skrbnik
+# Zaženi PowerShell kot skrbnik
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
@@ -282,40 +310,40 @@ azd config set http.insecure true
 #### Konflikti različic
 ```bash
 # Odstranite stare namestitve
-# Windows: winget uninstall Microsoft.Azd
+# Windows: winget uninstall microsoft.azd
 # macOS: brew uninstall azd
-# Linux: sudo apt remove azd
+# Linux: pred ponovno namestitvijo odstranite prejšnjo binarno datoteko azd ali simbolno povezavo
 
-# Očistite konfiguracijo
+# Počistite konfiguracijo
 rm -rf ~/.azd
 ```
 
-### Kako pridobiti več pomoči
+### Kje dobiti dodatno pomoč
 ```bash
-# Omogoči beleženje za odpravljanje napak
+# Omogoči beleženje za razhroščevanje
 export AZD_DEBUG=true
 azd <command> --debug
 
 # Prikaži trenutno konfiguracijo
-azd config list
+azd config show
 
-# Prikaži trenutno stanje uvajanja
+# Prikaži trenutno stanje nameščanja
 azd show
 ```
 
 ## Posodabljanje azd
 
-### Samodejne posodobitve
-azd vas bo obvestil, ko bodo posodobitve na voljo:
+### Preverjanje posodobitev
+azd opozori, ko je na voljo novejša izdaja, in lahko potrdite svojo trenutno verzijo z:
 ```bash
-azd version --check-for-updates
+azd version
 ```
 
 ### Ročne posodobitve
 
 **Windows (winget):**
 ```cmd
-winget upgrade Microsoft.Azd
+winget upgrade microsoft.azd
 ```
 
 **macOS (Homebrew):**
@@ -328,33 +356,33 @@ brew upgrade azd
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-## 💡 Pogosta vprašanja
+## 💡 Pogosto zastavljena vprašanja
 
 <details>
 <summary><strong>Kakšna je razlika med azd in az CLI?</strong></summary>
 
-**Azure CLI (az)**: Nizkonivojsko orodje za upravljanje posameznih Azure virov
+**Azure CLI (az)**: Orodje nizke ravni za upravljanje posameznih Azure virov
 - `az webapp create`, `az storage account create`
 - En vir naenkrat
-- Usmerjeno v upravljanje infrastrukture
+- Osredotočeno na upravljanje infrastrukture
 
-**Azure Developer CLI (azd)**: Visokonivojsko orodje za celovite uvedbe aplikacij
-- `azd up` uvede celotno aplikacijo z vsemi viri
-- Poteki dela na osnovi predlog
+**Azure Developer CLI (azd)**: Orodje višje ravni za celotna nameščanja aplikacij
+- `azd up` namesti celotno aplikacijo z vsemi viri
+- Delovni tokovi, temelječi na predlogah
 - Osredotočeno na produktivnost razvijalcev
 
-**Potrebujete oba**: azd uporablja az CLI za overjanje
+**Potrebujete obe**: azd uporablja az CLI za avtentikacijo
 </details>
 
 <details>
-<summary><strong>Ali lahko uporabim azd z obstoječimi Azure viri?</strong></summary>
+<summary><strong>Ali lahko uporabljam azd z obstoječimi viri Azure?</strong></summary>
 
 Da! Lahko:
 1. Uvozite obstoječe vire v azd okolja
 2. Referencirate obstoječe vire v svojih Bicep predlogah
-3. Uporabljate azd za nove uvedbe poleg obstoječe infrastrukture
+3. Uporabljate azd za nove namestitve skupaj z obstoječo infrastrukturo
 
-Poglejte [Vodnik za konfiguracijo](configuration.md) za podrobnosti.
+Oglejte si [Vodnik za konfiguracijo](configuration.md) za podrobnosti.
 </details>
 
 <details>
@@ -362,68 +390,68 @@ Poglejte [Vodnik za konfiguracijo](configuration.md) za podrobnosti.
 
 Da, konfigurirajte oblak:
 ```bash
-# Vladni Azure
+# Azure za vlado
 az cloud set --name AzureUSGovernment
 az login
 
-# Kitajski Azure
+# Azure Kitajska
 az cloud set --name AzureChinaCloud
 az login
 ```
 </details>
 
 <details>
-<summary><strong>Ali lahko uporabim azd v CI/CD cevovodih?</strong></summary>
+<summary><strong>Ali lahko uporabljam azd v CI/CD cevovodih?</strong></summary>
 
 Absolutno! azd je zasnovan za avtomatizacijo:
 - Integracija z GitHub Actions
-- Podpora za Azure DevOps
-- Overjanje s servisnim principalom
+- Podpora Azure DevOps
+- Avtentikacija preko service principal
 - Neinteraktivni način
 
-Poglejte [Vodnik za uvajanje](../chapter-04-infrastructure/deployment-guide.md) za vzorce CI/CD.
+Oglejte si [Vodnik za nameščanje](../chapter-04-infrastructure/deployment-guide.md) za vzorce CI/CD.
 </details>
 
 <details>
 <summary><strong>Kakšni so stroški uporabe azd?</strong></summary>
 
 azd je sam **popolnoma brezplačen** in odprtokoden. Plačate le za:
-- Azure vire, ki jih uvedete
-- Porabo Azure storitev (računalniški viri, shranjevanje itd.)
+- Azure vire, ki jih namestite
+- Stroške porabe Azure (računalniške vire, shranjevanje itd.)
 
-Uporabite `azd provision --preview` za oceno stroškov pred uvedbo.
+Uporabite `azd provision --preview` za ocenitev stroškov pred nameščanjem.
 </details>
 
 ## Naslednji koraki
 
-1. **Dokončajte overjanje**: Prepričajte se, da lahko dostopate do svoje Azure naročnine
-2. **Preizkusite svojo prvo uvedbo**: Sledite [Vodniku za prvi projekt](first-project.md)
+1. **Dokončajte avtentikacijo**: Prepričajte se, da imate dostop do svoje Azure naročnine
+2. **Preizkusite prvo nameščanje**: Sledite [Vodniku za prvi projekt](first-project.md)
 3. **Raziskujte predloge**: Brskajte po razpoložljivih predlogah z `azd template list`
-4. **Konfigurirajte svoj IDE**: Nastavite razvojno okolje
+4. **Konfigurirajte svoj IDE**: Nastavite svoje razvojno okolje
 
 ## Podpora
 
 Če naletite na težave:
 - [Uradna dokumentacija](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Prijavite težave](https://github.com/Azure/azure-dev/issues)
+- [Prijavi težave](https://github.com/Azure/azure-dev/issues)
 - [Skupnostne razprave](https://github.com/Azure/azure-dev/discussions)
-- [Podpora Azure](https://azure.microsoft.com/support/)
-- [**Spretnosti Azure agenta**](https://skills.sh/microsoft/github-copilot-for-azure) - Pridobite navodila za Azure ukaze neposredno v urejevalniku z `npx skills add microsoft/github-copilot-for-azure`
+- [Podpora za Azure](https://azure.microsoft.com/support/)
+- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Pridobite navodila za Azure ukaze neposredno v urejevalniku z `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Navigacija po poglavjih:**
-- **📚 Domov tečaja**: [AZD za začetnike](../../README.md)
-- **📖 Trenutno poglavje**: Poglavje 1 - Osnove in hiter začetek
-- **⬅️ Prejšnje**: [Osnove AZD](azd-basics.md) 
-- **➡️ Naslednje**: [Vaš prvi projekt](first-project.md)
-- **🚀 Naslednje poglavje**: [Poglavje 2: Razvoj, usmerjen na AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD za začetnike](../../README.md)
+- **📖 Current Chapter**: Poglavje 1 - Osnove in hiter začetek
+- **⬅️ Previous**: [Osnove AZD](azd-basics.md) 
+- **➡️ Next**: [Vaš prvi projekt](first-project.md)
+- **🚀 Next Chapter**: [Poglavje 2: Razvoj, usmerjen v AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**✅ Namestitev končana!** Nadaljujte na [Vaš prvi projekt](first-project.md) , da začnete graditi z azd.
+**✅ Namestitev zaključena!** Nadaljujte na [Vaš prvi projekt](first-project.md), da začnete graditi z azd.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Izjava o omejitvi odgovornosti**:
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v izvirnem jeziku je treba šteti za avtoritativni vir. Za ključne informacije priporočamo strokovni prevod, opravljen s strani človeka. Ne prevzemamo odgovornosti za morebitne nesporazume ali napačne interpretacije, ki izhajajo iz uporabe tega prevoda.
+**Disclaimer**:
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba obravnavati kot avtoritativni vir. Za ključne informacije priporočamo strokovni človeški prevod. Ne odgovarjamo za morebitne nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

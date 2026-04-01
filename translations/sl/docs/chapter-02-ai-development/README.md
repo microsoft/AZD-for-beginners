@@ -1,20 +1,22 @@
-# Poglavje 2: Razvoj, usmerjen na AI
+# Poglavje 2: Razvoj, usmerjen v AI
 
-**📚 Tečaj**: [AZD za začetnike](../../README.md) | **⏱️ Čas trajanja**: 1-2 hours | **⭐ Zahtevnost**: Srednje
+**📚 Tečaj**: [AZD For Beginners](../../README.md) | **⏱️ Trajanje**: 1-2 ure | **⭐ Zapletenost**: Srednje
 
 ---
 
 ## Pregled
 
-To poglavje se osredotoča na uvajanje aplikacij, podprtih z AI, z uporabo Azure Developer CLI in Microsoft Foundry storitev. Od preprostih AI klepetalnih aplikacij do inteligentnih agentov z orodji.
+To poglavje se osredotoča na uvajanje aplikacij, podprtih z AI, z uporabo Azure Developer CLI in storitev Microsoft Foundry. Od preprostih AI klepetalnih aplikacij do inteligentnih agentov z orodji.
 
-## Cilji učenja
+> **Opomba preverjanja (2026-03-25):** Potek ukazov in smernice za razširitve v tem poglavju so bili pregledani glede na `azd` `1.23.12` in trenutno predogledno izdajo razširitve AI agentov `azure.ai.agents` `0.1.18-preview`. Če uporabljate starejšo različico AZD, najprej izvedite posodobitev in nato nadaljujte z vajami.
 
-Z dokončanjem tega poglavja boste:
-- Razmestiti AI-aplikacije z uporabo vnaprej pripravljenih AZD predlog
-- Razumeti integracijo Microsoft Foundry z AZD
-- Konfigurirati in prilagoditi AI agente s orodji
-- Razmestiti RAG (Retrieval-Augmented Generation) aplikacije
+## Učni cilji
+
+Po končanem poglavju boste:
+- Razmestili AI-aplikacije z uporabo vnaprej pripravljenih AZD predlog
+- Razumeli integracijo Microsoft Foundry z AZD
+- Konfigurirali in prilagodili AI-agente z orodji
+- Razmestili RAG (Retrieval-Augmented Generation) aplikacije
 
 ---
 
@@ -22,14 +24,14 @@ Z dokončanjem tega poglavja boste:
 
 | # | Lekcija | Opis | Čas |
 |---|--------|-------------|------|
-| 1 | [Integracija Microsoft Foundry](microsoft-foundry-integration.md) | Povežite AZD s storitvami Foundry | 30 min |
-| 2 | [Vodnik za AI agente](agents.md) | Razmestiti inteligentne agente z orodji | 45 min |
-| 3 | [Razmestitev AI modelov](ai-model-deployment.md) | Razmestiti in konfigurirati AI modele | 30 min |
-| 4 | [AI delavnica](ai-workshop-lab.md) | Praktično: Pripravite svojo AI rešitev za AZD | 60 min |
+| 1 | [Integracija z Microsoft Foundry](microsoft-foundry-integration.md) | Povežite AZD s storitvami Foundry | 30 min |
+| 2 | [Vodnik za AI agente](agents.md) | Razmestite inteligentne agente z orodji | 45 min |
+| 3 | [Razmestitev AI modelov](ai-model-deployment.md) | Razmestite in konfigurirajte AI modele | 30 min |
+| 4 | [AI delavnica](ai-workshop-lab.md) | Praktično: Pripravite svojo AI-rešitev za AZD | 60 min |
 
 ---
 
-## 🚀 Hiter začetek
+## 🚀 Hitri začetek
 
 ```bash
 # Možnost 1: RAG aplikacija za klepet
@@ -40,18 +42,18 @@ azd up
 azd init --template get-started-with-ai-agents
 azd up
 
-# Možnost 3: Hitra aplikacija za klepet
+# Možnost 3: Aplikacija za hiter klepet
 azd init --template openai-chat-app-quickstart
 azd up
 ```
 
 ---
 
-## 🤖 Predstavljene AI predloge
+## 🤖 Izpostavljene AI predloge
 
-| Template | Description | Services |
+| Predloga | Opis | Storitve |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG chat z navedbami | OpenAI + AI Search |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG klepet z navedbami | OpenAI + AI Search |
 | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI agent z orodji | AI Agent Service |
 | [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Osnovni AI klepet | OpenAI + Container Apps |
 
@@ -59,23 +61,23 @@ azd up
 
 ## 💰 Zavedanje stroškov
 
-| Environment | Estimated Monthly Cost |
+| Okolje | Ocenjeni mesečni strošek |
 |-------------|----------------------|
-| Development | $80-150 |
-| Staging | $150-300 |
-| Production | $300-3,500+ |
+| Razvoj | $80-150 |
+| Predprodukcija | $150-300 |
+| Produkcija | $300-3,500+ |
 
-**Namig:** Za zmanjšanje stroškov po testiranju zaženite `azd down`.
+**Namig:** Za izogibanje stroškom zaženite `azd down` po testiranju.
 
 ---
 
 ## 🔗 Navigacija
 
-| Direction | Chapter |
+| Smer | Poglavje |
 |-----------|---------|
-| **Previous** | [Poglavje 1: Osnove](../chapter-01-foundation/README.md) |
-| **Next** | [Poglavje 3: Konfiguracija](../chapter-03-configuration/README.md) |
-| **Skip to** | [Poglavje 8: Produkcijski vzorci](../chapter-08-production/README.md) |
+| **Prejšnje** | [Poglavje 1: Osnove](../chapter-01-foundation/README.md) |
+| **Naslednje** | [Poglavje 3: Konfiguracija](../chapter-03-configuration/README.md) |
+| **Preskoči na** | [Poglavje 8: Produkcijski vzorci](../chapter-08-production/README.md) |
 
 ---
 
@@ -88,6 +90,6 @@ azd up
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Izjava o omejitvi odgovornosti:
-Ta dokument je bil preveden s pomočjo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v izvirnem jeziku velja za avtoritativni vir. Za ključne informacije priporočamo strokovni človeški prevod. Ne prevzemamo odgovornosti za morebitne nesporazume ali napačne razlage, ki bi nastale zaradi uporabe tega prevoda.
+**Izjava o omejitvi odgovornosti**:
+Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da samodejni prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku velja za avtoritativni vir. Za kritične informacije priporočamo strokovni človeški prevod. Ne odgovarjamo za kakršne koli nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
