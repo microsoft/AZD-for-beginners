@@ -6,8 +6,8 @@ This directory contains comprehensive examples for deploying containerized appli
 
 - [Apžvalga](#apžvalga)
 - [Reikalavimai](#reikalavimai)
-- [Greito paleidimo pavyzdžiai](#greito-paleidimo-pavyzdžiai)
-- [Produkciniai pavyzdžiai](#produkciniai-pavyzdžiai)
+- [Greito starto pavyzdžiai](#greito-starto-pavyzdžiai)
+- [Gamybos pavyzdžiai](#gamybos-pavyzdžiai)
 - [Išplėstiniai modeliai](#išplėstiniai-modeliai)
 - [Geriausios praktikos](#geriausios-praktikos)
 
@@ -15,41 +15,43 @@ This directory contains comprehensive examples for deploying containerized appli
 
 Azure Container Apps is a fully managed serverless container platform that enables you to run microservices and containerized applications without managing infrastructure. When combined with AZD, you get:
 
-- **Supaprastintas diegimas**: Single command deploys containers with infrastructure
-- **Automatinis mastelio keitimas**: Scale to zero and scale out based on HTTP traffic or events
-- **Integruotas tinklas**: Built-in service discovery and traffic splitting
-- **Valdomas identitetas**: Secure authentication to Azure resources
-- **Išlaidų optimizavimas**: Pay only for resources you use
+- **Supaprastintas diegimas**: Viena komanda diegia konteinerius su infrastruktūra
+- **Automatinis skalavimas**: Skalavimas iki nulio ir išplėtimas pagal HTTP srautą ar įvykius
+- **Integruotas tinklas**: Įdiegta paslaugų aptikimas ir srauto skaidymas
+- **Valdomas identitetas**: Saugus autentifikavimas į Azure išteklius
+- **Sąnaudų optimizavimas**: Mokate tik už naudojamus išteklius
 
 ## Reikalavimai
 
-Before getting started, ensure you have:
+Prieš pradėdami, įsitikinkite, kad turite:
 
 ```bash
-# Patikrinkite AZD įdiegimą
+# Patikrinkite AZD diegimą
 azd version
 
 # Patikrinkite Azure CLI
 az version
 
-# Patikrinkite Docker (skirta kuriant pasirinktinius vaizdus)
+# Patikrinkite Docker (norint kurti pasirinktinius vaizdus)
 docker --version
 
-# Prisijunkite prie Azure
+# Autentifikuokitės AZD diegimams
 azd auth login
+
+# Pasirinktinai: prisijunkite prie Azure CLI, jei planuojate vykdyti az komandas tiesiogiai
 az login
 ```
 
 **Būtini Azure ištekliai:**
-- Veikianti Azure prenumerata
-- Leidimai kurti resursų grupes
+- Aktyvi Azure prenumerata
+- Leidimai kurti išteklių grupę
 - Prieiga prie Container Apps aplinkos
 
-## Greito paleidimo pavyzdžiai
+## Greito starto pavyzdžiai
 
 ### 1. Paprastas Web API (Python Flask)
 
-Diegti paprastą REST API su Azure Container Apps.
+Įdiekite paprastą REST API su Azure Container Apps.
 
 **Pavyzdys: Python Flask API**
 
@@ -80,14 +82,14 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
 **Pagrindinės savybės:**
-- Automatinis mastelio keitimas nuo 0 iki 10 kopijų
-- Sveikatos sondos ir gyvybingumo patikrinimai
+- Automatinis skalavimas nuo 0 iki 10 kopijų
+- Sveikatos patikros ir gyvybingumo tikrinimai
 - Aplinkos kintamųjų įterpimas
-- Application Insights integracija
+- „Application Insights“ integracija
 
 ### 2. Node.js Express API
 
-Diegti Node.js serverį su MongoDB integracija.
+Įdiekite Node.js backend'ą su MongoDB integracija.
 
 ```bash
 # Inicializuoti Node.js API šabloną
@@ -147,12 +149,12 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 3. Statinis Frontend + API Backend
+### 3. Statiškas frontend + API backend
 
-Diegti pilno steko programą su React frontendu ir API backend'u.
+Įdiekite pilno stako programą su React frontendu ir API backendu.
 
 ```bash
-# Inicializuoti viso steko šabloną
+# Inicializuoti full-stack šabloną
 azd init --template todo-csharp-sql-swa-func
 
 # Peržiūrėti konfigūraciją
@@ -165,11 +167,11 @@ azd up
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
-## Produkciniai pavyzdžiai
+## Gamybos pavyzdžiai
 
-### Pavyzdys 1: Mikropaslaugų architektūra
+### Pavyzdys 1: Mikroservisų architektūra
 
-**Scenarijus**: E. komercijos programa su keliomis mikropaslaugomis
+**Scenarijus**: Elektroninės prekybos programa su keliomis mikroservisėmis
 
 **Katalogo struktūra:**
 ```
@@ -231,9 +233,9 @@ azd up
 azd monitor --overview
 ```
 
-### Pavyzdys 2: Dirbtiniu intelektu valdomas Container App
+### Pavyzdys 2: Dirbtiniu intelektu varoma Container App
 
-**Scenarijus**: DI pokalbių programa su Microsoft Foundry Models integracija
+**Scenarijus**: Pokalbių AI programa su Microsoft Foundry Models integracija
 
 **Failas: src/ai-chat/app.py**
 ```python
@@ -244,7 +246,7 @@ import openai
 
 app = Flask(__name__)
 
-# Naudokite valdomąją tapatybę (Managed Identity) saugiam prieigos užtikrinimui
+# Naudokite valdomąją tapatybę saugiam prieigai
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -339,7 +341,7 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Pavyzdys 3: Foninis darbininkas su eilutės apdorojimu
+### Pavyzdys 3: Foninis darbininkas su eilių apdorojimu
 
 **Scenarijus**: Užsakymų apdorojimo sistema su žinučių eile
 
@@ -411,7 +413,7 @@ azd init
 # Diegti su eilės konfigūracija
 azd up
 
-# Keisti darbinio proceso mastą pagal eilės ilgį
+# Keisti darbininko mastą pagal eilės ilgį
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -425,19 +427,19 @@ az containerapp update \
 ### Modelis 1: Blue-Green diegimas
 
 ```bash
-# Sukurti naują versiją be srauto
+# Sukurti naują reviziją be srauto
 azd deploy api --revision-suffix blue --no-traffic
 
-# Išbandyti naują versiją
+# Išbandyti naują reviziją
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Padalyti srautą (20% į mėlyną, 80% į esamą)
+# Padalyti srautą (20% į mėlyną reviziją, 80% į dabartinę reviziją)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# Pilnas perėjimas į mėlyną
+# Pilnas perėjimas į mėlyną reviziją
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -463,7 +465,7 @@ az containerapp ingress traffic set \
 #!/bin/bash
 # deploy-canary.sh
 
-# Diegti naują versiją su 10% srauto
+# Diegti naują reviziją su 10% srauto
 azd deploy api --revision-mode multiple
 
 # Stebėti metrikas
@@ -599,11 +601,11 @@ def create_order():
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# Pažymėkite išteklius sąnaudų stebėjimui
+# Pažymėkite išteklius sąnaudų sekimui
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. Saugumo gerosios praktikos
+### 2. Saugumo geriausios praktikos
 
 ```bicep
 // Always use managed identity
@@ -665,7 +667,7 @@ services:
 ### 4. Stebėjimas ir matomumas
 
 ```bash
-# Įgalinti Application Insights
+# Įjungti Application Insights
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
 # Peržiūrėti žurnalus realiuoju laiku
@@ -685,16 +687,16 @@ az monitor metrics alert create \
   --description "Alert when CPU exceeds 80%"
 ```
 
-### 5. Išlaidų optimizavimas
+### 5. Sąnaudų optimizavimas
 
 ```bash
-# Sumažinti iki nulio, kai nenaudojama
+# Masteliuokite iki nulio, kai nenaudojama
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# Naudokite spot instancijas vystymo aplinkose
+# Naudokite spot instancijas kūrimo aplinkose
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
 # Nustatykite biudžeto įspėjimus
@@ -737,10 +739,10 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Dažniausiai naudojamos komandos
+## Dažniausiai naudojamų komandų nuoroda
 
 ```bash
-# Inicializuoti naują konteinerinės programos projektą
+# Inicializuoti naują konteinerio programos projektą
 azd init --template <template-name>
 
 # Diegti infrastruktūrą ir programą
@@ -749,13 +751,13 @@ azd up
 # Diegti tik programos kodą (praleisti infrastruktūrą)
 azd deploy
 
-# Sukurti tik infrastruktūrą
+# Paruošti tik infrastruktūrą
 azd provision
 
 # Peržiūrėti įdiegtus išteklius
 azd show
 
-# Srautinti žurnalus naudojant azd monitor arba Azure CLI
+# Srautiniu būdu peržiūrėti žurnalus naudojant azd monitor arba Azure CLI
 azd monitor --logs
 # az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
@@ -766,7 +768,7 @@ azd monitor --overview
 azd down --force --purge
 ```
 
-## Trikčių šalinimas
+## Problemų sprendimas
 
 ### Problema: Konteineris nepaleidžiamas
 
@@ -785,16 +787,16 @@ docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Problema: Negalite pasiekti Container App galinio taško
+### Problema: Nepavyksta pasiekti konteinerio programos galinio taško
 
 ```bash
-# Patikrinti ingress konfigūraciją
+# Patikrinkite ingress konfigūraciją
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# Patikrinti, ar vidinis ingress yra įjungtas
+# Patikrinkite, ar vidinis ingress įjungtas
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
@@ -818,30 +820,30 @@ az containerapp update \
 ```
 
 ## Papildomi ištekliai ir pavyzdžiai
-- [Mikropaslaugų pavyzdys](./microservices/README.md)
-- [Paprastas Flask API pavyzdys](./simple-flask-api/README.md)
+- [Mikroservisų pavyzdys](./microservices/README.md)
+- [Paprastas Flash API pavyzdys](./simple-flask-api/README.md)
 - [Azure Container Apps dokumentacija](https://learn.microsoft.com/azure/container-apps/)
 - [AZD šablonų galerija](https://azure.github.io/awesome-azd/)
 - [Container Apps pavyzdžiai](https://github.com/Azure-Samples/container-apps-samples)
 - [Bicep šablonai](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-## Prisidėjimas
+## Kaip prisidėti
 
-Norėdami pridėti naujų Container App pavyzdžių:
+Norėdami pridėti naujus Container App pavyzdžius:
 
-1. Sukurkite naują apakatalogą su savo pavyzdžiu
-2. Įtraukite visus failus `azure.yaml`, `infra/` ir `src/`
+1. Sukurkite naują subdirektoriją su savo pavyzdžiu
+2. Įtraukite pilnus `azure.yaml`, `infra/` ir `src/` failus
 3. Pridėkite išsamų README su diegimo instrukcijomis
 4. Išbandykite diegimą su `azd up`
 5. Pateikite pull request'ą
 
 ---
 
-**Reikia pagalbos?** Prisijunkite prie [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) bendruomenės palaikymui ir klausimams.
+**Reikia pagalbos?** Prisijunkite prie [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) bendruomenės dėl palaikymo ir klausimų.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Atsakomybės apribojimas**:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų arba netikslumų. Originalus dokumentas jo gimtąja kalba turi būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojamas profesionalus, žmogaus atliktas vertimas. Mes neatsakome už bet kokius nesusipratimus ar klaidingą aiškinimą, kilusius dėl šio vertimo naudojimo.
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipkite dėmesį, kad automatiniai vertimai gali turėti klaidų arba netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama kreiptis į profesionalų vertėją. Mes neatsakome už jokius nesusipratimus ar neteisingus aiškinimus, kilusius dėl šio vertimo naudojimo.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

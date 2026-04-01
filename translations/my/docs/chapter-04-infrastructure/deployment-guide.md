@@ -1,98 +1,97 @@
-# တပ်ဆင်ခြင်း လမ်းညွှန် - AZD တပ်ဆင်မှုများ ကျွမ်းကျင်ခြင်း
+# ထည့်သွင်းခြင်းလမ်းညွှန် - AZD ထည့်သွင်းမှုများ ကျွမ်းကျင်ခြင်း
 
-**အခန်းလမ်းညွှန်:**
-- **📚 သင်တန်း မူလ စာမျက်နှာ**: [AZD စတင်သူများအတွက်](../../README.md)
-- **📖 လက်ရှိ အခန်း**: အခန်း ၄ - Infrastructure as Code နှင့် တပ်ဆင်ခြင်း
-- **⬅️ Previous Chapter**: [အခန်း ၃: ဆက်တင်များ](../chapter-03-configuration/configuration.md)
-- **➡️ နောက်တစ်ခု**: [အရင်းအမြစ်များ ပေးအပ်ခြင်း](provisioning.md)
-- **🚀 နောက် အခန်း**: [အခန်း ၅: Multi-Agent AI ဖြေရှင်းချက်များ](../../examples/retail-scenario.md)
+**အခန်း လမ်းညွှန်:**
+- **📚 သင်တန်း မူလစာမျက်နှာ**: [AZD စတင်သူများအတွက်](../../README.md)
+- **📖 လက်ရှိ အခန်း**: အခန်း ၄ - အဆောက်အုံကို ကုဒ်အဖြစ် နှင့် ထည့်သွင်းခြင်း
+- **⬅️ ယခင် အခန်း**: [အခန်း ၃: ဖွဲ့စည်းမှု](../chapter-03-configuration/configuration.md)
+- **➡️ နောက်တစ်ခု**: [အရင်းအမြစ်များ ပံ့ပိုးခြင်း](provisioning.md)
+- **🚀 နောက်ထပ် အခန်း**: [အခန်း ၅: မျိုးစုံ အေးဂျင့် AI ဖြေရှင်းချက်များ](../../examples/retail-scenario.md)
 
 ## နိဒါန်း
 
-ဤ စုံလင်သည့် လမ်းညွှန်သည် Azure Developer CLI ကို အသုံးပြု၍ လျှောက်လွှာများကို တပ်ဆင်ခြင်းအကြောင်း သင့်အား လိုအပ်သမျှ အားလုံးကို ဖုံးလွှမ်းပေးပါသည်၊ အခြေခံ တစ်ချက်-ကွန်မန်း တပ်ဆင်ခြင်းမှ စ၍ စိတ်ကြိုက် hooks များ၊ မျိုးစုံပတ်ဝန်းကျင်များနှင့် CI/CD ပေါင်းစည်းမှုပါသော ထုတ်လုပ်မှုပတ်ဝန်းကျင်များအထိ။ လက်တွေ့ ဥပမာများနှင့် အကောင်းဆုံး လမ်းစဉ်များဖြင့် တပ်ဆင်မှု အသက်တာလုံးကို ကျွမ်းကျင်ပါ။
+ဤလမ်းညွှန်စာတမ်းသည် Azure Developer CLI ကို အသုံးပြု၍ အပလီကေရှင်းများကို ထည့်သွင်းရာ၌ မိမိမှာ လိုအပ်သော အချက်အားလုံးကို အစမှ အဆုံးအထိ ဖေါ်ပြထားသည်။ တစ်ချက် command ဖြင့် လုပ်ဆောင်ခြင်းမှ စ၍ custom hooks များ၊ မတူကွဲပြားသော ပတ်ဝန်းကျင်များနှင့် CI/CD အညွှန်းများထိ တိုးတက်ပြည့်စုံသော ထုတ်လုပ်ရေးအခြေအနေများအထိ လက်တွေ့ ဥပမာများနှင့် အကောင်းဆုံး နည်းလမ်းများဖြင့် deployment လေစီကို ကျွမ်းကျင်စေပါမည်။
 
-## သင်ယူရမည့် ရည်မှန်းချက်များ
+## သင်ယူရန်ရည်ရွယ်ချက်များ
 
-By completing this guide, you will:
-- Azure Developer CLI ၏ တပ်ဆင်မှု အမိန့်များနှင့် လုပ်ငန်းစဉ်များအားလုံးကို ကျွမ်းကျင်ပါ
-- Provisioning မှ monitoring ထိ တပ်ဆင်မှု အသက်တာလုံးကို နားလည်ပါ
-- Pre- နှင့် post-deployment အလိုအလျောက်လုပ်ဆောင်မှုများအတွက် စိတ်ကြိုက် deployment hooks များ အကောင်အထည်ဖော်ပါ
-- ပတ်ဝန်းကျင်အလိုက် parameters များဖြင့် မျိုးစုံပတ်ဝန်းကျင်များကို ဖော်ပြင်ပါ
-- blue-green နှင့် canary တပ်ဆင်မှုများ ပါဝင်သည့် အဆင့်မြင့် deployment ပြုပြင်များကို တပ်ဆင်ပါ
-- azd တပ်ဆင်မှုများကို CI/CD pipeline များနှင့် DevOps လုပ်ငန်းစဉ်များထဲသို့ ပေါင်းစည်းပါ
+- Azure Developer CLI ထည့်သွင်းရေး command များနှင့် workflow များအားလုံးကို ကျွမ်းကျင်စွာ သိရှိရန်
+- ပံ့ပိုးမှုမှစ၍ မော်နီတာထိ ထည့်သွင်းမှု၏ လုပ်ငန်းစဉ်လုံးဝကို နားလည်ရန်
+- မပေးမပျက် အလိုအလျောက်လုပ်ဆောင်ရန် pre/post-deployment custom hooks များကို သတ်မှတ်တပ်ဆင်ရန်
+- ပတ်ဝန်းကျင်အလိုက် အချိန်နှင့် parameter များကို သတ်မှတ်၍ အများပြည်သူပတ်ဝန်းကျင်များကို ဖွဲ့စည်းရန်
+- blue-green နှင့် canary တို့ပါသည့် တိုးတက်သော deployment မဟာဗျုဟာများကို ပြင်ဆင်ရန်
+- azd deployments များကို CI/CD pipeline များနှင့် DevOps workflow များသို့ ပေါင်းစည်းရန်
 
 ## သင်ယူပြီးရလဒ်များ
 
-Upon completion, you will be able to:
-- တစ်ကိုယ်တော် အနေဖြင့် `azd` တပ်ဆင်မှု လုပ်ငန်းစဉ်များအားလုံးကို အကောင်အထည်ဖော်ပြီး ဖြေရှင်းနိုင်မည်
-- Hooks အသုံးပြု၍ စိတ်ကြိုက် တပ်ဆင်မှု အလိုအလျောက်လုပ်ဆောင်မှုများကို ဒီဇိုင်းဆွဲပြီး ထည့်သွင်းနိုင်မည်
-- ဘေးကင်းလုံခြုံမှုနှင့် ကြပ်မတ်မှုမရှိသော ထုတ်လုပ်မှု အတွက် ပြင်ဆင်ထားသော တပ်ဆင်မှုများ ဖော်ဆောင်နိုင်မည်
-- များစွာသော ပတ်ဝန်းကျင်များနှင့် ရှုပ်ထွေးသော deployment အခြေအနေများကို စီမံနိုင်မည်
-- တပ်ဆင်မှု စွမ်းဆောင်ရည်ကို အကောင်းဆုံးဖြစ်စေပြီး ပြန်လှန်ပြင်ဆင်မှု များကို ထိန်းချုပ်နိုင်မည်
-- azd တပ်ဆင်မှုများကို ကုမ္ပဏီပတ်ဝန်းကျင် DevOps လုပ်ငန်းစဉ်များထဲသို့ ပေါင်းစည်းနိုင်မည်
+ပြီးဆုံးပြီးနောက် သင်သည် အောက်ပါများကို အလုပ်လုပ်နိုင်မည်ဖြစ်သည်။
+- azd ထည့်သွင်းမှု workflow များအားလုံးကို လွတ်လပ်စွာ အလွယ်တကူ လည်ပတ်ပြုပြင်နိုင်ခြင်း
+- hooks များကို အသုံးပြု၍ custom deployment automation များကို ဒီဇိုင်းရေးဆွဲနှင့် တည်ဆောက်နိုင်ခြင်း
+- လုံခြုံရေးနှင့် မော်နီတာလုပ်ငန်းစဉ်တို့ပါဝင်သည့် ထုတ်လုပ်ရေးသင့် သတ်မှတ်ချက်ရှိ deployments များကို ဖွဲ့စည်းနိုင်ခြင်း
+- လူကြီးမင်း၏ မဟာဗျုဟာအရ မျိုးစုံပတ်ဝန်းကျင်များ၏ ခက်ခဲသော ထည့်သွင်းမှုကိစ္စများကို စီမံနိုင်ခြင်း
+- ထည့်သွင်းမှု လုပ်ငန်းစဉ်ကို အမြန်ဆုံး ပြုလုပ်နိုင်စေပြီး ပြန်လည်မူလအခြေအနေသို့ ပြန်သွားစေသော မဟာဗျုဟာများကို အကောင်အထည်ဖော်နိုင်ခြင်း
+- azd deployments များကို စီးပွားရေး DevOps လက်ရှိနည်းလမ်းများနှင့် ပေါင်းစည်းနိုင်ခြင်း
 
-## တပ်ဆင်မှု အကျဉ်းချုပ်
+## ထည့်သွင်းမှု အနှစ်ချုပ်
 
-Azure Developer CLI သည် အများအပြားတပ်ဆင်မှု အမိန့်များပေးစွမ်းပါသည်:
-- `azd up` - အပြည့်အစုံ လုပ်ငန်းစဉ် (provision + deploy)
-- `azd provision` - Azure အရင်းအမြစ်များသာ ဖန်တီး/အပ်ဒိတ်လုပ်ခြင်း
-- `azd deploy` - လျှောက်လွှာကုဒ်ကိုသာ တပ်ဆင်ခြင်း
-- `azd package` - လျှောက်လွှာများ တည်ဆောက်ပြီး ထုပ်ပိုးခြင်း
+Azure Developer CLI သည် အောက်ပါထည့်သွင်းရန် command များကို ပံ့ပိုးပေးသည်။
+- `azd up` - ပြည့်စုံသော workflow (ပံ့ပိုးခြင်း + ထည့်သွင်းခြင်း)
+- `azd provision` - Azure အရင်းအမြစ်များသာ ဖန်တီး/ပြင်ဆင်ခြင်း
+- `azd deploy` - အပလီကေရှင်းကုဒ်ကိုသာ ထည့်သွင်းခြင်း
+- `azd package` - အပလီကေရှင်းများကို build ပြုလုပ်၍ ပက်ကေ့ချ် ဖန်တီးခြင်း
 
-## မူလ တပ်ဆင်မှု လုပ်ငန်းစဉ်များ
+## အခြေခံ ထည့်သွင်းမှု လုပ်ငန်းစဉ်များ
 
-### Complete Deployment (azd up)
-The most common workflow for new projects:
+### ပြည့်စုံသော ထည့်သွင်းမှု (azd up)
+ပရောဂျက်အသစ်များအတွက် အများဆုံး အသုံးများသော workflow:
 ```bash
-# အစမှ စ၍ အားလုံးကို တပ်ဆင်ပါ
+# အစမှ စ၍ အားလုံးကို ဖြန့်ချိပါ
 azd up
 
-# သတ်မှတ်ထားသော ပတ်ဝန်းကျင်ဖြင့် တပ်ဆင်ပါ
+# သတ်မှတ်ထားသော ပတ်ဝန်းကျင်ဖြင့် ဖြန့်ချိပါ
 azd up --environment production
 
-# စိတ်ကြိုက် ပါရာမီတာများဖြင့် တပ်ဆင်ပါ
+# စိတ်ကြိုက် ပါရာမီတာများဖြင့် ဖြန့်ချိပါ
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Infrastructure-Only Deployment
-When you only need to update Azure resources:
+### အဆောက်အုံသာ အတွက် ထည့်သွင်းမှု
+Azure အရင်းအမြစ်များကိုသာ အပ်ဒိတ်လုပ်ရန်လိုသောအခါ:
 ```bash
-# အောက်ခံအဆောက်အအုံကို တပ်ဆင်/အပ်ဒိတ်လုပ်ခြင်း
+# အခြေခံအဆောက်အအုံကို ထောက်ပံ့/အပ်ဒိတ်လုပ်ရန်
 azd provision
 
-# ပြောင်းလဲမှုများကို ကြိုကြည့်ရန် dry-run ဖြင့် ထောက်ပံ့ခြင်း
+# ပြောင်းလဲမည့်အရာများကို ကြိုကြည့်ရန် dry-run ဖြင့် ထောက်ပံ့ရန်
 azd provision --preview
 
-# သီးသန့် ဝန်ဆောင်မှုများကို ထောက်ပံ့ခြင်း
+# တိကျသတ်မှတ်ထားသော ဝန်ဆောင်မှုများကို ထောက်ပံ့ရန်
 azd provision --service database
 ```
 
-### Code-Only Deployment
-For quick application updates:
+### ကုဒ်ပင်သာ ထည့်သွင်းမှု
+အလုပ်လျင်မြန်သော အပလီကေရှင်း အပ်ဒိတ်များအတွက်:
 ```bash
-# ဝန်ဆောင်မှုအားလုံးကို ဖြန့်ချိပါ
+# ဝန်ဆောင်မှုအားလုံးကို တင်ပါ
 azd deploy
 
-# မျှော်မှန်းထားသော ထွက်စာရင်း:
-# ဝန်ဆောင်မှုများကို ဖြန့်ချိနေသည် (azd deploy)
-# - web: ဖြန့်ချိနေသည်... ပြီးစီးပါပြီ
-# - api: ဖြန့်ချိနေသည်... ပြီးစီးပါပြီ
-# အောင်မြင်: သင့် ဖြန့်ချိမှုကို 2 မိနစ် 15 စက္ကန့်အတွင်း ပြီးစီးခဲ့သည်
+# မျှော်မှန်းထားသော အထွက်:
+# ဝန်ဆောင်မှုများကို တင်နေသည် (azd deploy)
+# - web: တင်နေသည်... ပြီးပြီ
+# - api: တင်နေသည်... ပြီးပြီ
+# အောင်မြင်ပါသည်: သင့်တပ်ဆင်မှုကို 2 မိနစ် 15 စက္ကန့်အတွင်း ပြီးစီးခဲ့သည်
 
-# တိကျသော ဝန်ဆောင်မှုကို ဖြန့်ချိပါ
+# သီးသန့် ဝန်ဆောင်မှုကို တပ်ဆင်ပါ
 azd deploy --service web
 azd deploy --service api
 
-# စိတ်ကြိုက် တည်ဆောက်မှု အချက်များဖြင့် ဖြန့်ချိပါ
+# စိတ်ကြိုက် build အချက်အလက်များဖြင့် တပ်ဆင်ပါ
 azd deploy --service api --build-arg NODE_ENV=production
 
-# ဖြန့်ချိမှုကို စစ်ဆေးပါ
+# တပ်ဆင်မှုကို စစ်ဆေးပါ
 azd show --output json | jq '.services'
 ```
 
-### ✅ Deployment Verification
+### ✅ ထည့်သွင်းမှု စစ်ဆေးခြင်း
 
-After any deployment, verify success:
+ထည့်သွင်းမှု မည်သည်ဖြစ်စေ အောင်မြင်မှုကို အောက်ပါအတိုင်း စစ်ဆေးပါ။
 
 ```bash
 # ဝန်ဆောင်မှုအားလုံး လည်ပတ်နေကြောင်း စစ်ဆေးပါ
@@ -109,15 +108,15 @@ curl -f "$API_URL/health" || echo "❌ API health check failed"
 azd monitor --logs
 ```
 
-**အောင်မြင်မှု ချက်များ:**
-- ✅ ဝန်ဆောင်မှုများအားလုံးတွင် "Running" အခြေအနေပြသည်
-- ✅ Health endpoints များသည် HTTP 200 ပြန်လည်ပေးပို့သည်
-- ✅ လွန်ခဲ့သည့် ၅ မိနစ်အတွင်း မှားယွင်းချက်မှတ်တမ်း မရှိပါ
-- ✅ လျှောက်လွှာသည် စမ်းသပ်မှု တောင်းဆိုချက်များကို တုံ့ပြန်ပေးသည်
+**အောင်မြင်မှု အချက်များ:**
+- ✅ အားလုံးသော ဝန်ဆောင်မှုများတွင် "Running" အခြေအနေ ပြသမှသာ
+- ✅ Health endpoint များမှ HTTP 200 ပြန်လာရမည်
+- ✅ နောက်ဆုံး ၅ မိနစ်အတွင်း အမှားမှတ်တမ်း မရှိရပါ
+- ✅ အပလီကေရှင်းသည် စမ်းသပ်မက်ဆေ့များအား တုံ့ပြန်နိုင်ရမည်
 
-## 🏗️ တပ်ဆင်မှု လုပ်ငန်းစဉ်ကို နားလည်ခြင်း
+## 🏗️ ထည့်သွင်းမှု လုပ်ငန်းစဉ်ကို နားလည်ခြင်း
 
-### Phase 1: Pre-Provision Hooks
+### အဆင့် ၁: ပံ့ပိုးမီ Hooks
 ```yaml
 # azure.yaml
 hooks:
@@ -131,13 +130,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Phase 2: Infrastructure Provisioning
-- အင်ဖရာစထရပ် မော်ဒယ်များ (Bicep/Terraform) ကို ဖတ်ထုတ်သည်
-- Azure အရင်းအမြစ်များကို ဖန်တီးသို့မဟုတ် အပ်ဒိတ်လုပ်သည်
-- ကွန်ယက်နှင့် လုံခြုံရေးကို ပြင်ဆင်သည်
-- ကြပ်မတ်မှုနှင့် မှတ်တမ်းတင်မှုကို စီစဉ်ပေးသည်
+### အဆင့် ၂: အဆောက်အုံ ပံ့ပိုးခြင်း
+- အဆောက်အုံ template များကို ဖတ်ယူသည် (Bicep/Terraform)
+- Azure အရင်းအမြစ်များ ဖန်တီး/အပ်ဒိတ်လုပ်သည်
+- နက်၀ါ့ခ်နှင့် လုံခြုံရေးကို ပုံသေနည်း ဖြင့် ဆက်တင်သည်
+- မော်နီတာနှင့် မှတ်တမ်းတင်ခြင်းကို စနစ်တကျ သတ်မှတ်သည်
 
-### Phase 3: Post-Provision Hooks
+### အဆင့် ၃: ပံ့ပိုးပြီးနောက် Hooks
 ```yaml
 hooks:
   postprovision:
@@ -150,12 +149,12 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### Phase 4: Application Packaging
-- လျှောက်လွှာကုဒ်ကို တည်ဆောက်သည်
-- တပ်ဆင်မှု အရာဝတ္ထုများကို ဖန်တီးသည်
-- ရည်ရွယ်ထားသော ပလက်ဖောင်းအတွက် ထုပ်ပိုးသည် (containers, ZIP ဖိုင်များ စသည်)
+### အဆင့် ၄: အပလီ케ရှင်း ပက်ကေ့ခ်် ဖန်တီးခြင်း
+- အပလီကေရှင်းကုဒ်ကို build ပြုလုပ်သည်
+- ထည့်သွင်းရန် အရာအဝတ်များ (artifacts) ဖန်တီးသည်
+- ရည်ရွယ်ထားသည့် ပလက်ဖောင်းအတွက် package ပြုလုပ်သည် (containers, ZIP ဖိုင်များ စသည်)
 
-### Phase 5: Pre-Deploy Hooks
+### အဆင့် ၅: ထည့်သွင်းမီ Hooks
 ```yaml
 hooks:
   predeploy:
@@ -168,12 +167,12 @@ hooks:
       npm run db:migrate
 ```
 
-### Phase 6: Application Deployment
-- ထုပ်ပိုးထားသော လျှောက်လွှာများကို Azure ဝန်ဆောင်မှုများသို့ တပ်ဆင်သည်
-- ဖော်ပြချက်ဆက်တင်များကို အပ်ဒိတ်လုပ်သည်
-- ဝန်ဆောင်မှုများကို စတင်/ပြန်စတင်သည်
+### အဆင့် ၆: အပလီကေရှင်း ထည့်သွင်းခြင်း
+- ပက်ကေ့ခ််ထားသော အပလီကေရှင်းများကို Azure ဝန်ဆောင်မှုများသို့ ထည့်သွင်းသည်
+- ဖွဲ့စည်းမှု ဆက်တင်များကို အပ်ဒိတ်လုပ်သည်
+- ဝန်ဆောင်မှုများကို စတင်/ပြန်စတင် လုပ်ဆောင်သည်
 
-### Phase 7: Post-Deploy Hooks
+### အဆင့် ၇: ထည့်သွင်းပြီးနောက် Hooks
 ```yaml
 hooks:
   postdeploy:
@@ -186,9 +185,9 @@ hooks:
       curl https://${WEB_URL}/health
 ```
 
-## 🎛️ တပ်ဆင်မှု ဖော်ပြချက်
+## 🎛️ ထည့်သွင်းမှု ဖော်ပြချက်များ
 
-### Service-Specific Deployment Settings
+### ဝန်ဆောင်မှု သီးသန့် ထည့်သွင်းမှု ဆက်တင်များ
 ```yaml
 # azure.yaml
 services:
@@ -218,14 +217,14 @@ services:
     buildCommand: npm install --production
 ```
 
-### Environment-Specific Configurations
+### ပတ်ဝန်းကျင် သီးသန့် ဖော်ပြချက်များ
 ```bash
 # ဖွံ့ဖြိုးရေး ပတ်ဝန်းကျင်
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# စတေဂျ် ပတ်ဝန်းကျင်
+# ထုတ်လုပ်မီ စမ်းသပ်ရေး ပတ်ဝန်းကျင်
 azd env new staging
 azd env set NODE_ENV staging
 azd env set DEBUG false
@@ -238,9 +237,9 @@ azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 အဆင့်မြင့် တပ်ဆင်မှု အခြေအနေများ
+## 🔧 တိုးတက်သော ထည့်သွင်းမှု အခြေအနေများ
 
-### Multi-Service Applications
+### မျိုးစုံ ဝန်ဆောင်မှု အပလီကေရှင်းများ
 ```yaml
 # Complex application with multiple services
 services:
@@ -276,7 +275,7 @@ services:
     host: function
 ```
 
-### Blue-Green Deployments
+### ပြာ-စိမ်း (Blue-Green) ထည့်သွင်းမှုများ
 ```bash
 # အပြာရောင် ပတ်ဝန်းကျင်ကို ဖန်တီးပါ
 azd env new production-blue
@@ -285,7 +284,7 @@ azd up --environment production-blue
 # အပြာရောင် ပတ်ဝန်းကျင်ကို စမ်းသပ်ပါ
 ./scripts/test-environment.sh production-blue
 
-# ကွန်ယက်ရောက်လာမှုကို အပြာသို့ ပြောင်းပါ (DNS/Load Balancer ကို လက်ဖြင့် အပ်ဒိတ်ပြုလုပ်ရန်)
+# ဆက်သွယ်မှုများကို အပြာသို့ လက်ဖြင့် DNS/လော့ဒ်ဘလေဆာကို မွမ်းမံ၍ လွှဲပြောင်းပါ
 ./scripts/switch-traffic.sh production-blue
 
 # အစိမ်းရောင် ပတ်ဝန်းကျင်ကို ရှင်းလင်းပါ
@@ -293,7 +292,7 @@ azd env select production-green
 azd down --force
 ```
 
-### Canary Deployments
+### ကနေရီ (Canary) ထည့်သွင်းမှုများ
 ```yaml
 # azure.yaml - Configure traffic splitting
 services:
@@ -307,7 +306,7 @@ services:
         percentage: 10
 ```
 
-### Staged Deployments
+### အဆင့်လိုက် (Staged) ထည့်သွင်းမှုများ
 ```bash
 #!/bin/bash
 # deploy-staged.sh
@@ -338,9 +337,9 @@ if [[ $confirm == [yY] ]]; then
 fi
 ```
 
-## 🐳 ကွန်တိန်နာ တပ်ဆင်မှုများ
+## 🐳 ကွန်တိတ်နာ ထည့်သွင်းမှုများ
 
-### Container App Deployments
+### Container App ထည့်သွင်းခြင်း
 ```yaml
 services:
   api:
@@ -364,7 +363,7 @@ services:
       maxReplicas: 10
 ```
 
-### Multi-Stage Dockerfile အကောင်းမြှင့်ခြင်း
+### Multi-Stage Dockerfile တိုးတက်ချက်များ
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -390,15 +389,15 @@ EXPOSE 3000
 CMD ["npm", "start"]
 ```
 
-## ⚡ စွမ်းဆောင်ရည် တိုးတက်စေခြင်း
+## ⚡ အ výkon တိုးတက်စေမှု
 
-### Service-Specific Deployments
+### ဝန်ဆောင်မှု သီးသန့် ထည့်သွင်းမှုများ
 ```bash
-# ပိုမိုမြန်ဆန်စေဖို့ တိကျသော ဝန်ဆောင်မှုတစ်ခုကို ဖြန့်ချိပါ
+# မြန်ဆန်စွာ အလှည့်လည်လုပ်ရန် သတ်မှတ်ထားသော ဝန်ဆောင်မှုတစ်ခုကို တပ်ဆင်ပါ
 azd deploy --service web
 azd deploy --service api
 
-# ဝန်ဆောင်မှုအားလုံးကို ဖြန့်ချိပါ
+# ဝန်ဆောင်မှုအားလုံးကို တပ်ဆင်ပါ
 azd deploy
 ```
 
@@ -412,27 +411,27 @@ services:
     outputPath: dist
 ```
 
-### Efficient Code Deployments
+### ထိရောက်သော ကုဒ် ထည့်သွင်းမှုများ
 ```bash
-# ကုဒ်သာ ပြင်ဆင်မှုများအတွက် azd up မဟုတ်ဘဲ azd deploy ကို သုံးပါ
-# ဤနည်းလမ်းသည် အင်ဖရားစထက် ဖွဲ့စည်းရေး (infrastructure provisioning) ကို ကျော်လွှတ်ပေး၍ ပိုမိုလျင်မြန်သည်
+# ကုဒ်သာ ပြင်ဆင်တဲ့အချိန် azd up မဟုတ်ဘဲ azd deploy ကို အသုံးပြုပါ
+# ဒီဟာက အခြေခံအဆောက်အအုံ ပို့ဆောင်မှုကို ကျော်လွှားပေးလို့ ပိုမြန်ပါတယ်
 azd deploy
 
-# အမြန်ဆုံး ပြန်လည်တိုးတက်မှုအတွက် သတ်မှတ်ထားသော ဝန်ဆောင်မှုကိုသာ deploy လုပ်ပါ
+# အမြန်ဆုံး ပြန်လည်လုပ်ဆောင်နိုင်ဖို့ သတ်မှတ် ဝန်ဆောင်မှုကို ဖြန့်ချိပါ
 azd deploy --service api
 ```
 
-## 🔍 တပ်ဆင်မှု ကြီးကြပ်ခြင်း
+## 🔍 ထည့်သွင်းမှု မော်နီတာလုပ်ငန်း
 
-### Real-Time Deployment Monitoring
+### အချိန်နှင့်တပြေးညီ ထည့်သွင်းမှု မော်နီတာလုပ်ခြင်း
 ```bash
-# အက်ပလီကေးရှင်းကို အချိန်နှင့်တပြေးညီ စောင့်ကြည့်ပါ
+# တစ်ချိန်တည်းတွင် အက်ပလီကေးရှင်းကို စောင့်ကြည့်ပါ
 azd monitor --live
 
-# အက်ပလီကေးရှင်း လော့ဂ်များ ကြည့်ရှုပါ
+# အက်ပလီကေးရှင်းလော့ဂ်များကို ကြည့်ရှုပါ
 azd monitor --logs
 
-# တပ်ဆင်မှု အခြေအနေကို စစ်ဆေးပါ
+# ဖြန့်ချိမှု အခြေအနေကို စစ်ဆေးပါ
 azd show
 ```
 
@@ -450,14 +449,14 @@ services:
       retries: 3
 ```
 
-### Post-Deployment Validation
+### ထည့်သွင်းပြီးနောက် စစ်ဆေးခြင်း
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
 
 echo "Validating deployment..."
 
-# အပလီကေးရှင်း၏ ကျန်းမာရေးကို စစ်ဆေးပါ
+# အပလီကေးရှင်းကျန်းမာရေးကို စစ်ဆေးပါ
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -483,16 +482,16 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 လုံခြုံရေးဆိုင်ရာ တွေးခေါ်ရန်များ
+## 🔐 လုံခြုံရေး သတိပြုရန်အချက်များ
 
-### Secrets Management
+### Secrets စီမံခန့်ခွဲမှု
 ```bash
 # လျှို့ဝှက်ချက်များကို လုံခြုံစိတ်ချစွာ သိမ်းဆည်းပါ
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# azure.yaml တွင် လျှို့ဝှက်ချက်များကို ကိုးကားပါ
+# azure.yaml ဖိုင်ထဲရှိ လျှို့ဝှက်ချက်များကို ကိုးကားပါ
 ```
 
 ```yaml
@@ -505,7 +504,7 @@ services:
         value: ${JWT_SECRET}
 ```
 
-### Network Security
+### ကွန်ယက် လုံခြုံရေး
 ```yaml
 # azure.yaml - Configure network security
 infra:
@@ -516,7 +515,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### Identity and Access Management
+### အိုင်ဒင်တစ်တီနှင့် အသုံးပြုခွင့် စီမံခန့်ခွဲမှု
 ```yaml
 services:
   api:
@@ -531,37 +530,37 @@ services:
           - external-api-key
 ```
 
-## 🚨 ပြန်လှန်ရန် 전략များ
+## 🚨 ပြန်လှန် မူလအခြေအနေ သတ်မှတ်ချက်များ
 
-### Quick Rollback
+### အမြန် ပြန်လှန်ခြင်း
 ```bash
-# AZD တွင် အတွင်းတည်ဆောက်ထားသည့် rollback မရှိပါ။ အကြံပြုသော နည်းလမ်းများ:
+# AZD တွင် အလိုအလျောက် ပြန်လည်ရုပ်သိမ်း (rollback) လုပ်နိုင်မှု မရှိပါ။ အကြံပြုထားသော နည်းလမ်းများ:
 
-# ရွေးချယ်စရာ ၁: Git မှ ပြန်လည်တပ်ဆင်ခြင်း (အကြံပြု)
-git revert HEAD  # ပြဿနာရှိသော commit ကို ပြန်လည်မူလအခြေအနေသို့ ပြန်ထားပါ
+# ရွေးချယ်စရာ ၁: Git မှ ပြန်လည်တင်သွင်းခြင်း (အကြံပြု)
+git revert HEAD  # ပြဿနာဖြစ်စေသော commit ကို မူလအခြေအနေသို့ ပြန်လည်ပြင်ဆင်ပါ
 git push
 azd deploy
 
-# ရွေးချယ်စရာ ၂: သတ်မှတ် commit ကို ပြန်လည်တပ်ဆင်ခြင်း
+# ရွေးချယ်စရာ ၂: အထူးသတ်မှတ်ထားသော commit ကို ပြန်လည်တင်သွင်းခြင်း
 git checkout <previous-commit-hash>
 azd deploy
 git checkout main
 ```
 
-### Infrastructure Rollback
+### အဆောက်အုံ ပြန်လှန်ခြင်း
 ```bash
-# ဖွဲ့စည်းပုံပြောင်းလဲမှုများကို လုပ်ဆောင်မပြုမီ ကြိုကြည့်ပါ
+# အသုံးချမတိုင်ခင် အောက်ခံအဆောက်အအုံ ပြောင်းလဲမှုများကို ကြိုကြည့်ပါ
 azd provision --preview
 
-# ဖွဲ့စည်းပုံ ပြန်လှန်ရန် ဗားရှင်းထိန်းချုပ်မှုကို အသုံးပြုပါ:
-git revert HEAD  # ဖွဲ့စည်းပုံ ပြောင်းလဲမှုများကို ပြန်လှန်ပြုလုပ်ပါ
-azd provision    # ယခင် ဖွဲ့စည်းပုံ အခြေအနေကို ပြန်တပ်ဆင်ပါ
+# အောက်ခံအဆောက်အအုံ ပြန်လုပ်ရန် ဗားရှင်းထိန်းချုပ်မှုကို အသုံးပြုပါ:
+git revert HEAD  # အောက်ခံအဆောက်အအုံ ပြောင်းလဲမှုများကို အရင်အခြေအနေသို့ ပြန်ပြင်ပါ
+azd provision    # အရင်အခြေနေအထားရှိသော အောက်ခံအဆောက်အအုံကို အသုံးချပါ
 ```
 
-### Database Migration Rollback
+### ဒေတာဘေ့(စ်) မိုက်ရေးရှင်း ပြန်လှန်ခြင်း
 ```bash
-#bash interpreter ကို သတ်မှတ်သော shebang (#!/bin/bash)
-# scripts/rollback-database.sh - ဒေတာဘေ့စ်ကို နောက်ပြန်ပြန်လည်ယူရန် script ဖိုင်
+#!/bin/bash
+# scripts/rollback-database.sh
 
 echo "Rolling back database migrations..."
 npm run db:rollback
@@ -572,21 +571,21 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 တပ်ဆင်မှု မက်ထရစ်များ
+## 📊 ထည့်သွင်းမှု တိုင်းတာချက်များ
 
-### Track Deployment Performance
+### ထည့်သွင်းမှု လုပ်ဆောင်ရည်ကို ဆက်လက် လိုက်ကြည့်ရန်
 ```bash
 # လက်ရှိ တပ်ဆင်မှု အခြေအနေကို ကြည့်ရန်
 azd show
 
-# Application Insights ဖြင့် အက်ပလီကေးရှင်းကို စောင့်ကြည့်ရန်
+# Application Insights ဖြင့် အပလီကေးရှင်းကို စောင့်ကြည့်ရန်
 azd monitor --overview
 
 # တိုက်ရိုက် မက်ထရစ်များကို ကြည့်ရန်
 azd monitor --live
 ```
 
-### Custom Metrics Collection
+### စိတ်ကြိုက် တိုင်းတာချက်များ စုဆောင်းခြင်း
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -603,32 +602,32 @@ hooks:
         -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
 ```
 
-## 🎯 အကောင်းဆုံး လက်တွေ့လမ်းစဉ်များ
+## 🎯 အကောင်းဆုံး လေ့လာမှု နည်းလမ်းများ
 
-### 1. Environment Consistency
+### 1. ပတ်ဝန်းကျင် တစ်ညီတစ်နိုင်မှု
 ```bash
-# နာမည်ပေးခြင်းကို တစ်မျိုးတည်း စည်းမျဉ်းဖြင့် အသုံးပြုပါ
+# နာမည်ပေးရာတွင် တူညီစွာ အသုံးပြုပါ
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# ပတ်ဝန်းကျင်များ၏ တူညီမှုကို ထိန်းသိမ်းပါ
+# ပတ်ဝန်းကျင်များအကြား တူညီမှုကို ထိန်းသိမ်းပါ
 ./scripts/sync-environments.sh
 ```
 
-### 2. Infrastructure Validation
+### 2. အဆောက်အုံ အတည်ပြုခြင်း
 ```bash
-# တပ်ဆင်မတိုင်မီ အခြေခံအဆောက်အဦး ပြောင်းလဲမှုများကို ကြိုကြည့်ပါ
+# တပ်ဆင်မတိုင်မီ အခြေခံအဆောက်အအုံ ပြောင်းလဲမှုများကို ကြိုမြင်ကြည့်ရှုပါ
 azd provision --preview
 
 # ARM/Bicep linting ကို အသုံးပြုပါ
 az bicep lint --file infra/main.bicep
 
-# Bicep syntax ကို အတည်ပြုပါ
+# Bicep စာမူပုံစံကို အတည်ပြုပါ
 az bicep build --file infra/main.bicep
 ```
 
-### 3. Testing Integration
+### 3. စမ်းသပ်မှု ပေါင်းစည်းမှု
 ```yaml
 hooks:
   predeploy:
@@ -657,74 +656,74 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. Documentation and Logging
+### 4. စာရွက်စာတမ်းနှင့် မှတ်တမ်းတင်ခြင်း
 ```bash
-# တပ်ဆင်ခြင်းလုပ်ထုံးလုပ်နည်းများအား မှတ်တမ်းတင်ပါ
+# တပ်ဆင်ခြင်း လုပ်ထုံးလုပ်နည်းများကို မှတ်တမ်းတင်ပါ
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
-echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
+echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
 ```
 
-## နောက်တစ်ပိုင်း အဆင့်များ
+## နောက်ထပ် ဆက်လက်လုပ်ဆောင်ရန်
 
-- [အရင်းအမြစ်များ ပေးအပ်ခြင်း](provisioning.md) - အင်ဖရာစထရပ် စီမံခန့်ခွဲခြင်းအကြောင်း နက်ချိတ်ပါစေ
-- [Pre-Deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - သင့် တပ်ဆင်မှု မဟာဗျူဟာကို စီစဉ်ပါ
-- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - တပ်ဆင်မှု ပြဿနာများကို ဖြေရှင်းပါ
-- [Best Practices](../chapter-07-troubleshooting/debugging.md) - ထုတ်လုပ်မှုသုံး တပ်ဆင်မှု မဟာဗျူဟာများ
+- [အရင်းအမြစ်များ ပံ့ပိုးခြင်း](provisioning.md) - အဆောက်အုံ စီမံခန့်ခွဲမှုကို နက်နက်ရှိုင်းရှိုင်း လေ့လာရန်
+- [ထည့်သွင်းမီ စီစဉ်မှု](../chapter-06-pre-deployment/capacity-planning.md) - သင့် ထည့်သွင်းမှု မဟာဗျုဟာကို စီမံရန်
+- [ရောဂါပျက်များ နှုတ်ကုန်များ](../chapter-07-troubleshooting/common-issues.md) - ထည့်သွင်းမှု ပြဿနာများကို ဖြေရှင်းရန်
+- [အကောင်းဆုံး လေ့လာမှု နည်းလမ်းများ](../chapter-07-troubleshooting/debugging.md) - ထုတ်လုပ်ရေးအဆင့် သင့်တော်သော ထည့်သွင်းမှု မဟာဗျုဟာများ
 
-## 🎯 လက်တွေ့ တပ်ဆင်မှု လေ့ကျင့်ခန်းများ
+## 🎯 လက်တွေ့ ထည့်သွင်းမှု လေ့ကျင့်ခန်းများ
 
-### လေ့ကျင့်ခန်း ၁: တိုးတက်အဆင့်လိုက် တပ်ဆင်မှု လုပ်ငန်းစဉ် (20 minutes)
-**ရည်မှန်းချက်**: အပြည့်အစုံနှင့် တိုးတက်အဆင့်လိုက် တပ်ဆင်မှုများ၏ မတူကွဲပြားချက်ကို ကျွမ်းကျင်ပါ
+### လေ့ကျင့်ခန်း ၁: တိုးတက်လာသော ထည့်သွင်းမှု လုပ်ငန်းစဉ် (20 မိနစ်)
+**ရည်ရွယ်ချက်**: ပြည့်စုံသော ထည့်သွင်းမှုနှင့် တိုးချဲ့ထည့်သွင်းမှု၏ ကွာခြားချက်ကို ကျွမ်းကျင်စေခြင်း
 
 ```bash
-# ပထမဆုံး တပ်ဆင်ခြင်း
+# အစပိုင်း တပ်ဆင်ခြင်း
 mkdir deployment-practice && cd deployment-practice
 azd init --template todo-nodejs-mongo
 azd up
 
-# ပထမဆုံး တပ်ဆင်သည့် အချိန်ကို မှတ်တမ်းတင်ခြင်း
+# အစပိုင်း တပ်ဆင်ချိန်ကို မှတ်တမ်းတင်ရန်
 echo "Full deployment: $(date)" > deployment-log.txt
 
-# ကုဒ် ပြောင်းလဲခြင်း
+# ကုဒ်ပြောင်းလဲရန်
 echo "// Updated $(date)" >> src/api/src/server.js
 
-# ကုဒ်ပဲ တပ်ဆင်ခြင်း (မြန်)
+# ကုဒ်ပဲ တင်သွင်းရန် (လျင်မြန်)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
-# အချိန်များကို နှိုင်းယှဉ်ခြင်း
+# အချိန်များကို နှိုင်းယှဉ်ရန်
 cat deployment-log.txt
 
-# သန့်ရှင်းရေး ပြုလုပ်ခြင်း
+# ရှင်းလင်းရန်
 azd down --force --purge
 ```
 
-**အောင်မြင်မှု ချက်များ:**
-- [ ] Full deployment takes 5-15 minutes
-- [ ] Code-only deployment takes 2-5 minutes
-- [ ] Code changes reflected in deployed app
-- [ ] Infrastructure unchanged after `azd deploy`
+**အောင်မြင်မှု အချက်များ:**
+- [ ] ပြည့်စုံ ထည့်သွင်းမှု သာမန်အားဖြင့် 5-15 မိနစ် ကြားယူသည်
+- [ ] ကုဒ်ပင်သာ ထည့်သွင်းမှု 2-5 မိနစ် ကြားယူသည်
+- [ ] ကုဒ်ပြင်နိုင်မှုများသည် ထည့်သွင်းထားသည့် အပလီကေရှင်းတွင် ထင်ရှားပြဿနာများကို ပြန်လည်ထုတ်ဖော်သည်
+- [ ] `azd deploy` ပြုလုပ်ပြီးနောက် အဆောက်အုံတွင် မပြောင်းလဲပါ
 
-**သင်ယူပြီးရလဒ်**: `azd deploy` သည် code ပြင်ဆင်မှုများအတွက် `azd up` ထက် 50-70% ပိုလျင်မြန်သည်
+**သင်ယူရလဒ်**: `azd deploy` သည် ကုဒ်ပြင်ပြင်ဆင်မှုများအတွက် `azd up` ထက် 50-70% အမြန်ဖြစ်သည်
 
-### လေ့ကျင့်ခန်း ၂: စိတ်ကြိုက် တပ်ဆင်မှု Hooks များ (30 minutes)
-**ရည်မှန်းချက်**: Pre- နှင့် post-deployment အလိုအလျောက်လုပ်ဆောင်မှုများကို အကောင်အထည်ဖော်ပါ
+### လေ့ကျင့်ခန်း ၂: Custom Deployment Hooks (30 မိနစ်)
+**ရည်ရွယ်ချက်**: ပံ့ပိုးမီနှင့် ပြီးနောက် ထည့်သွင်းမှု အလိုအလျောက်လုပ်ငန်းစဉ်များကို တည်ဆောက်မှု
 
 ```bash
-# တပ်ဆင်မီ အတည်ပြုရန် စကရစ်ပ့် တစ်ခု ဖန်တီးပါ
+# deploy မလုပ်ခင် အတည်ပြုစစ်ဆေးရေး script တစ်ခု ဖန်တီးပါ
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
 echo "⚠️ Running pre-deployment checks..."
 
-# စမ်းသပ်မှုများ အောင်မြင်သလား စစ်ဆေးပါ
+# စမ်းသပ်မှုများ အောင်မြင်ပါသလား စစ်ဆေးပါ
 if ! npm run test:unit; then
     echo "❌ Tests failed! Aborting deployment."
     exit 1
 fi
 
-# commit မထားသေးသော ပြောင်းလဲမှုများ ရှိမရှိ စစ်ဆေးပါ
+# commit မထိုးထားသေးသော ပြောင်းလဲမှုများ ရှိမရှိ စစ်ဆေးပါ
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -734,7 +733,7 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# တပ်ဆင်ပြီးနောက် smoke test တစ်ခု ဖန်တီးပါ
+# deploy ပြီးနောက် smoke test တစ်ခု ဖန်တီးပါ
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
 echo "💨 Running smoke tests..."
@@ -753,7 +752,7 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# azure.yaml ဖိုင်ထဲသို့ hooks ထည့်ပါ
+# azure.yaml ဖိုင်ထဲသို့ hooks များ ထည့်ပါ
 cat >> azure.yaml << 'EOF'
 
 hooks:
@@ -766,21 +765,21 @@ hooks:
     run: ./scripts/post-deploy-test.sh
 EOF
 
-# hooks များဖြင့် တပ်ဆင်မှုကို စမ်းသပ်ပါ
+# hooks များနှင့်အတူ deployment ကို စမ်းသပ်ပါ
 azd deploy
 ```
 
-**အောင်မြင်မှု ချက်များ:**
-- [ ] Pre-deploy script သည် တပ်ဆင်မှုမပြုမီ အလုပ်လုပ်သည်
-- [ ] စမ်းသပ်မှု မအောင်မြင်လျှင် တပ်ဆင်မှု ပိတ်သိမ်းသည်
-- [ ] Post-deploy smoke test သည် ကျန်းမာရေးကို အတည်ပြုသည်
-- [ ] Hooks များသည် မှန်ကန်သော အစီအစဉ်အတိုင်း အလုပ်လုပ်သည်
+**အောင်မြင်မှု အချက်များ:**
+- [ ] ထည့်သွင်းမီ စက္ကူ script သည် ထည့်သွင်းမှုမပြုမီ အသောက်လည်သည်
+- [ ] စမ်းသပ်မှု မအောင်မြင်ပါက ထည့်သွင်းမှု ရပ်ဆိုင်းသည်
+- [ ] ထည့်သွင်းပြီးနောက် smoke test သည် ကျန်းမာအခြေအနေ ကို အတည်ပြုသည်
+- [ ] Hooks များသည် မှန်ကန်သော အစဉ်အတိုင်း အလုပ်လုပ်သည်
 
-### လေ့ကျင့်ခန်း ၃: မျိုးစုံပတ်ဝန်းကျင် တပ်ဆင်မှု မဟာဗျူဟာ (45 minutes)
-**ရည်မှန်းချက်**: အဆင့်လိုက် တပ်ဆင်မှု လုပ်ငန်းစဉ် (dev → staging → production) ကို အကောင်အထည်ဖော်ပါ
+### လေ့ကျင့်ခန်း ၃: မျိုးစုံ ပတ်ဝန်းကျင် ထည့်သွင်း မဟာဗျုဟာ (45 မိနစ်)
+**ရည်ရွယ်ချက်**: အဆင့်လိုက် ထည့်သွင်းမှု လုပ်ငန်းစဉ် (dev → staging → production) ကို တည်ဆောက်ခြင်း
 
 ```bash
-# deployment script တစ်ခု ဖန်တီးပါ
+# တပ်ဆင်ရေး စကရစ်ပ့် ဖန်တီးပါ
 cat > deploy-staged.sh << 'EOF'
 #!/bin/bash
 set -e
@@ -788,7 +787,7 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# အဆင့် ၁: dev ပတ်ဝန်းကျင်သို့ တပ်ဆင်ပါ
+# အဆင့် 1: dev သို့ တပ်ဆင်ပါ
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
@@ -797,7 +796,7 @@ azd up --no-prompt
 echo "Running dev tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# အဆင့် ၂: staging ပတ်ဝန်းကျင်သို့ တပ်ဆင်ပါ
+# အဆင့် 2: staging သို့ တပ်ဆင်ပါ
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
@@ -806,7 +805,7 @@ azd up --no-prompt
 echo "Running staging tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# အဆင့် ၃: ထုတ်လုပ်ရေး (production) အတွက် လက်တွေ့ အတည်ပြုချက် လိုအပ်သည်
+# အဆင့် 3: production အတွက် လက်ဖြင့် အတည်ပြုရမည်
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -834,64 +833,64 @@ azd env new dev
 azd env new staging
 azd env new production
 
-# အဆင့်လိုက် တပ်ဆင်မှုကို စတင် လုပ်ဆောင်ပါ
+# အဆင့်လိုက် တပ်ဆင်မှုကို ဆောင်ရွက်ပါ
 ./deploy-staged.sh
 ```
 
-**အောင်မြင်မှု ချက်များ:**
-- [ ] Dev ပတ်ဝန်းကျင် တပ်ဆင်မှု အောင်မြင်စွာ ပြီးမြောက်သည်
-- [ ] Staging ပတ်ဝန်းကျင် တပ်ဆင်မှု အောင်မြင်စွာ ပြီးမြောက်သည်
-- [ ] Production အတွက် လက်မှတ် အတည်ပြုချက် လိုအပ်သည်
-- [ ] အားလုံးသော ပတ်ဝန်းကျင်များတွင် ကျန်းမာရေး စစ်ဆေးမှုများ လုပ်ငန်းသုံးနိုင်သည်
-- [ ] လိုအပ်ပါက ပြန်လှန်စိတ်ချနိုင်သည်
+**အောင်မြင်မှု အချက်များ:**
+- [ ] Dev ပတ်ဝန်းကျင်ကို အောင်မြင်စွာ ထည့်သွင်းနိုင်ရမည်
+- [ ] Staging ပတ်ဝန်းကျင်ကို အောင်မြင်စွာ ထည့်သွင်းနိုင်ရမည်
+- [ ] ထုတ်လုပ်ရေးအတွက် လက်မှတ် ခွင့်ပြုချက် လိုအပ်သည်
+- [ ] အရာအားလုံးတွင် Health check များ လုပ်ငန်းဆောင်ခဲ့ရမည်
+- [ ] လိုအပ်လျှင် ပြန်လှန်နိုင်ရမည်
 
-### လေ့ကျင့်ခန်း ၄: ပြန်လှန်ရန် မဟာဗျူဟာ (25 minutes)
-**ရည်မှန်းချက်**: Git ကို အသုံးပြု၍ တပ်ဆင်မှု ပြန်လှန်ခြင်းကို အကောင်အထည်ဖော်၍ စမ်းသပ်ပါ
+### လေ့ကျင့်ခန်း ၄: ပြန်လှန်မှု မဟာဗျုဟာ (25 မိနစ်)
+**ရည်ရွယ်ချက်**: Git ကို အသုံးပြု၍ ထည့်သွင်းမှု ပြန်လှန်ခြင်းကို တည်ဆောက်၍ စမ်းသပ်ခြင်း
 
 ```bash
-# v1 ကို ဖြန့်ချိပါ
+# v1 ကို ဖြန့်ချိခြင်း
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# v1 commit hash ကို သိမ်းဆည်းပါ
+# v1 commit hash ကို သိမ်းဆည်းခြင်း
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# ချိုးဖောက်မှုပါသော ပြောင်းလဲမှုနဲ့ v2 ကို ဖြန့်ချိပါ
+# အနှောင့်အယှက် ဖြစ်စေမည့် ပြောင်းလဲမှုပါရှိသည့် v2 ကို ဖြန့်ချိခြင်း
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
 azd deploy
 
-# ပျက်ကွက်မှုကို တွေ့ရှိပြီး မူလအခြေအနေသို့ ပြန်လည်သွားပါ
+# ပြဿနာကို တွေ့ရှိပြီး နောက်သို့ ပြန်လုပ်ခြင်း
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # git ကို အသုံးပြုပြီး ပြန်လည်သွားပါ
+    # git ဖြင့် နောက်သို့ ပြန်လုပ်ခြင်း
     git revert HEAD --no-edit
     
-    # ပတ်ဝန်းကျင်ကို ပြန်လည်သွားပါ
+    # ပတ်ဝန်းကျင်ကို နောက်သို့ ပြန်လုပ်ခြင်း
     azd env set APP_VERSION "1.0.0"
     
-    # v1 ကို ထပ်မံဖြန့်ချိပါ
+    # v1 ကို ထပ်မံ ဖြန့်ချိခြင်း
     azd deploy
     
     echo "✅ Rolled back to v1.0.0"
 fi
 ```
 
-**အောင်မြင်မှု ချက်များ:**
-- [ ] တပ်ဆင်မှု မအောင်မြင်မှုများကို တွေ့နိုင်သည်
-- [ ] Rollback script ကို အလိုအလျောက် လည်ပတ်စေသည်
-- [ ] လျှောက်လွှာသည် လုပ်ဆောင်နိုင်သော အခြေအနေသို့ ပြန်သွားသည်
-- [ ] Rollback အပြီးတွင် ကျန်းမာရေး စစ်ဆေးမှုများ ဖြတ်ผ่านသည်
+**အောင်မြင်မှု အချက်များ:**
+- [ ] ထည့်သွင်းမှု မအောင်မြင်မှုများကို ချက်ချင်း သိရှိနိုင်ရမည်
+- [ ] ပြန်လှန်မှု script ကို အလိုအလျောက် လည်ပတ်စေခြင်း
+- [ ] အပလီကေရှင်း ကို အလုပ်လုပ်နိုင်သည့် အခြေအနေသို့ ပြန်လည်ရောက်လာစေခြင်း
+- [ ] ပြန်လှန်ပြီးနောက် Health check များ ဖြတ်ကျော်ရမည်
 
-## 📊 တပ်ဆင်မှု မက်ထရစ်များ ထိန်းသိမ်းခြင်း
+## 📊 ထည့်သွင်းမှု တိုင်းတာချက် လိုက်နာခြင်း
 
-### သင့် တပ်ဆင်မှု စွမ်းဆောင်ရည်ကို တိုင်းတာပါ
+### သင့် ထည့်သွင်းမှု လုပ်ဆောင်ရည်ကို လိုက်နာခြင်း
 
 ```bash
-# တပ်ဆင်မှု မီထရစ် စကရစ် ဖန်တီးပါ
+# တပ်ဆင်မှု မက်ထရစ်များအတွက် စကရစ်ဖိုင် တစ်ခု ဖန်တီးပါ
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
@@ -905,44 +904,44 @@ echo "
 📊 Deployment Metrics:"
 echo "Duration: ${DURATION}s"
 echo "Timestamp: $(date)"
-echo "Environment: $(azd env show --output json | jq -r '.name')"
+echo "Environment: $(azd env get-value AZURE_ENV_NAME)"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
-# ဖိုင်သို့ မှတ်တမ်းတင်ပါ
-echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
+# ဖိုင်ထဲသို့ မှတ်တမ်းတင်ပါ
+echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
 EOF
 
 chmod +x track-deployment.sh
 
-# အသုံးပြုပါ
+# ဒါကို အသုံးပြုပါ
 ./track-deployment.sh
 ```
 
-**သင့် မက်ထရစ်များကို သုံးသပ်ပါ:**
+**သင်၏ တိုင်းတာချက်များကို ချိတ်ဆက် စစ်ဆေးပါ:**
 ```bash
-# ဖြန့်ချိမှုမှတ်တမ်းများကို ကြည့်ရှုရန်
+# ဖြန့်ချိမှုမှတ်တမ်း ကြည့်ရန်
 cat deployment-metrics.csv
 
-# ပျမ်းမျှဖြန့်ချိချိန်ကို တွက်ချက်ရန်
+# ပျမ်းမျှ ဖြန့်ချိမှုအချိန်ကို တွက်ချက်ပါ
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
-## အပို အရင်းအမြစ်များ
+## အပိုဆောင်း အရင်းအမြစ်များ
 
-- [Azure Developer CLI Deployment Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Azure Container Apps Deployment](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Azure Functions Deployment](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Azure Developer CLI ထည့်သွင်းမှု ကိုးကားချက်](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Azure App Service ထည့်သွင်းခြင်း](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Azure Container Apps ထည့်သွင်းခြင်း](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Azure Functions ထည့်သွင်းခြင်း](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
-**လမ်းကြောင်း**
-- **Previous Lesson**: [Your First Project](../chapter-01-foundation/first-project.md)
-- **Next Lesson**: [အရင်းအမြစ်များ ပေးအပ်ခြင်း](provisioning.md)
+**လမ်းညွှန်**
+- **ယခင် မိနစ်**: [သင့် ပထမ ပရိုဂျက်](../chapter-01-foundation/first-project.md)
+- **နောက်တစ်ခု မိနစ်**: [အရင်းအမြစ်များ ပံ့ပိုးခြင်း](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးစားသော်လည်း အလိုအလျောက်ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါရှိနိုင်ကြောင်း သတိပေးပါသည်။ မူလဘာသာဖြင့် ရေးသားထားသော မူရင်းစာတမ်းကို တရားဝင်အရင်းမြစ်အဖြစ် ယူဆသင့်သည်။ အရေးကြီးသော အချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူဘာသာပြန်အား အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းကြောင့် ဖြစ်ပေါ်လာသော နားမလည်မှုများ သို့မဟုတ် မှားယွင်းသတ်မှတ်ခြင်းများအတွက် ကျွန်ုပ်တို့ တာဝန်မယူပါ။
+**အသိပေးချက်**:
+ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုအတွက် ကြိုးပမ်းပါသော်လည်း၊ အလိုအလျော့ ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် တိကျမှုလျော့ပါးမှုများ ရှိနိုင်ကြောင်း သတိပေးလိုပါသည်။ မူလဘာသာဖြင့် ရှိသော မူရင်းစာတမ်းကို တရားဝင် အချက်အလက်ရင်းမြစ်အဖြစ် သတ်မှတ်ထောင့်ထားသင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူသားဘာသာပြန်ကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုချိန်တွင် ဖြစ်ပေါ်နိုင်သည့် နားမလည်မှုများ သို့မဟုတ် မမှန်ကန်သော ဖတ်ရှုမှုများအတွက် ကျွန်ုပ်တို့ တာဝန်မခံပါ။
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

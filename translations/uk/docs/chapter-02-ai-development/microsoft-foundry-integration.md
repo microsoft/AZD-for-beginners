@@ -1,48 +1,50 @@
 # Інтеграція Microsoft Foundry з AZD
 
 **Навігація по розділах:**
-- **📚 Головна курсу**: [AZD для початківців](../../README.md)
-- **📖 Поточний розділ**: Розділ 2 - Розробка з орієнтацією на ШІ
+- **📚 Домашня сторінка курсу**: [AZD для початківців](../../README.md)
+- **📖 Поточний розділ**: Розділ 2 – Розробка з акцентом на штучний інтелект
 - **⬅️ Попередній розділ**: [Розділ 1: Ваш перший проєкт](../chapter-01-foundation/first-project.md)
-- **➡️ Наступний**: [Розгортання AI-моделей](ai-model-deployment.md)
+- **➡️ Наступний**: [Розгортання AI-моделі](ai-model-deployment.md)
 - **🚀 Наступний розділ**: [Розділ 3: Конфігурація](../chapter-03-configuration/configuration.md)
 
 ## Огляд
 
-Цей посібник демонструє, як інтегрувати служби Microsoft Foundry з Azure Developer CLI (AZD) для оптимізованого розгортання AI-додатків. Microsoft Foundry забезпечує комплексну платформу для створення, розгортання та керування AI-додатками, тоді як AZD спрощує процес інфраструктури та розгортання.
+Цей посібник демонструє, як інтегрувати сервіси Microsoft Foundry з Azure Developer CLI (AZD) для спрощеного розгортання AI-застосунків. Microsoft Foundry надає комплексну платформу для створення, розгортання та управління AI-застосунками, а AZD оптимізує процес інфраструктури та розгортання.
 
 ## Що таке Microsoft Foundry?
 
 Microsoft Foundry — це уніфікована платформа Microsoft для розробки AI, що включає:
 
-- **Каталог моделей**: Доступ до передових AI моделей
-- **Prompt Flow**: Візуальний конструктор AI-робочих процесів
-- **Портал Microsoft Foundry**: Інтегроване середовище розробки AI-додатків
-- **Опції розгортання**: Різні варіанти хостингу та масштабування
-- **Безпека та захист**: Вбудовані функції відповідального AI
+- **Каталог моделей**: Доступ до передових AI-моделей
+- **Prompt Flow**: Візуальний дизайнер AI-робочих процесів
+- **Портал Microsoft Foundry**: Інтегроване середовище розробки AI-застосунків
+- **Опції розгортання**: Різноманітні варіанти хостингу та масштабування
+- **Безпека**: Вбудовані функції відповідального AI
 
-## AZD + Microsoft Foundry: Краще разом
+## AZD + Microsoft Foundry: Кращі разом
 
-| Функція | Microsoft Foundry | Перевага інтеграції з AZD |
-|---------|-----------------|------------------------|
-| **Розгортання моделей** | Ручне розгортання через портал | Автоматизовані, повторювані розгортання |
-| **Інфраструктура** | Налагодження через кліки | Інфраструктура як код (Bicep) |
-| **Управління середовищем** | Фокус на одному середовищі | Багатосередовищність (розробка/стейджинг/прод) |
-| **Інтеграція CI/CD** | Обмежена | Вбудована підтримка GitHub Actions |
+| Функція | Microsoft Foundry | Переваги інтеграції з AZD |
+|---------|-----------------|--------------------------|
+| **Розгортання моделей** | Ручне через портал | Автоматизоване, повторюване розгортання |
+| **Інфраструктура** | Провізування через кліки | Інфраструктура як код (Bicep) |
+| **Управління середовищами** | Фокус на одному середовищі | Багатосередовищність (dev/staging/prod) |
+| **Інтеграція CI/CD** | Обмежена | Рідна підтримка GitHub Actions |
 | **Управління витратами** | Базовий моніторинг | Оптимізація витрат для кожного середовища |
 
-## Вимоги
+## Передумови
 
 - Підписка Azure з відповідними дозволами
 - Встановлений Azure Developer CLI
-- Доступ до Microsoft Foundry Models
-- Базове знайомство з Microsoft Foundry
+- Доступ до сервісів Microsoft Foundry Models
+- Початкові знання Microsoft Foundry
+
+> **Поточний базовий рівень AZD:** Ці приклади перевіряли на версії `azd` `1.23.12`. Для робочого процесу AI-агента використовуйте актуальне прев’ю розширення та перевірте вашу встановлену версію перед початком.
 
 ## Основні патерни інтеграції
 
 ### Патерн 1: Інтеграція Microsoft Foundry Models
 
-**Випадок використання**: Розгортання чат-додатків з моделями Microsoft Foundry Models
+**Використання**: Розгортання чат-застосунків з моделями Microsoft Foundry Models
 
 ```yaml
 # azure.yaml
@@ -75,12 +77,12 @@ resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
 // Deploy GPT model
 resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAIAccount
-  name: 'gpt-35-turbo'
+  name: 'gpt-4.1-mini'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-35-turbo'
-      version: '0613'
+      name: 'gpt-4.1-mini'
+      version: '2024-07-18'
     }
     scaleSettings: {
       scaleType: 'Standard'
@@ -92,7 +94,7 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 
 ### Патерн 2: Інтеграція AI Search + RAG
 
-**Випадок використання**: Розгортання додатків з покращеним пошуком (RAG)
+**Використання**: Розгортання застосунків із генерацією, доповненою пошуком (RAG)
 
 ```bicep
 // Azure AI Search
@@ -120,9 +122,9 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### Патерн 3: Інтеграція інтелектуальної обробки документів
+### Патерн 3: Інтеграція Document Intelligence
 
-**Випадок використання**: Робочі процеси обробки та аналізу документів
+**Використання**: Робочі процеси обробки та аналізу документів
 
 ```bicep
 // Document Intelligence service
@@ -157,16 +159,16 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ### Налаштування змінних середовища
 
-**Конфігурація для продакшн:**
+**Конфігурація для продакшену:**
 ```bash
-# Основні служби ШІ
+# Основні сервіси ШІ
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
 # Конфігурації моделей
-azd env set AZURE_OPENAI_MODEL "gpt-35-turbo"
-azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-ada-002"
+azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
+azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-3-large"
 
 # Налаштування продуктивності
 azd env set AZURE_OPENAI_CAPACITY 30
@@ -175,7 +177,7 @@ azd env set AZURE_SEARCH_SKU "standard"
 
 **Конфігурація для розробки:**
 ```bash
-# Оптимізовані за вартістю налаштування для розробки
+# Налаштування, оптимізовані за вартістю для розробки
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Безкоштовний рівень
@@ -220,48 +222,58 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### Розширення AZD для Foundry
 
-AZD надає розширення, які додають AI-специфічні можливості для роботи з Microsoft Foundry:
+AZD надає розширення, що додають AI-специфічні можливості для роботи з сервісами Microsoft Foundry:
 
 ```bash
-# Встановіть розширення агентів Foundry
+# Встановити розширення агентів Foundry
 azd extension install azure.ai.agents
 
-# Встановіть розширення для тонкого налаштування
+# Встановити розширення тонкого налаштування
 azd extension install azure.ai.finetune
 
-# Встановіть розширення для користувацьких моделей
+# Встановити розширення користувацьких моделей
 azd extension install azure.ai.models
 
-# Перелік встановлених розширень
-azd extension list
+# Показати список встановлених розширень
+azd extension list --installed
+
+# Перевірити поточну встановлену версію розширення агента
+azd extension show azure.ai.agents
 ```
 
-### Розгортання з пріоритетом агента за допомогою `azd ai`
+AI-розширення все ще активно розвиваються у прев’ю. Якщо команда поводиться інакше, ніж показано тут, оновіть відповідне розширення перед налагодженням самого проєкту.
 
-Якщо у вас є агент-мафест, використовуйте `azd ai agent init` для створення проєкту, підключеного до Foundry Agent Service:
+### Розгортання, орієнтоване на агента, з `azd ai`
+
+Якщо маєте манифест агента, використайте `azd ai agent init` для створення проєкту, підключеного до Foundry Agent Service:
 
 ```bash
-# Ініціалізація з маніфесту агента
+# Ініціалізувати з маніфесту агента
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# Розгортання в Azure
+# Розгорнути в Azure
 azd up
 ```
 
-Дивіться [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) для повного довідника по командах та опціях.
+Останні прев’ю-релізи `azure.ai.agents` також додали підтримку ініціалізації за шаблоном для `azd ai agent init`. Якщо ви користуєтеся новішими прикладами агентів, перевірте допомогу розширення щодо доступних прапорців у вашій версії.
+
+Див. [AZD AI CLI Команди](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) для повного переліку команд і прапорців.
 
 ### Розгортання однією командою
 
 ```bash
-# Розгорнути все однією командою
+# Розгорніть все однією командою
 azd up
 
-# Або розгортати поступово
+# Або розгортайте поетапно
 azd provision  # Лише інфраструктура
 azd deploy     # Лише застосунок
+
+# Для довготривалих розгортань додатків ШІ у azd 1.23.11+
+azd deploy --timeout 1800
 ```
 
-### Розгортання для конкретних середовищ
+### Розгортання, орієнтоване на середовище
 
 ```bash
 # Середовище розробки
@@ -270,7 +282,7 @@ azd env set AZURE_LOCATION eastus
 azd env set ENVIRONMENT_TYPE dev
 azd up
 
-# Промислове середовище
+# Продуктивне середовище
 azd env new production
 azd env set AZURE_LOCATION westus2
 azd env set ENVIRONMENT_TYPE prod
@@ -278,7 +290,7 @@ azd env set AZURE_OPENAI_CAPACITY 100
 azd up
 ```
 
-## Моніторинг та спостереження
+## Моніторинг і спостережливість
 
 ### Інтеграція Application Insights
 
@@ -454,13 +466,13 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## Вирішення типових проблем
+## Вирішення поширених проблем
 
-### Проблема 1: Перевищено квоту OpenAI
+### Проблема 1: Перевищення квоти OpenAI
 
 **Симптоми:**
-- Розгортання не вдалось через помилки квоти
-- Помилки 429 у логах додатку
+- Розгортання не вдається з помилками квоти
+- 429 помилки в логах застосунку
 
 **Рішення:**
 ```bash
@@ -471,111 +483,111 @@ az cognitiveservices usage list --location eastus
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Тимчасово зменшити ємність
+# Тимчасово зменшити потужність
 azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
 
-### Проблема 2: Помилки аутентифікації
+### Проблема 2: Помилки автентифікації
 
 **Симптоми:**
-- Помилки 401/403 при викликах AI-сервісів
+- 401/403 помилки при виклику AI-сервісів
 - Повідомлення "Доступ заборонено"
 
 **Рішення:**
 ```bash
-# Перевірте призначення ролей
+# Перевірити призначення ролей
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Перевірте конфігурацію керованої ідентичності
+# Перевірити конфігурацію керованої ідентичності
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
-# Перевірте доступ до Key Vault
+# Перевірити доступ до Key Vault
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
 ### Проблема 3: Проблеми з розгортанням моделей
 
 **Симптоми:**
-- Моделі недоступні під час розгортання
-- Помилки у конкретних версіях моделей
+- Моделі відсутні при розгортанні
+- Відмови конкретних версій моделей
 
 **Рішення:**
 ```bash
-# Перелічити доступні моделі за регіонами
+# Перелік доступних моделей за регіонами
 az cognitiveservices model list --location eastus
 
-# Оновити версію моделі у шаблоні bicep
+# Оновити версію моделі в bicep-шаблоні
 # Перевірити вимоги до потужності моделі
 ```
 
-## Приклади шаблонів
+## Прикладні шаблони
 
-### RAG чат-додаток (Python)
+### RAG чат-застосунок (Python)
 
 **Репозиторій**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-**Служби**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
+**Сервіси**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-**Опис**: Найпопулярніший зразок Azure AI — готовий до продакшн RAG чат-додаток, який дозволяє ставити запитання по власних документах. Використовує GPT-4.1-mini для чату, text-embedding-ada-002 для векторних представлень та Azure AI Search для пошуку. Підтримує мультимодальні документи, голосовий ввід/вивід, аутентифікацію Microsoft Entra і трасування через Application Insights.
+**Опис**: Найпопулярніший зразок Azure AI — готовий до виробництва RAG чат-застосунок, що дозволяє ставити запитання по вашим документам. Використовує GPT-4.1-mini для чату, text-embedding-3-large для векторів і Azure AI Search для пошуку. Підтримує мультимодальні документи, введення/виведення голосом, автентифікацію Microsoft Entra та трасування Application Insights.
 
-**Швидкий старт**:
+**Швидкий старт:**
 ```bash
 azd init --template azure-search-openai-demo
 azd up
 ```
 
-### RAG чат-додаток (.NET)
+### RAG чат-застосунок (.NET)
 
 **Репозиторій**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
 
-**Служби**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
+**Сервіси**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
 
-**Опис**: Еквівалент зразка RAG чату на Python для .NET/C#. Побудований на ASP.NET Core Minimal API та Blazor WebAssembly фронтенді. Включає голосовий чат, підтримку GPT-4o-mini vision та додаток .NET MAUI Blazor Hybrid для десктопу/мобільних пристроїв.
+**Опис**: .NET/C# аналог Python-версії RAG чату. Побудовано на ASP.NET Core Minimal API і Blazor WebAssembly фронтенді. Включає голосовий чат, підтримку GPT-4o-mini vision та компаньйона у вигляді .NET MAUI Blazor гібридного десктоп/мобільного клієнта.
 
-**Швидкий старт**:
+**Швидкий старт:**
 ```bash
 azd init --template azure-search-openai-demo-csharp
 azd up
 ```
 
-### RAG чат-додаток (Java)
+### RAG чат-застосунок (Java)
 
 **Репозиторій**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
 
-**Служби**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
+**Сервіси**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
 
-**Опис**: Java-версія RAG чат зразка з використанням Langchain4J для AI-оркестрації. Підтримує поділену на мікросервіси подієво-орієнтовану архітектуру, кілька стратегій пошуку (текст, вектор, гібрид), завантаження документів з Azure Document Intelligence, розгортання на Azure Container Apps або Azure Kubernetes Service.
+**Опис**: Java-версія RAG чату з використанням Langchain4J для оркестрації AI. Підтримує мікросервісну подійно-орієнтовану архітектуру, кілька стратегій пошуку (текст, вектор, гібрид), завантаження документів з Azure Document Intelligence, розгортання на Azure Container Apps чи Azure Kubernetes Service.
 
-**Швидкий старт**:
+**Швидкий старт:**
 ```bash
 azd init --template azure-search-openai-demo-java
 azd up
 ```
 
-### Підсилювач для роздрібного бізнесу з Azure AI Foundry
+### Копілот для роздрібного підприємства з Azure AI Foundry
 
 **Репозиторій**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
-**Служби**: Azure OpenAI + Azure AI Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
+**Сервіси**: Azure OpenAI + Azure AI Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
 
-**Опис**: Комплексний RAG-помічник для роздрібної торгівлі з Azure AI Foundry та Prompty. Чат-бот Contoso Outdoor для інтерактивної роботи з каталогом продуктів та даними клієнтських замовлень. Демонструє повний GenAIOps робочий процес — прототип з Prompty, оцінка за допомогою AI-помічників, розгортання через AZD у Container Apps.
+**Опис**: Повноцінний роздрібний RAG копілот з Azure AI Foundry і Prompty. Чатбот рітейлера Contoso Outdoor, що ґрунтує відповіді на каталозі товарів і даних замовлень клієнтів. Демонструє повний робочий процес GenAIOps — прототип на Prompty, оцінка AI-помічниками, розгортання через AZD на Container Apps.
 
-**Швидкий старт**:
+**Швидкий старт:**
 ```bash
 azd init --template contoso-chat
 azd up
 ```
 
-### Креативний мультиагентський додаток для письма
+### Багатоагентський застосунок для творчого письма
 
 **Репозиторій**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
 
-**Служби**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
+**Сервіси**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
 
-**Опис**: Зразок мультиагентської оркестрації AI агентів за допомогою Prompty. Включає дослідницького агента (Bing Grounding у Azure AI Agent Service), агента продукту (Azure AI Search), агента-письменника і агента-редактора для спільного створення добре досліджених статей. Включає CI/CD з оцінкою в GitHub Actions.
+**Опис**: Зразок багатьох агентів, що демонструє оркестрацію AI-агентів за допомогою Prompty. Використовує агента дослідника (Bing Grounding в Azure AI Agent Service), агента продукту (Azure AI Search), агента-письменника та агента-редактора для спільного створення ґрунтовних статей. Включає CI/CD із оцінкою в GitHub Actions.
 
-**Швидкий старт**:
+**Швидкий старт:**
 ```bash
 azd init --template contoso-creative-writer
 azd up
@@ -585,11 +597,11 @@ azd up
 
 **Репозиторій**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
 
-**Служби**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
+**Сервіси**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB для NoSQL + LangChain.js
 
-**Опис**: Повністю безсерверний RAG чат-бот, що використовує LangChain.js з Azure Functions для API та Azure Static Web Apps для хостингу. Використовує Azure Cosmos DB як векторне сховище і базу історії чатів. Підтримує локальну розробку з Ollama для безкоштовного тестування.
+**Опис**: Повністю безсерверний RAG чатбот із LangChain.js, Azure Functions для API та Azure Static Web Apps для хостингу. Використовує Azure Cosmos DB як векторне сховище та базу даних історії чату. Підтримує локальну розробку з Ollama для тестування без витрат.
 
-**Швидкий старт**:
+**Швидкий старт:**
 ```bash
 azd init --template serverless-chat-langchainjs
 azd up
@@ -599,59 +611,59 @@ azd up
 
 **Репозиторій**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
 
-**Служби**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
+**Сервіси**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
 
-**Опис**: Підприємницьке рішення RAG з порталом адміністратора для завантаження/керування документами, кількома варіантами оркестраторів (Semantic Kernel, LangChain, Prompt Flow), підтримкою голосового вводу, інтеграцією Microsoft Teams і вибором PostgreSQL або Cosmos DB на бекенді. Спрямоване як настроювана стартова точка для виробничих сценаріїв RAG.
+**Опис**: Прискорювач корпоративного рівня RAG із порталом адміністратора для завантаження/управління документами, кількома варіантами оркестрації (Semantic Kernel, LangChain, Prompt Flow), мовлення у текст, інтеграція з Microsoft Teams і вибір між PostgreSQL або Cosmos DB на бекенді. Призначений як настроювана база для виробничих сценаріїв RAG.
 
-**Швидкий старт**:
+**Швидкий старт:**
 ```bash
 azd init --template chat-with-your-data-solution-accelerator
 azd up
 ```
 
-### AI туристичні агенти — мультиагентська MCP оркестрація
+### AI Travel Agents — Оркестрація Multi-Agent MCP
 
 **Репозиторій**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
 
-**Служби**: Azure OpenAI + Azure AI Foundry + Azure Container Apps + MCP Сервери (.NET, Python, Java, TypeScript)
+**Сервіси**: Azure OpenAI + Azure AI Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
 
-**Опис**: Референс-додаток мультиагентської AI оркестрації, що використовує три фреймворки (LangChain.js, LlamaIndex.TS, Microsoft Agent Framework). Має MCP (Model Context Protocol) сервери на чотирьох мовах, розгорнуті як безсерверні Azure Container Apps з моніторингом OpenTelemetry.
+**Опис**: Шаблон застосунку для мультиагентної AI-оркестрації з використанням трьох фреймворків (LangChain.js, LlamaIndex.TS та Microsoft Agent Framework). Включає MCP (Model Context Protocol) сервери на чотирьох мовах, розгорнуті як безсерверні Azure Container Apps з моніторингом OpenTelemetry.
 
-**Швидкий старт**:
+**Швидкий старт:**
 ```bash
 azd init --template azure-ai-travel-agents
 azd up
 ```
 
-### Azure AI Стартер
+### Початковий шаблон Azure AI
 
 **Репозиторій**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
 
-**Служби**: Azure AI Services + Azure OpenAI
+**Сервіси**: Azure AI Services + Azure OpenAI
 
-**Опис**: Мінімалістичний шаблон Bicep, який розгортає Azure AI служби з налаштованими моделями машинного навчання. Легкий старт, якщо потрібно лише забезпечити інфраструктуру Azure AI без повного стеку додатків.
+**Опис**: Мінімальний Bicep-шаблон, що розгортає сервіси Azure AI з налаштованими моделями машинного навчання. Легковаговий старт, коли потрібна лише інфраструктура Azure AI без повного стеку застосунку.
 
-**Швидкий старт**:
+**Швидкий старт:**
 ```bash
 azd init --template azd-ai-starter
 azd up
 ```
 
-> **Переглянути більше шаблонів**: Відвідайте [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) для 80+ AI-специфічних AZD шаблонів різними мовами й сценаріями.
+> **Переглянути більше шаблонів**: Відвідайте [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) для понад 80 AI-специфічних шаблонів AZD різними мовами та сценаріями.
 
 ## Наступні кроки
 
-1. **Спробуйте приклади**: Почніть з готового шаблону, що відповідає вашому випадку
-2. **Налаштуйте під свої потреби**: Змініть інфраструктуру та код додатку
-3. **Додайте моніторинг**: Реалізуйте комплексне спостереження
-4. **Оптимізуйте витрати**: Підлаштуйте конфігурації під бюджет
-5. **Захистіть розгортання**: Впровадьте корпоративні патерни безпеки
-6. **Масштабуйте до продакшну**: Додайте багаторегіональні та високодоступні функції
+1. **Спробуйте приклади**: Почніть із готового шаблону, що відповідає вашому випадку
+2. **Налаштуйте під свої потреби**: Змініть інфраструктуру та код застосунку
+3. **Додайте моніторинг**: Реалізуйте повну спостережливість
+4. **Оптимізуйте витрати**: Підберіть конфігурації відповідно до бюджету
+5. **Забезпечте безпеку розгортання**: Впровадьте корпоративні патерни безпеки
+6. **Масштабуйте на продакшен**: Додайте мульти-регіональні та високодоступні функції
 
 ## 🎯 Практичні вправи
 
-### Вправа 1: Розгортання чат-додатку Microsoft Foundry Models (30 хвилин)
-**Мета**: Розгорнути та протестувати готовий до продакшн AI чат-додаток
+### Вправа 1: Розгортання чат-застосунку з Microsoft Foundry Models (30 хвилин)
+**Мета**: Розгорнути й протестувати готовий до виробництва AI чат-застосунок
 
 ```bash
 # Ініціалізувати шаблон
@@ -677,19 +689,19 @@ azd down --force --purge
 ```
 
 **Критерії успіху:**
-- [ ] Розгортання завершилось без помилок квоти
-- [ ] Можливість доступу до чат-інтерфейсу у браузері
-- [ ] Можливість ставити питання та отримувати AI-відповіді
-- [ ] Application Insights показує телеметричні дані
-- [ ] Успішне очищення ресурсів після тестування
+- [ ] Розгортання завершено без помилок квоти
+- [ ] Доступ до інтерфейсу чату у браузері
+- [ ] Можна ставити питання і отримувати відповіді з AI
+- [ ] Application Insights показує телеметрію
+- [ ] Успішне очищення ресурсів
 
-**Орієнтовна вартість**: $5-10 за 30 хвилин тестування
+**Орієнтовна вартість**: $5-10 за 30 хв тестування
 
-### Вправа 2: Налаштування розгортання багатьох моделей (45 хвилин)
-**Мета**: Розгорнути кілька AI моделей з різними конфігураціями
+### Вправа 2: Налаштування розгортання з кількома моделями (45 хвилин)
+**Мета**: Розгорнути кілька AI-моделей із різними конфігураціями
 
 ```bash
-# Створити власну конфігурацію Bicep
+# Створити користувацьку конфігурацію Bicep
 cat > infra/ai-models.bicep << 'EOF'
 param openAiAccountName string
 param location string
@@ -718,12 +730,12 @@ resource gpt4omini 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01'
 // Text embedding for search
 resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'text-embedding-ada-002'
+  name: 'text-embedding-3-large'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     scaleSettings: {
       scaleType: 'Standard'
@@ -740,16 +752,16 @@ azd show
 ```
 
 **Критерії успіху:**
-- [ ] Багато моделей успішно розгорнено
+- [ ] Кілька моделей успішно розгорнені
 - [ ] Застосовано різні налаштування потужності
 - [ ] Моделі доступні через API
-- [ ] Можливість виклику обох моделей з додатку
+- [ ] Можна викликати обидві моделі з застосунку
 
 ### Вправа 3: Впровадження моніторингу витрат (20 хвилин)
-**Мета**: Налаштувати бюджетні сповіщення та відстеження витрат
+**Мета**: Налаштувати сповіщення про бюджет та відслідковування витрат
 
 ```bash
-# Додати бюджетне сповіщення до Bicep
+# Додати сповіщення про бюджет до Bicep
 cat >> infra/main.bicep << 'EOF'
 
 resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
@@ -780,7 +792,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 EOF
 
-# Розгорнути бюджетне сповіщення
+# Розгорнути сповіщення про бюджет
 azd provision
 
 # Перевірити поточні витрати
@@ -788,22 +800,23 @@ az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-d
 ```
 
 **Критерії успіху:**
-- [ ] Створено сповіщення про бюджет в Azure
-- [ ] Налаштовані email повідомлення
-- [ ] Можливість перегляду даних витрат у порталі Azure
-- [ ] Відповідно встановлені пороги бюджету
+- [ ] Створено сповіщення про бюджет у Azure
+- [ ] Налаштовано email-сповіщення
+- [ ] Можна переглянути дані про витрати в Azure Portal
+- [ ] Встановлені відповідні межі бюджету
 
-## 💡 Часті запитання
+## 💡 Часті питання
 
 <details>
-<summary><strong>Як знизити витрати Microsoft Foundry Models під час розробки?</strong></summary>
+<summary><strong>Як зменшити витрати на Microsoft Foundry Models під час розробки?</strong></summary>
 
 1. **Використовуйте безкоштовний рівень**: Microsoft Foundry Models надає 50,000 токенів на місяць безкоштовно
-2. **Зменшіть потужність**: Встановіть 10 TPM замість 30+ для розробки
-3. **Використовуйте azd down**: Звільняйте ресурси, коли не працюєте активно
-4. **Кешування відповідей**: Реалізуйте Redis кеш для повторних запитів
-5. **Використовуйте інжиніринг запитів (Prompt Engineering)**: Зменшуйте споживання токенів за допомогою оптимізованих запитів
+2. **Зменште потужність**: Встановіть потужність на 10 TPM замість 30+ для розробки
+3. **Використовуйте azd down**: Звільняйте ресурси, коли не розробляєте активно
+4. **Кешуйте відповіді**: Впровадьте Redis кеш для повторних запитів
+5. **Використовуйте prompt engineering**: Зменшуйте використання токенів за допомогою ефективних запитів
 
+</details>
 ```bash
 # Конфігурація розробки
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -812,22 +825,22 @@ azd env set ENABLE_RESPONSE_CACHE true
 </details>
 
 <details>
-<summary><strong>В чому різниця між Microsoft Foundry Models та OpenAI API?</strong></summary>
+<summary><strong>У чому різниця між Microsoft Foundry Models і OpenAI API?</strong></summary>
 
 **Microsoft Foundry Models**:
-- Корпоративний рівень безпеки і відповідності
+- Безпека підприємства і відповідність стандартам
 - Інтеграція з приватною мережею
 - Гарантії SLA
-- Аутентифікація через керовану ідентичність
+- Аутентифікація за допомогою керованої ідентичності
 - Доступні вищі квоти
 
 **OpenAI API**:
 - Швидший доступ до нових моделей
-- Простіша настройка
+- Простіше налаштування
 - Нижчий поріг входу
 - Тільки публічний інтернет
 
-Для виробничих додатків **рекомендується Microsoft Foundry Models**.
+Для продуктивних додатків **рекомендується Microsoft Foundry Models**.
 </details>
 
 <details>
@@ -841,19 +854,19 @@ az cognitiveservices usage list --location eastus2
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Тимчасово зменшити потужність
+# Тимчасово зменшити місткість
 azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
-# Запитати збільшення квоти
-# Перейдіть до Azure Portal > Квоти > Запит на збільшення
+# Запросити збільшення квоти
+# Перейдіть до Azure Portal > Quotas > Request increase
 ```
 </details>
 
 <details>
-<summary><strong>Чи можна використовувати власні дані з Microsoft Foundry Models?</strong></summary>
+<summary><strong>Чи можу я використовувати власні дані з Microsoft Foundry Models?</strong></summary>
 
-Так! Використовуйте **Azure AI Search** для RAG (Retrieval Augmented Generation):
+Звісно! Використовуйте **Azure AI Search** для RAG (Retrieval Augmented Generation):
 
 ```yaml
 # azure.yaml
@@ -869,14 +882,14 @@ services:
 </details>
 
 <details>
-<summary><strong>Як забезпечити безпеку кінцевих точок AI моделей?</strong></summary>
+<summary><strong>Як захистити кінцеві точки моделей штучного інтелекту?</strong></summary>
 
 **Кращі практики**:
-1. Використовуйте Managed Identity (без API ключів)
-2. Увімкніть Private Endpoints
-3. Налаштуйте мережеві групи безпеки
-4. Впровадьте обмеження швидкості
-5. Використовуйте Azure Key Vault для зберігання секретів
+1. Використовуйте керовану ідентичність (без API ключів)
+2. Увімкніть приватні кінцеві точки
+3. Налаштуйте групи безпеки мережі
+4. Реалізуйте обмеження швидкості запитів
+5. Використовуйте Azure Key Vault для секретів
 
 ```bicep
 // Managed Identity authentication
@@ -898,25 +911,25 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 ## Спільнота та підтримка
 
-- **Microsoft Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
+- **Microsoft Foundry Discord**: [#Azure канал](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [Проблеми та обговорення](https://github.com/Azure/azure-dev)
 - **Microsoft Learn**: [Офіційна документація](https://learn.microsoft.com/azure/ai-studio/)
-- **Agent Skills**: [Навички Microsoft Foundry на skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Встановіть навички Azure + Foundry agent у ваш редактор за допомогою `npx skills add microsoft/github-copilot-for-azure`
+- **Agent Skills**: [Навичка Microsoft Foundry на skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Встановіть навички агента Azure + Foundry у вашому редакторі за допомогою `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Навігація по розділах:**
-- **📚 Головна сторінка курсу**: [AZD For Beginners](../../README.md)
-- **📖 Поточний розділ**: Розділ 2 - AI-First Development
-- **⬅️ Попередній розділ**: [Розділ 1: Ваш перший проект](../chapter-01-foundation/first-project.md)
-- **➡️ Наступний**: [Розгортання AI моделі](ai-model-deployment.md)
+- **📚 Домашня сторінка курсу**: [AZD For Beginners](../../README.md)
+- **📖 Поточний розділ**: Розділ 2 - Розробка зі ставкою на ШІ
+- **⬅️ Попередній розділ**: [Розділ 1: Ваш перший проєкт](../chapter-01-foundation/first-project.md)
+- **➡️ Наступний**: [Розгортання ШІ-моделі](ai-model-deployment.md)
 - **🚀 Наступний розділ**: [Розділ 3: Конфігурація](../chapter-03-configuration/configuration.md)
 
-**Потрібна допомога?** Приєднуйтесь до обговорень у спільноті або відкрийте проблему в репозиторії. Спільнота Azure AI + AZD допоможе вам досягти успіху!
+**Потрібна допомога?** Приєднуйтеся до обговорень спільноти або відкрийте питання у репозиторії. Спільнота Azure AI + AZD тут, щоб допомогти вам досягти успіху!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Відмова від відповідальності**:  
-Цей документ був перекладений за допомогою сервісу штучного інтелекту [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, будь ласка, враховуйте, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ його рідною мовою слід вважати авторитетним джерелом. Для критично важливої інформації рекомендується професійний людський переклад. Ми не несемо відповідальності за будь-які непорозуміння чи неправильні тлумачення, що виникли внаслідок використання цього перекладу.
+**Застереження**:  
+Цей документ було перекладено за допомогою сервісу автоматичного перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоч ми і прагнемо до точності, будь ласка, майте на увазі, що автоматичні переклади можуть містити помилки чи неточності. Оригінальний документ рідною мовою слід вважати авторитетним джерелом. Для критичної інформації рекомендується звертатися до професійного людського перекладу. Ми не несемо відповідальності за будь-які непорозуміння чи неправильні тлумачення, що виникли внаслідок використання цього перекладу.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

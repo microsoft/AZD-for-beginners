@@ -1,67 +1,170 @@
-# ပြောင်းလဲမှုမှတ်တမ်း - AZD For Beginners
+# အပြောင်းအလဲ မှတ်တမ်း - AZD For Beginners
 
-## နိဒါန်း
+## မိတ်ဆက်
 
-ဤ ပြောင်းလဲမှုမှတ်တမ်းတွင် AZD For Beginners repository တွင် ဖြစ်ပေါ်ခဲ့သည့် ထင်သာလောက်ရာ ပြောင်းလဲမှုများ၊ အပ်ဒိတ်များနှင့် တိုးတက်မှုများကို စာရင်းတင်ထားပါတယ်။ ကျွန်ုပ်တို့သည် semantic versioning စံနှုန်းများကို လိုက်နာကာ ဗားရှင်းများအကြား ဘာတွေပြောင်းလဲထားသလဲဆိုတာ အသုံးပြုသူများဘယ်လိုနားလည်ရမယ်ဆိုတာ ကူညီရန် ဤ မှတ်တမ်းကို ထိန်းသိမ်းထားပါသည်။
+ဤ changelog မှတ်တမ်းသည် AZD For Beginners repository အတွက် အရေးပါသည့်ပြောင်းလဲမှုများ၊ အပ်ဒိတ်များနှင့် တိုးတက်စေမှုများအားလုံးကို မှတ်တမ်းတင်ထားသည်။ ကျွန်ုပ်တို့သည် semantic versioning ပေါင်းစည်းမှုချက်များကိုလိုက်နာပြီး ဤမှတ်တမ်းကိုဗားရှင်းများအကြား မည်သည့်အရာများပြောင်းလဲသွားသည်ကို အသုံးပြုသူများအား နားလည်နိုင်စေရန် ထိန်းသိမ်းထားသည်။
 
-## သင်ယူစရာရည်မှန်းချက်များ
+## သင်ယူရမည့်ရည်မှန်းချက်များ
 
-ဤ ပြောင်းလဲမှုမှတ်တမ်းကို ပြန်လည်လေ့လာခြင်းအားဖြင့် သင်သည်
-- လတ်တလော ထည့်သွင်းထားသည့် feature များနှင့် အကြောင်းအရာများအကြောင်း အသိပေးချက်များ ရယူနိုင်မည်
-- ရှိပြီးသား စာရွက်စာတမ်းများ၌ ပြုလုပ်ထားသည့် တိုးတက်မှုများကို နားလည်နိုင်မည်
-- အမှားပြင်ဆင်ချက်များနှင့် ကျင့်သုံးချက်များအား ကြည့်ရှု၍ တိကျမှန်ကန်မှုကို သေချာစေမည်
-- သင်ယူမှုပစ္စည်းများ၏ တိုးတက်ဖွံ့ဖြိုးမှုကို အချိန်အခါနှင့်အမျှ ဆက်လက်လိုက်လံနိုင်မည်
+ဤ changelog ကို ပြန်လည်ကြည့်ရှုခြင်းဖြင့် သင်သည် -
+- အင်္ဂါရပ်အသစ်များနှင့် အကြောင်းအရာထည့်သွင်းမှုများအကြောင်း အသိပေးထားနိုင်မည်
+- ရှိပြီးသားစာတမ်းများတွင် ပြုလုပ်ထားသည့် တိုးတက်ချက်များကို နားလည်နိုင်မည်
+- အမွားပြင်ဆင်မှုများနှင့် အချက်အလက်တိကျမှုအတွက် bug fixes များကို လိုက်လံစစ်ဆေးနိုင်မည်
+- သင်ယူမည့်ပစ္စည်းများ၏ တိုးတက်စဉ်ကို အချိန်နှင့်အမျှ လိုက်လံကြည့်ရှုနိုင်မည်
 
-## သင်ယူပြီးရရှိမည့်ရလဒ်များ
+## သင်ယူပြီးရရှိမည့် outcomes
 
-ပြောင်းလဲမှုမှတ်တမ်းအEntries များကို ပြန်လည်ကြည့်ရှုပြီးနောက် သင်သည်
-- သင်ယူရန် အသစ်ဖြစ်ထွန်းလာသည့် အကြောင်းအရာများနှင့် အရင်းအမြစ်များကို ဖော်ထုတ်နိုင်မည်
-- မည်သည့် အပိုင်းများကို အပ်ဒိတ်လုပ်ပြီး ထိန်းသိမ်းထားသလဲဆိုတာ နားလည်နိုင်မည်
-- လတ်တလောအချက်အလက်များအပေါ် အခြေခံ၍ သင်၏ သင်ယူမှုလမ်းကြောင်းကို စီစဉ်နိုင်မည်
-- အနာဂတ်တိုးတက်မှုများအတွက် တုံ့ပြန်ချက်များနှင့် အကြံပေးချက်များ ပေးပို့နိုင်မည်
+changelog အ entries များကို ပြန်လည်ကြည့်ရှုပြီးနောက် သင်သည် -
+- သင်ယူရန်အသစ်ထည့်သွင်းထားသော အကြောင်းအရာများနှင့် အရင်းအမြစ်များကို ဖော်ထုတ်နိုင်မည်
+- ပြုလုပ်ပြီးသား အပိုင်းများထဲတွင် မည်သည်များကို အပ်ဒိတ်/တိုးတက်စေထားသည်ကို နားလည်နိုင်မည်
+- နောက်ဆုံးထိခေတ်မီပစ္စည်းများအပေါ် အခြေခံ၍ သင်၏ သင်ယူမှုလမ်းကြောင်းကို စီမံနိုင်မည်
+- နောက်ထပ်တိုးတက်စေရေးအတွက် တွေ့ကြုံချက်များနှင့် အကြံပြုချက်များ ပေးစွမ်းနိုင်မည်
 
-## ဗားရှင်းဖြတ်သန်းမှတ်တမ်း
+## ဗားရှင်းမှတ်တမ်း
+
+### [v3.19.1] - 2026-03-27
+
+#### Beginner Onboarding Clarification, Setup Validation & Final AZD Command Cleanup
+**ဤဗားရှင်းသည် AZD 1.23 validation စစ်ဆေးမှုကို အပြီးသတ်လိုက်၍ စတင်လေ့လာသူများအတွက် အထူးအာရုံစိုက်ထားသော စာတမ်းဆိုင်ရာ ပြုပြင်မွမ်းမံမှုများကို ပြန်လည်ဆောင်ရွက်ထားသည် — AZD-first authentication လမ်းညွှန်ကို ပိုမိုရှင်းလင်းစေပြီး၊ ဒေသခံ setup စစ်ဆေးရေး script များထည့်သွင်းကာ အဓိက command များကို live AZD CLI တို့နှင့် ထပ်တူစစ်ဆေးပြီး အချို့ အရင်းအမြစ်ပေါ်ရှိ အဟောင်း English-source command ကို changelog အပြင်နေရာများမှ ဖယ်ရှားထားသည်။**
+
+#### Added
+- **🧪 စတင်လေ့လာသူ setup စစ်ဆေးရေး script များ** — `validate-setup.ps1` နှင့် `validate-setup.sh` ကို ထည့်သွင်းထားပြီး သင်တန်းသားများသည် Chapter 1 စတင်ရန်မတိုင်မီ လိုအပ်သည့် tools များကို အတည်ပြုနိုင်မည်
+- **✅ မူလ setup စစ်ဆေးခြင်း အဆင့်များ** ကို root README နှင့် Chapter 1 README တို့တွင် ထည့်သွင်းထားပြီး `azd up` ကို 실행မပြုမီ မလိုအပ်သော prerequisite များကို ဖမ်းနိုင်မည်
+
+#### Changed
+- **🔐 စတင်လေ့လာသူ authentication လမ်းညွှန်ချက်များ** — `azd auth login` ကို AZD workflow များအတွက် အဓိကလမ်းကြောင်းအဖြစ် အမြဲသတ်မှတ်ထားပြီး `az login` ကို Azure CLI command များကို တိုက်ရိုက် အသုံးပြုသည့်အခါသာ ရွေးချယ်စရာအဖြစ် ဖော်ပြထားသည်
+- **📚 Chapter 1 onboarding flow** — သင်တန်းသားများကို installation, authentication နှင့် ပထမဆုံး deployment အဆင့်များမပြုလုပ်မှီ ဒေသခံ setup ကို အရင်စစ်ဆေးရန် ညွှန်ပြထားသည်
+- **🛠️ Validator မက်ဆေ့ချ်များ** — AZD-only စတင်လေ့လာသူလမ်းကြောင်းအတွက် အတားအဆီးဖြစ်စေသော လိုအပ်ချက်များကို မရှိမဖြစ်လိုအပ်သောသတိပေးချက်များနှင့် optional Azure CLI သတိပေးချက်များကို သေချာ ခွဲခြားပြထားသည်
+- **📖 Configuration, troubleshooting, နှင့် example စာတမ်းများ** — လိုအပ်သော AZD authentication နှင့် optional Azure CLI sign-in များကို ယခင်က context မရှိဘဲ တပြိုင်နက်တည်း ဖော်ပြထားသောနေရာများတွင် မည်သည်နှင့်မည်သည်ကို ချဲ့ထွင် ခွဲခြားပြထားသည်
+
+#### Fixed
+- **📋 ကျန်ရှိနေသေးသော English-source command ကိုးကားချက်များ** ကို လက်ရှိ AZD ပုံစံများသို့ အပ်ဒိတ်ပြုလုပ်ထားသည်၊ ထို့ထဲတွင် cheat sheet အတွက် `azd config show` နှင့် Azure Portal overview လမ်းညွှန်ရန် ရည်ရွယ်ထားသော `azd monitor --overview` ပါဝင်သည်
+- **🧭 Chapter 1 များတွင် စတင်လေ့လာသူအား ဖြောင့်မတ်မှုများ** ကို template များနှင့် Azure resource များ အားလုံးအပေါ် အမှားမဖြစ်အပ်/rollback အာမခံချက် မပေးနိုင်သည့် အခြေအနေများကို သက်သာစေရန် ချိန်ညှိထားသည်
+- **🔎 Live CLI သက်ဆိုင်စစ်ဆေးမှု** — `azd env get-values`, `azd template list`, `azd extension list --installed`, `azd copilot consent list`, `azd mcp start`, `azd provision --preview`, `azd monitor --logs`, နှင့် `azd down --force --purge` များအတွက် လက်ရှိထောက်ပံ့မှုကို အတည်ပြုထားသည်
+
+#### Files Updated
+- `README.md`
+- `changelog.md`
+- `docs/chapter-01-foundation/README.md`
+- `docs/chapter-01-foundation/azd-basics.md`
+- `docs/chapter-01-foundation/installation.md`
+- `docs/chapter-01-foundation/first-project.md`
+- `docs/chapter-03-configuration/README.md`
+- `docs/chapter-07-troubleshooting/README.md`
+- `examples/container-app/README.md`
+- `examples/database-app/README.md`
+- `resources/cheat-sheet.md`
+- `validate-setup.ps1`
+- `validate-setup.sh`
+
+---
+
+### [v3.19.0] - 2026-03-26
+
+#### AZD 1.23.12 Validation, Workshop Environment Expansion & AI Model Refresh
+**ဤဗားရှင်းသည် `azd` `1.23.12` အပေါ် စာတမ်းအကဲဖြတ်စစ်ဆေးမှုကို ဆောင်ရွက်ပြီး၊ အသက်ဝင်မှုမရှိသေးသည့် AZD command ဥပမာများကို အပ်ဒိတ်လုပ်ကာ AI model လမ်းညွှန်ချက်များကို လက်ရှိ defaults အတိုင်း ပြန်လည်အသစ်ပေါင်းထည့်ထားပြီး GitHub Codespaces အပြင် dev containers နှင့် ဒေသခံ clone များကိုလည်း ပံ့ပိုးပေးရန် workshop နှစ်ဖက်သားညွှန်ကြားမှုကို ကျယ်ပြန့်စေထားသည်။**
+
+#### Added
+- **✅ အဓိကအခန်းများနှင့် workshop စာရွက်များအတွင်း validation မှတ်ချက်များ** — စမ်းသပ်ထားသည့် AZD baseline ကို အသုံးပြုသူများသိရှိနိုင်စေရန် ထည့်သွင်းထားသည်
+- **⏱️ အချိန်ကုန်ဆုံးမှု (deployment timeout) လမ်းညွှန်ချက်** — ကြာရှည်တည်ဆောက်နေသည့် AI app deployment များအတွက် `azd deploy --timeout 1800` ကို ညွှန်ပြထားသည်
+- **🔎 Extension စစ်ဆေးခြင်း အဆင့်များ** — AI workflow စာတမ်းများတွင် `azd extension show azure.ai.agents` ကို ထည့်သွင်းထားသည်
+- **🌐 Workshop ပတ်ဝန်းကျင် လမ်းညွှန်ချက်များ ပိုမိုစုံလင်စေခြင်း** — GitHub Codespaces, dev containers, နှင့် local clones များအတွက် MkDocs ဖြင့် ထောက်ခံပေးထားသည်
+
+#### Changed
+- **📚 အခန်းမိတ်ဆက် README များ** — foundation, configuration, infrastructure, multi-agent, pre-deployment, troubleshooting, နှင့် production အပိုင်းများတွင် `azd 1.23.12` ကို စမ်းသပ်ထားကြောင်း ဆိုင်းဘုတ်အဖြစ် ထည့်သွင်းပြထားသည်
+- **🛠️ AZD command ကိုးကားချက်များ** — စာတမ်းများတလျောက် လက်ရှိပုံစံများသို့ ပြင်ဆင်ထားသည်။
+  - `azd config list` → `azd config show`
+  - `azd env show` → `azd env list` or `azd env get-value(s)` (context အပေါ်မူတည်)
+  - `azd auth whoami` → `azd auth status`
+  - `azd monitor` → `azd monitor --overview` (Application Insights overview ရည်ရွယ်ချက်ရှိသောနေရာများ)
+- **🧪 Provision preview ဥပမာများ** — `azd provision --preview` နှင့် `azd provision --preview -e production` ကဲ့သို့ လက်ရှိထောက်ခံထားသော အသုံးပြုမှုများကို ရိုးရိုးလက်ခံနိုင်အောင် လိုင်းရှင်းထားသည်
+- **🧭 Workshop လမ်းစဉ်** — သင်တန်းသားများသည် Codespaces, dev container, သို့မဟုတ် local clone တို့တွင် labs များကို ပြီးမြောက်နိုင်အောင် အသစ်ပြင်ဆင်ထားသည်
+- **🔐 Authentication လမ်းညွှန်ချက်များ** — AZD workflow များအတွက် `azd auth login` ကို အကြောင်းပြု၍ ထိန်းသိမ်းထားပြီး Azure CLI ကို တိုက်ရိုက်သုံးသောအခါ `az login` ကို optional အဖြစ် ဖော်ပြထားသည်
+
+#### Fixed
+- **🪟 Windows installation command များ** — installation guide တွင် `winget` package casing ကို လက်ရှိမှန်သလို အသုံးပြုရန် စံချိန်ညိှထားသည်
+- **🐧 Linux installation လမ်းညွှန်ချက်များ** — distro-specific unsupported `azd` package manager ညွှန်ချက်များကို ဖယ်ရှားပြီး release assets များသို့ ညွှန်ပေးထားသည်
+- **📦 AI model ဥပမာများ** — အဟောင်း defaults ဖြစ်သော `gpt-35-turbo` နှင့် `text-embedding-ada-002` တို့ကို လက်ရှိဥပမာများဖြစ်သော `gpt-4.1-mini`, `gpt-4.1`, နှင့် `text-embedding-3-large` သို့ ပြန်လည်ပြင်ဆင်ထားသည်
+- **📋 Deployment နှင့် diagnostics နမူနာများ** — logs, script များနှင့် troubleshooting အဆင့်များတွင် လက်ရှိ environment နှင့် status command များကို အသုံးပြုသည့်ပုံစံဖြင့် ပြင်ဆင်ထားသည်
+- **⚙️ GitHub Actions လမ်းညွှန်ချက်များ** — `Azure/setup-azd@v1.0.0` မှ `Azure/setup-azd@v2` သို့ ပြောင်းလဲထားသည်
+- **🤖 MCP/Copilot consent လမ်းညွှန်ချက်များ** — `azd mcp consent` မှ `azd copilot consent list` သို့ အပ်ဒိတ်ပြုလုပ်ထားသည်
+
+#### Improved
+- **🧠 AI အခန်းလမ်းညွှန်ချက်များ** — preview-sensitive `azd ai` အပြုအမူများ၊ tenant-specific login လုပ်နည်း၊ လက်ရှိ extension အသုံးပြုမှု နှင့် မော်ဒယ် deployment အကြံပြုချက်များကို ပိုမိုရှင်းလင်းစွာ ရှင်းပြထားသည်
+- **🧪 Workshop အညွှန်းများ** — ပိုမိုယုံကြည်ရသော ဗားရှင်းဥပမာများနှင့် ပတ်ဝန်းကျင် setup အသုံးအနှုန်းရွေးချယ်မှုများကို ပိုမိုရှင်းလင်းစေခဲ့သည်
+- **📈 Production နှင့် troubleshooting စာတမ်းများ** — လက်ရှိ monitoring, fallback model, နှင့် cost-tier ဥပမာများနှင့် ပိုမိုကိုက်ညီလာစေခဲ့သည်
+
+#### Files Updated
+- `docs/chapter-01-foundation/README.md`
+- `docs/chapter-01-foundation/azd-basics.md`
+- `docs/chapter-01-foundation/installation.md`
+- `docs/chapter-02-ai-development/README.md`
+- `docs/chapter-02-ai-development/agents.md`
+- `docs/chapter-02-ai-development/ai-model-deployment.md`
+- `docs/chapter-02-ai-development/ai-workshop-lab.md`
+- `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
+- `docs/chapter-03-configuration/README.md`
+- `docs/chapter-03-configuration/configuration.md`
+- `docs/chapter-04-infrastructure/README.md`
+- `docs/chapter-04-infrastructure/deployment-guide.md`
+- `docs/chapter-04-infrastructure/provisioning.md`
+- `docs/chapter-05-multi-agent/README.md`
+- `docs/chapter-06-pre-deployment/README.md`
+- `docs/chapter-06-pre-deployment/preflight-checks.md`
+- `docs/chapter-07-troubleshooting/README.md`
+- `docs/chapter-07-troubleshooting/ai-troubleshooting.md`
+- `docs/chapter-07-troubleshooting/common-issues.md`
+- `docs/chapter-08-production/README.md`
+- `docs/chapter-08-production/production-ai-practices.md`
+- `workshop/README.md`
+- `workshop/docs/index.md`
+- `workshop/docs/instructions/1-Select-AI-Template.md`
+- `workshop/docs/instructions/2-Validate-AI-Template.md`
+- `workshop/docs/instructions/3-Deconstruct-AI-Template.md`
+- `workshop/docs/instructions/5-Customize-AI-Template.md`
+
+---
 
 ### [v3.18.0] - 2026-03-16
 
 #### AZD AI CLI Commands, Content Validation & Template Expansion
-**ဤဗားရှင်းမှာ `azd ai`, `azd extension`, နှင့် `azd mcp` ကဲ့သို့သော command များကို AI ဆိုင်ရာ အခန်းတွေရဲ့ မျိုးစုံတွင် ဖြန့်ဝေမှုရှိစေပြီး agents.md တွင် ပျက်စီးနေသော link များနှင့် ဟောင်းနေသော code များကို ပြင်ဆင်ခဲ့သည်၊ cheat sheet ကို အပ်ဒိတ်လုပ်လိုက်ပြီး Example Templates အပိုင်းကို အပြည့်အဝ ပြန်လည်စစ်ဆေးထားသော ဖော်ပြချက်များနှင့် အသစ်ထည့်သွင်းထားသော Azure AI AZD templates များဖြင့် ပြောင်းလဲတိုးချဲ့ထားသည်။**
+**ဤဗားရှင်းတွင် `azd ai`, `azd extension`, နှင့် `azd mcp` command များကို AI သက်ဆိုင်ရာအခန်းများတွင် အကျယ်တဝင်ကို ဖော်ထုတ်ပေးထားပြီး၊ agents.md တွင် ချိုးကျသွားသော link များနှင့် အဟောင်း code များကို ပြုပြင်ကာ cheat sheet ကို အပ်ဒိတ်လုပ်ပြီး Example Templates အပိုင်းကို မှန်ကန်သည့်ဖော်ပြချက်များနှင့် Azure AI AZD templates အသစ်များဖြင့် ပြန်လည်ပြုပြင်ထားသည်။**
 
 #### Added
-- **🤖 AZD AI CLI ကဲ့သို့သော coverage** ကို ဖိုင် 7 ဖိုင် အတွင်း တိုးချဲ့ထားသည် (မဖြစ်ခင်တွင် Chapter 8 မှာပဲ ပါဝင်ခဲ့သည်)။
-  - `docs/chapter-01-foundation/azd-basics.md` — New "Extensions and AI Commands" section သစ်တွင် `azd extension`, `azd ai agent init`, နှင့် `azd mcp` ကို ဆိုင်းငံ့မထားဘဲ မိတ်ဆက်ပေးထားသည်
-  - `docs/chapter-02-ai-development/agents.md` — Option 4: `azd ai agent init` နှင့် template နည်းလမ်းနှင့် manifest နည်းလမ်းကို နှိုင်းယှဉ်ထားသည့် ကိန်းတန်းဇယားပါရှိသည်
-  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — "AZD Extensions for Foundry" နှင့် "Agent-First Deployment" များအတွက် အပိုင်းများ ထည့်သွင်းထားသည်
-  - `docs/chapter-05-multi-agent/README.md` — Quick Start မှာ template-based နှင့် manifest-based deployment လမ်းကြောင်း နှစ်မျိုးကို ပြသထားသည်
-  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — Deploy အပိုင်းတွင် `azd ai agent init` ရွေးချယ်စရာ အနည်းငယ်ထည့်သွင်းထားသည်
-  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — "AZD AI Extension Commands for Diagnostics" အပိုင်းထည့်သွင်းထားသည်
-  - `resources/cheat-sheet.md` — "AI & Extensions Commands" အပိုင်းသစ်ထည့်သွင်း၍ `azd extension`, `azd ai agent init`, `azd mcp`, နှင့် `azd infra generate` များကို ဖော်ပြထားသည်
-- **📦 AZD AI ဥပမာ template များ အသစ်များ** ကို `microsoft-foundry-integration.md` တွင် ထည့်သွင်းထားသည်။
-  - **azure-search-openai-demo-csharp** — .NET RAG chat ဖြစ်ပြီး Blazor WebAssembly, Semantic Kernel နှင့် voice chat ထောက်ပံ့မှုများ ပါဝင်သည်
-  - **azure-search-openai-demo-java** — Langchain4J ကို အသုံးပြုသော Java RAG chat; ACA/AKS ဖြင့် deploy ရွေးချယ်နိုင်သည်
-  - **contoso-creative-writer** — Azure AI Agent Service, Bing Grounding, နှင့် Prompty ကို အသုံးပြုသော multi-agent စာရေးဆိုင်ရာ အက်ပလီကေးရှင်း
-  - **serverless-chat-langchainjs** — Azure Functions + LangChain.js + Cosmos DB ကို အသုံးပြုသည့် serverless RAG; Ollama local dev အထောက်အပံ့ပါရှိသည်
-  - **chat-with-your-data-solution-accelerator** — အစိုးရ/ လုပ်ငန်းအဆင့် RAG accelerator ဖြစ်ပြီး admin portal, Teams အတွဲဖက်နှင့် PostgreSQL/Cosmos DB ရွေးချယ်စရာများပါရှိသည်
-  - **azure-ai-travel-agents** — servers များကို .NET, Python, Java, နှင့် TypeScript ဖြင့် တည်ဆောက်ထားသည့် multi-agent MCP orchestration ကို ကိုးကားထားသည့် reference app
-  - **azd-ai-starter** — Azure AI အခြေခံ အင်ဖရာစတက်ချာ Bicep starter template အနု
-  - **🔗 Awesome AZD AI Gallery link** — [awesome-azd AI gallery](https://azure.github.io/awesome-azd/?tags=ai) ကို ကိုးကားထားသည် (80+ templates)
+- **🤖 AZD AI CLI ကမ်းလှမ်းချက်များ** — အောက်ပါ 7 ဖိုင်တစ်ဝက်ထဲလုံး အပါအဝင် (ယခင်တွင် Chapter 8 သာရှိခဲ့သည်)။
+  - `docs/chapter-01-foundation/azd-basics.md` — "Extensions and AI Commands" အပိုင်း အသစ် ( `azd extension`, `azd ai agent init`, နှင့် `azd mcp` ကို မိတ်ဆက်)
+  - `docs/chapter-02-ai-development/agents.md` — Option 4: `azd ai agent init` (template vs manifest လမ်းစဉ် နှိုင်းယှဉ်ဇယား အပါအဝင်)
+  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — "AZD Extensions for Foundry" နှင့် "Agent-First Deployment" သက်ဆိုင်ရာစုစည်းမှုများ
+  - `docs/chapter-05-multi-agent/README.md` — Quick Start တွင် template-based နှင့် manifest-based deployment လမ်းစဉ်နှစ်ခုလုံးပြသ
+  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — Deploy အပိုင်းတွင် `azd ai agent init` ရွေးချယ်စရာ ပါဝင်
+  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — "AZD AI Extension Commands for Diagnostics" အပိုင်းအသစ်
+  - `resources/cheat-sheet.md` — "AI & Extensions Commands" အပိုင်းအသစ် ( `azd extension`, `azd ai agent init`, `azd mcp`, နှင့် `azd infra generate` စသည်ဖြင့်)
+- **📦 AZD AI ဥပမာ template အသစ်များ** (`microsoft-foundry-integration.md` တွင်):
+  - **azure-search-openai-demo-csharp** — Blazor WebAssembly, Semantic Kernel, နှင့် အသံစကားပြော chat ကို ထည့်သွင်းထားသော .NET RAG chat
+  - **azure-search-openai-demo-java** — Langchain4J ကို အသုံးပြုသော Java RAG chat (ACA/AKS deployment ရွေးချယ်စရာ)
+  - **contoso-creative-writer** — Azure AI Agent Service, Bing Grounding, နှင့် Prompty ကို အသုံးပြုသည့် Multi-agent creative writing app
+  - **serverless-chat-langchainjs** — Azure Functions + LangChain.js + Cosmos DB အသုံးပြုသည့် Serverless RAG (Ollama local dev ထောက်ခံမှုပါ)
+  - **chat-with-your-data-solution-accelerator** — admin portal, Teams integration, နှင့် PostgreSQL/Cosmos DB ရွေးချယ်စရာပါရှိသော Enterprise RAG accelerator
+  - **azure-ai-travel-agents** — .NET, Python, Java, နှင့် TypeScript တို့တွင် servers ပါဝင်သည့် Multi-agent MCP orchestration ကို ကိုးကားထားသော reference app
+  - **azd-ai-starter** — များမကြီးသော Azure AI အခြေခံ infrastructure Bicep starter template
+  - **🔗 Awesome AZD AI Gallery link** — [awesome-azd AI gallery](https://azure.github.io/awesome-azd/?tags=ai) (80+ templates) ထံကို ကိုးကား
 
 #### Fixed
-- **🔗 agents.md navigation**: Previous/Next လင့်ခ်များသည် Chapter 2 README သင်ခန်းစာ အဆင့်အတန်းလိုက်အတိုင်း (Microsoft Foundry Integration → Agents → AI Model Deployment) ကို သေချာ လိုက်ဖက်အောင် ပြင်ဆင်ထားသည်
-- **🔗 agents.md ပျက်စီးနေသော link များ**: `production-ai-practices.md` ကို `../chapter-08-production/production-ai-practices.md` သို့ ပြင်ဆင်ပြီး (3 ကြိမ်)
-- **📦 agents.md ဟောင်းနေသော code များ**: `opencensus` ကို `azure-monitor-opentelemetry` + OpenTelemetry SDK ဖြင့် အစားထိုးပြောင်းလဲထားသည်
-- **🐛 agents.md မှ မှားယွင်းသော API အသုံးပြုမှု**: `max_tokens` ကို `create_agent()` ထဲမှ ဘာသာရပ်ပေးပြီး `create_run()` အတွင်း `max_completion_tokens` အဖြစ် ရ 옮ထားသည်
-- **🔢 agents.md token ကောက်ချက်နည်း**: မျှခွဲခြုံလေး `len//4` ခန့်မှန်းချက်ကို `tiktoken.encoding_for_model()` အသုံးပြုရန် ဖြည့်စွက်ပြောင်းလဲထားသည်
-- **azure-search-openai-demo**: ဝန်ဆောင်မှုများကို "Cognitive Search + App Service" မှ "Azure AI Search + Azure Container Apps" သို့ ပြင်ဆင်ထားသည် (default host ကို Oct 2024 မှ ပြောင်းလဲခဲ့သည်)
-- **contoso-chat**: ဖော်ပြချက်ကို repo ရဲ့ အမည်နှင့် နည်းပညာ သက်ရောက်မှုနှင့် ကိုက်ညီရန် Azure AI Foundry + Prompty ကို ကိုးကားသည့် ဖော်ပြချက်သို့ အပ်ဒိတ်လုပ်ထားသည်
+- **🔗 agents.md navigation** — Previous/Next links များကို Chapter 2 README သင်ခန်းစာ အစီအစဉ်နှင့် ကိုက်ညီအောင် ပြင်ဆင်ထားသည် (Microsoft Foundry Integration → Agents → AI Model Deployment)
+- **🔗 agents.md broken links** — `production-ai-practices.md` ကို `../chapter-08-production/production-ai-practices.md` သို့ ပြင်ဆင်ထားသည် (3 ခေါက်)
+- **📦 agents.md deprecated code** — `opencensus` ကို `azure-monitor-opentelemetry` + OpenTelemetry SDK ဖြင့် အစားထိုးထားသည်
+- **🐛 agents.md invalid API** — `create_agent()` မှ `max_tokens` ကို `create_run()` ထဲသို့ `max_completion_tokens` အဖြစ် ရွှေ့ထားသည်
+- **🔢 agents.md token counting** — အနီးကပ်ကြမ်းတမ်းသော `len//4` ခန့်မှန်းချက်ကို `tiktoken.encoding_for_model()` ဖြင့် အစားထိုးထားသည်
+- **azure-search-openai-demo** — service များကို "Cognitive Search + App Service" မှ "Azure AI Search + Azure Container Apps" သို့ ပြင်ဆင်ထားသည် (default host မပြောင်းလဲမှု Oct 2024 မှာရှိ)
+- **contoso-chat** — ဖော်ပြချက်ကို repo ၏ တိုက်ရိုက်ခေါင်းစဉ်နှင့် နည်းပညာစနစ်နှင့် ကိုက်ညီအောင် Azure AI Foundry + Prompty ကို ကိုးကားအဖြစ် ပြင်ဆင်ထားသည်
 
 #### Removed
-- **ai-document-processing**: AZD template အဖြစ် အများပြည်သူ သို့ ဝင်ရောက်ချင်စိတ်မရှိသော repo ဖြစ်သောကြောင့် အလုပ်မလုပ်သော template ကို ဖယ်ရှားလိုက်သည်
+- **ai-document-processing** — ဖောက်လှမ်း၍မရသော template ကို ဖျက်ပြီး ဖြုတ်ပစ်ထားသည် (repo သည် အများပြည်သူအတွက် ရရှိနိုင်ခြင်းမရှိသောကြောင့်)
 
 #### Improved
-- **📝 agents.md လက်တွေ့လုပ်ငန်းလုပ်ဆောင်မှုများ**: Exercise 1 တွင် အထင်မွန်းထားသော output နှင့် `azd monitor` အဆင့်ကို ပြသထားသည်; Exercise 2 တွင် FunctionTool အား register ပြုလုပ်သည့် လက်တွေ့ code ကို ပြည့်စုံ ထည့်သွင်းထားသည်; Exercise 3 တွင် မရှင်းလင်းသော ညွှန်ကြားချက်များကို concrete `prepdocs.py` command များဖြင့် အစားထိုးထားသည်
-- **📚 agents.md အရင်းအမြစ်များ**: Azure AI Agent Service documents နှင့် quickstart များသို့ လက်ရှိ link များအဖြစ် အပ်ဒိတ်လုပ်ထားသည်
-- **📋 agents.md Next Steps အကြောင်းအရာဇယား**: အပိုင်းအကုန်ဖုံးလွှမ်းသည့် AI Workshop Lab link ကို ထည့်သွင်းထားသည်
+- **📝 agents.md exercises**: Exercise 1 အတွက် ယခု မျှော်လင့်ထားသည့် ထွက်ပေါက်ကို ပြသပြီး `azd monitor` အဆင့်ထည့်သွင်းထားသည်; Exercise 2 တွင် `FunctionTool` မှတ်ပုံတင် ကုဒ် အပြည့်အစုံ ပါရှိသည်; Exercise 3 သည် မကြာခဏ မရှင်းလင်းသော ညွှန်ကြားချက်များကို `prepdocs.py` အမိန့်များဖြင့် တိကျစေရန် ပြောင်းလဲထားသည်
+- **📚 agents.md resources**: လက်ရှိ Azure AI Agent Service မှတ်တမ်းများနှင့် quickstart သို့ ဗဟိုချထားသော documentation လင့်ခ်များကို အပ်ဒိတ်လုပ်ထားသည်
+- **📋 agents.md Next Steps table**: အခန်းအားလုံး ဖုံးလွှမ်းမှုကို ပြည့်စုံစေသော AI Workshop Lab လင့်ခ်ကို ထည့်သွင်းထားသည်
 
 #### Files Updated
 - `docs/chapter-01-foundation/azd-basics.md`
@@ -76,22 +179,22 @@
 
 ### [v3.17.0] - 2026-02-05
 
-#### သင်တန်းလမ်းညွှန် မြှင့်တင်မှု
-**ဤဗားရှင်းသည် README.md အတွင်း chapter navigation ကို အကောင်းမြင့်သော အကောင်အထည်ဖော်ထားသော ဇယားပုံစံဖြင့် တိုးတက်အောင် ပြုလုပ်ထားသည်။**
+#### Course Navigation Enhancement
+**ဤဗားရှင်းသည် README.md ရဲ့ အခန်း သွားရာလမ်းညွှန်ကို တိုးတက်လာသော ဇယားပုံစံဖြင့် ကောင်းမွန်စေခဲ့သည်။**
 
 #### Changed
-- **သင်တန်းမြေပုံဇယား (Course Map Table)**: တိုက်ရိုက် သင်ခန်းစာ လင့်ခ်များ၊ ထာဝရချိန် ခန့်မှန်းချက်များနှင့် ပြင်းထန်မှု အဆင့်သတ်မှတ်ချက်များ ဖြည့်စွက်ထားသည်
-- **ဖိုလ်ဒါ သန့်ရှင်းမှု**: ပြန်မလိုအပ်သော ဟောင်းနေသော ဖိုလ်ဒါများ (deployment/, getting-started/, pre-deployment/, troubleshooting/) ကို ဖယ်ရှားထားသည်
-- **လင့်ခ်စစ်ဆေးမှု**: Course Map ဇယားအတွင်းရှိ 21+ internal link များအားလုံး ကို စစ်ဆေးပြီး အတည်ပြုထားသည်
+- **Course Map Table**: တန်းတိုက်သင်ခန်းစာ လင့်ခ်များ၊ ကြာချိန် ခန့်မှန်းချက်များနှင့် ရှုပ်ထွေးမှု အဆင့်များနှင့်အတူ တိုးချဲ့ထားသည်
+- **Folder Cleanup**: အလွန်လိုအပ်နည်းသော အဟောင်း ဖိုင်ဖေါ်ဒါများ (deployment/, getting-started/, pre-deployment/, troubleshooting/) ကို ဖျက်ပစ်ထားသည်
+- **Link Validation**: Course Map ဇယားအတွင်းရှိ 21+ ပြင်ပ မဟုတ်သော လင့်ခ်အားလုံးကို စစ်ဆေးအတည်ပြုထားသည်
 
 ### [v3.16.0] - 2026-02-05
 
-#### ထုတ်ကုန်အမည် အပ်ဒိတ်
-**ဤဗားရှင်းသည် ထုတ်ကုန်ကို ယနေ့ရှိ Microsoft branding အရ အမည်များကို အပ်ဒိတ်လုပ်ထားသည်။**
+#### Product Name Updates
+**ဤဗားရှင်းသည် မိုင်ခရိုဆိုက်၏ လက်ရှိ ဘရန်းဒင်းနာမည်များအတိုင်း ထုတ်ကုန်အညွှန်းများကို ပြင်ထားသည်။**
 
 #### Changed
-- **Microsoft Foundry → Microsoft Foundry**: ဘာသာပြန်မထားသော ဖိုင်များအတွက် အားလုံးကို အပ်ဒိတ်လုပ်ထားသည်
-- **Azure AI Agent Service → Foundry Agents**: ဝန်ဆောင်မှုအမည်ကို လက်ရှိ branding အတိုင်း ပြောင်းလဲထားသည်
+- **Microsoft Foundry → Microsoft Foundry**: မဘာသာပြန်ထားသော ဖိုင်များတွင် ရည်ညွှန်းချက်အားလုံးကို အပ်ဒိတ်လုပ်ထားသည်
+- **Azure AI Agent Service → Foundry Agents**: လက်ရှိ ဘရန်းဒင်းနှင့် ကိုက်ညီစေရန် ဝန်ဆောင်မှု နာမည်ကို အပ်ဒိတ်လုပ်ထားသည်
 
 #### Files Updated
 - `README.md` - Main course landing page
@@ -107,11 +210,11 @@
 
 ### [v3.15.0] - 2026-02-05
 
-#### အကြီးစား Repository ဖွဲ့စည်းပုံ ပြန်လည်ဖွဲ့စည်းခြင်း: Chapter အလိုက် ဖိုလ်ဒါ အမည်များ
-**ဤဗားရှင်းတွင် စာရွက်စာတမ်းများကို ပိုမိုရှင်း明နားလင်းစေရန် သတ်သတ်မှတ်မှတ် Chapter ဖိုလ်ဒါများအား ဖွဲ့စည်းပေးထားသည်။**
+#### Major Repository Restructuring: Chapter-Based Folder Names
+**ဤဗားရှင်းသည် စာတမ်းများကို ပိုမိုရှင်းလင်းစေရန် အခန်းအလိုက် ဖေါ်ဒါများဖြင့် ပြန်လည်ဖွဲ့စည်းထားသည်။**
 
-#### ဖိုလ်ဒါနာမည်ပြောင်းလဲမှုများ
-ဟောင်းနေသော ဖိုလ်ဒါများကို chapter-numbered ဖိုလ်ဒါများဖြင့် အစားထိုးထားသည်။
+#### Folder Renames
+အဟောင်း ဖေါ်ဒါများကို အခန်းအမှတ်ပြထားသော ဖေါ်ဒါများဖြင့် အစားထိုးပြုလုပ်ထားသည်။
 - `docs/getting-started/` → `docs/chapter-01-foundation/` + `docs/chapter-03-configuration/`
 - `docs/microsoft-foundry/` → `docs/chapter-02-ai-development/` + `docs/chapter-08-production/`
 - `docs/deployment/` → `docs/chapter-04-infrastructure/`
@@ -119,8 +222,8 @@
 - `docs/troubleshooting/` → `docs/chapter-07-troubleshooting/`
 - Added new: `docs/chapter-05-multi-agent/`
 
-#### ဖိုင်များရွေ့ပြောင်းမှုများ
-| ဖိုင် | မှ | သို့ |
+#### File Migrations
+| File | From | To |
 |------|------|---|
 | azd-basics.md | getting-started/ | chapter-01-foundation/ |
 | installation.md | getting-started/ | chapter-01-foundation/ |
@@ -138,466 +241,466 @@
 | All troubleshooting files | troubleshooting/ | chapter-07-troubleshooting/ |
 
 #### Added
-- **📚 Chapter README ဖိုင်များ**: တစ်ခုချင်းစီသော chapter ဖိုလ်ဒါများအတွက် README.md ဖိုင်များ အသစ်ထည့်သွင်းထားပြီး အတွင်းတွင်:
+- **📚 Chapter README files**: အခန်းတိုင်းဖေါ်ဒါ၌ README.md ဖိုင်များကို ဖန်တီးပြီး အောက်ပါအချက်များကို ထည့်သွင်းထားသည်။
   - သင်ယူရမည့် ရည်မှန်းချက်များနှင့် ကြာချိန်
   - သင်ခန်းစာဇယားနှင့် ဖော်ပြချက်များ
-  - Quick start command များ
-  - အခြား chapter များသို့ သွားရာ navigation ကို ထည့်သွင်းထားသည်
+  - အမြန်စတาร์့ အမိန့်များ
+  - အခန်းများပေါ်သို့ ဖော်ပြချက်များ
 
 #### Changed
-- **🔗 အတွင်းလင့်ခ်အားလုံးကို အပ်ဒိတ်**: စာရွက်စာတမ်းများအနှံ့ 78+ လမ်းကြောင်းများကို အပ်ဒိတ်လုပ်ထားသည်
-- **🗺️ Main README.md**: Course Map ကို chapter အသစ်စနစ်အတိုင်း ထပ်ပြီး ပြင်ဆင်ထားသည်
-- **📝 examples/README.md**: chapter ဖိုလ်ဒါများသို့ အညွှန်းများကို အပ်ဒိတ်လုပ်ထားသည်
+- **🔗 Updated all internal links**: စာတမ်းများအနှံ့ 78+ လမ်းကြောင်းများကို သိရှိပြီး အပ်ဒိတ်လုပ်ထားသည်
+- **🗺️ Main README.md**: Course Map ကို အခန်းဖွဲ့စည်းမှုအသစ်နှင့် တွဲဖက် ပြင်ဆင်ထားသည်
+- **📝 examples/README.md**: chapter ဖေါ်ဒါများသို့ အချိန်နှုတ် cross-references များကို အပ်ဒိတ်လုပ်ထားသည်
 
 #### Removed
-- ဟောင်းနေသော ဖိုလ်ဒါ ပုံစံများ (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/)
+- အဟောင်း ဖေါ်ဒါဖွဲ့စည်းမှုများ (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/) ကို ဖယ်ရှားထားသည်
 
 ---
 
 ### [v3.14.0] - 2026-02-05
 
-#### Repository ဖွဲ့စည်းပုံ ပြန်လည်ဖွဲ့စည်းခြင်း: Chapter Navigation
-**ဤဗားရှင်းတွင် chapter navigation README ဖိုင်များကို ထည့်သွင်းခဲ့သည် (v3.15.0 မှာ အစားထိုးတင်ထားသည်)।**
+#### Repository Restructuring: Chapter Navigation
+**ဤဗားရှင်းသည် အခန်း သွားရာလမ်းကြောင်း README ဖိုင်များကို ထည့်သွင်းခဲ့သည် (v3.15.0 က အသစ်ပိုမိုကောင်းမွန်သောအရ ပြင်ဆင်ထားသည်)।**
 
 ---
 
 ### [v3.13.0] - 2026-02-05
 
-#### AI Agents လမ်းညွှန်အသစ်
-**ဤဗားရှင်းတွင် Azure Developer CLI ဖြင့် AI agents များ deploy လုပ်ရာ အတွက် ပိုမိုတိကျစွာ လမ်းညွှန်ပေးသည့် လက်စွဲစာမျက်နှာ အသစ်တစ်ခု ထည့်သွင်းထားသည်။**
+#### New AI Agents Guide
+**ဤဗားရှင်းတွင် Azure Developer CLI ဖြင့် AI agents များကို တပ်ဆင်ပေးရန် အပြည့်အစုံ လမ်းညွှန်စာတမ်းကို ထည့်သွင်းထားသည်။**
 
 #### Added
-- **🤖 docs/microsoft-foundry/agents.md**: အပြည့်အစုံ လမ်းညွှန်စာမျက်နှာတစ်ခုကို ထည့်သွင်းထားပြီး အောက်ပါအရာများကို ဖော်ပြသည်။
-  - AI agents ဆိုသည်မှာ ဘာလဲ၊ chatbots များနှင့် ဘယ်လိုကွဲပြားသည်
-  - Three quick-start agent templates (Foundry Agents, Prompty, RAG)
-  - Agent architecture ပုံစံများ (single agent, RAG, multi-agent)
-  - Tool ဖွဲ့စည်းမှုနှင့် စိတ်ကြိုက်ပြင်ဆင်မှု
-  - မော်နီတာနှင့် မက်ထရစ်စာရင်းကြည့်ခြင်း
-  - ကုန်ကျစရိတ် စဉ်းစားချက်များနှင့် အကောင်းဆုံးအသုံးပြုမှု
-  - လက်တွေ့ဖြေရှင်းမှု အခက်အခဲများနှင့် ကျော်ဖြတ်နည်းများ
-  - အောင်မြင်ရေးသတ်မှတ်ချက်နှင့်အတူ လက်တွေ့လေ့လာရေး အလေ့အကျင့်သုံးခု
+- **🤖 docs/microsoft-foundry/agents.md**: အောက်ပါအရာများအား ဖော်ပြသည့် ပြည့်စုံသော လမ်းညွှန်စာတမ်း
+  - AI agents ဆိုသည်မှာ အဘယ်နှင့် chatbot များနှင့် မည်ကဲ့သို့ ကွာခြားသည်ကို ရှင်းလင်းပြသခြင်း
+  - သုံးမျိုးသော အမြန်စတาร์့ agent တမ်းပလိတ်များ (Foundry Agents, Prompty, RAG)
+  - Agent အောက်ဆောက်ပုံ ပုံစံများ (single agent, RAG, multi-agent)
+  - Tool များ စီမံခန့်ခွဲခြင်းနှင့် မိမိလိုအပ်သည့်အတိုင်း ပြင်ဆင်နိုင်မှု
+  - မော်နတာနှင့် မက်ထရစ်များလိုအပ်ချက်
+  - ကုန်ကျစရိတ် တွက်ချက်ခြင်းနှင့် အာနိသင်တိုးတက်အောင်လုပ်ခြင်း
+  - အများကြုံ တွေ့ရသည့် ပြဿနာဖြေရှင်း နည်းလမ်းများ
+  - အောင်မြင်မှု ချက်ရှိသည့် လက်တွေ့ လေ့ကျင့်ခန်းသုံးခု
 
-#### အကြောင်းအရာ ဖွဲ့စည်းပုံ
-- **နိဒါန်း**: စတင်လေ့လာသူများအတွက် agent ကို မိတ်ဆက်ခြင်း
-- **Quick Start**: `azd init --template get-started-with-ai-agents` ဖြင့် agents များကို deploy လုပ်ရန်
-- **Architecture Patterns**: agent ပုံစံများ၏ ကြည့်ရှုနိုင်သော ဇယားများ
-- **Configuration**: Tool စနစ်တပ်ဆင်ခြင်းနှင့် environment variable များ
-- **Monitoring**: Application Insights နှင့် ပေါင်းစည်းခြင်း
-- **Exercises**: တိုးတက်လျှင် လက်တွေ့ လေ့လာနိုင်သော လေ့ကျင့်ခန်းများ (တစ်ခုလျှင် 20-45 မိနစ်)
+#### Content Structure
+- **Introduction**: စတင်လေ့လာသူများအတွက် agent အယူအဆများ
+- **Quick Start**: `azd init --template get-started-with-ai-agents` ဖြင့် agent များကို တပ်ဆင်ရန် အတိုချုံးလမ်းညွှန်
+- **Architecture Patterns**: agent ပုံစံများ၏ ဗီဇွယ် ပုံများ
+- **Configuration**: Tool များ သတ်မှတ်ခြင်းနှင့် ပတ်ဝန်းကျင် အတည်ပြုချက်များ
+- **Monitoring**: Application Insights ထည့်သွင်းသည့် နည်းလမ်းများ
+- **Exercises**: 20-45 မိနစ်ကြာသော တိုးတက်ကာ လက်တွေ့ လေ့ကျင့်ခန်းများ
 
 ---
 
 ### [v3.12.0] - 2026-02-05
 
-#### DevContainer Environment အပ်ဒိတ်
-**ဤဗားရှင်းတွင် ဖွံ့ဖြိုးရေး container ကို လက်ရှိကာလနှင့် သင့်တော်သည့် ကိရိယာများနှင့် အကောင်းဆုံး default များဖြင့် အပ်ဒိတ်ပြုလုပ်ထားသည်၊ ဤသည်ဖြင့် AZD သင်ယူမှုအတွေ့အကြုံ တိုးတက်စေသည်။**
+#### DevContainer Environment Update
+**ဤဗားရှင်းသည် ဖြံ့ဖြိုးရေး ကွန်တိနာ ပတ်ဝန်းကျင်ကို ခေတ်မီကိရိယာများနှင့် ပိုမိုကောင်းမွန်သော ဖော်ပြချက်များဖြင့် အပ်ဒိတ်လုပ်ထားသည်။**
 
 #### Changed
-- **🐳 Base Image**: `python:3.12-bullseye` မှ `python:3.12-bookworm` (latest Debian stable) သို့ အပ်ဒိတ်ပြောင်းလဲထားသည်
-- **📛 Container အမည်**: clarity ရရှိစေရန် "Python 3" မှ "AZD for Beginners" အမည်သို့ ပြောင်းပြင်ထားသည်
+- **🐳 Base Image**: `python:3.12-bullseye` မှ `python:3.12-bookworm` (အကြာဆုံး Debian stable) သို့ အပ်ဒိတ်လုပ်ထားသည်
+- **📛 Container Name**: အသွင်အပြင်အတွက် "Python 3" မှ "AZD for Beginners" သို့ ပြောင်းထားသည်
 
 #### Added
-- **🔧 ဖွံ့ဖြိုးရေး ကွန်တိန်းနာ အသစ်အင်္ဂါရပ်များ**:
-  - `azure-cli` သည် Bicep အတွက် အထောက်အပံ့ ဖွင့်ထားပါသည်
-  - `node:20` (AZD templates များအတွက် LTS ဗားရှင်း)
-  - `github-cli` ကို template များ စီမံခန့်ခွဲရန်
-  - `docker-in-docker` ကို container app များကို deploy လုပ်ရန်
+- **🔧 New Dev Container Features**:
+  - `azure-cli` နှင့် Bicep support ကို ဖွင့်ထားသည်
+  - `node:20` (AZD templates အတွက် LTS ဗားရှင်း)
+  - `github-cli` သို့ template စီမံခန့်ခွဲရန်
+  - `docker-in-docker` ကို container app deployments အတွက် ထည့်သွင်းထားသည်
 
-- **🔌 Port Forwarding**: လူသုံးများသော ဖွံ့ဖြိုးရေးအတွက် ကြိုတင် ဖော်ပြထားသော ports:
-  - 8000 (MkDocs ကြိုတင်ပြသခြင်း)
+- **🔌 Port Forwarding**: ပုံမှန် ဖွံ့ဖြိုးရေးအတွက် ကြိုတင်ညှိထားသော ဆိပ်ကမ်းများ
+  - 8000 (MkDocs preview)
   - 3000 (Web apps)
   - 5000 (Python Flask)
   - 8080 (APIs)
 
-- **🧩 VS Code အတွက် Extension အသစ်များ**:
-  - `ms-python.vscode-pylance` - Python IntelliSense ကို မြှင့်တင်ပေးသည်
-  - `ms-azuretools.vscode-azurefunctions` - Azure Functions အထောက်အပံ့
-  - `ms-azuretools.vscode-docker` - Docker အထောက်အပံ့
-  - `ms-azuretools.vscode-bicep` - Bicep ဘာသာစကား အထောက်အပံ့
-  - `ms-azure-devtools.azure-resource-groups` - Azure resource စီမံခန့်ခွဲမှု
-  - `yzhang.markdown-all-in-one` - Markdown တည်းဖြတ်ခြင်း
+- **🧩 New VS Code Extensions**:
+  - `ms-python.vscode-pylance` - Enhanced Python IntelliSense
+  - `ms-azuretools.vscode-azurefunctions` - Azure Functions support
+  - `ms-azuretools.vscode-docker` - Docker support
+  - `ms-azuretools.vscode-bicep` - Bicep language support
+  - `ms-azure-devtools.azure-resource-groups` - Azure resource management
+  - `yzhang.markdown-all-in-one` - Markdown editing
   - `DavidAnson.vscode-markdownlint` - Markdown linting
-  - `bierner.markdown-mermaid` - Mermaid စရန်ပုံများ အထောက်အပံ့
-  - `redhat.vscode-yaml` - YAML အထောက်အပံ့ (azure.yaml အတွက်)
-  - `eamodio.gitlens` - Git ကို ကြည့်ရှုမြင်သာစေခြင်း
-  - `mhutchie.git-graph` - Git သမိုင်း
+  - `bierner.markdown-mermaid` - Mermaid diagram support
+  - `redhat.vscode-yaml` - YAML support (for azure.yaml)
+  - `eamodio.gitlens` - Git visualization
+  - `mhutchie.git-graph` - Git history
 
-- **⚙️ VS Code Settings**: Python interpreter, ဖိုင်ကို သိမ်းသည့်အချိန်တွင် ဖော်မတ်လုပ်ခြင်းနှင့် whitespace ကို ဖြုတ်ဖယ်ပေးရန် စသည်တို့အတွက် မူရင်းချိန်ညှိချက်များ ထည့်သွင်းထားသည်
+- **⚙️ VS Code Settings**: Python interpreter, format on save, whitespace trimming အတွက် မူကြမ်း သတ်မှတ်ချက်များ ထည့်သွင်းထားသည်
 
 - **📦 Updated requirements-dev.txt**:
-  - MkDocs minify plugin ထည့်သွင်းထားသည်
-  - code အရည်အသွေးအတွက် pre-commit ထည့်သွင်းထားသည်
-  - Azure SDK ပက်ကေ့ချ်များ ထည့်သွင်းထားသည် (azure-identity, azure-mgmt-resource)
+  - MkDocs minify plugin ကို ထည့်သွင်းထားသည်
+  - pre-commit ကို အရည်အသွေး စစ်ဆေးရေးအတွက် ထည့်ထားသည်
+  - Azure SDK packages (azure-identity, azure-mgmt-resource) ကို ထည့်ထားသည်
 
-#### ပြုပြင်ခြင်းများ
-- **Post-Create Command**: container start အချိန်တွင် AZD နှင့် Azure CLI တပ်ဆင်မှုကို အတည်ပြုသည်
+#### Fixed
+- **Post-Create Command**: ကွန်တိနာ စတင်လာချိန်တွင် AZD နှင့် Azure CLI တပ်ဆင်မှုကို အတည်ပြုစစ်ဆေးသည်
 
 ---
 
 ### [v3.11.0] - 2026-02-05
 
-#### စတင်လေ့လာသူအတွက် အဆင်ပြေသော README ပြင်ဆင်ခြင်း
-**ဤဗားရှင်းသည် README.md ကို စတင်လေ့လာသူများအတွက် ပိုမိုလွယ်ကူစေရန် အရေးကြီးပြုပြင်ပြီး AI ဖွံ့ဖြိုးရေးသူများအတွက် မရှိမဖြစ်လိုအပ်သော အရင်းအမြစ်များကို ထည့်သွင်းထားသည်။**
+#### Beginner-Friendly README Overhaul
+**ဤဗားရှင်းသည် README.md ကို စတင်လေ့လာသူများအတွက် ပိုမိုလွယ်ကူစေရန် အလေးပေး ပြန်လည်ရေးသားပြီး AI ဖွံ့ဖြိုးရေးသူများအတွက် မရှိမဖြစ် လိုအပ်သော အရင်းအမြစ်များကို ထည့်သွင်းထားသည်။**
 
-#### ထည့်သွင်းထားသည်
-- **🆚 Azure CLI vs AZD နှိုင်းယှဉ်ချက်**: ဘယ်တ/tools ကို ဘယ်အချိန် အသုံးပြုရမည်ကို လက်တွေ့ နမူနာများနှင့် ဖော်ပြချက်ရှင်းလင်းတိကျစေခြင်း
-- **🌟 Awesome AZD လင့်ခ်များ**: အသိုင်းအဝိုင်း၏ template ပြခန်းနှင့် ဖောင်ထည့်ပေးရန် အရင်းအမြစ်များသို့ တိုက်ရိုက် လင့်ခ်များ:
-  - [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) - တပ်ဆင်ရန် ပြင်ဆင်ပြီးသော template များ 200+ 
-  - [Submit a Template](https://github.com/Azure/awesome-azd/issues) - အသိုင်းအဝိုင်း ပါဝင်ပို့ခွင့်
-- **🎯 Quick Start Guide**: စတင်ရန် လွယ်ကူသည့် 3 အဆင့် ဝန်းကျင် (Install → Login → Deploy)
-- **📊 အတွေ့အကြုံအပေါ် အခြေခံ၍ လမ်းညွှန်ပေးသည့် ဇယား**: ဖွံ့ဖြိုးရေးသူ အတွေ့အကြုံအလိုက် မည်နေရာမှ စတင်ရသည်ကို ဖော်ပြထားသည်
+#### Added
+- **🆚 Azure CLI vs AZD Comparison**: တိုက်ရိုက် အသုံးပြုသင့်သည့် ကိရိယာကို ရှင်းလင်းဖော်ပြထားပြီး အသုံးချ နမူနာများပါဝင်သည်
+- **🌟 Awesome AZD Links**: ဆွဲဆောင်မှုရှိသော AZD တန်ဖိုးများနှင့် ပံ့ပိုးမှု အရင်းအမြစ်များ (direct links)
+  - [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) - 200+ ready-to-deploy templates
+  - [Submit a Template](https://github.com/Azure/awesome-azd/issues) - Community contribution
+- **🎯 Quick Start Guide**: ထပ်ရှင်းသော 3-ခြေလှမ်း စတတ်လမ်းညွှန် (Install → Login → Deploy)
+- **📊 Experience-Based Navigation Table**: developer အတွေ့အကြုံ အလိုက် စတင်ရန် နေရာများကို ရှင်းလင်းပြထားသည်
 
-#### ပြောင်းလဲခဲ့သည်
-- **README ဖွဲ့စည်းပုံ**: မကျန်ရစ်စွာ ဖော်ပြပေးရန် အဖွဲ့အစည်း ပြင်ဆင်ထားပြီး အချက်အလက် အရေးကြီးဆုံးကို မူလဦးစွာထားသည်
-- **မိတ်ဆက် အပိုင်း**: "The Magic of `azd up`" ကို စတင်လေ့လာသူများအတွက် ရှင်းလင်းစွာ ရေးသားပြန်လည်ပြင်ဆင်ထားသည်
-- **ထပ်ထွက် duplicate အကြောင်းအရာများကို ဖယ်ရှားလိုက်သည်**: အခက်အခဲ ဖြေရှင်းခြင်း အပိုင်း ထပ်နေသည်များ ရှင်းလင်းပြီး ဖယ်ထုတ်ထားသည်
-- **Troubleshooting Commands**: `azd logs` ကို သက်ဆိုင်သော `azd monitor --logs` သို့ ပြောင်းလဲ၍ မှားယွင်းချက်များကို ပြင်ဆင်ထားသည်
+#### Changed
+- **README Structure**: အချက်အလက် အရေးကြီးဆုံးကို ဦးစားပေးဖော်ပြရန် ပြန်လည်စီစဉ်ထားသည်
+- **Introduction Section**: စတင်လေ့လာသူများအတွက် "The Magic of `azd up`" ကို ရိုးရှင်းစွာ ရှင်းလင်းပြထားသည်
+- **Removed Duplicate Content**: ထပ်နေသော troubleshooting အပိုဒ်ကို ဖြုတ်ပစ်ထားသည်
+- **Troubleshooting Commands**: `azd logs` ကို တရားဝင် `azd monitor --logs` ဖြင့် အသုံးပြုရန် ပြင်ဆင်ထားသည်
 
-#### ပြုပြင်ပြီးသည့် အချက်များ
+#### Fixed
 - **🔐 Authentication Commands**: cheat-sheet.md တွင် `azd auth login` နှင့် `azd auth logout` ကို ထည့်သွင်းထားသည်
-- **မမှန်ကန်သော Command အညွှန်းများ**: README troubleshooting အပိုင်းမှ ကျန်ရှိခဲ့သော `azd logs` ကို ဖယ်ရှားထားသည်
+- **Invalid Command References**: README troubleshooting အပိုင်းမှ ကျန်ရှိသေးသော `azd logs` ကို ဖယ်ရှားထားသည်
 
-#### မှတ်စုများ
-- **Scope**: ပြောင်းလဲမှုများကို main README.md နှင့် resources/cheat-sheet.md တို့တွင် အသုံးပြုထားသည်
-- **ရည်ညွှန်းထားသည့် ပရဟိတ**: AZD အသစ်သင်ကြားရေးအတွက် စတင်လေ့လာသူများကို အထူးရည်ရွယ်သည်
+#### Notes
+- **Scope**: ပြင်ဆင်မှုများကို main README.md နှင့် resources/cheat-sheet.md တွင် အဓိက အကောင်အထည်ဖော်ထားသည်
+- **Target Audience**: AZD အသစ်စတင်သော developer များအတွက် အထူးအာရုံစိုက်ထားသည်
 
 ---
 
 ### [v3.10.0] - 2026-02-05
 
-#### Azure Developer CLI Command တိကျမှု အပ်ဒိတ်
-**ဤဗားရှင်းသည် စာရွက်စာတမ်းများအတွင်း မရှိနိုင်သော AZD command များကို ပြန်လည်ဖယ်ရှား၍ Azure Developer CLI သင်္ကေတများအားလုံး တိကျစေရန် ဥပမာကုဒ်များကို ပြင်ဆင်ထားသည်။**
+#### Azure Developer CLI Command Accuracy Update
+**ဤဗားရှင်းသည် စာတမ်းများအတွင်း တွေ့ရသည့် မရှိမဖြစ် AZD command များကို ပြင်ဆင်ပြီး ကုဒ်နမူနာများအားလုံး တိကျသည့် Azure Developer CLI syntax များကို အသုံးပြုစေသည်။**
 
-#### ပြုပြင်ထားသည်
-- **🔧 မရှိ/မှားနေသော AZD Commands များ ဖယ်ရှားပြီး ပြင်ဆင်ထားသည်**: မမှန်ကန်သော command များကို ကြိုတင်စစ်ဆေးပြီး ပြင်ဆင်ထားသည်။
-  - `azd logs` (မရှိ) → `azd monitor --logs` သို့မဟုတ် Azure CLI အခြားရွေးချယ်စရာများဖြင့် အစားထိုးထားသည်
-  - `azd service` subcommands (မရှိ) → `azd show` နှင့် Azure CLI ကို အသုံးပြုရန် အစားထိုးထားသည်
-  - `azd infra import/export/validate` (မရှိ) → ဖယ်ရှား သို့မဟုတ် မှန်ကန်သည့် အခြားနည်းလမ်းဖြင့် အစားထိုးထားသည်
-  - `azd deploy --rollback/--incremental/--parallel/--detect-changes` flags (မရှိ) → ဖယ်ရှားထားသည်
-  - `azd provision --what-if/--rollback` flags (မရှိ) → `--preview` အသုံးပြုရန် အပ်ဒိတ်ပြုလုပ်ထားသည်
-  - `azd config validate` (မရှိ) → `azd config list` ဖြင့် အစားထိုးထားသည်
-  - `azd info`, `azd history`, `azd metrics` (မရှိ) → ဖယ်ရှားထားသည်
+#### Fixed
+- **🔧 Non-Existent AZD Commands Removed**: မရှိသော azd command များအား လုံးကို စိစစ်ဖယ်ရှားပြီး တိကျသော အစားထိုးများကို ထည့်သွင်းထားသည်။
+  - `azd logs` (doesn't exist) → replaced with `azd monitor --logs` or Azure CLI alternatives
+  - `azd service` subcommands (don't exist) → replaced with `azd show` and Azure CLI
+  - `azd infra import/export/validate` (don't exist) → removed or replaced with valid alternatives
+  - `azd deploy --rollback/--incremental/--parallel/--detect-changes` flags (don't exist) → removed
+  - `azd provision --what-if/--rollback` flags (don't exist) → updated to use `--preview`
+  - `azd config validate` (doesn't exist) → replaced with `azd config list`
+  - `azd info`, `azd history`, `azd metrics` (don't exist) → removed
 
-- **📚 Command များ ပြင်ဆင်ထားသော ဖိုင်များ**:
-  - `resources/cheat-sheet.md`: Command ကိုးကားစာရင်း အပြည့်အစုံ ပြင်ဆင်ထားသည်
-  - `docs/deployment/deployment-guide.md`: Rollback နှင့် deployment မျက်နှာစာရင်းများ ပြင်ဆင်ထားသည်
-  - `docs/troubleshooting/debugging.md`: log စိစစ်မှု အပိုင်းများကို မှန်ကန်စေသည်
-  - `docs/troubleshooting/common-issues.md`: Troubleshooting command များ အပ်ဒိတ်
-  - `docs/troubleshooting/ai-troubleshooting.md`: AZD debugging အပိုင်း ပြင်ဆင်ထားသည်
-  - `docs/getting-started/azd-basics.md`: monitoring command များ ပြင်ဆင်ထားသည်
-  - `docs/getting-started/first-project.md`: monitoring နှင့် debugging ဥပမာများကို အပ်ဒိတ်လုပ်ထားသည်
-  - `docs/getting-started/installation.md`: help နှင့် version ဥပမာများ ကို ပြင်ဆင်ထားသည်
-  - `docs/pre-deployment/application-insights.md`: log ကြည့်ရှုမှုပြဿနာများ ကို ပြင်ဆင်ထားသည်
-  - `docs/pre-deployment/coordination-patterns.md`: agent debugging ဥပမာများကို ပြင်ဆင်ထားသည်
+- **📚 Files Updated with Command Corrections**:
+  - `resources/cheat-sheet.md`: Major overhaul of command reference
+  - `docs/deployment/deployment-guide.md`: Fixed rollback and deployment strategies
+  - `docs/troubleshooting/debugging.md`: Corrected log analysis sections
+  - `docs/troubleshooting/common-issues.md`: Updated troubleshooting commands
+  - `docs/troubleshooting/ai-troubleshooting.md`: Fixed AZD debugging section
+  - `docs/getting-started/azd-basics.md`: Corrected monitoring commands
+  - `docs/getting-started/first-project.md`: Updated monitoring and debugging examples
+  - `docs/getting-started/installation.md`: Fixed help and version examples
+  - `docs/pre-deployment/application-insights.md`: Corrected log viewing commands
+  - `docs/pre-deployment/coordination-patterns.md`: Fixed agent debugging commands
 
-- **📝 ဗားရှင်း ကိုးကား အပ်ဒိတ်**:
-  - `docs/getting-started/installation.md`: 1.5.0 ဟု ခိုင်လုံစွာ သတ်မှတ်ထားသော ဗားရှင်း ကို `1.x.x` အဖြစ် အစားထိုးထားပြီး releases link ထည့်ထားသည်
+- **📝 Version Reference Updated**: 
+  - `docs/getting-started/installation.md`: 固定された `1.5.0` ဗားရှင်းကို `1.x.x` အဖြစ်ပြောင်းပြီး releases အတွက် link ထည့်ထားသည်
 
-#### ပြောင်းလဲချက်များ
-- **Rollback နည်းဗျူဟာများ**: AZD တွင် native rollback မရှိသောကြောင့် Git အခြေပြု rollback ကို အသုံးပြုရန် ညွှန်ပြထားသည်
-- **Log ကြည့်ရှုခြင်း**: `azd logs` မှ အညွှန်းများကို `azd monitor --logs`, `azd monitor --live` နှင့် Azure CLI command များဖြင့် အစားထိုးထားသည်
-- **Performance အပိုင်း**: မရှိသော parallel/incremental deployment flags များကို ဖယ်ရှားပြီး မှန်ကန်သော ရွေးချယ်စရာများ ပေးထားသည်
+#### Changed
+- **Rollback Strategies**: AZD သည် မတည်ဆောက်သည့် native rollback များမရှိသောကြောင့် Git-based rollback ကို အသုံးပြုရန် အသိပေးထားသည်
+- **Log Viewing**: `azd logs` ကို `azd monitor --logs`, `azd monitor --live`, နှင့် Azure CLI အစီအစဉ်များဖြင့် အစားထိုးပြင်ဆင်ထားသည်
+- **Performance Section**: မရှိသော parallel/incremental deployment flag များကို ဖယ်ရှားပြီး သက်ဆိုင်ရာ တရားဝင် အစားထိုးနည်းလမ်းများကို ဖော်ပြထားသည်
 
-#### နည်းပညာဆိုင်ရာ အသေးစိတ်
-- **မှန်ကန်သော AZD Commands**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
-- **azd monitor အတွက် မှန်ကန်သော Flags များ**: `--live`, `--logs`, `--overview`
-- **ဖယ်ရှားလိုက်သော အင်္ဂါရပ်များ**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
+#### Technical Details
+- **မှန်ကန်သော AZD အမိန့်များ**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
+- **မှန်ကန်သော azd monitor အတွက် Flag များ**: `--live`, `--logs`, `--overview`
+- **ဖယ်ရှားထားသော အင်္ဂါရပ်များ**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
 
-#### မှတ်စုများ
-- **စစ်ဆီးမှု**: Commands အားလုံးကို Azure Developer CLI v1.23.x နှင့် ကိုက်ညီမှု ရှိကြောင်း အတည်ပြုထားသည်
+#### မှတ်ချက်များ
+- **အတည်ပြုချက်**: Azure Developer CLI v1.23.x အပေါ် အမိန့်များကို စမ်းသပ်အတည်ပြုထားသည်
 
 ---
 
 ### [v3.9.0] - 2026-02-05
 
-#### ဝေါ့ရှော့(Workshop) ပြီးမြောက်မှုနှင့် စာတမ်းရည်မှန်းချက် အရည်အသွေး အပ်ဒိတ်
-**ဤဗားရှင်းသည် အပြန်အလှန် ဆွေးနွေးနိုင်သည့် workshop modules များကို ပြီးစီးစေပြီး ချက်ချင်းပျက်ကွက်နေသော စာတမ်းလင့်ခ်များကို ပြုပြင်ကောင်းမွန်စေသည်၊ Microsoft AZD အသုံးပြုသော AI ဖွံ့ဖြိုးရေးသူများအတွက် အကြောင်းအရာအရည်အသွေးကို မြှင့်တင်ထားသည်။**
+#### ဇယားသင်တန်းပြီးစီးမှုနှင့် စာရွက်စာတမ်း အရည်အသွေး အပ်ဒိတ်
+**ဤဗားရှင်းသည် အင်တာแက်တက် ဗဟိုပြီး သင်တန်းမော်ဂျူးများကို ပြီးမြောက်စေကာ ချိုးယွင်းနေသော စာရွက်စာတမ်း ချိတ်ဆက်များကို ပြင်ဆင်ပြီး Microsoft AZD အသုံးပြု နေသော AI developer များအတွက် အကြောင်းအရာ အလုံးစုံအရည်အသွေး ကို မြှင့်တင်ပေးသည်။**
 
-#### ထည့်သွင်းထားသည်
-- **📝 CONTRIBUTING.md**: အသစ်ထည့်သွင်းထားသော လှုံ့ဆော်မှု စည်းကမ်းများစာတမ်း၊ ယင်းတွင်:
-  - ပြဿနာအစီအစဉ် တင်ရန်နှင့် ပြင်ဆင်မှု အကြံပြုရန် သတ်မှတ်ချက်များ
-  - အကြောင်းအရာ အသစ်များအတွက် စာတမ်းစံနှုန်းများ
-  - ကုဒ်နမူနာ ညွှန်ကြားချက်များနှင့် commit message စံနစ်များ
-  - အသိုင်းအဝိုင်း ပါဝင်ဆောင်ရွက်ရေး သတင်းအချက်အလက်များ
+#### Added
+- **📝 CONTRIBUTING.md**: အကူအညီပေးရန် အသစ်သော ပြန်လည်ပေးဆောင်မှုလမ်းညွှန်စာရွက် ပါရှိသည့် စာရွက်:
+  - ပြဿနာများ ထောက်ပြခြင်းနှင့် ပြင်ဆင်မှု အကြံပြုခြင်းအတွက် ပြတ်သားသော ညွှန်ကြားချက်များ
+  - အကြောင်းအရာအသစ်များအတွက် စာရွက်စာတမ်း စံနှုန်းများ
+  - ကုဒ် နမူနာ နည်းလမ်းများနှင့် commit မက်ဆေ့ စနစ်များအတွက် ညွှန်ကြားချက်များ
+  - အသိုင်းအဝိုင်း ပါဝင်ဆောင်ရွက်မှု အချက်အလက်များ
 
-#### အပိုင်းများ ပြီးမြောက်စေပြီး
-- **🎯 Workshop Module 7 (Wrap-up)**: Wrap-up module ကို အပြည့်အဝ ပြီးဆုံးထားပြီး:
-  - Workshop အပြုပ်အတွဲ အကျဉ်းချုံး
-  - AZD, template များနှင့် Microsoft Foundry ကို ကွဲပြားစွာ နားလည်ပြီး မိတ်ဆက်ထားသည်
-  - သင်ယူမှု ဆက်လက်လုပ်ရန် အကြံပြုချက်များ
-  - Workshop challenge လေ့ကျင့်ခန်းများကို အတန်းအစား အဆင့်သတ်မှတ်ချက်များနှင့်ဖြင့်ထည့်သွင်းထားသည်
-  - အသိုင်းအဝိုင်း အကြံပြုချက်နှင့် အထောက်အပံ့ လင့်ခ်များ
+#### Completed
+- **🎯 Workshop Module 7 (Wrap-up)**: အဆုံးသတ် Module ကို ပြီးစီးပြီး အောက်ပါများပါဝင်သည်:
+  - သင်တန်းအမှတ်တရ လေ့ကျင့်ခဲ့သော အလုပ်ရလဒ်များအကျဉ်းချုံး
+  - AZD, templates, နှင့် Microsoft Foundry အပါအဝင် ကျွမ်းကျင်ခဲ့သည့် အဓိက မှတ်စုများ
+  - သင်ယူမှု ခရီးကို ဆက်လက်တိုးတက်ရန် အကြံပြုချက်များ
+  - အခက်အခဲ အဆင့်အလိုက် သင်တန်း စိန်ခေါ်မှု လေ့ကျင့်ခန်းများ
+  - အသိုင်းအဝိုင်း တုံ့ပြန်ချက်နှင့် ထောက်ခံမှု ချိတ်ဆက်များ
 
-- **📚 Workshop Module 3 (Deconstruct)**: သင်ယူရည်ရွယ်ချက်များကို အပ်ဒိတ်လုပ်ထားပြီး:
-  - GitHub Copilot နှင့် MCP servers ဖန်တီးခြင်း လုပ်ငန်းစဉ်များ ညွှန်ပြချက်
-  - AZD template ဖိုလ်ဒါ ဖွဲ့စည်းပုံ အကြောင်းနားလည်မှု
-  - Infrastructure-as-code (Bicep) စီမံခန့်ခွဲမှု ပုံစံများ
-  - လက်တွေ့ လက်တွေ့လက်ခံ လေ့ကျင့်ခန်းများ
+- **📚 Workshop Module 3 (Deconstruct)**: သင်ယူရည်မှန်းချက်များကို အပ်ဒိတ်လုပ်ပြီး အောက်ပါများပါဝင်သည်:
+  - GitHub Copilot နှင့် MCP servers ကို ဖွင့်သတ်ခြင်း ညွှန်ကြားချက်များ
+  - AZD template ဖိုလ်ဒါ ဖွဲ့စည်းပုံ နားလည်မှု
+  - Infrastructure-as-code (Bicep) အဖွဲ့အစည်း ပုံစံများ
+  - လက်တွေ့ လေ့ကျင့်ခန်း ညွှန်ကြားချက်များ
 
-- **🔧 Workshop Module 6 (Teardown)**: ပြီးစီးထားပြီး:
+- **🔧 Workshop Module 6 (Teardown)**: ပြီးစီးပြီး အောက်ပါများပါဝင်သည်:
   - အရင်းအမြစ် ရှင်းလင်းခြင်းနှင့် ကုန်ကျစရိတ် စီမံခန့်ခွဲမှု ရည်ရွယ်ချက်များ
-  - အင်ဖရာကို 안전하게 ဖယ်ရှားရန် `azd down` အသုံးပြုပုံ
-  - Soft-deleted cognitive services ပြန်လည်ကောင်းမွန်စေရန် လမ်းညွှန်ချက်များ
-  - GitHub Copilot နှင့် Azure Portal ကို အပိုစူးစမ်းရန် အကြံပြုချက်များ
+  - လုံခြုံစွာ အင်ဖ্রာစ्ट्रက်ချာ ဖျက်ပစ်ရန် `azd down` အသုံးပြုနည်း
+  - soft-delete လုပ်ထားသော Cognitive Services များ ပြန်လည် ရယူခြင်းအတွက် ညွှန်ကြားချက်
+  - GitHub Copilot နှင့် Azure Portal အတွက် အပို စူးစမ်းဖွယ် အကြံပြုချက်များ
 
-#### ပြုပြင်ထားသည်
-- **🔗 ပျက်ကွက်နေသော လင့်ခ်များ ပြုပြင်ခြင်း**: 15+ ကျော်သော အတွင်းရေးစာရွက်လင့်ခ်များကို ပြုပြင်ပြီး:
-  - `docs/ai-foundry/ai-model-deployment.md`: microsoft-foundry-integration.md သို့ လမ်းကြောင်းများ ပြင်ဆင်ထားသည်
-  - `docs/troubleshooting/ai-troubleshooting.md`: ai-model-deployment.md နှင့် production-ai-practices.md လမ်းကြောင်းများကို ပြင်ဆင်ထားသည်
-  - `docs/getting-started/first-project.md`: မရှိတော့သော cicd-integration.md ကို deployment-guide.md ဖြင့် အစားထိုးထားသည်
-  - `examples/retail-scenario.md`: FAQ နှင့် troubleshooting ဂိုဏ်းလမ်းကြောင်းများ ကို ပြုပြင်ထားသည်
-  - `examples/container-app/microservices/README.md`: course home နှင့် deployment guide လမ်းကြောင်းများ ပြင်ဆင်ထားသည်
-  - `resources/faq.md` နှင့် `resources/glossary.md`: AI အခန်း အရင်းအမြစ် ကို အပ်ဒိတ်လုပ်ထားသည်
-  - `course-outline.md`: instructor guide နှင့် AI workshop lab လမ်းကြောင်းများ ကို ပြင်ဆင်ထားသည်
+#### Fixed
+- **🔗 ချိုးဆီးနေသော ချိတ်ဆက်များ ပြင်ဆင်မှုများ**: အတွင်း စာရွက်စာတမ်း ချိတ်ဆက် ချိုးယွင်းချက် 15+ ခုကို ဖြေရှင်းခဲ့သည်:
+  - `docs/ai-foundry/ai-model-deployment.md`: microsoft-foundry-integration.md သို့ ဦးတည်နေသော လမ်းကြောင်းများကို မှန်ကန်အောင် ပြင်ဆင်ခဲ့သည်
+  - `docs/troubleshooting/ai-troubleshooting.md`: ai-model-deployment.md နှင့် production-ai-practices.md သို့ ချိတ်ဆက်ရာ လမ်းကြောင်းများကို ချိန်ညှိပြင်ဆင်ခဲ့သည်
+  - `docs/getting-started/first-project.md`: မရှိတော့သော cicd-integration.md ကို deployment-guide.md ဖြင့် အစားထိုးပြင်ဆင်ခဲ့သည်
+  - `examples/retail-scenario.md`: FAQ နှင့် troubleshooting guide လမ်းကြောင်းများကို ပြင်ဆင်ခဲ့သည်
+  - `examples/container-app/microservices/README.md`: course home နှင့် deployment guide လမ်းကြောင်းများကို သင့်တော်အောင် ပြင်ဆင်ခဲ့သည်
+  - `resources/faq.md` နှင့် `resources/glossary.md`: AI အခန်းပိုင်း ရည်ညွှန်းချက်များကို အပ်ဒိတ်ပြုလုပ်ခဲ့သည်
+  - `course-outline.md`: instructor guide နှင့် AI workshop lab ရည်ညွှန်းချက်များကို မှန်ကန်အောင် ပြင်ဆင်ခဲ့သည်
 
-- **📅 Workshop အခြေနေ ဘားနာ**: "Under Construction" မှ ဖေဖော်ဝါရီ 2026 နေ့စွဲနဲ့ active workshop အခြေအနေသို့ ပြောင်းလဲထားသည်
+- **📅 Workshop Status Banner**: "Under Construction" မှ ဖေဖော်ဝါရီ 2026 နေ့စွဲပါ active workshop အခြေအနေသို့ အပ်ဒိတ်ပြုလုပ်ခဲ့သည်
 
-- **🔗 Workshop သွားလာမှု လမ်းကြောင်း**: workshop README.md တွင် lab-1-azd-basics ဖိုလ်ဒါ မရှိသည့် လမ်းကြောင်းများကို ပြင်ဆင်ထားသည်
+- **🔗 Workshop Navigation**: workshop README.md တွင် lab-1-azd-basics ဖိုလ်ဒါ မရှိတော့သောနေရာကို ညွှန်ပြနေသည့် ချိတ်ဆက် အမှားများကို ပြင်ဆင်ခဲ့သည်
 
-#### ပြောင်းလဲချက်များ
-- **Workshop တင်ဆက်မှု**: "under construction" သတိပေးမှုကို ဖယ်ရှားပြီး workshop ကို အပြည့်အဝ အသုံးပြုနိုင်အောင် ပြုပြင်ထားသည်
-- **သွားလာမှု တိကျမှု**: အပိုင်းအလိုက် သွားလာရန် လမ်းညွှန်ချက်များကို စနစ်တကျ ထားရှိထားသည်
-- **သင်ကြားမှုပုံစံ ရည်ညွှန်းချက်များ**: chapter များအကြား cross-reference များကို microsoft-foundry လမ်းကြောင်းများဖြင့် အပ်ဒိတ်ထားသည်
+#### Changed
+- **Workshop Presentation**: "under construction" သတိပေးချက်ကို ဖယ်ရှားပြီး သင်တန်းသည် ယခု ပြီးစီးပြီး အသုံးပြုရန် ကျန်ရှိနေပြီဖြစ်သည်
+- **Navigation Consistency**: အစိတ်အပိုင်းများ အကြား သင့်တော်သော navigation ကို အားလုံးတွင် အတည်ပြုထားသည်
+- **Learning Path References**: chapter နှင့် chapter အကြား ရည်ညွှန်းချက်များကို microsoft-foundry သို့ သတ်မှတ်ချက်များဖြင့် ပြင်ဆင်ထားသည်
 
-#### အတည်ပြုချက်များ
-- ✅ အင်္ဂလိပ် markdown ဖိုင်များအားလုံးတွင် အတွင်းလင့်ခ်များ မှန်ကန်ပါသည်
-- ✅ Workshop modules 0-7 အားလုံးသည် သင်ယူရည်ရွယ်ချက်များနှင့် အပြည့်အဝ ပြီးစီးပါပြီ
-- ✅ အခန်းများနှင့် module များအကြား သွားလာမှု များသည် မှန်ကန်စွာ လုပ်ဆောင်နိုင်ပါသည်
-- ✅ Microsoft AZD အသုံးပြုသော AI ဖွံ့ဖြိုးရေးသူများအတွက် အကြောင်းအရာ သင့်တော်သည်
-- ✅ စတင်လေ့လာသူအတွက် ဘာသာစကားနှင့် ဖွဲ့စည်းပုံကို ထိန်းသိမ်းထားသည်
-- ✅ CONTRIBUTING.md သည် အသိုင်းအဝိုင်း အတွက် ရှင်းလင်းသော လမ်းညွှန်ချက်များ ပေးထားသည်
+#### Validated
+- ✅ အင်္ဂလိပ် Markdown ဖိုင်များအားလုံးတွင် အတွင်းချိတ်ဆက်များ တိကျမှန်ကန်သိရသည်
+- ✅ Workshop module 0-7 များသည် သင်ယူရည်မှန်းချက်များနှင့် အပြီးအစီးဖြစ်သည်
+- ✅ အခန်းများနှင့် မော်ဂျူးများအကြား navigation သာမက တပြိုင်နက် လည်ပတ်နိုင်သည်
+- ✅ အကြောင်းအရာသည် Microsoft AZD သုံး AI developer များအတွက် သင့်တော်သည်
+- ✅ စတရင်သူများအတွက် သင့်လျော်သော ဘာသာစကားနှင့် ဖွဲ့စည်းပုံကို ထိန်းသိမ်းထားသည်
+- ✅ CONTRIBUTING.md သည် အသိုင်းအဝိုင်း တက်ကြွသူများအတွက် ရှင်းလင်းသော လမ်းညွှန်ချက်များပေးထားသည်
 
-#### နည်းပညာဆိုင်ရာ အကောင်အထည်ဖော်ချက်
-- **လင့်ခ် စစ်ဆေးမှု**: Automated PowerShell script တစ်ခုက .md internal link အားလုံးကို စစ်ဆေးထားသည်
-- **အကြောင်းအရာ စစ်ဆေးမှု**: Workshop ပြီးစီးမှုနှင့် စတင်လေ့လာသူအဆင်ပြေမှုအား လက်ဖြင့် စစ်ဆေးထားသည်
-- ** navigation system **: chapter နှင့် module များအတွက် တူညီသော သွားလာမှု ပုံစံများကို အသုံးပြုထားသည်
+#### Technical Implementation
+- **Link Validation**: အလိုအလျောက် PowerShell script ဖြင့် .md ဖိုင်များအားလုံး၏ အတွင်းချိတ်ဆက်များကို စစ်ဆေးခဲ့သည်
+- **Content Audit**: သင်တန်း ပြီးစီးမှုနှင့် စတင်သူအတွက် သင့်လျော်မှုကို ကိုယ်တိုင် သုံးသပ်ချက်ပြုလုပ်ခဲ့သည်
+- **Navigation System**: အခန်းနှင့် မော်ဂျူးများအတွက် တစ်မျိုးတည်း Navigation ပုံစံများကို အကောင်အထည်ဖော်ထားသည်
 
-#### မှတ်စုများ
-- **Scope**: ပြောင်းလဲမှုများကို အင်္ဂလိပ် စာရွက်စာတမ်းများတွင်သာ အသုံးပြုထားသည်
-- **ဘာသာပြန်ချက်များ**: ဤဗားရှင်းတွင် ဘာသာပြန် ဖိုလ်ဒါများကို အပ်ဒိတ်မပြုလုပ်ထားပါ (အလိုအလျောက် ဘာသာပြန်မှု နောက်ပိုင်းတွင် ကိုက်ညီစေမည်)
-- **Workshop သင်ကြားချိန်**: ပြီးစီးသော workshop သည် လက်တွေ့ လေ့ကျင့်ရန် 3-4 နာရီ ကာလ ပေးသည်
+#### မှတ်ချက်များ
+- **Scope**: ပြင်ဆင်မှုများကို အင်္ဂလိပ် စာရွက်စာတမ်းများပေါ်တွင်သာ အသက်သွင်းထားသည်
+- **Translations**: ဘာသာပြန် ဖိုလ်ဒါများကို ဤဗားရှင်းတွင် မသိမ်းဆည်းထားပါ (အလိုအလျောက် ဘာသာပြန်ခြင်းသည် နောက်ပိုင်းတွင် ကိုက်တွယ်မည်)
+- **Workshop Duration**: ပြီးပြည့်စုံသော သင်တန်းသည် လက်တွေ့ လေ့ကျင့်ခန်း 3-4 နာရီ ခန့် ပေးထားသည်
 
 ---
 
 ### [v3.8.0] - 2025-11-19
 
-#### အဆင့်မြင့် စာတမ်းများ: မျက်မှောက်ကြည့်ခြင်း (Monitoring), လုံခြုံရေး, နှင့် Multi-Agent ပုံစံများ
-**ဤဗားရှင်းသည် Application Insights ပေါင်းစည်းခြင်း, authentication ပုံစံများနှင့် production deployments အတွက် multi-agent coordination ပုံစံများအပေါ် A-grade သင်ခန်းစာများကို လက်ခံထည့်သွင်းထားသည်။**
+#### အဆင့်မြင့် စာရွက်စာတမ်းများ: မော်နီတာရေးရှင်း၊ လုံခြုံရေးနှင့် Multi-Agent ပုံစံများ
+**ဤဗားရှင်းသည် Application Insights ပေါင်းစည်းခြင်း၊ အတည်ပြုရေး ပုံစံများနှင့် ထုတ်လုပ်ရေး သုံး multi-agent စီမံခန့်ခွဲမှုများအတွက် အပြည့်အစုံ A-အဆင့် သင်ခန်းစာများကို ထပ်ဆင့်ထည့်သွင်းသည်။**
 
-#### ထည့်သွင်းထားသည်
-- **📊 Application Insights ပေါင်းစည်းမှု သင်ခန်းစာ**: `docs/pre-deployment/application-insights.md` တွင်-
-  - AZD အာရုံစိုက်ထားသော deployment နည်းလမ်းများနှင့် အလိုအလျောက် provisioning
-  - Application Insights + Log Analytics အတွက် ပြည့်စုံသော Bicep templates များ
-  - custom telemetry ပါရှိသည့် Python application များ (1,200+ သင်္ကေတလိုင်း)
-  - AI/LLM များအတွက် မော်နီတာလုပ်ပုံများ (Microsoft Foundry Models token/cost tracking)
-  - 6 ခု의 Mermaid ပုံစံဇယားများ (architecture, distributed tracing, telemetry flow)
-  - 3 ခု의 လက်တွေ့ လေ့ကျင့်ခန်းများ (alerts, dashboards, AI monitoring)
-  - Kusto query ဥပမာများနှင့် ကုန်ကျစရိတ် အကောင်းဆုံး စီမံခန့်ခွဲမှု နည်းဗျူဟာများ
-  - Live metrics streaming နှင့် အစစ်အမှန် အချိန် debugging
-  - သင်ယူရန် 40-50 မိနစ် ကာလ အတိအကျနှင့် production-ready ပုံစံများ
+#### Added
+- **📊 Application Insights Integration Lesson**: ကို `docs/pre-deployment/application-insights.md` တွင် ထည့်သွင်း:
+  - AZD အလျောက် provisioning အား ဖြည့်စွက်ထားသော deployment ဗဟိုစနစ်
+  - Application Insights + Log Analytics အတွက် အပြည့်အစုံ Bicep template များ
+  - custom telemetry ဖြင့် အလုပ်လုပ်နိုင်သော Python application များ (1,200+ စာကြောင်း)
+  - AI/LLM မော်နီတာရေးရှင်း ပုံစံများ (Microsoft Foundry Models token/ကုန်ကျစရိတ် လမ်းကြောင်းများ)
+  - 6 ချိတ်ဆက် Mermaid စာကြည့် (architecture, distributed tracing, telemetry flow)
+  - လက်တွေ့ လေ့ကျင့်ခန်း 3 ခု (alerts, dashboards, AI monitoring)
+  - Kusto query နမူနာများနှင့် ကုန်ကျစရိတ် အကျိုးကောင်းဆုံး စီမံခန့်ခွဲရေး နည်းလမ်း
+  - Live metrics streaming နှင့် real-time debugging
+  - သင်ယူချိန် 40-50 မိနစ်၊ ထုတ်လုပ်ရေးသင့် ပုံစံများပါဝင်
 
-- **🔐 Authentication နှင့် Security ပုံစံ သင်ခန်းစာ**: `docs/getting-started/authsecurity.md` တွင်-
+- **🔐 Authentication & Security Patterns Lesson**: `docs/getting-started/authsecurity.md` တွင်:
   - authentication ပုံစံ 3 မျိုး (connection strings, Key Vault, managed identity)
-  - လုံခြုံစိတ်ချရသော deployments အတွက် ပြည့်စုံသော Bicep infrastructure templates များ
-  - Node.js application ကို Azure SDK နှင့် ပေါင်းစပ်ထားသော ကုဒ်နမူနာ
-  - managed identity ဖွင့်ခြင်း၊ user-assigned identity၊ Key Vault rotation စသည်တို့အတွက် လေ့ကျင့်ခန်း 3 ခု
-  - လုံခြုံရေး အကောင်းဆုံး လမ်းညွှန်ချက်များနှင့် RBAC ဆက်တင်များ
-  - troubleshooting လမ်းညွှန်ချက်နှင့် ကုန်ကျစရိတ် ခွဲခြမ်းစိတ်ဖြာချက်
-  - production-ready passwordless authentication ပုံစံများ
+  - လုံခြုံစိတ်ချရသော deploy များအတွက် အပြည့်အစုံ Bicep template များ
+  - Azure SDK ပေါင်းစည်းထားသည့် Node.js application ကိုဒ်နမူနာ
+  - လက်တွေ့ လေ့ကျင့်ခန်း 3 ခု (managed identity enable စာရင်း, user-assigned identity, Key Vault rotation)
+  - လုံခြုံရေး ကောင်းမွန်ရေး အကောင်းဆုံး ကမ်းလှမ်းချက်များနှင့် RBAC အပြင်အဆင်များ
+  - အခက်အခဲ ဖြေရှင်းလမ်းညွှန်နှင့် ကုန်ကျစရိတ် ခွဲခြမ်းစိတ်ဖြာချက်
+  - ထုတ်လုပ်ရေးသင့် passwordless authentication ပုံစံများ
 
-- **🤖 Multi-Agent Coordination ပုံစံ သင်ခန်းစာ**: `docs/pre-deployment/coordination-patterns.md` တွင်-
+- **🤖 Multi-Agent Coordination Patterns Lesson**: `docs/pre-deployment/coordination-patterns.md` တွင်:
   - coordination ပုံစံ 5 မျိုး (sequential, parallel, hierarchical, event-driven, consensus)
-  - ပြည့်စုံသော orchestrator service အကောင်အထည်ဖော်ချက် (Python/Flask, 1,500+ သင်္ကေတလိုင်း)
-  - အထူးပြု agent များ 3 မျိုး (Research, Writer, Editor)
-  - Service Bus အတွက် message queuing ပေါင်းစည်းမှု
-  - Cosmos DB ကို distributed systems အတွက် state management အနေဖြင့် အသုံးပြုခြင်း
-  - agent interaction များကို ဖော်ပြသည့် Mermaid ပုံစံ 6 ခု
-  - အဆင့်မြင့် လေ့ကျင့်ခန်း 3 ခု (timeout handling, retry logic, circuit breaker)
-  - ကုန်ကျစရိတ် ခွဲခြမ်းချက် ($240-565/month) နှင့် အကောင်းဆုံး စီမံခန့်ခွဲမှု နည်းဗျူဟာများ
-  - မော်နီတာအတွက် Application Insights ပေါင်းစည်းထားခြင်း
+  - အပြည့်အစုံ orchestrator service implementation (Python/Flask, 1,500+ စာကြောင်း)
+  - အထူးပြု agent implementation 3 မျိုး (Research, Writer, Editor)
+  - message queuing အတွက် Service Bus ပေါင်းစည်းမှု
+  - distributed systems အတွက် Cosmos DB state မာနေဂျ်မင့်
+  - agent interaction ကို ဖော်ပြသည့် Mermaid ဆွဲပုံ 6 ချက်
+  - အဆင့်မြင့် လက်တွေ့ လေ့ကျင့်ခန်း 3 ချက် (timeout handling, retry logic, circuit breaker)
+  - ကုန်ကျစရိတ် ခွဲချက် ($240-565/month) နှင့် အရင်းအမြစ် အကောင်းဆုံးသုံး စနစ်များ
+  - မော်နီတာရေးရှင်းအတွက် Application Insights ပေါင်းစည်းထားမှု
 
-#### တိုးတက်စေထားသည်
-- **Pre-deployment အခန်း**: မော်နီတာနှင့် coordination ပုံစံများကို အပြည့်အစုံ ထည့်သွင်းထားသည်
-- **Getting Started အခန်း**: ပရော်ဖက်ရှင်နယ် authentication ပုံစံများဖြင့် မြှင့်တင်ထားသည်
-- **Production ပြင်ဆင်မှု**: လုံခြုံရေးမှ observability အထိ အပြည့်အ၀ ဖုံးလွှမ်းထားသည်
-- **Course Outline**: Chapter 3 နှင့် 6 တွင် သင်ခန်းစာအသစ်များကို ရည်ညွှန်းထားသည်
+#### Enhanced
+- **Pre-deployment Chapter**: မော်နီတာရေးရှင်း နှင့် coordination ပုံစံများ အပြည့်အစုံ ထည့်သွင်းပြီးပါပြီ
+- **Getting Started Chapter**: ဝါရင့် ရည်ညွှန်း authentication ပုံစံများဖြင့် အဆင့်မြှင့်ထားသည်
+- **Production Readiness**: လုံခြုံရေးမှ observable ဝန်ဆောင်မှုများအထိ အပြည့်အစုံ ဖော်ပြချက်
+- **Course Outline**: အပိုသင်ခန်းစာများကို အခန်း 3 နှင့် 6 တွင် ရည်ညွှန်းထားသည်
 
-#### ပြောင်းလဲချက်များ
-- **သင်ယူမှု တိုးတက်မှု**: လုံခြုံရေးနှင့် monitoring ကို သင်ကြားမှုအတွင်း ပိုမို ထည့်သွင်းထားသည်
-- **စာတမ်း အရည်အသွေး**: သင်ခန်းစာ အသစ်များတွင် A-grade နည်းစံအတိုင်း ထိန်းသိမ်းထားသည် (95-97%)
-- **Production ပုံစံများ**: အစတွင်မှ အဆုံးအထိ Enterprise deployment များအတွက် ပြည့်စုံစွာ ဖော်ပြထားသည်
+#### Changed
+- **Learning Progression**: security နှင့် monitoring ကို သင်ကြားမှုတစ်လျှောက်လုံးနဲ့ ပိုမိုထိရောက်စေမှု
+- **Documentation Quality**: အသစ်ထည့်သွင်းသော သင်ခန်းစာများတွင် A-အဆင့်(95-97%) အဆင့် ထိကောင်းမွန်မှုရှိစေသည်
+- **Production Patterns**: အစမှ အဆုံးထိ စီးပွားရေးအသုံးအဆောင် ထုတ်လုပ်ရေး လမ်းစဉ်များ အပြည့်အဝ ဖော်ပြထားသည်
 
-#### တိုးတက်မှုများ
-- **Developer Experience**: ဖွံ့ဖြိုးရေးသူအတွေ့အကြုံ — ဖွံ့ဖြိုးမှုမှ ထုတ်လုပ်မှုဆီသို့ မော်နီတာလုပ်ငန်းသို့ သေချာရှင်းလင်းသော လမ်းကြောင်း
-- **Security Standards**: လုံခြုံရေးစံနှုန်းများ — အတည်ပြုမှုနှင့် လျှို့ဝှက်ချက် စီမံခန့်ခွဲမှုအတွက် ပရော်ဖက်ရှင်နယ် ပုံစံများ
-- **Observability**: AZD ဖြင့် အပြည့်အစုံ Application Insights ပေါင်းစည်းမှု
-- **AI Workloads**: Microsoft Foundry Models နှင့် multi-agent စနစ်များအတွက် အထူးပြု မော်နီတာလုပ်ငန်း
+#### Improved
+- **Developer Experience**: ဖွံ့ဖြိုးမှုမှ ထုတ်လုပ်ရေး မော်နီတာရေးရှင်းထိ ပို့ဆောင်မှုပြတ်သားခြင်း
+- **Security Standards**: authentication နှင့် secrets များ စီမံခန့်ခွဲရေးအတွက် ပရော်ဖက်ရှင်နယ် ပုံစံများ
+- **Observability**: AZD နှင့် အတူ Application Insights ပေါင်းစည်းထားမှု အပြည့်အစုံ
+- **AI Workloads**: Microsoft Foundry Models နှင့် multi-agent စနစ်များအတွက် အထူးပြု မော်နီတာရေးရှင်း
 
-#### အတည်ပြု済
-- ✅ သင်ခန်းစာအားလုံးတွင် အပြည့်အစုံ လုပ်ဆောင်နိုင်သော ကုဒ်များ ပါဝင်သည် (ကုတ်အပိုင်းအစ မဟုတ်ပါ)
-- ✅ အမြင်ယူသင်ကြားရေးအတွက် Mermaid တိုက်ရိုက်ပုံဆွဲများ (စုစုပေါင်း 19 ခု၊ သင်ခန်းစာ 3 ခုတွင် ဖြန့်ဝေထားသည်)
-- ✅ လက်တွေ့ လေ့ကျင့်ခန်းများနှင့် အတည်ပြုခြင်း အဆင့်များ ပါဝင်သည် (စုစုပေါင်း 9 ခု)
-- ✅ `azd up` ဖြင့် တပ်ဆင်နိုင်သော ထုတ်လုပ်မှု အသင့် Bicep မော်ဒယ်များ
-- ✅ ကုန်ကျစရိတ် ခွဲခြမ်းစိတ်ဖြာခြင်းနှင့် ထိရောက်စေရေး မဟာဗျူဟာများ
-- ✅ ပြဿနာရှာဖွေရေး လမ်းညွှန်များနှင့် အကောင်းဆုံး လေ့ကျင့်မှုများ
-- ✅ သိမြင်စစ်ဆေးရေးချက်များနှင့် အတည်ပြု အမိန့်များ
+#### Validated
+- ✅ သင်ခန်းစာအားလုံးတွင် အလုပ်လုပ်နိုင်သော ကုဒ် တစ်ထောင့်လုံးပါဝင်သည် (snippet မဟုတ်)
+- ✅ မျိုးဖေါ်ပြထားသည့် Mermaid ဆွဲပုံများ (သင်ခန်းစာ 3 ခုတွင် စုစုပေါင်း 19)
+- ✅ လက်တွေ့ လေ့ကျင့်ခန်းများနှင့် အတည်ပြုချက်ခြေလှမ်းများ (စုစုပေါင်း 9)
+- ✅ `azd up` ဖြင့် deploy ပြုလုပ်နိုင်သည့် ထုတ်လုပ်ရေးသင့် Bicep templates များ
+- ✅ ကုန်ကျစရိတ် ခွဲခြမ်းစိတ်ဖြာချက်များနှင့် အကောင်းဆုံးသုံးနည်းများ
+- ✅ အခက်အခဲ ဖြေရှင်းရေးလမ်းညွှန်များနှင့် အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများ
+- ✅ ဗဟုသုတ စစ်ဆေးစရာများနှင့် အတည်ပြုคำ령များ
 
-#### စာရွက်စာတမ်း အရည်အသွေး အကဲဖြတ် ရလဒ်
-- **docs/pre-deployment/application-insights.md**: - အပြည့်အစုံ မော်နီတာ ညွှန်ကြားချက်
+#### Documentation Grading Results
+- **docs/pre-deployment/application-insights.md**: - အပြည့်အစုံ မော်နီတာရေးရှင်းလမ်းညွှန်
 - **docs/getting-started/authsecurity.md**: - ပရော်ဖက်ရှင်နယ် လုံခြုံရေး ပုံစံများ
-- **docs/pre-deployment/coordination-patterns.md**: - အဆင့်မြင့် multi-agent စနစ် ဆောက်လုပ်ပုံများ
-- **Overall New Content**: - တူညီ၍ အရည်အသွေး မြင့်မားသော စံနှုန်းများ
+- **docs/pre-deployment/coordination-patterns.md**: - အဆင့်မြင့် multi-agent အဆောက်အအုံများ
+- **Overall New Content**: - တစ်ပြိုင်နက် အရည်အသွေး မြင့်မားစနစ်သည်
 
-#### နည်းပညာဆိုင်ရာ အကောင်အထည်ဖော်ခြင်း
+#### Technical Implementation
 - **Application Insights**: Log Analytics + custom telemetry + distributed tracing
-- **Authentication**: Managed Identity + Key Vault + RBAC patterns
+- **Authentication**: Managed Identity + Key Vault + RBAC ပုံစံများ
 - **Multi-Agent**: Service Bus + Cosmos DB + Container Apps + orchestration
 - **Monitoring**: Live metrics + Kusto queries + alerts + dashboards
 - **Cost Management**: Sampling strategies, retention policies, budget controls
 
 ### [v3.7.0] - 2025-11-19
 
-#### စာရွက်စာတမ်း အရည်အသွေး တိုးတက်မှုများနှင့် Microsoft Foundry Models ဥပမာအသစ်
-**ဤဗားရှင်းသည် repository အတွင်း စာရွက်စာတမ်းအရည်အသွေးကို တိုးမြှင့်ပေးပြီး gpt-4.1 chat အင်တာဖေ့စ်ပါရှိသည့် Microsoft Foundry Models အပြည့်အစုံ တပ်ဆင်မှု ဥပမာကို ထည့်သွင်းထားသည်။**
+#### စာရွက်စာတမ်း အရည်အသွေး တိုးတက်မှုများနှင့် Microsoft Foundry Models ဥပမာ အသစ်
+**ဤဗားရှင်းသည် repository အတွင်း စာရွက်စာတမ်း အရည်အသွေးကို မြှင့်တင်ပေးကာ gpt-4.1 chat interface ပါရှိသည့် Microsoft Foundry Models deployment ဥပမာ တစ်ခုကို ထည့်သွင်းပေးသည်။**
 
-#### ထည့်သွင်းခဲ့သည်
-- **🤖 Microsoft Foundry Models Chat Example**: `examples/azure-openai-chat/` တွင် လက်တွေ့အသုံးလုပ်နိုင်သော အပြည့်အစုံ gpt-4.1 တပ်ဆင်မှုနှင့် အကောင်အထည်ဖော်ထားသော အကောင်အထည်:
-  - gpt-4.1 model တပ်ဆင်မှုပါသည့် Microsoft Foundry Models အပြည့်အစုံအင်ဖရာစထက်ချာ
-  - စာသားမှတ်တမ်းပါရှိသည့် Python command-line chat အင်တာဖေ့စ်
-  - API key များ လုံခြုံစွာ သိမ်းဆည်းရန် Key Vault ပေါင်းစည်းမှု
-  - token အသုံးပြုမှု အလေးချိန်နှင့် ကုန်ကျစရိတ် ခန့်မှန်းခြေ
-  - အမြန်နှုန်း အကန့်အသတ်သတ်မှတ်ခြင်းနှင့် အမှားကိုင်တွယ်ခြင်း
-  - 35-45 မိနစ် အတွင်း တပ်ဆင်နိုင်ရန် အကြမ်းဖျဉ် README
-  - Bicep မော်ဒယ်များ၊ Python app နှင့် ကွန်ဖစ်ဂျာရေးရှင်းများ ပါဝင်သည့် 11 ဖိုင် ထုတ်လုပ်မှု အသင့် ဖိုင်များ
-- **📚 Documentation Exercises**: ကွန်ဖစ်ဂျူရေးရှင်း ညွှန်ကြားချက်တွင် လက်တွေ့ လေ့ကျင့်ခန်းများ ထည့်သွင်းထားသည်:
-  - လေ့ကျင့်ခန်း 1: Multi-environment configuration (15 minutes)
-  - လေ့ကျင့်ခန်း 2: Secret management practice (10 minutes)
-  - အောင်မြင်မှု သတ်မှတ်ချက်များနှင့် အတည်ပြုခြင်း အဆင့်များ ရှင်းလင်းပြတ်သားစွာ ဖော်ပြထားသည်
-- **✅ Deployment Verification**: တပ်ဆင်မှု ညွှန်ကြားချက်တွင် အတည်ပြုရေး ပိုင်း ထည့်သွင်းလိုက်သည်:
-  - ကျန်းမာရေး စစ်ဆေးမှု လုပ်ထုံးလုပ်နည်းများ
-  - အောင်မြင်မှု စစ်ဆေးစာရင်း
-  - တပ်ဆင်ကာ အမိန့်များအတွက် မျှော်မှန်းနိုင်သော ထွက်ရှိမှုများ
-  - ပြဿနာရှာဖွေမှု အရေးပေါ် အညွှန်းများ
+#### Added
+- **🤖 Microsoft Foundry Models Chat Example**: `examples/azure-openai-chat/` တွင် gpt-4.1 deployment နှင့် အလုပ်လုပ်နိုင်သော အကောင်အထည်ဖော်မှု:
+  - Microsoft Foundry Models အင်ဖရန်စထချာ အပြည့်အစုံ (gpt-4.1 model deployment)
+  - စာမျက်နှာ တွေ့ဆုံ ဖော်ဖြေ သော Python command-line chat interface နှင့် ဆက်သွယ်မှုမှတ်တမ်း
+  - လုံခြုံစိတ်ချစေရန် Key Vault ပေါင်းစည်းထားမှု
+  - token အသုံးပြုမှု ခန့်မှန်းနှင့် ကုန်ကျစရိတ် အကဲခတ်ခြင်း
+  - rate limiting နှင့် error handling
+  - 35-45 မိနစ် deploy လမ်းညွှန် သီးသန့် README
+  - 11 ဖိုင် (Bicep templates, Python app, configuration) အပြည့်အစုံ ထုတ်လုပ်ရေး အသင့်ဖိုင်များ
+- **📚 Documentation Exercises**: configuration guide တွင် လက်တွေ့ လေ့ကျင့်ခန်းများ ထည့်သွင်း:
+  - လေ့ကျင့်ခန်း 1: Multi-environment configuration (15 မိနစ်)
+  - လေ့ကျင့်ခန်း 2: Secret management လက်တွေ့ (10 မိနစ်)
+  - အောင်မြင်မှု စံနှုန်းများနှင့် အတည်ပြုခြေလှမ်းများ ပြတ်သားစွာဖော်ပြထားသည်
+- **✅ Deployment Verification**: deployment guide တွင် အတည်ပြုချက် အပိုင်း ထည့်သွင်း:
+  - Health check လုပ်ထုံးလုပ်နည်းများ
+  - အောင်မြင်မှု စစ်ဆေးချက် စာရင်း
+  - မည်သည့် deployment command မဆို ရရှိသင့်သည့် output များ
+  - အခက်အခဲ ဖြေရှင်းရန် အချက်တိုအချက် ပြည့်စုံ
 
-#### တိုးမြှင့်ထားသည်
-- **examples/README.md**: A-grade အရည်အသွေး (93%) သို့ အဆင့်မြှင့်တင်ပြီး အောက်ပါများပြုလုပ်ထားသည်:
-  - azure-openai-chat ကို သက်ဆိုင်ရာ အပိုင်းအားလုံးတွင် ထည့်သွင်းခဲ့သည်
-  - ဒေသခံ ဥပမာ အရေအတွက်ကို 3 မှ 4 သို့ သတ်မှတ်ပြောင်းလဲခဲ့သည်
-  - AI Application Examples ဇယားသို့ ထည့်သွင်းထားသည်
-  - Intermediate Users အတွက် Quick Start ထဲသို့ ပေါင်းထည့်ထားသည်
-  - Microsoft Foundry Templates အပိုင်းသို့ ထည့်သွင်းထားသည်
-  - တွဲအလားသဏ္ဍာန်နှင့် နည်းပညာ ရှာဖွေရေး အပိုင်းများကို အပ်ဒိတ်လုပ်ထားသည်
-- **Documentation Quality**: B+ (87%) → A- (92%) အထိ ကောင်းမွန်အောင် တိုးတက်စေခဲ့သည်:
-  - အရေးကြီး ကမ်းလှမ်းချက်များသို့ မျှော်မှန်း ထွက်ရန် ဖော်ပြချက်များ ထည့်သွင်းထားသည်
-  - ကွန်ဖစ်ဂျူရေးရှင်း ပြောင်းလဲမှုများအတွက် အတည်ပြုခြင်း အဆင့်များ ထည့်သွင်းထားသည်
-  - လက်တွေ့သင်ယူမှုကို ပိုမိုကောင်းမွန်စေရန် လေ့ကျင့်ခန်းများ တိုးမြှင့်ထားသည်
+#### Enhanced
+- **examples/README.md**: A-အဆင့် အရည်အသွေးအထိ (93%) အပ်ဒိတ်လုပ်:
+  - azure-openai-chat ကို သက်ဆိုင်ရာ အပိုင်းများသို့ ထည့်သွင်း
+  - local example အရေအတွက် 3 ကနေ 4 သို့ တိုးမြှင့်
+  - AI Application Examples အဇယားတွင် ထည့်သွင်း
+  - Intermediate Users အတွက် Quick Start တွင် ပါဝင်
+  - Microsoft Foundry Templates အပိုင်းတွင် ထည့်သွင်း
+  - တွဲဖက်နှိုင်းယှဥ်မှုဇယား နှင့် နည်းပညာ ရှာဖွေမှု အပိုင်းများကို အပ်ဒိတ်
+- **Documentation Quality**: docs ဖိုလ်ဒါအတွင်း B+ (87%) → A- (92%) အထိ တိုးတက်:
+  - အရေးကြီး command ဥပမာများအတွက် မျှော်လင့်ရလဒ်များ ထည့်သွင်း
+  - configuration ပြောင်းလဲမှုများအတွက် အတည်ပြုခြေလှမ်းများ ထည့်သွင်း
+  - လက်တွေ့ သင်ယူမှု တိုးတက်အောင် လေ့ကျင့်ခန်းများကို အားဖြည့်
 
-#### ပြောင်းလဲချက်များ
-- **Learning Progression**: मध्यတန်း သင်ယူသူများအတွက် AI ဥပမာများ ပိုပြီးညှိနှိုင်း ထည့်သွင်းထားသည်
-- **Documentation Structure**: ရလဒ်ရှင်းလင်းသော လက်တွေ့ လေ့ကျင့်ခန်းများ ပိုမိုထည့်သွင်းထားသည်
-- **Verification Process**: အဓိကလုပ်ငန်းစဉ်များတွင် အောင်မြင်မှု သတ်မှတ်ချက်များ ထပ်တိုး ဖော်ပြထားသည်
+#### Changed
+- **Learning Progression**: intermediate learners အတွက် AI ဥပမာများ ပို၍ သေချာ ညီထွေထုလုပ်ဆောင်မှု
+- **Documentation Structure**: ရလဒ် ပိုမိုအမှန်တကယ် ရရှိစေသော လုပ်ဆောင်ချက်များဖြင့် ဖွဲ့စည်းမှုကို ကောင်းမွန်စေသည်
+- **Verification Process**: အဓိက workflow များတွင် အောင်မြင်မှု သတ်မှတ်ချက်များ ထပ်မံ ထည့်သွင်း
 
-#### တိုးတက်မှုများ
-- **Developer Experience**: Microsoft Foundry Models တပ်ဆင်ခြင်း အချိန်ကို 35-45 မိနစ် (ရှုပ်ထွေးသော အခြားရွေးချယ်စရာများတွင် 60-90 မိနစ်နှင့် နှိုင်းယှဉ်) သို့ လျှော့ချလိုက်သည်
-- **Cost Transparency**: Microsoft Foundry Models ဥပမာအတွက် ကုန်ကျစရိတ် ခန့်မှန်းချက်များ ($50-200/month) ကို ရှင်းလင်းဖော်ပြထားသည်
-- **Learning Path**: AI ဖွံ့ဖြိုးရေးသူများအတွက် azure-openai-chat ဖြင့် စတင်ရန် သေချာရှင်းလင်းသော လမ်းကြောင်းစေသည်
-- **Documentation Standards**: မျှော်မှန်း ထွက်ရှိမှုများနှင့် အတည်ပြုခြင်း အဆင့်များကို တစ်ရပ်တည်း ချထားသည်
+#### Improved
+- **Developer Experience**: Microsoft Foundry Models deployment သည် ယခင် 60-90 မိနစ်ဖြင့် နှိုင်းယှဥ်ပါက 35-45 မိနစ်ခန့်သာ လိုအပ်သည်
+- **Cost Transparency**: Microsoft Foundry Models ဥပမာအတွက် ကုန်ကျစရိတ် ခန့်မှန်းချက်များ ($50-200/month) ကို ထည့်သွင်း ဖော်ပြထားသည်
+- **Learning Path**: AI developer များအတွက် azure-openai-chat ဖြင့် ဖွင့်သင်းသွားရန် တိကျသော အစပြုချက် ရှိသည်
+- **Documentation Standards**: အကြံပြုချက်များနှင့် အတည်ပြုရလဒ်များကို တည်ငြိမ်စွာ ဖော်ပြထားသည်
 
-#### အတည်ပြု済
-- ✅ Microsoft Foundry Models ဥပမာ `azd up` ဖြင့် အပြည့်အစုံလည်းလည်တည်ဆောက်နိုင်သည်
-- ✅ အကောင်အထည်ဖော် နေသော ဖိုင် 11 ခု အားလုံး syntax မှားယြင်းချက် မရှိပါ
-- ✅ README အကြောင်းအရာများ သတ်မှတ်ထားသည့် တပ်ဆင်မှု အတွေ့အမြင်နှင့် ကိုက်ညီသည်
-- ✅ စာရွက်စာတမ်းလင့်ခ်များကို 8+ နေရာတွင် update ပြုလုပ်ထားသည်
-- ✅ Examples index သည် ဒေသခံ ဥပမာ 4 ခုကို မှန်ကန်စွာ ဖော်ပြထားသည်
-- ✅ ဇယားများတွင် ထပ်တူ link မရှိပါ
-- ✅ မည်သည့် navigation ကိုးကားချက်များမှားယွင်းခြင်း မရှိပါ
+#### Validated
+- ✅ Microsoft Foundry Models ဥပမာသည် `azd up` ဖြင့် အပြည့်အဝ လည်ပတ်နိုင်သည်
+- ✅ 11 ဖိုင်အားလုံးသည် syntax အရ မှန်ကန်သည်
+- ✅ README အညွှန်ကြားချက်များသည် သက်ဆိုင်ရာ deployment အတွေ့အကြုံနှင့် ကိုက်ညီသည်
+- ✅ စာရွက်စာတမ်း ချိတ်ဆက်များကို 8+ နေရာတွင် အပ်ဒိတ်ပြုလုပ်ထားသည်
+- ✅ Examples index သည် 4 local examples ကို မှန်ကန်စွာ ဖော်ပြထားသည်
+- ✅ ဇယားများတွင် ပြတင်းပေါက် အပြင်အဆင် မရှိသော ရင်းမြစ်ချိတ်ဆက် မရှိ
+- ✅ navigation ရည်ညွှန်းချက်များ အားလုံး မှန်ကန်သည်
 
-#### နည်းပညာဆိုင်ရာ အကောင်အထည်ဖော်ခြင်း
+#### Technical Implementation
 - **Microsoft Foundry Models Architecture**: gpt-4.1 + Key Vault + Container Apps ပုံစံ
-- **Security**: Managed Identity တပ်ဆင်ပြီး secrets များကို Key Vault တွင် သိမ်းဆည်းထားသည်
-- **Monitoring**: Application Insights ပေါင်းစည်းထားခြင်း
-- **Cost Management**: Token ချိန်ညှိမှုနှင့် အသုံးပြုမှု ထိရောက်စေရေး
-- **Deployment**: တစ်ချက် `azd up` ဖြင့် အပြည့်အစုံ တပ်ဆင်နိုင်သည်
+- **Security**: Managed Identity ရှိပြီး၊ Key Vault တွင် secrets သိမ်းဆည်းထားသည်
+- **Monitoring**: Application Insights ပေါင်းစည်းထားသည်
+- **Cost Management**: Token tracking နှင့် အသုံးစရိတ် အတိအကျ ခန့်မှန်းခြင်း
+- **Deployment**: Single `azd up` command ဖြင့် အပြည့်အစုံ ထည့်သွင်းနိုင်သည်
 
 ### [v3.6.0] - 2025-11-19
 
-#### အကြီးမားဆုံး အပ်ဒိတ်: Container App တပ်ဆင်မှု ဥပမာများ
-**ဤဗားရှင်းသည် Azure Developer CLI (AZD) ကို အသုံးပြုပြီး ထုတ်လုပ်မှု အသင့် Container application တပ်ဆင်မှု ဥပမာများအား အပြည့်အစုံ ထည့်သွင်းထားပြီး သေချာ documentationနှင့် သင်ကြားရေးလမ်းကြောင်းများထံဆက်သွယ်ထားသည်။**
+#### အကြီးစား အပ်ဒိတ်: Container App Deployment ဥပမာများ
+**ဤဗားရှင်းတွင် Azure Developer CLI (AZD) ကို အသုံးပြုပြီး ထုတ်လုပ်ရေးသင့် container application deployment ဥပမာများကို အပြည့်အစုံ ထည့်သွင်းထားရှိပြီး သင်ယူလမ်းကြောင်းထဲသို့ ပေါင်းထည့်ထားသည်။**
 
-#### ထည့်သွင်းခဲ့သည်
-- **🚀 Container App Examples**: `examples/container-app/` တွင် ဒေသခံ ဥပမာအသစ်များ:
-  - [Master Guide](examples/container-app/README.md): ကုန်ကျစရိတ်၊ quick start၊ ထုတ်လုပ်မှုနှင့် အဆင့်မြင့် ပုံစံများ အခြေခံ အကျဉ်းချုပ်
-  - [Simple Flask API](../../examples/container-app/simple-flask-api): စတင်သူများအတွက် REST API — scale-to-zero, health probes, monitoring နှင့် troubleshooting ပါဝင်သည်
-  - [Microservices Architecture](../../examples/container-app/microservices): ထုတ်လုပ်မှု အသင့် multi-service တပ်ဆင်မှု (API Gateway, Product, Order, User, Notification), အဆင့်လိုက် မက်ဆေ့ဂျင်း၊ Service Bus, Cosmos DB, Azure SQL, distributed tracing, blue-green/canary deployment
-- **Best Practices**: လုံခြုံရေး၊ မော်နီတာရေး၊ ကုန်ကျစရိတ် လျှော့ချခြင်းနှင့် CI/CD လမ်းညွှန်ချက်များ
-- **Code Samples**: အပြည့်အစုံ `azure.yaml`, Bicep မော်ဒယ်များနှင့် ဘာသာစကား အမျိုးမျိုးဖြင့် service အကောင်အဖြစ် 구현 (Python, Node.js, C#, Go)
-- **Testing & Troubleshooting**: အဆုံးသတ် စစ်ဆေးမှု ကြောင်း၊ မော်နီတာ အမိန့်များ၊ ပြဿနာရှာဖွေရေး လမ်းညွှန်ချက်များ
+#### Added
+- **🚀 Container App Examples**: `examples/container-app/` တွင် အသစ်သော local ဥပမာများ:
+  - [Master Guide](examples/container-app/README.md): containerized deployments အပေါ် အပြည့်အစုံ အထောက်အကူ, quick start, production နှင့် အဆင့်မြင့် ပုံစံများ
+  - [Simple Flask API](../../examples/container-app/simple-flask-api): scale-to-zero, health probes, monitoring, နှင့် troubleshooting ပါဝင်သော စတင်သူများအတွက် REST API
+  - [Microservices Architecture](../../examples/container-app/microservices): ထုတ်လုပ်ရေးသင့် multi-service deployment (API Gateway, Product, Order, User, Notification), async messaging, Service Bus, Cosmos DB, Azure SQL, distributed tracing, blue-green/canary deployment
+- **Best Practices**: containerized အလုပ်ပေါ် မူတည်၍ လုံခြုံရေး, မော်နီတာရေးရှင်း, ကုန်ကျစရိတ် အကောင်းဆုံး လုပ်နည်းများနှင့် CI/CD လမ်းညွှန်ချက်များ
+- **Code Samples**: အပြည့်အစုံ `azure.yaml`, Bicep templates, နှင့် ဘာသာစကား အမျိုးမျိုးဖြင့် service implementation များ (Python, Node.js, C#, Go)
+- **Testing & Troubleshooting**: end-to-end စမ်းသပ်မှု အခြေအနေများ, မော်နီတာ ရာ၊ troubleshooting ညွှန်ကြားချက်များ
 
-#### ပြောင်းလဲချက်များ
-- **README.md**: Local Examples - Container Applications အတွဲတွင် အသစ်ထည့်သွင်းထားသော container app ဥပမာများကို ကိုးကားရန် ပြင်ဆင်ထားသည်
-- **examples/README.md**: container app ဥပမာများကို ထင်ဟပ်စေပြီး နှိုင်းယှဉ်ဇယား၊ နည်းပညာ/ဆောက်လုပ်ပုံ ကိုးကားချက်များကို အပ်ဒိတ်လုပ်ထားသည်
-- **Course Outline & Study Guide**: သင်ခန်းစာအကြောင်းအရာများတွင် container app ဥပမာများနှင့် တပ်ဆင်မှု ပုံစံများကို ကိုးကားရန် ပြင်ဆင်ထားသည်
+#### Changed
+- **README.md**: Local Examples - Container Applications အောက်ရှိ container app ဥပမာအသစ်များကို ဖော်ပြ၍ လင့်ခ်ထည့်ပြီး အပ်ဒိတ်လုပ်ခဲ့သည်
+- **examples/README.md**: container app ဥပမာများကို အထူးဖော်ပြရန် အပ်ဒိတ်လုပ်ပြီး နှိုင်းယှဉ်မက်ထရီဇ် အချက်များ ထည့်သွင်းခဲ့သည်၊ နည်းပညာ/သတ်မှတ်ချက်များကို အပ်ဒိတ်လုပ်ခဲ့သည်
+- **Course Outline & Study Guide**: သက်ဆိုင်ရာအခန်းများတွင် container app ဥပမာအသစ်များနှင့် deployment ပုံစံများကို ရည်ညွှန်းရန် အပ်ဒိတ်လုပ်ခဲ့သည်
 
-#### အတည်ပြု済
-- ✅ ဥပမာအသစ်များအားလုံး `azd up` ဖြင့် တပ်ဆင်နိုင်ပြီး အကောင်းဆုံး ပုံစံများကိုလိုက်နာထားသည်
-- ✅ စာရွက်စာတမ်း cross-links နှင့် navigation များကို အပ်ဒိတ်လုပ်ပြီး တိကျစွာ ပြင်ဆင်ထားသည်
-- ✅ ဥပမာများသည် စတင်သူမှ အဆင့်မြင့်အထိ အခြေအနေများကို ဖုံးလွှမ်းထားသည်
+#### Validated
+- ✅ အားလုံးသော ဥပမာအသစ်များကို `azd up` ဖြင့် deploy လုပ်နိုင်ပြီး အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများကို လိုက်နာထားပါသည်
+- ✅ စာရွက်စာတမ်းအကြား cross-links နှင့် navigation ကို အပ်ဒိတ်လုပ်ထားပါသည်
+- ✅ ဥပမာများတွင် စတင်သူမှ အဆင့်မြင့်သူထိ လုံးဝ ဖုံးလွှမ်းထားပြီး production microservices အပါအဝင်ပါဝင်သည်
 
-#### မှတ်ချက်များ
-- **Scope**: အင်္ဂလိပ် စာရွက်စာတမ်းနှင့် ဥပမာများသာလျှင်
-- **Next Steps**: အဆင့်မြင့် container ပုံစံများနှင့် CI/CD automation များကို နောက်ထပ်မျိုးစုံထည့်သွင်းရန်
+#### Notes
+- **Scope**: အင်္ဂလိပ်စာ documentation နှင့် ဥပမာများသာ
+- **Next Steps**: နောက်ထွက်ဗားရှင်းများတွင် ပိုမိုတိုးချဲ့သော advanced container pattern များနှင့် CI/CD automation များထည့်သွင်းရန်
 
 ### [v3.5.0] - 2025-11-19
 
-#### ထုတ်ကုန်အမည် ပြောင်းလဲခြင်း: Microsoft Foundry
-**ဤဗားရှင်းတွင် "Microsoft Foundry" အမည်ကို အင်္ဂလိပ် စာရွက်စာတမ်းအားလုံးတွင် ထည့်သွင်းပြုပြင်ထားသည်။**
+#### Product Rebranding: Microsoft Foundry
+** ဤဗားရှင်းသည် အင်္ဂလိပ်စာ documentation အားလုံးတွင် "Microsoft Foundry" ကို "Microsoft Foundry" သို့ တစ်ခြားကျယ်ပြန့်စွာ ထိန်းသိမ်းထားခြင်းဖြင့် ထုတ်ကုန်အမည်ပြောင်းလဲမှုကို အပြည့်အစုံ အကောင်အထည်ဖော်ထားသည်။**
 
-#### ပြောင်းလဲချက်များ
-- **🔄 ထုတ်ကုန်အမည် အပ်ဒိတ်**: "Microsoft Foundry" သို့ အပြောင်းအလဲ ပြုလုပ်ခြင်း
-  - `docs/` ဖိုင်များအတွင်းရှိ ကိုးကားချက်များအားလုံး အသစ်အတိုင်း ပြင်ဆင်ထားသည်
-  - ဖိုလ်ဒါအမည် ပြောင်းလဲမှု: `docs/ai-foundry/` → `docs/microsoft-foundry/`
-  - ဖိုင်အမည် ပြောင်းလဲမှု: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - စုစုပေါင်း: အကြောင်းအရာ 23 ခုကို 7 ဖိုင်တွင် ပြောင်းလဲပြီး ဖြစ်သည်
+#### Changed
+- **🔄 Product Name Update**: "Microsoft Foundry" ကို "Microsoft Foundry" အဖြစ် ပြောင်းလဲခြင်း အပြည့်အစုံ
+  - `docs/` ဖိုလ်ဒါအတွင်းရှိ အင်္ဂလိပ်စာ documentation အားလုံးတွင် အဆိုပါ ရည်ညွှန်းချက်များကို အပ်ဒိတ်လုပ်ထားသည်
+  - ဖိုလ်ဒါအမည် Rename: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+  - ဖိုင်အမည် Rename: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+  - စုစုပေါင်း: 7 ဖိုင်တွင်း 23 ချက်သော 콘텐츠 ရည်ညွှန်းချက်များကို အပ်ဒိတ်လုပ်ခဲ့သည်
 
-- **📁 ဖိုလ်ဒါ ဖွဲ့စည်းပုံ ပြောင်းလဲချက်များ**:
-  - `docs/ai-foundry/` ကို `docs/microsoft-foundry/` သို့ အမည်ပြောင်းထားသည်
-  - အတွင်းပိုင်း ကိုးကားချက်များအားလုံး ကို အမည်အသစ်နှင့် ကိုက်ညီအောင် အပ်ဒိတ်လုပ်ထားသည်
-  - navigation လင့်ခ်များကို အတည်ပြုပြီး ဖြစ်သည်
+- **📁 Folder Structure Changes**:
+  - `docs/ai-foundry/` ကို `docs/microsoft-foundry/` သို့ ပြောင်းသိမ်းထားသည်
+  - ဖိုလ်ဒါငယ်ပေါ်ရှိ အားလုံးသော cross-reference များကို အသစ်သော ဖိုလ်ဒါဖွဲ့စည်းပုံ အလိုက် အပ်ဒိတ်လုပ်ထားသည်
+  - စာရွက်စာတမ်းများအတွင်း Navigation links များကို စစ်ဆေးအတည်ပြုထားသည်
 
-- **📄 ဖိုင်အမည် ပြောင်းလဲချက်များ**:
+- **📄 File Renames**:
   - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - အတွင်းပိုင်း လင့်ခ်များအားလုံးကို အသစ်အမည်ဖြင့် update ပြုလုပ်ထားသည်
+  - အတွင်းရေးသားထားသော link များကို အားလုံး အသစ်သော ဖိုင်အမည်နှင့် ကိုက်ညီအောင် ပြောင်းထားသည်
 
-#### အပ်ဒိတ်ခဲ့သော ဖိုင်များ
-- **Chapter Documentation** (7 ဖိုင်):
-  - `docs/microsoft-foundry/ai-model-deployment.md` - navigation link 3 ခု update ပြုလုပ်ထားသည်
-  - `docs/microsoft-foundry/ai-workshop-lab.md` - ထုတ်ကုန်အမည် ကိုးကားချက် 4 ခုပြောင်းထားသည်
-  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - ယခုထိ Microsoft Foundry အမည်ကို အသုံးပြုထားသည် (ယခင် update များကြောင့်)
-  - `docs/microsoft-foundry/production-ai-practices.md` - အကြောင်းအရာ 3 ခု အပ်ဒိတ်ပြုလုပ်ထားသည် (အကျဉ်းချုံး၊ community feedback, documentation)
-  - `docs/getting-started/azd-basics.md` - cross-reference link 4 ခု update ပြုလုပ်ထားသည်
-  - `docs/getting-started/first-project.md` - chapter navigation link 2 ခု update ပြုလုပ်ထားသည်
-  - `docs/getting-started/installation.md` - next chapter link 2 ခု update ပြုလုပ်ထားသည်
-  - `docs/troubleshooting/ai-troubleshooting.md` - ကိုးကားချက် 3 ခု update ပြုလုပ်ထားသည် (navigation, Discord community)
-  - `docs/troubleshooting/common-issues.md` - navigation link 1 ခု update ပြုလုပ်ထားသည်
-  - `docs/troubleshooting/debugging.md` - navigation link 1 ခု update ပြုလုပ်ထားသည်
+#### Updated Files
+- **Chapter Documentation** (7 files):
+  - `docs/microsoft-foundry/ai-model-deployment.md` - navigation link 3 ချက် အပ်ဒိတ်လုပ်ထားသည်
+  - `docs/microsoft-foundry/ai-workshop-lab.md` - product name ကို ရည်ညွှန်းထားသော အချက် 4 ချက် အပ်ဒိတ်လုပ်ထားသည်
+  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - ယခင်အပ်ဒိတ်များမှ ပြီးသား Microsoft Foundry ကို အသုံးပြုထားပါသည်
+  - `docs/microsoft-foundry/production-ai-practices.md` - အကျဉ်းချုပ်၊ community feedback၊ documentation အစိတ်အပိုင်း 3 ချက် အပ်ဒိတ်လုပ်ထားသည်
+  - `docs/getting-started/azd-basics.md` - cross-reference link 4 ချက် အပ်ဒိတ်လုပ်ထားသည်
+  - `docs/getting-started/first-project.md` - chapter navigation link 2 ချက် အပ်ဒိတ်လုပ်ထားသည်
+  - `docs/getting-started/installation.md` - next chapter link 2 ချက် အပ်ဒိတ်လုပ်ထားသည်
+  - `docs/troubleshooting/ai-troubleshooting.md` - navigation, Discord community အတွက် အချက် 3 ချက် အပ်ဒိတ်လုပ်ထားသည်
+  - `docs/troubleshooting/common-issues.md` - navigation link 1 ချက် အပ်ဒိတ်လုပ်ထားသည်
+  - `docs/troubleshooting/debugging.md` - navigation link 1 ချက် အပ်ဒိတ်လုပ်ထားသည်
 
-- **Course Structure Files** (2 ဖိုင်):
-  - `README.md` - 17 ကိုးကားချက် update ပြုလုပ်ထားသည် (course overview, chapter titles, templates section, community insights)
-  - `course-outline.md` - 14 ကိုးကားချက် update ပြုလုပ်ထားသည် (overview, learning objectives, chapter resources)
+- **Course Structure Files** (2 files):
+  - `README.md` - course overview, chapter titles, templates section, community insights အစရှိသည့် နေရာ 17 ချက် အပ်ဒိတ်လုပ်ထားသည်
+  - `course-outline.md` - overview, learning objectives, chapter resources အစရှိသည့် နေရာ 14 ချက် အပ်ဒိတ်လုပ်ထားသည်
 
-#### အတည်ပြု済
-- ✅ English docs များတွင် "ai-foundry" ဖိုလ်ဒါ path ကို အရှုံးမရှိစေရန် စစ်ဆေးပြီး ဖြစ်သည်
-- ✅ "Microsoft Foundry" ထုတ်ကုန်အမည် ကို English docs အားလုံးတွင် အပြည့်အဝ အသုံးပြုထားသည်
-- ✅ နောက်ခံ navigation လင့်ခ်များ အလုပ်လုပ်နိုင်မှုကို အတည်ပြုထားသည်
-- ✅ ဖိုင်နှင့် ဖိုလ်ဒါ အမည် ပြောင်းလဲခြင်းများ အောင်မြင်စွာ ပြီးစီးထားသည်
-- ✅ အခင်းအနောက်အတွင်း တွဲဆက်ရာ ကိုးကားချက်များ စစ်ဆေးပြီး ဖြစ်သည်
+#### Validated
+- ✅ အင်္ဂလိပ်စာ docs အတွင်း `ai-foundry` ဖိုလ်ဒါ လမ်းကြောင်းများ တစ်ခုလုံး ဤဗားရှင်းတွင် မရှိတော့ပါ
+- ✅ အင်္ဂလိပ်စာ docs အတွင်း Microsoft Foundry ထုတ်ကုန်အမည် ရည်ညွှန်းချက်များ မရှိတော့ပါ
+- ✅ အသစ်သော ဖိုလ်ဒါဖွဲ့စည်းပုံနှင့်အညီ navigation links များ အလုပ်လုပ်နိုင်မှု အတည်ပြုထားပါသည်
+- ✅ ဖိုင်နာမည်နှင့် ဖိုလ်ဒါ Rename အလုပ်အဆင်ပြေစွာ ပြီးစီးထားပါသည်
+- ✅ အခန်းများအကြား cross-reference များ စစ်ဆေးပြီး အတည်ပြုထားပါသည်
 
-#### မှတ်ချက်များ
-- **Scope**: ပြောင်းလဲချက်များကို `docs/` ဖိုလ်ဒါအတွင်း အင်္ဂလိပ် စာရွက်စာတမ်းများသာ သက်ဆိုင်သည်
-- **Translations**: ပြောင်းလဲချက်များတွင် ဘာသာပြန် ဖိုင်များ (`translations/`) များကို update မလုပ်ထားသေးပါ
-- **Workshop**: `workshop/` အထောက်အပံ့စာသားများကို update မလုပ်ထားသေးပါ
-- **Examples**: ဥပမာ ဖိုင်များတွင် legacy naming ကို တွေ့နိုင်သည် (နောက်ထပ် update တွင် ဖြေရှင်းမည်)
-- **External Links**: အပြင်ဘက် URLs နှင့် GitHub ကိုးကားချက်များကို မပြောင်းလဲထားပါ
+#### Notes
+- **Scope**: ပြောင်းလဲချက်များကို `docs/` ဖိုလ်ဒါအတွင်းရှိ အင်္ဂလိပ်စာ documentation များတွင်သာ အကောင်အထည်ဖော်ထားသည်
+- **Translations**: ဘာသာပြန်ထားသော ဖိုလ်ဒါများ (`translations/`) သို့ မပြောင်းလဲထားပါ
+- **Workshop**: workshop materials (`workshop/`) ကို ဤဗားရှင်းတွင် မပြောင်းလဲထားပါ
+- **Examples**: ဥပမာဖိုင်များတွင် အမွေကျန် နာမည်များကို ဆက်လက် ရည်ညွှန်းထားနိုင်ပြီး (နောက်ထပ် အပ်ဒိတ်တွင် ကိုင်တွယ်မည်)
+- **External Links**: အပြင်ဘက် URL များနှင့် GitHub repository ရည်ညွှန်းချက်များကို မမှီခင်အတိုင်း ထိန်းသိမ်းထားပါသည်
 
 #### Migration Guide for Contributors
 If you have local branches or documentation referencing the old structure:
@@ -611,94 +714,94 @@ If you have local branches or documentation referencing the old structure:
 ### [v3.4.0] - 2025-10-24
 
 #### Infrastructure Preview and Validation Enhancements
-**ဤဗားရှင်းသည် Azure Developer CLI preview ထူးခြားချက်အသစ်အတွက် အပြည့်အဝ ထောက်ပံ့မှုနှင့် workshop အသုံးပြုသူ အတွေ့အကြုံကို တိုးမြှင့်ပေးထားသည်။**
+** ဤဗားရှင်းတွင် Azure Developer CLI preview feature အသစ်အတွက် အပြည့်အစုံ ထောက်ပံ့မှုနှင့် workshop အသုံးပြုသူအတွေ့အကြုံကို မြှင့်တင်ပေးထားပါသည်။**
 
-#### ထည့်သွင်းခဲ့သည်
-- **🧪 azd provision --preview Feature Documentation**: အင်ဖရာစထက် preview စွမ်းဆောင်ရည် အသစ်အတွက် အသေးစိတ် ဖော်ပြချက်
-  - cheat sheet တွင် command ကိုးကားချက်များနှင့် အသုံးပြုနည်း နမႈ
-  - provisioning guide အတွင်း အသုံးပြုမှုနည်းလမ်းများနှင့် အကျိုးကျေးဇူးများ နှင့် အသေးစိတ် ပေါင်းထည့်ထားသည်
-  - pre-flight check integration — တပ်ဆင်မှု မတိုင်မီ စစ်ဆေးရေး အပိုင်းများ
-  - Getting started guide ကို safety-first deployment လုပ်ထုံးလုပ်နည်းများနှင့် အပ်ဒိတ်လုပ်ထားသည်
-- **🚧 Workshop Status Banner**: workshop အလုပ်တိုးတတ်နေသည့် အခြေအနေကို ပြသသည့် professional HTML banner
-  - gradient ဒီဇိုင်းနှင့် တည်ဆောက်ရေး စနစ်ကို ဖော်ပြရန် အချက်ပြများ
-  - နောက်ဆုံး 업데이트ချိန်ကို ဖော်ပြထား၍ ပူးပေါင်းသူများ အတွက် ဖော်ပြချက် ရှင်းလင်းစေသည်
-  - မိုဘိုင်း အျမင့်အမြင်တွင်လည်း မြင်သာစေရန် ပြင်ဆင်ထားသည်
+#### Added
+- **🧪 azd provision --preview Feature Documentation**: infrastructure preview စွမ်းဆောင်မှုအသစ်အတွက် အပြည့်အစုံ ဖော်ပြချက်
+  - Command reference နှင့် အသုံးပြုမှု ဥပမာများကို cheat sheet တွင် ထည့်သွင်းထားသည်
+  - provisioning guide တွင် use case များနှင့် အကျိုးကျေးဇူးများ နှိုင်းယှဉ် ဖော်ပြထားသည်
+  - Pre-flight စစ်ဆေးမှုကို ပေါင်းစည်းထား၍ deploy မပြုမီ စစ်ဆေးနိုင်စေသည်
+  - Getting started လမ်းညွှန်ကို safety-first deployment အလမ်းစဉ်များနှင့် အပ်ဒိတ်လုပ်ထားသည်
+- **🚧 Workshop Status Banner**: workshop ဖွံ့ဖြိုးရေး အခြေအနေကို ပြသသည့် professional HTML banner
+  - ရောင်စုံ gradient ဒီဇိုင်းနှင့် ဆောက်လုပ်ရေး သင်္ကေတများဖြင့် အသုံးပြုသူ ပိုမိုရှင်းလင်းစေရန် ဖော်ပြထားသည်
+  - ဖော်ပြချက်အလင်းအလင်းအတိအကျ အတွက် နောက်ဆုံး အပ်ဒိတ် timestamp ထည့်ထားသည်
+  - မိုဘိုင်းနှင့် device အမျိုးအစားအားလုံးအတွက် responsive ဒီဇိုင်း
 
-#### တိုးမြှင့်ထားသည်
-- **Infrastructure Safety**: preview လုပ်ဆောင်ချက်ကို deployment documentation အစုံတွင် ပေါင်းထည့်ထားသည်
-- **Pre-deployment Validation**: automated script များတွင် infrastructure preview စစ်တမ်းများ ပါဝင်လာသည်
-- **Developer Workflow**: command စဉ်များကို preview ကို အကောင်းဆုံးလက်တွေ့အဆင့်အဖြစ် ထည့်သွင်းထားသည်
-- **Workshop Experience**: အကြောင်းအရာ ဖွံ့ဖြိုးတိုးတက်ရေး အခြေအနေကို အသုံးပြုသူများအား ရှင်းလင်းစွာ အသိပေးထားသည်
+#### Enhanced
+- **Infrastructure Safety**: preview လုပ်ဆောင်ချက်ကို deployment စာရွက်စာတမ်းများတလျောက် ပေါင်းထည့်ထားသည်
+- **Pre-deployment Validation**: automated script များတွင် infrastructure preview စစ်ဆေးမှုများ ထည့်သွင်းထားသည်
+- **Developer Workflow**: command အစီအစဉ်များကို preview ကို အကောင်းဆုံးလက်တွဲနည်းလမ်းအဖြစ် ထည့်သွင်းထားသည်
+- **Workshop Experience**: အကြောင်းအရာ ဖွံ့ဖြိုးရေး အခြေအနေများအတွက် အသုံးပြုသူ မျှော်လင့်ချက်များကို ပြတ်သားစွာ ဆက်သွယ်ထားသည်
 
-#### ပြောင်းလဲချက်များ
-- **Deployment Best Practices**: preview-first workflow ကို အကြံပြု အကောင်းဆုံး လမ်းစဉ်အဖြစ် အကြံပြုထားသည်
-- **Documentation Flow**: infrastructure validation ကို သင်ကြားမှု လမ်းကြောင်းတွင် မျက်နှာဖုံး အစောပိုင်းသို့ ရွှေ့ထားသည်
-- **Workshop Presentation**: professional status ဖြင့် ဖော်ပြမှုများ ထပ်မံ ပိုမို ထင်ရှားစေထားသည်
+#### Changed
+- **Deployment Best Practices**: preview-first workflow ကို အကြံပြုထားသည့် လမ်းစဉ်အဖြစ် ပြောင်းလဲထားသည်
+- **Documentation Flow**: infrastructure validation ကို သင်ယူမှု အစဉ်အတိုင်း မေ့မရစေရန် မျဉ်းပေါ်ပို မျှဝေထားသည်
+- **Workshop Presentation**: professional အသိပေးပုံစံဖြင့် ဖော်ပြထားသည်၊ ဖွံ့ဖြိုးရေး အချိန်ပြဇယားအား ပြတ်သားစွာ ဖော်ပြထားသည်
 
-#### တိုးတက်မှုများ
-- **Safety-First Approach**: infrastructure ပြောင်းလဲမှုများကို တပ်ဆင်မပြုမီ စစ်ဆေးနိုင်ရန် preview တွင် ရနိုင်ပါပြီ
-- **Team Collaboration**: preview နောက်ဆုံး ရလဒ်များကို သုံးသပ်၍ အတည်ပြုရန် မျှဝေ နိုင်သည်
-- **Cost Awareness**: provisioning မပြုမီ resource ကုန်ကျစရိတ်ကိုပိုမိုသိရှိနိုင်သည်
-- **Risk Mitigation**: ကြိုတင် စမ်းသပ်ခြင်းဖြင့် တပ်ဆင်မှု မအောင်မြင်မှုများ လျော့ချနိုင်သည်
+#### Improved
+- **Safety-First Approach**: deployment မလုပ်ခင် infrastructure ပြောင်းလဲမှုများကို စစ်ဆေး၍ အန္တရာယ်လျော့ချနိုင်သည်
+- **Team Collaboration**: preview ရလဒ်များကို ပြန်လည်သုံးသပ်ခြင်းနှင့် အတည်ပြုချက်အတွက် မျှဝေနိုင်သည်
+- **Cost Awareness**: provision လုပ်ခင် အရင်းအနှီး ကုန်ကျစရိတ်များကို ပိုမို သိရှိနိုင်စေသည်
+- **Risk Mitigation**: ကြိုတင်စစ်ဆေးခြင်းမှတဆင့် deployment မအောင်မြင်မှုများ လျော့နည်းစေသည်
 
-#### နည်းပညာဆိုင်ရာ အကောင်အထည်ဖော်ခြင်း
-- **Multi-document Integration**: preview အင်္ဂါရပ်ကို ဖော်ပြထားသော အဓိက 4 ဖိုင်များတွင် နှစ်ဆမှု ရှိသည်
-- **Command Patterns**: documentation အထဲတွင် စနစ်တကျ syntax နှင့် နမူနာ များ ထည့်သွင်းထားသည်
-- **Best Practice Integration**: preview ကို validation workflows နှင့် scripts များတွင် တပ်ဆင်ထားသည်
-- **Visual Indicators**: အသစ်ဖြစ်သော feature များကို အတွင်းတွင် အသေးစိတ် အမှတ်အသားထား၍ ရှာတွေ့ရလွယ်စေသည်
+#### Technical Implementation
+- **Multi-document Integration**: preview feature ကို အဓိကဖိုင် 4 ခုအတွင်း အပြည့်အစုံ လက်တွေ့အသုံးပြုထားသည်
+- **Command Patterns**: စနစ်တကျ syntax နှင့် ဥပမာများကို စာရွက်စာတမ်းများတလျောက် တစ်ပြိုင်နက် ထည့်သွင်းထားသည်
+- **Best Practice Integration**: preview ကို validation workflow များနှင့် script များတွင် ထည့်သွင်းထားသည်
+- **Visual Indicators**: discoverability အတွက် NEW feature အမှတ်အသားများကို ထင်ရှားစေထားသည်
 
 #### Workshop Infrastructure
-- **Status Communication**: gradient styling နှင့် professional HTML banner တစ်ခုဖြင့် အခြေအနေကို ဖော်ပြထားသည်
-- **User Experience**: ဖွံ့ဖြိုးရေးအခြေအနေကို ရှင်းလင်းစွာ ပေးထား၍ အသုံးပြုသူ ပျက်စီးမဖြစ်စေ
-- **Professional Presentation**: repository ၏ မှတ်တမ်းထိထိန်းသိမ်းမှုနှင့် ယုံကြည်စိတ်ချမှု ကိုထိန်းသိမ်းထားသည်
-- **Timeline Transparency**: October 2025 နောက်ဆုံး update ချိန်ကို ဖော်ပြထားပြီး အကွင့်တင်အားရှိသည်
+- **Status Communication**: gradient styling ပါသော professional HTML banner ဖြင့် အခြေအနေ ဆက်သွယ်ထားသည်
+- **User Experience**: ဖွံ့ဖြိုးရေး အခြေအနေ ပြတ်သားစေခြင်းဖြင့် အသုံးပြုသူ မေးမြန်းမှုများ လျော့ချစေသည်
+- **Professional Presentation**: စုစုပေါင်း repository ၏ ယုံကြည်ရမှုကို ထိန်းသိမ်းထားကာ မျှော်လင့်ချက်များကို သတ်မှတ်ထားသည်
+- **Timeline Transparency**: October 2025 အတွက် နောက်ဆုံး အပ်ဒိတ် ရက်ကို တိတိကျကျ ဖော်ပြထားသည်
 
 ### [v3.3.0] - 2025-09-24
 
-#### Workshop ပစ္စည်းများ ဖွံ့ဖြိုးတိုးတက်မှုနှင့် အပြန်အလှန် သင်ယူသင်ကြားမှု အတွေ့အကြုံ တိုးမြှင့်ခြင်း
-**ဤဗားရှင်းတွင် browser-အခြေပြု အင်တာแက်တက်တစ် ညွှန်ပြမှုများနှင့် ဖွဲ့စည်းထားသော သင်ယူမှု လမ်းကြောင်းများ ပါဝင်လာပါသည်။**
+#### Enhanced Workshop Materials and Interactive Learning Experience
+** ဤဗားရှင်းတွင် browser-based interactive guide များနှင့် ဖွဲ့စည်းထားသည့် သင်ယူမှုလမ်းကြောင်းများဖြင့် workshop ချဉ်းကပ်မှုကို အပြည့်အစုံ ဖြည့်စွက်ပေးထားသည်။**
 
-#### ထည့်သွင်းခဲ့သည်
-- **🎥 Interactive Workshop Guide**: MkDocs ကြိုကြည့်မှု စွမ်းရည်ပါရှိသော ဘရောက်ဇာအခြေပြု လက်တွေ့အလုပ်ရုံ အတွေ့အကြုံ
-- **📝 Structured Workshop Instructions**: ရှာဖွေမှုမှ စိတ်ကြိုက်ပြုပြင်ခြင်း အထိ ၇-ဆင့် လမ်းညွှန်သင်ယူမှု
-  - 0-Introduction: အလုပ်ရုံအကျဉ်းချုပ်နှင့် စတင်တပ်ဆင်ခြင်း
-  - 1-Select-AI-Template: ပုံစံ ရှာဖွေရေးနှင့် ရွေးချယ်ချိန်ဆောင်ရွက်ချက်
-  - 2-Validate-AI-Template: တပ်ဆင်ခြင်းနှင့် အတည်ပြုလုပ်ထုံးလုပ်နည်းများ
-  - 3-Deconstruct-AI-Template: ပုံစံ معمိဏ်သဘောထားကို နားလည်ခြင်း
-  - 4-Configure-AI-Template: ဖော်ပြချက်နှင့် စိတ်ကြိုက်ပြင်ဆင်ခြင်း
-  - 5-Customize-AI-Template: အဆင့်မြင့် ပြင်ဆင်မှုများနှင့် အကြိမ်ကြိမ် ပြင်ဆင်ခြင်း
-  - 6-Teardown-Infrastructure: သုံးစွဲသော အရင်းအမြစ်များကို သန့်ရှင်းရေးနှင့် စီမံခန့်ခွဲခြင်း
-  - 7-Wrap-up: အကျဉ်းချုပ်နှင့် နောက်ဆက်တွဲခြေလှမ်းများ
-- **🛠️ Workshop Tooling**: မြှင့်တင်ထားသည့် သင်ယူမှု အတွေ့အကြုံအတွက် Material theme ပါသည့် MkDocs ဖော်ပြချက်
-- **🎯 Hands-On Learning Path**: ၃-ဆင့် နည်းဗျူဟာ (ရှာဖွေခြင်း → တပ်ဆင်ခြင်း → စိတ်ကြိုက်ပြုပြင်ခြင်း)
-- **📱 GitHub Codespaces Integration**: ဖွံ့ဖြိုးရေးပတ်ဝန်းကျင်ကို အဆင်ပြေစွာ တပ်ဆင်ရန် ပေါင်းစည်းမှု
+#### Added
+- **🎥 Interactive Workshop Guide**: MkDocs preview စနစ်ဖြင့် browser-based workshop အတွေ့အကြုံ
+- **📝 Structured Workshop Instructions**: ရှာဖွေရေးမှ အပြင်ဆင်ခြင်းထိ 7-ဆင့် လမ်းကြောင်း အစီအစဉ်
+  - 0-Introduction: Workshop အကျဉ်းချုပ်နှင့် setup
+  - 1-Select-AI-Template: template ရှာဖွေရေးနှင့် ရွေးချယ်ရန် လုပ်ငန်းစဉ်
+  - 2-Validate-AI-Template: deployment နှင့် validation နည်းလမ်းများ
+  - 3-Deconstruct-AI-Template: template architecture ကို နားလည်ခြင်း
+  - 4-Configure-AI-Template: configuration နှင့် customization
+  - 5-Customize-AI-Template: အဆင့်မြင့် ပြင်ဆင်ခြင်းနှင့် iteration များ
+  - 6-Teardown-Infrastructure: resources များကို cleanup နှင့် စီမံခန့်ခွဲခြင်း
+  - 7-Wrap-up: အကျဉ်းချုပ်နှင့် နောက်ဆက်တွဲ အဆင့်များ
+- **🛠️ Workshop Tooling**: enhanced learning experience အတွက် Material theme ဖြင့် MkDocs configuration
+- **🎯 Hands-On Learning Path**: 3-အဆင့် မျဉ်းစေမည့် ဖြစ်စဉ် (Discovery → Deployment → Customization)
+- **📱 GitHub Codespaces Integration**: ဖွံ့ဖြိုးရေးပတ်ဝန်းကျင်ကို လျင်မြန်စေသော ပေါင်းစည်းမှု
 
 #### Enhanced
-- **AI Workshop Lab**: ၄င်းကို တိုးချဲ့ထားပြီး အပြည့်အစုံ ၂-၃ နာရီ အစီအစဉ် သင်ယူမှု အတွေ့အကြုံ
-- **Workshop Documentation**: လမ်းကြောင်းနှင့် ဗျူအာ ရုပ်ပိုင်းဆိုင်ရာ အကူအညီများပါသည့် ပရော်ဖက်ရှင်နယ် တင်ဆက်မှု
-- **Learning Progression**: ပုံစံရွေးချယ်မှုမှ ထုတ်လုပ်မှု တင်သွင်းရေးအထိ ပြင်းပြသော အဆင့်ဆင့် လမ်းညွှန်ချက်များ
-- **Developer Experience**: ဖွံ့ဖြိုးရေးလုပ်ငန်းစဉ်များကို ပေါင်းစည်းသုံးစွဲနိုင်စေရန် ပေါင်းစည်းထားသော ကိရိယာများ
+- **AI Workshop Lab**: 2-3 နာရီ ကြာ သင်ယူနိုင်သော စနစ်တကျ လမ်းကြောင်းအပါအဝင် ပိုမိုတိုးချဲ့ထားသည်
+- **Workshop Documentation**: navigation နှင့် visual aids ဖြင့် 전문적 ဖော်ပြထားသည်
+- **Learning Progression**: template ရွေးချယ်ခြင်းမှ production deployment ထိ အဆင့်ဆင့် လမ်းညွှန်မှု ရှင်းလင်းစွာ ဖော်ပြထားသည်
+- **Developer Experience**: ဖော်ပြထားသော tooling များဖြင့် ဖွံ့ဖြိုးရေးလှုပ်ရှားမှုများ ပိုမိုချောမွေ့စေသည်
 
 #### Improved
-- **Accessibility**: ရှာဖွေရန်၊ မိတ္တူကူးရန် လုပ်ဆောင်ချက်နှင့် အမှောင်/အလင်းစနစ် ပြောင်းနိုင်မှုပါရှိသော ဘရောက်ဇာအခြေပြု အင်တာဖေ့စ်
-- **Self-Paced Learning**: သင်ယူနှုန်းကွဲများနှင့် ကိုက်ညီနိုင်သည့် လိုက်လျောညီထွေနိုင်သော အလုပ်ရုံ ဖွဲ့စည်းမှု
-- **Practical Application**: အမှန်တကယ် အသုံးချနိုင်သည့် AI ပုံစံ တပ်ဆင်ရေး ဇာတ်လမ်းများ
-- **Community Integration**: အလုပ်ရုံအတွက် အထောက်အပံ့နှင့် ပူးပေါင်းဆောင်ရွက်ရန် Discord ပေါင်းစည်းမှု
+- **Accessibility**: search, copy function နှင့် theme toggle ပါရှိသည့် browser-based interface
+- **Self-Paced Learning**: သင်ယူသူ၏ အမြန်နှုန်းအလိုက် မျှတစွာ လေ့လာနိုင်သည့် ဖွဲ့စည်းမှု
+- **Practical Application**: ကိုယ်တိုင် လက်တွေ့အသုံးပြုနိုင်သည့် AI template deployment အခြေခံ များ
+- **Community Integration**: workshop အတွက် Discord ပေါ်မှ အထောက်အပံ့နှင့် ပူးပေါင်းဆောင်ရွက်မှု
 
 #### Workshop Features
-- **Built-in Search**: စကားလုံးနှင့် သင်ခန်းစာများကို အမြန်ရှာဖွေရန်
-- **Copy Code Blocks**: ကုဒ်ဥပမာအားလုံးအတွက် မောက်ဆာထားကူးယူနိုင်မှု
-- **Theme Toggle**: ရွေးချယ်မှုမျိုးစုံအတွက် အမှောင်/အလင်း မုဒ် ပံ့ပိုးမှု
-- **Visual Assets**: နားလည်မှုကောင်းစေရန် စကရင်ရှော့များနှင့် ဇယားများ
-- **Help Integration**: အသိုင်းအဝိုင်း အထောက်အပံ့အတွက် တိုက်ရိုက် Discord ဝင်ရောက်မှု
+- **Built-in Search**: စကားလုံးအလိုက် သင်ခန်းစာများကို ချက်ချက်ရှာဖွေရန်
+- **Copy Code Blocks**: ကုဒ်ဥပမာများအားလုံးတွင် hover-to-copy စနစ်
+- **Theme Toggle**: မီးမှောင်/မီးပေါ် mode support
+- **Visual Assets**: ပုံတစ်ချို့နှင့် diagram များဖြင့် နားလည်ရလွယ်စေခြင်း
+- **Help Integration**: community အထောက်အပံ့အတွက် တိုက်ရိုက် Discord သို့ ချိတ်ဆက်ထားသည်
 
 ### [v3.2.0] - 2025-09-17
 
 #### Major Navigation Restructuring and Chapter-Based Learning System
-**ဤဗားရှင်းတွင် ပြည့်စုံသော အခန်းအလိုက် သင်ယူမှု ဖွဲ့စည်းပုံနှင့် သိုက်လှုပ်ရှားမှုကောင်းမွန်သည့် နာဗီဂေးရှင်းများကို မူလ စုစည်းမှုတစ်လျှောက် ထည့်သွင်းထားပါသည်။**
+** ဤဗားရှင်းသည် စာရင်းအဆင့်ဖြန့်ချိထားသည့် chapter-based သင်ယူမှုဖွဲ့စည်းမှုနှင့် repository အနှံ့ navigation ကို ကျယ်ပြန့်စွာပြောင်းလဲထားသည်။**
 
 #### Added
-- **📚 Chapter-Based Learning System**: သင်တန်းတစ်ခုလုံးကို တိုးတက်မှုအဆင့် ၈ ချက်အဖြစ် ပြန်လည်ဖွဲ့စည်းထားသည်
+- **📚 Chapter-Based Learning System**: သင်တန်းအစီအစဉ်အား 8 ခန်းသို့ ပြန်လည်ဖွဲ့စည်းထားပြီး အဆင့်တက်သင်ယူမှုများပါဝင်သည်
   - Chapter 1: Foundation & Quick Start (⭐ - 30-45 mins)
   - Chapter 2: AI-First Development (⭐⭐ - 1-2 hours)
   - Chapter 3: Configuration & Authentication (⭐⭐ - 45-60 mins)
@@ -707,132 +810,132 @@ If you have local branches or documentation referencing the old structure:
   - Chapter 6: Pre-Deployment Validation & Planning (⭐⭐ - 1 hour)
   - Chapter 7: Troubleshooting & Debugging (⭐⭐ - 1-1.5 hours)
   - Chapter 8: Production & Enterprise Patterns (⭐⭐⭐⭐ - 2-3 hours)
-- **📚 Comprehensive Navigation System**: စာတမ်းများအတွင်း အမြဲတမ်းတည်ရှိသည့် နာဗီဂေးရှင်း ခေါင်းစီးနှင့် အောက်ခြေ စနစ်များ
-- **🎯 Progress Tracking**: သင်တန်းပြီးစီးမှု စစ်တမ်းစာရင်းနှင့် သင်ယူမှု အတည်ပြုစနစ်
-- **🗺️ Learning Path Guidance**: အတွေ့အကြုံနှင့် ရည်မှန်းချက် အမျိုးအစားအလိုက် ရှင်းလင်းသော ဝင်ရောက်ရန် လမ်းကြောင်းများ
-- **🔗 Cross-Reference Navigation**: ဆက်စပ် အခန်းများနှင့် ကြိုတင်တတ်ရှိရန် တိုက်ရိုက် ဆက်သွယ်ချက်များ
+- **📚 Comprehensive Navigation System**: စာရွက်စာတမ်းအားလုံးတွင် ယေဘုယျ navigation header နှင့် footer များကို တဏှာတင်းတန်း ပြန်လည်ထည့်သွင်းထားသည်
+- **🎯 Progress Tracking**: သင်တန်းပြီးစီးခြင်း စစ်တမ်းနှင့် သင်ယူမှုပေါ်ဆိုင်ရာ အတည်ပြုပုံစနစ်
+- **🗺️ Learning Path Guidance**: အတွေ့အကြုံအလိုက် ဝင်ရောက်ရန် ရှင်းလင်းသော အစီအချက်
+- **🔗 Cross-Reference Navigation**: သက်ဆိုင်သော chapter များနှင့် prerequisite များကို ရှင်းလင်းစွာ ချိတ်ဆက်ထားသည်
 
 #### Enhanced
-- **README Structure**: README ဖိုင်ကို အခန်းအလိုက် အစီအစဉ်ထားသည့် သင်ယူရေး ပလက်ဖောင်းအဖြစ် ပြောင်းလဲထားသည်
-- **Documentation Navigation**: စာမျက်နှာတိုင်းတွင် အခန်းဆိုင်ရာ အကြောင်းအရာနှင့် တိုးတက်မှု လမ်းညွှန်ချက်များပါဝင်သည်
-- **Template Organization**: ဥပမာများနှင့် ပုံစံများကို သင်ယူမှုအခန်းများနှင့် ကိုက်ညီအောင် တိတိကျကျ ပေါင်းစည်းထားသည်
-- **Resource Integration**: cheat sheets, FAQs နှင့် သုတေသနလမ်းညွှန်များကို သက်ဆိုင်ရာ အခန်းများနှင့် ချိတ်ဆက်ထားသည်
-- **Workshop Integration**: လက်တွေ့ လက်ငယ်လက်ချာ အလုပ်ရုံများကို หลายခန်းသင်ယူမှု ရည်မှန်းချက်များနှင့် ချိတ်ဆက်ထားသည်
+- **README Structure**: README ကို သင်ယူမှုအခြေခံ ပလက်ဖောင်းအဖြစ် ပြောင်းလဲထားပြီး chapter-based အစီအစဉ်ဖြင့် သတ်မှတ်ထားသည်
+- **Documentation Navigation**: စာမျက်နှာတိုင်းတွင် chapter context နှင့် progression လမ်းညွှန်မှု ထည့်သွင်းထားသည်
+- **Template Organization**: ဥပမာများနှင့် template များကို သင်ယူမှု chapter များနှင့် ကိုက်ညီအောင် မတ်တပ်ရုပ်ဖော်ပြထားသည်
+- **Resource Integration**: cheat sheets, FAQs, study guides များကို သက်ဆိုင်ရာ chapter များနှင့် ချိတ်ဆက်ထားသည်
+- **Workshop Integration**: hands-on lab များကို chapter များနှင့် ဆက်စပ်ထားသည်
 
 #### Changed
-- **Learning Progression**: တန်းတန်းတိုက်ရိုက် စာတမ်းများမှ အခန်းအလိုက် မျိုးဆက်ပြောင်းလဲနိုင်သည့် သင်ယူမှုသို့ ပြောင်းလဲသည်
-- **Configuration Placement**: သင်ယူမှု လိုက်လျောမှုကောင်းစေရန် ဖော်ပြချက်လမ်းညွှန်ကို အခန်း ၃ အဖြစ် ပြန်တည်ရာချထားသည်
-- **AI Content Integration**: သင်ယူမှု လမ်းကြောင်းတလျှောက် AI-အထူး အကြောင်းအရာများကို ပိုမိုကောင်းမွန်စွာ ပေါင်းစည်းထားသည်
-- **Production Content**: စီးပွားရေး သင်ယူသူများအတွက် အဆင့်မြင့် ပုံစံများကို အခန်း ၈ တွင် စုစည်းထားသည်
+- **Learning Progression**: လမ်းကြောင်းကို လိုင်းပြောနည်းမှ chapter-based အဆင်များဖြင့် တည်ဆောက်မှုသို့ ပြောင်းထားသည်
+- **Configuration Placement**: configuration guide ကို Chapter 3 အဖြစ် ပြောင်းထား၍ သင်ယူမှုစဉ်ကို ကောင်းမွန်စေသည်
+- **AI Content Integration**: AI သက်ဆိုင်ရာ အကြောင်းအရာများကို သင်ယူမှုလမ်းကြောင်းတလျောက် ပို၍ ထည့်သွင်းထားသည်
+- **Production Content**: အဆင့်မြင့် ပုံစံများကို Enterprise learners များအတွက် Chapter 8 အတွင်း စုစည်းထားသည်
 
 #### Improved
-- **User Experience**: လမ်းကြောင်း breadcrumb နှင့် အခန်း တိုးတက်မှု ညွှန်ပြချက်များ ပိုမိုရှင်းလင်းစေသည်
-- **Accessibility**: သင်တန်းလမ်းကြောင်းလျှောက်ရှိရာတွင် သာမာန် နာဗီဂေးရှင်း ပုံစံများ တစ်နေရာတည်းရှိစေရန်
-- **Professional Presentation**: တက္ကသိုလ်ပုံစံ သင်တန်းပုံစံနှင့် ကိုက်ညီသော ပရော်ဖက်ရှင်နယ် တင်ဆက်မှု
-- **Learning Efficiency**: ကောင်းမွန်သည့် အဖွဲ့အစည်းမှုဖြင့် သက်ဆိုင်ရာ အကြောင်းအရာ ရှာဖွေရှာရသည့် အချိန်လျော့ပါးစေသည်
+- **User Experience**: navigation breadcrumbs နှင့် chapter progression အညွှန်းများ ပိုမိုရှင်းလင်းစေသည်
+- **Accessibility**: တူညီသော navigation ပုံစံများဖြင့် သင်တန်းလမ်းကြောင်း ရှာဖွေရေး လွယ်ကူစေသည်
+- **Professional Presentation**: တက္ကသိုလ်စတိုင် သင်တန်းဖွဲ့စည်းမှုအတိုင်း သင်တန်းနှင့် ကုမ္ပဏီလေ့လာရေးအတွက် သင့်လျော်သည်
+- **Learning Efficiency**: အဖွဲ့အစည်းက အသိပညာ သင်ယူရန် အချိန်လျော့နည်းစေသည်
 
 #### Technical Implementation
-- **Navigation Headers**: 40+ စာတမ်းဖိုင်များအားလုံးတွင် အခန်းနာဗီဂေးရှင်း များကို စံတင့်တူ သတ်မှတ်ထားသည်
-- **Footer Navigation**: တိုးတက်မှု လမ်းညွှန်ချက်များနှင့် အခန်းပြီးစီးမှု ပြသချက်များကို တစ်ပြိုင်နက် အတိုက်အခံ ပြသပေးမှု
-- **Cross-Linking**: ဆက်စပ် အယူအဆများကို ချိတ်ဆက်ပေးသည့် အတွင်းပိုင်း ချိတ်ဆက်မှု စနစ်
-- **Chapter Mapping**: ပုံစံများနှင့် ဥပမာများကို သင်ယူမှု ရည်မှန်းချက်များနှင့် ထင်ရှားစွာ ဆက်သွယ်ထားခြင်း
+- **Navigation Headers**: 40+ စာရွက်စာတမ်းများတွင် standard chapter navigation ကို စံပြအတိုင်း ထည့်သွင်းထားသည်
+- **Footer Navigation**: တူညီသော progression လမ်းညွှန်မှုနှင့် chapter completion အညွှန်းများပါရှိသည်
+- **Cross-Linking**: ဆက်စပ်အကြောင်းအရာများကို အပြည့်အဝ ချိတ်ဆက်ထားသည်
+- **Chapter Mapping**: template များနှင့် ဥပမာများကို သင်ယူမှုရည်ရွယ်ချက်များနှင့် သေချာစွာ ချိတ်ဆက်ထားသည်
 
 #### Study Guide Enhancement
-- **📚 Comprehensive Learning Objectives**: အခန်း ၈ ချက် စနစ်နှင့် ကိုက်ညီစေရန် သုတေသနလမ်းညွှန်ကို ပြန်လည်ဖွဲ့စည်းထားသည်
-- **🎯 Chapter-Based Assessment**: အခန်းတိုင်းတွင် သီးသန့် သင်ယူရန် ရည်မှန်းချက်များနှင့် လက်တွေ့ လေ့ကျင့်ခန်းများ ပါဝင်သည်
-- **📋 Progress Tracking**: အပတ်စဉ် သင်ယူချိန်ဇယားနှင့် တိုင်းတာနိုင်သည့် ရလဒ်များ၊ ပြီးစီးမှု စစ်တမ်းစာရင်းများ
-- **❓ Assessment Questions**: အခန်းတိုင်းအတွက် အသိပညာ အတည်ပြုမေးခွန်းများနှင့် ပရော်ဖက်ရှင်နယ် ရလဒ်များ
-- **🛠️ Practical Exercises**: တကယ့်တကယ် တပ်ဆင်ရေး အခြေအနေများနှင့် ပြဿနာဖြေရှင်းမှု ပါဝင်သည့် လက်တွေ့ လှုပ်ရှားမှုများ
-- **📊 Skill Progression**: အခြေခံ အယူအဆမှ စီးပွားရေး ပုံစံများသို့ ရှင်းလင်းစွာ တိုးတက်ကာ အလုပ်အကိုင် ဖွံ့ဖြိုးရာကို အာရုံစိုက်မှု
-- **🎓 Certification Framework**: ပရော်ဖက်ရှင်နယ် တိုးတက်ရေး ရလဒ်များနှင့် အသိုင်းအဝိုင်း မှတ်သားကြောင်း စနစ်
-- **⏱️ Timeline Management**: အဆင့်သတ်မှတ်ချက်များကို အတည်ပြုနိုင်သည့် ၁၀-အပတ် သင်ယူမှု အစီအစဉ်
+- **📚 Comprehensive Learning Objectives**: 8-chapter စနစ်နှင့် ကိုက်ညီအောင် study guide ကို ပြန်လည်စီစဉ်ထားသည်
+- **🎯 Chapter-Based Assessment**: တစ်ခန်းချင်းစီတွင် သင်ယူရမည့် ရည်ရွယ်ချက်များနှင့် လက်တွေ့ လေ့ကျင့်ခန်းများ ပါဝင်သည်
+- **📋 Progress Tracking**: အပတ်စဉ် သင်ယူမှု အချိန်ဇယားနှင့် တိုင်းတာနိုင်သော ရလဒ်များ ဖော်ပြထားသည်
+- **❓ Assessment Questions**: တစ်ခန်းချင်းစီအတွက် ဗဟုသုတ စစ်ဆေးမေးခွန်းများနှင့် ပရော်ဖက်ရှင်နယ်ရလဒ်များ
+- **🛠️ Practical Exercises**: real deployment ကျင့်သုံးမှုများနှင့် troubleshooting ကို ထည့်သွင်းထားသည်
+- **📊 Skill Progression**: အခြေခံအမှုပိုင်းမှ Enterprise ပုံစံအထိ တိုးတက်မှုများကို မှတ်သားထားသည်
+- **🎓 Certification Framework**: ပရော်ဖက်ရှင်နယ် ဖွံ့ဖြိုးရေး ရလဒ်များနှင့် community မှ အသိမှတ်ပြုချက်များ
+- **⏱️ Timeline Management**: milestone အတည်ပြုချက်များပါဝင်သည့် 10-week သင်ယူမှုအစီအစဉ်
 
 ### [v3.1.0] - 2025-09-17
 
 #### Enhanced Multi-Agent AI Solutions
-**ဤဗားရှင်းသည် စက်ရုံစတင် ဆိုင်ရာ multi-agent retail solution ကို အေးဂျင့်အမည်ပေးမှုကို ပိုမိုရှင်းလင်းစေရန် နှင့် စာတမ်းများကို တိုးတက်အောင် တင်ပြထားသည်။**
+** ဤဗားရှင်းတွင် retail multi-agent ဖြေရှင်းချက်အား agent အမည်များ တိုးတက်အောင် ပြင်ဆင်ပြီး documentation ကို ကောင်းမွန်အောင် မြှင့်တင်ထားသည်။**
 
 #### Changed
-- **Multi-Agent Terminology**: ရောင်းအား ပိုင်းဆိုင်ရာ multi-agent ဖြေရှင်းချက်တစ်ခုလုံးတွင် နားလည်ရလွယ်အောင် "Cora agent" ကို "Customer agent" ဖြင့် အစားထိုးထားသည်
-- **Agent Architecture**: စာတမ်းများအားလုံး၊ ARM templates နှင့် ကုဒ်ဥပမာများကို ညီညာအောင် "Customer agent" အမည်ကို အသုံးပြုသွားသည်
-- **Configuration Examples**: အမည်ပေးမှု ရိုးရာများကို အပ်ဒိတ်လုပ်၍ တွဲဖက် agent ဖော်ပြချက် ပုံစံများကို မော်ဒန်ပြုလုပ်ထားသည်
-- **Documentation Consistency**: အရာအားလုံးကို ပရော်ဖက်ရှင်နယ်၊ ဖေါ်ပြချက်ပြည့်ဝသော agent အမည်များနှင့် ကိုက်ညီစေရန် သေချာစေထားသည်
+- **Multi-Agent Terminology**: retail multi-agent ဖြေရှင်းချက်တွင် "Cora agent" ကို "Customer agent" ဖြင့် အစားထိုး ပြောင်းလဲထားသည် เพื่อ နားလည်ရလွယ်ကူစေရန်
+- **Agent Architecture**: အချက်အလက်အားလုံး၊ ARM template များနှင့် code ဥပမာများကို "Customer agent" အမည်သုံးစွဲမှုနှင့် ကိုက်ညီအောင် ပြင်ဆင်ထားသည်
+- **Configuration Examples**: agent configuration ပုံစံများကို ယူသုံးရလွယ်ကူအောင် အပ်ဒိတ်လုပ်ထားသည်
+- **Documentation Consistency**: အားလုံးသော ရည်ညွှန်းချက်များတွင် ပရော်ဖက်ရှင်နယ်၊ ဖော်ပြချက်အရ agent အမည်များကို သေချာကျင့်သုံးထားသည်
 
 #### Enhanced
-- **ARM Template Package**: retail-multiagent-arm-template ကို Customer agent ကိုးကားချက်များဖြင့် အပ်ဒိတ်လုပ်ထားသည်
-- **Architecture Diagrams**: Mermaid ဇယားများကို အမည်အပ်ဒိတ်ဖြင့် ပြန်လည်မွမ်းမံထားသည်
-- **Code Examples**: Python class များနှင့် အကောင်အထည်ဖော်အတွက် ဥပမာများတွင် ယခု CustomerAgent အမည်ကို အသုံးပြုထားသည်
-- **Environment Variables**: တပ်ဆင်ရေး စက်ရုံ script များအားလုံးကို CUSTOMER_AGENT_NAME ကွန်ဗင်ရှင်းများကို အသုံးပြုအောင် အပ်ဒိတ်လုပ်ထားသည်
+- **ARM Template Package**: retail-multiagent-arm-template ကို Customer agent ရည်ညွှန်းချက်များဖြင့် အပ်ဒိတ်လုပ်ခဲ့သည်
+- **Architecture Diagrams**: Mermaid diagrams များကို agent အမည်သစ်ဖြင့် ပြန်လည်သန့်စင်ထားသည်
+- **Code Examples**: Python classes နှင့် implementation ဥပမာများတွင် ယခု CustomerAgent အမည်ကို အသုံးပြုထားသည်
+- **Environment Variables**: deployment script များအားလုံးကို CUSTOMER_AGENT_NAME သတ်မှတ်ချက်များအတိုင်း အပ်ဒိတ်လုပ်ထားသည်
 
 #### Improved
-- **Developer Experience**: စာတမ်းများတွင် agent အခန်းကဏ္ဍများနှင့် တာဝန်များ ပိုမိုရှင်းလင်းစေရန်
-- **Production Readiness**: စီးပွားရေးအဆင့်အတန်းနှင့် ကိုက်ညီသော အမည်ပေးမှုများဖြင့် ပိုမိုသင့်လျော်စေခြင်း
-- **Learning Materials**: ပညာသင်ကြားရေးအတွက် agent အမည်ကို ပိုမိုနားလည်ရလွယ်အောင် ပြုလုပ်ထားသည်
-- **Template Usability**: agent တာဝန်များနှင့် တပ်ဆင်ရေး လမ်းစဉ်များကို ရိုးရှင်းစေသည်
+- **Developer Experience**: အဆိုပါ documentation တွင် agent တာဝန်များနှင့် တာဝန်ယူချက်များ ပိုမိုရှင်းလင်းစေခဲ့သည်
+- **Production Readiness**: စီးပွားရေးအဆင့်အတန်းအမည်စနစ်များနှင့် ပိုမိုကိုက်ညီစေခဲ့သည်
+- **Learning Materials**: ပညာပေးရည်ရွယ်ချက်များအတွက် agent အမည်သတ်မှတ်မှုများ ပိုမိုနားလည်ရလွယ်ကူစေခဲ့သည်
+- **Template Usability**: agent လုပ်ဆောင်ချက်များနှင့် deployment ပုံစံများကို လွယ်ကူစွာနားလည်နိုင်စေခဲ့သည်
 
 #### Technical Details
-- Mermaid architecture diagrams များကို CustomerAgent ကိုးကားချက်များဖြင့် အပ်ဒိတ်လုပ်ထားသည်
-- CoraAgent class အမည်များကို Python ဥပမာများတွင် CustomerAgent အဖြစ် အစားထိုးထားသည်
-- ARM template JSON ဖိုင်များကို "customer" agent အမျိုးအစား အသုံးပြုရန် ပြင်ဆင်ထားသည်
-- ဆက်တင် အပတ်အပြင်များကို CORA_AGENT_* မှ CUSTOMER_AGENT_* ပုံစံသို့ ပြောင်းလဲထားသည်
-- တပ်ဆင်ရေး command များနှင့် ကွန်တိန်နာ cấu ပုံစံများကို ပြန်လည်အသစ်ပြင်ဆင်ထားသည်
+- CustomerAgent ကို ကိုယ်စားပြု၍ Mermaid architecture diagrams များကို ပြင်ဆင်ထားသည်
+- Python ဥပမာများတွင် CoraAgent class အမည်များကို CustomerAgent ဖြင့် အစားထိုးထားသည်
+- ARM template JSON configuration များကို "customer" agent type အသုံးပြုရန် ပြင်ဆင်ထားသည်
+- Environment variables များကို CORA_AGENT_* မှ CUSTOMER_AGENT_* ပုံစံသို့ အပ်ဒိတ်ပြောင်းလဲထားသည်
+- deployment command များနှင့် container configuration များအားလုံးကို ပြန်လည်အသစ်ပြင်ဆင်ထားသည်
 
 ### [v3.0.0] - 2025-09-12
 
 #### Major Changes - AI Developer Focus and Microsoft Foundry Integration
-**ဤဗားရှင်းသည် မော်ကွန်းတင် AI အထူးပြု သင်ကြားရေး အရင်းအမြစ်တစ်ခုအဖြစ် repository ကို ပြောင်းလဲပေးပြီး Microsoft Foundry ပေါင်းစည်းမှုကို ထည့်သွင်းထားသည်။**
+**This version transforms the repository into a comprehensive AI-focused learning resource with Microsoft Foundry integration.**
 
 #### Added
-- **🤖 AI-First Learning Path**: AI ဖွံ့ဖြိုးရေးသူများနှင့် အင်ဂျင်နီယာများအား ဦးစားပေး၍ ပြန်လည်စဉ်းစားထားသည့် ပြုပြင်အသစ်
-- **Microsoft Foundry Integration Guide**: AZD ကို Microsoft Foundry ဝန်ဆောင်မှုများနှင့် ချိတ်ဆက်ရန် တိကျသော လမ်းညွှန်စာတမ်း
-- **AI Model Deployment Patterns**: မော်ဒယ်ရွေးချယ်မှု၊ ဖော်ပြချက်နှင့် ထုတ်လုပ်မှုတင်သွင်းရေးနည်းဗျူဟာများအား ဖော်ပြထားသည့် လမ်းညွှန်
-- **AI Workshop Lab**: AI အပလီကေးရှင်းများကို AZD ဖြင့် တပ်ဆင်နိုင်အောင် ပြောင်းလဲပေးသည့် ၂-၃ နာရီ လက်တွေ့ အလုပ်ရုံ
-- **Production AI Best Practices**: AI အလုပ်အကိုင်များကို အတိုင်းအတာတင်မယ်၊ စောင့်ကြည့်မယ်၊ လုံခြုံရေးဆိုင်ရာ pattern များ
-- **AI-Specific Troubleshooting Guide**: Microsoft Foundry Models, Cognitive Services နှင့် AI တပ်ဆင်မှု ပြဿနာများအတွက် အပြည့်အစုံ ပြဿနာဖြေရှင်းလမ်းညွှန်
-- **AI Template Gallery**: Microsoft Foundry ပုံစံများ ပါဝင်သည့် ဖော်ပြချက် စုစည်းမှုနှင့် အခက်အခဲ အဆင့်ထားရာ
-- **Workshop Materials**: လက်တွေ့ လက်ဖြတ် Lab များနှင့် ကိုးကားစာရွက်စာတမ်းများ
+- **🤖 AI-First Learning Path**: စတင်မှုအနေဖြင့် AI developer များနှင့် engineer များကို ဦးစားပေးထားသော စနစ်တကျ ပြန်လည်ဖွဲ့စည်းမှု
+- **Microsoft Foundry Integration Guide**: AZD ကို Microsoft Foundry services များနှင့်ဆက်သွယ်ရာအတွက် စုံလင်သည့် စာတမ်းများ
+- **AI Model Deployment Patterns**: မော်ဒယ်ရွေးချယ်မှု၊ ဖွန်ချ်ချိန်ညှိနှိုင်းမှုနှင့် production သို့ ထုတ်ပြန်ခြင်း များကို ကောင်းစွာဖော်ပြထားသည့် လမ်းညွှန်စာမျက်နှာ
+- **AI Workshop Lab**: AI applications များကို AZD ဖြင့် deploy ပြုလုပ်နိုင်ရန် ပြောင်းလဲသင်ကြားရန် 2-3 နာရီကြာ hands-on workshop
+- **Production AI Best Practices**: AI workloads များအတွက် များပြားစွာ အသုံးပြုနိုင်သော scaling, monitoring, နှင့် security ပုံစံများ
+- **AI-Specific Troubleshooting Guide**: Microsoft Foundry Models, Cognitive Services, နှင့် AI deployment စာရင်းများဆိုင်ရာ ပြဿနာများအတွက် စုံလင်သည့် troubleshooting ဗျူဟာများ
+- **AI Template Gallery**: Microsoft Foundry templates များကို complexity ထိန်းသတ်ချက်များနှင့်အတူ ဖော်ပြထားသည့် စုစည်းမှု
+- **Workshop Materials**: hands-on lab များနှင့် ကိုးကားအတွက် reference စာတမ်းများပါရှိသည့် workshop ပစ္စည်းတစ်ထုပ်
 
 #### Enhanced
-- **README Structure**: AI-ဖွံ့ဖြိုးရေးသူများကို ဦးစားပေးသည့် ဖွဲ့စည်းပုံနှင့် Microsoft Foundry Discord မှ ကောင်းမွန်သော အသိုင်းအဝိုင်း စိတ်ဝင်စားမှု ဒေတာ ၄၅% ဖြင့်
-- **Learning Paths**: ကျောင်းသားများနှင့် DevOps အင်ဂျင်နီယာများအတွက် ရိုးရာလမ်းကြောင်းများနှင့် အတူ AI ဖွံ့ဖြိုးရေးသူများအတွက် သီးသန့် လမ်းကြောင်းများ
-- **Template Recommendations**: azure-search-openai-demo, contoso-chat, နှင့် openai-chat-app-quickstart စသည့် အကြံပြုထားသော AI ပုံစံများ
-- **Community Integration**: AI-အထူး ချန်နယ်များနှင့် ဆွေးနွေးမှုများပါရှိသော Discord အသိုင်းအဝိုင်း ပံ့ပိုးမှု တိုးတက်မှု
+- **README Structure**: AI-developer အာရုံစိုက်ထားသော ဖွဲ့စည်းပုံ၊ Microsoft Foundry Discord မှ community စိတ်ဝင်စားမှု အချက်အလက် 45% ကို ထည့်သွင်းထားသည်
+- **Learning Paths**: 학생များနှင့် DevOps engineer များအတွက် ရိုးရာ learning path များအပြင် dedicated AI developer ခရီးစဉ်ကို ထည့်သွင်းထားသည်
+- **Template Recommendations**: azure-search-openai-demo, contoso-chat, နှင့် openai-chat-app-quickstart အပါအဝင် သတ်မှတ်ထားသော AI templates များကို ဖော်ပြထားသည်
+- **Community Integration**: AI-specific channel များနှင့် ဆွေးနွေးမှုများပါရှိသော Discord community ကို တိုးချဲ့ထားသည်
 
 #### Security & Production Focus
-- **Managed Identity Patterns**: AI-အထူး အတည်ပြုမှုနှင့် လုံခြုံရေး ဖော်ပြချက်များ
-- **Cost Optimization**: Token အသုံးပြုမှုကို စောင့်ကြည့်ခြင်းနှင့် ဘတ်ဂျက် ထိန်းချုပ်မှုများ
-- **Multi-Region Deployment**: ကမ္ဘာလုံးဆိုင်ရာ AI အပလီကေးရှင်း တပ်ဆင်ခြင်း ကြံဆ
-- **Performance Monitoring**: AI-အထူး မီထရစ်များနှင့် Application Insights ပေါင်းစည်းမှု
+- **Managed Identity Patterns**: AI-specific authentication နှင့် security configuration များ
+- **Cost Optimization**: Token usage tracking နှင့် AI workloads တွင် ဘတ်ဂျက်ထိန်းချုပ်မှုများ
+- **Multi-Region Deployment**: global AI application deployment အတွက် စနစ်များ
+- **Performance Monitoring**: AI-specific metrics နှင့် Application Insights ကိုပေါင်းစပ်သုံးစွဲခြင်း
 
 #### Documentation Quality
-- **Linear Course Structure**: အခြေခံမှ အဆင့်မြင့် AI တင်သွင်းမှုနည်းပညာများသို့ အ منطقي အဆင့်ဆင့် လမ်းကြောင်း
-- **Validated URLs**: အပြင်ဘက် repository လင့်များအားလုံး စစ်ဆေးပြီး အသုံးပြုနိုင်သည်
-- **Complete Reference**: အတွင်းစာရွက်လင့်များအားလုံး စစ်ဆေးပြီး လုပ်ဆောင်နိုင်ခ
-- **Production Ready**: အမှန်တကယ် အသုံးပြုနိုင်သည့် စီးပွားရေး တင်သွင်းနည်းပညာများနှင့် ဥပမာများ
+- **Linear Course Structure**: beginner မှ advanced AI deployment ပုံစံများသို့ တန်းတန်းလိုက် တိုးတက်သွားစေသည့် အစီအစဉ်
+- **Validated URLs**: အပြင် repository link အားလုံးကို စစ်ဆေးသပ်ရပ်ပြီး အသုံးပြုနိုင်စေ
+- **Complete Reference**: အတွင်းပိုင်း documentation link အားလုံး အလုပ်လုပ်နိုင်စေရန် စစ်ဆေးထားသည်
+- **Production Ready**: အထူးသုံးသူများအတွက် enterprise deployment ပုံစံများနှင့် အမှန်တကယ် အသုံးပြုနိုင်သော ဥပမာများ
 
 ### [v2.0.0] - 2025-09-09
 
 #### Major Changes - Repository Restructure and Professional Enhancement
-**ဤဗားရှင်းသည် repository ဖွဲ့စည်းမှုနှင့် အကြောင်းအရာ တင်ဆက်မှုကို အပြင်းအထန် ပြင်ဆင်ထားသည့် အဓိက ပြောင်းလဲမှုကို ကိုယ်စားပြုသည်။**
+**This version represents a significant overhaul of the repository structure and content presentation.**
 
 #### Added
-- **Structured Learning Framework**: အစာတမ်းစာမျက်နှာများအားလုံးတွင် ဦးတည်ချက်၊ သင်ယူရည်မှန်းချက်များနှင့် သင်ယူမှုပေါင်းသင့်ရလဒ် များပါဝင်သည်
-- **Navigation System**: လမ်းညွှန်သင်ခန်းစာများအားလုံးတွင် Previous/Next ပေါ်လာသော လင့်ခ်များ ထည့်သွင်းထားသည်
-- **Study Guide**: သင်ယူရည်မှန်းချက်များ၊ လေ့ကျင့်ခန်းများနှင့် သုံးသပ်မေးခွန်းများ ပါဝင်သည့် study-guide.md
-- **Professional Presentation**: လက်တွေ့ ဖတ်ရှုမှုနှင့် ပရော်ဖက်ရှင်နယ် ပုံစံအတွက် emoji အများစုကို ဖယ်ရှားထားသည်
-- **Enhanced Content Structure**: သင်ယူမှု ဖြန့်ချိမှုနှင့် အကြောင်းအရာ ကောင်းမွန်စေရန် အဖွဲ့စည်းမှု တိုးတက်
+- **Structured Learning Framework**: documentation စာမျက်နှာများအားလုံးတွင် Introduction, Learning Goals, နှင့် Learning Outcomes အပိုင်းများ ထည့်သွင်းထားသည်
+- **Navigation System**: ทุก documentation များတွင် Previous/Next lesson links များ ထည့်သွင်းပြီး လမ်းညွှန်ပုံစံဖြင့် ဆက်လက်လေ့လာနိုင်စေသည်
+- **Study Guide**: learning objectives, practice exercises, နှင့် assessment materials ပါရှိသည့် comprehensive study-guide.md
+- **Professional Presentation**: ပထမဦးဆုံး ဖော်ပြချက်များမှ emoji icon များကို ဖယ်ရှားပြီး 접근성နှင့် professional ဖြစ်ပေါ်မှုတိုးတက်စေခဲ့သည်
+- **Enhanced Content Structure**: learning materials များ၏ အစုအဝေးနှင့် စဉ်ဆက်ဖြစ်စဉ်ကို ပြုပြင်တိုးမြှင့်ထားသည်
 
 #### Changed
-- **Documentation Format**: စာတမ်းများအားလုံးကို သင်ယူမှုအာရုံစိုက်သော တူညီသည့် ဖွဲ့စည်းပုံဖြင့် စံမကျသတ်မှတ်ထားသည်
-- **Navigation Flow**: သင်ယူမှု အစဥ်အလာကို အကျိုးရှိအောင် ဖွဲ့စည်းထားသည်
-- **Content Presentation**: အလှဆင်သော အရာများကို ဖယ်ရှားပြီး ရှင်းလင်းသည့် ပေးပို့ပုံကို အသုံးပြုထားသည်
-- **Link Structure**: နာဗီဂေးရှင်း အသစ်ကို ပံ့ပိုးရန် အတွင်းလင့်များကို ပြင်ဆင်ထားသည်
+- **Documentation Format**: စာတမ်းများအားလုံးကို တစ်သံတည်း learning-focused ဖွဲ့စည်းပုံဖြင့် စံချိန်သတ်မှတ်ထားသည်
+- **Navigation Flow**: learning materials အားလုံးအတွင်း အဆင့်လိုက် တိုးတက်မှုကို အရသာရှိအောင် ပြုပြင်ထားသည်
+- **Content Presentation**: ကိုယ်ကျေနပ်စရာ အလှဆင်သည့် အချက်များကို ဖယ်ရှား၍ ရိုးရှင်းသည့် professional ဖော်ပြချက်ကို ဦးစားပေးထားသည်
+- **Link Structure**: navigation system အသစ်ကို ထောက်ပံ့ရန် အတွင်းလင့်များအား အပ်ဒိတ်ပြုလုပ်ထားသည်
 
 #### Improved
-- **Accessibility**: Screen reader များအတွက်ပိုမိုသင့်လျော်စေရန် emoji များကို ဖယ်ရှားထားသည်
-- **Professional Appearance**: စီးပွားရေးနှင့် ပညာရေးသင်တန်းများအတွက် သင့်လျော်သည့် ပရော်ဖက်ရှင်နယ် ပုံစံ
-- **Learning Experience**: သင်ခန်းစာတိုင်းအတွက် ရည်မှန်းချက်နှင့် ရလဒ်တို့ပါသည့် ဖွဲ့စည်းပုံ
-- **Content Organization**: ဆက်စပ်ခန့်မှန်းချက်များနှင့် အကြောင်းအရာ အချိတ်အဆက် ကောင်းမွန်စေခြင်း
+- **Accessibility**: screen reader များအတွက် emoji များမလိုအပ်အောင် ဖယ်ရှားပြီး မျက်နှာဖုံးရောက်မှုတိုးတက်စေခဲ့သည်
+- **Professional Appearance**: သက်ဆိုင်ရာ စီးပွားရေးနှင့် သင်ယူမှုများအတွက် သင့်တော်သည့် ရိုးရှင်းသည့် ပုံစံ
+- **Learning Experience**: သင်ခန်းစာတိုင်းအတွက် ရည်မှန်းချက်များနှင့် ရလဒ်များကို ဖော်ထုတ်ထားသည့် စနစ်တကျနည်းလမ်း
+- **Content Organization**: ဆက်စပ်သောခေါင်းစဉ်များအကြား အဆက်အသေးအဖွဲ့၍ ကောင်းမွန်စွာ ဖော်စပ်ထားသည်
 
 ### [v1.0.0] - 2025-09-09
 
@@ -840,111 +943,111 @@ If you have local branches or documentation referencing the old structure:
 
 #### Added
 - **Core Documentation Structure**
-  - အစပြု မိတ်ဆက် လမ်းညွှန် စီးရီး အပြည့်အစုံ
-  - တပ်ဆင်ခြင်းနှင့် ပံ့ပိုးမှု စာတမ်းများ အပြည့်အစုံ
-  - ပြဿနာဖြေရှင်းမှုနှင့် ဒက်ဘတ်ဂျင်း လမ်းညွှန်များ အသေးစိတ်
-  - တပ်ဆင်မှုမပြုမီ စစ်ဆေးရေး ကိရိယာများနှင့် လုပ်ထုံးလုပ်နည်းများ
+  - Complete getting-started guide series
+  - Comprehensive deployment and provisioning documentation
+  - Detailed troubleshooting resources and debugging guides
+  - Pre-deployment validation tools and procedures
 
 - **Getting Started Module**
-  - AZD အခြေခံများ: အဓိကအယူအဆများနှင့် သတ်မှတ်ချက်များ
-  - Installation Guide: စနစ်အလိုက် ထည့်သွင်းခြင်း လမ်းညွှန်ချက်များ
-  - Configuration Guide: ပတ်ဝန်းကျင် တပ်ဆင်ခြင်းနှင့် အတည်ပြုရေး
-  - First Project Tutorial: အဆင့်ချင်း လက်တွေ့လေ့ကျင့်နည်း
+  - AZD Basics: Core concepts and terminology
+  - Installation Guide: Platform-specific setup instructions
+  - Configuration Guide: Environment setup and authentication
+  - First Project Tutorial: Step-by-step hands-on learning
 
 - **Deployment and Provisioning Module**
-  - Deployment Guide: အလုပ်လျှောက်လမ်းစဉ် အပြည့်အစုံ
-  - Provisioning Guide: Bicep ဖြင့် Infrastructure as Code
-  - ထုတ်လုပ်မှု တင်သွင်းရာတွင် အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများ
-  - Multi-service architecture နမူနာများ
+  - Deployment Guide: Complete workflow documentation
+  - Provisioning Guide: Infrastructure as Code with Bicep
+  - Best practices for production deployments
+  - Multi-service architecture patterns
 
 - **Pre-deployment Validation Module**
-  - Capacity Planning: Azure ရင်းနှီးမြှုပ်နှံမှု စွမ်းရည် စစ်တမ်း
-  - SKU Selection: ဝန်ဆောင်မှု အဆင့်ရွေးချယ်မှုပေးလာမှုများ
-  - Pre-flight Checks: အလိုအလျောက် အတည်ပြုခြင်း script များ (PowerShell နှင့် Bash)
-  - ကုန်ကျစရိတ် ခန့်မှန်းခြင်းနှင့် ဘတ်ဂျက်စီမံခန့်ခွဲမှုကိရိယာများ
+  - Capacity Planning: Azure resource availability validation
+  - SKU Selection: Comprehensive service tier guidance
+  - Pre-flight Checks: Automated validation scripts (PowerShell and Bash)
+  - Cost estimation and budget planning tools
 
 - **Troubleshooting Module**
-  - Common Issues: ထင်ရှားကြုံတွေ့ရသည့် ပြဿနာများနှင့် ဖြေရှင်းနည်း
-  - Debugging Guide: စနစ်တကျ ပြဿနာရှာဖွေရေး နည်းဗျူဟာများ
-  - အဆင့်မြင့် ရှာဖွေခြင်း နည်းပညာများနှင့် ကိရိယာများ
-  - စွမ်းဆောင်ရည် စောင့်ကြည့်ခြင်းနှင့် ထိရောက်ရေး တိုးတက်စေရေး
+  - Common Issues: Frequently encountered problems and solutions
+  - Debugging Guide: Systematic troubleshooting methodologies
+  - Advanced diagnostic techniques and tools
+  - Performance monitoring and optimization
 
 - **Resources and References**
-  - Command Cheat Sheet: အရေးကြီး အမိန့်များအတွက် လျှပ်စစ် မှတ်စု
-  - Glossary: အသုံးအနှုန်းများနှင့် ကိုးကားသတ်မှတ်ချက်များ
-  - FAQ: မကြာခဏ မေးလေ့ရှိသော မေးခွန်းများအတွက် အသေးစိတ် ဖြေကြားချက်များ
-  - အပြင်ဘက် အရင်းအမြစ် လင့်များနှင့် အသိုင်းအဝိုင်း ဆက်သွယ်ရန် နည်းလမ်းများ
+  - Command Cheat Sheet: Quick reference for essential commands
+  - Glossary: Comprehensive terminology and acronym definitions
+  - FAQ: Detailed answers to common questions
+  - External resource links and community connections
 
 - **Examples and Templates**
-  - Simple Web Application ဥပမာ
-  - Static Website တပ်ဆင်ရေး ပုံစံ
-  - Container Application ဖော်ပြချက်
-  - Database ပေါင်းစည်းမှု နမူနာများ
-  - Microservices architecture နမူနာများ
-  - Serverless function အကောင်အထည်ဖော်ချက်များ
+  - Simple Web Application example
+  - Static Website deployment template
+  - Container Application configuration
+  - Database integration patterns
+  - Microservices architecture examples
+  - Serverless function implementations
 
 #### Features
-- **Multi-Platform Support**: Windows, macOS, နှင့် Linux များအတွက် ထည့်သွင်းခြင်းနှင့် ဖော်ပြချက် လမ်းညွှန်ချက်များ
-- **Multiple Skill Levels**: ကျောင်းသားများမှ စ၍ ပရော်ဖက်ရှင်နယ် ဖွံ့ဖြိုးသူများထိ အသင့်
-- **Practical Focus**: လက်တွေ့ ဥပမာများနှင့် အနုတ်လက္ခဏာ သဘောထားများ
-- **Comprehensive Coverage**: အခြေခံ အယူအဆမှ အဆင့်မြင့် စီးပွားရေး ပုံစံများအထိ
-- **Security-First Approach**: လုံခြုံရေး အကောင်းဆုံး လက်တွေ့များကို ချိတ်ဆက်ထားခြင်း
-- **Cost Optimization**: ကုန်ကျစရိတ် ထိထိမိမိ တင်ပြမှုနှင့် အရင်းအမြစ် စီမံခန့်ခွဲမှု
+- **Multi-Platform Support**: Windows, macOS, နှင့် Linux များအတွက် installation နှင့် configuration လမ်းညွှန်ချက်များ
+- **Multiple Skill Levels**: ကျောင်းသားများမှ professional developer များအထိ သင်ယူနိုင်သောအဆင့်များအတွက် ဒီဇိုင်းပြုထားသည်
+- **Practical Focus**: လက်တွေ့အသုံးပြုနိုင်သော ဥပမာများနှင့် အမှန်တကယ်ဖြစ်သော ရုပ်သိမ်းပုံရိပ်များ
+- **Comprehensive Coverage**: အခြေခံအတွေးများမှ advanced enterprise ပုံစံများအထိ ဖုံးလွှမ်းထားသည်
+- **Security-First Approach**: လုံခြုံရေးအကောင်းမြင်ချက်များကို အစဉ်အမြဲ ထည့်သွင်းထားသည်
+- **Cost Optimization**: အသုံးပြုမှုကုန်ကျစရိတ် သက်သာစေရန် လမ်းညွှန်ချက်များ
 
 #### Documentation Quality
-- **Detailed Code Examples**: လက်တွေ့ အသုံးပြုနိုင်ပြီး စမ်းသပ်ထားသော ကုဒ် ဥပမာများ
-- **Step-by-Step Instructions**: ရှင်းလင်း၍ လိုက်နာနိုင်သော လမ်းညွှန်ချက်များ
-- **Comprehensive Error Handling**: အချိန်ကြာကြာ ကြုံတွေ့နိုင်သည့် ပြဿနာများအတွက် ပြုပြင်နည်းများ
-- **Best Practices Integration**: စက်မှုပုံစံနှင့် အကြံပြုချက်များ
-- **Version Compatibility**: နောက်ဆုံး Azure ဝန်ဆောင်မှုများနှင့် azd ထောက်ပံ့မှုနှင့် ကိုက်ညီမှု
+- **Detailed Code Examples**: လက်တွေ့နှင့် စမ်းသပ်ပြီးသော code နမူနာများ
+- **Step-by-Step Instructions**: ရှင်းလင်း၍ လုပ်ဆောင်နိုင်သည့် အဆင့်လိုက် ညွှန်ပြချက်များ
+- **Comprehensive Error Handling**: အများဆုံ ဖြစ်ပေါ်တတ်သော ပြဿနာများအတွက် troubleshooting
+- **Best Practices Integration**: စက်မှုလုပ်ငန်းစံနှင့် အကြံပြုချက်များ ပေါင်းစပ်ထားသည်
+- **Version Compatibility**: နောက်ဆုံး Azure services နှင့် azd အစီအစဉ်များနှင့် သင့်တော်အောင် ထိန်းသိမ်းထားသည်
 
 ## Planned Future Enhancements
 
 ### Version 3.1.0 (Planned)
 #### AI Platform Expansion
-- **Multi-Model Support**: Hugging Face, Azure Machine Learning, နှင့် စိတ်ကြိုက် မော်ဒယ်များအတွက် ပေါင်းစည်းမှု ပုံစံများ
-- **AI Agent Frameworks**: LangChain, Semantic Kernel, နှင့် AutoGen အသုံးချမှုများအတွက် စံနမူနာများ
-- **Advanced RAG Patterns**: Azure AI Search အပြင် ရွေးချယ်နိုင်သော ဗက်တာ ဒေတာဘေ့(စ်) အစီအစဉ်များ (Pinecone, Weaviate, စသည်)
-- **AI Observability**: မော်ဒယ် စွမ်းဆောင်ရည်၊ token သုံးစွဲနှုန်း နှင့် တုံ့ပြန်ချက် အရည်အသွေးတို့အတွက် တိုးတက် ပြည့်စုံအကောင်းမြင်မှု
+- **Multi-Model Support**: Hugging Face, Azure Machine Learning, နှင့် custom models များအတွက် integration pattern များ
+- **AI Agent Frameworks**: LangChain, Semantic Kernel, နှင့် AutoGen deployments အတွက် template များ
+- **Advanced RAG Patterns**: Azure AI Search အပြင် Pinecone, Weaviate စသဖြင့် vector database ရွေးချယ်မှုများ
+- **AI Observability**: မော်ဒယ် performance, token အသုံးပြုမှု, နှင့် response မှတ္တမ်းအရည်အသွေးများအတွက် monitoring တိုးတက်စေမှု
 
 #### Developer Experience
-- **VS Code Extension**: AZD + Microsoft Foundry ပေါင်းစပ်ထားသည့် ဖွံ့ဖြိုးရေး အတွေ့အကြုံ
-- **GitHub Copilot Integration**: AI ကူညီပေးသည့် AZD စံနမူနာ ဖန်တီးခြင်း
-- **Interactive Tutorials**: AI ရှေ့ဆိုင်သော အခြေအနေများအတွက် အလိုအလျောက် စစ်ဆေးမှုဖြင့် လက်တွေ့ ကုတ်ရေး လေ့ကျင့်ခန်းများ
-- **Video Content**: AI တင်သွင်းမှုအပေါ် အာရုံစိုက်၍ ဗီဒီယို သင်ခန်းစာများဖြင့် ဗစ်ရှွယ် အလေ့လာသူများအတွက် ထောက်ပံ့ချက်
+- **VS Code Extension**: AZD + Microsoft Foundry အတွက် ပေါင်းစပ်ထားသည့် development အတွေ့အကြုံ
+- **GitHub Copilot Integration**: AI ကူညီပေးသည့် AZD template ဖန်တီးမှု
+- **Interactive Tutorials**: AI စက်မှုလုပ်ငန်းများအတွက် automated validation ပါရှိသည့် hands-on coding လေ့ကျင့်ခန်းများ
+- **Video Content**: AI deployments များအပေါ် ဗီဒီယို သင်ကြားမှုများ
 
 ### Version 4.0.0 (Planned)
 #### Enterprise AI Patterns
-- **Governance Framework**: AI မော်ဒယ် အုပ်ချုပ်မှု၊ လိုက်နာမှုနှင့် audit လမ်းကြောင်းများ
-- **Multi-Tenant AI**: အများအပြား ဖောက်သည်များကို သီးခြားထားသော AI ဝန်ဆောင်မှုများဖြင့် ဝန်ဆောင်မှုပေးနိုင်ရန်ပုံစံများ
-- **Edge AI Deployment**: Azure IoT Edge နှင့် ကွန်တိန်နာ အရင်းအမြစ်များနှင့် ပေါင်းစည်းခြင်း
-- **Hybrid Cloud AI**: AI လုပ်ငန်းများအတွက် မလွန်မလျော့ multi-cloud နှင့် hybrid တင်သွင်းမှု ပုံစံများ
+- **Governance Framework**: AI model governance, compliance, နှင့် audit trail များ
+- **Multi-Tenant AI**: သီးခြားထားသော AI ဝန်ဆောင်မှုများဖြင့် ငွေပေးချေခွင့်မိတျသော ဖောက်သည်များစွာကို service ပေးနိုင်သော ပုံစံများ
+- **Edge AI Deployment**: Azure IoT Edge နှင့် container instances ဖြင့် ပေါင်းစည်းခြင်း
+- **Hybrid Cloud AI**: မျိုးစုံ cloud နှင့် hybrid deployment ပုံစံများ
 
 #### Advanced Features
-- **AI Pipeline Automation**: Azure Machine Learning pipeline များနှင့် MLOps ပေါင်းစည်းခြင်း
-- **Advanced Security**: Zero-trust ပုံစံများ၊ ပုဂ္ဂိုလ်ရေး endpoints များနှင့် တိုးတက်သော အန္တရာယ် ကာကွယ်မှု
-- **Performance Optimization**: အမြင့် throughput AI အက်ပလီကေးရှင်းများအတွက် တိုးတက်အောင် ထိန်းညှိခြင်းနှင့် အသံချဲ့မှု မဟာဗျူဟာများ
-- **Global Distribution**: AI အက်ပလီကေးရှင်းများအတွက် အကြောင်းအရာ ပို့ဆောင်ခြင်းနှင့် edge caching ပုံစံများ
+- **AI Pipeline Automation**: Azure Machine Learning pipelines နှင့် MLOps ပေါင်းစည်းမှု
+- **Advanced Security**: Zero-trust patterns, private endpoints, နှင့် advanced threat protection
+- **Performance Optimization**: high-throughput AI applications များအတွက် တိုက်ရိုက်ညှိနှိုင်းခြင်းနှင့် scaling နည်းလမ်းများ
+- **Global Distribution**: AI applications များအတွက် content delivery နှင့် edge caching ပုံစံများ
 
 ### Version 3.0.0 (Planned) - Superseded by Current Release
 #### Proposed Additions - Now Implemented in v3.0.0
-- ✅ **AI-Focused Content**: Microsoft Foundry အပြည့်အစုံ ပေါင်းစည်းမှု (ပြီးစီး)
-- ✅ **Interactive Tutorials**: လက်တွေ့ AI အလုပ်ရုံသင်တန်း (ပြီးစီး)
-- ✅ **Advanced Security Module**: AI သီးသန့် လုံခြုံရေး ပုံစံများ (ပြီးစီး)
-- ✅ **Performance Optimization**: AI လုပ်ဆောင်မှု ညှိချက် မဟာဗျူဟာများ (ပြီးစီး)
+- ✅ **AI-Focused Content**: Microsoft Foundry integration အပြည့်အစုံ (Completed)
+- ✅ **Interactive Tutorials**: hands-on AI workshop lab (Completed)
+- ✅ **Advanced Security Module**: AI-specific security patterns (Completed)
+- ✅ **Performance Optimization**: AI workload tuning strategies (Completed)
 
 ### Version 2.1.0 (Planned) - Partially Implemented in v3.0.0
 #### Minor Enhancements - Some Completed in Current Release
-- ✅ **Additional Examples**: AI အာရုံစိုက် တင်သွင်းမှု အခြေအနေများ (ပြီးစီး)
-- ✅ **Extended FAQ**: AI သီးသန့် မေးခွန်းများနှင့် ပြဿနာဖြေရှင်းခြင်း (ပြီးစီး)
-- **Tool Integration**: IDE နှင့် editor ပေါင်းစည်းမှု လမ်းညွှန်များ တိုးမြှင့်ခြင်း
-- ✅ **Monitoring Expansion**: AI သီးသန့် မောနီတာနှင့် အချက်ပေးရေး ပုံစံများ (ပြီးစီး)
+- ✅ **Additional Examples**: AI-focused deployment scenarios (Completed)
+- ✅ **Extended FAQ**: AI-specific questions and troubleshooting (Completed)
+- **Tool Integration**: IDE နှင့် editor ပေါင်းစည်းမှုလမ်းညွှန်ချက်များ တိုးချဲ့မှု
+- ✅ **Monitoring Expansion**: AI-specific monitoring နှင့် alerting patterns (Completed)
 
 #### Still Planned for Future Release
-- **Mobile-Friendly Documentation**: မိုဘိုင်း သင်ယူမှုအတွက် တုံ့ပြန်နိုင်သော ဒီဇိုင်း
-- **Offline Access**: ဒေါင်းလုဒ်လုပ်၍ အသုံးပြုနိုင်သော စာတမ်း ထုပ်ပိုးမှုများ
-- **Enhanced IDE Integration**: AZD + AI လုပ်ငန်းစဉ်များအတွက် VS Code တိုးချဲ့မှု
-- **Community Dashboard**: real-time လူမှု သတင်းအချက်အလက်များနှင့် အထားဆောင်မှု တွက်ချက်ခြင်း
+- **Mobile-Friendly Documentation**: mobile learning အတွက် responsive design
+- **Offline Access**: downloadable documentation package များ
+- **Enhanced IDE Integration**: AZD + AI workflow များအတွက် VS Code extension
+- **Community Dashboard**: real-time community metrics နှင့် contribution tracking
 
 ## Contributing to the Changelog
 
@@ -954,122 +1057,122 @@ When contributing to this repository, please ensure changelog entries include:
 1. **Version Number**: Following semantic versioning (major.minor.patch)
 2. **Date**: Release or update date in YYYY-MM-DD format
 3. **Category**: Added, Changed, Deprecated, Removed, Fixed, Security
-4. **Clear Description**: သို့ရိုက်ပြတ်ထားသော ပြောင်းလဲချက် ဖော်ပြချက်
-5. **Impact Assessment**: ပြောင်းလဲမှုများက ရှိပြီးသား အသုံးပြုသူများကို မည်သို့ သက်ရောက်မည်ကို ဖော်ပြခြင်း
+4. **Clear Description**: Concise description of what changed
+5. **Impact Assessment**: How changes affect existing users
 
 ### Change Categories
 
 #### Added
-- အသစ်ထည့်သွင်းထားသော အင်္ဂါရပ်များ၊ စာတမ်း အပိုင်းများ သို့မဟုတ် လုပ်ဆောင်နိုင်မှုများ
-- အသစ်သော နမူနာများ၊ စံနမူနာများ သို့မဟုတ် သင်ယူရေး အရင်းအမြစ်များ
-- နောက်ထပ် ကိရိယာများ၊ စကရပ်(စ်)များ သို့မဟုတ် အသုံးဝင် ကိရိယာများ
+- New features, documentation sections, or capabilities
+- New examples, templates, or learning resources
+- Additional tools, scripts, or utilities
 
 #### Changed
-- ရှိပြီးသား လုပ်ဆောင်ချက် သို့မဟုတ် စာတမ်းများကို ပြင်ဆင်ပြောင်းလဲခြင်း
-- ရှင်းလင်းမှု သို့မဟုတ် တိကျမှုကို တိုးတက်စေရန် အပ်ဒိတ်များ
-- အကြောင်းအရာ သို့မဟုတ် အဖွဲ့အစည်း ဖွဲ့စည်းပုံ ပြန်လည်ပြုပြင်ခြင်း
+- Modifications to existing functionality or documentation
+- Updates to improve clarity or accuracy
+- Restructuring of content or organization
 
 #### Deprecated
-- သုတ်သာဖျက်ချေခံနေရသော အင်္ဂါရပ်များ သို့မဟုတ် နည်းလမ်းများ
-- ဖယ်ရှားရန် စီစဉ်ထားသည့် စာတမ်း အပိုင်းများ
-- ပိုမိုကိုက်ညီသော အခြား နည်းလမ်းများ ရှိနေသော နည်းပုံများ
+- Features or approaches that are being phased out
+- Documentation sections scheduled for removal
+- Methods that have better alternatives
 
 #### Removed
-- အရေးမကြီးတော့သော အင်္ဂါရပ်များ၊ စာတမ်းများ သို့မဟုတ် နမူနာများ
-- ဟောင်းပြစ်နေသော အချက်အလက်များ သို့မဟုတ် အသုံးမပြုတော့သော နည်းလမ်းများ
-- ထပ်တူဖြစ်နေသော သို့မဟုတ် ပေါင်းစည်းထားသော အကြောင်းအရာများ
+- Features, documentation, or examples that are no longer relevant
+- Outdated information or deprecated approaches
+- Redundant or consolidated content
 
 #### Fixed
-- စာတမ်း သို့မဟုတ် ကုဒ်အတွင်း အမှားများကို ပြင်ဆင်ခြင်း
-- တင်ပြထားသည့် ပြဿနာများ သို့မဟုတ် အခက်အခဲများကို ဖြေရှင်းခြင်း
-- တိကျမှု သို့မဟုတ် လုပ်ဆောင်နိုင်မှု တိုးတက်စေရန် တိုးတက်မှုများ
+- Corrections to errors in documentation or code
+- Resolution of reported issues or problems
+- Improvements to accuracy or functionality
 
 #### Security
-- လုံခြုံရေးဆိုင်ရာ တိုးတက်မှုများ သို့မဟုတ် ပြင်ဆင်မှုများ
-- လုံခြုံရေး အကောင်းဆုံး လမ်းစဉ်များအတွက် အပ်ဒိတ်များ
-- လုံခြုံရေး ချို့ယွင်းချက်များကို ဖြေရှင်းခြင်း
+- Security-related improvements or fixes
+- Updates to security best practices
+- Resolution of security vulnerabilities
 
 ### Semantic Versioning Guidelines
 
 #### Major Version (X.0.0)
-- အသုံးပြုသူ၏ လုပ်ဆောင်ချက် လိုအပ်စေသော ချိုးဖျက်သည့် ပြောင်းလဲမှုများ
-- အကြောင်းအရာ သို့မဟုတ် အဖွဲ့အစည်း၏ အဓိက ပြုပြင်ပြောင်းလဲမှုများ
-- မူလ ယုံကြည်ချက် သို့မဟုတ် နည်းဗျူဟာကို ပြောင်းလဲစေသည့် ပြောင်းလဲမှုများ
+- Breaking changes that require user action
+- Significant restructuring of content or organization
+- Changes that alter the fundamental approach or methodology
 
 #### Minor Version (X.Y.0)
-- အသစ်အင်္ဂါရပ်များ သို့မဟုတ် အကြောင်းအရာ ထည့်သွင်းခြင်းများ
-- နောက်ကျောလိုက်သော ကိုက်ညီမှုကို ထိန်းသိမ်းထားပါသော တိုးတက်မှုများ
-- နောက်ထပ် နမူနာများ၊ ကိရိယာများ သို့မဟုတ် အရင်းအမြစ်များ
+- New features or content additions
+- Enhancements that maintain backward compatibility
+- Additional examples, tools, or resources
 
 #### Patch Version (X.Y.Z)
-- အမှားပြင်ဆင်ခြင်းများနှင့် သက်သာစေသော ပြုပြင်ချက်များ
-- ရှိပြီးသား အကြောင်းအရာများအတွက် အသေးစား တိုးတက်မှုများ
-- ရှင်းလင်းရေးနည်းလမ်းများနှင့် အသေးစား တိုးတက်မှုများ
+- Bug fixes and corrections
+- Minor improvements to existing content
+- Clarifications and small enhancements
 
 ## Community Feedback and Suggestions
 
-ကျွန်ုပ်တို့သည် ဤ သင်ယူရေး အရင်းအမြစ်ကို တိုးတက်အောင် လုပ်ရန် လူမှုအသိုင်းအဝိုင်း၏ တုံ့ပြန်ချက်များကို လှုံ့ဆော်အားပေးပါသည်။
+We actively encourage community feedback to improve this learning resource:
 
 ### How to Provide Feedback
-- **GitHub Issues**: ပြဿနာများကိုအစီရင်ခံရန် သို့မဟုတ် တိုးတက်စေရန် အကြံပြုရန် (AI သီးသန့် ပြဿနာများကိုလည်း ကြိုဆိုပါသည်)
-- **Discord Discussions**: အယူအဆများမျှဝေရန်နှင့် Microsoft Foundry လူမှုအသိုင်းအဝိုင်းနှင့် ပါဝင်ဆွေးနွေးရန်
-- **Pull Requests**: အကြောင်းအရာများကို တိုက်ရိုက် တိုးတက်စေရန် ဆက်လက်ထည့်သွင်းရန်၊ အထူးသဖြင့် AI စံနမူနာများနှင့် လမ်းညွှန်များ
-- **Microsoft Foundry Discord**: AZD + AI ဆွေးနွေးချက်များအတွက် #Azure ချန်နယ်တွင် ပါဝင်ဆွေးနွေးပါ
-- **Community Forums**: ကျယ်ပြန့်သော Azure ဖွံ့ဖြိုးရေးသူ ဆွေးနွေးချက်များတွင် ပါဝင်ဆောင်ရွက်ပါ
+- **GitHub Issues**: Report problems or suggest improvements (AI-specific issues welcome)
+- **Discord Discussions**: Share ideas and engage with the Microsoft Foundry community
+- **Pull Requests**: Contribute direct improvements to content, especially AI templates and guides
+- **Microsoft Foundry Discord**: Participate in #Azure channel for AZD + AI discussions
+- **Community Forums**: Participate in broader Azure developer discussions
 
 ### Feedback Categories
-- **AI Content Accuracy**: AI ဝန်ဆောင်မှု ပေါင်းစည်းမှုနှင့် တင်သွင်းခြင်း အချက်အလက်များအတွက် ပြင်ဆင်ချက်များ
-- **Learning Experience**: AI ဖွံ့ဖြိုးရေးသူများအတွက် သင်ယူမှု အတွေ့အကြုံကို တိုးတက်စေရန် အကြံပြုချက်များ
-- **Missing AI Content**: နောက်ထပ် AI စံနမူနာများ၊ ပုံစံများ သို့မဟုတ် နမူနာများ တောင်းဆိုချက်များ
-- **Accessibility**: မတူကွဲပြားသည့် သင်ယူသူလိုအပ်ချက်များအတွက် တိုးတက်မှုများ
-- **AI Tool Integration**: AI ဖွံ့ဖြိုးရေး လုပ်ငန်းစဉ် ပေါင်းစည်းမှုကို ပိုမိုကောင်းမွန်အောင် အကြံပြုချက်များ
-- **Production AI Patterns**: လုပ်ငန်းအဆင့် AI တင်သွင်းမှု ပုံစံများအတွက် တောင်းဆိုချက်များ
+- **AI Content Accuracy**: AI service integration နှင့် deployment သတင်းအချက်အလက်များ၏ မှန်ကန်မှုအပေါ် ဖော်ပြချက်များ
+- **Learning Experience**: AI developer သင်ယူမှု စီးဆင်းမှုကို တိုးတက်စေသည့် အကြံပေးချက်များ
+- **Missing AI Content**: ထပ်မံ လိုအပ်သေးသော AI templates, patterns, သို့မဟုတ် ဥပမာများအတွက် တောင်းဆိုချက်များ
+- **Accessibility**: အမျိုးမျိုးသောသင်ယူခွင့်များအတွက် တိုးတက်စေရန် အကြံပြုချက်များ
+- **AI Tool Integration**: AI development workflow ပေါင်းစည်းမှုကို ပိုမိုကောင်းမွန်စေရန် အကြံပြုချက်များ
+- **Production AI Patterns**: enterprise AI deployment ပုံစံများအတွက် တောင်းဆိုချက်များ
 
 ### Response Commitment
-- **Issue Response**: တင်ပြထားသော ပြဿနာများအတွက် ၄၈ နာရီအတွင်း တုံ့ပြန်ပါမည်
-- **Feature Requests**: တစ်ပတ်အတွင်း သုံးသပ်ပါမည်
-- **Community Contributions**: တစ်ပတ်အတွင်း ပြန်လည်သုံးသပ်ပါမည်
-- **Security Issues**: အရေးပေါ် ဦးစားပေး၍ ချက်ချင်း တုံ့ပြန်ပါမည်
+- **Issue Response**: Report ပြဿနာများအတွက် 48 နာရီအတွင်းပြန်လည်ဖြေကြားမှု
+- **Feature Requests**: တောင်းဆိုချက်များကို တစ်ပါတ်အတွင်း အကဲဖြတ်မှု
+- **Community Contributions**: တစ်ပါတ်အတွင်း ပြန်လည်သုံးသပ်မှု
+- **Security Issues**: အရေးပေါ် ဦးစားပေးပြီး အမြန်ဆုံးပြန်လည်ဆောင်ရွက်မှု
 
 ## Maintenance Schedule
 
 ### Regular Updates
-- **Monthly Reviews**: အကြောင်းအရာ တိကျမှုနှင့် လင့်ခ် များ စစ်ဆေးခြင်း
-- **Quarterly Updates**: အကြောင်းအရာ အကြီးစား ထည့်သွင်းမှုများနှင့် တိုးတက်မှုများ
-- **Semi-Annual Reviews**: အပြည့်အစုံ ပြန်လည်ဖွဲ့စည်းခြင်းနှင့် တိုးတက်မှုများ
-- **Annual Releases**: အရေးကြီးတိုးတက်မှုများပါသော အဓိက ဗားရှင်း အပ်ဒိတ်များ
+- **Monthly Reviews**: content မှန်ကန်မှုနှင့် link သက်ရောက်မှု စစ်ဆေးခြင်း
+- **Quarterly Updates**: အကြီးစား content ထည့်သွင်းမှုများနှင့် တိုးတက်မှုများ
+- **Semi-Annual Reviews**: စနစ်တကျ ပြုပြင်မွမ်းမံခြင်းနှင့် တိုးတက်မှုများ
+- **Annual Releases**: အကြီးစား version update များနှင့် အရေးပါသော တိုးတက်မှုများ
 
 ### Monitoring and Quality Assurance
-- **Automated Testing**: ကုဒ် နမူနာများနှင့် လင့်ခ် များကို ပုံမှန် စစ်ဆေးနိုင်ရန် အလိုအလျောက် စမ်းသပ်မှု
-- **Community Feedback Integration**: အသုံးပြုသူ အကြံပြုချက်များကို ပုံမှန် ထည့်သွင်းခြင်း
-- **Technology Updates**: နောက်ဆုံး Azure ဝန်ဆောင်မှုများနှင့် azd ထုတ်ဝေမှုများနှင့် လိုက်၍ အပ်ဒိတ်လုပ်ခြင်း
-- **Accessibility Audits**: ထည့်သွင်းအသုံးပြုနိုင်ရေး ဒီဇိုင်း နိယာမများအတွက် ပုံမှန် ပြန်လည်သုံးသပ်ခြင်း
+- **Automated Testing**: code နမူနာများနှင့် link များကို အလိုအလျောက် စစ်ဆေးခြင်း
+- **Community Feedback Integration**: အသုံးပြုသူ တောင်းဆိုချက်များကို ပုံမှန် တင်ပြထည့်သွင်းခြင်း
+- **Technology Updates**: နောက်ဆုံး Azure services နှင့် azd releases များနှင့် ကိုက်ညီစေရန် အဆက်မပြတ် သက်ဆိုင်မှု ထိန်းသိမ်းခြင်း
+- **Accessibility Audits**: ဝင်ရောက်လေ့လာသူများအတွက် အပြန်အလှန် ဒီဇိုင်းမူဝါဒများကို ပုံမှန် စစ်ဆေးခြင်း
 
 ## Version Support Policy
 
 ### Current Version Support
-- **Latest Major Version**: ပုံမှန် အပ်ဒိတ်များနှင့်အတူ အပြည့်အဝ ထောက်ပံ့မှု
-- **Previous Major Version**: လုံခြုံရေး အပ်ဒိတ်များနှင့် အရေးကြီး ပြင်ဆင်ချက်များကို ၁၂ လအတွင်း ပေးစီမံမှု
-- **Legacy Versions**: လူမှုပဲ ထောက်ပံ့မှုရှိပြီး တရားဝင် အပ်ဒိတ် မပေးပါ
+- **နောက်ဆုံး မေဂျာ ဗားရှင်း**: ပုံမှန် အပ်ဒိတ်များနှင့် အပြည့်အစုံ ပံ့ပိုးမှု
+- **ယခင် မေဂျာ ဗားရှင်း**: လုံခြုံရေး အပ်ဒိတ်များနှင့် အရေးကြီး ပြုပြင်ချက်များကို 12 လအထိ ပေးဆောင်မည်
+- **အဟောင်းဗားရှင်းများ**: အသိုင်းအဝိုင်းမှပဲ ပံ့ပိုးမှု ရရှိ하며 တရားဝင် အပ်ဒိတ် မရှိပါ
 
-### Migration Guidance
-When major versions are released, we provide:
-- **Migration Guides**: အဆင့်လိုက် ပြောင်းရွှေ့ခြင်း သို့မဟုတ် လမ်းညွှန်ချက်များ
-- **Compatibility Notes**: ချိုးဖျက်သည့် ပြောင်းလဲမှုများနှင့်ဆိုင်သော အသေးစိတ် အချက်အလက်များ
-- **Tool Support**: ပြောင်းရွှေ့မှုကို ကူညီပေးနိုင်သော script များ သို့မဟုတ် အသုံးဝင် ကိရိယာများ
-- **Community Support**: ပြောင်းရွှေ့မှု မေးခွန်းများအတွက် သီးသန့် ဖိုရမ်များ
+### လွှဲပြောင်း လမ်းညွှန်
+မေဂျာ ဗားရှင်းများ ထုတ်ပြန်သောအခါ၊ ကျွန်ုပ်တို့ပေးဆောင်သည့် အရာများ:
+- **လွှဲပြောင်း လမ်းညွှန်များ**: အဆင့်လိုက် လွှဲပြောင်းနည်း ညွှန်ကြားချက်များ
+- **ကိုက်ညီမှု မှတ်စုများ**: ကိုက်ညီမှုကို ပျက်စီးစေသော ပြောင်းလဲမှုများအကြောင်း အသေးစိတ်
+- **ကိရိယာ ပံ့ပိုးမှု**: လွှဲပြောင်းရာတွင် အကူအညီပေးရန် script များ သို့မဟုတ် utility များ
+- **အသိုင်းအဝိုင်း ပံ့ပိုးမှု**: လွှဲပြောင်းနှင့် ပတ်သက်သော မေးခွန်းများအတွက် အထူး ဖိုရမ်များ
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [လေ့လာမှု လမ်းညွှန်](resources/study-guide.md)
-- **Next Lesson**: ပြန်သွားရန် [အဓိက README](README.md)
+**လမ်းကြောင်း**
+- **ယခင် သင်ခန်းစာ**: [လေ့လာရေး လမ်းညွှန်](resources/study-guide.md)
+- **နောက်ထပ် သင်ခန်းစာ**: သို့ ပြန်သွားရန် [အဓိက README](README.md)
 
-**Stay Updated**: ဤ repository ကို ကြည့်ရှု၍ သင်ယူရေးပစ္စည်းများအတွက် ထုတ်ဝေမှုအသစ်များနှင့် အရေးကြီး အပ်ဒိတ်များအကြောင်း အသိပေးချက်များ ရရှိရန် ထိန်းလိုက်ပါ။
+**နောက်ဆုံးအချက်အလက်များကို သိရှိထားပါ**: ဒီ repository ကို စောင့်ကြည့်ပြီး ထုတ်ဝေမှုအသစ်များနှင့် သင်ယူရေးပစ္စည်းများဆိုင်ရာ အရေးကြီး အပ်ဒိတ်များအတွက် အသိပေးချက်များကို လက်ခံပါ။
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ကြေညာချက်**:
-စာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးစားသော်လည်း အလိုအလျောက် ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် မှန်ကန်မှုလျော့နည်းချက်များ ပါဝင်နိုင်ကြောင်း သတိပြုပါ။ မူလစာရွက်စာတမ်းကို ၎င်း၏ မူလဘာသာဖြင့် အကျိုးသက်ရောက်သော အရင်းအမြစ်အဖြစ် သတ်မှတ်စဉ်းစားသင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် လူ့ ပရော်ဖက်ရှင်နယ် ဘာသာပြန်သူအား အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းကြောင့် ဖြစ်ပေါ်လာသော နားလည်မှုချွတ်မြေ သို့မဟုတ် အဓိပ္ပါယ်အား ခွဲဝေပေါက်ဖွားမှုများအတွက် ကျွန်ုပ်တို့ တာဝန်မယူပါ။
+**Disclaimer**:
+ဤစာရွက်ကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးပမ်းသော်လည်း အလိုအလျောက် ဘာသာပြန်ခြင်းများတွင် အမှားများ သို့မဟုတ် တိကျမှုနည်းပါးမှုများ ပါဝင်နိုင်ကြောင်း သတိပြုပါ။ မူလစာရွက်ကို မူလဘာသာဖြင့် ရှိသည့် အကျိုးသက်ရောက်သော အရင်းအမြစ်အဖြစ် ယူဆသင့်ပါသည်။ အရေးပါတဲ့ သတင်းအချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူ့ဘာသာပြန်ကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်ကို အသုံးပြုမှုကြောင့် ဖြစ်ပေါ်လာနိုင်သော နားမလည်မှုများ သို့မဟုတ် အဓိပ္ပာယ်မှားယွင်းမှုများအတွက် ကျွန်ုပ်တို့ တာဝန်မယူပါ။
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

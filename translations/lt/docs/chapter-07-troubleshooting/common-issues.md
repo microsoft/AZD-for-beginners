@@ -1,87 +1,87 @@
-# Įprastos problemos ir sprendimai
+# Dažnos problemos ir sprendimai
 
-**Skirsnio navigacija:**
+**Skyriaus naršymas:**
 - **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
-- **📖 Dabartinis skyrius**: 7 skyrius - Trikčių šalinimas ir derinimas
-- **⬅️ Ankstesnis skyrius**: [6 skyrius: Parengiamieji patikrinimai](../chapter-06-pre-deployment/preflight-checks.md)
-- **➡️ Toliau**: [Derinimo vadovas](debugging.md)
-- **🚀 Sekantis skyrius**: [8 skyrius: Produkcijos ir įmonės modeliai](../chapter-08-production/production-ai-practices.md)
+- **📖 Dabartinis skyrius**: 7 skyrius – trikčių šalinimas ir derinimas
+- **⬅️ Ankstesnis skyrius**: [6 skyrius: Priešdiegančiosios patikros](../chapter-06-pre-deployment/preflight-checks.md)
+- **➡️ Kitas**: [Derinimo vadovas](debugging.md)
+- **🚀 Kitas skyrius**: [8 skyrius: Gamybos ir verslo modeliai](../chapter-08-production/production-ai-practices.md)
 
 ## Įvadas
 
-Šis išsamus trikčių šalinimo vadovas apima dažniausiai pasitaikančias problemas naudojant Azure Developer CLI. Išmokite diagnozuoti, šalinti gedimus ir spręsti įprastas problemas, susijusias su autentifikavimu, diegimu, infrastruktūros teikimu ir programų konfigūracija. Kiekviena problema apima simptomus, pagrindines priežastis ir žingsnis po žingsnio sprendimo procedūras.
+Ši išsami trikčių šalinimo vadovas apima dažniausiai pasitaikančias problemas naudojant Azure Developer CLI. Sužinokite, kaip diagnozuoti, šalinti ir spręsti dažniausiai pasitaikančias autentifikavimo, diegimo, infrastruktūros diegimo ir programos konfigūracijos problemas. Kiekviena problema apima detalius simptomus, priežastis ir žingsnis po žingsnio sprendimo procedūras.
 
 ## Mokymosi tikslai
 
-Baigę šį vadovą jūs:
-- Išmoksite diagnostikos metodų Azure Developer CLI problemoms
-- Suprasite dažnas autentifikavimo ir leidimų problemas bei jų sprendimus
-- Išspręsite diegimo klaidas, infrastruktūros teikimo problemas ir konfigūracijos sutrikimus
+Baigę šį vadovą, jūs:
+- Įvaldysite diagnostikos metodus Azure Developer CLI problemoms
+- Suprasite dažniausias autentifikacijos ir leidimų problemas bei jų sprendimus
+- Spręsite diegimo klaidas, infrastruktūros diegimo problemas ir konfigūracijos neatitikimus
 - Įgyvendinsite proaktyvų stebėjimą ir derinimo strategijas
-- Taikysite sistemines trikčių šalinimo metodikas sudėtingoms problemoms
-- Suconfiguruosite tinkamą žurnalavimą ir stebėjimą, kad išvengtumėte ateities problemų
+- Taikysite sistemingas trikčių šalinimo metodikas sudėtingoms problemoms
+- Konfigūruosite tinkamą žurnalo vedimą ir stebėjimą, kad išvengtumėte ateities problemų
 
 ## Mokymosi rezultatai
 
-Baigę mokymą gebėsite:
-- Diagnozuoti Azure Developer CLI problemas naudojant įmontuotus diagnostikos įrankius
-- Savarankiškai spręsti autentifikavimo, prenumeratos ir leidimų problemas
-- Efektyviai šalinti diegimo klaidas ir infrastruktūros teikimo klaidas
-- Derinti programų konfigūracijos problemas ir aplinkai būdingus sutrikimus
-- Įdiegti stebėjimą ir įspėjimus, kad proaktyviai nustatytumėte galimas problemas
-- Taikyti geriausias žurnalavimo, derinimo ir problemų sprendimo darbo eigas
+Baigę suprasite, kaip:
+- Diagnostikuoti Azure Developer CLI problemas naudojant įmontuotus diagnostikos įrankius
+- Savarankiškai spręsti autentifikacijos, prenumeratos ir leidimų problemas
+- Efektyviai šalinti diegimo klaidas ir infrastruktūros diegimo problemas
+- Derinti programos konfigūracijos problemas ir aplinkai būdingas klaidas
+- Įgyvendinti stebėjimą ir įspėjimus, kad proaktyviai nustatytumėte galimas problemas
+- Taikyti geriausias praktikas žurnalų vedimui, derinimui ir problemų sprendimo procesams
 
-## Greita diagnostika
+## Greitos diagnostikos komandos
 
-Prieš pereinant prie konkrečių problemų, paleiskite šias komandas, kad surinktumėte diagnostinę informaciją:
+Prieš pereidami prie konkrečių problemų, paleiskite šias komandas diagnostikos informacijai surinkti:
 
 ```bash
-# Patikrinti azd versiją ir būklę
+# Patikrinkite azd versiją ir būklę
 azd version
-azd config list
+azd config show
 
-# Patikrinti Azure autentifikaciją
+# Patvirtinkite Azure autentifikavimą
 az account show
 az account list
 
-# Patikrinti dabartinę aplinką
-azd env show
+# Patikrinkite dabartinę aplinką
+azd env list
 azd env get-values
 
-# Įgalinti derinimo žurnalavimą
+# Įjunkite derinimo žurnalus
 export AZD_DEBUG=true
 azd <command> --debug
 ```
 
-## Autentifikavimo problemos
+## Autentifikacijos problemos
 
-### Problema: "Failed to get access token"
+### Problema: „Nepavyko gauti prieigos rakto“
 **Simptomai:**
-- `azd up` nepavyksta dėl autentifikavimo klaidų
-- Komandos grąžina "unauthorized" arba "access denied"
+- `azd up` nepavyksta dėl autentifikacijos klaidų
+- Komandos grąžina „neautorizuota“ arba „prieiga uždrausta“
 
 **Sprendimai:**
 ```bash
-# 1. Prisijungti iš naujo naudojant Azure CLI
+# 1. Iš naujo autentifikuokitės su Azure CLI
 az login
 az account show
 
-# 2. Išvalyti talpykloje esančius kredencialus
+# 2. Išvalykite talpykloje saugomus prisijungimo duomenis
 az account clear
 az login
 
-# 3. Naudoti įrenginio kodo srautą (skirta sistemoms be grafinės aplinkos)
+# 3. Naudokite įrenginio kodo srautą (be galvutės sistemoms)
 az login --use-device-code
 
-# 4. Nustatyti konkrečią prenumeratą
+# 4. Nustatykite aiškią prenumeratą
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### Problema: "Insufficient privileges" diegimo metu
+### Problema: „Nepakankamos privilegijos“ diegimo metu
 **Simptomai:**
 - Diegimas nepavyksta dėl leidimų klaidų
-- Negalite sukurti tam tikrų Azure resursų
+- Negalima sukurti tam tikrų Azure išteklių
 
 **Sprendimai:**
 ```bash
@@ -89,13 +89,13 @@ azd config set defaults.subscription "your-subscription-id"
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
 # 2. Įsitikinkite, kad turite reikiamus vaidmenis
-# - Contributor (resursų kūrimui)
-# - User Access Administrator (vaidmenų priskyrimams)
+# - Dalyvis (resursų kūrimui)
+# - Vartotojo prieigos administratorius (vaidmenų priskyrimams)
 
-# 3. Susisiekite su savo Azure administratoriumi dėl tinkamų teisių
+# 3. Susisiekite su savo Azure administratoriumi dėl tinkamų leidimų
 ```
 
-### Problema: Daugnuominės (multi-tenant) autentifikavimo problemos
+### Problema: Daugiaklientė autentifikacija
 **Sprendimai:**
 ```bash
 # 1. Prisijunkite su konkrečiu nuomininku
@@ -104,16 +104,16 @@ az login --tenant "your-tenant-id"
 # 2. Nustatykite nuomininką konfigūracijoje
 azd config set auth.tenantId "your-tenant-id"
 
-# 3. Išvalykite nuomininko talpyklą, jei perjungiate nuomininkus
+# 3. Išvalykite nuomininko talpyklą, jei keičiami nuomininkai
 az account clear
 ```
 
-## 🏗️ Infrastruktūros teikimo klaidos
+## 🏗️ Infrastruktūros diegimo klaidos
 
-### Problema: Resursų pavadinimų konfliktai
+### Problema: Išteklių pavadinimų konfliktai
 **Simptomai:**
-- "The resource name already exists" klaidos
-- Diegimas nepavyksta kuriant resursus
+- „Išteklių pavadinimas jau egzistuoja“ klaidos
+- Diegimas nepavyksta kuriant išteklius
 
 **Sprendimai:**
 ```bash
@@ -129,39 +129,39 @@ azd env new my-app-dev-$(whoami)-$(date +%s)
 azd down --force --purge
 ```
 
-### Problema: Vieta/regionas nepasiekiamas
+### Problema: Vietovė/regionas nepasiekiamas
 **Simptomai:**
-- "The location 'xyz' is not available for resource type"
-- Tam tikri SKU neprieinami pasirinktoje regione
+- „Vietovė 'xyz' nepasiekiama šio tipo ištekliui“ klaida
+- Kai kurie SKU nesuteikiami pasirinktoje regione
 
 **Sprendimai:**
 ```bash
-# 1. Patikrinkite prieinamas vietas pagal išteklių tipus
+# 1. Patikrinkite, kokios vietovės yra prieinamos resursų tipams
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Naudokite dažniausiai prieinamus regionus
+# 2. Naudokite dažniausiai prieinamas sritis
 azd config set defaults.location eastus2
 # arba
 azd env set AZURE_LOCATION eastus2
 
-# 3. Patikrinkite paslaugų prieinamumą pagal regionus
+# 3. Patikrinkite paslaugos prieinamumą pagal sritį
 # Apsilankykite: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### Problema: Kvotos viršijimo klaidos
+### Problema: Viršytos kvotos klaidos
 **Simptomai:**
-- "Quota exceeded for resource type"
-- "Maximum number of resources reached"
+- „Viršyta kvota šiam išteklių tipui“ klaida
+- „Pasiektas maksimalus išteklių kiekis“
 
 **Sprendimai:**
 ```bash
-# 1. Patikrinkite dabartinį kvotos naudojimą
+# 1. Patikrinkite esamą kvotos naudojimą
 az vm list-usage --location eastus2 -o table
 
 # 2. Prašykite kvotos padidinimo per Azure portalą
-# Go to: Prenumeratos > Naudojimas ir kvotos
+# Eikite į: Prenumeratos > Naudojimas + kvotos
 
-# 3. Vystymui naudokite mažesnius SKU
+# 3. Naudokite mažesnius SKU kūrimui
 # Faile main.parameters.json:
 {
   "appServiceSku": {
@@ -169,27 +169,27 @@ az vm list-usage --location eastus2 -o table
   }
 }
 
-# 4. Pašalinkite nenaudojamus išteklius
+# 4. Išvalykite nenaudojamus išteklius
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
-### Problema: Bicep šablono klaidos
+### Problema: Bicep šablonų klaidos
 **Simptomai:**
-- Šablono validacijos klaidos
+- Šablonų patikros klaidos
 - Sintaksės klaidos Bicep failuose
 
 **Sprendimai:**
 ```bash
-# 1. Patikrinti Bicep sintaksę
+# 1. Patvirtinkite Bicep sintaksę
 az bicep build --file infra/main.bicep
 
-# 2. Naudoti Bicep linterį
+# 2. Naudokite Bicep linter'į
 az bicep lint --file infra/main.bicep
 
-# 3. Patikrinti parametrų failo sintaksę
+# 3. Patikrinkite parametro failo sintaksę
 cat infra/main.parameters.json | jq '.'
 
-# 4. Peržiūrėti diegimo pakeitimus
+# 4. Peržiūrėkite diegimo pakeitimus
 azd provision --preview
 ```
 
@@ -197,24 +197,24 @@ azd provision --preview
 
 ### Problema: Kūrimo klaidos
 **Simptomai:**
-- Programa nepavyksta sugeneruoti diegimo metu
-- Paketų įdiegimo klaidos
+- Programa nepavyksta sukurti diegimo metu
+- Paketo diegimo klaidos
 
 **Sprendimai:**
 ```bash
-# 1. Patikrinkite kūrimo išvestį su derinimo žyme
+# 1. Patikrinkite kūrimo rezultatą su derinimo žymekliu
 azd deploy --service web --debug
 
-# 2. Peržiūrėkite išdiegtos paslaugos būseną
+# 2. Peržiūrėkite išdiegto serviso būseną
 azd show
 
-# 3. Išbandykite kūrimą lokaliai
+# 3. Testuokite kūrimą lokaliai
 cd src/web
 npm install
 npm run build
 
 # 3. Patikrinkite Node.js/Python versijų suderinamumą
-node --version  # Turėtų atitikti azure.yaml nustatymus
+node --version  # Turi atitikti azure.yaml nustatymus
 python --version
 
 # 4. Išvalykite kūrimo talpyklą
@@ -226,34 +226,34 @@ docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Problema: Talpyklos (container) diegimo klaidos
+### Problema: Konteinerio diegimo klaidos
 **Simptomai:**
-- Container apps nepaleidžiami
-- Klaidos traukiant paveikslėlį (image pull errors)
+- Konteinerių programos nepaleidžiamos
+- Klaidos traukiant atvaizdą
 
 **Sprendimai:**
 ```bash
-# 1. Išbandykite Docker build lokaliai
+# 1. Išbandykite Docker kūrimą lokaliai
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
 # 2. Patikrinkite konteinerio žurnalus naudodami Azure CLI
 az containerapp logs show --name my-app --resource-group my-rg --follow
 
-# 3. Stebėkite programą naudodami azd
+# 3. Stebėkite programą per azd
 azd monitor --logs
 
 # 3. Patikrinkite prieigą prie konteinerių registro
 az acr login --name myregistry
 
-# 4. Patikrinkite konteinerio programos konfigūraciją
+# 4. Patikrinkite konteinerių programos konfigūraciją
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### Problema: Duomenų bazės prisijungimo klaidos
+### Problema: Duomenų bazės ryšio klaidos
 **Simptomai:**
 - Programa negali prisijungti prie duomenų bazės
-- Prisijungimo laiko išeigos klaidos (connection timeout errors)
+- Ryšio laiko išeigos klaidos
 
 **Sprendimai:**
 ```bash
@@ -261,10 +261,10 @@ az containerapp show --name my-app --resource-group my-rg
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
 # 2. Patikrinkite ryšį iš programos
-# Laikinai pridėkite į savo programą:
+# Laikinai pridėkite prie savo programos:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. Patikrinkite prisijungimo eilutės formatą
+# 3. Patikrinkite ryšio eilutės formatą
 azd env get-values | grep DATABASE
 
 # 4. Patikrinkite duomenų bazės serverio būseną
@@ -280,14 +280,14 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 **Sprendimai:**
 ```bash
-# 1. Patikrinkite, ar aplinkos kintamieji nustatyti
+# 1. Patikrinkite, ar nustatytos aplinkos kintamųjų reikšmės
 azd env get-values
 azd env get DATABASE_URL
 
 # 2. Patikrinkite kintamųjų pavadinimus faile azure.yaml
 cat azure.yaml | grep -A 5 env:
 
-# 3. Paleiskite programą iš naujo
+# 3. Perkraukite programą
 azd deploy --service web
 
 # 4. Patikrinkite programos paslaugos konfigūraciją
@@ -297,47 +297,47 @@ az webapp config appsettings list --name myapp --resource-group myrg
 ### Problema: SSL/TLS sertifikatų problemos
 **Simptomai:**
 - HTTPS neveikia
-- Sertifikato validacijos klaidos
+- Sertifikato patikros klaidos
 
 **Sprendimai:**
 ```bash
 # 1. Patikrinkite SSL sertifikato būseną
 az webapp config ssl list --resource-group myrg
 
-# 2. Įgalinkite tik HTTPS
+# 2. Įjungti tik HTTPS
 az webapp update --name myapp --resource-group myrg --https-only true
 
-# 3. Pridėkite pasirinktinį domeną (jei reikia)
+# 3. Pridėti pasirinktinius domenus (jei reikia)
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
 ### Problema: CORS konfigūracijos problemos
 **Simptomai:**
 - Frontendas negali kviesti API
-- Cross-origin užklausa blokuojama
+- Blokuojamas tarp kilmės prašymas
 
 **Sprendimai:**
 ```bash
-# 1. Konfigūruokite CORS App Service
+# 1. Sukonfigūruokite CORS App Service
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. Atnaujinkite API, kad tvarkytų CORS
-# Express.js aplinkoje:
+# 2. Atnaujinkite API, kad palaikytų CORS
+# Express.js:
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
 
-# 3. Patikrinkite, ar veikia teisinguose URL adresuose
+# 3. Patikrinkite, ar veikia tinkamuose URL adresuose
 azd show
 ```
 
 ## 🌍 Aplinkos valdymo problemos
 
-### Problema: Aplinkos keitimosi problemos
+### Problema: Aplinkos perjungimo problemos
 **Simptomai:**
 - Naudojama neteisinga aplinka
-- Konfigūracija nesikeičia tinkamai
+- Konfigūracija nepereinama tinkamai
 
 **Sprendimai:**
 ```bash
@@ -347,18 +347,18 @@ azd env list
 # 2. Aiškiai pasirinkti aplinką
 azd env select production
 
-# 3. Patikrinti dabartinę aplinką
-azd env show
+# 3. Patikrinti esamą aplinką
+azd env list
 
-# 4. Sukurti naują aplinką, jei ji sugadinta
+# 4. Sukurti naują aplinką, jei sugadinta
 azd env new production-new
 azd env select production-new
 ```
 
 ### Problema: Aplinkos sugadinimas
 **Simptomai:**
-- Aplinka rodo neleistiną būseną
-- Resursai neatitinka konfigūracijos
+- Aplinka rodo neteisingą būseną
+- Ištekliai neatitinka konfiguracijos
 
 **Sprendimai:**
 ```bash
@@ -367,62 +367,62 @@ azd env refresh
 
 # 2. Atstatyti aplinkos konfigūraciją
 azd env new production-reset
-# Nukopijuoti reikalingus aplinkos kintamuosius
+# Nukopijuoti reikiamus aplinkos kintamuosius
 azd env set DATABASE_URL "your-value"
 
 # 3. Importuoti esamus išteklius (jei įmanoma)
-# Rankiniu būdu atnaujinkite .azure/production/config.json su išteklių ID
+# Rankiniu būdu atnaujinti .azure/production/config.json su išteklių ID
 ```
 
 ## 🔍 Veikimo problemos
 
 ### Problema: Lėti diegimo laikai
 **Simptomai:**
-- Diegimai užtrunka per ilgai
-- Laiko išeigos diegimo metu
+- Diegimai trunka per ilgai
+- Diegimo metu laiko išeigos
 
 **Sprendimai:**
 ```bash
-# 1. Diegti konkrečias paslaugas greitesniam iteravimui
+# 1. Diegti specifines paslaugas greitesniam iteravimui
 azd deploy --service web
 azd deploy --service api
 
-# 2. Naudokite tik kodo diegimą, kai infrastruktūra nepasikeitė
+# 2. Naudokite tik kodo diegimą, kai infrastruktūra nesikeičia
 azd deploy  # Greičiau nei azd up
 
-# 3. Optimizuokite kūrimo procesą
+# 3. Optimizuoti kūrimo procesą
 # Faile package.json:
 "scripts": {
   "build": "webpack --mode=production --optimize-minimize"
 }
 
-# 4. Patikrinkite išteklių vietas (naudokite tą patį regioną)
+# 4. Patikrinti išteklių vietas (naudoti tą patį regioną)
 azd config set defaults.location eastus2
 ```
 
-### Problema: Programos veikimo sutrikimai
+### Problema: Programos veikimo problemos
 **Simptomai:**
-- Lėtas atsakymo laikas
-- Aukštas resursų panaudojimas
+- Lėti atsako laikai
+- Didelis išteklių naudojimas
 
 **Sprendimai:**
 ```bash
-# 1. Padidinti išteklius
+# 1. Padidinkite išteklius
 # Atnaujinkite SKU faile main.parameters.json:
 "appServiceSku": {
   "value": "S2"  // Scale up from B1
 }
 
-# 2. Įgalinti Application Insights stebėjimą
+# 2. Įgalinkite Application Insights stebėjimą
 azd monitor --overview
 
 # 3. Patikrinkite programos žurnalus Azure
 az webapp log tail --name myapp --resource-group myrg
-# arba Container Apps atvejui:
+# arba konteinerių programoms:
 az containerapp logs show --name myapp --resource-group myrg --follow
 
-# 4. Įdiegti kešavimą
-# Pridėkite Redis talpyklą prie savo infrastruktūros
+# 4. Įgyvendinkite kešavimą
+# Pridėkite Redis kešą į savo infrastruktūrą
 ```
 
 ## 🛠️ Trikčių šalinimo įrankiai ir komandos
@@ -436,8 +436,8 @@ azd up --debug 2>&1 | tee debug.log
 # Patikrinti azd versiją
 azd version
 
-# Peržiūrėti dabartinę konfigūraciją
-azd config list
+# Peržiūrėti esamą konfigūraciją
+azd config show
 
 # Patikrinti ryšį
 curl -v https://myapp.azurewebsites.net/health
@@ -448,23 +448,23 @@ curl -v https://myapp.azurewebsites.net/health
 # Programos žurnalai per Azure CLI
 az webapp log tail --name myapp --resource-group myrg
 
-# Stebėkite programą naudodami azd
+# Stebėkite programą su azd
 azd monitor --logs
 azd monitor --live
 
 # Azure išteklių žurnalai
 az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
 
-# Konteinerių žurnalai (Container Apps)
+# Konteinerio žurnalai (konteinerių programoms)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
-### Resursų tyrimas
+### Išteklių tyrimas
 ```bash
-# Išvardinti visus išteklius
+# Išvardinkite visus išteklius
 az resource list --resource-group myrg -o table
 
-# Patikrinti išteklių būseną
+# Patikrinkite ištekliaus būseną
 az webapp show --name myapp --resource-group myrg --query state
 
 # Tinklo diagnostika
@@ -474,36 +474,36 @@ az network watcher test-connectivity --source-resource myvm --dest-address myapp
 ## 🆘 Papildoma pagalba
 
 ### Kada eskaluoti
-- Autentifikavimo problemos neišsprendžiamos pasinaudojus visais sprendimais
+- Autentifikacijos problemos išlieka po visų sprendimų bandymo
 - Infrastruktūros problemos su Azure paslaugomis
-- Sąskaitų arba prenumeratos susijusios problemos
-- Saugumo klausimai arba incidentai
+- Mokėjimų ar prenumeratos problemos
+- Saugumo klausimai ar incidentai
 
-### Palaikymo kanalai
+### Pagalbos kanalai
 ```bash
 # 1. Patikrinkite Azure paslaugų būklę
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
 # 2. Sukurkite Azure palaikymo užklausą
-# Eikite į: https://portal.azure.com -> Pagalba ir palaikymas
+# Eikite į: https://portal.azure.com -> Pagalba + palaikymas
 
 # 3. Bendruomenės ištekliai
-# - Stack Overflow: žyma azure-developer-cli
-# - GitHub Issues: https://github.com/Azure/azure-dev/issues
+# - Stack Overflow: azure-developer-cli žyma
+# - GitHub klausimai: https://github.com/Azure/azure-dev/issues
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
-### Informacija, kurią reikia surinkti
-Prieš kreipiantis į palaikymą, surinkite:
-- `azd version` išvestis
-- `azd config list` išvestis
-- `azd show` išvestis (dabartinė diegimo būsena)
-- Klaidų pranešimai (pilnas tekstas)
-- Veiksmų sekos, kaip atkurti problemą
-- Aplinkos detalės (`azd env show`)
-- Laiko juosta, kada problema prasidėjo
+### Informacija, kurią surinkti
+Prieš kreipiantis į pagalbą, surinkite:
+- `azd version` išvestį
+- `azd config show` išvestį
+- `azd show` išvestį (dabartinės diegimo būsenos)
+- Klaidų pranešimus (visą tekstą)
+- Žingsnius problemos atkartojimui
+- Aplinkos duomenis (`azd env get-values`)
+- Laiko juostą, kada problema prasidėjo
 
-### Žurnalų rinkimo skriptas
+### Žurnalų rinkimo scenarijus
 ```bash
 #!/bin/bash
 # collect-debug-info.sh
@@ -516,8 +516,8 @@ azd version >> debug-logs/system-info.txt
 az --version >> debug-logs/system-info.txt
 
 echo "Configuration:" > debug-logs/config.txt
-azd config list >> debug-logs/config.txt
-azd env show >> debug-logs/config.txt
+azd config show >> debug-logs/config.txt
+azd env list >> debug-logs/config.txt
 azd env get-values >> debug-logs/config.txt
 
 echo "Current deployment status:" > debug-logs/status.txt
@@ -528,7 +528,7 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 Problemų prevencija
 
-### Priešdiegimo kontrolinis sąrašas
+### Priešdiegančių patikrinimo sąrašas
 ```bash
 # 1. Patikrinti autentifikaciją
 az account show
@@ -539,18 +539,18 @@ az vm list-usage --location eastus2
 # 3. Patikrinti šablonus
 az bicep build --file infra/main.bicep
 
-# 4. Pirmiausia išbandykite lokaliai
+# 4. Iš pradžių išbandyti lokaliai
 npm run build
 npm run test
 
-# 5. Naudoti bandomuosius diegimus
+# 5. Naudoti „sauso paleidimo“ diegimus
 azd provision --preview
 ```
 
-### Stebėjimo nustatymas
+### Stebėjimo konfigūracija
 ```bash
-# Įjungti Application Insights
-# Pridėti į main.bicep:
+# Įgalinti Application Insights
+# Pridėti prie main.bicep:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
@@ -563,38 +563,38 @@ az monitor metrics alert create \
   --condition "avg Percentage CPU > 80"
 ```
 
-### Reguliari priežiūra
+### Reguliarus priežiūra
 ```bash
-# Savaitiniai sveikatos patikrinimai
+# Savaitinės sveikatos patikros
 ./scripts/health-check.sh
 
-# Mėnesinė išlaidų peržiūra
+# Mėnesio sąnaudų peržiūra
 az consumption usage list --billing-period-name 202401
 
-# Ketvirtinė saugumo peržiūra
+# Ketvirtinės saugumo peržiūros
 az security assessment list --resource-group myrg
 ```
 
 ## Susiję ištekliai
 
-- [Derinimo vadovas](debugging.md) - Išplėstinės derinimo technikos
-- [Resursų teikimas](../chapter-04-infrastructure/provisioning.md) - Infrastruktūros trikčių šalinimas
-- [Talpos planavimas](../chapter-06-pre-deployment/capacity-planning.md) - Gairės resursų planavimui
-- [SKU pasirinkimas](../chapter-06-pre-deployment/sku-selection.md) - Paslaugų lygio rekomendacijos
+- [Derinimo vadovas](debugging.md) – pažangios derinimo technikos
+- [Išteklių diegimas](../chapter-04-infrastructure/provisioning.md) – infrastruktūros trikčių šalinimas
+- [Talpos planavimas](../chapter-06-pre-deployment/capacity-planning.md) – išteklių planavimo gairės
+- [SKU pasirinkimas](../chapter-06-pre-deployment/sku-selection.md) – paslaugų lygio rekomendacijos
 
 ---
 
-**Patarimas**: Laikykite šį vadovą pažymėtą ir kreipkitės į jį kiekvieną kartą, kai susiduriate su problemomis. Dauguma problemų jau buvo matytos anksčiau ir turi nustatytus sprendimus!
+**Patartina**: Išsaugokite šį vadovą žymėje ir naudokitės juo susidūrę su problemomis. Dauguma klaidų jau yra žinomos ir turi įprastus sprendimus!
 
 ---
 
-**Navigacija**
-- **Ankstesnis pamokas**: [Resursų teikimas](../chapter-04-infrastructure/provisioning.md)
-- **Tolimesnė pamoka**: [Derinimo vadovas](debugging.md)
+**Naršymas**
+- **Ankstesnė pamoka**: [Išteklių diegimas](../chapter-04-infrastructure/provisioning.md)
+- **Kita pamoka**: [Derinimo vadovas](debugging.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Atsakomybės apribojimas**:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, atkreipkite dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neatsakome už jokius nesusipratimus ar neteisingus aiškinimus, kilusius dėl šio vertimo naudojimo.
+**Atsakomybės apribojimas**:  
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama pasitelkti profesionalų žmogaus vertimą. Mes neatsakome už bet kokius nesusipratimus ar klaidingus aiškinimus, kilusius naudojantis šiuo vertimu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

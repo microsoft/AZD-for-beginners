@@ -1,21 +1,23 @@
-# Skyrius 8: Gamyba ir įmonių modeliai
+# 8 skyrius: Gamybos ir Įmonių Šablonai
 
-**📚 Kursas**: [AZD pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 2-3 valandos | **⭐ Sudėtingumas**: Pažengęs
+**📚 Kursas**: [AZD Pradedantiesiems](../../README.md) | **⏱️ Trukmė**: 2-3 valandos | **⭐ Sudėtingumas**: Pažengęs
 
 ---
 
 ## Apžvalga
 
-Šis skyrius apima įmonėms tinkamus diegimo modelius, saugumo sustiprinimą, stebėjimą ir sąnaudų optimizavimą gamybos AI darbo krūviams.
+Šiame skyriuje apžvelgiami įmonėms pritaikyti diegimo šablonai, saugumo stiprinimas, stebėjimas ir išlaidų optimizavimas gamybos AI darbo krūviams.
+
+> Patikrinta su `azd 1.23.12` 2026 m. kovą.
 
 ## Mokymosi tikslai
 
 Baigę šį skyrių, jūs:
-- Diegti kelių regionų atsparias programas
-- Įdiegti įmonės saugumo modelius
-- Konfigūruoti visapusišką stebėjimą
-- Optimizuoti sąnaudas dideliu mastu
-- Nustatyti CI/CD vamzdynus su AZD
+- Įdiegsite atsparias daugregionines programas
+- Įgyvendinsite įmonių saugumo šablonus
+- Suprasite išsamų stebėjimą
+- Optimizuosite išlaidas dideliu mastu
+- Nustatysite CI/CD procesus su AZD
 
 ---
 
@@ -23,37 +25,37 @@ Baigę šį skyrių, jūs:
 
 | # | Pamoka | Aprašymas | Laikas |
 |---|--------|-----------|--------|
-| 1 | [Gamybinės AI praktikos](production-ai-practices.md) | Įmonės diegimo modeliai | 90 min |
+| 1 | [Gamybos AI praktikos](production-ai-practices.md) | Įmonių diegimo šablonai | 90 min |
 
 ---
 
 ## 🚀 Gamybos kontrolinis sąrašas
 
-- [ ] Daugių regionų diegimas dėl atsparumo
-- [ ] Valdomas identitetas autentifikacijai (be raktų)
+- [ ] Daugregionis diegimas atsparumui užtikrinti
+- [ ] Valdomos tapatybės autentifikacijai (be raktų)
 - [ ] Application Insights stebėjimui
-- [ ] Sąnaudų biudžetai ir įspėjimai sukonfigūruoti
-- [ ] Saugumo skenavimas įgalintas
-- [ ] CI/CD vamzdynų integracija
-- [ ] Avarinio atkūrimo planas
+- [ ] Išlaidų biudžetai ir įspėjimai sukonfigūruoti
+- [ ] Įjungtas saugumo skenavimas
+- [ ] CI/CD proceso integracija
+- [ ] Atsarginių kopijų atkūrimo planas
 
 ---
 
-## 🏗️ Architektūros modeliai
+## 🏗️ Architektūros šablonai
 
-### Modelis 1: Mikroservisų AI
+### Šablonas 1: Mikroservisų AI
 
 ```mermaid
 graph LR
-    Gateway[API vartai] --> AI[DI paslauga] --> Models[Microsoft Foundry modeliai]
-    Gateway --> Auth[Autentifikavimo paslauga]
-    AI --> Data[Duomenų saugykla]
+    Gateway[API Vartai] --> AI[DI Paslauga] --> Models[Microsoft Foundry Modeliai]
+    Gateway --> Auth[Autentifikavimo Paslauga]
+    AI --> Data[Duomenų Saugykla]
 ```
-### Modelis 2: Įvykių valdomas AI
+### Šablonas 2: Įvykių varoma AI
 
 ```mermaid
 graph LR
-    EventGrid[Įvykių tinklas] --> Functions[Funkcijos] --> Pipeline[DI srautas]
+    EventGrid[Įvykių Tinklas] --> Functions[Funkcijos] --> Pipeline[DI Vamzdis]
 ```
 ---
 
@@ -76,13 +78,13 @@ properties: {
 
 ---
 
-## 💰 Sąnaudų optimizavimas
+## 💰 Išlaidų optimizavimas
 
 | Strategija | Sutaupymai |
-|----------|---------|
-| Mastelis iki nulio (Container Apps) | 60-80% |
-| Naudoti vartojimo lygmenis kūrimo aplinkai | 50-70% |
-| Planuotas mastelio keitimas | 30-50% |
+|------------|------------|
+| Skalavimas iki nulio (Container Apps) | 60-80% |
+| Naudojimas vartojimo lygiams kūrimui | 50-70% |
+| Grafikuotas skalavimas | 30-50% |
 | Rezervuota talpa | 20-40% |
 
 ```bash
@@ -99,11 +101,11 @@ az consumption budget create \
 ## 📊 Stebėjimo nustatymas
 
 ```bash
-# Transliuoti žurnalus
+# Srautiniai žurnalai
 azd monitor --logs
 
-# Patikrinti Application Insights
-azd monitor
+# Patikrinkite Application Insights
+azd monitor --overview
 
 # Peržiūrėti metrikas
 az monitor metrics list --resource <resource-id>
@@ -114,9 +116,9 @@ az monitor metrics list --resource <resource-id>
 ## 🔗 Navigacija
 
 | Kryptis | Skyrius |
-|-----------|---------|
+|---------|---------|
 | **Ankstesnis** | [7 skyrius: Gedimų šalinimas](../chapter-07-troubleshooting/README.md) |
-| **Kursas baigtas** | [Kurso pradžia](../../README.md) |
+| **Kurso pabaiga** | [Kurso Pradžia](../../README.md) |
 
 ---
 
@@ -124,12 +126,12 @@ az monitor metrics list --resource <resource-id>
 
 - [AI agentų vadovas](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Daugių agentų sprendimai](../chapter-05-multi-agent/README.md)
+- [Daugiagentiniai sprendimai](../chapter-05-multi-agent/README.md)
 - [Mikroservisų pavyzdys](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Atsakomybės apribojimas**:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl kritinės informacijos rekomenduojamas profesionalus, žmogaus atliktas vertimas. Mes neatsakome už jokius nesusipratimus ar neteisingus aiškinimus, kilusius dėl šio vertimo naudojimo.
+**Atsakomybės apribojimas**:  
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Pradinė dokumento versija jo gimtąja kalba yra laikoma autoritetingu šaltiniu. Svarbiai informacijai rekomenduojama rinktis profesionalų žmogaus vertimą. Mes neatsakome už bet kokius nesusipratimus ar neteisingus aiškinimus, kilusius dėl šio vertimo naudojimo.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,43 +1,43 @@
-# Розгортання ресурсів Azure за допомогою AZD
+# Забезпечення ресурсів Azure за допомогою AZD
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD для початківців](../../README.md)
-- **📖 Current Chapter**: Глава 4 - Інфраструктура як код та розгортання
-- **⬅️ Previous**: [Посібник з розгортання](deployment-guide.md)
-- **➡️ Next Chapter**: [Глава 5: Мультиагентні AI-рішення](../../examples/retail-scenario.md)
-- **🔧 Related**: [Глава 6: Перевірка перед розгортанням](../chapter-06-pre-deployment/capacity-planning.md)
+**Навігація по розділах:**
+- **📚 Головна сторінка курсу**: [AZD For Beginners](../../README.md)
+- **📖 Поточний розділ**: Розділ 4 - Інфраструктура як код і розгортання
+- **⬅️ Попередній**: [Посібник з розгортання](deployment-guide.md)
+- **➡️ Наступний розділ**: [Розділ 5: Багатоагентні AI-рішення](../../examples/retail-scenario.md)
+- **🔧 Пов’язано з**: [Розділ 6: Валідація перед розгортанням](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Вступ
 
-Цей вичерпний посібник охоплює все, що потрібно знати про розгортання та управління ресурсами Azure за допомогою Azure Developer CLI. Навчіться впроваджувати шаблони Infrastructure as Code (IaC) — від базового створення ресурсів до розвинених корпоративних архітектур інфраструктури, використовуючи Bicep, ARM templates, Terraform та Pulumi.
+Цей детальний посібник охоплює все, що потрібно знати про забезпечення та керування ресурсами Azure за допомогою Azure Developer CLI. Навчіться впроваджувати патерни Infrastructure as Code (IaC) від базового створення ресурсів до складних архітектур корпоративного рівня за допомогою Bicep, ARM шаблонів, Terraform та Pulumi.
 
-## Цілі навчання
+## Мета навчання
 
-By completing this guide, you will:
-- Опановати принципи Infrastructure as Code і розгортання ресурсів Azure
-- Зрозуміти кількох провайдерів IaC, які підтримує Azure Developer CLI
-- Проєктувати та реалізовувати шаблони Bicep для типових архітектур додатків
-- Налаштовувати параметри ресурсів, змінні та параметри, специфічні для середовища
-- Реалізувати просунуті шаблони інфраструктури, включно з мережами та безпекою
-- Керувати життєвим циклом ресурсів, оновленнями і вирішенням залежностей
+Після проходження цього посібника ви:
+- Опануєте принципи Infrastructure as Code та забезпечення ресурсів Azure
+- Зрозумієте кілька провайдерів IaC, підтримуваних Azure Developer CLI
+- Розробите та впровадите Bicep шаблони для типових архітектур додатків
+- Налаштуєте параметри ресурсів, змінні та специфічні для середовища налаштування
+- Впровадите складні патерни інфраструктури, включно з мережею та безпекою
+- Керуєте життєвим циклом ресурсів, оновленнями та розв’язанням залежностей
 
 ## Результати навчання
 
 Після завершення ви зможете:
-- Проєктувати та розгортати інфраструктуру Azure за допомогою Bicep та ARM templates
-- Налаштовувати складні мультисервісні архітектури з коректними залежностями між ресурсами
-- Реалізувати параметризовані шаблони для декількох середовищ та конфігурацій
-- Усувати проблеми розгортання інфраструктури та вирішувати збої при розгортанні
-- Застосовувати принципи Azure Well-Architected Framework при проєктуванні інфраструктури
+- Проєктувати та забезпечувати інфраструктуру Azure за допомогою Bicep та ARM шаблонів
+- Налаштовувати складні багатосервісні архітектури з коректними залежностями ресурсів
+- Впроваджувати параметризовані шаблони для різних середовищ та конфігурацій
+- Вирішувати проблеми забезпечення інфраструктури та усувати помилки розгортання
+- Застосовувати принципи Azure Well-Architected Framework для проєктування інфраструктури
 - Керувати оновленнями інфраструктури та впроваджувати стратегії версіонування інфраструктури
 
-## Огляд розгортання інфраструктури
+## Огляд забезпечення інфраструктури
 
 Azure Developer CLI підтримує кілька провайдерів Infrastructure as Code (IaC):
-- **Bicep** (recommended) - доменно-специфічна мова Azure
-- **ARM Templates** - JSON-based Azure Resource Manager templates
-- **Terraform** - інструмент для інфраструктури в мультихмарних середовищах
-- **Pulumi** - сучасна infrastructure as code з використанням мов програмування
+- **Bicep** (рекомендовано) — доменоспецифічна мова Azure
+- **ARM Templates** — шаблони Azure Resource Manager на основі JSON
+- **Terraform** — інструмент для мультихмарної інфраструктури
+- **Pulumi** — сучасна інфраструктура як код з використанням мов програмування
 
 ## Розуміння ресурсів Azure
 
@@ -49,16 +49,16 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Поширені сервіси Azure для додатків
-- **Compute**: App Service, Container Apps, Functions, Virtual Machines
-- **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Networking**: Virtual Network, Application Gateway, CDN
-- **Security**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
+### Загальні служби Azure для додатків
+- **Обчислення**: App Service, Container Apps, Functions, Віртуальні машини
+- **Сховище**: Обліковий запис сховища, Cosmos DB, SQL Database, PostgreSQL
+- **Мережа**: Віртуальна мережа, Application Gateway, CDN
+- **Безпека**: Key Vault, Application Insights, Log Analytics
+- **AI/ML**: Cognitive Services, OpenAI, Машинне навчання
 
 ## Шаблони інфраструктури Bicep
 
-### Базова структура шаблону Bicep
+### Базова структура Bicep шаблону
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -128,7 +128,7 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Розвинені шаблони Bicep
+### Розвинені патерни Bicep
 
 #### Модульна інфраструктура
 ```bicep
@@ -200,7 +200,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Розгортання баз даних
+## 🗃️ Забезпечення баз даних
 
 ### Cosmos DB
 ```bicep
@@ -298,7 +298,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Управління безпекою та секретами
+## 🔒 Безпека та керування секретами
 
 ### Інтеграція з Key Vault
 ```bicep
@@ -342,7 +342,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Налаштування керованих ідентичностей
+### Налаштування керованої ідентичності
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -527,7 +527,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Користувацькі метрики та сповіщення
+### Користувацькі метрики та оповіщення
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -561,7 +561,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Налаштування, специфічні для середовищ
+## 🔧 Налаштування для конкретних середовищ
 
 ### Файли параметрів для різних середовищ
 ```json
@@ -617,7 +617,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Умовне розгортання ресурсів
+### Умовне забезпечення ресурсів
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,7 +649,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Просунуті шаблони розгортання
+## 🚀 Просунуті патерни забезпечення
 
 ### Розгортання в кількох регіонах
 ```bicep
@@ -755,42 +755,41 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 Перегляд та перевірка інфраструктури (НОВЕ)
+## 🧪 Попередній перегляд та валідація інфраструктури (НОВИНКА)
 
-### Попередній перегляд змін інфраструктури перед розгортанням
+### Перегляд змін інфраструктури перед розгортанням
 
-The `azd provision --preview` feature lets you **simulate infrastructure provisioning** before actually deploying resources. It's similar in spirit to `terraform plan` or `bicep what-if`, giving you a **dry-run view** of what changes would be made to your Azure environment.
+Функція `azd provision --preview` дозволяє **симулювати забезпечення інфраструктури** перед фактичним розгортанням ресурсів. Вона схожа на `terraform plan` або `bicep what-if`, даючи вам **перегляд без внесення змін**, що буде застосовано до вашого середовища Azure.
 
-#### 🛠️ Що це робить
-- **Аналізує ваші IaC-шаблони** (Bicep або Terraform)
+#### 🛠️ Що робить ця функція
+- **Аналізує ваші IaC шаблони** (Bicep або Terraform)
 - **Показує попередній перегляд змін ресурсів**: додавання, видалення, оновлення
-- **Не застосовує зміни** — режим лише для читання і безпечний для запуску
+- **Не застосовує зміни** — це тільки для читання і безпечно запускати
 
-#### � Варіанти використання
+#### Варіанти використання
 ```bash
-# Попередній перегляд змін інфраструктури перед розгортанням
+# Переглянути зміни в інфраструктурі перед розгортанням
 azd provision --preview
 
-# Попередній перегляд з детальним виводом
-azd provision --preview --output json
-
-# Попередній перегляд для конкретного середовища
-azd provision --preview --environment production
+# Перегляд для конкретного середовища
+azd provision --preview -e production
 ```
 
-This command helps you:
-- **Перевіряти зміни інфраструктури** перед фіксацією ресурсів
-- **Виявляти некоректні конфігурації на ранніх етапах розробки**
-- **Безпечно співпрацювати** в командному середовищі
-- **Гарантувати розгортання з найменшими привілеями** без несподіванок
+Ця команда допомагає:
+- **Перевірити зміни інфраструктури** перед фіксацією ресурсів
+- **Виявити помилки налаштувань на ранніх стадіях** розробки
+- **Безпечно співпрацювати** у командному середовищі
+- **Забезпечити мінімальні права доступу** без несподіванок
 
-It's especially useful when:
-- Працюєте зі складними мультисервісними середовищами
-- Вносите зміни до продуктивної інфраструктури
-- Перевіряєте зміни шаблонів перед затвердженням PR
-- Навчаєте нових членів команди шаблонам інфраструктури
+Особливо корисна, коли:
+- Працюєте з комплексними багатосервісними середовищами
+- Вносите зміни в продуктивну інфраструктуру
+- Перевіряєте модифікації шаблонів перед затвердженням PR
+- Навчаєте нових членів команди патернам інфраструктури
 
 ### Приклад виводу попереднього перегляду
+Точний вивід попереднього перегляду залежить від провайдера та структури проєкту, але результат повинен чітко ідентифікувати запропоновані зміни до їх застосування.
+
 ```bash
 $ azd provision --preview
 
@@ -809,24 +808,23 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
 ```
 
-## �🔄 Оновлення ресурсів та міграції
+## �🔄 Оновлення та міграції ресурсів
 
 ### Безпечні оновлення ресурсів
 ```bash
-# Спочатку перегляньте зміни інфраструктури (РЕКОМЕНДУЄТЬСЯ)
+# Спочатку перегляньте зміни в інфраструктурі (РЕКОМЕНДОВАНО)
 azd provision --preview
 
-# Застосуйте зміни після підтвердження перегляду
+# Застосовуйте зміни після підтвердження перегляду
 azd provision --confirm-with-no-prompt
 
-# Для відкату використовуйте Git, щоб скасувати зміни інфраструктури:
-git revert HEAD  # Відкотити останній коміт інфраструктури
+# Для відкату використовуйте Git, щоб скасувати зміни в інфраструктурі:
+git revert HEAD  # Скасувати останній коміт інфраструктури
 azd provision    # Застосувати попередній стан інфраструктури
 ```
 
@@ -861,7 +859,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🎯 Кращі практики
 
-### 1. Конвенції найменування ресурсів
+### 1. Умови найменування ресурсів
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -872,7 +870,7 @@ var naming = {
 }
 ```
 
-### 2. Стратегія тегування
+### 2. Стратегія позначок
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -918,27 +916,27 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Наступні кроки
 
-- [Планування перед розгортанням](../chapter-06-pre-deployment/capacity-planning.md) - Перевірити доступність ресурсів
-- [Поширені проблеми](../chapter-07-troubleshooting/common-issues.md) - Усунення проблем інфраструктури
-- [Посібник з налагодження](../chapter-07-troubleshooting/debugging.md) - Налагодження проблем розгортання
-- [Вибір SKU](../chapter-06-pre-deployment/sku-selection.md) - Обрати відповідні рівні сервісу
+- [Планування перед розгортанням](../chapter-06-pre-deployment/capacity-planning.md) - Перевірка доступності ресурсів
+- [Типові проблеми](../chapter-07-troubleshooting/common-issues.md) - Усунення проблем інфраструктури
+- [Посібник з налагодження](../chapter-07-troubleshooting/debugging.md) - Налагодження проблем забезпечення
+- [Вибір SKU](../chapter-06-pre-deployment/sku-selection.md) - Вибір відповідних рівнів сервісів
 
 ## Додаткові ресурси
 
 - [Документація Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Шаблони Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [Центр архітектури Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Фреймворк Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Посібник з розгортання](deployment-guide.md)
-- **Next Lesson**: [Планування ємності](../chapter-06-pre-deployment/capacity-planning.md)
+**Навігація**
+- **Попередній урок**: [Посібник з розгортання](deployment-guide.md)
+- **Наступний урок**: [Планування потужностей](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Відмова від відповідальності:
-Цей документ було перекладено з використанням сервісу автоматичного перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, зверніть увагу, що автоматизовані переклади можуть містити помилки або неточності. Оригінальний документ мовою оригіналу слід вважати авторитетним джерелом. Для критично важливої інформації рекомендується професійний переклад, виконаний людиною. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникли внаслідок використання цього перекладу.
+**Відмова від відповідальності**:  
+Цей документ було перекладено за допомогою сервісу автоматичного перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, будь ласка, майте на увазі, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ рідною мовою слід вважати авторитетним джерелом. Для критично важливої інформації рекомендується звертатися до професійного людського перекладу. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникли внаслідок використання цього перекладу.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

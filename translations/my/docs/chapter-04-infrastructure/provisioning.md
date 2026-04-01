@@ -1,45 +1,45 @@
-# AZD ဖြင့် Azure အရင်းအမြစ်များ ပံ့ပိုးခြင်း
+# AZD ဖြင့် Azure အရင်းအမြစ်များ ဖန်တီးခြင်း
 
 **Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: အခန်း 4 - Infrastructure as Code နှင့် Deployment
-- **⬅️ Previous**: [Deployment Guide](deployment-guide.md)
-- **➡️ Next Chapter**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
-- **🔧 Related**: [Chapter 6: Pre-Deployment Validation](../chapter-06-pre-deployment/capacity-planning.md)
+- **📚 Course Home**: [AZD စတင်လေ့လာသူများအတွက်](../../README.md)
+- **📖 Current Chapter**: အခန်း 4 - Infrastructure as Code & Deployment
+- **⬅️ Previous**: [တပ်ဆင်ခြင်း လမ်းညွှန်](deployment-guide.md)
+- **➡️ Next Chapter**: [အခန်း 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+- **🔧 Related**: [အခန်း 6: Pre-Deployment Validation](../chapter-06-pre-deployment/capacity-planning.md)
 
-## အမိန့်မိတ်ဆက်
+## နိဒါန်း
 
-ဤစုံလင်သောလမ်းညွှန်မှာ Azure Developer CLI ကို အသုံးပြုပြီး Azure အရင်းအမြစ်များကို ပံ့ပိုးခြင်းနှင့် စီမံခန့်ခွဲခြင်းအကြောင်း အားလုံးကို ဖုံးလွှမ်းပေးသည်။ Bicep၊ ARM templates၊ Terraform၊ နှင့် Pulumi တို့ကို အသုံးပြုပြီး မူလ အရင်းအမြစ်ဖန်တီးမှုမှ စ၍ စီးပွားရေးအဆင့်မြင့် အဆောက်အအုံပုံစံများထိ Infrastructure as Code (IaC) နည်းလမ်းများကို အကောင်အထည်ဖော်ခြင်းကို လေ့လာပါ။
+ဤ လမ်းညွှန်စာရွက်သည် Azure Developer CLI ကို အသုံးပြုပြီး Azure အရင်းအမြစ်များကို ဖန်တီး၊ စီမံခန့်ခွဲခြင်းနှင့် ပတ်သက်၍ လိုအပ်သည့် အချက်အလက်များအားလုံးကို လေ့လာပေးပါသည်။ Bicep၊ ARM templates၊ Terraform နှင့် Pulumi တို့ကို အသုံးပြု၍ အခြေခံအရင်းအမြစ် ဖန်တီးခြင်းမှ စ၍ လုပ်ငန်းအဆင့်မြင့် အင်ဖရာစထပ်ဖွဲ့စည်းမှုများထိ Infrastructure as Code (IaC) ပုံစံများကို အကောင်အထည်ဖော်နိုင်ရန် သင်ယူပါ။
 
-## သင်ယူရန် ရည်ရွယ်ချက်များ
+## သင်ယူရမည့် ရည်မှန်းချက်များ
 
-ဤလမ်းညွှန်ကို ပြီးမြောက်စေပါက သင်သည်:
-- Infrastructure as Code သဘောတရားများနှင့် Azure အရင်းအမြစ် ပံ့ပိုးခြင်းကို ကျွမ်းကျင်စွာ လေ့လာနိုင်ပါမည်
-- Azure Developer CLI က ထောက်ပံ့သည့် အမျိုးမျိုးသော IaC ပံ့ပိုးသူများကို နားလည်နိုင်မည်
-- စေ့စပ်သော application architecture များအတွက် Bicep template များကို ဒီဇိုင်းရေးဆွဲ၍ တည်ဆောက်နိုင်မည်
-- resource parameters၊ variables နှင့် ပတ်ဝန်းကျင်အလိုက် ချိန်ညှိမှုများကို ဖွဲ့စည်းနိုင်မည်
-- ကွန်ယက်နှင့် လုံခြုံရေး အပါအဝင် အဆင့်မြင့် အင်ဖရာစထိတ်ပုံစံများကို အကောင်အထည်ဖော်နိုင်မည်
-- resource lifecycle၊ အပ်ဒိတ်များနှင့် dependency ဖြေရှင်းမှုကို စီမံနိုင်မည်
+By completing this guide, you will:
+- Infrastructure as Code 원칙များနှင့် Azure အရင်းအမြစ် ပေးပို့ခြင်းကို ကျွမ်းကျင်လာမည်
+- Azure Developer CLI မှ ပံ့ပိုးထားသည့် IaC ပေးသွင်းသူများကို နားလည်မည်
+- ပုံမှန် application စံနှုန်းများအတွက် Bicep တမ်ပလိတ်များ ডিজাইনနှင့် အကောင်အထည်ဖော်မည်
+- အရင်းအမြစ် ပါရာမီတာများ၊ မာတိကာများနှင့် ပတ်ဝန်းကျင်အလိုက် ဆက်တင်များကို ဖန်တီးချိန်သိမြင်စွာ ပြင်ဆင်မည်
+- ကွန်ရက်နှင့် လုံခြုံရေး အပါအဝင် တိုးတက်သော အင်ဖရာစထပ် ပုံစံများကို အကောင်အထည်ဖော်မည်
+- အရင်းအမြစ် အလဲအပြောင်းများ၊ အပ်ဒိတ်များနှင့် တွဲဆက်မှု ဖြေရှင်းနည်းများကို စီမံခန့်ခွဲမည်
 
 ## သင်ယူပြီးရလဒ်များ
 
-ပြီးမြောက်သည်နှင့်အမျှ သင်သည်:
-- Bicep နှင့် ARM template များကို အသုံးပြုပြီး Azure အင်ဖရာစထရပ်ချာများကို ဒီဇိုင်းရေးဆွဲ၍ ပံ့ပိုးနိုင်မည်
-- သင့်တော်သော resource dependencies နှင့် အတူ စပ်ဆိုင်ရာ multi-service ပလက်ဖောင်းများကို ဖွဲ့စည်းနိုင်မည်
-- မတူညီသော ပတ်ဝန်းကျင်များနှင့် ဖွဲ့စည်းမှုများအတွက် parameterized template များ ကို အကောင်အထည်ဖော်နိုင်မည်
-- အင်ဖရာစထရပ်ချာ ပံ့ပိုးမှုအခက်အခဲများကို ပြဿနာရှာထုတ်ကာ deployment မအောင်မြင်မှုများကို ဖြေရှင်းနိုင်မည်
-- Azure Well-Architected Framework သဘောတရားများကို အင်ဖရာစထရပ်ချာ ဒီဇိုင်းတွင် အကျုံးဝင်အသုံးပြုနိုင်မည်
-- အင်ဖရာစထရပ်ချာ အပ်ဒိတ်များကို စီမံ၍ အင်ဖရာစထရပ်ချာ ဗားရှင်းမူထုတ်ယူခြင်း များကို ကျင့်သုံးနိုင်မည်
+Upon completion, you will be able to:
+- Bicep နှင့် ARM templates အသုံးပြုကာ Azure အင်ဖရာစထပ်ကို ဒီဇိုင်းဆွဲ၍ ပေးပို့နိုင်မည်
+- သင့်အက်ပ်များအတွက် စနစ်တကျ အဆက်အသွယ်ရှိသော မျိုးစုံဆာဗစ်များ အတွက် ရှုပ်ထွေးသော ပြုပြင်ချိတ်ဆက်မှုများကို ဖန်တီးနိုင်မည်
+- ပတ်ဝန်းကျင် အမျိုးမျိုးနှင့် ဖွဲ့စည်းတည်ဆောက်မှုများအတွက် ပါရာမီတာ ထည့်သွင်းထားသည့် တမ်ပလိတ်များကို အသုံးချနိုင်မည်
+- အင်ဖရာစထပ် ပေးပို့ရာတွင် ဖြစ်သော ပြဿနာများကို ပြေရှင်းနိုင်မည်
+- Azure Well-Architected Framework အခြေခံချက်များကို အင်ဖရာစထပ် ဒီဇိုင်းတွင် အကောင်အထည်ဖော်နိုင်မည်
+- အင်ဖရာစထပ် အပ်ဒိတ်များကို စီမံပိုင်ခွင့်နှင့် ဗားရှင်းမီတာကျဆင်းမှုများအတွက် မျှော်မှန်းချက်များထားနိုင်မည်
 
-## အင်ဖရာစထရပ်ချာ ပံ့ပိုးမှု အကြည့်အရာ
+## အင်ဖရာစထပ် ပေးပို့ခြင်း အကျဉ်းချုပ်
 
-Azure Developer CLI သည် အမျိုးမျိုးသော Infrastructure as Code (IaC) ပံ့ပိုးသူများကို ထောက်ပံ့သည် -
-- **Bicep** (အကြံပြု) - Azure ၏ domain-specific ဘာသာစကား
-- **ARM Templates** - JSON-based Azure Resource Manager templates
-- **Terraform** - မျိုးစုံ cloud အင်ဖရာစထရပ်ချာ ကိရိယာ
-- **Pulumi** - programming languages များဖြင့် ခေတ်မီ Infrastructure as Code
+Azure Developer CLI သည် မျိုးစုံသော Infrastructure as Code (IaC) ပေးသွင်းသူများကို ပံ့ပိုးသည်။
+- **Bicep** (အကြံပြု) - Azure အတွက် အထူးသတ်မှတ် ဘာသာစကား
+- **ARM Templates** - JSON အခြေခံ Azure Resource Manager တမ်ပလိတ်များ
+- **Terraform** - မျိုးစုံ cloud များအတွက် အင်ဖရာစထပ် ကိရိယာ
+- **Pulumi** - ပရိုဂရမ်မင်းဘာသာစကားများဖြင့် ဆန်းသစ်သော Infrastructure as Code
 
-## Azure အရင်းအမြစ်များကို နားလည်ခြင်း
+## Azure အရင်းအမြစ်များ နားလည်ခြင်း
 
 ### Resource Hierarchy
 ```
@@ -49,16 +49,16 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### အပလီကေးရှင်းများအတွက် ပုံမှန် Azure ဝန်ဆောင်မှုများ
+### အက်ပ်များအတွက် ပုံမှန် Azure ဝန်ဆောင်မှုများ
 - **Compute**: App Service, Container Apps, Functions, Virtual Machines
 - **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Networking**: Virtual Network, Application Gateway, CDN
 - **Security**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
-## Bicep အင်ဖရာစထရပ်ချာ Templates
+## Bicep အင်ဖရာစထပ် တမ်ပလိတ်များ
 
-### မူလ Bicep Template ဖွဲ့စည်းပုံ
+### အခြေခံ Bicep တမ်ပလိတ် ဖွဲ့စည်းပုံ
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -128,9 +128,9 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### အဆင့်မြင့် Bicep နမူနာများ
+### တိုးတက်သော Bicep ပုံစံများ
 
-#### မော်ဂျူးလာ အဆောက်အအုံ
+#### မော်ဂျူးလာ အင်ဖရာစထပ်
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -179,7 +179,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### အခြေအနေ ပေါ်မူတည်၍ အရင်းအမြစ် ဖန်တီးခြင်း
+#### အခြေအနေ အပေါ် မူတည်၍ အရင်းအမြစ် ဖန်တီးခြင်း
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -200,7 +200,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ ဒေတာဘေ့စ် ပံ့ပိုးခြင်း
+## 🗃️ ဒေတာဘေ့စ် ပေးပို့ခြင်း
 
 ### Cosmos DB
 ```bicep
@@ -298,9 +298,9 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 လုံခြုံရေးနှင့် လျှို့ဝှက်ချက် စီမံခြင်း
+## 🔒 လုံခြုံရေးနှင့် လျှို့ဝှက်ချက် စီမံခန့်ခွဲခြင်း
 
-### Key Vault ပေါင်းစည်းခြင်း
+### Key Vault အတူခေါင်းစဉ် ဆက်စပ်မှု
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -342,7 +342,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Managed Identity ဖွဲ့စည်းမှု
+### Managed Identity ဖွဲ့စည်းခြင်း
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -368,9 +368,9 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 ကွန်ယက်နှင့် ချိတ်ဆက်မှု
+## 🌍 ကွန်ရက်နှင့် ချိတ်ဆက်မှု
 
-### Virtual Network ဖွဲ့စည်းမှု
+### Virtual Network သတ်မှတ်ချက်
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -433,7 +433,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### SSL ပါသော Application Gateway
+### SSL ပါသည့် Application Gateway
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -496,7 +496,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 မော်နിറ്റရင်းနှင့် ဖော်ပြနိုင်မှု
+## 📊 စောင့်ကြည့်ခြင်းနှင့် မျက်နှာပြင်မြင်သာရေး
 
 ### Application Insights
 ```bicep
@@ -527,7 +527,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### စိတ်ကြိုက် ကိုးကားစံနှုန်းများနှင့် သတိပေးချက်များ
+### ကိုယ်ပိုင် မက်ထရစ်များနှင့် သတိပေးချက်များ
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -561,9 +561,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 ပတ်ဝန်းကျင် အလိုက် ဖွဲ့စည်းမှုများ
+## 🔧 ပတ်ဝန်းကျင်အလိုက် သတ်မှတ်ချက်များ
 
-### မတူညီသော ပတ်ဝန်းကျင်များအတွက် Parameter ဖိုင်များ
+### ပတ်ဝန်းကျင် မတူညီစွာ အတွက် ပါရာမီတာ ဖိုင်များ
 ```json
 // infra/main.parameters.dev.json
 {
@@ -617,7 +617,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### အခြေအနေ ပေါ်မူတည်၍ အရင်းအမြစ် ပံ့ပိုးခြင်း
+### အခြေအနေ အပေါ် မူတည်၍ အရင်းအမြစ် ပေးပို့ခြင်း
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,9 +649,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 အဆင့်မြင့် ပံ့ပိုးရေး နမူနာများ
+## 🚀 တိုးတက်သော ပေးပို့မှု ပုံစံများ
 
-### အနယ်နယ်အရပ်ရပ် တပ်ဆင်ခြင်း
+### ဒေသ အများအပြား တပ်ဆင်ခြင်း
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -719,7 +719,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### အင်ဖရာစထရပ်ချာ စမ်းသပ်ခြင်း
+### အင်ဖရာစထပ် စမ်းသပ်ခြင်း
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -755,42 +755,41 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 အင်ဖရာစထရပ်ချာ ကြိုကြည့်နှင့် အတည်ပြုခြင်း (အသစ်)
+## 🧪 အင်ဖရာစထပ် ကြိုကြည့်ခြင်းနှင့် အတည်ပြုခြင်း (အသစ်)
 
-### တပ်ဆင်မီ အဆောက်အအုံ ပြောင်းလဲမှုများကို ကြိုကြည့်ခြင်း
+### တပ်ဆင်ရန်မပြုမီ အင်ဖရာစထပ် ပြောင်းလဲမှုများကို ကြိုကြည့်ပါ
 
-The `azd provision --preview` feature သည် သင်ကို ရင်းမြစ်များကို အကောင်အထည်ဖော်မတတ်ခင် အဆောက်အအုံ ပံ့ပိုးမှုကို **အတုစမ်းသပ်ရန်** ခွင့်ပြုသည်။ ၎င်းသည် `terraform plan` သို့မဟုတ် `bicep what-if` တို့နှင့် စိတ်ဓာတ်တူပြီး သင့် Azure ပတ်ဝန်းကျင်၌ ဘာတွေ ပြောင်းလဲမယ်ဆိုသည်ကို **dry-run ကြည့်ရှုခြင်း** ပေးသည်။
+The `azd provision --preview` feature သည် အရင်းအမြစ်များကို တကယ်တန်ဆောင်မပြုမီ အင်ဖရာစထပ် ပေးပို့ခြင်းကို **သရုပ်ပြ စမ်းသပ်ရန်** ခွင့်ပြုသည်။ ၎င်းသည် `terraform plan` သို့မဟုတ် `bicep what-if` တို့နှင့် ယာယီတွေ့ဆုံမှုတူပြီး သင့် Azure ပတ်ဝန်းကျင်တွင် ဘာများပြောင်းလဲမည်ကို **ဖက်ရွက်မဟုတ်သည့် ကြိုကြည့်ရှုမြင်ချက် (dry-run view)** တစ်ရပ် ပေးသည်။
 
-#### 🛠️ ၎င်းက ဘာတွေ ပြုလုပ်သလဲ
-- **သင့် IaC template များကို বিশ্লেষण ပြုလုပ်သည်** (Bicep သို့မဟုတ် Terraform)
-- **အရင်းအမြစ် ပြောင်းလဲမှုများ၏ ကြိုကြည့်နိဒါန်းကို ဖော်ပြသည်**: အသစ်ထည့်ခြင်း၊ ဖျက်ခြင်း၊ အပ်ဒိတ်လုပ်ခြင်း
-- **ပြောင်းလဲမှုများကို အကောင်အထည်မဖော်ပါ** — ဖတ်-only ဖြစ်ပြီး လုံခြုံစိတ်ချစွာ လည်ပတ်နိုင်သည်
+#### 🛠️ ၎င်း လုပ်ဆောင်ပုံ
+- **သင့် IaC တမ်ပလိတ်များကို ချက်ချင်း လေ့လာသုံးသပ်သည်** (Bicep သို့မဟုတ် Terraform)
+- **အရင်းအမြစ် ပြောင်းလဲမှုများ၏ ကြိုကြည့်ရှုချက်ကို ပြထားသည်**: ထပ်ထည့်ခြင်းများ၊ ဖျက်သိမ်းခြင်းများ၊ အပ်ဒိတ်များ
+- **ပြောင်းလဲမှုများကို မကျင့်ကြံပါ** — ရုပ်ရှင်ဖတ်သာပင်သာဖြစ်ပြီး အလုပ်လုပ်ရန် လုံခြုံသည်
 
-#### � Use Cases
+#### အသုံးချမှုအခြေအနေများ
 ```bash
-# တပ်ဆင်မည့် မတိုင်မီ အခြေခံအဆောက်အအုံ ပြင်ဆင်မှုများကို ကြိုကြည့်ပါ
+# တပ်ဆင်မီ အင်ဖရားစနစ်ပြောင်းလဲမှုများကို ကြိုမြင်ကြည့်ပါ
 azd provision --preview
 
-# အသေးစိတ် အထွက်ဖြင့် ကြိုကြည့်ပါ
-azd provision --preview --output json
-
-# သတ်မှတ်ထားသော ပတ်ဝန်းကျင်အတွက် ကြိုကြည့်ပါ
-azd provision --preview --environment production
+# သတ်မှတ်ထားသော ပတ်ဝန်းကျင်အတွက် ကြိုမြင်ကြည့်ပါ
+azd provision --preview -e production
 ```
 
-ဤ ကော်မန်း့သည် သင့်အား အောက်ပါအရာများတွင် ကူညီပေးသည် -
-- **အရင်းအမြစ်များကို တပ်ဆင်မည်မီ ပြောင်းလဲမှုများကို အတည်ပြုသည်**
-- **ဖွဲ့စည်းမှုမှားလွဲချက်များကို မကြာခဏ တွေ့ရှိနိုင်ရန် ကာကွယ်ပေးသည်**
-- **အသင်းအဖွဲ့များအနေဖြင့် လုံခြုံစိတ်ချစွာ ပူးပေါင်းဆောင်ရွက်ရန် အထောက်အကူပြုသည်**
-- **စောင့်မျှော်မှုမရှိဘဲ ကန့်သတ်ထားသော အခွင့်အရေးဖြင့် တပ်ဆင်မှုများ အကောင်အထည်ဖော်ရန် အာမခံပေးသည်**
+ဤ command သည် သင့်အား အောက်ပါအရာများတွင် ကူညီပေးသည်:
+- **အရင်းအမြစ် ပြောင်းလဲမှုများကို အတည်ပြုရန်** ရောအောင် သတ်မှတ်နိုင်ရန်
+- **အမှားဖွဲ့စည်းမှုများကို မကြာမီ သိရှိနိုင်ရန်**
+- **အဖွဲ့လိုက် ပူးပေါင်းဆောင်ရွက်မှုကို လုံခြုံစိတ်ချစေမှု**
+- **မမျှော်လင့်နိုင်သည့် အကန့်အသတ်များမရှိဘဲ အနည်းဆုံး ခွင့်ပြုပေးမှုဖြင့် တပ်ဆင်နိုင်ရေး Ensure လုပ်ခြင်း**
 
-အထူးသဖြင့် အောက်ပါအခြေအနေများတွင် အထောက်အကူဖြစ်သည် -
-- စပ်ဆိုင်ရာ multi-service ပတ်ဝန်းကျင်များနှင့် အလုပ်လုပ်နေသောအခါ
-- ထုတ်လုပ်မှု infrastructure ကို ပြင်ဆင်နေချိန်တွင်
-- PR အတည်ပြုမှုမပြုမီ template ပြင်ဆင်မှုများကို စစ်ဆေးနေချိန်တွင်
-- အင်ဖရာစထရပ်ချာ နမူနာများအပေါ် အသစ်ဝင်မည့် အဖွဲ့ဝင်များအား သင်ကြားနေချိန်တွင်
+ထို့အပြင် အောက်ပါအခြေအနေများတွင် အထူးအသုံးဝင်သည် -
+- ရှုပ်ထွေးသော မျိုးစုံဆာဗစ် ပတ်ဝန်းကျင်များနှင့် အလုပ်လုပ်သည့်အခါ
+- ထုတ်လုပ်မှု အင်ဖရာစထပ်ကို ပြောင်းလဲရာတွင်
+- PR အတည်ပြုပြီ မတိုင်ခင် တမ်ပလိတ်ပြင်ဆင်မှုများကို အတည်ပြုချင်သည့်အခါ
+- အင်ဖရာစထပ် ပုံစံများအပေါ် အသစ်တက်လာသော အဖွဲ့ဝင်များကို လေ့ကျင့်ရန်
 
-### ဥပမာ ကြိုကြည့် ရလဒ်
+### ဥပမာ ကြိုကြည့်ထွက်ရှိချက်
+တိကျသည့် ကြိုကြည့် ထွက်ရှိချက်သည် ပေးသွင်းသူနှင့် project ဖွဲ့စည်းပုံအပေါ် မူတည်၍ ကွာခြားနိုင်သည်၊ သို့သော် ရလဒ်သည် အရာအားလုံး မကျင့်သေးမီ အကြောင်းအရာပြောင်းလဲမှုများကို ရှင်းလင်းစေသင့်သည်။
+
 ```bash
 $ azd provision --preview
 
@@ -809,28 +808,27 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
 ```
 
-## �🔄 အရင်းအမြစ် အပ်ဒိတ်များနှင့် မိုက်ဂရေးရှင်းများ
+## �🔄 အရင်းအမြစ် အပ်ဒိတ်များနှင့် ပြောင်းရွှေ့မှုများ
 
-### လုံခြုံသော အရင်းအမြစ် အပ်ဒိတ်များ
+### လုံခြုံသေချာသော အရင်းအမြစ် အပ်ဒိတ်များ
 ```bash
-# အင်ဖရာစထရပ်ချာ ပြောင်းလဲမှုများကို အရင်ကြိုကြည့်ပါ (အကြံပြု)
+# အင်ဖရာစထရပ်ချာ ပြောင်းလဲမှုများကို အရင်ဆုံး ကြိုကြည့်ပါ (အကြံပြု)
 azd provision --preview
 
-# ကြိုကြည့်ပြီး အတည်ပြုချက် ရရှိမှ ပြောင်းလဲမှုများကို အကောင်အထည်ဖော်ပါ
+# ကြိုကြည့်ပြီး အတည်ပြုမှုရရှိမှ ပြောင်းလဲမှုများကို အကောင်အထည်ဖော်ပါ
 azd provision --confirm-with-no-prompt
 
-# ပြန်လည်ပြန်လှည့်ရန် (rollback) အတွက် အင်ဖရာစထရပ်ချာ ပြောင်းလဲမှုများကို ပြန်သိမ်းရန် Git ကို အသုံးပြုပါ:
-git revert HEAD  # နောက်ဆုံး အင်ဖရာစထရပ်ချာ commit ကို ပြန်သိမ်းပါ
-azd provision    # ယခင် အင်ဖရာအခြေအနေကို ပြန်လည်အသုံးပြုပါ
+# rollback အတွက် Git ကို အသုံးပြုပြီး အင်ဖရာစထရပ်ချာ ပြောင်းလဲမှုများကို ပြန်လည်ဖျက်ပါ:
+git revert HEAD  # နောက်ဆုံး အင်ဖရာစထရပ်ချာ commit ကို ပြန်လည်မူလအခြေအနေသို့ ပြန်လှန်ပါ
+azd provision    # ယခင် အင်ဖရာစထရပ်ချာ အခြေအနေကို ပြန်လည်အသုံးပြုပါ
 ```
 
-### ဒေတာဘေ့စ် မိုက်ဂရေးရှင်းများ
+### ဒေတာဘေ့စ် ပြောင်းရွှေ့မှုများ
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -859,9 +857,9 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🎯 အကောင်းဆုံး လက်တွေ့ကျကျ မျိုးစုံ
+## 🎯 အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများ
 
-### 1. Resource Naming Conventions
+### 1. အရင်းအမြစ် အမည်ပေးမှု ဧရိယာများ
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -872,7 +870,7 @@ var naming = {
 }
 ```
 
-### 2. Tagging Strategy
+### 2. Tagging မူဝါဒ
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -885,7 +883,7 @@ var commonTags = {
 }
 ```
 
-### 3. Parameter Validation
+### 3. ပါရာမီတာ အတည်ပြုခြင်း
 ```bicep
 @description('Environment name')
 @minLength(3)
@@ -901,7 +899,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Output Organization
+### 4. ထွက်ရလဒ် စနစ်တကျ စီစဉ်ခြင်း
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -916,14 +914,14 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## နောက်ဆက်တွဲ အဆင့်များ
+## နောက်တဆင့်များ
 
-- [Pre-deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - အရင်းအမြစ်ရရှိနိုင်မှုကို အတည်ပြုပါ
-- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - အင်ဖရာစထရပ်ချာပြဿနာများကို ဖြေရှင်းပါ
-- [Debugging Guide](../chapter-07-troubleshooting/debugging.md) - ပံ့ပိုးမှုပြဿနာများကို debug လုပ်ပါ
-- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - သင့်တော်သော service tier များကို ရွေးချယ်ပါ
+- [Pre-deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - အရင်းအမြစ် ရရှိနိုင်မှုကို အတည်ပြုပါ
+- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - အင်ဖရာစထပ် ပြဿနာများကို ဖြေရှင်းပါ
+- [Debugging Guide](../chapter-07-troubleshooting/debugging.md) - ပေးပို့မှု ပြဿနာများကို ပြန်လည်ရှာဖွေပါ
+- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - သင့်လျော်သော ဝန်ဆောင်မှု အဆင့်များကို ရွေးပါ
 
-## ထပ်မံ အသုံးဝင်သော အရင်းအမြစ်များ
+## အပိုဆောင်း ရင်းမြစ်များ
 
 - [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
@@ -933,12 +931,12 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Navigation**
-- **Previous Lesson**: [Deployment Guide](deployment-guide.md)
-- **Next Lesson**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
+- **Previous Lesson**: [တပ်ဆင်ခြင်း လမ်းညွှန်](deployment-guide.md)
+- **Next Lesson**: [စွမ်းရည် စီမံကိန်းဆွဲခြင်း](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-အသိပေးချက်:
-ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှုဖြစ်သည့် [Co-op Translator](https://github.com/Azure/co-op-translator) အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ တိကျမှန်ကန်မှု ရရှိစေရန် ကြိုးစားပေမယ့်၊ အလိုအလျောက် ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် မမှန်ကန်ချက်များ ပါဝင်နိုင်ကြောင်း သတိပေးပါသည်။ မူလစာရွက်စာတမ်းကို မူလဘာသာဖြင့်သာ ယုံကြည်စိတ်ချရသော အရင်းအမြစ်အဖြစ် သတ်မှတ်သင့်သည်။ အရေးကြီးသော အချက်အလက်များအတွက် ကြောင်းမြတ်သော လူ့ဘာသာပြန်ဝန်ထမ်းမှ ဘာသာပြန်ပေးရမည်ဟု အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းကြောင့် ဖြစ်ပေါ်နိုင်သည့် နားမလည်မှုများ သို့မဟုတ် မှားယွင်းသော အဓိပ္ပာယ်ဖော်ခြင်းများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
+**Disclaimer**:
+ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုကို ကြိုးပမ်းသော်လည်း အလိုအလျောက် ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် မတိကျမှုများ ပါဝင်နိုင်သည်ကို သတိပြုပါ။ မူလစာတမ်းကို မူရင်းဘာသာဖြင့်သာ အာဏာရှိသော အရင်းအမြစ်အဖြစ် သိမြင်စဉ်းစားသင့်သည်။ အရေးကြီးသော သတင်းအချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူဘာသာပြန်ဝန်ဆောင်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုမှုကြောင့် ဖြစ်ပေါ်နိုင်သည့် နားလည်မှုပျက်ကွက်ခြင်းများ သို့မဟုတ် အဓိပ္ပာယ် မမှန်ခြင်းများအတွက် ကျွန်ုပ်တို့ တာဝန်မယူပါ။
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
