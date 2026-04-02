@@ -1,65 +1,71 @@
 # AI Workshop Lab: Making Your AI Solutions AZD-Deployable
 
-**Chapter Navigation:**
+**అధ్యాయం నావిగేషన్:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 2 - AI-First Development
 - **⬅️ Previous**: [AI Model Deployment](ai-model-deployment.md)
 - **➡️ Next**: [Production AI Best Practices](production-ai-practices.md)
 - **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
-## Workshop Overview
+## వర్క్‌షాప్ అవలోకనం
 
-This hands-on lab guides developers through the process of taking an existing AI template and deploying it using Azure Developer CLI (AZD). You'll learn essential patterns for production AI deployments using Microsoft Foundry services.
+ఈ హ్యాండ్‌స్ఓన్ ల్యాబ్ డెవలపర్లకు ఒక ఉన్నతమైన AI టెంప్లేట్‌ను తీసుకుని Azure Developer CLI (AZD) ఉపయోగించి దాన్ని డిప్లాయ్ చేసే ప్రక్రియలో గైడ్ చేస్తుంది. మీరు Microsoft Foundry సేవలను ఉపయోగించి ప్రొడక్షన్ AI డిప్లాయ్‌మెంట్ల కోసం అవసరమైన నమూనాలను నేర్చుకుంటారు.
 
-**Duration:** 2-3 hours  
-**Level:** Intermediate  
-**Prerequisites:** Basic Azure knowledge, familiarity with AI/ML concepts
+> **నిర్ధారణ గమనిక (2026-03-25):** ఈ వర్క్‌షాప్‌ను `azd` `1.23.12` ఆధారంగా సమీక్షించారు. మీ స్థానిక ఇన్‌స్టాలేషన్ పాతదైతే, క్రింది దశలతో ఆథ్, టెంప్లేట్ మరియు డిప్లాయ్‌మెంట్ వర్క్‌ఫ్లో సరిపోవడానికి ప్రారంభించే ముందు AZDని అప్‌డేట్ చేయండి.
 
-## 🎓 Learning Objectives
+**వ్యవధి:** 2-3 గంటలు  
+**స్తాయి:** మధ్యస్థ  
+**ముందస్తు అవసరాలు:** Azure గురించి ప్రాథమిక పరిజ్ఞానం, AI/ML కాన్సెప్ట్‌లతో పరిచయం
 
-By the end of this workshop, you will be able to:
-- ✅ Convert an existing AI application to use AZD templates
-- ✅ Configure Microsoft Foundry services with AZD
-- ✅ Implement secure credential management for AI services
-- ✅ Deploy production-ready AI applications with monitoring
-- ✅ Troubleshoot common AI deployment issues
+## 🎓 అభ్యాస లక్ష్యాలు
 
-## Prerequisites
+ఈ వర్క్‌షాప్ చివరలో, మీరు చేయగలుగుతారు:
+- ✅ ఉన్న AI అప్లికేషన్‌ను AZD టెంప్లేట్లను ఉపయోగించేలా మార్చడం
+- ✅ AZDతో Microsoft Foundry సేవలను కాన్ఫిగర్ చేయడం
+- ✅ AI సేవల కోసం సురక్షిత క్రెడెన్షియల్ నిర్వహణను అమలు చేయడం
+- ✅ మానిటరింగ్‌తో ప్రొడక్షన్-రెడీ AI అప్లికేషన్లను డిప్లాయ్ చేయడం
+- ✅ సాధారణ AI డిప్లాయ్‌మెంట్ సమస్యలను తొలగించడం
 
-### Required Tools
-- [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) installed
-- [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) installed
-- [Git](https://git-scm.com/) installed
-- Code editor (VS Code recommended)
+## ముందస్తు అవసరాలు
 
-### Azure Resources
-- Azure subscription with contributor access
-- Access to Microsoft Foundry Models services (or ability to request access)
-- Resource group creation permissions
+### అవసరమైన సాధనాలు
+- [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) ఇన్‌స్టాల్ చేయబడాలి
+- [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) ఇన్‌స్టాల్ చేయబడాలి
+- [Git](https://git-scm.com/) ఇన్‌స్టాల్ చేయబడాలి
+- కోడ్ ఎడిటర్ (VS Codeను సూచించబడింది)
 
-### Knowledge Prerequisites
-- Basic understanding of Azure services
-- Familiarity with command-line interfaces
-- Basic AI/ML concepts (APIs, models, prompts)
+### Azure వనరులు
+- కంట్రిబ్యూటర్ యాక్సెస్ ఉన్న Azure సబ్‌స్క్రిప్షన్
+- Microsoft Foundry Models సేవలకు యాక్సెస్ (లేదా యాక్సెస్ కోసం అభ్యర్థించగల సామర్థ్యం)
+- రీసోర్సు గ్రూప్ సృష్టించే అనుమతులు
 
-## Lab Setup
+### అవసరమైన జ్ఞాన పూర్వాపరాలు
+- Azure సేవల ప్రాథమిక అవగాహన
+- కమాండ్-లైన్ ఇంటర్‌ఫేస్‌లతో పరిచయం
+- AI/ML ప్రాథమిక కాన్సెప్ట్స్ (APIs, మోడల్స్, ప్రాంప్ట్స్)
 
-### Step 1: Environment Preparation
+## ల్యాబ్ సెటప్
 
-1. **Verify tool installations:**
+### దశ 1: పరిసరాల సిద్ధత
+
+1. **సాధనాల సంస్థాపనలను ధృవీకరించండి:**
 ```bash
-# AZD ఇన్‌స్టాలేషన్‌ను తనిఖీ చేయండి
+# AZD సంస్థాపనను తనిఖీ చేయండి
 azd version
 
-# Azure CLIని తనిఖీ చేయండి
+# Azure CLI ను తనిఖీ చేయండి
 az --version
 
-# Azureలో లాగిన్ చేయండి
-az login
+# AZD వర్క్‌ఫ్లోల కోసం Azureలో లాగిన్ చేయండి
 azd auth login
+
+# డయాగ్నోస్టిక్స్ సమయంలో az కమాండ్లు నడపాలనుకుంటే మాత్రమే Azure CLIలో లాగిన్ అవ్వండి
+az login
 ```
 
-2. **Clone the workshop repository:**
+If you work across multiple tenants or your subscription is not detected automatically, retry with `azd auth login --tenant-id <tenant-id>`.
+
+2. **వర్క్‌షాప్ రేపోజిటరీని క్లోన్ చేయండి:**
 ```bash
 git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
@@ -67,9 +73,9 @@ cd azure-search-openai-demo
 
 ## Module 1: Understanding AZD Structure for AI Applications
 
-### Anatomy of an AI AZD Template
+### AI AZD టెంప్లేట్ యొక్క నిర్మాణం
 
-Explore the key files in an AI-ready AZD template:
+AI-సిద్ధ AZD టెంప్లేట్‌లోని కీలక ఫైళ్లను పరిశీలించండి:
 
 ```
 azure-search-openai-demo/
@@ -86,35 +92,35 @@ azure-search-openai-demo/
 └── .azure/               # AZD environment files
 ```
 
-### **Lab Exercise 1.1: Explore the Configuration**
+### **ల్యాబ్ వ్యాయామం 1.1: కాన్ఫిగరేషన్ పరిశీలించండి**
 
-1. **Examine the azure.yaml file:**
+1. **azure.yaml ఫైల్‌ను పరిశీలించండి:**
 ```bash
 cat azure.yaml
 ```
 
-**What to look for:**
-- Service definitions for AI components
-- Environment variable mappings
-- Host configurations
+**ఏం చూడాలో:**
+- AI కంపోనెంట్‌ల కోసం సర్వీస్ నిర్వచనాలు
+- ఎన్విరాన్‌మెంట్ వేరియబుల్ మ్యాపింగ్స్
+- హోస్ట్ కాన్ఫిగరేషన్‌లు
 
-2. **Review the main.bicep infrastructure:**
+2. **main.bicep ఇన్‌ఫ్రాస్ట్రక్చర్‌ను సమీక్షించండి:**
 ```bash
 cat infra/main.bicep
 ```
 
-**Key AI patterns to identify:**
-- Microsoft Foundry Models service provisioning
-- Cognitive Search integration
-- Secure key management
-- Network security configurations
+**గుర్తించవలసిన కీలక AI నమూనాలు:**
+- Microsoft Foundry Models సేవా ప్రావిజనింగ్
+- Cognitive Search సమగ్రీకరణ
+- సురక్షిత కీ నిర్వహణ
+- నెట్‌వర్క్ భద్రత కాన్ఫిగరేషన్‌లు
 
-### **Discussion Point:** Why These Patterns Matter for AI
+### **చర్చ పాయింట్:** AI కోసం ఈ నమూనాలు ఎందుకు ముఖ్యం?
 
-- **Service Dependencies**: AI apps often require multiple coordinated services
-- **Security**: API keys and endpoints need secure management
-- **Scalability**: AI workloads have unique scaling requirements
-- **Cost Management**: AI services can be expensive if not properly configured
+- **Service Dependencies**: AI యాప్లు తరచుగా బహుళ సమన్వయిత సేవలను అవసరం పడతాయి
+- **Security**: API కీలు మరియు ఎండ్పాయింట్లను సురక్షితంగా నిర్వహించాలి
+- **Scalability**: AI వర్క్‌లోడ్స్‌కు వేరుగా స్కేలింగ్ అవసరాలు ఉంటాయి
+- **Cost Management**: సరైన కాన్ఫిగరేషన్ లేకపోతే AI సేవలు ఖరీదైనవిగా మారవచ్చు
 
 ## Module 2: Deploy Your First AI Application
 
@@ -127,11 +133,11 @@ azd env new myai-workshop
 
 2. **Set required parameters:**
 ```bash
-# మీకు ఇష్టమైన Azure ప్రాంతాన్ని ఎంచుకోండి
+# మీ ఇష్టమైన Azure ప్రాంతాన్ని సెట్ చేయండి
 azd env set AZURE_LOCATION eastus
 
-# ఐచ్ఛికం: నిర్దిష్ట OpenAI మోడల్‌ను ఎంచుకోండి
-azd env set AZURE_OPENAI_MODEL gpt-35-turbo
+# ఐచ్ఛికం: నిర్దిష్ట OpenAI మోడల్‌ను సెట్ చేయండి
+azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
 ```
 
 ### Step 2.2: Deploy the Infrastructure and Application
@@ -141,49 +147,51 @@ azd env set AZURE_OPENAI_MODEL gpt-35-turbo
 azd up
 ```
 
-**What happens during `azd up`:**
-- ✅ Provisions Microsoft Foundry Models service
-- ✅ Creates Cognitive Search service
-- ✅ Sets up App Service for the web application
-- ✅ Configures networking and security
-- ✅ Deploys application code
-- ✅ Sets up monitoring and logging
+**`azd up` సమయంలో ఏమి జరుగుతుందో:**
+- ✅ Microsoft Foundry Models సేవను ప్రావిజన్ చేస్తుంది
+- ✅ Cognitive Search సేవను సృష్టిస్తుంది
+- ✅ వెబ్ అప్లికేషన్ కోసం App Service సెటప్ చేస్తుంది
+- ✅ నెట్‌వర్కింగ్ మరియు భద్రతను కాన్ఫిగర్ చేస్తుంది
+- ✅ అప్లికేషన్ కోడ్‌ను డిప్లాయ్ చేస్తుంది
+- ✅ మానిటరింగ్ మరియు లాగింగ్‌ను సెటప్ చేస్తుంది
 
-2. **Monitor the deployment progress** and note the resources being created.
+2. **డిప్లాయ్‌మెంట్ పురోగతిని గమనించండి** మరియు సృష్టించబడుతున్న రీసోర్సులను గుర్తించండి.
 
 ### Step 2.3: Verify Your Deployment
 
-1. **Check the deployed resources:**
+1. **డిప్లాయ్ చేసిన రీసోర్సులను తనిఖీ చేయండి:**
 ```bash
 azd show
 ```
 
-2. **Open the deployed application:**
+2. **డిప్లాయ్ చేసిన అప్లికేషన్ తెరవండి:**
 ```bash
-azd show --output json | grep "webAppUrl"
+azd show
 ```
 
-3. **Test the AI functionality:**
-   - Navigate to the web application
-   - Try sample queries
-   - Verify AI responses are working
+Open the web endpoint shown in the `azd show` output.
 
-### **Lab Exercise 2.1: Troubleshooting Practice**
+3. **AI ఫంక్షనాలిటీని పరీక్షించండి:**
+   - వెబ్ అప్లికేషన్‌కి వెళ్ళండి
+   - నమూనా క్వెరీస్ పరీక్షించండి
+   - AI ప్రతిస్పందనలు పని చేస్తున్నాయో ధృవీకరించండి
 
-**Scenario**: Your deployment succeeded but the AI isn't responding.
+### **ల్యాబ్ వ్యాయామం 2.1: ట్రబుల్‌షూటింగ్ ప్రాక్టీస్**
 
-**Common issues to check:**
-1. **OpenAI API keys**: Verify they're correctly set
-2. **Model availability**: Check if your region supports the model
-3. **Network connectivity**: Ensure services can communicate
-4. **RBAC permissions**: Verify the app can access OpenAI
+**సన్నివేశం**: మీ డిప్లాయ్‌మెంట్ విజయవంతమవగా కూడా AI స్పందించటం లేదు.
 
-**Debugging commands:**
+**సాధారణ సమస్యలు చెక్ చేయవలసినవి:**
+1. **OpenAI API keys**: అవి సరిగా సెటింగ్ అయ్యాయో పరీక్షించండి
+2. **Model availability**: మీ రీజియన్ ఆ మోడల్‌ను సపోర్ట్ చేస్తోందా చెక్ చేయండి
+3. **Network connectivity**: సేవలు పరస్పరం కమ్యూనికేట్ చేయగలవా చూసుకోండి
+4. **RBAC permissions**: అప్లికేషన్ OpenAIకి యాక్సెస్ ఉండేలా అనుమతులు ఉన్నాయో ధృవీకరించండి
+
+**డీబగ్గింగ్ కమాండ్లు:**
 ```bash
-# పర్యావరణ వేరియబుల్‌లను తనిఖీ చేయండి
+# పర్యావరణ చరాలను తనిఖీ చేయండి
 azd env get-values
 
-# డిప్లాయ్‌మెంట్ లాగ్‌లను వీక్షించండి
+# డిప్లాయ్‌మెంట్ లాగ్‌లను చూడండి
 az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 
 # OpenAI డిప్లాయ్‌మెంట్ స్థితిని తనిఖీ చేయండి
@@ -194,16 +202,16 @@ az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-
 
 ### Step 3.1: Modify the AI Configuration
 
-1. **Update the OpenAI model:**
+1. **OpenAI మోడల్‌ను నవీకరించండి:**
 ```bash
-# మీ ప్రాంతంలో అందుబాటులో ఉంటే వేరే మోడల్‌కు మార్చండి
+# వేరే మోడల్‌కు మారండి (మీ ప్రాంతంలో అందుబాటులో ఉంటే)
 azd env set AZURE_OPENAI_MODEL gpt-4.1
 
-# కొత్త కాన్ఫిగరేషన్‌తో మళ్లీ అమర్చండి
+# కొత్త కాన్ఫిగరేషన్‌తో మళ్లీ డిప్లాయ్ చేయండి
 azd deploy
 ```
 
-2. **Add additional AI services:**
+2. **అదనపు AI సేవలను చేర్చండి:**
 
 Edit `infra/main.bicep` to add Document Intelligence:
 
@@ -224,60 +232,60 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Step 3.2: Environment-Specific Configurations
 
-**Best Practice**: Different configurations for development vs production.
+**ఉత్తమ పద్ధతి**: డెవలప్‌మెంట్ మరియు ప్రొడక్షన్‌కు వివిధ కాన్ఫిగరేషన్లు ఉండాలి.
 
-1. **Create a production environment:**
+1. **ప్రొడక్షన్ ఎన్విరాన్‌మెంట్ సృష్టించండి:**
 ```bash
 azd env new myai-production
 ```
 
-2. **Set production-specific parameters:**
+2. **ప్రొడక్షన్-స్పెసిఫిక్ పారామీటర్లను సెట్ చేయండి:**
 ```bash
-# ప్రొడక్షన్ సాధారణంగా ఉన్నత SKUs ఉపయోగిస్తుంది
+# ప్రొడక్షన్ సాధారణంగా అధిక SKUsను ఉపయోగిస్తుంది
 azd env set AZURE_OPENAI_SKU S0
 azd env set AZURE_SEARCH_SKU standard
 
-# అదనపు భద్రతా లక్షణాలను సక్రియం చేయండి
+# అదనపు భద్రతా ఫీచర్లను సక్రియం చేయండి
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
-### **Lab Exercise 3.1: Cost Optimization**
+### **ల్యాబ్ వ్యాయామం 3.1: ఖర్చు ఆప్టిమైజేషన్**
 
-**Challenge**: Configure the template for cost-effective development.
+**ఛాలెంజ్**: అభివృద్ధి కోసం ఖర్చు-ప్రభావవంతంగా టెంప్లేట్‌ను కాన్ఫిగర్ చేయండి.
 
-**Tasks:**
-1. Identify which SKUs can be set to free/basic tiers
-2. Configure environment variables for minimal cost
-3. Deploy and compare costs with the production configuration
+**పనులు:**
+1. ఎలాంటి SKUsను ఫ్రీ/బేసిక్ టియర్‌గా సెట్ చేయవచ్చో గుర్తించండి
+2. కనిష్ట ఖర్చుకు ఎన్విరాన్‌మెంట్ వేరియబుల్స్‌ను కాన్ఫిగర్ చేయండి
+3. డిప్లాయ్ చేసి ప్రొడక్షన్ కాన్ఫిగరేషన్‌తో ఖర్చును తులనా చేయండి
 
-**Solution hints:**
-- Use F0 (free) tier for Cognitive Services when possible
-- Use Basic tier for Search Service in development
-- Consider using Consumption plan for Functions
+**సమాధాన సూచనలు:**
+- సాధ్యమైతే Cognitive Services కోసం F0 (free) టియర్ వినియోగించండి
+- డెవ‌లో Search Service కోసం Basic టియర్‌ని ఉపయోగించండి
+- Functions కోసం Consumption ప్లాన్ పరిగణలోకి తీసుకోండి
 
 ## Module 4: Security and Production Best Practices
 
 ### Step 4.1: Secure Credential Management
 
-**Current challenge**: Many AI apps hardcode API keys or use insecure storage.
+**ప్రస్తుత సమస్య**: చాలా AI యాప్స్ API కీలు హార్డ్‌కోడ్ చేయటం లేదా అనుభద్రమైన స్టోరేజ్ ఉపయోగించడం.
 
-**AZD Solution**: Managed Identity + Key Vault integration.
+**AZD పరిష్కారం**: Managed Identity + Key Vault ఇంటిగ్రేషన్.
 
-1. **Review the security configuration in your template:**
+1. **మీ టెంప్లేట్‌లోని భద్రతా కాన్ఫిగరేషనును సమీక్షించండి:**
 ```bash
 # Key Vault మరియు Managed Identity కాన్ఫిగరేషన్ కోసం చూడండి
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
-2. **Verify Managed Identity is working:**
+2. **Managed Identity సక్రమంగా పనిచేస్తున్నదా చెక్ చేయండి:**
 ```bash
-# వెబ్ యాప్‌కు సరైన గుర్తింపు కాన్ఫిగరేషన్ ఉందా అని తనిఖీ చేయండి
+# వెబ్ యాప్‌కు సరిగ్గా గుర్తింపు కాన్ఫిగరేషన్ ఉందో లేదో తనిఖీ చేయండి
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
 ### Step 4.2: Network Security
 
-1. **Enable private endpoints** (if not already configured):
+1. **ప్రైవేట్ ఎండ్పాయింట్లు ఎనేబుల్ చేయండి** (ఇప్పటి వరకు కాన్ఫిగర్ చేయப்படలేదా):
 
 Add to your bicep template:
 ```bicep
@@ -304,16 +312,16 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ### Step 4.3: Monitoring and Observability
 
-1. **Configure Application Insights:**
+1. **Application Insightsని కాన్ఫిగర్ చేయండి:**
 ```bash
 # Application Insights స్వయంచాలకంగా కాన్ఫిగర్ చేయబడాలి
-# కన్ఫిగరేషన్‌ను తనిఖీ చేయండి:
+# కాన్ఫిగరేషన్‌ను తనిఖీ చేయండి:
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-2. **Set up AI-specific monitoring:**
+2. **AI-స్పెసిఫిక్ మానిటరింగ్ సెటప్ చేయండి:**
 
-Add custom metrics for AI operations:
+AI ఆపరేషన్ల కోసం కస్టమ్ మెట్రిక్స్ జోడించండి:
 ```bicep
 // In your web app configuration
 resource webApp 'Microsoft.Web/sites@2023-01-01' = {
@@ -334,44 +342,44 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-### **Lab Exercise 4.1: Security Audit**
+### **ల్యాబ్ వ్యాయామం 4.1: సెక్యూరిటీ ఆడిట్**
 
-**Task**: Review your deployment for security best practices.
+**పని**: మీ డిప్లాయ్‌మెంట్‌ను భద్రతా ఉత్తమ పద్ధతుల కోసం సమీక్షించండి.
 
-**Checklist:**
-- [ ] No hardcoded secrets in code or configuration
-- [ ] Managed Identity used for service-to-service authentication
-- [ ] Key Vault stores sensitive configuration
-- [ ] Network access is properly restricted
-- [ ] Monitoring and logging are enabled
+**చెక్‌లిస్ట్:**
+- [ ] కోడ్ లేదా కాన్ఫిగరేషన్‌లో హార్డ్‌కోడ్ చేయబడిన సీక్రెట్స్ ఉండవు
+- [ ] సర్వీస్-టు-సర్వీస్ అధికారం కోసం Managed Identity వినియోగించబడుతోందా
+- [ ] సున్నితమైన కాన్ఫిగరేషన్ Key Vaultలో నిలిచివుంది
+- [ ] నెట్‌వర్క్ యాక్సెస్ సరిగా పరిమితం చేయబడింది
+- [ ] మానిటరింగ్ మరియు లాగింగ్ ఎనేబుల్ చేయబడ్డాయి
 
 ## Module 5: Converting Your Own AI Application
 
 ### Step 5.1: Assessment Worksheet
 
-**Before converting your app**, answer these questions:
+**మీ యాప్‌ను మార్చడానికి ముందు**, ఈ ప్రశ్నలకు సమాధానమివ్వండి:
 
 1. **Application Architecture:**
-   - What AI services does your app use?
-   - What compute resources does it need?
-   - Does it require a database?
-   - What are the dependencies between services?
+   - మీ యాప్ ఏ AI సేవలను ఉపయోగిస్తుంది?
+   - అది ఏ కంప్యూట్ వనరులను అవసరం పడుతుంది?
+   - దానికి డేటాబేస్ అవసరమా?
+   - సేవల మధ్య ఆధార్యాలు ఏమిటి?
 
 2. **Security Requirements:**
-   - What sensitive data does your app handle?
-   - What compliance requirements do you have?
-   - Do you need private networking?
+   - మీ యాప్ ఏ సున్నితమైన డేటాను హ్యాండిల్ చేస్తుంది?
+   - మీకు ఎలాంటి కంప్లయెన్స్ అవసరమా?
+   - ప్రైవేట్ నెట్‌వర్కింగ్ అవసరమా?
 
 3. **Scaling Requirements:**
-   - What's your expected load?
-   - Do you need auto-scaling?
-   - Are there regional requirements?
+   - మీ అంచనా లోడ్ ఎంత?
+   - ఆటో-స్కేలింగ్ కావాలా?
+   - రీజియనల్ అవసరాలున్నాయా?
 
 ### Step 5.2: Create Your AZD Template
 
-**Follow this pattern to convert your app:**
+**మీ యాప్‌ను మార్చడానికి ఈ ప్యాటర్న్‌ను అనుసరించండి:**
 
-1. **Create the basic structure:**
+1. **బేసిక్ స్ట్రక్చర్ సృష్టించండి:**
 ```bash
 mkdir my-ai-app-azd
 cd my-ai-app-azd
@@ -380,7 +388,7 @@ cd my-ai-app-azd
 azd init --template minimal
 ```
 
-2. **Create azure.yaml:**
+2. **azure.yaml సృష్టించండి:**
 ```yaml
 # Metadata
 name: my-ai-app
@@ -403,9 +411,9 @@ hooks:
     run: echo "Preparing AI models..."
 ```
 
-3. **Create infrastructure templates:**
+3. **ఇన్ఫ్రాస్ట్రక్చర్ టెంప్లేట్లను సృష్టించండి:**
 
-**infra/main.bicep** - Main template:
+**infra/main.bicep** - ప్రధాన టెంప్లేట్:
 ```bicep
 @description('Primary location for all resources')
 param location string = resourceGroup().location
@@ -423,7 +431,7 @@ module openAI 'modules/openai.bicep' = {
 }
 ```
 
-**infra/modules/openai.bicep** - OpenAI module:
+**infra/modules/openai.bicep** - OpenAI మాడ్యూల్:
 ```bicep
 @description('Name of the OpenAI service')
 param name string
@@ -447,58 +455,58 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
-### **Lab Exercise 5.1: Template Creation Challenge**
+### **ల్యాబ్ వ్యాయామం 5.1: టెంప్లేట్ సృష్టి ఛాలెంజ్**
 
-**Challenge**: Create an AZD template for a document processing AI app.
+**ఛాలెంజ్**: డాక్యుమెంట్ ప్రాసెసింగ్ AI యాప్ కోసం AZD టెంప్లేట్ రూపొందించండి.
 
-**Requirements:**
-- Microsoft Foundry Models for content analysis
-- Document Intelligence for OCR
-- Storage Account for document uploads
-- Function App for processing logic
-- Web app for user interface
+**అవసరాలు:**
+- కంటెంట్ విశ్లేషణ కోసం Microsoft Foundry Models
+- OCR కోసం Document Intelligence
+- డాక్యుమెంట్ అప్లోడ్స్ కోసం Storage Account
+- ప్రాసెసింగ్ లాజిక్ కోసం Function App
+- యూజర్ ఇంటర్‌ఫేస్ కోసం Web app
 
-**Bonus points:**
-- Add proper error handling
-- Include cost estimation
-- Set up monitoring dashboards
+**బోనస్ పాయింట్లు:**
+- సరైన ఎర్రర్ హ్యాండ్లింగ్ చేర్చండి
+- ఖర్చు అంచనా చేర్చండి
+- మానిటరింగ్ డాష్‌బోర్డ్లు సెటప్ చేయండి
 
 ## Module 6: Troubleshooting Common Issues
 
 ### Common Deployment Issues
 
 #### Issue 1: OpenAI Service Quota Exceeded
-**Symptoms:** Deployment fails with quota error
-**Solutions:**
+**లక్షణాలు:** డిప్లాయ్‌మెంట్ క్వోటా ఎర్రర్‌తో విఫలమవుతుంది
+**పరిష్కారాలు:**
 ```bash
 # ప్రస్తుత క్వోటాలను తనిఖీ చేయండి
 az cognitiveservices usage list --location eastus
 
-# క్వోటా పెంపును అభ్యర్థించండి లేదా వేరే ప్రాంతాన్ని ప్రయత్నించండి
+# క్వోటా పెంచాలని అభ్యర్థించండి లేదా వేరే ప్రాంతాన్ని ప్రయత్నించండి
 azd env set AZURE_LOCATION westus2
 azd up
 ```
 
 #### Issue 2: Model Not Available in Region
-**Symptoms:** AI responses fail or model deployment errors
-**Solutions:**
+**లక్షణాలు:** AI ప్రతిస్పందనలు విఫలమవడం లేదా మోడల్ డిప్లాయ్‌మెంట్ లో ఎర్రర్లు
+**పరిష్కారాలు:**
 ```bash
-# ప్రాంతాల వారీగా మోడల్ అందుబాటును తనిఖీ చేయండి
+# ప్రాంతం ప్రకారం మోడల్ లభ్యతను తనిఖీ చేయండి
 az cognitiveservices model list --location eastus
 
-# అందుబాటులో ఉన్న మోడల్‌కు అప్డేట్ చేయండి
-azd env set AZURE_OPENAI_MODEL gpt-35-turbo-16k
+# అందుబాటులో ఉన్న మోడల్‌కు నవీకరించండి
+azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
 azd deploy
 ```
 
 #### Issue 3: Permission Issues
-**Symptoms:** 403 Forbidden errors when calling AI services
-**Solutions:**
+**లక్షణాలు:** AI సేవలను పిలిచేప్పుడు 403 Forbidden ఎర్రర్లు
+**పరిష్కారాలు:**
 ```bash
-# పాత్ర కేటాయింపులను తనిఖీ చేయండి
+# పాత్రల కేటాయింపులను తనిఖీ చేయండి
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# లేని పాత్రలను జోడించండి
+# అభావపడ్డ పాత్రలను జోడించండి
 az role assignment create \
   --assignee YOUR_PRINCIPAL_ID \
   --role "Cognitive Services OpenAI User" \
@@ -508,46 +516,46 @@ az role assignment create \
 ### Performance Issues
 
 #### Issue 4: Slow AI Responses
-**Investigation steps:**
-1. Check Application Insights for performance metrics
-2. Review OpenAI service metrics in Azure portal
-3. Verify network connectivity and latency
+**పరిశీలన దశలు:**
+1. ప్రదర్శన మెట్రిక్స్ కోసం Application Insightsను చెక్ చేయండి
+2. Azure పోర్టల్‌లో OpenAI సేవా మెట్రిక్స్‌ను సమీక్షించండి
+3. నెట్‌వర్క్ కనెక్టివిటీ మరియు లేటెన్సీని ధృవీకరించండి
 
-**Solutions:**
-- Implement caching for common queries
-- Use appropriate OpenAI model for your use case
-- Consider read replicas for high-load scenarios
+**పరిష్కారాలు:**
+- సాధారణ క్వెరీస్‌కు క్యాషింగ్ అమలు చేయండి
+- మీ ఉపయోగ సందర్భానికి సరిపోయే OpenAI మోడల్ ఉపయోగించండి
+- హెచ్చు లోడ్ సన్నివేశాలకు రీడ్ రిప్లికాలకు పరిగణించండి
 
-### **Lab Exercise 6.1: Debugging Challenge**
+### **ల్యాబ్ వ్యాయామం 6.1: డీబగ్గింగ్ ఛాలెంజ్**
 
-**Scenario**: Your deployment succeeded, but the application returns 500 errors.
+**సన్నివేశం**: మీ డిప్లాయ్‌మెంట్ విజయవంతమైంది, కానీ అప్లికేషన్ 500 ఎర్రర్స్ ఇచ్చುತ್ತಿದೆ.
 
-**Debugging tasks:**
-1. Check application logs
-2. Verify service connectivity
-3. Test authentication
-4. Review configuration
+**డీబగ్గింగ్ పనులు:**
+1. అప్లికేషన్ లాగ్‌లను తనిఖీ చేయండి
+2. సేవా కనెక్టివిటీని ధృవీకరించండి
+3. ఆథెంటికేషన్‌ను పరీక్షించండి
+4. కాన్ఫిగరేషన్‌ను సమీక్షించండి
 
-**Tools to use:**
-- `azd show` for deployment overview
-- Azure portal for detailed service logs
-- Application Insights for application telemetry
+**ఉపయోగించే టూల్స్:**
+- డిప్లాయ్‌మెంట్ అవలోకనానికి `azd show`
+- సేవా లాగ్స్ కోసం Azure పోర్టల్
+- అప్లికేషన్ టెలిమెట్రీ కోసం Application Insights
 
 ## Module 7: Monitoring and Optimization
 
 ### Step 7.1: Set Up Comprehensive Monitoring
 
-1. **Create custom dashboards:**
+1. **కస్టమ్ డాష్‌బోర్డ్లు సృష్టించండి:**
 
-Navigate to Azure portal and create a dashboard with:
-- OpenAI request count and latency
-- Application error rates
-- Resource utilization
-- Cost tracking
+Azure పోర్టల్‌కు నావిగేట్ చేసి క్రింది అంశాలతో డాష్‌బోర్డు సృష్టించండి:
+- OpenAI అభ్యర్థనల సంఖ్య మరియు లేటెన్సీ
+- అప్లికేషన్ లోపాల శాతం
+- రీసోర్సు వినియోగం
+- ఖర్చు ట్రాకింగ్
 
-2. **Set up alerts:**
+2. **అలర్ట్‌లను సెటప్ చేయండి:**
 ```bash
-# ఎక్కువ లోపాల రేటుకి హెచ్చరిక
+# అధిక లోపాల రేటుకు హెచ్చరిక
 az monitor metrics alert create \
   --name "AI-App-High-Error-Rate" \
   --resource-group YOUR_RG \
@@ -558,120 +566,121 @@ az monitor metrics alert create \
 
 ### Step 7.2: Cost Optimization
 
-1. **Analyze current costs:**
+1. **ప్రస్తుత ఖర్చులను విశ్లేషించండి:**
 ```bash
 # Azure CLI ఉపయోగించి ఖర్చు డేటాను పొందండి
 az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
-2. **Implement cost controls:**
-- Set up budget alerts
-- Use autoscaling policies
-- Implement request caching
-- Monitor token usage for OpenAI
+2. **ఖర్చు నియంత్రణలను అమలు చేయండి:**
+- బడ్జెట్ అలర్ట్‌లను సెటప్ చేయండి
+- ఆటోస్కేలింగ్ పాలసీలను ఉపయోగించండి
+- అభ్యర్థన క్యాషింగ్‌ను అమలు చేయండి
+- OpenAI కోసం టోకెన్ ఉపయోగాన్ని మానిటర్ చేయండి
 
-### **Lab Exercise 7.1: Performance Optimization**
+### **ల్యాబ్ వ్యాయామం 7.1: ప్రదర్శన ఆప్టిమైజేషన్**
 
-**Task**: Optimize your AI application for both performance and cost.
+**పని**: ప్రదర్శన మరియు ఖర్చు రెండింటికీ మీ AI అప్లికేషన్‌ను ఆప్టిమైజ్ చేయండి.
 
-**Metrics to improve:**
-- Reduce average response time by 20%
-- Reduce monthly costs by 15%
-- Maintain 99.9% uptime
+**మెట్రిక్స్ మెరుగుపరచాల్సినవి:**
+- సగటు స్పందన సమయాన్ని 20% తగ్గించండి
+- నెలవారీ ఖర్చును 15% తగ్గించండి
+- 99.9% uptime ను నిలబెట్టుకోండి
 
-**Strategies to try:**
-- Implement response caching
-- Optimize prompts for token efficiency
-- Use appropriate compute SKUs
-- Set up proper autoscaling
+**ప్రయత్నించవలసిన వ్యూహాలు:**
+- స్పందన క్యాషింగ్ అమలు చేయండి
+- టోకెన్ సమర్థత కోసం ప్రాంప్ట్స్ ను ఆప్టిమైజ్ చేయండి
+- సరైన కంప్యూట్ SKUs ఉపయోగించండి
+- సరికొత్త ఆటోస్కేలింగ్ సెటప్స్ ఏర్పాటు చేయండి
 
 ## Final Challenge: End-to-End Implementation
 
 ### Challenge Scenario
 
-You're tasked with creating a production-ready AI-powered customer service chatbot with these requirements:
+మీ బాధ్యత ఒక ప్రొడక్షన్-రెడీ AI ఆధారిత కస్టమర్ సర్వీస్ చాట్‌బాట్ సృష్టించటమే, క్రింది అవసరాలతో:
 
-**Functional Requirements:**
-- Web interface for customer interactions
-- Integration with Microsoft Foundry Models for responses
-- Document search capability using Cognitive Search
-- Integration with existing customer database
-- Multi-language support
+**ఫంక్షనల్ అవసరాలు:**
+- కస్టమర్ ఇంటరాక్షన్ల కోసం వెబ్ ఇంటర్‌ఫేస్
+- ప్రతిస్పందనల కోసం Microsoft Foundry Models సమీకరణ
+- Cognitive Search ద్వారా డాక్యుమెంట్ సెర్చ్ సామర్థ్యం
+- ఉన్న కస్టమర్ డేటాబేస్‌తో సమగ్రీకరణ
+- బహుభాషా మద్దతు
 
-**Non-Functional Requirements:**
-- Handle 1000 concurrent users
+**నాన్-ఫంక్షనల్ అవసరాలు:**
+- 1000 సమకాలిక యూజర్లను హ్యాండిల్ చేయగలగడం
 - 99.9% uptime SLA
-- SOC 2 compliance
-- Cost under $500/month
-- Deploy to multiple environments (dev, staging, prod)
+- SOC 2 కంప్లయెన్స్
+- $500/నెలకు లోపే ఖర్చు
+- బహుళ ఎన్విరాన్‌మెంట్లలో డిప్లాయ్ చేయడం (dev, staging, prod)
 
-### Implementation Steps
+### అమలు దశలు
 
-1. **Design the architecture**
-2. **Create the AZD template**
-3. **Implement security measures**
-4. **Set up monitoring and alerting**
-5. **Create deployment pipelines**
-6. **Document the solution**
+1. ఆర్కిటెక్చర్ డిజైన్ చేయండి
+2. AZD టెంప్లేట్ సృష్టించండి
+3. భద్రతా చర్యలు అమలు చేయండి
+4. మానిటరింగ్ మరియు అలర్టింగ్ సెటప్ చేయండి
+5. డిప్లాయ్‌మెంట్ పైప్‌లైన్స్ సృష్టించండి
+6. పరిష్కారాన్ని డాక్యుమెంట్ చేయండి
 
-### Evaluation Criteria
+### మూల్యాంకన ప్రమాణాలు
 
-- ✅ **Functionality**: Does it meet all requirements?
-- ✅ **Security**: Are best practices implemented?
-- ✅ **Scalability**: Can it handle the load?
-- ✅ **Maintainability**: Is the code and infrastructure well-organized?
-- ✅ **Cost**: Does it stay within budget?
+- ✅ **Functionality**: ఇది అన్ని అవసరాలను తీర్చుకుంటుందా?
+- ✅ **Security**: ఉత్తమ పద్ధతులు అమలు చేయబడ్డాయా?
+- ✅ **Scalability**: ఇవి లోడ్ను భరించగలవా?
+- ✅ **Maintainability**: కోడ్ మరియు ఇన్‌ఫ్రాస్ట్రక్చర్ బాగా ఆర్గనైజ్ చేయబడ్డాయా?
+- ✅ **Cost**: ఇది బడ్జెట్లలోనే ఉందా?
 
-## Additional Resources
+## అదనపు వనరులు
 
-### Microsoft Documentation
+### Microsoft డాక్యుమెంటేషన్
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Microsoft Foundry Models Service Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
 - [Microsoft Foundry Documentation](https://learn.microsoft.com/azure/ai-studio/)
 
-### Sample Templates
-- [Microsoft Foundry Models Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
-- [OpenAI Chat App Quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart)
-- [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
+### ఉదాహరణ టెంప్లేట్లు
+- [Microsoft Foundry Models చాట్ యాప్](https://github.com/Azure-Samples/azure-search-openai-demo)
+- [OpenAI చాట్ యాప్ క్విక్‌స్టార్ట్](https://github.com/Azure-Samples/openai-chat-app-quickstart)
+- [Contoso చాట్](https://github.com/Azure-Samples/contoso-chat)
 
-### Community Resources
-- [Microsoft Foundry Discord](https://discord.gg/microsoft-azure)
-- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
+### సముదాయ వనరులు
+- [Microsoft Foundry డిస్కార్డ్](https://discord.gg/microsoft-azure)
+- [Azure డెవలపర్ CLI GitHub](https://github.com/Azure/azure-dev)
+- [అద్భుతమైన AZD టెంప్లేట్లు](https://azure.github.io/awesome-azd/)
 
-## 🎓 Completion Certificate
+## 🎓 పూర్తి ధృవపత్రం
 
-Congratulations! You've completed the AI Workshop Lab. You should now be able to:
-- ✅ ఉన్న AI అప్లికేషన్లను AZD టెంప్లేట్లుగా మార్చండి
-- ✅ ప్రొడక్షన్ సిద్ధమైన AI అప్లికేషన్లను అమలు చేయండి
-- ✅ AI వర్క్‌లోడ్స్ కోసం భద్రతా ఉత్తమ ఆచరణలను అమలు చేయండి
-- ✅ AI అప్లికేషన్ పనితీరును పర్యవేక్షించి మెరుగుపరచండి
-- ✅ సాధారణ డిప్లాయ్‌మెంట్ సమస్యలను పరిష్కరించండి
+అభినందనలు! మీరు AI వర్క్‌షాప్ ప్రయోగశాల పూర్తి చేసారు. ఇప్పుడు మీరు చేయగలరు:
 
-### తదుపరి దశలు
-1. ఈ నమూనాలను మీ స్వంత AI ప్రాజెక్టులకు వర్తింపజేయండి
-2. టెంప్లేట్లను సముదాయానికి అందించండి
-3. కొనసాగుతున్న సహాయానికి Microsoft Foundry Discordలో చేరండి
-4. బహుళ-రీజియన్ డిప్లాయ్‌మెంట్స్ వంటి అధునాతన అంశాలను అన్వేషించండి
+- ✅ ఉన్న AI అప్లికేషన్లను AZD టెంప్లేట్స్‌గా మార్చడం
+- ✅ ప్రొడక్షన్-సిద్ధమైన AI అప్లికేషన్లను అమలు చేయడం
+- ✅ AI వర్క్‌లోడ్‌ల కోసం భద్రత యొక్క ఉత్తమ ఆచరణలను అమలు చేయడం
+- ✅ AI అప్లికేషన్ పనితీరును పర్యవేక్షించి మెరుగుపరచడం
+- ✅ సాధారణ డిప్లాయ్‌మెంట్ సమస్యలను పరిష్కరించడం
 
----
-
-**వర్క్‌షాప్ అభిప్రాయం**: దయచేసి మీ అనుభవాన్ని [Microsoft Foundry Discord #Azure ఛానెల్](https://discord.gg/microsoft-azure) లో పంచుకొని ఈ వర్క్‌షాప్‌ను మెరుగుపరచడానికి మాకు సహాయం చేయండి.
+### తర్వాతి దశలు
+1. ఈ నమూనాలను మీ స్వంత AI ప్రాజెక్టులకు వర్తింపచేయండి
+2. టెంప్లేట్స్‌ను సముదాయానికి అందించండి
+3. కొనసాగుతున్న మద్దతుకు Microsoft Foundry Discordలో చేరండి
+4. బహు-ప్రాంత డిప్లాయ్‌మెంట్ల వంటి అధునాతన విషయాలను పరిశీలించండి
 
 ---
 
-**అధ్యాయం నావిగేషన్:**
-- **📚 Course Home**: [AZD ప్రారంభికులకు](../../README.md)
+**వర్క్‌షాప్ ఫీడ్‌బ్యాక్**: మా వర్క్‌షాప్‌ను మెరుగుపరచడంలో సహాయపడేందుకు మీ అనుభవాన్ని [Microsoft Foundry Discord #Azure ఛానెల్](https://discord.gg/microsoft-azure)లో పంచుకోండి.
+
+---
+
+**అధ్యాయ నావిగేషన్:**
+- **📚 కోర్స్ హోమ్**: [ప్రారంభుల కోసం AZD](../../README.md)
 - **📖 ప్రస్తుత అధ్యాయం**: అధ్యాయం 2 - AI-ప్రథమ అభివృద్ధి
-- **⬅️ ముందటి**: [AI మోడల్ డిప్లాయ్‌మెంట్](ai-model-deployment.md)
+- **⬅️ మునుపటి**: [AI మోడల్ డిప్లాయ్‌మెంట్](ai-model-deployment.md)
 - **➡️ తర్వాతి**: [ప్రొడక్షన్ AI ఉత్తమ ఆచరణలు](production-ai-practices.md)
-- **🚀 తర్వాతి అధ్యాయం**: [అధ్యాయం 3: కాన్ఫిగరేషన్](../chapter-03-configuration/configuration.md)
+- **🚀 తదుపరి అధ్యాయం**: [అధ్యాయం 3: కాన్ఫిగరేషన్](../chapter-03-configuration/configuration.md)
 
-**సహాయం కావాలా?** AZD మరియు AI డిప్లాయ్‌మెంట్ల గురించి సహాయం మరియు చర్చల కోసం మా సముదాయంలో చేరండి.
+**సహాయం కావాలా?** AZD మరియు AI డిప్లాయ్‌మెంట్ల గురించి మద్దతు మరియు చర్చల కోసం మా సముదాయంలో చేరండి.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **నిరాకరణ**:
-ఈ డాక్యుమెంట్ AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నించినప్పటికీ, స్వయంచాలక అనువాదాల్లో లోపాలు లేదా తప్పుడు వివరాలు ఉండవచ్చని దయచేసి గమనించండి. మూల పత్రాన్ని దాని స్థానిక భాషలో ఉన్నది అధికారిక మూలంగా పరిగణించాలి. కీలకమైన సమాచారానికి వృత్తిపరమైన మానవ అనువాదాన్ని సూచిస్తాము. ఈ అనువాదాన్ని ఉపయోగించడం వల్ల ఏర్పడే ఏవైనా అపార్థాలు లేదా తప్పుగా అర్థం చేసుకోవడంపై మేము బాధ్యత వహించమని లేదు.
+ఈ పత్రాన్ని AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నించినప్పటికీ, ఆటోమేటెడ్ అనువాదాల్లో పొరపాట్లు లేదా లోపాలు ఉండొచ్చు అని దయచేసి గమనించండి. మూల భాషలోని అసలు పత్రాన్ని అధికారిక మూలంగా పరిగణించాలి. కీలకమైన సమాచారం కోసం, వృత్తిపరమైన మానవ అనువాదాన్ని చేయించుకోవాలని సూచించబడుతుంది. ఈ అనువాదం ఉపయోగం వల్ల ఏర్పడే ఏవైనా అపార్థాలు లేదా తప్పుగా అర్థం చేసుకోవడంపై మేము బాధ్యత వహించము.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

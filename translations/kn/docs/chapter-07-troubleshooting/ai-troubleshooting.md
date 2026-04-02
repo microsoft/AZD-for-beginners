@@ -1,28 +1,28 @@
-# AI-ನಿರ್ದಿಷ್ಟ ಸಮಸ್ಯೆ ಪರಿಹಾರ ಮಾರ್ಗದರ್ಶಿ
+# AI-ನಿರ್ದಿಷ್ಟ ಸಮಸ್ಯೆ ಪತ್ತೆ ಮಾರ್ಗದರ್ಶಿ
 
-**ಅಧ್ಯಾಯ ನ್ಯಾವಿಗೇಶನ್:**
-- **📚 ಕೋರ್ಸ್ ಹೋಮ್**: [AZD ಆರಂಭಿಕರಿಗೆ](../../README.md)
-- **📖 ಪ್ರಸ್ತುತ ಅಧ್ಯಾಯ**: ಅಧ್ಯಾಯ 7 - ಸಮಸ್ಯೆ ಪರಿಹಾರ ಮತ್ತು ಡಿಬಗಿಂಗ್
-- **⬅️ ಹಿಂದಿನ**: [ಡಿಬಗಿಂಗ್ ಮಾರ್ಗದರ್ಶಿ](debugging.md)
-- **➡️ ಮುಂದಿನ ಅಧ್ಯಾಯ**: [ಅಧ್ಯಾಯ 8: ಉತ್ಪಾದನೆ ಮತ್ತು ಎಂಟರ್‌ಪ್ರೈಸ್ ಮಾದರಿಗಳು](../chapter-08-production/production-ai-practices.md)
-- **🤖 ಸಂಬಂಧಿಸಿದ**: [ಅಧ್ಯಾಯ 2: AI-ಪ್ರಥಮ ಅಭಿವೃದ್ಧಿ](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**ಅಧ್ಯಾಯ ನಾವಿಗೇಶನ್:**
+- **📚 ಕೋರ್ಸ್ ಹೋಮ್**: [ಆಜಡ್ ಶುರುವಾತಿಗಾಗಿ](../../README.md)
+- **📖 ಪ್ರಸ್ತುತ ಅಧ್ಯಾಯ**: ಅಧ್ಯಾಯ 7 - ಸಮಸ್ಯೆ ಪತ್ತೆ ಹಾಗೂ ಡಿಬಗಿನಿಂಗ್
+- **⬅️ ಹಿಂದಿನದು**: [ಡಿಬಗಿನಿಂಗ್ ಮಾರ್ಗದರ್ಶಿ](debugging.md)
+- **➡️ ಮುಂದಿನ ಅಧ್ಯಾಯ**: [ಅಧ್ಯಾಯ 8: ಉತ್ಪಾದನೆ ಮತ್ತು ಸಂಸ್ಥೆ ಮಾದರಿಗಳು](../chapter-08-production/production-ai-practices.md)
+- **🤖 ಸಂಬಂಧಿತ**: [ಅಧ್ಯಾಯ 2: AI-ಪ್ರಥಮ ಅಭಿವೃದ್ಧಿ](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-ಈ ಸಮಗ್ರ ಸಮಸ್ಯೆ ಪರಿಹಾರ ಮಾರ್ಗದರ್ಶಿ AZD ಬಳಸಿ AI ಪರಿಹಾರಗಳನ್ನು ನಿಯೋಜಿಸುವಾಗ ಎದುರಾಗುವ ಸಾಮಾನ್ಯ ಸಮಸ್ಯೆಗಳನ್ನು ಕ್ರೋಢೀಕರಿಸಿ, Azure AI ಸೇವೆಗಳಿಗೆ ನಿರ್ದಿಷ್ಟವಾದ ಪರಿಹಾರಗಳು ಮತ್ತು ಡಿಬಗಿಂಗ್ ತಂತ್ರಗಳನ್ನು ಒದಗಿಸುತ್ತದೆ.
+ಈ ವ್ಯಾಪಕ ಸಮಸ್ಯೆ ಪತ್ತೆ ಮಾರ್ಗದರ್ಶಿ ಆಜಡ್‌ ಬಳಸಿ AI ಪರಿಹಾರಗಳನ್ನು ನಿಯೋಜಿಸುವಾಗ ಸಾಮಾನ್ಯ ಸಮಸ್ಯೆಗಳಿಗೆAzure AI ಸೇವೆಗಳಿಗೆ ನಿರ್ದಿಷ್ಟ ಪರಿಹಾರಗಳು ಮತ್ತು ಡಿಬಗಿನಿಂಗ್ ತಂತ್ರಗಳನ್ನು ಒದಗಿಸುತ್ತದೆ.
 
-## ವಿಷಯ ಸೂಚಿ
+## ವಿಷಯಗಳ ಪಟ್ಟಿಗೆ
 
-- [Microsoft Foundry ಮಾದರಿ ಸೇವೆಯ ಸಮಸ್ಯೆಗಳು](#azure-openai-service-issues)
+- [Microsoft Foundry ಮಾದರಿಗಳು ಸೇವೆ ಸಮಸ್ಯೆಗಳು](#azure-openai-service-issues)
 - [Azure AI ಹುಡುಕಾಟ ಸಮಸ್ಯೆಗಳು](#azure-ai-ಹುಡುಕಾಟ-ಸಮಸ್ಯೆಗಳು)
 - [ಕಂಟೈನರ್ ಅಪ್ಸ್ ನಿಯೋಜನೆ ಸಮಸ್ಯೆಗಳು](#ಕಂಟೈನರ್-ಅಪ್ಸ್-ನಿಯೋಜನೆ-ಸಮಸ್ಯೆಗಳು)
-- [ಪ್ರಾಮಾಣೀಕರಣ ಮತ್ತು ಅನುಮತಿ ದೋಷಗಳು](#ಪ್ರಾಮಾಣೀಕರಣ-ಮತ್ತು-ಅನುಮತಿ-ದೋಷಗಳು)
+- [ಪ್ರಮಾಣೀಕರಣ ಮತ್ತು ಅನುಮತಿ ದೋಷಗಳು](#ಪ್ರಮಾಣೀಕರಣ-ಮತ್ತು-ಅನುಮತಿ-ದೋಷಗಳು)
 - [ಮಾದರಿ ನಿಯೋಜನೆ ವಿಫಲತೆಗಳು](#ಮಾದರಿ-ನಿಯೋಜನೆ-ವಿಫಲತೆಗಳು)
-- [ಕಾರ್ಯಕ್ಷಮತೆ ಮತ್ತು ಸ್ಕೇಲಿಂಗ್ ಸಮಸ್ಯೆಗಳು](#ಕಾರ್ಯಕ್ಷಮತೆ-ಮತ್ತು-ಸ್ಕೇಲಿಂಗ್-ಸಮಸ್ಯೆಗಳು)
-- [ಖರ್ಚು ಮತ್ತು ಕೊಟಾ ನಿರ್ವಹಣೆ](#ಖರ್ಚು-ಮತ್ತು-ಕೊಟಾ-ನಿರ್ವಹಣೆ)
-- [ಡಿಬಗಿಂಗ್ ಸಾಧನಗಳು ಮತ್ತು ತಂತ್ರಗಳು](#ಡಿಬಗಿಂಗ್-ಸಾಧನಗಳು-ಮತ್ತು-ತಂತ್ರಗಳು)
+- [ಕಾರ್ಯಕ್ಷಮತೆ ಮತ್ತು масш್ಜ್ ಸಮಸ್ಯೆಗಳು](#ಕಾರ್ಯಕ್ಷಮತೆ-ಮತ್ತು-масшಡ್-ಸಮಸ್ಯೆಗಳು)
+- [ಖರ್ಚು ಮತ್ತು ಅರ್ಹತಾ ನಿರ್ವಹಣೆ](#ಖರ್ಚು-ಮತ್ತು-ಅರ್ಹತಾ-ನಿರ್ವಹಣೆ)
+- [ಡಿಬಗಿನಿಂಗ್ ಸಾಧನಗಳು ಮತ್ತು ತಂತ್ರಗಳು](#ಡಿಬಗಿನಿಂಗ್-ಸಾಧನಗಳು-ಮತ್ತು-ತಂತ್ರಗಳು)
 
-## Microsoft Foundry ಮಾದರಿ ಸೇವೆಯ ಸಮಸ್ಯೆಗಳು
+## Microsoft Foundry ಮಾದರಿಗಳು ಸೇವೆ ಸಮಸ್ಯೆಗಳು
 
-### ಸಮಸ್ಯೆ: OpenAI ಸೇವೆ ಪ್ರದೇಶದಲ್ಲಿ ಲಭ್ಯವಿಲ್ಲ
+### ಸಮಸ್ಯೆ: OpenAI ಸೇವೆ ಪ್ರಾಂತ್ಯದಲ್ಲಿ ಲಭ್ಯವಿಲ್ಲ
 
 **ಲಕ್ಷಣಗಳು:**
 ```
@@ -30,22 +30,22 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **ಕಾರಣಗಳು:**
-- ಆಯ್ಕೆ ಮಾಡಲಾದ ಪ್ರದೇಶದಲ್ಲಿ Microsoft Foundry Models ಲಭ್ಯವಿಲ್ಲ
-- ಆಯ್ಕೆಮಾಡಿದ ಪ್ರದೇಶಗಳಲ್ಲಿ ಕೊಟಾ ಮುಗಿದಿದೆ
-- ಪ್ರಾದೇಶಿಕ ಸಾಮರ್ಥ್ಯದ ನಿರ್ಬಂಧಗಳು
+- Microsoft Foundry ಮಾದರಿಗಳು ಆಯ್ದ ಪ್ರದೇಶದಲ್ಲಿ ಲಭ್ಯವಿಲ್ಲ
+- ಇಚ್ಛಿತ ಪ್ರದೇಶಗಳಲ್ಲಿ ಅರ್ಹತಾ ಮಿತಿ ಮುಗಿದಿದೆ
+- ಪ್ರಾದೇಶಿಕ ಸಾಮರ್ಥ್ಯ ಮಿತಿ
 
-**ಉಪಾಯಗಳು:**
+**ಪರಿಹಾರಗಳು:**
 
-1. **ಪ್ರದೇಶ ಲಭ್ಯತೆ ಪರಿಶೀಲಿಸಿ:**
+1. **ಪ್ರಾಂತ್ಯ ಲಭ್ಯತೆ ಪರಿಶೀಲಿಸಿ:**
 ```bash
-# OpenAI ಗೆ ಲಭ್ಯವಿರುವ ಪ್ರದೇಶಗಳನ್ನು ಪಟ್ಟಿ ಮಾಡಿ
+# OpenAI ಗೆ ಲಭ್ಯವಿರುವ ಪ್ರಾಂತ್ಯಗಳನ್ನು ಪಟ್ಟಿ ಮಾಡಿ
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
   --output table
 ```
 
-2. **AZD ಸಂರಚನೆಯನ್ನು ನವೀಕರಿಸಿ:**
+2. **ಆಜಡ್ ಸಂರಚನೆಯನ್ನು ನವೀಕರಿಸಿ:**
 ```yaml
 # azure.yaml - Force specific region
 infra:
@@ -56,7 +56,7 @@ parameters:
   location: "eastus2"  # Known working region
 ```
 
-3. **ಭಿನ್ನ ಪ್ರದೇಶಗಳನ್ನು ಬಳಸಿ:**
+3. **ವೈಕಲ್ಪಿಕ ಪ್ರದೇಶಗಳನ್ನು ಬಳಸಿ:**
 ```bicep
 // infra/main.bicep - Multi-region fallback
 @allowed([
@@ -68,16 +68,16 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### ಸಮಸ್ಯೆ: ಮಾದರಿ ನಿಯೋಜನೆ ಕೊಟಾ ಮೀರಿದೆ
+### ಸಮಸ್ಯೆ: ಮಾದರಿ ನಿಯೋಜನೆ ಅರ್ಹತಾ ಮಿತಿ ಮೀರಿ ಹೋದಿದೆ
 
 **ಲಕ್ಷಣಗಳು:**
 ```
 Error: Deployment failed due to insufficient quota
 ```
 
-**ಉಪಾಯಗಳು:**
+**ಪರಿಹಾರಗಳು:**
 
-1. **ಪ್ರಸ್ತುತ ಕೊಟಾ ಪರಿಶೀಲಿಸಿ:**
+1. **ಪ್ರಸ್ತುತ ಅರ್ಹತಾ ಮಿತಿ ಪರಿಶೀಲಿಸಿ:**
 ```bash
 # ಕೊಟಾ ಬಳಕೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
 az cognitiveservices usage list \
@@ -85,9 +85,9 @@ az cognitiveservices usage list \
   --resource-group YOUR_RG
 ```
 
-2. **ಕೊಟಾ ವೃದ್ಧಿಯನ್ನು ವಿನಂತಿಸಿ:**
+2. **ಅರ್ಹತಾ ಮಿತಿ ಹೆಚ್ಚಿಸುವಂತೆ ವಿನಂತಿಸಿ:**
 ```bash
-# ಕ್ವೋಟಾ ಹೆಚ್ಚಳಕ್ಕಾಗಿ ವಿನಂತಿಯನ್ನು ಸಲ್ಲಿಸಿ
+# ಕೊಟಾ ವೃದ್ಧಿ ವಿನಂತಿಯನ್ನು ಸಲ್ಲಿಸಿ
 az support tickets create \
   --ticket-name "OpenAI Quota Increase" \
   --description "Need increased quota for production deployment" \
@@ -95,7 +95,7 @@ az support tickets create \
   --problem-classification "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/quota_service_problemClassification_guid"
 ```
 
-3. **ಮಾದರಿ ಸಾಮರ್ಥ್ಯವನ್ನು ಉನ್ನತಗೊಳಿಸಿ:**
+3. **ಮಾದರಿ ಸಾಮರ್ಥ್ಯವನ್ನು ಪರಿಪೋಷಿಸಿ:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
@@ -113,24 +113,24 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }
 ```
 
-### ಸಮಸ್ಯೆ: ಅಮಾನ್ಯ API ಆವೃತ್ತಿ
+### ಸಮಸ್ಯೆ: ಅನಾವಶ್ಯಕ API ಆವೃತ್ತಿ
 
-**ಲಕ್ಷಣಗಳು:**
+**ಲક્ષણಗಳು:**
 ```
 Error: The API version '2023-05-15' is not available for OpenAI
 ```
 
-**ಉಪಾಯಗಳು:**
+**ಪರಿಹಾರಗಳು:**
 
-1. **ಬೆಂಬಲಿತ API ಆವೃತ್ತಿಯನ್ನು ಬಳಸಿರಿ:**
+1. **ಬೆಂಬಲಿತ API ಆವೃತ್ತಿ ಬಳಸಿ:**
 ```python
 # ಇತ್ತೀಚಿನ ಬೆಂಬಲಿತ ಆವೃತ್ತಿಯನ್ನು ಬಳಸಿ
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
-2. **API ಆವೃತ್ತಿ ಹೊಂದಿಕೆಯನ್ನು ಪರಿಶೀಲಿಸಿ:**
+2. **API ಆವೃತ್ತಿ ಹೊಂದಾಣಿಕೆ ಪರಿಶೀಲಿಸಿ:**
 ```bash
-# ಬೆಂಬಲಿಸಲಾದ API ಆವೃತ್ತಿಗಳನ್ನು ಪಟ್ಟಿ ಮಾಡಿ
+# ಬೆಂಬಲಿತ API ಆವೃತ್ತಿಗಳ ಪಟ್ಟಿಗಳನ್ನು ತೋರಿಸಿ
 az rest --method get \
   --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
@@ -138,16 +138,16 @@ az rest --method get \
 
 ## Azure AI ಹುಡುಕಾಟ ಸಮಸ್ಯೆಗಳು
 
-### ಸಮಸ್ಯೆ: ಸರ್ಚ್ ಸೇವೆಯ ಬೆಲೆಯ ಮಟ್ಟ ಅಸಮರ್ಪಕವಾಗಿದೆ
+### ಸಮಸ್ಯೆ: ಹುಡುಕಾಟ ಸೇವೆ ಬೆಲೆಮಟ್ಟ ಅಪರ್ಯಾಪ್ತವಾಗಿದೆ
 
 **ಲಕ್ಷಣಗಳು:**
 ```
 Error: Semantic search requires Basic tier or higher
 ```
 
-**ಉಪಾಯಗಳು:**
+**ಪರಿಹಾರಗಳು:**
 
-1. **ಬೆಲೆಯ ಮಟ್ಟವನ್ನು ಅಪ್‌ಗ್ರೇಡ್ ಮಾಡಿ:**
+1. **ಬೆಲೆಮಟ್ಟವನ್ನು ಹೆಚ್ಚಿಸಿ:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -165,7 +165,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **ಸಾಮ್ಯಾಂಟಿಕ್ ಹುಡುಕಾಟ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ (ವಿಕಸನ):**
+2. **ಅರ್ಥ ಸSenseರ್ಚి (Semantic Search) ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ (ಅಭಿವೃದ್ಧಿಗಾಗಿ):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -186,19 +186,19 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 Error: Cannot create index, insufficient permissions
 ```
 
-**ಉಪಾಯಗಳು:**
+**ಪರಿಹಾರಗಳು:**
 
-1. **ಸರ್ಚ್ ಸೇವೆಯ ಕೀಲಿಗಳನ್ನು ಪರಿಶೀಲಿಸಿ:**
+1. **ಹುಡುಕಾಟ ಸೇವೆ ಕೀಗಳನ್ನು ಪರಿಶೀಲಿಸಿ:**
 ```bash
-# ಶೋಧನಾ ಸೇವೆಯ ಆಡಳಿತ ಕೀಲಿಯನ್ನು ಪಡೆಯಿರಿ
+# ಹುಡುಕಿ ಸೇವೆಯ ಆಡಳಿತ ಕೀ ಅನ್ನು ಪಡೆಯಿರಿ
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
 ```
 
-2. **ಇಂಡೆಕ್ಸ್ ಸ್ಕೆಮಾ ಪರಿಶೀಲಿಸಿ:**
+2. **ಇಂಡೆಕ್ಸ್ ಸೂತ್ರರಚನೆಯನ್ನು ಪರಿಶೀಲಿಸಿ:**
 ```python
-# ಸೂಚ್ಯಕ ಸ್ಕೀಮಾವನ್ನು ಪರಿಶೀಲಿಸಿ
+# ಸೂಚ್ಯಂಕ ಮಾದರಿಯನ್ನು ಮಾನ್ಯಗೊಳಿಸಿ
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
@@ -212,7 +212,7 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **Managed Identity ಬಳಸಿ:**
+3. **ನಿರ್ವಹಿತ ಗುರುತನ್ನು ಬಳಸಿ:**
 ```bicep
 // Grant search permissions to managed identity
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -228,16 +228,16 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 
 ## ಕಂಟೈನರ್ ಅಪ್ಸ್ ನಿಯೋಜನೆ ಸಮಸ್ಯೆಗಳು
 
-### ಸಮಸ್ಯೆ: ಕಂಟೈನರ್ ಬಿಲ್ಡ್ ವಿಫಲತೆಗಳು
+### ಸಮಸ್ಯೆ: ಕಾಂಟೈನರ್ ನಿರ್ಮಾಣ ವಿಫಲತೆಗಳು
 
 **ಲಕ್ಷಣಗಳು:**
 ```
 Error: Failed to build container image
 ```
 
-**ಉಪಾಯಗಳು:**
+**ಪರಿಹಾರಗಳು:**
 
-1. **Dockerfile ವ್ಯಾಕರಣ ಪರಿಶೀಲಿಸಿ:**
+1. **ಡೊಕರ್‌ಫೈಲ್ ವ್ಯಾಕರಣ ಪರಿಶೀಲಿಸಿ:**
 ```dockerfile
 # Dockerfile - Python AI app example
 FROM python:3.11-slim
@@ -259,7 +259,7 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **ಆಶ್ರಿತತಗಳನ್ನು ಮಾನ್ಯಗೊಳಿಸಿ:**
+2. **ಆಶ್ರಿತತೆಗಳನ್ನು ಮಾನ್ಯಗೊಳಿಸಿ:**
 ```txt
 # requirements.txt - Pin versions for stability
 fastapi==0.104.1
@@ -271,9 +271,9 @@ azure-search-documents==11.4.0
 azure-cosmos==4.5.1
 ```
 
-3. **ಹೆಲ್ತ್ ಚೆಕ್ ಸೇರಿಸಿ:**
+3. **ಆರೋಗ್ಯ ಪರಿಶೀಲನೆ ಸೇರಿಸಿ:**
 ```python
-# main.py - ಆರೋಗ್ಯ ಪರಿಶೀಲನಾ ಎಂಡ್ಪಾಯಿಂಟ್ ಸೇರಿಸಿ
+# main.py - ಆರೋಗ್ಯ ಪರಿಶೀಲನೆ ಎಂಡ್ಪಾಯಿಂಟ್ ಸೇರಿಸಿ
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -283,16 +283,16 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### ಸಮಸ್ಯೆ: ಕಂಟೈನರ್ ಅಪ್ ಆರಂಭ ವೈಫಲ್ಯಗಳು
+### ಸಮಸ್ಯೆ: ಕಾಂಟೈನರ್ ಅಪ್ಲಿಕೇಶನ್ ಪ್ರಾರಂಭ ವಿಫಲತೆಗಳು
 
 **ಲಕ್ಷಣಗಳು:**
 ```
 Error: Container failed to start within timeout period
 ```
 
-**ಉಪಾಯಗಳು:**
+**ಪರಿಹಾರಗಳು:**
 
-1. **ಆರಂಭಿಕ ಟೈಮೌಟ್ ಹೆಚ್ಚಿಸಿ:**
+1. **ಪ್ರಾರಂಭ ಕಾಲಾವಧಿ ಹೆಚ್ಚಿಸಿ:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -325,9 +325,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **ಮಾದರಿ ಲೋಡಿಂಗ್ ಅನ್ನು.optಿಮೈಸ್ ಮಾಡಿ:**
+2. **ಮಾದರಿ ಲೋಡಿಂಗ್ ಅನ್ನು ಪರಿಪೋಷಿಸಿ:**
 ```python
-# ಪ್ರಾರಂಭ ಸಮಯವನ್ನು ಕಡಿಮೆ ಮಾಡಲು ಮಾದರಿಗಳನ್ನು ಆಲಸ್ಯವಾಗಿ ಲೋಡ್ ಮಾಡಿ
+# ಪ್ರಾರಂಭ ಸಮಯವನ್ನು ಕಡಿಮೆ ಮಾಡಲು ಆಲಸಿ ಲೋಡ್ ಮಾದರಿಗಳನ್ನು
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -341,40 +341,40 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # ಇಲ್ಲಿ ಎಐ ಕ್ಲೈಂಟ್ ಅನ್ನು ಪ್ರಾರಂಭಿಸಿ
+        # ಇಲ್ಲಿ AI ಕ್ಲೈಯಂಟ್ ಅನ್ನು ಪ್ರಾರಂಭಿಸಿ
         pass
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # ಪ್ರಾರಂಭ
+    # ಪ್ರಾರಂಭಿಕೆ
     app.state.model_manager = ModelManager()
     yield
-    # ನಿಲ್ಲಿಸುವಿಕೆ
+    # ನಿಲ್ಲಿಕೆ
     pass
 
 app = FastAPI(lifespan=lifespan)
 ```
 
-## ಪ್ರಾಮಾಣೀಕರಣ ಮತ್ತು ಅನುಮತಿ ದೋಷಗಳು
+## ಪ್ರಮಾಣೀಕರಣ ಮತ್ತು ಅನುಮತಿ ದೋಷಗಳು
 
-### ಸಮಸ್ಯೆ: Managed Identity ಅನುಮತಿ ನಿರಾಕರಿಸಲಾಗಿದೆ
+### ಸಮಸ್ಯೆ: ನಿರ್ವಹಿತ ಗುರುತಿಗೆ ಅನುಮತಿ ನಿರಾಕರಿಸಲಾಗಿದೆ
 
 **ಲಕ್ಷಣಗಳು:**
 ```
 Error: Authentication failed for Microsoft Foundry Models Service
 ```
 
-**ಉಪಾಯಗಳು:**
+**ಪರಿಹಾರಗಳು:**
 
 1. **ಪಾತ್ರ ನಿಯೋಜನೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ:**
 ```bash
-# ಪ್ರಸ್ತುೕತ ಪಾತ್ರ ನಿಯೋಜನೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
+# ಪ್ರಸ್ತುತ ಪಾತ್ರ ಹಂಚಿಕೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **ಅವಶ್ಯಕ ಪಾತ್ರಗಳನ್ನು ನಿಯೋಜಿಸಿ:**
+2. **ಅಗತ್ಯ ಪಾತ್ರಗಳನ್ನು ನಿಯೋಜಿಸಿ:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -391,9 +391,9 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-3. **ಪ್ರಾಮಾಣೀಕರಣವನ್ನು ಪರೀಕ್ಷಿಸಿ:**
+3. **ಪ್ರಮಾಣೀಕರಣ ತಪಾಸಣೆ ಮಾಡಿ:**
 ```python
-# ನಿರ್ವಹಿತ ಐಡೆಂಟಿಟಿ ಪ್ರಮಾಣೀಕರಣವನ್ನು ಪರೀಕ್ಷಿಸಿ
+# ನಿರ್ವಹಿತ ಗುರುತಿನ ದೃಢೀಕರಣವನ್ನು ಪರೀಕ್ಷಿಸಿ
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
@@ -406,16 +406,16 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### ಸಮಸ್ಯೆ: Key Vault ಪ್ರವೇಶ ನಿರಾಕರಿಸಲಾಗಿದೆ
+### ಸಮಸ್ಯೆ: ಕೀ ವಾಲ್ಟ್ ಪ್ರವೇಶ ನಿರಾಕರಿಸಲಾಗಿದೆ
 
 **ಲಕ್ಷಣಗಳು:**
 ```
 Error: The user, group or application does not have secrets get permission
 ```
 
-**ಉಪಾಯಗಳು:**
+**ಪರಿಹಾರಗಳು:**
 
-1. **Key Vault ಅನುಮತಿಗಳನ್ನು ಮಂಜೂರು ಮಾಡಿ:**
+1. **ಕೀ ವಾಲ್ಟ್ ಅನುಮತಿಗಳನ್ನು ನೀಡಿರಿ:**
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -434,7 +434,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Access Policies ಬದಲು RBAC ಬಳಸಿ:**
+2. **ಪ್ರವೇಶ ನೀತಿಗಳ ಬದಲು RBAC ಬಳಸಿ:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -456,7 +456,7 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 Error: Model version 'gpt-4-32k' is not available
 ```
 
-**ಉಪಾಯಗಳು:**
+**ಪರಿಹಾರಗಳು:**
 
 1. **ಲಭ್ಯವಿರುವ ಮಾದರಿಗಳನ್ನು ಪರಿಶೀಲಿಸಿ:**
 ```bash
@@ -468,7 +468,7 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **ಮಾದರಿFallbacks ಬಳಸಿರಿ:**
+2. **ಮಾದರಿ ಫಾಲ್ಬ್ಯಾಕ್‌ಗಳನ್ನು ಬಳಸಿ:**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
@@ -479,8 +479,8 @@ param primaryModel object = {
 
 @description('Fallback model configuration')
 param fallbackModel object = {
-  name: 'gpt-35-turbo'
-  version: '0125'
+  name: 'gpt-4.1'
+  version: '2024-08-06'
 }
 
 // Try primary model first, fallback if unavailable
@@ -499,7 +499,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 
 3. **ನಿಯೋಜನೆಯ ಮೊದಲು ಮಾದರಿಯನ್ನು ಮಾನ್ಯಗೊಳಿಸಿ:**
 ```python
-# ವಿತರಣೆಗೆ ಮೊದಲು ಮಾದರಿಯ ಮಾನ್ಯತೆ
+# ನಿಯೋಜನೆಯ ಮುಂಚಿನ ಮಾದರಿ ಪರಿಶೀಲನೆ
 import httpx
 
 async def validate_model_availability(model_name: str, version: str) -> bool:
@@ -519,20 +519,20 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
         return False
 ```
 
-## ಕಾರ್ಯಕ್ಷಮತೆ ಮತ್ತು ಸ್ಕೇಲಿಂಗ್ ಸಮಸ್ಯೆಗಳು
+## ಕಾರ್ಯಕ್ಷಮತೆ ಮತ್ತು масшಡ್ ಸಮಸ್ಯೆಗಳು
 
-### ಸಮಸ್ಯೆ: ಉನ್ನತ ವಿಳಂಬದ ಪ್ರತಿಕ್ರಿಯೆಗಳು
+### ಸಮಸ್ಯೆ: ಹೆಚ್ಚಿನ ವಿಳಂಬ ಪ್ರತಿಕ್ರಿಯೆಗಳು
 
 **ಲಕ್ಷಣಗಳು:**
-- ಪ್ರತಿಕ್ರಿಯೆ ಸಮಯಗಳು > 30 ಸೆಕೆಂಡುಗಳು
-- ಟೈಮ್‌ಔಟ್ ದೋಷಗಳು
-- ಕೆಟ್ಟ ಬಳಕೆದಾರ ಅನುಭವ
+- ಪ್ರತಿಕ್ರಿಯೆ ಸಮಯ > 30 ಸೆಕೆಂಡುಗಳು
+- ಕಾಲಹರಣ ದೋಷಗಳು
+- ದುರ್ಬಲ ಬಳಕೆದಾರ ಅನುಭವ
 
-**ಉಪಾಯಗಳು:**
+**ಪರಿಹಾರಗಳು:**
 
-1. **ವಿನಂತಿ ಟೈಮ್‌ಔಟ್‌ಗಳನ್ನು ಅನುಷ್ಠಾನಗೊಳಿಸಿ:**
+1. **ವಿನಂತಿ ಕಾಲಹರಣವನ್ನು ಅಳವಡಿಸಿ:**
 ```python
-# ಸರಿಯಾದ ಟೈಮೌಟ್‌ಗಳನ್ನು ಸಂರಚಿಸಿ
+# ಸೂಕ್ತ ಸಮಯ ಮೀರಿದ ಸಮಯಗಳನ್ನು ಸಂರಚಿಸಿ
 import httpx
 
 client = httpx.AsyncClient(
@@ -547,7 +547,7 @@ client = httpx.AsyncClient(
 
 2. **ಪ್ರತಿಕ್ರಿಯೆ ಕ್ಯಾಶಿಂಗ್ ಸೇರಿಸಿ:**
 ```python
-# ಪ್ರತ್ಯುತ್ತರಗಳಿಗೆ Redis ಕ್ಯಾಶೆ
+# ಪ್ರತಿಕ್ರಿಯೆಗಳಿಗೆ Redis ಕ್ಯಾಚೆ
 import redis.asyncio as redis
 import json
 
@@ -565,7 +565,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **ಆಟೋ-ಸ್ಕೇಲಿಂಗ್ ಸಂರಚಿಸಿ:**
+3. **ಸ್ವಯಂ-ಮಾಪನ ಅನ್ನು ಸಂರಚಿಸಿ:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -599,16 +599,16 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### ಸಮಸ್ಯೆ: ಮೆಮೊರಿ ಮುಗಿಯುವ ದೋಷಗಳು
+### ಸಮಸ್ಯೆ: ಮೆಮೊರಿ ಹೊರದೋಷಗಳು
 
 **ಲಕ್ಷಣಗಳು:**
 ```
 Error: Container killed due to memory limit exceeded
 ```
 
-**ಉಪಾಯಗಳು:**
+**ಪರಿಹಾರಗಳು:**
 
-1. **ಮೆಮೊರಿ ಪಡಿತ ಹೆಚ್ಚಿಸಿ:**
+1. **ಮೆಮೊರಿ ಮಂಜೂರು ಹೆಚ್ಚಿಸಿ:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -627,9 +627,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **ಮೆಮೊರಿ ಬಳಕೆಯನ್ನು ಉನ್ನತಗೊಳಿಸಿ:**
+2. **ಮೆಮೊರಿ ಬಳಸಿಕೆಯನ್ನು ಪರಿಪೋಷಿಸಿ:**
 ```python
-# ಸ್ಮೃತಿ ಕಾರ್ಯಕ್ಷಮ ಮಾದರಿ ನಿರ್ವಹಣೆ
+# ಸ್ಮೃತಿ-ಕಾರ್ಯಕ್ಷಮ ಮಾದರಿ ನಿರ್ವಹಣೆ
 import gc
 import psutil
 
@@ -639,10 +639,10 @@ class MemoryOptimizedAI:
         
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # ಪ್ರಕ್ರಿಯೆ ಪ್ರಾರಂಭಿಸುವ ಮೊದಲು ಸ್ಮೃತಿ ಬಳಕೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
+        # ಪ್ರಕ್ರಿಯೆಗೊಳಿಸುವ ಮೊದಲು ಸ್ಮೃತಿ ಬಳಕೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # ಗಾರ್ಬೇಜ್ ಕಲೆಕ್ಷನ್ ಅನ್ನು ಬಲವಂತವಾಗಿ ನಡೆಸಿ
+            gc.collect()  # ಕಸ ಸಂಗ್ರಹಣೆಯನ್ನು ಬಲವಂತರೂಪದಲ್ಲಿ ಕರೆಸುವುದು
             
         result = await self._process_ai_request(request)
         
@@ -651,20 +651,20 @@ class MemoryOptimizedAI:
         return result
 ```
 
-## ಖರ್ಚು ಮತ್ತು ಕೊಟಾ ನಿರ್ವಹಣೆ
+## ಖರ್ಚು ಮತ್ತು ಅರ್ಹತಾ ನಿರ್ವಹಣೆ
 
-### ಸಮಸ್ಯೆ: ಅನಿರೀಕ್ಷಿತ ಹೆಚ್ಚಿನ ವೆಚ್ಚಗಳು
+### ಸಮಸ್ಯೆ: ಕನಸಿನಷ್ಟು ಹೆಚ್ಚಿನ ಖರ್ಚುಗಳು
 
 **ಲಕ್ಷಣಗಳು:**
-- ನಿರೀಕ್ಷೆಗಿಂತ ಹೆಚ್ಚಾದ Azure ಬಿಲ್
-- ಟೋಕನ್ ಬಳಕೆ ಅಂದಾಜಿಗಿಂತ ಹೆಚ್ಚಾಗಿದೆ
-- ಬಜೆಟ್ ಎಚ್ಚರಿಕೆಗಳು ಚಾಲನೆಯಲ್ಲಿವೆ
+- ನಿರೀಕ್ಷೆಗಿಂತ ಹೆಚ್ಚಿನ Azure ಬಿಲ್
+- ಟೋಕನ್ ಬಳಕೆ ಅಂದಾಜು ಮೀರಿ ದಾಟಿದೆ
+- ಬಜೆಟ್ ಮಾಹಿತಿ ಅಲೆಯನ್ ಸಕ್ರಿಯವಾಗಿದೆ
 
-**ಉಪಾಯಗಳು:**
+**ಪರಿಹಾರಗಳು:**
 
-1. **ಖರ್ಚು ನಿಯಂತ್ರಣಗಳನ್ನು ಜಾರಿಗೆ ತರುವುದನ್ನು ಅನುಷ್ಠಾನಗೊಳಿಸಿ:**
+1. **ಖರ್ಚು ನಿಯಂತ್ರಣಗಳನ್ನು ಅಳವಡಿಸಿ:**
 ```python
-# ಟೋಕನ್ ಬಳಕೆ ಅನುಸರಣೆ
+# ಟೋಕನ್ ಬಳಕೆಯನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡುವುದು
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -681,7 +681,7 @@ class TokenTracker:
         return total_tokens
 ```
 
-2. **ಖರ್ಚು ಎಚ್ಚರಿಕೆಗಳನ್ನು ಹೊಂದಿಸಿ:**
+2. **ಖರ್ಚು ಸೂಚನೆಗಳನ್ನು ಹೊಂದಿಸಿ:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
@@ -706,74 +706,71 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-3. **ಮಾದರಿ ಆಯ್ಕೆಗಳನ್ನು ಉನ್ನತಗೊಳಿಸಿ:**
+3. **ಮಾದರಿ ಆಯ್ಕೆ ಪರಿಪೋಷಿಸಿ:**
 ```python
-# ಖರ್ಚನ್ನು ಗಮನಿಸುವ ಮಾದರಿ ಆಯ್ಕೆ
-MODEL_COSTS = {
-    'gpt-4.1-mini': 0.00015,  # ಪ್ರತಿ 1K ಟೋಕನ್ಗಳಿಗೆ
-    'gpt-4.1': 0.03,          # ಪ್ರತಿ 1K ಟೋಕನ್ಗಳಿಗೆ
-    'gpt-35-turbo': 0.0015  # ಪ್ರತಿ 1K ಟೋಕನ್ಗಳಿಗೆ
+# ವೆಚ್ಚ-ಜಾಗೃತಿ ಹೊಂದಿರುವ ಮಾದರಿ ಆಯ್ಕೆ
+MODEL_COST_TIERS = {
+  'gpt-4.1-mini': 'low',
+  'gpt-4.1': 'high'
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
     """Select model based on complexity and budget."""
     if complexity == 'simple' or budget_remaining < 10:
         return 'gpt-4.1-mini'
-    elif complexity == 'medium':
-        return 'gpt-35-turbo'
     else:
         return 'gpt-4.1'
 ```
 
-## ಡಿಬಗಿಂಗ್ ಸಾಧನಗಳು ಮತ್ತು ತಂತ್ರಗಳು
+## ಡಿಬಗಿನಿಂಗ್ ಸಾಧನಗಳು ಮತ್ತು ತಂತ್ರಗಳು
 
-### AZD ಡಿಬಗಿಂಗ್ ಆಜ್ಞೆಗಳು
+### AZD ಡಿಬಗಿನಿಂಗ್ ಕಮಾಂಡ್‌ಗಳು
 
 ```bash
-# ವಿಸ್ತೃತ ಲಾಗಿಂಗ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ
+# ವರ್ಬೋಸ್ ಲಾಗಿಂಗ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ
 azd up --debug
 
-# ಡಿಪ್ಲಾಯ್ ಸ್ಥಿತಿಯನ್ನು ಪರಿಶೀಲಿಸಿ
+# ನಿಯೋಜನೆ ಸ್ಥಿತಿಯನ್ನು ಪರಿಶೀಲಿಸಿ
 azd show
 
-# ಅಪ್ಲಿಕೇಶನ್ ಲಾಗ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ (ನಿರೀಕ್ಷಣಾ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ ತೆರೆಯುತ್ತದೆ)
+# ಅನ್ವಯಿಕ ಲಾಗ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ (ಮೌಲ್ಯಮಾಪನ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ ತೆರೆಯುತ್ತದೆ)
 azd monitor --logs
 
-# ಲೈವ್ ಮೆಟ್ರಿಕ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ
+# ಜೀವಂತ ಮೆಟ್ರಿಕ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ
 azd monitor --live
 
-# ಪರಿಸರ ಚರಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
+# ಪರಿಸರ ಚರ들을 ಪರಿಶೀಲಿಸಿ
 azd env get-values
 ```
 
-### AZD AI ವಿಸ್ತರಣೆ ಆಜ್ಞೆಗಳು ಡಯಾಗ್ನೋಸ್ಟಿಕ್ಸ್ ಗಾಗಿ
+### AZD AI ವಿಸ್ತರಣೆ ಡಯಾಗ್ನೋಸ್ಟಿಕ್ಸ್ ಕಮಾಂಡ್‌ಗಳು
 
-ನೀವು `azd ai agent init` ಬಳಸಿ ಏಜೆಂಟ್‌ಗಳನ್ನು ನಿಯೋಜಿಸಿದರೆ, ಈ ಹೆಚ್ಚುವರಿ ಸಾಧನಗಳು ಲಭ್ಯವಿರುತ್ತವೆ:
+`azd ai agent init` ಬಳಸಿ ಏಜೆಂಟ್ಗಳನ್ನು ನಿಯೋಜಿಸಿದರೆ, ಈ అదನಪೂರ್ವಕ ಸಾಧನಗಳು ಲಭ್ಯವಿವೆ:
 
 ```bash
-# ಏಜೆಂಟ್ಸ್ ವಿಸ್ತರಣೆ ಸ್ಥಾಪಿಸಲಾಗಿದೆ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ
+# ಏಜೆಂಟ್ಸ್ ವಿಸ್ತರಣೆಯನ್ನು ಅನುಸ್ಥಾಪಿಸಲಾಗಿರುವುದನ್ನು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ
 azd extension install azure.ai.agents
 
-# ಮ್ಯಾನಿಫೆಸ್ಟ್‌ನಿಂದ ಏಜೆಂಟನ್ನು ಮರುಆರಂಭಿಸಿ ಅಥವಾ ನವೀಕರಿಸಿ
+# ಮ್ಯಾನಿಫೆಸ್ಟ್‌ನಿಂದ ಏಜೆಂಟ್ನ್ನು ಪುನರ್‌ಪ್ರಾರಂಭ ಅಥವಾ تازهಗೊಳಿಸಿ
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# ಎಐ ಉಪಕರಣಗಳಿಗೆ ಪ್ರಾಜೆಕ್ಟಿನ ಸ್ಥಿತಿಯನ್ನು ವಿಚಾರಿಸಲು MCP ಸರ್ವರ್ ಅನ್ನು ಬಳಸಿ
+# AI ಉಪಕರಣಗಳು ಪ್ರಾಜೆಕ್ಟ್ ಸ್ಥಿತಿಯನ್ನು ಪ್ರಶ್ನಿಸಲು MCP ಸರ್ವರ್ ಅನ್ನು ಬಳಸಿ
 azd mcp start
 
-# ಪರಿಶೀಲನೆ ಮತ್ತು ಲೆಕ್ಕಪರಿಶೀಲನೆಗಾಗಿ ಮೂಲಸೌಕರ್ಯ ಕಡತಗಳನ್ನು ರಚಿಸಿ
+# ಪರಿಶೀಲನೆ ಮತ್ತು ಆಡಿಟ್‌ಗಾಗಿ ಮೂಲಸೌಕರ್ಯ ಕಡತಗಳನ್ನು ರಚಿಸಿ
 azd infra generate
 ```
 
-> **ಸಲಹೆ:** `azd infra generate` ಅನ್ನು ಬಳಸಿ IaC ಅನ್ನು ಡಿಸ್ಕ್‌ಗೆ ಬರೆಯಿರಿ যাতে ನೀವು ನಿಖರವಾಗಿ ಯಾವ ಸಂಪನ್ಮೂಲಗಳು provision ಮಾಡಲ್ಪಟ್ಟವೆಂದು ಪರಿಶೀಲಿಸಬಹುದು. ಇದು ಸಂಪನ್ಮೂಲ ಸಂರಚನೆ ಸಮಸ್ಯೆಗಳನ್ನು ಡಿಬಗ್ ಮಾಡುವಾಗ ಅಮೂಲ್ಯವಾಗಿದೆ. ಸಂಪೂರ್ಣ ವಿವರಗಳಿಗೆ [AZD AI CLI ರೆಫರೆನ್ಸ್](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) ನೋಡಿ.
+> **ಸಲಹೆ:**  `azd infra generate` ಬಳಸಿ IaC ಅನ್ನು ಡಿಸ್ಕ್‌ಗೆ ಬರೆಯಬಹುದು, ಇದರಿಂದ ನೀವು ನಿಯೋಜಿಸಲಾದ ಸಂಪನ್ಮೂಲಗಳನ್ನು ನಿಖರವಾಗಿ ಪರಿಶೀಲಿಸಬಹುದು. ಇದು ಸಂಪನ್ಮೂಲ ಸಂರಚನೆಯ ಸಮಸ್ಯೆಗಳನ್ನು ಡಿಬಗ್ ಮಾಡುವಾಗ ಅಮೂಲ್ಯವಾಗಿದೆ. ಪೂರ್ಣ ವಿವರಗಳಿಗೆ [ಆಜಡ್ AI CLI ರೆಫರೆನ್ಸ್](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) ನೋಡಿ.
 
-### ಅಪ್ಲಿಕೇಶನ್ ಡಿಬಗಿಂಗ್
+### ಅಪ್ಲಿಕೇಶನ್ ಡಿಬಗಿನಿಂಗ್
 
 1. **ಸಂರಚಿತ ಲಾಗಿಂಗ್:**
 ```python
 import logging
 import json
 
-# AI ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಗಾಗಿ ಸಂರಚಿತ ಲಾಗಿಂಗ್ ಅನ್ನು ಸಂರಚಿಸಿ
+# AI ಅನ್ವಯಿಕೆಗಳಿಗೆ ಸಂರಚಿತ ಲಾಗಿಂಗ್ ಅನ್ನು ಕונ್ಫಿಗರ್ ಮಾಡಿ
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -792,7 +789,7 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **ಆರೋಗ್ಯ ಪರಿಶೀಲನಾ ಎಂಡ್‌ಪಾಯಿಂಟ್‌ಗಳು:**
+2. **ಆರೋಗ್ಯ ಪರಿಶೀಲನಾ ಎಂಡ್ಪಾಯಿಂಟ್‌ಗಳು:**
 ```python
 @app.get("/debug/health")
 async def detailed_health_check():
@@ -807,7 +804,7 @@ async def detailed_health_check():
     except Exception as e:
         checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
     
-    # ಶೋಧನಾ ಸೇವೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
+    # ಹುಡುಕಾಟ ಸೇವೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
     try:
         search_client = SearchIndexClient(
             endpoint=AZURE_SEARCH_ENDPOINT,
@@ -821,7 +818,7 @@ async def detailed_health_check():
     return checks
 ```
 
-3. **ಕಾರ್ಯಕ್ಷಮತೆ ಮೇಲ್ವಿಚಾರಣೆ:**
+3. **ಕಾರ್ಯಕ್ಷಮತೆ ಮಾನಿಟರಿಂಗ್:**
 ```python
 import time
 from functools import wraps
@@ -856,39 +853,39 @@ def monitor_performance(func):
 
 | ದೋಷ ಕೋಡ್ | ವಿವರಣೆ | ಪರಿಹಾರ |
 |------------|-------------|----------|
-| 401 | ಅನಧಿಕೃತ | API ಕೀಗಳು ಮತ್ತು Managed Identity ಸಂರಚನೆಯನ್ನು ಪರಿಶೀಲಿಸಿ |
-| 403 | ನಿರ್ಬಂಧಿಸಲಾಗಿದೆ | RBAC ಪಾತ್ರ ನಿಯೋಜನೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ |
-| 429 | ರೇಟ್ ಮಿತಿಗೊಳಿಸಿದೆ | ಮರುಪ್ರಯತ್ನ ಲಾಜಿಕ್ ಅನ್ನು ಏರಿಹೋಗುವ ಹಿಂತಿರುಗುವ (exponential backoff) ಮೂಲಕ ಅನುಷ್ಠಾನಗೊಳಿಸಿ |
-| 500 | ಇಂಟರ್ನಲ್ ಸರ್ವರ್ ದೋಷ | ಮಾದರಿ ನಿಯೋಜನೆ ಸ್ಥಿತಿಯನ್ನು ಮತ್ತು ಲಾಗ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸಿ |
-| 503 | ಸೇವೆ ಲಭ್ಯವಿಲ್ಲ | ಸೇವೆಯ ಆರೋಗ್ಯ ಮತ್ತು ಪ್ರಾದೇಶಿಕ ಲಭ್ಯತೆಯನ್ನು ಪರಿಶೀಲಿಸಿ |
+| 401 | ಅನುಮತಿಸದ | API ಕೀಗಳು ಮತ್ತು ನಿರ್ವಹಿತ ಗುರುತಿನ ಸಂರಚನೆಯನ್ನು ಪರಿಶೀಲಿಸಿ |
+| 403 | ನಿಷೇಧಿತ | RBAC ಪಾತ್ರ ನಿಯೋಜನೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ |
+| 429 | ದರ ಮಿತಿಗೊಳಿಸಲಾಗಿದೆ | ಗುಣಾಕಾರ ಹಿಂಬುತ್ತದಿ ಸಹಿತ ಮರುಪ್ರಯತ್ನ ತಂತ್ರ ಬಳಸಿ |
+| 500 | ಆಂತರಿಕ ಸರ್ವರ್ ದೋಷ | ಮಾದರಿ ನಿಯೋಜನೆ ಸ್ಥಿತಿ ಮತ್ತು ಲಾಗ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸಿ |
+| 503 | ಸೇವೆ ಲಭ್ಯವಿಲ್ಲ | ಸೇವೆಯ ಆರೋಗ್ಯ ಮತ್ತು ಪ್ರಾದೇಶಿಕ ಲಭ್ಯತೆ ಪರಿಶೀಲಿಸಿ |
 
-## ಮುಂದಿನ ಕ್ರಮಗಳು
+## ಮುಂದಿನ ಹಂತಗಳು
 
-1. **ನಿಯೋಜನೆ ಉತ್ತಮ ಅಭ್ಯಾಸಗಳಿಗಾಗಿ [AI ಮಾದರಿ ನಿಯೋಜನೆ ಮಾರ್ಗದರ್ಶಿ](../chapter-02-ai-development/ai-model-deployment.md) ಪರಿಶೀಲಿಸಿ**
-2. **ಎಂಟರ್‌ಪ್ರೈಸ್-ಸಿದ್ಧ ಪರಿಹಾರಗಳಿಗೆ [ಉತ್ಪಾದನಾ AI ಅಭ್ಯಾಸಗಳು](../chapter-08-production/production-ai-practices.md) ಪೂರ್ಣಗೊಳಿಸಿ**
-3. **ಸಮುದಾಯ ಬೆಂಬಲಕ್ಕಾಗಿ [Microsoft Foundry Discord](https://aka.ms/foundry/discord) ಸೇರಿ**
-4. **AZD-ಸಂಬಂಧಿತ ಸಮಸ್ಯೆಗಳಿಗೆ ಸಮಸ್ಯೆಗಳನ್ನು ಸಲ್ಲಿಸಲು [AZD GitHub repository](https://github.com/Azure/azure-dev) ಬಳಸಿ**
+1. **[AI ಮಾದರಿ ನಿಯೋಜನೆ ಮಾರ್ಗದರ್ಶಿ](../chapter-02-ai-development/ai-model-deployment.md)** ಯನ್ನು ಉತ್ತಮ ಅಭ್ಯಾಸಗಳಿಗೆ ಪರಿಶೀಲಿಸಿ
+2. **[ಉತ್ಪಾದನೆ AI ಅಭ್ಯಾಸಗಳು](../chapter-08-production/production-ai-practices.md)** ಅನ್ನು ಸಂಪೂರ್ಣಗೊಳಿಸಿ ಸಂಸ್ಥೆಗಳಿಗೆ ಸಿದ್ಧ ಪರಿಹಾರಗಳಿಗೆ
+3. **[Microsoft Foundry Discord](https://aka.ms/foundry/discord)** ನಲ್ಲಿ ಸಮುದಾಯ ಬೆಂಬಲಕ್ಕೆ ಸೇರಿ
+4. **ಸಮಸ್ಯೆಗಳು ಇದ್ದರೆ [ಆಜಡ್ GitHub ಸಂಗ್ರಹಸ್ಥಳ](https://github.com/Azure/azure-dev) ಗೆ ಕೊಡುಗೆ ನೀಡಿ**
 
 ## ಸಂಪನ್ಮೂಲಗಳು
 
-- [Microsoft Foundry ಮಾದರಿ ಸೇವೆ ಸಮಸ್ಯೆಗಳ ಪರಿಹಾರ](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [Container Apps ಸಮಸ್ಯೆ ಪರಿಹಾರ](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI ಹುಡುಕಾಟ ಸಮಸ್ಯೆ ಪರಿಹಾರ](https://learn.microsoft.com/azure/search/search-monitor-logs)
-- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - ನಿಮ್ಮ ಸಂಪಾದಕದಲ್ಲಿ Azure ಸಮಸ್ಯೆ ಪರಿಹಾರ ಕೌಶಲ್ಯಗಳನ್ನು ಸ್ಥಾಪಿಸಿ: `npx skills add microsoft/github-copilot-for-azure`
+- [Microsoft Foundry ಮಾದರಿಗಳು ಸೇವೆ ಸಮಸ್ಯೆ ಪತ್ತೆ](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [ಕಂಟೈನರ್ ಅಪ್ಸ್ ಸಮಸ್ಯೆ ಪತ್ತೆ](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Azure AI ಹುಡುಕಾಟ ಸಮಸ್ಯೆ ಪತ್ತೆ](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Azure ಡಯಾಗ್ನೋಸ್ಟಿಕ್ಸ್ ಏಜೆಂಟ್ ಸ್ಕಿಲ್**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - ನಿಮ್ಮ ಸಂಪಾದಕದಲ್ಲಿ Azure ಸಮಸ್ಯೆ ಪತ್ತೆ ಸ್ಕಿಲ್ಸ್ ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಲು: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**ಅಧ್ಯಾಯ ನ್ಯಾವಿಗೇಶನ್:**
-- **📚 ಕೋರ್ಸ್ ಹೋಮ್**: [AZD ಆರಂಭಿಕರಿಗೆ](../../README.md)
-- **📖 ಪ್ರಸ್ತುತ ಅಧ್ಯಾಯ**: ಅಧ್ಯಾಯ 7 - ಸಮಸ್ಯೆ ಪರಿಹಾರ ಮತ್ತು ಡಿಬಗಿಂಗ್
-- **⬅️ ಹಿಂದಿನ**: [ಡಿಬಗಿಂಗ್ ಮಾರ್ಗದರ್ಶಿ](debugging.md)
-- **➡️ ಮುಂದಿನ ಅಧ್ಯಾಯ**: [ಅಧ್ಯಾಯ 8: ಉತ್ಪಾದನೆ ಮತ್ತು ಎಂಟರ್‌ಪ್ರೈಸ್ ಮಾದರಿಗಳು](../chapter-08-production/production-ai-practices.md)
-- **🤖 ಸಂಬಂಧಿಸಿದ**: [ಅಧ್ಯಾಯ 2: AI-ಪ್ರಥಮ ಅಭಿವೃದ್ಧಿ](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **📖 ಸಂದರ್ಭ**: [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+**ಅಧ್ಯಾಯ ನಾವಿಗೇಶನ್:**
+- **📚 ಕೋರ್ಸ್ ಹೋಮ್**: [ಆಜಡ್ ಶುರುವಾತಿಗಾಗಿ](../../README.md)
+- **📖 ಪ್ರಸ್ತುತ ಅಧ್ಯಾಯ**: ಅಧ್ಯಾಯ 7 - ಸಮಸ್ಯೆ ಪತ್ತೆ ಹಾಗೂ ಡಿಬಗಿನಿಂಗ್
+- **⬅️ ಹಿಂದಿನದು**: [ಡಿಬಗಿನಿಂಗ್ ಮಾರ್ಗದರ್ಶಿ](debugging.md)
+- **➡️ ಮುಂದಿನ ಅಧ್ಯಾಯ**: [ಅಧ್ಯಾಯ 8: ಉತ್ಪಾದನೆ ಮತ್ತು ಸಂಸ್ಥೆ ಮಾದರಿಗಳು](../chapter-08-production/production-ai-practices.md)
+- **🤖 ಸಂಬಂಧಿತ**: [ಅಧ್ಯಾಯ 2: AI-ಪ್ರಥಮ ಅಭಿವೃದ್ಧಿ](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 ಉಲ್ಲೇಖ**: [Azure ಡೆವಲಪರ್ CLI ಸಮಸ್ಯೆ ಪತ್ತೆ](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ನಿರಾಕರಣೆ**:
-ಈ ದಸ್ತಾವೇಜನ್ನು AI ಭಾಷಾಂತರ ಸೇವೆ [Co-op Translator](https://github.com/Azure/co-op-translator) ಬಳಸಿಕೊಂಡು ಭಾಷಾಂತರಿಸಲಾಗಿದೆ. ನಾವು ನಿಖರತೆಯನ್ನು ಸಾಧಿಸಲು ಪ್ರಯತ್ನಿಸಿದರೂ, ಸ್ವಯಂಚಾಲಿತ ಭಾಷಾಂತರಗಳಲ್ಲಿ ದೋಷಗಳು ಅಥವಾ ಅಸೂಕ್ತತೆಗಳು ಇರಬಹುದೆಂದು ದಯವಿಟ್ಟು ಗಮನಿಸಿ. ಮೂಲದ ಭಾಷೆಯಲ್ಲಿ ಇರುವ ಮೂಲ ದಸ್ತಾವೇಜನ್ನು ಅಧಿಕೃತ ಮೂಲವೆಂದು ಪರಿಗಣಿಸಬೇಕು. ಗಂಭೀರ ಮಾಹಿತಿಗಾಗಿ, ವೃತ್ತಿಪರ ಮಾನವ ಭಾಷಾಂತರವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಭಾಷಾಂತರದ ಬಳಕೆಯಿಂದ ಉಂಟಾಗುವ ಯಾವುದೇ ತಪ್ಪು ಅರ್ಥಗರ್ಭಿತತೆಗಳು ಅಥವಾ ತಪ್ಪು ವ್ಯಾಖ್ಯಾನಗಳಿಗೆ ನಾವು ಜವಾಬ್ದಾರಿಯಲ್ಲ.
+**ಅಸ್ಪಷ್ಟತಾ ಘೋಷಣೆ**:
+ಈ ದਸਤಾವೇಜು AI ಅನುವಾದ ಸೇವೆ [Co-op Translator](https://github.com/Azure/co-op-translator) ಬಳಸಿ ಅನುವದಿಸಲಾಗಿದೆ. ನಾವು ಖಚಿತತೆಯನ್ನಾಗಿಸಲು ಪ್ರಯತ್ನಿಸುತ್ತೇವೆ, ಆದರೆ ಸ್ವಯಂಚಾಲಿತ ಅನುವಾದಗಳಲ್ಲಿ ದೋಷಗಳು ಅಥವಾ ತಪ್ಪುಗಳಿರಬಹುದು ಎಂಬುದನ್ನು ದಯವಿಟ್ಟು ಗಮನದಲ್ಲಿಡಿ. ಮೂಲ ದಸ್ತಾವೇಜನ್ನು ಅದರ ಸ್ವದೇಶಿ ಭಾಷೆಯಲ್ಲಿ ಪ್ರಾಮಾಣಿಕ ಸೂತ್ರವೆಂದು ಪರಿಗಣಿಸಬೇಕು. ಪ್ರಮುಖ ಮಾಹಿತಿಗಾಗಿ, ವೃತ್ತಿಪರ ಮಾನವ ಅನುವಾದ ಶಿಫಾರಸು ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಅನುವಾದ ಬಳಕೆ ನಿಂದ ಉಂಟಾಗುವ ಯಾವುದೇ ಅರ್ಥಪರಿವರ್ತನೆಗಳು ಅಥವಾ ತಪ್ಪು ಅರ್ಥಮಾಡಿಕೊಡುತ್ತಿರುವುದಕ್ಕೆ ನಾವು ಹೊಣೆಗಾರರಾಗಿರುವುದಿಲ್ಲ.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

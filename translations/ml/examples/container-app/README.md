@@ -1,55 +1,57 @@
-# Container App Deployment Examples with AZD
+# AZD ഉപയോഗിച്ച് കണ്ടെയ്‌നർ ആപ്പ് ഡിപ്ലോയ്മെന്റ് ഉദാഹരണങ്ങൾ
 
-ഈ ഡയറക്ടറി Azure Developer CLI (AZD) ഉപയോഗിച്ച് Azure Container Apps-ൽ കണ്ടെയ്‌നറൈസ് ചെയ്ത അപേക്ഷകൾ ഡിപ്ലോയുചെയ്യുന്നതിനുള്ള സമഗ്ര ഉദാഹരണങ്ങൾ ഉൾക്കൊള്ളുന്നു. ഈ ഉദാഹരണങ്ങൾ യഥാർത്ഥ ലോക മാതൃകകൾ, മികച്ച പ്രയോഗങ്ങൾ, ഉത്പാദന-സജ്ജമായ കോൺഫിഗറേഷനുകൾ എന്നിവ പ്രദർശിപ്പിക്കുന്നു.
+ഈ ഡയറക്ടറി Azure Developer CLI (AZD) ഉപയോഗിച്ച് Azure Container Apps-ലേക്ക് കണ്ടെയ്‌നർ ആപ്ലിക്കേഷനുകൾ ഡിപ്ലോയ്ചെയ്യുന്നതിനുള്ള സമഗ്രമായ ഉദാഹരണങ്ങൾ ഉൾക്കൊള്ളുന്നു. ഈ ഉദാഹരണങ്ങൾ യഥാർത്ഥ ലോകത്തുള്ള പാറ്റേൺസും, മികച്ച പ്രാക്ടീസുകളും, പ്രൊഡക്ഷൻ റഡീ ഡ്രഡ്ഗിഗ് കോൺഫിഗറേഷനുകളും പ്രദർശിപ്പിക്കുന്നു.
 
-## 📚 Table of Contents
+## 📚 ഉള്ളടക്ക പട്ടിക
 
-- [Overview](#overview)
-- [Prerequisites](#prerequisites)
-- [Quick Start Examples](#quick-start-examples)
-- [Production Examples](#production-examples)
-- [Advanced Patterns](#advanced-patterns)
-- [Best Practices](#best-practices)
+- [അവലോകനം](#അവലോകനം)
+- [മുൻകൂട്ടി ആവശ്യങ്ങൾ](#മുൻകൂട്ടി-ആവശ്യങ്ങൾ)
+- [വേഗത്തിലുള്ള ആരംഭം ഉദാഹരണങ്ങൾ](#വേഗത്തിലുള്ള-ആരംഭം-ഉദാഹരണങ്ങൾ)
+- [പ്രൊഡക്ഷൻ ഉദാഹരണങ്ങൾ](#പ്രൊഡക്ഷൻ-ഉദാഹരണങ്ങൾ)
+- [ඇഡ്‌വാൻസ്ഡ് പാറ്റേൺസുകൾ](#ඇഡ്‌വാൻസ്ഡ്-പാറ്റേൺസുകൾ)
+- [മികച്ച പ്രാക്ടീസുകൾ](#മികച്ച-പ്രാക്ടീസുകൾ)
 
-## Overview
+## അവലോകനം
 
-Azure Container Apps ഒരു പൂർണ്ണമായും മാനേജുചെയ്യുന്ന സർവറിലെസ് കണ്ടെയ്‌നർ പ്ലാറ്റ്ഫോമാണ്, ഇത് ഇൻഫ്രാസ്ട്രക്ചർ നിയന്ത്രണമില്ലാതെ മൈക്രോസർവിസുകളും കണ്ടെയ്‌നറൈസ് ചെയ്ത അപ്ലിക്കേഷനുകളും ഓടിക്കാൻ അനുവദിക്കുന്നു. AZD-യോടൊപ്പം ചേർത്താൽ, നിങ്ങൾക്ക് ലഭിക്കുന്നത്:
+Azure Container Apps ഒരു പൂർണ്ണമായി മാനേജുചെയ്ത സെർവർലെസ് കണ്ടെയ്‌നർ പ്ലാറ്റ്ഫോമാണ്, ഇത് കണ്ടെയ്‌നർ ആപ്ലിക്കേഷനുകളും മൈക്രോസ്‌ർവീസുകളും ഇൻഫ്രാസ്ട്രക്ടർ മാനേജുമെന്റ് ഇല്ലാതെയും ഓടിക്കാൻ സഹായിക്കുന്നു. AZD-യുമായി ചേർന്ന് നിങ്ങൾക്ക് ലഭിക്കുന്നത്:
 
-- **സിമ്പ്ലിഫൈഡ് ഡിപ്ലോയ്മെന്റ്**: സിംഗിൾ കമാൻഡ് കൊണ്ട് ഇൻഫ്രാസ്ട്രക്ചർ सहित കണ്ടെയ്‌നറുകൾ ഡിപ്ലോയുചെയ്യുന്നു
-- **ഓട്ടോമാറ്റിക് സ്കെയ്ലിംഗ്**: HTTP ട്രാഫിക് അല്ലെങ്കിൽ ഇവന്റുകൾ അടിസ്ഥാനമാക്കി സീറോയിൽ നിന്ന് സ്‌കെയിൽ ചെയ്യും
-- **ഇൻറഗ്രേറ്റഡ് നെറ്റ്വർക്കിംഗ്**: ബിൽറ്റ്-ഇൻ സർവീസ് ഡിസ്കവറിയും ട്രാഫിക് സ്പ്ലിറ്റിംഗും
-- **മാനേജ്ഡ് ഐഡന്റിറ്റി**: Azure റിസോഴ്‌സുകളിലേക്ക് സുരക്ഷിത പ്രാമാണീകരണം
-- **കൊസ്റ്റ് ഒപ്റ്റിമൈസേഷൻ**: നിങ്ങൾ ഉപയോഗിക്കുന്നonly റിസോഴ്‌സുകൾക്ക് മാത്രമേ പണം നൽകേണ്ടതുള്ളൂ
+- **സർളമായ ഡിപ്ലോയ്മെന്റ്**: ഒറ്റ കമാൻഡിൽ കണ്ടെയ്‌നറുകളും ഇന്‍ഫ്രാസ്ട്രക്ചറും ഡിപ്ലോയ്ചെയ്യുക  
+- **ഓട്ടോമാറ്റിക് സ്കേലിംഗ്**: HTTP ട്രാഫിക് അല്ലെങ്കിൽ ഇവന്റുകളുടെ അടിസ്ഥാനത്തിൽ 0 മുതൽ സ്കേൽ ചെയ്യുക  
+- **ഇന്റഗ്രേറ്റഡ് നെറ്റ്വർകിംഗ്**: ഇൻ-ബിൽട്ട് സർവീസ് ഡിസ്കവറി, ട്രാഫിക് സ്‌പ്ലിറ്റിങ്  
+- **മാനേജ്ഡ് ഐഡెంటിറ്റി**: Azure റിസോഴ്‌സുകളിലേക്ക് സുരക്ഷിതമായി ആണയനൊടുക്കൽ  
+- **ചെലവ് മെച്ചപ്പെടുത്തൽ**: നിങ്ങൾ ഉപയോഗിക്കുന്ന റിസോഴ്‌സുകൾക്കേക്കാൾ മാത്രമേ പണം നൽകേണ്ടത് ഉണ്ടാകൂ  
 
-## Prerequisites
+## മുൻകൂട്ടി ആവശ്യങ്ങൾ
 
-ആരംഭിക്കുന്നതിനുമുമ്പ്, നിങ്ങൾക്ക് ഉള്ളതെന്ന് ഉറപ്പാക്കുക:
+ആരംഭിക്കുന്നതിന് മുമ്പ്, നിങ്ങൾക്കുണ്ടെന്ന് ഉറപ്പാക്കുക:
 
 ```bash
-# AZD ഇൻസ്റ്റലേഷൻ പരിശോധിക്കുക
+# AZD ഇൻസ്റ്റളേഷൻ പരിശോധിക്കുക
 azd version
 
 # Azure CLI പരിശോധിക്കുക
 az version
 
-# Docker പരിശോധിക്കുക (ഇത്തരത്തിലുള്ള ഇമേജുകൾ നിർമ്മിക്കുന്നതിന്)
+# Docker പരിശോധിക്കുക (കസ്റ്റം ഇമേജുകൾ നിർമ്മിക്കാൻ)
 docker --version
 
-# Azure-ൽ ലോഗിൻ ചെയ്യുക
+# AZD വിന്യാസങ്ങൾക്ക് ഓതന്റിക്കേറ്റ് ചെയ്യുക
 azd auth login
+
+# ഐഷികം: നിങ്ങൾക്ക് az കമാൻഡുകൾ നേരിട്ട് നടത്താനാണ് വേണ്ടെങ്കിൽ Azure CLI ലോഗിൻ ചെയ്യുക
 az login
 ```
+  
+**ആവശ്യമായ Azure റിസോഴ്‌സുകൾ:**  
+- הפעיל Azure സബ്സ്ക്രിപ്ഷൻ  
+- റിസോഴ്‌സ് ഗ്രൂപ്പ് സൃഷ്ടിക്കൽ അനുമതികൾ  
+- Container Apps എൻവയോൺമെന്റ് ആക്സസ്  
 
-**ആവശ്യമായ Azure റിസോഴ്‌സുകൾ:**
-- ആക്റ്റീവ് Azure സബ്സ്ക്രിപ്ഷൻ
-- റിസോഴ്‌സ് ഗ്രൂപ്പ് സൃഷ്ടിക്കാനുള്ള അനുവാദങ്ങൾ
-- Container Apps പരിസ്ഥിതി ആക്‌സസ്
+## വേഗത്തിലുള്ള ആരംഭം ഉദാഹരണങ്ങൾ
 
-## Quick Start Examples
+### 1. സിംപിൾ വെബ് API (Python Flask)
 
-### 1. Simple Web API (Python Flask)
-
-Azure Container Apps ഉപയോഗിച്ച് ഒരു അടിസ്ഥാന REST API ഡിപ്ലോയുചെയ്യുക.
+Azure Container Apps ഉപയോഗിച്ച് അടിസ്ഥാന REST API ഡിപ്ലോയ്ചെയ്യുക.
 
 **ഉദാഹരണം: Python Flask API**
 
@@ -64,47 +66,47 @@ services:
     language: python
     host: containerapp
 ```
-
-**ഡിപ്ലോയ്മെന്റ് ഘട്ടങ്ങൾ:**
+  
+**ഡിപ്ലോയ്മെന്റ് പ്രഖ്യാപനങ്ങൾ:**
 
 ```bash
-# ടെംപ്ലേറ്റിൽ നിന്നും പ്രാരംഭമാക്കുക
+# ടെംപ്ലേറ്റിൽ നിന്ന് തുടങ്ങുക
 azd init --template todo-python-mongo
 
 # ഇൻഫ്രാസ്ട്രക്ചർ ഒരുക്കി വിന്യസിക്കുക
 azd up
 
-# വിന്യംശീകരണം പരീക്ഷിക്കുക
+# വിന്യാസം പരിശോധന നടത്തുക
 azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
-
-**പ്രധാന സവിശേഷതകൾ:**
-- 0-ൽ നിന്നു 10 റെപ്ലിക്കാസിലേക്ക് സ്വയഞ്ചാലക സ്‌കെയ്ലിംഗ്
-- ഹെൽത്ത് പ്രോബുകളും ലൈവ്‌നസ്സ് ചെക്കുകളും
-- എൻവയ്റണ്മെന്റ് വ്യാരിയബിൾ ഇൻജെക്ഷൻ
-- അപ്ലിക്കേഷൻ ഇൻസൈറ്റ്സ് ഇന്റഗ്രേഷൻ
+  
+**പ്രധാന ഫീച്ചറുകൾ:**  
+- 0 മുതൽ 10 റെപ്ലിക്കാസിലേക്ക് ഓട്ടോ-സ്കേലിംഗ്  
+- ഹെൽത്ത് പ്രോബുകളും ലൈവ്‌നസ് ചെക്കുകളും  
+- എൻവയോൺമെന്റ് വെറിയബിൾ injection  
+- ആപ്ലിക്കേഷൻ ഇൻസൈറ്റ്‌സ് ഇന്റഗ്രേഷൻ  
 
 ### 2. Node.js Express API
 
-MongoDB ഇന്റഗ്രേഷൻ ആയ Node.js ബാക്ക്എൻഡ് ഡിപ്ലോയുചെയ്യുക.
+MongoDB ഇന്റഗ്രേഷനോടെയുള്ള Node.js ബാക്ക്‌എൻഡ് ഡിപ്ലോയ്ചെയ്യുക.
 
 ```bash
 # Node.js API ടെംപ്ലേറ്റ് ആരംഭിക്കുക
 azd init --template todo-nodejs-mongo
 
-# പരിസ്ഥിതി വ്യാരിയബിളുകൾ ക്രമീകരിക്കുക
+# പരിസ്ഥിതിവേരിയബിളുകള്‍ നിർമ്മാണം
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
 # വിന്യസിക്കുക
 azd up
 
-# Azure Monitor വഴി ലോഗുകൾ കാണുക
+# Azure Monitor വഴി ലോഗുകള്‍ കാണുക
 azd monitor --logs
 ```
-
-**ഇൻഫ്രാസ്ട്രക്ചർ ഹൈലൈറ്റുകൾ:**
+  
+**ഇൻഫ്രാസ്ട്രക്ചർ ഹൈലൈറ്റുകൾ:**  
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -146,32 +148,32 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   }
 }
 ```
+  
+### 3. സ്റ്റാറ്റിക് ഫ്രണ്ട്‌എൻഡ് + API ബാക്ക്‌എൻഡ്
 
-### 3. Static Frontend + API Backend
-
-React ഫ്രണ്ട്‌എൻഡ്‌യും API ബാക്ക്എൻഡും ഉള്ള ഫുൾ-സ്റ്റാക്ക് അപ്ലിക്കേഷൻ ഡിപ്ലോയുചെയ്യുക.
+React ഫ്രണ്ട്‌എൻഡ് കൂടിയ ഒരു ഫുൾ സ്റ്റാക്ക് അപ്ലിക്കേഷൻ ഡിപ്ലോയ്ചെയ്യുക.
 
 ```bash
-# ഫുൾ-സ്റ്റാക് ടെംപ്ലേറ്റ് തുടങ്ങിയിടുക
+# ഫുൾ-സ്റ്റാക്ക് ടെംപ്ലേറ്റ് തുടങ്ങുക
 azd init --template todo-csharp-sql-swa-func
 
 # കോൺഫിഗറേഷൻ അവലോകനം ചെയ്യുക
 cat azure.yaml
 
-# ഇരുവശവും സേവനങ്ങൾ നിയോഗിക്കുക
+# രണ്ട് സേവനങ്ങളും വിന്യസിക്കുക
 azd up
 
 # അപ്ലിക്കേഷൻ തുറക്കുക
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
+  
+## പ്രൊഡക്ഷൻ ഉദാഹരണങ്ങൾ
 
-## Production Examples
+### ഉദാഹരണം 1: മൈക്രോസർവീസ് ആർക്കിടെക്ചർ
 
-### Example 1: Microservices Architecture
+**സിനാരിയോ**: ബഹുമുഖ മൈക്രോസർവീസുകളുള്ള ഇ-കൊമേഴ്സ് അപ്ലിക്കേഷൻ
 
-**സെനാരിയോ**: ബഹുമൂല്യ മൈക്രോസർവിസുകൾ ഉൾക്കൊള്ളുന്ന ഇ-കൊമേഴ്സ് അപ്ലിക്കേഷൻ
-
-**ഡയറക്ടറി ഘടന:**
+**ഡയറക്ടറി ഘടന:**  
 ```
 microservices-demo/
 ├── azure.yaml
@@ -190,8 +192,8 @@ microservices-demo/
     ├── order-service/
     └── payment-service/
 ```
-
-**azure.yaml കോൺഫിഗറേഷൻ:**
+  
+**azure.yaml കോൺഫിഗറേഷൻ:**  
 ```yaml
 name: microservices-ecommerce
 services:
@@ -210,16 +212,16 @@ services:
     language: nodejs
     host: containerapp
 ```
-
-**ഡിപ്ലോയ്മെന്റ്:**
+  
+**ഡിപ്ലോയ്മെന്റ്:**  
 ```bash
-# പ്രോജക്ട് തുടങ്ങി
+# പ്രൊജക്ട് ആരംഭിക്കുക
 azd init
 
-# പ്രൊഡക്ഷൻ പരിസ്ഥിതി ക്രമീകരിക്കുക
+# പ്രൊഡക്ഷൻ പരിസ്ഥിതി സജ്ജീകരിക്കുക
 azd env new production
 
-# പ്രൊഡക്ഷൻ സജ്ജീകരണങ്ങൾ ക്രമീകരിക്കുക
+# പ്രൊഡക്ഷൻ ക്രമീകരണങ്ങൾ ക്രമീകരിക്കുക
 azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
@@ -230,12 +232,12 @@ azd up
 # വിന്യസനം നിരീക്ഷിക്കുക
 azd monitor --overview
 ```
+  
+### ഉദാഹരണം 2: AI-പവേർഡ് കണ്ടെയ്‌നർ ആപ്പ്
 
-### Example 2: AI-Powered Container App
+**സിനാരിയോ**: Microsoft Foundry മോഡലുകൾ ഉൾപ്പെട്ട AI ചാറ്റ് അപ്ലിക്കേഷൻ
 
-**സെനാരിയോ**: Microsoft Foundry Models ഇന്റഗ്രേഷനോടുകൂടിയ AI ചാറ്റ് അപ്ലിക്കേഷൻ
-
-**ഫയൽ: src/ai-chat/app.py**
+**ഫയൽ: src/ai-chat/app.py**  
 ```python
 from flask import Flask, request, jsonify
 from azure.identity import DefaultAzureCredential
@@ -244,7 +246,7 @@ import openai
 
 app = Flask(__name__)
 
-# സുരക്ഷിത ആക്സസിനായി മാനേജുചെയ്ത ഐഡെന്റിറ്റി ഉപയോഗിക്കുക
+# സുരക്ഷിത ആക്സസിനായി മാനേജ്ഡ് ഐഡന്റിറ്റി ഉപയോഗിക്കുക
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -253,7 +255,7 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # കീ വാല്ട്ടിൽ നിന്ന് OpenAI കീ നേടുക
+    # കീ വാൾട്ട് നിന്ന് OpenAI കീ നേടുക
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
@@ -267,8 +269,8 @@ def chat():
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
-
-**ഫയൽ: azure.yaml**
+  
+**ഫയൽ: azure.yaml**  
 ```yaml
 name: ai-chat-app
 services:
@@ -277,8 +279,8 @@ services:
     language: python
     host: containerapp
 ```
-
-**ഫയൽ: infra/main.bicep**
+  
+**ഫയൽ: infra/main.bicep**  
 ```bicep
 param location string = resourceGroup().location
 param environmentName string
@@ -319,10 +321,10 @@ module aiChatApp './app/container-app.bicep' = {
   }
 }
 ```
-
-**ഡിപ്ലോയ്മെന്റ് കമാൻഡുകൾ:**
+  
+**ഡിപ്ലോയ്മെന്റ് കമാൻഡുകൾ:**  
 ```bash
-# പരിസ്ഥിതി തയ്യാറാക്കുക
+# പരിസ്ഥിതി ക്രമീകരിക്കുക
 azd init --template ai-chat-app
 azd env new dev
 
@@ -330,7 +332,7 @@ azd env new dev
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4.1"
 
-# വിനിയോഗിക്കുക
+# വിന്യസിക്കുക
 azd up
 
 # API പരിശോധിക്കുക
@@ -338,12 +340,12 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -H "Content-Type: application/json" \
   -d '{"message": "Hello, how are you?"}'
 ```
+  
+### ഉദാഹരണം 3: ബാക്ക്ഗ്രൗണ്ട് വേർക്കർ ക്യൂ പ്രോസസ്സിംഗോടെ
 
-### Example 3: Background Worker with Queue Processing
+**സിനാരിയോ**: മെസേജ് ക്യൂ ഉപയോഗിച്ച് ഓർഡർ പ്രോസസ്സിംഗ് സിസ്റ്റം
 
-**സെനാരിയോ**: മെസ്സേജ് ക്യൂ ഉപയോഗിച്ച് ഓർഡർ പ്രോസസ്സിങ് സിസ്റ്റം
-
-**ഡയറക്ടറി ഘടന:**
+**ഡയറക്ടറി ഘടന:**  
 ```
 queue-worker/
 ├── azure.yaml
@@ -359,8 +361,8 @@ queue-worker/
     ├── api/
     └── worker/
 ```
-
-**ഫയൽ: src/worker/processor.py**
+  
+**ഫയൽ: src/worker/processor.py**  
 ```python
 import os
 from azure.storage.queue import QueueClient
@@ -387,8 +389,8 @@ def process_orders():
 if __name__ == '__main__':
     process_orders()
 ```
-
-**ഫയൽ: azure.yaml**
+  
+**ഫയൽ: azure.yaml**  
 ```yaml
 name: order-processing
 services:
@@ -402,16 +404,16 @@ services:
     language: python
     host: containerapp
 ```
-
-**ഡിപ്ലോയ്മെന്റ്:**
+  
+**ഡിപ്ലോയ്മെന്റ്:**  
 ```bash
-# തുടക്കം കൊടുക്കുക
+# ആരംഭിക്കുക
 azd init
 
-# ക്യൂ കോൺഫിഗുറേഷനോടെ വിന്യസിക്കുക
+# ക്യൂ കോൺഫിഗറേഷനോടുകൂടെ വിന്യസിക്കുക
 azd up
 
-# ക്യൂ നീളത്തിന് അടിസ്ഥാനമായി തൊഴിലാളിയെ വലുതാക്കുക
+# ക്യൂ നീളത്തെ അടിസ്ഥാനമാക്കി വർ커ിന്റെ വലുപ്പം വർദ്ധിപ്പിക്കുക
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -419,34 +421,34 @@ az containerapp update \
   --scale-rule-type azure-queue \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
+  
+## ඇഡ്‌വാൻസ്ഡ് പാറ്റേൺസുകൾ
 
-## Advanced Patterns
-
-### Pattern 1: Blue-Green Deployment
+### പാറ്റേൺ 1: ബ്ലൂ-ഗ്രീൻ ഡിപ്ലോയ്മെന്റ്
 
 ```bash
-# ട്രാഫിക് ഇല്ലാതെ പുതിയ റിപ്പടി ഒരുക്കുക
+# ട്രാഫിക് ഇല്ലാതെ പുതിയ പതിപ്പ് സൃഷ്ടിക്കുക
 azd deploy api --revision-suffix blue --no-traffic
 
-# പുതിയ റിപ്പടി പരിശോദിക്കുക
+# പുതിയ പതിപ്പ് പരിശോധിക്കുക
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# ട്രാഫിക് വിഭജിക്കുക (20% നീലേക്ക്, 80% നിലവാരത്തിലേക്ക്)
+# ട്രാഫിക് വിഭജിക്കുക (20% ബ്ലുവിന്, 80% നിലവാരത്തിന്)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# പൂർണ്ണമായി നീലിലേക്ക് മാറ്റുക
+# പൂർണ്ണമായും ബ്ലുവിലേക്ക് മാറുക
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
+  
+### പാറ്റേൺ 2: AZD ഉപയോഗിച്ച് കാനറി ഡിപ്ലോയ്മെന്റ്
 
-### Pattern 2: Canary Deployment with AZD
-
-**ഫയൽ: .azure/dev/config.json**
+**ഫയൽ: .azure/dev/config.json**  
 ```json
 {
   "deploymentStrategy": "canary",
@@ -457,8 +459,8 @@ az containerapp ingress traffic set \
   }
 }
 ```
-
-**ഡിപ്ലോയ്മെന്റ് സ്ക്രിപ്റ്റ്:**
+  
+**ഡിപ്ലോയ്മെന്റ് സ്ക്രിപ്റ്റ്:**  
 ```bash
 #!/bin/bash
 # deploy-canary.sh
@@ -466,10 +468,10 @@ az containerapp ingress traffic set \
 # 10% ട്രാഫിക്കോടെ പുതിയ പതിപ്പ് വിന്യസിക്കുക
 azd deploy api --revision-mode multiple
 
-# മെട്രിക്കുകൾ നിരീക്ഷിക്കുക
+# മെട്രിക്‌സ് നിരീക്ഷിക്കുക
 azd monitor --service api --duration 5m
 
-# ട്രാഫിക് ക്രമക്കേട് വർദ്ധിപ്പിക്കുക
+# ട്രാഫിക് ക്രമයෙන් വർദ്ധിപ്പിക്കുക
 for i in {20..100..10}; do
   echo "Increasing traffic to $i%"
   az containerapp revision set-traffic \
@@ -477,13 +479,13 @@ for i in {20..100..10}; do
     --resource-group rg-myapp \
     --revision-weight latest=$i
   
-  sleep 300  # 5 മിനിറ്റ് കാത്തിരിക്കുക
+  sleep 300  # 5 നിമിഷം കാത്തിരിക്കുക
 done
 ```
+  
+### പാറ്റേൺ 3: മൾട്ടി-റീജിയൻ ഡിപ്ലോയ്മെന്റ്
 
-### Pattern 3: Multi-Region Deployment
-
-**ഫയൽ: azure.yaml**
+**ഫയൽ: azure.yaml**  
 ```yaml
 name: global-app
 services:
@@ -496,8 +498,8 @@ services:
       - westeurope
       - southeastasia
 ```
-
-**ഫയൽ: infra/multi-region.bicep**
+  
+**ഫയൽ: infra/multi-region.bicep**  
 ```bicep
 param regions array = ['eastus', 'westeurope', 'southeastasia']
 
@@ -526,8 +528,8 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
   }
 }
 ```
-
-**ഡിപ്ലോയ്മെന്റ്:**
+  
+**ഡിപ്ലോയ്മെന്റ്:**  
 ```bash
 # എല്ലാ പ്രദേശങ്ങളിലും വിന്യസിക്കുക
 azd up
@@ -535,10 +537,10 @@ azd up
 # എൻഡ്‌പോയിന്റുകൾ സ്ഥിരീകരിക്കുക
 azd show --output json | jq '.services.api.endpoints'
 ```
+  
+### പാറ്റേൺ 4: Dapr ഇന്റഗ്രേഷൻ
 
-### Pattern 4: Dapr Integration
-
-**ഫയൽ: infra/app/dapr-enabled.bicep**
+**ഫയൽ: infra/app/dapr-enabled.bicep**  
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: 'dapr-app'
@@ -562,8 +564,8 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   }
 }
 ```
-
-**Dapr ഉപയോഗിച്ചുള്ള അപ്ലിക്കേഷൻ കോഡ്:**
+  
+**Dapr ഉപയോഗിച്ച് ആപ്ലിക്കേഷൻ കോഡ്:**  
 ```python
 from flask import Flask
 from dapr.clients import DaprClient
@@ -573,14 +575,14 @@ app = Flask(__name__)
 @app.route('/orders', methods=['POST'])
 def create_order():
     with DaprClient() as client:
-        # സ്റ്റേറ്റ് സേവ് ചെയ്യുക
+        # നില സംരക്ഷിക്കുക
         client.save_state(
             store_name='statestore',
             key='order-123',
             value={'status': 'pending'}
         )
         
-        # ഇവന്റ് പ്രചരിപ്പിക്കുക
+        # ഇവന്റ് പ്രസിദ്ധീകരിക്കുക
         client.publish_event(
             pubsub_name='pubsub',
             topic_name='orders',
@@ -589,21 +591,21 @@ def create_order():
     
     return {'status': 'created'}
 ```
+  
+## മികച്ച പ്രാക്ടീസുകൾ
 
-## Best Practices
-
-### 1. Resource Organization
+### 1. റിസോഴ്‌സ് ഓർഗനൈസേഷൻ
 
 ```bash
-# സ്ഥിരതയുള്ള പേര് ക്രമീകരണങ്ങൾ ഉപയോഗിക്കുക
+# സ്ഥിരമായ നാമമന്ത്രങ്ങൾ ഉപയോഗിക്കുക
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# ചെലവ് ട്രാക്കിംഗിന് റിസോഴ്‌സുകൾ ടാഗ് ചെയ്യുക
+# ചെലവ് ട്രാക്കിംഗിനായി വിഭവങ്ങളെ ടാഗ് ചെയ്യുക
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
-
-### 2. Security Best Practices
+  
+### 2. സുരക്ഷിതത്വം മികച്ച പ്രാക്ടീസുകൾ
 
 ```bicep
 // Always use managed identity
@@ -641,8 +643,8 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
   }
 }
 ```
-
-### 3. Performance Optimization
+  
+### 3. പ്രകടനം മെച്ചപ്പെടുത്തൽ
 
 ```yaml
 # azure.yaml with performance settings
@@ -661,22 +663,22 @@ services:
           http:
             concurrent: 100
 ```
-
-### 4. Monitoring and Observability
+  
+### 4. നിരീക്ഷണവും ഒബ്സർവബിലിറ്റിയും
 
 ```bash
-# ആപ്ലിക്കേഷൻ ഇൻസൈറ്റ്സ് സജ്ജമാക്കുക
+# ആപ്ലിക്കേഷൻ ഇൻസൈറ്റ്സുകൾ സാധൂകരിക്കുക
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
-# ലോഗുകൾ റിയൽ ടൈമിൽ കാണുക
+# യാഥാർത്ഥ്യ സമയത്ത് ലോഗുകൾ കാണുക
 azd monitor --logs
-# അല്ലെങ്കിൽ കൺറെയ്‌നർ ആപ്പുകൾക്കായി അസ്യൂർ CLI ഉപയോഗിക്കുക:
+# അല്ലെങ്കിൽ കോൺടെയ്‌നർ ആപ്പുകൾക്കായി അസ്യൂർ CLI ഉപയോഗിക്കുക:
 az containerapp logs show --name api --resource-group rg-myapp --follow
 
-# മീറ്റ്രിക്‌സ് നിരീക്ഷിക്കുക
+# മീറ്റ്രിക്കുകൾ നിരീക്ഷിക്കുക
 azd monitor --live
 
-# അലർട്ടുകൾ സൃഷ്ടിക്കുക
+# അലെർട്ടുകൾ സൃഷ്ടിക്കുക
 az monitor metrics alert create \
   --name high-cpu-alert \
   --resource-group rg-myapp \
@@ -684,30 +686,30 @@ az monitor metrics alert create \
   --condition "avg CPU > 80" \
   --description "Alert when CPU exceeds 80%"
 ```
-
-### 5. Cost Optimization
+  
+### 5. ചെലവ് മെച്ചപ്പെടുത്തൽ
 
 ```bash
-# ഉപയോഗത്തിലില്ലാത്തപ്പോൾ സകലവ് പൂർണമായും കുറയ്ക്കുക
+# ഉപയോഗത്തിലില്ലാതിരുന്നാൽ പൂജ്യമായി സ്‌കെയിൽ ചെയ്യുക
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# വികസന പരിസരങ്ങളിലായി സ്പോട്ട് ഇൻസ്റ്റൻസ്‌കൾ ഉപയോഗിക്കുക
+# ഡെവലപ്പ്മെന്റ് പരിരക്ഷണങ്ങൾക്ക് സ്‌പോട് ഇൻസ്റ്റാൻസുകൾ ഉപയോഗിക്കുക
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# ബഡ്ജറ്റ് അലർട്ടുകൾ സജ്ജമാക്കുക
+# ബഡ്ജറ്റായിടുകളുണ്ടെങ്കിൽ അലേർട്ട് സജ്ജമാക്കുക
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
   --time-grain Monthly \
   --threshold 80
 ```
+  
+### 6. CI/CD ഇന്റഗ്രേഷൻ
 
-### 6. CI/CD Integration
-
-**GitHub Actions ഉദാഹരണം:**
+**GitHub ആക്ഷൻസ് ഉദാഹരണം:**  
 ```yaml
 name: Deploy to Azure Container Apps
 
@@ -736,42 +738,42 @@ jobs:
           AZURE_ENV_NAME: ${{ secrets.AZURE_ENV_NAME }}
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
-
-## Common Commands Reference
+  
+## പൊതുവായ കമാൻഡുകളുടെ റഫറൻസ്
 
 ```bash
-# പുതിയ കണ്ടെയ്നർ ആപ്പ് പ്രോജക്ട് ആരംഭിക്കുക
+# പുതിയ കണ്ടെയ്‌നർ ആപ്പ് പ്രോജക്ട് ആരംഭിക്കുക
 azd init --template <template-name>
 
-# അടിസ്ഥാനസൗകര്യവും ആപ്പ്ലിക്കേഷനും വിന്യാസം ചെയ്യുക
+# ഇന്‍ഫ്രാസ്‌ട്രക്ചർയും അപ്ലിക്കേഷൻവും ഡിപ്പ്ലോയ്മെന്റ് ചെയ്യുക
 azd up
 
-# ആപ്പ്ലിക്കേഷൻ കോഡ് മാത്രം വിന്യാസം ചെയ്യുക (അടിസ്ഥാനസൗകര്യം ഒഴിവാക്കുക)
+# അപ്ലിക്കേഷൻ കോഡ് മാത്രം ഡിപ്പ്ലോയ്മെന്റ് ചെയ്യുക (ഇന്‍ഫ്രാസ്‌ട്രക്ചർ ഒഴിവാക്കുക)
 azd deploy
 
-# അടിസ്ഥാനസൗകര്യം മാത്രം ഒരുക്കുക
+# ഇന്‍ഫ്രാസ്‌ട്രക്ചർ മാത്രം പ്രൊവിഷന്‍ ചെയ്യുക
 azd provision
 
-# വിന്യാസം ചെയ്‌ത റിസോഴ്സ് കാണൂ
+# ഡിപ്പ്ലോയ്മെന്റ് ചെയ്ത റെസോഴ്‌സുകൾ കാണുക
 azd show
 
-# azd monitor അല്ലെങ്കിൽ Azure CLI ഉപയോഗിച്ച് ലോഗുകൾ സ്ട്രീം ചെയ്യുക
+# azd monitor അല്ലെങ്കിൽ Azure CLI ഉപയോഗിച്ച് ലോഗുകൾ പകരുക
 azd monitor --logs
-# az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
+# az containerapp logs show --name <സർവീസ്-പേര്> --resource-group <ആർജി-പേര്> --follow
 
-# ആപ്പ്ലിക്കേഷൻ നിരീക്ഷിക്കുക
+# അപ്ലിക്കേഷൻ നിരീക്ഷിക്കുക
 azd monitor --overview
 
 # റിസോഴ്‌സുകൾ ശുചീകരിക്കുക
 azd down --force --purge
 ```
+  
+## പ്രശ്‌ന പരിഹാരങ്ങൾ
 
-## Troubleshooting
-
-### പ്രശ്നം: കണ്ടെയ്‌നർ ആരംഭിക്കാൻ കഴിയുന്നില്ല
+### പ്രശ്‌നം: കണ്ടെയ്‌നർ തുടങ്ങാനാകുന്നില്ല
 
 ```bash
-# അസ്യൂർ CLI ഉപയോഗിച്ച് ലോഗുകൾ പരിശോധിക്കുക
+# Azure CLI ഉപയോഗിച്ച് ലോഗുകൾ പരിശോധിക്കുക
 az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
 # കണ്ടെയ്‌നർ ഇവന്റുകൾ കാണുക
@@ -780,68 +782,68 @@ az containerapp revision show \
   --resource-group rg-myapp \
   --revision latest
 
-# ലോക്കലായി ടെസ്റ്റ് ചെയ്യുക
+# ലോക്കൽ ആയി പരീക്ഷിക്കുക
 docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
-
-### പ്രശ്നം: കണ്ടെയ്‌നർ ആപ്പ് എൻഡ്‌പോയിന്റ് ആക്‌സസ് ചെയ്യാൻ കഴിയുന്നില്ല
+  
+### പ്രശ്‌നം: കണ്ടെയ്‌നർ ആപ്പ് എണ്ട്പോയിന്റിൽ ആക്‌സസ് സാധ്യമല്ല
 
 ```bash
-# ഇൻഗ്രസ് കോൺഫിഗറേഷൻ സ്ഥിരീകരിക്കുക
+# ഇംഗ്രസ് കോൺഫിഗറേഷൻ ശരിയാണോ എന്ന് പരിശോധിക്കുക
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# ഇൻറേണൽ ഇൻഗ്രസ് সক്രീയമാണോ എന്ന് പരിശോധിക്കുക
+# ഇന്റേണൽ ഇംഗ്രസ് പ്രവർത്തനക്ഷമമാണോ എന്ന് പരിശോധിക്കുക
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
   --external true
 ```
-
-### പ്രശ്നം: പ്രകടന പ്രശ്നങ്ങൾ
+  
+### പ്രശ്‌നം: പ്രകടന പ്രശ്നങ്ങൾ
 
 ```bash
-# സ്രോതസ്സ് ഉപയോഗം പരിശോധിക്കുക
+# ഉറവിട ഉപയോഗവ് പരിശോധിക്കുക
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# സ്രോതസ്സ് വർധിപ്പിക്കുക
+# ഉറവിടങ്ങൾ ഉയർത്തുക
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --cpu 2.0 \
   --memory 4Gi
 ```
+  
+## അധിക ռിസോഴ്‌സുകളും ഉദാഹരണങ്ങളും
+- [മൈക്രോസർവീസസ് ഉദാഹരണം](./microservices/README.md)
+- [വളരെ ലളിതമായ ഫ്ലാസ്‌ക് API ഉദാഹരണം](./simple-flask-api/README.md)
+- [Azure Container Apps ഡോക്യുമെന്റേഷൻ](https://learn.microsoft.com/azure/container-apps/)
+- [AZD ടെംപ്ലേറ്റ്സ് ഗ്യാലറി](https://azure.github.io/awesome-azd/)
+- [Container Apps സാമ്പിളുകൾ](https://github.com/Azure-Samples/container-apps-samples)
+- [Bicep ടെംപ്ലേറ്റ്സ്](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-## Additional Resources and Examples
-- [Microservices Example](./microservices/README.md)
-- [Simple Flash API Example](./simple-flask-api/README.md)
-- [Azure Container Apps Documentation](https://learn.microsoft.com/azure/container-apps/)
-- [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
-- [Container Apps Samples](https://github.com/Azure-Samples/container-apps-samples)
-- [Bicep Templates](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+## സംഭാവനകൾ
 
-## Contributing
+പുതിയ കണ്ടെയ്‌നർ ആപ്പ് ഉദാഹരണങ്ങൾ സംഭാവന ചെയ്യുവാൻ:
 
-പുതിയ കണ്ടെയ്‌നർ ആപ്പ് ഉദാഹരണങ്ങൾ സംഭാവന ചെയ്യാൻ:
-
-1. നിങ്ങളുടെ ഉദാഹരണത്തിനായി ഒരു പുതിയ സബ്ഡയറക്ടറി സൃഷ്ടിക്കുക
-2. പൂര്‍ണമായ azure.yaml, infra/, src/ ഫയലുകൾ ഉൾപ്പെടുത്തുക
-3. ഡിപ്ലോയ്മെന്റ് നിർദ്ദേശങ്ങളോടുകൂടിയ സമ്പൂർണ്ണ README ചേർക്കുക
-4. `azd up` ഉപയോഗിച്ച് ഡിപ്ലോയ്മെന്റ് പരീക്ഷിക്കുക
-5. ഒരു പുൾ റിക്വസ്റ്റ് സമർപ്പിക്കുക
+1. നിങ്ങളുടെ ഉദാഹരണത്തോടെ പുതിയ സബ്‌డയറക്ടറി സൃഷ്ടിക്കുക  
+2. സമ്പൂർണമായ `azure.yaml`, `infra/`, `src/` ഫയലുകൾ ഉൾപ്പെടുക  
+3. ഡിപ്ലോയ്മെന്റ് നിർദ്ദേശങ്ങളോടെയുള്ള പൂർണമായ README ചേർക്കുക  
+4. `azd up` ഉപയോഗിച്ച് ഡിപ്ലോയ്മെന്റ് ടെസ്റ്റ് ചെയ്യുക  
+5. പോൾ അഭ്യർത്ഥന സമർപ്പിക്കുക  
 
 ---
 
-**ഒരു സഹായം വേണോ?** പിന്തുണക്കും ചോദ്യങ്ങൾക്കും [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) കമ്മ്യൂണിറ്റിയിൽ ചേരുക.
+**സഹായം വേണോ?** പിന്തുണയ്ക്കും ചോദ്യങ്ങൾക്കുമായി [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) കമ്മ്യൂണിറ്റിയിൽ ചേരുക.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ഡിസ്ക്ലെയിമർ**:  
-ഈ ഡോക്യുമെന്റ് എഐ വിവർത്തന സേവനം [Co-op Translator](https://github.com/Azure/co-op-translator) ഉപയോഗിച്ച് വിവർത്തനം ചെയ്‍തിരിക്കുന്നു. നാം കൃതത്വത്തിനായി പരിശ്രമിച്ചിട്ടുണ്ടെങ്കിലും, ആട്ടോമേറ്റഡ് വിവർത്തനങ്ങളിൽ പിഴവുകൾ അല്ലെങ്കിൽ അനിഷ്ടതകൾ ഉണ്ടാകാം എന്ന് ദയവായി ശ്രദ്ധിക്കുക. സ്വന്തം ഭാഷയിലുള്ള യഥാർത്ഥ ഡോക്യുമെന്റ് ഔദ്യോഗിക ഉറവിടമായി കണക്കാക്കണം. ഗുരുതരമായ വിവരങ്ങൾക്ക്, പ്രൊഫഷണൽ മനുഷ്യ വിവർത്തനം നിർദ്ദേശിക്കുന്നു. ഈ വിവർത്തനത്തിന്റെ ഉപയോഗത്തിൽ നിന്നുണ്ടാകുന്ന ഏതൊക്കെ തെറ്റിദ്ധാരണകൾക്ക് ഞങ്ങൾ ഉത്തരവാദിത്വം ഏറ്റെടുക്കുന്നില്ല.
+**പരിഭവം**:  
+ഈ ഡോക്യുമെന്റ് AI പരിഭാഷാ സേവനം [Co-op Translator](https://github.com/Azure/co-op-translator) ഉപയോഗിച്ച് വിവർത്തനം ചെയ്തതാണ്. നമുക്ക് അച്ചടക്കപ്പെട്ടതിന്റെ തുല്യമായ തർജ്ജമ നൽകാൻ ശ്രമിക്കുന്നതിനാൽ, യന്ത്രപരിഭാഷകളിൽ പിശകുകൾ അല്ലെങ്കിൽ കൃത്യതയ്‌ക്കുറവ് ഉണ്ടാകാം എന്ന് ദയവായി ശ്രദ്ധിക്കുക. ഇതിന്റെ പ്രാമാണികമേഖല ഭാഷയിലുള്ള യഥാർത്ഥ ഡോക്യുമെന്റാണ് പ്രാമാണികമായ സ്രോതസ്സെന്ന് പരിഗണിക്കേണ്ടതുണ്ട്. നിർണായക വിവരങ്ങൾക്ക്, പ്രൊഫഷണൽ മനുഷ്യ പരിഭാഷ ശിപാർശിക്കുന്നു. ഈ പരിഭാഷ ഉപയോഗിച്ച് ഉണ്ടാകുന്ന ഏത് തെറ്റിദ്ധാരണകൾക്കും ഞങ്ങൾ ഉത്തരവാദിത്വം ഏറ്റെടുക്കുന്നില്ല.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

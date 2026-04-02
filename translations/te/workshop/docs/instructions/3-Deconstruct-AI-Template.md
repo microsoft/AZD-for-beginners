@@ -1,40 +1,40 @@
-# 3. టెంప్లేట్‌ను విచ్ఛేదనం చేయండి
+# 3. టెంప్లేట్‌ను విచ్ఛేదించండి
 
-!!! tip "ఈ మాడ్యూల్ ముగిసినప్పుడు మీరు చేయగలుగుతారు"
+!!! tip "ఈ మాడ్యూల్ ముగిసే వరకు మీరు చేయగలుగుతారు"
 
-    - [ ] Azure సహాయానికి MCP సర్వర్లుతో GitHub Copilot యాక్టివేట్ చేయడం
-    - [ ] AZD టెంప్లేట్ ఫోల్డర్ నిర్మాణం మరియు భాగాలు అర్థం చేసుకోవడం
-    - [ ] ఇన్ఫ్రాస్ట్రక్చర్-అజ్-కోడ్ (Bicep) సంస్థాగత నమూనాలను అన్వేషించడం
-    - [ ] **Lab 3:** రిపొజిటరీ ఆర్కిటెక్చర్‌ను అన్వేషించడానికి మరియు అర్థం చేసుకోవడానికి GitHub Copilot ఉపయోగించండి 
-
----
-
-
-AZD టెంప్లేట్‌లు మరియు Azure Developer CLI (`azd`) ద్వారా, మేము నమూనా కోడ్, ఇన్ఫ్రాస్ట్రక్చర్ మరియు కాన్ఫిగరేషన్ ఫైళ్లు కలిగిన ప్రీసెటప్ రెపోలను ఉపయోగించి మా AI డెవలప్‌మెంట్ ప్రయాణాన్ని వేగంగా ప్రారంభించవచ్చు - ఇది ఒక రెడీ-టు-డిప్లాయ్ _స్టార్టర్_ ప్రాజెక్ట్ రీతిలో ఉంటుంది.
-
-**కానీ ఇప్పుడు, ప్రాజెక్ట్ నిర్మాణం మరియు కోడ్‌బేస్‌ను అర్థం చేసుకోవాలి - మరియు AZD టెంప్లేట్‌ను అనుభవం లేకుండానే అనుకూలీకరించగలగాలి!**
+    - [ ] Azure సాయానికి MCP సర్వర్లతో GitHub Copilotను సక్రియం చేయండి
+    - [ ] AZD టెంప్లేట్ ఫోల్డర్ నిర్మాణం మరియు భాగాలను అర్థం చేసుకోండి
+    - [ ] Infrastructure-as-code (Bicep) నిర్వహణ నమూనాలను పరిశీలించండి
+    - [ ] **ల్యాబ్ 3:** GitHub Copilot ఉపయోగించి రిపోసిటరీ ఆర్కిటెక్చర్‌ను అన్వేషించి అర్థం చేసుకోండి
 
 ---
 
-## 1. GitHub Copilot యాక్టివేట్ చేయండి
 
-### 1.1 GitHub Copilot Chat ఇన్స్టాల్ చేయండి
+With AZD templates and the Azure Developer CLI (`azd`) we can quickly jumpstart our AI development journey with standardized repositories that provide sample code, infrastructure and configuration files - in the form of a ready-to-deploy _starter_ project.
 
-ఇప్పుడు [GitHub Copilot with Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode)ని అన్వేషించేందుకు సమయం వచ్చేసింది. ఇప్పుడ 우리는 ప్రకృతభాషలో మా టాస్క్‌ను చెప్పి, అమలు విషయంలో సహాయం పొందగలము. ఈ ల్యాబ్ కోసం, మేము [Copilot Free plan](https://github.com/github-copilot/signup)ను ఉపయోగిస్తాము, దీనికి నెలవారీ పూర్తి/చాట్ పరిమితి ఉంటుంది.
+**కానీ ఇప్పుడు, మనకు ప్రాజెక్ట్ నిర్మాణం మరియు కోడ్‌బేస్‌ ను అర్థం చేసుకోవాలి - మరియు AZD టెంప్లేట్‌ను కస్టమైజ్ చేయగలిగే స్థాయిలో ఉండాలి - AZD గురించి ముందే అనుభవం లేకుండానే!**
 
-యాన్జ(extension) మార్కెట్ప్లేస్ నుండే ఇన్స్టాల్ చేయొచ్చు, అయితే అది మీ Codespaces వాతావరణంలో ఇప్పటికే అందుబాటులో ఉండాలి. _Copilot ఐకాన్ డ్రాప్‌డౌన్ నుంచి `Open Chat` క్లిక్ చేయండి - మరియు `What can you do?` లాంటి ప్రాంప్ట్ టైప్ చేయండి_ - మీరు లాగిన్ కావడానికి ప్రాంప్ట్ కావచ్చు. **GitHub Copilot Chat సిద్ధంగా ఉంది**.
+---
 
-### 1.2. MCP సర్వర్లను ఇన్స్టాల్ చేయండి
+## 1. GitHub Copilotను సక్రియం చేయండి
 
-Agent మోడ్ విజయవంతంగా ఉపయోగపడాలంటే, అది సరైన టూల్స్‌కి ప్రాప్తి ఉండాలి అవి జ్ఞానం తీసుకోవడానికి లేదా చర్యలు తీసుకోవడానికి సహాయపడతాయి. ఇక్కడ MCP సర్వర్లు సహాయపడతాయి. మేము ఈ క్రింది సర్వర్లను కాన్ఫిగర్ చేస్తాము:
+### 1.1 GitHub Copilot Chat ను ఇన్‌స్టాల్ చేయండి
+
+It's time to explore [GitHub Copilot with Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Now, we can use natural language to describe our task at a high level, and get assistance in execution. For this lab, we'll use the [Copilot Free plan](https://github.com/github-copilot/signup) which has a monthly limit for completions and chat interactions.
+
+The extension can be installed from the marketplace, and it is often already available in Codespaces or dev container environments. _Click `Open Chat` from the Copilot icon drop-down - and type a prompt like `What can you do?`_ - you may be prompted to log in. **GitHub Copilot Chat సిద్ధంగా ఉంది**.
+
+### 1.2. MCP సర్వర్లను ఇన్‌స్టాల్ చేయండి
+
+For Agent mode to be effective, it needs access to the right tools to help it retrieve knowledge or take actions. This is where MCP servers can help. We'll configure the following servers:
 
 1. [Azure MCP Server](../../../../../workshop/docs/instructions)
 1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
 
-ఏక్టివేట్ చేయడానికి:
+To activate these:
 
-1. `.vscode/mcp.json` అని ఒక ఫైల్ ఉండకపోతే సృష్టించండి
-1. ఆ ఫైల్‌లో క్రింది 내용을 కాపీ చేసి - సర్వర్లు మొదలు పెట్టండి!
+1. Create a file called `.vscode/mcp.json` if it does not exist
+1. Copy the following into that file - and start the servers!
    ```json title=".vscode/mcp.json"
    {
       "servers": {
@@ -55,9 +55,9 @@ Agent మోడ్ విజయవంతంగా ఉపయోగపడాలం
    }
    ```
 
-??? warning "మీకు `npx` ఇన్స్టాల్ కాలేదన్న దోషం రావచ్చు (పరిష్కారం కోసం విస్తరించడానికి క్లిక్ చేయండి)"
+??? warning "మీకు `npx` ఇన్‌స్టాల్ కాలేదన్న దోషం ఎదుర కావచ్చు (సరిచేసుకోవడానికి క్లిక్ చేయండి)"
 
-      దీనిని పరిష్కరించడానికి, `.devcontainer/devcontainer.json` ఫైల్‌ను తెరిచి features సెక్షన్‌లో క్రింది లైన్‌ను జోడించండి. తర్వాత కంటెయినర్‌ను మళ్ళీ బిల్డ్ చేయండి. ఇప్పుడు మీకु `npx` ఇన్స్టాల్ అవ్వాలి.
+      To fix,this open the `.devcontainer/devcontainer.json` file and add this line to the features section. Then rebuild the container. You should now have `npx` installed.
 
       ```title="" linenums="0"
          "features": {
@@ -66,53 +66,52 @@ Agent మోడ్ విజయవంతంగా ఉపయోగపడాలం
          },
       ```
 
+
 ---
 
 ### 1.3. GitHub Copilot Chat ని పరీక్షించండి
 
-**ముందుగా VS Code కమాండ్ లైన్ నుండి Azure తో authenticate కావడానికి `az login` ఉపయోగించండి.**
+**మొదట VS Code కమాండ్ లైన్ నుండి Azureతో authenticate చేయడానికి `azd auth login` ఉపయోగించండి. మీరు Azure CLI కమాండ్లు నేరుగా నడపాలనుకుంటే మాత్రమే `az login` కూడా వాడండి.**
 
-ఇప్పుడు మీరు మీ Azure సబ్‌స్క్రిప్షన్ స్థితిని ప్రశ్నించగలరటం, మరియు డిప్లాయ్ అయిన రిసోర్సుల లేదా కాన్ఫిగరేషన్ గురించి ప్రశ్నలు అడగగలరు. ఈ ప్రాంప్ట్‌లను ప్రయత్నించండి:
+You should now be able to query your Azure subscription status, and ask questions about deployed resources or configuration. Try these prompts:
 
 1. `List my Azure resource groups`
 1. `#foundry list my current deployments`
 
-మైక్రోసాఫ్ట్ డాక్స్ MCP సర్వర్‌లో భద్రపడి ఉన్న Azure డాక్యుమెంటేషన్ గురించి కూడా మీరు ప్రశ్న అడిగి, సమాధానాలు పొందవచ్చు. ఈ ప్రాంప్ట్‌లను ప్రయత్నించండి:
+You can also ask questions about Azure documentation and get responses grounded in the Microsoft Docs MCP server. Try these prompts:
 
 1. `#microsoft_docs_search What is Azure Developer CLI?`
 1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
 
-లేదా టాస్క్ పూర్తి చేయడానికి కోడ్ స్నిపెట్లను కోరవచ్చు. ఈ ప్రాంప్ట్‌ని ప్రయత్నించండి.
+Or you can ask for code snippets to complete a task. Try this prompt.
 
 1. `Give me a Python code example that uses AAD for an interactive chat client`
 
-`Ask` మోడ్‌లో, ఇది మీరు కాపీ-పేస్ట్ చేసి ప్రయత్నించగల కోడ్ ను అందిస్తుంది. `Agent` మోడ్‌లో, ఇది ఒక దశ ముందుకు వెళ్లి సంబంధిత రిసోర్సులను సృష్టించవచ్చు - సెటప్ స్క్రిప్టులు మరియు డాక్యుమెంటేషన్ సహా - ఆ టాస్క్‌ను అమలు చేయటానికి మీకు సహాయం చేయడానికి.
+In `Ask` mode, this will provide code that you can copy-paste and try out. In `Agent` mode, this might go a step further and create the relevant resources for you - including setup scripts and documentation - to help you execute that task.
 
-**ఇప్పుడు మీరు టెంప్లేట్ రిపొజిటరీని అన్వేషించేందుకు సిద్ధంగా ఉన్నారు**
+**మీకు ఇప్పుడు టెంప్లేట్ రిపోసిటరీని అన్వేషించడానికి సన్నద్ధంగా ఉంటుంది**
 
 ---
 
-## 2. ఆర్కిటెక్చర్‌ను విచ్ఛేదనం చేయండి
+## 2. ఆర్కిటెక్చర్‌ను విచ్ఛేదించండి
 
-??? prompt "ASK: docs/images/architecture.pngలోని అప్లికేషన్ ఆర్కిటెక్చర్‌ను 1 పేరాగ్రాఫ్‌లో వివరణ చేయండి"
+??? prompt "ASK: docs/images/architecture.png లోని అప్లికేషన్ ఆర్కిటెక్చర్‌ను 1 పేరాలో వివరించండి"
 
-      ఈ అప్లికేషన్ Azure మీద నిర్మించబడిన AI శక్తివంతమైన చాట్ అప్లికేషన్‌గా ఉంది, ఇది ఆధునిక ఏజెంట్-ఆధారిత ఆర్కిటెక్చర్‌ను ప్రదర్శిస్తుంది. ఈ పరిష్కారం ప్రధానంగా Azure Container App చుట్టూ ఏర్పడింది, ఇది ప్రధాన అప్లికేషన్ కో드를 హోస్ట్ చేస్తుంది, వినియోగదారు ఇన్పుట్‌ను ప్రాసెస్ చేసి AI ఏజెంట్ ద్వారా తెలివైన ప్రతిస్పందనలు రూపొందిస్తుంది.
+      This application is an AI-powered chat application built on Azure that demonstrates a modern agent-based architecture. The solution centers around an Azure Container App that hosts the main application code, which processes user input and generates intelligent responses through an AI agent. 
       
-      ఆర్కిటెక్చర్ Microsoft Foundry ప్రాజెక్టును AI సామర్ధ్యాల కోసం ఆధారంగా ఉపయోగిస్తుంది, మరియు Azure AI Services (ఉదాహరణకు gpt-4.1-mini వంటి భాషా మోడల్స్) మరియు ఏజెంట్ ఫంక్షనాలిటీకి కనెక్ట్ చేస్తుంది. వినియోగదారు పరస్పర చర్యలు React-ఆధారిత ఫ్రంట్‌ఎండ్ నుండి FastAPI బ్యాక్‌ఎండ్ వరకు ప్రవహిస్తాయి, ఇది గున్న భాగంలో AI ఏజెంట్ సేవతో సందేశాలు మార్చుకోవడానికి వినియోగించబడుతుంది.
+      The architecture leverages Microsoft Foundry Project as the foundation for AI capabilities, connecting to Azure AI Services that provide the underlying language models (such as gpt-4.1-mini) and agent functionality. User interactions flow through a React-based frontend to a FastAPI backend that communicates with the AI agent service for generating contextual responses. 
       
-      సిస్టమ్ ఫైల్ శోధన లేదా Azure AI Search సేవ ద్వారా జ్ఞానం తిరిగి పొందే సామర్థ్యాలను చేర్చుకుంటుంది, ఏజెంట్ అప్లోడ్ చేయబడిన డాక్యుమెంట్ల నుంచి సమాచారం తీసుకొనడానికి మరియు సూచించేలా ఉంటుంది.
+      The system incorporates knowledge retrieval capabilities through either file search or Azure AI Search service, allowing the agent to access and cite information from uploaded documents. For operational excellence, the architecture includes comprehensive monitoring through Application Insights and Log Analytics Workspace for tracing, logging, and performance optimization. 
       
-      ఆపరేషనల్ ఉత్తమత కోసం, ఆర్కిటెక్చర్ ట్రేసింగ్, లాగింగ్ మరియు పనితీరు ఆప్టిమైజేషన్ కోసం Application Insights మరియు Log Analytics Workspace ద్వారా సమగ్ర మానిటరింగ్‌ను కలిగి ఉంటుంది.
-      
-      Azure Storage అప్లికేషన్ డేటా మరియు ఫైల్ అప్లోడ్స్ కోసం blob స్టోరేజ్‌ను అందిస్తుంది, మరియు Managed Identity రిసోర్సుల మధ్య సురక్షిత ప్రాప్తిని క్రెడెంచియల్స్ నిల్వ చేయకుండా უზრუნველყოფిస్తుంది. మొత్తం పరిష్కారం స్కేలబిలిటీ మరియు నిర్వహణా-సౌకర్యానికి డిజైన్ చేయబడింది, కంటెయినరైజ్డ్ అప్లికేషన్ డిమాండ్ ఆధారంగా ఆటోమేటిక్‌గా స్కేల్ అవుతుంది మరియు Azure యొక్క మేనేజ్ చేయబడే సర్వీసుల ద్వారా బిల్ట్-ఇన్ భద్రత, మానిటరింగ్ మరియు CI/CD సామర్థ్యాలను అందిస్తుంది.
+      Azure Storage provides blob storage for application data and file uploads, while Managed Identity ensures secure access between Azure resources without storing credentials. The entire solution is designed for scalability and maintainability, with the containerized application automatically scaling based on demand while providing built-in security, monitoring, and CI/CD capabilities through Azure's managed services ecosystem.
 
 ![ఆర్కిటెక్చర్](../../../../../translated_images/te/architecture.48d94861e6e6cdc0.webp)
 
 ---
 
-## 3. రిపొజిటరీ నిర్మాణం
+## 3. రిపోసిటరీ నిర్మాణం
 
-!!! prompt "ASK: టెంప్లేట్ ఫోల్డర్ నిర్మాణాన్ని వివరణ చేయండి. విజువల్ హైరార్కికల్ డయగ్రామ్ తో ప్రారంభించండి."
+!!! prompt "ASK: టెంప్లేట్ ఫోల్డర్ నిర్మాణాన్ని వివరించండి. ఒక దృశ్య హైరార్కికల్ డయాగ్రామ్‌తో ప్రారంభించండి."
 
 ??? info "ANSWER: Visual Hierarchical Diagram"
 
@@ -120,163 +119,163 @@ Agent మోడ్ విజయవంతంగా ఉపయోగపడాలం
       get-started-with-ai-agents/
       ├── 📋 Configuration & Setup
       │   ├── azure.yaml                    # Azure Developer CLI కాన్ఫిగరేషన్
-      │   ├── docker-compose.yaml           # స్థానిక డెవలప్‌మెంట్ కంటైనర్లు
+      │   ├── docker-compose.yaml           # లోకల్ డెవలప్‌మెంట్ కంటెయినర్లు
       │   ├── pyproject.toml                # Python ప్రాజెక్ట్ కాన్ఫిగరేషన్
       │   ├── requirements-dev.txt          # డెవలప్‌మెంట్ డిపెండెన్సీలు
-      │   └── .devcontainer/                # VS Code dev container సెటప్
+      │   └── .devcontainer/                # VS Code dev కంటెయినర్ సెటప్
       │
       ├── 🏗️ Infrastructure (infra/)
-      │   ├── main.bicep                    # ప్రధాన ఇన్ఫ్రాస్ట్రక్చర్ టెంప్లేట్
-      │   ├── api.bicep                     # API-స్పెసిఫిక్ రిసోర్సులు
-      │   ├── main.parameters.json          # ఇన్ఫ్రాస్ట్రక్చర్ పారామీటర్లు
-      │   └── core/                         # మాడ్యూలర్ ఇన్ఫ్రాస్ట్రక్చర్ కొంపోనెంట్స్
+      │   ├── main.bicep                    # ప్రధాన ఇన్‌ఫ్రాస్ట్రక్చర్ టెంప్లేట్
+      │   ├── api.bicep                     # API-స్పెసిఫిక్ రిసోర్సెస్
+      │   ├── main.parameters.json          # ఇన్‌ఫ్రాస్ట్రక్చర్ పారామీటర్లు
+      │   └── core/                         # మాడ్యులర్ ఇన్‌ఫ్రాస్ట్రక్చర్ భాగాలు
       │       ├── ai/                       # AI సర్వీస్ కాన్ఫిగరేషన్లు
-      │       ├── host/                     # హోస్టింగ్ ఇన్ఫ్రాస్ట్రక్చర్
+      │       ├── host/                     # హోస్టింగ్ ఇన్‌ఫ్రాస్ట్రక్చర్
       │       ├── monitor/                  # మానిటరింగ్ మరియు లాగింగ్
       │       ├── search/                   # Azure AI Search సెటప్
-      │       ├── security/                 # భద్రత మరియు ఐడెంటిటీ
+      │       ├── security/                 # సెక్యూరిటీ మరియు ఐడెంటిటీ
       │       └── storage/                  # స్టోరేజ్ అకౌంట్ కాన్ఫిగ్స్
       │
       ├── 💻 Application Source (src/)
-      │   ├── api/                          # బ్యాక్‌ఎండ్ API
+      │   ├── api/                          # బ్యాకెండ్ API
       │   │   ├── main.py                   # FastAPI అప్లికేషన్ ఎంట్రీ
       │   │   ├── routes.py                 # API రూట్ నిర్వచనలు
-      │   │   ├── search_index_manager.py   # శోధన ఫంక్షనాలిటీ
+      │   │   ├── search_index_manager.py   # సెర్చ్ ఫంక్షనాలిటీ
       │   │   ├── data/                     # API డేటా హ్యాండ్లింగ్
-      │   │   ├── static/                   # స్థిర వెబ్ ఆసెట్స్
+      │   │   ├── static/                   # స్థిర వెబ్ ఆస్తులు
       │   │   └── templates/                # HTML టెంప్లేట్లు
       │   ├── frontend/                     # React/TypeScript ఫ్రంట్‌ఎండ్
       │   │   ├── package.json              # Node.js డిపెండెన్సీలు
       │   │   ├── vite.config.ts            # Vite బిల్డ్ కాన్ఫిగరేషన్
       │   │   └── src/                      # ఫ్రంట్‌ఎండ్ సోర్స్ కోడ్
       │   ├── data/                         # నమూనా డేటా ఫైళ్లు
-      │   │   └── embeddings.csv            # ప్రీ-కంప్యూటెడ్ ఎంబెడింగ్‌లు
-      │   ├── files/                        # జ్ఞాన బేస్ ఫైళ్లు
+      │   │   └── embeddings.csv            # ముందుగా గణించిన ఎంబెడ్డింగ్స్
+      │   ├── files/                        # నాలెడ్జ్ బేస్ ఫైళ్ళు
       │   │   ├── customer_info_*.json      # కస్టమర్ డేటా నమూనాలు
       │   │   └── product_info_*.md         # ఉత్పత్తి డాక్యుమెంటేషన్
       │   ├── Dockerfile                    # కంటెయినర్ కాన్ఫిగరేషన్
-      │   └── requirements.txt              # Python డిపెండెన్సీలు
+      │   └── requirements.txt              # Python డిపెండెన్సీస్
       │
       ├── 🔧 Automation & Scripts (scripts/)
-      │   ├── postdeploy.sh/.ps1           # పోస్ట్-డిప్లాయ్ సెటప్
-      │   ├── setup_credential.sh/.ps1     # క్రెడెంచియల్ కాన్ఫిగరేషన్
-      │   ├── validate_env_vars.sh/.ps1    # ఎన్విరాన్‌మెంట్ వెరియబుల్ పర్యవేక్షణ
+      │   ├── postdeploy.sh/.ps1           # పోస్ట్-డిప్లాయ్‌మెంట్ సెటప్
+      │   ├── setup_credential.sh/.ps1     # క్రెడెన్షియల్ కాన్ఫిగరేషన్
+      │   ├── validate_env_vars.sh/.ps1    # పర్యావరణ ధృవీకరణ
       │   └── resolve_model_quota.sh/.ps1  # మోడల్ కోటా నిర్వహణ
       │
       ├── 🧪 Testing & Evaluation
-      │   ├── tests/                        # యూనిట్ మరియు ఇంటిగ్రేషన్ టెస్ట్లు
+      │   ├── tests/                        # యూనిట్ మరియు ఇంటిగ్రేషన్ పరీక్షలు
       │   │   └── test_search_index_manager.py
-      │   ├── evals/                        # ఏజెంట్ మూల్యాంకన ఫ్రేమ్‌వర్క్
+      │   ├── evals/                        # ఏజెంట్ మూల్యాంకన ఫ్రేమ్వర్క్
       │   │   ├── evaluate.py               # మూల్యాంకన రన్నర్
-      │   │   ├── eval-queries.json         # టెస్ట్ ప్రశ్నలు
+      │   │   ├── eval-queries.json         # పరీక్ష క్వెరీలు
       │   │   └── eval-action-data-path.json
-      │   ├── sandbox/                      # డెవలప్‌మెంట్ ప్లెయ్‌గ్రౌండ్
-      │   │   ├── 1-quickstart.py           # ప్రారంభిక ఉదాహరణలు
+      │   ├── sandbox/                      # డెవలప్‌మెంట్ ప్లేగ్రౌండ్
+      │   │   ├── 1-quickstart.py           # ప్రారంభించడానికి ఉదాహరణలు
       │   │   └── aad-interactive-chat.py   # ఆథెంటికేషన్ ఉదాహరణలు
-      │   └── airedteaming/                 # AI సేఫ్టీ మూల్యాంకన
+      │   └── airedteaming/                 # AI సేఫ్టీ మూల్యాంకనం
       │       └── ai_redteaming.py          # రెడ్ టీమ్ టెస్టింగ్
       │
       ├── 📚 Documentation (docs/)
-      │   ├── deployment.md                 # డిప్లాయ్ గైడ్
-      │   ├── local_development.md          # స్థానిక సెటప్ సూచనలు
+      │   ├── deployment.md                 # డిప్లాయ్‌మెంట్ గైడ్
+      │   ├── local_development.md          # లోకల్ సెటప్ సూచనలు
       │   ├── troubleshooting.md            # సాధారణ సమస్యలు & పరిష్కారాలు
       │   ├── azure_account_setup.md        # Azure ప్రీరిక్విజిట్స్
-      │   └── images/                       # డాక్యుమెంటేషన్ ఆసెట్స్
+      │   └── images/                       # డాక్యుమెంటేషన్ ఆస్తులు
       │
       └── 📄 Project Metadata
          ├── README.md                     # ప్రాజెక్ట్ అవలోకనం
          ├── CODE_OF_CONDUCT.md           # కమ్యూనిటీ మార్గదర్శకాలు
-         ├── CONTRIBUTING.md              # సంకలనం మార్గదర్శకం
-         ├── LICENSE                      # లైసెన్సు షరతులు
-         └── next-steps.md                # పోస్ట్-డిప్లాయ్ మార్గదర్శకాలు
+         ├── CONTRIBUTING.md              # కాంట్రిబ్యూషన్ గైడ్
+         ├── LICENSE                      # లైసెన్స్ నిబంధనలు
+         └── next-steps.md                # పోస్ట్-డిప్లాయ్‌మెంట్ మార్గదర్శకత్వం
       ```
 
-### 3.1. కోర్ అప్లికేషన్ ఆర్కిటెక్చర్
+### 3.1. కోర్ యాప్ ఆర్కిటెక్చర్
 
-ఈ టెంప్లేట్ ఒక **ఫుల్-స్టాక్ వెబ్ అప్లికేషన్** నమూనాను అనుసరిస్తుంది:
+This template follows a **full-stack web application** pattern with:
 
-- **బ్యాక్‌ఎండ్**: Python FastAPI తో Azure AI ఇంటిగ్రేషన్
-- **ఫ్రంట్‌ఎండ్**: TypeScript/React తో Vite బిల్డ్ సిస్టమ్
-- **ఇన్ఫ్రాస్ట్రక్చర్**: క్లౌడ్ రిసోర్సుల కోసం Azure Bicep టెంప్లేట్లు
-- **కంటెయినరైజేషన్**: స్థిరమైన డిప్లాయ్‌మెంట్ కోసం Docker
+- **Backend**: Python FastAPI తో Azure AI ఇంటిగ్రేషన్
+- **Frontend**: TypeScript/React మరియు Vite బిల్డ్ సిస్టమ్
+- **Infrastructure**: క్లౌడ్ రిసోర్సుల కోసం Azure Bicep టెంప్లేట్స్
+- **Containerization**: స్థిరమైన డిప్లాయ్‌మెంట్ కోసం Docker
 
-### 3.2 ఇన్ఫ్రా యస్ కోడ్ (bicep)
+### 3.2 ఇన్‌ఫ్రాస్ట్రక్చర్ ఎస్-కోడ్ (bicep)
 
-ఇన్ఫ్రాస్ట్రక్చర్ లేయర్ modularగా అమలుచేసే **Azure Bicep** టెంప్లేట్స్ ఉపయోగిస్తుంది:
+The infrastructure layer uses **Azure Bicep** templates organized modularly:
 
    - **`main.bicep`**: అన్ని Azure రిసోర్సులను ఆర్కెస్ట్రేట్ చేస్తుంది
-   - **`core/` మాడ్యూల్స్**: వివిధ సర్వీసుల కోసం పునర్వినియోగపరచదగిన కంపోనెంట్లు
-      - AI సేవలు (Microsoft Foundry Models, AI Search)
-      - కంటెయినర్ హోస్టింగ్ (Azure Container Apps)
-      - మానిటరింగ్ (Application Insights, Log Analytics)
-      - భద్రత (Key Vault, Managed Identity)
+   - **`core/` modules**: వివిధ సర్వీసుల కోసం పునర్వినియోగపరచగల భాగాలు
+      - AI services (Microsoft Foundry Models, AI Search)
+      - Container hosting (Azure Container Apps)
+      - Monitoring (Application Insights, Log Analytics)
+      - Security (Key Vault, Managed Identity)
 
-### 3.3 అప్లికేషన్ సోర్స్ (`src/`)
+### 3.3 Application Source (`src/`)
 
-**బ్యాక్‌ఎండ్ API (`src/api/`)**:
+**Backend API (`src/api/`)**:
 
-- FastAPI-పై ఆధారపడి ఉన్న REST API
+- FastAPI ఆధారిత REST API
 - Foundry Agents ఇంటిగ్రేషన్
-- జ్ఞానం తిరిగి పొందుట కోసం సెర్చ్ ఇండెక్స్ నిర్వహణ
+- నాలెడ్జ్ రిట్రీవల్ కోసం సెర్చ్ ఇండెక్స్ నిర్వహణ
 - ఫైల్ అప్లోడ్ మరియు ప్రాసెసింగ్ సామర్థ్యాలు
 
-**ఫ్రంట్‌ఎండ్ (`src/frontend/`)**:
+**Frontend (`src/frontend/`)**:
 
 - ఆధునిక React/TypeScript SPA
 - వేగవంతమైన డెవలప్‌మెంట్ మరియు ఆప్టిమైజ్డ్ బిల్డ్స్ కోసం Vite
-- ఏజెంట్ పరస్పర చర్యల కోసం చాట్ ఇంటర్‌ఫేస్
+- ఏజెంట్ ఇంటరాక్షన్ల కోసం చాట్ ఇంటర్‌ఫేస్
 
-**నాలెడ్జ్ బేస్ (`src/files/`)**:
+**Knowledge Base (`src/files/`)**:
 
 - నమూనా కస్టమర్ మరియు ఉత్పత్తి డేటా
-- ఫైల్-ఆధారిత జ్ఞానం తిరిగి పొందడాన్ని ప్రదర్శిస్తుంది
+- ఫైల్-ఆధారిత నాలెడ్జ్ రిట్రీవల్‌ను చూపిస్తుంది
 - JSON మరియు Markdown ఫార్మాట్ ఉదాహరణలు
 
 
-### 3.4 DevOps & ఆటోమేషన్
+### 3.4 డెవ్‌ఓప్స్ & ఆటోమేషన్
 
-**స్క్రిప్ట్స్ (`scripts/`)**:
+**Scripts (`scripts/`)**:
 
-- క్రాస్-ప్లాట్‌ఫార్మ్ PowerShell మరియు Bash స్క్రిప్ట్లు
-- ఎన్విరాన్‌మెంట్ నిర్ధారణ మరియు సెటప్
-- పోస్ట్-డిప్లాయ్ కాన్ఫిగరేషన్
+- క్రాస్-ప్లాట్‌ఫాం PowerShell మరియు Bash స్క్రిప్ట్స్
+- పర్యావరణ ధృవీకరణ మరియు సెటప్
+- పోస్ట్-డిప్లాయ్‌మెంట్ కాన్ఫిగరేషన్
 - మోడల్ కోటా నిర్వహణ
 
-**Azure Developer CLI ఇంటిగ్రేషన్**:
+**Azure Developer CLI Integration**:
 
-- `azure.yaml` `azd` వర్క్‌ఫ్లోస్ కోసం కాన్ఫిగరేషన్
-- ఆటోమేటెడ్ ప్రావిజనింగ్ మరియు డిప్లాయ్‌మెంట్
-- ఎన్విరాన్‌మెంట్ వేరియబుల్ నిర్వహణ
+- `azure.yaml` కన్ఫిగరేషన్ `azd` వర్క్‌ఫ్లోల కోసం
+- ఆటోమేటెడ్ ప్రొవిజనింగ్ మరియు డిప్లాయ్‌మెంట్
+- ఎన్‌వారన్మెంట్ వ్యారీబుళ్ల నిర్వహణ
 
-### 3.5 టెస్టింగ్ & క్వాలిటీ అశ్యూరెన్స్
+### 3.5 టెస్టింగ్ & క్వాలిటీ అష్యూరెన్స్
 
-**మూల్యాంకన ఫ్రేమ్‌వర్క్ (`evals/`)**:
+**Evaluation Framework (`evals/`)**:
 
 - ఏజెంట్ పనితీరు మూల్యాంకనం
-- ప్రశ్న-ప్రతిస్పందన నాణ్యత పరీక్షలు
-- ఆటోమేటెడ్ అసెస్‌మెంట్ పైప్‌లైన్
+- క్వరీ-ప్రత్యుత్తర నాణ్యత పరీక్షలు
+- ఆటోమేటెడ్ అసెస్‌మెంట్ పైప్లైన్
 
-**AI సేఫ్టీ (`airedteaming/`)**:
+**AI Safety (`airedteaming/`)**:
 
-- AI సేఫ్టీ కోసం రెడ్-టీమ్ టెస్టింగ్
-- భద్రత లోపాల స్క్యానింగ్
-- బాధ్యతాయుత AI అమర్యాదలు
+- AI సేఫ్టీ కోసం రెడ్ టీమ్ టెస్టింగ్
+- సెక్యూరిటీ లోపాల స్కానింగ్
+- బాధ్యతాయుత AI ప్రాక్టీసులు
 
 ---
 
 ## 4. అభినందనలు 🏆
 
-మీరు GitHub Copilot Chat మరియు MCP సర్వర్లను ఉపయోగించి విజయవంతంగా రిపొజిటరీని అన్వేషించారు.
+You successfully used GitHub Copilot Chat with MCP servers, to explore the repository.
 
-- [X] Azure కోసం GitHub Copilot యాక్టివేట్ చేశారు
-- [X] అప్లికేషన్ ఆర్కిటెక్చర్ ను అర్థం చేసుకున్నారు
-- [X] AZD టెంప్లేట్ నిర్మాణాన్ని అన్వేషించారు
+- [X] Azure కోసం GitHub Copilot‌ను సక్రియం చేయించారు
+- [X] అప్లికేషన్ ఆర్కిటెక్చర్‌ను అర్థం చేసుకున్నారు
+- [X] AZD టెంప్లేట్ నిర్మాణాన్ని పరిశీలించారు
 
-ఇది మీకు ఈ టెంప్లేట్ కోసం ఉన్న _ఇన్ఫ్రాస్ట్రక్చర్ యస్ కోడ్_ ఆస్తుల గురించి భావననిస్తుంది. తర్వాత, మనం AZD కోసం కాన్ఫిగరేషన్ ఫైల్ ని పరిశీలిస్తాం.
+This gives you a sense of the _infrastructure as code_ assets for this template. Next, we'll look at the configuration file for AZD.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**నిరాకరణ**:
-ఈ పత్రం AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నించినప్పటికీ, ఆటోమేటెడ్ అనువాదాల్లో పొరపాట్లు లేదా లోపాలు ఉండవచ్చని దయచేసి గమనించండి. మూల భాషలోని అసలు డాక్యుమెంట్‌ను అధికారిక మూలంగా తీసుకోవాలి. కీలక సమాచారానికి వృత్తిపరమైన మానవ అనువాదం సిఫార్సు చేయబడుతుంది. ఈ అనువాదాన్ని ఉపయోగించడంవల్ల సంభవించిన ఏవైనా అపార్థాలు లేదా తప్పుగా అర్థం చేసుకోవడంపై మేము బాధ్యులు కాదు.
+**Disclaimer**:
+ఈ పత్రాన్ని AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించారు. మేము ఖచ్చితత్వానికి ప్రయత్నించినప్పటికీ, ఆటోమేటెడ్ అనువాదాల్లో తప్పులు లేదా పొరపాట్లు ఉండవచ్చు అని దయచేసి గమనించండి. మూల పత్రాన్ని దాని స్థానిక భాషలోని సంస్కరణను అధికారిక మూలంగా పరిగణించాలి. ప్రముఖమైన లేదా కీలకమైన సమాచారానికి, వృత్తిపరమైన మానవ అనువాదం సిఫార్సు చేయబడుతుంది. ఈ అనువాదాన్ని ఉపయోగించడం వల్ల ఏర్పడే ఏవైనా అపార్థాలు లేదా తప్పుగా అర్థం చేసుకోవడాల కోసం మేము బాధ్యులు కాదని తెలియజేస్తున్నాము.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

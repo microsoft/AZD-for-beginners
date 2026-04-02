@@ -1,55 +1,57 @@
-# AZD ಮೂಲಕ ಕಂಟೈನರ್ ಅಪ್ಸ್ ನಿಯೋಜನೆ ಉದಾಹರಣೆಗಳು
+# AZD ನೊಂದಿಗೆ ಕಂಟೈನರ್ ಅಪ್ಲಿಕೇಶನ್ ನಿಯೋಜನೆ ಉದಾಹರಣೆಗಳು
 
-ಈ ಡೈರೆಕ್ಟರಿ Azure Developer CLI (AZD) ಬಳಸಿ Azure Container Apps ಗೆ ಕಂಟೇನರೈಸ್ ಮಾಡಲಾದ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ನಿಯೋಜಿಸಲು ಸಮಗ್ರ ಉದಾಹರಣೆಗಳನ್ನು ಹೊಂದಿದೆ. ಈ ಉದಾಹರಣೆಗಳು ನೈಜ ಜಗತ್ತಿನ ಮಾದರಿಗಳು, ಉತ್ತಮ ಅಭ್ಯಾಸಗಳು, ಮತ್ತು ಉತ್ಪಾದನಾ-ತರದ ಸಂರಚನೆಗಳನ್ನು ಪ್ರದರ್ಶಿಸುತ್ತವೆ.
+ಈ ಡೈರೆಕ್ಟರಿ ನೀವಗೆ ಅಜ್ಯೂರ್ ಡೆವಲಪರ್ CLI (AZD) ಬಳಸಿ ಅಜ್ಯೂರ್ ಕಂಟೈನರ್ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಗಾಗಿ ಕಂಟೈನರ್ ರೂಪದ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ನಿಯೋಜಿಸುವ ವ್ಯಾಪಕ ಉದಾಹರಣೆಗಳನ್ನು ಒಳಗೊಂಡಿದೆ. ಈ ಉದಾಹರಣೆಗಳು ನೈಜ ಜಿಮ್ಮು ಪ್ಯಾಟರ್ನ್‌ಗಳು, ಉತ್ತಮ ಅಭ್ಯಾಸಗಳು, ಮತ್ತು ಉತ್ಪಾದನಾ-ಸಿದ್ಧ ಸಮೆಪನಗಳನ್ನು ತೋರಿಸುತ್ತವೆ.
 
-## 📚 ವಿಷಯಸೂಚಿ
+## 📚 ವಿಷಯಗಳ ಟೇಬಲ್
 
-- [ಅವಲೋಕನ](#ಅವಲೋಕನ)
-- [ಆವಶ್ಯಕತೆಗಳು](#ಪೂರ್ವಾಪೇಕ್ಷೆಗಳು)
+- [ಓವರ್‌ವ್ಯೂ](#ಓವರ್‌ವ್ಯೂ)
+- [ಮೂಲೆಭೂತ ಅಗತ್ಯಗಳು](#ಮೂಲೆಭೂತ-ಅಗತ್ಯಗಳು)
 - [ತ್ವರಿತ ಪ್ರಾರಂಭ ಉದಾಹರಣೆಗಳು](#ತ್ವರಿತ-ಪ್ರಾರಂಭ-ಉದಾಹರಣೆಗಳು)
 - [ಉತ್ಪಾದನಾ ಉದಾಹರಣೆಗಳು](#ಉತ್ಪಾದನಾ-ಉದಾಹರಣೆಗಳು)
-- [ಉನ್ನತ ಮಾದರಿಗಳು](#ಉನ್ನತ-ಮಾದರಿಗಳು)
+- [ಉನ್ನತ ಪ್ಯಾಟರ್ನ್‌ಗಳು](#ಉನ್ನತ-ಪ್ಯಾಟರ್ನ್‌ಗಳು)
 - [ಉತ್ತಮ ಅಭ್ಯಾಸಗಳು](#ಉತ್ತಮ-ಅಭ್ಯಾಸಗಳು)
 
-## ಅವಲೋಕನ
+## ಓವರ್‌ವ್ಯೂ
 
-Azure Container Apps 는 ಮ್ಯಾನೇಜ್ಡ್ ಸರ್ವರ್‌ಲೆಸ್ ಕಂಟೈನರ್ ಪ್ಲಾಟ್‌ಫಾರ್ಮ್ ಆಗಿದ್ದು, ಇನ್‌ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ನಿರ್ವಹಣೆ ಕೈಗೊಳ್ಳದೆ ಮೈಕ್ರೋಸರ್ವಿಸ್ಗಳನ್ನು ಮತ್ತು ಕಂಟೇನರ್‌ಅಧಾರಿತ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ಚಾಲನೆ ಮಾಡಲು ಅನುಮತಿಸುತ್ತದೆ. AZD ಜೊತೆಗೆ ಬಳಕೆ ಮಾಡಿದಾಗ, ನೀವು ಪಡೆಯುತ್ತೀರಿ:
+ಅಜ್ಯೂರ್ ಕಂಟೈನರ್ ಅಪ್ಲಿಕೇಶನ್ಸ್ ಎನ್ನುವುದು ಸಂಪೂರ್ಣ ನಿರ್ವಹಿತ ಸರ್ವರ್‌ಲೆಸ್ ಕಂಟೈನರ್ ವೇದಿಕೆ ಆಗಿದ್ದು, ಮೂಲಸೌಕರ್ಯ ನಿರ್ವಹಣೆ ಇಲ್ಲದೆ ಮೈಕ್ರೋಸರ್ವಿಸ್‌ಗಳು ಮತ್ತು ಕಂಟೈನರ್ ರೂಪದ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ನಡೆಸಲು ಸಾಧ್ಯವಾಗಿಸುತ್ತದೆ. AZD ಜೊತೆಗೆ:
 
-- **ಸರಳಗೊಳಿಸಲಾದ ನಿಯೋಜನೆ**: ಒಂದು ಒಡನಂತಹ ಕಮಾಂಡ್ ಮೂಲಕ ಡಿಪ್ಲಾಯ್‌ಮೆಂಟ್ ಮತ್ತು ಇನ್‌ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್
-- **ಸ್ವಯಂಚಾಲಿತ ಸ್ಕೇಲಿಂಗ್**: HTTP ಟ್ರಾಫಿಕ್ ಅಥವಾ ಇವென್ಟ್‌ಗಳ ಆಧಾರದ ಮೇಲೆ ಶೂನ್ಯಕ್ಕೆ ಸ್ಕೇಲ್ ಮಾಡುವುದು ಮತ್ತು ಸ್ಕೇಲ್ ಔಟ್ ಮಾಡುವುದು
-- **ಒಗ್ಗೂಡಿಸಿದ ನೆಟ್ವರ್ಕಿಂಗ್**: встроенный ಸೇವಾ ಹುಡುಕಿ ಮತ್ತು ಟ್ರಾಫಿಕ್ ವಿಂಗಡಣೆ
-- **Managed Identity**: Azure ಸಂಪನ್ಮೂಲಗಳಿಗೆ ಭದ್ರ ಪ್ರಮಾಣೀಕರಣ
-- **ವೆಚ್ಚದ ಆಪ್ಟಿಮೈಜೆಶನ್**: ನೀವು ಬಳಸಿದ ಸಂಪನ್ಮೂಲಗಳಿಗೆ ಮಾತ್ರ ಪಾವತಿ
+- **ಸರಳೀಕೃತ ನಿಯೋಜನೆ**: ಒಂದೇ ಆದೇಶದಲ್ಲಿ ಮೂಲಸೌಕರ್ಯ ಬದಿಗೊಟ್ಟಿರುವ ಕಂಟೈನರ್‌ಗಳನ್ನು ನಿಯೋಜಿಸಿ
+- **ಸ್ವಯಂಚಾಲಿತ ವಿಸ್ತರಣೆ**: HTTP ಟ್ರಾಫಿಕ್ ಅಥವಾ ಘಟನೆಗಳ ಆಧಾರದ ಮೇಲೆ ಶೂನ್ಯಕ್ಕೆ ಮತ್ತು ಹೊರಗೆ ವ್ಯಾಪಿಸು
+- **ಒಕ್ಕೂಟಗೊಳ್ಳುವ ನೆಟ್ವರ್ಕಿಂಗ್**: ಒಳಗೊಂಡಿರುವ ಸರ್ವಿಸ್ ಪತ್ತೆ ಮತ್ತು ಟ್ರಾಫಿಕ್ ವಿಭಜನೆ
+- **ನಿರ್ವಹಿತ ಐಡೆಂಟಿಟಿ**: ಅಜ್ಯೂರ್ ಸಂಪನ್ಮೂಲಗಳಿಗೆ ಸುರಕ್ಷಿತ 身ಪೈಕಿ
+- **ವೆಚ್ಚ ದಕ್ಷತೆ**: ನೀವು ಬಳಕೆಯಾದ ಸಂಪನ್ಮೂಲಗಳಿಗೆ ಮಾತ್ರ ಪಾವತಿಸಿ
 
-## ಪೂರ್ವಾಪೇಕ್ಷೆಗಳು
+## ಮೂಲೆಭೂತ ಅಗತ್ಯಗಳು
 
-ಆರಂಭಿಸುವ ಮುನ್ನ, ಖಾತ್ರಿ ಮಾಡಿ ನಿಮ್ಮ ಬಳಿ:
+ಆರಂಭಿಸುವುದಕ್ಕೆ ಮುನ್ನ താഴಿತುಂಡಿರುವುದನ್ನು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ:
 
 ```bash
-# AZD ಸ್ಥಾಪನೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
+# AZD ಸ್ಥಾಪನೆಯನ್ನ ಪರಿಶೀಲಿಸಿ
 azd version
 
-# Azure CLI ಅನ್ನು ಪರಿಶೀಲಿಸಿ
+# ಅಜೂರ್ CLI ಪರಿಶೀಲಿಸಿ
 az version
 
-# Docker ಅನ್ನು ಪರಿಶೀಲಿಸಿ (ಕಸ್ಟಮ್ ಇಮೇಜ್‌ಗಳನ್ನು ನಿರ್ಮಿಸಲು)
+# ಡೋಕರ್ ಪರಿಶೀಲಿಸಿ (ಕಸ್ಟಮ್ ಇಮೇಜ್‌ಗಳನ್ನು ರಚಿಸಲು)
 docker --version
 
-# Azure ಗೆ ಲಾಗಿನ್ ಮಾಡಿ
+# AZD ನಿಯೋಜನೆಗಳಿಗೆ ಪ್ರಮಾಣೀಕರಿಸಿ
 azd auth login
+
+# ಐಚ್ಛಿಕ: ನೀವು ನೇರವಾಗಿ az ಕಮಾಂಡ್‌ಗಳನ್ನು ચલಿಸಲು ಯೋಜಿಸುತ್ತಿದ್ದರೆ ಅಜೂರ್ CLI ಯಲ್ಲಿ ಸೈನ್ ಇನ್ ಮಾಡಿ
 az login
 ```
 
-**ಬೇಕಾಗುವ Azure ಸಂಪನ್ಮೂಲಗಳು:**
-- ಸಕ್ರಿಯ Azure ಸಬ್ಸ್ಕ್ರಿಪ್ಶನ್
-- Resource group ರಚನೆ ಪರವಾನಗಿಗಳು
-- Container Apps ಪರಿಸರಕ್ಕೆ ಪ್ರವೇಶ
+**ಅಗತ್ಯ ಅಜ್ಯೂರ್ ಸಂಪನ್ಮೂಲಗಳು:**
+- ಸಕ್ರಿಯ ಅಜ್ಯೂರ್ ಚಂದಾದಾರಿಕೆ
+- ಸಂಪನ್ಮೂಲ ಗುಂಪು ರಚನೆ ಅನುಮತಿಗಳು
+- ಕಂಟೈನರ್ ಅಪ್ಲಿಕೇಶನ್ ವಾತಾವರಣ ಪ್ರವೇಶ
 
 ## ತ್ವರಿತ ಪ್ರಾರಂಭ ಉದಾಹರಣೆಗಳು
 
 ### 1. ಸರಳ ವೆಬ್ API (Python Flask)
 
-Azure Container Apps ಬಳಸಿ ಮೂಲಭೂತ REST API ಅನ್ನು ನಿಯೋಜಿಸಿ.
+ಅಜ್ಯೂರ್ ಕಂಟೈನರ್ ಅಪ್ಲಿಕೇಶನ್ಸ್ ಬಳಸಿ ಮೂಲ REST API ಅನ್ನು ನಿಯೋಜಿಸಿ.
 
 **ಉದಾಹರಣೆ: Python Flask API**
 
@@ -68,26 +70,26 @@ services:
 **ನಿಯೋಜನೆ ಹಂತಗಳು:**
 
 ```bash
-# ಟೆಂಪ್ಲೇಟಿನಿಂದ ಆರಂಭಿಸಿ
+# ಟೆಂಪ್ಲೇಟಿನಿಂದ ಪ್ರಾರಂಭಿಸಿ
 azd init --template todo-python-mongo
 
-# ಮೂಲಸೌಕರ್ಯವನ್ನು ಒದಗಿಸಿ ಮತ್ತು ಸ್ಥಾಪಿಸಿ
+# ಇನ್ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಅನ್ನು ಒದಗಿಸಿ ಮತ್ತು ನಿಯೋಜಿಸಿ
 azd up
 
-# ಸ್ಥಾಪನೆಯನ್ನು ಪರೀಕ್ಷಿಸಿ
+# ನಿಯೋಜನೆಯನ್ನು ಪರೀಕ್ಷಿಸಿ
 azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-**ಮುಖ್ಯ ಲಕ್ಷಣಗಳು:**
-- ಸ್ವಯಂ-ಸ್ಕೇಲಿಂಗ್ 0 ರಿಂದ 10 ಪ್ರತಿರೂಪಗಳವರೆಗೆ
-- ಆರೋಗ್ಯ ಪರೀಕ್ಷೆಗಳು ಮತ್ತು ಲೈವ್ನೆಸ್ ಪರಿಶೀಲನೆಗಳು
-- ಪರಿಸರ ಚರಗಳ ಸೇರ್ಪಡೆ
-- Application Insights ಏಕೀಕರಣ
+**ಮುಖ್ಯ ವೈಶಿಷ್ಟ್ಯಗಳು:**
+- 0 ರಿಂದ 10 ಪ್ರತಿಲಿಪಿಗಳವರೆಗೆ ಸ್ವಯಂ ವಿಸ್ತರಣೆ
+- ಆರೋಗ್ಯ ಪರಿಶೀಲನೆಗಳು ಮತ್ತು ಬಾಳಿಕೆ ಪರೀಕ್ಷೆಗಳು
+- ಪರಿಸರ ಚರ ಸೆರಿಸುವಿಕೆ
+- ಅಪ್ಲಿಕೇಶನ್ ಇನ್ಸೈಟ್ಸ್ ಒಕ್ಕೂಟ
 
 ### 2. Node.js Express API
 
-MongoDB ಏಕೀಕರಣದೊಂದಿಗೆ Node.js ಬ್ಯಾಕೆಂಡ್ ಅನ್ನು ನಿಯೋಜಿಸಿ.
+Node.js ಬ್ಯಾಕೆಂಡ್ ಜೊತೆಗೆ MongoDB ಒಕ್ಕೂಟವನ್ನು ನಿಯೋಜಿಸಿ.
 
 ```bash
 # Node.js API ಟೆಂಪ್ಲೇಟನ್ನು ಪ್ರಾರಂಭಿಸಿ
@@ -97,14 +99,14 @@ azd init --template todo-nodejs-mongo
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
-# ಡಿಪ್ಲಾಯ್ ಮಾಡಿ
+# ನಿಯೋಜಿಸಿ
 azd up
 
-# Azure Monitor ಮೂಲಕ ಲಾಗ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಿ
+# Azure ಮಾನಿಟರ್ ಮೂಲಕ ಲಾಗ್‌ಗಳನ್ನು ನೋಡಿ
 azd monitor --logs
 ```
 
-**ಅಧಿರಚನಾ ಮುಖ್ಯಾಂಶಗಳು:**
+**ಮೂಲಸೌಕರ್ಯ ಪ್ರಮುಖಾಂಶಗಳು:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -149,16 +151,16 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 3. ಸ್ಥಿರ ಫ್ರಂಟ್‌ಎಂಡ್ + API ಬ್ಯಾಕೆಂಡ್
 
-React ಫ್ರಂಟ್‌ಎಂಡ್ ಮತ್ತು API ಬ್ಯಾಕೆಂಡ್ ಹೊಂದಿರುವ ಫುಲ್-ಸ್ಟ್ಯಾಕ್ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ನಿಯೋಜಿಸಿ.
+React ಫ್ರಂಟ್‌ಎಂಡ್ ಮತ್ತು API ಬ್ಯಾಕೆಂಡ್ ಸಹಿತ ಪೂರ್ಣ-ಸ್ಟಾಕ್ ಅಪ್ಲಿಕೇಶನ್ ನಿಯೋಜಿಸಿ.
 
 ```bash
-# ಫುಲ್‌ಸ್ಟಾಕ್ ಟೆಂಪ್ಲೇಟ್ ಅನ್ನು ಆರಂಭಿಸಿ
+# ಫುಲ್-ಸ್ಟಾಕ್ ಟೆಂಪ್ಲೇಟ್ನ್ನು ಪ್ರಾರಂಭಿಸಿ
 azd init --template todo-csharp-sql-swa-func
 
 # ಸಂರಚನೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
 cat azure.yaml
 
-# ಎರಡೂ ಸೇವೆಗಳನ್ನೂ ನಿಯೋಜಿಸಿ
+# ಎರಡೂ ಸೇವೆಗಳನ್ನು ನಿಯೋಜಿಸಿ
 azd up
 
 # ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ತೆರೆಯಿರಿ
@@ -167,9 +169,9 @@ azd show --output json | jq -r '.services.web.endpoint' | xargs start
 
 ## ಉತ್ಪಾದನಾ ಉದಾಹರಣೆಗಳು
 
-### ಉದಾಹರಣೆ 1: ಮೈಕ್ರೋಸರ್ವಿಸಿಸ್ ವಾಸ್ತುಶಿಲ್ಪ
+### ಉದಾಹರಣೆ 1: ಮೈಕ್ರೋಸರ್ವಿಸ್ ವಾಸ್ತುಶಿಲ್ಪ
 
-**ದೃಶ್ಯ**: ಬಹು ಮೈಕ್ರೋಸರ್ವಿಸ್ಗಳೊಂದಿಗೆ ಇ-ಕಾಮರ್ಸ್ ಅಪ್ಲಿಕೇಶನ್
+**ಸ್ಥಿತಿ**: ಬಹು ಮೈಕ್ರೋಸರ್ವಿಸ್‌ಗಳೊಂದಿಗೆ ಇ-ಕಾಮರ್ಸ್ ಅಪ್ಲಿಕೇಶನ್
 
 **ಡೈರೆಕ್ಟರಿ ರಚನೆ:**
 ```
@@ -216,7 +218,7 @@ services:
 # ಪ್ರಾಜೆಕ್ಟ್ ಪ್ರಾರಂಭಿಸಿ
 azd init
 
-# ಉತ್ಪಾದನಾ ಪರಿಸರವನ್ನು ಹೊಂದಿಸಿ
+# ಉತ್ಪಾದನಾ ಪರಿಸರವನ್ನು ಸೆಟ್ ಮಾಡಿ
 azd env new production
 
 # ಉತ್ಪಾದನಾ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಸಂರಚಿಸಿ
@@ -224,16 +226,16 @@ azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
 
-# ಎಲ್ಲಾ ಸೇವೆಗಳನ್ನು ಜಾರಿಗೆ ತರು
+# ಎಲ್ಲಾ ಸೇವೆಗಳನ್ನು ನಿಯೋಜಿಸಿ
 azd up
 
-# ಜಾರಿಗೊಳಿಸುವಿಕೆಯನ್ನು ನಿಗಾ ವಹಿಸಿ
+# ನಿಯೋಜನೆಯನ್ನು ನಿಗದಿಪಡಿಸಿ
 azd monitor --overview
 ```
 
-### ಉದಾಹರಣೆ 2: ಏಐ ಚಾಲಿತ ಕಂಟೇನರ್ ಅಪ್
+### ಉದಾಹರಣೆ 2: AI-ಸಮರ್ಥಿತ ಕಂಟೈನರ್ ಅಪ್ಲಿಕೇಶನ್
 
-**ದೃಶ್ಯ**: Microsoft Foundry Models ಏಕೀಕರಣದೊಂದಿಗೆ ಏಐ ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್
+**ಸ್ಥಿತಿ**: Microsoft Foundry ಮಾದರಿಗಳ ಒಕ್ಕೂಟದೊಂದಿಗೆ AI ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್
 
 **ಫೈಲ್: src/ai-chat/app.py**
 ```python
@@ -244,7 +246,7 @@ import openai
 
 app = Flask(__name__)
 
-# ಭದ್ರ ಪ್ರವೇಶಕ್ಕಾಗಿ Managed Identity ಅನ್ನು ಬಳಸಿ
+# ಸುರಕ್ಷಿತ ಪ್ರವೇಶಕ್ಕೆ ನಿರ್ವಹಿತ ಗುರುತನ್ನು ಬಳಸಿ
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -253,7 +255,7 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # OpenAI ಕೀಲಿಯನ್ನು Key Vault-ನಿಂದ ಪಡೆಯಿರಿ
+    # ಕೀ ವಾಲ್ಟ್‌ನಿಂದ OpenAI ಕೀ ಪಡೆಯಿರಿ
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
@@ -320,28 +322,28 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**ನಿಯೋಜನೆ ಕಮಾಂಡ್ಗಳು:**
+**ನಿಯೋಜನೆ ಆದೇಶಗಳು:**
 ```bash
-# ಪರಿಸರವನ್ನು ಸಜ್ಜುಗೊಳಿಸಿ
+# ಪರಿಸರವನ್ನು ಸೆಟ್‌ಅಪ್ ಮಾಡಿ
 azd init --template ai-chat-app
 azd env new dev
 
-# OpenAI ಅನ್ನು ಸಂರಚಿಸಿ
+# OpenAI ಅನ್ನು ಕನ್ಫಿಗರ್ ಮಾಡಿ
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4.1"
 
-# ವಿತರಣೆಗೆ ಹಾಕಿ
+# ನಿಯೋಜಿಸಿ
 azd up
 
-# API ಅನ್ನು ಪರೀಕ್ಷಿಸಿ
+# API ಪರೀಕ್ಷಿಸಿ
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat \
   -H "Content-Type: application/json" \
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### ಉದಾಹರಣೆ 3: पछि ಭೂಮಿಕೆಯಲ್ಲಿ ಕಾರ್ಯನಿರ್ವಹಿಸುವ ವರ್ಕರ್ ಹಾಗೂ ಕ್ಯೂ ಪ್ರಾಸೆಸಿಂಗ್
+### ಉದಾಹರಣೆ 3: ಬ್ಯಾಕ್ಗ್ರೌಂಡ್ ವರ್ಕರ್ ನಲ್ಲಿ ಕ್ಯೂ ಪ್ರೋಸೆಸಿಂಗ್
 
-**ದೃಶ್ಯ**: ಸಂದೇಶ ಕ್ಯೂ ಹೊಂದಿರುವ ಆರ್ಡರ್ ಪ್ರಾಸೆಸಿಂಗ್ ವ್ಯವಸ್ಥೆ
+**ಸ್ಥಿತಿ**: ಸಂದೇಶ ಕ್ಯೂ ಬಳಸಿ ಆದೇಶ ಪ್ರೋಸೆಸಿಂಗ್ ವ್ಯವಸ್ಥೆ
 
 **ಡೈರೆಕ್ಟರಿ ರಚನೆ:**
 ```
@@ -378,10 +380,10 @@ def process_orders():
     while True:
         messages = queue_client.receive_messages(max_messages=10)
         for message in messages:
-            # ಆದೇಶವನ್ನು ಸಂಸ್ಕರಿಸಿ
+            # ಆರ್ಡರ್ ಪ್ರಕ್ರಿಯೆ
             print(f"Processing order: {message.content}")
             
-            # ಸಂಪೂರ್ಣ ಸಂದೇಶ
+            # ಪೂರ್ಣ ಸಂದೇಶ
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -405,13 +407,13 @@ services:
 
 **ನಿಯೋಜನೆ:**
 ```bash
-# ಆರಂಭಿಸಿ
+# ಪ್ರಾರಂಭಿಸಿ
 azd init
 
-# ಕ್ಯೂ ಸಂರಚನೆ ಬಳಸಿ ನಿಯೋಜಿಸಿ
+# ಸರಣಿ ಕಾನ್ಫಿಗರೇಶನ್‌ನೊಂದಿಗೆ ನಿಯೋಜಿಸಿ
 azd up
 
-# ಕ್ಯೂ ಉದ್ದದ ಆಧಾರದ ಮೇಲೆ worksರ್‌ಗಳ ಸಂಖ್ಯೆಯನ್ನು ಹೊಂದಿಸಿ
+# ಸರಣಿ ದೈರ್ಘ್ಯದ ಮೇಲೆ ಕೆಲಸಗಾರರನ್ನು ಪ್ರಮಾಣಿಸಿ
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -420,31 +422,31 @@ az containerapp update \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
 
-## ಉನ್ನತ ಮಾದರಿಗಳು
+## ಉನ್ನತ ಪ್ಯಾಟರ್ನ್‌ಗಳು
 
-### ಮಾದರಿ 1: ಬ್ಲ್ಯೂ-ಗ್ರೀನ್ ನಿಯೋಜನೆ
+### ಪ್ಯಾಟರ್ನ್ 1: ಬ್ಲೂ-ಗ್ರೀನ್ ನಿಯೋಜನೆ
 
 ```bash
-# ಟ್ರಾಫಿಕ್ ಇಲ್ಲದೆ ಹೊಸ ರಿವಿಷನ್ ರಚಿಸಿ
+# ಟ್ರಾಫಿಕ್ ಇಲ್ಲದೆ ಹೊಸ ತಿದ್ದುಪಡಿ ಸೃಷ್ಟಿಸಿ
 azd deploy api --revision-suffix blue --no-traffic
 
-# ಹೊಸ ರಿವಿಷನ್ ಅನ್ನು ಪರೀಕ್ಷಿಸಿ
+# ಹೊಸ ತಿದ್ದುಪடியನ್ನು ಪರೀಕ್ಷಿಸಿ
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# ಟ್ರಾಫಿಕ್ ಅನ್ನು ವಿಭಜಿಸಿ (20% ನೀಲಿಗೆ, 80% ಪ್ರಸ್ತುತಕ್ಕೆ)
+# ಟ್ರಾಫಿಕ್ ವಿಭಜಿಸಿ (20% ಬ್ಲೂಗೆ, 80% वर्तमानಕ್ಕೆ)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# ಸಂಪೂರ್ಣವಾಗಿ ನೀலಿಗೆ ವರ್ಗಾಯಿಸಿ
+# ಸಂಪೂರ್ಣವಾಗಿ ಬ್ಲೂಗೆ ಕಟ್‌ಓವರ್ ಮಾಡಿ
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
 
-### ಮಾದರಿ 2: AZD ಜೊತೆಗೆ ಕ್ಯಾನರಿ ಡಿಪ್ಲಾಯ್‌ಮೆಂಟ್
+### ಪ್ಯಾಟರ್ನ್ 2: AZD ಮೂಲಕ ಕ್ಯಾನರಿ ನಿಯೋಜನೆ
 
 **ಫೈಲ್: .azure/dev/config.json**
 ```json
@@ -463,13 +465,13 @@ az containerapp ingress traffic set \
 #!/bin/bash
 # deploy-canary.sh
 
-# ಹೊಸ ಆವೃತ್ತಿಯನ್ನು 10% ಟ್ರಾಫಿಕ್‌ನೊಂದಿಗೆ ನಿಯೋಜಿಸಿ
+# 10% ಟ್ರಾಫಿಕ್‌ನಲ್ಲಿ ಹೊಸ ಸಂಶೋಧನೆಯನ್ನು ನಿಯೋಜಿಸಿ
 azd deploy api --revision-mode multiple
 
-# ಮೆಟ್ರಿಕ್‌ಗಳನ್ನು ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡಿ
+# ಮಾನದಂಡಗಳನ್ನು ಅಧ್ಯಯನ ಮಾಡಿ
 azd monitor --service api --duration 5m
 
-# ಕ್ರಮೇಣ ಟ್ರಾಫಿಕ್ ಹೆಚ್ಚಿಸಿ
+# ಟ್ರಾಫಿಕ್ ಅನ್ನು ಹಸ್ತಾಂತರವಾಗಿ ಹೆಚ್ಚಿಸಿ
 for i in {20..100..10}; do
   echo "Increasing traffic to $i%"
   az containerapp revision set-traffic \
@@ -477,11 +479,11 @@ for i in {20..100..10}; do
     --resource-group rg-myapp \
     --revision-weight latest=$i
   
-  sleep 300  # 5 ನಿಮಿಷ ಕಾಯಿರಿ
+  sleep 300  # 5 ನಿಮಿಷಗಳು ಕಾಯಿರಿ
 done
 ```
 
-### ಮಾದರಿ 3: ಬಹು-ಪ್ರದೇಶ ನಿಯೋಜನೆ
+### ಪ್ಯಾಟರ್ನ್ 3: ಬಹು-ಪ್ರದೇಶ ನಿಯೋಜನೆ
 
 **ಫೈಲ್: azure.yaml**
 ```yaml
@@ -529,14 +531,14 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 
 **ನಿಯೋಜನೆ:**
 ```bash
-# ಎಲ್ಲಾ ಜಿಲ್ಲೆಗಳಲ್ಲಿ ನಿಯೋಜಿಸಿ
+# ಎಲ್ಲ ಪ್ರದೇಶಗಳಿಗೆ ನಿಯೋಜಿಸಿ
 azd up
 
-# ಎಂಡ್‌ಪಾಯಿಂಟ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
+# ಎಂಡ್ಪಾಯಿಂಟ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### ಮಾದರಿ 4: Dapr ಏಕೀಕರಣ
+### ಪ್ಯಾಟರ್ನ್ 4: ಡ್ಯಾಪರ್ ಒಕ್ಕೂಟ
 
 **ಫೈಲ್: infra/app/dapr-enabled.bicep**
 ```bicep
@@ -563,7 +565,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-**Dapr ಹೊಂದಿರುವ ಅಪ್ಲಿಕೇಶನ್ ಕೋಡ್:**
+**ಡ್ಯಾಪರ್ ಸಹಿತ ಅಪ್ಲಿಕೇಶನ್ ಕೋಡ್:**
 ```python
 from flask import Flask
 from dapr.clients import DaprClient
@@ -595,15 +597,15 @@ def create_order():
 ### 1. ಸಂಪನ್ಮೂಲ ಸಂಘಟನೆ
 
 ```bash
-# ಒಂದೇ ರೀತಿಯ ನಾಮಕರಣ ಸಂಪ್ರदಾಯಗಳನ್ನು ಉಪಯೋಗಿಸಿ
+# ಸತತ ನಾಮಕರಣ ನಿಯಮಗಳನ್ನು ಬಳಸಿ
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# ವೆಚ್ಚದ ಟ್ರ್ಯಾಕಿಂಗ್‌ಗಾಗಿ ಸಂಪನ್ಮೂಲಗಳನ್ನು ಟ್ಯಾಗ್ ಮಾಡಿ
+# ವೆಚ್ಚ ಟ್ರ್ಯಾಕಿಂಗ್‌ಗಾಗಿ ಸಂಪನ್ಮೂಲಗಳಿಗೆ ಟ್ಯಾಗ್ ಮಾಡಿ
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. ಭದ್ರತಾ ಉತ್ತಮ ಅಭ್ಯಾಸಗಳು
+### 2. ಸುರಕ್ಷತಾ ಉತ್ತಮ ಅಭ್ಯಾಸಗಳು
 
 ```bicep
 // Always use managed identity
@@ -642,7 +644,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
 }
 ```
 
-### 3. ಕಾರ್ಯಕ್ಷಮತೆ ಪರಿಷ್ಕರಣೆ
+### 3. ಕಾರ್ಯಕ್ಷಮತೆ ದಕ್ಷತೆ
 
 ```yaml
 # azure.yaml with performance settings
@@ -662,21 +664,21 @@ services:
             concurrent: 100
 ```
 
-### 4. ನಿಗಾ ಮತ್ತು ನಿರೀಕ್ಷಣಾಸಾಮರ್ಥ್ಯ
+### 4. ಮೌಲ್ಯಮಾಪನ ಮತ್ತು ಗಮನಾರ್ಹತೆ
 
 ```bash
-# Application Insights ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ
+# ಅಪ್ಲಿಕೇಶನ್ ಇನ್‌ಸೈಟ್‌ಗಳನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
-# ಲಾಗ್‌ಗಳನ್ನು ನೈಜ ಸಮಯದಲ್ಲಿ ವೀಕ್ಷಿಸಿ
+# ಲಾಗ್ಗಳನ್ನು ನೈಜ ಸಮಯದಲ್ಲಿ ವೀಕ್ಷಿಸಿ
 azd monitor --logs
-# ಅಥವಾ ಕಂಟೇನರ್ ಆಪ್‌ಗಳಿಗೆ Azure CLI ಅನ್ನು ಬಳಸಿ:
+# ಅಥವಾ ಕಂಟೈನರ್ ಅಪ್ಲಿಕೇಶನ್‌ಗಾಗಿ ಅಜ್ಯೂರ್ CLI ಬಳಸಿ:
 az containerapp logs show --name api --resource-group rg-myapp --follow
 
-# ಮೆಟ್ರಿಕ್‌ಗಳನ್ನು ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡಿ
+# ಮಾನದಂಡಗಳನ್ನು ಗಮನಿಸಿ
 azd monitor --live
 
-# ಅಲರ್ಟ್‌ಗಳನ್ನು ರಚಿಸಿ
+# ಅಲ್ಟ್‌ಗಳನ್ನು ರಚಿಸಿ
 az monitor metrics alert create \
   --name high-cpu-alert \
   --resource-group rg-myapp \
@@ -685,19 +687,19 @@ az monitor metrics alert create \
   --description "Alert when CPU exceeds 80%"
 ```
 
-### 5. ವೆಚ್ಚ ಪರಿಷ್ಕರಣೆ
+### 5. ವೆಚ್ಚ ದಕ್ಷತೆ
 
 ```bash
-# ಬಳಕೆ ಆಗದಾಗ ಶೂನ್ಯಕ್ಕೆ ಪ್ರಮಾಣವನ್ನು ಇಳಿಸಿ
+# ಬಳಸದಿದ್ದಾಗ ಶೂನ್ಯಕ್ಕೆ ಮಿತಿವೆನು
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# ಡೆವ್ ಪರಿಸರಗಳಿಗಾಗಿ ಸ್ಪಾಟ್ ಇನ್ಸ್ಟಾನ್ಸ್ಗಳನ್ನು ಬಳಸಿ
+# ಡೆವ್ ಪರಿಸರಗಳಿಗೆ ಸ್ಪಾಟ್ ಇನ್ಸ್ಟಾನ್ಸ್‌ಗಳನ್ನು ಬಳಸಿರಿ
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# ಬಜೆಟ್ ಎಚ್ಚರಿಕೆಗಳನ್ನು ಸ್ಥಾಪಿಸಿ
+# ಬಜೆಟ್ ಎಚ್ಚರಿಕೆಗಳನ್ನು ಹೊಂದಿಸಿ
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
@@ -705,9 +707,9 @@ az consumption budget create \
   --threshold 80
 ```
 
-### 6. CI/CD ಏಕೀಕರಣ
+### 6. CI/CD ಒಕ್ಕೂಟ
 
-**GitHub Actions ಉದಾಹರಣೆ:**
+**GitHub ಕ್ರಿಯೆಗಳು ಉದಾಹರಣೆ:**
 ```yaml
 name: Deploy to Azure Container Apps
 
@@ -737,44 +739,44 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## ಸಾಮಾನ್ಯ ಕಮಾಂಡ್‍ಗಳು ಉಲ್ಲೇಖ
+## ಸಾಮಾನ್ಯ ಆದೇಶಗಳ ಉಲ್ಲೇಖ
 
 ```bash
-# ಹೊಸ ಕಾಂಟೈನರ್ ಆಪ್ ಪ್ರಾಜೆಕ್ಟ್ ಅನ್ನು ಪ್ರಾರಂಭಿಸಿ
+# ಹೊಸ ಕಂಟೇನರ್ ಅಪ್ಲಿಕೇಶನ್ ಪ್ರಾಜೆಕ್ಟ್ ಪ್ರಾರಂಭಿಸಿ
 azd init --template <template-name>
 
-# ಇನ್‌ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಮತ್ತು ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ನಿಯೋಜಿಸಿ
+# ಮೂಲಸೌಕರ್ಯ ಮತ್ತು ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ನಿಯೋಜಿಸಿ
 azd up
 
-# ಕೇವಲ ಅಪ್ಲಿಕೇಶನ್ ಕೋಡ್ ಅನ್ನು ನಿಯೋಜಿಸಿ (ಇನ್‌ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಅನ್ನು ಬಿಟ್ಟುಕೊಡಿ)
+# ಕೇವಲ ಅಪ್ಲಿಕೇಶನ್ ಕೋಡ್ ಅನ್ನು ನಿಯೋಜಿಸಿ (ಮೂಲಸೌಕರ್ಯ ಬಿಟ್ಟು ಬಿಡಿ)
 azd deploy
 
-# ಕೇವಲ ಇನ್‌ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಅನ್ನು ಒದಗಿಸಿ
+# ಕೇವಲ ಮೂಲಸೌಕರ್ಯವನ್ನು ಒದಗಿಸಿ
 azd provision
 
 # ನಿಯೋಜಿಸಲಾದ ಸಂಪನ್ಮೂಲಗಳನ್ನು ವೀಕ್ಷಿಸಿ
 azd show
 
-# azd monitor ಅಥವಾ Azure CLI ಬಳಸಿ ಲಾಗ್‌ಗಳನ್ನು ಸ್ಟ್ರೀಮ್ ಮಾಡಿ
+# azd ಮಾನಿಟರ್ ಅಥವಾ ಅಜೂರ್ CLI ಬಳಸಿ ಲಾಗ್‌ಗಳನ್ನು ಸ್ಟ್ರೀಮ್ ಮಾಡಿ
 azd monitor --logs
 # az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
-# ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡಿ
+# ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಮಾನಿಟರ್ ಮಾಡಿ
 azd monitor --overview
 
-# ಸಂಪನ್ಮೂಲಗಳನ್ನು ತೆರವುಗೊಳಿಸಿ
+# ಸಂಪನ್ಮೂಲಗಳನ್ನು ಸ್ವಚ್ಛಗೊಳಿಸಿ
 azd down --force --purge
 ```
 
 ## ಸಮಸ್ಯೆ ಪರಿಹಾರ
 
-### ಸಮಸ್ಯೆ: ಕಂಟೈನರ್ ಪ್ರಾರಂಭವಾಗುವುದಿಲ್ಲ
+### ಸಮಸ್ಯೆ: ಕಂಟೈನರ್ ಪ್ರಾರಂಭಿಸಲು ವಿಫಲವಾಗಿದೆ
 
 ```bash
-# Azure CLI ಬಳಸಿ ಲಾಗ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
+# ಅಜೂರ್ CLI ಬಳಸಿ ಲಾಗ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
 az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# ಕಂಟೈನರ್ ಘಟನೆಗಳನ್ನು ವೀಕ್ಷಿಸಿ
+# ಕಾಂಟೇನರ್ ಘಟನೆಗಳನ್ನು ವೀಕ್ಷಿಸಿ
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
@@ -785,16 +787,16 @@ docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### ಸಮಸ್ಯೆ: ಕಂಟೈನರ್ ಅಪ್ ಎಂಡ್ಪಾಯಿಂಟ್ ಪ್ರವೇಶಿಸಲು ಆಗುತ್ತಿಲ್ಲ
+### ಸಮಸ್ಯೆ: ಕಂಟೈನರ್ ಅಪ್ಲಿಕೇಶನ್ ಅಂತಿಮ ಬಿಂದುವಿಗೆ ಪ್ರವೇಶ ಸಾಧ್ಯವಿಲ್ಲ
 
 ```bash
-# ಇನ್‌ಗ್ರೆಸ್ ಸಂರಚನೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
+# ಇನ್ಗ్రెస్ ಸಂರಚನೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# ಆಂತರಿಕ ಇನ್‌ಗ್ರೆಸ್ ಸಕ್ರಿಯವಾಗಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ
+# ಆಂತರಿಕ ಇನ್ಗ್ರೆಸ್ಸು ಸಕ್ರಿಯವಾಗಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
@@ -818,30 +820,30 @@ az containerapp update \
 ```
 
 ## ಹೆಚ್ಚುವರಿ ಸಂಪನ್ಮೂಲಗಳು ಮತ್ತು ಉದಾಹರಣೆಗಳು
-- [ಮೈಕ್ರೋಸರ್ವಿಸಸ್ ಉದಾಹರಣೆ](./microservices/README.md)
-- [ಸರಳ Flask API ಉದಾಹರಣೆ](./simple-flask-api/README.md)
-- [Azure Container Apps ಡಾಕ್ಯುಮೆಂಟೇಶನ್](https://learn.microsoft.com/azure/container-apps/)
-- [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
-- [Container Apps ಉದಾಹರಣೆಗಳು](https://github.com/Azure-Samples/container-apps-samples)
-- [Bicep Templates](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+- [ಮೈಕ್ರೋಸರ್ವಿಸ್ ಉದಾಹರಣೆ](./microservices/README.md)
+- [ಸರಳ ಫ್ಲಾಸ್ಕ್ API ಉದಾಹರಣೆ](./simple-flask-api/README.md)
+- [ಅಜ್ಯೂರ್ ಕಂಟೈನರ್ ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಡಾಕ್ಯುಮೆಂಟೇಶನ್](https://learn.microsoft.com/azure/container-apps/)
+- [AZD ಟೆಂಪ್ಲೇಟ್ಸ್ ಗ್ಯಾಲರಿ](https://azure.github.io/awesome-azd/)
+- [ಕಂಟೈನರ್ ಅಪ್ಲಿಕೇಶನ್ಸ್ ನಂಯೋಜನೆ ಸಂಗ್ರಹ](https://github.com/Azure-Samples/container-apps-samples)
+- [ಬೈಸಪ್ ಟೆಂಪ್ಲೇಟ್ಸ್](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-## ಕೊಡುಗೆ
+## ಕೊಡುಗೆ ನೀಡುವಿಕೆ
 
-ಹೊಸ ಕಂಟೈನರ್ ಅಪ್ ಉದಾಹರಣೆಗಳನ್ನು ಕೊಡುಗೆ ನೀಡಲು:
+ಹೊಸ ಕಂಟೈನರ್ ಅಪ್ಲಿಕೇಶನ್ ಉದಾಹರಣೆಗಳನ್ನು ಕೊಡುಗೆ ನೀಡಲು:
 
-1. ನಿಮ್ಮ ಉದಾಹರಣೆಯೊಂದಿಗೆ ಹೊಸ ಸಬ್‍ಡೈರೆಕ್ಟರಿ ರಚಿಸಿ
-2. ಸಂಪೂರ್ಣ `azure.yaml`, `infra/`, ಮತ್ತು `src/` ಫೈல்கள் ಸೇರಿಸಿ
-3. ನಿಯೋಜನೆ ಸೂಚನೆಗಳೊಂದಿಗೆ ಸಮಗ್ರ README ಸೇರಿಸಿ
-4. `azd up` ಬಳಸಿ ನಿಯೋಜನೆಯನ್ನು ಪರೀಕ್ಷಿಸಿ
-5. ಪುಲ್ ರಿಕ್ವೆಸ್ಟ್ ಸಲ್ಲಿಸಿ
+1. ನಿಮ್ಮ ಉದಾಹರಣೆಯೊಂದಿಗೆ ಹೊಸ ಉಪಡೈರೆಕ್ಟರಿ ರಚಿಸಿ
+2. ಪೂರ್ಣ `azure.yaml`, `infra/`, ಮತ್ತು `src/` ಫೈಲ್‌ಗಳನ್ನು ಒಳಗೊಂಡಿರಿಸಿ
+3. ನಿಯೋಜನೆ ಸೂಚನೆಗಳೊಂದಿಗೆ ವ್ಯಾಪಕ README ಸೇರಿಸಿ
+4. `azd up` ಮೂಲಕ ನಿಯೋಜನೆ ಪರೀಕ್ಷಿಸಿ
+5. ಪೋಜ್ ವಿನಂತಿಯನ್ನು ಸಲ್ಲಿಸಿ
 
 ---
 
-**ಸಹಾಯ ಬೇಕು?** ಬೆಂಬಲ ಮತ್ತು ಪ್ರಶ್ನೆಗಳಿಗೆ [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) ಸಮುದಾಯಕ್ಕೆ ಸೇರಿಕೊಳ್ಳಿ.
+**ಸಹಾಯ ಬೇಕೇ?** ಬೆಂಬಲ ಮತ್ತು ಪ್ರಶ್ನೆಗಳಿಗಾಗಿ [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) ಸಮುದಾಯದಲ್ಲಿ ಸೇರಿಕೊಳ್ಳಿ.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ನಿರಾಕರಣೆ**:
-ಈ ದಸ್ತಾವೇಜನ್ನು [Co-op Translator](https://github.com/Azure/co-op-translator) ಎಂಬ ಕೃತಕ ಬುದ್ಧಿಮತ್ತೆ ಆಧಾರಿತ ಅನುವಾದ ಸೇವೆಯನ್ನು ಬಳಸಿ ಅನುವಾದಿಸಲಾಗಿದೆ. ನಾವು ನಿಖರತೆಯನ್ನು ಸಾಧಿಸಲು ಪ್ರಯತ್ನಿಸುತ್ತಿದ್ದರೂ, ಸ್ವಯಂಚಾಲಿತ ಅನುವಾದಗಳಲ್ಲಿ ತಪ್ಪುಗಳು ಅಥವಾ ಅಸತ್ಯತೆಗಳು ಇರಬಹುದೆಂದನ್ನು ದಯವಿಟ್ಟು ಗಮನದಲ್ಲಿರಿಸಿ. ಮೂಲ ಭಾಷೆಯಲ್ಲಿನ ಮೂಲ ದಸ್ತಾವೇಜನ್ನು ಅಧಿಕೃತ ಮೂಲವೆಂದು ಪರಿಗಣಿಸಬೇಕು. ಗಂಭೀರ ಮಾಹಿತಿಗಾಗಿ ವೃತ್ತಿಪರ ಮಾನವ ಅನುವಾದವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಅನುವಾದವನ್ನು ಬಳಸುವುದರಿಂದ ಉಂಟಾಗುವ ಯಾವುದೇ ತಪ್ಪಾಗಿ ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವಿಕೆಗಳು ಅಥವಾ ತಪ್ಪು ವ್ಯಾಖ್ಯಾನಗಳಿಗೆ ನಾವು ಹೊಣೆಗಾರರಲ್ಲ.
+**ಅಸ್ವೀಕರಣ**:  
+ಈ ಡಾಕ್ಯುಮೆಂಟ್ ಅನ್ನು AI ಅನುವಾದ ಸೇವೆ [Co-op Translator](https://github.com/Azure/co-op-translator) ಬಳಸಿ ಅನುವದಿಸಲಾಗಿದೆ. ನಾವು ಶುದ್ದತೆಗಾಗಿ ಪ್ರಯತ್ನಿಸುತ್ತಿದ್ದರೂ, ಸ್ವಯಂಚಾಲಿತ ಅನುವಾದದಲ್ಲಿ ತಪ್ಪುಗಳು ಅಥವಾ ಅಸಂಬಳತೆಗಳು ಇರಬಹುದು ಎಂದು ದಯವಿಟ್ಟು ಗಮನವಿಟ್ಟುಿರಿ. ಮೂಲ ಭಾಷೆಯ ಮೂಲ ಡಾಕ್ಯುಮೆಂಟ್ ಅನ್ನು ಅಧಿಕೃತ ಮೂಲವೆಂದು ಪರಿಗಣಿಸಬೇಕು. ಗಂಭೀರ ಮಾಹಿತಿಗಾಗಿ, ವೃತ್ತಿಪರ ಮಾನವರಿಂದ ಅನುವಾದವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಅನುವಾದ ಬಳಕೆಯಿಂದ ಉಂಟಾಗುವ ಯಾವುದೇ误understanding ಗಳು ಅಥವಾ ತಪ್ಪು ಅರ್ಥಗಳಿಗಾಗಿ ನಾವು ಹೊಣೆಗಾರರಾಗಿರುವುದಿಲ್ಲ.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
