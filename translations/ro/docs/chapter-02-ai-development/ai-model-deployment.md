@@ -1,28 +1,30 @@
-# Implementarea Modelului AI cu Azure Developer CLI
+# Implementarea modelelor AI cu Azure Developer CLI
 
-**Navigarea capitolului:**
-- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitol Curent**: Capitolul 2 - Dezvoltare AI-First
-- **⬅️ Anterior**: [Integrare Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Următor**: [Laborator AI Workshop](ai-workshop-lab.md)
-- **🚀 Capitol Următor**: [Capitolul 3: Configurare](../chapter-03-configuration/configuration.md)
+**Navigare capitol:**
+- **📚 Pagina cursului**: [AZD pentru începători](../../README.md)
+- **📖 Capitolul curent**: Capitolul 2 - Dezvoltare axată pe AI
+- **⬅️ Anterior**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ Următor**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Capitolul următor**: [Capitolul 3: Configurare](../chapter-03-configuration/configuration.md)
 
-Acest ghid oferă instrucțiuni complete pentru implementarea modelelor AI folosind șabloane AZD, acoperind totul de la selecția modelului până la tiparele de implementare în producție.
+Acest ghid oferă instrucțiuni cuprinzătoare pentru implementarea modelelor AI folosind șabloane AZD, acoperind totul, de la selecția modelului până la tiparele de implementare în producție.
+
+> **Notă de validare (2026-03-25):** Fluxul de lucru AZD din acest ghid a fost verificat cu `azd` `1.23.12`. Pentru implementările AI care durează mai mult decât fereastra implicită de implementare a serviciului, versiunile curente AZD acceptă `azd deploy --timeout <seconds>`.
 
 ## Cuprins
 
-- [Strategia de Selecție a Modelului](#strategia-de-selecție-a-modelului)
-- [Configurarea AZD pentru Modelele AI](#configurarea-azd-pentru-modelele-ai)
-- [Tipare de Implementare](#tipare-de-implementare)
-- [Managementul Modelului](#managementul-modelului)
-- [Considerații pentru Producție](#considerații-pentru-producție)
-- [Monitorizare și Observabilitate](#monitorizare-și-observabilitate)
+- [Strategia de selecție a modelului](#strategia-de-selecție-a-modelului)
+- [Configurarea AZD pentru modele AI](#configurarea-azd-pentru-modele-ai)
+- [Tipare de implementare](#tipare-de-implementare)
+- [Gestionarea modelelor](#gestionarea-modelelor)
+- [Considerații pentru producție](#considerații-pentru-producție)
+- [Monitorizare și observabilitate](#monitorizare-și-observabilitate)
 
-## Strategia de Selecție a Modelului
+## Strategia de selecție a modelului
 
-### Modele Microsoft Foundry
+### Modele Microsoft Foundry Modele
 
-Alege modelul potrivit pentru cazul tău de utilizare:
+Alegeți modelul potrivit pentru cazul dvs. de utilizare:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -41,29 +43,29 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
         ]
 ```
 
-### Planificarea Capacității Modelului
+### Planificarea capacității modelului
 
-| Tip Model | Caz de Utilizare | Capacitate Recomandată | Considerații de Cost |
-|-----------|------------------|-----------------------|---------------------|
-| gpt-4.1-mini | Chat, Întrebări & Răspunsuri | 10-50 TPM | Rentabil pentru majoritatea sarcinilor |
-| gpt-4.1 | Raționament complex | 20-100 TPM | Cost mai mare, folosit pentru funcții premium |
-| Text-embedding-ada-002 | Căutare, RAG | 30-120 TPM | Esențial pentru căutare semantică |
-| Whisper | Transcriere vorbire | 10-50 TPM | Sarcini de procesare audio |
+| Tip model | Caz de utilizare | Capacitate recomandată | Considerații privind costurile |
+|------------|----------|---------------------|-------------------|
+| gpt-4.1-mini | Chat, Întrebări și Răspunsuri | 10-50 TPM | Rentabil pentru majoritatea sarcinilor |
+| gpt-4.1 | Raționament complex | 20-100 TPM | Cost mai mare, folosiți pentru funcționalități premium |
+| text-embedding-3-large | Căutare, RAG | 30-120 TPM | Alegere implicită puternică pentru căutare semantică și recuperare |
+| Whisper | Speech-to-text | 10-50 TPM | Sarcini de procesare audio |
 
-## Configurarea AZD pentru Modelele AI
+## Configurarea AZD pentru modele AI
 
-### Configurarea Șablonului Bicep
+### Configurare șablon Bicep
 
-Creează implementări ale modelului prin șabloane Bicep:
+Creați implementări de modele prin șabloane Bicep:
 
 ```bicep
 // infra/main.bicep
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -122,21 +124,21 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
-### Variabile de Mediu
+### Variabile de mediu
 
-Configurează mediul aplicației tale:
+Configurați mediul aplicației:
 
 ```bash
-# configurație .env
+# configurare .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Tipare de Implementare
+## Tipare de implementare
 
-### Tiparul 1: Implementare într-o singură regiune
+### Modelul 1: Implementare într-o singură regiune
 
 ```yaml
 # azure.yaml - Single region
@@ -149,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Cel mai potrivit pentru:
+Potrivit pentru:
 - Dezvoltare și testare
 - Aplicații pentru o singură piață
 - Optimizare a costurilor
 
-### Tiparul 2: Implementare multi-regiune
+### Modelul 2: Implementare multi-regiune
 
 ```bicep
 // Multi-region deployment
@@ -167,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Cel mai potrivit pentru:
+Potrivit pentru:
 - Aplicații globale
-- Cerințe ridicate de disponibilitate
-- Distribuția încărcării
+- Cerințe de disponibilitate ridicată
+- Distribuirea încărcării
 
-### Tiparul 3: Implementare Hibridă
+### Modelul 3: Implementare hibridă
 
-Combină modelele Microsoft Foundry cu alte servicii AI:
+Combinați Modele Microsoft Foundry cu alte servicii AI:
 
 ```bicep
 // Hybrid AI services
@@ -203,11 +205,11 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Managementul Modelului
+## Gestionarea modelelor
 
-### Controlul Versiunilor
+### Controlul versiunilor
 
-Urmărește versiunile modelului în configurația AZD:
+Urmăriți versiunile modelelor în configurația AZD:
 
 ```json
 {
@@ -215,19 +217,19 @@ Urmărește versiunile modelului în configurația AZD:
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
 ```
 
-### Actualizări ale Modelului
+### Actualizări ale modelului
 
-Folosește hook-uri AZD pentru actualizările modelului:
+Utilizați hook-urile AZD pentru actualizările modelelor:
 
 ```bash
 #!/bin/bash
@@ -238,11 +240,14 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# Dacă implementarea durează mai mult decât timpul de expirare implicit
+azd deploy --timeout 1800
 ```
 
 ### Testare A/B
 
-Implementarea mai multor versiuni ale modelului:
+Implementați mai multe versiuni ale modelului:
 
 ```bicep
 param enableABTesting bool = false
@@ -264,11 +269,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Considerații pentru Producție
+## Considerații pentru producție
 
-### Planificarea Capacității
+### Planificarea capacității
 
-Calculează capacitatea necesară în funcție de modelele de utilizare:
+Calculați capacitatea necesară pe baza tiparelor de utilizare:
 
 ```python
 # Exemplu de calcul al capacității
@@ -293,9 +298,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Configurarea Auto-scalării
+### Configurare auto-scalare
 
-Configurează auto-scalarea pentru Container Apps:
+Configurați auto-scalarea pentru Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -331,9 +336,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Optimizarea Costurilor
+### Optimizarea costurilor
 
-Implementează controale de cost:
+Implementați controale de cost:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -363,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Monitorizare și Observabilitate
+## Monitorizare și observabilitate
 
-### Integrarea Application Insights
+### Integrare Application Insights
 
-Configurează monitorizarea pentru sarcinile AI:
+Configurați monitorizarea pentru sarcinile AI:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -403,12 +408,12 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Metrice Personalizate
+### Metrice personalizate
 
-Urmărește metrice specifice AI:
+Urmăriți metrice specifice AI:
 
 ```python
-# Telemetrie personalizată pentru modelele AI
+# Telemetrie personalizată pentru modele de inteligență artificială
 import logging
 from applicationinsights import TelemetryClient
 
@@ -440,12 +445,12 @@ class AITelemetry:
         )
 ```
 
-### Verificări de Sănătate
+### Verificări de sănătate
 
-Implementează monitorizarea stării serviciilor AI:
+Implementați monitorizarea stării serviciilor AI:
 
 ```python
-# Puncte finale pentru verificarea sănătății
+# Endpoint-uri pentru verificarea stării
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -455,7 +460,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Testează conexiunea OpenAI
+        # Testează conexiunea la OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -471,32 +476,32 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## Pașii Următori
+## Pașii următori
 
-1. **Revizuiește [Ghidul de Integrare Microsoft Foundry](microsoft-foundry-integration.md)** pentru tipare de integrare a serviciilor
-2. **Finalizează [Laboratorul AI Workshop](ai-workshop-lab.md)** pentru experiență practică
-3. **Implementează [Practici AI pentru Producție](production-ai-practices.md)** pentru implementări enterprise
-4. **Explorează [Ghidul AI de Remediere a Problemelor](../chapter-07-troubleshooting/ai-troubleshooting.md)** pentru probleme comune
+1. **Revizuiți [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** pentru tipare de integrare a serviciilor
+2. **Finalizați [AI Workshop Lab](ai-workshop-lab.md)** pentru experiență practică
+3. **Implementați [Practici AI pentru producție](production-ai-practices.md)** pentru implementări enterprise
+4. **Explorați [Ghidul de depanare AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** pentru probleme comune
 
 ## Resurse
 
-- [Disponibilitatea Modelului Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Disponibilitatea modelelor Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Documentația Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Scalarea Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [Optimizarea Costurilor Model AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Optimizarea costurilor modelelor AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Navigarea capitolului:**
-- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitol Curent**: Capitolul 2 - Dezvoltare AI-First
-- **⬅️ Anterior**: [Integrare Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Următor**: [Laborator AI Workshop](ai-workshop-lab.md)
-- **🚀 Capitol Următor**: [Capitolul 3: Configurare](../chapter-03-configuration/configuration.md)
+**Navigare capitol:**
+- **📚 Pagina cursului**: [AZD pentru începători](../../README.md)
+- **📖 Capitolul curent**: Capitolul 2 - Dezvoltare axată pe AI
+- **⬅️ Anterior**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ Următor**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Capitolul următor**: [Capitolul 3: Configurare](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Declinare a responsabilității**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite ce pot rezulta din utilizarea acestei traduceri.
+**Disclaimer**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă o traducere profesională realizată de un traducător uman. Nu ne asumăm răspunderea pentru eventuale neînțelegeri sau interpretări greșite rezultate din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

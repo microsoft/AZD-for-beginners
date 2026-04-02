@@ -1,40 +1,46 @@
-# Capitolul 7: Diagnosticare și depanare
+# Capitolul 7: Depanare & Debugging
 
-**📚 Curs**: [AZD For Beginners](../../README.md) | **⏱️ Durată**: 1-1.5 ore | **⭐ Complexitate**: Intermediar
+**📚 Curs**: [AZD pentru începători](../../README.md) | **⏱️ Durată**: 1-1.5 ore | **⭐ Complexitate**: Intermediar
 
 ---
 
 ## Prezentare generală
 
-Acest capitol vă ajută să diagnosticați și să rezolvați problemele comune atunci când lucrați cu Azure Developer CLI. De la eșecuri de implementare până la probleme specifice AI.
+Acest capitol te ajută să diagnostichezi și să rezolvi probleme comune atunci când lucrezi cu Azure Developer CLI. De la eșecuri de implementare la probleme specifice AI.
+
+> Validat cu `azd 1.23.12` în martie 2026.
 
 ## Obiective de învățare
 
-După parcurgerea acestui capitol, veți:
+După parcurgerea acestui capitol, vei:
 - Diagnostica eșecurile comune de implementare AZD
 - Depana problemele de autentificare și permisiuni
 - Rezolva problemele de conectivitate ale serviciilor AI
-- Utiliza Azure Portal și CLI pentru depanare
+- Folosi Azure Portal și CLI pentru depanare
 
 ---
 
 ## 📚 Lecții
 
-| # | Lecție | Descriere | Durată |
-|---|--------|-------------|------|
+| # | Lecție | Descriere | Timp |
+|---|--------|-----------|------|
 | 1 | [Common Issues](common-issues.md) | Probleme întâlnite frecvent | 30 min |
 | 2 | [Debugging Guide](debugging.md) | Strategii de depanare pas cu pas | 45 min |
 | 3 | [AI Troubleshooting](ai-troubleshooting.md) | Probleme specifice AI | 30 min |
 
 ---
 
-## 🚨 Soluții rapide
+## 🚨 Remedieri rapide
 
 ### Probleme de autentificare
 ```bash
+# Necesar pentru fluxurile de lucru AZD
 azd auth login
+
+# Opțional dacă utilizați și comenzile Azure CLI direct
 az login
-azd auth whoami
+
+azd auth status
 ```
 
 ### Eșecuri la provisionare
@@ -63,23 +69,23 @@ azd up
 ## 📋 Referință coduri de eroare
 
 | Eroare | Cauză | Soluție |
-|-------|-------|----------|
+|-------|-------|---------|
 | `AuthenticationError` | Neautentificat | `azd auth login` |
-| `ResourceNotFound` | Resursă lipsă | Verificați numele resurselor |
-| `QuotaExceeded` | Limitări ale abonamentului | Solicitați creșterea cotei |
+| `ResourceNotFound` | Resursă lipsă | Verifică numele resurselor |
+| `QuotaExceeded` | Limite ale abonamentului | Solicită creșterea cotei |
 | `InvalidTemplate` | Eroare de sintaxă Bicep | `az bicep build` |
-| `Conflict` | Resursă existentă | Folosiți un nume nou sau ștergeți |
-| `Forbidden` | Permisiuni insuficiente | Verificați rolurile RBAC |
+| `Conflict` | Resursa există | Folosește un nume nou sau șterge |
+| `Forbidden` | Permisiuni insuficiente | Verifică rolurile RBAC |
 
 ---
 
 ## 🔄 Resetare și recuperare
 
 ```bash
-# Resetare soft (păstrează resursele, re-deployează codul)
+# Resetare soft (păstrează resursele, redeploiază codul)
 azd deploy --force
 
-# Resetare hard (șterge totul, pornește de la zero)
+# Resetare completă (șterge tot, pornește de la zero)
 azd down --force --purge
 azd up
 ```
@@ -97,13 +103,13 @@ azd up
 
 ## 📖 Resurse conexe
 
-- [Pre-Deployment Checks](../chapter-06-pre-deployment/preflight-checks.md)
-- [Configuration Guide](../chapter-03-configuration/configuration.md)
-- [AZD GitHub Issues](https://github.com/Azure/azure-dev/issues)
+- [Verificări pre-implementare](../chapter-06-pre-deployment/preflight-checks.md)
+- [Ghid de configurare](../chapter-03-configuration/configuration.md)
+- [Issue-urile AZD pe GitHub](https://github.com/Azure/azure-dev/issues)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Declinare de responsabilitate:
-Acest document a fost tradus folosind serviciul de traducere AI Co-op Translator (https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original, în limba sa nativă, trebuie considerat sursa autorizată. Pentru informații critice, se recomandă o traducere profesională realizată de un traducător uman. Nu ne asumăm responsabilitatea pentru eventuale neînțelegeri sau interpretări greșite care pot rezulta din utilizarea acestei traduceri.
+**Declinare de responsabilitate**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autoritativă. Pentru informații critice, se recomandă o traducere profesională realizată de un traducător uman. Nu suntem răspunzători pentru orice neînțelegeri sau interpretări eronate care decurg din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,29 +1,31 @@
-# Kapitola 4: Infrastruktúra ako kód a nasadenie
+# Kapitola 4: Infraštruktúra ako Kód & Nasadenie
 
-**📚 Kurz**: [AZD For Beginners](../../README.md) | **⏱️ Trvanie**: 1–1,5 hodiny | **⭐ Zložitosť**: Stredná
+**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Trvanie**: 1-1,5 hodiny | **⭐ Zložitosť**: Stredne pokročilý
 
 ---
 
 ## Prehľad
 
-Táto kapitola pokrýva vzory Infrastruktúry ako kód (IaC) s Bicep šablónami, poskytovanie zdrojov a stratégie nasadenia pomocou Azure Developer CLI.
+Táto kapitola pokrýva vzory Infraštruktúry ako Kódu (IaC) s Bicep šablónami, provisioning zdrojov a stratégie nasadenia pomocou Azure Developer CLI.
+
+> Overené na `azd 1.23.12` v marci 2026.
 
 ## Ciele učenia
 
-Po absolvovaní tejto kapitoly budete:
-- Pochopiť štruktúru a syntax Bicep šablón
-- Zabezpečiť Azure zdroje pomocou `azd provision`
-- Nasadiť aplikácie pomocou `azd deploy`
-- Implementovať stratégie nasadenia blue-green a postupného (rolling) nasadenia
+Dokončením tejto kapitoly budete:
+- Rozumieť štruktúre a syntaxu Bicep šablón
+- Provisionovať Azure zdroje pomocou `azd provision`
+- Nasadzovať aplikácie pomocou `azd deploy`
+- Implementovať stratégie nasadenia blue-green a rolling
 
 ---
 
 ## 📚 Lekcie
 
 | # | Lekcia | Popis | Čas |
-|---|--------|-------------|------|
-| 1 | [Provisioning Resources](provisioning.md) | Správa Azure zdrojov pomocou AZD | 45 min |
-| 2 | [Deployment Guide](deployment-guide.md) | Stratégie nasadenia aplikácií | 45 min |
+|---|--------|--------|------|
+| 1 | [Provisionovanie zdrojov](provisioning.md) | Správa Azure zdrojov s AZD | 45 min |
+| 2 | [Sprievodca nasadením](deployment-guide.md) | Stratégie nasadenia aplikácií | 45 min |
 
 ---
 
@@ -33,13 +35,13 @@ Po absolvovaní tejto kapitoly budete:
 # Inicializovať z šablóny
 azd init --template azure-functions-python-v2-http
 
-# Náhľad toho, čo bude vytvorené
+# Zobraziť náhľad toho, čo bude vytvorené
 azd provision --preview
 
-# Iba zriadiť infraštruktúru
+# Nasadiť iba infraštruktúru
 azd provision
 
-# Iba nasadiť kód
+# Nasadiť iba kód
 azd deploy
 
 # Alebo oboje spolu
@@ -72,7 +74,7 @@ my-project/
 | `azd init` | Inicializovať projekt |
 | `azd provision` | Vytvoriť Azure zdroje |
 | `azd deploy` | Nasadiť kód aplikácie |
-| `azd up` | poskytovanie + nasadenie |
+| `azd up` | provision + deploy |
 | `azd down` | Odstrániť všetky zdroje |
 
 ---
@@ -82,19 +84,19 @@ my-project/
 | Smer | Kapitola |
 |-----------|---------|
 | **Predchádzajúca** | [Kapitola 3: Konfigurácia](../chapter-03-configuration/README.md) |
-| **Nasledujúca** | [Kapitola 5: Riešenia s viacerými agentmi](../chapter-05-multi-agent/README.md) |
+| **Ďalšia** | [Kapitola 5: Multi-agentové riešenia](../chapter-05-multi-agent/README.md) |
 
 ---
 
 ## 📖 Súvisiace zdroje
 
 - [Kontroly pred nasadením](../chapter-06-pre-deployment/README.md)
-- [Príklady aplikácií v kontajneroch](../../examples/container-app/README.md)
+- [Príklady Container App](../../examples/container-app/README.md)
 - [Príklad databázovej aplikácie](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Upozornenie:
-Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, vezmite, prosím, na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho originálnom jazyku by sa mal považovať za autoritatívny zdroj. Pre kritické informácie odporúčame profesionálny ľudský preklad. Nepreberáme zodpovednosť za žiadne nedorozumenia ani nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+**Zrieknutie sa zodpovednosti**:  
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, berte prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Originálny dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Za akékoľvek nedorozumenia alebo nesprávne výklady vyplývajúce z použitia tohto prekladu nenesieme zodpovednosť.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

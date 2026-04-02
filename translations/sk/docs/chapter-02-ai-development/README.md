@@ -1,20 +1,22 @@
-# Kapitola 2: Vývoj orientovaný na AI
+# Chapter 2: Vývoj s prioritou na AI
 
-**📚 Kurz**: [AZD For Beginners](../../README.md) | **⏱️ Trvanie**: 1-2 hodiny | **⭐ Zložitosť**: Stredná
+**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Trvanie**: 1-2 hodiny | **⭐ Náročnosť**: Stredná
 
 ---
 
 ## Prehľad
 
-Táto kapitola sa zameriava na nasadzovanie aplikácií poháňaných AI pomocou Azure Developer CLI a služieb Microsoft Foundry. Od jednoduchých AI chatovacích aplikácií až po inteligentných agentov s nástrojmi.
+Táto kapitola sa zameriava na nasadenie aplikácií poháňaných AI pomocou Azure Developer CLI a služieb Microsoft Foundry. Od jednoduchých AI chatovacích aplikácií až po inteligentných agentov s nástrojmi.
+
+> **Poznámka k validácii (2026-03-25):** Priebeh príkazov a pokyny k rozšíreniam v tejto kapitole boli skontrolované voči `azd` `1.23.12` a aktuálnej ukážkovej verzii AI agent rozšírenia `azure.ai.agents` `0.1.18-preview`. Ak používate staršiu verziu AZD, najskôr aktualizujte a potom pokračujte v cvičeniach.
 
 ## Ciele učenia
 
-Po dokončení tejto kapitoly budete:
-- Nasadíte AI aplikácie pomocou predpripravených AZD šablón
-- Pochopíte integráciu Microsoft Foundry s AZD
-- Konfigurujete a prispôsobíte AI agentov s nástrojmi
-- Nasadíte RAG (Retrieval-Augmented Generation) aplikácie
+Dokončením tejto kapitoly budete vedieť:
+- Nasadiť AI aplikácie pomocou predpripravených AZD šablón
+- Pochopiť integráciu Microsoft Foundry s AZD
+- Konfigurovať a prispôsobiť AI agentov s nástrojmi
+- Nasadiť RAG (Retrieval-Augmented Generation) aplikácie
 
 ---
 
@@ -22,21 +24,21 @@ Po dokončení tejto kapitoly budete:
 
 | # | Lekcia | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Integrácia Microsoft Foundry](microsoft-foundry-integration.md) | Pripojiť AZD k službám Foundry | 30 min |
+| 1 | [Integrácia Microsoft Foundry](microsoft-foundry-integration.md) | Prepojiť AZD so službami Foundry | 30 min |
 | 2 | [Sprievodca AI agentmi](agents.md) | Nasadiť inteligentných agentov s nástrojmi | 45 min |
-| 3 | [Nasadenie AI modelov](ai-model-deployment.md) | Nasadiť a nakonfigurovať AI modely | 30 min |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Praktické cvičenie: Pripraviť vaše AI riešenie pre AZD | 60 min |
+| 3 | [Nasadenie AI modelu](ai-model-deployment.md) | Nasadiť a nakonfigurovať AI modely | 30 min |
+| 4 | [AI Workshop Laboratórium](ai-workshop-lab.md) | Prakticky: Pripravte svoje AI riešenie na AZD | 60 min |
 
 ---
 
 ## 🚀 Rýchly štart
 
 ```bash
-# Možnosť 1: RAG chatová aplikácia
+# Možnosť 1: RAG Chat aplikácia
 azd init --template azure-search-openai-demo
 azd up
 
-# Možnosť 2: Agenti umelej inteligencie
+# Možnosť 2: AI agenti
 azd init --template get-started-with-ai-agents
 azd up
 
@@ -57,15 +59,15 @@ azd up
 
 ---
 
-## 💰 Prehľad nákladov
+## 💰 Informácie o nákladoch
 
 | Prostredie | Odhadované mesačné náklady |
 |-------------|----------------------|
-| Vývoj | $80-150 |
-| Predprodukcia | $150-300 |
-| Produkcia | $300-3,500+ |
+| Vývojové | 80-150 $ |
+| Testovacie | 150-300 $ |
+| Produkčné | 300-3 500+ $ |
 
-**Tip:** Spustite `azd down` po testovaní, aby ste predišli poplatkom.
+**Tip:** Po testovaní spustite `azd down`, aby ste predišli poplatkom.
 
 ---
 
@@ -73,8 +75,8 @@ azd up
 
 | Smer | Kapitola |
 |-----------|---------|
-| **Predchádzajúce** | [Kapitola 1: Základy](../chapter-01-foundation/README.md) |
-| **Ďalšie** | [Kapitola 3: Konfigurácia](../chapter-03-configuration/README.md) |
+| **Predchádzajúca** | [Kapitola 1: Základy](../chapter-01-foundation/README.md) |
+| **Nasledujúca** | [Kapitola 3: Konfigurácia](../chapter-03-configuration/README.md) |
 | **Preskočiť na** | [Kapitola 8: Produkčné vzory](../chapter-08-production/README.md) |
 
 ---
@@ -82,12 +84,12 @@ azd up
 ## 📖 Súvisiace zdroje
 
 - [Riešenie problémov s AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Postupy pre produkčné AI](../chapter-08-production/production-ai-practices.md)
+- [Produkčné AI praktiky](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vylúčenie zodpovednosti**:
-Tento dokument bol preložený pomocou služby prekladu založenej na umelej inteligencii [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa usilujeme o presnosť, majte prosím na pamäti, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Originálny dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre dôležité informácie sa odporúča odborný ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+**Zrieknutie sa zodpovednosti**:  
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, upozorňujeme, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

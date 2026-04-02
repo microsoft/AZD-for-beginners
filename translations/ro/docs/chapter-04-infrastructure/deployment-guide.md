@@ -1,32 +1,32 @@
-# Ghid de Implementare - Stăpânirea Implementărilor AZD
+# Ghid de implementare - Stăpânirea implementărilor AZD
 
-**Navigare capitole:**
-- **📚 Acasă curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitolul curent**: Capitolul 4 - Infrastructură ca Cod și Implementare
+**Chapter Navigation:**
+- **📚 Pagina cursului**: [AZD pentru începători](../../README.md)
+- **📖 Capitolul curent**: Capitolul 4 - Infrastructură ca Cod & Implementare
 - **⬅️ Capitolul anterior**: [Capitolul 3: Configurare](../chapter-03-configuration/configuration.md)
-- **➡️ Următorul**: [Provisionarea Resurselor](provisioning.md)
-- **🚀 Capitolul următor**: [Capitolul 5: Soluții AI Multi-Agent](../../examples/retail-scenario.md)
+- **➡️ Următorul**: [Provisionarea resurselor](provisioning.md)
+- **🚀 Capitolul următor**: [Capitolul 5: Soluții AI cu mai mulți agenți](../../examples/retail-scenario.md)
 
 ## Introducere
 
-Acest ghid cuprinzător acoperă tot ce trebuie să știi despre implementarea aplicațiilor folosind Azure Developer CLI, de la implementări simple cu o singură comandă până la scenarii avansate de producție cu hook-uri personalizate, medii multiple și integrare CI/CD. Stăpânește întregul ciclu de viață al implementării cu exemple practice și bune practici.
+Acest ghid cuprinzător acoperă tot ce trebuie să știi despre implementarea aplicațiilor folosind Azure Developer CLI, de la implementări de bază cu o singură comandă până la scenarii avansate de producție cu hook-uri personalizate, multiple medii și integrare CI/CD. Stăpânește ciclul complet de viață al implementării cu exemple practice și bune practici.
 
 ## Obiective de învățare
 
-Completând acest ghid, vei:
-- Stăpâni toate comenzile și fluxurile de lucru ale implementărilor din Azure Developer CLI
-- Înțelege întregul ciclu de viață al implementării de la provisioning la monitorizare
-- Implementa hook-uri personalizate pentru automatizarea pre și post-implementare
-- Configura medii multiple cu parametri specifici fiecărui mediu
+După parcurgerea acestui ghid, vei:
+- Stăpâni toate comenzile și fluxurile de lucru de implementare ale Azure Developer CLI
+- Înțelege ciclul de viață complet al implementării, de la provisionare la monitorizare
+- Implementa hook-uri de implementare personalizate pentru automatizare înainte și după implementare
+- Configura mai multe medii cu parametri specifici fiecărui mediu
 - Configura strategii avansate de implementare, inclusiv blue-green și canary
 - Integra implementările azd cu pipeline-uri CI/CD și fluxuri de lucru DevOps
 
-## Rezultate de învățare
+## Rezultate ale învățării
 
-La final, vei putea să:
-- Rulezi și să depanezi independent toate fluxurile de implementare azd
-- Proiectezi și implementezi automatizări personalizate cu hook-uri
-- Configurezi implementări pregătite pentru producție cu securitate și monitorizare corespunzătoare
+După finalizare, vei fi capabil să:
+- Executi și depanezi toate fluxurile de implementare azd în mod independent
+- Proiectezi și implementezi automatizări de implementare personalizate folosind hook-uri
+- Configurezi implementări gata pentru producție cu securitate și monitorizare adecvate
 - Gestionezi scenarii complexe de implementare multi-mediu
 - Optimizezi performanța implementărilor și implementezi strategii de rollback
 - Integrezi implementările azd în practicile DevOps ale întreprinderii
@@ -34,56 +34,56 @@ La final, vei putea să:
 ## Prezentare generală a implementării
 
 Azure Developer CLI oferă mai multe comenzi de implementare:
-- `azd up` - Flux complet (provision + deploy)
+- `azd up` - Flux complet (provisionare + implementare)
 - `azd provision` - Creează/actualizează doar resursele Azure
 - `azd deploy` - Implementează doar codul aplicației
-- `azd package` - Compilează și împachetează aplicațiile
+- `azd package` - Compilează și pachetează aplicațiile
 
 ## Fluxuri de lucru de bază pentru implementare
 
 ### Implementare completă (azd up)
-Cel mai comun flux pentru proiectele noi:
+Cel mai comun flux de lucru pentru proiectele noi:
 ```bash
-# Distribuie totul de la zero
+# Desfășoară totul de la zero
 azd up
 
-# Distribuie cu un mediu specific
+# Desfășoară într-un mediu specific
 azd up --environment production
 
-# Distribuie cu parametri personalizați
+# Desfășoară cu parametri personalizați
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Implementare doar infrastructură
+### Implementare doar a infrastructurii
 Când trebuie doar să actualizezi resursele Azure:
 ```bash
-# Furnizarea/actualizarea infrastructurii
+# Provisionare/actualizare a infrastructurii
 azd provision
 
-# Furnizarea cu dry-run pentru a previzualiza modificările
+# Provisionare cu execuție simulată (dry-run) pentru a previzualiza modificările
 azd provision --preview
 
-# Furnizarea serviciilor specifice
+# Provisionare a serviciilor specifice
 azd provision --service database
 ```
 
-### Implementare doar cod
+### Implementare doar a codului
 Pentru actualizări rapide ale aplicației:
 ```bash
 # Implementați toate serviciile
 azd deploy
 
-# Ieșire așteptată:
-# Implementarea serviciilor (azd deploy)
+# Rezultatul așteptat:
+# Se implementează serviciile (azd deploy)
 # - web: Se implementează... Gata
 # - api: Se implementează... Gata
-# SUCCES: Implementarea dvs. s-a încheiat în 2 minute 15 secunde
+# SUCCES: Implementarea dvs. s-a finalizat în 2 minute și 15 secunde
 
 # Implementați un serviciu specific
 azd deploy --service web
 azd deploy --service api
 
-# Implementați cu argumente personalizate de construire
+# Implementați cu argumente de compilare personalizate
 azd deploy --service api --build-arg NODE_ENV=production
 
 # Verificați implementarea
@@ -98,22 +98,22 @@ După orice implementare, verifică succesul:
 # Verifică dacă toate serviciile rulează
 azd show
 
-# Testează punctele finale de stare
+# Testează endpoint-urile de sănătate
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
 curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
 curl -f "$API_URL/health" || echo "❌ API health check failed"
 
-# Monitorizează pentru erori (se deschide implicit în browser)
+# Monitorizează erorile (se deschide implicit în browser)
 azd monitor --logs
 ```
 
 **Criterii de succes:**
-- ✅ Toate serviciile afișează status "Running"
-- ✅ Endpoint-urile de sănătate returnează HTTP 200
-- ✅ Nu există erori în jurnalele ultimele 5 minute
-- ✅ Aplicația răspunde la cererile de test
+- ✅ Toate serviciile afișează starea "Running"
+- ✅ Endpoints de sănătate returnează HTTP 200
+- ✅ Niciun jurnal de erori în ultimele 5 minute
+- ✅ Aplicația răspunde la cereri de test
 
 ## 🏗️ Înțelegerea procesului de implementare
 
@@ -132,10 +132,10 @@ hooks:
 ```
 
 ### Faza 2: Provisionarea infrastructurii
-- Citește template-uri de infrastructură (Bicep/Terraform)
+- Citește șabloanele de infrastructură (Bicep/Terraform)
 - Creează sau actualizează resursele Azure
-- Configurează rețeaua și securitatea
-- Configurează monitorizarea și logarea
+- Configurează rețelistica și securitatea
+- Configurează monitorizarea și înregistrarea jurnalelor
 
 ### Faza 3: Hook-uri post-provisionare
 ```yaml
@@ -150,10 +150,10 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### Faza 4: Împachetarea aplicației
+### Faza 4: Ambalarea aplicației
 - Compilează codul aplicației
-- Creează artefacte de implementare
-- Împachetează pentru platforma țintă (containere, fișiere ZIP etc.)
+- Creează artefactele de implementare
+- Pachetează pentru platforma țintă (containere, fișiere ZIP, etc.)
 
 ### Faza 5: Hook-uri pre-implementare
 ```yaml
@@ -169,7 +169,7 @@ hooks:
 ```
 
 ### Faza 6: Implementarea aplicației
-- Implementează aplicațiile împachetate în serviciile Azure
+- Implementează aplicațiile împachetate pe serviciile Azure
 - Actualizează setările de configurare
 - Pornește/repornește serviciile
 
@@ -188,7 +188,7 @@ hooks:
 
 ## 🎛️ Configurarea implementării
 
-### Setări de implementare specifice serviciilor
+### Setări de implementare specifice serviciului
 ```yaml
 # azure.yaml
 services:
@@ -218,14 +218,14 @@ services:
     buildCommand: npm install --production
 ```
 
-### Configurări specifice mediului
+### Configurații specifice fiecărui mediu
 ```bash
 # Mediu de dezvoltare
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Mediu de testare
+# Mediu de preproducție
 azd env new staging
 azd env set NODE_ENV staging
 azd env set DEBUG false
@@ -285,7 +285,7 @@ azd up --environment production-blue
 # Testează mediul albastru
 ./scripts/test-environment.sh production-blue
 
-# Comută traficul către albastru (actualizare manuală DNS/balansator de încărcare)
+# Redirecționează traficul către mediul albastru (actualizare manuală DNS/load-balancer)
 ./scripts/switch-traffic.sh production-blue
 
 # Curăță mediul verde
@@ -340,7 +340,7 @@ fi
 
 ## 🐳 Implementări cu containere
 
-### Implementări în Container App
+### Implementări pentru Container App
 ```yaml
 services:
   api:
@@ -364,7 +364,7 @@ services:
       maxReplicas: 10
 ```
 
-### Optimizare Dockerfile multi-etapă
+### Optimizarea Dockerfile multi-stage
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -394,11 +394,11 @@ CMD ["npm", "start"]
 
 ### Implementări specifice serviciilor
 ```bash
-# Implementați un serviciu specific pentru iterații mai rapide
+# Desfășoară un serviciu specific pentru iterații mai rapide
 azd deploy --service web
 azd deploy --service api
 
-# Implementați toate serviciile
+# Desfășoară toate serviciile
 azd deploy
 ```
 
@@ -412,19 +412,19 @@ services:
     outputPath: dist
 ```
 
-### Implementări eficiente ale codului
+### Implementări eficiente de cod
 ```bash
-# Folosiți azd deploy (nu azd up) pentru modificările doar în cod
-# Aceasta sare peste aprovizionarea infrastructurii și este mult mai rapid
+# Utilizați azd deploy (nu azd up) pentru modificări care țin doar de cod
+# Acest lucru evită provisionarea infrastructurii și este mult mai rapid
 azd deploy
 
-# Implementați serviciul specific pentru cea mai rapidă iterare
+# Implementați un serviciu specific pentru cea mai rapidă iterație
 azd deploy --service api
 ```
 
-## 🔍 Monitorizarea implementării
+## 🔍 Monitorizarea implementărilor
 
-### Monitorizare a implementării în timp real
+### Monitorizare în timp real a implementărilor
 ```bash
 # Monitorizați aplicația în timp real
 azd monitor --live
@@ -450,14 +450,14 @@ services:
       retries: 3
 ```
 
-### Validarea post-implementare
+### Validare post-implementare
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
 
 echo "Validating deployment..."
 
-# Verifică starea de sănătate a aplicației
+# Verifică starea aplicației
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -487,12 +487,12 @@ echo "✅ Deployment validation completed successfully"
 
 ### Gestionarea secretelor
 ```bash
-# Stochează secretele în siguranță
+# Stocați secretele în siguranță
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# Referință secrete în azure.yaml
+# Faceți referire la secrete în azure.yaml
 ```
 
 ```yaml
@@ -516,7 +516,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### Gestionarea identității și accesului
+### Managementul identității și accesului
 ```yaml
 services:
   api:
@@ -537,28 +537,28 @@ services:
 ```bash
 # AZD nu are rollback încorporat. Abordări recomandate:
 
-# Opțiunea 1: Reimplementare din Git (recomandat)
-git revert HEAD  # Reveniți la commit-ul problematic
+# Opțiunea 1: Redeploy din Git (recomandat)
+git revert HEAD  # Revertează commit-ul problematic
 git push
 azd deploy
 
-# Opțiunea 2: Reimplementare commit specific
+# Opțiunea 2: Redeploy unui commit specific
 git checkout <previous-commit-hash>
 azd deploy
 git checkout main
 ```
 
-### Rollback infrastructură
+### Rollback al infrastructurii
 ```bash
-# Previzualizează modificările infrastructurii înainte de aplicare
+# Previzualizați modificările infrastructurii înainte de aplicare
 azd provision --preview
 
-# Pentru revenirea infrastructurii, folosește controlul versiunilor:
-git revert HEAD  # Revino asupra modificărilor infrastructurii
+# Pentru revenirea la versiunea anterioară a infrastructurii, folosiți controlul versiunilor:
+git revert HEAD  # Anulează modificările infrastructurii
 azd provision    # Aplică starea anterioară a infrastructurii
 ```
 
-### Rollback migrații baze de date
+### Rollback al migrațiilor bazei de date
 ```bash
 #!/bin/bash
 # scripts/rollback-database.sh
@@ -572,11 +572,11 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 Măsurarea implementării
+## 📊 Metrice ale implementării
 
-### Monitorizează performanța implementării
+### Urmărește performanța implementărilor
 ```bash
-# Vizualizați starea actuală a implementării
+# Vizualizați starea curentă a implementării
 azd show
 
 # Monitorizați aplicația cu Application Insights
@@ -586,7 +586,7 @@ azd monitor --overview
 azd monitor --live
 ```
 
-### Colectarea metricilor personalizate
+### Colectare de metrici personalizate
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -603,16 +603,16 @@ hooks:
         -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
 ```
 
-## 🎯 Bune practici
+## 🎯 Cele mai bune practici
 
-### 1. Consistența mediului
+### 1. Consistența mediilor
 ```bash
-# Folosește denumiri consecvente
+# Folosiți denumiri consistente
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Menține paritatea mediului
+# Mențineți paritatea între medii
 ./scripts/sync-environments.sh
 ```
 
@@ -621,7 +621,7 @@ azd env new production-v1
 # Previzualizați modificările infrastructurii înainte de implementare
 azd provision --preview
 
-# Folosiți verificarea ARM/Bicep
+# Utilizați linting pentru ARM/Bicep
 az bicep lint --file infra/main.bicep
 
 # Validați sintaxa Bicep
@@ -657,25 +657,25 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. Documentație și logare
+### 4. Documentare și logare
 ```bash
 # Documentați procedurile de implementare
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
-echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
+echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
 ```
 
 ## Pașii următori
 
-- [Provisionarea Resurselor](provisioning.md) - Explorare detaliată a managementului infrastructurii
-- [Planificarea pre-implementare](../chapter-06-pre-deployment/capacity-planning.md) - Planifică strategia ta de implementare
+- [Provisionarea resurselor](provisioning.md) - Analiză aprofundată a gestionării infrastructurii
+- [Planificarea pre-implementării](../chapter-06-pre-deployment/capacity-planning.md) - Planifică strategia de implementare
 - [Probleme comune](../chapter-07-troubleshooting/common-issues.md) - Rezolvă problemele de implementare
-- [Bune practici](../chapter-07-troubleshooting/debugging.md) - Strategii de implementare pregătite pentru producție
+- [Cele mai bune practici](../chapter-07-troubleshooting/debugging.md) - Strategii de implementare pregătite pentru producție
 
 ## 🎯 Exerciții practice de implementare
 
-### Exercițiul 1: Flux incremental de implementare (20 minute)
-**Obiectiv**: Stăpânește diferența dintre implementările complete și cele incrementale
+### Exercițiul 1: Flux de implementare incremental (20 de minute)
+**Scop**: Stăpânește diferența dintre implementările complete și cele incrementale
 
 ```bash
 # Implementare inițială
@@ -683,13 +683,13 @@ mkdir deployment-practice && cd deployment-practice
 azd init --template todo-nodejs-mongo
 azd up
 
-# Înregistrează ora implementării inițiale
+# Înregistrează timpul implementării inițiale
 echo "Full deployment: $(date)" > deployment-log.txt
 
 # Fă o modificare a codului
 echo "// Updated $(date)" >> src/api/src/server.js
 
-# Distribuie doar codul (rapid)
+# Implementare doar a codului (rapid)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
@@ -703,16 +703,16 @@ azd down --force --purge
 **Criterii de succes:**
 - [ ] Implementarea completă durează 5-15 minute
 - [ ] Implementarea doar a codului durează 2-5 minute
-- [ ] Modificările codului sunt reflectate în aplicația implementată
+- [ ] Modificările de cod sunt reflectate în aplicația implementată
 - [ ] Infrastructura rămâne neschimbată după `azd deploy`
 
-**Rezultat așteptat**: `azd deploy` este cu 50-70% mai rapid decât `azd up` pentru schimbări ale codului
+**Rezultat al învățării**: `azd deploy` este cu 50-70% mai rapid decât `azd up` pentru modificările de cod
 
-### Exercițiul 2: Hook-uri personalizate de implementare (30 minute)
-**Obiectiv**: Implementarea automatizărilor pre și post-implementare
+### Exercițiul 2: Hook-uri de implementare personalizate (30 de minute)
+**Scop**: Implementează automatizare înainte și după implementare
 
 ```bash
-# Creează scriptul de validare pre-deploy
+# Creează un script de validare înainte de implementare
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
@@ -734,7 +734,7 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# Creează un test de tip smoke post-deploy
+# Creează un test smoke după implementare
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
 echo "💨 Running smoke tests..."
@@ -766,18 +766,18 @@ hooks:
     run: ./scripts/post-deploy-test.sh
 EOF
 
-# Testează deployment-ul cu hook-uri
+# Testează implementarea cu hook-uri
 azd deploy
 ```
 
 **Criterii de succes:**
-- [ ] Scriptul pre-implementare rulează înainte de implementare
-- [ ] Implementarea este anulată dacă testele eșuează
-- [ ] Testul de fum post-implementare validează sănătatea
+- [ ] Scriptul pre-deploy rulează înainte de implementare
+- [ ] Implementarea se oprește dacă testele eșuează
+- [ ] Testul smoke post-deploy validează sănătatea
 - [ ] Hook-urile se execută în ordinea corectă
 
-### Exercițiul 3: Strategie de implementare multi-mediu (45 minute)
-**Obiectiv**: Implementarea unui flux de implementare etapizat (dev → staging → producție)
+### Exercițiul 3: Strategie de implementare multi-mediu (45 de minute)
+**Scop**: Implementează un flux de implementare în etape (dev → staging → production)
 
 ```bash
 # Creează scriptul de implementare
@@ -788,7 +788,7 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# Pasul 1: Implementare în dev
+# Pasul 1: Implementare în mediul de dezvoltare
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
@@ -797,7 +797,7 @@ azd up --no-prompt
 echo "Running dev tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# Pasul 2: Implementare în staging
+# Pasul 2: Implementare în mediul de staging
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
@@ -841,39 +841,39 @@ azd env new production
 **Criterii de succes:**
 - [ ] Mediul dev se implementează cu succes
 - [ ] Mediul staging se implementează cu succes
-- [ ] Este necesară aprobare manuală pentru producție
+- [ ] Este necesară aprobarea manuală pentru producție
 - [ ] Toate mediile au verificări de sănătate funcționale
-- [ ] Este posibilă revenirea înapoi, dacă este necesar
+- [ ] Se poate reveni la versiunea anterioară dacă e necesar
 
-### Exercițiul 4: Strategie de rollback (25 minute)
-**Obiectiv**: Implementarea și testarea rollback-ului de implementare folosind Git
+### Exercițiul 4: Strategie de rollback (25 de minute)
+**Scop**: Implementează și testează rollback-ul implementării folosind Git
 
 ```bash
-# Implementare v1
+# Implementează v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# Salvează hash-ul commitului v1
+# Salvează hash-ul commit-ului v1
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# Implementare v2 cu schimbare majoră
+# Implementează v2 cu schimbare incompatibilă
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
 azd deploy
 
-# Detectează eșecul și execută rollback
+# Detectează eșecul și revino la versiunea anterioară
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # Rollback folosind git
+    # Revino la versiunea anterioară folosind git
     git revert HEAD --no-edit
     
-    # Rollback mediu
+    # Restabilește mediul
     azd env set APP_VERSION "1.0.0"
     
-    # Reimplementare v1
+    # Reimplementează v1
     azd deploy
     
     echo "✅ Rolled back to v1.0.0"
@@ -881,14 +881,14 @@ fi
 ```
 
 **Criterii de succes:**
-- [ ] Se pot detecta eșecurile de implementare
-- [ ] Scriptul de rollback rulează automat
-- [ ] Aplicația revine într-o stare funcțională
-- [ ] Verificările de sănătate trec după rollback
+- [ ] Poți detecta eșecurile de implementare
+- [ ] Scriptul de rollback se execută automat
+- [ ] Aplicația revine la starea de funcționare
+- [ ] Verificările de sănătate sunt trecute după rollback
 
-## 📊 Monitorizarea metricilor de implementare
+## 📊 Monitorizarea metricilor implementării
 
-### Monitorizează performanța implementării tale
+### Monitorizează performanța implementărilor tale
 
 ```bash
 # Creează script pentru metrici de implementare
@@ -905,11 +905,11 @@ echo "
 📊 Deployment Metrics:"
 echo "Duration: ${DURATION}s"
 echo "Timestamp: $(date)"
-echo "Environment: $(azd env show --output json | jq -r '.name')"
+echo "Environment: $(azd env get-value AZURE_ENV_NAME)"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
-# Înregistrează în fișier
-echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
+# Înregistrează într-un fișier
+echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
 EOF
 
 chmod +x track-deployment.sh
@@ -918,7 +918,7 @@ chmod +x track-deployment.sh
 ./track-deployment.sh
 ```
 
-**Analizează metricile tale:**
+**Analizează-ți metricile:**
 ```bash
 # Vizualizați istoricul implementărilor
 cat deployment-metrics.csv
@@ -929,20 +929,20 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 
 ## Resurse suplimentare
 
-- [Referință Azure Developer CLI Deployment](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Implementarea Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Implementarea Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Implementarea Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Referință de implementare Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Implementare Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Implementare Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Implementare Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
-**Navigare**
-- **Lecția anterioară**: [Primul tău proiect](../chapter-01-foundation/first-project.md)
-- **Lecția următoare**: [Provisionarea Resurselor](provisioning.md)
+**Navigation**
+- **Previous Lesson**: [Primul tău proiect](../chapter-01-foundation/first-project.md)
+- **Next Lesson**: [Provisionarea resurselor](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Avertisment**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să luați în considerare că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea realizată de un profesionist uman. Nu ne asumăm responsabilitatea pentru eventuale neînțelegeri sau interpretări greșite rezultate din utilizarea acestei traduceri.
+**Declinare de responsabilitate**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original, în limba sa nativă, trebuie considerat sursa autorizată. Pentru informații critice, se recomandă o traducere profesională realizată de un traducător uman. Nu ne facem răspunzători pentru eventualele neînțelegeri sau interpretări greșite care rezultă din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

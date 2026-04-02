@@ -1,21 +1,23 @@
-# Kapitola 6: Plánovanie a validácia pred nasadením
+# Chapter 6: Plánovanie a overovanie pred nasadením
 
-**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Dĺžka**: 1 hour | **⭐ Zložitosť**: Intermediate
+**📚 Kurz**: [AZD pre začiatočníkov](../../README.md) | **⏱️ Trvanie**: 1 hodina | **⭐ Zložitosť**: Stredne pokročilý
 
 ---
 
 ## Prehľad
 
-Táto kapitola pokrýva základné kroky plánovania a overovania pred nasadením vašej aplikácie. Naučte sa predchádzať nákladným chybám pomocou správneho plánovania kapacity, výberu SKU a prednasadzovacích kontrol.
+Táto kapitola pokrýva základné kroky plánovania a overovania pred nasadením vašej aplikácie. Naučte sa vyhnúť nákladným chybám pomocou správneho plánovania kapacity, výberu SKU a predbežných kontrol.
 
-## Ciele učenia
+> Overené s `azd 1.23.12` v marci 2026.
 
-Po dokončení tejto kapitoly budete:
-- Spúšťať prednasadzovacie kontroly pred nasadením
-- Plánovať kapacitu a odhadovať požiadavky na zdroje
-- Vyberať vhodné SKU pre optimalizáciu nákladov
+## Výukové ciele
+
+Úspešným dokončením tejto kapitoly budete vedieť:
+- Spustiť predbežné kontroly pred nasadením
+- Plánovať kapacitu a odhadnúť požiadavky na zdroje
+- Vybrať vhodné SKU pre optimalizáciu nákladov
 - Konfigurovať Application Insights na monitorovanie
-- Rozumieť vzorom tímovej koordinácie
+- Pochopiť vzorce koordinácie tímu
 
 ---
 
@@ -23,27 +25,27 @@ Po dokončení tejto kapitoly budete:
 
 | # | Lekcia | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Kontroly pred nasadením](preflight-checks.md) | Overiť konfiguráciu pred nasadením | 15 min |
-| 2 | [Plánovanie kapacity](capacity-planning.md) | Odhadnúť požiadavky na zdroje | 20 min |
-| 3 | [Výber SKU](sku-selection.md) | Vybrať vhodné cenové hladiny | 15 min |
-| 4 | [Application Insights](application-insights.md) | Konfigurovať monitorovanie | 20 min |
-| 5 | [Vzory koordinácie](coordination-patterns.md) | Tímové pracovné postupy pri nasadzovaní | 15 min |
+| 1 | [Predbežné kontroly](preflight-checks.md) | Overenie konfigurácie pred nasadením | 15 min |
+| 2 | [Plánovanie kapacity](capacity-planning.md) | Odhad požiadaviek na zdroje | 20 min |
+| 3 | [Výber SKU](sku-selection.md) | Výber vhodných cenových úrovní | 15 min |
+| 4 | [Application Insights](application-insights.md) | Konfigurácia monitorovania | 20 min |
+| 5 | [Vzorce koordinácie](coordination-patterns.md) | Pracovné postupy tímového nasadenia | 15 min |
 
 ---
 
 ## 🚀 Rýchly štart
 
 ```bash
-# Skontrolovať kvóty predplatného
+# Skontrolujte kvóty predplatného
 az vm list-usage --location eastus --output table
 
-# Náhľad nasadenia (žiadne prostriedky nebudú vytvorené)
+# Náhľad nasadenia (neboli vytvorené žiadne zdroje)
 azd provision --preview
 
-# Overiť syntax Bicep
+# Overte syntax Bicep
 az bicep build --file infra/main.bicep
 
-# Skontrolovať konfiguráciu prostredia
+# Skontrolujte konfiguráciu prostredia
 azd env get-values
 ```
 
@@ -53,18 +55,18 @@ azd env get-values
 
 ### Pred `azd provision`
 
-- [ ] Kvóta overená pre región
-- [ ] SKU správne zvolené
-- [ ] Skontrolovaný odhad nákladov
+- [ ] Overená kvóta pre región
+- [ ] Vhodne vybrané SKU
+- [ ] Preskúmaný odhad nákladov
 - [ ] Konzistentná konvencia pomenovania
-- [ ] Zabezpečenie/RBAC nakonfigurované
+- [ ] Nastavené zabezpečenie/RBAC
 
 ### Pred `azd deploy`
 
 - [ ] Nastavené premenné prostredia
 - [ ] Tajomstvá v Key Vault
-- [ ] Reťazce pripojenia overené
-- [ ] Nastavené kontroly stavu
+- [ ] Overené pripojovacie reťazce
+- [ ] Nakonfigurované zdravotné kontroly
 
 ---
 
@@ -72,7 +74,7 @@ azd env get-values
 
 | Zaťaženie | Vývoj | Produkcia |
 |----------|-------------|------------|
-| Kontajnerové aplikácie | Consumption | Dedicated D4 |
+| Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
 | Microsoft Foundry Models | Standard | Standard + PTU |
 | AI Search | Basic | Standard S2+ |
@@ -83,20 +85,20 @@ azd env get-values
 
 | Smer | Kapitola |
 |-----------|---------|
-| **Predchádzajúca** | [Kapitola 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
+| **Predchádzajúca** | [Kapitola 5: Viacagentný](../chapter-05-multi-agent/README.md) |
 | **Nasledujúca** | [Kapitola 7: Riešenie problémov](../chapter-07-troubleshooting/README.md) |
 
 ---
 
 ## 📖 Súvisiace zdroje
 
-- [Príručka konfigurácie](../chapter-03-configuration/configuration.md)
-- [Príručka nasadenia](../chapter-04-infrastructure/deployment-guide.md)
+- [Sprievodca konfiguráciou](../chapter-03-configuration/configuration.md)
+- [Sprievodca nasadením](../chapter-04-infrastructure/deployment-guide.md)
 - [Bežné problémy](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vyhlásenie o vylúčení zodpovednosti**:
-Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, vezmite prosím na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by sa mal považovať za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
+**Upozornenie**:  
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Aj keď sa snažíme o presnosť, prosím, majte na pamäti, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho rodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nezodpovedáme za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

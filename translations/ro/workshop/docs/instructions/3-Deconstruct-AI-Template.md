@@ -1,40 +1,40 @@
-# 3. Deconstruiește un Șablon
+# 3. Deconstruiți un șablon
 
-!!! tip "LA FINALUL ACESTUI MODUL VEI FI CAPABIL SĂ"
+!!! tip "LA FINALUL ACESTUI MODUL VEI PUTEA"
 
-    - [ ] Activezi GitHub Copilot cu serverele MCP pentru asistență Azure
-    - [ ] Înțelegi structura folderelor și componentele template-ului AZD
-    - [ ] Explorezi tiparele de organizare infrastructure-as-code (Bicep)
-    - [ ] **Lab 3:** Folosește GitHub Copilot pentru a explora și înțelege arhitectura depozitului
-
----
-
-
-Cu șabloanele AZD și Azure Developer CLI (`azd`) putem începe rapid călătoria noastră de dezvoltare AI cu depozite standardizate care oferă cod exemplu, infrastructură și fișiere de configurare - sub forma unui proiect _starter_ gata de implementat.
-
-**Dar acum, trebuie să înțelegem structura proiectului și baza de cod - și să putem personaliza șablonul AZD - fără experiență sau cunoștințe anterioare despre AZD!**
+    - [ ] Activați GitHub Copilot cu serverele MCP pentru asistență Azure
+    - [ ] Înțelegeți structura folderelor șablonului AZD și componentele
+    - [ ] Explorați modele de organizare infrastructură-ca-cod (Bicep)
+    - [ ] **Lab 3:** Folosiți GitHub Copilot pentru a explora și înțelege arhitectura depozitului 
 
 ---
 
-## 1. Activează GitHub Copilot
 
-### 1.1 Instalează GitHub Copilot Chat
+With AZD templates and the Azure Developer CLI (`azd`) we can quickly jumpstart our AI development journey with standardized repositories that provide sample code, infrastructure and configuration files - in the form of a ready-to-deploy _proiect de start_.
 
-Este timpul să explorăm [GitHub Copilot cu Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Acum putem utiliza limbajul natural pentru a descrie sarcina la nivel înalt și să primim asistență pentru executare. Pentru acest laborator, vom folosi planul [Copilot Free](https://github.com/github-copilot/signup) care are o limită lunară pentru completări și interacțiuni de chat.
+**But now, we need to understand the project structure and codebase - and be able to customize the AZD template - without any prior experience or understanding of AZD!**
 
-Extensia poate fi instalată din marketplace, dar ar trebui să fie deja disponibilă în mediul tău Codespaces. _Apasă `Open Chat` din meniul derulant al pictogramei Copilot și scrie o comandă precum `What can you do?`_ - s-ar putea să fii rugat să te autentifici. **GitHub Copilot Chat este gata de utilizare**.
+---
 
-### 1.2. Instalează Serverele MCP
+## 1. Activați GitHub Copilot
 
-Pentru ca modul Agent să fie eficient, are nevoie de acces la uneltele potrivite pentru a obține cunoștințe sau a efectua acțiuni. Aici serverele MCP pot ajuta. Vom configura următoarele servere:
+### 1.1 Instalați GitHub Copilot Chat
 
-1. [Azure MCP Server](../../../../../workshop/docs/instructions)
-1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
+It's time to explore [GitHub Copilot în modul Agent](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Now, we can use natural language to describe our task at a high level, and get assistance in execution. For this lab, we'll use the [Copilot Free plan](https://github.com/github-copilot/signup) which has a monthly limit for completions and chat interactions.
 
-Pentru a le activa:
+The extension can be installed from the marketplace, and it is often already available in Codespaces or dev container environments. _Click `Open Chat` from the Copilot icon drop-down - and type a prompt like `What can you do?`_ - you may be prompted to log in. **GitHub Copilot Chat is ready**.
 
-1. Creează un fișier numit `.vscode/mcp.json` dacă nu există
-1. Copiază următorul conținut în acel fișier - și pornește serverele!
+### 1.2. Instalați serverele MCP
+
+For Agent mode to be effective, it needs access to the right tools to help it retrieve knowledge or take actions. This is where MCP servers can help. We'll configure the following servers:
+
+1. [Server MCP Azure](../../../../../workshop/docs/instructions)
+1. [Server MCP Microsoft Docs](../../../../../workshop/docs/instructions)
+
+To activate these:
+
+1. Create a file called `.vscode/mcp.json` if it does not exist
+1. Copy the following into that file - and start the servers!
    ```json title=".vscode/mcp.json"
    {
       "servers": {
@@ -55,9 +55,9 @@ Pentru a le activa:
    }
    ```
 
-??? warning "Este posibil să primești o eroare că `npx` nu este instalat (click pentru soluție)"
+??? warning "S-ar putea să primiți o eroare că `npx` nu este instalat (faceți clic pentru a extinde soluția)"
 
-      Pentru a rezolva, deschide fișierul `.devcontainer/devcontainer.json` și adaugă această linie în secțiunea features. Apoi reconstruiește containerul. Acum ar trebui să ai `npx` instalat.
+      Pentru a remedia, deschideți fișierul `.devcontainer/devcontainer.json` și adăugați această linie în secțiunea features. Apoi reconstruiți containerul. Ar trebui să aveți acum `npx` instalat.
 
       ```title="" linenums="0"
          "features": {
@@ -66,86 +66,81 @@ Pentru a le activa:
          },
       ```
 
+
 ---
 
-### 1.3. Testează GitHub Copilot Chat
+### 1.3. Testați GitHub Copilot Chat
 
-**Folosește mai întâi `az login` pentru a te autentifica în Azure din linia de comandă VS Code.**
+**First use `azd auth login` to authenticate with Azure from the VS Code command line. Use `az login` as well only if you plan to run Azure CLI commands directly.**
 
-Acum ar trebui să poți interoga starea abonamentului tău Azure și să pui întrebări despre resursele implementate sau configurație. Încearcă aceste comenzi:
+You should now be able to query your Azure subscription status, and ask questions about deployed resources or configuration. Try these prompts:
 
 1. `List my Azure resource groups`
 1. `#foundry list my current deployments`
 
-Poți, de asemenea, să pui întrebări despre documentația Azure și să primești răspunsuri bazate pe serverul Microsoft Docs MCP. Încearcă aceste comenzi:
+You can also ask questions about Azure documentation and get responses grounded in the Microsoft Docs MCP server. Try these prompts:
 
 1. `#microsoft_docs_search What is Azure Developer CLI?`
 1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
 
-Sau poți cere fragmente de cod pentru a îndeplini o sarcină. Încearcă această comandă.
+Or you can ask for code snippets to complete a task. Try this prompt.
 
 1. `Give me a Python code example that uses AAD for an interactive chat client`
 
-În modul `Ask`, aceasta va oferi cod pe care îl poți copia și încerca. În modul `Agent`, acest pas poate merge mai departe și creează resursele relevante pentru tine - incluzând scripturi de configurare și documentație - pentru a te ajuta să execuți acea sarcină.
+In `Ask` mode, this will provide code that you can copy-paste and try out. In `Agent` mode, this might go a step further and create the relevant resources for you - including setup scripts and documentation - to help you execute that task.
 
-**Ești acum echipat pentru a începe să explorezi depozitul șablonului**
-
----
-
-## 2. Deconstruiește Arhitectura
-
-??? prompt "ÎNTREABĂ: Explică arhitectura aplicației din docs/images/architecture.png în 1 paragraf"
-
-      Această aplicație este o aplicație de chat bazată pe AI construită pe Azure care demonstrează o arhitectură modernă bazată pe agenți. Soluția este centrată în jurul unui Azure Container App care găzduiește codul principal al aplicației, ce procesează intrările utilizatorului și generează răspunsuri inteligente printr-un agent AI.
-      
-      Arhitectura folosește Microsoft Foundry Project ca bază pentru capabilitățile AI, conectându-se la serviciile Azure AI care oferă modelele lingvistice subiacente (cum ar fi gpt-4.1-mini) și funcționalitatea agentului.
-      
-      Interacțiunile utilizatorilor trec printr-un frontend bazat pe React către un backend FastAPI care comunică cu serviciul agentului AI pentru generarea răspunsurilor contextuale.
-      
-      Sistemul încorporează capabilități de extragere a cunoștințelor prin căutare în fișiere sau serviciul Azure AI Search, permițând agentului să acceseze și să citeze informații din documentele încărcate.
-      
-      Pentru excelență operațională, arhitectura include monitorizare completă prin Application Insights și Log Analytics Workspace pentru urmărire, înregistrare și optimizarea performanței.
-      
-      Azure Storage oferă stocare blob pentru datele aplicației și încărcările de fișiere, în timp ce Managed Identity asigură acces securizat între resursele Azure fără stocarea credentialelor.
-      
-      Întreaga soluție este proiectată pentru scalabilitate și mentenanță, cu aplicația containerizată care scalează automat în funcție de cerere, oferind în același timp securitate încorporată, monitorizare și capabilități CI/CD prin ecosistemul de servicii gestionate Azure.
-
-![Architecture](../../../../../translated_images/ro/architecture.48d94861e6e6cdc0.webp)
+**You are now equipped to start exploring the template repository**
 
 ---
 
-## 3. Structura Depozitului
+## 2. Deconstruiți arhitectura
 
-!!! prompt "ÎNTREABĂ: Explică structura folderelor șablonului. Începe cu un diagram ierarhic vizual."
+??? prompt "ÎNTREBARE: Explică arhitectura aplicației din docs/images/architecture.png în 1 paragraf"
 
-??? info "RĂSPUNS: Diagram ierarhic vizual"
+      Această aplicație este o aplicație de chat alimentată de AI construită pe Azure care prezintă o arhitectură modernă bazată pe agenți. Soluția se concentrează în jurul unei Azure Container App care găzduiește codul principal al aplicației, care procesează intrările utilizatorilor și generează răspunsuri inteligente prin intermediul unui agent AI. 
+      
+      Arhitectura valorifică Microsoft Foundry Project ca fundație pentru capabilitățile AI, conectându-se la Azure AI Services care oferă modelele de limbaj subiacente (cum ar fi gpt-4.1-mini) și funcționalitatea agenților. Interacțiunile utilizatorilor trec printr-un front-end bazat pe React către un backend FastAPI care comunică cu serviciul agent AI pentru a genera răspunsuri contextuale. 
+      
+      Sistemul încorporează capabilități de recuperare a cunoștințelor prin căutare în fișiere sau serviciul Azure AI Search, permițând agentului să acceseze și să citeze informații din documentele încărcate. Pentru excelență operațională, arhitectura include o monitorizare cuprinzătoare prin Application Insights și Log Analytics Workspace pentru trasare, logging și optimizare a performanței. 
+      
+      Azure Storage oferă stocare blob pentru datele aplicației și încărcările de fișiere, în timp ce Managed Identity asigură acces securizat între resursele Azure fără stocarea credentialelor. Întreaga soluție este proiectată pentru scalabilitate și întreținere, aplicația containerizată scalând automat în funcție de cerere și oferind funcționalități încorporate de securitate, monitorizare și CI/CD prin ecosistemul de servicii gestionate Azure.
+
+![Arhitectură](../../../../../translated_images/ro/architecture.48d94861e6e6cdc0.webp)
+
+---
+
+## 3. Structura depozitului
+
+!!! prompt "ÎNTREBARE: Explică structura folderelor șablonului. Începe cu un diagramă ierarhică vizuală."
+
+??? info "RĂSPUNS: Diagramă ierarhică vizuală"
 
       ```bash title="" 
       get-started-with-ai-agents/
-      ├── 📋 Configuration & Setup
-      │   ├── azure.yaml                    # Configurare Azure Developer CLI
+      ├── 📋 Configurare și setări
+      │   ├── azure.yaml                    # Configurație Azure Developer CLI
       │   ├── docker-compose.yaml           # Containere pentru dezvoltare locală
-      │   ├── pyproject.toml                # Configurare proiect Python
+      │   ├── pyproject.toml                # Configurație proiect Python
       │   ├── requirements-dev.txt          # Dependențe pentru dezvoltare
-      │   └── .devcontainer/                # Configurare container dezvoltare VS Code
+      │   └── .devcontainer/                # Configurare dev container VS Code
       │
-      ├── 🏗️ Infrastructure (infra/)
+      ├── 🏗️ Infrastructură (infra/)
       │   ├── main.bicep                    # Șablon principal de infrastructură
       │   ├── api.bicep                     # Resurse specifice API-ului
-      │   ├── main.parameters.json          # Parametri infrastructură
-      │   └── core/                         # Componente modulare de infrastructură
+      │   ├── main.parameters.json          # Parametri pentru infrastructură
+      │   └── core/                         # Componente de infrastructură modulare
       │       ├── ai/                       # Configurări servicii AI
-      │       ├── host/                     # Infrastructură hosting
+      │       ├── host/                     # Infrastructură de găzduire
       │       ├── monitor/                  # Monitorizare și logare
       │       ├── search/                   # Configurare Azure AI Search
       │       ├── security/                 # Securitate și identitate
       │       └── storage/                  # Configurări cont stocare
       │
-      ├── 💻 Application Source (src/)
-      │   ├── api/                          # Backend API
-      │   │   ├── main.py                   # Punct de intrare aplicație FastAPI
+      ├── 💻 Sursă aplicație (src/)
+      │   ├── api/                          # API backend
+      │   │   ├── main.py                   # Punctul de intrare al aplicației FastAPI
       │   │   ├── routes.py                 # Definiții rute API
-      │   │   ├── search_index_manager.py  # Funcționalitate de căutare
+      │   │   ├── search_index_manager.py   # Funcționalitate de căutare
       │   │   ├── data/                     # Gestionare date API
       │   │   ├── static/                   # Resurse web statice
       │   │   └── templates/                # Șabloane HTML
@@ -154,133 +149,133 @@ Sau poți cere fragmente de cod pentru a îndeplini o sarcină. Încearcă aceas
       │   │   ├── vite.config.ts            # Configurare build Vite
       │   │   └── src/                      # Cod sursă frontend
       │   ├── data/                         # Fișiere de date exemplu
-      │   │   └── embeddings.csv            # Embeddings pre-computate
+      │   │   └── embeddings.csv            # Embeddings precomputate
       │   ├── files/                        # Fișiere bază de cunoștințe
-      │   │   ├── customer_info_*.json      # Exemplu date clienți
+      │   │   ├── customer_info_*.json      # Exemple de date clienți
       │   │   └── product_info_*.md         # Documentație produs
       │   ├── Dockerfile                    # Configurare container
       │   └── requirements.txt              # Dependențe Python
       │
-      ├── 🔧 Automation & Scripts (scripts/)
-      │   ├── postdeploy.sh/.ps1           # Setup post-deployment
+      ├── 🔧 Automatizare & Scripturi (scripts/)
+      │   ├── postdeploy.sh/.ps1           # Configurație post-deployment
       │   ├── setup_credential.sh/.ps1     # Configurare credentiale
-      │   ├── validate_env_vars.sh/.ps1    # Validare variabile mediu
-      │   └── resolve_model_quota.sh/.ps1  # Gestionare cotă modele
+      │   ├── validate_env_vars.sh/.ps1    # Validare variabile de mediu
+      │   └── resolve_model_quota.sh/.ps1  # Management cotă modele
       │
-      ├── 🧪 Testing & Evaluation
-      │   ├── tests/                        # Teste unitare și integrări
+      ├── 🧪 Testare & Evaluare
+      │   ├── tests/                        # Teste unitare și de integrare
       │   │   └── test_search_index_manager.py
-      │   ├── evals/                        # Cadru de evaluare agent
-      │   │   ├── evaluate.py               # Rularea evaluărilor
-      │   │   ├── eval-queries.json         # Interogări test
+      │   ├── evals/                        # Cadru de evaluare a agenților
+      │   │   ├── evaluate.py               # Runner evaluare
+      │   │   ├── eval-queries.json         # Interogări de test
       │   │   └── eval-action-data-path.json
       │   ├── sandbox/                      # Spațiu de dezvoltare
-      │   │   ├── 1-quickstart.py           # Exemple de început rapid
-      │   │   └── aad-interactive-chat.py   # Exemple de autentificare
+      │   │   ├── 1-quickstart.py           # Exemple de început
+      │   │   └── aad-interactive-chat.py   # Exemple autentificare
       │   └── airedteaming/                 # Evaluare siguranță AI
-      │       └── ai_redteaming.py          # Testare echipa roșie
+      │       └── ai_redteaming.py          # Testare red team
       │
-      ├── 📚 Documentation (docs/)
-      │   ├── deployment.md                 # Ghid de implementare
-      │   ├── local_development.md          # Instrucțiuni configurare locală
-      │   ├── troubleshooting.md            # Probleme comune și soluții
-      │   ├── azure_account_setup.md        # Cerințe prealabile Azure
+      ├── 📚 Documentație (docs/)
+      │   ├── deployment.md                 # Ghid de deploy
+      │   ├── local_development.md          # Instrucțiuni pentru configurare locală
+      │   ├── troubleshooting.md            # Probleme comune și remedieri
+      │   ├── azure_account_setup.md        # Precondiții Azure
       │   └── images/                       # Resurse documentație
       │
-      └── 📄 Project Metadata
-         ├── README.md                     # Prezentare generală proiect
-         ├── CODE_OF_CONDUCT.md           # Regulament comunitate
-         ├── CONTRIBUTING.md              # Ghid contribuții
+      └── 📄 Metadate proiect
+         ├── README.md                     # Prezentare generală a proiectului
+         ├── CODE_OF_CONDUCT.md           # Ghiduri comunitate
+         ├── CONTRIBUTING.md              # Ghid de contribuție
          ├── LICENSE                      # Termeni licență
-         └── next-steps.md                # Ghid post-implementare
+         └── next-steps.md                # Ghid post-deployment
       ```
 
-### 3.1. Arhitectura Principală a Aplicației
+### 3.1. Arhitectura principală a aplicației
 
-Acest șablon urmează un model de **aplicație web full-stack** cu:
+This template follows a **aplicație web full-stack** pattern with:
 
 - **Backend**: Python FastAPI cu integrare Azure AI
 - **Frontend**: TypeScript/React cu sistem de build Vite
-- **Infrastructură**: Șabloane Azure Bicep pentru resurse cloud
-- **Containerizare**: Docker pentru implementare consistentă
+- **Infrastructure**: șabloane Azure Bicep pentru resurse cloud
+- **Containerization**: Docker pentru deploy consistent
 
-### 3.2 Infra Ca Cod (bicep)
+### 3.2 Infrastructură ca Cod (Bicep)
 
-Stratul de infrastructură folosește șabloane **Azure Bicep** organizate modular:
+The infrastructure layer uses **Azure Bicep** templates organized modularly:
 
-   - **`main.bicep`**: Ordonează toate resursele Azure
-   - **module `core/`**: Componente reutilizabile pentru servicii diferite
-      - Servicii AI (Modele Microsoft Foundry, AI Search)
-      - Găzduire container (Azure Container Apps)
+   - **`main.bicep`**: Orchestră toate resursele Azure
+   - **`core/` modules**: Componente reutilizabile pentru diferite servicii
+      - Servicii AI (Microsoft Foundry Models, AI Search)
+      - Găzduire containere (Azure Container Apps)
       - Monitorizare (Application Insights, Log Analytics)
       - Securitate (Key Vault, Managed Identity)
 
-### 3.3 Sursa Aplicației (`src/`)
+### 3.3 Sursa aplicației (`src/`)
 
-**API Backend (`src/api/`)**:
+**API backend (`src/api/`)**:
 
-- API REST bazat pe FastAPI
-- Integrare Foundry Agents
-- Administrare index de căutare pentru extragerea cunoștințelor
-- Capacități încărcare și procesare fișiere
+- REST API bazat pe FastAPI
+- Integrare cu Foundry Agents
+- Gestionare index de căutare pentru recuperarea cunoștințelor
+- Capabilități de încărcare și procesare fișiere
 
 **Frontend (`src/frontend/`)**:
 
 - SPA modern React/TypeScript
-- Vite pentru dezvoltare rapidă și build optimizat
-- Interfață chat pentru interacțiuni agent
+- Vite pentru dezvoltare rapidă și build-uri optimizate
+- Interfață de chat pentru interacțiuni cu agentul
 
-**Baza de cunoștințe (`src/files/`)**:
+**Bază de cunoștințe (`src/files/`)**:
 
 - Date de exemplu despre clienți și produse
-- Demonstrează extragerea cunoștințelor din fișiere
-- Exemple în formate JSON și Markdown
+- Demonstrează recuperarea cunoștințelor din fișiere
+- Exemple în formatele JSON și Markdown
 
 
 ### 3.4 DevOps & Automatizare
 
-**Scripturi (`scripts/`)**:
+**Scripts (`scripts/`)**:
 
 - Scripturi PowerShell și Bash multi-platformă
 - Validare și configurare mediu
-- Configurare post-implementare
+- Configurare post-deploy
 - Gestionare cotă modele
 
 **Integrare Azure Developer CLI**:
 
-- Configurare `azure.yaml` pentru fluxuri `azd`
-- Provisionare și implementare automatizată
-- Management variabile de mediu
+- `azure.yaml` configuration for `azd` workflows
+- Provisionare și deployment automatizate
+- Gestionare variabile de mediu
 
-### 3.5 Testare & Asigurare Calitate
+### 3.5 Testare și Asigurarea Calității
 
 **Cadru de evaluare (`evals/`)**:
 
-- Evaluare performanță agent
-- Testare calitate răspunsuri interogări
-- Pipeline automatizat de evaluare
+- Evaluarea performanței agenților
+- Testare calitate răspuns interogare
+- Pipeline de evaluare automatizată
 
 **Siguranța AI (`airedteaming/`)**:
 
 - Testare red team pentru siguranța AI
 - Scanare vulnerabilități de securitate
-- Practici responsabile AI
+- Practici AI responsabile
 
 ---
 
 ## 4. Felicitări 🏆
 
-Ai folosit cu succes GitHub Copilot Chat cu serverele MCP pentru a explora depozitul.
+You successfully used GitHub Copilot Chat with MCP servers, to explore the repository.
 
-- [X] Ai activat GitHub Copilot pentru Azure
-- [X] Ai înțeles arhitectura aplicației
-- [X] Ai explorat structura șablonului AZD
+- [X] Ați activat GitHub Copilot pentru Azure
+- [X] Ați înțeles arhitectura aplicației
+- [X] Ați explorat structura șablonului AZD
 
-Aceasta îți oferă o perspectivă asupra activelor _infrastructure as code_ pentru acest șablon. Următorul pas este să analizăm fișierul de configurare pentru AZD.
+This gives you a sense of the _infrastructură ca cod_ assets for this template. Next, we'll look at the configuration file for AZD.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Declinarea responsabilității**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite rezultate din utilizarea acestei traduceri.
+**Declinare de responsabilitate**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un traducător uman. Nu suntem răspunzători pentru eventuale neînțelegeri sau interpretări greșite care decurg din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
