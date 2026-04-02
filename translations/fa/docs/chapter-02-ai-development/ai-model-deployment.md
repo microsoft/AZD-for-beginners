@@ -1,13 +1,15 @@
 # استقرار مدل‌های هوش مصنوعی با Azure Developer CLI
 
-**ناوبری فصل:**
-- **📚 صفحه دوره**: [AZD برای مبتدیان](../../README.md)
-- **📖 فصل فعلی**: فصل 2 - توسعه محور هوش مصنوعی
+**راهنمای فصل:**
+- **📚 صفحه‌ی دوره**: [AZD برای مبتدیان](../../README.md)
+- **📖 فصل جاری**: فصل ۲ - توسعه‌محور هوش مصنوعی
 - **⬅️ قبلی**: [ادغام Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ بعدی**: [آزمایشگاه کارگاه هوش مصنوعی](ai-workshop-lab.md)
-- **🚀 فصل بعدی**: [فصل 3: پیکربندی](../chapter-03-configuration/configuration.md)
+- **➡️ بعدی**: [کارگاه عملی هوش مصنوعی](ai-workshop-lab.md)
+- **🚀 فصل بعدی**: [فصل ۳: پیکربندی](../chapter-03-configuration/configuration.md)
 
-این راهنما دستورالعمل‌های کامل برای استقرار مدل‌های هوش مصنوعی با استفاده از قالب‌های AZD را ارائه می‌دهد و همه چیز را از انتخاب مدل تا الگوهای استقرار در محیط تولید پوشش می‌دهد.
+این راهنما دستورالعمل‌های جامع برای استقرار مدل‌های هوش مصنوعی با استفاده از قالب‌های AZD را فراهم می‌کند و همه چیز را از انتخاب مدل تا الگوهای استقرار در محیط تولید پوشش می‌دهد.
+
+> **یادداشت اعتبارسنجی (2026-03-25):** جریان کاری AZD در این راهنما با `azd` `1.23.12` بررسی شد. برای استقرارهای هوش مصنوعی که زمان بیشتری از پنجره پیش‌فرض استقرار سرویس می‌گیرند، نسخه‌های فعلی AZD از `azd deploy --timeout <seconds>` پشتیبانی می‌کنند.
 
 ## فهرست مطالب
 
@@ -15,14 +17,14 @@
 - [پیکربندی AZD برای مدل‌های هوش مصنوعی](#پیکربندی-azd-برای-مدل‌های-هوش-مصنوعی)
 - [الگوهای استقرار](#الگوهای-استقرار)
 - [مدیریت مدل](#مدیریت-مدل)
-- [ملاحظات تولید](#ملاحظات-تولید)
-- [نظارت و مشاهده‌پذیری](#نظارت-و-مشاهده‌پذیری)
+- [ملاحظات محیط تولید](#ملاحظات-محیط-تولید)
+- [نظارت و قابلیت مشاهده](#نظارت-و-قابلیت-مشاهده)
 
 ## استراتژی انتخاب مدل
 
-### مدل‌های Microsoft Foundry Models
+### مدل‌های Microsoft Foundry
 
-مدل مناسب را برای مورد استفاده خود انتخاب کنید:
+مدل مناسب را برای مورد استفادهٔ خود انتخاب کنید:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -41,9 +43,9 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
@@ -54,16 +56,16 @@ services:
 
 | نوع مدل | مورد استفاده | ظرفیت پیشنهادی | ملاحظات هزینه |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | چت، پرسش و پاسخ | 10-50 TPM | مقرون‌به‌صرفه برای اکثر بارهای کاری |
-| gpt-4.1 | استدلال پیچیده | 20-100 TPM | هزینه بالاتر، برای قابلیت‌های پریمیوم استفاده شود |
-| Text-embedding-ada-002 | جستجو، RAG | 30-120 TPM | برای جستجوی معنایی ضروری است |
-| Whisper | تبدیل گفتار به متن | 10-50 TPM | بارهای کاری پردازش صوتی |
+| gpt-4.1-mini | گفت‌وگو، پرسش و پاسخ | 10-50 TPM | مناسب از نظر هزینه برای اکثر بارهای کاری |
+| gpt-4.1 | استدلال پیچیده | 20-100 TPM | هزینهٔ بالاتر، مناسب برای ویژگی‌های پرمیوم |
+| text-embedding-3-large | جستجو، RAG | 30-120 TPM | انتخاب پیش‌فرض قوی برای جستجوی معنایی و بازیابی |
+| Whisper | تبدیل گفتار به متن | 10-50 TPM | بارهای کاری پردازش صوت |
 
 ## پیکربندی AZD برای مدل‌های هوش مصنوعی
 
 ### پیکربندی قالب Bicep
 
-استقرار مدل‌ها را از طریق قالب‌های Bicep ایجاد کنید:
+از طریق قالب‌های Bicep استقرار مدل‌ها را ایجاد کنید:
 
 ```bicep
 // infra/main.bicep
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -124,19 +126,19 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### متغیرهای محیطی
 
-محیط برنامه خود را پیکربندی کنید:
+محیط برنامهٔ خود را پیکربندی کنید:
 
 ```bash
-# پیکربندی .env
+# پیکربندی فایل .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
 ## الگوهای استقرار
 
-### الگو 1: استقرار در یک منطقه
+### الگوی ۱: استقرار در یک منطقه
 
 ```yaml
 # azure.yaml - Single region
@@ -150,11 +152,11 @@ services:
 ```
 
 مناسب برای:
-- توسعه و آزمون
-- برنامه‌های تک‌بازار
+- توسعه و تست
+- برنامه‌های تک‌بازاری
 - بهینه‌سازی هزینه
 
-### الگو 2: استقرار چندمنطقه‌ای
+### الگوی ۲: استقرار چندمنطقه‌ای
 
 ```bicep
 // Multi-region deployment
@@ -169,12 +171,12 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 
 مناسب برای:
 - برنامه‌های جهانی
-- نیازمندی‌های دسترسی بالا
+- الزامات در دسترس‌پذیری بالا
 - توزیع بار
 
-### الگو 3: استقرار ترکیبی
+### الگوی ۳: استقرار ترکیبی
 
-ترکیب مدل‌های Microsoft Foundry Models با سایر خدمات هوش مصنوعی:
+ادغام مدل‌های Microsoft Foundry با سایر سرویس‌های هوش مصنوعی:
 
 ```bicep
 // Hybrid AI services
@@ -207,7 +209,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### کنترل نسخه
 
-نسخه‌های مدل را در پیکربندی AZD خود پیگیری کنید:
+پیگیری نسخه‌های مدل در پیکربندی AZD خود:
 
 ```json
 {
@@ -215,34 +217,37 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
 ```
 
-### به‌روزرسانی‌های مدل
+### به‌روزرسانی مدل
 
-از هوک‌های AZD برای به‌روزرسانی مدل‌ها استفاده کنید:
+از هوک‌های AZD برای به‌روزرسانی مدل استفاده کنید:
 
 ```bash
-#!/بین/باش
-# هوک‌ها/پیش‌استقرار.sh
+#!/bin/bash
+# hooks/predeploy.sh
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# اگر عملیات استقرار بیش از زمان انتظار پیش‌فرض طول بکشد
+azd deploy --timeout 1800
 ```
 
-### آزمایش A/B
+### تست A/B
 
-نسخه‌های متعدد مدل را مستقر کنید:
+چندین نسخه از مدل را مستقر کنید:
 
 ```bicep
 param enableABTesting bool = false
@@ -264,14 +269,14 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## ملاحظات تولید
+## ملاحظات محیط تولید
 
 ### برنامه‌ریزی ظرفیت
 
 ظرفیت مورد نیاز را بر اساس الگوهای استفاده محاسبه کنید:
 
 ```python
-# مثال محاسبهٔ ظرفیت
+# مثال محاسبه ظرفیت
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -283,7 +288,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# نمونهٔ استفاده
+# نمونه استفاده
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -295,7 +300,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### پیکربندی مقیاس خودکار
 
-مقیاس خودکار برای Container Apps را پیکربندی کنید:
+مقیاس خودکار را برای Container Apps پیکربندی کنید:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -333,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### بهینه‌سازی هزینه
 
-کنترل‌های هزینه را پیاده‌سازی کنید:
+کنترل‌های هزینه را اجرا کنید:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -363,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## نظارت و مشاهده‌پذیری
+## نظارت و قابلیت مشاهده
 
 ### ادغام Application Insights
 
-نظارت بر بارهای کاری هوش مصنوعی را پیکربندی کنید:
+نظارت را برای بارهای کاری هوش مصنوعی پیکربندی کنید:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -403,9 +408,9 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### شاخص‌های سفارشی
+### متریک‌های سفارشی
 
-شاخص‌های مخصوص هوش مصنوعی را پیگیری کنید:
+پیگیری متریک‌های خاص هوش مصنوعی:
 
 ```python
 # تله‌متری سفارشی برای مدل‌های هوش مصنوعی
@@ -471,32 +476,32 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## قدم‌های بعدی
+## گام‌های بعدی
 
 1. **مرور [راهنمای ادغام Microsoft Foundry](microsoft-foundry-integration.md)** برای الگوهای ادغام سرویس
-2. **تکمیل [آزمایشگاه کارگاه هوش مصنوعی](ai-workshop-lab.md)** برای تجربه عملی
-3. **پیاده‌سازی [شیوه‌های تولیدی هوش مصنوعی](production-ai-practices.md)** برای استقرارهای سازمانی
-4. **کاوش در [راهنمای رفع اشکال هوش مصنوعی](../chapter-07-troubleshooting/ai-troubleshooting.md)** برای مشکلات رایج
+2. **تکمیل [کارگاه عملی هوش مصنوعی](ai-workshop-lab.md)** برای تجربهٔ عملی
+3. **اجرای [روش‌های تولیدی هوش مصنوعی](production-ai-practices.md)** برای استقرارهای سازمانی
+4. **مطالعه [راهنمای عیب‌یابی هوش مصنوعی](../chapter-07-troubleshooting/ai-troubleshooting.md)** برای مسائل رایج
 
 ## منابع
 
-- [دسترس‌پذیری مدل‌های Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [دسترس‌پذیری مدل‌های Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [مستندات Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [مقیاس‌دهی Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [بهینه‌سازی هزینه مدل‌های هوش مصنوعی](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**ناوبری فصل:**
-- **📚 صفحه دوره**: [AZD برای مبتدیان](../../README.md)
-- **📖 فصل فعلی**: فصل 2 - توسعه محور هوش مصنوعی
+**راهنمای فصل:**
+- **📚 صفحه‌ی دوره**: [AZD برای مبتدیان](../../README.md)
+- **📖 فصل جاری**: فصل ۲ - توسعه‌محور هوش مصنوعی
 - **⬅️ قبلی**: [ادغام Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ بعدی**: [آزمایشگاه کارگاه هوش مصنوعی](ai-workshop-lab.md)
-- **🚀 فصل بعدی**: [فصل 3: پیکربندی](../chapter-03-configuration/configuration.md)
+- **➡️ بعدی**: [کارگاه عملی هوش مصنوعی](ai-workshop-lab.md)
+- **🚀 فصل بعدی**: [فصل ۳: پیکربندی](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**سلب مسئولیت**:
-این سند با استفاده از سرویس ترجمهٔ هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان مادری آن باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمهٔ حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرستی که از استفاده از این ترجمه ناشی شود، مسئولیتی نداریم.
+**Disclaimer**:
+این سند با استفاده از سرویس ترجمه مبتنی بر هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است شامل خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان بومی خود باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حساس، ترجمه انسانی حرفه‌ای توصیه می‌شود. ما در قبال هرگونه سوتفاهم یا تفسیر نادرست ناشی از استفاده از این ترجمه مسئولیتی نداریم.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

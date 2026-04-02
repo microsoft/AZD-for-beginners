@@ -1,30 +1,30 @@
 # 5. سفارشی‌سازی یک قالب
 
-!!! tip "در پایان این ماژول قادر خواهید بود"
+!!! tip "تا پایان این ماژول شما قادر خواهید بود"
 
     - [ ] قابلیت‌های پیش‌فرض عامل‌های هوش مصنوعی را بررسی کردید
     - [ ] جستجوی AI را با ایندکس خود اضافه کردید
-    - [ ] معیارهای Tracing را فعال و تحلیل کردید
+    - [ ] ردیابی و معیارها را فعال و تحلیل کردید
     - [ ] یک اجرای ارزیابی انجام دادید
     - [ ] یک اسکن red-teaming اجرا کردید
-    - [ ] **آزمایشگاه 5: تهیه طرح سفارشی‌سازی** 
+    - [ ] **Lab 5: ساخت یک طرح سفارشی‌سازی** 
 
 ---
 
-## 5.1 قابلیت‌های عامل هوش‌مصنوعی
+## 5.1 قابلیت‌های عامل هوش مصنوعی
 
 !!! success "این مورد را در آزمایشگاه 01 تکمیل کردیم"
 
 - **File Search**: جستجوی فایل داخلی OpenAI برای بازیابی دانش
 - **Citations**: تخصیص خودکار منبع در پاسخ‌ها
 - **Customizable Instructions**: تغییر رفتار و شخصیت عامل
-- **Tool Integration**: سیستم ابزار قابل توسعه برای قابلیت‌های سفارشی
+- **Tool Integration**: سیستم ابزار قابل گسترش برای قابلیت‌های سفارشی
 
 ---
 
 ## 5.2 گزینه‌های بازیابی دانش
 
-!!! task "برای تکمیل این باید تغییراتی ایجاد کرده و مجدداً مستقر کنیم"    
+!!! task "برای تکمیل این بخش باید تغییراتی انجام دهیم و دوباره استقرار دهیم"    
     
     ```bash title=""
     # Set environment variables
@@ -42,22 +42,22 @@
 
 **OpenAI File Search (Default):**
 
-- Built-in to Foundry Agents
-- Automatic document processing and indexing
-- No additional configuration required
+- ساخته‌شده در Foundry Agents
+- پردازش خودکار اسناد و ایندکس‌سازی
+- نیاز به پیکربندی اضافی ندارد
 
 **Azure AI Search (Optional):**
 
-- Hybrid semantic and vector search
-- Custom index management
-- Advanced search capabilities
-- Requires `USE_AZURE_AI_SEARCH_SERVICE=true`
+- جستجوی هیبریدی معنایی و برداری
+- مدیریت ایندکس سفارشی
+- قابلیت‌های جستجوی پیشرفته
+- نیازمند `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
-## 5.3 [ردیابی و نظارت](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [ردیابی و پایش](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "برای تکمیل این باید تغییراتی ایجاد کرده و مجدداً مستقر کنیم"    
+!!! task "برای تکمیل این بخش باید تغییراتی انجام دهیم و دوباره استقرار دهیم"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
@@ -66,16 +66,16 @@
 
 **ردیابی:**
 
-- OpenTelemetry integration
-- Request/response tracking
-- Performance metrics
-- Available in Microsoft Foundry portal
+- ادغام OpenTelemetry
+- ردیابی درخواست/پاسخ
+- معیارهای عملکرد
+- در پرتال Microsoft Foundry در دسترس است
 
 **لاگ‌گیری:**
 
-- Application logs in Container Apps
-- Structured logging with correlation IDs
-- Real-time and historical log viewing
+- لاگ‌های اپلیکیشن در Container Apps
+- لاگ‌گیری ساختاریافته با شناسه‌های همبستگی
+- مشاهده لاگ‌ها به‌صورت بلادرنگ و تاریخی
 
 ---
 
@@ -83,83 +83,83 @@
 
 **ارزیابی محلی:**
 
-- Built-in evaluators for quality assessment
-- Custom evaluation scripts
-- Performance benchmarking
+- ارزیاب‌های داخلی برای سنجش کیفیت
+- اسکریپت‌های ارزیابی سفارشی
+- معیارگذاری عملکرد
 
-**نظارت مستمر:**
+**پایش مداوم:**
 
-- Automatic evaluation of live interactions
-- Quality metrics tracking
-- Performance regression detection
+- ارزیابی خودکار تعاملات زنده
+- ردیابی معیارهای کیفیت
+- تشخیص افت عملکرد
 
 **ادغام CI/CD:**
 
-- GitHub Actions workflow
-- Automated testing and evaluation
-- Statistical comparison testing
+- جریان کاری GitHub Actions
+- تست و ارزیابی خودکار
+- تست‌های مقایسه‌ای آماری
 
 ---
 
 ## 5.5 [عامل تیم قرمز هوش مصنوعی](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**تیم‌قرمز (Red Teaming) هوش مصنوعی:**
+**تیم قرمز هوش مصنوعی:**
 
-- Automated security scanning
-- Risk assessment for AI systems
-- Safety evaluation across multiple categories
+- اسکن امنیتی خودکار
+- ارزیابی ریسک برای سیستم‌های هوش مصنوعی
+- ارزیابی ایمنی در رشته‌های مختلف
 
 **احراز هویت:**
 
 - Managed Identity برای سرویس‌های Azure
-- Optional Azure App Service authentication
-- Basic auth fallback for development
+- احراز هویت اختیاری Azure App Service
+- بازگشت به احراز هویت پایه برای توسعه
 
 
 
-!!! quote "در پایان این آزمایشگاه شما باید موارد زیر را داشته باشید"
-    - [ ] نیازمندی‌های سناریوی خود را تعریف کنید
-    - [ ] متغیرهای محیطی را سفارشی کنید (config)
-    - [ ] دستورالعمل‌های عامل را سفارشی کنید (task)
-    - [ ] قالب سفارشی‌شده را استقرار دهید (app)
-    - [ ] وظایف پس از استقرار را تکمیل کنید (manual)
-    - [ ] یک ارزیابی آزمایشی اجرا کنید
+!!! quote "تا پایان این آزمایشگاه شما باید داشته باشید"
+    - [ ] نیازمندی‌های سناریو خود را تعریف کرده باشید
+    - [ ] متغیرهای محیطی سفارشی شده (پیکربندی)
+    - [ ] دستورالعمل‌های عامل سفارشی شده (وظیفه)
+    - [ ] قالب سفارشی شده را مستقر کرده باشید (اپ)
+    - [ ] وظایف پس از استقرار را تکمیل کرده باشید (دستی)
+    - [ ] یک ارزیابی آزمایشی اجرا کرده باشید
 
-This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
+این مثال نشان می‌دهد چگونه قالب را برای یک سناریوی سازمانی خرده‌فروشی با دو عامل تخصصی و چندین استقرار مدل سفارشی‌سازی کنیم.
 
 ---
 
-## 5.6 سفارشی‌سازی برای شما!
+## 5.6 آن را برای شما سفارشی کنید!
 
 ### 5.6.1. نیازمندی‌های سناریو
 
 #### **استقرار عامل‌ها:** 
 
    - Shopper Agent: به مشتریان کمک می‌کند محصولات را پیدا و مقایسه کنند
-   - Loyalty Agent: مدیریت جوایز و تبلیغات مشتریان
+   - Loyalty Agent: جوایز و تبلیغات مشتریان را مدیریت می‌کند
 
 #### **استقرار مدل‌ها:**
 
-   - `gpt-4.1`: مدل اصلی چت
+   - `gpt-4.1`: مدل چت اصلی
    - `o3`: مدل استدلال برای پرسش‌های پیچیده
    - `gpt-4.1-nano`: مدل سبک برای تعاملات ساده
-   - `text-embedding-3-large`: تعبیه‌های باکیفیت برای جستجو
+   - `text-embedding-3-large`: بردارهای تعبیه‌شده با کیفیت بالا برای جستجو
 
 #### **ویژگی‌ها:**
 
-   - ردیابی و نظارت فعال شده‌اند
+   - ردیابی و پایش فعال شده
    - AI Search برای فهرست محصولات
    - چارچوب ارزیابی برای تضمین کیفیت
-   - تیم‌قرمز برای اعتبارسنجی امنیت
+   - red teaming برای اعتبارسنجی امنیت
 
 ---
 
 ### 5.6.2 پیاده‌سازی سناریو
 
 
-#### 5.6.2.1 پیکربندی پیش از استقرار
+#### 5.6.2.1. پیکربندی پیش‌از استقرار
 
-Create a setup script (`setup-retail.sh`)
+یک اسکریپت راه‌انداز بسازید (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -175,13 +175,13 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# مدل اصلی چت را پیکربندی کنید (gpt-4.1 به‌عنوان نزدیک‌ترین مدل موجود به gpt-4.1)
+# مدل چت اصلی را پیکربندی کنید (gpt-4.1 به‌عنوان نزدیک‌ترین مدل موجود به gpt-4.1)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# مدل امبدینگ را برای بهبود جستجو پیکربندی کنید
+# مدل تعبیه‌سازی را برای جستجوی بهبود یافته پیکربندی کنید
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
@@ -200,7 +200,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 #### 5.6.2.2: دستورالعمل‌های عامل
 
-Create `custom-agents/shopper-agent-instructions.md`:
+فایل `custom-agents/shopper-agent-instructions.md` را ایجاد کنید:
 
 ```markdown
 # Shopper Agent Instructions
@@ -223,7 +223,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-Create `custom-agents/loyalty-agent-instructions.md`:
+فایل `custom-agents/loyalty-agent-instructions.md` را ایجاد کنید:
 
 ```markdown
 # Loyalty Agent Instructions
@@ -250,7 +250,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 #### 5.6.2.3: اسکریپت استقرار
 
-Create `deploy-retail.sh`:
+فایل `deploy-retail.sh` را ایجاد کنید:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -295,12 +295,12 @@ fi
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# ثبت خروجی‌های استقرار
+# جمع‌آوری خروجی‌های استقرار
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# دریافت آدرس برنامه وب
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# دریافت آدرس URL برنامه وب
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -323,7 +323,7 @@ echo "4. Test both agents with sample queries"
 
 #### 5.6.2.4: پیکربندی پس از استقرار
 
-Create `configure-retail-agents.sh`:
+فایل `configure-retail-agents.sh` را ایجاد کنید:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -380,19 +380,19 @@ echo "
 
 ### 5.6.3: تست و اعتبارسنجی
 
-Create `test-retail-deployment.sh`:
+فایل `test-retail-deployment.sh` را ایجاد کنید:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🧪 Testing retail deployment..."
 
-# اطمینان حاصل کنید که متغیرهای محیطی تنظیم شده‌اند
+# اطمینان از تنظیم بودن متغیرهای محیطی
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# در دسترس بودن برنامه وب را آزمایش کنید
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# بررسی در دسترس بودن برنامه وب
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -405,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# در صورت پیکربندی، ارزیابی را اجرا کنید
+# اجرای ارزیابی در صورت پیکربندی
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -431,40 +431,40 @@ Next steps:
 
 ### 5.6.4 نتایج مورد انتظار
 
-پس از دنبال کردن این راهنمای پیاده‌سازی، شما خواهید داشت:
+پس از پیروی از این راهنمای پیاده‌سازی، شما خواهید داشت:
 
-1. **زیرساخت‌های مستقر شده:**
+1. **زیرساخت مستقر شده:**
 
-      - Microsoft Foundry project با استقرار مدل‌ها
-      - Container Apps میزبانی‌کننده برنامه وب
-      - AI Search service برای فهرست محصولات
-      - Application Insights برای نظارت
+      - پروژه Microsoft Foundry با استقرار مدل‌ها
+      - Container Apps میزبانی برنامه وب
+      - سرویس AI Search برای فهرست محصولات
+      - Application Insights برای پایش
 
 2. **عامل اولیه:**
 
-      - Shopper Agent با دستورالعمل‌های پایه پیکربندی شده است
-      - قابلیت جستجوی فایل فعال شده است
-      - ردیابی و نظارت پیکربندی شده‌اند
+      - Shopper Agent با دستورالعمل‌های پایه پیکربندی شده
+      - قابلیت جستجوی فایل فعال شده
+      - ردیابی و پایش پیکربندی شده
 
-3. **آماده‌سازی برای سفارشی‌سازی:**
+3. **آماده برای سفارشی‌سازی:**
 
-      - چارچوبی برای اضافه کردن عامل Loyalty
-      - قالب‌های دستورالعمل سفارشی
+      - چارچوبی برای افزودن Loyalty Agent
+      - الگوهای دستورالعمل سفارشی
       - اسکریپت‌های تست و اعتبارسنجی
-      - تنظیمات نظارت و ارزیابی
+      - تنظیمات پایش و ارزیابی
 
 4. **آمادگی برای تولید:**
 
-      - اسکن امنیتی با تیم‌قرمز
-      - نظارت بر عملکرد
+      - اسکن امنیتی با red teaming
+      - پایش عملکرد
       - چارچوب ارزیابی کیفیت
-      - معماری مقیاس‌پذیر
+      - معماری قابل مقیاس
 
-This example demonstrates how the AZD template can be extended and customized for specific enterprise scenarios while maintaining best practices for security, monitoring, and scalability.
+این مثال نشان می‌دهد چگونه قالب AZD می‌تواند برای سناریوهای سازمانی خاص گسترش و سفارشی شود در حالی که بهترین شیوه‌ها برای امنیت، پایش و مقیاس‌پذیری حفظ می‌شود.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **سلب مسئولیت**:
-این سند با استفاده از سرویس ترجمهٔ هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. اگرچه ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان مبدأ باید به‌عنوان منبع معتبر تلقی شود. برای اطلاعات حیاتی، ترجمهٔ حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرست ناشی از استفاده از این ترجمه مسئول نیستیم.
+این سند با استفاده از سرویس ترجمه‌ی هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی اشتباهات یا نادرستی‌هایی باشند. سند اصلی به زبان مبدأ باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمه حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرستی که از استفاده از این ترجمه ناشی شود، مسئولیتی نداریم.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

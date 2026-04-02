@@ -1,31 +1,33 @@
-# باب 2: AI-فرسٹ ڈیولپمنٹ
+# باب 2: AI-پہلا ترقی
 
-**📚 کورس**: [AZD برائے مبتدیان](../../README.md) | **⏱️ دورانیہ**: 1-2 گھنٹے | **⭐ پیچیدگی**: درمیانہ
+**📚 کورس**: [AZD ابتدائیوں کے لیے](../../README.md) | **⏱️ دورانیہ**: 1-2 گھنٹے | **⭐ پیچیدگی**: متوسط
 
 ---
 
 ## جائزہ
 
-یہ باب Azure Developer CLI اور Microsoft Foundry سروسز کا استعمال کرتے ہوئے AI سے مربوط ایپلیکیشنز کی تعیناتی پر مرکوز ہے۔ سادہ AI چیٹ ایپس سے لے کر ٹولز والے ذہین ایجنٹس تک۔
+یہ باب Azure Developer CLI اور Microsoft Foundry خدمات کا استعمال کرتے ہوئے AI سے چلنے والی ایپلیکیشنز کی تعیناتی پر مرکوز ہے۔ سادہ AI چیٹ ایپس سے لے کر ٹولز کے ساتھ ذہین ایجنٹس تک۔
+
+> **تصدیقی نوٹ (2026-03-25):** اس باب میں کمانڈ فلو اور توسیعی رہنمائی کا جائزہ `azd` `1.23.12` اور موجودہ پریویو AI ایجنٹ ایکسٹینشن ریلیز `azure.ai.agents` `0.1.18-preview` کے تحت لیا گیا ہے۔ اگر آپ کے پاس پرانا AZD ورژن ہے تو پہلے اپ ڈیٹ کریں اور پھر مشقوں کو جاری رکھیں۔
 
 ## تعلیمی مقاصد
 
 اس باب کو مکمل کرکے، آپ:
-- پہلے سے تیار شدہ AZD ٹیمپلیٹس استعمال کرتے ہوئے AI ایپلیکیشنز کو تعینات کریں
-- AZD کے ساتھ Microsoft Foundry کے انضمام کو سمجھیں
-- ٹولز کے ساتھ AI ایجنٹس کو ترتیب اور حسبِ ضرورت بنائیں
-- RAG (Retrieval-Augmented Generation) ایپلیکیشنز کو تعینات کریں
+- پہلے سے تیار شدہ AZD ٹیمپلیٹس کا استعمال کرتے ہوئے AI ایپلیکیشنز تعینات کریں گے
+- Microsoft Foundry کی AZD کے ساتھ انضمام کو سمجھیں گے
+- ٹولز کے ساتھ AI ایجنٹس کو ترتیب اور حسب ضرورت بنائیں گے
+- RAG (Retrieval-Augmented Generation) ایپلیکیشنز تعینات کریں گے
 
 ---
 
 ## 📚 اسباق
 
-| # | سبق | تفصیل | وقت |
-|---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | AZD کو Foundry سروسز کے ساتھ مربوط کریں | 30 منٹ |
-| 2 | [AI Agents Guide](agents.md) | ٹولز کے ساتھ ذہین ایجنٹس کو تعینات کریں | 45 منٹ |
-| 3 | [AI Model Deployment](ai-model-deployment.md) | AI ماڈلز کو تعینات اور ترتیب دیں | 30 منٹ |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | عملی: اپنے AI حل کو AZD کے لیے تیار کریں | 60 منٹ |
+| # | سبق | وضاحت | وقت |
+|---|------|---------|------|
+| 1 | [Microsoft Foundry انضمام](microsoft-foundry-integration.md) | AZD کو Foundry خدمات سے منسلک کریں | 30 منٹ |
+| 2 | [AI ایجنٹس کی رہنمائی](agents.md) | ٹولز کے ساتھ ذہین ایجنٹس تعینات کریں | 45 منٹ |
+| 3 | [AI ماڈل کی تعیناتی](ai-model-deployment.md) | AI ماڈلز کو تعینات اور ترتیب دیں | 30 منٹ |
+| 4 | [AI ورکشاپ لیب](ai-workshop-lab.md) | عملی: اپنا AI حل AZD کے لیے تیار کریں | 60 منٹ |
 
 ---
 
@@ -36,7 +38,7 @@
 azd init --template azure-search-openai-demo
 azd up
 
-# اختیار 2: مصنوعی ذہانت کے ایجنٹس
+# اختیار 2: AI ایجنٹس
 azd init --template get-started-with-ai-agents
 azd up
 
@@ -49,23 +51,23 @@ azd up
 
 ## 🤖 نمایاں AI ٹیمپلیٹس
 
-| ٹیمپلیٹ | تفصیل | خدمات |
-|----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | حوالہ جات کے ساتھ RAG چیٹ | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ٹولز کے ساتھ AI ایجنٹ | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | بنیادی AI چیٹ | OpenAI + Container Apps |
+| ٹیمپلیٹ | وضاحت | خدمات |
+|----------|---------|--------|
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | حوالوں کے ساتھ RAG چیٹ | OpenAI + AI سرچ |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | ٹولز کے ساتھ AI ایجنٹ | AI ایجنٹ سروس |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | بنیادی AI چیٹ | OpenAI + کنٹینر ایپس |
 
 ---
 
-## 💰 لاگت کی آگاہی
+## 💰 لاگت کا ادراک
 
-| ماحول | تخمینہ شدہ ماہانہ لاگت |
+| ماحول | تخمینہ ماہانہ لاگت |
 |-------------|----------------------|
-| ڈیولپمنٹ | $80-150 |
-| اسٹیجنگ | $150-300 |
-| پروڈکشن | $300-3,500+ |
+| ترقیاتی | $80-150 |
+| مرحلہ وار | $150-300 |
+| پیداوار | $300-3,500+ |
 
-**مشورہ:** چارجز سے بچنے کے لیے ٹیسٹنگ کے بعد `azd down` چلائیں۔
+**اشارہ:** چارجز سے بچنے کے لیے ٹیسٹنگ کے بعد `azd down` چلائیں۔
 
 ---
 
@@ -74,20 +76,20 @@ azd up
 | سمت | باب |
 |-----------|---------|
 | **پچھلا** | [باب 1: بنیاد](../chapter-01-foundation/README.md) |
-| **اگلا** | [باب 3: ترتیب](../chapter-03-configuration/README.md) |
-| **براہِ راست جائیں** | [باب 8: پیداواری نمونے](../chapter-08-production/README.md) |
+| **اگلا** | [باب 3: تشکیل](../chapter-03-configuration/README.md) |
+| **چھلانگ لگائیں** | [باب 8: پیداوار کے نمونے](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 متعلقہ وسائل
 
-- [AI ٹربل شوٹنگ](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [پیداواری AI طریقے](../chapter-08-production/production-ai-practices.md)
+- [AI مسائل کا حل](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [پیداوار AI طریقے](../chapter-08-production/production-ai-practices.md)
 - [ایپلیکیشن انسائٹس](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-دستبرداری:
-یہ دستاویز AI ترجمہ سروس Co-op Translator (https://github.com/Azure/co-op-translator) کا استعمال کرتے ہوئے ترجمہ کی گئی ہے۔ اگرچہ ہم درستگی کی کوشش کرتے ہیں، براہِ مہربانی یاد رکھیں کہ خودکار تراجم میں غلطیاں یا عدمِ صحت ہو سکتی ہے۔ اصل دستاویز اس کی مادری زبان میں معتبر ماخذ سمجھنی چاہیے۔ اہم معلومات کے لیے پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ ہم اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تفسیر کے لیے ذمہ دار نہیں ہیں۔
+**تنبیہ**:
+یہ دستاویز AI ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کے ذریعے ترجمہ کی گئی ہے۔ جبکہ ہم درستگی کے لیے کوشش کرتے ہیں، براہ کرم اس بات سے آگاہ رہیں کہ خودکار ترجمے میں غلطیاں یا عدم صحت ہو سکتی ہے۔ اصل دستاویز اپنی مادری زبان میں معتبر ماخذ سمجھا جانا چاہیے۔ اہم معلومات کے لیے پیشہ ورانہ انسانی ترجمہ کی سفارش کی جاتی ہے۔ اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تفسیر کے لیے ہم ذمہ دار نہیں ہیں۔
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

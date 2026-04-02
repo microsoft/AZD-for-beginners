@@ -1,79 +1,80 @@
-# کارگاه AZD برای توسعه‌دهندگان هوش‌مصنوعی
+# کارگاه AZD برای توسعه‌دهندگان هوش مصنوعی
 
+> اعتبارسنجی‌شده با `azd 1.23.12` در مارس 2026.
 > [!IMPORTANT]  
-> **این کارگاه دارای یک راهنمای کارگاه است که می‌توانید آن را در مرورگر محلی خود پیش‌نمایش کنید. برای شروع، باید GitHub Codespaces را روی مخزن اجرا کنید — سپس منتظر بمانید تا یک ترمینال فعال VS Code مشاهده کنید و تایپ کنید:**  
+> **این کارگاه مجهز به یک راهنمای کارگاه است که می‌توانید آن را در مرورگر محلی خود پیش‌نمایش کنید. برای شروع، مخزن را در GitHub Codespaces، یک dev container، یا یک نسخه کلون محلی با MkDocs نصب‌شده باز کنید—سپس منتظر بمانید تا یک ترمینال فعال VS Code ببینید و تایپ کنید:**  
 > `mkdocs serve > /dev/null 2>&1 &`  
-> **باید یک پنجره پاپ‌آپ برای باز کردن صفحه پیش‌نمایش در مرورگر مشاهده کنید.**
+> **باید یک کادر محاوره‌ای پوپ‌آپ ببینید تا صفحه پیش‌نمایش را در مرورگر باز کنید.**
 
-به کارگاه عملی برای یادگیری Azure Developer CLI (AZD) با تمرکز بر استقرار برنامه‌های هوش مصنوعی خوش آمدید. این کارگاه به شما کمک می‌کند تا در 3 مرحله درک کاربردی از قالب‌های AZD به‌دست آورید:
+به کارگاه عملی خوش آمدید برای یادگیری Azure Developer CLI (AZD) با تمرکز بر استقرار برنامه‌های هوش مصنوعی. این کارگاه به شما کمک می‌کند درک کاربردی از الگوهای AZD در 3 مرحله کسب کنید:
 
-1. **کشف** - پیدا کردن قالب مناسب برای خودتان.
-1. **استقرار** - استقرار و اعتبارسنجی اینکه کار می‌کند
-1. **سفارشی‌سازی** - اصلاح و تکرار برای اختصاصی کردن آن!
+1. **کشف** - قالب مناسب برای خود را پیدا کنید.
+1. **استقرار** - استقرار دهید و تأیید کنید که کار می‌کند
+1. **سفارشی‌سازی** - تغییر دهید و تکرار کنید تا متعلق به شما شود!
 
-در طول این کارگاه، با ابزارها و جریان‌های کاری اصلی توسعه‌دهنده نیز آشنا می‌شوید تا به شما در ساده‌سازی مسیر توسعه انتها به انتها کمک کند.
+در طول این کارگاه، با ابزارها و جریان‌های کاری اصلی توسعه‌دهندگان نیز آشنا خواهید شد تا به شما در ساده‌سازی مسیر توسعه انتها به انتهای خود کمک کند.
 
 | | | 
 |:---|:---|
-| **📚 Course Home**| [AZD For Beginners](../README.md)|
-| **📖 Documentation** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 Next Steps** | [Take The Challenge](../../../../workshop/docs) |
+| **📚 صفحه دوره**| [AZD برای مبتدیان](../README.md)|
+| **📖 مستندات** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️ قالب‌های AI** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
+|**🚀 گام‌های بعدی** | [چالش را بپذیرید](#workshop-challenge) |
 | | |
 
-## نمای کلی کارگاه
+## مرور کلی کارگاه
 
-**مدت:** 3-4 ساعت  
+**مدت زمان:** ۳–۴ ساعت  
 **سطح:** مبتدی تا متوسط  
-**پیش‌نیازها:** آشنایی با Azure، مفاهیم هوش‌مصنوعی، VS Code و ابزارهای خط فرمان.
+**پیش‌نیازها:** آشنایی با Azure، مفاهیم AI، VS Code و ابزارهای خط فرمان.
 
-این یک کارگاه عملی است که از طریق انجام وظایف یاد می‌گیرید. پس از تکمیل تمرین‌ها، پیشنهاد می‌کنیم مرور محتوای AZD For Beginners را برای ادامه مسیر یادگیری خود در زمینه بهترین شیوه‌های امنیت و افزایش بهره‌وری بررسی کنید.
+این یک کارگاه عملی است که در آن با عمل کردن یاد می‌گیرید. پس از تکمیل تمرین‌ها، توصیه می‌کنیم برای ادامه مسیر یادگیری خود به مجموعه آموزشی AZD For Beginners مراجعه کنید تا وارد مباحث امنیت و بهترین شیوه‌های بهره‌وری شوید.
 
 | Time| Module  | Objective |
 |:---|:---|:---|
-| 15 mins | Introduction | Set the stage, understand the goals |
-| 30 mins | Select AI Template | Explore options and pick starter | 
-| 30 mins | Validate AI Template | Deploy default solution to Azure |
-| 30 mins | Deconstruct AI Template | Explore structure and configuration |
-| 30 mins | Configure AI Template | Activate and try available features |
-| 30 mins | Customize AI Template | Adapt the template to your needs |
-| 30 mins | Teardown Infrastructure | Cleanup and release resources |
-| 15 mins | Wrap-Up & Next Steps | Learning resources, Workshop challenge |
+| 15 mins | معرفی | زمینه را مشخص کنید، اهداف را درک کنید |
+| 30 mins | انتخاب قالب AI | گزینه‌ها را بررسی کرده و یک شروع‌کننده انتخاب کنید | 
+| 30 mins | اعتبارسنجی قالب AI | راه‌حل پیش‌فرض را در Azure مستقر کنید |
+| 30 mins | تجزیه قالب AI | ساختار و پیکربندی را بررسی کنید |
+| 30 mins | پیکربندی قالب AI | قابلیت‌ها را فعال کرده و امتحان کنید |
+| 30 mins | سفارشی‌سازی قالب AI | قالب را بر اساس نیازهای خود تطبیق دهید |
+| 30 mins | پاک‌سازی زیرساخت | پاکسازی و آزادسازی منابع |
+| 15 mins | خلاصه و گام‌های بعدی | منابع یادگیری، چالش کارگاه |
 | | |
 
 ## آنچه خواهید آموخت
 
-قالب AZD را می‌توان به‌عنوان یک «محل شبیه‌سازی یادگیری» در نظر گرفت تا قابلیت‌ها و ابزارهای مختلف برای توسعه انتها به انتها در Microsoft Foundry را کاوش کنید. تا پایان این کارگاه، باید درک شهودی از ابزارها و مفاهیم مختلف در این زمینه داشته باشید.
+قالب AZD را به عنوان یک جعبه شنی آموزشی در نظر بگیرید تا قابلیت‌ها و ابزارهای مختلف برای توسعه انتها به انتها در Microsoft Foundry را بررسی کنید. تا پایان این کارگاه، باید احساس شهودی نسبت به ابزارها و مفاهیم مختلف در این زمینه داشته باشید.
 
 | Concept  | Objective |
 |:---|:---|
-| **Azure Developer CLI** | درک دستورات ابزار و جریان‌های کاری |
-| **AZD Templates**| درک ساختار پروژه و پیکربندی |
-| **Azure AI Agent**| تأمین و استقرار پروژه Microsoft Foundry  |
-| **Azure AI Search**| فعال‌سازی مهندسی محتوا با استفاده از عامل‌ها |
+| **Azure Developer CLI** | درک دستورات ابزار و جریان‌های کاری|
+| **الگوهای AZD**| درک ساختار پروژه و پیکربندی|
+| **Azure AI Agent**| فراهم‌سازی و استقرار پروژه Microsoft Foundry  |
+| **Azure AI Search**| فعال‌سازی مهندسی زمینه با استفاده از عامل‌ها |
 | **Observability**| بررسی ردگیری، مانیتورینگ و ارزیابی‌ها |
-| **Red Teaming**| بررسی آزمون‌های خصمانه و راهکارهای کاهش ریسک |
+| **Red Teaming**| بررسی تست‌های خصمانه و راهبردهای کاهش ریسک |
 | | |
 
 ## ماژول‌های کارگاه
 
 آماده شروع هستید؟ از طریق ماژول‌های کارگاه حرکت کنید:
 
-- [Module 1: Select AI Template](instructions/1-Select-AI-Template.md)
-- [Module 2: Validate AI Template](instructions/2-Validate-AI-Template.md) 
-- [Module 3: Deconstruct AI Template](instructions/3-Deconstruct-AI-Template.md)
-- [Module 4: Configure AI Template](instructions/4-Configure-AI-Template.md)
-- [Module 5: Customize AI Template](instructions/5-Customize-AI-Template.md)
-- [Module 6: Teardown Infrastructure](instructions/6-Teardown-Infrastructure.md)
-- [Module 7: Wrap-up & Next Steps](instructions/7-Wrap-up.md)
+- [ماژول 1: انتخاب قالب AI](instructions/1-Select-AI-Template.md)
+- [ماژول 2: اعتبارسنجی قالب AI](instructions/2-Validate-AI-Template.md) 
+- [ماژول 3: تجزیه قالب AI](instructions/3-Deconstruct-AI-Template.md)
+- [ماژول 4: پیکربندی قالب AI](instructions/4-Configure-AI-Template.md)
+- [ماژول 5: سفارشی‌سازی قالب AI](instructions/5-Customize-AI-Template.md)
+- [ماژول 6: پاک‌سازی زیرساخت](instructions/6-Teardown-Infrastructure.md)
+- [ماژول 7: خلاصه و گام‌های بعدی](instructions/7-Wrap-up.md)
 
-## بازخورد دارید؟
+## نظر یا بازخورد دارید؟
 
-در این مخزن یک issue ارسال کنید (آن را با `Workshop` تگ بزنید) یا به [Discord](https://aka.ms/foundry/discord) بپیوندید و در کانال `#get-help` پست بفرستید.
+یک issue در این مخزن ثبت کنید (با برچسب `Workshop`) یا به ما در [Discord](https://aka.ms/foundry/discord) بپیوندید و در کانال `#get-help` پست کنید.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-سلب مسئولیت:
-این سند با استفاده از سرویس ترجمهٔ هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی اشتباهات یا نواقصی باشند. نسخهٔ اصلی سند به زبان اصلی آن باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی یا مهم، ترجمهٔ حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرست ناشی از استفاده از این ترجمه مسئولیتی نداریم.
+**سلب مسئولیت**:
+این سند با استفاده از سرویس ترجمه‌ی هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان مادری آن باید منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمه‌ی حرفه‌ای انسانی توصیه می‌شود. ما مسئول هیچ‌گونه سوءتفاهم یا برداشت نادرستی که از استفاده از این ترجمه ناشی شود، نیستیم.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

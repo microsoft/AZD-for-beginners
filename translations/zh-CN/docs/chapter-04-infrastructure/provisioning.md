@@ -1,47 +1,47 @@
-# 使用 AZD 配置 Azure 资源
+# 使用 AZD 预配 Azure 资源
 
 **章节导航:**
-- **📚 课程主页**: [AZD 入门](../../README.md)
+- **📚 课程主页**: [AZD For Beginners](../../README.md)
 - **📖 当前章节**: 第4章 - 基础设施即代码与部署
-- **⬅️ 上一个**: [部署指南](deployment-guide.md)
+- **⬅️ 上一章**: [部署指南](deployment-guide.md)
 - **➡️ 下一章**: [第5章：多代理 AI 解决方案](../../examples/retail-scenario.md)
 - **🔧 相关**: [第6章：部署前验证](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## 介绍
 
-本综合指南涵盖使用 Azure Developer CLI 配置和管理 Azure 资源所需的所有内容。学习如何使用 Bicep、ARM 模板、Terraform 和 Pulumi 从基础资源创建到高级企业级基础设施架构实现基础设施即代码 (IaC) 模式。
+本综合指南涵盖使用 Azure Developer CLI 预配和管理 Azure 资源所需的一切知识。学习如何使用 Bicep、ARM 模板、Terraform 和 Pulumi 从基础资源创建到企业级高级基础设施架构实现基础设施即代码 (IaC) 模式。
 
 ## 学习目标
 
 完成本指南后，您将能够：
-- 掌握基础设施即代码原理和 Azure 资源配置
-- 了解 Azure Developer CLI 支持的多种 IaC 提供程序
-- 为常见应用架构设计并实现 Bicep 模板
-- 配置资源参数、变量和特定于环境的设置
-- 实现包括网络和安全在内的高级基础设施模式
-- 管理资源生命周期、更新和依赖解析
+- 掌握基础设施即代码原则和 Azure 资源预配
+- 了解 Azure Developer CLI 支持的多种 IaC 提供者
+- 设计并实现常见应用架构的 Bicep 模板
+- 配置资源参数、变量和特定环境设置
+- 实施包括网络和安全在内的高级基础设施模式
+- 管理资源生命周期、更新和依赖关系解析
 
 ## 学习成果
 
 完成后，您将能够：
-- 使用 Bicep 和 ARM 模板设计并配置 Azure 基础设施
+- 使用 Bicep 和 ARM 模板设计并预配 Azure 基础设施
 - 配置具有正确资源依赖关系的复杂多服务架构
 - 为多个环境和配置实现参数化模板
-- 排查基础设施配置问题并解决部署失败
+- 排查基础设施预配问题并解决部署失败
 - 在基础设施设计中应用 Azure 良好架构框架原则
 - 管理基础设施更新并实施基础设施版本控制策略
 
-## 基础设施配置概述
+## 基础设施预配概述
 
-Azure Developer CLI 支持多种基础设施即代码 (IaC) 提供程序：
-- **Bicep** (recommended) - Azure 的领域特定语言
-- **ARM Templates** - 基于 JSON 的 Azure 资源管理器模板
+Azure Developer CLI 支持多种基础设施即代码 (IaC) 提供者：
+- **Bicep** (推荐) - Azure 的领域特定语言
+- **ARM Templates** - 基于 JSON 的 Azure Resource Manager 模板
 - **Terraform** - 多云基础设施工具
 - **Pulumi** - 使用编程语言的现代基础设施即代码
 
-## 理解 Azure 资源
+## 了解 Azure 资源
 
-### 资源层次结构
+### 资源层级
 ```
 Azure Account
 └── Subscriptions
@@ -49,12 +49,12 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### 应用的常见 Azure 服务
-- **Compute**: App Service, Container Apps, Functions, Virtual Machines
-- **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Networking**: Virtual Network, Application Gateway, CDN
-- **Security**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
+### 常见的应用 Azure 服务
+- <strong>计算</strong>: App Service、Container Apps、Functions、虚拟机
+- <strong>存储</strong>: 存储帐户、Cosmos DB、SQL Database、PostgreSQL
+- <strong>网络</strong>: 虚拟网络、应用网关、CDN
+- <strong>安全</strong>: Key Vault、Application Insights、Log Analytics
+- **AI/ML**: 认知服务、OpenAI、Machine Learning
 
 ## Bicep 基础设施模板
 
@@ -200,7 +200,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ 数据库配置
+## 🗃️ 数据库预配
 
 ### Cosmos DB
 ```bicep
@@ -342,7 +342,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### 托管标识配置
+### 托管身份配置
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -368,9 +368,9 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 网络与连接性
+## 🌍 网络与连接
 
-### Virtual Network 配置
+### 虚拟网络配置
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -433,7 +433,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### 带 SSL 的 Application Gateway
+### 带 SSL 的应用网关
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -496,7 +496,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 监控与可观测性
+## 📊 监控与可观察性
 
 ### Application Insights
 ```bicep
@@ -527,7 +527,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### 自定义度量和警报
+### 自定义指标与警报
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -561,7 +561,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 特定于环境的配置
+## 🔧 环境特定配置
 
 ### 不同环境的参数文件
 ```json
@@ -617,7 +617,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 条件性资源配置
+### 条件性资源预配
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,7 +649,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 高级配置模式
+## 🚀 高级预配模式
 
 ### 多区域部署
 ```bicep
@@ -755,42 +755,41 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 基础设施预览与验证 (NEW)
+## 🧪 基础设施预览与验证 (新)
 
 ### 在部署前预览基础设施更改
 
-`azd provision --preview` 功能允许您在实际部署资源之前**模拟基础设施配置**。它的理念类似于 `terraform plan` 或 `bicep what-if`，为您提供一个关于将对 Azure 环境进行哪些更改的**演练视图**。
+`azd provision --preview` 功能允许您在实际部署资源之前<strong>模拟基础设施预配</strong>。它的理念类似于 `terraform plan` 或 `bicep what-if`，为您提供针对将对 Azure 环境进行哪些更改的<strong>干运行视图</strong>。
 
-#### 🛠️ 它能做什么
+#### 🛠️ 它的作用
 - **分析您的 IaC 模板**（Bicep 或 Terraform）
-- **显示资源更改的预览**：添加、删除、更新
-- **不应用更改** — 这是只读的，运行安全
+- <strong>显示资源更改的预览</strong>：新增、删除、更新
+- <strong>不应用更改</strong> — 只读且安全运行
 
-#### � 用例
+#### 使用场景
 ```bash
-# 在部署前预览基础设施更改
+# 在部署前预览基础设施变更
 azd provision --preview
 
-# 预览并显示详细输出
-azd provision --preview --output json
-
-# 为特定环境预览
-azd provision --preview --environment production
+# 针对特定环境的预览
+azd provision --preview -e production
 ```
 
 此命令可帮助您：
-- **在提交资源之前验证基础设施更改**
-- **在开发周期中尽早发现错误配置**
-- **在团队环境中安全协作**
-- **在无意外情况下确保最小权限部署**
+- <strong>在提交资源之前验证基础设施更改</strong>
+- <strong>在开发周期早期捕获配置错误</strong>
+- <strong>在团队环境中安全协作</strong>
+- <strong>确保最小权限部署而不会出现意外</strong>
 
-在以下情况下特别有用：
-- 处理复杂多服务环境时
-- 对生产基础设施进行更改时
-- 在 PR 批准之前验证模板修改时
-- 向新团队成员培训基础设施模式时
+在以下情况下尤为有用：
+- 处理复杂的多服务环境
+- 对生产基础设施进行更改
+- 在 PR 批准前验证模板修改
+- 培训新团队成员了解基础设施模式
 
-### 预览示例输出
+### 示例预览输出
+确切的预览输出会因提供者和项目结构而异，但结果应在应用任何更改之前清晰标识建议的更改。
+
 ```bash
 $ azd provision --preview
 
@@ -809,7 +808,6 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
@@ -819,15 +817,15 @@ The following resources will be destroyed:
 
 ### 安全的资源更新
 ```bash
-# 首先预览基础设施更改（推荐）
+# 先预览基础设施更改（推荐）
 azd provision --preview
 
 # 在预览确认后应用更改
 azd provision --confirm-with-no-prompt
 
-# 如需回滚，使用 Git 恢复基础设施更改:
+# 如需回滚，请使用 Git 回退基础设施更改：
 git revert HEAD  # 回退最后一次基础设施提交
-azd provision    # 应用之前的基础设施状态
+azd provision    # 应用先前的基础设施状态
 ```
 
 ### 数据库迁移
@@ -872,7 +870,7 @@ var naming = {
 }
 ```
 
-### 2. 标记策略
+### 2. 标签策略
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -916,29 +914,29 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## 后续步骤
+## 下一步
 
 - [部署前规划](../chapter-06-pre-deployment/capacity-planning.md) - 验证资源可用性
 - [常见问题](../chapter-07-troubleshooting/common-issues.md) - 排查基础设施问题
-- [调试指南](../chapter-07-troubleshooting/debugging.md) - 调试配置问题
+- [调试指南](../chapter-07-troubleshooting/debugging.md) - 调试预配问题
 - [SKU 选择](../chapter-06-pre-deployment/sku-selection.md) - 选择合适的服务层级
 
 ## 附加资源
 
-- [Azure Bicep 文档](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure 资源管理器模板](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure 架构中心](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure 良好架构框架](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**导航**
-- **上一课**: [部署指南](deployment-guide.md)
-- **下一课**: [容量规划](../chapter-06-pre-deployment/capacity-planning.md)
+<strong>导航</strong>
+- <strong>上一课</strong>: [部署指南](deployment-guide.md)
+- <strong>下一课</strong>: [容量规划](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免责声明：
-本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们力求准确，但请注意自动翻译可能包含错误或不准确之处。原始语言的原文应被视为具有权威性的版本。对于重要信息，建议采用专业人工翻译。对于因使用本翻译而引起的任何误解或误释，我们不承担任何责任。
+**免责声明**:
+本文件已使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力保证准确性，但请注意，自动翻译可能包含错误或不准确之处。原始文档的原文应被视为权威来源。对于关键信息，建议采用专业人工翻译。对于因使用本翻译而产生的任何误解或曲解，我们概不负责。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

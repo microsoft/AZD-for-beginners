@@ -1,65 +1,65 @@
-# AZD 部署前检查
+# AZD 部署的预检流程
 
 **章节导航:**
-- **📚 课程首页**: [AZD 入门](../../README.md)
-- **📖 当前章节**: 第6章 - 部署前验证与规划
-- **⬅️ 上一个**: [SKU 选择](sku-selection.md)
-- **➡️ 下一章**: [第7章：故障排除](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 相关**: [第4章：部署指南](../chapter-04-infrastructure/deployment-guide.md)
+- **📚 课程首页**: [AZD For Beginners](../../README.md)
+- **📖 当前章节**: 第 6 章 - 部署前验证与规划
+- **⬅️ 上一章**: [SKU Selection](sku-selection.md)
+- **➡️ 下一章**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 相关**: [Chapter 4: Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
 
 ## 介绍
 
-本综合指南提供部署前验证脚本和流程，以确保在开始之前 Azure Developer CLI 部署能够成功。学习如何实现用于身份验证、资源可用性、配额、安全合规性和性能要求的自动化检查，以防止部署失败并优化部署成功率。
+本综合指南提供在开始 Azure Developer CLI 部署前的预部署验证脚本和程序。学习实现自动化检查以验证认证、资源可用性、配额、安全合规性和性能要求，以防止部署失败并优化部署成功率。
 
 ## 学习目标
 
 完成本指南后，您将能够：
-- 掌握自动化部署前验证技术和脚本
-- 了解用于身份验证、权限和配额的全面检查策略
-- 实施资源可用性和容量验证流程
+- 掌握自动化的部署前验证技术和脚本
+- 了解针对认证、权限和配额的全面检查策略
+- 实施资源可用性和容量验证程序
 - 配置符合组织策略的安全与合规检查
 - 设计成本估算和预算验证工作流
-- 为 CI/CD 管道创建自定义预检自动化
+- 为 CI/CD 管道创建自定义的预检自动化
 
 ## 学习成果
 
 完成后，您将能够：
 - 创建并执行全面的预检验证脚本
 - 为不同部署场景设计自动化检查工作流
-- 实施特定环境的验证流程和策略
-- 配置部署就绪性的主动监控和告警
+- 实施特定环境的验证程序和策略
+- 配置用于部署就绪性的主动监控和告警
 - 排查部署前问题并实施纠正措施
 - 将预检集成到 DevOps 管道和自动化工作流中
 
 ## 目录
 
-- [概述](../../../../docs/chapter-06-pre-deployment)
-- [自动化预检脚本](../../../../docs/chapter-06-pre-deployment)
-- [手动验证清单](../../../../docs/chapter-06-pre-deployment)
-- [环境验证](../../../../docs/chapter-06-pre-deployment)
-- [资源验证](../../../../docs/chapter-06-pre-deployment)
-- [安全 & 合规性检查](../../../../docs/chapter-06-pre-deployment)
-- [性能 & 容量规划](../../../../docs/chapter-06-pre-deployment)
-- [故障排除常见问题](../../../../docs/chapter-06-pre-deployment)
+- [概述](#概述)
+- [自动化预检脚本](#自动化预检脚本)
+- [手动验证清单](#codeblock1)
+- [环境验证](#✅-备份与恢复)
+- [资源验证](#生产环境验证)
+- [安全与合规检查](#security--compliance-checks)
+- [性能与容量规划](#performance--capacity-planning)
+- [常见问题排查](#troubleshooting-common-issues)
 
 ---
 
 ## 概述
 
-预检是在部署之前执行的关键验证，用于确保：
+预检是部署前执行的重要验证，用以确保：
 
-- **目标区域的资源可用性** 和配额
-- **身份验证和权限** 已正确配置
-- **模板有效性** 和参数正确性
-- **网络连接性** 和依赖项
-- **安全合规性** 符合组织策略
-- **成本估算** 在预算范围内
+- <strong>目标区域的资源可用性</strong>和配额
+- <strong>认证和权限</strong>已正确配置
+- <strong>模板有效性</strong>和参数正确性
+- <strong>网络连通性</strong>和依赖关系
+- <strong>与组织策略一致的安全合规性</strong>
+- <strong>在预算范围内的成本估算</strong>
 
 ### 何时运行预检
 
-- **在首次将部署推送到新环境之前**
-- **在重大模板变更后**
-- **在生产部署之前**
+- <strong>在首次向新环境部署之前</strong>
+- <strong>在重大模板更改后</strong>
+- <strong>在生产部署之前</strong>
 - **在更改 Azure 区域时**
 - **作为 CI/CD 管道的一部分**
 
@@ -67,7 +67,7 @@
 
 ## 自动化预检脚本
 
-### PowerShell 预检程序
+### PowerShell 预检检查器
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -100,7 +100,7 @@ param(
     [switch]$Detailed
 )
 
-# 输出的颜色编码
+# 输出颜色编码
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -210,7 +210,7 @@ function Test-Permissions {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # 测试资源组创建（如果已指定）
+        # 测试资源组创建（如果指定）
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 新：测试基础设施预览（安全的模拟运行）
+    # 🧪 新增：测试基础设施预览（安全的模拟运行）
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -472,7 +472,7 @@ function Test-SecurityCompliance {
     
     # 检查常见的安全做法
     try {
-        # 检查是否配置了 Key Vault
+        # 检查是否已配置 Key Vault
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
             Write-Status "Key Vault usage" "Success" "Key Vault detected in templates"
         }
@@ -504,7 +504,7 @@ function Test-SecurityCompliance {
     }
 }
 
-# 主执行
+# 主程序执行
 function Invoke-PreflightCheck {
     Write-Host "${Green}AZD Pre-flight Check${Reset}" -ForegroundColor Green
     Write-Host "Environment: $EnvironmentName"
@@ -561,11 +561,11 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash 预检程序
+### Bash 预检检查器
 
 ```bash
 #!/bin/bash
-# 用于 Unix/Linux 系统的预检脚本的 Bash 版本
+# Unix/Linux 系统预检的 Bash 版本
 
 set -euo pipefail
 
@@ -606,7 +606,7 @@ print_status() {
 check_prerequisites() {
     echo -e "${BLUE}=== Prerequisites Check ===${NC}"
     
-    # 检查 AZD 安装
+    # 检查 AZD 是否已安装
     if command -v azd >/dev/null 2>&1; then
         local azd_version=$(azd version --output json | jq -r '.azd.version')
         print_status "AZD CLI installed" "success" "Version: $azd_version"
@@ -615,7 +615,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # 检查 Azure CLI 安装
+    # 检查 Azure CLI 是否已安装
     if command -v az >/dev/null 2>&1; then
         local az_version=$(az version --output json | jq -r '."azure-cli"')
         print_status "Azure CLI installed" "success" "Version: $az_version"
@@ -624,7 +624,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # 检查 jq 安装
+    # 检查 jq 是否已安装
     if command -v jq >/dev/null 2>&1; then
         print_status "jq installed" "success"
     else
@@ -755,7 +755,7 @@ main() {
         esac
     done
     
-    # 验证必需参数
+    # 验证必需的参数
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -798,51 +798,51 @@ main "$@"
 
 ## 手动验证清单
 
-### 部署前清单
+### 部署前检查清单
 
-打印此清单并在部署前核对每一项：
+打印此清单并在部署前逐项验证：
 
 #### ✅ 环境设置
 - [ ] 已安装并更新到最新版本的 AZD CLI
-- [ ] 已安装并已通过身份验证的 Azure CLI
-- [ ] 已选择正确的 Azure 订阅
-- [ ] 环境名称唯一并符合命名规范
-- [ ] 已确认目标资源组或可创建
+- [ ] 已安装并完成身份验证的 Azure CLI
+- [ ] 选择了正确的 Azure 订阅
+- [ ] 环境名称唯一且符合命名规范
+- [ ] 已识别目标资源组或可以创建目标资源组
 
-#### ✅ 身份验证与权限
-- [ ] 已使用 `azd auth login` 成功完成身份验证
+#### ✅ 认证与权限
+- [ ] 使用 `azd auth login` 成功进行身份验证
 - [ ] 用户在目标订阅/资源组上具有 Contributor 角色
-- [ ] 已为 CI/CD 配置服务主体（如适用）
+- [ ] 为 CI/CD 配置了服务主体（如适用）
 - [ ] 无过期的证书或凭据
 
 #### ✅ 模板验证
-- [ ] 存在 `azure.yaml` 且为有效的 YAML
-- [ ] azure.yaml 中定义的所有服务均有对应的源代码
+- [ ] 存在且为有效 YAML 的 `azure.yaml`
+- [ ] azure.yaml 中定义的所有服务都有对应的源代码
 - [ ] `infra/` 目录中的 Bicep 模板存在
-- [ ] `main.bicep` 无错误编译（`az bicep build --file infra/main.bicep`）
-- [ ] 🧪 基础设施预览成功运行（`azd provision --preview`）
-- [ ] 所有必需参数具有默认值或将在部署时提供
-- [ ] 模板中没有硬编码的密钥/机密
+- [ ] `main.bicep` 可编译且无错误（`az bicep build --file infra/main.bicep`）
+- [ ] 🧪 基础设施预览运行成功（`azd provision --preview`）
+- [ ] 所有必需参数都有默认值或将被提供
+- [ ] 模板中无硬编码的机密
 
 #### ✅ 资源规划
 - [ ] 已选择并验证目标 Azure 区域
 - [ ] 目标区域中所需的 Azure 服务可用
-- [ ] 规划的资源有足够的配额
-- [ ] 已检查资源命名冲突
-- [ ] 了解资源之间的依赖关系
+- [ ] 计划资源的配额充足
+- [ ] 检查资源命名冲突
+- [ ] 理解资源间的依赖关系
 
 #### ✅ 网络与安全
-- [ ] 已验证到 Azure 端点的网络连接
-- [ ] 如需，已配置防火墙/代理设置
-- [ ] 已配置 Key Vault 用于机密管理
-- [ ] 在可能的情况下使用托管标识
+- [ ] 已验证到 Azure 端点的网络连通性
+- [ ] 根据需要配置了防火墙/代理设置
+- [ ] 已配置用于密钥管理的 Key Vault
+- [ ] 尽可能使用托管身份
 - [ ] 为 Web 应用启用 HTTPS 强制
 
 #### ✅ 成本管理
-- [ ] 已使用 Azure Pricing Calculator 计算成本估算
-- [ ] 如需，已配置预算告警
-- [ ] 为环境类型选择了合适的 SKU
-- [ ] 已为生产工作负载考虑预留容量
+- [ ] 使用 Azure Pricing Calculator 计算了成本估算
+- [ ] 如需，已配置预算警报
+- [ ] 为环境类型选择了适当的 SKU
+- [ ] 为生产工作负载考虑了预留容量
 
 #### ✅ 监控与可观测性
 - [ ] 在模板中配置了 Application Insights
@@ -851,9 +851,9 @@ main "$@"
 - [ ] 在应用中实现了健康检查端点
 
 #### ✅ 备份与恢复
-- [ ] 已为数据资源定义备份策略
-- [ ] 已记录恢复时间目标 (RTO)
-- [ ] 已记录恢复点目标 (RPO)
+- [ ] 为数据资源定义了备份策略
+- [ ] 记录了恢复时间目标（RTO）
+- [ ] 记录了恢复点目标（RPO）
 - [ ] 为生产环境制定了灾难恢复计划
 
 ---
@@ -864,12 +864,12 @@ main "$@"
 
 ```bash
 #!/bin/bash
-# 针对开发环境的特定验证
+# 开发环境特定的验证
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # 检查开发友好型配置
+    # 检查对开发友好的配置
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
@@ -896,7 +896,7 @@ validate_dev_environment() {
 
 ```bash
 #!/bin/bash
-# 生产环境特定的验证
+# 针对生产环境的特定验证
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
@@ -1058,7 +1058,7 @@ if __name__ == "__main__":
 
 ---
 
-## 安全与合规性检查
+## 安全与合规检查
 
 ### 安全验证脚本
 
@@ -1079,7 +1079,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # 检查是否使用托管标识
+    # 检查是否使用托管身份
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1131,7 +1131,7 @@ check_compliance_requirements() {
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # 检查审计日志
+    # 检查审计日志记录
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
@@ -1146,7 +1146,7 @@ check_compliance_requirements() {
     fi
 }
 
-# 主执行
+# 主程序执行
 main() {
     echo "🔒 Security and Compliance Validation"
     echo "📁 Checking infra/ directory for security best practices"
@@ -1294,54 +1294,54 @@ steps:
 
 ### ✅ 预检最佳实践
 
-1. **尽可能自动化**
+1. <strong>尽可能自动化</strong>
    - 将检查集成到 CI/CD 管道中
    - 使用脚本进行可重复的验证
    - 存储结果以便审计追踪
 
-2. **针对环境的验证**
-   - 针对 dev/staging/prod 使用不同的检查
-   - 为不同环境设定适当的安全要求
+2. <strong>按环境进行特定验证</strong>
+   - 针对开发/预发布/生产进行不同检查
+   - 为各环境设置适当的安全要求
    - 对非生产环境进行成本优化
 
-3. **全面覆盖**
-   - 身份验证和权限
-   - 资源配额和可用性
-   - 模板验证和语法检查
+3. <strong>全面覆盖</strong>
+   - 认证与权限
+   - 资源配额与可用性
+   - 模板验证与语法
    - 安全与合规性要求
 
-4. **清晰报告**
-   - 颜色编码的状态指示
-   - 提供带有修复步骤的详细错误信息
-   - 提供便于快速评估的摘要报告
+4. <strong>清晰的报告</strong>
+   - 颜色编码的状态指示器
+   - 带有修复步骤的详细错误信息
+   - 用于快速评估的摘要报告
 
-5. **快速失败**
-   - 如果关键检查失败则停止部署
-   - 提供明确的解决指南
-   - 便于重新运行检查
+5. <strong>快速失败</strong>
+   - 若关键检查失败则停止部署
+   - 提供明确的解决指导
+   - 使重新运行检查变得容易
 
 ### 常见的预检陷阱
 
 1. **为“快速”部署跳过验证**
-2. **部署前未充分检查权限**
-3. **忽视配额限制，直到部署失败**
+2. <strong>在部署前未充分检查权限</strong>
+3. <strong>忽略配额限制直到部署失败</strong>
 4. **未在 CI/CD 管道中验证模板**
-5. **生产环境缺失安全验证**
-6. **成本估算不足，导致预算意外**
+5. <strong>对生产环境缺乏安全验证</strong>
+6. <strong>成本估算不足导致预算意外</strong>
 
 ---
 
-**Pro Tip**: 在 CI/CD 管道中将预检作为与实际部署作业分离的独立作业运行。这可以让您更早发现问题，并为开发人员提供更快的反馈。
+<strong>专业提示</strong>：在 CI/CD 管道中将预检作为一个独立作业运行，放在实际部署作业之前。这可以让您及早发现问题，并为开发人员提供更快的反馈。
 
 ---
 
-**导航**
-- **Previous Lesson**: [SKU 选择](sku-selection.md)
-- **Next Lesson**: [速查表](../../resources/cheat-sheet.md)
+<strong>导航</strong>
+- <strong>上一课</strong>: [SKU Selection](sku-selection.md)
+- <strong>下一课</strong>: [Cheat Sheet](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免责声明：  
-本文件使用 AI 翻译服务 Co-op Translator（https://github.com/Azure/co-op-translator）翻译。虽然我们力求准确，但请注意自动翻译可能包含错误或不准确之处。原始语言的原文应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用本翻译而产生的任何误解或曲解承担任何责任。
+**免责声明**:
+本文件已使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的原文应被视为权威来源。对于关键信息，建议使用专业人工翻译。我们不对因使用本翻译而产生的任何误解或错误解释承担责任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

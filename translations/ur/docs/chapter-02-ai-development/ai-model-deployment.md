@@ -1,13 +1,15 @@
 # Azure Developer CLI کے ساتھ AI ماڈل کی تعیناتی
 
-**باب کی نیوی گیشن:**
+**باب کی نیویگیشن:**
 - **📚 کورس ہوم**: [AZD For Beginners](../../README.md)
 - **📖 موجودہ باب**: باب 2 - AI-First Development
 - **⬅️ پچھلا**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ اگلا**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 اگلا باب**: [باب 3: Configuration](../chapter-03-configuration/configuration.md)
 
-یہ گائیڈ AZD ٹیمپلیٹس استعمال کرتے ہوئے AI ماڈلز کی تعیناتی کے لئے جامع ہدایات فراہم کرتا ہے، ماڈل کے انتخاب سے لے کر پروڈکشن میں تعیناتی کے پیچیدہ نمونوں تک۔
+یہ رہنما AZD ٹیمپلیٹس استعمال کرتے ہوئے AI ماڈلز کی تعیناتی کے لئے جامع ہدایات فراہم کرتا ہے، جو ماڈل کے انتخاب سے لے کر پیداوار میں تعیناتی کے نمونوں تک سب کچھ شامل ہے۔
+
+> **تصدیقی نوٹ (2026-03-25):** اس رہنما میں AZD ورک فلو کو `azd` `1.23.12` کے خلاف چیک کیا گیا تھا۔ AI تعیناتیوں کے لئے جو ڈیفالٹ سروس تعیناتی کھڑکی سے زیادہ وقت لیتے ہیں، موجودہ AZD ریلیزز `azd deploy --timeout <seconds>` کی حمایت کرتے ہیں۔
 
 ## فہرست مضامین
 
@@ -15,14 +17,14 @@
 - [AI ماڈلز کے لئے AZD کنفیگریشن](#ai-ماڈلز-کے-لئے-azd-کنفیگریشن)
 - [تعیناتی کے نمونے](#تعیناتی-کے-نمونے)
 - [ماڈل مینجمنٹ](#ماڈل-مینجمنٹ)
-- [پروڈکشن کے اعتبارات](#پروڈکشن-کے-اعتبارات)
-- [مانیٹرنگ اور نظارت](#مانیٹرنگ-اور-نظارت)
+- [پیداوری خیالات](#پیداوری-خیالات)
+- [مانیٹرنگ اور مشاہدہ](#مانیٹرنگ-اور-مشاہدہ)
 
 ## ماڈل انتخاب کی حکمت عملی
 
 ### Microsoft Foundry ماڈلز
 
-اپنے استعمال کے کیس کے لئے درست ماڈل منتخب کریں:
+اپنے استعمال کے معاملے کے لئے صحیح ماڈل منتخب کریں:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -41,9 +43,9 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
@@ -52,18 +54,18 @@ services:
 
 ### ماڈل صلاحیت کی منصوبہ بندی
 
-| ماڈل کی قسم | استعمال کا کیس | تجویز کردہ صلاحیت | لاگت کے عوامل |
+| ماڈل کی قسم | استعمال کا کیس | تجویز کردہ صلاحیت | لاگت کے پہلو |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | چیٹ، سوال و جواب | 10-50 TPM | زیادہ کام کے لئے لاگت-موثر |
-| gpt-4.1 | پیچیدہ استدلال | 20-100 TPM | زیادہ لاگت، پریمیم خصوصیات کے لئے استعمال کریں |
-| Text-embedding-ada-002 | تلاش، RAG | 30-120 TPM | معنوی تلاش کے لئے ضروری |
-| Whisper | تقریر سے متن | 10-50 TPM | آڈیو پروسیسنگ کام کے لئے |
+| gpt-4.1-mini | چیٹ، سوال و جواب | 10-50 TPM | زیادہ تر ورکلوڈز کے لئے لاگت مؤثر |
+| gpt-4.1 | پیچیدہ منطق | 20-100 TPM | اعلی لاگت، پریمیم خصوصیات کے لئے استعمال کریں |
+| text-embedding-3-large | تلاش، RAG | 30-120 TPM | معنوی تلاش اور بازیافت کے لئے مضبوط ڈیفالٹ انتخاب |
+| Whisper | تقریر سے متن | 10-50 TPM | آڈیو پراسیسنگ ورکلوڈز |
 
 ## AI ماڈلز کے لئے AZD کنفیگریشن
 
-### بائسک ٹیمپلیٹ کنفیگریشن
+### بائسپ ٹیمپلیٹ کنفیگریشن
 
-بائسک ٹیمپلیٹس کے ذریعے ماڈل کی تعیناتی کریں:
+بائسپ ٹیمپلیٹس کے ذریعے ماڈل کی تعیناتی کریں:
 
 ```bicep
 // infra/main.bicep
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -122,21 +124,21 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
-### ماحولیاتی متغیرات
+### ماحول کے متغیرات
 
-اپنے ایپلیکیشن کے ماحول کو ترتیب دیں:
+اپنی ایپلیکیشن کے ماحول کو ترتیب دیں:
 
 ```bash
 # ترتیب .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
 ## تعیناتی کے نمونے
 
-### نمونہ 1: سنگل ریجن تعیناتی
+### نمونہ 1: سنگل-ریجن تعیناتی
 
 ```yaml
 # azure.yaml - Single region
@@ -149,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-سب سے بہترین:
-- ترقی اور ٹیسٹنگ
+بہترین برائے:
+- ترقی اور جانچ
 - واحد مارکیٹ کی ایپلیکیشنز
-- لاگت کی بہتری
+- لاگت کی بہتر کاری
 
-### نمونہ 2: کثیر ریجن تعیناتی
+### نمونہ 2: ملٹی-ریجن تعیناتی
 
 ```bicep
 // Multi-region deployment
@@ -167,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-سب سے بہترین:
+بہترین برائے:
 - عالمی ایپلیکیشنز
 - اعلی دستیابی کی ضروریات
-- لوڈ کی تقسیم
+- بوجھ کی تقسیم
 
-### نمونہ 3: ہائبرڈ تعیناتی
+### نمونہ 3: ہائبریڈ تعیناتی
 
-Microsoft Foundry ماڈلز کو دیگر AI خدمات کے ساتھ جوڑیں:
+Microsoft Foundry ماڈلز کو دیگر AI خدمات کے ساتھ ملائیں:
 
 ```bicep
 // Hybrid AI services
@@ -207,7 +209,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### ورژن کنٹرول
 
-اپنے AZD کنفیگریشن میں ماڈل ورژنز کا پتہ لگائیں:
+اپنے AZD کنفیگریشن میں ماڈل ورژنز کا پتہ رکھیں:
 
 ```json
 {
@@ -215,19 +217,19 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
 ```
 
-### ماڈل اپ ڈیٹس
+### ماڈل اپڈیٹس
 
-ماڈل اپ ڈیٹس کے لئے AZD ہکس استعمال کریں:
+ماڈل اپڈیٹس کے لئے AZD ہُکس استعمال کریں:
 
 ```bash
 #!/bin/bash
@@ -238,6 +240,9 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# اگر تعیناتی وقت زیادہ لے جائے طے شدہ ٹائم آؤٹ سے
+azd deploy --timeout 1800
 ```
 
 ### A/B ٹیسٹنگ
@@ -264,7 +269,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## پروڈکشن کے اعتبارات
+## پیداوری خیالات
 
 ### صلاحیت کی منصوبہ بندی
 
@@ -283,7 +288,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# مثال کا استعمال
+# استعمال کی مثال
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -293,9 +298,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### خودکار توسیع کی کنفیگریشن
+### آٹو سکیلنگ کنفیگریشن
 
-کنٹینر ایپس کے لئے خودکار اسکیلنگ ترتیب دیں:
+کنٹینر ایپلیکیشنز کے لئے آٹو سکیلنگ ترتیب دیں:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -331,7 +336,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### لاگت کی بہتری
+### لاگت کی بہتر کاری
 
 لاگت کنٹرول نافذ کریں:
 
@@ -363,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## مانیٹرنگ اور نظارت
+## مانیٹرنگ اور مشاہدہ
 
 ### ایپلیکیشن انسائٹس انٹیگریشن
 
-AI کام کے بوجھ کے لئے مانیٹرنگ ترتیب دیں:
+AI ورکلوڈز کے لئے مانیٹرنگ ترتیب دیں:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -403,12 +408,12 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### حسب ضرورت میٹرکس
+### کسٹم میٹرکس
 
-AI-خصوصی میٹرکس کا پتہ لگائیں:
+AI متعلقہ میٹرکس کا پتہ رکھیں:
 
 ```python
-# AI ماڈلز کے لیے حسب ضرورت ٹیلی میٹری
+# AI ماڈلز کے لیے حسبِ خواہش ٹیلی میٹری
 import logging
 from applicationinsights import TelemetryClient
 
@@ -445,7 +450,7 @@ class AITelemetry:
 AI سروس کی صحت کی نگرانی نافذ کریں:
 
 ```python
-# صحت کی جانچ کے اختتامی نقاط
+# صحت کی جانچ کے ایند پوائنٹس
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -473,21 +478,21 @@ async def check_ai_models():
 
 ## اگلے اقدامات
 
-1. **[Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** کا جائزہ لیں تاکہ سروس انٹیگریشن کے نمونے سمجھ سکیں  
-2. **[AI Workshop Lab](ai-workshop-lab.md)** مکمل کریں تاکہ عملی تجربہ حاصل ہو  
-3. **[Production AI Practices](production-ai-practices.md)** نافذ کریں تاکہ انٹرپرائز تعیناتی کی جاتی رہے  
-4. **[AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** دیکھیں تاکہ عمومی مسائل حل کیے جا سکیں  
+1. **[Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** کے ذریعے سروس انٹیگریشن نمونوں کا جائزہ لیں
+2. **[AI Workshop Lab](ai-workshop-lab.md)** مکمل کریں تاکہ عملی تجربہ حاصل ہو
+3. **[Production AI Practices](production-ai-practices.md)** نافذ کریں برائے انٹرپرائز تعیناتیاں
+4. **[AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** دریافت کریں عام مسائل کے حل کے لئے
 
 ## وسائل
 
 - [Microsoft Foundry ماڈلز کی دستیابی](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI کی دستاویزات](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [کنٹینر ایپس اسکیلنگ](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [AI ماڈل لاگت کی بہتری](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Azure Developer CLI دستاویزات](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [کنٹینر ایپلیکیشنز کی سکیلنگ](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [AI ماڈل کی لاگت کی بہتر کاری](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**باب کی نیوی گیشن:**
+**باب کی نیویگیشن:**
 - **📚 کورس ہوم**: [AZD For Beginners](../../README.md)
 - **📖 موجودہ باب**: باب 2 - AI-First Development
 - **⬅️ پچھلا**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
@@ -497,6 +502,6 @@ async def check_ai_models():
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**دستبرداری**:  
-یہ دستاویز AI ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کا استعمال کرتے ہوئے ترجمہ کی گئی ہے۔ اگرچہ ہم درستگی کے لئے کوشش کرتے ہیں، براہ کرم سمجھیں کہ خودکار ترجموں میں غلطیاں یا بے ضابطگیاں ہو سکتی ہیں۔ اصل دستاویز اپنی مادری زبان میں مستند ماخذ سمجھا جانا چاہیے۔ اہم معلومات کے لیے، پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ ہم اس ترجمہ کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تشریح کے ذمہ دار نہیں ہیں۔
+**خبردار**:
+اس دستاویز کا ترجمہ AI ترجمہ خدمت [Co-op Translator](https://github.com/Azure/co-op-translator) کے ذریعہ کیا گیا ہے۔ جبکہ ہم درستگی کے لیے کوشش کرتے ہیں، براہ کرم آگاہ رہیں کہ خودکار ترجمے میں غلطیاں یا غیر درستیاں ہو سکتی ہیں۔ اصل دستاویز اپنی مادری زبان میں قابل اعتماد ماخذ سمجھی جانی چاہئے۔ حساس معلومات کے لیے پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ ہم اس ترجمہ کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تعبیر کے لیے ذمہ دار نہیں ہیں۔
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

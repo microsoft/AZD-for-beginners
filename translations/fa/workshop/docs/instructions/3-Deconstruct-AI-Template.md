@@ -1,35 +1,35 @@
-# 3. Deconstruct a Template
+# 3. تجزیه یک قالب
 
-!!! tip "تا پایان این ماژول شما قادر خواهید بود"
+!!! tip "تا پایان این ماژول قادر خواهید بود"
 
-    - [ ] Activate GitHub Copilot with MCP servers for Azure assistance
-    - [ ] Understand the AZD template folder structure and components
-    - [ ] Explore infrastructure-as-code (Bicep) organization patterns
-    - [ ] **Lab 3:** Use GitHub Copilot to explore and understand repository architecture 
-
----
-
-
-With AZD templates and the Azure Developer CLI (`azd`) we can quickly jumpstart our AI development journey with standardized repositories that provide sample code, infrastructure and configuration files - in the form of a ready-to-deploy _starter_ project.
-
-**But now, we need to understand the project structure and codebase - and be able to customize the AZD template - without any prior experience or understanding of AZD!**
+    - [ ] GitHub Copilot را با سرورهای MCP برای پشتیبانی Azure فعال کنید
+    - [ ] ساختار پوشه قالب AZD و اجزای آن را درک کنید
+    - [ ] الگوهای سازمان‌دهی زیرساخت به‌عنوان‌کد (Bicep) را بررسی کنید
+    - [ ] **آزمایشگاه 3:** از GitHub Copilot برای بررسی و درک معماری مخزن استفاده کنید
 
 ---
 
-## 1. Activate GitHub Copilot
 
-### 1.1 Install GitHub Copilot Chat
+With AZD templates and the Azure Developer CLI (`azd`) we can quickly jumpstart our AI development journey with standardized repositories that provide sample code, infrastructure and configuration files - in the form of a ready-to-deploy _پروژه آماده برای استقرار_.
 
-It's time to explore [GitHub Copilot with Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Now, we can use natural language to describe our task at a high level, and get assistance in execution. For this lab, we'll use the [Copilot Free plan](https://github.com/github-copilot/signup) which has a monthly limit for completions and chat interactions.
+**اما اکنون، نیاز داریم ساختار پروژه و کدبیس را بفهمیم — و بتوانیم قالب AZD را سفارشی کنیم — بدون هیچ تجربه یا درکی قبلی از AZD!**
 
-The extension can be installed from the marketplace, but should already be available in your Codespaces environment. _Click `Open Chat` from the Copilot icon drop-down - and type a prompt like `What can you do?`_ - you may be prompted to log in. **GitHub Copilot Chat is ready**.
+---
+
+## 1. فعال‌سازی GitHub Copilot
+
+### 1.1 نصب GitHub Copilot Chat
+
+It's time to explore [GitHub Copilot با حالت عامل](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Now, we can use natural language to describe our task at a high level, and get assistance in execution. For this lab, we'll use the [طرح رایگان Copilot](https://github.com/github-copilot/signup) which has a monthly limit for completions and chat interactions.
+
+The extension can be installed from the marketplace, and it is often already available in Codespaces or dev container environments. _Click `Open Chat` from the Copilot icon drop-down - and type a prompt like `What can you do?`_ - you may be prompted to log in. **GitHub Copilot Chat آماده است**.
 
 ### 1.2. Install MCP Servers
 
 For Agent mode to be effective, it needs access to the right tools to help it retrieve knowledge or take actions. This is where MCP servers can help. We'll configure the following servers:
 
-1. [Azure MCP Server](../../../../../workshop/docs/instructions)
-1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
+1. [سرور MCP آژور](../../../../../workshop/docs/instructions)
+1. [سرور MCP Microsoft Docs](../../../../../workshop/docs/instructions)
 
 To activate these:
 
@@ -55,9 +55,9 @@ To activate these:
    }
    ```
 
-??? warning "ممکن است خطایی دریافت کنید مبنی بر اینکه `npx` نصب نیست (برای رفع کلیک کنید تا باز شود)"
+??? warning "ممکن است خطایی مبنی بر نصب نبودن `npx` دریافت کنید (برای رفع روی باز کردن کلیک کنید)"
 
-      برای رفع این مشکل، فایل `.devcontainer/devcontainer.json` را باز کرده و این خط را به بخش features اضافه کنید. سپس کانتینر را مجددا بسازید. اکنون باید `npx` نصب شده باشد.
+      برای رفع این مشکل، فایل `.devcontainer/devcontainer.json` را باز کنید و این خط را به بخش features اضافه کنید. سپس کانتینر را بازسازی کنید. اکنون باید `npx` نصب شده باشد.
 
       ```title="" linenums="0"
          "features": {
@@ -70,7 +70,7 @@ To activate these:
 
 ### 1.3. Test GitHub Copilot Chat
 
-**First use `az login` to authenticate with Azure from VS Code command line.**
+**ابتدا از `azd auth login` برای احراز هویت با Azure از خط فرمان VS Code استفاده کنید. در صورتی که قصد اجرای مستقیم دستورات Azure CLI را دارید، از `az login` نیز استفاده کنید.**
 
 You should now be able to query your Azure subscription status, and ask questions about deployed resources or configuration. Try these prompts:
 
@@ -88,193 +88,193 @@ Or you can ask for code snippets to complete a task. Try this prompt.
 
 In `Ask` mode, this will provide code that you can copy-paste and try out. In `Agent` mode, this might go a step further and create the relevant resources for you - including setup scripts and documentation - to help you execute that task.
 
-**You are now equipped to start exploring the template repository**
+**اکنون مجهز به ابزارهای لازم برای شروع بررسی مخزن قالب هستید**
 
 ---
 
-## 2. Deconstruct Architecture
+## 2. تجزیه معماری
 
-??? prompt "ASK: Explain the application architecture in docs/images/architecture.png in 1 paragraph"
+??? prompt "پرسش: معماری برنامه در docs/images/architecture.png را در یک پاراگراف توضیح دهید"
 
-      این برنامه یک اپلیکیشن چت مجهز به هوش مصنوعی است که بر بستر Azure ساخته شده و معماری مدرن مبتنی بر عامل (agent-based) را نمایش می‌دهد. راه‌حل حول یک Azure Container App می‌چرخد که کد اصلی برنامه را میزبانی می‌کند، ورودی کاربر را پردازش می‌کند و از طریق یک عامل هوش مصنوعی پاسخ‌های هوشمند تولید می‌کند. 
+      این برنامه یک اپلیکیشن چت تقویت‌شده با هوش مصنوعی است که روی Azure ساخته شده و یک معماری مدرن مبتنی بر عامل را نشان می‌دهد. راه‌حل حول یک Azure Container App می‌چرخد که کد اصلی برنامه را میزبانی می‌کند و ورودی کاربر را پردازش کرده و از طریق یک عامل هوش مصنوعی پاسخ‌های هوشمند تولید می‌کند.
       
-      معماری از Microsoft Foundry Project به عنوان پایه قابلیت‌های AI بهره می‌برد و به سرویس‌های Azure AI متصل می‌شود که مدل‌های زبان پایه (مانند gpt-4.1-mini) و عملکردهای عاملی را فراهم می‌کنند. تعاملات کاربر از یک رابط کاربری مبتنی بر React به یک بک‌اند FastAPI جریان می‌یابد که با سرویس عامل AI برای تولید پاسخ‌های متنی مرتبط ارتباط برقرار می‌کند. 
+      معماری از Microsoft Foundry Project به‌عنوان پایه قابلیت‌های هوش مصنوعی بهره می‌برد و به سرویس‌های Azure AI متصل می‌شود که مدل‌های زبانی زیرساختی (مانند gpt-4.1-mini) و قابلیت‌های عامل را فراهم می‌کنند. تعاملات کاربر از طریق یک فرانت‌اند مبتنی بر React به یک بک‌اند FastAPI جریان می‌یابد که با سرویس عامل هوش مصنوعی برای تولید پاسخ‌های متنی و متنی-زمینه‌ای ارتباط برقرار می‌کند.
       
-      سیستم قابلیت‌های بازیابی دانش را از طریق جستجوی فایل یا سرویس Azure AI Search ترکیب می‌کند، که به عامل اجازه می‌دهد به اسناد بارگذاری‌شده دسترسی پیدا کند و از آن‌ها استناد کند. برای تعالی عملیاتی، معماری شامل نظارت جامع از طریق Application Insights و Log Analytics Workspace برای ردیابی، لاگ‌گیری و بهینه‌سازی عملکرد است. 
+      سیستم قابلیت‌های بازیابی دانش را از طریق جستجوی فایل یا سرویس Azure AI Search در اختیار دارد و به عامل اجازه می‌دهد تا به اسناد بارگذاری‌شده دسترسی یابد و از آنها استناد کند. برای برتری عملیاتی، معماری شامل پایش جامع از طریق Application Insights و Log Analytics Workspace برای ردیابی، لاگ‌گذاری و بهینه‌سازی عملکرد است.
       
-      Azure Storage ذخیره‌سازی blob را برای داده‌های برنامه و بارگذاری فایل‌ها فراهم می‌کند، در حالی که Managed Identity دسترسی امن بین منابع Azure را بدون ذخیره کردن اعتبارنامه تضمین می‌کند. کل راه‌حل برای مقیاس‌پذیری و قابل نگهداری بودن طراحی شده است، به‌طوری که برنامه کانتینری‌شده به‌طور خودکار بر اساس تقاضا مقیاس می‌پذیرد در حالی که امنیت، نظارت و قابلیت‌های CI/CD را از طریق اکوسیستم سرویس‌های مدیریت‌شده Azure فراهم می‌کند.
+      Azure Storage فضای ذخیره‌سازی blob برای داده‌های برنامه و بارگذاری فایل‌ها را فراهم می‌کند، در حالی که Managed Identity دسترسی ایمن بین منابع Azure را بدون ذخیره‌سازی اعتبارنامه تضمین می‌کند. کل راه‌حل برای مقیاس‌پذیری و قابلیت نگهداری طراحی شده است، به‌طوری که برنامه کانتینری‌شده به‌صورت خودکار براساس تقاضا مقیاس می‌یابد و در عین حال امنیت، پایش و قابلیت‌های CI/CD را از طریق اکوسیستم سرویس‌های مدیریت‌شده Azure فراهم می‌کند.
 
 ![معماری](../../../../../translated_images/fa/architecture.48d94861e6e6cdc0.webp)
 
 ---
 
-## 3. Repository Structure
+## 3. ساختار مخزن
 
-!!! prompt "ASK: Explain the template folder structure. Start with a visual hierarchical diagram."
+!!! prompt "پرسش: ساختار پوشه قالب را توضیح دهید. با یک نمودار سلسله‌مراتبی بصری شروع کنید."
 
-??? info "ANSWER: Visual Hierarchical Diagram"
+??? info "پاسخ: نمودار سلسله‌مراتبی بصری"
 
       ```bash title="" 
       get-started-with-ai-agents/
-      ├── 📋 Configuration & Setup
-      │   ├── azure.yaml                    # Azure Developer CLI configuration
-      │   ├── docker-compose.yaml           # Local development containers
-      │   ├── pyproject.toml                # Python project configuration
-      │   ├── requirements-dev.txt          # Development dependencies
-      │   └── .devcontainer/                # VS Code dev container setup
+      ├── 📋 پیکربندی و راه‌اندازی
+      │   ├── azure.yaml                    # پیکربندی Azure Developer CLI
+      │   ├── docker-compose.yaml           # کانتینرهای توسعه محلی
+      │   ├── pyproject.toml                # پیکربندی پروژه Python
+      │   ├── requirements-dev.txt          # وابستگی‌های توسعه
+      │   └── .devcontainer/                # تنظیمات dev container وی‌اس‌کد
       │
-      ├── 🏗️ Infrastructure (infra/)
-      │   ├── main.bicep                    # Main infrastructure template
-      │   ├── api.bicep                     # API-specific resources
-      │   ├── main.parameters.json          # Infrastructure parameters
-      │   └── core/                         # Modular infrastructure components
-      │       ├── ai/                       # AI service configurations
-      │       ├── host/                     # Hosting infrastructure
-      │       ├── monitor/                  # Monitoring and logging
-      │       ├── search/                   # Azure AI Search setup
-      │       ├── security/                 # Security and identity
-      │       └── storage/                  # Storage account configs
+      ├── 🏗️ زیرساخت (infra/)
+      │   ├── main.bicep                    # قالب اصلی زیرساخت
+      │   ├── api.bicep                     # منابع مخصوص API
+      │   ├── main.parameters.json          # پارامترهای زیرساخت
+      │   └── core/                         # اجزای مدولار زیرساخت
+      │       ├── ai/                       # تنظیمات سرویس‌های هوش مصنوعی
+      │       ├── host/                     # زیرساخت میزبانی
+      │       ├── monitor/                  # مانیتورینگ و لاگ‌گذاری
+      │       ├── search/                   # تنظیم Azure AI Search
+      │       ├── security/                 # امنیت و هویت
+      │       └── storage/                  # پیکربندی حساب‌های ذخیره‌سازی
       │
-      ├── 💻 Application Source (src/)
-      │   ├── api/                          # Backend API
-      │   │   ├── main.py                   # FastAPI application entry
-      │   │   ├── routes.py                 # API route definitions
-      │   │   ├── search_index_manager.py   # Search functionality
-      │   │   ├── data/                     # API data handling
-      │   │   ├── static/                   # Static web assets
-      │   │   └── templates/                # HTML templates
-      │   ├── frontend/                     # React/TypeScript frontend
-      │   │   ├── package.json              # Node.js dependencies
-      │   │   ├── vite.config.ts            # Vite build configuration
-      │   │   └── src/                      # Frontend source code
-      │   ├── data/                         # Sample data files
-      │   │   └── embeddings.csv            # Pre-computed embeddings
-      │   ├── files/                        # Knowledge base files
-      │   │   ├── customer_info_*.json      # Customer data samples
-      │   │   └── product_info_*.md         # Product documentation
-      │   ├── Dockerfile                    # Container configuration
-      │   └── requirements.txt              # Python dependencies
+      ├── 💻 منبع برنامه (src/)
+      │   ├── api/                          # API بک‌اند
+      │   │   ├── main.py                   # نقطه ورود برنامه FastAPI
+      │   │   ├── routes.py                 # تعریف مسیرهای API
+      │   │   ├── search_index_manager.py   # عملکرد جستجو
+      │   │   ├── data/                     # مدیریت داده‌های API
+      │   │   ├── static/                   # دارایی‌های استاتیک وب
+      │   │   └── templates/                # قالب‌های HTML
+      │   ├── frontend/                     # فرانت‌اند React/TypeScript
+      │   │   ├── package.json              # وابستگی‌های Node.js
+      │   │   ├── vite.config.ts            # پیکربندی ساخت Vite
+      │   │   └── src/                      # کد منبع فرانت‌اند
+      │   ├── data/                         # فایل‌های داده نمونه
+      │   │   └── embeddings.csv            # امبدینگ‌های از پیش محاسبه‌شده
+      │   ├── files/                        # فایل‌های پایگاه دانش
+      │   │   ├── customer_info_*.json      # نمونه‌های داده مشتری
+      │   │   └── product_info_*.md         # مستندات محصول
+      │   ├── Dockerfile                    # پیکربندی کانتینر
+      │   └── requirements.txt              # وابستگی‌های پایتون
       │
-      ├── 🔧 Automation & Scripts (scripts/)
-      │   ├── postdeploy.sh/.ps1           # Post-deployment setup
-      │   ├── setup_credential.sh/.ps1     # Credential configuration
-      │   ├── validate_env_vars.sh/.ps1    # Environment validation
-      │   └── resolve_model_quota.sh/.ps1  # Model quota management
+      ├── 🔧 خودکارسازی و اسکریپت‌ها (scripts/)
+      │   ├── postdeploy.sh/.ps1           # تنظیمات پس از استقرار
+      │   ├── setup_credential.sh/.ps1     # پیکربندی اعتبارنامه
+      │   ├── validate_env_vars.sh/.ps1    # اعتبارسنجی محیط
+      │   └── resolve_model_quota.sh/.ps1  # مدیریت سهمیه مدل
       │
-      ├── 🧪 Testing & Evaluation
-      │   ├── tests/                        # Unit and integration tests
+      ├── 🧪 آزمایش و ارزیابی
+      │   ├── tests/                        # تست‌های واحد و یکپارچه‌سازی
       │   │   └── test_search_index_manager.py
-      │   ├── evals/                        # Agent evaluation framework
-      │   │   ├── evaluate.py               # Evaluation runner
-      │   │   ├── eval-queries.json         # Test queries
+      │   ├── evals/                        # چارچوب ارزیابی عامل
+      │   │   ├── evaluate.py               # اجراکننده ارزیابی
+      │   │   ├── eval-queries.json         # پرس‌و‌جوهای تست
       │   │   └── eval-action-data-path.json
-      │   ├── sandbox/                      # Development playground
-      │   │   ├── 1-quickstart.py           # Getting started examples
-      │   │   └── aad-interactive-chat.py   # Authentication examples
-      │   └── airedteaming/                 # AI safety evaluation
-      │       └── ai_redteaming.py          # Red team testing
+      │   ├── sandbox/                      # فضای بازی توسعه
+      │   │   ├── 1-quickstart.py           # مثال‌های شروع سریع
+      │   │   └── aad-interactive-chat.py   # مثال‌های احراز هویت
+      │   └── airedteaming/                 # ارزیابی ایمنی هوش مصنوعی
+      │       └── ai_redteaming.py          # تست تیم قرمز
       │
-      ├── 📚 Documentation (docs/)
-      │   ├── deployment.md                 # Deployment guide
-      │   ├── local_development.md          # Local setup instructions
-      │   ├── troubleshooting.md            # Common issues & fixes
-      │   ├── azure_account_setup.md        # Azure prerequisites
-      │   └── images/                       # Documentation assets
+      ├── 📚 مستندات (docs/)
+      │   ├── deployment.md                 # راهنمای استقرار
+      │   ├── local_development.md          # راهنمای راه‌اندازی محلی
+      │   ├── troubleshooting.md            # مشکلات رایج و رفع آنها
+      │   ├── azure_account_setup.md        # پیش‌نیازهای Azure
+      │   └── images/                       # دارایی‌های مستندات
       │
-      └── 📄 Project Metadata
-         ├── README.md                     # Project overview
-         ├── CODE_OF_CONDUCT.md           # Community guidelines
-         ├── CONTRIBUTING.md              # Contribution guide
-         ├── LICENSE                      # License terms
-         └── next-steps.md                # Post-deployment guidance
+      └── 📄 متادیتای پروژه
+         ├── README.md                     # مروری بر پروژه
+         ├── CODE_OF_CONDUCT.md           # راهنمایی‌های جامعه
+         ├── CONTRIBUTING.md              # راهنمای مشارکت
+         ├── LICENSE                      # شرایط مجوز
+         └── next-steps.md                # راهنمایی پس از استقرار
       ```
 
-### 3.1. Core App Architecture
+### 3.1. معماری اصلی اپ
 
 This template follows a **full-stack web application** pattern with:
 
-- **Backend**: Python FastAPI with Azure AI integration
-- **Frontend**: TypeScript/React with Vite build system
-- **Infrastructure**: Azure Bicep templates for cloud resources
-- **Containerization**: Docker for consistent deployment
+- **بک‌اند**: Python FastAPI با ادغام Azure AI
+- **فرانت‌اند**: TypeScript/React با سیستم ساخت Vite
+- **زیرساخت**: قالب‌های Azure Bicep برای منابع ابری
+- **کانتینری شدن**: Docker برای استقرار یکنواخت
 
-### 3.2 Infra As Code (bicep)
+### 3.2 زیرساخت به‌عنوان‌کد (bicep)
 
 The infrastructure layer uses **Azure Bicep** templates organized modularly:
 
-   - **`main.bicep`**: Orchestrates all Azure resources
-   - **`core/` modules**: Reusable components for different services
-      - AI services (Microsoft Foundry Models, AI Search)
-      - Container hosting (Azure Container Apps)
-      - Monitoring (Application Insights, Log Analytics)
-      - Security (Key Vault, Managed Identity)
+   - **`main.bicep`**: هماهنگ‌کننده تمام منابع Azure
+   - **ماژول‌های `core/`**: اجزای قابل استفاده مجدد برای سرویس‌های مختلف
+      - سرویس‌های AI (Microsoft Foundry Models, AI Search)
+      - میزبانی کانتینر (Azure Container Apps)
+      - مانیتورینگ (Application Insights, Log Analytics)
+      - امنیت (Key Vault, Managed Identity)
 
-### 3.3 Application Source (`src/`)
+### 3.3 کد منبع برنامه (`src/`)
 
-**Backend API (`src/api/`)**:
+**بک‌اند API (`src/api/`)**:
 
-- FastAPI-based REST API
-- Foundry Agents integration
-- Search index management for knowledge retrieval
-- File upload and processing capabilities
+- REST API مبتنی بر FastAPI
+- ادغام با Foundry Agents
+- مدیریت شاخص جستجو برای بازیابی دانش
+- قابلیت‌های بارگذاری و پردازش فایل
 
-**Frontend (`src/frontend/`)**:
+**فرانت‌اند (`src/frontend/`)**:
 
-- Modern React/TypeScript SPA
-- Vite for fast development and optimized builds
-- Chat interface for agent interactions
+- SPA مدرن React/TypeScript
+- Vite برای توسعه سریع و ساخت‌های بهینه‌شده
+- رابط چت برای تعاملات عامل
 
-**Knowledge Base (`src/files/`)**:
+**پایگاه دانش (`src/files/`)**:
 
-- Sample customer and product data
-- Demonstrates file-based knowledge retrieval
-- JSON and Markdown format examples
+- نمونه‌های داده مشتری و محصول
+- نشان‌دهنده بازیابی دانش مبتنی بر فایل
+- نمونه‌هایی در فرمت JSON و Markdown
 
 
-### 3.4 DevOps & Automation
+### 3.4 DevOps و خودکارسازی
 
-**Scripts (`scripts/`)**:
+**اسکریپت‌ها (`scripts/`)**:
 
-- Cross-platform PowerShell and Bash scripts
-- Environment validation and setup
-- Post-deployment configuration
-- Model quota management
+- اسکریپت‌های کراس‌پلتفرم PowerShell و Bash
+- اعتبارسنجی و راه‌اندازی محیط
+- پیکربندی پس از استقرار
+- مدیریت سهمیه مدل
 
-**Azure Developer CLI Integration**:
+**یکپارچه‌سازی Azure Developer CLI**:
 
-- `azure.yaml` configuration for `azd` workflows
-- Automated provisioning and deployment
-- Environment variable management
+- پیکربندی `azure.yaml` برای جریان‌های کاری `azd`
+- تأمین و استقرار خودکار
+- مدیریت متغیرهای محیطی
 
-### 3.5 Testing & Quality Assurance
+### 3.5 آزمایش و تضمین کیفیت
 
-**Evaluation Framework (`evals/`)**:
+**چارچوب ارزیابی (`evals/`)**:
 
-- Agent performance evaluation
-- Query-response quality testing
-- Automated assessment pipeline
+- ارزیابی عملکرد عامل
+- آزمایش کیفیت پرسش-پاسخ
+- خط لوله ارزیابی خودکار
 
-**AI Safety (`airedteaming/`)**:
+**ایمنی هوش مصنوعی (`airedteaming/`)**:
 
-- Red team testing for AI safety
-- Security vulnerability scanning
-- Responsible AI practices
+- تست تیم قرمز برای ایمنی هوش مصنوعی
+- اسکن آسیب‌پذیری‌های امنیتی
+- شیوه‌های مسئولانه در AI
 
 ---
 
-## 4. Congratulations 🏆
+## 4. تبریک 🏆
 
-You successfully used GitHub Copilot Chat with MCP servers, to explore the repository.
+شما با موفقیت از GitHub Copilot Chat همراه با سرورهای MCP استفاده کردید تا مخزن را بررسی کنید.
 
-- [X] Activated GitHub Copilot for Azure
-- [X] Understood the Application Architecture
-- [X] Explored the AZD template structure
+- [X] GitHub Copilot را برای Azure فعال کردید
+- [X] معماری برنامه را درک کردید
+- [X] ساختار قالب AZD را بررسی کردید
 
-This gives you a sense of the _infrastructure as code_ assets for this template. Next, we'll look at the configuration file for AZD.
+این به شما دیدی از دارایی‌های _زیرساخت به‌عنوان‌کد_ برای این قالب می‌دهد. در ادامه، به فایل پیکربندی AZD خواهیم پرداخت.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-این سند با استفاده از سرویس ترجمه هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما برای دقت تلاش می‌کنیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان مادری‌اش باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمه حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرستی که ناشی از استفاده از این ترجمه باشد، مسئولیتی نداریم.
+این سند با استفاده از سرویس ترجمهٔ مبتنی بر هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان بومی‌اش باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمهٔ حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرست ناشی از استفاده از این ترجمه مسئولیتی نداریم.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

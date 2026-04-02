@@ -1,67 +1,67 @@
-# AZD ڈپلائمنٹس کے لیے پری-فلائٹ چیکس
+# AZD کی تعیناتیوں کے لیے پری-فلائٹ چیکس
 
-**باب نیویگیشن:**
-- **📚 کورس ہوم**: [AZD For Beginners](../../README.md)
-- **📖 موجودہ باب**: باب 6 - پری-ڈپلائمنٹ توثیق اور منصوبہ بندی
+**باب کی نیوی گیشن:**
+- **📚 کورس ہوم**: [ابتدائیوں کے لیے AZD](../../README.md)
+- **📖 موجودہ باب**: باب 6 - پیشگی تعیناتی کی تصدیق اور منصوبہ بندی
 - **⬅️ پچھلا**: [SKU انتخاب](sku-selection.md)
-- **➡️ اگلا باب**: [باب 7: ٹربل شوٹنگ](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 متعلقہ**: [باب 4: ڈپلائمنٹ گائیڈ](../chapter-04-infrastructure/deployment-guide.md)
+- **➡️ اگلا باب**: [باب 7: مسائل کا حل](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 متعلقہ**: [باب 4: تعیناتی کا رہنما](../chapter-04-infrastructure/deployment-guide.md)
 
 ## تعارف
 
-یہ جامع رہنما پری-ڈپلائمنٹ توثیق اسکرپٹس اور طریقہ کار فراہم کرتا ہے تاکہ Azure Developer CLI ڈپلائمنٹس شروع ہونے سے پہلے کامیابی کو یقینی بنایا جا سکے۔ تصدیق، وسائل کی دستیابی، کوٹا، سیکورٹی کمپلائنس، اور کارکردگی کی ضروریات کے لیے خودکار چیکس نافذ کرنا سیکھیں تاکہ ڈپلائمنٹ کی ناکامیوں کو روکا جا سکے اور کامیابی کی شرح کو بہتر بنایا جا سکے۔
+یہ جامع رہنما تعیناتی شروع ہونے سے پہلے Azure Developer CLI تعیناتیوں کی کامیابی کو یقینی بنانے کے لیے پیشگی تصدیقی اسکرپٹس اور طریقہ کار فراہم کرتی ہے۔ خودکار چیکوں کو نافذ کرنا سیکھیں جیسے کہ توثیق، وسائل کی دستیابی، کوٹہ، سیکیورٹی کی تعمیل، اور کارکردگی کی ضروریات تاکہ تعیناتیاں ناکام نہ ہوں اور تعیناتی کی کامیابی کی شرح بہتر ہو۔
 
-## سیکھنے کے اہداف
+## تعلیمی اہداف
 
-اس رہنما کو مکمل کرنے کے بعد آپ:
-- خودکار پری-ڈپلائمنٹ توثیق تکنیکوں اور اسکرپٹس میں مہارت حاصل کریں گے
-- تصدیق، اجازتوں، اور کوٹاز کے لیے جامع چیکنگ حکمتِ عملیاں سمجھیں گے
-- وسائل کی دستیابی اور صلاحیت کی توثیق کے طریقہ کار نافذ کریں گے
-- تنظیمی پالیسیوں کے لیے سیکورٹی اور کمپلائنس چیکس ترتیب دیں گے
-- لاگت کے تخمینے اور بجٹ توثیق کے ورک فلو ڈیزائن کریں گے
-- CI/CD پائپ لائنز کے لیے کسٹم پری-فلائٹ چیک خودکار کریں گے
+اس رہنما کو مکمل کر کے آپ:
+- خودکار پیشگی تعیناتی تصدیقی تکنیک اور اسکرپٹس پر مہارت حاصل کریں گے
+- توثیق، اجازتوں، اور کوٹہ کے لیے جامع چیکنگ حکمت عملی سمجھیں گے
+- وسائل کی دستیابی اور صلاحیت کی تصدیقی طریقہ کار نافذ کریں گے
+- تنظیمی پالیسیوں کے مطابق سیکیورٹی اور تعمیل چیک ترتیب دیں گے
+- لاگت کے تخمینے اور بجٹ کی جانچ کے عمل ڈیزائن کریں گے
+- CI/CD پائپ لائنز کے لیے اپنی مرضی کے پری-فلائٹ چیک خودکار بنائیں گے
 
-## سیکھنے کے نتائج
+## تعلیمی نتیجے
 
-مکمل کرنے پر، آپ قادِر ہوں گے:
-- جامع پری-فلائٹ توثیق اسکرپٹس بنائیں اور چلائیں
-- مختلف ڈپلائمنٹ منظرناموں کے لیے خودکار چیکنگ ورک فلو ڈیزائن کریں
-- ماحول مخصوص توثیق طریقہ کار اور پالیسیاں نافذ کریں
-- ڈپلائمنٹ ریڈینس کے لیے پیشگی مانیٹرنگ اور الرٹنگ ترتیب دیں
-- پری-ڈپلائمنٹ مسائل کو حل کریں اور درستگی اقدامات نافذ کریں
-- پری-فلائٹ چیکس کو DevOps پائپ لائنز اور خودکاری ورک فلو میں ضم کریں
+مکمل کرنے کے بعد، آپ قابل ہوں گے:
+- جامع پری-فلائٹ تصدیقی اسکرپٹس بنائیں اور چلائیں
+- مختلف تعیناتی کے منظرناموں کے لیے خودکار چیکنگ ورک فلو ڈیزائن کریں
+- ماحول کے مطابق تصدیقی طریقہ کار اور پالیسیاں نافذ کریں
+- تعیناتی کی تیاری کے لیے پروایکٹیو مانیٹرنگ اور الارٹنگ کنفیگر کریں
+- پیشگی تعیناتی کے مسائل کو حل کریں اور اصلاحی اقدامات کریں
+- پری-فلائٹ چیکس کو ڈیئووپس پائپ لائنز اور خودکار ورک فلو میں ضم کریں
 
-## مواد کی فہرست
+## فہرست مواد
 
-- [جائزہ](../../../../docs/chapter-06-pre-deployment)
-- [خودکار پری-فلائٹ اسکرپٹ](../../../../docs/chapter-06-pre-deployment)
-- [دستی توثیق چیک لسٹ](../../../../docs/chapter-06-pre-deployment)
-- [ماحول کی توثیق](../../../../docs/chapter-06-pre-deployment)
-- [وسائل کی توثیق](../../../../docs/chapter-06-pre-deployment)
-- [سیکورٹی اور کمپلائنس چیکس](../../../../docs/chapter-06-pre-deployment)
-- [کارکردگی اور صلاحیت کی منصوبہ بندی](../../../../docs/chapter-06-pre-deployment)
-- [عام مسائل کا حل](../../../../docs/chapter-06-pre-deployment)
+- [جائزہ](#جائزہ)
+- [خودکار پری-فلائٹ اسکرپٹ](#خودکار-پری-فلائٹ-اسکرپٹ)
+- [دستی تصدیقی چیک لسٹ](#codeblock1)
+- [ماحولیاتی تصدیق](#✅-بیک-اپ-اور-بحالی)
+- [وسائل کی تصدیق](#پروڈکشن-ماحول-کی-تصدیق)
+- [سیکیورٹی اور تعمیل کے چیک](#security--compliance-checks)
+- [کارکردگی اور صلاحیت کی منصوبہ بندی](#performance--capacity-planning)
+- [عام مسائل کا حل](#troubleshooting-common-issues)
 
 ---
 
 ## جائزہ
 
-پری-فلائٹ چیکس وہ ضروری توثیقات ہیں جو ڈپلائمنٹ کرنے سے پہلے انجام دی جاتی ہیں تاکہ یقین ہو سکے:
+پری-فلائٹ چیکس وہ ضروری تصدیقیں ہیں جو تعیناتی سے پہلے کی جاتی ہیں تاکہ یقینی بنایا جا سکے:
 
-- ہدف علاقوں میں **وسائل کی دستیابی** اور کوٹس
-- **تصدیق اور اجازتیں** درست طریقے سے ترتیب دی گئی ہیں
-- **ٹیمپلیٹ کی درستگی** اور پیرامیٹرز کی صداقت
-- **نیٹ ورک کنیکٹوٹی** اور انحصار
-- تنظیمی پالیسیوں کے مطابق **سیکورٹی کمپلائنس**
-- بجٹ کی حدوں کے اندر **لاگت کا تخمینہ**
+- **ہدف علاقہ جات میں وسائل کی دستیابی** اور کوٹہ
+- **توثیق اور اجازتیں** درست طریقے سے ترتیب دی گئی ہوں
+- **سانچہ کی درستگی** اور پیرا میٹرز کا صحیح ہونا
+- **نیٹ ورک کنیکٹیویٹی** اور انحصار
+- **تنظیمی پالیسیوں کے مطابق سیکیورٹی کی تعمیل**
+- **لاگت کا تخمینہ** بجٹ کی حدود کے اندر
 
-### پری-فلائٹ چیکس کب چلانے چاہئیں
+### پری-فلائٹ چیکس کب چلائیں
 
-- کسی نئے ماحول میں **پہلی ڈپلائمنٹ سے پہلے**
-- **اہم ٹیمپلیٹ تبدیلیوں** کے بعد
-- **پروڈکشن ڈپلائمنٹس** سے پہلے
-- جب **Azure ریجنز** تبدیل کیے جائیں
-- **CI/CD پائپ لائنز** کے حصے کے طور پر
+- **نئے ماحول میں پہلی بار تعیناتی سے پہلے**
+- **اہم سانچہ تبدیلیوں کے بعد**
+- **پروڈکشن کی تعیناتیاں شروع کرنے سے پہلے**
+- **Azure کے خطے بدلتے وقت**
+- **CI/CD پائپ لائنز کا حصہ کے طور پر**
 
 ---
 
@@ -177,7 +177,7 @@ function Test-Authentication {
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # سبسکرپشن تک رسائی کی توثیق کریں
+        # سبسکرپشن تک رسائی کی تصدیق کریں
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -194,7 +194,7 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # موجودہ صارف کے رول کی تفویضات حاصل کریں
+        # موجودہ صارف کے کردار کی تفویضات حاصل کریں
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
@@ -210,14 +210,14 @@ function Test-Permissions {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # ریسورس گروپ کی تخلیق کا ٹیسٹ کریں (اگر مخصوص ہو)
+        # ریسورس گروپ بنانے کا تجربہ کریں (اگر مخصوص ہو)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # ریسورس گروپ بنانے کی صلاحیت کا ٹیسٹ کریں
+                # ریسورس گروپ بنانے کی صلاحیت کا تجربہ کریں
                 try {
                     az group create --name "preflight-test-rg" --location $Location --output none
                     az group delete --name "preflight-test-rg" --yes --output none
@@ -242,10 +242,10 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # کمپیوٹ کوٹے چیک کریں
+        # کمپیوٹ کوٹہ چیک کریں
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # مخصوص کوٹے چیک کریں
+        # مخصوص کوٹہ چیک کریں
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
         if ($coreQuota) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
@@ -257,7 +257,7 @@ function Test-QuotasAndLimits {
             }
         }
         
-        # App Service کی حدود چیک کریں
+        # ایپ سروس کی حدود چیک کریں
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
             if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
@@ -285,14 +285,14 @@ function Test-QuotasAndLimits {
     }
     catch {
         Write-Status "Quota check failed" "Warning" $_.Exception.Message
-        return $true # بلاک نہ کرنے والا
+        return $true # غیر بلاکنگ
     }
 }
 
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # Azure اینڈ پوائنٹس کا ٹیسٹ کریں
+    # Azure کے اینڈ پوائنٹس کا تجربہ کریں
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -310,7 +310,7 @@ function Test-NetworkConnectivity {
         }
     }
     
-    # DNS ریزولوشن ٹیسٹ کریں
+    # DNS ریزولوشن کا تجربہ کریں
     try {
         $dnsResult = Resolve-DnsName "management.azure.com" -ErrorAction Stop
         Write-Status "DNS resolution" "Success" "Resolved successfully"
@@ -335,7 +335,7 @@ function Test-TemplateValidation {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # سروسز کی توثیق کریں
+            # سروسز کی تصدیق کریں
             if ($azureYaml.services) {
                 $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
@@ -354,13 +354,13 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # انفراسٹرکچر فائلز کی جانچ کریں
+    # انفراسٹرکچر فائلز کے لیے چیک کریں
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # اگر موجود ہو تو main.bicep کی توثیق کریں
+            # اگر main.bicep موجود ہو تو اس کی تصدیق کریں
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 نیا: انفراسٹرکچر پریویو کا ٹیسٹ کریں (محفوظ ڈرائی رن)
+    # 🧪 نیا: انفراسٹرکچر پریویو کا تجربہ کریں (محفوظ خشک رن)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -415,7 +415,7 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # علاقے میں سروس کی دستیابی چیک کریں
+        # خطے میں سروس کی دستیابی چیک کریں
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
@@ -446,7 +446,7 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # بنیادی لاگت کا تخمینہ (صحیح اندازے کے لیے Azure Pricing API درکار ہوگا)
+    # بنیادی لاگت کا تخمینہ (صحیح اندازے کے لیے Azure پریسنگ API کی ضرورت ہوگی)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
@@ -470,9 +470,9 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # عام حفاظتی طریقوں کی جانچ کریں
+    # عام حفاظتی طریقوں کے لیے چیک کریں
     try {
-        # چیک کریں کہ Key Vault ترتیب دیا گیا ہے یا نہیں
+        # چیک کریں کہ Key Vault کنفیگر ہے یا نہیں
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
             Write-Status "Key Vault usage" "Success" "Key Vault detected in templates"
         }
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # Managed Identity کے استعمال کے لیے چیک کریں
+        # منیج شدہ شناخت کے استعمال کے لیے چیک کریں
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +488,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # HTTPS کے نفاذ کے لیے چیک کریں
+        # HTTPS نفاذ کے لیے چیک کریں
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -504,7 +504,7 @@ function Test-SecurityCompliance {
     }
 }
 
-# مرکزی عملدرآمد
+# مرکزی نفاذ
 function Invoke-PreflightCheck {
     Write-Host "${Green}AZD Pre-flight Check${Reset}" -ForegroundColor Green
     Write-Host "Environment: $EnvironmentName"
@@ -516,7 +516,7 @@ function Invoke-PreflightCheck {
     $allPassed = $true
     $results = @{}
     
-    # تمام چیکس چلائیں
+    # تمام چیک چلائیں
     $results["Prerequisites"] = Test-Prerequisites
     $results["Authentication"] = Test-Authentication
     $results["Permissions"] = Test-Permissions
@@ -565,7 +565,7 @@ Invoke-PreflightCheck
 
 ```bash
 #!/bin/bash
-# Unix/Linux سسٹمز کے لیے پری فلائٹ چیکس کا Bash ورژن
+# Unix/Linux سسٹمز کے لیے پری فلائٹ چیکس کا باش ورژن
 
 set -euo pipefail
 
@@ -637,7 +637,7 @@ check_prerequisites() {
 check_authentication() {
     echo -e "\n${BLUE}=== Authentication Check ===${NC}"
     
-    # AZD کی تصدیق کی جانچ کریں
+    # AZD کی توثیق چیک کریں
     if azd auth login --check-status >/dev/null 2>&1; then
         local principal_name=$(azd auth login --check-status --output json 2>/dev/null | jq -r '.principalName // "Unknown"')
         print_status "AZD authentication" "success" "User: $principal_name"
@@ -646,7 +646,7 @@ check_authentication() {
         return 1
     fi
     
-    # Azure CLI کی تصدیق کی جانچ کریں
+    # Azure CLI کی توثیق چیک کریں
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -661,11 +661,11 @@ check_authentication() {
 check_template_validation() {
     echo -e "\n${BLUE}=== Template Validation ===${NC}"
     
-    # azure.yaml کو چیک کریں
+    # azure.yaml چیک کریں
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
-        # بنیادی YAML کی توثیق
+        # بنیادی YAML کی تصدیق
         if python3 -c "import yaml; yaml.safe_load(open('azure.yaml'))" 2>/dev/null; then
             print_status "azure.yaml parsing" "success"
         else
@@ -677,13 +677,13 @@ check_template_validation() {
         return 1
     fi
     
-    # انفراسٹرکچر فائلیں چیک کریں
+    # انفراسٹرکچر فائلز چیک کریں
     if [[ -d "infra" ]]; then
         local bicep_count=$(find infra -name "*.bicep" | wc -l)
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # اگر موجود ہو تو main.bicep کی توثیق کریں
+            # اگر موجود ہو تو main.bicep کی تصدیق کریں
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +706,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # یہ چیک کریں کہ مقام درست ہے
+    # چیک کریں کہ مقام درست ہے
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -729,7 +729,7 @@ check_regional_availability() {
 }
 
 main() {
-    # کمانڈ لائن دلائل کو پارس کریں
+    # کمانڈ لائن دلائل پارس کریں
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -755,7 +755,7 @@ main() {
         esac
     done
     
-    # ضروری پیرامیٹرز کی توثیق کریں
+    # مطلوبہ پیرا میٹرز کی تصدیق کریں
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -790,100 +790,100 @@ main() {
     fi
 }
 
-# مین فنکشن چلائیں
+# مرکزی فنکشن چلائیں
 main "$@"
 ```
 
 ---
 
-## دستی توثیق چیک لسٹ
+## دستی تصدیقی چیک لسٹ
 
-### پری-ڈپلائمنٹ چیک لسٹ
+### پیشگی تعیناتی چیک لسٹ
 
-اس چیک لسٹ کو پرنٹ کریں اور ڈپلائمنٹ سے پہلے ہر آئٹم کی تصدیق کریں:
+اس چیک لسٹ کو پرنٹ کریں اور ہر آئٹم تعیناتی سے پہلے چیک کریں:
 
-#### ✅ ماحول سیٹ اپ
-- [ ] AZD CLI انسٹال ہے اور تازہ ترین ورژن پر اپڈیٹ ہے
-- [ ] Azure CLI انسٹال ہے اور مستند (authenticated) ہے
-- [ ] درست Azure سبسکرپشن منتخب ہے
-- [ ] ماحول کا نام منفرد ہے اور نام رکھنے کے قواعد کی پیروی کرتا ہے
-- [ ] ہدف ریسورس گروپ شناخت کیا گیا ہے یا بنایا جا سکتا ہے
+#### ✅ ماحول کی ترتیب
+- [ ] AZD CLI انسٹال اور تازہ ترین ورژن پر اپ ڈیٹ کیا گیا ہو
+- [ ] Azure CLI انسٹال اور تصدیق شدہ ہو
+- [ ] درست Azure سبسکرپشن منتخب کیا گیا ہو
+- [ ] ماحول کا نام منفرد ہو اور نام کے قواعد کی پیروی کرے
+- [ ] ہدف ریسورس گروپ شناخت کیا گیا یا بنایا جا سکتا ہو
 
-#### ✅ تصدیق اور اجازتیں
-- [ ] `azd auth login` کے ذریعے کامیابی سے مستند کیا گیا ہے
-- [ ] صارف کے پاس ہدف سبسکرپشن/ریسورس گروپ پر Contributor رول ہے
-- [ ] CI/CD کے لیے سروس پرنسپل تشکیل دیا گیا ہے (اگر قابل اطلاق ہو)
-- [ ] کوئی ختم شدہ سرٹیفکیٹ یا اسناد موجود نہیں ہیں
+#### ✅ توثیق اور اجازتیں
+- [ ] `azd auth login` کے ذریعے کامیابی سے توثیق ہو چکی ہو
+- [ ] صارف کے پاس ہدف سبسکرپشن/ریسورس گروپ پر کنٹری بیوٹر کا کردار ہو
+- [ ] CI/CD کے لیے سروس پرنسپل ترتیب دیا گیا ہو (اگر قابل اطلاق ہو)
+- [ ] کوئی میعاد ختم شدہ سرٹیفکیٹ یا اسناد نہ ہوں
 
-#### ✅ ٹیمپلیٹ کی توثیق
-- [ ] `azure.yaml` موجود ہے اور درست YAML ہے
-- [ ] azure.yaml میں تعریف شدہ تمام سروسز کے متناسب سورس کوڈ موجود ہیں
-- [ ] `infra/` ڈائریکٹری میں Bicep ٹیمپلیٹس موجود ہیں
-- [ ] `main.bicep` بغیر غلطیوں کے کمپائل ہوتا ہے (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Infrastructure preview کامیابی سے چلتا ہے (`azd provision --preview`)
-- [ ] تمام مطلوبہ پیرامیٹرز کے ڈیفالٹ ویلیوز ہیں یا فراہم کیے جائیں گے
-- [ ] ٹیمپلیٹس میں ہارڈ کوڈڈ سیکریٹس موجود نہیں ہیں
+#### ✅ سانچہ کی تصدیق
+- [ ] `azure.yaml` فائل موجود اور درست YAML ہو
+- [ ] azure.yaml میں تمام خدمات کے لیے متعلقہ سورس کوڈ موجود ہو
+- [ ] `infra/` ڈائریکٹری میں Bicep سانچے موجود ہوں
+- [ ] `main.bicep` بغیر کسی غلطی کے کمپائل ہوتا ہو (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 انفراسٹرکچر پریویو کامیابی سے چلتا ہو (`azd provision --preview`)
+- [ ] تمام ضروری پیرا میٹرز کے ڈیفالٹ ویلیوز ہوں یا فراہم کیے جائیں گے
+- [ ] سانچوں میں کوئی ہارڈ کوڈڈ سیکرٹس نہ ہوں
 
 #### ✅ وسائل کی منصوبہ بندی
-- [ ] ہدف Azure ریجن منتخب اور توثیق شدہ ہے
-- [ ] ہدف ریجن میں مطلوبہ Azure سروسز دستیاب ہیں
-- [ ] منصوبہ بند وسائل کے لیے مناسب کوٹس دستیاب ہیں
-- [ ] ریسورس ناموں کے تنازعے چیک کیے گئے ہیں
-- [ ] وسائل کے درمیان انحصارات کو سمجھ لیا گیا ہے
+- [ ] ہدف Azure علاقہ منتخب اور تصدیق شدہ ہو
+- [ ] ہدف علاقے میں مطلوبہ Azure خدمات دستیاب ہوں
+- [ ] منصوبہ بند وسائل کے لیے کافی کوٹے دستیاب ہوں
+- [ ] وسائل کے ناموں کے تصادم کی جانچ کی گئی ہو
+- [ ] وسائل کے مابین انحصار کو سمجھ لیا گیا ہو
 
-#### ✅ نیٹ ورک اور سیکورٹی
-- [ ] Azure اینڈ پوائنٹس تک نیٹ ورک کنیکٹوٹی کی تصدیق کی گئی ہے
-- [ ] فائر وال/پراکسی سیٹنگز ضرورت کے مطابق ترتیب دی گئی ہیں
-- [ ] سیکریٹس مینجمنٹ کے لیے Key Vault ترتیب دیا گیا ہے
-- [ ] جہاں ممکن ہو Managed identities استعمال کیے گئے ہیں
-- [ ] ویب ایپلیکیشنز کے لیے HTTPS نفاذ فعال ہے
+#### ✅ نیٹ ورک اور سیکیورٹی
+- [ ] Azure اینڈپوائنٹس کے ساتھ نیٹ ورک کنیکٹیویٹی کی تصدیق کی گئی ہو
+- [ ] فائر وال/پراکسی کی ترتیبات کنفیگر کی گئی ہوں اگر ضرورت ہو
+- [ ] سیکرٹس مینجمنٹ کے لیے کی والٹ ترتیب دی گئی ہو
+- [ ] جہاں ممکن ہو مینیجد شناختیں استعمال کی گئی ہوں
+- [ ] ویب ایپلیکیشنز کے لیے HTTPS کا نفاذ فعال ہو
 
 #### ✅ لاگت کا انتظام
-- [ ] Azure Pricing Calculator استعمال کر کے لاگت کے تخمینے کیے گئے ہیں
-- [ ] ضرورت ہو تو بجٹ الارٹس ترتیب دیے گئے ہیں
-- [ ] ماحول کی قسم کے لیے مناسب SKUs منتخب کیے گئے ہیں
-- [ ] پروڈکشن ورک لوڈز کے لیے Reserved capacity پر غور کیا گیا ہے
+- [ ] Azure پرائسنگ کیلکولیٹر سے لاگت کا تخمینہ لگایا گیا ہو
+- [ ] بجٹ کی اطلاعات کنفیگر کی گئی ہوں اگر ضرورت ہو
+- [ ] ماحول کی قسم کے لیے مناسب SKUs منتخب کیے گئے ہوں
+- [ ] پروڈکشن ورکلوڈز کے لیے ریزروڈ صلاحیت کا خیال رکھا گیا ہو
 
 #### ✅ مانیٹرنگ اور مشاہدہ
-- [ ] ٹیمپلیٹس میں Application Insights ترتیب دیا گیا ہے
-- [ ] Log Analytics ورک اسپیس منصوبہ بندی کی گئی ہے
-- [ ] اہم میٹرکس کے لیے الرٹ رولز متعین کیے گئے ہیں
-- [ ] ایپلیکیشنز میں ہیل्थ چیک اینڈ پوائنٹس نافذ کیے گئے ہیں
+- [ ] ایپلیکیشن انسائٹس سانچوں میں شامل ہو
+- [ ] لاگ اینالٹکس ورک اسپیس منصوبہ بند ہو
+- [ ] اہم میٹرکس کے لیے الارم رولز متعین کیے گئے ہوں
+- [ ] ایپلیکیشنز میں صحت کی جانچ کے اینڈپوائنٹس نافذ کیے گئے ہوں
 
-#### ✅ بیک اپ اور بازیابی
-- [ ] ڈیٹا وسائل کے لیے بیک اپ حکمتِ عملی متعین ہے
-- [ ] Recovery time objectives (RTO) دستاویزی ہیں
-- [ ] Recovery point objectives (RPO) دستاویزی ہیں
-- [ ] پروڈکشن کے لیے ڈیزاسٹر ریکوری پلان موجود ہے
+#### ✅ بیک اپ اور بحالی
+- [ ] ڈیٹا وسائل کے لیے بیک اپ حکمت عملی متعین ہو
+- [ ] ریکوری ٹائم آبجیکٹیوز (RTO) دستاویزی ہوں
+- [ ] ریکوری پوائنٹ آبجیکٹیوز (RPO) دستاویزی ہوں
+- [ ] پروڈکشن کے لیے ڈیزاسٹر ریکوری پلان موجود ہو
 
 ---
 
-## ماحول کی توثیق
+## ماحولیاتی تصدیق
 
-### ڈویلپمنٹ ماحول کی توثیق
+### ڈویلپمنٹ ماحول کی تصدیق
 
 ```bash
 #!/bin/bash
-# ڈیولپمنٹ ماحول کے مخصوص تصدیقات
+# ترقیاتی ماحول کے مخصوص تصدیقات
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # ڈیولپمنٹ کے موافق کنفیگریشنز کی جانچ کریں
+    # ترقی کے موافق ترتیب کی جانچ کریں
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # خودکار بندش کی ترتیبات کی جانچ کریں
+    # خودکار بندش کی ترتیب کی جانچ کریں
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # ڈیولپمنٹ کے ڈیٹا بیس کنفیگریشنز کی توثیق کریں
+    # ترقیاتی ڈیٹا بیس کی ترتیبات کی توثیق کریں
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -892,37 +892,37 @@ validate_dev_environment() {
 }
 ```
 
-### پروڈکشن ماحول کی توثیق
+### پروڈکشن ماحول کی تصدیق
 
 ```bash
 #!/bin/bash
-# پروڈکشن ماحول کے مخصوص تصدیقی چیک
+# پیداواری ماحول کی مخصوص تصدیقات
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # ہائی دستیابی کنفیگریشنز کی جانچ کریں
+    # اعلی دستیابی کی ترتیب کی جانچ کریں
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # بیک اپ کنفیگریشنز کی جانچ کریں
+    # بیک اپ کی ترتیب کی جانچ کریں
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # مانیٹرنگ سیٹ اپ کی تصدیق کریں
+    # مانیٹرنگ سیٹ اپ کی توثیق کریں
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # سیکیورٹی کنفیگریشنز کی جانچ کریں
+    # سیکورٹی کی ترتیب کی جانچ کریں
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -933,9 +933,9 @@ validate_prod_environment() {
 
 ---
 
-## وسائل کی توثیق
+## وسائل کی تصدیق
 
-### کوٹا توثیق اسکرپٹ
+### کوٹا تصدیقی اسکرپٹ
 
 ```python
 #!/usr/bin/env python3
@@ -990,7 +990,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # سبسکرپشن میں اسٹوریج اکاؤنٹس حاصل کریں
+    # سبسکرپشن میں سٹوریج اکاؤنٹس حاصل کریں
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -998,7 +998,7 @@ def check_storage_limits(location: str) -> bool:
         return False
     
     account_count = len(accounts)
-    max_accounts = 250  # Azure کی ڈیفالٹ حد
+    max_accounts = 250  # ڈیفالٹ ایزور حد
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1011,13 +1011,13 @@ def check_network_limits(location: str) -> bool:
     """Check network-related limits"""
     print(f"\n=== Network Limits Check ({location}) ===")
     
-    # ورچوئل نیٹ ورکس کو چیک کریں
+    # ورچوئل نیٹ ورکس چیک کریں
     vnets = run_command(['az', 'network', 'vnet', 'list'])
     if vnets is not None:
         vnet_count = len(vnets)
         print(f"✅ Virtual Networks: {vnet_count}/1000")
     
-    # عوامی آئی پی پتوں کو چیک کریں
+    # پبلک آئی پی ایڈریسز چیک کریں
     public_ips = run_command(['az', 'network', 'public-ip', 'list'])
     if public_ips is not None:
         ip_count = len(public_ips)
@@ -1058,20 +1058,20 @@ if __name__ == "__main__":
 
 ---
 
-## سیکورٹی اور کمپلائنس چیکس
+## سیکیورٹی اور تعمیل کے چیک
 
-### سیکورٹی توثیق اسکرپٹ
+### سیکیورٹی تصدیقی اسکرپٹ
 
 ```bash
 #!/bin/bash
-# AZD کی تعیناتیوں کے لیے سیکیورٹی اور تعمیل کی توثیق
+# AZD تعیناتی کے لیے سیکورٹی اور تعمیل کی توثیق
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
     
     local issues_found=0
     
-    # Key Vault کے استعمال کی جانچ
+    # کلید والیٹ استعمال کی جانچ کریں
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1079,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Managed Identity کے استعمال کی جانچ
+    # مینیجڈ شناخت کے استعمال کی جانچ کریں
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # HTTPS نفاذ کی جانچ
+    # HTTPS نفاذ کی جانچ کریں
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1095,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # کم از کم TLS ورژن کی جانچ
+    # کم سے کم TLS ورژن کی جانچ کریں
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1103,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # عوامی رسائی کی پابندیوں کی جانچ
+    # عوامی رسائی کی پابندیوں کی جانچ کریں
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1111,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # نیٹ ورک سیکیورٹی گروپس کی جانچ
+    # نیٹ ورک سیکیورٹی گروپس کی جانچ کریں
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1124,21 +1124,21 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # ڈیٹا کی انکرپشن کی جانچ
+    # ڈیٹا انکرپشن کی جانچ کریں
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # آڈٹ لاگنگ کی جانچ
+    # آڈٹ لاگنگ کی جانچ کریں
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # بیک اپ اور محفوظ رکھنے کی پالیسیوں کی جانچ
+    # بیک اپ اور برقرار رکھنے کی پالیسیاں چیک کریں
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1146,7 +1146,7 @@ check_compliance_requirements() {
     fi
 }
 
-# مرکزی عملدرآمد
+# مرکزی نفاذ
 main() {
     echo "🔒 Security and Compliance Validation"
     echo "📁 Checking infra/ directory for security best practices"
@@ -1290,58 +1290,58 @@ steps:
 
 ---
 
-## بہترین طریقوں کا خلاصہ
+## بہترین عملی خلاصہ
 
-### ✅ پری-فلائٹ چیک کے بہترین طریقے
+### ✅ پری-فلائٹ چیک کی بہترین عملی مثالیں
 
 1. **جہاں ممکن ہو خودکار بنائیں**
-   - چیکس کو CI/CD پائپ لائنز میں ضم کریں
-   - قابلِ تکرار توثیقات کے لیے اسکرپٹس استعمال کریں
-   - آڈٹ ٹریلز کے لیے نتائج اسٹور کریں
+   - چیکس کو CI/CD پائپ لائنز میں شامل کریں
+   - دہرائے جانے والے تصدیقات کے لیے اسکرپٹس استعمال کریں
+   - آڈٹ ٹریلز کے لیے نتائج محفوظ کریں
 
-2. **ماحول مخصوص توثیق**
-   - dev/staging/prod کے لیے مختلف چیکس
+2. **ماحول کے مطابق تصدیق**
+   - دیو/اسٹیجنگ/پروڈ کے لیے مختلف چیکس
    - ہر ماحول کے لیے مناسب سیکیورٹی ضروریات
-   - غیر پروڈکشن ماحول کے لیے لاگت کی بہتر سازی
+   - غیر پروڈکشن ماحول کے لیے لاگت کی بچت
 
 3. **جامع کوریج**
-   - تصدیق اور اجازتیں
-   - ریسورس کوٹس اور دستیابی
-   - ٹیمپلیٹ کی توثیق اور نحو
-   - سیکورٹی اور کمپلائنس کی ضروریات
+   - توثیق اور اجازتیں
+   - وسائل کے کوٹے اور دستیابی
+   - سانچے کی درستگی اور نحو
+   - سیکیورٹی اور تعمیل کی ضروریات
 
 4. **واضح رپورٹنگ**
-   - رنگ کوڈڈ اسٹیٹس اشاریے
-   - اصلاحی اقدامات کے ساتھ تفصیلی ایرر پیغامات
-   - تیز اندازِ جائزے کے لیے خلاصہ رپورٹس
+   - رنگ کوڈ والے حالت کے اشارے
+   - تفصیلی غلطی کے پیغامات اور اصلاحی اقدامات
+   - فوری جائزے کے لیے خلاصہ رپورٹس
 
-5. **جلدی ناکامی (Fail Fast)**
-   - اگر اہم چیکس ناکام ہوں تو ڈپلائمنٹ روک دیں
-   - حل کے لیے واضح رہنمائی فراہم کریں
-   - چیکس کو دوبارہ آسانی سے چلانے کے قابل بنائیں
+5. **جلدی ناکامی**
+   - اگر اہم چیکس ناکام ہوں تو تعیناتی روک دیں
+   - مسئلے کے حل کے لیے واضح رہنمائی فراہم کریں
+   - چیکس کو آسانی سے دوبارہ چلانے کی سہولت دیں
 
-### عام پری-فلائٹ کمزوریاں
+### عام پری-فلائٹ مشکلات
 
-1. "جلدی" ڈپلائمنٹس کے لیے توثیق کو چھوڑ دینا
-2. ڈپلائمنٹ سے پہلے ناقص اجازتوں کی جانچ
-3. کوٹا حدوں کو نظر انداز کرنا جب تک ڈپلائمنٹ ناکام نہ ہو
-4. CI/CD پائپ لائنز میں ٹیمپلیٹس کی توثیق نہ کرنا
-5. پروڈکشن ماحول کے لیے سیکورٹی توثیق کی کمی
-6. ناکافی لاگت کا تخمینہ جو بجٹ کے جھٹکے کا باعث بنے
-
----
-
-**پرو ٹپ**: پری-فلائٹ چیکس کو اپنی CI/CD پائپ لائن میں اصل ڈپلائمنٹ جاب سے پہلے ایک الگ جاب کے طور پر چلائیں۔ اس سے آپ مسائل کو جلدی پکڑ سکتے ہیں اور ڈویلپرز کو تیز فیڈبیک ملتا ہے۔
+1. "تیز" تعیناتیوں کے لیے تصدیق کو نظر انداز کرنا
+2. تعیناتی سے پہلے ناکافی اجازتوں کی جانچ
+3. تعیناتی ناکام ہونے تک کوٹہ کی حدوں کو نظر انداز کرنا
+4. CI/CD پائپ لائنز میں سانچوں کا عدم تصدیق
+5. پروڈکشن ماحول کے لیے سیکیورٹی کی جانچ نہ کرنا
+6. لاگت کا غیر مناسب تخمینہ جو بجٹ میں ناگہانی پیدا کرے
 
 ---
 
-**نیویگیشن**
+**پروفیشنل ٹپ**: پری-فلائٹ چیکس کو اپنے CI/CD پائپ لائن میں اصل تعیناتی کے کام سے پہلے ایک منفرد کام کے طور پر چلائیں۔ یہ آپ کو مسائل جلد پکڑنے اور ڈویلپرز کو تیزی سے فیڈ بیک دینے کی اجازت دیتا ہے۔
+
+---
+
+**نیوی گیشن**
 - **پچھلا سبق**: [SKU انتخاب](sku-selection.md)
-- **اگلا سبق**: [Cheat Sheet](../../resources/cheat-sheet.md)
+- **اگلا سبق**: [چیٹ شیٹ](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-دستبرداری:
-اس دستاویز کا ترجمہ مصنوعی ذہانت (AI) ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کے ذریعے کیا گیا ہے۔ اگرچہ ہم درستگی کے لیے کوشاں ہیں، براہِ کرم نوٹ کریں کہ خودکار ترجموں میں غلطیاں یا عدمِ درستگی ہو سکتی ہیں۔ اصل دستاویز، اس کی مادری زبان میں، معتبر ماخذ سمجھی جانی چاہیے۔ اہم معلومات کے لیے پیشہ ور انسانی ترجمہ کی سفارش کی جاتی ہے۔ اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تعبیر کے لیے ہم ذمہ دار نہیں ہوں گے۔
+**ڈسکلیمر**:  
+اس دستاویز کا ترجمہ AI ترجمہ سروس [Co-op Translator](https://github.com/Azure/co-op-translator) کے ذریعے کیا گیا ہے۔ اگرچہ ہم درستگی کے لیے کوشاں ہیں، براہ کرم اس بات سے آگاہ رہیں کہ خودکار تراجم میں غلطیاں یا عدم صحت ہو سکتی ہے۔ اصل دستاویز اپنی مقامی زبان میں معتبر ذریعہ سمجھی جانی چاہیے۔ اہم معلومات کے لیے پیشہ ور انسانی ترجمے کی سفارش کی جاتی ہے۔ اس ترجمے کے استعمال سے پیدا ہونے والی کسی بھی غلط فہمی یا غلط تشریحات کے لیے ہم ذمہ دار نہیں ہیں۔
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,67 +1,67 @@
 # بررسی‌های پیش‌پرواز برای استقرارهای AZD
 
 **ناوبری فصل:**
-- **📚 صفحه اصلی دوره**: [AZD برای مبتدیان](../../README.md)
-- **📖 فصل فعلی**: فصل 6 - اعتبارسنجی پیش از استقرار و برنامه‌ریزی
-- **⬅️ قبلی**: [SKU Selection](sku-selection.md)
-- **➡️ فصل بعدی**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 مرتبط**: [Chapter 4: Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+- **📚 صفحهٔ دوره**: [AZD برای مبتدیان](../../README.md)
+- **📖 فصل جاری**: فصل 6 - اعتبارسنجی و برنامه‌ریزی پیش از استقرار
+- **⬅️ قبلی**: [انتخاب SKU](sku-selection.md)
+- **➡️ فصل بعدی**: [فصل 7: عیب‌یابی](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 مرتبط**: [فصل 4: راهنمای استقرار](../chapter-04-infrastructure/deployment-guide.md)
 
 ## مقدمه
 
-این راهنمای جامع اسکریپت‌ها و روندهای اعتبارسنجی پیش از استقرار را فراهم می‌کند تا از موفقیت‌آمیز بودن استقرارهای Azure Developer CLI پیش از آغاز آن‌ها اطمینان حاصل شود. بیاموزید چگونه بررسی‌های خودکار برای احراز هویت، در دسترس بودن منابع، سهمیه‌ها، تطابق امنیتی و الزامات عملکردی را پیاده‌سازی کنید تا از شکست استقرار جلوگیری کرده و نرخ موفقیت استقرار را بهینه نمایید.
+این راهنمای جامع اسکریپت‌ها و رویه‌های اعتبارسنجی پیش از استقرار را فراهم می‌کند تا موفقیت استقرار با Azure Developer CLI پیش از آغاز تضمین شود. یاد بگیرید چگونه بررسی‌های خودکار برای احراز هویت، در دسترس بودن منابع، سهمیه‌ها، انطباق امنیتی و نیازمندی‌های عملکردی پیاده‌سازی کنید تا از شکست‌های استقرار جلوگیری کرده و نرخ موفقیت استقرار را بهینه کنید.
 
 ## اهداف یادگیری
 
-با تکمیل این راهنما، شما خواهید توانست:
+با تکمیل این راهنما شما قادر خواهید بود:
 - تسلط بر تکنیک‌ها و اسکریپت‌های اعتبارسنجی خودکار پیش از استقرار
 - درک استراتژی‌های جامع بررسی برای احراز هویت، مجوزها و سهمیه‌ها
-- پیاده‌سازی روندهای اعتبارسنجی در دسترس بودن و ظرفیت منابع
+- پیاده‌سازی رویه‌های اعتبارسنجی در دسترس بودن و ظرفیت منابع
 - پیکربندی بررسی‌های امنیتی و انطباق با سیاست‌های سازمانی
-- طراحی گردش‌کارهای برآورد هزینه و اعتبارسنجی بودجه
+- طراحی جریان‌های کاری برآورد هزینه و اعتبارسنجی بودجه
 - ایجاد خودکارسازی چک‌های پیش‌پرواز سفارشی برای CI/CD
 
-## دستاوردهای یادگیری
+## نتایج یادگیری
 
-پس از تکمیل، شما قادر خواهید بود:
+پس از اتمام، شما قادر خواهید بود:
 - ایجاد و اجرای اسکریپت‌های جامع اعتبارسنجی پیش‌پرواز
-- طراحی گردش‌کارهای بررسی خودکار برای سناریوهای مختلف استقرار
-- پیاده‌سازی روندها و سیاست‌های اعتبارسنجی مخصوص محیط
-- پیکربندی نظارت پیشگیرانه و هشداردهی برای آمادگی استقرار
-- رفع مشکلات پیش از استقرار و اجرای اقدامات اصلاحی
-- یکپارچه‌سازی چک‌های پیش‌پرواز در خطوط لوله DevOps و گردش‌کارهای اتوماسیون
+- طراحی جریان‌های کاری بررسی خودکار برای سناریوهای مختلف استقرار
+- پیاده‌سازی رویه‌ها و سیاست‌های اعتبارسنجی ویژهٔ محیط
+- پیکربندی پایش پیشگیرانه و هشداردهی برای آماده‌سازی استقرار
+- عیب‌یابی مسائل پیش از استقرار و اجرای اقدامات اصلاحی
+- ادغام چک‌های پیش‌پرواز در خط لوله‌ها و گردش‌های کاری اتوماسیون DevOps
 
 ## فهرست مطالب
 
-- [Overview](../../../../docs/chapter-06-pre-deployment)
-- [Automated Pre-flight Script](../../../../docs/chapter-06-pre-deployment)
-- [Manual Validation Checklist](../../../../docs/chapter-06-pre-deployment)
-- [Environment Validation](../../../../docs/chapter-06-pre-deployment)
-- [Resource Validation](../../../../docs/chapter-06-pre-deployment)
-- [Security & Compliance Checks](../../../../docs/chapter-06-pre-deployment)
-- [Performance & Capacity Planning](../../../../docs/chapter-06-pre-deployment)
-- [Troubleshooting Common Issues](../../../../docs/chapter-06-pre-deployment)
+- [Overview](#overview)
+- [Automated Pre-flight Script](#automated-pre-flight-script)
+- [Manual Validation Checklist](#codeblock1)
+- [Environment Validation](#✅-پشتیبان‌گیری-و-بازیابی)
+- [Resource Validation](#اعتبارسنجی-محیط-تولید)
+- [Security & Compliance Checks](#security--compliance-checks)
+- [Performance & Capacity Planning](#performance--capacity-planning)
+- [Troubleshooting Common Issues](#troubleshooting-common-issues)
 
 ---
 
 ## Overview
 
-بررسی‌های پیش‌پرواز اعتبارسنجی‌های ضروری هستند که قبل از استقرار برای اطمینان از موارد زیر انجام می‌شوند:
+بررسی‌های پیش‌پرواز اعتبارسنجی‌های ضروری هستند که قبل از استقرار انجام می‌شوند تا اطمینان حاصل شود:
 
-- **دسترسی به منابع** و سهمیه‌ها در مناطق هدف
-- **احراز هویت و مجوزها** به‌درستی پیکربندی شده‌اند
-- **صحت قالب‌ها** و درستی پارامترها
-- **اتصال شبکه** و وابستگی‌ها
-- **تطابق امنیتی** با سیاست‌های سازمانی
-- **برآورد هزینه** در چارچوب محدودیت‌های بودجه
+- در دسترس بودن منابع و سهمیه‌ها در مناطق هدف
+- احراز هویت و مجوزها به‌درستی پیکربندی شده‌اند
+- اعتبار قالب و صحت پارامترها
+- اتصال شبکه و وابستگی‌ها
+- انطباق امنیتی با سیاست‌های سازمانی
+- برآورد هزینه در محدودهٔ بودجه
 
-### چه زمانی باید بررسی‌های پیش‌پرواز را اجرا کرد
+### چه زمانی بررسی‌های پیش‌پرواز را اجرا کنیم
 
-- **قبل از اولین استقرار** در یک محیط جدید
-- **پس از تغییرات قابل توجه در قالب‌ها**
-- **قبل از استقرار در محیط تولید**
-- **هنگام تغییر مناطق Azure**
-- **به‌عنوان بخشی از خطوط لوله CI/CD**
+- قبل از اولین استقرار به یک محیط جدید
+- پس از تغییرات قابل‌توجه در قالب‌ها
+- قبل از استقرار در محیط تولید
+- هنگام تغییر ناحیه‌های Azure
+- به‌عنوان بخشی از pipelineهای CI/CD
 
 ---
 
@@ -148,7 +148,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # بررسی نسخه PowerShell
+    # بررسی نسخهٔ PowerShell
     if ($PSVersionTable.PSVersion.Major -ge 7) {
         Write-Status "PowerShell version" "Success" "Version: $($PSVersionTable.PSVersion)"
     }
@@ -194,7 +194,7 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # دریافت انتساب‌های نقش کاربر فعلی
+        # دریافت انتساب‌های نقش کاربر جاری
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
@@ -210,14 +210,14 @@ function Test-Permissions {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # آزمایش ایجاد گروه منابع (در صورت مشخص بودن)
+        # آزمایش ایجاد گروه منابع (اگر مشخص شده)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # آزمایش توانایی ایجاد گروه منابع
+                # آزمون توانایی ایجاد گروه منابع
                 try {
                     az group create --name "preflight-test-rg" --location $Location --output none
                     az group delete --name "preflight-test-rg" --yes --output none
@@ -245,7 +245,7 @@ function Test-QuotasAndLimits {
         # بررسی سهمیه‌های محاسباتی
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # بررسی سهمیه‌های مشخص
+        # بررسی سهمیه‌های خاص
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
         if ($coreQuota) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
@@ -285,7 +285,7 @@ function Test-QuotasAndLimits {
     }
     catch {
         Write-Status "Quota check failed" "Warning" $_.Exception.Message
-        return $true # غیرمسدودکننده
+        return $true # غیر مسدودکننده
     }
 }
 
@@ -330,7 +330,7 @@ function Test-TemplateValidation {
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # تحلیل فایل azure.yaml
+        # تجزیه فایل azure.yaml
         try {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
@@ -360,7 +360,7 @@ function Test-TemplateValidation {
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # اعتبارسنجی main.bicep در صورت وجود
+            # اعتبارسنجی فایل main.bicep در صورت وجود
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 جدید: آزمایش پیش‌نمایش زیرساخت (اجرای خشک ایمن)
+    # 🧪 جدید: آزمایش پیش‌نمایش زیرساخت (اجرای آزمایشی ایمن)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -415,7 +415,7 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # بررسی در دسترس بودن سرویس در منطقه
+        # بررسی دسترس‌پذیری سرویس در منطقه
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
@@ -446,7 +446,7 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # برآورد ابتدایی هزینه (برای برآورد دقیق نیاز به Azure Pricing API است)
+    # تخمین اولیه هزینه (برای برآورد دقیق به Azure Pricing API نیاز است)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
@@ -470,7 +470,7 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # بررسی رعایت شیوه‌های امنیتی رایج
+    # بررسی شیوه‌های امنیتی رایج
     try {
         # بررسی پیکربندی Key Vault
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # بررسی استفاده از هویت مدیریت‌شده
+        # بررسی استفاده از Managed Identity
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +488,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # بررسی الزام HTTPS
+        # بررسی اجبار HTTPS
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -557,7 +557,7 @@ function Invoke-PreflightCheck {
     }
 }
 
-# اجرای بررسی پیش‌پروازی
+# اجرای بررسی پیش‌پرواز
 Invoke-PreflightCheck
 ```
 
@@ -565,7 +565,7 @@ Invoke-PreflightCheck
 
 ```bash
 #!/bin/bash
-# نسخهٔ Bash از بررسی‌های پیش‌پرواز برای سیستم‌های یونیکس/لینوکس
+# نسخهٔ Bash از بررسی‌های پیش‌اجرایی برای سیستم‌های یونیکس/لینوکس
 
 set -euo pipefail
 
@@ -683,7 +683,7 @@ check_template_validation() {
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # در صورت وجود، اعتبارسنجی main.bicep
+            # اعتبارسنجی main.bicep در صورت وجود
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +706,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # بررسی معتبر بودن منطقه
+    # بررسی معتبر بودن منطقه (location)
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -729,7 +729,7 @@ check_regional_availability() {
 }
 
 main() {
-    # تجزیهٔ آرگومان‌های خط فرمان
+    # تجزیه آرگومان‌های خط فرمان
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -755,7 +755,7 @@ main() {
         esac
     done
     
-    # اعتبارسنجی پارامترهای مورد نیاز
+    # اعتبارسنجی پارامترهای الزامی
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -800,65 +800,65 @@ main "$@"
 
 ### Pre-Deployment Checklist
 
-این چک‌لیست را چاپ کنید و پیش از استقرار هر مورد را بررسی کنید:
+این چک‌لیست را چاپ کنید و قبل از استقرار هر مورد را بررسی کنید:
 
-#### ✅ تنظیم محیط
-- [ ] AZD CLI نصب و به‌روز شده به آخرین نسخه
-- [ ] Azure CLI نصب و احراز هویت انجام شده است
-- [ ] اشتراک Azure صحیح انتخاب شده است
-- [ ] نام محیط یکتا است و از قراردادهای نام‌گذاری پیروی می‌کند
-- [ ] گروه منابع هدف مشخص یا قابل ایجاد است
+#### ✅ راه‌اندازی محیط
+- [ ] AZD CLI نصب شده و به آخرین نسخه به‌روزرسانی شده باشد
+- [ ] Azure CLI نصب شده و احراز هویت انجام شده باشد
+- [ ] اشتراک Azure صحیح انتخاب شده باشد
+- [ ] نام محیط یکتا باشد و از قوانین نام‌گذاری پیروی کند
+- [ ] گروه منابع هدف مشخص شده یا قابلیت ایجاد آن وجود داشته باشد
 
 #### ✅ احراز هویت و مجوزها
-- [ ] با موفقیت با `azd auth login` احراز هویت شده‌اید
-- [ ] کاربر نقش Contributor در اشتراک/گروه منابع هدف را دارد
-- [ ] یک service principal برای CI/CD پیکربندی شده است (در صورت نیاز)
-- [ ] هیچ گواهی‌نامه یا مدارک منقضی وجود ندارد
+- [ ] با `azd auth login` با موفقیت احراز هویت شده باشد
+- [ ] کاربر نقش Contributor روی اشتراک/گروه منابع هدف داشته باشد
+- [ ] Service principal برای CI/CD پیکربندی شده باشد (در صورت کاربرد)
+- [ ] هیچ گواهی‌نامه یا مدارک منقضی‌شده‌ای وجود نداشته باشد
 
 #### ✅ اعتبارسنجی قالب‌ها
-- [ ] `azure.yaml` وجود دارد و YAML معتبری است
-- [ ] همه سرویس‌های تعریف‌شده در azure.yaml دارای کد منبع متناظر هستند
-- [ ] قالب‌های Bicep در دایرکتوری `infra/` موجود هستند
-- [ ] `main.bicep` بدون خطا کامپایل می‌شود (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 پیش‌نمایش زیرساخت با موفقیت اجرا می‌شود (`azd provision --preview`)
-- [ ] تمام پارامترهای مورد نیاز دارای مقادیر پیش‌فرض هستند یا ارائه خواهند شد
-- [ ] هیچ راز یا اطلاعات محرمانه‌ای به‌صورت هاردکد در قالب‌ها وجود ندارد
+- [ ] `azure.yaml` موجود و YAML معتبر باشد
+- [ ] تمام سرویس‌های تعریف‌شده در azure.yaml دارای کد منبع متناظر باشند
+- [ ] قالب‌های Bicep در دایرکتوری `infra/` وجود داشته باشند
+- [ ] `main.bicep` بدون خطا کامپایل شود (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 پیش‌نمایش زیرساخت با موفقیت اجرا شود (`azd provision --preview`)
+- [ ] تمام پارامترهای موردنیاز دارای مقدار پیش‌فرض باشند یا ارائه شوند
+- [ ] هیچ راز سخت‌کدشده‌ای در قالب‌ها وجود نداشته باشد
 
 #### ✅ برنامه‌ریزی منابع
-- [ ] منطقه Azure هدف انتخاب و تایید شده است
-- [ ] سرویس‌های مورد نیاز Azure در منطقه هدف در دسترس هستند
-- [ ] سهمیه‌های کافی برای منابع برنامه‌ریزی‌شده موجود است
-- [ ] تداخلات نام منابع بررسی شده‌اند
-- [ ] وابستگی بین منابع درک شده است
+- [ ] ناحیهٔ هدف Azure انتخاب و اعتبارسنجی شده باشد
+- [ ] سرویس‌های موردنیاز Azure در ناحیهٔ هدف در دسترس باشند
+- [ ] سهمیه‌های کافی برای منابع برنامه‌ریزی‌شده موجود باشد
+- [ ] تداخل نام منابع بررسی شده باشد
+- [ ] وابستگی‌های بین منابع درک شده باشد
 
 #### ✅ شبکه و امنیت
-- [ ] اتصال شبکه به نقاط انتهایی Azure تایید شده است
-- [ ] تنظیمات فایروال/پراکسی در صورت نیاز پیکربندی شده‌اند
-- [ ] Key Vault برای مدیریت اسرار پیکربندی شده است
-- [ ] از managed identities در صورت امکان استفاده شده است
-- [ ] اجرای HTTPS برای برنامه‌های وب فعال شده است
+- [ ] اتصال شبکه به نقاط انتهایی Azure تأیید شده باشد
+- [ ] تنظیمات فایروال/پراکسی در صورت نیاز پیکربندی شده باشد
+- [ ] Key Vault برای مدیریت رازها پیکربندی شده باشد
+- [ ] در صورت امکان از Managed identities استفاده شده باشد
+- [ ] اجبار HTTPS برای برنامه‌های وب فعال شده باشد
 
 #### ✅ مدیریت هزینه
-- [ ] برآوردهای هزینه با استفاده از Azure Pricing Calculator محاسبه شده‌اند
-- [ ] هشدارهای بودجه در صورت نیاز پیکربندی شده‌اند
-- [ ] SKUهای مناسب برای نوع محیط انتخاب شده‌اند
-- [ ] ظرفیت رزرو شده برای بارهای کاری تولید در نظر گرفته شده است
+- [ ] برآوردهای هزینه با استفاده از Azure Pricing Calculator محاسبه شده باشد
+- [ ] هشدارهای بودجه در صورت نیاز پیکربندی شده باشد
+- [ ] SKUهای مناسب برای نوع محیط انتخاب شده باشند
+- [ ] ظرفیت رزروشده برای بارهای کاری تولیدی در نظر گرفته شده باشد
 
-#### ✅ نظارت و مشاهده‌پذیری
-- [ ] Application Insights در قالب‌ها پیکربندی شده است
-- [ ] Log Analytics workspace برنامه‌ریزی شده است
-- [ ] قوانین هشدار برای معیارهای حیاتی تعریف شده‌اند
-- [ ] نقاط انتهایی بررسی سلامت در برنامه‌ها پیاده‌سازی شده‌اند
+#### ✅ نظارت و قابلیت مشاهده
+- [ ] Application Insights در قالب‌ها پیکربندی شده باشد
+- [ ] Log Analytics workspace برنامه‌ریزی شده باشد
+- [ ] قواعد هشدار برای متریک‌های حیاتی تعریف شده باشد
+- [ ] نقاط انتهایی بررسی سلامت در برنامه‌ها پیاده‌سازی شده باشند
 
 #### ✅ پشتیبان‌گیری و بازیابی
-- [ ] استراتژی پشتیبان‌گیری برای منابع داده تعریف شده است
-- [ ] اهداف زمان بازیابی (RTO) مستندسازی شده‌اند
-- [ ] اهداف نقطه بازیابی (RPO) مستندسازی شده‌اند
-- [ ] برنامه بازیابی از فاجعه برای محیط تولید در محل وجود دارد
+- [ ] استراتژی پشتیبان‌گیری برای منابع داده تعریف شده باشد
+- [ ] اهداف زمان بازیابی (RTO) مستندسازی شده باشند
+- [ ] اهداف نقطه بازیابی (RPO) مستندسازی شده باشند
+- [ ] برنامه بازیابی از فاجعه برای محیط تولید موجود باشد
 
 ---
 
-## Environment Validation
+## اعتبارسنجی محیط
 
 ### اعتبارسنجی محیط توسعه
 
@@ -869,14 +869,14 @@ main "$@"
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # بررسی پیکربندی‌های مناسب توسعه
+    # بررسی پیکربندی‌های سازگار با توسعه
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # بررسی تنظیمات خاموشی خودکار
+    # بررسی پیکربندی‌های خاموشی خودکار
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
@@ -896,12 +896,12 @@ validate_dev_environment() {
 
 ```bash
 #!/bin/bash
-# اعتبارسنجی‌های مربوط به محیط تولید
+# اعتبارسنجی‌های مخصوص محیط تولید
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # بررسی پیکربندی‌های مربوط به دسترس‌پذیری بالا
+    # بررسی پیکربندی‌های دسترس‌پذیری بالا
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
@@ -933,7 +933,7 @@ validate_prod_environment() {
 
 ---
 
-## Resource Validation
+## اعتبارسنجی منابع
 
 ### اسکریپت اعتبارسنجی سهمیه
 
@@ -1058,7 +1058,7 @@ if __name__ == "__main__":
 
 ---
 
-## Security & Compliance Checks
+## بررسی‌های امنیتی و رعایت انطباق
 
 ### اسکریپت اعتبارسنجی امنیت
 
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # بررسی الزام استفاده از HTTPS
+    # بررسی اجباری بودن HTTPS
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1111,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # بررسی وجود گروه‌های امنیتی شبکه
+    # بررسی گروه‌های امنیتی شبکه
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1131,7 +1131,7 @@ check_compliance_requirements() {
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # بررسی ثبت لاگ‌های حسابرسی
+    # بررسی لاگ‌های ممیزی
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
@@ -1177,9 +1177,9 @@ main "$@"
 
 ---
 
-## Integration with CI/CD
+## یکپارچه‌سازی با CI/CD
 
-### ادغام با GitHub Actions
+### یکپارچه‌سازی GitHub Actions
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1238,7 +1238,7 @@ jobs:
         path: preflight-results.json
 ```
 
-### ادغام با Azure DevOps
+### یکپارچه‌سازی Azure DevOps
 
 ```yaml
 trigger: none
@@ -1290,58 +1290,58 @@ steps:
 
 ---
 
-## خلاصه بهترین شیوه‌ها
+## خلاصهٔ بهترین شیوه‌ها
 
 ### ✅ بهترین شیوه‌های بررسی پیش‌پرواز
 
-1. **خودکارسازی در جایی که ممکن است**
-   - چک‌ها را در خطوط لوله CI/CD یکپارچه کنید
-   - از اسکریپت‌ها برای اعتبارسنجی‌های تکرارشونده استفاده کنید
-   - نتایج را برای ردگیری‌های حسابرسی ذخیره کنید
+1. **خودکارسازی در صورت امکان**
+   - چک‌ها را در pipelineهای CI/CD ادغام کنید
+   - از اسکریپت‌ها برای اعتبارسنجی‌های تکرارپذیر استفاده کنید
+   - نتایج را برای ردگیری حسابرسی ذخیره کنید
 
-2. **اعتبارسنجی مخصوص محیط**
+2. **اعتبارسنجی مختص محیط**
    - چک‌های متفاوت برای dev/staging/prod
-   - الزامات امنیتی مناسب برای هر محیط
+   - نیازمندی‌های امنیتی مناسب برای هر محیط
    - بهینه‌سازی هزینه برای محیط‌های غیرتولیدی
 
 3. **پوشش جامع**
    - احراز هویت و مجوزها
    - سهمیه‌ها و در دسترس بودن منابع
-   - اعتبارسنجی قالب‌ها و نحو
+   - اعتبارسنجی قالب و نحو
    - نیازمندی‌های امنیتی و انطباق
 
-4. **گزارش‌دهی شفاف**
-   - نشانگرهای وضعیت با کد رنگی
-   - پیام‌های خطای مفصل همراه با گام‌های رفع
+4. **گزارش‌دهی واضح**
+   - نمایشگرهای وضعیت رنگی
+   - پیام‌های خطای مفصل همراه با مراحل رفع
    - گزارش‌های خلاصه برای ارزیابی سریع
 
-5. **Fail Fast**
-   - در صورت شکست چک‌های حیاتی، فرآیند استقرار متوقف شود
-   - راهنمایی واضح برای حل مشکل ارائه شود
-   - اجرای مجدد چک‌ها آسان باشد
+5. **متوقف شدن سریع**
+   - اگر چک‌های حیاتی شکست خوردند، استقرار را متوقف کنید
+   - راهنمایی واضح برای رفع ارائه دهید
+   - امکان اجرای مجدد آسان چک‌ها را فراهم کنید
 
-### مشکلات رایج پیش‌پرواز
+### اشتباهات رایج در پیش‌پرواز
 
-1. **رد کردن اعتبارسنجی** برای استقرارهای "سریع"
-2. **بررسی ناکافی مجوزها** پیش از استقرار
+1. **رد کردن اعتبارسنجی** برای استقرارهای «سریع»
+2. **بررسی ناکافی مجوزها** قبل از استقرار
 3. **نادیده گرفتن محدودیت‌های سهمیه** تا زمان شکست استقرار
-4. **اعتبارسنجی نکردن قالب‌ها** در خطوط لوله CI/CD
-5. **نبود بررسی امنیتی** برای محیط‌های تولید
-6. **برآورد ناکافی هزینه** که منجر به شگفتی در بودجه می‌شود
+4. **اعتبارسنجی نکردن قالب‌ها** در pipelineهای CI/CD
+5. **فوت کردن بررسی امنیتی** برای محیط‌های تولید
+6. **برآورد هزینه ناکافی** که منجر به شگفتی‌های بودجه‌ای می‌شود
 
 ---
 
-**نکته حرفه‌ای**: بررسی‌های پیش‌پرواز را به‌عنوان یک شغل جداگانه در خط لوله CI/CD خود اجرا کنید قبل از شغل استقرار واقعی. این به شما اجازه می‌دهد مسائل را زودتر شناسایی کنید و بازخورد سریع‌تری به توسعه‌دهندگان ارائه دهید.
+**نکتهٔ حرفه‌ای**: چک‌های پیش‌پرواز را به‌عنوان یک کار جداگانه در pipeline CI/CD خود قبل از کار استقرار واقعی اجرا کنید. این کار به شما اجازه می‌دهد مشکلات را زود شناسایی کنید و بازخورد سریع‌تری به توسعه‌دهندگان می‌دهد.
 
 ---
 
 **ناوبری**
-- **درس قبلی**: [SKU Selection](sku-selection.md)
-- **درس بعدی**: [راهنمای مختصر](../../resources/cheat-sheet.md)
+- **درس قبلی**: [انتخاب SKU](sku-selection.md)
+- **درس بعدی**: [برگه تقلب](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-سلب مسئولیت:
-این سند با استفاده از سرویس ترجمهٔ هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. هرچند ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطا یا نادرستی باشند. سند اصلی به زبان مبدأ باید به‌عنوان مرجع معتبر در نظر گرفته شود. برای اطلاعات حساس و حیاتی، ترجمهٔ حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرستی که از استفاده از این ترجمه ناشی شود، مسئولیتی نداریم.
+**سلب مسئولیت**:
+این سند با استفاده از سرویس ترجمه مبتنی بر هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً آگاه باشید که ترجمه‌های خودکار ممکن است شامل خطاها یا نادرستی‌هایی باشند. نسخهٔ اصلی سند به زبان مادری آن باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمهٔ حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرستی که ناشی از استفاده از این ترجمه باشد، مسئولیتی نداریم.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
