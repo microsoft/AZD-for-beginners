@@ -1,79 +1,81 @@
-# AZD für KI-Entwickler-Workshop
+# AZD für KI-Entwickler Workshop
+
+> Validiert mit `azd 1.23.12` im März 2026.
 
 > [!IMPORTANT]  
-> **Dieser Workshop enthält eine Workshop-Anleitung, die Sie in Ihrem lokalen Browser anzeigen können. Um zu beginnen, müssen Sie GitHub Codespaces im Repository starten — warten Sie dann, bis Sie ein aktives VS Code-Terminal sehen, und geben Sie ein:**  
+> **Dieser Workshop ist mit einer Workshop-Anleitung ausgestattet, die Sie lokal in Ihrem Browser anzeigen können. Um zu beginnen, öffnen Sie das Repo in GitHub Codespaces, einem Dev-Container oder einem lokalen Klon mit installiertem MkDocs—warten Sie dann, bis Sie ein aktives VS Code-Terminal sehen, und geben Sie ein:**  
 > `mkdocs serve > /dev/null 2>&1 &`  
-> **Sie sollten ein Popup-Dialogfeld sehen, um die Vorschauseite in einem Browser zu öffnen.**
+> **Sie sollten ein Pop-up-Dialogfeld sehen, um die Vorschauseite in einem Browser zu öffnen.**
 
-Willkommen zum praxisorientierten Workshop, um die Azure Developer CLI (AZD) mit Fokus auf die Bereitstellung von KI-Anwendungen kennenzulernen. Dieser Workshop hilft Ihnen, ein praktisches Verständnis für AZD-Vorlagen in 3 Schritten zu erlangen:
+Willkommen zum praxisorientierten Workshop zum Erlernen der Azure Developer CLI (AZD) mit Fokus auf die Bereitstellung von KI-Anwendungen. Dieser Workshop hilft Ihnen, ein praktisches Verständnis für AZD-Vorlagen in 3 Schritten zu erlangen:
 
-1. **Discovery** - finden Sie die Vorlage, die für Sie geeignet ist.
-1. **Deployment** - bereitstellen und prüfen, ob sie funktioniert
-1. **Customization** - anpassen und iterieren, damit sie Ihnen gehört!
+1. **Discovery** - finden Sie die Vorlage, die zu Ihnen passt.
+1. **Deployment** - bereitstellen und validieren, dass sie funktioniert
+1. **Customization** - modifizieren und iterieren, um sie zu Ihrer eigenen zu machen!
 
-Im Verlauf dieses Workshops werden Sie außerdem in zentrale Entwicklerwerkzeuge und -workflows eingeführt, die Ihnen helfen, Ihre End-to-End-Entwicklungsreise zu optimieren.
+Im Verlauf dieses Workshops werden Sie auch mit Kernentwicklertools und Workflows vertraut gemacht, um Ihre End-to-End-Entwicklungsreise zu optimieren.
 
 | | | 
 |:---|:---|
 | **📚 Course Home**| [AZD For Beginners](../README.md)|
 | **📖 Documentation** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
 | **🛠️AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 Next Steps** | [Take The Challenge](../../../../workshop/docs) |
+|**🚀 Next Steps** | [Nimm die Herausforderung an](#workshop-challenge) |
 | | |
 
-## Workshop Overview
+## Workshop-Übersicht
 
 **Dauer:** 3-4 Stunden  
-**Level:** Anfänger bis Fortgeschrittene  
-**Voraussetzungen:** Vertrautheit mit Azure, KI-Konzepten, VS Code & Kommandozeilenwerkzeugen.
+**Level:** Anfänger bis Mittelstufe  
+**Voraussetzungen:** Vertrautheit mit Azure, KI-Konzepten, VS Code & Kommandozeilentools.
 
-Dies ist ein praxisorientierter Workshop, in dem Sie durch Tun lernen. Sobald Sie die Übungen abgeschlossen haben, empfehlen wir, das Curriculum AZD For Beginners zu prüfen, um Ihre Lernreise zu Security- und Produktivitätsbest-Practices fortzusetzen.
+Dies ist ein praxisorientierter Workshop, in dem Sie durch Tun lernen. Sobald Sie die Übungen abgeschlossen haben, empfehlen wir, den Lehrplan AZD For Beginners zu überprüfen, um Ihre Lernreise in Richtung Sicherheits- und Produktivitäts-Best-Practices fortzusetzen.
 
 | Time| Module  | Objective |
 |:---|:---|:---|
-| 15 mins | Introduction | Set the stage, understand the goals |
-| 30 mins | Select AI Template | Explore options and pick starter | 
-| 30 mins | Validate AI Template | Deploy default solution to Azure |
-| 30 mins | Deconstruct AI Template | Explore structure and configuration |
-| 30 mins | Configure AI Template | Activate and try available features |
-| 30 mins | Customize AI Template | Adapt the template to your needs |
-| 30 mins | Teardown Infrastructure | Cleanup and release resources |
-| 15 mins | Wrap-Up & Next Steps | Learning resources, Workshop challenge |
+| 15 mins | Introduction | Rahmen setzen, Ziele verstehen |
+| 30 mins | Select AI Template | Optionen erkunden und Starter auswählen | 
+| 30 mins | Validate AI Template | Standardlösung in Azure bereitstellen |
+| 30 mins | Deconstruct AI Template | Struktur und Konfiguration erkunden |
+| 30 mins | Configure AI Template | Verfügbare Funktionen aktivieren und testen |
+| 30 mins | Customize AI Template | Die Vorlage an Ihre Bedürfnisse anpassen |
+| 30 mins | Teardown Infrastructure | Aufräumen und Ressourcen freigeben |
+| 15 mins | Wrap-Up & Next Steps | Lernressourcen, Workshop-Herausforderung |
 | | |
 
-## What You'll Learn
+## Was Sie lernen werden
 
-Betrachten Sie die AZD-Vorlage als eine Lern-Sandbox, um verschiedene Fähigkeiten und Werkzeuge für die End-to-End-Entwicklung auf Microsoft Foundry zu erkunden. Am Ende dieses Workshops sollten Sie ein intuitives Verständnis für verschiedene Werkzeuge und Konzepte in diesem Umfeld haben.
+Betrachten Sie die AZD-Vorlage als eine Lern-Sandbox, um verschiedene Fähigkeiten und Tools für die End-to-End-Entwicklung auf Microsoft Foundry zu erkunden. Am Ende dieses Workshops sollten Sie ein intuitives Verständnis für verschiedene Tools und Konzepte in diesem Kontext haben.
 
 | Concept  | Objective |
 |:---|:---|
-| **Azure Developer CLI** | Verstehen Sie die Befehle des Tools und Workflows |
-| **AZD Templates**| Verstehen Sie Projektstruktur und Konfiguration |
-| **Azure AI Agent**| Provisionierung & Bereitstellung eines Microsoft Foundry-Projekts |
-| **Azure AI Search**| Kontext-Engineering mit Agenten ermöglichen |
-| **Observability**| Tracing, Monitoring und Auswertungen erkunden |
-| **Red Teaming**| Adversarielle Tests und Gegenmaßnahmen erkunden |
+| **Azure Developer CLI** | Befehle und Workflows des Tools verstehen|
+| **AZD Templates**| Projektstruktur und Konfiguration verstehen|
+| **Azure AI Agent**| Microsoft Foundry-Projekt provisionieren & bereitstellen  |
+| **Azure AI Search**| Kontext-Engineering mit Agents ermöglichen |
+| **Observability**| Tracing, Überwachung und Auswertungen erkunden |
+| **Red Teaming**| Adversarial-Tests und Gegenmaßnahmen erkunden |
 | | |
 
-## Workshop Modules
+## Workshop-Module
 
-Bereit zu beginnen? Navigieren Sie durch die Workshop-Module:
+Bereit loszulegen? Navigieren Sie durch die Workshop-Module:
 
-- [Module 1: Select AI Template](instructions/1-Select-AI-Template.md)
-- [Module 2: Validate AI Template](instructions/2-Validate-AI-Template.md) 
-- [Module 3: Deconstruct AI Template](instructions/3-Deconstruct-AI-Template.md)
-- [Module 4: Configure AI Template](instructions/4-Configure-AI-Template.md)
-- [Module 5: Customize AI Template](instructions/5-Customize-AI-Template.md)
-- [Module 6: Teardown Infrastructure](instructions/6-Teardown-Infrastructure.md)
-- [Module 7: Wrap-up & Next Steps](instructions/7-Wrap-up.md)
+- [Modul 1: AI-Vorlage auswählen](instructions/1-Select-AI-Template.md)
+- [Modul 2: AI-Vorlage validieren](instructions/2-Validate-AI-Template.md) 
+- [Modul 3: AI-Vorlage zerlegen](instructions/3-Deconstruct-AI-Template.md)
+- [Modul 4: AI-Vorlage konfigurieren](instructions/4-Configure-AI-Template.md)
+- [Modul 5: AI-Vorlage anpassen](instructions/5-Customize-AI-Template.md)
+- [Modul 6: Infrastruktur abbauen](instructions/6-Teardown-Infrastructure.md)
+- [Modul 7: Abschluss & nächste Schritte](instructions/7-Wrap-up.md)
 
-## Have feedback?
+## Feedback?
 
-Erstellen Sie ein Issue in diesem Repository (markieren Sie es mit `Workshop`) oder treten Sie uns auf [Discord](https://aka.ms/foundry/discord) bei und posten Sie in unserem Kanal `#get-help`
+Eröffnen Sie ein Issue in diesem Repo (taggen Sie es mit `Workshop`) oder treten Sie unserem [Discord](https://aka.ms/foundry/discord) bei und posten Sie in unserem `#get-help`-Kanal
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Haftungsausschluss:
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst Co-op Translator (https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ursprungssprache ist als maßgebliche Quelle zu betrachten. Für kritische Informationen wird eine professionelle, menschliche Übersetzung empfohlen. Wir haften nicht für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
+**Haftungsausschluss**:
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache gilt als maßgebliche Quelle. Bei kritischen Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir haften nicht für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

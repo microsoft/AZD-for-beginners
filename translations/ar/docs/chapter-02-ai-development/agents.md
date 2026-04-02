@@ -1,85 +1,87 @@
-# وكلاء الذكاء الاصطناعي باستخدام Azure Developer CLI
+# وكلاء الذكاء الاصطناعي مع Azure Developer CLI
 
-**التنقل في الفصل:**
+**تنقل الفصل:**
 - **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
-- **📖 الفصل الحالي**: الفصل 2 - التطوير المرتكز على الذكاء الاصطناعي
-- **⬅️ السابق**: [تكامل Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ التالي**: [نشر نموذج الذكاء الاصطناعي](ai-model-deployment.md)
+- **📖 الفصل الحالي**: الفصل 2 - التطوير المعتمد على الذكاء الاصطناعي
+- **⬅️ السابق**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ التالي**: [AI Model Deployment](ai-model-deployment.md)
 - **🚀 متقدم**: [حلول متعددة الوكلاء](../../examples/retail-scenario.md)
 
 ---
 
 ## مقدمة
 
-وكلاء الذكاء الاصطناعي هي برامج مستقلة يمكنها إدراك بيئتها، واتخاذ قرارات، واتخاذ إجراءات لتحقيق أهداف محددة. على عكس روبوتات الدردشة البسيطة التي تستجيب للمطالبات، يمكن للوكلاء:
+وكلاء الذكاء الاصطناعي هم برامج مستقلة قادرة على إدراك بيئتها، واتخاذ قرارات، وتنفيذ إجراءات لتحقيق أهداف محددة. على عكس روبوتات المحادثة البسيطة التي تستجيب للمطالبات، يمكن للوكلاء:
 
 - **استخدام الأدوات** - استدعاء واجهات برمجة التطبيقات، البحث في قواعد البيانات، تنفيذ الشيفرة
-- **التخطيط والتفكير** - تقسيم المهام المعقدة إلى خطوات
-- **التعلم من السياق** - الحفاظ على الذاكرة وتكييف السلوك
+- **التخطيط والاستدلال** - تقسيم المهام المعقدة إلى خطوات
+- **التعلّم من السياق** - الاحتفاظ بالذاكرة والتكيف في السلوك
 - **التعاون** - العمل مع وكلاء آخرين (أنظمة متعددة الوكلاء)
 
 يوضح هذا الدليل كيفية نشر وكلاء الذكاء الاصطناعي إلى Azure باستخدام Azure Developer CLI (azd).
 
+> **ملاحظة التحقق (2026-03-25):** تمت مراجعة هذا الدليل مقابل `azd` `1.23.12` و `azure.ai.agents` `0.1.18-preview`. تجربة `azd ai` لا تزال تعتمد على المعاينة، لذا تحقق من مساعدة الامتداد إذا كانت الأعلام المثبتة لديك مختلفة.
+
 ## أهداف التعلم
 
-بإكمال هذا الدليل، ستتمكن من:
-- فهم ماهية وكلاء الذكاء الاصطناعي وكيف يختلفون عن روبوتات الدردشة
-- نشر قوالب وكلاء معدة مسبقًا باستخدام AZD
-- تكوين وكلاء Foundry للوكلاء المخصصة
-- تنفيذ أنماط وكيل أساسية (استخدام الأدوات، RAG، متعدد الوكلاء)
-- مراقبة وتصحيح الوكلاء المنشورين
+عند إكمال هذا الدليل، سوف:
+- تفهم ما هي وكلاء الذكاء الاصطناعي وكيف تختلف عن روبوتات المحادثة
+- تنشر قوالب وكلاء مُعدة مسبقًا باستخدام AZD
+- تهيئ وكلاء Foundry للوكلاء المخصصين
+- تنفذ أنماط وكلاء أساسية (استخدام الأدوات، RAG، متعدد الوكلاء)
+- تراقب وتصحح الوكلاء المنشورين
 
-## مخرجات التعلم
+## النتائج المتوقعة من التعلم
 
-عند الانتهاء، ستتمكن من:
+عند الإكمال، ستكون قادرًا على:
 - نشر تطبيقات وكلاء الذكاء الاصطناعي إلى Azure بأمر واحد
-- تكوين أدوات الوكيل وقدراته
-- تنفيذ التوليد المعزز بالاسترجاع (RAG) مع الوكلاء
-- تصميم بنى أنظمة متعددة الوكلاء لتدفقات العمل المعقدة
+- تكوين أدوات وقدرات الوكلاء
+- تنفيذ التوليد المدعوم بالاستخراج (RAG) مع الوكلاء
+- تصميم معمارية متعددة الوكلاء لعمليات عمل معقدة
 - استكشاف مشكلات نشر الوكلاء الشائعة وإصلاحها
 
 ---
 
-## 🤖 ما الذي يجعل الوكيل مختلفًا عن روبوت الدردشة؟
+## 🤖 ما الذي يجعل الوكيل مختلفًا عن روبوت المحادثة؟
 
-| الميزة | روبوت الدردشة | وكيل الذكاء الاصطناعي |
+| الميزة | روبوت محادثة | وكيل ذكاء اصطناعي |
 |---------|---------|----------|
-| **السلوك** | يرد على المطالبات | يتخذ إجراءات بشكل مستقل |
+| **السلوك** | يرد على المطالبات | يتخذ إجراءات مستقلة |
 | **الأدوات** | لا شيء | يمكنه استدعاء واجهات برمجة التطبيقات، البحث، تنفيذ الشيفرة |
 | **الذاكرة** | تعتمد على الجلسة فقط | ذاكرة مستمرة عبر الجلسات |
-| **التخطيط** | استجابة واحدة | تفكير متعدد الخطوات |
+| **التخطيط** | استجابة واحدة | استدلال متعدد الخطوات |
 | **التعاون** | كيان واحد | يمكنه العمل مع وكلاء آخرين |
 
 ### تشبيه بسيط
 
-- **روبوت الدردشة** = شخص مساعد يجيب على الأسئلة عند مكتب المعلومات
-- **وكيل الذكاء الاصطناعي** = مساعد شخصي يمكنه إجراء المكالمات، حجز المواعيد، وإتمام المهام نيابة عنك
+- **روبوت المحادثة** = شخص مفيد يجيب على الأسئلة عند مكتب الاستعلامات
+- **وكيل الذكاء الاصطناعي** = مساعد شخصي يمكنه إجراء مكالمات، حجز مواعيد، وإكمال المهام نيابةً عنك
 
 ---
 
 ## 🚀 بدء سريع: انشر وكيلك الأول
 
-### الخيار 1: قالب وكلاء Foundry (مُوصى به)
+### الخيار 1: قالب Foundry Agents (موصى به)
 
 ```bash
 # تهيئة قالب وكلاء الذكاء الاصطناعي
 azd init --template get-started-with-ai-agents
 
-# نشر إلى أزور
+# نشر إلى Azure
 azd up
 ```
 
-**ما الذي يتم نشره:**
-- ✅ وكلاء Foundry
-- ✅ نماذج Microsoft Foundry (gpt-4.1)
+**ما يتم نشره:**
+- ✅ Foundry Agents
+- ✅ Microsoft Foundry Models (gpt-4.1)
 - ✅ Azure AI Search (لـ RAG)
-- ✅ Azure Container Apps (واجهة الويب)
+- ✅ Azure Container Apps (واجهة ويب)
 - ✅ Application Insights (المراقبة)
 
 **الوقت:** ~15-20 دقيقة
-**التكلفة:** ~$100-150/شهريًا (للتطوير)
+**التكلفة:** ~$100-150/شهر (تطوير)
 
-### الخيار 2: وكيل OpenAI باستخدام Prompty
+### الخيار 2: وكيل OpenAI مع Prompty
 
 ```bash
 # تهيئة قالب الوكيل المعتمد على Prompty
@@ -89,14 +91,14 @@ azd init --template agent-openai-python-prompty
 azd up
 ```
 
-**ما الذي يتم نشره:**
-- ✅ Azure Functions (تنفيذ الوكيل بدون خوادم)
-- ✅ نماذج Microsoft Foundry
+**ما يتم نشره:**
+- ✅ Azure Functions (تنفيذ الوكيل بدون خادم)
+- ✅ Microsoft Foundry Models
 - ✅ ملفات تكوين Prompty
-- ✅ تنفيذ وكيل نموذجي
+- ✅ تنفيذ عينة للوكيل
 
 **الوقت:** ~10-15 دقيقة
-**التكلفة:** ~$50-100/شهريًا (للتطوير)
+**التكلفة:** ~$50-100/شهر (تطوير)
 
 ### الخيار 3: وكيل دردشة RAG
 
@@ -108,42 +110,45 @@ azd init --template azure-search-openai-demo
 azd up
 ```
 
-**ما الذي يتم نشره:**
-- ✅ نماذج Microsoft Foundry
-- ✅ Azure AI Search مع بيانات عينة
+**ما يتم نشره:**
+- ✅ Microsoft Foundry Models
+- ✅ Azure AI Search مع بيانات نموذجية
 - ✅ خط أنابيب معالجة المستندات
-- ✅ واجهة دردشة مع الاستشهادات
+- ✅ واجهة دردشة مع استشهادات
 
 **الوقت:** ~15-25 دقيقة
-**التكلفة:** ~$80-150/شهريًا (للتطوير)
+**التكلفة:** ~$80-150/شهر (تطوير)
 
-### الخيار 4: تهيئة وكيل AZD AI (مبني على البيان التعريفي)
+### الخيار 4: تهيئة وكيل AZD AI (معاينة قائمة على المانيفست أو القالب)
 
-إذا كان لديك ملف البيان التعريفي للوكيل، يمكنك استخدام الأمر `azd ai` لتهيئة مشروع خدمة وكيل Foundry مباشرة:
+إذا كان لديك ملف مانيفست للوكيل، يمكنك استخدام أمر `azd ai` لتهيئة مشروع خدمة Foundry Agent مباشرة. أصدارات المعاينة الأخيرة أضافت أيضًا دعم التهيئة المستندة إلى القوالب، لذا قد يختلف تدفق المطالبات قليلاً اعتمادًا على إصدار الامتداد المثبت لديك.
 
 ```bash
 # تثبيت امتداد وكلاء الذكاء الاصطناعي
 azd extension install azure.ai.agents
 
-# التهيئة من ملف مواصفات الوكيل
+# اختياري: التحقق من إصدار المعاينة المثبت
+azd extension show azure.ai.agents
+
+# التهيئة من ملف تعريف الوكيل
 azd ai agent init -m agent-manifest.yaml
 
-# نشر إلى أزور
+# النشر إلى أزور
 azd up
 ```
 
 **متى تستخدم `azd ai agent init` مقابل `azd init --template`:**
 
-| النهج | الأفضل لـ | كيفية العمل |
+| النهج | الأنسب لـ | كيف يعمل |
 |----------|----------|------|
-| `azd init --template` | البدء من تطبيق عينة يعمل | يستنسخ مستودع قالب كامل يحتوي على الشيفرة + البنية التحتية |
-| `azd ai agent init -m` | البناء من البيان التعريفي الخاص بوكيلك | يقوم بتهيئة بنية المشروع من تعريف الوكيل الخاص بك |
+| `azd init --template` | البدء من تطبيق عيّنة يعمل | يستنسخ مستودع قالب كامل مع الشيفرة + البنية التحتية |
+| `azd ai agent init -m` | البناء من مانيفست الوكيل الخاص بك | ينشئ هيكل المشروع من تعريف الوكيل الخاص بك |
 
-> **نصيحة:** استخدم `azd init --template` عند التعلم (الخيارات 1-3 أعلاه). استخدم `azd ai agent init` عند بناء وكلاء للإنتاج ببياناتك التعريفية الخاصة. راجع [أوامر AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) للمرجع الكامل.
+> **نصيحة:** استخدم `azd init --template` عند التعلم (الخيارات 1-3 أعلاه). استخدم `azd ai agent init` عند بناء وكلاء الإنتاج بمانيفستاتك الخاصة. انظر [أوامر AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) للمرجع الكامل.
 
 ---
 
-## 🏗️ أنماط بنية الوكيل
+## 🏗️ أنماط معمارية الوكلاء
 
 ### النمط 1: وكيل واحد مع أدوات
 
@@ -156,16 +161,16 @@ graph TD
     Agent --> Database[أداة قاعدة البيانات]
     Agent --> API[أداة واجهة برمجة التطبيقات]
 ```
-**الأفضل لـ:**
-- بوتات دعم العملاء
-- مساعدين بحثيين
+**مناسب لـ:**
+- روبوتات دعم العملاء
+- مساعدي البحث
 - وكلاء تحليل البيانات
 
 **قالب AZD:** `azure-search-openai-demo`
 
-### النمط 2: وكيل RAG (التوليد المعزز بالاسترجاع)
+### النمط 2: وكيل RAG (التوليد المدعوم بالاستخراج)
 
-وكيل يقوم باسترجاع المستندات ذات الصلة قبل توليد الردود.
+وكيل يسترجع المستندات ذات الصلة قبل توليد الاستجابات.
 
 ```mermaid
 graph TD
@@ -173,12 +178,12 @@ graph TD
     RAG --> Vector[بحث المتجهات]
     RAG --> LLM[نموذج لغوي كبير<br/>gpt-4.1]
     Vector -- مستندات --> LLM
-    LLM --> Response[استجابة مع الاستشهادات]
+    LLM --> Response[استجابة مع استشهادات]
 ```
-**الأفضل لـ:**
+**مناسب لـ:**
 - قواعد معرفة المؤسسات
-- أنظمة الأسئلة والأجوبة للمستندات
-- الامتثال والبحث القانوني
+- أنظمة سؤال وجواب للمستندات
+- أبحاث الامتثال والقانون
 
 **قالب AZD:** `azure-search-openai-demo`
 
@@ -188,14 +193,14 @@ graph TD
 
 ```mermaid
 graph TD
-    Orchestrator[وكيل المنسق] --> Research[وكيل البحث<br/>gpt-4.1]
+    Orchestrator[الوكيل المنسق] --> Research[وكيل البحث<br/>gpt-4.1]
     Orchestrator --> Writer[وكيل الكاتب<br/>gpt-4.1-mini]
-    Orchestrator --> Reviewer[وكيل المُراجع<br/>gpt-4.1]
+    Orchestrator --> Reviewer[وكيل المراجع<br/>gpt-4.1]
 ```
-**الأفضل لـ:**
+**مناسب لـ:**
 - إنشاء محتوى معقد
-- تدفقات عمل متعددة الخطوات
-- المهام التي تتطلب خبرات مختلفة
+- سير عمل متعدد الخطوات
+- مهام تتطلب خبرات مختلفة
 
 **تعرف أكثر:** [أنماط تنسيق متعدد الوكلاء](../chapter-06-pre-deployment/coordination-patterns.md)
 
@@ -203,9 +208,9 @@ graph TD
 
 ## ⚙️ تكوين أدوات الوكيل
 
-تصبح الوكلاء قوية عندما يمكنهم استخدام الأدوات. فيما يلي كيفية تكوين الأدوات الشائعة:
+تصبح الوكلاء قوية عندما يمكنها استخدام الأدوات. إليك كيفية تكوين الأدوات الشائعة:
 
-### تكوين الأدوات في وكلاء Foundry
+### تكوين الأدوات في Foundry Agents
 
 ```python
 # agent_config.py
@@ -259,13 +264,13 @@ azd deploy
 تتضمن جميع قوالب وكلاء AZD Application Insights للمراقبة:
 
 ```bash
-# فتح لوحة المراقبة
+# افتح لوحة المراقبة
 azd monitor --overview
 
-# عرض السجلات الحية
+# عرض السجلات المباشرة
 azd monitor --logs
 
-# عرض المقاييس الحية
+# عرض المقاييس المباشرة
 azd monitor --live
 ```
 
@@ -273,11 +278,11 @@ azd monitor --live
 
 | المقياس | الوصف | الهدف |
 |--------|-------------|--------|
-| زمن الاستجابة | الوقت اللازم لتوليد الاستجابة | < 5 ثوانٍ |
-| استخدام التوكينات | التوكينات لكل طلب | راقب للتكلفة |
+| زمن الاستجابة | الوقت لتوليد الاستجابة | < 5 ثوانٍ |
+| استخدام التوكنات | توكنات لكل طلب | راقب من أجل التكلفة |
 | معدل نجاح استدعاء الأدوات | % من تنفيذات الأدوات الناجحة | > 95% |
-| معدل الأخطاء | الطلبات الفاشلة للوكيل | < 1% |
-| رضا المستخدم | درجات الملاحظات | > 4.0/5.0 |
+| معدل الأخطاء | طلبات الوكيل الفاشلة | < 1% |
+| رضا المستخدم | درجات التغذية الراجعة | > 4.0/5.0 |
 
 ### التسجيل المخصص للوكلاء
 
@@ -334,9 +339,9 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
        return agent.run(query_hash)
    ```
 
-3. **حدد حدود التوكينات لكل تشغيل**
+3. **حدد حدود التوكن لكل تشغيل**
    ```python
-   # اضبط max_completion_tokens عند تشغيل الوكيل، ليس أثناء إنشائه
+   # اضبط max_completion_tokens عند تشغيل الوكيل، وليس أثناء إنشائه
    run = project_client.agents.create_run(
        thread_id=thread.id,
        agent_id=agent.id,
@@ -344,9 +349,9 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
    )
    ```
 
-4. **قُم بالتحجيم إلى الصفر عندما لا تكون قيد الاستخدام**
+4. **قم بالتصغير إلى الصفر عند عدم الاستخدام**
    ```bash
-   # تقوم تطبيقات الحاويات بالتحجيم تلقائيًا إلى الصفر
+   # تتقلص تطبيقات الحاويات تلقائيًا إلى الصفر
    azd env set MIN_REPLICAS "0"
    ```
 
@@ -354,7 +359,7 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 
 ## 🔧 استكشاف أخطاء الوكلاء وإصلاحها
 
-### المشكلات الشائعة والحلول
+### المشاكل والحلول الشائعة
 
 <details>
 <summary><strong>❌ الوكيل لا يستجيب لاستدعاءات الأدوات</strong></summary>
@@ -374,7 +379,7 @@ azd monitor --logs
 
 **الأسباب الشائعة:**
 - عدم تطابق توقيع دالة الأداة
-- نقص الأذونات المطلوبة
+- غياب الأذونات المطلوبة
 - نقطة نهاية API غير متاحة
 </details>
 
@@ -382,25 +387,25 @@ azd monitor --logs
 <summary><strong>❌ زمن استجابة مرتفع في ردود الوكيل</strong></summary>
 
 ```bash
-# تحقق من Application Insights لمعرفة نقاط الاختناق
+# تحقق من Application Insights للعثور على اختناقات
 azd monitor --live
 
-# فكر في استخدام نموذج أسرع
+# فكّر في استخدام نموذج أسرع
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd deploy
 ```
 
 **نصائح التحسين:**
 - استخدم الاستجابات المتدفقة
-- نفّذ التخزين المؤقت للاستجابات
+- نفّذ تخزين الاستجابات المؤقت
 - قلل حجم نافذة السياق
 </details>
 
 <details>
-<summary><strong>❌ الوكيل يعيد معلومات غير صحيحة أو هلوسات</strong></summary>
+<summary><strong>❌ الوكيل يعيد معلومات غير صحيحة أو مُتوَهِّمة</strong></summary>
 
 ```python
-# التحسين باستخدام مطالبات نظام أفضل
+# تحسين عبر مطالبات نظامية أفضل
 instructions = """
 You are a helpful assistant. IMPORTANT:
 - Only answer based on provided context
@@ -409,17 +414,17 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# أضف استرجاعًا للتأصيل
+# إضافة استرجاع لتأسيس الإجابات
 agent = project_client.agents.create_agent(
     model="gpt-4.1",
     instructions=instructions,
-    tools=[FileSearchTool()]  # اربط الردود بالمستندات
+    tools=[FileSearchTool()]  # ربط الإجابات بالوثائق
 )
 ```
 </details>
 
 <details>
-<summary><strong>❌ أخطاء تجاوز حد التوكينات</strong></summary>
+<summary><strong>❌ أخطاء تجاوز حد التوكن</strong></summary>
 
 ```python
 # تنفيذ إدارة نافذة السياق
@@ -443,7 +448,7 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
 
 ---
 
-## 🎓 تمارين عملية
+## 🎓 تمارين تطبيقية
 
 ### التمرين 1: نشر وكيل أساسي (20 دقيقة)
 
@@ -455,6 +460,7 @@ azd init --template get-started-with-ai-agents
 
 # الخطوة 2: تسجيل الدخول إلى Azure
 azd auth login
+# إذا كنت تعمل عبر المستأجرين، أضف --tenant-id <tenant-id>
 
 # الخطوة 3: النشر
 azd up
@@ -468,25 +474,25 @@ azd up
 # الخطوة 5: عرض المراقبة
 azd monitor --overview
 
-# الخطوة 6: تنظيف الموارد
+# الخطوة 6: التنظيف
 azd down --force --purge
 ```
 
 **معايير النجاح:**
-- [ ] يرد الوكيل على الأسئلة
+- [ ] الوكيل يرد على الأسئلة
 - [ ] يمكن الوصول إلى لوحة المراقبة عبر `azd monitor`
-- [ ] تم تنظيف الموارد بنجاح
+- [ ] تنظيف الموارد بنجاح
 
 ### التمرين 2: إضافة أداة مخصصة (30 دقيقة)
 
 **الهدف:** توسيع الوكيل بأداة مخصصة
 
-1. نشر قالب الوكيل:
+1. انشر قالب الوكيل:
    ```bash
    azd init --template get-started-with-ai-agents
    azd up
    ```
-2. أنشئ دالة أداة جديدة في شيفرة الوكيل الخاص بك:
+2. أنشئ دالة أداة جديدة في كود الوكيل الخاص بك:
    ```python
    def get_weather(location: str) -> str:
        """Get current weather for a location."""
@@ -519,12 +525,12 @@ azd down --force --purge
    ```bash
    azd deploy
    # اسأل: "ما هو الطقس في سياتل؟"
-   # المتوقع: أن يستدعي الوكيل get_weather("Seattle") ويعيد معلومات الطقس
+   # المتوقع: يقوم الوكيل باستدعاء get_weather("Seattle") ويُعيد معلومات الطقس
    ```
 
 **معايير النجاح:**
-- [ ] يتعرف الوكيل على استفسارات متعلقة بالطقس
-- [ ] يتم استدعاء الأداة بشكل صحيح
+- [ ] الوكيل يتعرف على استفسارات الطقس
+- [ ] تم استدعاء الأداة بشكل صحيح
 - [ ] تتضمن الاستجابة معلومات الطقس
 
 ### التمرين 3: بناء وكيل RAG (45 دقيقة)
@@ -540,16 +546,16 @@ azd up
 # ضع ملفات PDF/TXT في مجلد data/، ثم شغّل:
 python scripts/prepdocs.py
 
-# الخطوة 3: اختبر بأسئلة خاصة بالمجال
-# افتح رابط تطبيق الويب من مخرجات azd up
-# اطرح أسئلة حول مستنداتك المرفوعة
-# يجب أن تتضمن الردود مراجع استشهاد مثل [doc.pdf]
+# الخطوة 3: اختبر بأسئلة متخصصة في المجال
+# افتح عنوان URL لتطبيق الويب من مخرجات azd up
+# اطرح أسئلة حول مستنداتك المحملة
+# ينبغي أن تتضمن الردود مراجع استشهاد مثل [doc.pdf]
 ```
 
 **معايير النجاح:**
-- [ ] يجيب الوكيل من المستندات المرفوعة
+- [ ] الوكيل يجيب من المستندات المرفوعة
 - [ ] تتضمن الردود استشهادات
-- [ ] لا حدوث هلوسة في الأسئلة خارج النطاق
+- [ ] لا توجد معلومات مُتوَهِّمة في الأسئلة خارج النطاق
 
 ---
 
@@ -559,33 +565,33 @@ python scripts/prepdocs.py
 
 | الموضوع | الوصف | الرابط |
 |-------|-------------|------|
-| **أنظمة متعددة الوكلاء** | بناء أنظمة تحتوي على وكلاء متعاونين متعددين | [مثال متعدد الوكلاء لتجزئة](../../examples/retail-scenario.md) |
-| **أنماط التنسيق** | تعلم أنماط الأوركسترا والتواصل | [أنماط التنسيق](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **نشر للإنتاج** | نشر وكلاء جاهزين للمؤسسات | [ممارسات AI للإنتاج](../chapter-08-production/production-ai-practices.md) |
-| **تقييم الوكلاء** | اختبار وتقييم أداء الوكلاء | [استكشاف أخطاء AI وإصلاحها](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **مختبر ورشة عمل AI** | عملي: اجعل حلك الذكي جاهزًا لـ AZD | [مختبر ورشة عمل AI](ai-workshop-lab.md) |
+| **أنظمة متعددة الوكلاء** | بناء أنظمة بها وكلاء متعاونون | [مثال تجارة التجزئة متعدد الوكلاء](../../examples/retail-scenario.md) |
+| **أنماط التنسيق** | تعلّم أنماط التنسيق والتواصل | [أنماط التنسيق](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **نشر للإنتاج** | نشر وكلاء جاهزين للمؤسسة | [ممارسات نشر الذكاء الاصطناعي للإنتاج](../chapter-08-production/production-ai-practices.md) |
+| **تقييم الوكلاء** | اختبار وتقييم أداء الوكلاء | [استكشاف أخطاء الذكاء الاصطناعي وإصلاحها](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **مختبر ورشة عمل الذكاء الاصطناعي** | عملي: جعل حل الذكاء الاصطناعي جاهزًا لـ AZD | [AI Workshop Lab](ai-workshop-lab.md) |
 
 ---
 
-## 📖 مصادر إضافية
+## 📖 موارد إضافية
 
-### التوثيق الرسمي
-- [خدمة وكلاء Azure AI](https://learn.microsoft.com/azure/ai-services/agents/)
-- [بدء سريع لخدمة وكلاء Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
-- [إطار عمل Semantic Kernel Agent](https://learn.microsoft.com/semantic-kernel/)
+### الوثائق الرسمية
+- [Azure AI Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
+- [Azure AI Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
+- [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
 
 ### قوالب AZD للوكلاء
-- [البدء مع وكلاء AI](https://github.com/Azure-Samples/get-started-with-ai-agents)
-- [وكيل OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
-- [عرض Azure Search OpenAI](https://github.com/Azure-Samples/azure-search-openai-demo)
+- [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents)
+- [Agent OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
+- [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-### مصادر المجتمع
-- [Awesome AZD - قوالب الوكلاء](https://azure.github.io/awesome-azd/?tags=ai-agents)
-- [Discord Azure AI](https://discord.gg/microsoft-azure)
-- [Discord Microsoft Foundry](https://discord.gg/nTYy5BXMWG)
+### موارد المجتمع
+- [Awesome AZD - Agent Templates](https://azure.github.io/awesome-azd/?tags=ai-agents)
+- [Azure AI Discord](https://discord.gg/microsoft-azure)
+- [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
 ### مهارات الوكلاء لمحررك
-- [**مهارات وكيل Microsoft Azure**](https://skills.sh/microsoft/github-copilot-for-azure) - ثبّت مهارات وكيل الذكاء الاصطناعي القابلة لإعادة الاستخدام لتطوير Azure في GitHub Copilot أو Cursor أو أي وكيل مدعوم. تتضمن مهارات لـ [خدمة Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai)، [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry)، [النشر](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy)، و[التشخيصات](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
+- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - ثبّت مهارات وكلاء AI قابلة لإعادة الاستخدام لتطوير Azure في GitHub Copilot أو Cursor أو أي وكيل مدعوم. يتضمن مهارات لـ [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai)، [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry)، [النشر](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy)، و[التشخيصات](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
@@ -593,12 +599,12 @@ python scripts/prepdocs.py
 ---
 
 **التنقل**
-- **الدرس السابق**: [تكامل Microsoft Foundry](microsoft-foundry-integration.md)
-- **الدرس التالي**: [نشر نموذج الذكاء الاصطناعي](ai-model-deployment.md)
+- **الدرس السابق**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **الدرس التالي**: [AI Model Deployment](ai-model-deployment.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-إخلاء المسؤولية:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى إلى تحقيق الدقة، يُرجى ملاحظة أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المعتمد. للمعلومات الحرجة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير خاطئ ينشأ عن استخدام هذه الترجمة.
+**إخلاء المسؤولية**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى إلى الدقة، يُرجى ملاحظة أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المعتمد. بالنسبة للمعلومات الحرجة، يُنصح بالاستعانة بترجمة بشرية محترفة. لن نتحمل أي مسؤولية عن أي سوء فهم أو تفسيرات خاطئة ناتجة عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

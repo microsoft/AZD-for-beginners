@@ -4,43 +4,43 @@
 - **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
 - **📖 الفصل الحالي**: الفصل 6 - التحقق والتخطيط قبل النشر
 - **⬅️ السابق**: [اختيار SKU](sku-selection.md)
-- **➡️ الفصل التالي**: [الفصل 7: استكشاف المشكلات وإصلاحها](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 ذو صلة**: [الفصل 4: دليل النشر](../chapter-04-infrastructure/deployment-guide.md)
+- **➡️ الفصل التالي**: [الفصل 7: استكشاف الأخطاء وإصلاحها](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 ذات صلة**: [الفصل 4: دليل النشر](../chapter-04-infrastructure/deployment-guide.md)
 
-## مقدمة
+## المقدمة
 
-يوفر هذا الدليل الشامل سكريبتات وإجراءات التحقق ما قبل النشر لضمان نجاح نشرات Azure Developer CLI قبل أن تبدأ. تعلّم كيفية تنفيذ فحوصات آلية للمصادقة، وتوافر الموارد، والحصص، والامتثال الأمني، ومتطلبات الأداء لمنع فشل النشر وتحسين معدلات نجاح النشر.
+يوفر هذا الدليل الشامل نصوصًا وإجراءات تحقق ما قبل النشر لضمان نجاح نشرات Azure Developer CLI قبل أن تبدأ. تعلّم كيفية تنفيذ فحوصات مؤتمتة للمصادقة، وتوافر الموارد، والحصص، والامتثال الأمني، ومتطلبات الأداء لمنع فشل النشر وتحسين معدلات نجاح النشر.
 
 ## أهداف التعلم
 
 بإكمال هذا الدليل، ستتمكن من:
-- إتقان تقنيات وسكريبتات التحقق الآلي ما قبل النشر
-- فهم استراتيجيات الفحص الشاملة للمصادقة والصلاحيات والحصص
-- تنفيذ إجراءات التحقق من توافر الموارد والقدرة الاستيعابية
+- إتقان تقنيات ونصوص التحقق الآلي ما قبل النشر
+- فهم استراتيجيات التحقق الشاملة للمصادقة والأذونات والحصص
+- تنفيذ إجراءات تحقق من توافر الموارد والسعة
 - تكوين فحوصات الأمان والامتثال لسياسات المؤسسة
-- تصميم سير عمل تقدير التكلفة والتحقق من الميزانية
+- تصميم تدفقات عمل لتقدير التكلفة والتحقق من الميزانية
 - إنشاء أتمتة فحوصات ما قبل الإقلاع مخصصة لخطوط CI/CD
 
-## نتائج التعلم
+## مخرجات التعلم
 
-عند الانتهاء، ستكون قادراً على:
-- إنشاء وتشغيل سكريبتات تحقق شاملة لما قبل الإقلاع
-- تصميم سير عمل فحص آلي لسيناريوهات نشر مختلفة
-- تنفيذ إجراءات وسياسات تحقق خاصة بالبيئة
-- تكوين المراقبة الاستباقية والتنبيهات لجاهزية النشر
-- استكشاف مشكلات ما قبل النشر وتنفيذ الإجراءات التصحيحية
-- دمج فحوصات ما قبل الإقلاع في خطوط DevOps وسير عمل الأتمتة
+عند الانتهاء، ستكون قادرًا على:
+- إنشاء وتشغيل نصوص تحقق شاملة ما قبل الإقلاع
+- تصميم تدفقات عمل تحقق مؤتمتة لسيناريوهات نشر مختلفة
+- تنفيذ إجراءات سياسات تحقق خاصة بالبيئة
+- تكوين المراقبة والتنبيه الاستباقي لجاهزية النشر
+- استكشاف مشكلات ما قبل النشر وتنفيذ إجراءات تصحيحية
+- دمج فحوصات ما قبل الإقلاع في خطوط DevOps وأتمتة العمل
 
 ## جدول المحتويات
 
-- [نظرة عامة](../../../../docs/chapter-06-pre-deployment)
-- [السكريبت الآلي لما قبل الإقلاع](../../../../docs/chapter-06-pre-deployment)
-- [قائمة التحقق اليدوية](../../../../docs/chapter-06-pre-deployment)
-- [التحقق من البيئة](../../../../docs/chapter-06-pre-deployment)
-- [التحقق من الموارد](../../../../docs/chapter-06-pre-deployment)
-- [فحوصات الأمان والامتثال](../../../../docs/chapter-06-pre-deployment)
-- [التخطيط للأداء والقدرة](../../../../docs/chapter-06-pre-deployment)
-- [استكشاف المشكلات الشائعة](../../../../docs/chapter-06-pre-deployment)
+- [نظرة عامة](#نظرة-عامة)
+- [البرنامج النصي الآلي لفحوصات ما قبل النشر](#البرنامج-النصي-الآلي-لفحوصات-ما-قبل-النشر)
+- [قائمة التحقق اليدوية](#codeblock1)
+- [التحقق من البيئة](#✅-النسخ-الاحتياطي-والاسترداد)
+- [التحقق من الموارد](#التحقق-من-بيئة-الإنتاج)
+- [فحوصات الأمن والامتثال](#security--compliance-checks)
+- [التخطيط للأداء والسعة](#performance--capacity-planning)
+- [استكشاف المشكلات الشائعة](#troubleshooting-common-issues)
 
 ---
 
@@ -48,16 +48,16 @@
 
 فحوصات ما قبل الإقلاع هي تحقق أساسي يُجرى قبل النشر لضمان:
 
-- **توافر الموارد** والحصص في المناطق المستهدفة
-- **المصادقة والصلاحيات** مُكوّنة بشكل صحيح
+- **توفر الموارد** والحصص في المناطق المستهدفة
+- **المصادقة والأذونات** مهيأة بشكل صحيح
 - **صلاحية القوالب** وصحة المعاملات
 - **اتصال الشبكة** والاعتمادات
 - **الامتثال الأمني** لسياسات المؤسسة
 - **تقدير التكلفة** ضمن قيود الميزانية
 
-### متى تُشغَّل فحوصات ما قبل الإقلاع
+### متى تشغّل فحوصات ما قبل الإقلاع
 
-- **قبل النشر الأول** إلى بيئة جديدة
+- **قبل أول نشر** إلى بيئة جديدة
 - **بعد تغييرات كبيرة في القوالب**
 - **قبل نشرات الإنتاج**
 - **عند تغيير مناطق Azure**
@@ -65,9 +65,9 @@
 
 ---
 
-## السكريبت الآلي لما قبل الإقلاع
+## البرنامج النصي الآلي لفحوصات ما قبل النشر
 
-### مدقق PowerShell لما قبل الإقلاع
+### مدقق فحوصات ما قبل النشر لـ PowerShell
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -100,7 +100,7 @@ param(
     [switch]$Detailed
 )
 
-# تلوين المخرجات
+# تلوين الإخراج
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -285,14 +285,14 @@ function Test-QuotasAndLimits {
     }
     catch {
         Write-Status "Quota check failed" "Warning" $_.Exception.Message
-        return $true # غير معرقل
+        return $true # غير معيق
     }
 }
 
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # اختبار نقاط نهاية Azure
+    # اختبار نقاط النهاية في Azure
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -326,11 +326,11 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # التحقق مما إذا كان ملف azure.yaml موجودًا
+    # التحقق مما إذا كان الملف azure.yaml موجودًا
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # تحليل ملف azure.yaml
+        # تحليل azure.yaml
         try {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
@@ -384,7 +384,7 @@ function Test-TemplateValidation {
     # 🧪 جديد: اختبار معاينة البنية التحتية (تشغيل تجريبي آمن)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -446,11 +446,11 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # تقدير تكلفة أساسي (ستحتاج إلى واجهة تسعير Azure للحصول على تقديرات دقيقة)
+    # تقدير تكلفة أساسي (يحتاج إلى Azure Pricing API لتقديرات دقيقة)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # التحقق مما إذا كانت الميزانية موجودة
+    # التحقق من وجود ميزانية
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -472,7 +472,7 @@ function Test-SecurityCompliance {
     
     # التحقق من ممارسات الأمان الشائعة
     try {
-        # التحقق مما إذا كان Key Vault مُعدًا
+        # التحقق مما إذا تم تكوين Key Vault
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
             Write-Status "Key Vault usage" "Success" "Key Vault detected in templates"
         }
@@ -561,11 +561,11 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### مدقق Bash لما قبل الإقلاع
+### مدقق فحوصات ما قبل النشر لـ Bash
 
 ```bash
 #!/bin/bash
-# نسخة Bash من فحوصات ما قبل الإقلاع لأنظمة Unix/Linux
+# نسخة Bash من فحوصات ما قبل التشغيل لأنظمة Unix/Linux
 
 set -euo pipefail
 
@@ -576,7 +576,7 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # بدون ألوان
 
-# المتغيرات العامة
+# متغيرات عامة
 ENVIRONMENT_NAME=""
 LOCATION=""
 RESOURCE_GROUP=""
@@ -683,7 +683,7 @@ check_template_validation() {
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # التحقق من صحة main.bicep إذا كان موجودًا
+            # التحقق من main.bicep إن وجد
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -729,7 +729,7 @@ check_regional_availability() {
 }
 
 main() {
-    # تحليل وسائط سطر الأوامر
+    # تحليل معاملات سطر الأوامر
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -776,7 +776,7 @@ main() {
     check_template_validation || all_passed=false
     check_regional_availability || all_passed=false
     
-    # ملخص
+    # الملخص
     echo -e "\n${BLUE}=== Pre-flight Check Summary ===${NC}"
     
     if $all_passed; then
@@ -800,61 +800,61 @@ main "$@"
 
 ### قائمة التحقق قبل النشر
 
-اطبع قائمة التحقق هذه وتحقق من كل بند قبل النشر:
+اطبع هذه القائمة وتحقق من كل بند قبل النشر:
 
 #### ✅ إعداد البيئة
 - [ ] تم تثبيت AZD CLI وتحديثه إلى أحدث إصدار
-- [ ] تم تثبيت Azure CLI وتم المصادقة
-- [ ] تم اختيار اشتراك Azure الصحيح
+- [ ] تم تثبيت Azure CLI وتسجيل الدخول
+- [ ] تم تحديد اشتراك Azure الصحيح
 - [ ] اسم البيئة فريد ويتبع قواعد التسمية
-- [ ] تم تحديد مجموعة الموارد المستهدفة أو يمكن إنشاؤها
+- [ ] مجموعة الموارد المستهدفة محددة أو يمكن إنشاؤها
 
-#### ✅ المصادقة والصلاحيات
-- [ ] تم المصادقة بنجاح باستخدام `azd auth login`
-- [ ] لدى المستخدم دور Contributor على الاشتراك/مجموعة الموارد المستهدفة
-- [ ] تم تكوين Service Principal لعمليات CI/CD (إن أمكن)
+#### ✅ المصادقة والأذونات
+- [ ] تمت المصادقة بنجاح باستخدام `azd auth login`
+- [ ] المستخدم لديه دور Contributor على الاشتراك/مجموعة الموارد المستهدفة
+- [ ] تم تكوين service principal لـ CI/CD (إذا أمكن)
 - [ ] لا توجد شهادات أو بيانات اعتماد منتهية الصلاحية
 
-#### ✅ التحقق من القوالب
-- [ ] `azure.yaml` موجود وصالح كـ YAML
-- [ ] كل الخدمات المعرفة في azure.yaml لها شفرة مصدرية مقابلة
+#### ✅ التحقق من القالب
+- [ ] يوجد `azure.yaml` وهو YAML صالح
+- [ ] جميع الخدمات المعرفة في azure.yaml لها شفرة مصدرية مقابلة
 - [ ] قوالب Bicep في الدليل `infra/` موجودة
-- [ ] يتم تجميع `main.bicep` بدون أخطاء (`az bicep build --file infra/main.bicep`)
+- [ ] `main.bicep` يترجم بدون أخطاء (`az bicep build --file infra/main.bicep`)
 - [ ] 🧪 معاينة البنية التحتية تعمل بنجاح (`azd provision --preview`)
 - [ ] جميع المعاملات المطلوبة لها قيم افتراضية أو سيتم توفيرها
-- [ ] لا توجد أسرار مضمّنة صلبًا في القوالب
+- [ ] لا توجد أسرار مضمنة في القوالب
 
 #### ✅ تخطيط الموارد
-- [ ] تم اختيار المنطقة المستهدفة في Azure والتحقق منها
-- [ ] خدمات Azure المطلوبة متوفرة في المنطقة المستهدفة
+- [ ] تم اختيار والتحقق من المنطقة المستهدفة في Azure
+- [ ] الخدمات المطلوبة في Azure متاحة في المنطقة المستهدفة
 - [ ] الحصص الكافية متاحة للموارد المخططة
-- [ ] تم التحقق من تضارب أسماء الموارد
+- [ ] تم التحقق من تعارضات أسماء الموارد
 - [ ] تم فهم التبعيات بين الموارد
 
-#### ✅ الشبكة والأمان
+#### ✅ الشبكة والأمن
 - [ ] تم التحقق من اتصال الشبكة بنقاط نهاية Azure
 - [ ] تم تكوين إعدادات الجدار الناري/الوكيل إذا لزم الأمر
 - [ ] تم تكوين Key Vault لإدارة الأسرار
-- [ ] استخدام Managed Identities حيثما أمكن
-- [ ] تفعيل فرض HTTPS لتطبيقات الويب
+- [ ] استخدام Managed identities حيثما أمكن
+- [ ] تم تفعيل فرض HTTPS لتطبيقات الويب
 
-#### ✅ إدارة التكاليف
-- [ ] تم حساب تقديرات التكاليف باستخدام Azure Pricing Calculator
-- [ ] تم تكوين تنبيهات الميزانية إن لزم
+#### ✅ إدارة التكلفة
+- [ ] تم حساب تقديرات التكلفة باستخدام Azure Pricing Calculator
+- [ ] تم تكوين تنبيهات الميزانية إذا لزم الأمر
 - [ ] تم اختيار SKUs المناسبة لنوع البيئة
-- [ ] تم مراعاة السعة المحجوزة لأحمال العمل الإنتاجية
+- [ ] تم أخذ السعة المحجوزة بعين الاعتبار لحمولات الإنتاج
 
-#### ✅ المراقبة والقابلية للملاحظة
+#### ✅ المراقبة والملاحظة
 - [ ] تم تكوين Application Insights في القوالب
-- [ ] تم التخطيط لمساحة عمل Log Analytics
-- [ ] تم تعريف قواعد التنبيه للمقاييس الحرجة
+- [ ] تم تخطيط مساحة عمل Log Analytics
+- [ ] تم تعريف قواعد التنبيه للقياسات الحرجة
 - [ ] تم تنفيذ نقاط نهاية فحص الصحة في التطبيقات
 
 #### ✅ النسخ الاحتياطي والاسترداد
 - [ ] تم تحديد استراتيجية النسخ الاحتياطي لموارد البيانات
 - [ ] تم توثيق أهداف زمن الاسترداد (RTO)
 - [ ] تم توثيق أهداف نقطة الاسترداد (RPO)
-- [ ] خطة للتعافي من الكوارث موجودة للإنتاج
+- [ ] خطة التعافي من الكوارث موجودة للإنتاج
 
 ---
 
@@ -864,12 +864,12 @@ main "$@"
 
 ```bash
 #!/bin/bash
-# التحققات الخاصة ببيئة التطوير
+# عمليات التحقق الخاصة ببيئة التطوير
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # التحقق من التكوينات الملائمة لبيئة التطوير
+    # التحقق من التهيئات الملائمة لبيئة التطوير
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
@@ -883,7 +883,7 @@ validate_dev_environment() {
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # التحقق من صحة تكوينات قاعدة بيانات التطوير
+    # التحقق من إعدادات قاعدة بيانات التطوير
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -896,19 +896,19 @@ validate_dev_environment() {
 
 ```bash
 #!/bin/bash
-# التحققات الخاصة ببيئة الإنتاج
+# عمليات التحقق الخاصة ببيئة الإنتاج
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # التحقق من تكوينات التوافر العالي
+    # التحقق من إعدادات التوافر العالي
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # التحقق من تكوينات النسخ الاحتياطي
+    # التحقق من إعدادات النسخ الاحتياطي
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
@@ -922,7 +922,7 @@ validate_prod_environment() {
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # التحقق من تكوينات الأمان
+    # التحقق من إعدادات الأمان
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -935,7 +935,7 @@ validate_prod_environment() {
 
 ## التحقق من الموارد
 
-### سكريبت التحقق من الحصص
+### نص تحقق الحصص
 
 ```python
 #!/usr/bin/env python3
@@ -1043,7 +1043,7 @@ def main():
     all_passed &= check_storage_limits(location)
     all_passed &= check_network_limits(location)
     
-    # الملخص
+    # ملخص
     print(f"\n=== Quota Check Summary ===")
     if all_passed:
         print("✅ All quota checks passed - sufficient capacity available")
@@ -1058,9 +1058,9 @@ if __name__ == "__main__":
 
 ---
 
-## فحوصات الأمان والامتثال
+## فحوصات الأمن والامتثال
 
-### سكريبت التحقق الأمني
+### نص تحقق الأمان
 
 ```bash
 #!/bin/bash
@@ -1071,7 +1071,7 @@ check_security_practices() {
     
     local issues_found=0
     
-    # التحقق من استخدام Key Vault
+    # التحقق من استخدام مخزن المفاتيح
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1131,7 +1131,7 @@ check_compliance_requirements() {
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # التحقق من سجلات التدقيق
+    # التحقق من تمكين سجلات التدقيق
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
@@ -1292,56 +1292,56 @@ steps:
 
 ## ملخص أفضل الممارسات
 
-### ✅ أفضل ممارسات فحوصات ما قبل الإقلاع
+### ✅ قم بالأتمتة حيثما أمكن
 
-1. **أتمتة حيثما أمكن**
-   - دمج الفحوصات ضمن خطوط أنابيب CI/CD
-   - استخدام سكريبتات للتحققات المتكررة
-   - حفظ النتائج لسجلات التدقيق
+1. **قم بالأتمتة حيثما أمكن**
+   - ادمج الفحوصات في خطوط أنابيب CI/CD
+   - استخدم نصوصًا برمجية لعمليات تحقق قابلة للتكرار
+   - خزن النتائج لأغراض سجلات التدقيق
 
 2. **التحقق الخاص بكل بيئة**
-   - فحوصات مختلفة لبيئات التطوير/المرحلة/الإنتاج
+   - فحوصات مختلفة للتطوير/الاختبار/الإنتاج
    - متطلبات أمان مناسبة لكل بيئة
    - تحسين التكلفة للبيئات غير الإنتاجية
 
 3. **تغطية شاملة**
-   - المصادقة والصلاحيات
-   - حصص الموارد وتوافرها
+   - المصادقة والأذونات
+   - حصص الموارد وتوفرها
    - التحقق من القوالب والصياغة
-   - متطلبات الأمان والامتثال
+   - متطلبات الأمن والامتثال
 
 4. **تقارير واضحة**
-   - مؤشرات حالة ذات رموز لونية
-   - رسائل خطأ مفصّلة مع خطوات العلاج
+   - مؤشرات حالة ملونة
+   - رسائل خطأ مفصلة مع خطوات العلاج
    - تقارير ملخصة للتقييم السريع
 
 5. **الفشل السريع**
-   - إيقاف النشر إذا فشلت الفحوصات الحرجة
-   - تقديم إرشادات واضحة للحل
-   - تمكين إعادة تشغيل الفحوصات بسهولة
+   - أوقف النشر إذا فشلت الفحوصات الحرجة
+   - قدّم إرشادات واضحة للحل
+   - مكّن إعادة تشغيل الفحوصات بسهولة
 
-### المشكلات الشائعة في فحوصات ما قبل الإقلاع
+### الأخطاء الشائعة في فحوصات ما قبل الإقلاع
 
-1. **تخطي التحقق** من أجل عمليات نشر "سريعة"
-2. **التحقق من الصلاحيات غير الكافي** قبل النشر
+1. **تخطي التحقق** لعمليات النشر "السريعة"
+2. **فحص الأذونات غير الكافي** قبل النشر
 3. **تجاهل حدود الحصص** حتى يفشل النشر
-4. **عدم التحقق من القوالب** في خطوط CI/CD
-5. **فقدان التحقق الأمني** لبيئات الإنتاج
-6. **تقدير تكلفة غير كافٍ** يؤدي إلى مفاجآت في الميزانية
+4. **عدم التحقق من القوالب** في خطوط أنابيب CI/CD
+5. **غياب تحقق الأمان** لبيئات الإنتاج
+6. **تقدير تكلفة غير كافٍ** يؤدي لمفاجآت في الميزانية
 
 ---
 
-**نصيحة احترافية**: قم بتشغيل فحوصات ما قبل الإقلاع كوظيفة منفصلة في خط CI/CD قبل وظيفة النشر الفعلية. هذا يسمح لك باكتشاف المشكلات مبكراً ويوفر ملاحظات أسرع للمطورين.
+**نصيحة احترافية**: شغّل فحوصات ما قبل الإقلاع كوظيفة منفصلة في خط أنابيب CI/CD قبل وظيفة النشر الفعلية. هذا يسمح باكتشاف المشكلات مبكرًا ويقدّم تغذية راجعة أسرع للمطورين.
 
 ---
 
 **التنقل**
 - **الدرس السابق**: [اختيار SKU](sku-selection.md)
-- **الدرس التالي**: [دليل مختصر](../../resources/cheat-sheet.md)
+- **الدرس التالي**: [ورقة الغش](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-إخلاء المسؤولية:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى إلى الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المعتمد. للمعلومات الحرجة، يُنصح بالاستعانة بترجمة بشرية محترفة. لا نتحمل أي مسؤولية عن أي سوء فهم أو تفسير خاطئ ناتج عن استخدام هذه الترجمة.
+**إخلاء المسؤولية**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى إلى الدقة، يرجى أن تضع في اعتبارك أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المرجعي والموثوق. بالنسبة للمعلومات الحرجة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أية سوء تفاهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,12 +1,14 @@
 # Kapitel 4: Infrastruktur als Code & Bereitstellung
 
-**📚 Kurs**: [AZD für Anfänger](../../README.md) | **⏱️ Dauer**: 1-1.5 Stunden | **⭐ Komplexität**: Mittel
+**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Dauer**: 1–1,5 Stunden | **⭐ Komplexität**: Fortgeschritten
 
 ---
 
-## Übersicht
+## Überblick
 
-Dieses Kapitel behandelt Infrastructure as Code (IaC)-Muster mit Bicep-Vorlagen, Ressourcenbereitstellung und Bereitstellungsstrategien mithilfe der Azure Developer CLI.
+Dieses Kapitel behandelt Infrastructure as Code (IaC)-Muster mit Bicep-Vorlagen, die Bereitstellung von Ressourcen und Bereitstellungsstrategien mithilfe der Azure Developer CLI.
+
+> Validiert gegen `azd 1.23.12` im März 2026.
 
 ## Lernziele
 
@@ -22,18 +24,18 @@ Nach Abschluss dieses Kapitels werden Sie:
 
 | # | Lektion | Beschreibung | Zeit |
 |---|--------|-------------|------|
-| 1 | [Provisioning Resources](provisioning.md) | Azure-Ressourcenverwaltung mit AZD | 45 min |
-| 2 | [Deployment Guide](deployment-guide.md) | Anwendungsbereitstellungsstrategien | 45 min |
+| 1 | [Bereitstellung von Ressourcen](provisioning.md) | Azure-Ressourcenverwaltung mit AZD | 45 Min |
+| 2 | [Bereitstellungsanleitung](deployment-guide.md) | Strategien zur Anwendungsbereitstellung | 45 Min |
 
 ---
 
 ## 🚀 Schnellstart
 
 ```bash
-# Von einer Vorlage initialisieren
+# Aus Vorlage initialisieren
 azd init --template azure-functions-python-v2-http
 
-# Vorschau auf das, was erstellt wird
+# Vorschau dessen, was erstellt wird
 azd provision --preview
 
 # Nur Infrastruktur bereitstellen
@@ -48,7 +50,7 @@ azd up
 
 ---
 
-## 📁 AZD-Projektstruktur
+## 📁 AZD Projektstruktur
 
 ```
 my-project/
@@ -81,7 +83,7 @@ my-project/
 
 | Richtung | Kapitel |
 |-----------|---------|
-| **Vorheriges** | [Kapitel 3: Konfiguration](../chapter-03-configuration/README.md) |
+| **Vorheriges** | [Kapitel 3: Configuration](../chapter-03-configuration/README.md) |
 | **Nächstes** | [Kapitel 5: Multi-Agent-Lösungen](../chapter-05-multi-agent/README.md) |
 
 ---
@@ -89,12 +91,12 @@ my-project/
 ## 📖 Verwandte Ressourcen
 
 - [Prüfungen vor der Bereitstellung](../chapter-06-pre-deployment/README.md)
-- [Beispiele für Container-Apps](../../examples/container-app/README.md)
-- [Beispiel für Datenbank-App](../../examples/database-app/README.md)
+- [Container-App-Beispiele](../../examples/container-app/README.md)
+- [Beispiel: Datenbank-App](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Haftungsausschluss:
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst Co-op Translator (https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ausgangssprache ist als maßgebliche Quelle zu betrachten. Für kritische Informationen empfehlen wir eine professionelle menschliche Übersetzung. Wir haften nicht für Missverständnisse oder Fehlinterpretationen, die sich aus der Verwendung dieser Übersetzung ergeben.
+**Disclaimer**:
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache ist als maßgebliche Quelle zu betrachten. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir haften nicht für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,73 +1,73 @@
-# Pre-Flight-Prüfungen für AZD-Bereitstellungen
+# Pre-Flight-Checks für AZD-Bereitstellungen
 
 **Kapitel-Navigation:**
-- **📚 Kursstart**: [AZD für Einsteiger](../../README.md)
-- **📖 Aktuelles Kapitel**: Kapitel 6 - Vorbereitungsvalidierung & Planung
-- **⬅️ Zurück**: [SKU-Auswahl](sku-selection.md)
-- **➡️ Nächstes Kapitel**: [Kapitel 7: Fehlerbehebung](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 Verwandt**: [Kapitel 4: Bereitstellungsanleitung](../chapter-04-infrastructure/deployment-guide.md)
+- **📚 Course Home**: [AZD für Anfänger](../../README.md)
+- **📖 Current Chapter**: Kapitel 6 - Validierung & Planung vor der Bereitstellung
+- **⬅️ Previous**: [SKU-Auswahl](sku-selection.md)
+- **➡️ Next Chapter**: [Kapitel 7: Fehlerbehebung](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 Related**: [Kapitel 4: Bereitstellungsleitfaden](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Einführung
 
-Dieser umfassende Leitfaden bietet Pre-Deployment-Validierungsskripte und -verfahren, um erfolgreiche Bereitstellungen mit der Azure Developer CLI sicherzustellen, bevor sie beginnen. Erfahren Sie, wie Sie automatisierte Prüfungen für Authentifizierung, Ressourcenverfügbarkeit, Kontingente, Sicherheits-Compliance und Leistungsanforderungen implementieren, um Bereitstellungsfehler zu verhindern und die Erfolgsraten von Bereitstellungen zu optimieren.
+Dieser umfassende Leitfaden bietet Vorab-Validierungsskripte und -verfahren, um erfolgreiche Azure Developer CLI-Bereitstellungen vor deren Beginn sicherzustellen. Lernen Sie, automatisierte Prüfungen für Authentifizierung, Ressourcenkapazitäten, Kontingente, Sicherheitskonformität und Leistungsanforderungen zu implementieren, um Bereitstellungsfehler zu verhindern und die Erfolgsquote von Bereitstellungen zu optimieren.
 
 ## Lernziele
 
-Durch Abschluss dieses Leitfadens werden Sie:
-- Automatisierte Validierungstechniken und -skripte vor der Bereitstellung beherrschen
+Nach Abschluss dieses Leitfadens werden Sie:
+- Automatisierte Vorab-Validierungstechniken und -skripte beherrschen
 - Umfassende Prüfstrategien für Authentifizierung, Berechtigungen und Kontingente verstehen
-- Verfahren zur Validierung der Ressourcenverfügbarkeit und -kapazität implementieren
+- Verfahren zur Validierung der Ressourcenverfügbarkeit und Kapazität implementieren
 - Sicherheits- und Compliance-Prüfungen für Organisationsrichtlinien konfigurieren
 - Workflows zur Kostenschätzung und Budgetvalidierung entwerfen
-- Benutzerdefinierte Pre-Flight-Check-Automatisierungen für CI/CD-Pipelines erstellen
+- Eigene Pre-Flight-Check-Automatisierungen für CI/CD-Pipelines erstellen
 
 ## Lernergebnisse
 
-Nach Abschluss werden Sie in der Lage sein:
-- Umfassende Pre-Flight-Validierungsskripte erstellen und ausführen
-- Automatisierte Prüf-Workflows für verschiedene Bereitstellungsszenarien entwerfen
-- Umgebungsspezifische Validierungsverfahren und Richtlinien implementieren
-- Proaktives Monitoring und Alerting für die Einsatzbereitschaft konfigurieren
-- Pre-Deployment-Probleme beheben und Korrekturmaßnahmen umsetzen
-- Pre-Flight-Checks in DevOps-Pipelines und Automatisierungs-Workflows integrieren
+Nach Abschluss sind Sie in der Lage:
+- Umfassende Pre-Flight-Validierungsskripte zu erstellen und auszuführen
+- Automatisierte Prüf-Workflows für verschiedene Bereitstellungsszenarien zu entwerfen
+- Umgebungspezifische Validierungsverfahren und Richtlinien umzusetzen
+- Proaktive Überwachung und Alarmierung für Bereitstellungsbereitschaft zu konfigurieren
+- Vorbereitungsprobleme zu beheben und Korrekturmaßnahmen umzusetzen
+- Pre-Flight-Checks in DevOps-Pipelines und Automatisierungs-Workflows zu integrieren
 
 ## Inhaltsverzeichnis
 
-- [Überblick](../../../../docs/chapter-06-pre-deployment)
-- [Automatisiertes Pre-Flight-Skript](../../../../docs/chapter-06-pre-deployment)
-- [Manuelle Validierungs-Checkliste](../../../../docs/chapter-06-pre-deployment)
-- [Umgebungsvalidierung](../../../../docs/chapter-06-pre-deployment)
-- [Ressourcenvalidierung](../../../../docs/chapter-06-pre-deployment)
-- [Sicherheits- & Compliance-Prüfungen](../../../../docs/chapter-06-pre-deployment)
-- [Leistungs- & Kapazitätsplanung](../../../../docs/chapter-06-pre-deployment)
-- [Fehlerbehebung bei häufigen Problemen](../../../../docs/chapter-06-pre-deployment)
+- [Overview](#overview)
+- [Automated Pre-flight Script](#automated-pre-flight-script)
+- [Manual Validation Checklist](#codeblock1)
+- [Environment Validation](#✅-backup-recovery)
+- [Resource Validation](#production-environment-validation)
+- [Security & Compliance Checks](#security--compliance-checks)
+- [Performance & Capacity Planning](#performance--capacity-planning)
+- [Troubleshooting Common Issues](#troubleshooting-common-issues)
 
 ---
 
-## Überblick
+## Overview
 
-Pre-Flight-Checks sind wesentliche Überprüfungen, die vor der Bereitstellung durchgeführt werden, um Folgendes sicherzustellen:
+Pre-Flight-Checks sind wichtige Validierungen, die vor der Bereitstellung durchgeführt werden, um sicherzustellen:
 
 - **Ressourcenverfügbarkeit** und Kontingente in Zielregionen
-- **Authentifizierung und Berechtigungen** korrekt konfiguriert sind
+- **Authentifizierung und Berechtigungen** sind korrekt konfiguriert
 - **Vorlagengültigkeit** und Parameterkorrektheit
 - **Netzwerkkonnektivität** und Abhängigkeiten
-- **Sicherheits-Compliance** mit Organisationsrichtlinien
+- **Sicherheitskonformität** mit Unternehmensrichtlinien
 - **Kostenschätzung** innerhalb der Budgetgrenzen
 
 ### Wann Pre-Flight-Checks ausgeführt werden sollten
 
 - **Vor der ersten Bereitstellung** in eine neue Umgebung
-- **Nach wesentlichen Änderungen an Vorlagen**
+- **Nach bedeutenden Vorlagenänderungen**
 - **Vor Produktionsbereitstellungen**
-- **Beim Wechsel der Azure-Regionen**
+- **Bei Wechsel der Azure-Region**
 - **Als Teil von CI/CD-Pipelines**
 
 ---
 
-## Automatisiertes Pre-Flight-Skript
+## Automated Pre-flight Script
 
-### PowerShell Pre-Flight-Checker
+### PowerShell Pre-flight Checker
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -100,7 +100,7 @@ param(
     [switch]$Detailed
 )
 
-# Farbkodierung für die Ausgabe
+# Farbkodierung der Ausgabe
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -128,7 +128,7 @@ function Write-Status {
 function Test-Prerequisites {
     Write-Host "${Blue}=== Prerequisites Check ===${Reset}"
     
-    # AZD-Installation prüfen
+    # Überprüfe AZD-Installation
     try {
         $azdVersion = azd version --output json | ConvertFrom-Json
         Write-Status "AZD CLI installed" "Success" "Version: $($azdVersion.azd.version)"
@@ -138,7 +138,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Azure CLI-Installation prüfen
+    # Überprüfe Azure CLI-Installation
     try {
         $azVersion = az version --output json | ConvertFrom-Json
         Write-Status "Azure CLI installed" "Success" "Version: $($azVersion.'azure-cli')"
@@ -148,7 +148,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # PowerShell-Version prüfen
+    # Überprüfe PowerShell-Version
     if ($PSVersionTable.PSVersion.Major -ge 7) {
         Write-Status "PowerShell version" "Success" "Version: $($PSVersionTable.PSVersion)"
     }
@@ -163,7 +163,7 @@ function Test-Authentication {
     Write-Host "`n${Blue}=== Authentication Check ===${Reset}"
     
     try {
-        # AZD-Authentifizierung prüfen
+        # Überprüfe AZD-Authentifizierung
         $azdAuth = azd auth login --check-status --output json 2>$null | ConvertFrom-Json
         if ($azdAuth.status -eq "Logged-in") {
             Write-Status "AZD authentication" "Success" "User: $($azdAuth.principalName)"
@@ -173,11 +173,11 @@ function Test-Authentication {
             return $false
         }
         
-        # Azure CLI-Authentifizierung prüfen
+        # Überprüfe Azure CLI-Authentifizierung
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # Abonnementzugriff validieren
+        # Überprüfe Zugriff auf das Abonnement
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -194,7 +194,7 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # Rollenzuweisungen des aktuellen Benutzers abrufen
+        # Ermittle Rollenzuweisungen des aktuellen Benutzers
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
@@ -210,14 +210,14 @@ function Test-Permissions {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # Ressourcengruppenerstellung testen (falls angegeben)
+        # Teste Erstellung einer Ressourcengruppe (falls angegeben)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # Fähigkeit zur Erstellung einer Ressourcengruppe testen
+                # Teste, ob das Erstellen einer Ressourcengruppe möglich ist
                 try {
                     az group create --name "preflight-test-rg" --location $Location --output none
                     az group delete --name "preflight-test-rg" --yes --output none
@@ -242,10 +242,10 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # Compute-Quoten prüfen
+        # Prüfe Compute-Quoten
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # Spezifische Quoten prüfen
+        # Prüfe spezifische Quoten
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
         if ($coreQuota) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
@@ -257,7 +257,7 @@ function Test-QuotasAndLimits {
             }
         }
         
-        # App Service-Grenzwerte prüfen
+        # Prüfe App Service-Limits
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
             if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
@@ -271,7 +271,7 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # Grenzwerte für Speicherkonten prüfen
+        # Prüfe Limits des Speicherkontos
         $storageAccounts = az storage account list --output json | ConvertFrom-Json
         $accountCount = ($storageAccounts | Measure-Object).Count
         if ($accountCount -lt 200) {
@@ -292,7 +292,7 @@ function Test-QuotasAndLimits {
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # Test Azure endpoints
+    # Teste Azure-Endpunkte
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -310,7 +310,7 @@ function Test-NetworkConnectivity {
         }
     }
     
-    # DNS-Auflösung testen
+    # Teste DNS-Auflösung
     try {
         $dnsResult = Resolve-DnsName "management.azure.com" -ErrorAction Stop
         Write-Status "DNS resolution" "Success" "Resolved successfully"
@@ -326,11 +326,11 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # Prüfen, ob azure.yaml existiert
+    # Prüfe, ob azure.yaml existiert
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # azure.yaml parsen
+        # Parsen von azure.yaml
         try {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
@@ -354,13 +354,13 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # Nach Infrastrukturdateien suchen
+    # Prüfe auf Infrastrukturdateien
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # main.bicep validieren, falls vorhanden
+            # Validiere main.bicep, falls vorhanden
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -384,7 +384,7 @@ function Test-TemplateValidation {
     # 🧪 NEU: Infrastruktur-Vorschau testen (sicherer Trockenlauf)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -403,7 +403,7 @@ function Test-RegionalAvailability {
     Write-Host "`n${Blue}=== Regional Availability Check ===${Reset}"
     
     try {
-        # Prüfen, ob der Standort gültig ist
+        # Prüfe, ob der Standort gültig ist
         $locations = az account list-locations --output json | ConvertFrom-Json
         $validLocation = $locations | Where-Object { $_.name -eq $Location -or $_.displayName -eq $Location }
         
@@ -415,7 +415,7 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # Verfügbarkeit des Dienstes in der Region prüfen
+        # Prüfe Dienstverfügbarkeit in der Region
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
@@ -450,7 +450,7 @@ function Test-CostEstimation {
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # Prüfen, ob ein Budget vorhanden ist
+    # Prüfe, ob ein Budget existiert
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -470,9 +470,9 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # Auf gängige Sicherheitspraktiken prüfen
+    # Prüfe auf gängige Sicherheitspraktiken
     try {
-        # Prüfen, ob Key Vault konfiguriert ist
+        # Prüfe, ob Key Vault konfiguriert ist
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
             Write-Status "Key Vault usage" "Success" "Key Vault detected in templates"
         }
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # Prüfen, ob verwaltete Identitäten verwendet werden
+        # Prüfe Verwendung von Managed Identity
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +488,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # Prüfen, ob HTTPS erzwungen wird
+        # Prüfe, ob HTTPS erzwungen wird
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -516,7 +516,7 @@ function Invoke-PreflightCheck {
     $allPassed = $true
     $results = @{}
     
-    # Alle Prüfungen ausführen
+    # Führe alle Prüfungen aus
     $results["Prerequisites"] = Test-Prerequisites
     $results["Authentication"] = Test-Authentication
     $results["Permissions"] = Test-Permissions
@@ -557,11 +557,11 @@ function Invoke-PreflightCheck {
     }
 }
 
-# Pre-Flight-Prüfung ausführen
+# Führe die Preflight-Prüfung aus
 Invoke-PreflightCheck
 ```
 
-### Bash Pre-Flight-Checker
+### Bash Pre-flight Checker
 
 ```bash
 #!/bin/bash
@@ -569,7 +569,7 @@ Invoke-PreflightCheck
 
 set -euo pipefail
 
-# Farbcodes
+# Farb-Codes
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -790,100 +790,100 @@ main() {
     fi
 }
 
-# Hauptfunktion ausführen
+# main-Funktion ausführen
 main "$@"
 ```
 
 ---
 
-## Manuelle Validierungs-Checkliste
+## Manual Validation Checklist
 
-### Checkliste vor der Bereitstellung
+### Pre-Deployment Checklist
 
-Drucken Sie diese Checkliste aus und prüfen Sie vor der Bereitstellung jeden Punkt:
+Drucken Sie diese Checkliste aus und prüfen Sie jeden Punkt vor der Bereitstellung:
 
-#### ✅ Umgebungseinrichtung
-- [ ] AZD CLI installiert und auf die neueste Version aktualisiert
+#### ✅ Environment Setup
+- [ ] AZD CLI installiert und auf dem neuesten Stand
 - [ ] Azure CLI installiert und authentifiziert
 - [ ] Korrektes Azure-Abonnement ausgewählt
-- [ ] Der Umgebungsname ist eindeutig und entspricht den Namenskonventionen
+- [ ] Umgebungsname ist eindeutig und folgt den Namenskonventionen
 - [ ] Zielressourcengruppe identifiziert oder kann erstellt werden
 
-#### ✅ Authentifizierung & Berechtigungen
+#### ✅ Authentication & Permissions
 - [ ] Erfolgreich authentifiziert mit `azd auth login`
-- [ ] Benutzer hat die Contributor-Rolle im Zielabonnement/der Zielressourcengruppe
-- [ ] Dienstprinzipal für CI/CD konfiguriert (falls zutreffend)
+- [ ] Benutzer besitzt die Rolle Contributor auf dem Zielabonnement/der Zielressourcengruppe
+- [ ] Service Principal für CI/CD konfiguriert (falls zutreffend)
 - [ ] Keine abgelaufenen Zertifikate oder Anmeldeinformationen
 
-#### ✅ Vorlagenvalidierung
+#### ✅ Template Validation
 - [ ] `azure.yaml` existiert und ist gültiges YAML
-- [ ] Alle in azure.yaml definierten Dienste haben den entsprechenden Quellcode
+- [ ] Alle in azure.yaml definierten Dienste haben entsprechenden Quellcode
 - [ ] Bicep-Vorlagen im Verzeichnis `infra/` sind vorhanden
-- [ ] `main.bicep` kompiliert fehlerfrei (`az bicep build --file infra/main.bicep`)
+- [ ] `main.bicep` kompiliert ohne Fehler (`az bicep build --file infra/main.bicep`)
 - [ ] 🧪 Infrastrukturvorschau läuft erfolgreich (`azd provision --preview`)
 - [ ] Alle erforderlichen Parameter haben Standardwerte oder werden bereitgestellt
 - [ ] Keine hartkodierten Geheimnisse in Vorlagen
 
-#### ✅ Ressourcenplanung
+#### ✅ Resource Planning
 - [ ] Ziel-Azure-Region ausgewählt und validiert
 - [ ] Erforderliche Azure-Dienste in der Zielregion verfügbar
-- [ ] Ausreichende Kontingente für geplante Ressourcen verfügbar
-- [ ] Ressourcennamenskonflikte geprüft
+- [ ] Ausreichende Kontingente für geplante Ressourcen vorhanden
+- [ ] Namenskonflikte für Ressourcen überprüft
 - [ ] Abhängigkeiten zwischen Ressourcen verstanden
 
-#### ✅ Netzwerk & Sicherheit
+#### ✅ Network & Security
 - [ ] Netzwerkverbindung zu Azure-Endpunkten überprüft
 - [ ] Firewall-/Proxy-Einstellungen bei Bedarf konfiguriert
-- [ ] Key Vault für das Geheimnismanagement konfiguriert
-- [ ] Verwaltete Identitäten dort eingesetzt, wo möglich
+- [ ] Key Vault zur Geheimnisverwaltung konfiguriert
+- [ ] Verwaltete Identitäten dort verwendet, wo möglich
 - [ ] HTTPS-Erzwingung für Webanwendungen aktiviert
 
-#### ✅ Kostenmanagement
+#### ✅ Cost Management
 - [ ] Kostenschätzungen mit dem Azure Pricing Calculator berechnet
-- [ ] Budgetwarnungen konfiguriert, falls erforderlich
+- [ ] Budgetwarnungen bei Bedarf konfiguriert
 - [ ] Geeignete SKUs für den Umgebungstyp ausgewählt
-- [ ] Reservierte Kapazität für Produktions-Workloads in Betracht gezogen
+- [ ] Reservierte Kapazität für Produktions-Workloads berücksichtigt
 
 #### ✅ Monitoring & Observability
 - [ ] Application Insights in Vorlagen konfiguriert
-- [ ] Log Analytics-Arbeitsbereich geplant
+- [ ] Log Analytics Workspace geplant
 - [ ] Alarmregeln für kritische Metriken definiert
 - [ ] Health-Check-Endpunkte in Anwendungen implementiert
 
-#### ✅ Backup & Wiederherstellung
+#### ✅ Backup & Recovery
 - [ ] Backup-Strategie für Datenressourcen definiert
-- [ ] Recovery Time Objectives (RTO) dokumentiert
-- [ ] Recovery Point Objectives (RPO) dokumentiert
-- [ ] Notfallwiederherstellungsplan für die Produktion vorhanden
+- [ ] Wiederherstellungszeitziele (RTO) dokumentiert
+- [ ] Wiederherstellungspunktziele (RPO) dokumentiert
+- [ ] Notfallwiederherstellungsplan für Produktion vorhanden
 
 ---
 
-## Umgebungsvalidierung
+## Environment Validation
 
-### Validierung der Entwicklungsumgebung
+### Development Environment Validation
 
 ```bash
 #!/bin/bash
-# Entwicklungsumgebung-spezifische Validierungen
+# Entwicklungsumgebungsspezifische Validierungen
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # Auf entwicklungsfreundliche Konfigurationen prüfen
+    # Überprüfung auf entwicklungsfreundliche Konfigurationen
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # Auf Konfigurationen zur automatischen Abschaltung prüfen
+    # Überprüfung auf Konfigurationen für automatische Abschaltung
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # Datenbankkonfigurationen der Entwicklungsumgebung validieren
+    # Validierung der Konfigurationen der Entwicklungsdatenbank
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -892,7 +892,7 @@ validate_dev_environment() {
 }
 ```
 
-### Validierung der Produktionsumgebung
+### Production Environment Validation
 
 ```bash
 #!/bin/bash
@@ -901,28 +901,28 @@ validate_dev_environment() {
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # Prüfung auf Hochverfügbarkeitskonfigurationen
+    # Prüfen auf Hochverfügbarkeitskonfigurationen
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # Prüfung auf Sicherungskonfigurationen
+    # Prüfen auf Backup-Konfigurationen
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # Validierung der Überwachungskonfiguration
+    # Validierung der Überwachungseinrichtung
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # Prüfung auf Sicherheitskonfigurationen
+    # Prüfen auf Sicherheitskonfigurationen
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -933,9 +933,9 @@ validate_prod_environment() {
 
 ---
 
-## Ressourcenvalidierung
+## Resource Validation
 
-### Kontingent-Validierungsskript
+### Quota Validation Script
 
 ```python
 #!/usr/bin/env python3
@@ -998,7 +998,7 @@ def check_storage_limits(location: str) -> bool:
         return False
     
     account_count = len(accounts)
-    max_accounts = 250  # Standardmäßiges Azure-Limit
+    max_accounts = 250  # Standardlimit von Azure
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1058,9 +1058,9 @@ if __name__ == "__main__":
 
 ---
 
-## Sicherheits- & Compliance-Prüfungen
+## Security & Compliance Checks
 
-### Sicherheitsvalidierungsskript
+### Security Validation Script
 
 ```bash
 #!/bin/bash
@@ -1071,7 +1071,7 @@ check_security_practices() {
     
     local issues_found=0
     
-    # Prüfung auf Verwendung von Key Vault
+    # Prüfung auf Key Vault-Nutzung
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1177,9 +1177,9 @@ main "$@"
 
 ---
 
-## Integration in CI/CD
+## Integration with CI/CD
 
-### GitHub Actions-Integration
+### GitHub Actions Integration
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1238,7 +1238,7 @@ jobs:
         path: preflight-results.json
 ```
 
-### Azure DevOps-Integration
+### Azure DevOps Integration
 
 ```yaml
 trigger: none
@@ -1290,18 +1290,18 @@ steps:
 
 ---
 
-## Zusammenfassung der Best Practices
+## Best Practices Summary
 
-### ✅ Best Practices für Pre-Flight-Checks
+### ✅ Pre-flight Check Best Practices
 
 1. **Automatisieren, wo möglich**
-   - Checks in CI/CD-Pipelines integrieren
-   - Skripte für wiederholbare Validierungen verwenden
-   - Ergebnisse für Audit-Trails speichern
+   - Integrieren Sie Prüfungen in CI/CD-Pipelines
+   - Verwenden Sie Skripte für wiederholbare Validierungen
+   - Speichern Sie Ergebnisse für Audit-Trails
 
 2. **Umgebungsspezifische Validierung**
    - Unterschiedliche Prüfungen für Dev/Staging/Prod
-   - Geeignete Sicherheitsanforderungen je Umgebung
+   - Angemessene Sicherheitsanforderungen pro Umgebung
    - Kostenoptimierung für Nicht-Produktionsumgebungen
 
 3. **Umfassende Abdeckung**
@@ -1311,37 +1311,37 @@ steps:
    - Sicherheits- und Compliance-Anforderungen
 
 4. **Klare Berichterstattung**
-   - Farblich gekennzeichnete Statusanzeigen
-   - Detaillierte Fehlermeldungen mit Behebungsanweisungen
-   - Zusammenfassende Berichte zur schnellen Beurteilung
+   - Farblich codierte Statusanzeigen
+   - Detaillierte Fehlermeldungen mit Lösungsschritten
+   - Zusammenfassende Berichte für schnelle Bewertung
 
-5. **Schnell abbrechen (Fail Fast)**
+5. **Fail Fast**
    - Bereitstellung stoppen, wenn kritische Prüfungen fehlschlagen
-   - Klare Anleitungen zur Lösung bereitstellen
-   - Einfache erneute Ausführung von Prüfungen ermöglichen
+   - Klare Anleitung zur Problemlösung bereitstellen
+   - Einfaches erneutes Ausführen der Prüfungen ermöglichen
 
 ### Häufige Pre-Flight-Fallen
 
 1. **Validierung überspringen** für „schnelle“ Bereitstellungen
 2. **Unzureichende Berechtigungsprüfung** vor der Bereitstellung
-3. **Kontingentgrenzen ignorieren** bis die Bereitstellung fehlschlägt
+3. **Kontingentlimits ignorieren**, bis die Bereitstellung fehlschlägt
 4. **Vorlagen nicht in CI/CD-Pipelines validieren**
-5. **Fehlende Sicherheitsvalidierung** für Produktionsumgebungen
+5. **Sicherheitsvalidierung für Produktionsumgebungen fehlen**
 6. **Unzureichende Kostenschätzung**, die zu Budgetüberraschungen führt
 
 ---
 
-**Profi-Tipp**: Führen Sie Pre-Flight-Checks als separaten Job in Ihrer CI/CD-Pipeline aus, bevor der eigentliche Bereitstellungs-Job startet. So können Probleme früh erkannt werden und Entwickler erhalten schnelleres Feedback.
+**Profi-Tipp**: Führen Sie Pre-Flight-Checks als separaten Job in Ihrer CI/CD-Pipeline vor dem eigentlichen Bereitstellungs-Job aus. Dadurch können Sie Probleme frühzeitig erkennen und Entwicklern schnelleres Feedback geben.
 
 ---
 
 **Navigation**
-- **Vorherige Lektion**: [SKU-Auswahl](sku-selection.md)
-- **Nächste Lektion**: [Spickzettel](../../resources/cheat-sheet.md)
+- **Previous Lesson**: [SKU-Auswahl](sku-selection.md)
+- **Next Lesson**: [Spickzettel](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Haftungsausschluss**:
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das ursprüngliche Dokument in seiner Originalsprache ist als maßgebliche Quelle zu betrachten. Für wichtige Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir haften nicht für Missverständnisse oder Fehlinterpretationen, die durch die Nutzung dieser Übersetzung entstehen.
+Dieses Dokument wurde mithilfe des KI-Übersetzungsdienstes [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das ursprüngliche Dokument in seiner ursprünglichen Sprache gilt als maßgebliche Quelle. Für wichtige Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir haften nicht für Missverständnisse oder Fehlinterpretationen, die sich aus der Verwendung dieser Übersetzung ergeben.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

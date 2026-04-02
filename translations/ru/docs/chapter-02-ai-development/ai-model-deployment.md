@@ -1,28 +1,30 @@
-# Развёртывание моделей ИИ с помощью Azure Developer CLI
+# Развертывание моделей ИИ с помощью Azure Developer CLI
 
 **Навигация по главам:**
-- **📚 Главная курса**: [AZD для начинающих](../../README.md)
-- **📖 Текущая глава**: Глава 2 — Разработка с приоритетом ИИ
-- **⬅️ Предыдущая**: [Интеграция Microsoft Foundry](microsoft-foundry-integration.md)
+- **📚 Домашняя страница курса**: [AZD для начинающих](../../README.md)
+- **📖 Текущая глава**: Глава 2 - Разработка с приоритетом ИИ
+- **⬅️ Предыдущая**: [Интеграция с Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Следующая**: [Лабораторная работа по ИИ](ai-workshop-lab.md)
 - **🚀 Следующая глава**: [Глава 3: Конфигурация](../chapter-03-configuration/configuration.md)
 
-Это руководство содержит подробные инструкции по развёртыванию моделей ИИ с использованием шаблонов AZD, охватывая всё — от выбора модели до схем развёртывания в продакшене.
+Это руководство содержит подробные инструкции по развертыванию моделей ИИ с использованием шаблонов AZD, охватывая все этапы от выбора модели до паттернов развертывания в производстве.
+
+> **Примечание по валидации (2026-03-25):** Рабочий процесс AZD в данном руководстве был проверен с `azd` версии `1.23.12`. Для развертываний ИИ, которые занимают больше времени, чем стандартное окно развертывания сервиса, текущие версии AZD поддерживают команду `azd deploy --timeout <seconds>`.
 
 ## Содержание
 
-- [Стратегия выбора модели](../../../../docs/chapter-02-ai-development)
-- [Конфигурация AZD для моделей ИИ](../../../../docs/chapter-02-ai-development)
-- [Схемы развёртывания](../../../../docs/chapter-02-ai-development)
-- [Управление моделями](../../../../docs/chapter-02-ai-development)
-- [Особенности продакшена](../../../../docs/chapter-02-ai-development)
-- [Мониторинг и наблюдаемость](../../../../docs/chapter-02-ai-development)
+- [Стратегия выбора модели](#стратегия-выбора-модели)
+- [Конфигурация AZD для моделей ИИ](#конфигурация-azd-для-моделей-ии)
+- [Паттерны развертывания](#паттерны-развертывания)
+- [Управление моделями](#управление-моделями)
+- [Особенности производства](#особенности-производства)
+- [Мониторинг и наблюдаемость](#мониторинг-и-наблюдаемость)
 
 ## Стратегия выбора модели
 
-### Модели Microsoft Foundry Models
+### Модели Microsoft Foundry
 
-Выберите подходящую модель для вашего сценария:
+Выберите подходящую модель для вашего сценария использования:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -41,9 +43,9 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
@@ -52,12 +54,12 @@ services:
 
 ### Планирование ёмкости модели
 
-| Тип модели | Сценарий использования | Рекомендуемая ёмкость | Затраты |
-|------------|-----------------------|----------------------|---------|
-| gpt-4.1-mini | Чат, Вопрос-Ответ | 10-50 TPM | Экономично для большинства задач |
-| gpt-4.1 | Сложное рассуждение | 20-100 TPM | Более высокая стоимость, для премиум-функций |
-| Text-embedding-ada-002 | Поиск, RAG | 30-120 TPM | Важно для семантического поиска |
-| Whisper | Распознавание речи | 10-50 TPM | Задачи обработки аудио |
+| Тип модели | Сценарий использования | Рекомендуемая ёмкость | Стоимостные соображения |
+|------------|-----------------------|----------------------|------------------------|
+| gpt-4.1-mini | Чат, Вопрос-Ответ | 10-50 TPM | Экономично для большинства нагрузок |
+| gpt-4.1 | Сложное рассуждение | 20-100 TPM | Более высокая стоимость, использовать для премиальных функций |
+| text-embedding-3-large | Поиск, RAG | 30-120 TPM | Надёжный выбор по умолчанию для семантического поиска и извлечения |
+| Whisper | Распознавание речи | 10-50 TPM | Для аудиообработки |
 
 ## Конфигурация AZD для моделей ИИ
 
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -124,19 +126,19 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Переменные окружения
 
-Настройте окружение приложения:
+Настройте окружение вашего приложения:
 
 ```bash
 # Конфигурация .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Схемы развёртывания
+## Паттерны развертывания
 
-### Схема 1: Развёртывание в одном регионе
+### Паттерн 1: Развертывание в одном регионе
 
 ```yaml
 # azure.yaml - Single region
@@ -149,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Подходит для:
+Лучше всего подходит для:
 - Разработки и тестирования
 - Приложений для одного рынка
 - Оптимизации затрат
 
-### Схема 2: Мульти-региональное развёртывание
+### Паттерн 2: Развертывание в нескольких регионах
 
 ```bicep
 // Multi-region deployment
@@ -167,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Подходит для:
+Лучше всего подходит для:
 - Глобальных приложений
 - Требований высокой доступности
 - Распределения нагрузки
 
-### Схема 3: Гибридное развёртывание
+### Паттерн 3: Гибридное развертывание
 
-Комбинируйте Microsoft Foundry Models с другими ИИ-сервисами:
+Комбинируйте модели Microsoft Foundry с другими ИИ-сервисами:
 
 ```bicep
 // Hybrid AI services
@@ -207,7 +209,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Контроль версий
 
-Отслеживайте версии модели в конфигурации AZD:
+Отслеживайте версии моделей в вашей конфигурации AZD:
 
 ```json
 {
@@ -215,11 +217,11 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
@@ -227,7 +229,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Обновления моделей
 
-Используйте хуки AZD для обновлений моделей:
+Используйте хуки AZD для обновления моделей:
 
 ```bash
 #!/bin/bash
@@ -238,11 +240,14 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# Если развертывание занимает больше времени, чем установленное по умолчанию время ожидания
+azd deploy --timeout 1800
 ```
 
 ### A/B тестирование
 
-Развёртывайте несколько версий моделей:
+Развертывайте несколько версий моделей:
 
 ```bicep
 param enableABTesting bool = false
@@ -264,11 +269,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Особенности продакшена
+## Особенности производства
 
 ### Планирование ёмкости
 
-Рассчитывайте необходимую ёмкость на основе паттернов использования:
+Рассчитывайте требуемую ёмкость на основе шаблонов использования:
 
 ```python
 # Пример расчёта ёмкости
@@ -293,9 +298,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Конфигурация авто-масштабирования
+### Конфигурация автоподстройки масштабирования
 
-Настройте авто-масштабирование для Container Apps:
+Настройте автоподстройку масштабирования для Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -333,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Оптимизация затрат
 
-Внедряйте меры контроля затрат:
+Внедрите управление затратами:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -365,7 +370,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ## Мониторинг и наблюдаемость
 
-### Интеграция с Application Insights
+### Интеграция Application Insights
 
 Настройте мониторинг для ИИ-нагрузок:
 
@@ -405,7 +410,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### Пользовательские метрики
 
-Отслеживайте специфические для ИИ метрики:
+Отслеживайте специфичные для ИИ метрики:
 
 ```python
 # Пользовательская телеметрия для моделей ИИ
@@ -442,7 +447,7 @@ class AITelemetry:
 
 ### Проверки состояния
 
-Реализуйте мониторинг здоровья сервисов ИИ:
+Реализуйте мониторинг состояния ИИ-сервисов:
 
 ```python
 # Конечные точки проверки состояния здоровья
@@ -455,7 +460,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Проверка подключения к OpenAI
+        # Тест подключения к OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -473,14 +478,14 @@ async def check_ai_models():
 
 ## Следующие шаги
 
-1. **Изучите [Руководство по интеграции Microsoft Foundry](microsoft-foundry-integration.md)** для схем интеграции сервисов  
-2. **Пройдите [Лабораторную работу по ИИ](ai-workshop-lab.md)** для практического опыта  
-3. **Реализуйте [Практики ИИ для продакшена](production-ai-practices.md)** для корпоративных развертываний  
-4. **Ознакомьтесь с [Руководством по устранению неполадок ИИ](../chapter-07-troubleshooting/ai-troubleshooting.md)** для решения распространённых проблем
+1. **Изучите [Руководство по интеграции Microsoft Foundry](microsoft-foundry-integration.md)** для паттернов интеграции сервисов
+2. **Выполните [Лабораторную работу по ИИ](ai-workshop-lab.md)** для практического опыта
+3. **Реализуйте [Практики производства ИИ](production-ai-practices.md)** для корпоративных развертываний
+4. **Изучите [Руководство по устранению неполадок ИИ](../chapter-07-troubleshooting/ai-troubleshooting.md)** для решения распространённых проблем
 
 ## Ресурсы
 
-- [Доступность моделей Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Доступность моделей Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Документация Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Масштабирование Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Оптимизация затрат на модели ИИ](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
@@ -488,15 +493,15 @@ async def check_ai_models():
 ---
 
 **Навигация по главам:**
-- **📚 Главная курса**: [AZD для начинающих](../../README.md)
-- **📖 Текущая глава**: Глава 2 — Разработка с приоритетом ИИ
-- **⬅️ Предыдущая**: [Интеграция Microsoft Foundry](microsoft-foundry-integration.md)
+- **📚 Домашняя страница курса**: [AZD для начинающих](../../README.md)
+- **📖 Текущая глава**: Глава 2 - Разработка с приоритетом ИИ
+- **⬅️ Предыдущая**: [Интеграция с Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Следующая**: [Лабораторная работа по ИИ](ai-workshop-lab.md)
 - **🚀 Следующая глава**: [Глава 3: Конфигурация](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Отказ от ответственности**:
-Этот документ был переведен с помощью автоматического сервиса перевода [Co-op Translator](https://github.com/Azure/co-op-translator). Несмотря на наши усилия по обеспечению точности, обратите внимание, что автоматические переводы могут содержать ошибки или неточности. Оригинальный документ на его исходном языке должен рассматриваться как авторитетный источник. Для важной информации рекомендуется использовать профессиональный перевод, выполненный человеком. Мы не несем ответственности за любые недоразумения или неверные толкования, возникшие в результате использования этого перевода.
+**Отказ от ответственности**:  
+Этот документ был переведен с помощью сервиса автоматического перевода [Co-op Translator](https://github.com/Azure/co-op-translator). Несмотря на наши усилия по обеспечению точности, имейте в виду, что автоматический перевод может содержать ошибки или неточности. Оригинальный документ на его исходном языке следует считать авторитетным источником. Для критически важной информации рекомендуется профессиональный перевод, выполненный человеком. Мы не несем ответственности за любые недоразумения или неправильные толкования, возникшие в результате использования данного перевода.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

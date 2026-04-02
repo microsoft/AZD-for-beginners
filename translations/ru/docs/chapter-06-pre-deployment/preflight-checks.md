@@ -1,73 +1,73 @@
-# Предварительные проверки для развертываний AZD
+# Проверка перед развертыванием AZD
 
-**Chapter Navigation:**
+**Навигация по главам:**
 - **📚 Главная курса**: [AZD для начинающих](../../README.md)
 - **📖 Текущая глава**: Глава 6 - Проверка и планирование перед развертыванием
 - **⬅️ Предыдущая**: [Выбор SKU](sku-selection.md)
 - **➡️ Следующая глава**: [Глава 7: Устранение неполадок](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 Связанное**: [Глава 4: Руководство по развертыванию](../chapter-04-infrastructure/deployment-guide.md)
+- **🔧 Связанные материалы**: [Глава 4: Руководство по развертыванию](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Введение
 
-Это всестороннее руководство предоставляет скрипты и процедуры предварительной проверки перед началом развертывания через Azure Developer CLI. Научитесь реализовывать автоматизированные проверки аутентификации, доступности ресурсов, квот, соответствия требованиям безопасности и производительности, чтобы предотвратить сбои при развертывании и повысить вероятность успешного выполнения.
+Это комплексное руководство предоставляет скрипты и процедуры проверки перед развертыванием, чтобы обеспечить успешное развертывание Azure Developer CLI ещё до его начала. Узнайте, как реализовать автоматические проверки аутентификации, доступности ресурсов, квот, соответствия требованиям безопасности и производительности, чтобы предотвратить сбои развертывания и повысить успешность развертываний.
 
 ## Цели обучения
 
-Пройдя это руководство, вы:
-- Овладеете автоматизированными техниками и скриптами предварительной проверки
-- Поймёте комплексные стратегии проверки аутентификации, разрешений и квот
-- Реализуете процедуры проверки доступности и ёмкости ресурсов
-- Настроите проверки безопасности и соответствия корпоративным политикам
-- Спроектируете рабочие процессы оценки затрат и проверки бюджета
-- Создадите собственную автоматизацию предполётных проверок для CI/CD
+После выполнения этого руководства вы научитесь:
+- Осваивать автоматизированные методы и скрипты проверки перед развертыванием
+- Понимать комплексные стратегии проверки аутентификации, прав и квот
+- Реализовывать процедуры проверки доступности ресурсов и емкости
+- Настраивать проверки безопасности и соответствия корпоративным политикам
+- Проектировать рабочие процессы оценки стоимости и проверки бюджета
+- Создавать пользовательскую автоматизацию предварительной проверки для CI/CD
 
 ## Результаты обучения
 
-По завершении вы сможете:
-- Создавать и запускать комплексные скрипты предварительной проверки
-- Проектировать автоматизированные рабочие процессы проверки для разных сценариев развертывания
-- Реализовывать процедуры и политики проверки, специфичные для окружения
-- Настроить проактивный мониторинг и оповещения готовности к развертыванию
-- Устранять проблемы перед развертыванием и применять корректирующие меры
-- Интегрировать предполётные проверки в DevOps-конвейеры и автоматизацию
+После завершения вы сможете:
+- Создавать и запускать комплексные скрипты проверки перед развертыванием
+- Проектировать автоматизированные рабочие процессы проверки для различных сценариев развертывания
+- Реализовывать процедуры и политики валидации, специфичные для среды
+- Настраивать проактивный мониторинг и оповещения готовности к развертыванию
+- Устранять проблемы перед развертыванием и выполнять корректирующие действия
+- Интегрировать проверки перед развертыванием в конвейеры DevOps и автоматизацию
 
 ## Содержание
 
-- [Обзор](../../../../docs/chapter-06-pre-deployment)
-- [Автоматизированный скрипт предварительной проверки](../../../../docs/chapter-06-pre-deployment)
-- [Контрольный список ручной проверки](../../../../docs/chapter-06-pre-deployment)
-- [Проверка окружения](../../../../docs/chapter-06-pre-deployment)
-- [Проверка ресурсов](../../../../docs/chapter-06-pre-deployment)
-- [Проверки безопасности и соответствия](../../../../docs/chapter-06-pre-deployment)
-- [Планирование производительности и ёмкости](../../../../docs/chapter-06-pre-deployment)
-- [Устранение распространённых проблем](../../../../docs/chapter-06-pre-deployment)
+- [Обзор](#обзор)
+- [Автоматический скрипт предварительной проверки](#автоматический-скрипт-предварительной-проверки)
+- [Чеклист ручной проверки](#codeblock1)
+- [Проверка среды](#✅-резервное-копирование-и-восстановление)
+- [Проверка ресурсов](#проверка-продуктивной-среды)
+- [Проверки безопасности и соответствия](#security--compliance-checks)
+- [Планирование производительности и емкости](#performance--capacity-planning)
+- [Устранение распространённых проблем](#troubleshooting-common-issues)
 
 ---
 
 ## Обзор
 
-Предварительные проверки — это обязательные валидации, выполняемые перед развертыванием, чтобы убедиться в следующем:
+Проверки перед развертыванием — это важные валидации, выполняемые до развертывания для обеспечения:
 
-- **Доступность ресурсов** и квоты в целевых регионах
-- **Аутентификация и разрешения** настроены корректно
-- **Корректность шаблонов** и параметров
-- **Сетевое подключение** и зависимости
-- **Соответствие требованиям безопасности** корпоративных политик
-- **Оценка затрат** в рамках бюджетных ограничений
+- **Доступности ресурсов** и квот в целевых регионах
+- **Правильной настройки аутентификации и прав**
+- **Корректности шаблонов** и параметров
+- **Сетевой доступности** и зависимостей
+- **Соответствия требованиям безопасности** корпоративных политик
+- **Оценки стоимости** в рамках бюджета
 
-### Когда запускать предварительные проверки
+### Когда запускать проверки перед развертыванием
 
-- **Перед первым развертыванием** в новом окружении
-- **После значительных изменений в шаблонах**
-- **Перед развертыванием в production**
+- **Перед первым развертыванием** в новой среде
+- **После существенных изменений в шаблонах**
+- **Перед развертываниями в продуктивной среде**
 - **При смене регионов Azure**
-- **Как часть CI/CD конвейеров**
+- **В рамках CI/CD конвейеров**
 
 ---
 
-## Автоматизированный скрипт предварительной проверки
+## Автоматический скрипт предварительной проверки
 
-### PowerShell: скрипт предварительной проверки
+### PowerShell скрипт предварительной проверки
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -128,7 +128,7 @@ function Write-Status {
 function Test-Prerequisites {
     Write-Host "${Blue}=== Prerequisites Check ===${Reset}"
     
-    # Проверить установку AZD
+    # Проверка установки AZD
     try {
         $azdVersion = azd version --output json | ConvertFrom-Json
         Write-Status "AZD CLI installed" "Success" "Version: $($azdVersion.azd.version)"
@@ -138,7 +138,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Проверить установку Azure CLI
+    # Проверка установки Azure CLI
     try {
         $azVersion = az version --output json | ConvertFrom-Json
         Write-Status "Azure CLI installed" "Success" "Version: $($azVersion.'azure-cli')"
@@ -148,7 +148,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Проверить версию PowerShell
+    # Проверка версии PowerShell
     if ($PSVersionTable.PSVersion.Major -ge 7) {
         Write-Status "PowerShell version" "Success" "Version: $($PSVersionTable.PSVersion)"
     }
@@ -163,7 +163,7 @@ function Test-Authentication {
     Write-Host "`n${Blue}=== Authentication Check ===${Reset}"
     
     try {
-        # Проверить аутентификацию AZD
+        # Проверка аутентификации AZD
         $azdAuth = azd auth login --check-status --output json 2>$null | ConvertFrom-Json
         if ($azdAuth.status -eq "Logged-in") {
             Write-Status "AZD authentication" "Success" "User: $($azdAuth.principalName)"
@@ -173,11 +173,11 @@ function Test-Authentication {
             return $false
         }
         
-        # Проверить аутентификацию Azure CLI
+        # Проверка аутентификации Azure CLI
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # Проверить доступ к подписке
+        # Проверка доступа к подписке
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -194,7 +194,7 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # Получить назначения ролей текущего пользователя
+        # Получение назначенных ролей текущего пользователя
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
@@ -210,14 +210,14 @@ function Test-Permissions {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # Проверить создание группы ресурсов (если указано)
+        # Тест создания группы ресурсов (если указано)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # Проверить возможность создания группы ресурсов
+                # Тест возможности создания группы ресурсов
                 try {
                     az group create --name "preflight-test-rg" --location $Location --output none
                     az group delete --name "preflight-test-rg" --yes --output none
@@ -242,10 +242,10 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # Проверить квоты вычислений
+        # Проверка квот вычислительных ресурсов
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # Проверить конкретные квоты
+        # Проверка конкретных квот
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
         if ($coreQuota) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
@@ -257,7 +257,7 @@ function Test-QuotasAndLimits {
             }
         }
         
-        # Проверить лимиты App Service
+        # Проверка лимитов App Service
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
             if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
@@ -271,7 +271,7 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # Проверить лимиты учетной записи хранения
+        # Проверка лимитов учетной записи хранения
         $storageAccounts = az storage account list --output json | ConvertFrom-Json
         $accountCount = ($storageAccounts | Measure-Object).Count
         if ($accountCount -lt 200) {
@@ -285,14 +285,14 @@ function Test-QuotasAndLimits {
     }
     catch {
         Write-Status "Quota check failed" "Warning" $_.Exception.Message
-        return $true # Неблокирующий
+        return $true # Не блокирующий
     }
 }
 
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # Проверить конечные точки Azure
+    # Тест Azure endpoints
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -310,7 +310,7 @@ function Test-NetworkConnectivity {
         }
     }
     
-    # Проверить разрешение DNS
+    # Тест разрешения DNS
     try {
         $dnsResult = Resolve-DnsName "management.azure.com" -ErrorAction Stop
         Write-Status "DNS resolution" "Success" "Resolved successfully"
@@ -326,16 +326,16 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # Проверить наличие azure.yaml
+    # Проверка существования azure.yaml
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # Разобрать azure.yaml
+        # Разбор azure.yaml
         try {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # Проверить сервисы
+            # Проверка сервисов
             if ($azureYaml.services) {
                 $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
@@ -354,13 +354,13 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # Проверить наличие файлов инфраструктуры
+    # Проверка наличия инфраструктурных файлов
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # Проверить main.bicep, если он существует
+            # Проверка main.bicep, если он существует
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -384,7 +384,7 @@ function Test-TemplateValidation {
     # 🧪 НОВОЕ: Тест предварительного просмотра инфраструктуры (безопасный dry-run)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -403,7 +403,7 @@ function Test-RegionalAvailability {
     Write-Host "`n${Blue}=== Regional Availability Check ===${Reset}"
     
     try {
-        # Проверить, корректен ли регион
+        # Проверка валидности локации
         $locations = az account list-locations --output json | ConvertFrom-Json
         $validLocation = $locations | Where-Object { $_.name -eq $Location -or $_.displayName -eq $Location }
         
@@ -415,7 +415,7 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # Проверить доступность сервиса в регионе
+        # Проверка доступности сервиса в регионе
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
@@ -446,11 +446,11 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Базовая оценка стоимости (для точных оценок требуется Azure Pricing API)
+    # Базовая оценка стоимости (для точной оценки потребуется Azure Pricing API)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # Проверить наличие бюджета
+    # Проверка существования бюджета
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -470,9 +470,9 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # Проверить соблюдение общих практик безопасности
+    # Проверка общих практик безопасности
     try {
-        # Проверить, настроен ли Key Vault
+        # Проверка конфигурации Key Vault
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
             Write-Status "Key Vault usage" "Success" "Key Vault detected in templates"
         }
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # Проверить использование управляемых идентичностей
+        # Проверка использования управляемой идентичности
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +488,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # Проверить принудительное применение HTTPS
+        # Проверка принудительного HTTPS
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -504,7 +504,7 @@ function Test-SecurityCompliance {
     }
 }
 
-# Основной запуск
+# Основное выполнение
 function Invoke-PreflightCheck {
     Write-Host "${Green}AZD Pre-flight Check${Reset}" -ForegroundColor Green
     Write-Host "Environment: $EnvironmentName"
@@ -516,7 +516,7 @@ function Invoke-PreflightCheck {
     $allPassed = $true
     $results = @{}
     
-    # Запустить все проверки
+    # Запуск всех проверок
     $results["Prerequisites"] = Test-Prerequisites
     $results["Authentication"] = Test-Authentication
     $results["Permissions"] = Test-Permissions
@@ -527,7 +527,7 @@ function Invoke-PreflightCheck {
     $results["CostEstimation"] = Test-CostEstimation
     $results["SecurityCompliance"] = Test-SecurityCompliance
     
-    # Сводка
+    # Итог
     Write-Host "`n${Blue}=== Pre-flight Check Summary ===${Reset}"
     
     $passedCount = 0
@@ -557,19 +557,19 @@ function Invoke-PreflightCheck {
     }
 }
 
-# Запустить предварительную проверку
+# Запуск предварительной проверки
 Invoke-PreflightCheck
 ```
 
-### Bash: скрипт предварительной проверки
+### Bash скрипт предварительной проверки
 
 ```bash
 #!/bin/bash
-# Bash-версия предварительных проверок для систем Unix/Linux
+# Версия Bash для предварительных проверок систем Unix/Linux
 
 set -euo pipefail
 
-# Коды цветов
+# Цветовые коды
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -606,7 +606,7 @@ print_status() {
 check_prerequisites() {
     echo -e "${BLUE}=== Prerequisites Check ===${NC}"
     
-    # Проверить установку AZD
+    # Проверка установки AZD
     if command -v azd >/dev/null 2>&1; then
         local azd_version=$(azd version --output json | jq -r '.azd.version')
         print_status "AZD CLI installed" "success" "Version: $azd_version"
@@ -615,7 +615,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # Проверить установку Azure CLI
+    # Проверка установки Azure CLI
     if command -v az >/dev/null 2>&1; then
         local az_version=$(az version --output json | jq -r '."azure-cli"')
         print_status "Azure CLI installed" "success" "Version: $az_version"
@@ -624,7 +624,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # Проверить установку jq
+    # Проверка установки jq
     if command -v jq >/dev/null 2>&1; then
         print_status "jq installed" "success"
     else
@@ -637,7 +637,7 @@ check_prerequisites() {
 check_authentication() {
     echo -e "\n${BLUE}=== Authentication Check ===${NC}"
     
-    # Проверить аутентификацию AZD
+    # Проверка аутентификации AZD
     if azd auth login --check-status >/dev/null 2>&1; then
         local principal_name=$(azd auth login --check-status --output json 2>/dev/null | jq -r '.principalName // "Unknown"')
         print_status "AZD authentication" "success" "User: $principal_name"
@@ -646,7 +646,7 @@ check_authentication() {
         return 1
     fi
     
-    # Проверить аутентификацию Azure CLI
+    # Проверка аутентификации Azure CLI
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -661,7 +661,7 @@ check_authentication() {
 check_template_validation() {
     echo -e "\n${BLUE}=== Template Validation ===${NC}"
     
-    # Проверить azure.yaml
+    # Проверка azure.yaml
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
@@ -677,13 +677,13 @@ check_template_validation() {
         return 1
     fi
     
-    # Проверить файлы инфраструктуры
+    # Проверка файлов инфраструктуры
     if [[ -d "infra" ]]; then
         local bicep_count=$(find infra -name "*.bicep" | wc -l)
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # Проверить main.bicep, если он существует
+            # Проверка main.bicep, если файл существует
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +706,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # Проверить, корректно ли указано местоположение
+    # Проверка корректности location
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -714,7 +714,7 @@ check_regional_availability() {
         return 1
     fi
     
-    # Проверить доступность сервиса
+    # Проверка доступности сервиса
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
     for service in "${services[@]}"; do
@@ -729,7 +729,7 @@ check_regional_availability() {
 }
 
 main() {
-    # Разобрать аргументы командной строки
+    # Анализ аргументов командной строки
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -755,7 +755,7 @@ main() {
         esac
     done
     
-    # Проверить обязательные параметры
+    # Проверка обязательных параметров
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -768,7 +768,7 @@ main() {
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
     
-    # Запустить проверки
+    # Запуск проверок
     local all_passed=true
     
     check_prerequisites || all_passed=false
@@ -776,7 +776,7 @@ main() {
     check_template_validation || all_passed=false
     check_regional_availability || all_passed=false
     
-    # Сводка
+    # Итог
     echo -e "\n${BLUE}=== Pre-flight Check Summary ===${NC}"
     
     if $all_passed; then
@@ -790,77 +790,77 @@ main() {
     fi
 }
 
-# Запустить основную функцию
+# Запуск основной функции
 main "$@"
 ```
 
 ---
 
-## Контрольный список ручной проверки
+## Чеклист ручной проверки
 
-### Контрольный список перед развертыванием
+### Чеклист перед развертыванием
 
-Распечатайте этот контрольный список и проверьте каждый пункт перед развертыванием:
+Распечатайте этот чеклист и проверьте каждый пункт перед развертыванием:
 
-#### ✅ Настройка окружения
+#### ✅ Настройка среды
 - [ ] AZD CLI установлен и обновлён до последней версии
 - [ ] Azure CLI установлен и выполнена аутентификация
 - [ ] Выбрана правильная подписка Azure
-- [ ] Имя окружения уникально и соответствует соглашениям об именовании
-- [ ] Целевая группа ресурсов определена или может быть создана
+- [ ] Имя среды уникально и соответствует правилам именования
+- [ ] Определена целевая группа ресурсов или возможность её создания
 
-#### ✅ Аутентификация и разрешения
-- [ ] Успешно аутентифицирован (выполнен вход) с помощью `azd auth login`
-- [ ] Пользователь имеет роль Contributor в целевой подписке/группе ресурсов
+#### ✅ Аутентификация и права
+- [ ] Успешная аутентификация через `azd auth login`
+- [ ] У пользователя роль Contributor в целевой подписке/группе ресурсов
 - [ ] Сервисный принципал настроен для CI/CD (если применимо)
-- [ ] Отсутствуют просроченные сертификаты или учётные данные
+- [ ] Нет просроченных сертификатов или учетных данных
 
 #### ✅ Проверка шаблонов
-- [ ] Файл `azure.yaml` существует и является корректным YAML
+- [ ] Файл `azure.yaml` существует и является валидным YAML
 - [ ] Все сервисы, определённые в azure.yaml, имеют соответствующий исходный код
-- [ ] Bicep-шаблоны в каталоге `infra/` присутствуют
+- [ ] Bicep шаблоны в каталоге `infra/` присутствуют
 - [ ] Файл `main.bicep` компилируется без ошибок (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Предварительный просмотр инфраструктуры выполняется успешно (`azd provision --preview`)
-- [ ] Все обязательные параметры имеют значения по умолчанию или будут предоставлены
-- [ ] В шаблонах нет захардкоженных секретов
+- [ ] 🧪 Предварительный просмотр инфраструктуры успешен (`azd provision --preview`)
+- [ ] Все необходимые параметры имеют значения по умолчанию или будут предоставлены
+- [ ] В шаблонах нет жестко закодированных секретов
 
 #### ✅ Планирование ресурсов
-- [ ] Выбран и подтверждён целевой регион Azure
+- [ ] Выбран и проверен целевой регион Azure
 - [ ] Необходимые сервисы Azure доступны в целевом регионе
-- [ ] Достаточные квоты доступны для планируемых ресурсов
+- [ ] Доступные квоты достаточны для планируемых ресурсов
 - [ ] Проверены конфликты имён ресурсов
 - [ ] Поняты зависимости между ресурсами
 
 #### ✅ Сеть и безопасность
-- [ ] Проверена сетевая связь с конечными точками Azure
-- [ ] Настройки брандмауэра/прокси сконфигурированы при необходимости
-- [ ] Key Vault настроен для управления секретами
-- [ ] Управляемые идентичности используются там, где это возможно
-- [ ] Принудительное использование HTTPS включено для веб-приложений
+- [ ] Проверена сетевая доступность конечных точек Azure
+- [ ] При необходимости настроены параметры фаервола/прокси
+- [ ] Для управления секретами настроен Key Vault
+- [ ] Используются управляемые идентичности, где возможно
+- [ ] Включено принуждение HTTPS для веб-приложений
 
 #### ✅ Управление затратами
-- [ ] Оценки затрат рассчитаны с использованием Azure Pricing Calculator
-- [ ] Настроены оповещения по бюджету при необходимости
-- [ ] Выбраны подходящие SKU для типа окружения
-- [ ] Рассмотрена зарезервированная ёмкость для производственных нагрузок
+- [ ] Оценка стоимости выполнена с помощью Azure Pricing Calculator
+- [ ] При необходимости настроены оповещения по бюджету
+- [ ] Для типа среды выбраны соответствующие SKU
+- [ ] Рассмотрена зарезервированная емкость для продуктивных нагрузок
 
 #### ✅ Мониторинг и наблюдаемость
-- [ ] Application Insights настроен в шаблонах
-- [ ] Спланировано рабочее пространство Log Analytics
-- [ ] Определены правила оповещений для критических метрик
-- [ ] В приложениях реализованы конечные точки проверки состояния
+- [ ] В шаблонах настроен Application Insights
+- [ ] Спланирована рабочая область Log Analytics
+- [ ] Определены правила оповещений по критическим метрикам
+- [ ] В приложениях реализованы эндпоинты проверки состояния
 
 #### ✅ Резервное копирование и восстановление
-- [ ] Определена стратегия резервного копирования для ресурсов данных
-- [ ] Документированы цели по времени восстановления (RTO)
-- [ ] Документированы цели по точке восстановления (RPO)
-- [ ] План аварийного восстановления подготовлен для производственной среды
+- [ ] Определена стратегия резервного копирования данных
+- [ ] Задокументированы целевые время восстановления (RTO)
+- [ ] Задокументированы целевые точки восстановления (RPO)
+- [ ] План аварийного восстановления для продуктивной среды существует
 
 ---
 
-## Проверка окружения
+## Проверка среды
 
-### Проверка окружения разработки
+### Проверка среды разработки
 
 ```bash
 #!/bin/bash
@@ -876,7 +876,7 @@ validate_dev_environment() {
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # Проверка настроек автоотключения
+    # Проверка настроек автоматического отключения
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
@@ -892,7 +892,7 @@ validate_dev_environment() {
 }
 ```
 
-### Проверка производственного окружения
+### Проверка продуктивной среды
 
 ```bash
 #!/bin/bash
@@ -901,28 +901,28 @@ validate_dev_environment() {
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # Проверить настройки высокой доступности
+    # Проверка конфигураций высокой доступности
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # Проверить настройки резервного копирования
+    # Проверка конфигураций резервного копирования
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # Проверить настройку мониторинга
+    # Проверка настройки мониторинга
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # Проверить настройки безопасности
+    # Проверка конфигураций безопасности
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -990,7 +990,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # Получить учетные записи хранилища в подписке
+    # Получить учетные записи хранения в подписке
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -998,7 +998,7 @@ def check_storage_limits(location: str) -> bool:
         return False
     
     account_count = len(accounts)
-    max_accounts = 250  # Ограничение Azure по умолчанию
+    max_accounts = 250  # Лимит Azure по умолчанию
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1017,7 +1017,7 @@ def check_network_limits(location: str) -> bool:
         vnet_count = len(vnets)
         print(f"✅ Virtual Networks: {vnet_count}/1000")
     
-    # Проверить публичные IP-адреса
+    # Проверить общедоступные IP-адреса
     public_ips = run_command(['az', 'network', 'public-ip', 'list'])
     if public_ips is not None:
         ip_count = len(public_ips)
@@ -1038,12 +1038,12 @@ def main():
     
     all_passed = True
     
-    # Запустить проверки
+    # Выполнить проверки
     all_passed &= check_compute_quotas(location)
     all_passed &= check_storage_limits(location)
     all_passed &= check_network_limits(location)
     
-    # Итог
+    # Итоговый отчет
     print(f"\n=== Quota Check Summary ===")
     if all_passed:
         print("✅ All quota checks passed - sufficient capacity available")
@@ -1079,7 +1079,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Проверка использования управляемых идентичностей
+    # Проверка использования управляемых идентификаторов
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Проверка принудительного использования HTTPS
+    # Проверка применения HTTPS
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1131,14 +1131,14 @@ check_compliance_requirements() {
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # Проверка ведения журналов аудита
+    # Проверка ведения аудиторских журналов
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # Проверка политик резервного копирования и хранения
+    # Проверка политики резервного копирования и хранения
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1290,58 +1290,58 @@ steps:
 
 ---
 
-## Сводка лучших практик
+## Резюме лучших практик
 
-### ✅ Лучшие практики предварительной проверки
+### ✅ Лучшие практики проверки перед развертыванием
 
-1. **Автоматизируйте, где возможно**
-   - Интегрируйте проверки в конвейеры CI/CD
+1. **Автоматизация там, где возможно**
+   - Интегрируйте проверки в CI/CD конвейеры
    - Используйте скрипты для повторяемых проверок
    - Храните результаты для аудита
 
-2. **Проверка, специфичная для окружения**
+2. **Проверка, специфичная для среды**
    - Разные проверки для dev/staging/prod
-   - Соответствующие требования безопасности для каждого окружения
-   - Оптимизация затрат для непроизводственных окружений
+   - Соответствующие требования безопасности для каждой среды
+   - Оптимизация затрат для непроизводственных сред
 
-3. **Всеобъемлющее покрытие**
-   - Аутентификация и разрешения
-   - Квоты ресурсов и их доступность
+3. **Полный охват**
+   - Аутентификация и права доступа
+   - Квоты и доступность ресурсов
    - Проверка шаблонов и синтаксиса
-   - Требования по безопасности и соответствию
+   - Требования безопасности и соответствия
 
-4. **Понятная отчетность**
+4. **Чёткая отчетность**
    - Индикаторы статуса с цветовой кодировкой
-   - Подробные сообщения об ошибках с шагами по исправлению
-   - Сводные отчёты для быстрой оценки
+   - Подробные сообщения об ошибках с шагами исправления
+   - Итоговые отчёты для быстрой оценки
 
-5. **Быстрое завершение при ошибках**
-   - Остановите развертывание, если критические проверки не пройдены
-   - Предоставьте чёткие рекомендации по устранению
-   - Обеспечьте возможность простого повторного запуска проверок
+5. **Быстрый отказ**
+   - Остановка развертывания при критических сбоях
+   - Предоставление чётких рекомендаций по устранению
+   - Возможность легкого повторного запуска проверок
 
-### Распространённые ошибки при предварительных проверках
+### Распространённые ошибки перед развертыванием
 
-1. Пропуск проверки ради «быстрой» публикации
-2. Недостаточная проверка разрешений перед развертыванием
-3. Игнорирование лимитов квот до тех пор, пока развертывание не завершится неудачей
-4. Отсутствие проверки шаблонов в CI/CD конвейерах
-5. Отсутствие проверки безопасности для производственных окружений
-6. Недостаточная оценка затрат, приводящая к неожиданным расходам
+1. **Пропуск проверки** ради «быстрого» развертывания
+2. **Недостаточная проверка прав** перед развертыванием
+3. **Игнорирование квот** до момента сбоя развертывания
+4. **Отсутствие проверки шаблонов** в CI/CD конвейерах
+5. **Пропуск проверки безопасности** в продуктивных средах
+6. **Неполная оценка затрат**, вызывающая неожиданные расходы
 
 ---
 
-**Pro Tip**: Запускайте предварительные проверки как отдельную задачу в вашем CI/CD конвейере до фактической задачи развертывания. Это позволяет выявлять проблемы на ранней стадии и обеспечивает более быструю обратную связь для разработчиков.
+**Профессиональный совет**: Запускайте проверки перед развертыванием как отдельное задание в CI/CD конвейере до этапа фактического развертывания. Это позволит выявить проблемы на ранней стадии и обеспечит более быстрый отклик разработчикам.
 
 ---
 
 **Навигация**
-- **Предыдущий урок**: [Выбор SKU](sku-selection.md)
-- **Следующий урок**: [Шпаргалка](../../resources/cheat-sheet.md)
+- **Предыдущее занятие**: [Выбор SKU](sku-selection.md)
+- **Следующее занятие**: [Шпаргалка](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Отказ от ответственности:
-Этот документ был переведён с использованием сервиса ИИ-перевода [Co-op Translator](https://github.com/Azure/co-op-translator). Хотя мы стремимся к точности, имейте в виду, что автоматические переводы могут содержать ошибки или неточности. Оригинальный документ на его исходном языке следует считать авторитетным источником. Для критически важной информации рекомендуется обратиться к профессиональному переводу, выполненному человеком. Мы не несем ответственности за любые недоразумения или неверные толкования, возникшие в результате использования данного перевода.
+**Отказ от ответственности**:  
+Этот документ был переведен с помощью сервиса автоматического перевода [Co-op Translator](https://github.com/Azure/co-op-translator). Несмотря на наши усилия обеспечить точность, пожалуйста, учтите, что автоматический перевод может содержать ошибки или неточности. Оригинальный документ на языке оригинала следует считать авторитетным источником. Для критически важной информации рекомендуется обращаться к профессиональному человеческому переводу. Мы не несем ответственности за любые недоразумения или неправильное толкование, возникшие в результате использования этого перевода.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

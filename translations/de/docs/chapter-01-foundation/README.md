@@ -1,30 +1,50 @@
 # Kapitel 1: Grundlagen & Schnellstart
 
-**📚 Kurs**: [AZD für Einsteiger](../../README.md) | **⏱️ Dauer**: 30-45 Minuten | **⭐ Komplexität**: Anfänger
+**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Dauer**: 30-45 Minuten | **⭐ Schwierigkeitsgrad**: Anfänger
 
 ---
 
 ## Überblick
 
-Dieses Kapitel führt in die Grundlagen der Azure Developer CLI (azd) ein. Du lernst Kernkonzepte, installierst die Tools und stellst deine erste Anwendung in Azure bereit.
+Dieses Kapitel stellt die Grundlagen der Azure Developer CLI (azd) vor. Sie lernen die Kernkonzepte, installieren die Tools und stellen Ihre erste Anwendung in Azure bereit.
+
+> Validiert gegen `azd 1.23.12` im März 2026.
 
 ## Lernziele
 
-By completing this chapter, you will:
-- Verstehen, was Azure Developer CLI ist und wie es sich von Azure CLI unterscheidet
-- AZD auf deiner Plattform installieren und konfigurieren
-- Deine erste Anwendung mit `azd up` in Azure bereitstellen
+Durch das Abschließen dieses Kapitels werden Sie:
+- Verstehen, was Azure Developer CLI ist und wie sie sich von der Azure CLI unterscheidet
+- AZD auf Ihrer Plattform installieren und konfigurieren
+- Ihre erste Anwendung mit `azd up` in Azure bereitstellen
 - Ressourcen mit `azd down` bereinigen
 
 ---
 
 ## 📚 Lektionen
 
-| # | Lektion | Beschreibung | Dauer |
+| # | Lesson | Description | Time |
 |---|--------|-------------|------|
 | 1 | [AZD-Grundlagen](azd-basics.md) | Kernkonzepte, Terminologie und Projektstruktur | 15 Min. |
-| 2 | [Installation & Einrichtung](installation.md) | Plattformspezifische Installationsanleitungen | 10 Min. |
-| 3 | [Dein erstes Projekt](first-project.md) | Praxis: Eine Webanwendung in Azure bereitstellen | 20 Min. |
+| 2 | [Installation & Einrichtung](installation.md) | Plattform-spezifische Installationsanleitungen | 10 Min. |
+| 3 | [Ihr erstes Projekt](first-project.md) | Praxis: Eine Webanwendung in Azure bereitstellen | 20 Min. |
+
+---
+
+## ✅ Hier starten: Prüfen Sie Ihre Einrichtung
+
+Bevor Sie beginnen, bestätigen Sie, dass Ihr lokaler Rechner für die Kapitel-1-Vorlage bereit ist:
+
+**Windows:**
+```powershell
+.\validate-setup.ps1
+```
+
+**macOS / Linux:**
+```bash
+bash ./validate-setup.sh
+```
+
+Wenn das Skript fehlende Tools meldet, beheben Sie diese zuerst und fahren Sie dann mit dem Kapitel fort.
 
 ---
 
@@ -34,7 +54,8 @@ By completing this chapter, you will:
 # Installation überprüfen
 azd version
 
-# Bei Azure anmelden
+# Für AZD authentifizieren
+# Optional: 'az login', wenn Sie vorhaben, Azure-CLI-Befehle direkt auszuführen
 azd auth login
 
 # Ihre erste App bereitstellen
@@ -49,13 +70,13 @@ azd down --force --purge
 
 ## ✅ Erfolgskriterien
 
-Nach Abschluss dieses Kapitels solltest du in der Lage sein:
+Nach Abschluss dieses Kapitels sollten Sie in der Lage sein:
 
 ```bash
-azd version              # Zeigt die installierte Version
+azd version              # Zeigt die installierte Version an
 azd init --template todo-nodejs-mongo  # Initialisiert das Projekt
 azd up                   # Stellt in Azure bereit
-azd show                 # Zeigt die URL der laufenden Anwendung an
+azd show                 # Zeigt die URL der laufenden App an
 azd down --force --purge # Bereinigt Ressourcen
 ```
 
@@ -63,10 +84,10 @@ azd down --force --purge # Bereinigt Ressourcen
 
 ## 🔗 Navigation
 
-| Richtung | Kapitel |
+| Direction | Chapter |
 |-----------|---------|
-| **Weiter** | [Kapitel 2: KI-fokussierte Entwicklung](../chapter-02-ai-development/README.md) |
-| **Springe zu** | [Kapitel 3: Konfiguration](../chapter-03-configuration/README.md) |
+| **Weiter** | [Kapitel 2: KI-zentrierte Entwicklung](../chapter-02-ai-development/README.md) |
+| **Springen zu** | [Kapitel 3: Konfiguration](../chapter-03-configuration/README.md) |
 
 ---
 
@@ -80,5 +101,5 @@ azd down --force --purge # Bereinigt Ressourcen
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Haftungsausschluss**:
-Dieses Dokument wurde mithilfe des KI-Übersetzungsdienstes [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache ist als maßgebliche Quelle zu betrachten. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Verwendung dieser Übersetzung ergeben.
+Dieses Dokument wurde mithilfe des KI-Übersetzungsdienstes [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache ist als maßgebliche Quelle zu betrachten. Für wichtige Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir haften nicht für Missverständnisse oder Fehlinterpretationen, die sich aus der Verwendung dieser Übersetzung ergeben.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

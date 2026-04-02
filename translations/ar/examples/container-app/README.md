@@ -1,25 +1,25 @@
-# أمثلة نشر تطبيقات الحاويات باستخدام AZD
+# أمثلة لنشر تطبيقات الحاويات باستخدام AZD
 
-هذا الدليل يحتوي على أمثلة شاملة لنشر التطبيقات المحوّمة إلى Azure Container Apps باستخدام Azure Developer CLI (AZD). توضح هذه الأمثلة أنماطًا من واقع العمل، وأفضل الممارسات، وتكوينات جاهزة للإنتاج.
+هذا الدليل يحتوي على أمثلة شاملة لنشر التطبيقات المحوّلة إلى حاويات على Azure Container Apps باستخدام Azure Developer CLI (AZD). توضح هذه الأمثلة أنماطاً من الواقع العملي، وأفضل الممارسات، وتكوينات جاهزة للإنتاج.
 
 ## 📚 جدول المحتويات
 
-- [نظرة عامة](../../../../examples/container-app)
-- [المتطلبات المسبقة](../../../../examples/container-app)
-- [أمثلة البدء السريع](../../../../examples/container-app)
-- [أمثلة للإنتاج](../../../../examples/container-app)
-- [أنماط متقدمة](../../../../examples/container-app)
-- [أفضل الممارسات](../../../../examples/container-app)
+- [نظرة عامة](#overview)
+- [المتطلبات المسبقة](#المتطلبات-المسبقة)
+- [أمثلة البدء السريع](#أمثلة-البدء-السريع)
+- [أمثلة جاهزة للإنتاج](#أمثلة-جاهزة-للإنتاج)
+- [أنماط متقدمة](#أنماط-متقدمة)
+- [أفضل الممارسات](#أفضل-الممارسات)
 
-## نظرة عامة
+## Overview
 
-Azure Container Apps هي منصة حاويات مُدارة بالكامل وخالية من الخوادم تتيح لك تشغيل الخدمات المصغرة والتطبيقات المحوّمة دون إدارة البنية التحتية. عند الجمع مع AZD، ستحصل على:
+Azure Container Apps هي منصة حاويات سحابية مُدارة بالكامل تمكنك من تشغيل الخدمات المصغرة والتطبيقات المحوّلة إلى حاويات دون إدارة البنية التحتية. عند الجمع مع AZD، تحصل على:
 
-- **نشر مبسط**: أمر واحد لنشر الحاويات مع البنية التحتية
-- **القياس التلقائي**: القياس إلى الصفر والتوسيع اعتمادًا على حركة HTTP أو الأحداث
-- **التكامل الشبكي**: اكتشاف خدمات مدمج وتقسيم حركة المرور
-- **الهوية المُدارة**: مصادقة آمنة على موارد Azure
-- **تحسين التكلفة**: الدفع فقط مقابل الموارد التي تستخدمها
+- **نشر مبسّط**: أمر واحد ينشر الحاويات مع البنية التحتية
+- **تحجيم تلقائي**: التحجيم إلى الصفر والتوسّع بناءً على حركة HTTP أو الأحداث
+- **شبكات متكاملة**: اكتشاف خدمات مدمج وتقسيم حركة المرور
+- **هوية مُدارة**: مصادقة آمنة على موارد Azure
+- **تحسين التكلفة**: ادفع فقط مقابل الموارد التي تستخدمها
 
 ## المتطلبات المسبقة
 
@@ -29,29 +29,31 @@ Azure Container Apps هي منصة حاويات مُدارة بالكامل وخ
 # تحقق من تثبيت AZD
 azd version
 
-# تحقق من Azure CLI
+# تحقق من تثبيت Azure CLI
 az version
 
-# تحقق من Docker (لبناء صور مخصصة)
+# تحقق من تثبيت Docker (لبناء صور مخصصة)
 docker --version
 
-# تسجيل الدخول إلى Azure
+# قم بالمصادقة لنشر AZD
 azd auth login
+
+# اختياري: سجّل الدخول إلى Azure CLI إذا كنت تخطط لتشغيل أوامر az مباشرةً
 az login
 ```
 
 **الموارد المطلوبة في Azure:**
 - اشتراك Azure نشط
 - أذونات إنشاء مجموعة موارد
-- إمكانية الوصول إلى بيئة Container Apps
+- وصول إلى بيئة Container Apps
 
 ## أمثلة البدء السريع
 
-### 1. واجهة برمجة تطبيقات ويب بسيطة (Python Flask)
+### 1. واجهة ويب بسيطة (Python Flask)
 
-نشر واجهة REST أساسية باستخدام Azure Container Apps.
+انشر واجهة REST أساسية باستخدام Azure Container Apps.
 
-**مثال: واجهة Python Flask**
+**مثال: Python Flask API**
 
 ```yaml
 # azure.yaml
@@ -68,7 +70,7 @@ services:
 **خطوات النشر:**
 
 ```bash
-# التهيئة من القالب
+# تهيئة من القالب
 azd init --template todo-python-mongo
 
 # توفير البنية التحتية والنشر
@@ -80,14 +82,14 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
 **الميزات الرئيسية:**
-- القياس التلقائي من 0 إلى 10 نسخ
-- اختبارات الصحة وفحوصات liveness
+- التحجيم التلقائي من 0 إلى 10 نسخ
+- فحوصات الصحة والتحققات من الجاهزية
 - حقن متغيرات البيئة
-- التكامل مع Application Insights
+- دمج Application Insights
 
-### 2. واجهة Node.js Express
+### 2. Node.js Express API
 
-نشر خلفية Node.js مع تكامل MongoDB.
+انشر خلفية Node.js مع تكامل MongoDB.
 
 ```bash
 # تهيئة قالب واجهة برمجة تطبيقات Node.js
@@ -104,7 +106,7 @@ azd up
 azd monitor --logs
 ```
 
-**أبرز عناصر البنية التحتية:**
+**أبرز ملامح البنية التحتية:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -147,12 +149,12 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 3. الواجهة الأمامية الثابتة + واجهة خلفية API
+### 3. واجهة أمامية ثابتة + واجهة خلفية API
 
-نشر تطبيق متكامل مع واجهة أمامية React وواجهة خلفية API.
+انشر تطبيق كامل مع واجهة أمامية React وواجهة خلفية API.
 
 ```bash
-# تهيئة قالب متكامل للواجهة الأمامية والخلفية
+# تهيئة قالب متكامل
 azd init --template todo-csharp-sql-swa-func
 
 # مراجعة التكوين
@@ -165,11 +167,11 @@ azd up
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
-## أمثلة للإنتاج
+## أمثلة جاهزة للإنتاج
 
 ### المثال 1: هندسة الخدمات المصغرة
 
-**السيناريو**: تطبيق تجارة إلكترونية مع عدة خدمات مصغرة
+**السيناريو**: تطبيق تجارة إلكترونية مع عدة خدمات مصغّرة
 
 **هيكل الدليل:**
 ```
@@ -231,7 +233,7 @@ azd up
 azd monitor --overview
 ```
 
-### المثال 2: تطبيق حاوية مدعوم بالذكاء الاصطناعي
+### المثال 2: تطبيق حاوية معزز بالذكاء الاصطناعي
 
 **السيناريو**: تطبيق دردشة ذكي مع تكامل Microsoft Foundry Models
 
@@ -253,7 +255,7 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # احصل على مفتاح OpenAI من Key Vault
+    # احصل على مفتاح OpenAI من خزانة المفاتيح
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
@@ -339,9 +341,9 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### المثال 3: عامل خلفي مع معالجة قائمة الانتظار
+### المثال 3: عامل خلفي مع معالجة قائمة انتظار
 
-**السيناريو**: نظام معالجة طلبات مع قائمة انتظار رسائل
+**السيناريو**: نظام معالجة طلبات مع قائمة رسائل
 
 **هيكل الدليل:**
 ```
@@ -381,7 +383,7 @@ def process_orders():
             # معالجة الطلب
             print(f"Processing order: {message.content}")
             
-            # الرسالة الكاملة
+            # رسالة كاملة
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -408,10 +410,10 @@ services:
 # تهيئة
 azd init
 
-# نشر مع تكوين الطابور
+# نشر باستخدام تكوين قائمة الانتظار
 azd up
 
-# تعديل سعة العامل بناءً على طول الطابور
+# تعديل عدد العاملين بناءً على طول قائمة الانتظار
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -425,19 +427,19 @@ az containerapp update \
 ### النمط 1: نشر أزرق-أخضر
 
 ```bash
-# إنشاء إصدار جديد بدون توجيه حركة المرور إليه
+# إنشاء إصدار جديد بدون حركة مرور
 azd deploy api --revision-suffix blue --no-traffic
 
 # اختبار الإصدار الجديد
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# تقسيم حركة المرور (20٪ إلى الأزرق، 80٪ إلى الحالي)
+# تقسيم حركة المرور (20% إلى الأزرق، 80% إلى الإصدار الحالي)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# الانتقال الكامل إلى الأزرق
+# التحويل الكامل إلى الأزرق
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -463,13 +465,13 @@ az containerapp ingress traffic set \
 #!/bin/bash
 # deploy-canary.sh
 
-# نشر إصدار جديد مع 10٪ من حركة المرور
+# نشر الإصدار الجديد مع 10٪ من حركة المرور
 azd deploy api --revision-mode multiple
 
 # مراقبة المقاييس
 azd monitor --service api --duration 5m
 
-# زيادة الحركة تدريجيًا
+# زيادة حركة المرور تدريجيًا
 for i in {20..100..10}; do
   echo "Increasing traffic to $i%"
   az containerapp revision set-traffic \
@@ -529,10 +531,10 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 
 **النشر:**
 ```bash
-# نشر إلى جميع المناطق
+# انشر في جميع المناطق
 azd up
 
-# التحقق من نقاط النهاية
+# تحقق من نقاط النهاية
 azd show --output json | jq '.services.api.endpoints'
 ```
 
@@ -595,11 +597,11 @@ def create_order():
 ### 1. تنظيم الموارد
 
 ```bash
-# استخدم اتفاقيات تسمية متسقة
+# استخدم قواعد تسمية متسقة
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# وسم الموارد لتتبع التكاليف
+# ضع وسوماً على الموارد لتتبع التكاليف
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
@@ -688,7 +690,7 @@ az monitor metrics alert create \
 ### 5. تحسين التكلفة
 
 ```bash
-# تقليص إلى الصفر عند عدم الاستخدام
+# قم بالتحجيم إلى الصفر عند عدم الاستخدام
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -737,10 +739,10 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## مرجع الأوامر الشائعة
+## مرجع الأوامر الشائع
 
 ```bash
-# تهيئة مشروع تطبيق حاوية جديد
+# تهيئة مشروع تطبيق حاويات جديد
 azd init --template <template-name>
 
 # نشر البنية التحتية والتطبيق
@@ -752,10 +754,10 @@ azd deploy
 # توفير البنية التحتية فقط
 azd provision
 
-# عرض الموارد المنشورة
+# عرض الموارد المنشأة
 azd show
 
-# بث السجلات باستخدام azd monitor أو سطر أوامر Azure
+# بث السجلات باستخدام azd monitor أو Azure CLI
 azd monitor --logs
 # az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
@@ -788,13 +790,13 @@ docker run -p 8000:8000 api:local
 ### المشكلة: لا يمكن الوصول إلى نقطة نهاية تطبيق الحاوية
 
 ```bash
-# التحقق من تكوين الـ Ingress
+# تحقق من تكوين ingress
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# التحقق مما إذا كان Ingress الداخلي مفعلًا
+# تحقق مما إذا كان ingress الداخلي ممكّنًا
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
@@ -817,23 +819,23 @@ az containerapp update \
   --memory 4Gi
 ```
 
-## موارد وأمثلة إضافية
+## موارد إضافية وأمثلة
 - [مثال الخدمات المصغرة](./microservices/README.md)
 - [مثال Simple Flash API](./simple-flask-api/README.md)
-- [توثيق Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
+- [وثائق Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
 - [معرض قوالب AZD](https://azure.github.io/awesome-azd/)
 - [عينات Container Apps](https://github.com/Azure-Samples/container-apps-samples)
 - [قوالب Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ## المساهمة
 
-للمساهمة بأمثلة تطبيقات حاويات جديدة:
+للمساهمة بأمثلة جديدة لتطبيقات الحاويات:
 
-1. أنشئ دليلًا فرعيًا جديدًا يحتوي على مثالك
-2. أدرج ملفات كاملة `azure.yaml`, `infra/`, و `src/`
-3. أضف ملف README شاملًا مع تعليمات النشر
+1. قم بإنشاء دليل فرعي جديد يحتوي على المثال الخاص بك
+2. تضمّن ملفات كاملة `azure.yaml`, `infra/`, و `src/`
+3. أضف README شامل مع تعليمات النشر
 4. اختبر النشر باستخدام `azd up`
-5. قدم طلب سحب
+5. قدّم طلب سحب (Pull Request)
 
 ---
 
@@ -842,6 +844,6 @@ az containerapp update \
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-إخلاء المسؤولية:
-تمت ترجمة هذه الوثيقة باستخدام خدمة الترجمة الآلية Co-op Translator (https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يُرجى ملاحظة أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقّة. يجب اعتبار الوثيقة الأصلية بلغتها الأصلية المصدر المعتمد. للمعلومات الحرجة، يُنصح بالاستعانة بترجمة بشرية احترافية. لا نتحمل أي مسؤولية عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
+**Disclaimer**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المعتمد. للمعلومات الحرجة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير خاطئ ناتج عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

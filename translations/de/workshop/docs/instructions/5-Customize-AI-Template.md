@@ -1,28 +1,28 @@
-# 5. Vorlage anpassen
+# 5. Customize a Template
 
 !!! tip "AM ENDE DIESES MODULS KÖNNEN SIE"
-
-    - [ ] Die Standardfähigkeiten des KI-Agenten erkundet
+    
+    - [ ] Standardmäßige KI-Agenten-Funktionen untersucht
     - [ ] AI Search mit Ihrem eigenen Index hinzugefügt
     - [ ] Tracing-Metriken aktiviert und analysiert
-    - [ ] Einen Evaluierungslauf durchgeführt
+    - [ ] Eine Evaluierung ausgeführt
     - [ ] Einen Red-Teaming-Scan durchgeführt
-    - [ ] **Labor 5: Einen Anpassungsplan erstellt** 
+    - [ ] **Lab 5: Einen Anpassungsplan erstellt**
 
 ---
 
-## 5.1 KI-Agenten-Fähigkeiten
+## 5.1 AI Agent Capabilities
 
-!!! success "Wir haben dies in Labor 01 abgeschlossen"
+!!! success "Wir haben das in Lab 01 abgeschlossen"
 
-- **File Search**: OpenAI's built-in file search for knowledge retrieval
-- **Citations**: Automatische Quellenangabe in Antworten
-- **Customizable Instructions**: Das Verhalten und die Persönlichkeit des Agenten anpassen
-- **Tool Integration**: Erweiterbares Toolsystem für benutzerdefinierte Fähigkeiten
+- **Dateisuche**: OpenAI's integrierte Dateisuche zur Wissensabruf
+- **Quellenangaben**: Automatische Quellenangabe in Antworten
+- **Anpassbare Anweisungen**: Verhalten und Persönlichkeit des Agenten anpassen
+- **Werkzeugintegration**: Erweiterbares Werkzeugsystem für benutzerdefinierte Funktionen
 
 ---
 
-## 5.2 Optionen zur Wissensabrufung
+## 5.2 Knowledge Retrieval Options
 
 !!! task "Um dies abzuschließen, müssen wir Änderungen vornehmen und neu bereitstellen"    
     
@@ -40,7 +40,7 @@
 
 ---
 
-**OpenAI File Search (Standard):**
+**OpenAI File Search (Default):**
 
 - In Foundry Agents integriert
 - Automatische Dokumentenverarbeitung und Indexierung
@@ -67,7 +67,7 @@
 **Tracing:**
 
 - OpenTelemetry-Integration
-- Anfrage-/Antwortverfolgung
+- Anfragen-/Antwortverfolgung
 - Leistungsmetriken
 - Im Microsoft Foundry-Portal verfügbar
 
@@ -75,29 +75,29 @@
 
 - Anwendungsprotokolle in Container Apps
 - Strukturierte Protokollierung mit Korrelations-IDs
-- Echtzeit- und historische Protokollanzeige
+- Echtzeit- und historische Protokollansicht
 
 ---
 
 ## 5.4 [Agentenbewertung](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
-**Lokale Evaluation:**
+**Lokale Bewertung:**
 
-- Eingebaute Evaluatoren zur Qualitätsbewertung
-- Benutzerdefinierte Evaluierungsskripte
+- Integrierte Evaluatoren zur Qualitätsbewertung
+- Eigene Evaluierungsskripte
 - Leistungs-Benchmarking
 
 **Kontinuierliche Überwachung:**
 
 - Automatische Bewertung von Live-Interaktionen
 - Verfolgung von Qualitätsmetriken
-- Erkennung von Performanceregressionen
+- Erkennung von Performance-Regressions
 
 **CI/CD-Integration:**
 
-- GitHub Actions-Workflow
-- Automatisierte Tests und Evaluierung
-- Statistische Vergleichstests
+- GitHub Actions Workflow
+- Automatisierte Tests und Evaluierungen
+- Statistischer Vergleichstest
 
 ---
 
@@ -105,7 +105,7 @@
 
 **KI-Red-Teaming:**
 
-- Automatisierte Sicherheitsüberprüfung
+- Automatisierte Sicherheitsscans
 - Risikobewertung für KI-Systeme
 - Sicherheitsbewertung in mehreren Kategorien
 
@@ -113,51 +113,51 @@
 
 - Managed Identity für Azure-Dienste
 - Optionale Authentifizierung des Azure App Service
-- Basic-Auth-Fallback für die Entwicklung
+- Fallback auf Basic Auth für die Entwicklung
 
 
 
-!!! quote "AM ENDE DIESES LABS SOLLTEN SIE FOLGENDES HABEN"
-    - [ ] Definieren Sie Ihre Szenarioanforderungen
-    - [ ] Angepasste Umgebungsvariablen (Konfiguration)
-    - [ ] Angepasste Agenteninstruktionen (Aufgabe)
-    - [ ] Die angepasste Vorlage bereitgestellt (App)
-    - [ ] Post-Deployment-Aufgaben abgeschlossen (manuell)
-    - [ ] Eine Testauswertung durchgeführt
+!!! quote "AM ENDE DIESES LABS SOLLTEN SIE"
+    - [ ] Ihre Szenarioanforderungen definiert haben
+    - [ ] Umgebungsvariablen (Konfiguration) angepasst haben
+    - [ ] Agentenanweisungen (Aufgabe) angepasst haben
+    - [ ] Die angepasste Vorlage bereitgestellt haben (App)
+    - [ ] Nachbereitungsaufgaben (manuell) abgeschlossen haben
+    - [ ] Eine Testbewertung durchgeführt haben
 
 This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
 
 ---
 
-## 5.6 Für Sie anpassen!
+## 5.6 Customize It For You!
 
-### 5.6.1. Szenarioanforderungen
+### 5.6.1. Scenario Requirements
 
-#### **Agentenbereitstellungen:** 
+#### **Agent Deployments:** 
 
    - Shopper Agent: Hilft Kunden, Produkte zu finden und zu vergleichen
-   - Loyalty Agent: Verwaltet Kundenprämien und Aktionen
+   - Loyalty Agent: Verwaltet Kundenbelohnungen und Aktionen
 
-#### **Modellbereitstellungen:**
+#### **Model Deployments:**
 
-   - `gpt-4.1`: Primäres Chatmodell
-   - `o3`: Reasoning-Modell für komplexe Anfragen
+   - `gpt-4.1`: Primäres Chat-Modell
+   - `o3`: Modell für komplexe Anfragen
    - `gpt-4.1-nano`: Leichtgewichtiges Modell für einfache Interaktionen
    - `text-embedding-3-large`: Hochwertige Embeddings für die Suche
 
-#### **Funktionen:**
+#### **Features:**
 
-   - Tracing und Monitoring aktiviert
-   - AI Search für Produktkatalog
-   - Evaluierungs-Framework für Qualitätssicherung
-   - Red Teaming zur Sicherheitsvalidierung
+   - Tracing und Überwachung aktiviert
+   - AI Search für den Produktkatalog
+   - Evaluierungsframework zur Qualitätssicherung
+   - Red-Teaming zur Sicherheitsvalidierung
 
 ---
 
-### 5.6.2 Szenarioimplementierung
+### 5.6.2 Scenario Implementation
 
 
-#### 5.6.2.1. Vorbereitende Konfiguration
+#### 5.6.2.1. Pre-Deployment Config
 
 Create a setup script (`setup-retail.sh`)
 
@@ -167,7 +167,7 @@ Create a setup script (`setup-retail.sh`)
 # Umgebungsname festlegen
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Region konfigurieren (nach Modellverfügbarkeit auswählen)
+# Region konfigurieren (je nach Modellverfügbarkeit auswählen)
 azd env set AZURE_LOCATION "eastus2"
 
 # Alle optionalen Dienste aktivieren
@@ -198,7 +198,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2: Agentenanweisungen
+#### 5.6.2.2: Agent Instructions
 
 Create `custom-agents/shopper-agent-instructions.md`:
 
@@ -248,7 +248,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: Bereitstellungsskript
+#### 5.6.2.3: Deployment Script
 
 Create `deploy-retail.sh`:
 
@@ -295,12 +295,12 @@ fi
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Bereitstellungsergebnisse erfassen
+# Ausgaben der Bereitstellung erfassen
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# URL der Webanwendung abrufen
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# Die URL der Webanwendung abrufen
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -321,7 +321,7 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Konfiguration nach der Bereitstellung
+#### 5.6.2.4: Post-Deployment Config
 
 Create `configure-retail-agents.sh`:
 
@@ -337,7 +337,7 @@ AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | t
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# Anweisungen für die manuelle Konfiguration
+# Anweisungen zur manuellen Konfiguration
 echo "
 🤖 Agent Configuration:
 
@@ -378,7 +378,7 @@ echo "
 "
 ```
 
-### 5.6.3: Test und Validierung
+### 5.6.3: Testing and Validation
 
 Create `test-retail-deployment.sh`:
 
@@ -387,12 +387,12 @@ Create `test-retail-deployment.sh`:
 
 echo "🧪 Testing retail deployment..."
 
-# Überprüfe, ob Umgebungsvariablen gesetzt sind
+# Überprüfen, ob Umgebungsvariablen gesetzt sind
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Teste die Verfügbarkeit der Webanwendung
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# Verfügbarkeit der Webanwendung testen
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -405,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Führe die Auswertung aus, falls konfiguriert
+# Auswertung ausführen, falls konfiguriert
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -435,29 +435,29 @@ After following this implementation guide, you will have:
 
 1. **Bereitgestellte Infrastruktur:**
 
-      - Microsoft Foundry-Projekt mit Modellbereitstellungen
+      - Microsoft Foundry-Projekt mit Modellsbereitstellungen
       - Container Apps, die die Webanwendung hosten
       - AI Search-Service für den Produktkatalog
-      - Application Insights für die Überwachung
+      - Application Insights zur Überwachung
 
 2. **Erster Agent:**
 
-      - Shopper Agent mit grundlegenden Anweisungen konfiguriert
-      - Dateisuche-Funktion aktiviert
-      - Tracing und Monitoring konfiguriert
+      - Shopper-Agent mit grundlegenden Anweisungen konfiguriert
+      - Dateisuche aktiviert
+      - Tracing und Überwachung konfiguriert
 
 3. **Bereit zur Anpassung:**
 
-      - Framework zum Hinzufügen des Loyalty Agent
-      - Vorlagen für benutzerdefinierte Anweisungen
+      - Framework zur Ergänzung des Loyalty-Agenten
+      - Anpassbare Anweisungsvorlagen
       - Test- und Validierungsskripte
-      - Überwachungs- und Evaluierungs-Setup
+      - Überwachungs- und Bewertungs-Setup
 
 4. **Produktionsbereitschaft:**
 
-      - Sicherheitsprüfung mit Red Teaming
-      - Performance-Überwachung
-      - Qualitätsevaluierungs-Framework
+      - Sicherheitsscans mit Red-Teaming
+      - Leistungsüberwachung
+      - Qualitätsbewertungs-Framework
       - Skalierbare Architektur
 
 This example demonstrates how the AZD template can be extended and customized for specific enterprise scenarios while maintaining best practices for security, monitoring, and scalability.
@@ -465,6 +465,6 @@ This example demonstrates how the AZD template can be extended and customized fo
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Haftungsausschluss:
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ausgangssprache ist als maßgebliche Quelle zu betrachten. Für wichtige Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für etwaige Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
+**Haftungsausschluss**:
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ausgangssprache ist als maßgebliche Quelle zu betrachten. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Verwendung dieser Übersetzung ergeben.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

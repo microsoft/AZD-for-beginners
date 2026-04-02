@@ -1,51 +1,51 @@
 # Häufige Probleme und Lösungen
 
 **Chapter Navigation:**
-- **📚 Course Home**: [AZD für Einsteiger](../../README.md)
+- **📚 Kursübersicht**: [AZD für Einsteiger](../../README.md)
 - **📖 Aktuelles Kapitel**: Kapitel 7 - Fehlerbehebung & Debugging
-- **⬅️ Previous Chapter**: [Kapitel 6: Vorab-Checks](../chapter-06-pre-deployment/preflight-checks.md)
-- **➡️ Next**: [Debugging-Anleitung](debugging.md)
-- **🚀 Next Chapter**: [Kapitel 8: Produktions- & Unternehmensmuster](../chapter-08-production/production-ai-practices.md)
+- **⬅️ Previous Chapter**: [Kapitel 6: Vorabprüfungen](../chapter-06-pre-deployment/preflight-checks.md)
+- **➡️ Next**: [Debugging-Leitfaden](debugging.md)
+- **🚀 Nächstes Kapitel**: [Kapitel 8: Produktions- & Unternehmensmuster](../chapter-08-production/production-ai-practices.md)
 
 ## Einführung
 
-Dieser umfassende Leitfaden zur Fehlerbehebung behandelt die am häufigsten auftretenden Probleme bei der Verwendung der Azure Developer CLI. Lernen Sie, wie Sie Authentifizierungs-, Bereitstellungs-, Infrastrukturbereitstellungs- und Anwendungs­konfigurationsprobleme diagnostizieren, beheben und lösen. Jedes Problem enthält detaillierte Symptome, Ursachen und schrittweise Anweisungen zur Behebung.
+Dieser umfassende Leitfaden zur Fehlerbehebung behandelt die am häufigsten auftretenden Probleme bei der Verwendung der Azure Developer CLI. Lernen Sie, Probleme mit Authentifizierung, Bereitstellung, Infrastrukturprovisionierung und Anwendungs‑Konfiguration zu diagnostizieren, zu beheben und zu lösen. Jedes Problem enthält detaillierte Symptome, Ursachen und schrittweise Lösungsverfahren.
 
 ## Lernziele
 
 Durch das Abschließen dieses Leitfadens werden Sie:
 - Diagnosetechniken für Probleme mit der Azure Developer CLI beherrschen
-- Häufige Authentifizierungs- und Berechtigungsprobleme sowie deren Lösungen verstehen
-- Bereitstellungsfehler, Fehler bei der Infrastrukturbereitstellung und Konfigurationsprobleme beheben
+- Häufige Authentifizierungs- und Berechtigungsprobleme und deren Lösungen verstehen
+- Bereitstellungsfehler, Fehler bei der Infrastrukturprovisionierung und Konfigurationsprobleme beheben können
 - Proaktive Überwachungs- und Debugging-Strategien implementieren
-- Systematische Fehlersuchmethoden für komplexe Probleme anwenden
-- Geeignete Protokollierung und Überwachung konfigurieren, um zukünftige Probleme zu verhindern
+- Systematische Fehlerbehebungsmethoden für komplexe Probleme anwenden
+- Eine angemessene Protokollierung und Überwachung konfigurieren, um zukünftige Probleme zu verhindern
 
 ## Lernergebnisse
 
-Nach Abschluss sind Sie in der Lage:
-- Probleme mit der Azure Developer CLI mithilfe integrierter Diagnosewerkzeuge zu diagnostizieren
-- Authentifizierungs-, Abonnement- und berechtigungsbezogene Probleme eigenständig zu lösen
-- Bereitstellungsfehler und Fehler bei der Infrastrukturbereitstellung effektiv zu beheben
-- Konfigurationsprobleme von Anwendungen und umgebungsspezifische Probleme zu debuggen
-- Überwachung und Alarmierung zu implementieren, um potenzielle Probleme frühzeitig zu erkennen
+Nach Abschluss werden Sie in der Lage sein:
+- Probleme mit der Azure Developer CLI mit eingebauten Diagnosewerkzeugen zu diagnostizieren
+- Authentifizierungs-, Abonnement- und Berechtigungsprobleme selbstständig zu lösen
+- Bereitstellungsfehler und Fehler bei der Infrastrukturprovisionierung effektiv zu beheben
+- Konfigurationsprobleme der Anwendung und umgebungsspezifische Probleme zu debuggen
+- Monitoring und Alerting zu implementieren, um potenzielle Probleme proaktiv zu erkennen
 - Best Practices für Protokollierung, Debugging und Problemlösungs-Workflows anzuwenden
 
-## Schnelle Diagnose
+## Schnelldiagnose
 
-Bevor Sie sich in spezifische Probleme vertiefen, führen Sie diese Befehle aus, um Diagnoseinformationen zu sammeln:
+Bevor Sie in spezifische Probleme eintauchen, führen Sie diese Befehle aus, um Diagnoseinformationen zu sammeln:
 
 ```bash
-# azd-Version und -Zustand prüfen
+# azd-Version und Status prüfen
 azd version
-azd config list
+azd config show
 
-# Azure-Authentifizierung prüfen
+# Azure-Authentifizierung überprüfen
 az account show
 az account list
 
 # Aktuelle Umgebung prüfen
-azd env show
+azd env list
 azd env get-values
 
 # Debug-Protokollierung aktivieren
@@ -62,7 +62,7 @@ azd <command> --debug
 
 **Lösungen:**
 ```bash
-# 1. Erneut mit der Azure CLI authentifizieren
+# 1. Mit Azure CLI erneut authentifizieren
 az login
 az account show
 
@@ -70,7 +70,7 @@ az account show
 az account clear
 az login
 
-# 3. Geräte-Code-Flow verwenden (für kopflose Systeme)
+# 3. Gerätecode-Flow verwenden (für kopflose Systeme)
 az login --use-device-code
 
 # 4. Explizites Abonnement festlegen
@@ -80,7 +80,7 @@ azd config set defaults.subscription "your-subscription-id"
 
 ### Problem: "Insufficient privileges" während der Bereitstellung
 **Symptome:**
-- Bereitstellung schlägt mit Berechtigungsfehlern fehl
+- Die Bereitstellung schlägt mit Berechtigungsfehlern fehl
 - Bestimmte Azure-Ressourcen können nicht erstellt werden
 
 **Lösungen:**
@@ -89,10 +89,10 @@ azd config set defaults.subscription "your-subscription-id"
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
 # 2. Stellen Sie sicher, dass Sie die erforderlichen Rollen haben
-# - Mitwirkender (für das Erstellen von Ressourcen)
-# - Administrator für Benutzerzugriff (für Rollenzuweisungen)
+# - Contributor (für die Erstellung von Ressourcen)
+# - User Access Administrator (für Rollenzuweisungen)
 
-# 3. Kontaktieren Sie Ihren Azure-Administrator für die erforderlichen Berechtigungen
+# 3. Kontaktieren Sie Ihren Azure-Administrator für die entsprechenden Berechtigungen
 ```
 
 ### Problem: Multi-Tenant-Authentifizierungsprobleme
@@ -101,19 +101,19 @@ az role assignment list --assignee $(az account show --query user.name -o tsv)
 # 1. Mit einem bestimmten Mandanten anmelden
 az login --tenant "your-tenant-id"
 
-# 2. Mandant in der Konfiguration festlegen
+# 2. Den Mandanten in der Konfiguration festlegen
 azd config set auth.tenantId "your-tenant-id"
 
-# 3. Mandanten-Cache leeren, wenn der Mandant gewechselt wird
+# 3. Mandanten-Cache löschen, wenn zu einem anderen Mandanten gewechselt wird
 az account clear
 ```
 
-## 🏗️ Fehler bei der Bereitstellung von Infrastruktur
+## 🏗️ Fehler bei der Infrastrukturprovisionierung
 
-### Problem: Konflikte bei Ressourcennamen
+### Problem: Ressourcennamen-Konflikte
 **Symptome:**
-- "The resource name already exists" Fehler
-- Bereitstellung schlägt während der Ressourcenerstellung fehl
+- Fehler "The resource name already exists"
+- Die Bereitstellung schlägt während der Ressourcenerstellung fehl
 
 **Lösungen:**
 ```bash
@@ -144,11 +144,11 @@ azd config set defaults.location eastus2
 # oder
 azd env set AZURE_LOCATION eastus2
 
-# 3. Überprüfen Sie die Dienstverfügbarkeit nach Region
+# 3. Prüfen Sie die Dienstverfügbarkeit nach Region
 # Besuchen Sie: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### Problem: Kontingent überschritten
+### Problem: Quotenüberschreitungen
 **Symptome:**
 - "Quota exceeded for resource type"
 - "Maximum number of resources reached"
@@ -169,13 +169,13 @@ az vm list-usage --location eastus2 -o table
   }
 }
 
-# 4. Nicht verwendete Ressourcen bereinigen
+# 4. Unbenutzte Ressourcen bereinigen
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
-### Problem: Bicep-Vorlagenfehler
+### Problem: Fehler in Bicep-Templates
 **Symptome:**
-- Validierungsfehler der Vorlage
+- Fehler bei der Template-Validierung
 - Syntaxfehler in Bicep-Dateien
 
 **Lösungen:**
@@ -186,7 +186,7 @@ az bicep build --file infra/main.bicep
 # 2. Bicep-Linter verwenden
 az bicep lint --file infra/main.bicep
 
-# 3. Parameterdatei-Syntax prüfen
+# 3. Syntax der Parameterdatei prüfen
 cat infra/main.parameters.json | jq '.'
 
 # 4. Bereitstellungsänderungen anzeigen
@@ -195,14 +195,14 @@ azd provision --preview
 
 ## 🚀 Bereitstellungsfehler
 
-### Problem: Fehler beim Build
+### Problem: Build-Fehler
 **Symptome:**
-- Anwendung schlägt während der Bereitstellung beim Build fehl
+- Die Anwendung kann während der Bereitstellung nicht gebaut werden
 - Fehler bei der Paketinstallation
 
 **Lösungen:**
 ```bash
-# 1. Überprüfe die Build-Ausgabe mit dem Debug-Flag
+# 1. Build-Ausgabe mit Debug-Flag prüfen
 azd deploy --service web --debug
 
 # 2. Status des bereitgestellten Dienstes anzeigen
@@ -213,7 +213,7 @@ cd src/web
 npm install
 npm run build
 
-# 3. Prüfe die Kompatibilität von Node.js- und Python-Versionen
+# 3. Kompatibilität der Node.js-/Python-Versionen prüfen
 node --version  # Sollte mit den Einstellungen in azure.yaml übereinstimmen
 python --version
 
@@ -226,42 +226,42 @@ docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Problem: Fehler bei der Bereitstellung von Containern
+### Problem: Fehler bei der Containereinführung
 **Symptome:**
 - Container-Apps starten nicht
-- Image pull errors
+- Fehler beim Abrufen von Images
 
 **Lösungen:**
 ```bash
-# 1. Lokalen Docker-Build testen
+# 1. Docker-Build lokal testen
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Container-Logs mit der Azure CLI überprüfen
+# 2. Container-Logs mit der Azure CLI prüfen
 az containerapp logs show --name my-app --resource-group my-rg --follow
 
-# 3. Anwendung mit azd überwachen
+# 3. Anwendung über azd überwachen
 azd monitor --logs
 
 # 3. Zugriff auf die Container-Registry überprüfen
 az acr login --name myregistry
 
-# 4. Container-App-Konfiguration überprüfen
+# 4. Container-App-Konfiguration prüfen
 az containerapp show --name my-app --resource-group my-rg
 ```
 
 ### Problem: Datenbankverbindungsfehler
 **Symptome:**
-- Anwendung kann keine Verbindung zur Datenbank herstellen
-- Connection timeout errors
+- Die Anwendung kann keine Verbindung zur Datenbank herstellen
+- Verbindungs-Timeouts
 
 **Lösungen:**
 ```bash
 # 1. Überprüfen Sie die Firewall-Regeln der Datenbank
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. Testen Sie die Konnektivität aus der Anwendung
-# Fügen Sie es vorübergehend Ihrer App hinzu:
+# 2. Testen Sie die Verbindung aus der Anwendung
+# Fügen Sie es Ihrer App vorübergehend hinzu:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
 # 3. Überprüfen Sie das Format der Verbindungszeichenfolge
@@ -276,7 +276,7 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 ### Problem: Umgebungsvariablen funktionieren nicht
 **Symptome:**
 - Die App kann Konfigurationswerte nicht lesen
-- Umgebungsvariablen scheinen leer zu sein
+- Umgebungsvariablen erscheinen leer
 
 **Lösungen:**
 ```bash
@@ -290,14 +290,14 @@ cat azure.yaml | grep -A 5 env:
 # 3. Starten Sie die Anwendung neu
 azd deploy --service web
 
-# 4. Überprüfen Sie die Konfiguration des App Service
+# 4. Überprüfen Sie die App-Service-Konfiguration
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
 ### Problem: SSL/TLS-Zertifikatsprobleme
 **Symptome:**
 - HTTPS funktioniert nicht
-- Certificate validation errors
+- Fehler bei der Zertifikatsvalidierung
 
 **Lösungen:**
 ```bash
@@ -313,15 +313,15 @@ az webapp config hostname add --webapp-name myapp --resource-group myrg --hostna
 
 ### Problem: CORS-Konfigurationsprobleme
 **Symptome:**
-- Frontend kann API nicht aufrufen
-- Cross-origin request blocked
+- Frontend kann die API nicht aufrufen
+- Cross-Origin-Anfrage blockiert
 
 **Lösungen:**
 ```bash
-# 1. CORS für App Service konfigurieren
+# 1. CORS für den App Service konfigurieren
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. API aktualisieren, um CORS zu behandeln
+# 2. API aktualisieren, damit sie CORS unterstützt
 # In Express.js:
 app.use(cors({
   origin: process.env.FRONTEND_URL,
@@ -336,8 +336,8 @@ azd show
 
 ### Problem: Probleme beim Wechseln der Umgebung
 **Symptome:**
-- Falsche Umgebung wird verwendet
-- Konfiguration wechselt nicht richtig
+- Es wird die falsche Umgebung verwendet
+- Konfiguration wechselt nicht korrekt
 
 **Lösungen:**
 ```bash
@@ -348,7 +348,7 @@ azd env list
 azd env select production
 
 # 3. Aktuelle Umgebung überprüfen
-azd env show
+azd env list
 
 # 4. Neue Umgebung erstellen, falls beschädigt
 azd env new production-new
@@ -357,12 +357,12 @@ azd env select production-new
 
 ### Problem: Beschädigte Umgebung
 **Symptome:**
-- Umgebung zeigt einen ungültigen Zustand an
+- Die Umgebung zeigt einen ungültigen Zustand
 - Ressourcen stimmen nicht mit der Konfiguration überein
 
 **Lösungen:**
 ```bash
-# 1. Umgebungszustand aktualisieren
+# 1. Umgebungzustand aktualisieren
 azd env refresh
 
 # 2. Umgebungskonfiguration zurücksetzen
@@ -370,8 +370,8 @@ azd env new production-reset
 # Erforderliche Umgebungsvariablen kopieren
 azd env set DATABASE_URL "your-value"
 
-# 3. Bestehende Ressourcen importieren (falls möglich)
-# Datei .azure/production/config.json manuell mit Ressourcen-IDs aktualisieren
+# 3. Vorhandene Ressourcen importieren (falls möglich)
+# Aktualisiere manuell .azure/production/config.json mit Ressourcen-IDs
 ```
 
 ## 🔍 Leistungsprobleme
@@ -383,27 +383,27 @@ azd env set DATABASE_URL "your-value"
 
 **Lösungen:**
 ```bash
-# 1. Bereitstellung spezifischer Dienste für schnellere Iterationen
+# 1. Bestimmte Dienste bereitstellen, um schneller iterieren zu können
 azd deploy --service web
 azd deploy --service api
 
 # 2. Nur-Code-Bereitstellung verwenden, wenn die Infrastruktur unverändert ist
 azd deploy  # Schneller als azd up
 
-# 3. Optimiere den Build-Prozess
+# 3. Build-Prozess optimieren
 # In der package.json:
 "scripts": {
   "build": "webpack --mode=production --optimize-minimize"
 }
 
-# 4. Überprüfe die Standorte der Ressourcen (die gleiche Region verwenden)
+# 4. Ressourcenstandorte prüfen (gleiche Region verwenden)
 azd config set defaults.location eastus2
 ```
 
-### Problem: Anwendungsleistungsprobleme
+### Problem: Leistungsprobleme der Anwendung
 **Symptome:**
-- Langsame Antwortzeiten
-- Hoher Ressourcenverbrauch
+- Langsame Reaktionszeiten
+- Hohe Ressourcenauslastung
 
 **Lösungen:**
 ```bash
@@ -425,11 +425,11 @@ az containerapp logs show --name myapp --resource-group myrg --follow
 # Fügen Sie Ihrer Infrastruktur einen Redis-Cache hinzu
 ```
 
-## 🛠️ Fehlerbehebungswerkzeuge und Befehle
+## 🛠️ Tools und Befehle zur Fehlerbehebung
 
 ### Debug-Befehle
 ```bash
-# Umfassende Fehlerbehebung
+# Umfassendes Debugging
 export AZD_DEBUG=true
 azd up --debug 2>&1 | tee debug.log
 
@@ -437,7 +437,7 @@ azd up --debug 2>&1 | tee debug.log
 azd version
 
 # Aktuelle Konfiguration anzeigen
-azd config list
+azd config show
 
 # Konnektivität testen
 curl -v https://myapp.azurewebsites.net/health
@@ -452,10 +452,10 @@ az webapp log tail --name myapp --resource-group myrg
 azd monitor --logs
 azd monitor --live
 
-# Protokolle von Azure-Ressourcen
+# Azure-Ressourcenprotokolle
 az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
 
-# Containerprotokolle (für Container-Apps)
+# Containerprotokolle (für Container Apps)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
@@ -474,17 +474,17 @@ az network watcher test-connectivity --source-resource myvm --dest-address myapp
 ## 🆘 Zusätzliche Hilfe erhalten
 
 ### Wann eskalieren
-- Authentifizierungsprobleme bestehen weiterhin, nachdem alle Lösungen ausprobiert wurden
+- Authentifizierungsprobleme bestehen, nachdem alle Lösungen ausprobiert wurden
 - Infrastrukturprobleme mit Azure-Diensten
 - Abrechnungs- oder abonnementbezogene Probleme
 - Sicherheitsbedenken oder Vorfälle
 
-### Supportkanäle
+### Support-Kanäle
 ```bash
-# 1. Azure Service Health überprüfen
+# 1. Azure Service Health prüfen
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. Erstellen Sie ein Azure-Supportticket
+# 2. Erstellen Sie ein Azure-Support-Ticket
 # Gehen Sie zu: https://portal.azure.com -> Hilfe + Support
 
 # 3. Community-Ressourcen
@@ -493,15 +493,15 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 # - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
-### Informationen sammeln
+### Informationen, die Sie sammeln sollten
 Bevor Sie den Support kontaktieren, sammeln Sie:
-- `azd version` output
-- `azd config list` output
-- `azd show` output (aktueller Bereitstellungsstatus)
+- `azd version` Ausgabe
+- `azd config show` Ausgabe
+- `azd show` Ausgabe (aktueller Bereitstellungsstatus)
 - Fehlermeldungen (vollständiger Text)
 - Schritte zur Reproduzierung des Problems
-- Umgebungsdetails (`azd env show`)
-- Zeitliche Abläufe, wann das Problem begonnen hat
+- Umgebungsdetails (`azd env get-values`)
+- Zeitachse, wann das Problem begonnen hat
 
 ### Skript zur Protokollsammlung
 ```bash
@@ -516,8 +516,8 @@ azd version >> debug-logs/system-info.txt
 az --version >> debug-logs/system-info.txt
 
 echo "Configuration:" > debug-logs/config.txt
-azd config list >> debug-logs/config.txt
-azd env show >> debug-logs/config.txt
+azd config show >> debug-logs/config.txt
+azd env list >> debug-logs/config.txt
 azd env get-values >> debug-logs/config.txt
 
 echo "Current deployment status:" > debug-logs/status.txt
@@ -526,14 +526,14 @@ azd show >> debug-logs/status.txt
 echo "Debug information collected in debug-logs/"
 ```
 
-## 📊 Fehlervermeidung
+## 📊 Vorbeugung von Problemen
 
 ### Checkliste vor der Bereitstellung
 ```bash
 # 1. Authentifizierung validieren
 az account show
 
-# 2. Kontingente und Beschränkungen prüfen
+# 2. Kontingente und Grenzwerte prüfen
 az vm list-usage --location eastus2
 
 # 3. Vorlagen validieren
@@ -543,11 +543,11 @@ az bicep build --file infra/main.bicep
 npm run build
 npm run test
 
-# 5. Trockenläufe für Bereitstellungen verwenden
+# 5. Trockendurchläufe für Bereitstellungen verwenden
 azd provision --preview
 ```
 
-### Überwachungseinrichtung
+### Monitoring-Konfiguration
 ```bash
 # Application Insights aktivieren
 # Zu main.bicep hinzufügen:
@@ -565,7 +565,7 @@ az monitor metrics alert create \
 
 ### Regelmäßige Wartung
 ```bash
-# Wöchentliche Gesundheitsprüfungen
+# Wöchentliche Gesundheitschecks
 ./scripts/health-check.sh
 
 # Monatliche Kostenüberprüfung
@@ -577,24 +577,24 @@ az security assessment list --resource-group myrg
 
 ## Verwandte Ressourcen
 
-- [Debugging-Anleitung](debugging.md) - Erweiterte Debugging-Techniken
-- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Fehlerbehebung in der Infrastruktur
+- [Debugging Guide](debugging.md) - Erweiterte Debugging-Techniken
+- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Fehlerbehebung bei der Infrastruktur
 - [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md) - Leitfaden zur Ressourcenplanung
-- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Empfehlungen zu Servicestufen
+- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Empfehlungen zu Service-Tiers
 
 ---
 
-**Tipp**: Speichern Sie diesen Leitfaden als Lesezeichen und schlagen Sie jederzeit nach, wenn Sie auf Probleme stoßen. Die meisten Probleme sind bereits bekannt und haben bewährte Lösungen!
+**Tipp**: Lesezeichen für diesen Leitfaden setzen und ihn bei Problemen konsultieren. Die meisten Probleme sind bereits aufgetreten und haben etablierte Lösungen!
 
 ---
 
 **Navigation**
-- **Previous Lesson**: [Ressourcenbereitstellung](../chapter-04-infrastructure/provisioning.md)
-- **Next Lesson**: [Debugging-Anleitung](debugging.md)
+- **Previous Lesson**: [Bereitstellung von Ressourcen](../chapter-04-infrastructure/provisioning.md)
+- **Next Lesson**: [Debugging-Leitfaden](debugging.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Haftungsausschluss:
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir um Genauigkeit bemüht sind, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache sollte als maßgebliche Quelle betrachtet werden. Bei wichtigen Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die durch die Nutzung dieser Übersetzung entstehen.
+**Haftungsausschluss**:
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Originalsprache ist als maßgebliche Quelle zu betrachten. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Verwendung dieser Übersetzung ergeben.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

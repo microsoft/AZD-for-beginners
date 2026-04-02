@@ -1,20 +1,22 @@
-# Глава 2: Разработка с приоритетом ИИ
+# Глава 2: Разработка с приоритетом на ИИ
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1-2 hours | **⭐ Complexity**: Intermediate
+**📚 Курс**: [AZD для начинающих](../../README.md) | **⏱️ Продолжительность**: 1-2 часа | **⭐ Сложность**: Средний уровень
 
 ---
 
 ## Обзор
 
-This chapter focuses on deploying AI-powered applications using Azure Developer CLI and Microsoft Foundry services. From simple AI chat apps to intelligent agents with tools.
+Эта глава посвящена развертыванию приложений с искусственным интеллектом с использованием Azure Developer CLI и сервисов Microsoft Foundry. От простых чат-приложений с ИИ до интеллектуальных агентов с инструментами.
+
+> **Примечание по проверке (2026-03-25):** Поток команд и рекомендации по расширениям в этой главе были проверены на `azd` версии `1.23.12` и текущем предварительном выпуске расширения AI агент `azure.ai.agents` `0.1.18-preview`. Если у вас более старая сборка AZD, сначала обновитесь, затем продолжайте выполнение упражнений.
 
 ## Цели обучения
 
-By completing this chapter, you will:
-- Deploy AI applications using pre-built AZD templates
-- Understand Microsoft Foundry integration with AZD
-- Configure and customize AI agents with tools
-- Deploy RAG (Retrieval-Augmented Generation) applications
+Выполнив эту главу, вы сможете:
+- Разворачивать приложения с ИИ, используя предварительно созданные шаблоны AZD
+- Понять интеграцию Microsoft Foundry с AZD
+- Настраивать и кастомизировать AI-агентов с инструментами
+- Разворачивать приложения RAG (Retrieval-Augmented Generation)
 
 ---
 
@@ -23,20 +25,20 @@ By completing this chapter, you will:
 | # | Урок | Описание | Время |
 |---|--------|-------------|------|
 | 1 | [Интеграция Microsoft Foundry](microsoft-foundry-integration.md) | Подключение AZD к сервисам Foundry | 30 мин |
-| 2 | [Руководство по агентам ИИ](agents.md) | Развертывание интеллектуальных агентов с инструментами | 45 мин |
-| 3 | [Развертывание моделей ИИ](ai-model-deployment.md) | Развертывание и настройка моделей ИИ | 30 мин |
-| 4 | [Практическая лаборатория по ИИ](ai-workshop-lab.md) | Практическая часть: подготовьте решение на базе ИИ для AZD | 60 мин |
+| 2 | [Руководство по AI агентам](agents.md) | Развертывание интеллектуальных агентов с инструментами | 45 мин |
+| 3 | [Развертывание AI модели](ai-model-deployment.md) | Развертывание и настройка AI моделей | 30 мин |
+| 4 | [Лабораторная работа по AI](ai-workshop-lab.md) | Практика: Сделайте ваше AI решение готовым для AZD | 60 мин |
 
 ---
 
 ## 🚀 Быстрый старт
 
 ```bash
-# Вариант 1: RAG чат-приложение
+# Вариант 1: Приложение для чата RAG
 azd init --template azure-search-openai-demo
 azd up
 
-# Вариант 2: агенты ИИ
+# Вариант 2: AI агенты
 azd init --template get-started-with-ai-agents
 azd up
 
@@ -51,21 +53,21 @@ azd up
 
 | Шаблон | Описание | Сервисы |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG-чат с цитированием | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Агент ИИ с инструментами | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Базовый чат на базе ИИ | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG чат с цитатами | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | AI агент с инструментами | AI Agent Service |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Базовый чат с ИИ | OpenAI + Container Apps |
 
 ---
 
-## 💰 Оценка стоимости
+## 💰 Осведомленность о затратах
 
-| Окружение | Оценочная месячная стоимость |
+| Среда | Расчётная ежемесячная стоимость |
 |-------------|----------------------|
-| Development | $80-150 |
-| Подготовление | $150-300 |
-| Производство | $300-3,500+ |
+| Разработка | $80-150 |
+| Тестирование | $150-300 |
+| Продакшн | $300-3,500+ |
 
-**Совет:** Run `azd down` after testing to avoid charges.
+**Совет:** Выполняйте `azd down` после тестирования, чтобы избежать дополнительных затрат.
 
 ---
 
@@ -73,21 +75,21 @@ azd up
 
 | Направление | Глава |
 |-----------|---------|
-| **Предыдущая** | [Chapter 1: Foundation](../chapter-01-foundation/README.md) |
-| **Следующая** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
-| **Перейти к** | [Chapter 8: Production Patterns](../chapter-08-production/README.md) |
+| **Предыдущая** | [Глава 1: Основы](../chapter-01-foundation/README.md) |
+| **Следующая** | [Глава 3: Конфигурация](../chapter-03-configuration/README.md) |
+| **Перейти к** | [Глава 8: Производственные шаблоны](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Связанные ресурсы
 
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
+- [Устранение неполадок ИИ](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Практики производства ИИ](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Отказ от ответственности:
-Этот документ был переведён с помощью сервиса машинного перевода на базе ИИ Co‑op Translator (https://github.com/Azure/co-op-translator). Несмотря на наши усилия по обеспечению точности, имейте в виду, что автоматические переводы могут содержать ошибки или неточности. Оригинальный документ на языке оригинала следует считать авторитетным источником. Для критически важной информации рекомендуется обратиться к профессиональному человеческому переводу. Мы не несем ответственности за любые недоразумения или неверные толкования, возникшие в результате использования данного перевода.
+**Отказ от ответственности**:
+Этот документ был переведен с помощью сервиса автоматического перевода [Co-op Translator](https://github.com/Azure/co-op-translator). Несмотря на наши усилия обеспечить точность, просим учитывать, что автоматические переводы могут содержать ошибки или неточности. Оригинальный документ на его исходном языке следует считать авторитетным источником. Для критически важной информации рекомендуется профессиональный перевод человеком. Мы не несем ответственности за любые недоразумения или искажения, возникшие вследствие использования данного перевода.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
