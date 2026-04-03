@@ -1,57 +1,63 @@
 # 7. fejezet: Hibaelhárítás és hibakeresés
 
-**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 1-1.5 óra | **⭐ Bonyolultság**: Közepes
+**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 1-1,5 óra | **⭐ Nehézségi szint**: Középhaladó
 
 ---
 
 ## Áttekintés
 
-Ez a fejezet segít a gyakori problémák diagnosztizálásában és megoldásában az Azure Developer CLI használata során. A telepítési hibáktól az AI-specifikus problémákig.
+Ez a fejezet segít diagnosztizálni és megoldani az Azure Developer CLI használata során gyakran előforduló problémákat. A telepítési hibáktól az AI-specifikus problémákig.
+
+> Validálva az `azd 1.23.12` verzióval 2026 márciusában.
 
 ## Tanulási célok
 
-A fejezet elvégzése után:
-- Gyakori AZD telepítési hibák diagnosztizálása
-- Hitelesítési és jogosultsági problémák hibakeresése
-- AI szolgáltatások kapcsolódási problémáinak megoldása
-- Az Azure Portal és CLI használata hibakereséshez
+A fejezet elvégzésével Ön képes lesz:
+- Gyakori AZD telepítési hibák diagnosztizálására
+- Hitelesítési és jogosultsági problémák hibakeresésére
+- AI szolgáltatás kapcsolódási problémáinak megoldására
+- Azure Portal és CLI használatára a hibaelhárításhoz
 
 ---
 
-## 📚 Leckék
+## 📚 Tananyagok
 
 | # | Lecke | Leírás | Idő |
 |---|--------|-------------|------|
-| 1 | [Gyakori problémák](common-issues.md) | Gyakran előforduló problémák | 30 perc |
+| 1 | [Gyakori problémák](common-issues.md) | Gyakran előforduló hibák | 30 perc |
 | 2 | [Hibakeresési útmutató](debugging.md) | Lépésről lépésre hibakeresési stratégiák | 45 perc |
 | 3 | [AI hibakeresés](ai-troubleshooting.md) | AI-specifikus problémák | 30 perc |
 
 ---
 
-## 🚨 Gyors javítások
+## 🚨 Gyors megoldások
 
-### Hitelesítési problémák
+### Hitelesítési hibák
 ```bash
+# Szükséges AZD munkafolyamatokhoz
 azd auth login
+
+# Opcionális, ha közvetlenül Azure CLI parancsokat is használ
 az login
-azd auth whoami
+
+azd auth status
 ```
 
-### Létrehozási hibák
+### Szolgáltatás létrehozási hibák
 ```bash
 azd show
 azd monitor --logs
 az deployment sub list --query "[?properties.provisioningState!='Succeeded']"
 ```
 
-### Erőforrás-ütközések
+### Erőforrások közötti ütközések
 ```bash
 azd down --force --purge
 azd env new different-name
 azd up
 ```
 
-### Kvóta túllépése
+### Kvóta túllépés
 ```bash
 az vm list-usage --location eastus --output table
 azd env set AZURE_LOCATION westus2
@@ -60,16 +66,16 @@ azd up
 
 ---
 
-## 📋 Hiba kód referencia
+## 📋 Hibakódok áttekintése
 
 | Hiba | Ok | Megoldás |
 |-------|-------|----------|
-| `AuthenticationError` | Nincs bejelentkezve | `azd auth login` |
-| `ResourceNotFound` | Hiányzó erőforrás | Ellenőrizd az erőforrásneveket |
-| `QuotaExceeded` | Előfizetési korlátok | Kérj kvótaemelést |
+| `AuthenticationError` | Nem bejelentkezett | `azd auth login` |
+| `ResourceNotFound` | Hiányzó erőforrás | Ellenőrizze az erőforrás neveit |
+| `QuotaExceeded` | Előfizetési korlátok | Kvóta növelését kérje |
 | `InvalidTemplate` | Bicep szintaxis hiba | `az bicep build` |
-| `Conflict` | Az erőforrás létezik | Használj új nevet vagy töröld |
-| `Forbidden` | Nincs elegendő jogosultság | Ellenőrizd az RBAC szerepeket |
+| `Conflict` | Az erőforrás létezik | Használjon új nevet vagy törölje |
+| `Forbidden` | Nincs elegendő jogosultság | Ellenőrizze az RBAC szerepköröket |
 
 ---
 
@@ -88,22 +94,22 @@ azd up
 
 ## 🔗 Navigáció
 
-| Irány | Fejezet |
+| Irany | Fejezet |
 |-----------|---------|
-| **Előző** | [6. fejezet: Előtelepítés](../chapter-06-pre-deployment/README.md) |
+| **Előző** | [6. fejezet: Telepítés előtti lépések](../chapter-06-pre-deployment/README.md) |
 | **Következő** | [8. fejezet: Éles környezet](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Kapcsolódó források
+## 📖 Kapcsolódó anyagok
 
 - [Telepítés előtti ellenőrzések](../chapter-06-pre-deployment/preflight-checks.md)
 - [Konfigurációs útmutató](../chapter-03-configuration/configuration.md)
-- [AZD GitHub hibajegyek](https://github.com/Azure/azure-dev/issues)
+- [AZD GitHub problémák](https://github.com/Azure/azure-dev/issues)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Felelősségkizárás:
-Ezt a dokumentumot a Co-op Translator (https://github.com/Azure/co-op-translator) nevű mesterséges intelligencia fordító szolgáltatással fordítottuk. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelven tekintendő irányadónak. Kritikus információk esetén professzionális, emberi fordítás igénybevételét javasoljuk. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+**Felelősségkizárás**:  
+Ez a dokumentum az AI fordítószolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Kritikus információk esetén szakmai emberi fordítást javaslunk. Nem vállalunk felelősséget semmilyen félreértésért vagy félreértelmezésért, amely ebből a fordításból ered.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,47 +1,47 @@
 # Provisioning Azure Resources with AZD
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD pro začátečníky](../../README.md)
-- **📖 Current Chapter**: Kapitola 4 - Infrastruktura jako kód a nasazení
-- **⬅️ Previous**: [Průvodce nasazením](deployment-guide.md)
-- **➡️ Next Chapter**: [Kapitola 5: Řešení s více agenty AI](../../examples/retail-scenario.md)
-- **🔧 Related**: [Kapitola 6: Validace před nasazením](../chapter-06-pre-deployment/capacity-planning.md)
+**Navigace kapitolami:**
+- **📚 Domovská stránka kurzu**: [AZD For Beginners](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 4 - Infrastructure as Code & Deployment
+- **⬅️ Předchozí**: [Deployment Guide](deployment-guide.md)
+- **➡️ Další kapitola**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+- **🔧 Související**: [Chapter 6: Pre-Deployment Validation](../chapter-06-pre-deployment/capacity-planning.md)
 
-## Introduction
+## Úvod
 
-Tento komplexní průvodce pokrývá vše, co potřebujete vědět o zřizování a správě prostředků Azure pomocí Azure Developer CLI. Naučíte se implementovat vzory Infrastruktura jako kód (IaC) od základního vytváření prostředků po pokročilé podnikové architektury infrastruktury s využitím Bicep, ARM šablon, Terraformu a Pulumi.
+Tento komplexní průvodce pokrývá vše, co potřebujete vědět o provisioning a správě zdrojů Azure pomocí Azure Developer CLI. Naučte se implementovat principy Infrastructure as Code (IaC) od základního vytváření zdrojů až po pokročilé podnikově orientované infrastruktury pomocí Bicep, ARM šablon, Terraformu a Pulumi.
 
-## Learning Goals
+## Výukové cíle
 
 Po dokončení tohoto průvodce budete:
-- Ovládat principy Infrastruktury jako kód a zřizování prostředků v Azure
-- Rozumět více poskytovatelům IaC podporovaným Azure Developer CLI
+- Ovládat principy Infrastructure as Code a provisioning Azure zdrojů
+- Rozumět různým IaC nástrojům podporovaným Azure Developer CLI
 - Navrhovat a implementovat Bicep šablony pro běžné aplikační architektury
-- Konfigurovat parametry prostředků, proměnné a nastavení specifická pro prostředí
+- Konfigurovat parametry zdrojů, proměnné a nastavení specifická pro prostředí
 - Implementovat pokročilé vzory infrastruktury včetně sítí a zabezpečení
-- Spravovat životní cyklus prostředků, aktualizace a řešení závislostí
+- Spravovat životní cyklus zdrojů, aktualizace a řešení závislostí
 
-## Learning Outcomes
+## Výsledky učení
 
 Po dokončení budete schopni:
-- Navrhnout a zřizovat infrastrukturu Azure pomocí Bicep a ARM šablon
-- Konfigurovat složité více-službové architektury se správnými závislostmi prostředků
-- Implementovat parametrizované šablony pro více prostředí a konfigurací
-- Odstraňovat problémy při zřizování infrastruktury a řešit chyby nasazení
-- Aplikovat principy Azure Well-Architected Framework při návrhu infrastruktury
-- Spravovat aktualizace infrastruktury a implementovat strategie verzování infrastruktury
+- Navrhovat a provisionovat infrastrukturu Azure pomocí Bicep a ARM šablon
+- Konfigurovat složité multi-službové architektury s korektními závislostmi zdrojů
+- Implementovat parametrizované šablony pro různá prostředí a konfigurace
+- Řešit problémy s provisionováním infrastruktury a řešit neúspěšné nasazení
+- Aplikovat zásady Azure Well-Architected Framework při návrhu infrastruktury
+- Spravovat aktualizace infrastruktury a zavádět strategie verzování infrastruktury
 
-## Infrastructure Provisioning Overview
+## Přehled provisioning infrastruktury
 
-Azure Developer CLI podporuje více poskytovatelů Infrastruktura jako kód (IaC):
-- **Bicep** (doporučeno) - doménově specifický jazyk Azure
-- **ARM Templates** - JSON založené šablony Azure Resource Manager
-- **Terraform** - nástroj pro infrastrukturu napříč cloudy
-- **Pulumi** - moderní infrastruktura jako kód s programovacími jazyky
+Azure Developer CLI podporuje více poskytovatelů Infrastructure as Code (IaC):
+- **Bicep** (doporučeno) – jazyk specifický pro Azure
+- **ARM Templates** – JSON šablony pro Azure Resource Manager
+- **Terraform** – nástroj pro multi-cloud infrastrukturu
+- **Pulumi** – moderní infrastruktura jako kód s programovacími jazyky
 
-## Understanding Azure Resources
+## Pochopení Azure zdrojů
 
-### Resource Hierarchy
+### Hierarchie zdrojů
 ```
 Azure Account
 └── Subscriptions
@@ -49,16 +49,16 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Common Azure Services for Applications
-- **Výpočetní služby**: App Service, Container Apps, Functions, Virtual Machines
+### Běžné Azure služby pro aplikace
+- **Výpočetní služba**: App Service, Container Apps, Functions, Virtuální stroje
 - **Úložiště**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Síťové služby**: Virtual Network, Application Gateway, CDN
+- **Síťování**: Virtuální síť, Application Gateway, CDN
 - **Zabezpečení**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
-## Bicep Infrastructure Templates
+## Šablony infrastruktury Bicep
 
-### Basic Bicep Template Structure
+### Základní struktura Bicep šablony
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -128,9 +128,9 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Advanced Bicep Patterns
+### Pokročilé vzory Bicep
 
-#### Modular Infrastructure
+#### Modulární infrastruktura
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -179,7 +179,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Conditional Resource Creation
+#### Podmíněné vytváření zdrojů
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -200,7 +200,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Database Provisioning
+## 🗃️ Provisioning databází
 
 ### Cosmos DB
 ```bicep
@@ -298,9 +298,9 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Security and Secrets Management
+## 🔒 Zabezpečení a správa tajemství
 
-### Key Vault Integration
+### Integrace Key Vault
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -342,7 +342,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Managed Identity Configuration
+### Konfigurace spravované identity
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -368,9 +368,9 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Networking and Connectivity
+## 🌍 Síťování a konektivita
 
-### Virtual Network Configuration
+### Konfigurace virtuální sítě
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -433,7 +433,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### Application Gateway with SSL
+### Application Gateway s SSL
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -496,7 +496,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Monitoring and Observability
+## 📊 Monitorování a pozorovatelnost
 
 ### Application Insights
 ```bicep
@@ -527,7 +527,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Custom Metrics and Alerts
+### Vlastní metriky a upozornění
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -561,9 +561,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Environment-Specific Configurations
+## 🔧 Konfigurace specifické pro prostředí
 
-### Parameter Files for Different Environments
+### Parametrické soubory pro různá prostředí
 ```json
 // infra/main.parameters.dev.json
 {
@@ -617,7 +617,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Conditional Resource Provisioning
+### Podmíněné provisionování zdrojů
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,9 +649,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Advanced Provisioning Patterns
+## 🚀 Pokročilé vzory provisioningu
 
-### Multi-Region Deployment
+### Nasazení v několika regionech
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -719,7 +719,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### Infrastructure Testing
+### Testování infrastruktury
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -755,42 +755,41 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 Infrastructure Preview & Validation (NOVÉ)
+## 🧪 Náhled a validace infrastruktury (NOVINKA)
 
-### Preview Infrastructure Changes Before Deployment
+### Náhled změn infrastruktury před nasazením
 
-Funkce `azd provision --preview` vám umožňuje **simulovat zřizování infrastruktury** před skutečným nasazením prostředků. Je podobná v duchu příkazům jako `terraform plan` nebo `bicep what-if` a poskytuje vám **suchý běh (dry-run)** toho, jaké změny by byly provedeny ve vašem prostředí Azure.
+Funkce `azd provision --preview` umožňuje **simulovat provisioning infrastruktury** před skutečným nasazením zdrojů. Je to podobné jako `terraform plan` nebo `bicep what-if`, poskytuje **suchý běh (dry-run)**, jaké změny by byly provedeny ve vašem Azure prostředí.
 
-#### 🛠️ Co to dělá
+#### 🛠️ Co dělá
 - **Analyzuje vaše IaC šablony** (Bicep nebo Terraform)
-- **Zobrazuje náhled změn prostředků**: přidání, odstranění, aktualizace
-- **Neaplikuje změny** — je pouze pro čtení a je bezpečné jej spustit
+- **Zobrazuje náhled změn zdrojů**: přidání, odstranění, aktualizace
+- **Neaplikuje změny** — je to jen pro čtení a bezpečné spustit
 
-#### � Případy použití
+#### Použití
 ```bash
 # Náhled změn infrastruktury před nasazením
 azd provision --preview
 
-# Náhled s podrobným výstupem
-azd provision --preview --output json
-
-# Náhled pro konkrétní prostředí
-azd provision --preview --environment production
+# Náhled pro specifické prostředí
+azd provision --preview -e production
 ```
 
 Tento příkaz vám pomůže:
-- **Ověřit změny infrastruktury** před nasazením prostředků
-- **Zachytit špatné konfigurace včas** v průběhu vývojového cyklu
-- **Bezpečně spolupracovat** v týmovém prostředí
-- **Zajistit nasazení s nejmenšími oprávněními** bez nepříjemných překvapení
+- **Ověřit změny infrastruktury** před zavedením zdrojů
+- **Včas odhalit špatné konfigurace** v průběhu vývoje
+- **Bezpečně spolupracovat** v týmech
+- **Zajistit nejnižší možná oprávnění** bez překvapení
 
-Je obzvlášť užitečný, když:
-- Pracujete se složitými více-službovými prostředími
-- Provádíte změny v produkční infrastruktuře
-- Ověřujete úpravy šablon před schválením PR
-- Školíte nové členy týmu na vzory infrastruktury
+Je obzvlášť užitečný při:
+- Práci se složitými multi-službovými prostředími
+- Provádění změn v produkční infrastruktuře
+- Ověřování úprav šablon před schválením PR
+- Školení nových členů týmů na vzory infrastruktury
 
-### Example Preview Output
+### Příklad výstupu náhledu
+Přesný výstup náhledu se liší podle poskytovatele a struktury projektu, ale výsledek by měl jasně identifikovat navrhované změny před jejich aplikací.
+
 ```bash
 $ azd provision --preview
 
@@ -809,28 +808,27 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
 ```
 
-## �🔄 Resource Updates and Migrations
+## 🔄 Aktualizace a migrace zdrojů
 
-### Safe Resource Updates
+### Bezpečné aktualizace zdrojů
 ```bash
 # Nejprve si prohlédněte změny infrastruktury (DOPORUČENO)
 azd provision --preview
 
-# Aplikujte změny po potvrzení náhledu
+# Proveďte změny po potvrzení náhledu
 azd provision --confirm-with-no-prompt
 
-# Pro obnovu předchozího stavu použijte Git k vrácení změn infrastruktury:
-git revert HEAD  # Vraťte poslední commit infrastruktury
-azd provision    # Aplikujte předchozí stav infrastruktury
+# Pro návrat zpět použijte Git k vrácení změn infrastruktury:
+git revert HEAD  # Vrátit poslední commit infrastruktury
+azd provision    # Aplikovat předchozí stav infrastruktury
 ```
 
-### Database Migrations
+### Migrace databází
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -859,9 +857,9 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🎯 Best Practices
+## 🎯 Nejlepší postupy
 
-### 1. Resource Naming Conventions
+### 1. Konvence pojmenování zdrojů
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -872,7 +870,7 @@ var naming = {
 }
 ```
 
-### 2. Tagging Strategy
+### 2. Strategie tagování
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -885,7 +883,7 @@ var commonTags = {
 }
 ```
 
-### 3. Parameter Validation
+### 3. Validace parametrů
 ```bicep
 @description('Environment name')
 @minLength(3)
@@ -901,7 +899,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Output Organization
+### 4. Organizace výstupů
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -916,29 +914,29 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## Next Steps
+## Další kroky
 
-- [Pre-deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - Ověřte dostupnost prostředků
-- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - Odstraňování problémů s infrastrukturou
-- [Debugging Guide](../chapter-07-troubleshooting/debugging.md) - Návod k ladění problémů se zřizováním
-- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Zvolte vhodné úrovně služeb
+- [Plánování před nasazením](../chapter-06-pre-deployment/capacity-planning.md) - Ověření dostupnosti zdrojů
+- [Běžné problémy](../chapter-07-troubleshooting/common-issues.md) - Řešení problémů s infrastrukturou
+- [Průvodce laděním](../chapter-07-troubleshooting/debugging.md) - Ladění problémů s provisioningem
+- [Výběr SKU](../chapter-06-pre-deployment/sku-selection.md) - Výběr správných úrovní služeb
 
-## Additional Resources
+## Další zdroje
 
 - [Dokumentace Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Šablony Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Centrum architektury Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Rámec Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Průvodce nasazením](deployment-guide.md)
-- **Next Lesson**: [Plánování kapacity](../chapter-06-pre-deployment/capacity-planning.md)
+**Navigace**
+- **Předchozí lekce**: [Deployment Guide](deployment-guide.md)
+- **Další lekce**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vyloučení odpovědnosti:
-Tento dokument byl přeložen pomocí služby pro překlad s využitím umělé inteligence [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho originálním jazyce by měl být považován za závazný. Pro důležité informace se doporučuje využít profesionální lidský překlad. Nejsme odpovědní za jakákoli nedorozumění nebo mylné výklady vyplývající z použití tohoto překladu.
+**Prohlášení o vyloučení odpovědnosti**:  
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho rodném jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo mylné výklady vyplývající z použití tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,28 +1,30 @@
 # AI Modell Telepítése Azure Developer CLI-vel
 
-**Fejezet Navigáció:**
-- **📚 Kurzus Főoldal**: [AZD Kezdőknek](../../README.md)
-- **📖 Aktuális fejezet**: 2. fejezet - AI-Először Fejlesztés
+**Fejezet navigáció:**
+- **📚 Kurzus főoldal**: [AZD Kezdőknek](../../README.md)
+- **📖 Jelenlegi fejezet**: 2. fejezet - AI-első fejlesztés
 - **⬅️ Előző**: [Microsoft Foundry Integráció](microsoft-foundry-integration.md)
 - **➡️ Következő**: [AI Műhely Labor](ai-workshop-lab.md)
 - **🚀 Következő fejezet**: [3. fejezet: Konfiguráció](../chapter-03-configuration/configuration.md)
 
-Ez az útmutató átfogó utasításokat nyújt AI modellek telepítéséhez az AZD sablonok segítségével, lefedve a modell kiválasztásától a gyártási telepítési mintákig mindent.
+Ez az útmutató átfogó utasításokat nyújt AI modellek telepítéséhez az AZD sablonok használatával, a modell kiválasztásától a gyártási telepítési mintákig.
+
+> **Érvényességi megjegyzés (2026-03-25):** Az ebben az útmutatóban található AZD munkafolyamatot a `azd` `1.23.12` verzióval tesztelték. Azokban az AI telepítésekben, amelyek hosszabb ideig tartanak, mint az alapértelmezett szolgáltatás telepítési ablak, a jelenlegi AZD kiadások támogatják az `azd deploy --timeout <másodperc>` használatát.
 
 ## Tartalomjegyzék
 
-- [Modell Kiválasztási Stratégia](#modell-kiválasztási-stratégia)
-- [AZD Konfiguráció AI Modellekhez](#azd-konfiguráció-ai-modellekhez)
-- [Telepítési Minták](#telepítési-minták)
-- [Modell Menedzsment](#modell-menedzsment)
-- [Gyártási Szempontok](#gyártási-szempontok)
-- [Figyelés és Megfigyelhetőség](#figyelés-és-megfigyelhetőség)
+- [Modell kiválasztási stratégia](#modell-kiválasztási-stratégia)
+- [AZD konfiguráció AI modellekhez](#azd-konfiguráció-ai-modellekhez)
+- [Telepítési minták](#telepítési-minták)
+- [Modell menedzsment](#modell-menedzsment)
+- [Gyártási megfontolások](#gyártási-megfontolások)
+- [Megfigyelés és megfigyelhetőség](#megfigyelés-és-megfigyelhetőség)
 
-## Modell Kiválasztási Stratégia
+## Modell kiválasztási stratégia
 
 ### Microsoft Foundry Modellek
 
-Válassza ki a megfelelő modellt az esete számára:
+Válassza ki az adott feladathoz legmegfelelőbb modellt:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -41,29 +43,29 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
         ]
 ```
 
-### Modell Kapacitás Tervezés
+### Modell kapacitás tervezés
 
-| Modell Típus | Használati Eset | Ajánlott Kapacitás | Költség Szempontok |
-|--------------|-----------------|-------------------|--------------------|
-| gpt-4.1-mini | Csevegés, Kérdés-Válasz | 10-50 TPM | Költséghatékony a legtöbb munkaterheléshez |
-| gpt-4.1 | Komplex következtetés | 20-100 TPM | Magasabb költség, prémium funkciókhoz |
-| Text-embedding-ada-002 | Keresés, RAG | 30-120 TPM | Szemantikus kereséshez elengedhetetlen |
-| Whisper | Beszéd-szöveg | 10-50 TPM | Hangfeldolgozási munkaterhelésekhez |
+| Modell típus | Használati eset | Ajánlott kapacitás | Költség megfontolások |
+|--------------|-----------------|-------------------|-----------------------|
+| gpt-4.1-mini | Chat, Kérdések és válaszok | 10-50 TPM | Költséghatékony a legtöbb munkaterheléshez |
+| gpt-4.1 | Összetett érvelés | 20-100 TPM | Magasabb költség, prémium funkciókhoz |
+| text-embedding-3-large | Keresés, RAG | 30-120 TPM | Erős alapválasztás szemantikus kereséshez és visszakereséshez |
+| Whisper | Beszéd-szöveg konverzió | 10-50 TPM | Hangfeldolgozási munkaterhelésekhez |
 
-## AZD Konfiguráció AI Modellekhez
+## AZD konfiguráció AI modellekhez
 
-### Bicep Sablon Konfiguráció
+### Bicep sablon konfiguráció
 
-Hozzon létre modell telepítéseket Bicep sablonokon keresztül:
+Modellek telepítésének létrehozása Bicep sablonok segítségével:
 
 ```bicep
 // infra/main.bicep
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -122,7 +124,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
-### Környezeti Változók
+### Környezeti változók
 
 Állítsa be az alkalmazás környezetét:
 
@@ -131,12 +133,12 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Telepítési Minták
+## Telepítési minták
 
-### Minta 1: Egyrégiós Telepítés
+### Minta 1: Egy régiós telepítés
 
 ```yaml
 # azure.yaml - Single region
@@ -149,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Legjobb:
-- Fejlesztés és tesztelés
-- Egypiaci alkalmazások
-- Költségoptimalizálás
+Legalkalmasabb:
+- Fejlesztéshez és teszteléshez
+- Egypiacos alkalmazásokhoz
+- Költség optimalizáláshoz
 
-### Minta 2: Többrégiós Telepítés
+### Minta 2: Több régiós telepítés
 
 ```bicep
 // Multi-region deployment
@@ -167,12 +169,12 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Legjobb:
-- Globális alkalmazások
-- Magas rendelkezésre állás igénye
-- Terheléselosztás
+Legalkalmasabb:
+- Globális alkalmazásokhoz
+- Magas rendelkezésre állási követelményekhez
+- Terheléselosztáshoz
 
-### Minta 3: Hibrid Telepítés
+### Minta 3: Hibrid telepítés
 
 Kombinálja a Microsoft Foundry Modelleket más AI szolgáltatásokkal:
 
@@ -203,11 +205,11 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Modell Menedzsment
+## Modell menedzsment
 
-### Verziókezelés
+### Verzió kezelés
 
-Kövesse a modellszámokat az AZD konfigurációban:
+Kövesse a modell verziókat az AZD konfigurációban:
 
 ```json
 {
@@ -215,19 +217,19 @@ Kövesse a modellszámokat az AZD konfigurációban:
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
 ```
 
-### Modell Frissítések
+### Modell frissítések
 
-Használja az AZD hook-okat a modell frissítésekhez:
+Használja az AZD hookokat a modell frissítésekhez:
 
 ```bash
 #!/bin/bash
@@ -238,11 +240,14 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# Ha a telepítés tovább tart az alapértelmezett időkorlátnál
+azd deploy --timeout 1800
 ```
 
-### A/B Tesztelés
+### A/B tesztelés
 
-Telepítsen több modell verziót:
+Több modell verzió telepítése:
 
 ```bicep
 param enableABTesting bool = false
@@ -264,11 +269,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Gyártási Szempontok
+## Gyártási megfontolások
 
-### Kapacitás Tervezés
+### Kapacitás tervezés
 
-Számolja ki a szükséges kapacitást a használati minták alapján:
+Számítsa ki a szükséges kapacitást a használati minták alapján:
 
 ```python
 # Kapacitás számítási példa
@@ -283,7 +288,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Példa használatára
+# Használati példa
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -293,9 +298,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Auto-scaling Konfiguráció
+### Auto-scaling konfiguráció
 
-Állítsa be az automatikus skálázást a Container Apps szolgáltatáshoz:
+Állítsa be az automatikus méretezést a Container Apps számára:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -363,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Figyelés és Megfigyelhetőség
+## Megfigyelés és megfigyelhetőség
 
-### Application Insights Integráció
+### Application Insights integráció
 
-Állítsa be a monitorozást az AI munkaterhelésekhez:
+Állítsa be a megfigyelést AI munkaterhelésekhez:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -403,9 +408,9 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Egyedi Mutatók
+### Egyedi metrikák
 
-Kövesse az AI-specifikus mutatókat:
+Kövesse az AI-specifikus metrikákat:
 
 ```python
 # Egyedi telemetria MI modellekhez
@@ -440,9 +445,9 @@ class AITelemetry:
         )
 ```
 
-### Állapot Ellenőrzések
+### Egészségügyi ellenőrzések
 
-Valósítson meg AI szolgáltatás egészség-ellenőrzést:
+Valósítson meg AI szolgáltatás egészségügyi megfigyelést:
 
 ```python
 # Egészségügyi ellenőrző végpontok
@@ -471,25 +476,25 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## Következő Lépések
+## Következő lépések
 
-1. **Tekintse át a [Microsoft Foundry Integrációs Útmutatót](microsoft-foundry-integration.md)** a szolgáltatás integrációs mintákért
-2. **Teljesítse a [AI Műhely Laboratóriumot](ai-workshop-lab.md)** gyakorlati tapasztalathoz
-3. **Valósítsa meg a [Gyártási AI Gyakorlatokat](production-ai-practices.md)** vállalati telepítésekhez
-4. **Fedezze fel a [AI Hibakeresési Útmutatót](../chapter-07-troubleshooting/ai-troubleshooting.md)** a gyakori problémákhoz
+1. **Nézze át a [Microsoft Foundry Integrációs Útmutatót](microsoft-foundry-integration.md)** a szolgáltatás integrációs mintákért
+2. **Teljesítse az [AI Műhely Labort](ai-workshop-lab.md)** a gyakorlati tapasztalatért
+3. **Valósítsa meg a [Gyártási AI gyakorlatokat](production-ai-practices.md)** vállalati telepítésekhez
+4. **Ismerje meg az [AI Hibakeresési Útmutatót](../chapter-07-troubleshooting/ai-troubleshooting.md)** a gyakori problémákhoz
 
 ## Források
 
 - [Microsoft Foundry Modellek elérhetősége](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI Dokumentáció](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps skálázása](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [AI Modell Költségoptimalizálás](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Azure Developer CLI dokumentáció](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Container Apps méretezés](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [AI Modell költségoptimalizálás](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Fejezet Navigáció:**
-- **📚 Kurzus Főoldal**: [AZD Kezdőknek](../../README.md)
-- **📖 Aktuális fejezet**: 2. fejezet - AI-Először Fejlesztés
+**Fejezet navigáció:**
+- **📚 Kurzus főoldal**: [AZD Kezdőknek](../../README.md)
+- **📖 Jelenlegi fejezet**: 2. fejezet - AI-első fejlesztés
 - **⬅️ Előző**: [Microsoft Foundry Integráció](microsoft-foundry-integration.md)
 - **➡️ Következő**: [AI Műhely Labor](ai-workshop-lab.md)
 - **🚀 Következő fejezet**: [3. fejezet: Konfiguráció](../chapter-03-configuration/configuration.md)
@@ -497,6 +502,6 @@ async def check_ai_models():
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Kizáró nyilatkozat**:  
-Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatizált fordítások tartalmazhatnak hibákat vagy pontatlanságokat. Az eredeti dokumentum anyanyelvű változatát kell tekinteni a hiteles forrásnak. Kritikus információk esetén szakmai, emberi fordítást javaslunk. Nem vállalunk felelősséget az ebből a fordításból eredő félreértésekért vagy helytelen értelmezésekért.
+**Nyilatkozat**:
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum anyanyelvén tekintendő a hiteles forrásnak. Kritikus információk esetén professzionális emberi fordítás ajánlott. Nem vállalunk felelősséget az ebből eredő félreértésekért vagy félreértelmezésekért.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

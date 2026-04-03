@@ -1,20 +1,22 @@
-# Fejezet 3: Konfiguráció és hitelesítés
+# 3. fejezet: Konfiguráció és hitelesítés
 
-**📚 Tanfolyam**: [AZD For Beginners](../../README.md) | **⏱️ Időtartam**: 45-60 perc | **⭐ Nehézségi szint**: Középhaladó
+**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 45-60 perc | **⭐ Nehézségi szint**: Középhaladó
 
 ---
 
 ## Áttekintés
 
-Ez a fejezet a környezet konfigurációját, hitelesítési mintákat és biztonsági bevált gyakorlatokat tárgyalja az Azure Developer CLI telepítésekhez.
+Ez a fejezet a környezet konfigurációját, hitelesítési mintákat és biztonsági legjobb gyakorlatokat tárgyalja az Azure Developer CLI telepítésekhez.
+
+> Érvényesítve az `azd 1.23.12` verzióval, 2026 márciusában.
 
 ## Tanulási célok
 
-A fejezet elvégzése után képes leszel:
-- Megismered az AZD konfigurációs hierarchiáját
-- Több környezet (dev, staging, prod) kezelése
-- Biztonságos hitelesítés megvalósítása kezelt identitásokkal
-- Környezetspecifikus beállítások konfigurálása
+A fejezet elvégzésével Ön:
+- Elsajátítja az AZD konfigurációs hierarchiáját
+- Kezeli a több környezetet (fejlesztés, tesztelés, éles)
+- Megvalósít biztonságos hitelesítést kezelt identitásokkal
+- Konfigurálja a környezet-specifikus beállításokat
 
 ---
 
@@ -22,7 +24,7 @@ A fejezet elvégzése után képes leszel:
 
 | # | Lecke | Leírás | Idő |
 |---|--------|-------------|------|
-| 1 | [Konfigurációs útmutató](configuration.md) | Környezet beállítása és kezelése | 30 perc |
+| 1 | [Konfiguráció útmutató](configuration.md) | Környezet beállítása és kezelése | 30 perc |
 | 2 | [Hitelesítés és biztonság](authsecurity.md) | Kezelt identitás és RBAC minták | 30 perc |
 
 ---
@@ -52,25 +54,29 @@ azd env get-values
 
 AZD a beállításokat ebben a sorrendben alkalmazza (a későbbi felülírja a korábbit):
 
-1. **Alapértelmezett értékek** (a sablonokba beépítve)
+1. **Alapértelmezett értékek** (a sablonokban beépítve)
 2. **azure.yaml** (projekt konfiguráció)
 3. **Környezeti változók** (`azd env set`)
 4. **Parancssori kapcsolók** (`--location eastus`)
 
 ---
 
-## 🔐 Biztonsági bevált gyakorlatok
+## 🔐 Biztonsági legjobb gyakorlatok
 
 ```bash
-# Használjon kezelt identitást (ajánlott)
+# Használjon felügyelt identitást (ajánlott)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Ellenőrizze a hitelesítési állapotot
-azd auth whoami
+# Ellenőrizze az AZD hitelesítési állapotát
+azd auth status
+
+# Opcionális: ellenőrizze az Azure CLI környezetét, ha az az parancsokat kíván futtatni
 az account show
 
-# Szükség esetén újra hitelesítse magát
+# Ha szükséges, jelentkezzen be újra
 azd auth login
+
+# Opcionális: frissítse az Azure CLI hitelesítést az az parancsokhoz
 az login
 ```
 
@@ -85,7 +91,7 @@ az login
 
 ---
 
-## 📖 Kapcsolódó források
+## 📖 Kapcsolódó anyagok
 
 - [Telepítés előtti ellenőrzések](../chapter-06-pre-deployment/README.md)
 - [Hibaelhárítás](../chapter-07-troubleshooting/common-issues.md)
@@ -93,6 +99,6 @@ az login
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Felelősségkizárás:
-Ez a dokumentum az AI fordítószolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár igyekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti, eredeti nyelvű dokumentum tekintendő a hiteles forrásnak. Kritikus jelentőségű információk esetén ajánlott professzionális, emberi fordítást igénybe venni. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+**Felelősség kizárása**:  
+Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások tartalmazhatnak hibákat vagy pontatlanságokat. Az eredeti dokumentum az anyanyelvén tekintendő hivatalos forrásnak. Kritikus információk esetén szakmai, emberi fordítást javaslunk. Nem vállalunk felelősséget az ebből a fordításból eredő félreértésekért vagy félreértelmezésekért.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

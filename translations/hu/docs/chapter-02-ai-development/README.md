@@ -1,20 +1,22 @@
-# 2. fejezet: AI-központú fejlesztés
+# 2. fejezet: AI-első fejlesztés
 
-**📚 Tanfolyam**: [AZD For Beginners](../../README.md) | **⏱️ Időtartam**: 1-2 óra | **⭐ Bonyolultság**: Közepes
+**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 1-2 óra | **⭐ Bonyolultság**: Középhaladó
 
 ---
 
 ## Áttekintés
 
-Ez a fejezet az Azure Developer CLI és a Microsoft Foundry szolgáltatások használatával történő MI-vezérelt alkalmazások telepítésére összpontosít. Az egyszerű MI-csevegőalkalmazásoktól az eszközökkel rendelkező intelligens ügynökökig.
+Ez a fejezet az Azure Developer CLI és a Microsoft Foundry szolgáltatások használatával AI-alapú alkalmazások telepítésére fókuszál. Egyszerű AI chat alkalmazásoktól az eszközökkel rendelkező intelligens ügynökökig.
+
+> **Érvényesítési megjegyzés (2026-03-25):** A parancsfutás és bővítmény útmutatás ezen fejezetben az `azd` `1.23.12` verziója, valamint a jelenlegi előzetes AI ügynök bővítménykiadás `azure.ai.agents` `0.1.18-preview` alapján lett ellenőrizve. Ha régebbi AZD verziót használ, frissítsen először, majd folytassa a gyakorlatokat.
 
 ## Tanulási célok
 
-A fejezet elvégzése után képes leszel:
-- AI-alkalmazások telepítése előre elkészített AZD-sablonokkal
-- A Microsoft Foundry és az AZD integrációjának megértése
-- Az AI-ügynökök eszközeinek konfigurálása és testreszabása
-- RAG (Retrieval-Augmented Generation) alkalmazások telepítése
+A fejezet befejezésével Ön:
+- AI alkalmazásokat telepít előre elkészített AZD sablonokkal
+- Megérti a Microsoft Foundry integrációját az AZD-vel
+- Konfigurálja és testreszabja az AI ügynököket eszközökkel
+- Telepít Retrieval-Augmented Generation (RAG) alkalmazásokat
 
 ---
 
@@ -22,50 +24,50 @@ A fejezet elvégzése után képes leszel:
 
 | # | Lecke | Leírás | Idő |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Csatlakoztasd az AZD-t a Foundry szolgáltatásokkal | 30 perc |
-| 2 | [AI Agents Guide](agents.md) | Telepíts intelligens ügynököket eszközökkel | 45 perc |
-| 3 | [AI Model Deployment](ai-model-deployment.md) | AI modellek telepítése és konfigurálása | 30 perc |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Gyakorlati: Tedd AZD-kompatibilissé az MI-megoldásodat | 60 perc |
+| 1 | [Microsoft Foundry integráció](microsoft-foundry-integration.md) | AZD összekapcsolása a Foundry szolgáltatásokkal | 30 perc |
+| 2 | [AI ügynökök útmutató](agents.md) | Intelligens ügynökök telepítése eszközökkel | 45 perc |
+| 3 | [AI modell telepítés](ai-model-deployment.md) | AI modellek telepítése és konfigurálása | 30 perc |
+| 4 | [AI műhely labor](ai-workshop-lab.md) | Gyakorlati: Készítse elő AI megoldását AZD-re | 60 perc |
 
 ---
 
 ## 🚀 Gyors kezdés
 
 ```bash
-# Opció 1: RAG csevegőalkalmazás
+# 1. lehetőség: RAG Chat alkalmazás
 azd init --template azure-search-openai-demo
 azd up
 
-# Opció 2: MI-ügynökök
+# 2. lehetőség: Mesterséges intelligencia ügynökök
 azd init --template get-started-with-ai-agents
 azd up
 
-# Opció 3: Gyors csevegőalkalmazás
+# 3. lehetőség: Gyors chat alkalmazás
 azd init --template openai-chat-app-quickstart
 azd up
 ```
 
 ---
 
-## 🤖 Kiemelt MI-sablonok
+## 🤖 Kiemelt AI sablonok
 
 | Sablon | Leírás | Szolgáltatások |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG csevegés hivatkozásokkal | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Eszközökkel rendelkező AI-ügynök | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Alapvető AI csevegés | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | RAG chat idézetekkel | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Eszközökkel rendelkező AI ügynök | AI Agent Service |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Alap AI chat | OpenAI + Container Apps |
 
 ---
 
 ## 💰 Költségtudatosság
 
-| Környezet | Becsült havi költség |
+| Környezet | Várható havi költség |
 |-------------|----------------------|
-| Fejlesztés | $80-150 |
-| Tesztelés | $150-300 |
-| Éles | $300-3,500+ |
+| Fejlesztés | 80-150 USD |
+| Tesztelés | 150-300 USD |
+| Éles | 300-3500+ USD |
 
-**Tipp:** Futtasd az `azd down` parancsot a tesztelés után, hogy elkerüld a költségeket.
+**Tipp:** Tesztelés után futtassa az `azd down` parancsot, hogy elkerülje a költségeket.
 
 ---
 
@@ -75,19 +77,19 @@ azd up
 |-----------|---------|
 | **Előző** | [1. fejezet: Alapok](../chapter-01-foundation/README.md) |
 | **Következő** | [3. fejezet: Konfiguráció](../chapter-03-configuration/README.md) |
-| **Ugrás ide** | [8. fejezet: Éles minták](../chapter-08-production/README.md) |
+| **Ugorjon ide** | [8. fejezet: Éles üzem minták](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Kapcsolódó források
 
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
-- [Application Insights](../chapter-06-pre-deployment/application-insights.md)
+- [AI hibakeresés](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Éles AI gyakorlatok](../chapter-08-production/production-ai-practices.md)
+- [Alkalmazásfigyelés](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Felelősségkizárás:
-Ezt a dokumentumot az AI fordítószolgáltatás, a Co-op Translator (https://github.com/Azure/co-op-translator) segítségével fordítottuk. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatizált fordítások hibákat vagy pontatlanságokat tartalmazhatnak. A dokumentum eredeti, anyanyelvi változatát tekintse a hiteles forrásnak. Fontos információk esetén professzionális, emberi fordítást javaslunk. Nem vállalunk felelősséget az ezen fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+**Nyilatkozat**:  
+Ezt a dokumentumot az AI fordító szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) használatával fordítottuk le. Bár a pontosságra törekszünk, kérjük vegye figyelembe, hogy az automatikus fordítások tartalmazhatnak hibákat vagy pontatlanságokat. Az eredeti dokumentum az anyanyelvén tekintendő hivatalos forrásnak. Fontos információk esetén javasolt szakmai emberi fordítás igénybevétele. Semmilyen felelősséget nem vállalunk a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

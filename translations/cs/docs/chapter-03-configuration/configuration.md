@@ -1,66 +1,66 @@
 # Příručka konfigurace
 
-**Navigace kapitolou:**
-- **📚 Course Home**: [AZD pro začátečníky](../../README.md)
-- **📖 Current Chapter**: Kapitola 3 - Konfigurace & Autentizace
-- **⬅️ Previous**: [Váš první projekt](first-project.md)
-- **➡️ Next**: [Průvodce nasazením](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 Next Chapter**: [Kapitola 4: Infrastruktura jako kód](../chapter-04-infrastructure/deployment-guide.md)
+**Navigace kapitolami:**
+- **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 3 - Konfigurace a autentizace
+- **⬅️ Předchozí**: [Váš první projekt](first-project.md)
+- **➡️ Další**: [Příručka nasazení](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 Další kapitola**: [Kapitola 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Úvod
 
-Tato komplexní příručka pokrývá všechny aspekty konfigurace Azure Developer CLI pro optimální vývojové a nasazovací pracovní postupy. Naučíte se hierarchii konfigurace, správu prostředí, metody autentizace a pokročilé konfigurační vzory, které umožňují efektivní a bezpečná nasazení do Azure.
+Tato komplexní příručka pokrývá všechny aspekty konfigurace Azure Developer CLI pro optimální vývojové a nasazovací pracovní postupy. Naučíte se o hierarchii konfigurace, správě prostředí, metodách autentizace a pokročilých vzorech konfigurace, které umožňují efektivní a bezpečné nasazování Azure.
 
 ## Cíle učení
 
 Na konci této lekce budete:
-- Ovládat hierarchii konfigurace azd a rozumět tomu, jak jsou nastavení prioritizována
-- Efektivně konfigurovat globální a projektově-specifická nastavení
+- Mistrovsky ovládat hierarchii konfigurace azd a rozumět prioritizaci nastavení
+- Efektivně konfigurovat globální a projektová nastavení
 - Spravovat více prostředí s různými konfiguracemi
 - Implementovat bezpečné vzory autentizace a autorizace
-- Rozumět pokročilým konfiguračním vzorům pro složité scénáře
+- Porozumět pokročilým vzorům konfigurace pro komplexní scénáře
 
 ## Výsledky učení
 
 Po dokončení této lekce budete schopni:
-- Konfigurovat azd pro optimální vývojové toky
+- Konfigurovat azd pro optimální vývojové pracovní postupy
 - Nastavit a spravovat více nasazovacích prostředí
-- Implementovat bezpečné postupy správy konfigurace
+- Implementovat bezpečné praktiky správy konfigurace
 - Řešit problémy související s konfigurací
-- Přizpůsobit chování azd pro specifické požadavky organizace
+- Přizpůsobit chování azd podle specifických organizačních požadavků
 
 Tato komplexní příručka pokrývá všechny aspekty konfigurace Azure Developer CLI pro optimální vývojové a nasazovací pracovní postupy.
 
 ## Pochopení AI agentů v projektu azd
 
-Pokud jste v oblasti AI agentů noví, zde je jednoduchý způsob, jak o nich v rámci světa azd přemýšlet.
+Pokud jste noví v oblasti AI agentů, zde je jednoduchý způsob, jak o nich v rámci světa azd přemýšlet.
 
 ### Co je agent?
 
-Agent je kus softwaru, který může přijmout požadavek, prověřit ho a provést akce — často voláním AI modelu, vyhledáním dat nebo vyvoláním jiných služeb. V projektu azd je agent jen další **služba** vedle vašeho webového frontendu nebo API backendu.
+Agent je kus softwaru, který může přijmout požadavek, analyzovat ho a podniknout kroky — často voláním AI modelu, vyhledáváním dat nebo vyvoláním jiných služeb. V projektu azd je agent jen další **službou** vedle vašeho webového frontend nebo API backendu.
 
 ### Jak agenti zapadají do struktury projektu azd
 
-Projekt azd se skládá ze tří vrstev: **infrastruktura**, **kód** a **konfigurace**. Agent se zapojuje do těchto vrstev stejným způsobem jako jakákoli jiná služba:
+Projekt azd se skládá ze tří vrstev: **infrastruktura**, **kód** a **konfigurace**. Agenti se připojují do těchto vrstev stejným způsobem jako jakákoli jiná služba:
 
 | Vrstva | Co dělá pro tradiční aplikaci | Co dělá pro agenta |
-|-------|-------------------------------------|---------------------------|
-| **Infrastruktura** (`infra/`) | Zřizuje webovou aplikaci a databázi | Zřizuje koncový bod Microsoft Foundry Models, index pro vyhledávání nebo hostitele agenta |
-| **Kód** (`src/`) | Obsahuje zdrojový kód frontendu a API | Obsahuje logiku agenta a definice promptů |
-| **Konfigurace** (`azure.yaml`) | Uvádí vaše služby a jejich hostingové cíle | Uvede vašeho agenta jako službu, ukazující na jeho kód a hostitele |
+|--------|-------------------------------|--------------------|
+| **Infrastruktura** (`infra/`) | Zajišťuje webovou aplikaci a databázi | Zajišťuje koncový bod AI modelu, vyhledávací index nebo hostitele agenta |
+| **Kód** (`src/`) | Obsahuje zdrojový kód frontend a API | Obsahuje logiku agenta a definice promptů |
+| **Konfigurace** (`azure.yaml`) | Uvádí vaše služby a jejich cílové hostování | Uvádí vašeho agenta jako službu, která ukazuje na jeho kód a hostitele |
 
-### Role `azure.yaml`
+### Role souboru `azure.yaml`
 
-Nemusíte si teď hned pamatovat syntaxi. Konceptuálně je `azure.yaml` soubor, kde azd řeknete: „Tady jsou služby, které tvoří mou aplikaci, a tady najdete jejich kód.“
+Nemusíte si syntax nyní pamatovat. Koncepčně je `azure.yaml` soubor, kde říkáte azd: *„Tady jsou služby, které tvoří mou aplikaci, a tady jsou jejich kódy.“*
 
-Když váš projekt obsahuje AI agenta, `azure.yaml` jednoduše uvede tohoto agenta jako jednu ze služeb. azd pak ví, že má zřídit odpovídající infrastrukturu (např. Microsoft Foundry Models endpoint nebo Container App pro hostování agenta) a nasadit kód agenta — stejně jako by to udělal u webové aplikace nebo API.
+Když váš projekt obsahuje AI agenta, `azure.yaml` jednoduše uvádí tohoto agenta jako jednu ze služeb. azd pak ví, že musí připravit správnou infrastrukturu (například endpoint Microsoft Foundry Models nebo Container App k hostování agenta) a nasadit kód agenta — stejně jako u webové aplikace nebo API.
 
-To znamená, že není třeba se učit nic fundamentálně nového. Pokud rozumíte tomu, jak azd spravuje webovou službu, už rozumíte tomu, jak spravuje agenta.
+To znamená, že není nic zásadně nového k naučení. Pokud rozumíte, jak azd spravuje webovou službu, již rozumíte, jak spravuje agenta.
 
 ## Hierarchie konfigurace
 
 azd používá hierarchický konfigurační systém:
-1. **Přepínače příkazového řádku** (nejvyšší priorita)
+1. **Přepínače příkazové řádky** (nejvyšší priorita)
 2. **Proměnné prostředí**
 3. **Místní konfigurace projektu** (`.azd/config.json`)
 4. **Globální uživatelská konfigurace** (`~/.azd/config.json`)
@@ -73,32 +73,32 @@ azd používá hierarchický konfigurační systém:
 # Nastavit výchozí předplatné
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Nastavit výchozí umístění
+# Nastavit výchozí lokaci
 azd config set defaults.location "eastus2"
 
 # Nastavit výchozí konvenci pojmenování skupiny prostředků
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
 # Zobrazit veškerou globální konfiguraci
-azd config list
+azd config show
 
-# Odstranit konfiguraci
+# Odebrat konfiguraci
 azd config unset defaults.location
 ```
 
 ### Běžná globální nastavení
 ```bash
-# Předvolby vývoje
+# Vývojové preference
 azd config set alpha.enable true                    # Povolit alfa funkce
 azd config set telemetry.enabled false             # Zakázat telemetrii
-azd config set output.format json                  # Nastavit formát výstupu
+azd config set output.format json                  # Nastavit výstupní formát
 
-# Bezpečnostní nastavení
+# Nastavení zabezpečení
 azd config set auth.useAzureCliCredential true     # Použít Azure CLI pro autentizaci
 azd config set tls.insecure false                  # Vynutit ověření TLS
 
 # Ladění výkonu
-azd config set provision.parallelism 5             # Paralelní vytváření prostředků
+azd config set provision.parallelism 5             # Paralelní vytváření zdrojů
 azd config set deploy.timeout 30m                  # Časový limit nasazení
 ```
 
@@ -181,9 +181,9 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Možnosti konfigurace služby
+### Konfigurační možnosti služeb
 
-#### Typy hostitelů
+#### Typy hostování
 ```yaml
 services:
   web-static:
@@ -202,7 +202,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Nastavení specifická pro jazyk
+#### Jazykově specifická nastavení
 ```yaml
 services:
   node-app:
@@ -233,10 +233,10 @@ services:
 # Vytvořit nové prostředí
 azd env new development
 
-# Vytvořit s konkrétním umístěním
+# Vytvořit se specifickou lokací
 azd env new staging --location "westus2"
 
-# Vytvořit z šablony
+# Vytvořit ze šablony
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
@@ -283,7 +283,7 @@ azd env unset DEBUG
 
 # Ověřit odstranění
 azd env get-values | grep DEBUG
-# (nemělo nic vrátit)
+# (nemělo by nic vrátit)
 ```
 
 ### Šablony prostředí
@@ -298,7 +298,7 @@ DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Volitelná nastavení pro vývoj
+# Nepovinná vývojová nastavení
 DEBUG=false
 LOG_LEVEL=info
 ```
@@ -307,25 +307,25 @@ LOG_LEVEL=info
 
 ### Integrace Azure CLI
 ```bash
-# Použít přihlašovací údaje Azure CLI (výchozí)
+# Použijte přihlašovací údaje Azure CLI (výchozí)
 azd config set auth.useAzureCliCredential true
 
-# Přihlásit se s konkrétním tenantem
+# Přihlaste se s konkrétním tenentem
 az login --tenant <tenant-id>
 
-# Nastavit výchozí předplatné
+# Nastavte výchozí předplatné
 az account set --subscription <subscription-id>
 ```
 
-### Autentizace pomocí Service Principal
-Pro CI/CD pipeliney:
+### Autentizace pomocí služebního principálu
+Pro CI/CD pipeline:
 ```bash
-# Nastavte proměnné prostředí
+# Nastavit proměnné prostředí
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Nebo nakonfigurujte přímo
+# Nebo nakonfigurovat přímo
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
@@ -333,7 +333,7 @@ azd config set auth.tenantId "your-tenant-id"
 ### Spravovaná identita
 Pro prostředí hostovaná v Azure:
 ```bash
-# Povolit autentizaci pomocí spravované identity
+# Povolit ověřování spravované identity
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
@@ -341,7 +341,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ## 🏗️ Konfigurace infrastruktury
 
 ### Parametry Bicep
-Nakonfigurujte parametry infrastruktury v `infra/main.parameters.json`:
+Konfigurujte parametry infrastruktury v `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -363,8 +363,8 @@ Nakonfigurujte parametry infrastruktury v `infra/main.parameters.json`:
 }
 ```
 
-### Konfigurace Terraformu
-Pro projekty používající Terraform nakonfigurujte v `infra/terraform.tfvars`:
+### Konfigurace Terraform
+Pro projekty Terraform konfigurujte v `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -374,7 +374,7 @@ database_sku = "GP_Gen5_2"
 
 ## 🚀 Konfigurace nasazení
 
-### Konfigurace sestavení
+### Konfigurace buildů
 ```yaml
 # In azure.yaml
 services:
@@ -450,14 +450,14 @@ monitoring:
 
 ### Vývojové prostředí
 ```bash
-# .azure/development/.env
+# .azure/vývoj/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Prostředí staging
+### Testovací prostředí (Staging)
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -468,7 +468,7 @@ USE_PRODUCTION_APIS=true
 
 ### Produkční prostředí
 ```bash
-# .azure/produkční/.env
+# .azure/produkce/.env
 DEBUG=false
 LOG_LEVEL=error
 ENABLE_MONITORING=true
@@ -477,9 +477,9 @@ ENABLE_SECURITY_HEADERS=true
 
 ## 🔍 Validace konfigurace
 
-### Validovat konfiguraci
+### Ověření konfigurace
 ```bash
-# Zkontrolujte syntaxi konfigurace
+# Zkontrolujte syntax konfigurace
 azd config validate
 
 # Otestujte proměnné prostředí
@@ -489,8 +489,8 @@ azd env get-values
 azd provision --dry-run
 ```
 
-### Skripty pro konfiguraci
-Vytvořte validační skripty v `scripts/`:
+### Konfigurační skripty
+Vytvářejte validační skripty v `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -498,7 +498,7 @@ Vytvořte validační skripty v `scripts/`:
 
 echo "Validating configuration..."
 
-# Zkontrolujte požadované proměnné prostředí
+# Zkontrolujte povinné proměnné prostředí
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
@@ -542,7 +542,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Úvahy o verzování
+### 3. Zohlednění verzovacího systému
 ```bash
 # .gitignore
 .azure/*/config.json         # Konfigurace prostředí (obsahují ID zdrojů)
@@ -568,7 +568,7 @@ Zdokumentujte svou konfiguraci v `CONFIG.md`:
 
 ## 🎯 Praktické cvičení
 
-### Cvičení 1: Konfigurace více prostředí (15 minut)
+### Cvičení 1: Konfigurace pro více prostředí (15 minut)
 
 **Cíl**: Vytvořit a nakonfigurovat tři prostředí s různými nastaveními
 
@@ -579,7 +579,7 @@ azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# Vytvořit testovací (staging) prostředí
+# Vytvořit testovací prostředí
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
@@ -598,60 +598,60 @@ azd env select production && azd env get-values
 ```
 
 **Kritéria úspěchu:**
-- [ ] Tři prostředí byla úspěšně vytvořena
+- [ ] Tři prostředí úspěšně vytvořena
 - [ ] Každé prostředí má jedinečnou konfiguraci
-- [ ] Lze přepínat mezi prostředími bez chyb
+- [ ] Přepínání mezi prostředími bez chyb
 - [ ] `azd env list` zobrazuje všechna tři prostředí
 
 ### Cvičení 2: Správa tajemství (10 minut)
 
-**Cíl**: Procvičit bezpečné nastavení s citlivými údaji
+**Cíl**: Procvičit bezpečnou konfiguraci s citlivými daty
 
 ```bash
-# Nastavit tajné údaje (nebudou zobrazeny ve výstupu)
+# Nastavit tajemství (nebudou zobrazeny ve výstupu)
 azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 
-# Nastavit konfiguraci, která není tajná
+# Nastavit konfiguraci bez tajemství
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# Zobrazit prostředí (tajné údaje by měly být skryté)
+# Zobrazit prostředí (tajemství by měla být skrytá)
 azd env get-values
 
-# Ověřit, že jsou tajné údaje uloženy
-azd env get DB_PASSWORD  # Mělo by zobrazit skutečnou hodnotu
+# Ověřit, že jsou tajemství uložena
+azd env get DB_PASSWORD  # Mělo by ukázat skutečnou hodnotu
 ```
 
 **Kritéria úspěchu:**
-- [ ] Tajemství jsou uložena bez zobrazení v terminálu
-- [ ] `azd env get-values` zobrazuje cenzurovaná tajemství
-- [ ] Jednotlivý příkaz `azd env get <SECRET_NAME>` vrátí skutečnou hodnotu
+- [ ] Tajemství uložena bez zobrazování v terminálu
+- [ ] `azd env get-values` zobrazuje skrytá tajemství
+- [ ] Jednotlivé `azd env get <SECRET_NAME>` načte skutečnou hodnotu
 
 ## Další kroky
 
-- [Váš první projekt](first-project.md) - Aplikujte konfiguraci v praxi
-- [Průvodce nasazením](../chapter-04-infrastructure/deployment-guide.md) - Použijte konfiguraci pro nasazení
-- [Zajištění zdrojů](../chapter-04-infrastructure/provisioning.md) - Konfigurace připravené pro produkci
+- [Váš první projekt](first-project.md) - Aplikace konfigurace v praxi
+- [Příručka nasazení](../chapter-04-infrastructure/deployment-guide.md) - Použití konfigurace pro nasazení
+- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Produkčně připravené konfigurace
 
 ## Reference
 
-- [Reference konfigurace azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azd Konfigurační reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Schéma azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [Proměnné prostředí](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Navigace kapitolou:**
-- **📚 Course Home**: [AZD pro začátečníky](../../README.md)
-- **📖 Current Chapter**: Kapitola 3 - Konfigurace & Autentizace
-- **⬅️ Previous**: [Váš první projekt](first-project.md)
-- **➡️ Next Chapter**: [Kapitola 4: Infrastruktura jako kód](../chapter-04-infrastructure/deployment-guide.md)
-- **Next Lesson**: [Váš první projekt](first-project.md)
+**Navigace kapitolami:**
+- **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 3 - Konfigurace a autentizace
+- **⬅️ Předchozí**: [Váš první projekt](first-project.md)
+- **➡️ Další kapitola**: [Kapitola 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
+- **Další lekce**: [Váš první projekt](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za žádná nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
+**Prohlášení o vyloučení odpovědnosti**:
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Neodpovídáme za jakékoliv nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

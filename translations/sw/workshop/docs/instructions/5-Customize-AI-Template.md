@@ -1,30 +1,30 @@
-# 5. Binafsisha Kiolezo
+# 5. Customize a Template
 
 !!! tip "MWISHO WA MODULI HII UTAWEZA"
 
-    - [ ] Umechunguza uwezo wa agenii wa AI wa chaguo-msingi
-    - [ ] Umeongeza AI Search kwa faharisi yako mwenyewe
-    - [ ] Umewezeshwa na kuchambua vipimo vya ufuatiliaji
-    - [ ] Umeendesha mzunguko wa tathmini
+    - [ ] Umechunguza Uwezo wa Wakala wa AI uliowekwa kwa chaguo-msingi
+    - [ ] Umeongeza Utafutaji wa AI kwa index yako mwenyewe
+    - [ ] Umewezeshwa na kuchambua vipimo vya Ufuatiliaji
+    - [ ] Umeendesha mtihani wa tathmini
     - [ ] Umeendesha skani ya red-teaming
-    - [ ] **Lab 5: Imejenga Mpango wa Binafsisho** 
+    - [ ] **Lab 5: Umejenga Mpango wa Ubinafsishaji** 
 
 ---
 
-## 5.1 Uwezo wa Ageni wa AI
+## 5.1 AI Agent Capabilities
 
-!!! success "Tulimaliza hili katika Lab 01"
+!!! success "Tumeikamilisha hii katika Lab 01"
 
-- **Utafutaji wa Faili**: Utafutaji wa faili uliopo ndani ya OpenAI kwa kupata maarifa
-- **Urejeleo wa vyanzo**: Urejeleo wa vyanzo kwa majibu kiotomatiki
-- **Maelekezo Yanayoweza Kubadilishwa**: Badilisha tabia na utu wa ageni
-- **Kuunganishwa kwa Zana**: Mfumo unaoweza kupanuliwa kwa zana maalum
+- **File Search**: Utafutaji wa faili uliowekwa wa OpenAI kwa urejesho wa maarifa
+- **Citations**: Utoaji wa vyanzo kwa majibu moja kwa moja
+- **Customizable Instructions**: Badilisha tabia na utu wa wakala
+- **Tool Integration**: Mfumo unaoweza kupanuliwa wa zana kwa uwezo maalum
 
 ---
 
-## 5.2 Chaguzi za Kupata Maarifa
+## 5.2 Knowledge Retrieval Options
 
-!!! task "Ili kukamilisha hili tunahitaji kufanya mabadiliko na kuitekeleza tena"    
+!!! task "Ili kumaliza hii tunahitaji kufanya mabadiliko na kupeleka tena"    
     
     ```bash title=""
     # Set environment variables
@@ -40,126 +40,126 @@
 
 ---
 
-**OpenAI File Search (Chaguo-msingi):**
+**OpenAI File Search (Default):**
 
-- Imejengwa ndani ya Foundry Agents
-- Usindikaji wa nyaraka na uorodheshaji wa kiotomatiki
+- Imejumuishwa ndani ya Foundry Agents
+- Usindikaji wa nyaraka na uorodheshaji moja kwa moja
 - Hakuna usanidi wa ziada unaohitajika
 
-**Azure AI Search (Hiari):**
+**Azure AI Search (Optional):**
 
-- Utafutaji mchanganyiko wa semantiki na vekta
-- Usimamizi wa faharisi maalum
+- Utafutaji mseto wa kitaalamu na vector
+- Usimamizi wa index iliyobinafsishwa
 - Uwezo wa utafutaji wa hali ya juu
 - Inahitaji `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
-## 5.3 [Ufuatiliaji na Uangalizi](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [Tracing & Monitoring](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "Ili kukamilisha hili tunahitaji kufanya mabadiliko na kuitekeleza tena"    
+!!! task "Ili kumaliza hii tunahitaji kufanya mabadiliko na kupeleka tena"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
     azd deploy
     ```
 
-**Ufuatiliaji:**
+**Tracing:**
 
 - Uunganisho wa OpenTelemetry
-- Ufuatiliaji wa maombi/majibu
+- Ufuatiliaji wa maombi/jawabu
 - Vipimo vya utendaji
-- Inapatikana katika portal ya Microsoft Foundry
+- Inapatikana kwenye portal ya Microsoft Foundry
 
-**Kuhifadhi kumbukumbu (Logging):**
+**Logging:**
 
-- Kumbukumbu za programu katika Container Apps
-- Uandishi wa kumbukumbu uliopangwa wenye vitambulisho vya uhusiano
-- Kuangalia kumbukumbu kwa wakati halisi na za kihistoria
+- Rejista za programu katika Container Apps
+- Uandishi wa kumbukumbu uliopangwa na vitambulisho vya uhusiano
+- Kuangalia rejista kwa wakati halisi na za kihistoria
 
 ---
 
-## 5.4 [Tathmini ya Ageni](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
+## 5.4 [Agent Evaluation](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
-**Tathmini ya Ndani:**
+**Local Evaluation:**
 
-- Watafiti waliyojengwa kwa ajili ya tathmini ya ubora
-- Skiripti za tathmini zilizobinafsishwa
-- Kupima utendaji
+- Watafiti waliyojengwa kwa tathmini ya ubora
+- Skripti za tathmini zilizobinafsishwa
+- Kulinganisha utendaji
 
-**Ufuatiliaji Endelevu:**
+**Continuous Monitoring:**
 
 - Tathmini ya moja kwa moja ya mwingiliano hai
 - Ufuatiliaji wa vipimo vya ubora
-- Ugundaji wa kuporomoka kwa utendaji
+- Ugundaji wa regression ya utendaji
 
-**Uunganisho wa CI/CD:**
+**CI/CD Integration:**
 
-- Mwendo kazi wa GitHub Actions
-- Upimaji na tathmini ya kiotomatiki
-- Upimaji wa kulinganisha kwa takwimu
+- Mtiririko wa kazi wa GitHub Actions
+- Upimaji na tathmini otomatiki
+- Mtihani wa kulinganisha takwimu
 
 ---
 
-## 5.5 [Ageni wa Red Teaming ya AI](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [AI Red Teaming Agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**Red Teaming ya AI:**
+**AI Red Teaming:**
 
-- Uchunguzi wa usalama wa kiotomatiki
+- Skanning ya usalama otomatiki
 - Tathmini ya hatari kwa mifumo ya AI
 - Tathmini ya usalama katika makundi mbalimbali
 
-**Uthibitishaji:**
+**Authentication:**
 
-- Utambulisho uliodhibitiwa kwa huduma za Azure
-- Uthibitishaji wa Azure App Service hiari
-- Uthibitishaji wa msingi kama mbadala kwa maendeleo
+- Managed Identity kwa huduma za Azure
+- Uthibitishaji wa hiari wa Azure App Service
+- Kushuka kwa uthibitishaji wa msingi kwa maendeleo
 
 
 
-!!! quote "MWISHO WA LAB HII UNATAKIWA KUWA NA"
-    - [ ] Tambua mahitaji ya senario yako
+!!! quote "MWISHO WA MAABIRI HII UNGEWAWEZEKANA KUWA NA"
+    - [ ] Fafanua mahitaji ya senario yako
     - [ ] Vigezo vya mazingira vilivyobinafsishwa (config)
-    - [ ] Maelekezo ya ageni yaliyobinafsishwa (task)
-    - [ ] Umeweka kiolezo kilichobinafsishwa (app)
-    - [ ] Umekamilisha kazi za baada ya uanzishaji (manual)
-    - [ ] Endesha tathmini ya mtihani
+    - [ ] Maelekezo ya wakala yaliyobinafsishwa (task)
+    - [ ] Umepeleka kiolezo kilichobinafsishwa (app)
+    - [ ] Umekamilisha kazi baada ya uanzishaji (manual)
+    - [ ] Endesha tathmini ya jaribio
 
 This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
 
 ---
 
-## 5.6 Binafsisha Kwa Ajili Yako!
+## 5.6 Customize It For You!
 
-### 5.6.1. Mahitaji ya Senario
+### 5.6.1. Scenario Requirements
 
-#### **Utekelezaji wa Ageni:** 
+#### **Agent Deployments:** 
 
-   - Ageni wa Mnunuzi: Husaidia wateja kutafuta na kulinganisha bidhaa
-   - Ageni wa Uaminifu: Husimamia tuzo za wateja na matangazo
+   - Shopper Agent: Husaidia wateja kupata na kulinganisha bidhaa
+   - Loyalty Agent: Inasimamia zawadi na matangazo ya wateja
 
-#### **Utekelezaji wa Mifano:**
+#### **Model Deployments:**
 
-   - `gpt-4.1`: Mfano kuu wa mazungumzo
-   - `o3`: Mfano wa kujadiliana kwa maswali magumu
-   - `gpt-4.1-nano`: Mfano mwepesi kwa mwingiliano rahisi
-   - `text-embedding-3-large`: Embedding za ubora wa juu kwa utafutaji
+   - `gpt-4.1`: Modeli ya gumzo ya msingi
+   - `o3`: Modeli ya mantiki kwa maswali magumu
+   - `gpt-4.1-nano`: Modeli nyepesi kwa mwingiliano rahisi
+   - `text-embedding-3-large`: Embeddings za ubora wa juu kwa utafutaji
 
-#### **Sifa:**
+#### **Features:**
 
    - Ufuatiliaji na uangalizi vimewezeshwa
-   - AI Search kwa katalogi ya bidhaa
+   - Utafutaji wa AI kwa katalogi ya bidhaa
    - Mfumo wa tathmini kwa uhakikisho wa ubora
-   - Red teaming kwa uhakiki wa usalama
+   - Red teaming kwa uthibitishaji wa usalama
 
 ---
 
-### 5.6.2 Utekelezaji wa Senario
+### 5.6.2 Scenario Implementation
 
 
-#### 5.6.2.1. Usanidi Kabla ya Utekelezaji
+#### 5.6.2.1. Pre-Deployment Config
 
-Tengeneza skiripti ya usanidi (`setup-retail.sh`)
+Create a setup script (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -167,7 +167,7 @@ Tengeneza skiripti ya usanidi (`setup-retail.sh`)
 # Weka jina la mazingira
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Sanidi eneo (chagua kulingana na upatikanaji wa modeli)
+# Sanidi eneo (chagua kulingana na upatikana wa modeli)
 azd env set AZURE_LOCATION "eastus2"
 
 # Washa huduma zote za hiari
@@ -175,21 +175,21 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Sanidi modeli kuu ya mazungumzo (gpt-4.1 kama inayokaribia zaidi inayopatikana kwa gpt-4.1)
+# Sanidi modeli kuu ya mazungumzo (gpt-4.1 kama iliyo karibu zaidi inayopatikana kwa gpt-4.1)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Sanidi modeli ya embedding kwa utafutaji ulioboreshwa
+# Sanidi modeli ya embedding kwa ajili ya utafutaji ulioboreshwa
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Weka jina la wakala (itatengeneza wakala wa kwanza)
+# Weka jina la wakala (itaunda wakala wa kwanza)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# Sanidi fahirisi ya utaftaji
+# Sanidi faharasa ya utafutaji
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -198,9 +198,9 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2: Maelekezo ya Ageni
+#### 5.6.2.2: Agent Instructions
 
-Tengeneza `custom-agents/shopper-agent-instructions.md`:
+Create `custom-agents/shopper-agent-instructions.md`:
 
 ```markdown
 # Shopper Agent Instructions
@@ -223,7 +223,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-Tengeneza `custom-agents/loyalty-agent-instructions.md`:
+Create `custom-agents/loyalty-agent-instructions.md`:
 
 ```markdown
 # Loyalty Agent Instructions
@@ -248,9 +248,9 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: Skiripti ya Utekelezaji
+#### 5.6.2.3: Deployment Script
 
-Tengeneza `deploy-retail.sh`:
+Create `deploy-retail.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -275,7 +275,7 @@ echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Angalia ukomo katika eneo lililochaguliwa
+# Kagua kvota katika eneo lililochaguliwa
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -295,12 +295,12 @@ fi
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Chukua matokeo ya uenezaji
+# Kusanya matokeo ya uwekaji
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
 # Pata URL ya programu ya wavuti
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -321,16 +321,16 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Usanidi Baada ya Utekelezaji
+#### 5.6.2.4: Post-Deployment Config
 
-Tengeneza `configure-retail-agents.sh`:
+Create `configure-retail-agents.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🔧 Configuring retail agents..."
 
-# Pata taarifa za uwekaji
+# Pata taarifa za utekelezaji
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
@@ -378,21 +378,21 @@ echo "
 "
 ```
 
-### 5.6.3: Upimaji na Uthibitishaji
+### 5.6.3: Testing and Validation
 
-Tengeneza `test-retail-deployment.sh`:
+Create `test-retail-deployment.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🧪 Testing retail deployment..."
 
-# Thibitisha kuwa vigezo vya mazingira vimewekwa
+# Hakikisha vigezo vya mazingira vimewekwa
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Pima upatikanaji wa programu ya wavuti
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# Jaribu upatikanaji wa programu ya wavuti
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -429,42 +429,42 @@ Next steps:
 
 ---
 
-### 5.6.4 Matokeo Yanayotarajiwa
+### 5.6.4 Expected Outcomes
 
-Baada ya kufuata mwongozo huu wa utekelezaji, utakuwa na:
+After following this implementation guide, you will have:
 
-1. **Miundombinu Iliyowekwa:**
+1. **Deployed Infrastructure:**
 
-      - Mradi wa Microsoft Foundry wenye utekelezaji wa mifano
-      - Container Apps zinazohifadhi programu ya wavuti
+      - Mradi wa Microsoft Foundry unaowuka na utekelezaji wa modeli
+      - Container Apps zinazoendesha programu ya wavuti
       - Huduma ya AI Search kwa katalogi ya bidhaa
       - Application Insights kwa ufuatiliaji
 
-2. **Ageni wa Msingi:**
+2. **Initial Agent:**
 
-      - Ageni wa Mnunuzi aliyekonfiguliwa na maelekezo ya msingi
+      - Shopper Agent imewekwa na maelekezo ya msingi
       - Uwezo wa utafutaji wa faili umewezeshwa
       - Ufuatiliaji na uangalizi vimewekwa
 
-3. **Tayari kwa Binafsisho:**
+3. **Ready for Customization:**
 
-      - Mfumo wa kuongeza Ageni wa Uaminifu
+      - Mfumo wa kuongeza Loyalty Agent
       - Violezo vya maelekezo vilivyobinafsishwa
-      - Skiripti za upimaji na uthibitishaji
-      - Usanidi wa ufuatiliaji na tathmini
+      - Skripti za upimaji na uthibitisho
+      - Uanzishaji wa ufuatiliaji na tathmini
 
-4. **Tayari kwa Uzalishaji:**
+4. **Production Readiness:**
 
-      - Uchunguzi wa usalama kwa red teaming
+      - Skanning ya usalama na red teaming
       - Ufuatiliaji wa utendaji
       - Mfumo wa tathmini ya ubora
-      - Miundo inayoweza kupanuka
+      - Miundombinu inayoweza kupanuka
 
 This example demonstrates how the AZD template can be extended and customized for specific enterprise scenarios while maintaining best practices for security, monitoring, and scalability.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Tamko la kutopewa dhamana**:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Nyaraka asilia katika lugha yake ya asili inapaswa kuchukuliwa kuwa chanzo cha kuaminika. Kwa habari muhimu, inashauriwa kutumia huduma za tafsiri ya kitaalamu zinazofanywa na wanadamu. Hatuwajibiki kwa kutoelewana au tafsiri potofu zitokanazo na matumizi ya tafsiri hii.
+**Angalizo**:
+Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuwa sahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au zisizokuwa sahihi. Nyaraka ya asili katika lugha yake ya mama inapaswa kuzingatiwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatuwajibiki kwa kutoelewana au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

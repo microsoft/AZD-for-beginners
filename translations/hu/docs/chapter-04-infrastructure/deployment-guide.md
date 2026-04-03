@@ -1,37 +1,37 @@
-# Telepítési útmutató - AZD telepítések mesterfokon
+# Telepítési Útmutató - AZD Telepítések Mesterfokon
 
-**Fejezet navigáció:**
-- **📚 Tanfolyam kezdőlap**: [AZD kezdőknek](../../README.md)
-- **📖 Aktuális fejezet**: 4. fejezet – Infrastruktúra mint kód & telepítés
-- **⬅️ Előző fejezet**: [3. fejezet: Konfiguráció](../chapter-03-configuration/configuration.md)
+**Fejezet Navigáció:**
+- **📚 Tanfolyam Kezdőlap**: [AZD Kezdőknek](../../README.md)
+- **📖 Jelenlegi Fejezet**: 4. fejezet - Infrastruktúra kódként és Telepítés
+- **⬅️ Előző Fejezet**: [3. fejezet: Konfiguráció](../chapter-03-configuration/configuration.md)
 - **➡️ Következő**: [Erőforrások előkészítése](provisioning.md)
-- **🚀 Következő fejezet**: [5. fejezet: Többügyfél AI megoldások](../../examples/retail-scenario.md)
+- **🚀 Következő Fejezet**: [5. fejezet: Többügynökös AI Megoldások](../../examples/retail-scenario.md)
 
 ## Bevezetés
 
-Ez az átfogó útmutató mindent lefed, amit az Azure Developer CLI használatával történő alkalmazástelepítésről tudni kell, az alapvető egylépéses telepítésektől kezdve a fejlett, termelési környezetekig egyedi hookokkal, több környezettel és CI/CD integrációval. Sajátítsd el a teljes telepítési életciklust gyakorlati példák és bevált módszerek alapján.
+Ez az átfogó útmutató mindent lefed, amit az Azure Developer CLI használatával történő alkalmazástelepítésről tudni kell, az egyszerű egylépéses telepítésektől kezdve, a haladó, egyedi hook-okkal, több környezettel és CI/CD integrációval rendelkező éles helyzetekig. Sajátítsd el a teljes telepítési életciklust gyakorlati példák és bevált módszerek segítségével.
 
-## Tanulási célok
+## Tanulási Célok
 
-Az útmutató elvégzése után képes leszel:
-- Mesteri szinten kezelni az Azure Developer CLI összes telepítési parancsát és munkafolyamatát
-- Megérteni a teljes telepítési életciklust az erőforrások előkészítésétől a monitorozásig
-- Egyedi telepítési hookokat alkalmazni elő- és utótelepítési automatizálásra
-- Több környezetet konfigurálni, környezetspecifikus paraméterekkel
-- Fejlett telepítési stratégiákat bevezetni, beleértve a blue-green és canary telepítéseket
-- Az azd telepítések CI/CD folyamatokkal és DevOps munkafolyamatokkal való integrálását megvalósítani
+Az útmutató elvégzésével:
+- Mesteri szinten kezelheted az Azure Developer CLI összes telepítési parancsát és munkafolyamatát
+- Megérted a teljes telepítési életciklust az előkészítéstől a figyelésig
+- Megvalósítod az egyedi telepítési hook-okat elő- és utóautomatikához
+- Konfigurálod a több környezetet környezet-specifikus paraméterekkel
+- Beállítasz haladó telepítési stratégiákat, beleértve a blue-green és canary telepítéseket
+- Integrálod az azd telepítéseket CI/CD pipeline-okba és DevOps munkafolyamatokba
 
-## Tanulási eredmények
+## Tanulási Eredmények
 
-A kurzus végén képes leszel:
-- Önállóan végrehajtani és hibakeresni az összes azd telepítési munkafolyamatot
-- Egyedi telepítési automatizálást tervezni és megvalósítani hookok segítségével
-- Termelésre kész telepítéseket konfigurálni megfelelő biztonsággal és monitorozással
-- Komplex, több környezetes telepítési forgatókönyveket kezelni
-- Optimalizálni a telepítési teljesítményt és visszagörgetési stratégiákat alkalmazni
-- Az azd telepítéseket vállalati DevOps gyakorlatokba integrálni
+A kurzus sikeres elvégzése után képes leszel:
+- Függetlenül végrehajtani és hibakeresni az összes azd telepítési munkafolyamatot
+- Egyedi telepítési automatizálást tervezni és megvalósítani hook-ok használatával
+- Éles környezetre kész telepítéseket konfigurálni megfelelő biztonsággal és monitorozással
+- Kezelni összetett, több környezetes telepítési forgatókönyveket
+- Optimalizálni a telepítési teljesítményt és megvalósítani visszagörgetési stratégiákat
+- Beilleszteni az azd telepítéseket vállalati DevOps gyakorlatokba
 
-## A telepítés áttekintése
+## Telepítési Áttekintés
 
 Az Azure Developer CLI több telepítési parancsot kínál:
 - `azd up` - Teljes munkafolyamat (erőforrás előkészítés + telepítés)
@@ -39,12 +39,12 @@ Az Azure Developer CLI több telepítési parancsot kínál:
 - `azd deploy` - Csak az alkalmazáskód telepítése
 - `azd package` - Alkalmazások építése és csomagolása
 
-## Alap telepítési munkafolyamatok
+## Alapvető Telepítési Munkafolyamatok
 
-### Teljes telepítés (azd up)  
-Új projektek leggyakoribb munkafolyamata:  
+### Teljes Telepítés (azd up)
+A leggyakoribb munkafolyamat új projektekhez:
 ```bash
-# Telepíts mindent a nulláról
+# Minden telepítése a nulláról
 azd up
 
 # Telepítés adott környezettel
@@ -53,22 +53,22 @@ azd up --environment production
 # Telepítés egyedi paraméterekkel
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
-  
-### Csak infrastruktúra telepítése  
-Ha csak Azure erőforrásokat kell frissíteni:  
+
+### Csak Infrastruktúra Telepítés
+Ha csak az Azure erőforrásokat kell frissíteni:
 ```bash
-# Infrastruktúra telepítése/frissítése
+# Infrastruktúra biztosítása/frissítése
 azd provision
 
-# Telepítés szárazfutással a változások előnézetéhez
+# Biztosítás száraz futtatással a változások előnézetéhez
 azd provision --preview
 
-# Specifikus szolgáltatások telepítése
+# Konkrét szolgáltatások biztosítása
 azd provision --service database
 ```
-  
-### Csak kód telepítése  
-Gyors alkalmazásfrissítésekhez:  
+
+### Csak Kód Telepítés
+Gyors alkalmazásfrissítésekhez:
 ```bash
 # Minden szolgáltatás telepítése
 azd deploy
@@ -77,47 +77,47 @@ azd deploy
 # Szolgáltatások telepítése (azd deploy)
 # - web: Telepítés... Kész
 # - api: Telepítés... Kész
-# SIKER: A telepítés 2 perc 15 másodperc alatt befejeződött
+# SIKERES: A telepítés 2 perc 15 másodperc alatt befejeződött
 
 # Egy adott szolgáltatás telepítése
 azd deploy --service web
 azd deploy --service api
 
-# Telepítés egyedi build argumentumokkal
+# Telepítés egyéni build argumentumokkal
 azd deploy --service api --build-arg NODE_ENV=production
 
 # Telepítés ellenőrzése
 azd show --output json | jq '.services'
 ```
-  
-### ✅ Telepítés ellenőrzése
 
-Bármilyen telepítés után ellenőrizd a sikerességet:  
+### ✅ Telepítés Ellenőrzése
+
+Bármilyen telepítés után ellenőrizd a sikerességet:
 
 ```bash
 # Ellenőrizze, hogy minden szolgáltatás fut-e
 azd show
 
-# Tesztelje az egészségi végpontokat
+# Egészségügyi végpontok tesztelése
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
 curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
 curl -f "$API_URL/health" || echo "❌ API health check failed"
 
-# Figyelje a hibákat (alapértelmezés szerint böngészőben nyílik meg)
+# Hibák figyelése (alapértelmezés szerint a böngészőben nyílik meg)
 azd monitor --logs
 ```
-  
-**Siker kritériumok:**  
-- ✅ Minden szolgáltatás "Fut" státuszt mutat  
-- ✅ Az egészségügyi végpontok HTTP 200-as választ adnak  
-- ✅ Az utolsó 5 percben nincs hibanapló  
-- ✅ Az alkalmazás válaszol a tesztkérelmekre  
 
-## 🏗️ A telepítési folyamat megértése
+**Sikerességi Kritériumok:**
+- ✅ Minden szolgáltatás "Fut" állapotban jelenik meg
+- ✅ Az egészségügyi végpontok HTTP 200-as választ adnak
+- ✅ Az elmúlt 5 percben nincs hibajelentés a naplókban
+- ✅ Az alkalmazás válaszol a tesztkérésekre
 
-### 1. szakasz: Elő-erőforrás előkészítési hookok  
+## 🏗️ A Telepítési Folyamat Megértése
+
+### 1. Fázis: Előkészítő Provision Hook-ok
 ```yaml
 # azure.yaml
 hooks:
@@ -130,14 +130,14 @@ hooks:
       echo "Setting up secrets..."
       ./scripts/setup-secrets.sh
 ```
-  
-### 2. szakasz: Infrastruktúra előkészítése  
-- Infrastruktúra sablonokat olvas (Bicep/Terraform)  
-- Azure erőforrásokat hoz létre vagy frissít  
-- Hálózatot és biztonságot konfigurál  
-- Monitorozást és naplózást állít be  
 
-### 3. szakasz: Utó-erőforrás előkészítési hookok  
+### 2. Fázis: Infrastruktúra Előkészítése
+- Beolvassa az infrastruktúra sablonokat (Bicep/Terraform)
+- Létrehozza vagy frissíti az Azure erőforrásokat
+- Konfigurálja a hálózatot és a biztonságot
+- Beállítja a monitorozást és naplózást
+
+### 3. Fázis: Utólagos Provision Hook-ok
 ```yaml
 hooks:
   postprovision:
@@ -149,13 +149,13 @@ hooks:
       Write-Host "Configuring application settings..."
       ./scripts/configure-app-settings.ps1
 ```
-  
-### 4. szakasz: Alkalmazás csomagolása  
-- Alkalmazáskódot épít  
-- Telepítési csomagokat készít  
-- Csomagol célplatformra (konténerek, ZIP fájlok stb.)  
 
-### 5. szakasz: Elő-telepítési hookok  
+### 4. Fázis: Alkalmazás Csomagolása
+- Felépíti az alkalmazáskódot
+- Létrehozza a telepítési artefaktumokat
+- Csomagolja a céleszköz platformjára (konténerek, ZIP fájlok stb.)
+
+### 5. Fázis: Előtelepítési Hook-ok
 ```yaml
 hooks:
   predeploy:
@@ -167,13 +167,13 @@ hooks:
       echo "Database migrations..."
       npm run db:migrate
 ```
-  
-### 6. szakasz: Alkalmazás telepítése  
-- Csomagolt alkalmazásokat telepít Azure szolgáltatásokra  
-- Konfigurációs beállításokat frissít  
-- Szolgáltatásokat indít/újraindít  
 
-### 7. szakasz: Utó-telepítési hookok  
+### 6. Fázis: Alkalmazás Telepítése
+- Telepíti a csomagolt alkalmazást az Azure szolgáltatásokra
+- Frissíti a konfigurációs beállításokat
+- Elindítja/újraindítja a szolgáltatásokat
+
+### 7. Fázis: Utótelepítési Hook-ok
 ```yaml
 hooks:
   postdeploy:
@@ -185,10 +185,10 @@ hooks:
       echo "Warming up applications..."
       curl https://${WEB_URL}/health
 ```
-  
-## 🎛️ Telepítési konfiguráció
 
-### Szolgáltatásspecifikus telepítési beállítások  
+## 🎛️ Telepítési Konfigurációk
+
+### Szolgáltatás-Specifikus Telepítési Beállítások
 ```yaml
 # azure.yaml
 services:
@@ -217,8 +217,8 @@ services:
     runtime: node
     buildCommand: npm install --production
 ```
-  
-### Környezetspecifikus konfigurációk  
+
+### Környezet-Specifikus Konfigurációk
 ```bash
 # Fejlesztői környezet
 azd env set NODE_ENV development
@@ -237,10 +237,10 @@ azd env set NODE_ENV production
 azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
-  
-## 🔧 Fejlett telepítési forgatókönyvek
 
-### Több-szolgáltatásos alkalmazások  
+## 🔧 Haladó Telepítési Forgatókönyvek
+
+### Több Szolgáltatásból Álló Alkalmazások
 ```yaml
 # Complex application with multiple services
 services:
@@ -275,8 +275,8 @@ services:
     project: ./src/workers/reports
     host: function
 ```
-  
-### Blue-Green telepítések  
+
+### Blue-Green Telepítések
 ```bash
 # Kék környezet létrehozása
 azd env new production-blue
@@ -292,8 +292,8 @@ azd up --environment production-blue
 azd env select production-green
 azd down --force
 ```
-  
-### Canary telepítések  
+
+### Canary Telepítések
 ```yaml
 # azure.yaml - Configure traffic splitting
 services:
@@ -306,8 +306,8 @@ services:
       - revision: canary
         percentage: 10
 ```
-  
-### Szakaszos telepítések  
+
+### Fokozatos Telepítések
 ```bash
 #!/bin/bash
 # deploy-staged.sh
@@ -337,10 +337,10 @@ if [[ $confirm == [yY] ]]; then
     ./scripts/test-environment.sh production
 fi
 ```
-  
-## 🐳 Konténeres telepítések
 
-### Konténer alkalmazás telepítése  
+## 🐳 Konténeres Telepítések
+
+### Container App Telepítések
 ```yaml
 services:
   api:
@@ -363,8 +363,8 @@ services:
       minReplicas: 1
       maxReplicas: 10
 ```
-  
-### Többfázisú Dockerfile optimalizáció  
+
+### Többlépéses Dockerfile Optimalizáció
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -389,10 +389,10 @@ COPY package*.json ./
 EXPOSE 3000
 CMD ["npm", "start"]
 ```
-  
-## ⚡ Teljesítmény-optimalizálás
 
-### Szolgáltatásspecifikus telepítések  
+## ⚡ Teljesítményoptimalizálás
+
+### Szolgáltatás-Specifikus Telepítések
 ```bash
 # Egy adott szolgáltatás telepítése a gyorsabb iteráció érdekében
 azd deploy --service web
@@ -401,8 +401,8 @@ azd deploy --service api
 # Minden szolgáltatás telepítése
 azd deploy
 ```
-  
-### Építési cache használata  
+
+### Build Gyorsítótárazás
 ```yaml
 # azure.yaml - Configure build commands
 services:
@@ -411,22 +411,22 @@ services:
     buildCommand: npm run build
     outputPath: dist
 ```
-  
-### Hatékony kódtelepítések  
+
+### Hatékony Kód Telepítések
 ```bash
-# Használd az azd deploy parancsot (ne azd up) csak kódváltozásokhoz
-# Ez kihagyja az infrastruktúra kiépítését és sokkal gyorsabb
+# Az kódváltoztatásokhoz használd az azd deploy parancsot (ne az azd up-ot)
+# Ez kihagyja az infrastruktúra kiépítését, és sokkal gyorsabb
 azd deploy
 
-# Specifikus szolgáltatás telepítése a leggyorsabb iterációért
+# Egy adott szolgáltatás telepítése a leggyorsabb iterációhoz
 azd deploy --service api
 ```
-  
-## 🔍 Telepítés monitorozása
 
-### Valós idejű telepítés monitorozása  
+## 🔍 Telepítés Monitorozás
+
+### Valós Idejű Telepítés Figyelés
 ```bash
-# Alkalmazás valós idejű figyelése
+# Alkalmazás valós idejű megfigyelése
 azd monitor --live
 
 # Alkalmazásnaplók megtekintése
@@ -435,8 +435,8 @@ azd monitor --logs
 # Telepítési állapot ellenőrzése
 azd show
 ```
-  
-### Egészségellenőrzések  
+
+### Egészségellenőrzések
 ```yaml
 # azure.yaml - Configure health checks
 services:
@@ -449,15 +449,15 @@ services:
       timeout: 10s
       retries: 3
 ```
-  
-### Utótelepítési érvényesítés  
+
+### Utótelepítési Érvényesítés
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
 
 echo "Validating deployment..."
 
-# Ellenőrizze az alkalmazás állapotát
+# Alkalmazás állapotának ellenőrzése
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -482,10 +482,10 @@ npm run test:integration
 
 echo "✅ Deployment validation completed successfully"
 ```
-  
-## 🔐 Biztonsági megfontolások
 
-### Titkok kezelése  
+## 🔐 Biztonsági Szempontok
+
+### Titkok Kezelése
 ```bash
 # Titkok biztonságos tárolása
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
@@ -494,7 +494,7 @@ azd env set API_KEY "your-api-key" --secret
 
 # Titkok hivatkozása az azure.yaml fájlban
 ```
-  
+
 ```yaml
 services:
   api:
@@ -504,8 +504,8 @@ services:
       - name: jwt-secret
         value: ${JWT_SECRET}
 ```
-  
-### Hálózatbiztonság  
+
+### Hálózatbiztonság
 ```yaml
 # azure.yaml - Configure network security
 infra:
@@ -515,8 +515,8 @@ infra:
       - "203.0.113.0/24"  # Office IP range
       - "198.51.100.0/24" # VPN IP range
 ```
-  
-### Azonosítás és jogosultságkezelés  
+
+### Identitás- és Hozzáférés-kezelés
 ```yaml
 services:
   api:
@@ -530,15 +530,15 @@ services:
           - database-connection
           - external-api-key
 ```
-  
-## 🚨 Visszagörgetési stratégiák
 
-### Gyors visszagörgetés  
+## 🚨 Visszagörgetési Stratégiák
+
+### Gyors Rollback
 ```bash
-# Az AZD nem rendelkezik beépített visszaállítással. Ajánlott megközelítések:
+# Az AZD-nek nincs beépített visszaállítása. Ajánlott megközelítések:
 
 # 1. lehetőség: Újratelepítés Gitből (ajánlott)
-git revert HEAD  # Az érintett commit visszavonása
+git revert HEAD  # A problémás commit visszavonása
 git push
 azd deploy
 
@@ -547,21 +547,21 @@ git checkout <previous-commit-hash>
 azd deploy
 git checkout main
 ```
-  
-### Infrastrukturális visszagörgetés  
+
+### Infrastruktúra Rollback
 ```bash
-# Előnézet az infrastruktúraváltozásokról alkalmazás előtt
+# Az infrastruktúra változtatásainak előnézete alkalmazás előtt
 azd provision --preview
 
-# Infrastruktúra visszaállításhoz használjon verziókezelést:
-git revert HEAD  # Infrastruktúra változások visszavonása
-azd provision    # Előző infrastruktúra állapot alkalmazása
+# Az infrastruktúra visszaállításához használjon verziókezelést:
+git revert HEAD  # Infrastrukturális változtatások visszavonása
+azd provision    # Az előző infrastruktúra állapot alkalmazása
 ```
-  
-### Adatbázis migráció visszagörgetés  
+
+### Adatbázis Migráció Visszagörgetés
 ```bash
 #!/bin/bash
-# script/rollback-adatbazis.sh
+# scripts/rollback-database.sh
 
 echo "Rolling back database migrations..."
 npm run db:rollback
@@ -571,22 +571,22 @@ npm run db:validate
 
 echo "Database rollback completed"
 ```
-  
-## 📊 Telepítési metrikák
 
-### Telepítési teljesítmény követése  
+## 📊 Telepítési Mutatók
+
+### Telepítési Teljesítmény Követése
 ```bash
-# Jelenlegi telepítési állapot megtekintése
+# Aktuális telepítési állapot megtekintése
 azd show
 
 # Alkalmazás figyelése az Application Insights segítségével
 azd monitor --overview
 
-# Élő metrikák megtekintése
+# Élő mérőszámok megtekintése
 azd monitor --live
 ```
-  
-### Egyedi metrikagyűjtés  
+
+### Egyedi Mutatók Gyűjtése
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -602,33 +602,33 @@ hooks:
         -H "Content-Type: application/json" \
         -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
 ```
-  
-## 🎯 Legjobb gyakorlatok
 
-### 1. Környezetek konzisztenciája  
+## 🎯 Legjobb Gyakorlatok
+
+### 1. Környezet Konzisztencia
 ```bash
 # Használj következetes elnevezést
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Tartsd fenn a környezeti egyenértékűséget
+# Tarts fenn környezeti azonosságot
 ./scripts/sync-environments.sh
 ```
-  
-### 2. Infrastruktúra érvényesítése  
+
+### 2. Infrastruktúra Ellenőrzése
 ```bash
-# Infrastruktúra változások előnézete telepítés előtt
+# Az infrastruktúra változásainak előnézete telepítés előtt
 azd provision --preview
 
-# ARM/Bicep lintelés használata
+# Használjon ARM/Bicep lintelést
 az bicep lint --file infra/main.bicep
 
-# A Bicep szintaxis érvényesítése
+# Ellenőrizze a Bicep szintaxist
 az bicep build --file infra/main.bicep
 ```
-  
-### 3. Tesztelési integráció  
+
+### 3. Teszt Integráció
 ```yaml
 hooks:
   predeploy:
@@ -656,26 +656,26 @@ hooks:
       # Smoke tests
       npm run test:smoke
 ```
-  
-### 4. Dokumentáció és naplózás  
+
+### 4. Dokumentáció és Naplózás
 ```bash
 # Dokumentálja a telepítési eljárásokat
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
-echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
+echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
 ```
-  
-## Következő lépések
 
-- [Erőforrások előkészítése](provisioning.md) – Részletes bemutató az infrastruktúra kezeléséről  
-- [Telepítés előtti tervezés](../chapter-06-pre-deployment/capacity-planning.md) – Tervezd meg telepítési stratégiádat  
-- [Gyakori hibák](../chapter-07-troubleshooting/common-issues.md) – Telepítési problémák megoldása  
-- [Legjobb gyakorlatok](../chapter-07-troubleshooting/debugging.md) – Termelésre kész telepítési stratégiák  
+## Következő Lépések
 
-## 🎯 Gyakorlati telepítési feladatok
+- [Erőforrások előkészítése](provisioning.md) - Mélyreható infrastruktúra kezelés
+- [Telepítés előtti tervezés](../chapter-06-pre-deployment/capacity-planning.md) - Tervezd meg a telepítési stratégiát
+- [Gyakori problémák](../chapter-07-troubleshooting/common-issues.md) - Telepítési hibák megoldása
+- [Legjobb gyakorlatok](../chapter-07-troubleshooting/debugging.md) - Éles környezetre kész telepítési stratégiák
 
-### 1. feladat: Inkrementális telepítési munkafolyamat (20 perc)  
-**Cél**: A teljes és inkrementális telepítés közti különbség elsajátítása  
+## 🎯 Gyakorlati Telepítési Feladatok
+
+### Feladat 1: Inkrementális Telepítési Munkafolyamat (20 perc)
+**Cél**: Sajátítsd el a teljes és inkrementális telepítések közötti különbséget
 
 ```bash
 # Kezdeti telepítés
@@ -686,10 +686,10 @@ azd up
 # Kezdeti telepítési idő rögzítése
 echo "Full deployment: $(date)" > deployment-log.txt
 
-# Kódbeli módosítás végrehajtása
+# Kód módosítása
 echo "// Updated $(date)" >> src/api/src/server.js
 
-# Csak a kód telepítése (gyors)
+# Csak kód telepítése (gyors)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
@@ -699,26 +699,26 @@ cat deployment-log.txt
 # Takarítás
 azd down --force --purge
 ```
-  
-**Siker kritériumok:**  
-- [ ] A teljes telepítés 5-15 percet vesz igénybe  
-- [ ] A kód-only telepítés 2-5 percet vesz igénybe  
-- [ ] A kódbeli változások megjelennek a telepített alkalmazásban  
-- [ ] Az infrastruktúra változatlan marad az `azd deploy` után  
 
-**Tanulási eredmény**: A `azd deploy` 50-70%-kal gyorsabb, mint a `azd up` kódváltozások esetén  
+**Sikerességi Kritériumok:**
+- [ ] A teljes telepítés 5-15 percet vesz igénybe
+- [ ] Csak kód telepítés 2-5 percet vesz igénybe
+- [ ] A kódváltozások megjelennek a telepített alkalmazásban
+- [ ] Az infrastruktúra nem változik az `azd deploy` után
 
-### 2. feladat: Egyedi telepítési hookok (30 perc)  
-**Cél**: Elő- és utótelepítési automatizálás megvalósítása  
+**Tanulási Eredmény**: `azd deploy` 50-70%-kal gyorsabb a kódváltozások esetén, mint az `azd up`
+
+### Feladat 2: Egyedi Telepítési Hook-ok (30 perc)
+**Cél**: Valósítsd meg az elő- és utótelepítési automatizálást
 
 ```bash
-# Előtelepítési érvényesítő script létrehozása
+# Hozzon létre előtelepítési validációs szkriptet
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
 echo "⚠️ Running pre-deployment checks..."
 
-# Ellenőrizze, hogy a tesztek sikeresen lefutnak-e
+# Ellenőrizze, hogy a tesztek sikeresek-e
 if ! npm run test:unit; then
     echo "❌ Tests failed! Aborting deployment."
     exit 1
@@ -734,7 +734,7 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# Poszttelepítési gyorsellenőrzés létrehozása
+# Hozzon létre utótelepítési smoke tesztet
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
 echo "💨 Running smoke tests..."
@@ -753,7 +753,7 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# Hookok hozzáadása az azure.yaml fájlhoz
+# Adjon hozzá hookokat az azure.yaml-hoz
 cat >> azure.yaml << 'EOF'
 
 hooks:
@@ -766,18 +766,18 @@ hooks:
     run: ./scripts/post-deploy-test.sh
 EOF
 
-# Telepítés tesztelése hookokkal
+# Tesztelje az telepítést hookokkal
 azd deploy
 ```
-  
-**Siker kritériumok:**  
-- [ ] Elő-telepítési szkript fut telepítés előtt  
-- [ ] Telepítés megszakad, ha a tesztek nem sikerülnek  
-- [ ] Utó-telepítési smoke test ellenőrzi az egészséget  
-- [ ] A hookok megfelelő sorrendben futnak  
 
-### 3. feladat: Több-környezetes telepítési stratégia (45 perc)  
-**Cél**: Szakaszos telepítési munkafolyamat megvalósítása (fejlesztés → teszt → éles)  
+**Sikerességi Kritériumok:**
+- [ ] Az előtelepítési szkript lefut a telepítés előtt
+- [ ] A telepítés megszakad, ha a tesztek sikertelenek
+- [ ] Az utótelepítési teszt érvényesíti az egészséget
+- [ ] A hook-ok helyes sorrendben futnak le
+
+### Feladat 3: Több Környezetes Telepítési Stratégia (45 perc)
+**Cél**: Valósíts meg fokozatos telepítési munkafolyamatot (dev → staging → production)
 
 ```bash
 # Telepítési szkript létrehozása
@@ -788,7 +788,7 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# 1. lépés: Telepítés fejlesztői környezetbe
+# 1. lépés: Telepítés fejlesztési környezetbe
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
@@ -797,7 +797,7 @@ azd up --no-prompt
 echo "Running dev tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# 2. lépés: Telepítés tesztelési környezetbe
+# 2. lépés: Telepítés tesztkörnyezetbe
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
@@ -806,7 +806,7 @@ azd up --no-prompt
 echo "Running staging tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# 3. lépés: Kézi jóváhagyás a termelési környezethez
+# 3. lépés: Manuális jóváhagyás éles környezethez
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -837,40 +837,40 @@ azd env new production
 # Szakaszos telepítés futtatása
 ./deploy-staged.sh
 ```
-  
-**Siker kritériumok:**  
-- [ ] A fejlesztői környezet sikeresen települ  
-- [ ] A tesztkörnyezet sikeresen települ  
-- [ ] Az éles környezetre manuális jóváhagyás szükséges  
-- [ ] Minden környezet működő egészségellenőrzéssel rendelkezik  
-- [ ] Szükség esetén visszaállítható  
 
-### 4. feladat: Visszagörgetési stratégia (25 perc)  
-**Cél**: Telepítés visszagörgetésének megvalósítása és tesztelése Git segítségével  
+**Sikerességi Kritériumok:**
+- [ ] A fejlesztői környezet sikeresen települ
+- [ ] A staging környezet sikeresen települ
+- [ ] Az éles környezethez manuális jóváhagyás szükséges
+- [ ] Minden környezetben működnek az egészségellenőrzések
+- [ ] Szükség esetén vissza tudsz görgetni
+
+### Feladat 4: Visszagörgetési Stratégia (25 perc)
+**Cél**: Valósítsd meg és teszteld a telepítési rollback-et Git használatával
 
 ```bash
 # Telepítés v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# v1 commit hash mentése
+# Mentse az v1 commit hash-t
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# v2 telepítése törő változással
+# Telepítés v2 törő változással
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
 azd deploy
 
-# Hibák észlelése és visszagörgetés
+# Hiba észlelése és visszavonás
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # Visszagörgetés git használatával
+    # Visszavonás git használatával
     git revert HEAD --no-edit
     
-    # Környezet visszagörgetése
+    # Környezet visszaállítása
     azd env set APP_VERSION "1.0.0"
     
     # v1 újratelepítése
@@ -879,19 +879,19 @@ if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; 
     echo "✅ Rolled back to v1.0.0"
 fi
 ```
-  
-**Siker kritériumok:**  
-- [ ] Felismeri a telepítési hibákat  
-- [ ] Visszagörgetési szkript automatikusan fut  
-- [ ] Az alkalmazás működő állapotba kerül visszagörgetés után  
-- [ ] Egészségellenőrzések sikeresek visszagörgetés után  
 
-## 📊 Telepítési metrikák követése
+**Sikerességi Kritériumok:**
+- [ ] Felismeri a telepítési hibákat
+- [ ] A rollback szkript automatikusan lefut
+- [ ] Az alkalmazás működő állapotba kerül visszagörgetés után
+- [ ] Az egészségellenőrzések sikeresek rollback után
 
-### Kövesd nyomon telepítéseid teljesítményét
+## 📊 Telepítési Mutatók Követése
+
+### Kövesd nyomon a telepítési teljesítményed
 
 ```bash
-# Létrehozás telepítési metrika szkript
+# Készíts telepítési metrikák szkriptet
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
@@ -905,11 +905,11 @@ echo "
 📊 Deployment Metrics:"
 echo "Duration: ${DURATION}s"
 echo "Timestamp: $(date)"
-echo "Environment: $(azd env show --output json | jq -r '.name')"
+echo "Environment: $(azd env get-value AZURE_ENV_NAME)"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
 # Naplózás fájlba
-echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
+echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
 EOF
 
 chmod +x track-deployment.sh
@@ -917,8 +917,8 @@ chmod +x track-deployment.sh
 # Használd ezt
 ./track-deployment.sh
 ```
-  
-**Elemezd metrikáidat:**  
+
+**Elemzd a mutatóidat:**
 ```bash
 # Telepítési előzmények megtekintése
 cat deployment-metrics.csv
@@ -926,23 +926,23 @@ cat deployment-metrics.csv
 # Átlagos telepítési idő kiszámítása
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
-  
-## További források
 
-- [Azure Developer CLI telepítési referencia](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Azure App Service telepítés](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Azure Container Apps telepítés](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Azure Functions telepítés](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+## További Források
+
+- [Azure Developer CLI Telepítési Referencia](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Azure App Service Telepítés](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Azure Container Apps Telepítés](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Azure Functions Telepítés](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
-**Navigáció**  
-- **Előző lecke**: [Az első projekted](../chapter-01-foundation/first-project.md)  
-- **Következő lecke**: [Erőforrások előkészítése](provisioning.md)
+**Navigáció**
+- **Előző Lecke**: [Az első projekted](../chapter-01-foundation/first-project.md)
+- **Következő Lecke**: [Erőforrások előkészítése](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Nyilatkozat**:  
-Ezt a dokumentumot az AI fordító szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) használatával fordítottuk. Bár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum anyanyelvű változatát tekintse illetékes forrásnak. Kritikus információk esetén szakmai, emberi fordítást javaslunk. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy félreértelmezésekért.
+**Jogi nyilatkozat**:
+Ezt a dokumentumot az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordító szolgáltatás segítségével fordítottuk le. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Kritikus információk esetén szakmai emberi fordítást javasolunk. Nem vállalunk felelősséget az ebből a fordításból eredő félreértésekért vagy téves értelmezésekért.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
