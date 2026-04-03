@@ -1,65 +1,67 @@
-# AI Agents with Azure Developer CLI
+# Azure Developer CLI を使った AI エージェント
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD 入門](../../README.md)
-- **📖 Current Chapter**: Chapter 2 - AI-First Development
-- **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Next**: [AI Model Deployment](ai-model-deployment.md)
-- **🚀 Advanced**: [Multi-Agent Solutions](../../examples/retail-scenario.md)
+**章のナビゲーション:**
+- **📚 コースホーム**: [AZD 入門](../../README.md)
+- **📖 現在の章**: 第2章 - AIファースト開発
+- **⬅️ 前へ**: [Microsoft Foundry 統合](microsoft-foundry-integration.md)
+- **➡️ 次へ**: [AI モデルのデプロイ](ai-model-deployment.md)
+- **🚀 上級**: [マルチエージェント ソリューション](../../examples/retail-scenario.md)
 
 ---
 
-## Introduction
+## はじめに
 
-AI エージェントは、自分の環境を認識し、意思決定を行い、特定の目標を達成するために行動を取る自律的なプログラムです。プロンプトに応答するだけの単純なチャットボットとは異なり、エージェントは次のことができます:
+AI エージェントは、自分の環境を認識し、意思決定を行い、特定の目標を達成するために行動を起こせる自律的なプログラムです。プロンプトに応答するだけのシンプルなチャットボットとは異なり、エージェントは以下のことができます:
 
-- <strong>ツールを使用する</strong> - API を呼び出したり、データベースを検索したり、コードを実行したりする
-- <strong>計画と推論を行う</strong> - 複雑なタスクをステップに分解する
-- <strong>コンテキストから学習する</strong> - メモリを保持して行動を適応させる
-- <strong>協力する</strong> - 他のエージェントと協力する（マルチエージェントシステム）
+- **Use tools** - API を呼び出す、データベースを検索する、コードを実行する
+- **Plan and reason** - 複雑なタスクをステップに分解する
+- **Learn from context** - コンテキストから学び、記憶を保持して挙動を適応する
+- **Collaborate** - 他のエージェントと協力する（マルチエージェントシステム）
 
 このガイドでは、Azure Developer CLI (azd) を使用して AI エージェントを Azure にデプロイする方法を示します。
 
-## Learning Goals
+> **Validation note (2026-03-25):** このガイドは `azd` `1.23.12` と `azure.ai.agents` `0.1.18-preview` に対してレビューされました。`azd ai` の体験はまだプレビュー主導のため、インストールされているフラグが異なる場合は拡張機能のヘルプを確認してください。
 
-このガイドを完了すると、次のことができるようになります:
-- エージェントとは何か、チャットボットとどう違うかを理解する
-- AZD を使って事前構築された AI エージェント テンプレートをデプロイする
-- カスタム エージェント向けに Foundry Agents を構成する
-- 基本的なエージェントパターン（ツール使用、RAG、マルチエージェント）を実装する
+## 学習目標
+
+このガイドを完了すると、次のことができるようになります：
+- AI エージェントとは何か、チャットボットとどのように異なるかを理解する
+- AZD を使って事前構築済みの AI エージェント テンプレートをデプロイする
+- カスタムエージェント用に Foundry Agents を構成する
+- 基本的なエージェントパターン（ツール利用、RAG、マルチエージェント）を実装する
 - デプロイされたエージェントを監視およびデバッグする
 
-## Learning Outcomes
+## 学習成果
 
-完了後、次のことができるようになります:
-- 単一コマンドで AI エージェント アプリケーションを Azure にデプロイする
-- エージェントのツールと機能を構成する
-- エージェントで検索強化生成（RAG）を実装する
-- 複雑なワークフローのためのマルチエージェントアーキテクチャを設計する
-- 一般的なエージェントデプロイの問題をトラブルシュートする
+完了後、次のことができるようになります：
+- 単一コマンドで AI エージェントアプリケーションを Azure にデプロイする
+- エージェントのツールと能力を構成する
+- エージェントでの検索強化生成（RAG）を実装する
+- 複雑なワークフロー向けにマルチエージェントアーキテクチャを設計する
+- 一般的なエージェントデプロイの問題をトラブルシューティングする
 
 ---
 
-## 🤖 What Makes an Agent Different from a Chatbot?
+## 🤖 エージェントはチャットボットと何が違うのか？
 
-| Feature | Chatbot | AI Agent |
+| 特徴 | チャットボット | AI エージェント |
 |---------|---------|----------|
-| **Behavior** | Responds to prompts | Takes autonomous actions |
-| **Tools** | None | Can call APIs, search, execute code |
-| **Memory** | Session-based only | Persistent memory across sessions |
-| **Planning** | Single response | Multi-step reasoning |
-| **Collaboration** | Single entity | Can work with other agents |
+| <strong>動作</strong> | プロンプトに応答する | 自律的な行動をとる |
+| <strong>ツール</strong> | なし | API 呼び出し、検索、コード実行が可能 |
+| **記憶（メモリ）** | セッションベースのみ | セッションを超えて持続する記憶 |
+| <strong>計画</strong> | 単一の応答 | マルチステップ推論 |
+| <strong>協力</strong> | 単一エンティティ | 他のエージェントと協力可能 |
 
-### Simple Analogy
+### シンプルな例え
 
-- **Chatbot** = 案内デスクで質問に答える親切な人
-- **AI Agent** = 電話をかけたり、予約をしたり、タスクを完了してくれる個人アシスタント
+- "**Chatbot**" = 案内デスクで質問に答える親切な人
+- "**AI Agent**" = 電話をかけたり、予約を行ったり、タスクを代行するパーソナルアシスタント
 
 ---
 
-## 🚀 Quick Start: Deploy Your First Agent
+## 🚀 クイックスタート: 最初のエージェントをデプロイする
 
-### Option 1: Foundry Agents Template (Recommended)
+### オプション 1: Foundry Agents テンプレート（推奨）
 
 ```bash
 # AIエージェントのテンプレートを初期化する
@@ -69,36 +71,36 @@ azd init --template get-started-with-ai-agents
 azd up
 ```
 
-**What gets deployed:**
+**デプロイされるもの:**
 - ✅ Foundry Agents
 - ✅ Microsoft Foundry Models (gpt-4.1)
-- ✅ Azure AI Search (for RAG)
+- ✅ Azure AI Search (RAG 用)
 - ✅ Azure Container Apps (web interface)
 - ✅ Application Insights (monitoring)
 
-**Time:** ~15-20 minutes
-**Cost:** ~$100-150/month (development)
+**時間:** ~15-20分
+**コスト:** 約$100-150/月（開発環境）
 
-### Option 2: OpenAI Agent with Prompty
+### オプション 2: Prompty を使った OpenAI エージェント
 
 ```bash
-# Prompty ベースのエージェントテンプレートを初期化する
+# Promptyベースのエージェントテンプレートを初期化する
 azd init --template agent-openai-python-prompty
 
 # Azure にデプロイする
 azd up
 ```
 
-**What gets deployed:**
-- ✅ Azure Functions (serverless agent execution)
+**デプロイされるもの:**
+- ✅ Azure Functions（サーバーレスでのエージェント実行）
 - ✅ Microsoft Foundry Models
-- ✅ Prompty configuration files
-- ✅ Sample agent implementation
+- ✅ Prompty の構成ファイル
+- ✅ サンプルのエージェント実装
 
-**Time:** ~10-15 minutes
-**Cost:** ~$50-100/month (development)
+**時間:** ~10-15分
+**コスト:** 約$50-100/月（開発環境）
 
-### Option 3: RAG Chat Agent
+### オプション 3: RAG チャットエージェント
 
 ```bash
 # RAGチャットテンプレートを初期化する
@@ -108,46 +110,49 @@ azd init --template azure-search-openai-demo
 azd up
 ```
 
-**What gets deployed:**
+**デプロイされるもの:**
 - ✅ Microsoft Foundry Models
 - ✅ Azure AI Search with sample data
-- ✅ Document processing pipeline
-- ✅ Chat interface with citations
+- ✅ ドキュメント処理パイプライン
+- ✅ 引用付きチャットインターフェイス
 
-**Time:** ~15-25 minutes
-**Cost:** ~$80-150/month (development)
+**時間:** ~15-25分
+**コスト:** 約$80-150/月（開発環境）
 
-### Option 4: AZD AI Agent Init (Manifest-Based)
+### オプション 4: AZD AI Agent Init（マニフェストまたはテンプレートベースのプレビュー）
 
-If you have an agent manifest file, you can use the `azd ai` command to scaffold a Foundry Agent Service project directly:
+エージェントのマニフェストファイルがある場合、`azd ai` コマンドを使用して Foundry Agent Service プロジェクトを直接スキャフォールドできます。最近のプレビュ―リリースではテンプレートベースの初期化サポートも追加されているため、インストールされている拡張機能のバージョンに応じて正確なプロンプトのフローが若干異なる場合があります。
 
 ```bash
-# AIエージェント拡張機能をインストールする
+# AI エージェント拡張機能をインストールする
 azd extension install azure.ai.agents
 
-# エージェントマニフェストから初期化する
+# 任意: インストールされたプレビュー版を確認する
+azd extension show azure.ai.agents
+
+# エージェント マニフェストから初期化する
 azd ai agent init -m agent-manifest.yaml
 
 # Azure にデプロイする
 azd up
 ```
 
-**When to use `azd ai agent init` vs `azd init --template`:**
+**`azd ai agent init` と `azd init --template` を使い分けるとき:**
 
-| Approach | Best For | How It Works |
+| アプローチ | 用途 | 動作方法 |
 |----------|----------|------|
-| `azd init --template` | Starting from a working sample app | Clones a full template repo with code + infra |
-| `azd ai agent init -m` | Building from your own agent manifest | Scaffolds project structure from your agent definition |
+| `azd init --template` | 動作するサンプルアプリから開始する場合 | コードとインフラを含む完全なテンプレートリポジトリをクローンする |
+| `azd ai agent init -m` | 自分のエージェントマニフェストから構築する場合 | エージェント定義からプロジェクト構造をスキャフォールドする |
 
-> **Tip:** Use `azd init --template` when learning (Options 1-3 above). Use `azd ai agent init` when building production agents with your own manifests. See [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full reference.
+> **Tip:** 学習時は `azd init --template` を使用してください（上記オプション 1-3）。独自のマニフェストで本番エージェントを構築する場合は `azd ai agent init` を使用してください。完全な参照は [AZD AI CLI コマンド](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) を参照してください。
 
 ---
 
-## 🏗️ Agent Architecture Patterns
+## 🏗️ エージェントアーキテクチャのパターン
 
-### Pattern 1: Single Agent with Tools
+### パターン 1: ツールを使う単一エージェント
 
-The simplest agent pattern - one agent that can use multiple tools.
+最も単純なエージェントパターン - 複数のツールを使用できる単一のエージェント。
 
 ```mermaid
 graph TD
@@ -156,56 +161,56 @@ graph TD
     Agent --> Database[データベースツール]
     Agent --> API[APIツール]
 ```
-**Best for:**
+**最適用途:**
 - カスタマーサポートボット
 - リサーチアシスタント
 - データ分析エージェント
 
-**AZD Template:** `azure-search-openai-demo`
+**AZD テンプレート:** `azure-search-openai-demo`
 
-### Pattern 2: RAG Agent (Retrieval-Augmented Generation)
+### パターン 2: RAG エージェント（Retrieval-Augmented Generation）
 
-An agent that retrieves relevant documents before generating responses.
+応答を生成する前に関連文書を検索するエージェント。
 
 ```mermaid
 graph TD
-    Query[ユーザーのクエリ] --> RAG[RAG エージェント]
+    Query[ユーザークエリ] --> RAG[RAGエージェント]
     RAG --> Vector[ベクトル検索]
     RAG --> LLM[大規模言語モデル<br/>gpt-4.1]
     Vector -- ドキュメント --> LLM
-    LLM --> Response[引用付き応答]
+    LLM --> Response[引用付きの応答]
 ```
-**Best for:**
-- 企業のナレッジベース
+**最適用途:**
+- エンタープライズのナレッジベース
 - ドキュメント Q&A システム
 - コンプライアンスや法務調査
 
-**AZD Template:** `azure-search-openai-demo`
+**AZD テンプレート:** `azure-search-openai-demo`
 
-### Pattern 3: Multi-Agent System
+### パターン 3: マルチエージェントシステム
 
-Multiple specialized agents working together on complex tasks.
+複雑なタスクで協力する複数の専門化されたエージェント。
 
 ```mermaid
 graph TD
-    Orchestrator[オーケストレーター エージェント] --> Research[リサーチ エージェント<br/>gpt-4.1]
-    Orchestrator --> Writer[ライター エージェント<br/>gpt-4.1-mini]
-    Orchestrator --> Reviewer[レビュアー エージェント<br/>gpt-4.1]
+    Orchestrator[オーケストレーターエージェント] --> Research[リサーチエージェント<br/>gpt-4.1]
+    Orchestrator --> Writer[ライターエージェント<br/>gpt-4.1-mini]
+    Orchestrator --> Reviewer[レビュアーエージェント<br/>gpt-4.1]
 ```
-**Best for:**
+**最適用途:**
 - 複雑なコンテンツ生成
-- マルチステップワークフロー
+- マルチステップのワークフロー
 - 異なる専門知識を必要とするタスク
 
-**Learn More:** [Multi-Agent Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md)
+**詳細:** [マルチエージェントの協調パターン](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
-## ⚙️ Configuring Agent Tools
+## ⚙️ エージェントツールの設定
 
-Agents become powerful when they can use tools. Here's how to configure common tools:
+エージェントはツールを利用できると強力になります。一般的なツールの設定方法は次のとおりです:
 
-### Tool Configuration in Foundry Agents
+### Foundry Agents でのツール設定
 
 ```python
 # agent_config.py
@@ -237,7 +242,7 @@ agent = project_client.agents.create_agent(
 )
 ```
 
-### Environment Configuration
+### 環境設定
 
 ```bash
 # エージェント固有の環境変数を設定する
@@ -246,40 +251,40 @@ azd env set AGENT_INSTRUCTIONS "You are a helpful assistant..."
 azd env set ENABLE_CODE_INTERPRETER "true"
 azd env set ENABLE_FILE_SEARCH "true"
 
-# 更新された構成でデプロイする
+# 更新された設定でデプロイする
 azd deploy
 ```
 
 ---
 
-## 📊 Monitoring Agents
+## 📊 エージェントの監視
 
-### Application Insights Integration
+### Application Insights 統合
 
-All AZD agent templates include Application Insights for monitoring:
+すべての AZD エージェントテンプレートは監視用に Application Insights を含みます:
 
 ```bash
 # 監視ダッシュボードを開く
 azd monitor --overview
 
-# ライブログを表示する
+# ライブログを表示
 azd monitor --logs
 
-# ライブメトリクスを表示する
+# ライブメトリクスを表示
 azd monitor --live
 ```
 
-### Key Metrics to Track
+### 追跡すべき主要メトリクス
 
-| Metric | Description | Target |
+| メトリクス | 説明 | 目標 |
 |--------|-------------|--------|
-| Response Latency | Time to generate response | < 5 seconds |
-| Token Usage | Tokens per request | Monitor for cost |
-| Tool Call Success Rate | % of successful tool executions | > 95% |
-| Error Rate | Failed agent requests | < 1% |
-| User Satisfaction | Feedback scores | > 4.0/5.0 |
+| レスポンス遅延 | 応答生成にかかる時間 | < 5 秒 |
+| トークン使用量 | リクエストごとのトークン | コスト監視 |
+| ツール呼び出し成功率 | ツール実行の成功割合 | > 95% |
+| エラー率 | 失敗したエージェントリクエスト | < 1% |
+| ユーザー満足度 | フィードバックスコア | > 4.0/5.0 |
 
-### Custom Logging for Agents
+### エージェントのカスタムログ
 
 ```python
 import os
@@ -303,29 +308,29 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
         })
 ```
 
-> **Note:** Install the required packages: `pip install azure-monitor-opentelemetry opentelemetry`
+> **Note:** 必要なパッケージをインストールしてください: `pip install azure-monitor-opentelemetry opentelemetry`
 
 ---
 
-## 💰 Cost Considerations
+## 💰 コストに関する考慮事項
 
-### Estimated Monthly Costs by Pattern
+### パターン別の推定月額コスト
 
-| Pattern | Dev Environment | Production |
+| パターン | 開発環境 | 本番 |
 |---------|-----------------|------------|
-| Single Agent | $50-100 | $200-500 |
-| RAG Agent | $80-150 | $300-800 |
-| Multi-Agent (2-3 agents) | $150-300 | $500-1,500 |
-| Enterprise Multi-Agent | $300-500 | $1,500-5,000+ |
+| 単一エージェント | $50-100 | $200-500 |
+| RAG エージェント | $80-150 | $300-800 |
+| マルチエージェント（2-3 エージェント） | $150-300 | $500-1,500 |
+| エンタープライズ向けマルチエージェント | $300-500 | $1,500-5,000+ |
 
-### Cost Optimization Tips
+### コスト最適化のヒント
 
-1. **Use gpt-4.1-mini for simple tasks**
+1. **簡単なタスクには gpt-4.1-mini を使用する**
    ```bash
    azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
 
-2. **Implement caching for repeated queries**
+2. <strong>繰り返しのクエリにはキャッシュを実装する</strong>
    ```python
    from functools import lru_cache
    
@@ -334,9 +339,9 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
        return agent.run(query_hash)
    ```
 
-3. **Set token limits per run**
+3. <strong>実行ごとにトークン制限を設定する</strong>
    ```python
-   # エージェントを作成する時ではなく、実行時にmax_completion_tokensを設定する
+   # 作成時ではなく、エージェント実行時に max_completion_tokens を設定する
    run = project_client.agents.create_run(
        thread_id=thread.id,
        agent_id=agent.id,
@@ -344,7 +349,7 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
    )
    ```
 
-4. **Scale to zero when not in use**
+4. <strong>使用していないときはゼロまでスケールダウンする</strong>
    ```bash
    # Container Apps は自動的にゼロまでスケールします
    azd env set MIN_REPLICAS "0"
@@ -352,15 +357,15 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 
 ---
 
-## 🔧 Troubleshooting Agents
+## 🔧 エージェントのトラブルシューティング
 
-### Common Issues and Solutions
+### よくある問題と解決策
 
 <details>
-<summary><strong>❌ エージェントがツール呼び出しに応答しない</strong></summary>
+<summary><strong>❌ ツール呼び出しに応答しないエージェント</strong></summary>
 
 ```bash
-# ツールが適切に登録されているか確認する
+# ツールが正しく登録されているか確認する
 azd show
 
 # OpenAI のデプロイを確認する
@@ -372,28 +377,28 @@ az cognitiveservices account deployment list \
 azd monitor --logs
 ```
 
-**Common causes:**
-- Tool function signature mismatch
-- Missing required permissions
-- API endpoint not accessible
+**よくある原因:**
+- ツール関数のシグネチャ不一致
+- 必要な権限が不足している
+- API エンドポイントにアクセスできない
 </details>
 
 <details>
-<summary><strong>❌ エージェント応答のレイテンシーが高い</strong></summary>
+<summary><strong>❌ エージェント応答の遅延が大きい</strong></summary>
 
 ```bash
-# Application Insights でボトルネックを確認してください
+# Application Insightsでボトルネックを確認する
 azd monitor --live
 
-# より高速なモデルの使用を検討してください
+# より高速なモデルの使用を検討する
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd deploy
 ```
 
-**Optimization tips:**
-- Use streaming responses
-- Implement response caching
-- Reduce context window size
+**最適化のヒント:**
+- ストリーミング応答を使用する
+- 応答キャッシュを実装する
+- コンテキストウィンドウのサイズを減らす
 </details>
 
 <details>
@@ -409,11 +414,11 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# 根拠付けのための検索機能を追加する
+# グラウンディングのための情報検索を追加する
 agent = project_client.agents.create_agent(
     model="gpt-4.1",
     instructions=instructions,
-    tools=[FileSearchTool()]  # 応答を文書に基づいて行う
+    tools=[FileSearchTool()]  # 応答を文書に根拠付ける
 )
 ```
 </details>
@@ -443,57 +448,58 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
 
 ---
 
-## 🎓 Hands-On Exercises
+## 🎓 ハンズオン演習
 
-### Exercise 1: Deploy a Basic Agent (20 minutes)
+### 演習 1: 基本的なエージェントをデプロイする（20分）
 
-**Goal:** Deploy your first AI agent using AZD
+**目標:** AZD を使って最初の AI エージェントをデプロイする
 
 ```bash
-# ステップ1: テンプレートを初期化
+# ステップ1: テンプレートを初期化する
 azd init --template get-started-with-ai-agents
 
-# ステップ2: Azureにログイン
+# ステップ2: Azure にログインする
 azd auth login
+# 複数のテナントで作業する場合は、--tenant-id <tenant-id> を追加してください
 
-# ステップ3: デプロイ
+# ステップ3: デプロイする
 azd up
 
-# ステップ4: エージェントをテスト
-# デプロイ後の期待される出力:
-#   デプロイが完了しました!
+# ステップ4: エージェントをテストする
+# デプロイ後の予想出力:
+#   デプロイ完了!
 #   エンドポイント: https://<app-name>.<region>.azurecontainerapps.io
-# 出力に表示されているURLを開き、質問してみてください
+# 出力に表示された URL を開いて、質問をしてみてください
 
-# ステップ5: モニタリングを表示
+# ステップ5: 監視を表示する
 azd monitor --overview
 
-# ステップ6: クリーンアップ
+# ステップ6: クリーンアップする
 azd down --force --purge
 ```
 
-**Success Criteria:**
+**成功基準:**
 - [ ] エージェントが質問に応答する
 - [ ] `azd monitor` で監視ダッシュボードにアクセスできる
 - [ ] リソースが正常にクリーンアップされる
 
-### Exercise 2: Add a Custom Tool (30 minutes)
+### 演習 2: カスタムツールを追加する（30分）
 
-**Goal:** Extend an agent with a custom tool
+**目標:** カスタムツールでエージェントを拡張する
 
-1. Deploy the agent template:
+1. エージェントテンプレートをデプロイする:
    ```bash
    azd init --template get-started-with-ai-agents
    azd up
    ```
-2. Create a new tool function in your agent code:
+2. エージェントコードに新しいツール関数を作成する:
    ```python
    def get_weather(location: str) -> str:
        """Get current weather for a location."""
        # 天気サービスへのAPI呼び出し
        return f"Weather in {location}: Sunny, 72°F"
    ```
-3. Register the tool with the agent:
+3. エージェントにツールを登録する:
    ```python
    from azure.ai.projects.models import FunctionTool
 
@@ -515,90 +521,89 @@ azd down --force --purge
        tools=[weather_tool]
    )
    ```
-4. Redeploy and test:
+4. 再デプロイしてテストする:
    ```bash
    azd deploy
    # 質問: "シアトルの天気はどうですか？"
    # 期待される動作: エージェントが get_weather("Seattle") を呼び出し、天気情報を返す
    ```
 
-**Success Criteria:**
-- [ ] エージェントが天気に関するクエリを認識する
+**成功基準:**
+- [ ] エージェントが天気関連のクエリを認識する
 - [ ] ツールが正しく呼び出される
 - [ ] 応答に天気情報が含まれる
 
-### Exercise 3: Build a RAG Agent (45 minutes)
+### 演習 3: RAG エージェントを構築する（45分）
 
-**Goal:** Create an agent that answers questions from your documents
+**目標:** ドキュメントからの質問に回答するエージェントを作成する
 
 ```bash
-# ステップ1: RAGテンプレートをデプロイする
+# ステップ1: RAGテンプレートをデプロイ
 azd init --template azure-search-openai-demo
 azd up
 
 # ステップ2: ドキュメントをアップロードする
-# PDF/TXTファイルをdata/ディレクトリに配置し、次に以下を実行します:
+# PDF/TXTファイルをdata/ディレクトリに置き、次に以下を実行してください:
 python scripts/prepdocs.py
 
 # ステップ3: ドメイン固有の質問でテストする
-# azd upの出力に表示されたWebアプリのURLを開く
+# azd up の出力に表示されるウェブアプリのURLを開く
 # アップロードしたドキュメントについて質問する
-# 応答には[doc.pdf]のような引用参照を含めるべきです
+# 応答には [doc.pdf] のような引用参照を含める必要があります
 ```
 
-**Success Criteria:**
+**成功基準:**
 - [ ] アップロードしたドキュメントからエージェントが回答する
 - [ ] 応答に引用が含まれる
 - [ ] 範囲外の質問で幻覚が発生しない
 
 ---
 
-## 📚 Next Steps
+## 📚 次のステップ
 
-Now that you understand AI agents, explore these advanced topics:
+AI エージェントを理解したので、これらの高度なトピックを探求してください:
 
-| Topic | Description | Link |
+| トピック | 説明 | リンク |
 |-------|-------------|------|
-| **Multi-Agent Systems** | Build systems with multiple collaborating agents | [Retail Multi-Agent Example](../../examples/retail-scenario.md) |
-| **Coordination Patterns** | Learn orchestration and communication patterns | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **Production Deployment** | Enterprise-ready agent deployment | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
-| **Agent Evaluation** | Test and evaluate agent performance | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **AI Workshop Lab** | Hands-on: Make your AI solution AZD-ready | [AI Workshop Lab](ai-workshop-lab.md) |
+| <strong>マルチエージェントシステム</strong> | 複数の協力するエージェントでシステムを構築する | [小売向けマルチエージェント例](../../examples/retail-scenario.md) |
+| <strong>協調パターン</strong> | オーケストレーションと通信パターンを学ぶ | [協調パターン](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **本番 AI プラクティス** | エンタープライズ対応のエージェント展開 | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
+| <strong>エージェント評価</strong> | エージェントのパフォーマンスをテストおよび評価する | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **AI ワークショップラボ** | ハンズオン: あなたの AI ソリューションを AZD 対応にする | [AI Workshop Lab](ai-workshop-lab.md) |
 
 ---
 
-## 📖 Additional Resources
+## 📖 追加リソース
 
-### Official Documentation
+### 公式ドキュメント
 - [Azure AI Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
 - [Azure AI Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
 - [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
 
-### AZD Templates for Agents
-- [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents)
+### エージェント用 AZD テンプレート
+- [AI エージェント入門](https://github.com/Azure-Samples/get-started-with-ai-agents)
 - [Agent OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
-- [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+- [Azure Search OpenAI デモ](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-### Community Resources
-- [Awesome AZD - Agent Templates](https://azure.github.io/awesome-azd/?tags=ai-agents)
+### コミュニティリソース
+- [Awesome AZD - エージェントテンプレート](https://azure.github.io/awesome-azd/?tags=ai-agents)
 - [Azure AI Discord](https://discord.gg/microsoft-azure)
 - [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
-### Agent Skills for Your Editor
-- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Install reusable AI agent skills for Azure development in GitHub Copilot, Cursor, or any supported agent. Includes skills for [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [deployment](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), and [diagnostics](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
+### エディタ用エージェントスキル
+- [**Microsoft Azure エージェントスキル**](https://skills.sh/microsoft/github-copilot-for-azure) - GitHub Copilot、Cursor、またはサポートされている任意のエージェントで Azure 開発向けの再利用可能な AI エージェントスキルをインストールします。以下のスキルが含まれます: [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [デプロイ](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), および [診断](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **Next Lesson**: [AI Model Deployment](ai-model-deployment.md)
+<strong>ナビゲーション</strong>
+- <strong>前のレッスン</strong>: [Microsoft Foundry 統合](microsoft-foundry-integration.md)
+- <strong>次のレッスン</strong>: [AI モデルのデプロイ](ai-model-deployment.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責事項**:
-この文書は AI 翻訳サービス [Co-op翻訳](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性には努めていますが、自動翻訳には誤りや不正確さが含まれる可能性があることにご注意ください。原文（原言語）の文書が信頼できる情報源と見なされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用によって生じるいかなる誤解や解釈違いについても、当社は責任を負いません。
+**免責事項**: この文書は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性には努めていますが、自動翻訳は誤りや不正確さを含む場合があることにご注意ください。原文（原語の文書）が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。当社は、本翻訳の利用により生じた誤解や誤訳について責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

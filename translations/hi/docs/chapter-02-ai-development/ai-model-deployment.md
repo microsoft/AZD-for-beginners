@@ -1,18 +1,20 @@
-# Azure Developer CLI के साथ AI मॉडल परिनियोजन
+# Azure Developer CLI के साथ AI मॉडल तैनाती
 
 **अध्याय नेविगेशन:**
-- **📚 पाठ्यक्रम मुख्य पृष्ठ**: [AZD शुरुआती के लिए](../../README.md)
+- **📚 कोर्स होम**: [AZD For Beginners](../../README.md)
 - **📖 वर्तमान अध्याय**: अध्याय 2 - AI-प्रथम विकास
-- **⬅️ पिछला**: [Microsoft Foundry एकीकरण](microsoft-foundry-integration.md)
-- **➡️ अगला**: [AI कार्यशाला](ai-workshop-lab.md)
-- **🚀 अगला अध्याय**: [अध्याय 3: कॉन्फ़िगरेशन](../chapter-03-configuration/configuration.md)
+- **⬅️ पिछला**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ अगला**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 अगला अध्याय**: [अध्याय 3: विन्यास](../chapter-03-configuration/configuration.md)
 
-यह मार्गदर्शिका AZD टेम्पलेट्स का उपयोग करके AI मॉडल तैनात करने के लिए व्यापक निर्देश प्रदान करती है, जो मॉडल चयन से लेकर प्रोडक्शन परिनियोजन पैटर्न तक सब कुछ कवर करती है।
+यह गाइड AZD टेम्पलेट्स का उपयोग करके AI मॉडल की तैनाती के लिए व्यापक निर्देश प्रदान करता है, जो मॉडल चयन से लेकर उत्पादन तैनाती पैटर्न तक सब कुछ शामिल करता है।
 
-## विषय सूची
+> **मान्यता नोट (2026-03-25):** इस गाइड में AZD वर्कफ़्लो को `azd` `1.23.12` के खिलाफ जाँचा गया था। उन AI तैनातियों के लिए जो डिफ़ॉल्ट सेवा तैनाती विंडो से अधिक समय लेते हैं, वर्तमान AZD संस्करण `azd deploy --timeout <seconds>` का समर्थन करते हैं।
+
+## सामग्री सारणी
 
 - [मॉडल चयन रणनीति](#मॉडल-चयन-रणनीति)
-- [AI मॉडलों के लिए AZD कॉन्फ़िगरेशन](#ai-मॉडलों-के-लिए-azd-कॉन्फ़िगरेशन)
+- [AI मॉडल के लिए AZD कॉन्फ़िगरेशन](#ai-मॉडल-के-लिए-azd-कॉन्फ़िगरेशन)
 - [तैनाती पैटर्न](#तैनाती-पैटर्न)
 - [मॉडल प्रबंधन](#मॉडल-प्रबंधन)
 - [उत्पादन विचार](#उत्पादन-विचार)
@@ -20,9 +22,9 @@
 
 ## मॉडल चयन रणनीति
 
-### Microsoft Foundry मॉडल्स
+### Microsoft Foundry मॉडल
 
-अपने उपयोग के मामले के लिए सही मॉडल चुनें:
+अपने उपयोग मामले के लिए सही मॉडल चुनें:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -41,29 +43,29 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
         ]
 ```
 
-### मॉडल क्षमता नियोजन
+### मॉडल क्षमता योजना
 
 | मॉडल प्रकार | उपयोग मामला | अनुशंसित क्षमता | लागत विचार |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | चैट, प्रश्नोत्तर | 10-50 TPM | अधिकांश कार्यभारों के लिए लागत-कुशल |
-| gpt-4.1 | जटिल तर्क | 20-100 TPM | उच्च लागत, प्रीमियम फीचरों के लिए उपयोग करें |
-| Text-embedding-ada-002 | खोज, RAG | 30-120 TPM | सार्थक खोज के लिए आवश्यक |
-| Whisper | वाणी से पाठ | 10-50 TPM | ऑडियो प्रसंस्करण कार्यभार |
+| gpt-4.1-mini | चैट, प्रश्नोत्तर | 10-50 TPM | अधिकांश वर्कलोड के लिए लागत प्रभावी |
+| gpt-4.1 | जटिल तर्क | 20-100 TPM | उच्च लागत, प्रीमियम सुविधाओं के लिए उपयोग करें |
+| text-embedding-3-large | खोज, RAG | 30-120 TPM | सेमांटिक खोज और पुनर्प्राप्ति के लिए मजबूत डिफ़ॉल्ट विकल्प |
+| Whisper | भाषण से पाठ | 10-50 TPM | ऑडियो प्रसंस्करण कार्यभार |
 
-## AI मॉडलों के लिए AZD कॉन्फ़िगरेशन
+## AI मॉडल के लिए AZD कॉन्फ़िगरेशन
 
 ### Bicep टेम्पलेट कॉन्फ़िगरेशन
 
-Bicep टेम्पलेट्स के माध्यम से मॉडल परिनियोजन बनाएँ:
+Bicep टेम्पलेट्स के जरिए मॉडल तैनाती बनाएं:
 
 ```bicep
 // infra/main.bicep
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -122,21 +124,21 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
-### पर्यावरण वेरिएबल्स
+### पर्यावरण चर
 
-अपने एप्लिकेशन का वातावरण कॉन्फ़िगर करें:
+अपने आवेदन पर्यावरण को कॉन्फ़िगर करें:
 
 ```bash
-# .env विन्यास
+# .env कॉन्फ़िगरेशन
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
 ## तैनाती पैटर्न
 
-### पैटर्न 1: एक-क्षेत्र तैनाती
+### पैटर्न 1: सिंगल-क्षेत्र तैनाती
 
 ```yaml
 # azure.yaml - Single region
@@ -149,9 +151,9 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-इसके लिए उपयुक्त:
+उत्तम के लिए:
 - विकास और परीक्षण
-- एकल-बाज़ार अनुप्रयोग
+- एकल-बाजार अनुप्रयोग
 - लागत अनुकूलन
 
 ### पैटर्न 2: बहु-क्षेत्र तैनाती
@@ -167,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-इसके लिए उपयुक्त:
+उत्तम के लिए:
 - वैश्विक अनुप्रयोग
 - उच्च उपलब्धता आवश्यकताएँ
 - लोड वितरण
 
-### पैटर्न 3: हाइब्रिड तैनाती
+### पैटर्न 3: संकर तैनाती
 
-Microsoft Foundry मॉडल्स को अन्य AI सेवाओं के साथ संयोजित करें:
+Microsoft Foundry मॉडल्स को अन्य AI सेवाओं के साथ मिलाएं:
 
 ```bicep
 // Hybrid AI services
@@ -207,7 +209,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### संस्करण नियंत्रण
 
-अपने AZD कॉन्फ़िगरेशन में मॉडल संस्करणों को ट्रैक करें:
+अपने AZD कॉन्फ़िगरेशन में मॉडल संस्करण ट्रैक करें:
 
 ```json
 {
@@ -215,11 +217,11 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
@@ -227,7 +229,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### मॉडल अपडेट्स
 
-AZD हुक्स का उपयोग करें मॉडल अपडेट्स के लिए:
+मॉडल अपडेट के लिए AZD हुक्स का उपयोग करें:
 
 ```bash
 #!/bin/bash
@@ -238,11 +240,14 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# यदि डिप्लॉयमेंट डिफ़ॉल्ट टाइमआउट से अधिक समय लेता है
+azd deploy --timeout 1800
 ```
 
 ### A/B परीक्षण
 
-कई मॉडल संस्करण तैनात करें:
+एक से अधिक मॉडल संस्करण तैनात करें:
 
 ```bicep
 param enableABTesting bool = false
@@ -266,12 +271,12 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ## उत्पादन विचार
 
-### क्षमता नियोजन
+### क्षमता योजना
 
 उपयोग पैटर्न के आधार पर आवश्यक क्षमता की गणना करें:
 
 ```python
-# क्षमता गणना का उदाहरण
+# क्षमता गणना उदाहरण
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -283,7 +288,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# उपयोग का उदाहरण
+# उदाहरण उपयोग
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -365,7 +370,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ## निगरानी और अवलोकन
 
-### Application Insights एकीकरण
+### एप्लिकेशन इनसाइट्स इंटीग्रेशन
 
 AI वर्कलोड्स के लिए निगरानी कॉन्फ़िगर करें:
 
@@ -403,12 +408,12 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### कस्टम मीट्रिक्स
+### कस्टम मेट्रिक्स
 
-AI-विशिष्ट मीट्रिक्स को ट्रैक करें:
+AI-विशिष्ट मेट्रिक्स ट्रैक करें:
 
 ```python
-# एआई मॉडलों के लिए कस्टम टेलीमेट्री
+# एआई मॉडल के लिए कस्टम टेलीमेट्री
 import logging
 from applicationinsights import TelemetryClient
 
@@ -440,12 +445,12 @@ class AITelemetry:
         )
 ```
 
-### स्वास्थ्य जाँच
+### स्वास्थ्य जांच
 
 AI सेवा स्वास्थ्य निगरानी लागू करें:
 
 ```python
-# स्वास्थ्य जाँच एंडपॉइंट्स
+# स्वास्थ्य जांच एंडपॉइंट्स
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -455,7 +460,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # OpenAI कनेक्शन का परीक्षण
+        # OpenAI कनेक्शन का परीक्षण करें
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -471,32 +476,32 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## अगला कदम
+## अगले कदम
 
-1. **[Microsoft Foundry एकीकरण गाइड](microsoft-foundry-integration.md) की समीक्षा करें** सेवा एकीकरण पैटर्न के लिए
-2. **[AI कार्यशाला](ai-workshop-lab.md) पूरा करें** व्यावहारिक अनुभव के लिए
-3. **[प्रोडक्शन AI प्रथाएँ](production-ai-practices.md) लागू करें** उद्यम तैनाती के लिए
-4. **[AI समस्या निवारण गाइड](../chapter-07-troubleshooting/ai-troubleshooting.md) खोजें** सामान्य समस्याओं के लिए
+1. **[Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** में सेवा एकीकरण पैटर्न की समीक्षा करें
+2. **[AI Workshop Lab](ai-workshop-lab.md)** पूरा करें ताकि आपको व्यावहारिक अनुभव मिले
+3. **[Production AI Practices](production-ai-practices.md)** लागू करें एंटरप्राइज तैनाती के लिए
+4. **[AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** देखें सामान्य समस्याओं के लिए
 
 ## संसाधन
 
-- [Microsoft Foundry मॉडल उपलब्धता](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI प्रलेखन](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Microsoft Foundry Models मॉडल उपलब्धता](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI डाक्यूमेंटेशन](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Container Apps स्केलिंग](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [AI मॉडल लागत अनुकूलन](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **अध्याय नेविगेशन:**
-- **📚 पाठ्यक्रम मुख्य पृष्ठ**: [AZD शुरुआती के लिए](../../README.md)
+- **📚 कोर्स होम**: [AZD For Beginners](../../README.md)
 - **📖 वर्तमान अध्याय**: अध्याय 2 - AI-प्रथम विकास
-- **⬅️ पिछला**: [Microsoft Foundry एकीकरण](microsoft-foundry-integration.md)
-- **➡️ अगला**: [AI कार्यशाला](ai-workshop-lab.md)
-- **🚀 अगला अध्याय**: [अध्याय 3: कॉन्फ़िगरेशन](../chapter-03-configuration/configuration.md)
+- **⬅️ पिछला**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ अगला**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 अगला अध्याय**: [अध्याय 3: विन्यास](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**अस्वीकरण**:
-यह दस्तावेज़ AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) का उपयोग करके अनुवादित किया गया है। जबकि हम सटीकता के लिए प्रयासरत हैं, कृपया ध्यान दें कि स्वचालित अनुवादों में त्रुटियाँ या अशुद्धियाँ हो सकती हैं। मूल दस्तावेज़ को उसकी मूल भाषा में प्रामाणिक स्रोत माना जाना चाहिए। महत्वपूर्ण जानकारी के लिए, पेशेवर मानव अनुवाद की सलाह दी जाती है। इस अनुवाद के उपयोग से उत्पन्न किसी भी गलतफहमी या गलत व्याख्या के लिए हम उत्तरदायी नहीं हैं।
+**अस्वीकरण**:  
+इस दस्तावेज़ का अनुवाद AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) का उपयोग करके किया गया है। जबकि हम सटीकता के लिए प्रयासरत हैं, कृपया ध्यान रखें कि स्वचालित अनुवाद में त्रुटियां या अशुद्धियां हो सकती हैं। मूल दस्तावेज़ अपनी मूल भाषा में प्रामाणिक स्रोत माना जाना चाहिए। महत्वपूर्ण जानकारी के लिए, पेशेवर मानव अनुवाद की सिफारिश की जाती है। इस अनुवाद के उपयोग से उत्पन्न किसी भी गलतफहमी या गलत व्याख्या के लिए हम जिम्मेदार नहीं हैं।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

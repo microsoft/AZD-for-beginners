@@ -1,21 +1,23 @@
-# Chapter 6: デプロイ前の計画と検証
+# Chapter 6: Pre-Deployment Planning & Validation
 
-**📚 Course**: [AZD 入門](../../README.md) | **⏱️ Duration**: 1時間 | **⭐ Complexity**: 中級
+**📚 Course**: [AZD 初心者向け](../../README.md) | **⏱️ Duration**: 1 hour | **⭐ Complexity**: Intermediate
 
 ---
 
 ## Overview
 
-この章では、アプリケーションをデプロイする前の重要な計画と検証手順を解説します。適切な容量計画、SKUの選択、プレフライトチェックにより高額なミスを回避する方法を学びます。
+この章では、アプリケーションをデプロイする前の重要な計画と検証の手順を扱います。適切なキャパシティ計画、SKU選定、事前チェックにより高価な間違いを避ける方法を学びます。
+
+> 2026年3月に `azd 1.23.12` で検証済み。
 
 ## Learning Objectives
 
 この章を完了すると、以下ができるようになります:
 - デプロイ前にプレフライトチェックを実行する
-- 容量を計画し、リソース要件を見積もる
+- キャパシティを計画し、リソース要件を見積もる
 - コスト最適化のために適切なSKUを選択する
 - 監視のためにApplication Insightsを構成する
-- チームの連携パターンを理解する
+- チームの調整パターンを理解する
 
 ---
 
@@ -23,11 +25,11 @@
 
 | # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [事前チェック](preflight-checks.md) | デプロイ前に構成を検証する | 15分 |
-| 2 | [容量計画](capacity-planning.md) | リソース要件を見積もる | 20分 |
-| 3 | [SKU 選択](sku-selection.md) | 適切な価格帯を選択する | 15分 |
-| 4 | [Application Insights](application-insights.md) | 監視を構成する | 20分 |
-| 5 | [調整パターン](coordination-patterns.md) | チームのデプロイワークフロー | 15分 |
+| 1 | [Preflight Checks](preflight-checks.md) | デプロイ前に構成を検証する | 15 min |
+| 2 | [Capacity Planning](capacity-planning.md) | リソース要件を見積もる | 20 min |
+| 3 | [SKU Selection](sku-selection.md) | 適切な価格帯を選定する | 15 min |
+| 4 | [Application Insights](application-insights.md) | 監視を構成する | 20 min |
+| 5 | [Coordination Patterns](coordination-patterns.md) | チームのデプロイワークフロー | 15 min |
 
 ---
 
@@ -49,26 +51,26 @@ azd env get-values
 
 ---
 
-## ☑️ デプロイ前チェックリスト
+## ☑️ Pre-Deployment Checklist
 
-### `azd provision` の前に
+### Before `azd provision`
 
 - [ ] リージョンのクォータを確認済み
 - [ ] SKUが適切に選択されている
-- [ ] コスト見積もりを確認済み
-- [ ] ネーミング規則が一貫している
+- [ ] コスト見積りを確認済み
+- [ ] 命名規則が一貫している
 - [ ] セキュリティ/RBACが構成されている
 
-### `azd deploy` の前に
+### Before `azd deploy`
 
 - [ ] 環境変数が設定されている
-- [ ] シークレットが Key Vault に保存されている
-- [ ] 接続文字列が確認されている
+- [ ] Key Vault にシークレットがある
+- [ ] 接続文字列が検証されている
 - [ ] ヘルスチェックが構成されている
 
 ---
 
-## 💰 SKU 選択ガイド
+## 💰 SKU Selection Guide
 
 | Workload | Development | Production |
 |----------|-------------|------------|
@@ -91,12 +93,12 @@ azd env get-values
 ## 📖 Related Resources
 
 - [構成ガイド](../chapter-03-configuration/configuration.md)
-- [デプロイ ガイド](../chapter-04-infrastructure/deployment-guide.md)
+- [デプロイガイド](../chapter-04-infrastructure/deployment-guide.md)
 - [よくある問題](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責事項**:
-本文書はAI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性に努めていますが、自動翻訳には誤りや不正確さが含まれる場合があることをご了承ください。原文（原言語のドキュメント）を正式な出典とみなしてください。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の使用により生じた誤解や誤訳について、当方は責任を負いません。
+本書類はAI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性の確保に努めていますが、自動翻訳には誤りや不正確な表現が含まれる可能性があることをご留意ください。原文（原言語の文書）を正規の情報源とみなしてください。重要な情報については、専門の人間による翻訳をお勧めします。本翻訳の利用により生じたいかなる誤解や誤訳についても、当社は責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

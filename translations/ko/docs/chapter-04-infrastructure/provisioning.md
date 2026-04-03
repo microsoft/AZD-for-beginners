@@ -1,43 +1,43 @@
-# Provisioning Azure Resources with AZD
+# AZD로 Azure 리소스 프로비저닝
 
-**Chapter Navigation:**
-- **📚 강좌 홈**: [AZD For Beginners](../../README.md)
-- **📖 현재 챕터**: Chapter 4 - Infrastructure as Code & Deployment
-- **⬅️ 이전**: [Deployment Guide](deployment-guide.md)
-- **➡️ 다음 챕터**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
-- **🔧 관련**: [Chapter 6: Pre-Deployment Validation](../chapter-06-pre-deployment/capacity-planning.md)
+**챕터 탐색:**
+- **📚 코스 홈**: [AZD 초보자를 위한](../../README.md)
+- **📖 현재 챕터**: 챕터 4 - 인프라스트럭처 코드(IaC) 및 배포
+- **⬅️ 이전**: [배포 가이드](deployment-guide.md)
+- **➡️ 다음 챕터**: [챕터 5: 멀티 에이전트 AI 솔루션](../../examples/retail-scenario.md)
+- **🔧 관련**: [챕터 6: 사전 배포 검증](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## 소개
 
-이 종합 가이드는 Azure Developer CLI를 사용한 Azure 리소스 프로비저닝 및 관리에 대해 알아야 할 모든 것을 다룹니다. Bicep, ARM 템플릿, Terraform 및 Pulumi를 사용하여 기본 리소스 생성부터 엔터프라이즈급 인프라 아키텍처까지 인프라를 코드로 구현하는 방법을 배웁니다.
+이 종합 가이드는 Azure Developer CLI를 사용하여 Azure 리소스를 프로비저닝하고 관리하는 데 필요한 모든 내용을 다룹니다. Bicep, ARM 템플릿, Terraform 및 Pulumi를 사용하여 기본 리소스 생성부터 엔터프라이즈 수준의 고급 인프라 아키텍처까지 인프라스트럭처 코드(IaC) 패턴을 구현하는 방법을 배우세요.
 
 ## 학습 목표
 
 이 가이드를 완료하면 다음을 수행할 수 있습니다:
-- 인프라를 코드로(IaC) 원칙 및 Azure 리소스 프로비저닝 숙달
-- Azure Developer CLI에서 지원하는 다양한 IaC 제공자를 이해
-- 일반 애플리케이션 아키텍처를 위한 Bicep 템플릿 설계 및 구현
-- 리소스 매개변수, 변수 및 환경별 설정 구성
-- 네트워킹 및 보안을 포함한 고급 인프라 패턴 구현
-- 리소스 수명 주기, 업데이트 및 종속성 해결 관리
+- 인프라스트럭처 코드(IaC) 원칙과 Azure 리소스 프로비저닝을 마스터합니다.
+- Azure Developer CLI에서 지원하는 여러 IaC 제공자를 이해합니다.
+- 일반적인 애플리케이션 아키텍처를 위한 Bicep 템플릿을 설계하고 구현합니다.
+- 리소스 매개변수, 변수 및 환경별 설정을 구성합니다.
+- 네트워킹 및 보안을 포함한 고급 인프라 패턴을 구현합니다.
+- 리소스 수명 주기, 업데이트 및 의존성 해결을 관리합니다.
 
-## 학습 성과
+## 학습 결과
 
-완료 시 다음을 할 수 있습니다:
-- Bicep 및 ARM 템플릿을 사용하여 Azure 인프라 설계 및 프로비저닝
-- 적절한 리소스 종속성을 갖춘 복잡한 다중 서비스 아키텍처 구성
-- 여러 환경 및 구성에 대한 매개변수화된 템플릿 구현
-- 인프라 프로비저닝 문제 해결 및 배포 실패 해결
-- 인프라 설계에 Azure Well-Architected Framework 원칙 적용
-- 인프라 업데이트 관리 및 인프라 버전 관리 전략 구현
+완료 후 다음을 수행할 수 있습니다:
+- Bicep 및 ARM 템플릿을 사용하여 Azure 인프라를 설계하고 프로비저닝합니다.
+- 적절한 리소스 의존성을 갖춘 복잡한 다중 서비스 아키텍처를 구성합니다.
+- 여러 환경과 구성에 대한 매개변수화된 템플릿을 구현합니다.
+- 인프라 프로비저닝 문제를 진단하고 배포 실패를 해결합니다.
+- Azure Well-Architected Framework 원칙을 인프라 설계에 적용합니다.
+- 인프라 업데이트를 관리하고 인프라 버전 관리 전략을 구현합니다.
 
 ## 인프라 프로비저닝 개요
 
 Azure Developer CLI는 여러 Infrastructure as Code(IaC) 제공자를 지원합니다:
-- **Bicep** (권장) - Azure의 도메인 전용 언어
+- **Bicep** (권장) - Azure의 도메인 특화 언어
 - **ARM Templates** - JSON 기반 Azure Resource Manager 템플릿
 - **Terraform** - 멀티클라우드 인프라 도구
-- **Pulumi** - 프로그래밍 언어로 구현하는 최신 인프라 코드
+- **Pulumi** - 프로그래밍 언어로 구현하는 현대적 인프라 코드
 
 ## Azure 리소스 이해하기
 
@@ -49,11 +49,11 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### 애플리케이션을 위한 일반 Azure 서비스
-- **Compute**: App Service, Container Apps, Functions, Virtual Machines
-- **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Networking**: Virtual Network, Application Gateway, CDN
-- **Security**: Key Vault, Application Insights, Log Analytics
+### 애플리케이션을 위한 일반적인 Azure 서비스
+- <strong>컴퓨팅</strong>: App Service, Container Apps, Functions, Virtual Machines
+- <strong>스토리지</strong>: Storage Account, Cosmos DB, SQL Database, PostgreSQL
+- <strong>네트워킹</strong>: Virtual Network, Application Gateway, CDN
+- <strong>보안</strong>: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
 ## Bicep 인프라 템플릿
@@ -433,7 +433,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### SSL이 포함된 Application Gateway
+### SSL 적용 Application Gateway
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -496,7 +496,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 모니터링 및 관측성
+## 📊 모니터링 및 관찰성
 
 ### Application Insights
 ```bicep
@@ -563,7 +563,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ## 🔧 환경별 구성
 
-### 다양한 환경을 위한 매개변수 파일
+### 서로 다른 환경을 위한 매개변수 파일
 ```json
 // infra/main.parameters.dev.json
 {
@@ -755,42 +755,41 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 인프라 미리보기 및 검증 (NEW)
+## 🧪 인프라 미리보기 및 검증 (새로운)
 
 ### 배포 전에 인프라 변경 사항 미리보기
 
-`azd provision --preview` 기능은 리소스를 실제로 배포하기 전에 인프라 프로비저닝을 **시뮬레이션**할 수 있게 해줍니다. 이는 `terraform plan` 또는 `bicep what-if`와 유사한 개념으로, Azure 환경에 어떤 변경이 이루어질지에 대한 **드라이런 뷰**를 제공합니다.
+`azd provision --preview` 기능을 사용하면 리소스를 실제로 배포하기 전에 인프라 프로비저닝을 <strong>시뮬레이션</strong>할 수 있습니다. 이는 `terraform plan` 또는 `bicep what-if`와 유사하며 Azure 환경에 어떤 변경이 적용될지를 보여주는 <strong>드라이런 뷰</strong>를 제공합니다.
 
-#### 🛠️ 수행 내용
-- **IaC 템플릿 분석**(Bicep 또는 Terraform)
-- **리소스 변경 사항 미리보기 표시**: 추가, 삭제, 업데이트
-- **변경 사항을 적용하지 않음** — 읽기 전용이며 안전하게 실행 가능
+#### 🛠️ 수행 기능
+- **IaC 템플릿을 분석합니다** (Bicep 또는 Terraform)
+- **리소스 변경 사항의 미리보기 표시**: 추가, 삭제, 업데이트
+- **변경을 적용하지 않습니다** — 읽기 전용이며 안전하게 실행할 수 있습니다
 
-#### � 사용 사례
+#### 사용 사례
 ```bash
 # 배포 전에 인프라 변경 사항 미리보기
 azd provision --preview
 
-# 자세한 출력과 함께 미리보기
-azd provision --preview --output json
-
 # 특정 환경에 대한 미리보기
-azd provision --preview --environment production
+azd provision --preview -e production
 ```
 
-이 명령은 다음을 도와줍니다:
-- **리소스 커밋 전에 인프라 변경 사항 검증**
-- **개발 주기 초기에 잘못된 구성 발견**
-- **팀 환경에서 안전하게 협업**
-- **예상치 못한 권한 상승 없이 최소 권한 배포 보장**
+이 명령은 다음을 돕습니다:
+- <strong>리소스 커밋 전에 인프라 변경 사항을 검증</strong>합니다
+- <strong>개발 주기 초기에 잘못된 구성을 발견</strong>합니다
+- <strong>팀 환경에서 안전하게 협업</strong>할 수 있게 합니다
+- <strong>예상치 못한 상황 없이 최소 권한 배포를 보장</strong>합니다
 
-특히 다음과 같은 경우에 유용합니다:
+특히 다음의 경우에 유용합니다:
 - 복잡한 다중 서비스 환경에서 작업할 때
-- 프로덕션 인프라에 대한 변경을 수행할 때
+- 프로덕션 인프라를 변경할 때
 - PR 승인 전에 템플릿 수정을 검증할 때
-- 인프라 패턴을 신입 팀원에게 교육할 때
+- 신규 팀원에게 인프라 패턴을 교육할 때
 
-### 미리보기 예시 출력
+### 미리보기 출력 예시
+정확한 미리보기 출력은 제공자 및 프로젝트 구조에 따라 다르지만, 결과는 실제로 적용되기 전에 제안된 변경 사항을 명확히 식별해야 합니다.
+
 ```bash
 $ azd provision --preview
 
@@ -809,7 +808,6 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
@@ -819,13 +817,13 @@ The following resources will be destroyed:
 
 ### 안전한 리소스 업데이트
 ```bash
-# 인프라 변경 사항을 먼저 확인하세요 (권장)
+# 먼저 인프라 변경 사항을 미리 확인하세요(권장)
 azd provision --preview
 
 # 미리보기 확인 후 변경 사항을 적용하세요
 azd provision --confirm-with-no-prompt
 
-# 롤백하려면 Git을 사용하여 인프라 변경을 되돌리세요:
+# 롤백하려면 Git을 사용하여 인프라 변경 사항을 되돌리세요:
 git revert HEAD  # 마지막 인프라 커밋을 되돌리세요
 azd provision    # 이전 인프라 상태를 적용하세요
 ```
@@ -918,27 +916,27 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## 다음 단계
 
-- [Pre-deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - 리소스 가용성 검증
-- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - 인프라 문제 해결
-- [Debugging Guide](../chapter-07-troubleshooting/debugging.md) - 프로비저닝 문제 디버깅
-- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - 적절한 서비스 등급 선택
+- [사전 배포 계획](../chapter-06-pre-deployment/capacity-planning.md) - 리소스 가용성 검증
+- [일반적인 문제](../chapter-07-troubleshooting/common-issues.md) - 인프라 문제 해결
+- [디버깅 가이드](../chapter-07-troubleshooting/debugging.md) - 프로비저닝 문제 디버깅
+- [SKU 선택](../chapter-06-pre-deployment/sku-selection.md) - 적절한 서비스 티어 선택
 
 ## 추가 자료
 
-- [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Bicep 문서](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Resource Manager 템플릿](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure 아키텍처 센터](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**Navigation**
-- **이전 레슨**: [Deployment Guide](deployment-guide.md)
-- **다음 레슨**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
+<strong>탐색</strong>
+- **이전 레슨**: [배포 가이드](deployment-guide.md)
+- **다음 레슨**: [용량 계획](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **면책 조항**:
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있으나 자동 번역은 오류나 부정확성을 포함할 수 있음을 유의하시기 바랍니다. 원래 언어의 원문이 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우 전문 번역가에 의한 번역을 권장합니다. 본 번역의 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 최선을 다하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있음을 유의하시기 바랍니다. 원문(원어) 문서가 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우 전문적인 인간 번역을 권장합니다. 본 번역의 사용으로 인해 발생한 오해나 잘못된 해석에 대해서는 책임을 지지 않습니다.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

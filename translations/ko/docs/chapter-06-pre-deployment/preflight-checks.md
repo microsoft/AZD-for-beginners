@@ -1,7 +1,7 @@
 # AZD 배포를 위한 사전 점검
 
-**챕터 탐색:**
-- **📚 코스 홈**: [초보자를 위한 AZD](../../README.md)
+**장 챕터 탐색:**
+- **📚 코스 홈**: [AZD 초보자용](../../README.md)
 - **📖 현재 챕터**: 챕터 6 - 배포 전 검증 및 계획
 - **⬅️ 이전**: [SKU 선택](sku-selection.md)
 - **➡️ 다음 챕터**: [챕터 7: 문제 해결](../chapter-07-troubleshooting/common-issues.md)
@@ -9,57 +9,57 @@
 
 ## 소개
 
-이 포괄적인 가이드는 Azure Developer CLI 배포가 시작되기 전에 성공적인 배포를 보장하기 위한 사전 배포 검증 스크립트와 절차를 제공합니다. 인증, 리소스 가용성, 할당량, 보안 준수 및 성능 요구사항에 대한 자동화된 검사 구현 방법을 학습하여 배포 실패를 방지하고 배포 성공률을 최적화하세요.
+이 종합 가이드는 Azure Developer CLI 배포를 시작하기 전에 성공적인 배포를 보장하기 위한 사전 배포 검증 스크립트와 절차를 제공합니다. 인증, 리소스 가용성, 할당량, 보안 준수 및 성능 요구 사항에 대한 자동화된 점검을 구현하여 배포 실패를 방지하고 배포 성공률을 최적화하는 방법을 배우십시오.
 
 ## 학습 목표
 
-이 가이드를 완료하면 다음을 할 수 있습니다:
-- 자동화된 사전 배포 검증 기술 및 스크립트 마스터
-- 인증, 권한 및 할당량에 대한 종합적인 검사 전략 이해
+이 가이드를 완료하면 다음을 수행할 수 있습니다:
+- 자동화된 사전 배포 검증 기법과 스크립트를 숙달
+- 인증, 권한 및 할당량에 대한 포괄적 점검 전략 이해
 - 리소스 가용성 및 용량 검증 절차 구현
-- 조직 정책을 위한 보안 및 규정 준수 검사 구성
+- 조직 정책을 위한 보안 및 준수 검사 구성
 - 비용 추정 및 예산 검증 워크플로 설계
-- CI/CD 파이프라인용 맞춤형 사전 점검 자동화 생성
+- CI/CD 파이프라인을 위한 맞춤형 사전 점검 자동화 생성
 
 ## 학습 성과
 
 완료 후 다음을 수행할 수 있습니다:
-- 포괄적인 사전 점검 스크립트 생성 및 실행
-- 다양한 배포 시나리오에 대한 자동화된 검사 워크플로 설계
+- 포괄적인 사전 비행(Pre-flight) 검증 스크립트 생성 및 실행
+- 다양한 배포 시나리오에 대한 자동화된 점검 워크플로 설계
 - 환경별 검증 절차 및 정책 구현
-- 배포 준비 상태에 대한 사전 모니터링 및 경보 구성
-- 사전 배포 문제를 해결하고 시정 조치 구현
+- 배포 준비 상태를 위한 사전 모니터링 및 알림 구성
+- 배포 전 문제를 해결하고 시정 조치 구현
 - 사전 점검을 DevOps 파이프라인 및 자동화 워크플로에 통합
 
 ## 목차
 
-- [개요](../../../../docs/chapter-06-pre-deployment)
-- [자동화된 사전 점검 스크립트](../../../../docs/chapter-06-pre-deployment)
-- [수동 검증 체크리스트](../../../../docs/chapter-06-pre-deployment)
-- [환경 검증](../../../../docs/chapter-06-pre-deployment)
-- [리소스 검증](../../../../docs/chapter-06-pre-deployment)
-- [보안 및 규정 준수 검사](../../../../docs/chapter-06-pre-deployment)
-- [성능 및 용량 계획](../../../../docs/chapter-06-pre-deployment)
-- [일반적인 문제 해결](../../../../docs/chapter-06-pre-deployment)
+- [개요](#개요)
+- [자동화된 사전 점검 스크립트](#자동화된-사전-점검-스크립트)
+- [수동 검증 체크리스트](#codeblock1)
+- [환경 검증](#✅-백업-및-복구)
+- [리소스 검증](#프로덕션-환경-검증)
+- [보안 및 준수 검사](#security--compliance-checks)
+- [성능 및 용량 계획](#performance--capacity-planning)
+- [일반적인 문제 해결](#troubleshooting-common-issues)
 
 ---
 
 ## 개요
 
-사전 점검은 배포 전에 수행되는 필수 검증으로 다음을 확인합니다:
+사전 점검은 배포 전에 수행되는 필수 검증으로 다음을 보장합니다:
 
-- **리소스 가용성** 및 대상 지역의 할당량
-- **인증 및 권한**이 올바르게 구성되어 있는지
+- **대상 지역의 리소스 가용성** 및 할당량
+- <strong>인증 및 권한</strong>이 올바르게 구성되어 있는지
 - **템플릿 유효성** 및 매개변수 정확성
 - **네트워크 연결성** 및 종속성
-- 조직 정책에 따른 **보안 준수**
-- 예산 제약 내의 **비용 추정**
+- **조직 정책에 따른 보안 준수**
+- **예산 범위 내의 비용 추정**
 
-### 사전 점검 실행 시기
+### 사전 점검을 실행해야 할 때
 
-- **새 환경에 대한 첫 배포 전**
-- **중요한 템플릿 변경 후**
-- **프로덕션 배포 전**
+- **새 환경에 대한 첫 배포 이전**
+- **중대한 템플릿 변경 후**
+- **프로덕션 배포 이전**
 - **Azure 지역 변경 시**
 - **CI/CD 파이프라인의 일부로**
 
@@ -67,7 +67,7 @@
 
 ## 자동화된 사전 점검 스크립트
 
-### PowerShell 사전 점검 도구
+### PowerShell 사전 점검기
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -100,7 +100,7 @@ param(
     [switch]$Detailed
 )
 
-# 출력의 색상 코딩
+# 출력 색상 표시
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -177,7 +177,7 @@ function Test-Authentication {
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # 구독 접근 권한 검증
+        # 구독 액세스 확인
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -194,7 +194,7 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # 현재 사용자 역할 할당 조회
+        # 현재 사용자의 역할 할당 가져오기
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
@@ -257,7 +257,7 @@ function Test-QuotasAndLimits {
             }
         }
         
-        # 앱 서비스 제한 확인
+        # App Service 제한 확인
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
             if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
@@ -310,7 +310,7 @@ function Test-NetworkConnectivity {
         }
     }
     
-    # DNS 조회 테스트
+    # DNS 해석 테스트
     try {
         $dnsResult = Resolve-DnsName "management.azure.com" -ErrorAction Stop
         Write-Status "DNS resolution" "Success" "Resolved successfully"
@@ -326,7 +326,7 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # azure.yaml 파일 존재 확인
+    # azure.yaml 존재 여부 확인
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
@@ -335,7 +335,7 @@ function Test-TemplateValidation {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # 서비스 검증
+            # 서비스 유효성 검사
             if ($azureYaml.services) {
                 $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
@@ -360,7 +360,7 @@ function Test-TemplateValidation {
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # main.bicep가 존재하면 검증
+            # main.bicep가 존재하면 유효성 검사
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 새로 추가됨: 인프라 미리보기 테스트(안전한 드라이런)
+    # 🧪 신규: 인프라 미리보기 테스트(안전한 드라이런)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -403,7 +403,7 @@ function Test-RegionalAvailability {
     Write-Host "`n${Blue}=== Regional Availability Check ===${Reset}"
     
     try {
-        # 지역이 유효한지 확인
+        # 위치가 유효한지 확인
         $locations = az account list-locations --output json | ConvertFrom-Json
         $validLocation = $locations | Where-Object { $_.name -eq $Location -or $_.displayName -eq $Location }
         
@@ -415,7 +415,7 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # 리전에서 서비스 이용 가능 여부 확인
+        # 리전에서 서비스 가용성 확인
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
@@ -446,7 +446,7 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # 기본 비용 추정(정확한 추정은 Azure 가격 책정 API 필요)
+    # 기본 비용 추정(정확한 추정에는 Azure 가격 API 필요)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # 관리형 아이덴티티 사용 여부 확인
+        # 관리형 ID 사용 여부 확인
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -561,11 +561,11 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash 사전 점검 도구
+### Bash 사전 점검기
 
 ```bash
 #!/bin/bash
-# Unix/Linux 시스템을 위한 사전 점검용 Bash 버전
+# Unix/Linux 시스템용 사전 점검 Bash 버전
 
 set -euo pipefail
 
@@ -665,7 +665,7 @@ check_template_validation() {
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
-        # 기본 YAML 유효성 검사
+        # 기본 YAML 검증
         if python3 -c "import yaml; yaml.safe_load(open('azure.yaml'))" 2>/dev/null; then
             print_status "azure.yaml parsing" "success"
         else
@@ -683,7 +683,7 @@ check_template_validation() {
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # 존재하는 경우 main.bicep 검증
+            # main.bicep가 존재하면 유효성 검사
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +706,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # 위치가 유효한지 확인
+    # 지역이 유효한지 확인
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -755,7 +755,7 @@ main() {
         esac
     done
     
-    # 필수 매개변수 검증
+    # 필수 매개변수 유효성 검사
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -768,7 +768,7 @@ main() {
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
     
-    # 검사 실행
+    # 점검 실행
     local all_passed=true
     
     check_prerequisites || all_passed=false
@@ -800,61 +800,61 @@ main "$@"
 
 ### 배포 전 체크리스트
 
-이 체크리스트를 출력하여 배포 전에 각 항목을 확인하세요:
+이 체크리스트를 출력하여 배포 전에 각 항목을 확인하십시오:
 
 #### ✅ 환경 설정
-- [ ] AZD CLI가 설치되어 있고 최신 버전으로 업데이트되어 있음
+- [ ] AZD CLI가 설치되어 있고 최신 버전으로 업데이트됨
 - [ ] Azure CLI가 설치되어 있고 인증됨
-- [ ] 올바른 Azure 구독이 선택되어 있음
-- [ ] 환경 이름이 고유하며 명명 규칙을 따름
+- [ ] 올바른 Azure 구독이 선택됨
+- [ ] 환경 이름이 고유하며 명명 규칙을 준수함
 - [ ] 대상 리소스 그룹이 식별되었거나 생성 가능함
 
 #### ✅ 인증 및 권한
 - [ ] `azd auth login`으로 성공적으로 인증됨
-- [ ] 사용자가 대상 구독/리소스 그룹에 대한 Contributor 역할을 보유함
-- [ ] CI/CD를 위한 서비스 프린시펄 구성(해당되는 경우)
-- [ ] 만료된 인증서 또는 자격 증명 없음
+- [ ] 사용자가 대상 구독/리소스 그룹에 대해 Contributor 역할을 보유함
+- [ ] CI/CD용 서비스 프린시펄이 구성되어 있음(해당되는 경우)
+- [ ] 만료된 인증서나 자격 증명이 없음
 
 #### ✅ 템플릿 검증
-- [ ] `azure.yaml`가 존재하고 유효한 YAML임
-- [ ] azure.yaml에 정의된 모든 서비스에 해당하는 소스 코드가 있음
+- [ ] `azure.yaml` 파일이 존재하며 유효한 YAML임
+- [ ] azure.yaml에 정의된 모든 서비스에 해당 소스 코드가 존재함
 - [ ] `infra/` 디렉터리에 Bicep 템플릿이 존재함
-- [ ] `main.bicep`가 오류 없이 컴파일됨 (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 인프라 미리보기가 성공적으로 실행됨 (`azd provision --preview`)
+- [ ] `main.bicep`가 오류 없이 컴파일됨(`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 인프라 미리보기가 성공적으로 실행됨(`azd provision --preview`)
 - [ ] 모든 필수 매개변수에 기본값이 있거나 제공될 예정임
-- [ ] 템플릿에 하드코딩된 비밀값 없음
+- [ ] 템플릿에 하드코딩된 비밀이 없음
 
 #### ✅ 리소스 계획
 - [ ] 대상 Azure 지역이 선택되고 검증됨
-- [ ] 대상 지역에서 필요한 Azure 서비스 사용 가능
+- [ ] 대상 지역에서 필요한 Azure 서비스가 사용 가능함
 - [ ] 계획된 리소스에 대해 충분한 할당량이 있음
-- [ ] 리소스 명명 충돌 확인됨
-- [ ] 리소스 간 종속성 이해됨
+- [ ] 리소스 이름 충돌 여부가 확인됨
+- [ ] 리소스 간 종속성이 이해됨
 
 #### ✅ 네트워크 및 보안
-- [ ] Azure 엔드포인트에 대한 네트워크 연결 확인됨
-- [ ] 필요 시 방화벽/프록시 설정 구성됨
-- [ ] 비밀 관리를 위해 Key Vault 구성됨
-- [ ] 가능한 경우 관리형 ID 사용됨
-- [ ] 웹 애플리케이션에 대해 HTTPS 적용 활성화됨
+- [ ] Azure 엔드포인트에 대한 네트워크 연결이 검증됨
+- [ ] 필요한 경우 방화벽/프록시 설정이 구성됨
+- [ ] 비밀 관리를 위해 Key Vault가 구성됨
+- [ ] 가능하면 관리형 ID가 사용됨
+- [ ] 웹 애플리케이션에 대해 HTTPS 적용이 활성화됨
 
 #### ✅ 비용 관리
-- [ ] Azure 가격 계산기를 사용하여 비용 추정 계산됨
-- [ ] 필요한 경우 예산 알림 구성됨
-- [ ] 환경 유형에 적합한 SKU 선택됨
-- [ ] 프로덕션 워크로드에 대해 예약 용량 고려됨
+- [ ] Azure 가격 계산기를 사용하여 비용 추정이 계산됨
+- [ ] 필요한 경우 예산 알림이 구성됨
+- [ ] 환경 유형에 적합한 SKU가 선택됨
+- [ ] 프로덕션 워크로드를 위해 예약 용량을 고려함
 
 #### ✅ 모니터링 및 관찰성
-- [ ] 템플릿에 Application Insights 구성됨
-- [ ] Log Analytics 작업 영역 계획됨
-- [ ] 중요 지표에 대한 경고 규칙 정의됨
-- [ ] 애플리케이션에 헬스 체크 엔드포인트 구현됨
+- [ ] 템플릿에 Application Insights가 구성됨
+- [ ] Log Analytics 작업 영역이 계획됨
+- [ ] 중요한 지표에 대한 경고 규칙이 정의됨
+- [ ] 애플리케이션에 헬스 체크 엔드포인트가 구현됨
 
 #### ✅ 백업 및 복구
-- [ ] 데이터 리소스에 대한 백업 전략 정의됨
-- [ ] 목표 복구 시간(RTO) 문서화됨
-- [ ] 목표 복구 시점(RPO) 문서화됨
-- [ ] 프로덕션에 대한 재해 복구 계획 수립됨
+- [ ] 데이터 리소스에 대한 백업 전략이 정의됨
+- [ ] 목표 복구 시간(RTO)이 문서화됨
+- [ ] 목표 복구 지점(RPO)이 문서화됨
+- [ ] 프로덕션을 위한 재해 복구 계획이 마련됨
 
 ---
 
@@ -869,7 +869,7 @@ main "$@"
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # 개발 친화적 구성 확인
+    # 개발 친화적인 구성 확인
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
@@ -896,7 +896,7 @@ validate_dev_environment() {
 
 ```bash
 #!/bin/bash
-# 프로덕션 환경에 대한 특정 유효성 검사
+# 프로덕션 환경에 특화된 검증
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
@@ -1058,7 +1058,7 @@ if __name__ == "__main__":
 
 ---
 
-## 보안 및 규정 준수 검사
+## 보안 및 준수 검사
 
 ### 보안 검증 스크립트
 
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # HTTPS 강제 적용 여부 확인
+    # HTTPS 강제 적용 확인
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1103,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # 공개 액세스 제한 여부 확인
+    # 공개 액세스 제한 확인
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1124,14 +1124,14 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # 데이터 암호화 여부 확인
+    # 데이터 암호화 확인
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # 감사 로깅 여부 확인
+    # 감사 로깅 확인
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
@@ -1295,53 +1295,53 @@ steps:
 ### ✅ 사전 점검 모범 사례
 
 1. **가능한 한 자동화**
-   - CI/CD 파이프라인에 체크 통합
+   - 검사를 CI/CD 파이프라인에 통합
    - 반복 가능한 검증을 위해 스크립트 사용
    - 감사 추적을 위해 결과 저장
 
 2. **환경별 검증**
-   - 개발/스테이징/프로덕션에 대해 다른 검증 수행
-   - 환경별 적절한 보안 요구 사항
+   - 개발/스테이징/프로덕션에 대한 다른 검사
+   - 환경별 적절한 보안 요구사항
    - 비프로덕션 환경에 대한 비용 최적화
 
 3. **포괄적 범위**
    - 인증 및 권한
    - 리소스 할당량 및 가용성
-   - 템플릿 검증 및 문법
-   - 보안 및 규정 준수 요구사항
+   - 템플릿 검증 및 구문
+   - 보안 및 준수 요구사항
 
 4. **명확한 보고**
    - 색상 코드 상태 표시기
-   - 개선 조치가 포함된 상세 오류 메시지
+   - 시정 조치가 포함된 자세한 오류 메시지
    - 빠른 평가를 위한 요약 보고서
 
-5. **빠르게 실패(Fail Fast)**
-   - 중요 검사 실패 시 배포 중단
+5. **빠른 실패**
+   - 중요 검사가 실패하면 배포 중단
    - 해결을 위한 명확한 안내 제공
-   - 검사를 쉽게 재실행할 수 있도록 구성
+   - 검사를 쉽게 다시 실행할 수 있도록 함
 
-### 일반적인 사전 점검의 함정
+### 일반적인 사전 점검 함정
 
-1. '빠른' 배포를 위해 검증을 건너뜀
-2. 배포 전 권한 확인 불충분
-3. 배포 실패까지 할당량 제한 무시
-4. CI/CD 파이프라인에서 템플릿 검증 누락
-5. 프로덕션 환경에 대한 보안 검증 누락
-6. 부적절한 비용 추정으로 예산 초과 발생
-
----
-
-**팁**: 실제 배포 작업 전에 CI/CD 파이프라인에서 사전 점검을 별도의 작업으로 실행하세요. 이렇게 하면 문제를 조기에 발견하고 개발자에게 더 빠른 피드백을 제공합니다.
+1. **"빠른" 배포를 위해 검증을 건너뛰는 것**
+2. **배포 전 권한 확인 부족**
+3. **배포 실패 전까지 할당량 한도를 무시하는 것**
+4. **CI/CD 파이프라인에서 템플릿을 검증하지 않는 것**
+5. **프로덕션 환경에 대한 보안 검증 누락**
+6. **예상치 못한 예산 초과로 이어지는 부적절한 비용 추정**
 
 ---
 
-**탐색**
-- **이전 레슨**: [SKU 선택](sku-selection.md)
-- **다음 레슨**: [치트 시트](../../resources/cheat-sheet.md)
+**프로 팁**: 실제 배포 작업 전에 CI/CD 파이프라인에서 사전 점검을 별도의 작업으로 실행하십시오. 이렇게 하면 문제를 조기에 발견할 수 있고 개발자에게 더 빠른 피드백을 제공합니다.
+
+---
+
+<strong>탐색</strong>
+- **이전 수업**: [SKU 선택](sku-selection.md)
+- **다음 수업**: [치트 시트](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-면책 사항:
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 노력하고 있으나 자동 번역에는 오류나 부정확성이 포함될 수 있음을 유의해 주십시오. 원문의 원어본을 권위 있는 출처로 간주해야 합니다. 중요한 내용의 경우 전문적인 인간 번역을 권장합니다. 이 번역의 사용으로 인해 발생하는 오해나 잘못된 해석에 대해서는 당사가 책임을 지지 않습니다.
+**면책 사항**:
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 기하기 위해 노력하고 있지만, 자동 번역에는 오류나 부정확성이 포함될 수 있음을 유의하시기 바랍니다. 원문은 해당 언어의 원본 문서가 권위 있는 자료로 간주되어야 합니다. 중요한 정보의 경우 전문 번역가의 번역을 권장합니다. 본 번역의 사용으로 인해 발생하는 모든 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

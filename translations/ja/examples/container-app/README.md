@@ -1,48 +1,50 @@
-# AZD を使った Container App デプロイの例
+# AZD を使ったコンテナ アプリのデプロイ例
 
-このディレクトリには Azure Developer CLI (AZD) を使用して Azure Container Apps にコンテナ化されたアプリケーションをデプロイするための包括的な例が含まれています。これらの例は実際のパターン、ベストプラクティス、および本番環境向けの構成を示します。
+このディレクトリには、Azure Developer CLI (AZD) を使用して Azure Container Apps にコンテナ化されたアプリケーションをデプロイするための包括的な例が含まれています。これらの例は実際のパターン、ベストプラクティス、および本番環境向けの設定を示します。
 
-## 📚 Table of Contents
+## 📚 目次
 
-- [概要](#overview)
-- [前提条件](#prerequisites)
-- [クイックスタートの例](#quick-start-examples)
-- [本番環境の例](#production-examples)
-- [高度なパターン](#advanced-patterns)
-- [ベストプラクティス](#best-practices)
+- [Overview](#overview)
+- [Prerequisites](#prerequisites)
+- [Quick Start Examples](#quick-start-examples)
+- [Production Examples](#production-examples)
+- [Advanced Patterns](#advanced-patterns)
+- [Best Practices](#best-practices)
 
 ## Overview
 
-Azure Container Apps は、インフラを管理することなくマイクロサービスやコンテナ化アプリケーションを実行できるフルマネージドのサーバーレスコンテナプラットフォームです。AZD と組み合わせることで、以下が得られます:
+Azure Container Apps は、インフラストラクチャを管理することなくマイクロサービスやコンテナ化されたアプリケーションを実行できるフルマネージドのサーバーレスコンテナプラットフォームです。AZD と組み合わせると、次の利点があります:
 
-- <strong>簡素化されたデプロイ</strong>: 単一のコマンドでインフラとコンテナをデプロイ
-- <strong>自動スケーリング</strong>: HTTP トラフィックやイベントに基づきゼロからスケールアウト可能
+- <strong>簡素化されたデプロイ</strong>: 単一コマンドでインフラ付きのコンテナをデプロイ
+- <strong>自動スケーリング</strong>: HTTP トラフィックやイベントに基づいてゼロからのスケールやスケールアウト
 - <strong>統合されたネットワーキング</strong>: 組み込みのサービスディスカバリとトラフィックスプリッティング
-- **マネージド アイデンティティ**: Azure リソースへの安全な認証
+- **マネージド ID**: Azure リソースへの安全な認証
 - <strong>コスト最適化</strong>: 使用したリソースに対してのみ課金
 
 ## Prerequisites
 
-開始する前に、次を確認してください：
+開始する前に、次を確認してください:
 
 ```bash
-# AZDのインストールを確認
+# AZD のインストールを確認
 azd version
 
-# Azure CLIのインストールを確認
+# Azure CLI のインストールを確認
 az version
 
-# Dockerのインストールを確認（カスタムイメージをビルドするため）
+# Docker のインストールを確認 (カスタムイメージのビルド用)
 docker --version
 
-# Azureにログイン
+# AZD デプロイ用に認証を行う
 azd auth login
+
+# オプション: az コマンドを直接実行する予定がある場合は Azure CLI にサインインしてください
 az login
 ```
 
 **必要な Azure リソース:**
 - 有効な Azure サブスクリプション
-- リソースグループ作成権限
+- リソースグループ作成の権限
 - Container Apps 環境へのアクセス
 
 ## Quick Start Examples
@@ -68,7 +70,7 @@ services:
 **デプロイ手順:**
 
 ```bash
-# テンプレートから初期化する
+# テンプレートから初期化
 azd init --template todo-python-mongo
 
 # インフラをプロビジョニングしてデプロイする
@@ -80,14 +82,14 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
 **主な機能:**
-- 0 から 10 レプリカまでの自動スケーリング
-- ヘルスプローブとライブネスチェック
+- 0 から 10 レプリカへのオートスケーリング
+- ヘルスプローブとライヴネスチェック
 - 環境変数の注入
-- Application Insights 統合
+- Application Insights との統合
 
 ### 2. Node.js Express API
 
-MongoDB 統合を用いた Node.js バックエンドをデプロイします。
+MongoDB 統合を伴う Node.js バックエンドをデプロイします。
 
 ```bash
 # Node.js API テンプレートを初期化する
@@ -100,7 +102,7 @@ azd env set COLLECTION_NAME todos
 # デプロイする
 azd up
 
-# Azure Monitorでログを表示する
+# Azure Monitor を介してログを表示する
 azd monitor --logs
 ```
 
@@ -149,7 +151,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 3. 静的フロントエンド + API バックエンド
 
-React フロントエンドと API バックエンドを持つフルスタックアプリケーションをデプロイします。
+React フロントエンドと API バックエンドを備えたフルスタックアプリケーションをデプロイします。
 
 ```bash
 # フルスタックテンプレートを初期化する
@@ -167,11 +169,11 @@ azd show --output json | jq -r '.services.web.endpoint' | xargs start
 
 ## Production Examples
 
-### 例 1: マイクロサービスアーキテクチャ
+### Example 1: Microservices Architecture
 
 <strong>シナリオ</strong>: 複数のマイクロサービスを持つ E コマースアプリケーション
 
-**ディレクトリ構成:**
+**ディレクトリ構造:**
 ```
 microservices-demo/
 ├── azure.yaml
@@ -213,29 +215,29 @@ services:
 
 **デプロイ:**
 ```bash
-# プロジェクトを初期化
+# プロジェクトを初期化する
 azd init
 
-# 本番環境を設定
+# 本番環境を設定する
 azd env new production
 
-# 本番設定を構成
+# 本番設定を構成する
 azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
 
-# すべてのサービスを展開
+# すべてのサービスをデプロイする
 azd up
 
-# 展開を監視
+# デプロイを監視する
 azd monitor --overview
 ```
 
-### 例 2: AI 搭載コンテナアプリ
+### Example 2: AI-Powered Container App
 
-<strong>シナリオ</strong>: Microsoft Foundry Models 統合を備えた AI チャットアプリケーション
+<strong>シナリオ</strong>: Microsoft Foundry Models と統合された AI チャットアプリケーション
 
-**File: src/ai-chat/app.py**
+**ファイル: src/ai-chat/app.py**
 ```python
 from flask import Flask, request, jsonify
 from azure.identity import DefaultAzureCredential
@@ -244,7 +246,7 @@ import openai
 
 app = Flask(__name__)
 
-# 安全なアクセスのためにマネージドIDを使用する
+# 安全なアクセスのためにマネージド ID を使用する
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -253,7 +255,7 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # Key Vault から OpenAI のキーを取得する
+    # Key Vault から OpenAI キーを取得する
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
@@ -268,7 +270,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-**File: azure.yaml**
+**ファイル: azure.yaml**
 ```yaml
 name: ai-chat-app
 services:
@@ -278,7 +280,7 @@ services:
     host: containerapp
 ```
 
-**File: infra/main.bicep**
+**ファイル: infra/main.bicep**
 ```bicep
 param location string = resourceGroup().location
 param environmentName string
@@ -320,13 +322,13 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**Deployment Commands:**
+**デプロイコマンド:**
 ```bash
 # 環境を設定する
 azd init --template ai-chat-app
 azd env new dev
 
-# OpenAIを設定する
+# OpenAI を設定する
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4.1"
 
@@ -339,11 +341,11 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### 例 3: キュー処理を行うバックグラウンドワーカー
+### Example 3: Background Worker with Queue Processing
 
-<strong>シナリオ</strong>: メッセージキューを使用した注文処理システム
+<strong>シナリオ</strong>: メッセージキューを使った注文処理システム
 
-**ディレクトリ構成:**
+**ディレクトリ構造:**
 ```
 queue-worker/
 ├── azure.yaml
@@ -360,7 +362,7 @@ queue-worker/
     └── worker/
 ```
 
-**File: src/worker/processor.py**
+**ファイル: src/worker/processor.py**
 ```python
 import os
 from azure.storage.queue import QueueClient
@@ -381,14 +383,14 @@ def process_orders():
             # 処理順序
             print(f"Processing order: {message.content}")
             
-            # 完全なメッセージ
+            # 完了メッセージ
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
     process_orders()
 ```
 
-**File: azure.yaml**
+**ファイル: azure.yaml**
 ```yaml
 name: order-processing
 services:
@@ -422,10 +424,10 @@ az containerapp update \
 
 ## Advanced Patterns
 
-### パターン 1: ブルーグリーンデプロイメント
+### パターン 1: ブルー/グリーンデプロイ
 
 ```bash
-# トラフィックを受けない新しいリビジョンを作成する
+# トラフィックを割り当てずに新しいリビジョンを作成する
 azd deploy api --revision-suffix blue --no-traffic
 
 # 新しいリビジョンをテストする
@@ -437,16 +439,16 @@ az containerapp ingress traffic set \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# 完全に青へ切り替える
+# 青へ完全に切り替える
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
 
-### パターン 2: AZD を使ったカナリアデプロイメント
+### パターン 2: AZD を使ったカナリアデプロイ
 
-**File: .azure/dev/config.json**
+**ファイル: .azure/dev/config.json**
 ```json
 {
   "deploymentStrategy": "canary",
@@ -463,7 +465,7 @@ az containerapp ingress traffic set \
 #!/bin/bash
 # deploy-canary.sh
 
-# 新しいリビジョンをトラフィックの10%でデプロイする
+# トラフィックの10%で新しいリビジョンをデプロイする
 azd deploy api --revision-mode multiple
 
 # メトリクスを監視する
@@ -481,9 +483,9 @@ for i in {20..100..10}; do
 done
 ```
 
-### パターン 3: マルチリージョンデプロイメント
+### パターン 3: マルチリージョンデプロイ
 
-**File: azure.yaml**
+**ファイル: azure.yaml**
 ```yaml
 name: global-app
 services:
@@ -497,7 +499,7 @@ services:
       - southeastasia
 ```
 
-**File: infra/multi-region.bicep**
+**ファイル: infra/multi-region.bicep**
 ```bicep
 param regions array = ['eastus', 'westeurope', 'southeastasia']
 
@@ -538,7 +540,7 @@ azd show --output json | jq '.services.api.endpoints'
 
 ### パターン 4: Dapr 統合
 
-**File: infra/app/dapr-enabled.bicep**
+**ファイル: infra/app/dapr-enabled.bicep**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: 'dapr-app'
@@ -573,14 +575,14 @@ app = Flask(__name__)
 @app.route('/orders', methods=['POST'])
 def create_order():
     with DaprClient() as client:
-        # 状態を保存する
+        # 状態を保存
         client.save_state(
             store_name='statestore',
             key='order-123',
             value={'status': 'pending'}
         )
         
-        # イベントを発行する
+        # イベントを発行
         client.publish_event(
             pubsub_name='pubsub',
             topic_name='orders',
@@ -673,7 +675,7 @@ azd monitor --logs
 # または Container Apps 用の Azure CLI を使用する:
 az containerapp logs show --name api --resource-group rg-myapp --follow
 
-# メトリックを監視する
+# メトリクスを監視する
 azd monitor --live
 
 # アラートを作成する
@@ -688,7 +690,7 @@ az monitor metrics alert create \
 ### 5. コスト最適化
 
 ```bash
-# 未使用時はスケールをゼロにする
+# 使用していないときはスケールをゼロにする
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -737,10 +739,10 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## 共通コマンド参照
+## Common Commands Reference
 
 ```bash
-# 新しいコンテナアプリプロジェクトを初期化する
+# 新しいコンテナ アプリ プロジェクトを初期化する
 azd init --template <template-name>
 
 # インフラとアプリケーションをデプロイする
@@ -766,12 +768,12 @@ azd monitor --overview
 azd down --force --purge
 ```
 
-## トラブルシューティング
+## Troubleshooting
 
 ### 問題: コンテナが起動しない
 
 ```bash
-# Azure CLI を使用してログを確認する
+# Azure CLIでログを確認する
 az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
 # コンテナのイベントを表示する
@@ -788,13 +790,13 @@ docker run -p 8000:8000 api:local
 ### 問題: コンテナアプリのエンドポイントにアクセスできない
 
 ```bash
-# ingress の設定を確認する
+# Ingress の構成を確認する
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# 内部の ingress が有効か確認する
+# 内部イングレスが有効かどうかを確認する
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
@@ -819,29 +821,29 @@ az containerapp update \
 
 ## 追加のリソースと例
 - [マイクロサービスの例](./microservices/README.md)
-- [Simple Flash API の例](./simple-flask-api/README.md)
+- [シンプル Flash API の例](./simple-flask-api/README.md)
 - [Azure Container Apps ドキュメント](https://learn.microsoft.com/azure/container-apps/)
-- [AZD テンプレートギャラリー](https://azure.github.io/awesome-azd/)
+- [AZD テンプレート ギャラリー](https://azure.github.io/awesome-azd/)
 - [Container Apps サンプル](https://github.com/Azure-Samples/container-apps-samples)
 - [Bicep テンプレート](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-## 貢献
+## 貢献方法
 
 新しいコンテナアプリの例を追加するには:
 
-1. 例を含む新しいサブディレクトリを作成する
+1. 新しいサブディレクトリを作成して例を追加する
 2. 完全な `azure.yaml`、`infra/`、および `src/` ファイルを含める
-3. デプロイ手順を含む包括的な README を追加する
+3. デプロイ手順を記載した包括的な README を追加する
 4. `azd up` でデプロイをテストする
-5. プルリクエストを送る
+5. プルリクエストを送信する
 
 ---
 
-**助けが必要ですか？** サポートや質問のために [Microsoft Foundry の Discord](https://discord.gg/microsoft-azure) コミュニティに参加してください。
+**お困りですか？** サポートや質問のために [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) コミュニティに参加してください。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責事項**:
-本書はAI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確さを期していますが、自動翻訳は誤りや不正確な箇所を含む可能性があることにご注意ください。原文（原言語）の文書を権威ある情報源とみなしてください。重要な情報については、専門の翻訳者による翻訳を推奨します。本翻訳の利用に起因するいかなる誤解や誤訳についても、当社は責任を負いません。
+この文書は AI 翻訳サービス [Co-op トランスレーター](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性には努めていますが、自動翻訳には誤りや不正確な箇所が含まれる場合があることにご留意ください。原文（原言語）を正式な情報源と見なすべきです。重要な情報については、専門の人による翻訳をお勧めします。本翻訳の利用に起因する誤解や誤訳について、当方は責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

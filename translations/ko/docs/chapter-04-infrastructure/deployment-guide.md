@@ -2,81 +2,81 @@
 
 **챕터 내비게이션:**
 - **📚 코스 홈**: [초보자를 위한 AZD](../../README.md)
-- **📖 현재 챕터**: 4장 - 코드형 인프라 및 배포
-- **⬅️ 이전 챕터**: [3장: 구성](../chapter-03-configuration/configuration.md)
+- **📖 현재 챕터**: 챕터 4 - 인프라스트럭처를 코드로(IaC) 및 배포
+- **⬅️ 이전 챕터**: [챕터 3: 구성](../chapter-03-configuration/configuration.md)
 - **➡️ 다음**: [리소스 프로비저닝](provisioning.md)
-- **🚀 다음 챕터**: [5장: 멀티 에이전트 AI 솔루션](../../examples/retail-scenario.md)
+- **🚀 다음 챕터**: [챕터 5: 멀티 에이전트 AI 솔루션](../../examples/retail-scenario.md)
 
 ## 소개
 
-이 포괄적인 가이드는 Azure Developer CLI를 사용한 애플리케이션 배포에 대해 기본적인 단일 명령어 배포부터 맞춤형 훅, 다중 환경, CI/CD 통합을 포함한 고급 프로덕션 시나리오까지 모든 것을 다룹니다. 실용적인 예제와 모범 사례를 통해 완전한 배포 수명주기를 마스터하세요.
+이 포괄적인 가이드는 Azure Developer CLI를 사용한 애플리케이션 배포에 대해 기본 단일 명령 배포부터 사용자 지정 훅, 다중 환경, CI/CD 통합을 포함한 고급 프로덕션 시나리오까지 필요한 모든 것을 다룹니다. 실용적인 예제와 모범 사례를 통해 전체 배포 수명 주기를 마스터하세요.
 
 ## 학습 목표
 
-이 가이드를 완료하면:
-- 모든 Azure Developer CLI 배포 명령어와 워크플로우를 마스터합니다
-- 프로비저닝에서 모니터링까지의 완전한 배포 수명주기를 이해합니다
-- 배포 전후 자동화를 위한 맞춤형 배포 훅을 구현합니다
-- 환경별 매개변수로 다중 환경을 구성합니다
-- 블루-그린 및 카나리 배포를 포함한 고급 배포 전략을 설정합니다
-- azd 배포를 CI/CD 파이프라인 및 DevOps 워크플로우와 통합합니다
+이 가이드를 완료하면 다음을 할 수 있습니다:
+- Azure Developer CLI 배포 명령 및 워크플로우 완전 숙달
+- 프로비저닝부터 모니터링까지 전체 배포 수명 주기 이해
+- 배포 전/후 자동화를 위한 사용자 지정 배포 훅 구현
+- 환경별 파라미터로 다중 환경 구성
+- 블루-그린 및 카나리 배포 등 고급 배포 전략 설정
+- azd 배포를 CI/CD 파이프라인 및 DevOps 워크플로우와 통합
 
 ## 학습 성과
 
-완료하면 다음을 수행할 수 있습니다:
-- 모든 azd 배포 워크플로우를 독립적으로 실행하고 문제 해결합니다
-- 훅을 사용한 맞춤형 배포 자동화를 설계하고 구현합니다
-- 적절한 보안 및 모니터링을 갖춘 프로덕션 준비 배포를 구성합니다
-- 복잡한 다중 환경 배포 시나리오를 관리합니다
-- 배포 성능을 최적화하고 롤백 전략을 구현합니다
-- azd 배포를 엔터프라이즈 DevOps 관행에 통합합니다
+완료 후 다음을 수행할 수 있습니다:
+- azd 배포 워크플로우를 독립적으로 실행하고 문제를 해결할 수 있습니다
+- 훅을 사용하여 사용자 지정 배포 자동화를 설계하고 구현할 수 있습니다
+- 적절한 보안 및 모니터링을 갖춘 프로덕션 준비 배포를 구성할 수 있습니다
+- 복잡한 다중 환경 배포 시나리오를 관리할 수 있습니다
+- 배포 성능을 최적화하고 롤백 전략을 구현할 수 있습니다
+- azd 배포를 엔터프라이즈 DevOps 관행에 통합할 수 있습니다
 
 ## 배포 개요
 
-Azure Developer CLI는 여러 배포 명령어를 제공합니다:
+Azure Developer CLI는 여러 배포 명령을 제공합니다:
 - `azd up` - 전체 워크플로우 (프로비저닝 + 배포)
-- `azd provision` - Azure 리소스 생성/업데이트만
+- `azd provision` - Azure 리소스만 생성/업데이트
 - `azd deploy` - 애플리케이션 코드만 배포
 - `azd package` - 애플리케이션 빌드 및 패키징
 
 ## 기본 배포 워크플로우
 
 ### 전체 배포 (azd up)
-새 프로젝트에 가장 일반적인 워크플로우:
+가장 일반적인 신규 프로젝트 워크플로우:
 ```bash
-# 모든 것을 처음부터 배포하기
+# 모든 것을 처음부터 배포
 azd up
 
-# 특정 환경에 배포하기
+# 특정 환경으로 배포
 azd up --environment production
 
-# 사용자 정의 매개변수로 배포하기
+# 사용자 정의 매개변수로 배포
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
 ### 인프라 전용 배포
-Azure 리소스만 업데이트할 때:
+Azure 리소스만 업데이트해야 할 때:
 ```bash
-# 인프라 제공/업데이트
+# 인프라를 프로비저닝/업데이트
 azd provision
 
-# 변경 사항을 미리 보기 위한 드라이런으로 제공
+# 변경 사항을 미리 확인하기 위한 드라이런(모의 실행)으로 프로비저닝
 azd provision --preview
 
-# 특정 서비스 제공
+# 특정 서비스를 프로비저닝
 azd provision --service database
 ```
 
 ### 코드 전용 배포
-애플리케이션 빠른 업데이트용:
+빠른 애플리케이션 업데이트용:
 ```bash
-# 모든 서비스 배포
+# 모든 서비스를 배포
 azd deploy
 
 # 예상 출력:
 # 서비스 배포 중 (azd deploy)
-# - 웹: 배포 중... 완료
-# - API: 배포 중... 완료
+# - web: 배포 중... 완료
+# - api: 배포 중... 완료
 # 성공: 배포가 2분 15초 만에 완료되었습니다
 
 # 특정 서비스 배포
@@ -92,32 +92,32 @@ azd show --output json | jq '.services'
 
 ### ✅ 배포 검증
 
-배포 후 성공 여부 확인:
+배포 후 성공 여부를 확인하세요:
 
 ```bash
-# 모든 서비스가 실행 중인지 확인하세요
+# 모든 서비스가 실행 중인지 확인
 azd show
 
-# 상태 엔드포인트를 테스트하세요
+# 헬스 엔드포인트를 테스트
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
 curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
 curl -f "$API_URL/health" || echo "❌ API health check failed"
 
-# 오류를 모니터링하세요 (기본적으로 브라우저에서 열림)
+# 오류를 모니터링 (기본적으로 브라우저에서 열림)
 azd monitor --logs
 ```
 
 **성공 기준:**
-- ✅ 모든 서비스가 "Running" 상태 표시
-- ✅ 헬스 엔드포인트에서 HTTP 200 응답
-- ✅ 최근 5분간 오류 로그 없음
-- ✅ 애플리케이션이 테스트 요청에 응답
+- ✅ 모든 서비스가 "Running" 상태를 표시함
+- ✅ 헬스 엔드포인트가 HTTP 200을 반환함
+- ✅ 최근 5분 내 오류 로그 없음
+- ✅ 애플리케이션이 테스트 요청에 응답함
 
 ## 🏗️ 배포 프로세스 이해
 
-### 1단계: 사전 프로비저닝 훅
+### 1단계: 프로비저닝 전 훅
 ```yaml
 # azure.yaml
 hooks:
@@ -133,11 +133,11 @@ hooks:
 
 ### 2단계: 인프라 프로비저닝
 - 인프라 템플릿(Bicep/Terraform) 읽음
-- Azure 리소스 생성 또는 업데이트
+- Azure 리소스를 생성하거나 업데이트함
 - 네트워킹 및 보안 구성
 - 모니터링 및 로깅 설정
 
-### 3단계: 사후 프로비저닝 훅
+### 3단계: 프로비저닝 후 훅
 ```yaml
 hooks:
   postprovision:
@@ -153,9 +153,9 @@ hooks:
 ### 4단계: 애플리케이션 패키징
 - 애플리케이션 코드 빌드
 - 배포 아티팩트 생성
-- 대상 플랫폼용 패키징(컨테이너, ZIP 등)
+- 대상 플랫폼용 패키징(컨테이너, ZIP 파일 등)
 
-### 5단계: 사전 배포 훅
+### 5단계: 배포 전 훅
 ```yaml
 hooks:
   predeploy:
@@ -169,11 +169,11 @@ hooks:
 ```
 
 ### 6단계: 애플리케이션 배포
-- Azure 서비스에 패키지 배포
+- 패키징된 애플리케이션을 Azure 서비스에 배포함
 - 구성 설정 업데이트
 - 서비스 시작/재시작
 
-### 7단계: 사후 배포 훅
+### 7단계: 배포 후 훅
 ```yaml
 hooks:
   postdeploy:
@@ -307,10 +307,10 @@ services:
         percentage: 10
 ```
 
-### 단계별 배포
+### 단계적 배포
 ```bash
-#!/bin/bash
-# deploy-staged.sh
+#!/bin/배시
+# 배포-스테이지드.sh
 
 echo "Deploying to development..."
 azd env select dev
@@ -414,11 +414,11 @@ services:
 
 ### 효율적인 코드 배포
 ```bash
-# 코드 변경만 있는 경우 azd deploy(azd up 아님)를 사용하세요
-# 이것은 인프라 프로비저닝을 건너뛰며 훨씬 빠릅니다
+# 코드 변경만 있을 때는 azd up이 아니라 azd deploy를 사용하세요
+# 이 작업은 인프라 프로비저닝을 건너뛰므로 훨씬 빠릅니다
 azd deploy
 
-# 가장 빠른 반복을 위해 특정 서비스를 배포하세요
+# 가장 빠른 반복을 위해 특정 서비스만 배포하세요
 azd deploy --service api
 ```
 
@@ -426,7 +426,7 @@ azd deploy --service api
 
 ### 실시간 배포 모니터링
 ```bash
-# 애플리케이션을 실시간으로 모니터링
+# 실시간으로 애플리케이션 모니터링
 azd monitor --live
 
 # 애플리케이션 로그 보기
@@ -483,16 +483,16 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 보안 고려 사항
+## 🔐 보안 고려사항
 
-### 비밀 관리
+### 비밀(시크릿) 관리
 ```bash
 # 비밀을 안전하게 저장
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# azure.yaml에서 비밀 참조
+# azure.yaml에서 비밀을 참조
 ```
 
 ```yaml
@@ -516,7 +516,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### ID 및 액세스 관리
+### ID 및 접근 관리
 ```yaml
 services:
   api:
@@ -538,11 +538,11 @@ services:
 # AZD에는 내장 롤백 기능이 없습니다. 권장되는 접근 방식:
 
 # 옵션 1: Git에서 다시 배포(권장)
-git revert HEAD  # 문제 있는 커밋을 되돌리기
+git revert HEAD  # 문제가 있는 커밋을 되돌리기
 git push
 azd deploy
 
-# 옵션 2: 특정 커밋 다시 배포
+# 옵션 2: 특정 커밋을 다시 배포
 git checkout <previous-commit-hash>
 azd deploy
 git checkout main
@@ -550,12 +550,12 @@ git checkout main
 
 ### 인프라 롤백
 ```bash
-# 적용하기 전에 인프라 변경 사항 미리보기
+# 적용하기 전에 인프라 변경 사항을 미리 확인
 azd provision --preview
 
 # 인프라 롤백을 위해 버전 관리를 사용하세요:
 git revert HEAD  # 인프라 변경 사항 되돌리기
-azd provision    # 이전 인프라 상태 적용하기
+azd provision    # 이전 인프라 상태 적용
 ```
 
 ### 데이터베이스 마이그레이션 롤백
@@ -572,21 +572,21 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 배포 지표
+## 📊 배포 메트릭
 
 ### 배포 성능 추적
 ```bash
 # 현재 배포 상태 보기
 azd show
 
-# Application Insights로 애플리케이션 모니터링
+# Application Insights로 애플리케이션을 모니터링
 azd monitor --overview
 
-# 실시간 지표 보기
+# 실시간 메트릭 보기
 azd monitor --live
 ```
 
-### 사용자 지정 지표 수집
+### 맞춤형 메트릭 수집
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -607,24 +607,24 @@ hooks:
 
 ### 1. 환경 일관성
 ```bash
-# 일관된 명명법 사용
+# 일관된 이름 사용
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# 환경 일치 유지
+# 환경 일관성 유지
 ./scripts/sync-environments.sh
 ```
 
 ### 2. 인프라 검증
 ```bash
-# 배포 전에 인프라 변경 사항 미리 보기
+# 배포 전에 인프라 변경 사항 미리보기
 azd provision --preview
 
 # ARM/Bicep 린팅 사용
 az bicep lint --file infra/main.bicep
 
-# Bicep 구문 유효성 검사
+# Bicep 구문 검증
 az bicep build --file infra/main.bicep
 ```
 
@@ -657,25 +657,25 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. 문서 및 로깅
+### 4. 문서화 및 로깅
 ```bash
 # 배포 절차 문서화
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
-echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
+echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
 ```
 
 ## 다음 단계
 
-- [리소스 프로비저닝](provisioning.md) - 인프라 관리 심층 탐구
-- [배포 사전 계획](../chapter-06-pre-deployment/capacity-planning.md) - 배포 전략 계획
-- [일반 문제](../chapter-07-troubleshooting/common-issues.md) - 배포 문제 해결
-- [모범 사례](../chapter-07-troubleshooting/debugging.md) - 프로덕션 준비 배포 전략
+- [리소스 프로비저닝](provisioning.md) - 인프라 관리 심층 분석
+- [사전 배포 계획](../chapter-06-pre-deployment/capacity-planning.md) - 배포 전략을 계획하세요
+- [일반적인 문제](../chapter-07-troubleshooting/common-issues.md) - 배포 문제 해결
+- [모범 사례](../chapter-07-troubleshooting/debugging.md) - 프로덕션 준비된 배포 전략
 
 ## 🎯 실습 배포 연습
 
 ### 연습 1: 증분 배포 워크플로우 (20분)
-<strong>목표</strong>: 전체 배포와 증분 배포의 차이점 마스터하기
+<strong>목표</strong>: 전체 배포와 증분 배포의 차이를 숙달합니다
 
 ```bash
 # 초기 배포
@@ -689,7 +689,7 @@ echo "Full deployment: $(date)" > deployment-log.txt
 # 코드 변경
 echo "// Updated $(date)" >> src/api/src/server.js
 
-# 코드만 배포 (빠름)
+# 코드만 배포(빠름)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
@@ -701,15 +701,15 @@ azd down --force --purge
 ```
 
 **성공 기준:**
-- [ ] 전체 배포에 5-15분 소요
-- [ ] 코드 전용 배포에 2-5분 소요
-- [ ] 코드 변경 사항이 배포된 애플리케이션에 반영됨
+- [ ] 전체 배포는 5-15분 소요
+- [ ] 코드 전용 배포는 2-5분 소요
+- [ ] 코드 변경 사항이 배포된 앱에 반영됨
 - [ ] `azd deploy` 후 인프라 변경 없음
 
-**학습 성과**: 코드 변경 시 `azd deploy`가 `azd up` 대비 50-70% 빠름
+**학습 결과**: `azd deploy`는 코드 변경 시 `azd up`보다 50-70% 더 빠릅니다
 
-### 연습 2: 맞춤 배포 훅 (30분)
-<strong>목표</strong>: 배포 전후 자동화 구현
+### 연습 2: 사용자 지정 배포 훅 (30분)
+<strong>목표</strong>: 배포 전후 자동화를 구현합니다
 
 ```bash
 # 배포 전 검증 스크립트 생성
@@ -718,7 +718,7 @@ cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
 echo "⚠️ Running pre-deployment checks..."
 
-# 테스트 통과 여부 확인
+# 테스트가 통과하는지 확인
 if ! npm run test:unit; then
     echo "❌ Tests failed! Aborting deployment."
     exit 1
@@ -766,18 +766,18 @@ hooks:
     run: ./scripts/post-deploy-test.sh
 EOF
 
-# 훅을 사용한 배포 테스트
+# 훅을 사용하여 배포 테스트
 azd deploy
 ```
 
 **성공 기준:**
-- [ ] 배포 전에 사전 배포 스크립트 실행
-- [ ] 테스트 실패 시 배포 중단
-- [ ] 사후 배포 스모크 테스트로 헬스 검증
+- [ ] 배포 전 스크립트가 배포 전에 실행됨
+- [ ] 테스트 실패 시 배포가 중단됨
+- [ ] 배포 후 스모크 테스트가 상태를 검증함
 - [ ] 훅이 올바른 순서로 실행됨
 
 ### 연습 3: 다중 환경 배포 전략 (45분)
-<strong>목표</strong>: 단계별 배포 워크플로우 구현 (개발 → 스테이징 → 프로덕션)
+<strong>목표</strong>: 단계별 배포 워크플로우 구현 (dev → staging → production)
 
 ```bash
 # 배포 스크립트 생성
@@ -806,7 +806,7 @@ azd up --no-prompt
 echo "Running staging tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# 3단계: 프로덕션 수동 승인
+# 3단계: 운영 배포를 위한 수동 승인
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -839,11 +839,11 @@ azd env new production
 ```
 
 **성공 기준:**
-- [ ] 개발 환경에 성공적으로 배포
-- [ ] 스테이징 환경에 성공적으로 배포
+- [ ] 개발(dev) 환경이 성공적으로 배포됨
+- [ ] 스테이징 환경이 성공적으로 배포됨
 - [ ] 프로덕션은 수동 승인 필요
-- [ ] 모든 환경에서 헬스 체크 동작
-- [ ] 필요할 경우 롤백 가능
+- [ ] 모든 환경에 작동하는 헬스 체크 존재
+- [ ] 필요 시 롤백 가능
 
 ### 연습 4: 롤백 전략 (25분)
 <strong>목표</strong>: Git을 사용한 배포 롤백 구현 및 테스트
@@ -857,7 +857,7 @@ azd up
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# breaking change가 있는 v2 배포
+# 비호환 변경이 있는 v2 배포
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
@@ -881,17 +881,17 @@ fi
 ```
 
 **성공 기준:**
-- [ ] 배포 실패 감지 가능
-- [ ] 롤백 스크립트 자동 실행
-- [ ] 애플리케이션이 정상 상태로 복구
+- [ ] 배포 실패를 감지할 수 있음
+- [ ] 롤백 스크립트가 자동으로 실행됨
+- [ ] 애플리케이션이 정상 상태로 복구됨
 - [ ] 롤백 후 헬스 체크 통과
 
-## 📊 배포 지표 추적
+## 📊 배포 메트릭 추적
 
 ### 배포 성능 추적
 
 ```bash
-# 배포 지표 스크립트 생성
+# 배포 메트릭 스크립트 생성
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
@@ -905,11 +905,11 @@ echo "
 📊 Deployment Metrics:"
 echo "Duration: ${DURATION}s"
 echo "Timestamp: $(date)"
-echo "Environment: $(azd env show --output json | jq -r '.name')"
+echo "Environment: $(azd env get-value AZURE_ENV_NAME)"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
-# 파일에 기록
-echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
+# 파일에 로그 기록
+echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
 EOF
 
 chmod +x track-deployment.sh
@@ -918,7 +918,7 @@ chmod +x track-deployment.sh
 ./track-deployment.sh
 ```
 
-**지표 분석:**
+**메트릭 분석:**
 ```bash
 # 배포 기록 보기
 cat deployment-metrics.csv
@@ -937,12 +937,12 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 ---
 
 <strong>내비게이션</strong>
-- **이전 레슨**: [나의 첫 프로젝트](../chapter-01-foundation/first-project.md)
+- **이전 레슨**: [첫 프로젝트](../chapter-01-foundation/first-project.md)
 - **다음 레슨**: [리소스 프로비저닝](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 노력하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있음을 유의하시기 바랍니다. 원문 문서는 해당 언어의 권위 있는 자료로 간주되어야 합니다. 중요한 정보의 경우 전문적인 인간 번역을 권장합니다. 본 번역의 사용으로 인한 오해나 잘못된 해석에 대해서는 책임지지 않습니다.
+**Disclaimer**:
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 저희는 정확성을 위해 노력하고 있으나, 자동 번역에는 오류나 부정확한 부분이 포함될 수 있음을 알려드립니다. 원문(원어)의 문서를 권위 있는 출처로 간주해야 합니다. 중요한 정보의 경우 전문적인 인력의 번역을 권장합니다. 본 번역의 사용으로 인해 발생하는 어떠한 오해나 잘못된 해석에 대해서도 당사는 책임을 지지 않습니다.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

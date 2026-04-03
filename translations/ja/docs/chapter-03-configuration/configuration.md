@@ -1,111 +1,111 @@
-# Configuration Guide
+# 設定ガイド
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
-- **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
+**章ナビゲーション:**
+- **📚 Course Home**: [AZD 入門](../../README.md)
+- **📖 Current Chapter**: 第3章 - 設定と認証
+- **⬅️ Previous**: [最初のプロジェクト](first-project.md)
+- **➡️ Next**: [デプロイガイド](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 Next Chapter**: [第4章: インフラストラクチャをコードとして](../chapter-04-infrastructure/deployment-guide.md)
 
-## Introduction
+## はじめに
 
-この包括的なガイドは、開発とデプロイのワークフローを最適化するための Azure Developer CLI の構成に関するすべての側面を扱います。構成の階層、環境管理、認証方法、および効率的で安全な Azure デプロイを可能にする高度な構成パターンについて学びます。
+この包括的なガイドは、開発およびデプロイのワークフローを最適化するための Azure Developer CLI の設定に関するあらゆる側面を扱います。設定階層、環境管理、認証方法、および効率的で安全な Azure デプロイを可能にする高度な設定パターンについて学びます。
 
-## Learning Goals
+## 学習目標
 
-このレッスンの終了時には、あなたは以下を行えるようになります:
-- azd の構成階層を習得し、設定の優先順位を理解する
+このレッスンの終わりまでに、あなたは以下を習得します:
+- azd の設定階層をマスターし、設定の優先順位の付け方を理解する
 - グローバルおよびプロジェクト固有の設定を効果的に構成する
 - 異なる構成を持つ複数の環境を管理する
-- 安全な認証と認可パターンを実装する
-- 複雑なシナリオ向けの高度な構成パターンを理解する
+- 安全な認証および認可パターンを実装する
+- 複雑なシナリオ向けの高度な設定パターンを理解する
 
-## Learning Outcomes
+## 学習成果
 
 このレッスンを修了すると、あなたは以下ができるようになります:
-- 開発ワークフローに最適な azd の構成を行う
-- 複数のデプロイ環境を設定および管理する
-- 安全な構成管理の実践を実装する
-- 構成に関連する問題をトラブルシュートする
-- 組織の特定要件に合わせて azd の動作をカスタマイズする
+- 最適な開発ワークフローのために azd を設定する
+- 複数のデプロイ環境をセットアップして管理する
+- 安全な設定管理の実践を実装する
+- 設定に関連する問題をトラブルシューティングする
+- 特定の組織要件に合わせて azd の動作をカスタマイズする
 
-この包括的なガイドは、開発とデプロイのワークフローを最適化するための Azure Developer CLI の構成に関するすべての側面を扱います。
+この包括的なガイドは、開発およびデプロイのワークフローを最適化するための Azure Developer CLI の設定に関するあらゆる側面を扱います。
 
-## Understanding AI Agents in an azd Project
+## azd プロジェクトにおける AI エージェントの理解
 
-AI エージェントに不慣れな場合、azd の世界におけるエージェントを理解する簡単な方法を以下に示します。
+AI エージェントが初めての方のために、azd の世界での扱い方を簡単に説明します。
 
-### What Is an Agent?
+### エージェントとは何か
 
-エージェントは、リクエストを受け取り、それについて推論し、アクションを実行できるソフトウェアの一部です — 多くの場合、AI モデルを呼び出したり、データを参照したり、他のサービスを呼び出したりします。azd プロジェクトでは、エージェントはウェブフロントエンドや API バックエンドと並ぶもう一つの **service** に過ぎません。
+エージェントは、リクエストを受け取り、推論を行い、アクションを実行できるソフトウェアです — 多くの場合、AI モデルを呼び出したり、データを参照したり、他のサービスを呼び出したりします。azd プロジェクトでは、エージェントはウェブフロントエンドや API バックエンドと並ぶ別の <strong>サービス</strong> に過ぎません。
 
-### How Agents Fit Into the azd Project Structure
+### エージェントが azd プロジェクト構造にどのように適合するか
 
-azd プロジェクトは **infrastructure**, **code**, **configuration** の三つのレイヤーで構成されます。エージェントは他のサービスと同様にこれらのレイヤーに組み込まれます:
+azd プロジェクトは、**infrastructure**、**code**、および **configuration** の3層で構成されています。エージェントは他のサービスと同様にこれらの層に組み込まれます:
 
-| Layer | What It Does for a Traditional App | What It Does for an Agent |
+| レイヤー | 従来アプリでの役割 | エージェントでの役割 |
 |-------|-------------------------------------|---------------------------|
-| **Infrastructure** (`infra/`) | Provisions a web app and database | Provisions an AI model endpoint, search index, or agent host |
-| **Code** (`src/`) | Contains your frontend and API source code | Contains your agent logic and prompt definitions |
-| **Configuration** (`azure.yaml`) | Lists your services and their hosting targets | Lists your agent as a service, pointing to its code and host |
+| <strong>インフラストラクチャ</strong> (`infra/`) | Web アプリとデータベースをプロビジョニングします | AI モデルエンドポイント、検索インデックス、またはエージェントホストをプロビジョニングします |
+| <strong>コード</strong> (`src/`) | フロントエンドと API のソースコードを含みます | エージェントのロジックとプロンプト定義を含みます |
+| <strong>設定</strong> (`azure.yaml`) | サービスとそのホスティングターゲットを一覧化します | エージェントをサービスとして一覧化し、そのコードとホストを指します |
 
 ### The Role of `azure.yaml`
 
-今すぐに構文を丸暗記する必要はありません。概念的には、`azure.yaml` は azd に対して「ここが私のアプリケーションを構成するサービスで、ここにそれらのコードがあります」と伝えるファイルです。
+構文を今すぐ暗記する必要はありません。概念的には、`azure.yaml` は azd に *「これは私のアプリケーションを構成するサービスであり、ここでそれらのコードが見つかります。」* と伝えるファイルです。
 
-プロジェクトに AI エージェントが含まれる場合、`azure.yaml` はそのエージェントをサービスの一つとして列挙するだけです。azd はそれに応じて適切なインフラストラクチャ（Microsoft Foundry Models エンドポイントやエージェントをホストする Container App など）をプロビジョニングし、エージェントコードをデプロイします — ウェブアプリや API の場合と同様です。
+プロジェクトに AI エージェントが含まれている場合、`azure.yaml` は単にそのエージェントをサービスの一つとしてリストします。azd は Microsoft Foundry Models のエンドポイントやコンテナアプリなど、適切なインフラストラクチャをプロビジョニングし、エージェントのコードをデプロイすることを認識します — ちょうどウェブアプリや API の場合と同様です。
 
-つまり、根本的に新しいことを学ぶ必要はありません。azd がウェブサービスを管理する方法を理解していれば、エージェントの管理方法もすでに理解しています。
+つまり、根本的に新しく学ぶことは何もありません。azd がウェブサービスを管理する方法を理解していれば、エージェントの管理方法もすでに理解しています。
 
-## Configuration Hierarchy
+## 設定の階層
 
-azd は階層型の構成システムを使用します:
-1. **Command-line flags** (highest priority)
-2. **Environment variables**
-3. **Local project configuration** (`.azd/config.json`)
-4. **Global user configuration** (`~/.azd/config.json`)
-5. **Default values** (lowest priority)
+azd は階層的な設定システムを使用します:
+1. <strong>コマンドラインフラグ</strong> (最優先)
+2. <strong>環境変数</strong>
+3. <strong>ローカルプロジェクト設定</strong> (`.azd/config.json`)
+4. <strong>グローバルユーザー設定</strong> (`~/.azd/config.json`)
+5. <strong>デフォルト値</strong> (最も低い優先度)
 
-## Global Configuration
+## グローバル設定
 
-### Setting Global Defaults
+### グローバルのデフォルト設定
 ```bash
-# 既定のサブスクリプションを設定する
+# デフォルトのサブスクリプションを設定する
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# 既定の場所を設定する
+# デフォルトの場所を設定する
 azd config set defaults.location "eastus2"
 
-# 既定のリソースグループの命名規則を設定する
+# デフォルトのリソースグループの命名規則を設定する
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
 # すべてのグローバル設定を表示する
-azd config list
+azd config show
 
-# 構成を削除する
+# 設定を削除する
 azd config unset defaults.location
 ```
 
-### Common Global Settings
+### 共通のグローバル設定
 ```bash
 # 開発の設定
 azd config set alpha.enable true                    # アルファ機能を有効にする
 azd config set telemetry.enabled false             # テレメトリを無効にする
-azd config set output.format json                  # 出力形式を設定する
+azd config set output.format json                  # 出力形式を設定
 
 # セキュリティ設定
 azd config set auth.useAzureCliCredential true     # 認証に Azure CLI を使用する
 azd config set tls.insecure false                  # TLS 検証を強制する
 
-# パフォーマンスの調整
+# パフォーマンス調整
 azd config set provision.parallelism 5             # リソースの並列作成
 azd config set deploy.timeout 30m                  # デプロイのタイムアウト
 ```
 
-## 🏗️ Project Configuration
+## 🏗️ プロジェクト設定
 
-### azure.yaml Structure
-`azure.yaml` ファイルは azd プロジェクトの中核です:
+### azure.yaml の構造
+`azure.yaml` ファイルは azd プロジェクトの中心です:
 
 ```yaml
 # Minimum configuration
@@ -181,9 +181,9 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Service Configuration Options
+### サービス設定オプション
 
-#### Host Types
+#### ホストタイプ
 ```yaml
 services:
   web-static:
@@ -202,7 +202,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Language-Specific Settings
+#### 言語固有の設定
 ```yaml
 services:
   node-app:
@@ -226,9 +226,9 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 Environment Management
+## 🌟 環境管理
 
-### Creating Environments
+### 環境の作成
 ```bash
 # 新しい環境を作成する
 azd env new development
@@ -240,8 +240,8 @@ azd env new staging --location "westus2"
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Environment Configuration
-各環境は `.azure/<env-name>/config.json` に独自の構成を持ちます:
+### 環境設定
+各環境は `.azure/<env-name>/config.json` に固有の設定を持ちます:
 
 ```json
 {
@@ -263,7 +263,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 }
 ```
 
-### Environment Variables
+### 環境変数
 ```bash
 # 環境固有の変数を設定する
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
@@ -273,7 +273,7 @@ azd env set DEBUG "true"
 # 環境変数を表示する
 azd env get-values
 
-# 期待される出力:
+# 期待される出力：
 # DATABASE_URL=postgresql://user:pass@host:5432/db
 # API_KEY=secret-api-key
 # DEBUG=true
@@ -286,8 +286,8 @@ azd env get-values | grep DEBUG
 # (何も返さないはず)
 ```
 
-### Environment Templates
-一貫した環境セットアップのために `.azure/env.template` を作成してください:
+### 環境テンプレート
+一貫した環境セットアップのために `.azure/env.template` を作成します:
 ```bash
 # 必須の変数
 AZURE_SUBSCRIPTION_ID=
@@ -303,21 +303,21 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 Authentication Configuration
+## 🔐 認証設定
 
-### Azure CLI Integration
+### Azure CLI 統合
 ```bash
-# Azure CLI の認証情報を使用（デフォルト）
+# Azure CLI の資格情報を使用する（既定）
 azd config set auth.useAzureCliCredential true
 
-# 特定のテナントでログイン
+# 特定のテナントでログインする
 az login --tenant <tenant-id>
 
-# デフォルトのサブスクリプションを設定
+# 既定のサブスクリプションを設定する
 az account set --subscription <subscription-id>
 ```
 
-### Service Principal Authentication
+### サービスプリンシパル認証
 CI/CD パイプライン向け:
 ```bash
 # 環境変数を設定する
@@ -330,18 +330,18 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Managed Identity
+### マネージド ID
 Azure ホスト環境向け:
 ```bash
-# マネージド ID 認証を有効にする
+# マネージドID認証を有効にする
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ Infrastructure Configuration
+## 🏗️ インフラ設定
 
-### Bicep Parameters
-`infra/main.parameters.json` でインフラパラメーターを構成します:
+### Bicep パラメーター
+インフラパラメーターを `infra/main.parameters.json` で構成します:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -363,8 +363,8 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 }
 ```
 
-### Terraform Configuration
-Terraform プロジェクトの場合は、`infra/terraform.tfvars` に構成します:
+### Terraform 設定
+Terraform プロジェクトの場合は、`infra/terraform.tfvars` で構成します:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -372,9 +372,9 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Deployment Configuration
+## 🚀 デプロイ設定
 
-### Build Configuration
+### ビルド設定
 ```yaml
 # In azure.yaml
 services:
@@ -397,7 +397,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Docker Configuration
+### Docker 設定
 ```yaml
 services:
   api:
@@ -413,9 +413,9 @@ services:
 ```
 Example `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 Advanced Configuration
+## 🔧 高度な設定
 
-### Custom Resource Naming
+### カスタムリソース命名
 ```bash
 # 命名規則を設定する
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -423,7 +423,7 @@ azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### Network Configuration
+### ネットワーク設定
 ```yaml
 # In azure.yaml
 infra:
@@ -434,7 +434,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Monitoring Configuration
+### 監視設定
 ```yaml
 # In azure.yaml
 monitoring:
@@ -446,18 +446,18 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Environment-Specific Configurations
+## 🎯 環境別設定
 
-### Development Environment
+### 開発環境
 ```bash
-# .azure/開発/.env
+# .azure/development/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Staging Environment
+### ステージング環境
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -466,18 +466,18 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### Production Environment
+### 本番環境
 ```bash
-# .azure/本番/.env
+# .azure/production/.env
 DEBUG=false
 LOG_LEVEL=error
 ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Configuration Validation
+## 🔍 設定の検証
 
-### Validate Configuration
+### 設定の検証
 ```bash
 # 設定の構文を確認する
 azd config validate
@@ -485,12 +485,12 @@ azd config validate
 # 環境変数をテストする
 azd env get-values
 
-# インフラを検証する
+# インフラストラクチャを検証する
 azd provision --dry-run
 ```
 
-### Configuration Scripts
-`scripts/` に検証スクリプトを作成してください:
+### 設定スクリプト
+検証スクリプトを `scripts/` に作成します:
 
 ```bash
 #!/bin/bash
@@ -498,7 +498,7 @@ azd provision --dry-run
 
 echo "Validating configuration..."
 
-# 必要な環境変数を確認する
+# 必須の環境変数を確認する
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
@@ -513,9 +513,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Best Practices
+## 🎓 ベストプラクティス
 
-### 1. Use Environment Variables
+### 1. 環境変数を使用する
 ```yaml
 # Good: Use environment variables
 database:
@@ -526,7 +526,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organize Configuration Files
+### 2. 設定ファイルを整理する
 ```
 .azure/
 ├── config.json              # Global project config
@@ -542,7 +542,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Version Control Considerations
+### 3. バージョン管理に関する考慮事項
 ```bash
 # .gitignore
 .azure/*/config.json         # 環境設定（リソースIDを含む）
@@ -550,8 +550,8 @@ database:
 .env                        # ローカル環境ファイル
 ```
 
-### 4. Configuration Documentation
-設定を `CONFIG.md` にドキュメント化してください:
+### 4. 設定ドキュメント
+設定を `CONFIG.md` にドキュメント化します:
 ```markdown
 # Configuration Guide
 
@@ -566,11 +566,11 @@ database:
 - Production: Uses production database, error logging only
 ```
 
-## 🎯 Hands-On Practice Exercises
+## 🎯 ハンズオン演習
 
-### Exercise 1: Multi-Environment Configuration (15 minutes)
+### 演習1: マルチ環境設定（15分）
 
-**Goal**: 三つの異なる設定を持つ環境を作成して構成する
+<strong>目標</strong>: 異なる設定を持つ3つの環境を作成して設定する
 
 ```bash
 # 開発環境を作成する
@@ -597,61 +597,61 @@ azd env select staging && azd env get-values
 azd env select production && azd env get-values
 ```
 
-**Success Criteria:**
-- [ ] 三つの環境が正常に作成されている
-- [ ] 各環境が固有の構成を持っている
-- [ ] 環境間の切り替えがエラーなく行える
-- [ ] `azd env list` が三つの環境すべてを表示する
+**成功基準:**
+- [ ] 3つの環境が正常に作成されている
+- [ ] 各環境が固有の設定を持っている
+- [ ] エラーなく環境間を切り替えられる
+- [ ] `azd env list` が3つの環境すべてを表示する
 
-### Exercise 2: Secret Management (10 minutes)
+### 演習2: シークレット管理（10分）
 
-**Goal**: 機密データを用いた安全な構成を実践する
+<strong>目標</strong>: 機密データを使った安全な設定を実践する
 
 ```bash
 # シークレットを設定する（出力には表示されません）
 azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 
-# 非機密の設定を行う
+# 非シークレットの設定を行う
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# 環境を表示する（シークレットはマスクされるべき）
+# 環境を表示する（シークレットは伏せられているはずです）
 azd env get-values
 
 # シークレットが保存されていることを確認する
-azd env get DB_PASSWORD  # 実際の値を表示するはず
+azd env get DB_PASSWORD  # 実際の値を表示するはずです
 ```
 
-**Success Criteria:**
-- [ ] シークレットがターミナルに表示されずに保存されている
+**成功基準:**
+- [ ] シークレットがターミナルに表示されることなく保存されている
 - [ ] `azd env get-values` がマスクされたシークレットを表示する
-- [ ] 個別の `azd env get <SECRET_NAME>` が実際の値を取得できる
+- [ ] 個別の `azd env get <SECRET_NAME>` が実際の値を取得する
 
-## Next Steps
+## 次のステップ
 
-- [Your First Project](first-project.md) - 実践で構成を適用する
-- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - デプロイで構成を使用する
-- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - 本番対応の構成
+- [最初のプロジェクト](first-project.md) - 設定を実際に適用する
+- [デプロイガイド](../chapter-04-infrastructure/deployment-guide.md) - デプロイに設定を使用する
+- [リソースのプロビジョニング](../chapter-04-infrastructure/provisioning.md) - 本番向けの設定
 
-## References
+## 参考資料
 
-- [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Environment Variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [azd 設定リファレンス](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml スキーマ](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [環境変数](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
-- **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
-- **Next Lesson**: [Your First Project](first-project.md)
+**章ナビゲーション:**
+- **📚 Course Home**: [AZD 入門](../../README.md)
+- **📖 Current Chapter**: 第3章 - 設定と認証
+- **⬅️ Previous**: [最初のプロジェクト](first-project.md)
+- **➡️ Next Chapter**: [第4章: インフラストラクチャをコードとして](../chapter-04-infrastructure/deployment-guide.md)
+- **Next Lesson**: [最初のプロジェクト](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責事項**:
-本書類は AI 翻訳サービス [Co-op トランスレーター](https://github.com/Azure/co-op-translator) を使用して翻訳されました。当社は正確性に努めていますが、自動翻訳には誤りや不正確な箇所が含まれることがある点にご注意ください。原文（原言語の文書）が権威ある情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の使用に起因するいかなる誤解や誤訳についても、当社は責任を負いません。
+本書類は AI 翻訳サービス [Co-op トランスレーター](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確さを期すよう努めていますが、自動翻訳には誤りや不正確な箇所が含まれる可能性があることをご承知おきください。原文（原言語）の文書を正式な情報源とみなしてください。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の使用により生じた誤解や解釈の相違について、当社は一切責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

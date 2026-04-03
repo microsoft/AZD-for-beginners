@@ -1,26 +1,28 @@
 # Azure Developer CLI を使用した AI モデルのデプロイ
 
-**章のナビゲーション:**
-- **📚 コース ホーム**: [AZD For Beginners](../../README.md)
-- **📖 現在の章**: Chapter 2 - AI-First Development
-- **⬅️ 前へ**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ 次へ**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 次の章**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+**章ナビゲーション:**
+- **📚 コース ホーム**: [AZD 入門](../../README.md)
+- **📖 現在の章**: 第2章 - AI ファースト開発
+- **⬅️ 前へ**: [Microsoft Foundry 統合](microsoft-foundry-integration.md)
+- **➡️ 次へ**: [AI ワークショップ ラボ](ai-workshop-lab.md)
+- **🚀 次の章**: [第3章: 設定](../chapter-03-configuration/configuration.md)
 
-このガイドは、AZD テンプレートを使用した AI モデルのデプロイに関する包括的な手順を提供します。モデル選定から本番デプロイのパターンまでを網羅しています。
+このガイドは、モデル選定から本番デプロイメントパターンまで、AZD テンプレートを使用した AI モデルのデプロイに関する包括的な手順を提供します。
+
+> **検証メモ (2026-03-25):** このガイドの AZD ワークフローは `azd` `1.23.12` に対して確認されました。デフォルトのサービスデプロイメント時間よりも長くかかる AI デプロイについては、現在の AZD リリースは `azd deploy --timeout <seconds>` をサポートしています。
 
 ## 目次
 
-- [モデル選定戦略](#model-selection-strategy)
-- [AI モデル向けの AZD 構成](#ai-モデル向けの-azd-構成)
-- [デプロイ パターン](#デプロイ-パターン)
+- [モデル選定戦略](#モデル選定戦略)
+- [AI モデル用の AZD 設定](#ai-モデル用の-azd-設定)
+- [デプロイパターン](#デプロイパターン)
 - [モデル管理](#モデル管理)
-- [本番での考慮事項](#本番での考慮事項)
+- [本番環境での考慮事項](#本番環境での考慮事項)
 - [監視と可観測性](#監視と可観測性)
 
-## Model Selection Strategy
+## モデル選定戦略
 
-### Microsoft Foundry モデル モデル
+### Microsoft Foundry Models モデル
 
 ユースケースに適したモデルを選択してください:
 
@@ -41,29 +43,29 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
         ]
 ```
 
-### モデルのキャパシティ計画
+### モデル容量計画
 
-| モデルタイプ | ユースケース | 推奨キャパシティ | コストに関する考慮事項 |
+| Model Type | Use Case | Recommended Capacity | Cost Considerations |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | チャット、Q&A | 10-50 TPM | ほとんどのワークロードでコスト効果が高い |
-| gpt-4.1 | 複雑な推論 | 20-100 TPM | コストが高いため、プレミアム機能に使用 |
-| Text-embedding-ada-002 | 検索、RAG | 30-120 TPM | 意味的検索に不可欠 |
-| Whisper | 音声認識 | 10-50 TPM | 音声処理ワークロード |
+| gpt-4.1-mini | チャット、Q&A | 10-50 TPM | ほとんどのワークロードに対して費用対効果が高い |
+| gpt-4.1 | 複雑な推論 | 20-100 TPM | コストは高め、プレミアム機能向けに使用 |
+| text-embedding-3-large | 検索、RAG | 30-120 TPM | 意味検索と検索に対する堅牢な既定の選択 |
+| Whisper | 音声→テキスト | 10-50 TPM | 音声処理ワークロード |
 
-## AI モデル向けの AZD 構成
+## AI モデル用の AZD 設定
 
-### Bicep テンプレート構成
+### Bicep テンプレートの設定
 
-Bicep テンプレートでモデルのデプロイを作成します:
+Bicep テンプレートを通じてモデルデプロイメントを作成します:
 
 ```bicep
 // infra/main.bicep
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -124,19 +126,19 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### 環境変数
 
-アプリケーションの環境を構成します:
+アプリケーションの環境を設定します:
 
 ```bash
 # .env の設定
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## デプロイ パターン
+## デプロイパターン
 
-### パターン 1: 単一リージョン展開
+### パターン 1: 単一リージョンデプロイメント
 
 ```yaml
 # azure.yaml - Single region
@@ -149,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-適しているケース:
+適している用途:
 - 開発およびテスト
 - 単一市場向けアプリケーション
 - コスト最適化
 
-### パターン 2: マルチリージョン展開
+### パターン 2: マルチリージョンデプロイメント
 
 ```bicep
 // Multi-region deployment
@@ -167,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-適しているケース:
+適している用途:
 - グローバルアプリケーション
 - 高可用性要件
 - 負荷分散
 
-### パターン 3: ハイブリッド展開
+### パターン 3: ハイブリッドデプロイメント
 
-Microsoft Foundry モデルを他の AI サービスと組み合わせます:
+Microsoft Foundry Models を他の AI サービスと組み合わせます:
 
 ```bicep
 // Hybrid AI services
@@ -207,7 +209,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### バージョン管理
 
-AZD 構成でモデルのバージョンを追跡します:
+AZD 設定でモデルのバージョンを追跡します:
 
 ```json
 {
@@ -215,11 +217,11 @@ AZD 構成でモデルのバージョンを追跡します:
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
@@ -238,6 +240,9 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# デプロイがデフォルトのタイムアウトを超える場合
+azd deploy --timeout 1800
 ```
 
 ### A/B テスト
@@ -264,11 +269,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## 本番での考慮事項
+## 本番環境での考慮事項
 
-### キャパシティ計画
+### キャパシティプランニング
 
-使用パターンに基づいて必要なキャパシティを計算します:
+使用パターンに基づいて必要な容量を計算します:
 
 ```python
 # 容量計算の例
@@ -293,7 +298,7 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### オートスケーリング構成
+### オートスケーリングの構成
 
 Container Apps のオートスケーリングを構成します:
 
@@ -333,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### コスト最適化
 
-コスト管理を実装します:
+コスト管理策を実装します:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -365,9 +370,9 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ## 監視と可観測性
 
-### Application Insights 統合
+### Application Insights の統合
 
-AI ワークロードの監視を構成します:
+AI ワークロード向けの監視を構成します:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -408,7 +413,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 AI 固有のメトリクスを追跡します:
 
 ```python
-# AIモデル向けのカスタムテレメトリ
+# AIモデルのカスタムテレメトリ
 import logging
 from applicationinsights import TelemetryClient
 
@@ -455,7 +460,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # OpenAI 接続をテストする
+        # OpenAI接続のテスト
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -473,30 +478,30 @@ async def check_ai_models():
 
 ## 次のステップ
 
-1. **[Microsoft Foundry Integration Guide](microsoft-foundry-integration.md) を確認する** サービス統合パターンについて
-2. **[AI Workshop Lab](ai-workshop-lab.md) を完了する** 実践的な経験のために
-3. **[Production AI Practices](production-ai-practices.md) を実装する** エンタープライズ展開のために
-4. **[AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md) を参照する** 一般的な問題について
+1. **[Microsoft Foundry 統合ガイド](microsoft-foundry-integration.md) を確認してください** サービス統合パターンのために
+2. **[AI ワークショップ ラボ](ai-workshop-lab.md) を完了してください** 実践的な経験のために
+3. **[本番 AI プラクティス](production-ai-practices.md) を実装してください** エンタープライズのデプロイのために
+4. **[AI トラブルシューティングガイド](../chapter-07-troubleshooting/ai-troubleshooting.md) を参照してください** よくある問題について
 
 ## リソース
 
-- [Microsoft Foundry モデルの利用可能性](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI ドキュメント](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps のスケーリング](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [AI モデルのコスト最適化](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Microsoft Foundry Models Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Container Apps Scaling](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [AI Model Cost Optimization](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**章のナビゲーション:**
-- **📚 コース ホーム**: [AZD For Beginners](../../README.md)
-- **📖 現在の章**: Chapter 2 - AI-First Development
-- **⬅️ 前へ**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ 次へ**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 次の章**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+**章ナビゲーション:**
+- **📚 コース ホーム**: [AZD 入門](../../README.md)
+- **📖 現在の章**: 第2章 - AI ファースト開発
+- **⬅️ 前へ**: [Microsoft Foundry 統合](microsoft-foundry-integration.md)
+- **➡️ 次へ**: [AI ワークショップ ラボ](ai-workshop-lab.md)
+- **🚀 次の章**: [第3章: 設定](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責事項**:
-本書類は AI 翻訳サービス [Co-opトランスレーター](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性を期していますが、自動翻訳には誤りや不正確さが含まれる可能性があることにご注意ください。原文（原言語）の文書を正式な情報源と見なしてください。重要な情報については、専門の人による翻訳を推奨します。本翻訳の使用により生じた誤解や解釈の相違について、当社は責任を負いません。
+本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性には努めておりますが、自動翻訳には誤りや不正確な箇所が含まれる可能性があることにご留意ください。原文（原言語）の文書が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の利用に起因して生じたいかなる誤解や誤訳についても、私たちは責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
