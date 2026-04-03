@@ -3,28 +3,28 @@
 !!! tip "I SLUTET AV DENNA MODUL KOMMER DU ATT KUNNA"
 
     - [ ] Utforskat standardfunktionerna för AI-agenter
-    - [ ] Lagt till AI-sökning med ditt eget index
-    - [ ] Aktiverat och analyserat spårningsmätvärden
+    - [ ] Lagt till AI Search med ditt eget index
+    - [ ] Aktiverat och analyserat Tracing-metriker
     - [ ] Kört en utvärderingskörning
-    - [ ] Kört en red‑teaming-skanning
+    - [ ] Genomfört en red-teaming-skanning
     - [ ] **Lab 5: Skapat en anpassningsplan** 
 
 ---
 
-## 5.1 AI-agentfunktioner
+## 5.1 AI-agenters kapaciteter
 
 !!! success "Vi slutförde detta i Lab 01"
 
-- **Filsökning**: OpenAI:s inbyggda filsökning för kunskapsinhämtning
-- **Källhänvisningar**: Automatisk källangivelse i svaren
-- **Anpassningsbara instruktioner**: Modifiera agentens beteende och personlighet
-- **Verktygsintegration**: Utbyggbart verktygssystem för egna funktioner
+- **File Search**: OpenAI:s inbyggda filsökning för kunskapsinhämtning
+- **Källhänvisningar**: Automatisk källangivelse i svar
+- **Anpassningsbara instruktioner**: Ändra agentens beteende och personlighet
+- **Verktygsintegration**: Utbyggbart verktygssystem för anpassade funktioner
 
 ---
 
 ## 5.2 Alternativ för kunskapsinhämtning
 
-!!! task "För att slutföra detta måste vi göra ändringar och distribuera igen"    
+!!! task "För att slutföra detta behöver vi göra ändringar och distribuera om"    
     
     ```bash title=""
     # Set environment variables
@@ -40,24 +40,24 @@
 
 ---
 
-**OpenAI Filsökning (standard):**
+**OpenAI File Search (Standard):**
 
-- Inbyggt i Foundry Agents
-- Automatisk dokumentbearbetning och indexering
+- Inbyggd i Foundry-agenterna
+- Automatisk dokumentbehandling och indexering
 - Ingen ytterligare konfiguration krävs
 
-**Azure AI Search (valfritt):**
+**Azure AI Search (Valfritt):**
 
-- Hybrid semantisk och vektorsökning
+- Hybrid semantisk- och vektorsökning
 - Anpassad indexhantering
 - Avancerade sökfunktioner
 - Kräver `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
-## 5.3 [Spårning och övervakning](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [Spårning & Övervakning](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "För att slutföra detta måste vi göra ändringar och distribuera igen"    
+!!! task "För att slutföra detta behöver vi göra ändringar och distribuera om"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
@@ -66,8 +66,8 @@
 
 **Spårning:**
 
-- Integration med OpenTelemetry
-- Spårning av förfrågningar/svar
+- OpenTelemetry-integration
+- Spårning av förfrågningar och svar
 - Prestandamätvärden
 - Tillgängligt i Microsoft Foundry-portalen
 
@@ -75,7 +75,7 @@
 
 - Applikationsloggar i Container Apps
 - Strukturerad loggning med korrelations-ID:n
-- Realtids- och historisk loggvisning
+- Visning av loggar i realtid och historik
 
 ---
 
@@ -85,51 +85,51 @@
 
 - Inbyggda utvärderare för kvalitetsbedömning
 - Anpassade utvärderingsskript
-- Prestandamätning
+- Prestandajämförelser
 
 **Kontinuerlig övervakning:**
 
 - Automatisk utvärdering av live-interaktioner
-- Spårning av kvalitetsmetrik
-- Detektion av prestandaregessioner
+- Spårning av kvalitetsmått
+- Upptäckt av prestandaregressioner
 
 **CI/CD-integration:**
 
 - GitHub Actions-arbetsflöde
 - Automatiserad testning och utvärdering
-- Statistisk jämförande testning
+- Statistisk jämförelsetestning
 
 ---
 
-## 5.5 [AI Red Teaming Agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [AI Red Teaming-agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
 **AI Red Teaming:**
 
-- Automatiska säkerhetsskanningar
+- Automatiserad säkerhetsskanning
 - Riskbedömning för AI-system
 - Säkerhetsutvärdering över flera kategorier
 
 **Autentisering:**
 
 - Managed Identity för Azure-tjänster
-- Valfri Azure App Service-autentisering
-- Basic-auth som reserv för utveckling
+- Valfri autentisering via Azure App Service
+- Grundläggande autentisering som fallback för utveckling
 
 
 
-!!! quote "I SLUTET AV DENNA LABB SKA DU HA"
+!!! quote "I SLUTET AV DETTA LABB SKA DU HA"
     - [ ] Definiera dina scenariokrav
     - [ ] Anpassade miljövariabler (konfig)
     - [ ] Anpassade agentinstruktioner (uppgift)
     - [ ] Distribuerat den anpassade mallen (app)
-    - [ ] Slutfört efter-distributionsuppgifter (manuella)
-    - [ ] Kör en testutvärdering
+    - [ ] Slutfört uppgifter efter distribution (manuellt)
+    - [ ] Kört en testutvärdering
 
-Detta exempel visar hur mallen kan anpassas för ett företagsinriktat detaljhandelsfall med två specialiserade agenter och flera modelldistributioner.
+This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
 
 ---
 
-## 5.6 Anpassa det för dig!
+## 5.6 Anpassa den för dig!
 
 ### 5.6.1. Scenariokrav
 
@@ -141,14 +141,14 @@ Detta exempel visar hur mallen kan anpassas för ett företagsinriktat detaljhan
 #### **Modelldistributioner:**
 
    - `gpt-4.1`: Primär chattmodell
-   - `o3`: Resonemangsmodell för komplexa frågor
-   - `gpt-4.1-nano`: Lättviktsmodell för enkla interaktioner
-   - `text-embedding-3-large`: Högkvalitativa embeddingar för sökning
+   - `o3`: Resoneringsmodell för komplexa frågor
+   - `gpt-4.1-nano`: Lättviktig modell för enkla interaktioner
+   - `text-embedding-3-large`: Högkvalitativa inbäddningar för sökning
 
 #### **Funktioner:**
 
    - Spårning och övervakning aktiverade
-   - AI-sökning för produktkatalog
+   - AI Search för produktkatalog
    - Utvärderingsramverk för kvalitetssäkring
    - Red teaming för säkerhetsvalidering
 
@@ -157,9 +157,9 @@ Detta exempel visar hur mallen kan anpassas för ett företagsinriktat detaljhan
 ### 5.6.2 Implementering av scenariot
 
 
-#### 5.6.2.1. Konfiguration före distribution
+#### 5.6.2.1. Förkonfigurationsinställningar
 
-Create a setup script (`setup-retail.sh`)
+Skapa ett installationsskript (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -200,7 +200,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 #### 5.6.2.2: Agentinstruktioner
 
-Create `custom-agents/shopper-agent-instructions.md`:
+Skapa `custom-agents/shopper-agent-instructions.md`:
 
 ```markdown
 # Shopper Agent Instructions
@@ -223,7 +223,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-Create `custom-agents/loyalty-agent-instructions.md`:
+Skapa `custom-agents/loyalty-agent-instructions.md`:
 
 ```markdown
 # Loyalty Agent Instructions
@@ -250,7 +250,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 #### 5.6.2.3: Distributionsskript
 
-Create `deploy-retail.sh`:
+Skapa `deploy-retail.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -258,7 +258,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# Verifiera förutsättningar
+# Validera förutsättningar
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -270,12 +270,12 @@ if ! az account show &> /dev/null; then
     exit 1
 fi
 
-# Sätt upp miljön
+# Konfigurera miljön
 echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Kontrollera kvot i vald region
+# Kontrollera kvot i den valda regionen
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -295,12 +295,12 @@ fi
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Hämta distributionsutdata
+# Hämta utdata från distributionen
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
 # Hämta webbappens URL
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -321,9 +321,9 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Konfiguration efter distribution
+#### 5.6.2.4: Efterdistributionskonfiguration
 
-Create `configure-retail-agents.sh`:
+Skapa `configure-retail-agents.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -380,19 +380,19 @@ echo "
 
 ### 5.6.3: Testning och validering
 
-Create `test-retail-deployment.sh`:
+Skapa `test-retail-deployment.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🧪 Testing retail deployment..."
 
-# Kontrollera att miljövariablerna är inställda
+# Verifiera att miljövariablerna är inställda
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
 # Testa webbapplikationens tillgänglighet
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -437,13 +437,13 @@ Efter att ha följt denna implementeringsguide kommer du att ha:
 
       - Microsoft Foundry-projekt med modelldistributioner
       - Container Apps som hostar webbapplikationen
-      - AI Search-tjänst för produktkatalog
+      - AI Search-tjänst för produktkatalogen
       - Application Insights för övervakning
 
-2. **Initialagent:**
+2. **Initial agent:**
 
       - Shopper Agent konfigurerad med grundläggande instruktioner
-      - Filsökfunktion aktiverad
+      - Filsökningsfunktion aktiverad
       - Spårning och övervakning konfigurerade
 
 3. **Redo för anpassning:**
@@ -453,18 +453,18 @@ Efter att ha följt denna implementeringsguide kommer du att ha:
       - Test- och valideringsskript
       - Uppställning för övervakning och utvärdering
 
-4. **Klar för produktion:**
+4. **Produktionsberedskap:**
 
       - Säkerhetsskanning med red teaming
       - Prestandaövervakning
       - Ramverk för kvalitetsutvärdering
       - Skalbar arkitektur
 
-Detta exempel visar hur AZD-mallen kan utvidgas och anpassas för specifika företags­scenarier samtidigt som bästa praxis för säkerhet, övervakning och skalbarhet bibehålls.
+Detta exempel visar hur AZD-mallen kan utökas och anpassas för specifika företagscenarier samtidigt som bästa praxis för säkerhet, övervakning och skalbarhet upprätthålls.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Friskrivning**:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Vi strävar efter noggrannhet, men var medveten om att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet i sitt originalspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användning av denna översättning.
+**Ansvarsfriskrivning**:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, vänligen observera att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på sitt ursprungsspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

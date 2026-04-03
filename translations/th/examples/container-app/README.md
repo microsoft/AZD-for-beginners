@@ -1,29 +1,29 @@
 # ตัวอย่างการปรับใช้ Container App ด้วย AZD
 
-ไดเรกทอรีนี้ประกอบด้วยตัวอย่างครบถ้วนสำหรับการปรับใช้แอปพลิเคชันที่ถูกบรรจุในคอนเทนเนอร์ไปยัง Azure Container Apps โดยใช้ Azure Developer CLI (AZD) ตัวอย่างเหล่านี้แสดงถึงรูปแบบการใช้งานจริง แนวทางปฏิบัติที่ดีที่สุด และการตั้งค่าพร้อมใช้งานสำหรับสภาพแวดล้อมการผลิต
+ไดเรกทอรีนี้ประกอบด้วยตัวอย่างที่ครอบคลุมสำหรับการปรับใช้แอปพลิเคชันที่บรรจุในคอนเทนเนอร์ไปยัง Azure Container Apps โดยใช้ Azure Developer CLI (AZD) ตัวอย่างเหล่านี้แสดงรูปแบบในโลกจริง, แนวทางปฏิบัติที่ดีที่สุด และการกำหนดค่าที่พร้อมสำหรับการใช้งานจริง
 
 ## 📚 สารบัญ
 
-- [ภาพรวม](../../../../examples/container-app)
-- [ข้อกำหนดเบื้องต้น](../../../../examples/container-app)
-- [ตัวอย่างเริ่มต้นอย่างรวดเร็ว](../../../../examples/container-app)
-- [ตัวอย่างสำหรับการผลิต](../../../../examples/container-app)
-- [รูปแบบขั้นสูง](../../../../examples/container-app)
-- [แนวทางปฏิบัติที่ดีที่สุด](../../../../examples/container-app)
+- [ภาพรวม](#ภาพรวม)
+- [ข้อกำหนดเบื้องต้น](#ข้อกำหนดเบื้องต้น)
+- [ตัวอย่างเริ่มต้นด่วน](#ตัวอย่างเริ่มต้นด่วน)
+- [ตัวอย่างสำหรับการผลิต](#ตัวอย่างสำหรับการผลิต)
+- [รูปแบบขั้นสูง](#รูปแบบขั้นสูง)
+- [แนวทางปฏิบัติที่ดีที่สุด](#แนวทางปฏิบัติที่ดีที่สุด)
 
 ## ภาพรวม
 
-Azure Container Apps คือแพลตฟอร์มเซิร์ฟเวอร์เลสที่จัดการคอนเทนเนอร์อย่างเต็มรูปแบบ ที่ช่วยให้คุณสามารถรันไมโครเซอร์วิสและแอปพลิเคชันที่บรรจุในคอนเทนเนอร์โดยไม่ต้องจัดการกับโครงสร้างพื้นฐาน เมื่อใช้ร่วมกับ AZD คุณจะได้รับ:
+Azure Container Apps เป็นแพลตฟอร์มคอนเทนเนอร์แบบไม่ต้องจัดการเซิร์ฟเวอร์ที่ช่วยให้คุณเรียกใช้ไมโครเซอร์วิสและแอปพลิเคชันที่บรรจุในคอนเทนเนอร์โดยไม่ต้องจัดการโครงสร้างพื้นฐาน เมื่อรวมกับ AZD คุณจะได้รับ:
 
-- **การปรับใช้ที่ง่ายขึ้น**: คำสั่งเดียวสำหรับปรับใช้คอนเทนเนอร์พร้อมโครงสร้างพื้นฐาน
-- **การปรับขนาดอัตโนมัติ**: ปรับขนาดเป็นศูนย์และขยายตามการจราจร HTTP หรือเหตุการณ์
-- **การเชื่อมต่อเครือข่ายที่รวมกัน**: บริการค้นหาและแบ่งแยกการจราจรในตัว
-- **ตัวตนที่จัดการได้**: การพิสูจน์ตัวตนอย่างปลอดภัยกับทรัพยากร Azure
-- **การเพิ่มประสิทธิภาพต้นทุน**: จ่ายเฉพาะทรัพยากรที่คุณใช้
+- **การปรับใช้ที่ง่ายขึ้น**: คำสั่งเดียวปรับใช้คอนเทนเนอร์พร้อมโครงสร้างพื้นฐาน
+- **การปรับขนาดอัตโนมัติ**: ปรับขนาดเป็น 0 และขยายตามปริมาณการใช้งาน HTTP หรือเหตุการณ์
+- **เครือข่ายแบบบูรณาการ**: การค้นหาเซอร์วิสและแยกทราฟฟิกในตัว
+- **Managed Identity**: การตรวจสอบสิทธิ์ที่ปลอดภัยไปยังทรัพยากร Azure
+- **การเพิ่มประสิทธิภาพค่าใช้จ่าย**: ชำระเฉพาะทรัพยากรที่คุณใช้
 
 ## ข้อกำหนดเบื้องต้น
 
-ก่อนเริ่มต้น ตรวจสอบให้แน่ใจว่าคุณมี:
+ก่อนเริ่มต้น โปรดตรวจสอบว่าคุณมี:
 
 ```bash
 # ตรวจสอบการติดตั้ง AZD
@@ -32,11 +32,13 @@ azd version
 # ตรวจสอบ Azure CLI
 az version
 
-# ตรวจสอบ Docker (สำหรับสร้างภาพที่กำหนดเอง)
+# ตรวจสอบ Docker (สำหรับสร้างอิมเมจที่กำหนดเอง)
 docker --version
 
-# เข้าสู่ระบบ Azure
+# ยืนยันตัวตนสำหรับการปรับใช้ด้วย AZD
 azd auth login
+
+# ตัวเลือก: ลงชื่อเข้าใช้ Azure CLI หากคุณวางแผนที่จะรันคำสั่ง az โดยตรง
 az login
 ```
 
@@ -45,11 +47,11 @@ az login
 - สิทธิ์ในการสร้างกลุ่มทรัพยากร
 - การเข้าถึงสภาพแวดล้อม Container Apps
 
-## ตัวอย่างเริ่มต้นอย่างรวดเร็ว
+## ตัวอย่างเริ่มต้นด่วน
 
-### 1. เว็บ API ง่ายๆ (Python Flask)
+### 1. เว็บ API ง่าย ๆ (Python Flask)
 
-ปรับใช้ API REST พื้นฐานด้วย Azure Container Apps
+ปรับใช้ REST API ขั้นพื้นฐานด้วย Azure Container Apps
 
 **ตัวอย่าง: Python Flask API**
 
@@ -68,7 +70,7 @@ services:
 **ขั้นตอนการปรับใช้:**
 
 ```bash
-# เริ่มต้นจากเทมเพลต
+# เริ่มต้นจากแม่แบบ
 azd init --template todo-python-mongo
 
 # จัดเตรียมโครงสร้างพื้นฐานและปรับใช้
@@ -79,32 +81,32 @@ azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-**คุณสมบัติสำคัญ:**
-- การปรับขนาดอัตโนมัติจาก 0 ถึง 10 ตัวโคลน
-- ตรวจสอบสุขภาพและลักษณะการทำงาน
+**คุณสมบัติหลัก:**
+- ปรับขนาดอัตโนมัติจาก 0 ถึง 10 รีพลิกา
+- การตรวจสอบสุขภาพและการตรวจสอบสถานะการมีชีวิต
 - การฉีดตัวแปรสภาพแวดล้อม
-- การเชื่อมต่อกับ Application Insights
+- การผสานรวม Application Insights
 
 ### 2. Node.js Express API
 
-ปรับใช้ backend Node.js พร้อมการรวม MongoDB
+ปรับใช้แบ็กเอนด์ Node.js พร้อมการผสาน MongoDB
 
 ```bash
-# เริ่มต้นเทมเพลต API ของ Node.js
+# เริ่มต้นเทมเพลต Node.js API
 azd init --template todo-nodejs-mongo
 
-# กำหนดค่าตัวแปรสภาพแวดล้อม
+# กำหนดค่าตัวแปรแวดล้อม
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
-# ติดตั้งใช้งาน
+# ดีพลอย
 azd up
 
 # ดูบันทึกผ่าน Azure Monitor
 azd monitor --logs
 ```
 
-**ไฮไลต์โครงสร้างพื้นฐาน:**
+**ไฮไลท์โครงสร้างพื้นฐาน:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -147,18 +149,18 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 3. Frontend แบบสแตติก + Backend API
+### 3. Static Frontend + API Backend
 
-ปรับใช้แอปแบบครบวงจรด้วย frontend React และ backend API
+ปรับใช้แอปพลิเคชันแบบฟูลสแต็กด้วย React frontend และ API backend
 
 ```bash
-# เริ่มต้นแม่แบบฟูลสแต็ก
+# เริ่มต้นแม่แบบฟูลสแตก
 azd init --template todo-csharp-sql-swa-func
 
-# ทบทวนการกำหนดค่า
+# ตรวจสอบการตั้งค่า
 cat azure.yaml
 
-# ติดตั้งทั้งสองบริการ
+# ปล่อยบริการทั้งสอง
 azd up
 
 # เปิดแอปพลิเคชัน
@@ -167,9 +169,9 @@ azd show --output json | jq -r '.services.web.endpoint' | xargs start
 
 ## ตัวอย่างสำหรับการผลิต
 
-### ตัวอย่าง 1: สถาปัตยกรรมไมโครเซอร์วิส
+### ตัวอย่างที่ 1: สถาปัตยกรรมไมโครเซอร์วิส
 
-**สถานการณ์:** แอปพลิเคชันอีคอมเมิร์ซที่ประกอบด้วยไมโครเซอร์วิสหลายตัว
+**สถานการณ์**: แอปอีคอมเมิร์ซที่มีไมโครเซอร์วิสหลายตัว
 
 **โครงสร้างไดเรกทอรี:**
 ```
@@ -191,7 +193,7 @@ microservices-demo/
     └── payment-service/
 ```
 
-**การตั้งค่า azure.yaml:**
+**การกำหนดค่า azure.yaml:**
 ```yaml
 name: microservices-ecommerce
 services:
@@ -213,10 +215,10 @@ services:
 
 **การปรับใช้:**
 ```bash
-# เริ่มต้นโปรเจกต์
+# เริ่มต้นโครงการ
 azd init
 
-# ตั้งค่าสภาพแวดล้อมการผลิต
+# ตั้งค่าสภาพแวดล้อมสำหรับการผลิต
 azd env new production
 
 # กำหนดค่าการตั้งค่าการผลิต
@@ -231,9 +233,9 @@ azd up
 azd monitor --overview
 ```
 
-### ตัวอย่าง 2: AI-Powered Container App
+### ตัวอย่างที่ 2: แอป Container ด้วย AI
 
-**สถานการณ์:** แอปแชท AI ที่ผสานรวม Microsoft Foundry Models
+**สถานการณ์**: แอปแชท AI พร้อมการผสาน Microsoft Foundry Models
 
 **ไฟล์: src/ai-chat/app.py**
 ```python
@@ -244,7 +246,7 @@ import openai
 
 app = Flask(__name__)
 
-# ใช้ Managed Identity สำหรับการเข้าถึงที่ปลอดภัย
+# ใช้ Managed Identity เพื่อการเข้าถึงที่ปลอดภัย
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -253,7 +255,7 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # รับคีย์ OpenAI จาก Key Vault
+    # ดึงคีย์ OpenAI จาก Key Vault
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
@@ -320,9 +322,9 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**คำสั่งปรับใช้:**
+**คำสั่งการปรับใช้:**
 ```bash
-# ตั้งค่สภาพแวดล้อม
+# ตั้งค่าสภาพแวดล้อม
 azd init --template ai-chat-app
 azd env new dev
 
@@ -330,7 +332,7 @@ azd env new dev
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4.1"
 
-# นำไปใช้
+# ติดตั้งใช้งาน
 azd up
 
 # ทดสอบ API
@@ -339,9 +341,9 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### ตัวอย่าง 3: Background Worker พร้อมประมวลผลคิว
+### ตัวอย่างที่ 3: พนักงานหลังบ้านกับการประมวลผลคิว
 
-**สถานการณ์:** ระบบการประมวลผลคำสั่งซื้อด้วยคิวข้อความ
+**สถานการณ์**: ระบบประมวลผลคำสั่งพร้อมคิวข้อความ
 
 **โครงสร้างไดเรกทอรี:**
 ```
@@ -408,10 +410,10 @@ services:
 # เริ่มต้น
 azd init
 
-# ติดตั้งพร้อมการตั้งค่าคิว
+# เปิดใช้งานด้วยการตั้งค่าคิว
 azd up
 
-# ปรับขนาดผู้ทำงานตามความยาวของคิว
+# ปรับขนาดพนักงานตามความยาวของคิว
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -425,26 +427,26 @@ az containerapp update \
 ### รูปแบบที่ 1: การปรับใช้แบบ Blue-Green
 
 ```bash
-# สร้างเวอร์ชันใหม่โดยไม่ส่งทราฟฟิก
+# สร้างรีวิชันใหม่โดยไม่มีทราฟฟิก
 azd deploy api --revision-suffix blue --no-traffic
 
-# ทดสอบเวอร์ชันใหม่
+# ทดสอบรีวิชันใหม่
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# แบ่งทราฟฟิก (20% ไปที่สีฟ้า, 80% ไปที่เวอร์ชันปัจจุบัน)
+# แบ่งทราฟฟิก (20% ไปที่บลู, 80% ไปที่ปัจจุบัน)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# เปลี่ยนทั้งหมดไปที่สีฟ้า
+# สลับทั้งหมดไปที่บลู
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
 
-### รูปแบบที่ 2: การปรับใช้แบบ Canary ด้วย AZD
+### รูปแบบที่ 2: การปรับใช้ Canary ด้วย AZD
 
 **ไฟล์: .azure/dev/config.json**
 ```json
@@ -463,13 +465,13 @@ az containerapp ingress traffic set \
 #!/bin/bash
 # deploy-canary.sh
 
-# ดำเนินการเผยแพร่เวอร์ชันใหม่ด้วยการรับส่งข้อมูล 10%
+# ปล่อยรีวิชันใหม่พร้อมกับทราฟฟิก 10%
 azd deploy api --revision-mode multiple
 
-# ตรวจสอบเมตริก
+# เฝ้าระวังเมตริก
 azd monitor --service api --duration 5m
 
-# เพิ่มการรับส่งข้อมูลอย่างค่อยเป็นค่อยไป
+# เพิ่มทราฟฟิกอย่างค่อยเป็นค่อยไป
 for i in {20..100..10}; do
   echo "Increasing traffic to $i%"
   az containerapp revision set-traffic \
@@ -529,14 +531,14 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 
 **การปรับใช้:**
 ```bash
-# ปรับใช้ไปยังทุกภูมิภาค
+# นำไปใช้ในทุกภูมิภาค
 azd up
 
 # ตรวจสอบจุดสิ้นสุด
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### รูปแบบที่ 4: การรวม Dapr
+### รูปแบบที่ 4: การผสาน Dapr
 
 **ไฟล์: infra/app/dapr-enabled.bicep**
 ```bicep
@@ -563,7 +565,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-**โค้ดแอปพลิเคชันที่ใช้ Dapr:**
+**โค้ดแอปพลิเคชันพร้อม Dapr:**
 ```python
 from flask import Flask
 from dapr.clients import DaprClient
@@ -599,11 +601,11 @@ def create_order():
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# ติดแท็กทรัพยากรเพื่อการติดตามต้นทุน
+# ติดแท็กรายการทรัพยากรเพื่อการติดตามต้นทุน
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. แนวทางความปลอดภัยที่ดีที่สุด
+### 2. แนวทางปฏิบัติด้านความปลอดภัย
 
 ```bicep
 // Always use managed identity
@@ -662,7 +664,7 @@ services:
             concurrent: 100
 ```
 
-### 4. การตรวจสอบและการสังเกตการณ์
+### 4. การตรวจสอบและสังเกตการณ์
 
 ```bash
 # เปิดใช้งาน Application Insights
@@ -685,7 +687,7 @@ az monitor metrics alert create \
   --description "Alert when CPU exceeds 80%"
 ```
 
-### 5. การเพิ่มประสิทธิภาพต้นทุน
+### 5. การเพิ่มประสิทธิภาพค่าใช้จ่าย
 
 ```bash
 # ปรับขนาดเป็นศูนย์เมื่อไม่ได้ใช้งาน
@@ -694,10 +696,10 @@ az containerapp update \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# ใช้ spot instances สำหรับสภาพแวดล้อมการพัฒนา
+# ใช้ spot instances สำหรับสภาพแวดล้อมพัฒนา
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# ตั้งการแจ้งเตือนงบประมาณ
+# ตั้งค่าการแจ้งเตือนงบประมาณ
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
@@ -705,7 +707,7 @@ az consumption budget create \
   --threshold 80
 ```
 
-### 6. การรวม CI/CD
+### 6. การผสาน CI/CD
 
 **ตัวอย่าง GitHub Actions:**
 ```yaml
@@ -740,22 +742,22 @@ jobs:
 ## คำสั่งทั่วไปอ้างอิง
 
 ```bash
-# เริ่มต้นโปรเจกต์แอปคอนเทนเนอร์ใหม่
+# เริ่มโปรเจกต์แอปคอนเทนเนอร์ใหม่
 azd init --template <template-name>
 
-# นำส่งโครงสร้างพื้นฐานและแอปพลิเคชัน
+# ปรับใช้โครงสร้างพื้นฐานและแอปพลิเคชัน
 azd up
 
-# นำส่งเฉพาะโค้ดแอปพลิเคชัน (ข้ามโครงสร้างพื้นฐาน)
+# ปรับใช้เฉพาะโค้ดแอปพลิเคชัน (ข้ามโครงสร้างพื้นฐาน)
 azd deploy
 
-# จัดเตรียมเฉพาะโครงสร้างพื้นฐาน
+# จัดเตรียมโครงสร้างพื้นฐานเท่านั้น
 azd provision
 
-# ดูทรัพยากรที่นำส่งแล้ว
+# ดูทรัพยากรที่ปรับใช้แล้ว
 azd show
 
-# ดูบันทึกสดโดยใช้ azd monitor หรือ Azure CLI
+# สตรีมล็อกโดยใช้ azd monitor หรือ Azure CLI
 azd monitor --logs
 # az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
@@ -768,7 +770,7 @@ azd down --force --purge
 
 ## การแก้ไขปัญหา
 
-### ปัญหา: คอนเทนเนอร์เริ่มต้นไม่สำเร็จ
+### ปัญหา: คอนเทนเนอร์ไม่สามารถเริ่มต้นได้
 
 ```bash
 # ตรวจสอบบันทึกโดยใช้ Azure CLI
@@ -785,7 +787,7 @@ docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### ปัญหา: ไม่สามารถเข้าถึงจุดสิ้นสุด container app
+### ปัญหา: ไม่สามารถเข้าถึงจุดสิ้นสุดของแอปคอนเทนเนอร์ได้
 
 ```bash
 # ตรวจสอบการกำหนดค่า ingress
@@ -794,7 +796,7 @@ az containerapp show \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# ตรวจสอบว่าการใช้งาน internal ingress เปิดใช้งานอยู่หรือไม่
+# ตรวจสอบว่าการใช้งาน internal ingress เปิดใช้งานหรือไม่
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
@@ -809,7 +811,7 @@ az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# ขยายทรัพยากร
+# ขยายทรัพยากรขึ้น
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -817,9 +819,9 @@ az containerapp update \
   --memory 4Gi
 ```
 
-## ทรัพยากรเพิ่มเติมและตัวอย่าง
+## ทรัพยากรและตัวอย่างเพิ่มเติม
 - [ตัวอย่างไมโครเซอร์วิส](./microservices/README.md)
-- [ตัวอย่าง Simple Flask API](./simple-flask-api/README.md)
+- [ตัวอย่าง Simple Flash API](./simple-flask-api/README.md)
 - [เอกสาร Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
 - [แกลเลอรีเทมเพลต AZD](https://azure.github.io/awesome-azd/)
 - [ตัวอย่าง Container Apps](https://github.com/Azure-Samples/container-apps-samples)
@@ -827,13 +829,13 @@ az containerapp update \
 
 ## การมีส่วนร่วม
 
-เพื่อมีส่วนร่วมเพิ่มตัวอย่าง container app ใหม่:
+เพื่อมีส่วนร่วมในตัวอย่างแอปคอนเทนเนอร์ใหม่:
 
 1. สร้างไดเรกทอรีย่อยใหม่พร้อมตัวอย่างของคุณ
-2. รวมไฟล์ `azure.yaml` `infra/` และ `src/` ให้ครบถ้วน
-3. เพิ่ม README ที่สมบูรณ์พร้อมคำแนะนำการปรับใช้
+2. รวมไฟล์ `azure.yaml`, `infra/` และ `src/` อย่างครบถ้วน
+3. เพิ่ม README ที่ครอบคลุมพร้อมคำแนะนำการปรับใช้
 4. ทดสอบการปรับใช้ด้วย `azd up`
-5. ส่งคำขอดึง (pull request)
+5. ส่งคำร้องขอดึง
 
 ---
 
@@ -842,6 +844,6 @@ az containerapp update \
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ข้อจำกัดความรับผิดชอบ**:  
-เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษาด้วย AI [Co-op Translator](https://github.com/Azure/co-op-translator) แม้เราจะพยายามให้ความถูกต้องแต่โปรดทราบว่าการแปลอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาต้นทางควรถูกพิจารณาเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่สำคัญ ควรใช้บริการแปลโดยผู้เชี่ยวชาญด้านมนุษย์ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความผิดใด ๆ ที่เกิดจากการใช้การแปลนี้
+**ข้อจำกัดความรับผิด**:
+เอกสารฉบับนี้ได้รับการแปลโดยใช้บริการแปลภาษา AI [Co-op Translator](https://github.com/Azure/co-op-translator) แม้เราจะพยายามให้ความถูกต้อง แต่โปรดทราบว่าการแปลอัตโนมัติอาจมีข้อผิดพลาดหรือความคลาดเคลื่อน เอกสารต้นฉบับในภาษาดั้งเดิมถือเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่สำคัญ ขอแนะนำให้ใช้การแปลโดยมืออาชีพที่เป็นมนุษย์ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความผิดใด ๆ ที่เกิดจากการใช้การแปลนี้
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

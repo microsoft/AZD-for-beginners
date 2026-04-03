@@ -1,45 +1,47 @@
-# บทที่ 4: Infrastructure as Code & Deployment
+# Chapter 4: Infrastructure as Code & Deployment
 
-**📚 หลักสูตร**: [AZD สำหรับผู้เริ่มต้น](../../README.md) | **⏱️ ระยะเวลา**: 1-1.5 ชั่วโมง | **⭐ ความซับซ้อน**: ระดับกลาง
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1-1.5 hours | **⭐ Complexity**: Intermediate
 
 ---
 
-## ภาพรวม
+## Overview
 
-บทนี้ครอบคลุมรูปแบบ Infrastructure as Code (IaC) ด้วยเทมเพลต Bicep, การเตรียมทรัพยากร และกลยุทธ์การปรับใช้โดยใช้ Azure Developer CLI
+บทนี้ครอบคลุมรูปแบบ Infrastructure as Code (IaC) ด้วยเทมเพลต Bicep, การจัดสรรทรัพยากร และกลยุทธ์การปรับใช้โดยใช้ Azure Developer CLI
 
-## วัตถุประสงค์การเรียนรู้
+> ตรวจสอบความถูกต้องกับ `azd 1.23.12` ในเดือนมีนาคม 2026
 
-เมื่อเรียนจบบทนี้ คุณจะ:
+## Learning Objectives
+
+เมื่อผ่านบทนี้แล้ว คุณจะ:
 - เข้าใจโครงสร้างและไวยากรณ์ของเทมเพลต Bicep
-- เตรียมทรัพยากร Azure ด้วย `azd provision`
+- จัดสรรทรัพยากร Azure ด้วย `azd provision`
 - ปรับใช้แอปพลิเคชันด้วย `azd deploy`
-- นำกลยุทธ์การปรับใช้แบบ blue-green และ rolling มาใช้
+- นำกลยุทธ์การปรับใช้แบบ blue-green และ rolling มาใช้งาน
 
 ---
 
-## 📚 บทเรียน
+## 📚 Lessons
 
-| # | บทเรียน | คำอธิบาย | เวลา |
+| # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [การเตรียมทรัพยากร](provisioning.md) | การจัดการทรัพยากร Azure ด้วย AZD | 45 นาที |
-| 2 | [คู่มือการปรับใช้](deployment-guide.md) | กลยุทธ์การปรับใช้แอปพลิเคชัน | 45 นาที |
+| 1 | [Provisioning Resources](provisioning.md) | การจัดการทรัพยากร Azure ด้วย AZD | 45 min |
+| 2 | [Deployment Guide](deployment-guide.md) | กลยุทธ์การปรับใช้แอปพลิเคชัน | 45 min |
 
 ---
 
-## 🚀 เริ่มต้นอย่างรวดเร็ว
+## 🚀 Quick Start
 
 ```bash
-# เริ่มต้นจากเทมเพลต
+# เริ่มต้นจากแม่แบบ
 azd init --template azure-functions-python-v2-http
 
-# ดูตัวอย่างสิ่งที่จะถูกสร้าง
+# แสดงตัวอย่างสิ่งที่จะถูกสร้าง
 azd provision --preview
 
 # จัดเตรียมโครงสร้างพื้นฐานเท่านั้น
 azd provision
 
-# ปรับใช้โค้ดเท่านั้น
+# นำรหัสขึ้นใช้งานเท่านั้น
 azd deploy
 
 # หรือทั้งสองอย่างพร้อมกัน
@@ -48,7 +50,7 @@ azd up
 
 ---
 
-## 📁 โครงสร้างโครงการ AZD
+## 📁 AZD Project Structure
 
 ```
 my-project/
@@ -65,36 +67,36 @@ my-project/
 
 ---
 
-## 🔧 คำสั่งสำคัญ
+## 🔧 Essential Commands
 
-| คำสั่ง | คำอธิบาย |
+| Command | Description |
 |---------|-------------|
-| `azd init` | เริ่มต้นโครงการ |
+| `azd init` | เริ่มต้นโปรเจกต์ |
 | `azd provision` | สร้างทรัพยากร Azure |
 | `azd deploy` | ปรับใช้โค้ดแอปพลิเคชัน |
-| `azd up` | เตรียมทรัพยากร + ปรับใช้ |
+| `azd up` | provision + deploy |
 | `azd down` | ลบทรัพยากรทั้งหมด |
 
 ---
 
-## 🔗 การนำทาง
+## 🔗 Navigation
 
-| ทิศทาง | บท |
+| Direction | Chapter |
 |-----------|---------|
-| **ก่อนหน้า** | [บทที่ 3: การกำหนดค่า](../chapter-03-configuration/README.md) |
-| **ถัดไป** | [บทที่ 5: โซลูชันหลายเอเย่นต์](../chapter-05-multi-agent/README.md) |
+| **Previous** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
+| **Next** | [Chapter 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md) |
 
 ---
 
-## 📖 แหล่งข้อมูลที่เกี่ยวข้อง
+## 📖 Related Resources
 
-- [การตรวจสอบก่อนการปรับใช้](../chapter-06-pre-deployment/README.md)
-- [ตัวอย่างแอปคอนเทนเนอร์](../../examples/container-app/README.md)
-- [ตัวอย่างแอปฐานข้อมูล](../../examples/database-app/README.md)
+- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
+- [Container App Examples](../../examples/container-app/README.md)
+- [Database App Example](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-ข้อจำกัดความรับผิดชอบ:
-เอกสารฉบับนี้ได้รับการแปลโดยใช้บริการแปลภาษา AI [Co-op Translator](https://github.com/Azure/co-op-translator) แม้ว่าเราจะพยายามให้มีความถูกต้อง โปรดทราบว่าการแปลโดยอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้องได้ ควรถือว่าเอกสารต้นฉบับในภาษาต้นฉบับเป็นแหล่งข้อมูลหลัก สำหรับข้อมูลที่มีความสำคัญเป็นอย่างยิ่ง ขอแนะนำให้ใช้บริการแปลโดยนักแปลมนุษย์มืออาชีพ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความผิดใดๆ ที่เกิดจากการใช้การแปลฉบับนี้
+**ข้อจำกัดความรับผิดชอบ**:  
+เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษา AI [Co-op Translator](https://github.com/Azure/co-op-translator) แม้เราจะพยายามให้ความถูกต้อง แต่กรุณาทราบว่าการแปลอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาต้นทางถือเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่มีความสำคัญ ควรใช้บริการแปลโดยมืออาชีพทางภาษา เราจะไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดใด ๆ ที่เกิดขึ้นจากการใช้การแปลนี้
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

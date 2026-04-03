@@ -1,110 +1,110 @@
-# Configuration Guide
+# คู่มือการตั้งค่า
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: บทที่ 3 - การกำหนดค่า & การตรวจสอบสิทธิ์
-- **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 Next Chapter**: [บทที่ 4: โครงสร้างพื้นฐานในรูปแบบโค้ด](../chapter-04-infrastructure/deployment-guide.md)
+**การนำทางบทเรียน:**
+- **📚 หน้าแรกคอร์ส**: [AZD For Beginners](../../README.md)
+- **📖 บทปัจจุบัน**: บทที่ 3 - การตั้งค่าและการพิสูจน์ตัวตน
+- **⬅️ ก่อนหน้า**: [โปรเจกต์แรกของคุณ](first-project.md)
+- **➡️ ถัดไป**: [คู่มือการดีพลอย](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 บทถัดไป**: [บทที่ 4: โครงสร้างพื้นฐานในรูปแบบโค้ด](../chapter-04-infrastructure/deployment-guide.md)
 
-## Introduction
+## บทนำ
 
-คู่มือฉบับสมบูรณ์นี้ครอบคลุมทุกด้านของการกำหนดค่า Azure Developer CLI เพื่อให้ได้ประสิทธิภาพสูงสุดในกระบวนการพัฒนาและการปรับใช้ คุณจะได้เรียนรู้เกี่ยวกับลำดับชั้นของการกำหนดค่า การจัดการสภาพแวดล้อม วิธีการตรวจสอบสิทธิ์ และรูปแบบการกำหนดค่าขั้นสูงที่ช่วยให้การปรับใช้ Azure มีประสิทธิภาพและปลอดภัย
+คู่มืออย่างละเอียดนี้ครอบคลุมทุกแง่มุมของการตั้งค่า Azure Developer CLI เพื่อกระบวนการพัฒนาและการดีพลอยที่เหมาะสม คุณจะได้เรียนรู้เกี่ยวกับลำดับชั้นของการตั้งค่า การจัดการสภาพแวดล้อม วิธีการพิสูจน์ตัวตน และรูปแบบการตั้งค่าที่ซับซ้อนซึ่งช่วยให้การดีพลอยบน Azure มีประสิทธิภาพและปลอดภัย
 
-## Learning Goals
+## เป้าหมายการเรียนรู้
 
-เมื่อจบบทเรียนนี้แล้ว คุณจะสามารถ:
-- เชี่ยวชาญลำดับชั้นการกำหนดค่า azd และเข้าใจวิธีการจัดลำดับความสำคัญของการตั้งค่า
-- กำหนดค่าการตั้งค่าระดับโลกและเฉพาะโครงการได้อย่างมีประสิทธิภาพ
-- จัดการหลายสภาพแวดล้อมที่มีการกำหนดค่าต่างกัน
-- นำรูปแบบการตรวจสอบสิทธิ์ที่ปลอดภัยมาใช้
-- เข้าใจรูปแบบการกำหนดค่าขั้นสูงสำหรับสถานการณ์ซับซ้อน
+เมื่อจบบทเรียนนี้ คุณจะสามารถ:
+- เชี่ยวชาญในลำดับชั้นการตั้งค่า azd และเข้าใจการจัดลำดับความสำคัญของการตั้งค่า
+- ตั้งค่าการตั้งค่าระดับโลกและเฉพาะโครงการได้อย่างมีประสิทธิภาพ
+- จัดการหลายสภาพแวดล้อมที่มีการตั้งค่าต่างกัน
+- นำรูปแบบการพิสูจน์ตัวตนและการให้สิทธิ์อย่างปลอดภัยมาใช้
+- เข้าใจรูปแบบการตั้งค่าขั้นสูงสำหรับสถานการณ์ที่ซับซ้อน
 
-## Learning Outcomes
+## ผลลัพธ์การเรียนรู้
 
-หลังจากจบบทเรียนนี้แล้ว คุณจะสามารถ:
-- กำหนดค่า azd เพื่อกระบวนการพัฒนาที่ดีที่สุด
-- ตั้งค่าและจัดการหลายสภาพแวดล้อมสำหรับการปรับใช้
-- นำแนวปฏิบัติการจัดการการกำหนดค่าที่ปลอดภัยมาใช้
-- แก้ไขปัญหาที่เกี่ยวข้องกับการกำหนดค่า
-- ปรับแต่งพฤติกรรม azd ให้เหมาะกับความต้องการเฉพาะขององค์กร
+หลังจากจบบทเรียนนี้ คุณจะสามารถ:
+- ตั้งค่า azd เพื่อการทำงานพัฒนาที่เหมาะสม
+- ตั้งค่าและจัดการหลายสภาพแวดล้อมสำหรับการดีพลอย
+- นำแนวทางการจัดการการตั้งค่าอย่างปลอดภัยมาใช้
+- แก้ไขปัญหาที่เกี่ยวข้องกับการตั้งค่า
+- ปรับแต่งพฤติกรรม azd ให้เหมาะสมกับความต้องการเฉพาะขององค์กร
 
-คู่มือฉบับสมบูรณ์นี้ครอบคลุมทุกด้านของการกำหนดค่า Azure Developer CLI เพื่อให้ได้ประสิทธิภาพสูงสุดในกระบวนการพัฒนาและการปรับใช้
+คู่มืออย่างละเอียดนี้ครอบคลุมทุกแง่มุมของการตั้งค่า Azure Developer CLI เพื่อกระบวนการพัฒนาและการดีพลอยที่เหมาะสม
 
-## Understanding AI Agents in an azd Project
+## ทำความเข้าใจเกี่ยวกับ AI Agents ในโปรเจกต์ azd
 
-ถ้าคุณยังไม่คุ้นเคยกับ AI agents นี่คือวิธีง่าย ๆ ที่จะคิดถึงพวกมันในโลกของ azd
+ถ้าคุณเป็นมือใหม่กับ AI agents นี่คือวิธีคิดง่าย ๆ เกี่ยวกับพวกมันในโลกของ azd
 
-### What Is an Agent?
+### เอเจนต์คืออะไร?
 
-เอเย่นต์คือซอฟต์แวร์ชิ้นหนึ่งที่สามารถรับคำขอ วิเคราะห์ และดำเนินการ—โดยมักจะเรียกใช้โมเดล AI ค้นหาข้อมูล หรือเรียกใช้บริการอื่น ๆ ในโปรเจกต์ azd เอเย่นต์คือ **บริการ** อีกหนึ่งชนิดที่อยู่ข้าง ๆ เว็บฟรอนต์เอนด์หรือ Backend API ของคุณ
+เอเจนต์คือซอฟต์แวร์ที่สามารถรับคำขอ วิเคราะห์เหตุผล และดำเนินการ — มักจะโดยการเรียกใช้โมเดล AI, ค้นหาข้อมูล หรือเรียกใช้บริการอื่น ๆ ในโปรเจกต์ azd เอเจนต์เป็นเพียงหนึ่งใน **บริการ** เช่นเดียวกับเว็บฟรอนเอนด์หรือ API แบ็คเอนด์ของคุณ
 
-### How Agents Fit Into the azd Project Structure
+### เอเจนต์รวมอยู่ในโครงสร้างโปรเจกต์ azd อย่างไร
 
-โปรเจกต์ azd ประกอบด้วยสามชั้น: **โครงสร้างพื้นฐาน**, **โค้ด**, และ **การกำหนดค่า** เอเย่นต์เชื่อมต่อกับชั้นเหล่านี้เช่นเดียวกับบริการอื่น:
+โปรเจกต์ azd ประกอบด้วยสามชั้น: **โครงสร้างพื้นฐาน**, **โค้ด**, และ **การตั้งค่า** เอเจนต์จะเชื่อมต่อกับชั้นเหล่านี้ในลักษณะเดียวกับบริการอื่น ๆ:
 
-| Layer | What It Does for a Traditional App | What It Does for an Agent |
+| ชั้น | หน้าที่สำหรับแอปแบบดั้งเดิม | หน้าที่สำหรับเอเจนต์ |
 |-------|-------------------------------------|---------------------------|
-| **Infrastructure** (`infra/`) | สร้างเว็บแอปและฐานข้อมูล | สร้างจุดเชื่อมต่อโมเดล AI, ดัชนีค้นหา หรือโฮสต์สำหรับเอเย่นต์ |
-| **Code** (`src/`) | ประกอบด้วยโค้ดฟรอนต์เอนด์และ API ของคุณ | ประกอบด้วยตรรกะของเอเย่นต์และการกำหนด prompt |
-| **Configuration** (`azure.yaml`) | แสดงรายการบริการและเป้าหมายโฮสต์ | แสดงรายการเอเย่นต์เป็นบริการ ชี้ไปที่โค้ดและโฮสต์ของมัน |
+| **โครงสร้างพื้นฐาน** (`infra/`) | จัดเตรียมเว็บแอปและฐานข้อมูล | จัดเตรียมเอ็นด์พอยต์โมเดล AI, ดัชนีการค้นหา หรือโฮสต์เอเจนต์ |
+| **โค้ด** (`src/`) | เก็บซอร์สโค้ดฟรอนท์เอนด์และ API | เก็บตรรกะเอเจนต์และคำสั่ง prompt |
+| **การตั้งค่า** (`azure.yaml`) | ระบุบริการและเป้าหมายโฮสต์ | ระบุเอเจนต์เป็นบริการ ชี้ไปที่โค้ดและโฮสต์ของมัน |
 
-### The Role of `azure.yaml`
+### บทบาทของ `azure.yaml`
 
-คุณไม่จำเป็นต้องจำไวยากรณ์ในตอนนี้ โดยแนวคิดแล้ว `azure.yaml` คือไฟล์ที่คุณบอก azd ว่า: *"นี่คืบริการที่ประกอบเป็นแอปของฉัน และนี่คือที่อยู่ของโค้ดของพวกมัน"*
+คุณไม่จำเป็นต้องจดจำไวยากรณ์ตอนนี้ โดยในแนวคิด `azure.yaml` คือไฟล์ที่บอก azd ว่า: *"นี่คือบริการที่ประกอบเป็นแอปของฉัน และนี่คือที่ตั้งของโค้ดพวกมัน"*
 
-เมื่อโปรเจกต์ของคุณมี AI agent, `azure.yaml` ก็แค่แสดงรายการเอเย่นต์นั้นเป็นหนึ่งในบริการ azd ก็จะรู้ว่าต้องสร้างโครงสร้างพื้นฐานที่ถูกต้อง (เช่น Microsoft Foundry Models endpoint หรือ Container App เพื่อโฮสต์เอเย่นต์) และปรับใช้โค้ดเอเย่นต์ของคุณ—เหมือนกับแอปเว็บหรือ API
+เมื่อโปรเจกต์ของคุณมี AI agent `azure.yaml` ก็แค่ระบุเอเจนต์เป็นหนึ่งในบริการ azd ก็จะรู้ว่าต้องจัดเตรียมโครงสร้างพื้นฐานที่เหมาะสม (เช่น Microsoft Foundry Models endpoint หรือ Container App ที่โฮสต์เอเจนต์) และดีพลอยโค้ดเอเจนต์ของคุณ — เหมือนกับเว็บแอปหรือ API
 
-ซึ่งหมายความว่าไม่มีอะไรใหม่ที่ต้องเรียนรู้ หากคุณเข้าใจวิธีจัดการเว็บเซอร์วิสของ azd คุณก็เข้าใจวิธีจัดการเอเย่นต์แล้ว
+นั่นหมายความว่าไม่มีอะไรใหม่ที่ต้องเรียนรู้พื้นฐาน ถ้าคุณเข้าใจวิธีที่ azd จัดการเว็บเซอร์วิส คุณก็เข้าใจวิธีจัดการเอเจนต์แล้ว
 
-## Configuration Hierarchy
+## ลำดับชั้นการตั้งค่า
 
-azd ใช้ระบบการกำหนดค่าลำดับชั้น:
-1. **แฟลกคำสั่ง CLI** (มีลำดับความสำคัญสูงสุด)
+azd ใช้ระบบการตั้งค่าแบบลำดับชั้น:
+1. **แฟล็กจากบรรทัดคำสั่ง** (ลำดับความสำคัญสูงสุด)
 2. **ตัวแปรสภาพแวดล้อม**
-3. **การกำหนดค่าโครงการในพื้นที่** (`.azd/config.json`)
-4. **การกำหนดค่าผู้ใช้ระดับโลก** (`~/.azd/config.json`)
+3. **การตั้งค่าโปรเจกต์ในเครื่อง** (`.azd/config.json`)
+4. **การตั้งค่าผู้ใช้ระดับโลก** (`~/.azd/config.json`)
 5. **ค่าตั้งต้น** (ลำดับความสำคัญต่ำสุด)
 
-## Global Configuration
+## การตั้งค่าระดับโลก
 
-### Setting Global Defaults
+### การตั้งค่าค่าตั้งต้นระดับโลก
 ```bash
-# ตั้งค่าการสมัครสมาชิกเริ่มต้น
+# ตั้งค่าการสมัครใช้งานเริ่มต้น
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
 # ตั้งค่าตำแหน่งเริ่มต้น
 azd config set defaults.location "eastus2"
 
-# ตั้งค่ารูปแบบการตั้งชื่อกลุ่มทรัพยากรเริ่มต้น
+# ตั้งค่านิยามการตั้งชื่อกลุ่มทรัพยากรเริ่มต้น
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
 # ดูการกำหนดค่าทั่วโลกทั้งหมด
-azd config list
+azd config show
 
 # ลบการกำหนดค่า
 azd config unset defaults.location
 ```
 
-### Common Global Settings
+### การตั้งค่าทั่วไประดับโลก
 ```bash
-# ค่ากำหนดการพัฒนา
-azd config set alpha.enable true                    # เปิดใช้งานฟีเจอร์เบต้า
-azd config set telemetry.enabled false             # ปิดการใช้งานการส่งข้อมูลวิเคราะห์
+# การตั้งค่าความชอบในการพัฒนา
+azd config set alpha.enable true                    # เปิดใช้งานฟีเจอร์อัลฟ่า
+azd config set telemetry.enabled false             # ปิดใช้งานการส่งข้อมูลสถิติ
 azd config set output.format json                  # ตั้งค่ารูปแบบผลลัพธ์
 
 # การตั้งค่าความปลอดภัย
 azd config set auth.useAzureCliCredential true     # ใช้ Azure CLI สำหรับการยืนยันตัวตน
-azd config set tls.insecure false                  # บังคับการตรวจสอบ TLS
+azd config set tls.insecure false                  # บังคับใช้การตรวจสอบ TLS
 
-# ปรับแต่งประสิทธิภาพ
+# การปรับแต่งประสิทธิภาพ
 azd config set provision.parallelism 5             # การสร้างทรัพยากรแบบขนาน
-azd config set deploy.timeout 30m                  # เวลาหมดอายุของการปรับใช้
+azd config set deploy.timeout 30m                  # เวลาหมดเขตการปรับใช้
 ```
 
-## 🏗️ Project Configuration
+## 🏗️ การตั้งค่าโปรเจกต์
 
-### azure.yaml Structure
+### โครงสร้าง azure.yaml
 ไฟล์ `azure.yaml` คือหัวใจของโปรเจกต์ azd ของคุณ:
 
 ```yaml
@@ -181,9 +181,9 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Service Configuration Options
+### ตัวเลือกการตั้งค่าบริการ
 
-#### Host Types
+#### ประเภทโฮสต์
 ```yaml
 services:
   web-static:
@@ -202,7 +202,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Language-Specific Settings
+#### การตั้งค่าภาษาที่เฉพาะเจาะจง
 ```yaml
 services:
   node-app:
@@ -226,22 +226,22 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 Environment Management
+## 🌟 การจัดการสภาพแวดล้อม
 
-### Creating Environments
+### การสร้างสภาพแวดล้อม
 ```bash
 # สร้างสภาพแวดล้อมใหม่
 azd env new development
 
-# สร้างด้วยตำแหน่งที่เจาะจง
+# สร้างด้วยตำแหน่งที่เฉพาะเจาะจง
 azd env new staging --location "westus2"
 
-# สร้างจากเทมเพลต
+# สร้างจากแม่แบบ
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Environment Configuration
-แต่ละสภาพแวดล้อมมีการกำหนดค่าของตัวเองใน `.azure/<env-name>/config.json`:
+### การตั้งค่าสภาพแวดล้อม
+แต่ละสภาพแวดล้อมมีการตั้งค่าของตัวเองใน `.azure/<env-name>/config.json`:
 
 ```json
 {
@@ -263,7 +263,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 }
 ```
 
-### Environment Variables
+### ตัวแปรสภาพแวดล้อม
 ```bash
 # ตั้งค่าตัวแปรเฉพาะสภาพแวดล้อม
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
@@ -283,10 +283,10 @@ azd env unset DEBUG
 
 # ตรวจสอบการลบ
 azd env get-values | grep DEBUG
-# (ควรไม่มีผลลัพธ์)
+# (ควรคืนค่าเป็นค่าว่าง)
 ```
 
-### Environment Templates
+### เทมเพลตสภาพแวดล้อม
 สร้าง `.azure/env.template` เพื่อการตั้งค่าสภาพแวดล้อมที่สอดคล้องกัน:
 ```bash
 # ตัวแปรที่จำเป็น
@@ -298,34 +298,34 @@ DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# การตั้งค่าการพัฒนาที่ไม่บังคับ
+# การตั้งค่าการพัฒนาเพิ่มเติม
 DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 Authentication Configuration
+## 🔐 การตั้งค่าการพิสูจน์ตัวตน
 
-### Azure CLI Integration
+### การผสานรวม Azure CLI
 ```bash
-# ใช้ข้อมูลรับรอง Azure CLI (ค่าเริ่มต้น)
+# ใช้ข้อมูลประจำตัว Azure CLI (ค่าเริ่มต้น)
 azd config set auth.useAzureCliCredential true
 
-# เข้าสู่ระบบด้วย tenant ที่ระบุ
+# เข้าสู่ระบบด้วยผู้เช่าเฉพาะ
 az login --tenant <tenant-id>
 
 # ตั้งค่าการสมัครสมาชิกเริ่มต้น
 az account set --subscription <subscription-id>
 ```
 
-### Service Principal Authentication
-สำหรับ pipelines CI/CD:
+### การพิสูจน์ตัวตนด้วย Service Principal
+สำหรับสายงาน CI/CD:
 ```bash
 # ตั้งค่าตัวแปรสภาพแวดล้อม
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# หรือกำหนดค่าโดยตรง
+# หรือกำหนดค่าตรง ๆ
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
@@ -333,15 +333,15 @@ azd config set auth.tenantId "your-tenant-id"
 ### Managed Identity
 สำหรับสภาพแวดล้อมที่โฮสต์บน Azure:
 ```bash
-# เปิดใช้งานการรับรองความถูกต้องด้วยตัวตนที่จัดการ
+# เปิดใช้งานการยืนยันตัวตนด้วย managed identity
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ Infrastructure Configuration
+## 🏗️ การตั้งค่าโครงสร้างพื้นฐาน
 
-### Bicep Parameters
-กำหนดค่าพารามิเตอร์โครงสร้างพื้นฐานใน `infra/main.parameters.json`:
+### พารามิเตอร์ Bicep
+ตั้งค่าพารามิเตอร์โครงสร้างพื้นฐานใน `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -363,8 +363,8 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 }
 ```
 
-### Terraform Configuration
-สำหรับโปรเจกต์ Terraform, กำหนดค่าใน `infra/terraform.tfvars`:
+### การตั้งค่า Terraform
+สำหรับโปรเจกต์ Terraform ตั้งค่าใน `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -372,9 +372,9 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Deployment Configuration
+## 🚀 การตั้งค่าการดีพลอย
 
-### Build Configuration
+### การตั้งค่าการสร้าง
 ```yaml
 # In azure.yaml
 services:
@@ -397,7 +397,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Docker Configuration
+### การตั้งค่า Docker
 ```yaml
 services:
   api:
@@ -411,19 +411,19 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
- ตัวอย่าง `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+ตัวอย่าง `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 Advanced Configuration
+## 🔧 การตั้งค่าขั้นสูง
 
-### Custom Resource Naming
+### การตั้งชื่อทรัพยากรแบบกำหนดเอง
 ```bash
-# ตั้งค่าข้อตกลงการตั้งชื่อ
+# ตั้งค่านิยามการตั้งชื่อ
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### Network Configuration
+### การตั้งค่าเครือข่าย
 ```yaml
 # In azure.yaml
 infra:
@@ -434,7 +434,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Monitoring Configuration
+### การตั้งค่าการตรวจสอบ
 ```yaml
 # In azure.yaml
 monitoring:
@@ -446,9 +446,9 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Environment-Specific Configurations
+## 🎯 การตั้งค่าสภาพแวดล้อมเฉพาะ
 
-### Development Environment
+### สภาพแวดล้อมการพัฒนา
 ```bash
 # .azure/development/.env
 DEBUG=true
@@ -457,7 +457,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Staging Environment
+### สภาพแวดล้อมการทดสอบ
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -466,7 +466,7 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### Production Environment
+### สภาพแวดล้อมการผลิต
 ```bash
 # .azure/production/.env
 DEBUG=false
@@ -475,22 +475,22 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Configuration Validation
+## 🔍 การตรวจสอบการตั้งค่า
 
-### Validate Configuration
+### การตรวจสอบการตั้งค่า
 ```bash
 # ตรวจสอบไวยากรณ์การกำหนดค่า
 azd config validate
 
-# ทดสอบตัวแปรสภาพแวดล้อม
+# ทดสอบตัวแปรแวดล้อม
 azd env get-values
 
 # ตรวจสอบความถูกต้องของโครงสร้างพื้นฐาน
 azd provision --dry-run
 ```
 
-### Configuration Scripts
-สร้างสคริปต์ตรวจสอบใน `scripts/`:
+### สคริปต์การตั้งค่า
+สร้างสคริปต์ตรวจสอบในโฟลเดอร์ `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -498,13 +498,13 @@ azd provision --dry-run
 
 echo "Validating configuration..."
 
-# ตรวจสอบตัวแปรแวดล้อมที่จำเป็น
+# ตรวจสอบตัวแปรสภาพแวดล้อมที่จำเป็น
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# ตรวจสอบไวยากรณ์ azure.yaml
+# ตรวจสอบไวยากรณ์ไฟล์ azure.yaml
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -513,9 +513,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Best Practices
+## 🎓 แนวปฏิบัติที่ดีที่สุด
 
-### 1. Use Environment Variables
+### 1. ใช้ตัวแปรสภาพแวดล้อม
 ```yaml
 # Good: Use environment variables
 database:
@@ -526,7 +526,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organize Configuration Files
+### 2. จัดระเบียบไฟล์การตั้งค่า
 ```
 .azure/
 ├── config.json              # Global project config
@@ -542,16 +542,16 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Version Control Considerations
+### 3. การพิจารณาการควบคุมเวอร์ชัน
 ```bash
 # .gitignore
-.azure/*/config.json         # การตั้งค่าสภาพแวดล้อม (มีรหัสทรัพยากร)
+.azure/*/config.json         # การตั้งค่าสภาพแวดล้อม (ประกอบด้วยรหัสทรัพยากร)
 .azure/*/.env               # ตัวแปรสภาพแวดล้อม (อาจมีความลับ)
 .env                        # ไฟล์สภาพแวดล้อมในเครื่อง
 ```
 
-### 4. Configuration Documentation
-บันทึกเอกสารการกำหนดค่าใน `CONFIG.md`:
+### 4. เอกสารการตั้งค่า
+จดบันทึกการตั้งค่าใน `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -566,11 +566,11 @@ database:
 - Production: Uses production database, error logging only
 ```
 
-## 🎯 Hands-On Practice Exercises
+## 🎯 แบบฝึกหัดปฏิบัติ
 
-### Exercise 1: Multi-Environment Configuration (15 minutes)
+### แบบฝึกหัด 1: การตั้งค่าหลายสภาพแวดล้อม (15 นาที)
 
-**เป้าหมาย**: สร้างและกำหนดค่าทั้งสามสภาพแวดล้อมที่มีการตั้งค่าต่างกัน
+**เป้าหมาย**: สร้างและตั้งค่าสามสภาพแวดล้อมที่มีการตั้งค่าต่างกัน
 
 ```bash
 # สร้างสภาพแวดล้อมการพัฒนา
@@ -579,13 +579,13 @@ azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# สร้างสภาพแวดล้อมทดสอบ
+# สร้างสภาพแวดล้อมการทดสอบ
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 50
 
-# สร้างสภาพแวดล้อมสำหรับการผลิต
+# สร้างสภาพแวดล้อมการผลิต
 azd env new production
 azd env set LOG_LEVEL error
 azd env set ENABLE_TELEMETRY true
@@ -598,60 +598,60 @@ azd env select production && azd env get-values
 ```
 
 **เกณฑ์ความสำเร็จ:**
-- [ ] สร้างสภาพแวดล้อมทั้งสามสำเร็จ
-- [ ] แต่ละสภาพแวดล้อมมีการกำหนดค่าที่ไม่ซ้ำกัน
-- [ ] สามารถสลับสภาพแวดล้อมโดยไม่มีข้อผิดพลาด
-- [ ] `azd env list` แสดงสภาพแวดล้อมทั้งสามทั้งหมด
+- [ ] สร้างสภาพแวดล้อมสามแห่งสำเร็จ
+- [ ] แต่ละสภาพแวดล้อมมีการตั้งค่าที่ไม่ซ้ำกัน
+- [ ] สามารถสลับระหว่างสภาพแวดล้อมโดยไม่มีข้อผิดพลาด
+- [ ] คำสั่ง `azd env list` แสดงสภาพแวดล้อมทั้งสาม
 
-### Exercise 2: Secret Management (10 minutes)
+### แบบฝึกหัด 2: การจัดการความลับ (10 นาที)
 
-**เป้าหมาย**: ฝึกการกำหนดค่าที่ปลอดภัยสำหรับข้อมูลสำคัญ
+**เป้าหมาย**: ฝึกฝนการตั้งค่าที่ปลอดภัยด้วยข้อมูลที่ไวต่อความลับ
 
 ```bash
-# ตั้งค่าความลับ (ไม่แสดงในผลลัพธ์)
+# ตั้งค่าสิ่งลับ (จะแสดงไม่ในผลลัพธ์)
 azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 
-# ตั้งค่าการตั้งค่าที่ไม่ใช่ความลับ
+# ตั้งค่าคอนฟิกที่ไม่ใช่ความลับ
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# ดูสภาพแวดล้อม (ความลับควรถูกปกปิด)
+# ดูสภาพแวดล้อม (ความลับควรถูกลบออก)
 azd env get-values
 
-# ตรวจสอบว่ามีการจัดเก็บความลับ
+# ตรวจสอบว่าสิ่งลับถูกเก็บไว้
 azd env get DB_PASSWORD  # ควรแสดงค่าจริง
 ```
 
 **เกณฑ์ความสำเร็จ:**
 - [ ] เก็บความลับโดยไม่แสดงในเทอร์มินัล
-- [ ] `azd env get-values` แสดงความลับในรูปแบบพราง
-- [ ] `azd env get <SECRET_NAME>` แต่ละตัวเรียกดูค่าจริงได้
+- [ ] คำสั่ง `azd env get-values` แสดงความลับที่ซ่อนไว้
+- [ ] คำสั่ง `azd env get <SECRET_NAME>` ดึงค่าจริงออกมาได้
 
-## Next Steps
+## ขั้นตอนถัดไป
 
-- [Your First Project](first-project.md) - ประยุกต์ใช้การกำหนดค่าในทางปฏิบัติ
-- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - ใช้การกำหนดค่าสำหรับการปรับใช้
-- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - การกำหนดค่าสำหรับพร้อมใช้งานในสภาพแวดล้อมจริง
+- [โปรเจกต์แรกของคุณ](first-project.md) - นำการตั้งค่าไปใช้งานจริง
+- [คู่มือการดีพลอย](../chapter-04-infrastructure/deployment-guide.md) - ใช้การตั้งค่าสำหรับการดีพลอย
+- [การจัดเตรียมทรัพยากร](../chapter-04-infrastructure/provisioning.md) - การตั้งค่าสำหรับสภาพแวดล้อมจริง
 
-## References
+## เอกสารอ้างอิง
 
-- [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Environment Variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [เอกสารอ้างอิงการตั้งค่า azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [โครงสร้าง azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [ตัวแปรสภาพแวดล้อม](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: บทที่ 3 - การกำหนดค่า & การตรวจสอบสิทธิ์
-- **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next Chapter**: [บทที่ 4: โครงสร้างพื้นฐานในรูปแบบโค้ด](../chapter-04-infrastructure/deployment-guide.md)
-- **Next Lesson**: [Your First Project](first-project.md)
+**การนำทางบทเรียน:**
+- **📚 หน้าแรกคอร์ส**: [AZD For Beginners](../../README.md)
+- **📖 บทปัจจุบัน**: บทที่ 3 - การตั้งค่าและการพิสูจน์ตัวตน
+- **⬅️ ก่อนหน้า**: [โปรเจกต์แรกของคุณ](first-project.md)
+- **➡️ บทถัดไป**: [บทที่ 4: โครงสร้างพื้นฐานในรูปแบบโค้ด](../chapter-04-infrastructure/deployment-guide.md)
+- **บทเรียนถัดไป**: [โปรเจกต์แรกของคุณ](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **ข้อจำกัดความรับผิดชอบ**:  
-เอกสารนี้ได้รับการแปลโดยใช้บริการแปลด้วย AI [Co-op Translator](https://github.com/Azure/co-op-translator) แม้เราจะพยายามให้การแปลถูกต้องที่สุด แต่โปรดทราบว่าการแปลอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้องได้ เอกสารต้นฉบับในภาษาต้นทางควรถูกพิจารณาเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่สำคัญ แนะนำให้ใช้บริการแปลโดยมนุษย์มืออาชีพ เราจะไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่คลาดเคลื่อนที่เกิดขึ้นจากการใช้การแปลนี้
+เอกสารนี้ได้รับการแปลโดยใช้บริการแปลภาษาอัตโนมัติ [Co-op Translator](https://github.com/Azure/co-op-translator) แม้ว่าเราจะพยายามให้การแปลมีความถูกต้อง โปรดทราบว่าการแปลอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาต้นฉบับควรถูกพิจารณาเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่สำคัญ แนะนำให้ใช้การแปลโดยมนุษย์ผู้เชี่ยวชาญ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความผิดใด ๆ ที่เกิดจากการใช้การแปลนี้
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

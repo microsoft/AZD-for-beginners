@@ -1,21 +1,23 @@
-# Kapitel 8: Produktion & Företagsmönster
+# Kapitel 8: Produktions- och företagsmönster
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varaktighet**: 2-3 timmar | **⭐ Komplexitet**: Avancerad
+**📚 Kurs**: [AZD för nybörjare](../../README.md) | **⏱️ Varaktighet**: 2-3 timmar | **⭐ Komplexitet**: Avancerad
 
 ---
 
 ## Översikt
 
-Detta kapitel täcker företagsfärdiga driftsmönster, säkerhetshärdning, övervakning och kostnadsoptimering för produktions-AI-arbetsbelastningar.
+Detta kapitel täcker företagsklara distributionsmönster, säkerhetshärdning, övervakning och kostnadsoptimering för produktionsarbetsbelastningar för AI.
+
+> Validerad mot `azd 1.23.12` i mars 2026.
 
 ## Lärandemål
 
 Genom att slutföra detta kapitel kommer du att:
-- Distribuera applikationer över flera regioner för motståndskraft
-- Implementera företagsäkerhetsmönster
+- Distribuera applikationer mot flera regioner för resilens
+- Implementera säkerhetsmönster för företag
 - Konfigurera omfattande övervakning
 - Optimera kostnader i stor skala
-- Ställa in CI/CD-pipelines med AZD
+- Sätta upp CI/CD-pipelines med AZD
 
 ---
 
@@ -23,25 +25,25 @@ Genom att slutföra detta kapitel kommer du att:
 
 | # | Lektion | Beskrivning | Tid |
 |---|--------|-------------|------|
-| 1 | [Produktions-AI-praktiker](production-ai-practices.md) | Företagsdriftsmönster | 90 min |
+| 1 | [Produktionspraxis för AI](production-ai-practices.md) | Företagsdistributionsmönster | 90 min |
 
 ---
 
 ## 🚀 Produktionschecklista
 
-- [ ] Distribuering i flera regioner för motståndskraft
+- [ ] Distribution över flera regioner för motståndskraft
 - [ ] Hanterad identitet för autentisering (inga nycklar)
 - [ ] Application Insights för övervakning
-- [ ] Kostnadsbudgetar och aviseringar konfigurerade
+- [ ] Kostnadsbudgetar och varningar konfigurerade
 - [ ] Säkerhetsskanning aktiverad
-- [ ] Integration av CI/CD-pipeline
-- [ ] Plan för katastrofåterställning
+- [ ] Integration med CI/CD-pipeline
+- [ ] Katastrofåterställningsplan
 
 ---
 
 ## 🏗️ Arkitekturmönster
 
-### Mönster 1: AI med mikrotjänster
+### Mönster 1: Mikrotjänster för AI
 
 ```mermaid
 graph LR
@@ -53,11 +55,11 @@ graph LR
 
 ```mermaid
 graph LR
-    EventGrid[Händelsegrid] --> Functions[Funktioner] --> Pipeline[AI-pipeline]
+    EventGrid[Händelsenät] --> Functions[Funktioner] --> Pipeline[AI-pipeline]
 ```
 ---
 
-## 🔐 Säkerhetsbästa praxis
+## 🔐 Bästa säkerhetspraxis
 
 ```bicep
 // Use managed identity
@@ -81,7 +83,7 @@ properties: {
 | Strategi | Besparingar |
 |----------|-------------|
 | Skala till noll (Container Apps) | 60-80% |
-| Använd konsumtionsnivåer för utveckling | 50-70% |
+| Använd konsumtionsnivåer för utveckling (dev) | 50-70% |
 | Schemalagd skalning | 30-50% |
 | Reserverad kapacitet | 20-40% |
 
@@ -103,7 +105,7 @@ az consumption budget create \
 azd monitor --logs
 
 # Kontrollera Application Insights
-azd monitor
+azd monitor --overview
 
 # Visa mätvärden
 az monitor metrics list --resource <resource-id>
@@ -116,7 +118,7 @@ az monitor metrics list --resource <resource-id>
 | Riktning | Kapitel |
 |-----------|---------|
 | **Föregående** | [Kapitel 7: Felsökning](../chapter-07-troubleshooting/README.md) |
-| **Kurs slutförd** | [Kursens startsida](../../README.md) |
+| **Kurs slutförd** | [Kursöversikt](../../README.md) |
 
 ---
 
@@ -124,12 +126,12 @@ az monitor metrics list --resource <resource-id>
 
 - [Guide för AI-agenter](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Lösningar med flera agenter](../chapter-05-multi-agent/README.md)
-- [Mikrotjänstexempel](../../examples/microservices/README.md)
+- [Fleragentslösningar](../chapter-05-multi-agent/README.md)
+- [Exempel på mikrotjänster](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfriskrivning:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten Co-op Translator (https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet bör du vara medveten om att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på sitt originalspråk ska betraktas som den auktoritativa källan. För kritisk information rekommenderas en professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+**Ansvarsfriskrivning**:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig observera att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på sitt ursprungsspråk ska betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell översättning utförd av en mänsklig översättare. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

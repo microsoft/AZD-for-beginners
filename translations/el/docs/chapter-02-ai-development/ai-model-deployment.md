@@ -1,28 +1,30 @@
 # Ανάπτυξη Μοντέλων AI με το Azure Developer CLI
 
-**Chapter Navigation:**
+**Πλοήγηση Κεφαλαίου:**
 - **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
-- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 2 - Ανάπτυξη με προτεραιότητα στο AI
+- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 2 - Ανάπτυξη με Προτεραιότητα στο AI
 - **⬅️ Προηγούμενο**: [Ενσωμάτωση Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Επόμενο**: [Εργαστήριο AI](ai-workshop-lab.md)
 - **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 3: Διαμόρφωση](../chapter-03-configuration/configuration.md)
 
-Αυτός ο οδηγός παρέχει ολοκληρωμένες οδηγίες για την ανάπτυξη μοντέλων AI χρησιμοποιώντας πρότυπα AZD, καλύπτοντας τα πάντα από την επιλογή μοντέλου μέχρι τα πρότυπα ανάπτυξης στην παραγωγή.
+Αυτός ο οδηγός παρέχει ολοκληρωμένες οδηγίες για την ανάπτυξη μοντέλων AI χρησιμοποιώντας πρότυπα AZD, καλύπτοντας τα πάντα από την επιλογή μοντέλου έως τα μοτίβα ανάπτυξης σε παραγωγή.
 
-## Περιεχόμενα
+> **Σημείωση επικύρωσης (2026-03-25):** Η ροή εργασίας AZD σε αυτόν τον οδηγό ελέγχθηκε έναντι `azd` `1.23.12`. Για αναπτύξεις AI που διαρκούν περισσότερο από το προεπιλεγμένο παράθυρο ανάπτυξης υπηρεσίας, οι τρέχουσες εκδόσεις AZD υποστηρίζουν `azd deploy --timeout <seconds>`.
 
-- [Στρατηγική Επιλογής Μοντέλου](../../../../docs/chapter-02-ai-development)
-- [Διαμόρφωση AZD για Μοντέλα AI](../../../../docs/chapter-02-ai-development)
-- [Πρότυπα Ανάπτυξης](../../../../docs/chapter-02-ai-development)
-- [Διαχείριση Μοντέλου](../../../../docs/chapter-02-ai-development)
-- [Παράγοντες για Παραγωγή](../../../../docs/chapter-02-ai-development)
-- [Παρακολούθηση και Παρατηρησιμότητα](../../../../docs/chapter-02-ai-development)
+## Πίνακας Περιεχομένων
+
+- [Στρατηγική Επιλογής Μοντέλου](#στρατηγική-επιλογής-μοντέλου)
+- [Διαμόρφωση AZD για Μοντέλα AI](#διαμόρφωση-azd-για-μοντέλα-ai)
+- [Μοτίβα Ανάπτυξης](#μοτίβα-ανάπτυξης)
+- [Διαχείριση Μοντέλων](#διαχείριση-μοντέλων)
+- [Παρατηρήσεις για Παραγωγή](#παρατηρήσεις-για-παραγωγή)
+- [Παρακολούθηση και Παρατηρησιμότητα](#παρακολούθηση-και-παρατηρησιμότητα)
 
 ## Στρατηγική Επιλογής Μοντέλου
 
 ### Μοντέλα Microsoft Foundry
 
-Επιλέξτε το κατάλληλο μοντέλο για την περίπτωση χρήσης σας:
+Επιλέξτε το κατάλληλο μοντέλο για την περίπτωσή σας χρήσης:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -41,9 +43,9 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
@@ -52,18 +54,18 @@ services:
 
 ### Σχεδιασμός Χωρητικότητας Μοντέλου
 
-| Model Type | Use Case | Recommended Capacity | Cost Considerations |
+| Τύπος Μοντέλου | Περίπτωση Χρήσης | Προτεινόμενη Χωρητικότητα | Θέματα Κόστους |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Συνομιλία, Ερωτήσεις και Απαντήσεις | 10-50 TPM | Οικονομικά αποδοτικό για τις περισσότερες εργασίες |
-| gpt-4.1 | Σύνθετη λογική | 20-100 TPM | Υψηλότερο κόστος, να χρησιμοποιείται για χαρακτηριστικά premium |
-| Text-embedding-ada-002 | Αναζήτηση, RAG | 30-120 TPM | Απαραίτητο για σημασιολογική αναζήτηση |
-| Whisper | Ομιλία σε κείμενο | 10-50 TPM | Φορτία εργασίας επεξεργασίας ήχου |
+| gpt-4.1-mini | Συνομιλία, Ερωταπαντήσεις | 10-50 TPM | Οικονομικά αποδοτικό για τις περισσότερες φορτίσεις εργασίας |
+| gpt-4.1 | Σύνθετη συλλογιστική | 20-100 TPM | Υψηλότερο κόστος, χρήση για προνομιακές λειτουργίες |
+| text-embedding-3-large | Αναζήτηση, RAG | 30-120 TPM | Καλή προεπιλογή για σημασιολογική αναζήτηση και ανάκτηση |
+| Whisper | Μετατροπή ομιλίας σε κείμενο | 10-50 TPM | Φορτία εργασίας επεξεργασίας ήχου |
 
 ## Διαμόρφωση AZD για Μοντέλα AI
 
 ### Διαμόρφωση Προτύπου Bicep
 
-Create model deployments through Bicep templates:
+Δημιουργήστε αναπτύξεις μοντέλων μέσω προτύπων Bicep:
 
 ```bicep
 // infra/main.bicep
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -124,19 +126,19 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Μεταβλητές Περιβάλλοντος
 
-Configure your application environment:
+Διαμορφώστε το περιβάλλον της εφαρμογής σας:
 
 ```bash
 # .env διαμόρφωση
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Πρότυπα Ανάπτυξης
+## Μοτίβα Ανάπτυξης
 
-### Πρότυπο 1: Ανάπτυξη σε Μία Περιοχή
+### Μοτίβο 1: Ανάπτυξη σε Μία Περιοχή
 
 ```yaml
 # azure.yaml - Single region
@@ -149,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Best for:
+Καλύτερο για:
 - Ανάπτυξη και δοκιμές
 - Εφαρμογές για μία αγορά
 - Βελτιστοποίηση κόστους
 
-### Πρότυπο 2: Ανάπτυξη σε Πολλές Περιοχές
+### Μοτίβο 2: Ανάπτυξη σε Πολλές Περιοχές
 
 ```bicep
 // Multi-region deployment
@@ -167,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Best for:
+Καλύτερο για:
 - Παγκόσμιες εφαρμογές
 - Απαιτήσεις υψηλής διαθεσιμότητας
-- Κατανομή φόρτου
+- Κατανομή φορτίου
 
-### Πρότυπο 3: Υβριδική Ανάπτυξη
+### Μοτίβο 3: Υβριδική Ανάπτυξη
 
-Combine Microsoft Foundry Models with other AI services:
+Συνδυάστε τα Μοντέλα Microsoft Foundry με άλλες υπηρεσίες AI:
 
 ```bicep
 // Hybrid AI services
@@ -203,11 +205,11 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Διαχείριση Μοντέλου
+## Διαχείριση Μοντέλων
 
 ### Έλεγχος Εκδόσεων
 
-Track model versions in your AZD configuration:
+Παρακολουθήστε τις εκδόσεις μοντέλων στη διαμόρφωση AZD σας:
 
 ```json
 {
@@ -215,11 +217,11 @@ Track model versions in your AZD configuration:
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
@@ -227,22 +229,25 @@ Track model versions in your AZD configuration:
 
 ### Ενημερώσεις Μοντέλου
 
-Use AZD hooks for model updates:
+Χρησιμοποιήστε hooks του AZD για ενημερώσεις μοντέλου:
 
 ```bash
 #!/bin/bash
-# hooks/προ-ανάπτυξη.sh
+# hooks/predeploy.sh
 
 echo "Checking model availability..."
 az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# Αν η ανάπτυξη διαρκέσει περισσότερο από το προεπιλεγμένο χρονικό όριο
+azd deploy --timeout 1800
 ```
 
 ### Δοκιμές A/B
 
-Deploy multiple model versions:
+Αναπτύξτε πολλαπλές εκδόσεις μοντέλου:
 
 ```bicep
 param enableABTesting bool = false
@@ -264,11 +269,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Παράγοντες για Παραγωγή
+## Παρατηρήσεις για Παραγωγή
 
 ### Σχεδιασμός Χωρητικότητας
 
-Calculate required capacity based on usage patterns:
+Υπολογίστε την απαιτούμενη χωρητικότητα βάσει προτύπων χρήσης:
 
 ```python
 # Παράδειγμα υπολογισμού χωρητικότητας
@@ -295,7 +300,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### Διαμόρφωση Αυτόματης Κλιμάκωσης
 
-Configure auto-scaling for Container Apps:
+Διαμορφώστε την αυτόματη κλιμάκωση για Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -333,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Βελτιστοποίηση Κόστους
 
-Implement cost controls:
+Εφαρμόστε ελέγχους κόστους:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -365,9 +370,9 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ## Παρακολούθηση και Παρατηρησιμότητα
 
-### Ενσωμάτωση του Application Insights
+### Ενσωμάτωση με Application Insights
 
-Configure monitoring for AI workloads:
+Διαμορφώστε την παρακολούθηση για φορτία εργασίας AI:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -403,9 +408,9 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### Προσαρμοσμένα Μετρικά
+### Προσαρμοσμένες Μετρικές
 
-Track AI-specific metrics:
+Παρακολουθήστε μετρικές ειδικές για AI:
 
 ```python
 # Προσαρμοσμένη τηλεμετρία για μοντέλα τεχνητής νοημοσύνης
@@ -442,10 +447,10 @@ class AITelemetry:
 
 ### Έλεγχοι Υγείας
 
-Implement AI service health monitoring:
+Υλοποιήστε παρακολούθηση υγείας υπηρεσιών AI:
 
 ```python
-# Σημεία τερματισμού ελέγχου υγείας
+# Σημεία ελέγχου υγείας
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -473,10 +478,10 @@ async def check_ai_models():
 
 ## Επόμενα Βήματα
 
-1. **Επανεξετάστε τον [Οδηγό Ενσωμάτωσης Microsoft Foundry](microsoft-foundry-integration.md)** για πρότυπα ενσωμάτωσης υπηρεσιών
+1. **Ανασκόπηση του [Οδηγού Ενσωμάτωσης Microsoft Foundry](microsoft-foundry-integration.md)** για μοτίβα ενσωμάτωσης υπηρεσιών
 2. **Ολοκληρώστε το [Εργαστήριο AI](ai-workshop-lab.md)** για πρακτική εμπειρία
-3. **Εφαρμόστε τις [Πρακτικές Παραγωγής για AI](production-ai-practices.md)** για αναπτύξεις σε επιχειρησιακό επίπεδο
-4. **Διερευνήστε τον [Οδηγό Επίλυσης Προβλημάτων AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** για κοινά ζητήματα
+3. **Εφαρμόστε τις [Πρακτικές AI για Παραγωγή](production-ai-practices.md)** για αναπτύξεις σε επιχειρήσεις
+4. **Εξερευνήστε τον [Οδηγό Επίλυσης Προβλημάτων AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** για κοινά ζητήματα
 
 ## Πόροι
 
@@ -487,9 +492,9 @@ async def check_ai_models():
 
 ---
 
-**Chapter Navigation:**
+**Πλοήγηση Κεφαλαίου:**
 - **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
-- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 2 - Ανάπτυξη με προτεραιότητα στο AI
+- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 2 - Ανάπτυξη με Προτεραιότητα στο AI
 - **⬅️ Προηγούμενο**: [Ενσωμάτωση Microsoft Foundry](microsoft-foundry-integration.md)
 - **➡️ Επόμενο**: [Εργαστήριο AI](ai-workshop-lab.md)
 - **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 3: Διαμόρφωση](../chapter-03-configuration/configuration.md)
@@ -497,6 +502,6 @@ async def check_ai_models():
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Αποποίηση ευθύνης:
-Το παρόν έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης τεχνητής νοημοσύνης Co-op Translator (https://github.com/Azure/co-op-translator). Παρά τις προσπάθειές μας για ακρίβεια, λάβετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στη γλώσσα του πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες συνιστάται η μετάφραση από επαγγελματία μεταφραστή. Δεν φέρουμε ευθύνη για οποιεσδήποτε παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+**Αποποίηση Ευθυνών**:
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Ενώ καταβάλλουμε προσπάθειες για ακρίβεια, παρακαλούμε να γνωρίζετε ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στη γλώσσα του θα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική μετάφραση από άνθρωπο. Δεν φέρουμε ευθύνη για τυχόν παρανοήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

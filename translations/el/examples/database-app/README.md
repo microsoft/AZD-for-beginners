@@ -1,30 +1,30 @@
-# Ανάπτυξη μιας βάσης δεδομένων Microsoft SQL και Web App με AZD
+# Ανάπτυξη βάσης δεδομένων Microsoft SQL και Web App με AZD
 
-⏱️ **Εκτιμώμενος Χρόνος**: 20-30 λεπτά | 💰 **Εκτιμώμενο Κόστος**: ~$15-25/μήνα | ⭐ **Πολυπλοκότητα**: Ενδιάμεση
+⏱️ **Εκτιμώμενος Χρόνος**: 20-30 λεπτά | 💰 **Εκτιμώμενο Κόστος**: ~$15-25/μήνα | ⭐ **Πολυπλοκότητα**: Ενδιάμεσο
 
-Αυτό το **πλήρες, λειτουργικό παράδειγμα** δείχνει πώς να χρησιμοποιήσετε το [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) για να αναπτύξετε μια εφαρμογή Python Flask web με μια βάση δεδομένων Microsoft SQL στο Azure. Όλος ο κώδικας συμπεριλαμβάνεται και έχει δοκιμαστεί—χωρίς εξωτερικές εξαρτήσεις.
+Αυτό το **πλήρες, λειτουργικό παράδειγμα** δείχνει πώς να χρησιμοποιήσετε το [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) για να αναπτύξετε μια εφαρμογή ιστού Python Flask με μια βάση δεδομένων Microsoft SQL στο Azure. Όλος ο κώδικας περιλαμβάνεται και έχει ελεγχθεί — δεν απαιτούνται εξωτερικές εξαρτήσεις.
 
 ## Τι θα μάθετε
 
-Με την ολοκλήρωση αυτού του παραδείγματος, θα:
-- Αναπτύξετε μια πολυεπίπεδη εφαρμογή (web app + βάση δεδομένων) χρησιμοποιώντας υποδομή ως κώδικα
-- Διαμορφώσετε ασφαλείς συνδέσεις βάσης δεδομένων χωρίς ενσωμάτωση μυστικών στο κώδικα
-- Παρακολουθήσετε την υγεία της εφαρμογής με το Application Insights
-- Διαχειριστείτε πόρους Azure αποδοτικά με το AZD CLI
+Ολοκληρώνοντας αυτό το παράδειγμα, θα:
+- Αναπτύξετε μια πολυεπίπεδη εφαρμογή (web app + βάση δεδομένων) χρησιμοποιώντας υποδομή-ως-κώδικα
+- Διαμορφώσετε ασφαλείς συνδέσεις βάσης δεδομένων χωρίς ενσωμάτωση μυστικών στον κώδικα
+- Παρακολουθήσετε την κατάσταση της εφαρμογής με το Application Insights
+- Διαχειριστείτε αποτελεσματικά πόρους Azure με το CLI AZD
 - Ακολουθήσετε τις βέλτιστες πρακτικές του Azure για ασφάλεια, βελτιστοποίηση κόστους και παρατηρησιμότητα
 
 ## Επισκόπηση Σεναρίου
-- **Web App**: Python Flask REST API με σύνδεση σε βάση δεδομένων
+- **Web App**: Python Flask REST API με σύνδεση στη βάση δεδομένων
 - **Database**: Azure SQL Database με δείγμα δεδομένων
-- **Infrastructure**: Παρέχεται με Bicep (μοσουλαρισμένα, επαναχρησιμοποιήσιμα πρότυπα)
+- **Infrastructure**: Προβλέπεται χρησιμοποιώντας Bicep (αρθρωτά, επαναχρησιμοποιήσιμα πρότυπα)
 - **Deployment**: Πλήρως αυτοματοποιημένο με εντολές `azd`
-- **Monitoring**: Application Insights για logs και τηλεμετρία
+- **Monitoring**: Application Insights για καταγραφές και τηλεμετρία
 
 ## Προαπαιτούμενα
 
 ### Απαιτούμενα Εργαλεία
 
-Πριν ξεκινήσετε, επαληθεύστε ότι έχετε εγκαταστήσει τα παρακάτω εργαλεία:
+Πριν ξεκινήσετε, βεβαιωθείτε ότι έχετε εγκαταστήσει τα παρακάτω εργαλεία:
 
 1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (έκδοση 2.50.0 ή νεότερη)
    ```sh
@@ -52,42 +52,42 @@
 
 ### Απαιτήσεις Azure
 
-- Ένας ενεργός **Azure subscription** ([δημιουργήστε δωρεάν λογαριασμό](https://azure.microsoft.com/free/))
-- Δικαιώματα για δημιουργία πόρων στο subscription σας
-- **Owner** ή **Contributor** ρόλος στο subscription ή στο resource group
+- Μια ενεργή **συνδρομή Azure** ([create a free account](https://azure.microsoft.com/free/))
+- Δικαιώματα για δημιουργία πόρων στη συνδρομή σας
+- **Owner** ή **Contributor** ρόλος στη συνδρομή ή στο resource group
 
-### Προαπαιτούμενες Γνώσεις
+### Γνωστικές Προαπαιτήσεις
 
 Αυτό είναι ένα παράδειγμα **ενδιάμεσου επιπέδου**. Θα πρέπει να είστε εξοικειωμένοι με:
-- Βασικές λειτουργίες γραμμής εντολών
+- Βασικές εντολές γραμμής εντολών
 - Θεμελιώδεις έννοιες cloud (πόροι, resource groups)
-- Βασική κατανόηση εφαρμογών web και βάσεων δεδομένων
+- Βασική κατανόηση εφαρμογών ιστού και βάσεων δεδομένων
 
-**Νέος στο AZD;** Ξεκινήστε πρώτα με τον [Οδηγό εκκίνησης](../../docs/chapter-01-foundation/azd-basics.md).
+**Νέος στο AZD;** Ξεκινήστε με τον [Getting Started guide](../../docs/chapter-01-foundation/azd-basics.md) πρώτα.
 
 ## Αρχιτεκτονική
 
-Αυτό το παράδειγμα αναπτύσσει μια δύο-επίπεδη αρχιτεκτονική με μια web εφαρμογή και μια βάση SQL:
+Αυτό το παράδειγμα αναπτύσσει μια αρχιτεκτονική δύο επιπέδων με μια web εφαρμογή και μια βάση δεδομένων SQL:
 
 ```mermaid
 graph TD
-    Browser[Πρόγραμμα περιήγησης χρήστη] <--> WebApp[Azure Web App<br/>Flask API<br/>/health<br/>/products]
-    WebApp -- Ασφαλής Σύνδεση<br/>Κρυπτογραφημένη --> SQL[Azure SQL Database<br/>Πίνακας προϊόντων<br/>Δείγμα δεδομένων]
+    Browser[Περιηγητής χρήστη] <--> WebApp[Εφαρμογή Web του Azure<br/>Flask API<br/>/health<br/>/products]
+    WebApp -- Ασφαλής σύνδεση<br/>Κρυπτογραφημένη --> SQL[Βάση δεδομένων Azure SQL<br/>Πίνακας Προϊόντων<br/>Δείγμα δεδομένων]
 ```
 **Ανάπτυξη Πόρων:**
-- **Resource Group**: Κουτί για όλους τους πόρους
-- **App Service Plan**: Φιλοξενία σε Linux (tier B1 για οικονομία)
+- **Resource Group**: Κοντέινερ για όλους τους πόρους
+- **App Service Plan**: Φιλοξενία βασισμένη σε Linux (B1 tier για οικονομία)
 - **Web App**: Python 3.11 runtime με εφαρμογή Flask
-- **SQL Server**: Διαχειριζόμενος διακομιστής βάσης δεδομένων με TLS 1.2 ως ελάχιστο
+- **SQL Server**: Διαχειριζόμενος SQL server με TLS 1.2 ως ελάχιστο
 - **SQL Database**: Basic tier (2GB, κατάλληλο για ανάπτυξη/δοκιμές)
-- **Application Insights**: Παρακολούθηση και logging
-- **Log Analytics Workspace**: Κεντρική αποθήκη logs
+- **Application Insights**: Παρακολούθηση και καταγραφές
+- **Log Analytics Workspace**: Κεντρική αποθήκευση καταγραφών
 
-**Παρομοίωση**: Σκεφτείτε το σαν ένα εστιατόριο (web app) με έναν μεγάλο καταψύκτη (βάση δεδομένων). Οι πελάτες παραγγέλνουν από το μενού (API endpoints), και η κουζίνα (Flask app) παίρνει τα υλικά (δεδομένα) από τον καταψύκτη. Ο μάνατζερ του εστιατορίου (Application Insights) παρακολουθεί ό,τι συμβαίνει.
+**Αναλογία**: Σκεφτείτε το σαν ένα εστιατόριο (web app) με ένα ψυγείο αποθήκευσης (βάση δεδομένων). Οι πελάτες παραγγέλνουν από το μενού (endpoints του API), και η κουζίνα (η εφαρμογή Flask) παίρνει τα υλικά (δεδομένα) από το ψυγείο. Ο διευθυντής του εστιατορίου (Application Insights) παρακολουθεί ό,τι συμβαίνει.
 
 ## Δομή Φακέλων
 
-Όλα τα αρχεία περιλαμβάνονται σε αυτό το παράδειγμα—χωρίς εξωτερικές εξαρτήσεις:
+Όλα τα αρχεία περιλαμβάνονται σε αυτό το παράδειγμα — δεν απαιτούνται εξωτερικές εξαρτήσεις:
 
 ```
 examples/database-app/
@@ -114,36 +114,36 @@ examples/database-app/
         └── Dockerfile          # Container definition
 ```
 
-**Τι Κάνει Κάθε Αρχείο:**
-- **azure.yaml**: Υποδεικνύει στο AZD τι να αναπτυχθεί και πού
-- **infra/main.bicep**: Συντονίζει όλους τους πόρους Azure
-- **infra/resources/*.bicep**: Ορισμοί μεμονωμένων πόρων (μοσουλαρισμένα για επαναχρησιμοποίηση)
+**Τι κάνει κάθε αρχείο:**
+- **azure.yaml**: Ενημερώνει το AZD τι να αναπτύξει και πού
+- **infra/main.bicep**: Ορχηστρώνει όλους τους πόρους του Azure
+- **infra/resources/*.bicep**: Ορισμοί μεμονωμένων πόρων (αρθρωτά για επαναχρησιμοποίηση)
 - **src/web/app.py**: Εφαρμογή Flask με λογική βάσης δεδομένων
 - **requirements.txt**: Εξαρτήσεις πακέτων Python
 - **Dockerfile**: Οδηγίες containerization για ανάπτυξη
 
-## Γρήγορη Εκκίνηση (Βήμα-Βήμα)
+## Γρήγορη εκκίνηση (Βήμα-βήμα)
 
-### Βήμα 1: Κλωνοποίηση και Μετάβαση
+### Βήμα 1: Κλωνοποίηση και Πλοήγηση
 
 ```sh
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/database-app
 ```
 
-**✓ Έλεγχος Επιτυχίας**: Επιβεβαιώστε ότι βλέπετε τα `azure.yaml` και τον φάκελο `infra/`:
+**✓ Έλεγχος Επιτυχίας**: Επαληθεύστε ότι βλέπετε `azure.yaml` και τον φάκελο `infra/`:
 ```sh
 ls
 # Αναμενόμενο: README.md, azure.yaml, infra/, src/
 ```
 
-### Βήμα 2: Πιστοποίηση στο Azure
+### Βήμα 2: Αυθεντικοποίηση στο Azure
 
 ```sh
 azd auth login
 ```
 
-Αυτό ανοίγει το πρόγραμμα περιήγησης για πιστοποίηση στο Azure. Συνδεθείτε με τα διαπιστευτήρια Azure.
+Αυτό θα ανοίξει το πρόγραμμα περιήγησής σας για την αυθεντικοποίηση στο Azure. Συνδεθείτε με τα διαπιστευτήρια Azure.
 
 **✓ Έλεγχος Επιτυχίας**: Θα πρέπει να δείτε:
 ```
@@ -158,9 +158,9 @@ azd init
 
 **Τι συμβαίνει**: Το AZD δημιουργεί μια τοπική διαμόρφωση για την ανάπτυξή σας.
 
-**Προτροπές που θα δείτε**:
-- **Environment name**: Εισάγετε ένα σύντομο όνομα (π.χ., `dev`, `myapp`)
-- **Azure subscription**: Επιλέξτε το subscription σας από τη λίστα
+**Ερωτήματα που θα εμφανιστούν**:
+- **Environment name**: Εισαγάγετε ένα σύντομο όνομα (π.χ., `dev`, `myapp`)
+- **Azure subscription**: Επιλέξτε τη συνδρομή σας από τη λίστα
 - **Azure location**: Επιλέξτε μια περιοχή (π.χ., `eastus`, `westeurope`)
 
 **✓ Έλεγχος Επιτυχίας**: Θα πρέπει να δείτε:
@@ -174,16 +174,16 @@ SUCCESS: New project initialized!
 azd provision
 ```
 
-**Τι συμβαίνει**: Το AZD αναπτύσσει όλη την υποδομή (χρειάζεται 5-8 λεπτά):
+**Τι συμβαίνει**: Το AZD αναπτύσσει όλη την υποδομή (διαρκεί 5-8 λεπτά):
 1. Δημιουργεί resource group
 2. Δημιουργεί SQL Server και Database
 3. Δημιουργεί App Service Plan
 4. Δημιουργεί Web App
 5. Δημιουργεί Application Insights
-6. Διαμορφώνει δικτύωση και ασφάλεια
+6. Διαμορφώνει δίκτυα και ασφάλεια
 
 **Θα σας ζητηθούν**:
-- **SQL admin username**: Εισάγετε ένα username (π.χ., `sqladmin`)
+- **SQL admin username**: Εισάγετε ένα όνομα χρήστη (π.χ., `sqladmin`)
 - **SQL admin password**: Εισάγετε έναν ισχυρό κωδικό (αποθηκεύστε τον!)
 
 **✓ Έλεγχος Επιτυχίας**: Θα πρέπει να δείτε:
@@ -202,7 +202,7 @@ azd deploy
 ```
 
 **Τι συμβαίνει**: Το AZD χτίζει και αναπτύσσει την εφαρμογή Flask σας:
-1. Πακετάρει την εφαρμογή Python
+1. Πακετάρει την Python εφαρμογή
 2. Χτίζει το Docker container
 3. Σπρώχνει στο Azure Web App
 4. Αρχικοποιεί τη βάση δεδομένων με δείγμα δεδομένων
@@ -223,9 +223,9 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 azd browse
 ```
 
-Αυτό ανοίγει την αναπτυγμένη web app σας στο πρόγραμμα περιήγησης στη διεύθυνση `https://app-<unique-id>.azurewebsites.net`
+Αυτό θα ανοίξει την αναπτυγμένη web εφαρμογή σας στο πρόγραμμα περιήγησης στη διεύθυνση `https://app-<unique-id>.azurewebsites.net`
 
-**✓ Έλεγχος Επιτυχίας**: Θα πρέπει να δείτε JSON έξοδο:
+**✓ Έλεγχος Επιτυχίας**: Θα πρέπει να δείτε έξοδο JSON:
 ```json
 {
   "message": "Welcome to the Database App API",
@@ -238,14 +238,14 @@ azd browse
 }
 ```
 
-### Βήμα 7: Δοκιμή των API Endpoints
+### Βήμα 7: Δοκιμή των τελικών σημείων του API
 
-**Έλεγχος υγείας** (επαληθεύστε τη σύνδεση στη βάση δεδομένων):
+**Έλεγχος υγείας** (επικύρωση σύνδεσης με τη βάση δεδομένων):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/health
 ```
 
-**Αναμενόμενη Απάντηση**:
+**Αναμενόμενη Απόκριση**:
 ```json
 {
   "status": "healthy",
@@ -258,7 +258,7 @@ curl https://app-<your-id>.azurewebsites.net/health
 curl https://app-<your-id>.azurewebsites.net/products
 ```
 
-**Αναμενόμενη Απάντηση**:
+**Αναμενόμενη Απόκριση**:
 ```json
 [
   {
@@ -283,59 +283,59 @@ curl https://app-<your-id>.azurewebsites.net/products/1
 
 **🎉 Συγχαρητήρια!** Έχετε αναπτύξει επιτυχώς μια web εφαρμογή με βάση δεδομένων στο Azure χρησιμοποιώντας το AZD.
 
-## Βαθιά Εμβάθυνση στη Διαμόρφωση
+## Εμβάθυνση στη Διαμόρφωση
 
 ### Μεταβλητές Περιβάλλοντος
 
-Τα μυστικά διαχειρίζονται με ασφάλεια μέσω της διαμόρφωσης του Azure App Service—**μην ενσωματώνετε ποτέ μυστικά στον πηγαίο κώδικα**.
+Τα μυστικά διαχειρίζονται με ασφάλεια μέσω της διαμόρφωσης του Azure App Service — **μην τα ενσωματώνετε ποτέ στον πηγαίο κώδικα**.
 
-**Διαμορφώνονται αυτόματα από το AZD**:
-- `SQL_CONNECTION_STRING`: Σύνδεση βάσης δεδομένων με κωδικούς κρυπτογραφημένους
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Τελεία τηλεμετρίας για παρακολούθηση
-- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Ενεργοποιεί αυτόματη εγκατάσταση εξαρτήσεων
+**Διαμορφώνεται Αυτόματα από το AZD**:
+- `SQL_CONNECTION_STRING`: Σύνδεση βάσης δεδομένων με κρυπτογραφημένα διαπιστευτήρια
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Τερματικό τηλεμετρίας για παρακολούθηση
+- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Ενεργοποιεί την αυτόματη εγκατάσταση εξαρτήσεων κατά την ανάπτυξη
 
 **Πού αποθηκεύονται τα μυστικά**:
-1. Κατά τη διάρκεια του `azd provision`, παρέχετε τα credentials SQL μέσω ασφαλών προτροπών
-2. Το AZD τα αποθηκεύει στο τοπικό αρχείο `.azure/<env-name>/.env` (που αγνοείται από το Git)
-3. Το AZD τα εγχέει στη διαμόρφωση του Azure App Service (κρυπτογραφημένα σε κατάσταση ηρεμίας)
-4. Η εφαρμογή τα διαβάζει μέσω `os.getenv()` κατά το runtime
+1. Κατά τη διάρκεια του `azd provision`, παρέχετε τα διαπιστευτήρια SQL μέσω ασφαλών ερωτημάτων
+2. Το AZD τα αποθηκεύει στο τοπικό αρχείο `.azure/<env-name>/.env` (αγνοείται από το Git)
+3. Το AZD τα εγχέει στη διαμόρφωση του Azure App Service (κρυπτογραφημένα σε ηρεμία)
+4. Η εφαρμογή τα διαβάζει μέσω `os.getenv()` κατά την εκτέλεση
 
 ### Τοπική Ανάπτυξη
 
-Για τοπικές δοκιμές, δημιουργήστε ένα `.env` αρχείο από το δείγμα:
+Για τοπικές δοκιμές, δημιουργήστε ένα αρχείο `.env` από το δείγμα:
 
 ```sh
 cp .env.sample .env
-# Επεξεργαστείτε το .env με τη σύνδεση στη τοπική σας βάση δεδομένων
+# Επεξεργαστείτε το .env με τη σύνδεση στην τοπική βάση δεδομένων σας
 ```
 
-**Τοπική Ροή Εργασίας Ανάπτυξης**:
+**Ροή εργασίας τοπικής ανάπτυξης**:
 ```sh
-# Εγκατάσταση εξαρτήσεων
+# Εγκαταστήστε τις εξαρτήσεις
 cd src/web
 pip install -r requirements.txt
 
-# Ορισμός μεταβλητών περιβάλλοντος
+# Ορίστε τις μεταβλητές περιβάλλοντος
 export SQL_CONNECTION_STRING="your-local-connection-string"
 
-# Εκτέλεση της εφαρμογής
+# Εκτελέστε την εφαρμογή
 python app.py
 ```
 
 **Δοκιμή τοπικά**:
 ```sh
 curl http://localhost:8000/health
-# Αναμενόμενο: {"status": "healthy", "database": "connected"}
+# Αναμενόμενο: {"κατάσταση": "υγιής", "βάση δεδομένων": "συνδεδεμένη"}
 ```
 
 ### Υποδομή ως Κώδικας
 
-Όλοι οι πόροι Azure ορίζονται σε **Bicep templates** (φάκελος `infra/`):
+Όλοι οι πόροι Azure ορίζονται σε **Bicep templates** (`infra/` φάκελος):
 
-- **Μοσουλαρισμένος Σχεδιασμός**: Κάθε τύπος πόρου έχει το δικό του αρχείο για επαναχρησιμοποίηση
-- **Παραμετροποιημένος**: Εξατομικεύστε SKUs, περιοχές, κανόνες ονοματολογίας
-- **Βέλτιστες Πρακτικές**: Ακολουθεί πρότυπα ονοματολογίας και προεπιλογές ασφαλείας του Azure
-- **Έλεγχος Έκδοσης**: Οι αλλαγές υποδομής παρακολουθούνται στο Git
+- **Αρθρωτός Σχεδιασμός**: Κάθε τύπος πόρου έχει το δικό του αρχείο για επαναχρησιμοποίηση
+- **Παραμετροποιημένος**: Προσαρμόστε SKUs, περιοχές, συμβάσεις ονομασίας
+- **Καλές Πρακτικές**: Ακολουθεί τα πρότυπα ονομασίας και τις προεπιλογές ασφαλείας του Azure
+- **Έλεγχος Έκδοσης**: Οι αλλαγές στην υποδομή παρακολουθούνται στο Git
 
 **Παράδειγμα Προσαρμογής**:
 Για να αλλάξετε το επίπεδο της βάσης δεδομένων, επεξεργαστείτε το `infra/resources/sql-database.bicep`:
@@ -347,91 +347,91 @@ sku: {
 }
 ```
 
-## Καλές Πρακτικές Ασφαλείας
+## Καλύτερες Πρακτικές Ασφαλείας
 
 Αυτό το παράδειγμα ακολουθεί τις βέλτιστες πρακτικές ασφαλείας του Azure:
 
-### 1. **Χωρίς Μυστικά στον Πηγαίο Κώδικα**
-- ✅ Τα credentials αποθηκεύονται στη διαμόρφωση του Azure App Service (κρυπτογραφημένα)
+### 1. **Κανένα μυστικό στον πηγαίο κώδικα**
+- ✅ Τα διαπιστευτήρια αποθηκεύονται στη διαμόρφωση του Azure App Service (κρυπτογραφημένα)
 - ✅ Τα αρχεία `.env` εξαιρούνται από το Git μέσω `.gitignore`
-- ✅ Τα μυστικά περνάνε μέσω ασφαλών παραμέτρων κατά την παροχή
+- ✅ Τα μυστικά περνούν μέσω ασφαλών παραμέτρων κατά την παροχή
 
 ### 2. **Κρυπτογραφημένες Συνδέσεις**
-- ✅ TLS 1.2 τουλάχιστον για τον SQL Server
-- ✅ Εφαρμογή μόνο HTTPS για το Web App
+- ✅ TLS 1.2 ως ελάχιστο για τον SQL Server
+- ✅ Ενίσχυση HTTPS-only για το Web App
 - ✅ Οι συνδέσεις στη βάση δεδομένων χρησιμοποιούν κρυπτογραφημένα κανάλια
 
 ### 3. **Ασφάλεια Δικτύου**
-- ✅ Ο τείχος προστασίας του SQL Server διαμορφώνεται ώστε να επιτρέπει μόνο υπηρεσίες Azure
-- ✅ Η δημόσια πρόσβαση δικτύου περιορίζεται (μπορεί να κλειδωθεί περαιτέρω με Private Endpoints)
-- ✅ Το FTPS απενεργοποιημένο στο Web App
+- ✅ Το firewall του SQL Server έχει ρυθμιστεί ώστε να επιτρέπει μόνο τις υπηρεσίες του Azure
+- ✅ Η δημόσια πρόσβαση δικτύου περιορίζεται (μπορεί να ενισχυθεί με Private Endpoints)
+- ✅ Το FTPS είναι απενεργοποιημένο στο Web App
 
 ### 4. **Πιστοποίηση & Εξουσιοδότηση**
-- ⚠️ **Τρέχον**: SQL authentication (username/password)
-- ✅ **Συνιστώμενο για Παραγωγή**: Χρήση Azure Managed Identity για πιστοποίηση χωρίς κωδικό
+- ⚠️ **Τρέχον**: SQL authentication (όνομα χρήστη/κωδικός)
+- ✅ **Σύσταση για Παραγωγή**: Χρησιμοποιήστε Azure Managed Identity για πιστοποίηση χωρίς κωδικούς
 
-**Για Αναβάθμιση σε Managed Identity** (για παραγωγή):
+**Για αναβάθμιση σε Managed Identity** (για παραγωγή):
 1. Ενεργοποιήστε managed identity στο Web App
-2. Χορηγήστε δικαιώματα SQL στην ταυτότητα
+2. Δώστε δικαιώματα SQL στην ταυτότητα
 3. Ενημερώστε τη συμβολοσειρά σύνδεσης για χρήση managed identity
-4. Αφαιρέστε την πιστοποίηση με βάση κωδικό
+4. Αφαιρέστε την πιστοποίηση με κωδικό
 
 ### 5. **Έλεγχος & Συμμόρφωση**
-- ✅ Το Application Insights καταγράφει όλα τα αιτήματα και τα σφάλματα
-- ✅ Η καταγραφή (auditing) της SQL Database ενεργοποιείται (μπορεί να ρυθμιστεί για συμμόρφωση)
-- ✅ Όλοι οι πόροι είναι επισημασμένοι για διακυβέρνηση
+- ✅ Το Application Insights καταγράφει όλα τα αιτήματα και σφάλματα
+- ✅ Ο έλεγχος της SQL Database είναι ενεργοποιημένος (μπορεί να ρυθμιστεί για συμμόρφωση)
+- ✅ Όλοι οι πόροι έχουν ετικέτες για διακυβέρνηση
 
-**Λίστα Ελέγχου Ασφαλείας πριν την Παραγωγή**:
+**Λίστα ελέγχου ασφαλείας πριν την παραγωγή**:
 - [ ] Ενεργοποιήστε το Azure Defender για SQL
 - [ ] Διαμορφώστε Private Endpoints για τη SQL Database
 - [ ] Ενεργοποιήστε Web Application Firewall (WAF)
 - [ ] Υλοποιήστε Azure Key Vault για περιστροφή μυστικών
-- [ ] Διαμορφώστε πιστοποίηση Azure AD
+- [ ] Διαμορφώστε Azure AD authentication
 - [ ] Ενεργοποιήστε διαγνωστική καταγραφή για όλους τους πόρους
 
 ## Βελτιστοποίηση Κόστους
 
-**Εκτιμώμενα Μηνιαία Έξοδα** (όπως τον Νοέμβριο 2025):
+**Εκτιμώμενα Μηνιαία Έξοδα** (στις  Νοέμβριος 2025):
 
-| Resource | SKU/Tier | Estimated Cost |
+| Πόρος | SKU/Επίπεδο | Εκτιμώμενο Κόστος |
 |----------|----------|----------------|
 | App Service Plan | B1 (Basic) | ~$13/month |
 | SQL Database | Basic (2GB) | ~$5/month |
 | Application Insights | Pay-as-you-go | ~$2/month (low traffic) |
-| **Total** | | **~$20/month** |
+| **Σύνολο** | | **~$20/month** |
 
-**💡 Συμβουλές για Εξοικονόμηση Κόστους**:
+**💡 Συμβουλές Εξοικονόμησης Κόστους**:
 
-1. **Χρησιμοποιήστε Δωρεάν Επίπεδο για Μάθηση**:
+1. **Χρησιμοποιήστε το Free Tier για μάθηση**:
    - App Service: F1 tier (δωρεάν, περιορισμένες ώρες)
-   - SQL Database: Χρησιμοποιήστε Azure SQL Database serverless
-   - Application Insights: 5GB/μήνα δωρεάν εισροή
+   - SQL Database: Χρησιμοποιήστε το Azure SQL Database serverless
+   - Application Insights: 5GB/μήνα δωρεάν εισαγωγή
 
-2. **Σταματήστε τους Πόρους Όταν Δεν Χρησιμοποιούνται**:
+2. **Σταματήστε τους πόρους όταν δεν χρησιμοποιούνται**:
    ```sh
-   # Διακόψτε την web εφαρμογή (η βάση δεδομένων εξακολουθεί να χρεώνεται)
+   # Σταματήστε την εφαρμογή web (η βάση δεδομένων εξακολουθεί να χρεώνει)
    az webapp stop --name <app-name> --resource-group <rg-name>
    
    # Επανεκκινήστε όταν χρειάζεται
    az webapp start --name <app-name> --resource-group <rg-name>
    ```
 
-3. **Διαγράψτε τα Πάντα Μετά τις Δοκιμές**:
+3. **Διαγράψτε τα πάντα μετά τις δοκιμές**:
    ```sh
    azd down
    ```
-   Αυτό αφαιρεί ΟΛΟΥΣ τους πόρους και σταματά τους χρεώσεις.
+   Αυτό καταργεί ΟΛΟΥΣ τους πόρους και σταματά τις χρεώσεις.
 
 4. **SKUs για Ανάπτυξη vs Παραγωγή**:
    - **Ανάπτυξη**: Basic tier (χρησιμοποιείται σε αυτό το παράδειγμα)
    - **Παραγωγή**: Standard/Premium tier με ανθεκτικότητα
 
 **Παρακολούθηση Κόστους**:
-- Δείτε τα κόστη στο [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
+- Δείτε τα έξοδα στο [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
 - Ρυθμίστε ειδοποιήσεις κόστους για να αποφύγετε εκπλήξεις
-- Επισυνάψτε tag σε όλους τους πόρους με `azd-env-name` για παρακολούθηση
+- Ετικετοποιήστε όλους τους πόρους με `azd-env-name` για παρακολούθηση
 
-**Εναλλακτική Δωρεάν Επίπεδου**:
+**Εναλλακτική Δωρεάν Επιλογή**:
 Για εκπαιδευτικούς σκοπούς, μπορείτε να τροποποιήσετε το `infra/resources/app-service-plan.bicep`:
 ```bicep
 sku: {
@@ -439,7 +439,7 @@ sku: {
   tier: 'Free'
 }
 ```
-**Σημείωση**: Το δωρεάν επίπεδο έχει περιορισμούς (60 min/day CPU, δεν υποστηρίζει always-on).
+**Σημείωση**: Το δωρεάν επίπεδο έχει περιορισμούς (60 λεπτά/ημέρα CPU, χωρίς πάντα-ενεργό).
 
 ## Παρακολούθηση & Παρατηρησιμότητα
 
@@ -447,16 +447,16 @@ sku: {
 
 Αυτό το παράδειγμα περιλαμβάνει **Application Insights** για ολοκληρωμένη παρακολούθηση:
 
-**Τι Παρακολουθείται**:
+**Τι παρακολουθείται**:
 - ✅ HTTP αιτήματα (καθυστέρηση, κωδικοί κατάστασης, endpoints)
 - ✅ Σφάλματα και εξαιρέσεις εφαρμογής
-- ✅ Προσαρμοσμένα logs από την εφαρμογή Flask
-- ✅ Υγεία σύνδεσης βάσης δεδομένων
-- ✅ Μετρικές απόδοσης (CPU, μνήμη)
+- ✅ Προσαρμοσμένες καταγραφές από την εφαρμογή Flask
+- ✅ Υγεία σύνδεσης με τη βάση δεδομένων
+- ✅ Μετρήσεις απόδοσης (CPU, μνήμη)
 
 **Πρόσβαση στο Application Insights**:
-1. Ανοίξτε το [Azure Portal](https://portal.azure.com)
-2. Μεταβείτε στο resource group σας (`rg-<env-name>`)
+1. Ανοίξτε την [Azure Portal](https://portal.azure.com)
+2. Πλοηγηθείτε στο resource group σας (`rg-<env-name>`)
 3. Κάντε κλικ στον πόρο Application Insights (`appi-<unique-id>`)
 
 **Χρήσιμες Ερωτήσεις** (Application Insights → Logs):
@@ -477,34 +477,34 @@ exceptions
 | project timestamp, type, outerMessage, operation_Name
 ```
 
-**Έλεγχος Endpoint Υγείας**:
+**Έλεγχος του endpoint υγείας**:
 ```kusto
 requests
 | where name contains "health"
 | summarize count() by resultCode, bin(timestamp, 1h)
 ```
 
-### Καταγραφή Auditing της SQL Database
+### Έλεγχος SQL Database (Auditing)
 
-**Η καταγραφή (auditing) της SQL Database είναι ενεργοποιημένη** για παρακολούθηση:
+**Ο έλεγχος της SQL Database είναι ενεργοποιημένος** για να παρακολουθεί:
 - Πρότυπα πρόσβασης στη βάση δεδομένων
-- Ανεπιτυχείς προσπάθειες σύνδεσης
+- Αποτυχημένες προσπάθειες σύνδεσης
 - Αλλαγές στο σχήμα
 - Πρόσβαση σε δεδομένα (για συμμόρφωση)
 
-**Πρόσβαση στα Audit Logs**:
+**Πρόσβαση στα αρχεία ελέγχου**:
 1. Azure Portal → SQL Database → Auditing
-2. Δείτε logs στο Log Analytics workspace
+2. Δείτε τα αρχεία στο Log Analytics workspace
 
 ### Παρακολούθηση σε Πραγματικό Χρόνο
 
-**Προβολή Live Metrics**:
+**Προβολή ζωντανών μετρήσεων**:
 1. Application Insights → Live Metrics
 2. Δείτε αιτήματα, αποτυχίες και απόδοση σε πραγματικό χρόνο
 
-**Ρύθμιση Ειδοποιήσεων**:
-Δημιουργήστε ειδοποιήσεις για κρίσιμα περιστατικά:
-- HTTP 500 > 5 σε 5 λεπτά
+**Δημιουργία ειδοποιήσεων**:
+Δημιουργήστε ειδοποιήσεις για κρίσιμα συμβάντα:
+- HTTP 500 σφάλματα > 5 σε 5 λεπτά
 - Αποτυχίες σύνδεσης στη βάση δεδομένων
 - Υψηλοί χρόνοι απόκρισης (>2 δευτερόλεπτα)
 
@@ -518,164 +518,167 @@ az monitor metrics alert create \
   --description "Alert when response time exceeds 2 seconds"
 ```
 
-## Αντιμετώπιση Προβλημάτων
+## Αντιμετώπιση προβλημάτων
 ### Συχνά Προβλήματα και Λύσεις
 
-#### 1. `azd provision` fails with "Location not available"
+#### 1. `azd provision` αποτυγχάνει με "Τοποθεσία μη διαθέσιμη"
 
-**Symptom**:
+**Σύμπτωμα**:
 ```
 Error: The subscription is not registered for the resource type 'components' in the location 'centralus'.
 ```
 
-**Solution**:
-Επιλέξτε διαφορετική περιοχή Azure ή εγγράψτε τον πάροχο πόρων:
+**Λύση**:
+Επιλέξτε μια διαφορετική περιοχή Azure ή εγγράψτε τον πάροχο πόρων:
 ```sh
 az provider register --namespace Microsoft.Insights
 ```
 
-#### 2. SQL Connection Fails During Deployment
+#### 2. Η σύνδεση SQL αποτυγχάνει κατά την ανάπτυξη
 
-**Symptom**:
+**Σύμπτωμα**:
 ```
 pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]TCP Provider...')
 ```
 
-**Solution**:
-- Επαληθεύστε ότι το firewall του SQL Server επιτρέπει τις υπηρεσίες Azure (ρυθμίζεται αυτόματα)
+**Λύση**:
+- Επαληθεύστε ότι το firewall του SQL Server επιτρέπει τις υπηρεσίες Azure (διαμορφώνεται αυτόματα)
 - Ελέγξτε ότι ο κωδικός διαχειριστή SQL εισήχθη σωστά κατά το `azd provision`
-- Βεβαιωθείτε ότι ο SQL Server έχει ολοκληρώσει την προμήθεια (μπορεί να πάρει 2-3 λεπτά)
+- Βεβαιωθείτε ότι ο SQL Server έχει ολοκληρώσει την παροχή (μπορεί να χρειαστούν 2-3 λεπτά)
 
-**Verify Connection**:
+**Επαλήθευση σύνδεσης**:
 ```sh
-# Από το Azure Portal, μεταβείτε στην SQL Database → Επεξεργαστής ερωτημάτων
+# Από την Πύλη του Azure, μεταβείτε σε Βάση δεδομένων SQL → Επεξεργαστής ερωτημάτων
 # Δοκιμάστε να συνδεθείτε με τα διαπιστευτήριά σας
 ```
 
-#### 3. Web App Shows "Application Error"
+#### 3. Η Web App εμφανίζει "Application Error"
 
-**Symptom**:
+**Σύμπτωμα**:
 Ο περιηγητής εμφανίζει γενική σελίδα σφάλματος.
 
-**Solution**:
+**Λύση**:
 Ελέγξτε τα αρχεία καταγραφής εφαρμογής:
 ```sh
-# Προβολή πρόσφατων καταγραφών
+# Προβολή πρόσφατων αρχείων καταγραφής
 az webapp log tail --name <app-name> --resource-group <rg-name>
 ```
 
-**Common causes**:
-- Λείπουν μεταβλητές περιβάλλοντος (ελέγξτε App Service → Configuration)
-- Η εγκατάσταση των πακέτων Python απέτυχε (ελέγξτε τα αρχεία καταγραφής ανάπτυξης)
+**Συνηθισμένες αιτίες**:
+- Λείπουν μεταβλητές περιβάλλοντος (ελέγξτε App Service → Διαμόρφωση)
+- Η εγκατάσταση πακέτων Python απέτυχε (ελέγξτε τα αρχεία καταγραφής ανάπτυξης)
 - Σφάλμα αρχικοποίησης βάσης δεδομένων (ελέγξτε τη συνδεσιμότητα SQL)
 
-#### 4. `azd deploy` Fails with "Build Error"
+#### 4. `azd deploy` αποτυγχάνει με "Build Error"
 
-**Symptom**:
+**Σύμπτωμα**:
 ```
 Error: Failed to build project
 ```
 
-**Solution**:
-- Βεβαιωθείτε ότι το `requirements.txt` δεν έχει συντακτικά λάθη
+**Λύση**:
+- Βεβαιωθείτε ότι το `requirements.txt` δεν έχει συντακτικά σφάλματα
 - Ελέγξτε ότι η Python 3.11 έχει καθοριστεί στο `infra/resources/web-app.bicep`
-- Επαληθεύστε ότι το Dockerfile έχει τη σωστή βασική εικόνα
+- Επιβεβαιώστε ότι το Dockerfile έχει σωστή βασική εικόνα
 
-**Debug locally**:
+**Αποσφαλμάτωση τοπικά**:
 ```sh
 cd src/web
 docker build -t test-app .
 docker run -p 8000:8000 test-app
 ```
 
-#### 5. "Unauthorized" When Running AZD Commands
+#### 5. "Unauthorized" κατά την εκτέλεση εντολών AZD
 
-**Symptom**:
+**Σύμπτωμα**:
 ```
 ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have authorization
 ```
 
-**Solution**:
-Επανασυνδεθείτε με το Azure:
+**Λύση**:
+Επανασυνδεθείτε στο Azure:
 ```sh
+# Απαιτείται για τις ροές εργασίας του AZD
 azd auth login
+
+# Προαιρετικό εάν χρησιμοποιείτε επίσης απευθείας εντολές της Azure CLI
 az login
 ```
 
-Επαληθεύστε ότι έχετε τα σωστά δικαιώματα (ρόλος Contributor) στη συνδρομή.
+Επιβεβαιώστε ότι έχετε τα σωστά δικαιώματα (ρόλος Contributor) στη συνδρομή.
 
-#### 6. High Database Costs
+#### 6. Υψηλό Κόστος Βάσης Δεδομένων
 
-**Symptom**:
-Απροσδόκητος λογαριασμός Azure.
+**Σύμπτωμα**:
+Απρόσμενος λογαριασμός από το Azure.
 
-**Solution**:
+**Λύση**:
 - Ελέγξτε αν ξεχάσατε να εκτελέσετε `azd down` μετά τις δοκιμές
-- Βεβαιωθείτε ότι η SQL Database χρησιμοποιεί το Basic tier (όχι Premium)
-- Εξετάστε τα κόστη στο Azure Cost Management
-- Ρυθμίστε ειδοποιήσεις κόστους
+- Επιβεβαιώστε ότι η SQL Database χρησιμοποιεί το επίπεδο Basic (όχι Premium)
+- Ελέγξτε τα κόστη στο Azure Cost Management
+- Ορίστε ειδοποιήσεις κόστους
 
-### Getting Help
+### Λήψη Βοήθειας
 
-**View All AZD Environment Variables**:
+**Προβολή όλων των μεταβλητών περιβάλλοντος AZD**:
 ```sh
 azd env get-values
 ```
 
-**Check Deployment Status**:
+**Έλεγχος κατάστασης ανάπτυξης**:
 ```sh
 az webapp show --name <app-name> --resource-group <rg-name> --query state
 ```
 
-**Access Application Logs**:
+**Πρόσβαση στα αρχεία καταγραφής εφαρμογής**:
 ```sh
 az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
 ```
 
-**Need More Help?**
-- [Οδηγός Αντιμετώπισης Προβλημάτων AZD](../../docs/chapter-07-troubleshooting/common-issues.md)
+**Χρειάζεστε περισσότερη βοήθεια;**
+- [Οδηγός Επίλυσης Προβλημάτων AZD](../../docs/chapter-07-troubleshooting/common-issues.md)
 - [Azure App Service Troubleshooting](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
 - [Azure SQL Troubleshooting](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
 
-## Practical Exercises
+## Πρακτικές Ασκήσεις
 
-### Exercise 1: Verify Your Deployment (Beginner)
+### Άσκηση 1: Επαλήθευση της Ανάπτυξής σας (Αρχάριος)
 
-**Goal**: Επιβεβαιώστε ότι όλοι οι πόροι έχουν αναπτυχθεί και η εφαρμογή λειτουργεί.
+**Στόχος**: Επιβεβαιώστε ότι όλοι οι πόροι έχουν αναπτυχθεί και η εφαρμογή λειτουργεί.
 
-**Steps**:
-1. Καταγράψτε όλους τους πόρους στην ομάδα πόρων σας:
+**Βήματα**:
+1. Καταγράψτε όλους τους πόρους στο resource group σας:
    ```sh
    az resource list --resource-group rg-<env-name> --output table
    ```
-   **Expected**: 6-7 resources (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
+   **Αναμενόμενο**: 6-7 πόροι (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
 
-2. Δοκιμάστε όλα τα API endpoints:
+2. Δοκιμάστε όλα τα endpoints του API:
    ```sh
    curl https://app-<your-id>.azurewebsites.net/
    curl https://app-<your-id>.azurewebsites.net/health
    curl https://app-<your-id>.azurewebsites.net/products
    curl https://app-<your-id>.azurewebsites.net/products/1
    ```
-   **Expected**: All return valid JSON without errors
+   **Αναμενόμενο**: Όλα επιστρέφουν έγκυρο JSON χωρίς σφάλματα
 
 3. Ελέγξτε το Application Insights:
    - Μεταβείτε στο Application Insights στο Azure Portal
    - Πηγαίνετε στο "Live Metrics"
-   - Ανανέωση του περιηγητή στην web app
-   **Expected**: Δείτε αιτήματα να εμφανίζονται σε πραγματικό χρόνο
+   - Ανανέωση του προγράμματος περιήγησης στην εφαρμογή web
+   **Αναμενόμενο**: Δείτε αιτήματα να εμφανίζονται σε πραγματικό χρόνο
 
-**Success Criteria**: Όλοι οι 6-7 πόροι υπάρχουν, όλα τα endpoints επιστρέφουν δεδομένα, τα Live Metrics εμφανίζουν δραστηριότητα.
+**Κριτήρια Επιτυχίας**: Όλοι οι 6-7 πόροι υπάρχουν, όλα τα endpoints επιστρέφουν δεδομένα, τα Live Metrics δείχνουν δραστηριότητα.
 
 ---
 
-### Exercise 2: Add a New API Endpoint (Intermediate)
+### Άσκηση 2: Προσθήκη Νέου Endpoint API (Ενδιάμεσο)
 
-**Goal**: Επεκτείνετε την εφαρμογή Flask με ένα νέο endpoint.
+**Στόχος**: Επεκτείνετε την εφαρμογή Flask με ένα νέο endpoint.
 
-**Starter Code**: Current endpoints in `src/web/app.py`
+**Αρχικός Κώδικας**: Τα τρέχοντα endpoints στο `src/web/app.py`
 
-**Steps**:
+**Βήματα**:
 1. Επεξεργαστείτε το `src/web/app.py` και προσθέστε ένα νέο endpoint μετά τη συνάρτηση `get_product()`:
    ```python
    @app.route('/products/search/<keyword>')
@@ -719,20 +722,20 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    ```sh
    curl https://app-<your-id>.azurewebsites.net/products/search/laptop
    ```
-   **Expected**: Επιστρέφει προϊόντα που ταιριάζουν με "laptop"
+   **Αναμενόμενο**: Επιστρέφει προϊόντα που ταιριάζουν με "laptop"
 
-**Success Criteria**: Το νέο endpoint λειτουργεί, επιστρέφει φιλτραρισμένα αποτελέσματα, εμφανίζεται στα αρχεία καταγραφής του Application Insights.
+**Κριτήρια Επιτυχίας**: Το νέο endpoint λειτουργεί, επιστρέφει φιλτραρισμένα αποτελέσματα, εμφανίζεται στα αρχεία καταγραφής του Application Insights.
 
 ---
 
-### Exercise 3: Add Monitoring and Alerts (Advanced)
+### Άσκηση 3: Προσθήκη Παρακολούθησης και Ειδοποιήσεων (Προχωρημένο)
 
-**Goal**: Ρυθμίστε προληπτική παρακολούθηση με ειδοποιήσεις.
+**Στόχος**: Ορίστε προληπτική παρακολούθηση με ειδοποιήσεις.
 
-**Steps**:
-1. Δημιουργήστε ένα alert για σφάλματα HTTP 500:
+**Βήματα**:
+1. Δημιουργήστε μια ειδοποίηση για σφάλματα HTTP 500:
    ```sh
-   # Λήψη αναγνωριστικού πόρου Application Insights
+   # Λήψη αναγνωριστικού πόρου του Application Insights
    AI_ID=$(az monitor app-insights component show \
      --app appi-<your-id> \
      --resource-group rg-<env-name> \
@@ -751,24 +754,24 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 2. Προκαλέστε την ειδοποίηση προκαλώντας σφάλματα:
    ```sh
-   # Ζητήστε ένα ανύπαρκτο προϊόν
+   # Αίτηση για μη υπάρχον προϊόν
    for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
    ```
 
-3. Ελέγξτε αν πυροδοτήθηκε η ειδοποίηση:
+3. Ελέγξτε αν ενεργοποιήθηκε η ειδοποίηση:
    - Azure Portal → Alerts → Alert Rules
    - Ελέγξτε το email σας (αν έχει ρυθμιστεί)
 
-**Success Criteria**: Ο κανόνας ειδοποίησης δημιουργήθηκε, ενεργοποιείται σε σφάλματα, λαμβάνονται ειδοποιήσεις.
+**Κριτήρια Επιτυχίας**: Ο κανόνας ειδοποίησης έχει δημιουργηθεί, ενεργοποιείται σε σφάλματα, λαμβάνονται ειδοποιήσεις.
 
 ---
 
-### Exercise 4: Database Schema Changes (Advanced)
+### Άσκηση 4: Αλλαγές Σχήματος Βάσης Δεδομένων (Προχωρημένο)
 
-**Goal**: Προσθέστε έναν νέο πίνακα και τροποποιήστε την εφαρμογή για να τον χρησιμοποιεί.
+**Στόχος**: Προσθέστε έναν νέο πίνακα και τροποποιήστε την εφαρμογή για να τον χρησιμοποιεί.
 
-**Steps**:
-1. Συνδεθείτε στη SQL Database μέσω του Azure Portal Query Editor
+**Βήματα**:
+1. Συνδεθείτε στη SQL Database μέσω του Query Editor στο Azure Portal
 
 2. Δημιουργήστε έναν νέο πίνακα `categories`:
    ```sql
@@ -787,110 +790,110 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    UPDATE products SET category_id = 1; -- Set all to Electronics
    ```
 
-3. Ενημερώστε το `src/web/app.py` ώστε να περιλαμβάνει πληροφορίες κατηγορίας στις απαντήσεις
+3. Ενημερώστε το `src/web/app.py` για να συμπεριλάβετε πληροφορίες κατηγορίας στις αποκρίσεις
 
 4. Αναπτύξτε και δοκιμάστε
 
-**Success Criteria**: Ο νέος πίνακας υπάρχει, τα προϊόντα εμφανίζουν πληροφορίες κατηγορίας, η εφαρμογή εξακολουθεί να λειτουργεί.
+**Κριτήρια Επιτυχίας**: Ο νέος πίνακας υπάρχει, τα προϊόντα εμφανίζουν πληροφορίες κατηγορίας, η εφαρμογή λειτουργεί κανονικά.
 
 ---
 
-### Exercise 5: Implement Caching (Expert)
+### Άσκηση 5: Υλοποίηση Cache (Ειδικός)
 
-**Goal**: Προσθέστε Azure Redis Cache για βελτίωση της απόδοσης.
+**Στόχος**: Προσθέστε Azure Redis Cache για βελτίωση της απόδοσης.
 
-**Steps**:
+**Βήματα**:
 1. Προσθέστε Redis Cache στο `infra/main.bicep`
 2. Ενημερώστε το `src/web/app.py` για να κάνετε cache τα ερωτήματα προϊόντων
 3. Μετρήστε τη βελτίωση απόδοσης με το Application Insights
-4. Συγκρίνετε τους χρόνους απόκρισης πριν/μετά το caching
+4. Συγκρίνετε τους χρόνους απόκρισης πριν/μετά την προσθήκη cache
 
-**Success Criteria**: Το Redis έχει αναπτυχθεί, το caching λειτουργεί, οι χρόνοι απόκρισης βελτιώνονται κατά >50%.
+**Κριτήρια Επιτυχίας**: Το Redis έχει αναπτυχθεί, η cache λειτουργεί, οι χρόνοι απόκρισης βελτιώνονται κατά >50%.
 
-**Hint**: Ξεκινήστε με την [Τεκμηρίωση Azure Cache for Redis](https://learn.microsoft.com/azure/azure-cache-for-redis/).
+**Υπόδειξη**: Ξεκινήστε με την [Τεκμηρίωση Azure Cache for Redis](https://learn.microsoft.com/azure/azure-cache-for-redis/).
 
 ---
 
-## Cleanup
+## Καθαρισμός
 
-Για να αποφύγετε συνεχιζόμενες χρεώσεις, διαγράψτε όλους τους πόρους όταν τελειώσετε:
+Για να αποφύγετε συνεχείς χρεώσεις, διαγράψτε όλους τους πόρους όταν τελειώσετε:
 
 ```sh
 azd down
 ```
 
-**Confirmation prompt**:
+**Μήνυμα επιβεβαίωσης**:
 ```
 ? Total resources to delete: 7, are you sure you want to continue? (y/N)
 ```
 
-Type `y` to confirm.
+Πληκτρολογήστε `y` για επιβεβαίωση.
 
 **✓ Έλεγχος Επιτυχίας**: 
 - Όλοι οι πόροι έχουν διαγραφεί από το Azure Portal
 - Δεν υπάρχουν συνεχιζόμενες χρεώσεις
 - Ο τοπικός φάκελος `.azure/<env-name>` μπορεί να διαγραφεί
 
-**Alternative** (keep infrastructure, delete data):
+**Εναλλακτική** (διατήρηση υποδομής, διαγραφή δεδομένων):
 ```sh
 # Διαγράψτε μόνο την ομάδα πόρων (κρατήστε τη διαμόρφωση AZD)
 az group delete --name rg-<env-name> --yes
 ```
-## Μάθε Περισσότερα
+## Μάθετε Περισσότερα
 
-### Related Documentation
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Azure SQL Database Documentation](https://learn.microsoft.com/azure/azure-sql/database/)
-- [Azure App Service Documentation](https://learn.microsoft.com/azure/app-service/)
-- [Application Insights Documentation](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Bicep Language Reference](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+### Σχετική Τεκμηρίωση
+- [Τεκμηρίωση Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Τεκμηρίωση Azure SQL Database](https://learn.microsoft.com/azure/azure-sql/database/)
+- [Τεκμηρίωση Azure App Service](https://learn.microsoft.com/azure/app-service/)
+- [Τεκμηρίωση Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Αναφορά Γλώσσας Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-### Next Steps in This Course
-- **[Παράδειγμα Container Apps](../../../../examples/container-app)**: Αναπτύξτε μικροϋπηρεσίες με Azure Container Apps
+### Επόμενα Βήματα σε Αυτό το Μάθημα
+- **[Παράδειγμα Container Apps](../../../../examples/container-app)**: Αναπτύξτε μικροϋπηρεσίες με τα Azure Container Apps
 - **[Οδηγός Ενσωμάτωσης AI](../../../../docs/ai-foundry)**: Προσθέστε δυνατότητες AI στην εφαρμογή σας
-- **[Καλές Πρακτικές Ανάπτυξης](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Σχέδια ανάπτυξης για παραγωγή
+- **[Βέλτιστες Πρακτικές Ανάπτυξης](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Πρότυπα ανάπτυξης για παραγωγή
 
-### Advanced Topics
-- **Managed Identity**: Αφαιρέστε τους κωδικούς και χρησιμοποιήστε την αυθεντικοποίηση Azure AD
-- **Private Endpoints**: Ασφαλίστε τις συνδέσεις βάσης δεδομένων εντός ιδιωτικού δικτύου
+### Προχωρημένα Θέματα
+- **Managed Identity**: Αφαιρέστε τους κωδικούς πρόσβασης και χρησιμοποιήστε την πιστοποίηση Azure AD
+- **Private Endpoints**: Ασφαλίστε τις συνδέσεις βάσης δεδομένων εντός εικονικού δικτύου
 - **CI/CD Integration**: Αυτοματοποιήστε τις αναπτύξεις με GitHub Actions ή Azure DevOps
 - **Multi-Environment**: Ρυθμίστε περιβάλλοντα dev, staging και production
-- **Database Migrations**: Χρησιμοποιήστε Alembic ή Entity Framework για versioning του σχήματος
+- **Database Migrations**: Χρησιμοποιήστε Alembic ή Entity Framework για versioning σχήματος
 
-### Comparison to Other Approaches
+### Σύγκριση με Άλλες Προσεγγίσεις
 
 **AZD vs. ARM Templates**:
 - ✅ AZD: Υψηλότερου επιπέδου αφαίρεση, απλούστερες εντολές
 - ⚠️ ARM: Πιο εκτενές, λεπτομερής έλεγχος
 
 **AZD vs. Terraform**:
-- ✅ AZD: Azure-native, ενσωματωμένο με τις υπηρεσίες Azure
-- ⚠️ Terraform: Υποστήριξη multi-cloud, μεγαλύτερο οικοσύστημα
+- ✅ AZD: Azure-πρωτότυπο, ενσωματωμένο με υπηρεσίες Azure
+- ⚠️ Terraform: Υποστήριξη πολλαπλών cloud, μεγαλύτερο οικοσύστημα
 
 **AZD vs. Azure Portal**:
 - ✅ AZD: Επαναλήψιμο, ελεγχόμενο με έκδοση, αυτοματοποιήσιμο
 - ⚠️ Portal: Χειροκίνητα κλικ, δύσκολο στην αναπαραγωγή
 
-**Think of AZD as**: Docker Compose for Azure—απλοποιημένη διαμόρφωση για πολύπλοκες αναπτύξεις.
+**Σκεφτείτε το AZD ως**: Docker Compose για Azure — απλοποιημένη διαμόρφωση για σύνθετες αναπτύξεις.
 
 ---
 
 ## Συχνές Ερωτήσεις
 
-**Q: Can I use a different programming language?**  
-A: Ναι! Αντικαταστήστε το `src/web/` με Node.js, C#, Go ή οποιαδήποτε γλώσσα. Ενημερώστε τα `azure.yaml` και Bicep ανάλογα.
+**Ε: Μπορώ να χρησιμοποιήσω διαφορετική γλώσσα προγραμματισμού;**  
+Α: Ναι! Αντικαταστήστε `src/web/` με Node.js, C#, Go, ή οποιαδήποτε γλώσσα. Ενημερώστε `azure.yaml` και Bicep αντίστοιχα.
 
-**Q: How do I add more databases?**  
-A: Προσθέστε ένα ακόμη module SQL Database στο `infra/main.bicep` ή χρησιμοποιήστε PostgreSQL/MySQL από τις υπηρεσίες Azure Database.
+**Ε: Πώς προσθέτω περισσότερες βάσεις δεδομένων;**  
+Α: Προσθέστε ένα ακόμη module SQL Database στο `infra/main.bicep` ή χρησιμοποιήστε PostgreSQL/MySQL από τις υπηρεσίες Azure Database.
 
-**Q: Can I use this for production?**  
-A: Αυτό είναι ένα σημείο εκκίνησης. Για παραγωγή, προσθέστε: managed identity, private endpoints, redundancy, στρατηγική backup, WAF και ενισχυμένη παρακολούθηση.
+**Ε: Μπορώ να το χρησιμοποιήσω για παραγωγή;**  
+Α: Αυτό είναι ένα σημείο εκκίνησης. Για παραγωγή, προσθέστε: managed identity, private endpoints, πλεονασμό, στρατηγική backup, WAF και βελτιωμένη παρακολούθηση.
 
-**Q: What if I want to use containers instead of code deployment?**  
-A: Δείτε το [Παράδειγμα Container Apps](../../../../examples/container-app) που χρησιμοποιεί Docker containers σε όλη τη διαδικασία.
+**Ε: Τι γίνεται αν θέλω να χρησιμοποιήσω containers αντί για ανάπτυξη κώδικα;**  
+Α: Δείτε το [Παράδειγμα Container Apps](../../../../examples/container-app) που χρησιμοποιεί Docker containers καθ' όλη τη διαδικασία.
 
-**Q: How do I connect to the database from my local machine?**  
-A: Προσθέστε την IP σας στο firewall του SQL Server:
+**Ε: Πώς συνδέομαι στη βάση δεδομένων από τον τοπικό μου υπολογιστή;**  
+Α: Προσθέστε τη διεύθυνση IP σας στο firewall του SQL Server:
 ```sh
 az sql server firewall-rule create \
   --resource-group rg-<env-name> \
@@ -900,21 +903,21 @@ az sql server firewall-rule create \
   --end-ip-address <your-ip>
 ```
 
-**Q: Can I use an existing database instead of creating a new one?**  
-A: Ναι, τροποποιήστε το `infra/main.bicep` για να αναφερθείτε σε έναν υπάρχοντα SQL Server και ενημερώστε τα παραμέτρους της συμβολοσειράς σύνδεσης.
+**Ε: Μπορώ να χρησιμοποιήσω υπάρχουσα βάση δεδομένων αντί να δημιουργήσω νέα;**  
+Α: Ναι, τροποποιήστε το `infra/main.bicep` για να αναφερθεί σε υπάρχοντα SQL Server και ενημερώστε τις παραμέτρους connection string.
 
 ---
 
-> **Note:** Αυτό το παράδειγμα παρουσιάζει βέλτιστες πρακτικές για την ανάπτυξη μιας web app με βάση δεδομένων χρησιμοποιώντας AZD. Περιλαμβάνει λειτουργικό κώδικα, εκτενή τεκμηρίωση και πρακτικές ασκήσεις για την εμπέδωση της μάθησης. Για παραγωγικές αναπτύξεις, ελέγξτε τα ζητήματα ασφάλειας, κλιμάκωσης, συμμόρφωσης και κόστους που αφορούν τον οργανισμό σας.
+> **Σημείωση:** Αυτό το παράδειγμα δείχνει βέλτιστες πρακτικές για την ανάπτυξη μιας εφαρμογής web με βάση δεδομένων χρησιμοποιώντας AZD. Περιλαμβάνει λειτουργικό κώδικα, πλήρη τεκμηρίωση και πρακτικές ασκήσεις για ενίσχυση της μάθησης. Για αναπτύξεις σε παραγωγή, εξετάστε τις απαιτήσεις ασφάλειας, κλιμάκωσης, συμμόρφωσης και κόστους που αφορούν τον οργανισμό σας.
 
-**📚 Course Navigation:**
-- ← Previous: [Παράδειγμα Container Apps](../../../../examples/container-app)
-- → Next: [Οδηγός Ενσωμάτωσης AI](../../../../docs/ai-foundry)
-- 🏠 [Course Home](../../README.md)
+**📚 Πλοήγηση Μαθήματος:**
+- ← Προηγούμενο: [Παράδειγμα Container Apps](../../../../examples/container-app)
+- → Επόμενο: [Οδηγός Ενσωμάτωσης AI](../../../../docs/ai-foundry)
+- 🏠 [Αρχική Μαθήματος](../../README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Αποποίηση ευθυνών:
-Αυτό το έγγραφο έχει μεταφραστεί με τη χρήση της υπηρεσίας αυτόματης μετάφρασης τεχνητής νοημοσύνης Co-op Translator (https://github.com/Azure/co-op-translator). Παρά τις προσπάθειές μας για ακρίβεια, λάβετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στην αρχική του γλώσσα πρέπει να θεωρείται η επίσημη πηγή. Για κρίσιμες πληροφορίες συνιστάται επαγγελματική μετάφραση από έμπειρο μεταφραστή. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+**Disclaimer**:
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης AI [Co-op Translator](https://github.com/Azure/co-op-translator). Παρόλο που επιδιώκουμε την ακρίβεια, παρακαλούμε να λάβετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στην πρωτότυπη γλώσσα του πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική μετάφραση από ανθρώπινο μεταφραστή. Δεν φέρουμε καμία ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -5,11 +5,11 @@
     </h2>
     <p style="color: white; margin: 10px 0 0 0; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
       <strong>En praktisk workshop för att bygga AI-applikationer med Azure Developer CLI.</strong><br>
-      Avsluta 7 moduler för att bemästra AZD-mallar och AI-distributionsarbetsflöden.
+      Slutför 7 moduler för att bemästra AZD-mallar och arbetsflöden för AI-distribution.
     </p>
     <div style="margin-top: 15px;">
       <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
-        📅 Senast uppdaterad: februari 2026
+        📅 Senast uppdaterad: mars 2026
       </span>
     </div>
   </div>
@@ -17,113 +17,115 @@
 
 # AZD för AI-utvecklare Workshop
 
-Välkommen till den praktiska workshopen för att lära dig Azure Developer CLI (AZD) med fokus på distribution av AI-applikationer. Denna workshop hjälper dig att få en praktisk förståelse för AZD-mallar i 3 steg:
+Välkommen till den praktiska workshopen för att lära dig Azure Developer CLI (AZD) med fokus på distribution av AI-applikationer. Den här workshopen hjälper dig att få en praktisk förståelse för AZD-mallar i 3 steg:
 
 1. **Upptäckt** - hitta den mall som passar dig.
-1. **Distribution** - distribuera och validera att det fungerar
-1. **Anpassning** - modifiera och iterera för att göra den till din!
+1. **Driftsättning** - distribuera och verifiera att det fungerar
+1. **Anpassning** - ändra och iterera för att göra det till ditt!
 
-Under kursens gång kommer du också att introduceras för kärnverktyg och arbetsflöden för utvecklare, för att hjälpa dig att effektivisera din end-to-end utvecklingsresa.
+Under kursens gång introduceras du också till kärnverktyg och arbetsflöden för utvecklare, för att hjälpa dig effektivisera din ända-till-ända utvecklingsresa.
 
 <br/>
 
 ## Webbläsarbaserad guide
 
-Workshopens lektioner är i Markdown. Du kan navigera dem direkt på GitHub - eller starta en webbläsarbaserad förhandsvisning som visas i skärmdumpen nedan.
+Workshopen finns i Markdown. Du kan navigera direkt i GitHub - eller starta en webbläsarförhandsgranskning som visas i skärmdumpen nedan.
 
 ![Workshop](../../../translated_images/sv/workshop.75906f133e6f8ba0.webp)
 
-För att använda det här alternativet - fork:a repositoryt till din profil och starta GitHub Codespaces. När VS Code-terminalen är aktiv, skriv detta kommando:
+För att använda det här alternativet - fork:a repositoryt till din profil och starta GitHub Codespaces. När VS Code-terminalen är aktiv, skriv följande kommando:
+
+This browser preview works in GitHub Codespaces, dev containers, or a local clone with Python and MkDocs installed.
 
 ```bash title="" linenums="0"
 mkdocs serve > /dev/null 2>&1 &
 ```
 
-Om några sekunder kommer du att se en popup-dialog. Välj alternativet att `Öppna i webbläsaren`. Den webbaserade guiden öppnas nu i en ny flik i webbläsaren. Några fördelar med denna förhandsvisning:
+Om några sekunder ser du en popup-dialog. Välj alternativet `Öppna i webbläsare`. Den webbaserade guiden öppnas nu i en ny flik i webbläsaren. Några fördelar med denna förhandsgranskning:
 
-1. **Inbyggd sökfunktion** - hitta nyckelord eller lektioner snabbt.
-1. **Kopieringsikon** - håll muspekaren över kodblock för att se detta alternativ
-1. **Byt tema** - växla mellan mörkt och ljust tema
+1. **Inbyggd sökning** - hitta nyckelord eller lektioner snabbt.
+1. **Kopiera-ikon** - hovra över kodblock för att se detta alternativ
+1. **Temaväxling** - växla mellan mörkt och ljust tema
 1. **Få hjälp** - klicka på Discord-ikonen i sidfoten för att gå med!
 
 <br/>
 
 ## Översikt över workshopen
 
-**Varaktighet:** 3-4 timmar  
-**Nivå:** Nybörjare till Mellannivå  
-**Förkunskaper:** Bekantskap med Azure, AI-koncept, VS Code & kommandoradsverktyg.
+**Tid:** 3–4 timmar  
+**Nivå:** Nybörjare till medel  
+**Förkunskaper:** Bekantskap med Azure, AI-koncept, VS Code och kommandoradsverktyg.
 
-Detta är en praktisk workshop där du lär dig genom att göra. När du har slutfört övningarna rekommenderar vi att du går igenom AZD För Nybörjare-kursen för att fortsätta din läranderesa in i säkerhets- och produktivitetsbästa praxis.
+Detta är en praktisk workshop där du lär dig genom att göra. När du har slutfört övningarna rekommenderar vi att du går igenom kursplanen AZD For Beginners för att fortsätta din inlärningsresa inom bästa praxis för säkerhet och produktivitet.
 
 | Tid| Modul  | Mål |
 |:---|:---|:---|
-| 15 mins | [Introduktion](docs/instructions/0-Introduction.md) | Sätt scenen, förstå målen |
-| 30 mins | [Välj AI-mall](docs/instructions/1-Select-AI-Template.md) | Utforska alternativ och välj startmall | 
-| 30 mins | [Validera AI-mall](docs/instructions/2-Validate-AI-Template.md) | Distribuera standardlösning till Azure |
-| 30 mins | [Analysera AI-mall](docs/instructions/3-Deconstruct-AI-Template.md) | Utforska struktur och konfiguration |
-| 30 mins | [Konfigurera AI-mall](docs/instructions/4-Configure-AI-Template.md) | Aktivera och testa tillgängliga funktioner |
+| 15 mins | [Introduktion](docs/instructions/0-Introduction.md) | Sätta scenen, förstå målen |
+| 30 mins | [Välj AI-mall](docs/instructions/1-Select-AI-Template.md) | Utforska alternativ och välj en startmall | 
+| 30 mins | [Validera AI-mall](docs/instructions/2-Validate-AI-Template.md) | Driftsätt standardlösningen till Azure |
+| 30 mins | [Dekonstruera AI-mall](docs/instructions/3-Deconstruct-AI-Template.md) | Utforska struktur och konfiguration |
+| 30 mins | [Konfigurera AI-mall](docs/instructions/4-Configure-AI-Template.md) | Aktivera och prova tillgängliga funktioner |
 | 30 mins | [Anpassa AI-mall](docs/instructions/5-Customize-AI-Template.md) | Anpassa mallen efter dina behov |
-| 30 mins | [Nedmontera infrastruktur](docs/instructions/6-Teardown-Infrastructure.md) | Rensa upp och frigör resurser |
-| 15 mins | [Sammanfattning & nästa steg](docs/instructions/7-Wrap-up.md) | Lärresurser, workshoputmaning |
+| 30 mins | [Avveckla infrastrukturen](docs/instructions/6-Teardown-Infrastructure.md) | Rensa upp och frigör resurser |
+| 15 mins | [Avslut & nästa steg](docs/instructions/7-Wrap-up.md) | Lärresurser, workshoputmaning |
 
 <br/>
 
 ## Vad du kommer att lära dig
 
-Tänk på AZD-mallen som en lärandesandbox för att utforska olika möjligheter och verktyg för end-to-end utveckling på Microsoft Foundry. I slutet av denna workshop bör du ha en intuitiv känsla för olika verktyg och koncept i detta sammanhang.
+Tänk på AZD-mallen som en lärsandlåda för att utforska olika kapabiliteter och verktyg för ända-till-ända-utveckling på Microsoft Foundry. I slutet av denna workshop bör du ha en intuitiv känsla för olika verktyg och koncept i detta sammanhang.
 
 | Koncept  | Mål |
 |:---|:---|
-| **Azure Developer CLI** | Förstå verktygets kommandon och arbetsflöden |
-| **AZD Templates**| Förstå projektstruktur och konfiguration |
-| **Azure AI Agent**| Provisionera & distribuera Microsoft Foundry-projekt  |
-| **Azure AI Search**| Möjliggör kontextengineering med agenter |
+| **Azure Developer CLI** | Förstå verktygets kommandon och arbetsflöden|
+| **AZD-mallar**| Förstå projektstruktur och konfiguration|
+| **Azure AI Agent**| Provisionera och distribuera Microsoft Foundry-projekt |
+| **Azure AI Search**| Möjliggöra kontextteknik med agenter |
 | **Observerbarhet**| Utforska spårning, övervakning och utvärderingar |
-| **Red Teaming**| Utforska adversarial tester och motåtgärder |
+| **Red Teaming**| Utforska adversariella tester och motåtgärder |
 
 <br/>
 
 ## Workshopstruktur
 
-Workshopen är strukturerad för att ta dig på en resa från mallupptäckt till distribution, dekonstruering och anpassning - med den officiella [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) startmallen som bas.
+Workshopen är strukturerad för att ta dig på en resa från mallupptäckt, till driftsättning, dekonstruering och anpassning - med den officiella [Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) startmallen som grund.
 
-### [Modul 1: Välj AI-mall](docs/instructions/1-Select-AI-Template.md) (30 mins)
+### [Modul 1: Välj AI-mall](docs/instructions/1-Select-AI-Template.md) (30 min)
 
 - Vad är AI-mallar?
-- Var kan jag hitta AI-mallar?
+- Var hittar jag AI-mallar?
 - Hur kommer jag igång med att bygga AI-agenter?
-- **Lab**: Snabbstart med GitHub Codespaces
+- **Lab**: Snabbstart i Codespaces eller en dev-container
 
-### [Modul 2: Validera AI-mall](docs/instructions/2-Validate-AI-Template.md) (30 mins)
+### [Modul 2: Validera AI-mall](docs/instructions/2-Validate-AI-Template.md) (30 min)
 
 - Vad är AI-mallens arkitektur?
 - Vad är AZD-utvecklingsarbetsflödet?
-- Hur får jag hjälp med AZD-utveckling?
-- **Lab**: Distribuera & validera AI Agents-mallen
+- Hur kan jag få hjälp med AZD-utveckling?
+- **Lab**: Driftsätt & validera AI Agents-mallen
 
-### [Modul 3: Analysera AI-mall](docs/instructions/3-Deconstruct-AI-Template.md) (30 mins)
+### [Modul 3: Dekonstruera AI-mall](docs/instructions/3-Deconstruct-AI-Template.md) (30 min)
 
 - Utforska din miljö i `.azure/` 
 - Utforska din resursuppsättning i `infra/` 
 - Utforska din AZD-konfiguration i `azure.yaml`s
-- **Lab**: Modifiera miljövariabler & distribuera igen
+- **Lab**: Ändra miljövariabler & driftsätt igen
 
-### [Modul 4: Konfigurera AI-mall](docs/instructions/4-Configure-AI-Template.md) (30 mins)
+### [Modul 4: Konfigurera AI-mall](docs/instructions/4-Configure-AI-Template.md) (30 min)
 - Utforska: Retrieval Augmented Generation
 - Utforska: Agentutvärdering & Red Teaming
 - Utforska: Spårning & övervakning
 - **Lab**: Utforska AI-agent + observerbarhet 
 
-### [Modul 5: Anpassa AI-mall](docs/instructions/5-Customize-AI-Template.md) (30 mins)
-- Definiera: PRD med scenariokrav
+### [Modul 5: Anpassa AI-mall](docs/instructions/5-Customize-AI-Template.md) (30 min)
+- Definiera: PRD med scenariospecifikationer
 - Konfigurera: Miljövariabler för AZD
-- Implementera: Livscykelkrokar för tillagda uppgifter
+- Implementera: Lifecycle Hooks för tillagda uppgifter
 - **Lab**: Anpassa mallen för mitt scenario
 
-### [Modul 6: Nedmontera infrastruktur](docs/instructions/6-Teardown-Infrastructure.md) (30 mins)
-- Sammanfatta: Vad är AZD-mallar?
-- Sammanfatta: Varför använda Azure Developer CLI?
+### [Modul 6: Avveckla infrastrukturen](docs/instructions/6-Teardown-Infrastructure.md) (30 min)
+- Sammanfattning: Vad är AZD-mallar?
+- Sammanfattning: Varför använda Azure Developer CLI?
 - Nästa steg: Prova en annan mall!
 - **Lab**: Avprovisionera infrastruktur & städa upp
 
@@ -131,41 +133,41 @@ Workshopen är strukturerad för att ta dig på en resa från mallupptäckt till
 
 ## Workshoputmaning
 
-Vill du utmana dig själv att göra mer? Här är några projektförslag - eller dela dina idéer med oss!!
+Vill du utmana dig själv mer? Här är några projektförslag — eller dela dina idéer med oss!!
 
-| Project | Description |
+| Projekt | Beskrivning |
 |:---|:---|
-|1. **Dekonstruera en komplex AI-mall** | Använd arbetsflödet och verktygen vi beskrev och se om du kan distribuera, validera och anpassa en annan AI-lösningsmall. _Vad lärde du dig?_|
-|2. **Anpassa efter ditt scenario**  | Försök att skriva ett PRD (Produktkravdokument) för ett annat scenario. Använd sedan GitHub Copilot i ditt mall-repo i Agent Model - och be den att generera ett anpassningsarbetsflöde åt dig. _Vad lärde du dig? Hur kan du förbättra dessa förslag?_|
+|1. **Dekonstruera en komplex AI-mall** | Använd arbetsflödet och verktygen vi beskrev och se om du kan distribuera, validera, och anpassa en annan AI-lösningsmall. _Vad lärde du dig?_|
+|2. **Anpassa efter ditt scenario**  | Försök skriva en PRD (Product Requirements Document) för ett annat scenario. Använd sedan GitHub Copilot i ditt mallrepo i Agent Model - och be det generera ett anpassningsarbetsflöde för dig. _Vad lärde du dig? Hur kan du förbättra dessa förslag?_|
 | | |
 
 ## Har du feedback?
 
-1. Skapa ett issue i detta repo - tagga det `Workshop` för enkelhetens skull.
+1. Skapa en issue i det här repot - tagga den `Workshop` för enkelhetens skull.
 1. Gå med i Microsoft Foundry Discord - koppla upp dig med dina kollegor!
 
 
 | | | 
 |:---|:---|
-| **📚 Kursöversikt**| [AZD For Beginners](../README.md)|
+| **📚 Kurshem**| [AZD för nybörjare](../README.md)|
 | **📖 Dokumentation** | [Kom igång med AI-mallar](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI-mallar** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 Nästa steg** | [Börja workshopen](../../../workshop) |
+| **🛠️AI-mallar** | [Microsoft Foundry-mallar](https://ai.azure.com/templates) |
+|**🚀 Nästa steg** | [Starta workshop](#översikt-över-workshopen) |
 | | |
 
 <br/>
 
 ---
 
-**Navigering:** [Huvudkurs](../README.md) | [Introduktion](docs/instructions/0-Introduction.md) | [Modul 1: Välj AI-mall](docs/instructions/1-Select-AI-Template.md)
+**Navigering:** [Huvudkurs](../README.md) | [Introduktion](docs/instructions/0-Introduction.md) | [Modul 1: Välj mall](docs/instructions/1-Select-AI-Template.md)
 
 **Redo att börja bygga AI-applikationer med AZD?**
 
-[Starta workshoppen: Introduktion →](docs/instructions/0-Introduction.md)
+[Starta workshop: Introduktion →](docs/instructions/0-Introduction.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Ansvarsfriskrivning**:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet bör du vara medveten om att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på originalspråket ska anses vara den auktoritativa källan. För viktig information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+**Friskrivning**:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Medan vi strävar efter noggrannhet, var medveten om att automatiska översättningar kan innehålla fel eller felaktigheter. Originaldokumentet i dess ursprungliga språk ska betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi är inte ansvariga för eventuella missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

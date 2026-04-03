@@ -1,43 +1,43 @@
-# Provisionera Azure-resurser med AZD
+# Provisionering av Azure-resurser med AZD
 
 **Kapitelnavigering:**
-- **📚 Kursstart**: [AZD För nybörjare](../../README.md)
-- **📖 Aktuellt kapitel**: Kapitel 4 - Infrastruktur som kod och distribution
-- **⬅️ Föregående**: [Distributionsguide](deployment-guide.md)
+- **📚 Kurshem**: [AZD För Nybörjare](../../README.md)
+- **📖 Aktuellt kapitel**: Kapitel 4 - Infrastruktur som kod & Distribution
+- **⬅️ Föregående**: [Distribueringsguide](deployment-guide.md)
 - **➡️ Nästa kapitel**: [Kapitel 5: Multi-agent AI-lösningar](../../examples/retail-scenario.md)
-- **🔧 Relaterat**: [Kapitel 6: Validering före distribution](../chapter-06-pre-deployment/capacity-planning.md)
+- **🔧 Relaterat**: [Kapitel 6: Förvalidering före distribution](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Introduktion
 
-Denna omfattande guide täcker allt du behöver veta om att provisionera och hantera Azure-resurser med Azure Developer CLI. Lär dig implementera infrastruktur som kod (IaC)-mönster från grundläggande resurskapande till avancerade företagsinfrastrukturer med Bicep, ARM-mallar, Terraform och Pulumi.
+Denna omfattande guide täcker allt du behöver veta om provisionering och hantering av Azure-resurser med Azure Developer CLI. Lär dig att implementera Infrastructure as Code (IaC)-mönster från grundläggande resurskapande till avancerade företagsklassade infrastrukturarkitekturer med Bicep, ARM-mallar, Terraform och Pulumi.
 
 ## Lärandemål
 
-Genom att genomföra denna guide kommer du att:
-- Behärska principerna för infrastruktur som kod och provisionering av Azure-resurser
-- Förstå de olika IaC-leverantörer som stöds av Azure Developer CLI
+Genom att slutföra denna guide kommer du att:
+- Behärska principerna för Infrastructure as Code (IaC) och Azure-resursprovisionering
+- Förstå flera IaC-leverantörer som stöds av Azure Developer CLI
 - Designa och implementera Bicep-mallar för vanliga applikationsarkitekturer
-- Konfigurera resursparametrar, variabler och miljöspecifika inställningar
+- Konfigurera resurssparametrar, variabler och miljöspecifika inställningar
 - Implementera avancerade infrastrukturmönster inklusive nätverk och säkerhet
-- Hantera resursernas livscykel, uppdateringar och beroendeupplösning
+- Hantera resurslivscykel, uppdateringar och beroendelösning
 
 ## Läranderesultat
 
-Efter slutförandet kommer du att kunna:
-- Designa och provisionera Azure-infrastruktur med hjälp av Bicep och ARM-mallar
+Vid avslut kommer du att kunna:
+- Designa och provisionera Azure-infrastruktur med Bicep och ARM-mallar
 - Konfigurera komplexa flertjänstarkitekturer med korrekta resursberoenden
 - Implementera parameteriserade mallar för flera miljöer och konfigurationer
 - Felsöka problem med infrastrukturprovisionering och åtgärda distributionsfel
-- Tillämpa principer från Azure Well-Architected Framework på infrastrukturdesign
-- Hantera infrastrukturella uppdateringar och implementera strategier för versionshantering av infrastruktur
+- Tillämpa Azure Well-Architected Framework-principer på infrastrukturdesign
+- Hantera infrastrukturoppdateringar och implementera strategier för versionshantering av infrastrukturen
 
 ## Översikt över infrastrukturprovisionering
 
-Azure Developer CLI stöder flera leverantörer för Infrastruktur som kod (IaC):
+Azure Developer CLI stöder flera Infrastructure as Code (IaC)-leverantörer:
 - **Bicep** (rekommenderas) - Azures domänspecifika språk
 - **ARM Templates** - JSON-baserade Azure Resource Manager-mallar
-- **Terraform** - Verktyg för multi-cloud-infrastruktur
-- **Pulumi** - Modern infrastruktur som kod med programmeringsspråk
+- **Terraform** - verktyg för multicloud-infrastruktur
+- **Pulumi** - modern infrastruktur som kod med programmeringsspråk
 
 ## Förstå Azure-resurser
 
@@ -50,10 +50,10 @@ Azure Account
 ```
 
 ### Vanliga Azure-tjänster för applikationer
-- **Compute**: App Service, Container Apps, Functions, virtuella maskiner
-- **Storage**: Lagringskonto, Cosmos DB, SQL-databas, PostgreSQL
+- **Compute**: App Service, Container Apps, Functions, Virtuella maskiner
+- **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Networking**: Virtuellt nätverk, Application Gateway, CDN
-- **Säkerhet**: Key Vault, Application Insights, Log Analytics
+- **Security**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
 ## Bicep-infrastrukturmallar
@@ -179,7 +179,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Villkorligt skapande av resurser
+#### Villkorlig resursgenerering
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -342,7 +342,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Konfigurering av hanterad identitet
+### Konfiguration av Managed Identity
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -527,7 +527,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Anpassade mätvärden och larm
+### Anpassade mätvärden och varningar
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -649,9 +649,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Avancerade provisionsmönster
+## 🚀 Avancerade provisioneringsmönster
 
-### Distribution över flera regioner
+### Distribution i flera regioner
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -719,7 +719,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### Testning av infrastruktur
+### Infrastrukturtestning
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -757,40 +757,39 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🧪 Förhandsgranskning och validering av infrastruktur (NYTT)
 
-### Förhandsgranska infrastrukturförändringar innan distribution
+### Förhandsgranska infrastruktursändringar före distribution
 
-Funktionen `azd provision --preview` låter dig **simulera infrastrukturprovisionering** innan du faktiskt distribuerar resurser. Den är liknande i anda som `terraform plan` eller `bicep what-if` och ger dig en **torrkörningsvy** av vilka ändringar som skulle göras i din Azure-miljö.
+Funktionen `azd provision --preview` låter dig **simulera infrastrukturprovisionering** innan du faktiskt distribuerar resurser. Det är liknande i sin anda till `terraform plan` eller `bicep what-if`, och ger dig en **torrkörningsvy** av vilka ändringar som skulle göras i din Azure-miljö.
 
-#### 🛠️ Vad den gör
+#### 🛠️ Vad det gör
 - **Analyserar dina IaC-mallar** (Bicep eller Terraform)
-- **Visar en förhandsgranskning av resursändringar**: tillägg, borttagningar, uppdateringar
-- **Utför inga ändringar** — den är skrivskyddad och säker att köra
+- **Visar en förhandsgranskning av resursändringar**: tillagda, borttagna, uppdaterade
+- **Tillämpas inga ändringar** — det är skrivskyddat och säkert att köra
 
-#### � Användningsfall
+#### Användningsfall
 ```bash
-# Förhandsgranska infrastrukturändringar innan driftsättning
+# Förhandsgranska infrastrukturförändringar innan distribution
 azd provision --preview
 
-# Förhandsgranska med detaljerad utdata
-azd provision --preview --output json
-
-# Förhandsgranska för en specifik miljö
-azd provision --preview --environment production
+# Förhandsgranskning för en specifik miljö
+azd provision --preview -e production
 ```
 
-Detta kommando hjälper dig:
-- **Validera infrastrukturändringar** innan du tillämpar dem
+Detta kommando hjälper dig att:
+- **Validera infrastruktursändringar** innan du distribuerar resurser
 - **Upptäcka felkonfigurationer tidigt** i utvecklingscykeln
 - **Samarbeta säkert** i teammiljöer
-- **Säkerställ distributioner med minst privilegium utan överraskningar**
+- **Säkerställa distribution med minst privilegium** utan överraskningar
 
 Det är särskilt användbart när:
-- Arbetar med komplexa miljöer med flera tjänster
+- Arbetar med komplexa flertjänstmiljöer
 - Gör ändringar i produktionsinfrastrukturen
-- Validera malländringar innan PR-godkännande
-- Träna nya teammedlemmar i infrastrukturmönster
+- Validerar malländringar innan PR-godkännande
+- Tränar nya teammedlemmar i infrastrukturmönster
 
 ### Exempel på förhandsgranskningsutdata
+Exakt förhandsgranskningsutdata varierar beroende på leverantör och projektstruktur, men resultatet bör tydligt identifiera föreslagna ändringar innan något tillämpas.
+
 ```bash
 $ azd provision --preview
 
@@ -809,7 +808,6 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
@@ -817,17 +815,17 @@ The following resources will be destroyed:
 
 ## �🔄 Resursuppdateringar och migreringar
 
-### Säkra resursuppdateringar
+### Säker resursuppdatering
 ```bash
 # Förhandsgranska infrastrukturändringar först (REKOMMENDERAS)
 azd provision --preview
 
-# Tillämpa ändringar efter bekräftad förhandsgranskning
+# Verkställ ändringar efter bekräftad förhandsgranskning
 azd provision --confirm-with-no-prompt
 
-# För återställning, använd Git för att rulla tillbaka infrastrukturändringar:
-git revert HEAD  # Rulla tillbaka senaste infrastrukturcommitten
-azd provision    # Tillämpa tidigare infrastrukturstatus
+# För återställning, använd Git för att ångra infrastrukturändringar:
+git revert HEAD  # Återställ senaste infrastrukturcommitten
+azd provision    # Tillämpa föregående infrastrukturstatus
 ```
 
 ### Databasmigreringar
@@ -901,7 +899,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Organisation av utdata
+### 4. Organisering av utdata
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -921,7 +919,7 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 - [Planering före distribution](../chapter-06-pre-deployment/capacity-planning.md) - Validera resursers tillgänglighet
 - [Vanliga problem](../chapter-07-troubleshooting/common-issues.md) - Felsök infrastrukturproblem
 - [Felsökningsguide](../chapter-07-troubleshooting/debugging.md) - Felsök problem med provisionering
-- [Val av SKU](../chapter-06-pre-deployment/sku-selection.md) - Välj lämpliga servicenivåer
+- [Val av SKU](../chapter-06-pre-deployment/sku-selection.md) - Välj lämpliga tjänstenivåer
 
 ## Ytterligare resurser
 
@@ -933,12 +931,12 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Navigering**
-- **Föregående lektion**: [Distributionsguide](deployment-guide.md)
-- **Nästa lektion**: [Kapacitetsplanering](../chapter-06-pre-deployment/capacity-planning.md)
+- **Föregående lektion**: [Distribueringsguide](deployment-guide.md)
+- **Nästa lektion**: [Kapasitetsplanering](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfriskrivning:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten Co-op Translator (https://github.com/Azure/co-op-translator). Vi strävar efter noggrannhet, men var medveten om att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på sitt ursprungsspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+**Friskrivning**:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Vi strävar efter noggrannhet, men var medveten om att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på sitt ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

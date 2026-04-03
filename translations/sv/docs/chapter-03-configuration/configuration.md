@@ -1,8 +1,8 @@
-# Konfigurationsguide
+# Kapitelnavigering
 
-**Kapitelnavigering:**
+**Chapter Navigation:**
 - **📚 Kursstartsida**: [AZD For Beginners](../../README.md)
-- **📖 Aktuellt kapitel**: Kapitel 3 - Konfiguration & Autentisering
+- **📖 Aktuellt kapitel**: Kapitel 3 - Konfiguration & autentisering
 - **⬅️ Föregående**: [Ditt första projekt](first-project.md)
 - **➡️ Nästa**: [Distributionsguide](../chapter-04-infrastructure/deployment-guide.md)
 - **🚀 Nästa kapitel**: [Kapitel 4: Infrastruktur som kod](../chapter-04-infrastructure/deployment-guide.md)
@@ -24,51 +24,51 @@ I slutet av denna lektion kommer du att:
 
 Efter att ha slutfört denna lektion kommer du att kunna:
 - Konfigurera azd för optimala utvecklingsarbetsflöden
-- Sätta upp och hantera flera distributionsmiljöer
-- Implementera säkra metoder för konfigurationshantering
+- Ställa in och hantera flera distributionsmiljöer
+- Implementera säkra konfigurationshanteringsrutiner
 - Felsöka konfigurationsrelaterade problem
 - Anpassa azd:s beteende för specifika organisatoriska krav
 
 Denna omfattande guide täcker alla aspekter av att konfigurera Azure Developer CLI för optimala utvecklings- och distributionsarbetsflöden.
 
-## Förstå AI-agenter i ett azd-projekt
+## Förstå AI‑agenter i ett azd‑projekt
 
-Om du är ny på AI-agenter, här är ett enkelt sätt att tänka på dem inom azd-världen.
+Om du är ny med AI‑agenter är här ett enkelt sätt att tänka på dem i azd‑världen.
 
 ### Vad är en agent?
 
-En agent är ett mjukvaruelement som kan ta emot en begäran, resonera kring den och vidta åtgärder—ofta genom att anropa en AI-modell, slå upp data eller anropa andra tjänster. I ett azd-projekt är en agent bara en annan **tjänst** tillsammans med din webbfrontend eller API-backend.
+En agent är ett mjukvaruelement som kan ta emot en förfrågan, resonera kring den och vidta åtgärder — ofta genom att anropa en AI‑modell, slå upp data eller anropa andra tjänster. I ett azd‑projekt är en agent bara en annan **tjänst** bredvid ditt webbfrontend eller API‑backend.
 
-### Hur agenter passar in i azd-projektets struktur
+### Hur agenter passar in i azd‑projektstrukturen
 
-Ett azd-projekt består av tre lager: **infrastruktur**, **kod** och **konfiguration**. Agenter ansluts till dessa lager på samma sätt som vilken annan tjänst som helst:
+Ett azd‑projekt består av tre lager: **infrastruktur**, **kod** och **konfiguration**. Agenter ansluts till dessa lager på samma sätt som vilken annan tjänst som helst:
 
-| Lager | Vad det gör för en traditionell app | Vad det gör för en agent |
+| Layer | What It Does for a Traditional App | What It Does for an Agent |
 |-------|-------------------------------------|---------------------------|
-| **Infrastruktur** (`infra/`) | Provisionerar en webbapp och databas | Provisionerar en AI-modellendpoint, ett sökindex eller en agentvärd |
-| **Kod** (`src/`) | Innehåller din frontend- och API-källkod | Innehåller din agentlogik och promptdefinitioner |
-| **Konfiguration** (`azure.yaml`) | Listar dina tjänster och var de ska hostas | Listar din agent som en tjänst och pekar på dess kod och värd |
+| **Infrastruktur** (`infra/`) | Provisionerar en webbapp och en databas | Provisionerar en AI‑modellendpoint, sökindex eller agentvärd |
+| **Kod** (`src/`) | Innehåller din frontend- och API‑källkod | Innehåller din agentlogik och promptdefinitioner |
+| **Konfiguration** (`azure.yaml`) | Anger dina tjänster och deras värdmål | Anger din agent som en tjänst, pekar på dess kod och värd |
 
-### Rollen för `azure.yaml`
+### `azure.yaml`‑filens roll
 
-Du behöver inte memorera syntaxen just nu. Konceptuellt är `azure.yaml` filen där du berättar för azd: *"Här är de tjänster som utgör min applikation, och här är var du hittar deras kod."*
+Du behöver inte memorera syntaxen just nu. Begreppsmässigt är `azure.yaml` filen där du talar om för azd: *"Här är de tjänster som utgör min applikation, och här hittar du deras kod."*
 
-När ditt projekt inkluderar en AI-agent listar `azure.yaml` helt enkelt den agenten som en av tjänsterna. azd vet då att provisionera rätt infrastruktur (som en Microsoft Foundry Models endpoint eller en Container App för att hosta agenten) och distribuera din agentkod—på samma sätt som det skulle göra för en webbapp eller ett API.
+När ditt projekt inkluderar en AI‑agent listar `azure.yaml` helt enkelt den agenten som en av tjänsterna. azd vet då att den ska provisionera rätt infrastruktur (som en Microsoft Foundry Models‑endpoint eller en Container App för att hosta agenten) och distribuera din agentkod — precis som det skulle göra för en webbapp eller API.
 
-Detta betyder att det inte finns något fundamentalt nytt att lära sig. Om du förstår hur azd hanterar en webbtjänst, förstår du redan hur det hanterar en agent.
+Detta innebär att det inte finns något fundamentalt nytt att lära sig. Om du förstår hur azd hanterar en webbtjänst förstår du redan hur det hanterar en agent.
 
 ## Konfigurationshierarki
 
 azd använder ett hierarkiskt konfigurationssystem:
-1. **Kommandoradsflaggor** (högsta prioritet)
+1. **Kommandoradsflaggor** (högst prioritet)
 2. **Miljövariabler**
 3. **Lokal projektkonfiguration** (`.azd/config.json`)
 4. **Global användarkonfiguration** (`~/.azd/config.json`)
-5. **Standardvärden** (lägsta prioritet)
+5. **Standardvärden** (lägst prioritet)
 
 ## Global konfiguration
 
-### Ange globala standardvärden
+### Ange globala standarder
 ```bash
 # Ange standardprenumeration
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -76,11 +76,11 @@ azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 # Ange standardplats
 azd config set defaults.location "eastus2"
 
-# Ange standardkonvention för namngivning av resursgrupper
+# Ange standardnamngivningskonvention för resursgrupper
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
 # Visa all global konfiguration
-azd config list
+azd config show
 
 # Ta bort en konfiguration
 azd config unset defaults.location
@@ -88,10 +88,10 @@ azd config unset defaults.location
 
 ### Vanliga globala inställningar
 ```bash
-# Utvecklingspreferenser
+# Utvecklingsinställningar
 azd config set alpha.enable true                    # Aktivera alfa-funktioner
 azd config set telemetry.enabled false             # Inaktivera telemetri
-azd config set output.format json                  # Ställ in utdataformat
+azd config set output.format json                  # Ange utdataformat
 
 # Säkerhetsinställningar
 azd config set auth.useAzureCliCredential true     # Använd Azure CLI för autentisering
@@ -99,13 +99,13 @@ azd config set tls.insecure false                  # Tvinga TLS-verifiering
 
 # Prestandaoptimering
 azd config set provision.parallelism 5             # Parallell skapande av resurser
-azd config set deploy.timeout 30m                  # Tidsgräns för distribution
+azd config set deploy.timeout 30m                  # Timeout för distribution
 ```
 
 ## 🏗️ Projektkonfiguration
 
-### Struktur för azure.yaml
-Filen `azure.yaml` är kärnan i ditt azd-projekt:
+### Struktur för `azure.yaml`
+Filen `azure.yaml` är hjärtat i ditt azd‑projekt:
 
 ```yaml
 # Minimum configuration
@@ -226,7 +226,7 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 Hantering av miljöer
+## 🌟 Miljöhantering
 
 ### Skapa miljöer
 ```bash
@@ -265,7 +265,7 @@ Varje miljö har sin egen konfiguration i `.azure/<env-name>/config.json`:
 
 ### Miljövariabler
 ```bash
-# Ange miljöspecifika variabler
+# Ställ in miljöspecifika variabler
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
@@ -273,27 +273,27 @@ azd env set DEBUG "true"
 # Visa miljövariabler
 azd env get-values
 
-# Förväntat resultat:
+# Förväntad utdata:
 # DATABASE_URL=postgresql://user:pass@host:5432/db
 # API_KEY=secret-api-key
 # DEBUG=true
 
-# Ta bort miljövariabel
+# Ta bort en miljövariabel
 azd env unset DEBUG
 
 # Verifiera borttagning
 azd env get-values | grep DEBUG
-# (bör inte returnera något)
+# (ska inte returnera något)
 ```
 
 ### Miljömallar
-Skapa `.azure/env.template` för konsekvent miljöuppsättning:
+Skapa `.azure/env.template` för en konsekvent miljöuppsättning:
 ```bash
 # Obligatoriska variabler
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Programinställningar
+# Applikationsinställningar
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
@@ -305,22 +305,22 @@ LOG_LEVEL=info
 
 ## 🔐 Autentiseringskonfiguration
 
-### Azure CLI-integration
+### Integration med Azure CLI
 ```bash
-# Använd Azure CLI-referenser (standard)
+# Använd Azure CLI-uppgifter (standard)
 azd config set auth.useAzureCliCredential true
 
-# Logga in med specifik hyresgäst
+# Logga in med en specifik tenant
 az login --tenant <tenant-id>
 
 # Ange standardprenumeration
 az account set --subscription <subscription-id>
 ```
 
-### Autentisering med service principal
-För CI/CD-pipelines:
+### Autentisering med serviceprincipal
+För CI/CD‑pipelines:
 ```bash
-# Ställ in miljövariabler
+# Ange miljövariabler
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
@@ -331,7 +331,7 @@ azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Hanterad identitet
-För Azure-hostade miljöer:
+För Azure‑värdade miljöer:
 ```bash
 # Aktivera autentisering med hanterad identitet
 azd config set auth.useMsi true
@@ -340,8 +340,8 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 
 ## 🏗️ Infrastrukturkonfiguration
 
-### Bicep-parametrar
-Konfigurera infrastrukturparametrar i `infra/main.parameters.json`:
+### Bicep‑parametrar
+Konfigurera infrastruktursparametrar i `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -363,8 +363,8 @@ Konfigurera infrastrukturparametrar i `infra/main.parameters.json`:
 }
 ```
 
-### Terraform-konfiguration
-För Terraform-projekt, konfigurera i `infra/terraform.tfvars`:
+### Terraform‑konfiguration
+För Terraform‑projekt, konfigurera i `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -372,7 +372,7 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Distributionskonfiguration
+## 🚀 Distribueringskonfiguration
 
 ### Byggkonfiguration
 ```yaml
@@ -397,7 +397,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Dockerkonfiguration
+### Docker‑konfiguration
 ```yaml
 services:
   api:
@@ -450,7 +450,7 @@ monitoring:
 
 ### Utvecklingsmiljö
 ```bash
-# .azure/development/.env
+# .azure/utveckling/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
@@ -468,7 +468,7 @@ USE_PRODUCTION_APIS=true
 
 ### Produktionsmiljö
 ```bash
-# .azure/produktion/.env
+# .azure/production/.env
 DEBUG=false
 LOG_LEVEL=error
 ENABLE_MONITORING=true
@@ -542,10 +542,10 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Överväganden för versionshantering
+### 3. Överväganden för versionskontroll
 ```bash
 # .gitignore
-.azure/*/config.json         # Miljökonfigurationer (innehåller resurs-ID:er)
+.azure/*/config.json         # Miljökonfigurationer (innehåller resurs-ID:n)
 .azure/*/.env               # Miljövariabler (kan innehålla hemligheter)
 .env                        # Lokal miljöfil
 ```
@@ -566,7 +566,7 @@ Dokumentera din konfiguration i `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
-## 🎯 Praktiska övningar
+## 🎯 Praktiska övningsuppgifter
 
 ### Övning 1: Konfiguration för flera miljöer (15 minuter)
 
@@ -601,7 +601,7 @@ azd env select production && azd env get-values
 - [ ] Tre miljöer skapade framgångsrikt
 - [ ] Varje miljö har unik konfiguration
 - [ ] Kan växla mellan miljöer utan fel
-- [ ] `azd env list` visar alla tre miljöer
+- [ ] `azd env list` visar alla tre miljöerna
 
 ### Övning 2: Hantering av hemligheter (10 minuter)
 
@@ -616,7 +616,7 @@ azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# Visa miljö (hemligheter bör maskeras)
+# Visa miljön (hemligheter bör maskeras)
 azd env get-values
 
 # Verifiera att hemligheter är lagrade
@@ -625,33 +625,33 @@ azd env get DB_PASSWORD  # Bör visa det faktiska värdet
 
 **Framgångskriterier:**
 - [ ] Hemligheter lagrade utan att visas i terminalen
-- [ ] `azd env get-values` visar bortmaskade hemligheter
-- [ ] Enskild `azd env get <SECRET_NAME>` hämtar det faktiska värdet
+- [ ] `azd env get-values` visar maskerade hemligheter
+- [ ] Individuellt `azd env get <SECRET_NAME>` hämtar verkligt värde
 
 ## Nästa steg
 
-- [Ditt första projekt](first-project.md) - Tillämpa konfiguration i praktiken
-- [Distributionsguide](../chapter-04-infrastructure/deployment-guide.md) - Använd konfiguration för distribution
-- [Resursprovisionering](../chapter-04-infrastructure/provisioning.md) - Produktionsklara konfigurationer
+- [Ditt första projekt](first-project.md) - Använd konfigurationen i praktiken
+- [Distributionsguide](../chapter-04-infrastructure/deployment-guide.md) - Använd konfigurationen för distribution
+- [Provisionering av resurser](../chapter-04-infrastructure/provisioning.md) - Produktionsklara konfigurationer
 
 ## Referenser
 
-- [azd Konfigurationsreferens](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml-schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [azd konfigurationsreferens](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Schema för azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
 - [Miljövariabler](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Kapitelnavigering:**
+**Chapter Navigation:**
 - **📚 Kursstartsida**: [AZD For Beginners](../../README.md)
-- **📖 Aktuellt kapitel**: Kapitel 3 - Konfiguration & Autentisering
+- **📖 Aktuellt kapitel**: Kapitel 3 - Konfiguration & autentisering
 - **⬅️ Föregående**: [Ditt första projekt](first-project.md)
-- **➡️ Nästa**: [Kapitel 4: Infrastruktur som kod](../chapter-04-infrastructure/deployment-guide.md)
+- **➡️ Nästa kapitel**: [Kapitel 4: Infrastruktur som kod](../chapter-04-infrastructure/deployment-guide.md)
 - **Nästa lektion**: [Ditt första projekt](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfriskrivning:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten Co-op Translator (https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, observera att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet i sitt ursprungliga språk bör anses vara den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår vid användning av denna översättning.
+**Friskrivning**:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet bör du vara medveten om att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på sitt ursprungliga språk bör anses vara den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
