@@ -1,20 +1,22 @@
-# अध्याय 2: AI-प्रथम विकास
+# अध्याय २: एआई-प्रथम विकास
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1-2 घण्टा | **⭐ Complexity**: मध्यम
+**📚 कोर्स**: [शिक्षार्थीहरूका लागि AZD](../../README.md) | **⏱️ अवधि**: १-२ घण्टा | **⭐ जटिलता**: मध्यम
 
 ---
 
 ## अवलोकन
 
-यस अध्यायले Azure Developer CLI र Microsoft Foundry सेवाहरू प्रयोग गरी AI-संचालित अनुप्रयोगहरू तैनाथ गर्नेमा केन्द्रित छ। साधारण AI च्याट अनुप्रयोगहरूदेखि उपकरणहरूसहित बौद्धिक एजेन्टहरू सम्म।
+यस अध्यायले Azure Developer CLI र Microsoft Foundry सेवाहरू उपयोग गरेर एआई-सक्षम अनुप्रयोगहरू परिनियोजनमा केन्द्रित छ। सरल एआई च्याट एपहरूदेखि लिएर उपकरणहरूसँग बुद्धिमान एजेन्टहरू सम्म।
 
-## अध्ययन लक्ष्यहरू
+> **मान्यता नोट (२०२६-०३-२५):** यस अध्यायको कमाण्ड फ्लो र विस्तार निर्देशनहरू `azd` `1.23.12` र हालको पूर्वावलोकन AI एजेन्ट विस्तार रिलिज `azure.ai.agents` `0.1.18-preview` को विरुद्ध समीक्षा गरिएको थियो। यदि तपाईं पुरानो AZD बिल्डमा हुनुहुन्छ भने, पहिले अपडेट गर्नुहोस् र त्यसपछि अभ्यासहरू जारी राख्नुहोस्।
 
-यस अध्याय पूरा गरेपछि, तपाईं:
-- प्रि-बिल्ट AZD टेम्पलेटहरू प्रयोग गरेर AI अनुप्रयोगहरू तैनाथ गर्नुहोस्
-- AZD सँग Microsoft Foundry को एकीकरण बुझ्नुहोस्
-- उपकरणहरूसँग AI एजेन्टहरू कन्फिगर र अनुकूलन गर्नुहोस्
-- RAG (Retrieval-Augmented Generation) अनुप्रयोगहरू तैनाथ गर्नुहोस्
+## सिकाइको उद्देश्यहरू
+
+यस अध्याय पूरा गर्दा, तपाईंले:
+- पूर्व-निर्मित AZD टेम्प्लेटहरू प्रयोग गरेर एआई अनुप्रयोगहरू परिनियोजन गर्ने
+- AZD सँग Microsoft Foundry एकीकरण बुझ्ने
+- उपकरणहरू सहित एआई एजेन्टहरू कन्फिगर र अनुकूलन गर्ने
+- RAG (Retrieval-Augmented Generation) अनुप्रयोगहरू परिनियोजन गर्ने
 
 ---
 
@@ -22,50 +24,50 @@
 
 | # | पाठ | विवरण | समय |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | AZD लाई Foundry सेवाहरू सँग जडान गर्नुहोस् | 30 min |
-| 2 | [AI Agents Guide](agents.md) | उपकरणहरूसँग बौद्धिक एजेन्टहरू तैनाथ गर्नुहोस् | 45 min |
-| 3 | [AI Model Deployment](ai-model-deployment.md) | AI मोडेलहरू तैनाथ र कन्फिगर गर्नुहोस् | 30 min |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | व्यावहारिक: तपाईंको AI समाधानलाई AZD-अनुकूल बनाउनुहोस् | 60 min |
+| १ | [Microsoft Foundry एकीकरण](microsoft-foundry-integration.md) | AZD लाई Foundry सेवाहरूमा जडान गर्ने | ३० मिनेट |
+| २ | [एआई एजेन्टहरू मार्गनिर्देशन](agents.md) | उपकरणहरूसँग बुद्धिमान एजेन्टहरू परिनियोजन गर्ने | ४५ मिनेट |
+| ३ | [एआई मोडेल परिनियोजन](ai-model-deployment.md) | एआई मोडेलहरू परिनियोजन र कन्फिगर गर्ने | ३० मिनेट |
+| ४ | [एआई कार्यशाला प्रयोगशाला](ai-workshop-lab.md) | व्यवहारिक: तपाईंको एआई समाधानलाई AZD- तयार बनाउने | ६० मिनेट |
 
 ---
 
 ## 🚀 छिटो सुरु
 
 ```bash
-# विकल्प 1: RAG च्याट अनुप्रयोग
+# विकल्प १: आरएजी च्याट अनुप्रयोग
 azd init --template azure-search-openai-demo
 azd up
 
-# विकल्प 2: कृत्रिम बुद्धिमत्ता एजेन्टहरू
+# विकल्प २: एआई एजेन्टहरू
 azd init --template get-started-with-ai-agents
 azd up
 
-# विकल्प 3: विकल्प 3: छिटो च्याट अनुप्रयोग
+# विकल्प ३: छिटो च्याट अनुप्रयोग
 azd init --template openai-chat-app-quickstart
 azd up
 ```
 
 ---
 
-## 🤖 प्रमुख AI टेम्पलेटहरू
+## 🤖 विशेष एआई टेम्प्लेटहरू
 
-| टेम्पलेट | विवरण | सेवाहरू |
+| टेम्प्लेट | विवरण | सेवाहरू |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | उद्धरणसहित RAG च्याट | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | उपकरणहरूसँग AI एजेन्ट | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | मूलभूत AI च्याट | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | उद्धरण सहित RAG च्याट | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | उपकरणहरूसँग AI एजेन्ट | AI Agent सेवा |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | आधारभूत AI च्याट | OpenAI + Container Apps |
 
 ---
 
-## 💰 लागत सचेतता
+## 💰 लागत सचेतना
 
-| पर्यावरण | अनुमानित मासिक लागत |
+| वातावरण | अनुमानित मासिक लागत |
 |-------------|----------------------|
-| Development | $80-150 |
-| Staging | $150-300 |
-| Production | $300-3,500+ |
+| विकास | $८०-१५० |
+| स्टेजिङ | $१५०-३०० |
+| उत्पादन | $३००-३,५००+ |
 
-**टिप:** परीक्षणपछि शुल्कबाट बच्न `azd down` चलाउनुहोस्।
+**सुझाव:** परीक्षण पछि शुल्कबाट बच्न `azd down` चलाउनुहोस्।
 
 ---
 
@@ -73,21 +75,21 @@ azd up
 
 | दिशा | अध्याय |
 |-----------|---------|
-| **पछिल्लो** | [Chapter 1: Foundation](../chapter-01-foundation/README.md) |
-| **अर्को** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
-| **सिधा जानुहोस्** | [Chapter 8: Production Patterns](../chapter-08-production/README.md) |
+| **अघिल्लो** | [अध्याय १: आधारभूत](../chapter-01-foundation/README.md) |
+| **अगाडि** | [अध्याय ३: कन्फिगरेसन](../chapter-03-configuration/README.md) |
+| **सरसार जानुहोस्** | [अध्याय ८: उत्पादन ढाँचा](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 सम्बन्धित स्रोतहरू
 
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
-- [Application Insights](../chapter-06-pre-deployment/application-insights.md)
+- [एआई समस्या समाधान](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [उत्पादन AI अभ्यासहरू](../chapter-08-production/production-ai-practices.md)
+- [अनुप्रयोग इनसाइट्स](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-अस्वीकरण:
-यो दस्तावेज AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरेर अनुवाद गरिएको हो। हामी शुद्धताको लागि प्रयास गर्छौं, तर कृपया ध्यान दिनुहोस् कि स्वचालित अनुवादमा त्रुटि वा अशुद्धता हुनसक्छ। मूल दस्तावेजलाई यसको मौलिक भाषामा अधिकारिक स्रोत मानिनु पर्छ। महत्वपूर्ण वा संवेदनशील जानकारीका लागि व्यावसायिक मानवीय अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न हुने कुनै पनि गलतफहमी वा गलत व्याख्याका लागि हामी जिम्मेवार हुने छैनौं।
+**अस्वीकरण**:  
+यस दस्तावेजलाई AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरी अनुवाद गरिएको हो। हामी शुद्धताका लागि प्रयासरत छौं, तर कृपया जानकार हुनुहोस् कि स्वचालित अनुवादहरूमा त्रुटि वा अशुद्धता हुन सक्छ। मूल भाषा मा रहेको दस्तावेजलाई आधिकारिक स्रोतको रूपमा मान्नु पर्छ। महत्वपूर्ण जानकारीको लागि, व्यावसायिक मानव अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलत बुझाइ वा गलत व्याख्याका लागि हामी जिम्मेवार छैनौं।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

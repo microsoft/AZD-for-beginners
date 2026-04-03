@@ -1,48 +1,50 @@
-# Microsoft Foundry र AZD सँग एकीकरण
+# Microsoft Foundry Integration with AZD
 
 **अध्याय नेभिगेसन:**
 - **📚 कोर्स होम**: [AZD For Beginners](../../README.md)
 - **📖 वर्तमान अध्याय**: अध्याय 2 - AI-प्रथम विकास
-- **⬅️ अघिल्लो अध्याय**: [Chapter 1: Your First Project](../chapter-01-foundation/first-project.md)
-- **➡️ अर्को**: [AI Model Deployment](ai-model-deployment.md)
-- **🚀 अर्को अध्याय**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+- **⬅️ अघिल्लो अध्याय**: [अध्याय 1: तपाईंको पहिलो प्रोजेक्ट](../chapter-01-foundation/first-project.md)
+- **➡️ अर्को**: [AI मोडेल डिप्लोइमेन्ट](ai-model-deployment.md)
+- **🚀 अर्को अध्याय**: [अध्याय 3: कन्फिगरेसन](../chapter-03-configuration/configuration.md)
 
 ## अवलोकन
 
-यो मार्गदर्शिकाले Microsoft Foundry सेवाहरूलाई Azure Developer CLI (AZD) सँग कसरी एकीकृत गर्ने देखाउँछ जसले AI अनुप्रयोगहरूको परिनियोजनलाई सरल र सुव्यवस्थित बनाउँछ। Microsoft Foundry ले AI अनुप्रयोगहरू निर्माण, परिनियोजन, र व्यवस्थापन गर्नको लागि समग्र प्लेटफर्म प्रदान गर्दछ, जब कि AZD पूर्वाधार र परिनियोजन प्रक्रियालाई सजिलो बनाउँछ।
+यस मार्गदर्शकले Microsoft Foundry सेवा र Azure Developer CLI (AZD) लाई कसरी एकीकृत गर्ने देखाउँछ जसले AI अनुप्रयोग डिप्लोइमेन्टलाई सजिलो र समन्वित बनाउँछ। Microsoft Foundry AI अनुप्रयोगहरू निर्माण, डिप्लोइ र व्यवस्थापन गर्न व्यापक प्लेटफर्म हो, जबकि AZD ले पूर्वाधार र डिप्लोइ प्रक्रिया लाई सरलीकृत गर्छ।
 
-## Microsoft Foundry के हो?
+## Microsoft Foundry भनेको के हो?
 
-Microsoft Foundry माईक्रोसफ्टको एक एकीकृत AI विकास प्लेटफर्म हो जसले समावेश गर्दछ:
+Microsoft Foundry माइक्रोसफ्टको एकीकृत AI विकास प्लेटफर्म हो जसमा समावेश छन्:
 
-- **Model Catalog**: अत्याधुनिक AI मोडेलहरूमा पहुँच
-- **Prompt Flow**: AI वर्कफ्लोहरूको लागि दृश्य डिजाइनर
-- **Microsoft Foundry Portal**: AI अनुप्रयोगहरूको लागि एकीकृत विकास वातावरण
-- **Deployment Options**: होस्टिङ र स्केलिङका बहु विकल्पहरू
-- **Safety and Security**: निर्मित जिम्मेवार AI सुविधाहरू
+- **मोडेल क्यालोग**: अत्याधुनिक AI मोडेलहरू पहुँच
+- **प्रॉम्प्ट फ्लो**: AI वर्कफ्लोको लागि भिजुअल डिजाइनर
+- **Microsoft Foundry पोर्टल**: AI अनुप्रयोगहरूको लागि एकीकृत विकास वातावरण
+- **डिप्लोइमेन्ट विकल्पहरू**: धेरै होस्टिङ र स्केलिङ विकल्पहरू
+- **सुरक्षा र सुरक्षा**: निर्मित जिम्मेवार AI सुविधाहरू
 
 ## AZD + Microsoft Foundry: सँगै राम्रो
 
-| विशेषता | Microsoft Foundry | AZD एकीकरण लाभ |
+| सुविधा | Microsoft Foundry | AZD एकीकरण लाभ |
 |---------|-----------------|------------------------|
-| **Model Deployment** | Manual portal deployment | स्वचालित, पुनरावृत्त गर्न मिल्ने परिनियोजनहरू |
-| **Infrastructure** | Click-through provisioning | कोडको रूपमा पूर्वाधार (Bicep) |
-| **Environment Management** | Single environment focus | बहु-वातावरण (dev/staging/prod) |
-| **CI/CD Integration** | Limited | मूल GitHub Actions समर्थन |
-| **Cost Management** | Basic monitoring | वातावरण-विशेष लागत अनुकूलन |
+| **मोडेल डिप्लोइमेन्ट** | म्यानुअल पोर्टल डिप्लोइमेन्ट | स्वचालित, पुनरावृत्ति योग्य डिप्लोइमेन्टहरू |
+| **पूर्वाधार** | क्लिक-थ्रु प्रावधान | पूर्वाधारको रूपमा कोड (Bicep) |
+| **पर्यावरण व्यवस्थापन** | एकल वातावरण फोकस | बहु-पर्यावरण (डेभ/स्टेजिङ/प्रोड) |
+| **CI/CD समाकालीनता** | सीमित | नेटिव GitHub Actions समर्थन |
+| **खर्च व्यवस्थापन** | आधारभूत अनुगमन | वातावरण-विशिष्ट लागत अनुकूलन |
 
-## पूर्वआवश्यकताहरू
+## आवश्यकताहरू
 
-- Azure सदस्यता र उपयुक्त अनुमति
+- उपयुक्त अनुमति सहित Azure सदस्यता
 - Azure Developer CLI स्थापना गरिएको
-- Microsoft Foundry Models सेवाहरूमा पहुँच
-- Microsoft Foundry सम्बन्धी आधारभूत परिचित
+- Microsoft Foundry मोडेल सेवाहरू पहुँच
+- Microsoft Foundry को आधारभूत परिचय
 
-## मुख्य एकीकरण ढाँचा
+> **हालको AZD आधाररेखा:** यी उदाहरणहरू `azd` `1.23.12` विरुद्ध समीक्षा गरिएका थिए। AI एजेन्ट वर्कफ्लोको लागि, वर्तमान प्रिभ्यू एक्सटेन्शन रिलीज प्रयोग गर्नुहोस् र सुरु गर्नु अघि तपाईंको इन्स्टल गरिएको संस्करण जाँच गर्नुहोस्।
 
-### ढाँचा 1: Microsoft Foundry Models एकीकरण
+## मुख्य एकीकरण ढाँचाहरू
 
-**प्रयोग केस**: Microsoft Foundry Models मोडेलहरूसँग च्याट अनुप्रयोगहरू परिनियोजन गर्नुहोस्
+### ढाँचा 1: Microsoft Foundry मोडेल एकीकरण
+
+**प्रयोग मामला**: Microsoft Foundry मोडेलहरूसँग च्याट अनुप्रयोग डिप्लोइमेन्ट
 
 ```yaml
 # azure.yaml
@@ -75,12 +77,12 @@ resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
 // Deploy GPT model
 resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAIAccount
-  name: 'gpt-35-turbo'
+  name: 'gpt-4.1-mini'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-35-turbo'
-      version: '0613'
+      name: 'gpt-4.1-mini'
+      version: '2024-07-18'
     }
     scaleSettings: {
       scaleType: 'Standard'
@@ -90,9 +92,9 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 }
 ```
 
-### ढाँचा 2: AI Search + RAG एकीकरण
+### ढाँचा 2: AI खोज + RAG एकीकरण
 
-**प्रयोग केस**: retrieval-augmented generation (RAG) अनुप्रयोगहरू परिनियोजन गर्नुहोस्
+**प्रयोग मामला**: पुनःप्राप्ति-वर्धित उत्पादन (RAG) अनुप्रयोग डिप्लोइमेन्ट
 
 ```bicep
 // Azure AI Search
@@ -120,9 +122,9 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### ढाँचा 3: Document Intelligence एकीकरण
+### ढाँचा 3: कागजात बुद्धिमत्ता एकीकरण
 
-**प्रयोग केस**: दस्तावेज प्रशोधन र विश्लेषण वर्कफ्लोहरू
+**प्रयोग मामला**: कागजात प्रशोधन र विश्लेषण वर्कफ्लोहरू
 
 ```bicep
 // Document Intelligence service
@@ -155,18 +157,18 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ## 🔧 कन्फिगरेसन ढाँचाहरू
 
-### वातावरण चर सेटअप
+### वातावरण चरहरू सेटअप
 
 **उत्पादन कन्फिगरेसन:**
 ```bash
-# मुख्य एआई सेवाहरू
+# मूल एआई सेवाहरू
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
-# मोडेल विन्यासहरू
-azd env set AZURE_OPENAI_MODEL "gpt-35-turbo"
-azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-ada-002"
+# मोडेल कन्फिगरेशन्स
+azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
+azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-3-large"
 
 # प्रदर्शन सेटिङहरू
 azd env set AZURE_OPENAI_CAPACITY 30
@@ -178,10 +180,10 @@ azd env set AZURE_SEARCH_SKU "standard"
 # विकासका लागि लागत-अनुकूल सेटिङहरू
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
-azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # निःशुल्क तह
+azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # निःशुल्क स्तर
 ```
 
-### Key Vault मार्फत सुरक्षित कन्फिगरेसन
+### Key Vault सँग सुरक्षित कन्फिगरेसन
 
 ```bicep
 // Key Vault for secrets
@@ -216,52 +218,62 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-## परिनियोजन कार्यप्रवाहहरू
+## डिप्लोइमेन्ट वर्कफ्लोहरू
 
-### Foundry का लागि AZD एक्सटेन्सनहरू
+### Foundry का लागि AZD एक्सटेन्शनहरू
 
-AZD ले Foundry सेवाहरूसँग काम गर्न AI-विशेष क्षमताहरू थप्ने एक्सटेन्सनहरू प्रदान गर्दछ:
+AZD ले Microsoft Foundry सेवाहरूसँग काम गर्न AI-विशिष्ट क्षमता थप्ने एक्सटेन्शनहरू प्रदान गर्दछ:
 
 ```bash
-# Foundry agents एक्सटेन्सन स्थापना गर्नुहोस्
+# Foundry एजेन्टहरू एक्सटेन्सन स्थापना गर्नुहोस्
 azd extension install azure.ai.agents
 
-# फाइन-ट्यूनिङ एक्सटेन्सन स्थापना गर्नुहोस्
+# फाइन-ट्यूनिंग एक्सटेन्सन स्थापना गर्नुहोस्
 azd extension install azure.ai.finetune
 
-# अनुकूलित मोडेलहरू एक्सटेन्सन स्थापना गर्नुहोस्
+# कस्टम मोडेलहरू एक्सटेन्सन स्थापना गर्नुहोस्
 azd extension install azure.ai.models
 
-# स्थापित एक्सटेन्सनहरू सूचीबद्ध गर्नुहोस्
-azd extension list
+# स्थापना गरिएको एक्सटेन्सनहरूको सूची बनाउनुहोस्
+azd extension list --installed
+
+# हाल स्थापना गरिएको एजेन्ट एक्सटेन्सन संस्करण जाँच गर्नुहोस्
+azd extension show azure.ai.agents
 ```
 
-### `azd ai` सँग एजेन्ट-प्रथम परिनियोजन
+AI एक्सटेन्शनहरू अझै प्रिभ्यूमा तीव्रगतिमा छ। कुनै आदेश यहाँ देखिएजस्तै व्यवहार नगरेमा, परियोजना समाधान अघि सम्बन्धित एक्सटेन्शन अपडेट गर्नुहोस्।
 
-यदि तपाईंसँग एजेन्ट म्यानिफेस्ट छ भने, Foundry Agent Service सँग जोडिएको प्रोजेक्ट स्कफल्ड गर्न `azd ai agent init` प्रयोग गर्नुहोस्:
+### `azd ai` संग एजेन्ट-प्रथम डिप्लोइमेन्ट
+
+यदि तपाईंसँग एजेन्ट म्यानिफेस्ट छ भने, `azd ai agent init` प्रयोग गरेर Foundry Agent Service मा जडित परियोजना स्क्याफोल्ड गर्न सक्नुहुन्छ:
 
 ```bash
-# एजेन्ट म्यानिफेस्टबाट आरम्भ गर्नुहोस्
+# एजेन्ट मेनिफेष्टबाट सुरु गर्नुहोस्
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
 # Azure मा तैनाथ गर्नुहोस्
 azd up
 ```
 
-पूर्ण आदेश सन्दर्भ र झण्डाहरूका लागि हेर्नुहोस् [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions)।
+हालैका `azure.ai.agents` प्रिभ्यू रिलिजहरूले `azd ai agent init` का लागि टेम्प्लेट-आधारित इनिसियलाइजेसन समर्थन थपेका छन्। नयाँ एजेन्ट नमूनाहरू अनुकरण गर्दा, इन्स्टल गरिएको संस्करणमा उपलब्ध ठ्याक्कै झण्डाहरूका लागि एक्सटेन्शन सहयोग जाँच गर्नुहोस्।
 
-### एकल आदेश परिनियोजन
+पूर्ण आदेश संदर्भ र झण्डाहरूका लागि [AZD AI CLI कमाण्डहरू](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) हेर्नुहोस्।
+
+### एकल कमाण्ड डिप्लोइमेन्ट
 
 ```bash
-# एकै आदेशमा सबै तैनाथ गर्नुहोस्
+# सबै कुरा एउटै कमाण्डले डिप्लोय गर्नुहोस्
 azd up
 
-# वा क्रमिक रूपमा तैनाथ गर्नुहोस्
-azd provision  # पूर्वाधार मात्र
-azd deploy     # अनुप्रयोग मात्र
+# वा क्रमिक रूपमा डिप्लोय गर्नुहोस्
+azd provision  # केवल पूर्वाधार
+azd deploy     # केवल अनुप्रयोग
+
+# azd 1.23.11+ मा लामो समय चल्ने AI अनुप्रयोग डिप्लोयमेन्टका लागि
+azd deploy --timeout 1800
 ```
 
-### वातावरण-विशेष परिनियोजनहरू
+### वातावरण-विशिष्ट डिप्लोइमेन्टहरू
 
 ```bash
 # विकास वातावरण
@@ -278,9 +290,9 @@ azd env set AZURE_OPENAI_CAPACITY 100
 azd up
 ```
 
-## अनुगमन र अवलोकन
+## अनुगमन र अवलोकनयोग्यता
 
-### Application Insights एकीकरण
+### अनुप्रयोग इनसाइट्स एकीकरण
 
 ```bicep
 // Application Insights for AI application monitoring
@@ -343,7 +355,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ## 🔐 सुरक्षा उत्तम अभ्यासहरू
 
-### Managed Identity कन्फिगरेसन
+### प्रबन्धित पहिचान कन्फिगरेसन
 
 ```bicep
 // Managed identity for the web application
@@ -390,7 +402,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ## प्रदर्शन अनुकूलन
 
-### क्याचिङ रणनीतिहरू
+### क्यासिङ रणनीतिहरू
 
 ```yaml
 # azure.yaml - Redis cache integration
@@ -420,7 +432,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### अटो-स्केलिङ कन्फिगरेसन
+### अटो-स्केल कन्फिगरेसन
 
 ```bicep
 // Container App with auto-scaling
@@ -456,57 +468,57 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ## सामान्य समस्याहरू समाधान
 
-### समस्या 1: OpenAI को कोटा अधिक
+### समस्या १: OpenAI कोटा समाप्त
 
 **लक्षणहरू:**
-- कोटा त्रुटिहरूका साथ परिनियोजन असफल हुन्छ
-- एप्लिकेसन लगहरूमा 429 त्रुटिहरू
+- डिप्लोइमेन्ट कोटा त्रुटिसँग असफल हुन्छ
+- आवेदन लगहरूमा 429 त्रुटिहरू
 
 **समाधानहरू:**
 ```bash
 # हालको कोटा प्रयोग जाँच गर्नुहोस्
 az cognitiveservices usage list --location eastus
 
-# अर्को क्षेत्र प्रयास गर्नुहोस्
+# फरक क्षेत्र प्रयास गर्नुहोस्
 azd env set AZURE_LOCATION westus2
 azd up
 
-# क्षमता अस्थायी रूपमा घटाउनुहोस्
+# अस्थायी रूपमा क्षमता घटाउनुहोस्
 azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
 
-### समस्या 2: प्रमाणिकरण असफलता
+### समस्या २: प्रमाणीकरण असफलता
 
 **लक्षणहरू:**
 - AI सेवाहरू कल गर्दा 401/403 त्रुटिहरू
-- "Access denied" सन्देशहरू
+- "प्रवेश अस्वीकृत" सन्देशहरू
 
 **समाधानहरू:**
 ```bash
-# भूमिका नियुक्तिहरू जाँच गर्नुहोस्
+# भूमिकाका नियुक्तिहरू पुष्टि गर्नुहोस्
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# प्रबन्धित पहिचान कन्फिगरेसन जाँच गर्नुहोस्
+# व्यवस्थापित पहिचान कन्फिगरेसन जाँच गर्नुहोस्
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
-# Key Vault पहुँच मान्य गर्नुहोस्
+# की भल्ट पहुँच प्रमाणीकरण गर्नुहोस्
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### समस्या 3: मोडेल परिनियोजन समस्या
+### समस्या ३: मोडेल डिप्लोइमेन्ट समस्याहरू
 
 **लक्षणहरू:**
-- परिनियोजनमा मोडेलहरू उपलब्ध छैनन्
+- मोडेलहरू डिप्लोइमेन्टमा उपलब्ध छैनन्
 - विशिष्ट मोडेल संस्करणहरू असफल छन्
 
 **समाधानहरू:**
 ```bash
-# क्षेत्रअनुसार उपलब्ध मोडेलहरू सूचीबद्ध गर्नुहोस्
+# क्षेत्र अनुसार उपलब्ध मोडेलहरूको सूची बनाउनुहोस्
 az cognitiveservices model list --location eastus
 
-# bicep टेम्पलेटमा मोडेल संस्करण अद्यावधिक गर्नुहोस्
-# मोडेलको क्षमता आवश्यकताहरू जाँच गर्नुहोस्
+# बाइसेप टेम्प्लेटमा मोडेल संस्करण अपडेट गर्नुहोस्
+# मोडेल क्षमताको आवश्यकता जाँच गर्नुहोस्
 ```
 
 ## उदाहरण टेम्प्लेटहरू
@@ -517,9 +529,9 @@ az cognitiveservices model list --location eastus
 
 **सेवाहरू**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-**विवरण**: सबैभन्दा लोकप्रिय Azure AI नमूना — उत्पादन-तयार RAG च्याट एप जसले तपाईंका आफ्नै दस्तावेजहरूमा प्रश्नहरू सोध्न दिन्छ। GPT-4.1-mini लाई च्याटका लागि, text-embedding-ada-002 लाई एम्बेडिङ्सका लागि, र Azure AI Search लाई रिट्राइवलका लागि प्रयोग गर्छ। मल्टि-मोडल दस्तावेजहरू, स्पीच इनपुट/आउटपुट, Microsoft Entra प्रमाणीकरण, र Application Insights ट्रेसिङ समर्थन गर्दछ।
+**विवरण**: सबैभन्दा लोकप्रिय Azure AI नमूना — उत्पादन-तयार RAG च्याट अनुप्रयोग जसले तपाईका आफ्नै कागजातहरूमा प्रश्न सोध्न दिन्छ। GPT-4.1-mini प्रयोग गरेर च्याट, टेक्स्ट-एम्बेडिङ-3-लार्ज एम्बेडिङ्सका लागि, र Azure AI Search पुनःप्राप्तिका लागि। मल्टिमोडल कागजातहरू, स्पीच इनपुट/आउटपुट, Microsoft Entra प्रमाणीकरण, र Application Insights ट्रेसिङ समर्थन गर्दछ।
 
-**छिटो सुरुवात**:
+**छिटो सुरु:**
 ```bash
 azd init --template azure-search-openai-demo
 azd up
@@ -531,9 +543,9 @@ azd up
 
 **सेवाहरू**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
 
-**विवरण**: Python RAG च्याट नमूनाको .NET/C# समकक्ष। ASP.NET Core Minimal API र Blazor WebAssembly फ्रन्टएन्डसँग बनाइएको। भ्वाइस च्याट, GPT-4o-mini भिजन समर्थन, र सहयोगी .NET MAUI Blazor Hybrid डेस्कटप/मोबाइल क्लाइन्ट समावेश छ।
+**विवरण**: Python RAG च्याट नमूनाको .NET/C# समकक्ष। ASP.NET Core मिनिमल API र Blazor WebAssembly फ्रन्टएण्डसहित निर्माण गरिएको। भ्वाइस च्याट, GPT-4o-mini भिजन समर्थन, र .NET MAUI Blazor हाइब्रिड डेस्कटप/मोबाइल क्लाइन्ट समावेश गर्दछ।
 
-**छिटो सुरुवात**:
+**छिटो सुरु:**
 ```bash
 azd init --template azure-search-openai-demo-csharp
 azd up
@@ -545,120 +557,120 @@ azd up
 
 **सेवाहरू**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
 
-**विवरण**: Langchain4J प्रयोग गरेर AI सङ्गठनका लागि Java संस्करण। माइक्रोसर्भिस इभेन्ट-ड्रिभेन आर्किटेक्चर, बहु खोज रणनीतिहरू (टेक्स्ट, भेक्टर, हाइब्रिड), Azure Document Intelligence सँग दस्तावेज अपलोड समर्थन, र Azure Container Apps वा Azure Kubernetes Service मा परिनियोजन समर्थन गर्दछ।
+**विवरण**: Langchain4J प्रयोग गरी AI समन्वयन गर्ने Java संस्करण RAG च्याट नमूना। माइक्रोसर्भिस घटना-चालित वास्तुकला, धेरै खोज रणनीतिहरू (टेक्स्ट, भेक्टर, मिश्रित), Azure Document Intelligence सहित कागजात अपलोड, र Azure Container Apps वा Azure Kubernetes Service मा डिप्लोइमेन्ट समर्थन गर्दछ।
 
-**छिटो सुरुवात**:
+**छिटो सुरु:**
 ```bash
 azd init --template azure-search-openai-demo-java
 azd up
 ```
 
-### Enterprise Retail Copilot with Azure AI Foundry
+### Azure AI Foundry सहित उद्यम खुद्रा सहायक
 
 **रिपोजिटरी**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
 **सेवाहरू**: Azure OpenAI + Azure AI Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
 
-**विवरण**: Azure AI Foundry र Prompty प्रयोग गरेर पूर्ण-सम्पूर्ण रिटेल RAG copilot। Contoso Outdoor रिटेलर च्याटबट जसले उत्तरहरू उत्पादन क्याटलग र ग्राहक अर्डर डाटामा आधार बनाउँछ। GenAIOps वर्कफ्लो देखाउँछ — Prompty सँग प्रोटोटाइप, AI-सहायता प्राप्त इवालुएटर्स सँग मूल्याङ्कन, र AZD मार्फत Container Apps मा परिनियोजन।
+**विवरण**: Azure AI Foundry र Prompty प्रयोग गर्ने अन्तिम खुद्रा RAG सहायक। Contoso आउटडोर खुद्रा च्याटबट जसले प्रतिक्रियाहरूलाई उत्पादन सूची र ग्राहक अर्डर डाटामा आधारित बनाउँछ। पूर्ण GenAIOps वर्कफ्लो प्रदर्शन गर्दछ — Prompty सँग प्रोटोटाइप, AI-सहायक मूल्यांकनकर्ताहरू सँग मूल्यांकन, र AZD मार्फत Container Apps मा डिप्लोइ।
 
-**छिटो सुरुवात**:
+**छिटो सुरु:**
 ```bash
 azd init --template contoso-chat
 azd up
 ```
 
-### Creative Writing Multi-Agent Application
+### सिर्जनात्मक लेखन बहु-एजेन्ट अनुप्रयोग
 
 **रिपोजिटरी**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
 
 **सेवाहरू**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
 
-**विवरण**: Prompty सहित AI एजेन्ट ऑर्केस्ट्रेसन देखाउने मल्टि-एजेन्ट नमूना। अनुसन्धान एजेन्ट (Bing Grounding in Azure AI Agent Service), प्रोडक्ट एजेन्ट (Azure AI Search), लेखक एजेन्ट, र सम्पादक एजेन्ट मिलेर राम्रोसँग अनुसन्धान गरिएका लेखहरू उत्पादन गर्छन्। GitHub Actions मा इवलुएसन सहित CI/CD समावेश छ।
+**विवरण**: Prompty सँगै AI एजेन्ट समन्वयन देखाउने बहु-एजेन्ट नमूना। अनुसन्धान एजेन्ट (Bing Grounding Azure AI Agent Service मा), उत्पादन एजेन्ट (Azure AI Search), लेखक एजेन्ट, र सम्पादक एजेन्ट समावेश गरि सँगै अनुसन्धान गरेका लेखहरू उत्पादन गर्न। GitHub Actions मा मूल्यांकनसहित CI/CD समावेश।
 
-**छिटो सुरुवात**:
+**छिटो सुरु:**
 ```bash
 azd init --template contoso-creative-writer
 azd up
 ```
 
-### Serverless RAG Chat (JavaScript/TypeScript)
+### सर्भरलेस RAG च्याट (JavaScript/TypeScript)
 
 **रिपोजिटरी**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
 
 **सेवाहरू**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
 
-**विवरण**: LangChain.js प्रयोग गरेर पूर्ण रूपमा सर्वरलेस RAG च्याटबट, API का लागि Azure Functions र होस्टिङका लागि Azure Static Web Apps। Azure Cosmos DB लाई भेक्टर स्टोर र च्याट इतिहास डाटाबेस दुवैको रूपमा प्रयोग गर्छ। शून्य-लागत परीक्षणको लागि स्थानीय विकासमा Ollama समर्थन गर्दछ।
+**विवरण**: LangChain.js प्रयोग गरी पूर्ण सर्भरलेस RAG च्याटबट जसमा API को लागि Azure Functions र होस्टिङको लागि Azure Static Web Apps। Azure Cosmos DB लाई भेक्टर स्टोर र च्याट इतिहास डेटाबेस दुवै रूपमा प्रयोग गर्दछ। स्थानीय विकासका लागि Ollama सहित शून्य लागत परीक्षण समर्थन गर्दछ।
 
-**छिटो सुरुवात**:
+**छिटो सुरु:**
 ```bash
 azd init --template serverless-chat-langchainjs
 azd up
 ```
 
-### Chat with Your Data Solution Accelerator
+### तपाइँको डाटासँगको च्याट समाधान त्वरक
 
 **रिपोजिटरी**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
 
 **सेवाहरू**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
 
-**विवरण**: प्रशासन पोर्टल सहित एन्त्रप्राइज-ग्रेड RAG समाधान एक्सेलेरेटर जसमा दस्तावेज अपलोड/प्रबन्धन, बहु ऑर्केस्ट्रेटर विकल्पहरू (Semantic Kernel, LangChain, Prompt Flow), स्पीच-टु-टेक्स्ट, Microsoft Teams एकीकरण, र PostgreSQL वा Cosmos DB ब्याकएन्ड छनोट समावेश छ। उत्पादन RAG परिदृश्यहरूको लागि अनुकूलनयोग्य सुरुआत बिन्दुको रूपमा डिजाइन गरिएको।
+**विवरण**: प्रशासन पोर्टल सहित उद्यम-स्तरको RAG समाधान त्वरक, कागजात अपलोड/व्यवस्थापन, विभिन्न समन्वयकर्ता विकल्पहरू (Semantic Kernel, LangChain, Prompt Flow), भाषण-टेक्स्ट, Microsoft Teams एकीकरण, र PostgreSQL वा Cosmos DB ब्याकएन्ड चयन। उत्पादन RAG परिदृश्यहरूका लागि अनुकूलनयोग्य प्रारम्भिक बिन्दु।
 
-**छिटो सुरुवात**:
+**छिटो सुरु:**
 ```bash
 azd init --template chat-with-your-data-solution-accelerator
 azd up
 ```
 
-### AI Travel Agents — Multi-Agent MCP Orchestration
+### AI यात्रा एजेन्टहरू — बहु-एजेन्ट MCP समन्वय
 
 **रिपोजिटरी**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
 
-**सेवाहरू**: Azure OpenAI + Azure AI Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
+**सेवाहरू**: Azure OpenAI + Azure AI Foundry + Azure Container Apps + MCP सर्भरहरू (.NET, Python, Java, TypeScript)
 
-**विवरण**: तीन फ्रेमवर्कहरू (LangChain.js, LlamaIndex.TS, र Microsoft Agent Framework) प्रयोग गरेर मल्टि-एजेन्ट AI ऑर्केस्ट्रेसनको लागि संदर्भ अनुप्रयोग। चार भाषाहरूमा MCP (Model Context Protocol) सर्भरहरू सर्भरलेस Azure Container Apps मा परिनियोजन गरिएका छन् र OpenTelemetry अनुगमन समावेश छ।
+**विवरण**: तीन फ्रेमवर्कहरू (LangChain.js, LlamaIndex.TS, र Microsoft Agent Framework) प्रयोग गरेर बहु-एजेन्ट AI समन्वयको लागि सन्दर्भ अनुप्रयोग। चार भाषाहरूमा MCP (Model Context Protocol) सर्भरहरूलाई सर्भरलेस Azure Container Apps रूपमा डिप्लोइ गरे र OpenTelemetry अनुगमनका साथ।
 
-**छिटो सुरुवात**:
+**छिटो सुरु:**
 ```bash
 azd init --template azure-ai-travel-agents
 azd up
 ```
 
-### Azure AI Starter
+### Azure AI स्टार्टर
 
 **रिपोजिटरी**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
 
-**सेवाहरू**: Azure AI Services + Azure OpenAI
+**सेवाहरू**: Azure AI सेवाहरू + Azure OpenAI
 
-**विवरण**: Azure AI सेवाहरू र कन्फिगर गरिएको मेसिन लर्निङ मोडेलहरूसँग सानो Bicep टेम्पलेट। विस्तृत अनुप्रयोग स्ट्याक बिना मात्र Azure AI पूर्वाधार चाहिने अवस्थामा हल्का सुरुवात बिन्दु।
+**विवरण**: Azure AI सेवाहरूलाई कन्फिगर गरिएको मेसिन लर्निङ मोडेलहरूसहित डिप्लोइ गर्ने न्यूनतम Bicep टेम्प्लेट। जब तपाईलाई पूर्ण अनुप्रयोग स्ट्याक बिना Azure AI पूर्वाधार मात्र चाहिन्छ भने हल्का प्रारम्भिक बिन्दु।
 
-**छिटो सुरुवात**:
+**छिटो सुरु:**
 ```bash
 azd init --template azd-ai-starter
 azd up
 ```
 
-> **अझ टेम्प्लेटहरू ब्राउज गर्नुहोस्**: Visit the [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) for 80+ AI-specific AZD templates across languages and scenarios.
+> **थप टेम्प्लेटहरू ब्राउज गर्नुहोस्**: भाषाहरू र प्रासंगिक परिदृश्यहरूमा ८०+ AI-विशिष्ट AZD टेम्प्लेटहरूको लागि [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) भ्रमण गर्नुहोस्।
 
-## अर्को कदमहरू
+## अर्को चरणहरू
 
-1. **उदाहरणहरू प्रयास गर्नुहोस्**: आफ्नो उपयोग केससँग मेल खाने पूर्व-निर्मित टेम्पलेटबाट सुरु गर्नुहोस्
-2. **आफ्नो आवश्यकतालाई अनुकूलित गर्नुहोस्**: पूर्वाधार र अनुप्रयोग कोड परिमार्जन गर्नुहोस्
-3. **अनुगमन थप्नुहोस्**: व्यापक अवलोकन कार्यान्वयन गर्नुहोस्
-4. **लागत अनुकूलन गर्नुहोस्**: आफ्नो बजेटका लागि कन्फिगरेसनहरू परिष्कृत गर्नुहोस्
-5. **तपाईंको परिनियोजनलाई सुरक्षित गर्नुहोस्**: एन्त्रप्राइज सुरक्षा ढाँचाहरू लागू गर्नुहोस्
-6. **उत्पादनमा स्केल गर्नुहोस्**: बहु-क्षेत्र र उच्च उपलब्धता सुविधाहरू थप्नुहोस्
+1. **उदाहरणहरू प्रयास गर्नुहोस्**: पूर्व-निर्मित टेम्प्लेटबाट सुरु गर्नुहोस् जुन तपाईंको प्रयोग मामिलासँग मेल खान्छ
+2. **आफ्नो आवश्यकताहरूका लागि अनुकूलन गर्नुहोस्**: पूर्वाधार र अनुप्रयोग कोड परिमार्जन गर्नुहोस्
+3. **अनुगमन थप्नुहोस्**: व्यापक अवलोकनयोग्यता कार्यान्वयन गर्नुहोस्
+4. **खर्चहरू अनुकूलन गर्नुहोस्**: तपाईंको बजेटका लागि कन्फिगरेसनहरू परिमार्जन गर्नुहोस्
+5. **तपाईंको डिप्लोइ सुरक्षित गर्नुहोस्**: उद्यम सुरक्षा ढाँचाहरू लागू गर्नुहोस्
+6. **उत्पादन स्तरमा स्केल गर्नुहोस्**: बहु-क्षेत्र र उच्च उपलब्धता सुविधाहरू थप्नुहोस्
 
 ## 🎯 व्यावहारिक अभ्यासहरू
 
-### अभ्यास 1: Microsoft Foundry Models च्याट एप परिनियोजन गर्नुहोस् (30 मिनेट)
-**लक्ष्य**: उत्पादन-तयार AI च्याट अनुप्रयोग परिनियोजन र परीक्षण गर्नु
+### अभ्यास १: Microsoft Foundry मोडेल च्याट अनुप्रयोग डिप्लोइ गर्नुहोस् (३० मिनेट)
+**लक्ष्य**: उत्पादन-मैत्री AI च्याट अनुप्रयोग डिप्लोइ र परीक्षण गर्नुहोस्
 
 ```bash
-# टेम्पलेट आरम्भ गर्नुहोस्
+# टेम्प्लेट सुरु गर्नुहोस्
 mkdir ai-chat-demo && cd ai-chat-demo
 azd init --template azure-search-openai-demo
 
-# वातावरणीय चरहरू सेट गर्नुहोस्
+# वातावरण चर सेट गर्नुहोस्
 azd env set AZURE_LOCATION eastus2
 azd env set AZURE_OPENAI_CAPACITY 30
 
@@ -669,27 +681,27 @@ azd up
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Chat app: $WEB_URL"
 
-# एआई सञ्चालनहरू अनुगमन गर्नुहोस्
+# एआई अपरेसनहरू निगरानी गर्नुहोस्
 azd monitor
 
 # सफा गर्नुहोस्
 azd down --force --purge
 ```
 
-**सफलताको मापदण्डहरू:**
-- [ ] परिनियोजन कोटा त्रुटि बिना पूरा हुन्छ
-- [ ] ब्राउजरमा च्याट इन्टरफेस पहुँच गर्न सकिन्छ
-- [ ] प्रश्न सोधेर AI-समर्थित उत्तरहरू प्राप्त गर्न सकिन्छ
-- [ ] Application Insights ले टेलिमेट्री डाटा देखाउँछ
-- [ ] स्रोतहरू सफलतापूर्वक सफा गरिएको छ
+**सफलता मापदण्डहरू:**
+- [ ] कोटा त्रुटि बिना डिप्लोइमेन्ट सफल हुन्छ
+- [ ] ब्राउजरमा च्याट इन्टरफेस पहुँच गर्न सक्छ
+- [ ] प्रश्न सोध्न र AI-सञ्चालित प्रतिक्रियाहरू प्राप्त गर्न सक्छ
+- [ ] एप्लिकेसन इनसाइट्सले टेलिमेट्री डेटा देखाउँछ
+- [ ] स्रोतहरू सफलतापूर्वक सफा गरियो
 
-**अनुमानित लागत**: $5-10 30 मिनेटको परीक्षणका लागि
+**अनुमानित लागत**: ३० मिनेट परीक्षणका लागि $5-10
 
-### अभ्यास 2: बहु-मोडेल परिनियोजन कन्फिगर गर्नुहोस् (45 मिनेट)
-**लक्ष्य**: फरक कन्फिगरेसनहरूसँग बहु AI मोडेलहरू परिनियोजन गर्नु
+### अभ्यास २: बहु-मोडेल डिप्लोइमेन्ट कन्फिगर गर्नुहोस् (४५ मिनेट)
+**लक्ष्य**: विभिन्न कन्फिगरेसनहरूसँग बहु AI मोडेल डिप्लोइमेन्ट गर्नुहोस्
 
 ```bash
-# अनुकूलित Bicep कन्फिगरेसन सिर्जना गर्नुहोस्
+# अनुकूलित बाइसेप कन्फिगरेसन बनाउनुहोस्
 cat > infra/ai-models.bicep << 'EOF'
 param openAiAccountName string
 param location string
@@ -718,12 +730,12 @@ resource gpt4omini 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01'
 // Text embedding for search
 resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'text-embedding-ada-002'
+  name: 'text-embedding-3-large'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     scaleSettings: {
       scaleType: 'Standard'
@@ -734,22 +746,22 @@ resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01'
 }
 EOF
 
-# परिनियोजन गर्नुहोस् र प्रमाणित गर्नुहोस्
+# डिप्लॉय र प्रमाणित गर्नुहोस्
 azd provision
 azd show
 ```
 
-**सफलताको मापदण्डहरू:**
-- [ ] बहु मोडेलहरू सफलतापूर्वक परिनियोजन भएका छन्
-- [ ] फरक क्षमता सेटिङहरू लागू भएका छन्
-- [ ] मोडेलहरू API मार्फत पहुँचयोग्य छन्
-- [ ] एप्लिकेसनबाट दुबै मोडेलहरू कल गर्न सकिन्छ
+**सफलता मापदण्डहरू:**
+- [ ] विभिन्न मोडेलहरू सफलतापूर्वक डिप्लोइ
+- [ ] फरक-फरक क्षमता सेटिङहरू लागू गरियो
+- [ ] API मार्फत मोडेलहरू पहुँचयोग्य
+- [ ] अनुप्रयोगबाट दुवै मोडेल कल गर्न सक्छ
 
-### अभ्यास 3: लागत अनुगमन कार्यान्वयन गर्नुहोस् (20 मिनेट)
-**लक्ष्य**: बजेट अलर्ट र लागत ट्र्याकिङ सेटअप गर्नु
+### अभ्यास ३: लागत अनुगमन कार्यान्वयन गर्नुहोस् (२० मिनेट)
+**लक्ष्य**: बजेट सूचना र लागत ट्र्याकिङ सेटअप गर्नुहोस्
 
 ```bash
-# Bicep मा बजेट अलर्ट थप्नुहोस्
+# Bicep मा बजेट सूचना थप्नुहोस्
 cat >> infra/main.bicep << 'EOF'
 
 resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
@@ -780,68 +792,67 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 EOF
 
-# बजेट अलर्ट तैनात गर्नुहोस्
+# बजेट सूचना तैनाथ गर्नुहोस्
 azd provision
 
-# हालको लागत जाँच गर्नुहोस्
+# वर्तमान खर्चहरू जाँच्नुहोस्
 az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-date $(date +%Y-%m-%d)
 ```
 
-**सफलताको मापदण्डहरू:**
-- [ ] Azure मा बजेट अलर्ट सिर्जना गरिएको छ
-- [ ] इमेल सूचनाहरू कन्फिगर गरिएका छन्
-- [ ] Azure पोर्टलमा लागत डाटा हेर्न सकिन्छ
-- [ ] बजेट थ्रेसहोल्डहरू उपयुक्त रूपमा सेट गरिएको छ
+**सफलता मापदण्डहरू:**
+- [ ] Azure मा बजेट सूचना सिर्जना गरियो
+- [ ] इमेल सूचनाहरू कन्फिगर गरियो
+- [ ] Azure पोर्टलमा लागत डेटा हेर्न सकिन्छ
+- [ ] बजेट सीमा उपयुक्त रूपमा सेट गरियो
 
 ## 💡 बारम्बार सोधिने प्रश्नहरू
 
 <details>
-<summary><strong>विकास दौरान Microsoft Foundry Models को लागत कसरी घटाउने?</strong></summary>
+<summary><strong>विकासको क्रममा Microsoft Foundry मोडेलहरूको लागत कसरी घटाउने?</strong></summary>
 
-1. **Free Tier प्रयोग गर्नुहोस्**: Microsoft Foundry Models ले प्रति महिना 50,000 टोकन निःशुल्क प्रदान गर्छ
-2. **क्षमता घटाउनुहोस्**: विकासका लागि क्षमता 30+ को सट्टा 10 TPM सेट गर्नुहोस्
-3. **azd down प्रयोग गर्नुहोस्**: सक्रिय रूपमा विकास नगर्दा स्रोतहरू डिअलोकेट गर्नुहोस्
-4. **प्रतिक्रिया क्यास गर्नुहोस्**: दोहोरिंदै सोधिने प्रश्नहरूको लागि Redis क्यास लागू गर्नुहोस्
-5. **Prompt Engineering प्रयोग गर्नुहोस्**: प्रभावकारी प्रम्प्टहरू प्रयोग गरेर टोकन उपयोग घटाउनुहोस्
-
+1. **निःशुल्क स्तर प्रयोग गर्नुहोस्**: Microsoft Foundry मोडेलहरूले प्रति महिना ५०,००० टोकन निःशुल्क दिन्छ
+2. **क्षमता घटाउनुहोस्**: विकासका लागि ३०+ सट्टा १० TPM सेट गर्नुहोस्
+3. **azd down प्रयोग गर्नुहोस्**: सक्रिय रूपमा विकास नगर्दा स्रोतहरू डिलिएट गर्नुहोस्
+4. **प्रतिक्रिया क्यास गर्नुहोस्**: पुनरावृत्त प्रश्नहरूको लागि Redis क्यास लागू गर्नुहोस्
+5. **प्रॉम्प्ट इन्जिनियरिङ प्रयोग गर्नुहोस्**: प्रभावकारी प्रॉम्प्टहरूसँग टोकन प्रयोग घटाउनुहोस्
 ```bash
-# विकास कन्फिगरेसन
+# विकास संरचना
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set ENABLE_RESPONSE_CACHE true
 ```
 </details>
 
 <details>
-<summary><strong>Microsoft Foundry Models र OpenAI API बीच के फरक छ?</strong></summary>
+<summary><strong>Microsoft Foundry मोडेलहरू र OpenAI API बीच के फरक छ?</strong></summary>
 
-**Microsoft Foundry Models**:
-- उद्यम स्तरको सुरक्षा र अनुपालन
+**Microsoft Foundry मोडेलहरू**:
+- उद्यम सुरक्षा र अनुपालन
 - निजी नेटवर्क एकीकरण
-- SLA ग्यारेन्टीहरू
-- Managed identity प्रमाणीकरण
-- उच्च कोटा उपलब्ध
+- SLA सुनिश्चितताहरू
+- प्रबन्धित पहिचान प्रमाणीकरण
+- बढी कोटा उपलब्ध
 
 **OpenAI API**:
 - नयाँ मोडेलहरूमा छिटो पहुँच
 - सरल सेटअप
-- प्रवेशिका कम बाधा
-- सार्वजनिक इन्टरनेटमात्र
+- कम प्रवेश बाधा
+- सार्वजनिक इन्टरनेट मात्र
 
-उत्पादन अनुप्रयोगहरूको लागि, **Microsoft Foundry Models सिफारिस गरिन्छ**।
+उत्पादन एपहरूको लागि, **Microsoft Foundry मोडेलहरू सिफारिस गरिन्छ**।
 </details>
 
 <details>
-<summary><strong>Microsoft Foundry मोडेलहरूको कोटा पार गरियो भन्ने त्रुटिहरूलाई म कसरी सम्हाल्ने?</strong></summary>
+<summary><strong>म Microsoft Foundry मोडेलहरू कोटा ओगटिएको त्रुटिहरू कसरी व्यवस्थापन गर्ने?</strong></summary>
 
 ```bash
 # हालको कोटा जाँच गर्नुहोस्
 az cognitiveservices usage list --location eastus2
 
-# अर्को क्षेत्र प्रयास गर्नुहोस्
+# फरक क्षेत्र प्रयास गर्नुहोस्
 azd env set AZURE_LOCATION westus2
 azd up
 
-# अस्थायी रूपमा क्षमता घटाउनुहोस्
+# क्षणिक रूपमा क्षमता घटाउनुहोस्
 azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
@@ -851,9 +862,9 @@ azd provision
 </details>
 
 <details>
-<summary><strong>के म आफ्नै डेटा Microsoft Foundry मोडेलहरूसँग प्रयोग गर्न सक्छु?</strong></summary>
+<summary><strong>के म मेरो आफ्नै डेटा Microsoft Foundry मोडेलहरूसँग प्रयोग गर्न सक्छु?</strong></summary>
 
-हो! RAG (Retrieval Augmented Generation) का लागि **Azure AI Search** प्रयोग गर्नुहोस्:
+हो! RAG (Retrieval Augmented Generation) को लागि **Azure AI Search** प्रयोग गर्नुहोस्:
 
 ```yaml
 # azure.yaml
@@ -865,18 +876,18 @@ services:
       - AZURE_OPENAI_ENDPOINT
 ```
 
-See the [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) template.
+[azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) टेम्प्लेट हेर्नुहोस्।
 </details>
 
 <details>
-<summary><strong>म AI मोडेल एन्डप्वाइन्टहरू कसरी सुरक्षित बनाउने?</strong></summary>
+<summary><strong>म कसरी AI मोडेल अन्त्यबिन्दुहरू सुरक्षित गर्ने?</strong></summary>
 
 **सर्वोत्तम अभ्यासहरू**:
-1. Managed Identity प्रयोग गर्नुहोस् (API कुञ्जीहरू प्रयोग नगर्नुहोस्)
-2. निजी एन्डप्वाइन्टहरू सक्षम गर्नुहोस्
+1. प्रबन्धित पहिचान प्रयोग गर्नुहोस् (API कुञ्जीहरू बिना)
+2. निजी अन्त्यबिन्दुहरू सक्षम गर्नुहोस्
 3. नेटवर्क सुरक्षा समूहहरू कन्फिगर गर्नुहोस्
-4. रेट लिमिटिङ लागू गर्नुहोस्
-5. गोप्य जानकारीको लागि Azure Key Vault प्रयोग गर्नुहोस्
+4. दर सीमांकन लागू गर्नुहोस्
+5. गोप्य जानकारीका लागि Azure Key Vault प्रयोग गर्नुहोस्
 
 ```bicep
 // Managed Identity authentication
@@ -898,25 +909,25 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 ## समुदाय र समर्थन
 
-- **Microsoft Foundry Discord**: [#Azure चैनल](https://discord.gg/microsoft-azure)
-- **AZD GitHub**: [इश्यूहरू र छलफलहरू](https://github.com/Azure/azure-dev)
-- **Microsoft Learn**: [आधिकारिक दस्तावेज](https://learn.microsoft.com/azure/ai-studio/)
-- **Agent Skills**: [skills.sh मा Microsoft Foundry स्किल](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - तपाईंको सम्पादकमा Azure + Foundry एजेन्ट स्किलहरू इन्स्टल गर्न `npx skills add microsoft/github-copilot-for-azure`
+- **Microsoft Foundry Discord**: [#Azure च्यानल](https://discord.gg/microsoft-azure)
+- **AZD GitHub**: [समस्या र छलफलहरू](https://github.com/Azure/azure-dev)
+- **Microsoft Learn**: [औपचारिक कागजातहरू](https://learn.microsoft.com/azure/ai-studio/)
+- **एजेन्ट स्किलहरू**: [Microsoft Foundry स्किल skills.sh मा](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - `npx skills add microsoft/github-copilot-for-azure` कमाण्ड प्रयोग गरी आफ्नो सम्पादकमा Azure + Foundry एजेन्ट स्किलहरू स्थापना गर्नुहोस्
 
 ---
 
 **अध्याय नेभिगेसन:**
-- **📚 कोर्स होम**: [AZD For Beginners](../../README.md)
-- **📖 वर्तमान अध्याय**: अध्याय 2 - एआई-प्रथम विकास
-- **⬅️ अघिल्लो अध्याय**: [अध्याय 1: तपाइँको पहिलो परियोजना](../chapter-01-foundation/first-project.md)
-- **➡️ अर्को**: [एआई मोडेल परिनियोजन](ai-model-deployment.md)
-- **🚀 अर्को अध्याय**: [अध्याय 3: कन्फिगरेसन](../chapter-03-configuration/configuration.md)
+- **📚 कोर्स गृहपृष्ठ**: [AZD शुरूआतीहरूका लागि](../../README.md)
+- **📖 वर्तमान अध्याय**: अध्याय २ - AI-प्रथम विकास
+- **⬅️ अघिल्लो अध्याय**: [अध्याय १: तपाईंको पहिलो परियोजना](../chapter-01-foundation/first-project.md)
+- **➡️ अर्को**: [AI मोडेल डिप्लोइमेन्ट](ai-model-deployment.md)
+- **🚀 अर्को अध्याय**: [अध्याय ३: कन्फिगरेसन](../chapter-03-configuration/configuration.md)
 
-**सहयोग चाहिन्छ?** हाम्रो समुदायका छलफलहरूमा सहभागी हुनुहोस् वा रिपोजिटरीमा इश्यू खोल्नुहोस्। Azure AI + AZD समुदाय तपाईंलाई सफल हुन मद्दत गर्न यहाँ छ!
+**मद्दत चाहिन्छ?** हाम्रो समुदाय छलफलमा सहभागी हुनुहोस् वा रिपोजिटरीमा मुद्दा खोल्नुहोस्। Azure AI + AZD समुदाय तपाईंलाई सफल बनाउन यहाँ छ!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-अस्वीकरण:
-यो दस्तावेज AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरेर अनुवाद गरिएको हो। हामी यथासम्भव शुद्धताको लागि प्रयास गर्छौं, तर कृपया ध्यान दिनुहोस् कि स्वचालित अनुवादमा त्रुटि वा अशुद्धता हुन सक्छ। मूल दस्तावेजलाई त्यसको मूल भाषामा रहेको संस्करणलाई अधिकारिक स्रोतका रूपमा मान्नुहोस्। महत्वपूर्ण जानकारीका लागि पेशेवर मानवीय अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलतफहमी वा गलत व्याख्याको लागि हामी जिम्मेवार छैनौं।
+**अस्वीकरण**:
+यस दस्तावेज़लाई AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरी अनुवाद गरिएको हो। हामी सटीकताको लागि प्रयास गर्छौं, तर कृपया ध्यान दिनुहोस् कि स्वचालित अनुवादमा त्रुटि वा अशुद्धिहरू हुन सक्नेछन्। मूल भाषामा रहेको दस्तावेज़लाई प्रमाणिक स्रोतको रूपमा मान्नुपर्छ। महत्वपूर्ण जानकारीको लागि, व्यावसायिक मानव अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि भ्रम वा गलतफहमीका लागि हामी जिम्मेवार छैनौं।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

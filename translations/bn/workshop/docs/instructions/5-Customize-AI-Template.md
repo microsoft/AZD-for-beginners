@@ -1,165 +1,163 @@
-# 5. Customize a Template
+# 5. একটি টেম্পলেট কাস্টমাইজ করুন
 
-!!! tip "এই মডিউলের শেষ নাগাদ আপনি সক্ষম হবেন"
+!!! tip "এই মডিউলের শেষে আপনি সক্ষম হবেন"
 
-    - [ ] ডিফল্ট AI এজেন্ট সক্ষমতাসমূহ অন্বেষণ করেছেন
-    - [ ] নিজেস্ব ইনডেক্স সহ AI সার্চ যোগ করেছেন
-    - [ ] ট্রেসিং মেট্রিক্স সক্রিয় এবং বিশ্লেষণ করেছেন
-    - [ ] একটি মূল্যায়ন রান সম্পাদন করেছেন
-    - [ ] একটি রেড-টিমিং স্ক্যান সম্পাদন করেছেন
-    - [ ] **ল্যাব ৫: কাস্টমাইজেশন প্ল্যান তৈরি করেছেন** 
-
----
-
-## 5.1 AI Agent Capabilities
-
-!!! success "আমরা এটি ল্যাব 01-এ সম্পন্ন করেছি"
-
-- **File Search**: জ্ঞান আহরণের জন্য OpenAI-এর বিল্ট-ইন ফাইল সার্চ
-- **Citations**: প্রতিক্রিয়ায় স্বয়ংক্রিয় সূত্র উল্লেখ
-- **Customizable Instructions**: এজেন্টের আচরণ এবং ব্যক্তিত্ব পরিবর্তনযোগ্য
-- **Tool Integration**: কাস্টম সক্ষমতার জন্য সম্প্রসার্য টুল সিস্টেম
+    - [ ] ডিফল্ট এআই এজেন্ট সক্ষমতা অন্বেষণ করেছেন
+    - [ ] আপনার নিজস্ব ইনডেক্স সহ এআই সার্চ যোগ করেছেন
+    - [ ] ট্রেসিং মেট্রিক্স সক্রিয় ও বিশ্লেষণ করেছেন
+    - [ ] একটি মূল্যায়ন রান চালিয়েছেন
+    - [ ] একটি রেড-টিমিং স্ক্যান সম্পন্ন করেছেন
+    - [ ] **ল্যাব 5: একটি কাস্টমাইজেশন পরিকল্পনা তৈরি করেছেন** 
 
 ---
 
-## 5.2 Knowledge Retrieval Options
+## 5.1 AI এজেন্ট সক্ষমতা
 
-!!! task "এটি সম্পন্ন করতে আমাদের পরিবর্তন করে পুনরায় ডিপ্লয় করতে হবে"    
+!!! success "আমরা এটি ল্যাব ০১ এ সম্পন্ন করেছি"
+
+- **ফাইল সার্চ**: জ্ঞান আহরণে OpenAI এর বিল্ট-ইন ফাইল সার্চ
+- **উদ্ধৃতি**: প্রতিক্রিয়ায় স্বয়ংক্রিয় উৎস উল্লেখ
+- **কাস্টমাইজেবল নির্দেশাবলী**: এজেন্টের আচরণ এবং ব্যক্তিত্ব পরিবর্তন করুন
+- **সরঞ্জাম সংযোজন**: কাস্টম সক্ষমতার জন্য সম্প্রসারিত টুল সিস্টেম
+
+---
+
+## 5.2 জ্ঞান আহরণের বিকল্প
+
+!!! task "এটি সম্পন্ন করতে আমাদের পরিবর্তন করতে হবে এবং পুনঃবিন্যাস করতে হবে"    
     
     ```bash title=""
-    # Set environment variables
+    # পরিবেশ ভেরিয়েবল সেট করুন
     azd env set USE_AZURE_AI_SEARCH_SERVICE true
     azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
-    # Upload data and create my index
+    # ডেটা আপলোড করুন এবং আমার ইনডেক্স তৈরি করুন
 
     ```
 
 ---
 
-**OpenAI File Search (Default):**
+**OpenAI ফাইল সার্চ (ডিফল্ট):**
 
-- Foundry এজেন্টগুলোর মধ্যে অন্তর্নির্মিত
-- স্বয়ংক্রিয় ডকুমেন্ট প্রসেসিং এবং ইনডেক্সিং
-- অতিরিক্ত কোনো কনফিগারেশন প্রয়োজন নেই
+- Foundry এজেন্টগুলোর বিল্ট-ইন
+- স্বয়ংক্রিয় ডকুমেন্ট প্রক্রিয়াজাতকরণ এবং ইনডেক্সিং
+- অতিরিক্ত কনফিগারেশন প্রয়োজন নেই
 
-**Azure AI Search (Optional):**
+**Azure AI সার্চ (ঐচ্ছিক):**
 
-- হাইব্রিড সেম্যান্টিক এবং ভেক্টর সার্চ
+- হাইব্রিড সেমান্টিক এবং ভেক্টর সার্চ
 - কাস্টম ইনডেক্স ব্যবস্থাপনা
 - উন্নত সার্চ সক্ষমতা
-- Requires `USE_AZURE_AI_SEARCH_SERVICE=true`
+- প্রয়োজন `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
 ## 5.3 [ট্রেসিং ও মনিটরিং](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "এটি সম্পন্ন করতে আমাদের পরিবর্তন করে পুনরায় ডিপ্লয় করতে হবে"    
+!!! task "এটি সম্পন্ন করতে আমাদের পরিবর্তন করতে হবে এবং পুনঃবিন্যাস করতে হবে"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
     azd deploy
     ```
 
-**Tracing:**
+**ট্রেসিং:**
 
-- OpenTelemetry ইন্টিগ্রেশন
-- রিকোয়েস্ট/রেসপন্স ট্র্যাকিং
-- পারফরম্যান্স মেট্রিক্স
+- OpenTelemetry সংযুক্তি
+- অনুরোধ/প্রতিক্রিয়া ট্র্যাকিং
+- কর্মক্ষমতা মেট্রিক্স
 - Microsoft Foundry পোর্টালে উপলব্ধ
 
-**Logging:**
+**লগিং:**
 
-- Container Apps-এ অ্যাপ্লিকেশন লগ
-- করেলেশন ID-সহ স্ট্রাকচার্ড লগিং
+- Container Apps এ অ্যাপ্লিকেশন লগসমূহ
+- সম্পর্কযুক্ত আইডি সহ কাঠামোবদ্ধ লগিং
 - রিয়েল-টাইম এবং ঐতিহাসিক লগ দেখা
 
 ---
 
 ## 5.4 [এজেন্ট মূল্যায়ন](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
-**লোকাল মূল্যায়ন:**
+**স্থানীয় মূল্যায়ন:**
 
-- মান নিরূপণের জন্য বিল্ট-ইন মূল্যায়ক
+- গুণগত মান যাচাইয়ের জন্য বিল্ট-ইন মূল্যায়ক
 - কাস্টম মূল্যায়ন স্ক্রিপ্ট
-- পারফরম্যান্স বেঞ্চমার্কিং
+- কর্মক্ষমতা বেঞ্চমার্কিং
 
-**নিরবচ্ছিন্ন মনিটরিং:**
+**অবিচ্ছিন্ন মনিটরিং:**
 
-- লাইভ ইন্টারঅ্যাকশনের স্বয়ংক্রিয় মূল্যায়ন
-- মান মেট্রিক্স ট্র্যাকিং
-- পারফরম্যান্স রিগ্রেশন সনাক্তকরণ
+- সরাসরি ইন্টারঅ্যাকশনের স্বয়ংক্রিয় মূল্যায়ন
+- গুণমান মেট্রিক্স ট্র্যাকিং
+- কর্মক্ষমতা হ্রাস সনাক্তকরণ
 
-**CI/CD ইন্টিগ্রেশন:**
+**CI/CD সংহতি:**
 
 - GitHub Actions ওয়ার্কফ্লো
-- স্বয়ংক্রিয় টেস্টিং এবং মূল্যায়ন
-- পরিসংখ্যানভিত্তিক তুলনামূলক টেস্টিং
+- স্বয়ংক্রিয় পরীক্ষা ও মূল্যায়ন
+- পরিসংখ্যানগত তুলনা পরীক্ষা
 
 ---
 
-## 5.5 [AI রেড টিমিং এজেন্ট](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [এআই রেড টিমিং এজেন্ট](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**AI রেড টিমিং:**
+**এআই রেড টিমিং:**
 
-- স্বয়ংক্রিয় সিকিউরিটি স্ক্যানিং
-- AI সিস্টেমের জন্য ঝুঁকি মূল্যায়ন
-- বহু কেটাগরিতে সেফটি মূল্যায়ন
+- স্বয়ংক্রিয় সুরক্ষা স্ক্যানিং
+- এআই সিস্টেমের ঝুঁকি মূল্যায়ন
+- একাধিক বিভাগে নিরাপত্তা মূল্যায়ন
 
-**Authentication:**
+**প্রমাণীকরণ:**
 
-- Azure সার্ভিসগুলোর জন্য Managed Identity
+- Azure সার্ভিসের জন্য ম্যানেজড আইডেন্টিটি
 - ঐচ্ছিক Azure App Service প্রমাণীকরণ
-- ডেভেলপমেন্টের জন্য বেসিক auth ফলব্যাক
+- উন্নয়নের জন্য বেসিক অথ ফ্যালব্যাক
 
+!!! quote "এই ল্যাবের শেষে আপনার উচিত হবে"
+    - [ ] আপনার পরিস্থিতির প্রয়োজনীয়তা সংজ্ঞায়িত করা
+    - [ ] কাস্টমাইজড env ভেরিয়েবল (কনফিগ)
+    - [ ] কাস্টমাইজড এজেন্ট নির্দেশাবলী (টাস্ক)
+    - [ ] কাস্টমাইজড টেম্পলেট ডিপ্লয় করা (অ্যাপ)
+    - [ ] পোস্ট-ডিপ্লয়মেন্ট টাস্ক সম্পন্ন (ম্যানুয়াল)
+    - [ ] একটি পরীক্ষা মূল্যায়ন চালানো
 
-
-!!! quote "ল্যাবের শেষে আপনার কাছে থাকা উচিৎ"
-    - [ ] আপনার সিনারিওর চাহিদা সংজ্ঞায়িত করা
-    - [ ] কাস্টমাইজ করা env ভেরিয়েবল (config)
-    - [ ] কাস্টমাইজ করা এজেন্ট নির্দেশনা (task)
-    - [ ] কাস্টমাইজ করা টেমপ্লেট ডিপ্লয় করা (app)
-    - [ ] পোস্ট-ডিপ্লয়মেন্ট টাস্ক শেষ করা (manual)
-    - [ ] একটি টেস্ট মূল্যায়ন চালানো
-
-This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
+এই উদাহরণটিতে একটি এন্টারপ্রাইজ রিটেইল ব্যবহার কেসের জন্য দুটি বিশেষায়িত এজেন্ট এবং একাধিক মডেল ডিপ্লয়মেন্ট সহ টেম্পলেট কাস্টমাইজ করার উপায় দেখানো হয়েছে।
 
 ---
 
-## 5.6 Customize It For You!
+## 5.6 আপনার জন্য কাস্টমাইজ করুন!
 
-### 5.6.1. Scenario Requirements
+### 5.6.1. পরিস্থিতির প্রয়োজনীয়তা
 
-#### **Agent Deployments:** 
+#### **এজেন্ট ডিপ্লয়মেন্ট:**
 
-   - Shopper Agent: গ্রাহকদের পণ্য খুঁজতে এবং তুলনা করতে সহায়তা করে
-   - Loyalty Agent: গ্রাহক পুরস্কার এবং প্রচার পরিচালনা করে
+   - শপার এজেন্ট: গ্রাহকদের পণ্য খুঁজে পেতে এবং তুলনা করতে সাহায্য করে
+   - লয়্যালটি এজেন্ট: গ্রাহক পুরস্কার ও প্রচারণা পরিচালনা করে
 
-#### **Model Deployments:**
+#### **মডেল ডিপ্লয়মেন্ট:**
 
    - `gpt-4.1`: প্রাথমিক চ্যাট মডেল
-   - `o3`: জটিল প্রশ্নের জন্য রিসোনিং মডেল
-   - `gpt-4.1-nano`: সরল ইন্টারঅ্যাকশনের জন্য হালকা ওজনের মডেল
-   - `text-embedding-3-large`: সার্চের জন্য উচ্চ-গুণমান এমবেডিং
+   - `o3`: জটিল প্রশ্নের জন্য রিজনিং মডেল
+   - `gpt-4.1-nano`: সহজ ইন্টারঅ্যাকশনের জন্য হালকা মডেল
+   - `text-embedding-3-large`: সার্চের জন্য উচ্চ-মানের এম্বেডিং
 
-#### **Features:**
+#### **বৈশিষ্ট্য:**
 
-   - ট্রেসিং এবং মনিটরিং সক্ষম
-   - পণ্য ক্যাটালগের জন্য AI Search
-   - গুণমান নিশ্চিতকরণের জন্য মূল্যায়ন ফ্রেমওয়ার্ক
-   - সিকিউরিটি যাচাইয়ের জন্য রেড টিমিং
+   - ট্রেসিং এবং মনিটরিং সক্রিয়
+   - পণ্য ক্যাটালগের জন্য AI সার্চ
+   - গুণগত নিশ্চয়তার জন্য মূল্যায়ন ফ্রেমওয়ার্ক
+   - সুরক্ষা যাচাইয়ের জন্য রেড টিমিং
 
 ---
 
-### 5.6.2 Scenario Implementation
+### 5.6.2 পরিস্থিতি বাস্তবায়ন
 
 
-#### 5.6.2.1. Pre-Deployment Config
+#### 5.6.2.1. পূর্ব-ডিপ্লয়মেন্ট কনফিগ
 
-Create a setup script (`setup-retail.sh`)
+একটি সেটআপ স্ক্রিপ্ট তৈরি করুন (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -167,15 +165,15 @@ Create a setup script (`setup-retail.sh`)
 # পরিবেশের নাম সেট করুন
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# অঞ্চল কনফিগার করুন (মডেলের উপলব্ধতার উপর ভিত্তি করে নির্বাচন করুন)
+# অঞ্চল কনফিগার করুন (মডেলের প্রাপ্যতার উপর ভিত্তি করে নির্বাচন করুন)
 azd env set AZURE_LOCATION "eastus2"
 
-# সমস্ত ঐচ্ছিক সার্ভিস সক্রিয় করুন
+# সকল ঐচ্ছিক সেবা চালু করুন
 azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# প্রাথমিক চ্যাট মডেল কনফিগার করুন (gpt-4.1-কে gpt-4.1-এর সবচেয়ে কাছের উপলব্ধ মডেল হিসেবে)
+# প্রাথমিক চ্যাট মডেল কনফিগার করুন (gpt-4.1 হিসাবে gpt-4.1 এর সবচেয়ে নিকটবর্তী)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
@@ -189,7 +187,7 @@ azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 # এজেন্টের নাম সেট করুন (প্রথম এজেন্ট তৈরি করবে)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# সার্চ ইনডেক্স কনফিগার করুন
+# অনুসন্ধান সূচক কনফিগার করুন
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -198,9 +196,9 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2: Agent Instructions
+#### 5.6.2.2: এজেন্ট নির্দেশাবলী
 
-Create `custom-agents/shopper-agent-instructions.md`:
+`custom-agents/shopper-agent-instructions.md` তৈরি করুন:
 
 ```markdown
 # Shopper Agent Instructions
@@ -223,7 +221,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-Create `custom-agents/loyalty-agent-instructions.md`:
+`custom-agents/loyalty-agent-instructions.md` তৈরি করুন:
 
 ```markdown
 # Loyalty Agent Instructions
@@ -248,9 +246,9 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: Deployment Script
+#### 5.6.2.3: ডিপ্লয়মেন্ট স্ক্রিপ্ট
 
-Create `deploy-retail.sh`:
+`deploy-retail.sh` তৈরি করুন:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -258,7 +256,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# প্রয়োজনীয়তা যাচাই করুন
+# পূর্বশর্ত যাচাই করুন
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -275,7 +273,7 @@ echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# নির্বাচিত অঞ্চলে কোটা চেক করুন
+# নির্বাচিত অঞ্চলে কোটা পরীক্ষা করুন
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -295,12 +293,12 @@ fi
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# ডিপ্লয়মেন্ট আউটপুট সংগ্রহ করুন
+# ডিপ্লয়মেন্ট আউটপুট ক্যাপচার করুন
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# ওয়েব অ্যাপের ইউআরএল পান
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# ওয়েব অ্যাপের URL পান
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -321,23 +319,23 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Post-Deployment Config
+#### 5.6.2.4: পোস্ট-ডিপ্লয়মেন্ট কনফিগ
 
-Create `configure-retail-agents.sh`:
+`configure-retail-agents.sh` তৈরি করুন:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🔧 Configuring retail agents..."
 
-# ডিপ্লয়মেন্ট তথ্য পান
+# ডিপ্লয়মেন্ট সম্পর্কিত তথ্য পান
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# ম্যানুয়াল কনফিগারেশনের নির্দেশাবলী
+# ম্যানুয়াল কনফিগারেশনের নির্দেশনা
 echo "
 🤖 Agent Configuration:
 
@@ -378,21 +376,21 @@ echo "
 "
 ```
 
-### 5.6.3: Testing and Validation
+### 5.6.3: পরীক্ষা ও যাচাই
 
-Create `test-retail-deployment.sh`:
+`test-retail-deployment.sh` তৈরি করুন:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🧪 Testing retail deployment..."
 
-# পরিবেশ ভেরিয়েবলগুলি সেট আছে কি না যাচাই করুন
+# পরিবেশ চলকগুলি সেট করা হয়েছে কিনা যাচাই করুন
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# ওয়েব অ্যাপ্লিকেশন উপলব্ধ আছে কি না পরীক্ষা করুন
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# ওয়েব অ্যাপ্লিকেশনটির উপলব্ধতা পরীক্ষা করুন
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -429,42 +427,42 @@ Next steps:
 
 ---
 
-### 5.6.4 Expected Outcomes
+### 5.6.4 প্রত্যাশিত ফলাফল
 
-After following this implementation guide, you will have:
+এই বাস্তবায়ন গাইড অনুসরণ করার পর, আপনার কাছে থাকবে:
 
-1. **Deployed Infrastructure:**
+1. **ডিপ্লয়ড অবকাঠামো:**
 
-      - Microsoft Foundry প্রোজেক্ট সহ মডেল ডিপ্লয়মেন্টসমূহ
-      - ওয়েব অ্যাপ্লিকেশন হোস্ট করা Container Apps
-      - পণ্য ক্যাটালগের জন্য AI Search সার্ভিস
-      - মনিটরিংয়ের জন্য Application Insights
+      - মডেল ডিপ্লয়মেন্টের সাথে Microsoft Foundry প্রকল্প
+      - ওয়েব অ্যাপ্লিকেশন হোস্টিংয়ের জন্য Container Apps
+      - পণ্য ক্যাটালগের জন্য AI সার্চ সার্ভিস
+      - মনিটরিংয়ের জন্য Application Insights
 
-2. **Initial Agent:**
+2. **প্রাথমিক এজেন্ট:**
 
-      - Shopper Agent বেসিক নির্দেশনা অনুসারে কনফিগার করা
-      - ফাইল সার্চ সক্ষমতা সক্রিয়
-      - ট্রেসিং এবং মনিটরিং কনফিগার করা হয়েছে
+      - মৌলিক নির্দেশাবলীর সাথে কনফিগার্ড শপার এজেন্ট
+      - ফাইল সার্চ সক্ষম করা হয়েছে
+      - ট্রেসিং ও মনিটরিং কনফিগার করা হয়েছে
 
-3. **Ready for Customization:**
+3. **কাস্টমাইজেশনের জন্য প্রস্তুত:**
 
-      - Loyalty Agent যোগ করার জন্য ফ্রেমওয়ার্ক
-      - কাস্টম নির্দেশনা টেমপ্লেট
-      - টেস্টিং এবং ভ্যালিডেশন স্ক্রিপ্ট
+      - লয়্যালটি এজেন্ট যোগ করার ফ্রেমওয়ার্ক
+      - কাস্টম নির্দেশনা টেম্পলেট
+      - পরীক্ষা ও যাচাই স্ক্রিপ্ট
       - মনিটরিং এবং মূল্যায়ন সেটআপ
 
-4. **Production Readiness:**
+4. **প্রোডাকশন প্রস্তুত:**
 
-      - রেড টিমিংসহ সিকিউরিটি স্ক্যানিং
-      - পারফরম্যান্স মনিটরিং
-      - গুণগত মান মূল্যায়ন ফ্রেমওয়ার্ক
+      - রেড টিমিং সহ সুরক্ষা স্ক্যানিং
+      - কর্মক্ষমতা মনিটরিং
+      - গুণগত মূল্যায়ন ফ্রেমওয়ার্ক
       - স্কেলেবল আর্কিটেকচার
 
-This example demonstrates how the AZD template can be extended and customized for specific enterprise scenarios while maintaining best practices for security, monitoring, and scalability.
+এই উদাহরণটি দেখায় কিভাবে AZD টেম্পলেটটি বিশেষ এন্টারপ্রাইজ পরিস্থিতির জন্য বিস্তার ও কাস্টমাইজ করা যেতে পারে যখন সুরক্ষা, মনিটরিং এবং স্কেলেবিলিটির জন্য সেরা অনুশীলনগুলি বজায় থাকে।
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-দায়-অস্বীকার:
-এই নথিটি AI অনুবাদ সেবা [Co-op Translator](https://github.com/Azure/co-op-translator) ব্যবহার করে অনুবাদ করা হয়েছে। আমরা যথাসম্ভব সঠিকতার চেষ্টা করি, তবু অনুগ্রহ করে সচেতন থাকুন যে স্বয়ংক্রিয় অনুবাদে ত্রুটি বা অসঙ্গতি থাকতে পারে। মূল ভাষায় থাকা নথিকেই প্রামাণিক উৎস হিসেবে বিবেচনা করা উচিত। গুরুত্বপূর্ণ তথ্যের জন্য পেশাদার মানব অনুবাদ গ্রহণের পরামর্শ দেওয়া হয়। এই অনুবাদ ব্যবহারের কারণে সৃষ্ট কোনো ভুল বোঝাবুঝি বা ভুল ব্যাখ্যার জন্য আমরা দায়ী নই।
+**অস্বীকারোক্তি**:  
+এই ডকুমেন্টটি AI অনুবাদ সেবা [Co-op Translator](https://github.com/Azure/co-op-translator) ব্যবহার করে অনুবাদ করা হয়েছে। যদিও আমরা সঠিকতার জন্য চেষ্টা করি, অনুগ্রহ করে জেনে রাখুন যে স্বয়ংক্রিয় অনুবাদে ত্রুটি বা অসঙ্গতি থাকতে পারে। মূল ভাষায় থাকা মূল ডকুমেন্টটিকেই প্রামাণিক উৎস হিসেবে বিবেচনা করা উচিত। গুরুত্বপূর্ণ তথ্যের জন্য, পেশাদার মানব অনুবাদের পরামর্শ দেওয়া হয়। এই অনুবাদের ব্যবহারে যে কোনো ভুল বোঝাবুঝি বা ভুল ব্যাখ্যার জন্য আমরা দায়ী নই।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

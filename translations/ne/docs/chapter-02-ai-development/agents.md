@@ -1,218 +1,223 @@
 # Azure Developer CLI सँग AI एजेन्टहरू
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 2 - AI-First Development
-- **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Next**: [AI Model Deployment](ai-model-deployment.md)
-- **🚀 Advanced**: [Multi-Agent Solutions](../../examples/retail-scenario.md)
+**अध्याय नेभिगेसन:**
+- **📚 कोर्स होम**: [AZD For Beginners](../../README.md)
+- **📖 वर्तमान अध्याय**: अध्याय २ - AI-प्रथम विकास
+- **⬅️ अघिल्लो**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ अर्को**: [AI Model Deployment](ai-model-deployment.md)
+- **🚀 उन्नत**: [Multi-Agent Solutions](../../examples/retail-scenario.md)
 
 ---
 
 ## परिचय
 
-AI एजेन्टहरू स्वतन्त्र प्रोग्रामहरू हुन् जसले आफ्नो वातावरण पहिचान गर्न, निर्णय लिन, र निश्चित लक्ष्यहरू प्राप्त गर्न कार्यहरू लिन सक्छन्। साधारण प्रॉम्प्ट-आधारित च्याटबटहरू जसले जवाफ दिन्छन् भन्दा फरक रूपमा, एजेन्टहरूले:
+AI एजेन्टहरू स्वायत्त कार्यक्रमहरू हुन् जसले आफ्नो वातावरणलाई बुझ्न, निर्णय लिन, र विशेष लक्ष्यहरू हासिल गर्न कार्यहरू लिन सक्छन्। साधारण च्याटबोटहरू जसले प्रम्प्टहरूको जवाफ दिन्छन् भन्दा फरक, एजेन्टहरूले सक्छन्:
 
-- **उपकरणहरू प्रयोग गर्न सक्छन्** - API कल गर्न, डाटाबेस खोज्न, कोड चलाउन
-- **योजना र तर्क गर्न सक्छन्** - जटिल कार्यहरूलाई चरणहरूमा विभाजन गर्न
-- **सन्दर्भबाट सिक्न सक्छन्** - सम्झना कायम राख्न र व्यवहार अनुकूलन गर्न
-- **सहकार्य गर्न सक्छन्** - अन्य एजेन्टहरूसँग काम गर्न (मल्टी-एजेन्ट प्रणालीहरू)
+- **उपकरणहरू प्रयोग गर्ने** - API कल गर्ने, डेटाबेस खोज्ने, कोड चलाउने
+- **योजना र तर्क गर्ने** - जटिल कार्यहरूलाई चरणहरूमा तोड्ने
+- **सन्दर्भबाट सिक्ने** - स्मृति राख्ने र व्यवहार अनुकूलन गर्ने
+- **सहयोग गर्ने** - अन्य एजेन्टहरूसँग काम गर्ने (बहु-एजेन्ट प्रणालीहरू)
 
-यो मार्गदर्शिकाले Azure मा Azure Developer CLI (azd) प्रयोग गरी AI एजेन्टहरू कसरी डिप्लोय गर्ने देखाउँछ।
+यस मार्गदर्शनले तपाईंलाई Azure Developer CLI (azd) प्रयोग गरी Azure मा AI एजेन्टहरू कसरी तैनाथ गर्ने देखाउँछ।
+
+> **पुष्टि नोट (2026-03-25):** यस मार्गदर्शनलाई `azd` `1.23.12` र `azure.ai.agents` `0.1.18-preview` विरुद्ध समीक्षा गरिएको छ। `azd ai` अनुभव अझै प्रिभ्यु-चालित छ, त्यसैले तपाईंको इन्स्टल गरिएको फ्ल्यागहरू फरक भएमा विस्तार मद्दत हेर्नुहोस्।
 
 ## सिकाइ लक्ष्यहरू
 
-यस मार्गदर्शिका पूरा गरेपछि, तपाईं:
-- AI एजेन्टहरू के हुन् र तिनीहरू च्याटबटहरूसँग कसरी फरक छन् बुझ्नुहुनेछ
-- AZD प्रयोग गरी पूर्व-निर्मित AI एजेन्ट टेम्प्लेटहरू डिप्लोय गर्न सक्नुहुनेछ
-- कस्टम एजेन्टहरूको लागि Foundry Agents कन्फिगर गर्न सक्षम हुनुहुनेछ
-- आधारभूत एजेन्ट ढाँचाहरू लागू गर्न सक्नुहुनेछ (टुल प्रयोग, RAG, मल्टी-एजेन्ट)
-- डिप्लोय गरिएका एजेन्टहरू अनुगमन र डिबग गर्न सक्नुहुनेछ
+यस मार्गदर्शन पूरा गरेर, तपाईं:
+- AI एजेन्टहरूले के हुन् र तिनीहरू च्याटबोटहरू भन्दा कसरी फरक छन् बुझ्नुहुनेछ
+- AZD प्रयोग गरेर पूर्व-निर्मित AI एजेन्ट टेम्प्लेटहरू तैनाथ गर्ने
+- Foundry एजेन्टहरू कस्टम एजेन्टहरूका लागि कन्फिगर गर्ने
+- आधारभूत एजेन्ट ढाँचाहरू लागू गर्ने (उपकरण प्रयोग, RAG, बहु-एजेन्ट)
+- तैनाथ गरिएको एजेन्टहरूको अनुगमन र डिबग गर्ने
 
 ## सिकाइ नतिजाहरू
 
-पूरा गरेपछि, तपाईं सक्षम हुनुहुनेछ:
-- एकै कमाण्डमा Azure मा AI एजेन्ट एप्लिकेसनहरू डिप्लोय गर्न
-- एजेन्ट उपकरणहरू र क्षमताहरू कन्फिगर गर्न
-- एजेन्टहरूसँग retrieval-augmented generation (RAG) लागू गर्न
-- जटिल वर्कफ्लोहरूको लागि मल्टी-एजेन्ट आर्किटेक्चर डिजाइन गर्न
-- सामान्य एजेन्ट डिप्लोयमेन्ट समस्याहरू ट्रबलशूट गर्न
+पूरा भएपछि, तपाईं सक्षम हुनुहुनेछ:
+- एक आदेशमा AI एजेन्ट अनुप्रयोगहरू Azure मा तैनाथ गर्ने
+- एजेन्ट उपकरणहरू र क्षमताहरू कन्फिगर गर्ने
+- एजेन्टहरूसँग पुन: प्राप्ति-वृद्धि जनरेशन (RAG) लागू गर्ने
+- जटिल कार्यहरूका लागि बहु-एजेन्ट संरचनाहरू डिजाइन गर्ने
+- सामान्य एजेन्ट तैनाथ समस्याहरू समाधान गर्ने
 
 ---
 
-## 🤖 एजेन्टलाई च्याटबटबाट केले फरक बनाउँछ?
+## 🤖 एजेन्ट र च्याटबोटमा के फरक छ?
 
-| Feature | Chatbot | AI Agent |
-|---------|---------|----------|
-| **Behavior** | Responds to prompts | Takes autonomous actions |
-| **Tools** | None | Can call APIs, search, execute code |
-| **Memory** | Session-based only | Persistent memory across sessions |
-| **Planning** | Single response | Multi-step reasoning |
-| **Collaboration** | Single entity | Can work with other agents |
+| विशेषता | च्याटबोट | AI एजेन्ट |
+|---------|----------|-----------|
+| **व्यवहार** | प्रम्प्टहरूमा प्रतिक्रिया दिन्छ | स्वतन्त्र क्रियाकलाप गर्छ |
+| **उपकरणहरू** | छैन | API कल गर्न, खोज गर्न, कोड चलाउन सक्छ |
+| **स्मृति** | केवल सत्र-आधारित | सत्रहरूमा पनि स्थायी स्मृति |
+| **योजना** | एकल प्रतिक्रिया | बहु-चरण तर्क |
+| **सहयोग** | एकल इकाई | अन्य एजेन्टहरूसँग काम गर्न सक्छ |
 
 ### सरल उपमा
 
-- **Chatbot** = एउटा सूचना डेस्कमा प्रश्नहरूको जवाफ दिने सहयोगी व्यक्ति
-- **AI Agent** = व्यक्तिगत सहायक जसले कल गर्न, भेटघाट बुक गर्न, र तपाईंका लागि कार्यहरू पूरा गर्न सक्छ
+- **च्याटबोट** = सूचना डेस्कमा प्रश्नहरूको जवाफ दिने मद्दतगार व्यक्ति
+- **AI एजेन्ट** = तपाईंको लागि कलहरू गर्ने, भेटघाट बुक गर्ने, र कार्यहरू पूरा गर्ने व्यक्तिगत सहायक
 
 ---
 
-## 🚀 छिटो सुरुवात: आफ्नो पहिलो एजेन्ट डिप्लोय गर्नुहोस्
+## 🚀 छिटो सुरु: तपाईंको पहिलो एजेन्ट तैनाथ गर्नुहोस्
 
-### विकल्प 1: Foundry Agents टेम्प्लेट (सिफारिस गरिएको)
+### विकल्प १: Foundry एजेन्टहरू टेम्प्लेट (सिफारिस गरिएको)
 
 ```bash
-# AI एजेन्टहरूको टेम्पलेट प्रारम्भ गर्नुहोस्
+# AI एजेन्टहरूको ढाँचा सुरु गर्नुहोस्
 azd init --template get-started-with-ai-agents
 
 # Azure मा तैनाथ गर्नुहोस्
 azd up
 ```
 
-**के डिप्लोय हुन्छ:**
-- ✅ Foundry Agents
-- ✅ Microsoft Foundry Models (gpt-4.1)
+**के तैनाथ हुन्छ:**
+- ✅ Foundry एजेन्टहरू
+- ✅ Microsoft Foundry मोडेलहरू (gpt-4.1)
 - ✅ Azure AI Search (RAG का लागि)
 - ✅ Azure Container Apps (वेब इन्टरफेस)
-- ✅ Application Insights (मोनिटरिङ)
+- ✅ Application Insights (अनुगमन)
 
-**समय:** ~15-20 मिनेट
-**लागत:** ~$100-150/महिना (डेभलपमेन्ट)
+**समय:** ~१५-२० मिनेट
+**लागत:** ~$१००-१५०/महिना (विकास)
 
-### विकल्प 2: Prompty सहित OpenAI Agent
+### विकल्प २: Prompty सहित OpenAI एजेन्ट
 
 ```bash
-# Prompty-आधारित एजेन्ट टेम्पलेट आरम्भ गर्नुहोस्
+# Prompty-आधारित एजेन्ट ढाँचा आरम्भ गर्नुहोस्
 azd init --template agent-openai-python-prompty
 
 # Azure मा तैनाथ गर्नुहोस्
 azd up
 ```
 
-**के डिप्लोय हुन्छ:**
-- ✅ Azure Functions (सर्भरलेस एजेन्ट निष्पादन)
-- ✅ Microsoft Foundry Models
+**के तैनाथ हुन्छ:**
+- ✅ Azure Functions (सर्भरलेस एजेन्ट कार्यान्वयन)
+- ✅ Microsoft Foundry मोडेलहरू
 - ✅ Prompty कन्फिगरेसन फाइलहरू
-- ✅ नमुना एजेन्ट कार्यान्वयन
+- ✅ नमूना एजेन्ट कार्यान्वयन
 
-**समय:** ~10-15 मिनेट
-**लागत:** ~$50-100/महिना (डेभलपमेन्ट)
+**समय:** ~१०-१५ मिनेट
+**लागत:** ~$५०-१००/महिना (विकास)
 
-### विकल्प 3: RAG च्याट एजेन्ट
+### विकल्प ३: RAG च्याट एजेन्ट
 
 ```bash
-# RAG च्याट टेम्पलेट प्रारम्भ गर्नुहोस्
+# RAG च्याट टेम्प्लेट सुरु गर्नुहोस्
 azd init --template azure-search-openai-demo
 
 # Azure मा तैनाथ गर्नुहोस्
 azd up
 ```
 
-**के डिप्लोय हुन्छ:**
-- ✅ Microsoft Foundry Models
-- ✅ Azure AI Search नमुना डाटासँग
-- ✅ दस्तावेज प्रशोधन पाइपलाइन
-- ✅ उद्धरण सहितको च्याट इन्टरफेस
+**के तैनाथ हुन्छ:**
+- ✅ Microsoft Foundry मोडेलहरू
+- ✅ Azure AI Search नमूना डाटासँग
+- ✅ कागजात प्रशोधन पाइपलाइन
+- ✅ उद्धरणसहितको च्याट इन्टरफेस
 
-**समय:** ~15-25 मिनेट
-**लागत:** ~$80-150/महिना (डेभलपमेन्ट)
+**समय:** ~१५-२५ मिनेट
+**लागत:** ~$८०-१५०/महिना (विकास)
 
-### विकल्प 4: AZD AI Agent Init (म्यानिफेस्ट-आधारित)
+### विकल्प ४: AZD AI एजेन्ट सुरु (म्यानिफेस्ट वा टेम्प्लेट-आधारित प्रिभ्यु)
 
-यदि तपाइँसँग एजेन्ट म्यानिफेस्ट फाइल छ भने, `azd ai` कमाण्ड प्रयोग गरी Foundry Agent Service प्रोजेक्ट प्रत्यक्ष रूपमा स्केफोल्ड गर्न सक्नुहुन्छ:
+यदि तपाईंंसँग एजेन्ट म्यानिफेस्ट फाइल छ भने, तपाईंले `azd ai` आदेश प्रयोग गरेर Foundry Agent Service परियोजना प्रत्यक्ष स्क्याफोल्ड गर्न सक्नुहुन्छ। पछिल्ला प्रिभ्यु रिलिजहरूले टेम्प्लेट-आधारित सुरु समर्थन थपेका छन्, त्यसैले तपाइँको इन्स्टल गरिएको विस्तार संस्करण अनुसार प्रम्प्ट फ्लो अलिकति फरक हुन सक्छ।
 
 ```bash
-# AI एजेन्टहरू एक्सटेन्सन इन्स्टल गर्नुहोस्
+# AI एजेन्ट विस्तार स्थापना गर्नुहोस्
 azd extension install azure.ai.agents
 
-# एजेन्ट म्यानिफेस्टबाट आरम्भ गर्नुहोस्
+# ऐच्छिक: स्थापना गरिएको पूर्वावलोकन संस्करण जाँच गर्नुहोस्
+azd extension show azure.ai.agents
+
+# एजेन्ट घोषणापत्रबाट आरम्भ गर्नुहोस्
 azd ai agent init -m agent-manifest.yaml
 
 # Azure मा परिनियोजन गर्नुहोस्
 azd up
 ```
 
-**कहिले `azd ai agent init` vs `azd init --template` प्रयोग गर्ने:**
+**`azd ai agent init` र `azd init --template` कहिले प्रयोग गर्ने:**
 
-| Approach | Best For | How It Works |
-|----------|----------|------|
-| `azd init --template` | Starting from a working sample app | Clones a full template repo with code + infra |
-| `azd ai agent init -m` | Building from your own agent manifest | Scaffolds project structure from your agent definition |
+| तरिका | उत्तम के लागि | कसरी काम गर्छ |
+|--------|---------------|----------------|
+| `azd init --template` | काम गर्ने नमूना अनुप्रयोगबाट सुरु गर्ने | कोड + इन्फ्रास्ट्रक्चर सहित पूर्ण टेम्प्लेट रिपो क्लोन गर्दछ |
+| `azd ai agent init -m` | तपाइँको आफ्नै एजेन्ट म्यानिफेस्टबाट तयार गर्ने | तपाइँको एजेन्ट परिभाषाबाट परियोजना संरचना स्क्याफोल्ड गर्दछ |
 
-> **सुझाव:** सिक्ने क्रममा `azd init --template` प्रयोग गर्नुहोस् (माथिका विकल्प 1-3)। आफ्नै म्यानिफेस्टहरूसँग उत्पादन एजेन्टहरू निर्माण गर्दा `azd ai agent init` प्रयोग गर्नुहोस्। पूर्ण सन्दर्भका लागि हेर्नुहोस् [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions)।
+> **टिप:** सिकाइको लागि `azd init --template` प्रयोग गर्नुहोस् (माथि विकल्प १-३)। उत्पादन एजेन्टहरू आफ्नै म्यानिफेस्टहरूसँग निर्माण गर्दा `azd ai agent init` प्रयोग गर्नुहोस्। पूर्ण सन्दर्भको लागि [AZD AI CLI आदेशहरू](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) हेर्नुहोस्।
 
 ---
 
-## 🏗️ एजेन्ट आर्किटेक्चर ढाँचाहरू
+## 🏗️ एजेन्ट संरचना ढाँचाहरू
 
-### ढाँचा 1: उपकरणहरूसँग एकल एजेन्ट
+### ढाँचा १: एकल एजेन्ट उपकरणहरूसँग
 
-सबभन्दा सरल एजेन्ट ढाँचा - एउटै एजेन्ट जसले धेरै उपकरणहरू प्रयोग गर्न सक्छ।
+सर्वभन्दा सरल एजेन्ट ढाँचा - एउटा एजेन्ट जुन धेरै उपकरणहरू प्रयोग गर्न सक्छ।
 
 ```mermaid
 graph TD
-    UI[प्रयोगकर्ता अन्तरफलक] --> Agent[एआई एजेन्ट<br/>gpt-4.1]
+    UI[प्रयोगकर्ता इन्टरफेस] --> Agent[एआई एजेन्ट<br/>gpt-4.1]
     Agent --> Search[खोज उपकरण]
     Agent --> Database[डेटाबेस उपकरण]
     Agent --> API[एपीआई उपकरण]
 ```
-**उपयुक्त लागि:**
-- ग्राहक सहायता बोटहरू
+**उत्तम लागि:**
+- ग्राहक समर्थन बोटहरू
 - अनुसन्धान सहायकहरू
 - डाटा विश्लेषण एजेन्टहरू
 
-**AZD Template:** `azure-search-openai-demo`
+**AZD टेम्प्लेट:** `azure-search-openai-demo`
 
-### ढाँचा 2: RAG एजेन्ट (Retrieval-Augmented Generation)
+### ढाँचा २: RAG एजेन्ट (पुन: प्राप्ति-वृद्धि जनरेशन)
 
-प्रतिक्रिया जनाउनुअघि सम्बन्धित दस्तावेजहरू खोज्ने एजेन्ट।
+एक एजेन्ट जसले प्रतिक्रिया दिने अघि सम्बन्धित कागजातहरू प्राप्त गर्छ।
 
 ```mermaid
 graph TD
-    Query[प्रयोगकर्ताको प्रश्न] --> RAG[RAG एजेन्ट]
+    Query[प्रयोगकर्ता सोधपुछ] --> RAG[RAG एजेन्ट]
     RAG --> Vector[भेक्टर खोज]
-    RAG --> LLM[एलएलएम<br/>gpt-4.1]
-    Vector -- दस्तावेजहरू --> LLM
-    LLM --> Response[सन्दर्भहरू सहित उत्तर]
+    RAG --> LLM[LLM<br/>gpt-4.1]
+    Vector -- कागजातहरू --> LLM
+    LLM --> Response[उद्धरणसहितको प्रतिक्रिया]
 ```
-**उपयुक्त लागि:**
+**उत्तम लागि:**
 - उद्यम ज्ञान आधारहरू
-- दस्तावेज Q&A प्रणालीहरू
+- कागजात प्रश्नोत्तर प्रणालीहरू
 - अनुपालन र कानुनी अनुसन्धान
 
-**AZD Template:** `azure-search-openai-demo`
+**AZD टेम्प्लेट:** `azure-search-openai-demo`
 
-### ढाँचा 3: मल्टी-एजेन्ट सिस्टम
+### ढाँचा ३: बहु-एजेन्ट प्रणाली
 
-जटिल कार्यहरूमा सँगै काम गर्ने धेरै विशेषज्ञ एजेन्टहरू।
+एकैसाथ धेरै विशेषज्ञ एजेन्टहरू जटिल कार्यहरूमा काम गर्छन्।
 
 ```mermaid
 graph TD
-    Orchestrator[ओर्केस्ट्रेटर एजेन्ट] --> Research[अनुसन्धान एजेन्ट<br/>gpt-4.1]
-    Orchestrator --> Writer[लेखक एजेन्ट<br/>gpt-4.1-mini]
+    Orchestrator[संगठक एजेन्ट] --> Research[अनुसन्धान एजेन्ट<br/>gpt-4.1]
+    Orchestrator --> Writer[लेखक एजेन्ट<br/>gpt-4.1-छोटो]
     Orchestrator --> Reviewer[समीक्षक एजेन्ट<br/>gpt-4.1]
 ```
-**उपयुक्त लागि:**
-- जटिल सामग्री सिर्जना
-- बहु-चरण वर्कफ्लोहरू
+**उत्तम लागि:**
+- जटिल सामग्री निर्माण
+- बहु-चरण कार्यप्रवाहहरू
 - विभिन्न विशेषज्ञता आवश्यक पर्ने कार्यहरू
 
-**थप जान्नुहोस्:** [Multi-Agent Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md)
+**थप जान्न:** [बहु-एजेन्ट समन्वय ढाँचाहरू](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
-## ⚙️ एजेन्ट उपकरणहरू कन्फिगर गर्दै
+## ⚙️ एजेन्ट उपकरण कन्फिगरेसन
 
-एजेन्टहरू उपकरणहरू प्रयोग गर्दा शक्तिशाली बन्छन्। यहाँ सामान्य उपकरणहरू कसरी कन्फिगर गर्ने देखाइएको छ:
+एजेन्टहरू शक्तिशाली हुन्छन् जब तिनीहरूले उपकरणहरू प्रयोग गर्न सक्छन्। सामान्य उपकरणहरू कन्फिगर गर्ने तरिका:
 
-### Foundry Agents मा टुल कन्फिगरेसन
+### Foundry एजेन्टहरूमा उपकरण कन्फिगरेसन
 
 ```python
 # agent_config.py
 from azure.ai.projects import AIProjectClient
 from azure.ai.projects.models import FunctionTool, CodeInterpreterTool
 
-# अनुकूलित उपकरणहरू परिभाषित गर्नुहोस्
+# अनुकुल उपकरणहरू परिभाषित गर्नुहोस्
 search_tool = FunctionTool(
     name="search_knowledge_base",
     description="Search the company knowledge base for relevant documents",
@@ -240,13 +245,13 @@ agent = project_client.agents.create_agent(
 ### वातावरण कन्फिगरेसन
 
 ```bash
-# एजेन्ट-विशिष्ट वातावरण चरहरू कन्फिगर गर्नुहोस्
+# एजेन्ट-विशिष्ट वातावरण चरहरू सेटअप गर्नुहोस्
 azd env set AZURE_OPENAI_MODEL "gpt-4.1"
 azd env set AGENT_INSTRUCTIONS "You are a helpful assistant..."
 azd env set ENABLE_CODE_INTERPRETER "true"
 azd env set ENABLE_FILE_SEARCH "true"
 
-# अद्यावधिक विन्याससहित तैनात गर्नुहोस्
+# अद्यावधिक कन्फिगरेसनसहित डिप्लोय गर्नुहोस्
 azd deploy
 ```
 
@@ -256,30 +261,30 @@ azd deploy
 
 ### Application Insights एकीकरण
 
-सबै AZD एजेन्ट टेम्प्लेटहरूमा मोनिटरिङका लागि Application Insights समावेश हुन्छ:
+सबै AZD एजेन्ट टेम्प्लेटहरूमा अनुगमनका लागि Application Insights समावेश छ:
 
 ```bash
 # अनुगमन ड्यासबोर्ड खोल्नुहोस्
 azd monitor --overview
 
-# सजीव लगहरू हेर्नुहोस्
+# प्रत्यक्ष लगहरू हेर्नुहोस्
 azd monitor --logs
 
-# सजीव मेट्रिक्स हेर्नुहोस्
+# प्रत्यक्ष मेट्रिक्स हेर्नुहोस्
 azd monitor --live
 ```
 
-### ट्र्याक गर्ने मुख्य मेट्रिक्स
+### अनुगमन गर्नुपर्ने प्रमुख मेट्रिक्सहरू
 
-| Metric | Description | Target |
-|--------|-------------|--------|
-| Response Latency | Time to generate response | < 5 seconds |
-| Token Usage | Tokens per request | Monitor for cost |
-| Tool Call Success Rate | % of successful tool executions | > 95% |
-| Error Rate | Failed agent requests | < 1% |
-| User Satisfaction | Feedback scores | > 4.0/5.0 |
+| मेट्रिक | विवरण | लक्ष्य |
+|---------|--------|--------|
+| प्रतिक्रिया ढिलाइ | प्रतिक्रिया बनाउन लागेको समय | < ५ सेकेन्ड |
+| टोकन प्रयोग | प्रति अनुरोध टोकन | लागत अनुगमन गर्नुहोस् |
+| उपकरण कल सफल률 | सफल उपकरण कार्यान्वयन प्रतिशत | > ९५% |
+| त्रुटि दर | असफल एजेन्ट अनुरोधहरू | < १% |
+| प्रयोगकर्ता सन्तुष्टि | प्रतिक्रिया स्कोरहरू | > ४.०/५.० |
 
-### एजेन्टहरूको लागि अनुकूल लगिङ
+### एजेन्टहरूको लागि कस्टम लगिङ
 
 ```python
 import os
@@ -303,29 +308,29 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
         })
 ```
 
-> **नोट:** आवश्यक प्याकेजहरू स्थापना गर्नुहोस्: `pip install azure-monitor-opentelemetry opentelemetry`
+> **नोट:** आवश्यक प्याकेजहरू इन्स्टल गर्नुहोस्: `pip install azure-monitor-opentelemetry opentelemetry`
 
 ---
 
 ## 💰 लागत विचारहरू
 
-### ढाँचाअनुसार अनुमानित मासिक लागत
+### प्रत्येक ढाँचाका मासिक अनुमानित लागतहरू
 
-| Pattern | Dev Environment | Production |
-|---------|-----------------|------------|
-| Single Agent | $50-100 | $200-500 |
-| RAG Agent | $80-150 | $300-800 |
-| Multi-Agent (2-3 agents) | $150-300 | $500-1,500 |
-| Enterprise Multi-Agent | $300-500 | $1,500-5,000+ |
+| ढाँचा | विकास वातावरण | उत्पादन |
+|--------|----------------|----------|
+| एकल एजेन्ट | $५०-१०० | $२००-५०० |
+| RAG एजेन्ट | $८०-१५० | $३००-८०० |
+| बहु-एजेन्ट (२-३ एजेन्टहरू) | $१५०-३०० | $५००-१,५०० |
+| उद्यम बहु-एजेन्ट | $३००-५०० | $१,५००-५,०००+ |
 
 ### लागत अनुकूलन सुझावहरू
 
-1. **साधारण कार्यहरूको लागि gpt-4.1-mini प्रयोग गर्नुहोस्**
+1. **साधारण कार्यका लागि gpt-4.1-mini प्रयोग गर्नुहोस्**
    ```bash
    azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
 
-2. **दोहरिने प्रश्नहरूको लागि क्याचिङ लागू गर्नुहोस्**
+2. **दोहरिने प्रश्नहरूको लागि क्यासिङ लागू गर्नुहोस्**
    ```python
    from functools import lru_cache
    
@@ -334,36 +339,36 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
        return agent.run(query_hash)
    ```
 
-3. **प्रति रन टोकन सीमाहरू सेट गर्नुहोस्**
+3. **प्रत्येक रनको लागि टोकन सीमा सेट गर्नुहोस्**
    ```python
    # एजेन्ट चलाउँदा max_completion_tokens सेट गर्नुहोस्, सिर्जना गर्दा होइन
    run = project_client.agents.create_run(
        thread_id=thread.id,
        agent_id=agent.id,
-       max_completion_tokens=1000  # जवाफको लम्बाइ सीमित गर्नुहोस्
+       max_completion_tokens=1000  # प्रतिक्रिया लामो सीमित गर्नुहोस्
    )
    ```
 
-4. **प्रयोगमा नरहेमा स्केल टु जीरो प्रयोग गर्नुहोस्**
+4. **नचाहिँदा स्केल टु जीरो गर्नुहोस्**
    ```bash
-   # कन्टेनर अनुप्रयोगहरू स्वचालित रूपमा शून्यसम्म स्केल गर्छन्
+   # कन्टेनर एप्लिकेसनहरू स्वचालित रूपमा शून्यमा विस्तार हुन्छन्
    azd env set MIN_REPLICAS "0"
    ```
 
 ---
 
-## 🔧 एजेन्टहरू ट्रबलशूट गर्दै
+## 🔧 एजेन्ट समस्याहरू समाधान
 
 ### सामान्य समस्याहरू र समाधानहरू
 
 <details>
-<summary><strong>❌ उपकरण कलहरूमा एजेन्टले उत्तर दिँदैन्</strong></summary>
+<summary><strong>❌ एजेन्टले उपकरण कलमा प्रतिक्रिया दिँदैन</strong></summary>
 
 ```bash
-# उपकरणहरू ठीकसँग दर्ता भएका छन् कि छैनन् जाँच गर्नुहोस्
+# उपकरणहरू सही तरिकाले दर्ता गरिएको छ कि छैन जाँच गर्नुहोस्
 azd show
 
-# OpenAI परिनियोजन जाँच गर्नुहोस्
+# OpenAI डिप्लोयमेन्ट पुष्टि गर्नुहोस्
 az cognitiveservices account deployment list \
   --name $AZURE_OPENAI_NAME \
   --resource-group $RG_NAME
@@ -373,34 +378,34 @@ azd monitor --logs
 ```
 
 **सामान्य कारणहरू:**
-- उपकरण फंक्शन सिग्नेचर मेल नहुने
-- आवश्यक अनुमति हराइरहेको
-- API endpoint पहुँचयोग्य छैन
+- उपकरण फंक्शन हस्ताक्षर मेल नखाने
+- आवश्यक अनुमति हराएको
+- API अन्तर्विन्दु पहुँचयोग्य छैन
 </details>
 
 <details>
-<summary><strong>❌ एजेन्ट प्रतिक्रियाहरूमा उच्च लेटेन्सी</strong></summary>
+<summary><strong>❌ एजेन्ट प्रतिक्रियामा उच्च विलम्बता</strong></summary>
 
 ```bash
-# अवरोधहरूको लागि Application Insights जाँच गर्नुहोस्
+# बोतल सरकारहरूको लागि एप्लिकेशन इनसाइट्स जाँच गर्नुहोस्
 azd monitor --live
 
-# छिटो मोडेल प्रयोग गर्ने बारे विचार गर्नुहोस्
+# छिटो मोडेल प्रयोग गर्ने विचार गर्नुहोस्
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd deploy
 ```
 
 **अनुकूलन सुझावहरू:**
-- स्ट्रिमिङ प्रतिक्रियाहरू प्रयोग गर्नुहोस्
-- प्रतिक्रिया क्याचिङ लागू गर्नुहोस्
+- स्ट्रिमिङ प्रतिक्रिया प्रयोग गर्नुहोस्
+- प्रतिक्रिया क्यासिङ लागू गर्नुहोस्
 - सन्दर्भ विन्डो साइज घटाउनुहोस्
 </details>
 
 <details>
-<summary><strong>❌ एजेन्टले गलत वा हल्युसिनेटेड जानकारी फर्काउँदैछ</strong></summary>
+<summary><strong>❌ एजेन्टले गलत वा कल्पित जानकारी फर्काउने</strong></summary>
 
 ```python
-# राम्रो सिस्टम प्रम्प्टहरू प्रयोग गरेर सुधार गर्नुहोस्
+# राम्रो प्रणाली प्रॉम्प्टसंग सुधार गर्नुहोस्
 instructions = """
 You are a helpful assistant. IMPORTANT:
 - Only answer based on provided context
@@ -409,17 +414,17 @@ You are a helpful assistant. IMPORTANT:
 - Never make up information
 """
 
-# ग्राउन्डिङका लागि पुनःप्राप्ति थप्नुहोस्
+# ग्राउन्डिङको लागि फिर्ता लिने थप्नुहोस्
 agent = project_client.agents.create_agent(
     model="gpt-4.1",
     instructions=instructions,
-    tools=[FileSearchTool()]  # प्रतिक्रियाहरूलाई दस्तावेजहरूमा आधारित गर्नुहोस्
+    tools=[FileSearchTool()]  # उत्तरहरूलाई कागजातहरूमा ग्राउन्ड गर्नुहोस्
 )
 ```
 </details>
 
 <details>
-<summary><strong>❌ टोकन सीमा नाघिएको त्रुटिहरू</strong></summary>
+<summary><strong>❌ टोकन सीमा उल्लंघन त्रुटिहरू</strong></summary>
 
 ```python
 # सन्दर्भ विन्डो व्यवस्थापन कार्यान्वयन गर्नुहोस्
@@ -443,57 +448,58 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
 
 ---
 
-## 🎓 प्रायोगिक अभ्यासहरू
+## 🎓 व्यावहारिक अभ्यासहरू
 
-### अभ्यास 1: आधारभूत एजेन्ट डिप्लोय गर्नुहोस् (20 मिनेट)
+### अभ्यास १: आधारभूत एजेन्ट तैनाथ गर्नुहोस् (२० मिनेट)
 
-**उद्देश्य:** AZD प्रयोग गरी आफ्नो पहिलो AI एजेन्ट डिप्लोय गर्नुहोस्
+**लक्ष्य:** AZD प्रयोग गरेर तपाईंको पहिलो AI एजेन्ट तैनाथ गर्नुहोस्
 
 ```bash
-# चरण 1: टेम्पलेट आरम्भ गर्नुहोस्
+# चरण १: टेम्प्लेट आरम्भ गर्नुहोस्
 azd init --template get-started-with-ai-agents
 
-# चरण 2: Azure मा लगइन गर्नुहोस्
+# चरण २: Azure मा लगइन गर्नुहोस्
 azd auth login
+# यदि तपाईंले भिन्न टेनेन्टहरूमा काम गर्नु हुन्छ भने, --tenant-id <tenant-id> थप्नुहोस्
 
-# चरण 3: परिनियोजन गर्नुहोस्
+# चरण ३: तैनाथ गर्नुहोस्
 azd up
 
-# चरण 4: एजेन्ट परीक्षण गर्नुहोस्
-# परिनियोजन पछि अपेक्षित आउटपुट:
-#   परिनियोजन पूरा भयो!
-#   एन्डपोइन्ट: https://<app-name>.<region>.azurecontainerapps.io
-# आउटपुटमा देखाइएको URL खोल्नुहोस् र प्रश्न सोधेर प्रयास गर्नुहोस्
+# चरण ४: एजेन्ट परीक्षण गर्नुहोस्
+# तैनाथ पछि अपेक्षित आउटपुट:
+#   तैनाथी पूरा भयो!
+#   अन्तबिन्दु: https://<app-name>.<region>.azurecontainerapps.io
+# आउटपुटमा देखाइएको URL खोल्नुहोस् र प्रश्न सोध्ने प्रयास गर्नुहोस्
 
-# चरण 5: निगरानी हेर्नुहोस्
+# चरण ५: निगरानी हेर्नुहोस्
 azd monitor --overview
 
-# चरण 6: सफा गर्नुहोस्
+# चरण ६: सफाई गर्नुहोस्
 azd down --force --purge
 ```
 
-**सफलता मापदण्ड:**
+**सफलता मापदण्डहरू:**
 - [ ] एजेन्टले प्रश्नहरूको जवाफ दिन्छ
-- [ ] `azd monitor` मार्फत मोनिटरिङ ड्यासबोर्ड पहुँच गर्न सकिन्छ
-- [ ] स्रोतहरू सफलतापूर्वक क्लिनअप गरियो
+- [ ] `azd monitor` मार्फत अनुगमन ड्यासबोर्ड पहुँच गर्न सक्छ
+- [ ] स्रोतहरू सफाइ सफलतापूर्वक गरियो
 
-### अभ्यास 2: कस्टम टुल थप्नुहोस् (30 मिनेट)
+### अभ्यास २: कस्टम उपकरण थप्नुहोस् (३० मिनेट)
 
-**उद्देश्य:** एजेन्टलाई कस्टम टुलले विस्तार गर्नुहोस्
+**लक्ष्य:** एजेन्टलाई कस्टम उपकरणले विस्तार गर्नुहोस्
 
-1. एजेन्ट टेम्प्लेट डिप्लोय गर्नुहोस्:
+1. एजेन्ट टेम्प्लेट तैनाथ गर्नुहोस्:
    ```bash
    azd init --template get-started-with-ai-agents
    azd up
    ```
-2. आफ्नो एजेन्ट कोडमा नयाँ टुल फंक्शन सिर्जना गर्नुहोस्:
+2. आफ्नो एजेन्ट कोडमा नयाँ उपकरण फंक्शन सिर्जना गर्नुहोस्:
    ```python
    def get_weather(location: str) -> str:
        """Get current weather for a location."""
-       # मौसम सेवामा गरिएको API कल
+       # मौसम सेवामा API कल
        return f"Weather in {location}: Sunny, 72°F"
    ```
-3. टुललाई एजेन्टसँग रजिस्टर गर्नुहोस्:
+3. उपकरणलाई एजेन्टसँग दर्ता गर्नुहोस्:
    ```python
    from azure.ai.projects.models import FunctionTool
 
@@ -515,90 +521,90 @@ azd down --force --purge
        tools=[weather_tool]
    )
    ```
-4. पुन:डिप्लोय र परीक्षण गर्नुहोस्:
+4. पुनः तैनाथ गरी परीक्षण गर्नुहोस्:
    ```bash
    azd deploy
    # सोध्नुहोस्: "सिएटलमा मौसम कस्तो छ?"
-   # अपेक्षित: एजेन्टले get_weather("Seattle") आह्वान गर्छ र मौसमको जानकारी फर्काउँछ
+   # अपेक्षित: एजेन्टले get_weather("Seattle") कल गर्दछ र मौसम सम्बन्धी जानकारी फर्काउँछ
    ```
 
-**सफलता मापदण्ड:**
-- [ ] एजेन्टले मौसम सम्बन्धित प्रश्नहरू चिन्हित गर्छ
-- [ ] टुल ठीकसँग कल गरिएको छ
-- [ ] प्रतिक्रिया मौसम सम्बन्धी जानकारी समावेश गर्दछ
+**सफलता मापदण्डहरू:**
+- [ ] एजेन्टले मौसमसम्बन्धी प्रश्नहरू पहिचान गर्छ
+- [ ] उपकरण सही रूपमा कल हुन्छ
+- [ ] प्रतिक्रियामा मौसम जानकारी समावेश हुन्छ
 
-### अभ्यास 3: RAG एजेन्ट बनाउनुहोस् (45 मिनेट)
+### अभ्यास ३: RAG एजेन्ट निर्माण गर्नुहोस् (४५ मिनेट)
 
-**उद्देश्य:** तपाइँका दस्तावेजहरूबाट प्रश्नहरूको जवाफ दिने एजेन्ट सिर्जना गर्नुहोस्
+**लक्ष्य:** कागजातहरूबाट प्रश्नहरूको उत्तर दिने एजेन्ट बनाउनुहोस्
 
 ```bash
-# चरण 1: RAG टेम्प्लेट परिनियोजन गर्नुहोस्
+# चरण 1: RAG टेम्प्लेट तैनाथ गर्नुहोस्
 azd init --template azure-search-openai-demo
 azd up
 
 # चरण 2: आफ्नो कागजातहरू अपलोड गर्नुहोस्
-# PDF/TXT फाइलहरू data/ निर्देशिकामा राख्नुहोस्, त्यसपछि चलाउनुहोस्:
+# डेटा/ निर्देशिकामा PDF/TXT फाइलहरू राख्नुहोस्, त्यसपछि चलाउनुहोस्:
 python scripts/prepdocs.py
 
 # चरण 3: डोमेन-विशिष्ट प्रश्नहरूसँग परीक्षण गर्नुहोस्
-# azd up आउटपुटबाट वेब एपको URL खोल्नुहोस्
-# आफ्ना अपलोड गरिएका कागजातहरूबारे प्रश्नहरू सोध्नुहोस्
+# azd up आउटपुटबाट वेब एप URL खोल्नुहोस्
+# अपलोड गरिएका कागजातहरूबारे प्रश्नहरू सोध्नुहोस्
 # प्रतिक्रियाहरूले [doc.pdf] जस्ता उद्धरण सन्दर्भहरू समावेश गर्नुपर्छ
 ```
 
-**सफलता मापदण्ड:**
-- [ ] एजेन्ट अपलोड गरिएका दस्तावेजहरूबाट जवाफ दिन्छ
-- [ ] प्रतिक्रियाहरूमा उद्धरणहरू समावेश छन्
-- [ ] सीमा बाहिरका प्रश्नहरूमा हल्युसिनेशन छैन
+**सफलता मापदण्डहरू:**
+- [ ] एजेन्ट अपलोड गरिएका कागजातहरूबाट जवाफ दिन्छ
+- [ ] प्रतिक्रियामा उद्धरणहरू समावेश छन्
+- [ ] सीमा बाहिरका प्रश्नमा कल्पनाशीलता हुँदैन
 
 ---
 
-## 📚 थप कदमहरू
+## 📚 अर्को चरणहरू
 
-अब जब तपाईंले AI एजेन्टहरू बुझ्नुभयो, यी उन्नत विषयहरू अन्वेषण गर्नुहोस्:
+अब तपाईंले AI एजेन्टहरू बुझ्नुभएको छ, यी उन्नत विषयहरू अन्वेषण गर्नुहोस्:
 
-| Topic | Description | Link |
-|-------|-------------|------|
-| **Multi-Agent Systems** | Build systems with multiple collaborating agents | [Retail Multi-Agent Example](../../examples/retail-scenario.md) |
-| **Coordination Patterns** | Learn orchestration and communication patterns | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **Production Deployment** | Enterprise-ready agent deployment | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
-| **Agent Evaluation** | Test and evaluate agent performance | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **AI Workshop Lab** | Hands-on: Make your AI solution AZD-ready | [AI Workshop Lab](ai-workshop-lab.md) |
+| विषय | विवरण | लिंक |
+|-------|----------|---------|
+| **बहु-एजेन्ट प्रणालीहरू** | धेरै सहकार्य गर्ने एजेन्टहरूसँग प्रणाली निर्माण गर्नुहोस् | [Retail Multi-Agent Example](../../examples/retail-scenario.md) |
+| **समन्वय ढाँचाहरू** | संचालन र सञ्चार ढाँचाहरू सिक्नुहोस् | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **उत्पादन तैनाथीकरण** | उद्यम-तयार एजेन्ट तैनाथ गर्नुहोस् | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
+| **एजेन्ट मूल्यांकन** | एजेन्ट प्रदर्शन परीक्षण र मूल्याङ्कन गर्नुहोस् | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **AI कार्यशाला प्रयोगशाला** | व्यावहारिक: तपाईंको AI समाधान AZD-तयार बनाउनुहोस् | [AI Workshop Lab](ai-workshop-lab.md) |
 
 ---
 
 ## 📖 अतिरिक्त स्रोतहरू
 
-### आधिकारिक डकुमेन्टेशन
+### आधिकारिक डकुमेन्टेसन
 - [Azure AI Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
 - [Azure AI Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
 - [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
 
-### एजेन्टहरूका लागि AZD टेम्प्लेटहरू
-- [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents)
+### AZD एजेन्ट टेम्प्लेटहरू
+- [AI एजेन्टहरू सँग सुरु गर्नुहोस्](https://github.com/Azure-Samples/get-started-with-ai-agents)
 - [Agent OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
 - [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
 ### समुदाय स्रोतहरू
-- [Awesome AZD - Agent Templates](https://azure.github.io/awesome-azd/?tags=ai-agents)
+- [Awesome AZD - एजेन्ट टेम्प्लेटहरू](https://azure.github.io/awesome-azd/?tags=ai-agents)
 - [Azure AI Discord](https://discord.gg/microsoft-azure)
 - [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
-### तपाइँको सम्पादनकर्ताका लागि एजेन्ट स्किलहरू
-- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - GitHub Copilot, Cursor, वा कुनै पनि समर्थित एजेन्टमा Azure विकासका लागि पुन:प्रयोगयोग्य AI एजेन्ट कौशलहरू इन्स्टल गर्नुहोस्। यसमा [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [deployment](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), र [diagnostics](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) का लागि कौशलहरू समावेश छन्:
+### तपाईंको सम्पादकका लागि एजेन्ट सीपहरू
+- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Azure विकासका लागि GitHub Copilot, Cursor वा कुनै समर्थित एजेन्टमा पुन: प्रयोगयोग्य AI एजेन्ट सीपहरू इन्स्टल गर्नुहोस्। यसमा [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [तैनाथीकरण](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy), र [निदान](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) का सीपहरू समावेश छन्:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**Navigation**
-- **Previous Lesson**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **Next Lesson**: [AI Model Deployment](ai-model-deployment.md)
+**नेभिगेसन**
+- **अघिल्लो पाठ:** [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **अर्को पाठ:** [AI Model Deployment](ai-model-deployment.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-अस्वीकरण:
-यो कागजात AI अनुवाद सेवा Co-op Translator (https://github.com/Azure/co-op-translator) प्रयोग गरी अनुवाद गरिएको हो। हामी शुद्धताका लागि प्रयासरत हुनु भए तापनि, कृपया ध्यान दिनुहोस् कि स्वचालित अनुवादमा त्रुटि वा असामञ्जस्यता हुन सक्नेछ। मूल कागजातलाई यसको मूल भाषामा प्राधिकृत स्रोतको रूपमा मानिनु पर्छ। महत्वपूर्ण जानकारीका लागि व्यावसायिक मानव अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न हुने कुनै पनि गलतफहमी वा गलत व्याख्याका लागि हामी जिम्मेवार छैनौं।
+**अस्वीकरण**:  
+यस दस्तावेजलाई AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) को प्रयोग गरी अनुवाद गरिएको हो। हामी यथार्थताका लागि प्रयासरत छौँ, तर कृपया ध्यान दिनुहोस् कि स्वचालित अनुवादहरूमा त्रुटिहरू वा गलतफहमिहरू हुन सक्छन्। मूल भाषा मा रहेको दस्तावेजलाई अधिकृत स्रोतमात्र मान्नु पर्छ। महत्वपूर्ण जानकारीका लागि व्यावसायिक मानव अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि भ्रम वा गलत व्याख्यासँग सम्बन्धित जिम्मेवारी हामीमा पर्ने छैन।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

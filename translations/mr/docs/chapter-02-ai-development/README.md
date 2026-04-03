@@ -1,53 +1,55 @@
 # अध्याय 2: AI-प्रथम विकास
 
-**📚 कोर्स**: [AZD नवशिक्यांसाठी](../../README.md) | **⏱️ कालावधी**: 1-2 तास | **⭐ कठीणपणा**: मध्यम
+**📚 कोर्स**: [AZD सुरुवातीसाठी](../../README.md) | **⏱️ कालावधी**: 1-2 तास | **⭐ कठीणपणा**: मध्यम
 
 ---
 
 ## आढावा
 
-हा अध्याय Azure Developer CLI आणि Microsoft Foundry सेवा वापरून AI-संचालित अनुप्रयोग तैनात करण्यावर लक्ष केंद्रित करतो. सोप्या AI चॅट अॅपपासून साधने असलेले बुद्धिमान एजंट्स पर्यंत.
+हा अध्याय Azure Developer CLI आणि Microsoft Foundry सेवा वापरून AI-शक्तीप्राप्त अनुप्रयोग तैनात करण्यावर लक्ष केंद्रित करतो. सोप्या AI चॅट ऍप्स पासून साधने असलेल्या बुद्धिमान एजंटपर्यंत.
 
-## शिकण्याच्या उद्दिष्टे
+> **पडताळणी नोंद (2026-03-25):** The command flow and extension guidance in this chapter were reviewed against `azd` `1.23.12` and the current preview AI agent extension release `azure.ai.agents` `0.1.18-preview`. If you are on an older AZD build, update first and then continue with the exercises.
 
-या अध्यायाला पूर्ण केल्यावर, आपण:
-- पूर्वनिर्मित AZD टेम्पलेट्स वापरून AI अनुप्रयोग तैनात कराल
-- AZD सह Microsoft Foundry चे एकत्रीकरण समजून घेणार
-- साधने वापरून AI एजंट्स कॉन्फिगर आणि सानुकूलित करणार
-- RAG (रिट्रीव्हल-ऑगमेंटेड जनरेशन) अनुप्रयोग तैनात कराल
+## शिकण्याची उद्दिष्टे
+
+By completing this chapter, you will:
+- पूर्व-निर्मित AZD टेम्पलेट्स वापरून AI अनुप्रयोग तैनात करा
+- Microsoft Foundry चे AZD सोबत समाकलन समजून घ्या
+- साधने वापरून AI एजंट्स संरचीत आणि सानुकूलित करा
+- RAG (Retrieval-Augmented Generation) अनुप्रयोग तैनात करा
 
 ---
 
 ## 📚 धडे
 
-| # | धडा | वर्णन | वेळ |
+| # | पाठ | वर्णन | वेळ |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry समाकलन](microsoft-foundry-integration.md) | AZD ला Foundry सेवांशी कनेक्ट करा | 30 मिनिटे |
-| 2 | [AI एजंट मार्गदर्शक](agents.md) | साधने वापरून बुद्धिमान एजंट्स तैनात करणे | 45 मिनिटे |
-| 3 | [AI मॉडेल तैनाती](ai-model-deployment.md) | AI मॉडेल तैनात आणि कॉन्फिगर करणे | 30 मिनिटे |
-| 4 | [AI वर्कशॉप लॅब](ai-workshop-lab.md) | हाताने प्रॅक्टिकल: आपले AI समाधान AZD-योग्य करा | 60 मिनिटे |
+| 1 | [Microsoft Foundry समाकलन](microsoft-foundry-integration.md) | AZD ला Foundry सेवांशी जोडा | 30 मिनिटे |
+| 2 | [AI Agents Guide](agents.md) | साधनांसह बुद्धिमान एजंट तैनात करा | 45 मिनिटे |
+| 3 | [AI मॉडेल तैनाती](ai-model-deployment.md) | AI मॉडेल तैनात आणि संरचीत करा | 30 मिनिटे |
+| 4 | [AI कार्यशाळा लॅब](ai-workshop-lab.md) | हाताने: आपले AI सोल्यूशन AZD-योग्य बनवा | 60 मिनिटे |
 
 ---
 
-## 🚀 जलद प्रारंभ
+## 🚀 त्वरित प्रारंभ
 
 ```bash
 # पर्याय 1: RAG चॅट अनुप्रयोग
 azd init --template azure-search-openai-demo
 azd up
 
-# पर्याय 2: एआय एजंट्स
+# पर्याय 2: AI एजंट्स
 azd init --template get-started-with-ai-agents
 azd up
 
-# पर्याय 3: त्वरित चॅट अनुप्रयोग
+# पर्याय 3: झटपट चॅट अॅप
 azd init --template openai-chat-app-quickstart
 azd up
 ```
 
 ---
 
-## 🤖 वैशिष्ट्यीकृत AI टेम्पलेट्स
+## 🤖 प्रमुख AI टेम्पलेट्स
 
 | Template | Description | Services |
 |----------|-------------|----------|
@@ -57,7 +59,7 @@ azd up
 
 ---
 
-## 💰 खर्चाची जाणीव
+## 💰 खर्चाबद्दल माहिती
 
 | Environment | Estimated Monthly Cost |
 |-------------|----------------------|
@@ -65,7 +67,7 @@ azd up
 | Staging | $150-300 |
 | Production | $300-3,500+ |
 
-**टीप:** शुल्क टाळण्यासाठी चाचणी नंतर `azd down` चालवा.
+**टीप:** Run `azd down` after testing to avoid charges.
 
 ---
 
@@ -73,15 +75,15 @@ azd up
 
 | Direction | Chapter |
 |-----------|---------|
-| **मागील** | [अध्याय 1: पायाभूत](../chapter-01-foundation/README.md) |
+| **मागील** | [अध्याय 1: पाया](../chapter-01-foundation/README.md) |
 | **पुढील** | [अध्याय 3: कॉन्फिगरेशन](../chapter-03-configuration/README.md) |
 | **थेट जा** | [अध्याय 8: उत्पादन पॅटर्न](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 संबंधित स्रोत
+## 📖 संबंधित संसाधने
 
-- [AI समस्या निवारण](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
 - [उत्पादन AI सराव](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
@@ -89,5 +91,5 @@ azd up
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **अस्वीकरण**:
-हे दस्तऐवज AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) वापरून अनुवादित केले आहे. जरी आम्ही अचूकतेसाठी प्रयत्न करतो, तरी कृपया लक्षात ठेवा की स्वयंचलित अनुवादांमध्ये चुका किंवा अचूकतेची कमतरता असू शकते. मूळ दस्तऐवज त्याच्या मूळ भाषेत अधिकृत स्रोत मानले जावे. महत्त्वाच्या माहितीसाठी व्यावसायिक मानवी अनुवादाची शिफारस केली जाते. या अनुवादाच्या वापरामुळे उद्भवलेल्या कोणत्याही गैरसमज किंवा चुकीच्या अर्थलाघवाबद्दल आम्ही जबाबदार नाही.
+हा दस्तऐवज AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) वापरून अनुवादित केला गेला आहे. आम्ही अचूकतेसाठी प्रयत्न करतो, परंतु कृपया लक्षात घ्या की स्वयंचलित अनुवादांमध्ये चुका किंवा अचूकतेच्या त्रुटी आढळू शकतात. मूळ भाषेतील दस्तऐवज अधिकृत स्रोत मानले जावे. महत्त्वाची माहिती असल्यास व्यावसायिक मानवी अनुवादाची शिफारस केली जाते. या अनुवादाच्या वापरामुळे उद्भवलेल्या कोणत्याही गैरसमजुतीं किंवा चुकीच्या अर्थ लावण्याबद्दल आम्ही जबाबदार नाही.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

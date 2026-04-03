@@ -1,73 +1,73 @@
-# AZD परिनियोजनहरूको लागि प्रि-फ्लाइट जाँचहरू
+# AZD डिप्लोयमेन्टहरूका लागि प्रि-फ्लाइट जाँचहरू
 
 **अध्याय नेभिगेसन:**
-- **📚 पाठ्यक्रम गृह**: [AZD For Beginners](../../README.md)
-- **📖 वर्तमान अध्याय**: Chapter 6 - Pre-Deployment Validation & Planning
-- **⬅️ अघिल्लो**: [SKU चयन](sku-selection.md)
-- **➡️ अर्को अध्याय**: [अध्याय 7: समस्या समाधान](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 सम्बन्धित**: [अध्याय 4: परिनियोजन मार्गदर्शिका](../chapter-04-infrastructure/deployment-guide.md)
+- **📚 कोर्स होम**: [AZD For Beginners](../../README.md)
+- **📖 हालको अध्याय**: अध्याय ६ - प्रि-डिप्लोयमेन्ट प्रमाणीकरण र योजना
+- **⬅️ पहिलेको**: [SKU चयन](sku-selection.md)
+- **➡️ अर्को अध्याय**: [अध्याय ७: समस्या समाधान](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 सम्बन्धित**: [अध्याय ४: डिप्लोयमेन्ट गाइड](../chapter-04-infrastructure/deployment-guide.md)
 
 ## परिचय
 
-यो विस्तृत मार्गदर्शिकाले प्रि-डिप्लोयमेन्ट (पूर्व-परिनियोजन) मान्यकरण स्क्रिप्टहरू र प्रक्रियाहरू प्रदान गर्छ ताकि Azure Developer CLI मार्फत परिनियोजन सुरु हुनु अघि सफल परिनियोजन सुनिश्चित गर्न सकियोस्। प्रमाणिकरण, स्रोत उपलब्धता, कोटा, सुरक्षा अनुपालन, र प्रदर्शन आवश्यकताहरूका लागि स्वचालित जाँचहरू कार्यान्वयन गर्ने तरिका सिक्नुहोस् जसले परिनियोजन असफलताहरू रोक्न र सफलताको दर अनुकूलित गर्न मद्दत गर्छ।
+यो व्यापक मार्गदर्शकले Azure Developer CLI डिप्लोयमेन्टहरू सुरु हुनु अघि सफलतापूर्वक सुनिश्चित गर्न प्रि-डिप्लोयमेन्ट प्रमाणीकरण स्क्रिप्टहरू र प्रक्रियाहरू प्रदान गर्दछ। प्रमाणीकरण, स्रोत उपलब्धता, कोटा, सुरक्षा अनुपालन, र प्रदर्शन आवश्यकताहरूको लागि स्वचालित जाँचहरू कार्यान्वयन गर्न सिक्नुहोस् जसले डिप्लोयमेन्ट असफलतालाई रोक्ने र डिप्लोयमेन्ट सफलताको दरलाई अनुकूल बनाउनेछ।
 
-## सिकाइ लक्ष्यहरू
+## सिक्ने लक्ष्यहरू
 
-यस मार्गदर्शिका पूरा गरेपछि, तपाईंले:
-- स्वचालित प्रि-डिप्लोयमेन्ट मान्यकरण प्रविधिहरू र स्क्रिप्टहरूमा दक्षता हासिल गर्नुहोस्
-- प्रमाणिकरण, अधिकारहरू, र कोटाहरूका लागि समग्र जाँच रणनीतिहरू बुझ्नुहोस्
-- स्रोत उपलब्धता र क्षमता मान्यकरण प्रक्रियाहरू कार्यान्वयन गर्नुहोस्
-- संगठनात्मक नीतिहरूका लागि सुरक्षा र अनुपालन जाँचहरू कन्फिगर गर्नुहोस्
-- लागत अनुमान र बजेट मान्यकरण वर्कफ्लोहरू डिजाइन गर्नुहोस्
-- CI/CD पाइपलाइनहरूको लागि कस्टम प्रि-फ्लाइट चेक अटोमेसन बनाउनुहोस्
+यस मार्गदर्शक पूरा गरेर, तपाईंले:
+- स्वचालित प्रि-डिप्लोयमेन्ट प्रमाणीकरण प्रविधिहरू र स्क्रिप्टहरूमा निपुणता हासिल गर्नुहुनेछ
+- प्रमाणीकरण, अनुमति, र कोटा हरूका लागि व्यापक जाँच रणनीतिहरू बुझ्नुहुनेछ
+- स्रोत उपलब्धता र क्षमता प्रमाणीकरण प्रक्रियाहरू कार्यान्वयन गर्नुहुनेछ
+- संगठनात्मक नीतिहरूका लागि सुरक्षा र अनुपालन जाँचहरू कन्फिगर गर्नुहुनेछ
+- लागत अनुमान र बजेट प्रमाणीकरण कार्यप्रवाह डिजाइन गर्नुहुनेछ
+- CI/CD पाइपलाइनका लागि अनुकूलित प्रि-फ्लाइट जाँचहरू स्वचालित गर्न सक्नुहुनेछ
 
 ## सिकाइ नतिजाहरू
 
-समाप्ति पछि, तपाईं सक्षम हुनुहुनेछ:
-- समग्र प्रि-फ्लाइट मान्यकरण स्क्रिप्टहरू सिर्जना र सञ्चालन गर्न
-- विभिन्न परिनियोजन परिदृश्यहरूका लागि स्वचालित जाँच वर्कफ्लो डिजाइन गर्न
-- वातावरण-विशेष मान्यकरण प्रक्रियाहरू र नीतिहरू कार्यान्वयन गर्न
-- परिनियोजन तयारीका लागि प्राक्टिभ निगरानी र अलर्टिङ कन्फिगर गर्न
-- प्रि-डिप्लोयमेन्ट समस्याहरू ट्रबलशुट गर्न र सुधारात्मक कदमहरू लागू गर्न
-- प्रि-फ्लाइट चेकहरू DevOps पाइपलाइन र अटोमेसन वर्कफ्लोहरूमा एकीकृत गर्न
+पूरा गरेपछि, तपाईं सक्षम हुनुहुनेछ:
+- व्यापक प्रि-फ्लाइट प्रमाणीकरण स्क्रिप्टहरू सिर्जना र कार्यान्वयन गर्न
+- विभिन्न डिप्लोयमेन्ट परिदृश्यका लागि स्वचालित जाँच कार्यप्रवाहहरू डिजाइन गर्न
+- वातावरण-विशिष्ट प्रमाणीकरण प्रक्रियाहरू र नीतिहरू कार्यान्वयन गर्न
+- डिप्लोयमेन्ट तयारीका लागि सक्रिय अनुगमन र सचेतक कन्फिगर गर्न
+- प्रि-डिप्लोयमेन्ट समस्याहरूको समस्या समाधान गर्न र सुधारात्मक कार्यहरू कार्यान्वयन गर्न
+- DevOps पाइपलाइनहरू र स्वचालन कार्यप्रवाहहरूमा प्रि-फ्लाइट जाँचहरू एकीकृत गर्न
 
 ## सामग्री तालिका
 
-- [Overview](../../../../docs/chapter-06-pre-deployment)
-- [Automated Pre-flight Script](../../../../docs/chapter-06-pre-deployment)
-- [Manual Validation Checklist](../../../../docs/chapter-06-pre-deployment)
-- [Environment Validation](../../../../docs/chapter-06-pre-deployment)
-- [Resource Validation](../../../../docs/chapter-06-pre-deployment)
-- [Security & Compliance Checks](../../../../docs/chapter-06-pre-deployment)
-- [Performance & Capacity Planning](../../../../docs/chapter-06-pre-deployment)
-- [Troubleshooting Common Issues](../../../../docs/chapter-06-pre-deployment)
+- [सर्वेक्षण](#सर्वेक्षण)
+- [स्वचालित प्रि-फ्लाइट स्क्रिप्ट](#स्वचालित-प्रि-फ्लाइट-स्क्रिप्ट)
+- [म्यानुअल प्रमाणीकरण चेकलिष्ट](#codeblock1)
+- [वातावरण प्रमाणीकरण](#✅-ब्याकअप-र-पुनप्राप्ति)
+- [स्रोत प्रमाणीकरण](#उत्पादन-वातावरण-प्रमाणीकरण)
+- [सुरक्षा र अनुपालन जाँचहरू](#security--compliance-checks)
+- [प्रदर्शन र क्षमता योजना](#performance--capacity-planning)
+- [सामान्य समस्याहरूको समस्या समाधान](#troubleshooting-common-issues)
 
 ---
 
-## Overview
+## सर्वेक्षण
 
-प्री-फ्लाइट जाँचहरू परिनियोजन गर्नु अघि गरिने आवश्यक मान्यकरणहरू हुन् जसले सुनिश्चित गर्छन्:
+प्रि-फ्लाइट जाँचहरू आवश्यक प्रमाणीकरणहरू हुन् जुन डिप्लोयमेन्ट गर्नु अघि गरिन्छ ताकि:
 
-- **Resource availability** र लक्षित क्षेत्रहरूमा कोटा
-- **Authentication and permissions** सही तरिकाले कन्फिगर गरिएको छ
-- **Template validity** र प्यारामिटरहरूको शुद्धता
-- **Network connectivity** र निर्भरताहरू
-- **Security compliance** संगठनात्मक नीतिहरूसँग मिल्दोजुल्दो
-- **Cost estimation** बजेट सीमाहरू भित्र
+- **स्रोत उपलब्धता** र लक्ष्य क्षेत्रहरूमा कोटा
+- **प्रमाणीकरण र अनुमति** ठीकसँग कन्फिगर गरिएको छ
+- **टेम्प्लेटको वैधता** र प्यारामिटर शुद्धता
+- **नेटवर्क कनेक्टिविटी** र निर्भरताहरू
+- **सुरक्षा अनुपालन** संगठनात्मक नीतिहरूसँग मेल खान्छ
+- **लागत अनुमान** बजेट सीमाभित्र छ
 
-### प्रि-फ्लाइट जाँचहरू कहिले चलाउने
+### कहिले प्रि-फ्लाइट जाँचहरू सञ्चालन गर्ने
 
-- **नयाँ वातावरणमा पहिलो परिनियोजन अघि**
-- **महत्त्वपूर्ण टेम्पलेट परिवर्तनहरू पछि**
-- **उत्पादन परिनियोजन अघि**
-- **Azure क्षेत्र परिवर्तन गर्दा**
+- **पहिलो डिप्लोयमेन्ट अघि** नयाँ वातावरणमा
+- **महत्वपूर्ण टेम्प्लेट परिवर्तन पछि**
+- **उत्पादन डिप्लोयमेन्ट अघि**
+- **Azure क्षेत्रहरू परिवर्तन गर्दा**
 - **CI/CD पाइपलाइनहरूको भागको रूपमा**
 
 ---
 
-## Automated Pre-flight Script
+## स्वचालित प्रि-फ्लाइट स्क्रिप्ट
 
-### PowerShell Pre-flight Checker
+### PowerShell प्रि-फ्लाइट चेकर
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -148,7 +148,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # PowerShell संस्करण जाँच्नुहोस्
+    # PowerShell संस्करण जाँच गर्नुहोस्
     if ($PSVersionTable.PSVersion.Major -ge 7) {
         Write-Status "PowerShell version" "Success" "Version: $($PSVersionTable.PSVersion)"
     }
@@ -163,7 +163,7 @@ function Test-Authentication {
     Write-Host "`n${Blue}=== Authentication Check ===${Reset}"
     
     try {
-        # AZD प्रमाणीकरण जाँच्नुहोस्
+        # AZD प्रमाणीकरण जाँच गर्नुहोस्
         $azdAuth = azd auth login --check-status --output json 2>$null | ConvertFrom-Json
         if ($azdAuth.status -eq "Logged-in") {
             Write-Status "AZD authentication" "Success" "User: $($azdAuth.principalName)"
@@ -173,11 +173,11 @@ function Test-Authentication {
             return $false
         }
         
-        # Azure CLI प्रमाणीकरण जाँच्नुहोस्
+        # Azure CLI प्रमाणीकरण जाँच गर्नुहोस्
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # सब्सक्रिप्शन पहुँच मान्य गर्नुहोस्
+        # सदस्यता पहुँच मान्यकरण गर्नुहोस्
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -194,7 +194,7 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # हालको प्रयोगकर्ताका भूमिका असाइनमेन्टहरू प्राप्त गर्नुहोस्
+        # वर्तमान प्रयोगकर्ताको भूमिका नियुक्तिहरू प्राप्त गर्नुहोस्
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
@@ -210,14 +210,14 @@ function Test-Permissions {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # रिसोर्स समूह सिर्जना परीक्षण गर्नुहोस् (यदि निर्दिष्ट गरिएको छ)
+        # स्रोत समूह सिर्जना परीक्षण गर्नुहोस् (यदि निर्दिष्ट गरिएको छ भने)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # रिसोर्स समूह सिर्जना गर्ने क्षमता परीक्षण गर्नुहोस्
+                # स्रोत समूह सिर्जना गर्न सक्ने क्षमता परीक्षण गर्नुहोस्
                 try {
                     az group create --name "preflight-test-rg" --location $Location --output none
                     az group delete --name "preflight-test-rg" --yes --output none
@@ -242,10 +242,10 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # कम्प्युट कोटा जाँच्नुहोस्
+        # कन्प्युट कोटा जाँच गर्नुहोस्
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # विशिष्ट कोटा जाँच्नुहोस्
+        # विशेष कोटा जाँच गर्नुहोस्
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
         if ($coreQuota) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
@@ -257,7 +257,7 @@ function Test-QuotasAndLimits {
             }
         }
         
-        # App Service सीमाहरू जाँच्नुहोस्
+        # एप सेवा सीमा जाँच गर्नुहोस्
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
             if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
@@ -271,7 +271,7 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # स्टोरेज अकाउन्ट सीमाहरू जाँच्नुहोस्
+        # स्टोरेज खाता सीमा जाँच गर्नुहोस्
         $storageAccounts = az storage account list --output json | ConvertFrom-Json
         $accountCount = ($storageAccounts | Measure-Object).Count
         if ($accountCount -lt 200) {
@@ -285,14 +285,14 @@ function Test-QuotasAndLimits {
     }
     catch {
         Write-Status "Quota check failed" "Warning" $_.Exception.Message
-        return $true # अवरोध नगर्ने
+        return $true # नन-ब्लकिंग
     }
 }
 
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # Azure एन्डपोइन्टहरू परीक्षण गर्नुहोस्
+    # Azure अन्त बिन्दु परीक्षण गर्नुहोस्
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -326,7 +326,7 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # azure.yaml अवस्थित छ कि छैन जाँच्नुहोस्
+    # azure.yaml छ कि छैन जाँच गर्नुहोस्
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
@@ -335,7 +335,7 @@ function Test-TemplateValidation {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # सेवाहरू मान्य गर्नुहोस्
+            # सेवा मान्यकरण गर्नुहोस्
             if ($azureYaml.services) {
                 $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
@@ -354,13 +354,13 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # पूर्वाधार फाइलहरूको जाँच गर्नुहोस्
+    # पूर्वाधार फाइल जाँच गर्नुहोस्
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # main.bicep अवस्थित भएमा मान्य गर्नुहोस्
+            # main.bicep छ भने मान्यकरण गर्नुहोस्
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -384,7 +384,7 @@ function Test-TemplateValidation {
     # 🧪 नयाँ: पूर्वाधार पूर्वावलोकन परीक्षण गर्नुहोस् (सुरक्षित ड्राइ-रन)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -403,7 +403,7 @@ function Test-RegionalAvailability {
     Write-Host "`n${Blue}=== Regional Availability Check ===${Reset}"
     
     try {
-        # स्थान मान्य छ कि छैन जाँच्नुहोस्
+        # स्थान मान्य छ कि छैन जाँच गर्नुहोस्
         $locations = az account list-locations --output json | ConvertFrom-Json
         $validLocation = $locations | Where-Object { $_.name -eq $Location -or $_.displayName -eq $Location }
         
@@ -415,7 +415,7 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # क्षेत्रमा सेवाको उपलब्धता जाँच्नुहोस्
+        # क्षेत्रको सेवा उपलब्धता जाँच गर्नुहोस्
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
@@ -446,11 +446,11 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # साधारण लागत अनुमान (ठीक अनुमानका लागि Azure Pricing API आवश्यक पर्छ)
+    # आधारभूत लागत अनुमान (ठिकठाक अनुमानको लागि Azure मूल्य निर्धारण API आवश्यक पर्नेछ)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # बजेट अवस्थित छ कि छैन जाँच्नुहोस्
+    # बजेट छ कि छैन जाँच गर्नुहोस्
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -470,9 +470,9 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # सामान्य सुरक्षा अभ्यासहरूको लागि जाँच गर्नुहोस्
+    # साझा सुरक्षा अभ्यास जाँच गर्नुहोस्
     try {
-        # Key Vault कन्फिगर गरिएको छ कि छैन जाँच्नुहोस्
+        # Key Vault कन्फिगर गरिएको छ कि छैन जाँच गर्नुहोस्
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
             Write-Status "Key Vault usage" "Success" "Key Vault detected in templates"
         }
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # प्रबन्धित आइडेन्टिटीको प्रयोग जाँच्नुहोस्
+        # प्रबन्धित पहिचानको प्रयोग जाँच गर्नुहोस्
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +488,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # HTTPS लागू गरिएको छ कि छैन जाँच्नुहोस्
+        # HTTPS लागू गरिएको छ कि छैन जाँच गर्नुहोस्
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -557,11 +557,11 @@ function Invoke-PreflightCheck {
     }
 }
 
-# प्री-फ्लाइट जाँच चलाउनुहोस्
+# प्रि-फ्लाइट जाँच चलाउनुहोस्
 Invoke-PreflightCheck
 ```
 
-### Bash Pre-flight Checker
+### Bash प्रि-फ्लाइट चेकर
 
 ```bash
 #!/bin/bash
@@ -606,7 +606,7 @@ print_status() {
 check_prerequisites() {
     echo -e "${BLUE}=== Prerequisites Check ===${NC}"
     
-    # AZD स्थापना जाँच गर्नुहोस्
+    # AZD इन्स्टलेसन जाँच गर्नुहोस्
     if command -v azd >/dev/null 2>&1; then
         local azd_version=$(azd version --output json | jq -r '.azd.version')
         print_status "AZD CLI installed" "success" "Version: $azd_version"
@@ -615,7 +615,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # Azure CLI स्थापना जाँच गर्नुहोस्
+    # Azure CLI इन्स्टलेसन जाँच गर्नुहोस्
     if command -v az >/dev/null 2>&1; then
         local az_version=$(az version --output json | jq -r '."azure-cli"')
         print_status "Azure CLI installed" "success" "Version: $az_version"
@@ -624,7 +624,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # jq स्थापना जाँच गर्नुहोस्
+    # jq इन्स्टलेसन जाँच गर्नुहोस्
     if command -v jq >/dev/null 2>&1; then
         print_status "jq installed" "success"
     else
@@ -665,7 +665,7 @@ check_template_validation() {
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
-        # आधारभूत YAML मान्यकरण
+        # आधारभूत YAML प्रमाणीकरण
         if python3 -c "import yaml; yaml.safe_load(open('azure.yaml'))" 2>/dev/null; then
             print_status "azure.yaml parsing" "success"
         else
@@ -683,7 +683,7 @@ check_template_validation() {
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # यदि अस्तित्वमा छ भने main.bicep मान्य गर्नुहोस्
+            # मुख्य.bicep मान्य छ भने प्रमाणीकरण गर्नुहोस्
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +706,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # स्थान मान्य छ कि छैन जाँच्नुहोस्
+    # स्थान मान्य छ कि छैन जाँच गर्नुहोस्
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -714,7 +714,7 @@ check_regional_availability() {
         return 1
     fi
     
-    # सेवा उपलब्धता जाँच्नुहोस्
+    # सेवा उपलब्धता जाँच गर्नुहोस्
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
     for service in "${services[@]}"; do
@@ -729,8 +729,8 @@ check_regional_availability() {
 }
 
 main() {
-    # कमाण्ड लाइन तर्कहरू पार्स गर्नुहोस्
-    while [[ $# -gt 0 ]]; do
+    # आदेश पङ्क्ति तर्कहरू पार्स गर्नुहोस्
+    while [[ $# -gt 0 ]]; गर्दछ
         case $1 in
             --environment-name)
                 ENVIRONMENT_NAME="$2"
@@ -755,7 +755,7 @@ main() {
         esac
     done
     
-    # आवश्यक प्यारामिटरहरू मान्य गर्नुहोस्
+    # आवश्यक प्यारामिटरहरू प्रमाणीकरण गर्नुहोस्
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -796,94 +796,94 @@ main "$@"
 
 ---
 
-## Manual Validation Checklist
+## म्यानुअल प्रमाणीकरण चेकलिष्ट
 
-### Pre-Deployment Checklist
+### प्रि-डिप्लोयमेन्ट चेकलिष्ट
 
-यो चेकलिस्ट प्रिन्ट गरेर परिनियोजन अघि प्रत्येक वस्तु प्रमाणित गर्नुहोस्:
+यो चेकलिष्ट प्रिन्ट गरेर डिप्लोयमेन्ट अघि प्रत्येक वस्तु जाँच गर्नुहोस्:
 
-#### ✅ Environment Setup
-- [ ] AZD CLI इन्स्टल गरिएको र नवीनतम संस्करणमा अपडेट गरिएको छ
-- [ ] Azure CLI इन्स्टल गरिएको र प्रमाणिकरण गरिएको छ
-- [ ] सहि Azure subscription चयन गरिएको छ
-- [ ] वातावरणको नाम अनन्य छ र नामकरण मान्यताहरू पालना गर्दछ
-- [ ] लक्षित resource group पहिचान गरिएको छ वा सिर्जना गर्न सकिन्छ
+#### ✅ वातावरण सेटअप
+- [ ] AZD CLI स्थापना गरिएको र नवीनतम संस्करणमा अपडेट गरिएको छ
+- [ ] Azure CLI स्थापना गरिएको र प्रमाणित गरिएको छ
+- [ ] सही Azure सदस्यता चयन गरिएको छ
+- [ ] वातावरण नाम अनौठो छ र नामकरण कन्वेन्सनहरू पालना गरिएको छ
+- [ ] लक्ष्य स्रोत समूह पहिचान गरिएको या सिर्जना गर्न सकिन्छ
 
-#### ✅ Authentication & Permissions
-- [ ] सफलतापूर्वक प्रमाणिकरण गरिएको छ `azd auth login`
-- [ ] प्रयोगकर्तासँग लक्ष्य subscription/resource group मा Contributor भूमिका छ
-- [ ] CI/CD का लागि service principal कन्फिगर गरिएको छ (यदि लागू हुन्छ)
-- [ ] कुनै म्यादिएको प्रमाणपत्र वा क्रेडेन्शियलहरू छैनन्
+#### ✅ प्रमाणीकरण र अनुमति
+- [ ] `azd auth login` द्वारा सफलतापूर्वक प्रमाणित गरिएको
+- [ ] प्रयोगकर्ताले लक्ष्य सदस्यता/स्रोत समूहमा Contributor भूमिका छ
+- [ ] CI/CD को लागि सेवा प्रधान कन्फिगर गरिएको (यदि लागू हुन्छ भने)
+- [ ] कुनै समाप्त प्रमाणपत्र वा प्रमाणहरू छैनन्
 
-#### ✅ Template Validation
-- [ ] `azure.yaml` अवस्थित छ र मान्य YAML छ
-- [ ] azure.yaml मा परिभाषित सबै सेवाहरूको लागि सम्बन्धित स्रोत कोड छ
-- [ ] `infra/` निर्देशिकामा Bicep टेम्पलेटहरू उपस्थित छन्
-- [ ] `main.bicep` त्रुटिविना कम्पाइल हुन्छ (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Infrastructure preview सफलतापूर्वक चल्छ (`azd provision --preview`)
-- [ ] आवश्यक सबै प्यारामिटरहरूको डिफल्ट मान छ वा प्रदान गरिनेछ
-- [ ] टेम्पलेटहरूमा हार्डकोड गरिएको गोप्य कुरा छैन
+#### ✅ टेम्प्लेट प्रमाणीकरण
+- [ ] `azure.yaml` अवस्थित छ र मान्य YAML हो
+- [ ] azure.yaml मा परिभाषित सबै सेवाहरूको सम्बद्ध स्रोत कोड छ
+- [ ] `infra/` निर्देशिकामा Bicep टेम्प्लेटहरू छन्
+- [ ] `main.bicep` त्रुटि बिना कम्पाइल हुन्छ (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 पूर्वविधान पूर्वावलोकन सफलतापूर्वक चल्छ (`azd provision --preview`)
+- [ ] सबै आवश्यक प्यारामिटरहरूसँग पूर्वनिर्धारित मानहरू छन् वा उपलब्ध हुनेछ
+- [ ] टेम्प्लेटहरूमा कुनै पनि कडा कोड गरिएको गोप्य कुरा छैन
 
-#### ✅ Resource Planning
-- [ ] लक्षित Azure क्षेत्र चयन र मान्य गरिएको छ
-- [ ] लक्षित क्षेत्रमा आवश्यक Azure सेवाहरू उपलब्ध छन्
+#### ✅ स्रोत योजना
+- [ ] लक्ष्य Azure क्षेत्र चयन गरिएको र प्रमाणीकरण गरिएको
+- [ ] आवश्यक Azure सेवाहरू लक्ष्य क्षेत्रमा उपलब्ध छन्
 - [ ] योजनाबद्ध स्रोतहरूको लागि पर्याप्त कोटा उपलब्ध छ
-- [ ] स्रोत नामकरण द्वन्द्वहरू जाँचिएको छ
-- [ ] स्रोतहरू बीचको निर्भरताहरू बुझिएको छ
+- [ ] स्रोत नामकरणमा द्वैत जाँच गरिएको छ
+- [ ] स्रोतहरू बीच निर्भरता बुझिएको छ
 
-#### ✅ Network & Security
-- [ ] Azure endpoint हरूमा नेटवर्क कनेक्टिविटी प्रमाणित गरिएको छ
-- [ ] आवश्यक परेमा फायरवाल/प्रोक्सी सेटिङहरू कन्फिगर गरिएको छ
-- [ ] गोप्य व्यवस्थापनका लागि Key Vault कन्फिगर गरिएको छ
-- [ ] जहाँ सम्भव छ Managed identities प्रयोग गरिएको छ
-- [ ] वेब अनुप्रयोगहरूका लागि HTTPS लागू गरिएको छ
+#### ✅ नेटवर्क र सुरक्षा
+- [ ] Azure अन्तबिन्दुहरूसँग नेटवर्क कनेक्टिविटी प्रमाणीकरण गरिएको
+- [ ] फायरवाल/प्रोक्सी सेटिङ्गहरू आवश्यक भएमा कन्फिगर गरिएको
+- [ ] गोप्य व्यवस्थापनका लागि Key Vault कन्फिगर गरिएको
+- [ ] सम्भव भएमा प्रबन्धित पहिचानहरू प्रयोग गरिएको
+- [ ] वेब अनुप्रयोगहरूका लागि HTTPS लागू गरिएको
 
-#### ✅ Cost Management
-- [ ] Azure Pricing Calculator प्रयोग गरी लागत अनुमान गणना गरिएको छ
-- [ ] आवश्यक परेमा बजेट अलर्टहरू कन्फिगर गरिएको छ
-- [ ] वातावरण प्रकारका लागि उपयुक्त SKU हरू चयन गरिएको छ
-- [ ] उत्पादन वर्कलोडहरूको लागि Reserved capacity विचार गरिएको छ
+#### ✅ लागत व्यवस्थापन
+- [ ] Azure मूल्य निर्धारण क्याल्क्युलेटर प्रयोग गरी लागत अनुमान गरिएको
+- [ ] आवश्यक भएमा बजेट सचेतनाहरू कन्फिगर गरिएको
+- [ ] वातावरण प्रकारका लागि उपयुक्त SKU चयन गरिएको
+- [ ] उत्पादन कार्यभारका लागि सुरक्षित क्षमतालाई विचार गरिएको
 
-#### ✅ Monitoring & Observability
-- [ ] Application Insights टेम्पलेटहरूमा कन्फिगर गरिएको छ
-- [ ] Log Analytics workspace योजना बनाइएको छ
-- [ ] महत्वपूर्ण मेट्रिक्सका लागि अलर्ट नियमहरू परिभाषित गरिएका छन्
-- [ ] अनुप्रयोगहरूमा हेल्थ चेक endpoints लागू गरिएका छन्
+#### ✅ अनुगमन र अवलोकन
+- [ ] टेम्प्लेटहरूमा Application Insights कन्फिगर गरिएको
+- [ ] Log Analytics कार्यस्थान योजना गरिएको
+- [ ] महत्वपूर्ण मेट्रिक्सका लागि सचेत नियमहरू परिभाषित गरिएको
+- [ ] अनुप्रयोगहरूमा हेल्थ चेक अन्तबिन्दुहरू कार्यान्वयन गरिएको
 
-#### ✅ Backup & Recovery
-- [ ] डेटा स्रोतहरूको लागि ब्याकअप रणनीति परिभाषित गरिएको छ
-- [ ] Recovery time objectives (RTO) दस्तावेज गरिएको छ
-- [ ] Recovery point objectives (RPO) दस्तावेज गरिएको छ
-- [ ] उत्पादनका लागि डिजास्टर रिकभरी योजना रहेको छ
+#### ✅ ब्याकअप र पुन:प्राप्ति
+- [ ] डेटा स्रोतहरूका लागि ब्याकअप रणनीति परिभाषित गरिएको
+- [ ] पुन:प्राप्ति समय लक्ष्यहरू (RTO) कागजात गरिएको
+- [ ] पुन:प्राप्ति पोइन्ट लक्ष्यहरू (RPO) कागजात गरिएको
+- [ ] उत्पादनको लागि विपद् पुन:प्राप्ति योजना तयार गरिएको
 
 ---
 
-## Environment Validation
+## वातावरण प्रमाणीकरण
 
-### Development Environment Validation
+### विकास वातावरण प्रमाणीकरण
 
 ```bash
 #!/bin/bash
-# विकास वातावरणसँग सम्बन्धित विशेष मान्यकरणहरू
+# विकास वातावरण सम्बन्धि विशिष्ट जाँचहरू
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # विकासमैत्री कन्फिगरेसनहरूको लागि जाँच
+    # विकासमैत्री कन्फिगरेसनहरूको जाँच गर्नुहोस्
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # स्वचालित बन्द कन्फिगरेसनहरूको लागि जाँच
+    # स्वचालित बन्द गर्ने कन्फिगरेसनहरूको जाँच गर्नुहोस्
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # विकास डेटाबेस कन्फिगरेसनहरूको मान्यकरण
+    # विकास डेटाबेस कन्फिगरेसनहरूको सत्यापन गर्नुहोस्
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -892,11 +892,11 @@ validate_dev_environment() {
 }
 ```
 
-### Production Environment Validation
+### उत्पादन वातावरण प्रमाणीकरण
 
 ```bash
 #!/bin/bash
-# उत्पादन वातावरणका विशिष्ट जाँचहरू
+# उत्पादन वातावरण विशिष्ट मान्यताहरू
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
@@ -915,7 +915,7 @@ validate_prod_environment() {
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # अनुगमन सेटअप मान्य गर्नुहोस्
+    # अनुगमन सेटअपको मान्यकरण गर्नुहोस्
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
@@ -933,9 +933,9 @@ validate_prod_environment() {
 
 ---
 
-## Resource Validation
+## स्रोत प्रमाणीकरण
 
-### Quota Validation Script
+### कोटा प्रमाणीकरण स्क्रिप्ट
 
 ```python
 #!/usr/bin/env python3
@@ -990,7 +990,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # सब्स्क्रिप्शनमा स्टोरेज खाताहरू प्राप्त गर्नुहोस्
+    # सदस्यतामा भण्डारण खाताहरू प्राप्त गर्नुहोस्
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -1011,7 +1011,7 @@ def check_network_limits(location: str) -> bool:
     """Check network-related limits"""
     print(f"\n=== Network Limits Check ({location}) ===")
     
-    # आभासी नेटवर्कहरू जाँच गर्नुहोस्
+    # भर्चुअल नेटवर्कहरू जाँच गर्नुहोस्
     vnets = run_command(['az', 'network', 'vnet', 'list'])
     if vnets is not None:
         vnet_count = len(vnets)
@@ -1058,20 +1058,20 @@ if __name__ == "__main__":
 
 ---
 
-## Security & Compliance Checks
+## सुरक्षा र अनुपालन जाँचहरू
 
-### Security Validation Script
+### सुरक्षा प्रमाणीकरण स्क्रिप्ट
 
 ```bash
 #!/bin/bash
-# AZD परिनियोजनहरूको लागि सुरक्षा र अनुरूपता प्रमाणीकरण
+# AZD वितरणहरूको लागि सुरक्षा र अनुपालन प्रमाणीकरण
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
     
     local issues_found=0
     
-    # Key Vault प्रयोगको जाँच
+    # कुञ्जी वाल्ट प्रयोगको जाँच गर्नुहोस्
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1079,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Managed Identity प्रयोगको जाँच
+    # व्यवस्थापित पहिचान प्रयोगको जाँच गर्नुहोस्
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # HTTPS अनिवार्यताको जाँच
+    # HTTPS लागू गर्ने जाँच गर्नुहोस्
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1095,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # न्यूनतम TLS संस्करणको जाँच
+    # न्यूनतम TLS संस्करणको जाँच गर्नुहोस्
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1103,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # सार्वजनिक पहुँच प्रतिबन्धहरूको जाँच
+    # सार्वजनिक पहुँच प्रतिबन्धहरूको जाँच गर्नुहोस्
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1111,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # नेटवर्क सुरक्षा समूहहरूको जाँच
+    # नेटवर्क सुरक्षा समूहहरूको जाँच गर्नुहोस्
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1124,21 +1124,21 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # डेटा इन्क्रिप्सनको जाँच
+    # डेटा इन्क्रिप्सनको जाँच गर्नुहोस्
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # अडिट लगिङको जाँच
+    # अडिट लगिङको जाँच गर्नुहोस्
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # ब्याकअप र प्रतिधारण नीतिहरूको जाँच
+    # ब्याकअप र अवशिष्ट नीति जाँच गर्नुहोस्
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1177,9 +1177,9 @@ main "$@"
 
 ---
 
-## Integration with CI/CD
+## CI/CD सँग एकीकरण
 
-### GitHub Actions Integration
+### GitHub Actions एकीकरण
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1238,7 +1238,7 @@ jobs:
         path: preflight-results.json
 ```
 
-### Azure DevOps Integration
+### Azure DevOps एकीकरण
 
 ```yaml
 trigger: none
@@ -1290,58 +1290,58 @@ steps:
 
 ---
 
-## Best Practices Summary
+## उत्तम अभ्यास सारांश
 
-### ✅ Pre-flight Check Best Practices
+### ✅ प्रि-फ्लाइट जाँचका उत्तम अभ्यासहरू
 
 1. **जहाँ सम्भव स्वचालित गर्नुहोस्**
-   - जाँचहरू CI/CD पाइपलाइनमा एकीकृत गर्नुहोस्
-   - दोहोरिने मान्यकरणका लागि स्क्रिप्टहरू प्रयोग गर्नुहोस्
-   - अडिट ट्रेलहरूका लागि परिणामहरू स्टोर गर्नुहोस्
+   - जाँचहरूलाई CI/CD पाइपलाइनहरूमा एकीकृत गर्नुहोस्
+   - पुनरावृत्त प्रमाणीकरणहरूको लागि स्क्रिप्टहरू प्रयोग गर्नुहोस्
+   - अडिट ट्रेलका लागि परिणामहरू भण्डारण गर्नुहोस्
 
-2. **पर्यावरण-विशेष मान्यकरण**
-   - dev/staging/prod का लागि फरक जाँचहरू
+2. **वातावरण-विशिष्ट प्रमाणीकरण**
+   - विकास/सहयोग/उत्पादनका लागि फरक जाँचहरू
    - वातावरण अनुसार उपयुक्त सुरक्षा आवश्यकताहरू
    - गैर-उत्पादन वातावरणहरूको लागि लागत अनुकूलन
 
-3. **समग्र कवरेज**
-   - प्रमाणिकरण र अधिकारहरू
+3. **व्यापक आवरण**
+   - प्रमाणीकरण र अनुमति
    - स्रोत कोटा र उपलब्धता
-   - टेम्पलेट मान्यकरण र सिन्ट्याक्स
+   - टेम्प्लेट प्रमाणीकरण र सिङ्ट्याक्स
    - सुरक्षा र अनुपालन आवश्यकताहरू
 
-4. **स्पष्ट प्रतिवेदन**
-   - रङ्ग-कोड गरिएका स्थिति संकेतकहरू
-   - समाधानका कदमहरूसँग विस्तृत त्रुटि सन्देशहरू
-   - द्रुत मूल्याङ्कनका लागि सारांश प्रतिवेदनहरू
+4. **स्पष्ट रिपोर्टिङ**
+   - रंग कोड गरिएको स्थिति सूचकहरू
+   - सुधारका कदमहरूसहित विस्तृत त्रुटि सन्देशहरू
+   - छिटो मूल्याङ्कनका लागि सारांश रिपोर्टहरू
 
-5. **असफल हुँदा तुरुन्त रोक्नुहोस्**
-   - महत्त्वपूर्ण जाँचहरू असफल भएमा परिनियोजन रोक्नुहोस्
-   - समाधानका लागि स्पष्ट मार्गदर्शन दिनुहोस्
-   - जाँचहरू सजिलै पुनः चलाउन सक्षम बनाउनुहोस्
+5. **छिटो असफलता**
+   - अत्यावश्यक जाँचहरू असफल भएमा डिप्लोयमेन्ट रोक्नुहोस्
+   - समाधानका लागि स्पष्ट मार्गनिर्देशन प्रदान गर्नुहोस्
+   - सजिलै जाँचहरू पुन: चलाउने सुविधा दिनुहोस्
 
-### सामान्य प्रि-फ्लाइट त्रुटिहरू
+### सामान्य प्रि-फ्लाइट समस्याहरू
 
-1. "छिटो" परिनियोजनका लागि मान्यकरण स्किप गर्नु
-2. परिनियोजन अघि अपर्याप्त अधिकार जाँच
-3. कोटा सीमाहरूलाई परिनियोजन असफल हुन नदुईसम्म बेवास्ता गर्नु
-4. CI/CD पाइपलाइनहरूमा टेम्पलेटहरू मान्य नगर्नु
-5. उत्पादन वातावरणका लागि सुरक्षा मान्यकरण छुटाउनु
-6. अपर्याप्त लागत अनुमान जसले बजेट आश्चर्य ल्याउँछ
+1. "छिटो" डिप्लोयमेन्टको लागि प्रमाणीकरण नगर्नु
+2. अनुमतिहरूको अपर्याप्त जाँच डिप्लोयमेन्ट अघि
+3. डिप्लोयमेन्ट असफल नहुँदासम्म कोटा सीमा बेवास्ता गर्नु
+4. CI/CD पाइपलाइनहरूमा टेम्प्लेटहरूको प्रमाणीकरण नगर्नु
+5. उत्पादन वातावरणहरूको लागि सुरक्षा प्रमाणीकरण छुटाउनु
+6. लागत अनुमान अपर्याप्त भएर बजेट अप्रत्याशित हुनु
 
 ---
 
-**प्रो टिप**: वास्तविक परिनियोजन जॉब अघि तपाईंको CI/CD पाइपलाइनमा प्रि-फ्लाइट जाँचहरू अलग जॉबको रूपमा चलाउनुहोस्। यसले समस्याहरू छिटो कैच गर्न मद्दत गर्छ र विकासकर्ताहरूप्रति छिटो प्रतिक्रिया प्रदान गर्छ।
+**प्रो टिप**: वास्तविक डिप्लोयमेन्ट जॉबसँग अघि प्रि-फ्लाइट जाँचहरूलाई CI/CD पाइपलाइनमा अलग कामको रूपमा सञ्चालन गर्नुहोस्। यसले समस्याहरू छिटो पत्ता लगाउन र विकासकर्ताहरूलाई छिटो प्रतिक्रिया दिन मद्दत गर्छ।
 
 ---
 
 **नेभिगेसन**
-- **अघिल्लो पाठ**: [SKU चयन](sku-selection.md)
-- **अर्को पाठ**: [Cheat Sheet](../../resources/cheat-sheet.md)
+- **पहिलो पाठ**: [SKU चयन](sku-selection.md)
+- **अर्को पाठ**: [चिट शीट](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-अस्वीकरण:
-यो दस्तावेज AI अनुवाद सेवा Co-op Translator (https://github.com/Azure/co-op-translator) प्रयोग गरेर अनुवाद गरिएको हो। हामी शुद्धताको लागि प्रयास गर्छौं, तर कृपया ध्यान दिनुहोस् कि स्वचालित अनुवादमा त्रुटि वा अशुद्धता हुनसक्छ। मूल भाषामा रहेको दस्तावेजलाई अधिकारिक स्रोत मानिनु पर्छ। संवेदनशील वा महत्वपूर्ण जानकारीका लागि पेशेवर मानव अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलतफहमी वा गलत व्याख्याका लागि हामी उत्तरदायी रहनेछैनौं।
+**अस्वीकरण**:  
+यो दस्तावेज AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) को प्रयोग गरेर अनुवाद गरिएको हो। हामी शुद्धताको लागि प्रयास गरिरहेका छौं, कृपया जानकार हुनुस् कि स्वचालित अनुवादमा त्रुटिहरू वा अशुद्धताहरू हुनसक्छन्। मूल दस्तावेज आफ्नै भाषामा आधिकारिक स्रोतको रूपमा मानिनुपर्छ। महत्वपूर्ण जानकारीका लागि पेशेवर मानव अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलतफहमी वा गलत व्याख्याका लागि हामी जिम्मेवार हुँदैनौं।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

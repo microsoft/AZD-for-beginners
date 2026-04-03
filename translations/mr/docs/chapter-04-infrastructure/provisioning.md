@@ -1,47 +1,47 @@
-# AZD सह Azure संसाधने प्रोव्हिजन करणे
+# AZD सह Azure संसाधने Provision करणे
 
 **अध्याय नेव्हिगेशन:**
-- **📚 Course Home**: [AZD नवशिक्यांसाठी](../../README.md)
-- **📖 Current Chapter**: अध्याय 4 - इन्फ्रास्ट्रक्चर अ‍ॅज कोड आणि तैनाती
-- **⬅️ Previous**: [डिप्लॉयमेंट मार्गदर्शक](deployment-guide.md)
-- **➡️ Next Chapter**: [अध्याय 5: मल्टी-एजंट AI सोल्यूशन्स](../../examples/retail-scenario.md)
-- **🔧 Related**: [अध्याय 6: प्री-डिप्लॉयमेंट वैधता](../chapter-06-pre-deployment/capacity-planning.md)
+- **📚 कोर्स मुख्यपृष्ठ**: [AZD सुरुवातीसाठी](../../README.md)
+- **📖 सध्याचा अध्याय**: अध्याय 4 - इन्फ्रास्ट्रक्चर अ‍ॅज कोड व तैनाती
+- **⬅️ मागील**: [तैनाती मार्गदर्शक](deployment-guide.md)
+- **➡️ पुढील अध्याय**: [अध्याय 5: बहु-एजंट AI उपाय](../../examples/retail-scenario.md)
+- **🔧 संबंधित**: [अध्याय 6: पूर्व-तैनाती पडताळणी](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## परिचय
 
-हा सर्वसमावेशक मार्गदर्शक Azure Developer CLI वापरून Azure संसाधने प्रोव्हिजन आणि व्यवस्थापित करण्याबद्दल तुम्हाला जाणून घेण्यास आवश्यक असलेली सर्व माहिती कव्हर करतो. Bicep, ARM टेम्पलेट्स, Terraform आणि Pulumi वापरून मूलभूत संसाधन निर्मितीपासून ते प्रगत एंटरप्राइझ-ग्रेड इन्फ्रास्ट्रक्चर आर्किटेक्चरपर्यंत Infrastructure as Code (IaC) पॅटर्न कसे अमलात आणायचे ते शिका.
+हा सर्वसमावेशक मार्गदर्शक Azure Developer CLI वापरून Azure संसाधने provision व व्यवस्थापित करण्याबाबत तुम्हाला आवश्यक असलेली सर्व माहिती कव्ह करतो. Bicep, ARM टेम्पलेट्स, Terraform आणि Pulumi वापरून मूलभूत संसाधन निर्मितीपासून उन्नत एंटरप्राइझ-ग्रेड इन्फ्रास्ट्रक्चर आर्किटेक्चरपर्यंत Infrastructure as Code (IaC) पॅटर्न्स कसे अमलात आणायचे हे शिका.
 
 ## शिकण्याचे उद्दिष्टे
 
-या मार्गदर्शकाचा अभ्यास पूर्ण केल्यानंतर तुम्ही:
-- Infrastructure as Code तत्त्वे आणि Azure संसाधन प्रोव्हिजनिंग मध्ये प्रावीण्य मिळवाल
-- Azure Developer CLI द्वारे समर्थित अनेक IaC प्रदात्यांना समजून घ्याल
-- सामान्य अनुप्रयोग आर्किटेक्चरसाठी Bicep टेम्पलेट्स डिझाइन आणि अमलात आणाल
-- संसाधन पॅरामीटर्स, व्हेरिएबल्स आणि पर्यावरण-विशिष्ट सेटिंग्ज कॉन्फिगर कराल
-- नेटवर्किंग आणि सुरक्षा यांसह प्रगत इन्फ्रास्ट्रक्चर पॅटर्न लागू कराल
-- संसाधनांचे लाइफसायकल, अपडेट्स आणि अवलंबित्व सोडवणूक व्यवस्थापित कराल
+हा मार्गदर्शक पूर्ण केल्यावर, तुम्ही:
+- Infrastructure as Code तत्त्वे आणि Azure संसाधन provisioning मध्ये प्रभुत्व मिळवाल
+- Azure Developer CLI द्वारे समर्थित विविध IaC प्रदात्यांना समजून घ्याल
+- सामान्य अनुप्रयोग आर्किटेक्चरसाठी Bicep टेम्पलेट्स डिझाइन व अमलात आणाल
+- संसाधन पॅरामीटर्स, व्हेरिएबल्स व पर्यावरण-विशिष्ट सेटिंग्ज कॉन्फिगर कराल
+- नेटवर्किंग आणि सुरक्षा यांसह उन्नत इन्फ्रास्ट्रक्चर पॅटर्न्स अंमलात आणाल
+- संसाधन जीवनचक्र, अद्यतने आणि अवलंबित्व निराकरण व्यवस्थापित कराल
 
 ## शिकण्याचे परिणाम
 
-या मार्गदर्शकाचे पालन केल्यावर, तुम्ही सक्षम असाल:
-- Bicep आणि ARM टेम्पलेट्स वापरून Azure इन्फ्रास्ट्रक्चर डिझाइन व प्रोव्हिजन करणे
-- योग्य संसाधन अवलंबित्वांसह संकुल मल्टी-सेवा आर्किटेक्चर कॉन्फिगर करणे
-- अनेक पर्यावरणे आणि कॉन्फिगरेशनसाठी पॅरामीटराइझ्ड टेम्पलेट्स लागू करणे
-- इन्फ्रास्ट्रक्चर प्रोव्हिजनिंग समस्यांचे ट्रबलशूट करणे आणि डिप्लॉयमेंट अयशस्वीता निवारण करणे
-- इन्फ्रास्ट्रक्चर डिझाइनसाठी Azure Well-Architected Framework तत्त्वे लागू करणे
-- इन्फ्रास्ट्रक्चर अपडेट्स व्यवस्थापित करणे आणि इन्फ्रास्ट्रक्चर व्हर्जनिंग धोरणे अंमलात आणणे
+पूर्ण केल्यावर, तुम्ही सक्षम असाल:
+- Bicep व ARM टेम्पलेट्स वापरून Azure इन्फ्रास्ट्रक्चर डिझाइन आणि provision करण्यास
+- योग्य संसाधन अवलंबित्वांसह क्लिष्ट मल्टी-सर्व्हिस आर्किटेक्चर कॉन्फिगर करण्यास
+- अनेक पर्यावरणे आणि कॉन्फिगरेशन्ससाठी पॅरामीटराइझ्ड टेम्पलेट्स अमलात आणण्यास
+- इन्फ्रास्ट्रक्चर provisioning समस्या ट्रबलशूट करण्यास आणि तैनातीतील अयशस्वीता सुधारण्यास
+- इन्फ्रास्ट्रक्चर डिझाइनमध्ये Azure Well-Architected Framework तत्त्वे लागू करण्यास
+- इन्फ्रास्ट्रक्चर अपडेट्स व्यवस्थापित करण्यास आणि आवृत्तीकरण धोरणे अमलात आणण्यास
 
-## इन्फ्रास्ट्रक्चर प्रोव्हिजनिंग अवलोकन
+## इन्फ्रास्ट्रक्चर Provisioning आढावा
 
-Azure Developer CLI अनेक Infrastructure as Code (IaC) प्रदाते समर्थन करते:
-- **Bicep** (शिफारस केलेले) - Azure ची डोमेन-विशिष्ट भाषा
+Azure Developer CLI अनेक Infrastructure as Code (IaC) प्रदाते समर्थित करते:
+- **Bicep** (शिफारसीय) - Azure चे डोमेन-विशिष्ट भाषा
 - **ARM Templates** - JSON-आधारित Azure Resource Manager टेम्पलेट्स
-- **Terraform** - मल्टी-क्लाउड इन्फ्रास्ट्रक्चर साधन
-- **Pulumi** - प्रोग्रामिंग भाषांसह आधुनिक इन्फ्रास्ट्रक्चर अ‍ॅज कोड
+- **Terraform** - मल्टी-क्लाउड इन्फ्रास्ट्रक्चर टूल
+- **Pulumi** - प्रोग्रामिंग भाषांसह आधुनिक इन्फ्रास्ट्रक्चर अ‍ॅझ कोड
 
 ## Azure संसाधने समजून घेणे
 
-### संसाधन श्रेणी
+### संसाधन अनुक्रम
 ```
 Azure Account
 └── Subscriptions
@@ -128,7 +128,7 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### प्रगत Bicep पॅटर्न
+### उन्नत Bicep पॅटर्न्स
 
 #### मॉड्युलर इन्फ्रास्ट्रक्चर
 ```bicep
@@ -179,7 +179,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### परिस्थितीनुसार संसाधन निर्मिती
+#### शर्तीवर आधारित संसाधन निर्मिती
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -200,7 +200,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ डेटाबेस प्रोव्हिजनिंग
+## 🗃️ डेटाबेस प्रोव्हीजनिंग
 
 ### Cosmos DB
 ```bicep
@@ -298,7 +298,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 सुरक्षा आणि सीक्रेट्स व्यवस्थापन
+## 🔒 सुरक्षा व रहस्य व्यवस्थापन
 
 ### Key Vault एकत्रीकरण
 ```bicep
@@ -368,7 +368,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 नेटवर्किंग आणि कनेक्टिव्हिटी
+## 🌍 नेटवर्किंग व कनेक्टिव्हिटी
 
 ### Virtual Network कॉन्फिगरेशन
 ```bicep
@@ -496,7 +496,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 मॉनिटरिंग आणि निरीक्षणक्षमता
+## 📊 मॉनिटरींग व निरीक्षण
 
 ### Application Insights
 ```bicep
@@ -527,7 +527,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### सानुकूल मेट्रिक्स आणि अलर्ट्स
+### कस्टम मेट्रिक्स व अलर्ट
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -561,9 +561,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 पर्यावरण-विशिष्ट कॉन्फिगरेशन्स
+## 🔧 पर्यावरण-विशिष्ट कॉन्फिगरेशन
 
-### विविध पर्यावरणांसाठी पॅरामीटर फाइल्स
+### वेगवेगळ्या पर्यावरणांसाठी पॅरामीटर फाईल्स
 ```json
 // infra/main.parameters.dev.json
 {
@@ -617,7 +617,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### परिस्थितीनुसार संसाधन प्रोव्हिजनिंग
+### शर्तीवर आधारित संसाधन प्रोव्हीजनिंग
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,9 +649,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 प्रगत प्रोव्हिजनिंग पॅटर्न
+## 🚀 उन्नत प्रोव्हीजनिंग पॅटर्न्स
 
-### बहु-प्रांत तैनाती
+### बहु-प्रदेश तैनाती
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -755,42 +755,41 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 इन्फ्रास्ट्रक्चर प्रीव्ह्यू आणि प्रमाणीकरण (नवीन)
+## 🧪 इन्फ्रास्ट्रक्चर पूर्वावलोकन व पडताळणी (नवीन)
 
 ### तैनातीपूर्वी इन्फ्रास्ट्रक्चर बदलांचे पूर्वावलोकन
 
-The `azd provision --preview` feature lets you **simulate infrastructure provisioning** before actually deploying resources. It's similar in spirit to `terraform plan` or `bicep what-if`, giving you a **dry-run view** of what changes would be made to your Azure environment.
+The `azd provision --preview` feature तुम्हाला **संसाधन तैनात करण्याआधी इन्फ्रास्ट्रक्चर provisioning चे अनुकरण** करण्याची परवानगी देते. हे `terraform plan` किंवा `bicep what-if` यांसारखे आहे, जे तुम्हाला Azure पर्यावरणात कोणते बदल केले जाणार आहेत याचे **ड्राय-रन दृश्य** दाखवते.
 
 #### 🛠️ हे काय करते
-- **आपल्या IaC टेम्पलेट्सचे विश्लेषण करते** (Bicep किंवा Terraform)
-- **संसाधन बदलांचे पूर्वावलोकन दर्शवते**: जोडणे, हटवणे, अद्यतने
-- **बदल लागू करत नाही** — हे फक्त वाचनासाठी आहे आणि चालवायला सुरक्षित आहे
+- **तुमचे IaC टेम्पलेट्स विश्लेषित करते** (Bicep किंवा Terraform)
+- **संसाधन बदलांचे पूर्वावलोकन दाखवते**: जोडणी, हटवणी, अद्यतने
+- **बदल लागू करत नाही** — हे फक्त वाचण्यायोग्य आहे आणि चालवायला सुरक्षित आहे
 
-#### � वापर प्रकरणे
+#### वापर प्रकरणे
 ```bash
-# तैनातीपूर्वी पायाभूत सुविधेतील बदलांचे पूर्वावलोकन करा
+# तैनातीपूर्वी पायाभूत सुविधांमधील बदलांचे पूर्वावलोकन करा
 azd provision --preview
 
-# सविस्तर आउटपुटसह पूर्वावलोकन
-azd provision --preview --output json
-
 # विशिष्ट वातावरणासाठी पूर्वावलोकन
-azd provision --preview --environment production
+azd provision --preview -e production
 ```
 
 हा आदेश तुम्हाला मदत करतो:
-- **संसाधने कमिट करण्यापूर्वी इन्फ्रास्ट्रक्चर बदलांची पडताळणी करा**
-- **विकसन चक्रात चुकीच्या कॉन्फिगरेशन लवकर पकडा**
-- **टीम वातावरणात सुरक्षितपणे सहकार्य करा**
-- **अनपेक्षित परिणामांशिवाय किमान-प्रिव्हिलेज तैनाती याची खात्री करा**
+- **संसाधन बदलांची पडताळणी करण्यासाठी** तैनात करण्यापूर्वी
+- **डेव्हलपमेंट चक्रात चुकीच्या कॉन्फिगरेशन्स लवकर पकडण्यासाठी**
+- **संघात सुरक्षितपणे सहकार्य करण्यासाठी**
+- **शक्य तितके कमी-परवानगी तैनाती सुनिश्चित करण्यासाठी** अनपेक्षित गोष्टी टाळता
 
 हे विशेषतः उपयुक्त आहे जेव्हा:
-- जटिल बहु-सेवा पर्यावरणावर काम करत असाल
-- उत्पादन इन्फ्रास्ट्रक्चरमध्ये बदल करत असाल
-- PR मंजुरीपूर्वी टेम्पलेट बदलांची पडताळणी करत असाल
+- कॉम्प्लेक्स मल्टी-सर्व्हिस पर्यावरणांवर काम करत असाल
+- प्रॉडक्शन इन्फ्रास्ट्रक्चरमध्ये बदल करत असाल
+- टेम्पलेट सुधारणा PR मंजुरीपूर्वी पडताळत असाल
 - इन्फ्रास्ट्रक्चर पॅटर्नवर नवीन टीम सदस्यांना प्रशिक्षण देत असाल
 
 ### उदाहरण पूर्वावलोकन आउटपुट
+ठीकठीक पूर्वावलोकन आउटपुट प्रदाता आणि प्रकल्प संरचनेनुसार वेगळे असते, परंतु निकालाने काहीही लागू होण्यापूर्वी प्रस्तावित बदल स्पष्टपणे ओळखता येतील असे दिसले पाहिजे.
+
 ```bash
 $ azd provision --preview
 
@@ -809,7 +808,6 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
@@ -819,18 +817,18 @@ The following resources will be destroyed:
 
 ### सुरक्षित संसाधन अद्यतने
 ```bash
-# इन्फ्रास्ट्रक्चरमधील बदल प्रथम पूर्वावलोकन करा (शिफारस केलेले)
+# पायाभूत रचनेतील बदल प्रथम पूर्वावलोकन करा (शिफारसीय)
 azd provision --preview
 
-# पूर्वावलोकन पुष्टी केल्यानंतर बदल लागू करा
+# पूर्वावलोकनाची पुष्टी झाल्यानंतर बदल लागू करा
 azd provision --confirm-with-no-prompt
 
-# रोलबॅकसाठी, इन्फ्रास्ट्रक्चरमधील बदल परत करण्यासाठी Git वापरा:
-git revert HEAD  # शेवटचा इन्फ्रास्ट्रक्चर कमिट परत करा
-azd provision    # मागील इन्फ्रास्ट्रक्चर स्थिती लागू करा
+# रोलबॅकसाठी, पायाभूत रचनेतील बदल परत करण्यासाठी Git वापरा:
+git revert HEAD  # शेवटचा पायाभूत रचनेचा कमिट परत करा
+azd provision    # मागील पायाभूत रचनेची स्थिती लागू करा
 ```
 
-### डेटाबेस स्थलांतर
+### डेटाबेस स्थलांतरण
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -861,7 +859,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🎯 सर्वोत्तम पद्धती
 
-### 1. संसाधन नामकरण नियम
+### 1. संसाधन नावकरण परंपरा
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -901,7 +899,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. आउटपुट संघटन
+### 4. आउटपुट आयोजन
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -916,29 +914,29 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## पुढील पायऱ्या
+## पुढील पावले
 
-- [प्री-डिप्लॉयमेंट नियोजन](../chapter-06-pre-deployment/capacity-planning.md) - संसाधन उपलब्धता सत्यापित करा
-- [सामान्य समस्या](../chapter-07-troubleshooting/common-issues.md) - इन्फ्रास्ट्रक्चर समस्या निवारण करा
-- [डिबगिंग मार्गदर्शक](../chapter-07-troubleshooting/debugging.md) - प्रोव्हिजनिंग समस्या डीबग करा
-- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - योग्य सेवा टिएर्स निवडा
+- [पूर्व-तैनाती नियोजन](../chapter-06-pre-deployment/capacity-planning.md) - संसाधन उपलब्धता पडताळा
+- [सामान्य समस्या](../chapter-07-troubleshooting/common-issues.md) - इन्फ्रास्ट्रक्चर समस्यांचे निवारण करा
+- [डिबगिंग मार्गदर्शक](../chapter-07-troubleshooting/debugging.md) - provisioning समस्या डिबग करा
+- [SKU निवड](../chapter-06-pre-deployment/sku-selection.md) - योग्य सेवा स्तर निवडा
 
 ## अतिरिक्त संसाधने
 
 - [Azure Bicep दस्तऐवजीकरण](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure आर्किटेक्चर केंद्र](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Resource Manager टेम्प्लेट्स](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure आर्किटेक्चर सेंटर](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **नेव्हिगेशन**
-- **मागील धडा**: [डिप्लॉयमेंट मार्गदर्शक](deployment-guide.md)
+- **मागील धडा**: [तैनाती मार्गदर्शक](deployment-guide.md)
 - **पुढील धडा**: [क्षमता नियोजन](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-अस्वीकरण:
-हा दस्तऐवज AI अनुवाद सेवा Co‑op Translator (https://github.com/Azure/co-op-translator) वापरून अनुवादित केला आहे. जरी आम्ही अचूकतेसाठी प्रयत्न करतो, तरी कृपया लक्षात घ्या की स्वयंचलित अनुवादांमध्ये चुका किंवा अचूकतेतील त्रुटी असू शकतात. मूळ दस्तऐवज त्याच्या मूळ भाषेत अधिकृत स्रोत म्हणून समजला जावा. महत्त्वाच्या माहितीसाठी व्यावसायिक मानवी अनुवाद करणे शिफारसीय आहे. या अनुवादाच्या वापरामुळे उद्भवणाऱ्या कोणत्याही गैरसमजांसाठी किंवा चुकीच्या अर्थलागीसाठी आम्ही जबाबदार नाही.
+**अस्वीकरण**:
+हा दस्तऐवज AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) वापरून अनुवादित करण्यात आला आहे. आम्ही अचूकतेसाठी प्रयत्न करतो, तरी कृपया लक्षात घ्या की स्वयंचलित अनुवादांमध्ये चुका किंवा अचूकतेचा अभाव असू शकतो. मूळ दस्तऐवज त्याच्या मूळ भाषेत अधिकृत स्रोत म्हणून मानले पाहिजे. महत्त्वाच्या माहितीसाठी व्यावसायिक मानवी अनुवाद शिफारस केला जातो. या अनुवादाच्या वापरामुळे उद्भवणाऱ्या कोणत्याही गैरसमजुती किंवा चुकीच्या अर्थलावाबद्दल आम्ही liable नाही.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,28 +1,28 @@
-# AI-विशिष्ट समस्या निवारण मार्गदर्शक
+# AI-विशिष्ट त्रoubleshooting मार्गदर्शक
 
-**प्रकरण नेव्हिगेशन:**
-- **📚 कोर्स होम**: [AZD For Beginners](../../README.md)
-- **📖 वर्तमान प्रकरण**: प्रकरण 7 - समस्या निवारण आणि डीबगिंग
-- **⬅️ मागील**: [डीबगिंग मार्गदर्शक](debugging.md)
-- **➡️ पुढील प्रकरण**: [प्रकरण 8: प्रॉडक्शन आणि एंटरप्राइज पॅटर्न्स](../chapter-08-production/production-ai-practices.md)
-- **🤖 संबंधित**: [प्रकरण 2: AI-फर्स्ट डेव्हलपमेंट](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**अध्याय निव्वळ:**
+- **📚 कोर्स मुखपृष्ठ**: [AZD For Beginners](../../README.md)
+- **📖 सध्याचा अध्याय**: अध्याय 7 - Troubleshooting & Debugging
+- **⬅️ मागील**: [Debugging Guide](debugging.md)
+- **➡️ पुढचा अध्याय**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
+- **🤖 संबंधित**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-हा सर्वसमावेशक समस्या निवारण मार्गदर्शक AZD सह AI सोल्युशन्स तैनात करताना येणाऱ्या सामान्य अडचणींना उद्देशून आहे, ज्यामध्ये Azure AI सेवा संबंधित विशिष्ट उपाय आणि डीबगिंग तंत्रे दिलेली आहेत.
+हा सर्वसमावेशक त्रoubleshooting मार्गदर्शक AZD सह AI सोल्यूशन्स तैनात करताना येणाऱ्या सामान्य समस्या, त्या सोडवण्याचे मार्ग आणि Azure AI सेवांसाठी विशिष्ट डीबगिंग तंत्रे दाखवतो.
 
-## आकृती सूची
+## अनुक्रमणिका
 
-- [Microsoft Foundry Models सेवा समस्या](../../../../docs/chapter-07-troubleshooting)
-- [Azure AI सर्च समस्या](../../../../docs/chapter-07-troubleshooting)
-- [कंटेनर अॅप्स तैनाती समस्या](../../../../docs/chapter-07-troubleshooting)
-- [प्रमाणीकरण आणि परवानगी त्रुटी](../../../../docs/chapter-07-troubleshooting)
-- [मॉडेल तैनात करण्यात अपयश](../../../../docs/chapter-07-troubleshooting)
-- [कार्यक्षमता आणि स्केलिंग समस्या](../../../../docs/chapter-07-troubleshooting)
-- [खर्च आणि कोटा व्यवस्थापन](../../../../docs/chapter-07-troubleshooting)
-- [डीबगिंग साधने आणि तंत्रे](../../../../docs/chapter-07-troubleshooting)
+- [Microsoft Foundry Models Service Issues](#azure-openai-service-issues)
+- [Azure AI Search Problems](#azure-ai-search-problems)
+- [Container Apps Deployment Issues](#container-apps-deployment-issues)
+- [Authentication and Permission Errors](#authentication-and-permission-errors)
+- [Model Deployment Failures](#model-deployment-failures)
+- [Performance and Scaling Issues](#performance-and-scaling-issues)
+- [Cost and Quota Management](#cost-and-quota-management)
+- [Debugging Tools and Techniques](#debugging-tools-and-techniques)
 
-## Microsoft Foundry Models सेवा समस्या
+## Microsoft Foundry Models Service Issues
 
-### समस्या: OpenAI सेवा क्षेत्रात उपलब्ध नाही
+### Issue: OpenAI Service Unavailable in Region
 
 **लक्षणे:**
 ```
@@ -30,13 +30,13 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **कारणे:**
-- निवडलेल्या क्षेत्रात Microsoft Foundry Models उपलब्ध नाहीत
-- प्राधान्यकृत क्षेत्रांतील कोटा संपुष्टात आला आहे
-- क्षेत्रीय क्षमता मर्यादा
+- निवडलेल्या प्रदेशात Microsoft Foundry Models उपलब्ध नाहीत
+- आवडत्या प्रदेशांमध्ये कोटा संपला आहे
+- प्रादेशिक क्षमता मर्यादा
 
 **उपाय:**
 
-1. **क्षेत्र उपलब्धता तपासा:**
+1. **प्रदेश उपलब्धता तपासा:**
 ```bash
 # OpenAI साठी उपलब्ध प्रदेशांची यादी करा
 az cognitiveservices account list-skus \
@@ -45,7 +45,7 @@ az cognitiveservices account list-skus \
   --output table
 ```
 
-2. **AZD कॉन्फिगरेशन अद्ययावत करा:**
+2. **AZD कॉन्फिगरेशन अपडेट करा:**
 ```yaml
 # azure.yaml - Force specific region
 infra:
@@ -56,7 +56,7 @@ parameters:
   location: "eastus2"  # Known working region
 ```
 
-3. **पर्यायी क्षेत्रांचा वापर करा:**
+3. **पर्यायी प्रदेश वापरा:**
 ```bicep
 // infra/main.bicep - Multi-region fallback
 @allowed([
@@ -68,7 +68,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### समस्या: मॉडेल तैनाती कोटा ओलांडले
+### Issue: Model Deployment Quota Exceeded
 
 **लक्षणे:**
 ```
@@ -85,7 +85,7 @@ az cognitiveservices usage list \
   --resource-group YOUR_RG
 ```
 
-2. **कोटा वाढीची विनंती करा:**
+2. **कोटा वाढवण्याची विनंती करा:**
 ```bash
 # कोटा वाढीची विनंती सादर करा
 az support tickets create \
@@ -95,7 +95,7 @@ az support tickets create \
   --problem-classification "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/quota_service_problemClassification_guid"
 ```
 
-3. **मॉडेल क्षमता ऑप्टिमाइझ करा:**
+3. **मॉडेल क्षमता सुधारित करा:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
@@ -113,7 +113,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }
 ```
 
-### समस्या: अमान्य API आवृत्ती
+### Issue: Invalid API Version
 
 **लक्षणे:**
 ```
@@ -130,15 +130,15 @@ AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 
 2. **API आवृत्ती सुसंगतता तपासा:**
 ```bash
-# समर्थित API आवृत्त्यांची यादी करा
+# समर्थित API आवृत्त्यांची यादी
 az rest --method get \
   --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
 ```
 
-## Azure AI सर्च समस्या
+## Azure AI Search Problems
 
-### समस्या: सर्च सेवा किंमत स्तर अपुरे
+### Issue: Search Service Pricing Tier Insufficient
 
 **लक्षणे:**
 ```
@@ -147,7 +147,7 @@ Error: Semantic search requires Basic tier or higher
 
 **उपाय:**
 
-1. **किंमत स्तर अपडेट करा:**
+1. **प्राइसिंग टियर अपग्रेड करा:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -165,7 +165,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **सेमँटिक सर्च अक्षम करा (डेव्हलपमेंट):**
+2. **Semantic Search अक्षम करा (विकासाकरता):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -179,7 +179,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### समस्या: इंडेक्स तयार करण्यात अपयश
+### Issue: Index Creation Failures
 
 **लक्षणे:**
 ```
@@ -188,9 +188,9 @@ Error: Cannot create index, insufficient permissions
 
 **उपाय:**
 
-1. **सर्च सेवा कीज तपासा:**
+1. **Search सेवा कीज तपासा:**
 ```bash
-# शोध सेवा प्रशासकीय कळ मिळवा
+# शोध सेवेसाठी प्रशासकीय की मिळवा
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
@@ -198,7 +198,7 @@ az search admin-key show \
 
 2. **इंडेक्स स्कीमा तपासा:**
 ```python
-# निर्देशांक योजना तपासा
+# इंडेक्स स्कीमा सत्यापित करा
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
@@ -212,7 +212,7 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **मॅनेज्ड आयडेंटिटी वापरा:**
+3. **Managed Identity वापरा:**
 ```bicep
 // Grant search permissions to managed identity
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -226,9 +226,9 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## कंटेनर अॅप्स तैनाती समस्या
+## Container Apps Deployment Issues
 
-### समस्या: कंटेनर बिल्ड फेल्युअर्स
+### Issue: Container Build Failures
 
 **लक्षणे:**
 ```
@@ -237,7 +237,7 @@ Error: Failed to build container image
 
 **उपाय:**
 
-1. **Dockerfile सिंटॅक्स तपासा:**
+1. **Dockerfile_Syntax तपासा:**
 ```dockerfile
 # Dockerfile - Python AI app example
 FROM python:3.11-slim
@@ -259,7 +259,7 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **आश्रितता वैध करा:**
+2. **Dependencies तपासा:**
 ```txt
 # requirements.txt - Pin versions for stability
 fastapi==0.104.1
@@ -271,7 +271,7 @@ azure-search-documents==11.4.0
 azure-cosmos==4.5.1
 ```
 
-3. **हेल्थ चेक जोडा:**
+3. **Health Check जोडा:**
 ```python
 # main.py - हेल्थ चेक एंडपॉइंट जोडा
 from fastapi import FastAPI
@@ -283,7 +283,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### समस्या: कंटेनर अॅप सुरू होण्यात अपयश
+### Issue: Container App Startup Failures
 
 **लक्षणे:**
 ```
@@ -292,7 +292,7 @@ Error: Container failed to start within timeout period
 
 **उपाय:**
 
-1. **सुरूवात टाइमआउट वाढवा:**
+1. **स्टार्टअप टाइमआउट वाढवा:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -327,7 +327,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **मॉडेल लोडिंग ऑप्टिमाइझ करा:**
 ```python
-# प्रारंभ वेळ कमी करण्यासाठी मॉडेल्स मोकळ्या लोड करा
+# स्टार्टअप वेळ कमी करण्यासाठी मॉडेल्सना आलसीपणे लोड करा
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -341,7 +341,7 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # येथे AI क्लाएंट सुरू करा
+        # येथे AI क्लायंट प्रारंभ करा
         pass
 
 @asynccontextmanager
@@ -349,15 +349,15 @@ async def lifespan(app: FastAPI):
     # प्रारंभ
     app.state.model_manager = ModelManager()
     yield
-    # बंद करा
+    # बंद
     pass
 
 app = FastAPI(lifespan=lifespan)
 ```
 
-## प्रमाणीकरण आणि परवानगी त्रुटी
+## Authentication and Permission Errors
 
-### समस्या: मॅनेज्ड आयडेंटिटीला परवानगी नाकारली
+### Issue: Managed Identity Permission Denied
 
 **लक्षणे:**
 ```
@@ -366,15 +366,15 @@ Error: Authentication failed for Microsoft Foundry Models Service
 
 **उपाय:**
 
-1. **भूमिका नियुक्तis तपासा:**
+1. **Role Assignments तपासा:**
 ```bash
-# वर्तमान भूमिका नियुक्त्या तपासा
+# सध्याच्या भूमिका वाटपांची तपासणी करा
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **आवश्यक भूमिका नियुक्त करा:**
+2. **आवश्यक रोल्स नियुक्त करा:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -391,9 +391,9 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-3. **प्रमाणीकरण चाचणी करा:**
+3. **ऑथेंटिकेशन तपासा:**
 ```python
-# व्यवस्थापित ओळख प्रमाणीकरणाची चाचणी करा
+# व्यवस्थापित ओळख प्रमाणीकरणाची चाचणी
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
@@ -406,7 +406,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### समस्या: की वॉल्ट प्रवेश नाकारला
+### Issue: Key Vault Access Denied
 
 **लक्षणे:**
 ```
@@ -415,7 +415,7 @@ Error: The user, group or application does not have secrets get permission
 
 **उपाय:**
 
-1. **की वॉल्ट परवानग्या द्या:**
+1. **Key Vault परवानग्या द्या:**
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -434,7 +434,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **ऍक्सेस पॉलिसीऐवजी RBAC वापरा:**
+2. **Access Policies ऐवजी RBAC वापरा:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -447,9 +447,9 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## मॉडेल तैनाती अयशस्वी
+## Model Deployment Failures
 
-### समस्या: मॉडेल आवृत्ती उपलब्ध नाही
+### Issue: Model Version Not Available
 
 **लक्षणे:**
 ```
@@ -468,7 +468,7 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **मॉडेल फॉलबॅक वापरा:**
+2. **मॉडेल फॉलबॅक्स वापरा:**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
@@ -479,8 +479,8 @@ param primaryModel object = {
 
 @description('Fallback model configuration')
 param fallbackModel object = {
-  name: 'gpt-35-turbo'
-  version: '0125'
+  name: 'gpt-4.1'
+  version: '2024-08-06'
 }
 
 // Try primary model first, fallback if unavailable
@@ -497,9 +497,9 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 }
 ```
 
-3. **तैनातीपूर्वी मॉडेल वैध करा:**
+3. **तैनात करण्यापूर्वी मॉडेल वैधता तपासा:**
 ```python
-# तैनातीपूर्व मॉडेल सत्यापन
+# तैनातीपूर्वी मॉडेलचे सत्यापन
 import httpx
 
 async def validate_model_availability(model_name: str, version: str) -> bool:
@@ -519,9 +519,9 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
         return False
 ```
 
-## कार्यक्षमता आणि स्केलिंग समस्या
+## Performance and Scaling Issues
 
-### समस्या: उच्च विलंब प्रतिसाद
+### Issue: High Latency Responses
 
 **लक्षणे:**
 - प्रतिसाद वेळ > 30 सेकंद
@@ -530,9 +530,9 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 **उपाय:**
 
-1. **विनंती टाइमआउट लागू करा:**
+1. **रिक्वेस्ट टाइमआउट लागू करा:**
 ```python
-# योग्य टाइमआउट सेट करा
+# योग्य टाइमआउट्स कॉन्फिगर करा
 import httpx
 
 client = httpx.AsyncClient(
@@ -545,9 +545,9 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **प्रतिसाद कॅशिंग जोडा:**
+2. **रिस्पॉन्स कॅशिंग जोडा:**
 ```python
-# प्रतिसादांसाठी रेडिस कॅशे
+# प्रतिसादांसाठी Redis कॅश
 import redis.asyncio as redis
 import json
 
@@ -565,7 +565,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **ऑटो-स्केलिंग कॉन्फिगर करा:**
+3. **ऑटो-स्केल कॉन्फिगर करा:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -599,7 +599,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### समस्या: मेमरी कमतर त्रुटी
+### Issue: Memory Out of Errors
 
 **लक्षणे:**
 ```
@@ -629,7 +629,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **मेमरी वापर ऑप्टिमाइझ करा:**
 ```python
-# स्मृती-कार्यक्षम मॉडेल हाताळणी
+# स्मृती-कारक्षम मॉडेल हाताळणी
 import gc
 import psutil
 
@@ -639,32 +639,32 @@ class MemoryOptimizedAI:
         
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # प्रक्रिया सुरू करण्यापूर्वी स्मृती वापर तपासा
+        # प्रक्रिया करण्यापूर्वी स्मृतीचा वापर तपासा
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # जबरदस्तीने कचरापेटी संकलन करा
+            gc.collect()  # कचरा संकलन जबरदस्ती चालवा
             
         result = await self._process_ai_request(request)
         
-        # प्रक्रियेनंतर साफसफाई करा
+        # प्रक्रिया झाल्यानंतर साफसफाई करा
         gc.collect()
         return result
 ```
 
-## खर्च आणि कोटा व्यवस्थापन
+## Cost and Quota Management
 
-### समस्या: अनपेक्षित उच्च खर्च
+### Issue: Unexpected High Costs
 
 **लक्षणे:**
-- अपेक्षा पेक्षा जास्त Azure बिल
-- टोकन वापर अंदाजांपेक्षा जास्त
-- बजेट सूचना सक्रिय
+- अपेक्षितापेक्षा जास्त Azure बिल
+- टोकन वापर अंदाजपेक्षा जास्त
+- बजेट अलर्ट ट्रिगर झाले
 
 **उपाय:**
 
-1. **खर्च नियंत्रण लागू करा:**
+1. **खर्च नियंत्रणे लागू करा:**
 ```python
-# टोकन वापर ट्रॅकिंग
+# टोकन वापराचा मागोवा
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -681,7 +681,7 @@ class TokenTracker:
         return total_tokens
 ```
 
-2. **खर्च सूचना सेट करा:**
+2. **खर्च अलर्ट सेट करा:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
@@ -708,65 +708,62 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 3. **मॉडेल निवड ऑप्टिमाइझ करा:**
 ```python
-# खर्च-जागरूक मॉडेल निवड
-MODEL_COSTS = {
-    'gpt-4.1-mini': 0.00015,  # प्रति 1K टोकन्स
-    'gpt-4.1': 0.03,          # प्रति 1K टोकन्स
-    'gpt-35-turbo': 0.0015  # प्रति 1K टोकन्स
+# खर्च लक्षात घेऊन मॉडेलची निवड
+MODEL_COST_TIERS = {
+  'gpt-4.1-mini': 'low',
+  'gpt-4.1': 'high'
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
     """Select model based on complexity and budget."""
     if complexity == 'simple' or budget_remaining < 10:
         return 'gpt-4.1-mini'
-    elif complexity == 'medium':
-        return 'gpt-35-turbo'
     else:
         return 'gpt-4.1'
 ```
 
-## डीबगिंग साधने आणि तंत्रे
+## Debugging Tools and Techniques
 
-### AZD डीबगिंग कमांड्स
+### AZD Debugging Commands
 
 ```bash
-# तपशीलवार लॉगिंग सक्षम करा
+# विस्तृत लॉगिंग सक्षम करा
 azd up --debug
 
-# तैनाती स्थिती तपासा
+# डिप्लॉयमेंट स्थिती तपासा
 azd show
 
-# अनुप्रयोग लॉग पहा (निरीक्षण डॅशबोर्ड उघडते)
+# अॅप्लिकेशन लॉग पहा (मॉनिटरिंग डॅशबोर्ड उघडेल)
 azd monitor --logs
 
-# थेट मेट्रिक्स पहा
+# लाइव्ह मेट्रिक्स पहा
 azd monitor --live
 
-# पर्यावरण चल तपासा
+# पर्यावरणीय चल तपासा
 azd env get-values
 ```
 
-### AZD AI विस्तार कमांड्स डायग्नोस्टिक्ससाठी
+### AZD AI Extension Commands for Diagnostics
 
-जर तुम्ही `azd ai agent init` वापरून एजंट्स तैनात केले असतील, तर हे अतिरिक्त साधने उपलब्ध आहेत:
+If you deployed agents using `azd ai agent init`, these additional tools are available:
 
 ```bash
-# एजंटचा विस्तार स्थापित करणे सुनिश्चित करा
+# एजंट्स एक्स्टेन्शन स्थापित आहे याची खात्री करा
 azd extension install azure.ai.agents
 
-# मॅनिफेस्टमधून एजंट पुन्हा सुरू करा किंवा अपडेट करा
+# मॅनिफेस्टमधून एजंट पुन्हा प्रारंभ करा किंवा अद्यतनित करा
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# AI साधनांना प्रकल्प स्थिती क्वेरी करण्यासाठी MCP सर्व्हर वापरा
+# एआय साधनांना प्रकल्पाची स्थिती विचार करण्यासाठी MCP सर्व्हर वापरा
 azd mcp start
 
-# पुनरावलोकन आणि लेखापरीक्षणासाठी पायाभूत सुविधा फायली तयार करा
+# पुनरावलोकन आणि लेखापरीक्षणासाठी पायाभूत रचना फायली तयार करा
 azd infra generate
 ```
 
-> **टीप:** `azd infra generate` वापरा जेणेकरून तुम्ही IaC डिस्कवर लिहू शकता आणि कोणते संसाधने प्राव्हिजन केले आहेत हे तपासू शकता. हे संसाधन कॉन्फिगरेशन समस्या डीबग करताना अमूल्य आहे. संपूर्ण तपशीलांसाठी पहा [AZD AI CLI संदर्भ](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
+> **टीप:** `azd infra generate` वापरा जेणेकरून IaC डिस्कवर लिहिले जाईल आणि तुम्ही नेमके कोणती रिसोर्सेस प्रोव्हिजन केली गेली आहेत हे तपासू शकाल. रिसोर्स कॉन्फिगरेशन समस्या डीबग करताना हे अत्यंत उपयुक्त आहे. संपूर्ण तपशीलांसाठी पहा [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
 
-### अनुप्रयोग डीबगिंग
+### Application Debugging
 
 1. **स्ट्रक्चर्ड लॉगिंग:**
 ```python
@@ -821,7 +818,7 @@ async def detailed_health_check():
     return checks
 ```
 
-3. **कार्यक्षमता मॉनिटरिंग:**
+3. **परफॉर्मन्स मॉनिटरिंग:**
 ```python
 import time
 from functools import wraps
@@ -852,43 +849,43 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## सामान्य त्रुटी कोड्स आणि उपाय
+## Common Error Codes and Solutions
 
-| त्रुटी कोड | वर्णन | उपाय |
+| Error Code | Description | Solution |
 |------------|-------------|----------|
-| 401 | अनधिकृत | API कीज आणि मॅनेज्ड आयडेंटिटी कॉन्फिगरेशन तपासा |
-| 403 | निषिद्ध | RBAC भूमिका नियुक्तis तपासा |
-| 429 | दर मर्यादित | पुनर्प्रयत्न लॉजिक सह एक्स्पोनेंशियल बॅकऑफ अंमलात आणा |
-| 500 | आंतरिक सर्व्हर त्रुटी | मॉडेल तैनात स्थिती आणि लॉग्स तपासा |
-| 503 | सेवा उपलब्ध नाही | सेवा आरोग्य आणि क्षेत्रीय उपलब्धता तपासा |
+| 401 | अनधिकृत | API कीज आणि managed identity कॉन्फिगरेशन तपासा |
+| 403 | परवानगी नाकारली | RBAC रोल नियुक्त्या सत्यापित करा |
+| 429 | रेट लिमिट | व्युत्क्रम बॅकऑफसह रीट्राय लॉजिक लागू करा |
+| 500 | अंतर्गत सर्व्हर त्रुटी | मॉडेल तैनात स्थिती आणि लॉग तपासा |
+| 503 | सेवा अनुपलब्ध | सेवा आरोग्य आणि प्रादेशिक उपलब्धता तपासा |
 
 ## पुढील पावले
 
-1. **[AI मॉडेल तैनात मार्गदर्शक](../chapter-02-ai-development/ai-model-deployment.md)** परीक्षणासाठी सर्वोत्तम सरावांसाठी
-2. **[प्रॉडक्शन AI व्यवहारांची पूर्णता करा](../chapter-08-production/production-ai-practices.md)** एंटरप्राइज-सज्ज सोल्युशन्ससाठी
-3. **संघटना समर्थनासाठी [Microsoft Foundry Discord](https://aka.ms/foundry/discord) मध्ये सामील व्हा**
-4. **AZD-विशिष्ट समस्या सादर करा [AZD GitHub संग्रहालय](https://github.com/Azure/azure-dev)**
+1. **[AI Model Deployment Guide](../chapter-02-ai-development/ai-model-deployment.md)** मधील तैनाती सर्वोत्तम पद्धती पाहा
+2. **[Production AI Practices](../chapter-08-production/production-ai-practices.md)** पूर्ण करा एंटरप्राइज-रेडी सोल्यूशन्ससाठी
+3. **समुदाय समर्थनासाठी [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** मध्ये सामील व्हा
+4. **AZD-विशिष्ट समस्यांसाठी** [AZD GitHub repository](https://github.com/Azure/azure-dev) वर issues सबमिट करा
 
-## संदर्भ
+## संसाधने
 
-- [Microsoft Foundry Models सेवा समस्या निवारण](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [कंटेनर अॅप्स समस्या निवारण](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI सर्च समस्या निवारण](https://learn.microsoft.com/azure/search/search-monitor-logs)
-- [**Azure डायग्नोस्टिक्स एजंट कौशल्य**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - तुमच्या एडिटरमध्ये Azure समस्या निवारण कौशल्ये इंस्टॉल करा: `npx skills add microsoft/github-copilot-for-azure`
+- [Microsoft Foundry Models Service Troubleshooting](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Azure AI Search Troubleshooting](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - आपल्या एडिटरमध्ये Azure troubleshooting skills इन्स्टॉल करा: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**प्रकरण नेव्हिगेशन:**
-- **📚 कोर्स होम**: [AZD For Beginners](../../README.md)
-- **📖 वर्तमान प्रकरण**: प्रकरण 7 - समस्या निवारण आणि डीबगिंग
-- **⬅️ मागील**: [डीबगिंग मार्गदर्शक](debugging.md)
-- **➡️ पुढील प्रकरण**: [प्रकरण 8: प्रॉडक्शन आणि एंटरप्राइज पॅटर्न्स](../chapter-08-production/production-ai-practices.md)
-- **🤖 संबंधित**: [प्रकरण 2: AI-फर्स्ट डेव्हलपमेंट](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **📖 संदर्भ**: [Azure Developer CLI समस्या निवारण](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+**अध्याय निव्वळ:**
+- **📚 कोर्स मुखपृष्ठ**: [AZD For Beginners](../../README.md)
+- **📖 सध्याचा अध्याय**: अध्याय 7 - Troubleshooting & Debugging
+- **⬅️ मागील**: [Debugging Guide](debugging.md)
+- **➡️ पुढचा अध्याय**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
+- **🤖 संबंधित**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 संदर्भ**: [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**अस्वीकरण**:
-हा दस्तऐवज AI भाषांतर सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) वापरून भाषांतरित केला आहे. आम्ही अचूकतेसाठी प्रयत्न करतो परंतु कृपया लक्षात घ्या की स्वयंचलित भाषांतरणांमध्ये त्रुटी किंवा अचूकतेत कमतरता असू शकते. मूळ दस्तऐवज त्याच्या मूळ भाषेत अधिकृत स्रोत मानला जावा. अत्यंत महत्त्वाच्या माहितीसाठी व्यावसायिक मानवी भाषांतर शिफारसीय आहे. या भाषांतराचा वापर करून होणाऱ्या कोणत्याही गैरसमजुती किंवा चुकीच्या अर्थलागी आम्ही जबाबदार नाही.
+**Disclaimer**:
+हा दस्तऐवज AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) वापरून अनुवादित केला गेला आहे. जरी आम्ही अचूकतेसाठी प्रयत्न करतो, कृपया लक्षात घ्या की स्वयंचलित अनुवादांमध्ये चुका किंवा अचूकतेच्या त्रुटी असू शकतात. मूळ दस्तऐवज त्याच्या मूळ भाषेत अधिकृत स्रोत म्हणून विचारात घेतला पाहिजे. महत्वाच्या माहितीसाठी, व्यावसायिक मानवी अनुवादाची शिफारस केली जाते. या अनुवादाच्या वापरामुळे उद्भवलेल्या कोणत्याही गैरसमजुतींसाठी किंवा चुकीच्या अर्थनिर्देशांसाठी आम्ही जबाबदार नाही.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
