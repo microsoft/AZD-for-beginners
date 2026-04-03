@@ -1,30 +1,30 @@
-# Deploying a Microsoft SQL Database and Web App with AZD
+# Implementeren van een Microsoft SQL-database en webapp met AZD
 
 ⏱️ **Geschatte tijd**: 20-30 minuten | 💰 **Geschatte kosten**: ~$15-25/maand | ⭐ **Complexiteit**: Gemiddeld
 
-Dit **volledige, werkende voorbeeld** laat zien hoe je de [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) gebruikt om een Python Flask-webapplicatie met een Microsoft SQL Database naar Azure te deployen. Alle code is inbegrepen en getest—geen externe afhankelijkheden nodig.
+Dit **volledige, werkende voorbeeld** toont hoe je de [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) gebruikt om een Python Flask-webapplicatie met een Microsoft SQL-database naar Azure te implementeren. Alle code is inbegrepen en getest—geen externe afhankelijkheden vereist.
 
-## Wat je leert
+## Wat je zult leren
 
 Door dit voorbeeld te voltooien, zul je:
-- Een multi-tier applicatie (web app + database) deployen met infrastructure-as-code
-- Veilige databaseverbindingen configureren zonder secrets te hardcoden
+- Een multi-tier applicatie (webapp + database) implementeren met infrastructure-as-code
+- Veilige databaseverbindingen configureren zonder geheimen hard te coderen
 - De gezondheid van de applicatie monitoren met Application Insights
 - Azure-resources efficiënt beheren met de AZD CLI
-- Azure best practices volgen voor beveiliging, kostenoptimalisatie en observeerbaarheid
+- Azure-best practices volgen voor beveiliging, kostenoptimalisatie en observability
 
-## Overzicht van het scenario
+## Scenario-overzicht
 - **Web App**: Python Flask REST API met databaseconnectiviteit
-- **Database**: Azure SQL Database met voorbeelddata
-- **Infrastructuur**: Geprovisiond met Bicep (modulair, herbruikbare templates)
-- **Deployment**: Volledig geautomatiseerd met `azd`-commando's
-- **Monitoring**: Application Insights voor logs en telemetry
+- **Database**: Azure SQL Database met voorbeeldgegevens
+- **Infrastructuur**: Geporvioneerd met Bicep (modulair, herbruikbare templates)
+- **Implementatie**: Volledig geautomatiseerd met `azd`-opdrachten
+- **Monitoring**: Application Insights voor logs en telemetrie
 
 ## Vereisten
 
 ### Benodigde tools
 
-Voordat je begint, controleer of je deze tools geïnstalleerd hebt:
+Voordat je begint, controleer of je deze tools hebt geïnstalleerd:
 
 1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (versie 2.50.0 of hoger)
    ```sh
@@ -52,27 +52,27 @@ Voordat je begint, controleer of je deze tools geïnstalleerd hebt:
 
 ### Azure-vereisten
 
-- Een actief **Azure-subscriptie** ([maak een gratis account aan](https://azure.microsoft.com/free/))
-- Machtigingen om resources te creëren in je subscriptie
-- **Owner** of **Contributor** rol op de subscriptie of resource group
+- Een actieve **Azure-abonnement** ([maak een gratis account aan](https://azure.microsoft.com/free/))
+- Machtigingen om resources in je abonnement te maken
+- **Eigenaar** of **Contributor** rol op het abonnement of resource group
 
 ### Kennisvereisten
 
-Dit is een **voorbeeld op gemiddeld niveau**. Je zou bekend moeten zijn met:
-- Basis commandoregelactiviteiten
+Dit is een voorbeeld op **gemiddeld niveau**. Je zou vertrouwd moeten zijn met:
+- Basis handelingen op de opdrachtregel
 - Fundamentele cloudconcepten (resources, resource groups)
-- Basiskennis van webapplicaties en databases
+- Basisbegrip van webapplicaties en databases
 
 **Nieuw met AZD?** Begin eerst met de [Getting Started guide](../../docs/chapter-01-foundation/azd-basics.md).
 
 ## Architectuur
 
-Dit voorbeeld deployt een twee-tier architectuur met een webapplicatie en SQL-database:
+Dit voorbeeld implementeert een tweelaagse architectuur met een webapplicatie en SQL-database:
 
 ```mermaid
 graph TD
-    Browser[Gebruikersbrowser] <--> WebApp[Azure Web App<br/>Flask API<br/>/health<br/>/products]
-    WebApp -- Beveiligde verbinding<br/>Versleuteld --> SQL[Azure SQL Database<br/>Productentabel<br/>Voorbeeldgegevens]
+    Browser[Gebruikersbrowser] <--> WebApp[Azure Webapp<br/>Flask-API<br/>/health<br/>/products]
+    WebApp -- Beveiligde verbinding<br/>Versleuteld --> SQL[Azure SQL-database<br/>Products-tabel<br/>Voorbeeldgegevens]
 ```
 **Resource-implementatie:**
 - **Resource Group**: Container voor alle resources
@@ -83,11 +83,11 @@ graph TD
 - **Application Insights**: Monitoring en logging
 - **Log Analytics Workspace**: Gecentraliseerde logopslag
 
-**Analogie**: Zie dit als een restaurant (web app) met een vriescel (database). Klanten bestellen van het menu (API-eindpunten), en de keuken (Flask-app) haalt ingrediënten (data) uit de vriezer. De restaurantmanager (Application Insights) houdt alles bij wat er gebeurt.
+**Analogie**: Zie dit als een restaurant (webapp) met een koelcel (database). Klanten bestellen van het menu (API-eindpunten), en de keuken (Flask-app) haalt ingrediënten (gegevens) uit de koelcel. De restaurantmanager (Application Insights) houdt alles bij wat er gebeurt.
 
 ## Mappenstructuur
 
-Alle bestanden zijn inbegrepen in dit voorbeeld—geen externe afhankelijkheden nodig:
+Alle bestanden zijn inbegrepen in dit voorbeeld—geen externe afhankelijkheden vereist:
 
 ```
 examples/database-app/
@@ -115,14 +115,14 @@ examples/database-app/
 ```
 
 **Wat elk bestand doet:**
-- **azure.yaml**: Zegt tegen AZD wat te deployen en waar
+- **azure.yaml**: Vertelt AZD wat te implementeren en waar
 - **infra/main.bicep**: Orkestreert alle Azure-resources
 - **infra/resources/*.bicep**: Individuele resource-definities (modulair voor hergebruik)
 - **src/web/app.py**: Flask-applicatie met databaselogica
-- **requirements.txt**: Python package-afhankelijkheden
-- **Dockerfile**: Containerisatie-instructies voor deployment
+- **requirements.txt**: Python-pakketafhankelijkheden
+- **Dockerfile**: Containerisatie-instructies voor implementatie
 
-## Quickstart (stap-voor-stap)
+## Quickstart (Stapsgewijs)
 
 ### Stap 1: Clone en navigeer
 
@@ -137,7 +137,7 @@ ls
 # Verwacht: README.md, azure.yaml, infra/, src/
 ```
 
-### Stap 2: Authenticeren bij Azure
+### Stap 2: Authenticeer bij Azure
 
 ```sh
 azd auth login
@@ -156,11 +156,11 @@ Logged in to Azure.
 azd init
 ```
 
-**Wat er gebeurt**: AZD maakt een lokale configuratie voor je deployment.
+**Wat er gebeurt**: AZD maakt een lokale configuratie voor je implementatie.
 
-**Prompts die je ziet**:
+**Vragen die je zult zien**:
 - **Environment name**: Voer een korte naam in (bijv. `dev`, `myapp`)
-- **Azure subscription**: Selecteer je subscriptie uit de lijst
+- **Azure subscription**: Selecteer je abonnement uit de lijst
 - **Azure location**: Kies een regio (bijv. `eastus`, `westeurope`)
 
 **✓ Succescontrole**: Je zou het volgende moeten zien:
@@ -168,13 +168,13 @@ azd init
 SUCCESS: New project initialized!
 ```
 
-### Stap 4: Provision Azure-resources
+### Stap 4: Voorzie Azure-resources
 
 ```sh
 azd provision
 ```
 
-**Wat er gebeurt**: AZD deployed alle infrastructuur (duurt 5-8 minuten):
+**Wat er gebeurt**: AZD implementeert alle infrastructuur (duurt 5-8 minuten):
 1. Maakt resource group aan
 2. Maakt SQL Server en Database aan
 3. Maakt App Service Plan aan
@@ -195,17 +195,17 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 
 **⏱️ Tijd**: 5-8 minuten
 
-### Stap 5: Deploy de applicatie
+### Stap 5: Implementeer de applicatie
 
 ```sh
 azd deploy
 ```
 
-**Wat er gebeurt**: AZD bouwt en deployt je Flask-applicatie:
+**Wat er gebeurt**: AZD bouwt en implementeert je Flask-applicatie:
 1. Pakt de Python-applicatie in
 2. Bouwt de Docker-container
 3. Pusht naar Azure Web App
-4. Initialiseert de database met voorbeelddata
+4. Initialiseren van de database met voorbeeldgegevens
 5. Start de applicatie
 
 **✓ Succescontrole**: Je zou het volgende moeten zien:
@@ -223,7 +223,7 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 azd browse
 ```
 
-Dit opent je gedeployde webapp in de browser op `https://app-<unique-id>.azurewebsites.net`
+Dit opent je geïmplementeerde webapp in de browser op `https://app-<unique-id>.azurewebsites.net`
 
 **✓ Succescontrole**: Je zou JSON-uitvoer moeten zien:
 ```json
@@ -240,12 +240,12 @@ Dit opent je gedeployde webapp in de browser op `https://app-<unique-id>.azurewe
 
 ### Stap 7: Test de API-eindpunten
 
-**Health Check** (controleer databaseverbinding):
+**Healthcheck** (verifieer databaseverbinding):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/health
 ```
 
-**Verwachte respons**:
+**Verwacht antwoord**:
 ```json
 {
   "status": "healthy",
@@ -253,12 +253,12 @@ curl https://app-<your-id>.azurewebsites.net/health
 }
 ```
 
-**Producten weergeven** (voorbeelddata):
+**Productenlijst** (voorbeeldgegevens):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/products
 ```
 
-**Verwachte respons**:
+**Verwacht antwoord**:
 ```json
 [
   {
@@ -272,37 +272,37 @@ curl https://app-<your-id>.azurewebsites.net/products
 ]
 ```
 
-**Enkel product ophalen**:
+**Haal één product op**:
 ```sh
 curl https://app-<your-id>.azurewebsites.net/products/1
 ```
 
-**✓ Succescontrole**: Alle eindpunten geven JSON-data terug zonder fouten.
+**✓ Succescontrole**: Alle eindpunten retourneren JSON-gegevens zonder fouten.
 
 ---
 
-**🎉 Gefeliciteerd!** Je hebt met succes een webapplicatie met een database naar Azure gedeployd met AZD.
+**🎉 Gefeliciteerd!** Je hebt met succes een webapplicatie met een database naar Azure uitgerold met behulp van AZD.
 
-## Configuratie deep-dive
+## Diepgaande configuratie
 
 ### Omgevingsvariabelen
 
-Secrets worden veilig beheerd via de configuratie van Azure App Service—**nooit hardcoden in de broncode**.
+Geheimen worden veilig beheerd via de configuratie van Azure App Service—**nooit hardcoded in de broncode**.
 
-**Automatisch door AZD geconfigureerd**:
+**Automatisch geconfigureerd door AZD**:
 - `SQL_CONNECTION_STRING`: Databaseverbinding met versleutelde referenties
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Telemetry-endpoint voor monitoring
-- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Schakelt automatische dependency-installatie in
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Telemetrie-eindpunt voor monitoring
+- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Schakelt automatische installatie van afhankelijkheden in
 
-**Waar secrets worden opgeslagen**:
-1. Tijdens `azd provision` geef je SQL-referenties via veilige prompts
-2. AZD slaat deze op in je lokale `.azure/<env-name>/.env` bestand (git-ignored)
-3. AZD injecteert ze in de configuratie van Azure App Service (versleuteld at rest)
-4. De applicatie leest ze via `os.getenv()` tijdens runtime
+**Waar geheimen worden opgeslagen**:
+1. Tijdens `azd provision` geef je SQL-referenties via veilige prompts op
+2. AZD slaat deze lokaal op in je `.azure/<env-name>/.env` bestand (git-ignored)
+3. AZD injecteert ze in de configuratie van Azure App Service (versleuteld in rust)
+4. De applicatie leest ze op via `os.getenv()` tijdens runtime
 
 ### Lokale ontwikkeling
 
-Voor lokaal testen, maak een `.env` bestand vanaf het voorbeeld:
+Voor lokaal testen, maak een `.env`-bestand aan vanaf het voorbeeld:
 
 ```sh
 cp .env.sample .env
@@ -318,27 +318,27 @@ pip install -r requirements.txt
 # Stel omgevingsvariabelen in
 export SQL_CONNECTION_STRING="your-local-connection-string"
 
-# Voer de applicatie uit
+# Start de applicatie
 python app.py
 ```
 
-**Lokaal testen**:
+**Test lokaal**:
 ```sh
 curl http://localhost:8000/health
-# Verwacht: {"status": "healthy", "database": "connected"}
+# Verwacht: {"status": "gezond", "database": "verbonden"}
 ```
 
-### Infrastructure as Code
+### Infrastructuur als code
 
-Alle Azure-resources zijn gedefinieerd in **Bicep-templates** (map `infra/`):
+Alle Azure-resources zijn gedefinieerd in **Bicep-templates** (`infra/` map):
 
 - **Modulair ontwerp**: Elk resourcetype heeft zijn eigen bestand voor herbruikbaarheid
 - **Geparameteriseerd**: Pas SKUs, regio's en naamgevingsconventies aan
-- **Best Practices**: Volgt Azure-naamgevingsstandaarden en beveiligingsstandaarden
-- **Versiebeheer**: Infrastructuurwijzigingen worden gevolgd in Git
+- **Best Practices**: Volgt Azure-naamgevingsstandaarden en beveiligingsdefaults
+- **Versiecontrole**: Infrastructuurwijzigingen worden gevolgd in Git
 
-**Voorbeeld aanpassing**:
-Om de databasetier te wijzigen, bewerk `infra/resources/sql-database.bicep`:
+**Aanpassingsvoorbeeld**:
+Om de database-tier te wijzigen, bewerk `infra/resources/sql-database.bicep`:
 ```bicep
 sku: {
   name: 'Standard'  // Changed from 'Basic'
@@ -349,12 +349,12 @@ sku: {
 
 ## Beveiligingsbest practices
 
-Dit voorbeeld volgt Azure-beveiligingsbest practices:
+Dit voorbeeld volgt Azure beveiligingsbest practices:
 
-### 1. **Geen secrets in de broncode**
+### 1. **Geen geheimen in broncode**
 - ✅ Referenties opgeslagen in Azure App Service-configuratie (versleuteld)
-- ✅ `.env` bestanden uitgesloten van Git via `.gitignore`
-- ✅ Secrets doorgegeven via veilige parameters tijdens provisioning
+- ✅ `.env`-bestanden uitgesloten van Git via `.gitignore`
+- ✅ Geheimen doorgegeven via veilige parameters tijdens provisioning
 
 ### 2. **Versleutelde verbindingen**
 - ✅ TLS 1.2 minimaal voor SQL Server
@@ -362,8 +362,8 @@ Dit voorbeeld volgt Azure-beveiligingsbest practices:
 - ✅ Databaseverbindingen gebruiken versleutelde kanalen
 
 ### 3. **Netwerkbeveiliging**
-- ✅ SQL Server firewall geconfigureerd om alleen Azure-services toe te staan
-- ✅ Openbare netwerktoegang beperkt (kan verder worden beperkt met Private Endpoints)
+- ✅ SQL Server-firewall geconfigureerd om alleen Azure-services toe te staan
+- ✅ Publieke netwerktoegang beperkt (kan verder worden afgeschermd met Private Endpoints)
 - ✅ FTPS uitgeschakeld op Web App
 
 ### 4. **Authenticatie & Autorisatie**
@@ -372,14 +372,14 @@ Dit voorbeeld volgt Azure-beveiligingsbest practices:
 
 **Om te upgraden naar Managed Identity** (voor productie):
 1. Schakel managed identity in op de Web App
-2. Verleen de identity SQL-permissies
+2. Verleen de identiteit SQL-rechten
 3. Werk de connection string bij om managed identity te gebruiken
 4. Verwijder wachtwoordgebaseerde authenticatie
 
 ### 5. **Auditing & Compliance**
-- ✅ Application Insights logt alle requests en fouten
-- ✅ SQL Database auditing ingeschakeld (kan geconfigureerd worden voor compliance)
-- ✅ Alle resources getagd voor governance
+- ✅ Application Insights logt alle verzoeken en fouten
+- ✅ SQL Database-auditing ingeschakeld (kan worden geconfigureerd voor compliance)
+- ✅ Alle resources zijn getagd voor governance
 
 **Beveiligingschecklist vóór productie**:
 - [ ] Schakel Azure Defender voor SQL in
@@ -397,12 +397,12 @@ Dit voorbeeld volgt Azure-beveiligingsbest practices:
 |----------|----------|------------------|
 | App Service Plan | B1 (Basic) | ~$13/maand |
 | SQL Database | Basic (2GB) | ~$5/maand |
-| Application Insights | Pay-as-you-go | ~$2/maand (weinig verkeer) |
-| **Totaal** | | **~$20/maand** |
+| Application Insights | Pay-as-you-go | ~$2/maand (laag verkeer) |
+| **Total** | | **~$20/maand** |
 
 **💡 Tips om kosten te besparen**:
 
-1. **Gebruik vrije tiers voor leren**:
+1. **Gebruik de gratis laag voor leren**:
    - App Service: F1-tier (gratis, beperkte uren)
    - SQL Database: Gebruik Azure SQL Database serverless
    - Application Insights: 5GB/maand gratis ingestie
@@ -416,7 +416,7 @@ Dit voorbeeld volgt Azure-beveiligingsbest practices:
    az webapp start --name <app-name> --resource-group <rg-name>
    ```
 
-3. **Verwijder alles na testen**:
+3. **Verwijder alles na het testen**:
    ```sh
    azd down
    ```
@@ -424,44 +424,44 @@ Dit voorbeeld volgt Azure-beveiligingsbest practices:
 
 4. **Development vs. Production SKUs**:
    - **Development**: Basic-tier (gebruikt in dit voorbeeld)
-   - **Productie**: Standard/Premium-tier met redundantie
+   - **Production**: Standard/Premium-tier met redundantie
 
-**Kostenbewaking**:
+**Kostenmonitoring**:
 - Bekijk kosten in [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
-- Stel kostenwaarschuwingen in om verrassingen te voorkomen
+- Stel kostwaarschuwingen in om verrassingen te voorkomen
 - Tag alle resources met `azd-env-name` voor tracking
 
-**Gratis tier alternatief**:
-Voor leersituaties kun je `infra/resources/app-service-plan.bicep` aanpassen:
+**Gratis laag alternatief**:
+Voor leerdoeleinden kun je `infra/resources/app-service-plan.bicep` wijzigen:
 ```bicep
 sku: {
   name: 'F1'  // Free tier
   tier: 'Free'
 }
 ```
-**Opmerking**: De gratis tier heeft beperkingen (60 min/dag CPU, geen always-on).
+**Opmerking**: De gratis laag heeft beperkingen (60 min/dag CPU, geen always-on).
 
-## Monitoring & Observeerbaarheid
+## Monitoring & Observability
 
 ### Integratie met Application Insights
 
 Dit voorbeeld bevat **Application Insights** voor uitgebreide monitoring:
 
-**Wat wordt gemonitord**:
-- ✅ HTTP-requests (latentie, statuscodes, eindpunten)
-- ✅ Applicatiefouten en exceptions
-- ✅ Aangepaste logging uit de Flask-app
-- ✅ Databaseverbinding gezondheid
-- ✅ Prestatiestatistieken (CPU, geheugen)
+**Wat wordt bewaakt**:
+- ✅ HTTP-verzoeken (latentie, statuscodes, eindpunten)
+- ✅ Applicatiefouten en uitzonderingen
+- ✅ Aangepaste logging vanuit de Flask-app
+- ✅ Database-verbindinggezondheid
+- ✅ Prestatiemetrics (CPU, geheugen)
 
 **Toegang tot Application Insights**:
-1. Open de [Azure Portal](https://portal.azure.com)
+1. Open [Azure Portal](https://portal.azure.com)
 2. Navigeer naar je resource group (`rg-<env-name>`)
 3. Klik op de Application Insights-resource (`appi-<unique-id>`)
 
-**Nuttige queries** (Application Insights → Logs):
+**Nuttige query's** (Application Insights → Logs):
 
-**Bekijk alle requests**:
+**Bekijk alle verzoeken**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -484,31 +484,31 @@ requests
 | summarize count() by resultCode, bin(timestamp, 1h)
 ```
 
-### SQL Database auditing
+### SQL Database-auditing
 
-**SQL Database auditing is ingeschakeld** om het volgende bij te houden:
-- Database-toegangs-patronen
+**SQL Database-auditing is ingeschakeld** om het volgende bij te houden:
+- Toegangs-patronen tot de database
 - Mislukte aanmeldpogingen
 - Schemawijzigingen
-- Data-toegang (voor compliance)
+- Gegevensaccess (voor compliance)
 
 **Toegang tot auditlogs**:
 1. Azure Portal → SQL Database → Auditing
-2. Bekijk logs in de Log Analytics workspace
+2. Bekijk logs in de Log Analytics-workspace
 
-### Real-time monitoring
+### Realtime monitoring
 
-**Bekijk live metrics**:
+**Bekijk live statistieken**:
 1. Application Insights → Live Metrics
-2. Zie requests, failures en prestaties in real-time
+2. Zie verzoeken, fouten en prestaties in realtime
 
-**Stel alerts in**:
-Maak alerts voor kritieke gebeurtenissen:
-- HTTP 500 fouten > 5 in 5 minuten
-- Database-verbindingsfouten
+**Stel waarschuwingen in**:
+Maak waarschuwingen voor kritieke gebeurtenissen:
+- HTTP 500-fouten > 5 in 5 minuten
+- Database-verbinding-failures
 - Hoge responsetijden (>2 seconden)
 
-**Voorbeeld aanmaken van een alert**:
+**Voorbeeld van het aanmaken van een waarschuwing**:
 ```sh
 az monitor metrics alert create \
   --name "High-Response-Time" \
@@ -519,66 +519,66 @@ az monitor metrics alert create \
 ```
 
 ## Probleemoplossing
-### Veelvoorkomende problemen en oplossingen
+### Veelvoorkomende Problemen en Oplossingen
 
-#### 1. `azd provision` faalt met "Locatie niet beschikbaar"
+#### 1. `azd provision` fails with "Location not available"
 
-**Symptoom**:
+**Symptom**:
 ```
 Error: The subscription is not registered for the resource type 'components' in the location 'centralus'.
 ```
 
-**Oplossing**:
-Kies een andere Azure-regio of registreer de resourceprovider:
+**Solution**:
+Kies een andere Azure-regio of registreer de resource provider:
 ```sh
 az provider register --namespace Microsoft.Insights
 ```
 
-#### 2. SQL-verbinding mislukt tijdens implementatie
+#### 2. SQL Connection Fails During Deployment
 
-**Symptoom**:
+**Symptom**:
 ```
 pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]TCP Provider...')
 ```
 
-**Oplossing**:
-- Controleer of de firewall van SQL Server Azure-services toestaat (automatisch geconfigureerd)
-- Controleer of het SQL-adminwachtwoord correct is ingevoerd tijdens `azd provision`
+**Solution**:
+- Controleer of de firewall van de SQL Server Azure-services toestaat (automatisch geconfigureerd)
+- Controleer of het SQL-adminwachtwoord tijdens `azd provision` correct is ingevoerd
 - Zorg dat SQL Server volledig is geprovisioneerd (kan 2-3 minuten duren)
 
-**Verbinding verifiëren**:
+**Controleer verbinding**:
 ```sh
-# Ga in het Azure-portaal naar SQL Database → Query-editor
-# Probeer verbinding te maken met uw inloggegevens
+# Ga in de Azure-portal naar SQL-database → Query-editor
+# Probeer verbinding te maken met uw inloggegevens.
 ```
 
-#### 3. Web-app toont "Applicatiefout"
+#### 3. Web App Shows "Application Error"
 
-**Symptoom**:
-De browser toont een algemene foutpagina.
+**Symptom**:
+Browser toont een generieke foutpagina.
 
-**Oplossing**:
+**Solution**:
 Controleer applicatielogs:
 ```sh
-# Bekijk recente logboeken
+# Bekijk recente logs
 az webapp log tail --name <app-name> --resource-group <rg-name>
 ```
 
 **Veelvoorkomende oorzaken**:
 - Ontbrekende omgevingsvariabelen (controleer App Service → Configuratie)
-- Installatie van Python-pakketten mislukt (controleer implementatielogs)
-- Fout bij initialisatie van database (controleer SQL-connectiviteit)
+- Installatie van Python-pakketten is mislukt (controleer implementatielogs)
+- Fout bij database-initialisatie (controleer SQL-connectiviteit)
 
-#### 4. `azd deploy` faalt met "Build-fout"
+#### 4. `azd deploy` Fails with "Build Error"
 
-**Symptoom**:
+**Symptom**:
 ```
 Error: Failed to build project
 ```
 
-**Oplossing**:
-- Zorg dat `requirements.txt` geen syntaxisfouten bevat
-- Controleer of Python 3.11 is gespecificeerd in `infra/resources/web-app.bicep`
+**Solution**:
+- Zorg dat `requirements.txt` geen syntaxfouten bevat
+- Controleer dat Python 3.11 is opgegeven in `infra/resources/web-app.bicep`
 - Controleer of Dockerfile het juiste basisimage heeft
 
 **Lokaal debuggen**:
@@ -588,95 +588,98 @@ docker build -t test-app .
 docker run -p 8000:8000 test-app
 ```
 
-#### 5. "Unauthorized" bij het uitvoeren van AZD-opdrachten
+#### 5. "Unauthorized" When Running AZD Commands
 
-**Symptoom**:
+**Symptom**:
 ```
 ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have authorization
 ```
 
-**Oplossing**:
+**Solution**:
 Log opnieuw in bij Azure:
 ```sh
+# Vereist voor AZD-workflows
 azd auth login
+
+# Optioneel als u ook rechtstreeks Azure CLI-commando's gebruikt
 az login
 ```
 
 Controleer of je de juiste machtigingen hebt (rol Contributor) op het abonnement.
 
-#### 6. Hoge databasekosten
+#### 6. High Database Costs
 
-**Symptoom**:
+**Symptom**:
 Onverwachte Azure-factuur.
 
-**Oplossing**:
+**Solution**:
 - Controleer of je vergeten bent `azd down` uit te voeren na het testen
-- Controleer of de SQL Database de Basic-laag gebruikt (niet Premium)
+- Controleer of de SQL Database de Basic-tier gebruikt (niet Premium)
 - Bekijk kosten in Azure Cost Management
 - Stel kostenwaarschuwingen in
 
-### Hulp
+### Getting Help
 
-**Bekijk alle AZD-omgevingsvariabelen**:
+**View All AZD Environment Variables**:
 ```sh
 azd env get-values
 ```
 
-**Controleer implementatiestatus**:
+**Check Deployment Status**:
 ```sh
 az webapp show --name <app-name> --resource-group <rg-name> --query state
 ```
 
-**Toegang tot applicatielogs**:
+**Access Application Logs**:
 ```sh
 az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
 ```
 
-**Meer hulp nodig?**
-- [AZD-probleemoplossingsgids](../../docs/chapter-07-troubleshooting/common-issues.md)
-- [Probleemoplossing Azure App Service](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
-- [Azure SQL - probleemoplossing](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
+**Need More Help?**
+- [AZD - Probleemoplossingshandleiding](../../docs/chapter-07-troubleshooting/common-issues.md)
+- [Azure App Service Troubleshooting](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
+- [Azure SQL Troubleshooting](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
 
-## Praktische oefeningen
+## Practical Exercises
 
-### Oefening 1: Verifieer je implementatie (Beginner)
+### Exercise 1: Verify Your Deployment (Beginner)
 
-**Doel**: Bevestig dat alle resources zijn uitgerold en de applicatie werkt.
+**Goal**: Bevestig dat alle resources zijn uitgerold en dat de applicatie werkt.
 
-**Stappen**:
-1. Toon alle resources in je resourcegroep:
+**Steps**:
+1. List all resources in your resource group:
    ```sh
    az resource list --resource-group rg-<env-name> --output table
    ```
-   **Verwacht**: 6-7 resources (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
+   **Expected**: 6-7 resources (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
 
-2. Test alle API-eindpunten:
+2. Test all API endpoints:
    ```sh
    curl https://app-<your-id>.azurewebsites.net/
    curl https://app-<your-id>.azurewebsites.net/health
    curl https://app-<your-id>.azurewebsites.net/products
    curl https://app-<your-id>.azurewebsites.net/products/1
    ```
-   **Verwacht**: Alle endpoints geven geldige JSON zonder fouten terug
+   **Expected**: All return valid JSON without errors
 
-3. Controleer Application Insights:
+3. Check Application Insights:
    - Navigeer naar Application Insights in de Azure Portal
    - Ga naar "Live Metrics"
-   - Vernieuw je browser op de web-app
-   **Verwacht**: Zie verzoeken in realtime verschijnen
+   - Vernieuw je browser op de webapp
+   **Expected**: Zie requests verschijnen in realtime
 
-**Succescriteria**: Alle 6-7 resources bestaan, alle endpoints geven data terug, Live Metrics toont activiteit.
+**Succescriteria**: Alle 6-7 resources bestaan, alle endpoints geven gegevens terug, Live Metrics toont activiteit.
 
 ---
 
-### Oefening 2: Voeg een nieuw API-eindpunt toe (Gevorderd)
+### Exercise 2: Add a New API Endpoint (Intermediate)
 
-**Doel**: Breid de Flask-applicatie uit met een nieuw endpoint.
+**Goal**: Breid de Flask-applicatie uit met een nieuw endpoint.
 
-**Startcode**: Huidige endpoints in `src/web/app.py`
+**Starter Code**: Huidige endpoints in `src/web/app.py`
 
-**Stappen**:
-1. Bewerk `src/web/app.py` en voeg een nieuw endpoint toe na de functie `get_product()`:
+**Steps**:
+1. Bewerk `src/web/app.py` en voeg een nieuw endpoint toe na de `get_product()` functie:
    ```python
    @app.route('/products/search/<keyword>')
    def search_products(keyword):
@@ -710,7 +713,7 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
            return jsonify({'error': str(e)}), 500
    ```
 
-2. Implementeer de bijgewerkte applicatie:
+2. Deploy de bijgewerkte applicatie:
    ```sh
    azd deploy
    ```
@@ -719,26 +722,26 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    ```sh
    curl https://app-<your-id>.azurewebsites.net/products/search/laptop
    ```
-   **Verwacht**: Geeft producten terug die overeenkomen met "laptop"
+   **Expected**: Returns products matching "laptop"
 
-**Succescriteria**: Nieuw endpoint werkt, geeft gefilterde resultaten terug, verschijnt in Application Insights-logs.
+**Succescriteria**: Het nieuwe endpoint werkt, retourneert gefilterde resultaten, verschijnt in de Application Insights-logs.
 
 ---
 
-### Oefening 3: Voeg bewaking en waarschuwingen toe (Geavanceerd)
+### Exercise 3: Add Monitoring and Alerts (Advanced)
 
-**Doel**: Stel proactieve bewaking met waarschuwingen in.
+**Goal**: Stel proactieve monitoring met waarschuwingen in.
 
-**Stappen**:
+**Steps**:
 1. Maak een waarschuwing voor HTTP 500-fouten:
    ```sh
-   # Haal de resource-id van Application Insights op
+   # Haal Application Insights resource-id op
    AI_ID=$(az monitor app-insights component show \
      --app appi-<your-id> \
      --resource-group rg-<env-name> \
      --query id -o tsv)
    
-   # Maak een waarschuwing aan
+   # Maak waarschuwing aan
    az monitor metrics alert create \
      --name "High-Error-Rate" \
      --resource-group rg-<env-name> \
@@ -749,28 +752,28 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
      --description "Alert when >5 failed requests in 5 minutes"
    ```
 
-2. Activeer de waarschuwing door fouten te veroorzaken:
+2. Trigger de waarschuwing door fouten te veroorzaken:
    ```sh
-   # Een niet-bestaand product opvragen
+   # Vraag een niet-bestaand product aan
    for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
    ```
 
-3. Controleer of de waarschuwing is geactiveerd:
+3. Controleer of de waarschuwing is afgevuurd:
    - Azure Portal → Alerts → Alert Rules
    - Controleer je e-mail (indien geconfigureerd)
 
-**Succescriteria**: Waarschuwingsregel is gemaakt, wordt geactiveerd bij fouten, meldingen worden ontvangen.
+**Succescriteria**: Waarschuwingsregel is aangemaakt, wordt geactiveerd bij fouten, notificaties worden ontvangen.
 
 ---
 
-### Oefening 4: Wijzigingen in databaseschema (Geavanceerd)
+### Exercise 4: Database Schema Changes (Advanced)
 
-**Doel**: Voeg een nieuwe tabel toe en pas de applicatie aan om deze te gebruiken.
+**Goal**: Voeg een nieuwe tabel toe en wijzig de applicatie om deze te gebruiken.
 
-**Stappen**:
-1. Maak verbinding met de SQL-database via de Query Editor in de Azure Portal
+**Steps**:
+1. Maak verbinding met de SQL Database via de Query Editor in de Azure Portal
 
-2. Maak een nieuwe tabel `categories` aan:
+2. Maak een nieuwe `categories`-tabel:
    ```sql
    CREATE TABLE categories (
        id INT PRIMARY KEY IDENTITY(1,1),
@@ -787,31 +790,31 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    UPDATE products SET category_id = 1; -- Set all to Electronics
    ```
 
-3. Werk `src/web/app.py` bij zodat categorie-informatie in de antwoorden wordt opgenomen
+3. Werk `src/web/app.py` bij om categorie-informatie in responses op te nemen
 
-4. Implementeer en test
+4. Deploy en test
 
 **Succescriteria**: Nieuwe tabel bestaat, producten tonen categorie-informatie, applicatie werkt nog steeds.
 
 ---
 
-### Oefening 5: Implementeer caching (Expert)
+### Exercise 5: Implement Caching (Expert)
 
-**Doel**: Voeg Azure Redis Cache toe om de prestaties te verbeteren.
+**Goal**: Voeg Azure Redis Cache toe om de prestaties te verbeteren.
 
-**Stappen**:
+**Steps**:
 1. Voeg Redis Cache toe aan `infra/main.bicep`
 2. Werk `src/web/app.py` bij om productqueries te cachen
 3. Meet prestatieverbetering met Application Insights
-4. Vergelijk reactietijden voor/na caching
+4. Vergelijk responstijden voor/na caching
 
-**Succescriteria**: Redis is uitgerold, caching werkt, reactietijden verbeteren met >50%.
+**Succescriteria**: Redis is uitgerold, caching werkt, responstijden verbeteren met >50%.
 
-**Tip**: Begin met de [Azure Cache for Redis-documentatie](https://learn.microsoft.com/azure/azure-cache-for-redis/).
+**Hint**: Begin met [Azure Cache for Redis documentation](https://learn.microsoft.com/azure/azure-cache-for-redis/).
 
 ---
 
-## Opruimen
+## Cleanup
 
 Om doorlopende kosten te voorkomen, verwijder alle resources wanneer je klaar bent:
 
@@ -819,7 +822,7 @@ Om doorlopende kosten te voorkomen, verwijder alle resources wanneer je klaar be
 azd down
 ```
 
-**Bevestigingsprompt**:
+**Confirmation prompt**:
 ```
 ? Total resources to delete: 7, are you sure you want to continue? (y/N)
 ```
@@ -829,67 +832,67 @@ Typ `y` om te bevestigen.
 **✓ Succescontrole**: 
 - Alle resources zijn verwijderd uit de Azure Portal
 - Geen doorlopende kosten
-- Lokale map `.azure/<env-name>` kan worden verwijderd
+- Lokale `.azure/<env-name>` map kan worden verwijderd
 
-**Alternatief** (infrastructuur behouden, gegevens verwijderen):
+**Alternatief** (infrastructuur behouden, data verwijderen):
 ```sh
 # Verwijder alleen de resourcegroep (bewaar de AZD-configuratie)
 az group delete --name rg-<env-name> --yes
 ```
-## Meer informatie
+## Learn More
 
-### Gerelateerde documentatie
-- [Azure Developer CLI-documentatie](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Azure SQL Database-documentatie](https://learn.microsoft.com/azure/azure-sql/database/)
-- [Azure App Service-documentatie](https://learn.microsoft.com/azure/app-service/)
-- [Application Insights-documentatie](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Bicep-taalreferentie](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+### Related Documentation
+- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Azure SQL Database Documentation](https://learn.microsoft.com/azure/azure-sql/database/)
+- [Azure App Service Documentation](https://learn.microsoft.com/azure/app-service/)
+- [Application Insights Documentation](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Bicep Language Reference](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-### Volgende stappen in deze cursus
-- **[Container Apps-voorbeeld](../../../../examples/container-app)**: Implementeer microservices met Azure Container Apps
-- **[AI-integratiegids](../../../../docs/ai-foundry)**: Voeg AI-mogelijkheden toe aan je app
-- **[Beste praktijken voor implementatie](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Patronen voor productie-implementatie
+### Next Steps in This Course
+- **[Container Apps Example](../../../../examples/container-app)**: Deploy microservices with Azure Container Apps
+- **[AI Integration Guide](../../../../docs/ai-foundry)**: Add AI capabilities to your app
+- **[Deployment Best Practices](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Production deployment patterns
 
-### Geavanceerde onderwerpen
-- **Managed Identity**: Verwijder wachtwoorden en gebruik Azure AD-authenticatie
-- **Private Endpoints**: Beveilig databaseverbindingen binnen een virtueel netwerk
-- **CI/CD-integratie**: Automatiseer implementaties met GitHub Actions of Azure DevOps
-- **Multi-Environment**: Stel dev-, staging- en productieomgevingen in
-- **Databasemigraties**: Gebruik Alembic of Entity Framework voor schemaversiebeheer
+### Advanced Topics
+- **Managed Identity**: Remove passwords and use Azure AD authentication
+- **Private Endpoints**: Secure database connections within a virtual network
+- **CI/CD Integration**: Automate deployments with GitHub Actions or Azure DevOps
+- **Multi-Environment**: Set up dev, staging, and production environments
+- **Database Migrations**: Use Alembic or Entity Framework for schema versioning
 
-### Vergelijking met andere benaderingen
+### Comparison to Other Approaches
 
-**AZD vs. ARM-templates**:
-- ✅ AZD: Hogere abstractie, eenvoudigere commando's
-- ⚠️ ARM: Meer omslachtig, fijnmazige controle
+**AZD vs. ARM Templates**:
+- ✅ AZD: Higher-level abstraction, simpler commands
+- ⚠️ ARM: More verbose, granular control
 
 **AZD vs. Terraform**:
-- ✅ AZD: Azure-native, geïntegreerd met Azure-services
-- ⚠️ Terraform: Multi-cloud-ondersteuning, groter ecosysteem
+- ✅ AZD: Azure-native, integrated with Azure services
+- ⚠️ Terraform: Multi-cloud support, larger ecosystem
 
 **AZD vs. Azure Portal**:
-- ✅ AZD: Herhaalbaar, versiebeheerbaar, automatiseerbaar
-- ⚠️ Portal: Handmatige klikken, moeilijk te reproduceren
+- ✅ AZD: Repeatable, version-controlled, automatable
+- ⚠️ Portal: Manual clicks, difficult to reproduce
 
-**Zie AZD als**: Docker Compose voor Azure—vereenvoudigde configuratie voor complexe implementaties.
+**Think of AZD as**: Docker Compose for Azure—simplified configuration for complex deployments.
 
 ---
 
-## Veelgestelde vragen
+## Frequently Asked Questions
 
-**Q: Kan ik een andere programmeertaal gebruiken?**  
-A: Ja! Vervang `src/web/` door Node.js, C#, Go of een andere taal. Werk `azure.yaml` en Bicep dienovereenkomstig bij.
+**Q: Can I use a different programming language?**  
+A: Yes! Replace `src/web/` with Node.js, C#, Go, or any language. Update `azure.yaml` and Bicep accordingly.
 
-**Q: Hoe voeg ik meer databases toe?**  
-A: Voeg een extra SQL Database-module toe in `infra/main.bicep` of gebruik PostgreSQL/MySQL van Azure Database-services.
+**Q: How do I add more databases?**  
+A: Add another SQL Database module in `infra/main.bicep` or use PostgreSQL/MySQL from Azure Database services.
 
-**Q: Kan ik dit voor productie gebruiken?**  
-A: Dit is een startpunt. Voor productie, voeg toe: managed identity, private endpoints, redundantie, back-upstrategie, WAF en verbeterde bewaking.
+**Q: Can I use this for production?**  
+A: This is a starting point. For production, add: managed identity, private endpoints, redundancy, backup strategy, WAF, and enhanced monitoring.
 
-**Q: Wat als ik containers wil gebruiken in plaats van code-implementatie?**  
-A: Bekijk het [Container Apps-voorbeeld](../../../../examples/container-app) dat Docker-containers doorlopend gebruikt.
+**Q: What if I want to use containers instead of code deployment?**  
+A: Check out the [Container Apps Example](../../../../examples/container-app) which uses Docker containers throughout.
 
-**Q: Hoe maak ik verbinding met de database vanaf mijn lokale machine?**  
+**Q: How do I connect to the database from my local machine?**  
 A: Voeg je IP toe aan de firewall van de SQL Server:
 ```sh
 az sql server firewall-rule create \
@@ -900,21 +903,21 @@ az sql server firewall-rule create \
   --end-ip-address <your-ip>
 ```
 
-**Q: Kan ik een bestaande database gebruiken in plaats van een nieuwe te maken?**  
-A: Ja, wijzig `infra/main.bicep` om te verwijzen naar een bestaande SQL Server en werk de connection string-parameters bij.
+**Q: Can I use an existing database instead of creating a new one?**  
+A: Yes, modify `infra/main.bicep` to reference an existing SQL Server and update the connection string parameters.
 
 ---
 
-> **Opmerking:** Dit voorbeeld toont best practices voor het implementeren van een web-app met een database met behulp van AZD. Het bevat werkende code, uitgebreide documentatie en praktische oefeningen om het leren te versterken. Voor productie-implementaties, controleer beveiliging, schaling, naleving en kostenvereisten die specifiek zijn voor je organisatie.
+> **Opmerking:** Dit voorbeeld toont best practices voor het uitrollen van een webapp met een database met behulp van AZD. Het bevat werkende code, uitgebreide documentatie en praktische oefeningen ter versterking van het leerproces. Voor productie-implementaties, bekijk beveiliging, schaling, compliance en kostenvereisten die specifiek zijn voor jouw organisatie.
 
-**📚 Course Navigation:**
-- ← Vorige: [Container Apps-voorbeeld](../../../../examples/container-app)
-- → Volgende: [AI-integratiegids](../../../../docs/ai-foundry)
-- 🏠 [Cursusstart](../../README.md)
+**📚 Cursusnavigatie:**
+- ← Vorige: [Container Apps Example](../../../../examples/container-app)
+- → Volgende: [AI Integration Guide](../../../../docs/ai-foundry)
+- 🏠 [Course Home](../../README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vrijwaring**:
-Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, houd er rekening mee dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor kritische informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+**Disclaimer**:
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, houd er rekening mee dat geautomatiseerde vertalingen fouten of onjuistheden kunnen bevatten. Het oorspronkelijke document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

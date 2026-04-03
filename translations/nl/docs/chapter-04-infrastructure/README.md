@@ -1,20 +1,22 @@
 # Hoofdstuk 4: Infrastructuur als Code & Implementatie
 
-**📚 Cursus**: [AZD For Beginners](../../README.md) | **⏱️ Duur**: 1-1.5 uur | **⭐ Complexiteit**: Gemiddeld
+**📚 Cursus**: [AZD voor beginners](../../README.md) | **⏱️ Duur**: 1-1.5 hours | **⭐ Complexiteit**: Gemiddeld
 
 ---
 
 ## Overzicht
 
-Dit hoofdstuk behandelt Infrastructuur als Code (IaC)-patronen met Bicep-templates, de voorziening van resources en implementatiestrategieën met de Azure Developer CLI.
+Dit hoofdstuk behandelt Infrastructuur als Code (IaC) patronen met Bicep-templates, het provisioneren van resources en implementatiestrategieën met de Azure Developer CLI.
+
+> Gevalideerd met `azd 1.23.12` in maart 2026.
 
 ## Leerdoelen
 
-Na het voltooien van dit hoofdstuk zul je:
-- Inzicht krijgen in de structuur en syntaxis van Bicep-templates
-- Azure-resources voorzien met `azd provision`
+Na het voltooien van dit hoofdstuk:
+- Begrijpen van de structuur en syntaxis van Bicep-templates
+- Azure-resources provisioneren met `azd provision`
 - Applicaties implementeren met `azd deploy`
-- Implementeer blue-green- en rolling-implementatiestrategieën
+- Blue-green- en rolling-implementatiestrategieën toepassen
 
 ---
 
@@ -22,12 +24,12 @@ Na het voltooien van dit hoofdstuk zul je:
 
 | # | Les | Beschrijving | Tijd |
 |---|--------|-------------|------|
-| 1 | [Provisioning Resources](provisioning.md) | Beheer van Azure-resources met AZD | 45 min |
-| 2 | [Deployment Guide](deployment-guide.md) | Strategieën voor applicatie-implementatie | 45 min |
+| 1 | [Provisioning van resources](provisioning.md) | Beheer van Azure-resources met AZD | 45 min |
+| 2 | [Implementatiegids](deployment-guide.md) | Strategieën voor applicatie-implementatie | 45 min |
 
 ---
 
-## 🚀 Snelstart
+## 🚀 Snelle start
 
 ```bash
 # Initialiseren vanaf sjabloon
@@ -65,15 +67,15 @@ my-project/
 
 ---
 
-## 🔧 Essentiële commando's
+## 🔧 Belangrijke opdrachten
 
-| Commando | Beschrijving |
+| Opdracht | Beschrijving |
 |---------|-------------|
-| `azd init` | Initialiseer project |
-| `azd provision` | Maak Azure-resources aan |
-| `azd deploy` | Implementeer applicatiecode |
-| `azd up` | voorziening + implementatie |
-| `azd down` | Verwijder alle resources |
+| `azd init` | Project initialiseren |
+| `azd provision` | Azure-resources aanmaken |
+| `azd deploy` | Applicatiecode implementeren |
+| `azd up` | provisionen + deployen |
+| `azd down` | Alle resources verwijderen |
 
 ---
 
@@ -88,13 +90,13 @@ my-project/
 
 ## 📖 Gerelateerde bronnen
 
-- [Pre-deployment-controles](../chapter-06-pre-deployment/README.md)
-- [Voorbeelden van Container-apps](../../examples/container-app/README.md)
-- [Voorbeeld van een database-app](../../examples/database-app/README.md)
+- [Pre-deploymentcontroles](../chapter-06-pre-deployment/README.md)
+- [Container-appvoorbeelden](../../examples/container-app/README.md)
+- [Database-appvoorbeeld](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, houd er rekening mee dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de originele taal moet als gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+**Disclaimer**:
+Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, houd er rekening mee dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

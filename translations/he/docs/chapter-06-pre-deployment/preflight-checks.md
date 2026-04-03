@@ -1,73 +1,73 @@
-# בדיקות מקדימות לפריסות AZD
+# בדיקות טרום-טיסה לפריסות AZD
 
-**ניווט בפרק:**
-- **📚 דף הקורס**: [AZD For Beginners](../../README.md)
-- **📖 הפרק הנוכחי**: פרק 6 - אימות ותכנון לפני פריסה
-- **⬅️ קודם**: [בחירת SKU](sku-selection.md)
-- **➡️ הפרק הבא**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 קשור**: [Chapter 4: Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+**ניווט בפרקים:**
+- **📚 דף הקורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 6 - אימות ותכנון טרום פריסה
+- **⬅️ הקודם**: [בחירת SKU](sku-selection.md)
+- **➡️ הפרק הבא**: [פרק 7: פתרון תקלות](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 קשור**: [פרק 4: מדריך פריסה](../chapter-04-infrastructure/deployment-guide.md)
 
-## מבוא
+## مقدمة
 
-המדריך המקיף הזה מספק סקריפטים ונהלים לאימות לפני פריסה כדי להבטיח פריסות מוצלחות עם Azure Developer CLI לפני שהן מתחילות. למד כיצד ליישם בדיקות אוטומטיות עבור אימות, זמינות משאבים, מכסות, תאימות אבטחה ודרישות ביצועים כדי למנוע כישלונות פריסה ולשפר את שיעורי ההצלחה של הפריסה.
+מדריך מקיף זה מספק סקריפטים ופרוצדורות לאימות לפני פריסה כדי להבטיח פריסות Azure Developer CLI מוצלחות לפני תחילתן. למדו ליישם בדיקות אוטומטיות לאימות, זמינות משאבים, מכסות, תאימות אבטחה ודרישות ביצועים למניעת כישלונות פריסה ואופטימיזציה של שיעורי הצלחת הפריסה.
 
 ## מטרות למידה
 
-בסיום המדריך הזה, תוכל:
-- לשלוט בטכניקות ובסקריפטים לאימות מקדים אוטומטי
-- להבין אסטרטגיות בדיקה מקיפות עבור אימות, הרשאות ומכסות
-- ליישם נהלים לאימות זמינות וקיבולת משאבים
-- להגדיר בדיקות אבטחה ותאימות למדיניות הארגונית
-- לתכנן זרימות עבודה להערכת עלויות ואימות תקציב
-- ליצור אוטומציה מותאמת לבדיקות מקדימות לצנרת CI/CD
+בסיום מדריך זה תוכלו:
+- לשלוט בטכניקות וסקריפטים של אימות אוטומטי לפני פריסה
+- להבין אסטרטגיות בדיקה מקיפות לאימות, הרשאות ומכסות
+- ליישם פרוצדורות לאימות זמינות וקיבולת משאבים
+- להגדיר בדיקות אבטחה וציות למדיניות הארגון
+- לעצב זרמי עבודה לאמידת עלות ולאימות תקציב
+- ליצור אוטומציה מותאמת אישית לבדיקות טרום-טיסה לצינורות CI/CD
 
 ## תוצאות למידה
 
-בסיום, תוכל:
-- ליצור ולהריץ סקריפטים מקיפים לאימות מקדים
-- לעצב זרמי עבודה לבדיקה אוטומטית לתרחישי פריסה שונים
-- ליישם נהלים ומדיניות אימות ייעודיים לסביבה
-- להגדיר ניטור פרואקטיבי והתראות למוכנות פריסה
-- לטפל בבעיות לפני פריסה וליישם פעולות מתקנות
-- לשלב בדיקות מקדימות בצנרת DevOps ובזרמי אוטומציה
+בסיום, תוכלו:
+- ליצור ולהריץ סקריפטי אימות טרום-טיסה מקיפים
+- לעצב זרמי עבודה לבדיקות אוטומטיות בתרחישי פריסה שונים
+- ליישם פרוצדורות ומדיניות אימות לסביבות ספציפיות
+- להגדיר ניטור ונתינת התראות פרואקטיביים למוכנות הפריסה
+- לטפל בבעיות טרום פריסה וליישם פעולות מתקנות
+- לשלב בדיקות טרום-טיסה בצינורות DevOps וזרמי עבודה אוטומטיים
 
 ## תוכן העניינים
 
-- [Overview](../../../../docs/chapter-06-pre-deployment)
-- [Automated Pre-flight Script](../../../../docs/chapter-06-pre-deployment)
-- [Manual Validation Checklist](../../../../docs/chapter-06-pre-deployment)
-- [Environment Validation](../../../../docs/chapter-06-pre-deployment)
-- [Resource Validation](../../../../docs/chapter-06-pre-deployment)
-- [Security & Compliance Checks](../../../../docs/chapter-06-pre-deployment)
-- [Performance & Capacity Planning](../../../../docs/chapter-06-pre-deployment)
-- [Troubleshooting Common Issues](../../../../docs/chapter-06-pre-deployment)
+- [סקירה כללית](#סקירה-כללית)
+- [סקריפט טרום-טיסה אוטומטי](#סקריפט-טרום-טיסה-אוטומטי)
+- [רשימת בדיקה לאימות ידני](#codeblock1)
+- [אימות סביבה](#✅-גיבוי-ושחזור)
+- [אימות משאבים](#אימות-סביבת-ייצור)
+- [בדיקות אבטחה וציות](#security--compliance-checks)
+- [תכנון ביצועים וקיבולת](#performance--capacity-planning)
+- [פתרון תקלות נפוצות](#troubleshooting-common-issues)
 
 ---
 
 ## סקירה כללית
 
-בדיקות מקדימות הן אימונים חיוניים שמתבצעים לפני פריסה כדי לוודא:
+בדיקות טרום-טיסה הן אימותים חיוניים המבוצעים לפני פריסה על מנת להבטיח:
 
-- **זמינות משאבים** ומכסות באזורים היעדיים
-- **אימות והרשאות** מונחות נכון
-- **תקינות תבניות** ודיוק הפרמטרים
-- **חיבוריות רשת** ותלויות
-- **תאימות אבטחה** למדיניות הארגונית
-- **הערכת עלות** במסגרת מגבלות התקציב
+- **זמינות משאבים** ומכסות באזורים היעד
+- **אימות והרשאות** מותאמים כראוי
+- **תוקף התבנית** ותקינות הפרמטרים
+- **קישוריות רשת** ותלותיות
+- **ציות אבטחתי** למדיניות הארגון
+- **אמידת עלות** במסגרת התקציב
 
-### מתי להריץ בדיקות מקדימות
+### מתי להריץ בדיקות טרום-טיסה
 
-- **לפני הפריסה הראשונה** לסביבה חדשה
-- **לאחר שינויים משמעותיים בתבניות**
-- **לפני פריסות לייצור**
-- **כאשר משנים אזורי Azure**
-- **כחלק מצנרת CI/CD**
+- **לפני פריסה ראשונה** לסביבה חדשה
+- **אחרי שינויים משמעותיים בתבניות**
+- **לפני פריסות בסביבת הייצור**
+- **בעת שינוי אזורי Azure**
+- **כחלק מצינורות CI/CD**
 
 ---
 
-## סקריפט בדיקות מקדימות אוטומטי
+## סקריפט טרום-טיסה אוטומטי
 
-### בודק מקדמי PowerShell
+### בודק טרום-טיסה PowerShell
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -100,7 +100,7 @@ param(
     [switch]$Detailed
 )
 
-# קידוד צבעים לפלט
+# קידוד צבע לפלט
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -177,7 +177,7 @@ function Test-Authentication {
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # אמת גישה למנוי
+        # אמת גישת מנוי
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -194,7 +194,7 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # קבל הקצאות התפקיד של המשתמש הנוכחי
+        # קבל את תפקיד המשתמש הנוכחי
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
@@ -217,7 +217,7 @@ function Test-Permissions {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # בדוק את היכולת ליצור קבוצת משאבים
+                # בדוק יכולת יצירת קבוצת משאבים
                 try {
                     az group create --name "preflight-test-rg" --location $Location --output none
                     az group delete --name "preflight-test-rg" --yes --output none
@@ -257,7 +257,7 @@ function Test-QuotasAndLimits {
             }
         }
         
-        # בדוק מגבלות App Service
+        # בדוק הגבלות שירות יישומים
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
             if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
@@ -271,7 +271,7 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # בדוק מגבלות חשבון אחסון
+        # בדוק הגבלות חשבון אחסון
         $storageAccounts = az storage account list --output json | ConvertFrom-Json
         $accountCount = ($storageAccounts | Measure-Object).Count
         if ($accountCount -lt 200) {
@@ -310,7 +310,7 @@ function Test-NetworkConnectivity {
         }
     }
     
-    # בדוק רזולוציית DNS
+    # בדוק פתרון DNS
     try {
         $dnsResult = Resolve-DnsName "management.azure.com" -ErrorAction Stop
         Write-Status "DNS resolution" "Success" "Resolved successfully"
@@ -326,11 +326,11 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # בדוק אם קובץ azure.yaml קיים
+    # בדוק אם קיים azure.yaml
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # נתח את azure.yaml
+        # נתח azure.yaml
         try {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
@@ -354,13 +354,13 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # בדוק קבצי תשתית
+    # בדוק קבצים של תשתית
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # אמת את main.bicep אם קיים
+            # אמת main.bicep אם קיים
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 חדש: בדוק תצוגת התשתית (הרצה יבשה בטוחה)
+    # 🧪 חדש: בדוק תצוגת תשתית (הרצה יבשה בטוחה)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -415,7 +415,7 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # בדוק זמינות השירות באזור
+        # בדוק זמינות שירותים באזור
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
@@ -446,7 +446,7 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # הערכת עלות בסיסית (נצטרך את Azure Pricing API להערכות מדויקות)
+    # הערכת עלות בסיסית (יידרש API לתמחור Azure להערכות מדויקות)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
@@ -470,7 +470,7 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # בדוק שיטות אבטחה נפוצות
+    # בדוק נהלי אבטחה נפוצים
     try {
         # בדוק אם Key Vault מוגדר
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
@@ -504,7 +504,7 @@ function Test-SecurityCompliance {
     }
 }
 
-# הרצה ראשית
+# ביצוע ראשי
 function Invoke-PreflightCheck {
     Write-Host "${Green}AZD Pre-flight Check${Reset}" -ForegroundColor Green
     Write-Host "Environment: $EnvironmentName"
@@ -557,15 +557,15 @@ function Invoke-PreflightCheck {
     }
 }
 
-# הרץ את בדיקת הקדם-טיסה
+# הרץ את בדיקת הבכורה
 Invoke-PreflightCheck
 ```
 
-### בודק מקדמי Bash
+### בודק טרום-טיסה Bash
 
 ```bash
 #!/bin/bash
-# גרסת Bash של בדיקות מקדימות למערכות Unix ו-Linux
+# גרסת Bash לבדיקה מוקדמת למערכות Unix/Linux
 
 set -euo pipefail
 
@@ -661,7 +661,7 @@ check_authentication() {
 check_template_validation() {
     echo -e "\n${BLUE}=== Template Validation ===${NC}"
     
-    # בדוק את azure.yaml
+    # בדוק azure.yaml
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
@@ -706,7 +706,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # בדוק אם המיקום תקין
+    # בדוק אם המיקום חוקי
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -755,7 +755,7 @@ main() {
         esac
     done
     
-    # אמת את הפרמטרים הנדרשים
+    # אמת פרמטרים דרושים
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -796,64 +796,64 @@ main "$@"
 
 ---
 
-## רשימת בדיקה ידנית
+## רשימת בדיקה לאימות ידני
 
-### רשימת בדיקה לפני פריסה
+### רשימת בדיקה טרום-פריסה
 
-הדפס רשימת בדיקה זו ואמת כל פריט לפני הפריסה:
+הדפיסו רשימה זו ואמתו כל פריט לפני הפריסה:
 
 #### ✅ הגדרת סביבה
 - [ ] AZD CLI מותקן ומעודכן לגרסה האחרונה
 - [ ] Azure CLI מותקן ומאומת
-- [ ] המנוי של Azure הנכון נבחר
-- [ ] שם הסביבה ייחודי ועומד בכללי השמות
-- [ ] קבוצת המשאבים היעד זוהתה או ניתנת ליצירה
+- [ ] מנוי Azure נכון נבחר
+- [ ] שם הסביבה ייחודי ועומד בקונבנציות שם
+- [ ] קבוצת משאבים יעד מזוהה או ניתנת ליצירה
 
 #### ✅ אימות והרשאות
-- [ ] אותמת בהצלחה עם `azd auth login`
-- [ ] למשתמש יש את תפקיד Contributor במנוי/קבוצת המשאבים היעד
-- [ ] ישות שירות (Service Principal) מוגדרת ל-CI/CD (אם רלוונטי)
-- [ ] אין אישורים או קרדנציאלים שפג תוקפם
+- [ ] התחברות מוצלחת באמצעות `azd auth login`
+- [ ] המשתמש הוא בעל תפקיד Contributor על המנוי/קבוצת המשאבים
+- [ ] פרינסיטפאל השירות מוגדר ל-CI/CD (אם רלוונטי)
+- [ ] אין תעודות או אישורים שפג תוקפם
 
-#### ✅ אימות תבניות
+#### ✅ אימות תבנית
 - [ ] קובץ `azure.yaml` קיים ותקין כ-YAML
-- [ ] לכל השירותים המוגדרים ב-`azure.yaml` יש קוד מקור תואם
+- [ ] כל השירותים המוגדרים ב-azure.yaml מקבלים קוד מקור תואם
 - [ ] תבניות Bicep בתיקיית `infra/` קיימות
-- [ ] `main.bicep` מתרגם ללא שגיאות (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 תצוגת התשתית רצה בהצלחה (`azd provision --preview`)
-- [ ] לכל הפרמטרים הנדרשים יש ערכי ברירת מחדל או יסופקו
-- [ ] אין סודות שקודדו בצורה קשיחה בתבניות
+- [ ] `main.bicep` מתורגם ללא שגיאות (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 הרצת תצוגה מקדימה של התשתית מצליחה (`azd provision --preview`)
+- [ ] לכל הפרמטרים הנדרשים יש ערכי ברירת מחדל או יועברו בעתיד
+- [ ] אין סודות מוצפנים בתבניות
 
 #### ✅ תכנון משאבים
-- [ ] אזור ה-Azure היעד נבחר ואומת
-- [ ] שירותי Azure הנדרשים זמינים באזור היעד
-- [ ] מכסת משאבים מספקת זמינה למשאבים המתוכננים
-- [ ] בוצעה בדיקה להתנגשויות בשמות משאבים
-- [ ] התלויות בין המשאבים מובנות
+- [ ] אזור Azure יעד נבחר ואומת
+- [ ] שירותי Azure דרושים זמינים באזור היעד
+- [ ] מכסות מספיקות זמינות למשאבים המתוכננים
+- [ ] נבדקו התנגשות שמות משאבים
+- [ ] הובנו התלותיות בין המשאבים
 
 #### ✅ רשת ואבטחה
-- [ ] חיבוריות רשת לנקודות הקצה של Azure אומתה
+- [ ] קישוריות רשת לנקודות קצה של Azure אומתה
 - [ ] הגדרות חומת אש/פרוקסי הוגדרו במידת הצורך
 - [ ] Key Vault מוגדר לניהול סודות
-- [ ] שימוש ב-managed identities היכן שאפשר
-- [ ] אכיפת HTTPS מופעלת עבור יישומי ווב
+- [ ] נעשה שימוש בזיהויים מנוהלים במידת האפשר
+- [ ] אכיפת HTTPS מופעלת ליישומי רשת
 
 #### ✅ ניהול עלויות
-- [ ] הערכות עלות חושבו באמצעות Azure Pricing Calculator
-- [ ] התראות תקציב הוגדרו במידת הצורך
-- [ ] SKUs מתאימות נבחרו לפי סוג הסביבה
-- [ ] נלקחה בחשבון קיבולת שמורה לעומסי עבודה בייצור
+- [ ] אומדני עלות חושבו בעזרת מחשבון המחירים Azure Pricing Calculator
+- [ ] התרעות תקציב הוגדרו במידת הצורך
+- [ ] SKU מתאימים נבחרו לפי סוג הסביבה
+- [ ] נשקלה קיבולת שמורה לעומסי עבודה בסביבת ייצור
 
 #### ✅ ניטור ותצפית
 - [ ] Application Insights מוגדר בתבניות
-- [ ] מרחב עבודה של Log Analytics מתוכנן
-- [ ] כללי התראות הוגדרו למדדים קריטיים
-- [ ] נקודות קצה לבדיקת בריאות מיושמות ביישומים
+- [ ] תוכנן Workspace של Log Analytics
+- [ ] מוגדרים כללי התראה למדדים קריטיים
+- [ ] נקודות בדיקת בריאות מיושמות ביישומים
 
 #### ✅ גיבוי ושחזור
-- [ ] אסטרטגיית גיבוי מוגדרת למשאבי נתונים
-- [ ] יעדי זמן שיקום (RTO) מתועדים
-- [ ] יעדי נקודת שיקום (RPO) מתועדים
+- [ ] אסטרטגיית גיבוי מוגדרת למשאבי הנתונים
+- [ ] יעדי זמן שחזור (RTO) תועדו
+- [ ] יעדי נקודת שחזור (RPO) תועדו
 - [ ] תוכנית התאוששות מאסון קיימת לסביבת הייצור
 
 ---
@@ -864,26 +864,26 @@ main "$@"
 
 ```bash
 #!/bin/bash
-# אימותים ספציפיים לסביבת פיתוח
+# בדיקות ספציפיות לסביבת פיתוח
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # בדוק תצורות ידידותיות לפיתוח
+    # בדוק תצורות המתאימות לפיתוח
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # בדוק הגדרות כיבוי אוטומטי
+    # בדוק תצורות כיבוי אוטומטי
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # אמת תצורות מסד הנתונים בסביבת הפיתוח
+    # אמת תצורות מסד נתונים של פיתוח
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -896,33 +896,33 @@ validate_dev_environment() {
 
 ```bash
 #!/bin/bash
-# אימותים ספציפיים לסביבת הייצור
+# בדיקות ספציפיות לסביבת ייצור
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # בדוק תצורות לזמינות גבוהה
+    # בדוק עבור תצורות זמינות גבוהה
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # בדוק תצורות גיבוי
+    # בדוק עבור תצורות גיבוי
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # אמת את תצורת הניטור
+    # אמת הגדרת ניטור
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # בדוק תצורות אבטחה
+    # בדוק עבור תצורות אבטחה
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -935,7 +935,7 @@ validate_prod_environment() {
 
 ## אימות משאבים
 
-### סקריפט אימות מכסות
+### סקריפט אימות מכסה
 
 ```python
 #!/usr/bin/env python3
@@ -990,7 +990,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # קבל חשבונות אחסון במנוי
+    # השג את חשבונות האחסון במנוי
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -998,7 +998,7 @@ def check_storage_limits(location: str) -> bool:
         return False
     
     account_count = len(accounts)
-    max_accounts = 250  # מגבלת ברירת המחדל של Azure
+    max_accounts = 250  # המגבלה המחדלית של Azure
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1064,14 +1064,14 @@ if __name__ == "__main__":
 
 ```bash
 #!/bin/bash
-# אימות אבטחה וציות לפריסות AZD
+# אימות אבטחה ועמידה בתקנים לפריסות AZD
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
     
     local issues_found=0
     
-    # בדוק שימוש ב-Key Vault
+    # בדיקת שימוש ב-Key Vault
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1079,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # בדוק שימוש בזהות מנוהלת
+    # בדיקת שימוש בזהות מנוהלת
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # בדוק אכיפת HTTPS
+    # בדיקת אכיפת HTTPS
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1095,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # בדוק את הגרסה המינימלית של TLS
+    # בדיקת גרסת TLS מינימלית
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1103,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # בדוק הגבלות על גישה ציבורית
+    # בדיקת הגבלות גישה ציבורית
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1111,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # בדוק קבוצות אבטחת רשת
+    # בדיקת קבוצות אבטחת רשת
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1124,21 +1124,21 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # בדוק הצפנת נתונים
+    # בדיקת הצפנת נתונים
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # בדוק רישום ביקורת
+    # בדיקת יומני ביקורת
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # בדוק מדיניות גיבוי ושימור
+    # בדיקת מדיניות גיבוי ושמירה
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1177,9 +1177,9 @@ main "$@"
 
 ---
 
-## שילוב עם CI/CD
+## אינטגרציה עם CI/CD
 
-### שילוב עם GitHub Actions
+### אינטגרציה עם GitHub Actions
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1238,7 +1238,7 @@ jobs:
         path: preflight-results.json
 ```
 
-### שילוב עם Azure DevOps
+### אינטגרציה עם Azure DevOps
 
 ```yaml
 trigger: none
@@ -1292,56 +1292,56 @@ steps:
 
 ## סיכום שיטות עבודה מומלצות
 
-### ✅ שיטות עבודה מומלצות לבדיקות מקדימות
+### ✅ שיטות עבודה מומלצות לבדיקות טרום-טיסה
 
-1. **אוטומטיזציה היכן שאפשר**
-   - שלב את הבדיקות בצנרת CI/CD
-   - השתמש בסקריפטים לאימותים ישימים
-   - אחסן תוצאות למעקב ביקורת
+1. **אוטומציה ככל האפשר**
+   - שלבו את הבדיקות בצינורות CI/CD
+   - השתמשו בסקריפטים לאימותים חוזרים
+   - שמרו תוצאות למעקב וביקורת
 
-2. **אימות ספציפי לסביבה**
-   - בדיקות שונות עבור dev/staging/prod
+2. **אימות סביבתי מותאם**
+   - בדיקות שונות לפיתוח/מבחן/ייצור
    - דרישות אבטחה מתאימות לכל סביבה
-   - אופטימיזציה של עלויות עבור סביבות שאינן ייצור
+   - אופטימיזציית עלויות לסביבות שאינן ייצור
 
 3. **כיסוי מקיף**
    - אימות והרשאות
    - מכסות וזמינות משאבים
-   - אימות תבניות וסינטקס
-   - דרישות אבטחה ותאימות
+   - אימות תבניות ותחביר
+   - דרישות אבטחה וציות
 
 4. **דיווח ברור**
-   - מדדי מצב עם קידוד צבעים
+   - אינדיקטורים צבעוניים למצב
    - הודעות שגיאה מפורטות עם צעדי תיקון
-   - דוחות סיכום להערכה מהירה
+   - דיווחים מסכמים להערכה מהירה
 
 5. **כישלון מהיר**
-   - עצור את הפריסה אם בדיקות קריטיות נכשלות
-   - ספק הנחיות ברורות לפתרון
-   - אפשר הרצה קלה מחדש של הבדיקות
+   - עצירת פריסה אם בדיקות קריטיות נכשלות
+   - הנחיות ברורות לפתרון הבעיה
+   - אפשרות להרצת בדיקות חוזרת בקלות
 
-### מלכודות נפוצות בבדיקות מקדימות
+### מלכודות נפוצות בטרום-טיסה
 
-1. **דלג על אימות** לטובת פריסות "מהירות"
-2. **בדיקת הרשאות לא מספקת** לפני פריסה
-3. **התעלמות מהמגבלות מכסה** עד שהפריסה נכשלת
-4. **אי-אימות תבניות** בצנרת CI/CD
-5. **היעדר אימות אבטחה** בסביבות ייצור
-6. **הערכת עלות לקויה** שמובילה להפתעות תקציביות
+1. **דלג על אימות** לפריסות "מהירות"
+2. **בדיקת הרשאות לא מספקת** לפני הפריסה
+3. **התעלמות ממכסות** עד לכישלון פריסה
+4. **אי אימות תבניות** בצינורות CI/CD
+5. **העדר אימות אבטחה** בסביבות ייצור
+6. **אמידת עלות לקויה** שמובילה להפתעות תקציביות
 
 ---
 
-**טיפ מקצועי**: הרץ בדיקות מקדימות כמשימה נפרדת בצנרת ה-CI/CD שלך לפני משימת הפריסה עצמה. זה מאפשר לתפוס בעיות מוקדם ומספק משוב מהיר יותר למפתחים.
+**טיפ מקצועי**: הריצו את בדיקות הטרום-טיסה כמשימה נפרדת בצינור ה-CI/CD לפני המשימה לפריסה בפועל. זה יאפשר לאתר בעיות מוקדם ויספק משוב מהיר יותר למפתחים.
 
 ---
 
 **ניווט**
 - **שיעור קודם**: [בחירת SKU](sku-selection.md)
-- **שיעור הבא**: [Cheat Sheet](../../resources/cheat-sheet.md)
+- **שיעור הבא**: [גליון רמאות](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-הצהרת אי-אחריות:
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית Co-op Translator (https://github.com/Azure/co-op-translator). אף שאנו שואפים לדיוק, יש לשים לב כי תרגומים אוטומטיים עשויים להכיל שגיאות או אי־דיוקים. יש להסתמך על המסמך המקורי בשפתו כמקור הסמכותי. לגבי מידע קריטי, מומלץ להיעזר בתרגום מקצועי שבוצע על ידי מתרגם אנושי. איננו אחראים לכל אי־הבנות או פרשנויות שגויות הנובעות משימוש בתרגום זה.
+**כתב ויתור**:  
+מסמך זה תורגם באמצעות שירות תרגום למכונה [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון שתרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. המסמך המקורי בשפת המקור שלו צריך להיחשב למקור המוסמך. עבור מידע קריטי, מומלץ להשתמש בתרגום מקצועי אנושי. אנו לא אחראים על אי-הבנות או פרשנויות שגויות הנובעות מהשימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

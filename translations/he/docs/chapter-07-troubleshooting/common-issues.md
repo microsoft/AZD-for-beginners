@@ -1,76 +1,76 @@
 # בעיות נפוצות ופתרונות
 
-**ניווט פרק:**
-- **📚 בית הקורס**: [AZD למתחילים](../../README.md)
-- **📖 הפרק הנוכחי**: פרק 7 - פתרון תקלות וניפוי באגים
-- **⬅️ פרק קודם**: [פרק 6: בדיקות טרום-פריסה](../chapter-06-pre-deployment/preflight-checks.md)
-- **➡️ הבא**: [מדריך ניפוי באגים](debugging.md)
-- **🚀 הפרק הבא**: [פרק 8: דפוסים לייצור וארגוניים](../chapter-08-production/production-ai-practices.md)
+**ניווט בפרקים:**
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 7 - פתרון תקלות ואיתור באגים
+- **⬅️ פרק קודם**: [פרק 6: בדיקות לפני הפעלה](../chapter-06-pre-deployment/preflight-checks.md)
+- **➡️ הבא**: [מדריך איתור באגים](debugging.md)
+- **🚀 פרק הבא**: [פרק 8: תבניות ייצור וארגוניות](../chapter-08-production/production-ai-practices.md)
 
-## הקדמה
+## מבוא
 
-מדריך מקיף זה לפתרון תקלות מכסה את הבעיות הנפוצות ביותר בעת שימוש ב-Azure Developer CLI. למדו לאבחן, לתחקר ולפתור בעיות נפוצות בקשר לאימות, פריסה, פריסת תשתית ותצורת יישומים. כל בעיה כוללת סימפטומים מפורטים, סיבות שורש ותהליכי פתרון צעד-אחר-צעד.
+מדריך מקיף לפתרון תקלות זה מכסה את הבעיות הנפוצות ביותר שנפגשות בעת שימוש ב-Azure Developer CLI. למדו לאבחן, לפתור ולתקן בעיות שכיחות באימות, פריסה, פריסת תשתיות והגדרת אפליקציות. כל בעיה כוללת תסמינים מפורטים, סיבות שורשיות ותהליכי פתרון שלב-אחר-שלב.
 
 ## מטרות הלמידה
 
-בסיום מדריך זה תוכלו:
-- לשלוט בטכניקות אבחון לבעיות ב-Azure Developer CLI
-- להבין בעיות אימות והרשאות נפוצות ואת הפתרונות להן
-- לפתור כשלי פריסה, שגיאות בפריסת תשתית ובעיות תצורה
-- ליישם אסטרטגיות ניטור וניפוי שגיאות פרואקטיביות
-- להחיל שיטות שיטתיות לפתרון בעיות מורכבות
-- להגדיר לוגים וניטור נכונים כדי למנוע בעיות עתידיות
+בסיום מדריך זה, תוכלו:
+- להתמקצע בטכניקות אבחון לבעיות Azure Developer CLI
+- להבין בעיות נפוצות באימות והרשאות ופתרונן
+- לפתור כשלים בפריסה, שגיאות בפריסת תשתיות ובעיות תצורה
+- ליישם אסטרטגיות ניטור ואיתור באגים יזומות
+- להשתמש במתודולוגיות פתרון בעיות שיטתיות לבעיות מורכבות
+- להגדיר רישום וניטור נכונים למניעת בעיות עתידיות
 
-## תוצרי למידה
+## תוצאות הלמידה
 
-בסיום, תוכלו:
-- לאבחן בעיות ב-Azure Developer CLI באמצעות כלי אבחון מובנים
+בסיום הקורס תוכלו:
+- לאבחן בעיות Azure Developer CLI באמצעות כלי אבחון מובנים
 - לפתור בעיות אימות, מנויים והרשאות באופן עצמאי
-- לתחקר כשלי פריסה ושגיאות בפריסת תשתית ביעילות
-- לנפות בעיות תצורה של יישומים ובעיות התלויות בסביבה
-- להטמיע ניטור והתראות לזיהוי פרואקטיבי של בעיות אפשריות
-- להחיל שיטות עבודה מומלצות ללוגינג, דיבוג וזרימות עבודה לפתרון בעיות
+- לפתור כשלים בפריסה ושגיאות בפריסת תשתיות בצורה אפקטיבית
+- לאתר באגים בבעיות תצורת אפליקציה ובעיות סביבתיות ספציפיות
+- ליישם ניטור והתראות לזיהוי יזום של בעיות פוטנציאליות
+- להפעיל שיטות עבודה מומלצות לרישום, איתור באגים ופתרון תקלות
 
 ## אבחון מהיר
 
-לפני שנכנסים לבעיות ספציפיות, הריצו את הפקודות הללו כדי לאסוף מידע אבחוני:
+לפני שנכנסים לבעיות ספציפיות, הריצו את הפקודות הבאות לאיסוף מידע אבחוני:
 
 ```bash
-# בדוק את גרסת azd ואת תקינותו
+# בדוק גרסת azd ובריאות
 azd version
-azd config list
+azd config show
 
-# אמת את ההתחברות ל-Azure
+# אמת את האימות של Azure
 az account show
 az account list
 
 # בדוק את הסביבה הנוכחית
-azd env show
+azd env list
 azd env get-values
 
-# הפעל רישום לניפוי שגיאות
+# הפעל רישום ניפוי שגיאות
 export AZD_DEBUG=true
 azd <command> --debug
 ```
 
 ## בעיות אימות
 
-### בעיה: "Failed to get access token"
-**סימפטומים:**
+### בעיה: "כשל בקבלת אסימון גישה"
+**תסמינים:**
 - `azd up` נכשל עם שגיאות אימות
-- פקודות מחזירות "unauthorized" או "access denied"
+- הפקודות מחזירות "לא מורשה" או "גישה נדחתה"
 
 **פתרונות:**
 ```bash
-# 1. בצע אימות מחדש באמצעות Azure CLI
+# 1. התחבר מחדש באמצעות Azure CLI
 az login
 az account show
 
-# 2. נקה אישורים שנשמרו במטמון
+# 2. נקה אישורי זיכרון מטמון
 az account clear
 az login
 
-# 3. השתמש בזרימת קוד למכשיר (למערכות ללא ממשק גרפי)
+# 3. השתמש בזרימת קוד מכשיר (למערכות ללא ממשק)
 az login --use-device-code
 
 # 4. הגדר מנוי מפורש
@@ -78,61 +78,61 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### בעיה: "Insufficient privileges" במהלך הפריסה
-**סימפטומים:**
+### בעיה: "הרשאות לא מספקות" במהלך פריסה
+**תסמינים:**
 - הפריסה נכשלת עם שגיאות הרשאה
-- אין אפשרות ליצור סוגים מסוימים של משאבי Azure
+- לא ניתן ליצור משאבים מסוימים ב-Azure
 
 **פתרונות:**
 ```bash
-# 1. בדוק/י את הקצאות התפקידים שלך ב-Azure
+# 1. בדוק את שיוכי התפקידים שלך ב-Azure
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. ודא/י שיש לך את התפקידים הנדרשים
-# - Contributor (ליצירת משאבים)
-# - User Access Administrator (להקצאת תפקידים)
+# 2. ודא שיש לך את התפקידים הנדרשים
+# - משתתף (ליצירת משאבים)
+# - מנהל גישה למשתמשים (לשיוכי תפקידים)
 
-# 3. פנה/י למנהל ה-Azure שלך לקבלת ההרשאות המתאימות
+# 3. פנה למנהל ה-Azure שלך לקבלת הרשאות מתאימות
 ```
 
-### בעיה: בעיות אימות רב-דיירי
+### בעיה: בעיות אימות רב-דיירים
 **פתרונות:**
 ```bash
 # 1. התחבר עם שוכר מסוים
 az login --tenant "your-tenant-id"
 
-# 2. קבע את השוכר בתצורה
+# 2. הגדר את השוכר בקונפיגורציה
 azd config set auth.tenantId "your-tenant-id"
 
-# 3. נקה את מטמון השוכר בעת החלפת שוכר
+# 3. נקה את המטמון של השוכר אם מחליפים שוכרים
 az account clear
 ```
 
-## 🏗️ שגיאות בפריסת תשתית
+## 🏗️ שגיאות בפריסת תשתיות
 
 ### בעיה: התנגשויות בשמות משאבים
-**סימפטומים:**
-- שגיאות "The resource name already exists"
-- הפריסה נכשלת במהלך יצירת המשאב
+**תסמינים:**
+- שגיאות "שם המשאב כבר קיים"
+- הפריסה נכשלת במהלך יצירת משאב
 
 **פתרונות:**
 ```bash
 # 1. השתמש בשמות משאבים ייחודיים עם טוקנים
-# בתבנית Bicep שלך:
+# בתבנית הביספ שלך:
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 name: '${applicationName}-${resourceToken}'
 
 # 2. שנה את שם הסביבה
 azd env new my-app-dev-$(whoami)-$(date +%s)
 
-# 3. נקה את המשאבים הקיימים
+# 3. נקה משאבים קיימים
 azd down --force --purge
 ```
 
-### בעיה: המיקום/אזור אינו זמין
-**סימפטומים:**
-- "The location 'xyz' is not available for resource type"
-- סוגי SKU מסוימים לא זמינים באזור שנבחר
+### בעיה: מיקום/אזור לא זמין
+**תסמינים:**
+- "המיקום 'xyz' אינו זמין לסוג המשאב"
+- SKU מסוימים אינם זמינים באזור הנבחר
 
 **פתרונות:**
 ```bash
@@ -145,23 +145,23 @@ azd config set defaults.location eastus2
 azd env set AZURE_LOCATION eastus2
 
 # 3. בדוק זמינות שירות לפי אזור
-# בקר: https://azure.microsoft.com/global-infrastructure/services/
+# בקר ב: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
 ### בעיה: חריגות מכסה
-**סימפטומים:**
-- "Quota exceeded for resource type"
-- "Maximum number of resources reached"
+**תסמינים:**
+- "חריגת מכסה עבור סוג המשאב"
+- "מספר המשאבים המקסימלי הושג"
 
 **פתרונות:**
 ```bash
-# 1. בדוק את ניצול המכסה הנוכחית
+# 1. בדוק את השימוש הנוכחי במכסה
 az vm list-usage --location eastus2 -o table
 
 # 2. בקש הגדלת מכסה דרך פורטל Azure
-# עבור אל: Subscriptions > Usage + quotas
+# עבור אל: מנויים > שימוש + מכסות
 
-# 3. השתמש ב-SKU קטנים יותר בפיתוח
+# 3. השתמש ב-SKU קטנים יותר לפיתוח
 # בקובץ main.parameters.json:
 {
   "appServiceSku": {
@@ -169,43 +169,43 @@ az vm list-usage --location eastus2 -o table
   }
 }
 
-# 4. נקה משאבים שאינם בשימוש
+# 4. נקה משאבים שלא בשימוש
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
 ### בעיה: שגיאות בתבנית Bicep
-**סימפטומים:**
-- כשלי אימות תבנית
+**תסמינים:**
+- כשל באימות תבנית
 - שגיאות תחביר בקבצי Bicep
 
 **פתרונות:**
 ```bash
-# 1. אמת את תחביר ה-Bicep
+# 1. לאמת את תחביר Bicep
 az bicep build --file infra/main.bicep
 
-# 2. השתמש ב-linter של Bicep
+# 2. להשתמש בלינטר של Bicep
 az bicep lint --file infra/main.bicep
 
-# 3. בדוק את תחביר קובץ הפרמטרים
+# 3. לבדוק את תחביר קובץ הפרמטרים
 cat infra/main.parameters.json | jq '.'
 
-# 4. הצג תצוגה מקדימה של השינויים בפריסה
+# 4. תצוגה מקדימה של שינויים בפריסה
 azd provision --preview
 ```
 
-## 🚀 כשלי פריסה
+## 🚀 כשלים בפריסה
 
-### בעיה: כשלי בנייה
-**סימפטומים:**
-- היישום נכשל בבנייה במהלך הפריסה
+### בעיה: כשלים בבנייה
+**תסמינים:**
+- האפליקציה נכשלת לבנות במהלך הפריסה
 - שגיאות בהתקנת חבילות
 
 **פתרונות:**
 ```bash
-# 1. בדוק את פלט הבנייה עם דגל דיבוג
+# 1. בדוק את פלט הבנייה עם דגל ניקוד
 azd deploy --service web --debug
 
-# 2. הצג את מצב השירות הפרוס
+# 2. הצג סטטוס של השירות המפורסם
 azd show
 
 # 3. בדוק את הבנייה באופן מקומי
@@ -213,98 +213,98 @@ cd src/web
 npm install
 npm run build
 
-# 3. בדוק תאימות בין גרסאות Node.js ו-Python
-node --version  # יש להתאים להגדרות בקובץ azure.yaml
+# 3. בדוק תאימות גרסאות Node.js/Python
+node --version  # צריך להתאים להגדרות azure.yaml
 python --version
 
 # 4. נקה את מטמון הבנייה
 rm -rf node_modules package-lock.json
 npm install
 
-# 5. בדוק את ה-Dockerfile אם משתמשים בקונטיינרים
+# 5. בדוק את Dockerfile אם משתמשים במכולות
 docker build -t test-image .
 docker run --rm test-image
 ```
 
-### בעיה: כשלי פריסת קונטיינרים
-**סימפטומים:**
-- אפליקציות קונטיינר נכשלות בפתיחה
-- שגיאות משיכת תמונה
+### בעיה: כשלים בפריסת מכולות
+**תסמינים:**
+- אפליקציות מכולה לא מתחילות
+- שגיאות משיכת תמונות
 
 **פתרונות:**
 ```bash
-# 1. בדוק את בניית Docker באופן מקומי
+# 1. בדוק בניית Docker ברמה מקומית
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. בדוק את יומני הקונטיינר באמצעות Azure CLI
+# 2. בדוק את יומני המיכל באמצעות Azure CLI
 az containerapp logs show --name my-app --resource-group my-rg --follow
 
-# 3. נטר את האפליקציה באמצעות azd
+# 3. נהל את היישום דרך azd
 azd monitor --logs
 
-# 3. אמת גישה לרגיסטרי של קונטיינרים
+# 3. אמת גישה למאגר המכולות
 az acr login --name myregistry
 
-# 4. בדוק את תצורת אפליקציית הקונטיינר
+# 4. בדוק את תצורת יישום המיכל
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### בעיה: כשלי חיבור למסד נתונים
-**סימפטומים:**
-- היישום אינו מצליח להתחבר למסד הנתונים
-- שגיאות חיבור/חריגת זמן
+### בעיה: כשלים בחיבור למסד נתונים
+**תסמינים:**
+- האפליקציה לא מצליחה להתחבר למסד הנתונים
+- שגיאות טיימאוט בחיבור
 
 **פתרונות:**
 ```bash
-# 1. בדקו את חוקי חומת האש של מסד הנתונים
+# 1. בדוק את חוקי חומת האש של מסד הנתונים
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
-# 2. בדקו את החיבור מהיישום
-# הוסיפו זאת לאפליקציה שלכם באופן זמני:
+# 2. בדוק את החיבור מהאפליקציה
+# הוסף לאפליקציה שלך זמנית:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
-# 3. וודאו את פורמט מחרוזת החיבור
+# 3. אמת את פורמט מחרוזת החיבור
 azd env get-values | grep DATABASE
 
-# 4. בדקו את מצב שרת מסד הנתונים
+# 4. בדוק את מצב שרת מסד הנתונים
 az postgres flexible-server show --name mydb --resource-group myrg --query state
 ```
 
 ## 🔧 בעיות תצורה
 
 ### בעיה: משתני סביבה לא פועלים
-**סימפטומים:**
-- היישום לא מצליח לקרוא ערכי תצורה
+**תסמינים:**
+- האפליקציה לא יכולה לקרוא ערכי תצורה
 - משתני סביבה נראים ריקים
 
 **פתרונות:**
 ```bash
-# 1. ודא שמשתני הסביבה מוגדרים
+# 1. וודא שמשתני הסביבה מוגדרים
 azd env get-values
 azd env get DATABASE_URL
 
-# 2. בדוק את שמות המשתנים בקובץ azure.yaml
+# 2. בדוק את שמות המשתנים ב-azure.yaml
 cat azure.yaml | grep -A 5 env:
 
-# 3. הפעל מחדש את היישום
+# 3. הפעל מחדש את האפליקציה
 azd deploy --service web
 
 # 4. בדוק את תצורת שירות האפליקציה
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
-### בעיה: בעיות תעודת SSL/TLS
-**סימפטומים:**
-- HTTPS אינו פועל
-- שגיאות אימות תעודה
+### בעיה: בעיות בתעודות SSL/TLS
+**תסמינים:**
+- HTTPS לא עובד
+- שגיאות באימות תעודה
 
 **פתרונות:**
 ```bash
 # 1. בדוק את מצב תעודת ה-SSL
 az webapp config ssl list --resource-group myrg
 
-# 2. הפעל רק HTTPS
+# 2. הפעל HTTPS בלבד
 az webapp update --name myapp --resource-group myrg --https-only true
 
 # 3. הוסף דומיין מותאם אישית (אם נדרש)
@@ -312,53 +312,53 @@ az webapp config hostname add --webapp-name myapp --resource-group myrg --hostna
 ```
 
 ### בעיה: בעיות תצורת CORS
-**סימפטומים:**
-- ה־frontend לא יכול לקרוא ל־API
-- בקשת cross-origin נחסמת
+**תסמינים:**
+- הממשק הקדמי לא יכול לקרוא ל-API
+- בקשת cross-origin חסומה
 
 **פתרונות:**
 ```bash
-# 1. הגדר את CORS עבור App Service
+# 1. הגדר CORS לשירות האפליקציה
 az webapp cors add --name myapi --resource-group myrg --allowed-origins https://myapp.azurewebsites.net
 
-# 2. עדכן את ה-API לטיפול ב-CORS
+# 2. עדכן את ה-API כדי לטפל ב-CORS
 # ב-Express.js:
 app.use(cors({
   origin: process.env.FRONTEND_URL,
   credentials: true
 }));
 
-# 3. בדוק אם רץ על כתובות ה-URL הנכונות
+# 3. בדוק אם רץ על כתובות URL נכונות
 azd show
 ```
 
-## 🌍 בעיות בניהול סביבות
+## 🌍 בעיות בניהול סביבה
 
-### בעיה: בעיות בהחלפת סביבה
-**סימפטומים:**
-- נעשה שימוש בסביבה שגויה
-- התצורה לא מתחלפת כראוי
+### בעיה: בעיות בהחלפת סביבת עבודה
+**תסמינים:**
+- שימוש בסביבה שגויה
+- תצורה לא מתחלפת כראוי
 
 **פתרונות:**
 ```bash
-# 1. הצג את כל הסביבות
+# 1. רשום את כל הסביבות
 azd env list
 
-# 2. בחר במפורש את הסביבה
+# 2. בחר סביבה במפורש
 azd env select production
 
 # 3. אמת את הסביבה הנוכחית
-azd env show
+azd env list
 
-# 4. צור סביבה חדשה אם הסביבה פגומה
+# 4. צור סביבה חדשה אם היא פגומה
 azd env new production-new
 azd env select production-new
 ```
 
-### בעיה: שיבוש בסביבה
-**סימפטומים:**
-- הסביבה מציגה מצב בלתי חוקי
-- המשאבים אינם תואמים לתצורה
+### בעיה: שחיתות סביבה
+**תסמינים:**
+- הסביבה מציגה מצב שגוי
+- משאבים לא תואמים לתצורה
 
 **פתרונות:**
 ```bash
@@ -370,38 +370,38 @@ azd env new production-reset
 # העתק את משתני הסביבה הנדרשים
 azd env set DATABASE_URL "your-value"
 
-# 3. ייבא משאבים קיימים (אם אפשר)
+# 3. ייבא משאבים קיימים (אם אפשרי)
 # עדכן ידנית את .azure/production/config.json עם מזהי המשאבים
 ```
 
 ## 🔍 בעיות ביצועים
 
 ### בעיה: זמני פריסה איטיים
-**סימפטומים:**
-- פריסות אורכות זמן רב מדי
-- חריגות זמן במהלך הפריסה
+**תסמינים:**
+- פריסות אורך זמן רב מדי
+- טיימאוטים במהלך פריסה
 
 **פתרונות:**
 ```bash
-# 1. פרוס שירותים ספציפיים לחזרות מהירות יותר
+# 1. לפרוס שירותים ספציפיים עבור איטרציה מהירה יותר
 azd deploy --service web
 azd deploy --service api
 
-# 2. השתמש בפריסה של קוד בלבד כאשר התשתית לא השתנתה
-azd deploy  # מהיר יותר מ-azd up
+# 2. השתמש בפריסת קוד בלבד כשהתשתית לא השתנתה
+azd deploy  # מהיר יותר מ- azd up
 
-# 3. ייעל את תהליך הבנייה
-# ב-package.json:
+# 3. לאופטימיזציית תהליך הבנייה
+# בקובץ package.json:
 "scripts": {
   "build": "webpack --mode=production --optimize-minimize"
 }
 
-# 4. בדוק את מיקומי המשאבים (השתמש באותו אזור)
+# 4. בדוק מיקומי משאבים (השתמש באותו אזור)
 azd config set defaults.location eastus2
 ```
 
-### בעיה: בעיות ביצועי יישום
-**סימפטומים:**
+### בעיה: בעיות ביצועי אפליקציה
+**תסמינים:**
 - זמני תגובה איטיים
 - שימוש גבוה במשאבים
 
@@ -416,18 +416,18 @@ azd config set defaults.location eastus2
 # 2. הפעל ניטור ב-Application Insights
 azd monitor --overview
 
-# 3. בדוק את יומני היישום ב-Azure
+# 3. בדוק יומני יישום ב-Azure
 az webapp log tail --name myapp --resource-group myrg
 # או עבור Container Apps:
 az containerapp logs show --name myapp --resource-group myrg --follow
 
-# 4. הטמע מטמון
+# 4. יישם מטמון
 # הוסף מטמון Redis לתשתית שלך
 ```
 
-## 🛠️ כלי ניפוי תקלות ופקודות
+## 🛠️ כלים ופקודות לאיתור תקלות
 
-### פקודות דיבוג
+### פקודות איתור באגים
 ```bash
 # ניפוי שגיאות מקיף
 export AZD_DEBUG=true
@@ -436,35 +436,35 @@ azd up --debug 2>&1 | tee debug.log
 # בדוק את גרסת azd
 azd version
 
-# הצג את התצורה הנוכחית
-azd config list
+# הצג את ההגדרות הנוכחיות
+azd config show
 
-# בדוק חיבוריות
+# בדוק את הקישוריות
 curl -v https://myapp.azurewebsites.net/health
 ```
 
 ### ניתוח לוגים
 ```bash
-# יומני היישום באמצעות Azure CLI
+# יומני אפליקציה דרך Azure CLI
 az webapp log tail --name myapp --resource-group myrg
 
-# ניטור היישום עם azd
+# ניטור אפליקציה עם azd
 azd monitor --logs
 azd monitor --live
 
-# יומני המשאבים של Azure
+# יומני משאבי Azure
 az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
 
-# יומני קונטיינר (עבור Container Apps)
+# יומני קונטיינר (לאפליקציות קונטיינר)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
 ### חקירת משאבים
 ```bash
-# הצג את כל המשאבים
+# רשום את כל המשאבים
 az resource list --resource-group myrg -o table
 
-# בדוק את מצב המשאב
+# בדוק את מצב המשאבים
 az webapp show --name myapp --resource-group myrg --query state
 
 # אבחון רשת
@@ -474,34 +474,34 @@ az network watcher test-connectivity --source-resource myvm --dest-address myapp
 ## 🆘 קבלת עזרה נוספת
 
 ### מתי להעביר הלאה
-- בעיות אימות נמשכות לאחר שניסיתם את כל הפתרונות
-- בעיות תשתית בשירותי Azure
-- בעיות חיוב או מנוי
+- בעיות אימות נמשכות לאחר ניסיון כל הפתרונות
+- בעיות בתשתית עם שירותי Azure
+- בעיות בחיוב או במנוי
 - חששות או אירועי אבטחה
 
 ### ערוצי תמיכה
 ```bash
-# 1. בדוק את Azure Service Health
+# 1. בדוק את בריאות שירותי Azure
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
-# 2. צור בקשת תמיכה ל-Azure
-# עבור אל: https://portal.azure.com -> עזרה ותמיכה
+# 2. צור פנייה לתמיכה של Azure
+# עבור אל: https://portal.azure.com -> עזרה + תמיכה
 
 # 3. משאבי קהילה
 # - Stack Overflow: תג azure-developer-cli
 # - בעיות ב-GitHub: https://github.com/Azure/azure-dev/issues
-# - Microsoft שאלות ותשובות: https://learn.microsoft.com/en-us/answers/
+# - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
 ```
 
 ### מידע לאיסוף
-לפני יצירת קשר עם התמיכה, אספו:
-- פלט של `azd version`
-- פלט של `azd config list`
-- פלט של `azd show` (מצב הפריסה הנוכחי)
+לפני שפונים לתמיכה, אספו:
+- פלט `azd version`
+- פלט `azd config show`
+- פלט `azd show` (מצב הפריסה הנוכחי)
 - הודעות שגיאה (טקסט מלא)
-- שלבים לשחזור הבעיה
-- פרטי סביבה (`azd env show`)
-- ציר זמן של מתי החלה הבעיה
+- צעדים להכפלת הבעיה
+- פרטי הסביבה (`azd env get-values`)
+- ציר זמן של תחילת הבעיה
 
 ### סקריפט לאיסוף לוגים
 ```bash
@@ -516,8 +516,8 @@ azd version >> debug-logs/system-info.txt
 az --version >> debug-logs/system-info.txt
 
 echo "Configuration:" > debug-logs/config.txt
-azd config list >> debug-logs/config.txt
-azd env show >> debug-logs/config.txt
+azd config show >> debug-logs/config.txt
+azd env list >> debug-logs/config.txt
 azd env get-values >> debug-logs/config.txt
 
 echo "Current deployment status:" > debug-logs/status.txt
@@ -528,29 +528,29 @@ echo "Debug information collected in debug-logs/"
 
 ## 📊 מניעת בעיות
 
-### רשימת בדיקה טרום-פריסה
+### רשימת בדיקות לפני פריסה
 ```bash
-# 1. וודא את ההזדהות
+# 1. לאמת אימות
 az account show
 
-# 2. בדוק את המכסות והמגבלות
+# 2. לבדוק מכסות והגבלות
 az vm list-usage --location eastus2
 
-# 3. אמת את התבניות
+# 3. לאמת תבניות
 az bicep build --file infra/main.bicep
 
-# 4. בדוק תחילה באופן מקומי
+# 4. לבדוק מקומית תחילה
 npm run build
 npm run test
 
-# 5. השתמש בפריסות בהרצה מדומה
+# 5. להשתמש בפריסות יבשות ניסוי
 azd provision --preview
 ```
 
 ### הגדרת ניטור
 ```bash
 # הפעל את Application Insights
-# הוסף לקובץ main.bicep:
+# הוסף ל-main.bicep:
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   // ... configuration
 }
@@ -577,24 +577,24 @@ az security assessment list --resource-group myrg
 
 ## משאבים קשורים
 
-- [מדריך ניפוי באגים](debugging.md) - טכניקות דיבוג מתקדמות
-- [פריסת משאבים](../chapter-04-infrastructure/provisioning.md) - פתרון תקלות תשתית
+- [מדריך איתור באגים](debugging.md) - טכניקות מתקדמות לאיתור באגים
+- [פריסת משאבים](../chapter-04-infrastructure/provisioning.md) - פתרון תקלות בתשתית
 - [תכנון קיבולת](../chapter-06-pre-deployment/capacity-planning.md) - הנחיות לתכנון משאבים
-- [בחירת SKU](../chapter-06-pre-deployment/sku-selection.md) - המלצות לרמת שירות
+- [בחירת SKU](../chapter-06-pre-deployment/sku-selection.md) - המלצות על שכבת שירות
 
 ---
 
-**טיפ**: שמרו מדריך זה בסימניות ותפנו אליו בכל פעם שתיתקלו בבעיות. רוב הבעיות כבר נראו בעבר ויש להן פתרונות מוכחים!
+**טיפ**: שמרו מדריך זה כמועדף והיעזרו בו בכל פעם שנתקלים בבעיות. רוב הבעיות כבר נראו בעבר ויש להן פתרונות מוסכמים!
 
 ---
 
 **ניווט**
 - **שיעור קודם**: [פריסת משאבים](../chapter-04-infrastructure/provisioning.md)
-- **השיעור הבא**: [מדריך ניפוי באגים](debugging.md)
+- **שיעור הבא**: [מדריך איתור באגים](debugging.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-הצהרת אחריות:
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית "Co-op Translator" (https://github.com/Azure/co-op-translator). אמנם אנו שואפים לדיוק, יש לשים לב כי תרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. יש להתייחס למסמך המקורי בשפת המקור כמקור הסמכות. עבור מידע קריטי מומלץ תרגום מקצועי שבוצע על ידי מתרגם אנושי. איננו אחראים לכל אי-הבנה או פרשנות שגויה הנובעת מהשימוש בתרגום זה.
+**כתב ויתור**:  
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון כי תרגומים אוטומטיים עשויים להכיל שגיאות או אי-דיוקים. המסמך המקורי בשפת המקור שלו צריך להיחשב כמקור הסמכות. למידע קריטי, מומלץ תרגום מקצועי אנושי. אנו לא אחראים לכל אי-הבנות או פרשנויות שגויות הנובעות משימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

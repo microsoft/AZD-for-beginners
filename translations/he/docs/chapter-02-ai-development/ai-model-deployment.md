@@ -1,26 +1,28 @@
-# פריסת מודל AI עם Azure Developer CLI
+# פריסת מודלים מבוססי בינה מלאכותית עם Azure Developer CLI
 
-**ניווט בפרקים:**
-- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
-- **📖 הפרק הנוכחי**: פרק 2 - פיתוח במרכז AI
+**ניווט בין פרקים:**
+- **📚 דף קורס ראשי**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 2 - פיתוח מבוסס בינה מלאכותית
 - **⬅️ קודם**: [שילוב Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ הבא**: [מעבדה לסדנת AI](ai-workshop-lab.md)
-- **🚀 הפרק הבא**: [פרק 3: קונפיגורציה](../chapter-03-configuration/configuration.md)
+- **➡️ הבא**: [סדנת מעבדה לבינה מלאכותית](ai-workshop-lab.md)
+- **🚀 הפרק הבא**: [פרק 3: תצורה](../chapter-03-configuration/configuration.md)
 
-מדריך זה מספק הוראות מקיפות לפריסת מודלים של AI באמצעות תבניות AZD, הכולל הכל מבחירת מודל ועד דפוסי פריסה בייצור.
+מדריך זה מספק הוראות מקיפות לפריסת מודלים של בינה מלאכותית באמצעות תבניות AZD, הכולל הכל מבחירת מודל ועד דפוסי פריסה בפרודקשן.
 
-## תוכן העניינים
+> **הערת אימות (2026-03-25):** תהליך העבודה של AZD במדריך זה נבדק כנגד `azd` `1.23.12`. לפריסות בינה מלאכותית שלוקחות יותר זמן מחלון פריסת השירות המוגדר כברירת מחדל, גרסאות AZD הנוכחיות תומכות ב-`azd deploy --timeout <seconds>`.
+
+## תכולת העניינים
 
 - [אסטרטגיית בחירת מודל](#אסטרטגיית-בחירת-מודל)
-- [קונפיגורציית AZD למודלי AI](#קונפיגורציית-azd-למודלי-ai)
+- [תצורת AZD למודלים של בינה מלאכותית](#תצורת-azd-למודלים-של-בינה-מלאכותית)
 - [דפוסי פריסה](#דפוסי-פריסה)
-- [ניהול מודל](#ניהול-מודל)
-- [שיקולים בייצור](#שיקולים-בייצור)
-- [ניטור ותצפית](#ניטור-ותצפית)
+- [ניהול מודלים](#ניהול-מודלים)
+- [התייחסויות לפרודקשן](#התייחסויות-לפרודקשן)
+- [ניטור ותצפיות](#ניטור-ותצפיות)
 
 ## אסטרטגיית בחירת מודל
 
-### מודלי Microsoft Foundry
+### מודלים של Microsoft Foundry
 
 בחר את המודל המתאים למקרה השימוש שלך:
 
@@ -41,27 +43,27 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
         ]
 ```
 
-### תכנון קיבולת למודל
+### תכנון קיבולת מודל
 
 | סוג מודל | מקרה שימוש | קיבולת מומלצת | שיקולי עלות |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | צ'אט, שאלות ותשובות | 10-50 TPM | חסכוני עבור רוב העומסים |
+| gpt-4.1-mini | שיחה, שאלות ותשובות | 10-50 TPM | חסכוני לרוב עומסי העבודה |
 | gpt-4.1 | חשיבה מורכבת | 20-100 TPM | עלות גבוהה יותר, לשימוש בתכונות פרימיום |
-| Text-embedding-ada-002 | חיפוש, RAG | 30-120 TPM | חיוני לחיפוש סמנטי |
-| Whisper | דיבור לטקסט | 10-50 TPM | עומסי עיבוד שמע |
+| text-embedding-3-large | חיפוש, RAG | 30-120 TPM | ברירת מחדל חזקה לחיפוש סמנטי ושליפה |
+| Whisper | דיבור לטקסט | 10-50 TPM | עומסי עבודה של עיבוד אודיו |
 
-## קונפיגורציית AZD למודלי AI
+## תצורת AZD למודלים של בינה מלאכותית
 
-### קונפיגורציית תבנית Bicep
+### תצורת תבנית Bicep
 
 צור פריסות מודל באמצעות תבניות Bicep:
 
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -124,19 +126,19 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### משתני סביבה
 
-קונפיגורציה של סביבת היישום שלך:
+הגדר את סביבת היישום שלך:
 
 ```bash
-# קונפיגורציית .env
+# קביעת תצורה של .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
 ## דפוסי פריסה
 
-### דפוס 1: פריסה באיזור יחיד
+### דפוס 1: פריסה באזור אחד
 
 ```yaml
 # azure.yaml - Single region
@@ -152,9 +154,9 @@ services:
 מומלץ עבור:
 - פיתוח ובדיקות
 - יישומים בשוק יחיד
-- אופטימיזציה של עלויות
+- אופטימיזציית עלויות
 
-### דפוס 2: פריסה ברב-אזור
+### דפוס 2: פריסה מרובת אזורים
 
 ```bicep
 // Multi-region deployment
@@ -170,11 +172,11 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 מומלץ עבור:
 - יישומים גלובליים
 - דרישות זמינות גבוהה
-- פיזור עומסים
+- פיזור עומס
 
-### דפוס 3: פריסה היברידית
+### דפוס 3: פריסה משולבת
 
-שלב מודלי Microsoft Foundry עם שירותי AI אחרים:
+שילוב מודלים של Microsoft Foundry עם שירותי בינה מלאכותית אחרים:
 
 ```bicep
 // Hybrid AI services
@@ -203,11 +205,11 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## ניהול מודל
+## ניהול מודלים
 
-### ניהול גרסאות
+### בקרת גרסאות
 
-עקוב אחר גרסאות המודל בקונפיגורציית AZD שלך:
+עקוב אחר גרסאות מודל בתצורת AZD שלך:
 
 ```json
 {
@@ -215,19 +217,19 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
 ```
 
-### עדכוני מודל
+### עדכוני מודלים
 
-השתמש ב-hooks של AZD לעדכוני מודל:
+השתמש ב-hooks של AZD לעדכוני מודלים:
 
 ```bash
 #!/bin/bash
@@ -238,11 +240,14 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# אם הפריסה אורכת זמן רב יותר מהדדליין המוגדר מראש
+azd deploy --timeout 1800
 ```
 
 ### בדיקות A/B
 
-פרוס מספר גרסאות של מודלים:
+פרוס מספר גרסאות מודל:
 
 ```bicep
 param enableABTesting bool = false
@@ -264,11 +269,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## שיקולים בייצור
+## התייחסויות לפרודקשן
 
 ### תכנון קיבולת
 
-חשב את הקיבולת הנדרשת בהתבסס על דפוסי השימוש:
+חשב קיבולת דרושה בהתבסס על דפוסי שימוש:
 
 ```python
 # דוגמה לחישוב קיבולת
@@ -283,7 +288,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# דוגמה לשימוש
+# דוגמת שימוש
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -293,9 +298,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### קונפיגורציית קנה מידה אוטומטי
+### תצורת סקיילינג אוטומטי
 
-הגדר קנה מידה אוטומטי עבור Container Apps:
+הגדר סקיילינג אוטומטי ל-Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -331,9 +336,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### אופטימיזציה של עלויות
+### אופטימיזציית עלויות
 
-מימש בקרות עלות:
+הטמעת בקרה על עלויות:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -363,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## ניטור ותצפית
+## ניטור ותצפיות
 
-### שילוב Application Insights
+### אינטגרציה עם Application Insights
 
-קונפיגורציה לניטור עומסי AI:
+הגדר ניטור לעומסי בינה מלאכותית:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -405,10 +410,10 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### מדדים מותאמים אישית
 
-עקוב אחר מדדים ספציפיים ל-AI:
+עקוב אחר מדדים ספציפיים לבינה מלאכותית:
 
 ```python
-# טלמטריה מותאמת אישית עבור מודלים של בינה מלאכותית
+# טלמטריה מותאמת אישית עבור מודלי בינה מלאכותית
 import logging
 from applicationinsights import TelemetryClient
 
@@ -442,10 +447,10 @@ class AITelemetry:
 
 ### בדיקות בריאות
 
-ממש ניטור בריאות לשירותי AI:
+הטמע ניטור בריאות של שירותי בינה מלאכותית:
 
 ```python
-# נקודות קצה לבדיקת בריאות
+# נקודות קצה לבדיקה בריאותית
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -455,7 +460,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # בדיקת חיבור ל-OpenAI
+        # בדוק את חיבור OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -471,32 +476,32 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## השלבים הבאים
+## צעדים הבאים
 
-1. **סקור את [מדריך שילוב Microsoft Foundry](microsoft-foundry-integration.md)** עבור דפוסי שילוב שירותים
-2. **השלים את [מעבדה לסדנת AI](ai-workshop-lab.md)** לניסיון מעשי
-3. **ממש [פרקטיקות AI בייצור](production-ai-practices.md)** עבור פריסות ארגוניות
+1. **סקור את [מדריך השילוב של Microsoft Foundry](microsoft-foundry-integration.md)** לדפוסי שילוב שירותים
+2. **השלים את [סדנת מעבדה לבינה מלאכותית](ai-workshop-lab.md)** להתנסות מעשית
+3. **הטמע את [פרקטיקות AI לפרודקשן](production-ai-practices.md)** לפריסות ארגוניות
 4. **חקור את [מדריך פתרון בעיות AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** לבעיות נפוצות
 
 ## משאבים
 
-- [זמינות מודלי Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [זמינות מודלים של Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [תיעוד Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [קנה מידה של Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [אופטימיזציה של עלות מודלי AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [סקיילינג של Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [אופטימיזציית עלות של מודלים בינה מלאכותית](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**ניווט בפרקים:**
-- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
-- **📖 הפרק הנוכחי**: פרק 2 - פיתוח במרכז AI
+**ניווט בין פרקים:**
+- **📚 דף קורס ראשי**: [AZD למתחילים](../../README.md)
+- **📖 פרק נוכחי**: פרק 2 - פיתוח מבוסס בינה מלאכותית
 - **⬅️ קודם**: [שילוב Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ הבא**: [מעבדה לסדנת AI](ai-workshop-lab.md)
-- **🚀 הפרק הבא**: [פרק 3: קונפיגורציה](../chapter-03-configuration/configuration.md)
+- **➡️ הבא**: [סדנת מעבדה לבינה מלאכותית](ai-workshop-lab.md)
+- **🚀 הפרק הבא**: [פרק 3: תצורה](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו שואפים לדיוק, יש לקחת בחשבון כי תרגומים אוטומטיים עלולים להכיל טעויות או אי-דיוקים. יש להתייחס למסמך המקורי בשפתו כמקור הסמכותי. למידע חיוני, מומלץ להיעזר בתרגום מקצועי של אדם. אנו אינם נושאים באחריות לכל אי-הבנה או פרשנות שגוייה הנובעת משימוש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון כי תרגומים אוטומטיים עלולים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית צריך להיחשב כמקור המוסמך. למידע קריטי מומלץ להיעזר בתרגום מקצועי מבוצע על ידי אדם. אנו לא אחראים לכל אי הבנות או פרשנויות שגויות הנובעות משימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,83 +1,83 @@
 # מדריך התקנה והגדרה
 
 **ניווט בפרקים:**
-- **📚 דף הקורס**: [AZD למתחילים](../../README.md)
-- **📖 הפרק הנוכחי**: פרק 1 - יסודות והתנעה מהירה
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 הפרק הנוכחי**: פרק 1 - יסודות והתחלה מהירה
 - **⬅️ הקודם**: [יסודות AZD](azd-basics.md)
 - **➡️ הבא**: [הפרויקט הראשון שלך](first-project.md)
-- **🚀 הפרק הבא**: [פרק 2: פיתוח מבוסס AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 הפרק הבא**: [פרק 2: פיתוח מונחה AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-## مقدمة
+## מבוא
 
-מדריך מקיף זה ילווה אותך במהלך התקנה והגדרת Azure Developer CLI (azd) במערכת שלך. תלמד שיטות התקנה שונות למערכות הפעלה שונות, הגדרת אימות וקונפיגורציה ראשונית להכנת סביבת הפיתוח שלך לפריסות ב-Azure.
+מדריך מקיף זה ילווה אותך בהתקנה ובהגדרת Azure Developer CLI (azd) במערכת שלך. תלמד שיטות התקנה מרובות עבור מערכות הפעלה שונות, הגדרת אימות ותצורה ראשונית להכנת סביבת הפיתוח שלך לפריסות Azure.
 
 ## מטרות למידה
 
 בסיום השיעור הזה, תוכל:
 - להתקין בהצלחה את Azure Developer CLI על מערכת ההפעלה שלך
 - להגדיר אימות עם Azure באמצעות שיטות שונות
-- להקים את סביבת הפיתוח שלך עם התלויות הנדרשות
-- להבין את אפשרויות ההתקנה השונות ומתי להשתמש בכל אחת מהן
+- להגדיר את סביבת הפיתוח שלך עם הדרישות המקדימות הנחוצות
+- להבין אפשרויות התקנה שונות ומתי להשתמש בכל אחת מהן
 - לפתור בעיות נפוצות בהתקנה ובהגדרה
 
 ## תוצאות למידה
 
 לאחר סיום השיעור, תוכל:
 - להתקין את azd באמצעות השיטה המתאימה לפלטפורמה שלך
-- לבצע אימות עם Azure באמצעות הפקודה azd auth login
-- לאשר שההתקנה בוצעה בהצלחה ולבדוק פקודות בסיסיות של azd
-- להגדיר את סביבת הפיתוח לשימוש מיטבי ב-azd
+- לאמת עם Azure באמצעות azd auth login
+- לוודא את ההתקנה ולבדוק פקודות azd בסיסיות
+- להגדיר את סביבת הפיתוח שלך לשימוש מיטבי ב-azd
 - לפתור בעיות התקנה נפוצות באופן עצמאי
 
-מדריך זה יסייע לך להתקין ולהגדיר את Azure Developer CLI במערכת שלך, ללא תלות במערכת ההפעלה או סביבת הפיתוח.
+מדריך זה יסייע לך להתקין ולהגדיר את Azure Developer CLI במערכת שלך, ללא קשר למערכת ההפעלה או סביבת הפיתוח.
 
 ## דרישות מוקדמות
 
-לפני ההתקנה של azd, ודא שיש לך:
-- **מנוי ל-Azure** - [צור חשבון חינמי](https://azure.microsoft.com/free/)
-- **Azure CLI** - עבור אימות וניהול משאבים
-- **Git** - לשיבוט תבניות ובקרת גרסאות
-- **Docker** (אופציונלי) - עבור יישומים מוכללים במכולות
+לפני התקנת azd, ודא שיש לך:
+- **מנוי Azure** - [צור חשבון חינמי](https://azure.microsoft.com/free/)
+- **Azure CLI** - לאימות וניהול משאבים
+- **Git** - לשכפול תבניות וניהול גרסאות
+- **Docker** (אופציונלי) - לאפליקציות במכלים
 
 ## שיטות התקנה
 
 ### Windows
 
-#### אופציה 1: PowerShell (מומלץ)
+#### אפשרות 1: מנהל החבילות של Windows (מומלץ)
+```cmd
+winget install microsoft.azd
+```
+
+#### אפשרות 2: סקריפט התקנה ב-PowerShell
 ```powershell
-# הפעל כמנהל או בהרשאות מורמות
+# שימושי כאשר winget אינו זמין
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
-#### אופציה 2: מנהל החבילות של Windows (winget)
-```cmd
-winget install Microsoft.Azd
-```
-
-#### אופציה 3: Chocolatey
+#### אפשרות 3: Chocolatey
 ```cmd
 choco install azd
 ```
 
-#### אופציה 4: התקנה ידנית
+#### אפשרות 4: התקנה ידנית
 1. הורד את הגרסה האחרונה מ-[GitHub](https://github.com/Azure/azure-dev/releases)
 2. חלץ ל-`C:\Program Files\azd\`
 3. הוסף למשתנה הסביבה PATH
 
 ### macOS
 
-#### אופציה 1: Homebrew (מומלץ)
+#### אפשרות 1: Homebrew (מומלץ)
 ```bash
 brew tap azure/azd
 brew install azd
 ```
 
-#### אופציה 2: סקריפט התקנה
+#### אפשרות 2: סקריפט התקנה
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### אופציה 3: התקנה ידנית
+#### אפשרות 3: התקנה ידנית
 ```bash
 # הורד והתקן
 curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.com/Azure/azure-dev/releases/latest/download --verbose
@@ -85,57 +85,52 @@ curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.
 
 ### Linux
 
-#### אופציה 1: סקריפט התקנה (מומלץ)
+#### אפשרות 1: סקריפט התקנה (מומלץ)
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### אופציה 2: מנהלי חבילות
+#### אפשרות 2: מנהלי חבילות
 
-**Ubuntu/Debian:**
+**התקנה ידנית מתוך נכסי הגרסה:**
 ```bash
-# הוסף מאגר חבילות של מיקרוסופט
-curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-
-# התקן את azd
-sudo apt-get update
-sudo apt-get install azd
-```
-
-**RHEL/CentOS/Fedora:**
-```bash
-# הוסף מאגר חבילות של מיקרוסופט
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-sudo dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/azure-cli
-sudo dnf install azd
+# הורד את הארכיון העדכני ביותר עבור הארכיטקטורה של הלינוקס שלך מ:
+# https://github.com/Azure/azure-dev/releases
+# לאחר מכן חלץ אותו והוסף את הקובץ הבינארי azd ל-PATH שלך.
 ```
 
 ### GitHub Codespaces
 
-azd מותקן מראש ב-GitHub Codespaces. פשוט צור codespace והתחל להשתמש ב-azd מיד.
+כמה סביבות Codespaces ומכלי פיתוח כוללים כבר את `azd`, אך עליך לוודא זאת במקום להניח:
+
+```bash
+azd version
+```
+
+אם `azd` חסר, התקן אותו באמצעות הסקריפט הסטנדרטי לאותה סביבה.
 
 ### Docker
 
 ```bash
-# הפעל את azd במכולה
+# להריץ azd במיכל
 docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest
 
-# צור כינוי לשימוש קל יותר
+# ליצור כינוי לשימוש קל יותר
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
 ## ✅ אימות התקנה
 
-לאחר ההתקנה, אשר ש-azd עובד כראוי:
+לאחר ההתקנה, וודא ש-azd פועל כראוי:
 
 ```bash
-# בדוק גרסה
+# לבדוק גרסה
 azd version
 
-# הצג עזרה
+# הצגת עזרה
 azd --help
 
-# רשום תבניות זמינות
+# רשימת תבניות זמינות
 azd template list
 ```
 
@@ -144,51 +139,84 @@ azd template list
 azd version 1.x.x (commit xxxxxx)
 ```
 
-**הערה**: מספר הגרסה בפועל עשוי להשתנות. בדוק [גרסאות Azure Developer CLI](https://github.com/Azure/azure-dev/releases) עבור הגרסה האחרונה.
+**הערה**: מספר הגרסה בפועל ישתנה. בדוק [גרסאות Azure Developer CLI](https://github.com/Azure/azure-dev/releases) כדי לראות את הגרסה העדכנית ביותר.
 
-**✅ רשימת בדיקות הצלחת ההתקנה:**
+**✅ רשימת בדיקה להצלחה בהתקנה:**
 - [ ] `azd version` מציג את מספר הגרסה ללא שגיאות
-- [ ] `azd --help` מציג תיעוד פקודות
+- [ ] `azd --help` מציג תיעוד לפקודות
 - [ ] `azd template list` מציג תבניות זמינות
-- [ ] `az account show` מציג את מנוי ה-Azure שלך
-- [ ] ניתן ליצור תיקיית בדיקה ולהריץ `azd init` בהצלחה
+- [ ] תוכל ליצור תיקיית בדיקה ולהריץ בהצלחה `azd init`
 
-**אם כל הבדיקות עברו, אתה מוכן להמשיך ל-[הפרויקט הראשון שלך](first-project.md)!**
+**אם כל הבדיקות עוברות, אתה מוכן להמשיך ל-[הפרויקט הראשון שלך](first-project.md)!**
 
 ## הגדרת אימות
 
-### אימות עם Azure CLI (מומלץ)
+### הגדרת מתחילים מומלצת
+
+לזרימות עבודה מונחות AZD, היכנס עם `azd auth login`.
+
 ```bash
-# התקן את Azure CLI אם לא מותקן כבר
+# נדרש לפקודות AZD כגון azd up
+azd auth login
+
+# אמת את מצב האימות של AZD
+azd auth login --check-status
+```
+
+השתמש בכניסת Azure CLI רק כשאתה מתכוון להריץ פקודות `az` בעצמך במהלך הקורס.
+
+### אימות Azure CLI (אופציונלי)
+```bash
+# התקן את Azure CLI אם עדיין לא מותקן
 # Windows: winget install Microsoft.AzureCLI
 # macOS: brew install azure-cli
-# Linux: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+# Linux: ראה את תיעוד ההתקנה של Azure CLI עבור ההפצה שלך
 
-# התחבר ל-Azure
+# היכנס ל-Azure
 az login
 
 # אמת את האימות
 az account show
 ```
 
-### אימות באמצעות Device Code
-אם אתה עובד במערכת ללא ממשק גרפי או שיש לך בעיות בדפדפן:
+### איזה זרם כניסה כדאי להשתמש?
+
+- השתמש ב-`azd auth login` אם אתה עוקב אחרי נתיב המתחילים של AZD ומריץ בעיקר פקודות `azd`.
+- השתמש גם ב-`az login` כאשר אתה רוצה להריץ פקודות Azure CLI כגון `az account show` או לבדוק משאבים ישירות.
+- אם התרגיל כולל גם פקודות `azd` וגם `az`, הרץ את שתי פקודות הכניסה פעם אחת בתחילת הדרך.
+
+### אימות קוד מכשיר
+אם אתה במערכת ללא ממשק משתמש או נתקל בבעיות דפדפן:
 ```bash
-az login --use-device-code
+azd auth login --use-device-code
 ```
 
-### אישור באמצעות Service Principal (CI/CD)
-לסביבות אוטומטיות:
+### שירות פרינסיפל (CI/CD)
+לסביבות אוטומציה:
 ```bash
-az login --service-principal \
-  --username <client-id> \
-  --password <client-secret> \
-  --tenant <tenant-id>
+azd auth login \
+  --client-id <client-id> \
+  --client-secret <client-secret> \
+  --tenant-id <tenant-id>
 ```
 
-## קונפיגורציה
+### וידוא התצורה המלאה שלך
 
-### קונפיגורציה גלובלית
+אם ברצונך לבדוק מהירות לפני תחילת פרק 1:
+
+**Windows:**
+```powershell
+.\validate-setup.ps1
+```
+
+**macOS / Linux:**
+```bash
+bash ./validate-setup.sh
+```
+
+## תצורה
+
+### תצורה גלובלית
 ```bash
 # הגדר מנוי ברירת מחדל
 azd config set defaults.subscription <subscription-id>
@@ -196,8 +224,8 @@ azd config set defaults.subscription <subscription-id>
 # הגדר מיקום ברירת מחדל
 azd config set defaults.location eastus2
 
-# הצג את כל ההגדרות
-azd config list
+# הצג את כל התצורה
+azd config show
 ```
 
 ### משתני סביבה
@@ -209,7 +237,7 @@ export AZURE_LOCATION="eastus2"
 
 # תצורת azd
 export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
-export AZD_DEBUG=true  # הפעלת רישום באגים
+export AZD_DEBUG=true  # אפשר רישום ניפוי שגיאות
 ```
 
 ## אינטגרציה עם IDE
@@ -222,10 +250,10 @@ export AZD_DEBUG=true  # הפעלת רישום באגים
 4. התקן את התוסף
 
 תכונות:
-- IntelliSense עבור azure.yaml
+- אינטיליסנס עבור azure.yaml
 - פקודות טרמינל משולבות
-- דפדוף בתבניות
-- מעקב פריסה
+- גלישה בתבניות
+- ניטור פריסות
 
 ### GitHub Codespaces
 צור קובץ `.devcontainer/devcontainer.json`:
@@ -245,11 +273,11 @@ export AZD_DEBUG=true  # הפעלת רישום באגים
 2. הגדר אישורי Azure
 3. השתמש בטרמינל המשולב לפקודות azd
 
-## 🐛 פתרון בעיות התקנה
+## 🐛 פתרון תקלות בהתקנה
 
 ### בעיות נפוצות
 
-#### הרשאות נדחות (Windows)
+#### הרשאה נדחתה (Windows)
 ```powershell
 # הפעל את PowerShell כמנהל מערכת
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
@@ -271,51 +299,51 @@ source ~/.bashrc
 
 #### בעיות רשת/פרוקסי
 ```bash
-# הגדר פרוקסי
+# קבע פרוקסי
 azd config set http.proxy http://proxy:8080
 azd config set https.proxy https://proxy:8080
 
-# דלג על אימות SSL (לא מומלץ לסביבות ייצור)
+# דלג על אימות SSL (לא מומלץ לסביבת ייצור)
 azd config set http.insecure true
 ```
 
-#### ניגודי גרסאות
+#### קונפליקטים בין גרסאות
 ```bash
-# הסר התקנות ישנות
-# Windows: winget uninstall Microsoft.Azd
+# להסיר התקנות ישנות
+# Windows: winget uninstall microsoft.azd
 # macOS: brew uninstall azd
-# Linux: sudo apt remove azd
+# Linux: הסר את הקובץ הבינארי של azd הקודם או את הקישור הסימבולי לפני התקנה מחדש
 
-# נקה תצורה
+# לנקות תצורה
 rm -rf ~/.azd
 ```
 
 ### לקבלת עזרה נוספת
 ```bash
-# הפעל רישום איתור תקלות
+# הפעלת רישום דיבוג
 export AZD_DEBUG=true
 azd <command> --debug
 
-# הצג את התצורה הנוכחית
-azd config list
+# הצג תצורה נוכחית
+azd config show
 
-# הצג את מצב הפריסה הנוכחי
+# הצג סטטוס פריסה נוכחי
 azd show
 ```
 
 ## עדכון azd
 
-### עדכונים אוטומטיים
-azd תודיע לך כאשר קיימים עדכונים זמינים:
+### בדיקת עדכון
+azd מזהיר כשהגרסה החדשה זמינה, ותוכל לוודא את הגרסה הנוכחית שלך עם:
 ```bash
-azd version --check-for-updates
+azd version
 ```
 
 ### עדכונים ידניים
 
 **Windows (winget):**
 ```cmd
-winget upgrade Microsoft.Azd
+winget upgrade microsoft.azd
 ```
 
 **macOS (Homebrew):**
@@ -333,97 +361,97 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 <details>
 <summary><strong>מה ההבדל בין azd ל-az CLI?</strong></summary>
 
-**Azure CLI (az)**: כלי ברמה נמוכה לניהול משאבים בודדים של Azure
+**Azure CLI (az)**: כלי ברמת נמוכה לניהול משאבים בודדים ב-Azure
 - `az webapp create`, `az storage account create`
 - משאב אחד בכל פעם
-- דגש על ניהול תשתיות
+- התמקדות בניהול תשתיות
 
-**Azure Developer CLI (azd)**: כלי ברמה גבוהה לפריסות יישומים מלאות
-- `azd up` מפריס אפליקציה שלמה עם כל המשאבים
+**Azure Developer CLI (azd)**: כלי ברמת גבוה לפריסת אפליקציות שלמות
+- `azd up` מפרסם אפליקציה שלמה עם כל המשאבים
 - זרימות עבודה מבוססות תבניות
-- דגש על פרודוקטיביות מתכנתים
+- התמקדות בפרודוקטיביות המפתח
 
 **צריך את שניהם**: azd משתמש ב-az CLI לאימות
 </details>
 
 <details>
-<summary><strong>האם אפשר להשתמש ב-azd עם משאבי Azure קיימים?</strong></summary>
+<summary><strong>האם אפשר להשתמש ב-azd עם משאבים קיימים ב-Azure?</strong></summary>
 
 כן! אפשר:
 1. לייבא משאבים קיימים לסביבות azd
-2. להפנות למשאבים קיימים בתבניות Bicep שלך
+2. להפנות למשאבים קיימים בתוך תבניות Bicep שלך
 3. להשתמש ב-azd לפריסות חדשות לצד התשתית הקיימת
 
-ראה את [מדריך ההגדרה](configuration.md) לפרטים.
+ראה [מדריך התצורה](configuration.md) לפרטים.
 </details>
 
 <details>
 <summary><strong>האם azd עובד עם Azure Government או Azure China?</strong></summary>
 
-כן, תגדיר את הענן:
+כן, הגדר את הענן:
 ```bash
-# ממשלת אזור
+# מיקרוסופט אזור ממשלתי
 az cloud set --name AzureUSGovernment
 az login
 
-# אזור סין
+# אזור מיקרוסופט סין
 az cloud set --name AzureChinaCloud
 az login
 ```
 </details>
 
 <details>
-<summary><strong>האם אפשר להשתמש ב-azd בשרשראות CI/CD?</strong></summary>
+<summary><strong>האם אפשר להשתמש ב-azd בצינורות CI/CD?</strong></summary>
 
-כמובן! azd מיועד לאוטומציה:
+בהחלט! azd מיועד לאוטומציה:
 - אינטגרציה עם GitHub Actions
 - תמיכה ב-Azure DevOps
-- אימות באמצעות Service Principal
-- מצב ללא צורך באינטראקציה
+- אימות באמצעות שירות פרינסיפל
+- מצב לא אינטראקטיבי
 
-ראה את [מדריך הפריסה](../chapter-04-infrastructure/deployment-guide.md) לדפוסי CI/CD.
+ראה [מדריך פריסה](../chapter-04-infrastructure/deployment-guide.md) לדוגמאות CI/CD.
 </details>
 
 <details>
 <summary><strong>כמה עולה השימוש ב-azd?</strong></summary>
 
-azd הוא **חינמי לחלוטין** וקוד פתוח. אתה משלם רק עבור:
-- משאבי Azure שאתה מפריס
-- עלויות צריכה של Azure (מחשוב, אחסון וכו׳)
+azd עצמו הוא **חינמי לחלוטין** וקוד פתוח. אתה משלם רק עבור:
+- משאבי Azure שאתה מפרסם
+- עלויות צריכה של Azure (חישוב, אחסון וכו')
 
-השתמש ב-`azd provision --preview` כדי להעריך עלויות לפני פריסה.
+השתמש ב-`azd provision --preview` להערכת עלויות לפני הפריסה.
 </details>
 
 ## צעדים הבאים
 
-1. **סיים את האימות**: ודא שיש לך גישה למנוי Azure שלך
-2. **נסה את הפריסה הראשונה שלך**: פעל לפי [מדריך הפרויקט הראשון](first-project.md)
+1. **השלים אימות**: ודא שיש לך גישה למנוי Azure שלך
+2. **נסה את הפריסה הראשונה שלך**: עקוב אחרי [מדריך הפרויקט הראשון](first-project.md)
 3. **חקור תבניות**: גלוש בתבניות זמינות עם `azd template list`
-4. **הגדר את ה-IDE שלך**: הקם את סביבת הפיתוח שלך
+4. **הגדר את סביבת הפיתוח שלך**: התאם אישית את הסביבה שלך
 
 ## תמיכה
 
 אם נתקלת בבעיות:
 - [תיעוד רשמי](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [דיווח בעיות](https://github.com/Azure/azure-dev/issues)
+- [דיווח על בעיות](https://github.com/Azure/azure-dev/issues)
 - [דיונים בקהילה](https://github.com/Azure/azure-dev/discussions)
-- [תמיכת Azure](https://azure.microsoft.com/support/)
-- [**כישורים של Azure Agent**](https://skills.sh/microsoft/github-copilot-for-azure) - קבל הנחיות פקודות Azure ישירות בעורך עם `npx skills add microsoft/github-copilot-for-azure`
+- [תמיכה ב-Azure](https://azure.microsoft.com/support/)
+- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - קבל עזרה בפקודות Azure ישירות בעורך שלך עם `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **ניווט בפרקים:**
-- **📚 דף הקורס**: [AZD למתחילים](../../README.md)
-- **📖 הפרק הנוכחי**: פרק 1 - יסודות והתנעה מהירה
+- **📚 דף הבית של הקורס**: [AZD למתחילים](../../README.md)
+- **📖 הפרק הנוכחי**: פרק 1 - יסודות והתחלה מהירה
 - **⬅️ הקודם**: [יסודות AZD](azd-basics.md)
 - **➡️ הבא**: [הפרויקט הראשון שלך](first-project.md)
-- **🚀 הפרק הבא**: [פרק 2: פיתוח מבוסס AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 הפרק הבא**: [פרק 2: פיתוח מונחה AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**✅ ההתקנה הושלמה!** המשך ל-[הפרויקט הראשון שלך](first-project.md) כדי להתחיל לבנות עם azd.
+**✅ ההתקנה הושלמה!** המשך אל [הפרויקט הראשון שלך](first-project.md) כדי להתחיל לבנות עם azd.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**כתב ויתור**:
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). על אף שאנו שואפים לדיוק, יש לקחת בחשבון כי תרגומים אוטומטיים עלולים להכיל שגיאות או אי דיוקים. יש להתייחס למסמך המקורי בשפת המקור כמקור הסמכותי. למידע קריטי מומלץ להשתמש בתרגום מקצועי אנושי. איננו אחראים לכל טעויות או אי הבנות הנובעות מהשימוש בתרגום זה.
+**כתב ויתור**:  
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש להיות מודעים לכך שתרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. יש להתייחס למסמך המקורי בשפתו המקורית כמקור המוסמך. למידע קריטי, מומלץ תרגום מקצועי על ידי אדם. אנו לא אחראים לכל אי-הבנה או פרשנות שגויה הנובעת משימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,51 +1,51 @@
-# Các Sự Cố Thường Gặp và Giải Pháp
+# Common Issues and Solutions
 
-**Điều hướng Chương:**
-- **📚 Trang Khóa Học**: [AZD Dành Cho Người Mới](../../README.md)
+**Chapter Navigation:**
+- **📚 Trang khóa học**: [AZD Cho Người Mới Bắt Đầu](../../README.md)
 - **📖 Chương hiện tại**: Chương 7 - Khắc phục sự cố & Gỡ lỗi
-- **⬅️ Chương trước**: [Chương 6: Kiểm tra trước khi triển khai](../chapter-06-pre-deployment/preflight-checks.md)
-- **➡️ Tiếp theo**: [Hướng dẫn Gỡ lỗi](debugging.md)
+- **⬅️ Chương trước**: [Chương 6: Kiểm tra trước triển khai](../chapter-06-pre-deployment/preflight-checks.md)
+- **➡️ Tiếp theo**: [Hướng dẫn gỡ lỗi](debugging.md)
 - **🚀 Chương tiếp theo**: [Chương 8: Mô hình Sản xuất & Doanh nghiệp](../chapter-08-production/production-ai-practices.md)
 
 ## Giới thiệu
 
-Hướng dẫn khắc phục sự cố toàn diện này bao gồm những vấn đề thường gặp nhất khi sử dụng Azure Developer CLI. Học cách chẩn đoán, xử lý và giải quyết các sự cố phổ biến liên quan đến xác thực, triển khai, cung cấp hạ tầng và cấu hình ứng dụng. Mỗi vấn đề bao gồm triệu chứng chi tiết, nguyên nhân gốc rễ và các bước giải quyết theo trình tự.
+Hướng dẫn khắc phục sự cố toàn diện này bao quát các vấn đề thường gặp nhất khi sử dụng Azure Developer CLI. Tìm hiểu cách chẩn đoán, khắc phục và giải quyết các vấn đề phổ biến liên quan đến xác thực, triển khai, cung cấp hạ tầng và cấu hình ứng dụng. Mỗi vấn đề bao gồm các triệu chứng chi tiết, nguyên nhân gốc rễ và các bước xử lý theo trình tự.
 
 ## Mục tiêu học tập
 
-Sau khi hoàn thành hướng dẫn này, bạn sẽ:
-- Làm chủ các kỹ thuật chẩn đoán cho các sự cố Azure Developer CLI
-- Hiểu các vấn đề phổ biến về xác thực và quyền hạn cùng các giải pháp của chúng
-- Giải quyết sự cố thất bại triển khai, lỗi cung cấp hạ tầng và vấn đề cấu hình
-- Thực hiện các chiến lược giám sát và gỡ lỗi chủ động
-- Áp dụng phương pháp khắc phục có hệ thống cho các vấn đề phức tạp
-- Cấu hình ghi nhật ký và giám sát phù hợp để ngăn ngừa sự cố trong tương lai
+Khi hoàn thành hướng dẫn này, bạn sẽ:
+- Thành thạo các kỹ thuật chẩn đoán cho các vấn đề Azure Developer CLI
+- Hiểu các vấn đề phổ biến về xác thực và quyền truy cập cùng các giải pháp
+- Giải quyết lỗi triển khai, lỗi cung cấp hạ tầng và sự cố cấu hình
+- Triển khai các chiến lược giám sát và gỡ lỗi chủ động
+- Áp dụng phương pháp luận khắc phục sự cố có hệ thống cho các vấn đề phức tạp
+- Cấu hình ghi nhật ký và giám sát hợp lý để ngăn ngừa các vấn đề trong tương lai
 
-## Thành quả học tập
+## Kết quả học tập
 
-Khi hoàn tất, bạn sẽ có thể:
-- Chẩn đoán các sự cố Azure Developer CLI bằng các công cụ chẩn đoán tích hợp
-- Giải quyết độc lập các vấn đề liên quan đến xác thực, đăng ký và quyền
-- Khắc phục hiệu quả các lỗi thất bại triển khai và cung cấp hạ tầng
-- Gỡ lỗi các sự cố cấu hình ứng dụng và vấn đề theo môi trường
-- Triển khai hệ thống giám sát và cảnh báo để nhận diện sớm các vấn đề tiềm ẩn
+Sau khi hoàn thành, bạn sẽ có thể:
+- Chẩn đoán các vấn đề Azure Developer CLI bằng các công cụ chẩn đoán tích hợp
+- Tự giải quyết các vấn đề liên quan đến xác thực, đăng ký và quyền
+- Khắc phục hiệu quả các lỗi triển khai và lỗi cung cấp hạ tầng
+- Gỡ lỗi các vấn đề cấu hình ứng dụng và các vấn đề phụ thuộc vào môi trường
+- Triển khai giám sát và cảnh báo để phát hiện chủ động các vấn đề tiềm ẩn
 - Áp dụng các thực hành tốt nhất cho ghi nhật ký, gỡ lỗi và quy trình xử lý sự cố
 
-## Chẩn đoán Nhanh
+## Chẩn đoán nhanh
 
-Trước khi đi sâu vào các vấn đề cụ thể, chạy các lệnh này để thu thập thông tin chẩn đoán:
+Trước khi đi sâu vào các vấn đề cụ thể, chạy các lệnh sau để thu thập thông tin chẩn đoán:
 
 ```bash
-# Kiểm tra phiên bản và trạng thái của azd
+# Kiểm tra phiên bản và tình trạng của azd
 azd version
-azd config list
+azd config show
 
 # Xác minh xác thực Azure
 az account show
 az account list
 
 # Kiểm tra môi trường hiện tại
-azd env show
+azd env list
 azd env get-values
 
 # Bật ghi nhật ký gỡ lỗi
@@ -53,49 +53,49 @@ export AZD_DEBUG=true
 azd <command> --debug
 ```
 
-## Vấn đề Xác thực
+## Vấn đề xác thực
 
-### Sự cố: "Failed to get access token"
+### Issue: "Failed to get access token"
 **Triệu chứng:**
 - `azd up` thất bại với lỗi xác thực
 - Các lệnh trả về "unauthorized" hoặc "access denied"
 
 **Giải pháp:**
 ```bash
-# 1. Xác thực lại bằng Azure CLI
+# 1. Xác thực lại với Azure CLI
 az login
 az account show
 
-# 2. Xóa các chứng thực được lưu trong bộ nhớ đệm
+# 2. Xóa các thông tin xác thực trong bộ nhớ đệm
 az account clear
 az login
 
 # 3. Sử dụng luồng mã thiết bị (cho hệ thống không có giao diện người dùng)
 az login --use-device-code
 
-# 4. Chỉ định đăng ký cụ thể
+# 4. Thiết lập đăng ký cụ thể
 az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### Sự cố: "Insufficient privileges" trong quá trình triển khai
+### Issue: "Insufficient privileges" during deployment
 **Triệu chứng:**
 - Triển khai thất bại với lỗi quyền
 - Không thể tạo một số tài nguyên Azure nhất định
 
 **Giải pháp:**
 ```bash
-# 1. Kiểm tra gán vai trò Azure của bạn
+# 1. Kiểm tra phân công vai trò Azure của bạn
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
 # 2. Đảm bảo bạn có các vai trò cần thiết
 # - Contributor (để tạo tài nguyên)
-# - User Access Administrator (để gán vai trò)
+# - User Access Administrator (để phân công vai trò)
 
 # 3. Liên hệ với quản trị viên Azure của bạn để được cấp quyền phù hợp
 ```
 
-### Sự cố: Vấn đề xác thực đa tenancy
+### Issue: Multi-tenant authentication problems
 **Giải pháp:**
 ```bash
 # 1. Đăng nhập với tenant cụ thể
@@ -110,10 +110,10 @@ az account clear
 
 ## 🏗️ Lỗi Cung cấp Hạ tầng
 
-### Sự cố: Xung đột tên tài nguyên
+### Issue: Resource name conflicts
 **Triệu chứng:**
 - Lỗi "The resource name already exists"
-- Triển khai thất bại khi tạo tài nguyên
+- Triển khai thất bại trong quá trình tạo tài nguyên
 
 **Giải pháp:**
 ```bash
@@ -129,7 +129,7 @@ azd env new my-app-dev-$(whoami)-$(date +%s)
 azd down --force --purge
 ```
 
-### Sự cố: Vị trí/Khu vực không khả dụng
+### Issue: Location/Region not available
 **Triệu chứng:**
 - Lỗi "The location 'xyz' is not available for resource type"
 - Một số SKU không khả dụng ở khu vực đã chọn
@@ -139,7 +139,7 @@ azd down --force --purge
 # 1. Kiểm tra các vị trí có sẵn cho các loại tài nguyên
 az provider show --namespace Microsoft.Web --query "resourceTypes[?resourceType=='sites'].locations" -o table
 
-# 2. Sử dụng các khu vực phổ biến có sẵn
+# 2. Sử dụng các khu vực thường có sẵn
 azd config set defaults.location eastus2
 # hoặc
 azd env set AZURE_LOCATION eastus2
@@ -148,9 +148,9 @@ azd env set AZURE_LOCATION eastus2
 # Truy cập: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### Sự cố: Vượt quá hạn mức (Quota exceeded)
+### Issue: Quota exceeded errors
 **Triệu chứng:**
-- Lỗi "Quota exceeded for resource type"
+- "Quota exceeded for resource type"
 - "Maximum number of resources reached"
 
 **Giải pháp:**
@@ -159,9 +159,9 @@ azd env set AZURE_LOCATION eastus2
 az vm list-usage --location eastus2 -o table
 
 # 2. Yêu cầu tăng hạn ngạch qua cổng Azure
-# Đi tới: Subscriptions > Usage + quotas
+# Đi tới: Đăng ký > Sử dụng + hạn ngạch
 
-# 3. Sử dụng SKU nhỏ hơn cho phát triển
+# 3. Sử dụng SKU nhỏ hơn cho môi trường phát triển
 # Trong main.parameters.json:
 {
   "appServiceSku": {
@@ -173,9 +173,9 @@ az vm list-usage --location eastus2 -o table
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
-### Sự cố: Lỗi template Bicep
+### Issue: Bicep template errors
 **Triệu chứng:**
-- Xác thực template thất bại
+- Kiểm tra tính hợp lệ của template thất bại
 - Lỗi cú pháp trong các tệp Bicep
 
 **Giải pháp:**
@@ -193,31 +193,31 @@ cat infra/main.parameters.json | jq '.'
 azd provision --preview
 ```
 
-## 🚀 Thất bại Triển khai
+## 🚀 Lỗi Triển khai
 
-### Sự cố: Build thất bại
+### Issue: Build failures
 **Triệu chứng:**
 - Ứng dụng không thể build trong quá trình triển khai
-- Lỗi khi cài đặt gói
+- Lỗi cài đặt gói
 
 **Giải pháp:**
 ```bash
-# 1. Kiểm tra đầu ra bản dựng bằng cờ gỡ lỗi
+# 1. Kiểm tra đầu ra build với cờ gỡ lỗi
 azd deploy --service web --debug
 
 # 2. Xem trạng thái dịch vụ đã triển khai
 azd show
 
-# 3. Kiểm tra bản dựng cục bộ
+# 3. Kiểm tra build cục bộ
 cd src/web
 npm install
 npm run build
 
-# 3. Kiểm tra tương thích phiên bản Node.js và Python
-node --version  # Nên khớp với cài đặt trong azure.yaml
+# 3. Kiểm tra tương thích phiên bản Node.js/Python
+node --version  # Phải khớp với cài đặt trong azure.yaml
 python --version
 
-# 4. Xóa bộ nhớ đệm bản dựng
+# 4. Xóa bộ nhớ đệm build
 rm -rf node_modules package-lock.json
 npm install
 
@@ -226,7 +226,7 @@ docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Sự cố: Triển khai container thất bại
+### Issue: Container deployment failures
 **Triệu chứng:**
 - Ứng dụng container không khởi động được
 - Lỗi kéo image
@@ -237,23 +237,23 @@ docker run --rm test-image
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
-# 2. Kiểm tra nhật ký của container bằng Azure CLI
+# 2. Kiểm tra nhật ký container bằng Azure CLI
 az containerapp logs show --name my-app --resource-group my-rg --follow
 
 # 3. Giám sát ứng dụng thông qua azd
 azd monitor --logs
 
-# 3. Xác minh quyền truy cập vào đăng ký container
+# 3. Xác minh quyền truy cập registry container
 az acr login --name myregistry
 
 # 4. Kiểm tra cấu hình ứng dụng container
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### Sự cố: Kết nối cơ sở dữ liệu thất bại
+### Issue: Database connection failures
 **Triệu chứng:**
-- Ứng dụng không thể kết nối với cơ sở dữ liệu
-- Lỗi hết thời gian kết nối
+- Ứng dụng không thể kết nối đến cơ sở dữ liệu
+- Lỗi timeout kết nối
 
 **Giải pháp:**
 ```bash
@@ -273,9 +273,9 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 ## 🔧 Vấn đề Cấu hình
 
-### Sự cố: Biến môi trường không hoạt động
+### Issue: Environment variables not working
 **Triệu chứng:**
-- Ứng dụng không đọc được giá trị cấu hình
+- Ứng dụng không đọc được các giá trị cấu hình
 - Biến môi trường hiển thị rỗng
 
 **Giải pháp:**
@@ -294,7 +294,7 @@ azd deploy --service web
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
-### Sự cố: Vấn đề chứng chỉ SSL/TLS
+### Issue: SSL/TLS certificate problems
 **Triệu chứng:**
 - HTTPS không hoạt động
 - Lỗi xác thực chứng chỉ
@@ -311,7 +311,7 @@ az webapp update --name myapp --resource-group myrg --https-only true
 az webapp config hostname add --webapp-name myapp --resource-group myrg --hostname mydomain.com
 ```
 
-### Sự cố: Cấu hình CORS
+### Issue: CORS configuration problems
 **Triệu chứng:**
 - Frontend không thể gọi API
 - Yêu cầu cross-origin bị chặn
@@ -328,13 +328,13 @@ app.use(cors({
   credentials: true
 }));
 
-# 3. Kiểm tra xem có đang chạy trên các URL chính xác không
+# 3. Kiểm tra xem có đang chạy trên các URL đúng hay không
 azd show
 ```
 
 ## 🌍 Vấn đề Quản lý Môi trường
 
-### Sự cố: Chuyển môi trường gặp vấn đề
+### Issue: Environment switching problems
 **Triệu chứng:**
 - Môi trường sai đang được sử dụng
 - Cấu hình không chuyển đổi đúng
@@ -348,14 +348,14 @@ azd env list
 azd env select production
 
 # 3. Xác minh môi trường hiện tại
-azd env show
+azd env list
 
 # 4. Tạo môi trường mới nếu bị hỏng
 azd env new production-new
 azd env select production-new
 ```
 
-### Sự cố: Hỏng môi trường
+### Issue: Environment corruption
 **Triệu chứng:**
 - Môi trường hiển thị trạng thái không hợp lệ
 - Tài nguyên không khớp với cấu hình
@@ -376,9 +376,9 @@ azd env set DATABASE_URL "your-value"
 
 ## 🔍 Vấn đề Hiệu năng
 
-### Sự cố: Thời gian triển khai chậm
+### Issue: Slow deployment times
 **Triệu chứng:**
-- Các lần triển khai mất quá nhiều thời gian
+- Các triển khai mất quá nhiều thời gian
 - Timeout trong quá trình triển khai
 
 **Giải pháp:**
@@ -387,7 +387,7 @@ azd env set DATABASE_URL "your-value"
 azd deploy --service web
 azd deploy --service api
 
-# 2. Chỉ triển khai mã khi hạ tầng không thay đổi
+# 2. Sử dụng triển khai chỉ mã khi cơ sở hạ tầng không thay đổi
 azd deploy  # Nhanh hơn azd up
 
 # 3. Tối ưu hóa quy trình build
@@ -400,7 +400,7 @@ azd deploy  # Nhanh hơn azd up
 azd config set defaults.location eastus2
 ```
 
-### Sự cố: Ứng dụng chậm
+### Issue: Application performance problems
 **Triệu chứng:**
 - Thời gian phản hồi chậm
 - Sử dụng tài nguyên cao
@@ -418,7 +418,7 @@ azd monitor --overview
 
 # 3. Kiểm tra nhật ký ứng dụng trong Azure
 az webapp log tail --name myapp --resource-group myrg
-# hoặc cho Container Apps:
+# hoặc đối với Container Apps:
 az containerapp logs show --name myapp --resource-group myrg --follow
 
 # 4. Triển khai bộ nhớ đệm
@@ -427,7 +427,7 @@ az containerapp logs show --name myapp --resource-group myrg --follow
 
 ## 🛠️ Công cụ và Lệnh Khắc phục Sự cố
 
-### Lệnh Gỡ lỗi
+### Lệnh gỡ lỗi
 ```bash
 # Gỡ lỗi toàn diện
 export AZD_DEBUG=true
@@ -437,18 +437,18 @@ azd up --debug 2>&1 | tee debug.log
 azd version
 
 # Xem cấu hình hiện tại
-azd config list
+azd config show
 
 # Kiểm tra kết nối
 curl -v https://myapp.azurewebsites.net/health
 ```
 
-### Phân tích Nhật ký
+### Phân tích nhật ký
 ```bash
 # Nhật ký ứng dụng qua Azure CLI
 az webapp log tail --name myapp --resource-group myrg
 
-# Giám sát ứng dụng với azd
+# Giám sát ứng dụng bằng azd
 azd monitor --logs
 azd monitor --live
 
@@ -459,7 +459,7 @@ az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
-### Điều tra Tài nguyên
+### Điều tra tài nguyên
 ```bash
 # Liệt kê tất cả các tài nguyên
 az resource list --resource-group myrg -o table
@@ -471,17 +471,17 @@ az webapp show --name myapp --resource-group myrg --query state
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
-## 🆘 Nhận Thêm Trợ Giúp
+## 🆘 Nhận thêm trợ giúp
 
-### Khi nào cần chuyển tiếp
-- Vấn đề xác thực vẫn tồn tại sau khi thử tất cả giải pháp
-- Sự cố hạ tầng liên quan đến dịch vụ Azure
+### Khi nào cần chuyển vấn đề lên cấp cao hơn
+- Vấn đề xác thực vẫn tiếp diễn sau khi thử tất cả các giải pháp
+- Sự cố hạ tầng với các dịch vụ Azure
 - Vấn đề liên quan đến thanh toán hoặc đăng ký
-- Mối quan tâm hoặc sự cố bảo mật
+- Các mối quan ngại hoặc sự cố bảo mật
 
 ### Kênh hỗ trợ
 ```bash
-# 1. Kiểm tra trạng thái dịch vụ Azure
+# 1. Kiểm tra Azure Service Health
 az rest --method get --uri "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2020-05-01"
 
 # 2. Tạo yêu cầu hỗ trợ Azure
@@ -489,21 +489,21 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 
 # 3. Tài nguyên cộng đồng
 # - Stack Overflow: thẻ azure-developer-cli
-# - GitHub Issues: https://github.com/Azure/azure-dev/issues
-# - Microsoft Q&A: https://learn.microsoft.com/en-us/answers/
+# - Issues trên GitHub: https://github.com/Azure/azure-dev/issues
+# - Microsoft Hỏi & Đáp: https://learn.microsoft.com/en-us/answers/
 ```
 
 ### Thông tin cần thu thập
 Trước khi liên hệ hỗ trợ, thu thập:
-- `azd version` đầu ra
-- `azd config list` đầu ra
-- `azd show` đầu ra (trạng thái triển khai hiện tại)
-- Thông báo lỗi (toàn bộ văn bản)
+- `azd version` output
+- `azd config show` output
+- `azd show` output (trạng thái triển khai hiện tại)
+- Thông điệp lỗi (toàn bộ văn bản)
 - Các bước để tái tạo sự cố
-- Chi tiết môi trường (`azd env show`)
-- Mốc thời gian khi sự cố bắt đầu
+- Chi tiết môi trường (`azd env get-values`)
+- Dòng thời gian khi sự cố bắt đầu
 
-### Script thu thập nhật ký
+### Kịch bản thu thập nhật ký
 ```bash
 #!/bin/bash
 # collect-debug-info.sh
@@ -516,8 +516,8 @@ azd version >> debug-logs/system-info.txt
 az --version >> debug-logs/system-info.txt
 
 echo "Configuration:" > debug-logs/config.txt
-azd config list >> debug-logs/config.txt
-azd env show >> debug-logs/config.txt
+azd config show >> debug-logs/config.txt
+azd env list >> debug-logs/config.txt
 azd env get-values >> debug-logs/config.txt
 
 echo "Current deployment status:" > debug-logs/status.txt
@@ -526,28 +526,28 @@ azd show >> debug-logs/status.txt
 echo "Debug information collected in debug-logs/"
 ```
 
-## 📊 Ngăn ngừa Sự cố
+## 📊 Phòng ngừa sự cố
 
-### Danh sách kiểm tra trước khi triển khai
+### Danh sách kiểm tra trước triển khai
 ```bash
-# 1. Xác minh xác thực
+# 1. Kiểm tra xác thực
 az account show
 
 # 2. Kiểm tra hạn ngạch và giới hạn
 az vm list-usage --location eastus2
 
-# 3. Xác minh các mẫu
+# 3. Kiểm tra mẫu
 az bicep build --file infra/main.bicep
 
-# 4. Thử nghiệm cục bộ trước
+# 4. Kiểm thử cục bộ trước
 npm run build
 npm run test
 
-# 5. Sử dụng triển khai chạy thử
+# 5. Sử dụng chế độ triển khai thử (dry-run)
 azd provision --preview
 ```
 
-### Thiết lập Giám sát
+### Cấu hình giám sát
 ```bash
 # Bật Application Insights
 # Thêm vào main.bicep:
@@ -575,26 +575,26 @@ az consumption usage list --billing-period-name 202401
 az security assessment list --resource-group myrg
 ```
 
-## Tài nguyên Liên quan
+## Tài nguyên liên quan
 
-- [Hướng dẫn Gỡ lỗi](debugging.md) - Kỹ thuật gỡ lỗi nâng cao
-- [Cung cấp Tài nguyên](../chapter-04-infrastructure/provisioning.md) - Khắc phục sự cố hạ tầng
-- [Lập kế hoạch Dung lượng](../chapter-06-pre-deployment/capacity-planning.md) - Hướng dẫn lập kế hoạch tài nguyên
-- [Lựa chọn SKU](../chapter-06-pre-deployment/sku-selection.md) - Khuyến nghị cấp dịch vụ
+- [Hướng dẫn gỡ lỗi](debugging.md) - Kỹ thuật gỡ lỗi nâng cao
+- [Cung cấp tài nguyên](../chapter-04-infrastructure/provisioning.md) - Khắc phục sự cố hạ tầng
+- [Lập kế hoạch công suất](../chapter-06-pre-deployment/capacity-planning.md) - Hướng dẫn lập kế hoạch tài nguyên
+- [Lựa chọn SKU](../chapter-06-pre-deployment/sku-selection.md) - Gợi ý mức dịch vụ
 
 ---
 
-**Mẹo**: Đánh dấu trang này và tham khảo khi gặp sự cố. Hầu hết các vấn đề đã từng gặp trước đây và có giải pháp đã được thiết lập!
+**Mẹo**: Lưu trang hướng dẫn này vào dấu trang và tham khảo khi bạn gặp sự cố. Phần lớn các vấn đề đã từng xuất hiện trước đây và có các giải pháp đã được xác định!
 
 ---
 
 **Điều hướng**
-- **Bài học trước**: [Cung cấp Tài nguyên](../chapter-04-infrastructure/provisioning.md)
-- **Bài học tiếp theo**: [Hướng dẫn Gỡ lỗi](debugging.md)
+- **Bài trước**: [Cung cấp tài nguyên](../chapter-04-infrastructure/provisioning.md)
+- **Bài tiếp theo**: [Hướng dẫn gỡ lỗi](debugging.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Miễn trừ trách nhiệm:
-Tài liệu này được dịch bằng dịch vụ dịch AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc sai sót. Văn bản gốc bằng ngôn ngữ ban đầu của tài liệu nên được coi là nguồn chính thức. Đối với các thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+**Miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực để đảm bảo tính chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ gốc nên được coi là nguồn có thẩm quyền. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp do người dịch có trình độ thực hiện. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

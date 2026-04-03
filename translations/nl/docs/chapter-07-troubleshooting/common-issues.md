@@ -1,76 +1,76 @@
 # Veelvoorkomende problemen en oplossingen
 
 **Hoofdstuknavigatie:**
-- **📚 Cursus startpagina**: [AZD voor beginners](../../README.md)
-- **📖 Huidig hoofdstuk**: Hoofdstuk 7 - Probleemoplossing & Debuggen
-- **⬅️ Vorige hoofdstuk**: [Hoofdstuk 6: Preflight-controles](../chapter-06-pre-deployment/preflight-checks.md)
-- **➡️ Volgende**: [Debuggengids](debugging.md)
-- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 8: Productie- & Enterprise-patronen](../chapter-08-production/production-ai-practices.md)
+- **📚 Cursus Startpagina**: [AZD voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 7 - Problemen oplossen & Debugging
+- **⬅️ Vorig hoofdstuk**: [Hoofdstuk 6: Pre-flight-controles](../chapter-06-pre-deployment/preflight-checks.md)
+- **➡️ Volgende**: [Foutopsporingsgids](debugging.md)
+- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 8: Productie- & Enterprisepatronen](../chapter-08-production/production-ai-practices.md)
 
-## Inleiding
+## Introductie
 
-Deze uitgebreide handleiding voor probleemoplossing behandelt de meest voorkomende problemen bij het gebruik van Azure Developer CLI. Leer problemen met authenticatie, deployment, infrastructuurprovisie en applicatieconfiguratie te diagnosticeren, op te lossen en te verhelpen. Elk probleem bevat gedetailleerde symptomen, hoofdoorzaken en stapsgewijze oplossingsprocedures.
+Deze uitgebreide gids voor probleemoplossing behandelt de meest voorkomende problemen bij het gebruik van de Azure Developer CLI. Leer hoe u problemen kunt diagnosticeren, oplossen en verhelpen met betrekking tot authenticatie, implementatie, infrastructuurprovisioning en applicatieconfiguratie. Elk probleem bevat gedetailleerde symptomen, oorzaken en stapsgewijze oplossingsprocedures.
 
 ## Leerdoelen
 
-Door deze gids te voltooien, zul je:
-- Diagnosetechnieken voor Azure Developer CLI-problemen beheersen
-- Veelvoorkomende authenticatie- en toestemmingsproblemen en hun oplossingen begrijpen
-- Deployment-fouten, fouten bij infrastructuurprovisie en configuratieproblemen oplossen
+Door deze gids te voltooien, zult u:
+- Beheersen van diagnostische technieken voor problemen met de Azure Developer CLI
+- Begrijpen van veelvoorkomende authenticatie- en machtigingsproblemen en hun oplossingen
+- Uitval bij implementatie, fouten bij infrastructuurprovisioning en configuratieproblemen oplossen
 - Proactieve monitoring- en debugstrategieën implementeren
 - Systematische probleemoplossingsmethodologieën toepassen voor complexe problemen
-- Juiste logging en monitoring configureren om toekomstige problemen te voorkomen
+- De juiste logging en monitoring configureren om toekomstige problemen te voorkomen
 
-## Leeruitkomsten
+## Leerresultaten
 
-Na voltooiing kun je:
-- Azure Developer CLI-problemen diagnosticeren met ingebouwde diagnostische tools
-- Authenticatie-, abonnement- en toestemmingsgerelateerde problemen zelfstandig oplossen
-- Deployment-fouten en fouten bij infrastructuurprovisie effectief verhelpen
-- Problemen met applicatieconfiguratie en omgevingsspecifieke problemen debuggen
-- Monitoring en alerting implementeren om potentiële problemen proactief te identificeren
-- Best practices voor logging, debugging en probleemoplossingsworkflows toepassen
+Na voltooiing kunt u:
+- Problemen met de Azure Developer CLI diagnosticeren met ingebouwde diagnosetools
+- Zelfstandig problemen oplossen die te maken hebben met authenticatie, abonnementen en machtigingen
+- Implementatiefouten en fouten bij infrastructuurprovisioning effectief oplossen
+- Foutopsporing van applicatieconfiguratieproblemen en omgevingsspecifieke problemen uitvoeren
+- Monitoring en waarschuwingen implementeren om potentiële problemen proactief te identificeren
+- Best practices toepassen voor logging, debuggen en workflows voor probleemoplossing
 
 ## Snelle diagnostiek
 
-Voer voordat je in specifieke problemen duikt deze opdrachten uit om diagnostische informatie te verzamelen:
+Voer, voordat u in specifieke problemen duikt, deze opdrachten uit om diagnostische informatie te verzamelen:
 
 ```bash
-# Controleer azd-versie en gezondheid
+# Controleer de azd-versie en gezondheid
 azd version
-azd config list
+azd config show
 
-# Controleer Azure-authenticatie
+# Controleer de Azure-authenticatie
 az account show
 az account list
 
-# Controleer huidige omgeving
-azd env show
+# Controleer de huidige omgeving
+azd env list
 azd env get-values
 
-# Schakel debug-logging in
+# Schakel debuglogging in
 export AZD_DEBUG=true
 azd <command> --debug
 ```
 
 ## Authenticatieproblemen
 
-### Probleem: "Failed to get access token"
+### Probleem: "Mislukt bij ophalen van toegangstoken"
 **Symptomen:**
 - `azd up` faalt met authenticatiefouten
-- Opdrachten geven "unauthorized" of "access denied" terug
+- Commando's geven "ongeautoriseerd" of "toegang geweigerd" terug
 
 **Oplossingen:**
 ```bash
-# 1. Opnieuw authenticeren met de Azure CLI
+# 1. Meld je opnieuw aan bij de Azure CLI
 az login
 az account show
 
-# 2. Gecachte referenties wissen
+# 2. Gecachte inloggegevens wissen
 az account clear
 az login
 
-# 3. Gebruik device code flow (voor headless-systemen)
+# 3. Gebruik apparaatcode-flow (voor headless-systemen)
 az login --use-device-code
 
 # 4. Stel een expliciet abonnement in
@@ -78,47 +78,47 @@ az account set --subscription "your-subscription-id"
 azd config set defaults.subscription "your-subscription-id"
 ```
 
-### Probleem: "Insufficient privileges" tijdens deployment
+### Probleem: "Onvoldoende rechten" tijdens implementatie
 **Symptomen:**
-- Deployment faalt met machtigingsfouten
-- Bepaalde Azure-resources kunnen niet worden gemaakt
+- De implementatie mislukt met machtigingsfouten
+- Kan bepaalde Azure-resources niet aanmaken
 
 **Oplossingen:**
 ```bash
-# 1. Controleer uw Azure-roltoewijzingen
+# 1. Controleer uw roltoewijzingen in Azure
 az role assignment list --assignee $(az account show --query user.name -o tsv)
 
-# 2. Zorg dat u de vereiste rollen hebt
-# - Contributor (voor het aanmaken van resources)
+# 2. Zorg ervoor dat u de vereiste rollen heeft
+# - Contributor (voor het maken van resources)
 # - User Access Administrator (voor roltoewijzingen)
 
 # 3. Neem contact op met uw Azure-beheerder voor de juiste machtigingen
 ```
 
-### Probleem: Multi-tenant authenticatieproblemen
+### Probleem: Multitenant-authenticatieproblemen
 **Oplossingen:**
 ```bash
-# 1. Inloggen met een specifieke tenant
+# 1. Inloggen met specifieke tenant
 az login --tenant "your-tenant-id"
 
 # 2. Stel de tenant in de configuratie in
 azd config set auth.tenantId "your-tenant-id"
 
-# 3. Maak de tenant-cache leeg als er van tenant gewisseld wordt
+# 3. Wis de tenant-cache bij het wisselen van tenant
 az account clear
 ```
 
-## 🏗️ Fouten bij infrastructuurvoorziening
+## 🏗️ Fouten bij infrastructuurprovisioning
 
-### Probleem: Conflicterende resource-namen
+### Probleem: Conflicten in resourcenamen
 **Symptomen:**
-- Fouten "The resource name already exists"
-- Deployment faalt tijdens het aanmaken van resources
+- Foutmeldingen "De resourcenaam bestaat al"
+- Implementatie mislukt tijdens het aanmaken van resources
 
 **Oplossingen:**
 ```bash
-# 1. Gebruik unieke resource-namen met tokens
-# In je Bicep-sjabloon:
+# 1. Gebruik unieke resourcenamen met tokens
+# In uw Bicep-sjabloon:
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 name: '${applicationName}-${resourceToken}'
 
@@ -129,10 +129,10 @@ azd env new my-app-dev-$(whoami)-$(date +%s)
 azd down --force --purge
 ```
 
-### Probleem: Locatie/Regio niet beschikbaar
+### Probleem: Locatie/regio niet beschikbaar
 **Symptomen:**
-- "The location 'xyz' is not available for resource type"
-- Bepaalde SKUs niet beschikbaar in de geselecteerde regio
+- "De locatie 'xyz' is niet beschikbaar voor het type resource"
+- Bepaalde SKU's niet beschikbaar in de geselecteerde regio
 
 **Oplossingen:**
 ```bash
@@ -144,22 +144,22 @@ azd config set defaults.location eastus2
 # of
 azd env set AZURE_LOCATION eastus2
 
-# 3. Controleer de beschikbaarheid van services per regio
+# 3. Controleer servicebeschikbaarheid per regio
 # Bezoek: https://azure.microsoft.com/global-infrastructure/services/
 ```
 
-### Probleem: Quota overschreden fouten
+### Probleem: Quotum overschreden
 **Symptomen:**
-- "Quota exceeded for resource type"
-- "Maximum number of resources reached"
+- "Quotum overschreden voor resourcetype"
+- "Maximum aantal resources bereikt"
 
 **Oplossingen:**
 ```bash
 # 1. Controleer het huidige quotagebruik
 az vm list-usage --location eastus2 -o table
 
-# 2. Vraag een verhoging van de quota aan via het Azure-portal
-# Ga naar: Abonnementen > Gebruik + quota's
+# 2. Vraag een verhoging van de quota aan via de Azure-portal
+# Ga naar: Abonnementen > Gebruik + quota
 
 # 3. Gebruik kleinere SKU's voor ontwikkeling
 # In main.parameters.json:
@@ -173,9 +173,9 @@ az vm list-usage --location eastus2 -o table
 az resource list --query "[?contains(name, 'unused')]" -o table
 ```
 
-### Probleem: Bicep-template fouten
+### Probleem: Bicep-templatefouten
 **Symptomen:**
-- Template-validatiefouten
+- Validatie van template mislukt
 - Syntaxfouten in Bicep-bestanden
 
 **Oplossingen:**
@@ -186,26 +186,26 @@ az bicep build --file infra/main.bicep
 # 2. Gebruik de Bicep-linter
 az bicep lint --file infra/main.bicep
 
-# 3. Controleer syntaxis van het parameterbestand
+# 3. Controleer de syntaxis van het parameterbestand
 cat infra/main.parameters.json | jq '.'
 
-# 4. Bekijk de uitrolwijzigingen
+# 4. Bekijk de wijzigingen in de implementatie
 azd provision --preview
 ```
 
-## 🚀 Deployment-fouten
+## 🚀 Implementatiefouten
 
 ### Probleem: Build-fouten
 **Symptomen:**
-- Applicatie faalt bij het bouwen tijdens deployment
+- Applicatie faalt bij het bouwen tijdens implementatie
 - Fouten bij het installeren van pakketten
 
 **Oplossingen:**
 ```bash
-# 1. Controleer de build-uitvoer met de debugvlag
+# 1. Controleer de builduitvoer met de debugvlag
 azd deploy --service web --debug
 
-# 2. Bekijk de status van de uitgerolde service
+# 2. Bekijk de status van de gedeployde service
 azd show
 
 # 3. Test de build lokaal
@@ -217,42 +217,42 @@ npm run build
 node --version  # Moet overeenkomen met de instellingen in azure.yaml
 python --version
 
-# 4. Wis de build-cache
+# 4. Maak de buildcache leeg
 rm -rf node_modules package-lock.json
 npm install
 
-# 5. Controleer de Dockerfile als er containers worden gebruikt
+# 5. Controleer de Dockerfile als je containers gebruikt
 docker build -t test-image .
 docker run --rm test-image
 ```
 
-### Probleem: Container-deploymentfouten
+### Probleem: Container-implementatiefouten
 **Symptomen:**
 - Container-apps starten niet
 - Fouten bij het ophalen van images
 
 **Oplossingen:**
 ```bash
-# 1. Test de Docker-build lokaal
+# 1. Docker-build lokaal testen
 docker build -t my-app:latest .
 docker run --rm -p 3000:3000 my-app:latest
 
 # 2. Controleer containerlogs met de Azure CLI
 az containerapp logs show --name my-app --resource-group my-rg --follow
 
-# 3. Monitor de applicatie via azd
+# 3. Bewaak de applicatie via azd
 azd monitor --logs
 
-# 3. Controleer de toegang tot het containerregister
+# 3. Controleer toegang tot het containerregister
 az acr login --name myregistry
 
 # 4. Controleer de configuratie van de container-app
 az containerapp show --name my-app --resource-group my-rg
 ```
 
-### Probleem: Databaseverbindingen falen
+### Probleem: Problemen met databaseverbinding
 **Symptomen:**
-- Applicatie kan geen verbinding maken met database
+- Applicatie kan geen verbinding maken met de database
 - Time-out fouten bij verbinding
 
 **Oplossingen:**
@@ -261,7 +261,7 @@ az containerapp show --name my-app --resource-group my-rg
 az postgres flexible-server firewall-rule list --name mydb --resource-group myrg
 
 # 2. Test de connectiviteit vanuit de applicatie
-# Voeg dit tijdelijk aan je app toe:
+# Voeg dit tijdelijk aan uw app toe:
 curl -v telnet://mydb.postgres.database.azure.com:5432
 
 # 3. Controleer het formaat van de verbindingsreeks
@@ -275,7 +275,7 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 
 ### Probleem: Omgevingsvariabelen werken niet
 **Symptomen:**
-- App kan configwaarden niet lezen
+- App kan configuratiewaarden niet lezen
 - Omgevingsvariabelen lijken leeg
 
 **Oplossingen:**
@@ -284,13 +284,13 @@ az postgres flexible-server show --name mydb --resource-group myrg --query state
 azd env get-values
 azd env get DATABASE_URL
 
-# 2. Controleer de variabelenamen in azure.yaml
+# 2. Controleer variabelenamen in azure.yaml
 cat azure.yaml | grep -A 5 env:
 
-# 3. Start de applicatie opnieuw
+# 3. Herstart de applicatie
 azd deploy --service web
 
-# 4. Controleer de configuratie van de app-service
+# 4. Controleer de configuratie van de App Service
 az webapp config appsettings list --name myapp --resource-group myrg
 ```
 
@@ -313,8 +313,8 @@ az webapp config hostname add --webapp-name myapp --resource-group myrg --hostna
 
 ### Probleem: CORS-configuratieproblemen
 **Symptomen:**
-- Frontend kan de API niet aanroepen
-- Cross-origin verzoek geblokkeerd
+- Frontend kan geen API-aanroepen doen
+- Cross-origin-verzoek geblokkeerd
 
 **Oplossingen:**
 ```bash
@@ -332,62 +332,62 @@ app.use(cors({
 azd show
 ```
 
-## 🌍 Omgevingsbeheerproblemen
+## 🌍 Problemen met omgevingbeheer
 
-### Probleem: Problemen met het wisselen van omgevingen
+### Probleem: Problemen met schakelen tussen omgevingen
 **Symptomen:**
 - Verkeerde omgeving wordt gebruikt
 - Configuratie schakelt niet correct
 
 **Oplossingen:**
 ```bash
-# 1. Lijst alle omgevingen
+# 1. Alle omgevingen weergeven
 azd env list
 
-# 2. Selecteer expliciet de omgeving
+# 2. Expliciet een omgeving selecteren
 azd env select production
 
-# 3. Controleer de huidige omgeving
-azd env show
+# 3. Huidige omgeving verifiëren
+azd env list
 
-# 4. Maak een nieuwe omgeving aan als deze beschadigd is
+# 4. Nieuwe omgeving aanmaken als deze beschadigd is
 azd env new production-new
 azd env select production-new
 ```
 
-### Probleem: Omgevingscorruptie
+### Probleem: Beschadigde omgeving
 **Symptomen:**
 - Omgeving toont een ongeldige status
 - Resources komen niet overeen met de configuratie
 
 **Oplossingen:**
 ```bash
-# 1. Vernieuw de status van de omgeving
+# 1. Vernieuw de omgevingsstatus
 azd env refresh
 
-# 2. Stel de configuratie van de omgeving opnieuw in
+# 2. Reset de configuratie van de omgeving
 azd env new production-reset
-# Kopieer de benodigde omgevingsvariabelen
+# Kopieer de vereiste omgevingsvariabelen
 azd env set DATABASE_URL "your-value"
 
 # 3. Importeer bestaande resources (indien mogelijk)
-# Werk .azure/production/config.json handmatig bij met resource-IDs
+# Werk .azure/production/config.json handmatig bij met resource-ID's
 ```
 
 ## 🔍 Prestatieproblemen
 
-### Probleem: Trage deploytijden
+### Probleem: Trage implementatietijden
 **Symptomen:**
-- Deployments duren te lang
-- Time-outs tijdens deployment
+- Implementaties duren te lang
+- Time-outs tijdens implementatie
 
 **Oplossingen:**
 ```bash
-# 1. Implementeer specifieke services voor snellere iteratie
+# 1. Implementeer specifieke diensten voor snellere iteratie
 azd deploy --service web
 azd deploy --service api
 
-# 2. Gebruik alleen-code-implementatie wanneer de infrastructuur ongewijzigd blijft
+# 2. Gebruik alleen code-deployment wanneer de infrastructuur ongewijzigd is
 azd deploy  # Sneller dan azd up
 
 # 3. Optimaliseer het buildproces
@@ -396,7 +396,7 @@ azd deploy  # Sneller dan azd up
   "build": "webpack --mode=production --optimize-minimize"
 }
 
-# 4. Controleer de locaties van resources (gebruik dezelfde regio)
+# 4. Controleer resource-locaties (gebruik dezelfde regio)
 azd config set defaults.location eastus2
 ```
 
@@ -408,7 +408,7 @@ azd config set defaults.location eastus2
 **Oplossingen:**
 ```bash
 # 1. Schaal resources op
-# Werk de SKU bij in main.parameters.json:
+# Werk SKU bij in main.parameters.json:
 "appServiceSku": {
   "value": "S2"  // Scale up from B1
 }
@@ -416,13 +416,13 @@ azd config set defaults.location eastus2
 # 2. Schakel Application Insights-monitoring in
 azd monitor --overview
 
-# 3. Controleer de applicatielogs in Azure
+# 3. Controleer applicatielogboeken in Azure
 az webapp log tail --name myapp --resource-group myrg
 # of voor Container Apps:
 az containerapp logs show --name myapp --resource-group myrg --follow
 
 # 4. Implementeer caching
-# Voeg Redis-cache toe aan uw infrastructuur
+# Voeg een Redis-cache toe aan uw infrastructuur
 ```
 
 ## 🛠️ Hulpmiddelen en opdrachten voor probleemoplossing
@@ -437,7 +437,7 @@ azd up --debug 2>&1 | tee debug.log
 azd version
 
 # Bekijk huidige configuratie
-azd config list
+azd config show
 
 # Test connectiviteit
 curl -v https://myapp.azurewebsites.net/health
@@ -445,21 +445,21 @@ curl -v https://myapp.azurewebsites.net/health
 
 ### Loganalyse
 ```bash
-# Applicatielogs via de Azure CLI
+# Applicatielogs via Azure CLI
 az webapp log tail --name myapp --resource-group myrg
 
-# Monitor de applicatie met azd
+# Applicatie monitoren met azd
 azd monitor --logs
 azd monitor --live
 
-# Logs van Azure-resources
+# Logboeken van Azure-resources
 az monitor activity-log list --resource-group myrg --start-time 2024-01-01 --max-events 50
 
 # Containerlogs (voor Container Apps)
 az containerapp logs show --name myapp --resource-group myrg --follow
 ```
 
-### Onderzoek van resources
+### Resource-onderzoek
 ```bash
 # Alle bronnen weergeven
 az resource list --resource-group myrg -o table
@@ -467,17 +467,17 @@ az resource list --resource-group myrg -o table
 # Controleer de status van de bron
 az webapp show --name myapp --resource-group myrg --query state
 
-# Netwerkdiagnose
+# Netwerkdiagnostiek
 az network watcher test-connectivity --source-resource myvm --dest-address myapp.azurewebsites.net --dest-port 443
 ```
 
 ## 🆘 Extra hulp krijgen
 
 ### Wanneer escaleren
-- Authenticatieproblemen blijven bestaan na het proberen van alle oplossingen
+- Authenticatieproblemen blijven bestaan nadat alle oplossingen zijn geprobeerd
 - Infrastructuurproblemen met Azure-services
-- Facturering of abonnementgerelateerde problemen
-- Beveiligingszorgen of incidenten
+- Facturerings- of abonnementsgerelateerde problemen
+- Beveiligingsproblemen of incidenten
 
 ### Ondersteuningskanalen
 ```bash
@@ -494,19 +494,19 @@ az rest --method get --uri "https://management.azure.com/subscriptions/{subscrip
 ```
 
 ### Informatie om te verzamelen
-Voordat je contact opneemt met ondersteuning, verzamel:
-- `azd version` output
-- `azd config list` output
-- `azd show` output (huidige deploymentstatus)
+Voordat u contact opneemt met support, verzamel:
+- `azd version` uitvoer
+- `azd config show` uitvoer
+- `azd show` uitvoer (huidige implementatiestatus)
 - Foutmeldingen (volledige tekst)
 - Stappen om het probleem te reproduceren
-- Omgevingsdetails (`azd env show`)
-- Tijdlijn van wanneer het probleem begon
+- Omgevingsdetails (`azd env get-values`)
+- Tijdlijn van wanneer het probleem is begonnen
 
-### Logverzamelingsscript
+### Script voor logverzameling
 ```bash
 #!/bin/bash
-# collect-debug-info.sh
+# verzamel-debug-info.sh
 
 echo "Collecting azd debug information..."
 mkdir -p debug-logs
@@ -516,8 +516,8 @@ azd version >> debug-logs/system-info.txt
 az --version >> debug-logs/system-info.txt
 
 echo "Configuration:" > debug-logs/config.txt
-azd config list >> debug-logs/config.txt
-azd env show >> debug-logs/config.txt
+azd config show >> debug-logs/config.txt
+azd env list >> debug-logs/config.txt
 azd env get-values >> debug-logs/config.txt
 
 echo "Current deployment status:" > debug-logs/status.txt
@@ -526,24 +526,24 @@ azd show >> debug-logs/status.txt
 echo "Debug information collected in debug-logs/"
 ```
 
-## 📊 Probleempreventie
+## 📊 Voorkomen van problemen
 
-### Checklist vóór implementatie
+### Pre-deployment-checklist
 ```bash
-# 1. Controleer authenticatie
+# 1. Valideer authenticatie
 az account show
 
 # 2. Controleer quota en limieten
 az vm list-usage --location eastus2
 
-# 3. Controleer sjablonen
+# 3. Valideer sjablonen
 az bicep build --file infra/main.bicep
 
 # 4. Test eerst lokaal
 npm run build
 npm run test
 
-# 5. Gebruik dry-run-implementaties
+# 5. Gebruik proefimplementaties
 azd provision --preview
 ```
 
@@ -571,30 +571,30 @@ az monitor metrics alert create \
 # Maandelijkse kostenbeoordeling
 az consumption usage list --billing-period-name 202401
 
-# Driemaandelijkse beveiligingsbeoordeling
+# Kwartaalgewijze beveiligingsbeoordeling
 az security assessment list --resource-group myrg
 ```
 
 ## Gerelateerde bronnen
 
-- [Debuggengids](debugging.md) - Geavanceerde debugtechnieken
-- [Provisioning van resources](../chapter-04-infrastructure/provisioning.md) - Problemen met infrastructuur
+- [Foutopsporingsgids](debugging.md) - Geavanceerde technieken voor foutopsporing
+- [Resources provisionen](../chapter-04-infrastructure/provisioning.md) - Infrastructuurfoutoplossing
 - [Capaciteitsplanning](../chapter-06-pre-deployment/capacity-planning.md) - Richtlijnen voor resourceplanning
 - [SKU-selectie](../chapter-06-pre-deployment/sku-selection.md) - Aanbevelingen voor servicetiers
 
 ---
 
-**Tip**: Sla deze gids als bladwijzer op en raadpleeg hem wanneer je problemen tegenkomt. De meeste problemen zijn eerder gezien en hebben vastgestelde oplossingen!
+**Tip**: Bewaar deze gids als bladwijzer en raadpleeg hem wanneer u problemen tegenkomt. De meeste problemen zijn eerder gezien en hebben beproefde oplossingen!
 
 ---
 
 **Navigatie**
-- **Vorige les**: [Provisioning van resources](../chapter-04-infrastructure/provisioning.md)
-- **Volgende les**: [Debuggengids](debugging.md)
+- **Vorige les**: [Resources provisionen](../chapter-04-infrastructure/provisioning.md)
+- **Volgende les**: [Foutopsporingsgids](debugging.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel wij naar nauwkeurigheid streven, wees u ervan bewust dat automatische vertalingen fouten of onjuistheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor cruciale informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, wees u ervan bewust dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de originele taal moet als de gezaghebbende bron worden beschouwd. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

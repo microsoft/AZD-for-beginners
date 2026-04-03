@@ -1,29 +1,29 @@
 # דוגמאות לפריסת אפליקציות מכולות עם AZD
 
-ספרייה זו מכילה דוגמאות מקיפות לפריסת אפליקציות מכולות ל-Azure Container Apps באמצעות Azure Developer CLI (AZD). דוגמאות אלה מראות תבניות מהעולם האמיתי, שיטות עבודה מומלצות, ותצורות מוכנות לייצור.
+תיקיה זו מכילה דוגמאות מקיפות לפריסת אפליקציות מכולות ל-Azure Container Apps באמצעות Azure Developer CLI (AZD). דוגמאות אלו ממחישות דגמים מהעולם האמיתי, שיטות עבודה מומלצות, וקונפיגורציות מוכנות לפרודקשן.
 
 ## 📚 תוכן עניינים
 
 - [סקירה כללית](#סקירה-כללית)
 - [דרישות מוקדמות](#דרישות-מוקדמות)
 - [דוגמאות התחלה מהירה](#דוגמאות-התחלה-מהירה)
-- [דוגמאות לייצור](#דוגמאות-לייצור)
-- [תבניות מתקדמות](#תבניות-מתקדמות)
+- [דוגמאות לפרודקשן](#דוגמאות-לפרודקשן)
+- [דגמים מתקדמים](#דגמים-מתקדמים)
 - [שיטות עבודה מומלצות](#שיטות-עבודה-מומלצות)
 
 ## סקירה כללית
 
-Azure Container Apps היא פלטפורמת מכולות מבוססת שרתים מנוהלים לחלוטין, המאפשרת להריץ מיקרו-שירותים ואפליקציות מכולות ללא ניהול תשתית. בשילוב עם AZD, תקבל:
+Azure Container Apps היא פלטפורמת מכולות מנוהלת מלאה ללא שרתים, שמאפשרת להריץ מיקרו-שירותים ואפליקציות מכולות ללא ניהול תשתית. בשילוב עם AZD, תקבלו:
 
-- **פריסה פשוטה**: פקודה אחת לפריסת מכולות עם התשתית
-- **קנה מידה אוטומטי**: קנה מידה לאפס ופריסה בהתאם לתעבורת HTTP או אירועים
-- **רשת משולבת**: גילוי שירותים מובנה ופיצול תעבורה
+- **פריסה פשוטה**: פריסה בפקודה אחת של מכולות עם תשתית
+- **התאמה אוטומטית של קנה מידה**: התאמת קנה מידה לאפס והרחבה על בסיס תעבורת HTTP או אירועים
+- **רשת משולבת**: גילוי שירות ואיזון עומסים מובנים
 - **זהות מנוהלת**: אימות מאובטח למשאבי Azure
-- **אופטימיזציית עלויות**: תשלום רק עבור המשאבים שבהם אתה משתמש
+- **אופטימיזציה של עלויות**: תשלום רק עבור המשאבים בהם אתם משתמשים
 
 ## דרישות מוקדמות
 
-לפני שמתחילים, ודא שיש לך:
+לפני שמתחילים, ודאו שיש לכם:
 
 ```bash
 # בדוק התקנת AZD
@@ -35,21 +35,23 @@ az version
 # בדוק את Docker (לבניית תמונות מותאמות אישית)
 docker --version
 
-# היכנס ל-Azure
+# אמת עבור פריסות AZD
 azd auth login
+
+# אופציונלי: היכנס ל-Azure CLI אם אתה מתכנן להריץ פקודות az ישירות
 az login
 ```
-  
-**משאבי Azure דרושים:**  
-- מנוי Azure פעיל  
-- הרשאות יצירת קבוצות משאבים  
-- גישה לסביבת Container Apps  
+
+**משאבי Azure דרושים:**
+- מנוי Azure פעיל
+- הרשאות ליצירת קבוצת משאבים
+- גישה לסביבת Container Apps
 
 ## דוגמאות התחלה מהירה
 
-### 1. API רשת פשוט (Python Flask)
+### 1. Web API פשוט (Python Flask)
 
-פרוס API REST בסיסי עם Azure Container Apps.
+פריסת REST API בסיסי עם Azure Container Apps.
 
 **דוגמה: Python Flask API**
 
@@ -64,47 +66,47 @@ services:
     language: python
     host: containerapp
 ```
-  
-**שלבי פריסה:**  
+
+**שלבי הפריסה:**
 
 ```bash
-# אתחול מתבנית
+# אתחול מהתבנית
 azd init --template todo-python-mongo
 
-# הקמת תשתית ופריסה
+# הפעלת תשתית ופריסה
 azd up
 
 # בדוק את הפריסה
 azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
-  
-**תכונות מרכזיות:**  
-- קנה מידה אוטומטי מ-0 עד 10 שכפולים  
-- בדיקות בריאות ובדיקות חיות  
-- הזרקת משתני סביבה  
-- אינטגרציה עם Application Insights  
+
+**תכונות עיקריות:**
+- התאמה אוטומטית של קנה מידה מ-0 עד 10 מופעים
+- בדיקות בריאות ובדיקות קיימות
+- הזרקת משתני סביבה
+- אינטגרציה עם Application Insights
 
 ### 2. Node.js Express API
 
-פרוס backend ב-Node.js עם אינטגרציה ל-MongoDB.
+פריסת Backend ב-Node.js עם אינטגרציה ל-MongoDB.
 
 ```bash
-# אתחול תבנית API של Node.js
+# לאתחל תבנית API של Node.js
 azd init --template todo-nodejs-mongo
 
-# הגדרת משתני סביבה
+# להגדיר משתני סביבה
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
-# פריסה
+# לפרוס
 azd up
 
-# הצגת לוגים דרך Azure Monitor
+# לצפות ביומנים דרך Azure Monitor
 azd monitor --logs
 ```
-  
-**היבטי תשתית עיקריים:**  
+
+**הדגשים תשתיתיים:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -146,32 +148,32 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   }
 }
 ```
-  
+
 ### 3. Frontend סטטי + Backend API
 
-פרוס אפליקציית full-stack עם Frontend ב-React ו-Backend API.
+פריסת אפליקציית Full-stack עם React כ-Frontend ו-API כ-Backend.
 
 ```bash
-# אתחול תבנית סטאק מלאה
+# אתחל תבנית פול-סטאק
 azd init --template todo-csharp-sql-swa-func
 
-# סקירת התצורה
+# בדוק את ההגדרות
 cat azure.yaml
 
-# פריסת שני השירותים
+# פרוס את שני השירותים
 azd up
 
-# פתיחת האפליקציה
+# פתח את האפליקציה
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
-  
-## דוגמאות לייצור
+
+## דוגמאות לפרודקשן
 
 ### דוגמה 1: ארכיטקטורת מיקרו-שירותים
 
-**תרחיש**: אפליקציית e-commerce עם מספר מיקרו-שירותים
+**תרחיש**: אפליקציית e-commerce עם מיקרו-שירותים מרובים
 
-**מבנה הספרייה:**  
+**מבנה התיקיות:**
 ```
 microservices-demo/
 ├── azure.yaml
@@ -190,8 +192,8 @@ microservices-demo/
     ├── order-service/
     └── payment-service/
 ```
-  
-**קובץ azure.yaml:**  
+
+**קובץ azure.yaml:**
 ```yaml
 name: microservices-ecommerce
 services:
@@ -210,16 +212,16 @@ services:
     language: nodejs
     host: containerapp
 ```
-  
-**פריסה:**  
+
+**פריסה:**
 ```bash
 # לאתחל את הפרויקט
 azd init
 
-# להגדיר את סביבת הייצור
+# להגדיר סביבת ייצור
 azd env new production
 
-# לקנפג את הגדרות הייצור
+# לתצבר את הגדרות הייצור
 azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
@@ -227,15 +229,15 @@ azd env set MAX_REPLICAS 50
 # לפרוס את כל השירותים
 azd up
 
-# לעקוב אחר הפריסה
+# לנטר את הפריסה
 azd monitor --overview
 ```
-  
-### דוגמה 2: אפליקציית מכולה מונעת AI
 
-**תרחיש**: אפליקציית צ'אט מבוססת AI עם אינטגרציה ל-Microsoft Foundry Models
+### דוגמה 2: אפליקציית מכולות עם בינה מלאכותית
 
-**קובץ: src/ai-chat/app.py**  
+**תרחיש**: אפליקציית צ׳אט מבוססת בינה מלאכותית עם אינטגרציה ל-Microsoft Foundry Models
+
+**קובץ: src/ai-chat/app.py**
 ```python
 from flask import Flask, request, jsonify
 from azure.identity import DefaultAzureCredential
@@ -253,7 +255,7 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # השג את מפתח OpenAI מ-Key Vault
+    # קבל את מפתח OpenAI מ-Key Vault
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
@@ -267,8 +269,8 @@ def chat():
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
-  
-**קובץ: azure.yaml**  
+
+**קובץ: azure.yaml**
 ```yaml
 name: ai-chat-app
 services:
@@ -277,8 +279,8 @@ services:
     language: python
     host: containerapp
 ```
-  
-**קובץ: infra/main.bicep**  
+
+**קובץ: infra/main.bicep**
 ```bicep
 param location string = resourceGroup().location
 param environmentName string
@@ -319,8 +321,8 @@ module aiChatApp './app/container-app.bicep' = {
   }
 }
 ```
-  
-**פקודות פריסה:**  
+
+**פקודות פריסה:**
 ```bash
 # הגדר סביבה
 azd init --template ai-chat-app
@@ -338,12 +340,12 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -H "Content-Type: application/json" \
   -d '{"message": "Hello, how are you?"}'
 ```
-  
-### דוגמה 3: עובד רקע עם עיבוד בתורים
+
+### דוגמה 3: עובד רקע עם עיבוד תור הודעות
 
 **תרחיש**: מערכת עיבוד הזמנות עם תור הודעות
 
-**מבנה הספרייה:**  
+**מבנה תיקיות:**
 ```
 queue-worker/
 ├── azure.yaml
@@ -359,8 +361,8 @@ queue-worker/
     ├── api/
     └── worker/
 ```
-  
-**קובץ: src/worker/processor.py**  
+
+**קובץ: src/worker/processor.py**
 ```python
 import os
 from azure.storage.queue import QueueClient
@@ -378,17 +380,17 @@ def process_orders():
     while True:
         messages = queue_client.receive_messages(max_messages=10)
         for message in messages:
-            # לעבד הזמנה
+            # עיבוד הזמנה
             print(f"Processing order: {message.content}")
             
-            # להשלים הודעה
+            # הודעה מלאה
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
     process_orders()
 ```
-  
-**קובץ: azure.yaml**  
+
+**קובץ: azure.yaml**
 ```yaml
 name: order-processing
 services:
@@ -402,16 +404,16 @@ services:
     language: python
     host: containerapp
 ```
-  
-**פריסה:**  
+
+**פריסה:**
 ```bash
 # אתחול
 azd init
 
-# פריסה עם תצורת תור
+# פרוס עם תצורת תור
 azd up
 
-# שינוי קנה מידה של העובד על בסיס אורך התור
+# הרחב את העובד בהתאם לאורך התור
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -419,10 +421,10 @@ az containerapp update \
   --scale-rule-type azure-queue \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
-  
-## תבניות מתקדמות
 
-### תבנית 1: פריסת Blue-Green
+## דגמים מתקדמים
+
+### דגם 1: פריסה Blue-Green
 
 ```bash
 # צור גרסה חדשה ללא תנועה
@@ -431,7 +433,7 @@ azd deploy api --revision-suffix blue --no-traffic
 # בדוק את הגרסה החדשה
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# חלוקת תנועה (20% לכחול, 80% לגרסה הנוכחית)
+# חלק תנועה (20% לכחול, 80% לנוכחי)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -443,10 +445,10 @@ az containerapp ingress traffic set \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
-  
-### תבנית 2: פריסת Canary עם AZD
 
-**קובץ: .azure/dev/config.json**  
+### דגם 2: פריסת Canary עם AZD
+
+**קובץ: .azure/dev/config.json**
 ```json
 {
   "deploymentStrategy": "canary",
@@ -457,19 +459,19 @@ az containerapp ingress traffic set \
   }
 }
 ```
-  
-**סקריפט פריסה:**  
+
+**סקריפט פריסה:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
 
-# פרוס גרסה חדשה עם 10% מהתנועה
+# לפרוס גרסה חדשה עם 10% מהתנועה
 azd deploy api --revision-mode multiple
 
-# נטר מדדים
+# לעקוב אחרי מדדים
 azd monitor --service api --duration 5m
 
-# הגדל את התנועה בהדרגה
+# להגדיל את התנועה בהדרגה
 for i in {20..100..10}; do
   echo "Increasing traffic to $i%"
   az containerapp revision set-traffic \
@@ -477,13 +479,13 @@ for i in {20..100..10}; do
     --resource-group rg-myapp \
     --revision-weight latest=$i
   
-  sleep 300  # המתן 5 דקות
+  sleep 300  # להמתין 5 דקות
 done
 ```
-  
-### תבנית 3: פריסת Multi-Region
 
-**קובץ: azure.yaml**  
+### דגם 3: פריסה מרובה אזורים
+
+**קובץ: azure.yaml**
 ```yaml
 name: global-app
 services:
@@ -496,8 +498,8 @@ services:
       - westeurope
       - southeastasia
 ```
-  
-**קובץ: infra/multi-region.bicep**  
+
+**קובץ: infra/multi-region.bicep**
 ```bicep
 param regions array = ['eastus', 'westeurope', 'southeastasia']
 
@@ -526,19 +528,19 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
   }
 }
 ```
-  
-**פריסה:**  
+
+**פריסה:**
 ```bash
-# לפרוס בכל האזורים
+# הפריסה לכל האזורים
 azd up
 
-# לאמת נקודות קצה
+# אמת נקודות קצה
 azd show --output json | jq '.services.api.endpoints'
 ```
-  
-### תבנית 4: אינטגרציית Dapr
 
-**קובץ: infra/app/dapr-enabled.bicep**  
+### דגם 4: אינטגרציית Dapr
+
+**קובץ: infra/app/dapr-enabled.bicep**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: 'dapr-app'
@@ -562,8 +564,8 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   }
 }
 ```
-  
-**קוד אפליקציה עם Dapr:**  
+
+**קוד אפליקציה עם Dapr:**
 ```python
 from flask import Flask
 from dapr.clients import DaprClient
@@ -589,20 +591,20 @@ def create_order():
     
     return {'status': 'created'}
 ```
-  
+
 ## שיטות עבודה מומלצות
 
 ### 1. ארגון משאבים
 
 ```bash
-# השתמש בקונבנציות שמות עקביות
+# השתמש בשמות עקביים
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# סמן משאבים למעקב עלות
+# תייג משאבים למעקב עלויות
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
-  
+
 ### 2. שיטות אבטחה מומלצות
 
 ```bicep
@@ -641,7 +643,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
   }
 }
 ```
-  
+
 ### 3. אופטימיזציית ביצועים
 
 ```yaml
@@ -661,22 +663,22 @@ services:
           http:
             concurrent: 100
 ```
-  
+
 ### 4. ניטור ותצפית
 
 ```bash
 # הפעלת Application Insights
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
-# הצג יומנים בזמן אמת
+# צפייה ביומנים בזמן אמת
 azd monitor --logs
-# או השתמש ב-Azure CLI עבור אפליקציות מכולות:
+# או השתמש ב-Azure CLI עבור Container Apps:
 az containerapp logs show --name api --resource-group rg-myapp --follow
 
-# נהל מדדים
+# ניטור מדדים
 azd monitor --live
 
-# צור התראות
+# יצירת התראות
 az monitor metrics alert create \
   --name high-cpu-alert \
   --resource-group rg-myapp \
@@ -684,30 +686,30 @@ az monitor metrics alert create \
   --condition "avg CPU > 80" \
   --description "Alert when CPU exceeds 80%"
 ```
-  
-### 5. אופטימיזציית עלויות
+
+### 5. אופטימיזציה של עלויות
 
 ```bash
-# להקטין לאפס כאשר לא בשימוש
+# התאם לגודל אפס כשלא בשימוש
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# השתמש במופעי ספוט לסביבות פיתוח
+# השתמש במופעים ספוט לסביבות פיתוח
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# להגדיר התראות תקציב
+# הגדר התראות תקציב
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
   --time-grain Monthly \
   --threshold 80
 ```
-  
+
 ### 6. אינטגרציית CI/CD
 
-**דוגמה ל-GitHub Actions:**  
+**דוגמת GitHub Actions:**
 ```yaml
 name: Deploy to Azure Container Apps
 
@@ -736,11 +738,11 @@ jobs:
           AZURE_ENV_NAME: ${{ secrets.AZURE_ENV_NAME }}
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
-  
-## הפקודות הנפוצות
+
+## הפניות לפקודות שכיחות
 
 ```bash
-# אתחל פרויקט אפליקציית מכולות חדש
+# אתחל פרויקט אפליקציית מכולות חדשה
 azd init --template <template-name>
 
 # פרוס תשתית ואפליקציה
@@ -752,55 +754,55 @@ azd deploy
 # ספק רק תשתית
 azd provision
 
-# הצג משאבים שמופעלים
+# הצג משאבים שפרסת
 azd show
 
-# העבר שידור יומני רישום באמצעות azd monitor או Azure CLI
+# זרם יומני רישום באמצעות azd monitor או Azure CLI
 azd monitor --logs
 # az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
-# נטר אפליקציה
+# נטר את האפליקציה
 azd monitor --overview
 
 # נקה משאבים
 azd down --force --purge
 ```
-  
+
 ## פתרון תקלות
 
-### בעיה: מכולה נכשלה בפתיחה
+### בעיה: המכולה לא מצליחה להידלק
 
 ```bash
-# בדוק לוגים באמצעות Azure CLI
+# בדוק יומני רישום באמצעות Azure CLI
 az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# הצג אירועי מכולה
+# הצג אירועי מיכל
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
   --revision latest
 
-# בדוק באופן מקומי
+# בדוק מקומית
 docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
-  
-### בעיה: אין גישה לנקודת קצה של אפליקציית המכולות
+
+### בעיה: לא מצליחים לגשת לנקודת הקצה של אפליקציית המכולה
 
 ```bash
-# אמת תצורת כניסה
+# אמת את תצורת הכניסה
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# בדוק אם כניסה פנימית מופעלת
+# בדוק אם הכניסה הפנימית מופעלת
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
   --external true
 ```
-  
+
 ### בעיה: בעיות ביצועים
 
 ```bash
@@ -816,10 +818,10 @@ az containerapp update \
   --cpu 2.0 \
   --memory 4Gi
 ```
-  
-## משאבים ודוגמאות נוספות
-- [דוגמת מיקרו-שירותים](./microservices/README.md)
-- [דוגמת API ב-Flask פשוט](./simple-flask-api/README.md)
+
+## משאבים ודוגמאות נוספים
+- [דוגמה למיקרו-שירותים](./microservices/README.md)
+- [דוגמת Flash API פשוטה](./simple-flask-api/README.md)
 - [תיעוד Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
 - [גלריית תבניות AZD](https://azure.github.io/awesome-azd/)
 - [דוגמאות Container Apps](https://github.com/Azure-Samples/container-apps-samples)
@@ -829,19 +831,19 @@ az containerapp update \
 
 כדי לתרום דוגמאות חדשות לאפליקציות מכולות:
 
-1. צור תת-ספרייה חדשה עם הדוגמה שלך  
-2. כלול קבצים מלאים של `azure.yaml`, `infra/`, ו-`src/`  
-3. הוסף קובץ README מקיף עם הוראות פריסה  
-4. בדוק פריסה עם `azd up`  
-5. הגש בקשת משיכה (Pull Request)  
+1. צרו תיקיית משנה חדשה עם הדוגמה שלכם
+2. כללו את הקבצים המלאים `azure.yaml`, `infra/`, ו-`src/`
+3. הוסיפו README מפורט עם הוראות פריסה
+4. בדקו את הפריסה עם `azd up`
+5. הגישו Pull Request
 
 ---
 
-**זקוק לעזרה?** הצטרף לקהילה של [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) לקבלת תמיכה ושאלות.
+**צריך עזרה?** הצטרפו לקהילת [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) לתמיכה ושאלות.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו שואפים לדיוק, יש לקחת בחשבון כי תרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. יש להתייחס למסמך המקורי בשפת המקור כמקור הסמכות. למידע קריטי מומלץ לבצע תרגום מקצועי על ידי בני אדם. איננו אחראים לכל אי הבנות או פרשנויות שגויות הנובעות משמש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו שואפים לדייק, יש לקחת בחשבון כי תרגומים אוטומטיים עלולים להכיל שגיאות או אי דיוקים. יש להעלות את המסמך המקורי בשפת המקור כמקור הסמכותי. למידע קריטי מומלץ להשתמש בתרגום מקצועי על ידי אדם. איננו אחראים על כל אי הבנות או פרשנויות שגויות הנובעות משימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

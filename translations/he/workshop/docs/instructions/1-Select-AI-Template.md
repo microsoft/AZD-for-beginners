@@ -1,43 +1,43 @@
 # 1. בחר תבנית
 
-!!! tip "בסוף המודול הזה תהיה לך היכולת"
+!!! tip "בסוף מודול זה תוכל ל"
 
     - [ ] לתאר מהן תבניות AZD
     - [ ] לגלות ולהשתמש בתבניות AZD ל-AI
-    - [ ] להתחיל עם תבנית הסוכנים של AI
-    - [ ] **מעבדה 1:** התחלה מהירה עם AZD ב-GitHub Codespaces
+    - [ ] להתחיל עם תבנית AI Agents
+    - [ ] **מעבדת 1:** התחלה מהירה עם AZD ב-Codespaces או מכולת פיתוח
 
 ---
 
-## 1. אנלוגיה של בונה
+## 1. אנלוגיה לבונה
 
-בניית אפליקציית AI מודרנית מוכנה לארגון _מהתחלה_ יכולה להיות מפחידה. זה מעט כמו לבנות בעצמך את הבית החדש, לבנה אחרי לבנה. כן, זה אפשרי! אבל זו לא הדרך היעילה ביותר להגיע לתוצאה הרצויה! 
+לבנות אפליקציית AI מודרנית ומוכנה לארגון _מהתחלה_ יכול להיות מאתגר. זה קצת כמו לבנות את הבית החדש שלך בעצמך, לבנה אחר לבנה. כן, זה אפשרי! אבל זו לא הדרך היעילה ביותר לקבל את התוצאה הרצויה!
 
-במקום זאת, לעיתים קרובות אנו מתחילים מ-_תוכנית עיצוב_ קיימת, ועובדים עם אדריכל כדי להתאים אותה לדרישות האישיות שלנו. וזוהי בדיוק הגישה שיש לנקוט בבניית אפליקציות חכמות. קודם כל, מצא אדריכלות עיצוב טובה שמתאימה למרחב הבעיה שלך. לאחר מכן עבוד עם אדריכל פתרונות כדי להתאים ולפתח את הפתרון לתרחיש הספציפי שלך.
+במקום זאת, אנחנו בדרך כלל מתחילים מתוכנית עיצוב קיימת, ועובדים עם אדריכל כדי להתאים אותה לדרישות האישיות שלנו. וזה בדיוק הגישה שיש לנקוט בבניית אפליקציות אינטליגנטיות. קודם כל, מצאו ארכיטקטורת עיצוב טובה שמתאימה לתחום הבעיה שלכם. לאחר מכן עבודו עם אדריכל פתרונות כדי להתאים ולפתח את הפתרון לתרחיש הספציפי שלכם.
 
-אבל איפה ניתן למצוא את תכניות העיצוב הללו? ואיך נמצא אדריכל שמוכן ללמד אותנו כיצד להתאים ולפרוס את התכניות הללו בעצמנו? בסדנה זו, אנו עונים על שאלות אלו על ידי היכרות עם שלוש טכנולוגיות:
+אבל איפה אפשר למצוא את תוכניות העיצוב האלה? ואיך למצוא אדריכל שמוכן ללמד אותנו כיצד להתאים ולהטמיע את התוכניות האלה בעצמנו? בסדנה זו, אנו עונים על שאלות אלו על ידי הצגת שלוש טכנולוגיות:
 
-1. [Azure Developer CLI](https://aka.ms/azd) - כלי קוד פתוח שמאיץ את מסלול המפתח מעבודה מקומית (build) לפריסת ענן (ship).
-1. [Microsoft Foundry Templates](https://ai.azure.com/templates) - מאגרי קוד בקוד פתוח סטנדרטיזציוני המכילים דוגמאות קוד, תשתיות וקבצי קונפיגורציה לפריסת ארכיטקטורת פתרון AI.
-1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - סוכן קוד מונחה ידע Azure, שיכול להנחות אותנו בניווט בקוד וביצוע שינויים - באמצעות שפת טבעית.
+1. [Azure Developer CLI](https://aka.ms/azd) - כלי קוד פתוח שמאיץ את דרכו של המפתח ממפתח מקומי (build) לפריסה בענן (ship).
+1. [Microsoft Foundry Templates](https://ai.azure.com/templates) - מאגרים סטנדרטיים בקוד פתוח המכילים קוד לדוגמה, תשתיות וקבצי הגדרה לפריסת ארכיטקטורת פתרון AI.
+1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - סוכן קידוד מבוסס ידע של Azure, שיכול להנחות אותנו בהתמצאות בקוד וביצוע שינויים - בשפה טבעית.
 
-עם כלים אלה ביד, אנו יכולים כעת _לגלות_ את התבנית המתאימה, _לפרוס_ אותה כדי לאמת שהיא עובדת, ו-_להתאים_ אותה לתרחישים הספציפיים שלנו. בואו נצלול ונלמד כיצד הם פועלים.
+עם הכלים האלה ביד, יש לנו כעת את היכולת _לגלות_ את התבנית הנכונה, _לפרוס_ אותה כדי לוודא שהיא פועלת, ו-_לשנות_ אותה כך שתתאים לתרחישים הספציפיים שלנו. בואו נצלול ונלמד כיצד הם פועלים.
 
 
 ---
 
 ## 2. Azure Developer CLI
 
-ה-[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (או `azd`) הוא כלי שורת פקודה בקוד פתוח שיכול להאיץ את מסלול הקוד לענן שלך עם סט פקודות נוחות למפתח שעובדות בעקביות בסביבת IDE (פיתוח) ו-CI/CD (devops).
+ה-[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (או `azd`) הוא כלי שורת פקודה בקוד פתוח שיכול לזרז את המסע שלך מקוד לענן עם סט פקודות ידידותיות למפתח שעובדות באופן עקבי בין סביבת הפיתוח שלך (IDE) וסביבת ה-CI/CD (דוואופס).
 
-עם `azd`, מסלול הפריסה שלך יכול להיות פשוט כמו:
+עם `azd`, המסע שלך לפריסה יכול להיות פשוט כמו:
 
 - `azd init` - מאתחל פרויקט AI חדש מתבנית AZD קיימת.
-- `azd up` - מספק תשתית ומפרוס את האפליקציה שלך בשלב אחד.
-- `azd monitor` - מקבל ניטור ודיאגנוסטיקה בזמן אמת עבור האפליקציה המופעלת.
-- `azd pipeline config` - מגדיר צינורות CI/CD לאוטומציה של הפריסה לאזור Azure.
+- `azd up` - מספק תשתית ומפרוס את האפליקציה שלך בצעד אחד.
+- `azd monitor` - מקבל ניטור בזמן אמת ואבחון לאפליקציה שהופעלה.
+- `azd pipeline config` - מגדיר צנרת CI/CD לאוטומציה של הפריסה לאשור.
 
-**🎯 | תרגיל**: <br/> חקור את כלי שורת הפקודה `azd` כעת בסביבת GitHub Codespaces שלך. התחל בהקלדת הפקודה הזו כדי לראות מה הכלי יכול לעשות:
+**🎯 | תרגיל**: <br/> חקור את כלי שורת הפקודה `azd` בסביבת הסדנה הנוכחית שלך עכשיו. זה יכול להיות GitHub Codespaces, מכולת פיתוח, או שכפול מקומי עם כל הדרישות המוקדמות מותקנות. התחל בהקלדת הפקודה הזו כדי לראות מה הכלי יכול לעשות:
 
 ```bash title="" linenums="0"
 azd help
@@ -49,20 +49,20 @@ azd help
 
 ## 3. תבנית AZD
 
-כדי ש-`azd` יוכל לעשות זאת, הוא צריך לדעת את התשתית לספק, את הגדרות הקונפיגורציה לאכוף, ואת האפליקציה לפרוס. כאן נכנסות לעניין [תבניות AZD](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp).
+כדי ש-`azd` ישיג זאת, הוא צריך לדעת את התשתית לפרוס, את הגדרות התצורה לאכוף, ואת האפליקציה לפרוס. כאן נכנסות לתמונה [תבניות AZD](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp).
 
-תבניות AZD הן מאגרים בקוד פתוח שמשלבים קוד לדוגמה עם תשתית וקבצי קונפיגורציה הדרושים לפריסת ארכיטקטורת הפתרון.
-באמצעות גישת _תשתית כקוד_ (IaC), הן מאפשרות להגדיר משאבים וקונפיגורציות הניתנים לבקרת גירסאות (כמו קוד מקור האפליקציה) - ויוצרות תהליכים חוזרים ועקביים למשתמשים באותו פרויקט.
+תבניות AZD הן מאגרים בקוד פתוח שמכילים שילוב של קוד לדוגמה עם קבצי תשתית והגדרה הדרושים לפריסת ארכיטקטורת הפתרון.
+באמצעות גישת _תשתית כקוד_ (IaC), הן מאפשרות שהגדרות המשאבים וקבצי התצורה יהיו תחת בקרת גרסאות (כמו קוד המקור של האפליקציה) - ויוצרות זרימות עבודה אחידות ונגישות למשתמשים בפרויקט.
 
-כאשר יוצרים או משתמשים מחדש בתבנית AZD לתרחיש ה-_שלך_, שקול את השאלות האלה:
+כשאתה יוצר או משתמש מחדש בתבנית AZD עבור התרחיש _שלך_, שקול את השאלות הבאות:
 
-1. מה אתה בונה? → האם יש תבנית עם קוד התחלה לתרחיש הזה?
-1. כיצד מעוצב הפתרון שלך? → האם יש תבנית עם המשאבים הדרושים?
-1. איך הפתרון שלך מפורס? → חשוב על `azd deploy` עם תוספות לפני/אחרי עיבוד!
-1. כיצד אפשר לאופטימיזציה נוספת? → חשוב על ניטור מובנה וצינורות אוטומציה!
+1. מה אתה בונה? → האם יש תבנית שמכילה קוד התחלתי לתרחיש זה?
+1. איך האדריכלות של הפתרון שלך? → האם יש תבנית עם המשאבים הדרושים?
+1. איך הפתרון שלך מנוהל? → חשוב על `azd deploy` עם תהליכי עיבוד מוקדמים/מאוחרים!
+1. איך אפשר לייעל אותו עוד יותר? → חשוב על ניטור מובנה וצינורות אוטומציה!
 
 **🎯 | תרגיל**: <br/> 
-בקר בגלריית [Awesome AZD](https://azure.github.io/awesome-azd/) והשתמש במסננים כדי לחקור את 250+ התבניות הזמינות כרגע. בדוק אם תמצא אחת המתאימה לדרישות התרחיש ה-_שלך_.
+בקרו בגלריה [Awesome AZD](https://azure.github.io/awesome-azd/) והשתמשו במסננים כדי לחקור את 250+ התבניות הזמינות כרגע. נסה למצוא תבנית שמתאימה לדרישות התרחיש _שלך_.
 
 ![Code](../../../../../translated_images/he/azd-code-to-cloud.2d9503d69d3400da.webp)
 
@@ -70,37 +70,37 @@ azd help
 
 ## 4. תבניות אפליקציות AI
 
-לאפליקציות מונעות AI, מייקרוסופט מספקת תבניות מיוחדות הכוללות **Microsoft Foundry** ו-**Foundry Agents**. תבניות אלו מאיצות את המסלול לבניית אפליקציות חכמות, מוכנות לייצור.
+לאפליקציות המופעלות במערכת AI, Microsoft מספקת תבניות מיוחדות הכוללות את **Microsoft Foundry** ו-**Foundry Agents**. תבניות אלו מאיצות את הדרך שלך לבניית אפליקציות אינטליגנטיות ומוכנות לייצור.
 
-### תבניות Microsoft Foundry & Foundry Agents
+### תבניות Microsoft Foundry ו-Foundry Agents
 
-בחר תבנית למטה לפריסה. כל תבנית זמינה בגלריית [Awesome AZD](https://azure.github.io/awesome-azd/) וניתנת לאתחול באמצעות פקודה אחת.
+בחר תבנית להלן לפריסה. כל תבנית זמינה ב-[Awesome AZD](https://azure.github.io/awesome-azd/) וניתן לאתחל אותה בפקודה אחת.
 
 | תבנית | תיאור | פקודת פריסה |
 |----------|-------------|----------------|
-| **[AI Chat עם RAG](https://azure.github.io/awesome-azd/?tags=ai&tags=rag)** | אפליקציית שיחה עם יצירת נתונים מוגברים (Retrieval Augmented Generation) באמצעות Microsoft Foundry | `azd init -t azure-samples/azure-search-openai-demo` |
-| **[התחלת שירות סוכן Foundry](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | בנה סוכני AI עם Foundry Agents לביצוע משימות אוטונומיות | `azd init -t azure-samples/foundry-agent-service-starter` |
-| **[תזמור ריבוי-סוכנים](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | תאם מספר סוכני Foundry עבור תהליכים מורכבים | `azd init -t azure-samples/multi-agent-orchestration` |
-| **[אינטליגנציה למסמכים AI](https://azure.github.io/awesome-azd/?tags=ai&tags=document)** | חילוץ וניתוח מסמכים עם מודלי Microsoft Foundry | `azd init -t azure-samples/ai-document-processing` |
-| **[בוט שיחה AI](https://azure.github.io/awesome-azd/?tags=ai&tags=bot)** | בנה צ'טבוטים חכמים בשילוב Microsoft Foundry | `azd init -t azure-samples/ai-chat-protocol` |
-| **[יצירת תמונות AI](https://azure.github.io/awesome-azd/?tags=ai&tags=dalle)** | צור תמונות באמצעות DALL-E דרך Microsoft Foundry | `azd init -t azure-samples/ai-image-generation` |
-| **[סוכן Semantic Kernel](https://azure.github.io/awesome-azd/?tags=ai&tags=semantic-kernel)** | סוכני AI המשתמשים ב-Semantic Kernel עם Foundry Agents | `azd init -t azure-samples/semantic-kernel-agent` |
-| **[ריבוי סוכנים AutoGen](https://azure.github.io/awesome-azd/?tags=ai&tags=autogen)** | מערכות ריבוי סוכנים באמצעות מסגרת AutoGen | `azd init -t azure-samples/autogen-multi-agent` |
+| **[AI Chat with RAG](https://azure.github.io/awesome-azd/?tags=ai&tags=rag)** | אפליקציית צ'אט עם יצירת מידע משופרת באמצעות Microsoft Foundry | `azd init -t azure-samples/azure-search-openai-demo` |
+| **[Foundry Agent Service Starter](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | בנה סוכני AI עם Foundry Agents לביצוע משימות אוטונומיות | `azd init -t azure-samples/foundry-agent-service-starter` |
+| **[Multi-Agent Orchestration](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | תיאום ריבוי סוכני Foundry לזרימות עבודה מורכבות | `azd init -t azure-samples/multi-agent-orchestration` |
+| **[AI Document Intelligence](https://azure.github.io/awesome-azd/?tags=ai&tags=document)** | חילוץ וניתוח מסמכים עם מודלים של Microsoft Foundry | `azd init -t azure-samples/ai-document-processing` |
+| **[Conversational AI Bot](https://azure.github.io/awesome-azd/?tags=ai&tags=bot)** | בנה רובוטי צ'אט אינטיליגנטיים עם אינטגרציה של Microsoft Foundry | `azd init -t azure-samples/ai-chat-protocol` |
+| **[AI Image Generation](https://azure.github.io/awesome-azd/?tags=ai&tags=dalle)** | יצירת תמונות באמצעות DALL-E דרך Microsoft Foundry | `azd init -t azure-samples/ai-image-generation` |
+| **[Semantic Kernel Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=semantic-kernel)** | סוכני AI המשתמשים ב-Semantic Kernel עם Foundry Agents | `azd init -t azure-samples/semantic-kernel-agent` |
+| **[AutoGen Multi-Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=autogen)** | מערכות ריבוי סוכנים בעזרת מסגרת AutoGen | `azd init -t azure-samples/autogen-multi-agent` |
 
 ### התחלה מהירה
 
-1. **גלוש בתבניות**: בקר ב-[https://azure.github.io/awesome-azd/](https://azure.github.io/awesome-azd/) וסנן לפי `AI`, `Agents` או `Microsoft Foundry`
-2. **בחר תבנית**: בחר תבנית המתאימה למקרה השימוש שלך
-3. **אתחל**: הרץ את הפקודה `azd init` עבור התבנית שבחרת
-4. **פרוס**: הרץ `azd up` כדי לספק ולפרוס
+1. **עיין בתבניות**: בקר בכתובת [https://azure.github.io/awesome-azd/](https://azure.github.io/awesome-azd/) וסנן לפי `AI`, `Agents`, או `Microsoft Foundry`
+2. **בחר את התבנית שלך**: בחר אחת שתתאים למקרה השימוש שלך
+3. **אתחל**: הפעל את הפקודה `azd init` עבור התבנית שבחרת
+4. **פרוס**: הפעל `azd up` לספק ולפרוס
 
 **🎯 | תרגיל**: <br/>
-בחר אחת מהתבניות למעלה בהתאם לתרחיש שלך:
+בחר אחת מהתבניות למעלה על בסיס התרחיש שלך:
 
-- **בונה צ'טבוט?** → התחל עם **AI Chat עם RAG** או **בוט שיחה AI**
-- **צריך סוכנים אוטונומיים?** → נסה את **Foundry Agent Service Starter** או **תזמור ריבוי-סוכנים**
-- **מעבד מסמכים?** → השתמש ב-**אינטליגנציה למסמכים AI**
-- **רוצה סיוע בקידוד AI?** → בחן את **סוכן Semantic Kernel** או **ריבוי סוכנים AutoGen**
+- **בונה רובוט צ'אט?** → התחל עם **AI Chat with RAG** או **Conversational AI Bot**
+- **צריך סוכנים אוטונומיים?** → נסה את **Foundry Agent Service Starter** או **Multi-Agent Orchestration**
+- **מעבד מסמכים?** → השתמש ב-**AI Document Intelligence**
+- **רוצה סיוע בקידוד AI?** → חקור את **Semantic Kernel Agent** או **AutoGen Multi-Agent**
 
 ```bash title="Example: Deploy the AI Chat with RAG template" linenums="0"
 azd init -t azure-samples/azure-search-openai-demo
@@ -108,11 +108,11 @@ azd up
 ```
 
 !!! info "גלה תבניות נוספות"
-    גלריית [Awesome AZD](https://azure.github.io/awesome-azd/) מכילה 250+ תבניות. השתמש במסננים כדי למצוא תבניות שעונות על דרישות ספציפיות שלך לשפה, מסגרת עבודה ושירותי Azure.
+    בגלריית [Awesome AZD](https://azure.github.io/awesome-azd/) יש מעל 250 תבניות. השתמש במסננים כדי למצוא תבניות התואמות לדרישות הספציפיות שלך לשפה, מסגרת עבודה, ושירותי Azure.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו שואפים לדיוק, יש לקחת בחשבון כי תרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. יש לראות את המסמך המקורי בשפת המקור כמקור הסמכותי. למידע קריטי מומלץ להיעזר בתרגום מקצועי ואנושי. אנו אינם אחראים לכל אי הבנה או פרשנות שגויה הנובעת משימוש בתרגום זה.
+מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). למרות שאנו משתדלים לדייק, יש להביא בחשבון כי תרגומים אוטומטיים עלולים להכיל שגיאות או אי-דיוקים. יש לראות במסמך המקורי בשפת המקור כמקור הסמכותי. למידע קריטי מומלץ להיעזר בתרגום מקצועי אנושי. אנו לא אחראים לכל הבנה שגויה או פירוש שגוי הנובע משימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
