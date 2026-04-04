@@ -1,26 +1,28 @@
 # Distribuzione di modelli AI con Azure Developer CLI
 
-**Navigazione del Capitolo:**
+**Navigazione del capitolo:**
 - **📚 Home del corso**: [AZD For Beginners](../../README.md)
-- **📖 Capitolo corrente**: Capitolo 2 - Sviluppo AI-First
+- **📖 Capitolo corrente**: Capitolo 2 - Sviluppo incentrato sull'AI
 - **⬅️ Precedente**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Successivo**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Capitolo successivo**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
-Questa guida fornisce istruzioni complete per il deployment di modelli AI utilizzando i template AZD, coprendo tutto, dalla selezione del modello ai modelli di distribuzione in produzione.
+Questa guida fornisce istruzioni complete per distribuire modelli AI usando i template AZD, coprendo tutto, dalla selezione del modello ai pattern di distribuzione in produzione.
+
+> **Nota di validazione (2026-03-25):** Il flusso di lavoro AZD in questa guida è stato verificato con `azd` `1.23.12`. Per le distribuzioni AI che richiedono più tempo rispetto alla finestra di distribuzione predefinita del servizio, le release AZD correnti supportano `azd deploy --timeout <seconds>`.
 
 ## Indice
 
-- [Strategia di selezione del modello](#strategia-di-selezione-del-modello)
-- [Configurazione AZD per i modelli AI](#configurazione-azd-per-i-modelli-ai)
-- [Modelli di distribuzione](#modelli-di-distribuzione)
-- [Gestione dei modelli](#gestione-dei-modelli)
-- [Considerazioni per la produzione](#considerazioni-per-la-produzione)
-- [Monitoraggio e osservabilità](#monitoraggio-e-osservabilità)
+- [Strategia di selezione del modello](#model-selection-strategy)
+- [Configurazione AZD per modelli AI](#azd-configuration-for-ai-models)
+- [Modelli di distribuzione](#deployment-patterns)
+- [Gestione dei modelli](#model-management)
+- [Considerazioni per la produzione](#production-considerations)
+- [Monitoraggio e osservabilità](#monitoring-and-observability)
 
-## Strategia di selezione del modello
+## Model Selection Strategy
 
-### Modelli Microsoft Foundry
+### Microsoft Foundry Models Models
 
 Scegli il modello giusto per il tuo caso d'uso:
 
@@ -41,9 +43,9 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
@@ -52,18 +54,18 @@ services:
 
 ### Pianificazione della capacità del modello
 
-| Model Type | Use Case | Recommended Capacity | Cost Considerations |
+| Model Type | Caso d'uso | Capacità consigliata | Considerazioni sui costi |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Chat, Q&A | 10-50 TPM | Economico per la maggior parte dei carichi di lavoro |
-| gpt-4.1 | Ragionamento complesso | 20-100 TPM | Costo più elevato, usarlo per funzionalità premium |
-| Text-embedding-ada-002 | Ricerca, RAG | 30-120 TPM | Essenziale per la ricerca semantica |
-| Whisper | Trascrizione vocale | 10-50 TPM | Carichi di lavoro di elaborazione audio |
+| gpt-4.1-mini | Chat, Q&A | 10-50 TPM | Costo-efficace per la maggior parte dei carichi di lavoro |
+| gpt-4.1 | Ragionamento complesso | 20-100 TPM | Costo maggiore, da utilizzare per funzionalità premium |
+| text-embedding-3-large | Ricerca, RAG | 30-120 TPM | Scelta predefinita solida per la ricerca semantica e il recupero |
+| Whisper | Speech-to-text | 10-50 TPM | Carichi di lavoro di elaborazione audio |
 
-## Configurazione AZD per i modelli AI
+## AZD Configuration for AI Models
 
-### Configurazione del template Bicep
+### Bicep Template Configuration
 
-Crea distribuzioni di modelli tramite template Bicep:
+Crea distribuzioni di modelli tramite i template Bicep:
 
 ```bicep
 // infra/main.bicep
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -131,10 +133,10 @@ Configura l'ambiente della tua applicazione:
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Modelli di distribuzione
+## Deployment Patterns
 
 ### Pattern 1: Distribuzione in singola regione
 
@@ -151,7 +153,7 @@ services:
 
 Ideale per:
 - Sviluppo e test
-- Applicazioni per un singolo mercato
+- Applicazioni per un unico mercato
 - Ottimizzazione dei costi
 
 ### Pattern 2: Distribuzione multi-regione
@@ -174,7 +176,7 @@ Ideale per:
 
 ### Pattern 3: Distribuzione ibrida
 
-Combina i Modelli Microsoft Foundry con altri servizi AI:
+Combina i modelli Microsoft Foundry con altri servizi AI:
 
 ```bicep
 // Hybrid AI services
@@ -203,11 +205,11 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Gestione dei modelli
+## Model Management
 
 ### Controllo delle versioni
 
-Traccia le versioni dei modelli nella tua configurazione AZD:
+Tieni traccia delle versioni dei modelli nella tua configurazione AZD:
 
 ```json
 {
@@ -215,11 +217,11 @@ Traccia le versioni dei modelli nella tua configurazione AZD:
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
@@ -227,7 +229,7 @@ Traccia le versioni dei modelli nella tua configurazione AZD:
 
 ### Aggiornamenti del modello
 
-Usa hook AZD per gli aggiornamenti dei modelli:
+Usa gli hook AZD per gli aggiornamenti dei modelli:
 
 ```bash
 #!/bin/bash
@@ -238,9 +240,12 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# Se il deployment impiega più tempo del timeout predefinito
+azd deploy --timeout 1800
 ```
 
-### Test A/B
+### Testing A/B
 
 Distribuisci più versioni del modello:
 
@@ -264,11 +269,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Considerazioni per la produzione
+## Production Considerations
 
 ### Pianificazione della capacità
 
-Calcola la capacità richiesta in base ai modelli di utilizzo:
+Calcola la capacità necessaria in base ai modelli di utilizzo:
 
 ```python
 # Esempio di calcolo della capacità
@@ -333,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Ottimizzazione dei costi
 
-Implementa controlli sui costi:
+Implementa controlli dei costi:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -363,7 +368,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Monitoraggio e osservabilità
+## Monitoring and Observability
 
 ### Integrazione con Application Insights
 
@@ -405,7 +410,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### Metriche personalizzate
 
-Traccia metriche specifiche per l'AI:
+Monitora metriche specifiche per l'AI:
 
 ```python
 # Telemetria personalizzata per modelli di intelligenza artificiale
@@ -442,10 +447,10 @@ class AITelemetry:
 
 ### Controlli di integrità
 
-Implementa il monitoraggio della salute dei servizi AI:
+Implementa il monitoraggio dello stato dei servizi AI:
 
 ```python
-# Endpoint per il controllo dello stato di salute
+# Endpoint per il controllo dello stato
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -455,7 +460,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test della connessione a OpenAI
+        # Verifica della connessione a OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -473,23 +478,23 @@ async def check_ai_models():
 
 ## Prossimi passi
 
-1. **Consulta la [Guida all'integrazione Microsoft Foundry](microsoft-foundry-integration.md)** per i pattern di integrazione dei servizi
+1. **Esamina la [Guida all'integrazione Microsoft Foundry](microsoft-foundry-integration.md)** per i pattern di integrazione dei servizi
 2. **Completa il [AI Workshop Lab](ai-workshop-lab.md)** per esperienza pratica
 3. **Implementa le [Pratiche AI per la produzione](production-ai-practices.md)** per distribuzioni enterprise
-4. **Esplora la [Guida al troubleshooting AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** per problemi comuni
+4. **Esplora la [Guida alla risoluzione dei problemi AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** per problemi comuni
 
 ## Risorse
 
 - [Disponibilità dei modelli Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Documentazione Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Scaling di Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Scalabilità di Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Ottimizzazione dei costi dei modelli AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Navigazione del Capitolo:**
+**Navigazione del capitolo:**
 - **📚 Home del corso**: [AZD For Beginners](../../README.md)
-- **📖 Capitolo corrente**: Capitolo 2 - Sviluppo AI-First
+- **📖 Capitolo corrente**: Capitolo 2 - Sviluppo incentrato sull'AI
 - **⬅️ Precedente**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Successivo**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Capitolo successivo**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
@@ -497,6 +502,6 @@ async def check_ai_models():
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Dichiarazione di non responsabilità**:
-Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Pur facendo del nostro meglio per garantire accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o inesattezze. Il documento originale nella sua lingua nativa deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un essere umano. Non siamo responsabili per eventuali fraintendimenti o interpretazioni errate derivanti dall'uso di questa traduzione.
+**Esclusione di responsabilità**:
+Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Pur impegnandoci per l'accuratezza, si prega di notare che le traduzioni automatizzate possono contenere errori o inesattezze. Il documento originale nella sua lingua nativa deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali fraintendimenti o interpretazioni errate derivanti dall'uso di questa traduzione.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

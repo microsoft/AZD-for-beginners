@@ -1,4 +1,4 @@
-# Bölüm 4: Altyapı Kod Olarak (IaC) ve Dağıtım
+# Bölüm 4: Kod Olarak Altyapı ve Dağıtım
 
 **📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Süre**: 1-1.5 saat | **⭐ Zorluk**: Orta
 
@@ -6,15 +6,17 @@
 
 ## Genel Bakış
 
-Bu bölüm, Bicep şablonlarıyla Altyapı Kod Olarak (IaC) desenlerini, kaynak sağlama ve Azure Developer CLI kullanarak dağıtım stratejilerini kapsar.
+Bu bölüm, Bicep şablonları ile Kod Olarak Altyapı (IaC) desenlerini, kaynak sağlama işlemlerini ve Azure Developer CLI kullanarak dağıtım stratejilerini kapsar.
+
+> Mart 2026'da `azd 1.23.12` ile doğrulandı.
 
 ## Öğrenme Hedefleri
 
-Bu bölümü tamamlayarak şunları yapabileceksiniz:
-- Bicep şablon yapısını ve sözdizimini anlamak
-- `azd provision` ile Azure kaynakları oluşturmak
-- `azd deploy` ile uygulamaları dağıtmak
-- blue-green ve rolling dağıtım stratejilerini uygulamak
+Bu bölümü tamamladığınızda şunları öğreneceksiniz:
+- Bicep şablon yapısını ve sözdizimini anlayın
+- Azure kaynaklarını `azd provision` ile sağlayın
+- Uygulamaları `azd deploy` ile dağıtın
+- Mavi-yeşil ve kademeli (rolling) dağıtım stratejilerini uygulayın
 
 ---
 
@@ -22,8 +24,8 @@ Bu bölümü tamamlayarak şunları yapabileceksiniz:
 
 | # | Ders | Açıklama | Süre |
 |---|--------|-------------|------|
-| 1 | [Kaynak Sağlama](provisioning.md) | AZD ile Azure kaynak yönetimi | 45 dk |
-| 2 | [Dağıtım Rehberi](deployment-guide.md) | Uygulama dağıtım stratejileri | 45 dk |
+| 1 | [Provisioning Resources](provisioning.md) | AZD ile Azure kaynak yönetimi | 45 dk |
+| 2 | [Deployment Guide](deployment-guide.md) | Uygulama dağıtım stratejileri | 45 dk |
 
 ---
 
@@ -42,7 +44,7 @@ azd provision
 # Yalnızca kodu dağıt
 azd deploy
 
-# Veya her ikisini birlikte
+# Ya da her ikisi birlikte
 azd up
 ```
 
@@ -67,34 +69,34 @@ my-project/
 
 ## 🔧 Temel Komutlar
 
-| Komut | Açıklama |
+| Command | Description |
 |---------|-------------|
 | `azd init` | Projeyi başlat |
-| `azd provision` | Azure kaynakları oluştur |
+| `azd provision` | Azure kaynaklarını oluştur |
 | `azd deploy` | Uygulama kodunu dağıt |
-| `azd up` | kaynak oluşturma + dağıtım |
+| `azd up` | kaynak sağlama + dağıtım |
 | `azd down` | Tüm kaynakları sil |
 
 ---
 
 ## 🔗 Gezinme
 
-| Yön | Bölüm |
+| Direction | Chapter |
 |-----------|---------|
-| **Önceki** | [Bölüm 3: Yapılandırma](../chapter-03-configuration/README.md) |
-| **Sonraki** | [Bölüm 5: Çoklu Ajan Çözümleri](../chapter-05-multi-agent/README.md) |
+| **Previous** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
+| **Next** | [Chapter 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md) |
 
 ---
 
 ## 📖 İlgili Kaynaklar
 
-- [Dağıtımdan Önce Kontroller](../chapter-06-pre-deployment/README.md)
-- [Konteyner Uygulama Örnekleri](../../examples/container-app/README.md)
-- [Veritabanı Uygulama Örneği](../../examples/database-app/README.md)
+- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
+- [Container App Examples](../../examples/container-app/README.md)
+- [Database App Example](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Feragatname:
-Bu belge, [Co-op Translator](https://github.com/Azure/co-op-translator) adlı yapay zeka çeviri hizmeti kullanılarak çevrilmiştir. Doğruluğa özen göstermemize rağmen, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belgenin özgün dili yetkili kaynak olarak kabul edilmelidir. Kritik/önemli bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+**Feragatname**:
+Bu belge [Co-op Translator](https://github.com/Azure/co-op-translator) adlı yapay zeka çeviri hizmeti kullanılarak çevrilmiştir. Doğruluk için çaba gösterilse de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilindeki metni yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumlama nedeniyle sorumluluk kabul etmiyoruz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

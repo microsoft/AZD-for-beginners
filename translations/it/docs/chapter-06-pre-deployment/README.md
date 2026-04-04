@@ -1,17 +1,19 @@
-# Chapter 6: Pre-Deployment Planning & Validation
+# Capitolo 6: Pianificazione e Validazione Pre-Distribuzione
 
-**📚 Corso**: [AZD per principianti](../../README.md) | **⏱️ Durata**: 1 ora | **⭐ Complessità**: Intermedio
+**📚 Corso**: [AZD For Beginners](../../README.md) | **⏱️ Durata**: 1 ora | **⭐ Complessità**: Intermedio
 
 ---
 
 ## Panoramica
 
-Questo capitolo copre i passaggi essenziali di pianificazione e convalida prima di distribuire la tua applicazione. Impara a evitare errori costosi con una corretta pianificazione della capacità, selezione degli SKU e controlli preflight.
+Questo capitolo copre i passaggi essenziali di pianificazione e validazione prima di distribuire la tua applicazione. Impara a evitare errori costosi con una corretta pianificazione della capacità, selezione degli SKU e controlli preliminari.
+
+> Validato con `azd 1.23.12` a marzo 2026.
 
 ## Obiettivi di apprendimento
 
-Al completamento di questo capitolo, sarai in grado di:
-- Eseguire controlli preflight prima del deployment
+Completando questo capitolo, sarai in grado di:
+- Eseguire controlli preliminari prima della distribuzione
 - Pianificare la capacità e stimare i requisiti delle risorse
 - Selezionare SKU appropriati per l'ottimizzazione dei costi
 - Configurare Application Insights per il monitoraggio
@@ -23,24 +25,24 @@ Al completamento di questo capitolo, sarai in grado di:
 
 | # | Lezione | Descrizione | Tempo |
 |---|--------|-------------|------|
-| 1 | [Controlli Preliminari](preflight-checks.md) | Valida la configurazione prima del deployment | 15 min |
-| 2 | [Pianificazione della capacità](capacity-planning.md) | Stima i requisiti delle risorse | 20 min |
-| 3 | [Selezione SKU](sku-selection.md) | Scegli i livelli di prezzo appropriati | 15 min |
+| 1 | [Preflight Checks](preflight-checks.md) | Valida la configurazione prima della distribuzione | 15 min |
+| 2 | [Capacity Planning](capacity-planning.md) | Stima i requisiti delle risorse | 20 min |
+| 3 | [SKU Selection](sku-selection.md) | Scegli i livelli di prezzo appropriati | 15 min |
 | 4 | [Application Insights](application-insights.md) | Configura il monitoraggio | 20 min |
-| 5 | [Modelli di coordinamento](coordination-patterns.md) | Flussi di lavoro di deployment del team | 15 min |
+| 5 | [Coordination Patterns](coordination-patterns.md) | Flussi di lavoro di distribuzione del team | 15 min |
 
 ---
 
-## 🚀 Avvio rapido
+## 🚀 Avvio Rapido
 
 ```bash
 # Verifica le quote della sottoscrizione
 az vm list-usage --location eastus --output table
 
-# Anteprima della distribuzione (nessuna risorsa creata)
+# Anteprima della distribuzione (nessuna risorsa verrà creata)
 azd provision --preview
 
-# Valida la sintassi di Bicep
+# Convalida la sintassi di Bicep
 az bicep build --file infra/main.bicep
 
 # Verifica la configurazione dell'ambiente
@@ -49,13 +51,13 @@ azd env get-values
 
 ---
 
-## ☑️ Checklist pre-distribuzione
+## ☑️ Lista di Controllo Pre-Distribuzione
 
 ### Prima di `azd provision`
 
 - [ ] Quota verificata per la regione
 - [ ] SKU selezionati correttamente
-- [ ] Stima dei costi rivista
+- [ ] Stima dei costi revisionata
 - [ ] Convenzione di denominazione coerente
 - [ ] Sicurezza/RBAC configurata
 
@@ -68,9 +70,9 @@ azd env get-values
 
 ---
 
-## 💰 Guida alla selezione SKU
+## 💰 Guida alla Selezione degli SKU
 
-| Workload | Development | Production |
+| Workload | Sviluppo | Produzione |
 |----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
@@ -81,22 +83,22 @@ azd env get-values
 
 ## 🔗 Navigazione
 
-| Direction | Chapter |
+| Direzione | Capitolo |
 |-----------|---------|
-| **Precedente** | [Chapter 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Successivo** | [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/README.md) |
+| **Precedente** | [Capitolo 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
+| **Successivo** | [Capitolo 7: Risoluzione dei Problemi](../chapter-07-troubleshooting/README.md) |
 
 ---
 
-## 📖 Risorse correlate
+## 📖 Risorse Correlate
 
-- [Guida alla configurazione](../chapter-03-configuration/configuration.md)
-- [Guida al deployment](../chapter-04-infrastructure/deployment-guide.md)
-- [Problemi comuni](../chapter-07-troubleshooting/common-issues.md)
+- [Guida alla Configurazione](../chapter-03-configuration/configuration.md)
+- [Guida alla Distribuzione](../chapter-04-infrastructure/deployment-guide.md)
+- [Problemi Comuni](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Dichiarazione di non responsabilità**:
-Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Pur impegnandoci a garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Pur impegnandoci per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o inesattezze. Il documento originale nella sua lingua nativa deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale eseguita da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

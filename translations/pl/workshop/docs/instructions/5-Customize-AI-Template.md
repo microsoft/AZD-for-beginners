@@ -1,30 +1,30 @@
-# 5. Dostosuj szablon
+# 5. Dostosuj Szablon
 
-!!! tip "NA KONIEC TEGO MODUŁU BĘDZIESZ MIAŁ MOŻLIWOŚĆ"
+!!! tip "NA KONIEC TEGO MODUŁU BĘDZIESZ MÓGŁ"
 
-    - [ ] Zapoznania się z domyślnymi możliwościami agenta AI
-    - [ ] Dodania wyszukiwania AI z własnym indeksem
-    - [ ] Aktywowania i analizowania metryk śledzenia
-    - [ ] Wykonania uruchomienia ewaluacji
-    - [ ] Przeprowadzenia skanowania red-teaming
-    - [ ] **Laboratorium 5: Stworzenia planu dostosowania**
+    - [ ] Poznać domyślne możliwości Agenta AI
+    - [ ] Dodać AI Search z własnym indeksem
+    - [ ] Aktywować i analizować metryki śledzenia
+    - [ ] Wykonać przebieg oceny
+    - [ ] Przeprowadzić skanowanie red-teamingowe
+    - [ ] **Lab 5: Opracować Plan Dostosowania** 
 
 ---
 
-## 5.1 Możliwości agenta AI
+## 5.1 Możliwości Agenta AI
 
 !!! success "Ukończyliśmy to w Laboratorium 01"
 
-- **Wyszukiwanie plików**: Wbudowane wyszukiwanie plików OpenAI do pozyskiwania wiedzy
+- **Wyszukiwanie plików**: Wbudowane w OpenAI wyszukiwanie plików do pozyskiwania wiedzy
 - **Cytowania**: Automatyczne przypisywanie źródeł w odpowiedziach
-- **Dostosowywalne instrukcje**: Modyfikacja zachowania i osobowości agenta
+- **Konfigurowalne instrukcje**: Modyfikowanie zachowania i osobowości agenta
 - **Integracja narzędzi**: Rozszerzalny system narzędzi dla niestandardowych funkcji
 
 ---
 
 ## 5.2 Opcje pozyskiwania wiedzy
 
-!!! task "Aby to ukończyć, musimy wprowadzić zmiany i ponownie wdrożyć"    
+!!! task "Aby to zakończyć, musimy wprowadzić zmiany i wdrożyć ponownie"    
     
     ```bash title=""
     # Ustaw zmienne środowiskowe
@@ -40,16 +40,16 @@
 
 ---
 
-**Wbudowane wyszukiwanie plików OpenAI (domyślne):**
+**OpenAI Wyszukiwanie plików (Domyślne):**
 
 - Wbudowane w Foundry Agents
 - Automatyczne przetwarzanie i indeksowanie dokumentów
-- Nie wymaga dodatkowej konfiguracji
+- Brak dodatkowej konfiguracji
 
-**Azure AI Search (opcjonalne):**
+**Azure AI Search (Opcjonalne):**
 
 - Hybrydowe wyszukiwanie semantyczne i wektorowe
-- Zarządzanie własnym indeksem
+- Zarządzanie niestandardowymi indeksami
 - Zaawansowane możliwości wyszukiwania
 - Wymaga `USE_AZURE_AI_SEARCH_SERVICE=true`
 
@@ -57,7 +57,7 @@
 
 ## 5.3 [Śledzenie i monitorowanie](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "Aby to ukończyć, musimy wprowadzić zmiany i ponownie wdrożyć"    
+!!! task "Aby to zakończyć, musimy wprowadzić zmiany i wdrożyć ponownie"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
@@ -66,7 +66,7 @@
 
 **Śledzenie:**
 
-- Integracja z OpenTelemetry
+- Integracja OpenTelemetry
 - Śledzenie żądań/odpowiedzi
 - Metryki wydajności
 - Dostępne w portalu Microsoft Foundry
@@ -74,18 +74,18 @@
 **Logowanie:**
 
 - Logi aplikacji w Container Apps
-- Strukturyzowane logowanie z identyfikatorami korelacji
+- Strukturalne logowanie z identyfikatorami korelacji
 - Podgląd logów w czasie rzeczywistym i historycznych
 
 ---
 
-## 5.4 [Ocena agenta](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
+## 5.4 [Ocena Agenta](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
 **Ocena lokalna:**
 
-- Wbudowane narzędzia oceniające jakość
+- Wbudowane mechanizmy oceny jakości
 - Niestandardowe skrypty oceny
-- Benchmark wydajności
+- Benchmarki wydajności
 
 **Ciągłe monitorowanie:**
 
@@ -95,38 +95,37 @@
 
 **Integracja CI/CD:**
 
-- Workflow w GitHub Actions
+- Workflow GitHub Actions
 - Automatyczne testowanie i ocena
 - Testy porównawcze statystyczne
 
 ---
 
-## 5.5 [Agent do testów bezpieczeństwa AI (red teaming)](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [Agent AI Red Teaming](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**Testy bezpieczeństwa AI (red teaming):**
+**AI Red Teaming:**
 
 - Automatyczne skanowanie bezpieczeństwa
-- Ocena ryzyka dla systemów AI
+- Ocena ryzyka systemów AI
 - Ocena bezpieczeństwa w wielu kategoriach
 
 **Uwierzytelnianie:**
 
 - Managed Identity dla usług Azure
 - Opcjonalne uwierzytelnianie Azure App Service
-- Fallback podstawowego uwierzytelniania dla środowiska developerskiego
+- Fallback basic auth dla środowiska developerskiego
 
-!!!
 
-quote "NA KONIEC TEGO LABORATORIUM POWINIENEŚ MIEĆ"
 
-    - [ ] Zdefiniowane wymagania scenariusza
-    - [ ] Dostosowane zmienne środowiskowe (config)
-    - [ ] Dostosowane instrukcje agenta (zadanie)
+!!! quote "NA KONIEC TEGO LABORATORIUM POWINIENEŚ MIEĆ"
+    - [ ] Określone wymagania scenariusza
+    - [ ] Dostosowane zmienne środowiskowe (konfiguracja)
+    - [ ] Dostosowane instrukcje agenta (zadania)
     - [ ] Wdrożony dostosowany szablon (aplikacja)
-    - [ ] Wykonane zadania po wdrożeniu (manualne)
-    - [ ] Przeprowadzona testowa ewaluacja
+    - [ ] Wykonane zadania po wdrożeniu (ręczne)
+    - [ ] Przeprowadzoną ocenę testową
 
-Ten przykład pokazuje, jak dostosować szablon dla zastosowania w przedsiębiorstwie z dwoma wyspecjalizowanymi agentami i wieloma wdrożeniami modeli.
+Ten przykład pokazuje dostosowanie szablonu do korporacyjnego zastosowania detalicznego z dwoma wyspecjalizowanymi agentami i wieloma wdrożeniami modeli.
 
 ---
 
@@ -136,21 +135,21 @@ Ten przykład pokazuje, jak dostosować szablon dla zastosowania w przedsiębior
 
 #### **Wdrożenia agentów:** 
 
-   - Agent kupującego: Pomaga klientom znajdować i porównywać produkty
+   - Agent zakupowy: Pomaga klientom znaleźć i porównać produkty
    - Agent lojalnościowy: Zarządza nagrodami i promocjami klientów
 
 #### **Wdrożenia modeli:**
 
-   - `gpt-4.1`: Podstawowy model czatu
-   - `o3`: Model rozumowania do skomplikowanych zapytań
+   - `gpt-4.1`: Główny model czatu
+   - `o3`: Model rozumowania dla złożonych zapytań
    - `gpt-4.1-nano`: Lekki model do prostych interakcji
-   - `text-embedding-3-large`: Wysokiej jakości osadzenia do wyszukiwania
+   - `text-embedding-3-large`: Wysokiej jakości embeddingi do wyszukiwania
 
 #### **Funkcje:**
 
    - Włączone śledzenie i monitorowanie
    - AI Search dla katalogu produktów
-   - System oceny dla zapewnienia jakości
+   - Ramy oceny dla zapewnienia jakości
    - Red teaming do walidacji bezpieczeństwa
 
 ---
@@ -160,7 +159,7 @@ Ten przykład pokazuje, jak dostosować szablon dla zastosowania w przedsiębior
 
 #### 5.6.2.1. Konfiguracja przed wdrożeniem
 
-Utwórz skrypt konfiguracji (`setup-retail.sh`)
+Utwórz skrypt instalacyjny (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -168,7 +167,7 @@ Utwórz skrypt konfiguracji (`setup-retail.sh`)
 # Ustaw nazwę środowiska
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Skonfiguruj region (wybierz na podstawie dostępności modelu)
+# Skonfiguruj region (wybierz w zależności od dostępności modelu)
 azd env set AZURE_LOCATION "eastus2"
 
 # Włącz wszystkie opcjonalne usługi
@@ -176,7 +175,7 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Skonfiguruj główny model czatu (gpt-4.1 jako najbliższy dostępny model do gpt-4.1)
+# Skonfiguruj główny model czatu (gpt-4.1 jako najbliższy dostępny do gpt-4.1)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
@@ -199,7 +198,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2: Instrukcje dla agentów
+#### 5.6.2.2: Instrukcje Agenta
 
 Utwórz `custom-agents/shopper-agent-instructions.md`:
 
@@ -276,7 +275,7 @@ echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Sprawdź limit zasobów w wybranym regionie
+# Sprawdź limit w wybranym regionie
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -296,12 +295,12 @@ fi
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Zbierz wyniki wdrożenia
+# Zbierz dane wyjściowe wdrożenia
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Pobierz adres URL aplikacji webowej
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# Pobierz URL aplikacji webowej
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -392,8 +391,8 @@ echo "🧪 Testing retail deployment..."
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Przetestuj dostępność aplikacji internetowej
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# Przetestuj dostępność aplikacji webowej
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -432,7 +431,7 @@ Next steps:
 
 ### 5.6.4 Oczekiwane rezultaty
 
-Po wykonaniu tego przewodnika implementacji będziesz miał:
+Po wykonaniu tego przewodnika wdrożeniowego będziesz mieć:
 
 1. **Wdrożoną infrastrukturę:**
 
@@ -441,31 +440,31 @@ Po wykonaniu tego przewodnika implementacji będziesz miał:
       - Usługa AI Search dla katalogu produktów
       - Application Insights do monitorowania
 
-2. **Wstępnego agenta:**
+2. **Początkowego agenta:**
 
-      - Agenta kupującego skonfigurowanego z podstawowymi instrukcjami
-      - Włączoną możliwość wyszukiwania plików
+      - Agent zakupowy skonfigurowany z podstawowymi instrukcjami
+      - Włączona możliwość wyszukiwania plików
       - Skonfigurowane śledzenie i monitorowanie
 
-3. **Gotowość do dostosowania:**
+3. **Gotowość do dostosowań:**
 
-      - Framework do dodania agenta lojalnościowego
+      - Ramy do dodania Agenta lojalnościowego
       - Szablony niestandardowych instrukcji
       - Skrypty testowe i walidacyjne
       - Konfiguracja monitorowania i oceny
 
 4. **Gotowość produkcyjna:**
 
-      - Skanowanie bezpieczeństwa za pomocą red teaming
+      - Skanowanie bezpieczeństwa red teaming
       - Monitorowanie wydajności
-      - System oceny jakości
+      - Ramy oceny jakości
       - Skalowalna architektura
 
-Ten przykład pokazuje, jak szablon AZD może być rozszerzony i dostosowany do specyficznych scenariuszy korporacyjnych przy zachowaniu najlepszych praktyk w zakresie bezpieczeństwa, monitorowania i skalowalności.
+Ten przykład pokazuje, jak szablon AZD można rozszerzać i dostosowywać do specyficznych scenariuszy korporacyjnych, zachowując najlepsze praktyki dotyczące bezpieczeństwa, monitorowania i skalowalności.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Zastrzeżenie**:  
-Ten dokument został przetłumaczony przy użyciu usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dążymy do dokładności, prosimy pamiętać, że tłumaczenia automatyczne mogą zawierać błędy lub niedokładności. Oryginalny dokument w języku źródłowym powinien być uważany za źródło wiarygodne. W przypadku informacji istotnych zaleca się skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+Ten dokument został przetłumaczony przy użyciu usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dążymy do jak największej dokładności, prosimy pamiętać, że tłumaczenia automatyczne mogą zawierać błędy lub niedokładności. Oryginalny dokument w języku źródłowym powinien być uznawany za źródło wiarygodne. W przypadku informacji istotnych zaleca się skorzystanie z profesjonalnego tłumaczenia wykonywanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

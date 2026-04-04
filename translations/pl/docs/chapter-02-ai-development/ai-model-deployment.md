@@ -1,28 +1,30 @@
-# Wdrażanie modelu AI z Azure Developer CLI
+# Wdrażanie modeli AI za pomocą Azure Developer CLI
 
 **Nawigacja po rozdziale:**
-- **📚 Strona kursu głównego**: [AZD dla początkujących](../../README.md)
-- **📖 Bieżący rozdział**: Rozdział 2 - AI-First Development
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Aktualny rozdział**: Rozdział 2 - Rozwój z myślą o AI
 - **⬅️ Poprzedni**: [Integracja Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Następny**: [Laboratorium AI Workshop](ai-workshop-lab.md)
+- **➡️ Następny**: [Warsztaty AI](ai-workshop-lab.md)
 - **🚀 Następny rozdział**: [Rozdział 3: Konfiguracja](../chapter-03-configuration/configuration.md)
 
-Ten przewodnik zawiera szczegółowe instrukcje dotyczące wdrażania modeli AI za pomocą szablonów AZD, obejmując wszystko od wyboru modelu po wzorce wdrożenia produkcyjnego.
+Ten przewodnik zawiera kompleksowe instrukcje dotyczące wdrażania modeli AI za pomocą szablonów AZD, obejmujące wszystko od wyboru modelu po wzorce wdrożeń produkcyjnych.
+
+> **Uwaga o walidacji (2026-03-25):** Przepływ pracy AZD w tym przewodniku został sprawdzony z `azd` w wersji `1.23.12`. Dla wdrożeń AI zajmujących więcej czasu niż domyślne okno wdrożenia usługi, aktualne wydania AZD obsługują `azd deploy --timeout <seconds>`.
 
 ## Spis treści
 
 - [Strategia wyboru modelu](#strategia-wyboru-modelu)
 - [Konfiguracja AZD dla modeli AI](#konfiguracja-azd-dla-modeli-ai)
-- [Wzorce wdrożenia](#wzorce-wdrożenia)
+- [Wzorce wdrożeń](#wzorce-wdrożeń)
 - [Zarządzanie modelem](#zarządzanie-modelem)
-- [Rozważania produkcyjne](#rozważania-produkcyjne)
+- [Aspekty produkcyjne](#aspekty-produkcyjne)
 - [Monitorowanie i obserwowalność](#monitorowanie-i-obserwowalność)
 
 ## Strategia wyboru modelu
 
 ### Modele Microsoft Foundry
 
-Wybierz odpowiedni model do swojego zastosowania:
+Wybierz odpowiedni model do swojego przypadku użycia:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -41,9 +43,9 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
@@ -52,12 +54,12 @@ services:
 
 ### Planowanie pojemności modelu
 
-| Typ modelu | Zastosowanie | Zalecana pojemność | Uwagi kosztowe |
-|------------|--------------|--------------------|----------------|
-| gpt-4.1-mini | Czaty, pytania i odpowiedzi | 10-50 TPM | Koszt efektywny dla większości obciążeń |
-| gpt-4.1 | Złożone rozumowanie | 20-100 TPM | Wyższy koszt, stosować do funkcji premium |
-| Text-embedding-ada-002 | Wyszukiwanie, RAG | 30-120 TPM | Niezbędny do wyszukiwania semantycznego |
-| Whisper | Mowa na tekst | 10-50 TPM | Obciążenia związane z przetwarzaniem dźwięku |
+| Typ modelu | Przypadek użycia | Zalecana pojemność | Uwagi dotyczące kosztów |
+|------------|------------------|--------------------|------------------------|
+| gpt-4.1-mini | Czat, pytania i odpowiedzi | 10-50 TPM | Ekonomiczne dla większości obciążeń |
+| gpt-4.1 | Złożone wnioskowanie | 20-100 TPM | Wyższy koszt, stosuj dla funkcji premium |
+| text-embedding-3-large | Wyszukiwanie, RAG | 30-120 TPM | Dobry domyślny wybór do semantycznego wyszukiwania i pobierania |
+| Whisper | Mowa na tekst | 10-50 TPM | Obciążenia przetwarzania audio |
 
 ## Konfiguracja AZD dla modeli AI
 
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -131,12 +133,12 @@ Skonfiguruj środowisko aplikacji:
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Wzorce wdrożenia
+## Wzorce wdrożeń
 
-### Wzorzec 1: Wdrożenie w pojedynczym regionie
+### Wzorzec 1: Wdrożenie w jednym regionie
 
 ```yaml
 # azure.yaml - Single region
@@ -149,9 +151,9 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Najlepsze do:
+Najlepsze dla:
 - Rozwoju i testowania
-- Aplikacji na pojedynczy rynek
+- Aplikacji na pojedynczym rynku
 - Optymalizacji kosztów
 
 ### Wzorzec 2: Wdrożenie wieloregionowe
@@ -167,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Najlepsze do:
-- Globalnych aplikacji
-- Wymagań wysokiej dostępności
-- Rozłożenia obciążenia
+Najlepsze dla:
+- Aplikacji globalnych
+- Wysokiej dostępności
+- Rozkładu obciążenia
 
 ### Wzorzec 3: Wdrożenie hybrydowe
 
-Połącz Microsoft Foundry Models z innymi usługami AI:
+Połącz modele Microsoft Foundry z innymi usługami AI:
 
 ```bicep
 // Hybrid AI services
@@ -215,11 +217,11 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
@@ -227,7 +229,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Aktualizacje modelu
 
-Użyj hooków AZD do aktualizacji modeli:
+Używaj hooków AZD do aktualizacji modeli:
 
 ```bash
 #!/bin/bash
@@ -238,11 +240,14 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# Jeśli wdrożenie trwa dłużej niż domyślny limit czasu
+azd deploy --timeout 1800
 ```
 
-### Testowanie A/B
+### Testy A/B
 
-Wdrażaj wiele wersji modelu:
+Wdróż wiele wersji modelu:
 
 ```bicep
 param enableABTesting bool = false
@@ -264,14 +269,14 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Rozważania produkcyjne
+## Aspekty produkcyjne
 
 ### Planowanie pojemności
 
-Oblicz wymaganą pojemność na podstawie wzorców użytkowania:
+Oblicz wymaganą pojemność na podstawie wzorców użycia:
 
 ```python
-# Przykład kalkulacji pojemności
+# Przykład obliczania pojemności
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -295,7 +300,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### Konfiguracja autoskalowania
 
-Skonfiguruj autoskalowanie dla Container Apps:
+Skonfiguruj autoskalowanie dla aplikacji kontenerowych:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -333,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Optymalizacja kosztów
 
-Wdrażaj kontrolę kosztów:
+Wprowadzaj kontrole kosztów:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -367,7 +372,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Integracja Application Insights
 
-Skonfiguruj monitorowanie obciążeń AI:
+Skonfiguruj monitorowanie dla obciążeń AI:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -440,12 +445,12 @@ class AITelemetry:
         )
 ```
 
-### Kontrole stanu
+### Kontrole stanu zdrowia
 
-Wdróż monitorowanie stanu usług AI:
+Wdróż monitorowanie kondycji usług AI:
 
 ```python
-# Punkty końcowe kontroli stanu zdrowia
+# Punkty końcowe do sprawdzania stanu zdrowia
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -473,30 +478,30 @@ async def check_ai_models():
 
 ## Kolejne kroki
 
-1. **Przejrzyj [Przewodnik integracji Microsoft Foundry](microsoft-foundry-integration.md)** dla wzorców integracji usług
-2. **Ukończ [Laboratorium AI Workshop](ai-workshop-lab.md)** dla praktycznego doświadczenia
-3. **Wdróż [Praktyki produkcyjne AI](production-ai-practices.md)** dla wdrożeń korporacyjnych
-4. **Poznaj [Przewodnik rozwiązywania problemów AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** dla typowych problemów
+1. **Przejrzyj [Przewodnik integracji Microsoft Foundry](microsoft-foundry-integration.md)** dotyczący wzorców integracji usług  
+2. **Wykonaj [Warsztaty AI](ai-workshop-lab.md)**, aby zdobyć praktyczne doświadczenie  
+3. **Wdrażaj [praktyki produkcyjne AI](production-ai-practices.md)** dla rozwiązań przedsiębiorstw  
+4. **Poznaj [Przewodnik rozwiązywania problemów AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** dotyczący typowych problemów  
 
 ## Zasoby
 
 - [Dostępność modeli Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Dokumentacja Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Skalowanie Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [Optymalizacja kosztów modelu AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Skalowanie aplikacji kontenerowych](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Optymalizacja kosztów modeli AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **Nawigacja po rozdziale:**
-- **📚 Strona kursu głównego**: [AZD dla początkujących](../../README.md)
-- **📖 Bieżący rozdział**: Rozdział 2 - AI-First Development
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Aktualny rozdział**: Rozdział 2 - Rozwój z myślą o AI
 - **⬅️ Poprzedni**: [Integracja Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Następny**: [Laboratorium AI Workshop](ai-workshop-lab.md)
+- **➡️ Następny**: [Warsztaty AI](ai-workshop-lab.md)
 - **🚀 Następny rozdział**: [Rozdział 3: Konfiguracja](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Zastrzeżenie**:  
-Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczeń AI [Co-op Translator](https://github.com/Azure/co-op-translator). Choć dokładamy starań, aby tłumaczenie było jak najbardziej precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w języku źródłowym powinien być traktowany jako źródło wiążące. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanej przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+Dokument ten został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mimo że dążymy do dokładności, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w jego języku źródłowym powinien być uznawany za autorytatywne źródło. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

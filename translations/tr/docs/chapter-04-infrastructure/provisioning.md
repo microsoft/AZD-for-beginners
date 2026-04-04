@@ -1,43 +1,43 @@
-# Provisioning Azure Resources with AZD
+# AZD ile Azure Kaynaklarını Sağlama
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD Yeni Başlayanlar İçin](../../README.md)
-- **📖 Current Chapter**: Bölüm 4 - Kod Olarak Altyapı ve Dağıtım
-- **⬅️ Previous**: [Dağıtım Kılavuzu](deployment-guide.md)
-- **➡️ Next Chapter**: [Bölüm 5: Çok Ajanlı Yapay Zeka Çözümleri](../../examples/retail-scenario.md)
-- **🔧 Related**: [Bölüm 6: Dağıtımdan Önce Doğrulama](../chapter-06-pre-deployment/capacity-planning.md)
+**Bölüm Gezinme:**
+- **📚 Kurs Anasayfası**: [AZD Yeni Başlayanlar](../../README.md)
+- **📖 Geçerli Bölüm**: Bölüm 4 - Kod Olarak Altyapı ve Dağıtım
+- **⬅️ Önceki**: [Dağıtım Kılavuzu](deployment-guide.md)
+- **➡️ Sonraki Bölüm**: [Bölüm 5: Çok Ajanlı AI Çözümleri](../../examples/retail-scenario.md)
+- **🔧 İlgili**: [Bölüm 6: Dağıtımdan Önce Doğrulama](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Giriş
 
-Bu kapsamlı rehber, Azure Developer CLI kullanarak Azure kaynaklarını sağlama ve yönetme hakkında bilmeniz gereken her şeyi kapsar. Bicep, ARM şablonları, Terraform ve Pulumi kullanarak temel kaynak oluşturmadan gelişmiş kurumsal sınıf altyapı mimarilerine kadar Kod Olarak Altyapı (IaC) desenlerini uygulamayı öğrenin.
+Bu kapsamlı kılavuz, Azure Developer CLI kullanarak Azure kaynaklarını sağlamaya ve yönetmeye dair bilmeniz gereken her şeyi kapsar. Bicep, ARM şablonları, Terraform ve Pulumi kullanarak temel kaynak oluşturmadan gelişmiş kurumsal sınıf altyapı mimarilerine kadar Kod Olarak Altyapı (IaC) desenlerini uygulamayı öğrenin.
 
 ## Öğrenme Hedefleri
 
-Bu rehberi tamamlayarak:
-- Kod Olarak Altyapı ilkelerini ve Azure kaynak sağlamayı öğreneceksiniz
-- Azure Developer CLI tarafından desteklenen birden çok IaC sağlayıcısını anlayacaksınız
-- Yaygın uygulama mimarileri için Bicep şablonları tasarlayıp uygulayacaksınız
-- Kaynak parametreleri, değişkenler ve ortama özel ayarları yapılandıracaksınız
-- Ağ ve güvenlik dahil olmak üzere gelişmiş altyapı desenlerini uygulayacaksınız
-- Kaynak yaşam döngüsünü, güncellemeleri ve bağımlılık çözümlemesini yöneteceksiniz
+Bu kılavuzu tamamlayarak şunları yapabileceksiniz:
+- Kod Olarak Altyapı (IaC) ilkelerini ve Azure kaynak sağlama konularında uzmanlaşma
+- Azure Developer CLI tarafından desteklenen birden çok IaC sağlayıcısını anlama
+- Yaygın uygulama mimarileri için Bicep şablonları tasarlayıp uygulama
+- Kaynak parametrelerini, değişkenleri ve ortama özgü ayarları yapılandırma
+- Ağ ve güvenlik dahil gelişmiş altyapı desenlerini uygulama
+- Kaynak yaşam döngüsünü, güncellemeleri ve bağımlılık çözümlemesini yönetme
 
 ## Öğrenme Çıktıları
 
-Tamamlandığında, şunları yapabileceksiniz:
-- Bicep ve ARM şablonları kullanarak Azure altyapısı tasarlayıp sağlamak
-- Uygun kaynak bağımlılıklarıyla karmaşık çok hizmetli mimarileri yapılandırmak
+Tamamladıktan sonra şunları yapabileceksiniz:
+- Bicep ve ARM şablonları kullanarak Azure altyapısını tasarlamak ve sağlamak
+- Doğru kaynak bağımlılıklarına sahip karmaşık çok servisli mimarileri yapılandırmak
 - Birden çok ortam ve yapılandırma için parametreleştirilmiş şablonlar uygulamak
 - Altyapı sağlama sorunlarını giderip dağıtım hatalarını çözmek
-- Altyapı tasarımında Azure Well-Architected Framework ilkelerini uygulamak
+- Altyapı tasarımına Azure Well-Architected Framework ilkelerini uygulamak
 - Altyapı güncellemelerini yönetmek ve altyapı sürümleme stratejileri uygulamak
 
-## Altyapı Sağlama Genel Bakış
+## Altyapı Sağlama Genel Bakışı
 
 Azure Developer CLI birden çok Kod Olarak Altyapı (IaC) sağlayıcısını destekler:
-- **Bicep** (önerilen) - Azure'ın alan özel dili
+- **Bicep** (önerilir) - Azure'ın alan özgü dili
 - **ARM Templates** - JSON tabanlı Azure Resource Manager şablonları
-- **Terraform** - Çok bulutlu altyapı aracı
-- **Pulumi** - Programlama dilleriyle modern kod olarak altyapı
+- **Terraform** - Çoklu bulut altyapı aracı
+- **Pulumi** - Programlama dilleriyle modern altyapı olarak kod
 
 ## Azure Kaynaklarını Anlama
 
@@ -298,7 +298,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Güvenlik ve Gizli Bilgiler Yönetimi
+## 🔒 Güvenlik ve Gizli Bilgi Yönetimi
 
 ### Key Vault Entegrasyonu
 ```bicep
@@ -561,7 +561,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Ortam Özel Yapılandırmalar
+## 🔧 Ortam Bazlı Yapılandırmalar
 
 ### Farklı Ortamlar için Parametre Dosyaları
 ```json
@@ -651,7 +651,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 
 ## 🚀 Gelişmiş Sağlama Desenleri
 
-### Çok Bölgeli Dağıtım
+### Çok Bölge Dağıtımı
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -755,42 +755,41 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 Altyapı Önizleme ve Doğrulama (YENİ)
+## 🧪 Altyapı Önizlemesi ve Doğrulama (YENİ)
 
 ### Dağıtımdan Önce Altyapı Değişikliklerini Önizleyin
 
-`azd provision --preview` özelliği, kaynakları gerçekten dağıtmadan önce altyapı sağlama işlemini **simüle etmenizi** sağlar. Bu, `terraform plan` veya `bicep what-if` ile benzer bir ruh taşır ve Azure ortamınızda hangi değişikliklerin yapılacağına dair bir **kuru çalıştırma görünümü** sağlar.
+`azd provision --preview` özelliği, kaynakları gerçekten dağıtmadan önce altyapı sağlama işlemini **simüle etmenizi** sağlar. Bu, ruh itibarıyla `terraform plan` veya `bicep what-if` ile benzerdir ve Azure ortamınıza yapılacak değişikliklerin **kuru çalıştırma görünümünü** sağlar.
 
 #### 🛠️ Ne Yapar
-- **IaC şablonlarınızı analiz eder** (Bicep veya Terraform)
-- **Kaynak değişikliklerinin bir önizlemesini gösterir**: eklemeler, silmeler, güncellemeler
-- **Değişiklikleri uygulamaz** — salt okunurdur ve çalıştırılması güvenlidir
+- IaC şablonlarınızı (Bicep veya Terraform) analiz eder
+- Kaynak değişikliklerinin bir önizlemesini gösterir: eklemeler, silmeler, güncellemeler
+- Değişiklikleri uygulamaz — salt okunurdur ve çalıştırılması güvenlidir
 
-#### � Kullanım Durumları
+#### Kullanım Durumları
 ```bash
-# Dağıtımdan önce altyapı değişikliklerini önizle
+# Dağıtımdan önce altyapı değişikliklerini önizleyin
 azd provision --preview
 
-# Ayrıntılı çıktı ile önizle
-azd provision --preview --output json
-
-# Belirli bir ortam için önizle
-azd provision --preview --environment production
+# Belirli bir ortam için önizleme
+azd provision --preview -e production
 ```
 
 Bu komut size yardımcı olur:
-- **Kaynakları taahhüt etmeden önce** altyapı değişikliklerini doğrulamak
-- **Geliştirme döngüsünde yanlış yapılandırmaları** erken yakalamak
-- **Ekip ortamlarında güvenli işbirliği** yapmak
-- **Sürprizler olmadan en az ayrıcalıklı dağıtımları** sağlamak
+- **Kaynakları dağıtmadan önce altyapı değişikliklerini doğrulayın**
+- **Yanlış yapılandırmaları geliştirme döngüsünün erken aşamasında yakalayın**
+- **Takım ortamlarında güvenle işbirliği yapın**
+- **Sürpriz olmadan en az ayrıcalıklı dağıtımları sağlayın**
 
-Özellikle şu durumlarda yararlıdır:
-- Karmaşık çok hizmetli ortamlarla çalışırken
-- Üretim altyapısında değişiklik yaparken
-- Şablon değişikliklerini PR onayından önce doğrularken
+Özellikle şu durumlarda kullanışlıdır:
+- Karmaşık çok servisli ortamlarla çalışırken
+- Üretim altyapısında değişiklikler yaparken
+- PR onayı öncesinde şablon değişikliklerini doğrularken
 - Yeni ekip üyelerini altyapı desenleri konusunda eğitirken
 
 ### Örnek Önizleme Çıktısı
+Tam önizleme çıktısı sağlayıcıya ve proje yapısına göre değişir, ancak sonuç, herhangi bir şey uygulanmadan önce önerilen değişiklikleri açıkça tanımlamalıdır.
+
 ```bash
 $ azd provision --preview
 
@@ -809,13 +808,12 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
 ```
 
-## �🔄 Kaynak Güncellemeleri ve Geçişler
+## �🔄 Kaynak Güncellemeleri ve Geçişleri
 
 ### Güvenli Kaynak Güncellemeleri
 ```bash
@@ -825,7 +823,7 @@ azd provision --preview
 # Önizleme onayından sonra değişiklikleri uygulayın
 azd provision --confirm-with-no-prompt
 
-# Geri alma durumunda altyapı değişikliklerini geri almak için Git'i kullanın:
+# Geri alma için altyapı değişikliklerini geri döndürmek üzere Git'i kullanın:
 git revert HEAD  # Son altyapı commit'ini geri alın
 azd provision    # Önceki altyapı durumunu uygulayın
 ```
@@ -919,26 +917,26 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ## Sonraki Adımlar
 
 - [Dağıtımdan Önce Planlama](../chapter-06-pre-deployment/capacity-planning.md) - Kaynak kullanılabilirliğini doğrulayın
-- [Yaygın Sorunlar](../chapter-07-troubleshooting/common-issues.md) - Altyapı problemlerini giderin
-- [Hata Ayıklama Rehberi](../chapter-07-troubleshooting/debugging.md) - Sağlama sorunlarını hata ayıklayın
+- [Yaygın Sorunlar](../chapter-07-troubleshooting/common-issues.md) - Altyapı sorunlarını giderin
+- [Hata Ayıklama Kılavuzu](../chapter-07-troubleshooting/debugging.md) - Sağlama sorunlarını hata ayıklayın
 - [SKU Seçimi](../chapter-06-pre-deployment/sku-selection.md) - Uygun hizmet katmanlarını seçin
 
 ## Ek Kaynaklar
 
-- [Azure Bicep Belgeleri](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure Bicep Dokümantasyonu](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Resource Manager Şablonları](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure Mimari Merkezi](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure İyi Mimarili Çerçeve](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **Gezinme**
 - **Önceki Ders**: [Dağıtım Kılavuzu](deployment-guide.md)
-- **Sonraki Ders**: [Kapasite Planlaması](../chapter-06-pre-deployment/capacity-planning.md)
+- **Sonraki Ders**: [Kapasite Planlama](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Feragatname:
-Bu belge, yapay zeka çeviri hizmeti Co-op Translator (https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilindeki hâli yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanılması sonucu oluşabilecek yanlış anlaşılma veya yanlış yorumlamalardan sorumlu değiliz.
+**Feragatname**:
+Bu belge, [Co-op Translator](https://github.com/Azure/co-op-translator) adlı yapay zeka çeviri hizmeti kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilindeki haliyle yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı nedeniyle ortaya çıkabilecek herhangi bir yanlış anlaşılma veya yanlış yorumdan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
