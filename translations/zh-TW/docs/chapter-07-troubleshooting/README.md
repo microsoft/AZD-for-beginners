@@ -1,43 +1,49 @@
-# 第7章：疑難排解與除錯
+# 第7章：故障排除與除錯
 
-**📚 課程**: [AZD For Beginners](../../README.md) | **⏱️ 時間長度**: 1-1.5 小時 | **⭐ 複雜度**: 中階
+**📚 課程**: [Azure Developer CLI 初學者指南](../../README.md) | **⏱️ 時長**: 1-1.5 小時 | **⭐ 難度**: 中階
 
 ---
 
-## 概覽
+## 概述
 
-本章幫助你診斷並解決使用 Azure Developer CLI 時常見的問題。從部署失敗到 AI 特定問題。
+本章協助您診斷並解決使用 Azure Developer CLI 時常見的問題。涵蓋從部署失敗到 AI 專屬的問題。
+
+> 經過 `azd 1.23.12` 於 2026 年 3 月驗證。
 
 ## 學習目標
 
-完成本章後，你將能：
-- 診斷常見的 AZD 部署失敗
-- 除錯驗證與權限問題
+完成本章後，您將能夠：
+- 診斷常見 AZD 部署失敗問題
+- 除錯身份驗證與權限問題
 - 解決 AI 服務連線問題
-- 使用 Azure 入口網站與 CLI 進行故障排除
+- 使用 Azure 入口網站及 CLI 進行故障排除
 
 ---
 
-## 📚 課程
+## 📚 課程列表
 
 | # | 課程 | 說明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [Common Issues](common-issues.md) | 常見問題 | 30 min |
-| 2 | [Debugging Guide](debugging.md) | 逐步除錯策略 | 45 min |
-| 3 | [AI Troubleshooting](ai-troubleshooting.md) | AI 特定問題疑難排解 | 30 min |
+| 1 | [常見問題](common-issues.md) | 常遇到的問題 | 30 分鐘 |
+| 2 | [除錯指南](debugging.md) | 逐步除錯策略 | 45 分鐘 |
+| 3 | [AI 故障排除](ai-troubleshooting.md) | AI 專屬問題 | 30 分鐘 |
 
 ---
 
 ## 🚨 快速修復
 
-### 驗證問題
+### 身份驗證問題
 ```bash
+# AZD 工作流程所需
 azd auth login
+
+# 如果您也直接使用 Azure CLI 命令，則為可選項
 az login
-azd auth whoami
+
+azd auth status
 ```
 
-### 佈建失敗
+### 設備佈署失敗
 ```bash
 azd show
 azd monitor --logs
@@ -62,36 +68,36 @@ azd up
 
 ## 📋 錯誤代碼參考
 
-| 錯誤 | 原因 | 解決方案 |
+| 錯誤 | 原因 | 解決方法 |
 |-------|-------|----------|
-| `AuthenticationError` | 未登入 | `azd auth login` |
+| `AuthenticationError` | 尚未登入 | `azd auth login` |
 | `ResourceNotFound` | 資源不存在 | 檢查資源名稱 |
-| `QuotaExceeded` | 訂閱限制 | 申請提高配額 |
+| `QuotaExceeded` | 訂閱限制 | 請求配額提升 |
 | `InvalidTemplate` | Bicep 語法錯誤 | `az bicep build` |
 | `Conflict` | 資源已存在 | 使用新名稱或刪除 |
 | `Forbidden` | 權限不足 | 檢查 RBAC 角色 |
 
 ---
 
-## 🔄 重設與復原
+## 🔄 重置與復原
 
 ```bash
 # 軟重置（保留資源，重新部署程式碼）
 azd deploy --force
 
-# 硬重置（刪除所有內容，從頭開始）
+# 硬重置（刪除所有內容，重新開始）
 azd down --force --purge
 azd up
 ```
 
 ---
 
-## 🔗 導航
+## 🔗 導覽
 
 | 方向 | 章節 |
 |-----------|---------|
-| **上一章** | [第6章：預部署](../chapter-06-pre-deployment/README.md) |
-| **下一章** | [第8章：生產環境](../chapter-08-production/README.md) |
+| <strong>上一章</strong> | [第6章：預部署](../chapter-06-pre-deployment/README.md) |
+| <strong>下一章</strong> | [第8章：生產環境](../chapter-08-production/README.md) |
 
 ---
 
@@ -99,11 +105,11 @@ azd up
 
 - [預部署檢查](../chapter-06-pre-deployment/preflight-checks.md)
 - [設定指南](../chapter-03-configuration/configuration.md)
-- [AZD GitHub 問題](https://github.com/Azure/azure-dev/issues)
+- [AZD GitHub 問題集](https://github.com/Azure/azure-dev/issues)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責聲明**：
-本文件是使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，但請注意自動翻譯可能包含錯誤或不精確之處。原始文件的母語版本應視為具權威性的版本。對於關鍵資訊，建議採用專業人工翻譯。我們對因使用此翻譯而導致的任何誤解或曲解不負任何責任。
+**免責聲明**：  
+本文件係使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，但請注意自動翻譯可能包含錯誤或不準確之處。原始文件之母語版本應視為權威來源。對於關鍵資訊，建議採用專業人工翻譯。我們不對因使用本翻譯而引起之任何誤解或誤譯負責。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

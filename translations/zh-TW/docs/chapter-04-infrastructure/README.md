@@ -1,28 +1,30 @@
-# 第 4 章：基礎設施即程式碼與部署
+# 第4章：基礎架構即程式碼與部署
 
-**📚 課程**: [AZD 新手入門](../../README.md) | **⏱️ 時間**: 1-1.5 小時 | **⭐ 複雜度**: 中階
+**📚 課程**: [初學者的 AZD](../../README.md) | **⏱️ 時長**: 1-1.5 小時 | **⭐ 難度**: 中級
 
 ---
 
 ## 概覽
 
-本章涵蓋使用 Bicep 範本的基礎設施即程式碼 (IaC) 範式、資源佈建，以及使用 Azure Developer CLI 的部署策略。
+本章涵蓋使用 Bicep 範本的基礎架構即程式碼 (IaC) 模式、資源配置，以及使用 Azure Developer CLI 的部署策略。
+
+> 於 2026 年 3 月，以 `azd 1.23.12` 版本驗證。
 
 ## 學習目標
 
-By completing this chapter, you will:
-- 了解 Bicep 範本的結構與語法
-- 使用 `azd provision` 佈建 Azure 資源
+完成本章後，您將能：
+- 了解 Bicep 範本結構與語法
+- 使用 `azd provision` 配置 Azure 資源
 - 使用 `azd deploy` 部署應用程式
-- 實作藍綠部署與滾動部署策略
+- 實作藍綠部署和滾動部署策略
 
 ---
 
-## 📚 課程
+## 📚 課程內容
 
-| # | 課程 | 描述 | 時間 |
+| # | 課程 | 說明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [資源佈建](provisioning.md) | 使用 AZD 管理 Azure 資源 | 45 分鐘 |
+| 1 | [資源配置](provisioning.md) | 使用 AZD 管理 Azure 資源 | 45 分鐘 |
 | 2 | [部署指南](deployment-guide.md) | 應用程式部署策略 | 45 分鐘 |
 
 ---
@@ -33,16 +35,16 @@ By completing this chapter, you will:
 # 從範本初始化
 azd init --template azure-functions-python-v2-http
 
-# 預覽即將建立的項目
+# 預覽將要建立的內容
 azd provision --preview
 
-# 僅佈建基礎架構
+# 僅配置基礎設施
 azd provision
 
 # 僅部署程式碼
 azd deploy
 
-# 或兩者一起
+# 或者同時進行兩者
 azd up
 ```
 
@@ -65,14 +67,14 @@ my-project/
 
 ---
 
-## 🔧 基本指令
+## 🔧 常用指令
 
 | 指令 | 說明 |
 |---------|-------------|
 | `azd init` | 初始化專案 |
 | `azd provision` | 建立 Azure 資源 |
 | `azd deploy` | 部署應用程式程式碼 |
-| `azd up` | provision + deploy |
+| `azd up` | 配置 + 部署 |
 | `azd down` | 刪除所有資源 |
 
 ---
@@ -81,20 +83,20 @@ my-project/
 
 | 方向 | 章節 |
 |-----------|---------|
-| **上一章** | [第 3 章：設定](../chapter-03-configuration/README.md) |
-| **下一章** | [第 5 章：多代理解決方案](../chapter-05-multi-agent/README.md) |
+| <strong>上一章</strong> | [第3章：設定](../chapter-03-configuration/README.md) |
+| <strong>下一章</strong> | [第5章：多代理解決方案](../chapter-05-multi-agent/README.md) |
 
 ---
 
 ## 📖 相關資源
 
 - [部署前檢查](../chapter-06-pre-deployment/README.md)
-- [容器應用範例](../../examples/container-app/README.md)
-- [資料庫應用範例](../../examples/database-app/README.md)
+- [容器應用程式範例](../../examples/container-app/README.md)
+- [資料庫應用程式範例](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責聲明：
-本文件使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，但請注意自動翻譯可能包含錯誤或不精確之處。原始文件（原文）應視為具權威性的來源。對於重要資訊，建議採用專業人工翻譯。我們不對因使用本翻譯而產生的任何誤解或誤釋負責。
+**免責聲明**：  
+本文件係使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們努力追求準確性，但請注意自動翻譯可能包含錯誤或不準確之處。原始文件的原文版本應視為權威來源。對於關鍵資訊，建議採用專業人工翻譯。我們概不對因使用本翻譯所產生的任何誤解或誤譯負責。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

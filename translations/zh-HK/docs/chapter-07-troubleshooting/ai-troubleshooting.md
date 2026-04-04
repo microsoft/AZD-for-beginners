@@ -1,51 +1,51 @@
-# AI 專用疑難排解指南
+# 專為 AI 的疑難排解指南
 
-**章節導航：**
-- **📚 課程首頁**：[AZD 新手指南](../../README.md)
-- **📖 目前章節**：第 7 章 - 疑難排解與除錯
-- **⬅️ 上一章**：[除錯指南](debugging.md)
-- **➡️ 下一章**：[第 8 章：生產與企業範例](../chapter-08-production/production-ai-practices.md)
-- **🤖 相關章節**：[第 2 章：AI優先開發](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**章節導航:**
+- **📚 課程主頁**: [AZD For Beginners](../../README.md)
+- **📖 當前章節**: 第7章 - 疑難排解與偵錯
+- **⬅️ 上一章**: [Debugging Guide](debugging.md)
+- **➡️ 下一章**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
+- **🤖 相關**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-此綜合性疑難排解指南針對使用 AZD 部署 AI 解決方案時常見問題，提供 Azure AI 服務專屬的解決方案與除錯技巧。
+此全面的疑難排解指南涵蓋使用 AZD 部署 AI 解決方案時常見的問題，並提供針對 Azure AI 服務的解決方案與偵錯技巧。
 
 ## 目錄
 
-- [Microsoft Foundry Models 服務問題](#azure-openai-service-issues)
+- [Microsoft Foundry 模型服務問題](#azure-openai-service-issues)
 - [Azure AI 搜尋問題](#azure-ai-搜尋問題)
 - [Container Apps 部署問題](#container-apps-部署問題)
-- [身份驗證與權限錯誤](#身份驗證與權限錯誤)
+- [驗證與權限錯誤](#驗證與權限錯誤)
 - [模型部署失敗](#模型部署失敗)
 - [效能與擴充問題](#效能與擴充問題)
 - [成本與配額管理](#成本與配額管理)
-- [除錯工具與技術](#除錯工具與技術)
+- [偵錯工具與技巧](#偵錯工具與技巧)
 
-## Microsoft Foundry Models 服務問題
+## Microsoft Foundry 模型服務問題
 
-### 問題：OpenAI 服務於該區域無法使用
+### 問題：OpenAI 服務在該區域不可用
 
-**現象：**
+**症狀:**
 ```
 Error: The requested resource type is not available in the location 'westus'
 ```
 
-**原因：**
-- Microsoft Foundry Models 於選定區域未開放
-- 偏好區域配額耗盡
+**原因:**
+- Microsoft Foundry 模型在所選區域不可用
+- 首選區域的配額已耗盡
 - 區域容量限制
 
-**解決方案：**
+**解決方法:**
 
-1. **檢查區域可用性：**
+1. **檢查區域可用性:**
 ```bash
-# 列出 OpenAI 可用地區
+# 列出 OpenAI 可用的地區
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
   --output table
 ```
 
-2. **更新 AZD 配置：**
+2. **更新 AZD 組態:**
 ```yaml
 # azure.yaml - Force specific region
 infra:
@@ -56,7 +56,7 @@ parameters:
   location: "eastus2"  # Known working region
 ```
 
-3. **使用其他區域：**
+3. **使用替代區域:**
 ```bicep
 // infra/main.bicep - Multi-region fallback
 @allowed([
@@ -68,16 +68,16 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### 問題：模型部署配額超過
+### 問題：模型部署配額超出
 
-**現象：**
+**症狀:**
 ```
 Error: Deployment failed due to insufficient quota
 ```
 
-**解決方案：**
+**解決方法:**
 
-1. **檢查當前配額：**
+1. **檢查目前配額:**
 ```bash
 # 檢查配額使用情況
 az cognitiveservices usage list \
@@ -85,9 +85,9 @@ az cognitiveservices usage list \
   --resource-group YOUR_RG
 ```
 
-2. **申請配額提升：**
+2. **申請配額增加:**
 ```bash
-# 提交配額提升請求
+# 提交配額增加申請
 az support tickets create \
   --ticket-name "OpenAI Quota Increase" \
   --description "Need increased quota for production deployment" \
@@ -95,7 +95,7 @@ az support tickets create \
   --problem-classification "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/quota_service_problemClassification_guid"
 ```
 
-3. **優化模型容量：**
+3. **優化模型容量:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
@@ -113,22 +113,22 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }
 ```
 
-### 問題：API 版本無效
+### 問題：無效的 API 版本
 
-**現象：**
+**症狀:**
 ```
 Error: The API version '2023-05-15' is not available for OpenAI
 ```
 
-**解決方案：**
+**解決方法:**
 
-1. **使用支援的 API 版本：**
+1. **使用支援的 API 版本:**
 ```python
-# 使用最新支持版本
+# 使用最新受支援的版本
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
-2. **檢查 API 版本相容性：**
+2. **檢查 API 版本相容性:**
 ```bash
 # 列出支援的 API 版本
 az rest --method get \
@@ -138,16 +138,16 @@ az rest --method get \
 
 ## Azure AI 搜尋問題
 
-### 問題：搜尋服務定價層不足
+### 問題：搜尋服務的定價層不足
 
-**現象：**
+**症狀:**
 ```
 Error: Semantic search requires Basic tier or higher
 ```
 
-**解決方案：**
+**解決方法:**
 
-1. **升級定價層：**
+1. **升級定價層:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -165,7 +165,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **禁用語意搜尋（開發階段）：**
+2. **停用語意搜尋（開發）:**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -181,22 +181,22 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 
 ### 問題：索引建立失敗
 
-**現象：**
+**症狀:**
 ```
 Error: Cannot create index, insufficient permissions
 ```
 
-**解決方案：**
+**解決方法:**
 
-1. **確認搜尋服務金鑰：**
+1. **驗證搜尋服務金鑰:**
 ```bash
-# 獲取搜索服務管理員金鑰
+# 取得搜尋服務管理員金鑰
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
 ```
 
-2. **檢查索引架構：**
+2. **檢查索引結構:**
 ```python
 # 驗證索引結構
 from azure.search.documents.indexes import SearchIndexClient
@@ -212,7 +212,7 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **使用管理身分識別：**
+3. **使用 Managed Identity:**
 ```bicep
 // Grant search permissions to managed identity
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -228,16 +228,16 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 
 ## Container Apps 部署問題
 
-### 問題：容器建置失敗
+### 問題：容器構建失敗
 
-**現象：**
+**症狀:**
 ```
 Error: Failed to build container image
 ```
 
-**解決方案：**
+**解決方法:**
 
-1. **檢查 Dockerfile 語法：**
+1. **檢查 Dockerfile 語法:**
 ```dockerfile
 # Dockerfile - Python AI app example
 FROM python:3.11-slim
@@ -259,7 +259,7 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **驗證依賴關係：**
+2. **驗證相依性:**
 ```txt
 # requirements.txt - Pin versions for stability
 fastapi==0.104.1
@@ -271,7 +271,7 @@ azure-search-documents==11.4.0
 azure-cosmos==4.5.1
 ```
 
-3. **新增健康檢查：**
+3. **新增健康檢查:**
 ```python
 # main.py - 新增健康檢查端點
 from fastapi import FastAPI
@@ -283,16 +283,16 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### 問題：Container App 啟動失敗
+### 問題：容器應用啟動失敗
 
-**現象：**
+**症狀:**
 ```
 Error: Container failed to start within timeout period
 ```
 
-**解決方案：**
+**解決方法:**
 
-1. **延長啟動逾時時間：**
+1. **增加啟動逾時:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -325,9 +325,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **優化模型載入：**
+2. **優化模型載入:**
 ```python
-# 懶加載模型以減少啟動時間
+# 延遲載入模型以減少啟動時間
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -341,7 +341,7 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # 在這裡初始化 AI 用戶端
+        # 在此初始化 AI 客戶端
         pass
 
 @asynccontextmanager
@@ -355,26 +355,26 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 ```
 
-## 身份驗證與權限錯誤
+## 驗證與權限錯誤
 
-### 問題：管理身分識別權限被拒
+### 問題：Managed Identity 權限被拒
 
-**現象：**
+**症狀:**
 ```
 Error: Authentication failed for Microsoft Foundry Models Service
 ```
 
-**解決方案：**
+**解決方法:**
 
-1. **確認角色指派：**
+1. **驗證角色指派:**
 ```bash
-# 檢查當前角色分配
+# 檢查目前的角色指派
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **指派所需角色：**
+2. **指派所需角色:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -391,9 +391,9 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-3. **測試身份驗證：**
+3. **測試驗證:**
 ```python
-# 測試託管身份驗證
+# 測試託管身分識別驗證
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
@@ -408,14 +408,14 @@ async def test_authentication():
 
 ### 問題：Key Vault 存取被拒
 
-**現象：**
+**症狀:**
 ```
 Error: The user, group or application does not have secrets get permission
 ```
 
-**解決方案：**
+**解決方法:**
 
-1. **授予 Key Vault 權限：**
+1. **授予 Key Vault 權限:**
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -434,7 +434,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **改用 RBAC 取代存取政策：**
+2. **使用 RBAC 取代 Access Policies:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -451,14 +451,14 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 
 ### 問題：模型版本不可用
 
-**現象：**
+**症狀:**
 ```
 Error: Model version 'gpt-4-32k' is not available
 ```
 
-**解決方案：**
+**解決方法:**
 
-1. **檢查可用模型：**
+1. **檢查可用模型:**
 ```bash
 # 列出可用的模型
 az cognitiveservices account list-models \
@@ -468,7 +468,7 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **使用模型回退方案：**
+2. **使用模型回退:**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
@@ -479,8 +479,8 @@ param primaryModel object = {
 
 @description('Fallback model configuration')
 param fallbackModel object = {
-  name: 'gpt-35-turbo'
-  version: '0125'
+  name: 'gpt-4.1'
+  version: '2024-08-06'
 }
 
 // Try primary model first, fallback if unavailable
@@ -497,7 +497,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 }
 ```
 
-3. **部署前驗證模型：**
+3. **在部署前驗證模型:**
 ```python
 # 部署前模型驗證
 import httpx
@@ -523,16 +523,16 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 ### 問題：高延遲回應
 
-**現象：**
-- 回應時間超過 30 秒
+**症狀:**
+- 回應時間 > 30 秒
 - 逾時錯誤
-- 用戶體驗不佳
+- 不佳的使用者體驗
 
-**解決方案：**
+**解決方法:**
 
-1. **實作請求逾時設定：**
+1. **實作請求逾時:**
 ```python
-# 設定適當的超時時間
+# 設定適當的逾時
 import httpx
 
 client = httpx.AsyncClient(
@@ -545,9 +545,9 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **新增回應快取：**
+2. **加入回應快取:**
 ```python
-# 用於回應的 Redis 快取
+# 回應的 Redis 快取
 import redis.asyncio as redis
 import json
 
@@ -565,7 +565,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **配置自動縮放：**
+3. **設定自動伸縮:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -599,16 +599,16 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### 問題：記憶體耗盡錯誤
+### 問題：記憶體不足錯誤
 
-**現象：**
+**症狀:**
 ```
 Error: Container killed due to memory limit exceeded
 ```
 
-**解決方案：**
+**解決方法:**
 
-1. **增加記憶體配置：**
+1. **增加記憶體配置:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -627,9 +627,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **優化記憶體使用：**
+2. **優化記憶體使用:**
 ```python
-# 節省記憶體嘅模型處理
+# 節省記憶體的模型處理
 import gc
 import psutil
 
@@ -639,32 +639,32 @@ class MemoryOptimizedAI:
         
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # 處理前檢查記憶體使用情況
+        # 處理前檢查記憶體使用量
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # 強制進行垃圾回收
+            gc.collect()  # 強制觸發垃圾回收
             
         result = await self._process_ai_request(request)
         
-        # 處理後清理環境
+        # 處理後清理
         gc.collect()
         return result
 ```
 
 ## 成本與配額管理
 
-### 問題：意外高額費用
+### 問題：意外的高額費用
 
-**現象：**
-- Azure 訂單金額高於預期
-- 令牌使用量超出估算
+**症狀:**
+- Azure 帳單高於預期
+- 令牌使用超出預估
 - 預算警示觸發
 
-**解決方案：**
+**解決方法:**
 
-1. **實施成本控制：**
+1. **實施成本控制:**
 ```python
-# 代幣使用量追蹤
+# 追蹤 Token 使用情況
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -681,7 +681,7 @@ class TokenTracker:
         return total_tokens
 ```
 
-2. **設置成本警示：**
+2. **設定成本警示:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
@@ -706,28 +706,25 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-3. **優化模型選擇：**
+3. **優化模型選擇:**
 ```python
-# 成本感知模型選擇
-MODEL_COSTS = {
-    'gpt-4.1-mini': 0.00015,  # 每 1,000 個標記
-    'gpt-4.1': 0.03,          # 每 1,000 個標記
-    'gpt-35-turbo': 0.0015  # 每 1,000 個標記
+# 考慮成本的模型選擇
+MODEL_COST_TIERS = {
+  'gpt-4.1-mini': 'low',
+  'gpt-4.1': 'high'
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
     """Select model based on complexity and budget."""
     if complexity == 'simple' or budget_remaining < 10:
         return 'gpt-4.1-mini'
-    elif complexity == 'medium':
-        return 'gpt-35-turbo'
     else:
         return 'gpt-4.1'
 ```
 
-## 除錯工具與技術
+## 偵錯工具與技巧
 
-### AZD 除錯指令
+### AZD 偵錯指令
 
 ```bash
 # 啟用詳細日誌記錄
@@ -736,44 +733,44 @@ azd up --debug
 # 檢查部署狀態
 azd show
 
-# 查看應用程式日誌（打開監控儀表板）
+# 檢視應用程式日誌 (會開啟監控儀表板)
 azd monitor --logs
 
-# 查看即時指標
+# 檢視即時指標
 azd monitor --live
 
 # 檢查環境變數
 azd env get-values
 ```
 
-### AZD AI 擴充診斷指令
+### 用於診斷的 AZD AI 擴充指令
 
-若您是使用 `azd ai agent init` 部署代理，還可使用以下工具：
+如果你使用 `azd ai agent init` 部署了代理，這些額外工具可用：
 
 ```bash
-# 確保已安裝代理擴充功能
+# 確保已安裝 agents 擴充功能
 azd extension install azure.ai.agents
 
-# 從清單重新初始化或更新代理
+# 從 manifest 檔案重新初始化或更新 agent
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
 # 使用 MCP 伺服器讓 AI 工具查詢專案狀態
 azd mcp start
 
-# 生成基礎設施檔案以供審查和審核
+# 生成基礎架構檔案以供審閱及稽核
 azd infra generate
 ```
 
-> **提示：** 使用 `azd infra generate` 將 IaC 寫入磁碟，這樣您可以精確檢查所佈署的資源，對除錯資源配置問題極其重要。詳情請參閱 [AZD AI CLI 參考](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) 。
+> **提示：** 使用 `azd infra generate` 將 IaC 寫到磁碟，這樣你可以檢查實際佈建了哪些資源。這在排查資源配置問題時非常重要。請參閱 [AZD AI CLI 參考](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) 以取得完整細節。
 
-### 應用程式除錯
+### 應用程式偵錯
 
-1. **結構化日誌：**
+1. **結構化日誌:**
 ```python
 import logging
 import json
 
-# 配置 AI 應用程式的結構化日誌記錄
+# 為 AI 應用程式設定結構化日誌
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -792,14 +789,14 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **健康檢查端點：**
+2. **健康檢查端點:**
 ```python
 @app.get("/debug/health")
 async def detailed_health_check():
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # 檢查 OpenAI 連線
+    # 檢查 OpenAI 連線狀態
     try:
         client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
         await client.models.list()
@@ -821,7 +818,7 @@ async def detailed_health_check():
     return checks
 ```
 
-3. **效能監控：**
+3. **效能監控:**
 ```python
 import time
 from functools import wraps
@@ -852,43 +849,43 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## 常見錯誤代碼與解決方案
+## 常見錯誤代碼與解決方法
 
-| 錯誤代碼 | 說明 | 解決方案 |
+| 錯誤代碼 | 說明 | 解決方法 |
 |------------|-------------|----------|
-| 401 | 未授權 | 檢查 API 金鑰與管理身分識別配置 |
-| 403 | 禁止訪問 | 驗證 RBAC 角色指派 |
-| 429 | 請求速率限制 | 實作指數退避重試邏輯 |
+| 401 | 未授權 | 檢查 API 金鑰和 Managed Identity 設定 |
+| 403 | 禁止 | 驗證 RBAC 角色指派 |
+| 429 | 速率限制 | 實作帶指數回退的重試邏輯 |
 | 500 | 內部伺服器錯誤 | 檢查模型部署狀態與日誌 |
-| 503 | 服務不可用 | 檢查服務健康狀況與區域可用性 |
+| 503 | 服務不可用 | 檢查服務健康與區域可用性 |
 
 ## 下一步
 
-1. **檢視 [AI 模型部署指南](../chapter-02-ai-development/ai-model-deployment.md)** 以掌握部署最佳實務
-2. **完成 [生產 AI 實踐](../chapter-08-production/production-ai-practices.md)** 以打造企業級解決方案
-3. **加入 [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** 獲取社群支援
-4. <strong>提交問題</strong> 至 [AZD GitHub 儲存庫](https://github.com/Azure/azure-dev) 報告 AZD 相關問題
+1. **檢閱 [AI Model Deployment Guide](../chapter-02-ai-development/ai-model-deployment.md)** 以了解部署最佳實踐
+2. **完成 [Production AI Practices](../chapter-08-production/production-ai-practices.md)** 以取得企業就緒的解決方案
+3. **加入 [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** 以取得社群支援
+4. **向 [AZD GitHub 儲存庫](https://github.com/Azure/azure-dev) 提交問題** 以回報 AZD 相關問題
 
 ## 資源
 
-- [Microsoft Foundry Models 服務疑難排解](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [Container Apps 疑難排解](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Azure AI 搜尋疑難排解](https://learn.microsoft.com/azure/search/search-monitor-logs)
-- [**Azure 診斷代理技能**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - 在您的編輯器安裝 Azure 疑難排解技能：`npx skills add microsoft/github-copilot-for-azure`
+- [Microsoft Foundry Models Service Troubleshooting](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Azure AI Search Troubleshooting](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - 在你的編輯器中安裝 Azure 疑難排解技能：`npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**章節導航：**
-- **📚 課程首頁**：[AZD 新手指南](../../README.md)
-- **📖 目前章節**：第 7 章 - 疑難排解與除錯
-- **⬅️ 上一章**：[除錯指南](debugging.md)
-- **➡️ 下一章**：[第 8 章：生產與企業範例](../chapter-08-production/production-ai-practices.md)
-- **🤖 相關章節**：[第 2 章：AI優先開發](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **📖 參考**：[Azure 開發者 CLI 疑難排解](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+**章節導航:**
+- **📚 課程主頁**: [AZD For Beginners](../../README.md)
+- **📖 當前章節**: 第7章 - 疑難排解與偵錯
+- **⬅️ 上一章**: [Debugging Guide](debugging.md)
+- **➡️ 下一章**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
+- **🤖 相關**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 參考**: [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責聲明**：
-本文件是使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯的。儘管我們力求準確，但請注意，機器翻譯可能包含錯誤或不準確之處。文件的原始語言版本應被視為權威來源。對於重要資訊，建議採用專業人工翻譯。我們不對因使用此翻譯而引起的任何誤解或誤釋承擔責任。
+**免責聲明**:
+本文件使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的母語版本應視為權威來源。對於重要資訊，建議以專業人工翻譯為準。我們對因使用本翻譯而引致的任何誤解或誤譯不承擔任何責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

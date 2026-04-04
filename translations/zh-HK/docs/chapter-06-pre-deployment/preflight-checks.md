@@ -1,66 +1,66 @@
-# AZD 部署的預檢檢查
+# AZD 部署前檢查
 
-**章節導航:**
-- **📚 課程主頁**: [AZD For Beginners](../../README.md)
-- **📖 當前章節**: 第 6 章 - 部署前驗證與規劃
+**章節導覽:**
+- **📚 課程主頁**: [AZD 新手入門](../../README.md)
+- **📖 目前章節**: 第 6 章 - 部署前驗證與規劃
 - **⬅️ 上一節**: [SKU 選擇](sku-selection.md)
 - **➡️ 下一章**: [第 7 章：疑難排解](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 相關**: [第 4 章：部署指南](../chapter-04-infrastructure/deployment-guide.md)
+- **🔧 相關章節**: [第 4 章：部署指南](../chapter-04-infrastructure/deployment-guide.md)
 
-## 介紹
+## 簡介
 
-本綜合指南提供部署前驗證腳本與程序，以確保 Azure Developer CLI 的部署在開始前能成功執行。學習實作自動檢查以驗證認證、資源可用性、配額、安全合規與效能需求，以避免部署失敗並提升部署成功率。
+本綜合指南提供部署前的驗證腳本與程序，以在 Azure Developer CLI 部署開始前確保部署成功。學習如何實作自動化檢查以驗證認證、資源可用性、配額、安全合規性與效能需求，從而避免部署失敗並提高部署成功率。
 
 ## 學習目標
 
-完成本指南後，你將能夠：
-- 精通自動化的部署前驗證技術與腳本
-- 了解用於認證、權限與配額的完整檢查策略
+完成本指南後，您將能夠：
+- 精通自動化部署前驗證技術與腳本
+- 理解認證、權限與配額的完整檢查策略
 - 實作資源可用性與容量驗證程序
-- 設定符合組織政策的安全與合規檢查
+- 設定符合組織策略的安全與合規檢查
 - 設計成本估算與預算驗證工作流程
 - 為 CI/CD 管線建立自訂的預檢自動化
 
-## 學習成效
+## 學習成果
 
-完成後，你將能夠：
+完成後，您將能夠：
 - 建立並執行完整的預檢驗證腳本
 - 為不同部署情境設計自動化檢查工作流程
-- 實作環境特定的驗證程序與政策
-- 設定部署就緒性的前瞻性監控與警示
-- 排解部署前問題並執行修正措施
-- 將預檢整合到 DevOps 管線與自動化流程中
+- 實作針對特定環境的驗證程序與政策
+- 設定部署就緒的主動監控與警示
+- 疑難排解部署前問題並實施修正措施
+- 將預檢整合至 DevOps 管線與自動化工作流程
 
 ## 目錄
 
-- [概述](../../../../docs/chapter-06-pre-deployment)
-- [自動化預檢腳本](../../../../docs/chapter-06-pre-deployment)
-- [手動驗證清單](../../../../docs/chapter-06-pre-deployment)
-- [環境驗證](../../../../docs/chapter-06-pre-deployment)
-- [資源驗證](../../../../docs/chapter-06-pre-deployment)
-- [安全與合規檢查](../../../../docs/chapter-06-pre-deployment)
-- [效能與容量規劃](../../../../docs/chapter-06-pre-deployment)
-- [常見問題排解](../../../../docs/chapter-06-pre-deployment)
+- [概覽](#概覽)
+- [自動化預檢腳本](#自動化預檢腳本)
+- [手動驗證清單](#codeblock1)
+- [環境驗證](#✅-備份與復原)
+- [資源驗證](#生產環境驗證)
+- [安全與合規性檢查](#security--compliance-checks)
+- [效能與容量規劃](#performance--capacity-planning)
+- [常見問題排解](#troubleshooting-common-issues)
 
 ---
 
-## 概述
+## 概覽
 
-預檢檢查是在部署前執行的必要驗證，以確保：
+預檢（Pre-flight checks）是在部署前執行的重要驗證，用以確保：
 
-- **資源可用性** 與目標地區的配額
-- **認證與權限** 已正確設定
-- **範本有效性** 與參數正確性
-- **網路連線性** 與相依性
-- **安全合規性** 符合組織政策
-- **成本估算** 在預算範圍內
+- <strong>目標區域的資源可用性</strong>與配額
+- <strong>認證與權限</strong>已正確設定
+- <strong>範本有效性</strong>與參數正確性
+- <strong>網路連通性</strong>與相依性
+- <strong>安全合規性</strong>符合組織政策
+- <strong>成本估算</strong>在預算範圍內
 
-### 何時執行預檢檢查
+### 何時執行預檢
 
-- **在第一次部署** 到新環境之前
-- **在重大範本變更後**
-- **在生產部署之前**
-- **更換 Azure 地區時**
+- <strong>首次部署</strong>到新環境前
+- <strong>重大範本變更</strong>後
+- <strong>生產部署</strong>前
+- <strong>變更 Azure 區域</strong>時
 - **作為 CI/CD 管線的一部分**
 
 ---
@@ -100,7 +100,7 @@ param(
     [switch]$Detailed
 )
 
-# 輸出顏色編碼
+# 輸出色彩編碼
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -163,7 +163,7 @@ function Test-Authentication {
     Write-Host "`n${Blue}=== Authentication Check ===${Reset}"
     
     try {
-        # 檢查 AZD 認證
+        # 檢查 AZD 認證狀態
         $azdAuth = azd auth login --check-status --output json 2>$null | ConvertFrom-Json
         if ($azdAuth.status -eq "Logged-in") {
             Write-Status "AZD authentication" "Success" "User: $($azdAuth.principalName)"
@@ -173,7 +173,7 @@ function Test-Authentication {
             return $false
         }
         
-        # 檢查 Azure CLI 認證
+        # 檢查 Azure CLI 認證狀態
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
@@ -242,7 +242,7 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # 檢查運算資源配額
+        # 檢查運算配額
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
         # 檢查特定配額
@@ -360,7 +360,7 @@ function Test-TemplateValidation {
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # 如存在，驗證 main.bicep
+            # 驗證 main.bicep（如存在）
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 新增：測試基礎設施預覽（安全的模擬執行）
+    # 🧪 新功能：測試基礎設施預覽（安全的模擬執行）
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -403,7 +403,7 @@ function Test-RegionalAvailability {
     Write-Host "`n${Blue}=== Regional Availability Check ===${Reset}"
     
     try {
-        # 檢查位置是否有效
+        # 檢查地區是否有效
         $locations = az account list-locations --output json | ConvertFrom-Json
         $validLocation = $locations | Where-Object { $_.name -eq $Location -or $_.displayName -eq $Location }
         
@@ -415,7 +415,7 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # 檢查該地區的服務可用性
+        # 檢查服務在該地區的可用性
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
@@ -446,7 +446,7 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # 基本成本估算（若要準確估算需使用 Azure 定價 API）
+    # 基本成本估算（若要準確需使用 Azure 定價 API）
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
@@ -470,7 +470,7 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # 檢查常見的安全做法
+    # 檢查常見的安全作法
     try {
         # 檢查是否已設定 Key Vault
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # 檢查是否使用受管理身分識別
+        # 檢查是否使用託管身分（Managed Identity）
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -527,7 +527,7 @@ function Invoke-PreflightCheck {
     $results["CostEstimation"] = Test-CostEstimation
     $results["SecurityCompliance"] = Test-SecurityCompliance
     
-    # 摘要
+    # 總結
     Write-Host "`n${Blue}=== Pre-flight Check Summary ===${Reset}"
     
     $passedCount = 0
@@ -565,7 +565,7 @@ Invoke-PreflightCheck
 
 ```bash
 #!/bin/bash
-# 用於 Unix/Linux 系統的 Bash 預檢查
+# 適用於 Unix/Linux 系統的 pre-flight 檢查（Bash 版本）
 
 set -euo pipefail
 
@@ -637,7 +637,7 @@ check_prerequisites() {
 check_authentication() {
     echo -e "\n${BLUE}=== Authentication Check ===${NC}"
     
-    # 檢查 AZD 認證狀態
+    # 檢查 AZD 的驗證狀態
     if azd auth login --check-status >/dev/null 2>&1; then
         local principal_name=$(azd auth login --check-status --output json 2>/dev/null | jq -r '.principalName // "Unknown"')
         print_status "AZD authentication" "success" "User: $principal_name"
@@ -646,7 +646,7 @@ check_authentication() {
         return 1
     fi
     
-    # 檢查 Azure CLI 認證狀態
+    # 檢查 Azure CLI 的驗證狀態
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -661,7 +661,7 @@ check_authentication() {
 check_template_validation() {
     echo -e "\n${BLUE}=== Template Validation ===${NC}"
     
-    # 檢查 azure.yaml
+    # 檢查 azure.yaml 檔案
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
@@ -683,7 +683,7 @@ check_template_validation() {
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # 如存在則驗證 main.bicep
+            # 若存在則驗證 main.bicep
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -776,7 +776,7 @@ main() {
     check_template_validation || all_passed=false
     check_regional_availability || all_passed=false
     
-    # 總結
+    # 摘要
     echo -e "\n${BLUE}=== Pre-flight Check Summary ===${NC}"
     
     if $all_passed; then
@@ -790,7 +790,7 @@ main() {
     fi
 }
 
-# 執行 main 函數
+# 執行主函式
 main "$@"
 ```
 
@@ -798,49 +798,49 @@ main "$@"
 
 ## 手動驗證清單
 
-### 部署前檢查清單
+### 部署前檢查表
 
-列印此清單並在部署前核對每項目：
+列印此檢查表並在部署前逐項核對：
 
 #### ✅ 環境設定
-- [ ] 已安裝 AZD CLI 並更新到最新版本
-- [ ] 已安裝 Azure CLI 並完成認證
-- [ ] 已選擇正確的 Azure 訂閱
-- [ ] 環境名稱唯一且遵循命名慣例
-- [ ] 已識別或可建立目標資源群組
+- [ ] 已安裝 AZD CLI 並更新至最新版本
+- [ ] 已安裝並已登入/完成認證的 Azure CLI
+- [ ] 已選取正確的 Azure 訂閱
+- [ ] 環境名稱唯一且符合命名規範
+- [ ] 已識別目標資源群組或可建立
 
-#### ✅ 認證與權限
-- [ ] 已使用 `azd auth login` 成功認證
+#### ✅ 驗證與權限
+- [ ] 已使用 `azd auth login` 成功進行認證
 - [ ] 使用者在目標訂閱/資源群組擁有 Contributor 角色
-- [ ] 已為 CI/CD 設定服務主體（如適用）
-- [ ] 沒有過期的憑證或憑證資訊
+- [ ] 已為 CI/CD 設定 service principal（如適用）
+- [ ] 沒有已過期的憑證或認證憑據
 
 #### ✅ 範本驗證
-- [ ] `azure.yaml` 存在且為有效的 YAML
+- [ ] `azure.yaml` 存在並為有效的 YAML
 - [ ] azure.yaml 中定義的所有服務都有相對應的原始碼
 - [ ] `infra/` 目錄中的 Bicep 範本存在
-- [ ] `main.bicep` 能夠編譯且無錯誤（`az bicep build --file infra/main.bicep`）
-- [ ] 🧪 基礎設施預覽執行成功（`azd provision --preview`）
-- [ ] 所有必要參數都有預設值或會被提供
-- [ ] 範本中沒有硬編碼的祕密
+- [ ] `main.bicep` 可成功編譯無錯誤（`az bicep build --file infra/main.bicep`）
+- [ ] 🧪 基礎建設預覽能成功執行（`azd provision --preview`）
+- [ ] 所有必須參數要有預設值或會被提供
+- [ ] 範本中沒有硬編碼的機密
 
 #### ✅ 資源規劃
-- [ ] 已選擇並驗證目標 Azure 地區
-- [ ] 目標地區可用所需的 Azure 服務
-- [ ] 有足夠的配額可用於計畫中的資源
-- [ ] 檢查資源命名是否有衝突
-- [ ] 了解資源之間的相依性
+- [ ] 已選取並驗證目標 Azure 區域
+- [ ] 目標區域中可用所需的 Azure 服務
+- [ ] 為規劃資源有足夠的配額
+- [ ] 已檢查資源命名衝突
+- [ ] 已理解資源之間的相依性
 
-#### ✅ 網路與安全
-- [ ] 已驗證與 Azure 端點的網路連線
-- [ ] 如有需要已配置防火牆/代理設定
-- [ ] 已使用 Key Vault 來管理祕密
-- [ ] 儘可能使用受管身分
-- [ ] 為 Web 應用啟用 HTTPS 強制
+#### ✅ 網絡與安全
+- [ ] 已驗證與 Azure 端點的網絡連線
+- [ ] 如需，已設定防火牆/代理設定
+- [ ] 已設定 Key Vault 用於機密管理
+- [ ] 盡可能使用受管身分（Managed identities）
+- [ ] 為 Web 應用啟用 HTTPS 強制執行
 
 #### ✅ 成本管理
 - [ ] 使用 Azure Pricing Calculator 計算成本估算
-- [ ] 如需已配置預算警示
+- [ ] 如需，已設定預算警示
 - [ ] 為環境類型選擇適當的 SKU
 - [ ] 為生產工作負載考慮預留容量
 
@@ -848,13 +848,13 @@ main "$@"
 - [ ] 在範本中設定 Application Insights
 - [ ] 已規劃 Log Analytics 工作區
 - [ ] 為關鍵指標定義警示規則
-- [ ] 在應用中實作健康檢查端點
+- [ ] 應用程式實作健康檢查端點
 
 #### ✅ 備份與復原
-- [ ] 已為資料資源定義備份策略
-- [ ] 已記錄復原時間目標 (RTO)
-- [ ] 已記錄復原點目標 (RPO)
-- [ ] 為生產環境建立災難復原計劃
+- [ ] 為資料資源定義備份策略
+- [ ] 已記錄復原時間目標（RTO）
+- [ ] 已記錄復原點目標（RPO）
+- [ ] 生產環境已制定災難復原計劃
 
 ---
 
@@ -864,19 +864,19 @@ main "$@"
 
 ```bash
 #!/bin/bash
-# 開發環境特定的驗證
+# 針對開發環境的特定驗證
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # 檢查是否有適合開發的設定
+    # 檢查是否為開發友好的設定
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # 檢查自動關機設定
+    # 檢查自動關機的設定
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
@@ -896,7 +896,7 @@ validate_dev_environment() {
 
 ```bash
 #!/bin/bash
-# 生產環境的特定驗證
+# 針對生產環境的特定驗證
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
@@ -922,7 +922,7 @@ validate_prod_environment() {
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # 檢查安全性設定
+    # 檢查安全設定
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -990,7 +990,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # 取得訂閱中的儲存體帳戶
+    # 取得訂閱內的儲存體帳戶
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -998,7 +998,7 @@ def check_storage_limits(location: str) -> bool:
         return False
     
     account_count = len(accounts)
-    max_accounts = 250  # Azure 預設限制
+    max_accounts = 250  # Azure 預設上限
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1017,7 +1017,7 @@ def check_network_limits(location: str) -> bool:
         vnet_count = len(vnets)
         print(f"✅ Virtual Networks: {vnet_count}/1000")
     
-    # 檢查公共 IP 位址
+    # 檢查公用 IP 位址
     public_ips = run_command(['az', 'network', 'public-ip', 'list'])
     if public_ips is not None:
         ip_count = len(public_ips)
@@ -1043,7 +1043,7 @@ def main():
     all_passed &= check_storage_limits(location)
     all_passed &= check_network_limits(location)
     
-    # 總結
+    # 摘要
     print(f"\n=== Quota Check Summary ===")
     if all_passed:
         print("✅ All quota checks passed - sufficient capacity available")
@@ -1058,13 +1058,13 @@ if __name__ == "__main__":
 
 ---
 
-## 安全與合規檢查
+## 安全與合規性檢查
 
 ### 安全驗證腳本
 
 ```bash
 #!/bin/bash
-# AZD 部署的安全性及合規性驗證
+# 針對 AZD 部署的安全性及合規性驗證
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
@@ -1079,7 +1079,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # 檢查是否使用 Managed Identity
+    # 檢查是否使用託管身分
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1095,7 +1095,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # 檢查最低 TLS 版本要求
+    # 檢查最低 TLS 版本
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1111,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # 檢查網路安全群組
+    # 檢查網絡安全群組
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1124,14 +1124,14 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # 檢查資料是否已加密
+    # 檢查資料加密
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # 檢查稽核日誌是否啟用
+    # 檢查稽核日誌
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
@@ -1146,7 +1146,7 @@ check_compliance_requirements() {
     fi
 }
 
-# 主執行程序
+# 主要執行
 main() {
     echo "🔒 Security and Compliance Validation"
     echo "📁 Checking infra/ directory for security best practices"
@@ -1294,54 +1294,54 @@ steps:
 
 ### ✅ 預檢檢查最佳實務
 
-1. **盡可能自動化**
-   - 將檢查整合至 CI/CD 管線
+1. <strong>盡可能自動化</strong>
+   - 將檢查整合到 CI/CD 管線中
    - 使用腳本進行可重複的驗證
-   - 儲存結果以保留稽核紀錄
+   - 儲存結果以供稽核追蹤
 
-2. **針對環境的驗證**
-   - 對 dev/staging/prod 使用不同的檢查
-   - 每個環境適用的安全要求
+2. <strong>針對環境的驗證</strong>
+   - 為 dev/staging/prod 使用不同檢查
+   - 為各環境制定適當的安全需求
    - 為非生產環境進行成本優化
 
-3. **全面覆蓋**
-   - 認證與權限
+3. <strong>全面覆蓋</strong>
+   - 驗證與權限
    - 資源配額與可用性
-   - 範本驗證與語法檢查
-   - 安全與合規要求
+   - 範本驗證與語法
+   - 安全與合規性要求
 
-4. **清晰報告**
+4. <strong>清晰報告</strong>
    - 顏色標示的狀態指示
-   - 帶有修復步驟的詳細錯誤訊息
-   - 便於快速評估的摘要報告
+   - 包含修復步驟的詳細錯誤訊息
+   - 摘要報告以便快速評估
 
-5. **失敗立即停止**
-   - 若關鍵檢查失敗則停止部署
+5. <strong>快速失敗</strong>
+   - 若關鍵檢查失敗即停止部署
    - 提供明確的解決指引
-   - 允許簡便地重新執行檢查
+   - 允許輕鬆重新執行檢查
 
-### 常見預檢陷阱
+### 常見的預檢陷阱
 
 1. **為了「快速」部署而跳過驗證**
-2. **在部署前檢查權限不足**
-3. **忽略配額限制直到部署失敗**
+2. <strong>部署前未充分檢查權限</strong>
+3. <strong>忽略配額限制直到部署失敗</strong>
 4. **未在 CI/CD 管線中驗證範本**
-5. **生產環境缺少安全驗證**
-6. **成本估算不足導致預算超支驚訝**
+5. <strong>未對生產環境進行安全驗證</strong>
+6. <strong>成本估算不足導致預算意外</strong>
 
 ---
 
-**小提示**: 將預檢檢查作為 CI/CD 管線中與實際部署工作分開的獨立工作來執行。這可以讓你及早抓出問題並為開發人員提供更快的回饋。
+<strong>專業提示</strong>：將預檢檢查作為 CI/CD 管線中的獨立工作執行，於實際部署工作之前。這可讓您及早發現問題並為開發人員提供更快的回饋。
 
 ---
 
-**導航**
-- **上一課**: [SKU 選擇](sku-selection.md)
-- **下一課**: [速查表](../../resources/cheat-sheet.md)
+<strong>導覽</strong>
+- <strong>上一課</strong>: [SKU 選擇](sku-selection.md)
+- <strong>下一課</strong>: [速查表](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責聲明：
-本文件使用 AI 翻譯服務 Co‑op Translator（https://github.com/Azure/co-op-translator）進行翻譯。雖然我們力求準確，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言版本應被視為具權威性的來源。若涉及重要資訊，建議採用專業人工翻譯。對於因使用本翻譯而導致的任何誤解或錯誤詮釋，我們概不負責。
+**Disclaimer**:
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，但請注意自動翻譯可能包含錯誤或不準確之處。原始語言的文件應被視為具權威性的來源。對於重要資訊，建議使用專業人工翻譯。我們對因使用此翻譯而引致的任何誤解或錯誤詮釋概不負責。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

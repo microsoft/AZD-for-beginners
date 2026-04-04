@@ -1,45 +1,45 @@
-# 使用 AZD 佈建 Azure 資源
+# 使用 AZD 配置 Azure 資源
 
-**Chapter Navigation:**
-- **📚 課程主頁**: [AZD 初學者指南](../../README.md)
-- **📖 本章**: 第 4 章 - 基礎設施即程式碼 與 部署
-- **⬅️ 上一個**: [Deployment Guide](deployment-guide.md)
-- **➡️ 下一章**: [第 5 章：多代理 AI 解決方案](../../examples/retail-scenario.md)
-- **🔧 相關**: [第 6 章：部署前驗證](../chapter-06-pre-deployment/capacity-planning.md)
+**章節導覽:**
+- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
+- **📖 目前章節**: 第4章 - 以程式碼管理基礎架構及部署
+- **⬅️ 前一頁**: [部署指南](deployment-guide.md)
+- **➡️ 下一章**: [第5章：多代理 AI 解決方案](../../examples/retail-scenario.md)
+- **🔧 相關章節**: [第6章：部署前驗證](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## 介紹
 
-本綜合指南涵蓋使用 Azure Developer CLI 佈建與管理 Azure 資源所需的一切。學習如何使用 Bicep、ARM 模板、Terraform 與 Pulumi，從基本資源建立到進階企業級基礎設施架構，實作基礎設施即程式碼 (IaC) 模式。
+本全面指南涵蓋使用 Azure Developer CLI 配置及管理 Azure 資源的所有必備知識。學習如何從基礎資源建立，到使用 Bicep、ARM 模板、Terraform 與 Pulumi 實作企業級基礎架構架構，落實以程式碼管理基礎架構 (IaC) 的模式。
 
 ## 學習目標
 
-完成本指南後，您將能夠：
-- 精通基礎設施即程式碼 原則與 Azure 資源佈建
-- 了解 Azure Developer CLI 支援的多種 IaC 提供者
-- 設計並實作適用於常見應用程式架構的 Bicep 範本
-- 設定資源參數、變數與環境特定設定
-- 實作包含網路與安全性的進階基礎設施模式
-- 管理資源生命週期、更新與相依性解析
+完成本指南後，您將能：
+- 精通以程式碼管理基礎架構的原理及 Azure 資源配置
+- 了解多種 Azure Developer CLI 支援的 IaC 提供者
+- 設計及實作常見應用架構的 Bicep 模板
+- 調整資源參數、變數及環境特定設定
+- 實作進階基礎架構模式，包括網絡與安全性
+- 管理資源生命週期、更新及依賴解析
 
 ## 學習成果
 
-完成後，您將能夠：
-- 使用 Bicep 與 ARM 範本設計並佈建 Azure 基礎設施
-- 為複雜的多服務架構正確設定資源相依性
-- 為多個環境與設定實作參數化範本
-- 疑難排解基礎設施佈建問題並解決部署失敗
-- 將 Azure 良好架構框架 原則應用於基礎設施設計
-- 管理基礎設施更新並實作基礎設施版本管理策略
+完成後，您將能：
+- 使用 Bicep 與 ARM 模板設計及配置 Azure 基礎架構
+- 設計具適當資源依賴的複雜多服務架構
+- 為多種環境與配置實作參數化模板
+- 排解基礎架構配置問題及解決部署失敗
+- 將 Azure 優良架構框架原則應用於基礎架構設計
+- 管理基礎架構更新並實作版本控制策略
 
-## 基礎設施佈建概覽
+## 基礎架構配置概覽
 
-Azure Developer CLI 支援多種基礎設施即程式碼 (IaC) 提供者：
-- **Bicep**（推薦）- Azure 的領域專用語言
-- **ARM Templates** - 基於 JSON 的 Azure Resource Manager 範本
-- **Terraform** - 多雲基礎設施工具
-- **Pulumi** - 使用程式語言的現代基礎設施即程式碼
+Azure Developer CLI 支援多種以程式碼管理基礎架構 (IaC) 的提供者：
+- **Bicep**（推薦）- Azure 專屬領域特定語言
+- **ARM Templates** - 基於 JSON 的 Azure 資源管理模板
+- **Terraform** - 多雲基礎架構工具
+- **Pulumi** - 使用程式語言的現代基礎架構即代碼
 
-## 了解 Azure 資源
+## 認識 Azure 資源
 
 ### 資源階層
 ```
@@ -49,16 +49,16 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### 應用程式常見的 Azure 服務
-- **Compute（運算）**: App Service, Container Apps, Functions, Virtual Machines
-- **Storage（儲存）**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Networking（網路）**: Virtual Network, Application Gateway, CDN
-- **Security（安全）**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
+### 常見應用的 Azure 服務
+- <strong>計算</strong>: 應用服務、容器應用、函數、虛擬機
+- <strong>儲存</strong>: 儲存帳號、Cosmos DB、SQL 資料庫、PostgreSQL
+- <strong>網絡</strong>: 虛擬網絡、應用閘道、CDN
+- <strong>安全</strong>: 金鑰保管庫、應用程式洞察、日誌分析
+- **人工智慧/機器學習**: 認知服務、OpenAI、機器學習
 
-## Bicep 基礎設施範本
+## Bicep 基礎架構模板
 
-### 基本 Bicep 範本結構
+### 基本 Bicep 模板結構
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -130,7 +130,7 @@ output WEB_NAME string = webApp.name
 
 ### 進階 Bicep 模式
 
-#### 模組化基礎設施
+#### 模組化基礎架構
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -179,7 +179,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### 條件資源建立
+#### 條件式資源建立
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -200,7 +200,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ 資料庫佈建
+## 🗃️ 資料庫配置
 
 ### Cosmos DB
 ```bicep
@@ -298,9 +298,9 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 安全性與機密管理
+## 🔒 安全性與密鑰管理
 
-### Key Vault 整合
+### 金鑰保管庫整合
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -342,7 +342,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### 託管識別設定
+### 托管身分識別設定
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -368,9 +368,9 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 網路與連線性
+## 🌍 網絡與連接性
 
-### 虛擬網路設定
+### 虛擬網絡配置
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -433,7 +433,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### 搭配 SSL 的 Application Gateway
+### 支援 SSL 的應用閘道
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -496,9 +496,9 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 監控與可觀測性
+## 📊 監控與可觀察性
 
-### Application Insights
+### 應用程式洞察
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
   name: '${applicationName}-logs-${resourceToken}'
@@ -561,9 +561,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 環境特定設定
+## 🔧 環境特定配置
 
-### 不同環境的參數檔案
+### 不同環境的參數文件
 ```json
 // infra/main.parameters.dev.json
 {
@@ -617,7 +617,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 條件式資源佈建
+### 條件式資源配置
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,7 +649,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 進階佈建模式
+## 🚀 進階配置模式
 
 ### 多區域部署
 ```bicep
@@ -719,7 +719,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### 基礎設施測試
+### 基礎架構測試
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -755,42 +755,41 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 基礎設施預覽與驗證（新）
+## 🧪 基礎架構預覽與驗證（新功能）
 
-### 在部署前預覽基礎設施變更
+### 部署前預覽基礎架構變更
 
-`azd provision --preview` 功能可讓您在實際部署資源之前，先行模擬基礎設施佈建。這與 `terraform plan` 或 `bicep what-if` 類似，可提供對將會變更 Azure 環境的「演練執行」檢視。
+`azd provision --preview` 功能讓您<strong>模擬基礎架構配置</strong>，無須實際部署資源。其精神類似 `terraform plan` 或 `bicep what-if`，提供一個對 Azure 環境變更的<strong>模擬執行畫面</strong>。
 
-#### 🛠️ 它會做什麼
-- **分析您的 IaC 範本**（Bicep 或 Terraform）
-- **顯示資源變更預覽**：新增、刪除、更新
-- **不會套用變更** — 僅為唯讀，執行安全
+#### 🛠️ 功能說明
+- **分析 IaC 模板**（Bicep 或 Terraform）
+- <strong>顯示資源變更預覽</strong>：新增、刪除、更新
+- <strong>不會套用變更</strong> — 僅限閱讀、安全執行
 
-#### � 使用情境
+#### 使用情境
 ```bash
-# 在部署前預覽基礎架構變更
+# 部署前預覽基礎設施更改
 azd provision --preview
 
-# 預覽並顯示詳細輸出
-azd provision --preview --output json
-
-# 針對特定環境進行預覽
-azd provision --preview --environment production
+# 預覽特定環境
+azd provision --preview -e production
 ```
 
-此指令可協助您：
-- **在提交資源前驗證基礎設施變更**
-- **在開發週期早期捕捉設定錯誤**
-- **在團隊環境中安全地協作**
-- **確保最低權限的部署不會有意外**
+此指令協助您：
+- <strong>驗證基礎架構變更</strong>，部署前先檢查
+- <strong>及早發現配置錯誤</strong>
+- <strong>安全地在團隊中協作</strong>
+- **確保以最小權限部署，無意外**
 
-當下列情況特別有用：
-- 處理複雜的多服務環境
-- 對生產基礎設施進行變更時
-- 在 PR 批准前驗證範本修改
-- 訓練新團隊成員使用基礎設施模式
+特別適用於：
+- 處理複雜多服務環境
+- 更改生產環境基礎架構時
+- PR 審查前驗證模板變更
+- 教育新團隊成員基礎架構模式
 
-### 預覽範例輸出
+### 範例預覽輸出
+預覽輸出依提供者及專案架構有所不同，但結果應清楚標示出擬議變更，部署前一目了然。
+
 ```bash
 $ azd provision --preview
 
@@ -809,25 +808,24 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
 ```
 
-## �🔄 資源更新與遷移
+## 🔄 資源更新與遷移
 
 ### 安全的資源更新
 ```bash
-# 先預覽基礎架構變更（建議）
+# 先預覽基礎設施更改（建議）
 azd provision --preview
 
-# 在確認預覽後再套用變更
+# 在預覽確認後應用更改
 azd provision --confirm-with-no-prompt
 
-# 如需回滾，請使用 Git 還原基礎架構變更：
-git revert HEAD  # 還原上一次基礎架構提交
-azd provision    # 套用先前的基礎架構狀態
+# 如需回滾，使用 Git 來還原基礎設施更改：
+git revert HEAD  # 還原最後一次基礎設施提交
+azd provision    # 應用先前的基礎設施狀態
 ```
 
 ### 資料庫遷移
@@ -861,7 +859,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🎯 最佳實務
 
-### 1. 資源命名慣例
+### 1. 資源命名規則
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -916,29 +914,29 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## 下一步
+## 後續步驟
 
 - [部署前規劃](../chapter-06-pre-deployment/capacity-planning.md) - 驗證資源可用性
-- [常見問題](../chapter-07-troubleshooting/common-issues.md) - 疑難排解基礎設施問題
-- [除錯指南](../chapter-07-troubleshooting/debugging.md) - 偵錯佈建問題
-- [SKU 選擇](../chapter-06-pre-deployment/sku-selection.md) - 選擇適當的服務等級
+- [常見問題](../chapter-07-troubleshooting/common-issues.md) - 排解基礎架構問題
+- [除錯指南](../chapter-07-troubleshooting/debugging.md) - 除錯配置問題
+- [SKU 選擇](../chapter-06-pre-deployment/sku-selection.md) - 選擇適合服務等級
 
-## 附加資源
+## 其他資源
 
-- [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure Bicep 文件](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure 資源管理器模板](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure 架構中心](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure 優良架構框架](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**Navigation**
-- **上一課**: [Deployment Guide](deployment-guide.md)
-- **下一課**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
+<strong>導覽</strong>
+- <strong>上一篇課程</strong>: [部署指南](deployment-guide.md)
+- <strong>下一篇課程</strong>: [容量規劃](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責聲明：
-本文件已使用 AI 翻譯服務 Co-op Translator（https://github.com/Azure/co-op-translator）進行翻譯。儘管我們力求準確，但自動翻譯可能包含錯誤或不準確之處，敬請留意。原始語言版本應視為具權威性的來源。如涉及重要資訊，建議採用專業人工翻譯。我們對因使用本翻譯所引致的任何誤解或曲解概不負責。
+**免責聲明**：  
+本文件由 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。以文件的原始語言版本為權威來源。對於重要資訊，建議使用專業人工翻譯。我們不對因使用本翻譯而引起的任何誤解或誤釋承擔責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

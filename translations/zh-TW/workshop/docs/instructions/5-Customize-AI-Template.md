@@ -1,81 +1,81 @@
 # 5. 自訂範本
 
-!!! tip "在本模組結束時您將能夠"
+!!! tip "完成此模組後，您將能夠"
 
-    - [ ] 探索預設的 AI 代理功能
-    - [ ] 新增 AI 搜尋並使用您自己的索引
-    - [ ] 啟用並分析追蹤（Tracing）指標
-    - [ ] 執行評估
+    - [ ] 探索預設的 AI 代理能力
+    - [ ] 使用您自己的索引新增 AI 搜尋
+    - [ ] 啟用並分析追蹤指標
+    - [ ] 執行評估測試
     - [ ] 執行紅隊掃描
-    - [ ] **實驗 5：建立自訂化計畫** 
+    - [ ] **實驗室 5：建立自訂計劃** 
 
 ---
 
-## 5.1 AI 代理功能
+## 5.1 AI 代理能力
 
-!!! success "我們在實驗 01 中已完成此項目"
+!!! success "我們在實驗室 01 已完成此部分"
 
-- <strong>檔案搜尋</strong>: OpenAI 內建的檔案搜尋，用於知識擷取
-- <strong>引用</strong>: 回應中的自動來源歸屬
-- <strong>可自訂指示</strong>: 修改代理的行為與個性
-- <strong>工具整合</strong>: 可擴充的工具系統以支援自訂功能
+- <strong>檔案搜尋</strong>：OpenAI 內建的檔案搜尋以取得知識
+- <strong>引用</strong>：回應中自動的來源歸屬
+- <strong>可自訂指令</strong>：調整代理行為與個性
+- <strong>工具整合</strong>：可擴充的工具系統以實現自訂功能
 
 ---
 
-## 5.2 知識檢索選項
+## 5.2 知識擷取選項
 
-!!! task "要完成此項，我們需要進行變更並重新部署"    
+!!! task "需改動並重新部署以完成此步驟"    
     
     ```bash title=""
-    # Set environment variables
+    # 設定環境變數
     azd env set USE_AZURE_AI_SEARCH_SERVICE true
     azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
-    # Upload data and create my index
+    # 上傳資料並建立索引
 
     ```
 
 ---
 
-**OpenAI File Search (Default):**
+**OpenAI 檔案搜尋（預設）：**
 
-- 內建於 Foundry Agents
-- 自動文件處理與建立索引
+- 内建於 Foundry 代理中
+- 自動文件處理與索引建立
 - 無需額外設定
 
-**Azure AI Search (Optional):**
+**Azure AI 搜尋（可選）：**
 
 - 混合語意與向量搜尋
 - 自訂索引管理
 - 進階搜尋功能
-- 需要 `USE_AZURE_AI_SEARCH_SERVICE=true`
+- 需設定 `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
 ## 5.3 [追蹤與監控](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "要完成此項，我們需要進行變更並重新部署"    
+!!! task "需改動並重新部署以完成此步驟"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
     azd deploy
     ```
 
-**追蹤：**
+**追蹤功能：**
 
-- OpenTelemetry 整合
+- OpenTelemetry 集成
 - 請求/回應追蹤
-- 效能指標
-- 可在 Microsoft Foundry 入口網站中使用
+- 性能指標
+- 可在 Microsoft Foundry 入口網站查看
 
-**日誌記錄：**
+**記錄功能：**
 
 - Container Apps 中的應用程式日誌
-- 具關聯 ID 的結構化日誌
-- 即時與歷史日誌查看
+- 附帶關聯 ID 的結構化記錄
+- 即時與歷史日誌檢視
 
 ---
 
@@ -83,20 +83,20 @@
 
 **本地評估：**
 
-- 內建評估器用於品質評估
+- 內建品質評估器
 - 自訂評估腳本
-- 效能基準測試
+- 性能基準測試
 
 **持續監控：**
 
-- 對實時互動進行自動評估
+- 自動評估即時互動
 - 品質指標追蹤
-- 效能回歸檢測
+- 性能回歸偵測
 
 **CI/CD 整合：**
 
 - GitHub Actions 工作流程
-- 自動化測試與評估
+- 自動測試和評估
 - 統計比較測試
 
 ---
@@ -106,51 +106,49 @@
 **AI 紅隊：**
 
 - 自動化安全掃描
-- AI 系統的風險評估
-- 跨多類別的安全評估
+- AI 系統風險評估
+- 多面向安全評價
 
-**驗證：**
+**驗證機制：**
 
-- Azure 服務的託管身分識別 (Managed Identity)
-- 可選的 Azure App Service 驗證
-- 開發時的 Basic 驗證回退
+- Azure 服務的管理識別
+- 選用 Azure App Service 驗證
+- 開發時支援基本驗證
 
-
-
-!!! quote "在本實驗結束時，您應該擁有"
+!!! quote "完成此實驗室後，您應該已經"
     - [ ] 定義您的情境需求
     - [ ] 自訂環境變數（設定）
-    - [ ] 自訂代理指示（任務）
-    - [ ] 部署自訂範本（應用程式）
-    - [ ] 完成部署後任務（手動）
+    - [ ] 自訂代理指令（任務）
+    - [ ] 部署客製範本（應用程式）
+    - [ ] 完成部署後作業（手動）
     - [ ] 執行測試評估
 
-This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
+此示例演示如何針對企業零售用例自訂範本，配備兩個專門代理和多個模型部署。
 
 ---
 
-## 5.6 為您自訂！
+## 5.6 為您量身打造！
 
 ### 5.6.1. 情境需求
 
 #### **代理部署：** 
 
-   - Shopper Agent：協助客戶尋找並比較產品
-   - Loyalty Agent：管理客戶獎勵與促銷
+   - 購物者代理：協助客戶查找及比較產品
+   - 忠誠度代理：管理客戶獎勵與促銷活動
 
 #### **模型部署：**
 
-   - `gpt-4.1`：主要的聊天模型
-   - `o3`：用於複雜查詢的推理模型
-   - `gpt-4.1-nano`：用於簡單互動的輕量模型
-   - `text-embedding-3-large`：用於搜尋的高品質嵌入向量
+   - `gpt-4.1`：主要聊天模型
+   - `o3`：處理複雜查詢的推理模型
+   - `gpt-4.1-nano`：輕量級用於簡單互動
+   - `text-embedding-3-large`：用於搜尋的高質量嵌入模型
 
 #### **功能：**
 
    - 啟用追蹤與監控
-   - 用於產品目錄的 AI 搜尋
-   - 用於品質保證的評估框架
-   - 用於安全驗證的紅隊測試
+   - 產品目錄的 AI 搜尋
+   - 品質保證評估框架
+   - 紅隊安全驗證
 
 ---
 
@@ -159,7 +157,7 @@ This example demonstrates customizing the template for an enterprise retail use 
 
 #### 5.6.2.1. 部署前設定
 
-Create a setup script (`setup-retail.sh`)
+建立設定腳本 (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -167,29 +165,29 @@ Create a setup script (`setup-retail.sh`)
 # 設定環境名稱
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# 設定區域（依據模型可用性選擇）
+# 配置區域（根據模型可用性選擇）
 azd env set AZURE_LOCATION "eastus2"
 
-# 啟用所有選用服務
+# 啟用所有可選服務
 azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# 設定主要聊天模型（gpt-4.1 為最接近 gpt-4.1 的可用模型）
+# 配置主要聊天模型（gpt-4.1 是最接近 gpt-4.1 的可用模型）
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# 設定嵌入模型以增強搜尋
+# 配置嵌入模型以增強搜尋
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# 設定代理名稱（將建立第一個代理）
+# 設定代理名稱（將創建第一個代理）
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# 設定搜尋索引
+# 配置搜尋索引
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -198,9 +196,9 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2：代理指示
+#### 5.6.2.2: 代理指令
 
-Create `custom-agents/shopper-agent-instructions.md`:
+建立 `custom-agents/shopper-agent-instructions.md`：
 
 ```markdown
 # Shopper Agent Instructions
@@ -223,7 +221,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-Create `custom-agents/loyalty-agent-instructions.md`:
+建立 `custom-agents/loyalty-agent-instructions.md`：
 
 ```markdown
 # Loyalty Agent Instructions
@@ -248,9 +246,9 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3：部署腳本
+#### 5.6.2.3: 部署腳本
 
-Create `deploy-retail.sh`:
+建立 `deploy-retail.sh`：
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -258,7 +256,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# 驗證先決條件
+# 驗證前置條件
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -275,7 +273,7 @@ echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# 檢查所選區域的配額
+# 檢查選定地區的配額
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -291,7 +289,7 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# 部署基礎設施與應用程式
+# 部署基礎架構和應用程式
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
@@ -299,8 +297,8 @@ azd up
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# 取得 Web 應用程式的 URL
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# 取得 Web 應用程式 URL
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -321,9 +319,9 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4：部署後設定
+#### 5.6.2.4: 部署後設定
 
-Create `configure-retail-agents.sh`:
+建立 `configure-retail-agents.sh`：
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -337,7 +335,7 @@ AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | t
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# 手動設定說明
+# 手動配置說明
 echo "
 🤖 Agent Configuration:
 
@@ -378,21 +376,21 @@ echo "
 "
 ```
 
-### 5.6.3：測試與驗證
+### 5.6.3: 測試與驗證
 
-Create `test-retail-deployment.sh`:
+建立 `test-retail-deployment.sh`：
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🧪 Testing retail deployment..."
 
-# 確認環境變數已設定
+# 驗證環境變數是否已設定
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# 測試 Web 應用程式的可用性
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# 測試網頁應用程式的可用性
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -429,42 +427,42 @@ Next steps:
 
 ---
 
-### 5.6.4 期望結果
+### 5.6.4 預期成果
 
 完成此實作指南後，您將擁有：
 
-1. **已部署基礎架構：**
+1. **已部署基礎設施：**
 
-      - 含模型部署的 Microsoft Foundry 專案
-      - 承載網頁應用程式的 Container Apps
-      - 用於產品目錄的 AI Search 服務
+      - 具模型部署的 Microsoft Foundry 專案
+      - 承載 Web 應用的 Container Apps
+      - 用於產品目錄的 AI 搜尋服務
       - 用於監控的 Application Insights
 
 2. **初始代理：**
 
-      - Shopper Agent 已配置基本指示
+      - 配置以基本指令的購物者代理
       - 啟用檔案搜尋功能
-      - 已設定追蹤與監控
+      - 設定追蹤與監控
 
 3. **準備自訂：**
 
-      - 可新增 Loyalty Agent 的框架
-      - 自訂指示範本
+      - 新增忠誠度代理的框架
+      - 自訂指令模板
       - 測試與驗證腳本
-      - 監控與評估設定
+      - 監控與評估配置
 
-4. **生產準備就緒：**
+4. **生產就緒：**
 
-      - 使用紅隊進行安全掃描
-      - 效能監控
+      - 紅隊安全掃描
+      - 性能監控
       - 品質評估框架
-      - 可擴充的架構
+      - 可擴充架構
 
-此範例示範如何在維持安全性、監控與可擴充性等最佳做法下，擴充與自訂 AZD 範本以符合特定企業情境。
+此範例展示如何擴展並自訂 AZD 範本以符合特定企業情境，同時維持安全、監控與可擴充的最佳實務。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責聲明**:
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的原始文件應被視為具權威性的來源。對於關鍵資訊，建議採用專業人工翻譯。我們不對因使用本翻譯而產生的任何誤解或誤釋承擔責任。
+**免責聲明**：  
+本文件由 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻譯。儘管我們致力於準確性，但請注意自動翻譯可能包含錯誤或不準確之處。原始語言文件應被視為權威來源。對於重要資訊，建議尋求專業人工翻譯。我們不對因使用本翻譯所產生的任何誤解或誤譯負責。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
