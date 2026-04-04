@@ -1,17 +1,19 @@
-# Capítulo 4: Infraestrutura como Código & Implantação
+# Chapter 4: Infraestrutura como Código & Implantação
 
-**📚 Curso**: [AZD For Beginners](../../README.md) | **⏱️ Duração**: 1-1.5 horas | **⭐ Complexidade**: Intermediário
+**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duration**: 1-1.5 hours | **⭐ Complexity**: Intermediário
 
 ---
 
-## Visão geral
+## Visão Geral
 
 Este capítulo aborda padrões de Infraestrutura como Código (IaC) com templates Bicep, provisionamento de recursos e estratégias de implantação usando o Azure Developer CLI.
 
+> Validado contra `azd 1.23.12` em março de 2026.
+
 ## Objetivos de Aprendizagem
 
-Ao completar este capítulo, você irá:
-- Compreender a estrutura e a sintaxe de templates Bicep
+Ao concluir este capítulo, você irá:
+- Entender a estrutura e a sintaxe dos templates Bicep
 - Provisionar recursos do Azure com `azd provision`
 - Implantar aplicações com `azd deploy`
 - Implementar estratégias de implantação blue-green e rolling
@@ -33,7 +35,7 @@ Ao completar este capítulo, você irá:
 # Inicializar a partir do modelo
 azd init --template azure-functions-python-v2-http
 
-# Pré-visualizar o que será criado
+# Visualizar o que será criado
 azd provision --preview
 
 # Provisionar apenas a infraestrutura
@@ -71,7 +73,7 @@ my-project/
 |---------|-------------|
 | `azd init` | Inicializar projeto |
 | `azd provision` | Criar recursos do Azure |
-| `azd deploy` | Implantar o código da aplicação |
+| `azd deploy` | Implantar código da aplicação |
 | `azd up` | provisionar + implantar |
 | `azd down` | Excluir todos os recursos |
 
@@ -89,12 +91,12 @@ my-project/
 ## 📖 Recursos Relacionados
 
 - [Verificações Pré-Implantação](../chapter-06-pre-deployment/README.md)
-- [Exemplos de Container App](../../examples/container-app/README.md)
+- [Exemplos de Aplicativos em Container](../../examples/container-app/README.md)
 - [Exemplo de Aplicativo de Banco de Dados](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Isenção de responsabilidade:**
-Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original, em seu idioma nativo, deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se a tradução profissional por um tradutor humano. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
+**Isenção de responsabilidade**:
+Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução humana profissional. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,93 +1,94 @@
 # Deploying a Microsoft SQL Database and Web App with AZD
 
-⏱️ **ਅੰਦਾਜ਼ਾ ਸਮਾਂ**: 20-30 ਮਿੰਟ | 💰 **ਅੰਦਾਜ਼ਾ ਲਾਗਤ**: ~$15-25/ਮਹੀਨਾ | ⭐ **ਜਟਿਲਤਾ**: ਦਰਮਿਆਨਾ
+⏱️ **Estimated Time**: 20-30 minutes | 💰 **Estimated Cost**: ~$15-25/month | ⭐ **Complexity**: Intermediate
 
-ਇਹ **ਪੂਰਾ, ਕੰਮ ਕਰਨ ਵਾਲਾ ਉਦਾਹਰਨ** ਦਰਸਾਉਂਦਾ ਹੈ ਕਿ [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) ਵਰਤ ਕੇ ਕਿਸ ਤਰ੍ਹਾਂ ਇੱਕ Python Flask ਵੈੱਬ ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ Microsoft SQL Database ਨਾਲ Azure ’ਤੇਡਿਪਲੌਇ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ। ਸਾਰਾ ਕੋਡ ਸ਼ਾਮਲ ਅਤੇ ਟੈਸਟ ਕੀਤਾ ਗਿਆ ਹੈ—ਕੋਈ ਬਾਹਰੀ ਨਿਰਭਰਤਾ ਲੋੜੀਂਦੀ ਨਹੀਂ।
+ਇਹ **ਪੂਰਾ, ਕੰਮ ਕਰਨ ਵਾਲਾ ਉਦਾਹਰਨ** ਦਿਖਾਉਂਦਾ ਹੈ ਕਿ ਕਿਵੇਂ [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇੱਕ Python Flask ਵੈੱਬ ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ Microsoft SQL Database ਨਾਲ Azure ‘ਤੇ ਡਿਪਲੋਇ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ। ਸਾਰੀ ਕੋਡ ਸ਼ਾਮਲ ਹੈ ਅਤੇ ਟੈਸਟ ਕੀਤੀ ਗਈ ਹੈ—ਕੋਈ ਬਾਹਰੀ ਨਿਰਭਰਤਾਵਾਂ ਲੋੜੀਂਦੀਆਂ ਨਹੀਂ।
 
 ## ਤੁਸੀਂ ਕੀ ਸਿੱਖੋਗੇ
 
-ਇਸ ਉਦਾਹਰਨ ਨੂੰ ਪੂਰਾ ਕਰਨ ਨਾਲ, ਤੁਸੀਂ:
-- ਇੰਫ੍ਰਾਸਟਰੱਕਚਰ-ਏਜ਼-ਕੋਡ ਵਰਤ ਕੇ ਇੱਕ ਮਲਟੀ-ਟੀਅਰ ਐਪਲੀਕੇਸ਼ਨ (ਵੈੱਬ ਐਪ + ਡੇਟਾਬੇਸ) ਡਿਪਲੌਇ ਕਰਨਾ
-- ਸੈਕਰੇਟ ਹਾਰਡਕੋਡ ਕੀਤੇ ਬਿਨਾਂ ਸੁਰੱਖਿਅਤ ਡੇਟਾਬੇਸ ਕਨੈਕਸ਼ਨ ਕੰਫਿਗਰ ਕਰਨਾ
-- Application Insights ਨਾਲ ਐਪਲੀਕੇਸ਼ਨ ਦੀ ਸਿਹਤ ਮਾਨੀਟਰ ਕਰਨਾ
-- AZD CLI ਨਾਲ Azure ਸਰੋਤਾਂ ਨੂੰ ਪ੍ਰਭਾਵਸ਼ਾਲੀ ਢੰਗ ਨਾਲ ਮੈਨੇਜ ਕਰਨਾ
-- ਸੁਰੱਖਿਆ, ਲਾਗਤ ਅਪਟੀਮਾਈਜ਼ੇਸ਼ਨ ਅਤੇ ਅਬਜ਼ਰਵੇਬਿਲਟੀ ਲਈ Azure ਦੇ ਵਧੀਆ ਅਭਿਆਸ ਦੀ ਪਾਲਣਾ ਕਰਨਾ
+ਇਸ ਉਦਾਹਰਨ ਨੂੰ ਪੂਰਾ ਕਰਕੇ, ਤੁਸੀਂ:
+- ਇੰਫრਾਸਟਰੱਕਚਰ-ਏਜ਼-ਕੋਡ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਇਕ ਬਹੁ-ਟਾਇਰ ਐਪਲੀਕੇਸ਼ਨ (ਵੈੱਬ ਐਪ + ਡੇਟਾਬੇਸ) ਡਿਪਲੋਇ ਕਰਨਾ
+- ਗੁਪਤਕੀ ਨੂਆਂ (secrets) ਨੂੰ ਹਾਰਡਕੋਡ ਕੀਤੇ ਬਿਨਾਂ ਸੁਰੱਖਿਅਤ ਤਰੀਕੇ ਨਾਲ ਕਨਫਿਗਰ ਕਰਨਾ
+- Application Insights ਨਾਲ ਐਪਲੀਕੇਸ਼ਨ ਸਿਹਤ ਦੀ ਨਿਗਰਾਨੀ ਕਰਨਾ
+- AZD CLI ਨਾਲ Azure ਰਿਸੋਰਸਾਂ ਨੂੰ ਪ੍ਰਭਾਵੀ ਢੰਗ ਨਾਲ ਪ੍ਰਬੰਧਿਤ ਕਰਨਾ
+- ਸੁਰੱਖਿਆ, ਲਾਗਤ ਅਨੁਕੂਲਤਾ ਅਤੇ ਦਿੱਖ-ਯੋਗਤਾ ਲਈ Azure ਦੀਆਂ ਸਰਵੋਤਮ ਪ੍ਰਥਾਵਾਂ ਦੀ ਪਾਲਣਾ ਕਰਨਾ
 
-## ਸਿਨਾਰਿਓ ਓਵਰਵਿਊ
-- **Web App**: ਡੇਟਾਬੇਸ ਕਨੈਕਟੀਵਿਟੀ ਵਾਲਾ Python Flask REST API
+## ਸ السينੇਰਿਓ ਦਾ ਝਲਕ
+
+- **Web App**: ਡੇਟਾਬੇਸ ਕਨੈਕਟਿਵਿਟੀ ਵਾਲਾ Python Flask REST API
 - **Database**: ਨਮੂਨਾ ਡੇਟਾ ਨਾਲ Azure SQL Database
-- **Infrastructure**: Bicep (ਮਾਡਿਊਲਰ, ਦੁਬਾਰਾ ਵਰਤਣਯੋਗ ਟੈਂਪਲੇਟ) ਵਰਤ ਕੇ ਪ੍ਰੋਵਿਜ਼ਨ ਕੀਤਾ ਗਿਆ
-- **Deployment**: `azd` ਕਮਾਂਡਾਂ ਨਾਲ ਪੂਰੀ ਤਰ੍ਹਾਂ ਆਟੋਮੇਟਿਕ
-- **Monitoring**: ਲੋਗਸ ਅਤੇ ਟੈਲੀਮੇਟਰੀ ਲਈ Application Insights
+- **Infrastructure**: Bicep ਦੀ ਵਰਤੋਂ ਨਾਲ ਪ੍ਰੋਵਿਜ਼ਨ (ਮੋਡੀਊਲਰ, ਦੁਬਾਰਾ ਵਰਤਣ ਯੋਗ ਟੈਪਲੇਟਸ)
+- **Deployment**: `azd` ਕਮਾਂਡਸ ਨਾਲ ਪੂਰੀ ਤਰ੍ਹਾਂ ਆਟੋਮੇਟਿਕ
+- **Monitoring**: ਲੌਗਾਂ ਅਤੇ ਟੈਲੀਮੇਟਰੀ ਲਈ Application Insights
 
-## ਪ੍ਰੀਰਿਕੁਇਜ਼ਾਈਟਸ
+## ਜਰੂਰੀਆਂ ਸ਼ਰਤਾਂ
 
 ### ਲੋੜੀਂਦੇ ਟੂਲ
 
-ਸ਼ੁਰੂ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ, ਇਹ ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਇਹ ਟੂਲ ਇੰਸਟਾਲ ਹੋਏ ਹਨ:
+ਸ਼ੁਰੂ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ, ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਇਹ ਟੂਲ ਇੰਸਟਾਲ ਹਨ:
 
-1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (ਵਰਜ਼ਨ 2.50.0 ਜਾਂ ਉਪਰ)
+1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (ਵਰਜ਼ਨ 2.50.0 ਜਾਂ ਉੱਪਰ)
    ```sh
    az --version
-   # ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁੱਟ: azure-cli 2.50.0 ਜਾਂ ਇਸ ਤੋਂ ਉੱਪਰ
+   # ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁੱਟ: azure-cli 2.50.0 ਜਾਂ ਉਸ ਤੋਂ ਵੱਧ
    ```
 
-2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (ਵਰਜ਼ਨ 1.0.0 ਜਾਂ ਉਪਰ)
+2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (ਵਰਜ਼ਨ 1.0.0 ਜਾਂ ਉੱਪਰ)
    ```sh
    azd version
-   # ਉਮੀਦ ਕੀਤਾ ਨਤੀਜਾ: azd ਸੰਸਕਰਣ 1.0.0 ਜਾਂ ਇਸ ਤੋਂ ਵੱਧ
+   # ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁੱਟ: azd ਵਰਜਨ 1.0.0 ਜਾਂ ਵੱਧ
    ```
 
 3. **[Python 3.8+](https://www.python.org/downloads/)** (ਲੋਕਲ ਡਿਵੈਲਪਮੈਂਟ ਲਈ)
    ```sh
    python --version
-   # ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁੱਟ: Python 3.8 ਜਾਂ ਉੱਪਰ
+   # ਉਮੀਦ ਕੀਤੀ ਆਉਟਪੁੱਟ: Python 3.8 ਜਾਂ ਉਸ ਤੋਂ ਉੱਪਰ
    ```
 
-4. **[Docker](https://www.docker.com/get-started)** (ਵਿਕਲਪਿਕ, ਲੋਕਲ ਕੰਟੇਨਰਾਈਜ਼ਡ ਡਿਵੈਲਪਮੈਂਟ ਲਈ)
+4. **[Docker](https://www.docker.com/get-started)** (ਇਛਿਕ, ਲੋਕਲ ਕੰਟੇਨਰਾਇਜ਼ਡ ਡਿਵੈਲਪਮੈਂਟ ਲਈ)
    ```sh
    docker --version
-   # ਉਮੀਦ ਕੀਤਾ ਨਤੀਜਾ: Docker ਵਰਜ਼ਨ 20.10 ਜਾਂ ਵੱਧ
+   # ਉਮੀਦ ਕੀਤਾ ਨਤੀਜਾ: Docker ਦਾ ਵਰਜਨ 20.10 ਜਾਂ ਇਸ ਤੋਂ ਉੱਪਰ
    ```
 
-### Azure ਲੋੜਾਂ
+### Azure ਦੀਆਂ ਲੋੜਾਂ
 
-- ਇਕ ਐਕਟਿਵ **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))
-- ਤੁਹਾਡੇ subscription ਵਿੱਚ ਸਰੋਤ ਬਣਾਉਣ ਦੀਆਂ ਅਨੁਮਤੀਆਂ
-- subscription ਜਾਂ resource group 'ਤੇ **Owner** ਜਾਂ **Contributor** ਰੋਲ
+- ਇੱਕ ਐਕਟਿਵ **Azure subscription** ([create a free account](https://azure.microsoft.com/free/))
+- ਤੁਹਾਡੇ ਸੁਬਸਕ੍ਰਿਪਸ਼ਨ ਵਿੱਚ ਰਿਸੋਰਸ ਬਣਾਉਣ ਦੀਆਂ ਅਨੁਮਤੀਆਂ
+- ਸੁਬਸਕ੍ਰਿਪਸ਼ਨ ਜਾਂ ਰਿਸੋਰਸ ਗਰੂਪ 'ਤੇ **Owner** ਜਾਂ **Contributor** ਰੋਲ
 
-### ਗਿਆਨ ਦੀਆਂ ਜ਼ਰੂਰਤਾਂ
+### ਗਿਆਨ ਦੀਆਂ ਬੁਨਿਆਦੀਆਂ ਲੋੜਾਂ
 
-ਇਹ ਇੱਕ **ਦਰਮਿਆਨਾ ਪੱਧਰ** ਦੀ ਉਦਾਹਰਨ ਹੈ। ਤੁਹਾਨੂੰ ਇਹਨਾਂ ਨਾਲ ਵਾਕਿਫ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ:
-- ਬੇਸਿਕ ਕਮਾਂਡ-ਲਾਈਨ ਓਪਰੇਸ਼ਨ
-- ਮੁੱਢਲੀ ਕਲਾਉਡ ਧਾਰਣਾਵਾਂ (resources, resource groups)
-- ਵੈੱਬ ਐਪਲੀਕੇਸ਼ਨ ਅਤੇ ਡੇਟਾਬੇਸ ਦੀ ਬੁਨਿਆਦੀ ਸਮਝ
+ਇਹ ਇੱਕ **ਦਰਮਿਆਨਾ-ਪੱਧਰ** ਦੀ ਉਦਾਹਰਨ ਹੈ। ਤੁਹਾਨੂੰ ਇਹਨਾਂ ਨਾਲ ਜਾਣੂ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ:
+- ਬੁਨਿਆਦੀ ਕਮਾਂਡ-ਲਾਈਨ ਆਪਰੇਸ਼ਨ
+- ਕਲਾਉਡ ਦੀਆਂ ਮੁੱਢ-ਧਾਰਣਾਵਾਂ (ਰਿਸੋਰਸ, ਰਿਸੋਰਸ ਗਰੂਪ)
+- ਵੈੱਬ ਐਪਲੀਕੇਸ਼ਨ ਅਤੇ ਡੇਟਾਬੇਸ ਬਾਰੇ ਬੁਨਿਆਦੀ ਸਮਝ
 
-**AZD ਵਿੱਚ ਨਵਾਂ ਹੋ?** ਪਹਿਲਾਂ [Getting Started guide](../../docs/chapter-01-foundation/azd-basics.md) ਤੋਂ ਸ਼ੁਰੂ ਕਰੋ।
+**AZD ਵਿੱਚ ਨਵਾਂ ਹੋ?** ਪਹਿਲਾਂ [Getting Started guide](../../docs/chapter-01-foundation/azd-basics.md) ਨਾਲ ਸ਼ੁਰੂ ਕਰੋ।
 
 ## ਆਰਕੀਟੈਕਚਰ
 
-ਇਹ ਉਦਾਹਰਨ ਇੱਕ ਦੋ-ਟੀਅਰ ਆਰਕੀਟੈਕਚਰ ਡਿਪਲੌਇ ਕਰਦੀ ਹੈ ਜਿਸ ਵਿੱਚ ਵੈੱਬ ਐਪ ਅਤੇ SQL ਡੇਟਾਬੇਸ ਹਨ:
+ਇਹ ਉਦਾਹਰਨ ਇੱਕ ਦੋ-ਟਾਇਰ ਆਰਕੀਟੈਕਚਰ ਡਿਪਲੋਇ ਕਰਦੀ ਹੈ ਜਿਸ ਵਿੱਚ ਵੈੱਬ ਐਪਲੀਕੇਸ਼ਨ ਅਤੇ SQL ਡੇਟਾਬੇਸ ਸ਼ਾਮਲ ਹਨ:
 
 ```mermaid
 graph TD
-    Browser[ਯੂਜ਼ਰ ਬ੍ਰਾਊਜ਼ਰ] <--> WebApp[Azure ਵੈੱਬ ਐਪ<br/>Flask API<br/>/health<br/>/products]
-    WebApp -- Secure Connection<br/>Encrypted --> SQL[Azure SQL ਡੇਟਾਬੇਸ<br/>ਉਤਪਾਦਾਂ ਦੀ ਟੇਬਲ<br/>ਨਮੂਨਾ ਡੇਟਾ]
+    Browser[ਯੂਜ਼ਰ ਬ੍ਰਾਊਜ਼ਰ] <--> WebApp[ਅਜ਼ੂਰ ਵੈੱਬ ਐਪ<br/>Flask ਏਪੀਆਈ<br/>/health<br/>/products]
+    WebApp -- ਸੁਰੱਖਿਅਤ ਕਨੈਕਸ਼ਨ<br/>ਇਨਕ੍ਰਿਪਟ ਕੀਤੀ --> SQL[ਅਜ਼ੂਰ SQL ਡੇਟਾਬੇਸ<br/>ਉਤਪਾਦਾਂ ਦੀ ਟੇਬਲ<br/>ਨਮੂਨਾ ਡੇਟਾ]
 ```
 **Resource Deployment:**
-- **Resource Group**: ਸਾਰੀਆਂ ਸਰੋਤਾਂ ਲਈ ਕੰਟੇਨਰ
-- **App Service Plan**: Linux-ਆਧਾਰਿਤ ਹੋਸਟਿੰਗ (ਲਾਗਤ ਪ੍ਰਭਾਵਸ਼ੀਲਤਾ ਲਈ B1 ਟੀਅਰ)
-- **Web App**: Python 3.11 ਰਨਟਾਈਮ ਨਾਲ Flask ਐਪਲੀਕੇਸ਼ਨ
+- **Resource Group**: ਸਾਰੇ ਰਿਸੋਰਸਾਂ ਲਈ ਕੰਟੈਨਰ
+- **App Service Plan**: Linux-ਆਧਾਰਿਤ ਹੋਸਟਿੰਗ (ਲਾਗਤ ਦੀ ਬਚਤ ਲਈ B1 ਟੀਅਰ)
+- **Web App**: Flask ਐਪਲੀਕੇਸ਼ਨ ਨਾਲ Python 3.11 ਰਨਟਾਈਮ
 - **SQL Server**: TLS 1.2 ਘੱਟੋ-ਘੱਟ ਨਾਲ ਮੈਨੇਜਡ ਡੇਟਾਬੇਸ ਸਰਵਰ
-- **SQL Database**: Basic ਟੀਅਰ (2GB, ਡਿਵੈਲਪਮੈਂਟ/ਟੈਸਟਿੰਗ ਲਈ موزوں)
-- **Application Insights**: ਮਾਨੀਟਰਿੰਗ ਅਤੇ ਲੋਗਿੰਗ
-- **Log Analytics Workspace**: ਸੈਂਟਰਲ ਲੋਗ ਸਟੋਰੇਜ
+- **SQL Database**: ਬੇਸਿਕ ਟੀਅਰ (2GB, ਡਿਵੈਲਪਮੈਂਟ/ਟੈਸਟਿੰਗ ਲਈ موزੂਨ)
+- **Application Insights**: ਮਾਨੀਟਰਿੰਗ ਅਤੇ ਲੌਗਿੰਗ
+- **Log Analytics Workspace**: ਕੇਂਦਰੀ ਲੌਗ ਸਟੋਰੇਜ
 
-**ਉਪਮਾ**: ਇਸਨੂੰ ਇੱਕ ਰੈਸਟੋਰੈਂਟ (ਵੈੱਬ ਐਪ) ਸਮਝੋ ਜਿਸਦੇ ਕੋਲ ਇੱਕ ਵਾਕ-ਇਨ ਫ੍ਰੀਜ਼ਰ (ਡੇਟਾਬੇਸ) ਹੈ। ਗ੍ਰਾਹਕ ਮੀਨੂ (API endpoints) ਤੋਂ ਆਰਡਰ ਕਰਦੇ ਹਨ, ਅਤੇ ਰਸੋਈ (Flask ਐਪ) ਫ੍ਰੀਜ਼ਰ ਤੋਂ ਸਮੱਗਰੀ (ਡੇਟਾ) ਲੈਂਦੀ ਹੈ। ਰੈਸਟੋਰੈਂਟ ਮੈਨੇਜਰ (Application Insights) ਸਭ ਕੁਝ ਟਰੈਕ ਕਰਦਾ ਹੈ।
+**ਉਪਮਾ**: ਇਸਨੂੰ ਏਕ ਰੈਸਟੋਰੈਂਟ (ਵੈੱਬ ਐਪ) ਸਮਝੋ ਜਿਸਦੇ ਕੋਲ ਇੱਕ ਪੈਦਾ ਫ੍ਰੀਜ਼ਰ (ਡੇਟਾਬੇਸ) ਹੈ। ਗਾਹਕ ਮੀਨੂ (API endpoints) ਤੋਂ ਆਰਡਰ ਕਰਦੇ ਹਨ, ਅਤੇ ਰਸੋਈ (Flask ਐਪ) ਫ੍ਰੀਜ਼ਰ ਤੋਂ ਸਮੱਗਰੀ (ਡੇਟਾ) ਲੈ ਆਉਂਦੀ ਹੈ। ਰੈਸਟੋਰੈਂਟ ਮੈਨੇਜਰ (Application Insights) ਸਾਰੀਆਂ ਘਟਨਾਵਾਂ ਨੂੰ ਟ੍ਰੈਕ ਕਰਦਾ ਹੈ।
 
-## ਫੋਲਡਰ ਸੰਰਚਨਾ
+## ਫੋਲਡਰ ਸਟਰਕਚਰ
 
-ਸਾਰੇ ਫਾਇਲ ਇਸ ਉਦਾਹਰਨ ਵਿੱਚ ਸ਼ਾਮਲ ਹਨ—ਕੋਈ ਬਾਹਰੀ ਨਿਰਭਰਤਾ ਲੋੜੀਂਦੀ ਨਹੀਂ:
+ਸਾਰੇ ਫਾਇਲ ਇਸ ਉਦਾਹਰਨ ਵਿੱਚ ਸ਼ਾਮਲ ਹਨ—ਕੋਈ ਬਾਹਰੀ ਨਿਰਭਰਤਾ ਲੋੜੀਂਦੀ ਨਹੀਂ:
 
 ```
 examples/database-app/
@@ -114,17 +115,17 @@ examples/database-app/
         └── Dockerfile          # Container definition
 ```
 
-**ਹਰ ਫਾਈਲ ਕੀ ਕਰਦੀ ਹੈ:**
-- **azure.yaml**: AZD ਨੂੰ ਦੱਸਦਾ ਹੈ ਕਿ ਕੀ ਡਿਪਲੌਇ ਕਰਨਾ ਹੈ ਅਤੇ ਕਿੱਥੇ
-- **infra/main.bicep**: ਸਾਰੇ Azure ਸਰੋਤਾਂ ਦੀ ਕੋਆਰਡੀਨੇਸ਼ਨ
-- **infra/resources/*.bicep**: ਵਿਅਕਤੀਗਤ ਸਰੋਤ ਦੀਆਂ ਪਰਿਭਾਸ਼ਾਵਾਂ (ਦੁਬਾਰਾ ਵਰਤੋਂ ਲਈ ਮਾਡਿਊਲਰ)
-- **src/web/app.py**: ਡੇਟਾਬੇਸ ਲਾਜਿਕ ਨਾਲ Flask ਐਪਲੀਕੇਸ਼ਨ
+**ਹਰ ਫਾਇਲ ਦਾ ਕੰਮ:**
+- **azure.yaml**: AZD ਨੂੰ ਦੱਸਦਾ ਹੈ ਕਿ ਕੀ ਡਿਪਲੋਇ ਕਰਨਾ ਹੈ ਅਤੇ ਕਿੱਥੇ
+- **infra/main.bicep**: ਸਾਰੇ Azure ਰਿਸੋਰਸਾਂ ਨੂੰ ਤਰਤੀਬ ਦਿੰਦਾ ਹੈ
+- **infra/resources/*.bicep**: ਵਿਅਕਤੀਗਤ ਰਿਸੋਰਸ ਪਰਿਭਾਸ਼ਾਵਾਂ (ਦੁਬਾਰਾ ਵਰਤੋਂ ਲਈ ਮੋਡੀਊਲਰ)
+- **src/web/app.py**: ਡੇਟਾਬੇਸ ਲੌਜਿਕ ਵਾਲੀ Flask ਐਪਲੀਕੇਸ਼ਨ
 - **requirements.txt**: Python ਪੈਕੇਜ ਨਿਰਭਰਤਾਵਾਂ
-- **Dockerfile**: ਡਿਪਲੌਇਮੈਂਟ ਲਈ ਕੰਟੇਨਰਾਈਜ਼ੇਸ਼ਨ ਨਿਰਦੇਸ਼
+- **Dockerfile**: ਡਿਪਲੋਇਮੈਂਟ ਲਈ ਕੰਟੇਨਰਾਈਜ਼ੇਸ਼ਨ ਨਿਰਦੇਸ਼
 
-## ਕਵਿਕਸਟਾਰਟ (ਕਦਮ-ਦਰ-ਕਦਮ)
+## ਕਵਾਇਕਸਟਾਰਟ (ਕਦਮ-ਦਰ-ਕਦਮ)
 
-### Step 1: Clone and Navigate
+### ਕਦਮ 1: ਕਲੋਨ ਅਤੇ ਨੈਵੀਗੇਟ
 
 ```sh
 git clone https://github.com/microsoft/AZD-for-beginners.git
@@ -137,95 +138,95 @@ ls
 # ਉਮੀਦ ਕੀਤੀ ਗਈ: README.md, azure.yaml, infra/, src/
 ```
 
-### Step 2: Authenticate with Azure
+### ਕਦਮ 2: Azure ਨਾਲ ਪ੍ਰਮਾਣਿਕਤਾ
 
 ```sh
 azd auth login
 ```
 
-ਇਹ ਤੁਹਾਡੇ ਬ੍ਰਾਉਜ਼ਰ ਨੂੰ Azure authentication ਲਈ ਖੋਲ੍ਹੇਗਾ। ਆਪਣੀਆਂ Azure ਪ੍ਰਮਾਣਪੱਤਰਾਂ ਨਾਲ ਸਾਈਨ ਇਨ ਕਰੋ।
+ਇਸ ਨਾਲ ਤੁਹਾਡਾ ਬ੍ਰਾਊਜ਼ਰ Azure ਪ੍ਰਮਾਣਿਕਤਾ ਲਈ ਖੁੱਲੇਗਾ। ਆਪਣੇ Azure ਰਿਕਾਰਡਾਂ ਨਾਲ ਸਾਈਨ-ਇਨ ਕਰੋ।
 
-**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਤੁਹਾਨੂੰ ਇਹ ਦਿਖਾਈ ਦੇਣਾ ਚਾਹੀਦਾ ਹੈ:
+**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਤੁਹਾਨੂੰ ਇਹ ਵੇਖਣਾ ਚਾਹੀਦਾ ਹੈ:
 ```
 Logged in to Azure.
 ```
 
-### Step 3: Initialize the Environment
+### ਕਦਮ 3: ਇਨਵਾਇਰਨਮੈਂਟ ਇਨੀਸ਼ੀਅਲਾਈਜ਼ ਕਰੋ
 
 ```sh
 azd init
 ```
 
-**ਕੀ ਹੋਂਦਾ ਹੈ**: AZD ਤੁਹਾਡੇ ਡਿਪਲੌਇਮੈਂਟ ਲਈ ਇੱਕ ਲੋਕਲ کنਫਿਗਰੇਸ਼ਨ ਬਣਾਉਂਦਾ ਹੈ।
+**ਕੀ ਹੁੰਦਾ ਹੈ**: AZD ਤੁਹਾਡੇ ਡਿਪਲੋਇਮੈਂਟ ਲਈ ਇੱਕ ਲੋਕਲ ਕনਫਿਗਰੇਸ਼ਨ ਬਣਾਉਂਦਾ ਹੈ।
 
-**ਤੁਹਾਨੂੰ ਜੋ ਪ੍ਰਾਂਪਟ ਦਿਖਾਈ ਦੇਣਗੇ**:
-- **Environment name**: ਇੱਕ ਛੋਟਾ ਨਾਮ ਦਿਓ (ਉਦਾਹਰਣ: `dev`, `myapp`)
-- **Azure subscription**: ਸੂਚੀ ਵਿਚੋਂ ਆਪਣੀ subscription ਚੁਣੋ
-- **Azure location**: ਇੱਕ ਰੀਜਿਅਨ ਚੁਣੋ (ਉਦਾਹਰਣ: `eastus`, `westeurope`)
+**ਤੁਹਾਨੂੰ ਇਹ ਪ੍ਰੋਂਪਟਸ ਦਿੱਸਣਗੇ**:
+- **Environment name**: ਇਕ ਛੋਟਾ ਨਾਂ ਦਿਓ (ਜਿਵੇਂ `dev`, `myapp`)
+- **Azure subscription**: ਸੁਚੀ ਤੋਂ ਆਪਣੀ ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਚੁਣੋ
+- **Azure location**: ਇੱਕ ਰੀਜਨ ਚੁਣੋ (ਜਿਵੇਂ `eastus`, `westeurope`)
 
-**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਤੁਹਾਨੂੰ ਇਹ ਦਿਖਾਈ ਦੇਣਾ ਚਾਹੀਦਾ ਹੈ:
+**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਤੁਹਾਨੂੰ ਇਹ ਵੇਖਣਾ ਚਾਹੀਦਾ ਹੈ:
 ```
 SUCCESS: New project initialized!
 ```
 
-### Step 4: Provision Azure Resources
+### ਕਦਮ 4: Azure ਰਿਸੋਰਸਾਂ ਦੀ ਪ੍ਰੋਵਿਜ਼ਨਿੰਗ
 
 ```sh
 azd provision
 ```
 
-**ਕੀ ਹੋਂਦਾ ਹੈ**: AZD ਸਾਰੀ ਇੰਫ੍ਰਾਸਟਰੱਕਚਰ ਡਿਪਲੌਇ ਕਰਦਾ ਹੈ (5-8 ਮਿੰਟ ਲੱਗਦੇ ਹਨ):
+**ਕੀ ਹੁੰਦਾ ਹੈ**: AZD ਸਾਰੀ ਇੰਫਰਾਸਟਰੱਕਚਰ ਡਿਪਲੋਇ ਕਰਦਾ ਹੈ (5-8 ਮਿੰਟ ਲੱਗ ਸਕਦੇ ਹਨ):
 1. Resource group ਬਣਾਉਂਦਾ ਹੈ
 2. SQL Server ਅਤੇ Database ਬਣਾਉਂਦਾ ਹੈ
 3. App Service Plan ਬਣਾਉਂਦਾ ਹੈ
 4. Web App ਬਣਾਉਂਦਾ ਹੈ
-5. Application Insights ਤਿਆਰ ਕਰਦਾ ਹੈ
-6. ਨੈਟਵਰਕਿੰਗ ਅਤੇ ਸੁਰੱਖਿਆ ਸੰਰਚਨਾ ਕਰਦਾ ਹੈ
+5. Application Insights ਬਣਾਉਂਦਾ ਹੈ
+6. ਨੈੱਟਵਰਕਿੰਗ ਅਤੇ ਸੁਰੱਖਿਆ ਕਨਫਿਗਰ ਕਰਦਾ ਹੈ
 
-**ਤੁਹਾਨੂੰ ਪੁੱਛਿਆ ਜਾਵੇਗਾ**:
-- **SQL admin username**: ਇੱਕ ਯੂਜ਼ਰਨੇਮ ਦਿਓ (ਉਦਾਹਰਣ: `sqladmin`)
-- **SQL admin password**: ਇੱਕ ਮਜ਼ਬੂਤ ਪਾਸਵਰਡ ਦਿਓ (ਇਸਨੂੰ ਸੇਵ ਕਰੋ!)
+**ਤੁਹਾਨੂੰ ਇਹ ਪ੍ਰੋਂਪਟਸ ਦਿੱਸਣਗੇ**:
+- **SQL admin username**: ਇਕ ਯੂਜ਼ਰਨੇਮ ਦਿਓ (ਜਿਵੇਂ `sqladmin`)
+- **SQL admin password**: ਇਕ ਮਜ਼ਬੂਤ ਪਾਸਵਰਡ ਦਿਓ (ਇਸਨੂੰ ਸੇਵ ਕਰੋ!)
 
-**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਤੁਹਾਨੂੰ ਇਹ ਦਿਖਾਈ ਦੇਣਾ ਚਾਹੀਦਾ ਹੈ:
+**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਤੁਹਾਨੂੰ ਇਹ ਵੇਖਣਾ ਚਾਹੀਦਾ ਹੈ:
 ```
 SUCCESS: Your application was provisioned in Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
 https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
 ```
 
-**⏱️ ਸਮਾਂ**: 5-8 ਮਿੰਟ
+**⏱️ Time**: 5-8 minutes
 
-### Step 5: Deploy the Application
+### ਕਦਮ 5: ਐਪਲੀਕੇਸ਼ਨ ਡਿਪਲੋਇ ਕਰੋ
 
 ```sh
 azd deploy
 ```
 
-**ਕੀ ਹੋਂਦਾ ਹੈ**: AZD ਤੁਹਾਡੀ Flask ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਬਿਲਡ ਅਤੇ ਡਿਪਲੌਇ ਕਰਦਾ ਹੈ:
-1. Python ਐਪਲੀਕੇਸ਼ਨ ਦਾ ਪੈਕੇਜ ਬਣਾਉਂਦਾ ਹੈ
-2. Docker ਕੰਟੇਨਰ ਬਿਲਡ ਕਰਦਾ ਹੈ
-3. Azure Web App 'ਤੇ ਪুশ ਕਰਦਾ ਹੈ
-4. ਡੇਟਾਬੇਸ ਨੂੰ ਨਮੂਨਾ ਡੇਟਾ ਨਾਲ ਇਨੀਸ਼ੀਅਲਾਈਜ਼ ਕਰਦਾ ਹੈ
-5. ਐਪਲੀਕੇਸ਼ਨ ਸ਼ੁਰੂ ਕਰਦਾ ਹੈ
+**ਕੀ ਹੁੰਦਾ ਹੈ**: AZD ਤੁਹਾਡੇ Flask ਐਪ ਨੂੰ ਬਿਲਡ ਅਤੇ ਡਿਪਲੋਇ ਕਰਦਾ ਹੈ:
+1. Python ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਪੈਕੇਜ ਕਰਦਾ ਹੈ
+2. Docker ਕੰਟੇਨਰ ਬਣਾਉਂਦਾ ਹੈ
+3. Azure Web App ਤੇ ਪੁਸ਼ ਕਰਦਾ ਹੈ
+4. ਨਮੂਨਾ ਡੇਟਾ ਨਾਲ ਡੇਟਾਬੇਸ ਨੂੰ ਆਰੰਭ ਕਰਦਾ ਹੈ
+5. ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਸ਼ੁਰੂ ਕਰਦਾ ਹੈ
 
-**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਤੁਹਾਨੂੰ ਇਹ ਦਿਖਾਈ ਦੇਣਾ ਚਾਹੀਦਾ ਹੈ:
+**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਤੁਹਾਨੂੰ ਇਹ ਵੇਖਣਾ ਚਾਹੀਦਾ ਹੈ:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
 https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
 ```
 
-**⏱️ ਸਮਾਂ**: 3-5 ਮਿੰਟ
+**⏱️ Time**: 3-5 minutes
 
-### Step 6: Browse the Application
+### ਕਦਮ 6: ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਬਰਾਊਜ਼ ਕਰੋ
 
 ```sh
 azd browse
 ```
 
-ਇਹ ਤੁਹਾਡੇ ਡਿਪਲੌਇਡ ਵੈੱਬ ਐਪ ਨੂੰ ਬ੍ਰਾਉਜ਼ਰ ਵਿੱਚ ਖੋਲ੍ਹੇਗਾ: `https://app-<unique-id>.azurewebsites.net`
+ਇਹ ਤੁਹਾਡੇ ਡਿਪਲੋਇਡ ਵੈੱਬ ਐਪ ਨੂੰ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਖੋਲ੍ਹੇਗਾ `https://app-<unique-id>.azurewebsites.net`
 
-**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਤੁਹਾਨੂੰ JSON ਆਉਟਪੁਟ ਦੇਖਣਾ ਚਾਹੀਦਾ ਹੈ:
+**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਤੁਹਾਨੂੰ JSON ਆਉਟਪੁੱਟ ਵੇਖਣਾ ਚਾਹੀਦਾ ਹੈ:
 ```json
 {
   "message": "Welcome to the Database App API",
@@ -238,14 +239,14 @@ azd browse
 }
 ```
 
-### Step 7: Test the API Endpoints
+### ਕਦਮ 7: API Endpoints ਦੀ ਟੈਸਟਿੰਗ
 
-**Health Check** (ਡੇਟਾਬੇਸ ਕਨੈਕਸ਼ਨ ਦੀ ਜਾਂਚ ਕਰੋ):
+**ਹੈਲਥ ਚੈੱਕ** (ਡੇਟਾਬੇਸ ਕਨੈਕਸ਼ਨ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/health
 ```
 
-**ਉਮੀਦ ਕੀਤੀ ਜਾਵੇ ਵਾਲੀ ਜਵਾਬਦਿਹੀ**:
+**ਉਮੀਦ ਕੀਤੀ ਜਵਾਬਦਿਹੀ**:
 ```json
 {
   "status": "healthy",
@@ -258,7 +259,7 @@ curl https://app-<your-id>.azurewebsites.net/health
 curl https://app-<your-id>.azurewebsites.net/products
 ```
 
-**ਉਮੀਦ ਕੀਤੀ ਜਾਵਾਬਦਿਹੀ**:
+**ਉਮੀਦ ਕੀਤੀ ਜਵਾਬਦਿਹੀ**:
 ```json
 [
   {
@@ -277,36 +278,36 @@ curl https://app-<your-id>.azurewebsites.net/products
 curl https://app-<your-id>.azurewebsites.net/products/1
 ```
 
-**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਸਾਰੇ endpoints ਬਿਨਾਂ ਤਰੁਟੀਆਂ ਦੇ JSON ਡੇਟਾ ਰਿਟਰਨ ਕਰਨਗੇ।
+**✓ ਸਫਲਤਾ ਚੈੱਕ**: ਸਾਰੇ endpoints ਬਿਨਾਂ ਏਰਰ ਦੇ JSON ਡੇਟਾ ਰਿਟਰਨ ਕਰਨਗੇ।
 
 ---
 
-**🎉 ਮੁਬਾਰਕਾਂ!** ਤੁਸੀਂ ਸਫਲਤਾਪੂਰਵਕ AZD ਦੀ ਵਰਤੋਂ ਕਰਕੇ Azure 'ਤੇ ਡੇਟਾਬੇਸ ਨਾਲ ਇੱਕ ਵੈੱਬ ਐਪਲੀਕੇਸ਼ਨ ਡਿਪਲੌਇ ਕੀਤਾ ਹੈ।
+**🎉 ਵਧਾਈਆਂ!** ਤੁਸੀਂ ਸਫਲਤਾਪੂਰਵਕ AZD ਦੀ ਵਰਤੋਂ ਕਰਕੇ Azure 'ਤੇ ਡੇਟਾਬੇਸ ਵਾਲੀ ਇਕ ਵੈੱਬ ਐਪਲੀਕੇਸ਼ਨ ਡਿਪਲੋਇ ਕਰ ਲਈ ਹੈ।
 
-## ਕੰਫਿਗਰੇਸ਼ਨ ਦੀ ਡੀਪ-ਡਾਈਵ
+## ਗੁੰਝਲਦਾਰ ਵਿਆਖਿਆ (Configuration Deep-Dive)
 
 ### Environment Variables
 
-ਰਹੱਸ ਸੁਰੱਖਿਅਤ ਤਰੀਕੇ ਨਾਲ Azure App Service ਕਨਫਿਗਰੇਸ਼ਨ ਰਾਹੀਂ ਮੈਨੇਜ ਕੀਤੇ ਜਾਂਦੇ ਹਨ—**ਸੋਰਸ ਕੋਡ ਵਿੱਚ ਕਦੇ ਵੀ ਹਾਰਡਕੋਡ ਨਾ ਕਰੋ**।
+ਗੁਪਤਕੀ ਨੂਆਂ ਸੁਰੱਖਿਅਤ ਤਰੀਕੇ ਨਾਲ Azure App Service configuration ਰਾਹੀਂ ਪ੍ਰਬੰਧਤ ਕੀਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ—**ਕੋਡ ਵਿੱਚ کبھی ਵੀ ਹਾਰਡਕੋਡ ਨਾ ਕਰੋ**।
 
-**AZD ਦੁਆਰਾ ਆਟੋਮੈਟਿਕ ਤੌਰ 'ਤੇ ਕੰਫਿਗਰ ਕੀਤੇ ਜਾਂਦੇ**:
-- `SQL_CONNECTION_STRING`: ਇਨਕ੍ਰਿਪਟ ਕੀਤੀਆਂ ਪ੍ਰਮਾਣਪੱਤਰਾਂ ਨਾਲ ਡੇਟਾਬੇਸ ਕਨੈਕਸ਼ਨ
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`: ਮਾਨੀਟਰਨਿੰਗ ਟੈਲੀਮੇਟਰੀ ਐਂਡਪੌਇੰਟ
-- `SCM_DO_BUILD_DURING_DEPLOYMENT`: ਆਟੋਮੈਟਿਕ ਨਿਰਭਰਤਾਵਾਂ ਇੰਸਟਾਲੇਸ਼ਨ ਨੂੰ ਯੋਗ ਬਣਾਉਂਦਾ ਹੈ
+**AZD ਦੁਆਰਾ ਆਟੋਮੈਟਿਕ ਤੌਰ ਤੇ ਕਨਫਿਗਰ ਕੀਤਿਆ ਜਾਂਦਾ ਹੈ**:
+- `SQL_CONNECTION_STRING`: ਡੇਟਾਬੇਸ ਕਨੈਕਸ਼ਨ ਵਿਥ ਇੰਕ੍ਰਿਪਟਿਡ ਕ੍ਰੈਡੈਂਸ਼ਲਜ਼
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: ਮਾਨੀਟਰਿੰਗ ਟੈਲੀਮੇਟਰੀ ਐਂਡਪਾਇੰਟ
+- `SCM_DO_BUILD_DURING_DEPLOYMENT`: ਡਿਪਲੋਇਮੈਂਟ ਦੌਰਾਨ ਆਟੋਮੈਟਿਕ ਡੀਪੈਂਡੈਂਸੀ ਇੰਸਟਾਲੇਸ਼ਨ ਨੂੰ ਯੋਗ ਕਰਦਾ ਹੈ
 
-**ਕਿੱਥੇ ਸੁਰੱਖਿਆਤਾਰਕ ਰੱਖੇ ਜਾਂਦੇ ਹਨ**:
-1. `azd provision` ਦੌਰਾਨ, ਤੁਸੀਂ ਸੁਰੱਖਿਅਤ ਪ੍ਰਾਂਪਟ ਰਾਹੀਂ SQL ਪ੍ਰਮਾਣਪੱਤਰ ਦਿੰਦੇ ਹੋ
-2. AZD ਇਹਨਾਂ ਨੂੰ ਤੁਹਾਡੇ ਲੋਕਲ `.azure/<env-name>/.env` ਫਾਇਲ ਵਿੱਚ ਸਟੋਰ ਕਰਦਾ ਹੈ (git-ignored)
-3. AZD ਇਹਨਾਂ ਨੂੰ Azure App Service ਕੰਫਿਗਰੇਸ਼ਨ ਵਿੱਚ ਇੰਜੈਕਟ ਕਰਦਾ ਹੈ (rest ਤੇ encrypted)
-4. ਐਪਲੀਕੇਸ਼ਨ ਰਨਟਾਈਮ 'ਤੇ `os.getenv()` ਰਾਹੀਂ ਇਹਨਾਂ ਨੂੰ ਪੜ੍ਹਦੀ ਹੈ
+**ਗੁਪਤਕੀ ਕਿੱਥੇ ਸਟੋਰ ਹੁੰਦੀਆਂ ਹਨ**:
+1. `azd provision` ਦੌਰਾਨ, ਤੁਸੀਂ SQL ਕ੍ਰੈਡੈਂਸ਼ਲਜ਼ ਸੁਰੱਖਿਅਤ ਪ੍ਰੋਂਪਟਸ ਰਾਹੀਂ ਦਿੰਦੇ ਹੋ
+2. AZD ਇਨ੍ਹਾਂ ਨੂੰ ਤੁਹਾਡੇ ਲੋਕਲ `.azure/<env-name>/.env` ਫਾਇਲ ਵਿੱਚ ਸਟੋਰ ਕਰਦਾ ਹੈ (git-ignored)
+3. AZD इन्हें Azure App Service configuration ਵਿੱਚ ਇੰਜੈਕਟ ਕਰਦਾ ਹੈ (rest 'ਤੇ ਐਨਕ੍ਰਿਪਟ ਕੀਤਿਆ ਹੋਇਆ)
+4. ਐਪਲੀਕੇਸ਼ਨ runtime ’ਤੇ `os.getenv()` ਰਾਹੀਂ ਇਨ੍ਹਾਂ ਨੂੰ ਪੜ੍ਹਦਾ ਹੈ
 
-### Local Development
+### ਲੋਕਲ ਡਿਵੈਲਪਮੈਂਟ
 
-ਲੋਕਲ ਟੇਸਟਿੰਗ ਲਈ, ਨਮੂਨੇ ਤੋਂ `.env` ਫਾਇਲ ਬਣਾਓ:
+ਲੋਕਲ ਟੈਸਟਿੰਗ ਲਈ, ਨਮੂਨੇ ਤੋਂ `.env` ਫਾਇਲ ਬਣਾਓ:
 
 ```sh
 cp .env.sample .env
-# .env ਫਾਇਲ ਨੂੰ ਆਪਣੇ ਲੋਕਲ ਡੇਟਾਬੇਸ ਕਨੈਕਸ਼ਨ ਨਾਲ ਸੰਪਾਦਿਤ ਕਰੋ
+# .env ਨੂੰ ਆਪਣੇ ਲੋਕਲ ਡੇਟਾਬੇਸ ਕਨੈਕਸ਼ਨ ਨਾਲ ਸੋਧੋ
 ```
 
 **ਲੋਕਲ ਡਿਵੈਲਪਮੈਂਟ ਵਰਕਫਲੋ**:
@@ -315,7 +316,7 @@ cp .env.sample .env
 cd src/web
 pip install -r requirements.txt
 
-# ਇਨਵਾਇਰਨਮੈਂਟ ਵੈਰੀਏਬਲ ਸੈੱਟ ਕਰੋ
+# ਇਨਵਾਇਰਨਮੈਂਟ ਵੈਰੀਏਬਲ ਸੈਟ ਕਰੋ
 export SQL_CONNECTION_STRING="your-local-connection-string"
 
 # ਐਪਲੀਕੇਸ਼ਨ ਚਲਾਓ
@@ -325,20 +326,20 @@ python app.py
 **ਲੋਕਲ ਟੈਸਟ ਕਰੋ**:
 ```sh
 curl http://localhost:8000/health
-# ਉਮੀਦ: {"status": "healthy", "database": "connected"}
+# ਉਮੀਦ: {"status": "ਸਿਹਤਮੰਦ", "database": "ਜੁੜਿਆ"}
 ```
 
 ### Infrastructure as Code
 
-ਸਾਰੇ Azure ਸਰੋਤ **Bicep ਟੈਂਪਲੇਟਸ** (`infra/` ਫੋਲਡਰ) ਵਿੱਚ ਪਰਿਭਾਸ਼ਿਤ ਹਨ:
+ਸਾਰੇ Azure ਰਿਸੋਰਸ **Bicep templates** (`infra/` ਫੋਲਡਰ) ਵਿੱਚ ਪਰਿਭਾਸ਼ਿਤ ਹਨ:
 
-- **ਮਾਡਿਊਲਰ ਡਿਜ਼ਾਇਨ**: ਹਰ ਸਰੋਤ ਕਿਸਮ ਲਈ ਆਪਣੀ ਫਾਇਲ ਹੈ ਤਾਂ ਜੋ ਦੁਬਾਰਾ ਵਰਤਿਆ ਜਾ ਸਕੇ
-- **ਪੈਰਾਮੀਟਰਾਈਜ਼ਡ**: SKUs, ਰੀਜਿਅਨ, ਨਾਂਕਰਨ ਪਰੰਪਰਾਸ਼ਾਂ ਨੂੰ কਸਟਮਾਈਜ਼ ਕਰੋ
-- **ਵਧੀਆ ਅਭਿਆਸ**: Azure ਨਾਂਕਰਨ ਮਾਪਦੰਡ ਅਤੇ ਸੁਰੱਖਿਆ ਡਿਫੌਲਟਾਂ ਦੀ ਪਾਲਣਾ
-- **ਵਰਜ਼ਨ ਕੰਟਰੋਲ**: ਇੰਫ੍ਰਾਸਟਰੱਕਚਰ ਬਦਲਾਅ Git ਵਿਚ ਟਰੈਕ ਕੀਤੇ ਜਾਂਦੇ ਹਨ
+- **ਮੋਡੀਊਲਰ ਡਿਜ਼ਾਇਨ**: ਹਰ ਰਿਸੋਰਸ ਟਾਈਪ ਲਈ ਅਲੱਗ ਫਾਇਲ ਹੈ ਤਾ ਕਿ ਦੁਬਾਰਾ ਵਰਤਿਆ ਜਾ ਸਕੇ
+- **ਪੈਰਾਮੀਟਰਾਈਜ਼ਡ**: SKUs, ਰੀਜਨ, ਨਿਆਮਕ ਨਾਂਕਰਨ ਆਦਿ ਕਸਟਮਾਈਜ਼ ਕਰੋ
+- **ਸਰਵੋਤਮ ਅਭਿਆਸ**: Azure ਨਾਂਕਰਨ ਮਿਆਰ ਅਤੇ ਸੁਰੱਖਿਆ ਡਿਫਾਲਟ ਪਾਲਣਾ ਕੀਤੀ ਗਈ
+- **ਵਰਜ਼ਨ ਕੰਟ੍ਰੋਲ**: ਇਨਫਰਾਸਟਰੱਕਚਰ ਬਦਲਾਅ Git ਵਿੱਚ ਟਰੈਕ ਕੀਤੇ ਜਾਂਦੇ ਹਨ
 
 **ਕਸਟਮਾਈਜ਼ੇਸ਼ਨ ਉਦਾਹਰਨ**:
-ਡੇਟਾਬੇਸ ਟੀਅਰ ਬਦਲਣ ਲਈ, edit ਕਰੋ `infra/resources/sql-database.bicep`:
+ਡੇਟਾਬੇਸ ਟੀਅਰ ਬਦਲਣ ਲਈ `infra/resources/sql-database.bicep` ਨੂੰ ਸੋਧੋ:
 ```bicep
 sku: {
   name: 'Standard'  // Changed from 'Basic'
@@ -347,51 +348,51 @@ sku: {
 }
 ```
 
-## ਸੁਰੱਖਿਆ ਦੇ ਵਧੀਆ ਅਭਿਆਸ
+## ਸੁਰੱਖਿਆ ਦੇ ਸਰਵੋਤਮ ਅਭਿਆਸ
 
-ਇਹ ਉਦਾਹਰਨ Azure ਦੀਆਂ ਸੁਰੱਖਿਆ ਬਿਹਤਰ ਪ੍ਰਥਾਵਾਂ ਦੀ ਪਾਲਣਾ ਕਰਦੀ ਹੈ:
+ਇਹ ਉਦਾਹਰਨ Azure ਦੀਆਂ ਸੁਰੱਖਿਆ ਦੀਆਂ ਸਰਵੋਤਮ ਪ੍ਰਥਾਵਾਂ ਦੀ ਪਾਲਣਾ ਕਰਦੀ ਹੈ:
 
-### 1. **ਸੋਰਸ ਕੋਡ ਵਿੱਚ ਕੋਈ ਸਿਕਰੇਟ ਨਹੀਂ**
-- ✅ ਪ੍ਰਮਾਣਪੱਤਰ Azure App Service ਕੰਫਿਗਰੇਸ਼ਨ ਵਿੱਚ ਸਟੋਰ ਕੀਤੇ ਜਾਂਦੇ ਹਨ (encrypted)
-- ✅ `.env` ਫਾਇਲਾਂ Git ਵਿੱਚ `.gitignore` ਰਾਹੀਂ ਬਾਹਰ ਰੱਖੀਆਂ ਜਾਂਦੀਆਂ ਹਨ
-- ✅ ਪ੍ਰੋਵਿਜ਼ਨਿੰਗ ਦੌਰਾਨ ਸੁਰੱਖਿਅਤ ਪੈਰਾਮੀਟਰਾਂ ਰਾਹੀਂ ਸਿਕਰੇਟ ਦਿੱਤੇ ਜਾਂਦੇ ਹਨ
+### 1. **Source Code ਵਿੱਚ ਕੋਈ Secrets ਨਹੀਂ**
+- ✅ ਕ੍ਰੈਡੈਂਸ਼ਲਜ਼ Azure App Service configuration ਵਿੱਚ ਸਟੋਰ ਕੀਤੇ ਜਾਂਦੇ ਹਨ (ਇੰਕ੍ਰਿਪਟ ਕੀਤੇ ਹੋਏ)
+- ✅ `.env` ਫਾਇਲਾਂ Git ਤੋਂ `.gitignore` ਰਾਹੀਂ ਬਾਹਰ ਰੱਖੀਆਂ ਗਈਆਂ ਹਨ
+- ✅ ਪ੍ਰੋਵਿਜ਼ਨਿੰਗ ਦੌਰਾਨ ਸੁਰੱਖਿਅਤ ਪੈਰਾਮੀਟਰਾਂ ਰਾਹੀਂ ਗੁਪਤਕੀ ਪਾਸ ਕੀਤੀਆਂ ਜਾਂਦੀਆਂ ਹਨ
 
-### 2. **ਇਨਕ੍ਰਿਪਟਿਡ ਕਨੈਕਸ਼ਨ**
-- ✅ SQL Server ਲਈ TLC 1.2 ਘੱਟੋ-ਘੱਟ
-- ✅ Web App ਲਈ ਸਿਰਫ HTTPS ਜ਼ੁਰੂਰੀ
-- ✅ ਡੇਟਾਬੇਸ ਕਨੈਕਸ਼ਨਾਂ ਲਈ ਇਨਕ੍ਰਿਪਟਿਡ ਚੈਨਲ ਵਰਤੇ ਜਾਂਦੇ ਹਨ
+### 2. **ਏਨਕ੍ਰਿਪਟਿਡ ਕਨੈਕਸ਼ਨ**
+- ✅ SQL Server ਲਈ ਘੱਟੋ-ਘੱਟ TLS 1.2
+- ✅ Web App ਲਈ ਸਿਰਫ HTTPS ਚਲਾਇਆ ਜਾ ਰਿਹਾ ਹੈ
+- ✅ ਡੇਟਾਬੇਸ ਕਨੈਕਸ਼ਨ ਇੰਕ੍ਰਿਪਟਿਡ ਚੈਨਲਾਂ ਰਾਹੀਂ ਹੁੰਦੇ ਹਨ
 
-### 3. **ਨੈਟਵਰਕ ਸੁਰੱਖਿਆ**
-- ✅ SQL Server ਫਾਇਰਵਾਲ Azure ਸਰਵਿਸਿਜ਼ ਨੂੰ ਹੀ ਆਗਿਆ ਦਿੰਦੈ
-- ✅ ਪਬਲਿਕ ਨੈਟਵਰਕ ਪਹੁੰਚ ਸੀਮਿਤ (ਹੋਰ ਤੌਰ 'ਤੇ Private Endpoints ਨਾਲ ਆਪਣੀ/ਹੋਰ ਲਾਕ ਡਾਊਨ ਕੀਤੀ ਜਾ ਸਕਦੀ ਹੈ)
-- ✅ Web App 'ਤੇ FTPS ਨਿਰਤਾਰਿਤ ਤੌਰ 'ਤੇ ਬੰਦ
+### 3. **ਨੈੱਟਵਰਕ ਸੁਰੱਖਿਆ**
+- ✅ SQL Server ਫਾਇਰਵਾਲ ਕੇਵਲ Azure ਸੇਵਾਵਾਂ ਨੂੰ ਆਗਿਆ ਦਿੰਦਾ ਹੈ
+- ✅ ਪਬਲਿਕ ਨੈੱਟਵਰਕ ਐਕਸੈਸ ਸੀਮਤ (Private Endpoints ਨਾਲ ਹੋਰ ਲਾਕ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ)
+- ✅ Web App ‘ਤੇ FTPS ਅਯੋਗ ਕੀਤਾ ਗਿਆ
 
-### 4. **ਪਛਾਣ ਅਤੇ ਅਧਿਕਾਰਤਾ**
+### 4. **Authentication & Authorization**
 - ⚠️ **ਮੌਜੂਦਾ**: SQL authentication (username/password)
-- ✅ **ਉਤਪਾਦਨ ਦੀ ਸਿਫਾਰਸ਼**: passwordless authentication ਲਈ Azure Managed Identity ਵਰਤੋ
+- ✅ **ਪੈਦਾਵਾਰ ਸਿਫਾਰਸ਼**: ਪਾਸਵਰਡ-ਰਹਿਤ ਪ੍ਰਮਾਣਿਕਤਾ ਲਈ Azure Managed Identity ਵਰਤੋ
 
-**Managed Identity 'ਤੇ ਅਪਗਰੇਡ ਕਰਨ ਲਈ** (ਉਤਪਾਦਨ ਲਈ):
-1. Web App 'ਤੇ managed identity ਯੋਗ ਕਰੋ
-2. Identity ਨੂੰ SQL ਅਨੁਮਤੀਆਂ ਦਿਓ
-3. کنیکشن ਸਟਰਿੰਗ update ਕਰੋ ਤਾਂ ਜੋ managed identity ਵਰਤੇ
-4. ਪਾਸਵਰਡ-ਆਧਾਰਿਤ ਪ੍ਰਮਾਣਪੱਤਰ ਹਟਾਓ
+**Managed Identity ਵਿੱਚ ਅੱਪਗਰੇਡ ਕਰਨ ਲਈ** (ਪੈਦਾਵਾਰ ਲਈ):
+1. Web App ‘ਤੇ managed identity ਯੋਗ ਕਰੋ
+2. identity ਨੂੰ SQL ਪర్మਿਸ਼ਨ ਦਿਓ
+3. connection string ਨੂੰ managed identity ਵਰਤਣ ਲਈ ਅਪਡੇਟ ਕਰੋ
+4. ਪਾਸਵਰਡ-ਅਧਾਰਿਤ ਪ੍ਰਮਾਣਿਕਤਾ ਹਟਾਓ
 
 ### 5. **ਆਡੀਟਿੰਗ ਅਤੇ ਅਨੁਕੂਲਤਾ**
-- ✅ Application Insights ਸਾਰੇ ਰਿਕਵੇਸਟ ਅਤੇ ਐਰਰ ਲੌਗ ਕਰਦਾ ਹੈ
-- ✅ SQL Database ਆਡੀਟਿੰਗ ਯੋਗ ਹੈ (ਕੰਪਲਾਇੰਸ ਲਈ ਕੰਫਿਗਰ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ)
-- ✅ ਸਾਰੇ ਸਰੋਤ ਗਵਰਨੈਂਸ ਲਈ ਟੈਗ ਕੀਤੇ ਜਾਂਦੇ ਹਨ
+- ✅ Application Insights ਸਾਰੇ ਰਿਕਵੈਸਟ ਅਤੇ ਏਰਰਲੌਗ ਕਰਦਾ ਹੈ
+- ✅ SQL Database ਆਡੀਟਿੰਗ ਯੋਗ ਹੈ (ਕੰਪਲਾਇੰਸ ਲਈ ਕਨਫਿਗਰ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ)
+- ✅ ਤਮਾਮ ਰਿਸੋਰਸ ਗਵਰਨੈਂਸ ਲਈ ਟੈਗ ਕੀਤੇ ਗਏ ਹਨ
 
-**ਉਤਪਾਦਨ ਤੋਂ ਪਹਿਲਾਂ ਸੁਰੱਖਿਆ ਚੈਕਲਿਸਟ**:
+**ਪੈਦਾਵਾਰ ਤੋਂ ਪਹਿਲਾਂ ਸੁਰੱਖਿਆ ਚੈਕਲਿਸਟ**:
 - [ ] SQL ਲਈ Azure Defender ਯੋਗ ਕਰੋ
-- [ ] SQL Database ਲਈ Private Endpoints ਕੰਫਿਗਰ ਕਰੋ
+- [ ] SQL Database ਲਈ Private Endpoints ਕਨਫਿਗਰ ਕਰੋ
 - [ ] Web Application Firewall (WAF) ਯੋਗ ਕਰੋ
-- [ ] Secret rotation ਲਈ Azure Key Vault ਲਾਗੂ ਕਰੋ
-- [ ] Azure AD authentication ਕੰਫਿਗਰ ਕਰੋ
-- [ ] ਸਾਰਿਆਂ ਸਰੋਤਾਂ ਲਈ diagnostic logging ਯੋਗ ਕਰੋ
+- [ ] ਨਗਰਾਨੀ ਲਈ Azure Key Vault ਨੂੰ ਲਾਗੂ ਕਰੋ
+- [ ] Azure AD ਪ੍ਰਮਾਣਿਕਤਾ ਕਨਫਿਗਰ ਕਰੋ
+- [ ] ਸਾਰੇ ਰਿਸੋਰਸ ਲਈ ਡਾਇਗਨੋਸਟਿਕ ਲੌਗਿੰਗ ਯੋਗ ਕਰੋ
 
-## ਲਾਗਤ ਅਪਟੀਮਾਈਜ਼ੇਸ਼ਨ
+## ਲਾਗਤ ਦੀ ਬਚਤ
 
-**ਅੰਦਾਜ਼ਾ ਮਹੀਨਾਵਾਰ ਲਾਗਤਾਂ** (ਨਵੰਬਰ 2025 ਦੀ ਸਥਿਤੀ ਦੇ ਅਨੁਸਾਰ):
+**ਮੈਂਹੀਨਾ ਅਨੁਮਾਨਕੀ ਲਾਗਤ** (ਨਵੰਬਰ 2025 ਤੱਕ):
 
 | Resource | SKU/Tier | Estimated Cost |
 |----------|----------|----------------|
@@ -400,68 +401,68 @@ sku: {
 | Application Insights | Pay-as-you-go | ~$2/month (low traffic) |
 | **Total** | | **~$20/month** |
 
-**💡 ਲਾਗਤ ਘਟਾਉਣ ਲਈ ਸੁਝਾਅ**:
+**💡 ਲਾਗਤ ਬਚਾਉਣ ਦੇ ਸੁਝਾਅ**:
 
-1. **ਸਿੱਖਣ ਲਈ Free Tier ਦੀ ਵਰਤੋਂ ਕਰੋ**:
-   - App Service: F1 ਟੀਅਰ (ਮੁਫ਼ਤ, ਸੀਮਿਤ ਘੰਟੇ)
-   - SQL Database: Azure SQL Database serverless ਵਰਤੋਂ
+1. **ਸਿੱਖਣ ਲਈ Free Tier ਵਰਤੋ**:
+   - App Service: F1 ਟੀਅਰ (ਫ੍ਰੀ, ਸੀਮਤ ਘੰਟੇ)
+   - SQL Database: Azure SQL Database serverless ਵਰਤੋ
    - Application Insights: 5GB/ਮਹੀਨਾ ਮੁਫ਼ਤ ingestion
 
-2. **ਜਦੋਂ ਵਰਤੋਂ ਨਾਹੀ ਹੋ ਰਹੀ ਤਾਂ ਸਰੋਤ ਰੋਕੋ**:
+2. **ਜਦੋਂ ਵਰਤ ਨਹੀਂ ਰਹੇ ਤਾਂ ਰਿਸੋਰਸ ਰੋਕੋ**:
    ```sh
-   # ਵੈੱਬ ਐਪ ਨੂੰ ਰੋਕੋ (ਡੇਟਾਬੇਸ ਲਈ ਫਿਰ ਵੀ ਖਰਚ ਹੁੰਦੇ ਹਨ)
+   # ਵੈਬ ਐਪ ਨੂੰ ਰੋਕੋ (ਡੇਟਾਬੇਸ ਲਈ ਖਰਚੇ ਫਿਰ ਵੀ ਲੱਗਦੇ ਰਹਿੰਦੇ ਹਨ)
    az webapp stop --name <app-name> --resource-group <rg-name>
    
-   # ਲੋੜ ਪੈਣ ਤੇ ਮੁੜ ਸ਼ੁਰੂ ਕਰੋ
+   # ਲੋੜ ਹੋਣ 'ਤੇ ਮੁੜ ਚਾਲੂ ਕਰੋ
    az webapp start --name <app-name> --resource-group <rg-name>
    ```
 
-3. **ਟੈਸਟਿੰਗ ਤੋਂ ਬਾਅਦ ਸਾਰਿਆਂ ਨੂੰ ਡਿਲੀਟ ਕਰੋ**:
+3. **ਟੈਸਟਿੰਗ ਮਗਰੋਂ ਸਭ ਕੁਝ ਮਿਟਾਓ**:
    ```sh
    azd down
    ```
-   ਇਹ ਸਾਰੇ ਸਰੋਤ ਹਟਾ ਦਿੰਦਾ ਹੈ ਅਤੇ ਚਾਰਜ ਰੋਕਦਾ ਹੈ।
+   ਇਸ ਨਾਲ ਸਾਰੇ ਰਿਸੋਰਸ ਹਟ ਜਾਣਗੇ ਅਤੇ ਚਾਰ্জ ਰੁਕ ਜਾਣਗੇ।
 
-4. **ਡਿਵੈਲਪਮੈਂਟ ਵੱਵਰੁੱਧ ਉਤਪਾਦਨ SKUs**:
-   - **Development**: Basic ਟੀਅਰ (ਇਸ ਉਦਾਹਰਨ ਵਿੱਚ ਵਰਤਿਆ ਗਿਆ)
+4. **Development ਵਿ. Production SKUs**:
+   - **Development**: ਬੇਸਿਕ ਟੀਅਰ (ਇਸ ਉਦਾਹਰਨ ਵਿੱਚ ਵਰਤਿਆ ਗਿਆ)
    - **Production**: redundancy ਵਾਲੇ Standard/Premium ਟੀਅਰ
 
-**ਲਾਗਤ ਮਾਨੀਟਰਿੰਗ**:
+**ਲਾਗਤ ਨਿਗਰਾਨੀ**:
 - [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement) ਵਿੱਚ ਲਾਗਤ ਵੇਖੋ
 - ਅਚਾਨਕ ਚਾਰਜ ਤੋਂ ਬਚਣ ਲਈ ਲਾਗਤ ਅਲਰਟ ਸੈੱਟ ਕਰੋ
-- ਟ੍ਰੈਕਿੰਗ ਲਈ ਸਾਰੇ ਸਰੋਤਾਂ ਨੂੰ `azd-env-name` ਨਾਲ ਟੈਗ ਕਰੋ
+- ਟਰੈਕਿੰਗ ਲਈ ਸਾਰੇ ਰਿਸੋਰਸਾਂ ਨੂੰ `azd-env-name` ਨਾਲ ਟੈਗ ਕਰੋ
 
-**ਮੁਫ਼ਤ ਟੀਅਰ ਵਿਕਲਪ**:
-ਸਿੱਖਣ ਲਈ, ਤੁਸੀਂ ਬਦਲ ਸਕਦੇ ਹੋ `infra/resources/app-service-plan.bicep`:
+**ਫ੍ਰੀ ਟੀਅਰ ਵਿਕਲਪ**:
+ਸਿੱਖਣ ਦੇ ਉਦੇਸ਼ ਲਈ, ਤੁਸੀਂ `infra/resources/app-service-plan.bicep` ਸੋਧ ਸਕਦੇ ਹੋ:
 ```bicep
 sku: {
   name: 'F1'  // Free tier
   tier: 'Free'
 }
 ```
-**ਨੋਟ**: ਮੁਫ਼ਤ ਟੀਅਰ ਦੀਆਂ ਸੀਮਾਵਾਂ ਹਨ (60 ਮਿੰਟ/ਦਿਨ CPU, no always-on)।
+**Note**: ਮੁਫ਼ਤ ਟੀਅਰ ਦੀਆਂ ਪਾਬੰਦੀਆਂ ਹਨ (60 min/day CPU, always-on ਨਹੀਂ)।
 
-## ਮਾਨੀਟਰਿੰਗ ਅਤੇ ਅਬਜ਼ਰਵੇਬਿਲਟੀ
+## ਮਾਨੀਟਰਿੰਗ ਅਤੇ ਦਿੱਖ-ਯੋਗਤਾ
 
-### Application Insights ਇੰਟੀਗ੍ਰੇਸ਼ਨ
+### Application Insights ਇੰਟੀਗਰੇਸ਼ਨ
 
-ਇਸ ਉਦਾਹਰਨ ਵਿੱਚ ਵਿਸਤృత ਮਾਨੀਟਰਿੰਗ ਲਈ **Application Insights** ਸ਼ਾਮਲ ਹੈ:
+ਇਹ ਉਦਾਹਰਨ ਵਿਸਥਾਰਤ ਮਾਨੀਟਰਿੰਗ ਲਈ **Application Insights** ਸ਼ਾਮਲ ਕਰਦੀ ਹੈ:
 
 **ਕੀ ਮਾਨੀਟਰ ਕੀਤਾ ਜਾਂਦਾ ਹੈ**:
-- ✅ HTTP ਰਿਕਵੇਸਟ (ਲੈਟੈਂਸੀ, ਸਟੇਟਸ ਕੋਡ, endpoints)
-- ✅ ਐਪਲੀਕੇਸ਼ਨ ਐਰਰ ਅਤੇ ਐਕਸੈਪਸ਼ਨ
-- ✅ Flask ਐਪ ਤੋਂ ਕਸ੍ਟਮ ਲੋਗਿੰਗ
+- ✅ HTTP ਰਿਕਵੈਸਟ (ਲੈਟੈਂਸੀ, ਸਟੇਟਸ ਕੋਡ, endpoints)
+- ✅ ਐਪਲੀਕੇਸ਼ਨ ਏਰਰ ਅਤੇ ਐਕਸੈਪਸ਼ਨ
+- ✅ Flask ਐਪ ਤੋਂ ਕਸਟਮ ਲੌਗਿੰਗ
 - ✅ ਡੇਟਾਬੇਸ ਕਨੈਕਸ਼ਨ ਸਿਹਤ
-- ✅ ਪ੍ਰਦਰਸ਼ਨ ਮੈਟਰਿਕਸ (CPU, memory)
+- ✅ ਪ੍ਰਦਰਸ਼ਨ ਮੈਟ੍ਰਿਕਸ (CPU, ਮੈਮੋਰੀ)
 
 **Application Insights ਤੱਕ ਪਹੁੰਚ**:
 1. [Azure Portal](https://portal.azure.com) ਖੋਲ੍ਹੋ
 2. ਆਪਣੇ resource group (`rg-<env-name>`) ਤੇ ਜਾਓ
-3. Application Insights ਸਰੋਤ (`appi-<unique-id>`) 'ਤੇ ਕਲਿੱਕ ਕਰੋ
+3. Application Insights resource (`appi-<unique-id>`) 'ਤੇ ਕਲਿੱਕ ਕਰੋ
 
-**ਉਪਯੋਗੀ ਕਵੈਰੀਜ਼** (Application Insights → Logs):
+**ਲਾਭਦਾਇਕ ਕੁਏਰੀਜ਼** (Application Insights → Logs):
 
-**ਸਭ ਰਿਕਵੇਸਟ ਵੇਖੋ**:
+**ਸਾਰੇ Requests ਵੇਖੋ**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -469,7 +470,7 @@ requests
 | project timestamp, name, url, resultCode, duration
 ```
 
-**ਏਰਰ ਲੱਭੋ**:
+**Errors ਲੱਭੋ**:
 ```kusto
 exceptions
 | where timestamp > ago(24h)
@@ -486,27 +487,27 @@ requests
 
 ### SQL Database ਆਡੀਟਿੰਗ
 
-**SQL Database ਆਡੀਟਿੰਗ ਯੋਗ ਕੀਤੀ ਗਈ ਹੈ** ਤਾਂ ਜੋ ਟਰੈਕ ਕੀਤਾ ਜਾ سکے:
-- ਡੇਟਾਬੇਸ ਪਹੁੰਚ ਪੈਟਰਨ
-- ਨਾਕਾਮ ਲੌਗਿਨ ਕੋਸ਼ਿਸ਼ਾਂ
-- ਸਕੀਮਾ ਬਦਲਾਅ
-- ਡੇਟਾ ਪਹੁੰਚ (ਕੰਪਲਾਇੰਸ ਲਈ)
+**SQL Database ਆਡੀਟਿੰਗ ਯੋਗ ਹੈ** ਤਾਂ ਜੋ ਇਹ ਟਰੈਕ ਕਰ ਸਕੇ:
+- ਡੇਟਾਬੇਸ ਐਕਸੈਸ ਪੈਟਰਨ
+- ਨਾਕਾਮ ਲੋਗਿਨ ਕੋਸ਼ਿਸ਼ਾਂ
+- ਸਕੀਮਾ ਬਦਲਾਵ
+- ਡੇਟਾ ਐਕਸੈਸ (ਕੰਪਲਾਇੰਸ ਲਈ)
 
 **ਆਡੀਟ ਲੌਗਸ ਤੱਕ ਪਹੁੰਚ**:
 1. Azure Portal → SQL Database → Auditing
-2. Log Analytics workspace ਵਿੱਚ ਲੌਗਸ ਵੇਖੋ
+2. Log Analytics workspace ਵਿੱਚ ਲੌਗ ਵੇਖੋ
 
 ### ਰੀਅਲ-ਟਾਈਮ ਮਾਨੀਟਰਿੰਗ
 
-**ਲਾਈਵ ਮੈਟ੍ਰਿਕਸ ਵੇਖੋ**:
+**ਲਾਈਵ ਮੈਟਰਿਕਸ ਵੇਖੋ**:
 1. Application Insights → Live Metrics
-2. ਰੀਅਲ-ਟਾਈਮ ਵਿੱਚ ਰਿਕਵੇਸਟ, ਫੇਲਿਯਰ, ਅਤੇ ਪ੍ਰਦਰਸ਼ਨ ਦੇਖੋ
+2. ਸੱਚ-ਵਕਤ ਵਿੱਚ ਰਿਕਵੈਸਟ, ਫੇਲਿਯਰ ਅਤੇ ਪ੍ਰਦਰਸ਼ਨ ਦੇਖੋ
 
-**ਅਲਰਟ ਸੈੱਟ ਕਰੋ**:
-ਨਿਮਨਲਿਖਤ ਸਮੀਕਰਨ ਲਈ ਅਲਰਟ ਬਣਾਓ:
-- 5 ਮਿੰਟ ਵਿੱਚ HTTP 500 ਐਰਰ > 5
-- ਡੇਟਾਬੇਸ ਕਨੈਕਸ਼ਨ ਫੇਲਿਉਰ
-- ਉੱਚ ਰਿਸਪਾਂਸ ਸਮਾਂ (>2 ਸੈਕਿੰਡ)
+**ਅਲਰਟਸ ਸੈੱਟ ਕਰੋ**:
+ਜ਼ਰੂਰੀ ਘਟਨਾਵਾਂ ਲਈ ਅਲਰਟ ਬਣਾਓ:
+- HTTP 500 errors > 5 in 5 minutes
+- ਡੇਟਾਬੇਸ ਕਨੈਕਸ਼ਨ ਫੇਲਿਯਰ
+- ਉੱਚ ਰਿਸਪਾਂਸ ਸਮਾਂ (>2 seconds)
 
 **ਅਲਰਟ ਬਣਾਉਣ ਦਾ ਉਦਾਹਰਨ**:
 ```sh
@@ -521,7 +522,7 @@ az monitor metrics alert create \
 ## Troubleshooting
 ### ਆਮ ਸਮੱਸਿਆਵਾਂ ਅਤੇ ਉਨ੍ਹਾਂ ਦੇ ਹੱਲ
 
-#### 1. `azd provision` "Location not available" ਨਾਲ ਫੇਲ
+#### 1. `azd provision` ਅਸਫਲ "Location not available" ਨਾਲ
 
 **ਲੱਛਣ**:
 ```
@@ -529,12 +530,12 @@ Error: The subscription is not registered for the resource type 'components' in 
 ```
 
 **ਹੱਲ**:
-ਕਿਸੇ ਹੋਰ Azure ਖੇਤਰ ਦੀ ਚੋਣ ਕਰੋ ਜਾਂ ਰਿਸੋਰਸ ਪ੍ਰੋਵਾਈਡਰ ਨੂੰ ਰਜਿਸਟਰ ਕਰੋ:
+ਕਿਸੇ ਹੋਰ Azure ਰੀਜਨ ਚੁਣੋ ਜਾਂ ਰਿਸੋਰਸ ਪ੍ਰੋਵਾਈਡਰ ਰਜਿਸਟਰ ਕਰੋ:
 ```sh
 az provider register --namespace Microsoft.Insights
 ```
 
-#### 2. ਡਿਪਲੌਇਮੈਂਟ ਦੌਰਾਨ SQL Connection ਫੇਲ
+#### 2. ਡਿਪਲੋਇਮੈਂਟ ਦੌਰਾਨ SQL ਕਨੈਕਸ਼ਨ ਫੇਲ
 
 **ਲੱਛਣ**:
 ```
@@ -542,34 +543,34 @@ pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL S
 ```
 
 **ਹੱਲ**:
-- ਯਕੀਨੀ ਬਣਾਓ ਕਿ SQL Server ਫਾਇਰਵਾਲ Azure ਸੇਵਾਵਾਂ ਨੂੰ ਆਗਿਆ ਦਿੰਦਾ ਹੈ (ਆਟੋਮੈਟਿਕ ਤੌਰ 'ਤੇ ਸੰਰਚਿਤ)
-- ਜਾਂਚੋ ਕਿ SQL admin ਪਾਸਵਰਡ `azd provision` ਦੌਰਾਨ ਠੀਕ ਦਰਜ ਕੀਤਾ ਗਿਆ ਸੀ
-- ਯਕੀਨੀ ਬਣਾਓ ਕਿ SQL Server ਪੂਰੀ ਤਰ੍ਹਾਂ ਪ੍ਰੋਵਿਜ਼ਨ ਹੋਇਆ ਹੈ (2-3 ਮਿੰਟ ਲੱਗ ਸਕਦੇ ਹਨ)
+- ਜਾਂਚੋ ਕਿ SQL Server ਫਾਇਰਵਾਲ Azure ਸੇਵਾਵਾਂ ਦੀ ਆਗਿਆ ਦਿੰਦਾ ਹੈ (ਆਟੋਮੈਟਿਕ ਤੌਰ 'ਤੇ ਕੰਫਿਗਰ ਕੀਤਾ ਗਿਆ)
+- ਜਾਂਚੋ ਕਿ SQL ਐਡਮਿਨ ਪਾਸਵਰਡ `azd provision` ਦੌਰਾਨ ਸਹੀ ਤਰ੍ਹਾਂ ਦਰਜ ਕੀਤਾ ਗਿਆ ਸੀ
+- ਯਕੀਨੀ ਬਣਾਓ ਕਿ SQL Server ਪੂਰੀ ਤਰ੍ਹਾਂ ਪ੍ਰੋਵਿਜ਼ਨ ਹੋਇਆ ਹੈ (2-3 ਮਿੰਟ ਲੱਗ ਸਕਦੇ ਹਨ)
 
 **ਕਨੈਕਸ਼ਨ ਦੀ ਜਾਂਚ ਕਰੋ**:
 ```sh
-# Azure ਪੋਰਟਲ ਵਿੱਚੋਂ SQL Database → Query editor ਤੇ ਜਾਓ
-# ਆਪਣੀਆਂ ਲਾਗਇਨ ਜਾਣਕਾਰੀਆਂ ਨਾਲ ਜੁੜਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ
+# Azure ਪੋਰਟਲ ਵਿੱਚੋਂ SQL ਡੇਟਾਬੇਸ → ਕੁਐਰੀ ਐਡੀਟਰ 'ਤੇ ਜਾਓ
+# ਆਪਣੀਆਂ ਪ੍ਰਮਾਣ-ਪੱਤਰਾਂ ਨਾਲ ਜੁੜਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ
 ```
 
 #### 3. ਵੈੱਬ ਐਪ "Application Error" ਦਿਖਾਉਂਦਾ ਹੈ
 
 **ਲੱਛਣ**:
-ਬ੍ਰਾਉਜ਼ਰ ਇੱਕ ਸਧਾਰਣ ਐਰਰ ਪੇਜ ਦਿਖਾਉਂਦਾ ਹੈ।
+ਬ੍ਰਾਉਜ਼ਰ ਇੱਕ ਜਨਰਿਕ ਐਰਰ ਪੰਨਾ ਦਿਖਾਉਂਦਾ ਹੈ।
 
 **ਹੱਲ**:
-ਐਪਲੀਕੇਸ਼ਨ ਲੌਗ ਚੈੱਕ ਕਰੋ:
+ਐਪਲੀਕੇਸ਼ਨ ਲਾਗ ਚੈੱਕ ਕਰੋ:
 ```sh
 # ਹਾਲੀਆ ਲੌਗ ਵੇਖੋ
 az webapp log tail --name <app-name> --resource-group <rg-name>
 ```
 
 **ਆਮ ਕਾਰਨ**:
-- ਮਾਹੌਲ ਵਾਲੇ ਵੈਰੀਏਬਲ ਗਾਇਬ ਹਨ (App Service → Configuration ਚੈੱਕ ਕਰੋ)
-- Python ਪੈਕੇਜ ਇੰਸਟਾਲੇਸ਼ਨ ਅਸਫਲ ਹੋਇਆ (ਡਿਪਲੌਇਮੈਂਟ ਲੌਗ ਚੈੱਕ ਕਰੋ)
-- ਡੇਟਾਬੇਸ ਇਨੀਸ਼ੀਅਲਾਈਜ਼ੇਸ਼ਨ ਤ੍ਰੁੱਟੀ (SQL ਕਨੈਕਟਿਵਿਟੀ ਚੈੱਕ ਕਰੋ)
+- ਜਰੂਰੀ ਵਾਤਾਵਰਣ ਵੈਰੀਏਬਲ ਗਾਇਬ ਹਨ (App Service → Configuration ਚੈੱਕ ਕਰੋ)
+- Python ਪੈਕੇਜ ਇੰਸਟਾਲੇਸ਼ਨ ਫੇਲ ਹੋ ਗਿਆ (ਡਿਪਲੋਇਮੈਂਟ ਲੌਗ ਚੈੱਕ ਕਰੋ)
+- ਡਾਟਾਬੇਸ ਇਨਿਸ਼ੀਅਲਾਈਜ਼ੇਸ਼ਨ ਦੀ ਗੜਬੜ (SQL ਕਨੈਕਟਿਵਿਟੀ ਚੈੱਕ ਕਰੋ)
 
-#### 4. `azd deploy` "Build Error" ਨਾਲ ਫੇਲ
+#### 4. `azd deploy` ਅਸਫਲ "Build Error" ਨਾਲ
 
 **ਲੱਛਣ**:
 ```
@@ -577,18 +578,18 @@ Error: Failed to build project
 ```
 
 **ਹੱਲ**:
-- ਯਕੀਨੀ ਬਣਾਓ ਕਿ `requirements.txt` ਵਿੱਚ ਕੋਈ ਸਿੰਟੈਕਸ ਤ੍ਰੁੱਟੀ ਨਹੀਂ ਹੈ
-- ਜਾਂਚੋ ਕਿ Python 3.11 `infra/resources/web-app.bicep` ਵਿੱਚ ਦਰਜ ਹੈ
-- ਪਕਾਓ ਕਿ Dockerfile ਵਿੱਚ ਸਹੀ ਬੇਸ ਇਮੇਜ ਹੈ
+- ਯਕੀਨੀ ਬਣਾਓ ਕਿ `requirements.txt` ਵਿੱਚ ਕੋਈ ਸਿੰਟੈਕਸ ਐਰਰ ਨਹੀਂ ਹਨ
+- ਜਾਂਚੋ ਕਿ Python 3.11 `infra/resources/web-app.bicep` ਵਿੱਚ ਦਰਜ ਕੀਤਾ ਗਿਆ ਹੈ
+- ਯਕੀਨੀ ਬਣਾਓ ਕਿ Dockerfile ਵਿੱਚ ਸਹੀ ਬੇਸ ਇਮੇਜ ਹੈ
 
-**ਲੋਕਲ ਤੌਰ 'ਤੇ ਡੀਬੱਗ ਕਰੋ**:
+**ਲੋਕਲ ਤੇ ਡੀਬੱਗ ਕਰੋ**:
 ```sh
 cd src/web
 docker build -t test-app .
 docker run -p 8000:8000 test-app
 ```
 
-#### 5. AZD ਕਮਾਂਡ ਚਲਾਉਂਦਿਆਂ "ਅਣਅਧਿਕਾਰਤ"
+#### 5. AZD ਕਮਾਂਡ ਚਲਾਉਂਦੇ ਸਮੇਂ "Unauthorized"
 
 **ਲੱਛਣ**:
 ```
@@ -596,87 +597,90 @@ ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have auth
 ```
 
 **ਹੱਲ**:
-ਮੁੜ Azure ਨਾਲ ਪ੍ਰਮਾਣਿਕਤਾ ਕਰੋ:
+Azure ਨਾਲ ਮੁੜ ਪ੍ਰਮਾਣਿਕਰਣ ਕਰੋ:
 ```sh
+# AZD ਵਰਕਫਲੋ ਲਈ ਲਾਜ਼ਮੀ
 azd auth login
+
+# ਜੇ ਤੁਸੀਂ ਸਿੱਧੇ ਤੌਰ 'ਤੇ Azure CLI ਕਮਾਂਡਾਂ ਵੀ ਵਰਤ ਰਹੇ ਹੋ ਤਾਂ ਇਹ ਵਿਕਲਪਿਕ ਹੈ
 az login
 ```
 
-ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਤੁਹਾਡੇ ਕੋਲ subscription 'ਤੇ ਸਹੀ ਅਨੁਮਤੀਆਂ ਹਨ (Contributor ਭੂਮਿਕਾ)।
+ਪੱਕਾ ਕਰੋ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਸਬਸਕ੍ਰਿਪਸ਼ਨ 'ਤੇ ਠੀਕ ਅਧਿਕਾਰ ਹਨ (Contributor ਰੋਲ).
 
-#### 6. ਡੇਟਾਬੇਸ ਦੇ ਉੱਚੇ ਖਰਚੇ
+#### 6. ਡਾਟਾਬੇਸ ਦੇ ਉੱਚੇ ਖਰਚੇ
 
 **ਲੱਛਣ**:
-ਅਣਉਮੀਦਿਤ Azure ਬਿੱਲ।
+ਅਣਪੇक्षित Azure ਬਿੱਲ।
 
 **ਹੱਲ**:
-- ਚੈੱਕ ਕਰੋ ਕਿ ਕੀ ਤੁਸੀਂ ਟੈਸਟਿੰਗ ਦੇ ਬਾਅਦ `azd down` ਚਲਾਉਣਾ ਭੁੱਲ ਗਏ ਸੀ
-- ਤਸਦੀਕ ਕਰੋ ਕਿ SQL Database Basic tier ਵਰਤ ਰਿਹਾ ਹੈ (Premium ਨਹੀਂ)
+- ਜਾਂਚੋ ਕਿ ਕੀ ਤੁਸੀਂ ਟੈਸਟ ਕਰਨ ਤੋਂ ਬਾਅਦ `azd down` ਚਲਾਉਣਾ ਭੁੱਲ ਗਏ ਸੀ
+- ਯਕੀਨੀ ਬਣਾਓ ਕਿ SQL Database Basic tier ਵਰਤ ਰਿਹਾ ਹੈ (Premium ਨਹੀਂ)
 - Azure Cost Management ਵਿੱਚ ਖਰਚੇ ਸਮੀਖਿਆ ਕਰੋ
-- ਖਰਚੇ ਲਈ alerts ਸੈੱਟ ਕਰੋ
+- ਲਾਗਤ ਅਲਰਟ ਸੈਟ ਕਰੋ
 
-### ਸਹਾਇਤਾ ਪ੍ਰਾਪਤ ਕਰੋ
+### ਮਦਦ
 
-**ਸਾਰੇ AZD Environment Variables ਵੇਖੋ**:
+**ਸਾਰੇ AZD ਵਾਤਾਵਰਣ ਵੈਰੀਏਬਲ ਵੇਖੋ**:
 ```sh
 azd env get-values
 ```
 
-**ਡਿਪਲੌਇਮੈਂਟ ਸਥਿਤੀ ਚੈੱਕ ਕਰੋ**:
+**ਡਿਪਲੋਇਮੈਂਟ ਸਥਿਤੀ ਚੈੱਕ ਕਰੋ**:
 ```sh
 az webapp show --name <app-name> --resource-group <rg-name> --query state
 ```
 
-**ਐਪਲੀਕੇਸ਼ਨ ਲੌਗਸ ਤੱਕ ਪਹੁੰਚ**:
+**ਐਪਲੀਕੇਸ਼ਨ ਲਾਗ ਐਕਸੈਸ ਕਰੋ**:
 ```sh
 az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
 ```
 
 **ਹੋਰ ਮਦਦ ਚਾਹੀਦੀ ਹੈ?**
-- [AZD Troubleshooting Guide](../../docs/chapter-07-troubleshooting/common-issues.md)
-- [Azure App Service Troubleshooting](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
-- [Azure SQL Troubleshooting](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
+- [AZD ਟਰਬਲਸ਼ੂਟਿੰਗ ਗਾਈਡ](../../docs/chapter-07-troubleshooting/common-issues.md)
+- [Azure App Service ਟ੍ਰਬਲਸ਼ੂਟਿੰਗ](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
+- [Azure SQL ਟ੍ਰਬਲਸ਼ੂਟਿੰਗ](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
 
-## ਪ੍ਰਯੋਗਾਤਮਕ ਅਭਿਆਸ
+## ਪ੍ਰੈਕਟਿਕਲ ਅਭਿਆਸ
 
-### ਅਭਿਆਸ 1: ਆਪਣੇ ਡਿਪਲੌਇਮੈਂਟ ਦੀ ਜਾਂਚ ਕਰੋ (ਸ਼ੁਰੂਆਤੀ)
+### ਅਭਿਆਸ 1: ਆਪਣੀ ਡਿਪਲੋਇਮੈਂਟ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ (ਬਿਗਿਨਰ)
 
-**ਉਦੇਸ਼**: ਪੱਕਾ ਕਰੋ ਕਿ ਸਾਰੇ ਰਿਸੋਰਸ ਡਿਪਲੋਇ ਹੋ ਚੁੱਕੇ ਹਨ ਅਤੇ ਐਪਲੀਕੇਸ਼ਨ ਕੰਮ ਕਰ ਰਹੀ ਹੈ।
+**ਉਦੇਸ਼**: ਯਕੀਨੀ ਬਣਾਓ ਕਿ ਸਾਰੇ ਰਿਸੋਰਸ ਤਾਇਨਾਤ ਹੋ ਚੁਕੇ ਹਨ ਅਤੇ ਐਪਲੀਕੇਸ਼ਨ ਠੀਕ ਕੰਮ ਕਰ ਰਹੀ ਹੈ।
 
 **ਕਦਮ**:
-1. ਆਪਣੇ ਰਿਸੋਰਸ ਗਰੁੱਪ ਵਿੱਚ ਸਾਰੇ ਰਿਸੋਰਸ ਲਿਸਟ ਕਰੋ:
+1. ਆਪਣੇ resource group ਵਿੱਚ ਸਾਰੇ ਰਿਸੋਰਸ ਲਿਸਟ ਕਰੋ:
    ```sh
    az resource list --resource-group rg-<env-name> --output table
    ```
-   **ਉਮੀਦ**: 6-7 ਰਿਸੋਰਸ (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
+   **ਉਮੀਦ**: 6-7 resources (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
 
-2. ਸਾਰੇ API endpoints ਦੀ ਜਾਂਚ ਕਰੋ:
+2. ਸਾਰੇ API endpoints ਟੈਸਟ ਕਰੋ:
    ```sh
    curl https://app-<your-id>.azurewebsites.net/
    curl https://app-<your-id>.azurewebsites.net/health
    curl https://app-<your-id>.azurewebsites.net/products
    curl https://app-<your-id>.azurewebsites.net/products/1
    ```
-   **ਉਮੀਦ**: ਸਾਰੇ ਸਹੀ JSON ਵਾਪਸ ਕਰਦੇ ਹਨ ਬਿਨਾਂ ਤ੍ਰੁੱਟੀਆਂ ਦੇ
+   **ਉਮੀਦ**: ਸਾਰੇ ਸਹੀ JSON ਬਿਨਾਂ ਐਰਰ ਦੇ ਵਾਪਸ ਕਰਦੇ ਹਨ
 
 3. Application Insights ਚੈੱਕ ਕਰੋ:
    - Azure Portal ਵਿੱਚ Application Insights 'ਤੇ ਜਾਓ
-   - "ਲਾਈਵ ਮੈਟ੍ਰਿਕਸ" 'ਤੇ ਜਾਓ
-   - ਵੈੱਬ ਐਪ 'ਤੇ ਆਪਣਾ ਬ੍ਰਾਉਜ਼ਰ ਰੀਫ੍ਰੈਸ਼ ਕਰੋ
-   **ਉਮੀਦ**: ਰੀਅਲ-ਟਾਈਮ ਵਿੱਚ ਰਿਕਵੇਸਟਾਂ ਦਿਖਾਈ ਦੇਣ
+   - "Live Metrics" 'ਤੇ ਜਾਓ
+   - ਵੈੱਬ ਐਪ 'ਤੇ ਆਪਣੇ ਬ੍ਰਾਊਜ਼ਰ ਨੂੰ ਰੀਫ੍ਰੈਸ਼ ਕਰੋ
+   **ਉਮੀਦ**: ਰੀਅਲ-ਟਾਈਮ ਵਿੱਚ ਨਿuroੋਤਾਂ ਦਿਖਾਈ ਦੈਣ
 
-**ਕਾਮਯਾਬੀ ਦੇ ਮਾਪਦੰਡ**: ਸਾਰੇ 6-7 ਰਿਸੋਰਸ ਮੌਜੂਦ ਹਨ, ਸਾਰੇ endpoints ਡੇਟਾ ਵਾਪਸ ਕਰਦੇ ਹਨ, Live Metrics ਚ ਸਰਗਰਮੀ ਦਿਖਾਈ ਦਿੰਦੀ ਹੈ।
+**ਸਫਲਤਾ ਮਾਪਦੰਡ**: ਸਾਰੇ 6-7 ਰਿਸੋਰਸ ਮੌਜੂਦ ਹਨ, ਸਾਰੇ endpoints ਡੇਟਾ ਵਾਪਸ ਕਰਦੇ ਹਨ, Live Metrics ਵਿਚ ਸਰਗਰਮੀ ਦਿਖਾਈ ਦਿੰਦੀ ਹੈ।
 
 ---
 
-### ਅਭਿਆਸ 2: ਨਵਾਂ API Endpoint ਸ਼ਾਮਲ ਕਰੋ (ਦਰਮਿਆਨਾ)
+### ਅਭਿਆਸ 2: ਨਵਾਂ API Endpoint ਜੋੜੋ (ਇੰਟਰਮੀਡੀਏਟ)
 
-**ਉਦੇਸ਼**: Flask ਐਪਲੀਕੇਸ਼ਨ ਵਿੱਚ ਨਵਾਂ endpoint ਜੋੜੋ।
+**ਉਦੇਸ਼**: Flask ਐਪਲੀਕੇਸ਼ਨ ਵਿੱਚ ਇੱਕ ਨਵਾਂ endpoint ਜੋੜੋ।
 
-**ਸ਼ੁਰੂਆਤੀ ਕੋਡ**: ਮੌਜੂਦਾ endpoints `src/web/app.py` ਵਿੱਚ
+**ਸਰਟਰ ਕੋਡ**: ਮੌਜੂਦਾ endpoints `src/web/app.py` ਵਿੱਚ
 
 **ਕਦਮ**:
-1. `src/web/app.py` ਨੂੰ ਸੰਪਾਦਿਤ ਕਰੋ ਅਤੇ `get_product()` ਫੰਕਸ਼ਨ ਤੋਂ ਬਾਅਦ ਇੱਕ ਨਵਾਂ endpoint ਜੋੜੋ:
+1. `src/web/app.py` ਨੂੰ ਐਡਿਟ ਕਰੋ ਅਤੇ `get_product()` ਫੰਕਸ਼ਨ ਤੋਂ ਬਾਅਦ ਇੱਕ ਨਵਾਂ endpoint ਸ਼ਾਮਲ ਕਰੋ:
    ```python
    @app.route('/products/search/<keyword>')
    def search_products(keyword):
@@ -710,29 +714,29 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
            return jsonify({'error': str(e)}), 500
    ```
 
-2. ਅਪਡੇਟ ਕੀਤੀ ਐਪਲੀਕੇਸ਼ਨ ਡਿਪਲੌਇ ਕਰੋ:
+2. ਅੱਪਡੇਟ ਕੀਤੀ ਐਪ ਨੂੰ ਡਿਪਲੋਇ ਕਰੋ:
    ```sh
    azd deploy
    ```
 
-3. ਨਵੇਂ endpoint ਦੀ ਜਾਂਚ ਕਰੋ:
+3. ਨਵੇਂ endpoint ਨੂੰ ਟੈਸਟ ਕਰੋ:
    ```sh
    curl https://app-<your-id>.azurewebsites.net/products/search/laptop
    ```
-   **ਉਮੀਦ**: ਉਹ ਉਤਪਾਦ ਵਾਪਸ ਕਰਦਾ ਹੈ ਜੋ "laptop" ਨਾਲ ਮੈਚ ਕਰਦੇ ਹੋਣ
+   **ਉਮੀਦ**: ਉਹਨਾਂ ਉਤਪਾਦਾਂ ਨੂੰ ਵਾਪਸ ਕਰਦਾ ਹੈ ਜੋ "laptop" ਨਾਲ ਮੇਲ ਖਾਂਦੇ ਹਨ
 
-**ਕਾਮਯਾਬੀ ਦੇ ਮਾਪਦੰਡ**: ਨਵਾਂ endpoint ਕੰਮ ਕਰਦਾ ਹੈ, ਫਿਲਟਰ ਕੀਤੇ ਨਤੀਜੇ ਵਾਪਸ ਕਰਦਾ ਹੈ, Application Insights ਲੌਗ ਵਿੱਚ ਦਿਖਾਈ ਦਿੰਦਾ ਹੈ।
+**ਸਫਲਤਾ ਮਾਪਦੰਡ**: ਨਵਾਂ endpoint ਕੰਮ ਕਰਦਾ ਹੈ, ਫਿਲਟਰੇਡ ਨਤੀਜੇ ਵਾਪਸ ਕਰਦਾ ਹੈ, Application Insights ਲਾਗਜ਼ ਵਿੱਚ ਦਿਖਾਈ ਦਿੰਦਾ ਹੈ।
 
 ---
 
-### ਅਭਿਆਸ 3: ਨਿਗਰਾਨੀ ਅਤੇ ਅਲਰਟ ਜੋੜੋ (ਉੱਚ ਪੱਧਰ)
+### ਅਭਿਆਸ 3: ਮਾਨੀਟਰਿੰਗ ਅਤੇ ਅਲਰਟ ਸ਼ਾਮਲ ਕਰੋ (ਅਡਵਾਂਸਡ)
 
-**ਉਦੇਸ਼**: ਅਲਰਟਸ ਨਾਲ ਪ੍ਰੋਐਕਟਿਵ ਮਾਨਿਟਰਿੰਗ ਸੈੱਟ ਕਰੋ।
+**ਉਦੇਸ਼**: ਅਲਰਟਾਂ ਨਾਲ ਪ੍ਰੋਐਕਟਿਵ ਮਾਨੀਟਰਿੰਗ ਸੈਟ ਅਪ ਕਰੋ।
 
 **ਕਦਮ**:
-1. HTTP 500 ਤ੍ਰੁਟੀਆਂ ਲਈ ਇਕ ਅਲਰਟ ਬਣਾਓ:
+1. HTTP 500 ਐਰਰਾਂ ਲਈ ਇੱਕ ਅਲਰਟ ਬਣਾਓ:
    ```sh
-   # Application Insights ਰਿਸੋਰਸ ID ਪ੍ਰਾਪਤ ਕਰੋ
+   # Application Insights ਦਾ ਰਿਸੋਰਸ ID ਪ੍ਰਾਪਤ ਕਰੋ
    AI_ID=$(az monitor app-insights component show \
      --app appi-<your-id> \
      --resource-group rg-<env-name> \
@@ -749,28 +753,28 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
      --description "Alert when >5 failed requests in 5 minutes"
    ```
 
-2. ਗਲਤੀਆਂ ਪੈਦਾ ਕਰਕੇ ਅਲਰਟ ਟ੍ਰਿਗਰ ਕਰੋ:
+2. ਐਰਰ ਪੈਦਾ ਕਰਕੇ ਅਲਰਟ ਟ੍ਰਿਗਰ ਕਰੋ:
    ```sh
-   # ਮੌਜੂਦ ਨਾ ਹੋਣ ਵਾਲੇ ਉਤਪਾਦ ਦੀ ਬੇਨਤੀ ਕਰੋ
+   # ਗੈਰ-ਮੌਜੂਦ ਉਤਪਾਦ ਦੀ ਬੇਨਤੀ
    for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
    ```
 
-3. ਜਾਂਚੋ ਕਿ ਅਲਰਟ ਚਲਿਆ ਹੈ ਜਾਂ ਨਹੀਂ:
+3. ਜਾਂਚੋ ਕਿ ਅਲਰਟ ਫਾਇਰ ਹੋਇਆ ਕਿ ਨਹੀਂ:
    - Azure Portal → Alerts → Alert Rules
-   - ਆਪਣਾ ਈਮੇਲ ਚੈੱਕ ਕਰੋ (ਜੇ ਸੰਰਚਿਤ ਕੀਤਾ ਗਿਆ ਹੋਵੇ)
+   - ਆਪਣੀ ਈਮੇਲ ਚੈੱਕ ਕਰੋ (ਜੇ ਕਨਫਿਗਰ ਕੀਤੀ ਹੋਈ ਹੋਵੇ)
 
-**ਕਾਮਯਾਬੀ ਦੇ ਮਾਪਦੰਡ**: ਅਲਰਟ ਰੂਲ ਬਣਿਆ ਹੋਇਆ ਹੈ, ਗਲਤੀਆਂ 'ਤੇ ਟ੍ਰਿਗਰ ਹੁੰਦਾ ਹੈ, ਸੁਚਨਾਵਾਂ ਪ੍ਰਾਪਤ ਹੁੰਦੀਆਂ ਹਨ।
+**ਸਫਲਤਾ ਮਾਪਦੰਡ**: ਅਲਰਟ ਰੂਲ ਬਣਾਇਆ ਗਿਆ ਹੈ, ਐਰਰਾਂ 'ਤੇ ਟ੍ਰਿਗਰ ਹੁੰਦਾ ਹੈ, ਸੂਚਨਾਵਾਂ ਮਿਲਦੀਆਂ ਹਨ।
 
 ---
 
-### ਅਭਿਆਸ 4: ਡੇਟਾਬੇਸ ਸਕੀਮਾ ਬਦਲਾਅ (ਉੱਚ ਪੱਧਰ)
+### ਅਭਿਆਸ 4: ਡਾਟਾਬੇਸ ਸਕੀਮਾ ਬਦਲਾਅ (ਅਡਵਾਂਸਡ)
 
-**ਉਦੇਸ਼**: ਨਵੀਂ ਟੇਬਲ ਜੋੜੋ ਅਤੇ ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਇਸਦਾ ਉਪਯੋਗ ਕਰਨ ਲਈ ਬਦਲੋ।
+**ਉਦੇਸ਼**: ਇੱਕ ਨਵੀਂ ਟੇਬਲ ਜੋੜੋ ਅਤੇ ਐਪ ਨੂੰ ਇਸਦਾ ਉਪਯੋਗ ਕਰਨ ਲਈ ਬਦਲੋ।
 
 **ਕਦਮ**:
-1. Azure Portal Query Editor ਰਾਹੀਂ SQL Database ਨਾਲ ਜੁੜੋ
+1. Azure Portal Query Editor ਰਾਹੀਂ SQL Database ਨਾਲ ਕਨੈਕਟ ਕਰੋ
 
-2. ਨਵੀਂ `categories` ਟੇਬਲ ਬਣਾਓ:
+2. ਇੱਕ ਨਵੀਂ `categories` ਟੇਬਲ ਬਣਾਓ:
    ```sql
    CREATE TABLE categories (
        id INT PRIMARY KEY IDENTITY(1,1),
@@ -787,110 +791,110 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    UPDATE products SET category_id = 1; -- Set all to Electronics
    ```
 
-3. `src/web/app.py` ਨੂੰ ਅਪਡੇਟ ਕਰੋ ਤਾਂ ਜੋ responses ਵਿੱਚ category ਜਾਣਕਾਰੀ ਸ਼ਾਮਿਲ ਹੋਵੇ
+3. `src/web/app.py` ਅਪਡੇਟ ਕਰੋ ਤਾਂ ਜੋ responses ਵਿੱਚ category ਜਾਣਕਾਰੀ ਸ਼ਾਮਲ ਹੋਵੇ
 
-4. ਡਿਪਲੌਇ ਕਰਕੇ ਜਾਂਚੋ
+4. ਡਿਪਲੋਇ ਅਤੇ ਟੈਸਟ ਕਰੋ
 
-**ਕਾਮਯਾਬੀ ਦੇ ਮਾਪਦੰਡ**: ਨਵੀਂ ਟੇਬਲ ਮੌਜੂਦ ਹੈ, ਉਤਪਾਦ category ਜਾਣਕਾਰੀ ਦਿਖਾਉਂਦੇ ਹਨ, ਐਪਲੀਕੇਸ਼ਨ ਹੁਣ ਵੀ ਕੰਮ ਕਰਦੀ ਹੈ।
+**ਸਫਲਤਾ ਮਾਪਦੰਡ**: ਨਵੀਂ ਟੇਬਲ ਮੌਜੂਦ ਹੈ, ਪ੍ਰੋਡਕਟਜ਼ ਵਿੱਚ category ਜਾਣਕਾਰੀ ਦਿਖਾਈ ਦਿੰਦੀ ਹੈ, ਐਪ ਫਿਰ ਵੀ ਕੰਮ ਕਰਦੀ ਹੈ।
 
 ---
 
-### ਅਭਿਆਸ 5: ਕੈਸ਼ਿੰਗ ਲਾਗੂ ਕਰੋ (ਮਾਹਿਰ)
+### ਅਭਿਆਸ 5: ਕੈਸ਼ਿੰਗ ਲਾਗੂ ਕਰੋ (ਐਕਸਪਰਟ)
 
-**ਉਦੇਸ਼**: ਪ੍ਰਦਰਸ਼ਨ ਸੁਧਾਰਨ ਲਈ Azure Redis Cache ਜੋੜੋ।
+**ਉਦੇਸ਼**: ਪ੍ਰਦਰਸ਼ਨ ਸੁਧਾਰਣ ਲਈ Azure Redis Cache ਜ਼ੋੜੋ।
 
 **ਕਦਮ**:
-1. `infra/main.bicep` ਵਿੱਚ Redis Cache ਜੋੜੋ
-2. `src/web/app.py` ਨੂੰ ਅਪਡੇਟ ਕਰੋ ਤਾ ਕਿ product queries ਕੈਸ਼ ਹੋਣ
+1. `infra/main.bicep` ਵਿੱਚ Redis Cache ਸ਼ਾਮਲ ਕਰੋ
+2. `src/web/app.py` ਅਪਡੇਟ ਕਰੋ ਤਾਂ ਜੋ ਉਤਪਾਦ ਕਵੈਰੀਜ਼ ਨੂੰ ਕੈਸ਼ ਕੀਤਾ ਜਾਏ
 3. Application Insights ਨਾਲ ਪ੍ਰਦਰਸ਼ਨ ਸੁਧਾਰ ਮਾਪੋ
-4. ਕੈਸ਼ਿੰਗ ਤੋਂ ਪਹਿਲਾਂ/ਬਾਅਦ response ਸਮੇਂ ਦੀ ਤੁਲਨਾ ਕਰੋ
+4. ਕੈਸ਼ਿੰਗ ਤੋਂ ਪਹਿਲਾਂ/ਬਾਅਦ ਰਿਸਪਾਂਸ ਸਮਿਆਂ ਦੀ ਤੁਲਨਾ ਕਰੋ
 
-**ਕਾਮਯਾਬੀ ਦੇ ਮਾਪਦੰਡ**: Redis ਡਿਪਲੋਇ ਹੋਇਆ ਹੈ, ਕੈਸ਼ਿੰਗ ਕੰਮ ਕਰਦੀ ਹੈ, response ਸਮੇਂ ਵਿੱਚ >50% ਸੁਧਾਰ।
+**ਸਫਲਤਾ ਮਾਪਦੰਡ**: Redis ਡਿਪਲੋਇ ਹੋਇਆ ਹੈ, ਕੈਸ਼ਿੰਗ ਕੰਮ ਕਰਦੀ ਹੈ, ਰਿਸਪਾਂਸ ਸਮਾਂ >50% ਸੁਧਰਦਾ ਹੈ।
 
-**ਸੰਕੇਤ**: ਸ਼ੁਰੂਆਤ ਕਰੋ [Azure Cache for Redis documentation](https://learn.microsoft.com/azure/azure-cache-for-redis/) ਨਾਲ।
+**ਸੁਝਾਅ**: ਸ਼ੁਰੂ ਕਰੋ [Azure Cache for Redis ਡੌਕਯੂਮੈਂਟੇਸ਼ਨ](https://learn.microsoft.com/azure/azure-cache-for-redis/) ਨਾਲ।
 
 ---
 
 ## ਸਾਫ਼-ਸਫਾਈ
 
-ਜ਼ਾਰੀ ਖਰਚਿਆਂ ਤੋਂ ਬਚਣ ਲਈ, ਸਮਾਪਤੀ 'ਤੇ ਸਾਰੇ ਰਿਸੋਰਸ ਮਿਟਾ ਦਿਓ:
+ਚੱਲ ਰਹੇ ਚਾਰਜਾਂ ਤੋਂ ਬਚਣ ਲਈ, ਮੁਕੰਮਲ ਹੋਣ 'ਤੇ ਸਾਰੇ ਰਿਸੋਰਸ ਮਿਟਾ ਦਿਓ:
 
 ```sh
 azd down
 ```
 
-**ਪੁਸ਼ਟੀ ਪ੍ਰੰਪਟ**:
+**ਪੁਸ਼ਟੀ ਪ੍ਰਾਂਪਟ**:
 ```
 ? Total resources to delete: 7, are you sure you want to continue? (y/N)
 ```
 
-`y` ਟਾਈਪ ਕਰੋ ਪੁਸ਼ਟੀ ਕਰਨ ਲਈ।
+ਪੁਸ਼ਟੀ ਕਰਨ ਲਈ `y` ਟਾਈਪ ਕਰੋ।
 
 **✓ ਸਫਲਤਾ ਜਾਂਚ**: 
-- ਸਾਰੇ ਰਿਸੋਰਸ Azure Portal ਤੋਂ ਮਿਟਾਏ ਗਏ ਹਨ
-- ਕੋਈ ਚਲਦੇ ਖਰਚੇ ਨਹੀਂ
-- ਲੋਕਲ `.azure/<env-name>` ਫੋਲਡਰ ਮਿਟਾਇਆ ਜਾ ਸਕਦਾ ਹੈ
+- Azure Portal ਤੋਂ ਸਾਰੇ ਰਿਸੋਰਸ ਮਿਟਾ ਦਿੱਤੇ ਗਏ ਹਨ
+- ਕੋਈ ਚੱਲ ਰਹੇ ਚਾਰਜ ਨਹੀਂ
+- ਸਥਾਨਕ `.azure/<env-name>` ਫੋਲਡਰ ਮਿਟਾਇਆ ਜਾ ਸਕਦਾ ਹੈ
 
-**ਵਿਕਲਪ** (ਇੰਫ੍ਰਾਸਟਰੱਕਚਰ ਰੱਖੋ, ਡੇਟਾ ਹਟਾਓ):
+**ਵਿਕਲਪ** (ਇੰਫ੍ਰਾਸਟ੍ਰਕਚਰ ਰੱਖੋ, ਡੇਟਾ ਮਿਟਾਓ):
 ```sh
-# ਕੇਵਲ ਰਿਸੋਰਸ ਗਰੁੱਪ ਹਟਾਓ (AZD ਸੰਰਚਨਾ ਰੱਖੋ)
+# ਕੇਵਲ ਰਿਸੋਰਸ ਗਰੁੱਪ ਹਟਾਓ (AZD ਸੰਰਚਨਾ ਬਰਕਰਾਰ ਰੱਖੋ)
 az group delete --name rg-<env-name> --yes
 ```
 ## ਹੋਰ ਜਾਣਕਾਰੀ
 
-### ਸੰਬੰਧਤ ਦਸਤਾਵੇਜ਼
+### ਸੰਬੰਧਿਤ ਦਸਤਾਵੇਜ਼
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Azure SQL Database Documentation](https://learn.microsoft.com/azure/azure-sql/database/)
 - [Azure App Service Documentation](https://learn.microsoft.com/azure/app-service/)
 - [Application Insights Documentation](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
 - [Bicep Language Reference](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-### ਕੋਰਸ ਵਿੱਚ ਅਗਲੇ ਕਦਮ
-- **[Container Apps Example](../../../../examples/container-app)**: Azure Container Apps ਨਾਲ ਮਾਇਕ੍ਰੋਸਰਵਿਸਜ਼ ਡਿਪਲੋਇ ਕਰੋ
-- **[AI Integration Guide](../../../../docs/ai-foundry)**: ਆਪਣੀ ਐਪ ਵਿੱਚ AI ਯੋਗਤਾਵਾਂ ਜੋੜੋ
-- **[Deployment Best Practices](../../docs/chapter-04-infrastructure/deployment-guide.md)**: ਪ੍ਰੋਡਕਸ਼ਨ ਡਿਪਲੌਇਮੈਂਟ ਪੈਟਰਨ
+### ਇਸ ਕੋਰਸ ਵਿੱਚ ਅਗਲੇ ਕਦਮ
+- **[Container Apps Example](../../../../examples/container-app)**: Azure Container Apps ਨਾਲ ਮਾਈਕਰੋਸਰਵਿਸਜ਼ ਡਿਪਲੋਇ ਕਰੋ
+- **[AI Integration Guide](../../../../docs/ai-foundry)**: ਆਪਣੀ ਐਪ ਵਿੱਚ AI ਸਮਰੱਥਾਵਾਂ ਸ਼ਾਮਲ ਕਰੋ
+- **[Deployment Best Practices](../../docs/chapter-04-infrastructure/deployment-guide.md)**: ਪ੍ਰੋਡਕਸ਼ਨ ਡਿਪਲੋਇਮੈਂਟ ਪੈਟਰਨ
 
 ### ਉੱਨਤ ਵਿਸ਼ੇ
-- **Managed Identity**: ਪਾਸਵਰਡ ਹਟਾਓ ਅਤੇ Azure AD ਪ੍ਰਮਾਣਿਕਤਾ ਵਰਤੋਂ
-- **Private Endpoints**: ਵਰਚੁਅਲ ਨੈੱਟਵਰਕ ਵਿੱਚ ਡੇਟਾਬੇਸ ਕਨੈਕਸ਼ਨਾਂ ਨੂੰ ਸੁਰੱਖਿਅਤ ਕਰੋ
-- **CI/CD ਇੰਟੀਗ੍ਰੇਸ਼ਨ**: GitHub Actions ਜਾਂ Azure DevOps ਨਾਲ ਡਿਪਲੌਇਮੈਂਟ ਆਟੋਮੇਟ ਕਰੋ
-- **Multi-Environment**: dev, staging ਅਤੇ production ਵਾਤਾਵਰਣ ਸੈੱਟ ਕਰੋ
-- **Database Migrations**: ਸਕੀਮਾ ਵਰਸਨਿੰਗ ਲਈ Alembic ਜਾਂ Entity Framework ਵਰਤੋਂ
+- **Managed Identity**: ਪਾਸਵਰਡ ਹਟਾਓ ਅਤੇ Azure AD ਪ੍ਰਮਾਣਿਕਤਾ ਵਰਤੋ
+- **Private Endpoints**: ਇੱਕ ਵਰਚੁਅਲ ਨੈੱਟਵਰਕ ਦੇ ਅੰਦਰ ਡਾਟਾਬੇਸ ਕਨੈਕਸ਼ਨਾਂ ਨੂੰ ਸੁਰੱਖਿਅਤ ਕਰੋ
+- **CI/CD Integration**: GitHub Actions ਜਾਂ Azure DevOps ਨਾਲ ਡਿਪਲੋਇਮੈਂਟ ਆਟੋਮੇਟ ਕਰੋ
+- **Multi-Environment**: dev, staging, ਅਤੇ production ਵਾਤਾਵਰਣ ਸੈਟ ਅਪ ਕਰੋ
+- **Database Migrations**: ਸਕੀਮਾ ਵਰਜ਼ਨਿੰਗ ਲਈ Alembic ਜਾਂ Entity Framework ਵਰਤੋਂ
 
-### ਹੋਰ ਪਹੁੰਚਾਂ ਨਾਲ ਤੁਲਨਾ
+### ਹੋਰ ਢੰਗਾਂ ਨਾਲ ਤੁਲਨਾ
 
 **AZD vs. ARM Templates**:
-- ✅ AZD: ਉੱਚ-ਸਤਈ ਅਬਸਟਰੈਕਸ਼ਨ, ਸਧਾਰਣ ਕਮਾਂਡਾਂ
-- ⚠️ ARM: ਜ਼ਿਆਦਾ ਵਿਸਤ੍ਰਿਤ, ਬਰੀਕੀ ਵਾਲਾ ਕੰਟਰੋਲ
+- ✅ AZD: ਉੱਚ-ਸਤਹੀ ਅਬਸਟ੍ਰੈਕਸ਼ਨ, ਸਧਾਰਨ ਕਮਾਂਡਾਂ
+- ⚠️ ARM: ਵਧੇਰੇ ਵਿਸਤਾਰਪੂਰਕ, ਬਰੀਕੀ ਕੰਟਰੋਲ
 
 **AZD vs. Terraform**:
-- ✅ AZD: Azure-ਨੈਟਿਵ, Azure ਸੇਵਾਵਾਂ ਨਾਲ ਇੰਟੀਗਰੇਟਡ
+- ✅ AZD: Azure-ਨੇਟਿਵ, Azure ਸੇਵਾਵਾਂ ਨਾਲ ਏਕੀਕ੍ਰਿਤ
 - ⚠️ Terraform: Multi-cloud ਸਹਾਇਤਾ, ਵੱਡਾ ecosystem
 
 **AZD vs. Azure Portal**:
-- ✅ AZD: ਦੁਹਰਾਉਣਯੋਗ, ਵਰਜ਼ਨ-ਕੰਟਰੋਲ ਵਾਲਾ, ਆਟੋਮੇਟੇਬਲ
-- ⚠️ Portal: ਮੈਨੁਅਲ ਕਲਿੱਕ, ਦੁਹਰਾਉਣਾ ਮੁਸ਼ਕਿਲ
+- ✅ AZD: ਦੁਹਰਾਇਆ ਜਾ ਸਕਦਾ, ਵਰਜ਼ਨ-ਕੰਟਰੋਲ, ਆਟੋਮੇਟੇਬਲ
+- ⚠️ Portal: ਹੱਥੋਂ-ਹੱਥ ਕਲਿੱਕ, ਦੁਬਾਰਾ ਬਣਾਉਣਾ ਮੁਸ਼ਕਲ
 
-**AZD ਬਾਰੇ ਸੋਚੋ**: Azure ਲਈ Docker Compose—ਜਟਿਲ ਡਿਪਲੌਇਮੈਂਟਾਂ ਲਈ ਸਰਲ ਕੀਤੀ ਗਈ ਸੰਰਚਨਾ।
+**AZD ਨੂੰ ਸੋਚੋ ਇਸ ਤਰ੍ਹਾਂ**: Azure ਲਈ Docker Compose—ਜਟਿਲ ਡਿਪਲੋਇਮੈਂਟਸ ਲਈ ਸਰਲੀਕ੍ਰਿਤ ਕੰਫਿਗਰੇਸ਼ਨ।
 
 ---
 
-## ਅਕਸਰ ਪੁੱਛੇ ਜਾਂਦੇ ਪ੍ਰਸ਼ਨ
+## ਅਕਸਰ ਪੁੱਛੇ ਜਾਣ ਵਾਲੇ ਪ੍ਰਸ਼ਨ
 
-**ਪ੍ਰ: ਕੀ ਮੈਂ ਕੋਈ ਹੋਰ ਪ੍ਰੋਗ੍ਰਾਮਿੰਗ ਭਾਸ਼ਾ ਵਰਤ ਸਕਦਾ ਹਾਂ?**  
-ਉ: ਹਾਂ! `src/web/` ਨੂੰ Node.js, C#, Go, ਜਾਂ ਕਿਸੇ ਹੋਰ ਭਾਸ਼ਾ ਨਾਲ ਬਦਲੋ। `azure.yaml` ਅਤੇ Bicep ਨੂੰ ਮੁਤਾਬਕ ਅਪਡੇਟ ਕਰੋ।
+**Q: ਕੀ ਮੈਂ ਕੋਈ ਹੋਰ ਪ੍ਰੋਗ੍ਰਾਮਿੰਗ ਭਾਸ਼ਾ ਵਰਤ ਸਕਦਾ/ਸਕਦੀ ਹਾਂ?**  
+A: ਹਾਂ! `src/web/` ਨੂੰ Node.js, C#, Go, ਜਾਂ ਕਿਸੇ ਵੀ ਭਾਸ਼ਾ ਨਾਲ ਬਦਲੋ। `azure.yaml` ਅਤੇ Bicep ਨੂੰ ਅਨੁਸਾਰ ਅਪਡੇਟ ਕਰੋ।
 
-**ਪ੍ਰ: ਮੈਂ ਹੋਰ ਡੇਟਾਬੇਸ ਕਿਵੇਂ ਜੋੜ ਸਕਦਾ/ਸਕਦੀ ਹਾਂ?**  
-ਉ: `infra/main.bicep` ਵਿੱਚ ਹੋਰ SQL Database ਮਾਡਿਊਲ ਜੋੜੋ ਜਾਂ Azure Database ਸੇਵਾਵਾਂ ਵਿੱਚੋਂ PostgreSQL/MySQL ਵਰਤੋਂ।
+**Q: ਮੈਂ ਹੋਰ ਡਾਟਾਬੇਸ ਕਿਵੇਂ ਜੋੜਾਂ?**  
+A: `infra/main.bicep` ਵਿੱਚ ਇੱਕ ਹੋਰ SQL Database ਮਾਡਿਊਲ ਸ਼ਾਮਲ ਕਰੋ ਜਾਂ Azure Database ਸੇਵਾਵਾਂ ਵਿੱਚੋਂ PostgreSQL/MySQL ਵਰਤੋ।
 
-**ਪ੍ਰ: ਕੀ ਮੈਂ ਇਸਨੂੰ ਪ੍ਰੋਡਕਸ਼ਨ ਲਈ ਵਰਤ ਸਕਦਾ/ਸਕਦੀ ਹਾਂ?**  
-ਉ: ਇਹ ਇੱਕ ਸ਼ੁਰੂਆਤੀ ਬਿੰਦੂ ਹੈ। ਪ੍ਰੋਡਕਸ਼ਨ ਲਈ, managed identity, private endpoints, redundancy, backup ਰਣਨੀਤੀ, WAF, ਅਤੇ ਵਧੀਕ ਨਿਗਰਾਨੀ ਸ਼ਾਮਿਲ ਕਰੋ।
+**Q: ਕੀ ਮੈਂ ਇਸਨੂੰ ਪ੍ਰੋਡਕਸ਼ਨ ਲਈ ਵਰਤ ਸਕਦਾ/ਸਕਦੀ ਹਾਂ?**  
+A: ਇਹ ਇੱਕ ਸ਼ੁਰੂਆਤੀ ਬਿੰਦੂ ਹੈ। ਪ੍ਰੋਡਕਸ਼ਨ ਲਈ, ਸ਼ਾਮਲ ਕਰੋ: managed identity, private endpoints, redundancy, ਬੈਕਅੱਪ ਰਣਨੀਤੀ, WAF, ਅਤੇ ਬਿਹਤਰ ਮਾਨੀਟਰਿੰਗ।
 
-**ਪ੍ਰ: ਜੇ ਮੈਂ ਕੋਡ ਡਿਪਲੌਇਮੈਂਟ ਦੀ ਥਾਂ ਕਨਟੇਨਰ ਵਰਤਣਾ ਚਾਹਾਂ ਤਾਂ ਕੀ?**  
-ਉ: ਵੇਖੋ [Container Apps Example](../../../../examples/container-app) ਜੋ ਸਾਰੀ ਪ੍ਰਕਿਰਿਆ ਵਿੱਚ Docker containers ਵਰਤਦਾ ਹੈ।
+**Q: ਜੇ ਮੈਂ ਕੋਡ ਡਿਪਲੋਇਮੈਂਟ ਦੀ ਥਾਂ ਕੰਟੇਨਰ ਵਰਤਣਾ ਚਾਹਾਂ ਤਾਂ?**  
+A: [Container Apps Example](../../../../examples/container-app) ਵੇਖੋ ਜੋ Docker containers ਸਾਰੀ ਰਾਹ ਵਿੱਚ ਵਰਤਦਾ ਹੈ।
 
-**ਪ੍ਰ: ਮੈਂ ਆਪਣੇ ਲੋਕਲ ਮਸ਼ੀਨ ਤੋਂ ਡੇਟਾਬੇਸ ਨਾਲ ਕਿਵੇਂ ਜੁੜਾਂ?**  
-ਉ: SQL Server ਫਾਇਰਵਾਲ ਵਿੱਚ ਆਪਣਾ IP ਜੋੜੋ:
+**Q: ਮੈਂ ਆਪਣੇ ਲੋਕਲ ਮਸ਼ੀਨ ਤੋਂ ਡਾਟਾਬੇਸ ਨਾਲ ਕਿਵੇਂ ਕੁਨੈਕਟ ਕਰਾਂ?**  
+A: SQL Server ਫਾਇਰਵਾਲ ਵਿੱਚ ਆਪਣਾ IP ਜੋੜੋ:
 ```sh
 az sql server firewall-rule create \
   --resource-group rg-<env-name> \
@@ -900,21 +904,21 @@ az sql server firewall-rule create \
   --end-ip-address <your-ip>
 ```
 
-**ਪ੍ਰ: ਕੀ ਮੈਂ ਨਵੀਂ ਬਣਾਉਣ ਦੀ ਥਾਂ ਮੌਜੂਦਾ ਡੇਟਾਬੇਸ ਵਰਤ ਸਕਦਾ/ਸਕਦੀ ਹਾਂ?**  
-ਉ: ਹਾਂ, `infra/main.bicep` ਨੂੰ ਸੋਧੋ ਤਾਂ ਜੋ ਮੌਜੂਦਾ SQL Server ਨੂੰ ਰੈਫਰੈਂਸ ਕੀਤਾ ਜਾ ਸਕੇ ਅਤੇ connection string ਪੈਰਾਮੀਟਰ ਅਪਡੇਟ ਕਰੋ।
+**Q: ਕੀ ਮੈਂ ਨਵਾਂ ਬਣਾਉਣ ਦੀ ਥਾਂ ਮੌਜੂਦਾ ਡਾਟਾਬੇਸ ਵਰਤ ਸਕਦਾ/ਸਕਦੀ ਹਾਂ?**  
+A: ਹਾਂ, `infra/main.bicep` ਨੂੰ ਤਬਦੀਲ ਕਰੋ ਤਾਂ ਜੋ ਮੌਜੂਦਾ SQL Server ਨੂੰ ਰੈਫਰੈਂਸ ਕਰੇ ਅਤੇ connection string ਪੈਰਾਮੀਟਰ ਅਪਡੇਟ ਕਰੋ।
 
 ---
 
-> **ਨੋਟ:** ਇਹ ਉਦਾਹਰਨ AZD ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਡੇਟਾਬੇਸ ਨਾਲ ਵੈੱਬ ਐਪ ਡਿਪਲੋਇ ਕਰਨ ਲਈ ਸਰਵੋਤਮ ਅਭਿਆਸ ਦਿਖਾਉਂਦੀ ਹੈ। ਇਸ ਵਿੱਚ ਕੰਮ ਕਰ ਰਹਾ ਕੋਡ, ਵਿਸਤ੍ਰਿਤ ਦਸਤਾਵੇਜ਼ ਅਤੇ ਸਿੱਖਣ ਨੂੰ ਮਜ਼ਬੂਤ ਕਰਨ ਲਈ ਪ੍ਰਯੋਗਾਤਮਕ ਅਭਿਆਸ ਸ਼ਾਮਿਲ ਹਨ। ਪ੍ਰੋਡਕਸ਼ਨ ਡਿਪਲੌਇਮੈਂਟ ਲਈ, ਆਪਣੇ ਸੰਗਠਨ ਲਈ ਖਾਸ ਸੁਰੱਖਿਆ, ਸਕੇਲਿੰਗ, ਅਨੁਕੂਲਤਾ ਅਤੇ ਲਾਗਤ ਦੀਆਂ ਲੋੜਾਂ ਦੀ ਸਮੀਖਿਆ ਕਰੋ।
+> **ਨੋਟ:** ਇਹ ਉਦਾਹਰਨ AZD ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਡਾਟਾਬੇਸ ਨਾਲ ਵੈੱਬ ਐਪ ਡਿਪਲੋਇ ਕਰਨ ਲਈ ਬਿਹਤਰ ਅਭਿਆਸ ਦਰਸਾਉਂਦੀ ਹੈ। ਇਹ ਵਿੱਚ ਕਾਰਜਸ਼ੀਲ ਕੋਡ, ਵਿਸਤ੍ਰਿਤ ਦਸਤਾਵੇਜ਼ ਅਤੇ ਸਿੱਖਣ ਨੂੰ ਮਜ਼ਬੂਤ ਬਣਾਉਣ ਲਈ ਵਿਹਾਰਕ ਅਭਿਆਸ ਸ਼ਾਮਲ ਹਨ। ਪ੍ਰੋਡਕਸ਼ਨ ਡਿਪਲੋਇਮੈਂਟ ਲਈ, ਆਪਣੇ ਸੰਸਥਾ-ਵਿਸ਼ੇਸ਼ ਸੁਰੱਖਿਆ, ਸਕੇਲਿੰਗ, ਅਨੁਕੂਲਤਾ, ਅਤੇ ਲਾਗਤ ਦੀਆਂ ਲੋੜਾਂ ਦੀ ਸਮੀਖਿਆ ਕਰੋ।
 
-**📚 ਕੋਰਸ ਨੇਵੀਗੇਸ਼ਨ:**
+**📚 ਕੋਰਸ ਨੈਵੀਗੇਸ਼ਨ:**
 - ← ਪਿਛਲਾ: [Container Apps Example](../../../../examples/container-app)
 - → ਅਗਲਾ: [AI Integration Guide](../../../../docs/ai-foundry)
-- 🏠 [ਕੋਰਸ ਹੋਮ](../../README.md)
+- 🏠 [Course Home](../../README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-ਇਹ ਦਸਤਾਵੇਜ਼ ਏ.ਆਈ. ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸ਼ੁੱਧਤਾ ਲਈ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਆਟੋਮੇਟਿਕ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਸਥਿਰਤਾਵਾਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਇਸ ਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਿਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀਆਂ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆਵਾਂ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+ਇਹ ਦਸਤਾਵੇਜ਼ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਅਨੁਵਾਦ ਕੀਤਾ ਗਿਆ ਹੈ। ਹਾਲਾਂਕਿ ਅਸੀਂ ਸ਼ੁੱਧਤਾ ਲਈ ਕੋਸ਼ਿਸ਼ ਕਰਦੇ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਆਟੋਮੇਟਿਕ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਣਸਹੀਤੀਆਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਇਸ ਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਪ੍ਰਮਾਣਿਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪ੍ਰੋਫੈਸ਼ਨਲ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਿਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਤੋਂ ਪੈਦਾ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਮੀ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

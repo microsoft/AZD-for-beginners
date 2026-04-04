@@ -1,43 +1,43 @@
-# 1. Selecione um Modelo
+# 1. Selecionar um Modelo
 
 !!! tip "AO FINAL DESTE MÓDULO VOCÊ SERÁ CAPAZ DE"
 
-    - [ ] Descrever o que são templates AZD
-    - [ ] Descobrir e usar templates AZD para IA
-    - [ ] Começar com o template AI Agents
-    - [ ] **Laboratório 1:** AZD Quickstart com GitHub Codespaces
+    - [ ] Descrever o que são os modelos AZD
+    - [ ] Descobrir e usar modelos AZD para IA
+    - [ ] Começar com o modelo AI Agents
+    - [ ] **Laboratório 1:** AZD Quickstart no Codespaces ou em um contêiner de desenvolvimento
 
 ---
 
-## 1. Uma analogia do construtor
+## 1. Uma Analogia do Construtor
 
-Construir uma aplicação de IA moderna e pronta para empresas _do zero_ pode ser intimidador. É um pouco como construir sua nova casa por conta própria, tijolo por tijolo. Sim, pode ser feito! Mas não é a maneira mais eficaz de obter o resultado desejado!
+Construir uma aplicação de IA moderna e pronta para empresas _do zero_ pode ser assustador. É um pouco como construir sua nova casa sozinho, tijolo por tijolo. Sim, é possível! Mas não é a maneira mais eficaz de alcançar o resultado desejado! 
 
-Em vez disso, muitas vezes começamos com uma _planta de projeto_ existente e trabalhamos com um arquiteto para personalizá-la conforme nossos requisitos pessoais. E essa é exatamente a abordagem a adotar ao construir aplicações inteligentes. Primeiro, encontre uma boa arquitetura de projeto que se encaixe no seu espaço de problema. Depois, trabalhe com um arquiteto de soluções para customizar e desenvolver a solução para o seu cenário específico.
+Em vez disso, frequentemente começamos com uma _planta de projeto_ existente, e trabalhamos com um arquiteto para personalizá‑la de acordo com nossos requisitos pessoais. E essa é exatamente a abordagem a ser adotada ao construir aplicações inteligentes. Primeiro, encontre uma boa arquitetura de projeto que se adeque ao seu espaço de problema. Em seguida, trabalhe com um arquiteto de soluções para customizar e desenvolver a solução para o seu cenário específico.
 
-Mas onde podemos encontrar essas plantas de projeto? E como encontramos um arquiteto disposto a nos ensinar como personalizar e implantar essas plantas por conta própria? Neste workshop, respondemos a essas perguntas apresentando três tecnologias:
+Mas onde podemos encontrar essas plantas de projeto? E como encontramos um arquiteto disposto a nos ensinar a personalizar e implantar essas plantas por conta própria? Neste workshop, respondemos a essas perguntas apresentando três tecnologias:
 
-1. [Azure Developer CLI](https://aka.ms/azd) - uma ferramenta de código aberto que acelera o caminho do desenvolvedor ao ir do desenvolvimento local (build) à implantação na nuvem (ship).
-1. [Microsoft Foundry Templates](https://ai.azure.com/templates) - repositórios padronizados de código aberto contendo código de exemplo, infraestrutura e arquivos de configuração para implantar uma arquitetura de solução de IA.
-1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - um agente de codificação fundamentado no conhecimento do Azure, que pode nos guiar na navegação pela base de código e na realização de alterações — usando linguagem natural.
+1. [Azure Developer CLI](https://aka.ms/azd) - uma ferramenta de código aberto que acelera o caminho do desenvolvedor do desenvolvimento local (build) à implantação na nuvem (ship).
+1. [Microsoft Foundry Templates](https://ai.azure.com/templates) - repositórios padronizados e de código aberto contendo código de exemplo, infraestrutura e arquivos de configuração para implantar uma arquitetura de solução de IA.
+1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - um agente de codificação fundamentado no conhecimento do Azure, que pode nos guiar na navegação pelo código e na realização de alterações — usando linguagem natural.
 
-Com essas ferramentas em mãos, agora podemos _descobrir_ o template certo, _implantá-lo_ para validar que funciona e _personalizá-lo_ para adequá-lo aos nossos cenários específicos. Vamos mergulhar e aprender como elas funcionam.
+Com essas ferramentas em mãos, agora podemos _descobrir_ o template certo, _implantar_ para validar que funciona e _personalizá‑lo_ para adequá‑lo aos nossos cenários específicos. Vamos nos aprofundar e aprender como isso funciona.
 
 
 ---
 
 ## 2. Azure Developer CLI
 
-The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (or `azd`) é uma ferramenta de linha de comando de código aberto que pode acelerar sua jornada do código para a nuvem com um conjunto de comandos amigáveis ao desenvolvedor que funcionam de forma consistente em seu IDE (desenvolvimento) e em ambientes de CI/CD (devops).
+The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (or `azd`) is an open-source commandline tool that can speed up your code-to-cloud journey with a set of developer-friendly commands that work consistently across your IDE (development) and CI/CD (devops) environments.
 
-Com `azd`, sua jornada de implantação pode ser tão simples quanto:
+Com o `azd`, sua jornada de implantação pode ser tão simples quanto:
 
 - `azd init` - Inicializa um novo projeto de IA a partir de um template AZD existente.
 - `azd up` - Provisiona a infraestrutura e implanta sua aplicação em um único passo.
 - `azd monitor` - Obtenha monitoramento e diagnóstico em tempo real para sua aplicação implantada.
 - `azd pipeline config` - Configure pipelines de CI/CD para automatizar a implantação no Azure.
 
-**🎯 | EXERCÍCIO**: <br/> Explore a ferramenta de linha de comando `azd` em seu ambiente GitHub Codespaces agora. Comece digitando este comando para ver o que a ferramenta pode fazer:
+**🎯 | EXERCÍCIO**: <br/> Explore a ferramenta de linha de comando `azd` no seu ambiente de workshop atual agora. Isso pode ser GitHub Codespaces, um contêiner de desenvolvimento, ou um clone local com os pré-requisitos instalados. Comece digitando este comando para ver o que a ferramenta pode fazer:
 
 ```bash title="" linenums="0"
 azd help
@@ -47,45 +47,45 @@ azd help
 
 ---
 
-## 3. O Template AZD
+## 3. O Modelo AZD
 
-Para que o `azd` consiga fazer isso, ele precisa saber a infraestrutura a ser provisionada, as configurações a serem aplicadas e a aplicação a ser implantada. É aí que os [AZD templates](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp) entram.
+Para que o `azd` consiga isso, ele precisa saber a infraestrutura a provisionar, as configurações a aplicar e a aplicação a implantar. É aí que entram os [AZD templates](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp). 
 
-AZD templates são repositórios de código aberto que combinam código de exemplo com arquivos de infraestrutura e configuração necessários para implantar a arquitetura da solução.
-Ao usar uma abordagem _Infraestrutura como Código_ (IaC), eles permitem que as definições de recursos do template e as configurações sejam controladas por versão (assim como o código-fonte do aplicativo) - criando fluxos de trabalho reutilizáveis e consistentes entre os usuários desse projeto.
+Os modelos AZD são repositórios de código aberto que combinam código de exemplo com arquivos de infraestrutura e configuração necessários para implantar a arquitetura da solução.
+Ao usar uma abordagem _Infrastructure-as-Code_ (IaC), eles permitem que as definições de recursos do template e as configurações sejam controladas por versão (assim como o código-fonte da aplicação) — criando fluxos de trabalho reutilizáveis e consistentes entre os usuários desse projeto.
 
-Ao criar ou reutilizar um AZD template para o _seu_ cenário, considere estas perguntas:
+Ao criar ou reutilizar um template AZD para o _seu_ cenário, considere estas perguntas:
 
 1. O que você está construindo? → Existe um template que tenha código inicial para esse cenário?
-1. Como sua solução é arquitetada? → Existe um template que tenha os recursos necessários?
+1. Como sua solução é arquitetada? → Existe um template que possua os recursos necessários?
 1. Como sua solução é implantada? → Pense em `azd deploy` com hooks de pré/pós-processamento!
-1. Como você pode otimizá-la ainda mais? → Pense em monitoramento embutido e pipelines de automação!
+1. Como você pode otimizá‑la ainda mais? → Pense em monitoramento embutido e pipelines de automação!
 
 **🎯 | EXERCÍCIO**: <br/> 
-Visite a galeria [Awesome AZD](https://azure.github.io/awesome-azd/) e use os filtros para explorar os 250+ templates atualmente disponíveis. Veja se você consegue encontrar um que se alinhe aos requisitos do _seu_ cenário.
+Visite a galeria [Awesome AZD](https://azure.github.io/awesome-azd/) e use os filtros para explorar os mais de 250 templates atualmente disponíveis. Veja se você consegue encontrar um que se alinhe aos requisitos do _seu_ cenário.
 
 ![Código](../../../../../translated_images/pt-BR/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 
-## 4. Modelos de Aplicativos de IA
+## 4. Modelos de Aplicações de IA
 
-Para aplicações impulsionadas por IA, a Microsoft fornece templates especializados com **Microsoft Foundry** e **Foundry Agents**. Esses templates aceleram seu caminho para construir aplicações inteligentes e prontas para produção.
+Para aplicações alimentadas por IA, a Microsoft fornece templates especializados com **Microsoft Foundry** e **Foundry Agents**. Esses templates aceleram seu caminho para construir aplicações inteligentes e prontas para produção.
 
-### Templates Microsoft Foundry & Foundry Agents
+### Microsoft Foundry & Foundry Agents Templates
 
-Selecione um template abaixo para implantar. Cada template está disponível no [Awesome AZD](https://azure.github.io/awesome-azd/) e pode ser inicializado com um único comando.
+Selecione um template abaixo para implantar. Cada template está disponível em [Awesome AZD](https://azure.github.io/awesome-azd/) e pode ser inicializado com um único comando.
 
-| Template | Descrição | Comando de implantação |
-|----------|-----------|------------------------|
-| **[AI Chat with RAG](https://azure.github.io/awesome-azd/?tags=ai&tags=rag)** | Aplicação de chat com Retrieval Augmented Generation usando Microsoft Foundry | `azd init -t azure-samples/azure-search-openai-demo` |
+| Template | Description | Deploy Command |
+|----------|-------------|----------------|
+| **[Chat de IA com RAG](https://azure.github.io/awesome-azd/?tags=ai&tags=rag)** | Aplicativo de chat com Geração Aumentada por Recuperação usando Microsoft Foundry | `azd init -t azure-samples/azure-search-openai-demo` |
 | **[Foundry Agent Service Starter](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Crie agentes de IA com Foundry Agents para execução autônoma de tarefas | `azd init -t azure-samples/foundry-agent-service-starter` |
-| **[Multi-Agent Orchestration](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Coordene múltiplos Foundry Agents para fluxos de trabalho complexos | `azd init -t azure-samples/multi-agent-orchestration` |
-| **[AI Document Intelligence](https://azure.github.io/awesome-azd/?tags=ai&tags=document)** | Extraia e analise documentos com modelos Microsoft Foundry | `azd init -t azure-samples/ai-document-processing` |
-| **[Conversational AI Bot](https://azure.github.io/awesome-azd/?tags=ai&tags=bot)** | Crie chatbots inteligentes com integração Microsoft Foundry | `azd init -t azure-samples/ai-chat-protocol` |
-| **[AI Image Generation](https://azure.github.io/awesome-azd/?tags=ai&tags=dalle)** | Gere imagens usando DALL-E via Microsoft Foundry | `azd init -t azure-samples/ai-image-generation` |
-| **[Semantic Kernel Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=semantic-kernel)** | Agentes de IA usando Semantic Kernel com Foundry Agents | `azd init -t azure-samples/semantic-kernel-agent` |
-| **[AutoGen Multi-Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=autogen)** | Sistemas multiagentes usando o framework AutoGen | `azd init -t azure-samples/autogen-multi-agent` |
+| **[Orquestração Multi-Agente](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Coordene múltiplos Foundry Agents para fluxos de trabalho complexos | `azd init -t azure-samples/multi-agent-orchestration` |
+| **[Inteligência de Documentos de IA](https://azure.github.io/awesome-azd/?tags=ai&tags=document)** | Extraia e analise documentos com modelos Microsoft Foundry | `azd init -t azure-samples/ai-document-processing` |
+| **[Bot de IA Conversacional](https://azure.github.io/awesome-azd/?tags=ai&tags=bot)** | Crie chatbots inteligentes com integração Microsoft Foundry | `azd init -t azure-samples/ai-chat-protocol` |
+| **[Geração de Imagens por IA](https://azure.github.io/awesome-azd/?tags=ai&tags=dalle)** | Gere imagens usando DALL-E via Microsoft Foundry | `azd init -t azure-samples/ai-image-generation` |
+| **[Agente Semantic Kernel](https://azure.github.io/awesome-azd/?tags=ai&tags=semantic-kernel)** | Agentes de IA usando Semantic Kernel com Foundry Agents | `azd init -t azure-samples/semantic-kernel-agent` |
+| **[AutoGen Multi-Agente](https://azure.github.io/awesome-azd/?tags=ai&tags=autogen)** | Sistemas multi-agente usando o framework AutoGen | `azd init -t azure-samples/autogen-multi-agent` |
 
 ### Início Rápido
 
@@ -97,22 +97,22 @@ Selecione um template abaixo para implantar. Cada template está disponível no 
 **🎯 | EXERCÍCIO**: <br/>
 Selecione um dos templates acima com base no seu cenário:
 
-- **Construindo um chatbot?** → Comece com **AI Chat with RAG** ou **Conversational AI Bot**
-- **Precisa de agentes autônomos?** → Experimente **Foundry Agent Service Starter** ou **Multi-Agent Orchestration**
-- **Processando documentos?** → Utilize **AI Document Intelligence**
-- **Quer assistência de codificação por IA?** → Explore **Semantic Kernel Agent** ou **AutoGen Multi-Agent**
+- **Construindo um chatbot?** → Comece com **Chat de IA com RAG** ou **Bot de IA Conversacional**
+- **Necessita de agentes autônomos?** → Experimente **Foundry Agent Service Starter** ou **Orquestração Multi-Agente**
+- **Processando documentos?** → Use **Inteligência de Documentos de IA**
+- **Quer assistência de codificação por IA?** → Explore **Agente Semantic Kernel** ou **AutoGen Multi-Agente**
 
 ```bash title="Example: Deploy the AI Chat with RAG template" linenums="0"
 azd init -t azure-samples/azure-search-openai-demo
 azd up
 ```
 
-!!! info "Explore Mais Templates"
-    A [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) contém 250+ templates. Use os filtros para encontrar templates que correspondam aos seus requisitos específicos de linguagem, framework e serviços do Azure.
+!!! info "Explore Mais Modelos"
+    The [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) contains 250+ templates. Use the filters to find templates matching your specific requirements for language, framework, and Azure services.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Isenção de responsabilidade**:
-Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se tradução humana profissional. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

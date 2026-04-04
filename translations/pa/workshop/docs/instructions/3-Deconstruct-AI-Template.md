@@ -1,40 +1,40 @@
-# 3. Deconstruct a Template
+# 3. ਇੱਕ ਟੈਮਪਲੇਟ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ
 
-!!! tip "ਇਸ ਮੋਡੀਊਲ ਦੇ ਅੰਤ ਤੱਕ ਤੁਸੀਂ ਸਮਰੱਥ ਹੋਵੋਗੇ"
+!!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
 
-    - [ ] Activate GitHub Copilot with MCP servers for Azure assistance
-    - [ ] Understand the AZD template folder structure and components
-    - [ ] Explore infrastructure-as-code (Bicep) organization patterns
-    - [ ] **Lab 3:** Use GitHub Copilot to explore and understand repository architecture 
-
----
-
-
-With AZD templates and the Azure Developer CLI (`azd`) we can quickly jumpstart our AI development journey with standardized repositories that provide sample code, infrastructure and configuration files - in the form of a ready-to-deploy _starter_ project.
-
-**But now, we need to understand the project structure and codebase - and be able to customize the AZD template - without any prior experience or understanding of AZD!**
+    - [ ] GitHub Copilot ਨੂੰ MCP ਸਰਵਰਾਂ ਨਾਲ Azure ਸਹਾਇਤਾ ਲਈ ਸਰਗਰਮ ਕਰੋ
+    - [ ] AZD ਟੈਮਪਲੇਟ ਫੋਲਡਰ ਢਾਂਚਾ ਅਤੇ ਉੱਪਕਰਣਾਂ ਨੂੰ ਸਮਝੋ
+    - [ ] Infrastructure-as-code (Bicep) ਦੇ ਸੰਗਠਨ ਮਾਡਲਾਂ ਦੀ ਖੋਜ ਕਰੋ
+    - [ ] **Lab 3:** GitHub Copilot ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਰਿਪੋਜ਼ਟਰੀ ਦੀ ਆਰਕੀਟੈਕਚਰ ਖੋਜੋ ਅਤੇ ਸਮਝੋ
 
 ---
 
-## 1. Activate GitHub Copilot
 
-### 1.1 Install GitHub Copilot Chat
+AZD ਟੈਮਪਲੇਟਾਂ ਅਤੇ Azure Developer CLI (`azd`) ਦੇ ਨਾਲ ਅਸੀਂ ਆਪਣੇ AI ਵਿਕਾਸ ਯਾਤਰਾ ਨੂੰ ਤੁਰੰਤ ਸ਼ੁਰੂ ਕਰ ਸਕਦੇ ਹਾਂ, ਸਰਲ ਅਤੇ ਮਾਪਦੇਰਾ ਰੀਪੋਜ਼ਟਰੀਆਂ ਦੇ ਰੂਪ ਵਿੱਚ ਜਿਹੜੀਆਂ ਨਮੂਨਾ ਕੋਡ, ਇੰਫ੍ਰਾਸਟ੍ਰਕਚਰ ਅਤੇ ਸੰਰਚਨਾ ਫਾਇਲਾਂ ਪ੍ਰਦਾਨ ਕਰਦੀਆਂ ਹਨ - ਇੱਕ ਤਿਆਰ-ਡਿਪਲੋਇ ਕਰਨ ਯੋਗ _starter_ ਪ੍ਰੋਜੇਕਟ ਦੇ ਰੂਪ ਵਿੱਚ।
 
-It's time to explore [GitHub Copilot with Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Now, we can use natural language to describe our task at a high level, and get assistance in execution. For this lab, we'll use the [Copilot Free plan](https://github.com/github-copilot/signup) which has a monthly limit for completions and chat interactions.
+**ਪਰ ਹੁਣ, ਸਾਨੂੰ ਪ੍ਰੋਜੇਕਟ ਦੀ ਬਣਤਰ ਅਤੇ ਕੋਡਬੇਸ ਨੂੰ ਸਮਝਣ ਦੀ ਲੋੜ ਹੈ - ਅਤੇ AZD ਟੈਮਪਲੇਟ ਨੂੰ ਕਸਟਮਾਈਜ਼ ਕਰਨ ਯੋਗ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ - ਬਿਨਾਂ ਕਿਸੇ ਪਹਿਲੇ ਤਜਰਬੇ ਜਾਂ AZD ਦੀ ਸਮਝ ਦੇ!**
 
-The extension can be installed from the marketplace, but should already be available in your Codespaces environment. _Click `Open Chat` from the Copilot icon drop-down - and type a prompt like `What can you do?`_ - you may be prompted to log in. **GitHub Copilot Chat is ready**.
+---
+
+## 1. GitHub Copilot ਨੂੰ ਸਰਗਰਮ ਕਰੋ
+
+### 1.1 GitHub Copilot Chat ਇੰਸਟਾਲ ਕਰੋ
+
+ਹੁਣ ਸਮਾਂ ਹੈ [Agent ਮੋਡ ਨਾਲ GitHub Copilot](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) ਨੂੰ ਖੰਗਾਲਣ ਦਾ। ਹੁਣ ਅਸੀਂ ਕੁਦਰਤੀ ਭਾਸ਼ਾ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਉੱਚ-ਸਤਰ 'ਤੇ ਆਪਣਾ ਕੰਮ ਵਰਣਨ ਕਰ ਸਕਦੇ ਹਾਂ, ਅਤੇ ਕਾਰਜਨਵਾਈ ਵਿੱਚ ਮਦਦ ਪ੍ਰਾਪਤ ਕਰ ਸਕਦੇ ਹਾਂ। ਇਸ ਲੈਬ ਲਈ, ਅਸੀਂ [Copilot ਮੁਫ਼ਤ ਯੋਜਨਾ](https://github.com/github-copilot/signup) ਦੀ ਵਰਤੋਂ ਕਰਾਂਗੇ ਜਿਸ ਵਿੱਚ ਸੰਪੂਰਨਤਾ ਅਤੇ ਚੈਟ ਇੰਟਰੈਕਸ਼ਨਾਂ ਲਈ ਮਹੀਨਾਵਾਰੀ ਸੀਮਾ ਹੁੰਦੀ ਹੈ।
+
+ਇਕਸਟੈਨਸ਼ਨ ਨੂੰ ਮਾਰਕੀਟਪਲੇਸ ਤੋਂ ਇੰਸਟਾਲ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ, ਅਤੇ ਇਹ ਅਕਸਰ Codespaces ਜਾਂ dev container ਵਾਤਾਵਰਣਾਂ ਵਿੱਚ ਪਹਿਲਾਂ ਹੀ ਉਪਲਬਧ ਹੋ ਸਕਦਾ ਹੈ। _Copilot ਆਈਕਨ ਡ੍ਰੌਪ-ਡਾਊਨ ਤੋਂ `Open Chat` 'ਤੇ ਕਲਿੱਕ ਕਰੋ - ਅਤੇ `What can you do?` ਵਰਗਾ ਪ੍ਰੋਮਪਟ ਟਾਈਪ ਕਰੋ_ - ਤੁਹਾਨੂੰ ਲੌਗਿਨ ਕਰਨ ਲਈ ਪ੍ਰੋੰਪਟ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ। **GitHub Copilot Chat ਤਿਆਰ ਹੈ**।
 
 ### 1.2. Install MCP Servers
 
-For Agent mode to be effective, it needs access to the right tools to help it retrieve knowledge or take actions. This is where MCP servers can help. We'll configure the following servers:
+Agent ਮੋਡ ਪ੍ਰਭਾਵਸ਼ালী ਹੋਣ ਲਈ, ਇਸਨੂੰ ਠੀਕ ਟੂਲਸ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ ਜੋ ਇਹ ਗਿਆਨ ਪ੍ਰਾਪਤ ਕਰਨ ਜਾਂ ਕਾਰਵਾਈ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰ ਸਕਣ। ਇਹੀ ਥਾਂ ਹੈ ਜਿਥੇ MCP ਸਰਵਰ ਮਦਦਗਾਰ ਸਾਬਿਤ ਹੋ ਸਕਦੇ ਹਨ। ਅਸੀਂ ਹੇਠ ਲਿਖੇ ਸਰਵਰਾਂ ਨੂੰ ਸੰਰਚਿਤ ਕਰਾਂਗੇ:
 
-1. [Azure MCP Server](../../../../../workshop/docs/instructions)
-1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
+1. [Azure MCP ਸਰਵਰ](../../../../../workshop/docs/instructions)
+1. [Microsoft Docs MCP ਸਰਵਰ](../../../../../workshop/docs/instructions)
 
-To activate these:
+ਇਨ੍ਹਾਂ ਨੂੰ ਸਰਗਰਮ ਕਰਨ ਲਈ:
 
-1. Create a file called `.vscode/mcp.json` if it does not exist
-1. Copy the following into that file - and start the servers!
+1. ਜੇ ਇਹ ਮੌਜੂਦ ਨਹੀਂ ਹੈ ਤਾਂ `.vscode/mcp.json` ਨਾਂ ਦਾ ਫਾਇਲ ਬਣਾਓ
+1. ਉਸ ਫਾਇਲ ਵਿੱਚ ਹੇਠ ਲਿਖਿਆ ਨਕਲ ਕਰੋ - ਅਤੇ ਸਰਵਰ ਸ਼ੁਰੂ ਕਰੋ!
    ```json title=".vscode/mcp.json"
    {
       "servers": {
@@ -55,9 +55,9 @@ To activate these:
    }
    ```
 
-??? warning "ਤੁਹਾਨੂੰ ਇੱਕ ਗਲਤੀ ਆ ਸਕਦੀ ਹੈ ਕਿ `npx` ਇੰਸਟਾਲ ਨਹੀਂ ਹੈ (ਠੀਕ ਕਰਨ ਲਈ ਵੇਖਣ ਲਈ ਖੋਲ੍ਹੋ)"
+??? warning "You may get an error that `npx` is not installed (click to expand for fix)"
 
-      To fix,this open the `.devcontainer/devcontainer.json` file and add this line to the features section. Then rebuild the container. You should now have `npx` installed.
+      ਇਸ ਨੂੰ ਠੀਕ ਕਰਨ ਲਈ, `.devcontainer/devcontainer.json` ਫਾਇਲ ਖੋਲ੍ਹੋ ਅਤੇ features ਸੈਕਸ਼ਨ ਵਿੱਚ ਇਹ ਲਾਈਨ ਸ਼ਾਮਲ ਕਰੋ। ਫਿਰ container ਨੂੰ ਦੁਬਾਰਾ ਬਣਾਓ। ਹੁਣ ਤੁਹਾਡੇ ਕੋਲ `npx` ਇੰਸਟਾਲ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।
 
       ```title="" linenums="0"
          "features": {
@@ -66,53 +66,54 @@ To activate these:
          },
       ```
 
+
 ---
 
 ### 1.3. Test GitHub Copilot Chat
 
-**First use `az login` to authenticate with Azure from VS Code command line.**
+**ਸਭ ਤੋਂ ਪਹਿਲਾਂ VS Code ਦੇ ਕਮਾਂਡ ਲਾਈਨ ਤੋਂ Azure ਵਿੱਚ ਪ੍ਰਮਾਣੀਕਰਨ ਲਈ `azd auth login` ਦੀ ਵਰਤੋਂ ਕਰੋ। ਜੇ ਤੁਸੀਂ ਸੀਧੇ Azure CLI ਕਮਾਂਡ ਚਲਾਉਣ ਦੀ ਯੋਜਨਾ ਬਣਾਉਂਦੇ ਹੋ ਤਾਂ `az login` ਵੀ ਵਰਤੋ।**
 
-You should now be able to query your Azure subscription status, and ask questions about deployed resources or configuration. Try these prompts:
+ਹੁਣ ਤੁਸੀਂ ਆਪਣੇ Azure ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਦੀ ਸਥਿਤੀ ਪੁੱਝ ਸਕਦੇ ਹੋ, ਅਤੇ ਡਿਪਲੋਇਡ ਰਿਸੋਰਸਜ਼ ਜਾਂ ਸੰਰਚਨਾ ਬਾਰੇ ਸਵਾਲ ਪੁੱਛ ਸਕਦੇ ਹੋ। ਇਹਨਾਂ ਪ੍ਰਾਂਪਟਾਂ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ:
 
 1. `List my Azure resource groups`
 1. `#foundry list my current deployments`
 
-You can also ask questions about Azure documentation and get responses grounded in the Microsoft Docs MCP server. Try these prompts:
+ਤੁਸੀਂ Azure ਡੌਕਯੂਮੈਂਟੇਸ਼ਨ ਬਾਰੇ ਸਵਾਲ ਵੀ ਪੁੱਛ ਸਕਦੇ ਹੋ ਅਤੇ Microsoft Docs MCP ਸਰਵਰ ਵਿੱਚ ਆਧਾਰਿਤ ਜਵਾਬ ਪ੍ਰਾਪਤ ਕਰ ਸਕਦੇ ਹੋ। ਇਹਨਾਂ ਪ੍ਰਾਂਪਟਾਂ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ:
 
 1. `#microsoft_docs_search What is Azure Developer CLI?`
 1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
 
-Or you can ask for code snippets to complete a task. Try this prompt.
+ਜਾਂ ਤੁਸੀਂ ਕੋਈ ਕੰਮ ਪੂਰਾ ਕਰਨ ਲਈ ਕੋਡ ਸਨਿੱਪੇਟ ਵੀ ਮੰਗ ਸਕਦੇ ਹੋ। ਇਹ ਪ੍ਰਾਂਪਟ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ।
 
 1. `Give me a Python code example that uses AAD for an interactive chat client`
 
-In `Ask` mode, this will provide code that you can copy-paste and try out. In `Agent` mode, this might go a step further and create the relevant resources for you - including setup scripts and documentation - to help you execute that task.
+`Ask` ਮੋਡ ਵਿੱਚ, ਇਹ ਤੁਸੀਂ ਕਾਪੀ-ਪੇਸਟ ਕਰਕੇ ਅਜ਼ਮਾਇਸ਼ ਕਰ ਸਕਦੇ ਹੋ ਐਸਾ ਕੋਡ ਦਿੰਦਾ ਹੈ। `Agent` ਮੋਡ ਵਿੱਚ, ਇਹ ਹੋਰ ਅੱਗੇ ਜਾ ਸਕਦਾ ਹੈ ਅਤੇ ਸਬੰਧਤ ਰਿਸੋਰਸਜ਼ (ਸੈਟਅਪ ਸਕ੍ਰਿਪਟਾਂ ਅਤੇ ਡੌਕਯੂਮੈਂਟੇਸ਼ਨ ਸਮੇਤ) ਬਣਾਕੇ ਤੁਹਾਡੀ ਉਸ ਕੰਮ ਨੂੰ ਅਮਲ ਵਿੱਚ ਲਿਆਉਣ ਵਿੱਚ ਮਦਦ ਕਰ ਸਕਦਾ ਹੈ।
 
-**You are now equipped to start exploring the template repository**
+**ਹੁਣ ਤੁਹਾਡੇ ਕੋਲ ਟੈਮਪਲੇਟ ਰਿਪੋਜ਼ਟਰੀ ਖੋਜਣ ਲਈ ਜ਼ਰੂਰੀ ਸਾਜੋ-ਸਾਮਾਨ ਹੈ**
 
 ---
 
-## 2. Deconstruct Architecture
+## 2. ਆਰਕੀਟੈਕਚਰ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ
 
-??? prompt "ਪ੍ਰਸ਼ਨ: Explain the application architecture in docs/images/architecture.png in 1 paragraph"
+??? prompt "ASK: Explain the application architecture in docs/images/architecture.png in 1 paragraph"
 
-      This application is an AI-powered chat application built on Azure that demonstrates a modern agent-based architecture. The solution centers around an Azure Container App that hosts the main application code, which processes user input and generates intelligent responses through an AI agent. 
+      ਇਹ ਐਪਲੀਕੇਸ਼ਨ ਇੱਕ Azure 'ਤੇ ਤਿਆਰ ਕੀਤਾ ਹੋਇਆ AI-ਪਾਵਰਡ ਚੈਟ ਐਪਲੀਕੇਸ਼ਨ ਹੈ ਜੋ ਆਧੁਨਿਕ ਏਜੰਟ-ਅਧਾਰਿਤ ਆਰਕੀਟੈਕਚਰ ਨੂੰ ਦਰਸਾਉਂਦਾ ਹੈ। ਹੱਲ ਦਾ ਕੇਂਦਰ ਇੱਕ Azure Container App ਹੈ ਜੋ ਮੁੱਖ ਐਪਲੀਕੇਸ਼ਨ ਕੋਡ ਹੋਸਟ ਕਰਦਾ ਹੈ, ਜੋ ਯੂਜ਼ਰ ਇਨਪੁੱਟ ਨੂੰ ਪ੍ਰੋਸੈੱਸ ਕਰਦਾ ਹੈ ਅਤੇ AI ਏਜੰਟ ਰਾਹੀਂ ਬੁੱਧੀਮਾਨ ਜਵਾਬ ਤਿਆਰ ਕਰਦਾ ਹੈ। 
       
-      The architecture leverages Microsoft Foundry Project as the foundation for AI capabilities, connecting to Azure AI Services that provide the underlying language models (such as gpt-4.1-mini) and agent functionality. User interactions flow through a React-based frontend to a FastAPI backend that communicates with the AI agent service for generating contextual responses. 
+      ਆਰਕੀਟੈਕਚਰ Microsoft Foundry Project ਨੂੰ AI ਸਮਰੱਥਾਵਾਂ ਲਈ ਬੁਨਿਆਦ ਵਜੋਂ ਵਰਤਦਾ ਹੈ, ਜੋ Azure AI Services ਨਾਲ ਜੁੜਦਾ ਹੈ ਜੋ ਆਧਾਰਭੂਤ ਲੈਂਗਵੇਜ ਮਾਡਲ (ਜਿਵੇਂ gpt-4.1-mini) ਅਤੇ ਏਜੰਟ ਕਾਰਗੁਜ਼ਾਰੀ ਪ੍ਰਦਾਨ ਕਰਦੇ ਹਨ। ਯੂਜ਼ਰ ਇੰਟਰੈਕਸ਼ਨ React-ਅਧਾਰਿਤ ਫਰੰਟਐਂਡ ਤੋਂ FastAPI ਬੈਕਐਂਡ ਤੱਕ ਫਲੋ ਹੁੰਦੀ ਹੈ ਜੋ ਸੰਦਰਭਿਕ ਜਵਾਬ ਤਿਆਰ ਕਰਨ ਲਈ AI ਏਜੰਟ ਸਰਵਿਸ ਨਾਲ ਸੰਚਾਰ ਕਰਦੀ ਹੈ। 
       
-      The system incorporates knowledge retrieval capabilities through either file search or Azure AI Search service, allowing the agent to access and cite information from uploaded documents. For operational excellence, the architecture includes comprehensive monitoring through Application Insights and Log Analytics Workspace for tracing, logging, and performance optimization. 
+      ਸਿਸਟਮ ਦਸਤਾਵੇਜ਼ਾਂ ਵਿੱਚੋਂ ਜਾਣਕਾਰੀ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ ਫਾਇਲ ਖੋਜ ਜਾਂ Azure AI Search ਸਰਵਿਸ ਰਾਹੀਂ ਨੋਲੇਜ ਰੀਟ੍ਰੀਵਲ ਸਮਰੱਥਾਵਾਂ ਸ਼ਾਮਲ ਕਰਦਾ ਹੈ, ਜਿਸ ਨਾਲ ਏਜੰਟ ਅਪਲੋਡ ਕੀਤੀਆਂ ਦਸਤਾਵੇਜ਼ਾਂ ਤੋਂ ਜਾਣਕਾਰੀ ਪ੍ਰਾਪਤ ਅਤੇ ਹਵਾਲਾ ਦੇ ਸਕਦਾ ਹੈ। ਓਪਰੇਸ਼ਨਲ ਐਕਸੀਲੈਂਸ ਲਈ, ਆਰਕੀਟੈਕਚਰ ਵਿੱਚ Application Insights ਅਤੇ Log Analytics Workspace ਰਾਹੀਂ ਵਿਆਪਕ ਮੋਨਿਟਰਿੰਗ ਸ਼ਾਮਲ ਹੈ ਜਿੱਥੇ ਟ੍ਰੇਸਿੰਗ, ਲੌਗਿੰਗ ਅਤੇ ਪ੍ਰਦਰਸ਼ਨ ਇਤਿਆਦੀ ਲਈ ਮਦਦ ਮਿਲਦੀ ਹੈ। 
       
-      Azure Storage provides blob storage for application data and file uploads, while Managed Identity ensures secure access between Azure resources without storing credentials. The entire solution is designed for scalability and maintainability, with the containerized application automatically scaling based on demand while providing built-in security, monitoring, and CI/CD capabilities through Azure's managed services ecosystem.
+      Azure Storage ਐਪਲੀਕੇਸ਼ਨ ਡਾਟਾ ਅਤੇ ਫਾਇਲ ਅਪਲੋਡ ਲਈ ਬਲੌਬ ਸਟੋਰੇਜ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ, ਜਦਕਿ Managed Identity Azure ਸਰੋਸਾਂ ਵਿਚਕਾਰ ਸੁਰੱਖਿਅਤ ਪਹੁੰਚ ਯਕੀਨੀ ਬਣਾਉਂਦੀ ਹੈ ਬਿਨਾਂ ਕਰੇਡੈਂਸ਼ਲ ਸਟੋਰ ਕੀਤੇ। ਪੂਰਾ ਹੱਲ ਸਕੇਲੇਬਿਲਟੀ ਅਤੇ ਮੈਨਟੇਨਬਿਲਟੀ ਲਈ ਡਿਜ਼ਾਇਨ ਕੀਤਾ ਗਿਆ ਹੈ, ਜਿੱਥੇ ਕੰਟੇਨਰਾਈਜ਼ਡ ਐਪਲੀਕੇਸ਼ਨ ਮੰਗ ਅਨੁਸਾਰ ਆਪਣੇ ਆਪ ਸਕੇਲ ਕਰਦੀ ਹੈ ਅਤੇ Azure ਦੇ ਪ੍ਰਬੰਧਿਤ ਸਰਵਿਸਿਜ਼ ਮਾਹੌਲ ਰਾਹੀਂ ਬਿਲਟ-ਇਨ ਸੁਰੱਖਿਆ, ਮੋਨਿਟਰਿੰਗ ਅਤੇ CI/CD ਸਮਰੱਥਾਵਾਂ ਪ੍ਰਦਾਨ ਕਰਦੀ ਹੈ।
 
 ![ਆਰਕੀਟੈਕਚਰ](../../../../../translated_images/pa/architecture.48d94861e6e6cdc0.webp)
 
 ---
 
-## 3. Repository Structure
+## 3. ਰਿਪੋਜ਼ਟਰੀ ਢਾਂਚਾ
 
-!!! prompt "ਪ੍ਰਸ਼ਨ: ਟੈਮਪਲੇਟ ਫੋਲਡਰ ਢਾਂਚੇ ਦੀ ਵਿਆਖਿਆ ਕਰੋ। ਇੱਕ ਵਿਜੁਅਲ ਹਾਇਰਾਰਕੀਕਲ ਡਾਇਗ੍ਰਾਮ ਨਾਲ ਸ਼ੁਰੂ ਕਰੋ।"
+!!! prompt "ASK: Explain the template folder structure. Start with a visual hierarchical diagram."
 
-??? info "ਜਵਾਬ: ਵਿਜੁਅਲ ਹਾਇਰਾਰਕੀਕਲ ਡਾਇਗ੍ਰਾਮ"
+??? info "ANSWER: Visual Hierarchical Diagram"
 
       ```bash title="" 
       get-started-with-ai-agents/
@@ -191,90 +192,89 @@ In `Ask` mode, this will provide code that you can copy-paste and try out. In `A
 
 ### 3.1. Core App Architecture
 
-This template follows a **full-stack web application** pattern with:
+ਇਹ ਟੈਮਪਲੇਟ ਇੱਕ **ਫੁੱਲ-ਸਟੈਕ ਵੈੱਬ ਐਪਲੀਕੇਸ਼ਨ** ਪੈਟਰਨ ਦੀ ਪਾਲਣਾ ਕਰਦਾ ਹੈ ਜਿਸ ਵਿੱਚ:
 
-- **Backend**: Python FastAPI with Azure AI integration
-- **Frontend**: TypeScript/React with Vite build system
-- **Infrastructure**: Azure Bicep templates for cloud resources
-- **Containerization**: Docker for consistent deployment
+- **ਬੈਕਐਂਡ**: Python FastAPI ਜਿਸ ਵਿੱਚ Azure AI ਇੰਟਿਗ੍ਰੇਸ਼ਨ
+- **ਫਰੰਟਐਂਡ**: TypeScript/React Vite ਬਿਲ্ড ਸਿਸਟਮ ਦੇ ਨਾਲ
+- **ਇੰਫ੍ਰਾਸਟ੍ਰਕਚਰ**: ਕਲਾਉਡ ਸਰੋਸਾਂ ਲਈ Azure Bicep ਟੈਮਪਲੇਟ
+- **ਕੰਟੇਨਰਾਈਜ਼ੇਸ਼ਨ**: ਸੰਗਤ ਡਿਪਲੋਇਮੈਂਟ ਲਈ Docker
 
 ### 3.2 Infra As Code (bicep)
 
-The infrastructure layer uses **Azure Bicep** templates organized modularly:
+ਇੰਫ੍ਰਾਸਟ੍ਰਕਚਰ ਲੇਅਰ **Azure Bicep** ਟੈਮਪਲੇਟਾਂ ਦੀ ਵਰਤੋਂ ਕਰਦਾ ਹੈ ਜੋ ਮੌਡੀਊਲਰ ਢੰਗ ਨਾਲ ਸੰਗਠਿਤ ਹਨ:
 
-   - **`main.bicep`**: Orchestrates all Azure resources
-   - **`core/` modules**: Reusable components for different services
-      - AI services (Microsoft Foundry Models, AI Search)
-      - Container hosting (Azure Container Apps)
-      - Monitoring (Application Insights, Log Analytics)
-      - Security (Key Vault, Managed Identity)
+   - **`main.bicep`**: ਸਾਰੇ Azure ਰਿਸੋਰਸਾਂ ਨੂੰ ਸੰਗਠਿਤ ਕਰਦਾ ਹੈ
+   - **`core/` modules**: ਵੱਖ-ਵੁੱਖ ਸਰਵਿਸਜ਼ ਲਈ ਦੁਬਾਰਾ ਵਰਤਣਯੋਗ ਕੰਪੋਨੈਂਟ
+      - AI ਸਰਵਿਸਜ਼ (Microsoft Foundry Models, AI Search)
+      - ਕੰਟੇਨਰ ਹੋਸਟਿੰਗ (Azure Container Apps)
+      - ਮੋਨਿਟਰਿੰਗ (Application Insights, Log Analytics)
+      - ਸੁਰੱਖਿਆ (Key Vault, Managed Identity)
 
-### 3.3 Application Source (`src/`)
+### 3.3 ਐਪਲੀਕੇਸ਼ਨ ਸਰੋਤ (`src/`)
 
-**Backend API (`src/api/`)**:
+**ਬੈਕਐਂਡ API (`src/api/`)**:
 
-- FastAPI-based REST API
-- Foundry Agents integration
-- Search index management for knowledge retrieval
-- File upload and processing capabilities
+- FastAPI-ਅਧਾਰਿਤ REST API
+- Foundry Agents ਇੰਟਿਗ੍ਰੇਸ਼ਨ
+- ਗਿਆਨ ਪ੍ਰਾਪਤੀ ਲਈ Search index ਪ੍ਰਬੰਧਨ
+- ਫਾਇਲ ਅਪਲੋਡ ਅਤੇ ਪ੍ਰੋਸੈਸਿੰਗ ਸਮਰੱਥਾਵਾਂ
 
-**Frontend (`src/frontend/`)**:
+**ਫਰੰਟਐਂਡ (`src/frontend/`)**:
 
-- Modern React/TypeScript SPA
-- Vite for fast development and optimized builds
-- Chat interface for agent interactions
+- ਆਧੁਨਿਕ React/TypeScript SPA
+- ਤੇਜ਼ ਵਿਕਾਸ ਅਤੇ ਵਿਅਕਤੀਗਤ ਬਿਲਡ ਲਈ Vite
+- ਏਜੰਟ ਇੰਟਰੈਕਸ਼ਨਾਂ ਲਈ ਚੈਟ ਇੰਟਰਫੇਸ
 
-**Knowledge Base (`src/files/`)**:
+**ਨੋਲੇਜ ਬੇਸ (`src/files/`)**:
 
-- Sample customer and product data
-- Demonstrates file-based knowledge retrieval
-- JSON and Markdown format examples
-
+- ਨਮੂਨਾ ਗਾਹਕ ਅਤੇ ਉਤਪਾਦ ਡਾਟਾ
+- ਫਾਇਲ-ਅਧਾਰਿਤ ਗਿਆਨ ਰੀਟ੍ਰੀਵਲ ਨੂੰ ਦਰਸਾਉਂਦਾ ਹੈ
+- JSON ਅਤੇ Markdown ਫਾਰਮੇਟ ਨਮੂਨੇ
 
 ### 3.4 DevOps & Automation
 
-**Scripts (`scripts/`)**:
+**ਸਕ੍ਰਿਪਟਸ (`scripts/`)**:
 
-- Cross-platform PowerShell and Bash scripts
-- Environment validation and setup
-- Post-deployment configuration
-- Model quota management
+- ਬਹੁ-ਪਲੇਟਫਾਰਮ PowerShell ਅਤੇ Bash ਸਕ੍ਰਿਪਟਸ
+- ਵਾਤਾਵਰਣ ਪ੍ਰਮਾਣਿਕਤਾ ਅਤੇ ਸੈਟਅਪ
+- ਪੋਸਟ-ਡਿਪਲੋਇਮੈਂਟ ਸੰਰਚਨਾ
+- ਮਾਡਲ ਕੋਟਾ ਪ੍ਰਬੰਧਨ
 
-**Azure Developer CLI Integration**:
+**Azure Developer CLI ਇੰਟਿਗ੍ਰੇਸ਼ਨ**:
 
-- `azure.yaml` configuration for `azd` workflows
-- Automated provisioning and deployment
-- Environment variable management
+- `azure.yaml` `azd` ਵਰਕਫਲੋਜ਼ ਲਈ ਸੰਰਚਨਾ
+- ਆਟੋਮੇਟਿਕ ਪ੍ਰੋਵਿਜ਼ਨਿੰਗ ਅਤੇ ਡਿਪਲੋਇਮੈਂਟ
+- ਇਨਵਾਇਰਨਮੈਂਟ ਵੈਰੀਏਬਲ ਪ੍ਰਬੰਧਨ
 
 ### 3.5 Testing & Quality Assurance
 
-**Evaluation Framework (`evals/`)**:
+**ਮੁਲਾਂਕਣ ਫਰੇਮਵਰਕ (`evals/`)**:
 
-- Agent performance evaluation
-- Query-response quality testing
-- Automated assessment pipeline
+- ਏਜੰਟ ਪ੍ਰਦਰਸ਼ਨ ਮੁਲਾਂਕਣ
+- ਪ੍ਰਸ਼ਨ-ਜਵਾਬ ਗੁણਵੱਤਾ ਟੈਸਟਿੰਗ
+- ਆਟੋਮੇਟਿਕ ਅੰਕੜਾ-ਅਧਾਰਿਤ ਮੁਲਾਂਕਣ ਪਾਈਪਲਾਈਨ
 
-**AI Safety (`airedteaming/`)**:
+**AI ਸੁਰੱਖਿਆ (`airedteaming/`)**:
 
-- Red team testing for AI safety
-- Security vulnerability scanning
-- Responsible AI practices
+- AI ਸੁਰੱਖਿਆ ਲਈ ਰੈਡ ਟੀਮ ਟੈਸਟਿੰਗ
+- ਸੁਰੱਖਿਆ ਜ਼ਰੀਏਸ਼ ਦੀ ਸਕੈਨਿੰਗ
+- ਜ਼ਿੰਮੇਵਾਰ AI ਅਭਿਆਸ
 
 ---
 
-## 4. Congratulations 🏆
+## 4. ਵਧਾਈਆਂ 🏆
 
-You successfully used GitHub Copilot Chat with MCP servers, to explore the repository.
+ਤੁਸੀਂ ਸਫਲਤਾਪੂਰਵਕ MCP ਸਰਵਰਾਂ ਨਾਲ GitHub Copilot Chat ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਰਿਪੋਜ਼ਟਰੀ ਦੀ ਖੋਜ ਕੀਤੀ।
 
-- [X] Activated GitHub Copilot for Azure
-- [X] Understood the Application Architecture
-- [X] Explored the AZD template structure
+- [X] GitHub Copilot ਨੂੰ Azure ਲਈ ਸਰਗਰਮ ਕੀਤਾ
+- [X] ਐਪਲੀਕੇਸ਼ਨ ਆਰਕੀਟੈਕਚਰ ਨੂੰ ਸਮਝਿਆ
+- [X] AZD ਟੈਮਪਲੇਟ ਢਾਂਚੇ ਦੀ ਖੋਜ ਕੀਤੀ
 
-This gives you a sense of the _infrastructure as code_ assets for this template. Next, we'll look at the configuration file for AZD.
+ਇਸ ਨਾਲ ਤੁਹਾਨੂੰ ਇਸ ਟੈਮਪਲੇਟ ਲਈ ਉਪਲਬਧ _infrastructure as code_ ਐਸੇਟਸ ਦੀ ਸਮਝ ਮਿਲਦੀ ਹੈ। ਅੱਗੇ, ਅਸੀਂ AZD ਲਈ ਸੰਰਚਨਾ ਫਾਇਲ 'ਤੇ ਨਜ਼ਰ ਮਾਰਾਂਗੇ।
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ਅਸਵੀਕਾਰਨ**:
-ਇਸ ਦਸਤਾਵੇਜ਼ ਦਾ ਅਨੁਵਾਦ AI ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਨਾਲ ਕੀਤਾ ਗਿਆ ਹੈ। ਜਦੋਂ ਕਿ ਅਸੀਂ ਸ਼ੁੱਧਤਾ ਲਈ ਯਤਨਸ਼ੀਲ ਹਾਂ, ਕਿਰਪਾ ਧਿਆਨ ਰੱਖੋ ਕਿ ਆਟੋਮੈਟਿਕ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਅਣਸਹੀਤੀਆਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਉਸ ਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਹੀ ਪ੍ਰਮਾਣਿਕ ਸਰੋਤ ਸਮਝਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ, ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਿਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਕਾਰਨ ਪੈਦਾ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀਆਂ ਜਾਂ ਭ੍ਰਮਾਂ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
+**Disclaimer**:
+ਇਸ ਦਸਤਾਵੇਜ਼ ਦਾ ਅਨੁਵਾਦ ਏਆਈ ਅਨੁਵਾਦ ਸੇਵਾ [Co-op Translator](https://github.com/Azure/co-op-translator) ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਕੀਤਾ ਗਿਆ ਹੈ। ਹਾਲਾਂਕਿ ਅਸੀਂ ਸਹੀਤਾ ਲਈ ਯਤਨ ਕਰਦੇ ਹਾਂ, ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਰੱਖੋ ਕਿ ਆਟੋਮੈਟਿਕ ਅਨੁਵਾਦਾਂ ਵਿੱਚ ਗਲਤੀਆਂ ਜਾਂ ਤਰੁੱਟੀਆਂ ਹੋ ਸਕਦੀਆਂ ਹਨ। ਮੂਲ ਦਸਤਾਵੇਜ਼ ਨੂੰ ਉਸ ਦੀ ਮੂਲ ਭਾਸ਼ਾ ਵਿੱਚ ਅਧਿਕਾਰਕ ਸਰੋਤ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ ਹੈ। ਮਹੱਤਵਪੂਰਨ ਜਾਣਕਾਰੀ ਲਈ ਪੇਸ਼ੇਵਰ ਮਨੁੱਖੀ ਅਨੁਵਾਦ ਦੀ ਸਿਫਾਰਿਸ਼ ਕੀਤੀ ਜਾਂਦੀ ਹੈ। ਅਸੀਂ ਇਸ ਅਨੁਵਾਦ ਦੀ ਵਰਤੋਂ ਕਾਰਨ ਹੋਣ ਵਾਲੀਆਂ ਕਿਸੇ ਵੀ ਗਲਤਫਹਿਮੀਆਂ ਜਾਂ ਗਲਤ ਵਿਆਖਿਆਵਾਂ ਲਈ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹਾਂ।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

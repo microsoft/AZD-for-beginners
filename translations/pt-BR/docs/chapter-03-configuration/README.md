@@ -1,16 +1,18 @@
-# Capítulo 3: Configuração & Autenticação
+# Capítulo 3: Configuração e Autenticação
 
-**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 45-60 minutos | **⭐ Complexidade**: Intermediário
+**📚 Curso**: [AZD para Iniciantes](../../README.md) | **⏱️ Duração**: 45-60 minutos | **⭐ Complexidade**: Intermediário
 
 ---
 
 ## Visão Geral
 
-Este capítulo aborda a configuração de ambiente, padrões de autenticação e melhores práticas de segurança para implantações com o Azure Developer CLI.
+Este capítulo aborda a configuração de ambientes, padrões de autenticação e práticas recomendadas de segurança para implantações com o Azure Developer CLI.
+
+> Validado contra `azd 1.23.12` em março de 2026.
 
 ## Objetivos de Aprendizagem
 
-Ao completar este capítulo, você irá:
+Ao concluir este capítulo, você:
 - Dominar a hierarquia de configuração do AZD
 - Gerenciar múltiplos ambientes (dev, staging, prod)
 - Implementar autenticação segura com identidades gerenciadas
@@ -18,24 +20,24 @@ Ao completar este capítulo, você irá:
 
 ---
 
-## 📚 Lições
+## 📚 Aulas
 
-| # | Lição | Descrição | Tempo |
+| # | Aula | Descrição | Tempo |
 |---|--------|-------------|------|
 | 1 | [Guia de Configuração](configuration.md) | Configuração e gerenciamento do ambiente | 30 min |
-| 2 | [Autenticação & Segurança](authsecurity.md) | Identidade gerenciada e padrões de RBAC | 30 min |
+| 2 | [Autenticação e Segurança](authsecurity.md) | Padrões de identidade gerenciada e RBAC | 30 min |
 
 ---
 
 ## 🚀 Início Rápido
 
 ```bash
-# Criar vários ambientes
+# Criar múltiplos ambientes
 azd env new dev
 azd env new staging
 azd env new prod
 
-# Alternar entre ambientes
+# Alternar ambientes
 azd env select prod
 
 # Definir variáveis de ambiente
@@ -50,27 +52,31 @@ azd env get-values
 
 ## 🔧 Hierarquia de Configuração
 
-O AZD aplica configurações nesta ordem (as posteriores substituem as anteriores):
+AZD aplica as configurações nesta ordem (itens posteriores sobrescrevem os anteriores):
 
-1. **Valores padrão** (embutidos nos modelos)
+1. **Valores padrão** (incorporados aos modelos)
 2. **azure.yaml** (configuração do projeto)
 3. **Variáveis de ambiente** (`azd env set`)
 4. **Opções de linha de comando** (`--location eastus`)
 
 ---
 
-## 🔐 Melhores Práticas de Segurança
+## 🔐 Práticas recomendadas de segurança
 
 ```bash
 # Use identidade gerenciada (recomendado)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Verifique o status de autenticação
-azd auth whoami
+# Verifique o status de autenticação do AZD
+azd auth status
+
+# Opcional: verifique o contexto do Azure CLI se planeja executar comandos az
 az account show
 
 # Reautentique-se se necessário
 azd auth login
+
+# Opcional: atualize a autenticação do Azure CLI para os comandos az
 az login
 ```
 
@@ -87,12 +93,12 @@ az login
 
 ## 📖 Recursos Relacionados
 
-- [Verificações Pré-Implantação](../chapter-06-pre-deployment/README.md)
+- [Verificações pré-implantação](../chapter-06-pre-deployment/README.md)
 - [Solução de Problemas](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Isenção de responsabilidade**:
-Este documento foi traduzido utilizando o serviço de tradução por inteligência artificial [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se tradução profissional realizada por tradutores humanos. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+**Aviso legal**:
+Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
