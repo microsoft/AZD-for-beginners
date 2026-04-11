@@ -1,29 +1,31 @@
 # Capítulo 8: Padrões de Produção e Empresariais
 
-**📚 Curso**: [AZD For Beginners](../../README.md) | **⏱️ Duração**: 2-3 horas | **⭐ Complexidade**: Avançado
+**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 2-3 hours | **⭐ Complexidade**: Avançado
 
 ---
 
-## Visão Geral
+## Visão geral
 
 Este capítulo aborda padrões de implantação prontos para empresas, fortalecimento de segurança, monitoramento e otimização de custos para cargas de trabalho de IA em produção.
 
-## Objetivos de Aprendizagem
+> Validado com `azd 1.23.12` em março de 2026.
 
-Ao concluir este capítulo, você:
-- Implantar aplicações resilientes em múltiplas regiões
+## Objetivos de aprendizagem
+
+Ao concluir este capítulo, você irá:
+- Implantar aplicações resilientes em várias regiões
 - Implementar padrões de segurança empresariais
 - Configurar monitoramento abrangente
-- Otimizar custos em larga escala
-- Configurar pipelines CI/CD com AZD
+- Otimizar custos em escala
+- Configurar pipelines de CI/CD com AZD
 
 ---
 
-## 📚 Lessons
+## 📚 Lições
 
-| # | Lesson | Description | Time |
+| # | Aula | Descrição | Tempo |
 |---|--------|-------------|------|
-| 1 | [Production AI Practices](production-ai-practices.md) | Enterprise deployment patterns | 90 min |
+| 1 | [Práticas de IA em Produção](production-ai-practices.md) | Padrões de implantação empresariais | 90 min |
 
 ---
 
@@ -32,8 +34,8 @@ Ao concluir este capítulo, você:
 - [ ] Implantação multi-região para resiliência
 - [ ] Identidade gerenciada para autenticação (sem chaves)
 - [ ] Application Insights para monitoramento
-- [ ] Orçamentos de custos e alertas configurados
-- [ ] Escaneamento de segurança ativado
+- [ ] Orçamentos de custo e alertas configurados
+- [ ] Varredura de segurança habilitada
 - [ ] Integração com pipeline CI/CD
 - [ ] Plano de recuperação de desastres
 
@@ -41,11 +43,11 @@ Ao concluir este capítulo, você:
 
 ## 🏗️ Padrões de Arquitetura
 
-### Padrão 1: Microsserviços de IA
+### Padrão 1: IA em Microsserviços
 
 ```mermaid
 graph LR
-    Gateway[Gateway de API] --> AI[Serviço de IA] --> Models[Modelos do Microsoft Foundry]
+    Gateway[Gateway de API] --> AI[Serviço de IA] --> Models[Modelos da Microsoft Foundry]
     Gateway --> Auth[Serviço de Autenticação]
     AI --> Data[Armazenamento de Dados]
 ```
@@ -80,9 +82,9 @@ properties: {
 
 | Strategy | Savings |
 |----------|---------|
-| Escalonar para zero (Container Apps) | 60-80% |
-| Usar níveis de consumo para dev | 50-70% |
-| Escalonamento agendado | 30-50% |
+| Escalar para zero (Container Apps) | 60-80% |
+| Usar níveis de consumo para desenvolvimento | 50-70% |
+| Escalonamento programado | 30-50% |
 | Capacidade reservada | 20-40% |
 
 ```bash
@@ -103,9 +105,9 @@ az consumption budget create \
 azd monitor --logs
 
 # Verificar o Application Insights
-azd monitor
+azd monitor --overview
 
-# Visualizar métricas
+# Ver métricas
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -113,9 +115,9 @@ az monitor metrics list --resource <resource-id>
 
 ## 🔗 Navegação
 
-| Direction | Chapter |
+| Direção | Capítulo |
 |-----------|---------|
-| **Anterior** | [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/README.md) |
+| **Anterior** | [Capítulo 7: Solução de Problemas](../chapter-07-troubleshooting/README.md) |
 | **Curso Concluído** | [Início do Curso](../../README.md) |
 
 ---
@@ -131,5 +133,5 @@ az monitor metrics list --resource <resource-id>
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Isenção de responsabilidade**:
-Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, por favor, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se uma tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,42 +1,42 @@
-# Aprovisionamiento de Recursos de Azure con AZD
+# Aprovisionamiento de recursos de Azure con AZD
 
-**Navegación del Capítulo:**
-- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
-- **📖 Capítulo actual**: Capítulo 4 - Infraestructura como Código y Despliegue
-- **⬅️ Anterior**: [Guía de Despliegue](deployment-guide.md)
-- **➡️ Capítulo siguiente**: [Capítulo 5: Soluciones de IA Multiagente](../../examples/retail-scenario.md)
+**Navegación del capítulo:**
+- **📚 Inicio del curso**: [AZD para principiantes](../../README.md)
+- **📖 Capítulo actual**: Capítulo 4 - Infraestructura como Código y Implementación
+- **⬅️ Anterior**: [Guía de implementación](deployment-guide.md)
+- **➡️ Siguiente capítulo**: [Capítulo 5: Soluciones de IA multiagente](../../examples/retail-scenario.md)
 - **🔧 Relacionado**: [Capítulo 6: Validación previa al despliegue](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Introducción
 
-Esta guía integral cubre todo lo que necesitas saber sobre el aprovisionamiento y la gestión de recursos de Azure usando Azure Developer CLI. Aprende a implementar patrones de Infrastructure as Code (IaC) desde la creación básica de recursos hasta arquitecturas de infraestructura avanzadas de nivel empresarial usando Bicep, plantillas ARM, Terraform y Pulumi.
+Esta guía completa cubre todo lo que necesitas saber sobre el aprovisionamiento y la gestión de recursos de Azure usando Azure Developer CLI. Aprende a implementar patrones de Infrastructure as Code (IaC) desde la creación básica de recursos hasta arquitecturas de infraestructura de grado empresarial avanzadas usando Bicep, plantillas ARM, Terraform y Pulumi.
 
 ## Objetivos de aprendizaje
 
-Al completar esta guía, podrás:
-- Dominar los principios de Infrastructure as Code y el aprovisionamiento de recursos de Azure
-- Entender múltiples proveedores IaC compatibles con Azure Developer CLI
+Al completar esta guía, usted:
+- Dominio de los principios de Infrastructure as Code y el aprovisionamiento de recursos de Azure
+- Comprender múltiples proveedores de IaC compatibles con Azure Developer CLI
 - Diseñar e implementar plantillas Bicep para arquitecturas de aplicaciones comunes
 - Configurar parámetros de recursos, variables y ajustes específicos por entorno
 - Implementar patrones de infraestructura avanzados, incluyendo redes y seguridad
 - Gestionar el ciclo de vida de los recursos, actualizaciones y resolución de dependencias
 
-## Resultados del aprendizaje
+## Resultados de aprendizaje
 
-Al finalizar, serás capaz de:
+Al finalizar, podrá:
 - Diseñar y aprovisionar infraestructura de Azure usando Bicep y plantillas ARM
-- Configurar arquitecturas complejas multi-servicio con dependencias de recursos adecuadas
+- Configurar arquitecturas complejas de múltiples servicios con dependencias de recursos adecuadas
 - Implementar plantillas parametrizadas para múltiples entornos y configuraciones
 - Solucionar problemas de aprovisionamiento de infraestructura y resolver fallos de despliegue
 - Aplicar los principios del Azure Well-Architected Framework al diseño de infraestructura
 - Gestionar actualizaciones de infraestructura e implementar estrategias de versionado de infraestructura
 
-## Visión general del aprovisionamiento de infraestructura
+## Descripción general del aprovisionamiento de infraestructura
 
 Azure Developer CLI admite varios proveedores de Infrastructure as Code (IaC):
 - **Bicep** (recomendado) - Lenguaje específico de dominio de Azure
 - **ARM Templates** - Plantillas de Azure Resource Manager basadas en JSON
-- **Terraform** - Herramienta de infraestructura multicloud
+- **Terraform** - Herramienta de infraestructura multi-nube
 - **Pulumi** - Infraestructura como código moderna con lenguajes de programación
 
 ## Comprendiendo los recursos de Azure
@@ -50,7 +50,7 @@ Azure Account
 ```
 
 ### Servicios comunes de Azure para aplicaciones
-- **Cómputo**: App Service, Container Apps, Functions, Máquinas virtuales
+- **Computación**: App Service, Container Apps, Functions, Virtual Machines
 - **Almacenamiento**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Redes**: Virtual Network, Application Gateway, CDN
 - **Seguridad**: Key Vault, Application Insights, Log Analytics
@@ -342,7 +342,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Configuración de identidades administradas
+### Configuración de identidad administrada
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -370,7 +370,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 
 ## 🌍 Redes y conectividad
 
-### Configuración de la red virtual
+### Configuración de red virtual
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -496,7 +496,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Monitorización y observabilidad
+## 📊 Supervisión y observabilidad
 
 ### Application Insights
 ```bicep
@@ -651,7 +651,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 
 ## 🚀 Patrones avanzados de aprovisionamiento
 
-### Despliegue multirregional
+### Despliegue multirregión
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -755,42 +755,41 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 Vista previa y validación de infraestructura (NUEVO)
+## 🧪 Vista previa y validación de la infraestructura (NUEVO)
 
-### Previsualizar cambios de infraestructura antes del despliegue
+### Vista previa de los cambios de infraestructura antes del despliegue
 
-La característica `azd provision --preview` te permite **simular el aprovisionamiento de infraestructura** antes de desplegar realmente los recursos. Es similar en espíritu a `terraform plan` o `bicep what-if`, ofreciéndote una **vista de ensayo** de qué cambios se harían en tu entorno de Azure.
+La característica `azd provision --preview` te permite **simular el aprovisionamiento de infraestructura** antes de desplegar realmente los recursos. Es similar en espíritu a `terraform plan` o `bicep what-if`, ofreciéndote una **vista de simulación** de qué cambios se harían en tu entorno de Azure.
 
 #### 🛠️ Qué hace
 - **Analiza tus plantillas IaC** (Bicep o Terraform)
-- **Muestra una vista previa de los cambios en los recursos**: adiciones, eliminaciones, actualizaciones
+- **Muestra una vista previa de los cambios de recursos**: adiciones, eliminaciones, actualizaciones
 - **No aplica cambios** — es de solo lectura y seguro de ejecutar
 
-#### � Casos de uso
+#### Casos de uso
 ```bash
-# Previsualizar los cambios en la infraestructura antes del despliegue
+# Vista previa de los cambios en la infraestructura antes del despliegue
 azd provision --preview
 
-# Previsualizar con salida detallada
-azd provision --preview --output json
-
-# Previsualizar para un entorno específico
-azd provision --preview --environment production
+# Vista previa para un entorno específico
+azd provision --preview -e production
 ```
 
 Este comando te ayuda a:
-- **Validar los cambios de infraestructura** antes de aprovisionar recursos
+- **Validar los cambios de infraestructura** antes de comprometer recursos
 - **Detectar errores de configuración temprano** en el ciclo de desarrollo
 - **Colaborar de forma segura** en entornos de equipo
-- **Asegurar despliegues con el principio de menor privilegio** sin sorpresas
+- **Garantizar despliegues con el principio de menor privilegio** sin sorpresas
 
 Es especialmente útil cuando:
-- Trabajas con entornos complejos de múltiples servicios
-- Realizas cambios en infraestructura de producción
-- Validar modificaciones en plantillas antes de la aprobación del PR
-- Formar a nuevos miembros del equipo en patrones de infraestructura
+- Se trabaja con entornos complejos de múltiples servicios
+- Se realizan cambios en infraestructura de producción
+- Se validan modificaciones de plantillas antes de la aprobación de un PR
+- Se capacita a nuevos miembros del equipo en patrones de infraestructura
 
 ### Ejemplo de salida de la vista previa
+La salida exacta de la vista previa varía según el proveedor y la estructura del proyecto, pero el resultado debería identificar claramente los cambios propuestos antes de que se aplique nada.
+
 ```bash
 $ azd provision --preview
 
@@ -809,7 +808,6 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
@@ -819,18 +817,18 @@ The following resources will be destroyed:
 
 ### Actualizaciones seguras de recursos
 ```bash
-# Previsualice los cambios de infraestructura primero (RECOMENDADO)
+# Previsualice primero los cambios en la infraestructura (RECOMENDADO)
 azd provision --preview
 
 # Aplique los cambios después de confirmar la vista previa
 azd provision --confirm-with-no-prompt
 
-# Para la reversión, use Git para revertir los cambios de infraestructura:
-git revert HEAD  # Revertir el último commit de infraestructura
+# Para revertir, use Git para deshacer los cambios en la infraestructura:
+git revert HEAD  # Revertir el último commit de la infraestructura
 azd provision    # Aplicar el estado anterior de la infraestructura
 ```
 
-### Migraciones de bases de datos
+### Migraciones de base de datos
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -859,9 +857,9 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🎯 Buenas prácticas
+## 🎯 Mejores prácticas
 
-### 1. Convenciones de nombres de recursos
+### 1. Convenciones de nomenclatura de recursos
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -916,7 +914,7 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## Próximos pasos
+## Siguientes pasos
 
 - [Planificación previa al despliegue](../chapter-06-pre-deployment/capacity-planning.md) - Validar la disponibilidad de recursos
 - [Problemas comunes](../chapter-07-troubleshooting/common-issues.md) - Solucionar problemas de infraestructura
@@ -933,12 +931,12 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Navegación**
-- **Lección anterior**: [Guía de Despliegue](deployment-guide.md)
-- **Lección siguiente**: [Planificación de capacidad](../chapter-06-pre-deployment/capacity-planning.md)
+- **Lección anterior**: [Guía de implementación](deployment-guide.md)
+- **Siguiente lección**: [Planificación de capacidad](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Descargo de responsabilidad:
-Este documento ha sido traducido mediante el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la exactitud, tenga en cuenta que las traducciones automáticas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por traductores humanos. No nos hacemos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
+**Disclaimer**:
+Este documento ha sido traducido utilizando el servicio de traducción por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por un humano. No nos hacemos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

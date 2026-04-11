@@ -1,40 +1,46 @@
-# Kapitel 7: Fejlfinding og fejlsøgning
+# Kapitel 7: Fejlfinding & Debugging
 
-**📚 Kursus**: [AZD For Beginners](../../README.md) | **⏱️ Varighed**: 1-1,5 timer | **⭐ Kompleksitet**: Mellemniveau
+**📚 Kursus**: [AZD for begyndere](../../README.md) | **⏱️ Varighed**: 1-1,5 timer | **⭐ Kompleksitet**: Mellem
 
 ---
 
 ## Oversigt
 
-Dette kapitel hjælper dig med at diagnosticere og løse almindelige problemer, når du arbejder med Azure Developer CLI. Fra udrulningsfejl til AI-specifikke problemer.
+Dette kapitel hjælper dig med at diagnosticere og løse almindelige problemer, når du arbejder med Azure Developer CLI. Fra implementeringsfejl til AI-specifikke problemer.
+
+> Valideret med `azd 1.23.12` i marts 2026.
 
 ## Læringsmål
 
 Ved at gennemføre dette kapitel vil du:
-- Diagnosticere almindelige AZD-udrulningsfejl
-- Fejlfinde autentificerings- og tilladelsesproblemer
-- Løse AI-tjenesteforbindelsesproblemer
-- Bruge Azure Portal og CLI til fejlfinding
+- Diagnosticere almindelige AZD-implementeringsfejl
+- Fejlsøge autentificerings- og tilladelsesproblemer
+- Løse AI-tjenestens forbindelsesproblemer
+- Brug Azure Portal og CLI til fejlfinding
 
 ---
 
-## 📚 Lessons
+## 📚 Lektioner
 
-| # | Lesson | Description | Time |
+| # | Lektion | Beskrivelse | Tid |
 |---|--------|-------------|------|
-| 1 | [Almindelige problemer](common-issues.md) | Ofte forekommende problemer | 30 min |
-| 2 | [Fejlsøgningsguide](debugging.md) | Trin-for-trin fejlsøgningsstrategier | 45 min |
+| 1 | [Almindelige problemer](common-issues.md) | Hyppigt forekommende problemer | 30 min |
+| 2 | [Fejlsøgningsvejledning](debugging.md) | Trin-for-trin fejlsøgningsstrategier | 45 min |
 | 3 | [AI-fejlfinding](ai-troubleshooting.md) | AI-specifikke problemer | 30 min |
 
 ---
 
-## 🚨 Hurtige løsninger
+## 🚨 Hurtige rettelser
 
-### Godkendelsesproblemer
+### Autentificeringsproblemer
 ```bash
+# Påkrævet for AZD-arbejdsgange
 azd auth login
+
+# Valgfrit, hvis du også bruger Azure CLI-kommandoer direkte
 az login
-azd auth whoami
+
+azd auth status
 ```
 
 ### Provisioneringsfejl
@@ -60,15 +66,15 @@ azd up
 
 ---
 
-## 📋 Fejlkode-reference
+## 📋 Fejlkodehenvisning
 
 | Fejl | Årsag | Løsning |
 |-------|-------|----------|
 | `AuthenticationError` | Ikke logget ind | `azd auth login` |
 | `ResourceNotFound` | Manglende ressource | Kontroller ressourcenavne |
-| `QuotaExceeded` | Abonnementsgrænser | Anmod om forøgelse af kvoten |
-| `InvalidTemplate` | Syntaksfejl i Bicep | `az bicep build` |
-| `Conflict` | Ressource findes | Brug nyt navn eller slet |
+| `QuotaExceeded` | Abonnementsgrænser | Anmod om øget kvote |
+| `InvalidTemplate` | Bicep-syntaksfejl | `az bicep build` |
+| `Conflict` | Ressourcen findes | Brug nyt navn eller slet |
 | `Forbidden` | Utilstrækkelige tilladelser | Kontroller RBAC-roller |
 
 ---
@@ -88,9 +94,9 @@ azd up
 
 ## 🔗 Navigation
 
-| Direction | Chapter |
+| Retning | Kapitel |
 |-----------|---------|
-| **Forrige** | [Kapitel 6: Før udrulning](../chapter-06-pre-deployment/README.md) |
+| **Forrige** | [Kapitel 6: Forudgående udrulning](../chapter-06-pre-deployment/README.md) |
 | **Næste** | [Kapitel 8: Produktion](../chapter-08-production/README.md) |
 
 ---
@@ -98,12 +104,12 @@ azd up
 ## 📖 Relaterede ressourcer
 
 - [Kontroller før udrulning](../chapter-06-pre-deployment/preflight-checks.md)
-- [Konfigurationsguide](../chapter-03-configuration/configuration.md)
-- [AZD GitHub-issues](https://github.com/Azure/azure-dev/issues)
+- [Konfigurationsvejledning](../chapter-03-configuration/configuration.md)
+- [AZD GitHub-problemer](https://github.com/Azure/azure-dev/issues)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfraskrivelse:
+**Ansvarsfraskrivelse**:
 Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på originalsproget bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

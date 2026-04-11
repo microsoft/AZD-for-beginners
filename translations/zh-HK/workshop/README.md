@@ -4,12 +4,12 @@
       🎯 AZD AI 開發者工作坊
     </h2>
     <p style="color: white; margin: 10px 0 0 0; font-size: 16px; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">
-      <strong>一個利用 Azure Developer CLI 構建 AI 應用的親身操作工作坊。</strong><br>
-      完成7個模組，掌握AZD範本及AI部署工作流程。
+      <strong>一個使用 Azure Developer CLI 的實作型工作坊，專注於建立 AI 應用程式。</strong><br>
+      完成 7 個模組，掌握 AZD 範本與 AI 部署工作流程。
     </p>
     <div style="margin-top: 15px;">
       <span style="background: rgba(255,255,255,0.2); padding: 5px 10px; border-radius: 15px; color: white; font-size: 14px;">
-        📅 最近更新：2026年2月
+        📅 最後更新：2026年3月
       </span>
     </div>
   </div>
@@ -17,154 +17,157 @@
 
 # AZD AI 開發者工作坊
 
-歡迎參加專注於AI應用部署的Azure Developer CLI (AZD)學習親手操作工作坊。此工作坊將透過3步驟，協助你實際了解AZD範本：
+歡迎參加以 Azure Developer CLI (AZD) 為主題、聚焦於 AI 應用部署的實作工作坊。本工作坊透過 3 個步驟幫助你實作並理解 AZD 範本：
 
-1. **發掘** - 找到適合你的範本。
-1. **部署** - 部署並驗證是否正常運作
-1. **自訂** - 修改並迭代，將它變成你的專屬作品！
+1. <strong>探索</strong> - 找到最適合你的範本。
+1. <strong>部署</strong> - 部署並驗證其運作
+1. <strong>自訂</strong> - 修改並反覆調整，讓它成為你的！
 
-在此工作坊過程中，你也將接觸核心開發工具及工作流程，幫助你順暢完成端對端開發旅程。
+在本工作坊過程中，你也會接觸到核心的開發工具與工作流程，協助你精簡端到端的開發歷程。
 
 <br/>
 
-## 瀏覽器內指引
+## 瀏覽器預覽指南
 
-工作坊課程是以 Markdown 編寫。你可以直接在 GitHub 瀏覽，或按照下方截圖示範啟動瀏覽器預覽。
+工作坊課程以 Markdown 撰寫。你可以直接在 GitHub 中瀏覽它們，或如下圖示啟動瀏覽器預覽。
 
-![Workshop](../../../translated_images/zh-HK/workshop.75906f133e6f8ba0.webp)
+![工作坊](../../../translated_images/zh-HK/workshop.75906f133e6f8ba0.webp)
 
-若要使用此選項 - 請將此倉庫分叉到你的個人帳戶，然後啟動 GitHub Codespaces。當 VS Code 終端機啟動後，輸入以下命令：
+要使用此選項 - 將此儲存庫 fork 到你的帳戶，然後啟動 GitHub Codespaces。當 VS Code 的終端機啟動後，輸入下列指令：
+
+This browser preview works in GitHub Codespaces, dev containers, or a local clone with Python and MkDocs installed.
 
 ```bash title="" linenums="0"
 mkdocs serve > /dev/null 2>&1 &
 ```
 
-幾秒鐘後會看到彈出對話框。選擇`Open in browser`選項。基於網頁的指南會在新分頁開啟。此預覽有幾項好處：
+In a few seconds, you will see a pop-up dialog. Select the option to `在瀏覽器中開啟`. The web-based guide will now open in a new browser tab. Some benefits of this preview:
 
-1. **內建搜尋** - 快速找到關鍵字或課程。
-1. **複製圖示** - 滑鼠停留在程式碼區塊時會顯示此選項
-1. **主題切換** - 在深色和淺色主題間切換
-1. **求助支援** - 點擊頁腳Discord圖示加入社群！
+1. <strong>內建搜尋</strong> - 快速找到關鍵字或課程
+1. <strong>複製圖示</strong> - 將滑鼠移到程式碼區塊以顯示此選項
+1. <strong>主題切換</strong> - 在深色與淺色主題間切換
+1. <strong>取得協助</strong> - 點選頁尾的 Discord 圖示加入！
 
 <br/>
 
 ## 工作坊總覽
 
-**時長：** 3-4小時  
-**程度：** 初學者到中階  
-**先備知識：** 熟悉Azure、AI概念、VS Code及命令列工具。
+**Duration:** 3-4 小時  
+**Level:** 初學者至中階  
+**Prerequisites:** 具備 Azure、AI 概念、VS Code 與命令列工具的基本認識。
 
-這是一個以實作學習為主的工作坊。當你完成所有練習後，建議回顧 AZD 初學者課程，繼續學習安全及生產力最佳實務。
+這是一個透過實作學習的工作坊。完成練習後，我們建議你回顧 AZD For Beginners 課程，以延伸你的學習，涵蓋安全性與生產力的最佳實務。
 
-| 時間| 模組  | 目標 |
+| Time| Module  | Objective |
 |:---|:---|:---|
-| 15 分鐘 | [簡介](docs/instructions/0-Introduction.md) | 建立基調，理解目標 |
-| 30 分鐘 | [選擇 AI 範本](docs/instructions/1-Select-AI-Template.md) | 探索選項並選擇入門範本 | 
-| 30 分鐘 | [驗證 AI 範本](docs/instructions/2-Validate-AI-Template.md) | 部署預設方案至 Azure |
-| 30 分鐘 | [解構 AI 範本](docs/instructions/3-Deconstruct-AI-Template.md) | 探索結構與設定檔 |
-| 30 分鐘 | [配置 AI 範本](docs/instructions/4-Configure-AI-Template.md) | 啟用並試用可用功能 |
-| 30 分鐘 | [自訂 AI 範本](docs/instructions/5-Customize-AI-Template.md) | 依需求調整範本 |
-| 30 分鐘 | [拆除基礎架構](docs/instructions/6-Teardown-Infrastructure.md) | 清理與釋放資源 |
-| 15 分鐘 | [總結與後續](docs/instructions/7-Wrap-up.md) | 學習資源，工作坊挑戰 |
+| 15 mins | [簡介](docs/instructions/0-Introduction.md) | 設定情境，理解目標 |
+| 30 mins | [選擇 AI 範本](docs/instructions/1-Select-AI-Template.md) | 探索選項並選擇起始範本 | 
+| 30 mins | [驗證 AI 範本](docs/instructions/2-Validate-AI-Template.md) | 將預設解決方案部署到 Azure |
+| 30 mins | [解析 AI 範本](docs/instructions/3-Deconstruct-AI-Template.md) | 探索結構與設定檔 |
+| 30 mins | [設定 AI 範本](docs/instructions/4-Configure-AI-Template.md) | 啟用並嘗試可用功能 |
+| 30 mins | [自訂 AI 範本](docs/instructions/5-Customize-AI-Template.md) | 將範本調整以符合你的需求 |
+| 30 mins | [拆除基礎設施](docs/instructions/6-Teardown-Infrastructure.md) | 清理並釋放資源 |
+| 15 mins | [結業與下一步](docs/instructions/7-Wrap-up.md) | 學習資源、工作坊挑戰 |
 
 <br/>
 
-## 你將學到什麼？
+## 你將學到的內容
 
-將AZD範本視為一個學習沙盒，探索Microsoft Foundry端對端開發的各種能力及工具。完成工作坊後，你應能直覺掌握相關工具及概念。
+將 AZD 範本視為一個學習沙盒，用來探索在 Microsoft Foundry 上進行端到端開發的各種能力與工具。完成本工作坊後，你應該能對此情境中的各項工具與概念有直覺性的理解。
 
-| 概念  | 目標 |
+| Concept  | Objective |
 |:---|:---|
 | **Azure Developer CLI** | 了解工具指令與工作流程|
-| **AZD 範本**| 了解專案結構及設定檔|
-| **Azure AI Agent**| 部署 Microsoft Foundry 專案 |
-| **Azure AI Search**| 利用代理人實現情境工程 |
-| **可觀察性**| 探索追蹤、監控和評估 |
-| **紅隊測試**| 探索對抗測試與防範措施 |
+| **AZD Templates**| 了解專案結構與設定|
+| **Azure AI Agent**| 建立與部署 Microsoft Foundry 專案  |
+| **Azure AI Search**| 使用代理實現上下文工程 |
+| **Observability**| 探索追蹤、監控與評估 |
+| **Red Teaming**| 探索對抗性測試與緩解策略 |
 
 <br/>
 
-## 工作坊架構
+## 工作坊結構
 
-工作坊結構設計帶你從範本發掘、部署、解構到自訂，使用官方[Getting Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents)入門範本作為基礎。
+本工作坊安排會帶你從範本探索、到部署、解析，最後到自訂 — 以官方的 [開始使用 AI 代理範本](https://github.com/Azure-Samples/get-started-with-ai-agents) 作為基礎。
 
-### [模組 1：選擇 AI 範本](docs/instructions/1-Select-AI-Template.md) (30 分鐘)
+### [模組 1：選擇 AI 範本](docs/instructions/1-Select-AI-Template.md) (30 mins)
 
 - 什麼是 AI 範本？
-- 我在哪裡找到 AI 範本？
-- 如何開始建構 AI 代理人？
-- **實驗**：快速開始 GitHub Codespaces
+- 我可以在哪裡找到 AI 範本？
+- 怎麼開始建立 AI 代理？
+- <strong>實驗室</strong>：在 Codespaces 或開發容器中快速上手
 
-### [模組 2：驗證 AI 範本](docs/instructions/2-Validate-AI-Template.md) (30 分鐘)
+### [模組 2：驗證 AI 範本](docs/instructions/2-Validate-AI-Template.md) (30 mins)
 
-- AI 範本架構是什麼？
-- AZD 開發工作流程是什麼？
-- 如何獲得 AZD 開發幫助？
-- **實驗**：部署並驗證 AI 代理人範本
+- AI 範本的架構為何？
+- AZD 的開發工作流程是什麼？
+- 如何取得 AZD 開發的協助？
+- <strong>實驗室</strong>：部署並驗證 AI 代理範本
 
-### [模組 3：解構 AI 範本](docs/instructions/3-Deconstruct-AI-Template.md) (30 分鐘)
+### [模組 3：解析 AI 範本](docs/instructions/3-Deconstruct-AI-Template.md) (30 mins)
 
-- 探索 `.azure/` 環境
-- 探索 `infra/` 資源配置
-- 探索 `azure.yaml` AZD 設定
-- **實驗**：修改環境變數並重新部署
+- 探索你的環境於 `.azure/` 
+- 探索你的資源設定於 `infra/` 
+- 探索你的 AZD 設定於 `azure.yaml`s
+- <strong>實驗室</strong>：修改環境變數並重新部署
 
-### [模組 4：配置 AI 範本](docs/instructions/4-Configure-AI-Template.md) (30 分鐘)
-- 探索：增強型檢索生成
-- 探索：代理人評估與紅隊測試
+### [模組 4：設定 AI 範本](docs/instructions/4-Configure-AI-Template.md) (30 mins)
+- 探索：檢索增強生成 (Retrieval Augmented Generation)
+- 探索：代理評估與 Red Teaming
 - 探索：追蹤與監控
-- **實驗**：探索 AI 代理人 + 可觀察性 
+- <strong>實驗室</strong>：探索 AI 代理 + 可觀察性 
 
-### [模組 5：自訂 AI 範本](docs/instructions/5-Customize-AI-Template.md) (30 分鐘)
-- 定義：含場景需求的產品需求文件 (PRD)
-- 配置：AZD 環境變數
-- 實作：生命週期掛鉤新增任務
-- **實驗**：為我的場景自訂範本
+### [模組 5：自訂 AI 範本](docs/instructions/5-Customize-AI-Template.md) (30 mins)
+- 定義：以情境需求撰寫 PRD（產品需求文件）
+- 設定：AZD 的環境變數
+- 實作：為額外任務加入生命週期鉤子
+- <strong>實驗室</strong>：為我的情境自訂範本
 
-### [模組 6：拆除基礎架構](docs/instructions/6-Teardown-Infrastructure.md) (30 分鐘)
+### [模組 6：拆除基礎設施](docs/instructions/6-Teardown-Infrastructure.md) (30 mins)
 - 回顧：什麼是 AZD 範本？
 - 回顧：為何使用 Azure Developer CLI？
-- 後續步驟：嘗試不同範本！
-- **實驗**：解除基礎架構與清理
+- 下一步：嘗試不同的範本！
+- <strong>實驗室</strong>：解除佈署基礎設施並清理
 
 <br/>
 
 ## 工作坊挑戰
 
-想挑戰自己做更多嗎？以下是一些專案建議，當然也歡迎與我們分享你的想法！
+想挑戰自己做更多嗎？以下是一些專案建議—或與我們分享你的想法!!
 
-| 專案 | 說明 |
+| Project | Description |
 |:---|:---|
-|1. **解構複雜 AI 範本** | 利用我們介紹的流程和工具，試著部署、驗證與自訂不同的 AI 解決方案範本。 _你學到了什麼？_|
-|2. **以你的場景自訂**  | 嘗試為不同場景撰寫PRD（產品需求文件）。接著在範本儲存庫以代理模型使用 GitHub Copilot，請它生成客製化工作流程。 _你學到了什麼？如何改善這些建議？_|
+|1. **解析一個複雜的 AI 範本** | 使用我們概述的工作流程與工具，看看你是否能部署、驗證並自訂不同的 AI 解決方案範本。 _你學到什麼？_|
+|2. <strong>以你的情境進行自訂</strong>  | 嘗試為不同情境撰寫 PRD（產品需求文件）。然後在你的範本 repo 中使用 GitHub Copilot 的 Agent Model，並請它為你產生自訂化的工作流程。 _你學到什麼？你可以如何改進這些建議？_|
 | | |
 
-## 有意見反饋？
+## 有意見回饋嗎？
 
-1. 在本倉庫發佈 Issue - 請標註 `Workshop` 標籤方便識別。
-1. 加入 Microsoft Foundry Discord - 與其他學員交流！
+1. 在此儲存庫發佈 issue - 方便起見標註 `Workshop`。
+1. 加入 Microsoft Foundry 的 Discord - 與你的同儕連結！
+
 
 | | | 
 |:---|:---|
-| **📚 課程主頁**| [AZD 初學者](../README.md)|
-| **📖 文件** | [AI 範本快速入門](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️ AI 範本** | [Microsoft Foundry 範本](https://ai.azure.com/templates) |
-|**🚀 往下進階** | [開始工作坊](../../../workshop) |
+| **📚 課程首頁**| [AZD 初學者](../README.md)|
+| **📖 文件** | [開始使用 AI 範本](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️AI 範本** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
+|**🚀 下一步** | [開始工作坊](#工作坊總覽) |
 | | |
 
 <br/>
 
 ---
 
-**導覽：** [主課程](../README.md) | [簡介](docs/instructions/0-Introduction.md) | [模組 1：選擇範本](docs/instructions/1-Select-AI-Template.md)
+**導航：** [主課程](../README.md) | [簡介](docs/instructions/0-Introduction.md) | [模組 1：選擇 AI 範本](docs/instructions/1-Select-AI-Template.md)
 
-**準備好用 AZD 開發 AI 應用了嗎？**
+**準備好用 AZD 開發 AI 應用程式了嗎？**
 
 [開始工作坊：簡介 →](docs/instructions/0-Introduction.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責聲明**：  
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。儘管我們力求準確，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件及其母語版本應被視為權威來源。對於重要資訊，建議採用專業人工翻譯。本公司不對因使用此翻譯而引致的任何誤解或誤釋負責。
+**Disclaimer**:
+本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力提供準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言的原文應被視為具有權威性的版本。對於重要資訊，建議採用專業人工翻譯。我們不對因使用本翻譯而引致的任何誤解或曲解承擔責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

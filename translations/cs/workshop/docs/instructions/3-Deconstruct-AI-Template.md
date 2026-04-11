@@ -1,39 +1,39 @@
-# 3. Rozebrat šablonu
+# 3. Rozebrání šablony
 
-!!! tip "NA KONCI TOHOTO MODULU BUDETE SCHOPNI"
+!!! tip "NA KONCI TOHOTO MODULU BUDETE UMĚT"
 
-    - [ ] Aktivovat GitHub Copilot s MCP servery pro asistenci Azure
-    - [ ] Porozumět struktuře složek a komponentám AZD šablony
+    - [ ] Aktivovat GitHub Copilot s MCP servery pro pomoc v Azure
+    - [ ] Pochopit strukturu složek a komponenty šablony AZD
     - [ ] Prozkoumat vzory organizace infrastruktury jako kódu (Bicep)
-    - [ ] **Cvičení 3:** Použít GitHub Copilot k prozkoumání a pochopení architektury repozitáře 
+    - [ ] **Lab 3:** Použít GitHub Copilot k průzkumu a pochopení architektury repozitáře
 
 ---
 
 
-S pomocí AZD šablon a Azure Developer CLI (`azd`) můžeme rychle nastartovat naši AI vývojovou cestu se standardizovanými repozitáři, které poskytují ukázkový kód, infrastrukturu a konfigurační soubory - ve formě připraveného k nasazení _starter_ projektu.
+S šablonami AZD a Azure Developer CLI (`azd`) můžeme rychle nastartovat naši AI vývojovou cestu se standardizovanými repozitáři, které poskytují vzorový kód, infrastrukturu a konfigurační soubory - ve formě připraveného _startovacího_ projektu.
 
-**Ale nyní potřebujeme porozumět struktuře projektu a kódu - a umět upravovat AZD šablonu - bez předchozích zkušeností nebo znalostí AZD!**
+**Ale nyní potřebujeme porozumět struktuře projektu a kódu - a být schopni šablonu AZD přizpůsobit - bez jakýchkoliv předchozích zkušeností nebo znalostí AZD!**
 
 ---
 
-## 1. Aktivovat GitHub Copilot
+## 1. Aktivace GitHub Copilot
 
-### 1.1 Nainstalovat GitHub Copilot Chat
+### 1.1 Instalace GitHub Copilot Chat
 
-Je čas prozkoumat [GitHub Copilot with Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Nyní můžeme použít přirozený jazyk k popisu našeho úkolu na vysoké úrovni a získat pomoc při jeho provedení. Pro toto cvičení použijeme [Copilot Free plan](https://github.com/github-copilot/signup), který má měsíční limit pro dokončení a chatovací interakce.
+Je čas prozkoumat [GitHub Copilot s Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Nyní můžeme použít přirozený jazyk pro popis našeho úkolu na vysoké úrovni a získat pomoc při jeho vykonání. Pro tento lab budeme používat [Copilot Free plán](https://github.com/github-copilot/signup), který má měsíční limit pro dokončení a interakce v chatu.
 
-Rozšíření lze nainstalovat z marketplace, ale mělo by být již dostupné ve vašem Codespaces prostředí. _Klikněte na `Open Chat` v rozbalovacím menu ikony Copilot - a napište prompt jako `What can you do?`_ - může být vyžadováno přihlášení. **GitHub Copilot Chat je připravený**.
+Rozšíření lze nainstalovat z marketplace, často je již dostupné v Codespaces nebo vývojových kontejnerech. _Klikněte na `Open Chat` v rozbalovacím menu ikony Copilot - a napište příkaz například `What can you do?`_ - může se vyžadovat přihlášení. **GitHub Copilot Chat je připraven.**
 
-### 1.2. Nainstalovat MCP servery
+### 1.2. Instalace MCP serverů
 
-Aby byl Agent mode efektivní, potřebuje přístup k správným nástrojům, které mu pomohou získávat znalosti nebo provádět akce. Zde mohou pomoci MCP servery. Nakonfigurujeme následující servery:
+Aby byl Agent mode efektivní, musí mít přístup k správným nástrojům, které mu pomohou získávat znalosti nebo provádět akce. Zde přicházejí na pomoc MCP servery. Nastavíme následující servery:
 
 1. [Azure MCP Server](../../../../../workshop/docs/instructions)
 1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
 
-Chcete-li je aktivovat:
+Pro aktivaci:
 
-1. Vytvořte soubor nazvaný `.vscode/mcp.json`, pokud neexistuje
+1. Vytvořte soubor `.vscode/mcp.json`, pokud neexistuje
 1. Zkopírujte do něj následující obsah - a spusťte servery!
    ```json title=".vscode/mcp.json"
    {
@@ -55,9 +55,9 @@ Chcete-li je aktivovat:
    }
    ```
 
-??? warning "Může se objevit chyba, že `npx` není nainstalováno (klikněte pro zobrazení opravy)"
+??? warning "Může se objevit chyba, že `npx` není nainstalováno (rozklikněte pro opravu)"
 
-      Pro opravu otevřete soubor `.devcontainer/devcontainer.json` a přidejte tento řádek do sekce features. Poté kontejner přestavte. Nyní by mělo být `npx` nainstalováno.
+      Pro opravu otevřete soubor `.devcontainer/devcontainer.json` a přidejte tento řádek do sekce features. Poté kontejner znovu sestavte. Nyní by mělo být `npx` nainstalováno.
 
       ```title="" linenums="0"
          "features": {
@@ -68,125 +68,127 @@ Chcete-li je aktivovat:
 
 ---
 
-### 1.3. Otestovat GitHub Copilot Chat
+### 1.3. Testování GitHub Copilot Chat
 
-**Nejprve použijte `az login` k autentizaci do Azure z příkazové řádky VS Code.**
+**Nejprve použijte `azd auth login` k autentizaci v Azure z příkazové řádky VS Code. Příkaz `az login` použijte pouze pokud plánujete spouštět příkazy Azure CLI přímo.**
 
-Nyní byste měli být schopni dotazovat se na stav vašeho Azure předplatného a klást otázky o nasazených zdrojích nebo konfiguraci. Vyzkoušejte tyto promptingy:
+Nyní byste měli být schopni vyhledat stav vašeho Azure předplatného a klást otázky o nasazených zdrojích nebo konfiguraci. Vyzkoušejte tyto příkazy:
 
 1. `List my Azure resource groups`
 1. `#foundry list my current deployments`
 
-Můžete také klást otázky ohledně dokumentace Azure a získávat odpovědi podložené Microsoft Docs MCP serverem. Vyzkoušejte tyto promptingy:
+Můžete také klást otázky o dokumentaci Azure a získat odpovědi založené na Microsoft Docs MCP serveru. Vyzkoušejte tyto příkazy:
 
 1. `#microsoft_docs_search What is Azure Developer CLI?`
 1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
 
-Nebo můžete požádat o ukázky kódu k dokončení úkolu. Vyzkoušejte tento prompt.
+Nebo si můžete vyžádat ukázky kódu pro dokončení úkolu. Vyzkoušejte tento příkaz:
 
 1. `Give me a Python code example that uses AAD for an interactive chat client`
 
-V režimu `Ask` to poskytne kód, který můžete zkopírovat a vyzkoušet. V režimu `Agent` to může jít o krok dál a vytvořit relevantní zdroje pro vás - včetně setup skriptů a dokumentace - aby vám pomohlo úkol provést.
+V režimu `Ask` toto poskytne kód, který můžete zkopírovat a vyzkoušet. V režimu `Agent` to může být dál a vytvoří odpovídající zdroje - včetně skriptů a dokumentace - aby vám pomohl úkol vykonat.
 
-**Nyní jste vybaveni k zahájení průzkumu repozitáře se šablonou**
+**Nyní jste vybaveni k průzkumu repozitáře šablony**
 
 ---
 
-## 2. Rozebrat architekturu
+## 2. Rozebrání architektury
 
-??? prompt "POŽADAVEK: Vysvětlete architekturu aplikace v docs/images/architecture.png v jednom odstavci"
+??? prompt "POPTÁVKA: Vysvětli architekturu aplikace v docs/images/architecture.png v 1 odstavci"
 
-      Tato aplikace je AI-poháněná chatovací aplikace postavená na Azure, která demonstruje moderní agent-based architekturu. Řešení se soustředí kolem Azure Container App, která hostuje hlavní aplikační kód, zpracovává vstup uživatele a generuje inteligentní odpovědi prostřednictvím AI agenta. 
-      
-      Architektura využívá Microsoft Foundry Project jako základ pro AI schopnosti a připojuje se k Azure AI Services, které poskytují základní jazykové modely (například gpt-4.1-mini) a agentní funkcionalitu. Interakce uživatele proudí přes frontend založený na Reactu do backendu ve FastAPI, který komunikuje se službou AI agenta pro generování kontextových odpovědí. 
-      
-      Systém zahrnuje schopnosti vyhledávání znalostí prostřednictvím buďhledání souborů nebo služby Azure AI Search, což umožňuje agentovi přistupovat k nahraným dokumentům a citovat informace. Pro provozní excelenci architektura obsahuje komplexní monitorování přes Application Insights a Log Analytics Workspace pro trasování, logování a optimalizaci výkonu. 
-      
-      Azure Storage poskytuje blob storage pro aplikační data a nahrávání souborů, zatímco Managed Identity zajišťuje bezpečný přístup mezi Azure zdroji bez ukládání přihlašovacích údajů. Celé řešení je navrženo pro škálovatelnost a udržovatelnost, kdy kontejnery aplikace automaticky škálují podle poptávky a poskytují vestavěné zabezpečení, monitorování a CI/CD schopnosti prostřednictvím Azure managed služeb ekosystému.
+      Tato aplikace je AI-poháněná chatovací aplikace postavená na Azure, která demonstruje moderní architekturu založenou na agentech. Řešení je soustředěno kolem Azure Container App, jež hostuje hlavní aplikační kód, který zpracovává uživatelský vstup a generuje inteligentní odpovědi prostřednictvím AI agenta.
 
-![Architektura](../../../../../translated_images/cs/architecture.48d94861e6e6cdc0.webp)
+      Architektura využívá Microsoft Foundry Project jako základ pro AI schopnosti, napojující se na Azure AI Services, které poskytují základní jazykové modely (např. gpt-4.1-mini) a agentní funkce. Uživatelské interakce procházejí frontendem založeným na Reactu do backendu FastAPI, který komunikuje se službou AI agenta pro generování kontextových odpovědí.
+
+      Systém zahrnuje schopnost vyhledávání znalostí buď přes hledání ve souborech, nebo službou Azure AI Search, což umožňuje agentovi přistupovat a citovat informace z nahraných dokumentů.
+
+      Pro provozní excelenci architektura obsahuje komplexní monitorování pomocí Application Insights a Log Analytics Workspace pro trasování, logování a optimalizaci výkonu.
+
+      Azure Storage poskytuje blob storage pro aplikační data a nahrávání souborů, zatímco Managed Identity zajišťuje bezpečný přístup mezi Azure zdroji bez ukládání přihlašovacích údajů. Celé řešení je navrženo pro škálovatelnost a udržovatelnost, přičemž kontejnerizovaná aplikace se automaticky škáluje podle potřeby a nabízí vestavěnou bezpečnost, monitorování a CI/CD schopnosti prostřednictvím ekosystému spravovaných služeb Azure.
+
+![Architecture](../../../../../translated_images/cs/architecture.48d94861e6e6cdc0.webp)
 
 ---
 
 ## 3. Struktura repozitáře
 
-!!! prompt "POŽÁDEJTE: Vysvětlete strukturu složek šablony. Začněte vizuálním hierarchickým diagramem."
+!!! prompt "POPTÁVKA: Vysvětli strukturu složek šablony. Začni vizuálním hierarchickým diagramem."
 
 ??? info "ODPOVĚĎ: Vizuální hierarchický diagram"
 
       ```bash title="" 
       get-started-with-ai-agents/
-      ├── 📋 Konfigurace a nastavení
+      ├── 📋 Konfigurace & Nastavení
       │   ├── azure.yaml                    # Konfigurace Azure Developer CLI
       │   ├── docker-compose.yaml           # Lokální vývojové kontejnery
       │   ├── pyproject.toml                # Konfigurace Python projektu
       │   ├── requirements-dev.txt          # Vývojové závislosti
-      │   └── .devcontainer/                # Nastavení dev kontejneru VS Code
+      │   └── .devcontainer/                # Nastavení VS Code vývojového kontejneru
       │
       ├── 🏗️ Infrastruktura (infra/)
       │   ├── main.bicep                    # Hlavní šablona infrastruktury
       │   ├── api.bicep                     # Zdroje specifické pro API
       │   ├── main.parameters.json          # Parametry infrastruktury
-      │   └── core/                         # Modulární infrastrukturní komponenty
+      │   └── core/                         # Modulární komponenty infrastruktury
       │       ├── ai/                       # Konfigurace AI služeb
-      │       ├── host/                     # Hostingová infrastruktura
+      │       ├── host/                     # Hosting infrastruktura
       │       ├── monitor/                  # Monitorování a logování
       │       ├── search/                   # Nastavení Azure AI Search
-      │       ├── security/                 # Zabezpečení a identity
+      │       ├── security/                 # Bezpečnost a identity
       │       └── storage/                  # Konfigurace úložiště
       │
-      ├── 💻 Zdroj aplikace (src/)
+      ├── 💻 Zdrojový kód aplikace (src/)
       │   ├── api/                          # Backend API
-      │   │   ├── main.py                   # Vstupní bod aplikace FastAPI
+      │   │   ├── main.py                   # Vstupní bod FastAPI aplikace
       │   │   ├── routes.py                 # Definice API tras
-      │   │   ├── search_index_manager.py   # Funkcionalita vyhledávání
-      │   │   ├── data/                     # Zpracování dat API
+      │   │   ├── search_index_manager.py   # Funkce vyhledávání
+      │   │   ├── data/                     # Zpracování dat pro API
       │   │   ├── static/                   # Statické webové zdroje
       │   │   └── templates/                # HTML šablony
-      │   ├── frontend/                     # Frontend v React/TypeScriptu
-      │   │   ├── package.json              # Závislosti Node.js
-      │   │   ├── vite.config.ts            # Konfigurace buildování Vite
+      │   ├── frontend/                     # Frontend React/TypeScript
+      │   │   ├── package.json              # Node.js závislosti
+      │   │   ├── vite.config.ts            # Konfigurace Vite buildu
       │   │   └── src/                      # Zdrojový kód frontendu
-      │   ├── data/                         # Ukázkové datové soubory
-      │   │   └── embeddings.csv            # Předpočítané embeddingy
+      │   ├── data/                         # Vzorové datové soubory
+      │   │   └── embeddings.csv            # Předpočítané embeddings
       │   ├── files/                        # Soubory znalostní báze
       │   │   ├── customer_info_*.json      # Ukázky zákaznických dat
       │   │   └── product_info_*.md         # Dokumentace produktů
       │   ├── Dockerfile                    # Konfigurace kontejneru
       │   └── requirements.txt              # Python závislosti
       │
-      ├── 🔧 Automatizace a skripty (scripts/)
+      ├── 🔧 Automatizace & Skripty (scripts/)
       │   ├── postdeploy.sh/.ps1           # Nastavení po nasazení
       │   ├── setup_credential.sh/.ps1     # Konfigurace přihlašovacích údajů
-      │   ├── validate_env_vars.sh/.ps1    # Ověření proměnných prostředí
+      │   ├── validate_env_vars.sh/.ps1    # Validace prostředí
       │   └── resolve_model_quota.sh/.ps1  # Správa kvót modelu
       │
-      ├── 🧪 Testování a vyhodnocení
+      ├── 🧪 Testování & Hodnocení
       │   ├── tests/                        # Jednotkové a integrační testy
       │   │   └── test_search_index_manager.py
-      │   ├── evals/                        # Rámec pro vyhodnocení agentů
-      │   │   ├── evaluate.py               # Spouštěč vyhodnocení
+      │   ├── evals/                        # Framework hodnocení agentů
+      │   │   ├── evaluate.py               # Spouštěč hodnocení
       │   │   ├── eval-queries.json         # Testovací dotazy
       │   │   └── eval-action-data-path.json
-      │   ├── sandbox/                      # Vývojové pískoviště
-      │   │   ├── 1-quickstart.py           # Ukázky pro začátečníky
-      │   │   └── aad-interactive-chat.py   # Příklady autentizace
-      │   └── airedteaming/                 # Vyhodnocení bezpečnosti AI
-      │       └── ai_redteaming.py          # Red team testování
+      │   ├── sandbox/                      # Vývojové hřiště
+      │   │   ├── 1-quickstart.py           # Ukázky pro rychlý začátek
+      │   │   └── aad-interactive-chat.py   # Ukázky autentizace
+      │   └── airedteaming/                 # Hodnocení bezpečnosti AI
+      │       └── ai_redteaming.py          # Testování red teamu
       │
       ├── 📚 Dokumentace (docs/)
-      │   ├── deployment.md                 # Průvodce nasazením
+      │   ├── deployment.md                 # Příručka nasazení
       │   ├── local_development.md          # Instrukce pro lokální nastavení
-      │   ├── troubleshooting.md            # Běžné problémy a opravy
-      │   ├── azure_account_setup.md        # Předpoklady pro Azure
-      │   └── images/                       # Prostředky dokumentace
+      │   ├── troubleshooting.md            # Časté problémy a řešení
+      │   ├── azure_account_setup.md        # Požadavky na Azure účet
+      │   └── images/                       # Assety dokumentace
       │
       └── 📄 Metadata projektu
          ├── README.md                     # Přehled projektu
          ├── CODE_OF_CONDUCT.md           # Pravidla komunity
-         ├── CONTRIBUTING.md              # Průvodce přispíváním
+         ├── CONTRIBUTING.md              # Průvodce příspěvky
          ├── LICENSE                      # Licenční podmínky
-         └── next-steps.md                # Následující kroky po nasazení
+         └── next-steps.md                # Doporučení po nasazení
       ```
 
 ### 3.1. Základní architektura aplikace
@@ -194,87 +196,87 @@ V režimu `Ask` to poskytne kód, který můžete zkopírovat a vyzkoušet. V re
 Tato šablona následuje vzor **full-stack webové aplikace** s:
 
 - **Backend**: Python FastAPI s integrací Azure AI
-- **Frontend**: TypeScript/React s Vite build systémem
+- **Frontend**: TypeScript/React s build systémem Vite
 - **Infrastruktura**: Azure Bicep šablony pro cloudové zdroje
-- **Containerizace**: Docker pro konzistentní nasazení
+- **Kontejnerizace**: Docker pro konzistentní nasazení
 
-### 3.2 Infrastruktura jako kód (Bicep)
+### 3.2. Infra jako kód (bicep)
 
-Vrstva infrastruktury používá **Azure Bicep** šablony organizované modulárně:
+Vrstva infrastruktury využívá **Azure Bicep** šablony organizované modulárně:
 
-   - **`main.bicep`**: Koordinuje všechny Azure zdroje
+   - **`main.bicep`**: Orchestrace všech Azure zdrojů
    - **`core/` moduly**: Znovupoužitelné komponenty pro různé služby
-      - AI služby (Microsoft Foundry Models, AI Search)
+      - AI služby (Microsoft Foundry modely, AI Search)
       - Hosting kontejnerů (Azure Container Apps)
       - Monitorování (Application Insights, Log Analytics)
-      - Zabezpečení (Key Vault, Managed Identity)
+      - Bezpečnost (Key Vault, Managed Identity)
 
-### 3.3 Zdroj aplikace (`src/`)
+### 3.3. Zdrojový kód aplikace (`src/`)
 
 **Backend API (`src/api/`)**:
 
 - REST API založené na FastAPI
-- Integrace Foundry agentů
+- Integrace Foundry Agentů
 - Správa indexu vyhledávání pro získávání znalostí
-- Možnosti nahrávání a zpracování souborů
+- Schopnosti nahrávání a zpracování souborů
 
 **Frontend (`src/frontend/`)**:
 
-- Moderní SPA v React/TypeScriptu
+- Moderní React/TypeScript SPA
 - Vite pro rychlý vývoj a optimalizované sestavení
-- Rozhraní chatu pro interakce s agentem
+- Chat rozhraní pro interakce agentů
 
-**Knowledge Base (`src/files/`)**:
+**Znalostní báze (`src/files/`)**:
 
-- Ukázková data zákazníků a produktů
+- Ukázkové zákaznické a produktové datové soubory
 - Demonstruje získávání znalostí ze souborů
-- Příklady ve formátu JSON a Markdown
+- Příklady ve formátech JSON a Markdown
 
 
-### 3.4 DevOps a automatizace
+### 3.4. DevOps & Automatizace
 
 **Skripty (`scripts/`)**:
 
-- Skripty PowerShell a Bash napříč platformami
-- Ověření a nastavení prostředí
+- PowerShell a Bash skripty multiplatformně
+- Validace a nastavení prostředí
 - Konfigurace po nasazení
-- Správa kvót modelů
+- Správa kvót modelu
 
 **Integrace Azure Developer CLI**:
 
 - Konfigurace `azure.yaml` pro workflow `azd`
-- Automatizované poskytování prostředků a nasazení
+- Automatické provisioning a nasazení
 - Správa proměnných prostředí
 
-### 3.5 Testování a zajištění kvality
+### 3.5. Testování & Zajištění kvality
 
-**Rámec pro vyhodnocení (`evals/`)**:
+**Framework hodnocení (`evals/`)**:
 
 - Hodnocení výkonu agentů
 - Testování kvality dotaz-odpověď
-- Automatizovaný vyhodnocovací proces
+- Automatizovaný hodnotící pipeline
 
 **Bezpečnost AI (`airedteaming/`)**:
 
-- Red team testování pro bezpečnost AI
+- Red team testování bezpečnosti AI
 - Skenování bezpečnostních zranitelností
-- Praktiky zodpovědného AI
+- Odpovědné AI praktiky
 
 ---
 
 ## 4. Gratulujeme 🏆
 
-Úspěšně jste použili GitHub Copilot Chat s MCP servery k prozkoumání repozitáře.
+Úspěšně jste použili GitHub Copilot Chat s MCP servery k průzkumu repozitáře.
 
 - [X] Aktivovali GitHub Copilot pro Azure
-- [X] Porozuměli architektuře aplikace
+- [X] Pochopili architekturu aplikace
 - [X] Prozkoumali strukturu šablony AZD
 
-To vám dává představu o _infrastructure as code_ aktivech pro tuto šablonu. Dále se podíváme na konfigurační soubor pro AZD.
+Toto vám poskytuje přehled o aktivech _infrastruktury jako kódu_ pro tuto šablonu. Následně se podíváme na konfigurační soubor pro AZD.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o přesnost, vezměte prosím na vědomí, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za případná nedorozumění nebo chybné výklady vyplývající z použití tohoto překladu.
+**Upozornění**:  
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). I když se snažíme o přesnost, mějte na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za žádná nedorozumění nebo nesprávné výklady vzniklé použitím tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

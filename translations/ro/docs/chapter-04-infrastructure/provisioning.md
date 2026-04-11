@@ -1,43 +1,43 @@
 # Provisionarea resurselor Azure cu AZD
 
 **Navigare capitole:**
-- **📚 Pagina cursului**: [AZD pentru începători](../../README.md)
+- **📚 Pagina cursului**: [AZD For Beginners](../../README.md)
 - **📖 Capitolul curent**: Capitolul 4 - Infrastructură ca Cod și Implementare
 - **⬅️ Anterior**: [Ghid de implementare](deployment-guide.md)
-- **➡️ Capitolul următor**: [Capitolul 5: Soluții AI multi-agent](../../examples/retail-scenario.md)
+- **➡️ Următorul capitol**: [Capitolul 5: Soluții AI multi-agent](../../examples/retail-scenario.md)
 - **🔧 Legate**: [Capitolul 6: Validare pre-implementare](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Introducere
 
-Acest ghid cuprinzător acoperă tot ce trebuie să știți despre provizionarea și gestionarea resurselor Azure folosind Azure Developer CLI. Învățați să implementați modele Infrastructure as Code (IaC) de la crearea de resurse de bază până la arhitecturi avansate de infrastructură pentru întreprinderi folosind Bicep, ARM templates, Terraform și Pulumi.
+Acest ghid cuprinzător acoperă tot ce trebuie să știți despre provizionarea și gestionarea resurselor Azure folosind Azure Developer CLI. Învățați să implementați modele Infrastructure as Code (IaC) de la crearea de resurse de bază până la arhitecturi de infrastructură avansate la nivel enterprise folosind Bicep, ARM templates, Terraform și Pulumi.
 
 ## Obiective de învățare
 
-Parcurgând acest ghid, veți:
-- Stăpâni principiile Infrastructure as Code și provizionarea resurselor Azure
-- Înțelege mai mulți furnizori IaC suportați de Azure Developer CLI
-- Proiecta și implementa șabloane Bicep pentru arhitecturi comune de aplicații
+După parcurgerea acestui ghid, veți:
+- Stăpâni principiile Infrastructure as Code și provizionarea resurselor în Azure
+- Înțelege mai mulți furnizori IaC suportati de Azure Developer CLI
+- Proiecta și implementa șabloane Bicep pentru arhitecturi de aplicații comune
 - Configura parametrii resurselor, variabilele și setările specifice mediului
-- Implementa modele avansate de infrastructură, incluzând rețelistică și securitate
+- Implementa modele avansate de infrastructură, inclusiv rețea și securitate
 - Gestiona ciclul de viață al resurselor, actualizările și rezolvarea dependențelor
 
 ## Rezultate ale învățării
 
 La final, veți putea:
-- Proiecta și proviziona infrastructură Azure folosind Bicep și ARM templates
+- Proiecta și proviziona infrastructură Azure utilizând Bicep și șabloane ARM
 - Configura arhitecturi complexe multi-serviciu cu dependențe corecte între resurse
-- Implementa șabloane parametrizate pentru multiple medii și configurații
-- Depana probleme de provizionare a infrastructurii și rezolva eșecurile de implementare
-- Aplica principii din Azure Well-Architected Framework la proiectarea infrastructurii
+- Implementa șabloane parametrizate pentru medii și configurații multiple
+- Depana probleme de provizionare a infrastructurii și rezolva erorile de implementare
+- Aplica principiile Azure Well-Architected Framework la proiectarea infrastructurii
 - Gestiona actualizările infrastructurii și implementa strategii de versionare a infrastructurii
 
 ## Prezentare generală a provizionării infrastructurii
 
-Azure Developer CLI suportă mai mulți furnizori Infrastructure as Code (IaC):
-- **Bicep** (recomandat) - limbajul specific domeniului al Azure
+Azure Developer CLI acceptă mai mulți furnizori Infrastructure as Code (IaC):
+- **Bicep** (recomandat) - limbaj specific domeniului Azure
 - **ARM Templates** - șabloane Azure Resource Manager bazate pe JSON
-- **Terraform** - instrument pentru infrastructură multi-cloud
-- **Pulumi** - infrastructură ca cod modernă folosind limbaje de programare
+- **Terraform** - instrument de infrastructură multi-cloud
+- **Pulumi** - Infrastructure as code modernă folosind limbaje de programare
 
 ## Înțelegerea resurselor Azure
 
@@ -50,13 +50,13 @@ Azure Account
 ```
 
 ### Servicii Azure comune pentru aplicații
-- **Resurse de calcul**: App Service, Container Apps, Functions, Virtual Machines
+- **Calcul**: App Service, Container Apps, Functions, Virtual Machines
 - **Stocare**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Rețea**: Virtual Network, Application Gateway, CDN
 - **Securitate**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
-## Șabloane Bicep pentru infrastructură
+## Șabloane de infrastructură Bicep
 
 ### Structura de bază a unui șablon Bicep
 ```bicep
@@ -128,7 +128,7 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Tipare avansate Bicep
+### Modele Bicep avansate
 
 #### Infrastructură modulară
 ```bicep
@@ -200,7 +200,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Provizionare baze de date
+## 🗃️ Provizionarea bazelor de date
 
 ### Cosmos DB
 ```bicep
@@ -300,7 +300,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 
 ## 🔒 Securitate și gestionarea secretelor
 
-### Integrarea Key Vault
+### Integrare Key Vault
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -370,7 +370,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 
 ## 🌍 Rețea și conectivitate
 
-### Configurarea rețelei virtuale
+### Configurarea Virtual Network
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -527,7 +527,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Metrici și alerte personalizate
+### Metrici personalizate și alerte
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -563,7 +563,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 
 ## 🔧 Configurații specifice mediului
 
-### Fișiere de parametri pentru diferite medii
+### Fișiere de parametri pentru medii diferite
 ```json
 // infra/main.parameters.dev.json
 {
@@ -649,7 +649,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Tipare avansate de provizionare
+## 🚀 Modele avansate de provizionare
 
 ### Implementare multi-regiune
 ```bicep
@@ -757,40 +757,39 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🧪 Previzualizare și validare a infrastructurii (NOU)
 
-### Previziualizarea modificărilor infrastructurii înainte de implementare
+### Previzualizați modificările infrastructurii înainte de implementare
 
-Funcționalitatea `azd provision --preview` vă permite să **simulați provizionarea infrastructurii** înainte de a implementa efectiv resursele. Este similară ca spirit cu `terraform plan` sau `bicep what-if`, oferindu-vă o **previzualizare în modul dry-run** a modificărilor care ar fi efectuate în mediul dvs. Azure.
+Funcția `azd provision --preview` vă permite să **simulați provizionarea infrastructurii** înainte de a implementa efectiv resursele. Este similară ca idee cu `terraform plan` sau `bicep what-if`, oferindu-vă o **vizualizare în regim dry-run** a modificărilor care ar fi efectuate în mediul dvs. Azure.
 
 #### 🛠️ Ce face
 - **Analizează șabloanele IaC** (Bicep sau Terraform)
 - **Afișează o previzualizare a modificărilor resurselor**: adăugări, ștergeri, actualizări
-- **Nu aplică modificările** — este doar în citire și sigur de rulat
+- **Nu aplică schimbările** — este doar pentru citire și sigur de rulat
 
-#### � Cazuri de utilizare
+#### Cazuri de utilizare
 ```bash
-# Previzualizare a modificărilor infrastructurii înainte de implementare
+# Previzualizați modificările infrastructurii înainte de implementare
 azd provision --preview
 
-# Previzualizare cu ieșire detaliată
-azd provision --preview --output json
-
 # Previzualizare pentru un mediu specific
-azd provision --preview --environment production
+azd provision --preview -e production
 ```
 
 Această comandă vă ajută să:
-- **Validați modificările infrastructurii** înainte de a angaja resurse
-- **Depistați din timp configurări greșite** în ciclul de dezvoltare
+- **Validați modificările infrastructurii** înainte de a aplica resursele
+- **Detectați configurări greșite** devreme în ciclul de dezvoltare
 - **Colaborați în siguranță** în medii de echipă
-- **Asigurați implementări cu privilegiu minim** fără surprize
+- **Asigurați implementări cu cel mai mic nivel de privilegii** fără surprize
 
-Este deosebit de util atunci când:
-- Lucrați cu medii complexe multi-serviciu
-- Faceți modificări la infrastructura de producție
-- Validați modificările șabloanelor înainte de aprobarea PR-urilor
-- Instruți membri noi ai echipei în privința modelelor de infrastructură
+Este deosebit de util când:
+- Lucrul cu medii complexe multi-serviciu
+- Făcând modificări în infrastructura de producție
+- Validarea modificărilor de șabloane înainte de aprobarea PR-ului
+- Instruirea noilor membri ai echipei privind tiparele de infrastructură
 
 ### Exemplu de ieșire a previzualizării
+Ieșirea exactă a previzualizării variază în funcție de furnizor și structura proiectului, dar rezultatul ar trebui să identifice clar modificările propuse înainte ca ceva să fie aplicat.
+
 ```bash
 $ azd provision --preview
 
@@ -809,7 +808,6 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
@@ -825,7 +823,7 @@ azd provision --preview
 # Aplicați modificările după confirmarea previzualizării
 azd provision --confirm-with-no-prompt
 
-# Pentru revenire (rollback), folosiți Git pentru a anula modificările infrastructurii:
+# Pentru revenire, folosiți Git pentru a anula modificările infrastructurii:
 git revert HEAD  # Anulați ultimul commit al infrastructurii
 azd provision    # Aplicați starea anterioară a infrastructurii
 ```
@@ -872,7 +870,7 @@ var naming = {
 }
 ```
 
-### 2. Strategie de etichetare
+### 2. Strategia de etichetare
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -919,16 +917,16 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ## Pașii următori
 
 - [Planificare pre-implementare](../chapter-06-pre-deployment/capacity-planning.md) - Validați disponibilitatea resurselor
-- [Probleme comune](../chapter-07-troubleshooting/common-issues.md) - Depanați problemele infrastructurii
-- [Ghid de depanare](../chapter-07-troubleshooting/debugging.md) - Depanați problemele de provizionare
-- [Selecția SKU](../chapter-06-pre-deployment/sku-selection.md) - Alegeți nivelurile de servicii adecvate
+- [Probleme comune](../chapter-07-troubleshooting/common-issues.md) - Depanați probleme de infrastructură
+- [Ghid de depanare](../chapter-07-troubleshooting/debugging.md) - Depanați probleme de provizionare
+- [Selectarea SKU-urilor](../chapter-06-pre-deployment/sku-selection.md) - Alegeți nivelurile de serviciu potrivite
 
 ## Resurse suplimentare
 
 - [Documentația Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Șabloane Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Centrul de arhitectură Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Cadrul Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
@@ -939,6 +937,6 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Declinare de responsabilitate:
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automatizate pot conține erori sau inexactități. Documentul original, în limba sa nativă, trebuie considerat sursa autorizată. Pentru informații critice, se recomandă o traducere profesională realizată de un traducător uman. Nu ne asumăm răspunderea pentru eventuale neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+**Declinare de responsabilitate**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original, în limba sa nativă, trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist. Nu ne asumăm răspunderea pentru orice neînțelegeri sau interpretări greșite rezultate din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

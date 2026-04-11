@@ -1,71 +1,71 @@
-# Pre-flight-kontroller för AZD-distributioner
+# Förkontroller för AZD-distributioner
 
 **Kapitelnavigering:**
-- **📚 Kursstart**: [AZD For Beginners](../../README.md)
+- **📚 Kursens startsida**: [AZD för nybörjare](../../README.md)
 - **📖 Aktuellt kapitel**: Kapitel 6 - Förvalidering och planering inför distribution
-- **⬅️ Föregående**: [SKU Selection](sku-selection.md)
-- **➡️ Nästa kapitel**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 Relaterat**: [Chapter 4: Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+- **⬅️ Föregående**: [Val av SKU](sku-selection.md)
+- **➡️ Nästa kapitel**: [Kapitel 7: Felsökning](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 Relaterat**: [Kapitel 4: Distribueringsguide](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Introduktion
 
-Denna omfattande guide innehåller skript och procedurer för förvalidering före distribution för att säkerställa framgångsrika Azure Developer CLI-distributioner innan de påbörjas. Lär dig att implementera automatiserade kontroller för autentisering, resurstillgänglighet, kvoter, säkerhetsöverensstämmelse och prestandakrav för att förhindra distributionsfel och optimera lyckandefrekvensen för distributioner.
+Denna omfattande guide tillhandahåller förvalideringsskript och procedurer för att säkerställa framgångsrika Azure Developer CLI-distributioner innan de påbörjas. Lär dig att implementera automatiserade kontroller för autentisering, resurstillgänglighet, kvoter, säkerhets-efterlevnad och prestandakrav för att förhindra distributionsfel och optimera distributionsframgång.
 
 ## Lärandemål
 
 Genom att slutföra denna guide kommer du att:
-- Bemästra automatiserade tekniker och skript för förvalidering före distribution
+- Bemästra automatiserade tekniker och skript för förvalidering
 - Förstå omfattande kontrollstrategier för autentisering, behörigheter och kvoter
-- Implementera valideringsrutiner för resursers tillgänglighet och kapacitet
-- Konfigurera säkerhets- och efterlevnadskontroller för organisatoriska riktlinjer
+- Implementera procedurer för validering av resurstillgänglighet och kapacitet
+- Konfigurera säkerhets- och efterlevnadskontroller för organisationspolicyer
 - Utforma arbetsflöden för kostnadsberäkning och budgetvalidering
-- Skapa anpassad automatisering av förkontroller för CI/CD-pipelines
+- Skapa anpassad förkontrollsautomation för CI/CD-pipelines
 
-## Läranderesultat
+## Inlärningsresultat
 
-Efter genomgång kommer du att kunna:
-- Skapa och köra omfattande förkontrollsskript
-- Utforma automatiserade kontrollarbetsflöden för olika distributionsscenarier
+Efter slutförande kommer du att kunna:
+- Skapa och köra omfattande förkontrollskript
+- Designa automatiserade kontrollarbetsflöden för olika distributionsscenarier
 - Implementera miljöspecifika valideringsprocedurer och policyer
 - Konfigurera proaktiv övervakning och avisering för distributionsberedskap
-- Felsöka förvalideringsproblem och genomföra korrigerande åtgärder
+- Felsöka förvalideringsproblem och åtgärda dem
 - Integrera förkontroller i DevOps-pipelines och automatiseringsarbetsflöden
 
 ## Innehållsförteckning
 
-- [Översikt](../../../../docs/chapter-06-pre-deployment)
-- [Automatiserat förkontrollskript](../../../../docs/chapter-06-pre-deployment)
-- [Manuell valideringschecklista](../../../../docs/chapter-06-pre-deployment)
-- [Miljövalidering](../../../../docs/chapter-06-pre-deployment)
-- [Resursvalidering](../../../../docs/chapter-06-pre-deployment)
-- [Säkerhets- och efterlevnadskontroller](../../../../docs/chapter-06-pre-deployment)
-- [Prestanda- och kapacitetsplanering](../../../../docs/chapter-06-pre-deployment)
-- [Felsökning av vanliga problem](../../../../docs/chapter-06-pre-deployment)
+- [Översikt](#översikt)
+- [Automatiserat förkontrollsskript](#automatiserat-förkontrollsskript)
+- [Manuell valideringschecklista](#codeblock1)
+- [Miljövalidering](#✅-säkerhetskopiering-och-återställning)
+- [Resursvalidering](#validering-av-produktionsmiljö)
+- [Säkerhets- och efterlevnadskontroller](#security--compliance-checks)
+- [Prestanda- och kapacitetsplanering](#performance--capacity-planning)
+- [Felsökning av vanliga problem](#troubleshooting-common-issues)
 
 ---
 
 ## Översikt
 
-Förkontroller är nödvändiga valideringar som utförs före distribution för att säkerställa:
+Förkontroller är viktiga valideringar som utförs före distribution för att säkerställa:
 
 - **Resurstillgänglighet** och kvoter i målregioner
 - **Autentisering och behörigheter** är korrekt konfigurerade
-- **Mallars giltighet** och att parametrar är korrekta
+- **Mallgiltighet** och parameterkorrekthet
 - **Nätverksanslutning** och beroenden
-- **Säkerhetsöverensstämmelse** med organisatoriska riktlinjer
-- **Kostnadsuppskattning** inom budgetbegränsningar
+- **Säkerhetsefterlevnad** med organisationens policyer
+- **Kostnadsestimering** inom budgetbegränsningar
 
 ### När man ska köra förkontroller
 
 - **Innan första distributionen** till en ny miljö
-- **Efter betydande ändringar i mallar**
-- **Innan distributioner i produktion**
-- **Vid byte av Azure-regioner**
+- **Efter betydande malländringar**
+- **Innan produktionsdistributioner**
+- **När man byter Azure-region**
 - **Som en del av CI/CD-pipelines**
 
 ---
 
-## Automatiserat förkontrollskript
+## Automatiserat förkontrollsskript
 
 ### PowerShell-förkontroll
 
@@ -177,7 +177,7 @@ function Test-Authentication {
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # Validera åtkomst till prenumeration
+        # Verifiera åtkomst till prenumeration
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -194,7 +194,7 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # Hämta den aktuella användarens rolltilldelningar
+        # Hämta den nuvarande användarens rolltilldelningar
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
@@ -217,7 +217,7 @@ function Test-Permissions {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # Testa möjligheten att skapa en resursgrupp
+                # Testa möjligheten att skapa resursgrupp
                 try {
                     az group create --name "preflight-test-rg" --location $Location --output none
                     az group delete --name "preflight-test-rg" --yes --output none
@@ -271,7 +271,7 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # Kontrollera begränsningar för lagringskonto
+        # Kontrollera gränser för lagringskonto
         $storageAccounts = az storage account list --output json | ConvertFrom-Json
         $accountCount = ($storageAccounts | Measure-Object).Count
         if ($accountCount -lt 200) {
@@ -292,7 +292,7 @@ function Test-QuotasAndLimits {
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # Testa Azure-slutpunkter
+    # Testa Azure-endpunkter
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -384,7 +384,7 @@ function Test-TemplateValidation {
     # 🧪 NYTT: Testa förhandsgranskning av infrastruktur (säker torrkörning)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -415,7 +415,7 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # Kontrollera tjänstens tillgänglighet i regionen
+        # Kontrollera tjänsternas tillgänglighet i regionen
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
@@ -488,7 +488,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # Kontrollera att HTTPS krävs
+        # Kontrollera om HTTPS krävs
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -565,7 +565,7 @@ Invoke-PreflightCheck
 
 ```bash
 #!/bin/bash
-# Bash-version av förkontroller för Unix/Linux-system
+# Bash-version av preflightkontroller för Unix/Linux-system
 
 set -euo pipefail
 
@@ -646,7 +646,7 @@ check_authentication() {
         return 1
     fi
     
-    # Kontrollera Azure CLI-autentisering
+    # Kontrollera autentisering för Azure CLI
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -798,63 +798,63 @@ main "$@"
 
 ## Manuell valideringschecklista
 
-### Checklista före distribution
+### Checklista inför distribution
 
 Skriv ut denna checklista och verifiera varje punkt innan distribution:
 
 #### ✅ Miljöuppsättning
 - [ ] AZD CLI installerad och uppdaterad till senaste versionen
-- [ ] Azure CLI installerat och autentiserat
+- [ ] Azure CLI installerad och autentiserad
 - [ ] Korrekt Azure-prenumeration vald
 - [ ] Miljönamn är unikt och följer namngivningskonventioner
 - [ ] Målresursgrupp identifierad eller kan skapas
 
 #### ✅ Autentisering och behörigheter
-- [ ] Lyckades autentisera med `azd auth login`
+- [ ] Har autentiserats framgångsrikt med `azd auth login`
 - [ ] Användaren har rollen Contributor på målprenumerationen/resursgruppen
-- [ ] Service principal konfigurerad för CI/CD (om tillämpligt)
-- [ ] Inga utgångna certifikat eller referenser
+- [ ] Serviceprincipal konfigurerad för CI/CD (om tillämpligt)
+- [ ] Inga utlöpta certifikat eller referenser
 
 #### ✅ Mallvalidering
 - [ ] `azure.yaml` finns och är giltig YAML
-- [ ] Alla tjänster som definieras i azure.yaml har motsvarande källkod
-- [ ] Bicep-mallar i katalogen `infra/` finns
+- [ ] Alla tjänster definierade i azure.yaml har motsvarande källkod
+- [ ] Bicep-mallar i `infra/`-katalogen finns
 - [ ] `main.bicep` kompileras utan fel (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Förhandsgranskning av infrastrukturen körs framgångsrikt (`azd provision --preview`)
-- [ ] Alla obligatoriska parametrar har standardvärden eller kommer att tillhandahållas
+- [ ] 🧪 Infrastrukturförhandsvisning körs framgångsrikt (`azd provision --preview`)
+- [ ] Alla nödvändiga parametrar har standardvärden eller kommer att tillhandahållas
 - [ ] Inga hårdkodade hemligheter i mallarna
 
 #### ✅ Resursplanering
-- [ ] Mål-Azure-region vald och validerad
-- [ ] Nödvändiga Azure-tjänster finns i målregionen
+- [ ] Målets Azure-region vald och validerad
+- [ ] Nödvändiga Azure-tjänster tillgängliga i målregionen
 - [ ] Tillräckliga kvoter tillgängliga för planerade resurser
 - [ ] Resursnamnskonflikter kontrollerade
 - [ ] Beroenden mellan resurser förstådda
 
 #### ✅ Nätverk och säkerhet
-- [ ] Nätverksanslutning till Azure-endpoints verifierad
-- [ ] Brandvägg/proxy-inställningar konfigurerade vid behov
+- [ ] Nätverksanslutning till Azure-slutpunkter verifierad
+- [ ] Brandvägg-/proxy-inställningar konfigurerade om det behövs
 - [ ] Key Vault konfigurerad för hantering av hemligheter
 - [ ] Hanterade identiteter används där det är möjligt
-- [ ] HTTPS-krav aktiverat för webbapplikationer
+- [ ] HTTPS-tvingning aktiverad för webbapplikationer
 
 #### ✅ Kostnadshantering
 - [ ] Kostnadsuppskattningar beräknade med Azure Pricing Calculator
-- [ ] Budgetlarm konfigurerade vid behov
-- [ ] Lämpliga SKU:er valda för miljötypen
+- [ ] Budgetvarningar konfigurerade om det krävs
+- [ ] Lämpliga SKUs valda för miljötyp
 - [ ] Reserverad kapacitet övervägd för produktionsarbetsbelastningar
 
 #### ✅ Övervakning och observabilitet
 - [ ] Application Insights konfigurerat i mallarna
 - [ ] Log Analytics-arbetsyta planerad
-- [ ] Larmregler definierade för kritiska mätvärden
-- [ ] Hälsokontrollendpoints implementerade i applikationerna
+- [ ] Varningsregler definierade för kritiska mätvärden
+- [ ] Hälsokontrollendpunkter implementerade i applikationerna
 
-#### ✅ Backup och återställning
-- [ ] Backupstrategi definierad för dataresurser
-- [ ] Recovery time objectives (RTO) dokumenterade
-- [ ] Recovery point objectives (RPO) dokumenterade
-- [ ] Plan för katastrofåterställning finns för produktion
+#### ✅ Säkerhetskopiering och återställning
+- [ ] Säkerhetskopieringsstrategi definierad för dataresurser
+- [ ] Återställningstidsmål (RTO) dokumenterade
+- [ ] Återställningspunktmål (RPO) dokumenterade
+- [ ] Plan för katastrofåterställning på plats för produktion
 
 ---
 
@@ -869,7 +869,7 @@ Skriv ut denna checklista och verifiera varje punkt innan distribution:
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # Kontrollera utvecklarvänliga konfigurationer
+    # Kontrollera utvecklingsvänliga konfigurationer
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
@@ -883,7 +883,7 @@ validate_dev_environment() {
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # Validera databasinställningar för utveckling
+    # Validera databasinställningar för utvecklingsmiljön
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -896,7 +896,7 @@ validate_dev_environment() {
 
 ```bash
 #!/bin/bash
-# Valideringar specifika för produktionsmiljön
+# Valideringar som är specifika för produktionsmiljön
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
@@ -915,7 +915,7 @@ validate_prod_environment() {
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # Validera övervakningsinställningar
+    # Validera övervakningsinställningen
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
@@ -935,7 +935,7 @@ validate_prod_environment() {
 
 ## Resursvalidering
 
-### Skript för kvotvalidering
+### Kvotvalideringsskript
 
 ```python
 #!/usr/bin/env python3
@@ -1060,11 +1060,11 @@ if __name__ == "__main__":
 
 ## Säkerhets- och efterlevnadskontroller
 
-### Skript för säkerhetsvalidering
+### Säkerhetsvalideringsskript
 
 ```bash
 #!/bin/bash
-# Säkerhets- och efterlevnadsvalidering för AZD-distributioner
+# Validering av säkerhet och regelefterlevnad för AZD-utrullningar
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
@@ -1079,7 +1079,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Kontrollera användning av hanterad identitet
+    # Kontrollera användning av hanterade identiteter
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Kontrollera att HTTPS krävs
+    # Kontrollera att HTTPS är påtvingat
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1095,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Kontrollera minsta TLS-versionen
+    # Kontrollera minsta TLS-version
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1301,7 +1301,7 @@ steps:
 
 2. **Miljöspecifik validering**
    - Olika kontroller för dev/staging/prod
-   - Lämpliga säkerhetskrav per miljö
+   - Passande säkerhetskrav per miljö
    - Kostnadsoptimering för icke-produktionsmiljöer
 
 3. **Omfattande täckning**
@@ -1316,32 +1316,32 @@ steps:
    - Sammanfattande rapporter för snabb bedömning
 
 5. **Avbryt snabbt vid fel**
-   - Avbryt distribution om kritiska kontroller misslyckas
-   - Ge tydlig vägledning för åtgärder
-   - Möjliggör enkel omkörning av kontroller
+   - Stoppa distributionen om kritiska kontroller misslyckas
+   - Ge tydlig vägledning för åtgärd
+   - Gör det enkelt att köra kontrollerna igen
 
 ### Vanliga fallgropar vid förkontroller
 
-1. **Hoppa över validering** för "snabba" distributioner
-2. **Otillräcklig behörighetskontroll** innan distribution
-3. **Ignorera kvotgränser** tills distributionen misslyckas
-4. **Inte validera mallar** i CI/CD-pipelines
+1. **Att hoppa över validering** för "snabba" distributioner
+2. **Otillräcklig behörighetskontroll** före distribution
+3. **Att ignorera kvotgränser** tills distributionen misslyckas
+4. **Att inte validera mallar** i CI/CD-pipelines
 5. **Saknad säkerhetsvalidering** för produktionsmiljöer
 6. **Otillräcklig kostnadsuppskattning** som leder till budgetöverraskningar
 
 ---
 
-**Proffstips**: Kör förkontroller som ett separat jobb i din CI/CD-pipeline före det faktiska distributionsjobbet. Detta gör att du kan upptäcka problem tidigt och ger snabbare återkoppling till utvecklarna.
+**Proffstips**: Kör förkontroller som ett separat jobb i din CI/CD-pipeline innan det faktiska distributionsjobbet. Detta gör att du kan fånga problem tidigt och ger snabbare återkoppling till utvecklare.
 
 ---
 
 **Navigering**
-- **Föregående lektion**: [SKU Selection](sku-selection.md)
-- **Nästa lektion**: [Cheat Sheet](../../resources/cheat-sheet.md)
+- **Föregående lektion**: [Val av SKU](sku-selection.md)
+- **Nästa lektion**: [Snabbreferens](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfriskrivning**:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var god observera att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungsspråk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, vänligen observera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på sitt ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för eventuella missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,51 +1,53 @@
-# Primjeri implementacije Container Appsa s AZD-om
+# Primjeri implementacije Container App s AZD
 
-Ovaj direktorij sadrži sveobuhvatne primjere za implementaciju kontejneriziranih aplikacija u Azure Container Apps koristeći Azure Developer CLI (AZD). Ovi primjeri prikazuju stvarne obrasce, najbolje prakse i konfiguracije spremne za produkciju.
+Ovaj direktorij sadrži sveobuhvatne primjere implementacije kontejneriziranih aplikacija na Azure Container Apps koristeći Azure Developer CLI (AZD). Ovi primjeri pokazuju stvarne obrasce, najbolje prakse i konfiguracije spremne za produkciju.
 
 ## 📚 Sadržaj
 
 - [Pregled](#pregled)
 - [Preduvjeti](#preduvjeti)
-- [Primjeri brzog početka](#primjeri-brzog-početka)
+- [Primjeri za brz početak](#primjeri-za-brz-početak)
 - [Primjeri za produkciju](#primjeri-za-produkciju)
 - [Napredni obrasci](#napredni-obrasci)
 - [Najbolje prakse](#najbolje-prakse)
 
 ## Pregled
 
-Azure Container Apps je potpuno upravljana platforma bez poslužitelja za kontejnere koja vam omogućuje pokretanje mikroservisa i kontejneriziranih aplikacija bez upravljanja infrastrukturom. U kombinaciji s AZD-om, dobivate:
+Azure Container Apps je potpuno upravljana serverless platforma za kontejnere koja vam omogućuje pokretanje mikroservisa i kontejneriziranih aplikacija bez upravljanja infrastrukturom. Kada se kombinira s AZD-om, dobivate:
 
-- **Pojednostavljena implementacija**: Jedan naredbeni redak implementira kontejnere s infrastrukturom
-- **Automatsko skaliranje**: Skaliranje do nule i skaliranje na više replika na temelju HTTP prometa ili događaja
-- **Integrirana mreža**: Ugrađeno otkrivanje usluga i razdvajanje prometa
-- **Upravljani identitet**: Sigurna autentifikacija prema Azure resursima
+- **Pojednostavljena implementacija**: Jedna naredba implementira kontejnere i infrastrukturu
+- **Automatsko skaliranje**: Skaliranje na nulu i skaliranje prema gore temeljem HTTP prometa ili događaja
+- **Integrirano umrežavanje**: Ugrađeno otkrivanje usluga i razdvajanje prometa
+- **Upravljani identitet**: Sigurna autentikacija prema Azure resursima
 - **Optimizacija troškova**: Plaćate samo za resurse koje koristite
 
 ## Preduvjeti
 
-Prije početka, osigurajte da imate:
+Prije početka, provjerite imate li:
 
 ```bash
-# Provjeri AZD instalaciju
+# Provjerite instalaciju AZD-a
 azd version
 
-# Provjeri Azure CLI
+# Provjerite Azure CLI
 az version
 
-# Provjeri Docker (za izgradnju prilagođenih slika)
+# Provjerite Docker (za izradu prilagođenih slika)
 docker --version
 
-# Prijavi se u Azure
+# Autentificirajte se za AZD implementacije
 azd auth login
+
+# Opcionalno: prijavite se u Azure CLI ako planirate pokretati az naredbe izravno
 az login
 ```
 
-**Potrebni Azure resursi:**
+**Potreban Azure resursi:**
 - Aktivna Azure pretplata
-- Dozvole za stvaranje grupe resursa
-- Pristup okruženju Container Apps
+- Dozvole za kreiranje resource grupe
+- Pristup Container Apps okruženju
 
-## Primjeri brzog početka
+## Primjeri za brz početak
 
 ### 1. Jednostavan Web API (Python Flask)
 
@@ -71,40 +73,40 @@ services:
 # Inicijaliziraj iz predloška
 azd init --template todo-python-mongo
 
-# Osiguraj infrastrukturu i rasporedi
+# Osiguraj infrastrukturu i implementiraj
 azd up
 
-# Testiraj raspored
+# Testiraj implementaciju
 azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
 **Ključne značajke:**
 - Automatsko skaliranje od 0 do 10 replika
-- Provjere zdravlja i liveness probeovi
-- Injektiranje varijabli okruženja
+- Health probe i provjere živosti
+- Umetanje varijabli okruženja
 - Integracija s Application Insights
 
 ### 2. Node.js Express API
 
-Implementirajte Node.js backend s integracijom MongoDB-a.
+Implementirajte Node.js backend s MongoDB integracijom.
 
 ```bash
 # Inicijaliziraj Node.js API predložak
 azd init --template todo-nodejs-mongo
 
-# Konfiguriraj varijable okoline
+# Konfiguriraj varijable okruženja
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
-# Postavi
+# Deploy (postavi)
 azd up
 
 # Pregledaj zapise putem Azure Monitor-a
 azd monitor --logs
 ```
 
-**Istaknute značajke infrastrukture:**
+**Istaknuti dijelovi infrastrukture:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -167,7 +169,7 @@ azd show --output json | jq -r '.services.web.endpoint' | xargs start
 
 ## Primjeri za produkciju
 
-### Primjer 1: Arhitektura mikroservisa
+### Primjer 1: Mikroservisi arhitektura
 
 **Scenarij**: E-commerce aplikacija s više mikroservisa
 
@@ -216,24 +218,24 @@ services:
 # Inicijaliziraj projekt
 azd init
 
-# Postavi proizvodno okruženje
+# Postavi okruženje za produkciju
 azd env new production
 
-# Konfiguriraj proizvodne postavke
+# Konfiguriraj postavke produkcije
 azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
 
-# Implementiraj sve usluge
+# Pokreni sve usluge
 azd up
 
-# Nadgledaj implementaciju
+# Prati implementaciju
 azd monitor --overview
 ```
 
 ### Primjer 2: AI-pokretan Container App
 
-**Scenarij**: AI chat aplikacija s integracijom Microsoft Foundry modela
+**Scenarij**: AI chat aplikacija s Microsoft Foundry Models integracijom
 
 **Datoteka: src/ai-chat/app.py**
 ```python
@@ -244,7 +246,7 @@ import openai
 
 app = Flask(__name__)
 
-# Koristite Upravnu identitet za siguran pristup
+# Koristite Managed Identity za sigurni pristup
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -253,7 +255,7 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # Nabavite OpenAI ključ iz Key Vault-a
+    # Dohvatite OpenAI ključ iz Key Vaulta
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
@@ -322,24 +324,24 @@ module aiChatApp './app/container-app.bicep' = {
 
 **Naredbe za implementaciju:**
 ```bash
-# Postavite okruženje
+# Postavi okoliš
 azd init --template ai-chat-app
 azd env new dev
 
-# Konfigurirajte OpenAI
+# Konfiguriraj OpenAI
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_OPENAI_DEPLOYMENT "gpt-4.1"
 
-# Implementirajte
+# Implementiraj
 azd up
 
-# Testirajte API
+# Testiraj API
 curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat \
   -H "Content-Type: application/json" \
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Primjer 3: Pozadinski radnik s obradom reda
+### Primjer 3: Pozadinski radnik s obradom reda poruka
 
 **Scenarij**: Sustav obrade narudžbi s porukama u redu
 
@@ -378,10 +380,10 @@ def process_orders():
     while True:
         messages = queue_client.receive_messages(max_messages=10)
         for message in messages:
-            # Obrada narudžbe
+            # Obradi narudžbu
             print(f"Processing order: {message.content}")
             
-            # Potpuna poruka
+            # Završna poruka
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -408,10 +410,10 @@ services:
 # Inicijaliziraj
 azd init
 
-# Postavi s konfiguracijom reda
+# Postavi s konfiguracijom reda čekanja
 azd up
 
-# Skaliraj radnika na temelju duljine reda
+# Skaliraj radnika prema duljini reda čekanja
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -431,7 +433,7 @@ azd deploy api --revision-suffix blue --no-traffic
 # Testiraj novu reviziju
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Podijeli promet (20 % za plavu, 80 % za trenutnu)
+# Podijeli promet (20% plavom, 80% trenutačnom)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -458,18 +460,18 @@ az containerapp ingress traffic set \
 }
 ```
 
-**Skript za implementaciju:**
+**Skripta za implementaciju:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
 
-# Postavi novu reviziju s 10% prometa
+# Postavite novu reviziju s 10% prometa
 azd deploy api --revision-mode multiple
 
-# Prati metrike
+# Pratite metrike
 azd monitor --service api --duration 5m
 
-# Postupno povećavaj promet
+# Postupno povećavajte promet
 for i in {20..100..10}; do
   echo "Increasing traffic to $i%"
   az containerapp revision set-traffic \
@@ -477,11 +479,11 @@ for i in {20..100..10}; do
     --resource-group rg-myapp \
     --revision-weight latest=$i
   
-  sleep 300  # Pričekaj 5 minuta
+  sleep 300  # Pričekajte 5 minuta
 done
 ```
 
-### Obrazac 3: Multi-regionalna implementacija
+### Obrazac 3: Implementacija u više regija
 
 **Datoteka: azure.yaml**
 ```yaml
@@ -529,14 +531,14 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 
 **Implementacija:**
 ```bash
-# Rasporedi na sve regije
+# Primijeni na sve regije
 azd up
 
 # Provjeri krajnje točke
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### Obrazac 4: Dapr integracija
+### Obrazac 4: Integracija Dapr-a
 
 **Datoteka: infra/app/dapr-enabled.bicep**
 ```bicep
@@ -563,7 +565,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-**Aplikacijski kod s Dapr-om:**
+**Kod aplikacije s Dapr-om:**
 ```python
 from flask import Flask
 from dapr.clients import DaprClient
@@ -599,11 +601,11 @@ def create_order():
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# Oznacite resurse za praćenje troškova
+# Oznaka resursa za praćenje troškova
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. Najbolje sigurnosne prakse
+### 2. Sigurnosne najbolje prakse
 
 ```bicep
 // Always use managed identity
@@ -662,21 +664,21 @@ services:
             concurrent: 100
 ```
 
-### 4. Praćenje i uvidi
+### 4. Praćenje i promatranje
 
 ```bash
 # Omogući Application Insights
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
-# Pregledaj zapisnike u stvarnom vremenu
+# Pregledajte dnevnike u stvarnom vremenu
 azd monitor --logs
-# Ili koristi Azure CLI za Container Apps:
+# Ili koristite Azure CLI za Container Apps:
 az containerapp logs show --name api --resource-group rg-myapp --follow
 
-# Prati metrike
+# Pratite metrike
 azd monitor --live
 
-# Kreiraj upozorenja
+# Kreirajte upozorenja
 az monitor metrics alert create \
   --name high-cpu-alert \
   --resource-group rg-myapp \
@@ -697,7 +699,7 @@ az containerapp update \
 # Koristi spot instance za razvojna okruženja
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# Postavi upozorenja za budžet
+# Postavi upozorenja o proračunu
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
@@ -705,7 +707,7 @@ az consumption budget create \
   --threshold 80
 ```
 
-### 6. CI/CD integracija
+### 6. Integracija CI/CD-a
 
 **Primjer GitHub Actions:**
 ```yaml
@@ -737,29 +739,29 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Reference uobičajenih naredbi
+## Referenca uobičajenih naredbi
 
 ```bash
-# Inicijaliziraj novi projekt za aplikaciju u spremniku
+# Inicijaliziraj novi projekt kontejnerske aplikacije
 azd init --template <template-name>
 
-# Implementiraj infrastrukturu i aplikaciju
+# Rasporedi infrastrukturu i aplikaciju
 azd up
 
-# Implementiraj samo kod aplikacije (preskoči infrastrukturu)
+# Rasporedi samo kod aplikacije (preskoči infrastrukturu)
 azd deploy
 
-# Osiguraj samo infrastrukturu
+# Opskrbi samo infrastrukturu
 azd provision
 
-# Prikaži implementirane resurse
+# Pregledaj postavljene resurse
 azd show
 
-# Prati zapisnike pomoću azd monitor ili Azure CLI
+# Prati zapise pomoću azd monitor ili Azure CLI
 azd monitor --logs
 # az containerapp logs show --name <naziv-usluge> --resource-group <naziv-rg> --follow
 
-# Prati aplikaciju
+# Nadziranje aplikacije
 azd monitor --overview
 
 # Očisti resurse
@@ -768,13 +770,13 @@ azd down --force --purge
 
 ## Rješavanje problema
 
-### Problem: Kontejner ne uspijeva pokrenuti se
+### Problem: Kontejner ne može pokrenuti
 
 ```bash
-# Provjerite zapisnike pomoću Azure CLI-ja
+# Provjerite zapisnike koristeći Azure CLI
 az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# Pregledajte događaje spremnika
+# Pogledajte događaje spremnika
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
@@ -785,7 +787,7 @@ docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Problem: Nemoguć pristup krajnjoj točki container appa
+### Problem: Ne može se pristupiti endpointu Container App-a
 
 ```bash
 # Provjerite konfiguraciju ulaza
@@ -794,7 +796,7 @@ az containerapp show \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# Provjerite je li interni ulaz omogućen
+# Provjerite je li unutarnji ulaz omogućen
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
@@ -819,7 +821,7 @@ az containerapp update \
 
 ## Dodatni resursi i primjeri
 - [Primjer mikroservisa](./microservices/README.md)
-- [Jednostavan Flash API primjer](./simple-flask-api/README.md)
+- [Primjer jednostavnog Flask API-ja](./simple-flask-api/README.md)
 - [Dokumentacija za Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
 - [Galerija AZD predložaka](https://azure.github.io/awesome-azd/)
 - [Primjeri Container Apps](https://github.com/Azure-Samples/container-apps-samples)
@@ -827,13 +829,13 @@ az containerapp update \
 
 ## Doprinos
 
-Za doprinos novih primjera container appova:
+Za doprinos novim primjerima Container App-a:
 
-1. Kreirajte novi poddirektorij za vaš primjer
-2. Uključite kompletne datoteke `azure.yaml`, `infra/` i `src/`
-3. Dodajte iscrpni README s uputama za implementaciju
-4. Testirajte implementaciju s `azd up`
-5. Pošaljite zahtjev za povlačenje (pull request)
+1. Kreirajte novi poddirektorij s primjerom
+2. Uključite potpunu `azure.yaml`, `infra/` i `src/` datoteke
+3. Dodajte opsežan README s uputama za implementaciju
+4. Testirajte implementaciju pomoću `azd up`
+5. Pošaljite pull request
 
 ---
 
@@ -842,6 +844,6 @@ Za doprinos novih primjera container appova:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Odricanje**:
-Ovaj dokument je preveden korištenjem AI prevoditeljskog servisa [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za važne informacije preporučuje se profesionalni ljudski prijevod. Ne snosimo odgovornost za bilo kakva nesporazuma ili netočne interpretacije koje proizlaze iz korištenja ovog prijevoda.
+**Odricanje od odgovornosti**:  
+Ovaj dokument preveden je pomoću AI prevoditeljske usluge [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati službenim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Ne odgovaramo za bilo kakve nesporazume ili kriva tumačenja nastala korištenjem ovog prijevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

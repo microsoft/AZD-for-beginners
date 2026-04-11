@@ -2,46 +2,46 @@
 
 **Chapter Navigation:**
 - **📚 Course Home**: [AZD Kwa Waanzilishi](../../README.md)
-- **📖 Sura ya Sasa**: Sura 4 - Miundombinu kama Kanuni (IaC) & Utekelezaji
-- **⬅️ Lililopita**: [Deployment Guide](deployment-guide.md)
-- **➡️ Sura Ifuatayo**: [Chapter 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
-- **🔧 Inayohusiana**: [Sura 6: Uthibitishaji Kabla ya Utekelezaji](../chapter-06-pre-deployment/capacity-planning.md)
+- **📖 Current Chapter**: Sura 4 - Miundombinu kama Msimbo & Utekelezaji
+- **⬅️ Previous**: [Deployment Guide](deployment-guide.md)
+- **➡️ Next Chapter**: [Sura 5: Suluhisho za AI za Wakala Nyingi](../../examples/retail-scenario.md)
+- **🔧 Related**: [Sura 6: Uthibitishaji Kabla ya Utekelezaji](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Utangulizi
 
-Mwongozo huu kamili unashughulikia kila kitu unachohitaji kujua kuhusu kutayarisha na kusimamia rasilimali za Azure kwa kutumia Azure Developer CLI. Jifunze kutekeleza mifumo ya Miundombinu kama Kanuni (IaC) kutoka uundaji wa rasilimali wa msingi hadi miundo ya miundombinu ya kiwango cha biashara kwa kutumia Bicep, ARM templates, Terraform, na Pulumi.
+Mwongozo huu wa kina unafunika kila unachohitaji kujua kuhusu kuandaa na kusimamia rasilimali za Azure ukitumia Azure Developer CLI. Jifunze kutekeleza mifumo ya Miundombinu kama Msimbo (IaC) kutoka utengenezaji wa rasilimali za msingi hadi miundo ya miundombinu ya kiwango cha biashara ukitumia Bicep, templeti za ARM, Terraform, na Pulumi.
 
 ## Malengo ya Kujifunza
 
-Kwa kumaliza mwongozo huu, utakuwa umeweza:
-- Kufahamu kanuni za Miundombinu kama Kanuni na utoaji wa rasilimali za Azure
-- Kuelewa watoa huduma mbalimbali wa IaC wanaoungwa mkono na Azure Developer CLI
-- Kuunda na kutekeleza templates za Bicep kwa miundo ya kawaida ya programu
-- Kusanidi vigezo vya rasilimali, vigezo vya ndani, na mipangilio maalum kwa mazingira
+Kwa kumaliza mwongozo huu, utakuwa na uwezo wa:
+- Kumaster kanuni za Miundombinu kama Msimbo na utayarishaji wa rasilimali za Azure
+- Kuelewa watoa huduma mbalimbali wa IaC wanaoungiwa mkono na Azure Developer CLI
+- Kutengeneza na kutekeleza templeti za Bicep kwa miundo ya kawaida ya programu
+- Konfiguresheni vigezo vya rasilimali, vigezo, na mipangilio maalum kwa mazingira
 - Kutekeleza mifumo ya juu ya miundombinu ikijumuisha mitandao na usalama
-- Kusimamia mzunguko wa maisha ya rasilimali, masasisho, na kutatua utegemezi
+- Kusimamia mzunguko wa maisha ya rasilimali, masasisho, na utatuzi wa utegemezi
 
 ## Matokeo ya Kujifunza
 
 Baada ya kumaliza, utaweza:
-- Kuunda na kutayarisha miundombinu ya Azure kwa kutumia Bicep na ARM templates
+- Kubuni na kuandaa miundombinu ya Azure ukitumia Bicep na templeti za ARM
 - Kusanidi miundo tata za huduma nyingi kwa utegemezi sahihi wa rasilimali
-- Kutekeleza templates zenye vigezo kwa mazingira na usanidi mbalimbali
-- Kutambua matatizo ya utayarishaji wa miundombinu na kutatua kushindwa kwa utekelezaji
-- Kutumia kanuni za Azure Well-Architected Framework katika ubunifu wa miundombinu
-- Kusimamia masasisho ya miundombinu na kutekeleza mikakati ya kuweka toleo la miundombinu
+- Kutumia templeti zilizo na vigezo kwa mazingira na mipangilio mbalimbali
+- Kutatua matatizo ya utayarishaji wa miundombinu na kutatua makosa ya utekelezaji
+- Kutumia kanuni za Azure Well-Architected Framework katika kubuni miundombinu
+- Kusimamia masasisho ya miundombinu na kutekeleza mikakati ya uwekaji toleo wa miundombinu
 
-## Muhtasari wa Utoaji wa Miundombinu
+## Muhtasari wa Utayarishaji wa Miundombinu
 
-Azure Developer CLI inaunga mkono watoa huduma mbalimbali wa Infrastructure as Code (IaC):
-- **Bicep** (inayopendekezwa) - lugha maalum ya Azure
-- **ARM Templates** - Templates za Azure Resource Manager zenye msingi wa JSON
-- **Terraform** - Zana ya miundombinu inayofanya kazi kwa wingu nyingi (multi-cloud)
-- **Pulumi** - Miundombinu ya kisasa kama kanuni kwa kutumia lugha za programu
+Azure Developer CLI inaunga mkono watoa huduma mbalimbali wa Miundombinu kama Msimbo (IaC):
+- **Bicep** (inayopendekezwa) - lugha maalum kwa Azure
+- **ARM Templates** - templeti za Azure Resource Manager zinazotegemea JSON
+- **Terraform** - zana ya miundombinu ya wingu nyingi
+- **Pulumi** - miundombinu ya kisasa kama msimbo kwa lugha za programu
 
 ## Kuelewa Rasilimali za Azure
 
-### Resource Hierarchy
+### Mlolongo wa Rasilimali
 ```
 Azure Account
 └── Subscriptions
@@ -49,16 +49,16 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Huduma za Azure Zinazotumika kwa Programu
-- **Kompyuta (Compute)**: App Service, Container Apps, Functions, Virtual Machines
-- **Uhifadhi (Storage)**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Mtandao (Networking)**: Virtual Network, Application Gateway, CDN
-- **Usalama (Security)**: Key Vault, Application Insights, Log Analytics
+### Huduma Zilizobebwa Kutumika kwa Programu
+- **Kompyuta**: App Service, Container Apps, Functions, Virtual Machines
+- **Uhifadhi**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
+- **Mihusayoni/Mitandao**: Virtual Network, Application Gateway, CDN
+- **Usalama**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
-## Bicep Infrastructure Templates
+## Templeti za Miundombinu za Bicep
 
-### Basic Bicep Template Structure
+### Muundo wa Msingi wa Templeti ya Bicep
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -128,9 +128,9 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Advanced Bicep Patterns
+### Mifumo ya Juu ya Bicep
 
-#### Modular Infrastructure
+#### Miundombinu ya Moduli
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -179,7 +179,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Conditional Resource Creation
+#### Uundaji wa Rasilimali kwa Masharti
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -300,7 +300,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 
 ## 🔒 Usalama na Usimamizi wa Siri
 
-### Key Vault Integration
+### Uunganishaji wa Key Vault
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -342,7 +342,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Managed Identity Configuration
+### Usanidi wa Utambulisho Iliyosimamiwa
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -368,9 +368,9 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Mtandao na Uunganishaji
+## 🌍 Mitandao na Uunganishaji
 
-### Virtual Network Configuration
+### Usanidi wa Virtual Network
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -433,7 +433,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### Application Gateway with SSL
+### Application Gateway yenye SSL
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -496,7 +496,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Ufuatiliaji na Uonekano
+## 📊 Ufuatiliaji na Uwezo wa Kuona
 
 ### Application Insights
 ```bicep
@@ -527,7 +527,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Custom Metrics and Alerts
+### Vipimo vya Mteja na Tahadhari
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -617,7 +617,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Conditional Resource Provisioning
+### Utayarishaji wa Rasilimali kwa Masharti
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -651,7 +651,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 
 ## 🚀 Mifumo ya Juu ya Utayarishaji
 
-### Multi-Region Deployment
+### Utekelezaji wa Mkoa Mwingi
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -719,7 +719,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### Infrastructure Testing
+### Upimaji wa Miundombinu
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -755,42 +755,41 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 Mapitio na Uthibitisho wa Miundombinu (MPYA)
+## 🧪 Mapitio na Uthibitishaji wa Miundombinu (MPYA)
 
-### Preview Infrastructure Changes Before Deployment
+### Pitia Mabadiliko ya Miundombinu Kabla ya Utekelezaji
 
-The `azd provision --preview` feature lets you **simulate infrastructure provisioning** before actually deploying resources. It's similar in spirit to `terraform plan` or `bicep what-if`, giving you a **dry-run view** of what changes would be made to your Azure environment.
+The `azd provision --preview` feature inakuwezesha **kuiga utayarishaji wa miundombinu** kabla ya kupeleka rasilimali kwa vitendo. Inafanana kwa roho na `terraform plan` au `bicep what-if`, ikikupa mtazamo wa **jaribio kavu** wa mabadiliko yatakayofanywa katika mazingira yako ya Azure.
 
 #### 🛠️ Inachofanya
-- **Huchambua templates zako za IaC** (Bicep au Terraform)
-- **Inaonyesha muhtasari wa mabadiliko ya rasilimali**: nyongeza, ufutaji, masasisho
-- **Haiutekelezi mabadiliko** — ni kwa kusoma tu na ni salama kuendesha
+- **Huchunguza templeti zako za IaC** (Bicep au Terraform)
+- **Inaonyesha mapitio ya mabadiliko ya rasilimali**: kuongeza, kufuta, kusasisha
+- **Haitumii mabadiliko** — ni kwa kusoma pekee na ni salama kuendesha
 
-#### � Matumizi
+#### Matumizi
 ```bash
-# Angalia mabadiliko ya miundombinu kabla ya kupeleka
+# Angalia mabadiliko ya miundombinu kabla ya utekelezaji
 azd provision --preview
 
-# Angalia kwa matokeo ya kina
-azd provision --preview --output json
-
-# Angalia kwa mazingira maalum
-azd provision --preview --environment production
+# Mapitio kwa mazingira maalum
+azd provision --preview -e production
 ```
 
 Amri hii inakusaidia:
-- **Kukagua mabadiliko ya miundombinu** kabla ya kuthibitisha rasilimali
-- **Kugundua mipangilio potofu mapema** katika mzunguko wa maendeleo
+- **Kuthibitisha mabadiliko ya miundombinu** kabla ya kuwekeza rasilimali
+- **Kugundua uundaji mbaya mapema** katika mzunguko wa maendeleo
 - **Kushirikiana kwa usalama** katika mazingira ya timu
-- **Kuhakikisha utekelezaji kwa kanuni ya ruhusa ndogo bila mshangao**
+- **Kuhakikisha utekelezaji wa haki ndogo kabisa** bila mshangao
 
 Ni muhimu hasa wakati:
-- Kufanya kazi na mazingira tata za huduma nyingi
-- Kufanya mabadiliko kwa miundombinu ya uzalishaji
-- Kukagua mabadiliko ya template kabla ya idhini ya PR
+- Ukifanya kazi na mazingira tata zenye huduma nyingi
+- Kufanya mabadiliko kwenye miundombinu ya uzalishaji
+- Kuthibitisha marekebisho ya templeti kabla ya idhini ya PR
 - Kufundisha wanachama wapya wa timu kuhusu mifumo ya miundombinu
 
-### Example Preview Output
+### Mfano wa Matokeo ya Mapitio
+Matokeo halisi ya mapitio yanatofautiana kulingana na mtoa huduma na muundo wa mradi, lakini matokeo yanapaswa kuelezea kwa uwazi mabadiliko yaliyopendekezwa kabla ya lolote kutumika.
+
 ```bash
 $ azd provision --preview
 
@@ -809,28 +808,27 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
 ```
 
-## �🔄 Sasisho na Uhamisho wa Rasilimali
+## �🔄 Sasisho za Rasilimali na Uhamisho
 
-### Safe Resource Updates
+### Sasisho Salama za Rasilimali
 ```bash
-# Angalia mabadiliko ya miundombinu kwanza (INAPENDEKEZWA)
+# Kagua mabadiliko ya miundombinu kwanza (INAPENDEKEZWA)
 azd provision --preview
 
 # Tekeleza mabadiliko baada ya uthibitisho wa mapitio
 azd provision --confirm-with-no-prompt
 
-# Kwa kurejesha, tumia Git kuirejesha mabadiliko ya miundombinu:
+# Kwa kurudisha nyuma, tumia Git kurejesha mabadiliko ya miundombinu:
 git revert HEAD  # Rejesha commit ya mwisho ya miundombinu
 azd provision    # Tekeleza hali ya awali ya miundombinu
 ```
 
-### Database Migrations
+### Uhamisho wa Hifadhidata
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -859,9 +857,9 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🎯 Mbinu Bora
+## 🎯 Mifano Bora ya Kutumia
 
-### 1. Resource Naming Conventions
+### 1. Kanuni za Kuitwa kwa Rasilimali
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -872,7 +870,7 @@ var naming = {
 }
 ```
 
-### 2. Tagging Strategy
+### 2. Mkakati wa Tagging
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -885,7 +883,7 @@ var commonTags = {
 }
 ```
 
-### 3. Parameter Validation
+### 3. Uthibitishaji wa Vigezo
 ```bicep
 @description('Environment name')
 @minLength(3)
@@ -901,7 +899,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Output Organization
+### 4. Organizesheni ya Matokeo
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -916,29 +914,29 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## Hatua Zinazofuata
+## Hatua Zifuatazo
 
 - [Pre-deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - Thibitisha upatikanaji wa rasilimali
 - [Common Issues](../chapter-07-troubleshooting/common-issues.md) - Tatua matatizo ya miundombinu
-- [Debugging Guide](../chapter-07-troubleshooting/debugging.md) - Tambua na rekebisha matatizo ya utayarishaji
-- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Chagua viwango vinavyofaa vya huduma
+- [Debugging Guide](../chapter-07-troubleshooting/debugging.md) - Fuatilia matatizo ya utayarishaji
+- [SKU Selection](../chapter-06-pre-deployment/sku-selection.md) - Chagua ngazi za huduma zinazofaa
 
-## Rasilimali za Ziada
+## Rasilimali Zingine
 
 - [Nyaraka za Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Kituo cha Miundo ya Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Mwongozo wa Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Templeti za Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Kituo cha Usanifu wa Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **Navigation**
-- **Somo lililopita**: [Deployment Guide](deployment-guide.md)
-- **Somo lijalo**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
+- **Previous Lesson**: [Deployment Guide](deployment-guide.md)
+- **Next Lesson**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Tamko la kutokuwajibika:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuwa sahihi, tafadhali jukumu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au ukosefu wa usahihi. Hati ya asili kwa lugha yake inapaswa kuchukuliwa kuwa chanzo cha mamlaka. Kwa taarifa muhimu, inashauriwa kutumia tafsiri ya kitaalamu ya binadamu. Hatutojibishwa kwa kutokuelewana au tafsiri potofu zitokanazo na matumizi ya tafsiri hii.
+**Taarifa ya kutokuwajibika**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake inapaswa kuchukuliwa kama chanzo rasmi. Kwa taarifa muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatuwajibiki kwa kutokuelewana yoyote au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

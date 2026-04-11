@@ -1,28 +1,30 @@
 # 使用 Azure Developer CLI 部署 AI 模型
 
-**章節導覽:**
-- **📚 Course Home**: [AZD 入門](../../README.md)
-- **📖 Current Chapter**: 第 2 章 - 以 AI 為先的開發
-- **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+**章節導覽：**
+- **📚 課程首頁**： [AZD 新手指南](../../README.md)
+- **📖 目前章節**： 第二章 - AI 優先開發
+- **⬅️ 上一節**： [Microsoft Foundry 整合](microsoft-foundry-integration.md)
+- **➡️ 下一節**： [AI 工作坊實作](ai-workshop-lab.md)
+- **🚀 下一章節**： [第三章：設定](../chapter-03-configuration/configuration.md)
 
-本指南提供使用 AZD 範本部署 AI 模型的完整說明，涵蓋從模型選擇到生產部署模式的所有內容。
+本指南提供使用 AZD 範本部署 AI 模型的詳細說明，涵蓋從模型選擇到生產部署模式的完整流程。
 
-## Table of Contents
+> **驗證說明 (2026-03-25)：** 本指南中的 AZD 工作流程已使用 `azd` `1.23.12` 版本檢查。對於超出預設服務部署時長的 AI 部署，目前 AZD 釋出版本已支援 `azd deploy --timeout <秒數>`。
 
-- [Model Selection Strategy](#model-selection-strategy)
-- [AZD Configuration for AI Models](#azd-configuration-for-ai-models)
-- [Deployment Patterns](#deployment-patterns)
-- [Model Management](#model-management)
-- [Production Considerations](#production-considerations)
-- [Monitoring and Observability](#monitoring-and-observability)
+## 目錄
 
-## Model Selection Strategy
+- [模型選擇策略](#模型選擇策略)
+- [AZD AI 模型設定](#azd-ai-模型設定)
+- [部署模式](#部署模式)
+- [模型管理](#模型管理)
+- [生產考量](#生產考量)
+- [監控與可觀察性](#監控與可觀察性)
 
-### Microsoft Foundry 模型 模型
+## 模型選擇策略
 
-為您的使用情境選擇合適的模型：
+### Microsoft Foundry 模型
+
+根據使用情景選擇適合的模型：
 
 ```yaml
 # azure.yaml - Model configuration
@@ -41,9 +43,9 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
@@ -52,16 +54,16 @@ services:
 
 ### 模型容量規劃
 
-| Model Type | Use Case | Recommended Capacity | Cost Considerations |
-|------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | 聊天、問答 | 10-50 TPM | 適合大多數工作負載的成本效益選擇 |
-| gpt-4.1 | 複雜推理 | 20-100 TPM | 成本較高，用於高階功能 |
-| Text-embedding-ada-002 | 搜尋、RAG | 30-120 TPM | 對語意搜尋至關重要 |
+| 模型類型 | 使用情境 | 推薦容量 | 成本考量 |
+|----------|----------|----------|---------|
+| gpt-4.1-mini | 聊天、問答 | 10-50 TPM | 大多工作負載的成本效益首選 |
+| gpt-4.1 | 複雜推理 | 20-100 TPM | 成本較高，適用於高階功能 |
+| text-embedding-3-large | 搜尋、RAG | 30-120 TPM | 語義搜尋與檢索的強力預設選擇 |
 | Whisper | 語音轉文字 | 10-50 TPM | 音訊處理工作負載 |
 
-## AZD Configuration for AI Models
+## AZD AI 模型設定
 
-### Bicep 範本配置
+### Bicep 範本設定
 
 透過 Bicep 範本建立模型部署：
 
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -124,19 +126,19 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### 環境變數
 
-設定您的應用程式環境：
+設定應用程式環境：
 
 ```bash
-# .env 設定
+# .env 配置
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Deployment Patterns
+## 部署模式
 
-### Pattern 1: Single-Region Deployment
+### 模式 1：單一區域部署
 
 ```yaml
 # azure.yaml - Single region
@@ -152,9 +154,9 @@ services:
 適用於：
 - 開發與測試
 - 單一市場應用
-- 成本最佳化
+- 成本優化
 
-### Pattern 2: Multi-Region Deployment
+### 模式 2：多區域部署
 
 ```bicep
 // Multi-region deployment
@@ -168,13 +170,13 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 ```
 
 適用於：
-- 全球性應用
+- 全球應用
 - 高可用性需求
 - 負載分散
 
-### Pattern 3: Hybrid Deployment
+### 模式 3：混合部署
 
-將 Microsoft Foundry 模型與其他 AI 服務結合：
+結合 Microsoft Foundry 模型與其他 AI 服務：
 
 ```bicep
 // Hybrid AI services
@@ -203,11 +205,11 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Model Management
+## 模型管理
 
 ### 版本控制
 
-在您的 AZD 配置中追蹤模型版本：
+在 AZD 設定中追蹤模型版本：
 
 ```json
 {
@@ -215,11 +217,11 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
@@ -227,7 +229,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### 模型更新
 
-使用 AZD hooks 進行模型更新：
+利用 AZD hooks 進行模型更新：
 
 ```bash
 #!/bin/bash
@@ -238,6 +240,9 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# 如果部署時間超過預設逾時時間
+azd deploy --timeout 1800
 ```
 
 ### A/B 測試
@@ -264,7 +269,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Production Considerations
+## 生產考量
 
 ### 容量規劃
 
@@ -293,9 +298,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### 自動擴充配置
+### 自動擴充設定
 
-為 Container Apps 設定自動擴充：
+設定容器應用的自動擴充：
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -333,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### 成本優化
 
-實施成本控管：
+實施成本控管措施：
 
 ```bicep
 @description('Enable cost management alerts')
@@ -363,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## Monitoring and Observability
+## 監控與可觀察性
 
 ### Application Insights 整合
 
-為 AI 工作負載設定監控：
+設定 AI 工作負載的監控：
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -474,29 +479,29 @@ async def check_ai_models():
 ## 下一步
 
 1. **檢視 [Microsoft Foundry 整合指南](microsoft-foundry-integration.md)** 以了解服務整合模式
-2. **完成 [AI 實作工作坊](ai-workshop-lab.md)** 以獲得實作經驗
-3. **實作 [Production AI Practices](production-ai-practices.md)** 以支援企業部署
-4. **參考 [AI 疑難排解指南](../chapter-07-troubleshooting/ai-troubleshooting.md)** 以解決常見問題
+2. **完成 [AI 工作坊實作](ai-workshop-lab.md)**，取得實務經驗
+3. **實作 [生產 AI 實務](production-ai-practices.md)**，應用於企業部署
+4. **探索 [AI 疑難排解指南](../chapter-07-troubleshooting/ai-troubleshooting.md)**，解決常見問題
 
 ## 資源
 
 - [Microsoft Foundry 模型可用性](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Azure Developer CLI 文件](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps 縮放](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [容器應用擴充](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [AI 模型成本優化](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**章節導覽:**
-- **📚 Course Home**: [AZD 入門](../../README.md)
-- **📖 Current Chapter**: 第 2 章 - 以 AI 為先的開發
-- **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+**章節導覽：**
+- **📚 課程首頁**： [AZD 新手指南](../../README.md)
+- **📖 目前章節**： 第二章 - AI 優先開發
+- **⬅️ 上一節**： [Microsoft Foundry 整合](microsoft-foundry-integration.md)
+- **➡️ 下一節**： [AI 工作坊實作](ai-workshop-lab.md)
+- **🚀 下一章節**： [第三章：設定](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責聲明**:
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求精確，但請注意自動翻譯可能包含錯誤或不準確之處。原始文件的原文應被視為權威來源。對於重要資訊，建議採用專業人工翻譯。我們不對因使用本翻譯而產生的任何誤解或誤釋負責。
+**免責聲明**：  
+本文件係使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於提升準確度，但請注意，自動翻譯可能包含錯誤或不準確之處。原始語言文件應視為權威來源。對於關鍵資訊，建議採用專業人工翻譯。對因使用本翻譯而產生的任何誤解或誤釋，本公司不負任何責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

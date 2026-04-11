@@ -1,28 +1,28 @@
-# Mwongozo wa Utatuzi wa Matatizo wa AI
+# Mwongozo wa Utatuzi wa Matatizo Maalumu za AI
 
 **Uvinjari wa Sura:**
-- **📚 Nyumbani kwa Kozi**: [AZD For Beginners](../../README.md)
-- **📖 Sura ya Sasa**: Sura 7 - Utatuzi wa Matatizo & Urekebishaji
-- **⬅️ Kati**: [Mwongozo wa Urekebishaji](debugging.md)
-- **➡️ Sura Ifuatayo**: [Sura 8: Mifumo ya Uzalishaji & Biashara](../chapter-08-production/production-ai-practices.md)
-- **🤖 Inayohusiana**: [Sura 2: Maendeleo ya Kwanza ya AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Sura 7 - Utatuzi wa Matatizo na Urekebishaji
+- **⬅️ Previous**: [Mwongozo wa Urekebishaji](debugging.md)
+- **➡️ Next Chapter**: [Sura 8: Mifumo ya Uzalishaji na Biashara](../chapter-08-production/production-ai-practices.md)
+- **🤖 Related**: [Sura 2: Maendeleo ya AI-Kwanza](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-Mwongozo huu kamilifu wa utatuzi wa matatizo unashughulikia masuala ya kawaida wakati wa kuzindua suluhisho za AI na AZD, ukitoa suluhisho na mbinu za urekebishaji maalumu kwa huduma za Azure AI.
+Mwongozo huu wa kina wa utatuzi wa matatizo unashughulikia masuala ya kawaida wakati wa kusambaza suluhisho za AI kwa kutumia AZD, ukitoa suluhisho na mbinu za urekebishaji maalumu kwa huduma za Azure AI.
 
-## Jedwali la Maudhui
+## Yaliyomo
 
-- [Matatizo ya Huduma ya Microsoft Foundry Models](#azure-openai-service-issues)
-- [Matatizo ya Azure AI Search](#matatizo-ya-azure-ai-search)
-- [Matatizo ya Utekelezaji wa Container Apps](#matatizo-ya-utekelezaji-wa-container-apps)
-- [Hitilafu za Uthibitishaji na Idhini](#hitilafu-za-uthibitishaji-na-idhini)
-- [Kushindwa kwa Utekelezaji wa Mfano](#kushindwa-kwa-utekelezaji-wa-mfano)
-- [Matatizo ya Utendaji na Upanuzi](#matatizo-ya-utendaji-na-upanuzi)
-- [Usimamizi wa Gharama na Kiasi](#usimamizi-wa-gharama-na-kiasi)
-- [Vifaa na Mbinu za Urekebishaji](#vifaa-na-mbinu-za-urekebishaji)
+- [Microsoft Foundry Models Service Issues](#azure-openai-service-issues)
+- [Azure AI Search Problems](#azure-ai-search-problems)
+- [Container Apps Deployment Issues](#container-apps-deployment-issues)
+- [Authentication and Permission Errors](#authentication-and-permission-errors)
+- [Model Deployment Failures](#model-deployment-failures)
+- [Performance and Scaling Issues](#performance-and-scaling-issues)
+- [Cost and Quota Management](#cost-and-quota-management)
+- [Debugging Tools and Techniques](#debugging-tools-and-techniques)
 
-## Matatizo ya Huduma ya Microsoft Foundry Models
+## Microsoft Foundry Models Service Issues
 
-### Tatizo: Huduma ya OpenAI Haitapatikana Kanda
+### Tatizo: Huduma ya OpenAI Haipatikani Kanda
 
 **Dalili:**
 ```
@@ -30,13 +30,13 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **Sababu:**
-- Microsoft Foundry Models haitapatikana katika kanda iliyochaguliwa
-- Kiasi kimekwisha katika maeneo yanayopendelewa
-- Vizingiti vya uwezo vya kanda
+- Microsoft Foundry Models haipatikani katika kanda iliyochaguliwa
+- Kiasi (quota) kimeisha katika kanda zinazopendekezwa
+- Mipaka ya uwezo wa kikanda
 
 **Suluhisho:**
 
-1. **Angalia Upatikanaji wa Kanda:**
+1. **Kagua Upatikanaji wa Kanda:**
 ```bash
 # Orodhesha mikoa inayopatikana kwa OpenAI
 az cognitiveservices account list-skus \
@@ -77,17 +77,17 @@ Error: Deployment failed due to insufficient quota
 
 **Suluhisho:**
 
-1. **Angalia Kiasi Cha Sasa:**
+1. **Kagua Kiasi Cha Sasa:**
 ```bash
-# Angalia matumizi ya kiwango cha ruhusa
+# Angalia matumizi ya ukomo
 az cognitiveservices usage list \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG
 ```
 
-2. **Omba Kuongezwa kwa Kiasi:**
+2. **Omba Kuongezwa kwa Kiasi (Quota):**
 ```bash
-# Wasilisha ombi la kuongeza kikomo
+# Wasilisha ombi la kuongeza ukomo
 az support tickets create \
   --ticket-name "OpenAI Quota Increase" \
   --description "Need increased quota for production deployment" \
@@ -122,23 +122,23 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 **Suluhisho:**
 
-1. **Tumia Toleo la API Linaloungwa Mkono:**
+1. **Tumia Toleo la API Linalounga Mkono:**
 ```python
-# Tumia toleo la hivi karibuni linaloungwa mkono
+# Tumia toleo la hivi karibuni linalounga mkono
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
-2. **Kagua Ulinganishaji wa Toleo la API:**
+2. **Kagua Ulinganifu wa Toleo la API:**
 ```bash
-# List supported API versions
+# Orodhesha matoleo ya API yanayoungwa mkono
 az rest --method get \
   --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
 ```
 
-## Matatizo ya Azure AI Search
+## Azure AI Search Problems
 
-### Tatizo: Ngazi ya Bei ya Huduma ya Utafutaji Haikutosha
+### Tatizo: Ngazi ya Bei ya Huduma ya Search Haikidhi
 
 **Dalili:**
 ```
@@ -147,7 +147,7 @@ Error: Semantic search requires Basic tier or higher
 
 **Suluhisho:**
 
-1. **Sasisha Ngazi ya Bei:**
+1. **Boresha Ngazi ya Bei:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -165,7 +165,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Zima Utafutaji wa Semantiki (Maendeleo):**
+2. **Zima Semantic Search (Katika Maendeleo):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -179,7 +179,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Tatizo: Kushindwa Kuunda Faharasa
+### Tatizo: Kushindwa Kuunda Index
 
 **Dalili:**
 ```
@@ -188,7 +188,7 @@ Error: Cannot create index, insufficient permissions
 
 **Suluhisho:**
 
-1. **Thibitisha Funguo za Huduma ya Utafutaji:**
+1. **Thibitisha Vifunguo vya Huduma ya Search:**
 ```bash
 # Pata ufunguo wa msimamizi wa huduma ya utafutaji
 az search admin-key show \
@@ -196,9 +196,9 @@ az search admin-key show \
   --resource-group YOUR_RG
 ```
 
-2. **Kagua Mchoro wa Faharasa:**
+2. **Kagua Muundo wa Index:**
 ```python
-# Thibitisha muundo wa indeksi
+# Thibitisha skema ya indeksi
 from azure.search.documents.indexes import SearchIndexClient
 from azure.search.documents.indexes.models import SearchIndex
 
@@ -212,7 +212,7 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **Tumia Kitambulisho Kinachosimamiwa:**
+3. **Tumia Managed Identity:**
 ```bicep
 // Grant search permissions to managed identity
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -226,7 +226,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Matatizo ya Utekelezaji wa Container Apps
+## Container Apps Deployment Issues
 
 ### Tatizo: Kushindwa Kujenga Kontena
 
@@ -259,7 +259,7 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **Thibitisha Mategemeo:**
+2. **Thibitisha Vitegemezi:**
 ```txt
 # requirements.txt - Pin versions for stability
 fastapi==0.104.1
@@ -283,7 +283,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Tatizo: Kushindwa Kuanza Programu ya Kontena
+### Tatizo: Kushindwa kuanza kwa Container App
 
 **Dalili:**
 ```
@@ -292,7 +292,7 @@ Error: Container failed to start within timeout period
 
 **Suluhisho:**
 
-1. **Ongeza Muda wa Kusubiri Kuanza:**
+1. **Ongeza Muda wa Kuanza (Startup Timeout):**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -327,7 +327,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Boresha Upakiaji wa Mfano:**
 ```python
-# Pakia modeli kwa kuchelewesha ili kupunguza muda wa kuanzisha
+# Pakia modeli kwa upole ili kupunguza muda wa kuanzisha
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -346,7 +346,7 @@ class ModelManager:
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Uanzishaji
+    # Kuanza
     app.state.model_manager = ModelManager()
     yield
     # Kuzima
@@ -355,9 +355,9 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Hitilafu za Uthibitishaji na Idhini
+## Authentication and Permission Errors
 
-### Tatizo: Ruhusa ya Kitambulisho Kinachosimamiwa Imekataliwa
+### Tatizo: Ruhusa za Managed Identity Zikatae
 
 **Dalili:**
 ```
@@ -366,15 +366,15 @@ Error: Authentication failed for Microsoft Foundry Models Service
 
 **Suluhisho:**
 
-1. **Thibitisha Uteuzi wa Nafasi:**
+1. **Thibitisha Uteuzi wa Majukumu (Role Assignments):**
 ```bash
-# Angalia ugawaji wa majukumu wa sasa
+# Angalia uteuzi wa majukumu wa sasa
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **Weka Nafasi Zinazohitajika:**
+2. **Weka Majukumu Yanayohitajika:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -391,9 +391,9 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-3. **Jaribu Uthibitishaji:**
+3. **Jaribu Uthibitisho:**
 ```python
-# Jaribu uthibitishaji wa utambulisho uliosimamiwa
+# Jaribu uthibitishaji wa kitambulisho kinachosimamiwa
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
@@ -406,7 +406,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### Tatizo: Ufikiaji wa Key Vault Umekataliwa
+### Tatizo: Upatikanaji wa Key Vault Ukataliwa
 
 **Dalili:**
 ```
@@ -415,7 +415,7 @@ Error: The user, group or application does not have secrets get permission
 
 **Suluhisho:**
 
-1. **Toa Ruhusa za Key Vault:**
+1. **Toa Ruhusa kwa Key Vault:**
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -434,7 +434,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Tumia RBAC Badala ya Sera za Ufikiaji:**
+2. **Tumia RBAC Badala ya Sera za Upatikanaji:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -447,7 +447,7 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## Kushindwa kwa Utekelezaji wa Mfano
+## Model Deployment Failures
 
 ### Tatizo: Toleo la Mfano Halipatikani
 
@@ -468,7 +468,7 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **Tumia Mbadala wa Mfano:**
+2. **Tumia Mbinu za Kurejesha Mfano (Model Fallbacks):**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
@@ -479,8 +479,8 @@ param primaryModel object = {
 
 @description('Fallback model configuration')
 param fallbackModel object = {
-  name: 'gpt-35-turbo'
-  version: '0125'
+  name: 'gpt-4.1'
+  version: '2024-08-06'
 }
 
 // Try primary model first, fallback if unavailable
@@ -499,7 +499,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 
 3. **Thibitisha Mfano Kabla ya Utekelezaji:**
 ```python
-# Uthibitishaji wa modeli kabla ya kusambazwa
+# Uthibitishaji wa modeli kabla ya kupelekwa
 import httpx
 
 async def validate_model_availability(model_name: str, version: str) -> bool:
@@ -519,20 +519,20 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
         return False
 ```
 
-## Matatizo ya Utendaji na Upanuzi
+## Performance and Scaling Issues
 
-### Tatizo: Mwitikio wa Muda Mrefu
+### Tatizo: Mwitikio wa Ucheleweshaji Mkubwa
 
 **Dalili:**
-- Muda wa mwitikio > 30 sekunde
-- Makosa ya muda umepita
-- Uzoefu mbaya wa mtumiaji
+- Nyakati za mwitikio > sekunde 30
+- Makosa ya muda (timeout)
+- Uzoefu duni wa mtumiaji
 
 **Suluhisho:**
 
-1. **Tekeleza Muda wa Kusubiri kwa Maombi:**
+1. **Tekeleza Muda wa Kusitisha Maombi (Request Timeouts):**
 ```python
-# Sanidi muda wa kusubiri unaofaa
+# Sanidi mipaka ya muda (timeouts) ipasavyo
 import httpx
 
 client = httpx.AsyncClient(
@@ -545,7 +545,7 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **Ongeza Kuhifadhi Mwitikio:**
+2. **Ongeza Kifurushi cha Hifadhi za Mwitikio (Response Caching):**
 ```python
 # Kache ya Redis kwa majibu
 import redis.asyncio as redis
@@ -565,7 +565,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **Sanidi Upanuzi wa Moja kwa Moja:**
+3. **Sanidi Upanuzi wa Otomatiki (Auto-scaling):**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -629,7 +629,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Boresha Matumizi ya Kumbukumbu:**
 ```python
-# Utunzaji wa modeli unaotumia kumbukumbu kwa ufanisi
+# Usimamizi wa modeli wenye ufanisi wa kumbukumbu
 import gc
 import psutil
 
@@ -639,26 +639,26 @@ class MemoryOptimizedAI:
         
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # Angalia matumizi ya kumbukumbu kabla ya kusindika
+        # Angalia matumizi ya kumbukumbu kabla ya kuchakata
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
             gc.collect()  # Lazimisha ukusanyaji wa taka
             
         result = await self._process_ai_request(request)
         
-        # Safisha baada ya kusindika
+        # Safisha baada ya kuchakata
         gc.collect()
         return result
 ```
 
-## Usimamizi wa Gharama na Kiasi
+## Cost and Quota Management
 
-### Tatizo: Gharama za Juu zisizotarajiwa
+### Tatizo: Gharama Za Juu Zisizotarajiwa
 
 **Dalili:**
-- Ankara ya Azure juu zaidi ya ilivyotarajiwa
-- Matumizi ya tokeni yanazidi makadirio
-- Arifa za bajeti ziliwashwa
+- Bili ya Azure iko juu kuliko ilivyotarajiwa
+- Matumizi ya token ziko juu kuliko makadirio
+- Tahadhari za bajeti zimetolewa
 
 **Suluhisho:**
 
@@ -681,7 +681,7 @@ class TokenTracker:
         return total_tokens
 ```
 
-2. **Sanidi Arifa za Gharama:**
+2. **Sanidi Tahadhari za Gharama:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
@@ -708,72 +708,69 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 3. **Boresha Uchaguzi wa Mfano:**
 ```python
-# Uchaguzi wa modeli kwa kuzingatia gharama
-MODEL_COSTS = {
-    'gpt-4.1-mini': 0.00015,  # kwa kila 1K tokeni
-    'gpt-4.1': 0.03,          # kwa kila 1K tokeni
-    'gpt-35-turbo': 0.0015  # kwa kila 1K tokeni
+# Uchaguzi wa modeli unaozingatia gharama
+MODEL_COST_TIERS = {
+  'gpt-4.1-mini': 'low',
+  'gpt-4.1': 'high'
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
     """Select model based on complexity and budget."""
     if complexity == 'simple' or budget_remaining < 10:
         return 'gpt-4.1-mini'
-    elif complexity == 'medium':
-        return 'gpt-35-turbo'
     else:
         return 'gpt-4.1'
 ```
 
-## Vifaa na Mbinu za Urekebishaji
+## Debugging Tools and Techniques
 
 ### Amri za Urekebishaji za AZD
 
 ```bash
-# Washa uandishi wa kumbukumbu wa kina
+# Wezesha uandishi wa kumbukumbu wa kina
 azd up --debug
 
-# Angalia hali ya uenezaji
+# Angalia hali ya usambazaji
 azd show
 
-# Tazama kumbukumbu za programu (inafungua dashibodi ya ufuatiliaji)
+# Angalia kumbukumbu za programu (hufungua dashibodi ya ufuatiliaji)
 azd monitor --logs
 
-# Tazama vipimo kwa wakati halisi
+# Angalia vipimo hai
 azd monitor --live
 
 # Angalia vigezo vya mazingira
 azd env get-values
 ```
 
-### Amri za Upanuzi wa AZD AI kwa Uchunguzi
+### Amri za Extension za AZD AI kwa Uchunguzi
 
-Ikiwa uliboresha wakala kwa kutumia `azd ai agent init`, zana hizi za ziada zinapatikana:
+Ikiwa umeweka mawakala kwa kutumia `azd ai agent init`, zana hizi za ziada zinapatikana:
 
 ```bash
-# Hakikisha ugani wa agents umewekwa
+# Hakikisha nyongeza ya mawakala imewekwa
 azd extension install azure.ai.agents
 
-# Weka upya au sasisha agent kutoka kwenye manifesti
+# Anzisha upya au sasisha mwakala kutoka kwenye manifesti
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# Tumia seva ya MCP kuruhusu zana za AI kuuliza hali ya mradi
+# Tumia seva ya MCP kuruhusu zana za AI kuuliza kuhusu hali ya mradi
 azd mcp start
 
-# Tengeneza faili za miundombinu kwa ajili ya mapitio na ukaguzi
+# Tengeneza mafaili ya miundombinu kwa ajili ya mapitio na ukaguzi
 azd infra generate
 ```
 
-> **Kidokezo:** Tumia `azd infra generate` kuandika IaC kwenye diski ili uweze kuchunguza kwa usahihi rasilimali zilizotolewa. Hii ni muhimu sana wakati wa kutatua masuala ya usanidi wa rasilimali. Angalia [Marejeleo ya AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) kwa maelezo kamili.
+> **Kidokezo:** Tumia `azd infra generate` kuandika IaC kwenye diski ili uweze kuchunguza hasa rasilimali gani ziliwekwa. Hii ni ya thamani kubwa wakati wa kutatua matatizo ya usanidi wa rasilimali. Angalia [Rejea ya AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) kwa maelezo kamili.
 
-### Urekebishaji wa Programu
+### Urekebishaji wa Maombi
 
-1. **Uandishi wa Kumbukumbu Uliopangwa:**
+1. **Uandishi wa Logi uliopangwa (Structured Logging):**
 ```python
 import logging
 import json
 
-# Sanidi uandikaji wa kumbukumbu uliopangwa kwa programu za AI
+# Sanidi uandishi wa kumbukumbu uliopangwa kwa programu za AI
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -792,14 +789,14 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **Miisho ya Ukaguzi wa Afya:**
+2. **Vituo vya Ukaguzi wa Afya (Health Check Endpoints):**
 ```python
 @app.get("/debug/health")
 async def detailed_health_check():
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # Angalia uunganisho wa OpenAI
+    # Angalia muunganisho wa OpenAI
     try:
         client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
         await client.models.list()
@@ -807,7 +804,7 @@ async def detailed_health_check():
     except Exception as e:
         checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
     
-    # Angalia huduma ya utafutaji
+    # Angalia huduma ya Utafutaji
     try:
         search_client = SearchIndexClient(
             endpoint=AZURE_SEARCH_ENDPOINT,
@@ -821,7 +818,7 @@ async def detailed_health_check():
     return checks
 ```
 
-3. **Ufuatiliaji wa Utendaji:**
+3. **Ufuatiliaji wa Utendaji (Performance Monitoring):**
 ```python
 import time
 from functools import wraps
@@ -852,43 +849,43 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## Msimbo wa Makosa ya Kawaida na Suluhisho
+## Msimbo wa Makosa wa Kawaida na Suluhisho
 
 | Msimbo wa Hitilafu | Maelezo | Suluhisho |
 |------------|-------------|----------|
-| 401 | Hakuruhusiwa | Kagua funguo za API na usanidi wa kitambulisho kinachosimamiwa |
-| 403 | Imekatazwa | Thibitisha uteuzi wa nafasi za RBAC |
-| 429 | Kizuizi cha Mwitikio | Tekeleza mantiki ya kurudia kwa kuchelewesha kwa mfululizo (exponential backoff) |
-| 500 | Hitilafu ya Seva ya Ndani | Kagua hali ya utekelezaji wa mfano na kumbukumbu za logi |
-| 503 | Huduma Haitapatikana | Thibitisha afya ya huduma na upatikanaji wa kanda |
+| 401 | Haikuruhusiwa | Kagua funguo za API na usanidi wa managed identity |
+| 403 | Umezuiwa | Thibitisha uteuzi wa majukumu wa RBAC |
+| 429 | Kuwekewa kikomo cha kiwango | Tekeleza mantiki ya kurudia na ucheleweshaji wa kuongezeka (exponential backoff) |
+| 500 | Hitilafu ya Mtoaji Ndani | Kagua hali ya utekelezaji wa modeli na kumbukumbu za logi |
+| 503 | Huduma Haipatikani | Thibitisha afya ya huduma na upatikaji wa kikanda |
 
-## Hatua Zijazo
+## Hatua Zifuatazo
 
-1. **Kagua [Mwongozo wa Utekelezaji wa Mfano wa AI](../chapter-02-ai-development/ai-model-deployment.md)** kwa mbinu bora za utekelezaji
-2. **Kamilisha [Mbinu za AI za Uzalishaji](../chapter-08-production/production-ai-practices.md)** kwa suluhisho zenye utayari wa biashara
-3. **Jiunge na [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** kwa msaada wa jumuiya
-4. **Wasilisha matatizo** kwenye [gahasha ya AZD GitHub](https://github.com/Azure/azure-dev) kwa matatizo maalumu ya AZD
+1. **Pitisha [Mwongozo wa Utekelezaji wa Mfano wa AI](../chapter-02-ai-development/ai-model-deployment.md)** kwa mbinu bora za utekelezaji
+2. **Kamilisha [Mifano ya AI kwa Uzalishaji](../chapter-08-production/production-ai-practices.md)** kwa suluhisho zinazostahili biashara
+3. **Jiunge na [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** kwa msaada wa jamii
+4. **Wasilisha matatizo** kwa [repo ya AZD kwenye GitHub](https://github.com/Azure/azure-dev) kwa matatizo maalumu ya AZD
 
 ## Rasilimali
 
-- [Utatuzi wa Matatizo ya Huduma ya Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [Utatuzi wa Matatizo wa Huduma za Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
 - [Utatuzi wa Matatizo wa Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 - [Utatuzi wa Matatizo wa Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
-- [**Ujuzi wa Wakaguzi wa Azure (Azure Diagnostics Agent Skill)**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Sakinisha ujuzi wa utatuzi wa Azure katika mhariri wako: `npx skills add microsoft/github-copilot-for-azure`
+- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Sakinisha ujuzi wa utatuzi wa Azure kwenye mhariri wako: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Uvinjari wa Sura:**
-- **📚 Nyumbani kwa Kozi**: [AZD For Beginners](../../README.md)
-- **📖 Sura ya Sasa**: Sura 7 - Utatuzi wa Matatizo & Urekebishaji
-- **⬅️ Kati**: [Mwongozo wa Urekebishaji](debugging.md)
-- **➡️ Sura Ifuatayo**: [Sura 8: Mifumo ya Uzalishaji & Biashara](../chapter-08-production/production-ai-practices.md)
-- **🤖 Inayohusiana**: [Sura 2: Maendeleo ya Kwanza ya AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **📖 Marejeleo**: [Utatuzi wa Matatizo wa Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Sura 7 - Utatuzi wa Matatizo na Urekebishaji
+- **⬅️ Previous**: [Mwongozo wa Urekebishaji](debugging.md)
+- **➡️ Next Chapter**: [Sura 8: Mifumo ya Uzalishaji na Biashara](../chapter-08-production/production-ai-practices.md)
+- **🤖 Related**: [Sura 2: Maendeleo ya AI-Kwanza](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Reference**: [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Angalizo**:
-Nyaraka hii imetafsiriwa kwa kutumia huduma ya utafsiri wa AI [Co-op Translator](https://github.com/Azure/co-op-translator). Wakati tunajitahidi kuwa sahihi, tafadhali fahamu kwamba tafsiri zilizofanywa kwa mashine zinaweza kuwa na makosa au kasoro za usahihi. Nyaraka ya asili kwa lugha yake ya mama inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa za muhimu, tafsiri ya kitaalamu iliyofanywa na binadamu inapendekezwa. Hatuwajibiki kwa uelewa mbaya au tafsiri potofu zinazoibuka kutokana na matumizi ya tafsiri hii.
+**Disclaimer**:
+Hati hii imetafsiriwa kwa kutumia huduma ya utafsiri wa AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upotoshaji. Waraka wa asili katika lugha yake ya asili unapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, inashauriwa kutumia utafsiri wa kitaalamu uliofanywa na binadamu. Hatuwezi kuwajibishwa kwa kutokuelewana au tafsiri mbaya zinazotokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

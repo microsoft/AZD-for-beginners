@@ -2,66 +2,169 @@
 
 ## Introduktion
 
-Denna ändringslogg dokumenterar alla betydande ändringar, uppdateringar och förbättringar i AZD For Beginners-repositoriet. Vi följer principer för semantisk versionering och underhåller denna logg för att hjälpa användare att förstå vad som har ändrats mellan versioner.
+Denna ändringslogg dokumenterar alla betydande ändringar, uppdateringar och förbättringar i AZD For Beginners-förvaret. Vi följer principer för semantisk versionering och upprätthåller denna logg för att hjälpa användare att förstå vad som har ändrats mellan versioner.
+
+## Inlärningsmål
+
+Genom att gå igenom denna ändringslogg kommer du att:
+- Hålla dig informerad om nya funktioner och tillagda innehåll
+- Förstå förbättringar som gjorts i befintlig dokumentation
+- Följa buggfixar och korrigeringar för att säkerställa noggrannhet
+- Följa utvecklingen av läromaterialet över tid
 
 ## Lärandemål
 
-Genom att granska denna ändringslogg kommer du att:
-- Hålla dig informerad om nya funktioner och innehållstillägg
-- Förstå förbättringar som gjorts i befintlig dokumentation
-- Följa buggfixar och korrigeringar för att säkerställa noggrannhet
-- Följa utvecklingen av lärmaterialet över tid
-
-## Inlärningsresultat
-
-Efter att ha granskat changelog-poster kommer du att kunna:
+Efter att ha granskat ändringsloggsposter kommer du att kunna:
 - Identifiera nytt innehåll och resurser som finns tillgängliga för lärande
 - Förstå vilka avsnitt som har uppdaterats eller förbättrats
-- Planera din inlärningsväg baserat på det mest aktuella materialet
+- Planera din lärväg baserat på det mest aktuella materialet
 - Bidra med feedback och förslag för framtida förbättringar
 
 ## Versionshistorik
 
-### [v3.18.0] - 2026-03-16
+### [v3.19.1] - 2026-03-27
 
-#### AZD AI CLI-kommandon, innehållsvalidering och mallutvidgning
-**Denna version lägger till `azd ai`, `azd extension` och `azd mcp` kommandoomfång i alla AI-relaterade kapitel, åtgärdar brutna länkar och föråldrad kod i agents.md, uppdaterar snabbreferensen och renoverar avsnittet Exempelmallar med validerade beskrivningar och nya Azure AI AZD-mallar.**
+#### Beginner Onboarding Clarification, Setup Validation & Final AZD Command Cleanup
+**Denna version följer upp AZD 1.23-valideringsgranskningen med en dokumentationsgenomgång fokuserad på nybörjare: den förtydligar AZD-först-autentiseringsvägledning, lägger till lokala setup-valideringsskript, verifierar nyckelkommandon mot den faktiska AZD-CLI:n och tar bort de sista föråldrade engelskspråkiga kommando-referenserna utanför ändringsloggen.**
 
-#### Tillagt
-- **🤖 Täckning för AZD AI CLI** i 7 filer (tidigare endast i Kapitel 8):
-  - `docs/chapter-01-foundation/azd-basics.md` — Ny sektion "Tillägg och AI-kommandon" som introducerar `azd extension`, `azd ai agent init` och `azd mcp`
-  - `docs/chapter-02-ai-development/agents.md` — Alternativ 4: `azd ai agent init` med jämförelsetabell (mall vs manifest-ansats)
-  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — Underrubrikerna "AZD-tillägg för Foundry" och "Agent-först-distribution"
-  - `docs/chapter-05-multi-agent/README.md` — Snabbstart visar nu både mall- och manifestbaserade distributionsvägar
-  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — Distribueringsavsnittet inkluderar nu alternativet `azd ai agent init`
-  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — Underrubrik "AZD AI-tilläggskommandon för diagnostik"
-  - `resources/cheat-sheet.md` — Ny sektion "AI- och tilläggskommandon" med `azd extension`, `azd ai agent init`, `azd mcp` och `azd infra generate`
-- **📦 Nya AZD AI-exempelmallar** i `microsoft-foundry-integration.md`:
-  - **azure-search-openai-demo-csharp** — .NET RAG-chatt med Blazor WebAssembly, Semantic Kernel och stöd för röstchatt
-  - **azure-search-openai-demo-java** — Java RAG-chatt som använder Langchain4J med ACA/AKS-distributionsalternativ
-  - **contoso-creative-writer** — Multi-agent kreativ skrivapplikation som använder Azure AI Agent Service, Bing Grounding och Prompty
-  - **serverless-chat-langchainjs** — Serverless RAG som använder Azure Functions + LangChain.js + Cosmos DB med lokalt utvecklingsstöd för Ollama
-  - **chat-with-your-data-solution-accelerator** — Enterprise RAG-accelerator med adminportal, Teams-integration och PostgreSQL/Cosmos DB-alternativ
-  - **azure-ai-travel-agents** — Multi-agent MCP-orkestreringsreferensapp med servrar i .NET, Python, Java och TypeScript
-  - **azd-ai-starter** — Minimal Azure AI-infrastruktur Bicep-startmall
-  - **🔗 Länk till Awesome AZD AI-galleri** — Referens till [awesome-azd AI-galleri](https://azure.github.io/awesome-azd/?tags=ai) (80+ mallar)
+#### Lagt till
+- **🧪 Valideringsskript för nybörjare** med `validate-setup.ps1` och `validate-setup.sh` så att elever kan bekräfta att nödvändiga verktyg finns innan kapitel 1 börjar
+- **✅ Inledande valideringssteg för setup** i root-README och Kapitel 1 README så att saknade förutsättningar fångas innan `azd up`
+
+#### Ändrat
+- **🔐 Autentiseringsvägledning för nybörjare** behandlar nu konsekvent `azd auth login` som den primära vägen för AZD-arbetsflöden, med `az login` utpekat som valfritt om Azure CLI-kommandon används direkt
+- **📚 Onboardingflödet i Kapitel 1** pekar nu användare att validera sin lokala setup innan installation, autentisering och första driftsättningssteg
+- **🛠️ Validator-meddelanden** separerar nu tydligt blockerande krav från valfria Azure CLI-varningar för den AZD-endast nybörjarvägen
+- **📖 Konfigurations-, felsöknings- och exempel-dokument** skiljer nu mellan krävd AZD-autentisering och valfri Azure CLI-inloggning där båda tidigare presenterades utan kontext
 
 #### Åtgärdat
-- **🔗 agents.md-navigering**: Föregående/Nästa-länkar matchar nu Kapitel 2 README-lektionsordning (Microsoft Foundry Integration → Agents → AI Model Deployment)
-- **🔗 agents.md brutna länkar**: `production-ai-practices.md` korrigerades till `../chapter-08-production/production-ai-practices.md` (3 förekomster)
+- **📋 Återstående engelskspråkiga kommando-referenser** uppdaterade till nuvarande AZD-former, inklusive `azd config show` i fusklappen och `azd monitor --overview` där vägledning om Azure Portal-översikt var avsedd
+- **🧭 Nybörjarpåståenden i Kapitel 1** mildrades för att undvika att lova garanterat felfritt beteende eller rollback över alla mallar och Azure-resurser
+- **🔎 Live-CLI-validering** bekräftade nuvarande stöd för `azd env get-values`, `azd template list`, `azd extension list --installed`, `azd copilot consent list`, `azd mcp start`, `azd provision --preview`, `azd monitor --logs`, och `azd down --force --purge`
+
+#### Uppdaterade filer
+- `README.md`
+- `changelog.md`
+- `docs/chapter-01-foundation/README.md`
+- `docs/chapter-01-foundation/azd-basics.md`
+- `docs/chapter-01-foundation/installation.md`
+- `docs/chapter-01-foundation/first-project.md`
+- `docs/chapter-03-configuration/README.md`
+- `docs/chapter-07-troubleshooting/README.md`
+- `examples/container-app/README.md`
+- `examples/database-app/README.md`
+- `resources/cheat-sheet.md`
+- `validate-setup.ps1`
+- `validate-setup.sh`
+
+---
+
+### [v3.19.0] - 2026-03-26
+
+#### AZD 1.23.12 Validation, Workshop Environment Expansion & AI Model Refresh
+**Denna version utför en dokumentationsvalideringsgenomgång mot `azd` `1.23.12`, uppdaterar föråldrade AZD-kommandoexempel, uppdaterar AI-modellvägledningen till nuvarande standarder och breddar workshop-instruktionerna bortom GitHub Codespaces för att även stödja dev containers och lokala kloner.**
+
+#### Lagt till
+- **✅ Valideringsanteckningar över kärnkapitel och workshop-dokument** för att göra den testade AZD-baslinjen tydlig för elever som använder nyare eller äldre CLI-byggnader
+- **⏱️ Vägledning om driftsättningstid** för långkörande AI-appdriftsättningar med `azd deploy --timeout 1800`
+- **🔎 Steg för inspektion av extension** med `azd extension show azure.ai.agents` i AI-arbetsflödesdokument
+- **🌐 Bredare vägledning för workshop-miljöer** som täcker GitHub Codespaces, dev containers och lokala kloner med MkDocs
+
+#### Ändrat
+- **📚 Kapitelintro-READMEs** noterar nu konsekvent validering mot `azd 1.23.12` över foundation, configuration, infrastructure, multi-agent, pre-deployment, troubleshooting och production-sektioner
+- **🛠️ AZD-kommando-referenser** uppdaterade till nuvarande former över dokumenten:
+  - `azd config list` → `azd config show`
+  - `azd env show` → `azd env list` eller `azd env get-value(s)` beroende på kontext
+  - `azd auth whoami` → `azd auth status`
+  - `azd monitor` → `azd monitor --overview` där Application Insights-översikt är avsedd
+- **🧪 Exempel för provision-preview** förenklade till nu understödda användningar såsom `azd provision --preview` och `azd provision --preview -e production`
+- **🧭 Workshopflöde** uppdaterat så att deltagare kan slutföra labbarna i Codespaces, en dev container eller en lokal klon istället för att anta Codespaces-endast körning
+- **🔐 Autentiseringsvägledning** föredrar nu `azd auth login` för AZD-arbetsflöden, med `az login` positionerat som valfritt när Azure CLI-kommandon används direkt
+
+#### Åtgärdat
+- **🪟 Windows-installationskommandon** normaliserades till aktuell `winget`-paketcasing i installationsguiden
+- **🐧 Linux-installationsvägledning** korrigerades för att undvika ej stödjade distro-specifika `azd` paketinstruktioner och pekar istället på release-artifakter där det är lämpligt
+- **📦 AI-modexempel** uppdaterades från äldre standarder som `gpt-35-turbo` och `text-embedding-ada-002` till nuvarande exempel såsom `gpt-4.1-mini`, `gpt-4.1`, och `text-embedding-3-large`
+- **📋 Utdrag för driftsättning och diagnostik** korrigerades för att använda nuvarande miljö- och statuskommandon i loggar, skript och felsökningssteg
+- **⚙️ GitHub Actions-vägledning** uppdaterades från `Azure/setup-azd@v1.0.0` till `Azure/setup-azd@v2`
+- **🤖 MCP/Copilot-samtyckesvägledning** uppdaterades från `azd mcp consent` till `azd copilot consent list`
+
+#### Förbättrat
+- **🧠 AI-kapitelvägledning** förklarar nu bättre preview-känsligt `azd ai`-beteende, tenant-specifik inloggning, nuvarande extension-användning och uppdaterade rekommendationer för modellutplacering
+- **🧪 Workshop-instruktioner** använder nu mer realistiska versionsexempel och tydligare språk för miljösetup i praktiska labbar
+- **📈 Produktions- och felsökningsdokument** stämmer nu bättre överens med aktuell övervakning, fallback-modell och kostnadsnivåexempel
+
+#### Uppdaterade filer
+- `docs/chapter-01-foundation/README.md`
+- `docs/chapter-01-foundation/azd-basics.md`
+- `docs/chapter-01-foundation/installation.md`
+- `docs/chapter-02-ai-development/README.md`
+- `docs/chapter-02-ai-development/agents.md`
+- `docs/chapter-02-ai-development/ai-model-deployment.md`
+- `docs/chapter-02-ai-development/ai-workshop-lab.md`
+- `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
+- `docs/chapter-03-configuration/README.md`
+- `docs/chapter-03-configuration/configuration.md`
+- `docs/chapter-04-infrastructure/README.md`
+- `docs/chapter-04-infrastructure/deployment-guide.md`
+- `docs/chapter-04-infrastructure/provisioning.md`
+- `docs/chapter-05-multi-agent/README.md`
+- `docs/chapter-06-pre-deployment/README.md`
+- `docs/chapter-06-pre-deployment/preflight-checks.md`
+- `docs/chapter-07-troubleshooting/README.md`
+- `docs/chapter-07-troubleshooting/ai-troubleshooting.md`
+- `docs/chapter-07-troubleshooting/common-issues.md`
+- `docs/chapter-08-production/README.md`
+- `docs/chapter-08-production/production-ai-practices.md`
+- `workshop/README.md`
+- `workshop/docs/index.md`
+- `workshop/docs/instructions/1-Select-AI-Template.md`
+- `workshop/docs/instructions/2-Validate-AI-Template.md`
+- `workshop/docs/instructions/3-Deconstruct-AI-Template.md`
+- `workshop/docs/instructions/5-Customize-AI-Template.md`
+
+---
+
+### [v3.18.0] - 2026-03-16
+
+#### AZD AI CLI Commands, Content Validation & Template Expansion
+**Denna version lägger till `azd ai`, `azd extension` och `azd mcp` kommandotäckning över alla AI-relaterade kapitel, åtgärdar brutna länkar och föråldrad kod i agents.md, uppdaterar fusklappen och gör om avsnittet Exempelmallar med validerade beskrivningar och nya Azure AI AZD-mallar.**
+
+#### Lagt till
+- **🤖 Täckning för AZD AI CLI** över 7 filer (tidigare endast i Kapitel 8):
+  - `docs/chapter-01-foundation/azd-basics.md` — Ny sektion "Extensions and AI Commands" som introducerar `azd extension`, `azd ai agent init`, och `azd mcp`
+  - `docs/chapter-02-ai-development/agents.md` — Alternativ 4: `azd ai agent init` med jämförelsetabell (mall vs manifest-ansats)
+  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — Undersektionerna "AZD Extensions for Foundry" och "Agent-First Deployment"
+  - `docs/chapter-05-multi-agent/README.md` — Quick Start visar nu både mall- och manifest-baserade driftsättningsvägar
+  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — Deploy-sektionen inkluderar nu `azd ai agent init`-alternativ
+  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — Undersektionen "AZD AI Extension Commands for Diagnostics"
+  - `resources/cheat-sheet.md` — Ny sektion "AI & Extensions Commands" med `azd extension`, `azd ai agent init`, `azd mcp`, och `azd infra generate`
+- **📦 Nya AZD AI-exempelmallar** i `microsoft-foundry-integration.md`:
+  - **azure-search-openai-demo-csharp** — .NET RAG-chatt med Blazor WebAssembly, Semantic Kernel och röstchattstöd
+  - **azure-search-openai-demo-java** — Java RAG-chatt med Langchain4J med ACA/AKS driftsättningsalternativ
+  - **contoso-creative-writer** — Multi-agent kreativ skrivapp som använder Azure AI Agent Service, Bing Grounding och Prompty
+  - **serverless-chat-langchainjs** — Serverless RAG med Azure Functions + LangChain.js + Cosmos DB med Ollama-stöd för lokal utveckling
+  - **chat-with-your-data-solution-accelerator** — Enterprise RAG-accelerator med administrationsportal, Teams-integration och PostgreSQL/Cosmos DB-alternativ
+  - **azure-ai-travel-agents** — Multi-agent MCP-orkestreringsreferensapp med servrar i .NET, Python, Java, och TypeScript
+  - **azd-ai-starter** — Minimal Azure AI-infrastruktur Bicep-startmall
+  - **🔗 Awesome AZD AI Gallery link** — Referens till [awesome-azd AI-galleri](https://azure.github.io/awesome-azd/?tags=ai) (80+ mallar)
+
+#### Åtgärdat
+- **🔗 agents.md-navigering**: Previous/Next-länkar matchar nu Kapitel 2 README-lektionsordning (Microsoft Foundry Integration → Agents → AI Model Deployment)
+- **🔗 agents.md brutna länkar**: `production-ai-practices.md` korrigerad till `../chapter-08-production/production-ai-practices.md` (3 förekomster)
 - **📦 agents.md föråldrad kod**: Ersatte `opencensus` med `azure-monitor-opentelemetry` + OpenTelemetry SDK
 - **🐛 agents.md ogiltigt API**: Flyttade `max_tokens` från `create_agent()` till `create_run()` som `max_completion_tokens`
-- **🔢 agents.md tokenräkning**: Ersatte grov uppskattning `len//4` med `tiktoken.encoding_for_model()`
+- **🔢 agents.md token-räkning**: Ersatte grov `len//4`-uppskattning med `tiktoken.encoding_for_model()`
 - **azure-search-openai-demo**: Korrigerade tjänster från "Cognitive Search + App Service" till "Azure AI Search + Azure Container Apps" (standardvärd ändrades okt 2024)
-- **contoso-chat**: Uppdaterad beskrivning för att referera till Azure AI Foundry + Prompty, vilket matchar repots faktiska titel och teknikstack
+- **contoso-chat**: Uppdaterade beskrivningen för att referera till Azure AI Foundry + Prompty, i linje med repots faktiska titel och teknikstack
 
 #### Borttaget
 - **ai-document-processing**: Tog bort icke-fungerande mallreferens (repo inte offentligt tillgängligt som en AZD-mall)
 
 #### Förbättrat
-- **📝 agents.md övningar**: Övning 1 visar nu förväntad utdata och `azd monitor`-steg; Övning 2 inkluderar full registreringskod för `FunctionTool`; Övning 3 ersätter vag vägledning med konkreta `prepdocs.py`-kommandon
-- **📚 agents.md resurser**: Uppdaterade dokumentationslänkar till aktuella Azure AI Agent Service-dokument och snabbstart
-- **📋 agents.md Nästa steg-tabell**: Lade till AI Workshop Lab-länk för komplett kapiteltäckning
+- **📝 agents.md övningar**: Övning 1 visar nu förväntad utdata och steget `azd monitor`; Övning 2 innehåller fullständig `FunctionTool`-registreringskod; Övning 3 ersätter vag vägledning med konkreta `prepdocs.py`-kommandon
+- **📚 agents.md resurser**: Uppdaterade dokumentlänkar till aktuella Azure AI Agent Service-dokument och snabbstart
+- **📋 agents.md Nästa steg-tabell**: Lade till länk till AI Workshop Lab för fullständig kapiteltäckning
 
 #### Uppdaterade filer
 - `docs/chapter-01-foundation/azd-basics.md`
@@ -77,40 +180,40 @@ Efter att ha granskat changelog-poster kommer du att kunna:
 ### [v3.17.0] - 2026-02-05
 
 #### Förbättring av kursnavigering
-**Denna version förbättrar README.md kapitelnavigeringen med ett förbättrat tabellformat.**
+**Denna version förbättrar kapitelnavigeringen i README.md med ett förbättrat tabellformat.**
 
 #### Ändrat
-- **Kurskarta-tabell**: Förbättrad med direkta lektionslänkar, tidsuppskattningar och komplexitetsbetyg
+- **Kurskartstabell**: Förbättrad med direkta lektionslänkar, tidsuppskattningar och komplexitetsbetyg
 - **Mappstädning**: Tog bort redundanta gamla mappar (deployment/, getting-started/, pre-deployment/, troubleshooting/)
-- **Länkvalidering**: Alla 21+ interna länkar i Kurskarta-tabellen verifierade
+- **Länkvalidering**: Alla 21+ interna länkar i Kurskartstabellen verifierade
 
 ### [v3.16.0] - 2026-02-05
 
-#### Uppdateringar av produktnamn
-**Denna version uppdaterar produktreferenser till aktuell Microsoft-varumärkning.**
+#### Produktnamnsuppdateringar
+**Denna version uppdaterar produktreferenser till nuvarande Microsoft-varumärke.**
 
 #### Ändrat
 - **Microsoft Foundry → Microsoft Foundry**: Alla referenser uppdaterade i icke-översättningsfiler
-- **Azure AI Agent Service → Foundry Agents**: Tjänstens namn uppdaterat för att återspegla aktuell varumärkesprofil
+- **Azure AI Agent Service → Foundry Agents**: Servicenamn uppdaterat för att återspegla aktuell varumärkesprofil
 
 #### Uppdaterade filer
-- `README.md` - Huvudsaklig kurslandningssida
-- `changelog.md` - Versionshistorik
-- `course-outline.md` - Kursstruktur
-- `docs/chapter-02-ai-development/agents.md` - AI-agenter guide
-- `examples/README.md` - Exempeldokumentation
-- `workshop/README.md` - Workshoplandningssida
-- `workshop/docs/index.md` - Workshopindex
-- `workshop/docs/instructions/*.md` - Alla workshop-instruktionsfiler
+- `README.md` - Main course landing page
+- `changelog.md` - Version history
+- `course-outline.md` - Course structure
+- `docs/chapter-02-ai-development/agents.md` - AI agents guide
+- `examples/README.md` - Examples documentation
+- `workshop/README.md` - Workshop landing page
+- `workshop/docs/index.md` - Workshop index
+- `workshop/docs/instructions/*.md` - All workshop instruction files
 
 ---
 
 ### [v3.15.0] - 2026-02-05
 
-#### Större omstrukturering av repot: Kapitelbaserade mappnamn
+#### Större omstrukturering av repo: Kapitelbaserade mappnamn
 **Denna version omstrukturerar dokumentationen till dedikerade kapitelmappar för tydligare navigering.**
 
-#### Mappnamnsändringar
+#### Mappändringar
 Gamla mappar har ersatts med kapitelnumrerade mappar:
 - `docs/getting-started/` → `docs/chapter-01-foundation/` + `docs/chapter-03-configuration/`
 - `docs/microsoft-foundry/` → `docs/chapter-02-ai-development/` + `docs/chapter-08-production/`
@@ -119,7 +222,7 @@ Gamla mappar har ersatts med kapitelnumrerade mappar:
 - `docs/troubleshooting/` → `docs/chapter-07-troubleshooting/`
 - Added new: `docs/chapter-05-multi-agent/`
 
-#### Filmigrationer
+#### Fillflyttningar
 | Fil | Från | Till |
 |------|------|---|
 | azd-basics.md | getting-started/ | chapter-01-foundation/ |
@@ -139,13 +242,13 @@ Gamla mappar har ersatts med kapitelnumrerade mappar:
 
 #### Tillagt
 - **📚 Kapitel-README-filer**: Skapade README.md i varje kapitelmapp med:
-  - Lärandemål och tidsåtgång
-  - Lektionenstabell med beskrivningar
+  - Lärandemål och varaktighet
+  - Lektionstabell med beskrivningar
   - Snabbstartskommandon
-  - Navigation till andra kapitel
+  - Navigering till andra kapitel
 
 #### Ändrat
-- **🔗 Uppdaterade alla interna länkar**: 78+ sökvägar uppdaterade i hela dokumentationen
+- **🔗 Uppdaterade alla interna länkar**: 78+ sökvägar uppdaterade i alla dokumentfiler
 - **🗺️ Huvud-README.md**: Uppdaterade Kurskarta med ny kapitelstruktur
 - **📝 examples/README.md**: Uppdaterade korsreferenser till kapitelmappar
 
@@ -157,7 +260,7 @@ Gamla mappar har ersatts med kapitelnumrerade mappar:
 ### [v3.14.0] - 2026-02-05
 
 #### Repositorieomstrukturering: Kapitelnavigering
-**Denna version lade till kapitelnavigerings-README-filer (överskuggad av v3.15.0).**
+**Denna version lade till README-filer för kapitelnavigering (ersattes av v3.15.0).**
 
 ---
 
@@ -168,11 +271,11 @@ Gamla mappar har ersatts med kapitelnumrerade mappar:
 
 #### Tillagt
 - **🤖 docs/microsoft-foundry/agents.md**: Komplett guide som täcker:
-  - Vad AI-agenter är och hur de skiljer sig från chatbots
-  - Tre snabbstartsmallar för agenter (Foundry Agents, Prompty, RAG)
+  - Vad AI-agenter är och hur de skiljer sig från chattbotar
+  - Tre snabbstartsagentmallar (Foundry Agents, Prompty, RAG)
   - Agentarkitekturmönster (enkel agent, RAG, multi-agent)
   - Konfiguration och anpassning av verktyg
-  - Övervakning och metricsspårning
+  - Övervakning och mätning
   - Kostnadsöverväganden och optimering
   - Vanliga felsökningsscenarier
   - Tre praktiska övningar med framgångskriterier
@@ -181,27 +284,27 @@ Gamla mappar har ersatts med kapitelnumrerade mappar:
 - **Introduktion**: Agentkoncept för nybörjare
 - **Snabbstart**: Distribuera agenter med `azd init --template get-started-with-ai-agents`
 - **Arkitekturmönster**: Visuella diagram av agentmönster
-- **Konfiguration**: Verktygsuppsättning och miljövariabler
+- **Konfiguration**: Verktygsinställning och miljövariabler
 - **Övervakning**: Integration med Application Insights
-- **Övningar**: Progressiva praktiska läraktiviteter (20–45 minuter vardera)
+- **Övningar**: Progressivt praktiskt lärande (20–45 minuter vardera)
 
 ---
 
 ### [v3.12.0] - 2026-02-05
 
-#### Uppdatering av DevContainer-miljö
+#### Uppdatering av DevContainer-miljön
 **Denna version uppdaterar utvecklingscontainerkonfigurationen med moderna verktyg och bättre standardinställningar för AZD-inlärningsupplevelsen.**
 
 #### Ändrat
-- **🐳 Basbild**: Uppdaterad från `python:3.12-bullseye` till `python:3.12-bookworm` (senaste Debian stable)
-- **📛 Container-namn**: Omdöpt från "Python 3" till "AZD for Beginners" för tydlighet
+- **🐳 Basimage**: Uppdaterad från `python:3.12-bullseye` till `python:3.12-bookworm` (senaste Debian-stabila)
+- **📛 Containernamn**: Omdöpt från "Python 3" till "AZD for Beginners" för tydlighet
 
 #### Tillagt
 - **🔧 Nya Dev Container-funktioner**:
   - `azure-cli` med Bicep-stöd aktiverat
   - `node:20` (LTS-version för AZD-mallar)
   - `github-cli` för mallhantering
-  - `docker-in-docker` för distributioner av container-appar
+  - `docker-in-docker` för distribution av containerappar
 
 - **🔌 Portvidarebefordran**: Förkonfigurerade portar för vanlig utveckling:
   - 8000 (MkDocs-förhandsvisning)
@@ -211,26 +314,26 @@ Gamla mappar har ersatts med kapitelnumrerade mappar:
 
 - **🧩 Nya VS Code-tillägg**:
   - `ms-python.vscode-pylance` - Förbättrad Python IntelliSense
-  - `ms-azuretools.vscode-azurefunctions` - Stöd för Azure Functions
-  - `ms-azuretools.vscode-docker` - Stöd för Docker
-  - `ms-azuretools.vscode-bicep` - Stöd för Bicep-språket
+  - `ms-azuretools.vscode-azurefunctions` - Azure Functions-stöd
+  - `ms-azuretools.vscode-docker` - Docker-stöd
+  - `ms-azuretools.vscode-bicep` - Bicep-språkstöd
   - `ms-azure-devtools.azure-resource-groups` - Azure-resurshantering
-  - `yzhang.markdown-all-in-one` - Redigering av Markdown
+  - `yzhang.markdown-all-in-one` - Markdown-redigering
   - `DavidAnson.vscode-markdownlint` - Markdown-lintning
-  - `bierner.markdown-mermaid` - Stöd för Mermaid-diagram
-  - `redhat.vscode-yaml` - Stöd för YAML (för azure.yaml)
+  - `bierner.markdown-mermaid` - Mermaid-diagramstöd
+  - `redhat.vscode-yaml` - YAML-stöd (för azure.yaml)
   - `eamodio.gitlens` - Git-visualisering
   - `mhutchie.git-graph` - Git-historik
 
-- **⚙️ VS Code-inställningar**: Lade till standardinställningar för Python-tolk, formatering vid sparande och trimning av blanksteg
+- **⚙️ VS Code-inställningar**: Lagt till standardinställningar för Python-tolk, formatera vid sparande och borttagning av blanksteg
 
-- **📦 Uppdaterad requirements-dev.txt**:
-  - Lade till MkDocs minify-plugin
-  - Lade till pre-commit för kodkvalitet
-  - Lade till Azure SDK-paket (azure-identity, azure-mgmt-resource)
+- **📦 Uppdaterade requirements-dev.txt**:
+  - Lagt till MkDocs minify-plugin
+  - Lagt till pre-commit för kodkvalitet
+  - Lagt till Azure SDK-paket (azure-identity, azure-mgmt-resource)
 
-#### Fixed
-- **Post-Create-kommando**: Verifierar nu AZD och Azure CLI-installation vid containerstart
+#### Fixat
+- **Post-create-kommando**: Verifierar nu AZD och Azure CLI-installation vid containerstart
 
 ---
 
@@ -239,324 +342,324 @@ Gamla mappar har ersatts med kapitelnumrerade mappar:
 #### README-översyn för nybörjare
 **Denna version förbättrar README.md avsevärt för att vara mer tillgänglig för nybörjare och lägger till viktiga resurser för AI-utvecklare.**
 
-#### Added
-- **🆚 Azure CLI vs AZD-jämförelse**: Tydlig förklaring av när man ska använda varje verktyg med praktiska exempel
-- **🌟 Fantastiska AZD-länkar**: Direkta länkar till communityns mallgalleri och resurser för bidrag:
-  - [Fantastiskt AZD-galleri](https://azure.github.io/awesome-azd/) - 200+ färdiga mallar för distribution
-  - [Skicka in en mall](https://github.com/Azure/awesome-azd/issues) - Community-bidrag
-- **🎯 Snabbstartsguide**: Förenklad 3-stegs introduktion (Installera → Logga in → Distribuera)
-- **📊 Erfarenhetsbaserad navigeringstabell**: Tydlig vägledning om var man ska börja baserat på utvecklarens erfarenhet
+#### Tillagt
+- **🆚 Azure CLI vs AZD-jämförelse**: Klar förklaring om när man ska använda varje verktyg med praktiska exempel
+- **🌟 Fantastiska AZD-länkar**: Direkta länkar till communitymallsgalleri och bidragsresurser:
+  - [Fantastiskt AZD-galleri](https://azure.github.io/awesome-azd/) - 200+ färdiga att distribuera mallar
+  - [Skicka in en mall](https://github.com/Azure/awesome-azd/issues) - Communitybidrag
+- **🎯 Snabbstartsguide**: Förenklad 3-stegs introduktionssektion (Installera → Logga in → Distribuera)
+- **📊 Navigeringstabell baserad på erfarenhet**: Tydlig vägledning om var man ska börja baserat på utvecklarens erfarenhet
 
-#### Changed
-- **README-struktur**: Omdisponerad för progressiv avslöjning - viktig information först
-- **Introduktionsavsnitt**: Omskrivet för att förklara "The Magic of `azd up`" för helt nya användare
-- **Borttaget duplicerat innehåll**: Tog bort dubbla felsökningsavsnittet
-- **Felsökningskommandon**: Fixade referensen `azd logs` till att använda giltiga `azd monitor --logs`
+#### Ändrat
+- **README-struktur**: Omdisponerad för successivt avslöjande - viktig information först
+- **Introduktionssektion**: Omskriven för att förklara "The Magic of `azd up`" för fullständiga nybörjare
+- **Borttaget duplicerat innehåll**: Tog bort duplicerad felsökningssektion
+- **Felsökningskommandon**: Fixade referensen `azd logs` till att använda giltigt `azd monitor --logs`
 
-#### Fixed
-- **🔐 Autentiseringskommandon**: Lade till `azd auth login` och `azd auth logout` i cheat-sheet.md
-- **Ogiltiga kommando-referenser**: Tog bort kvarvarande `azd logs` från README:s felsökningsavsnitt
+#### Fixat
+- **🔐 Autentiseringskommandon**: Lagt till `azd auth login` och `azd auth logout` i cheat-sheet.md
+- **Ogiltiga kommando-referenser**: Tog bort återstående `azd logs` från README:s felsökningssektion
 
-#### Notes
+#### Anteckningar
 - **Omfattning**: Ändringar tillämpade på huvud-README.md och resources/cheat-sheet.md
-- **Målgrupp**: Förbättringar riktade särskilt till utvecklare som är nya till AZD
+- **Målgrupp**: Förbättringarna riktade specifikt till utvecklare nya till AZD
 
 ---
 
 ### [v3.10.0] - 2026-02-05
 
-#### Uppdatering av Azure Developer CLI-kommandonas noggrannhet
+#### Uppdatering av korrektheten i Azure Developer CLI-kommandon
 **Denna version korrigerar icke-existerande AZD-kommandon i dokumentationen och säkerställer att alla kodexempel använder giltig Azure Developer CLI-syntax.**
 
-#### Fixed
-- **🔧 Ogiltiga AZD-kommandon borttagna**: Omfattande granskning och korrigering av ogiltiga kommandon:
-  - `azd logs` (finns inte) → ersatt med `azd monitor --logs` eller Azure CLI-alternativ
-  - `azd service` underkommandon (finns inte) → ersatta med `azd show` och Azure CLI
-  - `azd infra import/export/validate` (finns inte) → borttaget eller ersatt med giltiga alternativ
-  - `azd deploy --rollback/--incremental/--parallel/--detect-changes` flaggor (finns inte) → borttagna
-  - `azd provision --what-if/--rollback` flaggor (finns inte) → uppdaterade för att använda `--preview`
-  - `azd config validate` (finns inte) → ersatt med `azd config list`
-  - `azd info`, `azd history`, `azd metrics` (finns inte) → borttagna
+#### Fixat
+- **🔧 Icke-existerande AZD-kommandon borttagna**: Omfattande granskning och korrigering av ogiltiga kommandon:
+  - `azd logs` (existerar inte) → ersatt med `azd monitor --logs` eller Azure CLI-alternativ
+  - `azd service` underkommandon (existerar inte) → ersatta med `azd show` och Azure CLI
+  - `azd infra import/export/validate` (existerar inte) → borttagna eller ersatta med giltiga alternativ
+  - flaggorna `azd deploy --rollback/--incremental/--parallel/--detect-changes` (existerar inte) → borttagna
+  - flaggorna `azd provision --what-if/--rollback` (existerar inte) → uppdaterade för att använda `--preview`
+  - `azd config validate` (existerar inte) → ersatt med `azd config list`
+  - `azd info`, `azd history`, `azd metrics` (existerar inte) → borttagna
 
 - **📚 Filer uppdaterade med kommando-korrigeringar**:
-  - `resources/cheat-sheet.md`: Stor översyn av kommando-referens
-  - `docs/deployment/deployment-guide.md`: Fixade rollback- och distributionsstrategier
-  - `docs/troubleshooting/debugging.md`: Korrigerade avsnitt om logganalys
-  - `docs/troubleshooting/common-issues.md`: Uppdaterade felsökningskommandon
-  - `docs/troubleshooting/ai-troubleshooting.md`: Fixade AZD-debuggingavsnittet
-  - `docs/getting-started/azd-basics.md`: Korrigerade övervakningskommandon
-  - `docs/getting-started/first-project.md`: Uppdaterade övervaknings- och felsökningsexempel
-  - `docs/getting-started/installation.md`: Fixade hjälp- och versionsexempel
-  - `docs/pre-deployment/application-insights.md`: Korrigerade kommandon för visning av loggar
-  - `docs/pre-deployment/coordination-patterns.md`: Fixade agent-debuggingkommandon
+  - `resources/cheat-sheet.md`: Major overhaul of command reference
+  - `docs/deployment/deployment-guide.md`: Fixed rollback and deployment strategies
+  - `docs/troubleshooting/debugging.md`: Corrected log analysis sections
+  - `docs/troubleshooting/common-issues.md`: Updated troubleshooting commands
+  - `docs/troubleshooting/ai-troubleshooting.md`: Fixed AZD debugging section
+  - `docs/getting-started/azd-basics.md`: Corrected monitoring commands
+  - `docs/getting-started/first-project.md`: Updated monitoring and debugging examples
+  - `docs/getting-started/installation.md`: Fixed help and version examples
+  - `docs/pre-deployment/application-insights.md`: Corrected log viewing commands
+  - `docs/pre-deployment/coordination-patterns.md`: Fixed agent debugging commands
 
-- **📝 Versionsreferens uppdaterad**: 
-  - `docs/getting-started/installation.md`: Ändrade hårdkodad version `1.5.0` till generisk `1.x.x` med länk till releaser
+- **📝 Version Reference Updated**: 
+  - `docs/getting-started/installation.md`: Changed hardcoded `1.5.0` version to generic `1.x.x` with link to releases
 
-#### Changed
-- **Rollback-strategier**: Uppdaterad dokumentation för att använda Git-baserad rollback (AZD har ingen inbyggd rollback)
+#### Ändrat
+- **Rollback-strategier**: Uppdaterade dokumentationen för att använda Git-baserad rollback (AZD har ingen inbyggd rollback)
 - **Loggvisning**: Ersatte `azd logs`-referenser med `azd monitor --logs`, `azd monitor --live` och Azure CLI-kommandon
-- **Prestandasektion**: Tog bort icke-existerande parallella/incrementella distributionsflaggor och gav giltiga alternativ
+- **Prestandasektionen**: Tog bort icke-existerande parallella/incrementella distributionsflaggor, gav giltiga alternativ
 
-#### Technical Details
+#### Tekniska detaljer
 - **Giltiga AZD-kommandon**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
 - **Giltiga azd monitor-flaggor**: `--live`, `--logs`, `--overview`
 - **Borttagna funktioner**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
 
-#### Notes
+#### Anteckningar
 - **Verifiering**: Kommandon validerade mot Azure Developer CLI v1.23.x
 
 ---
 
 ### [v3.9.0] - 2026-02-05
 
-#### Workshopens slutförande och uppdatering av dokumentationskvalitet
-**Denna version slutför de interaktiva workshopmodulerna, åtgärdar brutna dokumentationslänkar och förbättrar det övergripande innehållet för AI-utvecklare som använder Microsoft AZD.**
+#### Slutförande av workshop och uppdatering av dokumentationskvalitet
+**Denna version slutför de interaktiva workshopmodulerna, åtgärdar alla brutna dokumentationslänkar och förbättrar den övergripande innehållskvaliteten för AI-utvecklare som använder Microsoft AZD.**
 
-#### Added
-- **📝 CONTRIBUTING.md**: Nytt dokument med riktlinjer för bidrag som innehåller:
+#### Lagt till
+- **📝 CONTRIBUTING.md**: Nyt dokument med bidragsriktlinjer med:
   - Tydliga instruktioner för att rapportera problem och föreslå ändringar
   - Dokumentationsstandarder för nytt innehåll
   - Riktlinjer för kodexempel och konventioner för commit-meddelanden
   - Information om community-engagemang
 
-#### Completed
-- **🎯 Workshopmodul 7 (Avslutning)**: Fullt slutförd avslutningsmodul med:
-  - Omfattande sammanfattning av workshopens resultat
-  - Avsnitt över nyckelbegrepp som täcker AZD, mallar och Microsoft Foundry
-  - Rekommendationer för fortsatt inlärningsresa
-  - Workshop-övningar med svårighetsgrader
+#### Slutfört
+- **🎯 Workshop Module 7 (Wrap-up)**: Fullständigt slutförd avslutningsmodul med:
+  - Omfattande sammanfattning av workshopens prestationer
+  - Avsnitt om huvudkoncept som täcker AZD, templates och Microsoft Foundry
+  - Rekommendationer för fortsatt läranderesa
+  - Workshoputmaningar med svårighetsgrader
   - Länkar för community-feedback och support
 
-- **📚 Workshopmodul 3 (Deconstruct)**: Uppdaterade lärandemål med:
+- **📚 Workshop Module 3 (Deconstruct)**: Uppdaterade lärandemål med:
   - Vägledning för aktivering av GitHub Copilot med MCP-servrar
-  - Förståelse för AZD-mallars mappstruktur
-  - Organisationsmönster för Infrastructure-as-Code (Bicep)
-  - Hands-on-labinstruktioner
+  - Förståelse av AZD template-mappstruktur
+  - Organisationsmönster för infrastruktursom-kod (Bicep)
+  - Praktiska labbinstruktioner
 
-- **🔧 Workshopmodul 6 (Teardown)**: Slutförd med:
-  - Mål för resursrengöring och kostnadshantering
-  - `azd down` användning för säker nedmontering av infrastruktur
+- **🔧 Workshop Module 6 (Teardown)**: Slutförd med:
+  - Målsättningar för resurserensning och kostnadshantering
+  - `azd down` användning för säker avveckling av infrastruktur
   - Vägledning för återställning av mjukborttagna kognitiva tjänster
-  - Bonusutforskningstips för GitHub Copilot och Azure Portal
+  - Bonusutforskningsuppgifter för GitHub Copilot och Azure Portal
 
-#### Fixed
-- **🔗 Länkfel åtgärdade**: Löste 15+ brutna interna dokumentationslänkar:
+#### Åtgärdat
+- **🔗 Åtgärdade brutna länkar**: Åtgärdade 15+ brutna interna dokumentationslänkar:
   - `docs/ai-foundry/ai-model-deployment.md`: Fixade sökvägar till microsoft-foundry-integration.md
-  - `docs/troubleshooting/ai-troubleshooting.md`: Korrigerade ai-model-deployment.md och production-ai-practices.md-sökvägar
+  - `docs/troubleshooting/ai-troubleshooting.md`: Korrigerade sökvägar till ai-model-deployment.md och production-ai-practices.md
   - `docs/getting-started/first-project.md`: Ersatte icke-existerande cicd-integration.md med deployment-guide.md
-  - `examples/retail-scenario.md`: Fixade FAQ- och felsökningsguide-sökvägar
-  - `examples/container-app/microservices/README.md`: Korrigerade kurshemmets och distributionsguidens sökvägar
-  - `resources/faq.md` och `resources/glossary.md`: Uppdaterade AI-avsnittsreferenser
-  - `course-outline.md`: Fixade instructor guide- och AI-workshop-labbsökvägar
+  - `examples/retail-scenario.md`: Fixade sökvägar till FAQ och felsökningsguide
+  - `examples/container-app/microservices/README.md`: Korrigerade sökvägar till course home och deployment guide
+  - `resources/faq.md` och `resources/glossary.md`: Uppdaterade AI-kapitelsreferenser
+  - `course-outline.md`: Fixade referenser till instructor guide och AI workshop lab
 
-- **📅 Workshop-statusbanderoll**: Uppdaterad från "Under Construction" till aktiv workshopstatus med februari 2026-datum
+- **📅 Workshopstatusbanner**: Uppdaterad från "Under Construction" till aktiv workshopstatus med februari 2026-datum
 
-- **🔗 Workshopnavigation**: Fixade brutna navigeringslänkar i workshop README.md som pekade på icke-existerande lab-1-azd-basics-mapp
+- **🔗 Workshopnavigering**: Åtgärdade brutna navigationslänkar i workshop README.md som pekade på den icke-existerande mappen lab-1-azd-basics
 
-#### Changed
-- **Workshoppresentation**: Tog bort varning om "under uppbyggnad", workshopen är nu komplett och redo att användas
-- **Navigeringskonsistens**: Säkerställde att alla workshopmoduler har korrekt inter-modulnavigation
-- **Referenser för lärväg**: Uppdaterade kapitelskorsreferenser för att använda korrekta microsoft-foundry-sökvägar
+#### Ändrat
+- **Workshoppresentation**: Tog bort varningen "under construction", workshopen är nu komplett och redo att användas
+- **Navigationskonsekvens**: Säkerställde att alla workshopmoduler har korrekt navigering mellan moduler
+- **Referenser i lärvägen**: Uppdaterade kapitelkorsreferenser för att använda korrekta microsoft-foundry-sökvägar
 
-#### Validated
-- ✅ Alla engelska markdown-filer har giltiga interna länkar
+#### Validerat
+- ✅ Alla engelska markdownfiler har giltiga interna länkar
 - ✅ Workshopmoduler 0-7 är kompletta med lärandemål
-- ✅ Navigation mellan kapitel och moduler fungerar korrekt
+- ✅ Navigering mellan kapitel och moduler fungerar korrekt
 - ✅ Innehållet är lämpligt för AI-utvecklare som använder Microsoft AZD
-- ✅ Nybörjarvänligt språk och struktur bibehålles genomgående
+- ✅ Nybörjarvänligt språk och struktur bibehållna genomgående
 - ✅ CONTRIBUTING.md ger tydlig vägledning för community-bidragsgivare
 
-#### Technical Implementation
+#### Teknisk implementering
 - **Länkvalidering**: Automatiskt PowerShell-skript verifierade alla .md interna länkar
-- **Innehållsgranskning**: Manuellt granskning av workshopens fullständighet och nybörjarvänlighet
-- **Navigationssystem**: Konsekventa kapitel- och modulnavigationsmönster tillämpade
+- **Innehållsgranskning**: Manuell granskning av workshopens fullständighet och lämplighet för nybörjare
+- **Navigationssystem**: Konsekventa navigationsmönster mellan kapitel och moduler tillämpade
 
-#### Notes
-- **Omfattning**: Ändringar tillämpade endast på engelsk dokumentation
-- **Översättningar**: Översättningsmappar uppdaterades inte i denna version (automatisk översättning kommer att synkroniseras senare)
-- **Workshopens längd**: Komplett workshop erbjuder nu 3–4 timmars praktisk inlärning
+#### Anteckningar
+- **Omfattning**: Ändringar tillämpade endast på engelskspråkig dokumentation
+- **Översättningar**: Översättningsmappar uppdaterades inte i denna version (automatisk översättning synkroniseras senare)
+- **Workshopens varaktighet**: Kompletta workshopen erbjuder nu 3-4 timmars praktiskt lärande
 
 ---
 
 ### [v3.8.0] - 2025-11-19
 
-#### Avancerad dokumentation: Övervakning, säkerhet och multi-agentmönster
-**Denna version lägger till omfattande A-nivålektioner om Application Insights-integrering, autentiseringsmönster och multi-agentkoordination för produktionsdistributioner.**
+#### Avancerad dokumentation: Övervakning, säkerhet och multi-agent-mönster
+**Denna version lägger till omfattande A-gradsläxor om Application Insights-integration, autentiseringsmönster och multi-agent-koordinering för produktionsdistributioner.**
 
-#### Added
-- **📊 Lektion om Application Insights-integration**: i `docs/pre-deployment/application-insights.md`:
-  - AZD-inriktad distribution med automatisk provisionering
-  - Fullständiga Bicep-mallar för Application Insights + Log Analytics
-  - Fungerande Python-applikationer med anpassad telemetri (1,200+ rader)
-  - AI/LLM-övervakningsmönster (Microsoft Foundry-modellers token-/kostnadsspårning)
+#### Lagt till
+- **📊 Application Insights Integration Lesson**: i `docs/pre-deployment/application-insights.md`:
+  - AZD-fokuserad distribution med automatisk provisioning
+  - Kompletta Bicep-mallar för Application Insights + Log Analytics
+  - Fungerande Python-applikationer med anpassad telemetri (1,200+ lines)
+  - AI/LLM-övervakningsmönster (Microsoft Foundry Models token/cost tracking)
   - 6 Mermaid-diagram (arkitektur, distribuerad spårning, telemetriflöde)
   - 3 praktiska övningar (larm, dashboards, AI-övervakning)
-  - Kusto-frågeexempel och kostnadsoptimeringsstrategier
-  - Live-metrikströmning och realtidsfelsökning
-  - 40–50 minuters inlärningstid med produktionsklara mönster
+  - Kusto-frågeexempel och strategier för kostnadsoptimering
+  - Live metrikströmning och felsökning i realtid
+  - 40-50 minute learning time with production-ready patterns
 
-- **🔐 Lektion om autentiserings- och säkerhetsmönster**: i `docs/getting-started/authsecurity.md`:
+- **🔐 Authentication & Security Patterns Lesson**: i `docs/getting-started/authsecurity.md`:
   - 3 autentiseringsmönster (connection strings, Key Vault, managed identity)
-  - Fullständiga Bicep-infrastrukturmallar för säkra distributioner
+  - Kompletta Bicep-infrastrukturmallar för säkra distributioner
   - Node.js-applikationskod med Azure SDK-integration
-  - 3 kompletta övningar (aktivera managed identity, user-assigned identity, Key Vault-rotation)
+  - 3 kompletta övningar (enable managed identity, user-assigned identity, Key Vault rotation)
   - Säkerhetsbästa praxis och RBAC-konfigurationer
   - Felsökningsguide och kostnadsanalys
-  - Produktionsklara lösenordslösa autentiseringsmönster
+  - Produktionsklara lösenordsfria autentiseringsmönster
 
-- **🤖 Lektion om multi-agentkoordineringsmönster**: i `docs/pre-deployment/coordination-patterns.md`:
-  - 5 koordineringsmönster (sekventiell, parallell, hierarkisk, händelsestyrd, konsensus)
-  - Fullständig orchestrator-tjänsteimplementation (Python/Flask, 1,500+ rader)
-  - 3 specialiserade agentimplementationer (Forsknings-, Författar- och Redigeringsagenter)
+- **🤖 Multi-Agent Coordination Patterns Lesson**: i `docs/pre-deployment/coordination-patterns.md`:
+  - 5 koordinationsmönster (sequential, parallel, hierarchical, event-driven, consensus)
+  - Komplett orchestrator-tjänstimplementering (Python/Flask, 1,500+ lines)
+  - 3 specialiserade agentimplementationer (Research, Writer, Editor)
   - Service Bus-integration för meddelandeköning
-  - Cosmos DB-tillståndshantering för distribuerade system
+  - Cosmos DB state management för distribuerade system
   - 6 Mermaid-diagram som visar agentinteraktioner
-  - 3 avancerade övningar (timeout-hantering, retry-logik, kretsbrytare)
+  - 3 avancerade övningar (timeout-hantering, retry-logic, circuit breaker)
   - Kostnadsuppdelning ($240-565/month) med optimeringsstrategier
-  - Application Insights-integrering för övervakning
+  - Application Insights-integration för övervakning
 
-#### Enhanced
-- **Pre-deployment-kapitlet**: Inkluderar nu omfattande övervaknings- och koordineringsmönster
-- **Getting Started-kapitlet**: Förbättrat med professionella autentiseringsmönster
-- **Produktionsberedskap**: Fullständig täckning från säkerhet till observerbarhet
-- **Kursöversikt**: Uppdaterad för att referera nya lektioner i Kapitel 3 och 6
+#### Förbättrat
+- **Pre-deployment Chapter**: Inkluderar nu omfattande övervakning och koordinationsmönster
+- **Getting Started Chapter**: Förbättrad med professionella autentiseringsmönster
+- **Produktionsberedskap**: Full täckning från säkerhet till observerbarhet
+- **Kursöversikt**: Uppdaterad för att referera de nya lektionerna i Chapter 3 och 6
 
-#### Changed
-- **Lärandeprogression**: Bättre integrering av säkerhet och övervakning genom kursen
-- **Dokumentationskvalitet**: Konsekventa A-nivåstandarder (95–97%) över nya lektioner
-- **Produktionsmönster**: Fullständig end-to-end-täckning för företagsdistributioner
+#### Ändrat
+- **Lärprogression**: Bättre integration av säkerhet och övervakning genom kursen
+- **Dokumentationskvalitet**: Konsekventa A-gradstandarder (95-97%) över nya lektioner
+- **Produktionsmönster**: Fulländad end-to-end täckning för företagsdistributioner
 
-#### Improved
-- **Developer Experience**: Klar väg från utveckling till produktion och övervakning
-- **Security Standards**: Professionella mönster för autentisering och hantering av hemligheter
-- **Observability**: Fullständig Application Insights-integration med AZD
-- **AI Workloads**: Specialiserad övervakning för Microsoft Foundry Models och multi-agent-system
+#### Förbättrad
+- **Utvecklarupplevelse**: Tydlig bana från utveckling till produktionsövervakning
+- **Säkerhetsstandarder**: Professionella mönster för autentisering och hemlighetshantering
+- **Observerbarhet**: Komplett Application Insights-integration med AZD
+- **AI-arbetslaster**: Specialiserad övervakning för Microsoft Foundry Models och multi-agent-system
 
 #### Validerat
-- ✅ Alla lektioner innehåller komplett fungerande kod (inte utdrag)
+- ✅ Alla lektioner inkluderar komplett fungerande kod (inte utdrag)
 - ✅ Mermaid-diagram för visuellt lärande (19 totalt över 3 lektioner)
 - ✅ Praktiska övningar med verifieringssteg (9 totalt)
-- ✅ Produktionsfärdiga Bicep-mallar som kan driftsättas via `azd up`
+- ✅ Produktionsklara Bicep-mallar distribuerbara via `azd up`
 - ✅ Kostnadsanalys och optimeringsstrategier
 - ✅ Felsökningsguider och bästa praxis
 - ✅ Kunskapskontroller med verifieringskommandon
 
-#### Dokumentationsgraderingsresultat
+#### Resultat av dokumentationsgradering
 - **docs/pre-deployment/application-insights.md**: - Omfattande övervakningsguide
 - **docs/getting-started/authsecurity.md**: - Professionella säkerhetsmönster
 - **docs/pre-deployment/coordination-patterns.md**: - Avancerade multi-agent-arkitekturer
-- **Overall New Content**: - Konsekventa högkvalitetsstandarder
+- **Övergripande nytt innehåll**: - Konsekventa högkvalitetsstandarder
 
 #### Teknisk implementering
 - **Application Insights**: Log Analytics + anpassad telemetri + distribuerad spårning
-- **Authentication**: Managed Identity + Key Vault + RBAC-mönster
+- **Autentisering**: Managed Identity + Key Vault + RBAC-mönster
 - **Multi-Agent**: Service Bus + Cosmos DB + Container Apps + orkestrering
-- **Monitoring**: Live-metriker + Kusto-frågor + aviseringar + dashboards
-- **Cost Management**: Samplingstrategier, behållningspolicyer, budgetkontroller
+- **Övervakning**: Live-metrik + Kusto-frågor + larm + dashboards
+- **Kostnadshantering**: Samplingstrategier, retention policies, budgetkontroller
 
 ### [v3.7.0] - 2025-11-19
 
-#### Förbättringar av dokumentationskvalitet och nytt exempel på Microsoft Foundry Models
-**Denna version förbättrar dokumentationskvaliteten i hela repositoriet och lägger till ett komplett distributions-exempel för Microsoft Foundry Models med gpt-4.1 chattgränssnitt.**
+#### Förbättringar av dokumentationskvalitet och nytt Microsoft Foundry Models-exempel
+**Denna version förbättrar dokumentationskvaliteten i hela arkivet och lägger till ett komplett Microsoft Foundry Models-distributionsexempel med gpt-4.1 chattgränssnitt.**
 
 #### Lagt till
 - **🤖 Microsoft Foundry Models Chat Example**: Komplett gpt-4.1-distribution med fungerande implementation i `examples/azure-openai-chat/`:
-  - Komplett Microsoft Foundry Models-infrastruktur (gpt-4.1 modellutplacering)
+  - Komplett Microsoft Foundry Models-infrastruktur (gpt-4.1 model deployment)
   - Python kommandorads-chattgränssnitt med konversationshistorik
-  - Key Vault-integration för säker lagring av API-nyckel
-  - Spårning av tokenanvändning och kostnadsuppskattning
-  - Hastighetsbegränsning och felhantering
-  - Omfattande README med 35–45 minuters driftsättningsguide
+  - Key Vault-integration för säker lagring av API-nycklar
+  - Tokenanvändningsspårning och kostnadsuppskattning
+  - Rate limiting och felhantering
+  - Omfattande README med 35-45 minute deployment guide
   - 11 produktionsfärdiga filer (Bicep-mallar, Python-app, konfiguration)
-- **📚 Dokumentationsövningar**: Lade till praktiska övningar i konfigurationsguiden:
-  - Övning 1: Multi-miljökonfiguration (15 minuter)
-  - Övning 2: Övning i hemlighetshantering (10 minuter)
+- **📚 Dokumentationsövningar**: Lagt till praktiska övningar i konfigurationsguiden:
+  - Övning 1: Konfiguration för flera miljöer (15 minuter)
+  - Övning 2: Övning i hantering av hemligheter (10 minuter)
   - Tydliga framgångskriterier och verifieringssteg
-- **✅ Distribueringsverifiering**: Lagt till verifieringssektion i distributionsguiden:
+- **✅ Distributionsverifiering**: Lagt till verifieringssektion i distributionsguiden:
   - Hälsokontrollprocedurer
   - Checklista för framgångskriterier
-  - Förväntade utdata för alla driftsättningskommandon
+  - Förväntade utdata för alla distributionskommandon
   - Snabbreferens för felsökning
 
 #### Förbättrat
-- **examples/README.md**: Uppdaterad till A-nivå (93%):
-  - Lagt till azure-openai-chat i alla relevanta avsnitt
+- **examples/README.md**: Uppdaterad till A-gradskvalitet (93%):
+  - Lagt till azure-openai-chat i alla relevanta sektioner
   - Uppdaterat antal lokala exempel från 3 till 4
   - Lagt till i tabellen för AI-applikationsexempel
-  - Integrerat i Quick Start för mellannivåanvändare
-  - Lagt till i avsnittet Microsoft Foundry Templates
-  - Uppdaterade jämförelsematrisen och teknikrelaterade avsnitt
-- **Dokumentationskvalitet**: Förbättrad B+ (87%) → A- (92%) över docs-mappen:
-  - La till förväntade utdata till kritiska kommandoexempel
-  - Inkluderade verifieringssteg för konfigurationsändringar
-  - Förbättrat praktiskt lärande med praktiska övningar
+  - Integrerat i Quick Start för intermediära användare
+  - Lagt till i Microsoft Foundry Templates-sektionen
+  - Uppdaterat jämförelsematrisen och teknologifinderavsnitten
+- **Dokumentationskvalitet**: Förbättrad från B+ (87%) → A- (92%) i docs-mappen:
+  - Lagt till förväntade utdata för kritiska kommandosexempel
+  - Inkluderat verifieringssteg för konfigurationsändringar
+  - Förbättrat praktiskt lärande med handgripliga övningar
 
 #### Ändrat
-- **Learning Progression**: Bättre integration av AI-exempel för mellannivålärande
-- **Documentation Structure**: Mer handlingsbara övningar med tydliga resultat
-- **Verification Process**: Tydliga framgångskriterier lades till i viktiga arbetsflöden
+- **Lärprogression**: Bättre integration av AI-exempel för intermediära elever
+- **Dokumentationsstruktur**: Mer handlingsbara övningar med tydliga resultat
+- **Verifieringsprocess**: Explicit framgångskriterier tillagda i nyckelarbetsflöden
 
-#### Förbättrat
-- **Developer Experience**: Distribution av Microsoft Foundry Models tar nu 35–45 minuter (jämfört med 60–90 för mer komplexa alternativ)
-- **Cost Transparency**: Tydliga kostnadsuppskattningar ($50-200/month) för Microsoft Foundry Models-exemplet
-- **Learning Path**: AI-utvecklare har en tydlig ingång med azure-openai-chat
-- **Documentation Standards**: Konsekventa förväntade utdata och verifieringssteg
+#### Förbättrad
+- **Utvecklarupplevelse**: Microsoft Foundry Models-distributionen tar nu 35-45 minuter (jmf 60-90 för komplexa alternativ)
+- **Kostnadstransparens**: Tydliga kostnadsuppskattningar ($50-200/month) för Microsoft Foundry Models-exemplet
+- **Lärväg**: AI-utvecklare har en tydlig ingång med azure-openai-chat
+- **Dokumentationsstandarder**: Konsekventa förväntade utdata och verifieringssteg
 
 #### Validerat
-- ✅ Microsoft Foundry Models-exempel fullt funktionellt med `azd up`
+- ✅ Microsoft Foundry Models-exempel fullt fungerande med `azd up`
 - ✅ Alla 11 implementationsfiler syntaktiskt korrekta
-- ✅ README-instruktioner matchar den faktiska driftsättningsupplevelsen
+- ✅ README-instruktioner matchar faktisk distributionsupplevelse
 - ✅ Dokumentationslänkar uppdaterade på 8+ platser
-- ✅ Exempelindex återspeglar korrekt 4 lokala exempel
-- ✅ Inga duplicerade externa länkar i tabeller
+- ✅ Examples-indexet speglar korrekt 4 lokala exempel
+- ✅ Inga dubbletter av externa länkar i tabeller
 - ✅ Alla navigationsreferenser korrekta
 
 #### Teknisk implementering
-- **Microsoft Foundry Models Architecture**: gpt-4.1 + Key Vault + Container Apps-mönster
-- **Security**: Förberett för Managed Identity, hemligheter i Key Vault
-- **Monitoring**: Application Insights-integrering
-- **Cost Management**: Tokenspårning och användningsoptimering
-- **Deployment**: Enkelt `azd up`-kommando för komplett uppsättning
+- **Microsoft Foundry Models-arkitektur**: gpt-4.1 + Key Vault + Container Apps-mönster
+- **Säkerhet**: Managed Identity redo, hemligheter i Key Vault
+- **Övervakning**: Application Insights-integration
+- **Kostnadshantering**: Tokenspårning och optimering av användning
+- **Distribution**: Enkelt `azd up`-kommando för komplett setup
 
 ### [v3.6.0] - 2025-11-19
 
-#### Större uppdatering: Exempel på distribution av Container Apps
-**Denna version introducerar omfattande, produktionsfärdiga exempel på distribution av containerapplikationer med Azure Developer CLI (AZD), med full dokumentation och integration i lärandespåret.**
+#### Större uppdatering: Exempel på distribution av Container App
+**Denna version introducerar omfattande, produktionsklara exempel för distribution av containerapplikationer med Azure Developer CLI (AZD), med full dokumentation och integration i lärvägen.**
 
 #### Lagt till
 - **🚀 Container App Examples**: Nya lokala exempel i `examples/container-app/`:
-  - [Huvudguide](examples/container-app/README.md): Komplett översikt av containeriserade distributioner, snabbstart, produktion och avancerade mönster
-  - [Enkel Flask-API](../../examples/container-app/simple-flask-api): Nybörjarvänligt REST-API med scale-to-zero, health probes, övervakning och felsökning
-  - [Mikrotjänstarkitektur](../../examples/container-app/microservices): Produktionsklart multiservice-distributionsscenario (API Gateway, Product, Order, User, Notification), asynkron meddelandehantering, Service Bus, Cosmos DB, Azure SQL, distribuerad spårning, blue-green/canary-distribution
-- **Bästa praxis**: Säkerhet, övervakning, kostnadsoptimering och CI/CD-riktlinjer för containeriserade arbetsbelastningar
-- **Kodexempel**: Komplett `azure.yaml`, Bicep-mallar och flerspråkiga serviceimplementationer (Python, Node.js, C#, Go)
-- **Testning & Felsökning**: End-to-end-testscenarier, övervakningskommandon, felsökningsvägledning
+  - [Master Guide](examples/container-app/README.md): Komplett översikt av containeriserade distributioner, snabbstart, produktion och avancerade mönster
+  - [Simple Flask API](../../examples/container-app/simple-flask-api): Nybörjarvänligt REST API med scale-to-zero, hälsokontroller, övervakning och felsökning
+  - [Microservices Architecture](../../examples/container-app/microservices): Produktionsklar fler-tjänstdistribution (API Gateway, Product, Order, User, Notification), asynkron meddelandehantering, Service Bus, Cosmos DB, Azure SQL, distribuerad spårning, blue-green/canary-distribution
+- **Bästa praxis**: Säkerhet, övervakning, kostnadsoptimering och CI/CD-riktlinjer för containeriserade arbetslaster
+- **Kodexempel**: Komplett `azure.yaml`, Bicep-mallar och flerspråkliga tjänsteimplementationer (Python, Node.js, C#, Go)
+- **Testning & felsökning**: End-to-end-testscenarier, övervakningskommandon, felsökningsvägledningar
 
 #### Ändrat
-- **README.md**: Uppdaterad för att presentera och länka nya container-apps-exempel under "Local Examples - Container Applications"
-- **examples/README.md**: Uppdaterad för att lyfta fram container-app-exempel, lägga till poster i jämförelsematrisen och uppdatera teknik-/arkitekturreferenser
-- **Course Outline & Study Guide**: Uppdaterad för att hänvisa till nya container-app-exempel och distributionsmönster i relevanta kapitel
+- **README.md**: Uppdaterad för att visa och länka nya container-appsexempel under "Lokala exempel - Container Applications"
+- **examples/README.md**: Uppdaterad för att framhäva container-appsexempel, lägga till poster i jämförelsematrisen och uppdatera teknik-/arkitekturreferenser
+- **Course Outline & Study Guide**: Uppdaterad för att hänvisa till nya container-appsexempel och distribueringsmönster i berörda kapitel
 
 #### Validerat
 - ✅ Alla nya exempel kan driftsättas med `azd up` och följer bästa praxis
-- ✅ Dokumentationskorslänkar och navigering uppdaterade
+- ✅ Dokumentationens korslänkar och navigering uppdaterade
 - ✅ Exemplen täcker nybörjar- till avancerade scenarier, inklusive produktionsmikrotjänster
 
 #### Anteckningar
-- **Scope**: Endast engelsk dokumentation och exempel
-- **Next Steps**: Expandera med ytterligare avancerade container-mönster och CI/CD-automation i framtida releaser
+- **Omfattning**: Endast engelskspråkig dokumentation och exempel
+- **Nästa steg**: Utöka med ytterligare avancerade containermönster och CI/CD-automation i kommande utgåvor
 
 ### [v3.5.0] - 2025-11-19
 
-#### Produktrebranding: Microsoft Foundry
-**Denna version genomför en omfattande namnändring av produkten från "Microsoft Foundry" till "Microsoft Foundry" i hela den engelska dokumentationen, vilket återspeglar Microsofts officiella omprofilering.**
+#### Produktomprofilering: Microsoft Foundry
+**Denna version genomför en omfattande namnändring av produkten från "Microsoft Foundry" till "Microsoft Foundry" i all engelskspråkig dokumentation, i enlighet med Microsofts officiella omprofilering.**
 
 #### Ändrat
-- **🔄 Produktnamnsuppdatering**: Fullständig omprofilering från "Microsoft Foundry" till "Microsoft Foundry"
-  - Uppdaterade alla referenser i den engelska dokumentationen i `docs/`-mappen
-  - Mapp omdöpt: `docs/ai-foundry/` → `docs/microsoft-foundry/`
-  - Fil omdöpt: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+- **🔄 Uppdatering av produktnamn**: Komplett omprofilering från "Microsoft Foundry" till "Microsoft Foundry"
+  - Uppdaterade alla referenser i den engelska dokumentationen i mappen `docs/`
+  - Omdöpt mapp: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+  - Omdöpt fil: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
   - Totalt: 23 innehållsreferenser uppdaterade i 7 dokumentationsfiler
 
 - **📁 Ändringar i mappstruktur**:
@@ -566,442 +669,442 @@ Gamla mappar har ersatts med kapitelnumrerade mappar:
 
 - **📄 Filnamnsändringar**:
   - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - Alla interna länkar uppdaterade för att referera till det nya filnamnet
+  - Alla interna länkar uppdaterade för att peka på det nya filnamnet
 
 #### Uppdaterade filer
-- **Kapitelldokumentation** (7 filer):
+- **Kapitel-dokumentation** (7 filer):
   - `docs/microsoft-foundry/ai-model-deployment.md` - 3 navigationslänkar uppdaterade
   - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 produktnamnsreferenser uppdaterade
-  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Redan använder Microsoft Foundry (från tidigare uppdateringar)
+  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - Använder redan Microsoft Foundry (från tidigare uppdateringar)
   - `docs/microsoft-foundry/production-ai-practices.md` - 3 referenser uppdaterade (översikt, community-feedback, dokumentation)
   - `docs/getting-started/azd-basics.md` - 4 korsreferenslänkar uppdaterade
   - `docs/getting-started/first-project.md` - 2 kapitelnavigeringslänkar uppdaterade
-  - `docs/getting-started/installation.md` - 2 nästa kapitel-länkar uppdaterade
+  - `docs/getting-started/installation.md` - 2 nästa-kapitel-länkar uppdaterade
   - `docs/troubleshooting/ai-troubleshooting.md` - 3 referenser uppdaterade (navigering, Discord-community)
-  - `docs/troubleshooting/common-issues.md` - 1 navigeringslänk uppdaterad
-  - `docs/troubleshooting/debugging.md` - 1 navigeringslänk uppdaterad
+  - `docs/troubleshooting/common-issues.md` - 1 navigationslänk uppdaterad
+  - `docs/troubleshooting/debugging.md` - 1 navigationslänk uppdaterad
 
-- **Filer för kursstruktur** (2 filer):
-  - `README.md` - 17 referenser uppdaterade (kursöversikt, kapiteltitlar, mallavsnitt, communityinsikter)
-  - `course-outline.md` - 14 referenser uppdaterade (översikt, lärandemål, kapitelresurser)
+- **Kursstrukturfiler** (2 filer):
+  - `README.md` - 17 referenser uppdaterade (kursöversikt, kapiteltitlar, mallsektion, communityinsikter)
+  - `course-outline.md` - 14 referenser uppdaterade (översikt, lärandemål, kapitelsresurser)
 
 #### Validerat
-- ✅ Inga kvarvarande "ai-foundry"-mappreferenser i engelska docs
-- ✅ Inga kvarvarande "Microsoft Foundry" produktnamnsreferenser i engelska docs
+- ✅ Inga återstående "ai-foundry" mappsökvägsreferenser i de engelska dokumenten
+- ✅ Inga kvarvarande referenser till produktnamnet "Microsoft Foundry" i de engelska dokumenten
 - ✅ Alla navigationslänkar fungerar med den nya mappstrukturen
-- ✅ Fil- och mappnamnändringar slutförda
+- ✅ Fil- och mappomdöpningar genomförda framgångsrikt
 - ✅ Korsreferenser mellan kapitel validerade
 
 #### Anteckningar
-- **Scope**: Ändringar tillämpade endast på engelsk dokumentation i `docs/`-mappen
-- **Translations**: Översättningsmappar (`translations/`) inte uppdaterade i denna version
-- **Workshop**: Workshopen (`workshop/`) inte uppdaterad i denna version
-- **Examples**: Exempelfiler kan fortfarande referera till äldre namngivning (kommer att åtgärdas i framtida uppdatering)
-- **External Links**: Externa URL:er och GitHub-referenser förblir oförändrade
+- **Omfattning**: Ändringar tillämpade endast på engelskspråkig dokumentation i mappen `docs/`
+- **Översättningar**: Översättningsmappar (`translations/`) uppdaterades inte i denna version
+- **Workshop**: Workshopmaterial (`workshop/`) uppdaterades inte i denna version
+- **Exempel**: Exempelfiler kan fortfarande referera till legacy-namn (åtgärdas i framtida uppdatering)
+- **Externa länkar**: Externa URL:er och GitHub-referenser förblir oförändrade
 
 #### Migreringsguide för bidragsgivare
-Om du har lokala brancher eller dokumentation som refererar till den gamla strukturen:
+Ifall du har lokala grenar eller dokumentation som refererar den gamla strukturen:
 1. Uppdatera mappreferenser: `docs/ai-foundry/` → `docs/microsoft-foundry/`
 2. Uppdatera filreferenser: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-3. Byt ut produktnamnet: "Microsoft Foundry" → "Microsoft Foundry"
-4. Verifiera att alla interna dokumentationslänkar fortfarande fungerar
+3. Ersätt produktnamnet: "Microsoft Foundry" → "Microsoft Foundry"
+4. Validera att alla interna dokumentationslänkar fortfarande fungerar
 
 ---
 
 ### [v3.4.0] - 2025-10-24
 
 #### Förhandsgranskning av infrastruktur och valideringsförbättringar
-**Denna version introducerar omfattande stöd för den nya förhandsgranskningsfunktionen i Azure Developer CLI och förbättrar workshop-användarupplevelsen.**
+**Denna version introducerar omfattande stöd för den nya förhandsgranskningsfunktionen i Azure Developer CLI och förbättrar användarupplevelsen för workshopdeltagare.**
 
 #### Lagt till
-- **🧪 azd provision --preview funktionsdokumentation**: Omfattande beskrivning av den nya förhandsgranskningsmöjligheten för infrastruktur
-  - Kommandoreferens och användningsexempel i fusklapp
-  - Detaljerad integration i provisioning-guiden med användningsfall och fördelar
-  - Förhandskontroll-integration för säkrare driftsättningsvalidering
-  - Uppdateringar i introduktionsguiden med säkerhetsförst-driftsättningsrutiner
-- **🚧 Workshopstatusbanderoll**: Professionell HTML-banner som indikerar workshopens utvecklingsstatus
+- **🧪 Dokumentation för azd provision --preview-funktionen**: Omfattande täckning av den nya förhandsgranskningsmöjligheten för infrastruktur
+  - Kommandoreferens och användningsexempel i fuskblad
+  - Detaljerad integration i provisionsguiden med användningsfall och fördelar
+  - Förhandskontrollsintegration för säkrare driftsättningsvalidering
+  - Uppdateringar i introduktionsguiden med säkerhetsfokuserade driftsättningsrutiner
+- **🚧 Workshop-statusbanner**: Professionell HTML-banner som indikerar workshopens utvecklingsstatus
   - Gradientdesign med byggindikatorer för tydlig användarkommunikation
   - Senast uppdaterad-tidsstämpel för transparens
   - Mobilresponsiv design för alla enhetstyper
 
 #### Förbättrat
 - **Infrastrukturssäkerhet**: Förhandsgranskningsfunktionalitet integrerad i hela driftsättningsdokumentationen
-- **Förhandsvalidering före driftsättning**: Automatiserade skript inkluderar nu infrastrukturförhandsgransknings-testning
-- **Utvecklararbetsflöde**: Uppdaterade kommandosekvenser för att inkludera preview som bästa praxis
-- **Workshopupplevelse**: Tydliga förväntningar för användare angående innehållets utvecklingsstatus
+- **Förvalidering före driftsättning**: Automatiserade skript inkluderar nu test för infrastrukturförhandsgranskning
+- **Utvecklarflöde**: Uppdaterade kommando-sekvenser som inkluderar förhandsgranskning som bästa praxis
+- **Workshopupplevelse**: Tydliga förväntningar för användare om innehållets utvecklingsstatus
 
 #### Ändrat
-- **Driftsättningspraxis**: Preview-first-arbetsflöde nu rekommenderad metod
-- **Dokumentationsflöde**: Infrastruktursvalidering flyttad tidigare i inlärningsprocessen
-- **Workshoppresentation**: Professionell statuskommunikation med tydlig utvecklingstidslinje
+- **Driftsättningsbästa praxis**: Förhandsgransknings-först arbetsflöde rekommenderas nu
+- **Dokumentationsflöde**: Infrastrukturvalidering flyttad tidigare i lärandeprocessen
+- **Workshoppresentation**: Professionell statuskommunikation med klar utvecklingstidslinje
 
-#### Förbättrat
-- **Säkerhets-först-ansats**: Infrastruktursändringar kan nu valideras innan driftsättning
+#### Förbättrad
+- **Säkerhetsförst-ansats**: Infrastrukturändringar kan nu valideras innan driftsättning
 - **Team-samarbete**: Förhandsgranskningsresultat kan delas för granskning och godkännande
-- **Kostnadsmedvetenhet**: Bättre förståelse för resurskostnader innan provisioning
-- **Riskminimering**: Minskade driftsättningsfel genom avancerad validering
+- **Kostnadsmedvetenhet**: Bättre förståelse för resurskostnader före provisionering
+- **Riskminimering**: Minskade driftsättningsfel genom förhandsvalidering
 
 #### Teknisk implementering
-- **Flerdokumentintegration**: Preview-funktionen dokumenterad i 4 nyckelfiler
+- **Multidokumentintegration**: Förhandsgranskningsfunktionen dokumenterad i 4 nyckelfiler
 - **Kommandomönster**: Konsekvent syntax och exempel i hela dokumentationen
-- **Bästa praxis-integration**: Preview inkluderad i valideringsarbetsflöden och skript
-- **Visuella indikatorer**: Tydlig NY funktion-markering för upptäckbarhet
+- **Bästa praxis-integration**: Förhandsgranskning inkluderad i valideringsarbetsflöden och skript
+- **Visuella indikatorer**: Tydliga NY funktion-markeringar för upptäckbarhet
 
 #### Workshopinfrastruktur
 - **Statuskommunikation**: Professionell HTML-banner med gradientstil
 - **Användarupplevelse**: Tydlig utvecklingsstatus förhindrar förvirring
-- **Professionell presentation**: Upprätthåller repositoryns trovärdighet samtidigt som förväntningar sätts
-- **Tidslinjetransparens**: Senast uppdaterad i oktober 2025 för ansvarsskyldighet
+- **Professionell presentation**: Bibehåller repo:tillit samtidigt som förväntningar sätts
+- **Tidslinjetransparens**: Senast uppdaterad oktober 2025-tidsstämpel för ansvarsskyldighet
 
 ### [v3.3.0] - 2025-09-24
 
-#### Förbättrat workshopmaterial och interaktiv lärandeupplevelse
-**Denna version introducerar omfattande workshopmaterial med webbläsarbaserade interaktiva guider och strukturerade lärandespår.**
+#### Förbättrade workshopmaterial och interaktivt lärande
+**Denna version introducerar omfattande workshopmaterial med webbläsarbaserade interaktiva guider och strukturerade lärvägar.**
 
 #### Lagt till
-- **🎥 Interaktiv workshopguide**: Webbläsarbaserad workshopupplevelse med MkDocs-förhandsgranskningsfunktion
-- **📝 Strukturerade workshopinstruktioner**: 7-stegs vägledd inlärningsväg från upptäckt till anpassning
-  - 0-Introduction: Översikt över workshopen och uppsättning
-  - 1-Select-AI-Template: Mallupptäckt och urvalsprocess
-  - 2-Validate-AI-Template: Driftsättnings- och valideringsprocedurer
-  - 3-Deconstruct-AI-Template: Förståelse av mallens arkitektur
-  - 4-Configure-AI-Template: Konfiguration och anpassning
-  - 5-Customize-AI-Template: Avancerade modifieringar och iterationer
-  - 6-Teardown-Infrastructure: Rensning och resursförvaltning
-  - 7-Wrap-up: Sammanfattning och nästa steg
-- **🛠️ Workshop Tooling**: MkDocs-konfiguration med Material-tema för förbättrad inlärningsupplevelse
-- **🎯 Praktisk inlärningsväg**: 3-stegs metodik (Upptäckt → Driftsättning → Anpassning)
-- **📱 GitHub Codespaces Integration**: Sömlös uppsättning av utvecklingsmiljö
+- **🎥 Interaktiv workshopguide**: Webbläsarbaserad workshopupplevelse med MkDocs-förhandsgranskning
+- **📝 Strukturerade workshopinstruktioner**: 7-stegs guidad lärväg från upptäckt till anpassning
+  - 0-Introduktion: Workshopöversikt och uppstart
+  - 1-Välj-AI-mall: Mallupptäckt och urvalsprocess
+  - 2-Validera-AI-mall: Driftsättning och valideringsprocedurer
+  - 3-Dekonstruera-AI-mall: Förstå mallens arkitektur
+  - 4-Konfigurera-AI-mall: Konfiguration och anpassning
+  - 5-Anpassa-AI-mall: Avancerade modifieringar och iterationer
+  - 6-Riv-ned-infrastruktur: Rensning och resursförvaltning
+  - 7-Avslut: Sammanfattning och nästa steg
+- **🛠️ Workshopverktyg**: MkDocs-konfiguration med Material-tema för förbättrad lärupplevelse
+- **🎯 Praktisk lärväg**: 3-stegs metodik (Upptäckt → Driftsättning → Anpassning)
+- **📱 GitHub Codespaces-integration**: Sömlös setup av utvecklingsmiljö
 
-#### Förbättrad
-- **AI Workshop Lab**: Utökad med en omfattande strukturerad inlärningsupplevelse på 2–3 timmar
+#### Förbättrat
+- **AI Workshop-labb**: Utökad med en omfattande 2-3 timmars strukturerad lärupplevelse
 - **Workshopdokumentation**: Professionell presentation med navigering och visuella hjälpmedel
-- **Inlärningsprogression**: Tydlig steg-för-steg vägledning från mallval till produktsättning
-- **Utvecklarupplevelse**: Integrerade verktyg för effektivare utvecklingsarbetsflöden
+- **Lärprogression**: Tydlig steg-för-steg-vägledning från val av mall till produktionsdriftsättning
+- **Utvecklarupplevelse**: Integrerade verktyg för strömlinjeformade utvecklingsarbetsflöden
 
 #### Förbättrad
-- **Tillgänglighet**: Webbläsarbaserat gränssnitt med sök, kopieringsfunktion och temaväxling
-- **Självstyrd inlärning**: Flexibel workshopstruktur som rymmer olika inlärningstakter
-- **Praktisk tillämpning**: Verkliga scenarier för driftsättning av AI-mallar
-- **Communityintegration**: Discord-integration för workshopstöd och samarbete
+- **Tillgänglighet**: Webbgränssnitt med sök, kopiera-funktionalitet och temaväxling
+- **Självstyrt lärande**: Flexibel workshopstruktur som rymmer olika inlärningshastigheter
+- **Praktisk tillämpning**: Verkliga AI-mallimplementeringar
+- **Community-integration**: Discord-integration för workshopsupport och samarbete
 
 #### Workshopfunktioner
-- **Inbyggd sökning**: Snabb sökning efter nyckelord och lektioner
+- **Inbyggd sökfunktion**: Snabb sökning av nyckelord och lektioner
 - **Kopiera kodblock**: Hover-to-copy-funktionalitet för alla kodexempel
 - **Temaväxling**: Stöd för mörkt/ljust läge efter preferens
-- **Visuella tillgångar**: Skärmdumpar och diagram för bättre förståelse
-- **Hjälpintegration**: Direkt tillgång till Discord för communitystöd
+- **Visuella tillgångar**: Skärmdumpar och diagram för förbättrad förståelse
+- **Hjälpintegration**: Direkt åtkomst till Discord för communitysupport
 
 ### [v3.2.0] - 2025-09-17
 
-#### Större omstrukturering av navigeringen och kapitelbaserat inlärningssystem
-**Denna version introducerar en omfattande kapitelbaserad inlärningsstruktur med förbättrad navigering i hela arkivet.**
+#### Storskalig navigeringsomstrukturering och kapitelbaserat lärsystem
+**Denna version introducerar en omfattande kapitelbaserad lärstruktur med förbättrad navigering i hela repositoryt.**
 
 #### Lagt till
-- **📚 Kapitelbaserat inlärningssystem**: Omstrukturerade hela kursen till 8 progressiva inlärningskapitel
-  - Kapitel 1: Grundläggande & Kom igång (⭐ - 30-45 min)
-  - Kapitel 2: AI-First-utveckling (⭐⭐ - 1-2 timmar)
+- **📚 Kapitelbaserat lärsystem**: Omstrukturerade hela kursen i 8 progressiva lärkapitel
+  - Kapitel 1: Grund & Kom igång (⭐ - 30-45 min)
+  - Kapitel 2: AI-först utveckling (⭐⭐ - 1-2 timmar)
   - Kapitel 3: Konfiguration & Autentisering (⭐⭐ - 45-60 min)
-  - Kapitel 4: Infrastructure as Code & Driftsättning (⭐⭐⭐ - 1-1.5 timmar)
+  - Kapitel 4: Infrastruktur som kod & driftsättning (⭐⭐⭐ - 1-1.5 timmar)
   - Kapitel 5: Multi-agent AI-lösningar (⭐⭐⭐⭐ - 2-3 timmar)
-  - Kapitel 6: Validering & planering före driftsättning (⭐⭐ - 1 timme)
-  - Kapitel 7: Felsökning & debugga (⭐⭐ - 1-1.5 timmar)
+  - Kapitel 6: Förvalidering & planering före driftsättning (⭐⭐ - 1 timme)
+  - Kapitel 7: Felsökning & debugging (⭐⭐ - 1-1.5 timmar)
   - Kapitel 8: Produktions- & företagsmönster (⭐⭐⭐⭐ - 2-3 timmar)
-- **📚 Omfattande navigationssystem**: Konsekventa navigeringshuvuden och sidfötter över all dokumentation
-- **🎯 Framstegsspårning**: Avcheckningslista för kursavslut och system för verifiering av inlärning
-- **🗺️ Vägledning för inlärningsväg**: Tydliga startpunkter för olika erfarenhetsnivåer och mål
-- **🔗 Korsreferensnavigering**: Relaterade kapitel och förkunskapskrav tydligt länkade
+- **📚 Omfattande navigationssystem**: Konsekventa navigationshuvuden och -fötter i hela dokumentationen
+- **🎯 Framstegsspårning**: Kursavslutningschecklista och verifieringssystem för lärande
+- **🗺️ Vägledning för lärväg**: Tydliga startpunkter för olika erfarenhetsnivåer och mål
+- **🔗 Korsreferensnavigering**: Relaterade kapitel och förkunskaper tydligt länkade
 
-#### Förbättrad
-- **README-struktur**: Omvandlad till en strukturerad inlärningsplattform med kapitelbaserad organisation
-- **Dokumentationsnavigering**: Varje sida inkluderar nu kapitelkontext och vägledning för progression
-- **Mallorganisation**: Exempel och mallar kopplade till lämpliga inlärningskapitel
-- **Resursintegration**: Fusklistor, FAQ och studieguides länkade till relevanta kapitel
+#### Förbättrat
+- **README-struktur**: Omvandlad till en strukturerad lärplattform med kapitelbaserad organisation
+- **Dokumentationsnavigering**: Varje sida inkluderar nu kapitelsammanhang och progression
+- **Mallorganisation**: Exempel och mallar kartlagda till lämpliga kapitel
+- **Resursintegration**: Fuskblad, vanliga frågor och studiehandledningar kopplade till relevanta kapitel
 - **Workshopintegration**: Praktiska labb kopplade till flera kapitelmål
 
 #### Ändrat
-- **Inlärningsprogression**: Flyttat från linjär dokumentation till flexibel kapitelbaserad inlärning
-- **Konfigurationsplacering**: Ompositionerad konfigurationsguide som Kapitel 3 för bättre lärflöde
-- **AI-innehållsintegration**: Bättre integration av AI-specifikt innehåll genom hela inlärningsresan
+- **Lärprogression**: Flytt från linjär dokumentation till flexibel kapitelbaserad inlärning
+- **Konfigurationsplacering**: Konfigurationsguiden omplacerad till Kapitel 3 för bättre inlärningsflöde
+- **AI-innehålls-integration**: Bättre integration av AI-specifikt innehåll genom hela lärresan
 - **Produktionsinnehåll**: Avancerade mönster konsoliderade i Kapitel 8 för företagsanvändare
 
 #### Förbättrad
-- **Användarupplevelse**: Tydliga navigationsbrödsmulor och indikatorer för kapitelprogression
-- **Tillgänglighet**: Konsekventa navigeringsmönster för enklare kursgenomgång
-- **Professionell presentation**: Universitetsliknande kursstruktur lämplig för akademisk och företagsutbildning
-- **Inlärningseffektivitet**: Kortare tid att hitta relevant innehåll genom förbättrad organisering
+- **Användarupplevelse**: Tydliga navigationsbrödsmulor och indikatorer för kapitelsprogression
+- **Tillgänglighet**: Konsekventa navigationsmönster för enklare kursgenomgång
+- **Professionell presentation**: Universitetslik struktur lämplig för akademisk och företagsutbildning
+- **Inlärningseffektivitet**: Minskat tidsbehov för att hitta relevant innehåll genom förbättrad organisation
 
 #### Teknisk implementering
-- **Navigeringshuvuden**: Standardiserad kapitelnavigering över 40+ dokumentationsfiler
-- **Sidfotsnavigering**: Konsekvent vägledning för progression och indikatorer för slutförda kapitel
-- **Korslänkning**: Omfattande internt länkning som kopplar relaterade koncept
-- **Kapitelkartläggning**: Mallar och exempel tydligt associerade med inlärningsmål
+- **Navigationshuvuden**: Standardiserad kapitelnavigering i över 40 dokumentationsfiler
+- **Foter-navigering**: Konsekvent guidning för progression och indikatorer för kapitelavslut
+- **Korslänkning**: Omfattande intern länkning som kopplar relaterade begrepp
+- **Kapitelkartläggning**: Mallar och exempel tydligt associerade med lärandemål
 
-#### Förbättring av studieguide
-- **📚 Omfattande inlärningsmål**: Omstrukturerad studieguide för att alignera med 8-kapitelssystemet
-- **🎯 Kapitelbaserad bedömning**: Varje kapitel innehåller specifika inlärningsmål och praktiska övningar
-- **📋 Framstegsspårning**: Veckovis inlärningsschema med mätbara resultat och avcheckningslistor
-- **❓ Bedömningsfrågor**: Kunskapsvalideringsfrågor för varje kapitel med professionella utfall
-- **🛠️ Praktiska övningar**: Praktiska aktiviteter med riktiga driftsättningsscenarier och felsökning
-- **📊 Kompetensprogression**: Tydlig utveckling från grundläggande koncept till företagsmönster med fokus på karriärutveckling
-- **🎓 Certifieringsramverk**: Professionella utvecklingsresultat och communityerkännanden
-- **⏱️ Tidslinjehantering**: Strukturerad 10-veckors inlärningsplan med milstolpsvalidering
+#### Förbättring av studiehandledning
+- **📚 Omfattande lärandemål**: Studiehandledningen omstrukturerad för att följa det 8-kapitelssystemet
+- **🎯 Kapitelbaserad bedömning**: Varje kapitel innehåller specifika lärandemål och praktiska övningar
+- **📋 Framstegsspårning**: Veckoplanering med mätbara resultat och avcheckningslistor
+- **❓ Bedömningsfrågor**: Kunskapsvalideringsfrågor för varje kapitel med professionella resultat
+- **🛠️ Praktiska övningar**: Hands-on-aktiviteter med verkliga driftsättningsscenarier och felsökning
+- **📊 Kompetensprogression**: Klar avancering från grundläggande koncept till företagsmönster med fokus på karriärutveckling
+- **🎓 Certifieringsramverk**: Professionella utvecklingsresultat och communityerkännande
+- **⏱️ Tidsplanering**: Strukturerad 10-veckors läroplan med milstolpsvalidering
 
 ### [v3.1.0] - 2025-09-17
 
-#### Förbättrade Multi-Agent AI-lösningar
-**Denna version förbättrar detaljhandelslösningen med flera agenter genom bättre agentnamngivning och förbättrad dokumentation.**
+#### Förbättrade multi-agent AI-lösningar
+**Denna version förbättrar multi-agent-lösningen för detaljhandel med tydligare agentnamn och förbättrad dokumentation.**
 
 #### Ändrat
-- **Multi-Agent-terminologi**: Ersatte "Cora agent" med "Customer agent" i hela retail multi-agent-lösningen för tydligare förståelse
+- **Multi-Agent-terminologi**: "Cora agent" ersatt med "Customer agent" i hela detaljhandelslösningen för multi-agenter för tydligare förståelse
 - **Agentarkitektur**: Uppdaterade all dokumentation, ARM-mallar och kodexempel för att använda konsekvent "Customer agent"-namngivning
 - **Konfigurationsexempel**: Moderniserade agentkonfigurationsmönster med uppdaterade namngivningskonventioner
-- **Dokumentationskonsekvens**: Säkerställde att alla referenser använder professionella, beskrivande agentnamn
+- **Dokumentationskonsekvens**: Säkrat att alla referenser använder professionella, beskrivande agentnamn
 
-#### Förbättrad
-- **ARM-mallspaket**: Uppdaterade retail-multiagent-arm-template med Customer agent-referenser
-- **Arkitekturdiagram**: Uppdaterade Mermaid-diagram med ny agentnamngivning
-- **Kodexempel**: Python-klasser och implementationsexempel använder nu CustomerAgent-namngivning
-- **Miljövariabler**: Uppdaterade alla driftsättningsskript för att använda CUSTOMER_AGENT_NAME-konventioner
+#### Förbättrat
+- **ARM Template Package**: Uppdaterad retail-multiagent-arm-template med referenser till Customer-agenten
+- **Architecture Diagrams**: Uppdaterade Mermaid-diagram med uppdaterad agentnamngivning
+- **Code Examples**: Python-klasser och implementationsexempel använder nu CustomerAgent-namn
+- **Environment Variables**: Uppdaterade alla deploy-skript för att använda CUSTOMER_AGENT_NAME-konventioner
 
-#### Förbättrad
-- **Utvecklarupplevelse**: Klarare agentroller och ansvar i dokumentationen
-- **Produktionsberedskap**: Bättre överensstämmelse med företagsnamngivningskonventioner
-- **Inlärningsmaterial**: Mer intuitiv agentnamngivning för utbildningsändamål
-- **Mallens användbarhet**: Förenklad förståelse av agentfunktioner och driftsättningsmönster
+#### Förbättrat
+- **Developer Experience**: Tydligare agentroller och ansvar i dokumentationen
+- **Production Readiness**: Bättre anpassning till företagsnamngivningskonventioner
+- **Learning Materials**: Mer intuitiv agentnamngivning för utbildningssyften
+- **Template Usability**: Förenklad förståelse av agentfunktioner och deploy-mönster
 
 #### Tekniska detaljer
 - Uppdaterade Mermaid-arkitekturdiagram med CustomerAgent-referenser
-- Ersatte CoraAgent-klasser med CustomerAgent i Python-exempel
-- Modifierade ARM-mallarnas JSON-konfigurationer för att använda "customer"-agenttyp
-- Uppdaterade miljövariabler från CORA_AGENT_* till CUSTOMER_AGENT_*-mönster
-- Uppdaterade alla driftsättningskommandon och containerkonfigurationer
+- Ersatte CoraAgent-klassnamn med CustomerAgent i Python-exempel
+- Modifierade ARM-template JSON-konfigurationer för att använda "customer" agenttyp
+- Uppdaterade miljövariabler från CORA_AGENT_* till CUSTOMER_AGENT_* mönster
+- Uppfräschade alla deploy-kommandon och containerkonfigurationer
 
 ### [v3.0.0] - 2025-09-12
 
-#### Stora förändringar - AI-utvecklarfokus och Microsoft Foundry-integration
+#### Stora förändringar - Fokus på AI-utvecklare och Microsoft Foundry-integration
 **Denna version förvandlar arkivet till en omfattande AI-inriktad lärresurs med Microsoft Foundry-integration.**
 
 #### Lagt till
 - **🤖 AI-First Learning Path**: Fullständig omstrukturering med prioritet för AI-utvecklare och ingenjörer
-- **Microsoft Foundry Integration Guide**: Utförlig dokumentation för att ansluta AZD med Microsoft Foundry-tjänster
-- **Mönster för driftsättning av AI-modeller**: Detaljerad guide som täcker val av modell, konfiguration och strategier för produktionsdriftsättning
-- **AI Workshop Lab**: 2–3 timmars praktiskt workshop för att konvertera AI-applikationer till AZD-driftsättningsbara lösningar
-- **Bästa praxis för AI i produktion**: Företagsklarade mönster för skalning, övervakning och säkerhet för AI-arbetslaster
-- **AI-specifik felsökningsguide**: Omfattande felsökning för Microsoft Foundry Models, Cognitive Services och AI-driftsättningsproblem
-- **AI-mallsgalleri**: Utvald samling Microsoft Foundry-mallar med komplexitetsbetyg
-- **Workshopmaterial**: Komplett workshopstruktur med praktiska labb och referensmaterial
+- **Microsoft Foundry Integration Guide**: Omfattande dokumentation för att koppla AZD till Microsoft Foundry-tjänster
+- **AI Model Deployment Patterns**: Detaljerad guide som täcker modellval, konfiguration och produktionsdeploystrategier
+- **AI Workshop Lab**: 2–3 timmars praktiskt workshop för att konvertera AI-applikationer till AZD-deployerbara lösningar
+- **Production AI Best Practices**: Företagsklara mönster för skalning, övervakning och säkring av AI-workloads
+- **AI-Specific Troubleshooting Guide**: Omfattande felsökningsguide för Microsoft Foundry-modeller, Cognitive Services och AI-deployproblem
+- **AI Template Gallery**: Utvald samling Microsoft Foundry-mallar med komplexitetsbetyg
+- **Workshop Materials**: Komplett workshopstruktur med praktiska labb och referensmaterial
 
-#### Förbättrad
-- **README-struktur**: AI-utvecklarfokuserad med 45% community-intressedata från Microsoft Foundry Discord
-- **Inlärningsvägar**: Avsedd AI-utvecklarresa parallellt med traditionella vägar för studenter och DevOps-ingenjörer
-- **Mallrekommendationer**: Utvalda AI-mallar inklusive azure-search-openai-demo, contoso-chat, och openai-chat-app-quickstart
-- **Communityintegration**: Förbättrat Discord-communitystöd med AI-specifika kanaler och diskussioner
+#### Förbättrat
+- **README Structure**: AI-utvecklarfokuserad med 45% communityintresse-data från Microsoft Foundry Discord
+- **Learning Paths**: Dedikerad AI-utvecklarresa tillsammans med traditionella vägar för studenter och DevOps-ingenjörer
+- **Template Recommendations**: Utvalda AI-mallar inklusive azure-search-openai-demo, contoso-chat och openai-chat-app-quickstart
+- **Community Integration**: Förbättrat Discord-communitystöd med AI-specifika kanaler och diskussioner
 
 #### Säkerhet & produktionsfokus
-- **Managed Identity-mönster**: AI-specifika autentiserings- och säkerhetskonfigurationer
-- **Kostnadsoptimering**: Spårning av tokenanvändning och budgetkontroller för AI-arbetslaster
-- **Multi-regiondriftsättning**: Strategier för global distribution av AI-applikationer
-- **Prestandaövervakning**: AI-specifika mätvärden och Application Insights-integrering
+- **Managed Identity Patterns**: AI-specifika autentiserings- och säkerhetskonfigurationer
+- **Cost Optimization**: Spårning av tokenanvändning och budgetkontroller för AI-workloads
+- **Multi-Region Deployment**: Strategier för global distribution av AI-applikationer
+- **Performance Monitoring**: AI-specifika mätvärden och Application Insights-integration
 
 #### Dokumentationskvalitet
-- **Linjerad kursstruktur**: Logisk progression från nybörjare till avancerade AI-driftsättningsmönster
-- **Validerade URL:er**: Alla externa arkivlänkar verifierade och åtkomliga
-- **Fullständig referens**: Alla interna dokumentationslänkar validerade och fungerande
-- **Produktionsklar**: Företagsdriftsättningsmönster med verkliga exempel
+- **Linear Course Structure**: Logisk progression från nybörjare till avancerade AI-deploymönster
+- **Validated URLs**: Alla externa repository-länkar verifierade och tillgängliga
+- **Complete Reference**: Alla interna dokumentationslänkar validerade och funktionella
+- **Production Ready**: Företagsdeploymönster med verkliga exempel
 
 ### [v2.0.0] - 2025-09-09
 
-#### Stora förändringar - Omstrukturering av arkivet och professionell förbättring
-**Denna version representerar en betydande översyn av arkivets struktur och innehållspresentation.**
+#### Stora förändringar - Omstrukturering av repository och professionell förbättring
+**Denna version representerar en betydande översyn av repository-strukturen och innehållspresentationen.**
 
 #### Lagt till
-- **Strukturerat inlärningsramverk**: Alla dokumentationssidor innehåller nu Introduktion, Inlärningsmål och Inlärningsresultat-sektioner
-- **Navigationssystem**: Lagt till Föregående/Nästa-lektionlänkar genom all dokumentation för vägledd inlärningsprogression
-- **Studieguide**: Omfattande study-guide.md med inlärningsmål, övningsuppgifter och bedömningsmaterial
-- **Professionell presentation**: Tog bort alla emoji-ikoner för förbättrad tillgänglighet och professionellt utseende
-- **Förbättrad innehållsstruktur**: Förbättrad organisation och flöde i inlärningsmaterialet
+- **Structured Learning Framework**: Alla dokumentationssidor inkluderar nu Avsnitt för Introduktion, Lärandemål och Lärandets resultat
+- **Navigation System**: Lade till Previous/Next-lesson-länkar genom hela dokumentationen för guidad lärandeprogression
+- **Study Guide**: Omfattande study-guide.md med lärandemål, övningar och bedömningsmaterial
+- **Professional Presentation**: Tog bort alla emoji-ikoner för förbättrad tillgänglighet och ett mer professionellt utseende
+- **Enhanced Content Structure**: Förbättrad organisering och flöde av lärmaterial
 
 #### Ändrat
-- **Dokumentationsformat**: Standardiserade all dokumentation med konsekvent inlärningsfokuserad struktur
-- **Navigationsflöde**: Implementerade logisk progression genom allt inlärningsmaterial
-- **Innehållspresentation**: Tog bort dekorativa element till förmån för tydlig, professionell formatering
-- **Länkstruktur**: Uppdaterade alla interna länkar för att stödja det nya navigationssystemet
+- **Documentation Format**: Standardiserade all dokumentation med konsekvent lärandefokuserad struktur
+- **Navigation Flow**: Implementerat logisk progression genom allt lärmaterial
+- **Content Presentation**: Tog bort dekorativa element till förmån för tydlig, professionell formatering
+- **Link Structure**: Uppdaterade alla interna länkar för att stödja det nya navigationssystemet
 
-#### Förbättrad
-- **Tillgänglighet**: Tog bort beroenden av emojis för bättre skärmläsarkompatibilitet
-- **Professionellt utseende**: Rent, akademiskt stilupplägg lämpligt för företagsutbildning
-- **Inlärningsupplevelse**: Strukturerat tillvägagångssätt med tydliga mål och resultat för varje lektion
-- **Innehållsorganisation**: Bättre logiskt flöde och koppling mellan relaterade ämnen
+#### Förbättrat
+- **Accessibility**: Tog bort emoji-beroenden för bättre skärmläsarkompatibilitet
+- **Professional Appearance**: Ren, akademisk stil lämplig för företagsutbildning
+- **Learning Experience**: Strukturerad metod med tydliga mål och utfall för varje lektion
+- **Content Organization**: Bättre logiskt flöde och koppling mellan relaterade ämnen
 
 ### [v1.0.0] - 2025-09-09
 
-#### Första utgåvan - Omfattande AZD-lärarkiv
+#### Första utgåvan - Omfattande AZD-lärrepository
 
 #### Lagt till
-- **Kärndokumentationsstruktur**
-  - Komplett getting-started guide-serie
-  - Omfattande dokumentation för driftsättning och provisioning
-  - Detaljerade felsökningsresurser och felsökningsguider
-  - Verktyg och procedurer för validering före driftsättning
+- **Core Documentation Structure**
+  - Komplett serie med getting-started-guider
+  - Omfattande dokumentation för deployment och provisioning
+  - Detaljerade felsökningsresurser och debug-guider
+  - Verktyg och procedurer för förvalidering före deployment
 
-- **Komma igång-modul**
+- **Getting Started Module**
   - AZD Basics: Kärnkoncept och terminologi
-  - Installationsguide: Plattformsspecifika installationsinstruktioner
-  - Konfigurationsguide: Miljöinställning och autentisering
-  - Första projekt-tutorial: Steg-för-steg praktisk inlärning
+  - Installation Guide: Plattformsspecifika installationsinstruktioner
+  - Configuration Guide: Miljöinställning och autentisering
+  - First Project Tutorial: Steg-för-steg praktisk introduktion
 
-- **Driftsättnings- och provisioningmodul**
-  - Driftsättningsguide: Komplett arbetsflödesdokumentation
-  - Provisioningguide: Infrastructure as Code med Bicep
-  - Bästa praxis för produktionsdriftsättningar
-  - Mönster för arkitektur med flera tjänster
+- **Deployment and Provisioning Module**
+  - Deployment Guide: Komplett arbetsflödesdokumentation
+  - Provisioning Guide: Infrastructure as Code med Bicep
+  - Bästa praxis för produktionsdeployments
+  - Multi-service-arkitekturmönster
 
-- **Modul för validering före driftsättning**
-  - Kapacitetsplanering: Validering av Azure-resursers tillgänglighet
-  - SKU-val: Utförlig vägledning för servicetier
-  - Pre-flight-kontroller: Automatiserade valideringsskript (PowerShell och Bash)
-  - Kostnadsuppskattning och budgetplaneringsverktyg
+- **Pre-deployment Validation Module**
+  - Capacity Planning: Validering av Azure-resursers tillgänglighet
+  - SKU Selection: Omfattande vägledning för servicetierval
+  - Pre-flight Checks: Automatiserade valideringsskript (PowerShell och Bash)
+  - Kostnadsestimering och budgetplaneringsverktyg
 
-- **Felsökningsmodul**
-  - Vanliga problem: Ofta förekommande problem och lösningar
-  - Felsökningsguide: Systematiska felsökningsmetodiker
-  - Avancerade diagnostikmetoder och verktyg
+- **Troubleshooting Module**
+  - Common Issues: Vanliga problem och lösningar
+  - Debugging Guide: Systematiska felsökningsmetodiker
+  - Avancerade diagnostiska tekniker och verktyg
   - Prestandaövervakning och optimering
 
-- **Resurser och referenser**
-  - Kommandocheatsheet: Snabbreferens för väsentliga kommandon
-  - Ordlista: Omfattande terminologi- och förkortningsdefinitioner
+- **Resources and References**
+  - Command Cheat Sheet: Snabbreferens för viktiga kommandon
+  - Glossary: Omfattande terminologi- och förkortningslista
   - FAQ: Utförliga svar på vanliga frågor
-  - Externa resurslänkar och communitykopplingar
+  - Externa resurslänkar och community-kopplingar
 
-- **Exempel och mallar**
+- **Examples and Templates**
   - Enkelt webbapplikationsexempel
-  - Mall för distributionsmall för statisk webbplats
-  - Konfiguration för containerapplikation
-  - Mönster för databasintegration
-  - Exempel på mikrotjänstarkitektur
-  - Implementationer av serverlösa funktioner
+  - Template för statisk webbplatsdeploy
+  - Containerapplikationskonfiguration
+  - Databasintegrationsmönster
+  - Mikrotjänstarkitektur-exempel
+  - Serverless-funktionsimplementationer
 
 #### Funktioner
-- **Flerplattformssupport**: Installations- och konfigurationsguider för Windows, macOS och Linux
-- **Flera färdighetsnivåer**: Innehåll utformat för studenter till professionella utvecklare
-- **Praktiskt fokus**: Praktiska exempel och verkliga scenarier
-- **Omfattande täckning**: Från grundläggande koncept till avancerade företagsmönster
-- **Säkerhetsförst-tillvägagångssätt**: Säkerhetsbästa praxis integrerade genomgående
-- **Kostnadsoptimering**: Vägledning för kostnadseffektiva driftsättningar och resursförvaltning
+- **Multi-Platform Support**: Installations- och konfigurationsguider för Windows, macOS och Linux
+- **Multiple Skill Levels**: Innehåll utformat för studenter till professionella utvecklare
+- **Practical Focus**: Hands-on-exempel och verklighetstrogna scenarier
+- **Comprehensive Coverage**: Från grundläggande koncept till avancerade företagsmönster
+- **Security-First Approach**: Säkerhetsbästa praxis integrerad genom hela materialet
+- **Cost Optimization**: Riktlinjer för kostnadseffektiva deployment- och resursstrategier
 
 #### Dokumentationskvalitet
-- **Detaljerade kodexempel**: Praktiska, testade kodprov
-- **Steg-för-steg-instruktioner**: Tydlig, handlingsbar vägledning
-- **Omfattande felhantering**: Felsökning för vanliga problem
-- **Integrering av bästa praxis**: Branschstandarder och rekommendationer
-- **Versionskompatibilitet**: Uppdaterad med senaste Azure-tjänsterna och azd-funktioner
+- **Detailed Code Examples**: Praktiska, testade kodexempel
+- **Step-by-Step Instructions**: Tydlig, handlingsbar vägledning
+- **Comprehensive Error Handling**: Felsökning för vanliga problem
+- **Best Practices Integration**: Branschstandarder och rekommendationer
+- **Version Compatibility**: Uppdaterad med de senaste Azure-tjänsterna och azd-funktionerna
 
 ## Planerade framtida förbättringar
 
 ### Version 3.1.0 (Planerad)
-#### Utvidgning av AI-plattformen
-- **Stöd för flera modeller**: Integrationsmönster för Hugging Face, Azure Machine Learning och anpassade modeller
-- **AI-agentramverk**: Mallar för LangChain, Semantic Kernel och AutoGen-utrullningar
-- **Avancerade RAG-mönster**: Vektordatabasalternativ utöver Azure AI Search (Pinecone, Weaviate, etc.)
-- **AI-observabilitet**: Förbättrad övervakning av modellprestanda, tokenanvändning och svarskvalitet
+#### AI-plattformsutvidgning
+- **Multi-Model Support**: Integrationsmönster för Hugging Face, Azure Machine Learning och egna modeller
+- **AI Agent Frameworks**: Mallar för LangChain, Semantic Kernel och AutoGen-deployments
+- **Advanced RAG Patterns**: Vektor-databasalternativ utöver Azure AI Search (Pinecone, Weaviate, osv.)
+- **AI Observability**: Förbättrad övervakning för modellprestanda, tokenanvändning och svarskvalitet
 
 #### Utvecklarupplevelse
-- **VS Code-tillägg**: Integrerad AZD + Microsoft Foundry-utvecklarupplevelse
-- **GitHub Copilot-integration**: AI-assisterad AZD-mallgenerering
-- **Interaktiva handledningar**: Praktiska kodningsövningar med automatiserad validering för AI-scenarier
-- **Videoinnehåll**: Kompletterande videoguider för visuella inlärare med fokus på AI-utrullningar
+- **VS Code Extension**: Integrerad AZD + Microsoft Foundry-utvecklingsupplevelse
+- **GitHub Copilot Integration**: AI-assisterad AZD-mallgenerering
+- **Interactive Tutorials**: Praktiska kodövningar med automatisk validering för AI-scenarier
+- **Video Content**: Kompletterande videotutorials för visuella inlärare med fokus på AI-deployments
 
 ### Version 4.0.0 (Planerad)
 #### Företags-AI-mönster
-- **Styrningsramverk**: AI-modellstyrning, efterlevnad och revisionsspår
-- **Multi-tenant AI**: Mönster för att betjäna flera kunder med isolerade AI-tjänster
-- **Edge AI-utrullning**: Integration med Azure IoT Edge och containerinstanser
-- **Hybridmoln-AI**: Multi-cloud- och hybridutrullningsmönster för AI-arbetsbelastningar
+- **Governance Framework**: AI-modellstyrning, efterlevnad och revisionsspår
+- **Multi-Tenant AI**: Mönster för att betjäna flera kunder med isolerade AI-tjänster
+- **Edge AI Deployment**: Integration med Azure IoT Edge och containerinstanser
+- **Hybrid Cloud AI**: Multi-cloud och hybrid-deploymönster för AI-workloads
 
 #### Avancerade funktioner
-- **AI-pipeline-automation**: MLOps-integration med Azure Machine Learning-pipelines
-- **Avancerad säkerhet**: Zero-trust-mönster, privata endpoints och avancerat skydd mot hot
-- **Prestandaoptimering**: Avancerade inställnings- och skalningsstrategier för AI-applikationer med hög genomströmning
-- **Global distribution**: Innehållsleverans- och edge-caching-mönster för AI-applikationer
+- **AI Pipeline Automation**: MLOps-integration med Azure Machine Learning-pipelines
+- **Advanced Security**: Zero-trust-mönster, privata endpoints och avancerat hot-skydd
+- **Performance Optimization**: Avancerad tuning och skalningsstrategier för hög-throughput AI-applikationer
+- **Global Distribution**: Innehållsleverans och edge-caching-mönster för AI-applikationer
 
-### Version 3.0.0 (Planerad) - Överträffad av nuvarande version
+### Version 3.0.0 (Planerad) - Ersatt av nuvarande utgåva
 #### Föreslagna tillägg - Nu implementerade i v3.0.0
-- ✅ **AI-fokuserat innehåll**: Omfattande Microsoft Foundry-integration (Slutfört)
-- ✅ **Interaktiva handledningar**: Praktiskt AI-workshop-labb (Slutfört)
-- ✅ **Avancerad säkerhetsmodul**: AI-specifika säkerhetsmönster (Slutfört)
-- ✅ **Prestandaoptimering**: Strategier för justering av AI-arbetsbelastningar (Slutfört)
+- ✅ **AI-Focused Content**: Omfattande Microsoft Foundry-integration (Slutförd)
+- ✅ **Interactive Tutorials**: Praktiskt AI-workshoplab (Slutförd)
+- ✅ **Advanced Security Module**: AI-specifika säkerhetsmönster (Slutförd)
+- ✅ **Performance Optimization**: Tuningstrategier för AI-workloads (Slutförd)
 
 ### Version 2.1.0 (Planerad) - Delvis implementerad i v3.0.0
 #### Mindre förbättringar - Några slutförda i nuvarande release
-- ✅ **Ytterligare exempel**: AI-fokuserade distributionsscenarier (Slutfört)
-- ✅ **Utökad FAQ**: AI-specifika frågor och felsökning (Slutfört)
-- **Verktygsintegration**: Förbättrade guider för IDE- och editorintegration
-- ✅ **Utökad övervakning**: AI-specifika mönster för övervakning och avisering (Slutfört)
+- ✅ **Additional Examples**: AI-inriktade deploymentscenarier (Slutförd)
+- ✅ **Extended FAQ**: AI-specifika frågor och felsökning (Slutförd)
+- **Tool Integration**: Förbättrade IDE- och editorintegrationsguider
+- ✅ **Monitoring Expansion**: AI-specifik övervakning och larmmönster (Slutförd)
 
 #### Fortfarande planerat för framtida release
-- **Mobilvänlig dokumentation**: Responsiv design för mobilt lärande
-- **Offlineåtkomst**: Nedladdningsbara dokumentationspaket
-- **Förbättrad IDE-integrering**: VS Code-tillägg för AZD + AI-arbetsflöden
-- **Community-instrumentpanel**: Realtidsmått för community och spårning av bidrag
+- **Mobile-Friendly Documentation**: Responsiv design för mobilinlärning
+- **Offline Access**: Nedladdningsbara dokumentationspaket
+- **Enhanced IDE Integration**: VS Code-extension för AZD + AI-arbetsflöden
+- **Community Dashboard**: Realtids community-mätningar och bidragsuppföljning
 
-## Bidra till ändringsloggen
+## Att bidra till förändringsloggen
 
 ### Rapportera ändringar
-När du bidrar till detta repository, vänligen se till att ändringsloggsposter inkluderar:
+När du bidrar till det här repositoryt, se till att changelog-poster innehåller:
 
-1. **Versionsnummer**: Följ semantisk versionering (major.minor.patch)
-2. **Datum**: Release- eller uppdateringsdatum i formatet ÅÅÅÅ-MM-DD
-3. **Kategori**: Added, Changed, Deprecated, Removed, Fixed, Security
-4. **Tydlig beskrivning**: Kortfattad beskrivning av vad som ändrats
-5. **Påverkansbedömning**: Hur förändringarna påverkar befintliga användare
+1. **Version Number**: Följ semantisk versionering (major.minor.patch)
+2. **Date**: Release- eller uppdateringsdatum i YYYY-MM-DD-format
+3. **Category**: Added, Changed, Deprecated, Removed, Fixed, Security
+4. **Clear Description**: Kortfattad beskrivning av vad som ändrats
+5. **Impact Assessment**: Hur ändringarna påverkar befintliga användare
 
 ### Ändringskategorier
 
-#### Added
-- Nya funktioner, dokumentationsavsnitt eller möjligheter
+#### Lagt till
+- Nya funktioner, dokumentationsavsnitt eller kapaciteter
 - Nya exempel, mallar eller lärresurser
-- Ytterligare verktyg, skript eller hjälpmedel
+- Ytterligare verktyg, skript eller verktyg
 
-#### Changed
-- Ändringar av befintlig funktionalitet eller dokumentation
+#### Ändrat
+- Modifieringar av befintlig funktionalitet eller dokumentation
 - Uppdateringar för att förbättra tydlighet eller noggrannhet
 - Omstrukturering av innehåll eller organisation
 
-#### Deprecated
+#### Föråldrat
 - Funktioner eller tillvägagångssätt som fasas ut
-- Dokumentationsavsnitt som planeras tas bort
+- Dokumentavsnitt planerade för borttagning
 - Metoder som har bättre alternativ
 
-#### Removed
+#### Borttaget
 - Funktioner, dokumentation eller exempel som inte längre är relevanta
-- Föråldrad information eller föråldrade tillvägagångssätt
-- Redundant eller konsoliderat innehåll
+- Föråldrad information eller utfasade tillvägagångssätt
+- Redundanta eller konsoliderade innehåll
 
 #### Fixed
 - Korrigeringar av fel i dokumentation eller kod
-- Lösning av rapporterade problem eller buggar
+- Åtgärdande av rapporterade problem eller buggar
 - Förbättringar av noggrannhet eller funktionalitet
 
 #### Security
-- Säkerhetsrelaterade förbättringar eller åtgärder
-- Uppdateringar av säkerhetsbästa praxis
-- Åtgärd av säkerhetssårbarheter
+- Säkerhetsrelaterade förbättringar eller fixar
+- Uppdateringar till säkerhetsbästa praxis
+- Åtgärdande av sårbarheter
 
 ### Riktlinjer för semantisk versionering
 
-#### Huvudversion (X.0.0)
-- Brytande ändringar som kräver åtgärd från användaren
+#### Major Version (X.0.0)
+- Brytande förändringar som kräver åtgärd från användaren
 - Betydande omstrukturering av innehåll eller organisation
-- Ändringar som ändrar den grundläggande metoden eller tillvägagångssättet
+- Ändringar som ändrar den grundläggande metoden eller metodologin
 
-#### Mindre version (X.Y.0)
-- Nya funktioner eller tillägg av innehåll
+#### Minor Version (X.Y.0)
+- Nya funktioner eller innehållstillägg
 - Förbättringar som bibehåller bakåtkompatibilitet
 - Ytterligare exempel, verktyg eller resurser
 
-#### Patch-version (X.Y.Z)
+#### Patch Version (X.Y.Z)
 - Buggfixar och korrigeringar
 - Mindre förbättringar av befintligt innehåll
 - Förtydliganden och små förbättringar
@@ -1010,54 +1113,54 @@ När du bidrar till detta repository, vänligen se till att ändringsloggsposter
 
 Vi uppmuntrar aktivt communityfeedback för att förbättra denna lärresurs:
 
-### Hur du ger feedback
-- **GitHub Issues**: Rapportera problem eller föreslå förbättringar (AI-specifika problem välkomnas)
-- **Discord Discussions**: Dela idéer och engagera dig i Microsoft Foundry-communityt
-- **Pull Requests**: Bidra med direkta förbättringar av innehållet, särskilt AI-mallar och guider
-- **Microsoft Foundry Discord**: Delta i #Azure-kanalen för diskussioner om AZD + AI
-- **Community Forums**: Delta i bredare Azure-utvecklardiskussioner
+### Hur man lämnar feedback
+- **GitHub Issues**: Rapportera problem eller föreslå förbättringar (AI-specifika frågor välkomna)
+- **Discord Discussions**: Dela idéer och engagera dig med Microsoft Foundry-communityn
+- **Pull Requests**: Bidra med direkta förbättringar av innehåll, särskilt AI-mallar och guider
+- **Microsoft Foundry Discord**: Delta i #Azure-kanalen för AZD + AI-diskussioner
+- **Community Forums**: Deltag i bredare Azure-utvecklardiskussioner
 
 ### Feedbackkategorier
-- **AI-innehållets noggrannhet**: Korrigeringar av information om AI-tjänsteintegration och distribution
-- **Inlärningsupplevelse**: Förslag för förbättrat lärflöde för AI-utvecklare
-- **Saknat AI-innehåll**: Förfrågningar om ytterligare AI-mallar, mönster eller exempel
-- **Tillgänglighet**: Förbättringar för olika inlärningsbehov
-- **AI-verktygsintegration**: Förslag för bättre integration av AI-utvecklingsarbetsflöden
-- **Produktions-AI-mönster**: Förfrågningar om företagsmönster för AI-utrullning
+- **AI Content Accuracy**: Korrigeringar av AI-tjänsteintegration och deployinformation
+- **Learning Experience**: Förslag för förbättrad AI-utvecklarkurs
+- **Missing AI Content**: Förfrågningar om ytterligare AI-mallar, mönster eller exempel
+- **Accessibility**: Förbättringar för olika inlärningsbehov
+- **AI Tool Integration**: Förslag för bättre AI-utvecklingsarbetsflödesintegration
+- **Production AI Patterns**: Förfrågningar om företags-AI-deploymönster
 
-### Svarsåtagande
-- **Svar på ärenden**: Inom 48 timmar för rapporterade problem
-- **Funktionsförfrågningar**: Utvärdering inom en vecka
-- **Communitybidrag**: Granskning inom en vecka
-- **Säkerhetsärenden**: Omedelbar prioritet med snabbt svar
+### Åtagande för svar
+- **Issue Response**: Inom 48 timmar för rapporterade problem
+- **Feature Requests**: Utvärdering inom en vecka
+- **Community Contributions**: Granskning inom en vecka
+- **Security Issues**: Omedelbar prioritet med förtur vid svar
 
 ## Underhållsschema
 
 ### Regelbundna uppdateringar
-- **Månadsöversyner**: Innehållets noggrannhet och länkvalidering
-- **Kvartalsvisa uppdateringar**: Stora innehållstillägg och förbättringar
-- **Halvårsöversyner**: Omfattande omstrukturering och förbättringar
-- **Årliga releaser**: Stora versionsuppdateringar med betydande förbättringar
+- **Monthly Reviews**: Innehållsnoggrannhet och länkvalidering
+- **Quarterly Updates**: Större innehållstillägg och förbättringar
+- **Semi-Annual Reviews**: Omfattande omstrukturering och förbättringar
+- **Annual Releases**: Stora versionsuppdateringar med betydande förbättringar
 
 ### Övervakning och kvalitetskontroll
-- **Automatiserade tester**: Regelbunden validering av kodexempel och länkar
-- **Integrering av communityfeedback**: Regelbunden införlivning av användarförslag
-- **Teknikuppdateringar**: Anpassning till de senaste Azure-tjänsterna och azd-releaserna
-- **Tillgänglighetsgranskningar**: Regelbunden översyn för inkluderande designprinciper
+- **Automated Testing**: Regelbunden validering av kodexempel och länkar
+- **Community Feedback Integration**: Regelbunden införlivning av användarförslag
+- **Technology Updates**: Anpassning till senaste Azure-tjänster och azd-utgåvor
+- **Accessibility Audits**: Regelgranskning för inkluderande designprinciper
 
-## Policy för versionsstöd
+## Versionssupportpolicy
 
-### Support för nuvarande version
+### Aktuell versionssupport
 - **Senaste huvudversionen**: Fullt stöd med regelbundna uppdateringar
-- **Föregående huvudversion**: Säkerhetsuppdateringar och kritiska fixar i 12 månader
-- **Äldre versioner**: Endast community-stöd, inga officiella uppdateringar
+- **Föregående huvudversion**: Säkerhetsuppdateringar och kritiska fixar under 12 månader
+- **Äldre versioner**: Endast communitystöd, inga officiella uppdateringar
 
 ### Migreringsvägledning
 När större versioner släpps tillhandahåller vi:
-- **Migrationsguider**: Steg-för-steg-instruktioner för övergång
+- **Migreringsguider**: Steg-för-steg-instruktioner för migreringen
 - **Kompatibilitetsanteckningar**: Detaljer om brytande ändringar
-- **Verktygsstöd**: Skript eller verktyg för att underlätta migrering
-- **Communitystöd**: Dedikerade forum för migreringsfrågor
+- **Verktygsstöd**: Skript eller verktyg för att hjälpa till med migreringen
+- **Communitystöd**: Dedikerade forum för frågor om migrering
 
 ---
 
@@ -1065,11 +1168,11 @@ När större versioner släpps tillhandahåller vi:
 - **Föregående lektion**: [Studieguide](resources/study-guide.md)
 - **Nästa lektion**: Återgå till [Huvud-README](README.md)
 
-**Håll dig uppdaterad**: Bevaka detta repository för aviseringar om nya releaser och viktiga uppdateringar av läromaterialen.
+**Håll dig uppdaterad**: Övervaka detta repository för aviseringar om nya utgåvor och viktiga uppdateringar av undervisningsmaterialet.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfriskrivning:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter att vara korrekta, observera att automatiska översättningar kan innehålla fel eller felaktigheter. Originaldokumentet på dess ursprungliga språk ska betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+**Disclaimer**:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, vänligen observera att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på dess modersmål bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

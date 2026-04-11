@@ -1,29 +1,31 @@
 # Chapter 6: Pre-Deployment Planning & Validation
 
-**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1 hour | **⭐ Complexity**: Intermediate
+**📚 Kọs**: [AZD For Beginners](../../README.md) | **⏱️ Taim**: 1 awa | **⭐ Level**: Intermediit
 
 ---
 
 ## Overview
 
-Dis chapter dey explain the important planning and validation steps wey you suppose do before you deploy your application. Learn how to avoid costly mistake by doing proper capacity planning, choosing correct SKUs, and running preflight checks.
+Dis chapter dey cover the important planning and validation steps wey you suppose do before you deploy your app. Learn how to avoid expensive mistakes with correct capacity planning, SKU selection, and preflight checks.
+
+> Dem don validate am wit `azd 1.23.12` for March 2026.
 
 ## Learning Objectives
 
-By completing this chapter, you go:
-- Run preflight checks before you deploy
-- Plan capacity and estimate wetin resource dem go need
-- Choose appropriate SKUs make cost dey optimized
+If you finish dis chapter, you go:
+- Go run preflight checks before you deploy
+- Plan capacity and estimate how much resources you need
+- Choose appropriate SKUs to optimize cost
 - Configure Application Insights for monitoring
-- Understand how team dem go coordinate
+- Understand how team go coordinate
 
 ---
 
 ## 📚 Lessons
 
-| # | Lekshon | Wetin e mean | Time |
+| # | Lekshon | Tori | Taim |
 |---|--------|-------------|------|
-| 1 | [Preflight Checks](preflight-checks.md) | Validate configuration before deployment | 15 min |
+| 1 | [Preflight Checks](preflight-checks.md) | Check configuration before you deploy | 15 min |
 | 2 | [Capacity Planning](capacity-planning.md) | Estimate resource requirements | 20 min |
 | 3 | [SKU Selection](sku-selection.md) | Choose appropriate pricing tiers | 15 min |
 | 4 | [Application Insights](application-insights.md) | Configure monitoring | 20 min |
@@ -34,7 +36,7 @@ By completing this chapter, you go:
 ## 🚀 Quick Start
 
 ```bash
-# Check di subscription quota dem
+# Check di subscription quotas
 az vm list-usage --location eastus --output table
 
 # Preview di deployment (no resources go dey created)
@@ -51,18 +53,18 @@ azd env get-values
 
 ## ☑️ Pre-Deployment Checklist
 
-### Before `azd provision`
+### Bifo `azd provision`
 
-- [ ] Quota don verify for the region
-- [ ] SKUs don choose well
+- [ ] Quota don verify for region
+- [ ] SKUs don select appropriately
 - [ ] Cost estimate don review
 - [ ] Naming convention dey consistent
 - [ ] Security/RBAC don configure
 
-### Before `azd deploy`
+### Bifo `azd deploy`
 
 - [ ] Environment variables don set
-- [ ] Secrets don put for Key Vault
+- [ ] Secrets dey for Key Vault
 - [ ] Connection strings don verify
 - [ ] Health checks don configure
 
@@ -97,6 +99,6 @@ azd env get-values
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dis document get translated by AI translation service wey dem dey call Co-op Translator (https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg note say automatic translations fit get mistakes or no too accurate. The original document for im original language na the main authoritative source. If na serious or important information, make you use professional human translator. We no go responsible for any misunderstanding or wrong interpretation wey fit come from this translation.
+**Disclaimer**:
+Dis dokument don translate wit AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am accurate, abeg sabi say automated translations fit get mistakes or inaccuracies. Make una consider di original dokument for im native language as di authoritative source. For critical information, we recommend say una use professional human translation. We no dey liable for any misunderstandings or misinterpretations wey fit arise from di use of dis translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

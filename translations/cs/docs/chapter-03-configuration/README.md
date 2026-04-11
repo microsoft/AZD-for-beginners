@@ -1,20 +1,22 @@
-# Kapitola 3: Konfigurace & Autentizace
+# Kapitola 3: Konfigurace a autentizace
 
-**📚 Kurz**: [AZD For Beginners](../../README.md) | **⏱️ Doba trvání**: 45-60 minut | **⭐ Složitost**: Středně pokročilá
+**📚 Kurz**: [AZD Pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 45-60 minut | **⭐ Náročnost**: Středně pokročilý
 
 ---
 
 ## Přehled
 
-Tato kapitola pokrývá konfiguraci prostředí, vzory ověřování a nejlepší bezpečnostní postupy pro nasazení pomocí Azure Developer CLI.
+Tato kapitola pokrývá konfiguraci prostředí, vzory autentizace a nejlepší bezpečnostní postupy pro nasazení pomocí Azure Developer CLI.
+
+> Ověřeno s `azd 1.23.12` v březnu 2026.
 
 ## Cíle učení
 
-Po dokončení této kapitoly budete:
-- Osvojit si hierarchii konfigurace AZD
-- Spravovat více prostředí (dev, staging, prod)
-- Implementovat bezpečné ověřování pomocí spravovaných identit
-- Konfigurovat nastavení specifická pro prostředí
+Po dokončení této kapitoly budete umět:
+- Ovládat hierarchii konfigurace AZD
+- Spravovat více prostředí (vývoj, testovací, produkční)
+- Implementovat zabezpečenou autentizaci s řízenými identitami
+- Konfigurovat nastavení specifická pro dané prostředí
 
 ---
 
@@ -23,7 +25,7 @@ Po dokončení této kapitoly budete:
 | # | Lekce | Popis | Čas |
 |---|--------|-------------|------|
 | 1 | [Průvodce konfigurací](configuration.md) | Nastavení a správa prostředí | 30 min |
-| 2 | [Autentizace & zabezpečení](authsecurity.md) | Vzorové postupy pro spravované identity a RBAC | 30 min |
+| 2 | [Autentizace a bezpečnost](authsecurity.md) | Vzory řízených identit a RBAC | 30 min |
 
 ---
 
@@ -50,12 +52,12 @@ azd env get-values
 
 ## 🔧 Hierarchie konfigurace
 
-AZD uplatňuje nastavení v tomto pořadí (pozdější přepíše dřívější):
+AZD aplikuje nastavení v tomto pořadí (pozdější přepíše dřívější):
 
 1. **Výchozí hodnoty** (vestavěné v šablonách)
 2. **azure.yaml** (konfigurace projektu)
 3. **Proměnné prostředí** (`azd env set`)
-4. **Příznaky příkazového řádku** (`--location eastus`)
+4. **Přepínače příkazového řádku** (`--location eastus`)
 
 ---
 
@@ -65,12 +67,16 @@ AZD uplatňuje nastavení v tomto pořadí (pozdější přepíše dřívější
 # Použijte spravovanou identitu (doporučeno)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Zkontrolujte stav ověření
-azd auth whoami
+# Zkontrolujte stav autentizace AZD
+azd auth status
+
+# Volitelné: ověřte kontext Azure CLI, pokud plánujete spustit příkazy az
 az account show
 
-# Znovu se ověřte, pokud je to nutné
+# Znovu se autentizujte, pokud je to potřeba
 azd auth login
+
+# Volitelné: obnovte autentizaci Azure CLI pro příkazy az
 az login
 ```
 
@@ -93,6 +99,6 @@ az login
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vyloučení odpovědnosti:
-Tento dokument byl přeložen pomocí AI překladatelské služby Co-op Translator (https://github.com/Azure/co-op-translator). Ačkoli usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v originálním znění by měl být považován za rozhodující zdroj. Pro zásadní informace doporučujeme využít profesionální lidský překlad. Nejsme odpovědní za případná nedorozumění nebo chybné výklady vyplývající z použití tohoto překladu.
+**Prohlášení o vyloučení odpovědnosti**:
+Tento dokument byl přeložen pomocí služby AI překladu [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné výklady vyplývající z použití tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

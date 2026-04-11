@@ -1,30 +1,30 @@
-# Microsoft SQL andmebaasi ja veebirakenduse juurutamine AZD-ga
+# Microsoft SQL andmebaasi ja veebiäpi levitamine AZD abil
 
-⏱️ **Eeldatav aeg**: 20–30 minutit | 💰 **Eeldatav maksumus**: ~15–25 USD kuus | ⭐ **Tasemeklaskus**: Kesktasemel
+⏱️ **Hinnanguline aeg**: 20-30 minutit | 💰 **Hinnanguline maksumus**: ~$15-25/kuus | ⭐ **Tasemel keerukus**: Keskmine
 
-See **täielik töötav näide** demonstreerib, kuidas kasutada [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) Python Flask veebirakenduse juurutamiseks Microsoft SQL andmebaasiga Azure'i. Kogu kood on kaasatud ja testitud—väliseid sõltuvusi ei ole vaja.
+See **täielik, töökindel näide** demonstreerib, kuidas kasutada [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) Python Flask veebirakenduse levitamiseks Microsoft SQL andmebaasiga Azure’is. Kõik kood on kaasatud ja testitud—väliseid sõltuvusi pole vaja.
 
-## Mida sa õpid
+## Mida Sa Õpid
 
-Selle näite sooritamisega:
-- Juurutad mitmekihilise rakenduse (veebirakendus + andmebaas) infrastruktuur-koodi abil
-- Konfigureerid turvalisi andmebaasiühendusi ilma salasõnade kodeerimiseta
-- Jälgid rakenduse tervist Application Insightsiga
-- Haldate Azure ressursse tõhusalt AZD CLI abil
-- Järgite Azure parimaid tavasid turvalisuse, kulude optimeerimise ja jälgitavuse osas
+Selle näite lõpetades:
+- Teed mitmekihilise rakenduse (veebiäpp + andmebaas) levituse infrastruktuuri kui koodi abil
+- Konfigureerid turvalised andmebaasiühendused ilma saladuste kõvakodeerimiseta
+- Jälgid rakenduse tervist rakenduse Insightsiga
+- Halad Azure ressursse AZD käsurea tööriistaga tõhusalt
+- Järgida Azure parimaid tavasid turvalisuse, kulude optimeerimise ja jälgitavuse osas
 
-## Stsenaarium kokkuvõte
-- **Veebirakendus**: Python Flask REST API, andmebaasiühendusega
+## Stsenaariumi Ülevaade
+- **Veebiäpp**: Python Flask REST API andmebaasiühendusega
 - **Andmebaas**: Azure SQL andmebaas näidisandmetega
-- **Infrastruktuur**: Provisioneeritud Bicepiga (modulaarne, korduvkasutatav mall)
-- **Juurutamine**: Täiesti automatiseeritud `azd` käskudega
-- **Jälgimine**: Application Insights logide ja telemeetria jaoks
+- **Infrastruktuur**: Provisioneeritud Bicepiga (moodulipõhised, taaskasutatavad mallid)
+- **Levitamine**: Täielikult automatiseeritud `azd` käskudega
+- **Jälgimine**: Application Insights logide ja telemeetriaga
 
 ## Eeltingimused
 
-### Nõutavad tööriistad
+### Vajalikud Tööriistad
 
-Enne alustamist veendu, et sul on need tööriistad paigaldatud:
+Enne alustamist veendu, et järgnevad tööriistad on installitud:
 
 1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (versioon 2.50.0 või uuem)
    ```sh
@@ -44,50 +44,50 @@ Enne alustamist veendu, et sul on need tööriistad paigaldatud:
    # Oodatav väljund: Python 3.8 või uuem
    ```
 
-4. **[Docker](https://www.docker.com/get-started)** (valikuline, konteineripõhiseks kohalikuks arenduseks)
+4. **[Docker](https://www.docker.com/get-started)** (valikuline, kohalikuks konteineripõhiseks arenduseks)
    ```sh
    docker --version
-   # Oodatav väljund: Dockeri versioon 20.10 või uuem
+   # Oodatav väljund: Docker versioon 20.10 või uuem
    ```
 
-### Azure nõuded
+### Azure Nõuded
 
 - Aktiivne **Azure tellimus** ([loo tasuta konto](https://azure.microsoft.com/free/))
-- Õigused ressursside loomiseks sinu tellimuses
-- **Omamise** või **Kaastöötaja** roll tellimuses või ressursigrupis
+- Õigused luua ressursse oma tellimusse
+- **Omaniku** või **kaastöötaja** roll tellimuse või ressursigrupi tasemel
 
-### Eelteadmised
+### Teadmiste Eeltingimused
 
-See on **kesktaseme** näide. Peaksid tuttav olema:
-- Põhiliste käsurea operatsioonidega
-- Pilvepõhiste aluste mõistmisega (ressursid, ressursigrupid)
-- Põhitõdede teadmine veebirakenduste ja andmebaaside kohta
+See on **kesktaseme** näide. Tuleb olla tuttav:
+- Põhiliste käsurea toimingutega
+- Pilve alusterminoloogiaga (ressursid, ressursigrupid)
+- Veebirakenduste ja andmebaaside baasteadmistega
 
-**AZD-ga alustamiseks** vaata esmalt [Getting Started juhendit](../../docs/chapter-01-foundation/azd-basics.md).
+**Sa oled AZD uus?** Alusta esmalt [Sissejuhatuse juhendist](../../docs/chapter-01-foundation/azd-basics.md).
 
 ## Arhitektuur
 
-See näide juurutab kahtekihilise arhitektuuri veebirakenduse ja SQL andmebaasiga:
+See näide levitab kahte taset koos veebirakenduse ja SQL andmebaasiga:
 
 ```mermaid
 graph TD
     Browser[Kasutaja brauser] <--> WebApp[Azure veebirakendus<br/>Flaski API<br/>/tervis<br/>/tooted]
-    WebApp -- Turvaline ühendus<br/>Krüpteeritud --> SQL[Azure SQL andmebaas<br/>Toodete tabel<br/>Näidisteave]
+    WebApp -- Turvaline ühendus<br/>Krüpteeritud --> SQL[Azure SQL andmebaas<br/>Toodete tabel<br/>Näidisandmed]
 ```
-**Ressursside juurutamine:**
+**Ressursi levitus:**
 - **Ressursigrupp**: Kõigi ressursside konteiner
-- **App Service plaan**: Linux-põhine majutus (B1 tase, kulutõhus)
-- **Veebirakendus**: Python 3.11 runtime Flask rakendusega
-- **SQL server**: Hallatav andmebaasiserver, TLS 1.2 miinimumiga
-- **SQL andmebaas**: Põhitasemel (2 GB, sobib arenduseks/testimiseks)
+- **App Service plaan**: Linuxil põhinev majutus (B1 virnast kuluefektiivseks)
+- **Veebiäpp**: Python 3.11 runtime Flask rakendusega
+- **SQL server**: Hallatav andmebaasi server TLS 1.2 või uuema minimaalne tugi
+- **SQL andmebaas**: Basic virn (2 GB, sobib arenduseks/testimiseks)
 - **Application Insights**: Jälgimine ja logimine
-- **Log Analytics tööruum**: Keskne logisäilitamine
+- **Log Analytics tööala**: Keskne logide hoiustamine
 
-**Analooogia**: Mõtle sellele nagu restoranile (veebirakendus) koos jalutuskülmikuga (andmebaas). Kliendid tellivad menüüst (API otspunktid) ning köök (Flaski rakendus) võtab koostisosi (andmeid) külmikust. Restorani juht (Application Insights) jälgib kõike, mis toimub.
+**Analooogia**: Kujuta ette restorani (veebiäpp) koos sisseehitatud külmkambriga (andmebaas). Kliendid tellivad menüüst (API lõpp-punktid) ja köök (Flask rakendus) võtab külmkambrist koostisosad (andmed). Restorani juht (Application Insights) jälgib kõike, mis toimub.
 
 ## Kaustastruktuur
 
-Kõik failid kaasatud – väliseid sõltuvusi ei ole:
+Kõik failid on selles näites kaasatud—väliseid sõltuvusi pole vaja:
 
 ```
 examples/database-app/
@@ -114,37 +114,38 @@ examples/database-app/
         └── Dockerfile          # Container definition
 ```
 
-**Mida iga fail teeb:**
-- **azure.yaml**: Ütleb AZD-le, mida ja kuhu juurutada
+**Mis iga fail teeb:**
+- **azure.yaml**: Määrab AZD-le, mida ja kuhu levitada
 - **infra/main.bicep**: Koordineerib kõiki Azure ressursse
-- **infra/resources/*.bicep**: Üksiktarbimuste definitsioonid (modulaarsed korduvkasutuseks)
+- **infra/resources/*.bicep**: Individuaalsed ressurside definitsioonid (moodulid taaskasutuseks)
 - **src/web/app.py**: Flask rakendus andmebaasi loogikaga
-- **requirements.txt**: Python pakettide sõltuvused
-- **Dockerfile**: Juhised konteinerimiseks juurutamisel
+- **requirements.txt**: Pythoni paketisõltuvused
+- **Dockerfile**: Konteineriseerimise juhised levitamiseks
 
-## Kiirkäivitus (samm-sammult)
+## Kiire algus (samm-sammult)
 
-### Samm 1: Kloonimine ja navigeerimine
+### Samm 1: Kopeeri ja liigu kataloogi
+
 ```sh
 git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/database-app
 ```
 
-**✓ Õnnestumise kontroll**: Veendu, et näed `azure.yaml` ja `infra/` kausta:
+**✓ Edu Kontroll**: Veendu, et näed faile `azure.yaml` ja kausta `infra/`:
 ```sh
 ls
 # Oodatud: README.md, azure.yaml, infra/, src/
 ```
 
-### Samm 2: Azure'isse autentimine
+### Samm 2: Autentimine Azure’iga
 
 ```sh
 azd auth login
 ```
 
-See avab brauseri Azure autentimiseks. Logi sisse oma Azure kasutajaga.
+See avab su brauseri Azure autentimiseks. Logi sisse oma Azure andmetega.
 
-**✓ Õnnestumise kontroll**: Peaksid nägema:
+**✓ Edu Kontroll**: Pead nägema:
 ```
 Logged in to Azure.
 ```
@@ -155,76 +156,76 @@ Logged in to Azure.
 azd init
 ```
 
-**Mis toimub**: AZD loob kohalikku konfiguratsiooni sinu juurutuseks.
+**Mis toimub**: AZD loob kohaliku konfiguratsiooni su levituseks.
 
-**Promptid, mida näed**:
+**Küsitakse:**
 - **Keskkonna nimi**: Sisesta lühike nimi (nt `dev`, `myapp`)
 - **Azure tellimus**: Vali tellimus nimekirjast
-- **Azure piirkond**: Vali piirkond (nt `eastus`, `westeurope`)
+- **Azure regioon**: Vali regioon (nt `eastus`, `westeurope`)
 
-**✓ Õnnestumise kontroll**: Peaksid nägema:
+**✓ Edu Kontroll**: Pead nägema:
 ```
 SUCCESS: New project initialized!
 ```
 
-### Samm 4: Azure ressursside provisioneerimine
+### Samm 4: Azure ressursside loomine
 
 ```sh
 azd provision
 ```
 
-**Mis toimub**: AZD juurutab kogu infrastruktuuri (võtab 5–8 minutit):
+**Mis toimub**: AZD levitab kogu infrastruktuuri (kestab 5-8 minutit):
 1. Loob ressursigrupi
 2. Loob SQL serveri ja andmebaasi
 3. Loob App Service plaani
-4. Loob veebirakenduse
+4. Loob veebiäpi
 5. Loob Application Insightsi
-6. Konfigureerib võrgu ja turvalisuse
+6. Konfigureerib võrgustiku ja turvalisuse
 
-**Sind küsitakse**:
+**Küsitakse:**
 - **SQL admin kasutajanimi**: Sisesta kasutajanimi (nt `sqladmin`)
 - **SQL admin parool**: Sisesta tugev parool (salvesta see!)
 
-**✓ Õnnestumise kontroll**: Peaksid nägema:
+**✓ Edu Kontroll**: Pead nägema:
 ```
 SUCCESS: Your application was provisioned in Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
 https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
 ```
 
-**⏱️ Aeg**: 5–8 minutit
+**⏱️ Aeg**: 5-8 minutit
 
-### Samm 5: Rakenduse juurutamine
+### Samm 5: Rakenduse levitamine
 
 ```sh
 azd deploy
 ```
 
-**Mis toimub**: AZD ehitab ja juurutab sinu Flask rakenduse:
-1. Pakkib Python rakenduse
-2. Ehitab Docker konteineri
-3. Lükab selle Azure Web Appi
-4. Initsialiseerib andmebaasi näidisandmetega
+**Mis toimub**: AZD koostab ja levitab su Flask rakenduse:
+1. Paketib Pythoni rakenduse
+2. Koostab Docker konteineri
+3. Lõhub Azure Web Äppi
+4. Algatab andmebaasi näidisandmetega
 5. Käivitab rakenduse
 
-**✓ Õnnestumise kontroll**: Peaksid nägema:
+**✓ Edu Kontroll**: Pead nägema:
 ```
 SUCCESS: Your application was deployed to Azure in X minutes Y seconds.
 You can view the resources created under the resource group rg-<env-name> in Azure Portal:
 https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-name>
 ```
 
-**⏱️ Aeg**: 3–5 minutit
+**⏱️ Aeg**: 3-5 minutit
 
-### Samm 6: Rakenduse avamine brauseris
+### Samm 6: Rakenduse sirvimine brauseris
 
 ```sh
 azd browse
 ```
 
-See avab sinu juurutatud veebirakenduse aadressil `https://app-<unique-id>.azurewebsites.net`
+See avab su levitatud veebiäpi brauseris aadressil `https://app-<unique-id>.azurewebsites.net`
 
-**✓ Õnnestumise kontroll**: Näed JSON väljundit:
+**✓ Edu Kontroll**: Pead nägema JSON väljundit:
 ```json
 {
   "message": "Welcome to the Database App API",
@@ -237,7 +238,7 @@ See avab sinu juurutatud veebirakenduse aadressil `https://app-<unique-id>.azure
 }
 ```
 
-### Samm 7: API otspunktide testimine
+### Samm 7: API lõpp-punktide testimine
 
 **Tervisekontroll** (kontrollib andmebaasiühendust):
 ```sh
@@ -276,28 +277,28 @@ curl https://app-<your-id>.azurewebsites.net/products
 curl https://app-<your-id>.azurewebsites.net/products/1
 ```
 
-**✓ Õnnestumise kontroll**: Kõik otspunktid tagastavad JSON andmed ilma vigadeta.
+**✓ Edu Kontroll**: Kõik lõpp-punktid tagastavad JSON andmeid ilma vigadeta.
 
 ---
 
-**🎉 Palju õnne!** Sa oled edukalt juurutanud veebirakenduse koos andmebaasiga Azure'i kasutades AZD-d.
+**🎉 Palju õnne!** Sa oled edukalt levitanud veebiäpi koos andmebaasiga Azures AZD abil.
 
-## Konfiguratsiooni süvitsi
+## Konfiguratsiooni süvaanalüüs
 
 ### Keskkonnamuutujad
 
-Saladused hallatakse turvaliselt Azure App Service konfigureerimise kaudu—**kunagi ei sisestata otse lähtekoodi**.
+Saladused on turvaliselt hallatud Azure App Service konfiguratsiooni kaudu—**mitte kunagi kõvakodeeritud lähtekoodis**.
 
-**AZD konfiguratsiooni automaatselt lisab**:
-- `SQL_CONNECTION_STRING`: Andmebaasi ühendus sh krüpteeritud mandaadid
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Jälgimistelemeetri otsapunkt
-- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Lubab automaatse sõltuvuste paigalduse
+**AZD konfigureerib automaatselt:**
+- `SQL_CONNECTION_STRING`: Andmebaasi ühendus krüpteeritud andmetega
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Jälgimise telemeetri aadress
+- `SCM_DO_BUILD_DURING_DEPLOYMENT`: Automaatse sõltuvuste paigalduse lubamine
 
-**Kus saladused hoiustatakse**:
-1. `azd provision` käigus sisestad SQL mandaadid turvaliste promptidega
-2. AZD salvestab need kohalikku `.azure/<env-name>/.env` faili (git-ignoreeritud)
-3. AZD süstib need Azure App Service konfigureerimisse (krüpteeritult)
-4. Rakendus loeb neid `os.getenv()` abil käivitumisel
+**Kus saladused hoitakse:**
+1. `azd provision` ajal sisestad SQL mandaadid turvaliste promptide abil
+2. AZD salvestab need su kohalikku `.azure/<env-name>/.env` faili (ignoreeritud Git’is)
+3. AZD süstib need Azure App Service konfiguratsiooni (krüpteeritult salvestatult)
+4. Rakendus loeb neid `os.getenv()` kaudu jooksuajal
 
 ### Kohalik arendus
 
@@ -305,7 +306,7 @@ Kohaliku testimise jaoks loo `.env` fail näidisfailist:
 
 ```sh
 cp .env.sample .env
-# Muuda .env oma kohaliku andmebaasi ühendusega
+# Muutke .env faili oma kohaliku andmebaasi ühenduse andmetega
 ```
 
 **Kohaliku arenduse töövoog**:
@@ -314,30 +315,30 @@ cp .env.sample .env
 cd src/web
 pip install -r requirements.txt
 
-# Määra keskkonnamuutujad
+# Sea keskkonnamuutujad
 export SQL_CONNECTION_STRING="your-local-connection-string"
 
 # Käivita rakendus
 python app.py
 ```
 
-**Testimine kohapeal**:
+**Teste kohapeal**:
 ```sh
 curl http://localhost:8000/health
 # Oodatud: {"status": "terve", "andmebaas": "ühendatud"}
 ```
 
-### Infrastruktuur kui kood
+### Infrastruktuur kui Kood
 
 Kõik Azure ressursid on määratletud **Bicep mallides** (`infra/` kaust):
 
-- **Modulaarne disain**: Igal ressursitüübil on oma fail korduvkasutuseks
-- **Parameetriseeritud**: Kohanda SKUsid, piirkondi, nimekonventsioone
+- **Moodulipõhine disain**: Igal ressursitüübil oma fail taaskasutuseks
+- **Parameetriseeritud**: SKU-d, regioonid, nimekonventsioonid kohandatavad
 - **Parimad tavad**: Järgib Azure nime- ja turvastandardeid
-- **Versioonihaldus**: Infrastruktuuri muudatused jälgitavad Gitis
+- **Versioonikontroll**: Infrastruktuur muudatused jälgitakse Gitis
 
-**Kohanäide**:
-Andmebaasi taseme muutmiseks muuda `infra/resources/sql-database.bicep` faili:
+**Kohandamise näide**:
+Andmebaasi tüki muutmiseks muuda `infra/resources/sql-database.bicep` faili:
 ```bicep
 sku: {
   name: 'Standard'  // Changed from 'Basic'
@@ -350,68 +351,68 @@ sku: {
 
 See näide järgib Azure turvalisuse parimaid tavasid:
 
-### 1. **Saladused ei ole lähtekoodis**
-- ✅ Mandaadid hoiustatud Azure App Service’i konfigureerimises (krüpteeritud)
-- ✅ `.env` failid on `.gitignore`-s
-- ✅ Saladused sisestatakse turvaliste parameetritena juurutamise ajal
+### 1. **Ei saladusi lähtekoodis**
+- ✅ Mandaadid salvestatud Azure App Service konfiguratsioonis (krüpteeritud)
+- ✅ `.env` failid jäetud Git’is ignoreerimiseks `.gitignore` abil
+- ✅ Saladused edastatakse turvaliste parameetritena provisioneerimisel
 
 ### 2. **Krüpteeritud ühendused**
-- ✅ SQL server TLS 1.2 miinimumiga
-- ✅ Veebirakendusel HTTPS ainult lubatud
-- ✅ Andmebaasiühendused krüpteeritud kanalite kaudu
+- ✅ SQL Server TLS 1.2 minimaalne tugi
+- ✅ Veebirakendus lubab ainult HTTPS teenindust
+- ✅ Andmebaasiühendused kasutavad krüpteeritud kanaleid
 
-### 3. **Võrgu turvalisus**
-- ✅ SQL serveri tulemüür lubab ainult Azure teenuseid
-- ✅ Avalik võrgujuurdepääs piiratud (saab täiendavalt piirata Privaatsete otsapunktidega)
-- ✅ Web Appil FTPS keelatud
+### 3. **Võrguturvalisus**
+- ✅ SQL Serveri tulemüür lubab ligipääsu ainult Azure teenustele
+- ✅ Avalik võrguliiklus piiratud (võimalik täiendav piirang Privaatsete Lõpp-punktide kaudu)
+- ✅ Veebiäpis on FTPS keelatud
 
 ### 4. **Autentimine ja autoriseerimine**
 - ⚠️ **Praegu**: SQL autentimine (kasutajanimi/parool)
-- ✅ **Tootmise soovitus**: Kasuta Azure Managed Identity paroolivabaks autentimiseks
+- ✅ **Tootmiskeskkonnas soovitatav**: Kasutada Azure Hallatavat Identiteeti paroolivabaks autentimiseks
 
-**Managed Identity kasutuselevõtt tootmises**:
-1. Luba veebirakendusel hallatav identiteet
+**Hallatavale identiteedile üleminek** (tootmises):
+1. Luba hallatav identiteet veebiäpil
 2. Anna identiteedile SQL õigused
-3. Uuenda ühendusstring managed identity kasutamiseks
+3. Värskenda ühendusstring, et kasutada hallatavat identiteeti
 4. Eemalda paroolipõhine autentimine
 
 ### 5. **Audit ja vastavus**
 - ✅ Application Insights logib kõik päringud ja vead
-- ✅ SQL andmebaasi auditeerimine lubatud (konfigureeritav vastavuseks)
-- ✅ Kõik ressursid märgistatud halduseks
+- ✅ SQL andmebaasi audit lubatud (vastavuseks konfigureeritav)
+- ✅ Kõik ressursid on märgistatud halduseks
 
 **Turvalisuse kontrollnimekiri enne tootmisse minekut**:
 - [ ] Luba Azure Defender SQL jaoks
-- [ ] Konfigureeri privaatotsapunktid SQL andmebaasile
-- [ ] Luba Veebirakenduste tulemüür (WAF)
-- [ ] Kasuta Azure Key Vaulti saladuste vahetamiseks
-- [ ] Konfigureeri Azure AD autentimine
-- [ ] Luba diagnostika logimine kõikidele ressurssidele
+- [ ] Konfigureeri Privaatsed Lõpp-punktid SQL andmebaasile
+- [ ] Luba Veebi Rakenduse Tulemüür (WAF)
+- [ ] Kasuta Azure Key Vault saladuste pööramiseks
+- [ ] Luba Azure AD autentimine
+- [ ] Luba diagnostikalogimine kõigile ressurssidele
 
 ## Kulude optimeerimine
 
-**Eeldatavad kuukulud** (2025. aasta november):
+**Hinnangulised kuukulud** (seisuga november 2025):
 
-| Ressurss | SKU / tase | Eeldatav maksumus |
-|----------|------------|-------------------|
-| App Service plaan | B1 (Basic) | ~13 USD kuus |
-| SQL andmebaas | Basic (2GB) | ~5 USD kuus |
-| Application Insights | Pay-as-you-go | ~2 USD kuus (vähene liiklus) |
-| **Kokku** | | **~20 USD kuus** |
+| Ressurss | SKU/Virn | Hinnanguline maksumus |
+|----------|----------|----------------------|
+| App Service plaan | B1 (Basic) | ~$13/kuus |
+| SQL andmebaas | Basic (2GB) | ~$5/kuus |
+| Application Insights | Maksa vastavalt kasutusele | ~$2/kuus (madal liiklus) |
+| **Kokku** | | **~$20/kuus** |
 
-**💡 Kulu kokkuhoiu näpunäited**:
+**💡 Kulu kokkuhoiu nipid**:
 
-1. **Kasuta tasuta taset õppimiseks**:
-   - App Service: F1 tase (tasuta, piiratud tunnid)
-   - SQL andmebaas: vali Azure SQL Database serverless variant
-   - Application Insights: 5 GB kuus tasuta andmete kogumine
+1. **Kasutage õppimiseks tasuta virna**:
+   - App Service: F1 virn (tasuta, piiratud tunnid)
+   - SQL andmebaas: Kasuta Azure serverless SQL andmebaasi
+   - Application Insights: 5GB/kuu tasuta andmete sissetoomine
 
 2. **Peata ressursid, kui neid ei kasutata**:
    ```sh
-   # Peata veebirakendus (andmebaas laadib endiselt)
+   # Peata veebirakendus (andmebaas kannab siiski kulusid)
    az webapp stop --name <app-name> --resource-group <rg-name>
    
-   # Taaskäivita vajadusel
+   # Taaskäivita vastavalt vajadusele
    az webapp start --name <app-name> --resource-group <rg-name>
    ```
 
@@ -419,48 +420,48 @@ See näide järgib Azure turvalisuse parimaid tavasid:
    ```sh
    azd down
    ```
-   See eemaldab KÕIK ressursid ja peatab kulud.
+   See kustutab KÕIK ressursid ja lõpetab kulutused.
 
-4. **Arendus- vs tootmistasemed**:
-   - **Arendus**: põhitasemel (kasutatud selles näites)
-   - **Tootmine**: standard / premium tasemed koos redundantsiga
+4. **Arenduse ja tootmise SKU-d**:
+   - **Arendus**: Basic virn (kasutatakse selles näites)
+   - **Tootmine**: Standard/Premium virn, süsteemsuse ja redundantsusega
 
 **Kulude jälgimine**:
-- Vaatamine [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement) juures
-- Sea üles kulualarmid üllatuste vältimiseks
+- Vaata kulusid [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
+- Sea sisse kuluhäired, et vältida ootamatuid arveid
 - Märgista kõik ressursid `azd-env-name` sildiga jälgimiseks
 
-**Tasuta taseme alternatiiv**:
-Õppimiseks muuda `infra/resources/app-service-plan.bicep` faili:
+**Tasuta virna alternatiiv**:
+Õppimise eesmärgil saad muuta faili `infra/resources/app-service-plan.bicep`:
 ```bicep
 sku: {
   name: 'F1'  // Free tier
   tier: 'Free'
 }
 ```
-**Märkus**: Tasuta tase on piiratud (60 minutit päevas CPU, mitte pesa-alati sees).
+**Märkus**: Tasuta virnal on piirangud (60 minutit päevas CPU, puudub always-on).
 
 ## Jälgimine ja jälgitavus
 
-### Application Insights integreerimine
+### Application Insightsi integreerimine
 
-See näide sisaldab **Application Insightsi** põhjalikuks jälgimiseks:
+See näide sisaldab **Application Insightsi** põhjalikku jälgimist:
 
-**Jälgitakse**:
-- ✅ HTTP päringud (viivitus, staatuskoodid, otspunktid)
+**Jälgimisel**:
+- ✅ HTTP päringud (latentsus, olekukoodid, lõpp-punktid)
 - ✅ Rakenduse vead ja erandid
 - ✅ Kohandatud logimine Flask rakendusest
-- ✅ Andmebaasi ühenduse tervis
-- ✅ Jõudlusmõõdikud (CPU, mälu)
+- ✅ Andmebaasiühenduse tervis
+- ✅ Jõudlusnäitajad (CPU, mälukasutus)
 
-**Kuidas vaadata Application Insightsi**:
-1. Ava [Azure portaal](https://portal.azure.com)
-2. Leia oma ressursigrupp (`rg-<env-name>`)
+**Kuidas pääseda Application Insightsile:**
+1. Ava [Azure Portaal](https://portal.azure.com)
+2. Liigu oma ressursigrupi juurde (`rg-<env-name>`)
 3. Klõpsa Application Insights ressursil (`appi-<unique-id>`)
 
-**Kasulikud päringud** (Application Insights → Logs):
+**Kasulikud päringud** (Application Insights → Logid):
 
-**Vaata kõiki päringuid**:
+**Kõigi päringute vaatamine**:
 ```kusto
 requests
 | where timestamp > ago(1h)
@@ -468,7 +469,7 @@ requests
 | project timestamp, name, url, resultCode, duration
 ```
 
-**Leia vead**:
+**Vigade leidmine**:
 ```kusto
 exceptions
 | where timestamp > ago(24h)
@@ -476,38 +477,38 @@ exceptions
 | project timestamp, type, outerMessage, operation_Name
 ```
 
-**Tervise kontrolli otspunkt**:
+**Tervise lõpp-punkti kontroll**:
 ```kusto
 requests
 | where name contains "health"
 | summarize count() by resultCode, bin(timestamp, 1h)
 ```
 
-### SQL andmebaasi auditeerimine
+### SQL andmebaasi audit
 
-**SQL andmebaasi auditeerimine on lubatud** järgneva jälgimiseks:
-- Andmebaasi ligipääsu mustrid
-- Ebaõnnestunud sisselogimiskatsed
-- Skeemi muutused
-- Andmete ligipääs (täituvuse jaoks)
+**SQL andmebaasi audit lubatud**, et jälgida:
+- Andmebaasi kasutusmustreid
+- Ebaõnnestunud sisselogimiskatseid
+- Skeemi muudatusi
+- Andmete ligipääsu (vastavuse tagamiseks)
 
-**Auditilogide vaatamine**:
-1. Azure portaal → SQL andmebaas → Auditeerimine
-2. Logid Log Analytics tööruumis
+**Juhtpaneeli logid**:
+1. Azure Portaal → SQL andmebaas → Audit
+2. Vaata logisid Log Analytics tööalas
 
 ### Reaalajas jälgimine
 
-**Vaata Live Metricsi**:
+**Vaata elavaid mõõdikuid**:
 1. Application Insights → Live Metrics
-2. Näed päringuid, vigu ja jõudlust reaalajas
+2. Vaata päringuid, ebaõnnestumisi ja jõudlust reaalajas
 
-**Seadista alarmid**:
-Loo alarmid kriitilistele sündmustele:
-- HTTP 500 vead > 5 viis minutit
-- Andmebaasiühenduse vead
-- Kõrged vastuseajad (> 2 sekundit)
+**Häirete seadistamine**:
+Loo häired kriitiliste sündmuste jaoks:
+- HTTP 500 vead > 5 5 minuti jooksul
+- Andmebaasiühenduse katkestused
+- Kõrged vastuseajad (>2 sekundit)
 
-**Näide alarmeerimise loomisest**:
+**Näide häirete loomisest**:
 ```sh
 az monitor metrics alert create \
   --name "High-Response-Time" \
@@ -517,124 +518,127 @@ az monitor metrics alert create \
   --description "Alert when response time exceeds 2 seconds"
 ```
 
-## Tõrkeotsing
+## Probleemide lahendamine
 ### Levinumad probleemid ja lahendused
 
-#### 1. `azd provision` ebaõnnestub veaga "Location not available"
+#### 1. `azd provision` nurjub veaga "Asukoht pole saadaval"
 
-**Sümptom**:
+**Sümptom**:  
 ```
 Error: The subscription is not registered for the resource type 'components' in the location 'centralus'.
 ```
-
-**Lahendus**:
-Vali teine Azure regioon või registreeri ressursipakkuja:
+  
+**Lahendus**:  
+Vali mõni teine Azure piirkond või registreeri ressursipakkuja:  
 ```sh
 az provider register --namespace Microsoft.Insights
 ```
+  
+#### 2. SQL-ühendus ebaõnnestub juurutamise ajal
 
-#### 2. SQL ühendus ebaõnnestub juurutamise ajal
-
-**Sümptom**:
+**Sümptom**:  
 ```
 pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]TCP Provider...')
 ```
+  
+**Lahendus**:  
+- Kontrolli, et SQL Serveri tulemüür lubab Azure teenuseid (konfigureeritakse automaatselt)  
+- Veendu, et SQL administraatori parool sisestati `azd provision` ajal õigesti  
+- Veendu, et SQL Server on täielikult juurutatud (võib võtta 2-3 minutit)  
 
-**Lahendus**:
-- Kontrolli, et SQL Serveri tulemüür lubab Azure teenuseid (on konfigureeritud automaatselt)
-- Veendu, et SQL admin parool sisestati õigesti käsklusega `azd provision`
-- Kontrolli, kas SQL Server on täielikult juurutatud (võib võtta 2-3 minutit)
-
-**Ühenduse kontrollimine**:
+**Ühenduse kontrollimine**:  
 ```sh
-# Azure portaalist minge SQL andmebaasi → Päringuredaktor
-# Proovige oma volikirjadega ühendada
+# Azure'i portaalist minge SQL andmebaasi → Päringu redaktorisse
+# Proovige oma mandaadiga ühenduda
 ```
+  
+#### 3. Veebirakendus kuvab "Rakenduse viga"
 
-#### 3. Veebirakendus kuvab "Application Error"
+**Sümptom**:  
+Brauser kuvab üldist veateadet.
 
-**Sümptom**:
-Brauser kuvab üldist vealehte.
-
-**Lahendus**:
-Kontrolli rakenduse logisid:
+**Lahendus**:  
+Kontrolli rakenduse logisid:  
 ```sh
 # Vaata viimaseid logisid
 az webapp log tail --name <app-name> --resource-group <rg-name>
 ```
+  
+**Levinumad põhjused**:  
+- Puuduvad keskkonnamuutujad (kontrolli App Service → Configuration)  
+- Python-paketi paigaldus ebaõnnestus (kontrolli juurutuslogisid)  
+- Andmebaasi algatamise viga (kontrolli SQL-ühenduvust)  
 
-**Levinumad põhjused**:
-- Puuduvad keskkonnamuutujad (kontrolli App Service → Configuration)
-- Python'i paketi installatsioon ebaõnnestus (kontrolli juurutuslogisid)
-- Andmebaasi inicialiseerimise viga (kontrolli SQL ühendust)
+#### 4. `azd deploy` nurjub veaga "Build Error"
 
-#### 4. `azd deploy` ebaõnnestub veaga "Build Error"
-
-**Sümptom**:
+**Sümptom**:  
 ```
 Error: Failed to build project
 ```
+  
+**Lahendus**:  
+- Veendu, et `requirements.txt` failis pole süntaksi vigu  
+- Kontrolli, et Python 3.11 on määratud failis `infra/resources/web-app.bicep`  
+- Kontrolli, et Dockerfile kasutab õiget baaspilti  
 
-**Lahendus**:
-- Veendu, et `requirements.txt` failis pole süntaksivigu
-- Kontrolli, et Python 3.11 on määratletud failis `infra/resources/web-app.bicep`
-- Veendu, et Dockerfile kasutab õiget baaspilti
-
-**Silumine kohapeal**:
+**Silumine lokaalselt**:  
 ```sh
 cd src/web
 docker build -t test-app .
 docker run -p 8000:8000 test-app
 ```
+  
+#### 5. "Volitamata" AZD käskude käivitamisel
 
-#### 5. "Unauthorized" tõrked AZD käskluste käivitamisel
-
-**Sümptom**:
+**Sümptom**:  
 ```
 ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have authorization
 ```
-
-**Lahendus**:
-Autendi uuesti Azure’i:
+  
+**Lahendus**:  
+Logi Azure keskkonda uuesti sisse:  
 ```sh
+# Nõutav AZD töövoogude jaoks
 azd auth login
+
+# Valikuline, kui kasutate ka Azure CLI käske otse
 az login
 ```
-
-Veendu, et sul on tellimuses õige õigustase (Contributor roll).
+  
+Veendu, et sul on õige õiguste tase (Contributor roll) tellimuses.
 
 #### 6. Kõrged andmebaasi kulud
 
-**Sümptom**:
-Ootamatult suur Azure arve.
+**Sümptom**:  
+Ootamatu Azure arve.
 
-**Lahendus**:
-- Kontrolli, kas unustasid peale testimist käivitada `azd down`
-- Veendu, et SQL andmebaas kasutab Basic taset (mitte Premium)
-- Vaata kulusid Azure Cost Management’is
-- Sea üles kuluhoiatused
+**Lahendus**:  
+- Kontrolli, kas unustasid pärast testimist käivitada `azd down`  
+- Veendu, et SQL andmebaas kasutab Basic taset (mitte Premium)  
+- Vaata kulusid Azure Cost Managementis üle  
+- Seadista kuluhoiatused  
 
 ### Abi saamine
 
-**Kõigi AZD keskkonnamuutujate kuvamine**:
+**Vaata kõiki AZD keskkonnamuutujaid**:  
 ```sh
 azd env get-values
 ```
-
-**Juurutuse staatuse kontroll**:
+  
+**Kontrolli juurutamise staatust**:  
 ```sh
 az webapp show --name <app-name> --resource-group <rg-name> --query state
 ```
-
-**Rakenduse logide lugemine**:
+  
+**Juurdepääs rakenduse logidele**:  
 ```sh
 az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
 ```
-
-**Vaja rohkem abi?**
-- [AZD tõrkeotsingu juhend](../../docs/chapter-07-troubleshooting/common-issues.md)
-- [Azure App Service tõrkeotsingu juhend](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
-- [Azure SQL tõrkeotsingu juhend](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
+  
+**Vajate rohkem abi?**  
+- [AZD tõrkeotsingu juhend](../../docs/chapter-07-troubleshooting/common-issues.md)  
+- [Azure App Service tõrkeotsing](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)  
+- [Azure SQL tõrkeotsing](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)  
 
 ## Praktilised harjutused
 
@@ -642,40 +646,40 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 **Eesmärk**: Kinnita, et kõik ressursid on juurutatud ja rakendus töötab.
 
-**Sammud**:
-1. Loetle kõik ressursid oma ressursigrupis:
+**Sammud**:  
+1. Kuva kõik ressursid oma ressursigrupis:  
    ```sh
    az resource list --resource-group rg-<env-name> --output table
    ```
-   **Oodatud**: 6-7 ressurssi (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
+   **Oodatud**: 6–7 ressurssi (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
 
-2. Testi kõiki API otsapunkte:
+2. Testi kõiki API lõpp-punkte:  
    ```sh
    curl https://app-<your-id>.azurewebsites.net/
    curl https://app-<your-id>.azurewebsites.net/health
    curl https://app-<your-id>.azurewebsites.net/products
    curl https://app-<your-id>.azurewebsites.net/products/1
    ```
-   **Oodatud**: Kõik tagastavad valide JSONi ilma vigadeta
+   **Oodatud**: Kõik tagastavad kehtiva JSONi vigadeta
 
-3. Kontrolli Application Insights’i:
-   - Ava Azure Portalis Application Insights
-   - Mine jaotisse "Live Metrics"
-   - Värskenda veebirakendust brauseris
-   **Oodatud**: Nostud ilmuvad reaalajas
+3. Kontrolli Application Insights:  
+   - Ava Azure portaalis Application Insights  
+   - Mine "Live Metrics" lehele  
+   - Värskenda oma brauseri vaadet veebirakenduses  
+   **Oodatud**: Reaalajas ilmub päringute tegevus
 
-**Edu kriteeriumid**: Kõik 6-7 ressurssi on olemas, kõik otsapunktid tagastavad andmed, Live Metrics näitab aktiivsust.
+**Edu kriteeriumid**: Kõik 6–7 ressurssi olemas, kõik lõpp-punktid tagastavad andmeid, Live Metrics näitab aktiivsust.
 
 ---
 
-### Harjutus 2: Lisa uus API otsapunkt (Kesktase)
+### Harjutus 2: Lisa uus API lõpp-punkt (Kesktase)
 
-**Eesmärk**: Laienda Flask-rakendust uue otsapunktiga.
+**Eesmärk**: Laienda Flaski rakendust uue lõpp-punktiga.
 
-**Alguskood**: Praegused otsapunktid failis `src/web/app.py`
+**Algkodeks**: Praegused lõpp-punktid failis `src/web/app.py`
 
-**Sammud**:
-1. Muuda `src/web/app.py` ja lisa uus otsapunkt pärast funktsiooni `get_product()`:
+**Sammud**:  
+1. Muuda faili `src/web/app.py` ja lisa uus lõpp-punkt pärast `get_product()` funktsiooni:  
    ```python
    @app.route('/products/search/<keyword>')
    def search_products(keyword):
@@ -708,36 +712,36 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
            logger.error(f"Error searching products: {str(e)}")
            return jsonify({'error': str(e)}), 500
    ```
-
-2. Juuri uuendatud rakendus:
+  
+2. Juuruta uuendatud rakendus:  
    ```sh
    azd deploy
    ```
-
-3. Testi uut otsapunkti:
+  
+3. Testi uut lõpp-punkti:  
    ```sh
    curl https://app-<your-id>.azurewebsites.net/products/search/laptop
    ```
-   **Oodatud**: Tagastab tooted, mis vastavad "laptop" märksõnale
+   **Oodatud**: Tagastab tooted, mis vastavad "laptop"
 
-**Edu kriteeriumid**: Uus otsapunkt töötab, tagastab filtreeritud tulemused, ilmub Application Insights logides.
+**Edu kriteeriumid**: Uus lõpp-punkt töötab, tagastab filtreeritud tulemused, ilmub Application Insights logides.
 
 ---
 
-### Harjutus 3: Lisa monitooring ja hoiatused (Edasijõudnu)
+### Harjutus 3: Lisa jälgimine ja hoiatused (Edasijõudnud)
 
-**Eesmärk**: Seadista proaktiivne monitooring koos teadetega.
+**Eesmärk**: Loo proaktiivne jälgimine ja hoiatused.
 
-**Sammud**:
-1. Loo hoiatus HTTP 500 vigade jaoks:
+**Sammud**:  
+1. Loo hoiatus HTTP 500 vigade jaoks:  
    ```sh
-   # Saa Application Insightsi ressursi ID
+   # Hangi Application Insightsi ressursi ID
    AI_ID=$(az monitor app-insights component show \
      --app appi-<your-id> \
      --resource-group rg-<env-name> \
      --query id -o tsv)
    
-   # Loo hoiatus
+   # Loo alarm
    az monitor metrics alert create \
      --name "High-Error-Rate" \
      --resource-group rg-<env-name> \
@@ -747,29 +751,29 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
      --evaluation-frequency 1m \
      --description "Alert when >5 failed requests in 5 minutes"
    ```
-
-2. Tekita vigu hoiatuses käivitamiseks:
+  
+2. Käivita hoiatus, põhjustades vigu:  
    ```sh
    # Taotlege mitteolemasolevat toodet
    for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
    ```
+  
+3. Kontrolli, kas hoiatus käivitati:  
+   - Azure portaal → Alerts → Alert Rules  
+   - Kontrolli oma e-kirja (kui seadistatud)  
 
-3. Kontrolli, kas hoiatus käivitati:
-   - Azure Portal → Alerts → Alert Rules
-   - Kontrolli oma e-posti (kui konfigureeritud)
-
-**Edu kriteeriumid**: Hoiatereegel on loodud, vigu tuvastab, teated on saadetud.
+**Edu kriteeriumid**: Hoiatusreegel on loodud, aktiveerub vigade korral, teavitused saadetakse.
 
 ---
 
-### Harjutus 4: Andmebaasi skeemi muutused (Edasijõudnu)
+### Harjutus 4: Andmebaasi skeemi muudatused (Edasijõudnud)
 
 **Eesmärk**: Lisa uus tabel ja muuda rakendust selle kasutamiseks.
 
-**Sammud**:
-1. Ühendu SQL andmebaasiga Azure Portali Query Editori kaudu
+**Sammud**:  
+1. Ühendu SQL andmebaasiga Azure portaali päringutoimetis
 
-2. Loo uus tabel `categories`:
+2. Loo uus tabel `categories`:  
    ```sql
    CREATE TABLE categories (
        id INT PRIMARY KEY IDENTITY(1,1),
@@ -785,111 +789,112 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    ALTER TABLE products ADD category_id INT;
    UPDATE products SET category_id = 1; -- Set all to Electronics
    ```
+  
+3. Lisa `src/web/app.py` ka kategooria info vastustesse
 
-3. Uuenda `src/web/app.py`, et vastustes kuvada kategooria informatsiooni
+4. Juuruta ja testi
 
-4. Juuri ja testi
-
-**Edu kriteeriumid**: Uus tabel on olemas, tooted kuvavad kategooriat, rakendus töötab endiselt.
+**Edu kriteeriumid**: Uus tabel olemas, tooted kuvavad kategooria infot, rakendus töötab endiselt.
 
 ---
 
-### Harjutus 5: Rakenda vahemällu salvestamine (Ekspert)
+### Harjutus 5: Rakenda vahemälu (Ekspert)
 
 **Eesmärk**: Lisa Azure Redis Cache jõudluse parandamiseks.
 
-**Sammud**:
-1. Lisa Redis Cache faili `infra/main.bicep`
-2. Uuenda `src/web/app.py`, et vahemällu salvestada tooteküsimusi
-3. Mõõda jõudluse paranemist Application Insights abil
-4. Võrdle vastamisajad enne ja pärast vahemällu salvestamist
+**Sammud**:  
+1. Lisa Redis Cache failis `infra/main.bicep`  
+2. Uuenda `src/web/app.py`, et vahemällu salvestada tootepäringud  
+3. Mõõda jõudluse paranemist Application Insights abil  
+4. Võrdle vastuseaegu enne ja pärast vahemällu panekut
 
-**Edu kriteeriumid**: Redis on juurutatud, vahemällu salvestamine töötab, vastamisajad paranevad >50%.
+**Edu kriteeriumid**: Redis on juurutatud, vahemälu töötab, vastuseajad paranevad üle 50%.
 
-**Vihje**: Alusta [Azure Cache for Redis dokumentatsioonist](https://learn.microsoft.com/azure/azure-cache-for-redis/).
+**Vihje**: Alustamiseks vaata [Azure Cache for Redis dokumentatsiooni](https://learn.microsoft.com/azure/azure-cache-for-redis/).
 
 ---
 
 ## Puhastamine
 
-Jätkuvate kulude vältimiseks kustuta kõik ressursid pärast lõpetamist:
+Kulude vältimiseks kustuta kõik ressursid pärast lõpetamist:
 
 ```sh
 azd down
 ```
-
-**Kinnitusviip**:
+  
+**Kinnituse päring**:  
 ```
 ? Total resources to delete: 7, are you sure you want to continue? (y/N)
 ```
-
+  
 Sisesta `y`, et kinnitada.
 
-**✓ Edu kontroll**: 
-- Kõik ressursid on kustutatud Azure Portalist
-- Ei ole jooksvaid kulusid
-- Kohalikku kausta `.azure/<env-name>` võib kustutada
+**✓ Edu kontroll**:  
+- Kõik ressursid on kustutatud Azure portaali kaudu  
+- Pole jooksvaid kulusid  
+- Kohalik `.azure/<env-name>` kaust võib kustutada  
 
-**Alternatiiv** (hoia infrastruktuuri, kustuta andmed):
+**Alternatiiv** (säilita infrastruktuur, kustuta andmed):  
 ```sh
-# Kustuta ainult ressursigrupp (hoia AZD konfiguratsiooni)
+# Kustuta ainult ressursigrupi (hoia AZD konfiguratsiooni)
 az group delete --name rg-<env-name> --yes
 ```
-## Õpi Rohkem
+  
+## Õpi rohkem
 
-### Seotud dokumentatsioon
-- [Azure Developer CLI dokumentatsioon](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Azure SQL Database dokumentatsioon](https://learn.microsoft.com/azure/azure-sql/database/)
-- [Azure App Service dokumentatsioon](https://learn.microsoft.com/azure/app-service/)
-- [Application Insights dokumentatsioon](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Bicep keele viide](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+### Seotud dokumentatsioon  
+- [Azure Developer CLI dokumentatsioon](https://learn.microsoft.com/azure/developer/azure-developer-cli/)  
+- [Azure SQL Database dokumentatsioon](https://learn.microsoft.com/azure/azure-sql/database/)  
+- [Azure App Service dokumentatsioon](https://learn.microsoft.com/azure/app-service/)  
+- [Application Insights dokumentatsioon](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)  
+- [Bicep keele viide](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)  
 
-### Järgmised sammud kursusel
-- **[Container Apps näidis](../../../../examples/container-app)**: Juuruta mikroteenused Azure Container Apps abil
-- **[AI integratsiooni juhend](../../../../docs/ai-foundry)**: Lisa rakendusele AI võimekused
-- **[Juurutuse häid tavasid](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Tootmisjuurutuse mustrid
+### Edasised sammud selles kursuses  
+- **[Container Apps näide](../../../../examples/container-app)**: Juuruta mikroteenuseid Azure Container Apps abil  
+- **[AI integreerimise juhend](../../../../docs/ai-foundry)**: Lisa AI võimekused oma rakendusse  
+- **[Juurutuse parimad tavad](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Tootmisjuurutuse mallid  
 
-### Täiustatud teemad
-- **Haldusega identiteet**: Eemalda paroolid ja kasuta Azure AD autentimist
-- **Privaatotsapunktid**: Turvalised andmebaasiühendused virtuaalvõrgus
-- **CI/CD integratsioon**: Automatiseeri juurutused GitHub Actions või Azure DevOps abil
-- **Mitmekesised keskkonnad**:  Seadista arendus-, testimis- ja tootmiskeskkonnad
-- **Andmebaasi migratsioonid**: Kasuta Alembic või Entity Framework skeemi versioonimiseks
+### Täiustatud teemad  
+- **Haldatud identiteet**: Eemalda paroolid ja kasuta Azure AD autentimist  
+- **Privaatendpunktid**: Turvalised andmebaasi ühendused virtuaalses võrgus  
+- **CI/CD integratsioon**: Automatiseeri juurutused GitHub Actions või Azure DevOps abil  
+- **Mitmekeskkond**: Määra arendus-, test- ja tootmiskeskkonnad  
+- **Andmebaasi migratsioonid**: Kasuta Alembicit või Entity Frameworki skeemiversioonide jaoks  
 
 ### Võrdlus teiste lähenemistega
 
-**AZD vs ARM mallid**:
-- ✅ AZD: Kõrgema taseme abstraktsioon, lihtsamad käsud
-- ⚠️ ARM: Detailsem ja põhjalikum kontroll
+**AZD vs. ARM mallid**:  
+- ✅ AZD: Kõrgema taseme abstraktsioon, lihtsamad käsud  
+- ⚠️ ARM: Detailsem, peenhäälestatud juhtimine  
 
-**AZD vs Terraform**:
-- ✅ AZD: Azurele kohandatud, integreeritud Azure teenustega
-- ⚠️ Terraform: Töötleb mitut pilve, suurem ökosüsteem
+**AZD vs. Terraform**:  
+- ✅ AZD: Azure-loomuline, integreeritud Azure teenustega  
+- ⚠️ Terraform: Mitme pilve tugi, suurem ökosüsteem  
 
-**AZD vs Azure Portal**:
-- ✅ AZD: Korduv, versioonihalduses, automatiseeritav
-- ⚠️ Portal: Käsitsi klikkimine, raske reprodutseerida
+**AZD vs. Azure portaal**:  
+- ✅ AZD: Korduv, versioonihaldatav, automatiseeritav  
+- ⚠️ Portaal: Käsitsi klõpsimine, keeruline korrata  
 
-**Mõtle AZD-le kui**: Docker Compose'ile Azure jaoks — lihtsustatud konfiguratsioon keerukate juurutuste jaoks.
+**Kujuta ette AZD-d nii nagu**: Docker Compose Azure jaoks — lihtsustatud konfiguratsioon keerukate juurutuste tarbeks.
 
 ---
 
 ## Korduma kippuvad küsimused
 
-**K: Kas saan kasutada teist programmeerimiskeelt?**  
-V: Jah! Asenda `src/web/` Node.js, C#, Go või mõne teise keelega. Uuenda `azure.yaml` ja Bicep vastavalt.
+**K: Kas ma saan kasutada mõnda teist programmeerimiskeelt?**  
+V: Jah! Asenda `src/web/` Node.js, C#, Go või mõne muu keelega. Uuenda `azure.yaml` ja Bicep faile vastavalt.
 
 **K: Kuidas lisada rohkem andmebaase?**  
-V: Lisa teine SQL Database moodul faili `infra/main.bicep` või kasuta Azure Database teenuste PostgreSQL/MySQL teenuseid.
+V: Lisa teine SQL Database moodul faili `infra/main.bicep` või kasuta PostgreSQL/MySQL teenuseid Azure Database sektsioonist.
 
-**K: Kas saan seda tootmises kasutada?**  
-V: See on lähtepunkt. Tootmises lisa: haldatu identiteet, privaatotsapunktid, redundantsus, varundusstrateegia, WAF ja täiustatud monitooring.
+**K: Kas seda saab kasutada tootmises?**  
+V: See on lähtepunkt. Tootmises lisa: haldatud identiteet, privaatendpunktid, kõrge saadavus, varundusstrateegia, WAF ja täiustatud jälgimine.
 
-**K: Mis siis, kui soovin kasutada konteinerit koodi juurutamise asemel?**  
-V: Vaata [Container Apps näidist](../../../../examples/container-app), kus kasutatakse masterina Docker konteinerit kogu protsessis.
+**K: Mis siis, kui tahan konteinerite asemel kasutada koodi juurutamist?**  
+V: Vaata [Container Apps näidet](../../../../examples/container-app), mis kasutab kogu ulatuses Docker konteinerid.
 
-**K: Kuidas ühendada andmebaasiga oma lokaalsest masinast?**  
-V: Lisa oma IP SQL Serveri tulemüüri:
+**K: Kuidas ühendada andmebaasiga oma lokaalselt arvutist?**  
+V: Lisa oma IP aadress SQL Serveri tulemüüri:  
 ```sh
 az sql server firewall-rule create \
   --resource-group rg-<env-name> \
@@ -898,22 +903,22 @@ az sql server firewall-rule create \
   --start-ip-address <your-ip> \
   --end-ip-address <your-ip>
 ```
-
-**K: Kas saan kasutada olemasolevat andmebaasi uue loomise asemel?**  
-V: Jah, muuda `infra/main.bicep` nii, et viitaks olemasolevale SQL Serverile ja uuenda ühendusstringi parameetreid.
+  
+**K: Kas ma saan kasutada olemasolevat andmebaasi uue loomise asemel?**  
+V: Jah, muuda `infra/main.bicep`, et viidata olemasolevale SQL Serverile ja uuenda ühenduse stringi parameetreid.
 
 ---
 
-> **Märkus:** See näide demonstreerib parimaid tavasid veebirakenduse juurutamiseks andmebaasiga kasutades AZD-d. Sisaldab töötavat koodi, põhjalikku dokumentatsiooni ja praktilisi harjutusi õppimise süvendamiseks. Tootmisjuurutuste puhul vaata üle turvalisus, skaleerimine, nõuetele vastavus ja kulud vastavalt oma organisatsioonile.
+> **Märkus:** See näide demonstreerib parimaid praktikaid veebirakenduse juurutamisel andmebaasiga kasutades AZD-d. Sisaldab töökindlat koodi, põhjalikku dokumentatsiooni ja praktilisi harjutusi õppimise toetamiseks. Tootmisjuurutuste puhul vaata hoolikalt üle organisatsiooni spetsiifilised turbe-, skalatsiooni-, nõuete ja kulude seadistused.
 
 **📚 Kursuse navigeerimine:**  
-- ← Eelmine: [Container Apps näidis](../../../../examples/container-app)  
-- → Järgmine: [AI integratsiooni juhend](../../../../docs/ai-foundry)  
+- ← Eelmine: [Container Apps näide](../../../../examples/container-app)  
+- → Järgmine: [AI integreerimise juhend](../../../../docs/ai-foundry)  
 - 🏠 [Kursuse avaleht](../../README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastutusest loobumine**:
-See dokument on tõlgitud kasutades tehisintellektil põhinevat tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüame tagada täpsust, tuleb arvestada, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise info puhul soovitame kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti mõistmiste eest.
+See dokument on tõlgitud kasutades tehisintellektil põhinevat tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüame tagada täpsust, palun arvestage, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tulenevate arusaamatuste või valesti mõistmiste eest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,63 +1,65 @@
-# AZD pro vývojáře AI Workshop
+# AZD pro AI vývojáře Workshop
+
+> Ověřeno proti `azd 1.23.12` v březnu 2026.
 
 > [!IMPORTANT]  
-> **Tento workshop je opatřen průvodcem workshopem, který si můžete zobrazit v místním prohlížeči. Pro začátek musíte spustit GitHub Codespaces na repozitáři—poté počkejte, až uvidíte aktivní terminál VS Code a zadejte:**  
+> **Tento workshop je vybaven průvodcem, kterého si můžete prohlédnout ve svém místním prohlížeči. Pro zahájení otevřete repozitář v GitHub Codespaces, vývojovém kontejneru nebo místní klon s nainstalovaným MkDocs—poté počkejte, až uvidíte aktivní terminál VS Code a zadejte:**  
 > `mkdocs serve > /dev/null 2>&1 &`  
-> **Měli byste vidět vyskakovací dialog pro otevření náhledu stránky v prohlížeči.**
+> **Měla by se zobrazit dialogové okno pro otevření náhledu ve vašem prohlížeči.**
 
-Vítejte v praktickém workshopu pro seznámení s Azure Developer CLI (AZD) se zaměřením na nasazení AI aplikací. Tento workshop vám pomůže získat praktické porozumění AZD šablonám ve 3 krocích:
+Vítejte v praktickém workshopu pro naučení Azure Developer CLI (AZD) se zaměřením na nasazení AI aplikací. Tento workshop vám pomůže získat praktické znalosti o AZD šablonách ve 3 krocích:
 
-1. **Objevování** - najděte šablonu, která je pro vás vhodná.
-1. **Nasazení** - nasaďte a ověřte, že funguje
-1. **Přizpůsobení** - upravte a iterujte, aby byla vaše!
+1. **Objevování** - najděte šablonu, která vám nejlépe vyhovuje.  
+1. **Nasazení** - nasadit a ověřit, že to funguje  
+1. **Přizpůsobení** - upravit a iterovat, aby byla vaše!
 
-Během tohoto workshopu se také seznámíte se základními vývojářskými nástroji a pracovními postupy, které vám pomohou zefektivnit váš end-to-end vývojový proces.
+Během tohoto workshopu se také seznámíte se základními vývojářskými nástroji a postupy, které vám pomohou zefektivnit celý vývojový proces.
 
 | | | 
 |:---|:---|
-| **📚 Course Home**| [AZD For Beginners](../README.md)|
-| **📖 Documentation** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 Next Steps** | [Take The Challenge](../../../../workshop/docs) |
+| **📚 Domů ke kurzu**| [AZD pro začátečníky](../README.md)|
+| **📖 Dokumentace** | [Začínáme se AI šablonami](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️ AI šablony** | [Microsoft Foundry šablony](https://ai.azure.com/templates) |
+|**🚀 Další kroky** | [Zúčastněte se výzvy](#workshop-challenge) |
 | | |
 
 ## Přehled workshopu
 
-**Doba trvání:** 3–4 hodiny  
+**Délka:** 3-4 hodiny  
 **Úroveň:** Začátečník až středně pokročilý  
-**Požadavky:** Znalost Azure, konceptů AI, VS Code a nástrojů příkazové řádky.
+**Požadavky:** Seznámení s Azure, koncepty AI, VS Code a příkazovými nástroji.
 
-Toto je praktický workshop, kde se učíte tím, že něco děláte. Po dokončení cvičení doporučujeme prostudovat si kurz AZD For Beginners, abyste pokračovali ve svém vzdělávacím putování směrem k osvědčeným postupům v oblasti zabezpečení a produktivity.
+Toto je praktický workshop, kde se učíte přímo aplikací. Jakmile dokončíte cvičení, doporučujeme projít si AZD pro začátečníky, abyste pokračovali ve své cestě poznáním bezpečnostních a produktivních osvědčených postupů.
 
-| Time| Module  | Objective |
+| Čas| Modul  | Cíl |
 |:---|:---|:---|
-| 15 mins | Introduction | Set the stage, understand the goals |
-| 30 mins | Select AI Template | Explore options and pick starter | 
-| 30 mins | Validate AI Template | Deploy default solution to Azure |
-| 30 mins | Deconstruct AI Template | Explore structure and configuration |
-| 30 mins | Configure AI Template | Activate and try available features |
-| 30 mins | Customize AI Template | Adapt the template to your needs |
-| 30 mins | Teardown Infrastructure | Cleanup and release resources |
-| 15 mins | Wrap-Up & Next Steps | Learning resources, Workshop challenge |
+| 15 minut | Úvod | Nastavit scénu, pochopit cíle |
+| 30 minut | Výběr AI šablony | Prozkoumat možnosti a vybrat startovní |
+| 30 minut | Ověření AI šablony | Nasadit výchozí řešení do Azure |
+| 30 minut | Rozebrání AI šablony | Prozkoumat strukturu a konfiguraci |
+| 30 minut | Konfigurace AI šablony | Aktivovat a vyzkoušet dostupné funkce |
+| 30 minut | Přizpůsobení AI šablony | Upravit šablonu podle vašich potřeb |
+| 30 minut | Odstranění infrastruktury | Úklid a uvolnění zdrojů |
+| 15 minut | Závěr a další kroky | Vzdělávací zdroje, výzva workshopu |
 | | |
 
 ## Co se naučíte
 
-Považujte AZD šablonu za vzdělávací pískoviště pro zkoumání různých schopností a nástrojů pro end-to-end vývoj na Microsoft Foundry. Na konci tohoto workshopu byste měli mít intuitivní přehled o různých nástrojích a konceptech v tomto kontextu.
+Přemýšlejte o AZD šabloně jako o sandboxu pro zkoumání rozličných možností a nástrojů pro kompletní vývoj na platformě Microsoft Foundry. Na konci tohoto workshopu byste měli mít intuitivní přehled o různých nástrojích a konceptech v tomto kontextu.
 
-| Concept  | Objective |
+| Koncept  | Cíl |
 |:---|:---|
-| **Azure Developer CLI** | Understand tool commands and workflows|
-| **AZD Templates**| Understand project structure and config|
-| **Azure AI Agent**| Provision & deploy Microsoft Foundry project  |
-| **Azure AI Search**| Enable context engineering with agents |
-| **Observability**| Explore tracing, monitoring and evaluations |
-| **Red Teaming**| Explore adversarial testing and mitigations |
+| **Azure Developer CLI** | Pochopit příkazy nástroje a pracovní postupy |
+| **AZD šablony**| Pochopit strukturu projektu a konfiguraci |
+| **Azure AI Agent**| Zajistit a nasadit projekt Microsoft Foundry  |
+| **Azure AI Search**| Umožnit kontextové inženýrství s agenty |
+| **Observabilita**| Prozkoumat trasování, monitorování a vyhodnocení |
+| **Red Teaming**| Prozkoumat protivníkové testování a opatření |
 | | |
 
 ## Moduly workshopu
 
-Připraveno začít? Procházejte moduly workshopu:
+Jste připraveni začít? Projděte si moduly workshopu:
 
 - [Modul 1: Výběr AI šablony](instructions/1-Select-AI-Template.md)
 - [Modul 2: Ověření AI šablony](instructions/2-Validate-AI-Template.md) 
@@ -69,11 +71,11 @@ Připraveno začít? Procházejte moduly workshopu:
 
 ## Máte zpětnou vazbu?
 
-Založte issue v tomto repozitáři (označte ji `Workshop`) nebo se přidejte k nám na [Discord](https://aka.ms/foundry/discord) a zveřejněte to v kanálu `#get-help`
+Založte issue v tomto repozitáři (označte ho `Workshop`) nebo se připojte k nám na [Discordu](https://aka.ms/foundry/discord) a napište do kanálu `#get-help`
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Prohlášení o vyloučení odpovědnosti**:
-Tento dokument byl přeložen pomocí služby pro překlad založené na umělé inteligenci [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, berte prosím na vědomí, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro zásadní informace doporučujeme profesionální lidský překlad. Za jakékoli nedorozumění nebo mylné výklady vzniklé v důsledku použití tohoto překladu neneseme odpovědnost.
+**Prohlášení o vyloučení odpovědnosti**:  
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné výklady vyplývající z používání tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

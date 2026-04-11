@@ -1,43 +1,43 @@
-# Provisioniranje Azure resursa pomoću AZD
+# Provisioniranje Azure resursa s AZD
 
-**Navigacija poglavljima:**
-- **📚 Početna tečaja**: [AZD za početnike](../../README.md)
-- **📖 Trenutno poglavlje**: Poglavlje 4 - Infrastructure as Code i raspoređivanje
-- **⬅️ Prethodno**: [Vodič za raspoređivanje](deployment-guide.md)
-- **➡️ Sljedeće poglavlje**: [Poglavlje 5: AI rješenja s više agenata](../../examples/retail-scenario.md)
-- **🔧 Povezano**: [Poglavlje 6: Provjera prije raspoređivanja](../chapter-06-pre-deployment/capacity-planning.md)
+**Navigacija kroz poglavlja:**
+- **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
+- **📖 Trenutno poglavlje**: Poglavlje 4 - Infrastruktura kao kod i implementacija
+- **⬅️ Prethodno**: [Vodič za implementaciju](deployment-guide.md)
+- **➡️ Sljedeće poglavlje**: [Poglavlje 5: Višeagentska AI rješenja](../../examples/retail-scenario.md)
+- **🔧 Povezano**: [Poglavlje 6: Provjera prije implementacije](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Uvod
 
-Ovaj sveobuhvatni vodič obuhvaća sve što trebate znati o provisioniranju i upravljanju Azure resursima pomoću Azure Developer CLI. Naučite kako implementirati obrasce Infrastructure as Code (IaC) od osnovnog stvaranja resursa do naprednih enterprise arhitektura koristeći Bicep, ARM predloške, Terraform i Pulumi.
+Ovaj detaljni vodič pokriva sve što trebate znati o provisioniranju i upravljanju Azure resursima koristeći Azure Developer CLI. Naučite implementirati obrasce Infrastructure as Code (IaC) od osnovnog stvaranja resursa do naprednih infrastrukturnih arhitektura razine poduzeća koristeći Bicep, ARM predloške, Terraform i Pulumi.
 
 ## Ciljevi učenja
 
-Nakon dovršetka ovog vodiča, moći ćete:
-- Savladati principe Infrastructure as Code i provisioniranje Azure resursa
-- Razumjeti više IaC pružatelja podržanih od Azure Developer CLI
+Nakon završetka ovog vodiča, moći ćete:
+- Ovladati principima Infrastructure as Code i provisioningom Azure resursa
+- Razumjeti višestruke IaC pružatelje koje podržava Azure Developer CLI
 - Dizajnirati i implementirati Bicep predloške za uobičajene arhitekture aplikacija
-- Konfigurirati parametre resursa, varijable i postavke specifične za okruženje
+- Konfigurirati parametre resursa, varijable i postavke specifične za okruženja
 - Implementirati napredne infrastrukturne obrasce uključujući mreže i sigurnost
 - Upravljati životnim ciklusom resursa, ažuriranjima i rješavanjem ovisnosti
 
 ## Ishodi učenja
 
-Po dovršetku, moći ćete:
+Po završetku, moći ćete:
 - Dizajnirati i provisionirati Azure infrastrukturu koristeći Bicep i ARM predloške
 - Konfigurirati složene višeservisne arhitekture s pravilnim ovisnostima resursa
-- Implementirati parametizirane predloške za više okruženja i konfiguracija
-- Rješavati probleme pri provisioniranju infrastrukture i otklanjati neuspjele implementacije
-- Primijeniti principe Azure Well-Architected Framework-a pri dizajnu infrastrukture
-- Upravljati ažuriranjima infrastrukture i implementirati strategije verzioniranja infrastrukture
+- Implementirati parametarske predloške za višestruka okruženja i konfiguracije
+- Otklanjati probleme s provisioningom infrastrukture i rješavati kvarove implementacije
+- Primjenjivati principe Azure Well-Architected Framework na dizajn infrastrukture
+- Upravljati ažuriranjima infrastrukture i provoditi strategije verzioniranja infrastrukture
 
 ## Pregled provisioniranja infrastrukture
 
-Azure Developer CLI podržava više Infrastructure as Code (IaC) pružatelja:
-- **Bicep** (preporučeno) - Azureov specifičan jezik za domenu
-- **ARM Templates** - Azure Resource Manager predlošci temeljeni na JSON-u
-- **Terraform** - Višeklaudni alat za infrastrukturu
-- **Pulumi** - Moderan IaC koristeći programske jezike
+Azure Developer CLI podržava višestruke Infrastructure as Code (IaC) pružatelje:
+- **Bicep** (preporučeno) - Azure-ov specifični jezik za domenu
+- **ARM predlošci** - JSON predlošci Azure Resource Managera
+- **Terraform** - alat za višemrežnu infrastrukturu
+- **Pulumi** - moderna infrastruktura kao kod s programskim jezicima
 
 ## Razumijevanje Azure resursa
 
@@ -50,15 +50,15 @@ Azure Account
 ```
 
 ### Uobičajene Azure usluge za aplikacije
-- **Računalstvo**: App Service, Container Apps, Functions, Virtual Machines
-- **Pohrana**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Mreže**: Virtual Network, Application Gateway, CDN
+- **Compute**: App Service, Container Apps, Functions, Virtual Machines
+- **Pohrana**: Storage Account, Cosmos DB, SQL baza podataka, PostgreSQL
+- **Mreža**: Virtualna mreža, Application Gateway, CDN
 - **Sigurnost**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
-## Bicep predlošci infrastrukture
+## Bicep infrastrukturni predlošci
 
-### Osnovna struktura Bicep predloška
+### Osnovna struktura Bicep predložaka
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -368,7 +368,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Mreže i povezanost
+## 🌍 Mreža i povezivost
 
 ### Konfiguracija virtualne mreže
 ```bicep
@@ -496,7 +496,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Nadzor i observabilnost
+## 📊 Nadgledanje i vidljivost
 
 ### Application Insights
 ```bicep
@@ -651,7 +651,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 
 ## 🚀 Napredni obrasci provisioniranja
 
-### Raspoređivanje u više regija
+### Implementacija u više regija
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -757,40 +757,39 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🧪 Pregled i validacija infrastrukture (NOVO)
 
-### Pogledajte promjene infrastrukture prije raspoređivanja
+### Pregled promjena infrastrukture prije implementacije
 
-Značajka `azd provision --preview` omogućuje vam da **simulirate provisioniranje infrastrukture** prije nego što zapravo implementirate resurse. Slično je `terraform plan` ili `bicep what-if`, dajući vam **pregled suhog pokusa** što bi se promijenilo u vašem Azure okruženju.
+Značajka `azd provision --preview` omogućuje vam da **simulirate provisioniranje infrastrukture** prije stvarnog implementiranja resursa. Slično je funkcijama `terraform plan` ili `bicep what-if`, pruža vam **suhi prikaz** promjena koje bi bile izvršene u vašem Azure okruženju.
 
 #### 🛠️ Što radi
 - **Analizira vaše IaC predloške** (Bicep ili Terraform)
 - **Prikazuje pregled promjena resursa**: dodavanja, brisanja, ažuriranja
-- **Ne primjenjuje promjene** — samo za čitanje i sigurno za pokretanje
+- **Ne izvršava promjene** — samo je za čitanje i sigurno za pokretanje
 
-#### � Slučajevi upotrebe
+#### Slučajevi korištenja
 ```bash
-# Pregled promjena infrastrukture prije raspoređivanja
+# Pregledajte promjene infrastrukture prije implementacije
 azd provision --preview
 
-# Pregled s detaljnim izlazom
-azd provision --preview --output json
-
 # Pregled za određeno okruženje
-azd provision --preview --environment production
+azd provision --preview -e production
 ```
 
-Ova naredba pomaže vam:
-- **Validirati promjene infrastrukture** prije potvrđivanja resursa
-- **Uraniti otkriti pogrešne konfiguracije** rano u razvojnom ciklusu
-- **Sigurno surađivati** u timskim okruženjima
-- **Osigurati najmanje privilegije pri raspoređivanju** bez iznenađenja
+Ova naredba pomaže vam da:
+- **Validirate promjene infrastrukture** prije dodjele resursa
+- **Rano otkrijete pogrešne konfiguracije** tijekom razvojnih ciklusa
+- **Sigurno surađujete** u timskim okruženjima
+- **Osigurate najmanje privilegirane implementacije** bez iznenađenja
 
-Posebno je korisno kada:
+Posebno je korisna kada:
 - Radite s kompleksnim višeservisnim okruženjima
-- Mijenjate proizvodnu infrastrukturu
-- Validirate izmjene predložaka prije odobrenja PR-a
-- Učite nove članove tima o obrascima infrastrukture
+- Izmjenjujete proizvodnu infrastrukturu
+- Provjeravate promjene predložaka prije odobrenja PR-a
+- Obučavate nove članove tima na infrastrukturalnim obrascima
 
 ### Primjer izlaza pregleda
+Točan izlaz pregleda varira ovisno o pružatelju i strukturi projekta, ali rezultat bi trebao jasno identificirati predložene promjene prije nego što se išta primijeni.
+
 ```bash
 $ azd provision --preview
 
@@ -809,24 +808,23 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
 ```
 
-## �🔄 Ažuriranja i migracije resursa
+## 🔄 Ažuriranja i migracije resursa
 
 ### Sigurna ažuriranja resursa
 ```bash
-# Prvo pregledajte promjene infrastrukture (PREPORUČENO)
+# Prvo pregledajte promjene u infrastrukturi (PREPORUČENO)
 azd provision --preview
 
 # Primijenite promjene nakon potvrde pregleda
 azd provision --confirm-with-no-prompt
 
-# Za povratak (rollback), koristite Git za poništavanje promjena infrastrukture:
-git revert HEAD  # Poništite posljednji commit infrastrukture
+# Za povratak koristite Git za vraćanje promjena u infrastrukturi:
+git revert HEAD  # Vratite zadnji commit infrastrukture
 azd provision    # Primijenite prethodno stanje infrastrukture
 ```
 
@@ -872,7 +870,7 @@ var naming = {
 }
 ```
 
-### 2. Strategija označavanja (tagging)
+### 2. Strategija tagiranja
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -918,27 +916,27 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Sljedeći koraci
 
-- [Planiranje prije raspoređivanja](../chapter-06-pre-deployment/capacity-planning.md) - Provjerite dostupnost resursa
-- [Uobičajeni problemi](../chapter-07-troubleshooting/common-issues.md) - Otklonite probleme s infrastrukturom
-- [Vodič za otklanjanje pogrešaka](../chapter-07-troubleshooting/debugging.md) - Otklonite probleme s provisioniranjem
-- [Odabir SKU-a](../chapter-06-pre-deployment/sku-selection.md) - Odaberite odgovarajuće razrede usluga
+- [Planiranje prije implementacije](../chapter-06-pre-deployment/capacity-planning.md) - Validacija dostupnosti resursa
+- [Uobičajeni problemi](../chapter-07-troubleshooting/common-issues.md) - Otklanjanje problema s infrastrukturom
+- [Vodič za otklanjanje pogrešaka](../chapter-07-troubleshooting/debugging.md) - Otklanjanje problema s provisioningom
+- [Odabir SKU-a](../chapter-06-pre-deployment/sku-selection.md) - Odabir odgovarajućih razina usluge
 
-## Dodatni resursi
+## Dodatni izvori
 
-- [Dokumentacija za Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Bicep dokumentacija](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Resource Manager predlošci](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Centar arhitekture za Azure](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **Navigacija**
-- **Prethodna lekcija**: [Vodič za raspoređivanje](deployment-guide.md)
+- **Prethodna lekcija**: [Vodič za implementaciju](deployment-guide.md)
 - **Sljedeća lekcija**: [Planiranje kapaciteta](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Izjava o odricanju odgovornosti:
-Ovaj dokument preveden je pomoću AI prevoditeljske usluge Co-op Translator (https://github.com/Azure/co-op-translator). Iako nastojimo postići točnost, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Ne snosimo odgovornost za bilo kakve nesporazume ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
+**Odricanje od odgovornosti**:
+Ovaj dokument je preveden korištenjem AI usluge za prevođenje [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatizirani prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Ne odgovaramo za bilo kakva nesporazuma ili pogrešna tumačenja nastala korištenjem ovog prijevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,13 +1,13 @@
-# راهنمای عیب‌یابی ویژه هوش مصنوعی
+# راهنمای عیب‌یابی مخصوص هوش مصنوعی
 
 **ناوبری فصل:**
 - **📚 صفحه دوره**: [AZD For Beginners](../../README.md)
-- **📖 فصل جاری**: فصل 7 - عیب‌یابی و رفع اشکال
+- **📖 فصل جاری**: فصل 7 - عیب‌یابی و دیباگ
 - **⬅️ قبلی**: [Debugging Guide](debugging.md)
-- **➡️ فصل بعد**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
+- **➡️ فصل بعدی**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
 - **🤖 مرتبط**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-این راهنمای جامع عیب‌یابی به مسائل رایج هنگام استقرار راه‌حل‌های هوش مصنوعی با AZD می‌پردازد و راه‌حل‌ها و تکنیک‌های رفع اشکال خاص سرویس‌های Azure AI را ارائه می‌دهد.
+این راهنمای جامع عیب‌یابی به مشکلات رایج هنگام استقرار راه‌حل‌های هوش مصنوعی با AZD می‌پردازد و راه‌حل‌ها و تکنیک‌های دیباگ خاص سرویس‌های Azure AI را ارائه می‌دهد.
 
 ## فهرست مطالب
 
@@ -15,30 +15,30 @@
 - [مشکلات Azure AI Search](#azure-ai-search-problems)
 - [مشکلات استقرار Container Apps](#container-apps-deployment-issues)
 - [خطاهای احراز هویت و دسترسی](#authentication-and-permission-errors)
-- [شکست‌های استقرار مدل](#model-deployment-failures)
+- [خطاهای استقرار مدل](#model-deployment-failures)
 - [مشکلات عملکرد و مقیاس‌پذیری](#performance-and-scaling-issues)
 - [مدیریت هزینه و سهمیه](#cost-and-quota-management)
-- [ابزارها و تکنیک‌های اشکال‌زدایی](#debugging-tools-and-techniques)
+- [ابزارها و تکنیک‌های دیباگ](#debugging-tools-and-techniques)
 
 ## Microsoft Foundry Models Service Issues
 
-### Issue: OpenAI Service Unavailable in Region
+### مشکل: سرویس OpenAI در منطقه در دسترس نیست
 
 **نشانه‌ها:**
 ```
 Error: The requested resource type is not available in the location 'westus'
 ```
 
-**علت‌ها:**
-- مدل‌های Microsoft Foundry در منطقه انتخاب‌شده در دسترس نیستند
-- سهمیه در مناطق مورد نظر تمام شده است
-- محدودیت‌های ظرفیت منطقه‌ای
+**دلایل:**
+- Microsoft Foundry Models در منطقه انتخاب‌شده در دسترس نیست
+- سهمیه در مناطق ترجیحی به اتمام رسیده است
+- محدودیت ظرفیت منطقه‌ای
 
 **راه‌حل‌ها:**
 
-1. **بررسی در دسترس‌بودن منطقه:**
+1. **بررسی در دسترس بودن منطقه:**
 ```bash
-# فهرست مناطق در دسترس برای OpenAI
+# فهرست مناطق موجود برای OpenAI
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
@@ -68,7 +68,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### Issue: Model Deployment Quota Exceeded
+### مشکل: سهمیه استقرار مدل تمام شده است
 
 **نشانه‌ها:**
 ```
@@ -77,9 +77,9 @@ Error: Deployment failed due to insufficient quota
 
 **راه‌حل‌ها:**
 
-1. **بررسی سهمیه کنونی:**
+1. **بررسی سهمیه فعلی:**
 ```bash
-# میزان استفاده از سهمیه را بررسی کنید
+# بررسی استفاده از سهمیه
 az cognitiveservices usage list \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG
@@ -113,7 +113,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }
 ```
 
-### Issue: Invalid API Version
+### مشکل: نسخه API نامعتبر
 
 **نشانه‌ها:**
 ```
@@ -130,7 +130,7 @@ AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 
 2. **بررسی سازگاری نسخه API:**
 ```bash
-# نسخه‌های API پشتیبانی‌شده را فهرست کنید
+# فهرست نسخه‌های API پشتیبانی‌شده
 az rest --method get \
   --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
@@ -138,7 +138,7 @@ az rest --method get \
 
 ## Azure AI Search Problems
 
-### Issue: Search Service Pricing Tier Insufficient
+### مشکل: سطح قیمت‌گذاری سرویس جستجو ناکافی است
 
 **نشانه‌ها:**
 ```
@@ -147,7 +147,7 @@ Error: Semantic search requires Basic tier or higher
 
 **راه‌حل‌ها:**
 
-1. **ارتقای لایه قیمتی:**
+1. **ارتقاء سطح قیمت‌گذاری:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -165,7 +165,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **غیرفعال‌سازی جستجوی معنایی (توسعه):**
+2. **غیرفعال کردن جستجوی معنایی (توسعه):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -179,7 +179,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Issue: Index Creation Failures
+### مشکل: ایجاد ایندکس ناموفق
 
 **نشانه‌ها:**
 ```
@@ -190,7 +190,7 @@ Error: Cannot create index, insufficient permissions
 
 1. **تأیید کلیدهای سرویس جستجو:**
 ```bash
-# کلید ادمین سرویس جستجو را دریافت کنید
+# دریافت کلید مدیریت سرویس جستجو
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
@@ -228,7 +228,7 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 
 ## Container Apps Deployment Issues
 
-### Issue: Container Build Failures
+### مشکل: شکست در ساخت کانتینر
 
 **نشانه‌ها:**
 ```
@@ -273,7 +273,7 @@ azure-cosmos==4.5.1
 
 3. **افزودن بررسی سلامت:**
 ```python
-# main.py - افزودن نقطهٔ بررسی سلامت
+# main.py - افزودن نقطهٔ پایانی بررسی وضعیت سلامت
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -283,7 +283,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Issue: Container App Startup Failures
+### مشکل: شکست در راه‌اندازی Container App
 
 **نشانه‌ها:**
 ```
@@ -292,7 +292,7 @@ Error: Container failed to start within timeout period
 
 **راه‌حل‌ها:**
 
-1. **افزایش تایم‌اوت راه‌اندازی:**
+1. **افزایش زمان تایم‌اوت راه‌اندازی:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -327,7 +327,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **بهینه‌سازی بارگذاری مدل:**
 ```python
-# مدل‌ها را به‌صورت تنبل بارگذاری کنید تا زمان راه‌اندازی کاهش یابد
+# بارگذاری تنبل مدل‌ها برای کاهش زمان راه‌اندازی
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -341,7 +341,7 @@ class ModelManager:
         return self._client
         
     async def _initialize_client(self):
-        # در اینجا کلاینت هوش مصنوعی را مقداردهی اولیه کنید
+        # کلاینت هوش مصنوعی را در اینجا مقداردهی اولیه کنید
         pass
 
 @asynccontextmanager
@@ -357,7 +357,7 @@ app = FastAPI(lifespan=lifespan)
 
 ## Authentication and Permission Errors
 
-### Issue: Managed Identity Permission Denied
+### مشکل: دسترسی Managed Identity رد شد
 
 **نشانه‌ها:**
 ```
@@ -374,7 +374,7 @@ az role assignment list \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **اختصاص نقش‌های مورد نیاز:**
+2. **تخصیص نقش‌های لازم:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -393,7 +393,7 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 3. **آزمون احراز هویت:**
 ```python
-# تست احراز هویت با شناسه مدیریت‌شده
+# تست احراز هویت با هویت مدیریت‌شده
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
@@ -406,7 +406,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### Issue: Key Vault Access Denied
+### مشکل: دسترسی Key Vault رد شد
 
 **نشانه‌ها:**
 ```
@@ -415,7 +415,7 @@ Error: The user, group or application does not have secrets get permission
 
 **راه‌حل‌ها:**
 
-1. **دادن مجوزهای Key Vault:**
+1. **اعطای مجوزهای Key Vault:**
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -434,7 +434,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **استفاده از RBAC به‌جای سیاست‌های دسترسی:**
+2. **استفاده از RBAC به‌جای Access Policies:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -449,7 +449,7 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 
 ## Model Deployment Failures
 
-### Issue: Model Version Not Available
+### مشکل: نسخه مدل در دسترس نیست
 
 **نشانه‌ها:**
 ```
@@ -458,7 +458,7 @@ Error: Model version 'gpt-4-32k' is not available
 
 **راه‌حل‌ها:**
 
-1. **بررسی مدل‌های در دسترس:**
+1. **بررسی مدل‌های موجود:**
 ```bash
 # فهرست مدل‌های موجود
 az cognitiveservices account list-models \
@@ -468,7 +468,7 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **استفاده از مدل‌های پشتیبان (Fallbacks):**
+2. **استفاده از مدل‌های جایگزین (Fallbacks):**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
@@ -479,8 +479,8 @@ param primaryModel object = {
 
 @description('Fallback model configuration')
 param fallbackModel object = {
-  name: 'gpt-35-turbo'
-  version: '0125'
+  name: 'gpt-4.1'
+  version: '2024-08-06'
 }
 
 // Try primary model first, fallback if unavailable
@@ -499,7 +499,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 
 3. **اعتبارسنجی مدل قبل از استقرار:**
 ```python
-# اعتبارسنجی مدل پیش از استقرار
+# اعتبارسنجی مدل قبل از استقرار
 import httpx
 
 async def validate_model_availability(model_name: str, version: str) -> bool:
@@ -521,7 +521,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 ## Performance and Scaling Issues
 
-### Issue: High Latency Responses
+### مشکل: پاسخ‌ها با تأخیر بالا
 
 **نشانه‌ها:**
 - زمان پاسخ > 30 ثانیه
@@ -530,9 +530,9 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 **راه‌حل‌ها:**
 
-1. **پیاده‌سازی تایم‌اوت برای درخواست‌ها:**
+1. **اجرای تایم‌اوت برای درخواست‌ها:**
 ```python
-# پیکربندی تایم‌اوت‌های مناسب
+# زمان‌های انتظار مناسب را تنظیم کنید
 import httpx
 
 client = httpx.AsyncClient(
@@ -547,7 +547,7 @@ client = httpx.AsyncClient(
 
 2. **افزودن کش پاسخ‌ها:**
 ```python
-# کش Redis برای پاسخ‌ها
+# حافظهٔ نهان رِدیس برای پاسخ‌ها
 import redis.asyncio as redis
 import json
 
@@ -565,7 +565,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **پیکربندی مقیاس خودکار:**
+3. **پیکربندی Auto-scaling:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -599,7 +599,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Issue: Memory Out of Errors
+### مشکل: ارورهای Out of Memory
 
 **نشانه‌ها:**
 ```
@@ -642,7 +642,7 @@ class MemoryOptimizedAI:
         # قبل از پردازش میزان استفاده از حافظه را بررسی کنید
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # اجرای اجباری جمع‌آوری زباله
+            gc.collect()  # اجبار به جمع‌آوری زباله
             
         result = await self._process_ai_request(request)
         
@@ -653,10 +653,10 @@ class MemoryOptimizedAI:
 
 ## Cost and Quota Management
 
-### Issue: Unexpected High Costs
+### مشکل: هزینه‌های غیرمنتظره بالا
 
 **نشانه‌ها:**
-- صورتحساب Azure بالاتر از حد انتظار
+- صورت‌حساب Azure بالاتر از انتظار
 - مصرف توکن بیشتر از برآوردها
 - هشدارهای بودجه فعال شده
 
@@ -664,7 +664,7 @@ class MemoryOptimizedAI:
 
 1. **اجرای کنترل‌های هزینه:**
 ```python
-# پیگیری مصرف توکن
+# ردیابی مصرف توکن‌ها
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -681,7 +681,7 @@ class TokenTracker:
         return total_tokens
 ```
 
-2. **راه‌اندازی هشدارهای هزینه:**
+2. **تنظیم هشدارهای هزینه:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
@@ -708,32 +708,29 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 3. **بهینه‌سازی انتخاب مدل:**
 ```python
-# انتخاب مدل با توجه به هزینه
-MODEL_COSTS = {
-    'gpt-4.1-mini': 0.00015,  # به‌ازای هر ۱۰۰۰ توکن
-    'gpt-4.1': 0.03,          # به‌ازای هر ۱۰۰۰ توکن
-    'gpt-35-turbo': 0.0015  # به‌ازای هر ۱۰۰۰ توکن
+# انتخاب مدل با در نظر گرفتن هزینه
+MODEL_COST_TIERS = {
+  'gpt-4.1-mini': 'low',
+  'gpt-4.1': 'high'
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
     """Select model based on complexity and budget."""
     if complexity == 'simple' or budget_remaining < 10:
         return 'gpt-4.1-mini'
-    elif complexity == 'medium':
-        return 'gpt-35-turbo'
     else:
         return 'gpt-4.1'
 ```
 
 ## Debugging Tools and Techniques
 
-### AZD Debugging Commands
+### دستورات دیباگ AZD
 
 ```bash
-# گزارش‌گیری مفصل را فعال کنید
+# فعال‌سازی گزارش‌گیری مفصل
 azd up --debug
 
-# وضعیت استقرار را بررسی کنید
+# بررسی وضعیت استقرار
 azd show
 
 # مشاهده لاگ‌های برنامه (داشبورد مانیتورینگ را باز می‌کند)
@@ -742,38 +739,38 @@ azd monitor --logs
 # مشاهده معیارهای زنده
 azd monitor --live
 
-# متغیرهای محیطی را بررسی کنید
+# بررسی متغیرهای محیطی
 azd env get-values
 ```
 
-### AZD AI Extension Commands for Diagnostics
+### دستورات افزونه AZD AI برای تشخیص
 
-اگر عامل‌ها را با استفاده از `azd ai agent init` مستقر کردید، این ابزارهای اضافی در دسترس هستند:
+اگر با استفاده از `azd ai agent init` عامل‌ها را استقرار داده‌اید، این ابزارهای اضافی در دسترس هستند:
 
 ```bash
 # اطمینان حاصل کنید که افزونهٔ عامل‌ها نصب شده است
 azd extension install azure.ai.agents
 
-# عامل را از مانیفست مجدداً مقداردهی اولیه یا به‌روزرسانی کنید
+# یک عامل را از یک مانیفست دوباره مقداردهی اولیه یا به‌روز کنید
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# از سرور MCP استفاده کنید تا ابزارهای هوش مصنوعی بتوانند وضعیت پروژه را پرس‌وجو کنند
+# از سرور MCP استفاده کنید تا ابزارهای هوش مصنوعی بتوانند وضعیت پروژه را استعلام کنند
 azd mcp start
 
 # فایل‌های زیرساخت را برای بازبینی و حسابرسی تولید کنید
 azd infra generate
 ```
 
-> **نکته:** از `azd infra generate` استفاده کنید تا IaC را روی دیسک بنویسید تا بتوانید دقیقاً بررسی کنید چه منابعی فراهم شده‌اند. این مورد هنگام رفع اشکالات پیکربندی منابع بسیار ارزشمند است. برای جزئیات کامل به [مرجع AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) مراجعه کنید.
+> **نکته:** از `azd infra generate` برای نوشتن IaC روی دیسک استفاده کنید تا بتوانید دقیقاً بررسی کنید چه منابعی تأمین شده‌اند. این هنگام دیباگ کردن پیکربندی منابع بسیار ارزشمند است. جزئیات کامل را در مرجع [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) ببینید.
 
-### اشکال‌زدایی برنامه
+### عیب‌یابی برنامه
 
-1. **لاگ‌نویسی ساخت‌یافته:**
+1. **لاگ‌گذاری ساختاریافته:**
 ```python
 import logging
 import json
 
-# پیکربندی لاگ‌نویسی ساخت‌یافته برای برنامه‌های هوش مصنوعی
+# پیکربندی لاگ‌دهی ساخت‌یافته برای برنامه‌های هوش مصنوعی
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -792,14 +789,14 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **نقاط انتهایی بررسی سلامت:**
+2. **نقاط پایانی بررسی سلامت:**
 ```python
 @app.get("/debug/health")
 async def detailed_health_check():
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # بررسی اتصال به OpenAI
+    # اتصال به OpenAI را بررسی کنید
     try:
         client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
         await client.models.list()
@@ -807,7 +804,7 @@ async def detailed_health_check():
     except Exception as e:
         checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
     
-    # بررسی سرویس جستجو
+    # سرویس جستجو را بررسی کنید
     try:
         search_client = SearchIndexClient(
             endpoint=AZURE_SEARCH_ENDPOINT,
@@ -821,7 +818,7 @@ async def detailed_health_check():
     return checks
 ```
 
-3. **پایش عملکرد:**
+3. **نظارت بر عملکرد:**
 ```python
 import time
 from functools import wraps
@@ -852,22 +849,22 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## کدهای خطای رایج و راه‌حل‌ها
+## کدهای خطا رایج و راه‌حل‌ها
 
-| Error Code | Description | Solution |
+| کد خطا | توضیحات | راه‌حل |
 |------------|-------------|----------|
-| 401 | احراز هویت نشده | کلیدهای API و پیکربندی Managed Identity را بررسی کنید |
-| 403 | ممنوع | انتساب‌های نقش RBAC را بررسی کنید |
-| 429 | محدودیت نرخ | منطق تکرار با تاخیر تصاعدی را پیاده‌سازی کنید |
+| 401 | غیرمجاز | کلیدهای API و پیکربندی managed identity را بررسی کنید |
+| 403 | دسترسی ممنوع | انتساب‌های نقش RBAC را تأیید کنید |
+| 429 | محدودیت نرخ | منطق تکرار با بازگشت نمایی (exponential backoff) پیاده‌سازی کنید |
 | 500 | خطای داخلی سرور | وضعیت استقرار مدل و لاگ‌ها را بررسی کنید |
-| 503 | سرویس در دسترس نیست | سلامت سرویس و دسترسی منطقه‌ای را بررسی کنید |
+| 503 | سرویس در دسترس نیست | سلامت سرویس و در دسترس بودن منطقه‌ای را بررسی کنید |
 
-## مراحل بعدی
+## گام‌های بعدی
 
 1. **مرور [AI Model Deployment Guide](../chapter-02-ai-development/ai-model-deployment.md)** برای بهترین شیوه‌های استقرار
-2. **تکمیل [Production AI Practices](../chapter-08-production/production-ai-practices.md)** برای راه‌حل‌های آماده سازمانی
+2. **تکمیل [Production AI Practices](../chapter-08-production/production-ai-practices.md)** برای راه‌حل‌های مناسب سازمانی
 3. **پیوستن به [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** برای پشتیبانی جامعه
-4. **ارسال اشکالات** به [مخزن GitHub AZD](https://github.com/Azure/azure-dev) برای مسائل مربوط به AZD
+4. **ثبت مشکلات** در [AZD GitHub repository](https://github.com/Azure/azure-dev) برای مشکلات خاص AZD
 
 ## منابع
 
@@ -880,9 +877,9 @@ def monitor_performance(func):
 
 **ناوبری فصل:**
 - **📚 صفحه دوره**: [AZD For Beginners](../../README.md)
-- **📖 فصل جاری**: فصل 7 - عیب‌یابی و رفع اشکال
+- **📖 فصل جاری**: فصل 7 - عیب‌یابی و دیباگ
 - **⬅️ قبلی**: [Debugging Guide](debugging.md)
-- **➡️ فصل بعد**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
+- **➡️ فصل بعدی**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
 - **🤖 مرتبط**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 - **📖 مرجع**: [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
@@ -890,5 +887,5 @@ def monitor_performance(func):
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **سلب مسئولیت**:
-این سند با استفاده از سرویس ترجمه‌ی هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما برای دقت تلاش می‌کنیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. نسخهٔ اصلی سند به زبان مادری آن باید به عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمهٔ حرفه‌ای انسانی توصیه می‌شود. ما در برابر هرگونه سوءتفاهم یا تفسیر نادرست ناشی از استفاده از این ترجمه مسئولیتی نداریم.
+این سند با استفاده از سرویس ترجمه‌ی هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. سند اصلی به زبان بومی‌اش باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمه‌ی حرفه‌ای انسانی توصیه می‌شود. ما در قبال هیچ‌گونه سوءتفاهم یا تفسیر نادرستی که از استفاده از این ترجمه ناشی شود، مسئولیتی نداریم.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

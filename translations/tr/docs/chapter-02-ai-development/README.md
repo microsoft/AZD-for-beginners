@@ -1,31 +1,33 @@
-# Bölüm 2: AI-Öncelikli Geliştirme
+# Bölüm 2: Yapay Zeka-Öncelikli Geliştirme
 
-**📚 Course**: [AZD Yeni Başlayanlar](../../README.md) | **⏱️ Duration**: 1-2 saat | **⭐ Complexity**: Orta
+**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Süre**: 1-2 saat | **⭐ Zorluk**: Orta
 
 ---
 
 ## Genel Bakış
 
-Bu bölüm, Azure Developer CLI ve Microsoft Foundry hizmetlerini kullanarak yapay zeka destekli uygulamaları dağıtmaya odaklanır. Basit AI sohbet uygulamalarından araçlara sahip akıllı ajanlara kadar.
+Bu bölüm, Azure Developer CLI ve Microsoft Foundry hizmetlerini kullanarak yapay zeka destekli uygulamaların dağıtımına odaklanır. Basit AI sohbet uygulamalarından araçlara sahip akıllı ajanlara kadar.
+
+> **Doğrulama notu (2026-03-25):** Bu bölümdeki komut akışı ve uzantı yönergeleri `azd` `1.23.12` ve mevcut önizleme AI ajan uzantısı sürümü `azure.ai.agents` `0.1.18-preview` ile gözden geçirilmiştir. Daha eski bir AZD yapısındaysanız önce güncelleyin ve ardından egzersizlere devam edin.
 
 ## Öğrenme Hedefleri
 
-Bu bölümü tamamlayarak:
-- Önceden oluşturulmuş AZD şablonlarını kullanarak AI uygulamaları dağıtacaksınız
-- AZD ile Microsoft Foundry entegrasyonunu anlayacaksınız
-- Araçlara sahip AI ajanlarını yapılandırıp özelleştireceksiniz
-- RAG (Retrieval-Augmented Generation) uygulamalarını dağıtacaksınız
+By completing this chapter, you will:
+- Önceden hazırlanmış AZD şablonlarını kullanarak yapay zeka uygulamaları dağıtmak
+- AZD ile Microsoft Foundry entegrasyonunu anlamak
+- Araçlarla AI ajanlarını yapılandırmak ve özelleştirmek
+- RAG (Retrieval-Augmented Generation) uygulamalarını dağıtmak
 
 ---
 
 ## 📚 Dersler
 
-| # | Lesson | Açıklama | Süre |
+| # | Ders | Açıklama | Süre |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Entegrasyonu](microsoft-foundry-integration.md) | AZD'yi Foundry hizmetleriyle bağlayın | 30 dk |
-| 2 | [AI Ajanları Kılavuzu](agents.md) | Araçlara sahip akıllı ajanları dağıtın | 45 dk |
-| 3 | [AI Model Dağıtımı](ai-model-deployment.md) | AI modellerini dağıtın ve yapılandırın | 30 dk |
-| 4 | [AI Atölye Laboratuvarı](ai-workshop-lab.md) | Uygulamalı: AI çözümünüzü AZD'ye hazır hale getirin | 60 dk |
+| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | AZD'yi Foundry hizmetleriyle bağlayın | 30 min |
+| 2 | [AI Agents Guide](agents.md) | Araçlarla akıllı ajanlar dağıtın | 45 min |
+| 3 | [AI Model Deployment](ai-model-deployment.md) | AI modellerini dağıtma ve yapılandırma | 30 min |
+| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Uygulamalı: AI çözümünüzü AZD'ye hazır hale getirin | 60 min |
 
 ---
 
@@ -51,8 +53,8 @@ azd up
 
 | Şablon | Açıklama | Hizmetler |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Kaynak gösterimli RAG sohbeti | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Araçlara sahip AI ajanı | AI Agent Service |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Alıntılarla RAG sohbeti | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Araçlarla AI ajanı | AI Agent Service |
 | [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Temel AI sohbeti | OpenAI + Container Apps |
 
 ---
@@ -62,10 +64,10 @@ azd up
 | Ortam | Tahmini Aylık Maliyet |
 |-------------|----------------------|
 | Geliştirme | $80-150 |
-| Hazırlama | $150-300 |
+| Hazırlık | $150-300 |
 | Üretim | $300-3,500+ |
 
-**İpucu:** Ücretlerden kaçınmak için testten sonra `azd down` çalıştırın.
+**İpucu:** Ücretlerden kaçınmak için testten sonra `azd down` komutunu çalıştırın.
 
 ---
 
@@ -81,13 +83,13 @@ azd up
 
 ## 📖 İlgili Kaynaklar
 
-- [AI Sorun Giderme](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Üretim AI Uygulamaları](../chapter-08-production/production-ai-practices.md)
+- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Sorumluluk Reddi:
-Bu belge, yapay zeka çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Belgenin orijinal dilindeki sürümü yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucunda ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
+**Disclaimer**:
+Bu belge [Co-op Translator](https://github.com/Azure/co-op-translator) adlı yapay zeka çeviri hizmeti kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucunda ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

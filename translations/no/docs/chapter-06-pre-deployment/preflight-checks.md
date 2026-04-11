@@ -1,73 +1,73 @@
-# Forhåndssjekker for AZD-distribusjoner
+# Pre-Flight-sjekker for AZD-distribusjoner
 
 **Kapittelnavigasjon:**
-- **📚 Kursoversikt**: [AZD for nybegynnere](../../README.md)
-- **📖 Gjeldende kapittel**: Kapittel 6 - Forhåndsvalidering og planlegging
-- **⬅️ Forrige**: [Valg av SKU](sku-selection.md)
+- **📚 Kursstart**: [AZD For Beginners](../../README.md)
+- **📖 Nåværende kapittel**: Kapittel 6 - Validering og planlegging før distribusjon
+- **⬅️ Forrige**: [SKU-valg](sku-selection.md)
 - **➡️ Neste kapittel**: [Kapittel 7: Feilsøking](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 Relatert**: [Kapittel 4: Distribusjonsveiledning](../chapter-04-infrastructure/deployment-guide.md)
+- **🔧 Relatert**: [Kapittel 4: Distribusjonsguide](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Introduksjon
 
-Denne omfattende veiledningen gir skript og prosedyrer for forhåndsvalidering før distribusjon for å sikre vellykkede distribusjoner med Azure Developer CLI før de starter. Lær å implementere automatiske kontroller for autentisering, ressurs tilgjengelighet, kvoter, sikkerhetssamsvar og ytelseskrav for å forhindre distribusjonsfeil og optimalisere suksessraten for distribusjoner.
+Denne omfattende veiledningen gir valideringsskript og prosedyrer før distribusjon for å sikre vellykkede Azure Developer CLI-distribusjoner før de begynner. Lær å implementere automatiserte kontroller for autentisering, tilgjengelighet av ressurser, kvoter, sikkerhetsoverholdelse og ytelseskrav for å forhindre distribusjonsfeil og optimalisere sjansene for suksess.
 
 ## Læringsmål
 
 Ved å fullføre denne veiledningen vil du:
-- Beherske automatiserte teknikker og skript for forhåndsvalidering før distribusjon
-- Forstå omfattende sjekkstrategier for autentisering, tillatelser og kvoter
-- Implementere prosedyrer for validering av ressurs tilgjengelighet og kapasitet
-- Konfigurere sikkerhets- og samsvarssjekker for organisasjonspolicyer
-- Designe arbeidsflyter for kostnadsestimering og budsjettvalidering
-- Lage egendefinert automatisering av forhåndssjekker for CI/CD-pipeliner
+- Mestre automatiserte teknikker og skript for validering før distribusjon
+- Forstå omfattende kontrollstrategier for autentisering, tillatelser og kvoter
+- Implementere prosedyrene for validering av ressurstilgjengelighet og kapasitet
+- Konfigurere sikkerhets- og overholdelseskontroller for organisasjonens retningslinjer
+- Designe arbeidsflyter for kostnadsestimater og budsjettvalidering
+- Lage tilpasset automatisering for pre-flight-sjekker i CI/CD-pipelines
 
 ## Læringsutbytte
 
-Etter fullføring vil du kunne:
-- Opprette og kjøre omfattende forhåndsvalideringsskript
+Når du er ferdig vil du kunne:
+- Lage og kjøre omfattende valideringsskript før distribusjon
 - Designe automatiserte sjekk-arbeidsflyter for ulike distribusjonsscenarier
 - Implementere miljøspesifikke valideringsprosedyrer og -policyer
-- Konfigurere proaktiv overvåking og varsling for distribusjonsberedskap
-- Feilsøke forhåndsdistribusjonsproblemer og implementere korrigerende tiltak
-- Integrere forhåndssjekker i DevOps-pipeliner og automatiseringsarbeidsflyter
+- Konfigurere proaktiv overvåking og varsling for distribusjonsklarhet
+- Feilsøke problemer før distribusjon og gjennomføre korrigerende tiltak
+- Integrere pre-flight-sjekker i DevOps-pipelines og automatiseringsflyter
 
 ## Innholdsfortegnelse
 
-- [Oversikt](../../../../docs/chapter-06-pre-deployment)
-- [Automatisert forhåndssjekkskript](../../../../docs/chapter-06-pre-deployment)
-- [Manuell valideringssjekkliste](../../../../docs/chapter-06-pre-deployment)
-- [Miljøvalidering](../../../../docs/chapter-06-pre-deployment)
-- [Ressursvalidering](../../../../docs/chapter-06-pre-deployment)
-- [Sikkerhets- og samsvarssjekker](../../../../docs/chapter-06-pre-deployment)
-- [Ytelse og kapasitetsplanlegging](../../../../docs/chapter-06-pre-deployment)
-- [Feilsøking av vanlige problemer](../../../../docs/chapter-06-pre-deployment)
+- [Oversikt](#oversikt)
+- [Automatisert pre-flight-skript](#automatisert-pre-flight-skript)
+- [Sjekkliste for manuell validering](#sjekkliste-for-manuell-validering)
+- [Miljøvalidering](#miljøvalidering)
+- [Ressursvalidering](#ressursvalidering)
+- [Sikkerhets- og overholdelsessjekker](#sikkerhets--og-overholdelsessjekker)
+- [Ytelse og kapasitetsplanlegging](#ytelse--og-kapasitetsplanlegging)
+- [Feilsøking vanlige problemer](#feilsøking-vanlige-problemer)
 
 ---
 
 ## Oversikt
 
-Forhåndssjekker er essensielle valideringer som utføres før distribusjon for å sikre:
+Pre-flight-sjekker er essensielle valideringer som utføres før distribusjon for å sikre:
 
-- **Ressurs tilgjengelighet** og kvoter i målregioner
+- **Tilgjengelighet av ressurser** og kvoter i målregioner
 - **Autentisering og tillatelser** er riktig konfigurert
-- **Malens gyldighet** og korrekthet av parametere
+- **Gyldighet av maler** og korrekthet av parametere
 - **Nettverkstilkobling** og avhengigheter
-- **Sikkerhetssamsvar** med organisasjonens policyer
-- **Kostnadsestimering** innenfor budsjettbegrensninger
+- **Sikkerhetsoverholdelse** i henhold til organisasjonens retningslinjer
+- **Kostnadsestimat** innenfor budsjettbegrensninger
 
-### Når kjøre forhåndssjekker
+### Når kjøre pre-flight-sjekker
 
 - **Før første distribusjon** til et nytt miljø
-- **Etter betydelige malendringer**
+- **Etter vesentlige endringer i maler**
 - **Før produksjonsdistribusjoner**
-- **Når du endrer Azure-regioner**
-- **Som en del av CI/CD-pipeliner**
+- **Ved bytte av Azure-regioner**
+- **Som del av CI/CD-pipelines**
 
 ---
 
-## Automatisert forhåndssjekkskript
+## Automatisert pre-flight-skript
 
-### PowerShell forhåndssjekker
+### PowerShell Pre-flight Checker
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -194,7 +194,7 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # Hent nåværende brukers rolletilordninger
+        # Hent gjeldende brukers rolleoppdrag
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
@@ -242,7 +242,7 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # Sjekk beregningskvoter
+        # Sjekk datakvote
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
         # Sjekk spesifikke kvoter
@@ -257,7 +257,7 @@ function Test-QuotasAndLimits {
             }
         }
         
-        # Sjekk App Service-grenser
+        # Sjekk App Service-begrensninger
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
             if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
@@ -271,7 +271,7 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # Sjekk grenser for lagringskontoer
+        # Sjekk lagringskonto-begrensninger
         $storageAccounts = az storage account list --output json | ConvertFrom-Json
         $accountCount = ($storageAccounts | Measure-Object).Count
         if ($accountCount -lt 200) {
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 NYTT: Test forhåndsvisning av infrastruktur (sikker tørrkjøring)
+    # 🧪 NYTT: Test forhåndsvisning av infrastruktur (trygg tørrkjøring)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -415,7 +415,7 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # Sjekk tjenestetilgjengelighet i regionen
+        # Sjekk tjenestens tilgjengelighet i region
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
@@ -446,7 +446,7 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Grunnleggende kostnadsestimering (ville trengt Azure Pricing API for nøyaktige anslag)
+    # Grunnleggende kostnadsestimering (vil trenge Azure Pricing API for nøyaktige estimater)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
@@ -470,7 +470,7 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # Sjekk for vanlige sikkerhetspraksiser
+    # Sjekk for vanlige sikkerhetsrutiner
     try {
         # Sjekk om Key Vault er konfigurert
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # Sjekk bruk av administrert identitet
+        # Sjekk for bruk av administrert identitet
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +488,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # Sjekk om HTTPS håndheves
+        # Sjekk for HTTPS-håndheving
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -516,7 +516,7 @@ function Invoke-PreflightCheck {
     $allPassed = $true
     $results = @{}
     
-    # Kjør alle kontroller
+    # Kjør alle sjekker
     $results["Prerequisites"] = Test-Prerequisites
     $results["Authentication"] = Test-Authentication
     $results["Permissions"] = Test-Permissions
@@ -527,7 +527,7 @@ function Invoke-PreflightCheck {
     $results["CostEstimation"] = Test-CostEstimation
     $results["SecurityCompliance"] = Test-SecurityCompliance
     
-    # Sammendrag
+    # Oppsummering
     Write-Host "`n${Blue}=== Pre-flight Check Summary ===${Reset}"
     
     $passedCount = 0
@@ -557,15 +557,15 @@ function Invoke-PreflightCheck {
     }
 }
 
-# Kjør forhåndssjekken
+# Kjør forhåndssjekk
 Invoke-PreflightCheck
 ```
 
-### Bash forhåndssjekker
+### Bash Pre-flight Checker
 
 ```bash
 #!/bin/bash
-# Bash-versjon av forhåndssjekker for Unix/Linux-systemer
+# Bash-versjon av pre-flight sjekker for Unix/Linux systemer
 
 set -euo pipefail
 
@@ -606,7 +606,7 @@ print_status() {
 check_prerequisites() {
     echo -e "${BLUE}=== Prerequisites Check ===${NC}"
     
-    # Sjekk AZD-installasjon
+    # Sjekk AZD installasjon
     if command -v azd >/dev/null 2>&1; then
         local azd_version=$(azd version --output json | jq -r '.azd.version')
         print_status "AZD CLI installed" "success" "Version: $azd_version"
@@ -615,7 +615,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # Sjekk Azure CLI-installasjon
+    # Sjekk Azure CLI installasjon
     if command -v az >/dev/null 2>&1; then
         local az_version=$(az version --output json | jq -r '."azure-cli"')
         print_status "Azure CLI installed" "success" "Version: $az_version"
@@ -624,7 +624,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # Sjekk jq-installasjon
+    # Sjekk jq installasjon
     if command -v jq >/dev/null 2>&1; then
         print_status "jq installed" "success"
     else
@@ -637,7 +637,7 @@ check_prerequisites() {
 check_authentication() {
     echo -e "\n${BLUE}=== Authentication Check ===${NC}"
     
-    # Sjekk AZD-autentisering
+    # Sjekk AZD autentisering
     if azd auth login --check-status >/dev/null 2>&1; then
         local principal_name=$(azd auth login --check-status --output json 2>/dev/null | jq -r '.principalName // "Unknown"')
         print_status "AZD authentication" "success" "User: $principal_name"
@@ -646,7 +646,7 @@ check_authentication() {
         return 1
     fi
     
-    # Sjekk Azure CLI-autentisering
+    # Sjekk Azure CLI autentisering
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -706,7 +706,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # Sjekk om lokasjonen er gyldig
+    # Sjekk om lokasjon er gyldig
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -714,7 +714,7 @@ check_regional_availability() {
         return 1
     fi
     
-    # Sjekk tjenestens tilgjengelighet
+    # Sjekk tjenestetilgjengelighet
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
     for service in "${services[@]}"; do
@@ -755,7 +755,7 @@ main() {
         esac
     done
     
-    # Valider påkrevde parametere
+    # Valider nødvendige parametere
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -776,7 +776,7 @@ main() {
     check_template_validation || all_passed=false
     check_regional_availability || all_passed=false
     
-    # Sammendrag
+    # Oppsummering
     echo -e "\n${BLUE}=== Pre-flight Check Summary ===${NC}"
     
     if $all_passed; then
@@ -790,71 +790,71 @@ main() {
     fi
 }
 
-# Kjør hovedfunksjonen
+# Kjør hovedfunksjon
 main "$@"
 ```
 
 ---
 
-## Manuell valideringssjekkliste
+## Sjekkliste for manuell validering
 
 ### Sjekkliste før distribusjon
 
-Skriv ut denne sjekklisten og verifiser hvert punkt før distribusjon:
+Skriv ut denne sjekklisten og bekreft hvert punkt før distribusjon:
 
-#### ✅ Oppsett av miljø
-- [ ] AZD CLI installert og oppdatert til siste versjon
+#### ✅ Miljøoppsett
+- [ ] AZD CLI installert og oppdatert til nyeste versjon
 - [ ] Azure CLI installert og autentisert
 - [ ] Riktig Azure-abonnement valgt
 - [ ] Miljønavn er unikt og følger navnekonvensjoner
-- [ ] Målressursgruppe identifisert eller kan opprettes
+- [ ] Mål ressursgruppe identifisert eller kan opprettes
 
 #### ✅ Autentisering og tillatelser
 - [ ] Vellykket autentisering med `azd auth login`
-- [ ] Bruker har rollen Contributor på mål-abonnement/ressursgruppe
-- [ ] Serviceprincipal konfigurert for CI/CD (hvis aktuelt)
+- [ ] Bruker har bidragsyterrolle på mål-abonnement/ressursgruppe
+- [ ] Service principal konfigurert for CI/CD (hvis relevant)
 - [ ] Ingen utløpte sertifikater eller legitimasjon
 
 #### ✅ Malvalidering
-- [ ] `azure.yaml` finnes og er gyldig YAML
+- [ ] `azure.yaml` eksisterer og er gyldig YAML
 - [ ] Alle tjenester definert i azure.yaml har tilsvarende kildekode
-- [ ] Bicep-maler i `infra/`-mappen er til stede
+- [ ] Bicep-maler i `infra/`-katalogen er til stede
 - [ ] `main.bicep` kompilerer uten feil (`az bicep build --file infra/main.bicep`)
 - [ ] 🧪 Infrastrukturforhåndsvisning kjører vellykket (`azd provision --preview`)
-- [ ] Alle nødvendige parametere har standardverdier eller vil bli levert
-- [ ] Ingen hardkodede hemmeligheter i maler
+- [ ] Alle nødvendige parametere har standardverdier eller vil bli angitt
+- [ ] Ingen hardkodede hemmeligheter i malene
 
 #### ✅ Ressursplanlegging
-- [ ] Mål-Azure-region valgt og validert
-- [ ] Nødvendige Azure-tjenester tilgjengelige i målregionen
+- [ ] Mål Azure-region valgt og validert
+- [ ] Nødvendige Azure-tjenester tilgjengelig i målregion
 - [ ] Tilstrekkelige kvoter tilgjengelig for planlagte ressurser
-- [ ] Konflikter i ressursnavn kontrollert
+- [ ] Ressursnavnekonflikter sjekket
 - [ ] Avhengigheter mellom ressurser forstått
 
 #### ✅ Nettverk og sikkerhet
 - [ ] Nettverkstilkobling til Azure-endepunkter verifisert
-- [ ] Brannmur/proxy-innstillinger konfigurert hvis nødvendig
+- [ ] Brannmur/proxy-innstillinger konfigurert om nødvendig
 - [ ] Key Vault konfigurert for hemmelighetshåndtering
 - [ ] Administrerte identiteter brukt der det er mulig
-- [ ] HTTPS-påtvunget aktivert for webapplikasjoner
+- [ ] HTTPS-håndhevelse aktivert for webapplikasjoner
 
 #### ✅ Kostnadsstyring
-- [ ] Kostnadsestimat beregnet ved hjelp av Azure Pricing Calculator
-- [ ] Varsler for budsjett konfigurert hvis nødvendig
-- [ ] Egnede SKU-er valgt for miljøtypen
-- [ ] Reservert kapasitet vurdert for produksjonsarbeidsbelastninger
+- [ ] Kostnadsestimater beregnet med Azure Pricing Calculator
+- [ ] Budsjettvarsler konfigurert ved behov
+- [ ] Passende SKUer valgt for miljøtype
+- [ ] Reservert kapasitet vurdert for produksjonsarbeidsmengder
 
 #### ✅ Overvåking og observabilitet
-- [ ] Application Insights konfigurert i malene
+- [ ] Application Insights konfigurert i maler
 - [ ] Log Analytics-arbeidsområde planlagt
 - [ ] Varselregler definert for kritiske måleparametere
-- [ ] Health check-endepunkter implementert i applikasjoner
+- [ ] Helsesjekk-endepunkter implementert i applikasjonene
 
-#### ✅ Sikkerhetskopiering og gjenoppretting
-- [ ] Sikkerhetskopieringsstrategi definert for dataressurser
-- [ ] Recovery time objectives (RTO) dokumentert
-- [ ] Recovery point objectives (RPO) dokumentert
-- [ ] Plan for katastrofegjenoppretting på plass for produksjon
+#### ✅ Backup og gjenoppretting
+- [ ] Backup-strategi definert for dataressurser
+- [ ] Gjenopprettingstidsmål (RTO) dokumentert
+- [ ] Gjenopprettingspunktmål (RPO) dokumentert
+- [ ] Katastrofegjenopprettingsplan på plass for produksjon
 
 ---
 
@@ -864,26 +864,26 @@ Skriv ut denne sjekklisten og verifiser hvert punkt før distribusjon:
 
 ```bash
 #!/bin/bash
-# Valideringer spesifikke for utviklingsmiljøet
+# Utviklingsmiljøspesifikke valideringer
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # Sjekk etter utviklervennlige konfigurasjoner
+    # Sjekk for utviklingsvennlige konfigurasjoner
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # Sjekk etter konfigurasjoner for automatisk nedstenging
+    # Sjekk for automatisk avslutning konfigurasjoner
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # Valider konfigurasjoner for utviklingsdatabasen
+    # Valider utviklingsdatabasekonfigurasjoner
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -896,33 +896,33 @@ validate_dev_environment() {
 
 ```bash
 #!/bin/bash
-# Valideringer spesifikke for produksjonsmiljøet
+# Spesifikke valideringer for produksjonsmiljø
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # Sjekk etter konfigurasjoner for høy tilgjengelighet
+    # Sjekk for høy tilgjengelighetskonfigurasjoner
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # Sjekk etter konfigurasjoner for sikkerhetskopiering
+    # Sjekk for sikkerhetskopieringskonfigurasjoner
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # Valider overvåkingsoppsettet
+    # Valider overvåkingsoppsett
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # Sjekk etter sikkerhetskonfigurasjoner
+    # Sjekk for sikkerhetskonfigurasjoner
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -990,7 +990,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # Hent lagringskontoer i abonnementet
+    # Hent lagringskontoer i abonnement
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -998,7 +998,7 @@ def check_storage_limits(location: str) -> bool:
         return False
     
     account_count = len(accounts)
-    max_accounts = 250  # Standardgrense for Azure
+    max_accounts = 250  # Standard Azure-grense
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1038,12 +1038,12 @@ def main():
     
     all_passed = True
     
-    # Kjør sjekker
+    # Kjør kontroller
     all_passed &= check_compute_quotas(location)
     all_passed &= check_storage_limits(location)
     all_passed &= check_network_limits(location)
     
-    # Oppsummering
+    # Sammendrag
     print(f"\n=== Quota Check Summary ===")
     if all_passed:
         print("✅ All quota checks passed - sufficient capacity available")
@@ -1058,13 +1058,13 @@ if __name__ == "__main__":
 
 ---
 
-## Sikkerhets- og samsvarssjekker
+## Sikkerhets- og overholdelsessjekker
 
-### Sikkerhetsvalideringsskript
+### Skript for sikkerhetsvalidering
 
 ```bash
 #!/bin/bash
-# Sikkerhets- og samsvarsvalidering for AZD-distribusjoner
+# Sikkerhets- og samsvarsvurdering for AZD-distribusjoner
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Sjekk at HTTPS håndheves
+    # Sjekk for håndheving av HTTPS
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1103,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Sjekk for begrensninger på offentlig tilgang
+    # Sjekk for offentlige tilgangsbegrensninger
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1138,7 +1138,7 @@ check_compliance_requirements() {
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # Sjekk for sikkerhetskopi- og oppbevaringspolicyer
+    # Sjekk for sikkerhetskopiering og oppbevaringspolicyer
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1179,7 +1179,7 @@ main "$@"
 
 ## Integrasjon med CI/CD
 
-### Integrasjon med GitHub Actions
+### GitHub Actions-integrasjon
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1238,7 +1238,7 @@ jobs:
         path: preflight-results.json
 ```
 
-### Integrasjon med Azure DevOps
+### Azure DevOps-integrasjon
 
 ```yaml
 trigger: none
@@ -1290,58 +1290,58 @@ steps:
 
 ---
 
-## Oppsummering av beste praksis
+## Sammendrag av beste praksis
 
-### ✅ Beste praksis for forhåndssjekker
+### ✅ Beste praksis for pre-flight-sjekker
 
 1. **Automatiser der det er mulig**
-   - Integrer kontroller i CI/CD-pipeliner
+   - Integrer sjekker i CI/CD-pipelines
    - Bruk skript for repeterbare valideringer
    - Lagre resultater for revisjonsspor
 
 2. **Miljøspesifikk validering**
-   - Ulike kontroller for dev/staging/prod
+   - Ulike sjekker for dev/staging/prod
    - Passende sikkerhetskrav per miljø
-   - Kostnadsoptimalisering for ikke-produksjonsmiljøer
+   - Kostnadsoptimalisering for ikke-produksjonsmiljø
 
 3. **Omfattende dekning**
    - Autentisering og tillatelser
    - Ressurskvoter og tilgjengelighet
    - Malvalidering og syntaks
-   - Sikkerhets- og samsvarskrav
+   - Sikkerhets- og overholdelseskrav
 
-4. **Tydelig rapportering**
+4. **Klar rapportering**
    - Fargekodede statusindikatorer
-   - Detaljerte feilmeldinger med utbedringstrinn
-   - Oppsummeringsrapporter for rask vurdering
+   - Detaljerte feilmeldinger med utbedringstips
+   - Sammendragsrapporter for rask vurdering
 
-5. **Stopp tidlig ved feil**
-   - Avbryt distribusjon hvis kritiske kontroller feiler
-   - Gi tydelig veiledning for løsning
-   - Gjør det enkelt å kjøre sjekker på nytt
+5. **Fail fast**
+   - Stopp distribusjon hvis kritiske sjekker mislykkes
+   - Gi klar veiledning for løsning
+   - Gjør det enkelt å kjøre sjekkene på nytt
 
-### Vanlige fallgruver ved forhåndssjekker
+### Vanlige fallgruver med pre-flight
 
 1. **Hopper over validering** for "raske" distribusjoner
-2. **Mangelfull sjekk av tillatelser** før distribusjon
-3. **Ignorerer kvotegrenser** til distribusjonen feiler
-4. **Validerer ikke maler** i CI/CD-pipeliner
-5. **Mangler sikkerhetsvalidering** for produksjonsmiljøer
-6. **Utilstrekkelig kostnadsestimering** som fører til budsjettoverraskelser
+2. **Mangelfull tillatelsestesting** før distribusjon
+3. **Ignorerer kvotegrenser** til distribusjon mislykkes
+4. **Validerer ikke maler** i CI/CD-pipelines
+5. **Manglende sikkerhetsvalidering** for produksjonsmiljøer
+6. **Utilstrekkelig kostnadsestimat** som fører til budsjett-overraskelser
 
 ---
 
-**Profftips**: Kjør forhåndssjekker som en separat jobb i CI/CD-pipelinen din før selve distribusjonsjobben. Dette lar deg fange problemer tidlig og gir raskere tilbakemelding til utviklerne.
+**Pro tips**: Kjør pre-flight-sjekker som en egen jobb i CI/CD-pipelinen før selve distribusjonsjobben. Dette lar deg oppdage problemer tidlig og gir raskere tilbakemelding til utviklere.
 
 ---
 
 **Navigasjon**
-- **Forrige leksjon**: [Valg av SKU](sku-selection.md)
-- **Neste leksjon**: [Jukselapp](../../resources/cheat-sheet.md)
+- **Forrige leksjon**: [SKU-valg](sku-selection.md)
+- **Neste leksjon**: [Snyteliste](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Ansvarsfraskrivelse**:
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på dets opprinnelige språk bør betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som følger av bruk av denne oversettelsen.
+**Ansvarsfraskrivelse**:  
+Dette dokumentet er oversatt ved bruk av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på sitt originale språk skal betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi påtar oss ikke ansvar for eventuelle misforståelser eller feiltolkninger som oppstår fra bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

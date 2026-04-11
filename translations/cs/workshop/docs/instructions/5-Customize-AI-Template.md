@@ -1,195 +1,193 @@
-# 5. Customize a Template
+# 5. Přizpůsobení šablony
 
-!!! tip "NA KONCI TOHOTO MODULU BUDETE UMĚT"
+!!! tip "NA KONCI TOHOTO MODULU BUDETE SCHOPNI"
 
-    - [ ] Prozkoumali výchozí schopnosti AI agenta
-    - [ ] Přidali AI Search s vlastním indexem
-    - [ ] Aktivovali a analyzovali metriky trasování
-    - [ ] Provedli vyhodnocovací běh
-    - [ ] Provedli red-teamingový sken
-    - [ ] **Lab 5: Vytvořili plán přizpůsobení** 
-
----
-
-## 5.1 AI Agent Capabilities
-
-!!! success "Dokončeno v Labu 01"
-
-- **File Search**: Vestavěné vyhledávání souborů OpenAI pro získávání znalostí
-- **Citations**: Automatické přiřazování zdrojů v odpovědích
-- **Customizable Instructions**: Upravte chování a osobnost agenta
-- **Tool Integration**: Rozšiřitelný systém nástrojů pro vlastní funkce
+    - [ ] Prozkoumat výchozí schopnosti AI agenta
+    - [ ] Přidat AI vyhledávání s vlastním indexem
+    - [ ] Aktivovat a analyzovat měření sledování
+    - [ ] Spustit hodnoticí běh
+    - [ ] Spustit red-teamové skenování
+    - [ ] **Lab 5: Vytvořit plán přizpůsobení** 
 
 ---
 
-## 5.2 Knowledge Retrieval Options
+## 5.1 Schopnosti AI agenta
 
-!!! task "Pro dokončení musíme provést změny a znovu nasadit"    
+!!! success "Dokončeno v Lab 01"
+
+- **Vyhledávání v souborech**: Vestavěné vyhledávání OpenAI pro získávání znalostí
+- **Citace**: Automatické přiřazení zdrojů v odpovědích
+- **Přizpůsobitelné instrukce**: Úprava chování a osobnosti agenta
+- **Integrace nástrojů**: Rozšiřitelný systém nástrojů pro vlastní schopnosti
+
+---
+
+## 5.2 Možnosti získávání znalostí
+
+!!! task "Pro dokončení je třeba provést změny a znovu nasadit"    
     
     ```bash title=""
-    # Set environment variables
+    # Nastavení proměnných prostředí
     azd env set USE_AZURE_AI_SEARCH_SERVICE true
     azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
-    # Upload data and create my index
+    # Nahrání dat a vytvoření indexu
 
     ```
 
 ---
 
-**OpenAI File Search (Výchozí):**
+**Vyhledávání v souborech OpenAI (výchozí):**
 
-- Vestavěné v Foundry Agents
+- Vestavěné v agentech Foundry
 - Automatické zpracování dokumentů a indexování
 - Není potřeba žádná další konfigurace
 
-**Azure AI Search (Volitelné):**
+**Azure AI Search (volitelné):**
 
 - Hybridní sémantické a vektorové vyhledávání
-- Vlastní správa indexů
-- Pokročilé vyhledávací funkce
+- Správa vlastního indexu
+- Pokročilé funkce vyhledávání
 - Vyžaduje `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
-## 5.3 [Trasování & monitorování](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [Sledování a monitorování](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "Pro dokončení musíme provést změny a znovu nasadit"    
+!!! task "Pro dokončení je třeba provést změny a znovu nasadit"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
     azd deploy
     ```
 
-**Tracing:**
+**Sledování:**
 
 - Integrace OpenTelemetry
-- Sledování požadavků/odpovědí
-- Metriky výkonu
+- Sledování požadavků a odpovědí
+- Výkonové metriky
 - Dostupné v portálu Microsoft Foundry
 
-**Logging:**
+**Logování:**
 
-- Aplikační protokoly v Container Apps
-- Strukturované logování s identifikátory korelace
-- Zobrazení logů v reálném čase i historických
+- Aplikační logy v Container Apps
+- Strukturované logování s ID korelace
+- Zobrazení logů v reálném čase i historicky
 
 ---
 
-## 5.4 [Hodnocení agentů](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
+## 5.4 [Hodnocení agenta](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
 **Lokální hodnocení:**
 
 - Vestavěné hodnoticí nástroje pro posouzení kvality
-- Vlastní skripty pro hodnocení
-- Výkonnostní benchmarky
+- Vlastní hodnoticí skripty
+- Benchmarking výkonu
 
 **Kontinuální monitorování:**
 
 - Automatické hodnocení živých interakcí
 - Sledování metrik kvality
-- Detekce regresí výkonu
+- Detekce regresí ve výkonu
 
-**Integrace CI/CD:**
+**CI/CD integrace:**
 
-- Workflow GitHub Actions
+- GitHub Actions workflow
 - Automatizované testování a hodnocení
-- Statistické porovnávací testování
+- Statistické srovnávací testování
 
 ---
 
-## 5.5 [Agent pro AI red teaming](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [AI Red Teaming agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
 **AI Red Teaming:**
 
 - Automatizované bezpečnostní skenování
-- Posouzení rizik pro AI systémy
-- Hodnocení bezpečnosti napříč více kategoriemi
+- Hodnocení rizik AI systémů
+- Bezpečnostní hodnocení ve více kategoriích
 
 **Autentizace:**
 
-- Spravovaná identita pro služby Azure
+- Spravovaná identita pro Azure služby
 - Volitelná autentizace Azure App Service
 - Záložní základní autentizace pro vývoj
 
-
-
 !!! quote "NA KONCI TOHOTO LABU BYSTE MĚLI MÍT"
-    - [ ] Definovali požadavky svého scénáře
-    - [ ] Přizpůsobili proměnné prostředí (config)
-    - [ ] Přizpůsobili instrukce agenta (task)
-    - [ ] Nasadili přizpůsobenou šablonu (app)
-    - [ ] Dokončili úkoly po nasazení (manuální)
-    - [ ] Spustili testovací hodnocení
+    - [ ] Definované požadavky scénáře
+    - [ ] Přizpůsobené proměnné prostředí (config)
+    - [ ] Přizpůsobené instrukce agenta (úkol)
+    - [ ] Nasazenou přizpůsobenou šablonu (app)
+    - [ ] Dokončené úkoly po nasazení (manuálně)
+    - [ ] Spuštěné testovací hodnocení
 
-This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
+Tento příklad ukazuje přizpůsobení šablony pro podnikový maloobchodní scénář se dvěma specializovanými agenty a více nasazeními modelů.
 
 ---
 
-## 5.6 Customize It For You!
+## 5.6 Přizpůsobte si to pro sebe!
 
-### 5.6.1. Scenario Requirements
+### 5.6.1 Požadavky scénáře
 
-#### **Agent Deployments:** 
+#### **Nasazení agentů:** 
 
    - Shopper Agent: Pomáhá zákazníkům najít a porovnat produkty
-   - Loyalty Agent: Spravuje zákaznické odměny a promo akce
+   - Loyalty Agent: Spravuje zákaznické odměny a promoakce
 
-#### **Model Deployments:**
+#### **Nasazení modelů:**
 
-   - `gpt-4.1`: Primární chatovací model
-   - `o3`: Model pro zpracování složitých dotazů
+   - `gpt-4.1`: Hlavní chatovací model
+   - `o3`: Dedukční model pro složité dotazy
    - `gpt-4.1-nano`: Lehký model pro jednoduché interakce
-   - `text-embedding-3-large`: Vysoce kvalitní embeddingy pro vyhledávání
+   - `text-embedding-3-large`: Vysoce kvalitní embeddings pro vyhledávání
 
-#### **Features:**
+#### **Funkce:**
 
-   - Povoleno trasování a monitorování
-   - AI Search pro katalog produktů
-   - Rámec hodnocení pro zajištění kvality
-   - Red teaming pro ověření bezpečnosti
+   - Povolené sledování a monitorování
+   - AI vyhledávání pro katalog produktů
+   - Rámec pro hodnocení kvality
+   - Red teaming pro bezpečnostní ověření
 
 ---
 
-### 5.6.2 Scenario Implementation
+### 5.6.2 Implementace scénáře
 
 
-#### 5.6.2.1. Pre-Deployment Config
+#### 5.6.2.1. Konfigurace před nasazením
 
-Create a setup script (`setup-retail.sh`)
+Vytvořte skript nastavení (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
-# Nastavte název prostředí
+# Nastavit název prostředí
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Konfigurujte region (vyberte podle dostupnosti modelu)
+# Nakonfigurovat region (vyberte podle dostupnosti modelu)
 azd env set AZURE_LOCATION "eastus2"
 
-# Povolte všechny volitelné služby
+# Povolit všechny volitelné služby
 azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Konfigurujte primární chatovací model (gpt-4.1 jako nejbližší dostupný)
+# Nakonfigurovat primární chatovací model (gpt-4.1 jako nejbližší dostupný k gpt-4.1)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Konfigurujte embeddingový model pro vylepšené vyhledávání
+# Nakonfigurovat model vkládání pro vylepšené vyhledávání
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Nastavte jméno agenta (vytvoří se první agent)
+# Nastavit název agenta (vytvoří prvního agenta)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# Konfigurujte vyhledávací index
+# Nakonfigurovat vyhledávací index
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -198,9 +196,9 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2: Agent Instructions
+#### 5.6.2.2: Instrukce agenta
 
-Create `custom-agents/shopper-agent-instructions.md`:
+Vytvořte `custom-agents/shopper-agent-instructions.md`:
 
 ```markdown
 # Shopper Agent Instructions
@@ -223,7 +221,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-Create `custom-agents/loyalty-agent-instructions.md`:
+Vytvořte `custom-agents/loyalty-agent-instructions.md`:
 
 ```markdown
 # Loyalty Agent Instructions
@@ -248,9 +246,9 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: Deployment Script
+#### 5.6.2.3: Skript pro nasazení
 
-Create `deploy-retail.sh`:
+Vytvořte `deploy-retail.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -275,7 +273,7 @@ echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Zkontrolovat kvótu v vybrané oblasti
+# Zkontrolovat kvótu ve vybrané oblasti
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -300,7 +298,7 @@ echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
 # Získat URL webové aplikace
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -321,9 +319,9 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Post-Deployment Config
+#### 5.6.2.4: Konfigurace po nasazení
 
-Create `configure-retail-agents.sh`:
+Vytvořte `configure-retail-agents.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -378,21 +376,21 @@ echo "
 "
 ```
 
-### 5.6.3: Testing and Validation
+### 5.6.3: Testování a ověření
 
-Create `test-retail-deployment.sh`:
+Vytvořte `test-retail-deployment.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🧪 Testing retail deployment..."
 
-# Ověřte, že jsou nastaveny proměnné prostředí
+# Ověřte, zda jsou nastaveny proměnné prostředí
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
 # Otestujte dostupnost webové aplikace
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -429,42 +427,42 @@ Next steps:
 
 ---
 
-### 5.6.4 Expected Outcomes
+### 5.6.4 Očekávané výsledky
 
-After following this implementation guide, you will have:
+Po dodržení tohoto návodu budete mít:
 
-1. **Deployed Infrastructure:**
+1. **Nasazenou infrastrukturu:**
 
-      - Microsoft Foundry project with model deployments
-      - Container Apps hosting the web application
-      - AI Search service for product catalog
-      - Application Insights for monitoring
+      - Projekt Microsoft Foundry s nasazením modelů
+      - Container Apps hostující webovou aplikaci
+      - AI Search službu pro katalog produktů
+      - Application Insights pro monitorování
 
-2. **Initial Agent:**
+2. **Počátečního agenta:**
 
-      - Shopper Agent configured with basic instructions
-      - File search capability enabled
-      - Tracing and monitoring configured
+      - Shopper Agent nakonfigurovaný se základními instrukcemi
+      - Povolené vyhledávání v souborech
+      - Nakonfigurované sledování a monitorování
 
-3. **Ready for Customization:**
+3. **Připraveno pro přizpůsobení:**
 
-      - Framework for adding Loyalty Agent
-      - Custom instruction templates
-      - Testing and validation scripts
-      - Monitoring and evaluation setup
+      - Rámec pro přidání Loyalty Agenta
+      - Šablony vlastních instrukcí
+      - Skripty pro testování a validaci
+      - Nastavení monitorování a hodnocení
 
-4. **Production Readiness:**
+4. **Připraveno do produkce:**
 
-      - Security scanning with red teaming
-      - Performance monitoring
-      - Quality evaluation framework
-      - Scalable architecture
+      - Bezpečnostní skenování s red teamingem
+      - Monitorování výkonu
+      - Rámec pro hodnocení kvality
+      - Škálovatelná architektura
 
-This example demonstrates how the AZD template can be extended and customized for specific enterprise scenarios while maintaining best practices for security, monitoring, and scalability.
+Tento příklad ukazuje, jak lze šablonu AZD rozšířit a přizpůsobit pro konkrétní podnikové scénáře při zachování osvědčených postupů v oblasti bezpečnosti, monitorování a škálovatelnosti.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné výklady vzniklé v souvislosti s použitím tohoto překladu.
+**Prohlášení o vyloučení odpovědnosti**:  
+Tento dokument byl přeložen pomocí služby automatického překladu AI [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakékoliv nedorozumění nebo chybné výklady vyplývající z použití tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

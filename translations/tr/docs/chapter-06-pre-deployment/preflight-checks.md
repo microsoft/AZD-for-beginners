@@ -1,73 +1,73 @@
-# AZD Dağıtımları için Ön Kontroller
+# AZD Dağıtımları için Ön Uçuş Kontrolleri
 
-**Bölüm Gezinme:**
-- **📚 Kurs Ana Sayfa**: [AZD For Beginners](../../README.md)
-- **📖 Mevcut Bölüm**: Bölüm 6 - Dağıtımdan Önce Doğrulama ve Planlama
-- **⬅️ Önceki**: [SKU Selection](sku-selection.md)
-- **➡️ Sonraki Bölüm**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 İlgili**: [Chapter 4: Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+**Bölüm Gezinimi:**
+- **📚 Kurs Anasayfası**: [AZD Yeni Başlayanlar](../../README.md)
+- **📖 Geçerli Bölüm**: Bölüm 6 - Dağıtımdan Önce Doğrulama ve Planlama
+- **⬅️ Önceki**: [SKU Seçimi](sku-selection.md)
+- **➡️ Sonraki Bölüm**: [Bölüm 7: Sorun Giderme](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 İlgili**: [Bölüm 4: Dağıtım Kılavuzu](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Giriş
 
-Bu kapsamlı rehber, Azure Developer CLI dağıtımları başlamadan önce başarılı olmalarını sağlamak için ön dağıtım doğrulama betikleri ve prosedürler sağlar. Dağıtım hatalarını önlemek ve başarı oranlarını optimize etmek için kimlik doğrulama, kaynak kullanılabilirliği, kotalar, güvenlik uyumluluğu ve performans gereksinimleri için otomatik kontrollerin nasıl uygulanacağını öğrenin.
+Bu kapsamlı rehber, Azure Developer CLI dağıtımları başlamadan önce başarılı olmalarını sağlamak için dağıtımdan önce doğrulama betikleri ve prosedürleri sağlar. Kimlik doğrulama, kaynak kullanılabilirliği, kotalar, güvenlik uyumluluğu ve performans gereksinimleri için otomatik kontroller uygulamayı öğrenerek dağıtım hatalarının önüne geçin ve dağıtım başarı oranlarını optimize edin.
 
 ## Öğrenme Hedefleri
 
-Bu rehberi tamamlayarak:
-- Otomatik ön-dağıtım doğrulama teknikleri ve betikleri konusunda uzmanlaşacaksınız
-- Kimlik doğrulama, izinler ve kotalar için kapsamlı kontrol stratejilerini anlayacaksınız
-- Kaynak kullanılabilirliği ve kapasite doğrulama prosedürlerini uygulayacaksınız
-- Kurumsal politikalar için güvenlik ve uyumluluk kontrollerini yapılandıracaksınız
-- Maliyet tahmini ve bütçe doğrulama iş akışları tasarlayacaksınız
-- CI/CD boru hatları için özel ön uç kontrol otomasyonları oluşturacaksınız
+Bu rehberi tamamlayarak şunları öğreneceksiniz:
+- Otomatikleştirilmiş dağıtımdan önce doğrulama teknikleri ve betikleri konusunda uzmanlaşma
+- Kimlik doğrulama, izinler ve kotalar için kapsamlı kontrol stratejilerini anlama
+- Kaynak kullanılabilirliği ve kapasite doğrulama prosedürlerini uygulama
+- Kurumsal politikalar için güvenlik ve uyumluluk kontrolleri yapılandırma
+- Maliyet tahmini ve bütçe doğrulama iş akışları tasarlama
+- CI/CD boru hatları için özel ön uçuş kontrol otomasyonları oluşturma
 
 ## Öğrenme Çıktıları
 
-Tamamlandığında, şunları yapabileceksiniz:
-- Kapsamlı ön-uc doğrulama betikleri oluşturup çalıştırmak
-- Farklı dağıtım senaryoları için otomatik kontrol iş akışları tasarlamak
-- Ortama özgü doğrulama prosedürleri ve politikaları uygulamak
-- Dağıtım hazırlığı için proaktif izleme ve uyarı yapılandırmak
-- Dağıtımdan önceki sorunları gidermek ve düzeltici önlemler uygulamak
-- Ön uç kontrollerini DevOps boru hatlarına ve otomasyon iş akışlarına entegre etmek
+Tamamlandığında şunları yapabileceksiniz:
+- Kapsamlı ön uçuş doğrulama betikleri oluşturma ve yürütme
+- Farklı dağıtım senaryoları için otomatik kontrol iş akışları tasarlama
+- Ortama özgü doğrulama prosedürleri ve politikaları uygulama
+- Dağıtım hazırlığı için proaktif izleme ve uyarı yapılandırma
+- Dağıtımdan önceki sorunları giderme ve düzeltici önlemler uygulama
+- Ön uçuş kontrollerini DevOps boru hatlarına ve otomasyon iş akışlarına entegre etme
 
 ## İçindekiler
 
-- [Genel Bakış](../../../../docs/chapter-06-pre-deployment)
-- [Otomatik Ön-Uç Betiği](../../../../docs/chapter-06-pre-deployment)
-- [Manuel Doğrulama Kontrol Listesi](../../../../docs/chapter-06-pre-deployment)
-- [Ortam Doğrulaması](../../../../docs/chapter-06-pre-deployment)
-- [Kaynak Doğrulaması](../../../../docs/chapter-06-pre-deployment)
-- [Güvenlik ve Uyumluluk Kontrolleri](../../../../docs/chapter-06-pre-deployment)
-- [Performans ve Kapasite Planlama](../../../../docs/chapter-06-pre-deployment)
-- [Yaygın Sorunların Giderilmesi](../../../../docs/chapter-06-pre-deployment)
+- [Genel Bakış](#genel-bakış)
+- [Otomatik Ön Uçuş Betiği](#otomatik-ön-uçuş-betiği)
+- [Manuel Doğrulama Kontrol Listesi](#codeblock1)
+- [Ortam Doğrulaması](#✅-yedekleme-kurtarma)
+- [Kaynak Doğrulama](#üretim-ortamı-doğrulaması)
+- [Güvenlik ve Uyumluluk Kontrolleri](#security--compliance-checks)
+- [Performans ve Kapasite Planlama](#performance--capacity-planning)
+- [Yaygın Sorunların Giderilmesi](#troubleshooting-common-issues)
 
 ---
 
 ## Genel Bakış
 
-Ön-uc kontrolleri, dağıtımdan önce yapılan ve şunları sağlamaya yönelik önemli doğrulamadır:
+Ön uçuş kontrolleri, dağıtımdan önce gerçekleştirilen ve şunları sağlamak için yapılan temel doğrulamalardır:
 
 - **Kaynak kullanılabilirliği** ve hedef bölgelerdeki kotalar
 - **Kimlik doğrulama ve izinler**in doğru yapılandırılması
 - **Şablon geçerliliği** ve parametre doğruluğu
 - **Ağ bağlantısı** ve bağımlılıklar
-- **Güvenlik uyumluluğu** kurumsal politikalarla uyumlu olma
-- **Maliyet tahmini** bütçe kısıtları içinde olma
+- **Güvenlik uyumluluğu** ve kuruluş politikalarına uygunluk
+- **Maliyet tahmini** bütçe kısıtları içinde
 
-### Ön-Uç Kontroller Ne Zaman Çalıştırılmalı
+### Ön Uçuş Kontrolleri Ne Zaman Çalıştırılmalı
 
-- **Yeni bir ortama** ilk dağıtım yapmadan önce
+- **Yeni bir ortama ilk dağıtımdan önce**
 - **Önemli şablon değişikliklerinden sonra**
-- **Üretim dağıtımlarından önce**
+- **Prodüksiyon dağıtımlarından önce**
 - **Azure bölgelerini değiştirirken**
-- **CI/CD boru hatlarının parçası olarak**
+- **CI/CD boru hatlarının bir parçası olarak**
 
 ---
 
-## Otomatik Ön-Uç Betiği
+## Otomatik Ön Uçuş Betiği
 
-### PowerShell Ön-Uç Denetleyicisi
+### PowerShell Ön Uçuş Denetleyicisi
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -210,7 +210,7 @@ function Test-Permissions {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # Kaynak grubu oluşturmayı test et (belirtilmişse)
+        # Kaynak grubunun oluşturulmasını test et (belirtilmişse)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
@@ -271,7 +271,7 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # Depolama hesabı limitlerini kontrol et
+        # Depolama hesabı sınırlarını kontrol et
         $storageAccounts = az storage account list --output json | ConvertFrom-Json
         $accountCount = ($storageAccounts | Measure-Object).Count
         if ($accountCount -lt 200) {
@@ -360,7 +360,7 @@ function Test-TemplateValidation {
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # main.bicep dosyasını doğrula (varsa)
+            # main.bicep dosyası varsa doğrula
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -384,7 +384,7 @@ function Test-TemplateValidation {
     # 🧪 YENİ: Altyapı önizlemesini test et (güvenli kuru çalıştırma)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -415,7 +415,7 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # Bölgedeki hizmet kullanılabilirliğini kontrol et
+        # Hizmetin bölgede kullanılabilirliğini kontrol et
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
@@ -446,7 +446,7 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Temel maliyet tahmini (doğru tahminler için Azure Fiyatlandırma API'si gerektirir)
+    # Temel maliyet tahmini (doğru tahminler için Azure Fiyatlandırma API'si gerekir)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
@@ -472,7 +472,7 @@ function Test-SecurityCompliance {
     
     # Yaygın güvenlik uygulamalarını kontrol et
     try {
-        # Key Vault'un yapılandırılmış olup olmadığını kontrol et
+        # Key Vault'un yapılandırılıp yapılandırılmadığını kontrol et
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
             Write-Status "Key Vault usage" "Success" "Key Vault detected in templates"
         }
@@ -557,15 +557,15 @@ function Invoke-PreflightCheck {
     }
 }
 
-# Hazırlık kontrolünü çalıştır
+# Ön kontrolleri çalıştır
 Invoke-PreflightCheck
 ```
 
-### Bash Ön-Uç Denetleyicisi
+### Bash Ön Uçuş Denetleyicisi
 
 ```bash
 #!/bin/bash
-# Unix/Linux sistemleri için ön uçuş kontrollerinin Bash sürümü
+# Unix/Linux sistemleri için Bash ile yapılan ön kontroller
 
 set -euo pipefail
 
@@ -576,7 +576,7 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # Renk yok
 
-# Global değişkenler
+# Küresel değişkenler
 ENVIRONMENT_NAME=""
 LOCATION=""
 RESOURCE_GROUP=""
@@ -683,7 +683,7 @@ check_template_validation() {
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # main.bicep dosyası varsa doğrula
+            # main.bicep dosyası mevcutsa doğrula
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +706,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # Konumun geçerli olup olmadığını kontrol et
+    # Lokasyonun geçerli olup olmadığını kontrol et
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -714,7 +714,7 @@ check_regional_availability() {
         return 1
     fi
     
-    # Servis kullanılabilirliğini kontrol et
+    # Hizmet kullanılabilirliğini kontrol et
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
     for service in "${services[@]}"; do
@@ -798,63 +798,63 @@ main "$@"
 
 ## Manuel Doğrulama Kontrol Listesi
 
-### Dağıtımdan Önceki Kontrol Listesi
+### Dağıtımdan Önce Kontrol Listesi
 
-Bu kontrol listesini yazdırın ve dağıtımdan önce her öğeyi doğrulayın:
+Bu kontrol listesini yazdırın ve dağıtımdan önce her bir öğeyi doğrulayın:
 
 #### ✅ Ortam Kurulumu
 - [ ] AZD CLI yüklü ve en son sürüme güncellenmiş
 - [ ] Azure CLI yüklü ve kimlik doğrulaması yapılmış
-- [ ] Doğru Azure aboneliği seçili
+- [ ] Doğru Azure aboneliği seçilmiş
 - [ ] Ortam adı benzersiz ve adlandırma kurallarına uygun
-- [ ] Hedef kaynak grubu belirlenmiş ya da oluşturulabilir
+- [ ] Hedef kaynak grubu belirlenmiş veya oluşturulabilir
 
 #### ✅ Kimlik Doğrulama & İzinler
-- [ ] `azd auth login` ile başarıyla kimlik doğrulaması yapılmış
+- [ ] Başarıyla `azd auth login` ile kimlik doğrulandı
 - [ ] Kullanıcının hedef abonelik/kaynak grubunda Contributor rolü var
-- [ ] CI/CD için servis principal yapılandırılmış (uygunsa)
-- [ ] Süresi geçmiş sertifika veya kimlik bilgisi yok
+- [ ] CI/CD için service principal yapılandırılmış (varsa)
+- [ ] Süresi dolmuş sertifika veya kimlik bilgisi yok
 
 #### ✅ Şablon Doğrulama
-- [ ] azure.yaml mevcut ve geçerli YAML
-- [ ] azure.yaml içinde tanımlı tüm servislerin karşılık gelen kaynak kodu var
+- [ ] `azure.yaml` mevcut ve geçerli YAML
+- [ ] azure.yaml içinde tanımlı tüm hizmetlerin karşılık gelen kaynak kodu var
 - [ ] `infra/` dizininde Bicep şablonları mevcut
 - [ ] `main.bicep` hatasız derleniyor (`az bicep build --file infra/main.bicep`)
 - [ ] 🧪 Altyapı önizlemesi başarıyla çalışıyor (`azd provision --preview`)
-- [ ] Gerekli tüm parametrelerin varsayılan değerleri var veya sağlanacak
-- [ ] Şablonlarda sert sabitlenmiş gizli bilgiler yok
+- [ ] Gerekli tüm parametrelerin varsayılan değerleri var ya da sağlanacak
+- [ ] Şablonlarda hardcoded gizli bilgiler yok
 
 #### ✅ Kaynak Planlaması
 - [ ] Hedef Azure bölgesi seçilmiş ve doğrulanmış
-- [ ] Hedef bölgede gerekli Azure servisleri mevcut
-- [ ] Planlanan kaynaklar için yeterli kotalar var
+- [ ] Gerekli Azure hizmetleri hedef bölgede mevcut
+- [ ] Planlanan kaynaklar için yeterli kotalar mevcut
 - [ ] Kaynak adlandırma çakışmaları kontrol edildi
 - [ ] Kaynaklar arasındaki bağımlılıklar anlaşıldı
 
 #### ✅ Ağ & Güvenlik
 - [ ] Azure uç noktalarına ağ bağlantısı doğrulandı
-- [ ] Gerekliyse güvenlik duvarı/proxy ayarları yapılandırıldı
-- [ ] Gizli yönetimi için Key Vault yapılandırıldı
-- [ ] Mümkün olduğunda yönetilen kimlikler kullanıldı
-- [ ] Web uygulamaları için HTTPS zorunluluğu etkin
+- [ ] Gerekirse firewall/proxy ayarları yapılandırıldı
+- [ ] Gizli veriler için Key Vault yapılandırıldı
+- [ ] Mümkün olduğunda managed identities kullanıldı
+- [ ] Web uygulamaları için HTTPS zorlaması etkinleştirildi
 
 #### ✅ Maliyet Yönetimi
 - [ ] Maliyet tahminleri Azure Fiyatlandırma Hesaplayıcısı kullanılarak hesaplandı
-- [ ] Gerekliyse bütçe uyarıları yapılandırıldı
-- [ ] Ortam türü için uygun SKU'lar seçildi
+- [ ] Gerekirse bütçe uyarıları yapılandırıldı
+- [ ] Ortam türüne uygun SKU'lar seçildi
 - [ ] Üretim iş yükleri için rezerve kapasite düşünüldü
 
 #### ✅ İzleme & Gözlemlenebilirlik
-- [ ] Application Insights şablonlarda yapılandırıldı
+- [ ] Şablonlarda Application Insights yapılandırıldı
 - [ ] Log Analytics çalışma alanı planlandı
 - [ ] Kritik metrikler için uyarı kuralları tanımlandı
 - [ ] Uygulamalarda sağlık kontrolü uç noktaları uygulandı
 
 #### ✅ Yedekleme & Kurtarma
 - [ ] Veri kaynakları için yedekleme stratejisi tanımlandı
-- [ ] Kurtarma zamanı hedefleri (RTO) dokümante edildi
-- [ ] Kurtarma noktası hedefleri (RPO) dokümante edildi
-- [ ] Üretim için felaket kurtarma planı hazır
+- [ ] Kurtarma süresi hedefleri (RTO) belgelenmiş
+- [ ] Kurtarma nokta hedefleri (RPO) belgelenmiş
+- [ ] Üretim için felaket kurtarma planı mevcut
 
 ---
 
@@ -933,7 +933,7 @@ validate_prod_environment() {
 
 ---
 
-## Kaynak Doğrulaması
+## Kaynak Doğrulama
 
 ### Kota Doğrulama Betiği
 
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # HTTPS uygulanmasını kontrol et
+    # HTTPS zorlamasını kontrol et
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1131,7 +1131,7 @@ check_compliance_requirements() {
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # Denetim günlüklemesini kontrol et
+    # Denetim kayıtlarını kontrol et
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
@@ -1292,56 +1292,56 @@ steps:
 
 ## En İyi Uygulamalar Özeti
 
-### ✅ Ön Kontroller İçin En İyi Uygulamalar
+### ✅ Ön Uçuş Kontrolleri İçin En İyi Uygulamalar
 
-1. **Mümkün Olan Yerleri Otomatikleştirin**
+1. **Mümkün olduğunda Otomatikleştir**
    - Kontrolleri CI/CD boru hatlarına entegre edin
    - Tekrarlanabilir doğrulamalar için betikler kullanın
    - Denetim izleri için sonuçları saklayın
 
-2. **Orama Özgü Doğrulama**
-   - geliştir/dev/staging/ürün için farklı kontroller
-   - Ortama göre uygun güvenlik gereksinimleri
+2. **Ortam Özelinde Doğrulama**
+   - Dev/staging/prod için farklı kontroller
+   - Her ortam için uygun güvenlik gereksinimleri
    - Üretim dışı ortamlar için maliyet optimizasyonu
 
-3. **Kapsamlı Kapsama**
+3. **Kapsamlı Kontrol**
    - Kimlik doğrulama ve izinler
    - Kaynak kotaları ve kullanılabilirlik
    - Şablon doğrulama ve sözdizimi
    - Güvenlik ve uyumluluk gereksinimleri
 
-4. **Net Raporlama**
+4. **Açık Raporlama**
    - Renk kodlu durum göstergeleri
-   - Düzeltme adımlarıyla birlikte detaylı hata mesajları
+   - Düzeltme adımlarıyla birlikte ayrıntılı hata mesajları
    - Hızlı değerlendirme için özet raporlar
 
-5. **Hızla Hata Yakalama**
+5. **Hemen Durdurma**
    - Kritik kontroller başarısız olursa dağıtımı durdurun
    - Çözüm için net rehberlik sağlayın
-   - Kontrollerin kolayca yeniden çalıştırılmasını sağlayın
+   - Kontrollerin kolayca tekrar çalıştırılabilmesini sağlayın
 
-### Yaygın Ön-Uç Tuzakları
+### Yaygın Ön Uçuş Tuzakları
 
-1. "Hızlı" dağıtımlar için doğrulamayı atlama
-2. Dağıtım öncesi yetersiz izin kontrolü
-3. Dağıtım başarısız olana kadar kota sınırlarını görmezden gelme
-4. Şablonları CI/CD boru hatlarında doğrulamama
-5. Üretim ortamları için güvenlik doğrulamasının eksik olması
-6. Yetersiz maliyet tahmini nedeniyle bütçe sürprizleri
+1. **Doğrulamayı atlamak** için "hızlı" dağıtımlar
+2. **Yetersiz izinler**in dağıtım öncesi kontrol edilmemesi
+3. **Kota limitlerini görmezden gelmek** dağıtım başarısız olana kadar
+4. **CI/CD boru hatlarında şablonları doğrulamamak**
+5. **Üretim ortamları için güvenlik doğrulamasının eksik olması**
+6. **Yetersiz maliyet tahmini** nedeniyle bütçe sürprizleri
 
 ---
 
-**İpucu**: Gerçek dağıtım işinden önce CI/CD boru hattınızda ön-uc kontrollerini ayrı bir iş olarak çalıştırın. Bu, sorunları erken yakalamanızı sağlar ve geliştiricilere daha hızlı geri bildirim verir.
+İpucu: Gerçek dağıtım işinden önce CI/CD boru hattınızda ön uçuş kontrollerini ayrı bir iş olarak çalıştırın. Bu, sorunları erken tespit etmenizi sağlar ve geliştiricilere daha hızlı geri bildirim verir.
 
 ---
 
 **Gezinme**
-- **Önceki Ders**: [SKU Selection](sku-selection.md)
-- **Sonraki Ders**: [Cheat Sheet](../../resources/cheat-sheet.md)
+- **Önceki Ders**: [SKU Seçimi](sku-selection.md)
+- **Sonraki Ders**: [Hızlı Başvuru](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Sorumluluk Reddi**:
-Bu belge, Yapay Zeka çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayın. Orijinal belgenin kendi dilindeki versiyonu yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanılması sonucunda ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, özgün dilindeki sürümü yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucunda ortaya çıkan herhangi bir yanlış anlaşılma veya yanlış yorumlamadan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

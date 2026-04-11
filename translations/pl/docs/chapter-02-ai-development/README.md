@@ -1,19 +1,21 @@
-# Rozdział 2: Rozwój z priorytetem AI
+# Rozdział 2: Rozwój z Podejściem AI-First
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Czas trwania**: 1-2 godziny | **⭐ Złożoność**: Średniozaawansowany
+**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 1-2 godziny | **⭐ Poziom trudności**: Średniozaawansowany
 
 ---
 
 ## Przegląd
 
-Ten rozdział koncentruje się na wdrażaniu aplikacji zasilanych AI przy użyciu Azure Developer CLI i usług Microsoft Foundry. Od prostych aplikacji czatowych AI po inteligentne agenty z narzędziami.
+Ten rozdział skupia się na wdrażaniu aplikacji zasilanych AI za pomocą Azure Developer CLI i usług Microsoft Foundry. Od prostych aplikacji czatowych AI po inteligentnych agentów z narzędziami.
+
+> **Uwaga dotycząca weryfikacji (2026-03-25):** Przepływ poleceń i wskazówki dotyczące rozszerzeń w tym rozdziale zostały zweryfikowane z wersją `azd` `1.23.12` oraz bieżącą wersją podglądową rozszerzenia agenta AI `azure.ai.agents` `0.1.18-preview`. Jeśli korzystasz ze starszej wersji AZD, najpierw zaktualizuj, a następnie kontynuuj ćwiczenia.
 
 ## Cele nauki
 
-Po ukończeniu tego rozdziału, będziesz:
-- Wdrażać aplikacje AI korzystając z gotowych szablonów AZD
+Po ukończeniu tego rozdziału będziesz potrafił:
+- Wdrażać aplikacje AI używając gotowych szablonów AZD
 - Zrozumieć integrację Microsoft Foundry z AZD
-- Konfigurować i dostosowywać agentów AI wraz z narzędziami
+- Konfigurować i dostosowywać agentów AI z narzędziami
 - Wdrażać aplikacje RAG (Retrieval-Augmented Generation)
 
 ---
@@ -22,10 +24,10 @@ Po ukończeniu tego rozdziału, będziesz:
 
 | # | Lekcja | Opis | Czas |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Połącz AZD z usługami Foundry | 30 min |
-| 2 | [AI Agents Guide](agents.md) | Wdrażaj inteligentnych agentów z narzędziami | 45 min |
-| 3 | [AI Model Deployment](ai-model-deployment.md) | Wdrażaj i konfiguruj modele AI | 30 min |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Praktycznie: Przygotuj swoje rozwiązanie AI do AZD | 60 min |
+| 1 | [Integracja Microsoft Foundry](microsoft-foundry-integration.md) | Połączenie AZD z usługami Foundry | 30 min |
+| 2 | [Przewodnik po agentach AI](agents.md) | Wdrażanie inteligentnych agentów z narzędziami | 45 min |
+| 3 | [Wdrażanie modeli AI](ai-model-deployment.md) | Wdrażanie i konfiguracja modeli AI | 30 min |
+| 4 | [Laboratorium warsztatowe AI](ai-workshop-lab.md) | Praktycznie: Przygotuj swoje rozwiązanie AI do AZD | 60 min |
 
 ---
 
@@ -36,7 +38,7 @@ Po ukończeniu tego rozdziału, będziesz:
 azd init --template azure-search-openai-demo
 azd up
 
-# Opcja 2: Agenci SI
+# Opcja 2: Agenci AI
 azd init --template get-started-with-ai-agents
 azd up
 
@@ -51,7 +53,7 @@ azd up
 
 | Szablon | Opis | Usługi |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Czat RAG z cytatami | OpenAI + AI Search |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Czatuj RAG z cytowaniami | OpenAI + AI Search |
 | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agent AI z narzędziami | AI Agent Service |
 | [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Podstawowy czat AI | OpenAI + Container Apps |
 
@@ -59,35 +61,35 @@ azd up
 
 ## 💰 Świadomość kosztów
 
-| Środowisko | Szacunkowy miesięczny koszt |
+| Środowisko | Szacowany miesięczny koszt |
 |-------------|----------------------|
-| Środowisko deweloperskie | $80-150 |
-| Testowe | $150-300 |
-| Produkcja | $300-3,500+ |
+| Development | 80-150 USD |
+| Staging | 150-300 USD |
+| Produkcja | 300-3 500+ USD |
 
-**Wskazówka:** Uruchom `azd down` po testach, aby uniknąć opłat.
+**Wskazówka:** Po testach uruchom `azd down`, aby uniknąć opłat.
 
 ---
 
 ## 🔗 Nawigacja
 
-| Direction | Chapter |
+| Kierunek | Rozdział |
 |-----------|---------|
-| **Poprzedni** | [Rozdział 1: Podstawy](../chapter-01-foundation/README.md) |
+| **Poprzedni** | [Rozdział 1: Fundamenty](../chapter-01-foundation/README.md) |
 | **Następny** | [Rozdział 3: Konfiguracja](../chapter-03-configuration/README.md) |
-| **Przejdź do** | [Rozdział 8: Wzorce produkcyjne](../chapter-08-production/README.md) |
+| **Pomiń do** | [Rozdział 8: Wzorce produkcyjne](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Powiązane zasoby
 
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Rozwiązywanie problemów z AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 - [Praktyki AI w produkcji](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Zastrzeżenie:
-Ten dokument został przetłumaczony przy użyciu usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mimo że dążymy do jak największej dokładności, prosimy pamiętać, że tłumaczenia automatyczne mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku źródłowym należy uznać za wersję wiążącą. W przypadku informacji istotnych zalecamy skorzystanie z usług profesjonalnego tłumacza. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+**Zastrzeżenie**:  
+Ten dokument został przetłumaczony za pomocą automatycznej usługi tłumaczeniowej [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dążymy do dokładności, prosimy mieć na uwadze, że tłumaczenia automatyczne mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku źródłowym należy uznać za źródło nadrzędne. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

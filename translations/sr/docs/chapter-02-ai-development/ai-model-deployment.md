@@ -1,26 +1,28 @@
-# Размештање AI модела помоћу Azure Developer CLI
+# Распоређивање AI модела уз Azure Developer CLI
 
-**Навигација по поглављима:**
-- **📚 Почетна страница курса**: [AZD For Beginners](../../README.md)
-- **📖 Текуће поглавље**: Поглавље 2 - Развој вођен AI
-- **⬅️ Претходно**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Следеће**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Следеће поглавље**: [Поглавље 3: Конфигурација](../chapter-03-configuration/configuration.md)
+**Навигација поглављем:**
+- **📚 Course Home**: [AZD за почетнике](../../README.md)
+- **📖 Current Chapter**: Поглавље 2 - AI-први развој
+- **⬅️ Previous**: [Интеграција Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Next**: [AI лабораторија](ai-workshop-lab.md)
+- **🚀 Next Chapter**: [Поглавље 3: Конфигурација](../chapter-03-configuration/configuration.md)
 
-Овај водич пружа свеобухватна упутства за размештање AI модела уз коришћење AZD шаблона, обухватајући све од избора модела до образаца за продукционо размењтање.
+Ово упутство пружа комплетне инструкције за распоређивање AI модела користећи AZD шаблоне, обухватајући све од избора модела до образаца распоређивања у продукцији.
+
+> **Напомена о валидацији (2026-03-25):** Радни ток AZD у овом водичу је проверен са `azd` `1.23.12`. За AI распореде који трају дуже од подразумеваног прозора за распоређивање сервиса, актуелна издања AZD-а подржавају `azd deploy --timeout <seconds>`.
 
 ## Садржај
 
 - [Стратегија избора модела](#стратегија-избора-модела)
 - [AZD конфигурација за AI моделе](#azd-конфигурација-за-ai-моделе)
-- [Обрасци за размењтање](#обрасци-за-размењтање)
-- [Управљање моделом](#управљање-моделом)
-- [Разматрања за производњу](#разматрања-за-производњу)
+- [Образци распоређивања](#образци-распоређивања)
+- [Управљање моделима](#управљање-моделима)
+- [Разматрања за продукцију](#разматрања-за-продукцију)
 - [Надгледање и опсервабилност](#надгледање-и-опсервабилност)
 
 ## Стратегија избора модела
 
-### Microsoft Foundry Модели Модели
+### Microsoft Foundry Models модели
 
 Изаберите прави модел за ваш случај употребе:
 
@@ -41,9 +43,9 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
@@ -52,18 +54,18 @@ services:
 
 ### Планирање капацитета модела
 
-| Model Type | Use Case | Recommended Capacity | Cost Considerations |
-|------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Ћаскање, Питања и одговори | 10-50 TPM | Ефективно по трошку за већину оптерећења |
-| gpt-4.1 | Комплексно расуђивање | 20-100 TPM | Виши трошкови, користити за премиум карактеристике |
-| Text-embedding-ada-002 | Претрага, RAG | 30-120 TPM | Кључно за семантичку претрагу |
-| Whisper | Претварање говора у текст | 10-50 TPM | Оптерећења за обраду аудио записа |
+| Тип модела | Случај употребе | Препоручени капацитет | Разматрања трошкова |
+|------------|-----------------|----------------------|---------------------|
+| gpt-4.1-mini | Разговор, питања и одговори | 10-50 TPM | Економично за већину оптерећења |
+| gpt-4.1 | Сложено резоновање | 20-100 TPM | Виши трошкови, користити за премиум функције |
+| text-embedding-3-large | Претрага, RAG | 30-120 TPM | Снажан подразумевани избор за семантичку претрагу и преузимање |
+| Whisper | Претварање говора у текст | 10-50 TPM | За аудио обраду |
 
 ## AZD конфигурација за AI моделе
 
 ### Конфигурација Bicep шаблона
 
-Креирајте размештања модела кроз Bicep шаблоне:
+Креирајте распореде модела преко Bicep шаблона:
 
 ```bicep
 // infra/main.bicep
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -127,16 +129,16 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Конфигуришите окружење ваше апликације:
 
 ```bash
-# Конфигурација .env
+# .env конфигурација
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Обрасци за размењтање
+## Образци распоређивања
 
-### Шаблон 1: Размештање у једној регији
+### Образац 1: Распоређивање у једној регији
 
 ```yaml
 # azure.yaml - Single region
@@ -149,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Најбоље за:
+Најпогодније за:
 - Развој и тестирање
 - Апликације за једно тржиште
 - Оптимизацију трошкова
 
-### Шаблон 2: Размештање у више регија
+### Образац 2: Распоређивање у више регија
 
 ```bicep
 // Multi-region deployment
@@ -167,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Најбоље за:
+Најпогодније за:
 - Глобалне апликације
 - Захтеве за високу доступност
 - Расподелу оптерећења
 
-### Шаблон 3: Хибридно размештање
+### Образац 3: Хибридно распоређивање
 
-Комбинујте Microsoft Foundry моделе са другим AI услугама:
+Комбинујте Microsoft Foundry Models са другим AI сервисима:
 
 ```bicep
 // Hybrid AI services
@@ -203,7 +205,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-## Управљање моделом
+## Управљање моделима
 
 ### Контрола верзија
 
@@ -215,11 +217,11 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
@@ -238,11 +240,14 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# Ако распоређивање траје дуже од подразумеваног временског ограничења
+azd deploy --timeout 1800
 ```
 
 ### A/B тестирање
 
-Разместите више верзија модела:
+Распоредите више верзија модела:
 
 ```bicep
 param enableABTesting bool = false
@@ -264,11 +269,11 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Разматрања за производњу
+## Разматрања за продукцију
 
 ### Планирање капацитета
 
-Израчунате потребни капацитет на основу образаца употребе:
+Израчунате потребни капацитет на основу образаца коришћења:
 
 ```python
 # Пример израчунавања капацитета
@@ -365,9 +370,9 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ## Надгледање и опсервабилност
 
-### Интеграција са Application Insights
+### Интеграција Application Insights
 
-Конфигуришите надгледање за AI оптерећења:
+Конфигуришите мониторинг за AI оптерећења:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -405,7 +410,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### Прилагођене метрике
 
-Пратите AI-специфичне метрике:
+Пратите метрике специфичне за AI:
 
 ```python
 # Прилагођена телеметрија за моделе вештачке интелигенције
@@ -442,10 +447,10 @@ class AITelemetry:
 
 ### Провере здравља
 
-Имплементирајте надгледање здравља AI услуга:
+Имплементирајте надгледање статуса здравља AI сервиса:
 
 ```python
-# Ендпоинти за проверу статуса
+# Крајње тачке за проверу статуса
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -455,7 +460,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Тест везе са OpenAI
+        # Тестирање везе са OpenAI
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -475,28 +480,28 @@ async def check_ai_models():
 
 1. **Прегледајте [Водич за интеграцију Microsoft Foundry](microsoft-foundry-integration.md)** за шаблоне интеграције сервиса
 2. **Завршите [AI лабораторију](ai-workshop-lab.md)** за практично искуство
-3. **Имплементирајте [Практике за продукцију AI](production-ai-practices.md)** за корпоративна размештања
+3. **Имплементирајте [Практике за продукцију AI](production-ai-practices.md)** за распоређивања у предузећима
 4. **Истражите [Водич за решавање проблема са AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** за уобичајене проблеме
 
 ## Ресурси
 
-- [Доступност Microsoft Foundry модела](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Доступност Microsoft Foundry Models модела](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Документација за Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Скалирање Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Оптимизација трошкова AI модела](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Навигација по поглављима:**
-- **📚 Почетна страница курса**: [AZD For Beginners](../../README.md)
-- **📖 Текуће поглавље**: Поглавље 2 - Развој вођен AI
-- **⬅️ Претходно**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Следеће**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Следеће поглавље**: [Поглавље 3: Конфигурација](../chapter-03-configuration/configuration.md)
+**Навигација поглављем:**
+- **📚 Course Home**: [AZD за почетнике](../../README.md)
+- **📖 Current Chapter**: Поглавље 2 - AI-први развој
+- **⬅️ Previous**: [Интеграција Microsoft Foundry](microsoft-foundry-integration.md)
+- **➡️ Next**: [AI лабораторија](ai-workshop-lab.md)
+- **🚀 Next Chapter**: [Поглавље 3: Конфигурација](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Одрицање одговорности**:
-Овај документ је преведен помоћу AI сервиса за превођење [Co-op Translator](https://github.com/Azure/co-op-translator). Иако настојимо да будемо прецизни, имајте на уму да аутоматизовани преводи могу садржати грешке или нетачности. Оригинални документ на свом изворном језику треба сматрати меродавним извором. За критичне информације препоручује се професионални људски превод. Не сносимо одговорност за било какве неспоразуме или погрешне тумачења која проистичу из коришћења овог превода.
+Овај документ је преведен помоћу сервиса за превођење вештачком интелигенцијом [Co-op Translator](https://github.com/Azure/co-op-translator). Иако тежимо тачности, имајте у виду да аутоматски преводи могу садржати грешке или нетачности. Изворни документ на његовом оригиналном језику треба сматрати ауторитетним извором. За критичне информације препоручује се професионални људски превод. Не сносимо одговорност за било какве неспоразуме или погрешне тумачења која произилазе из коришћења овог превода.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

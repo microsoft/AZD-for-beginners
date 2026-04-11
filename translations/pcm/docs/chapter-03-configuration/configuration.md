@@ -1,111 +1,111 @@
-# Configuration Guide
+# Konfigureshon Gaid
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
+**Chapta Navigation:**
+- **📚 Kọs Hom**: [AZD For Beginners](../../README.md)
+- **📖 Chapta wey dey now**: Chapter 3 - Configuration & Authentication
 - **⬅️ Previous**: [Your First Project](first-project.md)
 - **➡️ Next**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 Next Chapta**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
 
-## Introduction
+## Introdakshon
 
-Dis complete guide dey cover everything wey concern how to configure Azure Developer CLI make development and deployment workflow beta. You go learn about configuration hierarchy, how to manage environments, different authentication methods, and advanced configuration patterns wey go help make your Azure deployments secure and efficient.
+Dis full guide dey cover everytin wey concern konfigureshon for Azure Developer CLI make development and deployment waka well. You go learn about konfigureshon hierarchy, how to manage environments, authentication methods, and advanced konfigureshon patterns wey go help make Azure deployments secure and sharp.
 
-## Learning Goals
+## Wetin You Go Learn
 
-By the end of this lesson, you go:
-- Understand how azd configuration hierarchy dey work and how settings dey get priority
-- Configure global and project-specific settings well
-- Manage plenty environments wey get different configurations
+By di end of dis lesson, you go:
+- Sabi di azd konfigureshon hierarchy and how settings dey priority
+- Konfigura global and project-specific settings well
+- Manage many environments wey get different konfigureshons
 - Implement secure authentication and authorization patterns
-- Understand advanced configuration patterns for complex cases
+- Understand advanced konfigureshon patterns for complex mata
 
-## Learning Outcomes
+## Wetin You Go Fit Do (Learning Outcomes)
 
-After you finish this lesson, you go fit:
-- Configure azd for better development workflows
-- Set up and manage many deployment environments
-- Implement secure configuration management practices
-- Troubleshoot configuration-related wahala
-- Customize azd behavior for specific organization requirements
+After you finish dis lesson, you go fit:
+- Konfigura azd for beta development workflows
+- Setup and manage many deployment environments
+- Implement secure konfigureshon management practices
+- Troubleshoot konfigureshon-related wahala
+- Customize azd behavior for specific organizational requirements
 
-Dis complete guide dey cover everything wey concern how to configure Azure Developer CLI make development and deployment workflow beta.
+Dis full guide dey cover everytin wey concern konfigureshon for Azure Developer CLI make development and deployment waka well.
 
 ## Understanding AI Agents in an azd Project
 
-If you never sabi AI agents, na simple way be this to think about dem inside azd world.
+If you new to AI agents, dis na simple way to reason about dem for azd world.
 
-### What Is an Agent?
+### Wetin Agent Mean?
 
-Agent na software wey fit receive request, reason about am, and take actions—most times by calling AI model, dey check data, or dey invoke other services. For azd project, agent na just another **service** beside your web frontend or API backend.
+Agent na software wey fit receive request, reason about am, and take action—often by calling AI model, look up data, or call other services. For azd project, agent na just another **service** side-by-side with your web frontend or API backend.
 
-### How Agents Fit Into the azd Project Structure
+### How Agents Dey Fit Inside azd Project Structure
 
-An azd project get three layers: **infrastructure**, **code**, and **configuration**. Agents dey plug into these layers the same way any other service dey:
+An azd project get three layers: **infrastructure**, **code**, and **configuration**. Agents dey plug into these layers same way any other service dey:
 
-| Layer | What It Does for a Traditional App | What It Does for an Agent |
-|-------|-------------------------------------|---------------------------|
-| **Infrastructure** (`infra/`) | Provisions a web app and database | Provisions an AI model endpoint, search index, or agent host |
-| **Code** (`src/`) | Contains your frontend and API source code | Contains your agent logic and prompt definitions |
-| **Configuration** (`azure.yaml`) | Lists your services and their hosting targets | Lists your agent as a service, pointing to its code and host |
+| Layer | Wetin E Dey Do for Normal App | Wetin E Dey Do for Agent |
+|-------|--------------------------------|---------------------------|
+| **Infrastructure** (`infra/`) | E go provision web app and database | E go provision AI model endpoint, search index, or agent host |
+| **Code** (`src/`) | E get your frontend and API source code | E get your agent logic and prompt definitions |
+| **Configuration** (`azure.yaml`) | E list your services and where dem go host | E list your agent as service, point to im code and host |
 
-### The Role of `azure.yaml`
+### Di Role of `azure.yaml`
 
-You no need to memorize the syntax now. Conceptually, `azure.yaml` na the file wey you dey tell azd: *"Here are the services that make up my application, and here's where to find their code."*
+You no need to memorize di syntax now. Concept na say `azure.yaml` na di file wey you dey tell azd: *"Na these services dey my application, and na here you go find their code."*
 
-When your project get AI agent, `azure.yaml` go just list that agent as one of the services. azd go then sabi to provision the correct infrastructure (like Microsoft Foundry Models endpoint or a Container App wey go host the agent) and deploy your agent code—same way e go take do for web app or API.
+When your project get AI agent, `azure.yaml` go simply list that agent as one service. azd go then sabi to provision di correct infrastructure (like Microsoft Foundry Models endpoint or a Container App to host di agent) and deploy your agent code—same way e go do for web app or API.
 
-This one mean say nothing serious new dey to learn. If you sabi how azd dey manage web service, you don sabi how e go manage agent.
+This one mean say no new kain tins to learn. If you sabi how azd dey manage web service, you don sabi how e go manage agent.
 
-## Configuration Hierarchy
+## Konfigureshon Hierarchy
 
-azd dey use hierarchical configuration system:
+azd dey use hierarchical konfigureshon system:
 1. **Command-line flags** (highest priority)
 2. **Environment variables**
 3. **Local project configuration** (`.azd/config.json`)
 4. **Global user configuration** (`~/.azd/config.json`)
 5. **Default values** (lowest priority)
 
-## Global Configuration
+## Global Konfigureshon
 
 ### Setting Global Defaults
 ```bash
-# Make di subscription default
+# Set di default subscription
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# Make di location default
+# Set di default location
 azd config set defaults.location "eastus2"
 
-# Set di default way wey we go dey name resource groups
+# Set di default way we dey name resource groups
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# See all global configuration
-azd config list
+# See all di global configuration
+azd config show
 
-# Comot one configuration
+# Comot wan configuration
 azd config unset defaults.location
 ```
 
 ### Common Global Settings
 ```bash
-# Wetin we prefer for development
+# Wetin you prefer for development
 azd config set alpha.enable true                    # Make alpha features dey on
-azd config set telemetry.enabled false             # Make telemetry off
-azd config set output.format json                  # Set how output go be
+azd config set telemetry.enabled false             # Make telemetry no dey
+azd config set output.format json                  # Choose how output go be
 
 # Settings wey concern security
 azd config set auth.useAzureCliCredential true     # Use Azure CLI do auth
-azd config set tls.insecure false                  # Make TLS verification na must
+azd config set tls.insecure false                  # Make TLS verification compulsory
 
-# Tweak performance make e beta
+# Tweaks to make performance better
 azd config set provision.parallelism 5             # Create resources at the same time
-azd config set deploy.timeout 30m                  # How long deployment go wait before e timeout
+azd config set deploy.timeout 30m                  # How long deployment go wait
 ```
 
-## 🏗️ Project Configuration
+## 🏗️ Project Konfigureshon
 
 ### azure.yaml Structure
-The `azure.yaml` file na the heart of your azd project:
+Di `azure.yaml` file na heart of your azd project:
 
 ```yaml
 # Minimum configuration
@@ -181,7 +181,7 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Service Configuration Options
+### Service Konfigureshon Options
 
 #### Host Types
 ```yaml
@@ -230,18 +230,18 @@ services:
 
 ### Creating Environments
 ```bash
-# Make new environment
+# Make one new environment
 azd env new development
 
-# Make for specific location
+# Make am for one particular place
 azd env new staging --location "westus2"
 
-# Make from template
+# Make am from template
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Environment Configuration
-Each environment get im own configuration for `.azure/<env-name>/config.json`:
+### Environment Konfigureshon
+Each environment get im own konfigureshon for `.azure/<env-name>/config.json`:
 
 ```json
 {
@@ -265,12 +265,12 @@ Each environment get im own configuration for `.azure/<env-name>/config.json`:
 
 ### Environment Variables
 ```bash
-# Set variables wey dey for each environment
+# Set environment-specific variable dem
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# See di environment variables
+# See environment variable dem
 azd env get-values
 
 # Wetin suppose show:
@@ -278,39 +278,39 @@ azd env get-values
 # API_KEY=secret-api-key
 # DEBUG=true
 
-# Comot di environment variable
+# Comot environment variable
 azd env unset DEBUG
 
-# Check say e don comot
+# Make sure say e don comot
 azd env get-values | grep DEBUG
 # (e no suppose return anything)
 ```
 
 ### Environment Templates
-Create `.azure/env.template` make environment setup dey consistent:
+Create `.azure/env.template` make environment setup consistent:
 ```bash
-# Variables wey dem need
+# Variables wey must dey
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Settings wey dey for app
+# Settings for di app
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Settings wey you fit use for development
+# Development settings wey optional
 DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 Authentication Configuration
+## 🔐 Authentication Konfigureshon
 
 ### Azure CLI Integration
 ```bash
-# Use Azure CLI credentials (na di default)
+# Use Azure CLI login details (na default)
 azd config set auth.useAzureCliCredential true
 
-# Login wit di specific tenant
+# Login with di specific tenant
 az login --tenant <tenant-id>
 
 # Set di default subscription
@@ -320,7 +320,7 @@ az account set --subscription <subscription-id>
 ### Service Principal Authentication
 For CI/CD pipelines:
 ```bash
-# Set di environment variables
+# Set environment variable dem
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
@@ -338,10 +338,10 @@ azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ Infrastructure Configuration
+## 🏗️ Infrastructure Konfigureshon
 
 ### Bicep Parameters
-Configure infrastructure parameters for `infra/main.parameters.json`:
+Konfigura infrastructure parameters for `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -363,8 +363,8 @@ Configure infrastructure parameters for `infra/main.parameters.json`:
 }
 ```
 
-### Terraform Configuration
-For Terraform projects, configure for `infra/terraform.tfvars`:
+### Terraform Konfigureshon
+For Terraform projects, konfigura for `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -372,9 +372,9 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Deployment Configuration
+## 🚀 Deployment Konfigureshon
 
-### Build Configuration
+### Build Konfigureshon
 ```yaml
 # In azure.yaml
 services:
@@ -397,7 +397,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Docker Configuration
+### Docker Konfigureshon
 ```yaml
 services:
   api:
@@ -413,17 +413,17 @@ services:
 ```
 Example `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 Advanced Configuration
+## 🔧 Advanced Konfigureshon
 
 ### Custom Resource Naming
 ```bash
-# Make rules for how we go dey name tins
+# Decide how we go dey name tins
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### Network Configuration
+### Network Konfigureshon
 ```yaml
 # In azure.yaml
 infra:
@@ -434,7 +434,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Monitoring Configuration
+### Monitoring Konfigureshon
 ```yaml
 # In azure.yaml
 monitoring:
@@ -446,7 +446,7 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Environment-Specific Configurations
+## 🎯 Environment-Specific Konfigureshons
 
 ### Development Environment
 ```bash
@@ -475,21 +475,21 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Configuration Validation
+## 🔍 Konfigureshon Validation
 
-### Validate Configuration
+### Validate Konfigureshon
 ```bash
-# Make sure di configuration syntax correct
+# Make sure say configuration syntax dey correct
 azd config validate
 
-# Test di environment variables
+# Test if environment variables dey correct
 azd env get-values
 
-# Make sure di infrastructure correct
+# Confirm say infrastructure dey correct
 azd provision --dry-run
 ```
 
-### Configuration Scripts
+### Konfigureshon Scripts
 Create validation scripts for `scripts/`:
 
 ```bash
@@ -498,7 +498,7 @@ Create validation scripts for `scripts/`:
 
 echo "Validating configuration..."
 
-# Make sure say di required environment variables dey
+# Make sure say di required environment variables dey set
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
@@ -526,7 +526,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organize Configuration Files
+### 2. Organize Konfigureshon Files
 ```
 .azure/
 ├── config.json              # Global project config
@@ -542,7 +542,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Version Control Considerations
+### 3. Version Control Tin Dem
 ```bash
 # .gitignore
 .azure/*/config.json         # Environment configs (dem get resource IDs)
@@ -550,8 +550,8 @@ database:
 .env                        # Local environment file
 ```
 
-### 4. Configuration Documentation
-Document your configuration for `CONFIG.md`:
+### 4. Konfigureshon Documentation
+Document your konfigureshon for `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -566,73 +566,73 @@ Document your configuration for `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
-## 🎯 Hands-On Practice Exercises
+## 🎯 Practical Exercises
 
-### Exercise 1: Multi-Environment Configuration (15 minutes)
+### Exercise 1: Multi-Environment Konfigureshon (15 minutes)
 
-**Goal**: Create and configure three environments with different settings
+**Goal**: Create and konfigura three environments wey get different settings
 
 ```bash
-# Make di development environment
+# Mek di development environment
 azd env new dev
 azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# Make di staging environment
+# Mek di staging environment
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 50
 
-# Make di production environment
+# Mek di production environment
 azd env new production
 azd env set LOG_LEVEL error
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 10
 
-# Make sure sey every environment dey okay
+# Mek sure say each environment dey okay
 azd env select dev && azd env get-values
 azd env select staging && azd env get-values
 azd env select production && azd env get-values
 ```
 
-**Success Criteria:**
-- [ ] Three environments created successfully
-- [ ] Each environment get im own unique configuration
+**How to sabi say you don succeed:**
+- [ ] Three environments create finish
+- [ ] Each environment get im own konfigureshon
 - [ ] Fit switch between environments without error
-- [ ] `azd env list` go show all three environments
+- [ ] `azd env list` dey show all three environments
 
 ### Exercise 2: Secret Management (10 minutes)
 
-**Goal**: Practice secure configuration with sensitive data
+**Goal**: Practice secure konfigureshon for sensitive data
 
 ```bash
-# Set secrets (no go show for output)
+# Put secret dem (no go show for output)
 azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 
-# Set config wey no be secret
+# Put config wey no be secret
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# See environment (secrets suppose dey hidden)
+# See environment (secret dem suppose dey hide)
 azd env get-values
 
-# Confirm say secrets don store
+# Make sure say secret dem don store
 azd env get DB_PASSWORD  # E suppose show the real value
 ```
 
-**Success Criteria:**
+**How to sabi say you don succeed:**
 - [ ] Secrets store without showing for terminal
-- [ ] `azd env get-values` go show redacted secrets
-- [ ] Individual `azd env get <SECRET_NAME>` go return actual value
+- [ ] `azd env get-values` dey show redacted secrets
+- [ ] Individual `azd env get <SECRET_NAME>` go bring actual value
 
 ## Next Steps
 
-- [Your First Project](first-project.md) - Apply configuration for practice
-- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Use configuration for deployment
-- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Production-ready configurations
+- [Your First Project](first-project.md) - Apply konfigureshon for practice
+- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Use konfigureshon for deployment
+- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Production-ready konfigureshons
 
 ## References
 
@@ -642,16 +642,16 @@ azd env get DB_PASSWORD  # E suppose show the real value
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
+**Chapta Navigation:**
+- **📚 Kọs Hom**: [AZD For Beginners](../../README.md)
+- **📖 Chapta wey dey now**: Chapter 3 - Configuration & Authentication
 - **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
+- **➡️ Next Chapta**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
 - **Next Lesson**: [Your First Project](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dis document don translate wit AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg note say automatic translations fit get mistakes or inaccuracies. Di original document for im own language suppose dey considered as di authoritative source. If na important information, better make person wey sabi do professional human translation handle am. We no go responsible for any misunderstanding or misinterpretation wey fit come from using dis translation.
+**Disclaimer**:
+Dis document don translate using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am accurate, abeg note say automatic translations fit get errors or inaccuracies. Di original document for im native language suppose be di authoritative source. For critical information, make una use professional human translation. We no dey liable for any misunderstandings or misinterpretations wey fit come from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -766,16 +766,13 @@ The `azd provision --preview` feature lets you **simulate infrastructure provisi
 - **Shows a preview of resource changes**: additions, deletions, updates
 - **Does not apply changes** — it's read-only and safe to run
 
-#### � Use Cases
+#### Use Cases
 ```bash
 # Preview infrastructure changes before deployment
 azd provision --preview
 
-# Preview with detailed output
-azd provision --preview --output json
-
 # Preview for specific environment
-azd provision --preview --environment production
+azd provision --preview -e production
 ```
 
 This command helps you:
@@ -791,6 +788,8 @@ It's especially useful when:
 - Training new team members on infrastructure patterns
 
 ### Example Preview Output
+Exact preview output varies by provider and project structure, but the result should clearly identify proposed changes before anything is applied.
+
 ```bash
 $ azd provision --preview
 
@@ -809,7 +808,6 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
@@ -939,6 +937,6 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-This document has been translated using the AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+**Disclaimer**:
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

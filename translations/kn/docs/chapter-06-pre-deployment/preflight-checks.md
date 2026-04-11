@@ -1,73 +1,73 @@
-# AZD ನಿಯೋಜನೆಗಳ ಪೂರ್ವ ತಪಾಸಣೆಗಳು
+# AZD ನಿಯೋಜನೆಗಳಿಗೆ ಪೂರ್ವ-ಯಾತ್ರೆ ಪರಿಶೀಲನೆಗಳು
 
 **ಅಧ್ಯಾಯ ನ್ಯಾವಿಗೇಶನ್:**
-- **📚 ಕೋರ್ಸ್ ಹೋಮ್**: [AZD ಪ್ರಾರಂಭಿಕರಿಗೆ](../../README.md)
-- **📖 ಹಾಲಿನ ಅಧ್ಯಾಯ**: ಅಧ್ಯಾಯ 6 - ಪೂರ್ವ-ನಿಯೋಜನೆ ಪರಿಶೀಲನೆ ಮತ್ತು ಯೋಜನೆ
+- **📚 ಕೋರ್ಸ್ ಮನೆ**: [ಆಜಡ್ ಫಾರ್ ಬಿಗಿನರ್ಸ್](../../README.md)
+- **📖 ಪ್ರಸ್ತುತ ಅಧ್ಯಾಯ**: ಅಧ್ಯಾಯ 6 - ಪೂರ್ವ ನಿಯೋಜನೆ ಪರಿಶೀಲನೆ ಮತ್ತು ಯೋಜನೆ
 - **⬅️ ಹಿಂದಿನ**: [SKU ಆಯ್ಕೆ](sku-selection.md)
 - **➡️ ಮುಂದಿನ ಅಧ್ಯಾಯ**: [ಅಧ್ಯಾಯ 7: ಸಮಸ್ಯೆ ಪರಿಹಾರ](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 ಸಂಬಂಧಿಸಿದದ್ದು**: [ಅಧ್ಯಾಯ 4: ನಿಯೋಜನೆ ಮಾರ್ಗದರ್ಶಿ](../chapter-04-infrastructure/deployment-guide.md)
+- **🔧 ಸಂಬಂಧಿಸಿದ**: [ಅಧ್ಯಾಯ 4: ನಿಯೋಜನೆ ಮಾರ್ಗದರ್ಶಿ](../chapter-04-infrastructure/deployment-guide.md)
 
 ## ಪರಿಚಯ
 
-ಈ ವ್ಯಾಪಕ ಮಾರ್ಗದರ್ಶಿಕೆ ಪೂರ್ವ-ನಿಯೋಜನೆ ಪರಿಶೀಲನೆ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳನ್ನೂ ಮತ್ತು ಪ್ರಕ್ರಿಯೆಗಳನ್ನು ಒದಗಿಸುತ್ತದೆ, ಇದು Azure Developer CLI ನಿಯೋಜನೆಗಳು ಆರಂಭವಾಗುವ ಮೊದಲು ಯಶಸ್ವಿಯಾಗುವಂತೆ ಖಚಿತಪಡಿಸುತ್ತದೆ. ಪ್ರಮಾಣೀಕರಣ, ಸಂಪನ್ಮೂಲ ಲಭ್ಯತೆ, ಕೋಟಾಗಳು, ಭದ್ರತಾ ಅನುಪಾಲನೆ ಮತ್ತು ಕಾರ್ಯಕ್ಷಮತಾ ಅವಶ್ಯಕತೆಗಳಿಗೆ ಸ್ವಯಂಚಾಲಿತ ತಪಾಸಣೆಗಳನ್ನು ಜಾರಿಗೆ ತರಲು ಕಲಿಯಿರಿ, ಇದರಿಂದ ನಿಯೋಜನೆ ವೈಫಲ್ಯಗಳನ್ನು ತಡೆಯಬಹುದು ಮತ್ತು ನಿಯೋಜನೆ ಯಶಸ್ಸಿನ ದರಗಳನ್ನು ಒತ್ತಾಯಿಸಬಹುದು.
+ಈ ಸಂಪೂರ್ಣ ಮಾರ್ಗದರ್ಶಿ ಆಜರ್ ಡೆವಲಪರ್ CLI ನಿಯೋಜನೆ ಆರಂಭವಾಗುವ ಮುನ್ನ ಯಶಸ್ವಿಯಾಗಿ ನಡೆಯುವುದಕ್ಕಾಗಿ ಪೂರ್ವ-ನಿಯೋಜನೆ ಪರಿಶೀಲನೆ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳು ಮತ್ತು ಕ್ರಮಗಳನ್ನು ಒದಗಿಸುತ್ತದೆ. ಪ್ರಾಮಾಣೀಕರಣ, ಸಂಪನ್ಮೂಲ ಲಭ್ಯತೆ, ಕೋಟ್, ಭದ್ರತೆ ಅನುಕೂಲತೆ ಮತ್ತು ಕಾರ್ಯಕ್ಷಮತೆ ಅಗತ್ಯಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಪರಿಶೀಲಿಸುವುದನ್ನು ಕಲಿಯಿರಿ, ನಿಯೋಜನೆ ವೈಫಲ್ಯಗಳನ್ನು ತಡೆಹಿಡಿಯಲು ಮತ್ತು ಯಶಸ್ಸಿನ ಪ್ರಮಾಣಗಳನ್ನು ಗಟ್ಟಿಗೊಳಿಸಲು.
 
 ## ಕಲಿಕೆಯ ಗುರಿಗಳು
 
-By completing this guide, you will:
-- ಸ್ವಯಂಚಾಲಿತ ಪೂರ್ವ-ನಿಯೋಜನೆ ಪರಿಶೀಲನೆ ತಂತ್ರಗಳು ಮತ್ತು ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳಲ್ಲಿ ನಿಪುಣರಾಗುವುದು
-- ಪ್ರಮಾಣೀಕರಣ, ಅನುಮತಿಗಳು ಮತ್ತು ಕೋಟಾಗಳಿಗಾಗಿ ಸಮಗ್ರ ತಪಾಸಣಾ ತಂತ್ರಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದು
-- ಸಂಪನ್ಮೂಲ ಲಭ್ಯತೆ ಮತ್ತು ಸಾಮರ್ಥ್ಯ ಪರಿಶೀಲನೆ ಪ್ರಕ್ರಿಯೆಗಳನ್ನು ಜಾರಿಗೆ ತರುವುದು
-- ಸಂಸ್ಥೆಯ ನೀತಿಗಳಿಗೆ ಸುರಕ್ಷತೆ ಮತ್ತು ಅನುಪಾಲನೆ ಪರಿಶೀಲನೆಗಳನ್ನು ಕಾನ್ಫಿಗರ್ ಮಾಡುವುದು
-- ಖರ್ಚು ಅಂದಾಜು ಮತ್ತು ಬಜೆಟ್ ಪರಿಶೀಲನೆ ಕಾರ್ಯಪ್ರವಾಹಗಳನ್ನು ವಿನ್ಯಾಸಗೊಳಿಸುವುದು
-- CI/CD ಪೈಪ್‌ಲೈನ್ಗಳಿಗಾಗಿ ಕಸ್ಟಮ್ ಪೂರ್ವ-ಪರೀಕ್ಷೆ ಸ್ವಯಂಕರಣ ರಚಿಸುವುದು
+ಈ ಮಾರ್ಗದರ್ಶಿಯನ್ನು ಪೂರ್ಣಗೊಳಿಸುವ ಮೂಲಕ ನೀವು:
+- ಸ್ವಯಂಚಾಲಿತ ಪೂರ್ವ-ನಿಯೋಜನೆ ಪರಿಶೀಲನೆ ತಂತ್ರಗಳು ಮತ್ತು ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳಲ್ಲಿ ಪರಿಣತಿ ಪಡೆಯುವಿರಿ
+- ಪ್ರಾಮಾಣೀಕರಣ, ಅನುಮತಿಗಳು ಮತ್ತು ಕೋಟ್‌ಗಳ ಸಮಗ್ರ ಪರಿಶೀಲನಾ ತಂತ್ರಗಳು ಅರಿತುಕೊಳ್ಳುವಿರಿ
+- ಸಂಪನ್ಮೂಲ ಲಭ್ಯತೆ ಮತ್ತು ಸಾಮರ್ಥ್ಯ ಪರಿಶೀಲನೆ ಕ್ರಮಗಳನ್ನು ಜರುಗಿಸುವಿರಿ
+- ಸಂಸ್ಥೆಯ ನೀತಿಗಳಿಗಾಗಿ ಭದ್ರತೆ ಮತ್ತು ಅನುಕೂಲತೆ ಪರಿಶೀಲನೆಗಳನ್ನು ಸಂರಚಿಸುವಿರಿ
+- ವೆಚ್ಚ ಅಂದಾಜು ಮತ್ತು ಬಜೆಟ್ ಪರಿಶೀಲನೆ ಕಾರ್ಯಪ್ರವಾಹಗಳನ್ನು ರೂಪಿಸುವಿರಿ
+- CI/CD ಪೈಪ್ಲೈನ್ಗಳಿಗಾಗಿ ಕಸ್ಟಮ್ ಪೂರ್ವ-ಯಾತ್ರೆ ಪರಿಶೀಲನೆ ಆटोಮೇಷನ್ ಸೃಷ್ಟಿಸುವಿರಿ
 
 ## ಕಲಿಕೆಯ ಫಲಿತಾಂಶಗಳು
 
-Upon completion, you will be able to:
-- ಸಮಗ್ರ ಪೂರ್ವ-ಫ್ಲೈಟ್ ಪರಿಶೀಲನೆ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳನ್ನು ರಚಿಸಿ ಮತ್ತು ನಿರ್ವಹಿಸಬಹುದು
-- ವಿವಿಧ ನಿಯೋಜನೆ ಪರಿಸ್ಥಿತಿಗಳಿಗಾಗಿ ಸ್ವಯಂಚಾಲಿತ ತಪಾಸಣಾ ಕಾರ್ಯಪ್ರವಾಹಗಳನ್ನು ವಿನ್ಯಾಸಗೊಳಿಸಬಹುದು
-- ಪರಿಸರ-ನಿರ್ದಿಷ್ಟ ಪರಿಶೀಲನೆ ಪ್ರಕ್ರಿಯೆಗಳು ಮತ್ತು ನೀತಿಗಳನ್ನು ಜಾರಿಗೆ ತರುತ್ತೀರಿ
-- ನಿಯೋಜನೆ ತಯಾರಿತಿಗೆ ಪ್ರೋತ್ಸಾಹಕ_monitoring_ ಮತ್ತು ಎಚ್ಚರಿಕೆಗಳನ್ನು ಕಾನ್ಫಿಗರ್ ಮಾಡಬಹುದು
-- ಪೂರ್ವ-ನಿಯೋಜನೆ ಸಮಸ್ಯೆಗಳನ್ನು ತಿದ್ದುಪಡಿಸಿ ಮತ್ತು ಪರಿಹಾರಗಳನ್ನು ಜಾರಿಗೆ ತರುತ್ತೀರಿ
-- ಪೂರ್ವ-ಫ್ಲೈಟ್ ಪರಿಶೀಲನೆಗಳನ್ನು DevOps ಪೈಪ್‌ಲೈನ್ಗಳಿಗೆ ಮತ್ತು ಸ್ವಯಂಕರಣ ಕಾರ್ಯಪ್ರವಾಹಗಳಿಗೆ ಸಂಯೋಜಿಸಬಹುದು
+ಪೂರ್ಣಗೊಳಿಸಿದ ನಂತರ, ನೀವು:
+- ಸಮಗ್ರ ಪೂರ್ವ-ಯಾತ್ರೆ ಪರಿಶೀಲನೆ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳನ್ನು ರಚಿಸಿ ನಿರ್ವಹಿಸಬಹುದು
+- ವಿಭಿನ್ನ ನಿಯೋಜನೆ ಸಂದರ್ಭಗಳಿಗೆ ಸ್ವಯಂಚಾಲಿತ ಪರಿಶೀಲನೆ ಕಾರ್ಯಪ್ರವಾಹಗಳನ್ನು ವಿನ್ಯಾಸಗೊಳಿಸಬಹುದು
+- ಪರಿಸರ-ನಿರ್ದಿಷ್ಟ ಪರಿಶೀಲನೆ ಕ್ರಮಗಳು ಮತ್ತು ನीतಿಗಳನ್ನು ಜಾರಿಗೊಳಿಸಬಹುದು
+- ನಿಯೋಜನೆ ಸಿದ್ಧತೆಗೆ ಪ್ರಾಕ್ಟಿವ್ ಮಾನಿಟರಿಂಗ್ ಮತ್ತು ಅಲರ್ಟ್‌ಗಳನ್ನು ಸಂರಚಿಸಬಹುದು
+- ಪೂರ್ವ-ನಿಯೋಜನೆ ಸಮಸ್ಯೆಗಳನ್ನು ಪರಿಹರಿಸಿ ತಿದ್ದುಪಡಿ ಕ್ರಮಗಳನ್ನು ಅನುಷ್ಠान ಮಾಡಬಹುದು
+- ಡೆವ್ಓಪ್ಸ್ ಪೈಪ್ಲೈನ್ಗಳಲ್ಲಿ ಪೂರ್ವ-ಯాత్రೆ ಪರಿಶೀಲನೆಗಳನ್ನು ಇಂಟಿಗ್ರೇಟ್ ಮಾಡಬಹುದು
 
-## ವಿಷಯಸೂಚಿ
+## ವಿಷಯಸಾರणी
 
-- [ಅವಲೋಕನ](../../../../docs/chapter-06-pre-deployment)
-- [ಸ್ವಯಂಚಾಲಿತ ಪೂರ್ವ-ಪರೀಕ್ಷಾ ಸ್ಕ್ರಿಪ್ಟ್](../../../../docs/chapter-06-pre-deployment)
-- [ಕೈಯ ಪರಿಶೀಲನೆ ಚೆಕ್‌ಲಿಸ್ಟ್](../../../../docs/chapter-06-pre-deployment)
-- [ಪರಿಸರ ಪರಿಶೀಲನೆ](../../../../docs/chapter-06-pre-deployment)
-- [ಸಂಪನ್ಮೂಲ ಪರಿಶೀಲನೆ](../../../../docs/chapter-06-pre-deployment)
-- [ಭದ್ರತೆ ಮತ್ತು ಅನುಪಾಲನೆ ಪರಿಶೀಲನೆಗಳು](../../../../docs/chapter-06-pre-deployment)
-- [ಕಾರ್ಯಕ್ಷಮತೆ ಮತ್ತು ಸಾಮರ್ಥ್ಯ ಯೋಜನೆ](../../../../docs/chapter-06-pre-deployment)
-- [ಸಾಮಾನ್ಯ ಸಮಸ್ಯೆಗಳ ಪರಿಹಾರ](../../../../docs/chapter-06-pre-deployment)
-
----
-
-## ಅವಲೋಕನ
-
-ಪೂರ್ವ-ಫ್ಲೈಟ್ ತಪಾಸಣೆಗಳು ನಿಯೋಜಿಸುವ ಮುನ್ನ ನಡೆಸುವ ಅಗತ್ಯ ಪರೀಕ್ಷೆಗಳಾಗಿವೆ, ಅವುಗಳು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಲು ನೆರವಾಗುತ್ತವೆ:
-
-- **ಸಂಪನ್ಮೂಲ ಲಭ್ಯತೆ** ಮತ್ತು ಗುರಿ ಪ್ರಾಂತ್ಯಗಳಲ್ಲಿ ಕೋಟಾಗಳು
-- **ಪ್ರಮಾಣೀಕರಣ ಮತ್ತು ಅನುಮತಿಗಳು** ಸರಿಯಾಗಿ ಸಂರಚಿಸಲ್ಪಟ್ಟಿವೆ
-- **ಟೆಂಪ್ಲೇಟ್ ಮಾನ್ಯತೆ** ಮತ್ತು ಪ್ಯಾರಾಮೀಟರ್ ಸರಿಯಾಗಿವೆ
-- **ಜಾಲತಂತ್ರ ಸಂಪರ್ಕತೆ** ಮತ್ತು ಅವಲಂಬಿತಗಳು
-- **ಸುರಕ್ಷತಾ ಅನುಪಾಲನೆ** ಸಂಸ್ಥೆಯ ನೀತಿಗಳಿಗೆ ಅನುಗುಣವಾಗಿರುವುದು
-- **ಖರ್ಚು ಅಂದಾಜು** ಬಜೆಟ್ ಮಿತಿಗಳಲ್ಲಿದೆ
-
-### ಪೂರ್ವ-ಪರೀಕ್ಷೆಗಳನ್ನು ಯಾವಾಗ ನಡೆಸಬೇಕು
-
-- **ಹೊಸ ಪರಿಸರಕ್ಕೆ** ಮೊದಲ ನಿಯೋಜನೆಯ ಮೊದಲು
-- **ಗಂಭೀರ ಟೆಂಪ್ಲೇಟ್ ಬದಲಾವಣೆಗಳ ನಂತರ**
-- **ಉತ್ಪಾದನಾ ನಿಯೋಜನೆಗಳ ಮೊದಲು**
-- **Azure ಪ್ರಾಂತ್ಯಗಳನ್ನು ಬದಲಾಯಿಸುವಾಗ**
-- **CI/CD ಪೈಪ್‌ಲೈನ್ಗಳ的一 ಭಾಗವಾಗಿ**
+- [ಸಾರಾಂಶ](#ಸಾರಾಂಶ)
+- [ಸ್ವಯಂಚಾಲಿತ ಪೂರ್ವ-ಯಾತ್ರೆ ಸ್ಕ್ರಿಪ್ಟ್](#ಸ್ವಯಂಚಾಲಿತ-ಪೂರ್ವ-ಯಾತ್ರೆ-ಸ್ಕ್ರಿಪ್ಟ್)
+- [ಮಾನುಯಲ್ ಪರಿಶೀಲನೆ ಚಕೇಶ್](#codeblock1)
+- [ಪರಿಸರ ಪರಿಶೀಲನೆ](#✅-ಬ್ಯಾಕಪ್-ಮತ್ತು-ಪುನಃಪಡೆಯಿಕೆ)
+- [ಸಂಪನ್ಮೂಲ ಪರಿಶೀಲನೆ](#ಉತ್ಪಾದನಾ-ಪರಿಸರ-ಪರಿಶೀಲನೆ)
+- [ಭದ್ರತೆ ಮತ್ತು ಅನುಕೂಲತೆ ಪರಿಶೀಲನೆ](#security--compliance-checks)
+- [ಕಾರ್ಯಕ್ಷಮತೆ ಮತ್ತು ಸಾಮರ್ಥ್ಯ ಯೋಜನೆ](#performance--capacity-planning)
+- [ಸಾಮಾನ್ಯ ಸಮಸ್ಯೆಗಳು ಪರಿಹಾರ](#troubleshooting-common-issues)
 
 ---
 
-## ಸ್ವಯಂಚಾಲಿತ ಪೂರ್ವ-ಪರೀಕ್ಷಾ ಸ್ಕ್ರಿಪ್ಟ್
+## ಸಾರಾಂಶ
 
-### PowerShell Pre-flight Checker
+ನಿಯೋಜಿಸುವ ಮುನ್ನ ಸಂಪೂರ್ಣ ಪರಿಶೀಲನೆಗಳು ಖಚಿತಪಡಿಸಲು ಅಗತ್ಯವಿದೆ:
+
+- ಗುರಿ ಪ್ರದೇಶಗಳಲ್ಲಿ **ಸಂಪನ್ಮೂಲ ಲಭ್ಯತೆ** ಮತ್ತು ಕೋಟ್‌ಗಳು
+- **ಪ್ರಾಮಾಣೀಕರಣ ಮತ್ತು ಅನುಮತಿಗಳು** ಸರಿಯಾಗಿ ಸಂರಚಿತವಾಗಿವೆ
+- **ಟೆಂಪ್ಲೆಟ್ ಸತ್ಯತೆಯ** ಮತ್ತು ನಿಯಮಗಳ ಸರಿಯಾದತೆ
+- **ಜಾಲ ಸಂಚರಣೆ** ಮತ್ತು ಅವಲಂಬನೆಗಳು
+- **ಸಂಸ್ಥೆಯ ನೀತಿಗಳ ಭದ್ರತಾ ಅನುಕೂಲತೆ**
+- **ಬಜೆಟ್ ಮಿತಿಗಳೊಳಗಿನ** ವೆಚ್ಚ ಅಂದಾಜು
+
+### ಪೂರ್ವ-ಯಾತ್ರೆ ಪರಿಶೀಲನೆ ನಡೆಸುವ ಸಮಯ
+
+- **ಹೊಸ ಪರಿಸರಕ್ಕೆ ಮೊದಲು** ನಿಯೋಜಿಸಲು
+- **ಪ್ರಮುಖ ಟೆಂಪ್ಲೆಟ್ ಬದಲಾವಣೆಗಳಿಗೆ ನಂತರ**
+- **ಆದಾಯ್ಯದ ನಿಯೋಜನೆಗಳ ಮೊದಲು**
+- **ಆಜರ್ ಪ್ರದೇಶ ಬದಲಾಯಿಸುವಾಗ**
+- **CI/CD ಪೈಪ್ಲೈನ್ಗಳ ಭಾಗವಾಗಿ**
+
+---
+
+## ಸ್ವಯಂಚಾಲಿತ ಪೂರ್ವ-ಯಾತ್ರೆ ಸ್ಕ್ರಿಪ್ಟ್
+
+### ಪವರ್‌ಶೆಲ್ ಪೂರ್ವ-ಯಾತ್ರೆ ಪರಿಶೀಲಕ
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -128,7 +128,7 @@ function Write-Status {
 function Test-Prerequisites {
     Write-Host "${Blue}=== Prerequisites Check ===${Reset}"
     
-    # AZD ಸ್ಥಾಪನೆ ಪರಿಶೀಲಿಸಿ
+    # AZD ಸ್ಥಾಪನೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
     try {
         $azdVersion = azd version --output json | ConvertFrom-Json
         Write-Status "AZD CLI installed" "Success" "Version: $($azdVersion.azd.version)"
@@ -138,7 +138,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Azure CLI ಸ್ಥಾಪನೆ ಪರಿಶೀಲಿಸಿ
+    # Azure CLI ಸ್ಥಾಪನೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
     try {
         $azVersion = az version --output json | ConvertFrom-Json
         Write-Status "Azure CLI installed" "Success" "Version: $($azVersion.'azure-cli')"
@@ -148,7 +148,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # PowerShell ಆವೃತ್ತಿ ಪರಿಶೀಲಿಸಿ
+    # PowerShell ಆವೃತ್ತಿಯನ್ನು ಪರಿಶೀಲಿಸಿ
     if ($PSVersionTable.PSVersion.Major -ge 7) {
         Write-Status "PowerShell version" "Success" "Version: $($PSVersionTable.PSVersion)"
     }
@@ -163,7 +163,7 @@ function Test-Authentication {
     Write-Host "`n${Blue}=== Authentication Check ===${Reset}"
     
     try {
-        # AZD ಪ್ರಾಮಾಣೀಕರಣ ಪರಿಶೀಲಿಸಿ
+        # AZD ಪ್ರমাণೀಕರಣವನ್ನು ಪರಿಶೀಲಿಸಿ
         $azdAuth = azd auth login --check-status --output json 2>$null | ConvertFrom-Json
         if ($azdAuth.status -eq "Logged-in") {
             Write-Status "AZD authentication" "Success" "User: $($azdAuth.principalName)"
@@ -173,11 +173,11 @@ function Test-Authentication {
             return $false
         }
         
-        # Azure CLI ಪ್ರಾಮಾಣೀಕರಣ ಪರಿಶೀಲಿಸಿ
+        # Azure CLI ಪ್ರমাণೀಕರಣವನ್ನು ಪರಿಶೀಲಿಸಿ
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # ಸಬ್ಸ್ಕ್ರಿಪ್ಶನ್ ಪ್ರವೇಶವನ್ನು ಪರಿಶೀಲಿಸಿ
+        # ಸಬ್ಸ್ಕ್ರಿಪ್ಶನ್ ಪ್ರವೇಶವನ್ನು ಮಾನ್ಯಗೊಳಿಸಿ
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -194,7 +194,7 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # ಪ್ರಸ್ತುತ ಬಳಕೆದಾರನ ಪಾತ್ರ ನಿಯೋಜನೆಗಳನ್ನು ಪಡೆಯಿ
+        # ಪ್ರಸ್ತುತ ಬಳಕೆದಾರರ ಪಾತ್ರ ನಿಯೋಜನೆಗಳನ್ನು ಪಡೆಯಿರಿ
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
@@ -210,14 +210,14 @@ function Test-Permissions {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # ಸಂಪನ್ಮೂಲ ಗುಂಪಿನ ರಚನೆಯನ್ನು ಪರೀಕ್ಷಿಸಿ (ನಿರ್ದಿಷ್ಟಪಡಿಸಿದಲ್ಲಿ)
+        # ರಿಸೋರ್ಸ್ ಗುಂಪು ರಚನೆಗೆ ಪರೀಕ್ಷೆ (ನಿರ್ದೇಶಿಸಿದರೆ)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # ಸಂಪನ್ಮೂಲ ಗುಂಪನ್ನು ರಚಿಸುವ ಸಾಮರ್ಥ್ಯವನ್ನು ಪರೀಕ್ಷಿಸಿ
+                # ರಿಸೋರ್ಸ್ ಗುಂಪು ರಚಿಸುವ ಸಾಮರ್ಥ್ಯವನ್ನು ಪರೀಕ್ಷಿಸಿ
                 try {
                     az group create --name "preflight-test-rg" --location $Location --output none
                     az group delete --name "preflight-test-rg" --yes --output none
@@ -242,10 +242,10 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # ಕಂಪ್ಯೂಟ್ ಕ್ವೋಟಾಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
+        # ಕಂಪ್ಯೂಟ್ ಕೊಟ್ಟಾಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # ನಿರ್ದಿಷ್ಟ ಕ್ವೋಟಾಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
+        # ನಿರ್ದಿಷ್ಟ ಕೊಟ್ಟಾಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
         if ($coreQuota) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
@@ -257,7 +257,7 @@ function Test-QuotasAndLimits {
             }
         }
         
-        # App Service ಮಿತಿಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
+        # ಅಪ್ಲಿಕೇಶನ್ ಸೇವೆ ಮಿತಿಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
             if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
@@ -271,7 +271,7 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # ಸ್ಟೋರೇಜ್ ಅಕೌಂಟ್ ಮಿತಿಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
+        # ಸಂಗ್ರಹಣೆ ಖಾತೆ ಮಿತಿಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
         $storageAccounts = az storage account list --output json | ConvertFrom-Json
         $accountCount = ($storageAccounts | Measure-Object).Count
         if ($accountCount -lt 200) {
@@ -285,7 +285,7 @@ function Test-QuotasAndLimits {
     }
     catch {
         Write-Status "Quota check failed" "Warning" $_.Exception.Message
-        return $true # ಅಡ್ಡಿಪಡಿಸುವುದಿಲ್ಲ
+        return $true # ವಿರಾಮರಹಿತ
     }
 }
 
@@ -310,7 +310,7 @@ function Test-NetworkConnectivity {
         }
     }
     
-    # DNS ಪರಿಹಾರವನ್ನು ಪರೀಕ್ಷಿಸಿ
+    # DNS ಪರಿಹಾರ ಸಾಮರ್ಥ್ಯವನ್ನು ಪರೀಕ್ಷಿಸಿ
     try {
         $dnsResult = Resolve-DnsName "management.azure.com" -ErrorAction Stop
         Write-Status "DNS resolution" "Success" "Resolved successfully"
@@ -326,11 +326,11 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # azure.yaml ಅಸ್ತಿತ್ವದಲ್ಲಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ
+    # azure.yaml ಇದೆ ಎಂದು ಪರಿಶೀಲಿಸಿ
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # azure.yaml ಅನ್ನು ಪಾರ್ಸ್ ಮಾಡಿ
+        # azure.yaml ಅನ್ನು ವಿಶ್ಲೇಷಿಸಿ
         try {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
@@ -354,13 +354,13 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # ಇನ್ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಫೈಲ್‌ಗಳಿಗಾಗಿ ಪರಿಶೀಲಿಸಿ
+    # ರಚನಾ ಕಡತಗಳಿಗಾಗಿ ಪರಿಶೀಲಿಸಿ
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # main.bicep ಅಸ್ತಿತ್ವದಲ್ಲಿದ್ದರೆ ಮಾನ್ಯಗೊಳಿಸಿ
+            # main.bicep ಇದ್ದರೆ ಮಾನ್ಯಗೊಳಿಸಿ
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 ಹೊಸ: ಇನ್ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಪೂರ್ವದರ್ಶನವನ್ನು ಪರೀಕ್ಷಿಸಿ (ಸುರಕ್ಷಿತ ಡ್ರೈ-ರನ್)
+    # 🧪 ಹೊಸದು: ರಚನಾ ಪೂರ್ವದೃಷ್ಟಿ (ಸುರಕ್ಷಿತ ಡ್ರೈ-ರನ್) ಪರೀಕ್ಷೆ
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -403,7 +403,7 @@ function Test-RegionalAvailability {
     Write-Host "`n${Blue}=== Regional Availability Check ===${Reset}"
     
     try {
-        # ಸ್ಥಳ ಮಾನ್ಯವಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ
+        # ಸ್ಥಳ ಮಾನ್ಯವೋ ಅಥವಾ ಇಲ್ಲವೋ ಪರಿಶೀಲಿಸಿ
         $locations = az account list-locations --output json | ConvertFrom-Json
         $validLocation = $locations | Where-Object { $_.name -eq $Location -or $_.displayName -eq $Location }
         
@@ -415,7 +415,7 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # ಪ್ರಾಂತ್ಯದಲ್ಲಿ ಸೇವಾ ಲಭ್ಯತೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
+        # ಪ್ರಾಂತ್ಯದಲ್ಲಿ ಸೇವೆಯ ಲಭ್ಯತೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
@@ -446,11 +446,11 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # ಮೂಲಭೂತ ವೆಚ್ಚ ಅಂದಾಜು (ನಿಖರ ಅಂದಾಜುಗಳಿಗೆ Azure ಪ್ರೈಸಿಂಗ್ API ಅಗತ್ಯ)
+    # ಮೂಲಭೂತ ವೆಚ್ಚ ಅಂದಾಜು (ನಿಖರ ಅಂದಾಜುಗಳಿಗೆ Azure ಬೆಲೆ ಏಪಿಐ ಅಗತ್ಯ)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # ಬಜೆಟ್ ಅಸ್ತಿತ್ವದಲ್ಲಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ
+    # ಬಜೆಟ್ ಇದೆ ಎಂದು ಪರಿಶೀಲಿಸಿ
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -472,7 +472,7 @@ function Test-SecurityCompliance {
     
     # ಸಾಮಾನ್ಯ ಭದ್ರತಾ ಅಭ್ಯಾಸಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
     try {
-        # Key Vault ಸಂರಚಿಸಲಾಗಿದೆ ಎಂದು ಪರಿಶೀಲಿಸಿ
+        # ಕೀ ವಾಲ್ಟ್ ಅನ್ನು ಸಂರಚಿತವಾಗಿದೆ ಎಂದು ಪರೀಕ್ಷಿಸಿ
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
             Write-Status "Key Vault usage" "Success" "Key Vault detected in templates"
         }
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # ಮ್ಯಾನೇಜ್ಡ್ ಐಡೆಂಟಿಟಿ ಬಳಕೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
+        # ನಿರ್ವಹಿತ ಗುರುತಿನ ಬಳಕೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +488,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # HTTPS ಜಾರಿಗೆ ಇಡಲಾಗಿದೆ ಎಂದು ಪರಿಶೀಲಿಸಿ
+        # HTTPS ವಿಧಿಯ ಅನುಸರಣೆ ಪರೀಕ್ಷಿಸಿ
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -557,15 +557,15 @@ function Invoke-PreflightCheck {
     }
 }
 
-# ಪ್ರಿ-ಫ್ಲೈಟ್ ಪರಿಶೀಲನೆಯನ್ನು ನಡೆಸಿ
+# ಪೂರ್ವ ವಿಮಾನ ಪರಿಶೀಲನೆಯನ್ನು ನಡೆಸಿ
 Invoke-PreflightCheck
 ```
 
-### Bash Pre-flight Checker
+### ಬ್ಯಾಶ್ ಪೂರ್ವ-ಯಾತ್ರೆ ಪರಿಶೀಲಕ
 
 ```bash
 #!/bin/bash
-# Unix/Linux ವ್ಯವಸ್ಥೆಗಳಿಗೆ ಮುಂಚಿತ ತಪಾಸಣೆಗಳ Bash ಆವೃತ್ತಿ
+# ಯುನಿಕ್ಸ್/ಲಿನಕ್ಸ್ ಸಿಸ್ಟಮ್ಗಳಿಗಾಗಿ ಮುಂಗಡ-flight ಪರಿಶೀಲನೆಗಳ ಬಾಷ್ ಆವೃತ್ತಿ
 
 set -euo pipefail
 
@@ -574,7 +574,7 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # ಬಣ್ಣವಿಲ್ಲ
+NC='\033[0m' # ಯಾವುದೇ ಬಣ್ಣವಿಲ್ಲ
 
 # ಜಾಗತಿಕ ಚರಗಳು
 ENVIRONMENT_NAME=""
@@ -637,7 +637,7 @@ check_prerequisites() {
 check_authentication() {
     echo -e "\n${BLUE}=== Authentication Check ===${NC}"
     
-    # AZD ಪ್ರಮಾಣೀಕರಣ ಪರಿಶೀಲಿಸಿ
+    # AZD ದೃಢೀಕರಣ ಪರಿಶೀಲಿಸಿ
     if azd auth login --check-status >/dev/null 2>&1; then
         local principal_name=$(azd auth login --check-status --output json 2>/dev/null | jq -r '.principalName // "Unknown"')
         print_status "AZD authentication" "success" "User: $principal_name"
@@ -646,7 +646,7 @@ check_authentication() {
         return 1
     fi
     
-    # Azure CLI ಪ್ರಮಾಣೀಕರಣ ಪರಿಶೀಲಿಸಿ
+    # Azure CLI ದೃಢೀಕರಣ ಪರಿಶೀಲಿಸಿ
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -665,7 +665,7 @@ check_template_validation() {
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
-        # ಮೂಲಭೂತ YAML ಮಾನ್ಯತಾ ಪರಿಶೀಲನೆ
+        # ಮೂಲ YAML ಮಾನ್ಯತೆ
         if python3 -c "import yaml; yaml.safe_load(open('azure.yaml'))" 2>/dev/null; then
             print_status "azure.yaml parsing" "success"
         else
@@ -677,13 +677,13 @@ check_template_validation() {
         return 1
     fi
     
-    # ಇನ್ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಕಡತಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
+    # ಮೂಲಸೌಕರ್ಯ ಕಡತಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
     if [[ -d "infra" ]]; then
         local bicep_count=$(find infra -name "*.bicep" | wc -l)
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # main.bicep ಇದ್ದರೆ ಮಾನ್ಯಗೊಳಿಸಿ
+            # main.bicep ಇದ್ದರೆ ಮಾನ್ಯತೆ ಮಾಡಿ
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +706,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # ಸ್ಥಳವು ಮಾನ್ಯವೋ ಎಂದು ಪರಿಶೀಲಿಸಿ
+    # ಸ್ಥಳ ಮಾನ್ಯವೋ ಎಂದು ಪರಿಶೀಲಿಸಿ
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -714,7 +714,7 @@ check_regional_availability() {
         return 1
     fi
     
-    # ಸೇವೆ ಲಭ್ಯತೆ ಪರಿಶೀಲಿಸಿ
+    # ಸೇವಾ ಲಭ್ಯತೆ ಪರಿಶೀಲಿಸಿ
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
     for service in "${services[@]}"; do
@@ -729,8 +729,8 @@ check_regional_availability() {
 }
 
 main() {
-    # ಕಮಾಂಡ್ ಲೈನ್ ಆರ್ಗ್ಯುಮೆಂಟ್‌ಗಳನ್ನು ವಿಶ್ಲೇಷಿಸಿ
-    while [[ $# -gt 0 ]]; do
+    # ಕಮಾಂಡ್ ಲೈನ್ ಆರ್ಗ್ಯುಮೆಂಟ್ಗಳನ್ನು ವಿಂಗಡಿಸಿ
+    while [[ $# -gt 0 ]]; ಮಾಡು
         case $1 in
             --environment-name)
                 ENVIRONMENT_NAME="$2"
@@ -755,7 +755,7 @@ main() {
         esac
     done
     
-    # ಅವಶ್ಯಕ ಪ್ಯಾರಾಮೀಟರ್‌ಗಳನ್ನು ಮಾನ್ಯಗೊಳಿಸಿ
+    # ಅಗತ್ಯ պարಾಮೀಟರ್ಗಳನ್ನು ಮಾನ್ಯತೆ ಮಾಡಿರಿ
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -768,7 +768,7 @@ main() {
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
     
-    # ಪರಿಶೀಲನೆಗಳನ್ನು ನಡೆಸಿ
+    # ಪರಿಶೀಲನೆಗಳನ್ನು ಚಾಲನೆ ಮಾಡಿರಿ
     local all_passed=true
     
     check_prerequisites || all_passed=false
@@ -790,100 +790,101 @@ main() {
     fi
 }
 
-# ಮುಖ್ಯ ಕಾರ್ಯವನ್ನು ನಡೆಸಿ
+# ಮುಖ್ಯ ಕಾರ್ಯವನ್ನು ಚಾಲನೆ ಮಾಡಿರಿ
 main "$@"
 ```
 
 ---
 
-## ಕೈಯ ಪರಿಶೀಲನೆ ಚೆಕ್‌ಲಿಸ್ಟ್
+## ಮಾನುವಲ್ ಪರಿಶೀಲನೆ ಚಕೇಶ್
 
-### ಪೂರ್ವ-ನಿಯೋಜನೆ ಚೆಕ್‌ಲಿಸ್ಟ್
+### ಪೂರ್ವ-ನಿಯೋಜನೆ ಚಕೇಶ್
 
-ಈ ಚೆಕ್‌ಲಿಸ್ಟ್ ಅನ್ನು ಮುದ್ರಿಸಿ ಮತ್ತು ನಿಯೋಜನೆಗೂ ಮುನ್ನ ಪ್ರತಿಯೊಂದು ಐಟಮ್ ಅನ್ನು ಪರಿಶೀಲಿಸಿ:
+ಈ ಚಕೇಶ್ ಅನ್ನು ಮುದ್ರಿಸಿ ಮತ್ತು ನಿಯೋಜನೆಯ ಮುನ್ನ ಪ್ರತಿ ವಿಷಯವನ್ನು ಪರಿಶೀಲಿಸಿ:
 
-#### ✅ ಪರಿಸರ ಸೆಟ್‌ಅಪ್
-- [ ] AZD CLI ಸ್ಥಾಪಿತವಾಗಿದ್ದು ತಾಜಾ ಆವೃತ್ತಿಗೆ ನವೀಕರಿಸಲಾಗಿದೆ
-- [ ] Azure CLI ಸ್ಥಾಪಿತ ಆಗಿದ್ದು ಪ್ರಾಮಾಣೀಕರಿಸಲಾಗಿದೆ
-- [ ] ಸರಿಯಾದ Azure ಸಬ್ಸ್ಕ್ರಿಪ್ಶನ್ ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ
-- [ ] ಪರಿಸರದ ಹೆಸರು ಅನನ್ಯವಾಗಿದ್ದು ನಾಮಕರಣ ನಿಯಮಗಳನ್ನು ಅನುಸರಿಸುತ್ತದೆ
-- [ ] ಗುರಿ ಸಂಪನ್ಮೂಲ ಗುಂಪು ಗುರುತಿಸಲಾಗಿದೆ ಅಥವಾ ಸೃಷ್ಟಿಸಲಾಗಬಹುದು
+#### ✅ ಪರಿಸರ ಸಜ್ಜುಗೊಳಿಸುವಿಕೆ
+- [ ] AZD CLI ಇನ್ಸ್ಟಾಲ್ ಆಗಿದ್ದು ಇತ್ತೀಚಿನ ಆವೃತ್ತಿಗೆ ನವೀಕರಿಸಲಾಗಿದೆ
+- [ ] ಆಜರ್ CLI ಇನ್ಸ್ಟാള് ಆಗಿದ್ದು ಪ್ರಾಮಾಣೀಕರಿಸಲಾಗಿದೆ
+- [ ] ಸರಿಯಾದ ಆಜರ್ ಚಂದಾದಾರಿಕೆ ಆಯ್ಕೆ ಮಾಡಲಾಗಿದೆ
+- [ ] ಪರಿಸರದ ಹೆಸರು ವಿಶಿಷ್ಟವಾಗಿದ್ದು ಹೆಸರಿಸುವ ನಿಯಮಗಳನ್ನು ಅನುಸರಿಸುತ್ತದೆ
+- [ ] ಗುರಿಯಾಗಿ ಸಂಪನ್ಮೂಲ ಗುಂಪು ಗುರುತಿಸಲಾಗಿದೆ ಅಥವಾ ಸೃಷ್ಟಿಸಬಹುದು
 
-#### ✅ Authentication & Permissions
-- [ ] ಯಶಸ್ವಿಯಾಗಿ `azd auth login` ಮೂಲಕ ಪ್ರಮಾಣೀಕರಿಸಲಾಗಿದೆ
-- [ ] ಬಳಕೆದಾರನಿಗೆ ಗುರಿ ಸಬ್ಸ್ಕ್ರಿಪ್ಶನ್/ಸಂಪನ್ಮೂಲ ಗುಂಪಿನಲ್ಲಿ Contributor ಪಾತ್ರ ಇದೆ
-- [ ] CI/CD (ಬಳಕೆ ಇದ್ದರೆ)ಗಾಗಿ Service Principal ಕಾನ್ಫಿಗರ್ ಮಾಡಲಾಗಿದೆ
-- [ ] ಕಾಲಹರಣಗೊಂಡ ಪ್ರಮಾಣಪತ್ರಗಳು ಅಥವಾ ಮಾನ್ಯತೆಗಳಿಲ್ಲ
+#### ✅ ಪ್ರಾಮಾಣೀಕರಣ ಮತ್ತು ಅನುಮತಿಗಳು
+- [ ] `azd auth login` ಮೂಲಕ ಯಶಸ್ವಿಯಾಗಿ ಪ್ರಾಮಾಣೀಕರಿಸಲಾಗಿದೆ
+- [ ] ಬಳಕೆದಾರನಿಗೆ ಗುರಿ ಚಂದಾದಾರಿಕೆ/ಸಂಪನ್ಮೂಲ ಗುಂಪಿನ ಮೇಲೆ ಕೊಡುಗೆದಾರ ಪಾತ್ರವಿದೆ
+- [ ] CI/CD ಗಾಗಿ ಸೇವಾ ಪ್ರಿಂಸಿಪಲ್ ಜೋಡಿಸಲಾಗಿದೆ (ಅದೃಷ್ಟಲ್ಲಿ)
+- [ ] ಯಾವುದೇ ಅವಧಿ ಮುಗಿಯುವ ಪ್ರಮಾಣಪತ್ರಗಳು ಅಥವಾ ದಾಖಲೆಗಳು ಇಲ್ಲ
 
-#### ✅ Template Validation
-- [ ] `azure.yaml` ಇದೆ ಮತ್ತು ಮಾನ್ಯ YAML ಆಗಿದೆ
-- [ ] `azure.yaml` ನಲ್ಲಿ ನಿರ್ದಿಷ್ಟಪಡಿಸಿದ ಎಲ್ಲಾ ಸೇವೆಗಳಿಗೂ ಅನುಸಾರವಾದ ಮೂಲ ಕೋಡ್ ಅಸ್ತಿತ್ವದಲ್ಲಿದೆ
-- [ ] `infra/` ಡೈರೆಕ್ಟರಿಯಲ್ಲಿನ Bicep ಟೆಂಪ್ಲೇಟುಗಳು ಲಭ್ಯವಿವೆ
-- [ ] `main.bicep` ದೋಷವಿಲ್ಲದೆ ಕಂಪೈಲ್ ಆಗುತ್ತದೆ (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Infrastructure preview ಯಶಸ್ವಿಯಾಗಿ ಓಡುತ್ತದೆ (`azd provision --preview`)
-- [ ] ಎಲ್ಲಾ ಅಗತ್ಯ ಪ್ಯಾರಾಮೀಟರ್‌ಗಳಿಗೆ ಡೀಫಾಲ್ಟ್ ಮೌಲ್ಯಗಳಿವೆ ಅಥವಾ ಒದಗಿಸಲಿದ್ದುದು
-- [ ] ಟೆಂಪ್ಲೇಟುಗಳಲ್ಲಿ ಹಾರ್ಡ್‌ಕೋಡ್ಡ್ ರಹಸ್ಯಗಳಿಲ್ಲ
+#### ✅ ಟೆಂಪ್ಲೆಟ್ ಪರಿಶೀಲನೆ
+- [ ] `azure.yaml` ಅಸ್ತಿತ್ವದಲ್ಲಿದ್ದು ಮಾನ್ಯ YAML ಆಗಿದೆ
+- [ ] azure.yaml ನಲ್ಲಿ ಎಲ್ಲಾ ಸೇವೆಗಳು ಸಂಬಂಧಪಟ್ಟ ಮೂಲಕೋಡ್ ಸಹಿತ ಇವೆ
+- [ ] `infra/` ಡೈರೆಕ್ಟರಿಯಲ್ಲಿ ಬೈಸಿಕ್ ಟೆಂಪ್ಲೆಟ್‌ಗಳು ಇವೆ
+- [ ] `main.bicep` ದೋಷರಹಿತವಾಗಿ ಸಂಯೋಜಿತವಾಗಿದೆ (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 ಇನ್ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಪೂರ್ವದೃಷ್ಟಿ ಯಶಸ್ವಿಯಾಗಿ ನಡೆಯುತ್ತದೆ (`azd provision --preview`)
+- [ ] ಎಲ್ಲಾ ಅಗತ್ಯ ನಿಯಮಗಳು ಡિફಾಲ್ಟ್ ಮೌಲ್ಯಗಳು ಅಥವಾ ಒದಗಿಸಲಾಗುತ್ತದೆ
+- [ ] ಟೆಂಪ್ಲೆಟ್‌ಗಳಲ್ಲಿ ಯಾವುದೇ ಕಠಿಣವಾಗಿ ಬರೆದ ರಹಸ್ಯಗಳು ಇಲ್ಲ
 
-#### ✅ Resource Planning
-- [ ] ಗುರಿ Azure ಪ್ರಾಂತ್ಯ ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ ಮತ್ತು ಮಾನ್ಯಗೊಳಿಸಲಾಗಿದೆ
-- [ ] ಗುರಿ ಪ್ರಾಂತ್ಯದಲ್ಲಿ ಅಗತ್ಯ Azure ಸೇವೆಗಳು ಲಭ್ಯವಿವೆ
-- [ ] ಯೋಜಿಸಿದ ಸಂಪನ್ಮೂಲಗಳಿಗಾಗಿ ಸಾಕಷ್ಟು ಕೋಟಾಗಳು ಲಭ್ಯವಿವೆ
-- [ ] ಸಂಪನ್ಮೂಲ ಹೆಸರು ಸಂಘರ್ಷಗಳು ಪರಿಶೀಲಿಸಲಾಗಿದೆ
-- [ ] ಸಂಪನ್ಮೂಲಗಳ ನಡುವಿನ ಅವಲಂಬನೆಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಂಡಿದ್ದಾರೆ
+#### ✅ ಸಂಪನ್ಮೂಲ ಯೋಜನೆ
+- [ ] ಗುರಿ ಆಜರ್ ಪ್ರದೇಶವನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಪರಿಶೀಲಿಸಲಾಗಿದೆ
+- [ ] ಗುರಿ ಪ್ರದೇಶದಲ್ಲಿ ಅಗತ್ಯ ಆಜರ್ ಸೇವೆಗಳು ಲಭ್ಯವಿವೆ
+- [ ] ಯೋಜಿತ ಸಂಪನ್ಮೂಲಗಳಿಗೆ ಸಾಕಷ್ಟು ಕೋಟ್ ಲಭ್ಯವಿದೆ
+- [ ] ಸಂಪನ್ಮೂಲ ಹೆಸರು ಒದಗಿತೆಗಳ ತಪಾಸಣೆ ಮಾಡಿದವು
+- [ ] ಸಂಪನ್ಮೂಲಗಳ ನಡುವೆ ಅವಲಂಬನೆಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಂಡಿದ್ದಾರೆ
 
-#### ✅ Network & Security
-- [ ] Azure ಎಂಡ್ಪಾಯಿಂಟ್‌ಗಳಿಗೆ ಜಾಲ ಸಂಪರ್ಕ ಪರಿಶೀಲಿಸಲಾಗಿದೆ
-- [ ] ಅಗತ್ಯವಿದ್ದರೆ ಫೈರ್ವಾಲ್/ಪ್ರಾಕ್ಸಿ ಸೆಟ್ಟಿಂಗ್ಗಳನ್ನು ಕಾನ್ಫಿಗರ್ ಮಾಡಲಾಗಿದೆ
-- [ ] ಗುಪ್ತತೆ ನಿರ್ವಹಣೆಗೆ Key Vault ಸಂರಚಿಸಲಾಗಿದೆ
-- [ ] ಸಾಧ್ಯವಾದ ಸ್ಥಳಗಳಲ್ಲಿ Managed identities ಉಪಯೋಗಿಸಲಾಗಿದೆ
-- [ ] ವೆಬ್ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಗೆ HTTPS ಅನಿವಾರ್ಯಗೊಳಿಸಲಾಗಿದೆ
+#### ✅ ಜಾಲ ಸಂಚರಣೆ ಮತ್ತು ಭದ್ರತೆ
+- [ ] ಆಜರ್ ಎಂಡ್‌ಪಾಯಿಂಟ್‌ಗಳಿಗೆ ಜಾಲ ಸಂಪರ್ಕ ಪರಿಶೀಲಿಸಲಾಗಿದೆ
+- [ ] ಅಗತ್ಯವಿದ್ದಲ್ಲಿ ಫೈರ್ವಾಲ್/ಪ್ರಾಕ್ಸಿ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಸಂರಚಿಸಲಾಗಿದೆ
+- [ ] ರಹಸ್ಯ ನಿರ್ವಹಣೆಗೆ ಕೀ ವಾಲ್ಟ್ ಕಂಫಿಗರ್ ಮಾಡಲಾಗಿದೆ
+- [ ] ಸಾಧ್ಯವಿರುವಲ್ಲಿ ನಿರ್ವಹಣಾ ಗುರುತುಗಳು ಬಳಸಲಾಗಿದೆ
+- [ ] ವೆಬ್ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಗೆ HTTPS ಅನುಷ್ಠಾನಗೊಂಡಿದೆ
 
-#### ✅ Cost Management
-- [ ] Azure Pricing Calculator ಬಳಸಿ ಖರ್ಚು ಅಂದಾಜುಗಳು ಲೆಕ್ಕಿಸಲ್ಪಟ್ಟಿವೆ
-- [ ] ಅಗತ್ಯವಿದ್ದರೆ ಬಜೆಟ್ ಎಚ್ಚರಿಕೆಗಳು ಕಾನ್ಫಿಗರ್ ಮಾಡಲಾಗಿದೆ
-- [ ] ಪರಿಸರ ಪ್ರಕಾರಕ್ಕೆ ತಕ್ಕ SKUs ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ
-- [ ] ಉತ್ಪಾದನಾ ಕೆಲಸಗಳಿಗೆ ರಿಸರ್ವ್ಡ್ ಸಾಮರ್ಥ್ಯ ಪರಿಗಣಿಸಲಾಗಿದೆ
+#### ✅ ವೆಚ್ಚ ನಿರ್ವಹಣೆ
+- [ ] ಆಜರ್ ಪ್ರೈಸಿಂಗ್ ಕ್ಯಾಲ್ಕ್ಯುಲೇಟರ್ ಬಳಸಿ ವೆಚ್ಚ ಅಂದಾಜು ಮಾಡಲಾಗಿದೆ
+- [ ] ಬಜೆಟ್ ಅಲರ್ಟ್‌ಗಳನ್ನು ಅಗತ್ಯವಿದ್ದಲ್ಲಿ ಸಂರಚಿಸಲಾಗಿದೆ
+- [ ] ಪರಿಸರ ಪ್ರಕಾರವು ಸೂಕ್ತ SKU ಆಯ್ಕೆ ಮಾಡಲಾಗಿದೆ
+- [ ] ಉತ್ಪಾದನಾ ಕಾರ್ಯಭಾರಗಳಿಗೆ ಮೀಸಲಾದ ಸಾಮರ್ಥ್ಯ ಪರಿಗಣಿಸಲಾಗಿದೆ
 
-#### ✅ Monitoring & Observability
-- [ ] ಟೆಂಪ್ಲೇಟುಗಳಲ್ಲಿ Application Insights ಕಾನ್ಫಿಗರ್ ಮಾಡಲಾಗಿದೆ
-- [ ] Log Analytics ವರ್ಕ್‌ಸ್ಪೇಸ್ ಯೋಜಿಸಲಾಗಿದೆ
-- [ ] ಆವಶ್ಯಕಮಾದ ಮೆಟ್ರಿಕ್‌ಗಳಿಗಾಗಿ ಎಚ್ಚರಿಕೆ ನಿಯಮಗಳು ನಿರ್ಧಾರಿಸಲಾಗಿದೆ
-- [ ] ಅಪ್ಲಿಕೇಶನ್‌ಗಳಲ್ಲಿ ಆರೋಗ್ಯ ಪರಿಶೀಲನೆ ಎಂಡ್ಪಾಯಿಂಟ್‌ಗಳನ್ನು ಜಾರಿ ಮಾಡಲಾಗಿದೆ
+#### ✅ ಮಾನಿಟರಿಂಗ್ ಮತ್ತು ಪ سروפּ
 
-#### ✅ Backup & Recovery
-- [ ] ಡೇಟಾ ಸಂಪನ್ಮೂಲಗಳಿಗಾಗಿ ಬ್ಯಾಕಪ್ ತಂತ್ರವಿಧಾನ ನಿರ್ಧರಿಸಲಾಗಿದೆ
-- [ ] Recovery Time Objectives (RTO) ದಾಖಲಿಸಲಾಗಿದೆ
-- [ ] Recovery Point Objectives (RPO) ದಾಖಲಿಸಲಾಗಿದೆ
-- [ ] ಉತ್ಪಾದನೆಗಾಗಿ ದುರ್ಘಟನೆ ಪುನರುತ್ಥಾನ ಯೋಜನೆ ಇಡಲಾಗಿದೆ
+- [ ] ಟೆಂಪ್ಲೆಟ್‌ಗಳಲ್ಲಿ ಅಪ್ಲಿಕೇಶನ್ ಇನ್ಸೈಟ್ಸ್ ಕಂಫಿಗರ್ ಮಾಡಲಾಗಿದೆ
+- [ ] ಲಾಗ್ ಅನಾಲಿಟಿಕ್ಸ್ ಕಾರ್ಯಸ್ಥಳ ಪ್ಲಾನ್ ಮಾಡಲಾಗಿದೆ
+- [ ] ಪ್ರಮುಖ ಮетрಿಕ್‌ಗಳಿಗಾಗಿ ಅಲರ್ಟ್ ನಿಯಮಗಳು ವ್ಯಾಖ್ಯಾನಿಸಲಾಗಿದೆ
+- [ ] ಅಪ್ಲಿಕೇಶನ್‌ಗಳಲ್ಲಿ ಆರೋಗ್ಯ ಪರಿಶೀಲನೆ ಎಂಡ್‌ಪಾಯಿಂಟ್‌ಗಳನ್ನು ಜಾರಿಗೊಳಿಸಲಾಗಿದೆ
+
+#### ✅ ಬ್ಯಾಕಪ್ ಮತ್ತು ಪುನಃಪಡೆಯಿಕೆ
+- [ ] ಡೇಟಾ ಸಂಪನ್ಮೂಲಗಳಿಗೆ ಬ್ಯಾಕಪ್ ತಂತ್ರವನ್ನು ವ್ಯಾಖ್ಯಾನಿಸಲಾಗಿದೆ
+- [ ] ಪುನಃಪ್ರಾಪ್ತ ಸಮಯ ಉದ್ದೇಶಗಳು (RTO) ದಾಖಲಿಸಲಾಗಿದೆ
+- [ ] ಪುನಃಪ್ರಾಪ್ತ ಬಿಂದು ಉದ್ದೇಶಗಳು (RPO) ದಾಖಲಾಗಿದೆ
+- [ ] ಉತ್ಪಾದನೆಗಾಗಿ ವಿಪತ್ತು ಪುನಃಪಡೆಯಿಕೆ ಯೋಜನೆ ಇದೆ
 
 ---
 
 ## ಪರಿಸರ ಪರಿಶೀಲನೆ
 
-### Development Environment Validation
+### ಅಭಿವೃದ್ಧಿ ಪರಿಸರ ಪರಿಶೀಲನೆ
 
 ```bash
 #!/bin/bash
-# ಡೆವಲಪ್‌ಮೆಂಟ್ ಪರಿಸರಕ್ಕೆ ಸಂಬಂಧಿಸಿದ ಪರಿಶೀಲನೆಗಳು
+# ಅಭಿವೃದ್ಧಿ ಪರಿಸರಕ್ಕೆ ವಿಶೇಷವಾದ ಪರಿಶೀಲನೆಗಳು
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # ಡೆವಲಪ್‌ಮೆಂಟ್-ಸ್ನೇಹಿ ಸಂರಚನೆಗಳಿಗಾಗಿ ಪರಿಶೀಲಿಸಿ
+    # ಅಭಿವೃದ್ಧಿ ಸ್ನೇಹಿ ಸಂರಚನೆಗಳ ಪರಿಶೀಲನೆ
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # ಸ್ವಯಂ ಶಟ್‌ಡೌನ್ ಸಂರಚನೆಗಳಿಗಾಗಿ ಪರಿಶೀಲಿಸು
+    # ಸ್ವಯಂಚಾಲಿತ-shutdown ಸಂರಚನೆಗಳ ಪರಿಶೀಲನೆ
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # ಡೆವಲಪ್‌ಮೆಂಟ್ ಡೇಟಾಬೇಸ್ ಸಂರಚನೆಗಳನ್ನು ಮಾನ್ಯಗೊಳಿಸಿ
+    # ಅಭಿವೃದ್ಧಿ ಡೇಟಾಬೇಸ್ ಸಂರಚನೆಗಳ ನಿರ್ವಹಣೆ
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -892,37 +893,37 @@ validate_dev_environment() {
 }
 ```
 
-### Production Environment Validation
+### ಉತ್ಪಾದನಾ ಪರಿಸರ ಪರಿಶೀಲನೆ
 
 ```bash
 #!/bin/bash
-# ಉತ್ಪಾದನಾ ಪರಿಸರಕ್ಕೆ ನಿರ್ದಿಷ್ಟವಾದ ಪರಿಶೀಲನೆಗಳು
+# ಉತ್ಪಾದನಾ ಪರಿಸರಕ್ಕೆ ವಿಶೇಷವಾದ ಮಾನ್ಯತೆಗಳು
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # ಉನ್ನತ ಲಭ್ಯತೆ ಸಂರಚನೆಗಳಿಗಾಗಿ ಪರಿಶೀಲಿಸಿ
+    # ಉಚ್ಛ ಲಭ್ಯತೆಯ ಸಂರಚನೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # ಬ್ಯಾಕಪ್ ಸಂರಚನೆಗಳಿಗಾಗಿ ಪರಿಶೀಲಿಸಿ
+    # ಬ್ಯಾಕಪ್ ಸಂರಚನೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # ನಿರೀಕ್ಷಣಾ ವ್ಯವಸ್ಥೆಯನ್ನು ಮಾನ್ಯಗೊಳಿಸಿ
+    # ನಿಗಾ ವ್ಯವಸ್ಥೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # ಭದ್ರತಾ ಸಂರಚನೆಗಳಿಗಾಗಿ ಪರಿಶೀಲಿಸಿ
+    # ಭದ್ರತಾ ಸಂರಚನೆಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -935,7 +936,7 @@ validate_prod_environment() {
 
 ## ಸಂಪನ್ಮೂಲ ಪರಿಶೀಲನೆ
 
-### Quota Validation Script
+### ಕೋಟ್ ಪರಿಶೀಲನೆ ಸ್ಕ್ರಿಪ್ಟ್
 
 ```python
 #!/usr/bin/env python3
@@ -990,7 +991,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # ಸಬ್ಸ್ಕ್ರಿಪ್ಶನ್‌ನಲ್ಲಿನ ಸ್ಟೋರೇಜ್ ಖಾತೆಗಳನ್ನು ಪಡೆಯಿರಿ
+    # ಸಬ್ಸ್ಕ್ರಿಪ್ಷನ್‌ನಲ್ಲಿ ಸಂಗ್ರಹ ಖಾತೆಗಳನ್ನು ಪಡೆಯಿರಿ
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -998,7 +999,7 @@ def check_storage_limits(location: str) -> bool:
         return False
     
     account_count = len(accounts)
-    max_accounts = 250  # ಡೀಫಾಲ್ಟ್ ಏಜ್ಯೂರ್ ಮಿತಿ
+    max_accounts = 250  # ಡೀಫಾಲ್ಟ್ ಅಜುರ್ ಮಿತಿ
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1011,7 +1012,7 @@ def check_network_limits(location: str) -> bool:
     """Check network-related limits"""
     print(f"\n=== Network Limits Check ({location}) ===")
     
-    # ವರ್ಚುವಲ್ ನೆಟ್‌ವರ್ಕ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
+    # ವರ್ಚುವಲ್ ನೆಟ್ವರ್ಕ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
     vnets = run_command(['az', 'network', 'vnet', 'list'])
     if vnets is not None:
         vnet_count = len(vnets)
@@ -1058,20 +1059,20 @@ if __name__ == "__main__":
 
 ---
 
-## ಭದ್ರತೆ ಮತ್ತು ಅನುಪಾಲನೆ ಪರಿಶೀಲನೆಗಳು
+## ಭದ್ರತೆ ಮತ್ತು ಅನುಕೂಲತೆ ಪರಿಶೀಲನೆ
 
-### Security Validation Script
+### ಭದ್ರತೆ ಪರಿಶೀಲನೆ ಸ್ಕ್ರಿಪ್ಟ್
 
 ```bash
 #!/bin/bash
-# AZD ನಿಯೋಜನೆಗಳಿಗಾಗಿ ಭದ್ರತೆ ಮತ್ತು ಅನುಪಾಲನೆ ಪರಿಶೀಲನೆ
+# AZD ನಿಯೋಜನೆಗಳಿಗಾಗಿ ಭದ್ರತೆ ಮತ್ತು ಅನುಕೂಲ ಪರಿಶೀಲನೆ
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
     
     local issues_found=0
     
-    # Key Vault ಬಳಕೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
+    # ಕೀ ವಾಲ್ಟ್ ಬಳಕೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1080,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Managed identity ಬಳಕೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
+    # ನಿರ್ವಹಿತ ಗುರುತು ಬಳಕೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1088,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # HTTPS ಕಡ್ಡಾಯಗೊಳಿಸುವಿಕೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
+    # HTTPS ಅನುವ್ರುತಿಯನ್ನು ಪರಿಶೀಲಿಸಿ
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1096,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # ಕನಿಷ್ಠ TLS ಆವೃತ್ತಿಗಾಗಿ ಪರಿಶೀಲಿಸಿ
+    # ಕನಿಷ್ಠ TLS ಆವೃತ್ತಿಯನ್ನು ಪರಿಶೀಲಿಸಿ
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1103,7 +1104,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # ಸಾರ್ವಜನಿಕ ಪ್ರವೇಶ ನಿರ್ಬಂಧಗಳಿಗಾಗಿ ಪರಿಶೀಲಿಸಿ
+    # ಸಾರ್ವಜನಿಕ ಪ್ರವೇಶ ನಿರ್ಬಂಧಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1111,7 +1112,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # ನೆಟ್‌ವರ್ಕ್ ಭದ್ರತಾ ಗುಂಪುಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
+    # ನೆಟ್ವರ್ಕ್ ಭದ್ರತಾ ಗುಂಪುಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1124,21 +1125,21 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # ಡೇಟಾ ಎನ್‌ಕ್ರಿಪ್ಷನ್ ಇರುವುದನ್ನು ಪರಿಶೀಲಿಸಿ
+    # ಡೇಟಾ ಗುಪ್ತೀಕರಣವನ್ನು ಪರಿಶೀಲಿಸಿ
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # ಆಡಿಟ್ ಲಾಗಿಂಗ್ ಅನ್ನು ಪರಿಶೀಲಿಸಿ
+    # ಅಡಿಟ್ ಲಾಗ್ ಪರಿಶೀಲನೆ
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # ಬ್ಯಾಕಪ್ ಮತ್ತು ಉಳಿಸುವ ನೀತಿಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
+    # ಬ್ಯಾಕಪ್ ಮತ್ತು ಸಂರಕ್ಷಣೆ ನೀತಿಗಳನ್ನು ಪರಿಶೀಲಿಸಿ
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1146,7 +1147,7 @@ check_compliance_requirements() {
     fi
 }
 
-# ಮುಖ್ಯ ಕಾರ್ಯನಿರ್ವಹಣೆ
+# ಪ್ರಮುಖ ಕಾರ್ಯಾಂವತಿ
 main() {
     echo "🔒 Security and Compliance Validation"
     echo "📁 Checking infra/ directory for security best practices"
@@ -1177,9 +1178,9 @@ main "$@"
 
 ---
 
-## CI/CD ಜೊತೆಗೆ ಒಟ್ಟುಗೂಡಿಕೆ
+## CI/CD ಇಂಟಿಗ್ರೇಶನ್
 
-### GitHub Actions ಏಕೀಕರಣ
+### GitHub ಕ್ರಿಯೆಗಳ ಸಂಯೋಜನೆ
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1238,7 +1239,7 @@ jobs:
         path: preflight-results.json
 ```
 
-### Azure DevOps ಏಕೀಕರಣ
+### ಆಜರ್ ಡೆವ್ಓಪ್ಸ್ ಇಂಟಿಗ್ರೇಶನ್
 
 ```yaml
 trigger: none
@@ -1292,56 +1293,56 @@ steps:
 
 ## ಉತ್ತಮ ಅಭ್ಯಾಸಗಳ ಸಾರಾಂಶ
 
-### ✅ ಪೂರ್ವ-ಪರೀಕ್ಷೆ ಉತ್ತಮ ಅಭ್ಯಾಸಗಳು
+### ✅ ಪೂರ್ವ-ಯಾತ್ರೆ ಪರಿಶೀಲನೆ ಉತ್ತಮ ಅಭ್ಯಾಸಗಳು
 
-1. **ಸಾಧ್ಯವಾದರೆ ಸ್ವಯಂಚಾಲಿತಗೊಳಿಸಿ**
-   - CI/CD ಪೈಪ್‌ಲೈನ್ಗಳಿಗೆ ತಪಾಸಣೆಗಳನ್ನು ಒಳಗೊಂಡಿಡಿ
-   - ಪುನರಾವರ್ತನೆಯ ಮಾನ್ಯತೆಗಳಿಗಾಗಿ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳನ್ನು ಬಳಸಿ
-   - ಆಡಿಟ್ ಟ್ರೇಲ್ಗಾಗಿ ಫಲಿತಾಂಶಗಳನ್ನು ಸಂಗ್ರಹಿಸಿ
+1. **ಸ್ವಯಂಚಾಲಿತಗೊಳಿಸಿ ಸಾಧ್ಯವಾದಷ್ಟು**
+   - CI/CD ಪೈಪ್ಲೈನ್‌ಗಳಲ್ಲಿ ಪರಿಶೀಲನೆಗಳನ್ನು ಇಂಟಿಗ್ರೇಟ್ ಮಾಡಿ
+   - ಪುನರಾವರ್ತನೆಯ ಪರೀಕ್ಷೆಗಳಿಗೆ ಸ್ಕ್ರಿಪ್ಟ್‌ಗಳನ್ನು ಬಳಸಿ
+   - ಪರಿಶೀಲನೆ ಫಲಿತಾಂಶಗಳನ್ನು ಪರಿಶೀಲನಾ ದೃಢಪಡಿಸಲು ಸಂರಕ್ಷಿಸಿ
 
 2. **ಪರಿಸರ-ನಿರ್ದಿಷ್ಟ ಪರಿಶೀಲನೆ**
-   - dev/staging/prod ಗಾಗಿ ವಿಭಿನ್ನ ತಪಾಸಣೆಗಳು
-   - ಪ್ರತಿ ಪರಿಸರಕ್ಕೆ ತಕ್ಕ ಭದ್ರತಾ ಅಗತ್ಯಗಳು
-   - ಅನುದಾನಾಂತರದ ಹೊರಗಿನ ಪರಿಸರಗಳಿಗೆ ಖರ್ಚು ಉತ್ತಮೀಕರಣ
+   - ಅಭಿವೃದ್ಧಿ/ಸ್ಟೇಜಿಂಗ್/ಉತ್ಪಾದನೆಗೆ ವಿಭಿನ್ನ ಪರೀಕ್ಷೆಗಳು
+   - ಪ್ರತಿ ಪರಿಸರಕ್ಕೆ ಸೂಕ್ತ ಭದ್ರತಾ ಅಗತ್ಯಗಳು
+   - ಉಳಿದ ಪರಿಸರಗಳಿಗೆ ವೆಚ್ಚದ ಆತ್ಮಕಷ್ಟುಮ
 
-3. **ಸಮಗ್ರ ವ್ಯಾಪ್ತಿ**
-   - ಪ್ರಮಾಣೀಕರಣ ಮತ್ತು ಅನುಮತಿಗಳು
-   - ಸಂಪನ್ಮೂಲ ಕೋಟಾಗಳು ಮತ್ತು ಲಭ್ಯತೆ
-   - ಟೆಂಪ್ಲೇಟು ಮಾನ್ಯತೆ ಮತ್ತು ಸಿಂಟ್ಯಾಕ್ಸ್
-   - ಭದ್ರತೆ ಮತ್ತು ಅನುಪಾಲನೆ ಅಗತ್ಯಗಳು
+3. **ಸಂಪೂರ್ಣ ಕವಚ**
+   - ಪ್ರಾಮಾಣೀಕರಣ ಮತ್ತು ಅನುಮತಿಗಳು
+   - ಸಂಪನ್ಮೂರು ಕೋಟ್ ಮತ್ತು ಲಭ್ಯತೆ
+   - ಟೆಂಪ್ಲೆಟ್ ಪರಿಶೀಲನೆ ಮತ್ತು ವ್ಯಾಕರಣ
+   - ಭದ್ರತೆ ಮತ್ತು ಅನುಕೂಲತೆ ಅಗತ್ಯಗಳು
 
-4. **ಸ್ಪಷ್ಟ ವರದಿ**
-   - ಬಣ್ಣ-ಕೋಡ್ ಮಾಡಿದ ಸ್ಥಿತಿ ಸೂಚಕಗಳು
-   - ಪರಿಹಾರದ ಹೆಜ್ಜೆಗಳಿಂದ ಸಂಪೂರ್ಣ ದೋಷ ಸಂದೇಶಗಳು
-   - ತ್ವರಿತ ಅಂಕಣಗಳಿಗಾಗಿ ಸಾರಾಂಶ ವರದಿಗಳು
+4. **ಸ್ವಚ್ಚ ವರದಿ ನೀಡುವುದು**
+   - ಬಣ್ಣ ಸಂಕೇತಿತ ಸ್ಥಿತಿ ಸೂಚಕಗಳು
+   - ಪರಿಹಾರ ಕ್ರಮಗಳೊಂದಿಗೆ ವಿವರವಾದ ದೋಷ ಸಂದೇಶಗಳು
+   - ತ್ವರಿತ ಮೌಲ್ಯಮಾಪನಕ್ಕಾಗಿ ಸಾರಾಂಶ ವರದಿ
 
-5. **ವೇಗವಾಗಿ ವಿಫಲಗೊಳ್ಳಿ**
-   - ಪ್ರಮುಖ ತಪಾಸಣೆಗಳು ವಿಫಲವಾದರೆ ನಿಯೋಜನೆಯನ್ನು ನಿಲ್ಲಿಸಿ
-   - ಪರಿಹಾರಕ್ಕಾಗಿ ಸ್ಪಷ್ಟ ಮಾರ್ಗದರ್ಶನವನ್ನು ಒದಗಿಸಿ
-   - ತಪಾಸಣೆಗಳನ್ನು ಸುಲಭವಾಗಿ ಮರುನೆಡಿಸಲು ಸಾದ್ಯಮಾಡಿ
+5. **ವಿಫಲವಾಗುವುದು ವೇಗವಾಗಿ**
+   - ಪ್ರಮುಖ ಪರೀಕ್ಷೆಗಳು ವಿಫಲವಾಗುವಲ್ಲಿ ನಿಯೋಜನೆ ನಿಲ್ಲಿಸು
+   - ಪರಿಹಾರಕ್ಕಾಗಿ ಸರಳ ಮಾರ್ಗದರ್ಶನ ಒದಗಿಸು
+   - ಪರೀಕ್ಷೆಗಳನ್ನು ಸರಳವಾಗಿ ಮರುಚಲಾಯಿಸಬಹುದು
 
-### ಸಾಮಾನ್ಯ ಪೂರ್ವ-ಪರೀಕ್ಷೆ ಸಮಸ್ಯೆಗಳು
+### ಸಾಮಾನ್ಯ ಪೂರ್ವ-ಯಾತ್ರೆ ದೋಷಗಳು
 
-1. **ಪರಿಶೀಲನೆಯನ್ನು ಬಿಟ್ಟುಕೊಡುವುದು** "ತ್ವರಿತ" ನಿಯೋಜನೆಗಳಿಗಾಗಿ
-2. **ಅಪರ್ಯाप्त ಅನುಮತಿಗಳು** ನಿಯೋಜನೆಯ ಮೊದಲು ಪರಿಶೀಲಿಕೆ ಮಾಡದೆ இருப்பನ್ನು
-3. **ಕೋಟಾ ಮಿತಿಗಳನ್ನು ನಿರ್ಲಕ್ಷಿಸುವುದು** ನಿಯೋಜನೆ ವಿಫಲವಾಗುವವರೆಗೆ
-4. **ಟೆಂಪ್ಲೇಟುಗಳನ್ನು CI/CD ನಲ್ಲಿ ಮಾನ್ಯಗೊಳಿಸದೆ ಇರುವುದು**
-5. **ಉತ್ಪಾದನಾ ಪರಿಸರಗಳಿಗಾಗಿ ಭದ್ರತಾ ಪರಿಶೀಲನೆಯನ್ನು ತಪ್ಪಿಸುವುದು**
-6. **ಅಪರ್ಯಾಪ್ತ ಖರ್ಚು ಅಂದಾಜು** ಬಜೆಟ್ ಅನುಮಾನಗಳಿಗೂ ಕಾರಣವಾಗುವುದು
+1. "ತ್ವರಿತ" ನಿಯೋಜನೆಗಳಿಗಾಗಿ ಪರಿಶೀಲನೆ ಬಿಟ್ಟುಹಾಕುವುದು
+2. ನಿಯೋಜನೆಯ ಮೊದಲು ಅನುಮತಿಗಳ ಅವ್ಯವಸ್ಥೆ ಪರಿಶೀಲನೆ ಇಲ್ಲ
+3. ನಿಯೋಜನೆ ವಿಫಲವಾಗುವವರೆಗೆ ಕೋಟ್ ಸೀಮಿತಗಳನ್ನು ನಿರ್ಲಕ್ಷಿಸುವುದು
+4. CI/CD ಪೈಪ್ಲೈನ್ಗಳಲ್ಲಿ ಟೆಂಪ್ಲೆಟ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸದಿರುವುದು
+5. ಉತ್ಪಾದನಾ ಪರಿಸರಗಳಿಗೆ ಭದ್ರತೆ ಪರಿಶೀಲನೆ ನೀಡದಿರುವುದು
+6. ಅತಿಯಾದ ವೆಚ್ಚ ಅಂದಾಜು, ಬಜೆಟ್ ಆಘಾತಗಳಿಗೆ ಹಾದಿ ಮಾಡುವುದು
 
 ---
 
-**ಪ್ರೊ ಟಿಪ್**: ನಿಜವಾದ ನಿಯೋಜನೆ ಜಾಬ್‌ನ ಮುನ್ನ ನಿಮ್ಮ CI/CD ಪೈಪ್‌ಲೈನಿನಲ್ಲಿ ಪೂರ್ವ-ಪರೀಕ್ಷೆಗಳನ್ನು ಪ್ರತ್ಯೇಕ ಜಾಬ್ ಆಗಿ ಓಡಿಸಿ. ಇದು ಸಮಸ್ಯೆಗಳನ್ನು ಮುಂಚಿತವಾಗಿ ಹಿಡಿಯಲು ಸಹಾಯಮಾಡುತ್ತದೆ ಮತ್ತು ಡೆವಲಪರ್‌ರಿಗೆ ವೇಗವಾದ ಪ್ರತಿಕ್ರಿಯೆ ನೀಡುತ್ತದೆ.
+**ಪ್ರೋ ಟಿಪ್**: ನಿಜವಾದ ನಿಯೋಜನೆ ಕೆಲಸಕ್ಕೆ ಮುನ್ನ ನಿಮ್ಮ CI/CD ಪೈಪ್ಲೈನಿನಲ್ಲಿ ಪೂರ್ವ-ಯಾತ್ರೆ ಪರಿಶೀಲನೆ ಕಾರ್ಯವನ್ನು ಪ್ರತ್ಯೇಕವಾಗಿ ನಡೆಸಿ. ಇದು ಸಮಸ್ಯೆಗಳನ್ನು ಬೇಗ ಹಿಡಿದುಕೊಳ್ಳಲು ಸಹಾಯಮಾಡುತ್ತದೆ ಮತ್ತು ಡೆವಲಪರ್‌ಗಳಿಗೆ ತ್ವರಿತ ಪ್ರತಿಕ್ರಿಯೆಯನ್ನು ಒದಗಿಸುತ್ತದೆ.
 
 ---
 
 **ನ್ಯಾವಿಗೇಶನ್**
-- **ಹಿಂದುಿನ ಪಾಠ**: [SKU ಆಯ್ಕೆ](sku-selection.md)
+- **ಹಿಂದಿನ ಪಾಠ**: [SKU ಆಯ್ಕೆ](sku-selection.md)
 - **ಮುಂದಿನ ಪಾಠ**: [ಚೀಟ್ ಶೀಟ್](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ಅಸ್ವೀಕರಣ**:
-ಈ ದಸ್ತಾವೇಜನ್ನು AI ಅನುವಾದ ಸೇವೆ [Co-op Translator](https://github.com/Azure/co-op-translator) ಬಳಸಿ ಅನುವಾದಿಸಲಾಗmıştır. ನಾವು ಶುದ್ಧತೆಗೆ ಪ್ರಯತ್ನಿಸಿದರೂ, ಸ್ವಯಂಚಾಲಿತ ಅನುವಾದಗಳಲ್ಲಿ ದೋಷಗಳು ಅಥವಾ ಅಸತ್ಯತೆಗಳು ಇರಬಹುದು ಎಂದು ದಯವಿಟ್ಟು ಗಮನಿಸಿ. ಮೂಲ ಭಾಷೆಯಲ್ಲಿನ ಮೂಲ ದಸ್ತಾವೇಜನ್ನು ಅಧಿಕೃತ ಮೂಲವೆಂದು ಪರಿಗಣಿಸಬೇಕು. ಗಂಭೀರ ಮಾಹಿತಿಗಾಗಿ ವೃತ್ತಿಪರ ಮಾನವ ಅನುವಾದವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಯಿತು. ಈ ಅನುವಾದದ ಬಳಕೆಯಿಂದ ಉಂಟಾಗುವ ಯಾವುದೇ ಭ್ರಮೆ ಅಥವಾ ತಪ್ಪಾದ ವ್ಯಾಖ್ಯಾನಗಳಿಗೆ ನಾವು ಜವಾಬ್ದಾರಿಯಲ್ಲ.
+**ತ್ಯಜ್ಯತೆ**:  
+ಈ ದಸ್ತಾವೇಜು AI ಅನುವಾದ ಸೇವೆ [Co-op Translator](https://github.com/Azure/co-op-translator) ಬಳಸಿ ಅನುವದಿಸಲಾಗಿದೆ. ನಾವು ನಿಖರತೆಗೆ ಪ್ರಯತ್ನಿಸುತ್ತಿದ್ದರೂ, ಸ್ವಯಂಚಾಲಿತ ಅನುವಾದಗಳಲ್ಲಿ ತಪ್ಪುಗಳು ಅಥವಾ ಅತಿವಿಶ್ಲೇಷಣೆಯಾಗಬಹುದು ಎನ್ನುವದನ್ನು ತಿಳಿದುಕೊಳ್ಳಿ. મૂળ ದಸ್ತಾವೇಜನ್ನು ಅದರ ಸ್ವಾಭಾವಿಕ ಭಾಷೆಯಲ್ಲಿ ಪ್ರಾಧಿಕೃತ ಮೂಲ ಎಂದು ಪರಿಗಣಿಸಬೇಕಾಗಿದ್ದು, ಮಹತ್ವಪೂರ್ಣ ಮಾಹಿತಿಗಾಗಿ ವೃತ್ತಿಪರ ಮಾನವ ಅನುವಾದವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ. ಈ ಅನುವಾದದಿಂದ ಉಂಟಾಗುವ ಯಾವುದೇ ತಪ್ಪು ಬಗೆಹರಿಸುವಿಕೆಗೆ ಅಥವಾ ಅರ್ಥಭ್ರಮೆಗೆ ನಾವು ಹೊಣೆಗಾರರಲ್ಲ.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

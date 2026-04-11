@@ -1,43 +1,43 @@
 # Penyediaan Sumber Daya Azure dengan AZD
 
 **Navigasi Bab:**
-- **📚 Beranda Kursus**: [AZD For Beginners](../../README.md)
-- **📖 Bab Saat Ini**: Bab 4 - Infrastruktur sebagai Kode & Penerapan
-- **⬅️ Sebelumnya**: [Panduan Penerapan](deployment-guide.md)
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 4 - Infrastruktur sebagai Kode & Penyebaran
+- **⬅️ Sebelumnya**: [Panduan Penyebaran](deployment-guide.md)
 - **➡️ Bab Berikutnya**: [Bab 5: Solusi AI Multi-Agen](../../examples/retail-scenario.md)
 - **🔧 Terkait**: [Bab 6: Validasi Pra-Penyebaran](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Pendahuluan
 
-Panduan komprehensif ini mencakup semua yang perlu Anda ketahui tentang penyediaan dan pengelolaan sumber daya Azure menggunakan Azure Developer CLI. Pelajari cara menerapkan pola Infrastructure as Code (IaC) dari pembuatan sumber daya dasar hingga arsitektur infrastruktur tingkat perusahaan yang canggih menggunakan Bicep, template ARM, Terraform, dan Pulumi.
+Panduan komprehensif ini mencakup segala hal yang perlu Anda ketahui tentang penyediaan dan pengelolaan sumber daya Azure menggunakan Azure Developer CLI. Pelajari cara menerapkan pola Infrastruktur sebagai Kode (IaC) mulai dari pembuatan sumber daya dasar hingga arsitektur infrastruktur skala perusahaan yang canggih menggunakan Bicep, ARM templates, Terraform, dan Pulumi.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan panduan ini, Anda akan:
-- Menguasai prinsip Infrastructure as Code dan penyediaan sumber daya Azure
+- Menguasai prinsip Infrastruktur sebagai Kode dan penyediaan sumber daya Azure
 - Memahami berbagai penyedia IaC yang didukung oleh Azure Developer CLI
 - Merancang dan menerapkan template Bicep untuk arsitektur aplikasi umum
-- Mengonfigurasi parameter sumber daya, variabel, dan pengaturan spesifik lingkungan
+- Mengonfigurasi parameter sumber daya, variabel, dan pengaturan khusus lingkungan
 - Menerapkan pola infrastruktur lanjutan termasuk jaringan dan keamanan
-- Mengelola siklus hidup sumber daya, pembaruan, dan resolusi ketergantungan
+- Mengelola siklus hidup sumber daya, pembaruan, dan resolusi dependensi
 
 ## Hasil Pembelajaran
 
-Setelah menyelesaikan, Anda akan mampu:
-- Merancang dan menyediakan infrastruktur Azure menggunakan Bicep dan template ARM
-- Mengonfigurasi arsitektur multi-layanan yang kompleks dengan ketergantungan sumber daya yang tepat
+Setelah penyelesaian, Anda akan mampu:
+- Merancang dan menyediakan infrastruktur Azure menggunakan Bicep dan ARM templates
+- Mengonfigurasi arsitektur multi-layanan kompleks dengan dependensi sumber daya yang tepat
 - Menerapkan template yang diparameterisasi untuk berbagai lingkungan dan konfigurasi
-- Memecahkan masalah penyediaan infrastruktur dan mengatasi kegagalan penyebaran
+- Memecahkan masalah penyediaan infrastruktur dan menyelesaikan kegagalan penyebaran
 - Menerapkan prinsip Azure Well-Architected Framework pada desain infrastruktur
 - Mengelola pembaruan infrastruktur dan menerapkan strategi versioning infrastruktur
 
-## Gambaran Penyediaan Infrastruktur
+## Ikhtisar Penyediaan Infrastruktur
 
 Azure Developer CLI mendukung beberapa penyedia Infrastructure as Code (IaC):
-- **Bicep** (direkomendasikan) - bahasa khusus domain Azure
+- **Bicep** (direkomendasikan) - bahasa spesifik domain Azure
 - **ARM Templates** - template Azure Resource Manager berbasis JSON
 - **Terraform** - alat infrastruktur multi-cloud
-- **Pulumi** - Infrastructure as Code modern dengan bahasa pemrograman
+- **Pulumi** - Infrastruktur sebagai kode modern dengan bahasa pemrograman
 
 ## Memahami Sumber Daya Azure
 
@@ -179,7 +179,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Pembuatan Sumber Daya Kondisional
+#### Pembuatan Sumber Daya Bersyarat
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -342,7 +342,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Konfigurasi Managed Identity
+### Konfigurasi Identitas Terkelola
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -370,7 +370,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 
 ## 🌍 Jaringan dan Konektivitas
 
-### Konfigurasi Virtual Network
+### Konfigurasi Jaringan Virtual
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -561,9 +561,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Konfigurasi Spesifik Lingkungan
+## 🔧 Konfigurasi Khusus Lingkungan
 
-### File Parameter untuk Lingkungan yang Berbeda
+### Berkas Parameter untuk Berbagai Lingkungan
 ```json
 // infra/main.parameters.dev.json
 {
@@ -617,7 +617,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Penyediaan Sumber Daya Kondisional
+### Penyediaan Sumber Daya Bersyarat
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -759,38 +759,37 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ### Pratinjau Perubahan Infrastruktur Sebelum Penyebaran
 
-Fitur `azd provision --preview` memungkinkan Anda **mensimulasikan penyediaan infrastruktur** sebelum benar-benar menerapkan sumber daya. Fungsinya mirip dengan `terraform plan` atau `bicep what-if`, memberikan Anda tampilan **dry-run** dari perubahan apa yang akan dilakukan pada lingkungan Azure Anda.
+Fitur `azd provision --preview` memungkinkan Anda **mensimulasikan penyediaan infrastruktur** sebelum benar-benar menerapkan sumber daya. Ini mirip dengan `terraform plan` atau `bicep what-if`, memberi Anda tampilan **dry-run** tentang perubahan yang akan dibuat di lingkungan Azure Anda.
 
 #### 🛠️ Apa yang Dilakukannya
 - **Menganalisis template IaC Anda** (Bicep atau Terraform)
 - **Menampilkan pratinjau perubahan sumber daya**: penambahan, penghapusan, pembaruan
-- **Tidak menerapkan perubahan** — ini bersifat baca saja dan aman untuk dijalankan
+- **Tidak menerapkan perubahan** — bersifat baca-saja dan aman dijalankan
 
-#### � Kasus Penggunaan
+#### Kasus Penggunaan
 ```bash
-# Pratinjau perubahan infrastruktur sebelum penerapan
+# Pratinjau perubahan infrastruktur sebelum penyebaran
 azd provision --preview
 
-# Pratinjau dengan keluaran terperinci
-azd provision --preview --output json
-
 # Pratinjau untuk lingkungan tertentu
-azd provision --preview --environment production
+azd provision --preview -e production
 ```
 
 Perintah ini membantu Anda:
 - **Memvalidasi perubahan infrastruktur** sebelum mengkomit sumber daya
-- **Menangkap konfigurasi yang salah lebih awal** dalam siklus pengembangan
+- **Mendeteksi konfigurasi yang salah lebih awal** dalam siklus pengembangan
 - **Berkolaborasi dengan aman** dalam lingkungan tim
-- **Memastikan penerapan prinsip least-privilege** tanpa kejutan
+- **Memastikan penyebaran dengan hak istimewa minimum** tanpa kejutan
 
 Ini sangat berguna ketika:
 - Bekerja dengan lingkungan multi-layanan yang kompleks
 - Melakukan perubahan pada infrastruktur produksi
 - Memvalidasi modifikasi template sebelum persetujuan PR
-- Melatih anggota tim baru tentang pola infrastruktur
+- Melatih anggota tim baru mengenai pola infrastruktur
 
 ### Contoh Output Pratinjau
+Output pratinjau yang tepat bervariasi menurut penyedia dan struktur proyek, tetapi hasilnya harus mengidentifikasi perubahan yang diusulkan dengan jelas sebelum apa pun diterapkan.
+
 ```bash
 $ azd provision --preview
 
@@ -809,7 +808,6 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
@@ -822,12 +820,12 @@ The following resources will be destroyed:
 # Pratinjau perubahan infrastruktur terlebih dahulu (DISARANKAN)
 azd provision --preview
 
-# Terapkan perubahan setelah konfirmasi pratinjau
+# Terapkan perubahan setelah pratinjau dikonfirmasi
 azd provision --confirm-with-no-prompt
 
 # Untuk rollback, gunakan Git untuk membatalkan perubahan infrastruktur:
 git revert HEAD  # Batalkan commit infrastruktur terakhir
-azd provision    # Terapkan keadaan infrastruktur sebelumnya
+azd provision    # Terapkan status infrastruktur sebelumnya
 ```
 
 ### Migrasi Basis Data
@@ -872,7 +870,7 @@ var naming = {
 }
 ```
 
-### 2. Strategi Penandaan
+### 2. Strategi Pemberian Tag
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -918,10 +916,10 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Langkah Selanjutnya
 
-- [Perencanaan Pra-penyebaran](../chapter-06-pre-deployment/capacity-planning.md) - Validasi ketersediaan sumber daya
+- [Perencanaan Pra-penyebaran](../chapter-06-pre-deployment/capacity-planning.md) - Memvalidasi ketersediaan sumber daya
 - [Masalah Umum](../chapter-07-troubleshooting/common-issues.md) - Memecahkan masalah infrastruktur
-- [Panduan Debugging](../chapter-07-troubleshooting/debugging.md) - Menangani masalah penyediaan
-- [Pemilihan SKU](../chapter-06-pre-deployment/sku-selection.md) - Pilih tingkatan layanan yang sesuai
+- [Panduan Debugging](../chapter-07-troubleshooting/debugging.md) - Men-debug masalah penyediaan
+- [Pemilihan SKU](../chapter-06-pre-deployment/sku-selection.md) - Memilih tingkatan layanan yang sesuai
 
 ## Sumber Daya Tambahan
 
@@ -933,12 +931,12 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Navigasi**
-- **Pelajaran Sebelumnya**: [Panduan Penerapan](deployment-guide.md)
+- **Pelajaran Sebelumnya**: [Panduan Penyebaran](deployment-guide.md)
 - **Pelajaran Berikutnya**: [Perencanaan Kapasitas](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Penafian:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI Co-op Translator (https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk memastikan ketepatan, harap diingat bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi penting, disarankan menggunakan jasa penerjemah profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul akibat penggunaan terjemahan ini.
+**Disclaimer**:
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya mencapai ketepatan, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

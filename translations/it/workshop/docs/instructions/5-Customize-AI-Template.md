@@ -1,28 +1,28 @@
-# 5. Personalizzare un modello
+# 5. Personalizzare un Modello
 
 !!! tip "ENTRO LA FINE DI QUESTO MODULO SARAI IN GRADO DI"
 
     - [ ] Esplorato le capacità predefinite degli agenti AI
-    - [ ] Aggiunto AI Search con il tuo indice
-    - [ ] Attivato e analizzato le metriche di tracciamento
-    - [ ] Eseguito un ciclo di valutazione
+    - [ ] Aggiunta la Ricerca AI con il tuo indice
+    - [ ] Attivato e analizzato le metriche di Tracing
+    - [ ] Eseguita una run di valutazione
     - [ ] Eseguita una scansione di red-teaming
-    - [ ] **Lab 5: Creato un piano di personalizzazione** 
+    - [ ] **Lab 5: Creato un Piano di Personalizzazione** 
 
 ---
 
-## 5.1 Capacità degli agenti AI
+## 5.1 Capacità degli Agenti AI
 
-!!! success "Lo abbiamo completato nel Lab 01"
+!!! success "Abbiamo completato questo nel Lab 01"
 
-- **File Search**: ricerca di file integrata di OpenAI per il recupero delle conoscenze
-- **Citations**: attribuzione automatica delle fonti nelle risposte
-- **Customizable Instructions**: modificare il comportamento e la personalità dell'agente
-- **Tool Integration**: sistema di strumenti estensibile per funzionalità personalizzate
+- **File Search**: File search integrata di OpenAI per il recupero delle conoscenze
+- **Citations**: Attribuzione automatica delle fonti nelle risposte
+- **Customizable Instructions**: Modifica del comportamento e della personalità dell'agente
+- **Tool Integration**: Sistema di strumenti estendibile per capacità personalizzate
 
 ---
 
-## 5.2 Opzioni di recupero della conoscenza
+## 5.2 Opzioni di Recupero della Conoscenza
 
 !!! task "Per completare questo dobbiamo apportare modifiche e ridistribuire"    
     
@@ -40,22 +40,22 @@
 
 ---
 
-**OpenAI File Search (Predefinito):**
+**OpenAI File Search (Default):**
 
-- Integrato negli agenti Foundry
+- Integrato in Foundry Agents
 - Elaborazione e indicizzazione automatica dei documenti
 - Nessuna configurazione aggiuntiva richiesta
 
 **Azure AI Search (Opzionale):**
 
-- Ricerca semantica e vettoriale ibrida
-- Gestione di indici personalizzati
-- Funzionalità avanzate di ricerca
+- Ricerca ibrida semantica e vettoriale
+- Gestione personalizzata degli indici
+- Funzionalità di ricerca avanzate
 - Richiede `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
-## 5.3 [Tracciamento e monitoraggio](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [Tracciamento & Monitoraggio](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
 !!! task "Per completare questo dobbiamo apportare modifiche e ridistribuire"    
     
@@ -64,14 +64,14 @@
     azd deploy
     ```
 
-**Tracciamento:**
+**Tracing:**
 
 - Integrazione OpenTelemetry
 - Tracciamento delle richieste/risposte
-- Metriche delle prestazioni
+- Metriche di prestazioni
 - Disponibile nel portale Microsoft Foundry
 
-**Registrazione:**
+**Logging:**
 
 - Log dell'applicazione in Container Apps
 - Logging strutturato con ID di correlazione
@@ -79,15 +79,15 @@
 
 ---
 
-## 5.4 [Valutazione degli agenti](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
+## 5.4 [Valutazione dell'Agente](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
-**Valutazione locale:**
+**Valutazione Locale:**
 
 - Valutatori integrati per la valutazione della qualità
 - Script di valutazione personalizzati
 - Benchmark delle prestazioni
 
-**Monitoraggio continuo:**
+**Monitoraggio Continuo:**
 
 - Valutazione automatica delle interazioni live
 - Monitoraggio delle metriche di qualità
@@ -96,70 +96,70 @@
 **Integrazione CI/CD:**
 
 - Workflow GitHub Actions
-- Testing e valutazione automatizzati
+- Test e valutazioni automatizzate
 - Test di confronto statistico
 
 ---
 
 ## 5.5 [Agente di Red Teaming AI](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**Red Teaming AI:**
+**AI Red Teaming:**
 
 - Scansione di sicurezza automatizzata
-- Valutazione dei rischi per i sistemi AI
+- Valutazione del rischio per i sistemi AI
 - Valutazione della sicurezza su più categorie
 
 **Autenticazione:**
 
 - Managed Identity per i servizi Azure
 - Autenticazione opzionale di Azure App Service
-- Fallback a basic auth per lo sviluppo
+- Fallback basic auth per lo sviluppo
 
 
 
-!!! quote "ENTRO LA FINE DI QUESTO LAB DOVRESTI AVERE"
+!!! quote "ENTRO LA FINE DI QUESTO LAB DOVRESTI AVERNE"
     - [ ] Definisci i requisiti del tuo scenario
-    - [ ] Variabili env personalizzate (config)
-    - [ ] Istruzioni dell'agente personalizzate (attività)
+    - [ ] Variabili di ambiente personalizzate (config)
+    - [ ] Istruzioni dell'agente personalizzate (task)
     - [ ] Distribuito il template personalizzato (app)
-    - [ ] Completate le attività post-distribuzione (manuale)
-    - [ ] Esegui una valutazione di prova
+    - [ ] Completate attività post-distribuzione (manuale)
+    - [ ] Eseguita una valutazione di prova
 
-Questo esempio dimostra come personalizzare il template per un caso d'uso aziendale nel settore retail con due agenti specializzati e più deployment di modelli.
+Questo esempio dimostra la personalizzazione del template per un caso d'uso aziendale nel settore retail con due agenti specializzati e più deployment di modelli.
 
 ---
 
-## 5.6 Personalizzalo per te!
+## 5.6 Personalizzalo per Te!
 
-### 5.6.1. Requisiti dello scenario
+### 5.6.1. Requisiti dello Scenario
 
-#### **Distribuzioni degli agenti:** 
+#### **Agent Deployments:** 
 
-   - Shopper Agent: Aiuta i clienti a trovare e confrontare i prodotti
-   - Loyalty Agent: Gestisce i premi e le promozioni dei clienti
+   - Agente Shopper: Aiuta i clienti a trovare e confrontare i prodotti
+   - Agente Loyalty: Gestisce ricompense e promozioni per i clienti
 
-#### **Distribuzioni dei modelli:**
+#### **Model Deployments:**
 
-   - `gpt-4.1`: modello chat primario
-   - `o3`: modello di ragionamento per query complesse
-   - `gpt-4.1-nano`: modello leggero per interazioni semplici
-   - `text-embedding-3-large`: embedding di alta qualità per la ricerca
+   - `gpt-4.1`: Modello principale per la chat
+   - `o3`: Modello di ragionamento per query complesse
+   - `gpt-4.1-nano`: Modello leggero per interazioni semplici
+   - `text-embedding-3-large`: Embedding di alta qualità per la ricerca
 
-#### **Funzionalità:**
+#### **Features:**
 
    - Tracciamento e monitoraggio abilitati
    - AI Search per il catalogo prodotti
-   - Framework di valutazione per la garanzia della qualità
+   - Framework di valutazione per assicurazione della qualità
    - Red teaming per la validazione della sicurezza
 
 ---
 
-### 5.6.2 Implementazione dello scenario
+### 5.6.2 Implementazione dello Scenario
 
 
-#### 5.6.2.1. Configurazione pre-distribuzione
+#### 5.6.2.1. Config Pre-Distribuzione
 
-Create a setup script (`setup-retail.sh`)
+Create uno script di setup (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -167,7 +167,7 @@ Create a setup script (`setup-retail.sh`)
 # Imposta il nome dell'ambiente
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Configura la regione (scegli in base alla disponibilità del modello)
+# Configura la regione (scegliere in base alla disponibilità del modello)
 azd env set AZURE_LOCATION "eastus2"
 
 # Abilita tutti i servizi opzionali
@@ -175,7 +175,7 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Configura il modello chat principale (gpt-4.1 come il più vicino disponibile a gpt-4.1)
+# Configura il modello principale per la chat (gpt-4.1 come il più vicino disponibile a gpt-4.1)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
@@ -198,7 +198,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2: Istruzioni per gli agenti
+#### 5.6.2.2: Istruzioni per gli Agenti
 
 Create `custom-agents/shopper-agent-instructions.md`:
 
@@ -248,7 +248,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: Script di distribuzione
+#### 5.6.2.3: Script di Distribuzione
 
 Create `deploy-retail.sh`:
 
@@ -275,7 +275,7 @@ echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Controllare la quota nella regione selezionata
+# Verificare la quota nella regione selezionata
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -300,7 +300,7 @@ echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
 # Ottenere l'URL dell'app web
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -321,7 +321,7 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Configurazione post-distribuzione
+#### 5.6.2.4: Config Post-Distribuzione
 
 Create `configure-retail-agents.sh`:
 
@@ -330,7 +330,7 @@ Create `configure-retail-agents.sh`:
 
 echo "🔧 Configuring retail agents..."
 
-# Ottieni informazioni sulla distribuzione
+# Ottieni informazioni sul deployment
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
@@ -378,7 +378,7 @@ echo "
 "
 ```
 
-### 5.6.3: Test e convalida
+### 5.6.3: Test e Validazione
 
 Create `test-retail-deployment.sh`:
 
@@ -392,7 +392,7 @@ echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
 # Verifica la disponibilità dell'applicazione web
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -429,31 +429,31 @@ Next steps:
 
 ---
 
-### 5.6.4 Risultati attesi
+### 5.6.4 Risultati Attesi
 
-After following this implementation guide, you will have:
+Dopo aver seguito questa guida di implementazione, avrai:
 
-1. **Infrastruttura distribuita:**
+1. **Infrastruttura Distribuita:**
 
-      - Progetto Microsoft Foundry con distribuzioni di modelli
+      - Progetto Microsoft Foundry con deployment di modelli
       - Container Apps che ospitano l'applicazione web
       - Servizio AI Search per il catalogo prodotti
       - Application Insights per il monitoraggio
 
-2. **Agente iniziale:**
+2. **Agente Iniziale:**
 
-      - Shopper Agent configurato con istruzioni di base
+      - Agente Shopper configurato con istruzioni di base
       - Capacità di ricerca file abilitata
       - Tracciamento e monitoraggio configurati
 
-3. **Pronto per la personalizzazione:**
+3. **Pronto per la Personalizzazione:**
 
-      - Framework per aggiungere il Loyalty Agent
+      - Framework per aggiungere l'Agente Loyalty
       - Template di istruzioni personalizzate
-      - Script per test e convalida
-      - Impostazioni per monitoraggio e valutazione
+      - Script di test e validazione
+      - Configurazione per monitoraggio e valutazione
 
-4. **Prontezza per la produzione:**
+4. **Prontezza per la Produzione:**
 
       - Scansione di sicurezza con red teaming
       - Monitoraggio delle prestazioni
@@ -466,5 +466,5 @@ Questo esempio dimostra come il template AZD possa essere esteso e personalizzat
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Tuttavia, nonostante ci impegniamo per garantire l'accuratezza, si prega di notare che le traduzioni automatizzate possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Pur impegnandoci per l'accuratezza, si prega di notare che le traduzioni automatizzate possono contenere errori o imprecisioni. Il documento originale nella sua lingua nativa deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un essere umano. Non siamo responsabili per eventuali malintesi o interpretazioni errate derivanti dall'uso di questa traduzione.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

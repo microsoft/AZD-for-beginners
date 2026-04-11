@@ -1,13 +1,13 @@
 # 5. I-customize ang Template
 
-!!! tip "SA PAGWAWAKAS NG MODULONG ITO MAAARI MO NANG:"
-
-    - [ ] Nasuri ang default na kakayahan ng AI Agent
-    - [ ] Idinagdag ang AI Search gamit ang sarili mong index
-    - [ ] Na-activate at na-analisa ang mga sukatan ng tracing
+!!! tip "PAGKATAPOS NG MODULONG ITO, MAGAGAWA MO"
+    
+    - [ ] Sinuri ang mga default na kakayahan ng AI Agent
+    - [ ] Idinagdag ang AI Search gamit ang iyong sariling index
+    - [ ] Na-activate at na-analisa ang mga Tracing metrics
     - [ ] Isinagawa ang isang evaluation run
     - [ ] Isinagawa ang isang red-teaming scan
-    - [ ] **Lab 5: Nilikha ang Plano ng Pag-customize** 
+    - [ ] **Lab 5: Nilikha ang isang Plano ng Pag-customize** 
 
 ---
 
@@ -15,16 +15,16 @@
 
 !!! success "Natapos namin ito sa Lab 01"
 
-- **File Search**: Built-in ng OpenAI para sa pagkuha ng kaalaman mula sa mga file
-- **Citations**: Awtomatikong paglalagay ng pinanggalingan sa mga tugon
-- **Customizable Instructions**: Baguhin ang pag-uugali at personalidad ng agent
-- **Tool Integration**: Pinalalawak na sistema ng mga tool para sa mga pasadyang kakayahan
+- **File Search**: Built-in na file search ng OpenAI para sa pagkuha ng kaalaman
+- **Citations**: Awtomatikong atribusyon ng pinagkunan sa mga tugon
+- **Customizable Instructions**: I-customize ang ugali at personalidad ng agent
+- **Tool Integration**: Napapalawak na sistema ng mga tool para sa pasadyang kakayahan
 
 ---
 
 ## 5.2 Mga Opsyon sa Pagkuha ng Kaalaman
 
-!!! task "Upang makumpleto ito kailangan nating gumawa ng mga pagbabago at mag-redeploy"    
+!!! task "Upang makumpleto ito, kailangan nating gumawa ng mga pagbabago at muling i-deploy"    
     
     ```bash title=""
     # Set environment variables
@@ -42,22 +42,22 @@
 
 **OpenAI File Search (Default):**
 
-- Built-in sa Foundry Agents
-- Awtomatikong pagproseso at pag-index ng mga dokumento
-- Walang karagdagang konfigurasiyon na kinakailangan
+- Naka-built-in sa Foundry Agents
+- Awtomatikong pagproseso at pag-index ng dokumento
+- Walang karagdagang kinakailangang konfigurasyon
 
-**Azure AI Search (Optional):**
+**Azure AI Search (Opsyonal):**
 
 - Hybrid na semantic at vector na paghahanap
-- Pamamahala ng pasadyang index
+- Pasadyang pamamahala ng index
 - Mga advanced na kakayahan sa paghahanap
 - Nangangailangan ng `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
-## 5.3 [Tracing at Pagsubaybay](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [Pagsubaybay at Pagmomonitor](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "Upang makumpleto ito kailangan nating gumawa ng mga pagbabago at mag-redeploy"    
+!!! task "Upang makumpleto ito, kailangan nating gumawa ng mga pagbabago at muling i-deploy"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
@@ -67,104 +67,104 @@
 **Tracing:**
 
 - Integrasyon ng OpenTelemetry
-- Pagsubaybay sa request/response
+- Pagsubaybay sa kahilingan/tugon
 - Mga sukatan ng pagganap
 - Magagamit sa Microsoft Foundry portal
 
 **Logging:**
 
-- Mga application log sa Container Apps
-- Istrakturadong pag-log na may mga correlation ID
-- Pagtingin ng mga log nang real-time at historikal
+- Mga log ng application sa Container Apps
+- Istrakturang pag-log na may mga correlation ID
+- Tingnan ang mga log nang real-time at historikal
 
 ---
 
 ## 5.4 [Pagsusuri ng Agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
-**Lokal na Pagsusuri:**
+**Lokal na Ebalwasyon:**
 
-- Mga built-in evaluator para sa pagtatasa ng kalidad
-- Mga pasadyang script ng pagsusuri
-- Pagsusukat ng pagganap
+- Mga built-in na evaluator para sa pagtatasa ng kalidad
+- Pasadyang mga script ng ebalwasyon
+- Benchmarking ng pagganap
 
-**Patuloy na Pagsubaybay:**
+**Tuloy-tuloy na Pagmomonitor:**
 
-- Awtomatikong pagsusuri ng mga aktwal na interaksyon
-- Pagsubaybay sa mga sukatan ng kalidad
-- Pag-detect ng regression sa pagganap
+- Awtomatikong ebalwasyon ng mga live na interaksyon
+- Pagsubaybay ng mga sukatan ng kalidad
+- Pagtuklas ng regression sa pagganap
 
 **Integrasyon ng CI/CD:**
 
-- GitHub Actions workflow
-- Awtomatikong pagsubok at pagsusuri
-- Estadistikal na paghambing na pagsusuri
+- Workflow ng GitHub Actions
+- Awtomatikong testing at ebalwasyon
+- Pagsusuring paghahambing na estadistikal
 
 ---
 
-## 5.5 [Ahente ng AI Red Teaming](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [AI Red Teaming Agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
 **AI Red Teaming:**
 
-- Awtomatikong pag-scan sa seguridad
+- Awtomatikong pag-scan para sa seguridad
 - Pagtatasa ng panganib para sa mga sistema ng AI
-- Pagsusuri ng kaligtasan sa iba't ibang kategorya
+- Ebalwasyon ng kaligtasan sa iba't ibang kategorya
 
-**Authentication:**
+**Pagpapatunay:**
 
 - Managed Identity para sa mga serbisyo ng Azure
-- Opsyonal na authentication ng Azure App Service
-- Basic auth fallback para sa development
+- Opsyonal na pagpapatunay ng Azure App Service
+- Basic auth bilang fallback para sa pag-develop
 
 
 
-!!! quote "SA PAGWAWAKAS NG LAB NA ITO DAPAT AY NAGAWA MO NA"
-    - [ ] Tukuyin ang iyong mga kinakailangan sa scenario
-    - [ ] Na-customize ang mga env variable (config)
-    - [ ] Na-customize ang mga instruksyon ng agent (task)
+!!! quote "SA PAGWAWAKAS NG LAB NA ITO, DAPAT MERON KA NG"
+    - [ ] Tukuyin ang iyong mga kinakailangan para sa senaryo
+    - [ ] Naka-customize na mga env variable (config)
+    - [ ] Naka-customize na mga instruksyon ng agent (task)
     - [ ] Na-deploy ang na-customize na template (app)
-    - [ ] Nakumpleto ang mga post-deployment na gawain (manwal)
-    - [ ] Napatakbo ang isang test evaluation
+    - [ ] Nakumpleto ang mga post-deployment na gawain (manual)
+    - [ ] Nagsagawa ng test evaluation
 
-Ang halimbawang ito ay nagpapakita ng pag-customize ng template para sa isang enterprise retail na kaso ng paggamit na may dalawang espesyal na ahente at maraming deployment ng modelo.
+Ang halimbawang ito ay nagpapakita ng pag-customize ng template para sa isang enterprise retail na kaso ng paggamit na may dalawang specialized agents at maraming deployment ng mga modelo.
 
 ---
 
-## 5.6 I-customize Ito Para sa Iyo!
+## 5.6 I-customize Para Sa Iyo!
 
-### 5.6.1 Mga Kinakailangan ng Scenario
+### 5.6.1. Mga Kinakailangan sa Senaryo
 
-#### **Deployment ng mga Ahente:** 
+#### **Pag-deploy ng Agent:** 
 
-   - Shopper Agent: Tinutulungan ang mga customer na maghanap at maghambing ng mga produkto
-   - Loyalty Agent: Namamahala sa mga gantimpala at promosyon ng mga customer
+   - Shopper Agent: Tinutulungan ang mga customer na maghanap at magkumpara ng mga produkto
+   - Loyalty Agent: Namamahala ng mga gantimpala at promosyon ng customer
 
-#### **Deployment ng mga Modelo:**
+#### **Pag-deploy ng Modelo:**
 
    - `gpt-4.1`: Pangunahing chat na modelo
-   - `o3`: Modelong pang-reasoning para sa mga kumplikadong query
-   - `gpt-4.1-nano`: Magaan na modelo para sa simpleng mga interaksyon
+   - `o3`: Modelo ng pangangatwiran para sa mga komplikadong query
+   - `gpt-4.1-nano`: Magaan na modelo para sa mga simpleng interaksyon
    - `text-embedding-3-large`: Mataas na kalidad na embeddings para sa paghahanap
 
 #### **Mga Tampok:**
 
-   - Naka-enable ang tracing at pagsubaybay
+   - Pinagana ang tracing at pagmomonitor
    - AI Search para sa katalogo ng produkto
-   - Framework ng pagsusuri para sa pagsiguro ng kalidad
+   - Framework ng ebalwasyon para sa quality assurance
    - Red teaming para sa pag-validate ng seguridad
 
 ---
 
-### 5.6.2 Implementasyon ng Scenario
+### 5.6.2 Implementasyon ng Senaryo
 
 
-#### 5.6.2.1. Pre-Deployment Config
+#### 5.6.2.1. Paunang Konfigurasyon bago i-deploy
 
 Create a setup script (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
-# Itakda ang pangalan ng environment
+# Itakda ang pangalan ng kapaligiran
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
 # I-configure ang rehiyon (pumili batay sa pagkakaroon ng modelo)
@@ -175,13 +175,13 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# I-configure ang pangunahing modelong chat (gpt-4.1 bilang pinakamalapit na magagamit sa gpt-4.1)
+# I-configure ang pangunahing chat na modelo (gpt-4.1 bilang pinakamalapit na magagamit sa gpt-4.1)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# I-configure ang modelong embedding para sa pinahusay na paghahanap
+# I-configure ang embedding na modelo para sa pinahusay na paghahanap
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
@@ -189,7 +189,7 @@ azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 # Itakda ang pangalan ng ahente (lilikha ng unang ahente)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# I-configure ang index ng paghahanap
+# I-configure ang indeks ng paghahanap
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -198,7 +198,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2: Mga Instruksyon ng Ahente
+#### 5.6.2.2: Mga Instruksyon ng Agent
 
 Create `custom-agents/shopper-agent-instructions.md`:
 
@@ -248,7 +248,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: Script ng Deployment
+#### 5.6.2.3: Script ng Pag-deploy
 
 Create `deploy-retail.sh`:
 
@@ -258,7 +258,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# Suriin ang mga prerekisito
+# Suriin ang mga kinakailangan
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -275,7 +275,7 @@ echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Suriin ang kuota sa napiling rehiyon
+# Suriin ang quota sa napiling rehiyon
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -295,12 +295,12 @@ fi
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Kunin ang mga resulta ng pag-deploy
+# Kunin ang mga output ng pag-deploy
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
 # Kunin ang URL ng web app
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -321,7 +321,7 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Post-Deployment Config
+#### 5.6.2.4: Konfigurasyon Pagkatapos ng Pag-deploy
 
 Create `configure-retail-agents.sh`:
 
@@ -337,7 +337,7 @@ AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | t
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# Mga tagubilin para sa manu-manong pagsasaayos
+# Mga tagubilin para sa manwal na konfigurasyon
 echo "
 🤖 Agent Configuration:
 
@@ -378,7 +378,7 @@ echo "
 "
 ```
 
-### 5.6.3: Pagsubok at Pagpapatunay
+### 5.6.3: Pagsusuri at Pagpapatunay
 
 Create `test-retail-deployment.sh`:
 
@@ -387,12 +387,12 @@ Create `test-retail-deployment.sh`:
 
 echo "🧪 Testing retail deployment..."
 
-# Tiyakin na nakatakda ang mga variable ng kapaligiran
+# Tiyakin na nakatakda ang mga environment variable
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Subukan kung magagamit ang web application
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# Subukan kung available ang web application
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -431,40 +431,40 @@ Next steps:
 
 ### 5.6.4 Mga Inaasahang Kinalabasan
 
-Pagkatapos sundin ang gabay na implementasyong ito, magkakaroon ka ng:
+Pagkatapos sundin ang gabay na implementasyon na ito, magkakaroon ka ng:
 
 1. **Na-deploy na Imprastruktura:**
 
-      - Microsoft Foundry project na may mga deployment ng modelo
-      - Container Apps na nagho-host ng web application
-      - AI Search service para sa katalogo ng produkto
-      - Application Insights para sa pagsubaybay
+      - Microsoft Foundry project with model deployments
+      - Container Apps hosting the web application
+      - AI Search service for product catalog
+      - Application Insights for monitoring
 
-2. **Paunang Ahente:**
+2. **Paunang Agent:**
 
-      - Shopper Agent na naka-configure na may mga pangunahing instruksyon
-      - Naka-enable ang kakayahan sa file search
-      - Naka-configure ang tracing at pagsubaybay
+      - Shopper Agent na naka-configure na may pangunahing mga instruksyon
+      - Pinagana ang kakayahan sa file search
+      - Naka-configure ang tracing at pagmomonitor
 
 3. **Handa para sa Pag-customize:**
 
-      - Framework para sa pagdaragdag ng Loyalty Agent
+      - Framework para sa pagdagdag ng Loyalty Agent
       - Mga template ng pasadyang instruksyon
-      - Mga script para sa pagsubok at pagpapatunay
-      - Setup para sa pagsubaybay at pagsusuri
+      - Mga script para sa pagsusuri at pagpapatunay
+      - Setup ng pagmomonitor at ebalwasyon
 
 4. **Kahandaan para sa Produksyon:**
 
       - Pag-scan ng seguridad gamit ang red teaming
-      - Pagsubaybay sa pagganap
-      - Framework para sa pagsusuri ng kalidad
+      - Pagmomonitor ng pagganap
+      - Framework ng ebalwasyon ng kalidad
       - Skalableng arkitektura
 
-Ipinapakita ng halimbawang ito kung paano maaaring palawakin at i-customize ang AZD template para sa mga tiyak na enterprise na scenario habang pinapanatili ang mga pinakamahusay na kasanayan para sa seguridad, pagsubaybay, at kakayahang mag-scale.
+Ipinapakita ng halimbawang ito kung paano maaaring palawakin at i-customize ang AZD template para sa mga partikular na senaryong enterprise habang pinananatili ang mga pinakamahuhusay na praktis para sa seguridad, pagmomonitor, at kakayahang mag-scale.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Paunawa**:
-Ang dokumentong ito ay isinalin gamit ang serbisyo ng pagsasaling AI na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, mangyaring tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o hindi pagkakatumpakan. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na pinagmumulan ng awtoridad. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin na ginawa ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmumula sa paggamit ng pagsasaling ito.
+**Disclaimer**:
+Ang dokumentong ito ay isinalin gamit ang serbisyo ng AI na pagsasalin na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kaming maging tumpak, pakatandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o di-tumpak na impormasyon. Ang orihinal na dokumento sa kanyang katutubong wika ang dapat ituring na pinakapinagkakatiwalaang sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasaling-tao. Hindi kami mananagot para sa anumang hindi pagkakaunawaan o maling interpretasyon na nagmula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

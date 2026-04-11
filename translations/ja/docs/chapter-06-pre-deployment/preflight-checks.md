@@ -1,67 +1,67 @@
-# AZD デプロイ向けの事前チェック
+# AZD デプロイの事前チェック
 
 **Chapter Navigation:**
-- **📚 コースホーム**: [AZD For Beginners](../../README.md)
-- **📖 現在の章**: Chapter 6 - 事前デプロイ検証と計画
-- **⬅️ 前へ**: [SKU 選択](sku-selection.md)
-- **➡️ 次の章**: [Chapter 7: トラブルシューティング](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 関連**: [第4章: 展開ガイド](../chapter-04-infrastructure/deployment-guide.md)
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: 第6章 - デプロイ前の検証と計画
+- **⬅️ Previous**: [SKU の選択](sku-selection.md)
+- **➡️ Next Chapter**: [第7章: トラブルシューティング](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 Related**: [第4章: デプロイガイド](../chapter-04-infrastructure/deployment-guide.md)
 
 ## はじめに
 
-本ガイドは、Azure Developer CLI のデプロイを開始する前に成功を確実にするための事前検証スクリプトと手順を提供します。認証、リソースの可用性、クォータ、セキュリティ準拠、パフォーマンス要件の自動チェックを実装して、デプロイ失敗を防ぎ、成功率を最適化する方法を学びます。
+この包括的なガイドは、Azure Developer CLI デプロイの開始前に成功を確実にするための事前検証スクリプトと手順を提供します。認証、リソースの可用性、クォータ、セキュリティ準拠、パフォーマンス要件に対する自動チェックを実装して、デプロイ失敗を防ぎ、成功率を最適化する方法を学びます。
 
 ## 学習目標
 
-このガイドを完了すると、次のことができるようになります:
-- 自動化された事前デプロイ検証技術とスクリプトを習得する
-- 認証、権限、クォータに関する包括的なチェック戦略を理解する
-- リソースの可用性と容量検証手順を実装する
-- 組織ポリシーに対するセキュリティおよびコンプライアンスチェックを設定する
-- コスト見積りと予算検証のワークフローを設計する
-- CI/CD パイプライン向けにカスタムの事前チェック自動化を作成する
+このガイドを完了すると、以下を習得します:
+- 自動化された事前デプロイ検証技術とスクリプトの習得
+- 認証、権限、クォータに関する包括的なチェック戦略の理解
+- リソース可用性と容量検証手順の実装
+- 組織ポリシーに対するセキュリティおよび準拠チェックの設定
+- コスト見積りと予算検証ワークフローの設計
+- CI/CD パイプライン向けのカスタム事前チェック自動化の作成
 
 ## 学習成果
 
 完了後、以下ができるようになります:
-- 包括的な事前検証スクリプトを作成して実行する
+- 包括的な事前検証スクリプトを作成および実行する
 - 異なるデプロイシナリオ向けの自動チェックワークフローを設計する
 - 環境固有の検証手順とポリシーを実装する
-- デプロイ準備状況のための事前監視とアラートを構成する
+- デプロイ準備状況のためのプロアクティブな監視とアラートを構成する
 - 事前デプロイの問題をトラブルシュートし是正措置を実施する
-- 事前チェックを DevOps パイプラインと自動化ワークフローに統合する
+- 事前チェックを DevOps パイプラインや自動化ワークフローに統合する
 
 ## 目次
 
-- [Overview](../../../../docs/chapter-06-pre-deployment)
-- [Automated Pre-flight Script](../../../../docs/chapter-06-pre-deployment)
-- [Manual Validation Checklist](../../../../docs/chapter-06-pre-deployment)
-- [Environment Validation](../../../../docs/chapter-06-pre-deployment)
-- [Resource Validation](../../../../docs/chapter-06-pre-deployment)
-- [Security & Compliance Checks](../../../../docs/chapter-06-pre-deployment)
-- [Performance & Capacity Planning](../../../../docs/chapter-06-pre-deployment)
-- [Troubleshooting Common Issues](../../../../docs/chapter-06-pre-deployment)
+- [Overview](#overview)
+- [Automated Pre-flight Script](#automated-pre-flight-script)
+- [Manual Validation Checklist](#codeblock1)
+- [Environment Validation](#✅-backup-recovery)
+- [Resource Validation](#production-environment-validation)
+- [Security & Compliance Checks](#security--compliance-checks)
+- [Performance & Capacity Planning](#performance--capacity-planning)
+- [Troubleshooting Common Issues](#troubleshooting-common-issues)
 
 ---
 
 ## Overview
 
-事前チェックは、デプロイ前に実施される重要な検証で、以下を保証します:
+事前チェックは、デプロイ前に実行される重要な検証で、以下を確認します:
 
-- **リソースの利用可能性** とターゲットリージョンのクォータ
-- **認証と権限** が適切に構成されていること
-- **テンプレートの有効性** とパラメーターの正確性
-- **ネットワーク接続性** と依存関係
-- **セキュリティの準拠** が組織のポリシーに沿っていること
-- **コスト見積り** が予算内であること
+- <strong>ターゲットリージョンでのリソース可用性</strong>とクォータ
+- <strong>認証と権限</strong>が適切に構成されていること
+- <strong>テンプレートの有効性</strong>とパラメーターの正確性
+- <strong>ネットワーク接続</strong>と依存関係
+- <strong>組織ポリシーへのセキュリティ準拠</strong>
+- <strong>予算内でのコスト見積り</strong>
 
 ### 事前チェックを実行するタイミング
 
-- 新しい環境への最初のデプロイ前
-- テンプレートに大幅な変更を加えた後
-- 本番デプロイの前
-- Azure リージョンを変更する場合
-- CI/CD パイプラインの一部として
+- 新しい環境に対しての<strong>最初のデプロイ前</strong>
+- <strong>テンプレートに大きな変更があった後</strong>
+- <strong>本番環境へのデプロイ前</strong>
+- **Azure リージョンを変更する場合**
+- **CI/CD パイプラインの一部として**
 
 ---
 
@@ -128,7 +128,7 @@ function Write-Status {
 function Test-Prerequisites {
     Write-Host "${Blue}=== Prerequisites Check ===${Reset}"
     
-    # AZD のインストールを確認
+    # AZD のインストールを確認する
     try {
         $azdVersion = azd version --output json | ConvertFrom-Json
         Write-Status "AZD CLI installed" "Success" "Version: $($azdVersion.azd.version)"
@@ -138,7 +138,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Azure CLI のインストールを確認
+    # Azure CLI のインストールを確認する
     try {
         $azVersion = az version --output json | ConvertFrom-Json
         Write-Status "Azure CLI installed" "Success" "Version: $($azVersion.'azure-cli')"
@@ -148,7 +148,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # PowerShell のバージョンを確認
+    # PowerShell のバージョンを確認する
     if ($PSVersionTable.PSVersion.Major -ge 7) {
         Write-Status "PowerShell version" "Success" "Version: $($PSVersionTable.PSVersion)"
     }
@@ -163,7 +163,7 @@ function Test-Authentication {
     Write-Host "`n${Blue}=== Authentication Check ===${Reset}"
     
     try {
-        # AZD の認証を確認
+        # AZD の認証を確認する
         $azdAuth = azd auth login --check-status --output json 2>$null | ConvertFrom-Json
         if ($azdAuth.status -eq "Logged-in") {
             Write-Status "AZD authentication" "Success" "User: $($azdAuth.principalName)"
@@ -173,11 +173,11 @@ function Test-Authentication {
             return $false
         }
         
-        # Azure CLI の認証を確認
+        # Azure CLI の認証を確認する
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # サブスクリプションへのアクセスを検証
+        # サブスクリプションへのアクセス権を検証する
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -194,7 +194,7 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # 現在のユーザーのロール割り当てを取得
+        # 現在のユーザーのロール割り当てを取得する
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
@@ -210,14 +210,14 @@ function Test-Permissions {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # リソース グループの作成をテスト（指定されている場合）
+        # リソースグループの作成をテストする（指定されている場合）
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # リソース グループを作成できるかをテスト
+                # リソースグループを作成できるかテストする
                 try {
                     az group create --name "preflight-test-rg" --location $Location --output none
                     az group delete --name "preflight-test-rg" --yes --output none
@@ -242,10 +242,10 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # コンピュートのクォータを確認
+        # コンピュートのクォータを確認する
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # 特定のクォータを確認
+        # 特定のクォータを確認する
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
         if ($coreQuota) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
@@ -257,7 +257,7 @@ function Test-QuotasAndLimits {
             }
         }
         
-        # App Service の制限を確認
+        # App Service の制限を確認する
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
             if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
@@ -271,7 +271,7 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # ストレージアカウントの制限を確認
+        # ストレージアカウントの制限を確認する
         $storageAccounts = az storage account list --output json | ConvertFrom-Json
         $accountCount = ($storageAccounts | Measure-Object).Count
         if ($accountCount -lt 200) {
@@ -292,7 +292,7 @@ function Test-QuotasAndLimits {
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # Azure のエンドポイントをテスト
+    # Azure エンドポイントをテストする
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -310,7 +310,7 @@ function Test-NetworkConnectivity {
         }
     }
     
-    # DNS 解決をテスト
+    # DNS 解決をテストする
     try {
         $dnsResult = Resolve-DnsName "management.azure.com" -ErrorAction Stop
         Write-Status "DNS resolution" "Success" "Resolved successfully"
@@ -326,16 +326,16 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # azure.yaml が存在するか確認
+    # azure.yaml が存在するか確認する
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # azure.yaml を解析
+        # azure.yaml を解析する
         try {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # サービスを検証
+            # サービスを検証する
             if ($azureYaml.services) {
                 $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
@@ -354,13 +354,13 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # インフラファイルの有無を確認
+    # インフラ関連ファイルを確認する
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # 存在する場合は main.bicep を検証
+            # main.bicep が存在する場合は検証する
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 新規: インフラのプレビューをテスト（安全なドライラン）
+    # 🧪 新: インフラのプレビューをテストする（安全なドライラン）
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -403,7 +403,7 @@ function Test-RegionalAvailability {
     Write-Host "`n${Blue}=== Regional Availability Check ===${Reset}"
     
     try {
-        # ロケーションが有効か確認
+        # location が有効か確認する
         $locations = az account list-locations --output json | ConvertFrom-Json
         $validLocation = $locations | Where-Object { $_.name -eq $Location -or $_.displayName -eq $Location }
         
@@ -415,7 +415,7 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # リージョンでのサービスの利用可能性を確認
+        # リージョンでサービスが利用可能か確認する
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
@@ -446,11 +446,11 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # 基本的なコスト見積もり（正確な見積もりには Azure Pricing API が必要）
+    # 簡易コスト見積もり（正確な見積もりには Azure Pricing API が必要）
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # 予算が存在するか確認
+    # 予算が存在するか確認する
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -470,9 +470,9 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # 一般的なセキュリティ対策の確認
+    # 一般的なセキュリティのベストプラクティスを確認する
     try {
-        # Key Vault が構成されているか確認
+        # Key Vault が構成されているか確認する
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
             Write-Status "Key Vault usage" "Success" "Key Vault detected in templates"
         }
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # マネージド ID の使用を確認
+        # マネージド ID の使用を確認する
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +488,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # HTTPS の強制を確認
+        # HTTPS の強制がされているか確認する
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -504,7 +504,7 @@ function Test-SecurityCompliance {
     }
 }
 
-# メイン実行
+# メインの実行
 function Invoke-PreflightCheck {
     Write-Host "${Green}AZD Pre-flight Check${Reset}" -ForegroundColor Green
     Write-Host "Environment: $EnvironmentName"
@@ -516,7 +516,7 @@ function Invoke-PreflightCheck {
     $allPassed = $true
     $results = @{}
     
-    # すべてのチェックを実行
+    # すべてのチェックを実行する
     $results["Prerequisites"] = Test-Prerequisites
     $results["Authentication"] = Test-Authentication
     $results["Permissions"] = Test-Permissions
@@ -557,7 +557,7 @@ function Invoke-PreflightCheck {
     }
 }
 
-# 事前チェックを実行
+# プレフライトチェックを実行する
 Invoke-PreflightCheck
 ```
 
@@ -565,11 +565,11 @@ Invoke-PreflightCheck
 
 ```bash
 #!/bin/bash
-# Unix/Linux システム向けの事前チェックの Bash バージョン
+# Unix/Linux システム用のプレフライトチェック（Bash版）
 
 set -euo pipefail
 
-# 色コード
+# カラーコード
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -714,7 +714,7 @@ check_regional_availability() {
         return 1
     fi
     
-    # サービスの利用可否を確認
+    # サービスが利用可能か確認
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
     for service in "${services[@]}"; do
@@ -755,7 +755,7 @@ main() {
         esac
     done
     
-    # 必須パラメータを検証
+    # 必須パラメーターを検証
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -802,65 +802,65 @@ main "$@"
 
 このチェックリストを印刷し、デプロイ前に各項目を確認してください:
 
-#### ✅ 環境セットアップ
+#### ✅ Environment Setup
 - [ ] AZD CLI がインストールされ、最新バージョンに更新されている
-- [ ] Azure CLI がインストールされ、認証されている
+- [ ] Azure CLI がインストールされ、認証済みである
 - [ ] 正しい Azure サブスクリプションが選択されている
-- [ ] 環境名が一意で命名規則に従っている
-- [ ] 対象のリソースグループが特定されている、または作成可能である
+- [ ] 環境名が一意で、命名規則に従っている
+- [ ] ターゲットのリソースグループが特定されている、または作成可能である
 
-#### ✅ 認証と権限
-- [ ] `azd auth login` で正常に認証されている
-- [ ] ユーザーが対象のサブスクリプション/リソースグループに対して Contributor ロールを持っている
+#### ✅ Authentication & Permissions
+- [ ] 成功裏に `azd auth login` で認証されている
+- [ ] ユーザーがターゲットのサブスクリプション/リソースグループに対して Contributor ロールを持っている
 - [ ] CI/CD 用にサービスプリンシパルが構成されている（該当する場合）
 - [ ] 期限切れの証明書や資格情報がない
 
-#### ✅ テンプレート検証
-- [ ] `azure.yaml` が存在し、正しい YAML 形式である
+#### ✅ Template Validation
+- [ ] `azure.yaml` が存在し、有効な YAML である
 - [ ] azure.yaml に定義されたすべてのサービスに対応するソースコードがある
-- [ ] `infra/` ディレクトリ内に Bicep テンプレートが存在する
+- [ ] `infra/` ディレクトリ内の Bicep テンプレートが存在する
 - [ ] `main.bicep` がエラーなくコンパイルされる（`az bicep build --file infra/main.bicep`）
 - [ ] 🧪 インフラプレビューが正常に実行される（`azd provision --preview`）
-- [ ] 必要なパラメーターはすべてデフォルト値があるか、提供される予定である
-- [ ] テンプレートにハードコードされたシークレットがない
+- [ ] 必要なすべてのパラメーターにデフォルト値があるか、提供される予定である
+- [ ] テンプレート内にハードコードされたシークレットがない
 
-#### ✅ リソース計画
-- [ ] 対象の Azure リージョンが選択され、検証されている
-- [ ] 必要な Azure サービスが対象リージョンで利用可能である
+#### ✅ Resource Planning
+- [ ] ターゲット Azure リージョンが選択され、検証されている
+- [ ] 必要な Azure サービスがターゲットリージョンで利用可能である
 - [ ] 計画したリソースに対して十分なクォータが利用可能である
-- [ ] リソース命名の競合がチェックされている
+- [ ] リソース名の競合がチェックされている
 - [ ] リソース間の依存関係が理解されている
 
-#### ✅ ネットワークとセキュリティ
-- [ ] Azure エンドポイントへのネットワーク接続が確認されている
+#### ✅ Network & Security
+- [ ] Azure エンドポイントへのネットワーク接続が検証されている
 - [ ] 必要に応じてファイアウォール/プロキシ設定が構成されている
-- [ ] Key Vault がシークレット管理のために構成されている
-- [ ] 可能な限りマネージド ID が使用されている
-- [ ] Web アプリケーションで HTTPS 強制が有効になっている
+- [ ] シークレット管理のために Key Vault が構成されている
+- [ ] 可能な場合はマネージド ID が使用されている
+- [ ] Web アプリケーションに対して HTTPS 強制が有効になっている
 
-#### ✅ コスト管理
-- [ ] Azure Pricing Calculator を使用してコスト見積りが算出されている
+#### ✅ Cost Management
+- [ ] Azure Pricing Calculator を使用してコスト見積りが計算されている
 - [ ] 必要に応じて予算アラートが構成されている
 - [ ] 環境タイプに適した SKU が選択されている
-- [ ] 本番ワークロードに対してリザーブドキャパシティの検討が行われている
+- [ ] 本番ワークロードに対してリザーブドキャパシティが検討されている
 
-#### ✅ 監視と可観測性
-- [ ] Application Insights がテンプレートに構成されている
+#### ✅ Monitoring & Observability
+- [ ] テンプレートに Application Insights が構成されている
 - [ ] Log Analytics ワークスペースが計画されている
 - [ ] 重要なメトリクスに対するアラートルールが定義されている
 - [ ] アプリケーションにヘルスチェックエンドポイントが実装されている
 
-#### ✅ バックアップと復旧
+#### ✅ Backup & Recovery
 - [ ] データリソースのバックアップ戦略が定義されている
-- [ ] 復旧時間目標（RTO）が文書化されている
-- [ ] 復旧ポイント目標（RPO）が文書化されている
-- [ ] 本番向けの災害復旧計画が整備されている
+- [ ] 復旧目標時間 (RTO) が文書化されている
+- [ ] 復旧目標点 (RPO) が文書化されている
+- [ ] 本番向けのディザスタリカバリ計画が整備されている
 
 ---
 
-## 環境検証
+## Environment Validation
 
-### 開発環境検証
+### Development Environment Validation
 
 ```bash
 #!/bin/bash
@@ -876,7 +876,7 @@ validate_dev_environment() {
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # 自動シャットダウンの構成を確認する
+    # 自動シャットダウン設定を確認する
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
@@ -892,7 +892,7 @@ validate_dev_environment() {
 }
 ```
 
-### 本番環境検証
+### Production Environment Validation
 
 ```bash
 #!/bin/bash
@@ -933,9 +933,9 @@ validate_prod_environment() {
 
 ---
 
-## リソース検証
+## Resource Validation
 
-### クォータ検証スクリプト
+### Quota Validation Script
 
 ```python
 #!/usr/bin/env python3
@@ -990,7 +990,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # サブスクリプション内のストレージアカウントを取得する
+    # サブスクリプション内のストレージアカウントを取得
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -998,7 +998,7 @@ def check_storage_limits(location: str) -> bool:
         return False
     
     account_count = len(accounts)
-    max_accounts = 250  # Azureのデフォルト制限
+    max_accounts = 250  # Azure の既定の制限
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1011,13 +1011,13 @@ def check_network_limits(location: str) -> bool:
     """Check network-related limits"""
     print(f"\n=== Network Limits Check ({location}) ===")
     
-    # 仮想ネットワークを確認する
+    # 仮想ネットワークを確認
     vnets = run_command(['az', 'network', 'vnet', 'list'])
     if vnets is not None:
         vnet_count = len(vnets)
         print(f"✅ Virtual Networks: {vnet_count}/1000")
     
-    # パブリックIPアドレスを確認する
+    # パブリック IP アドレスを確認
     public_ips = run_command(['az', 'network', 'public-ip', 'list'])
     if public_ips is not None:
         ip_count = len(public_ips)
@@ -1038,7 +1038,7 @@ def main():
     
     all_passed = True
     
-    # チェックを実行する
+    # チェックを実行
     all_passed &= check_compute_quotas(location)
     all_passed &= check_storage_limits(location)
     all_passed &= check_network_limits(location)
@@ -1058,13 +1058,13 @@ if __name__ == "__main__":
 
 ---
 
-## セキュリティとコンプライアンスチェック
+## Security & Compliance Checks
 
-### セキュリティ検証スクリプト
+### Security Validation Script
 
 ```bash
 #!/bin/bash
-# AZD デプロイのセキュリティおよびコンプライアンス検証
+# AZD デプロイメントのセキュリティおよびコンプライアンス検証
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
@@ -1095,7 +1095,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # 最小 TLS バージョンを確認
+    # TLS の最小バージョンを確認
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1146,7 +1146,7 @@ check_compliance_requirements() {
     fi
 }
 
-# メイン処理
+# メインの実行
 main() {
     echo "🔒 Security and Compliance Validation"
     echo "📁 Checking infra/ directory for security best practices"
@@ -1177,9 +1177,9 @@ main "$@"
 
 ---
 
-## CI/CD との統合
+## Integration with CI/CD
 
-### GitHub Actions 統合
+### GitHub Actions Integration
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1238,7 +1238,7 @@ jobs:
         path: preflight-results.json
 ```
 
-### Azure DevOps 統合
+### Azure DevOps Integration
 
 ```yaml
 trigger: none
@@ -1290,58 +1290,58 @@ steps:
 
 ---
 
-## ベストプラクティスのまとめ
+## Best Practices Summary
 
 ### ✅ 事前チェックのベストプラクティス
 
-1. **可能な限り自動化する**
+1. <strong>可能な限り自動化する</strong>
    - チェックを CI/CD パイプラインに統合する
-   - 再現可能な検証のためにスクリプトを使用する
-   - 監査証跡のために結果を保存する
+   - 繰り返し可能な検証のためにスクリプトを使用する
+   - 監査トレイルのために結果を保存する
 
-2. **環境固有の検証**
+2. <strong>環境固有の検証</strong>
    - 開発/ステージング/本番で異なるチェックを行う
    - 環境ごとに適切なセキュリティ要件を設定する
    - 非本番環境のコスト最適化を行う
 
-3. **包括的なカバレッジ**
+3. <strong>包括的なカバレッジ</strong>
    - 認証と権限
-   - リソースのクォータと可用性
-   - テンプレート検証と構文チェック
-   - セキュリティとコンプライアンス要件
+   - リソースクォータと可用性
+   - テンプレートの検証と構文チェック
+   - セキュリティと準拠要件
 
-4. **明確なレポーティング**
-   - 色分けされたステータス表示
-   - 改善手順を含む詳細なエラーメッセージ
+4. <strong>明確なレポーティング</strong>
+   - カラーコード化されたステータスインジケーター
+   - 是正手順を含む詳細なエラーメッセージ
    - 迅速な評価のためのサマリーレポート
 
-5. **Fail Fast（早期失敗）**
-   - 重大なチェックが失敗した場合はデプロイを停止する
+5. **Fail Fast**
+   - 重要なチェックが失敗した場合はデプロイを停止する
    - 解決のための明確なガイダンスを提供する
-   - チェックの再実行を容易にする
+   - チェックを簡単に再実行できるようにする
 
 ### よくある事前チェックの落とし穴
 
-1. **「簡単に済ませたい」ために検証をスキップする**
-2. **デプロイ前に権限チェックが不十分である**
-3. **デプロイが失敗するまでクォータ制限を無視する**
-4. **CI/CD パイプラインでテンプレートを検証していない**
-5. **本番環境のセキュリティ検証が欠落している**
-6. **不十分なコスト見積りにより予算の問題が発生する**
+1. 「簡単に済ませる」ために検証をスキップする
+2. デプロイ前の権限チェックが不十分である
+3. デプロイ失敗になるまでクォータ制限を無視する
+4. CI/CD パイプラインでテンプレートを検証していない
+5. 本番環境向けのセキュリティ検証が抜けている
+6. 不十分なコスト見積りにより予算の問題が発生する
 
 ---
 
-**プロのコツ**: 事前チェックは実際のデプロイジョブの前に CI/CD パイプラインの別ジョブとして実行してください。これにより早期に問題を発見でき、開発者へのフィードバックが速くなります。
+<strong>プロのヒント</strong>: 実際のデプロイジョブの前に、CI/CD パイプラインで事前チェックを別のジョブとして実行してください。これにより問題を早期に発見でき、開発者へのフィードバックが速くなります。
 
 ---
 
-**ナビゲーション**
-- **前のレッスン**: [SKU 選択](sku-selection.md)
-- **次のレッスン**: [チートシート](../../resources/cheat-sheet.md)
+**Navigation**
+- **Previous Lesson**: [SKU の選択](sku-selection.md)
+- **Next Lesson**: [Cheat Sheet](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責事項：
-本書はAI翻訳サービス「Co-op Translator」（https://github.com/Azure/co-op-translator）を用いて翻訳されています。正確性には努めておりますが、自動翻訳には誤りや不正確な箇所が含まれる場合があります。原文（原言語）の文書が正式な出典と見なされます。重要な情報については、専門の人による翻訳を推奨します。本翻訳の利用に起因する誤解や誤訳について、当社は一切の責任を負いません。
+**免責事項**:
+本書類は AI 翻訳サービス [Co-op翻訳ツール](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性を期していますが、自動翻訳には誤りや不正確な点が含まれる可能性があることにご注意ください。原文（原言語の文書）を正式な情報源と見なしてください。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の使用に起因するいかなる誤解や誤訳についても、当方は責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

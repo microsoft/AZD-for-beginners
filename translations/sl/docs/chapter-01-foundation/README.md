@@ -1,20 +1,22 @@
-# Poglavje 1: Osnove in hiter začetek
+# Poglavje 1: Temelji in hiter začetek
 
-**📚 Tečaj**: [AZD za začetnike](../../README.md) | **⏱️ Trajanje**: 30-45 minut | **⭐ Zahtevnost**: Začetna
+**📚 Tečaj**: [AZD za začetnike](../../README.md) | **⏱️ Trajanje**: 30-45 minutes | **⭐ Težavnost**: Beginner
 
 ---
 
 ## Pregled
 
-To poglavje uvaja osnove Azure Developer CLI (azd). Naučili se boste osnovnih konceptov, namestili orodja in razmestili svojo prvo aplikacijo v Azure.
+To poglavje uvaja temelje Azure Developer CLI (azd). Naučili se boste osnovnih konceptov, namestili orodja in razmestili svojo prvo aplikacijo v Azure.
+
+> Preverjeno z `azd 1.23.12` v marcu 2026.
 
 ## Cilji učenja
 
-Po zaključku tega poglavja boste:
-- Razumeti, kaj je Azure Developer CLI in kako se razlikuje od Azure CLI
-- Namestiti in konfigurirati AZD na vaši platformi
-- Razmestiti svojo prvo aplikacijo v Azure z `azd up`
-- Počistiti vire z `azd down`
+Z zaključkom tega poglavja boste:
+- Razumeli, kaj je Azure Developer CLI in kako se razlikuje od Azure CLI
+- Namestili in konfigurirali AZD na svoji platformi
+- Razmestili svojo prvo aplikacijo v Azure z ukazom `azd up`
+- Počistili vire z `azd down`
 
 ---
 
@@ -23,8 +25,26 @@ Po zaključku tega poglavja boste:
 | # | Lekcija | Opis | Čas |
 |---|--------|-------------|------|
 | 1 | [Osnove AZD](azd-basics.md) | Osnovni koncepti, terminologija in struktura projekta | 15 min |
-| 2 | [Namestitev & Nastavitev](installation.md) | Navodila za namestitev po platformah | 10 min |
-| 3 | [Vaš prvi projekt](first-project.md) | Praktično: razmestitev spletne aplikacije v Azure | 20 min |
+| 2 | [Namestitev in nastavitev](installation.md) | Navodila za namestitev, specifična za platformo | 10 min |
+| 3 | [Vaš prvi projekt](first-project.md) | Praktično: Razmestitev spletne aplikacije v Azure | 20 min |
+
+---
+
+## ✅ Začnite tukaj: Preverite svojo namestitev
+
+Pred začetkom potrdite, da je vaš lokalni računalnik pripravljen za predlogo poglavja 1:
+
+**Windows:**
+```powershell
+.\validate-setup.ps1
+```
+
+**macOS / Linux:**
+```bash
+bash ./validate-setup.sh
+```
+
+Če skripta poroča o manjkajočih orodjih, jih najprej namestite in nato nadaljujte s poglavjem.
 
 ---
 
@@ -34,29 +54,30 @@ Po zaključku tega poglavja boste:
 # Preverite namestitev
 azd version
 
-# Prijavite se v Azure
+# Avtenticirajte se za AZD
+# Neobvezno: az login, če nameravate neposredno izvajati ukaze Azure CLI
 azd auth login
 
 # Razmestite svojo prvo aplikacijo
 azd init --template todo-nodejs-mongo
 azd up
 
-# Ko končate, pospravite
+# Po končanem počistite
 azd down --force --purge
 ```
 
 ---
 
-## ✅ Kriteriji uspeha
+## ✅ Merila uspeha
 
-Po zaključku tega poglavja boste sposobni:
+Po zaključku tega poglavja boste lahko:
 
 ```bash
 azd version              # Prikaže nameščeno različico
 azd init --template todo-nodejs-mongo  # Inicializira projekt
-azd up                   # Razmestí v Azure
-azd show                 # Prikaže URL delujoče aplikacije
-azd down --force --purge # Očisti vire
+azd up                   # Razporedi v Azure
+azd show                 # Prikaže URL zagnane aplikacije
+azd down --force --purge # Počisti vire
 ```
 
 ---
@@ -65,20 +86,20 @@ azd down --force --purge # Očisti vire
 
 | Smer | Poglavje |
 |-----------|---------|
-| **Naprej** | [Poglavje 2: Razvoj, osredotočen na AI](../chapter-02-ai-development/README.md) |
+| **Naprej** | [Poglavje 2: Razvoj z AI v ospredju](../chapter-02-ai-development/README.md) |
 | **Preskoči na** | [Poglavje 3: Konfiguracija](../chapter-03-configuration/README.md) |
 
 ---
 
-## 📖 Sorodni viri
+## 📖 Povezani viri
 
-- [Povzetek ukazov](../../resources/cheat-sheet.md)
+- [Kratka referenca ukazov](../../resources/cheat-sheet.md)
 - [Pogosta vprašanja](../../resources/faq.md)
-- [Pojmovnik](../../resources/glossary.md)
+- [Slovar pojmov](../../resources/glossary.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Zavrnitev odgovornosti:
-Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, prosimo, upoštevajte, da avtomatski prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvor­nem jeziku velja za avtoritativni vir. Za kritične informacije priporočamo strokovni prevod, opravljen s strani profesionalnega prevajalca. Ne prevzemamo odgovornosti za kakršnekoli nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+**Izjava o omejitvi odgovornosti**:
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v matičnem jeziku naj velja za avtoritativni vir. Za ključne informacije priporočamo strokovni človeški prevod. Ne odgovarjamo za morebitna nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

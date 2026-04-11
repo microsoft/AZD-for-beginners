@@ -1,18 +1,20 @@
-# Capitolo 8: Pattern di produzione & aziendali
+# Capitolo 8: Produzione e pattern aziendali
 
-**📚 Corso**: [AZD per principianti](../../README.md) | **⏱️ Durata**: 2-3 ore | **⭐ Complessità**: Avanzata
+**📚 Corso**: [AZD Per Principianti](../../README.md) | **⏱️ Durata**: 2-3 ore | **⭐ Complessità**: Avanzato
 
 ---
 
 ## Panoramica
 
-Questo capitolo copre pattern di deployment pronti per l'azienda, hardening della sicurezza, monitoraggio e ottimizzazione dei costi per carichi di lavoro AI in produzione.
+Questo capitolo tratta pattern di deployment pronti per l'azienda, hardening della sicurezza, monitoraggio e ottimizzazione dei costi per carichi di lavoro AI in produzione.
+
+> Validato con `azd 1.23.12` a marzo 2026.
 
 ## Obiettivi di apprendimento
 
 Completando questo capitolo, sarai in grado di:
 - Distribuire applicazioni resilienti multi-regione
-- Implementare pattern di sicurezza aziendali
+- Implementare pattern di sicurezza aziendale
 - Configurare un monitoraggio completo
 - Ottimizzare i costi su larga scala
 - Configurare pipeline CI/CD con AZD
@@ -23,7 +25,7 @@ Completando questo capitolo, sarai in grado di:
 
 | # | Lezione | Descrizione | Tempo |
 |---|--------|-------------|------|
-| 1 | [Pratiche di produzione IA](production-ai-practices.md) | Pattern di deployment aziendali | 90 min |
+| 1 | [Pratiche AI di produzione](production-ai-practices.md) | Pattern di deployment aziendale | 90 min |
 
 ---
 
@@ -33,9 +35,9 @@ Completando questo capitolo, sarai in grado di:
 - [ ] Identità gestita per l'autenticazione (senza chiavi)
 - [ ] Application Insights per il monitoraggio
 - [ ] Budget dei costi e avvisi configurati
-- [ ] Scansione di sicurezza abilitata
-- [ ] Integrazione pipeline CI/CD
-- [ ] Piano di ripristino di emergenza
+- [ ] Scansione della sicurezza abilitata
+- [ ] Integrazione della pipeline CI/CD
+- [ ] Piano di disaster recovery
 
 ---
 
@@ -81,8 +83,8 @@ properties: {
 | Strategia | Risparmi |
 |----------|---------|
 | Scalare a zero (Container Apps) | 60-80% |
-| Usare tier a consumo per lo sviluppo | 50-70% |
-| Scaling pianificato | 30-50% |
+| Usare livelli di consumo per sviluppo | 50-70% |
+| Ridimensionamento pianificato | 30-50% |
 | Capacità riservata | 20-40% |
 
 ```bash
@@ -103,7 +105,7 @@ az consumption budget create \
 azd monitor --logs
 
 # Controlla Application Insights
-azd monitor
+azd monitor --overview
 
 # Visualizza metriche
 az monitor metrics list --resource <resource-id>
@@ -113,16 +115,16 @@ az monitor metrics list --resource <resource-id>
 
 ## 🔗 Navigazione
 
-| Direction | Chapter |
+| Direzione | Capitolo |
 |-----------|---------|
 | **Precedente** | [Capitolo 7: Risoluzione dei problemi](../chapter-07-troubleshooting/README.md) |
-| **Corso completato** | [Home del corso](../../README.md) |
+| **Corso completo** | [Home del corso](../../README.md) |
 
 ---
 
 ## 📖 Risorse correlate
 
-- [Guida agli agenti IA](../chapter-02-ai-development/agents.md)
+- [Guida agli agenti AI](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Soluzioni multi-agente](../chapter-05-multi-agent/README.md)
 - [Esempio di microservizi](../../examples/microservices/README.md)
@@ -130,6 +132,6 @@ az monitor metrics list --resource <resource-id>
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Pur impegnandoci per garantire l'accuratezza, si prega di notare che le traduzioni automatiche possono contenere errori o inesattezze. Il documento originale nella sua lingua nativa deve essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale effettuata da un essere umano. Non siamo responsabili per eventuali incomprensioni o interpretazioni errate derivanti dall'uso di questa traduzione.
+**Dichiarazione di non responsabilità**:
+Questo documento è stato tradotto utilizzando il servizio di traduzione AI [Co-op Translator](https://github.com/Azure/co-op-translator). Pur impegnandoci per l'accuratezza, si segnala che le traduzioni automatizzate possono contenere errori o inesattezze. Il documento originale nella sua lingua madre dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale eseguita da un traduttore umano. Non siamo responsabili per eventuali malintesi o interpretazioni errate derivanti dall'uso di questa traduzione.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

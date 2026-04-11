@@ -1,43 +1,43 @@
-# Provisioning Azure Resources with AZD
+# Provisioning zasobów Azure za pomocą AZD
 
 **Nawigacja po rozdziale:**
 - **📚 Strona kursu**: [AZD dla początkujących](../../README.md)
-- **📖 Aktualny rozdział**: Rozdział 4 - Infrastruktura jako kod i wdrażanie
-- **⬅️ Poprzedni**: [Przewodnik wdrażania](deployment-guide.md)
+- **📖 Bieżący rozdział**: Rozdział 4 - Infrastruktura jako kod i wdrożenie
+- **⬅️ Poprzedni**: [Przewodnik wdrożenia](deployment-guide.md)
 - **➡️ Następny rozdział**: [Rozdział 5: Wieloagentowe rozwiązania AI](../../examples/retail-scenario.md)
 - **🔧 Powiązane**: [Rozdział 6: Walidacja przed wdrożeniem](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Wprowadzenie
 
-Ten kompleksowy przewodnik obejmuje wszystko, co musisz wiedzieć o provisionowaniu i zarządzaniu zasobami Azure za pomocą Azure Developer CLI. Nauczysz się wdrażać wzorce Infrastructure as Code (IaC) od podstawowego tworzenia zasobów po zaawansowane, korporacyjne architektury infrastruktury z wykorzystaniem Bicep, szablonów ARM, Terraform i Pulumi.
+Ten kompleksowy przewodnik obejmuje wszystko, co musisz wiedzieć o provisioningu i zarządzaniu zasobami Azure za pomocą Azure Developer CLI. Naucz się wdrażać wzorce Infrastructure as Code (IaC) od podstawowego tworzenia zasobów po zaawansowane architektury infrastruktury klasy korporacyjnej z użyciem Bicep, szablonów ARM, Terraform i Pulumi.
 
 ## Cele nauki
 
 Po ukończeniu tego przewodnika będziesz:
-- Mistrzem zasad Infrastructure as Code i provisionowania zasobów Azure
-- Rozumieć różnych dostawców IaC obsługiwanych przez Azure Developer CLI
-- Projektować i implementować szablony Bicep dla typowych architektur aplikacji
-- Konfigurować parametry zasobów, zmienne i ustawienia specyficzne dla środowiska
-- Wdrażać zaawansowane wzorce infrastruktury, w tym sieci i bezpieczeństwo
-- Zarządzać cyklem życia zasobów, aktualizacjami i rozwiązywaniem zależności
+- Mistrzem zasad Infrastructure as Code i provisioningu zasobów Azure
+- Znał różnych dostawców IaC obsługiwanych przez Azure Developer CLI
+- Projektował i wdrażał szablony Bicep dla powszechnych architektur aplikacji
+- Konfigurował parametry zasobów, zmienne i ustawienia specyficzne dla środowiska
+- Wdrażał zaawansowane wzorce infrastruktury, w tym sieci i zabezpieczeń
+- Zarządzał cyklem życia zasobów, aktualizacjami i rozwiązywaniem zależności
 
-## Efekty nauczania
+## Efekty nauki
 
-Po ukończeniu będziesz w stanie:
-- Projektować i provisionować infrastrukturę Azure przy użyciu Bicep i szablonów ARM
-- Konfigurować złożone architektury wieloserwisowe z właściwymi zależnościami zasobów
-- Implementować parametryzowane szablony dla wielu środowisk i konfiguracji
-- Rozwiązywać problemy z provisionowaniem infrastruktury i naprawiać niepowodzenia wdrożeń
+Po ukończeniu będziesz potrafił:
+- Projektować i provisionować infrastrukturę Azure za pomocą Bicep i szablonów ARM
+- Konfigurować złożone, wieloserwisowe architektury z odpowiednimi zależnościami zasobów
+- Wdrażać szablony parametryzowane dla wielu środowisk i konfiguracji
+- Rozwiązywać problemy z provisioningiem infrastruktury i naprawiać błędy wdrożeń
 - Stosować zasady Azure Well-Architected Framework w projektowaniu infrastruktury
 - Zarządzać aktualizacjami infrastruktury i wdrażać strategie wersjonowania infrastruktury
 
-## Przegląd provisionowania infrastruktury
+## Przegląd provisioningu infrastruktury
 
 Azure Developer CLI obsługuje wielu dostawców Infrastructure as Code (IaC):
-- **Bicep** (zalecane) - język specyficzny dla domeny Azure
-- **ARM Templates** - szablony Azure Resource Manager w formacie JSON
-- **Terraform** - narzędzie infrastruktury wielochmurowej
-- **Pulumi** - nowoczesne Infrastructure as Code z użyciem języków programowania
+- **Bicep** (zalecany) - język specyficzny dla domeny od Azure
+- **Szablony ARM** - oparte na JSON szablony Azure Resource Manager
+- **Terraform** - narzędzie wielochmurowe do infrastruktury
+- **Pulumi** - nowoczesny infrastructure as code z użyciem języków programowania
 
 ## Zrozumienie zasobów Azure
 
@@ -49,10 +49,10 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Powszechne usługi Azure dla aplikacji
-- **Obliczenia**: App Service, Container Apps, Functions, Virtual Machines
-- **Przechowywanie**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Sieć**: Virtual Network, Application Gateway, CDN
+### Popularne usługi Azure dla aplikacji
+- **Compute**: App Service, Container Apps, Functions, Maszyny wirtualne
+- **Storage**: Konto magazynu, Cosmos DB, SQL Database, PostgreSQL
+- **Sieć**: Wirtualna sieć, Application Gateway, CDN
 - **Bezpieczeństwo**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
@@ -200,7 +200,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Provisionowanie baz danych
+## 🗃️ Provisioning bazy danych
 
 ### Cosmos DB
 ```bicep
@@ -342,7 +342,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Konfiguracja tożsamości zarządzanej
+### Konfiguracja Managed Identity
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -370,7 +370,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 
 ## 🌍 Sieć i łączność
 
-### Konfiguracja sieci wirtualnej
+### Konfiguracja wirtualnej sieci
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -527,7 +527,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Własne metryki i alerty
+### Niestandardowe metryki i alerty
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -617,7 +617,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Warunkowe provisionowanie zasobów
+### Warunkowy provisioning zasobów
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,9 +649,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Zaawansowane wzorce provisionowania
+## 🚀 Zaawansowane wzorce provisioningu
 
-### Wdrażanie wieloregionowe
+### Deployment wieloregionalny
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -759,38 +759,37 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ### Podgląd zmian infrastruktury przed wdrożeniem
 
-Funkcja `azd provision --preview` pozwala **symulować provisionowanie infrastruktury** przed rzeczywistym wdrożeniem zasobów. Jest zbliżona duchem do `terraform plan` lub `bicep what-if`, dając Ci **symulacyjny podgląd** tego, jakie zmiany zostałyby wprowadzone w Twoim środowisku Azure.
+Funkcja `azd provision --preview` pozwala **symulować provisioning infrastruktury** przed faktycznym wdrożeniem zasobów. Jest to podobne do `terraform plan` lub `bicep what-if`, dając **podgląd suchych danych** jakie zmiany zostałyby wprowadzone w środowisku Azure.
 
 #### 🛠️ Co robi
 - **Analizuje Twoje szablony IaC** (Bicep lub Terraform)
-- **Pokazuje podgląd zmian zasobów**: dodania, usunięcia, aktualizacje
-- **Nie stosuje zmian** — jest tylko do odczytu i bezpieczne do uruchomienia
+- **Wyświetla podgląd zmian w zasobach**: dodania, usunięcia, aktualizacje
+- **Nie stosuje zmian** — działa w trybie tylko do odczytu i jest bezpieczne w użyciu
 
-#### � Przypadki użycia
+#### Zastosowania
 ```bash
-# Podejrzyj zmiany w infrastrukturze przed wdrożeniem
+# Podgląd zmian w infrastrukturze przed wdrożeniem
 azd provision --preview
 
-# Podgląd ze szczegółowym wyjściem
-azd provision --preview --output json
-
-# Podgląd dla konkretnego środowiska
-azd provision --preview --environment production
+# Podgląd dla określonego środowiska
+azd provision --preview -e production
 ```
 
-To polecenie pomaga:
-- **Zwalidować zmiany infrastruktury** przed zatwierdzeniem zasobów
-- **Wykryć błędne konfiguracje** wcześnie w cyklu rozwoju
-- **Współpracować bezpiecznie** w środowiskach zespołowych
-- **Zapewnić wdrożenia z minimalnymi uprawnieniami** bez niespodzianek
+To polecenie pomaga Ci:
+- **Zweryfikować zmiany infrastruktury** przed zatwierdzeniem zasobów
+- **Wykryć błędy konfiguracji wcześnie** w cyklu rozwojowym
+- **Bezpiecznie współpracować** w zespołach
+- **Zapewnić wdrożenia o najmniejszych uprawnieniach** bez niespodzianek
 
-Jest szczególnie przydatne, gdy:
-- Pracujesz z złożonymi, wielousługowymi środowiskami
-- Wprowadzasz zmiany w infrastrukturze produkcyjnej
+Jest szczególnie przydatne gdy:
+- Pracujesz złożonymi środowiskami wieloserwisowymi
+- Dokonujesz zmian w produkcyjnej infrastrukturze
 - Weryfikujesz modyfikacje szablonów przed zatwierdzeniem PR
-- Szkolisz nowych członków zespołu w zakresie wzorców infrastruktury
+- Szkolisz nowych członków zespołu w wzorcach infrastruktury
 
-### Przykładowy podgląd wyjścia
+### Przykładowy podgląd wyniku
+Dokładny wynik podglądu zależy od dostawcy i struktury projektu, ale wynik powinien jasno pokazywać proponowane zmiany przed ich zastosowaniem.
+
 ```bash
 $ azd provision --preview
 
@@ -809,23 +808,22 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
 ```
 
-## �🔄 Aktualizacje zasobów i migracje
+## 🔄 Aktualizacje i migracje zasobów
 
 ### Bezpieczne aktualizacje zasobów
 ```bash
-# Najpierw przejrzyj zmiany w infrastrukturze (ZALECANE)
+# Najpierw wyświetl podgląd zmian w infrastrukturze (ZALECANE)
 azd provision --preview
 
 # Zastosuj zmiany po potwierdzeniu podglądu
 azd provision --confirm-with-no-prompt
 
-# Aby cofnąć zmiany, użyj Gita do przywrócenia poprzedniego stanu infrastruktury:
+# Aby cofnąć zmiany, użyj Git do przywrócenia zmian w infrastrukturze:
 git revert HEAD  # Cofnij ostatni commit infrastruktury
 azd provision    # Zastosuj poprzedni stan infrastruktury
 ```
@@ -901,7 +899,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Organizacja wyjść
+### 4. Organizacja outputów
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -918,10 +916,10 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Kolejne kroki
 
-- [Planowanie przed wdrożeniem](../chapter-06-pre-deployment/capacity-planning.md) - Weryfikuj dostępność zasobów
+- [Planowanie przed wdrożeniem](../chapter-06-pre-deployment/capacity-planning.md) - Weryfikacja dostępności zasobów
 - [Częste problemy](../chapter-07-troubleshooting/common-issues.md) - Rozwiązywanie problemów z infrastrukturą
-- [Przewodnik debugowania](../chapter-07-troubleshooting/debugging.md) - Debugowanie problemów z provisioningiem
-- [Wybór SKU](../chapter-06-pre-deployment/sku-selection.md) - Wybierz odpowiednie poziomy usług
+- [Przewodnik debugowania](../chapter-07-troubleshooting/debugging.md) - Debugowanie problemów provisioningowych
+- [Wybór SKU](../chapter-06-pre-deployment/sku-selection.md) - Wybór odpowiednich poziomów usług
 
 ## Dodatkowe zasoby
 
@@ -933,12 +931,12 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Nawigacja**
-- **Poprzednia lekcja**: [Przewodnik wdrażania](deployment-guide.md)
+- **Poprzednia lekcja**: [Przewodnik wdrożenia](deployment-guide.md)
 - **Następna lekcja**: [Planowanie pojemności](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Zastrzeżenie:
-Niniejszy dokument został przetłumaczony przy użyciu usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy starań, aby tłumaczenia były jak najbardziej precyzyjne, prosimy pamiętać, że tłumaczenia automatyczne mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku źródłowym należy traktować jako dokument wiążący. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez tłumacza. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+**Zastrzeżenie**:
+Ten dokument został przetłumaczony przy użyciu automatycznej usługi tłumaczeniowej [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dążymy do dokładności, prosimy mieć na uwadze, że tłumaczenia automatyczne mogą zawierać błędy lub nieścisłości. Oryginalny dokument w jego ojczystym języku należy uważać za źródło wiążące. W przypadku informacji krytycznych zaleca się skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

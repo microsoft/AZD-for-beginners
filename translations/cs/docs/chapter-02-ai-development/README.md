@@ -1,38 +1,40 @@
 # Kapitola 2: Vývoj zaměřený na AI
 
-**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 1-2 hodiny | **⭐ Složitost**: Středně pokročilé
+**📚 Kurz**: [AZD pro začátečníky](../../README.md) | **⏱️ Doba trvání**: 1-2 hodiny | **⭐ Složitost**: Středně pokročilý
 
 ---
 
 ## Přehled
 
-Tato kapitola se zaměřuje na nasazování aplikací poháněných AI pomocí Azure Developer CLI a služeb Microsoft Foundry. Od jednoduchých chatovacích AI aplikací až po inteligentní agenty s nástroji.
+Tato kapitola se zaměřuje na nasazování aplikací poháněných AI pomocí Azure Developer CLI a služeb Microsoft Foundry. Od jednoduchých AI chatových aplikací po inteligentní agenty s nástroji.
+
+> **Poznámka k ověření (2026-03-25):** Průběh příkazů a pokyny k rozšířením v této kapitole byly ověřeny vůči `azd` `1.23.12` a aktuálnímu preview vydání AI agentního rozšíření `azure.ai.agents` `0.1.18-preview`. Pokud používáte starší verzi AZD, nejprve ji aktualizujte a poté pokračujte v cvičeních.
 
 ## Cíle učení
 
-Po absolvování této kapitoly budete:
-- Nasadit aplikace s AI pomocí předpřipravených šablon AZD
+Po dokončení této kapitoly budete umět:
+- Nasazovat AI aplikace s použitím předpřipravených AZD šablon
 - Porozumět integraci Microsoft Foundry s AZD
-- Nakonfigurujete a přizpůsobíte AI agenty s nástroji
-- Nasadíte RAG (Retrieval-Augmented Generation) aplikace
+- Konfigurovat a přizpůsobovat AI agenty s nástroji
+- Nasazovat aplikace RAG (Retrieval-Augmented Generation)
 
 ---
 
 ## 📚 Lekce
 
-| # | Lekce | Popis | Doba |
+| # | Lekce | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Propojit AZD se službami Foundry | 30 min |
-| 2 | [AI Agents Guide](agents.md) | Nasadit inteligentní agenty s nástroji | 45 min |
-| 3 | [AI Model Deployment](ai-model-deployment.md) | Nasadit a konfigurovat AI modely | 30 min |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Praktické cvičení: Připravte své AI řešení pro AZD | 60 min |
+| 1 | [Integrace Microsoft Foundry](microsoft-foundry-integration.md) | Propojení AZD se službami Foundry | 30 min |
+| 2 | [Průvodce AI agenty](agents.md) | Nasazení inteligentních agentů s nástroji | 45 min |
+| 3 | [Nasazení AI modelů](ai-model-deployment.md) | Nasazení a konfigurace AI modelů | 30 min |
+| 4 | [Laboratoř AI workshopu](ai-workshop-lab.md) | Prakticky: Připravte své AI řešení pro AZD | 60 min |
 
 ---
 
 ## 🚀 Rychlý start
 
 ```bash
-# Možnost 1: RAG chatovací aplikace
+# Možnost 1: RAG Chat aplikace
 azd init --template azure-search-openai-demo
 azd up
 
@@ -47,7 +49,7 @@ azd up
 
 ---
 
-## 🤖 Vybrané AI šablony
+## 🤖 Doporučené AI šablony
 
 | Šablona | Popis | Služby |
 |----------|-------------|----------|
@@ -57,15 +59,15 @@ azd up
 
 ---
 
-## 💰 Informace o nákladech
+## 💰 Povědomí o nákladech
 
 | Prostředí | Odhadované měsíční náklady |
 |-------------|----------------------|
 | Vývoj | $80-150 |
 | Testovací | $150-300 |
-| Produkční | $300-3,500+ |
+| Produkce | $300-3,500+ |
 
-**Tip:** Spusťte `azd down` po testování, abyste se vyhnuli poplatkům.
+**Tip:** Po testování spusťte `azd down`, aby nedocházelo ke zbytečnému účtování.
 
 ---
 
@@ -74,20 +76,20 @@ azd up
 | Směr | Kapitola |
 |-----------|---------|
 | **Předchozí** | [Kapitola 1: Základy](../chapter-01-foundation/README.md) |
-| **Další** | [Kapitola 3: Konfigurace](../chapter-03-configuration/README.md) |
-| **Přejít na** | [Kapitola 8: Produkční vzory](../chapter-08-production/README.md) |
+| **Následující** | [Kapitola 3: Konfigurace](../chapter-03-configuration/README.md) |
+| **Přeskočit na** | [Kapitola 8: Produkční vzory](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Související zdroje
 
 - [Řešení problémů s AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Postupy pro produkční AI](../chapter-08-production/production-ai-practices.md)
+- [Produkční AI postupy](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Prohlášení o vyloučení odpovědnosti:
-Tento dokument byl přeložen pomocí služby automatického překladu umělé inteligence [Co-op Translator](https://github.com/Azure/co-op-translator). Ač usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho rodném jazyce by měl být považován za autoritativní zdroj. Pro zásadní informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za žádná nedorozumění nebo mylné výklady vyplývající z použití tohoto překladu.
+**Prohlášení o vyloučení odpovědnosti**:  
+Tento dokument byl přeložen pomocí služby pro překlad s umělou inteligencí [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoliv usilujeme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho mateřském jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje využít profesionální lidský překlad. Nejsme odpovědní za jakékoli nedorozumění nebo nesprávné interpretace vyplývající z použití tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

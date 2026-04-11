@@ -1,20 +1,22 @@
-# 5. fejezet: Többügynökös Mesterséges Intelligencia Megoldások
+# 5. fejezet: Többügynökös MI megoldások
 
-**📚 Tanfolyam**: [AZD Kezdőknek](../../README.md) | **⏱️ Időtartam**: 2-3 óra | **⭐ Bonyolultság**: Haladó
+**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 2-3 óra | **⭐ Bonyolultság**: Haladó
 
 ---
 
 ## Áttekintés
 
-Ez a fejezet fejlett többügynökös architektúra mintákat, ügynök koordinációt és éles környezetbe szánt mesterséges intelligencia telepítéseket tárgyal összetett helyzetekhez.
+Ez a fejezet haladó többügynökös architektúra mintákat, ügynökök összehangolását és gyártásra kész MI telepítéseket tárgyal összetett szcenáriókhoz.
+
+> Ellenőrizve `azd 1.23.12` verzióval 2026 márciusában.
 
 ## Tanulási célok
 
-A fejezet elvégzése során Ön:
-- Megérti a többügynökös architektúra mintákat
-- Koordinált MI-ügynök rendszereket telepít
-- Ügynökök közötti kommunikációt valósít meg
-- Éles környezetben használható többügynökös megoldásokat épít
+A fejezet elvégzése után képes leszel:
+- Megérteni a többügynökös architektúra mintákat
+- Összehangolt MI ügynökrendszereket telepíteni
+- Ügynökök közötti kommunikációt megvalósítani
+- Gyártásra kész többügynökös megoldásokat építeni
 
 ---
 
@@ -22,56 +24,56 @@ A fejezet elvégzése során Ön:
 
 | # | Lecke | Leírás | Idő |
 |---|--------|-------------|------|
-| 1 | [Kiskereskedelmi Többügynökös Megoldás](../../examples/retail-scenario.md) | Teljes megvalósítási bemutató | 90 perc |
-| 2 | [Koordinációs Minták](../chapter-06-pre-deployment/coordination-patterns.md) | Ügynök összehangolási stratégiák | 30 perc |
-| 3 | [ARM Sablon Telepítés](../../examples/retail-multiagent-arm-template/README.md) | Egylépéses telepítés | 30 perc |
+| 1 | [Kiskereskedelmi többügynökös megoldás](../../examples/retail-scenario.md) | Teljes implementáció bemutatása | 90 perc |
+| 2 | [Összehangolási minták](../chapter-06-pre-deployment/coordination-patterns.md) | Ügynök összehangolási stratégiák | 30 perc |
+| 3 | [ARM sablon telepítés](../../examples/retail-multiagent-arm-template/README.md) | Egykattintásos telepítés | 30 perc |
 
 ---
 
-## 🚀 Gyors Kezdés
+## 🚀 Gyors kezdés
 
 ```bash
-# 1. lehetőség: Kiszolgáló telepítése sablonból
+# 1. lehetőség: Telepítés sablonból
 azd init --template agent-openai-python-prompty
 azd up
 
-# 2. lehetőség: Kiszolgáló telepítése ügynök manifesztből (az azure.ai.agents bővítményt igényli)
+# 2. lehetőség: Telepítés ügynök manifestből (az azure.ai.agents kiterjesztést igényli)
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Melyik megközelítés?** Használja az `azd init --template` parancsot egy működő minta alapján való kezdéshez. Az `azd ai agent init` parancsot használja, ha saját ügynök manifesztje van. Részletekért lásd az [AZD AI CLI referencia](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) részt.
+> **Melyik megközelítést válasszam?** Használd az `azd init --template` parancsot, ha működő mintából szeretnél indítani. Használd az `azd ai agent init` parancsot, ha saját ügynök manifest fájlod van. Teljes részletekért lásd az [AZD AI CLI referencia](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) dokumentációt.
 
 ---
 
-## 🤖 Többügynökös Architektúra
+## 🤖 Többügynökös architektúra
 
 ```mermaid
 graph TD
-    Orchestrator[Orchestrátor Ügynök<br/>Kérések irányítása, munkafolyamat kezelése] --> Customer[Vevő Ügynök<br/>Felhasználói lekérdezések, preferenciák]
-    Orchestrator --> Inventory[Készlet Ügynök<br/>Készletszintek, rendelések]
+    Orchestrator[Orchestrátor ügynök<br/>Kérések irányítása, munkafolyamat kezelése] --> Customer[Vevő ügynök<br/>Felhasználói lekérdezések, preferenciák]
+    Orchestrator --> Inventory[Készlet ügynök<br/>Készletszintek, megrendelések]
 ```
 ---
 
-## 🎯 Kiemelt Megoldás: Kiskereskedelmi Többügynökös
+## 🎯 Kiemelt megoldás: Kiskereskedelmi többügynökös rendszer
 
-A [Kiskereskedelmi Többügynökös Megoldás](../../examples/retail-scenario.md) bemutatja:
+A [Kiskereskedelmi többügynökös megoldás](../../examples/retail-scenario.md) bemutatja:
 
-- **Ügyfél Ügynök**: Felhasználói interakciók és preferenciák kezelése
-- **Készlet Ügynök**: Készlet- és rendeléskezelés
-- **Orkesztrátor**: Ügynökök közötti koordináció
-- **Megosztott Memória**: Ügynökök közötti kontextuskezelés
+- **Ügyfélügynök**: Ügyfél interakciók és preferenciák kezelése
+- **Készletügynök**: Készlet- és rendeléskezelés
+- **Koordinátor**: Az ügynökök összehangolása
+- **Megosztott memória**: Ügynökök közti kontextuskezelés
 
-### Használt Szolgáltatások
+### Használt szolgáltatások
 
 | Szolgáltatás | Cél |
 |---------|---------|
-| Microsoft Foundry Modellek | Nyelvi megértés |
-| Azure AI Keresés | Termékkatalógus |
-| Cosmos DB | Ügynöki állapot és memória |
-| Konténer Alkalmazások | Ügynökök hosztolása |
-| Application Insights | Felügyelet |
+| Microsoft Foundry Models | Nyelvi megértés |
+| Azure AI Search | Termékkatalógus |
+| Cosmos DB | Ügynök állapot és memória |
+| Container Apps | Ügynök hosztolása |
+| Application Insights | Megfigyelés |
 
 ---
 
@@ -80,19 +82,19 @@ A [Kiskereskedelmi Többügynökös Megoldás](../../examples/retail-scenario.md
 | Irány | Fejezet |
 |-----------|---------|
 | **Előző** | [4. fejezet: Infrastruktúra](../chapter-04-infrastructure/README.md) |
-| **Következő** | [6. fejezet: Előzetes Telepítés](../chapter-06-pre-deployment/README.md) |
+| **Következő** | [6. fejezet: Telepítés előtti lépések](../chapter-06-pre-deployment/README.md) |
 
 ---
 
-## 📖 Kapcsolódó Források
+## 📖 Kapcsolódó források
 
-- [MI Ügynökök Útmutató](../chapter-02-ai-development/agents.md)
-- [Éles Mesterséges Intelligencia Gyakorlatok](../chapter-08-production/production-ai-practices.md)
-- [MI Hibakeresés](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [MI Ügynökök útmutatója](../chapter-02-ai-development/agents.md)
+- [Gyártásra kész MI gyakorlatok](../chapter-08-production/production-ai-practices.md)
+- [MI hibakeresés](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Jogi nyilatkozat**:  
-Ez a dokumentum az AI fordítási szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár igyekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekinthető hiteles forrásnak. Fontos információk esetén javasolt profi emberi fordítást igénybe venni. Nem vállalunk felelősséget az ebből a fordításból eredő félreértésekért vagy téves értelmezésekért.
+Ez a dokumentum az AI fordító szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum anyanyelvű változata tekintendő hiteles forrásnak. Kritikus információk esetén professzionális emberi fordítást javaslunk. Nem vállalunk felelősséget az ebből a fordításból eredő félreértésekért vagy téves értelmezésekért.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

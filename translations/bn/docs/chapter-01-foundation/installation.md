@@ -1,130 +1,125 @@
-# ইনস্টলেশন ও সেটআপ গাইড
+# ইনস্টলেশন এবং সেটআপ গাইড
 
 **চ্যাপ্টার নেভিগেশন:**
 - **📚 কোর্স হোম**: [AZD ফর বিগিনার্স](../../README.md)
-- **📖 বর্তমান অধ্যায়**: অধ্যায় 1 - ভিত্তি ও দ্রুত শুরু
-- **⬅️ পূর্ববর্তী**: [AZD বেসিকস](azd-basics.md)
-- **➡️ পরবর্তী**: [আপনার প্রথম প্রকল্প](first-project.md)
-- **🚀 পরবর্তী অধ্যায়**: [অধ্যায় 2: AI-ফার্স্ট ডেভেলপমেন্ট](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 বর্তমান চ্যাপ্টার**: চ্যাপ্টার ১ - ভিত্তি এবং দ্রুত শুরু
+- **⬅️ আগের**: [AZD বেসিকস](azd-basics.md)
+- **➡️ পরের**: [আপনার প্রথম প্রকল্প](first-project.md)
+- **🚀 পরবর্তী চ্যাপ্টার**: [চ্যাপ্টার ২: এআই-প্রথম উন্নয়ন](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## পরিচিতি
 
-এই বিস্তৃত গাইডটি আপনার সিস্টেমে Azure Developer CLI (azd) ইনস্টল এবং কনফিগার করার ধাপগুলো দেখাবে। আপনি বিভিন্ন অপারেটিং সিস্টেমের জন্য একাধিক ইনস্টলেশন পদ্ধতি, প্রমাণীকরণ সেটআপ, এবং Azure ডিপ্লয়মেন্টের জন্য আপনার ডেভেলপমেন্ট পরিবেশকে প্রথমিক কনফিগারেশন কিভাবে করতে হয় তা শিখবেন।
+এই বিস্তৃত গাইডটি আপনাকে Azure Developer CLI (azd) আপনার সিস্টেমে ইনস্টল এবং কনফিগার করতে সাহায্য করবে। আপনি বিভিন্ন অপারেটিং সিস্টেমের জন্য একাধিক ইনস্টলেশন পদ্ধতি, প্রমাণীকরণ সেটআপ, এবং Azure ডিপ্লয়মেন্টের জন্য আপনার উন্নয়ন পরিবেশ প্রস্তুত করার প্রাথমিক কনফিগারেশন শিখবেন।
 
-## শেখার লক্ষ্য
+## শিক্ষার লক্ষ্য
 
-এই পাঠের শেষে আপনি:
-- আপনার অপারেটিং সিস্টেমে Azure Developer CLI সফলভাবে ইনস্টল করতে পারবেন
-- একাধিক পদ্ধতি ব্যবহার করে Azure-এ প্রমাণীকরণ কনফিগার করতে পারবেন
-- প্রয়োজনীয় পূর্বশর্তগুলি দিয়ে আপনার ডেভেলপমেন্ট পরিবেশ সেটআপ করতে পারবেন
-- বিভিন্ন ইনস্টলেশন অপশন ও কখন কোনটি ব্যবহার করবেন তা বোঝতে পারবেন
-- সাধারণ ইনস্টলেশন ও সেটআপ সমস্যাগুলি সমাধান করতে পারবেন
+এই পাঠের শেষে, আপনি পারবেন:
+- আপনার অপারেটিং সিস্টেমে সফলভাবে Azure Developer CLI ইনস্টল করতে
+- একাধিক পদ্ধতি ব্যবহার করে Azure এর সাথে প্রমাণীকরণ কনফিগার করতে
+- আপনার উন্নয়ন পরিবেশ প্রয়োজনীয় শর্তাদি দিয়ে সেটআপ করতে
+- বিভিন্ন ইনস্টলেশন অপশন এবং কখন কোনটি ব্যবহার করবেন তা বুঝতে
+- সাধারণ ইনস্টলেশন এবং সেটআপ সমস্যা সমাধান করতে
 
-## শেখার ফলাফল
+## শিক্ষার ফলাফল
 
-এই পাঠটি সম্পন্ন করার পরে, আপনি সক্ষম হবেন:
-- আপনার প্ল্যাটফর্মের উপযোগী পদ্ধতি ব্যবহার করে azd ইনস্টল করতে
-- azd auth login ব্যবহার করে Azure-এ প্রমাণীকরণ করতে
-- আপনার ইনস্টলেশন যাচাই এবং মৌলিক azd কমান্ডগুলি টেস্ট করতে
-- অপ্টিমাল azd ব্যবহার জন্য আপনার ডেভেলপমেন্ট পরিবেশ কনফিগার করতে
-- সাধারণ ইনস্টলেশন সমস্যা স্বতন্ত্রভাবে সমাধান করতে
+এই পাঠ সম্পন্ন করার পরে, আপনি সক্ষম হবেন:
+- আপনার প্ল্যাটফর্মের জন্য উপযুক্ত পদ্ধতিতে azd ইনস্টল করতে
+- azd auth login ব্যবহার করে Azure এর সাথে প্রমাণীকরণ করতে
+- আপনার ইনস্টলেশন যাচাই করতে এবং মৌলিক azd কমান্ড পরীক্ষা করতে
+- azd সঠিক ব্যবহারের জন্য আপনার উন্নয়ন পরিবেশ কনফিগার করতে
+- সাধারণ ইনস্টলেশন সমস্যা স্বাধীনভাবে সমাধান করতে
 
-এই গাইডটি আপনার অপারেটিং সিস্টেম বা ডেভেলপমেন্ট পরিবেশ যাই হোক না কেন আপনার সিস্টেমে Azure Developer CLI ইনস্টল এবং কনফিগার করতে সহায়তা করবে।
+এই গাইডটি আপনাকে Azure Developer CLI আপনার সিস্টেমে ইনস্টল এবং কনফিগার করতে সাহায্য করবে, আপনার অপারেটিং সিস্টেম বা উন্নয়ন পরিবেশ যাই হোক না কেন।
 
 ## পূর্বশর্ত
 
-azd ইনস্টল করার আগে, নিশ্চিত করুন আপনার কাছে আছে:
-- **Azure subscription** - [একটি ফ্রি অ্যাকাউন্ট তৈরি করুন](https://azure.microsoft.com/free/)
-- **Azure CLI** - প্রমাণীকরণ এবং রিসোর্স ব্যবস্থাপনার জন্য
+azd ইনস্টল করার আগে নিশ্চিত করুন আপনার কাছে আছে:
+- **Azure সাবস্ক্রিপশন** - [একটি ফ্রি অ্যাকাউন্ট তৈরি করুন](https://azure.microsoft.com/free/)
+- **Azure CLI** - প্রমাণীকরণ এবং রিসোর্স ম্যানেজমেন্টের জন্য
 - **Git** - টেমপ্লেট ক্লোন এবং ভার্সন কন্ট্রোলের জন্য
-- **Docker** (ঐচ্ছিক) - কন্টেইনারাইজড অ্যাপ্লিকেশনগুলোর জন্য
+- **Docker** (ঐচ্ছিক) - কনটেইনারাইজড অ্যাপ্লিকেশনগুলির জন্য
 
 ## ইনস্টলেশন পদ্ধতি
 
-### Windows
+### উইন্ডোজ
 
-#### বিকল্প 1: PowerShell (প্রস্তাবিত)
+#### অপশন ১: উইন্ডোজ প্যাকেজ ম্যানেজার (প্রস্তাবিত)
+```cmd
+winget install microsoft.azd
+```
+
+#### অপশন ২: পাওয়ারশেল ইনস্টল স্ক্রিপ্ট
 ```powershell
-# অ্যাডমিনিস্ট্রেটর হিসেবে বা উচ্চতর বিশেষাধিকার নিয়ে চালান
+# উইঙ্গেট অনুপলব্ধ থাকলে কার্যকর
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
-#### বিকল্প 2: Windows Package Manager (winget)
-```cmd
-winget install Microsoft.Azd
-```
-
-#### বিকল্প 3: Chocolatey
+#### অপশন ৩: চকোলেটি
 ```cmd
 choco install azd
 ```
 
-#### বিকল্প 4: ম্যানুয়াল ইনস্টলেশন
-1. GitHub থেকে সর্বশেষ রিলিজ ডাউনলোড করুন: [GitHub](https://github.com/Azure/azure-dev/releases)
-2. এটি `C:\Program Files\azd\` এ এক্সট্র্যাক্ট করুন
+#### অপশন ৪: ম্যানুয়াল ইনস্টলেশন
+1. [GitHub](https://github.com/Azure/azure-dev/releases) থেকে সর্বশেষ রিলিজ ডাউনলোড করুন
+2. `C:\Program Files\azd\` এ এক্সট্র্যাক্ট করুন
 3. PATH পরিবেশ ভেরিয়েবলে যোগ করুন
 
-### macOS
+### ম্যাকওএস
 
-#### বিকল্প 1: Homebrew (প্রস্তাবিত)
+#### অপশন ১: হোমব্রু (প্রস্তাবিত)
 ```bash
 brew tap azure/azd
 brew install azd
 ```
 
-#### বিকল্প 2: ইনস্টল স্ক্রিপ্ট
+#### অপশন ২: ইনস্টল স্ক্রিপ্ট
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### বিকল্প 3: ম্যানুয়াল ইনস্টলেশন
+#### অপশন ৩: ম্যানুয়াল ইনস্টলেশন
 ```bash
 # ডাউনলোড এবং ইনস্টল করুন
 curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.com/Azure/azure-dev/releases/latest/download --verbose
 ```
 
-### Linux
+### লিনাক্স
 
-#### বিকল্প 1: ইনস্টল স্ক্রিপ্ট (প্রস্তাবিত)
+#### অপশন ১: ইনস্টল স্ক্রিপ্ট (প্রস্তাবিত)
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### বিকল্প 2: প্যাকেজ ম্যানেজারস
+#### অপশন ২: প্যাকেজ ম্যানেজার
 
-**Ubuntu/Debian:**
+**রিলিজ অ্যাসেট থেকে ম্যানুয়াল ইনস্টলেশন:**
 ```bash
-# Microsoft প্যাকেজ রিপোজিটরি যোগ করুন
-curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-
-# azd ইনস্টল করুন
-sudo apt-get update
-sudo apt-get install azd
+# আপনার লিনাক্স আর্কিটেকচারের জন্য সর্বশেষ আর্কাইভটি থেকে ডাউনলোড করুন:
+# https://github.com/Azure/azure-dev/releases
+# তারপর এটি এক্সট্র্যাক্ট করুন এবং azd বাইনারিটি আপনার PATH-এ যোগ করুন।
 ```
 
-**RHEL/CentOS/Fedora:**
+### গিটহাব কোডস্পেসেস
+
+কিছু কোডস্পেসেস এবং ডেভ কন্টেইনার পরিবেশ ইতিমধ্যেই `azd` অন্তর্ভুক্ত করে, তবে অনুমান করার বদলে যাচাই করা উচিত:
+
 ```bash
-# Microsoft প্যাকেজ রিপোজিটরি যোগ করুন
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-sudo dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/azure-cli
-sudo dnf install azd
+azd version
 ```
 
-### GitHub Codespaces
+যদি `azd` অনুপস্থিত থাকে, তাহলে পরিবেশের জন্য স্ট্যান্ডার্ড স্ক্রিপ্ট ব্যবহার করে এটি ইনস্টল করুন।
 
-azd GitHub Codespaces-এ পূর্ব-ইনস্টল করা থাকে। শুধু একটি কোডস্পেস তৈরি করুন এবং সঙ্গে সঙ্গেই azd ব্যবহার শুরু করুন।
-
-### Docker
+### ডকার
 
 ```bash
-# কনটেইনারে azd চালান
+# একটি কনটেইনারে azd চালান
 docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest
 
-# সহজ ব্যবহারের জন্য একটি অ্যালিয়াস তৈরি করুন
+# সহজ ব্যবহারের জন্য একটি ছদ্মনাম তৈরি করুন
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
-## ✅ ইনস্টলেশন যাচাই
+## ✅ ইনস্টলেশন যাচাই করুন
 
 ইনস্টলেশনের পরে, azd সঠিকভাবে কাজ করছে কিনা যাচাই করুন:
 
@@ -132,10 +127,10 @@ alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-
 # সংস্করণ পরীক্ষা করুন
 azd version
 
-# সহায়তা দেখুন
+# সাহায্য দেখুন
 azd --help
 
-# উপলব্ধ টেমপ্লেটগুলির তালিকা
+# উপলব্ধ টেমপ্লেটগুলি তালিকা করুন
 azd template list
 ```
 
@@ -144,46 +139,79 @@ azd template list
 azd version 1.x.x (commit xxxxxx)
 ```
 
-**নোট**: বাস্তব সংস্করণ নম্বর পরিবর্তিত হতে পারে। সর্বশেষ সংস্করণের জন্য দেখুন [Azure Developer CLI releases](https://github.com/Azure/azure-dev/releases)।
+**নোট**: প্রকৃত ভার্সন নম্বর ভিন্ন হবে। সর্বশেষ সংস্করণের জন্য [Azure Developer CLI রিলিজ](https://github.com/Azure/azure-dev/releases) দেখুন।
 
 **✅ ইনস্টলেশন সফলতার চেকলিস্ট:**
 - [ ] `azd version` ত্রুটি ছাড়াই সংস্করণ নম্বর দেখায়
 - [ ] `azd --help` কমান্ড ডকুমেন্টেশন প্রদর্শন করে
-- [ ] `azd template list` উপলব্ধ টেমপ্লেটগুলি দেখায়
-- [ ] `az account show` আপনার Azure subscription প্রদর্শন করে
-- [ ] আপনি একটি টেস্ট ডিরেক্টরি তৈরি করে `azd init` সফলভাবে চালাতে পারেন
+- [ ] `azd template list` উপলব্ধ টেমপ্লেট দেখায়
+- [ ] আপনি একটি টেস্ট ডিরেক্টরি তৈরি করতে পারেন এবং সফলভাবে `azd init` চালাতে পারেন
 
-**যদি সব চেক পাস করে, আপনি [আপনার প্রথম প্রকল্প](first-project.md)-এ এগোতে প্রস্তুত!**
+**যদি সমস্ত চেক সফল হয়, তাহলে আপনি [আপনার প্রথম প্রকল্প](first-project.md) এ এগিয়ে যেতে প্রস্তুত!**
 
 ## প্রমাণীকরণ সেটআপ
 
-### Azure CLI প্রমাণীকরণ (প্রস্তাবিত)
+### প্রস্তাবিত новичক সেটআপ
+
+AZD-প্রথম কর্মপ্রবাহের জন্য, `azd auth login` দিয়ে সাইন ইন করুন।
+
 ```bash
-# যদি ইতিমধ্যেই ইনস্টল করা না থাকে তবে Azure CLI ইনস্টল করুন
+# azd up এর মতো AZD কমান্ডের জন্য প্রয়োজন
+azd auth login
+
+# AZD প্রমাণীকরণ স্থিতি যাচাই করুন
+azd auth login --check-status
+```
+
+কোর্স চলাকালীন যখন আপনি নিজে `az` কমান্ড চালানোর পরিকল্পনা করেন তখনই Azure CLI সাইন-ইন ব্যবহার করুন।
+
+### Azure CLI প্রমাণীকরণ (ঐচ্ছিক)
+```bash
+# যদি ইতিমধ্যে ইনস্টল না করা থাকে তাহলে Azure CLI ইনস্টল করুন
 # উইন্ডোজ: winget install Microsoft.AzureCLI
 # ম্যাকওএস: brew install azure-cli
-# লিনাক্স: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+# লিনাক্স: আপনার বিতরণের জন্য Azure CLI ইনস্টল ডকুমেন্টেশন দেখুন
 
-# Azure-এ লগইন করুন
+# Azure এ লগইন করুন
 az login
 
 # প্রমাণীকরণ যাচাই করুন
 az account show
 ```
 
+### কোন সাইন-ইন ফ্লো ব্যবহার করবেন?
+
+- যদি আপনি বিগিনার AZD পাথ অনুসরণ করেন এবং প্রধানত `azd` কমান্ড চালান, তবে `azd auth login` ব্যবহার করুন।
+- যখন আপনি Azure CLI কমান্ড যেমন `az account show` বা সরাসরি রিসোর্স পরীক্ষা করতে চান তখন `az login` ও ব্যবহার করুন।
+- যদি কোনো এক্সারসাইজে `azd` এবং `az` উভয় কমান্ড থাকে, তাহলে দুটো সাইন-ইন কমান্ড শুরুতেই একবার চালান।
+
 ### ডিভাইস কোড প্রমাণীকরণ
-যদি আপনি হেডলেস সিস্টেমে থাকেন বা ব্রাউজার সম্পর্কিত সমস্যা থাকে:
+যদি আপনি হেডলেস সিস্টেমে থাকেন বা ব্রাউজার সমস্যা থাকে:
 ```bash
-az login --use-device-code
+azd auth login --use-device-code
 ```
 
 ### সার্ভিস প্রিন্সিপাল (CI/CD)
 স্বয়ংক্রিয় পরিবেশের জন্য:
 ```bash
-az login --service-principal \
-  --username <client-id> \
-  --password <client-secret> \
-  --tenant <tenant-id>
+azd auth login \
+  --client-id <client-id> \
+  --client-secret <client-secret> \
+  --tenant-id <tenant-id>
+```
+
+### আপনার সম্পূর্ণ সেটআপ যাচাই করুন
+
+যদি আপনি চ্যাপ্টার ১ শুরু করার আগে দ্রুত পরীক্ষামূলক প্রস্তুতি চান:
+
+**উইন্ডোজ:**
+```powershell
+.\validate-setup.ps1
+```
+
+**ম্যাকওএস / লিনাক্স:**
+```bash
+bash ./validate-setup.sh
 ```
 
 ## কনফিগারেশন
@@ -197,13 +225,13 @@ azd config set defaults.subscription <subscription-id>
 azd config set defaults.location eastus2
 
 # সমস্ত কনফিগারেশন দেখুন
-azd config list
+azd config show
 ```
 
 ### পরিবেশ ভেরিয়েবল
-আপনার শেল প্রোফাইলে যোগ করুন (`.bashrc`, `.zshrc`, `.profile`):
+আপনার শেল প্রোফাইলে (`.bashrc`, `.zshrc`, `.profile`) যোগ করুন:
 ```bash
-# Azure কনফিগারেশন
+# আজুর কনফিগারেশন
 export AZURE_SUBSCRIPTION_ID="your-subscription-id"
 export AZURE_LOCATION="eastus2"
 
@@ -212,22 +240,22 @@ export AZD_ALPHA_ENABLE_APPSERVICE_REMOTE_DEBUGGING=true
 export AZD_DEBUG=true  # ডিবাগ লগিং সক্ষম করুন
 ```
 
-## IDE ইন্টিগ্রেশন
+## আইডিই ইন্টিগ্রেশন
 
-### Visual Studio Code
+### ভিজ্যুয়াল স্টুডিও কোড
 Azure Developer CLI এক্সটেনশন ইনস্টল করুন:
 1. VS Code খুলুন
 2. এক্সটেনশনে যান (Ctrl+Shift+X)
-3. "Azure Developer CLI" সার্চ করুন
+3. "Azure Developer CLI" খুঁজুন
 4. এক্সটেনশন ইনস্টল করুন
 
-ফিচারসমূহ:
+বৈশিষ্ট্য:
 - azure.yaml এর জন্য IntelliSense
-- একীভূত টার্মিনাল কমান্ড
+- ইন্টিগ্রেটেড টার্মিনাল কমান্ড
 - টেমপ্লেট ব্রাউজিং
 - ডিপ্লয়মেন্ট মনিটরিং
 
-### GitHub Codespaces
+### গিটহাব কোডস্পেসেস
 একটি `.devcontainer/devcontainer.json` তৈরি করুন:
 ```json
 {
@@ -242,28 +270,28 @@ Azure Developer CLI এক্সটেনশন ইনস্টল করুন:
 
 ### IntelliJ/JetBrains
 1. Azure প্লাগইন ইনস্টল করুন
-2. Azure ক্রেডেনশিয়াল কনফিগার করুন
-3. azd কমান্ডগুলির জন্য একীভূত টার্মিনাল ব্যবহার করুন
+2. Azure ক্রেডেনশিয়ালস কনফিগার করুন
+3. ইন্টিগ্রেটেড টার্মিনাল থেকে azd কমান্ড ব্যবহার করুন
 
-## 🐛 ইনস্টলেশন সমস্যার সমাধান
+## 🐛 ইনস্টলেশন সমস্যা সমাধান
 
 ### সাধারণ সমস্যা
 
-#### Permission Denied (Windows)
+#### অনুমতি অস্বীকৃত (উইন্ডোজ)
 ```powershell
-# PowerShell-কে প্রশাসক হিসেবে চালান
+# PowerShell অ্যাডমিনিস্ট্রেটর হিসেবে চালান
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 #### PATH সমস্যা
-হাতে করে azd আপনার PATH-এ যোগ করুন:
+হাত দিয়ে azd আপনার PATH এ যোগ করুন:
 
-**Windows:**
+**উইন্ডোজ:**
 ```cmd
 setx PATH "%PATH%;C:\Program Files\azd\"
 ```
 
-**macOS/Linux:**
+**ম্যাকওএস/লিনাক্স:**
 ```bash
 echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
 source ~/.bashrc
@@ -275,29 +303,29 @@ source ~/.bashrc
 azd config set http.proxy http://proxy:8080
 azd config set https.proxy https://proxy:8080
 
-# SSL যাচাই বাদ দিন (উৎপাদন পরিবেশে এটি সুপারিশ করা হয় না)
+# SSL যাচাইকরণ এড়িয়ে যান (প্রোডাকশনের জন্য সুপারিশ করা হয় না)
 azd config set http.insecure true
 ```
 
-#### সংস্করণ বিরোধ
+#### সংস্করণ সংঘাত
 ```bash
-# পুরানো ইনস্টলেশনগুলি মুছে ফেলুন
-# উইন্ডোজ: winget uninstall Microsoft.Azd
+# পুরানো ইনস্টলেশন সরান
+# উইন্ডোজ: winget uninstall microsoft.azd
 # ম্যাকওএস: brew uninstall azd
-# লিনাক্স: sudo apt remove azd
+# লিনাক্স: পুনঃইনস্টলেশনের আগে পূর্ববর্তী azd বাইনারি বা সিমলিঙ্ক সরান
 
 # কনফিগারেশন পরিষ্কার করুন
 rm -rf ~/.azd
 ```
 
-### আরও সাহায্য নেওয়া
+### আরও সাহায্য পাওয়া
 ```bash
-# ডিবাগ লগিং সক্রিয় করুন
+# ডিবাগ লগিং সক্ষম করুন
 export AZD_DEBUG=true
 azd <command> --debug
 
 # বর্তমান কনফিগারেশন দেখুন
-azd config list
+azd config show
 
 # বর্তমান ডিপ্লয়মেন্টের অবস্থা দেখুন
 azd show
@@ -305,68 +333,68 @@ azd show
 
 ## azd আপডেট করা
 
-### স্বয়ংক্রিয় আপডেট
-azd আপডেট উপলব্ধ হলে আপনাকে জানাবে:
+### আপডেট চেক
+azd তখনই সতর্ক করে যখন একটি নতুন রিলিজ পাওয়া যায়, এবং আপনি আপনার বর্তমান বিল্ড নিশ্চিত করতে পারেন:
 ```bash
-azd version --check-for-updates
+azd version
 ```
 
 ### ম্যানুয়াল আপডেট
 
-**Windows (winget):**
+**উইন্ডোজ (winget):**
 ```cmd
-winget upgrade Microsoft.Azd
+winget upgrade microsoft.azd
 ```
 
-**macOS (Homebrew):**
+**ম্যাকওএস (হোমব্রু):**
 ```bash
 brew upgrade azd
 ```
 
-**Linux:**
+**লিনাক্স:**
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-## 💡 প্রায়শই জিজ্ঞাসা করা প্রশ্ন
+## 💡 প্রায়শই জিজ্ঞাস্য
 
 <details>
-<summary><strong>azd এবং az CLI-এর মধ্যে পার্থক্য কী?</strong></summary>
+<summary><strong>azd এবং az CLI এর মধ্যে পার্থক্য কী?</strong></summary>
 
-**Azure CLI (az)**: ব্যক্তিগত Azure রিসোর্সগুলি পরিচালনার জন্য নিম্ন-স্তরের টুল
+**Azure CLI (az)**: পৃথক Azure রিসোর্স পরিচালনার জন্য নিচ-স্তরের টুল
 - `az webapp create`, `az storage account create`
-- একবারে একটি রিসোর্স
-- ইনফ্রাসট্রাকচার ব্যবস্থাপনার উপর ফোকাস
+- এক সময়ে এক রিসোর্স
+- অবকাঠামো ব্যবস্থাপনা কেন্দ্রিক
 
 **Azure Developer CLI (azd)**: সম্পূর্ণ অ্যাপ্লিকেশন ডিপ্লয়মেন্টের জন্য উচ্চ-স্তরের টুল
 - `azd up` সম্পূর্ণ অ্যাপ এবং সমস্ত রিসোর্স ডিপ্লয় করে
-- টেমপ্লেট-ভিত্তিক ওয়ার্কফ্লো
-- ডেভেলপার উৎপাদনশীলতার দিকে ফোকাস
+- টেমপ্লেট-ভিত্তিক কর্মপ্রবাহ
+- ডেভেলপার উৎপাদনত্মকতা ফোকাস
 
-**আপনাকে উভয়ই দরকার**: azd প্রমাণীকরণের জন্য az CLI ব্যবহার করে
+**আপনার উভয়ের প্রয়োজন**: azd প্রমাণীকরণের জন্য az CLI ব্যবহার করে
 </details>
 
 <details>
-<summary><strong>আমি কি বিদ্যমান Azure রিসোর্সগুলির সাথে azd ব্যবহার করতে পারি?</strong></summary>
+<summary><strong>আমি কি বিদ্যমান Azure রিসোর্সের সাথে azd ব্যবহার করতে পারি?</strong></summary>
 
-হ্যাঁ! আপনি করতে পারেন:
-1. বিদ্যমান রিসোর্সগুলি azd এনভায়রনমেন্টে ইম্পোর্ট করতে
+হ্যাঁ! আপনি পারেন:
+1. বিদ্যমান রিসোর্স azd পরিবেশে ইমপোর্ট করতে
 2. আপনার Bicep টেমপ্লেটে বিদ্যমান রিসোর্স রেফারেন্স করতে
-3. বিদ্যমান ইনফ্রাস্ট্রাকচারের পাশে azd ব্যবহার করে নতুন ডিপ্লয়মেন্ট করতে
+3. বিদ্যমান অবকাঠামোর পাশে নতুন ডিপ্লয়মেন্টের জন্য azd ব্যবহার করতে
 
-বিস্তারিত জন্য দেখুন [Configuration Guide](configuration.md)।
+বিস্তারিত জানতে দেখুন [কনফিগারেশন গাইড](configuration.md)।
 </details>
 
 <details>
-<summary><strong>azd কি Azure Government বা Azure China-এ কাজ করে?</strong></summary>
+<summary><strong>azd কি Azure Government বা Azure China এর সাথে কাজ করে?</strong></summary>
 
 হ্যাঁ, ক্লাউড কনফিগার করুন:
 ```bash
-# অ্যাজিউর সরকারি
+# আজুর গভর্নমেন্ট
 az cloud set --name AzureUSGovernment
 az login
 
-# অ্যাজিউর চীন
+# আজুর চীন
 az cloud set --name AzureChinaCloud
 az login
 ```
@@ -376,54 +404,54 @@ az login
 <summary><strong>আমি কি CI/CD পাইপলাইনে azd ব্যবহার করতে পারি?</strong></summary>
 
 অবশ্যই! azd স্বয়ংক্রিয়তার জন্য ডিজাইন করা হয়েছে:
-- GitHub Actions ইন্টিগ্রেশন
-- Azure DevOps সাপোর্ট
+- গিটহাব অ্যাকশনের ইন্টিগ্রেশন
+- Azure DevOps সমর্থন
 - সার্ভিস প্রিন্সিপাল প্রমাণীকরণ
-- নন-ইন্টারঅ্যাকটিভ মোড
+- নন-ইন্টারেক্টিভ মোড
 
-CI/CD প্যাটার্নের জন্য দেখুন [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)।
+CI/CD প্যাটার্নের জন্য দেখুন [ডিপ্লয়মেন্ট গাইড](../chapter-04-infrastructure/deployment-guide.md)।
 </details>
 
 <details>
-<summary><strong>azd ব্যবহার করার খরচ কত?</strong></summary>
+<summary><strong>azd ব্যবহারের খরচ কত?</strong></summary>
 
-azd নিজেই **সম্পূর্ণ বিনামূল্যে** এবং ওপেন-সোর্স। আপনি কেবল নিম্নলিখিতগুলোর জন্য অর্থ প্রদান করবেন:
-- আপনি যে Azure রিসোর্সগুলি ডিপ্লয় করেন সেগুলি
-- Azure খরচ (compute, storage ইত্যাদি)
+azd নিজেই **সম্পূর্ণ ফ্রি** এবং ওপেন-সোর্স। আপনি শুধু যা পরিশোধ করবেন:
+- আপনি যে Azure রিসোর্স ডিপ্লয় করবেন
+- Azure ব্যবহার খরচ (কম্পিউট, স্টোরেজ, ইত্যাদি)
 
-ডিপ্লয়মেন্টের আগে খরচ অনুমান করতে `azd provision --preview` ব্যবহার করুন।
+ডিপ্লয়মেন্টের আগে খরচ মূল্যায়নের জন্য `azd provision --preview` ব্যবহার করুন।
 </details>
 
 ## পরবর্তী ধাপ
 
-1. **প্রমাণীকরণ সম্পূর্ণ করুন**: নিশ্চিত করুন আপনি আপনার Azure subscription-এ অ্যাক্সেস করতে পারেন
-2. **আপনার প্রথম ডিপ্লয়মেন্ট চেষ্টা করুন**: অনুসরণ করুন [First Project Guide](first-project.md)
-3. **টেমপ্লেটগুলো অন্বেষণ করুন**: `azd template list` দিয়ে উপলব্ধ টেমপ্লেট ব্রাউজ করুন
-4. **আপনার IDE কনফিগার করুন**: আপনার ডেভেলপমেন্ট পরিবেশ সেটআপ করুন
+1. **প্রমাণীকরণ সম্পন্ন করুন**: নিশ্চিত করুন আপনি আপনার Azure সাবস্ক্রিপশনে প্রবেশ করতে পারেন
+2. **আপনার প্রথম ডিপ্লয়মেন্ট চেষ্টা করুন**: [প্রথম প্রকল্প গাইড](first-project.md) অনুসরণ করুন
+3. **টেমপ্লেট ব্রাউজ করুন**: উপলব্ধ টেমপ্লেট দেখুন `azd template list` ব্যবহার করে
+4. **আপনার আইডিই কনফিগার করুন**: উন্নয়ন পরিবেশ সেটআপ করুন
 
 ## সহায়তা
 
-যদি আপনি সমস্যার সম্মুখীন হন:
-- [Official Documentation](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Report Issues](https://github.com/Azure/azure-dev/issues)
-- [Community Discussions](https://github.com/Azure/azure-dev/discussions)
-- [Azure Support](https://azure.microsoft.com/support/)
-- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - আপনার এডিটরে সরাসরি Azure কমান্ড নির্দেশনা পান `npx skills add microsoft/github-copilot-for-azure` ব্যবহার করে
+যদি সমস্যার সম্মুখীন হন:
+- [সরকারি ডকুমেন্টেশন](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [সমস্যার প্রতিবেদন](https://github.com/Azure/azure-dev/issues)
+- [কমিউনিটি আলোচনা](https://github.com/Azure/azure-dev/discussions)
+- [Azure সহায়তা](https://azure.microsoft.com/support/)
+- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - `npx skills add microsoft/github-copilot-for-azure` দিয়ে সরাসরি আপনার এডিটরে Azure কমান্ড নির্দেশনা পান
 
 ---
 
 **চ্যাপ্টার নেভিগেশন:**
 - **📚 কোর্স হোম**: [AZD ফর বিগিনার্স](../../README.md)
-- **📖 বর্তমান অধ্যায়**: অধ্যায় 1 - ভিত্তি ও দ্রুত শুরু
-- **⬅️ পূর্ববর্তী**: [AZD বেসিকস](azd-basics.md) 
-- **➡️ পরবর্তী**: [আপনার প্রথম প্রকল্প](first-project.md)
-- **🚀 পরবর্তী অধ্যায়**: [অধ্যায় 2: AI-ফার্স্ট ডেভেলপমেন্ট](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 বর্তমান চ্যাপ্টার**: চ্যাপ্টার ১ - ভিত্তি এবং দ্রুত শুরু
+- **⬅️ আগের**: [AZD বেসিকস](azd-basics.md) 
+- **➡️ পরের**: [আপনার প্রথম প্রকল্প](first-project.md)
+- **🚀 পরবর্তী চ্যাপ্টার**: [চ্যাপ্টার ২: এআই-প্রথম উন্নয়ন](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**✅ ইনস্টলেশন সম্পূর্ণ!** শুরু করতে [Your First Project](first-project.md)-এ যান এবং azd দিয়ে বিল্ড শুরু করুন।
+**✅ ইনস্টলেশন সম্পূর্ণ হয়েছে!** azd দিয়ে নির্মাণ শুরু করতে [আপনার প্রথম প্রকল্প](first-project.md) এ যান।
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-অস্বীকার:
-এই নথিটি এআই অনুবাদ সেবা Co-op Translator (https://github.com/Azure/co-op-translator) ব্যবহার করে অনুবাদ করা হয়েছে। যদিও আমরা যথাসম্ভব সঠিকতার চেষ্টা করি, অনুগ্রহ করে মনে রাখুন যে স্বয়ংক্রিয় অনুবাদে ত্রুটি বা অসঙ্গতি থাকতে পারে। মূল নথিটি তার নিজ ভাষায়ই কর্তৃত্বপূর্ণ উৎস হিসেবে বিবেচিত হবে। গুরুত্বপূর্ণ তথ্যের জন্য পেশাদার মানব অনুবাদ গ্রহণ করার পরামর্শ দেওয়া হয়। এই অনুবাদ ব্যবহারের ফলে যে কোনো ভুল বোঝাবুঝি বা ভ্রান্তির জন্য আমরা দায়ী নই।
+**অস্বীকৃতি**:  
+এই ডকুমেন্টটি AI অনুবাদ সেবা [Co-op Translator](https://github.com/Azure/co-op-translator) ব্যবহার করে অনূলিত হয়েছে। যদিও আমরা যথাসাধ্য সঠিকতার চেষ্টা করি, দয়া করে সচেতন থাকুন যে স্বয়ংক্রিয় অনুবাদে ত্রুটি বা অসঙ্গতি থাকতে পারে। প্রকৃত ডকুমেন্টটি তার নিজস্ব ভাষায়ই বিদ্যমান হওয়ায় সেটিকে প্রাধান্যপূর্ণ উৎস হিসেবে বিবেচনা করা উচিত। গুরুত্বপূর্ণ তথ্যের জন্য পেশাদারমানব অনুবাদের পরামর্শ দেওয়া হয়। এই অনুবাদ ব্যবহারের ফলে কোনো ভুল বোঝাবুঝি বা ভুল ব্যাখ্যার জন্য আমরা দায়বদ্ধ নই।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

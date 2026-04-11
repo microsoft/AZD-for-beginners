@@ -1,48 +1,50 @@
-# Microsoft Foundry ကို AZD နှင့် ပေါင်းစည်းခြင်း
+# Microsoft Foundry Integration with AZD
 
 **Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: အခန်း ၂ - AI-ပထမ ဖွံ့ဖြိုးရေး
-- **⬅️ Previous Chapter**: [အခန်း ၁: သင့် ပထမဆုံး ပရောဂျက်](../chapter-01-foundation/first-project.md)
-- **➡️ Next**: [AI မော်ဒယ် တပ်ဆင်ခြင်း](ai-model-deployment.md)
-- **🚀 Next Chapter**: [အခန်း ၃: ဖွဲ့စည်းမှု](../chapter-03-configuration/configuration.md)
+- **📖 Current Chapter**: Chapter 2 - AI-First Development
+- **⬅️ Previous Chapter**: [Chapter 1: Your First Project](../chapter-01-foundation/first-project.md)
+- **➡️ Next**: [AI Model Deployment](ai-model-deployment.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
-## အကြောင်းအကျဉ်း
+## Overview
 
-ဤလမ်းညွှန်သည် Microsoft Foundry ဝန်ဆောင်မှုများကို Azure Developer CLI (AZD) နှင့် ပေါင်းစည်း၍ AI အက်ပလီကေးရှင်းများကို ပိုမိုလွယ်ကူစွာ တပ်ဆင်နိုင်စေရန် ပြသပေးပါသည်။ Microsoft Foundry သည် AI အက်ပလီကေးရှင်းများကို တည်ဆောက်၊ တပ်ဆင် နှင့် စီမံခန့်ခွဲရန် အပြည့်အစုံ ပလက်ဖောင်းကို ပံ့ပိုးပြီး AZD သည် အင်ဖရာစထရပ်ချာနှင့် တပ်ဆင်ခြင်းလုပ်ငန်းစဉ်ကို ရိုးရှင်းစေပါသည်။
+ဤလမ်းပြသည် Microsoft Foundry ဝန်ဆောင်မှုများကို Azure Developer CLI (AZD) နှင့်ပေါင်းစည်း၍ AI အပ်ပလီကေးရှင်းများကို အလွယ်တကူ တည်ဆောက်၊ တပ်ဆင်နှင့်စီမံခန့်ခွဲနိုင်ခြင်းကို ဖော်ပြသည်။ Microsoft Foundry သည် AI အပလီကေးရှင်းများဆောက်ရန်၊ တပ်ဆင်ရန်နှင့် စီမံရန် အပြည့်အစုံပလက်ဖောင်းဖြစ်ပြီး AZD သည် အင်ဖရာစထပ်ချာနှင့် တပ်ဆင်ရေးလုပ်ငန်းစဉ်များကို ရိုးရှင်းစေသည်။
 
-## Microsoft Foundry ဆိုတာဘာလဲ?
+## What is Microsoft Foundry?
 
-Microsoft Foundry သည် Microsoft ၏ AI ဖွံ့ဖြိုးရေးအတွက် ညီညွတ်စုပေါင်းထားသည့် ပလက်ဖောင်းဖြစ်ပြီး အောက်ဖော်ပြပါများကို ပါဝင်သည် -
+Microsoft Foundry သည် Microsoft ၏ AI ဖွံ့ဖြိုးရေးအတွက် ပေါင်းစည်းထားသော ပလက်ဖောင်းဖြစ်ပြီး အောက်ပါများပါဝင်ပါတယ်။
 
-- **Model Catalog**: ခေတ်မီ AI မော်ဒယ်များသို့ ဝင်ရောက်နိုင်မှု
-- **Prompt Flow**: AI လုပ်ငန်းစဉ်များအတွက် ဗစ္စူးချုပ် အလှတရား ဒီဇိုင်နာ
-- **Microsoft Foundry Portal**: AI အက်ပလီကေးရှင်းများအတွက် ပေါင်းစည်းထားသော ဖွံ့ဖြိုးရေး ပတ်ဝန်းကျင်
-- **Deployment Options**: မျိုးစုံသော ဟိုစတင်းနှင့် အရွယ်တင်ခွင့် ရွေးချယ်စရာများ
-- **Safety and Security**: တာဝန်ရှိသော AI လုပ်ဆောင်ချက်များကို ထည့်သွင်းထားသည့် လုံခြုံမှုနှင့် ဘေးကင်းရေးအင်္ဂါရပ်များ
+- **Model Catalog**: အဆင့်မြင့် AI မော်ဒယ်များသို့ ဝင်ရောက်နိုင်ခြင်း
+- **Prompt Flow**: AI လုပ်ငန်းစဉ်များအတွက် visual ဒီဇိုင်နာ
+- **Microsoft Foundry Portal**: AI အပလီကေးရှင်းများအတွက် ပေါင်းစည်းထားသော ဖွံ့ဖြိုးရေးပတ်ဝန်းကျင်
+- **Deployment Options**: မဟာဗျူဟာနှင့် မျိုးစုံသော hosting နှင့် scaling ရွေးချယ်စရာများ
+- **Safety and Security**: တပ်ဆင်ထားသော တာဝန်ရှိသော AI ဖိုင်ချာများ
 
-## AZD + Microsoft Foundry: ပို၍ ကောင်းမွန်စေခြင်း
+## AZD + Microsoft Foundry: Better Together
 
 | Feature | Microsoft Foundry | AZD Integration Benefit |
 |---------|-----------------|------------------------|
-| **Model Deployment** | လက်ခလုတ်ဖြင့် portal မှ တပ်ဆင်ခြင်း | အလိုအလျောက်၊ ထပ်ခါထပ်မှန် ပြန်လည်ဆောင်ရွက်နိုင်သော တပ်ဆင်မှုများ |
+| **Model Deployment** | Manual portal deployment | Automated, repeatable deployments |
 | **Infrastructure** | Click-through provisioning | Infrastructure as Code (Bicep) |
-| **Environment Management** | တစ်ခုတည်းသော ပတ်ဝန်းကျင် အာရုံစိုက်မှု | ပတ်ဝန်းကျင်များစုံ (dev/staging/prod) |
-| **CI/CD Integration** | ကန့်သတ်ချက်အချို့ရှိသည် | Native GitHub Actions ပံ့ပိုးမှု |
-| **Cost Management** | မူလစောင့်ကြည့်ခြင်း | ပတ်ဝန်းကျင်အလိုက် ကုန်ကျစရိတ် အကောင်းဆုံး ချိန်ညှိနိုင်မှု |
+| **Environment Management** | Single environment focus | Multi-environment (dev/staging/prod) |
+| **CI/CD Integration** | Limited | Native GitHub Actions support |
+| **Cost Management** | Basic monitoring | Environment-specific cost optimization |
 
-## လိုအပ်ချက်များ
+## Prerequisites
 
-- သင့်တွင် သင့်တော်သော ခွင့်ပြုချက်များဖြင့် Azure subscription ရှိရမည်
-- Azure Developer CLI ထည့်သွင်းထားရမည်
-- Microsoft Foundry Models ဝန်ဆောင်မှုများသို့ ဝင်ရောက်ခွင့်ရှိရမည်
-- Microsoft Foundry နှင့် အခြေခံ မှတ်ရမှုများ သိရှိမှု ရှိရမည်
+- Azure subscription with appropriate permissions
+- Azure Developer CLI installed
+- Access to Microsoft Foundry Models services
+- Basic familiarity with Microsoft Foundry
 
-## မူလ ပေါင်းစည်းမှု ပုံစံများ
+> **Current AZD baseline:** These examples were reviewed against `azd` `1.23.12`. For the AI agent workflow, use the current preview extension release and check your installed version before you begin.
 
-### ပုံစံ 1: Microsoft Foundry Models ပေါင်းစည်းမှု
+## Core Integration Patterns
 
-**Use Case**: Microsoft Foundry Models မော်ဒယ်များဖြင့် chat အက်ပလီကေးရှင်းများ တပ်ဆင်ခြင်း
+### Pattern 1: Microsoft Foundry Models Integration
+
+**Use Case**: Deploy chat applications with Microsoft Foundry Models models
 
 ```yaml
 # azure.yaml
@@ -56,7 +58,7 @@ services:
       - AZURE_OPENAI_API_KEY
 ```
 
-**အင်ဖရာစထရပ်ချာ (main.bicep):**
+**Infrastructure (main.bicep):**
 ```bicep
 // Microsoft Foundry Models Account
 resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
@@ -75,12 +77,12 @@ resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
 // Deploy GPT model
 resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAIAccount
-  name: 'gpt-35-turbo'
+  name: 'gpt-4.1-mini'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-35-turbo'
-      version: '0613'
+      name: 'gpt-4.1-mini'
+      version: '2024-07-18'
     }
     scaleSettings: {
       scaleType: 'Standard'
@@ -90,9 +92,9 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 }
 ```
 
-### ပုံစံ 2: AI Search + RAG ပေါင်းစည်းမှု
+### Pattern 2: AI Search + RAG Integration
 
-**Use Case**: retrieval-augmented generation (RAG) အက်ပလီကေးရှင်းများ တပ်ဆင်ခြင်း
+**Use Case**: Deploy retrieval-augmented generation (RAG) applications
 
 ```bicep
 // Azure AI Search
@@ -120,9 +122,9 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### ပုံစံ 3: Document Intelligence ပေါင်းစည်းမှု
+### Pattern 3: Document Intelligence Integration
 
-**Use Case**: စာရွက်စာတမ်း ချိန်ခွင့်လုပ်ငန်းစဉ်များနှင့် ခွဲခြမ်းစိတ်ဖြာခြင်း
+**Use Case**: Document processing and analysis workflows
 
 ```bicep
 // Document Intelligence service
@@ -153,35 +155,35 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 }
 ```
 
-## 🔧 ဖွဲ့စည်းမှုပုံစံများ
+## 🔧 Configuration Patterns
 
-### ပတ်ဝန်းကျင် အပြောင်းအလဲ အချက်များ သတ်မှတ်ခြင်း
+### Environment Variables Setup
 
-**ထုတ်လုပ်ရေး ဖွဲ့စည်းမှု:**
+**Production Configuration:**
 ```bash
 # အဓိက AI ဝန်ဆောင်မှုများ
 azd env set AZURE_OPENAI_ENDPOINT "https://your-openai.openai.azure.com/"
 azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
-# မော်ဒယ် ပြင်ဆင်ချက်များ
-azd env set AZURE_OPENAI_MODEL "gpt-35-turbo"
-azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-ada-002"
+# မော်ဒယ် ဆက်တင်များ
+azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
+azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-3-large"
 
-# စွမ်းဆောင်ရည် ချိန်ညှိချက်များ
+# စွမ်းဆောင်ရည် ဆက်တင်များ
 azd env set AZURE_OPENAI_CAPACITY 30
 azd env set AZURE_SEARCH_SKU "standard"
 ```
 
-**ဖွံ့ဖြိုးရေး ဖွဲ့စည်းမှု:**
+**Development Configuration:**
 ```bash
-# ဖွံ့ဖြိုးရေးအတွက် ကုန်ကျစရိတ် ထိရောက်စွာ ညှိထားသော ဆက်တင်များ
+# ဖွံ့ဖြိုးရေးအတွက် ကုန်ကျစရိတ် အထိရောက်ဆုံး ဖြစ်အောင် ပြင်ဆင်ထားသော ဆက်တင်များ
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # အခမဲ့ အဆင့်
 ```
 
-### Key Vault ဖြင့် လုံခြုံစိတ်ချစွာ ဖွဲ့စည်းခြင်း
+### Secure Configuration with Key Vault
 
 ```bicep
 // Key Vault for secrets
@@ -216,52 +218,62 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-## တပ်ဆင်မှု လုပ်ငန်းစဉ်များ
+## Deployment Workflows
 
-### Foundry အတွက် AZD တိုးချဲ့မှုများ
+### AZD Extensions for Foundry
 
-AZD သည် Microsoft Foundry ဝန်ဆောင်မှုများနှင့် အလုပ်လုပ်ရန် AI-သက်ဆိုင်သော အင်္ဂါရပ်များကို ထည့်သွင်းပေးသည့် တိုးချဲ့မှုများကို ပံ့ပိုးပေးပါသည်။
+AZD သည် Microsoft Foundry ဝန်ဆောင်မှုများနှင့်လုပ်ဆောင်ရန် AI-ဆိုင်ရာ လုပ်ဆောင်ချက်များကို ထည့်သွင်းပေးသည့် extension များကို ပေးသည်။
 
 ```bash
-# Foundry agents တိုးချဲ့မှုကို ထည့်သွင်းပါ
+# Foundry agents extension ကို တပ်ဆင်ပါ
 azd extension install azure.ai.agents
 
-# fine-tuning တိုးချဲ့မှုကို ထည့်သွင်းပါ
+# fine-tuning ချဲ့ထည့်ပစ္စည်းကို တပ်ဆင်ပါ
 azd extension install azure.ai.finetune
 
-# custom models တိုးချဲ့မှုကို ထည့်သွင်းပါ
+# စိတ်ကြိုက်မော်ဒယ်များ ချဲ့ထည့်ပစ္စည်းကို တပ်ဆင်ပါ
 azd extension install azure.ai.models
 
-# ထည့်သွင်းထားသော တိုးချဲ့မှုများကို စာရင်းပြပါ
-azd extension list
+# တပ်ဆင်ထားသော ချဲ့ထည့်ပစ္စည်းများကို စာရင်းပြပါ
+azd extension list --installed
+
+# ယခုတပ်ဆင်ထားသော agent ချဲ့ထည့်ပစ္စည်း၏ ဗားရှင်းကို စစ်ဆေးပါ
+azd extension show azure.ai.agents
 ```
 
-### Agent-First တပ်ဆင်မှု `azd ai` ဖြင့်
+The AI extensions are still moving quickly in preview. If a command behaves differently than shown here, upgrade the relevant extension before troubleshooting the project itself.
 
-agent manifest ရှိပါက၊ `azd ai agent init` ကို အသုံးပြုပြီး Foundry Agent Service နှင့် ချိတ်ဆက်ထားသော project ကို scaffold လုပ်ပါ။
+### Agent-First Deployment with `azd ai`
+
+If you have an agent manifest, use `azd ai agent init` to scaffold a project wired to Foundry Agent Service:
 
 ```bash
-# အေဂျင့် manifest မှ အစပြုရန်
+# agent manifest ဖိုင်မှ စတင်ဆောင်ရွက်ပါ
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# Azure သို့ ဖြန့်ချိရန်
+# Azure သို့ ဖြန့်ချိပါ
 azd up
 ```
 
-အပြည့်အစုံသော အမိန့် ရှင်းလင်းချက်များနှင့် flag များအတွက် [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) ကို ကြည့်ပါ။
+Recent preview releases of `azure.ai.agents` also added template-based initialization support for `azd ai agent init`. If you are following newer agent samples, check the extension help for the exact flags available in your installed version.
 
-### တစ်ချက်တည်း အမိန့် ဖြင့် တပ်ဆင်ခြင်း
+See [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for the full command reference and flags.
+
+### Single Command Deployment
 
 ```bash
-# တစ်ချက်တည်းအမိန့်ဖြင့် အားလုံးကို တင်ပို့ပါ
+# တစ်ချက်တည်းသော အမိန့်ဖြင့် အားလုံးကို တပ်ဆင်ပါ
 azd up
 
-# သို့မဟုတ် အဆင့်လိုက် တင်ပို့ပါ
-azd provision  # အောက်ခံ အဆောက်အအုံသာ
+# သို့မဟုတ် အပိုင်းလိုက် တပ်ဆင်ပါ
+azd provision  # အခြေခံ အဆောက်အအုံသာ
 azd deploy     # အက်ပလီကေးရှင်းသာ
+
+# azd 1.23.11+ တွင် သက်တမ်းရှည် AI အက်ပလီကေးရှင်း တပ်ဆင်မှုများအတွက်
+azd deploy --timeout 1800
 ```
 
-### ပတ်ဝန်းကျင်-အထူး ရည်ညွှန်းသော တပ်ဆင်မှုများ
+### Environment-Specific Deployments
 
 ```bash
 # ဖွံ့ဖြိုးရေး ပတ်ဝန်းကျင်
@@ -270,7 +282,7 @@ azd env set AZURE_LOCATION eastus
 azd env set ENVIRONMENT_TYPE dev
 azd up
 
-# ထုတ်လုပ်မှု ပတ်ဝန်းကျင်
+# ထုတ်လုပ်ရေး ပတ်ဝန်းကျင်
 azd env new production
 azd env set AZURE_LOCATION westus2
 azd env set ENVIRONMENT_TYPE prod
@@ -278,9 +290,9 @@ azd env set AZURE_OPENAI_CAPACITY 100
 azd up
 ```
 
-## စောင့်ထိန်းခြင်းနှင့် ကြည့်ရှုနိုင်မှု
+## Monitoring and Observability
 
-### Application Insights ပေါင်းစည်းခြင်း
+### Application Insights Integration
 
 ```bicep
 // Application Insights for AI application monitoring
@@ -313,7 +325,7 @@ resource customMetrics 'Microsoft.Insights/components/analyticsItems@2015-05-01'
 }
 ```
 
-### ကုန်ကျစရိတ် စောင့်ကြည့်ခြင်း
+### Cost Monitoring
 
 ```bicep
 // Budget alert for AI services
@@ -341,9 +353,9 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-## 🔐 လုံခြုံရေး အကောင်းဆုံး လုပ်နည်းများ
+## 🔐 Security Best Practices
 
-### Managed Identity ဖွဲ့စည်းခြင်း
+### Managed Identity Configuration
 
 ```bicep
 // Managed identity for the web application
@@ -364,7 +376,7 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-### ကွန်ယက် လုံခြုံရေး
+### Network Security
 
 ```bicep
 // Private endpoints for AI services
@@ -388,9 +400,9 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## စွမ်းဆောင်ချက် မြှင့်တင်ခြင်း
+## Performance Optimization
 
-### Cache များ အသုံးပြုနည်းများ
+### Caching Strategies
 
 ```yaml
 # azure.yaml - Redis cache integration
@@ -420,7 +432,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### အလိုအလျောက် အရွယ်အစား တိုးချဲ့မှု ဖွဲ့စည်းခြင်း
+### Auto-scaling Configuration
 
 ```bicep
 // Container App with auto-scaling
@@ -454,72 +466,72 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## တွေ့ရနေသော ပြဿနာများ ဖြေရှင်းနည်း
+## Troubleshooting Common Issues
 
-### ပြဿနာ ၁: OpenAI မှ Quota ကျော်လွန်ခြင်း
+### Issue 1: OpenAI Quota Exceeded
 
-**လက္ခဏာများ:**
-- quota error များနှင့်အတူ တပ်ဆင်မှု မအောင်မြင်ခြင်း
-- application logs တွင် 429 error များ တွေ့ရခြင်း
+**Symptoms:**
+- Deployment fails with quota errors
+- 429 errors in application logs
 
-**ဖြေရှင်းနည်းများ:**
+**Solutions:**
 ```bash
-# လက်ရှိ ကွိုတာအသုံးပြုမှုကို စစ်ဆေးပါ
+# လက်ရှိ ကွိုတာ အသုံးပြုမှုကို စစ်ဆေးပါ
 az cognitiveservices usage list --location eastus
 
 # အခြားဒေသကို စမ်းကြည့်ပါ
 azd env set AZURE_LOCATION westus2
 azd up
 
-# ကာလအနည်းငယ်အတွက် စွမ်းရည်ကို လျှော့ချပါ
+# စွမ်းရည်ကို ယာယီ လျှော့ချပါ
 azd env set AZURE_OPENAI_CAPACITY 10
 azd deploy
 ```
 
-### ပြဿနာ ၂: အတည်ပြုခြင်း မအောင်မြင်ခြင်း
+### Issue 2: Authentication Failures
 
-**လက္ခဏာများ:**
-- AI ဝန်ဆောင်မှုများကို ခေါ်ယူရာတွင် 401/403 error များ
-- "Access denied" စေသာ မက်ဆေ့ခ်ျများ
+**Symptoms:**
+- 401/403 errors when calling AI services
+- "Access denied" messages
 
-**ဖြေရှင်းနည်းများ:**
+**Solutions:**
 ```bash
-# အခန်းကဏ္ဍ တာဝန်ပေးမှုများကို အတည်ပြုပါ
+# တာဝန်ပေးအပ်မှုများကို အတည်ပြုပါ
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Managed Identity ဖွဲ့စည်းပုံကို စစ်ဆေးပါ
+# managed identity ဖွဲ့စည်းပုံကို စစ်ဆေးပါ
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
-# Key Vault ဝင်ရောက်ခွင့်ကို အတည်ပြုပါ
+# Key Vault အသုံးပြုခွင့်ကို အတည်ပြုပါ
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### ပြဿနာ ၃: မော်ဒယ် တပ်ဆင်မှု ပြဿနာများ
+### Issue 3: Model Deployment Issues
 
-**လက္ခဏာများ:**
-- မော်ဒယ်များ တပ်ဆင်မှုတွင် မရရှိနိုင်ခြင်း
-- တိကျသော မော်ဒယ် ဗားရှင်းများ မအောင်မြင်ခြင်း
+**Symptoms:**
+- Models not available in deployment
+- Specific model versions failing
 
-**ဖြေရှင်းနည်းများ:**
+**Solutions:**
 ```bash
-# ဒေသအလိုက် ရရှိနိုင်သည့် မော်ဒယ်များ စာရင်း
+# ဒေသအလိုက် ရနိုင်သော မော်ဒယ်များ စာရင်းပြပါ
 az cognitiveservices model list --location eastus
 
-# bicep template ထဲရှိ မော်ဒယ် ဗားရှင်းကို အပ်ဒိတ်လုပ်ပါ
-# မော်ဒယ်၏ စွမ်းဆောင်ရည် လိုအပ်ချက်များကို စစ်ဆေးပါ
+# Bicep တမ်းပလိတ်တွင် မော်ဒယ် ဗားရှင်းကို အပ်ဒိတ်လုပ်ပါ
+# မော်ဒယ် စွမ်းရည် လိုအပ်ချက်များကို စစ်ဆေးပါ
 ```
 
-## ဥပမာ တမ်းပလိတ်များ
+## Example Templates
 
 ### RAG Chat Application (Python)
 
-**သိုလှောင်ရာ (Repository)**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
+**Repository**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
-**ဝန်ဆောင်မှုများ**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
+**Services**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-**ဖော်ပြချက်**: အများပြည်သူရေပန်းစားဆုံး Azure AI နမူနာ — ထုတ်လုပ်နိုင်သော RAG chat အက်ပ်ဖြစ်၍ ကိုယ်ပိုင် စာရွက်စာတမ်းများပေါ်မှာ မေးခွန်းမေးနိုင်သည်။ Chat အတွက် GPT-4.1-mini ကို အသုံးပြုသည်၊ embeddings အတွက် text-embedding-ada-002 ကို အသုံးပြုသည် နှင့် ပြန်လည် ရှာဖွေရန် Azure AI Search ကို အသုံးပြုသည်။ နှစ်မျိုးစုံပုံစံ စာရွက်စာတမ်းများကို ထောက်ပံ့သည်၊ အသံ input/output၊ Microsoft Entra အတည်ပြုခြင်းနှင့် Application Insights tracing ကို ပံ့ပိုးသည်။
+**Description**: The most popular Azure AI sample — a production-ready RAG chat app that lets you ask questions over your own documents. Uses GPT-4.1-mini for chat, text-embedding-3-large for embeddings, and Azure AI Search for retrieval. Supports multimodal documents, speech input/output, Microsoft Entra authentication, and Application Insights tracing.
 
-**လျင်မြန်စတင်ခြင်း**:
+**Quick Start**:
 ```bash
 azd init --template azure-search-openai-demo
 azd up
@@ -527,13 +539,13 @@ azd up
 
 ### RAG Chat Application (.NET)
 
-**သိုလှောင်ရာ (Repository)**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
+**Repository**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
 
-**ဝန်ဆောင်မှုများ**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
+**Services**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
 
-**ဖော်ပြချက်**: Python RAG chat နမူနာ၏ .NET/C# သင်္ကေတ ညီမျိုး။ ASP.NET Core Minimal API နှင့် Blazor WebAssembly frontend ဖြင့် ဆောက်ထားသည်။ အသံ chat၊ GPT-4o-mini vision ထောက်ပံ့မှုနှင့် .NET MAUI Blazor Hybrid desktop/mobile client ပါဝင်သည်။
+**Description**: The .NET/C# equivalent of the Python RAG chat sample. Built with ASP.NET Core Minimal API and Blazor WebAssembly frontend. Includes voice chat, GPT-4o-mini vision support, and a companion .NET MAUI Blazor Hybrid desktop/mobile client.
 
-**လျင်မြန်စတင်ခြင်း**:
+**Quick Start**:
 ```bash
 azd init --template azure-search-openai-demo-csharp
 azd up
@@ -541,13 +553,13 @@ azd up
 
 ### RAG Chat Application (Java)
 
-**သိုလှောင်ရာ (Repository)**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
+**Repository**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
 
-**ဝန်ဆောင်မှုများ**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
+**Services**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
 
-**ဖော်ပြချက်**: Langchain4J ကို အသုံးပြု၍ AI ဥပဒေချုပ်စီမံခန့်ခွဲမှုအတွက် Java ဗားရှင်း RAG chat နမူနာ။ မိုက်ခရိုဆာဗစ် အဖြစ် event-driven architecture၊ ရှာဖွေရန် မျိုးစုံနည်းလမ်းများ (text, vector, hybrid) ကို ထောက်ပံ့သည်၊ Azure Document Intelligence ဖြင့် စာရွက်စာတမ်းတင် တင်နိုင်ခြင်းနှင့် Azure Container Apps သို့မဟုတ် Azure Kubernetes Service တွင် တပ်ဆင်နိုင်သည်။
+**Description**: Java version of the RAG chat sample using Langchain4J for AI orchestration. Supports microservice event-driven architecture, multiple search strategies (text, vector, hybrid), document upload with Azure Document Intelligence, and deployment on either Azure Container Apps or Azure Kubernetes Service.
 
-**လျင်မြန်စတင်ခြင်း**:
+**Quick Start**:
 ```bash
 azd init --template azure-search-openai-demo-java
 azd up
@@ -555,13 +567,13 @@ azd up
 
 ### Enterprise Retail Copilot with Azure AI Foundry
 
-**သိုလှောင်ရာ (Repository)**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
+**Repository**: [contoso-chat](https://github.com/Azure-Samples/contoso-chat)
 
-**ဝန်ဆောင်မှုများ**: Azure OpenAI + Azure AI Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
+**Services**: Azure OpenAI + Azure AI Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
 
-**ဖော်ပြချက်**: Azure AI Foundry နှင့် Prompty ကို အသုံးပြုသော အပြည့်အစုံ retail RAG copilot။ Contoso Outdoor စတိုးဆိုင်အတွက် chatbot တစ်ခုဖြစ်ကာ ထုတ်ကုန် ကတ်တလော့နှင့် ဖောက်သည် အော်ဒါ ဒေတာများကို အခြေခံ၍ ဖြေကြားချက်များ ဖန်တီးပေးသည်။ GenAIOps အလုပ်လည်ပတ်မှုကို ပြသသည် — Prompty ဖြင့် မူလပုံစံ ပြုလုပ်ခြင်း၊ AI အကူအညီဖြင့် အကဲဖြတ်ခြင်းနှင့် AZD ဖြင့် Container Apps သို့ တပ်ဆင်ခြင်း။
+**Description**: End-to-end retail RAG copilot using Azure AI Foundry and Prompty. A Contoso Outdoor retailer chatbot that grounds responses in product catalog and customer order data. Demonstrates the full GenAIOps workflow — prototype with Prompty, evaluate with AI-assisted evaluators, and deploy via AZD to Container Apps.
 
-**လျင်မြန်စတင်ခြင်း**:
+**Quick Start**:
 ```bash
 azd init --template contoso-chat
 azd up
@@ -569,13 +581,13 @@ azd up
 
 ### Creative Writing Multi-Agent Application
 
-**သိုလှောင်ရာ (Repository)**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
+**Repository**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
 
-**ဝန်ဆောင်မှုများ**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
+**Services**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
 
-**ဖော်ပြချက်**: Prompty ဖြင့် AI agent orchestration ကို ပြသထားသည့် multi-agent နမူနာ။ သုတေသန agent (Bing Grounding in Azure AI Agent Service), ထုတ်ကုန် agent (Azure AI Search), စာရေးသူ agent နှင့် တည်းဖြတ်သူ agent တို့ ပူးပေါင်း၍ သုတေသနကောင်းမွန်ပြီး အချက်အလက်များ တိကျစွာ ပါဝင်သည့် ဆောင်းပါးများ ဖန်တီးပေးသည်။ GitHub Actions တွင် အကဲဖြတ်ချက်ပါသော CI/CD ကိုပါ ပါဝင်သည်။
+**Description**: Multi-agent sample demonstrating AI agent orchestration with Prompty. Uses a research agent (Bing Grounding in Azure AI Agent Service), a product agent (Azure AI Search), a writer agent, and an editor agent to collaboratively produce well-researched articles. Includes CI/CD with evaluation in GitHub Actions.
 
-**လျင်မြန်စတင်ခြင်း**:
+**Quick Start**:
 ```bash
 azd init --template contoso-creative-writer
 azd up
@@ -583,13 +595,13 @@ azd up
 
 ### Serverless RAG Chat (JavaScript/TypeScript)
 
-**သိုလှောင်ရာ (Repository)**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
+**Repository**: [serverless-chat-langchainjs](https://github.com/Azure-Samples/serverless-chat-langchainjs)
 
-**ဝန်ဆောင်မှုများ**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
+**Services**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
 
-**ဖော်ပြချက်**: LangChain.js ကို အသုံးပြု၍ Azure Functions ဖြင့် API ကို ဆောင်ရွက်သည့် အပြည့်အဝ serverless RAG chatbot။ Azure Static Web Apps သည် Hosting အတွက် အသုံးပြုထားပြီး Azure Cosmos DB ကို vector store နှင့် chat history database အဖြစ် အသုံးပြုထားသည်။ Ollama ဖြင့် local development ကို zero-cost စမ်းသပ်နိုင်စေသည်။
+**Description**: Fully serverless RAG chatbot using LangChain.js with Azure Functions for the API and Azure Static Web Apps for hosting. Uses Azure Cosmos DB as both vector store and chat history database. Supports local development with Ollama for zero-cost testing.
 
-**လျင်မြန်စတင်ခြင်း**:
+**Quick Start**:
 ```bash
 azd init --template serverless-chat-langchainjs
 azd up
@@ -597,13 +609,13 @@ azd up
 
 ### Chat with Your Data Solution Accelerator
 
-**သိုလှောင်ရာ (Repository)**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
+**Repository**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
 
-**ဝန်ဆောင်မှုများ**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
+**Services**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
 
-**ဖော်ပြချက်**: စာရွက်စာတမ်း တင်သွင်း/စီမံခန့်ခွဲခြင်းအတွက် admin ပို့တယ်ပါရှိသော enterprise-အဆင့် RAG solution accelerator။ Semantic Kernel, LangChain, Prompt Flow စသည့် orchestrator မျိုးစုံ၊ အသံ-to-text, Microsoft Teams ပေါင်းစည်းမှုနှင့် PostgreSQL သို့မဟုတ် Cosmos DB ကို အခြေခံထားနိုင်သည်။ ထုတ်လုပ်ရေး RAG သင်္ကေတများအတွက် စိတ်ကြိုက်စိတ်ချမှုပေးရန် စတင်ရန် အချက်အလက်။
+**Description**: Enterprise-grade RAG solution accelerator with admin portal for document upload/management, multiple orchestrator options (Semantic Kernel, LangChain, Prompt Flow), speech-to-text, Microsoft Teams integration, and choice of PostgreSQL or Cosmos DB backend. Designed as a customizable starting point for production RAG scenarios.
 
-**လျင်မြန်စတင်ခြင်း**:
+**Quick Start**:
 ```bash
 azd init --template chat-with-your-data-solution-accelerator
 azd up
@@ -611,13 +623,13 @@ azd up
 
 ### AI Travel Agents — Multi-Agent MCP Orchestration
 
-**သိုလှောင်ရာ (Repository)**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
+**Repository**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
 
-**ဝန်ဆောင်မှုများ**: Azure OpenAI + Azure AI Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
+**Services**: Azure OpenAI + Azure AI Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
 
-**ဖော်ပြချက်**: LangChain.js, LlamaIndex.TS, Microsoft Agent Framework ဆိုသည့် Framework သုံးမျိုးကို အသုံးပြုပြီး multi-agent AI orchestration အတွက် ကိုးကားနမူနာ။ MCP (Model Context Protocol) servers များကို ဘာသာစကားလေးမျိုးဖြင့် serverless Azure Container Apps အဖြစ် တပ်ဆင်ထားပြီး OpenTelemetry monitoring ပါဝင်သည်။
+**Description**: Reference application for multi-agent AI orchestration using three frameworks (LangChain.js, LlamaIndex.TS, and Microsoft Agent Framework). Features MCP (Model Context Protocol) servers in four languages deployed as serverless Azure Container Apps with OpenTelemetry monitoring.
 
-**လျင်မြန်စတင်ခြင်း**:
+**Quick Start**:
 ```bash
 azd init --template azure-ai-travel-agents
 azd up
@@ -625,71 +637,71 @@ azd up
 
 ### Azure AI Starter
 
-**သိုလှောင်ရာ (Repository)**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
+**Repository**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
 
-**ဝန်ဆောင်မှုများ**: Azure AI Services + Azure OpenAI
+**Services**: Azure AI Services + Azure OpenAI
 
-**ဖော်ပြချက်**: Azure AI ဝန်ဆောင်မှုများကို configured machine learning models ဖြင့် တပ်ဆင်ပေးသည့် သေးငယ်သေးငယ် Bicep template တစ်ခု။ အပေါ်လွှာ အက်ပလီကေးရှင်း မလိုအပ်ဘဲ Azure AI အင်ဖရာစထရပ်ချာကိုသာ provisioning လုပ်ချင်သော အစအနとして သက်သာသောစတင်ချက်။
+**Description**: Minimal Bicep template that deploys Azure AI services with configured machine learning models. A lightweight starting point when you only need the Azure AI infrastructure provisioned without a full application stack.
 
-**လျင်မြန်စတင်ခြင်း**:
+**Quick Start**:
 ```bash
 azd init --template azd-ai-starter
 azd up
 ```
 
-> **ပိုမိုသော တမ်းပလိတ်များကို ကြည့်ရှုရန်**: 80+ AI-ဆိုင်ရာ AZD တမ်းပလိတ်များကို ဘာသာစကားများနှင့် စိန်ခေါ်မှုများအလိုက် ကြည့်ရှုနိုင်ရန် [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) ကို သွားရောက်ကြည့်ပါ။
+> **Browse more templates**: Visit the [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) for 80+ AI-specific AZD templates across languages and scenarios.
 
-## နောက်ဆက်တွဲ လမ်းညွှန်များ
+## Next Steps
 
-1. **ဥပမာများကို စမ်းသပ်ပါ**: သင့်အသုံးအတွက် သင့်လျော်သည့် pre-built template နှင့် စတင်ပါ
-2. **သင့်လိုအပ်ချက်အတွက် မိမိလိုက် အပ်ပါ**: အင်ဖရာစထရပ်ချာနှင့် အက်ပလီကေးရှင်း ကုဒ်ကို ပြင်ဆင်ပါ
-3. **မော်နိုရ်ထင်း ထားပါ**: အကောင်အထည်ဖော်ရန် ပြည့်စုံသော observability ကို ထည့်သွင်းပါ
-4. **ကုန်ကျစရိတ် ညှိနှိုင်းပါ**: သင့်ဘက်ဂျက်အရ ဖော်ပြချက်များကို ညှိနှိုင်းပါ
-5. **တပ်ဆင်ချက်ကို လုံခြုံစေပါ**: အဖွဲ့အစည်း လုံခြုံရေး ပုံစံများကို အကောင်အထည်ဖော်ပါ
-6. **ထုတ်လုပ်ရေးသို့ ဖျော်ဖြေထားပါ**: များစွာဒေသနှင့် အမြင့်ရရှိနိုင်မှု အင်္ဂါရပ်များ ထည့်ပါ
+1. **Try the Examples**: Start with a pre-built template that matches your use case
+2. **Customize for Your Needs**: Modify the infrastructure and application code
+3. **Add Monitoring**: Implement comprehensive observability
+4. **Optimize Costs**: Fine-tune configurations for your budget
+5. **Secure Your Deployment**: Implement enterprise security patterns
+6. **Scale to Production**: Add multi-region and high-availability features
 
-## 🎯 လက်တွေ့ လေ့ကျင့်ခန်းများ
+## 🎯 Hands-On Exercises
 
-### လေ့ကျင့်ခန်း ၁: Microsoft Foundry Models Chat App တပ်ဆင်ခြင်း (၃၀ မိနစ်)
-**ပန်းတိုင်**: ထုတ်လုပ်နိုင်သော AI chat အက်ပလိကေးရှင်း တပ်ဆင်၍ စမ်းသပ်ပါ
+### Exercise 1: Deploy Microsoft Foundry Models Chat App (30 minutes)
+**Goal**: Deploy and test a production-ready AI chat application
 
 ```bash
-# ပုံစံကို စတင်ပြင်ဆင်သည်
+# ပုံစံကို အစပြုပါ
 mkdir ai-chat-demo && cd ai-chat-demo
 azd init --template azure-search-openai-demo
 
-# ပတ်ဝန်းကျင် တန်ဖိုးများကို သတ်မှတ်သည်
+# ပတ်ဝန်းကျင်တန်ဖိုးများကို သတ်မှတ်ပါ
 azd env set AZURE_LOCATION eastus2
 azd env set AZURE_OPENAI_CAPACITY 30
 
-# ဖြန့်ချိသည်
+# တပ်ဆင်ပါ
 azd up
 
-# အပလီကေးရှင်းကို စမ်းသပ်သည်
+# လျှောက်လွှာကို စမ်းသပ်ပါ
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 echo "Chat app: $WEB_URL"
 
-# AI လုပ်ဆောင်ချက်များကို စောင့်ကြည့်သည်
+# AI လုပ်ငန်းစဉ်များကို စောင့်ကြည့်ပါ
 azd monitor
 
-# ရှင်းလင်းသည်
+# ရှင်းလင်းပါ
 azd down --force --purge
 ```
 
-**အောင်မြင်မှု သတ်မှတ်ချက်များ:**
-- [ ] တပ်ဆင်မှု quota error မရှိဘဲ အပြီးသတ်မည်
-- [ ] ဘရောက်ဇာတွင် chat မျက်နှာပြင်ကို ဝင်ရောက်ကြည့်ရှုနိုင်မည်
-- [ ] မေးခွန်းမေး၍ AI အားဖြင့် ဖြေကြားချက်ရရှိနိုင်မည်
-- [ ] Application Insights တွင် telemetry ဒေတာဖော်ပြမည်
-- [ ] အရင်းအမှုများကို အောင်မြင်စွာ ဖျက်ရှင်းထားမည်
+**Success Criteria:**
+- [ ] Deployment completes without quota errors
+- [ ] Can access chat interface in browser
+- [ ] Can ask questions and get AI-powered responses
+- [ ] Application Insights shows telemetry data
+- [ ] Successfully cleaned up resources
 
-**ခန့်မှန်းကုန်ကျစရိတ်**: $5-10 (၃၀ မိနစ် စမ်းသပ်ရန်)
+**Estimated Cost**: $5-10 for 30 minutes of testing
 
-### လေ့ကျင့်ခန်း ၂: မော်ဒယ် မျိုးစုံ တပ်ဆင်ခြင်း ကို သတ်မှတ်ခြင်း (၄၅ မိနစ်)
-**ပန်းတိုင်**: မျိုးစုံသော အင်္ဂါရပ်များနှင့် ကွဲပြားသည့် ဖော်ပြချက်များဖြင့် အမော်ဒယ်များ တပ်ဆင်ပါ
+### Exercise 2: Configure Multi-Model Deployment (45 minutes)
+**Goal**: Deploy multiple AI models with different configurations
 
 ```bash
-# စိတ်ကြိုက် Bicep ဖွဲ့စည်းချက် တည်ဆောက်ပါ
+# စိတ်ကြိုက် Bicep ဖိုင်ကို ဖန်တီးပါ
 cat > infra/ai-models.bicep << 'EOF'
 param openAiAccountName string
 param location string
@@ -718,12 +730,12 @@ resource gpt4omini 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01'
 // Text embedding for search
 resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'text-embedding-ada-002'
+  name: 'text-embedding-3-large'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     scaleSettings: {
       scaleType: 'Standard'
@@ -739,17 +751,17 @@ azd provision
 azd show
 ```
 
-**အောင်မြင်မှု သတ်မှတ်ချက်များ:**
-- [ ] မော်ဒယ်များစွာကို အောင်မြင်စွာ တပ်ဆင်ထားသည်
-- [ ] ကွဲပြားသော capacity ဆက်တင်များ သတ်မှတ်ထားသည်
-- [ ] မော်ဒယ်များကို API ဖြင့် ချိတ်ဆက်၍ အသုံးပြုနိုင်သည်
-- [ ] အက်ပလီကေးရှင်းမှ မော်ဒယ် နှစ်ခုလုံးကို ခေါ်ယူနိုင်သည်
+**Success Criteria:**
+- [ ] Multiple models deployed successfully
+- [ ] Different capacity settings applied
+- [ ] Models accessible via API
+- [ ] Can call both models from application
 
-### လေ့ကျင့်ခန်း ၃: ကုန်ကျစရိတ် စောင့်ကြည့်မှု ကို အကောင်အထည်ဖော်ခြင်း (၂၀ မိနစ်)
-**ပန်းတိုင်**: ဘတ်ဂျက် alerts နှင့် ကုန်ကျစရိတ် ချောမွေ့မှု တည်ဆောက်ပါ
+### Exercise 3: Implement Cost Monitoring (20 minutes)
+**Goal**: Set up budget alerts and cost tracking
 
 ```bash
-# Bicep ထဲသို့ ဘတ်ဂျက် သတိပေးချက် ထည့်ပါ
+# Bicep သို့ ဘတ်ဂျက် သတိပေးချက် ထည့်ပါ
 cat >> infra/main.bicep << 'EOF'
 
 resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
@@ -780,30 +792,29 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 EOF
 
-# ဘတ်ဂျက် သတိပေးချက်ကို တပ်ဆင်ပါ
+# ဘတ်ဂျက် သတိပေးချက် တပ်ဆင်ပါ
 azd provision
 
-# လက်ရှိ ကုန်ကျစရိတ်များကို စစ်ဆေးပါ
+# လက်ရှိ ကုန်ကျစရိတ်ကို စစ်ဆေးပါ
 az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-date $(date +%Y-%m-%d)
 ```
 
-**အောင်မြင်မှု သတ်မှတ်ချက်များ:**
-- [ ] Azure တွင် ဘတ်ဂျက် alert တစ်ခု ဖန်တီးထားသည်
-- [ ] အီးမေးလ် အသိပေးချက်များ စီစဉ်ထားသည်
-- [ ] Azure Portal တွင် ကုန်ကျစရိတ် ဒေတာ ကြည့်ရှုနိုင်သည်
-- [ ] ဘတ်ဂျက် အကန့်အသတ်များကို သင့်တော်စွာ သတ်မှတ်ထားသည်
+**Success Criteria:**
+- [ ] Budget alert created in Azure
+- [ ] Email notifications configured
+- [ ] Can view cost data in Azure Portal
+- [ ] Budget thresholds set appropriately
 
-## 💡 မကြာခဏ မေးလေ့ရှိသော မေးခွန်းများ
+## 💡 Frequently Asked Questions
 
 <details>
-<summary><strong>ဖွံ့ဖြိုးရေးအချိန်တွင် Microsoft Foundry Models ၏ ကုန်ကျစရိတ်ကို မည်သို့ လျှော့ချနိုင်မလဲ?</strong></summary>
+<summary><strong>ဘယ်လို Microsoft Foundry Models ခံစားရမှတ်များကို ဖွံ့ဖြိုးရေးအချိန်အတွင်း လျော့နည်းစေနိုင်မလဲ?</strong></summary>
 
-1. **Free Tier အသုံးပြုပါ**: Microsoft Foundry Models သည် တစ်လလျှင် 50,000 tokens အခမဲ့ ပေးသည်
-2. **Capacity လျော့ပါ**: dev အတွက် 30+ ကို မလိုအပ်ပဲ 10 TPM သတ်မှတ်ပါ
-3. **azd down ကို အသုံးပြုပါ**: တတ်နိုင်သလောက် ဖွံ့ဖြိုးရေးမလုပ်နေချိန်တွင် resources ကို deallocate လုပ်ပါ
-4. **တုံ့ပြန်ချက်များကို Cache ထားပါ**: ထပ်ခါတလဲလဲ မေးခွန်းများအတွက် Redis cache ကို အကောင်အထည်ဖော်ပါ
-5. **Prompt Engineering ကို အသုံးပြုပါ**: ထိရောက်သော prompts ဖြင့် token အသုံးလိုခြင်းကို လျော့နည်းစေပါ
-
+1. **Use Free Tier**: Microsoft Foundry Models offers 50,000 tokens/month free
+2. **Reduce Capacity**: Set capacity to 10 TPM instead of 30+ for dev
+3. **Use azd down**: Deallocate resources when not actively developing
+4. **Cache Responses**: Implement Redis cache for repeated queries
+5. **Use Prompt Engineering**: Reduce token usage with efficient prompts
 ```bash
 # ဖွံ့ဖြိုးရေး ဆက်တင်
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -812,48 +823,48 @@ azd env set ENABLE_RESPONSE_CACHE true
 </details>
 
 <details>
-<summary><strong>Microsoft Foundry Models နှင့် OpenAI API တို့မှာ မတူကြသော အချက်များ ဘာတွေလဲ?</strong></summary>
+<summary><strong>Microsoft Foundry Models နဲ့ OpenAI API မှာ ကွာခြားချက် ဘာတွေလဲ?</strong></summary>
 
 **Microsoft Foundry Models**:
-- အဖွဲ့အစည်းဆိုင်ရာ လုံခြုံရေးနှင့် အညီအဝေးများ
-- ပုဂ္ဂိုလ်ရေးကွန်ယက် ပေါင်းခြင်း
+- အဖဲြ႕အစည်းအဆင့် လုံခြုံမှုနှင့် အညီလိုက်မှု
+- ပုဂ္ဂလိက ကွန်ရက် ထည့်သွင်းနိုင်မှု
 - SLA အာမခံချက်များ
-- Managed identity ဖြင့် အတည်ပြုခြင်း
-- မြင့်မားသော quota များ ရရှိနိုင်ခြင်း
+- Managed identity ဖြင့် အ-authentication
+- ထပ်မံ ရရှိနိုင်သော ကိုးတာများ
 
 **OpenAI API**:
-- မော်ဒယ်အသစ်များကို လျင်မြန်စွာ ဝင်ရောက်နိုင်ခြင်း
-- ရိုးရှင်းသော ဆက်တင်လုပ်ငန်းစဉ်
-- ဝင်ရောက်ခွင့်ရလွယ်ခြင်း
-- ဆိုရှယ် အင်တာနက်သာ အသုံးပြုနိုင်ခြင်း
+- မော်ဒယ်အသစ်များကို ပိုမိုလျင်မြန်စွာ ရရှိနိုင်ခြင်း
+- စတင်တပ်ဆင်ရတာ ပိုမိုရိုးရှင်းခြင်း
+- ဝင်ရောက်ရန် အတားအဆီး အနည်းငယ်
+- အများပြည်သူ အင်တာနက်မှသာ
 
-ထုတ်လုပ်ရေး အက်ပလီကေးရှင်းများအတွက်၊ **Microsoft Foundry Models ကို အကြံပြုသည်**။
+ထုတ်လုပ်မှုအတွက် အသုံးပြုမည့် အက်ပလီကေးရှင်းများအတွက်၊ **Microsoft Foundry Models ကို ညွှန်ကြားအကြံပြုပါသည်။**
 </details>
 
 <details>
-<summary><strong>Microsoft Foundry မော်ဒယ်များ၏ ခွင့်အကန့်အသတ် (quota) ကျော်လွန်ခြင်း အမှားများကို မည်သို့ ကိုင်တွယ်မလဲ?</strong></summary>
+<summary><strong>Microsoft Foundry Models ကို quota ကျော်လွန်မှု အမှားများကို ဘယ်လို ကိုင်တွယ်ရမလဲ?</strong></summary>
 
 ```bash
-# လက်ရှိ ခွင့်အကန့်အသတ်ကို စစ်ဆေးပါ
+# လက်ရှိ ကန့်သတ်ချက် (quota) ကို စစ်ဆေးပါ
 az cognitiveservices usage list --location eastus2
 
 # တခြား ဒေသကို စမ်းကြည့်ပါ
 azd env set AZURE_LOCATION westus2
 azd up
 
-# ယာယီအဖြစ် စွမ်းရည်ကို လျော့ချပါ
+# စွမ်းရည်ကို ယာယි လျော့ချပါ
 azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
-# ခွင့်အကန့်အသတ် တိုးမြှင့်ရန် တောင်းဆိုပါ
+# ကန့်သတ်ချက် (quota) တိုးရန် တောင်းဆိုပါ
 # Azure Portal > Quotas > Request increase သို့ သွားပါ
 ```
 </details>
 
 <details>
-<summary><strong>Microsoft Foundry မော်ဒယ်များနှင့် ကိုယ်ပိုင်ဒေတာကို အသုံးပြုနိုင်ပါသလား?</strong></summary>
+<summary><strong>ငါ့ရဲ့ ကိုယ်ပိုင် ဒေတာကို Microsoft Foundry Models နဲ့ အသုံးပြုလို့ ရမလား?</strong></summary>
 
-ဟုတ်ကဲ့! RAG (Retrieval Augmented Generation) အတွက် **Azure AI Search** ကို အသုံးပြုပါ။
+ဟုတ်ပါတယ်! RAG (Retrieval Augmented Generation) အတွက် **Azure AI Search** ကို အသုံးပြုပါ။
 
 ```yaml
 # azure.yaml
@@ -869,14 +880,14 @@ See the [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search
 </details>
 
 <details>
-<summary><strong>AI မော်ဒယ် endpoint များကို မည်သို့ လုံခြုံစေမည်နည်း?</strong></summary>
+<summary><strong>AI မော်ဒယ် endpoints တွေကို ဘယ်လိုလုံခြုံစေမလဲ?</strong></summary>
 
-**အကောင်းဆုံး ကျင့်သုံးမှုများ**:
-1. Managed Identity ကို အသုံးပြုပါ (API keys မလိုပါ)
-2. Private Endpoints များကို ဖွင့်ပါ
-3. Network security groups များကို ဖွဲ့စည်းပါ
-4. Rate limiting ကို အကောင်အထည်ဖော်ပါ
-5. လျှို့ဝှက်ချက်များအတွက် Azure Key Vault ကို အသုံးပြုပါ
+**အကောင်းဆုံး ကျင့်သုံးရမည့် နည်းလမ်းများ**:
+1. Managed Identity ကို အသုံးပြုပါ (API key မလို)
+2. Private Endpoints ကို ဖွင့်ပါ
+3. Network security groups များကို ရှေ့ပြင်ပြုလုပ်ပါ
+4. Rate limiting အကောင်အထည်ဖော်ပါ
+5. မှတ်လိပ်စာများအတွက် Azure Key Vault ကို အသုံးပြုပါ
 
 ```bicep
 // Managed Identity authentication
@@ -896,27 +907,27 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 ```
 </details>
 
-## အသိုင်းအဝိုင်းနှင့် ပံ့ပိုးမှု
+## အသိုင်းအဝိုင်းနှင့် ထောက်ခံမှု
 
 - **Microsoft Foundry Discord**: [#Azure ချန်နယ်](https://discord.gg/microsoft-azure)
 - **AZD GitHub**: [ပြဿနာများနှင့် ဆွေးနွေးချက်များ](https://github.com/Azure/azure-dev)
-- **Microsoft Learn**: [တရားဝင် စာရွက်စာတမ်းများ](https://learn.microsoft.com/azure/ai-studio/)
-- **Agent Skills**: [skills.sh တွင်ရှိသော Microsoft Foundry skill](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - သင်၏ editor တွင် Azure + Foundry agent skills များကို `npx skills add microsoft/github-copilot-for-azure` ဖြင့် တပ်ဆင်ပါ။
+- **Microsoft Learn**: [တရားဝင် စာရွက်စာတမ်း](https://learn.microsoft.com/azure/ai-studio/)
+- **Agent Skills**: [skills.sh ပေါ်ရှိ Microsoft Foundry skill](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Editor ထဲသို့ Azure + Foundry agent skills များကို သွင်းရန် `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**အခန်း လမ်းညွှန်**:
+**Chapter Navigation:**
 - **📚 သင်တန်း မူလစာမျက်နှာ**: [AZD For Beginners](../../README.md)
-- **📖 လက်ရှိ အခန်း**: အခန်း 2 - AI-First ဖွံ့ဖြိုးရေး
-- **⬅️ ယခင် အခန်း**: [အခန်း 1: သင်၏ ပထမပရောဂျက်](../chapter-01-foundation/first-project.md)
-- **➡️ နောက်တစ်ခု**: [AI မော်ဒယ် ဖြန့်ချိခြင်း](ai-model-deployment.md)
-- **🚀 နောက် အခန်း**: [အခန်း 3: ဆက်တင်များ](../chapter-03-configuration/configuration.md)
+- **📖 လက်ရှိ အခန်း**: Chapter 2 - AI-First Development
+- **⬅️ ယခင် အခန်း**: [Chapter 1: Your First Project](../chapter-01-foundation/first-project.md)
+- **➡️ နောက်တစ်ခု**: [AI Model Deployment](ai-model-deployment.md)
+- **🚀 နောက်ပိုင်း အခန်း**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
-**အကူအညီ လိုပါသလား?** အသိုင်းအဝိုင်း ဆွေးနွေးပွဲများတွင် ပါဝင်ပါ သို့မဟုတ် repository တွင် issue တစ်ခု ဖွင့်ပါ။ Azure AI + AZD အသိုင်းအဝိုင်းသည် သင် အောင်မြင်ရန် ကူညီရန်ရှိပါသည်!
+**ကူညီလိုပါသလား?** ကျွန်ုပ်တို့၏ အသိုင်းအဝိုင်း ဆွေးနွေးပွဲများတွင် ပါဝင်ပါ သို့မဟုတ် repository တွင် issue တစ်ခု ဖွင့်ပါ။ Azure AI + AZD အသိုင်းအဝိုင်းက သင်အောင်မြင်စေရန် ကူညီပေးဖို့ ရှိပါတယ်!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-ဤစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်ရေးအတွက် ကြိုးပမ်းသော်လည်း အလိုအလျောက် ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် မှန်ကန်မှုမရှိသော အချက်များ ပါဝင်နိုင်ကြောင်း သတိပြုပါ။ မူလစာတမ်းကို မူလဘာသာဖြင့် အာဏာပိုင် ရင်းမြစ်အဖြစ် သတ်မှတ်ထားသင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူဘာသာပြန်ထံမှ ဘာသာပြန်ခြင်းကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုမှုကြောင့် ဖြစ်ပေါ်လာသည့် နားမလည်မှုများ သို့မဟုတ် မမှန်ကန်သော အဓိပ္ပာယ်ဖွင့်ဆိုချက်များအတွက် ကျွန်ုပ်တို့ တာဝန်မယူပါ။
+ဤစာရွက်ကို AI ဘာသာပြန်မှုဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားသည်။ ကျွန်ုပ်တို့သည် တိကျမှုကို ကြိုးပမ်းရန် ဆောင်ရွက်သော်လည်း၊ အလိုအလျောက် ဘာသာပြန်ခြင်းများတွင် အမှားများ သို့မဟုတ် တိကျမှုလျော့နည်းချက်များ ရှိနိုင်ကြောင်း သတိပြုပါ။ မူလစာရွက်ကို ထိုဘာသာစကားဖြင့် ရှိသော မူရင်းစာတမ်းကို ယုံကြည်စိတ်ချရသော အကျိုးခံစားရမည့် အရင်းအမြစ်အဖြစ် သတ်မှတ်ပါ။ အရေးကြီးသောအချက်အလက်များအတွက် လူ့ကျွမ်းကျင် ဘာသာပြန်ကို အသုံးပြုရန် အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းကြောင့် ဖြစ်ပေါ်နိုင်သည့် နားလည်မှုမှားများ သို့မဟုတ် အဓိပ္ပာယ်လွဲများအတွက် ကျွန်ုပ်တို့ တာဝန်ယူမည်မဟုတ်ပါ။
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

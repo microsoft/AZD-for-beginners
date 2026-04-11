@@ -20,7 +20,7 @@ Over the course of this workshop, you will also be introduced to core developer 
 | **📚 Course Home**| [AZD For Beginners](../README.md)|
 | **📖 Documentation** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
 | **🛠️AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 Next Steps** | [Take The Challenge](../../../../workshop/docs) |
+|**🚀 Next Steps** | [Take The Challenge](#workshop-challenge) |
 | | |
 
 ## Workshop Overview

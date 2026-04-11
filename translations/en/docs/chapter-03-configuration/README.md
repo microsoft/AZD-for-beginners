@@ -8,6 +8,8 @@
 
 This chapter covers environment configuration, authentication patterns, and security best practices for Azure Developer CLI deployments.
 
+> Validated against `azd 1.23.12` in March 2026.
+
 ## Learning Objectives
 
 By completing this chapter, you will:
@@ -65,12 +67,16 @@ AZD applies settings in this order (later overrides earlier):
 # Use managed identity (recommended)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Check authentication status
-azd auth whoami
+# Check AZD authentication status
+azd auth status
+
+# Optional: verify Azure CLI context if you plan to run az commands
 az account show
 
 # Re-authenticate if needed
 azd auth login
+
+# Optional: refresh Azure CLI authentication for az commands
 az login
 ```
 

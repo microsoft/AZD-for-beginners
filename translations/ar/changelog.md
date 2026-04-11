@@ -2,68 +2,171 @@
 
 ## المقدمة
 
-يوثق سجل التغييرات هذا جميع التغييرات البارزة والتحديثات والتحسينات في مستودع AZD للمبتدئين. نحن نتبع مبادئ الترقيم الدلالي ونحافظ على هذا السجل لمساعدة المستخدمين على فهم ما تغير بين الإصدارات.
+يوثق سجل التغييرات هذا جميع التغييرات وال تحديثات والتحسينات الملحوظة على مستودع AZD للمبتدئين. نتبع مبادئ الترقيم الدلالي ونحافظ على هذا السجل لمساعدة المستخدمين على فهم ما تغيّر بين الإصدارات.
 
 ## أهداف التعلم
 
-من خلال مراجعة سجل التغييرات هذا، ستتمكن من:
-- البقاء مطلعًا على الميزات الجديدة والإضافات إلى المحتوى
-- فهم التحسينات التي أُجريت على الوثائق الحالية
-- تتبع إصلاحات الأخطاء والتصحيحات لضمان الدقة
-- متابعة تطور مواد التعلم مع مرور الوقت
+من خلال مراجعتك لسجل التغييرات هذا، سوف:
+- تظل مطلعًا على الميزات الجديدة وإضافات المحتوى
+- تفهم التحسينات التي أُجريت على الوثائق الحالية
+- تتتبع إصلاحات الأخطاء والتصحيحات لضمان الدقة
+- تتابع تطور مواد التعلم مع مرور الوقت
 
-## نواتج التعلم
+## مخرجات التعلم
 
 بعد مراجعة إدخالات سجل التغييرات، ستكون قادرًا على:
-- تحديد المحتوى والموارد الجديدة المتاحة للتعلم
+- تحديد المحتوى والموارد الجديدة المتاحة للتعلّم
 - فهم الأقسام التي تم تحديثها أو تحسينها
 - تخطيط مسار تعلمك بناءً على أحدث المواد
 - تقديم ملاحظات واقتراحات للتحسينات المستقبلية
 
-## تاريخ الإصدارات
+## سجل الإصدارات
+
+### [v3.19.1] - 2026-03-27
+
+#### توضيح تهيئة المبتدئين، التحقق من الإعداد وتنظيف أوامر AZD النهائية
+**تتابع هذه النسخة مسح التحقق من AZD 1.23 مع تمرير توثيقي مخصّص للمبتدئين: توضح إرشادات المصادقة الخاصة بـ AZD أولاً، تضيف نصوص تحقق من الإعداد المحلي، تتحقق من الأوامر الرئيسية مقابل AZD CLI الحي، وتزيل آخر مراجع للأوامر في المصدر الإنجليزي خارج سجل التغييرات.**
+
+#### تمت الإضافة
+- **🧪 نصوص تحقق إعداد المبتدئين** مع `validate-setup.ps1` و `validate-setup.sh` حتى يتمكن المتعلمون من تأكيد الأدوات المطلوبة قبل بدء الفصل 1
+- **✅ خطوات تحقق الإعداد المسبقة** في README الجذر وREADME الفصل 1 حتى يتم اكتشاف المتطلبات المسبقة المفقودة قبل `azd up`
+
+#### تم التغيير
+- **🔐 إرشادات مصادقة المبتدئين** الآن تتعامل بشكل ثابت مع `azd auth login` كالمسار الأساسي لتدفقات عمل AZD، مع الإشارة إلى `az login` كاختياري ما لم تُستخدم أوامر Azure CLI مباشرة
+- **📚 سير تهيئة الفصل 1** الآن يوجّه المتعلمين للتحقق من إعدادهم المحلي قبل التثبيت والمصادقة وخطوات النشر الأولى
+- **🛠️ رسائل المحقق** الآن تفصل بوضوح المتطلبات المانعة عن تحذيرات Azure CLI الاختيارية لمسار المبتدئين المعتمد على AZD فقط
+- **📖 وثائق التكوين واستكشاف الأخطاء والأمثلة** الآن تميز بين مصادقة AZD المطلوبة وتسجيل الدخول الاختياري لـ Azure CLI حيثما عُرض كلاهما سابقًا دون سياق
+
+#### تم الإصلاح
+- **📋 مراجع الأوامر المتبقية بالمصدر الإنجليزي** تم تحديثها إلى صيغ AZD الحالية، بما في ذلك `azd config show` في ورقة الغش و `azd monitor --overview` حيث كان يُقصد دليل نظرة عامة على بوابة Azure
+- **🧭 ادعاءات المبتدئين في الفصل 1** خُففت لتجنب المبالغة في الوعد بسلوك خالٍ من الأخطاء أو التراجع المضمون عبر جميع القوالب وموارد Azure
+- **🔎 التحقق الحي من CLI** أكد الدعم الحالي لـ `azd env get-values`, `azd template list`, `azd extension list --installed`, `azd copilot consent list`, `azd mcp start`, `azd provision --preview`, `azd monitor --logs`, و `azd down --force --purge`
+
+#### الملفات المحدثة
+- `README.md`
+- `changelog.md`
+- `docs/chapter-01-foundation/README.md`
+- `docs/chapter-01-foundation/azd-basics.md`
+- `docs/chapter-01-foundation/installation.md`
+- `docs/chapter-01-foundation/first-project.md`
+- `docs/chapter-03-configuration/README.md`
+- `docs/chapter-07-troubleshooting/README.md`
+- `examples/container-app/README.md`
+- `examples/database-app/README.md`
+- `resources/cheat-sheet.md`
+- `validate-setup.ps1`
+- `validate-setup.sh`
+
+---
+
+### [v3.19.0] - 2026-03-26
+
+#### تحقق AZD 1.23.12، توسيع بيئة الورشة وتحديث نماذج الذكاء الاصطناعي
+**تجري هذه النسخة مسح تحقق توثيقي مقابل `azd` `1.23.12`، تحدّث أمثلة أوامر AZD القديمة، تُحدّث إرشادات نماذج الذكاء الاصطناعي إلى الافتراضات الحالية، و وتوسع تعليمات الورشة لتدعم حاويات التطوير والاستنساخات المحلية بالإضافة إلى GitHub Codespaces.**
+
+#### تمت الإضافة
+- **✅ ملاحظات التحقق عبر الفصول الأساسية ووثائق الورشة** لجعل خط الأساس من AZD المختبر صريحًا للمتعلمين الذين يستخدمون إصدارات CLI أحدث أو أقدم
+- **⏱️ إرشادات مهلة النشر** لنشر تطبيقات الذكاء الاصطناعي طويلة التشغيل باستخدام `azd deploy --timeout 1800`
+- **🔎 خطوات فحص الإضافات** مع `azd extension show azure.ai.agents` في مستندات سير عمل الذكاء الاصطناعي
+- **🌐 توجيهات أوسع بيئة الورشة** تغطي GitHub Codespaces، حاويات التطوير، والاستنساخات المحلية مع MkDocs
+
+#### تم التغيير
+- **📚 ملفات README لمقدمات الفصول** الآن تشير بشكل ثابت إلى التحقق مقابل `azd 1.23.12` عبر الأقسام: الأساس، التكوين، البنية التحتية، الوكلاء المتعددين، ما قبل النشر، استكشاف الأخطاء، والإنتاج
+- **🛠️ مراجع أوامر AZD** تم تحديثها إلى الصيغ الحالية عبر الوثائق:
+  - `azd config list` → `azd config show`
+  - `azd env show` → `azd env list` أو `azd env get-value(s)` حسب السياق
+  - `azd auth whoami` → `azd auth status`
+  - `azd monitor` → `azd monitor --overview` حيث يُقصد نظرة عامة على Application Insights
+- **🧪 أمثلة معاينة التهيئة** بسطت إلى الاستخدام المدعوم الحالي مثل `azd provision --preview` و `azd provision --preview -e production`
+- **🧭 تدفق الورشة** تم تحديثه بحيث يمكن للمتعلمين إكمال المختبرات في Codespaces أو حاوية تطوير أو استنساخ محلي بدلاً من افتراض التنفيذ في Codespaces فقط
+- **🔐 إرشادات المصادقة** الآن تفضل `azd auth login` لتدفقات عمل AZD، مع وضع `az login` كاختياري عند استخدام أوامر Azure CLI مباشرة
+
+#### تم الإصلاح
+- **🪟 أوامر التثبيت على Windows** تم توحيدها إلى كتابة حزم `winget` الحالية في دليل التثبيت
+- **🐧 إرشادات تثبيت Linux** صححت لتجنب تعليمات مدراء حزم `azd` غير المدعومة الخاصة بتوزيعات محددة، وبالمقابل تشير إلى أصول الإصدارات عند الاقتضاء
+- **📦 أمثلة نماذج الذكاء الاصطناعي** تم تحديثها من الافتراضات القديمة مثل `gpt-35-turbo` و `text-embedding-ada-002` إلى أمثلة حالية مثل `gpt-4.1-mini`, `gpt-4.1`, و `text-embedding-3-large`
+- **📋 مقتطفات النشر والتشخيص** صُحّحت لاستخدام أوامر البيئة والحالة الحالية في السجلات والسيناريوهات النصية وخطوات استكشاف الأخطاء
+- **⚙️ إرشادات GitHub Actions** تم تحديثها من `Azure/setup-azd@v1.0.0` إلى `Azure/setup-azd@v2`
+- **🤖 إرشادات موافقة MCP/Copilot** تم تحديثها من `azd mcp consent` إلى `azd copilot consent list`
+
+#### تم التحسين
+- **🧠 إرشادات فصل الذكاء الاصطناعي** الآن تشرح بشكل أفضل سلوك `azd ai` الحساس للمعاينة، وتسجيل الدخول الخاص بالمستأجر، واستخدام الإضافات الحالي، وتوصيات نشر النماذج المحدّثة
+- **🧪 تعليمات الورشة** الآن تستخدم أمثلة إصدارات أكثر واقعية ولغة إعداد بيئة أوضح للمختبرات العملية
+- **📈 وثائق الإنتاج واستكشاف الأخطاء** الآن تتوافق بشكل أفضل مع أمثلة المراقبة والنموذج الاحتياطي ومستويات التكلفة الحالية
+
+#### الملفات المحدثة
+- `docs/chapter-01-foundation/README.md`
+- `docs/chapter-01-foundation/azd-basics.md`
+- `docs/chapter-01-foundation/installation.md`
+- `docs/chapter-02-ai-development/README.md`
+- `docs/chapter-02-ai-development/agents.md`
+- `docs/chapter-02-ai-development/ai-model-deployment.md`
+- `docs/chapter-02-ai-development/ai-workshop-lab.md`
+- `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
+- `docs/chapter-03-configuration/README.md`
+- `docs/chapter-03-configuration/configuration.md`
+- `docs/chapter-04-infrastructure/README.md`
+- `docs/chapter-04-infrastructure/deployment-guide.md`
+- `docs/chapter-04-infrastructure/provisioning.md`
+- `docs/chapter-05-multi-agent/README.md`
+- `docs/chapter-06-pre-deployment/README.md`
+- `docs/chapter-06-pre-deployment/preflight-checks.md`
+- `docs/chapter-07-troubleshooting/README.md`
+- `docs/chapter-07-troubleshooting/ai-troubleshooting.md`
+- `docs/chapter-07-troubleshooting/common-issues.md`
+- `docs/chapter-08-production/README.md`
+- `docs/chapter-08-production/production-ai-practices.md`
+- `workshop/README.md`
+- `workshop/docs/index.md`
+- `workshop/docs/instructions/1-Select-AI-Template.md`
+- `workshop/docs/instructions/2-Validate-AI-Template.md`
+- `workshop/docs/instructions/3-Deconstruct-AI-Template.md`
+- `workshop/docs/instructions/5-Customize-AI-Template.md`
+
+---
 
 ### [v3.18.0] - 2026-03-16
 
-#### AZD AI CLI Commands, Content Validation & Template Expansion
-**تضيف هذه النسخة تغطية أوامر `azd ai` و`azd extension` و`azd mcp` عبر جميع الفصول المتعلقة بالذكاء الاصطناعي، وتصَحح الروابط المعطلة والشيفرات المهجورة في agents.md، وتحدّث ورقة الغش، وتعِيد هيكلة قسم قوالب الأمثلة مع أوصاف مُحققة وقوالب Azure AI AZD جديدة.**
+#### أوامر AZD AI CLI، التحقق من المحتوى وتوسع القوالب
+**تُضيف هذه النسخة تغطية لأوامر `azd ai`, `azd extension`, و `azd mcp` عبر جميع الفصول المتعلقة بالذكاء الاصطناعي، تصلح الروابط المعطلة والكود المهجور في agents.md، تُحدّث ورقة الغش، وتجري إعادة تشكيل لقسم قوالب الأمثلة مع أوصاف مُتحققة وقوالب AZD جديدة لAzure AI.**
 
 #### تمت الإضافة
 - **🤖 تغطية AZD AI CLI** عبر 7 ملفات (كانت سابقًا فقط في الفصل 8):
-  - `docs/chapter-01-foundation/azd-basics.md` — قسم جديد "Extensions and AI Commands" يقدم `azd extension` و`azd ai agent init` و`azd mcp`
-  - `docs/chapter-02-ai-development/agents.md` — الخيار 4: `azd ai agent init` مع جدول مقارنة (النهج: القالب مقابل البيان)
-  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — المقاطع الفرعية "AZD Extensions for Foundry" و"Agent-First Deployment"
-  - `docs/chapter-05-multi-agent/README.md` — بدء سريع الآن يوضح مساري النشر القائمين على القالب والبيان
-  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — يتضمن قسم النشر الآن خيار `azd ai agent init`
-  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — المقطع الفرعي "AZD AI Extension Commands for Diagnostics"
-  - `resources/cheat-sheet.md` — قسم جديد "AI & Extensions Commands" مع `azd extension` و`azd ai agent init` و`azd mcp` و`azd infra generate`
-- **📦 قوالب AZD AI جديدة** في `microsoft-foundry-integration.md`:
-  - **azure-search-openai-demo-csharp** — دردشة RAG على .NET مع Blazor WebAssembly وSemantic Kernel ودعم الدردشة الصوتية
-  - **azure-search-openai-demo-java** — دردشة RAG بلغة Java باستخدام Langchain4J مع خيارات نشر ACA/AKS
-  - **contoso-creative-writer** — تطبيق كتابة إبداعية متعدد الوكلاء باستخدام Azure AI Agent Service وBing Grounding وPrompty
-  - **serverless-chat-langchainjs** — RAG بدون خادم باستخدام Azure Functions + LangChain.js + Cosmos DB مع دعم تطوير محلي عبر Ollama
-  - **chat-with-your-data-solution-accelerator** — مسرع RAG للمؤسسات ببوابة إدارة وتكامل Teams وخيارات PostgreSQL/Cosmos DB
-  - **azure-ai-travel-agents** — تطبيق مرجعي لتنظيم MCP متعدد الوكلاء مع خوادم .NET وPython وJava وTypeScript
-  - **azd-ai-starter** — قالب بداية بسيط لبنية تحتية Azure AI باستخدام Bicep
-  - **🔗 رابط معرض AZD AI المذهل** — إشارة إلى [معرض AZD AI المذهل](https://azure.github.io/awesome-azd/?tags=ai) (أكثر من 80 قالبًا)
+  - `docs/chapter-01-foundation/azd-basics.md` — قسم جديد "الإضافات وأوامر الذكاء الاصطناعي" يقدّم `azd extension`, `azd ai agent init`, و `azd mcp`
+  - `docs/chapter-02-ai-development/agents.md` — الخيار 4: `azd ai agent init` مع جدول مقارنة (نهج القالب مقابل النهج القائم على البيان)
+  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — أقسام "إضافات AZD لـ Foundry" و "نشر يعتمد على الوكيل أولاً"
+  - `docs/chapter-05-multi-agent/README.md` — يبدأ الدليل السريع الآن بإظهار مسارات النشر القائمة على القالب والبيان
+  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — قسم النشر يضم الآن خيار `azd ai agent init`
+  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — قسم "أوامر امتداد AZD AI لأغراض التشخيص"
+  - `resources/cheat-sheet.md` — قسم جديد "أوامر AI والإضافات" مع `azd extension`, `azd ai agent init`, `azd mcp`, و `azd infra generate`
+- **📦 قوالب أمثلة AZD AI جديدة** في `microsoft-foundry-integration.md`:
+  - **azure-search-openai-demo-csharp** — دردشة RAG بـ .NET مع Blazor WebAssembly و Semantic Kernel ودعم الدردشة الصوتية
+  - **azure-search-openai-demo-java** — دردشة RAG بجافا باستخدام Langchain4J مع خيارات نشر ACA/AKS
+  - **contoso-creative-writer** — تطبيق كتابة إبداعي متعدد الوكلاء باستخدام Azure AI Agent Service و Bing Grounding و Prompty
+  - **serverless-chat-langchainjs** — RAG خالي من الخوادم باستخدام Azure Functions + LangChain.js + Cosmos DB مع دعم تطوير محلي عبر Ollama
+  - **chat-with-your-data-solution-accelerator** — مسرّع RAG للمؤسسات مع بوابة إدارة، تكامل Teams، وخيارات PostgreSQL/Cosmos DB
+  - **azure-ai-travel-agents** — تطبيق مرجعي لأوركسترة MCP متعدد الوكلاء بخوادم في .NET و Python و Java و TypeScript
+  - **azd-ai-starter** — قالب بداية بيسيب (Bicep) بسيط لبنية Azure AI الأساسية
+  - **🔗 رابط معرض Awesome AZD AI** — إشارة إلى [awesome-azd AI gallery](https://azure.github.io/awesome-azd/?tags=ai) (أكثر من 80 قالبًا)
 
 #### تم الإصلاح
-- **🔗 agents.md التنقل**: روابط السابق/التالي الآن تتطابق مع ترتيب دروس README للفصل 2 (Microsoft Foundry Integration → Agents → AI Model Deployment)
-- **🔗 الروابط المعطلة في agents.md**: تم تصحيح `production-ai-practices.md` إلى `../chapter-08-production/production-ai-practices.md` (3 حالات)
-- **📦 الكود المهجور في agents.md**: استبدال `opencensus` بـ `azure-monitor-opentelemetry` + OpenTelemetry SDK
-- **🐛 واجهة برمجة تطبيقات غير صحيحة في agents.md**: نقل `max_tokens` من `create_agent()` إلى `create_run()` كـ `max_completion_tokens`
-- **🔢 حساب الرموز في agents.md**: استبدال التقدير التقريبي `len//4` بـ `tiktoken.encoding_for_model()`
-- **azure-search-openai-demo**: تصحيح الخدمات من "Cognitive Search + App Service" إلى "Azure AI Search + Azure Container Apps" (تغير المضيف الافتراضي في Oct 2024)
-- **contoso-chat**: تحديث الوصف للإشارة إلى Azure AI Foundry + Prompty، ليتطابق مع عنوان المستودع الفعلي وتكديس التقنية
+- **🔗 تنقل agents.md**: روابط السابق/التالي الآن تطابق ترتيب الدروس في README الفصل 2 (Microsoft Foundry Integration → Agents → AI Model Deployment)
+- **🔗 روابط agents.md المعطلة**: `production-ai-practices.md` صُحّحت إلى `../chapter-08-production/production-ai-practices.md` (3 حالات)
+- **📦 كود agents.md المهجور**: استبدال `opencensus` بـ `azure-monitor-opentelemetry` + OpenTelemetry SDK
+- **🐛 واجهة برمجة التطبيقات غير الصالحة في agents.md**: نقل `max_tokens` من `create_agent()` إلى `create_run()` كـ `max_completion_tokens`
+- **🔢 حساب رموز agents.md**: استبدال تقدير تقريبي `len//4` بـ `tiktoken.encoding_for_model()`
+- **azure-search-openai-demo**: تصحيح الخدمات من "Cognitive Search + App Service" إلى "Azure AI Search + Azure Container Apps" (تغيّر المضيف الافتراضي أكتوبر 2024)
+- **contoso-chat**: تحديث الوصف للإشارة إلى Azure AI Foundry + Prompty، بما يتوافق مع عنوان المستودع الفعلي وتكدس التقنيات
 
 #### تمت الإزالة
 - **ai-document-processing**: إزالة إشارة قالب غير وظيفي (المستودع غير متاح علنًا كقالب AZD)
 
 #### تم التحسين
-- **📝 تمارين agents.md**: التمرين 1 يعرض الآن الناتج المتوقع وخطوة `azd monitor`; التمرين 2 يتضمن كود تسجيل `FunctionTool` الكامل؛ التمرين 3 يستبدل التوجيه الغامض بأوامر `prepdocs.py` ملموسة
-- **📚 موارد agents.md**: تحديث روابط الوثائق إلى مستندات Azure AI Agent Service والبدء السريع الحالية
-- **📋 جدول الخطوات التالية في agents.md**: إضافة رابط ورشة عمل AI كاملة لتغطية الفصل
+- **📝 agents.md exercises**: التمرين 1 الآن يعرض المخرجات المتوقعة وخطوة `azd monitor`; التمرين 2 يتضمن كود التسجيل الكامل لـ `FunctionTool`; التمرين 3 يستبدل الإرشادات الغامضة بأوامر محددة `prepdocs.py`
+- **📚 agents.md resources**: تم تحديث روابط التوثيق إلى مستندات Azure AI Agent Service الحالية والدليل السريع
+- **📋 agents.md Next Steps table**: تمت إضافة رابط مختبر ورشة العمل AI Workshop Lab لتغطية الفصل بالكامل
 
-#### الملفات المحدثة
+#### Files Updated
 - `docs/chapter-01-foundation/azd-basics.md`
 - `docs/chapter-02-ai-development/agents.md`
 - `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
@@ -76,30 +179,30 @@
 
 ### [v3.17.0] - 2026-02-05
 
-#### تحسين تنقّل المقرر
-**تحسّن هذه النسخة تنقّل فصول README.md مع تنسيق جدول موسع.**
+#### تحسين تنقل الدورة
+**تعمل هذه النسخة على تحسين تنقل الفصول في README.md عبر تنسيق جدول محسن.**
 
-#### تم التغيير
-- **جدول خريطة المقرر**: تم تحسينه بروابط دروس مباشرة، تقديرات المدة، وتصنيفات التعقيد
-- **تنظيف المجلدات**: إزالة المجلدات القديمة المكررة (deployment/, getting-started/, pre-deployment/, troubleshooting/)
-- **التحقق من الروابط**: تم التحقق من جميع الروابط الداخلية الـ 21+ في جدول خريطة المقرر
+#### التغييرات
+- **جدول خريطة الدورة**: تم تحسينه بروابط دروس مباشرة، وتقديرات للمدة، وتقييمات التعقيد
+- **تنظيف المجلدات**: تم إزالة المجلدات القديمة المتكررة (deployment/, getting-started/, pre-deployment/, troubleshooting/)
+- **التحقق من الروابط**: تم التحقق من صحة أكثر من 21 رابطًا داخليًا في جدول خريطة الدورة
 
 ### [v3.16.0] - 2026-02-05
 
-#### تحديث أسماء المنتجات
-**تحدّثت هذه النسخة مراجع المنتجات لتعكس العلامات التجارية الحالية لشركة Microsoft.**
+#### تحديثات أسماء المنتجات
+**تقوم هذه النسخة بتحديث إشارات المنتجات لتتماشى مع العلامة التجارية الحالية لشركة Microsoft.**
 
-#### تم التغيير
-- **Microsoft Foundry → Microsoft Foundry**: تحديث جميع المراجع عبر الملفات غير المترجمة
-- **Azure AI Agent Service → Foundry Agents**: تحديث اسم الخدمة ليعكس العلامة التجارية الحالية
+#### التغييرات
+- **Microsoft Foundry → Microsoft Foundry**: تم تحديث كافة الإشارات عبر الملفات غير المترجمة
+- **Azure AI Agent Service → Foundry Agents**: تم تحديث اسم الخدمة ليعكس العلامة التجارية الحالية
 
 #### الملفات المحدثة
-- `README.md` - صفحة الهبوط الرئيسية للمقرر
-- `changelog.md` - تاريخ الإصدارات
-- `course-outline.md` - هيكل المقرر
+- `README.md` - الصفحة الرئيسية للدورة
+- `changelog.md` - سجل الإصدارات
+- `course-outline.md` - هيكل الدورة
 - `docs/chapter-02-ai-development/agents.md` - دليل وكلاء الذكاء الاصطناعي
 - `examples/README.md` - توثيق الأمثلة
-- `workshop/README.md` - صفحة الهبوط للورشة
+- `workshop/README.md` - صفحة ورشة العمل
 - `workshop/docs/index.md` - فهرس الورشة
 - `workshop/docs/instructions/*.md` - جميع ملفات تعليمات الورشة
 
@@ -107,11 +210,11 @@
 
 ### [v3.15.0] - 2026-02-05
 
-#### إعادة هيكلة المستودع الكبرى: أسماء المجلدات بحسب الفصول
-**تعيد هذه النسخة هيكلة الوثائق إلى مجلدات مخصصة بحسب الفصول لتسهيل التنقل.**
+#### إعادة هيكلة رئيسية للمستودع: أسماء المجلدات حسب الفصل
+**تقوم هذه النسخة بإعادة تنظيم الوثائق إلى مجلدات مخصصة بحسب الفصول لتسهيل التنقل.**
 
 #### إعادة تسمية المجلدات
-تم استبدال المجلدات القديمة بمجلدات مرقمة حسب الفصول:
+تم استبدال المجلدات القديمة بمجلدات مرقمة حسب الفصل:
 - `docs/getting-started/` → `docs/chapter-01-foundation/` + `docs/chapter-03-configuration/`
 - `docs/microsoft-foundry/` → `docs/chapter-02-ai-development/` + `docs/chapter-08-production/`
 - `docs/deployment/` → `docs/chapter-04-infrastructure/`
@@ -120,8 +223,7 @@
 - تمت الإضافة: `docs/chapter-05-multi-agent/`
 
 #### ترحيل الملفات
-
-| الملف | من | إلى |
+| ملف | من | إلى |
 |------|------|---|
 | azd-basics.md | getting-started/ | chapter-01-foundation/ |
 | installation.md | getting-started/ | chapter-01-foundation/ |
@@ -139,166 +241,169 @@
 | All troubleshooting files | troubleshooting/ | chapter-07-troubleshooting/ |
 
 #### تمت الإضافة
-- **📚 ملفات README لكل فصل**: إنشاء README.md في كل مجلد فصل يحتوي على:
-  - أهداف التعلم والمدة الزمنية
-  - جدول الدروس مع الأوصاف
-  - أوامر البدء السريع
-  - توجيهات للتنقل إلى الفصول الأخرى
+- **📚 ملفات README لكل فصل**: تم إنشاء README.md في كل مجلد فصل ويتضمن:
+  - أهداف التعلم والمدة
+  - جدول الدروس مع الوصف
+  - أوامر بدء سريعة
+  - تنقل إلى الفصول الأخرى
 
-#### تم التغيير
-- **🔗 تحديث جميع الروابط الداخلية**: تحديث 78+ مسارًا عبر جميع ملفات الوثائق
-- **🗺️ README.md الرئيسي**: تحديث خريطة المقرر بهيكل الفصول الجديد
-- **📝 examples/README.md**: تحديث المراجع المتبادلة إلى مجلدات الفصول
+#### التغييرات
+- **🔗 تحديث جميع الروابط الداخلية**: تم تحديث أكثر من 78 مسارًا عبر ملفات التوثيق
+- **🗺️ README.md الرئيسي**: تم تحديث خريطة الدورة بهيكل الفصول الجديد
+- **📝 examples/README.md**: تم تحديث المراجع المتبادلة إلى مجلدات الفصول
 
-#### تمت الإزالة
-- بنية المجلدات القديمة (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/)
+#### الإزالة
+- هيكل المجلدات القديم تمت إزالته (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/)
 
 ---
 
 ### [v3.14.0] - 2026-02-05
 
-#### إعادة هيكلة المستودع: تنقّل الفصول
-**أضافت هذه النسخة ملفات README لتنقّل الفصول (تم تجاوزها بواسطة v3.15.0).**
+#### إعادة هيكلة المستودع: تنقل حسب الفصل
+**أضافت هذه النسخة ملفات README تنقلية خاصة بالفصول (تم الاستعاضة عنها بواسطة v3.15.0).**
 
 ---
 
 ### [v3.13.0] - 2026-02-05
 
-#### دليل وكلاء الذكاء الاصطناعي الجديد
+#### دليل جديد لوكلاء الذكاء الاصطناعي
 **تضيف هذه النسخة دليلًا شاملاً لنشر وكلاء الذكاء الاصطناعي باستخدام Azure Developer CLI.**
 
 #### تمت الإضافة
 - **🤖 docs/microsoft-foundry/agents.md**: دليل كامل يغطي:
-  - ما هي وكلاء الذكاء الاصطناعي وكيف تختلف عن الدردشات الآلية
-  - ثلاثة قوالب بدء سريعة للوكلاء (Foundry Agents، Prompty، RAG)
-  - أنماط عمارة الوكلاء (وكيل واحد، RAG، متعدد الوكلاء)
-  - تكوين الأدوات والتخصيص
-  - المراقبة وتتبع المقاييس
+  - ما هي وكلاء الذكاء الاصطناعي وكيف تختلف عن روبوتات الدردشة
+  - ثلاث قوالب تشغيل سريعة للوكلاء (Foundry Agents, Prompty, RAG)
+  - أنماط هندسة الوكلاء (وكيل واحد، RAG، متعدد الوكلاء)
+  - إعداد الأدوات وتخصيصها
+  - المراقبة وتعقب المقاييس
   - اعتبارات التكلفة والتحسين
   - سيناريوهات استكشاف الأخطاء الشائعة
-  - ثلاث تمارين عملية مع معايير النجاح
+  - ثلاثة تمارين عملية مع معايير النجاح
 
 #### هيكل المحتوى
 - **المقدمة**: مفاهيم الوكلاء للمبتدئين
 - **البدء السريع**: نشر الوكلاء باستخدام `azd init --template get-started-with-ai-agents`
-- **أنماط العمارة**: مخططات بصرية لأنماط الوكلاء
+- **أنماط الهندسة**: مخططات بصرية لأنماط الوكلاء
 - **التكوين**: إعداد الأدوات والمتغيرات البيئية
 - **المراقبة**: تكامل Application Insights
-- **التمارين**: تعلم عملي تدريجي (20-45 دقيقة لكل تمرين)
+- **التمارين**: تعلم عملي تصاعدي (20-45 دقيقة لكل تمرين)
 
 ---
 
 ### [v3.12.0] - 2026-02-05
 
 #### تحديث بيئة DevContainer
-**تحدّثت هذه النسخة تكوين الحاوية التطويرية بأدوات حديثة وإعدادات افتراضية أفضل لتجربة تعلم AZD.**
+**تقوم هذه النسخة بتحديث تكوين حاوية التطوير بأدوات حديثة وإعدادات افتراضية أفضل لتجربة تعلم AZD.**
 
-#### تم التغيير
-- **🐳 صورة الأساس**: الترقية من `python:3.12-bullseye` إلى `python:3.12-bookworm` (أحدث إصدارة مستقرة من Debian)
-- **📛 اسم الحاوية**: إعادة التسمية من "Python 3" إلى "AZD for Beginners" لمزيد من الوضوح
+#### التغييرات
+- **🐳 صورة الأساس**: تم التحديث من `python:3.12-bullseye` إلى `python:3.12-bookworm` (أحدث إصدار ثابت لـ Debian)
+- **📛 اسم الحاوية**: تم إعادة التسمية من "Python 3" إلى "AZD for Beginners" للوضوح
 
 #### تمت الإضافة
-- **🔧 ميزات جديدة لحاوية التطوير**:
-  - `azure-cli` مع تمكين دعم Bicep
+- **🔧 ميزات جديدة في Dev Container**:
+  - `azure-cli` مع دعم Bicep مفعل
   - `node:20` (إصدار LTS لقوالب AZD)
   - `github-cli` لإدارة القوالب
   - `docker-in-docker` لنشر تطبيقات الحاويات
 
-- **🔌 إعادة توجيه المنافذ**: منافذ معدة مسبقًا للتطوير الشائع:
+- **🔌 تمرير المنافذ**: تم تهيئة المنافذ مسبقًا للاستخدامات الشائعة:
   - 8000 (معاينة MkDocs)
   - 3000 (تطبيقات الويب)
-  - 5000 (Flask بايثون)
+  - 5000 (Python Flask)
   - 8080 (واجهات برمجة التطبيقات)
 
-- **🧩 إضافات VS Code جديدة**:
-  - `ms-python.vscode-pylance` - تحسين IntelliSense لبايثون
+- **🧩 امتدادات VS Code الجديدة**:
+  - `ms-python.vscode-pylance` - تحسين IntelliSense للـ Python
   - `ms-azuretools.vscode-azurefunctions` - دعم Azure Functions
   - `ms-azuretools.vscode-docker` - دعم Docker
   - `ms-azuretools.vscode-bicep` - دعم لغة Bicep
   - `ms-azure-devtools.azure-resource-groups` - إدارة موارد Azure
   - `yzhang.markdown-all-in-one` - تحرير Markdown
-  - `DavidAnson.vscode-markdownlint` - تدقيق Markdown
-  - `bierner.markdown-mermaid` - دعم مخططات Mermaid
+  - `DavidAnson.vscode-markdownlint` - فحص Markdown
+  - `bierner.markdown-mermaid` - دعم رسومات Mermaid
   - `redhat.vscode-yaml` - دعم YAML (لـ azure.yaml)
   - `eamodio.gitlens` - تصور Git
-  - `mhutchie.git-graph` - سجل Git
+  - `mhutchie.git-graph` - سجل التغييرات في Git
 
-- **⚙️ إعدادات VS Code**: أُضيفت إعدادات افتراضية لمُفسر Python، والتنسيق عند الحفظ، وإزالة الفراغات البيضاء
+- **⚙️ إعدادات VS Code**: أُضيفت إعدادات افتراضية لمفسر Python، والتنسيق عند الحفظ، وإزالة الفراغات النهائية
 
-- **📦 تم تحديث requirements-dev.txt**:
-  - أُضيفت إضافة تصغير MkDocs
-  - أُضيف pre-commit لتحسين جودة الكود
-  - أُضيفت حزم Azure SDK (`azure-identity`, `azure-mgmt-resource`)
+- **📦 تحديث requirements-dev.txt**:
+  - تمت إضافة ملحق تصغير MkDocs
+  - تمت إضافة pre-commit لجودة الكود
+  - تمت إضافة حزم Azure SDK (`azure-identity`, `azure-mgmt-resource`)
 
 #### تم الإصلاح
-- **أمر ما بعد الإنشاء**: الآن يتحقق من تثبيت AZD و Azure CLI عند بدء الحاوية
+- **Post-Create Command**: الآن يتحقق من تثبيت AZD و Azure CLI عند بدء الحاوية
 
 ---
 
 ### [v3.11.0] - 2026-02-05
 
-#### إعادة تصميم README صديقة للمبتدئين
-**هذا الإصدار يحسّن بشكل كبير README.md ليكون أكثر قابلية للوصول للمبتدئين ويضيف موارد أساسية لمطوري الذكاء الاصطناعي.**
+#### إعادة صياغة README مناسبة للمبتدئين
+**تحسن هذه النسخة README.md بشكل كبير لجعله أكثر وصولًا للمبتدئين وتضيف موارد أساسية لمطوري الذكاء الاصطناعي.**
 
-#### أُضيف
-- **🆚 مقارنة Azure CLI و AZD**: شرح واضح متى يجب استخدام كل أداة مع أمثلة عملية
-- **🌟 روابط Awesome AZD**: روابط مباشرة إلى معرض قوالب المجتمع وموارد المساهمة:
+#### تمت الإضافة
+- **🆚 مقارنة Azure CLI مقابل AZD**: شرح واضح متى يجب استخدام كل أداة مع أمثلة عملية
+- **🌟 روابط AZD المميزة**: روابط مباشرة إلى معرض قوالب المجتمع وموارد المساهمة:
   - [معرض Awesome AZD](https://azure.github.io/awesome-azd/) - أكثر من 200 قالب جاهز للنشر
-  - [إرسال قالب](https://github.com/Azure/awesome-azd/issues) - مساهمة المجتمع
-- **🎯 دليل البدء السريع**: قسم مبسط للبدء من 3 خطوات (التثبيت → تسجيل الدخول → النشر)
-- **📊 جدول تنقل قائم على الخبرة**: إرشادات واضحة حول من أين تبدأ بناءً على خبرة المطور
+  - [إرسال قالب](https://github.com/Azure/awesome-azd/issues) - المساهمة المجتمعية
+- **🎯 دليل البدء السريع**: قسم تبسيطي من 3 خطوات للبدء (تثبيت → تسجيل الدخول → النشر)
+- **📊 جدول تنقل مبني على الخبرة**: إرشاد واضح حول مكان البدء اعتمادًا على خبرة المطور
 
-#### تغييرات
-- **هيكل README**: إعادة تنظيم للكشف التدريجي - المعلومات الأساسية أولاً
-- **قسم المقدمة**: أُعيدت صياغته لشرح "The Magic of `azd up`" للمبتدئين تمامًا
-- **إزالة المحتوى المكرر**: أُزيل قسم استكشاف الأخطاء وإصلاحها المكرر
-- **أوامر استكشاف الأخطاء وإصلاحها**: تم إصلاح إشارة `azd logs` لاستخدام `azd monitor --logs` الصالح
+#### التغييرات
+- **هيكل README**: أعيد تنظيمه لعرض المعلومات الأساسية أولًا
+- **قسم المقدمة**: أُعيدت صياغته لشرح "سحر `azd up`" للمبتدئين تمامًا
+- **إزالة المحتوى المكرر**: تمت إزالة قسم استكشاف الأخطاء المكرر
+- **أوامر استكشاف الأخطاء**: تم تصحيح إشارة `azd logs` لاستخدام الأمر الصحيح `azd monitor --logs`
 
 #### تم الإصلاح
-- **🔐 أوامر المصادقة**: أُضيفت `azd auth login` و `azd auth logout` إلى cheat-sheet.md
-- **مراجع الأوامر غير الصالحة**: أُزيلت بقايا `azd logs` من قسم استكشاف الأخطاء في README
+- **🔐 أوامر المصادقة**: تم إضافة `azd auth login` و `azd auth logout` إلى resources/cheat-sheet.md
+- **مراجع أوامر غير صحيحة**: تمت إزالة الإشارات المتبقية إلى `azd logs` من قسم استكشاف الأخطاء في README
 
 #### ملاحظات
-- **نطاق التغيير**: التغييرات طُبقت على README.md الرئيسي و resources/cheat-sheet.md
-- **الجمهور المستهدف**: التحسينات موجهة خصيصًا للمطورين الجدد على AZD
+- **النطاق**: تم تطبيق التغييرات على README.md الرئيسي و resources/cheat-sheet.md
+- **الجمهور المستهدف**: تحسينات موجّهة خصيصًا للمطورين الجدد على AZD
 
 ---
 
 ### [v3.10.0] - 2026-02-05
 
 #### تحديث دقة أوامر Azure Developer CLI
-**يقوم هذا الإصدار بتصحيح أوامر AZD غير الموجودة في المستندات، مما يضمن أن جميع أمثلة الشيفرة تستخدم صيغة صالحة لأوامر Azure Developer CLI.**
+**تصحح هذه النسخة الأوامر غير الموجودة في AZD عبر التوثيق، مما يضمن أن أمثلة الكود تستخدم تراكيب صحيحة لصيغة Azure Developer CLI.**
 
 #### تم الإصلاح
 - **🔧 إزالة أوامر AZD غير الموجودة**: تدقيق شامل وتصحيح للأوامر غير الصالحة:
-  - `azd logs` (غير موجود) → استبدل بـ `azd monitor --logs` أو بدائل Azure CLI
-  - أوامر فرعية لـ `azd service` (غير موجودة) → استبدلت بـ `azd show` و Azure CLI
-  - `azd infra import/export/validate` (غير موجودة) → أُزيلت أو استبدلت ببدائل صالحة
-  - أعلام `azd deploy --rollback/--incremental/--parallel/--detect-changes` (غير موجودة) → أُزيلت
-  - أعلام `azd provision --what-if/--rollback` (غير موجودة) → تم التحديث لاستخدام `--preview`
-  - `azd config validate` (غير موجود) → استبدل بـ `azd config list`
-  - `azd info`, `azd history`, `azd metrics` (غير موجودة) → أُزيلت
+  - `azd logs` (غير موجود) → استبداله بـ `azd monitor --logs` أو بدائل Azure CLI
+  - أوامر فرعية لـ `azd service` (غير موجودة) → استبدالها بـ `azd show` و Azure CLI
+  - `azd infra import/export/validate` (غير موجودة) → إزالتها أو استبدالها ببدائل صحيحة
+  - أعلام `azd deploy --rollback/--incremental/--parallel/--detect-changes` (غير موجودة) → تمت إزالتها
+  - أعلام `azd provision --what-if/--rollback` (غير موجودة) → تم تحديثها لاستخدام `--preview`
+  - `azd config validate` (غير موجود) → استبداله بـ `azd config list`
+  - `azd info`, `azd history`, `azd metrics` (غير موجودة) → تمت إزالتها
 
-- **📚 ملفات محدثة مع تصحيحات الأوامر**:
-  - `resources/cheat-sheet.md`: تجديد كبير لمرجع الأوامر
-  - `docs/deployment/deployment-guide.md`: إصلاح استراتيجيات التراجع والنشر
+- **📚 الملفات المحدثة بتصحيحات الأوامر**:
+  - `resources/cheat-sheet.md`: مراجعة كبيرة لدليل الأوامر
+  - `docs/deployment/deployment-guide.md`: تصحيح استراتيجيات التراجع والنشر
   - `docs/troubleshooting/debugging.md`: تصحيح أقسام تحليل السجلات
   - `docs/troubleshooting/common-issues.md`: تحديث أوامر استكشاف الأخطاء
-  - `docs/troubleshooting/ai-troubleshooting.md`: إصلاح قسم تصحيح أخطاء AZD
+  - `docs/troubleshooting/ai-troubleshooting.md`: تصحيح قسم تصحيح أخطاء AZD
   - `docs/getting-started/azd-basics.md`: تصحيح أوامر المراقبة
-  - `docs/getting-started/first-project.md`: تحديث أمثلة المراقبة والتصحيح
-  - `docs/getting-started/installation.md`: إصلاح أمثلة المساعدة والإصدار
+  - `docs/getting-started/first-project.md`: تحديث أمثلة المراقبة وتصحيح الأخطاء
+  - `docs/getting-started/installation.md`: تصحيح أمثلة المساعدة والإصدارات
   - `docs/pre-deployment/application-insights.md`: تصحيح أوامر عرض السجلات
-  - `docs/pre-deployment/coordination-patterns.md`: إصلاح أوامر تصحيح العامل
+  - `docs/pre-deployment/coordination-patterns.md`: تصحيح أوامر تصحيح أخطاء الوكلاء
 
-#### تغييرات
-- **استراتيجيات التراجع**: تحديث الوثائق لاستخدام التراجع المعتمد على Git (AZD لا يمتلك تراجعًا أصليًا)
-- **عرض السجلات**: استبدال إشارات `azd logs` بـ `azd monitor --logs`, `azd monitor --live`, و أوامر Azure CLI
-- **قسم الأداء**: إزالة أعلام النشر المتوازية/التزايدية غير الموجودة، وتقديم بدائل صالحة
+- **📝 تحديث مرجع الإصدار**:
+  - `docs/getting-started/installation.md`: تغيير الإصدار المحدد `1.5.0` إلى عام `1.x.x` مع رابط إصدارات
 
-#### التفاصيل التقنية
-- **الأوامر الصالحة لـ AZD**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
-- **أعلام azd monitor الصالحة**: `--live`, `--logs`, `--overview`
+#### التغييرات
+- **استراتيجيات التراجع**: تحديث الوثائق لاستخدام التراجع المستند إلى Git (AZD لا يدعم التراجع داخليًا)
+- **عرض السجلات**: استبدال إشارات `azd logs` بـ `azd monitor --logs`، `azd monitor --live`، وأوامر Azure CLI
+- **قسم الأداء**: إزالة أعلام النشر المتوازية/التزايدية غير الموجودة، وتقديم بدائل صحيحة
+
+#### التفاصيل الفنية
+- **أوامر AZD الصالحة**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
+- **العلامات الصالحة لأمر azd monitor**: `--live`, `--logs`, `--overview`
 - **الميزات المحذوفة**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
 
 #### ملاحظات
@@ -308,766 +413,766 @@
 
 ### [v3.9.0] - 2026-02-05
 
-#### اكتمال الورشة وتحسين جودة الوثائق
-**يكمل هذا الإصدار وحدات الورشة التفاعلية، يصلح جميع روابط الوثائق المعطلة، ويحسّن جودة المحتوى لمطوري الذكاء الاصطناعي الذين يستخدمون Microsoft AZD.**
+#### اكتمال الورشة وتحديث جودة الوثائق
+**تُكمل هذه النسخة وحدات الورشة التفاعلية، وتصلح جميع روابط الوثائق المعطلة، وتحسّن جودة المحتوى العامة لمطوري الذكاء الاصطناعي الذين يستخدمون Microsoft AZD.**
 
-#### أُضيف
-- **📝 CONTRIBUTING.md**: مستند إرشادات المساهمة الجديد مع:
-  - تعليمات واضحة للإبلاغ عن المشكلات واقتراح التغييرات
-  - معايير توثيق للمحتوى الجديد
-  - إرشادات لأمثلة الشيفرة وقيود رسائل الالتزام
-  - معلومات عن مشاركة المجتمع
+#### تمت الإضافة
+- **📝 CONTRIBUTING.md**: وثيقة إرشادات مساهمة جديدة تتضمن:
+  - إرشادات واضحة للإبلاغ عن المشاكل واقتراح التغييرات
+  - معايير التوثيق للمحتوى الجديد
+  - إرشادات أمثلة الشيفرة واتفاقيات رسائل الالتزام
+  - معلومات حول تفاعل المجتمع
 
-#### مُكتمل
-- **🎯 وحدة الورشة 7 (الختام)**: اكتمال وحدة الختام بالكامل مع:
+#### مكتمل
+- **🎯 Workshop Module 7 (Wrap-up)**: إكمال كامل لوحدة الختام مع:
   - ملخص شامل لإنجازات الورشة
-  - قسم المفاهيم الرئيسية المتقنة مع تغطية AZD، القوالب، و Microsoft Foundry
-  - توصيات لمواصلة رحلة التعلم
-  - تحديات ورشة العمل مع تقييمات الصعوبة
-  - روابط دعم وملاحظات المجتمع
+  - قسم المفاهيم الرئيسية التي تم إتقانها ويغطي AZD والقوالب وMicrosoft Foundry
+  - توصيات لاستمرار رحلة التعلم
+  - تمارين تحدي للورشة مع تصنيفات الصعوبة
+  - روابط ملاحظات المجتمع والدعم
 
-- **📚 وحدة الورشة 3 (تفكيك)**: تحديث أهداف التعلم مع:
+- **📚 Workshop Module 3 (Deconstruct)**: تم تحديث أهداف التعلم لتشمل:
   - إرشادات تفعيل GitHub Copilot مع خوادم MCP
   - فهم بنية مجلد قوالب AZD
   - أنماط تنظيم البنية التحتية ككود (Bicep)
-  - تعليمات مختبرية عملية
+  - إرشادات المختبرات العملية
 
-- **🔧 وحدة الورشة 6 (تفكيك الموارد)**: اكتملت مع:
+- **🔧 Workshop Module 6 (Teardown)**: مكتمل مع:
   - أهداف تنظيف الموارد وإدارة التكلفة
-  - استخدام `azd down` لإلغاء نشر البنية التحتية بأمان
-  - إرشادات استرداد الخدمات المعرفية المحذوفة مؤقتًا
-  - محركات استكشاف إضافية لـ GitHub Copilot و Azure Portal
+  - `azd down` لاستخدامه في إلغاء توفير البنية بأمان
+  - إرشادات استعادة خدمات Cognitive التي حُذفت بشكل ناعم
+  - مطالبات استكشافية إضافية لـ GitHub Copilot وAzure Portal
 
 #### تم الإصلاح
-- **🔗 إصلاحات الروابط المعطلة**: حل أكثر من 15 رابطًا داخليًا معطلاً في الوثائق:
+- **🔗 إصلاح الروابط المعطلة**: تم حل أكثر من 15 رابطًا داخليًا معطلاً في الوثائق:
   - `docs/ai-foundry/ai-model-deployment.md`: تم إصلاح المسارات إلى microsoft-foundry-integration.md
-  - `docs/troubleshooting/ai-troubleshooting.md`: تم تصحيح مسارات ai-model-deployment.md و production-ai-practices.md
-  - `docs/getting-started/first-project.md`: استبدال cicd-integration.md غير الموجودة بـ deployment-guide.md
-  - `examples/retail-scenario.md`: إصلاح مسارات الأسئلة الشائعة ودليل استكشاف الأخطاء
-  - `examples/container-app/microservices/README.md`: تصحيح مسارات صفحة الدورة ودليل النشر
-  - `resources/faq.md` و `resources/glossary.md`: تحديث مراجع فصل الذكاء الاصطناعي
-  - `course-outline.md`: إصلاح مراجع دليل المدرب ومختبرات ورشة العمل الخاصة بالذكاء الاصطناعي
+  - `docs/troubleshooting/ai-troubleshooting.md`: تم تصحيح المسارات إلى ai-model-deployment.md و production-ai-practices.md
+  - `docs/getting-started/first-project.md`: تم استبدال cicd-integration.md غير الموجود بـ deployment-guide.md
+  - `examples/retail-scenario.md`: تم إصلاح مسارات الأسئلة الشائعة ودليل استكشاف الأخطاء
+  - `examples/container-app/microservices/README.md`: تم تصحيح مسارات الصفحة الرئيسية للدورة ودليل النشر
+  - `resources/faq.md` و `resources/glossary.md`: تم تحديث مراجع فصل الذكاء الاصطناعي
+  - `course-outline.md`: تم إصلاح مرجع دليل المدرب وإشارات معمل ورشة العمل الخاصة بالذكاء الاصطناعي
 
-- **📅 شارة حالة الورشة**: تم تحديثها من "قيد الإنشاء" إلى حالة ورشة نشطة بتاريخ فبراير 2026
+- **📅 لافتة حالة الورشة**: تم التحديث من "قيد الإنشاء" إلى حالة الورشة النشطة بتاريخ فبراير 2026
 
-- **🔗 تنقل الورشة**: إصلاح روابط التنقل المعطلة في README.md الخاصة بالورشة التي تشير إلى مجلد lab-1-azd-basics غير الموجود
+- **🔗 تنقل الورشة**: تم إصلاح روابط التنقل المعطلة في workshop README.md والتي كانت تشير إلى المجلد غير الموجود lab-1-azd-basics
 
-#### تغييرات
-- **عرض الورشة**: إزالة تحذير "قيد الإنشاء"، الورشة الآن مكتملة وجاهزة للاستخدام
-- **اتساق التنقل**: ضمان أن جميع وحدات الورشة تحتوي على تنقل بين الوحدات بشكل صحيح
-- **مراجع مسارات التعلم**: تحديث المراجع الفصلية لاستخدام مسارات microsoft-foundry الصحيحة
+#### تم التغيير
+- **عرض الورشة**: تمت إزالة تحذير "قيد الإنشاء"، الورشة الآن مكتملة وجاهزة للاستخدام
+- **اتساق التنقل**: تم التحقق من أن جميع وحدات الورشة تحتوي على تنقل صحيح بين الوحدات
+- **مراجع مسار التعلم**: تم تحديث المراجع المتقاطعة للفصول لاستخدام مسارات microsoft-foundry الصحيحة
 
 #### تم التحقق
-- ✅ كل ملفات Markdown الإنجليزية تحتوي على روابط داخلية صالحة
-- ✅ وحدات الورشة 0-7 مكتملة بأهداف التعلم
+- ✅ تحتوي جميع ملفات Markdown الإنجليزية على روابط داخلية صالحة
+- ✅ وحدات الورشة 0-7 مكتملة مع أهداف التعلم
 - ✅ التنقل بين الفصول والوحدات يعمل بشكل صحيح
 - ✅ المحتوى مناسب لمطوري الذكاء الاصطناعي الذين يستخدمون Microsoft AZD
-- ✅ لغة وهيكل مناسبان للمبتدئين
-- ✅ يقدم CONTRIBUTING.md إرشادات واضحة للمساهمين في المجتمع
+- ✅ تم الحفاظ على لغة وبنية مناسبة للمبتدئين في جميع أنحاء المحتوى
+- ✅ يوفر CONTRIBUTING.md إرشادات واضحة للمساهمين من المجتمع
 
-#### التنفيذ الفني
-- **التحقق من الروابط**: برنامج PowerShell آلي تحقق من جميع الروابط الداخلية في ملفات .md
-- **تدقيق المحتوى**: مراجعة يدوية لاكتمال الورشة وملاءمتها للمبتدئين
-- **نظام التنقل**: تطبيق أنماط تنقل متسقة بين الفصول والوحدات
+#### التنفيذ التقني
+- **التحقق من الروابط**: برنامج PowerShell تلقائي تحقق من جميع الروابط الداخلية في ملفات .md
+- **تدقيق المحتوى**: مراجعة يدوية لاكتمال الورشة ومدى ملاءمتها للمبتدئين
+- **نظام التنقل**: تم تطبيق أنماط تنقل موحدة للفصول والوحدات
 
 #### ملاحظات
-- **النطاق**: التغييرات طُبقت على الوثائق الإنجليزية فقط
-- **الترجمات**: لم تُحدّث مجلدات الترجمة في هذا الإصدار (سيتم مزامنة الترجمة الآلية لاحقًا)
+- **النطاق**: تم تطبيق التغييرات على الوثائق الإنجليزية فقط
+- **الترجمات**: مجلدات الترجمة لم يتم تحديثها في هذه النسخة (سيتم مزامنة الترجمة الآلية لاحقًا)
 - **مدة الورشة**: توفر الورشة المكتملة الآن 3-4 ساعات من التعلم العملي
 
 ---
 
 ### [v3.8.0] - 2025-11-19
 
-#### وثائق متقدمة: المراقبة، الأمان، وأنماط التنسيق متعددة الوكلاء
-**يضيف هذا الإصدار دروسًا شاملة من الدرجة A حول تكامل Application Insights، أنماط المصادقة، وتنظيم الوكلاء المتعددين لنشرات الإنتاج.**
+#### الوثائق المتقدمة: المراقبة والأمان وأنماط تعدد الوكلاء
+**تضيف هذه النسخة دروسًا شاملة بمستوى A حول تكامل Application Insights، وأنماط المصادقة، وتنسيق الوكلاء المتعددين للنشر في بيئات الإنتاج.**
 
-#### أُضيف
+#### تمت الإضافة
 - **📊 درس تكامل Application Insights**: في `docs/pre-deployment/application-insights.md`:
-  - نشر موجه لـ AZD مع توفير تلقائي
+  - نشر متمحور حول AZD مع توفير تلقائي
   - قوالب Bicep كاملة لـ Application Insights + Log Analytics
-  - تطبيقات بايثون عملية مع قياس مخصص (أكثر من 1,200 سطر)
-  - أنماط مراقبة AI/LLM (تتبع رموز/تكلفة نماذج Microsoft Foundry)
-  - 6 مخططات Mermaid (العمارة، التتبع الموزع، تدفق القياس)
-  - 3 تمارين عملية (التنبيهات، اللوحات، مراقبة AI)
-  - أمثلة استعلام Kusto واستراتيجيات تحسين التكلفة
-  - بث مقاييس مباشر وتصحيح أخطاء في الوقت الفعلي
-  - وقت تعلم يتراوح بين 40-50 دقيقة مع أنماط جاهزة للإنتاج
+  - تطبيقات Python عاملة مع قياسات مخصصة (أكثر من 1,200 سطر)
+  - أنماط مراقبة AI/LLM (تتبع رموز/تكلفة Microsoft Foundry Models)
+  - 6 مخططات Mermaid (العمارة، التتبع الموزع، تدفق القياسات)
+  - 3 تمارين عملية (التنبيهات، لوحات المعلومات، مراقبة AI)
+  - أمثلة استعلامات Kusto واستراتيجيات تحسين التكلفة
+  - بث المقاييس المباشر وتصحيح الأخطاء في الوقت الحقيقي
+  - زمن تعلم 40-50 دقيقة مع أنماط جاهزة للإنتاج
 
 - **🔐 درس أنماط المصادقة والأمان**: في `docs/getting-started/authsecurity.md`:
-  - 3 أنماط مصادقة (سلاسل الاتصال، Key Vault، managed identity)
-  - قوالب بنية تحتية كاملة بـ Bicep للنشر الآمن
+  - 3 أنماط للمصادقة (سلاسل الاتصال، Key Vault، الهوية المُدارة)
+  - قوالب بنية تحتية Bicep كاملة للنشر الآمن
   - كود تطبيق Node.js مع تكامل Azure SDK
-  - 3 تمارين كاملة (تمكين managed identity، identity مخصص للمستخدم، تدوير Key Vault)
-  - أفضل ممارسات الأمان وتكوينات RBAC
+  - 3 تمارين كاملة (تفعيل الهوية المُدارة، الهوية المعينة من المستخدم، تدوير Key Vault)
+  - ممارسات أمان موصى بها وتكوينات RBAC
   - دليل استكشاف الأخطاء وتحليل التكلفة
-  - أنماط مصادقة بدون كلمات مرور جاهزة للإنتاج
+  - أنماط مصادقة بدون كلمة مرور جاهزة للإنتاج
 
-- **🤖 درس أنماط تنسيق الوكلاء المتعددين**: في `docs/pre-deployment/coordination-patterns.md`:
-  - 5 أنماط تنسيق (تسلسلي، متوازي، هرمي، مدفوع بالحدث، إجماعي)
-  - تنفيذ خدمة منسق كامل (Python/Flask، أكثر من 1,500 سطر)
-  - 3 تطبيقات وكلاء متخصصة (باحث، كاتب، محرر)
-  - تكامل Service Bus لطوابير الرسائل
+- **🤖 درس أنماط تنسيق تعدد الوكلاء**: في `docs/pre-deployment/coordination-patterns.md`:
+  - 5 أنماط للتنسيق (التسلسلي، المتوازي، الهرمي، المدفوع بالأحداث، الإجماع)
+  - تنفيذ خدمة منسق كاملة (Python/Flask، أكثر من 1,500 سطر)
+  - 3 تطبيقات وكيلي متخصصة (Research، Writer، Editor)
+  - تكامل Service Bus لطابور الرسائل
   - إدارة الحالة في Cosmos DB للأنظمة الموزعة
   - 6 مخططات Mermaid تُظهر تفاعلات الوكلاء
-  - 3 تمارين متقدمة (معالجة المهلة، منطق إعادة المحاولة، قاطع الدائرة)
-  - تحليل تكلفة ($240-565/month) مع استراتيجيات تحسين
+  - 3 تمارين متقدمة (التعامل مع انقضاء المهلة، منطق إعادة المحاولة، قاطع الدائرة)
+  - تفصيل التكلفة (240-565$/شهريًا) مع استراتيجيات تحسين
   - تكامل Application Insights للمراقبة
 
-#### مُحسّن
-- **فصل ما قبل النشر**: الآن يتضمن مراقبة شاملة وأنماط التنسيق
-- **فصل البدء**: معزز بأنماط مصادقة مهنية
+#### تم التعزيز
+- **فصل ما قبل النشر**: الآن يتضمن أنماط مراقبة وتنسيق شاملة
+- **فصل البدء**: تم تعزيزه بأنماط مصادقة احترافية
 - **الجاهزية للإنتاج**: تغطية كاملة من الأمان إلى القابلية للرصد
-- **مخطط الدورة**: تم تحديثه للإشارة إلى الدروس الجديدة في الفصلين 3 و 6
+- **مخطط الدورة**: تم تحديثه للإشارة إلى الدروس الجديدة في الفصلين 3 و6
 
-#### تغييرات
-- **تطور التعلم**: دمج أفضل للأمان والمراقبة عبر الدورة
-- **جودة الوثائق**: معايير متناسقة من الدرجة A (95-97%) عبر الدروس الجديدة
-- **أنماط الإنتاج**: تغطية شاملة من النهاية إلى النهاية لنشر المؤسسات
+#### تم التغيير
+- **تدرج التعلم**: تكامل أفضل للأمان والمراقبة عبر الدورة
+- **جودة الوثائق**: معايير متسقة بمستوى A (95-97%) عبر الدروس الجديدة
+- **أنماط الإنتاج**: تغطية شاملة من البداية للنهاية لنشرات المؤسسات
 
-#### مُحسّن
+#### تم التحسين
 - **تجربة المطور**: مسار واضح من التطوير إلى مراقبة الإنتاج
-- **معايير الأمان**: أنماط مهنية للمصادقة وإدارة الأسرار
-- **الملاحظة**: تكامل كامل مع Application Insights عبر AZD
-- **أحمال عمل الذكاء الاصطناعي**: مراقبة متخصصة لنماذج Microsoft Foundry وأنظمة الوكلاء المتعددين
+- **معايير الأمان**: أنماط احترافية للمصادقة وإدارة الأسرار
+- **القابلية للرصد**: تكامل كامل لـ Application Insights مع AZD
+- **أحمال العمل الخاصة بالذكاء الاصطناعي**: مراقبة متخصصة لنماذج Microsoft Foundry وأنظمة تعدد الوكلاء
 
 #### تم التحقق
-- ✅ جميع الدروس تتضمن كودًا عمليًا كاملًا (ليس مقتطفات)
-- ✅ مخططات Mermaid للتعلم البصري (19 إجمالي عبر 3 دروس)
-- ✅ تمارين عملية مع خطوات تحقق (9 إجمالي)
+- ✅ تتضمن جميع الدروس شيفرة كاملة عاملة (ليست مقتطفات)
+- ✅ مخططات Mermaid للتعلم البصري (19 إجماليًا عبر 3 دروس)
+- ✅ تمارين عملية مع خطوات التحقق (9 إجماليًا)
 - ✅ قوالب Bicep جاهزة للإنتاج قابلة للنشر عبر `azd up`
 - ✅ تحليل التكلفة واستراتيجيات التحسين
 - ✅ أدلة استكشاف الأخطاء وأفضل الممارسات
-- ✅ نقاط فحص المعرفة مع أوامر تحقق
+- ✅ نقاط فحص المعرفة مع أوامر التحقق
 
-#### نتائج تقييم التوثيق
+#### نتائج تقييم الوثائق
 - **docs/pre-deployment/application-insights.md**: - دليل مراقبة شامل
-- **docs/getting-started/authsecurity.md**: - أنماط أمان مهنية
-- **docs/pre-deployment/coordination-patterns.md**: - هندسات متقدمة للوكيل المتعدد
-- **محتوى جديد عام**: - معايير جودة عالية ومتسقة
+- **docs/getting-started/authsecurity.md**: - أنماط أمان احترافية
+- **docs/pre-deployment/coordination-patterns.md**: - هندسات تعدد الوكلاء المتقدمة
+- **المحتوى الجديد العام**: - معايير جودة عالية متسقة
 
-#### التنفيذ الفني
-- **Application Insights**: Log Analytics + قياسات مخصصة + تتبع موزع
+#### التنفيذ التقني
+- **Application Insights**: Log Analytics + قياسات مخصصة + التتبع الموزع
 - **المصادقة**: Managed Identity + Key Vault + أنماط RBAC
-- **الوكيل المتعدد**: Service Bus + Cosmos DB + Container Apps + orchestration
-- **المراقبة**: مقاييس حية + استعلامات Kusto + تنبيهات + لوحات معلومات
-- **إدارة التكاليف**: استراتيجيات العينة، سياسات الاحتفاظ، ضوابط الميزانية
+- **تعدد الوكلاء**: Service Bus + Cosmos DB + Container Apps + التنسيق
+- **المراقبة**: مقاييس مباشرة + استعلامات Kusto + تنبيهات + لوحات معلومات
+- **إدارة التكلفة**: استراتيجيات العينة، سياسات الاحتفاظ، ضوابط الميزانية
 
 ### [v3.7.0] - 2025-11-19
 
-#### تحسينات جودة التوثيق ومثال جديد لنماذج Microsoft Foundry
-**تعمل هذه النسخة على تحسين جودة التوثيق عبر المستودع وتضيف مثالًا كاملًا لنشر نماذج Microsoft Foundry مع واجهة دردشة gpt-4.1.**
+#### تحسينات جودة الوثائق ومثال جديد لنماذج Microsoft Foundry
+**تعزز هذه النسخة جودة الوثائق عبر المستودع وتضيف مثالًا كاملاً لنشر نماذج Microsoft Foundry مع واجهة دردشة gpt-4.1.**
 
 #### تمت الإضافة
-- **🤖 مثال دردشة Microsoft Foundry Models**: نشر gpt-4.1 كامل مع تنفيذ عملي في `examples/azure-openai-chat/`:
-  - بنية تحتية كاملة لنماذج Microsoft Foundry (نشر نموذج gpt-4.1)
-  - واجهة دردشة لسطر الأوامر بلغة Python مع سجل المحادثة
+- **🤖 مثال دردشة Microsoft Foundry Models**: نشر gpt-4.1 كامل مع تنفيذ عامل في `examples/azure-openai-chat/`:
+  - بنية Microsoft Foundry Models التحتية الكاملة (نشر نموذج gpt-4.1)
+  - واجهة دردشة سطر أوامر Python مع سجل المحادثة
   - تكامل Key Vault لتخزين مفاتيح API بأمان
-  - تتبع استخدام الرموز وتقدير التكاليف
-  - تحديد معدلات الطلب ومعالجة الأخطاء
-  - README شامل مع دليل نشر يستغرق 35-45 دقيقة
+  - تتبع استخدام الرموز وتقدير التكلفة
+  - حدود معدل الطلبات والتعامل مع الأخطاء
+  - README شامل مع دليل نشر مدته 35-45 دقيقة
   - 11 ملفًا جاهزًا للإنتاج (قوالب Bicep، تطبيق Python، تكوين)
-- **📚 تمارين توثيقية**: أضيفت تمارين عملية إلى دليل التكوين:
-  - التمرين 1: تكوين متعدد البيئات (15 دقيقة)
-  - التمرين 2: ممارسة إدارة الأسرار (10 دقائق)
-  - معايير نجاح واضحة وخطوات تحقق
-- **✅ التحقق من النشر**: أضيف قسم تحقق إلى دليل النشر:
+- **📚 تمارين الوثائق**: إضافة تمارين عملية إلى دليل التكوين:
+  - التمرين 1: تهيئة متعددة البيئات (15 دقيقة)
+  - التمرين 2: تدريب إدارة الأسرار (10 دقائق)
+  - معايير نجاح واضحة وخطوات التحقق
+- **✅ التحقق من النشر**: إضافة قسم التحقق إلى دليل النشر:
   - إجراءات فحص الصحة
   - قائمة معايير النجاح
   - المخرجات المتوقعة لجميع أوامر النشر
-  - مرجع سريع لاستكشاف الأخطاء وإصلاحها
+  - مرجع سريع لاستكشاف الأخطاء
 
-#### المحسّن
-- **examples/README.md**: تم التحديث إلى جودة من الفئة A (93%):
-  - إضافة azure-openai-chat إلى جميع الأقسام ذات الصلة
-  - تحديث عدد الأمثلة المحلية من 3 إلى 4
-  - الإضافة إلى جدول أمثلة تطبيقات الذكاء الاصطناعي
-  - دمجه في الإعداد السريع للمستخدمين المتوسطين
-  - الإضافة إلى قسم قوالب Microsoft Foundry
-  - تحديث مصفوفة المقارنة وأقسام نتائج التكنولوجيا
-- **جودة التوثيق**: تحسّنت من B+ (87%) → A- (92%) عبر مجلد docs:
+#### تم التعزيز
+- **examples/README.md**: تم تحديثه إلى جودة مستوى A (93%):
+  - تمت إضافة azure-openai-chat إلى جميع الأقسام ذات الصلة
+  - تم تحديث عدد الأمثلة المحلية من 3 إلى 4
+  - تمت الإضافة إلى جدول أمثلة تطبيقات AI
+  - تم دمجه في بدء سريع للمستخدمين المتوسطين
+  - تمت الإضافة إلى قسم قوالب Microsoft Foundry
+  - تم تحديث مصفوفة المقارنة وأقسام العثور على التكنولوجيا
+- **جودة الوثائق**: تحسنت من B+ (87%) إلى A- (92%) عبر مجلد docs:
   - إضافة المخرجات المتوقعة لأمثلة الأوامر الحرجة
   - تضمين خطوات التحقق لتغييرات التكوين
-  - تعزيز التعلم العملي بتمارين تطبيقية
+  - تعزيز التعلم العملي بتمارين عملية
 
 #### تم التغيير
-- **examples/README.md**: التحديث ليعرض ويربط أمثلة container app الجديدة ضمن "Local Examples - Container Applications"
-- **examples/README.md**: تم تحديثه لتسليط الضوء على أمثلة تطبيق الحاويات وإضافة مدخل مصفوفة المقارنة وتحديث مراجع التكنولوجيا/الهندسة المعمارية
-- **مخطط الدورة ودليل الدراسة**: تم التحديث للإشارة إلى أمثلة تطبيق الحاويات الجديدة وأنماط النشر في الفصول ذات الصلة
+- **تدرج التعلم**: دمج أفضل لأمثلة AI للمتعلمين المتوسطين
+- **بنية الوثائق**: تمارين أكثر قابلية للتنفيذ مع نتائج واضحة
+- **عملية التحقق**: إضافة معايير نجاح صريحة إلى سير العمل الرئيسية
 
-#### تحسّن
-- **تجربة المطور**: نشر نماذج Microsoft Foundry الآن يستغرق 35-45 دقيقة (مقابل 60-90 للبدائل المعقدة)
-- **شفافية التكاليف**: تقديرات تكلفة واضحة (50$-200$/شهر) لمثال Microsoft Foundry Models
-- **مسار التعلم**: للمطورين في مجال الذكاء الاصطناعي نقطة دخول واضحة مع azure-openai-chat
-- **معايير التوثيق**: مخرجات متوقعة وخطوات تحقق متسقة
+#### تم التحسين
+- **تجربة المطور**: أصبح نشر نماذج Microsoft Foundry يستغرق الآن 35-45 دقيقة (مقارنةً بـ60-90 لبدائل معقدة)
+- **شفافية التكلفة**: تقديرات تكلفة واضحة (50-200$/شهر) لمثال Microsoft Foundry Models
+- **مسار التعلم**: يوفر azure-openai-chat نقطة دخول واضحة لمطوري AI
+- **معايير الوثائق**: مخرجات متوقعة وخطوات تحقق متسقة
 
 #### تم التحقق
 - ✅ مثال Microsoft Foundry Models يعمل بالكامل مع `azd up`
-- ✅ جميع الملفات الـ11 صحيحة نحويًا
-- ✅ تعليمات README تتطابق مع تجربة النشر الفعلية
-- ✅ تحديث روابط التوثيق عبر أكثر من 8 مواقع
+- ✅ جميع الملفات الـ11 للتنفيذ صحيحة من حيث البنية
+- ✅ تعليمات README تطابق تجربة النشر الفعلية
+- ✅ تحديث روابط الوثائق عبر 8+ مواقع
 - ✅ فهرس الأمثلة يعكس بدقة 4 أمثلة محلية
-- ✅ لا توجد روابط خارجية مكررة في الجداول
+- ✅ لا وجود لروابط خارجية مكررة في الجداول
 - ✅ جميع مراجع التنقل صحيحة
 
-#### التنفيذ الفني
-- **هندسة نماذج Microsoft Foundry**: gpt-4.1 + Key Vault + نمط Container Apps
-- **الأمن**: جاهزية Managed Identity، أسرار في Key Vault
-- **المراقبة**: تكامل مع Application Insights
+#### التنفيذ التقني
+- **هندسة Microsoft Foundry Models**: gpt-4.1 + Key Vault + نمط Container Apps
+- **الأمان**: جاهزية Managed Identity، الأسرار في Key Vault
+- **المراقبة**: تكامل Application Insights
 - **إدارة التكلفة**: تتبع الرموز وتحسين الاستخدام
 - **النشر**: أمر واحد `azd up` للإعداد الكامل
 
 ### [v3.6.0] - 2025-11-19
 
-#### تحديث رئيسي: أمثلة نشر Container App
-**تقدم هذه النسخة أمثلة شاملة وقابلة للإنتاج لنشر تطبيقات الحاويات باستخدام Azure Developer CLI (AZD)، مع توثيق كامل ودمج في مسار التعلم.**
+#### تحديث رئيسي: أمثلة نشر تطبيقات الحاويات
+**تُدخل هذه النسخة أمثلة شاملة وجاهزة للإنتاج لنشر تطبيقات الحاويات باستخدام Azure Developer CLI (AZD)، مع توثيق كامل ودمج في مسار التعلم.**
 
 #### تمت الإضافة
 - **🚀 أمثلة تطبيقات الحاويات**: أمثلة محلية جديدة في `examples/container-app/`:
-  - [الدليل الرئيسي](examples/container-app/README.md): نظرة عامة كاملة على نشر التطبيقات المعبأة، الإعداد السريع، الإنتاج، والأنماط المتقدمة
-  - [واجهة Flask بسيطة API](../../examples/container-app/simple-flask-api): واجهة REST للمبتدئين مع scale-to-zero، فحوصات الصحة، المراقبة، واستكشاف الأخطاء
-  - [هندسة الميكروسيرفيسز](../../examples/container-app/microservices): نشر متعدد الخدمات جاهز للإنتاج (API Gateway، Product، Order، User، Notification)، مراسلة غير متزامنة، Service Bus، Cosmos DB، Azure SQL، تتبع موزع، نشر أزرق-أخضر/كاناري
-- **أفضل الممارسات**: الأمان، المراقبة، تحسين التكلفة، وإرشادات CI/CD لأحمال العمل المعبأة
-- **عينات الشيفرة**: `azure.yaml` كاملة، قوالب Bicep، وتنفيذ خدمات متعدد اللغات (Python، Node.js، C#، Go)
-- **الاختبار واستكشاف الأخطاء**: سيناريوهات اختبار شاملة، أوامر المراقبة، وإرشادات استكشاف الأخطاء
+  - [الدليل الرئيسي](examples/container-app/README.md): نظرة عامة كاملة على نشرات الحاويات، بدء سريع، الإنتاج، والأنماط المتقدمة
+  - [واجهة Flask بسيطة](../../examples/container-app/simple-flask-api): واجهة REST للمبتدئين مع موازنة حتى الصفر، فحوصات الصحة، المراقبة، واستكشاف الأخطاء
+  - [هيكلية الخدمات المصغرة](../../examples/container-app/microservices): نشر متعدد الخدمات جاهز للإنتاج (API Gateway, Product, Order, User, Notification)، المراسلة غير المتزامنة، Service Bus، Cosmos DB، Azure SQL، التتبع الموزع، نشر أزرق-أخضر/كاناري
+- **أفضل الممارسات**: الأمان، المراقبة، تحسين التكلفة، وإرشادات CI/CD لأحمال العمل المعبأة في حاويات
+- **عينات الشيفرة**: `azure.yaml` كاملة، قوالب Bicep، وتنفيذ خدمات متعدد اللغات (Python, Node.js, C#, Go)
+- **الاختبار واستكشاف الأخطاء**: سيناريوهات اختبار من الطرف إلى الطرف، أوامر المراقبة، وإرشادات استكشاف الأخطاء
 
 #### تم التغيير
-- **README.md**: تم التحديث لعرض وربط أمثلة تطبيق الحاويات الجديدة تحت "Local Examples - Container Applications"
-- **examples/README.md**: تم التحديث لتسليط الضوء على أمثلة تطبيق الحاويات، إضافة مدخل في مصفوفة المقارنة، وتحديث مراجع التكنولوجيا/الهندسة المعمارية
-- **مخطط الدورة ودليل الدراسة**: تم التحديث للإشارة إلى أمثلة تطبيق الحاويات وأنماط النشر في الفصول ذات الصلة
+- **README.md**: تم التحديث لإبراز وربط أمثلة تطبيقات الحاويات الجديدة تحت "Local Examples - Container Applications"
+- **examples/README.md**: تم التحديث لتسليط الضوء على أمثلة تطبيقات الحاويات، إضافة مدخلات مصفوفة المقارنة، وتحديث مراجع التكنولوجيا/الهيكلية
+- **Course Outline & Study Guide**: تم التحديث للإشارة إلى أمثلة تطبيقات الحاويات الجديدة ونماذج النشر ذات الصلة في الفصول المعنية
 
 #### تم التحقق
-- ✅ جميع الأمثلة الجديدة قابلة للنشر عبر `azd up` وتتبع أفضل الممارسات
-- ✅ تم تحديث روابط التوثيق والربط المتقاطع
-- ✅ الأمثلة تغطي سيناريوهات من المبتدئ إلى المتقدم، بما في ذلك ميكروسيرفيسز للإنتاج
+- ✅ جميع الأمثلة الجديدة قابلة للنشر باستخدام `azd up` وتتبع أفضل الممارسات
+- ✅ تم تحديث الروابط المتبادلة والملاحة في الوثائق
+- ✅ تغطي الأمثلة السيناريوهات من المبتدئين إلى المتقدمين، بما في ذلك الخدمات المصغرة للإنتاج
 
 #### ملاحظات
-- **النطاق**: التوثيق والأمثلة باللغة الإنجليزية فقط
-- **الخطوات التالية**: التوسع بأنماط حاويات متقدمة إضافية وأتمتة CI/CD في الإصدارات المستقبلية
+- **النطاق**: الوثائق والأمثلة باللغة الإنجليزية فقط
+- **الخطوات التالية**: التوسع بإضافة أنماط حاويات متقدمة إضافية وأتمتة CI/CD في الإصدارات المستقبلية
 
 ### [v3.5.0] - 2025-11-19
 
-#### إعادة تسمية المنتج: Microsoft Foundry
-**تنفذ هذه النسخة تغيير اسم المنتج من "Microsoft Foundry" إلى "Microsoft Foundry" عبر كامل التوثيق الإنجليزي، بما يعكس إعادة تسمية رسمية من Microsoft.**
+#### Product Rebranding: Microsoft Foundry
+**تقوم هذه النسخة بتنفيذ تغيير شامل لاسم المنتج من "Microsoft Foundry" إلى "Microsoft Foundry" عبر كل الوثائق الإنجليزية، مما يعكس إعادة تسمية رسمية من Microsoft.**
 
 #### تم التغيير
 - **🔄 تحديث اسم المنتج**: إعادة تسمية كاملة من "Microsoft Foundry" إلى "Microsoft Foundry"
-  - تحديث جميع الإشارات عبر التوثيق الإنجليزي في مجلد `docs/`
+  - تم تحديث جميع الإشارات عبر الوثائق الإنجليزية في مجلد `docs/`
   - إعادة تسمية المجلد: `docs/ai-foundry/` → `docs/microsoft-foundry/`
   - إعادة تسمية الملف: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - الإجمالي: تحديث 23 إشارة محتوى عبر 7 ملفات توثيق
+  - الإجمالي: تم تحديث 23 مرجع محتوى عبر 7 ملفات توثيق
 
 - **📁 تغييرات هيكل المجلدات**:
   - تم إعادة تسمية `docs/ai-foundry/` إلى `docs/microsoft-foundry/`
-  - تم تحديث جميع المراجع المتقاطعة لتعكس بنية المجلد الجديدة
-  - تم التحقق من روابط التنقل عبر التوثيق
+  - تم تحديث جميع المراجع المتقاطعة لتعكس هيكل المجلد الجديد
+  - تم التحقق من روابط التنقل عبر كامل الوثائق
 
 - **📄 إعادة تسمية الملفات**:
   - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-  - تم تحديث جميع الروابط الداخلية للإشارة إلى الاسم الجديد للملف
+  - تم تحديث جميع الروابط الداخلية للإشارة إلى اسم الملف الجديد
 
 #### الملفات المحدثة
 - **وثائق الفصول** (7 ملفات):
-  - `docs/microsoft-foundry/ai-model-deployment.md` - 3 تحديثات في روابط التنقل
-  - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 إشارات اسم المنتج محدثة
-  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - مستخدم بالفعل Microsoft Foundry (من تحديثات سابقة)
-  - `docs/microsoft-foundry/production-ai-practices.md` - 3 إشارات محدثة (نظرة عامة، ملاحظات المجتمع، التوثيق)
-  - `docs/getting-started/azd-basics.md` - 4 روابط متقاطعة محدثة
-  - `docs/getting-started/first-project.md` - 2 روابط تنقل فصل محدثة
-  - `docs/getting-started/installation.md` - 2 روابط فصل تالية محدثة
-  - `docs/troubleshooting/ai-troubleshooting.md` - 3 إشارات محدثة (التنقل، مجتمع Discord)
-  - `docs/troubleshooting/common-issues.md` - 1 رابط تنقل محدث
-  - `docs/troubleshooting/debugging.md` - 1 رابط تنقل محدث
+  - `docs/microsoft-foundry/ai-model-deployment.md` - 3 تحديثات لروابط التنقل
+  - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 إشارات لاسم المنتج تم تحديثها
+  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - يستخدم بالفعل Microsoft Foundry (من التحديثات السابقة)
+  - `docs/microsoft-foundry/production-ai-practices.md` - 3 إشارات تم تحديثها (نظرة عامة، ملاحظات المجتمع، التوثيق)
+  - `docs/getting-started/azd-basics.md` - 4 روابط عابرة تم تحديثها
+  - `docs/getting-started/first-project.md` - 2 روابط تنقل فصلية تم تحديثها
+  - `docs/getting-started/installation.md` - 2 روابط للفصل التالي تم تحديثها
+  - `docs/troubleshooting/ai-troubleshooting.md` - 3 إشارات تم تحديثها (التنقل، مجتمع Discord)
+  - `docs/troubleshooting/common-issues.md` - 1 رابط تنقل تم تحديثه
+  - `docs/troubleshooting/debugging.md` - 1 رابط تنقل تم تحديثه
 
-- **ملفات بنية الدورة** (2 ملفين):
-  - `README.md` - 17 إشارة محدثة (نظرة عامة على الدورة، عناوين الفصول، قسم القوالب، رؤى المجتمع)
-  - `course-outline.md` - 14 إشارة محدثة (نظرة عامة، أهداف التعلم، موارد الفصل)
+- **ملفات هيكل المقرر** (2 ملفات):
+  - `README.md` - 17 إشارة تم تحديثها (نظرة عامة على الدورة، عناوين الفصول، قسم القوالب، رؤى المجتمع)
+  - `course-outline.md` - 14 إشارة تم تحديثها (نظرة عامة، أهداف التعلم، موارد الفصل)
 
 #### تم التحقق
 - ✅ لا توجد مراجع متبقية لمسار المجلد "ai-foundry" في الوثائق الإنجليزية
 - ✅ لا توجد مراجع متبقية لاسم المنتج "Microsoft Foundry" في الوثائق الإنجليزية
-- ✅ جميع روابط التنقل تعمل مع بنية المجلد الجديدة
-- ✅ إكمال إعادة تسمية الملفات والمجلدات بنجاح
-- ✅ التحقق من المراجع المتبادلة بين الفصول
+- ✅ جميع روابط التنقل تعمل مع هيكل المجلد الجديد
+- ✅ تم إكمال إعادة تسمية الملفات والمجلدات بنجاح
+- ✅ تم التحقق من المراجع المتبادلة بين الفصول
 
 #### ملاحظات
-- **النطاق**: التغييرات طُبقت على التوثيق الإنجليزي في مجلد `docs/` فقط
-- **الترجمات**: مجلدات الترجمة (`translations/`) لم تُحدّث في هذه النسخة
-- **ورشة العمل**: مواد الورشة (`workshop/`) لم تُحدّث في هذه النسخة
-- **الأمثلة**: قد تستمر ملفات الأمثلة في الإشارة إلى التسمية القديمة (سيتم معالجة ذلك في التحديث المستقبلي)
-- **الروابط الخارجية**: روابط URL الخارجية وإشارات مستودع GitHub تظل دون تغيير
+- **النطاق**: التغييرات طبقت على الوثائق الإنجليزية في مجلد `docs/` فقط
+- **الترجمات**: مجلدات الترجمة (`translations/`) لم يتم تحديثها في هذا الإصدار
+- **ورشة العمل**: مواد الورشة (`workshop/`) لم يتم تحديثها في هذا الإصدار
+- **الأمثلة**: قد تظل ملفات الأمثلة تشير إلى التسميات القديمة (سيتم معالجتها في تحديث مستقبلي)
+- **الروابط الخارجية**: روابط URL الخارجية ومراجع مستودع GitHub تظل دون تغيير
 
 #### دليل الترحيل للمساهمين
-إذا كان لديك فروع محلية أو توثيق يشير إلى البنية القديمة:
-1. تحديث مراجع المجلد: `docs/ai-foundry/` → `docs/microsoft-foundry/`
-2. تحديث مراجع الملفات: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
-3. استبدال اسم المنتج: "Microsoft Foundry" → "Microsoft Foundry"
-4. التحقق من أن جميع الروابط الداخلية في التوثيق ما زالت تعمل
+إذا كانت لديك فروع محلية أو توثيق يشير إلى البنية القديمة:
+1. قم بتحديث مراجع المجلد: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+2. قم بتحديث مراجع الملفات: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+3. استبدل اسم المنتج: "Microsoft Foundry" → "Microsoft Foundry"
+4. تحقق من أن جميع الروابط الداخلية في الوثائق لا تزال تعمل
 
 ---
 
 ### [v3.4.0] - 2025-10-24
 
-#### معاينة البنية التحتية وتعزيزات التحقق
+#### Infrastructure Preview and Validation Enhancements
 **تقدم هذه النسخة دعمًا شاملاً لميزة المعاينة الجديدة في Azure Developer CLI وتحسن تجربة مستخدمي الورش.**
 
 #### تمت الإضافة
 - **🧪 وثائق ميزة azd provision --preview**: تغطية شاملة لقدرة معاينة البنية التحتية الجديدة
   - مرجع الأمر وأمثلة الاستخدام في ورقة الغش
-  - تكامل مفصل في دليل التحضير مع حالات استخدام وفوائد
-  - دمج فحص ما قبل التشغيل للتحقق الآمن من النشر
-  - تحديثات دليل البدء بممارسات نشر تركز على السلامة أولًا
-- **🚧 لافتة حالة الورشة**: لافتة HTML احترافية تشير إلى حالة تطوير الورشة
-  - تصميم متدرج مع مؤشرات قيد الإنشاء لتواصل واضح مع المستخدمين
-  - طابع زمني لآخر تحديث للشفافية
-  - تصميم متجاوب مع الأجهزة المحمولة لجميع أنواع الأجهزة
-
-#### تم التعزيز
-- **سلامة البنية التحتية**: تم دمج وظيفة المعاينة عبر توثيق النشر
-- **التحقق قبل النشر**: تتضمن الآن البرامج النصية المؤتمتة اختبار معاينة البنية التحتية
-- **سير عمل المطور**: تحديث تسلسلات الأوامر لتشمل المعاينة كممارسة مُستحسنة
-- **تجربة الورشة**: تحديد توقعات واضحة للمستخدمين حول حالة تطوير المحتوى
-
-#### تم التغيير
-- **أفضل ممارسات النشر**: أصبح سير العمل القائم على المعاينة هو النهج الموصى به
-- **تدفق التوثيق**: تم تقديم التحقق من البنية التحتية إلى مرحلة أبكر في عملية التعلم
-- **عرض الورشة**: تواصل حالة احترافي مع جدول تطوير واضح
+  - تكامل مفصل في دليل التجهيز مع حالات استخدام وفوائد
+  - تكامل فحص ما قبل التشغيل للتحقق الآمن من النشر
+  - تحديثات دليل البدء بممارسات نشر تضع السلامة أولاً
+- **🚧 لافتة حالة ورشة العمل**: لافتة HTML احترافية تشير إلى حالة تطوير الورشة
+  - تصميم متدرج مع مؤشرات قيد الإنشاء لتواصل واضح مع المستخدم
+  - طابع زمني لآخر تحديث من أجل الشفافية
+  - تصميم مستجيب للهواتف لجميع أنواع الأجهزة
 
 #### تم التحسين
-- **نهج السلامة أولًا**: يمكن الآن التحقق من تغييرات البنية التحتية قبل النشر
-- **التعاون الفرقي**: يمكن مشاركة نتائج المعاينة للمراجعة والموافقة
-- **الوعي بالتكلفة**: فهم أفضل لتكاليف الموارد قبل التزويد
+- **سلامة البنية التحتية**: دمج وظيفة المعاينة في وثائق النشر كاملة
+- **التحقق قبل النشر**: النصوص الآلية الآن تتضمن اختبار معاينة البنية التحتية
+- **سير عمل المطور**: تحديث تسلسلات الأوامر لتشمل المعاينة كممارسة مثلى
+- **تجربة الورشة**: وضع توقعات واضحة للمستخدمين حول حالة تطوير المحتوى
+
+#### تم التغيير
+- **أفضل ممارسات النشر**: الآن يوصى بسير عمل يبدأ بالمعاينة
+- **تدفق الوثائق**: تم نقل التحقق من البنية التحتية إلى مرحلة أبكر في عملية التعلم
+- **عرض الورشة**: تواصل حالة احترافي مع جدول زمني لتطور العمل
+
+#### تم التحسين
+- **نهج السلامة أولاً**: يمكن الآن التحقق من تغييرات البنية التحتية قبل النشر
+- **تعاون الفريق**: يمكن مشاركة نتائج المعاينة للمراجعة والموافقة
+- **الوعي بالتكلفة**: فهم أفضل لتكاليف الموارد قبل التجهيز
 - **تخفيف المخاطر**: تقليل فشل النشر من خلال التحقق المسبق
 
-#### التنفيذ الفني
-- **تكامل متعدد الملفات**: تم توثيق ميزة المعاينة عبر 4 ملفات رئيسية
-- **أنماط الأوامر**: اتساق في الصياغة والأمثلة عبر التوثيق
-- **دمج أفضل الممارسات**: تضمين المعاينة في سير عمل التحقق والبرامج النصية
-- **مؤشرات بصرية**: علامات ميزات NEW واضحة لسهولة الاكتشاف
+#### التنفيذ التقني
+- **تكامل متعدد الوثائق**: تم توثيق ميزة المعاينة عبر 4 ملفات رئيسية
+- **أنماط الأوامر**: بنية نحوية متسقة وأمثلة عبر الوثائق
+- **دمج أفضل الممارسات**: شملت المعاينة في سير عمل التحقق والنصوص
+- **المؤشرات البصرية**: علامات ميزة NEW واضحة لتسهيل الاكتشاف
 
-#### بنية ورشة العمل التحتية
-- **تواصل الحالة**: لافتة HTML احترافية ذات تنسيق متدرج
-- **تجربة المستخدم**: تحديد حالة التطوير بوضوح لمنع الالتباس
-- **عرض احترافي**: يحافظ على مصداقية المستودع مع وضع توقعات واضحة
-- **شفافية الجدول الزمني**: طابع آخر تحديث أكتوبر 2025 للمساءلة
+#### بنية ورشة العمل
+- **تواصل الحالة**: لافتة HTML احترافية بتنسيق متدرج
+- **تجربة المستخدم**: حالة تطوير واضحة تمنع الالتباس
+- **عرض احترافي**: يحافظ على مصداقية المستودع مع وضع التوقعات
+- **شفافية الجدول الزمني**: October 2025 طابع زمني لآخر تحديث من أجل المساءلة
 
 ### [v3.3.0] - 2025-09-24
 
-#### تعزيز مواد الورشة وتجربة التعلم التفاعلية
-**تقدم هذه النسخة مواد ورشة شاملة مع أدلة تفاعلية قائمة على المتصفح ومسارات تعلم منظمة.**
+#### Enhanced Workshop Materials and Interactive Learning Experience
+**تقدم هذه النسخة مواد ورشة عمل شاملة مع أدلة تفاعلية تعمل في المتصفح ومسارات تعليمية منظمة.**
 
 #### تمت الإضافة
-- **🎥 دليل ورشة عمل تفاعلية**: تجربة ورشة عمل تعمل في المتصفح مع قدرة معاينة MkDocs
-- **📝 تعليمات ورشة منظمة**: مسار تعلّم مكوّن من 7 خطوات موجه من الاكتشاف إلى التخصيص
-  - 0-Introduction: نظرة عامة على الورشة وإعدادها
-  - 1-Select-AI-Template: عملية اكتشاف القوالب واختيارها
+- **🎥 دليل ورشة عمل تفاعلية**: تجربة ورشة عمل تعمل في المتصفح مع إمكانية معاينة MkDocs
+- **📝 تعليمات ورشة عمل منظمة**: مسار تعليمي مكون من 7 خطوات موجهة من الاكتشاف إلى التخصيص
+  - 0-Introduction: نظرة عامة على الورشة والإعداد
+  - 1-Select-AI-Template: عملية اكتشاف واختيار القالب
   - 2-Validate-AI-Template: إجراءات النشر والتحقق
   - 3-Deconstruct-AI-Template: فهم بنية القالب
-  - 4-Configure-AI-Template: الإعداد والتخصيص
-  - 5-Customize-AI-Template: تعديلات متقدمة وتكرارات
-  - 6-Teardown-Infrastructure: تنظيف وإدارة الموارد
+  - 4-Configure-AI-Template: التكوين والتخصيص
+  - 5-Customize-AI-Template: التعديلات المتقدمة والتكرارات
+  - 6-Teardown-Infrastructure: التنظيف وإدارة الموارد
   - 7-Wrap-up: الملخص والخطوات التالية
-- **🛠️ أدوات الورشة**: تكوين MkDocs مع سمة Material لتجربة تعلم محسّنة
-- **🎯 مسار التعلم العملي**: منهجية مكوّنة من 3 خطوات (اكتشاف → نشر → تخصيص)
-- **📱 تكامل GitHub Codespaces**: إعداد بيئة تطوير سلسة
+- **🛠️ أدوات الورشة**: تكوين MkDocs مع سمة Material لتحسين تجربة التعلم
+- **🎯 مسار التعلم العملي**: منهجية من 3 خطوات (اكتشاف → نشر → تخصيص)
+- **📱 تكامل GitHub Codespaces**: إعداد بيئة تطوير متكاملة بسلاسة
 
-#### محسّن
-- **مختبر ورشة عمل الذكاء الاصطناعي**: ممتد مع تجربة تعلم منظمة شاملة لمدة 2-3 ساعات
-- **توثيق الورشة**: عرض احترافي مع تنقّل ووسائل بصرية
-- **تقدّم التعلم**: إرشاد خطوة بخطوة واضح من اختيار القالب إلى نشر الإنتاج
-- **تجربة المطور**: أدوات مدمجة لتبسيط سير عمل التطوير
+#### تم التحسين
+- **مختبر ورشة العمل للذكاء الاصطناعي**: تم توسيعه ليشمل تجربة تعلم منظمة شاملة لمدة 2-3 ساعات
+- **توثيق الورشة**: عرض احترافي مع تنقل ومساعدات بصرية
+- **تقدم التعلم**: إرشاد خطوة بخطوة واضح من اختيار القالب إلى النشر في الإنتاج
+- **تجربة المطور**: أدوات متكاملة لتبسيط سير العمل التطويري
 
-#### مُحسَّن
-- **إمكانية الوصول**: واجهة متصفّح مع بحث، وظيفة النسخ، ومفتاح تبديل السمة
-- **التعلّم الذاتي الوتيرة**: هيكل ورشة مرن يستوعب سرعات تعلم مختلفة
-- **تطبيق عملي**: سيناريوهات نشر قوالب الذكاء الاصطناعي في العالم الحقيقي
-- **التكامل المجتمعي**: تكامل Discord لدعم الورشة والتعاون
+#### تم التحسين
+- **الوصولية**: واجهة تعمل في المتصفح مع بحث، ووظيفة نسخ، ومفتاح تبديل السمة
+- **التعلم الذاتي**: هيكل ورشة مرن يتناسب مع سرعات تعلم مختلفة
+- **التطبيق العملي**: سيناريوهات نشر قوالب AI في العالم الحقيقي
+- **تكامل المجتمع**: تكامل Discord لدعم الورشة والتعاون
 
 #### ميزات الورشة
 - **بحث مدمج**: اكتشاف سريع للكلمات المفتاحية والدروس
-- **نسخ كتل الشيفرة**: وظيفة المرور بالماوس للنسخ لجميع أمثلة الشيفرة
-- **مفتاح تبديل السمة**: دعم وضع داكن/فاتح لتفضيلات مختلفة
-- **الموارد البصرية**: لقطات شاشة ومخططات لفهم أفضل
+- **نسخ كتل الكود**: وظيفة تمرير للنسخ لكل أمثلة الكود
+- **مفتاح تبديل السمة**: دعم الوضع الداكن/الفاتح لتفضيلات مختلفة
+- **الأصول البصرية**: لقطات شاشة ومخططات لتعزيز الفهم
 - **تكامل المساعدة**: وصول مباشر إلى Discord لدعم المجتمع
 
 ### [v3.2.0] - 2025-09-17
 
-#### إعادة هيكلة التنقّل الرئيسية ونظام التعلم القائم على الفصول
-**تقدّم هذه النسخة هيكل تعلم شامل قائم على الفصول مع تنقّل محسن عبر المستودع بأكمله.**
+#### Major Navigation Restructuring and Chapter-Based Learning System
+**تقدم هذه النسخة هيكل تعلم قائم على الفصول شاملًا مع تحسين التنقل عبر كامل المستودع.**
 
-#### أُضيف
-- **📚 نظام تعلم قائم على الفصول**: إعادة هيكلة الدورة بأكملها إلى 8 فصول تعليمية متدرجة
-  - Chapter 1: Foundation & Quick Start (⭐ - 30-45 دقائق)
-  - Chapter 2: AI-First Development (⭐⭐ - 1-2 ساعات)
-  - Chapter 3: Configuration & Authentication (⭐⭐ - 45-60 دقائق)
-  - Chapter 4: Infrastructure as Code & Deployment (⭐⭐⭐ - 1-1.5 ساعات)
-  - Chapter 5: Multi-Agent AI Solutions (⭐⭐⭐⭐ - 2-3 ساعات)
-  - Chapter 6: Pre-Deployment Validation & Planning (⭐⭐ - 1 ساعة)
-  - Chapter 7: Troubleshooting & Debugging (⭐⭐ - 1-1.5 ساعات)
-  - Chapter 8: Production & Enterprise Patterns (⭐⭐⭐⭐ - 2-3 ساعات)
-- **📚 نظام تنقّل شامل**: رؤوس وتذييلات تنقّل متسقة عبر جميع الوثائق
-- **🎯 تتبع التقدم**: قائمة تحقق لإكمال الدورة ونظام تحقق من التعلم
-- **🗺️ إرشاد مسار التعلم**: نقاط دخول واضحة لمستويات وخبرات وأهداف مختلفة
-- **🔗 تنقّل عبر المراجع**: ربط واضح للفصول ذات الصلة والمتطلبات المسبقة
+#### تمت الإضافة
+- **📚 نظام تعلم قائم على الفصول**: إعادة هيكلة الدورة كاملة إلى 8 فصول تعليمية تقدمية
+  - الفصل 1: الأساسيات والبدء السريع (⭐ - 30-45 دقيقة)
+  - الفصل 2: التطوير الموجه بالذكاء الاصطناعي (⭐⭐ - 1-2 ساعة)
+  - الفصل 3: التكوين والمصادقة (⭐⭐ - 45-60 دقيقة)
+  - الفصل 4: البنية التحتية كرمز والنشر (⭐⭐⭐ - 1-1.5 ساعة)
+  - الفصل 5: حلول الذكاء الاصطناعي متعددة الوكلاء (⭐⭐⭐⭐ - 2-3 ساعات)
+  - الفصل 6: التحقق والتخطيط قبل النشر (⭐⭐ - 1 ساعة)
+  - الفصل 7: استكشاف الأخطاء وإصلاحها والتصحيح (⭐⭐ - 1-1.5 ساعة)
+  - الفصل 8: أنماط الإنتاج والمؤسسات (⭐⭐⭐⭐ - 2-3 ساعات)
+- **📚 نظام ملاحة شامل**: رؤوس وتذييلات تنقل متسقة عبر كل التوثيق
+- **🎯 تتبع التقدم**: قائمة تحقق لإكمال الدورة ونظام التحقق من التعلم
+- **🗺️ إرشاد مسار التعلم**: نقاط دخول واضحة لمستويات الخبرة والأهداف المختلفة
+- **🔗 تنقل المراجع المتقاطعة**: ربط واضح بين الفصول ذات الصلة والمتطلبات السابقة
 
-#### محسّن
-- **هيكل README**: تحويله إلى منصة تعلم منظمة مع تنظيم قائم على الفصول
-- **تنقّل الوثائق**: كل صفحة الآن تتضمن سياق الفصل وإرشاد التقدّم
-- **تنظيم القوالب**: أمثلة وقوالب مرتبطة بالفصول التعليمية المناسبة
+#### تم التحسين
+- **هيكل README**: تحول إلى منصة تعلم منسقة مع تنظيم قائم على الفصول
+- **تنقل الوثائق**: كل صفحة الآن تتضمن سياق الفصل وإرشادات التقدم
+- **تنظيم القوالب**: أمثلة وقوالب موضوعة مقابل الفصول التعليمية المناسبة
 - **تكامل الموارد**: أوراق الغش، الأسئلة المتكررة، وأدلة الدراسة مرتبطة بالفصول ذات الصلة
-- **تكامل الورشة**: مختبرات عملية مرتبطة بأهداف تعليمية متعددة للفصول
+- **تكامل الورشة**: المختبرات العملية موجهة لأهداف تعلم متعددة الفصول
 
-#### مُغيَّر
-- **تقدّم التعلم**: الانتقال من توثيق خطّي إلى تعلم قائم على فصول مرن
-- **موضع الإعدادات**: إعادة وضع دليل التكوين كالفصل 3 لتدفق تعليمي أفضل
-- **تكامل محتوى الذكاء الاصطناعي**: تكامل أفضل للمحتوى الخاص بالذكاء الاصطناعي عبر رحلة التعلم
-- **محتوى الإنتاج**: أنماط متقدمة مجمّعة في الفصل 8 للمتعلمين المؤسساتيين
+#### تم التغيير
+- **تقدم التعلم**: الانتقال من وثائق خطية إلى تعلم مرن قائم على الفصول
+- **وضع التكوين**: إعادة وضع دليل التكوين كالفصل 3 لتحسين تسلسل التعلم
+- **تكامل محتوى الذكاء الاصطناعي**: تحسين دمج المحتوى الخاص بالذكاء الاصطناعي عبر رحلة التعلم
+- **محتوى الإنتاج**: تجميع الأنماط المتقدمة في الفصل 8 للمتعلمين المؤسسيين
 
-#### محسّن
-- **تجربة المستخدم**: شِرَط تنقّل واضحة ومؤشرات تقدّم الفصل
-- **إمكانية الوصول**: أنماط تنقّل متسقة لتسهيل تصفح الدورة
-- **عرض احترافي**: هيكل دورة على طراز الجامعات مناسب للتدريب الأكاديمي والمؤسسي
-- **كفاءة التعلم**: تقليل الوقت للعثور على المحتوى ذي الصلة من خلال تنظيم محسن
+#### تم التحسين
+- **تجربة المستخدم**: مسارات تنقل واضحة ومؤشرات تقدم الفصل
+- **الوصولية**: أنماط تنقل متسقة لتسهيل تصفح الدورة
+- **عرض احترافي**: بنية دورة شبيهة بالجامعة مناسبة للتدريب الأكاديمي والمؤسسي
+- **كفاءة التعلم**: تقليل الوقت للعثور على المحتوى ذي الصلة عبر تحسين التنظيم
 
-#### التنفيذ الفني
-- **رؤوس التنقّل**: توحيد تنقّل الفصول عبر أكثر من 40 ملفًا وثائقيًا
-- **تذييل التنقّل**: إرشاد تقدّم متسق ومؤشرات إكمال الفصل
-- **الربط الداخلي**: نظام ربط داخلي شامل يربط المفاهيم ذات الصلة
-- **رسم خريطة الفصول**: ربط القوالب والأمثلة بوضوح بأهداف التعلم
+#### التنفيذ التقني
+- **رؤوس التنقل**: توحيد تنقل الفصول عبر أكثر من 40 ملف توثيق
+- **تذييل التنقل**: إرشادات تقدم متسقة ومؤشرات إكمال الفصل
+- **الروابط المتقاطعة**: نظام الربط الداخلي الشامل الذي يربط المفاهيم ذات الصلة
+- **تخطيط الفصول**: ربط القوالب والأمثلة بأهداف التعلم بوضوح
 
-#### تعزيز دليل الدراسة
-- **📚 أهداف تعلم شاملة**: إعادة هيكلة دليل الدراسة ليتماشى مع نظام الفصول الثمانية
+#### تحسين دليل الدراسة
+- **📚 أهداف تعلم شاملة**: إعادة هيكلة دليل الدراسة لمواءمته مع نظام الفصول الثمانية
 - **🎯 تقييم قائم على الفصول**: كل فصل يتضمن أهداف تعلم محددة وتمارين عملية
 - **📋 تتبع التقدم**: جدول تعلم أسبوعي مع نتائج قابلة للقياس وقوائم تحقق للإكمال
-- **❓ أسئلة التقييم**: أسئلة للتحقق من المعرفة لكل فصل مع مخرجات مهنية
-- **🛠️ تمارين عملية**: أنشطة عملية مع سيناريوهات نشر حقيقية واستكشاف الأخطاء
-- **📊 تطور المهارات**: تقدم واضح من المفاهيم الأساسية إلى أنماط المؤسسات مع تركيز على تطوير المسار المهني
-- **🎓 إطار الشهادات**: مخرجات تطوير مهني ونظام اعتراف مجتمعي
+- **❓ أسئلة التقييم**: أسئلة تحقق من المعرفة لكل فصل بنتائج مهنية
+- **🛠️ تمارين عملية**: أنشطة عملية مع سيناريوهات نشر حقيقية واستكشاف أخطاء
+- **📊 تقدم المهارات**: تقدم واضح من المفاهيم الأساسية إلى أنماط المؤسسات مع تركيز على تطوير الحياة المهنية
+- **🎓 إطار الشهادات**: نتائج تطوير احترافية واعتراف المجتمع
 - **⏱️ إدارة الجدول الزمني**: خطة تعلم منظمة لمدة 10 أسابيع مع تحقق من المعالم
 
 ### [v3.1.0] - 2025-09-17
 
-#### تعزيز حلول الذكاء الاصطناعي متعددة الوكلاء
-**تحسّن هذه النسخة حل التجزئة متعدد الوكلاء مع تسمية أفضل للوكلاء وتوثيق محسّن.**
+#### Enhanced Multi-Agent AI Solutions
+**تحسن هذه النسخة حل التجزئة متعدد الوكلاء مع تسمية أفضل للوكلاء وتوثيق محسن.**
 
-#### مُغيَّر
-- **مصطلحات متعدد الوكلاء**: استبدال "Cora agent" بـ "Customer agent" عبر حل التجزئة متعدد الوكلاء لفهم أوضح
-- **هندسة الوكيل**: تحديث كل الوثائق وARM templates وأمثلة الشيفرة لاستخدام تسمية "Customer agent" المتسقة
-- **أمثلة التكوين**: تحديث أنماط تكوين الوكلاء مع قواعد تسمية محدثة
-- **اتساق الوثائق**: التأكد من أن جميع الإشارات تستخدم أسماء وكلاء وصفية ومهنية
+#### تم التغيير
+- **مصطلحات متعددة الوكلاء**: تم استبدال "Cora agent" بـ "Customer agent" في كامل حل التجزئة متعدد الوكلاء لفهم أكثر وضوحًا
+- **بنية الوكلاء**: تم تحديث كل التوثيق، قالب ARM، وأمثلة الكود لاستخدام تسمية "Customer agent" المتسقة
+- **أمثلة التكوين**: تحديث أنماط تكوين الوكيل الحديثة مع اتفاقيات تسمية محدثة
+- **اتساق التوثيق**: ضمان أن كل الإشارات تستخدم أسماء وكلاء مهنية ووصفية
 
-#### محسّن
-- **حزمة قالب ARM**: تحديث retail-multiagent-arm-template مع إشارات Customer agent
-- **مخططات الهندسة**: تحديث مخططات Mermaid بتسمية الوكلاء المحدثة
-- **أمثلة الشيفرة**: الآن تستخدم فئات وPython أمثلة تسمية CustomerAgent
-- **متغيرات البيئة**: تحديث جميع سكربتات النشر لاستخدام CUSTOMER_AGENT_NAME conventions
+#### تم التحسين
+- **ARM Template Package**: تم تحديث retail-multiagent-arm-template بمراجع CustomerAgent
+- **Architecture Diagrams**: تم تحديث مخططات Mermaid بتسمية وكلاء محدثة
+- **Code Examples**: تستخدم فئات Python وأمثلة التنفيذ الآن تسمية CustomerAgent
+- **Environment Variables**: تم تحديث جميع سكربتات النشر لاستخدام اصطلاحات CUSTOMER_AGENT_NAME
 
-#### مُحسَّن
-- **تجربة المطور**: أدوار ومسؤوليات وكلاء أوضح في الوثائق
-- **جاهزية للإنتاج**: مواءمة أفضل مع قواعد تسمية المؤسسات
-- **مواد التعلم**: تسمية وكلاء أكثر بديهية لأغراض التعليم
-- **قابلية استخدام القالب**: تبسيط فهم وظائف الوكلاء وأنماط النشر
+#### Improved
+- **Developer Experience**: وضوح أكبر لأدوار ومسؤوليات الوكلاء في الوثائق
+- **Production Readiness**: توافق أفضل مع اصطلاحات التسمية المؤسسية
+- **Learning Materials**: تسمية وكلاء أكثر بديهية لأغراض التعليم
+- **Template Usability**: فهم مبسط لوظائف الوكلاء ونماذج النشر
 
-#### تفاصيل فنية
-- Updated Mermaid architecture diagrams with CustomerAgent references
-- Replaced CoraAgent class names with CustomerAgent in Python examples
-- Modified ARM template JSON configurations to use "customer" agent type
-- Updated environment variables from CORA_AGENT_* to CUSTOMER_AGENT_* patterns
-- Refreshed all deployment commands and container configurations
+#### Technical Details
+- تم تحديث مخططات البنية المعمارية Mermaid بمراجع CustomerAgent
+- تم استبدال أسماء الفئة CoraAgent بـ CustomerAgent في أمثلة Python
+- تم تعديل تكوينات قالب ARM JSON لاستخدام نوع الوكيل "customer"
+- تم تحديث متغيرات البيئة من CORA_AGENT_* إلى نمط CUSTOMER_AGENT_*
+- تم تحديث جميع أوامر النشر وتكوينات الحاويات
 
 ### [v3.0.0] - 2025-09-12
 
-#### تغييرات رئيسية - تركيز مطوّر الذكاء الاصطناعي وتكامل Microsoft Foundry
-**تحوّل هذه النسخة المستودع إلى مصدر تعلم شامل موجه للذكاء الاصطناعي مع تكامل Microsoft Foundry.**
+#### Major Changes - AI Developer Focus and Microsoft Foundry Integration
+**تحوّل هذا الإصدار المستودع إلى مورد تعلم شامل موجه نحو الذكاء الاصطناعي مع تكامل Microsoft Foundry.**
 
-#### أُضيف
-- **🤖 مسار تعلم يركّز على الذكاء الاصطناعي**: إعادة هيكلة كاملة مع أولوية لمطوري ومهندسي الذكاء الاصطناعي
-- **دليل تكامل Microsoft Foundry**: توثيق شامل لربط AZD بخدمات Microsoft Foundry
-- **أنماط نشر نماذج الذكاء الاصطناعي**: دليل مفصّل يغطي اختيار النماذج، التكوين، واستراتيجيات النشر في الإنتاج
-- **مختبر ورشة عمل الذكاء الاصطناعي**: ورشة عملية لمدة 2-3 ساعات لتحويل تطبيقات الذكاء الاصطناعي إلى حلول قابلة للنشر بواسطة AZD
-- **أفضل ممارسات الإنتاج للذكاء الاصطناعي**: أنماط جاهزة للمؤسسات للتوسع، المراقبة، وتأمين أحمال عمل الذكاء الاصطناعي
-- **دليل استكشاف أخطاء الذكاء الاصطناعي**: استكشاف شامل لمشكلات Microsoft Foundry Models وCognitive Services وقضايا نشر الذكاء الاصطناعي
-- **معرض قوالب الذكاء الاصطناعي**: مجموعة مميزة من قوالب Microsoft Foundry مع تقييمات تعقيد
-- **مواد الورشة**: هيكل ورشة كامل مع مختبرات عملية ومواد مرجعية
+#### Added
+- **🤖 AI-First Learning Path**: إعادة هيكلة كاملة تُعطي أولوية لمطوري ومهندسي الذكاء الاصطناعي
+- **Microsoft Foundry Integration Guide**: توثيق شامل لربط AZD بخدمات Microsoft Foundry
+- **AI Model Deployment Patterns**: دليل مفصّل يغطي اختيار النماذج والتكوين واستراتيجيات النشر في الإنتاج
+- **AI Workshop Lab**: ورشة عمل عملية مدتها 2-3 ساعات لتحويل تطبيقات الذكاء الاصطناعي إلى حلول قابلة للنشر عبر AZD
+- **Production AI Best Practices**: أنماط جاهزة للاستخدام المؤسسي للتوسيع والمراقبة وتأمين أحمال عمل الذكاء الاصطناعي
+- **AI-Specific Troubleshooting Guide**: دليل استكشاف أخطاء شامل لنماذج Microsoft Foundry وCognitive Services وقضايا نشر الذكاء الاصطناعي
+- **AI Template Gallery**: مجموعة مختارة من قوالب Microsoft Foundry مع تقييمات تعقيدية
+- **Workshop Materials**: هيكل ورشة العمل الكامل مع مختبرات عملية ومواد مرجعية
 
-#### محسّن
-- **هيكل README**: مُركّز على مطوري الذكاء الاصطناعي مع بيانات اهتمام المجتمع بنسبة 45% من Discord الخاص بـ Microsoft Foundry
-- **مسارات التعلم**: رحلة مخصصة لمطوّري الذكاء الاصطناعي إلى جانب المسارات التقليدية للطلاب ومهندسي DevOps
-- **توصيات القوالب**: قوالب مميزة للذكاء الاصطناعي بما في ذلك azure-search-openai-demo، contoso-chat، وopenai-chat-app-quickstart
-- **التكامل المجتمعي**: دعم مجتمع Discord مع قنوات ومناقشات مخصصة للذكاء الاصطناعي
+#### Enhanced
+- **README Structure**: موجه لمطوري الذكاء الاصطناعي مع بيانات اهتمام المجتمع بنسبة 45% من Microsoft Foundry Discord
+- **Learning Paths**: رحلة مخصصة لمطور الذكاء الاصطناعي إلى جانب المسارات التقليدية للطلاب ومهندسي DevOps
+- **Template Recommendations**: قوالب AI مميزة بما في ذلك azure-search-openai-demo وcontoso-chat وopenai-chat-app-quickstart
+- **Community Integration**: دعم مجتمع Discord محسّن مع قنوات ومناقشات مخصّصة للذكاء الاصطناعي
 
-#### تركيز على الأمان والإنتاج
-- **نماذج الهوية المدارة**: مصادقة وتكوينات أمان مخصصة للذكاء الاصطناعي
-- **تحسين التكلفة**: تتبع استخدام التوكن والضوابط الميزانية لأحمال عمل الذكاء الاصطناعي
-- **نشر متعدد المناطق**: استراتيجيات لنشر تطبيقات الذكاء الاصطناعي عالمياً
-- **مراقبة الأداء**: مقاييس مخصصة للذكاء الاصطناعي وتكامل Application Insights
+#### Security & Production Focus
+- **Managed Identity Patterns**: تكوينات مصادقة وأمن خاصة بالذكاء الاصطناعي
+- **Cost Optimization**: تتبع استخدام الرموز الضمنية وضوابط الميزانية لأحمال عمل الذكاء الاصطناعي
+- **Multi-Region Deployment**: استراتيجيات لنشر تطبيقات الذكاء الاصطناعي عالمياً
+- **Performance Monitoring**: مقاييس مخصّصة للذكاء الاصطناعي وتكامل مع Application Insights
 
-#### جودة التوثيق
-- **هيكل دورة خطّي**: تقدم منطقي من المبتدئ إلى أنماط نشر الذكاء الاصطناعي المتقدمة
-- **الروابط الصالحة**: التحقق من أن جميع روابط المستودعات الخارجية قابلة للوصول
-- **مرجع كامل**: التحقق من صلاحية جميع روابط الوثائق الداخلية وعملها
-- **جاهزية للإنتاج**: أنماط نشر مؤسسية مع أمثلة من العالم الحقيقي
+#### Documentation Quality
+- **Linear Course Structure**: تقدم منطقي من المبتدئ إلى أنماط نشر الذكاء الاصطناعي المتقدمة
+- **Validated URLs**: جميع روابط المستودعات الخارجية تم التحقق منها وقابلة للوصول
+- **Complete Reference**: جميع روابط الوثائق الداخلية تم التحقق منها وتعمل
+- **Production Ready**: أنماط نشر مؤسسية مع أمثلة من العالم الحقيقي
 
 ### [v2.0.0] - 2025-09-09
 
-#### تغييرات رئيسية - إعادة هيكلة المستودع وتحسين احترافي
-**تمثل هذه النسخة إعادة هيكلة كبيرة لبنية المستودع وعرض المحتوى.**
+#### Major Changes - Repository Restructure and Professional Enhancement
+**يمثل هذا الإصدار مراجعة كبيرة لبنية المستودع وعرض المحتوى.**
 
-#### أُضيف
-- **إطار تعلم منظم**: جميع صفحات الوثائق الآن تتضمن أقسام المقدمة، أهداف التعلم، ونتائج التعلم
-- **نظام تنقّل**: إضافة روابط الدرس السابق/التالي في جميع الوثائق لتقدّم تعلم موجه
-- **دليل الدراسة**: study-guide.md شامل مع أهداف التعلم، تمارين عملية، ومواد تقييم
-- **عرض احترافي**: إزالة جميع الرموز التعبيرية لتحسين إمكانية الوصول والمظهر المهني
-- **هيكل محتوى محسّن**: تحسين تنظيم وتدفق مواد التعلم
+#### Added
+- **Structured Learning Framework**: جميع صفحات الوثائق الآن تتضمن أقسام المقدمة، أهداف التعلم، ومخرجات التعلم
+- **Navigation System**: إضافة روابط الدرس السابق/التالي في جميع الوثائق لتوجيه التقدّم التعليمي
+- **Study Guide**: study-guide.md شامل بأهداف التعلم، تمارين عملية، ومواد تقييم
+- **Professional Presentation**: إزالة جميع الرموز التعبيرية لتحسين إمكانية الوصول والمظهر الاحترافي
+- **Enhanced Content Structure**: تحسين تنظيم وتدفق مواد التعلم
 
-#### مُغيَّر
-- **تنسيق الوثائق**: توحيد جميع الوثائق بهيكل متسق يركّز على التعلم
-- **تدفق التنقّل**: تنفيذ تقدم منطقي عبر مواد التعلم
-- **عرض المحتوى**: إزالة العناصر الزخرفية لصالح تنسيق واضح ومهني
-- **بنية الروابط**: تحديث جميع الروابط الداخلية لدعم نظام التنقّل الجديد
+#### Changed
+- **Documentation Format**: توحيد جميع الوثائق ببنية متسقة تركز على التعلم
+- **Navigation Flow**: تنفيذ تقدم منطقي عبر جميع مواد التعلم
+- **Content Presentation**: إزالة العناصر الزخرفية لصالح تنسيق واضح واحترافي
+- **Link Structure**: تحديث جميع الروابط الداخلية لدعم نظام التنقل الجديد
 
-#### محسّن
-- **إمكانية الوصول**: إزالة الاعتماد على الرموز التعبيرية لتحسين توافق قارئات الشاشة
-- **مظهر احترافي**: عرض نظيف على طراز أكاديمي مناسب للتعلم المؤسسي
-- **تجربة التعلم**: نهج منظم مع أهداف ونتائج واضحة لكل درس
-- **تنظيم المحتوى**: تدفق منطقي أفضل وربط بين الموضوعات ذات الصلة
+#### Improved
+- **Accessibility**: إزالة الاعتماد على الرموز التعبيرية لتحسين توافق قارئات الشاشة
+- **Professional Appearance**: عرض نظيف على نمط أكاديمي مناسب للتعلّم المؤسسي
+- **Learning Experience**: نهج منظم مع أهداف ومخرجات واضحة لكل درس
+- **Content Organization**: تدفق منطقي أفضل وربط بين المواضيع ذات الصلة
 
 ### [v1.0.0] - 2025-09-09
 
-#### الإصدار الأولي - مستودع تعلم AZD شامل
+#### Initial Release - Comprehensive AZD Learning Repository
 
-#### أُضيف
-- **بنية التوثيق الأساسية**
-  - سلسلة أدلة البدء السريع الكاملة
-  - توثيق النشر والتهيئة الشامل
-  - موارد استكشاف الأخطاء وإرشادات التصحيح المفصّلة
+#### Added
+- **Core Documentation Structure**
+  - سلسلة أدلة البدء الكامل
+  - وثائق نشر وتوفير شاملة
+  - موارد استكشاف الأخطاء وإرشادات التصحيح التفصيلية
   - أدوات وإجراءات التحقق قبل النشر
 
-- **وحدة البداية**
+- **Getting Started Module**
   - AZD Basics: المفاهيم والمصطلحات الأساسية
   - Installation Guide: تعليمات إعداد خاصة بالمنصة
   - Configuration Guide: إعداد البيئة والمصادقة
-  - First Project Tutorial: دليل عملي خطوة بخطوة
+  - First Project Tutorial: تعلم عملي خطوة بخطوة
 
-- **وحدة النشر والتهيئة**
-  - Deployment Guide: توثيق سير العمل الكامل
+- **Deployment and Provisioning Module**
+  - Deployment Guide: وثائق سير العمل الكاملة
   - Provisioning Guide: البنية التحتية ككود باستخدام Bicep
-  - أفضل الممارسات لنشرات الإنتاج
-  - أنماط هندسة متعددة الخدمات
+  - أفضل الممارسات لنشر الإنتاج
+  - أنماط البنية متعددة الخدمات
 
-- **وحدة التحقق قبل النشر**
+- **Pre-deployment Validation Module**
   - Capacity Planning: التحقق من توفر موارد Azure
-  - SKU Selection: إرشادات شاملة لفئات الخدمة
-  - Pre-flight Checks: سكربتات تحقق آلية (PowerShell وBash)
+  - SKU Selection: إرشادات شاملة لطبقات الخدمة
+  - Pre-flight Checks: سكربتات تحقق آلي (PowerShell وBash)
   - أدوات تقدير التكلفة والتخطيط الميزاني
 
-- **وحدة استكشاف الأخطاء**
-  - Common Issues: المشكلات الشائعة والحلول
-  - Debugging Guide: منهجيات استكشاف الأخطاء المنهجية
+- **Troubleshooting Module**
+  - Common Issues: المشاكل المتكررة والحلول
+  - Debugging Guide: منهجيات منهجية لاستكشاف الأخطاء
   - تقنيات وأدوات تشخيص متقدمة
   - مراقبة الأداء والتحسين
 
-- **الموارد والمرجع**
+- **Resources and References**
   - Command Cheat Sheet: مرجع سريع للأوامر الأساسية
-  - Glossary: مصطلحات وشروح شاملة للاختصارات
-  - FAQ: إجابات مفصّلة للأسئلة الشائعة
+  - Glossary: قائمة شاملة بالمصطلحات والاختصارات
+  - FAQ: إجابات مفصّلة على الأسئلة الشائعة
   - روابط موارد خارجية واتصالات المجتمع
 
-- **أمثلة وقوالب**
+- **Examples and Templates**
   - مثال تطبيق ويب بسيط
   - قالب نشر موقع ثابت
   - تكوين تطبيق حاويات
-  - أنماط تكامل قواعد البيانات
-  - أمثلة هندسة الخدمات المصغرة
-  - تطبيقات دوال بدون خادم
+  - أنماط دمج قواعد البيانات
+  - أمثلة بنية ميكروسيرفيسز
+  - تنفيذات الوظائف الخالية من الخادم
 
-#### الميزات
-- **دعم متعدد المنصات**: أدلة التثبيت والتكوين لنظام Windows وmacOS وLinux
-- **مستويات مهارة متعددة**: محتوى مصمم للطلاب حتى المطورين المحترفين
-- **تركيز عملي**: أمثلة عملية وسيناريوهات من العالم الحقيقي
-- **تغطية شاملة**: من المفاهيم الأساسية إلى أنماط المؤسسات المتقدمة
-- **نهج أمني أولاً**: أفضل ممارسات الأمان مدمجة في كل مكان
-- **تحسين التكلفة**: إرشادات لنشرات فعّالة من حيث التكلفة وإدارة الموارد
+#### Features
+- **Multi-Platform Support**: أدلة التثبيت والتكوين لنظام Windows وmacOS وLinux
+- **Multiple Skill Levels**: محتوى مصمم للطلاب ووصولاً إلى المطورين المحترفين
+- **Practical Focus**: أمثلة عملية وسيناريوهات من العالم الحقيقي
+- **Comprehensive Coverage**: من المفاهيم الأساسية إلى الأنماط المؤسسية المتقدمة
+- **Security-First Approach**: ممارسات أمان مدمجة في جميع أنحاء المحتوى
+- **Cost Optimization**: إرشادات لنشر فعال من حيث التكلفة وإدارة الموارد
 
-#### جودة التوثيق
-- **أمثلة شيفرة مفصّلة**: عينات شيفرة عملية ومختبرة
-- **إرشادات خطوة بخطوة**: توجيهات واضحة وقابلة للتنفيذ
-- **معالجة أخطاء شاملة**: استكشاف الأخطاء للمشكلات الشائعة
-- **دمج أفضل الممارسات**: معايير الصناعة والتوصيات
-- **توافق الإصدارات**: محدث مع أحدث خدمات Azure وميزات azd
+#### Documentation Quality
+- **Detailed Code Examples**: أمثلة كود عملية ومجربة
+- **Step-by-Step Instructions**: إرشادات واضحة وقابلة للتطبيق
+- **Comprehensive Error Handling**: استكشاف مشكلات شائعة وإصلاحها
+- **Best Practices Integration**: معايير الصناعة والتوصيات
+- **Version Compatibility**: محدثة مع أحدث خدمات Azure وميزات azd
 
-## التحسينات المستقبلية المخططة
+## Planned Future Enhancements
 
 ### Version 3.1.0 (Planned)
-#### توسيع منصة الذكاء الاصطناعي
-- **دعم نماذج متعددة**: أنماط التكامل مع Hugging Face وAzure Machine Learning والنماذج المخصصة
-- **أطر وكلاء الذكاء الاصطناعي**: قوالب لنشر LangChain وSemantic Kernel وAutoGen
-- **أنماط RAG المتقدمة**: خيارات قواعد بيانات المتجهات بخلاف Azure AI Search (Pinecone، Weaviate، إلخ)
-- **قابلية ملاحظة الذكاء الاصطناعي**: مراقبة محسنة لأداء النموذج، استخدام التوكنات، وجودة الاستجابة
+#### AI Platform Expansion
+- **Multi-Model Support**: أنماط تكامل لـ Hugging Face وAzure Machine Learning والنماذج المخصصة
+- **AI Agent Frameworks**: قوالب لنشر LangChain وSemantic Kernel وAutoGen
+- **Advanced RAG Patterns**: خيارات قواعد بيانات المتجهات خارج Azure AI Search (Pinecone، Weaviate، إلخ)
+- **AI Observability**: مراقبة محسّنة لأداء النموذج، استخدام الرموز، وجودة الاستجابة
 
-#### تجربة المطور
-- **امتداد VS Code**: تجربة تطوير مدمجة لـ AZD + Microsoft Foundry
-- **تكامل GitHub Copilot**: توليد قوالب AZD بمساعدة الذكاء الاصطناعي
-- **دروس تفاعلية**: تمارين برمجية عملية مع تحقق آلي لسيناريوهات الذكاء الاصطناعي
-- **محتوى فيديو**: دروس فيديو تكميلية للمتعلمين البصريين تركز على نشرات الذكاء الاصطناعي
+#### Developer Experience
+- **VS Code Extension**: تجربة تطوير مدمجة AZD + Microsoft Foundry
+- **GitHub Copilot Integration**: توليد قوالب AZD بمساعدة الذكاء الاصطناعي
+- **Interactive Tutorials**: تمارين ترميز عملية مع تحقق آلي لسيناريوهات الذكاء الاصطناعي
+- **Video Content**: شروحات فيديوية داعمة للمتعلمين البصريين تركز على نشرات الذكاء الاصطناعي
 
-### الإصدار 4.0.0 (مخطط)
-#### أنماط الذكاء الاصطناعي للمؤسسات
-- **إطار الحوكمة**: حوكمة نماذج الذكاء الاصطناعي، الامتثال، ومسارات التدقيق
-- **الذكاء الاصطناعي متعدد المستأجرين**: أنماط لخدمة عدة عملاء بخدمات ذكاء اصطناعي معزولة
-- **نشر الذكاء الاصطناعي على الحافة**: التكامل مع Azure IoT Edge وحاويات الحالات
-- **الذكاء الاصطناعي السحابي الهجين**: أنماط نشر متعددة السحابات وهجينة لأحمال عمل الذكاء الاصطناعي
+### Version 4.0.0 (Planned)
+#### Enterprise AI Patterns
+- **Governance Framework**: حوكمة نماذج الذكاء الاصطناعي، الامتثال، ومسارات التدقيق
+- **Multi-Tenant AI**: أنماط لخدمة عدة عملاء بخدمات ذكاء اصطناعي معزولة
+- **Edge AI Deployment**: التكامل مع Azure IoT Edge وحالات الحاويات
+- **Hybrid Cloud AI**: أنماط نشر متعددة السحابات وهجينة لأحمال عمل الذكاء الاصطناعي
 
-#### ميزات متقدمة
-- **أتمتة خطوط أنابيب الذكاء الاصطناعي**: تكامل MLOps مع خطوط أنابيب Azure Machine Learning
-- **أمان متقدم**: أنماط الثقة الصفرية، نقاط النهاية الخاصة، وحماية متقدمة من التهديدات
-- **تحسين الأداء**: استراتيجيات ضبط وتوسيع متقدمة لتطبيقات الذكاء الاصطناعي عالية الإنتاجية
-- **التوزيع العالمي**: أنماط تسليم المحتوى وتخزين مؤقت على الحافة لتطبيقات الذكاء الاصطناعي
+#### Advanced Features
+- **AI Pipeline Automation**: تكامل MLOps مع مسارات Azure Machine Learning
+- **Advanced Security**: أنماط الثقة الصفرية، نقاط نهاية خاصة، وحماية متقدمة من التهديدات
+- **Performance Optimization**: ضبط متقدم واستراتيجيات توسيع لتطبيقات الذكاء الاصطناعي عالية الإنتاجية
+- **Global Distribution**: توصيل المحتوى ونماذج التخزين المؤقت على الحافة لتطبيقات الذكاء الاصطناعي
 
-### الإصدار 3.0.0 (مخطط) - تم تجاوزه بالإصدار الحالي
-#### الإضافات المقترحة - مُنفذة الآن في v3.0.0
-- ✅ **محتوى موجه للذكاء الاصطناعي**: تكامل شامل مع Microsoft Foundry (مكتمل)
-- ✅ **دروس تفاعلية**: مختبر عملي لورش عمل الذكاء الاصطناعي (مكتمل)
-- ✅ **وحدة أمان متقدمة**: أنماط أمان مخصصة للذكاء الاصطناعي (مكتمل)
-- ✅ **تحسين الأداء**: استراتيجيات لضبط أحمال عمل الذكاء الاصطناعي (مكتمل)
+### Version 3.0.0 (Planned) - Superseded by Current Release
+#### Proposed Additions - Now Implemented in v3.0.0
+- ✅ **AI-Focused Content**: تكامل Microsoft Foundry الشامل (مكتمل)
+- ✅ **Interactive Tutorials**: مختبر ورشة عمل عملية للذكاء الاصطناعي (مكتمل)
+- ✅ **Advanced Security Module**: أنماط أمنية خاصة بالذكاء الاصطناعي (مكتمل)
+- ✅ **Performance Optimization**: استراتيجيات ضبط أحمال الذكاء الاصطناعي (مكتمل)
 
-### الإصدار 2.1.0 (مخطط) - مُنفذ جزئياً في v3.0.0
-#### تحسينات طفيفة - بعضها مكتمل في الإصدار الحالي
-- ✅ **أمثلة إضافية**: سيناريوهات نشر موجهة للذكاء الاصطناعي (مكتمل)
-- ✅ **أسئلة متكررة ممتدة**: أسئلة خاصة بالذكاء الاصطناعي وحلول المشاكل (مكتمل)
-- **تكامل الأدوات**: أدلة محسنة لتكامل IDE والمحررات
-- ✅ **توسيع المراقبة**: أنماط مراقبة وتنبيه مخصصة للذكاء الاصطناعي (مكتمل)
+### Version 2.1.0 (Planned) - Partially Implemented in v3.0.0
+#### Minor Enhancements - Some Completed in Current Release
+- ✅ **Additional Examples**: سيناريوهات نشر موجهة للذكاء الاصطناعي (مكتمل)
+- ✅ **Extended FAQ**: أسئلة وحلول متعلقة بالذكاء الاصطناعي (مكتمل)
+- **Tool Integration**: أدلة محسّنة لتكامل IDE والمحرر
+- ✅ **Monitoring Expansion**: توسيع المراقبة والتنبيهات الخاصة بالذكاء الاصطناعي (مكتمل)
 
-#### لا يزال مخططًا لإصدار مستقبلي
-- **توثيق ملائم للهواتف**: تصميم متجاوب للتعلم عبر الجوال
-- **وصول دون اتصال**: حزم وثائق قابلة للتنزيل
-- **تعزيز تكامل IDE**: امتداد VS Code لتدفقات عمل AZD + AI
-- **لوحة معلومات المجتمع**: مقاييس المجتمع في الوقت الفعلي وتتبع المساهمات
+#### Still Planned for Future Release
+- **Mobile-Friendly Documentation**: تصميم متجاوب للتعلم عبر الجوال
+- **Offline Access**: حزم وثائق قابلة للتنزيل
+- **Enhanced IDE Integration**: امتداد VS Code لسيناريوهات AZD + AI
+- **Community Dashboard**: مقاييس المجتمع في الوقت الفعلي وتتبع المساهمات
 
-## المساهمة في سجل التغييرات
+## Contributing to the Changelog
 
-### الإبلاغ عن التغييرات
+### Reporting Changes
 عند المساهمة في هذا المستودع، يرجى التأكد من أن إدخالات سجل التغييرات تتضمن:
 
-1. **رقم الإصدار**: متبعًا الترقيم الدلالي (major.minor.patch)
-2. **التاريخ**: تاريخ الإصدار أو التحديث بصيغة YYYY-MM-DD
-3. **الفئة**: Added، Changed، Deprecated، Removed، Fixed، Security
-4. **وصف واضح**: وصف موجز لما تغيّر
-5. **تقييم التأثير**: كيف تؤثر التغييرات على المستخدمين الحاليين
+1. **Version Number**: اتباع الترقيم الدلالي (major.minor.patch)
+2. **Date**: تاريخ الإصدار أو التحديث بالصيغة YYYY-MM-DD
+3. **Category**: Added, Changed, Deprecated, Removed, Fixed, Security
+4. **Clear Description**: وصف موجز لما تم تغييره
+5. **Impact Assessment**: كيف تؤثر التغييرات على المستخدمين الحاليين
 
-### فئات التغيير
+### Change Categories
 
-#### مضاف
-- ميزات جديدة، أجزاء توثيق، أو إمكانيات جديدة
-- أمثلة جديدة، قوالب، أو موارد تعليمية
+#### Added
+- ميزات جديدة، أقسام وثائق، أو قدرات إضافية
+- أمثلة جديدة، قوالب، أو موارد تعلم
 - أدوات إضافية، سكربتات، أو أدوات مساعدة
 
-#### مُعدل
-- تعديلات على الوظائف أو التوثيق الحالي
+#### Changed
+- تعديلات على الوظائف أو الوثائق الحالية
 - تحديثات لتحسين الوضوح أو الدقة
 - إعادة هيكلة للمحتوى أو التنظيم
 
-#### مهمل
-- ميزات أو نهج يتم إيقافها تدريجياً
-- أجزاء توثيق مبرمجة للإزالة
+#### Deprecated
+- ميزات أو نهج جارٍ التخلص منها تدريجياً
+- أقسام وثائق مجدولة للإزالة
 - طرق لديها بدائل أفضل
 
-#### مُزال
-- ميزات أو توثيق أو أمثلة لم تعد ذات صلة
-- معلومات قديمة أو نهج مهجور
-- محتوى مكرر أو مُدمج
+#### Removed
+- ميزات، وثائق، أو أمثلة لم تعد ذات صلة
+- معلومات قديمة أو طرق مهملة
+- محتوى مكرر أو مدمج
 
-#### مُصلح
-- تصحيحات للأخطاء في التوثيق أو الشيفرة
-- حل للمشكلات أو الأخطاء المبلغ عنها
-- تحسينات للدقة أو الوظائف
+#### Fixed
+- تصحيحات للأخطاء في الوثائق أو الكود
+- حل للمشكلات المبلغ عنها
+- تحسينات في الدقة أو الوظائف
 
-#### أمني
-- تحسينات أو تصحيحات متعلقة بالأمان
-- تحديثات لممارسات الأمان الأفضل
+#### Security
+- تحسينات أو تصحيحات متعلقة بالأمن
+- تحديثات لممارسات الأمان الموصى بها
 - حل لثغرات أمنية
 
-### إرشادات الترقيم الدلالي
+### Semantic Versioning Guidelines
 
-#### الإصدار الرئيسي (X.0.0)
-- تغييرات كاسحة تتطلب إجراء من المستخدم
+#### Major Version (X.0.0)
+- تغييرات تعطل التوافق وتتطلب إجراء من المستخدم
 - إعادة هيكلة كبيرة للمحتوى أو التنظيم
 - تغييرات تغير النهج أو المنهجية الأساسية
 
-#### الإصدار الثانوي (X.Y.0)
-- ميزات جديدة أو إضافات محتوى
-- تحسينات تحافظ على التوافق السابق
+#### Minor Version (X.Y.0)
+- ميزات أو إضافات محتوى جديدة
+- تحسينات تحافظ على التوافق للخلف
 - أمثلة إضافية، أدوات، أو موارد
 
-#### إصدار التصحيح (X.Y.Z)
-- إصلاحات أخطاء وتصحيحات
-- تحسينات طفيفة للمحتوى الحالي
+#### Patch Version (X.Y.Z)
+- إصلاحات أخطاء وتعديلات
+- تحسينات طفيفة على المحتوى الحالي
 - توضيحات وتحسينات صغيرة
 
-## ملاحظات المجتمع والاقتراحات
+## Community Feedback and Suggestions
 
-نحن نشجع بنشاط ملاحظات المجتمع لتحسين مورد التعلم هذا:
+نشجع بنشاط ملاحظات المجتمع لتحسين مورد التعلم هذا:
 
-### كيفية تقديم الملاحظات
-- **قضايا GitHub**: أبلغ عن المشاكل أو اقترح تحسينات (نرحب بالقضايا المتعلقة بالذكاء الاصطناعي)
-- **مناقشات Discord**: شارك الأفكار وتفاعل مع مجتمع Microsoft Foundry
-- **طلبات السحب**: ساهم بتحسينات مباشرة للمحتوى، خاصة قوالب وأدلة الذكاء الاصطناعي
-- **Microsoft Foundry Discord**: شارك في قناة #Azure لمناقشات AZD + AI
-- **منتديات المجتمع**: شارك في مناقشات مطوري Azure الأوسع
+### How to Provide Feedback
+- **GitHub Issues**: الإبلاغ عن المشاكل أو اقتراح التحسينات (قضايا متعلقة بالذكاء الاصطناعي مرحب بها)
+- **Discord Discussions**: مشاركة الأفكار والتفاعل مع مجتمع Microsoft Foundry
+- **Pull Requests**: المساهمة بتحسينات مباشرة للمحتوى، خاصة قوالب ودلائل الذكاء الاصطناعي
+- **Microsoft Foundry Discord**: المشاركة في قناة #Azure لمناقشات AZD + AI
+- **Community Forums**: المشاركة في مناقشات مطوري Azure الأوسع
 
-### فئات الملاحظات
-- **دقة محتوى الذكاء الاصطناعي**: تصحيحات لتكامل خدمات الذكاء الاصطناعي ومعلومات النشر
-- **تجربة التعلم**: اقتراحات لتحسين تدفق تعلم مطوري الذكاء الاصطناعي
-- **المحتوى المفقود عن الذكاء الاصطناعي**: طلبات لقوالب أو أنماط أو أمثلة إضافية
-- **إمكانية الوصول**: تحسينات لاحتياجات تعلم متنوعة
-- **تكامل أدوات الذكاء الاصطناعي**: اقتراحات لتحسين تدفق عمل تطوير الذكاء الاصطناعي
-- **أنماط الذكاء الاصطناعي للإنتاج**: طلبات لأنماط نشر الذكاء الاصطناعي للمؤسسات
+### Feedback Categories
+- **AI Content Accuracy**: تصحيحات لتكامل خدمات الذكاء الاصطناعي ومعلومات النشر
+- **Learning Experience**: اقتراحات لتحسين تدفق تعلم مطوري الذكاء الاصطناعي
+- **Missing AI Content**: طلبات لإضافات قوالب، أنماط، أو أمثلة متعلقة بالذكاء الاصطناعي
+- **Accessibility**: تحسينات لاحتياجات تعلم متنوعة
+- **AI Tool Integration**: اقتراحات لتحسين تكامل سير عمل تطوير الذكاء الاصطناعي
+- **Production AI Patterns**: طلبات لأنماط نشر ذكاء اصطناعي مؤسسية
 
-### التزام بالاستجابة
-- **الرد على القضايا**: خلال 48 ساعة للمشاكل المبلغ عنها
-- **طلبات الميزات**: تقييم خلال أسبوع
-- **مساهمات المجتمع**: مراجعة خلال أسبوع
-- **قضايا الأمان**: أولوية فورية مع استجابة مسرّعة
+### Response Commitment
+- **Issue Response**: خلال 48 ساعة للمشكلات المبلغ عنها
+- **Feature Requests**: التقييم خلال أسبوع
+- **Community Contributions**: المراجعة خلال أسبوع
+- **Security Issues**: أولوية فورية مع استجابة مسرّعة
 
-## جدول الصيانة
+## Maintenance Schedule
 
-### تحديثات منتظمة
-- **مراجعات شهرية**: دقة المحتوى والتحقق من الروابط
-- **تحديثات ربع سنوية**: إضافات وتحسينات محتوى رئيسية
-- **مراجعات نصف سنوية**: إعادة هيكلة شاملة وتحسينات
-- **إصدارات سنوية**: تحديثات إصدار رئيسية مع تحسينات كبيرة
+### Regular Updates
+- **Monthly Reviews**: دقة المحتوى والتحقق من الروابط
+- **Quarterly Updates**: إضافات وتحسينات محتوى رئيسية
+- **Semi-Annual Reviews**: إعادة هيكلة شاملة وتحسينات
+- **Annual Releases**: تحديثات إصدارات رئيسية مع تحسينات كبيرة
 
-### المراقبة وضمان الجودة
-- **اختبارات آلية**: تحقق دوري لأمثلة الشيفرة والروابط
-- **دمج ملاحظات المجتمع**: دمج منتظم لاقتراحات المستخدمين
-- **تحديثات التكنولوجيا**: التوافق مع أحدث خدمات Azure وإصدارات azd
-- **مراجعات إمكانية الوصول**: مراجعة منتظمة لمبادئ التصميم الشاملة
+### Monitoring and Quality Assurance
+- **Automated Testing**: تحقق منتظم من أمثلة الكود والروابط
+- **Community Feedback Integration**: دمج اقتراحات المستخدمين بانتظام
+- **Technology Updates**: التوافق مع أحدث خدمات Azure وإصدارات azd
+- **Accessibility Audits**: مراجعة منتظمة لمبادئ التصميم الشامل
 
-## سياسة دعم الإصدارات
+## Version Support Policy
 
-### دعم الإصدار الحالي
-- **أحدث إصدار رئيسي**: دعم كامل مع تحديثات منتظمة
-- **الإصدار الرئيسي السابق**: تحديثات أمنية وتصحيحات حرجة لمدة 12 شهرًا
-- **الإصدارات القديمة**: دعم المجتمع فقط، بدون تحديثات رسمية
+### Current Version Support
+- **أحدث إصدار رئيسي**: دعم كامل مع تحديثات دورية
+- **الإصدار الرئيسي السابق**: تحديثات أمان وتصحيحات حرجة لمدة 12 شهرًا
+- **الإصدارات القديمة**: دعم المجتمع فقط، ولا توجد تحديثات رسمية
 
 ### إرشادات الترحيل
-عند إصدار إصدارات رئيسية، نقدم:
-- **أدلة الترحيل**: تعليمات انتقال خطوة بخطوة
-- **ملاحظات التوافق**: تفاصيل حول التغييرات الكاسحة
-- **دعم الأدوات**: سكربتات أو أدوات مساعدة للمساعدة في الترحيل
+عند إصدار إصدارات رئيسية، نوفر:
+- **أدلة الترحيل**: تعليمات الانتقال خطوة بخطوة
+- **ملاحظات التوافق**: تفاصيل حول التغييرات التي تؤدي إلى كسر التوافق
+- **دعم الأدوات**: نصوص أو أدوات مساعدة في الترحيل
 - **دعم المجتمع**: منتديات مخصصة لأسئلة الترحيل
 
 ---
 
-**الملاحة**
+**التنقل**
 - **الدرس السابق**: [دليل الدراسة](resources/study-guide.md)
 - **الدرس التالي**: العودة إلى [README الرئيسي](README.md)
 
-**ابق محدثًا**: راقب هذا المستودع للحصول على إشعارات حول الإصدارات الجديدة والتحديثات المهمة لمواد التعلم.
+**ابقَ على اطلاع**: راقب هذا المستودع للحصول على إشعارات حول الإصدارات الجديدة والتحديثات المهمة لمواد التعلم.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-إخلاء المسؤولية:
-تمت ترجمة هذا المستند باستخدام خدمة ترجمة بالذكاء الاصطناعي Co-op Translator (https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى ملاحظة أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار الوثيقة الأصلية بلغتها الأصلية المصدر المعتمد. للمعلومات الحرجة، يُوصى بالاستعانة بترجمة بشرية محترفة. لا نتحمل أي مسؤولية عن أي سوء فهم أو تفسير ناتج عن استخدام هذه الترجمة.
+**إخلاء المسؤولية**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يُرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الموثوق به. بالنسبة للمعلومات الحساسة أو الحرجة، يُنصح بالاستعانة بترجمة بشرية محترفة. لن نكون مسؤولين عن أي سوء فهم أو تفسير خاطئ ناتج عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

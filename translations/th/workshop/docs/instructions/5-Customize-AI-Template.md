@@ -1,33 +1,33 @@
-# 5. ปรับแต่งเทมเพลต
+# 5. Customize a Template
 
-!!! tip "เมื่อสิ้นสุดโมดูลนี้คุณจะสามารถ"
+!!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
 
     - [ ] สำรวจความสามารถของ AI Agent เริ่มต้น
     - [ ] เพิ่ม AI Search ด้วยดัชนีของคุณเอง
-    - [ ] เปิดใช้งานและวิเคราะห์เมตริกการติดตาม
-    - [ ] ดำเนินการรันการประเมินผล
-    - [ ] ดำเนินการสแกนแบบ red-teaming
-    - [ ] **ห้องปฏิบัติการ 5: สร้างแผนการปรับแต่ง**
+    - [ ] เปิดใช้งานและวิเคราะห์เมตริก Tracing
+    - [ ] ดำเนินการรันประเมินผล
+    - [ ] ดำเนินการสแกน red-teaming
+    - [ ] **แลป 5: สร้างแผนการปรับแต่ง** 
 
 ---
 
-## 5.1 ความสามารถของ AI Agent
+## 5.1 AI Agent Capabilities
 
-!!! success "เราได้ทำสิ่งนี้ในห้องปฏิบัติการ 01 เรียบร้อยแล้ว"
+!!! success "เราทำเสร็จเรียบร้อยในแลป 01"
 
-- **File Search**: ฟีเจอร์ค้นหาไฟล์ในตัวของ OpenAI สำหรับการดึงข้อมูลความรู้
-- **Citations**: การระบุแหล่งที่มาอัตโนมัติในคำตอบ
+- **File Search**: การค้นหาไฟล์ในตัวของ OpenAI เพื่อดึงความรู้
+- **Citations**: การอ้างอิงแหล่งข้อมูลอัตโนมัติในคำตอบ
 - **Customizable Instructions**: ปรับแต่งพฤติกรรมและบุคลิกภาพของเอเจนต์
-- **Tool Integration**: ระบบเครื่องมือขยายสำหรับความสามารถที่กำหนดเอง
+- **Tool Integration**: ระบบเครื่องมือที่ขยายได้สำหรับความสามารถเฉพาะ
 
 ---
 
-## 5.2 ตัวเลือกการดึงข้อมูลความรู้
+## 5.2 Knowledge Retrieval Options
 
-!!! task "เพื่อให้เสร็จสมบูรณ์ เราต้องทำการเปลี่ยนแปลงและปรับใช้ใหม่"    
+!!! task "เพื่อทำให้เสร็จ เราต้องทำการเปลี่ยนแปลงและดีพลอยใหม่"    
     
     ```bash title=""
-    # ตั้งค่าตัวแปรสภาพแวดล้อม
+    # กำหนดตัวแปรสภาพแวดล้อม
     azd env set USE_AZURE_AI_SEARCH_SERVICE true
     azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
@@ -42,14 +42,14 @@
 
 **OpenAI File Search (ค่าเริ่มต้น):**
 
-- ติดตั้งไว้ใน Foundry Agents
-- ประมวลผลเอกสารและจัดทำดัชนีโดยอัตโนมัติ
-- ไม่ต้องการการกำหนดค่าเพิ่มเติม
+- ถูกฝังใน Foundry Agents
+- การประมวลผลเอกสารและการทำดัชนีอัตโนมัติ
+- ไม่ต้องการการตั้งค่าเพิ่มเติม
 
-**Azure AI Search (ตัวเลือก):**
+**Azure AI Search (ตัวเลือกเสริม):**
 
-- ค้นหาผสมผสานเชิงความหมายและเวกเตอร์
-- การจัดการดัชนีที่กำหนดเอง
+- การค้นหาผสมผสานระหว่างความหมายและเวกเตอร์
+- การจัดการดัชนีแบบกำหนดเอง
 - ความสามารถการค้นหาขั้นสูง
 - ต้องการ `USE_AZURE_AI_SEARCH_SERVICE=true`
 
@@ -57,7 +57,7 @@
 
 ## 5.3 [Tracing & Monitoring](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "เพื่อให้เสร็จสมบูรณ์ เราต้องทำการเปลี่ยนแปลงและปรับใช้ใหม่"    
+!!! task "เพื่อทำให้เสร็จ เราต้องทำการเปลี่ยนแปลงและดีพลอยใหม่"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
@@ -66,38 +66,38 @@
 
 **Tracing:**
 
-- การผนวกรวม OpenTelemetry
-- การติดตามคำขอ/การตอบกลับ
+- การบูรณาการ OpenTelemetry
+- การติดตามคำขอ/การตอบสนอง
 - เมตริกประสิทธิภาพ
-- ใช้งานได้ใน Microsoft Foundry portal
+- ใช้งานได้ในพอร์ทัล Microsoft Foundry
 
 **Logging:**
 
 - บันทึกแอปพลิเคชันใน Container Apps
-- บันทึกแบบมีโครงสร้างพร้อมรหัสสัมพันธ์ (correlation IDs)
-- การดูบันทึกแบบเรียลไทม์และย้อนหลัง
+- บันทึกแบบมีโครงสร้างพร้อมรหัสเชื่อมโยง
+- ดูบันทึกแบบเรียลไทม์และย้อนหลัง
 
 ---
 
-## 5.4 [การประเมิน Agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
+## 5.4 [Agent Evaluation](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
 **Local Evaluation:**
 
 - ตัวประเมินในตัวสำหรับการประเมินคุณภาพ
-- สคริปต์ประเมินแบบกำหนดเอง
-- การวัดประสิทธิภาพ
+- สคริปต์ประเมินผลแบบกำหนดเอง
+- การวัดเปรียบเทียบประสิทธิภาพ
 
 **Continuous Monitoring:**
 
-- การประเมินอัตโนมัติจากการโต้ตอบในชีวิตจริง
+- การประเมินอัตโนมัติของการโต้ตอบแบบสด
 - การติดตามเมตริกคุณภาพ
-- การตรวจจับการถดถอยของประสิทธิภาพ
+- ตรวจจับการถดถอยของประสิทธิภาพ
 
 **CI/CD Integration:**
 
-- เวิร์กโฟลว์ GitHub Actions
+- workflow ของ GitHub Actions
 - การทดสอบและประเมินผลอัตโนมัติ
-- การทดสอบการเปรียบเทียบทางสถิติ
+- การทดสอบเปรียบเทียบทางสถิติ
 
 ---
 
@@ -112,50 +112,52 @@
 **Authentication:**
 
 - Managed Identity สำหรับบริการ Azure
-- ตัวเลือกการตรวจสอบสิทธิ์ Azure App Service
-- ทางเลือก Basic auth สำหรับการพัฒนา
+- การพิสูจน์ตัวตน Azure App Service แบบเลือกใช้ได้
+- การยืนยันตัวตนแบบ basic auth สำหรับการพัฒนา
 
-!!! quote "เมื่อสิ้นสุดห้องปฏิบัติการนี้ คุณควรมี"
-    - [ ] กำหนดข้อกำหนดสถานการณ์ของคุณ
+
+
+!!! quote "BY THE END OF THIS LAB YOU SHOULD HAVE"
+    - [ ] กำหนดความต้องการของสถานการณ์ของคุณ
     - [ ] ปรับแต่งตัวแปรสภาพแวดล้อม (config)
     - [ ] ปรับแต่งคำสั่งเอเจนต์ (task)
-    - [ ] ปรับใช้เทมเพลตที่ปรับแต่งแล้ว (app)
-    - [ ] ทำงานหลังการปรับใช้ให้เสร็จสมบูรณ์ (manual)
-    - [ ] รันการประเมินทดสอบ
+    - [ ] ดีพลอยเท็มเพลตที่ปรับแต่งแล้ว (app)
+    - [ ] ทำงานหลังการดีพลอยเสร็จ (manual)
+    - [ ] รันทดสอบประเมินผล
 
-ตัวอย่างนี้สาธิตการปรับแต่งเทมเพลตสำหรับกรณีการใช้งานองค์กรค้าปลีกด้วยเอเจนต์เฉพาะสองตัวและการปรับใช้โมเดลหลายตัว
+ตัวอย่างนี้แสดงการปรับแต่งเท็มเพลตสำหรับกรณีใช้งานค้าปลีกองค์กรด้วยเอเจนต์เฉพาะสองตัวและการดีพลอยโมเดลหลายชุด
 
 ---
 
-## 5.6 ปรับแต่งสำหรับคุณ!
+## 5.6 Customize It For You!
 
-### 5.6.1. ข้อกำหนดสถานการณ์
+### 5.6.1. Scenario Requirements
 
-#### **การปรับใช้ Agent:** 
+#### **Agent Deployments:** 
 
    - Shopper Agent: ช่วยลูกค้าค้นหาและเปรียบเทียบสินค้า
    - Loyalty Agent: จัดการรางวัลและโปรโมชั่นลูกค้า
 
-#### **การปรับใช้โมเดล:**
+#### **Model Deployments:**
 
    - `gpt-4.1`: โมเดลแชทหลัก
    - `o3`: โมเดลเหตุผลสำหรับคำถามซับซ้อน
    - `gpt-4.1-nano`: โมเดลน้ำหนักเบาสำหรับการโต้ตอบง่าย ๆ
-   - `text-embedding-3-large`: การฝังความหมายคุณภาพสูงสำหรับการค้นหา
+   - `text-embedding-3-large`: embeddings คุณภาพสูงสำหรับการค้นหา
 
-#### **คุณสมบัติ:**
+#### **Features:**
 
-   - เปิดใช้งานการติดตามและตรวจสอบ
+   - เปิดใช้งาน tracing และ monitoring
    - AI Search สำหรับแคตตาล็อกสินค้า
-   - เฟรมเวิร์กการประเมินผลเพื่อความมั่นใจคุณภาพ
-   - การทำ red teaming สำหรับการตรวจสอบความปลอดภัย
+   - กรอบการประเมินคุณภาพ
+   - Red teaming สำหรับการตรวจสอบความปลอดภัย
 
 ---
 
-### 5.6.2 การดำเนินการตามสถานการณ์
+### 5.6.2 Scenario Implementation
 
 
-#### 5.6.2.1. การตั้งค่าก่อนปรับใช้
+#### 5.6.2.1. Pre-Deployment Config
 
 สร้างสคริปต์ตั้งค่า (`setup-retail.sh`)
 
@@ -165,26 +167,26 @@
 # ตั้งชื่อสภาพแวดล้อม
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# กำหนดภูมิภาค (เลือกตามความพร้อมของโมเดล)
+# กำหนดภูมิภาค (เลือกตามความพร้อมใช้งานของโมเดล)
 azd env set AZURE_LOCATION "eastus2"
 
-# เปิดใช้บริการเสริมทั้งหมด
+# เปิดใช้งานบริการเสริมทั้งหมด
 azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# กำหนดโมเดลแชทหลัก (gpt-4.1 เป็นโมเดลที่ใกล้เคียงที่สุดกับ gpt-4.1)
+# กำหนดโมเดลแชทหลัก (gpt-4.1 เป็นรุ่นที่ใกล้เคียงที่สุดกับ gpt-4.1)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# กำหนดโมเดลฝังข้อมูลเพื่อการค้นหาที่ดีขึ้น
+# กำหนดโมเดลฝังตัวเพื่อการค้นหาที่ดีขึ้น
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# ตั้งชื่อเอเจนต์ (จะสร้างเอเจนต์ตัวแรก)
+# ตั้งชื่อเอเย่นต์ (จะสร้างเอเย่นต์ตัวแรก)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
 # กำหนดดัชนีการค้นหา
@@ -196,7 +198,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2: คำสั่งเอเจนต์
+#### 5.6.2.2: Agent Instructions
 
 สร้าง `custom-agents/shopper-agent-instructions.md`:
 
@@ -246,7 +248,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: สคริปต์ปรับใช้
+#### 5.6.2.3: Deployment Script
 
 สร้าง `deploy-retail.sh`:
 
@@ -293,12 +295,12 @@ fi
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# บันทึกผลลัพธ์การติดตั้ง
+# จับผลลัพธ์การติดตั้ง
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# ดึง URL ของเว็บแอป
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# รับ URL ของเว็บแอป
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -319,7 +321,7 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: การตั้งค่าหลังการปรับใช้
+#### 5.6.2.4: Post-Deployment Config
 
 สร้าง `configure-retail-agents.sh`:
 
@@ -328,7 +330,7 @@ echo "4. Test both agents with sample queries"
 
 echo "🔧 Configuring retail agents..."
 
-# ดึงข้อมูลการใช้งาน
+# รับข้อมูลการปรับใช้
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
@@ -376,7 +378,7 @@ echo "
 "
 ```
 
-### 5.6.3: การทดสอบและการตรวจสอบ
+### 5.6.3: Testing and Validation
 
 สร้าง `test-retail-deployment.sh`:
 
@@ -385,12 +387,12 @@ echo "
 
 echo "🧪 Testing retail deployment..."
 
-# ตรวจสอบว่าตัวแปรสภาพแวดล้อมถูกตั้งค่าหรือไม่
+# ตรวจสอบว่าตัวแปรแวดล้อมถูกตั้งค่าแล้ว
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# ทดสอบความพร้อมใช้งานของแอปพลิเคชันเว็บ
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# ทดสอบการเข้าถึงเว็บแอปพลิเคชัน
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -403,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# รันการประเมินผลหากมีการกำหนดค่าไว้
+# รันการประเมินผลหากมีการตั้งค่าไว้
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -427,42 +429,42 @@ Next steps:
 
 ---
 
-### 5.6.4 ผลลัพธ์ที่คาดหวัง
+### 5.6.4 Expected Outcomes
 
-หลังจากปฏิบัติตามคู่มือนี้ คุณจะมี:
+หลังจากทำตามคำแนะนำนี้ คุณจะมี:
 
-1. **โครงสร้างพื้นฐานที่ปรับใช้แล้ว:**
+1. **โครงสร้างพื้นฐานที่ดีพลอยแล้ว:**
 
-      - โครงการ Microsoft Foundry พร้อมการปรับใช้โมเดล
+      - โครงการ Microsoft Foundry พร้อมการดีพลอยโมเดล
       - Container Apps ที่โฮสต์เว็บแอปพลิเคชัน
       - บริการ AI Search สำหรับแคตตาล็อกสินค้า
-      - Application Insights สำหรับการตรวจสอบ
+      - Application Insights สำหรับการมอนิเตอร์
 
-2. **Agent เริ่มต้น:**
+2. **เอเจนต์เริ่มต้น:**
 
       - Shopper Agent ที่ตั้งค่าด้วยคำสั่งพื้นฐาน
-      - เปิดใช้งานความสามารถค้นหาไฟล์
-      - ตั้งค่าการติดตามและตรวจสอบ
+      - ความสามารถการค้นหาไฟล์เปิดใช้งานแล้ว
+      - การตั้งค่า tracing และ monitoring
 
 3. **พร้อมสำหรับการปรับแต่ง:**
 
       - เฟรมเวิร์กสำหรับเพิ่ม Loyalty Agent
-      - เทมเพลตคำสั่งที่ปรับแต่งได้
+      - เท็มเพลตคำสั่งปรับแต่งได้
       - สคริปต์ทดสอบและตรวจสอบ
-      - การตั้งค่าการตรวจสอบและการประเมิน
+      - การตั้งค่ามอนิเตอร์และประเมินผล
 
-4. **พร้อมใช้งานในระดับผลิต:**
+4. **พร้อมสำหรับการใช้งานจริง:**
 
       - การสแกนความปลอดภัยด้วย red teaming
-      - การตรวจสอบประสิทธิภาพ
-      - เฟรมเวิร์กการประเมินคุณภาพ
-      - สถาปัตยกรรมที่ปรับขยายได้
+      - การมอนิเตอร์ประสิทธิภาพ
+      - กรอบการประเมินคุณภาพ
+      - สถาปัตยกรรมที่ปรับขนาดได้
 
-ตัวอย่างนี้แสดงให้เห็นว่าเทมเพลต AZD สามารถขยายและปรับแต่งสำหรับสถานการณ์องค์กรเฉพาะได้อย่างไร ในขณะที่ยังคงรักษาวิธีปฏิบัติที่ดีที่สุดสำหรับความปลอดภัย การตรวจสอบ และการปรับขยายได้
+ตัวอย่างนี้แสดงให้เห็นว่าการขยายและปรับแต่งเท็มเพลต AZD สำหรับสถานการณ์องค์กรเฉพาะได้อย่างไร ในขณะเดียวกันยังคงรักษาการปฏิบัติที่ดีที่สุดด้านความปลอดภัย การมอนิเตอร์ และความสามารถในการปรับขนาดไว้ได้
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ข้อจำกัดความรับผิดชอบ**:
-เอกสารฉบับนี้ได้รับการแปลโดยใช้บริการแปลภาษาด้วย AI [Co-op Translator](https://github.com/Azure/co-op-translator) แม้เราจะพยายามให้ความถูกต้องสูงสุด แต่โปรดทราบว่าการแปลอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาต้นฉบับถือเป็นแหล่งข้อมูลที่น่าเชื่อถือ สำหรับข้อมูลที่สำคัญ ขอแนะนำให้ใช้การแปลโดยผู้เชี่ยวชาญที่เป็นมนุษย์ ทางเราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดใด ๆ ที่เกิดจากการใช้การแปลฉบับนี้
+**ข้อจำกัดความรับผิดชอบ**:  
+เอกสารฉบับนี้ได้รับการแปลโดยใช้บริการแปลด้วย AI [Co-op Translator](https://github.com/Azure/co-op-translator) แม้ว่าเราจะพยายามให้ความแม่นยำ โปรดทราบว่าการแปลโดยอัตโนมัติอาจมีข้อผิดพลาดหรือความไม่ถูกต้อง เอกสารต้นฉบับในภาษาต้นทางควรถูกพิจารณาเป็นแหล่งข้อมูลที่เชื่อถือได้ สำหรับข้อมูลที่สำคัญ ขอแนะนำให้ใช้บริการแปลโดยมนุษย์มืออาชีพ เราไม่รับผิดชอบต่อความเข้าใจผิดหรือการตีความที่ผิดพลาดที่เกิดจากการใช้การแปลนี้
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

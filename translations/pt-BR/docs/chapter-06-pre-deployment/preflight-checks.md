@@ -1,17 +1,17 @@
 # Verificações Pré-implantação para Implantações AZD
 
 **Navegação do Capítulo:**
-- **📚 Início do Curso**: [AZD Para Iniciantes](../../README.md)
-- **📖 Capítulo Atual**: Capítulo 6 - Validação Pré-Implantação e Planejamento
-- **⬅️ Anterior**: [Seleção de SKU](sku-selection.md)
-- **➡️ Próximo Capítulo**: [Capítulo 7: Solução de Problemas](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 Relacionado**: [Capítulo 4: Guia de Implantação](../chapter-04-infrastructure/deployment-guide.md)
+- **📚 Course Home**: [AZD para Iniciantes](../../README.md)
+- **📖 Current Chapter**: Capítulo 6 - Validação e Planejamento Pré-Implantação
+- **⬅️ Previous**: [Seleção de SKU](sku-selection.md)
+- **➡️ Next Chapter**: [Capítulo 7: Solução de Problemas](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 Related**: [Capítulo 4: Guia de Implantação](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Introdução
 
-Este guia abrangente fornece scripts e procedimentos de validação pré-implantação para garantir implantações bem-sucedidas com o Azure Developer CLI antes de começarem. Aprenda a implementar verificações automatizadas para autenticação, disponibilidade de recursos, cotas, conformidade de segurança e requisitos de desempenho para evitar falhas na implantação e otimizar as taxas de sucesso das implantações.
+Este guia abrangente fornece scripts e procedimentos de validação pré-implantação para garantir implantações bem-sucedidas com o Azure Developer CLI antes de começarem. Aprenda a implementar verificações automatizadas para autenticação, disponibilidade de recursos, cotas, conformidade de segurança e requisitos de desempenho para prevenir falhas de implantação e otimizar as taxas de sucesso.
 
-## Objetivos de Aprendizagem
+## Objetivos de Aprendizado
 
 Ao concluir este guia, você irá:
 - Dominar técnicas e scripts automatizados de validação pré-implantação
@@ -23,51 +23,51 @@ Ao concluir este guia, você irá:
 
 ## Resultados de Aprendizagem
 
-Ao concluir, você será capaz de:
-- Criar e executar scripts abrangentes de validação pré-voo
+Após a conclusão, você será capaz de:
+- Criar e executar scripts abrangentes de validação pré-implantação
 - Projetar fluxos de trabalho de verificação automatizados para diferentes cenários de implantação
-- Implementar procedimentos e políticas de validação específicos por ambiente
-- Configurar monitoramento e alertas proativos para prontidão de implantação
+- Implementar procedimentos e políticas de validação específicas do ambiente
+- Configurar monitoramento proativo e alertas para prontidão de implantação
 - Solucionar problemas pré-implantação e implementar ações corretivas
-- Integrar verificações pré-voo em pipelines e fluxos de automação DevOps
+- Integrar verificações pré-implantação em pipelines DevOps e fluxos de automação
 
 ## Sumário
 
-- [Visão Geral](../../../../docs/chapter-06-pre-deployment)
-- [Script Pré-implantação Automatizado](../../../../docs/chapter-06-pre-deployment)
-- [Checklist de Validação Manual](../../../../docs/chapter-06-pre-deployment)
-- [Validação do Ambiente](../../../../docs/chapter-06-pre-deployment)
-- [Validação de Recursos](../../../../docs/chapter-06-pre-deployment)
-- [Verificações de Segurança e Conformidade](../../../../docs/chapter-06-pre-deployment)
-- [Planejamento de Desempenho e Capacidade](../../../../docs/chapter-06-pre-deployment)
-- [Solução de Problemas Comuns](../../../../docs/chapter-06-pre-deployment)
+- [Visão Geral](#visão-geral)
+- [Script Pré-implantação Automatizado](#script-pré-implantação-automatizado)
+- [Lista de Verificação de Validação Manual](#codeblock1)
+- [Validação do Ambiente](#✅-backup-recuperação)
+- [Validação de Recursos](#validação-do-ambiente-de-produção)
+- [Verificações de Segurança e Conformidade](#security--compliance-checks)
+- [Planejamento de Desempenho e Capacidade](#performance--capacity-planning)
+- [Solução de Problemas Comuns](#troubleshooting-common-issues)
 
 ---
 
 ## Visão Geral
 
-Verificações pré-implantação são validações essenciais realizadas antes de implantar para garantir:
+Verificações pré-implantação são validações essenciais realizadas antes da implantação para garantir:
 
 - **Disponibilidade de recursos** e cotas nas regiões de destino
 - **Autenticação e permissões** devidamente configuradas
-- **Validade dos templates** e correção dos parâmetros
+- **Validade do template** e correção dos parâmetros
 - **Conectividade de rede** e dependências
 - **Conformidade de segurança** com políticas organizacionais
-- **Estimativa de custo** dentro das restrições orçamentárias
+- **Estimativa de custos** dentro das restrições do orçamento
 
 ### Quando Executar as Verificações Pré-implantação
 
 - **Antes da primeira implantação** em um novo ambiente
-- **Após alterações significativas em templates**
+- **Após mudanças significativas nos templates**
 - **Antes de implantações em produção**
-- **Ao trocar regiões do Azure**
+- **Ao alterar regiões do Azure**
 - **Como parte de pipelines CI/CD**
 
 ---
 
 ## Script Pré-implantação Automatizado
 
-### PowerShell Pre-flight Checker
+### Validador Pré-implantação PowerShell
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -100,7 +100,7 @@ param(
     [switch]$Detailed
 )
 
-# Codificação de cores da saída
+# Codificação de cores na saída
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 NOVO: Testar pré-visualização da infraestrutura (simulação segura)
+    # 🧪 NOVO: Testar pré-visualização da infraestrutura (execução simulada segura)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -446,7 +446,7 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Estimativa básica de custo (seria necessário o Azure Pricing API para estimativas precisas)
+    # Estimativa básica de custos (seria necessária a API de Preços do Azure para estimativas precisas)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
@@ -470,7 +470,7 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # Verificar práticas de segurança comuns
+    # Verificar práticas comuns de segurança
     try {
         # Verificar se o Key Vault está configurado
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
@@ -488,7 +488,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # Verificar imposição de HTTPS
+        # Verificar exigência de HTTPS
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -561,15 +561,15 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash Pre-flight Checker
+### Validador Pré-implantação Bash
 
 ```bash
 #!/bin/bash
-# Versão em Bash das verificações pré-voo para sistemas Unix/Linux
+# Versão Bash das verificações prévias para sistemas Unix/Linux
 
 set -euo pipefail
 
-# Códigos de cor
+# Códigos de cores
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -796,11 +796,11 @@ main "$@"
 
 ---
 
-## Checklist de Validação Manual
+## Lista de Verificação de Validação Manual
 
-### Checklist Pré-Implantação
+### Lista de Verificação Pré-Implantação
 
-Imprima este checklist e verifique cada item antes da implantação:
+Imprima esta lista de verificação e verifique cada item antes da implantação:
 
 #### ✅ Configuração do Ambiente
 - [ ] AZD CLI instalado e atualizado para a versão mais recente
@@ -811,28 +811,28 @@ Imprima este checklist e verifique cada item antes da implantação:
 
 #### ✅ Autenticação e Permissões
 - [ ] Autenticado com sucesso com `azd auth login`
-- [ ] Usuário possui a função Contributor na assinatura/grupo de recursos alvo
+- [ ] Usuário possui a função Contributor na assinatura/grupo de recursos de destino
 - [ ] Service principal configurado para CI/CD (se aplicável)
 - [ ] Sem certificados ou credenciais expiradas
 
 #### ✅ Validação de Templates
-- [ ] `azure.yaml` existe e é YAML válido
+- [ ] `azure.yaml` existe e é um YAML válido
 - [ ] Todos os serviços definidos em azure.yaml têm código-fonte correspondente
 - [ ] Templates Bicep no diretório `infra/` estão presentes
 - [ ] `main.bicep` compila sem erros (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Pré-visualização da infraestrutura executa com sucesso (`azd provision --preview`)
-- [ ] Todos os parâmetros necessários têm valores padrão ou serão fornecidos
+- [ ] 🧪 Pré-visualização da infraestrutura é executada com sucesso (`azd provision --preview`)
+- [ ] Todos os parâmetros obrigatórios possuem valores padrão ou serão fornecidos
 - [ ] Sem segredos codificados diretamente nos templates
 
 #### ✅ Planejamento de Recursos
-- [ ] Região do Azure alvo selecionada e validada
-- [ ] Serviços Azure necessários disponíveis na região alvo
+- [ ] Região do Azure de destino selecionada e validada
+- [ ] Serviços do Azure necessários disponíveis na região de destino
 - [ ] Cotas suficientes disponíveis para os recursos planejados
 - [ ] Conflitos de nomes de recursos verificados
 - [ ] Dependências entre recursos compreendidas
 
 #### ✅ Rede e Segurança
-- [ ] Conectividade de rede aos endpoints do Azure verificada
+- [ ] Conectividade de rede com endpoints do Azure verificada
 - [ ] Configurações de firewall/proxy configuradas se necessário
 - [ ] Key Vault configurado para gerenciamento de segredos
 - [ ] Identidades gerenciadas usadas quando possível
@@ -846,11 +846,11 @@ Imprima este checklist e verifique cada item antes da implantação:
 
 #### ✅ Monitoramento e Observabilidade
 - [ ] Application Insights configurado nos templates
-- [ ] Workspace do Log Analytics planejado
+- [ ] Espaço de trabalho do Log Analytics planejado
 - [ ] Regras de alerta definidas para métricas críticas
 - [ ] Endpoints de verificação de integridade implementados nas aplicações
 
-#### ✅ Backup e Recuperação
+#### ✅ Backup & Recuperação
 - [ ] Estratégia de backup definida para recursos de dados
 - [ ] Objetivos de tempo de recuperação (RTO) documentados
 - [ ] Objetivos de ponto de recuperação (RPO) documentados
@@ -869,7 +869,7 @@ Imprima este checklist e verifique cada item antes da implantação:
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # Verificar configurações adequadas para desenvolvimento
+    # Verificar configurações amigáveis ao desenvolvimento
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
@@ -1071,7 +1071,7 @@ check_security_practices() {
     
     local issues_found=0
     
-    # Verificar o uso do Key Vault
+    # Verificar uso do Key Vault
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1079,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Verificar o uso de identidade gerenciada
+    # Verificar uso de identidade gerenciada
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Verificar a obrigatoriedade do HTTPS
+    # Verificar exigência de HTTPS
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1095,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Verificar a versão mínima do TLS
+    # Verificar versão mínima do TLS
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1124,14 +1124,14 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # Verificar a criptografia de dados
+    # Verificar criptografia de dados
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # Verificar logs de auditoria
+    # Verificar registro de auditoria
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
@@ -1292,21 +1292,21 @@ steps:
 
 ## Resumo de Melhores Práticas
 
-### ✅ Melhores Práticas de Verificações Pré-implantação
+### ✅ Melhores Práticas para Verificações Pré-implantação
 
 1. **Automatize Sempre que Possível**
-   - Integre verificações em pipelines CI/CD
-   - Use scripts para validações repetíveis
-   - Armazene resultados para trilhas de auditoria
+   - Integrar verificações em pipelines CI/CD
+   - Usar scripts para validações repetíveis
+   - Armazenar resultados para trilhas de auditoria
 
 2. **Validação Específica por Ambiente**
    - Verificações diferentes para dev/staging/prod
    - Requisitos de segurança apropriados por ambiente
-   - Otimização de custos para ambientes não produtivos
+   - Otimização de custos para ambientes não-produtivos
 
-3. **Cobertura Completa**
+3. **Cobertura Abrangente**
    - Autenticação e permissões
-   - Cotas de recursos e disponibilidade
+   - Cotas e disponibilidade de recursos
    - Validação e sintaxe de templates
    - Requisitos de segurança e conformidade
 
@@ -1318,30 +1318,30 @@ steps:
 5. **Falhar Rápido**
    - Interromper a implantação se verificações críticas falharem
    - Fornecer orientação clara para resolução
-   - Habilitar reexecução fácil das verificações
+   - Permitir reexecução fácil das verificações
 
-### Erros Comuns nas Verificações Pré-implantação
+### Erros Comuns em Verificações Pré-implantação
 
 1. **Pular a validação** para implantações "rápidas"
 2. **Verificação insuficiente de permissões** antes da implantação
-3. **Ignorar limites de cota** até a implantação falhar
+3. **Ignorar limites de cotas** até que a implantação falhe
 4. **Não validar templates** em pipelines CI/CD
 5. **Falta de validação de segurança** para ambientes de produção
 6. **Estimativa de custos inadequada** levando a surpresas no orçamento
 
 ---
 
-**Dica**: Execute as verificações pré-implantação como um job separado no seu pipeline CI/CD antes do job de implantação real. Isso permite capturar problemas cedo e fornece feedback mais rápido aos desenvolvedores.
+**Dica Profissional**: Execute as verificações pré-implantação como um job separado no seu pipeline CI/CD antes do job de implantação real. Isso permite identificar problemas cedo e fornece feedback mais rápido aos desenvolvedores.
 
 ---
 
 **Navegação**
-- **Aula Anterior**: [Seleção de SKU](sku-selection.md)
-- **Próxima Aula**: [Resumo Rápido](../../resources/cheat-sheet.md)
+- **Lição Anterior**: [Seleção de SKU](sku-selection.md)
+- **Próxima Lição**: [Cheat Sheet](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Isenção de responsabilidade:
-Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução por um tradutor profissional. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas decorrentes do uso desta tradução.
+**Isenção de responsabilidade**:
+Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se tradução humana profissional. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

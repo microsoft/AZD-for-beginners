@@ -1,45 +1,45 @@
 # AZDを使ったAzureリソースのプロビジョニング
 
 **章のナビゲーション:**
-- **📚 コースホーム**: [AZD 入門](../../README.md)
-- **📖 現在の章**: 第4章 - Infrastructure as Code（IaC）とデプロイ
+- **📚 コースホーム**: [AZD For Beginners](../../README.md)
+- **📖 現在の章**: 第4章 - インフラストラクチャをコードとして＆デプロイメント
 - **⬅️ 前へ**: [デプロイメントガイド](deployment-guide.md)
 - **➡️ 次の章**: [第5章: マルチエージェントAIソリューション](../../examples/retail-scenario.md)
-- **🔧 関連**: [第6章: デプロイ前の検証](../chapter-06-pre-deployment/capacity-planning.md)
+- **🔧 関連**: [第6章: 展開前の検証](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## はじめに
 
-この包括的なガイドでは、Azure Developer CLIを使用したAzureリソースのプロビジョニングと管理に関する必要な情報をすべて網羅します。Bicep、ARMテンプレート、Terraform、Pulumiを使用して、基本的なリソース作成からエンタープライズ向けの高度なインフラストラクチャアーキテクチャまで、Infrastructure as Code（IaC）パターンを実装する方法を学びます。
+この総合的なガイドでは、Azure Developer CLIを使用してAzureリソースをプロビジョニングおよび管理するために知っておくべきすべてを取り扱います。基本的なリソース作成からBicep、ARMテンプレート、Terraform、Pulumiを使った高度なエンタープライズグレードのインフラアーキテクチャの実装まで、インフラをコードとして（IaC）実現する方法を学びます。
 
 ## 学習目標
 
-このガイドを完了すると、次のことができるようになります:
-- Infrastructure as Codeの原則とAzureリソースプロビジョニングを習得する
-- Azure Developer CLIがサポートする複数のIaCプロバイダーを理解する
-- 共通のアプリケーションアーキテクチャ向けにBicepテンプレートを設計・実装する
-- リソースパラメータ、変数、および環境固有の設定を構成する
-- ネットワーキングやセキュリティを含む高度なインフラストラクチャパターンを実装する
-- リソースのライフサイクル、更新、および依存関係の解決を管理する
+このガイドを完了すると、以下が習得できます：
+- インフラをコードとしての原則とAzureリソースのプロビジョニングをマスター
+- Azure Developer CLIがサポートする複数のIaCプロバイダーを理解
+- 一般的なアプリケーションアーキテクチャ用のBicepテンプレートの設計と実装
+- リソースのパラメーター、変数、環境固有の設定の構成
+- ネットワーキングやセキュリティを含む高度なインフラパターンの実装
+- リソースのライフサイクル管理、更新、および依存関係解決
 
 ## 学習成果
 
-完了後、あなたは以下ができるようになります:
-- BicepおよびARMテンプレートを使用してAzureインフラを設計およびプロビジョニングする
-- 適切なリソース依存関係を持つ複雑なマルチサービスアーキテクチャを構成する
-- 複数の環境および構成に対応したパラメータ化されたテンプレートを実装する
-- インフラプロビジョニングの問題をトラブルシューティングし、デプロイの失敗を解決する
-- インフラ設計にAzure Well-Architected Frameworkの原則を適用する
-- インフラの更新を管理し、インフラのバージョン管理戦略を実装する
+完了後には以下ができるようになります：
+- BicepおよびARMテンプレートを使ったAzureインフラの設計とプロビジョニング
+- 適切なリソース依存関係を持つ複雑なマルチサービスアーキテクチャの構成
+- 複数環境や構成向けのパラメータライズドテンプレートの実装
+- インフラプロビジョニングの問題のトラブルシューティングとデプロイ失敗の解決
+- Azure Well-Architected Frameworkの原則をインフラ設計に適用
+- インフラの更新管理とバージョニング戦略の実装
 
-## インフラプロビジョニングの概要
+## インフラプロビジョニング概要
 
-Azure Developer CLIは複数のInfrastructure as Code（IaC）プロバイダーをサポートしています:
-- **Bicep**（推奨） - Azureのドメイン固有言語
-- **ARM Templates** - JSONベースのAzure Resource Managerテンプレート
-- **Terraform** - マルチクラウドのインフラツール
-- **Pulumi** - プログラミング言語で記述するモダンなインフラストラクチャ as code
+Azure Developer CLIは複数のインフラをコードとして管理する（IaC）プロバイダーをサポートしています：
+- **Bicep**（推奨） - Azureのドメイン特化言語
+- **ARMテンプレート** - JSONベースのAzure Resource Managerテンプレート
+- **Terraform** - マルチクラウド対応のインフラ管理ツール
+- **Pulumi** - プログラミング言語を用いた最新のインフラコード
 
-## Azureリソースの理解
+## Azureリソースを理解する
 
 ### リソース階層
 ```
@@ -49,16 +49,16 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### アプリケーション向けの一般的なAzureサービス
-- **コンピューティング**: App Service, Container Apps, Functions, Virtual Machines
-- **ストレージ**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **ネットワーキング**: Virtual Network, Application Gateway, CDN
-- **セキュリティ**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
+### アプリケーション向け一般的なAzureサービス
+- <strong>コンピュート</strong>: App Service、Container Apps、Functions、Virtual Machines
+- <strong>ストレージ</strong>: Storage Account、Cosmos DB、SQL Database、PostgreSQL
+- <strong>ネットワーキング</strong>: Virtual Network、Application Gateway、CDN
+- <strong>セキュリティ</strong>: Key Vault、Application Insights、Log Analytics
+- **AI/ML**: Cognitive Services、OpenAI、Machine Learning
 
 ## Bicepインフラテンプレート
 
-### 基本的な Bicep テンプレートの構造
+### 基本的なBicepテンプレート構造
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -128,9 +128,9 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### 高度な Bicep パターン
+### 高度なBicepパターン
 
-#### モジュール化されたインフラ
+#### モジュラーインフラ
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -300,7 +300,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 
 ## 🔒 セキュリティとシークレット管理
 
-### Key Vault 統合
+### Key Vaultの統合
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -370,7 +370,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 
 ## 🌍 ネットワーキングと接続
 
-### 仮想ネットワークの構成
+### Virtual Networkの構成
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -527,7 +527,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### カスタムメトリクスとアラート
+### カスタムメトリックとアラート
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -561,9 +561,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 環境固有の構成
+## 🔧 環境固有の設定
 
-### 異なる環境向けのパラメータファイル
+### 環境別パラメータファイル
 ```json
 // infra/main.parameters.dev.json
 {
@@ -651,7 +651,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 
 ## 🚀 高度なプロビジョニングパターン
 
-### マルチリージョンデプロイ
+### マルチリージョンデプロイメント
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -719,7 +719,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### インフラストラクチャのテスト
+### インフラテスト
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -755,42 +755,41 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 インフラのプレビューと検証（新機能）
+## 🧪 インフラプレビューと検証（新機能）
 
-### デプロイ前にインフラの変更をプレビューする
+### デプロイ前にインフラ変更をプレビュー
 
-`azd provision --preview` 機能を使うと、実際にリソースをデプロイする前にインフラプロビジョニングを**シミュレート**できます。`terraform plan`や`bicep what-if`の精神に類似しており、Azure環境に対してどのような変更が行われるかの**ドライラン表示**を提供します。
+`azd provision --preview` 機能は、実際にリソースをデプロイする前に<strong>インフラプロビジョニングをシミュレーション</strong>することができます。これは `terraform plan` や `bicep what-if` と同様で、Azure環境に対してどのような変更が行われるかを<strong>ドライランで確認</strong>できます。
 
-#### 🛠️ 何をするか
-- **IaCテンプレートを分析する**（BicepまたはTerraform）
-- **リソース変更のプレビューを表示する**：追加、削除、更新
-- **変更を適用しない** — 読み取り専用で安全に実行できる
+#### 🛠️ 機能内容
+- **IaCテンプレート**（BicepまたはTerraform）を解析
+- <strong>リソース変更のプレビュー表示</strong>：追加、削除、更新
+- <strong>変更の適用は行わない</strong> — 読み取り専用で安全に実行可能
 
-#### � 使用例
+#### 利用シーン
 ```bash
-# デプロイ前にインフラの変更をプレビューする
+# デプロイ前にインフラストラクチャの変更をプレビューする
 azd provision --preview
 
-# 詳細な出力でプレビューする
-azd provision --preview --output json
-
-# 特定の環境向けにプレビューする
-azd provision --preview --environment production
+# 特定の環境のプレビュー
+azd provision --preview -e production
 ```
 
-このコマンドは次のことに役立ちます:
-- **リソースをコミットする前にインフラの変更を検証する**
-- **開発サイクルの早い段階で設定ミスを発見する**
-- **チーム環境で安全に共同作業する**
-- **予期せぬ事態なしに最小権限でデプロイを行うことを保証する**
+このコマンドは以下に役立ちます：
+- <strong>リソースをコミットする前にインフラ変更を検証</strong>
+- <strong>開発サイクルの早期に設定ミスを検出</strong>
+- <strong>チーム環境で安全に共同作業を実施</strong>
+- <strong>予期せぬ権限問題がないか最小権限での展開を保証</strong>
 
-特に有用な場面:
-- 複雑なマルチサービス環境で作業しているとき
-- 本番インフラに変更を加えるとき
-- PR承認前にテンプレートの変更を検証するとき
-- インフラパターンについて新しいチームメンバーを教育するとき
+特に役立つ場面：
+- 複雑なマルチサービス環境を操作する場合
+- 本番環境インフラに変更を加える場合
+- PR承認前にテンプレート変更を検証する場合
+- 新規メンバーにインフラパターンを教える場合
 
-### プレビュー出力の例
+### プレビュー結果の例
+プロバイダーやプロジェクト構造によりプレビュー結果は異なりますが、適用前に提案された変更点がはっきり識別できるはずです。
+
 ```bash
 $ azd provision --preview
 
@@ -809,28 +808,27 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
 ```
 
-## �🔄 リソースの更新とマイグレーション
+## 🔄 リソース更新とマイグレーション
 
 ### 安全なリソース更新
 ```bash
-# まずインフラの変更をプレビューしてください（推奨）
+# インフラ変更を最初にプレビューする（推奨）
 azd provision --preview
 
 # プレビュー確認後に変更を適用する
 azd provision --confirm-with-no-prompt
 
-# ロールバックするには Git を使ってインフラの変更を元に戻してください:
-git revert HEAD  # 最後のインフラのコミットを取り消す
-azd provision    # 以前のインフラの状態を適用する
+# ロールバックするには、Gitを使ってインフラ変更を元に戻します：
+git revert HEAD  # 最後のインフラコミットを元に戻す
+azd provision    # 以前のインフラ状態を適用する
 ```
 
-### データベースのマイグレーション
+### データベースマイグレーション
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -872,7 +870,7 @@ var naming = {
 }
 ```
 
-### 2. タギング戦略
+### 2. タグ付け戦略
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -918,27 +916,27 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## 次のステップ
 
-- [デプロイ前の計画](../chapter-06-pre-deployment/capacity-planning.md) - リソースの利用可能性を検証する
-- [一般的な問題](../chapter-07-troubleshooting/common-issues.md) - インフラの問題をトラブルシューティングする
-- [デバッグガイド](../chapter-07-troubleshooting/debugging.md) - プロビジョニングの問題をデバッグする
-- [SKUの選択](../chapter-06-pre-deployment/sku-selection.md) - 適切なサービス階層を選択する
+- [展開前の計画](../chapter-06-pre-deployment/capacity-planning.md) - リソースの可用性を検証
+- [よくある問題](../chapter-07-troubleshooting/common-issues.md) - インフラ問題のトラブルシュート
+- [デバッグガイド](../chapter-07-troubleshooting/debugging.md) - プロビジョニング問題のデバッグ
+- [SKU選択](../chapter-06-pre-deployment/sku-selection.md) - 適切なサービス層の選択
 
 ## 追加リソース
 
 - [Azure Bicep ドキュメント](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [Azure Resource Manager テンプレート](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure アーキテクチャセンター](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected フレームワーク](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azureアーキテクチャセンター](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**ナビゲーション**
-- **前のレッスン**: [デプロイメントガイド](deployment-guide.md)
-- **次のレッスン**: [キャパシティプランニング](../chapter-06-pre-deployment/capacity-planning.md)
+<strong>ナビゲーション</strong>
+- <strong>前のレッスン</strong>: [デプロイメントガイド](deployment-guide.md)
+- <strong>次のレッスン</strong>: [キャパシティプランニング](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責事項：
-この文書はAI翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を用いて翻訳されました。正確性には努めておりますが、自動翻訳には誤りや不正確な点が含まれる可能性があることをご承知ください。原文（原言語版）を正式な権威ある文書として扱ってください。重要な情報については、専門の翻訳者による人間の翻訳を推奨します。本翻訳の利用に起因するいかなる誤解や解釈の相違についても、当方は責任を負いません。
+**免責事項**:  
+本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を目指しておりますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご了承ください。原文の母国語版が正式な情報源とみなされます。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の使用に起因するいかなる誤解や誤訳についても、当方は責任を負いかねます。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

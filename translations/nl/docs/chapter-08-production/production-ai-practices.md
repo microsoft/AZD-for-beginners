@@ -1,27 +1,27 @@
-# Beste praktijken voor productie-AI-workloads met AZD
+# Beste praktijken voor AI-productieworkloads met AZD
 
-**Chapter Navigation:**
-- **📚 Cursus Start**: [AZD Voor Beginners](../../README.md)
+**Hoofdstuknavigatie:**
+- **📚 Cursus Startpagina**: [AZD Voor Beginners](../../README.md)
 - **📖 Huidig Hoofdstuk**: Hoofdstuk 8 - Productie- & Enterprise-patronen
-- **⬅️ Vorig Hoofdstuk**: [Hoofdstuk 7: Problemen oplossen](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Ook gerelateerd**: [AI Workshop Lab](ai-workshop-lab.md)
+- **⬅️ Vorig Hoofdstuk**: [Hoofdstuk 7: Probleemoplossing](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Ook Gerelateerd**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🎯 Cursus Voltooid**: [AZD Voor Beginners](../../README.md)
 
 ## Overzicht
 
-Deze gids biedt uitgebreide beste praktijken voor het implementeren van productieklare AI-workloads met behulp van Azure Developer CLI (AZD). Op basis van feedback van de Microsoft Foundry Discord-community en implementaties bij klanten in de praktijk, behandelen deze praktijken de meest voorkomende uitdagingen in productie-AI-systemen.
+Deze gids biedt uitgebreide best practices voor het implementeren van productieklare AI-workloads met behulp van Azure Developer CLI (AZD). Op basis van feedback uit de Microsoft Foundry Discord-community en praktijkimplementaties bij klanten, behandelen deze praktijken de meest voorkomende uitdagingen in productie-AI-systemen.
 
-## Belangrijkste aangepakte uitdagingen
+## Belangrijkste Uitdagingen Aangepakt
 
-Op basis van onze communitypoll zijn dit de belangrijkste uitdagingen waarmee ontwikkelaars te maken hebben:
+Op basis van onze community-enquête zijn dit de grootste uitdagingen waar ontwikkelaars tegenaan lopen:
 
-- **45%** worstelt met multi-service AI-implementaties
+- **45%** heeft moeite met multi-service AI-implementaties
 - **38%** heeft problemen met credential- en secretbeheer  
-- **35%** vindt productieklaarheid en schalen moeilijk
+- **35%** vindt productie-klaarheid en schalen moeilijk
 - **32%** heeft betere kostenoptimalisatiestrategieën nodig
-- **29%** vereist verbeterde monitoring en probleemoplossing
+- **29%** heeft verbeterde monitoring en troubleshooting nodig
 
-## Architectuurpatronen voor productie-AI
+## Architectuurpatronen voor Productie-AI
 
 ### Patroon 1: Microservices AI-architectuur
 
@@ -30,9 +30,9 @@ Op basis van onze communitypoll zijn dit de belangrijkste uitdagingen waarmee on
 ```mermaid
 graph TD
     Frontend[Webfrontend] --- Gateway[API-gateway] --- LB[Loadbalancer]
-    Gateway --> Chat[Chatservice]
-    Gateway --> Image[Afbeeldingsservice]
-    Gateway --> Text[Tekstservice]
+    Gateway --> Chat[Chatdienst]
+    Gateway --> Image[Afbeeldingsdienst]
+    Gateway --> Text[Tekstdienst]
     Chat --> OpenAI[Microsoft Foundry-modellen]
     Image --> Vision[Computervisie]
     Text --> DocIntel[Documentintelligentie]
@@ -60,7 +60,7 @@ services:
     host: containerapp
 ```
 
-### Patroon 2: Evenementgestuurde AI-verwerking
+### Patroon 2: Event-Driven AI-verwerking
 
 **Wanneer te gebruiken**: Batchverwerking, documentanalyse, asynchrone workflows
 
@@ -109,38 +109,38 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Nadenken over de gezondheid van AI-agents
+## Nadenken over de Gezondheid van AI-agents
 
-Wanneer een traditionele webapplicatie faalt, zijn de symptomen herkenbaar: een pagina laadt niet, een API geeft een fout terug of een deployment faalt. AI-aangedreven applicaties kunnen op al die manieren falen—maar ze kunnen ook subtieler verkeerd functioneren zonder duidelijke foutmeldingen.
+Wanneer een traditionele webapplicatie crasht, zijn de symptomen vertrouwd: een pagina laadt niet, een API geeft een fout terug, of een deployment mislukt. AI-gedreven applicaties kunnen op al diezelfde manieren falen—maar ze kunnen ook subtieler slecht gedrag vertonen dat geen duidelijke foutmeldingen geeft.
 
-Deze sectie helpt je een mentaal model op te bouwen voor het monitoren van AI-workloads, zodat je weet waar je moet kijken wanneer dingen niet goed lijken te werken.
+Deze sectie helpt je een mentaal model op te bouwen voor het monitoren van AI-workloads zodat je weet waar je moet zoeken wanneer iets niet goed lijkt te gaan.
 
-### Hoe agentgezondheid verschilt van traditionele appgezondheid
+### Hoe Agent-gezondheid verschilt van traditionele App-gezondheid
 
-Een traditionele app werkt of werkt niet. Een AI-agent kan lijken te werken maar slechte resultaten opleveren. Beschouw agentgezondheid als twee lagen:
+Een traditionele app werkt of werkt niet. Een AI-agent kan lijken te werken maar slechte resultaten opleveren. Zie agent-gezondheid als twee lagen:
 
-| Laag | Waar op te letten | Waar te zoeken |
+| Laag | Waar op te letten | Waar te kijken |
 |-------|--------------|---------------|
-| **Infrastructuurgezondheid** | Draait de service? Zijn resources toegewezen? Zijn endpoints bereikbaar? | `azd monitor`, Azure Portal resource health, container/app logs |
-| **Gedragsgezondheid** | Reageert de agent nauwkeurig? Zijn reacties tijdig? Wordt het model correct aangeroepen? | Application Insights-traces, latentie-metrieken voor modelaanroepen, logs voor responskwaliteit |
+| **Infrastructuurgezondheid** | Draait de service? Zijn resources geprovisioned? Zijn endpoints bereikbaar? | `azd monitor`, Azure Portal resource health, container/app logs |
+| **Gedragsgezondheid** | Reageert de agent accuraat? Zijn responses tijdig? Wordt het model correct aangeroepen? | Application Insights traces, model call latency metrics, response quality logs |
 
 Infrastructuurgezondheid is bekend—het is hetzelfde voor elke azd-app. Gedragsgezondheid is de nieuwe laag die AI-workloads introduceren.
 
-### Waar te zoeken wanneer AI-apps zich niet gedragen zoals verwacht
+### Waar te kijken als AI-apps zich niet gedragen zoals verwacht
 
-Als je AI-toepassing niet de verwachte resultaten oplevert, is hier een conceptuele checklist:
+Als je AI-toepassing niet de verwachte resultaten oplevert, volgt hier een conceptuele checklist:
 
-1. **Begin met de basis.** Draait de app? Kan deze zijn afhankelijkheden bereiken? Controleer `azd monitor` en resource health zoals je dat voor elke app zou doen.
-2. **Controleer de modelverbinding.** Roept je toepassing het AI-model succesvol aan? Mislukte of verlopen modelaanroepen zijn de meest voorkomende oorzaak van AI-appproblemen en verschijnen in je applicatielogs.
-3. **Bekijk wat het model ontving.** AI-antwoorden zijn afhankelijk van de input (de prompt en eventuele opgehaalde context). Als de output onjuist is, is de input meestal verkeerd. Controleer of je applicatie de juiste gegevens naar het model stuurt.
-4. **Bekijk de responstijd.** Modelaanroepen zijn langzamer dan typische API-aanroepen. Als je app traag aanvoelt, controleer dan of de responstijden van het model zijn toegenomen — dit kan wijzen op throttling, capaciteitslimieten of congestie op regiovlak.
-5. **Let op kostenindicatoren.** Onverwachte pieken in tokengebruik of API-aanroepen kunnen wijzen op een lus, een verkeerd geconfigureerde prompt of overmatige retries.
+1. **Begin bij de basis.** Draait de app? Kan het zijn afhankelijkheden bereiken? Controleer `azd monitor` en resource health zoals je bij elke app zou doen.
+2. **Controleer de modelverbinding.** Roept je applicatie het AI-model succesvol aan? Mislukte of getimede modelaanroepen zijn de meest voorkomende oorzaak van AI-app problemen en zullen in je applicatielogs verschijnen.
+3. **Kijk naar wat het model ontving.** AI-responses hangen af van de input (de prompt en eventuele opgehaalde context). Als de output fout is, is de input meestal fout. Controleer of je applicatie de juiste gegevens naar het model stuurt.
+4. **Bekijk responstijd.** AI-modelaanroepen zijn trager dan typische API-aanroepen. Als je app traag aanvoelt, controleer of de modelresponstijden zijn gestegen—dit kan wijzen op throttling, capaciteitslimieten of congestie op regiobasis.
+5. **Let op kostensignalen.** Onverwachte pieken in tokengebruik of API-aanroepen kunnen wijzen op een lus, een verkeerd geconfigureerde prompt of te veel retries.
 
-Je hoeft niet meteen alle observability-tools te beheersen. De kernboodschap is dat AI-applicaties een extra laag gedrag hebben om te monitoren, en azd's ingebouwde monitoring (`azd monitor`) geeft je een startpunt om beide lagen te onderzoeken.
+Je hoeft niet meteen een expert in observability-tools te worden. De belangrijkste conclusie is dat AI-applicaties een extra gedragslaag hebben om te monitoren, en azd's ingebouwde monitoring (`azd monitor`) geeft je een startpunt om beide lagen te onderzoeken.
 
 ---
 
-## Beste beveiligingspraktijken
+## Beveiligingsbest practices
 
 ### 1. Zero-Trust beveiligingsmodel
 
@@ -169,9 +169,9 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. Veilg geheimenbeheer
+### 2. Beveiligd Secret Management
 
-**Key Vault-integratiepatroon**:
+**Key Vault integratiepatroon**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -206,7 +206,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### 3. Netwerkbeveiliging
 
-**Private Endpoint-configuratie**:
+**Private Endpoint configuratie**:
 
 ```bicep
 // Virtual Network for AI services
@@ -264,9 +264,9 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Prestaties en schalen
+## Prestatie en Schalen
 
-### 1. Auto-scalingstrategieën
+### 1. Auto-scaling strategieën
 
 **Container Apps Auto-scaling**:
 
@@ -312,9 +312,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. Cachingstrategieën
+### 2. Caching-strategieën
 
-**Redis Cache voor AI-reacties**:
+**Redis Cache voor AI-responses**:
 
 ```bicep
 // Redis Premium for production workloads
@@ -342,7 +342,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Load balancing en verkeersbeheer
+### 3. Load Balancing en Verkeersmanagement
 
 **Application Gateway met WAF**:
 
@@ -382,7 +382,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ## 💰 Kostenoptimalisatie
 
-### 1. Resource right-sizing
+### 1. Right-Sizing van Resources
 
 **Omgevingsspecifieke configuraties**:
 
@@ -404,7 +404,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Kostenmonitoring en budgetten
+### 2. Kostenbewaking en Budgetten
 
 ```bicep
 // Cost management and budgets
@@ -445,7 +445,7 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. Tokengebruik optimaliseren
+### 3. Tokengebruiksoptimalisatie
 
 **OpenAI-kostenbeheer**:
 
@@ -468,13 +468,13 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // Ruime schatting: 1 token ≈ 4 tekens
+    // Ruwe schatting: 1 token ≈ 4 tekens
     return Math.ceil(text.length / 4);
   }
 }
 ```
 
-## Monitoring en observeerbaarheid
+## Monitoring en Observeerbaarheid
 
 ### 1. Uitgebreide Application Insights
 
@@ -521,9 +521,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. AI-specifieke monitoring
+### 2. AI-specifieke Monitoring
 
-**Aangepaste dashboards voor AI-metrieken**:
+**Aangepaste dashboards voor AI-metrics**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -552,7 +552,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Health checks en uptime-monitoring
+### 3. Health Checks en Uptime-monitoring
 
 ```bicep
 // Application Insights availability tests
@@ -621,9 +621,9 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Noodherstel en hoge beschikbaarheid
+## Disaster Recovery en Hoge Beschikbaarheid
 
-### 1. Multi-region deployment
+### 1. Multi-region Deployments
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -685,7 +685,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Data-back-up en herstel
+### 2. Data Backup en Herstel
 
 ```bicep
 // Backup configuration for critical data
@@ -736,9 +736,9 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 }
 ```
 
-## DevOps- en CI/CD-integratie
+## DevOps en CI/CD-integratie
 
-### 1. GitHub Actions-workflow
+### 1. GitHub Actions Workflow
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -782,7 +782,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup AZD
-        uses: Azure/setup-azd@v1.0.0
+        uses: Azure/setup-azd@v2
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -802,7 +802,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup AZD
-        uses: Azure/setup-azd@v1.0.0
+        uses: Azure/setup-azd@v2
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -827,7 +827,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Controleer of alle vereiste services draaien
+# Controleren of alle vereiste services draaien
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -840,8 +840,8 @@ done
 # Valideer OpenAI-modelimplementaties
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
-if [[ ! $models == *"gpt-35-turbo"* ]]; then
-    echo "ERROR: Required model gpt-35-turbo not deployed"
+if [[ ! $models == *"gpt-4.1-mini"* ]]; then
+  echo "ERROR: Required model gpt-4.1-mini not deployed"
     exit 1
 fi
 
@@ -852,7 +852,7 @@ python scripts/test_connectivity.py
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Checklist voor productieklaarheid
+## Productieklaarheidschecklist
 
 ### Beveiliging ✅
 - [ ] Alle services gebruiken managed identities
@@ -862,17 +862,17 @@ echo "Infrastructure validation completed successfully!"
 - [ ] RBAC met least privilege
 - [ ] WAF ingeschakeld op publieke endpoints
 
-### Prestaties ✅
+### Prestatie ✅
 - [ ] Auto-scaling geconfigureerd
 - [ ] Caching geïmplementeerd
 - [ ] Load balancing ingesteld
-- [ ] CDN voor statische content
+- [ ] CDN voor statische inhoud
 - [ ] Database connection pooling
-- [ ] Tokengebruik geoptimaliseerd
+- [ ] Tokengebruiksoptimalisatie
 
 ### Monitoring ✅
 - [ ] Application Insights geconfigureerd
-- [ ] Aangepaste metrieken gedefinieerd
+- [ ] Aangepaste metrics gedefinieerd
 - [ ] Alertregels ingesteld
 - [ ] Dashboard gemaakt
 - [ ] Health checks geïmplementeerd
@@ -880,42 +880,42 @@ echo "Infrastructure validation completed successfully!"
 
 ### Betrouwbaarheid ✅
 - [ ] Multi-region deployment
-- [ ] Back-up- en herstelplan
+- [ ] Backup- en herstelplan
 - [ ] Circuit breakers geïmplementeerd
 - [ ] Retry-beleid geconfigureerd
-- [ ] Gracieuze degradatie
+- [ ] Graceful degradation
 - [ ] Health check endpoints
 
 ### Kostenbeheer ✅
-- [ ] Budget-waarschuwingen geconfigureerd
-- [ ] Resource right-sizing
+- [ ] Budgetwaarschuwingen geconfigureerd
+- [ ] Resources juist geschaald
 - [ ] Dev/test-kortingen toegepast
 - [ ] Reserved instances aangeschaft
 - [ ] Kostenmonitoring-dashboard
 - [ ] Regelmatige kostenreviews
 
 ### Compliance ✅
-- [ ] Vereisten voor dataresidency nageleefd
+- [ ] Data residency-vereisten nageleefd
 - [ ] Auditlogging ingeschakeld
 - [ ] Compliancebeleid toegepast
 - [ ] Security baselines geïmplementeerd
-- [ ] Regelmatige beveiligingsassessments
-- [ ] Incident response-plan
+- [ ] Regelmatige security-assessments
+- [ ] Incidentresponsplan
 
 ## Prestatiebenchmarks
 
-### Typische productiemetrieken
+### Typische productiemetrics
 
 | Metriek | Doel | Monitoring |
 |--------|--------|------------|
 | **Responstijd** | < 2 seconden | Application Insights |
-| **Beschikbaarheid** | 99.9% | Uptime-monitoring |
-| **Foutpercentage** | < 0.1% | Applicatielogs |
-| **Tokengebruik** | < $500/month | Kostenbeheer |
-| **Gelijktijdige gebruikers** | 1000+ | Loadtesting |
-| **Hersteltijd** | < 1 hour | Disaster recovery-tests |
+| **Beschikbaarheid** | 99,9% | Uptime-monitoring |
+| **Foutrate** | < 0,1% | Applicatielogs |
+| **Tokengebruik** | < $500/maand | Cost management |
+| **Gelijktijdige gebruikers** | 1000+ | Load testing |
+| **Hersteltijd** | < 1 uur | Disaster recovery tests |
 
-### Loadtesten
+### Load Testing
 
 ```bash
 # Script voor loadtesten van AI-toepassingen
@@ -926,27 +926,27 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Beste praktijken uit de community
+## 🤝 Community Best Practices
 
 Op basis van feedback uit de Microsoft Foundry Discord-community:
 
 ### Topaanbevelingen uit de community:
 
-1. **Begin klein, schaal geleidelijk**: Begin met basale SKUs en schaal op basis van daadwerkelijk gebruik
+1. **Begin klein, schaal geleidelijk**: Start met basis-SKU's en schaal op op basis van daadwerkelijk gebruik
 2. **Monitor alles**: Zet vanaf dag één uitgebreide monitoring op
-3. **Automatiseer beveiliging**: Gebruik infrastructure-as-code voor consistente beveiliging
+3. **Automatiseer beveiliging**: Gebruik infrastructure as code voor consistente beveiliging
 4. **Test grondig**: Neem AI-specifieke tests op in je pipeline
 5. **Plan voor kosten**: Monitor tokengebruik en stel vroeg budgetwaarschuwingen in
 
-### Veelvoorkomende valkuilen om te vermijden:
+### Veelgemaakte valkuilen om te vermijden:
 
-- ❌ API-sleutels in code hardcoderen
-- ❌ Geen juiste monitoring instellen
+- ❌ API-sleutels hardcoden in code
+- ❌ Geen juiste monitoring opzetten
 - ❌ Kostenoptimalisatie negeren
-- ❌ Faalscenario's niet testen
+- ❌ Niet testen van faalscenario's
 - ❌ Deployen zonder health checks
 
-## AZD AI CLI-commando's en extensies
+## AZD AI CLI-commando's en Extensies
 
 AZD bevat een groeiende set AI-specifieke commando's en extensies die productie-AI-workflows stroomlijnen. Deze tools overbruggen de kloof tussen lokale ontwikkeling en productie-implementatie voor AI-workloads.
 
@@ -955,10 +955,13 @@ AZD bevat een groeiende set AI-specifieke commando's en extensies die productie-
 AZD gebruikt een extensiesysteem om AI-specifieke mogelijkheden toe te voegen. Installeer en beheer extensies met:
 
 ```bash
-# Lijst alle beschikbare extensies (inclusief AI)
+# Toon alle beschikbare extensies (inclusief AI)
 azd extension list
 
-# Installeer de Foundry Agents-extensie
+# Bekijk details van geïnstalleerde extensies
+azd extension show azure.ai.agents
+
+# Installeer de Foundry agents-extensie
 azd extension install azure.ai.agents
 
 # Installeer de fine-tuning-extensie
@@ -976,25 +979,25 @@ azd extension upgrade --all
 | Extensie | Doel | Status |
 |-----------|---------|--------|
 | `azure.ai.agents` | Foundry Agent Service-beheer | Preview |
-| `azure.ai.finetune` | Foundry-model fine-tuning | Preview |
-| `azure.ai.models` | Foundry aangepaste modellen | Preview |
-| `azure.coding-agent` | Configuratie van coding-agent | Available |
+| `azure.ai.finetune` | Foundry model fine-tuning | Preview |
+| `azure.ai.models` | Foundry custom models | Preview |
+| `azure.coding-agent` | Coding agent configuratie | Available |
 
 ### Agentprojecten initialiseren met `azd ai agent init`
 
-Het `azd ai agent init`-commando scaffoldt een productieklare AI-agentproject die geïntegreerd is met Microsoft Foundry Agent Service:
+Het `azd ai agent init`-commando scaffoldt een productie-klaar AI-agentproject geïntegreerd met Microsoft Foundry Agent Service:
 
 ```bash
-# Initialiseer een nieuw agentproject op basis van een agentmanifest
+# Initialiseer een nieuw agentproject vanuit een agentmanifest
 azd ai agent init -m <manifest-path-or-uri>
 
-# Initialiseer en selecteer een specifiek Foundry-project als doel
+# Initialiseer en stel een specifiek Foundry-project als doel in
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
 # Initialiseer met een aangepaste bronmap
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
-# Selecteer Container Apps als host
+# Stel Container Apps als host in
 azd ai agent init -m agent-manifest.yaml --host containerapp
 ```
 
@@ -1004,29 +1007,29 @@ azd ai agent init -m agent-manifest.yaml --host containerapp
 |------|-------------|
 | `-m, --manifest` | Pad of URI naar een agentmanifest om aan je project toe te voegen |
 | `-p, --project-id` | Bestaande Microsoft Foundry Project ID voor je azd-omgeving |
-| `-s, --src` | Directory om de agentdefinitie te downloaden (standaard `src/<agent-id>`) |
+| `-s, --src` | Directory om de agentdefinitie naartoe te downloaden (standaard `src/<agent-id>`) |
 | `--host` | Overschrijf de standaard host (bijv. `containerapp`) |
 | `-e, --environment` | De azd-omgeving die gebruikt moet worden |
 
-**Productietip**: Gebruik `--project-id` om direct verbinding te maken met een bestaand Foundry-project, zodat je agentcode en cloudresources vanaf het begin gekoppeld blijven.
+**Productietip**: Gebruik `--project-id` om direct verbinding te maken met een bestaand Foundry-project, zodat je agentcode en cloudresources vanaf het begin gekoppeld zijn.
 
 ### Model Context Protocol (MCP) met `azd mcp`
 
-AZD bevat ingebouwde MCP-serverondersteuning (Alpha), waarmee AI-agents en tools via een gestandaardiseerd protocol met je Azure-resources kunnen interageren:
+AZD bevat ingebouwde MCP-serverondersteuning (Alpha), waarmee AI-agents en tools met je Azure-resources kunnen communiceren via een gestandaardiseerd protocol:
 
 ```bash
 # Start de MCP-server voor je project
 azd mcp start
 
-# Beheer toestemmingen van tools voor MCP-bewerkingen
-azd mcp consent
+# Controleer de huidige Copilot-toestemmingsregels voor tooluitvoering
+azd copilot consent list
 ```
 
-De MCP-server stelt je azd-projectcontext bloot—omgevingen, services en Azure-resources—aan AI-aangedreven developmenttools. Dit maakt het mogelijk om:
+De MCP-server maakt je azd-projectcontext—omgevingen, services en Azure-resources—beschikbaar voor AI-gedreven ontwikkeltools. Dit maakt mogelijk:
 
-- **AI-geassisteerde deployment**: Laat coding-agents je projectstatus opvragen en deployments triggeren
-- **Resource-discovery**: AI-tools kunnen ontdekken welke Azure-resources je project gebruikt
-- **Omgevingsbeheer**: Agents kunnen schakelen tussen dev/staging/production-omgevingen
+- **AI-geassisteerde deployment**: Laat coding agents je projectstatus opvragen en deployments triggeren
+- **Resource discovery**: AI-tools kunnen ontdekken welke Azure-resources je project gebruikt
+- **Omgevingsbeheer**: Agents kunnen schakelen tussen dev/staging/production omgevingen
 
 ### Infrastructuurgeneratie met `azd infra generate`
 
@@ -1038,14 +1041,14 @@ azd infra generate
 ```
 
 Dit schrijft IaC naar schijf zodat je kunt:
-- Infrastructuur beoordelen en auditen voordat je deployt
-- Aangepaste beveiligingsregels toevoegen (netwerkregels, private endpoints)
+- Infrastructuur beoordelen en auditen voordat je deployed
+- Aangepaste beveiligingsbeleid toevoegen (netwerkregels, private endpoints)
 - Integreren met bestaande IaC-reviewprocessen
-- Infrastructuurwijzigingen apart van applicatiecode versioneren
+- Infrastructuurwijzigingen versiebeheer geven los van applicatiecode
 
-### Productie lifecycle-hooks
+### Productielevenscyclus Hooks
 
-AZD-hooks laten je aangepaste logica injecteren in elke fase van de deployment-levenscyclus—kritisch voor productie-AI-workflows:
+AZD-hooks laten je aangepaste logica injecteren in elke fase van de deployment-levenscyclus—kritiek voor productie-AI-workflows:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1080,14 +1083,14 @@ azd hooks run predeploy
 
 **Aanbevolen productiehooks voor AI-workloads:**
 
-| Hook | Gebruikscase |
+| Hook | Gebruiksscenario |
 |------|----------|
-| `preprovision` | Valideer abonnementquota voor AI-modelcapaciteit |
+| `preprovision` | Valideer subscription-quotas voor AI-modelcapaciteit |
 | `postprovision` | Configureer private endpoints, deploy modelweights |
-| `predeploy` | Voer AI-veiligheidstests uit, valideer prompt-templates |
-| `postdeploy` | Smoke-test agentantwoorden, verifieer modelconnectiviteit |
+| `predeploy` | Voer AI-veiligheidstests uit, valideer prompttemplates |
+| `postdeploy` | Smoke test agentresponses, verifieer modelconnectiviteit |
 
-### CI/CD-pijplijnconfiguratie
+### CI/CD-pipelineconfiguratie
 
 Gebruik `azd pipeline config` om je project te koppelen aan GitHub Actions of Azure Pipelines met veilige Azure-authenticatie:
 
@@ -1100,41 +1103,41 @@ azd pipeline config --provider github
 ```
 
 Dit commando:
-- Creëert een serviceprincipal met least-privilege-toegang
+- Maakt een service principal met least-privilege toegang
 - Configureert federated credentials (geen opgeslagen secrets)
-- Genereert of werkt je pijplijnconfiguratiebestand bij
-- Stelt vereiste omgevingsvariabelen in in je CI/CD-systeem
+- Genereert of werkt je pipeline-definitiebestand bij
+- Zet vereiste omgevingsvariabelen in je CI/CD-systeem
 
-**Productieworkflow met pipelineconfiguratie:**
+**Productieworkflow met pipeline-config:**
 
 ```bash
-# 1. Productieomgeving opzetten
+# 1. Stel de productieomgeving in
 azd env new production
 azd env set AZURE_OPENAI_CAPACITY 100
 
 # 2. Configureer de pipeline
 azd pipeline config --provider github
 
-# 3. Pipeline voert azd deploy uit bij elke push naar main
+# 3. De pipeline voert azd deploy uit bij elke push naar main
 ```
 
 ### Componenten toevoegen met `azd add`
 
-Voeg geleidelijk Azure-services toe aan een bestaand project:
+Voeg incrementeel Azure-services toe aan een bestaand project:
 
 ```bash
 # Voeg interactief een nieuwe servicecomponent toe
 azd add
 ```
 
-Dit is bijzonder nuttig voor het uitbreiden van productie-AI-toepassingen—bijvoorbeeld het toevoegen van een vector search-service, een nieuw agentendpoint of een monitoringcomponent aan een bestaande implementatie.
+Dit is bijzonder nuttig voor het uitbreiden van productie-AI-applicaties—bijvoorbeeld het toevoegen van een vector search-service, een nieuw agent-endpoint of een monitoringcomponent aan een bestaande deployment.
 
 ## Aanvullende bronnen
-- **Azure Well-Architected Framework**: [Richtlijnen voor AI-workloads](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Azure Well-Architected Framework**: [Richtlijnen voor AI-werklasten](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Microsoft Foundry Documentation**: [Officiële documentatie](https://learn.microsoft.com/azure/ai-studio/)
 - **Community Templates**: [Azure Samples](https://github.com/Azure-Samples)
 - **Discord Community**: [#Azure-kanaal](https://discord.gg/microsoft-azure)
-- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 open agentvaardigheden voor Azure AI, Foundry, implementatie, kostenoptimalisatie en diagnostiek. Installeer in je editor:
+- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 open agentvaardigheden voor Azure AI, Foundry, deployment, kostenoptimalisatie en diagnostiek. Installeer in je editor:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
@@ -1142,17 +1145,17 @@ Dit is bijzonder nuttig voor het uitbreiden van productie-AI-toepassingen—bijv
 ---
 
 **Hoofdstuknavigatie:**
-- **📚 Cursusstart**: [AZD For Beginners](../../README.md)
-- **📖 Huidig hoofdstuk**: Hoofdstuk 8 - Productie- en bedrijfspatronen
-- **⬅️ Vorig hoofdstuk**: [Hoofdstuk 7: Problemen oplossen](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Ook gerelateerd**: [AI Workshop Lab](ai-workshop-lab.md)
+- **📚 Cursusstartpagina**: [AZD For Beginners](../../README.md)
+- **📖 Huidig hoofdstuk**: Hoofdstuk 8 - Productie- en bedrijfs-patronen
+- **⬅️ Vorig hoofdstuk**: [Hoofdstuk 7: Probleemoplossing](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Ook gerelateerd**: [AI Workshop-lab](ai-workshop-lab.md)
 - **� Cursus voltooid**: [AZD For Beginners](../../README.md)
 
-**Onthoud**: Productie-AI-workloads vereisen zorgvuldige planning, bewaking en doorlopende optimalisatie. Begin met deze patronen en pas ze aan jouw specifieke vereisten aan.
+**Onthoud**: Productie-AI-werklasten vereisen zorgvuldige planning, monitoring en voortdurende optimalisatie. Begin met deze patronen en pas ze aan je specifieke vereisten aan.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, houd er rekening mee dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor cruciale informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, houd er rekening mee dat geautomatiseerde vertalingen fouten of onjuistheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

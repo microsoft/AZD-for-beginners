@@ -1,73 +1,73 @@
-# Verificações Pré-Implementação para Implementações AZD
+# Verificações Prévias para Implantações AZD
 
 **Navegação do Capítulo:**
 - **📚 Início do Curso**: [AZD Para Iniciantes](../../README.md)
-- **📖 Capítulo Atual**: Capítulo 6 - Validação e Planeamento Pré-Implementação
+- **📖 Capítulo Atual**: Capítulo 6 - Validação & Planeamento Pré-Implantação
 - **⬅️ Anterior**: [Seleção de SKU](sku-selection.md)
 - **➡️ Próximo Capítulo**: [Capítulo 7: Resolução de Problemas](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 Relacionado**: [Capítulo 4: Guia de Implementação](../chapter-04-infrastructure/deployment-guide.md)
+- **🔧 Relacionado**: [Capítulo 4: Guia de Implantação](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Introdução
 
-Este guia abrangente fornece scripts e procedimentos de validação pré-implementação para garantir implementações bem-sucedidas com o Azure Developer CLI antes de começarem. Aprenda a implementar verificações automatizadas para autenticação, disponibilidade de recursos, quotas, conformidade de segurança e requisitos de desempenho para prevenir falhas de implementação e otimizar as taxas de sucesso de implementação.
+Este guia abrangente fornece scripts e procedimentos de validação pré-implantação para assegurar implantações bem-sucedidas com o Azure Developer CLI antes de estas começarem. Aprenda a implementar verificações automatizadas para autenticação, disponibilidade de recursos, quotas, conformidade de segurança e requisitos de desempenho para evitar falhas nas implantações e otimizar a taxa de sucesso das mesmas.
 
 ## Objetivos de Aprendizagem
 
-Ao concluir este guia, você irá:
-- Dominar técnicas e scripts automatizados de validação pré-implementação
+Ao concluir este guia, irá:
+- Dominar técnicas e scripts automatizados de validação pré-implantação
 - Compreender estratégias abrangentes de verificação para autenticação, permissões e quotas
-- Implementar procedimentos de validação de disponibilidade de recursos e capacidade
-- Configurar verificações de segurança e conformidade com políticas organizacionais
-- Conceber fluxos de trabalho de estimativa de custos e validação orçamental
-- Criar automatizações de verificações pré-implementação personalizadas para pipelines CI/CD
+- Implementar procedimentos de validação de disponibilidade e capacidade de recursos
+- Configurar verificações de segurança e conformidade para políticas organizacionais
+- Projetar fluxos de trabalho de estimativa de custos e validação de orçamento
+- Criar automação personalizada de verificações prévias para pipelines CI/CD
 
 ## Resultados de Aprendizagem
 
-Após a conclusão, você será capaz de:
-- Criar e executar scripts completos de validação pré-implementação
-- Conceber fluxos de verificação automatizados para diferentes cenários de implementação
-- Implementar procedimentos e políticas de validação específicos para cada ambiente
-- Configurar monitorização proativa e alertas para prontidão de implementação
-- Diagnosticar problemas pré-implementação e aplicar ações corretivas
-- Integrar verificações pré-implementação em pipelines DevOps e fluxos de trabalho de automação
+Após a conclusão, será capaz de:
+- Criar e executar scripts completos de validação prévia
+- Projetar fluxos de trabalho de verificação automatizados para diferentes cenários de implantação
+- Implementar procedimentos e políticas de validação específicas ao ambiente
+- Configurar monitorização proativa e alertas para prontidão de implantação
+- Diagnosticar problemas pré-implantação e implementar ações corretivas
+- Integrar verificações prévias em pipelines DevOps e fluxos de automação
 
 ## Índice
 
-- [Visão Geral](../../../../docs/chapter-06-pre-deployment)
-- [Script Pré-Implementação Automatizado](../../../../docs/chapter-06-pre-deployment)
-- [Lista de Verificação Manual](../../../../docs/chapter-06-pre-deployment)
-- [Validação do Ambiente](../../../../docs/chapter-06-pre-deployment)
-- [Validação de Recursos](../../../../docs/chapter-06-pre-deployment)
-- [Verificações de Segurança e Conformidade](../../../../docs/chapter-06-pre-deployment)
-- [Planeamento de Desempenho e Capacidade](../../../../docs/chapter-06-pre-deployment)
-- [Resolução de Problemas Comuns](../../../../docs/chapter-06-pre-deployment)
+- [Visão Geral](#visão-geral)
+- [Script Automático de Verificação Prévia](#script-automático-de-verificação-prévia)
+- [Lista de Verificação Manual](#codeblock1)
+- [Validação do Ambiente](#✅-backup-recuperação)
+- [Validação de Recursos](#validação-do-ambiente-de-produção)
+- [Verificações de Segurança & Conformidade](#security--compliance-checks)
+- [Planeamento de Desempenho & Capacidade](#performance--capacity-planning)
+- [Resolução de Problemas Comuns](#troubleshooting-common-issues)
 
 ---
 
 ## Visão Geral
 
-As verificações pré-implementação são validações essenciais efetuadas antes da implementação para garantir:
+As verificações prévias são validações essenciais realizadas antes de implantar para garantir:
 
 - **Disponibilidade de recursos** e quotas nas regiões alvo
-- **Autenticação e permissões** estão configuradas corretamente
+- **Autenticação e permissões** devidamente configuradas
 - **Validade dos templates** e correção dos parâmetros
 - **Conectividade de rede** e dependências
-- **Conformidade de segurança** com as políticas organizacionais
-- **Estimativa de custos** dentro das restrições orçamentais
+- **Conformidade de segurança** com políticas organizacionais
+- **Estimativa de custos** dentro dos limites orçamentais
 
-### Quando Executar as Verificações Pré-Implementação
+### Quando Executar as Verificações Prévias
 
-- **Antes da primeira implementação** para um novo ambiente
+- **Antes da primeira implantação** para um novo ambiente
 - **Após alterações significativas nos templates**
-- **Antes das implementações em produção**
-- **Ao alterar regiões do Azure**
-- **Como parte de pipelines CI/CD**
+- **Antes de implantações em produção**
+- **Ao mudar de regiões Azure**
+- **Como parte dos pipelines CI/CD**
 
 ---
 
-## Script Pré-Implementação Automatizado
+## Script Automático de Verificação Prévia
 
-### Verificador Pré-Implementação PowerShell
+### Verificador Prévio PowerShell
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -100,7 +100,7 @@ param(
     [switch]$Detailed
 )
 
-# Codificação de cores da saída
+# Codificação de cores para a saída
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -138,7 +138,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Verificar instalação da Azure CLI
+    # Verificar instalação do Azure CLI
     try {
         $azVersion = az version --output json | ConvertFrom-Json
         Write-Status "Azure CLI installed" "Success" "Version: $($azVersion.'azure-cli')"
@@ -173,7 +173,7 @@ function Test-Authentication {
             return $false
         }
         
-        # Verificar autenticação da Azure CLI
+        # Verificar autenticação do Azure CLI
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
@@ -194,7 +194,7 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # Obter atribuições de função do utilizador atual
+        # Obter atribuições de funções do utilizador atual
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
@@ -210,14 +210,14 @@ function Test-Permissions {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # Testar criação do grupo de recursos (se especificado)
+        # Testar criação de grupo de recursos (se especificado)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # Testar capacidade de criar um grupo de recursos
+                # Testar capacidade de criar grupo de recursos
                 try {
                     az group create --name "preflight-test-rg" --location $Location --output none
                     az group delete --name "preflight-test-rg" --yes --output none
@@ -326,7 +326,7 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # Verificar se o azure.yaml existe
+    # Verificar se azure.yaml existe
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
@@ -354,7 +354,7 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # Verificar existência de ficheiros de infraestrutura
+    # Verificar ficheiros de infraestrutura
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 NOVO: Testar pré-visualização da infraestrutura (simulação segura)
+    # 🧪 NOVO: Testar pré-visualização da infraestrutura (execução segura em modo dry-run)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -446,11 +446,11 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Estimativa básica de custos (seria necessária a Azure Pricing API para estimativas precisas)
+    # Estimativa básica de custos (seria necessária a API de Preços do Azure para estimativas precisas)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # Verificar se existe um orçamento
+    # Verificar se o orçamento existe
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -470,7 +470,7 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # Verificar práticas de segurança comuns
+    # Verificar práticas comuns de segurança
     try {
         # Verificar se o Key Vault está configurado
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # Verificar utilização de identidade gerida
+        # Verificar uso de identidade gerida
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -557,15 +557,15 @@ function Invoke-PreflightCheck {
     }
 }
 
-# Executar a verificação prévia
+# Executar o teste pré-voo
 Invoke-PreflightCheck
 ```
 
-### Verificador Pré-Implementação Bash
+### Verificador Prévio Bash
 
 ```bash
 #!/bin/bash
-# Versão em Bash das verificações prévias para sistemas Unix/Linux
+# Versão Bash das verificações prévias para sistemas Unix/Linux
 
 set -euo pipefail
 
@@ -665,7 +665,7 @@ check_template_validation() {
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
-        # Validação básica do YAML
+        # Validação básica de YAML
         if python3 -c "import yaml; yaml.safe_load(open('azure.yaml'))" 2>/dev/null; then
             print_status "azure.yaml parsing" "success"
         else
@@ -706,7 +706,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # Verificar se a localização é válida
+    # Verificar se o local é válido
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -798,63 +798,63 @@ main "$@"
 
 ## Lista de Verificação Manual
 
-### Lista de Verificação Pré-Implementação
+### Lista de Verificação Pré-Implantação
 
-Imprima esta lista de verificação e verifique cada item antes da implementação:
+Imprima esta lista e verifique cada item antes da implantação:
 
 #### ✅ Configuração do Ambiente
 - [ ] AZD CLI instalado e atualizado para a versão mais recente
 - [ ] Azure CLI instalado e autenticado
-- [ ] Assinatura Azure correta selecionada
-- [ ] O nome do ambiente é único e segue as convenções de nomenclatura
+- [ ] Subscrição Azure correta selecionada
+- [ ] Nome do ambiente é único e segue convenções de nomenclatura
 - [ ] Grupo de recursos alvo identificado ou pode ser criado
 
-#### ✅ Autenticação e Permissões
+#### ✅ Autenticação & Permissões
 - [ ] Autenticado com sucesso com `azd auth login`
-- [ ] O utilizador tem a função Contributor na subscrição/grupo de recursos alvo
-- [ ] Service principal configurado para CI/CD (se aplicável)
+- [ ] Usuário com função de Contribuidor na subscrição/grupo de recursos alvo
+- [ ] Principal de serviço configurado para CI/CD (se aplicável)
 - [ ] Sem certificados ou credenciais expiradas
 
-#### ✅ Validação de Templates
+#### ✅ Validação do Template
 - [ ] `azure.yaml` existe e é YAML válido
-- [ ] Todos os serviços definidos em azure.yaml têm código fonte correspondente
-- [ ] Templates Bicep no diretório `infra/` estão presentes
+- [ ] Todos os serviços definidos em azure.yaml têm código-fonte correspondente
+- [ ] Templates Bicep na diretoria `infra/` estão presentes
 - [ ] `main.bicep` compila sem erros (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 A pré-visualização da infraestrutura é executada com sucesso (`azd provision --preview`)
-- [ ] Todos os parâmetros obrigatórios têm valores por omissão ou serão fornecidos
-- [ ] Sem segredos codificados nos templates
+- [ ] 🧪 Previsão da infraestrutura executa com sucesso (`azd provision --preview`)
+- [ ] Todos os parâmetros necessários têm valores por defeito ou serão fornecidos
+- [ ] Sem segredos embutidos nos templates
 
 #### ✅ Planeamento de Recursos
 - [ ] Região Azure alvo selecionada e validada
 - [ ] Serviços Azure necessários disponíveis na região alvo
 - [ ] Quotas suficientes disponíveis para os recursos planeados
-- [ ] Conflitos de nomenclatura dos recursos verificados
+- [ ] Conflitos de nomes de recursos verificados
 - [ ] Dependências entre recursos compreendidas
 
-#### ✅ Rede e Segurança
-- [ ] Conectividade de rede aos endpoints Azure verificada
-- [ ] Definições de firewall/proxy configuradas se necessário
+#### ✅ Rede & Segurança
+- [ ] Conectividade de rede com endpoints Azure verificada
+- [ ] Configurações de firewall/proxy definidas, se necessário
 - [ ] Key Vault configurado para gestão de segredos
-- [ ] Identidades geridas utilizadas onde possível
-- [ ] Forçar HTTPS ativado para aplicações web
+- [ ] Identidades geridas usadas onde aplicável
+- [ ] Aplicação de HTTPS ativada para aplicações web
 
 #### ✅ Gestão de Custos
-- [ ] Estimativas de custo calculadas usando o Azure Pricing Calculator
-- [ ] Alertas orçamentais configurados se necessário
+- [ ] Estimativas de custo calculadas com Azure Pricing Calculator
+- [ ] Alertas de orçamento configurados, se necessário
 - [ ] SKUs apropriados selecionados para o tipo de ambiente
-- [ ] Capacidade reservada considerada para cargas de trabalho de produção
+- [ ] Capacidade reservada considerada para cargas de trabalho em produção
 
-#### ✅ Monitorização e Observabilidade
+#### ✅ Monitorização & Observabilidade
 - [ ] Application Insights configurado nos templates
 - [ ] Espaço de trabalho Log Analytics planeado
 - [ ] Regras de alerta definidas para métricas críticas
-- [ ] Endpoints de verificação de integridade implementados nas aplicações
+- [ ] Endpoints de verificação de estado implementados nas aplicações
 
-#### ✅ Backup e Recuperação
+#### ✅ Backup & Recuperação
 - [ ] Estratégia de backup definida para recursos de dados
 - [ ] Objetivos de tempo de recuperação (RTO) documentados
 - [ ] Objetivos de ponto de recuperação (RPO) documentados
-- [ ] Plano de recuperação de desastre em vigor para produção
+- [ ] Plano de recuperação de desastres implementado para produção
 
 ---
 
@@ -869,7 +869,7 @@ Imprima esta lista de verificação e verifique cada item antes da implementaç�
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # Verificar configurações favoráveis ao desenvolvimento
+    # Verificar configurações adequadas para desenvolvimento
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
@@ -908,14 +908,14 @@ validate_prod_environment() {
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # Verificar configurações de cópias de segurança
+    # Verificar configurações de backup
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # Validar a configuração de monitorização
+    # Validar configuração de monitorização
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
@@ -990,7 +990,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # Obter as contas de armazenamento na assinatura
+    # Obter contas de armazenamento na subscrição
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -998,7 +998,7 @@ def check_storage_limits(location: str) -> bool:
         return False
     
     account_count = len(accounts)
-    max_accounts = 250  # Limite predefinido do Azure
+    max_accounts = 250  # Limite padrão do Azure
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1043,7 +1043,7 @@ def main():
     all_passed &= check_storage_limits(location)
     all_passed &= check_network_limits(location)
     
-    # Resumo
+    # Sumário
     print(f"\n=== Quota Check Summary ===")
     if all_passed:
         print("✅ All quota checks passed - sufficient capacity available")
@@ -1058,7 +1058,7 @@ if __name__ == "__main__":
 
 ---
 
-## Verificações de Segurança e Conformidade
+## Verificações de Segurança & Conformidade
 
 ### Script de Validação de Segurança
 
@@ -1071,7 +1071,7 @@ check_security_practices() {
     
     local issues_found=0
     
-    # Verificar a utilização do Key Vault
+    # Verificar o uso do Key Vault
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1079,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Verificar a utilização de identidades geridas
+    # Verificar o uso de identidade gerida
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Verificar se o HTTPS é obrigatório
+    # Verificar a aplicação obrigatória de HTTPS
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1095,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Verificar a versão mínima do TLS
+    # Verificar a versão mínima de TLS
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1103,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Verificar restrições ao acesso público
+    # Verificar restrições de acesso público
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1124,14 +1124,14 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # Verificar encriptação de dados
+    # Verificar a encriptação de dados
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # Verificar o registo de auditoria
+    # Verificar registos de auditoria
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
@@ -1290,58 +1290,58 @@ steps:
 
 ---
 
-## Resumo das Boas Práticas
+## Resumo das Melhores Práticas
 
-### ✅ Melhores Práticas para Verificações Pré-Implementação
+### ✅ Melhores Práticas para Verificações Prévias
 
-1. **Automatizar Onde Possível**
-   - Integrar as verificações nos pipelines CI/CD
+1. **Automatizar Sempre que Possível**
+   - Integrar verificações nos pipelines CI/CD
    - Usar scripts para validações repetíveis
-   - Armazenar resultados para registos de auditoria
+   - Armazenar resultados para auditorias
 
-2. **Validação Específica por Ambiente**
-   - Verificações diferentes para dev/staging/prod
-   - Requisitos de segurança apropriados por ambiente
+2. **Validação Específica de Ambiente**
+   - Diferentes verificações para dev/staging/prod
+   - Requisitos de segurança adequados por ambiente
    - Otimização de custos para ambientes não produtivos
 
 3. **Cobertura Abrangente**
    - Autenticação e permissões
    - Quotas e disponibilidade de recursos
-   - Validação de templates e sintaxe
+   - Validação e sintaxe dos templates
    - Requisitos de segurança e conformidade
 
 4. **Relatórios Claros**
-   - Indicadores de estado codificados por cor
-   - Mensagens de erro detalhadas com passos de remediação
+   - Indicadores de estado com código de cores
+   - Mensagens de erro detalhadas com passos de correção
    - Relatórios sumários para avaliação rápida
 
 5. **Falhar Rápido**
-   - Interromper a implementação se verificações críticas falharem
-   - Fornecer orientação clara para resolução
-   - Permitir fácil reexecução das verificações
+   - Parar a implantação se verificações críticas falharem
+   - Fornecer orientações claras para resolução
+   - Permitir reexecução fácil das verificações
 
-### Principais Armadilhas Pré-Implementação Comuns
+### Armadilhas Comuns nas Verificações Prévias
 
-1. **Saltar a validação** para implementações "rápidas"
-2. **Verificação de permissões insuficiente** antes da implementação
-3. **Ignorar limites de quota** até a implementação falhar
-4. **Não validar templates** nos pipelines CI/CD
-5. **Falta de validação de segurança** para ambientes de produção
-6. **Estimativa de custos inadequada** levando a surpresas orçamentais
+1. **Pular validação** para implantações "rápidas"
+2. **Verificação insuficiente de permissões** antes da implantação
+3. **Ignorar limites de quota** até que a implantação falhe
+4. **Não validar templates** em pipelines CI/CD
+5. **Falta de validação de segurança** em ambientes de produção
+6. **Estimativa de custos inadequada** que causa surpresas no orçamento
 
 ---
 
-**Dica Pro**: Execute as verificações pré-implementação como um trabalho separado no seu pipeline CI/CD antes do trabalho de implementação real. Isto permite detetar problemas cedo e fornece feedback mais rápido aos desenvolvedores.
+**Dica Profissional**: Execute as verificações prévias como um trabalho separado no seu pipeline CI/CD antes do trabalho real de implantação. Isto permite detetar problemas cedo e oferece feedback mais rápido aos desenvolvedores.
 
 ---
 
 **Navegação**
 - **Lição Anterior**: [Seleção de SKU](sku-selection.md)
-- **Próxima Lição**: [Folha de Consulta](../../resources/cheat-sheet.md)
+- **Lição Seguinte**: [Resumo Rápido](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Isenção de responsabilidade:
-Este documento foi traduzido utilizando o serviço de tradução automática [Co-op Translator](https://github.com/Azure/co-op-translator). Apesar de nos esforçarmos por garantir a precisão, por favor, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original no seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se uma tradução humana profissional. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações erradas decorrentes da utilização desta tradução.
+**Aviso Legal**:  
+Este documento foi traduzido utilizando o serviço de tradução automática [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos por garantir a precisão, tenha em atenção que as traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte oficial. Para informações críticas, recomenda-se a tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações erradas resultantes da utilização desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

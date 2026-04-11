@@ -1,74 +1,74 @@
-# Configuration Guide
+# Οδηγός Διαμόρφωσης
 
 **Πλοήγηση Κεφαλαίου:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Κεφάλαιο 3 - Ρύθμιση & Πιστοποίηση
-- **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
+- **📚 Αρχική Σελίδα Μαθήματος**: [AZD For Beginners](../../README.md)
+- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 3 - Διαμόρφωση & Αυθεντικοποίηση
+- **⬅️ Προηγούμενο**: [Το Πρώτο σας Έργο](first-project.md)
+- **➡️ Επόμενο**: [Οδηγός Ανάπτυξης](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 Επόμενο Κεφάλαιο**: [Κεφάλαιο 4: Υποδομή ως Κώδικας](../chapter-04-infrastructure/deployment-guide.md)
 
-## Introduction
+## Εισαγωγή
 
-Αυτός ο ολοκληρωμένος οδηγός καλύπτει όλες τις πτυχές της διαμόρφωσης του Azure Developer CLI για βέλτιστες ροές ανάπτυξης και ανάπτυξης. Θα μάθετε για την ιεραρχία ρυθμίσεων, τη διαχείριση περιβαλλόντων, μεθόδους πιστοποίησης και προηγμένα μοτίβα διαμόρφωσης που επιτρέπουν αποδοτικές και ασφαλείς αναπτύξεις στο Azure.
+Αυτός ο ολοκληρωμένος οδηγός καλύπτει όλες τις πτυχές της διαμόρφωσης του Azure Developer CLI για βέλτιστα ροή εργασίας ανάπτυξης και ανάπτυξης. Θα μάθετε για την ιεραρχία διαμόρφωσης, τη διαχείριση περιβαλλόντων, τις μεθόδους αυθεντικοποίησης και πρότυπα προχωρημένης διαμόρφωσης που επιτρέπουν αποδοτικές και ασφαλείς αναπτύξεις στο Azure.
 
-## Learning Goals
+## Στόχοι Μάθησης
 
 Στο τέλος αυτού του μαθήματος, θα:
-- Κατακτήσετε την ιεραρχία διαμόρφωσης του azd και θα καταλάβετε πώς προτεραιοποιούνται οι ρυθμίσεις
-- Διαμορφώσετε παγκόσμιες και ειδικές για το έργο ρυθμίσεις αποτελεσματικά
+- Κατακτήσετε την ιεραρχία ρυθμίσεων του azd και θα κατανοήσετε πώς προτεραιοποιούνται οι ρυθμίσεις
+- Διαμορφώσετε αποτελεσματικά παγκόσμιες και ειδικές για έργο ρυθμίσεις
 - Διαχειριστείτε πολλαπλά περιβάλλοντα με διαφορετικές ρυθμίσεις
-- Εφαρμόσετε ασφαλή μοτίβα πιστοποίησης και εξουσιοδότησης
-- Κατανοήσετε προηγμένα μοτίβα διαμόρφωσης για σύνθετα σενάρια
+- Εφαρμόσετε ασφαλή πρότυπα αυθεντικοποίησης και εξουσιοδότησης
+- Κατανοήσετε προχωρημένα πρότυπα διαμόρφωσης για πολύπλοκα σενάρια
 
-## Learning Outcomes
+## Μαθησιακά Αποτελέσματα
 
-Μετά την ολοκλήρωση αυτού του μαθήματος, θα μπορείτε να:
+Αφού ολοκληρώσετε αυτό το μάθημα, θα μπορείτε να:
 - Διαμορφώσετε το azd για βέλτιστες ροές εργασίας ανάπτυξης
 - Ρυθμίσετε και διαχειριστείτε πολλαπλά περιβάλλοντα ανάπτυξης
-- Εφαρμόσετε πρακτικές ασφαλούς διαχείρισης ρυθμίσεων
-- Αντιμετωπίσετε προβλήματα σχετιζόμενα με τη διαμόρφωση
-- Προσαρμόσετε τη συμπεριφορά του azd για συγκεκριμένες οργανωτικές απαιτήσεις
+- Εφαρμόσετε ασφαλείς πρακτικές διαχείρισης διαμόρφωσης
+- Εντοπίσετε και επιλύσετε προβλήματα σχετιζόμενα με τη διαμόρφωση
+- Προσαρμόσετε τη συμπεριφορά του azd σε συγκεκριμένες οργανωτικές απαιτήσεις
 
-Αυτός ο ολοκληρωμένος οδηγός καλύπτει όλες τις πτυχές της διαμόρφωσης του Azure Developer CLI για βέλτιστες ροές ανάπτυξης και ανάπτυξης.
+Αυτός ο ολοκληρωμένος οδηγός καλύπτει όλες τις πτυχές της διαμόρφωσης του Azure Developer CLI για βέλτιστα ροή εργασίας ανάπτυξης και ανάπτυξης.
 
-## Understanding AI Agents in an azd Project
+## Κατανόηση των Πρακτόρων AI σε ένα έργο azd
 
-Αν είστε νέοι στους πράκτορες AI, εδώ είναι ένας απλός τρόπος να τους σκεφτείτε μέσα στον κόσμο του azd.
+Αν είστε νέοι στους πράκτορες AI, εδώ είναι ένας απλός τρόπος να σκεφτείτε για αυτούς μέσα στον κόσμο του azd.
 
-### What Is an Agent?
+### Τι είναι ένας πράκτορας;
 
-Ένας πράκτορας είναι ένα κομμάτι λογισμικού που μπορεί να λάβει ένα αίτημα, να συλλογιστεί πάνω σε αυτό και να λάβει δράσεις—συχνά καλώντας ένα μοντέλο AI, αναζητώντας δεδομένα, ή επικαλούμενο άλλες υπηρεσίες. Σε ένα έργο azd, ένας πράκτορας είναι απλώς μια άλλη **υπηρεσία** δίπλα στο frontend του ιστού ή στο backend του API σας.
+Ένας πράκτορας είναι ένα κομμάτι λογισμικού που μπορεί να λάβει ένα αίτημα, να σκεφτεί πάνω σε αυτό και να αναλάβει ενέργειες—συχνά καλώντας ένα μοντέλο AI, αναζητώντας δεδομένα ή επικαλούμενο άλλες υπηρεσίες. Σε ένα έργο azd, ένας πράκτορας είναι απλώς άλλη μια **υπηρεσία** παράλληλα με το web frontend ή το API backend σας.
 
-### How Agents Fit Into the azd Project Structure
+### Πώς εντάσσονται οι πράκτορες στη δομή έργου azd
 
-Ένα έργο azd αποτελείται από τρία επίπεδα: **infrastructure**, **code**, και **configuration**. Οι πράκτορες εντάσσονται σε αυτά τα επίπεδα με τον ίδιο τρόπο που το κάνει οποιαδήποτε άλλη υπηρεσία:
+Ένα έργο azd αποτελείται από τρία επίπεδα: **υποδομή**, **κώδικας** και **διαμόρφωση**. Οι πράκτορες ενσωματώνονται σε αυτά τα επίπεδα με τον ίδιο τρόπο που οποιαδήποτε άλλη υπηρεσία το κάνει:
 
 | Layer | What It Does for a Traditional App | What It Does for an Agent |
 |-------|-------------------------------------|---------------------------|
-| **Infrastructure** (`infra/`) | Παρέχει μια web εφαρμογή και βάση δεδομένων | Παρέχει ένα endpoint μοντέλου AI, έναν δείκτη αναζήτησης, ή έναν host για τον πράκτορα |
-| **Code** (`src/`) | Περιέχει τον κώδικα του frontend και του API σας | Περιέχει τη λογική του πράκτορα και τους ορισμούς προτροπών (prompts) |
-| **Configuration** (`azure.yaml`) | Καταχωρεί τις υπηρεσίες σας και τους στόχους φιλοξενίας τους | Καταχωρεί τον πράκτορα ως υπηρεσία, δείχνοντας στον κώδικά του και τον host του |
+| **Infrastructure** (`infra/`) | Παρέχει μια web εφαρμογή και βάση δεδομένων | Παρέχει ένα endpoint μοντέλου AI, ευρετήριο αναζήτησης ή περιβάλλον φιλοξενίας πράκτορα |
+| **Code** (`src/`) | Περιέχει τον κώδικα πηγής του frontend και του API | Περιέχει τη λογική του πράκτορα και τους ορισμούς προτροπών |
+| **Configuration** (`azure.yaml`) | Καταγράφει τις υπηρεσίες σας και τους στόχους φιλοξενίας τους | Καταγράφει τον πράκτορα ως υπηρεσία, δείχνοντας στον κώδικα και στο περιβάλλον φιλοξενίας του |
 
-### The Role of `azure.yaml`
+### Ο ρόλος του `azure.yaml`
 
-Δεν χρειάζεται να απομνημονεύσετε τη σύνταξη αυτή τη στιγμή. Εννοιολογικά, το `azure.yaml` είναι το αρχείο όπου λέτε στο azd: *"Εδώ είναι οι υπηρεσίες που αποτελούν την εφαρμογή μου, και εδώ είναι που θα βρείτε τον κώδικά τους."*
+Δεν χρειάζεται να αποστηθίσετε τη σύνταξη τώρα. Εννοιολογικά, το `azure.yaml` είναι το αρχείο όπου λέτε στο azd: *"Εδώ είναι οι υπηρεσίες που αποτελούν την εφαρμογή μου, και εδώ θα βρείτε πού βρίσκεται ο κώδικάς τους."*
 
-Όταν το έργο σας περιλαμβάνει έναν πράκτορα AI, το `azure.yaml` απλώς καταχωρεί αυτόν τον πράκτορα ως μία από τις υπηρεσίες. Το azd στη συνέχεια γνωρίζει να προμηθεύσει την κατάλληλη υποδομή (όπως ένα Microsoft Foundry Models endpoint ή ένα Container App για τη φιλοξενία του πράκτορα) και να αναπτύξει τον κώδικα του πράκτορα—όπως θα έκανε για μια web εφαρμογή ή API.
+Όταν το έργο σας περιλαμβάνει έναν πράκτορα AI, το `azure.yaml` απλώς καταγράφει αυτόν τον πράκτορα ως μία από τις υπηρεσίες. Το azd γνωρίζει τότε να προμηθεύσει τη σωστή υποδομή (όπως ένα Microsoft Foundry Models endpoint ή ένα Container App για να φιλοξενήσει τον πράκτορα) και να αναπτύξει τον κώδικα του πράκτορα—όπως θα έκανε και για μια web εφαρμογή ή ένα API.
 
-Αυτό σημαίνει ότι δεν υπάρχει κάτι ριζικά νέο να μάθετε. Αν καταλαβαίνετε πώς το azd διαχειρίζεται μια web υπηρεσία, ήδη καταλαβαίνετε πώς διαχειρίζεται έναν πράκτορα.
+Αυτό σημαίνει ότι δεν υπάρχει κάτι θεμελιωδώς καινούργιο να μάθετε. Αν κατανοείτε πώς το azd διαχειρίζεται μια web υπηρεσία, ήδη καταλαβαίνετε πώς διαχειρίζεται έναν πράκτορα.
 
-## Configuration Hierarchy
+## Ιεραρχία Διαμόρφωσης
 
 Το azd χρησιμοποιεί ένα ιεραρχικό σύστημα διαμόρφωσης:
-1. **Command-line flags** (υψηλότερη προτεραιότητα)
-2. **Environment variables**
-3. **Local project configuration** (`.azd/config.json`)
-4. **Global user configuration** (`~/.azd/config.json`)
-5. **Default values** (χαμηλότερη προτεραιότητα)
+1. **Σημαίες γραμμής εντολών** (υψηλότερη προτεραιότητα)
+2. **Μεταβλητές περιβάλλοντος**
+3. **Τοπική διαμόρφωση έργου** (`.azd/config.json`)
+4. **Παγκόσμια διαμόρφωση χρήστη** (`~/.azd/config.json`)
+5. **Προεπιλεγμένες τιμές** (χαμηλότερη προτεραιότητα)
 
-## Global Configuration
+## Παγκόσμια Διαμόρφωση
 
-### Setting Global Defaults
+### Ορισμός Παγκόσμιων Προεπιλογών
 ```bash
 # Ορισμός προεπιλεγμένης συνδρομής
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -76,24 +76,24 @@ azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 # Ορισμός προεπιλεγμένης τοποθεσίας
 azd config set defaults.location "eastus2"
 
-# Ορισμός προεπιλεγμένης σύμβασης ονοματοδοσίας ομάδας πόρων
+# Ορισμός προεπιλεγμένου κανόνα ονομασίας για ομάδες πόρων
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
 # Προβολή όλων των παγκόσμιων ρυθμίσεων
-azd config list
+azd config show
 
-# Κατάργηση μιας διαμόρφωσης
+# Κατάργηση ρύθμισης
 azd config unset defaults.location
 ```
 
-### Common Global Settings
+### Συνηθισμένες Παγκόσμιες Ρυθμίσεις
 ```bash
 # Προτιμήσεις ανάπτυξης
-azd config set alpha.enable true                    # Ενεργοποίηση alpha λειτουργιών
+azd config set alpha.enable true                    # Ενεργοποίηση λειτουργιών alpha
 azd config set telemetry.enabled false             # Απενεργοποίηση τηλεμετρίας
 azd config set output.format json                  # Ορισμός μορφής εξόδου
 
-# Ρυθμίσεις ασφάλειας
+# Ρυθμίσεις ασφαλείας
 azd config set auth.useAzureCliCredential true     # Χρήση Azure CLI για έλεγχο ταυτότητας
 azd config set tls.insecure false                  # Επιβολή επαλήθευσης TLS
 
@@ -102,10 +102,10 @@ azd config set provision.parallelism 5             # Παράλληλη δημι
 azd config set deploy.timeout 30m                  # Χρονικό όριο ανάπτυξης
 ```
 
-## 🏗️ Project Configuration
+## 🏗️ Διαμόρφωση Έργου
 
-### azure.yaml Structure
-Το αρχείο `azure.yaml` είναι η καρδιά του έργου azd:
+### Δομή του `azure.yaml`
+Το αρχείο `azure.yaml` είναι η καρδιά του έργου azd σας:
 
 ```yaml
 # Minimum configuration
@@ -181,9 +181,9 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Service Configuration Options
+### Επιλογές Διαμόρφωσης Υπηρεσίας
 
-#### Host Types
+#### Τύποι Φιλοξενίας
 ```yaml
 services:
   web-static:
@@ -202,7 +202,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Language-Specific Settings
+#### Ρυθμίσεις ανά Γλώσσα
 ```yaml
 services:
   node-app:
@@ -226,22 +226,22 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 Environment Management
+## 🌟 Διαχείριση Περιβάλλοντος
 
-### Creating Environments
+### Δημιουργία Περιβαλλόντων
 ```bash
 # Δημιουργήστε ένα νέο περιβάλλον
 azd env new development
 
-# Δημιουργήστε με συγκεκριμένη τοποθεσία
+# Δημιουργήστε σε συγκεκριμένη τοποθεσία
 azd env new staging --location "westus2"
 
 # Δημιουργήστε από πρότυπο
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Environment Configuration
-Κάθε περιβάλλον έχει τη δική του διαμόρφωση σε `.azure/<env-name>/config.json`:
+### Διαμόρφωση Περιβάλλοντος
+Κάθε περιβάλλον έχει τη δική του διαμόρφωση στο `.azure/<env-name>/config.json`:
 
 ```json
 {
@@ -263,9 +263,9 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 }
 ```
 
-### Environment Variables
+### Μεταβλητές Περιβάλλοντος
 ```bash
-# Ορισμός μεταβλητών ανά περιβάλλον
+# Ορισμός μεταβλητών ειδικών για το περιβάλλον
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
@@ -278,16 +278,16 @@ azd env get-values
 # API_KEY=secret-api-key
 # DEBUG=true
 
-# Αφαίρεση μεταβλητής περιβάλλοντος
+# Κατάργηση μεταβλητής περιβάλλοντος
 azd env unset DEBUG
 
 # Επαλήθευση αφαίρεσης
 azd env get-values | grep DEBUG
-# (δεν θα πρέπει να επιστρέφει τίποτα)
+# (δεν θα πρέπει να επιστρέψει τίποτα)
 ```
 
-### Environment Templates
-Δημιουργήστε `.azure/env.template` για συνεπή ρύθμιση περιβάλλοντος:
+### Πρότυπα Περιβάλλοντος
+Δημιουργήστε το `.azure/env.template` για συνεπή ρύθμιση περιβάλλοντος:
 ```bash
 # Απαιτούμενες μεταβλητές
 AZURE_SUBSCRIPTION_ID=
@@ -303,22 +303,22 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 Authentication Configuration
+## 🔐 Διαμόρφωση Αυθεντικοποίησης
 
-### Azure CLI Integration
+### Ενσωμάτωση Azure CLI
 ```bash
-# Χρήση διαπιστευτηρίων Azure CLI (προεπιλεγμένα)
+# Χρησιμοποιήστε τα διαπιστευτήρια του Azure CLI (προεπιλεγμένα)
 azd config set auth.useAzureCliCredential true
 
-# Σύνδεση με συγκεκριμένο tenant
+# Συνδεθείτε με συγκεκριμένο tenant
 az login --tenant <tenant-id>
 
-# Ορισμός προεπιλεγμένης συνδρομής
+# Ορίστε την προεπιλεγμένη συνδρομή
 az account set --subscription <subscription-id>
 ```
 
-### Service Principal Authentication
-Για CI/CD pipelines:
+### Αυθεντικοποίηση μέσω Service Principal
+Για pipelines CI/CD:
 ```bash
 # Ορίστε μεταβλητές περιβάλλοντος
 export AZURE_CLIENT_ID="your-client-id"
@@ -330,18 +330,18 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Managed Identity
+### Διαχειριζόμενη Ταυτότητα
 Για περιβάλλοντα που φιλοξενούνται στο Azure:
 ```bash
-# Ενεργοποίηση ελέγχου ταυτότητας με διαχειριζόμενη ταυτότητα
+# Ενεργοποιήστε την πιστοποίηση μέσω διαχειριζόμενης ταυτότητας
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ Infrastructure Configuration
+## 🏗️ Διαμόρφωση Υποδομής
 
-### Bicep Parameters
-Ρυθμίστε παραμέτρους υποδομής στο `infra/main.parameters.json`:
+### Παράμετροι Bicep
+Διαμορφώστε τις παραμέτρους υποδομής στο `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -363,8 +363,8 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 }
 ```
 
-### Terraform Configuration
-Για έργα Terraform, ρυθμίστε στο `infra/terraform.tfvars`:
+### Διαμόρφωση Terraform
+Για έργα Terraform, διαμορφώστε στο `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -372,9 +372,9 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Deployment Configuration
+## 🚀 Διαμόρφωση Ανάπτυξης
 
-### Build Configuration
+### Διαμόρφωση Build
 ```yaml
 # In azure.yaml
 services:
@@ -397,7 +397,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Docker Configuration
+### Διαμόρφωση Docker
 ```yaml
 services:
   api:
@@ -411,19 +411,19 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
-Example `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+Παράδειγμα `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 Advanced Configuration
+## 🔧 Προχωρημένη Διαμόρφωση
 
-### Custom Resource Naming
+### Προσαρμοσμένη Ονοματοδοσία Πόρων
 ```bash
-# Ορισμός συμβάσεων ονομασίας
+# Ορίστε τις συμβάσεις ονοματοδοσίας
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### Network Configuration
+### Διαμόρφωση Δικτύου
 ```yaml
 # In azure.yaml
 infra:
@@ -434,7 +434,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Monitoring Configuration
+### Διαμόρφωση Παρακολούθησης
 ```yaml
 # In azure.yaml
 monitoring:
@@ -446,18 +446,18 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Environment-Specific Configurations
+## 🎯 Διαμορφώσεις Ειδικές για Περιβάλλον
 
-### Development Environment
+### Περιβάλλον Ανάπτυξης
 ```bash
-# .azure/ανάπτυξη/.env
+# .azure/development/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Staging Environment
+### Περιβάλλον Staging
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -466,7 +466,7 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### Production Environment
+### Περιβάλλον Παραγωγής
 ```bash
 # .azure/παραγωγή/.env
 DEBUG=false
@@ -475,11 +475,11 @@ ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Configuration Validation
+## 🔍 Επικύρωση Διαμόρφωσης
 
-### Validate Configuration
+### Επικύρωση Διαμόρφωσης
 ```bash
-# Ελέγξτε τη σύνταξη διαμόρφωσης
+# Ελέγξτε τη σύνταξη της διαμόρφωσης
 azd config validate
 
 # Δοκιμάστε τις μεταβλητές περιβάλλοντος
@@ -489,8 +489,8 @@ azd env get-values
 azd provision --dry-run
 ```
 
-### Configuration Scripts
-Δημιουργήστε σενάρια επικύρωσης στο `scripts/`:
+### Σενάρια Διαμόρφωσης
+Δημιουργήστε σκριπτά επικύρωσης στο `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -504,7 +504,7 @@ if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   exit 1
 fi
 
-# Επαληθεύστε τη σύνταξη του azure.yaml
+# Επικυρώστε τη σύνταξη του azure.yaml
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -513,9 +513,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Best Practices
+## 🎓 Καλές Πρακτικές
 
-### 1. Use Environment Variables
+### 1. Χρησιμοποιήστε Μεταβλητές Περιβάλλοντος
 ```yaml
 # Good: Use environment variables
 database:
@@ -526,7 +526,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organize Configuration Files
+### 2. Οργανώστε τα Αρχεία Διαμόρφωσης
 ```
 .azure/
 ├── config.json              # Global project config
@@ -542,7 +542,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Version Control Considerations
+### 3. Θέματα για τον Έλεγχο Εκδόσεων
 ```bash
 # .gitignore
 .azure/*/config.json         # Ρυθμίσεις περιβάλλοντος (περιέχουν αναγνωριστικά πόρων)
@@ -550,7 +550,7 @@ database:
 .env                        # Τοπικό αρχείο περιβάλλοντος
 ```
 
-### 4. Configuration Documentation
+### 4. Τεκμηρίωση Διαμόρφωσης
 Τεκμηριώστε τη διαμόρφωσή σας στο `CONFIG.md`:
 ```markdown
 # Configuration Guide
@@ -566,11 +566,11 @@ database:
 - Production: Uses production database, error logging only
 ```
 
-## 🎯 Hands-On Practice Exercises
+## 🎯 Πρακτικές Ασκήσεις
 
-### Exercise 1: Multi-Environment Configuration (15 minutes)
+### Άσκηση 1: Διαμόρφωση Πολυ-Περιβάλλοντος (15 λεπτά)
 
-**Goal**: Create and configure three environments with different settings
+**Στόχος**: Δημιουργήστε και διαμορφώστε τρία περιβάλλοντα με διαφορετικές ρυθμίσεις
 
 ```bash
 # Δημιουργήστε περιβάλλον ανάπτυξης
@@ -579,7 +579,7 @@ azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# Δημιουργήστε περιβάλλον προπαραγωγής
+# Δημιουργήστε περιβάλλον δοκιμών
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
@@ -597,18 +597,18 @@ azd env select staging && azd env get-values
 azd env select production && azd env get-values
 ```
 
-**Success Criteria:**
+**Κριτήρια Επιτυχίας:**
 - [ ] Δημιουργήθηκαν επιτυχώς τρία περιβάλλοντα
 - [ ] Κάθε περιβάλλον έχει μοναδική διαμόρφωση
-- [ ] Μπορείτε να αλλάζετε μεταξύ περιβαλλόντων χωρίς σφάλματα
-- [ ] `azd env list` εμφανίζει και τα τρία περιβάλλοντα
+- [ ] Μπορείτε να εναλλάσσετε μεταξύ των περιβαλλόντων χωρίς σφάλματα
+- [ ] Η εντολή `azd env list` εμφανίζει και τα τρία περιβάλλοντα
 
-### Exercise 2: Secret Management (10 minutes)
+### Άσκηση 2: Διαχείριση Μυστικών (10 λεπτά)
 
-**Goal**: Practice secure configuration with sensitive data
+**Στόχος**: Εξασκηθείτε σε ασφαλή διαμόρφωση με ευαίσθητα δεδομένα
 
 ```bash
-# Ορίστε τα μυστικά (δεν εμφανίζονται στην έξοδο)
+# Ορίστε μυστικά (δεν εμφανίζονται στην έξοδο)
 azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 
@@ -616,42 +616,42 @@ azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# Προβολή περιβάλλοντος (τα μυστικά θα πρέπει να αποκρύπτονται)
+# Δείτε το περιβάλλον (τα μυστικά πρέπει να αποκρύπτονται)
 azd env get-values
 
 # Επαληθεύστε ότι τα μυστικά αποθηκεύονται
 azd env get DB_PASSWORD  # Πρέπει να εμφανίζει την πραγματική τιμή
 ```
 
-**Success Criteria:**
+**Κριτήρια Επιτυχίας:**
 - [ ] Τα μυστικά αποθηκεύτηκαν χωρίς εμφάνιση στο τερματικό
-- [ ] `azd env get-values` εμφανίζει αποκρυπτογραφημένα μυστικά
-- [ ] Μεμονωμένο `azd env get <SECRET_NAME>` επιστρέφει την πραγματική τιμή
+- [ ] Η εντολή `azd env get-values` εμφανίζει τα μυστικά με απόκρυψη
+- [ ] Η εντολή `azd env get <SECRET_NAME>` ανακτά την πραγματική τιμή
 
-## Next Steps
+## Επόμενα Βήματα
 
-- [Your First Project](first-project.md) - Εφαρμόστε τη διαμόρφωση στην πράξη
-- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Χρησιμοποιήστε τη διαμόρφωση για ανάπτυξη
-- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Διαμορφώσεις παραγωγής έτοιμες
+- [Το Πρώτο σας Έργο](first-project.md) - Εφαρμόστε τη διαμόρφωση στην πράξη
+- [Οδηγός Ανάπτυξης](../chapter-04-infrastructure/deployment-guide.md) - Χρησιμοποιήστε τη διαμόρφωση για ανάπτυξη
+- [Προμήθεια Πόρων](../chapter-04-infrastructure/provisioning.md) - Διαμορφώσεις έτοιμες για παραγωγή
 
-## References
+## Αναφορές
 
-- [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Environment Variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [Αναφορά Διαμόρφωσης azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Σχήμα azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [Μεταβλητές Περιβάλλοντος](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
 **Πλοήγηση Κεφαλαίου:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Κεφάλαιο 3 - Ρύθμιση & Πιστοποίηση
-- **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
-- **Next Lesson**: [Your First Project](first-project.md)
+- **📚 Αρχική Σελίδα Μαθήματος**: [AZD For Beginners](../../README.md)
+- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 3 - Διαμόρφωση & Αυθεντικοποίηση
+- **⬅️ Προηγούμενο**: [Το Πρώτο σας Έργο](first-project.md)
+- **➡️ Επόμενο Κεφάλαιο**: [Κεφάλαιο 4: Υποδομή ως Κώδικας](../chapter-04-infrastructure/deployment-guide.md)
+- **Επόμενο Μάθημα**: [Το Πρώτο σας Έργο](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Αποποίηση ευθυνών:
-Το παρόν έγγραφο έχει μεταφραστεί με τη χρήση της υπηρεσίας μετάφρασης τεχνητής νοημοσύνης [Co-op Translator](https://github.com/Azure/co-op-translator). Παρότι καταβάλλουμε προσπάθειες για την ακρίβεια, παρακαλείστε να λάβετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στη γλώσσα του πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες συνιστάται η ανάθεση της μετάφρασης σε επαγγελματία μεταφραστή. Δεν φέρουμε ευθύνη για οποιεσδήποτε παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+**Αποποίηση ευθύνης**:
+Το παρόν έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Παρά τις προσπάθειές μας για ακρίβεια, παρακαλείστε να λάβετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στην αρχική του γλώσσα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

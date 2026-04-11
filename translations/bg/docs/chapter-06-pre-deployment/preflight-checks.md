@@ -1,73 +1,73 @@
-# Проверки преди внедряване за AZD внедрявания
+# Проверки преди полет за разгръщания с AZD
 
-**Навигация в главата:**
+**Навигация на главата:**
 - **📚 Начало на курса**: [AZD за начинаещи](../../README.md)
-- **📖 Текуща глава**: Глава 6 - Валидация и планиране преди внедряване
+- **📖 Текуща глава**: Глава 6 - Проверка и планиране преди разгръщане
 - **⬅️ Предишна**: [Избор на SKU](sku-selection.md)
-- **➡️ Следваща глава**: [Глава 7: Отстраняване на неизправности](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 Свързано**: [Глава 4: Ръководство за внедряване](../chapter-04-infrastructure/deployment-guide.md)
+- **➡️ Следваща глава**: [Глава 7: Отстраняване на проблеми](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 Свързано**: [Глава 4: Ръководство за разгръщане](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Въведение
 
-Това изчерпателно ръководство предоставя скриптове и процедури за валидация преди внедряване, за да осигури успешни внедрявания с Azure Developer CLI преди те да започнат. Научете как да внедрите автоматизирани проверки за удостоверяване, наличност на ресурси, квоти, съответствие със сигурността и изисквания за производителност, за да предотвратите неуспехи при внедряване и да оптимизирате процента на успешни внедрявания.
+Този обширен наръчник предоставя скриптове и процедури за проверка преди разгръщане, с цел успешни разгръщания с Azure Developer CLI, преди да започнат. Научете как да внедрите автоматизирани проверки за автентикация, наличност на ресурси, квоти, съобразяване със сигурността и изисквания за производителност, за да предотвратите провали при разгръщане и да оптимизирате успеха на разгръщанията.
 
-## Цели за обучение
+## Цели на обучението
 
-Като завършите това ръководство, вие ще:
-- Овладeете автоматизирани техники и скриптове за валидация преди внедряване
-- Разберете цялостни стратегии за проверки на удостоверяване, разрешения и квоти
-- Прилагате процедури за проверка на наличността и капацитета на ресурсите
-- Конфигурирате проверки за сигурност и съответствие с организационните политики
-- Проектирате работни потоци за оценка на разходите и валидация на бюджета
-- Създадете персонализирана автоматизация за предполетни проверки в CI/CD конвейери
+След завършване на този наръчник ще:
+- Усвоите техники и скриптове за автоматизирана проверка преди разгръщане
+- Разберете комплексни стратегии за проверка на автентикация, разрешения и квоти
+- Прилагате процедури за валидиране на наличност и капацитет на ресурси
+- Конфигурирате проверки за сигурност и съобразяване с организационни политики
+- Проектирате работни потоци за оценка на разходи и бюджет
+- Създавате персонализирана автоматизация за проверки преди полет в CI/CD среди
 
 ## Резултати от обучението
 
-След завършване ще можете:
-- Да създавате и изпълнявате изчерпателни скриптове за предполетна валидация
-- Да проектирате автоматизирани работни потоци за проверки при различни сценарии на внедряване
-- Да прилагате процедури и политики за валидация, специфични за средата
-- Да конфигурирате проактивно наблюдение и алармиране за готовност за внедряване
-- Да отстранявате проблеми преди внедряване и да прилагате корективни действия
-- Да интегрирате предполетните проверки в DevOps конвейери и автоматизационни работни потоци
+След завършването ще можете да:
+- Създавате и изпълнявате комплексни скриптове за проверка преди полет
+- Проектирате автоматизирани проверки за различни сценарии на разгръщане
+- Прилагате валидиращи процедури и политики за конкретни среди
+- Конфигурирате проактивен мониторинг и алармиране за готовност за разгръщане
+- Отстранявате проблеми преди разгръщане и прилагате коригиращи действия
+- Интегрирате проверки преди полет в DevOps канали и автоматизирани работни потоци
 
 ## Съдържание
 
-- [Преглед](../../../../docs/chapter-06-pre-deployment)
-- [Автоматизиран предполетен скрипт](../../../../docs/chapter-06-pre-deployment)
-- [Ръчен контролен списък за валидация](../../../../docs/chapter-06-pre-deployment)
-- [Валидация на средата](../../../../docs/chapter-06-pre-deployment)
-- [Валидация на ресурсите](../../../../docs/chapter-06-pre-deployment)
-- [Проверки за сигурност и съответствие](../../../../docs/chapter-06-pre-deployment)
-- [Планиране на производителността и капацитета](../../../../docs/chapter-06-pre-deployment)
-- [Отстраняване на често срещани проблеми](../../../../docs/chapter-06-pre-deployment)
+- [Преглед](#преглед)
+- [Автоматизиран скрипт за проверки преди полет](#автоматизиран-скрипт-за-проверки-преди-полет)
+- [Списък за ръчни проверки](#codeblock1)
+- [Валидиране на средата](#✅-архивиране-и-възстановяване)
+- [Валидиране на ресурси](#валидиране-на-продукционна-среда)
+- [Проверки за сигурност и съответствие](#security--compliance-checks)
+- [Планиране на производителност и капацитет](#performance--capacity-planning)
+- [Отстраняване на често срещани проблеми](#troubleshooting-common-issues)
 
 ---
 
 ## Преглед
 
-Предполетните проверки са задължителни валидации, изпълнявани преди внедряване, за да се осигури:
+Проверките преди полет са задължителни валидирания, извършвани преди разгръщане, за да се гарантира:
 
 - **Наличност на ресурси** и квоти в целевите региони
-- **Удостоверяване и разрешения** са правилно конфигурирани
-- **Валидност на шаблоните** и коректност на параметрите
+- **Правилна конфигурация** на автентикация и разрешения
+- **Валидност на шаблони** и коректност на параметри
 - **Мрежова свързаност** и зависимости
-- **Съответствие със сигурността** с организационните политики
-- **Оценка на разходите** в рамките на бюджета
+- **Съответствие със сигурността** според организационните политики
+- **Оценка на разходи** в рамките на бюджетните ограничения
 
-### Кога да се изпълняват предполетни проверки
+### Кога да стартирате проверки преди полет
 
-- **Преди първото внедряване** в нова среда
-- **След значителни промени в шаблоните**
-- **Преди внедрявания в продукция**
-- **При смяна на регионите на Azure**
-- **Като част от CI/CD конвейерите**
+- **Преди първото разгръщане** в нова среда
+- **След съществени промени в шаблони**
+- **Преди разгръщания в продукция**
+- **При смяна на Azure регионите**
+- **Като част от CI/CD канали**
 
 ---
 
-## Автоматизиран предполетен скрипт
+## Автоматизиран скрипт за проверки преди полет
 
-### PowerShell предполетен чекър
+### PowerShell проверяващ скрипт
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -194,7 +194,7 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # Получаване на назначените роли на текущия потребител
+        # Вземане на текущите ролеви назначения на потребителя
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
@@ -210,14 +210,14 @@ function Test-Permissions {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # Тестване на създаването на ресурсна група (ако е посочена)
+        # Тестване на създаване на група ресурси (ако е посочена)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # Тестване на възможността за създаване на ресурсна група
+                # Тестване на възможността за създаване на група ресурси
                 try {
                     az group create --name "preflight-test-rg" --location $Location --output none
                     az group delete --name "preflight-test-rg" --yes --output none
@@ -257,7 +257,7 @@ function Test-QuotasAndLimits {
             }
         }
         
-        # Проверка на ограниченията за App Service
+        # Проверка на лимитите на App Service
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
             if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
@@ -271,7 +271,7 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # Проверка на ограниченията на акаунта за съхранение
+        # Проверка на лимитите на акаунти за съхранение
         $storageAccounts = az storage account list --output json | ConvertFrom-Json
         $accountCount = ($storageAccounts | Measure-Object).Count
         if ($accountCount -lt 200) {
@@ -292,7 +292,7 @@ function Test-QuotasAndLimits {
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # Тестване на крайните точки на Azure
+    # Тестване на Azure крайни точки
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -310,7 +310,7 @@ function Test-NetworkConnectivity {
         }
     }
     
-    # Тестване на разрешаването на DNS
+    # Тестване на DNS резолюция
     try {
         $dnsResult = Resolve-DnsName "management.azure.com" -ErrorAction Stop
         Write-Status "DNS resolution" "Success" "Resolved successfully"
@@ -326,16 +326,16 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # Проверка дали файлът azure.yaml съществува
+    # Проверка дали съществува azure.yaml
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # Анализиране на azure.yaml
+        # Парсиране на azure.yaml
         try {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # Проверка на услугите
+            # Валидация на услуги
             if ($azureYaml.services) {
                 $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
@@ -360,7 +360,7 @@ function Test-TemplateValidation {
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # Валидиране на main.bicep, ако файлът съществува
+            # Валидация на main.bicep, ако съществува
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 НОВО: Тест на предварителния преглед на инфраструктурата (безопасно симулирано изпълнение)
+    # 🧪 НОВО: Тестване на прегледа на инфраструктурата (безопасно сухо изпълнение)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -403,7 +403,7 @@ function Test-RegionalAvailability {
     Write-Host "`n${Blue}=== Regional Availability Check ===${Reset}"
     
     try {
-        # Проверка дали местоположението е валидно
+        # Проверка дали локацията е валидна
         $locations = az account list-locations --output json | ConvertFrom-Json
         $validLocation = $locations | Where-Object { $_.name -eq $Location -or $_.displayName -eq $Location }
         
@@ -446,11 +446,11 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Основна оценка на разходите (необходимо е Azure Pricing API за точни оценки)
+    # Основна оценка на разходите (ще е необходим Azure Pricing API за точни оценки)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # Проверка дали е зададен бюджет
+    # Проверка дали съществува бюджет
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -470,7 +470,7 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # Проверка за общи практики за сигурност
+    # Проверка на често използвани практики за сигурност
     try {
         # Проверка дали Key Vault е конфигуриран
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
@@ -516,7 +516,7 @@ function Invoke-PreflightCheck {
     $allPassed = $true
     $results = @{}
     
-    # Изпълняване на всички проверки
+    # Изпълнение на всички проверки
     $results["Prerequisites"] = Test-Prerequisites
     $results["Authentication"] = Test-Authentication
     $results["Permissions"] = Test-Permissions
@@ -557,15 +557,15 @@ function Invoke-PreflightCheck {
     }
 }
 
-# Стартиране на предварителната проверка
+# Изпълнение на предварителната проверка
 Invoke-PreflightCheck
 ```
 
-### Bash предполетен чекър
+### Bash проверяващ скрипт
 
 ```bash
 #!/bin/bash
-# Bash версия на предварителните проверки за Unix/Linux системи
+# Bash версия на предварителни проверки за Unix/Linux системи
 
 set -euo pipefail
 
@@ -637,7 +637,7 @@ check_prerequisites() {
 check_authentication() {
     echo -e "\n${BLUE}=== Authentication Check ===${NC}"
     
-    # Проверка на удостоверяването за AZD
+    # Проверка на автентикация в AZD
     if azd auth login --check-status >/dev/null 2>&1; then
         local principal_name=$(azd auth login --check-status --output json 2>/dev/null | jq -r '.principalName // "Unknown"')
         print_status "AZD authentication" "success" "User: $principal_name"
@@ -646,7 +646,7 @@ check_authentication() {
         return 1
     fi
     
-    # Проверка на удостоверяването за Azure CLI
+    # Проверка на автентикация в Azure CLI
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -677,13 +677,13 @@ check_template_validation() {
         return 1
     fi
     
-    # Проверка на инфраструктурните файлове
+    # Проверка на инфраструктурни файлове
     if [[ -d "infra" ]]; then
         local bicep_count=$(find infra -name "*.bicep" | wc -l)
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # Валидиране на main.bicep, ако съществува
+            # Валидация на main.bicep, ако съществува
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +706,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # Провери дали местоположението е валидно
+    # Проверка дали местоположението е валидно
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -714,7 +714,7 @@ check_regional_availability() {
         return 1
     fi
     
-    # Провери наличността на услугата
+    # Проверка на наличност на услугата
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
     for service in "${services[@]}"; do
@@ -729,7 +729,7 @@ check_regional_availability() {
 }
 
 main() {
-    # Парсиране на аргументите от командния ред
+    # Парсиране на аргументи от командния ред
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -755,7 +755,7 @@ main() {
         esac
     done
     
-    # Валидиране на задължителните параметри
+    # Валидация на задължителни параметри
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -768,7 +768,7 @@ main() {
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
     
-    # Изпълни проверките
+    # Изпълнение на проверки
     local all_passed=true
     
     check_prerequisites || all_passed=false
@@ -790,86 +790,86 @@ main() {
     fi
 }
 
-# Изпълни основната функция
+# Изпълнение на главната функция
 main "$@"
 ```
 
 ---
 
-## Ръчен контролен списък за валидация
+## Списък за ръчни проверки
 
-### Контролен списък преди внедряване
+### Списък за проверка преди разгръщане
 
-Разпечатайте този контролен списък и проверете всеки елемент преди внедряване:
+Принтирайте този списък и проверете всеки артикул преди разгръщане:
 
 #### ✅ Настройка на средата
-- [ ] AZD CLI инсталиран и обновен до последната версия
-- [ ] Azure CLI инсталиран и автентикиран
+- [ ] Инсталиран и обновен до най-нова версия AZD CLI
+- [ ] Инсталиран и автентикиран Azure CLI
 - [ ] Избран правилен Azure абонамент
-- [ ] Името на средата е уникално и следва конвенциите за именуване
-- [ ] Целевата ресурсна група е идентифицирана или може да бъде създадена
+- [ ] Името на средата е уникално и следва правилата за именуване
+- [ ] Целева група ресурси е идентифицирана или може да бъде създадена
 
-#### ✅ Удостоверяване и разрешения
-- [ ] Успешно удостоверен с `azd auth login`
-- [ ] Потребителят има роля Contributor в целевия абонамент/ресурсна група
-- [ ] Service principal конфигуриран за CI/CD (ако е приложимо)
+#### ✅ Автентикация и разрешения
+- [ ] Успешна автентикация с `azd auth login`
+- [ ] Потребителят има ролята Contributor на целевия абонамент/група ресурси
+- [ ] Конфигуриран service principal за CI/CD (ако е приложимо)
 - [ ] Няма изтекли сертификати или идентификационни данни
 
-#### ✅ Валидация на шаблоните
+#### ✅ Валидиране на шаблони
 - [ ] `azure.yaml` съществува и е валиден YAML
-- [ ] Всички услуги, дефинирани в azure.yaml, имат съответен изходен код
-- [ ] Bicep шаблоните в директорията `infra/` присъстват
-- [ ] Файлът `main.bicep` се компилира без грешки (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Прегледът на инфраструктурата се изпълнява успешно (`azd provision --preview`)
+- [ ] Всички услуги, дефинирани в azure.yaml, имат съответния изходен код
+- [ ] Присъстват Bicep шаблони в директория `infra/`
+- [ ] `main.bicep` се компилира без грешки (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Преглед на инфраструктурата се изпълнява успешно (`azd provision --preview`)
 - [ ] Всички задължителни параметри имат стойности по подразбиране или ще бъдат предоставени
-- [ ] Няма твърдо кодирани (hardcoded) тайни в шаблоните
+- [ ] Няма твърдо кодирани тайни в шаблоните
 
-#### ✅ Планиране на ресурсите
-- [ ] Избран и валидиран целеви регион на Azure
-- [ ] Необходимите Azure услуги са налични в целевия регион
-- [ ] Налични са достатъчни квоти за планираните ресурси
-- [ ] Проверени са конфликти в имената на ресурсите
-- [ ] Разбрани са зависимостите между ресурсите
+#### ✅ Планиране на ресурси
+- [ ] Избран и валидиран целеви Azure регион
+- [ ] Налични необходими Azure услуги в целевия регион
+- [ ] Има достатъчни квоти за планираните ресурси
+- [ ] Проверени конфликти при именуване на ресурси
+- [ ] Разбрани зависимости между ресурсите
 
 #### ✅ Мрежа и сигурност
-- [ ] Проверена е мрежовата свързаност до Azure крайни точки
-- [ ] Конфигурирани са настройки на защитна стена/прокси ако е необходимо
-- [ ] Key Vault конфигуриран за управление на тайни
-- [ ] Използвани са управлявани идентичности, където е възможно
-- [ ] Включено е принуждаване на HTTPS за уеб приложенията
+- [ ] Проверена мрежова свързаност към Azure крайните точки
+- [ ] Конфигурирани настройки на защитна стена/прокси, ако е необходимо
+- [ ] Конфигуриран Key Vault за управление на тайни
+- [ ] Използвани управлявани идентичности, където е възможно
+- [ ] Разрешен HTTPS за уеб приложения
 
-#### ✅ Управление на разходите
-- [ ] Оценките на разходите са изчислени с помощта на Azure Pricing Calculator
-- [ ] Конфигурирани са известия за бюджет при необходимост
-- [ ] Избрани са подходящи SKU-та за типа среда
-- [ ] Разгледана е резервация на капацитет за продукционни натоварвания
+#### ✅ Управление на разходи
+- [ ] Изчислени разходи с помощта на Azure Pricing Calculator
+- [ ] Конфигурирани аларми за бюджета, ако са необходими
+- [ ] Подбрани подходящи SKU за типа среда
+- [ ] Взета предвид резервирана капацитет за продукционни натоварвания
 
-#### ✅ Наблюдение и наблюдаемост
-- [ ] Application Insights конфигуриран в шаблоните
-- [ ] Планирано е Log Analytics работно пространство
-- [ ] Дефинирани са правила за предупреждения за критични метрики
-- [ ] Имплементирани са здравни крайни точки (health check) в приложенията
+#### ✅ Мониторинг и наблюдаемост
+- [ ] Конфигуриран Application Insights в шаблоните
+- [ ] Планиран Log Analytics workspace
+- [ ] Дефинирани правила за аларми за критични метрики
+- [ ] Имплементирани endpoint-и за здравен статус в приложенията
 
 #### ✅ Архивиране и възстановяване
-- [ ] Дефинирана е стратегия за архивиране за данните
-- [ ] Документирани са цели за време за възстановяване (RTO)
-- [ ] Документирани са цели за точка на възстановяване (RPO)
-- [ ] Наличен е план за аварийно възстановяване за продукция
+- [ ] Определена стратегия за архивиране на ресурсите с данни
+- [ ] Документирани Recovery Time Objectives (RTO)
+- [ ] Документирани Recovery Point Objectives (RPO)
+- [ ] План за възстановяване при бедствия за продукция
 
 ---
 
-## Валидация на средата
+## Валидиране на средата
 
-### Валидация на развойна среда
+### Валидиране на средата за разработка
 
 ```bash
 #!/bin/bash
-# Проверки, специфични за средата за разработка
+# Проверки специфични за средата за разработка
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # Проверка за конфигурации, подходящи за разработка
+    # Проверка за конфигурации, удобни за разработка
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
@@ -883,7 +883,7 @@ validate_dev_environment() {
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # Валидиране на конфигурациите на базата данни за разработка
+    # Валидация на конфигурации на базата данни за разработка
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -892,30 +892,30 @@ validate_dev_environment() {
 }
 ```
 
-### Валидация на продукционна среда
+### Валидиране на продукционна среда
 
 ```bash
 #!/bin/bash
-# Проверки, специфични за производствената среда
+# Специфични проверки за производствена среда
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # Проверка за конфигурации за висока наличност
+    # Проверка за конфигурации с висока наличност
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # Проверка за конфигурации за резервно копиране
+    # Проверка за конфигурации за архивиране
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # Проверка на настройката за мониторинг
+    # Валидиране на настройките за мониторинг
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
@@ -933,9 +933,9 @@ validate_prod_environment() {
 
 ---
 
-## Валидация на ресурсите
+## Валидиране на ресурси
 
-### Скрипт за валидация на квоти
+### Скрипт за проверка на квоти
 
 ```python
 #!/usr/bin/env python3
@@ -990,7 +990,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # Получаване на акаунти за съхранение в абонамента
+    # Вземете съхранителни акаунти в подписка
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -998,7 +998,7 @@ def check_storage_limits(location: str) -> bool:
         return False
     
     account_count = len(accounts)
-    max_accounts = 250  # Ограничение по подразбиране в Azure
+    max_accounts = 250  # По подразбиране лимит на Azure
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1011,13 +1011,13 @@ def check_network_limits(location: str) -> bool:
     """Check network-related limits"""
     print(f"\n=== Network Limits Check ({location}) ===")
     
-    # Проверка на виртуалните мрежи
+    # Проверете виртуални мрежи
     vnets = run_command(['az', 'network', 'vnet', 'list'])
     if vnets is not None:
         vnet_count = len(vnets)
         print(f"✅ Virtual Networks: {vnet_count}/1000")
     
-    # Проверка на публичните IP адреси
+    # Проверете публични IP адреси
     public_ips = run_command(['az', 'network', 'public-ip', 'list'])
     if public_ips is not None:
         ip_count = len(public_ips)
@@ -1038,12 +1038,12 @@ def main():
     
     all_passed = True
     
-    # Изпълнение на проверките
+    # Изпълнете проверки
     all_passed &= check_compute_quotas(location)
     all_passed &= check_storage_limits(location)
     all_passed &= check_network_limits(location)
     
-    # Обобщение
+    # Резюме
     print(f"\n=== Quota Check Summary ===")
     if all_passed:
         print("✅ All quota checks passed - sufficient capacity available")
@@ -1060,11 +1060,11 @@ if __name__ == "__main__":
 
 ## Проверки за сигурност и съответствие
 
-### Скрипт за валидация на сигурността
+### Скрипт за валидиране на сигурността
 
 ```bash
 #!/bin/bash
-# Проверка на сигурността и съответствието за внедрявания на AZD
+# Проверка на сигурността и съответствието за разгръщания на AZD
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Проверка за налагане на HTTPS
+    # Проверка за прилагане на HTTPS
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1111,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Проверка за групи за мрежова сигурност
+    # Проверка за мрежови защитни групи
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1131,7 +1131,7 @@ check_compliance_requirements() {
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # Проверка за одитно регистриране
+    # Проверка за одитен лог
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
@@ -1146,7 +1146,7 @@ check_compliance_requirements() {
     fi
 }
 
-# Основно изпълнение
+# Главно изпълнение
 main() {
     echo "🔒 Security and Compliance Validation"
     echo "📁 Checking infra/ directory for security best practices"
@@ -1290,48 +1290,48 @@ steps:
 
 ---
 
-## Резюме на добрите практики
+## Обобщение на добрите практики
 
-### ✅ Най-добри практики за предполетни проверки
+### ✅ Най-добри практики за проверки преди полет
 
-1. **Автоматизирайте, където е възможно**
-   - Интегрирайте проверките в CI/CD конвейери
-   - Използвайте скриптове за повтарящи се валидации
+1. **Автоматизирайте където е възможно**
+   - Интегрирайте проверки в CI/CD канали
+   - Използвайте скриптове за повтаряеми проверки
    - Съхранявайте резултатите за одитни следи
 
-2. **Валидация, специфична за средата**
-   - Различни проверки за dev/staging/prod
-   - Подходящи изисквания за сигурност за всяка среда
-   - Оптимизация на разходите за не-продукционни среди
+2. **Валидиране според средата**
+   - Различни проверки за dev/staging/production
+   - Подходящи изисквания за сигурност според средата
+   - Оптимизация на разходите за непроизводствени среди
 
-3. **Пълно покритие**
-   - Удостоверяване и разрешения
+3. **Цялостно покритие**
+   - Автентикация и разрешения
    - Квоти и наличност на ресурси
-   - Валидация на шаблони и синтаксис
+   - Валидиране на шаблони и синтаксис
    - Изисквания за сигурност и съответствие
 
-4. **Ясно отчитане**
-   - Индикатори за статус с цветно кодиране
-   - Подробни съобщения за грешки с стъпки за поправка
-   - Обобщени отчети за бърза оценка
+4. **Ясни отчети**
+   - Цветово кодирани индикатори за статус
+   - Подробни съобщения за грешки с инструкции за отстраняване
+   - Обобщени доклади за бързо оценяване
 
-5. **Принципът „Fail Fast“**
-   - Спиране на внедряването, ако критични проверки се провалят
-   - Осигурете ясни насоки за разрешаване
-   - Позволете лесно повторно изпълнение на проверките
+5. **Fail Fast принцип**
+   - Спиране на разгръщането при критични грешки
+   - Ясни указания за решаване
+   - Лесно повторно стартиране на проверките
 
-### Чести проблеми при предполетни проверки
+### Обичайни капани при проверки преди полет
 
-1. **Пропускане на валидацията** за „бързи“ внедрявания
-2. **Недостатъчна проверка на разрешенията** преди внедряване
-3. **Игнориране на лимитите на квотите** до провал на внедряването
-4. **Невалидиране на шаблоните** в CI/CD конвейерите
-5. **Липсваща проверка за сигурност** за продукционни среди
-6. **Недостатъчна оценка на разходите**, водеща до неочаквани бюджетни разходи
+1. **Прескачане на валидиране** за „бързи“ разгръщания
+2. **Недостатъчна проверка на разрешения** преди разгръщане
+3. **Игнориране на ограничения на квоти** докато не възникне провал
+4. **Невалидиране на шаблони** в CI/CD канали
+5. **Липса на проверка за сигурност** за продукционни среди
+6. **Недостатъчна оценка на разходи** водеща до бюджетни изненади
 
 ---
 
-**Съвет**: Изпълнявайте предполетните проверки като отделна задача в CI/CD конвейера преди реалната задача за внедряване. Това ви позволява да откриете проблеми рано и да предоставите по-бърза обратна връзка на разработчиците.
+**Професионален съвет**: Стартирайте проверките преди полет като отделна задача в CI/CD канала преди самото разгръщане. Това ви позволява да откриете проблеми рано и да получите по-бърза обратна връзка от разработчиците.
 
 ---
 
@@ -1342,6 +1342,6 @@ steps:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Отказ от отговорност**:
-Този документ е преведен с помощта на AI преводаческа услуга [Co-op Translator](https://github.com/Azure/co-op-translator). Въпреки че се стремим към точност, моля, имайте предвид, че автоматичните преводи могат да съдържат грешки или неточности. Оригиналният документ на езика, на който е написан, трябва да се счита за авторитетен източник. За критична информация се препоръчва професионален превод, извършен от квалифициран преводач. Не носим отговорност за никакви недоразумения или погрешни тълкувания, произтичащи от използването на този превод.
+**Отказ от отговорност**:  
+Този документ е преведен с помощта на AI услуга за превод [Co-op Translator](https://github.com/Azure/co-op-translator). Въпреки че се стремим към точност, моля, имайте предвид, че автоматизираните преводи могат да съдържат грешки или неточности. Оригиналният документ на неговия оригинален език трябва да се счита за авторитетен източник. За критична информация се препоръчва професионален човешки превод. Не носим отговорност за каквито и да е недоразумения или неправилни тълкувания, произтичащи от използването на този превод.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

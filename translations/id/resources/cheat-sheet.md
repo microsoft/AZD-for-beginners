@@ -1,4 +1,4 @@
-# Daftar Singkat Perintah - Perintah AZD Penting
+# Ringkasan Perintah - Perintah AZD Esensial
 
 **Referensi Cepat untuk Semua Bab**
 - **📚 Beranda Kursus**: [AZD untuk Pemula](../README.md)
@@ -8,36 +8,36 @@
 
 ## Pendahuluan
 
-Ringkasan perintah komprehensif ini menyediakan referensi cepat untuk perintah Azure Developer CLI yang paling sering digunakan, diatur berdasarkan kategori dengan contoh praktis. Sempurna untuk pencarian cepat selama pengembangan, pemecahan masalah, dan operasi harian dengan proyek azd.
+Ringkasan perintah komprehensif ini menyediakan referensi cepat untuk perintah Azure Developer CLI yang paling sering digunakan, disusun menurut kategori dengan contoh praktis. Sempurna untuk pencarian cepat saat pengembangan, pemecahan masalah, dan operasi harian dengan proyek azd.
 
 ## Tujuan Pembelajaran
 
-Dengan menggunakan daftar singkat ini, Anda akan:
+Dengan menggunakan ringkasan perintah ini, Anda akan:
 - Memiliki akses instan ke perintah dan sintaks Azure Developer CLI yang penting
-- Memahami organisasi perintah berdasarkan kategori fungsional dan kasus penggunaan
+- Memahami pengorganisasian perintah berdasarkan kategori fungsional dan kasus penggunaan
 - Merujuk contoh praktis untuk skenario pengembangan dan penyebaran umum
-- Mengakses perintah pemecahan masalah untuk penyelesaian masalah yang cepat
-- Menemukan opsi konfigurasi dan kustomisasi lanjutan dengan efisien
+- Mengakses perintah pemecahan masalah untuk resolusi isu cepat
+- Menemukan opsi konfigurasi dan kustomisasi tingkat lanjut dengan efisien
 - Menemukan perintah manajemen lingkungan dan alur kerja multi-lingkungan
 
 ## Hasil Pembelajaran
 
-Dengan merujuk secara rutin ke daftar singkat ini, Anda akan mampu:
+Dengan merujuk ringkasan perintah ini secara rutin, Anda akan dapat:
 - Menjalankan perintah azd dengan percaya diri tanpa merujuk dokumentasi lengkap
-- Dengan cepat menyelesaikan masalah umum menggunakan perintah diagnostik yang tepat
+- Cepat menyelesaikan masalah umum menggunakan perintah diagnostik yang sesuai
 - Mengelola beberapa lingkungan dan skenario penyebaran secara efisien
-- Menerapkan fitur azd lanjutan dan opsi konfigurasi sesuai kebutuhan
+- Menerapkan fitur azd tingkat lanjut dan opsi konfigurasi sesuai kebutuhan
 - Memecahkan masalah penyebaran menggunakan urutan perintah yang sistematis
 - Mengoptimalkan alur kerja melalui penggunaan pintasan dan opsi azd yang efektif
 
 ## Perintah Memulai
 
-### Otentikasi
+### Autentikasi
 ```bash
 # Masuk ke Azure melalui AZD
 azd auth login
 
-# Masuk ke Azure CLI (AZD menggunakannya di balik layar)
+# Masuk ke Azure CLI (AZD menggunakan ini di balik layar)
 az login
 
 # Periksa akun saat ini
@@ -56,7 +56,7 @@ az logout
 
 ### Inisialisasi Proyek
 ```bash
-# Telusuri template yang tersedia
+# Jelajahi template yang tersedia
 azd template list
 
 # Inisialisasi dari template
@@ -70,20 +70,20 @@ azd init .
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
-## Perintah Inti Penyebaran
+## Perintah Penyebaran Inti
 
 ### Alur Kerja Penyebaran Lengkap
 ```bash
-# Sebarkan semuanya (penyediaan + penyebaran)
+# Terapkan semuanya (penyediaan + penyebaran)
 azd up
 
-# Sebarkan dengan prompt konfirmasi dinonaktifkan
+# Terapkan dengan prompt konfirmasi dinonaktifkan
 azd up --confirm-with-no-prompt
 
-# Sebarkan ke lingkungan tertentu
+# Terapkan ke lingkungan tertentu
 azd up --environment production
 
-# Sebarkan dengan parameter khusus
+# Terapkan dengan parameter khusus
 azd up --parameter location=westus2
 ```
 
@@ -94,7 +94,7 @@ azd provision
 
 # 🧪 Pratinjau perubahan infrastruktur
 azd provision --preview
-# Menampilkan tampilan dry-run tentang sumber daya apa yang akan dibuat/dimodifikasi/dihapus
+# Menampilkan tampilan simulasi mengenai sumber daya yang akan dibuat/dimodifikasi/dihapus
 # Mirip dengan 'terraform plan' atau 'bicep what-if' - aman dijalankan, tidak ada perubahan yang diterapkan
 ```
 
@@ -111,7 +111,7 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### Membangun dan Mengemas
+### Build dan Paket
 ```bash
 # Membangun aplikasi
 azd package
@@ -134,8 +134,8 @@ azd env new staging --location westus2
 # Pilih lingkungan
 azd env select production
 
-# Tampilkan lingkungan saat ini
-azd env show
+# Tampilkan lingkungan yang tersedia
+azd env list
 
 # Segarkan status lingkungan
 azd env refresh
@@ -162,9 +162,9 @@ azd env unset DEBUG
 ### Konfigurasi Global
 ```bash
 # Daftar semua konfigurasi
-azd config list
+azd config show
 
-# Tetapkan default global
+# Atur default global
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
@@ -191,16 +191,16 @@ azd show --output json
 
 ### Dasbor Pemantauan
 ```bash
-# Buka dasbor pemantauan Portal Azure
+# Buka dasbor pemantauan portal Azure
 azd monitor
 
-# Buka metrik langsung Application Insights
+# Buka metrik waktu nyata di Application Insights
 azd monitor --live
 
-# Buka panel log Application Insights
+# Buka blade log di Application Insights
 azd monitor --logs
 
-# Buka ikhtisar Application Insights
+# Buka ikhtisar di Application Insights
 azd monitor --overview
 ```
 
@@ -212,13 +212,13 @@ az containerapp logs show --name <app-name> --resource-group <rg-name>
 # Ikuti log secara real-time
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# Lihat log melalui Azure Portal
+# Lihat log di Azure Portal
 azd monitor --logs
 ```
 
 ### Kueri Log Analytics
 ```bash
-# Akses Log Analytics melalui Portal Azure
+# Akses Log Analytics melalui Azure Portal
 azd monitor --logs
 
 # Kueri log menggunakan Azure CLI
@@ -253,7 +253,7 @@ azd version
 azd version
 
 # Lihat konfigurasi saat ini
-azd config list
+azd config show
 ```
 
 ## 🔧 Perintah Lanjutan
@@ -272,19 +272,19 @@ azd pipeline show
 
 ### Manajemen Infrastruktur
 ```bash
-# Hasilkan templat infrastruktur
+# Hasilkan template infrastruktur
 azd infra generate
 
 # 🧪 Pratinjau & Perencanaan Infrastruktur
 azd provision --preview
-# Mensimulasikan penyediaan infrastruktur tanpa menerapkannya
-# Menganalisis templat Bicep/Terraform dan menampilkan:
+# Mensimulasikan penyediaan infrastruktur tanpa melakukan penyebaran
+# Menganalisis template Bicep/Terraform dan menampilkan:
 # - Sumber daya yang akan ditambahkan (hijau +)
 # - Sumber daya yang akan dimodifikasi (kuning ~)
 # - Sumber daya yang akan dihapus (merah -)
 # Aman dijalankan - tidak ada perubahan nyata yang dilakukan pada lingkungan Azure
 
-# Mensintesis infrastruktur dari azure.yaml
+# Menyintesis infrastruktur dari azure.yaml
 azd infra synth
 ```
 
@@ -293,7 +293,7 @@ azd infra synth
 # Tampilkan status proyek dan titik akhir
 azd show
 
-# Tampilkan informasi proyek terperinci sebagai JSON
+# Tampilkan informasi proyek secara rinci sebagai JSON
 azd show --output json
 
 # Dapatkan titik akhir layanan
@@ -307,10 +307,10 @@ azd show --output json | jq '.services'
 # Daftar semua ekstensi yang tersedia (termasuk AI)
 azd extension list
 
-# Pasang ekstensi Foundry agents
+# Pasang ekstensi agen Foundry
 azd extension install azure.ai.agents
 
-# Pasang ekstensi fine-tuning
+# Pasang ekstensi penyetelan halus
 azd extension install azure.ai.finetune
 
 # Pasang ekstensi model kustom
@@ -325,7 +325,7 @@ azd extension upgrade --all
 # Inisialisasi proyek agen dari manifes
 azd ai agent init -m <manifest-path-or-uri>
 
-# Targetkan proyek Foundry tertentu
+# Menargetkan proyek Foundry tertentu
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
 # Tentukan direktori sumber agen
@@ -335,21 +335,21 @@ azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 azd ai agent init -m agent-manifest.yaml --host containerapp
 ```
 
-### Server MCP (Alpha)
+### MCP Server (Alpha)
 ```bash
 # Mulai server MCP untuk proyek Anda
 azd mcp start
 
 # Kelola persetujuan alat untuk operasi MCP
-azd mcp consent
+azd copilot consent list
 ```
 
-### Pembuatan Infrastruktur
+### Generasi Infrastruktur
 ```bash
 # Hasilkan file IaC dari definisi proyek Anda
 azd infra generate
 
-# Sintesis infrastruktur dari azure.yaml
+# Hasilkan infrastruktur dari file azure.yaml
 azd infra synth
 ```
 
@@ -403,7 +403,7 @@ export AZD_DEBUG=true
 azd show
 
 # Validasi konfigurasi
-azd config list
+azd config show
 
 # Buka dasbor pemantauan untuk log
 azd monitor --logs
@@ -420,19 +420,19 @@ azd show --output json
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Nonaktifkan telemetri untuk keluaran yang lebih bersih
+# Nonaktifkan telemetri untuk output yang lebih bersih
 export AZD_DISABLE_TELEMETRY=true
 
 # Periksa konfigurasi saat ini
-azd config list
+azd config show
 
-# Periksa status otentikasi
+# Periksa status autentikasi
 az account show
 ```
 
 ### Debug Template
 ```bash
-# Daftar template yang tersedia beserta rinciannya
+# Daftar template yang tersedia beserta rincian
 azd template list --output json
 
 # Tampilkan informasi template
@@ -450,21 +450,21 @@ azd template validate <template-name>
 tree /f  # Windows
 find . -type f  # Linux/macOS
 
-# Masuk ke root proyek azd
+# Arahkan ke root proyek azd
 cd $(azd root)
 
 # Tampilkan direktori konfigurasi azd
 echo $AZD_CONFIG_DIR  # Biasanya ~/.azd
 ```
 
-## 🎨 Pemformatan Output
+## 🎨 Format Output
 
 ### Output JSON
 ```bash
 # Dapatkan keluaran JSON untuk skrip
 azd show --output json
 azd env list --output json
-azd config list --output json
+azd config show --output json
 
 # Urai dengan jq
 azd show --output json | jq '.services.web.endpoint'
@@ -485,9 +485,9 @@ azd show --output json | jq '.services | keys'
 ### Skrip Pemeriksaan Kesehatan
 ```bash
 #!/bin/bash
-# Pemeriksaan kesehatan singkat
+# Pemeriksaan kesehatan cepat
 azd show
-azd env show
+azd env get-values
 azd monitor --logs
 ```
 
@@ -496,7 +496,7 @@ azd monitor --logs
 #!/bin/bash
 # Validasi sebelum penyebaran
 azd show
-azd provision --preview  # Pratinjau perubahan sebelum penyebaran
+azd provision --preview  # Pratinjau perubahan sebelum menerapkan
 az account show
 ```
 
@@ -536,7 +536,7 @@ export AZD_DEBUG=true
 export AZD_DISABLE_TELEMETRY=true
 export AZD_CONFIG_DIR="~/.azd"
 
-# Konfigurasi aplikasi
+# Konfigurasi Aplikasi
 export NODE_ENV="production"
 export LOG_LEVEL="info"
 ```
@@ -549,23 +549,23 @@ export LOG_LEVEL="info"
 az account clear
 az login
 
-# Paksa penyegaran lingkungan
+# Paksa muat ulang lingkungan
 azd env refresh
 
-# Terapkan ulang semua layanan
+# Terapkan kembali semua layanan
 azd deploy
 
-# Periksa status penerapan
+# Periksa status penyebaran
 azd show --output json
 ```
 
 ### Perintah Pemulihan
 ```bash
-# Pulihkan dari penyebaran yang gagal - bersihkan dan terapkan ulang
+# Pulihkan dari penerapan yang gagal - bersihkan dan terapkan ulang
 azd down --force --purge
 azd up
 
-# Hanya menyediakan ulang infrastruktur
+# Hanya reprovisikan infrastruktur
 azd provision
 
 # Hanya terapkan ulang aplikasi
@@ -585,7 +585,7 @@ alias azde='azd env'
 
 ### Pintasan Fungsi
 ```bash
-# Peralihan lingkungan cepat
+# Beralih lingkungan dengan cepat
 azd-env() {
     azd env select $1 && azd show
 }
@@ -598,7 +598,7 @@ azd-deploy-watch() {
 # Status lingkungan
 azd-status() {
     echo "Current environment:"
-    azd env show
+    azd env get-values
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }
@@ -633,21 +633,21 @@ azd template show <template-name> --docs
 
 ---
 
-**Tip**: Tandai halaman ringkasan ini dan gunakan `Ctrl+F` untuk menemukan perintah yang Anda butuhkan dengan cepat!
+**Tip**: Tandai ringkasan perintah ini dan gunakan `Ctrl+F` untuk menemukan perintah yang Anda butuhkan dengan cepat!
 
 ---
 
 **Navigasi**
-- **Pelajaran Sebelumnya**: [Pemeriksaan Pra-Penyebaran](../docs/pre-deployment/preflight-checks.md)
+- **Pelajaran Sebelumnya**: [Pemeriksaan Pra-penyebaran](../docs/pre-deployment/preflight-checks.md)
 - **Pelajaran Berikutnya**: [Glosarium](glossary.md)
 
 ---
 
-> **💡 Ingin bantuan perintah Azure di editor Anda?** Pasang [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) dengan `npx skills add microsoft/github-copilot-for-azure` — 37 keterampilan untuk AI, Foundry, penyebaran, diagnostik, dan lainnya.
+> **💡 Ingin bantuan perintah Azure di editor Anda?** Instal [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) dengan `npx skills add microsoft/github-copilot-for-azure` — 37 keterampilan untuk AI, Foundry, penyebaran, diagnostik, dan lainnya.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya mencapai akurasi, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidaktepatan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas setiap kesalahpahaman atau penafsiran yang keliru yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk akurasi, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber otoritatif. Untuk informasi penting, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

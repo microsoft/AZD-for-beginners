@@ -1,29 +1,29 @@
 # AZD ile Container Uygulama Dağıtım Örnekleri
 
-Bu dizin, Azure Developer CLI (AZD) kullanarak Azure Container Apps'e containerlaştırılmış uygulamaların dağıtımı için kapsamlı örnekler içerir. Bu örnekler gerçek dünya desenlerini, en iyi uygulamaları ve üretime hazır yapılandırmaları göstermektedir.
+Bu dizin, Azure Developer CLI (AZD) kullanarak Azure Container Apps'e konteynerleştirilmiş uygulamaları dağıtmak için kapsamlı örnekler içerir. Bu örnekler gerçek dünya desenlerini, en iyi uygulamaları ve üretime hazır yapılandırmaları gösterir.
 
 ## 📚 İçindekiler
 
-- [Overview](#overview)
-- [Prerequisites](#prerequisites)
-- [Quick Start Examples](#quick-start-examples)
-- [Production Examples](#production-examples)
-- [Advanced Patterns](#advanced-patterns)
-- [Best Practices](#best-practices)
+- [Genel Bakış](#overview)
+- [Ön Koşullar](#ön-koşullar)
+- [Hızlı Başlangıç Örnekleri](#hızlı-başlangıç-örnekleri)
+- [Üretim Örnekleri](#üretim-örnekleri)
+- [Gelişmiş Desenler](#gelişmiş-desenler)
+- [En İyi Uygulamalar](#en-i̇yi-uygulamalar)
 
 ## Overview
 
-Azure Container Apps, altyapıyı yönetmeden mikroservisleri ve containerlaştırılmış uygulamaları çalıştırmanızı sağlayan tam yönetilen sunucusuz bir container platformudur. AZD ile birleştirildiğinde şunları elde edersiniz:
+Azure Container Apps, altyapıyı yönetmeden mikroservisleri ve konteynerleştirilmiş uygulamaları çalıştırmanızı sağlayan tam yönetilen bir sunucusuz konteyner platformudur. AZD ile birleştirildiğinde şunları elde edersiniz:
 
-- **Basitleştirilmiş Dağıtım**: Tek komutla konteynerleri ve altyapıyı dağıtma
-- **Otomatik Ölçeklendirme**: HTTP trafiğine veya olaylara göre sıfıra ölçeklenme ve yatay ölçekleme
+- **Basitleştirilmiş Dağıtım**: Tek bir komut konteynerleri ve altyapıyı dağıtır
+- **Otomatik Ölçeklendirme**: HTTP trafiğine veya olaylara göre sıfıra kadar ölçeklendirme ve yatay ölçeklendirme
 - **Entegre Ağ**: Dahili servis keşfi ve trafik bölme
-- **Managed Identity**: Azure kaynaklarına güvenli kimlik doğrulama
-- **Maliyet Optimizasyonu**: Yalnızca kullandığınız kaynaklar için ödeme
+- **Yönetilen Kimlik**: Azure kaynaklarına güvenli kimlik doğrulama
+- **Maliyet Optimizasyonu**: Yalnızca kullandığınız kaynaklar için ödeme yapın
 
-## Prerequisites
+## Ön Koşullar
 
-Başlamadan önce, şunlara sahip olduğunuzdan emin olun:
+Başlamadan önce, sahip olduğunuzdan emin olun:
 
 ```bash
 # AZD kurulumunu kontrol et
@@ -32,22 +32,24 @@ azd version
 # Azure CLI'yi kontrol et
 az version
 
-# Docker'ı kontrol et (özel imajlar oluşturmak için)
+# Docker'ı kontrol et (özel görüntüler oluşturmak için)
 docker --version
 
-# Azure'a giriş yap
+# AZD dağıtımları için kimlik doğrulaması yap
 azd auth login
+
+# İsteğe bağlı: az komutlarını doğrudan çalıştırmayı planlıyorsanız Azure CLI'ye giriş yapın
 az login
 ```
 
 **Gerekli Azure Kaynakları:**
 - Aktif Azure aboneliği
 - Kaynak grubu oluşturma izinleri
-- Container Apps ortamına erişim
+- Container Apps ortam erişimi
 
-## Quick Start Examples
+## Hızlı Başlangıç Örnekleri
 
-### 1. Simple Web API (Python Flask)
+### 1. Basit Web API (Python Flask)
 
 Azure Container Apps ile temel bir REST API dağıtın.
 
@@ -80,27 +82,27 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
 **Temel Özellikler:**
-- 0'dan 10 kopyaya kadar otomatik ölçeklenme
-- Sağlık probe'ları ve canlılık kontrolleri
+- 0'dan 10 replika'ya kadar otomatik ölçeklendirme
+- Sağlık probu ve canlılık kontrolleri
 - Ortam değişkeni enjeksiyonu
 - Application Insights entegrasyonu
 
 ### 2. Node.js Express API
 
-MongoDB entegrasyonlu bir Node.js backend dağıtın.
+MongoDB entegrasyonlu bir Node.js arka ucu dağıtın.
 
 ```bash
-# Node.js API şablonunu başlatın
+# Node.js API şablonunu başlat
 azd init --template todo-nodejs-mongo
 
-# Ortam değişkenlerini yapılandırın
+# Ortam değişkenlerini yapılandır
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
-# Dağıtın
+# Dağıt
 azd up
 
-# Azure Monitor üzerinden günlükleri görüntüleyin
+# Azure Monitor aracılığıyla günlükleri görüntüle
 azd monitor --logs
 ```
 
@@ -147,9 +149,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 3. Static Frontend + API Backend
+### 3. Statik Ön Uç + API Arka Uç
 
-React önyüzü ve API arka ucu ile tam yığın bir uygulama dağıtın.
+React ön uç ve API arka ucu ile tam yığın bir uygulama dağıtın.
 
 ```bash
 # Tam yığın şablonunu başlat
@@ -158,18 +160,18 @@ azd init --template todo-csharp-sql-swa-func
 # Yapılandırmayı gözden geçir
 cat azure.yaml
 
-# Her iki servisi de dağıt
+# Her iki hizmeti dağıt
 azd up
 
 # Uygulamayı aç
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
-## Production Examples
+## Üretim Örnekleri
 
-### Example 1: Microservices Architecture
+### Örnek 1: Mikroservis Mimarisi
 
-**Senaryo**: Birden çok mikroservis içeren e-ticaret uygulaması
+**Senaryo**: Birden fazla mikroservis içeren e-ticaret uygulaması
 
 **Dizin Yapısı:**
 ```
@@ -231,9 +233,9 @@ azd up
 azd monitor --overview
 ```
 
-### Example 2: AI-Powered Container App
+### Örnek 2: Yapay Zeka Destekli Konteyner Uygulaması
 
-**Senaryo**: Microsoft Foundry Modelleri entegrasyonlu yapay zeka sohbet uygulaması
+**Senaryo**: Microsoft Foundry Models entegrasyonlu yapay zeka sohbet uygulaması
 
 **Dosya: src/ai-chat/app.py**
 ```python
@@ -253,7 +255,7 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # OpenAI anahtarını Key Vault'tan alın
+    # OpenAI anahtarını Anahtar Kasasından alın
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
@@ -322,7 +324,7 @@ module aiChatApp './app/container-app.bicep' = {
 
 **Dağıtım Komutları:**
 ```bash
-# Ortamı kur
+# Ortamı ayarla
 azd init --template ai-chat-app
 azd env new dev
 
@@ -339,7 +341,7 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Example 3: Background Worker with Queue Processing
+### Örnek 3: Kuyruk İşleme ile Arka Plan İşçisi
 
 **Senaryo**: Mesaj kuyruğu ile sipariş işleme sistemi
 
@@ -378,10 +380,10 @@ def process_orders():
     while True:
         messages = queue_client.receive_messages(max_messages=10)
         for message in messages:
-            # Siparişi işle
+            # İşlem sırası
             print(f"Processing order: {message.content}")
             
-            # Mesajı tamamla
+            # Tamamlanmış mesaj
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -411,7 +413,7 @@ azd init
 # Kuyruk yapılandırmasıyla dağıt
 azd up
 
-# İşçiyi kuyruk uzunluğuna göre ölçeklendir
+# İşçi sayısını kuyruk uzunluğuna göre ölçeklendir
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -420,18 +422,18 @@ az containerapp update \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
 
-## Advanced Patterns
+## Gelişmiş Desenler
 
-### Pattern 1: Blue-Green Deployment
+### Desen 1: Mavi-Yeşil Dağıtım
 
 ```bash
-# Trafiği olmayan yeni bir sürüm oluştur
+# Trafik almadan yeni revizyon oluştur
 azd deploy api --revision-suffix blue --no-traffic
 
-# Yeni sürümü test et
+# Yeni revizyonu test et
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Trafiği böl (%20 maviye, %80 mevcut sürüme)
+# Trafiği böl (yüzde 20 maviye, yüzde 80 mevcut sürüme)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -444,7 +446,7 @@ az containerapp ingress traffic set \
   --revision-weight blue=100
 ```
 
-### Pattern 2: Canary Deployment with AZD
+### Desen 2: Canary Dağıtımı ile AZD
 
 **Dosya: .azure/dev/config.json**
 ```json
@@ -463,7 +465,7 @@ az containerapp ingress traffic set \
 #!/bin/bash
 # deploy-canary.sh
 
-# Yeni revizyonu %10 trafik ile dağıt
+# Yeni revizyonu %10 trafikle dağıt
 azd deploy api --revision-mode multiple
 
 # Metrikleri izle
@@ -481,7 +483,7 @@ for i in {20..100..10}; do
 done
 ```
 
-### Pattern 3: Multi-Region Deployment
+### Desen 3: Çok Bölgeli Dağıtım
 
 **Dosya: azure.yaml**
 ```yaml
@@ -536,7 +538,7 @@ azd up
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### Pattern 4: Dapr Integration
+### Desen 4: Dapr Entegrasyonu
 
 **Dosya: infra/app/dapr-enabled.bicep**
 ```bicep
@@ -590,9 +592,9 @@ def create_order():
     return {'status': 'created'}
 ```
 
-## Best Practices
+## En İyi Uygulamalar
 
-### 1. Resource Organization
+### 1. Kaynak Organizasyonu
 
 ```bash
 # Tutarlı adlandırma kuralları kullanın
@@ -603,7 +605,7 @@ azd env set AZURE_LOCATION "eastus"
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. Security Best Practices
+### 2. Güvenlik En İyi Uygulamaları
 
 ```bicep
 // Always use managed identity
@@ -642,7 +644,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
 }
 ```
 
-### 3. Performance Optimization
+### 3. Performans Optimizasyonu
 
 ```yaml
 # azure.yaml with performance settings
@@ -662,13 +664,13 @@ services:
             concurrent: 100
 ```
 
-### 4. Monitoring and Observability
+### 4. İzleme ve Gözlemlenebilirlik
 
 ```bash
-# Application Insights'i etkinleştir
+# Application Insights'ı etkinleştir
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
-# Kayıtları gerçek zamanlı olarak görüntüle
+# Günlükleri gerçek zamanlı olarak görüntüle
 azd monitor --logs
 # Veya Container Apps için Azure CLI'yi kullan:
 az containerapp logs show --name api --resource-group rg-myapp --follow
@@ -685,7 +687,7 @@ az monitor metrics alert create \
   --description "Alert when CPU exceeds 80%"
 ```
 
-### 5. Cost Optimization
+### 5. Maliyet Optimizasyonu
 
 ```bash
 # Kullanılmadığında sıfıra ölçeklendir
@@ -705,7 +707,7 @@ az consumption budget create \
   --threshold 80
 ```
 
-### 6. CI/CD Integration
+### 6. CI/CD Entegrasyonu
 
 **GitHub Actions Örneği:**
 ```yaml
@@ -737,10 +739,10 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Common Commands Reference
+## Yaygın Komutlar Referansı
 
 ```bash
-# Yeni bir konteyner uygulama projesi başlat
+# Yeni container uygulama projesini başlat
 azd init --template <template-name>
 
 # Altyapıyı ve uygulamayı dağıt
@@ -752,10 +754,10 @@ azd deploy
 # Yalnızca altyapıyı hazırla
 azd provision
 
-# Dağıtılmış kaynakları görüntüle
+# Dağıtılan kaynakları görüntüle
 azd show
 
-# azd monitor veya Azure CLI ile günlükleri akış halinde izle
+# azd monitor veya Azure CLI kullanarak günlükleri izle
 azd monitor --logs
 # az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
@@ -766,26 +768,26 @@ azd monitor --overview
 azd down --force --purge
 ```
 
-## Troubleshooting
+## Sorun Giderme
 
-### Sorun: Container başlatılamıyor
+### Sorun: Konteyner başlatılamıyor
 
 ```bash
-# Azure CLI kullanarak logları kontrol et
+# Azure CLI kullanarak günlükleri kontrol et
 az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# Konteyner olaylarını görüntüle
+# konteyner olaylarını görüntüle
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
   --revision latest
 
-# Yerelde test et
+# Yerel olarak test et
 docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Sorun: Container uygulama uç noktasına erişilemiyor
+### Sorun: Konteyner uygulaması uç noktasına erişilemiyor
 
 ```bash
 # Ingress yapılandırmasını doğrulayın
@@ -801,7 +803,7 @@ az containerapp ingress update \
   --external true
 ```
 
-### Sorun: Performans sorunları
+### Sorun: Performans problemleri
 
 ```bash
 # Kaynak kullanımını kontrol et
@@ -819,21 +821,21 @@ az containerapp update \
 
 ## Ek Kaynaklar ve Örnekler
 - [Mikroservis Örneği](./microservices/README.md)
-- [Basit Flash API Örneği](./simple-flask-api/README.md)
-- [Azure Container Apps Documentation](https://learn.microsoft.com/azure/container-apps/)
-- [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
-- [Container Apps Samples](https://github.com/Azure-Samples/container-apps-samples)
-- [Bicep Templates](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+- [Basit Flask API Örneği](./simple-flask-api/README.md)
+- [Azure Container Apps Belgeleri](https://learn.microsoft.com/azure/container-apps/)
+- [AZD Şablon Galerisi](https://azure.github.io/awesome-azd/)
+- [Container Apps Örnekleri](https://github.com/Azure-Samples/container-apps-samples)
+- [Bicep Şablonları](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ## Katkıda Bulunma
 
-Yeni container uygulama örnekleri eklemek için:
+Yeni konteyner uygulama örnekleri eklemek için:
 
 1. Örneğiniz için yeni bir alt dizin oluşturun
-2. Tam `azure.yaml`, `infra/` ve `src/` dosyalarını ekleyin
-3. Dağıtım talimatlarını içeren kapsamlı bir README ekleyin
-4. Dağıtımı `azd up` ile test edin
-5. Pull request gönderin
+2. Tam `azure.yaml`, `infra/` ve `src/` dosyalarını dahil edin
+3. Dağıtım talimatları içeren kapsamlı bir README ekleyin
+4. `azd up` ile dağıtımı test edin
+5. Bir pull request gönderin
 
 ---
 
@@ -842,6 +844,6 @@ Yeni container uygulama örnekleri eklemek için:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Bu belge, yapay zeka çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucunda ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
+**Feragatname**:
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğinin farkında olun. Orijinal belgenin kendi dilindeki sürümü yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanılmasından kaynaklanan herhangi bir yanlış anlama veya yanlış yorumdan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

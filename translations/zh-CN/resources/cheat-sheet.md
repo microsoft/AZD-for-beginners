@@ -2,32 +2,32 @@
 
 <strong>所有章节快速参考</strong>
 - **📚 课程主页**: [AZD 入门](../README.md)
-- **📖 快速开始**: [第 1 章：基础与快速开始](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI 命令**: [第 2 章：以 AI 为先的开发（推荐给 AI 开发者）](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 高级**: [第 4 章：基础设施即代码](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **📖 快速开始**: [第1章：基础与快速开始](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 AI 命令**: [第2章：以 AI 为先的开发](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 高级**: [第4章：基础设施即代码](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## 介绍
 
-本备忘单为最常用的 Azure Developer CLI 命令提供快速参考，按类别组织并附有实用示例。非常适合在开发、故障排查和使用 azd 项目的日常操作中快速查找。
+本备忘单提供常用 Azure Developer CLI 命令的快速参考，按类别组织并附有实用示例。非常适合在开发、故障排查和使用 azd 项目进行日常操作时快速查找。
 
 ## 学习目标
 
 通过使用此备忘单，您将能够：
-- 即时访问重要的 Azure Developer CLI 命令和语法
+- 能够即时访问常用的 Azure Developer CLI 命令和语法
 - 了解按功能类别和用例组织的命令
 - 参考常见开发和部署场景的实用示例
 - 使用故障排查命令快速解决问题
 - 高效查找高级配置和自定义选项
-- 查找环境管理和多环境工作流命令
+- 定位环境管理和多环境工作流命令
 
 ## 学习成果
 
-经常参考此备忘单，您将能够：
-- 在不查阅完整文档的情况下自信执行 azd 命令
-- 使用适当的诊断命令快速解决常见问题
+通过定期参考此备忘单，您将能够：
+- 无需查阅完整文档即可自信执行 azd 命令
+- 使用合适的诊断命令快速解决常见问题
 - 高效管理多个环境和部署场景
 - 根据需要应用高级 azd 功能和配置选项
-- 使用系统化的命令序列排查部署问题
+- 使用系统化命令序列排查部署问题
 - 通过有效使用 azd 快捷方式和选项优化工作流
 
 ## 入门命令
@@ -40,7 +40,7 @@ azd auth login
 # 登录到 Azure CLI（AZD 在底层使用它）
 az login
 
-# 检查当前帐户
+# 查看当前账户
 az account show
 
 # 设置默认订阅
@@ -74,7 +74,7 @@ azd init --template todo-nodejs-mongo my-awesome-app
 
 ### 完整部署工作流
 ```bash
-# 全部部署（预配 + 部署）
+# 部署所有内容（包含资源预配和部署）
 azd up
 
 # 部署时禁用确认提示
@@ -94,16 +94,16 @@ azd provision
 
 # 🧪 预览基础设施更改
 azd provision --preview
-# 显示将要创建/修改/删除的资源的试运行视图
-# 类似于 'terraform plan' 或 'bicep what-if' - 安全运行，不会应用任何更改
+# 显示资源将被创建、修改或删除的模拟视图
+# 类似于 'terraform plan' 或 'bicep what-if' - 可安全运行，不会应用任何更改
 ```
 
-### 仅应用
+### 仅应用程序
 ```bash
 # 部署应用程序代码
 azd deploy
 
-# 部署指定服务
+# 部署特定服务
 azd deploy --service web
 azd deploy --service api
 
@@ -116,7 +116,7 @@ azd deploy --all
 # 构建应用程序
 azd package
 
-# 构建特定的服务
+# 构建特定服务
 azd package --service api
 ```
 
@@ -134,8 +134,8 @@ azd env new staging --location westus2
 # 选择环境
 azd env select production
 
-# 显示当前环境
-azd env show
+# 显示可用环境
+azd env list
 
 # 刷新环境状态
 azd env refresh
@@ -162,7 +162,7 @@ azd env unset DEBUG
 ### 全局配置
 ```bash
 # 列出所有配置
-azd config list
+azd config show
 
 # 设置全局默认值
 azd config set defaults.location eastus2
@@ -189,7 +189,7 @@ azd show --output json
 
 ## 📊 监控与诊断
 
-### 监控仪表板
+### 监控面板
 ```bash
 # 打开 Azure 门户监控仪表板
 azd monitor
@@ -206,13 +206,13 @@ azd monitor --overview
 
 ### 查看容器日志
 ```bash
-# 通过 Azure CLI 查看日志（适用于容器应用）
+# 通过 Azure CLI 查看日志（适用于 Container Apps）
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
 # 实时查看日志
 az containerapp logs show --name <app-name> --resource-group <rg-name> --follow
 
-# 从 Azure 门户查看日志
+# 通过 Azure 门户查看日志
 azd monitor --logs
 ```
 
@@ -240,7 +240,7 @@ azd down --force
 # 清除已软删除的资源
 azd down --purge
 
-# 完成清理
+# 彻底清理
 azd down --force --purge
 ```
 
@@ -253,7 +253,7 @@ azd version
 azd version
 
 # 查看当前配置
-azd config list
+azd config show
 ```
 
 ## 🔧 高级命令
@@ -277,14 +277,14 @@ azd infra generate
 
 # 🧪 基础设施预览与规划
 azd provision --preview
-# 模拟基础设施配置而不进行实际部署
+# 模拟基础设施配置而不部署
 # 分析 Bicep/Terraform 模板并显示：
-# - 将要添加的资源（绿色 +）
-# - 将要修改的资源（黄色 ~）
-# - 将要删除的资源（红色 -）
-# 可安全运行 - 不会对 Azure 环境做出任何实际更改
+# - 要添加的资源（绿色 +）
+# - 要修改的资源（黄色 ~）
+# - 要删除的资源（红色 -）
+# 可安全运行 - 不会对 Azure 环境进行任何实际更改
 
-# 从 azure.yaml 生成基础设施
+# 从 azure.yaml 合成基础设施
 azd infra synth
 ```
 
@@ -304,7 +304,7 @@ azd show --output json | jq '.services'
 
 ### AZD 扩展
 ```bash
-# 列出所有可用的扩展 (包括 AI)
+# 列出所有可用的扩展（包括 AI）
 azd extension list
 
 # 安装 Foundry agents 扩展
@@ -337,19 +337,19 @@ azd ai agent init -m agent-manifest.yaml --host containerapp
 
 ### MCP 服务器（Alpha）
 ```bash
-# 为您的项目启动 MCP 服务器
+# 为你的项目启动 MCP 服务器
 azd mcp start
 
 # 管理 MCP 操作的工具授权
-azd mcp consent
+azd copilot consent list
 ```
 
 ### 基础设施生成
 ```bash
-# 从您的项目定义生成 IaC 文件
+# 从您的项目定义生成基础设施即代码 (IaC) 文件
 azd infra generate
 
-# 根据 azure.yaml 合成基础设施
+# 从 azure.yaml 合成基础设施
 azd infra synth
 ```
 
@@ -385,7 +385,7 @@ azd env new production
 azd env select dev
 azd up
 
-# 测试并提升到预发布环境
+# 测试并提升到暂存环境
 azd env select staging
 azd up
 
@@ -403,7 +403,7 @@ export AZD_DEBUG=true
 azd show
 
 # 验证配置
-azd config list
+azd config show
 
 # 打开监控仪表板以查看日志
 azd monitor --logs
@@ -420,11 +420,11 @@ azd show --output json
 export AZD_DEBUG=true
 azd <command> --debug
 
-# 禁用遥测以获得更清晰的输出
+# 禁用遥测以使输出更简洁
 export AZD_DISABLE_TELEMETRY=true
 
 # 检查当前配置
-azd config list
+azd config show
 
 # 检查身份验证状态
 az account show
@@ -432,7 +432,7 @@ az account show
 
 ### 模板调试
 ```bash
-# 列出可用模板及其详细信息
+# 列出可用模板及详细信息
 azd template list --output json
 
 # 显示模板信息
@@ -454,17 +454,17 @@ find . -type f  # Linux/macOS
 cd $(azd root)
 
 # 显示 azd 配置目录
-echo $AZD_CONFIG_DIR  # 通常位于 ~/.azd
+echo $AZD_CONFIG_DIR  # 通常是 ~/.azd
 ```
 
-## 🎨 输出格式
+## 🎨 输出格式化
 
 ### JSON 输出
 ```bash
-# 为脚本获取 JSON 输出
+# 获取用于脚本的 JSON 输出
 azd show --output json
 azd env list --output json
-azd config list --output json
+azd config show --output json
 
 # 使用 jq 解析
 azd show --output json | jq '.services.web.endpoint'
@@ -473,21 +473,21 @@ azd env get-values --output json | jq -r '.DATABASE_URL'
 
 ### 表格输出
 ```bash
-# 以表格格式显示
+# 格式化为表格
 azd env list --output table
 
 # 查看已部署的服务
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 常用命令组合
+## 🔧 常见命令组合
 
 ### 健康检查脚本
 ```bash
 #!/bin/bash
 # 快速健康检查
 azd show
-azd env show
+azd env get-values
 azd monitor --logs
 ```
 
@@ -561,7 +561,7 @@ azd show --output json
 
 ### 恢复命令
 ```bash
-# 从失败的部署恢复 - 清理并重新部署
+# 从失败的部署中恢复 - 清理并重新部署
 azd down --force --purge
 azd up
 
@@ -574,16 +574,16 @@ azd deploy
 
 ## 💡 专业提示
 
-### 更快工作流的别名
+### 加速工作流的别名
 ```bash
-# 将其添加到你的 .bashrc 或 .zshrc 中
+# 添加到你的 .bashrc 或 .zshrc
 alias azdup='azd up'
 alias azdm='azd monitor --live'
 alias azds='azd show --output json'
 alias azde='azd env'
 ```
 
-### 功能快捷方式
+### 函数快捷方式
 ```bash
 # 快速环境切换
 azd-env() {
@@ -598,7 +598,7 @@ azd-deploy-watch() {
 # 环境状态
 azd-status() {
     echo "Current environment:"
-    azd env show
+    azd env get-values
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }
@@ -608,7 +608,7 @@ azd-status() {
 
 ### 获取帮助
 ```bash
-# 一般帮助
+# 通用帮助
 azd --help
 azd help
 
@@ -643,11 +643,11 @@ azd template show <template-name> --docs
 
 ---
 
-> **💡 想在编辑器中获得 Azure 命令帮助吗？** 通过 `npx skills add microsoft/github-copilot-for-azure` 安装 [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) — 提供 37 项技能，涵盖 AI、Foundry、部署、诊断等。
+> **💡 想在编辑器中获得 Azure 命令帮助吗？** 安装 [Microsoft Azure Agent 技能](https://skills.sh/microsoft/github-copilot-for-azure)，并运行 `npx skills add microsoft/github-copilot-for-azure` — 包含用于 AI、Foundry、部署、诊断等的 37 项技能。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免责声明**:
-本文件已使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。原始语言的原文应被视为权威来源。对于关键信息，建议使用专业人工翻译。对于因使用本翻译而产生的任何误解或错误解释，我们不承担责任。
+本文档已使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保准确性，但请注意，自动翻译可能包含错误或不准确之处。原始文档的母语版本应被视为权威来源。对于关键信息，建议采用专业人工翻译。我们不对因使用本翻译而产生的任何误解或错误解释承担责任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,67 +1,67 @@
 # Pre-Flight Checks for AZD Deployments
 
-**Hoofdstuknavigatie:**
-- **📚 Cursus Startpagina**: [AZD For Beginners](../../README.md)
-- **📖 Huidig hoofdstuk**: Hoofdstuk 6 - Validatie en planning vóór implementatie
-- **⬅️ Vorige**: [SKU Selection](sku-selection.md)
-- **➡️ Volgend hoofdstuk**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 Gerelateerd**: [Chapter 4: Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Hoofdstuk 6 - Pre-deployment validatie & planning
+- **⬅️ Previous**: [SKU-selectie](sku-selection.md)
+- **➡️ Next Chapter**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 Related**: [Chapter 4: Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
 
-## Introductie
+## Introduction
 
-Deze uitgebreide handleiding biedt pre-implementatie validatiescripts en procedures om succesvolle Azure Developer CLI-implementaties te waarborgen voordat ze beginnen. Leer hoe je geautomatiseerde controles implementeert voor authenticatie, beschikbaarheid van resources, quota's, beveiligingsconformiteit en prestatievereisten om implementatiefouten te voorkomen en de slagingspercentages te optimaliseren.
+Deze uitgebreide gids biedt pre-deployment validatiescripts en procedures om succesvolle Azure Developer CLI-implementaties te waarborgen voordat ze beginnen. Leer geautomatiseerde controles te implementeren voor authenticatie, beschikbaarheid van resources, quota's, beveiligingsnaleving en prestatie-eisen om implementatiefouten te voorkomen en het slagingspercentage van implementaties te optimaliseren.
 
-## Leerdoelen
+## Learning Goals
 
-Door deze handleiding te voltooien, zul je:
-- Geautomatiseerde pre-implementatie validatietechnieken en scripts beheersen
-- Begrijpen hoe je uitgebreide controles uitvoert voor authenticatie, machtigingen en quota's
-- Procedures voor validatie van resourcebeschikbaarheid en capaciteit implementeren
-- Beveiligings- en conformiteitscontroles configureren voor organisatiebeleid
-- Workflows voor kostenraming en budgetvalidatie ontwerpen
-- Aangepaste pre-flight check-automatisering maken voor CI/CD-pipelines
+By completing this guide, you will:
+- Beheers geautomatiseerde pre-deployment validatietechnieken en scripts
+- Begrijp uitgebreide controlestrategieën voor authenticatie, machtigingen en quota
+- Implementeer procedures voor validatie van beschikbaarheid en capaciteit van resources
+- Configureer beveiligings- en nalevingscontroles voor organisatorische beleidsregels
+- Ontwerp workflows voor kostenraming en budgetvalidatie
+- Maak aangepaste pre-flight check-automatisering voor CI/CD-pijplijnen
 
-## Leeruitkomsten
+## Learning Outcomes
 
-Na voltooiing kun je:
-- Uitgebreide pre-flight validatiescripts maken en uitvoeren
-- Geautomatiseerde controleworkflows ontwerpen voor verschillende implementatiescenario's
-- Omgevingsspecifieke validatieprocedures en -beleid implementeren
-- Proactieve monitoring en alerting voor implementatiegereedheid configureren
-- Pre-implementatieproblemen oplossen en corrigerende maatregelen implementeren
-- Pre-flight checks integreren in DevOps-pipelines en automatiseringsworkflows
+Upon completion, you will be able to:
+- Maak en voer uitgebreide pre-flight validatiescripts uit
+- Ontwerp geautomatiseerde controleworkflows voor verschillende implementatiescenario's
+- Implementeer omgevingsspecifieke validatieprocedures en -beleid
+- Configureer proactieve monitoring en waarschuwingen voor implementatiegereedheid
+- Los pre-deployment problemen op en voer corrigerende maatregelen uit
+- Integreer pre-flight checks in DevOps-pijplijnen en automatiseringsworkflows
 
-## Inhoudsopgave
+## Table of Contents
 
-- [Overview](../../../../docs/chapter-06-pre-deployment)
-- [Automated Pre-flight Script](../../../../docs/chapter-06-pre-deployment)
-- [Manual Validation Checklist](../../../../docs/chapter-06-pre-deployment)
-- [Environment Validation](../../../../docs/chapter-06-pre-deployment)
-- [Resource Validation](../../../../docs/chapter-06-pre-deployment)
-- [Security & Compliance Checks](../../../../docs/chapter-06-pre-deployment)
-- [Performance & Capacity Planning](../../../../docs/chapter-06-pre-deployment)
-- [Troubleshooting Common Issues](../../../../docs/chapter-06-pre-deployment)
+- [Overzicht](#overview)
+- [Geautomatiseerd pre-flight script](#automated-pre-flight-script)
+- [Handmatige validatiechecklist](#codeblock1)
+- [Omgevingsvalidatie](#✅-back-up-herstel)
+- [Resourcevalidatie](#validatie-productieomgeving)
+- [Beveiligings- & nalevingscontroles](#security--compliance-checks)
+- [Prestatie- & capaciteitsplanning](#performance--capacity-planning)
+- [Probleemoplossing veelvoorkomende issues](#troubleshooting-common-issues)
 
 ---
 
 ## Overview
 
-Pre-flight checks zijn essentiële controles die worden uitgevoerd vóór implementatie om te verzekeren:
+Pre-flight checks zijn essentiële validaties die worden uitgevoerd voordat er wordt geïmplementeerd om te zorgen voor:
 
-- **Beschikbaarheid van resources** en quota's in doelregio's
-- **Authenticatie en machtigingen** zijn correct geconfigureerd
-- **Validiteit van templates** en juistheid van parameters
+- **Beschikbaarheid van resources** en quota's in doellocaties
+- **Authenticatie en machtigingen** correct geconfigureerd zijn
+- **Geldigheid van templates** en juistheid van parameters
 - **Netwerkconnectiviteit** en afhankelijkheden
-- **Beveiligingsconformiteit** met organisatiebeleid
+- **Beveiligingsnaleving** met organisatorische beleidsregels
 - **Kostenraming** binnen budgettaire beperkingen
 
-### Wanneer pre-flight checks uitvoeren
+### When to Run Pre-flight Checks
 
-- **Vóór de eerste implementatie** naar een nieuwe omgeving
-- **Na aanzienlijke wijzigingen in templates**
-- **Vóór productiedeployments**
-- **Bij het veranderen van Azure-regio's**
-- **Als onderdeel van CI/CD-pipelines**
+- **Before first deployment** to a new environment
+- **After significant template changes**
+- **Before production deployments**
+- **When changing Azure regions**
+- **As part of CI/CD pipelines**
 
 ---
 
@@ -177,7 +177,7 @@ function Test-Authentication {
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # Valideer toegang tot abonnement
+        # Valideer abonnementstoegang
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -210,14 +210,14 @@ function Test-Permissions {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # Test resourcegroepcreatie (indien gespecificeerd)
+        # Test het aanmaken van een resourcegroep (indien opgegeven)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # Test mogelijkheid om een resourcegroep aan te maken
+                # Test of het mogelijk is een resourcegroep te maken
                 try {
                     az group create --name "preflight-test-rg" --location $Location --output none
                     az group delete --name "preflight-test-rg" --yes --output none
@@ -242,7 +242,7 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # Controleer compute-quota
+        # Controleer computequota's
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
         # Controleer specifieke quota
@@ -335,7 +335,7 @@ function Test-TemplateValidation {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # Controleer services
+            # Valideer services
             if ($azureYaml.services) {
                 $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
@@ -360,7 +360,7 @@ function Test-TemplateValidation {
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # Valideer main.bicep indien aanwezig
+            # Valideer main.bicep als het bestaat
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 NIEUW: Test infrastructuurpreview (veilige proefrun)
+    # 🧪 NIEUW: Test voorvertoning van de infrastructuur (veilige proefrun)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -415,7 +415,7 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # Controleer servicebeschikbaarheid in regio
+        # Controleer servicebeschikbaarheid in de regio
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
@@ -446,7 +446,7 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Basis kostenschatting (voor nauwkeurige schattingen is de Azure Pricing API nodig)
+    # Basis kosteninschatting (zou de Azure Pricing API nodig hebben voor nauwkeurige schattingen)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # Controleer gebruik van managed identity
+        # Controleer op gebruik van beheerde identiteit
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +488,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # Controleer of HTTPS wordt afgedwongen
+        # Controleer of HTTPS is afgedwongen
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -557,7 +557,7 @@ function Invoke-PreflightCheck {
     }
 }
 
-# Voer de pre-flightcontrole uit
+# Voer de preflight-controle uit
 Invoke-PreflightCheck
 ```
 
@@ -565,7 +565,7 @@ Invoke-PreflightCheck
 
 ```bash
 #!/bin/bash
-# Bash-versie van preflightcontroles voor Unix/Linux-systemen
+# Bash-versie van preflightcontroles voor Unix-/Linux-systemen
 
 set -euo pipefail
 
@@ -729,7 +729,7 @@ check_regional_availability() {
 }
 
 main() {
-    # Parseer opdrachtregelargumenten
+    # Analyseer opdrachtregelargumenten
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -800,67 +800,67 @@ main "$@"
 
 ### Pre-Deployment Checklist
 
-Print deze checklist en verifieer elk item vóór implementatie:
+Print this checklist and verify each item before deployment:
 
-#### ✅ Omgevingsconfiguratie
+#### ✅ Omgeving instellen
 - [ ] AZD CLI geïnstalleerd en bijgewerkt naar de nieuwste versie
 - [ ] Azure CLI geïnstalleerd en geauthenticeerd
-- [ ] Juiste Azure-subscriptie geselecteerd
-- [ ] Omgevingsnaam is uniek en volgt naamgevingsconventies
-- [ ] Doelresourcegroep geïdentificeerd of kan worden gemaakt
+- [ ] Juiste Azure-abonnement geselecteerd
+- [ ] Omgevingsnaam is uniek en volgt de naamgevingsconventies
+- [ ] Doel-resourcegroep geïdentificeerd of kan worden aangemaakt
 
-#### ✅ Authenticatie & Machtigingen
+#### ✅ Authenticatie & machtigingen
 - [ ] Succesvol geauthenticeerd met `azd auth login`
-- [ ] Gebruiker heeft Contributor-rol op de doelsubscriptie/resourcegroep
-- [ ] Service principal geconfigureerd voor CI/CD (indien van toepassing)
+- [ ] Gebruiker heeft de rol Contributor op het doelabonnement/resourcegroep
+- [ ] Service-principal geconfigureerd voor CI/CD (indien van toepassing)
 - [ ] Geen verlopen certificaten of referenties
 
 #### ✅ Templatevalidatie
-- [ ] `azure.yaml` bestaat en is geldige YAML
-- [ ] Alle services gedefinieerd in azure.yaml hebben bijbehorende broncode
-- [ ] Bicep-templates in de `infra/` map zijn aanwezig
+- [ ] `azure.yaml` bestaat en is geldig YAML
+- [ ] Alle services die zijn gedefinieerd in `azure.yaml` hebben bijbehorende broncode
+- [ ] Bicep-sjablonen in de `infra/` directory zijn aanwezig
 - [ ] `main.bicep` compileert zonder fouten (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Infrastructure preview draait succesvol (`azd provision --preview`)
-- [ ] Alle vereiste parameters hebben standaardwaarden of worden geleverd
-- [ ] Geen hardcoded secrets in templates
+- [ ] 🧪 Infrastructuurpreview wordt succesvol uitgevoerd (`azd provision --preview`)
+- [ ] Alle vereiste parameters hebben standaardwaarden of worden aangeleverd
+- [ ] Geen hardgecodeerde geheimen in templates
 
 #### ✅ Resourceplanning
 - [ ] Doel-Azure-regio geselecteerd en gevalideerd
 - [ ] Vereiste Azure-services beschikbaar in de doelregio
 - [ ] Voldoende quota beschikbaar voor geplande resources
-- [ ] Resource-naamgevingsconflicten gecontroleerd
+- [ ] Controle op naamconflicten van resources uitgevoerd
 - [ ] Afhankelijkheden tussen resources begrepen
 
-#### ✅ Netwerk & Beveiliging
+#### ✅ Netwerk & beveiliging
 - [ ] Netwerkconnectiviteit naar Azure-eindpunten geverifieerd
 - [ ] Firewall/proxy-instellingen geconfigureerd indien nodig
 - [ ] Key Vault geconfigureerd voor geheimenbeheer
-- [ ] Managed identities gebruikt waar mogelijk
+- [ ] Beheerde identiteiten gebruikt waar mogelijk
 - [ ] HTTPS-afdwinging ingeschakeld voor webapplicaties
 
 #### ✅ Kostenbeheer
-- [ ] Kostenramingen berekend met Azure Pricing Calculator
+- [ ] Kostenramingen berekend met de Azure Pricing Calculator
 - [ ] Budgetwaarschuwingen geconfigureerd indien vereist
 - [ ] Geschikte SKU's geselecteerd voor het omgevings-type
 - [ ] Gereserveerde capaciteit overwogen voor productie-workloads
 
-#### ✅ Monitoring & Observeerbaarheid
+#### ✅ Monitoring & observeerbaarheid
 - [ ] Application Insights geconfigureerd in templates
 - [ ] Log Analytics-workspace gepland
 - [ ] Waarschuwingsregels gedefinieerd voor kritieke metrics
-- [ ] Health check endpoints geïmplementeerd in applicaties
+- [ ] Healthcheck-eindpunten geïmplementeerd in applicaties
 
-#### ✅ Backup & Herstel
-- [ ] Back-upstrategie gedefinieerd voor dataresources
-- [ ] Recovery time objectives (RTO) gedocumenteerd
-- [ ] Recovery point objectives (RPO) gedocumenteerd
-- [ ] Disaster recovery-plan aanwezig voor productie
+#### ✅ Back-up & herstel
+- [ ] Back-upstrategie gedefinieerd voor datamiddelen
+- [ ] Recovery Time Objectives (RTO) gedocumenteerd
+- [ ] Recovery Point Objectives (RPO) gedocumenteerd
+- [ ] Rampenherstelplan aanwezig voor productie
 
 ---
 
 ## Environment Validation
 
-### Development Environment Validation
+### Validatie ontwikkelomgeving
 
 ```bash
 #!/bin/bash
@@ -892,7 +892,7 @@ validate_dev_environment() {
 }
 ```
 
-### Production Environment Validation
+### Validatie productieomgeving
 
 ```bash
 #!/bin/bash
@@ -915,7 +915,7 @@ validate_prod_environment() {
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # Valideer monitoringconfiguratie
+    # Valideer de monitoringconfiguratie
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
@@ -935,7 +935,7 @@ validate_prod_environment() {
 
 ## Resource Validation
 
-### Quota Validation Script
+### Quota-validatiescript
 
 ```python
 #!/usr/bin/env python3
@@ -990,7 +990,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # Opslagaccounts in het abonnement ophalen
+    # Haalt opslagaccounts op in de subscription
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -1060,18 +1060,18 @@ if __name__ == "__main__":
 
 ## Security & Compliance Checks
 
-### Security Validation Script
+### Beveiligingsvalidatiescript
 
 ```bash
 #!/bin/bash
-# Beveiligings- en nalevingsvalidatie voor AZD-implementaties
+# Validatie van beveiliging en naleving voor AZD-implementaties
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
     
     local issues_found=0
     
-    # Controleer op gebruik van Key Vault
+    # Controleren op gebruik van Key Vault
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1079,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Controleer op gebruik van beheerde identiteit
+    # Controleren op gebruik van beheerde identiteit
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Controleer op afdwingen van HTTPS
+    # Controleren op afdwingen van HTTPS
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1095,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Controleer op minimale TLS-versie
+    # Controleren op minimale TLS-versie
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1103,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Controleer op beperkingen voor openbare toegang
+    # Controleren op beperkingen voor openbare toegang
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1111,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Controleer op netwerkbeveiligingsgroepen
+    # Controleren op netwerkbeveiligingsgroepen
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1124,21 +1124,21 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # Controleer op gegevensversleuteling
+    # Controleren op gegevensversleuteling
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # Controleer op auditregistratie
+    # Controleren op auditlogging
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # Controleer op back-up- en retentiebeleid
+    # Controleren op back-up- en retentiebeleid
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1179,7 +1179,7 @@ main "$@"
 
 ## Integration with CI/CD
 
-### GitHub Actions Integration
+### Integratie met GitHub Actions
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1238,7 +1238,7 @@ jobs:
         path: preflight-results.json
 ```
 
-### Azure DevOps Integration
+### Integratie met Azure DevOps
 
 ```yaml
 trigger: none
@@ -1295,9 +1295,9 @@ steps:
 ### ✅ Beste praktijken voor pre-flight checks
 
 1. **Automatiseer waar mogelijk**
-   - Integreer controles in CI/CD-pipelines
+   - Integreer controles in CI/CD-pijplijnen
    - Gebruik scripts voor herhaalbare validaties
-   - Bewaar resultaten voor audittrajecten
+   - Sla resultaten op voor auditsporen
 
 2. **Omgevingsspecifieke validatie**
    - Verschillende controles voor dev/staging/prod
@@ -1308,40 +1308,40 @@ steps:
    - Authenticatie en machtigingen
    - Resourcequota's en beschikbaarheid
    - Templatevalidatie en syntaxis
-   - Beveiligings- en conformiteitseisen
+   - Beveiligings- en nalevingsvereisten
 
 4. **Duidelijke rapportage**
-   - Kleurengecodeerde statusindicatoren
+   - Kleurgecodeerde statusindicatoren
    - Gedetailleerde foutmeldingen met herstelstappen
-   - Samenvattende rapporten voor snelle beoordeling
+   - Samenvattingsrapporten voor snelle beoordeling
 
-5. **Snel falen**
-   - Stop de implementatie als kritieke controles falen
-   - Bied duidelijke richtlijnen voor oplossing
+5. **Fail Fast**
+   - Stop de implementatie als kritische controles falen
+   - Geef duidelijke richtlijnen voor oplossing
    - Maak het eenvoudig om controles opnieuw uit te voeren
 
-### Veel voorkomende pre-flight valkuilen
+### Veelvoorkomende pre-flight valkuilen
 
-1. **Validering overslaan** voor "snelle" deployments
-2. **Onvoldoende machtigingen** controleren vóór implementatie
-3. **Quota-limieten negeren** totdat de implementatie faalt
-4. **Templates niet valideren** in CI/CD-pipelines
-5. **Ontbrekende beveiligingsvalidatie** voor productieomgevingen
-6. **Onvoldoende kostenraming** leidend tot onverwachte budgetten
+1. **Skipping validation** voor "quick" deployments
+2. **Insufficient permissions** checking before deployment
+3. **Ignoring quota limits** until deployment fails
+4. **Not validating templates** in CI/CD pipelines
+5. **Missing security validation** for production environments
+6. **Inadequate cost estimation** leading to budget surprises
 
 ---
 
-**Pro-tip**: Voer pre-flight checks uit als een afzonderlijke taak in je CI/CD-pipeline vóór de daadwerkelijke implementatietaak. Dit stelt je in staat problemen vroeg te detecteren en geeft snellere feedback aan ontwikkelaars.
+**Pro Tip**: Voer pre-flight checks uit als een aparte taak in je CI/CD-pijplijn vóór de daadwerkelijke implementatietaak. Dit stelt je in staat problemen vroegtijdig te ontdekken en snellere feedback te geven aan ontwikkelaars.
 
 ---
 
 **Navigatie**
-- **Vorige les**: [SKU Selection](sku-selection.md)
-- **Volgende les**: [Cheat Sheet](../../resources/cheat-sheet.md)
+- **Vorige les**: [SKU-selectie](sku-selection.md)
+- **Volgende les**: [Spiekbriefje](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Dit document is vertaald met behulp van de AI-vertalingsservice [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, dient u er rekening mee te houden dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet als gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we streven naar nauwkeurigheid, houd er rekening mee dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het originele document in de oorspronkelijke taal moet als de gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt een professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor enige misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

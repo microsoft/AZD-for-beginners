@@ -1,20 +1,22 @@
 # Sura 1: Msingi & Anza Haraka
 
-**📚 Kozi**: [AZD For Beginners](../../README.md) | **⏱️ Muda**: 30-45 dakika | **⭐ Ugumu**: Msingi
+**📚 Kozi**: [AZD For Beginners](../../README.md) | **⏱️ Muda**: 30-45 dakika | **⭐ Ugumu**: Beginner
 
 ---
 
 ## Muhtasari
 
-Sura hii inatambulisha msingi wa Azure Developer CLI (azd). Utajifunza dhana za msingi, kusakinisha zana, na kuweka programu yako ya kwanza kwenye Azure.
+Sura hii inaelezea misingi ya Azure Developer CLI (azd). Utajifunza dhana za msingi, kusakinisha zana, na kupeleka programu yako ya kwanza kwenye Azure.
+
+> Imethibitishwa dhidi ya `azd 1.23.12` mwezi Machi 2026.
 
 ## Malengo ya Kujifunza
 
 Kwa kumaliza sura hii, utakuwa umeweza:
-- Elewa Azure Developer CLI ni nini na inavyotofautiana na Azure CLI
+- Elewa Azure Developer CLI ni nini na jinsi inavyotofautiana na Azure CLI
 - Sakinisha na usanidi AZD kwenye jukwaa lako
-- Weka programu yako ya kwanza kwenye Azure kwa kutumia `azd up`
-- Safisha rasilimali kwa kutumia `azd down`
+- Peleka programu yako ya kwanza kwenye Azure kwa `azd up`
+- Safisha rasilimali kwa `azd down`
 
 ---
 
@@ -28,13 +30,32 @@ Kwa kumaliza sura hii, utakuwa umeweza:
 
 ---
 
+## ✅ Anza Hapa: Thibitisha Mipangilio Yako
+
+Kabla ya kuanza, thibitisha kwamba mashine yako ya ndani iko tayari kwa kiolezo cha Sura 1:
+
+**Windows:**
+```powershell
+.\validate-setup.ps1
+```
+
+**macOS / Linux:**
+```bash
+bash ./validate-setup.sh
+```
+
+If the script reports missing tools, fix those first and then continue with the chapter.
+
+---
+
 ## 🚀 Anza Haraka
 
 ```bash
 # Angalia usakinishaji
 azd version
 
-# Ingia kwenye Azure
+# Thibitisha kwa AZD
+# Hiari: az login ikiwa unapanga kuendesha amri za Azure CLI moja kwa moja
 azd auth login
 
 # Sambaza programu yako ya kwanza
@@ -52,34 +73,33 @@ azd down --force --purge
 Baada ya kumaliza sura hii, unapaswa kuwa na uwezo wa:
 
 ```bash
-azd version              # Inaonyesha toleo lililowekwa
+azd version              # Inaonyesha toleo lililosakinishwa
 azd init --template todo-nodejs-mongo  # Inaanzisha mradi
-azd up                   # Inasambaza kwenye Azure
+azd up                   # Inaweka kwenye Azure
 azd show                 # Inaonyesha URL ya programu inayokimbia
 azd down --force --purge # Inasafisha rasilimali
 ```
 
 ---
 
-## 🔗 Uvinjari
+## 🔗 Urambazaji
 
 | Mwelekeo | Sura |
 |-----------|---------|
-| **Ifuatayo** | [Sura 2: Maendeleo ya AI-Kwanza](../chapter-02-ai-development/README.md) |
-| **Ruka kwenda** | [Sura 3: Mipangilio](../chapter-03-configuration/README.md) |
+| **Ijayo** | [Sura 2: Maendeleo ya AI-Kwanza](../chapter-02-ai-development/README.md) |
+| **Ruka hadi** | [Sura 3: Usanidi](../chapter-03-configuration/README.md) |
 
 ---
 
 ## 📖 Rasilimali Zinazohusiana
 
-- [Muhtasari wa Amri](../../resources/cheat-sheet.md)
+- [Mwongozo wa Amri](../../resources/cheat-sheet.md)
 - [Maswali Yanayoulizwa Mara kwa Mara (FAQ)](../../resources/faq.md)
 - [Kamusi](../../resources/glossary.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Tamko la kutokuwa na dhamana:
-
-Waraka huu umetafsiriwa kwa kutumia huduma ya tafsiri ya AI Co-op Translator (https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kufikia usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au ukosefu wa usahihi. Waraka asili katika lugha yake ya awali unapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, inapendekezwa kutumia tafsiri ya mtaalamu wa kibinadamu. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zitokanazo na matumizi ya tafsiri hii.
+**Tamko la kutolea uwajibikaji**:
+Hati hii imefasiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kufikia usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati ya asili katika lugha yake ya asili inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, inapendekezwa kutumia tafsiri ya mtaalamu wa binadamu. Hatuwajibiki kwa kutokuelewana au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

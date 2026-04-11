@@ -1,40 +1,40 @@
-# Gamybinio lygio AI darbo krūvių gerosios praktikos su AZD
+# Geriausios praktikos produkciniams DI darbo krūviams su AZD
 
-**Skyrių naršymas:**
-- **📚 Kurso pradžia**: [AZD For Beginners](../../README.md)
-- **📖 Dabartinis skyrius**: Skyrius 8 - Gamybos ir įmonių modeliai
-- **⬅️ Ankstesnis skyrius**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Taip pat susiję**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎯 Kursas baigtas**: [AZD For Beginners](../../README.md)
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 8 skyrius – Produkciniai ir Įmonių modeliai
+- **⬅️ Ankstesnis skyrius**: [7 skyrius: Gedimų šalinimas](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Taip pat susiję**: [DI dirbtuvės laboratorija](ai-workshop-lab.md)
+- **🎯 Kursas baigtas**: [AZD pradedantiesiems](../../README.md)
 
 ## Apžvalga
 
-Šis vadovas pateikia išsamias gerąsias praktikas diegiant gamybai paruoštus AI darbo krūvius naudojant Azure Developer CLI (AZD). Remiantis Microsoft Foundry Discord bendruomenės atsiliepimais ir realiais klientų diegimais, šios praktikos sprendžia dažniausias problemas gamybos AI sistemose.
+Šiame vadove pateikiamos išsamios geriausios praktikos diegiant produkcinius DI darbo krūvius naudojant Azure Developer CLI (AZD). Remiantis Microsoft Foundry Discord bendruomenės atsiliepimais ir realių klientų diegimais, šios praktikos sprendžia dažniausias problemas produkcinių DI sistemų valdyme.
 
 ## Pagrindinės sprendžiamos problemos
 
-Remiantis mūsų bendruomenės apklausos rezultatais, tai yra pagrindinės problemos, su kuriomis susiduria kūrėjai:
+Remiantis mūsų bendruomenės apklausos rezultatais, tai yra didžiausios kūrėjų iškylančios problemos:
 
-- **45%** susiduria su kelių paslaugų AI diegimu
-- **38%** turi problemų dėl kredencialų ir slaptumo valdymo  
-- **35%** sunkiai sekasi pasiruošti gamybai ir skalavimui
-- **32%** reikia geresnių kaštų optimizavimo strategijų
-- **29%** reikalingas pagerintas stebėjimas ir gedimų šalinimas
+- **45 %** susiduria su daugiapakopio DI diegimu
+- **38 %** patiria sunkumų su kredencialų ir slaptų duomenų valdymu  
+- **35 %** sunkiai įgyvendina produkcinį pasirengimą ir mastelį
+- **32 %** reikia geresnių sąnaudų optimizavimo strategijų
+- **29 %** reikalauja patobulinto stebėjimo ir gedimų šalinimo
 
-## Gamybos AI architektūros modeliai
+## Produkcinio DI architektūros modeliai
 
-### Modelis 1: Mikroservisų AI architektūra
+### Modelis 1: Mikroservisų DI architektūra
 
-**Kada naudoti**: Sudėtingoms AI programoms su keliomis galimybėmis
+**Kada naudoti**: Sudėtingoms DI programoms su keliomis funkcijomis
 
 ```mermaid
 graph TD
-    Frontend[Žiniatinklio priekinė dalis] --- Gateway[API vartai] --- LB[apkrovos balansavimo įrenginys]
+    Frontend[Žiniatinklio priekinė dalis] --- Gateway[API Vartai] --- LB[Krūvio balansavimas]
     Gateway --> Chat[Pokalbių paslauga]
     Gateway --> Image[Vaizdų paslauga]
     Gateway --> Text[Teksto paslauga]
     Chat --> OpenAI[Microsoft Foundry modeliai]
-    Image --> Vision[Kompiuterinis regėjimas]
+    Image --> Vision[Kompiuterinė vizija]
     Text --> DocIntel[Dokumentų intelektas]
 ```
 **AZD įgyvendinimas**:
@@ -60,9 +60,9 @@ services:
     host: containerapp
 ```
 
-### Modelis 2: Įvykių valdomas AI apdorojimas
+### Modelis 2: Įvykių valdomas DI apdorojimas
 
-**Kada naudoti**: Paketinis apdorojimas, dokumentų analizė, asinchroniniai darbo srautai
+**Kada naudoti**: Paketinis apdorojimas, dokumentų analizė, asinchroniniai srautai
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -109,46 +109,46 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Galvojimas apie AI agento sveikatą
+## Mąstymas apie DI agento būklę
 
-Kai tradicinė žiniatinklio programa sugenda, simptomai yra pažįstami: puslapis neužsikrauna, API grąžina klaidą arba diegimas nepasiseka. AI varomos programos gali sugesti tais pačiais būdais — bet jos taip pat gali elgtis subtiliau, nesukeldamos akivaizdžių klaidų pranešimų.
+Kai tradicinė žiniatinklio programa sugenda, simptomai yra pažįstami: puslapis neįsikrauna, API grąžina klaidą arba diegimas nepavyksta. DI varomos programos gali sugesti tais pačiais būdais – bet taip pat gali elgtis subtiliau, nerodydamos akivaizdžių klaidų pranešimų.
 
-Ši skiltis padeda sukurti dėsningą modelį AI darbo krūvių stebėjimui, kad žinotumėte, kur ieškoti, kai kas nors negerai.
+Šiame skyriuje padėsime sukurti mentalinį modelį DI darbo krūvių stebėjimui, kad žinotumėte, kur ieškoti, kai kažkas neveikia kaip tikėtasi.
 
-### Kaip agento sveikata skiriasi nuo tradicinės programos sveikatos
+### Kaip agento būklė skiriasi nuo tradicinės programos būklės
 
-Tradicinė programa arba veikia, arba neveikia. AI agentas gali atrodyti, kad veikia, tačiau duoti prastus rezultatus. Galvokite apie agento sveikatą dviem sluoksniais:
+Tradicinė programa veikia arba neveikia. DI agentas gali atrodyti, kad veikia, bet generuoti prastus rezultatus. Apgalvokite agento būklę dviem sluoksniais:
 
-| Layer | What to Watch | Where to Look |
-|-------|--------------|---------------|
-| **Infrastructure health** | Ar paslauga veikia? Ar resursai aprovisionuoti? Ar pabaigos taškai pasiekiami? | `azd monitor`, Azure Portal resource health, container/app logs |
-| **Behavior health** | Ar agentas atsako tiksliai? Ar atsakymai laiku? Ar modelis kviečiamas taisyklingai? | Application Insights traces, model call latency metrics, response quality logs |
+| Sluoksnis | Ką stebėti | Kur žiūrėti |
+|-----------|------------|-------------|
+| **Infrastruktūros būklė** | Ar paslauga veikia? Ar ištekliai paskirti? Ar galimi prieigos taškai? | `azd monitor`, Azure portalas – išteklių būklė, konteinerių/programos žurnalai |
+| **Elgsenos būklė** | Ar agentas tiksliai atsako? Ar atsakymai laiku? Ar teisingai kviečiamas modelis? | Application Insights pėdsakai, modelio kvietimo delsos metrikos, atsakymų kokybės žurnalai |
 
-Infrastruktūros sveikata yra pažįstama — ji ta pati bet kuriai azd programai. Elgesio sveikata yra naujas sluoksnis, kurį įveda AI darbo krūviai.
+Infrastruktūros būklė yra pažįstama – tokia pati kaip bet kuriai azd programai. Elgsenos būklė yra naujas sluoksnis, kurį įveda DI darbo krūviai.
 
-### Kur žiūrėti, kai AI programos elgiasi ne taip, kaip tikėtasi
+### Kur žiūrėti, kai DI programos veikia ne taip, kaip tikėtasi
 
-Jei jūsų AI programa neduoda tikėtinų rezultatų, čia yra konceptualus kontrolinis sąrašas:
+Jei jūsų DI programa nesuteikia laukiamų rezultatų, pateikiame konceptualų kontrolinį sąrašą:
 
-1. **Pradėkite nuo pagrindų.** Ar programa veikia? Ar ji gali pasiekti savo priklausomybes? Patikrinkite `azd monitor` ir resursų sveikatą taip pat, kaip bet kuriai programai.
-2. **Patikrinkite modelio ryšį.** Ar jūsų programa sėkmingai kviečia AI modelį? Nepavykę ar laiku neatsakyti modelio kvietimai yra dažniausia AI programų problemų priežastis ir pasirodys jūsų programos žurnaluose.
-3. **Pažiūrėkite, ką modelis gavo.** AI atsakymai priklauso nuo įvesties (prompt'o ir bet kokio paimto konteksto). Jei išvestis neteisinga, dažniausiai įvestis yra neteisinga. Patikrinkite, ar jūsų programa siunčia teisingus duomenis modeliui.
-4. **Peržvelkite atsakymo vėlinimą.** AI modelio kvietimai yra lėtesni už tipiškus API kvietimus. Jei programa atrodo lėta, patikrinkite, ar modelio atsakymo laikai padidėjo — tai gali reikšti ribojimą (throttling), talpos ribas arba regioninius perpildymus.
-5. **Stebėkite kaštų signalus.** Nenumatytas žetonų arba API kvietimų šuolis gali reikšti ciklą, neteisingai sukonfigūruotą prompt'ą arba perteklinius bandymus.
+1. **Pradėkite nuo pagrindų.** Ar programa veikia? Ar ji pasiekia savo priklausomybes? Patikrinkite `azd monitor` ir išteklių būklę kaip bet kuriam kitam programai.
+2. **Patikrinkite modelio ryšį.** Ar jūsų programa sėkmingai siunčia užklausas DI modeliui? Neišpildyti ar laiko limitą viršiję kvietimai yra dažniausia DI programų problemų priežastis ir matysis jūsų programos žurnaluose.
+3. **Peržiūrėkite, ką modelis gavo.** DI atsakymai priklauso nuo įvesties (užklausos ir bet kokio gauto konteksto). Jei išvestis neteisinga, paprastai įvestis klaidinga. Patikrinkite, ar jūsų programa siunčia tinkamus duomenis modeliui.
+4. **Peržiūrėkite atsakymo delsą.** DI modelių kvietimai yra lėtesni nei įprasti API kvietimai. Jei programa atrodo lėta, patikrinkite, ar modelio atsako laikas padidėjo – tai gali rodyti ribojimus, pajėgumų apribojimus ar regiono tinklo apkrovimą.
+5. **Stebėkite sąnaudų signalus.** Netikėti žetonų panaudojimo ar API kvietimų šuoliai gali rodyti kilpą, neteisingai sukonfigūruotą užklausą ar per daug bandymų.
 
-Jums nereikia iš karto įvaldyti stebėjimo įrankių. Svarbiausia išvada — AI programoms reikia papildomo elgesio sluoksnio stebėjimo, o azd įmontuotas stebėjimas (`azd monitor`) suteikia pradžios tašką abiems sluoksniams tirti.
+Jums nereikia iškart išmokti visų stebėjimo įrankių. Pagrindinė išvada – DI programoms reikia stebėti papildomą elgesio sluoksnį, o azd integruota stebėjimo priemonė (`azd monitor`) suteikia pradinę poziciją abiems sluoksniams tirti.
 
 ---
 
-## Saugumo gerosios praktikos
+## Saugumo geriausios praktikos
 
 ### 1. Nulinio pasitikėjimo saugumo modelis
 
 **Įgyvendinimo strategija**:
-- Jokio paslaugos į paslaugą ryšio be autentifikacijos
-- Visi API kvietimai naudoja managed identities
-- Tinklo izoliacija su private endpoints
-- Mažiausių teisių prieigos kontrolė
+- Jokio paslaugų tarpusavio komunikavimo be autentifikacijos
+- Visi API kvietimai naudoja valdomas tapatybes
+- Tinklo izoliacija naudojant privačius prieigos taškus
+- Mažiausios teisės prieigos kontrolė
 
 ```bicep
 // Managed Identity for each service
@@ -169,7 +169,7 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. Saugus slaptumų valdymas
+### 2. Saugus slaptažodžių valdymas
 
 **Key Vault integracijos modelis**:
 
@@ -206,7 +206,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### 3. Tinklo saugumas
 
-**Private Endpoint konfigūracija**:
+**Privataus prieigos taško konfigūracija**:
 
 ```bicep
 // Virtual Network for AI services
@@ -264,7 +264,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Veikimas ir skalavimas
+## Veikimo našumas ir skalavimas
 
 ### 1. Automatinio skalavimo strategijos
 
@@ -312,9 +312,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. Kešavimo strategijos
+### 2. Talpyklos strategijos
 
-**Redis kešas AI atsakymams**:
+**Redis talpykla DI atsakymams**:
 
 ```bicep
 // Redis Premium for production workloads
@@ -342,7 +342,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Apkrovos balansavimas ir eismo valdymas
+### 3. Apkrovos balansavimas ir srauto valdymas
 
 **Application Gateway su WAF**:
 
@@ -380,14 +380,14 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 💰 Kaštų optimizavimas
+## 💰 Sąnaudų optimizavimas
 
-### 1. Resursų tinkamas dydis
+### 1. Išteklių tinkamas dydis
 
 **Aplinkai specifinės konfigūracijos**:
 
 ```bash
-# Vystymo aplinka
+# Kūrimo aplinka
 azd env new development
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -395,7 +395,7 @@ azd env set AZURE_SEARCH_SKU "basic"
 azd env set CONTAINER_CPU 0.5
 azd env set CONTAINER_MEMORY 1.0
 
-# Gamybinė aplinka
+# Gamybos aplinka
 azd env new production
 azd env set AZURE_OPENAI_SKU "S0"
 azd env set AZURE_OPENAI_CAPACITY 100
@@ -404,7 +404,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Kaštų stebėjimas ir biudžetai
+### 2. Sąnaudų stebėjimas ir biudžetai
 
 ```bicep
 // Cost management and budgets
@@ -447,10 +447,10 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 
 ### 3. Žetonų naudojimo optimizavimas
 
-**OpenAI kaštų valdymas**:
+**OpenAI sąnaudų valdymas**:
 
 ```typescript
-// Programos lygio žetonų optimizavimas
+// Programėlės lygmens žetonų optimizavimas
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -460,7 +460,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Trumpinkite kontekstą, ne vartotojo įvestį
+      // Apkarpyti kontekstą, ne vartotojo įvestį
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -474,7 +474,7 @@ class TokenOptimizer {
 }
 ```
 
-## Stebėjimas ir observabilumas
+## Stebėjimas ir matomumas
 
 ### 1. Išsamus Application Insights
 
@@ -521,9 +521,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. AI specifiškas stebėjimas
+### 2. DI specifinis stebėjimas
 
-**Pasirinktinių AI metrikų prietaisų skydai**:
+**Pritaikyti skydeliai DI metrikoms**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -552,7 +552,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Sveikatos patikros ir veikimo laiko stebėjimas
+### 3. Būklės tikrinimai ir veikimo laiko stebėjimas
 
 ```bicep
 // Application Insights availability tests
@@ -621,9 +621,9 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Atsparumas gedimams ir aukštas prieinamumas
+## Atsparumo gedimams ir didelis pasiekiamumas
 
-### 1. Daugregionis diegimas
+### 1. Daugiataučių diegimas
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -685,7 +685,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Duomenų atsarginė kopija ir atkūrimas
+### 2. Duomenų atsarginės kopijos ir atkūrimas
 
 ```bicep
 // Backup configuration for critical data
@@ -738,7 +738,7 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 
 ## DevOps ir CI/CD integracija
 
-### 1. GitHub Actions darbo eiga
+### 1. GitHub Actions darbų eiga
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -782,7 +782,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup AZD
-        uses: Azure/setup-azd@v1.0.0
+        uses: Azure/setup-azd@v2
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -802,7 +802,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup AZD
-        uses: Azure/setup-azd@v1.0.0
+        uses: Azure/setup-azd@v2
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -819,7 +819,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. Infrastruktūros validacija
+### 2. Infrastruktūros patikra
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -827,7 +827,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Patikrinti, ar visos reikiamos paslaugos veikia
+# Patikrinti, ar veikia visi reikalingi servisai
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -837,88 +837,88 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Patikrinti OpenAI modelių diegimus
+# Patvirtinti OpenAI modelių diegimus
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
-if [[ ! $models == *"gpt-35-turbo"* ]]; then
-    echo "ERROR: Required model gpt-35-turbo not deployed"
+if [[ ! $models == *"gpt-4.1-mini"* ]]; then
+  echo "ERROR: Required model gpt-4.1-mini not deployed"
     exit 1
 fi
 
-# Išbandyti DI paslaugos ryšį
+# Išbandyti AI paslaugos ryšį
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Gamybos pasirengimo kontrolinis sąrašas
+## Produkcinio pasirengimo kontrolinis sąrašas
 
 ### Saugumas ✅
-- [ ] Visos paslaugos naudoja managed identities
-- [ ] Slapti saugomi Key Vault
-- [ ] Private endpoints sukonfigūruoti
-- [ ] Tinklo saugumo grupės įdiegtos
-- [ ] RBAC su mažiausiomis teisėmis
-- [ ] WAF įjungtas viešuose pabaigos taškuose
+- [ ] Visos paslaugos naudoja valdomas tapatybes
+- [ ] Slaptažodžiai saugomi Key Vault
+- [ ] Privatieji prieigos taškai sukonfigūruoti
+- [ ] Įdiegti tinklo saugumo grupės
+- [ ] RBAC su mažiausiais leidimais
+- [ ] WAF įjungtas viešuose prieigos taškuose
 
 ### Veikimas ✅
 - [ ] Automatinis skalavimas sukonfigūruotas
-- [ ] Kešavimas įdiegtas
-- [ ] Apkrovos balansavimas nustatytas
+- [ ] Įdiegtas talpinimas
+- [ ] Apkrovos balansavimas įdiegtas
 - [ ] CDN statiniam turiniui
-- [ ] Duomenų bazės ryšių pulimas
+- [ ] Duomenų bazės jungčių kaupimas
 - [ ] Žetonų naudojimo optimizavimas
 
 ### Stebėjimas ✅
 - [ ] Application Insights sukonfigūruotas
-- [ ] Pasirinktinės metrikos apibrėžtos
-- [ ] Įspėjimų taisyklės nustatytos
-- [ ] Prietaisų skydas sukurtas
-- [ ] Sveikatos patikros įdiegtos
-- [ ] Žurnalų saugojimo taisyklės
+- [ ] Apibrėžtos pritaikytos metrikos
+- [ ] Įjungti įspėjimų taisyklės
+- [ ] Sukurtas informacinis skydelis
+- [ ] Įdiegtos būklės patikros
+- [ ] Žurnalų saugojimo politikos
 
 ### Patikimumas ✅
-- [ ] Daugregionis diegimas
+- [ ] Daugiataučių diegimas
 - [ ] Atsarginės kopijos ir atkūrimo planas
-- [ ] Įgyvendinti circuit breakers
-- [ ] Retry politikos sukonfigūruotos
-- [ ] Malonus degradavimas (graceful degradation)
-- [ ] Sveikatos patikros pabaigos taškai
+- [ ] Įdiegtos grandinės pertraukikliai
+- [ ] Konfigūruotos pakartotinės bandymo politikos
+- [ ] Maloniai sumažinama paslauga
+- [ ] Būklės patikrinimo prieigos taškai
 
-### Kaštų valdymas ✅
+### Sąnaudų valdymas ✅
 - [ ] Biudžeto įspėjimai sukonfigūruoti
-- [ ] Resursų tinkamas dydis
-- [ ] Taikomos dev/test nuolaidos
+- [ ] Išteklių tinkamas dydis
+- [ ] Taikomos kūrimo/testavimo nuolaidos
 - [ ] Įsigytos rezervuotos instancijos
-- [ ] Kaštų stebėjimo prietaisų skydas
-- [ ] Reguliarūs kaštų peržiūros
+- [ ] Sąnaudų stebėjimo skydelis
+- [ ] Reguliarūs sąnaudų peržiūros
 
 ### Atitiktis ✅
-- [ ] Duomenų rezidencijos reikalavimai įvykdyti
-- [ ] Audit žurnavimas įjungtas
+- [ ] Atitinkami duomenų lokalizacijos reikalavimai
+- [ ] Įjungtas auditavimo žurnalas
 - [ ] Taikomos atitikties politikos
-- [ ] Įdiegti saugumo pagrindai
+- [ ] Įdiegtos saugumo bazės linijos
 - [ ] Reguliarūs saugumo vertinimai
-- [ ] Incidentų reagavimo planas
+- [ ] Įvykio atsako planas
 
-## Veikimo etalonai
+## Veikimo našumo etalonai
 
-### Tipinės gamybos metrikos
+### Tipinės produkcijos metrikos
 
-| Metric | Target | Monitoring |
-|--------|--------|------------|
-| **Response Time** | < 2 seconds | Application Insights |
-| **Availability** | 99.9% | Uptime monitoring |
-| **Error Rate** | < 0.1% | Application logs |
-| **Token Usage** | < $500/month | Cost management |
-| **Concurrent Users** | 1000+ | Load testing |
-| **Recovery Time** | < 1 hour | Disaster recovery tests |
+| Metrika | Tikslas | Stebėjimas |
+|---------|---------|------------|
+| **Atsako laikas** | < 2 sekundžių | Application Insights |
+| **Pasiekiamumas** | 99,9 % | Veikimo laiko stebėjimas |
+| **Klaidų dažnis** | < 0,1 % | Programos žurnalai |
+| **Žetonų naudojimas** | < 500 USD/mėn. | Sąnaudų valdymas |
+| **Konkuruojantys vartotojai** | 1000+ | Apkrovos testavimas |
+| **Atstatymo laikas** | < 1 valanda | Atsparumo gedimams testai |
 
 ### Apkrovos testavimas
 
 ```bash
-# Skriptas apkrovos testavimui dirbtinio intelekto programoms
+# Apkrovos testavimo scenarijus dirbtinio intelekto programoms
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -926,126 +926,129 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Bendruomenės gerosios praktikos
+## 🤝 Bendruomenės geriausios praktikos
 
 Remiantis Microsoft Foundry Discord bendruomenės atsiliepimais:
 
 ### Pagrindinės bendruomenės rekomendacijos:
 
-1. **Pradėkite mažai, skalaukite palaipsniui**: Pradėkite su baziniais SKU ir didinkite pagal faktinį naudojimą
+1. **Pradėkite nuo mažo, didinkite palaipsniui**: Pradėkite nuo pagrindinių SKU, didinkite pagal faktinį naudojimą
 2. **Stebėkite viską**: Nustatykite išsamų stebėjimą nuo pirmos dienos
-3. **Automatizuokite saugumą**: Naudokite infrastruktūrą kaip kodą nuosekliam saugumui
-4. **Testuokite kruopščiai**: Įtraukite AI specifiškus testus į savo pipeline
-5. **Planuokite kaštus**: Stebėkite žetonų naudojimą ir anksti nustatykite biudžeto įspėjimus
+3. **Automatizuokite saugumą**: Naudokite infrastruktūrą kaip kodą nuosekliam saugumui užtikrinti
+4. **Atlikite kruopštus testavimus**: Įtraukite DI specifinius testus į savo procesą
+5. **Planuokite išlaidas**: Stebėkite žetonų naudojimą ir anksti nustatykite biudžeto įspėjimus
 
 ### Dažnos klaidos, kurių reikėtų vengti:
 
-- ❌ API raktų įkalbinimas kode
-- ❌ Netinkamas stebėjimo nustatymas
-- ❌ Ignoruojant kaštų optimizavimą
-- ❌ Nevykdymas testuojant gedimo scenarijus
-- ❌ Diegimas be sveikatos patikrinimų
+- ❌ API raktų kietojo kodavimo kode
+- ❌ Nenurodytas tinkamas stebėjimas
+- ❌ Sąnaudų optimizavimo ignoravimas
+- ❌ Nenuoseklus gedimų scenarijų testavimas
+- ❌ Diegimas be būklės patikrinimų
 
-## AZD AI CLI komandos ir plėtiniai
+## AZD DI CLI komandos ir plėtiniai
 
-AZD apima augantį AI specifinių komandų ir plėtinių rinkinį, kuris supaprastina gamybinio AI darbo krūvių srautus. Šie įrankiai sujungia vietinio vystymo ir gamybinio diegimo spragas AI darbo krūviams.
+AZD apima vis didėjantį DI specifinių komandų ir plėtinių rinkinį, kuris supaprastina produkcinių DI darbo krūvių valdymą. Šie įrankiai sujungia vietinę kūrimą su produkciniu diegimu DI darbo krūviams.
 
-### AZD plėtiniai AI
+### AZD plėtiniai DI
 
-AZD naudoja plėtinių sistemą AI specifinėms galimybėms pridėti. Įdiekite ir valdykite plėtinius su:
+AZD naudoja plėtinių sistemą, kad pridėtų DI specifines funkcijas. Įdiekite ir valdykite plėtinius su:
 
 ```bash
-# Išvardinti visus prieinamus plėtinius (įskaitant dirbtinį intelektą)
+# Išvardinkite visas galimas plėtinius (įskaitant DI)
 azd extension list
 
-# Įdiegti Foundry agentų plėtinį
+# Peržiūrėkite įdiegtų plėtinių detales
+azd extension show azure.ai.agents
+
+# Įdiekite Foundry agentų plėtinį
 azd extension install azure.ai.agents
 
-# Įdiegti smulkiojo derinimo plėtinį
+# Įdiekite tikslinimo plėtinį
 azd extension install azure.ai.finetune
 
-# Įdiegti pasirinktinų modelių plėtinį
+# Įdiekite pritaikytų modelių plėtinį
 azd extension install azure.ai.models
 
-# Atnaujinti visus įdiegtus plėtinius
+# Atnaujinkite visus įdiegtus plėtinius
 azd extension upgrade --all
 ```
 
-**Galimi AI plėtiniai:**
+**Galimi DI plėtiniai:**
 
-| Extension | Purpose | Status |
-|-----------|---------|--------|
-| `azure.ai.agents` | Foundry Agent Service valdymas | Preview |
-| `azure.ai.finetune` | Foundry modelio fine-tuning | Preview |
-| `azure.ai.models` | Foundry custom models | Preview |
-| `azure.coding-agent` | Coding agent konfigūracija | Available |
+| Plėtinys | Paskirtis | Statusas |
+|----------|-----------|----------|
+| `azure.ai.agents` | Foundry agentų paslaugų valdymas | Peržiūros fazė |
+| `azure.ai.finetune` | Foundry modelių tikslinimas | Peržiūros fazė |
+| `azure.ai.models` | Foundry individualūs modeliai | Peržiūros fazė |
+| `azure.coding-agent` | Koduojančio agento konfigūracija | Prieinamas |
 
 ### Agentų projektų inicializavimas su `azd ai agent init`
 
-Komanda `azd ai agent init` sukuria gamybai paruoštą AI agento projekto karkasą, integruotą su Microsoft Foundry Agent Service:
+Komanda `azd ai agent init` sukuria produkcijai paruoštą DI agento projektą, integruotą su Microsoft Foundry Agent Service:
 
 ```bash
-# Inicializuoti naują agento projektą iš agento manifesto
+# Inicializuokite naują agento projektą iš agento manifesto
 azd ai agent init -m <manifest-path-or-uri>
 
-# Inicializuoti ir nukreipti į konkretų Foundry projektą
+# Inicializuokite ir nukreipkite į konkretų Foundry projektą
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# Inicializuoti su pasirinktu šaltinio katalogu
+# Inicializuokite su pasirinktu šaltinio katalogu
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
-# Nustatyti Container Apps kaip talpinimo platformą
+# Nustatykite Container Apps kaip prieglobą
 azd ai agent init -m agent-manifest.yaml --host containerapp
 ```
 
-**Pagrindiniai parametrai:**
+**Pagrindinės parinktys:**
 
-| Flag | Description |
-|------|-------------|
-| `-m, --manifest` | Path or URI to an agent manifest to add to your project |
-| `-p, --project-id` | Existing Microsoft Foundry Project ID for your azd environment |
-| `-s, --src` | Directory to download the agent definition (defaults to `src/<agent-id>`) |
-| `--host` | Override the default host (e.g., `containerapp`) |
-| `-e, --environment` | The azd environment to use |
+| Parinktis | Aprašymas |
+|-----------|-----------|
+| `-m, --manifest` | Agentų manifestas failo kelias arba URI, pridėti prie projekto |
+| `-p, --project-id` | Esamas Microsoft Foundry projekto ID jūsų azd aplinkai |
+| `-s, --src` | Katalogas agento aprašui atsisiųsti (numatyta `src/<agent-id>`) |
+| `--host` | Numatytojo talpinimo pakeitimas (pvz., `containerapp`) |
+| `-e, --environment` | Naudojama azd aplinka |
 
-**Gamybos patarimas**: Naudokite `--project-id`, kad tiesiogiai prijungtumėte prie esamo Foundry projekto, palaikydami agento kodą ir debesies resursus susietus nuo pat pradžių.
+**Produkcinis patarimas**: Naudokite `--project-id`, kad iš karto susietumėte su esamu Foundry projektu, taip išlaikydami agento kodą ir debesų išteklius nuo pradžios.
 
-### Model Context Protocol (MCP) su `azd mcp`
+### Modelio konteksto protokolas (MCP) su `azd mcp`
 
-AZD turi įmontuotą MCP serverio palaikymą (Alpha), leidžiantį AI agentams ir įrankiams bendrauti su jūsų Azure resursais per standartizuotą protokolą:
+AZD įtraukia integruotą MCP serverio palaikymą (Alfa versija), leidžiantį DI agentams ir įrankiams bendrauti su jūsų Azure ištekliais per standartizuotą protokolą:
 
 ```bash
-# Paleisti MCP serverį jūsų projektui
+# Paleiskite MCP serverį savo projektui
 azd mcp start
 
-# Valdyti įrankio sutikimą MCP operacijoms
-azd mcp consent
+# Peržiūrėkite dabartines Copilot sutikimo taisykles įrankio vykdymui
+azd copilot consent list
 ```
 
-MCP serveris atskleidžia jūsų azd projekto kontekstą — aplinkas, paslaugas ir Azure resursus — AI palaikomiems vystymo įrankiams. Tai leidžia:
+MCP serveris pateikia jūsų azd projekto kontekstą – aplinkas, paslaugas ir Azure išteklius – DI varomiems kūrimo įrankiams. Tai leidžia:
 
-- **AI palaikomas diegimas**: Leiskite coding agentams užklausti jūsų projekto būsenos ir inicijuoti diegimus
-- **Resursų atradimas**: AI įrankiai gali atrasti, kokius Azure resursus naudoja jūsų projektas
-- **Aplinkos valdymas**: Agentai gali perjungti tarp dev/staging/production aplinkų
+- **DI palaikomą diegimą**: Leiskite kodavimo agentams užklausti projekto būklės ir inicijuoti diegimus
+- **Išteklių atradimą**: DI įrankiai gali aptikti, kokius Azure išteklius naudoja projektas
+- **Aplinkos valdymą**: Agentai gali persijungti tarp kūrimo/perskirstymo/produkcinės aplinkų
 
 ### Infrastruktūros generavimas su `azd infra generate`
 
-Gamybos AI darbo krūviams galite sugeneruoti ir pritaikyti Infrastructure as Code, o ne pasikliauti automatinio aprovisionavimo priemonėmis:
+Produkciniams DI darbo krūviams galite generuoti ir suasmeninti infrastruktūrą kaip kodą, o ne remtis automatinio paruošimo procesu:
 
 ```bash
-# Sugeneruoti Bicep/Terraform failus iš jūsų projekto apibrėžimo
+# Sugeneruokite Bicep/Terraform failus iš savo projekto aprašymo
 azd infra generate
 ```
 
-Tai įrašo IaC į diską, kad galėtumėte:
-- Peržiūrėti ir audituoti infrastruktūrą prieš diegiant
-- Pridėti pasirinktines saugumo politikas (tinklo taisyklės, private endpoints)
+Tai įrašo IaC į diską, todėl galite:
+- Peržiūrėti ir audituoti infrastruktūrą prieš diegdami
+- Pridėti savo saugumo politiką (tinklų taisykles, privačius prieigos taškus)
 - Integruoti su esamais IaC peržiūros procesais
-- Versijuoti infrastruktūros pakeitimus atskirai nuo programos kodo
+- Valdyti infrastruktūros pakeitimus versijų kontrolėje atskirai nuo programos kodo
 
-### Gamybos gyvavimo ciklo kabliai (hooks)
+### Produkciniai gyvenimo ciklo kabliukai
 
-AZD hook'ai leidžia įkišti pasirinktą logiką kiekviename diegimo gyvavimo ciklo etape — tai kritiška gamybos AI darbo srautams:
+AZD kabliukai leidžia pridėti savo logiką kiekviename diegimo etape – itin svarbus produkciniams DI darbo krūviams:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1074,85 +1077,85 @@ services:
 ```
 
 ```bash
-# Vykdyti konkretų hooką rankiniu būdu vystymo metu
+# Vykdyti tam tikrą kabliuką rankiniu būdu kūrimo metu
 azd hooks run predeploy
 ```
 
-**Rekomenduojami gamybos hook'ai AI darbo krūviams:**
+**Rekomenduojami produkcijos kabliukai DI darbo krūviams:**
 
-| Hook | Use Case |
-|------|----------|
-| `preprovision` | Validuoti prenumeratos kvotas AI modelio talpai |
-| `postprovision` | Konfigūruoti private endpoints, diegti modelio svorius |
-| `predeploy` | Vykdyti AI saugumo testus, validuoti prompt šablonus |
-| `postdeploy` | Atlikti smoke test agento atsakymams, patikrinti modelio jungtį |
+| Kabliukas | Naudojimo atvejis |
+|-----------|-------------------|
+| `preprovision` | Prenumeratos kvotų patikra DI modelio pajėgumui |
+| `postprovision` | Privataus prieigos taško konfigūracija, modelio svorių diegimas |
+| `predeploy` | DI saugumo testai, užklausų šablonų validacija |
+| `postdeploy` | Agentų atsakymų pirminiai testai, modelio ryšio patikrinimas |
 
-### CI/CD pipeline konfigūracija
+### CI/CD tinklo konfigūracija
 
-Naudokite `azd pipeline config`, kad prijungtumėte savo projektą prie GitHub Actions arba Azure Pipelines su saugia Azure autentifikacija:
+Naudokite `azd pipeline config`, kad sujungtumėte projektą su GitHub Actions ar Azure Pipelines su saugia Azure autentifikacija:
 
 ```bash
-# Konfigūruoti CI/CD vamzdyną (interaktyviai)
+# Sukonfigūruokite CI/CD kanalą (interaktyvus)
 azd pipeline config
 
-# Konfigūruoti su konkrečiu teikėju
+# Konfigūruokite su konkrečiu tiekėju
 azd pipeline config --provider github
 ```
 
 Ši komanda:
-- Sukuria service principal su mažiausių teisių prieiga
+- Sukuria paslaugų principalą su mažiausio privilegijų prieiga
 - Konfigūruoja federuotus kredencialus (be saugomų slaptažodžių)
-- Sugeneruoja arba atnaujina jūsų pipeline aprašymo failą
-- Nustato reikalingus aplinkos kintamuosius jūsų CI/CD sistemoje
+- Sukuria arba atnaujina jūsų tinklo aprašymo failą
+- Nustato reikiamus aplinkos kintamuosius CI/CD sistemoje
 
-**Gamybos darbo eiga su pipeline config:**
+**Produkcinis darbo eiga su tinklo konfigūracija:**
 
 ```bash
-# 1. Paruošti gamybos aplinką
+# 1. Nustatyti gamybos aplinką
 azd env new production
 azd env set AZURE_OPENAI_CAPACITY 100
 
-# 2. Konfigūruoti darbo eigą
+# 2. Konfigūruoti pipeline'ą
 azd pipeline config --provider github
 
-# 3. Darbo eiga vykdo azd deploy kiekvieną kartą, kai į main šaką atliekamas push
+# 3. Pipeline vykdo azd deploy kiekvieną kartą, kai stumiama į main šaką
 ```
 
 ### Komponentų pridėjimas su `azd add`
 
-Palaipsniui pridėkite Azure paslaugas prie esamo projekto:
+Palaipsniui pridėkite Azure paslaugas esamam projektui:
 
 ```bash
-# Pridėti naują paslaugos komponentą interaktyviai
+# Interaktyviai pridėti naują paslaugos komponentą
 azd add
 ```
 
-Tai ypač naudinga plečiant gamybines AI programas — pavyzdžiui, pridedant vektorinės paieškos paslaugą, naują agento pabaigos tašką arba stebėjimo komponentą prie esamo diegimo.
+Tai ypač naudinga plečiant produkcines DI programas – pavyzdžiui, pridedant vektorinės paieškos paslaugą, naują agento galinį tašką ar stebėjimo komponentą prie esamo diegimo.
 
-## Papildomi resursai
-- **Azure Well-Architected Framework**: [Dirbtinio intelekto darbo krūvio gairės](https://learn.microsoft.com/azure/well-architected/ai/)
+## Papildomi ištekliai
+- **„Azure Well-Architected Framework“**: [AI darbo krūvio gairės](https://learn.microsoft.com/azure/well-architected/ai/)
 - **Microsoft Foundry dokumentacija**: [Oficiali dokumentacija](https://learn.microsoft.com/azure/ai-studio/)
-- **Bendruomenės šablonai**: [Azure Samples](https://github.com/Azure-Samples)
-- **Discord bendruomenė**: [#Azure channel](https://discord.gg/microsoft-azure)
-- **Agentų įgūdžiai Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 atviri agentų įgūdžiai Azure AI, Foundry, diegimo, sąnaudų optimizavimo ir diagnostikos srityse. Įdiekite savo redaktoriuje:
+- **Bendrcommunity šablonai**: [Azure pavyzdžiai](https://github.com/Azure-Samples)
+- **Discord bendruomenė**: [#Azure kanalas](https://discord.gg/microsoft-azure)
+- **Agentų įgūdžiai Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 atviri agentų įgūdžiai Azure AI, Foundry, diegimui, sąnaudų optimizavimui ir diagnostikai. Įdiekite savo redaktoriuje:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**Skyriaus naršymas:**
-- **📚 Kurso pradžia**: [AZD For Beginners](../../README.md)
-- **📖 Dabartinis skyrius**: Skyrius 8 - Produkciniai ir įmoniniai modeliai
-- **⬅️ Ankstesnis skyrius**: [7 skyrius: Trikčių šalinimas](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Taip pat susiję**: [AI Workshop Lab](ai-workshop-lab.md)
-- **� Kursas baigtas**: [AZD For Beginners](../../README.md)
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD Pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 8 skyrius - Gamybos ir įmonių šablonai
+- **⬅️ Ankstesnis skyrius**: [7 skyrius: trikčių šalinimas](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Taip pat susiję**: [AI dirbtuvės laboratorija](ai-workshop-lab.md)
+- **� Kursas baigtas**: [AZD Pradedantiesiems](../../README.md)
 
-**Prisiminkite**: Produkciniai dirbtinio intelekto darbo krūviai reikalauja kruopštaus planavimo, stebėjimo ir nuolatinio optimizavimo. Pradėkite nuo šių modelių ir pritaikykite juos pagal savo konkrečius reikalavimus.
+**Prisiminkite**: Gamybiniai AI darbo krūviai reikalauja atidaus planavimo, stebėjimo ir nuolatinio optimizavimo. Pradėkite nuo šių šablonų ir pritaikykite juos savo specifiniams reikalavimams.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Atsakomybės apribojimas**:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojamas profesionalus žmogaus vertimas. Mes neatsakome už bet kokius nesusipratimus ar netinkamus aiškinimus, kilusius naudojant šį vertimą.
+**Atsakomybės apribojimas**:  
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turi būti laikomas patikimiausiu šaltiniu. Kritiskiems duomenims rekomenduojame naudoti profesionalią žmogaus atliktą vertimą. Mes neatsakome už bet kokius nesusipratimus ar klaidingus interpretavimus, kilusius naudojant šį vertimą.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

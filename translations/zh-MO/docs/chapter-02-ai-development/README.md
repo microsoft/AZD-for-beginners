@@ -1,42 +1,44 @@
-# 第 2 章：AI 優先開發
+# Chapter 2: AI-First Development
 
-**📚 課程**: [AZD 新手入門](../../README.md) | **⏱️ 時長**: 1-2 小時 | **⭐ 難度**: 中等
+**📚 Course**: [AZD For Beginners](../../README.md) | **⏱️ Duration**: 1-2 hours | **⭐ Complexity**: Intermediate
 
 ---
 
-## 概覽
+## Overview
 
-本章著重於使用 Azure Developer CLI 與 Microsoft Foundry 服務來部署具 AI 功能的應用程式。從簡單的 AI 聊天應用到具工具的智慧代理人。
+本章集中於使用 Azure Developer CLI 及 Microsoft Foundry 服務部署 AI 驅動的應用程式。從簡單的 AI 聊天應用到具備工具的智慧代理。
 
-## 學習目標
+> **Validation note (2026-03-25):** 本章中的命令流程及擴充套件指引已根據 `azd` 版本 `1.23.12` 與目前預覽的 AI 代理擴充套件版本 `azure.ai.agents` `0.1.18-preview` 進行審視。若您使用的是舊版 AZD，請先更新再繼續練習。
 
-完成本章後，您將會：
+## Learning Objectives
+
+完成本章後，您將能夠：
 - 使用預建的 AZD 範本部署 AI 應用程式
 - 理解 Microsoft Foundry 與 AZD 的整合
-- 設定並自訂具工具的 AI 代理人
-- 部署 RAG（檢索增強生成）應用程式
+- 配置及自訂具有工具的 AI 代理
+- 部署 RAG（檢索擴增生成）應用程式
 
 ---
 
-## 📚 課程
+## 📚 Lessons
 
-| # | 課程 | 描述 | 時間 |
+| # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry 整合](microsoft-foundry-integration.md) | 將 AZD 連接至 Foundry 服務 | 30 分鐘 |
-| 2 | [AI 代理指南](agents.md) | 部署具工具的智慧代理人 | 45 分鐘 |
-| 3 | [AI 模型部署](ai-model-deployment.md) | 部署並設定 AI 模型 | 30 分鐘 |
-| 4 | [AI 實作工作坊](ai-workshop-lab.md) | 實作：讓您的 AI 解決方案能使用 AZD | 60 分鐘 |
+| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | 連接 AZD 與 Foundry 服務 | 30 min |
+| 2 | [AI Agents Guide](agents.md) | 部署具工具的智慧代理 | 45 min |
+| 3 | [AI Model Deployment](ai-model-deployment.md) | 部署及配置 AI 模型 | 30 min |
+| 4 | [AI Workshop Lab](ai-workshop-lab.md) | 實作：讓您的 AI 解決方案適用 AZD | 60 min |
 
 ---
 
-## 🚀 快速開始
+## 🚀 Quick Start
 
 ```bash
 # 選項 1：RAG 聊天應用程式
 azd init --template azure-search-openai-demo
 azd up
 
-# 選項 2：AI 代理
+# 選項 2：人工智能代理
 azd init --template get-started-with-ai-agents
 azd up
 
@@ -47,47 +49,47 @@ azd up
 
 ---
 
-## 🤖 精選 AI 範本
+## 🤖 Featured AI Templates
 
-| 範本 | 描述 | 服務 |
+| Template | Description | Services |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | 具引用來源的 RAG 聊天 | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | 具工具的 AI 代理 | AI Agent Service |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | 帶引用的 RAG 聊天 | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | 搭配工具的 AI 代理 | AI Agent Service |
 | [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | 基本 AI 聊天 | OpenAI + Container Apps |
 
 ---
 
-## 💰 成本概覽
+## 💰 Cost Awareness
 
-| 環境 | 估計每月成本 |
+| Environment | Estimated Monthly Cost |
 |-------------|----------------------|
-| 開發 | $80-150 |
-| 預備 | $150-300 |
-| 生產 | $300-3,500+ |
+| Development | $80-150 |
+| Staging | $150-300 |
+| Production | $300-3,500+ |
 
-**提示：** 完成測試後執行 `azd down` 以避免產生費用。
+**Tip:** 測試後請執行 `azd down` 以避免產生費用。
 
 ---
 
-## 🔗 導覽
+## 🔗 Navigation
 
-| 方向 | 章節 |
+| Direction | Chapter |
 |-----------|---------|
-| **上一章** | [第 1 章：基礎](../chapter-01-foundation/README.md) |
-| **下一章** | [第 3 章：設定](../chapter-03-configuration/README.md) |
-| **跳至** | [第 8 章：生產模式](../chapter-08-production/README.md) |
+| **Previous** | [Chapter 1: Foundation](../chapter-01-foundation/README.md) |
+| **Next** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
+| **Skip to** | [Chapter 8: Production Patterns](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 相關資源
+## 📖 Related Resources
 
-- [AI 疑難排解](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [生產 AI 實務](../chapter-08-production/production-ai-practices.md)
+- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責聲明：
-本文件已使用 AI 翻譯服務 Co-op Translator (https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，請注意自動翻譯可能包含錯誤或不準確之處。原文（其母語版本）應被視為具權威性的版本。對於重要資訊，建議採用專業人工翻譯。我們對因使用此翻譯而引致的任何誤解或錯誤詮釋概不負責。
+**免責聲明**：  
+本文件由 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於確保準確性，但請注意自動翻譯可能含有錯誤或不準確之處。原始的母語文件應被視為權威來源。對於重要資訊，建議採用專業人工翻譯。對於因使用此翻譯而導致的任何誤解或誤釋，我們概不負責。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

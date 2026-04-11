@@ -1,74 +1,74 @@
-# Vodnik za konfiguracijo
+# Configuration Guide
 
-**Navigacija poglavij:**
-- **📚 Course Home**: [AZD za začetnike](../../README.md)
-- **📖 Current Chapter**: Poglavje 3 - Konfiguracija & Avtentikacija
-- **⬅️ Previous**: [Vaš prvi projekt](first-project.md)
-- **➡️ Next**: [Vodnik za uvajanje](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 Next Chapter**: [Poglavje 4: Infrastruktura kot koda](../chapter-04-infrastructure/deployment-guide.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
+- **⬅️ Previous**: [Your First Project](first-project.md)
+- **➡️ Next**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
 
-## Uvod
+## Introduction
 
-Ta obsežen vodnik pokriva vse vidike konfiguracije Azure Developer CLI za optimalne razvojne in uvajalne postopke. Naučili se boste hierarhije konfiguracije, upravljanja okolij, metod avtentikacije in naprednih konfiguracijskih vzorcev, ki omogočajo učinkovita in varna uvajanja v Azure.
+This comprehensive guide covers all aspects of configuring Azure Developer CLI for optimal development and deployment workflows. You'll learn about the configuration hierarchy, environment management, authentication methods, and advanced configuration patterns that enable efficient and secure Azure deployments.
 
-## Cilji učenja
+## Learning Goals
 
-Do konca te lekcije boste:
-- Obvladali hierarhijo konfiguracije azd in razumeli, kako so nastavitve razvrščene po prioriteti
-- Učinkovito konfigurirali globalne in projektno-specifične nastavitve
-- Upravljali več okolij z različnimi konfiguracijami
-- Implementirali varne vzorce avtentikacije in avtorizacije
-- Razumeli napredne konfiguracijske vzorce za kompleksne scenarije
+By the end of this lesson, you will:
+- Master the azd configuration hierarchy and understand how settings are prioritized
+- Configure global and project-specific settings effectively
+- Manage multiple environments with different configurations
+- Implement secure authentication and authorization patterns
+- Understand advanced configuration patterns for complex scenarios
 
-## Rezultati učenja
+## Learning Outcomes
 
-Po končani tej lekciji boste lahko:
-- Konfigurirali azd za optimalne razvojne tokove
-- Nastavili in upravljali več okolij za uvajanje
-- Implementirali varne prakse upravljanja konfiguracij
-- Odpravljali težave, povezane s konfiguracijo
-- Prilagodili obnašanje azd specifičnim zahtevam organizacije
+After completing this lesson, you will be able to:
+- Configure azd for optimal development workflows
+- Set up and manage multiple deployment environments
+- Implement secure configuration management practices
+- Troubleshoot configuration-related issues
+- Customize azd behavior for specific organizational requirements
 
-Ta obsežen vodnik pokriva vse vidike konfiguracije Azure Developer CLI za optimalne razvojne in uvajalne postopke.
+This comprehensive guide covers all aspects of configuring Azure Developer CLI for optimal development and deployment workflows.
 
-## Razumevanje AI agentov v projektu azd
+## Understanding AI Agents in an azd Project
 
-Če ste novi pri AI agentih, je tukaj preprost način, kako jih zamisliti znotraj sveta azd.
+If you're new to AI agents, here's a simple way to think about them within the azd world.
 
-### Kaj je agent?
+### What Is an Agent?
 
-Agent je programska komponenta, ki lahko prejme zahtevo, razmisli o njej in izvede dejanja — pogosto z uporabo klica AI modela, iskanjem podatkov ali klicanjem drugih storitev. V projektu azd je agent le še ena **storitev** poleg vašega spletnega frontenda ali API zaledja.
+An agent is a piece of software that can receive a request, reason about it, and take actions—often by calling an AI model, looking up data, or invoking other services. In an azd project, an agent is just another **service** alongside your web frontend or API backend.
 
-### Kako se agenti vključujejo v strukturo projekta azd
+### How Agents Fit Into the azd Project Structure
 
-Projekt azd je sestavljen iz treh slojev: **infrastruktura**, **koda** in **konfiguracija**. Agenti se povežejo z njimi na enak način kot katera koli druga storitev:
+An azd project is made up of three layers: **infrastructure**, **code**, and **configuration**. Agents plug into these layers the same way any other service does:
 
-| Plast | Kaj počne za tradicionalno aplikacijo | Kaj počne za agenta |
-|-------|---------------------------------------|---------------------|
-| **Infrastruktura** (`infra/`) | Vzpostavi spletno aplikacijo in podatkovno bazo | Vzpostavi končno točko modela AI, iskalni indeks ali gostitelja agenta |
-| **Koda** (`src/`) | Vsebuje vašo frontend in API izvorno kodo | Vsebuje logiko agenta in definicije pozivov |
-| **Konfiguracija** (`azure.yaml`) | Navaja vaše storitve in njihove cilje gostovanja | Navaja vašega agenta kot storitev, ki kaže na njegovo kodo in gostitelja |
+| Layer | What It Does for a Traditional App | What It Does for an Agent |
+|-------|-------------------------------------|---------------------------|
+| **Infrastructure** (`infra/`) | Provisions a web app and database | Provisions an AI model endpoint, search index, or agent host |
+| **Code** (`src/`) | Contains your frontend and API source code | Contains your agent logic and prompt definitions |
+| **Configuration** (`azure.yaml`) | Lists your services and their hosting targets | Lists your agent as a service, pointing to its code and host |
 
-### Vloga `azure.yaml`
+### The Role of `azure.yaml`
 
-Trenutno vam ni treba zapomniti sintakse. Konceptualno je `azure.yaml` datoteka, kjer poveste azd: *"Tukaj so storitve, ki sestavljajo mojo aplikacijo, in tukaj je, kje najti njihovo kodo."*
+You don't need to memorize the syntax right now. Conceptually, `azure.yaml` is the file where you tell azd: *"Here are the services that make up my application, and here's where to find their code."*
 
-Ko vaš projekt vključuje AI agenta, `azure.yaml` preprosto navaja tega agenta kot eno od storitev. azd nato ve, da je treba vzpostaviti ustrezno infrastrukturo (npr. končno točko Microsoft Foundry Models ali Container App za gostovanje agenta) in razmestiti kodo vašega agenta — enako kot bi to storil za spletno aplikacijo ali API.
+When your project includes an AI agent, `azure.yaml` simply lists that agent as one of the services. azd then knows to provision the right infrastructure (like an Microsoft Foundry Models endpoint or a Container App to host the agent) and deploy your agent code—just as it would for a web app or API.
 
-To pomeni, da ni nič temeljno novega za učenje. Če razumete, kako azd upravlja spletno storitev, že razumete, kako upravlja agenta.
+This means there's nothing fundamentally new to learn. If you understand how azd manages a web service, you already understand how it manages an agent.
 
-## Hierarhija konfiguracije
+## Configuration Hierarchy
 
-azd uporablja hierarhičen konfiguracijski sistem:
-1. **Parametri ukazne vrstice** (najvišja prioriteta)
-2. **Sistemske spremenljivke**
-3. **Lokalna projektna konfiguracija** (`.azd/config.json`)
-4. **Globalna uporabniška konfiguracija** (`~/.azd/config.json`)
-5. **Privzete vrednosti** (najnižja prioriteta)
+azd uses a hierarchical configuration system:
+1. **Command-line flags** (highest priority)
+2. **Environment variables**
+3. **Local project configuration** (`.azd/config.json`)
+4. **Global user configuration** (`~/.azd/config.json`)
+5. **Default values** (lowest priority)
 
-## Globalna konfiguracija
+## Global Configuration
 
-### Nastavitev globalnih privzetih vrednosti
+### Setting Global Defaults
 ```bash
 # Nastavi privzeto naročnino
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -79,33 +79,33 @@ azd config set defaults.location "eastus2"
 # Nastavi privzeto konvencijo poimenovanja skupin virov
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# Prikaži vse globalne konfiguracije
-azd config list
+# Prikaži vse globalne nastavitve
+azd config show
 
 # Odstrani konfiguracijo
 azd config unset defaults.location
 ```
 
-### Pogoste globalne nastavitve
+### Common Global Settings
 ```bash
-# Razvojne preference
+# Razvojne nastavitve
 azd config set alpha.enable true                    # Omogoči alfa funkcije
 azd config set telemetry.enabled false             # Onemogoči telemetrijo
 azd config set output.format json                  # Nastavi format izhoda
 
 # Varnostne nastavitve
-azd config set auth.useAzureCliCredential true     # Uporabi Azure CLI za avtentikacijo
+azd config set auth.useAzureCliCredential true     # Uporabi Azure CLI za preverjanje pristnosti
 azd config set tls.insecure false                  # Zahtevaj preverjanje TLS
 
-# Prilagajanje zmogljivosti
+# Optimizacija zmogljivosti
 azd config set provision.parallelism 5             # Vzporedno ustvarjanje virov
-azd config set deploy.timeout 30m                  # Časovna omejitev za razmestitev
+azd config set deploy.timeout 30m                  # Časovna omejitev nameščanja
 ```
 
-## 🏗️ Projektna konfiguracija
+## 🏗️ Project Configuration
 
-### Struktura `azure.yaml`
-Datoteka `azure.yaml` je srce vašega projekta azd:
+### azure.yaml Structure
+The `azure.yaml` file is the heart of your azd project:
 
 ```yaml
 # Minimum configuration
@@ -181,9 +181,9 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Možnosti konfiguracije storitev
+### Service Configuration Options
 
-#### Vrste gostiteljev
+#### Host Types
 ```yaml
 services:
   web-static:
@@ -202,7 +202,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Nastavitve specifične za jezik
+#### Language-Specific Settings
 ```yaml
 services:
   node-app:
@@ -226,22 +226,22 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 Upravljanje okolij
+## 🌟 Environment Management
 
-### Ustvarjanje okolij
+### Creating Environments
 ```bash
 # Ustvari novo okolje
 azd env new development
 
-# Ustvari z določeno lokacijo
+# Ustvari na določeni lokaciji
 azd env new staging --location "westus2"
 
 # Ustvari iz predloge
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Konfiguracija okolja
-Vsako okolje ima svojo konfiguracijo v `.azure/<env-name>/config.json`:
+### Environment Configuration
+Each environment has its own configuration in `.azure/<env-name>/config.json`:
 
 ```json
 {
@@ -263,7 +263,7 @@ Vsako okolje ima svojo konfiguracijo v `.azure/<env-name>/config.json`:
 }
 ```
 
-### Spremenljivke okolja
+### Environment Variables
 ```bash
 # Nastavi spremenljivke, specifične za okolje
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
@@ -273,7 +273,7 @@ azd env set DEBUG "true"
 # Prikaži spremenljivke okolja
 azd env get-values
 
-# Pričakovani izhod:
+# Pričakovan izhod:
 # DATABASE_URL=postgresql://user:pass@host:5432/db
 # API_KEY=secret-api-key
 # DEBUG=true
@@ -283,11 +283,11 @@ azd env unset DEBUG
 
 # Preveri odstranitev
 azd env get-values | grep DEBUG
-# (ne bi smelo vrniti ničesar)
+# (naj ne vrne ničesar)
 ```
 
-### Predloge okolij
-Ustvarite `.azure/env.template` za dosledno nastavitev okolja:
+### Environment Templates
+Create `.azure/env.template` for consistent environment setup:
 ```bash
 # Zahtevane spremenljivke
 AZURE_SUBSCRIPTION_ID=
@@ -298,27 +298,27 @@ DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
 
-# Neobvezne razvojne nastavitve
+# Izbirne razvojne nastavitve
 DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 Konfiguracija avtentikacije
+## 🔐 Authentication Configuration
 
-### Integracija Azure CLI
+### Azure CLI Integration
 ```bash
 # Uporabi poverilnice Azure CLI (privzeto)
 azd config set auth.useAzureCliCredential true
 
-# Prijavite se z določenim najemnikom
+# Prijavi se z določenim najemnikom
 az login --tenant <tenant-id>
 
 # Nastavi privzeto naročnino
 az account set --subscription <subscription-id>
 ```
 
-### Avtentikacija s Service Principal
-Za CI/CD cevovode:
+### Service Principal Authentication
+For CI/CD pipelines:
 ```bash
 # Nastavite spremenljivke okolja
 export AZURE_CLIENT_ID="your-client-id"
@@ -330,18 +330,18 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Upravljana identiteta
-Za v Azure gostovana okolja:
+### Managed Identity
+For Azure-hosted environments:
 ```bash
 # Omogoči preverjanje pristnosti z upravljano identiteto
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ Konfiguracija infrastrukture
+## 🏗️ Infrastructure Configuration
 
-### Parametri Bicep
-Konfigurirajte parametre infrastrukture v `infra/main.parameters.json`:
+### Bicep Parameters
+Configure infrastructure parameters in `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -363,8 +363,8 @@ Konfigurirajte parametre infrastrukture v `infra/main.parameters.json`:
 }
 ```
 
-### Konfiguracija Terraform
-Za projekte Terraform konfigurirajte v `infra/terraform.tfvars`:
+### Terraform Configuration
+For Terraform projects, configure in `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -372,9 +372,9 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Konfiguracija uvajanja
+## 🚀 Deployment Configuration
 
-### Konfiguracija gradnje
+### Build Configuration
 ```yaml
 # In azure.yaml
 services:
@@ -397,7 +397,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Konfiguracija Docker
+### Docker Configuration
 ```yaml
 services:
   api:
@@ -411,11 +411,11 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
-Primer `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+Example `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 Napredna konfiguracija
+## 🔧 Advanced Configuration
 
-### Po meri poimenovanje virov
+### Custom Resource Naming
 ```bash
 # Določite konvencije poimenovanja
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
@@ -423,7 +423,7 @@ azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### Konfiguracija omrežja
+### Network Configuration
 ```yaml
 # In azure.yaml
 infra:
@@ -434,7 +434,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Konfiguracija spremljanja
+### Monitoring Configuration
 ```yaml
 # In azure.yaml
 monitoring:
@@ -446,9 +446,9 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Konfiguracije specifične za okolje
+## 🎯 Environment-Specific Configurations
 
-### Razvojno okolje
+### Development Environment
 ```bash
 # .azure/development/.env
 DEBUG=true
@@ -457,7 +457,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Predprodukcijsko okolje
+### Staging Environment
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -466,18 +466,18 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### Produkcijsko okolje
+### Production Environment
 ```bash
-# .azure/produkcija/.env
+# .azure/production/.env
 DEBUG=false
 LOG_LEVEL=error
 ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Preverjanje konfiguracije
+## 🔍 Configuration Validation
 
-### Preverite konfiguracijo
+### Validate Configuration
 ```bash
 # Preveri sintakso konfiguracije
 azd config validate
@@ -489,8 +489,8 @@ azd env get-values
 azd provision --dry-run
 ```
 
-### Skripte za konfiguracijo
-Ustvarite skripte za preverjanje v `scripts/`:
+### Configuration Scripts
+Create validation scripts in `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -513,9 +513,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Najboljše prakse
+## 🎓 Best Practices
 
-### 1. Uporabljajte spremenljivke okolja
+### 1. Use Environment Variables
 ```yaml
 # Good: Use environment variables
 database:
@@ -526,7 +526,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organizirajte konfiguracijske datoteke
+### 2. Organize Configuration Files
 ```
 .azure/
 ├── config.json              # Global project config
@@ -542,7 +542,7 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Premisleki glede sistema za nadzor različic
+### 3. Version Control Considerations
 ```bash
 # .gitignore
 .azure/*/config.json         # Konfiguracije okolja (vsebujejo ID-je virov)
@@ -550,8 +550,8 @@ database:
 .env                        # Lokalna datoteka okolja
 ```
 
-### 4. Dokumentacija konfiguracije
-Dokumentirajte svojo konfiguracijo v `CONFIG.md`:
+### 4. Configuration Documentation
+Document your configuration in `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -566,49 +566,49 @@ Dokumentirajte svojo konfiguracijo v `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
-## 🎯 Praktične vaje
+## 🎯 Hands-On Practice Exercises
 
-### Vaja 1: Konfiguracija z več okolji (15 minut)
+### Exercise 1: Multi-Environment Configuration (15 minutes)
 
-**Cilj**: Ustvarite in konfigurirajte tri okolja z različnimi nastavitvami
+**Goal**: Create and configure three environments with different settings
 
 ```bash
-# Ustvarite razvojno okolje
+# Ustvari razvojno okolje
 azd env new dev
 azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# Ustvarite predprodukcijsko okolje
+# Ustvari predprodukcijsko okolje
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 50
 
-# Ustvarite produkcijsko okolje
+# Ustvari produkcijsko okolje
 azd env new production
 azd env set LOG_LEVEL error
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 10
 
-# Preverite vsako okolje
+# Preveri vsako okolje
 azd env select dev && azd env get-values
 azd env select staging && azd env get-values
 azd env select production && azd env get-values
 ```
 
-**Kriteriji uspeha:**
-- [ ] Tri okolja uspešno ustvarjena
-- [ ] Vsako okolje ima edinstveno konfiguracijo
-- [ ] Lahko preklapljate med okolji brez napak
-- [ ] `azd env list` prikaže vsa tri okolja
+**Success Criteria:**
+- [ ] Three environments created successfully
+- [ ] Each environment has unique configuration
+- [ ] Can switch between environments without errors
+- [ ] `azd env list` shows all three environments
 
-### Vaja 2: Upravljanje skrivnosti (10 minut)
+### Exercise 2: Secret Management (10 minutes)
 
-**Cilj**: Vaditi varno konfiguracijo s občutljivimi podatki
+**Goal**: Practice secure configuration with sensitive data
 
 ```bash
-# Nastavi skrivnosti (se ne prikažejo v izhodu)
+# Nastavi skrivnosti (v izhodu niso prikazane)
 azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 
@@ -616,25 +616,25 @@ azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# Prikaži okolje (skrivnosti bi morale biti prikrite)
+# Prikaži okolje (skrivnosti naj bodo prikrite)
 azd env get-values
 
 # Preveri, ali so skrivnosti shranjene
-azd env get DB_PASSWORD  # Naj bi prikazalo dejansko vrednost
+azd env get DB_PASSWORD  # Naj prikaže dejansko vrednost
 ```
 
-**Kriteriji uspeha:**
-- [ ] Skrivnosti shranjene brez prikaza v terminalu
-- [ ] `azd env get-values` prikazuje zamaskirane skrivnosti
-- [ ] Individualni `azd env get <SECRET_NAME>` pridobi dejansko vrednost
+**Success Criteria:**
+- [ ] Secrets stored without displaying in terminal
+- [ ] `azd env get-values` shows redacted secrets
+- [ ] Individual `azd env get <SECRET_NAME>` retrieves actual value
 
-## Naslednji koraki
+## Next Steps
 
-- [Vaš prvi projekt](first-project.md) - Uporabite konfiguracijo v praksi
-- [Vodnik za uvajanje](../chapter-04-infrastructure/deployment-guide.md) - Uporabite konfiguracijo za uvajanje
-- [Zagotavljanje virov](../chapter-04-infrastructure/provisioning.md) - Konfiguracije primerne za produkcijo
+- [Your First Project](first-project.md) - Apply configuration in practice
+- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - Use configuration for deployment
+- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - Production-ready configurations
 
-## Reference
+## References
 
 - [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
@@ -642,16 +642,16 @@ azd env get DB_PASSWORD  # Naj bi prikazalo dejansko vrednost
 
 ---
 
-**Navigacija poglavij:**
-- **📚 Course Home**: [AZD za začetnike](../../README.md)
-- **📖 Current Chapter**: Poglavje 3 - Konfiguracija & Avtentikacija
-- **⬅️ Previous**: [Vaš prvi projekt](first-project.md)
-- **➡️ Next Chapter**: [Poglavje 4: Infrastruktura kot koda](../chapter-04-infrastructure/deployment-guide.md)
-- **Naslednja lekcija**: [Vaš prvi projekt](first-project.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
+- **⬅️ Previous**: [Your First Project](first-project.md)
+- **➡️ Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
+- **Next Lesson**: [Your First Project](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-Ta dokument je bil preveden z AI prevajalsko storitvijo [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v svojem izvor­nem jeziku velja za avtoritativni vir. Za kritične informacije priporočamo strokoven človeški prevod. Ne odgovarjamo za kakršnekoli nesporazume ali napačne interpretacije, ki bi nastale zaradi uporabe tega prevoda.
+Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da samodejni prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku je treba šteti za avtoritativni vir. Za ključne informacije priporočamo strokovni človeški prevod. Za morebitne nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda, ne odgovarjamo.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

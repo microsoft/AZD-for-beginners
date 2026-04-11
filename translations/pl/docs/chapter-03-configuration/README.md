@@ -1,19 +1,21 @@
 # Rozdział 3: Konfiguracja i uwierzytelnianie
 
-**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 45-60 minut | **⭐ Poziom trudności**: Średnio zaawansowany
+**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 45-60 minut | **⭐ Poziom trudności**: Średniozaawansowany
 
 ---
 
 ## Przegląd
 
-Ten rozdział obejmuje konfigurację środowiska, wzorce uwierzytelniania oraz najlepsze praktyki bezpieczeństwa dla wdrożeń przy użyciu Azure Developer CLI.
+Ten rozdział obejmuje konfigurację środowiska, wzorce uwierzytelniania oraz najlepsze praktyki bezpieczeństwa dla wdrożeń Azure Developer CLI.
 
-## Cele nauczania
+> Zweryfikowano na `azd 1.23.12` w marcu 2026.
+
+## Cele nauki
 
 Po ukończeniu tego rozdziału będziesz potrafić:
 - Opanować hierarchię konfiguracji AZD
 - Zarządzać wieloma środowiskami (dev, staging, prod)
-- Wdrażać bezpieczne uwierzytelnianie za pomocą tożsamości zarządzanych
+- Wdrażać bezpieczne uwierzytelnianie za pomocą zarządzanych tożsamości
 - Konfigurować ustawienia specyficzne dla środowiska
 
 ---
@@ -22,8 +24,8 @@ Po ukończeniu tego rozdziału będziesz potrafić:
 
 | # | Lekcja | Opis | Czas |
 |---|--------|-------------|------|
-| 1 | [Przewodnik konfiguracji](configuration.md) | Konfiguracja i zarządzanie środowiskiem | 30 min |
-| 2 | [Uwierzytelnianie i bezpieczeństwo](authsecurity.md) | Wzorce tożsamości zarządzanej i RBAC | 30 min |
+| 1 | [Przewodnik po konfiguracji](configuration.md) | Ustawianie i zarządzanie środowiskiem | 30 min |
+| 2 | [Uwierzytelnianie i bezpieczeństwo](authsecurity.md) | Zarządzane tożsamości i wzorce RBAC | 30 min |
 
 ---
 
@@ -50,27 +52,31 @@ azd env get-values
 
 ## 🔧 Hierarchia konfiguracji
 
-AZD stosuje ustawienia w tej kolejności (późniejsze nadpisują wcześniejsze):
+AZD stosuje ustawienia w następującej kolejności (późniejsze nadpisuje wcześniejsze):
 
 1. **Wartości domyślne** (wbudowane w szablony)
 2. **azure.yaml** (konfiguracja projektu)
 3. **Zmienne środowiskowe** (`azd env set`)
-4. **Flagi wiersza poleceń** (`--location eastus`)
+4. **Przełączniki wiersza poleceń** (`--location eastus`)
 
 ---
 
 ## 🔐 Najlepsze praktyki bezpieczeństwa
 
 ```bash
-# Użyj tożsamości zarządzanej (zalecane)
+# Użyj zarządzanej tożsamości (zalecane)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Sprawdź status uwierzytelniania
-azd auth whoami
+# Sprawdź status uwierzytelniania AZD
+azd auth status
+
+# Opcjonalnie: zweryfikuj kontekst Azure CLI, jeśli planujesz uruchamiać polecenia az
 az account show
 
-# Ponownie uwierzytelnij, jeśli to konieczne
+# Ponownie się uwierzytelnij w razie potrzeby
 azd auth login
+
+# Opcjonalnie: odśwież uwierzytelnianie Azure CLI dla poleceń az
 az login
 ```
 
@@ -80,7 +86,7 @@ az login
 
 | Kierunek | Rozdział |
 |-----------|---------|
-| **Poprzedni** | [Rozdział 2: Tworzenie AI](../chapter-02-ai-development/README.md) |
+| **Poprzedni** | [Rozdział 2: Rozwój AI](../chapter-02-ai-development/README.md) |
 | **Następny** | [Rozdział 4: Infrastruktura](../chapter-04-infrastructure/README.md) |
 
 ---
@@ -93,6 +99,6 @@ az login
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Wyłączenie odpowiedzialności**:
-Ten dokument został przetłumaczony przy użyciu usługi tłumaczeń AI Co-op Translator (https://github.com/Azure/co-op-translator). Chociaż dokładamy starań, aby tłumaczenie było jak najbardziej dokładne, należy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku źródłowym powinien być uznany za źródło wiążące. W przypadku informacji o krytycznym znaczeniu zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+**Zastrzeżenie**:  
+Niniejszy dokument został przetłumaczony za pomocą automatycznej usługi tłumaczeniowej AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mimo że dążymy do dokładności, prosimy mieć na uwadze, że tłumaczenia automatyczne mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku źródłowym powinien być traktowany jako wiarygodne źródło. W przypadku informacji krytycznych zaleca się profesjonalne tłumaczenie wykonane przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

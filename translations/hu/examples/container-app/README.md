@@ -1,29 +1,29 @@
 # Container App Telepítési Példák AZD-vel
 
-Ez a könyvtár átfogó példákat tartalmaz konténerizált alkalmazások Azure Container Apps-be történő telepítésére az Azure Developer CLI-vel (AZD). Ezek a példák valós mintákat, bevált gyakorlatokat és éles környezetbe kész konfigurációkat mutatnak be.
+Ez a könyvtár átfogó példákat tartalmaz az Azure Container Apps-be történő konténerizált alkalmazások telepítésére az Azure Developer CLI (AZD) használatával. Ezek a példák valós gyakorlati mintákat, bevált gyakorlatokat és éles környezetre kész konfigurációkat mutatnak be.
 
 ## 📚 Tartalomjegyzék
 
 - [Áttekintés](#áttekintés)
 - [Előfeltételek](#előfeltételek)
-- [Gyors kezdési példák](#gyors-kezdési-példák)
+- [Gyorsindítási példák](#gyorsindítási-példák)
 - [Éles példák](#éles-példák)
-- [Haladó minták](#haladó-minták)
+- [Fejlett minták](#fejlett-minták)
 - [Bevált gyakorlatok](#bevált-gyakorlatok)
 
 ## Áttekintés
 
-Az Azure Container Apps egy teljesen menedzselt szerver nélküli konténerplatform, amely lehetővé teszi mikroszolgáltatások és konténerizált alkalmazások futtatását infrastruktúra kezelés nélkül. Az AZD-vel kombinálva a következőket kapja:
+Az Azure Container Apps egy teljesen menedzselt, szerver nélküli konténerplatform, amely lehetővé teszi mikroszolgáltatások és konténerizált alkalmazások futtatását infrastruktúra kezelése nélkül. AZD-vel kombinálva a következő előnyöket kapja:
 
-- **Egyszerűsített telepítés**: Egyszeri parancs konténerek, valamint az infrastruktúra telepítésére
-- **Automatikus skálázás**: Skálázás nullára vagy ki  HTTP forgalom vagy események alapján
-- **Integrált hálózatkezelés**: Beépített szolgáltatásfelismerés és forgalommegosztás
-- **Kezelt identitás**: Biztonságos hitelesítés Azure erőforrásokhoz
-- **Költséghatékonyság**: Csak a használt erőforrásokért fizetsz
+- **Egyszerűsített telepítés**: Egyetlen parancs konténereket telepít infrastruktúrával együtt
+- **Automatikus skálázás**: Nulláról skálázás és skálázás HTTP forgalom vagy események alapján
+- **Integrált hálózatkezelés**: Beépített szolgáltatásfelismerés és forgalomelosztás
+- **Menedzselt identitás**: Biztonságos hitelesítés Azure-erőforrásokhoz
+- **Költséghatékonyság**: Csak az által használt erőforrásokért fizet
 
 ## Előfeltételek
 
-A kezdés előtt győződj meg arról, hogy rendelkezel:
+Mielőtt elkezdené, győződjön meg róla, hogy rendelkezik:
 
 ```bash
 # Ellenőrizze az AZD telepítését
@@ -35,21 +35,23 @@ az version
 # Ellenőrizze a Dockert (egyedi képek készítéséhez)
 docker --version
 
-# Jelentkezzen be az Azure-ba
+# Hitelesítés az AZD telepítésekhez
 azd auth login
+
+# Opcionális: jelentkezzen be az Azure CLI-be, ha közvetlenül az az parancsokat fogja futtatni
 az login
 ```
 
-**Szükséges Azure erőforrások:**
+**Szükséges Azure-erőforrások:**
 - Aktív Azure előfizetés
-- Erőforráscsoport létrehozási jogosultságok
+- Erőforráscsoport létrehozási jogosultság
 - Hozzáférés Container Apps környezethez
 
-## Gyors kezdési példák
+## Gyorsindítási példák
 
 ### 1. Egyszerű Web API (Python Flask)
 
-Telepíts egy egyszerű REST API-t Azure Container Apps-be.
+Alap REST API telepítése Azure Container Apps-be.
 
 **Példa: Python Flask API**
 
@@ -68,10 +70,10 @@ services:
 **Telepítési lépések:**
 
 ```bash
-# Kezdeményezés sablonból
+# Inicializálás sablonból
 azd init --template todo-python-mongo
 
-# Infrastruktúra biztosítása és telepítés
+# Infrastruktúra létrehozása és telepítés
 azd up
 
 # A telepítés tesztelése
@@ -81,16 +83,16 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 
 **Fő jellemzők:**
 - Automatikus skálázás 0-ról 10 példányra
-- Egészségügyi ellenőrzések és életjelek
-- Környezeti változók befecskendezése
+- Egészségügyi vizsgálatok és életben tartás ellenőrzés
+- Környezeti változó injektálása
 - Application Insights integráció
 
 ### 2. Node.js Express API
 
-Telepíts egy Node.js backend-et MongoDB integrációval.
+Node.js backend telepítése MongoDB integrációval.
 
 ```bash
-# Node.js API sablon inicializálása
+# Inicializálja a Node.js API sablont
 azd init --template todo-nodejs-mongo
 
 # Környezeti változók beállítása
@@ -100,11 +102,11 @@ azd env set COLLECTION_NAME todos
 # Telepítés
 azd up
 
-# Naplók megtekintése az Azure Monitoron keresztül
+# Naplók megtekintése az Azure Monitor segítségével
 azd monitor --logs
 ```
 
-**Infrastruktúra főbb pontjai:**
+**Infrastruktúra kiemelések:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -149,19 +151,19 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 3. Statikus frontend + API backend
 
-Telepíts egy teljes stack alkalmazást React front-enddel és API backenddel.
+Teljes körű alkalmazás telepítése React front-enddel és API back-enddel.
 
 ```bash
-# Inicializáld a teljes körű sablont
+# Teljes körű sablon inicializálása
 azd init --template todo-csharp-sql-swa-func
 
-# Tekintsd át a konfigurációt
+# Konfiguráció átnézése
 cat azure.yaml
 
-# Telepítsd mindkét szolgáltatást
+# Mindkét szolgáltatás telepítése
 azd up
 
-# Nyisd meg az alkalmazást
+# Alkalmazás megnyitása
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
@@ -169,9 +171,9 @@ azd show --output json | jq -r '.services.web.endpoint' | xargs start
 
 ### Példa 1: Mikroszolgáltatások architektúrája
 
-**Forgatókönyv**: Több mikroszolgáltatást tartalmazó e-kereskedelmi alkalmazás
+**Forgatókönyv**: Több mikroszolgáltatással rendelkező e-kereskedelmi alkalmazás
 
-**Könyvtár struktúra:**
+**Könyvtárszerkezet:**
 ```
 microservices-demo/
 ├── azure.yaml
@@ -216,24 +218,24 @@ services:
 # Projekt inicializálása
 azd init
 
-# Gyártási környezet beállítása
+# Állítsa be a termelési környezetet
 azd env new production
 
-# Gyártási beállítások konfigurálása
+# Konfigurálja a termelési beállításokat
 azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
 
-# Az összes szolgáltatás telepítése
+# Telepítse az összes szolgáltatást
 azd up
 
-# Telepítés figyelése
+# Kövesse nyomon a telepítést
 azd monitor --overview
 ```
 
-### Példa 2: AI-alapú Container App
+### Példa 2: Mesterséges intelligencia-alapú Container App
 
-**Forgatókönyv**: AI chat alkalmazás Microsoft Foundry Modellek integrációval
+**Forgatókönyv**: AI chatalkalmazás Microsoft Foundry modellekkel integrálva
 
 **Fájl: src/ai-chat/app.py**
 ```python
@@ -244,7 +246,7 @@ import openai
 
 app = Flask(__name__)
 
-# Használja a Kezelt azonosítót a biztonságos hozzáféréshez
+# Használjon kezelt identitást a biztonságos hozzáféréshez
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -253,7 +255,7 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # Szerezze be az OpenAI kulcsot a Kulcstárolóból
+    # Szerezze be az OpenAI kulcsot a kulcstárolóból
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
@@ -339,11 +341,11 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Példa 3: Háttérmunka küldetés feldolgozóval
+### Példa 3: Háttérmunka-szóvivő üzenetsor feldolgozással
 
-**Forgatókönyv**: Rendelésfeldolgozó rendszer üzenetsorral
+**Forgatókönyv**: Rendelésfeldolgozó rendszer üzenetsor használatával
 
-**Könyvtár struktúra:**
+**Könyvtárszerkezet:**
 ```
 queue-worker/
 ├── azure.yaml
@@ -408,10 +410,10 @@ services:
 # Inicializálás
 azd init
 
-# Telepítés a sor konfigurációval
+# Ütemező konfigurációval telepítés
 azd up
 
-# Munkás méretezése a sor hosszának alapján
+# Dolgozó skálázása a várólista hosszának alapján
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -420,9 +422,9 @@ az containerapp update \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
 
-## Haladó minták
+## Fejlett minták
 
-### Minta 1: Blue-Green Telepítés
+### Minta 1: Blue-Green telepítés
 
 ```bash
 # Új verzió létrehozása forgalom nélkül
@@ -431,20 +433,20 @@ azd deploy api --revision-suffix blue --no-traffic
 # Az új verzió tesztelése
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Forgalom megosztása (20% a kékhez, 80% az aktuálishoz)
+# Forgalom megosztása (20% kékre, 80% aktuálisra)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# Teljes átállás a kék verzióra
+# Teljes átváltás kékre
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
 
-### Minta 2: Canary Telepítés AZD-vel
+### Minta 2: Canary telepítés AZD-vel
 
 **Fájl: .azure/dev/config.json**
 ```json
@@ -529,10 +531,10 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 
 **Telepítés:**
 ```bash
-# Telepítés az összes régióba
+# Telepítés minden régióba
 azd up
 
-# Végpontok ellenőrzése
+# Ellenőrizze a végpontokat
 azd show --output json | jq '.services.api.endpoints'
 ```
 
@@ -563,7 +565,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-**Alkalmazás kód Dapr-rel:**
+**Alkalmazáskód Dapr-rel:**
 ```python
 from flask import Flask
 from dapr.clients import DaprClient
@@ -595,11 +597,11 @@ def create_order():
 ### 1. Erőforrások szervezése
 
 ```bash
-# Használj következetes elnevezési szabályokat
+# Egységes elnevezési konvenciók használata
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# Címkézd meg az erőforrásokat költségkövetéshez
+# Erőforrások címkézése a költségkövetéshez
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
@@ -642,7 +644,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
 }
 ```
 
-### 3. Teljesítmény optimalizálás
+### 3. Teljesítményoptimalizálás
 
 ```yaml
 # azure.yaml with performance settings
@@ -662,10 +664,10 @@ services:
             concurrent: 100
 ```
 
-### 4. Megfigyelés és láthatóság
+### 4. Monitorozás és megfigyelhetőség
 
 ```bash
-# Alkalmazás elemzés engedélyezése
+# Alkalmazásfigyelés engedélyezése
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
 # Naplók valós időben történő megtekintése
@@ -673,7 +675,7 @@ azd monitor --logs
 # Vagy használja az Azure CLI-t a Konténer Alkalmazásokhoz:
 az containerapp logs show --name api --resource-group rg-myapp --follow
 
-# Metrikák figyelése
+# Mérőszámok figyelése
 azd monitor --live
 
 # Értesítések létrehozása
@@ -685,19 +687,19 @@ az monitor metrics alert create \
   --description "Alert when CPU exceeds 80%"
 ```
 
-### 5. Költségoptimalizálás
+### 5. Költséghatékonyság
 
 ```bash
-# Skálázás nullára, ha nem használjuk
+# Méretezze nullára, ha nem használják
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# Fejlesztői környezetekhez spot példányokat használni
+# Használjon spot példányokat fejlesztési környezetekhez
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# Költségkeret-riasztások beállítása
+# Állítson be költségvetési riasztásokat
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
@@ -737,7 +739,7 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Gyakori parancsok áttekintése
+## Gyakori parancsok referencia
 
 ```bash
 # Új konténeralkalmazás projekt inicializálása
@@ -749,32 +751,32 @@ azd up
 # Csak az alkalmazáskód telepítése (infrastruktúra kihagyása)
 azd deploy
 
-# Csak infrastruktúra biztosítása
+# Csak az infrastruktúra biztosítása
 azd provision
 
 # Telepített erőforrások megtekintése
 azd show
 
-# Naplók folyamatos figyelése az azd monitor vagy az Azure CLI segítségével
+# Naplók streamelése az azd monitorral vagy az Azure CLI-vel
 azd monitor --logs
 # az containerapp logs show --name <szolgáltatás-név> --resource-group <rg-név> --follow
 
 # Alkalmazás figyelése
 azd monitor --overview
 
-# Erőforrások törlése
+# Erőforrások eltávolítása
 azd down --force --purge
 ```
 
 ## Hibakeresés
 
-### Probléma: A konténer nem indul el
+### Probléma: Konténer nem indul el
 
 ```bash
 # Naplók ellenőrzése Azure CLI használatával
 az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# Konténeresemények megtekintése
+# Konténer események megtekintése
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
@@ -785,7 +787,7 @@ docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Probléma: Nem lehet elérni a container app végpontját
+### Probléma: Nem elérhető a konténer alkalmazás végpontja
 
 ```bash
 # Ellenőrizze az ingress konfigurációt
@@ -801,15 +803,15 @@ az containerapp ingress update \
   --external true
 ```
 
-### Probléma: Teljesítmény problémák
+### Probléma: Teljesítményproblémák
 
 ```bash
-# Erőforrás kihasználtság ellenőrzése
+# Ellenőrizze az erőforrás-használatot
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Erőforrások skálázása növeléssel
+# Növelje az erőforrásokat
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -817,31 +819,31 @@ az containerapp update \
   --memory 4Gi
 ```
 
-## További erőforrások és példák
+## További források és példák
 - [Mikroszolgáltatások példa](./microservices/README.md)
 - [Egyszerű Flask API példa](./simple-flask-api/README.md)
 - [Azure Container Apps dokumentáció](https://learn.microsoft.com/azure/container-apps/)
-- [AZD sablon galéria](https://azure.github.io/awesome-azd/)
+- [AZD sablonok galéria](https://azure.github.io/awesome-azd/)
 - [Container Apps minták](https://github.com/Azure-Samples/container-apps-samples)
 - [Bicep sablonok](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ## Közreműködés
 
-Új container app példák beküldéséhez:
+Új container app példák hozzáadásához:
 
-1. Hozz létre egy új alkönyvtárat a példáddal
-2. Tartalmazza az teljes `azure.yaml`, `infra/` és `src/` fájlokat
-3. Adj hozzá átfogó README-t a telepítési utasításokkal
-4. Teszteld a telepítést `azd up` parancssal
-5. Küldj be pull request-et
+1. Hozzon létre egy új alkönyvtárat a példájával
+2. Tartalmazza a teljes `azure.yaml`, `infra/` és `src/` fájlokat
+3. Adjon hozzá átfogó README-t telepítési utasításokkal
+4. Tesztelje a telepítést `azd up` használatával
+5. Nyújtson be pull requestet
 
 ---
 
-**Segítségre van szükséged?** Csatlakozz a [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) közösséghez támogatásért és kérdésekért.
+**Segítségre van szüksége?** Csatlakozzon a [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) közösséghez támogatásért és kérdésekért.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Felelősségkizárás**:
-Ez a dokumentum az AI fordító szolgáltatás, a [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár igyekszünk pontos fordítást nyújtani, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az adott nyelven tekintendő hiteles forrásnak. Kritikus információk esetén ajánlott professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget az ebből a fordításból eredő félreértésekért vagy helytelen értelmezésekért.
+**Nyilatkozat**:  
+Ezt a dokumentumot az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordító szolgáltatás segítségével fordítottuk. Bár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum a saját nyelvén tekintendő hivatalos forrásnak. Kritikus információk esetén professzionális emberi fordítást javaslunk. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy helytelen értelmezésekért.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

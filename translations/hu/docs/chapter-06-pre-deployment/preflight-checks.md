@@ -1,73 +1,73 @@
-# AZD telepítések előtti ellenőrzései
+# Előzetes ellenőrzések AZD telepítésekhez
 
 **Fejezet navigáció:**
-- **📚 Kurzus kezdőlap**: [AZD Kezdőknek](../../README.md)
-- **📖 Jelenlegi fejezet**: 6. fejezet - Telepítés előtti érvényesítés és tervezés
-- **⬅️ Előző**: [SKU Selection](sku-selection.md)
-- **➡️ Következő fejezet**: [7. fejezet: Hibaelhárítás](../chapter-07-troubleshooting/common-issues.md)
+- **📚 Tanfolyam kezdőoldal**: [AZD kezdőknek](../../README.md)
+- **📖 Aktuális fejezet**: 6. fejezet - Telepítés előtti érvényesítés és tervezés
+- **⬅️ Előző**: [SKU kiválasztás](sku-selection.md)
+- **➡️ Következő fejezet**: [7. fejezet: Hibakeresés](../chapter-07-troubleshooting/common-issues.md)
 - **🔧 Kapcsolódó**: [4. fejezet: Telepítési útmutató](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Bevezetés
 
-Ez az átfogó útmutató előtelepítési érvényesítési szkripteket és eljárásokat biztosít annak érdekében, hogy az Azure Developer CLI telepítések sikeresek legyenek, még mielőtt megkezdődnének. Tanulja meg automatizált ellenőrzések megvalósítását az azonosításhoz, erőforrás-elhárításokhoz, kvótákhoz, biztonsági megfeleléshez és teljesítménykövetelményekhez, hogy megelőzze a telepítési hibákat és optimalizálja a telepítési sikerességi arányt.
+Ez az átfogó útmutató telepítés előtti érvényesítési szkripteket és eljárásokat kínál, hogy az Azure Developer CLI telepítései sikeresen induljanak el. Tanulja meg, hogyan valósíthat meg automatizált ellenőrzéseket az hitelesítésre, erőforrások rendelkezésre állására, kvótákra, biztonsági megfelelőségre és teljesítménykövetelményekre, hogy megelőzze a telepítési hibákat és optimalizálja a telepítések sikerességét.
 
 ## Tanulási célok
 
-A útmutató elvégzésével Ön képes lesz:
-- Elsajátítani az automatizált előtelepítési érvényesítési technikákat és szkripteket
-- Megérteni az átfogó ellenőrzési stratégiákat az azonosításhoz, jogosultságokhoz és kvótákhoz
-- Megvalósítani erőforrás-átláthatósági és kapacitás-érvényesítési eljárásokat
-- Konfigurálni biztonsági és megfelelőségi ellenőrzéseket a szervezeti szabályzatokhoz
-- Tervezni költségbecslési és költségvetés-ellenőrzési munkafolyamatokat
-- Létrehozni egyedi pre-flight ellenőrzés automatizációkat CI/CD csövekhez
+Az útmutató elvégzésével Ön:
+- Elsajátítja az automatizált telepítés előtti érvényesítési technikákat és szkripteket
+- Megérti az átfogó ellenőrzési stratégiákat hitelesítésre, jogosultságokra és kvótákra
+- Megvalósítja az erőforrás rendelkezésre állásának és kapacitásának ellenőrzési eljárásait
+- Beállítja a biztonsági és megfelelőségi ellenőrzéseket a szervezeti szabályzatokhoz
+- Tervez költségbecslési és költségvetés-érvényesítési munkafolyamatokat
+- Egyedi előzetes ellenőrzési automatizációkat hoz létre CI/CD csővezetékekhez
 
 ## Tanulási eredmények
 
-A befejezés után képes lesz:
-- Átfogó pre-flight érvényesítési szkriptek létrehozására és futtatására
-- Automatizált ellenőrző munkafolyamatok tervezésére különböző telepítési forgatókönyvekhez
-- Környezet-specifikus érvényesítési eljárások és szabályzatok megvalósítására
-- Proaktív megfigyelés és riasztás konfigurálására a telepítési készenlét ellenőrzéséhez
-- Előtelepítési problémák hibakeresésére és javító intézkedések végrehajtására
-- A pre-flight ellenőrzések integrálására DevOps pipeline-okba és automatizációs munkafolyamatokba
+Az útmutató befejezése után képes lesz:
+- Létrehozni és végrehajtani átfogó előzetes érvényesítési szkripteket
+- Tervezni automatizált ellenőrzési munkafolyamatokat különböző telepítési forgatókönyvekhez
+- Külön környezetekre szabott érvényesítési eljárásokat és szabályzatokat bevezetni
+- Konfigurálni a telepítési készültség proaktív figyelését és riasztásait
+- Hibakeresni a telepítés előtti problémákat és javító intézkedéseket alkalmazni
+- Integrálni az előzetes ellenőrzéseket DevOps csővezetékekbe és automatizációkba
 
 ## Tartalomjegyzék
 
-- [Áttekintés](../../../../docs/chapter-06-pre-deployment)
-- [Automatizált előflight script](../../../../docs/chapter-06-pre-deployment)
-- [Kézi érvényesítési ellenőrzőlista](../../../../docs/chapter-06-pre-deployment)
-- [Környezeti érvényesítés](../../../../docs/chapter-06-pre-deployment)
-- [Erőforrás érvényesítés](../../../../docs/chapter-06-pre-deployment)
-- [Biztonság és megfelelőség ellenőrzések](../../../../docs/chapter-06-pre-deployment)
-- [Teljesítmény és kapacitástervezés](../../../../docs/chapter-06-pre-deployment)
-- [Gyakori problémák hibaelhárítása](../../../../docs/chapter-06-pre-deployment)
+- [Áttekintés](#áttekintés)
+- [Automatizált előzetes szkript](#automatizált-előzetes-szkript)
+- [Kézi érvényesítési ellenőrzőlista](#codeblock1)
+- [Környezet érvényesítése](#✅-biztonsági-mentés-és-helyreállítás)
+- [Erőforrások érvényesítése](#éles-környezet-érvényesítése)
+- [Biztonsági és megfelelőségi ellenőrzések](#security--compliance-checks)
+- [Teljesítmény- és kapacitástervezés](#performance--capacity-planning)
+- [Gyakori problémák hibakeresése](#troubleshooting-common-issues)
 
 ---
 
 ## Áttekintés
 
-A pre-flight ellenőrzések alapvető érvényesítések, amelyeket a telepítés előtt hajtanak végre annak érdekében, hogy biztosítsák:
+Az előzetes ellenőrzések olyan alapvető érvényesítések, melyeket telepítés előtt végeznek a következők biztosítására:
 
-- **Erőforrás elérhetőség** és kvóták a cél régiókban
-- **Azonosítás és jogosultságok** megfelelő konfigurálása
-- **Sablonok érvényessége** és paraméterek helyessége
-- **Hálózati kapcsolódás** és függőségek
-- **Biztonsági megfelelés** a szervezeti szabályzatokkal
-- **Költségbecslés** a költségvetési korlátokon belül
+- **Erőforrások rendelkezésre állása** és kvóták a cél régiókban
+- **Hitelesítés és jogosultságok** helyes konfigurációja
+- **Sablon érvényesség** és paraméterek helyessége
+- **Hálózati kapcsolat** és függőségek ellenőrzése
+- **Biztonsági megfelelőség** a szervezeti előírások szerint
+- **Költségbecslés** a költségvetési kereten belül
 
-### Mikor futtassuk a pre-flight ellenőrzéseket
+### Mikor kell lefuttatni az előzetes ellenőrzéseket
 
-- **Mielőtt először telepítenénk** egy új környezetbe
+- **Első telepítés előtt** új környezetbe
 - **Jelentős sablonváltozások után**
-- **A termelési telepítések előtt**
-- **Azure régiók megváltoztatásakor**
-- **CI/CD pipeline-ok részeként**
+- **Éles környezetbe történő telepítés előtt**
+- **Azure régió váltásakor**
+- **CI/CD csővezetékek részeként**
 
 ---
 
-## Automatizált pre-flight script
+## Automatizált előzetes szkript
 
-### PowerShell pre-flight ellenőrző
+### PowerShell előzetes ellenőrző
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -177,7 +177,7 @@ function Test-Authentication {
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # Előfizetéshez való hozzáférés ellenőrzése
+        # Előfizetés hozzáférésének érvényesítése
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -194,7 +194,7 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # Az aktuális felhasználó szerepkör-hozzárendeléseinek lekérése
+        # Jelenlegi felhasználó szerepkör-hozzárendeléseinek lekérdezése
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
@@ -210,7 +210,7 @@ function Test-Permissions {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # Erőforráscsoport létrehozásának tesztelése (ha meg van adva)
+        # Erőforráscsoport létrehozás tesztelése (ha meg van adva)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
@@ -257,7 +257,7 @@ function Test-QuotasAndLimits {
             }
         }
         
-        # Az App Service korlátainak ellenőrzése
+        # App Service korlátainak ellenőrzése
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
             if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
@@ -326,7 +326,7 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # Ellenőrizze, hogy létezik-e az azure.yaml
+    # Ellenőrzés, hogy létezik-e az azure.yaml
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
@@ -354,13 +354,13 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # Infrastruktúra fájlok ellenőrzése
+    # Infrastrukturális fájlok keresése
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # Ha létezik, a main.bicep érvényesítése
+            # main.bicep érvényesítése, ha létezik
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 ÚJ: Infrastrukturális előnézet tesztelése (biztonságos próbafuttatás)
+    # 🧪 ÚJ: Infrastrukturális előnézet tesztelése (biztonságos próba futtatás)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -403,7 +403,7 @@ function Test-RegionalAvailability {
     Write-Host "`n${Blue}=== Regional Availability Check ===${Reset}"
     
     try {
-        # Ellenőrizze, hogy a régió érvényes-e
+        # Hely érvényességének ellenőrzése
         $locations = az account list-locations --output json | ConvertFrom-Json
         $validLocation = $locations | Where-Object { $_.name -eq $Location -or $_.displayName -eq $Location }
         
@@ -415,7 +415,7 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # Szolgáltatás elérhetőségének ellenőrzése a régióban
+        # Szolgáltatás elérhetőségének ellenőrzése régióban
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
@@ -446,11 +446,11 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Alap költségbecslés (pontos becsléshez az Azure Pricing API szükséges)
+    # Alapvető költségbecslés (pontos becsléshez Azure Árképzési API szükséges)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # Ellenőrizze, hogy létezik-e költségvetés
+    # Ellenőrzés, hogy létezik-e költségvetés
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -470,9 +470,9 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # Gyakori biztonsági gyakorlatok ellenőrzése
+    # Általános biztonsági gyakorlatok ellenőrzése
     try {
-        # Ellenőrizze, hogy a Key Vault be van-e konfigurálva
+        # Ellenőrzés, hogy a Key Vault be van-e állítva
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
             Write-Status "Key Vault usage" "Success" "Key Vault detected in templates"
         }
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # Felügyelt identitás használatának ellenőrzése
+        # Kezelt identitás használatának ellenőrzése
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +488,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # HTTPS kikényszerítésének ellenőrzése
+        # HTTPS kikényszerítés ellenőrzése
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -557,15 +557,15 @@ function Invoke-PreflightCheck {
     }
 }
 
-# Futtassa az előzetes ellenőrzést
+# Előzetes ellenőrzés futtatása
 Invoke-PreflightCheck
 ```
 
-### Bash pre-flight ellenőrző
+### Bash előzetes ellenőrző
 
 ```bash
 #!/bin/bash
-# Unix/Linux rendszerek előzetes ellenőrzéseinek Bash-változata
+# Bash verziója az előzetes ellenőrzéseknek Unix/Linux rendszerekhez
 
 set -euo pipefail
 
@@ -665,7 +665,7 @@ check_template_validation() {
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
-        # Alapvető YAML érvényesítés
+        # Alap YAML érvényesítés
         if python3 -c "import yaml; yaml.safe_load(open('azure.yaml'))" 2>/dev/null; then
             print_status "azure.yaml parsing" "success"
         else
@@ -706,7 +706,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # Hely érvényességének ellenőrzése
+    # Érvényes helyszín ellenőrzése
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -729,7 +729,7 @@ check_regional_availability() {
 }
 
 main() {
-    # Parancssori argumentumok elemzése
+    # Parancssori argumentumok feldolgozása
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -755,7 +755,7 @@ main() {
         esac
     done
     
-    # Szükséges paraméterek ellenőrzése
+    # Kötelező paraméterek érvényesítése
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -800,90 +800,90 @@ main "$@"
 
 ### Telepítés előtti ellenőrzőlista
 
-Nyomtassa ki ezt az ellenőrzőlistát és ellenőrizze minden tételt a telepítés előtt:
+Nyomtassa ki ezt az ellenőrzőlistát, és telepítés előtt ellenőrizze az egyes pontokat:
 
 #### ✅ Környezet beállítása
 - [ ] AZD CLI telepítve és frissítve a legújabb verzióra
 - [ ] Azure CLI telepítve és hitelesítve
 - [ ] A megfelelő Azure előfizetés kiválasztva
-- [ ] A környezet neve egyedi és követi a névadási konvenciókat
-- [ ] A cél erőforráscsoport azonosított vagy létrehozható
+- [ ] Környezet neve egyedi és megfelel az elnevezési szabályoknak
+- [ ] Cél erőforráscsoport meghatározva vagy létrehozható
 
-#### ✅ Azonosítás és jogosultságok
-- [ ] Sikeres hitelesítés `azd auth login` parancsal
-- [ ] A felhasználónak Contributor szerepe van a cél előfizetésen/erőforráscsoporton
-- [ ] Service principal konfigurálva a CI/CD-hez (ha alkalmazható)
+#### ✅ Hitelesítés és jogosultságok
+- [ ] Sikeres bejelentkezés az `azd auth login` paranccsal
+- [ ] A felhasználónak Contributor szerepkör a cél előfizetésben/erőforráscsoportban
+- [ ] CI/CD szolgáltatási fiók konfigurálva (ha alkalmazható)
 - [ ] Nincsenek lejárt tanúsítványok vagy hitelesítő adatok
 
 #### ✅ Sablon érvényesítés
-- [ ] `azure.yaml` létezik és érvényes YAML
-- [ ] Minden azure.yaml-ben definiált szolgáltatáshoz van megfelelő forráskód
-- [ ] A `infra/` könyvtárban található Bicep sablonok jelen vannak
-- [ ] `main.bicep` lefordul hibák nélkül (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Az infrastruktúra előnézet sikeresen lefut (`azd provision --preview`)
-- [ ] Minden szükséges paraméternek van alapértelmezett értéke vagy meg lesz adva
+- [ ] `azure.yaml` létezik és érvényes YAML formátumú
+- [ ] Minden szolgáltatás az azure.yaml-ban meg van határozva és rendelkezik forráskóddal
+- [ ] A `infra/` könyvtárban lévő Bicep sablonok megvannak
+- [ ] A `main.bicep` hiba nélkül fordul (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Az infrastruktúra előnézete sikeresen lefut (`azd provision --preview`)
+- [ ] Minden szükséges paraméterhez van alapértelmezett érték vagy meg lesz adva
 - [ ] Nincsenek keménykódolt titkok a sablonokban
 
 #### ✅ Erőforrás tervezés
-- [ ] A cél Azure régió kiválasztva és érvényesítve
-- [ ] A szükséges Azure szolgáltatások elérhetők a cél régióban
-- [ ] Elég kvóta áll rendelkezésre a tervezett erőforrásokhoz
-- [ ] Erőforrás névütközések ellenőrzve
-- [ ] Az erőforrások közötti függőségek megértettek
+- [ ] Cél Azure régió kiválasztva és validált
+- [ ] A szükséges Azure szolgáltatások elérhetőek a cél régióban
+- [ ] Elégséges kvóta áll rendelkezésre a tervezett erőforrásokhoz
+- [ ] Erőforrás elnevezési ütközések ellenőrizve
+- [ ] Az erőforrások közötti függőségek ismertek
 
 #### ✅ Hálózat és biztonság
-- [ ] Hálózati kapcsolódás az Azure végpontokhoz ellenőrizve
+- [ ] Hálózati kapcsolat az Azure végpontokhoz ellenőrizve
 - [ ] Tűzfal/proxy beállítások konfigurálva, ha szükséges
-- [ ] Key Vault konfigurálva a titkok kezeléséhez
+- [ ] Key Vault konfigurálva a titkok kezelésére
 - [ ] Kezelt identitások használata, ahol lehetséges
-- [ ] HTTPS kikényszerítése engedélyezve webalkalmazásoknál
+- [ ] HTTPS kötelezővé tétele webalkalmazásokhoz
 
-#### ✅ Költséggazdálkodás
-- [ ] Költségbecslések kiszámítva az Azure Pricing Calculator használatával
-- [ ] Költségvetési riasztások konfigurálva, ha szükséges
-- [ ] Megfelelő SKU-k kiválasztva a környezet típusához
-- [ ] Foglalható kapacitás mérlegelve a termelési munkaterhelésekhez
+#### ✅ Költségmenedzsment
+- [ ] Költségbecslések kiszámítva az Azure Pricing Calculatorral
+- [ ] Költségvetési riasztások beállítva, ha szükséges
+- [ ] A környezet típusának megfelelő SKU-k kiválasztva
+- [ ] Fenntartott kapacitás figyelembe véve éles üzemhez
 
-#### ✅ Monitoring és megfigyelhetőség
+#### ✅ Monitorozás és megfigyelhetőség
 - [ ] Application Insights konfigurálva a sablonokban
-- [ ] Log Analytics munkaterület megtervezve
-- [ ] Riasztási szabályok definiálva a kritikus metrikákra
-- [ ] Health check végpontok megvalósítva az alkalmazásokban
+- [ ] Log Analytics munkaterület tervezve
+- [ ] Kritikus metrikákhoz riasztási szabályok definiálva
+- [ ] Egészségügyi ellenőrző végpontok megvalósítva az alkalmazásokban
 
 #### ✅ Biztonsági mentés és helyreállítás
 - [ ] Biztonsági mentési stratégia meghatározva az adatforrásokra
-- [ ] Recovery time objective (RTO) dokumentálva
-- [ ] Recovery point objective (RPO) dokumentálva
-- [ ] Katasztrófa utáni helyreállítási terv készenlétben a termeléshez
+- [ ] Helyreállítási időcélok (RTO) dokumentálva
+- [ ] Helyreállítási pont célok (RPO) dokumentálva
+- [ ] Katasztrófa helyreállítási terv készen áll éles környezetre
 
 ---
 
-## Környezeti érvényesítés
+## Környezet érvényesítése
 
-### Fejlesztési környezet érvényesítése
+### Fejlesztői környezet érvényesítése
 
 ```bash
 #!/bin/bash
-# Fejlesztési környezetre vonatkozó ellenőrzések
+# Fejlesztési környezetre jellemző ellenőrzések
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # Fejlesztésbarát konfigurációk ellenőrzése
+    # Ellenőrizze a fejlesztésbarát beállításokat
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # Automatikus leállításra vonatkozó beállítások ellenőrzése
+    # Ellenőrizze az automatikus leállítási beállításokat
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # Fejlesztési adatbázis-konfigurációk érvényesítése
+    # Érvényesítse a fejlesztési adatbázis-konfigurációkat
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -892,37 +892,37 @@ validate_dev_environment() {
 }
 ```
 
-### Termelési környezet érvényesítése
+### Éles környezet érvényesítése
 
 ```bash
 #!/bin/bash
-# A termelési környezetre vonatkozó ellenőrzések
+# Éles környezetre vonatkozó érvényesítések
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # Ellenőrizze a magas rendelkezésre állású konfigurációkat
+    # Magas rendelkezésre állás beállításainak ellenőrzése
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # Ellenőrizze a biztonsági mentések konfigurációit
+    # Biztonsági mentés beállításainak ellenőrzése
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # Ellenőrizze a monitorozás beállításait
+    # Felügyeleti beállítások érvényesítése
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # Ellenőrizze a biztonsági konfigurációkat
+    # Biztonsági beállítások ellenőrzése
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -933,9 +933,9 @@ validate_prod_environment() {
 
 ---
 
-## Erőforrás érvényesítés
+## Erőforrások érvényesítése
 
-### Kvóta érvényesítési szkript
+### Kvóta érvényesítő szkript
 
 ```python
 #!/usr/bin/env python3
@@ -990,7 +990,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # Tárolási fiókok lekérése az előfizetésben
+    # Tárolófiókok lekérése az előfizetésben
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -998,7 +998,7 @@ def check_storage_limits(location: str) -> bool:
         return False
     
     account_count = len(accounts)
-    max_accounts = 250  # Azure alapértelmezett korlátja
+    max_accounts = 250  # Alapértelmezett Azure-korlát
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1043,7 +1043,7 @@ def main():
     all_passed &= check_storage_limits(location)
     all_passed &= check_network_limits(location)
     
-    # Összefoglalás
+    # Összegzés
     print(f"\n=== Quota Check Summary ===")
     if all_passed:
         print("✅ All quota checks passed - sufficient capacity available")
@@ -1058,20 +1058,20 @@ if __name__ == "__main__":
 
 ---
 
-## Biztonság és megfelelőség ellenőrzések
+## Biztonsági és megfelelőségi ellenőrzések
 
-### Biztonsági érvényesítési szkript
+### Biztonsági érvényesítő szkript
 
 ```bash
 #!/bin/bash
-# AZD-telepítések biztonsági és megfelelőségi ellenőrzése
+# Biztonsági és megfelelőségi ellenőrzés az AZD telepítésekhez
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
     
     local issues_found=0
     
-    # Key Vault használatának ellenőrzése
+    # Kulcstároló használatának ellenőrzése
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1079,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Felügyelt identitás használatának ellenőrzése
+    # Kezelt identitás használatának ellenőrzése
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # HTTPS kikényszerítésének ellenőrzése
+    # HTTPS követelményének ellenőrzése
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1095,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Minimális TLS-verzió ellenőrzése
+    # Minimális TLS verzió ellenőrzése
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1103,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Nyilvános hozzáférés korlátozásainak ellenőrzése
+    # Nyilvános hozzáférési korlátozások ellenőrzése
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1124,21 +1124,21 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # Adat titkosításának ellenőrzése
+    # Adattitkosítás ellenőrzése
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # Audit naplózás ellenőrzése
+    # Naplózás ellenőrzése
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # Biztonsági mentések és megőrzési irányelvek ellenőrzése
+    # Biztonsági mentési és megőrzési szabályzatok ellenőrzése
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1290,58 +1290,58 @@ steps:
 
 ---
 
-## Legjobb gyakorlatok összefoglalása
+## Legjobb gyakorlatok összefoglalója
 
-### ✅ Pre-flight ellenőrzés legjobb gyakorlatai
+### ✅ Előzetes ellenőrzések legjobb gyakorlatai
 
 1. **Automatizálás, ahol lehetséges**
-   - Integrálja az ellenőrzéseket a CI/CD pipeline-okba
+   - Integrálja az ellenőrzéseket CI/CD csővezetékekbe
    - Használjon szkripteket ismételhető érvényesítésekhez
-   - Tárolja az eredményeket auditálási nyomvonalakhoz
+   - Tárolja az eredményeket auditáláshoz
 
-2. **Környezetspecifikus érvényesítés**
-   - Különböző ellenőrzések fejlesztés/staging/termelés számára
-   - Megfelelő biztonsági követelmények környezettől függően
-   - Költségoptimalizálás nem-termelési környezetekre
+2. **Környezet-specifikus érvényesítés**
+   - Különböző ellenőrzések fejlesztési/staging/éles környezetekhez
+   - Megfelelő biztonsági követelmények környezetenként
+   - Költségoptimalizálás nem éles környezetekhez
 
 3. **Átfogó lefedettség**
-   - Azonosítás és jogosultságok
-   - Erőforrás kvóták és elérhetőség
-   - Sablon érvényesítés és szintaxis
+   - Hitelesítés és jogosultságok
+   - Erőforrás kvóták és rendelkezésre állás
+   - Sablon érvényesség és szintaxis
    - Biztonsági és megfelelőségi követelmények
 
-4. **Világos jelentés**
-   - Színkódolt állapotjelzők
+4. **Átlátható jelentéstétel**
+   - Színkódolt státusz indikátorok
    - Részletes hibaüzenetek javítási lépésekkel
    - Összefoglaló jelentések gyors értékeléshez
 
-5. **Gyors hibamegállás**
-   - Állítsa le a telepítést, ha kritikus ellenőrzések megbuknak
-   - Adjon világos útmutatást a megoldáshoz
-   - Tegye lehetővé az ellenőrzések egyszerű újbóli futtatását
+5. **Gyors hibajelzés**
+   - Szakítsa meg a telepítést kritikus hibák esetén
+   - Biztosítson világos útmutatást a megoldáshoz
+   - Tegye lehetővé az ellenőrzések könnyű újrafuttatását
 
-### Gyakori pre-flight buktatók
+### Gyakori előzetes ellenőrzési buktatók
 
-1. **Az érvényesítés kihagyása** a "gyors" telepítések miatt
-2. **Megfelelő jogosultságok hiányának** ellenőrzése a telepítés előtt
-3. **Kvóta limitek figyelmen kívül hagyása** amíg a telepítés el nem bukik
-4. **Sablonok nem érvényesítése** a CI/CD pipeline-okban
-5. **Biztonsági érvényesítés hiánya** a termelési környezeteknél
-6. **Nem megfelelő költségbecslés**, ami költségvetési meglepetésekhez vezet
+1. **Ellenőrzés kihagyása** "gyors" telepítéseknél
+2. **Nem megfelelő jogosultságok** ellenőrzése telepítés előtt
+3. **Kvóta korlátok figyelmen kívül hagyása** mindaddig, míg a telepítés nem hibásodik meg
+4. **Sablonok érvényesítésének hiánya** CI/CD csővezetékekben
+5. **Biztonsági ellenőrzés hiánya** éles környezetekben
+6. **Nem megfelelő költségbecslés**, ami költségvetési meglepetéseket okozhat
 
 ---
 
-**Pro Tipp**: Futtassa a pre-flight ellenőrzéseket külön munkaként a CI/CD pipeline-jában a tényleges telepítési munka előtt. Ez lehetővé teszi a korai problémafelismerést és gyorsabb visszajelzést ad a fejlesztőknek.
+**Pro Tipp**: Futtassa az előzetes ellenőrzéseket külön munkaként CI/CD csővezetékében az éles telepítés előtt. Ez lehetővé teszi a problémák korai felderítését és gyorsabb visszacsatolást ad a fejlesztőknek.
 
 ---
 
 **Navigáció**
-- **Előző lecké**: [SKU Selection](sku-selection.md)
-- **Következő lecké**: [Gyors referencia](../../resources/cheat-sheet.md)
+- **Előző leckéhez**: [SKU kiválasztás](sku-selection.md)
+- **Következő leckéhez**: [Segédlet](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Felelősségkizárás:
-Ez a dokumentum az AI fordító szolgáltatás, a Co-op Translator (https://github.com/Azure/co-op-translator) segítségével készült. Bár igyekszünk a lehető legpontosabb fordítást nyújtani, kérjük, vegye figyelembe, hogy az automatizált fordítások hibákat vagy pontatlanságokat tartalmazhatnak. A dokumentum eredeti, anyanyelvi változatát tekintse irányadónak. Kritikus fontosságú információk esetén szakmai, emberi fordítást javaslunk. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy helytelen értelmezésekért.
+**Felelősségi nyilatkozat**:  
+Ez a dokumentum az AI fordító szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével készült. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Kritikus információk esetén professzionális emberi fordítást javaslunk. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy félreértelmezésekért.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

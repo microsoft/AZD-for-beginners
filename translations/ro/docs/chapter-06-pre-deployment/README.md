@@ -1,43 +1,45 @@
 # Capitolul 6: Planificare și Validare Prealabilă Implementării
 
-**📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 1 oră | **⭐ Complexitate**: Intermediar
+**📚 Curs**: [AZD pentru Începători](../../README.md) | **⏱️ Durată**: 1 oră | **⭐ Complexitate**: Intermediar
 
 ---
 
 ## Prezentare generală
 
-Acest capitol acoperă pași esențiali de planificare și validare înainte de a implementa aplicația ta. Învață să eviți greșelile costisitoare printr-o planificare corectă a capacității, selectarea SKU-urilor și verificări prealabile.
+Acest capitol acoperă pașii esențiali de planificare și validare înainte de a implementa aplicația. Învață cum să eviți greșelile costisitoare prin planificarea corectă a capacității, selecția SKU-urilor și verificări prealabile.
+
+> Validat cu `azd 1.23.12` în martie 2026.
 
 ## Obiective de învățare
 
-Prin finalizarea acestui capitol, vei:
+După finalizarea acestui capitol, vei:
 - Rula verificări prealabile înainte de implementare
 - Planifica capacitatea și estima cerințele de resurse
 - Selecta SKU-urile potrivite pentru optimizarea costurilor
 - Configura Application Insights pentru monitorizare
-- Înțelege tiparele de coordonare în echipă
+- Înțelege modelele de coordonare ale echipei
 
 ---
 
 ## 📚 Lecții
 
 | # | Lecție | Descriere | Timp |
-|---|--------|-----------|------|
-| 1 | [Verificări prealabile](preflight-checks.md) | Validarea configurației înainte de implementare | 15 min |
-| 2 | [Planificarea capacității](capacity-planning.md) | Estimarea cerințelor de resurse | 20 min |
-| 3 | [Selectarea SKU-urilor](sku-selection.md) | Alegerea nivelurilor de preț adecvate | 15 min |
-| 4 | [Application Insights](application-insights.md) | Configurarea monitorizării | 20 min |
-| 5 | [Tipare de coordonare](coordination-patterns.md) | Fluxuri de lucru pentru echipa de implementare | 15 min |
+|---|--------|-------------|------|
+| 1 | [Verificări prealabile](preflight-checks.md) | Validează configurația înainte de implementare | 15 min |
+| 2 | [Planificarea capacității](capacity-planning.md) | Estimează cerințele de resurse | 20 min |
+| 3 | [Selecția SKU-urilor](sku-selection.md) | Alege nivelurile de preț potrivite | 15 min |
+| 4 | [Application Insights](application-insights.md) | Configurează monitorizarea | 20 min |
+| 5 | [Tipare de coordonare](coordination-patterns.md) | Fluxuri de lucru pentru implementarea în echipă | 15 min |
 
 ---
 
-## 🚀 Început rapid
+## 🚀 Pornire rapidă
 
 ```bash
 # Verifică cotele abonamentului
 az vm list-usage --location eastus --output table
 
-# Previzualizează implementarea (nu se creează resurse)
+# Previzualizează implementarea (nu sunt create resurse)
 azd provision --preview
 
 # Validează sintaxa Bicep
@@ -49,29 +51,29 @@ azd env get-values
 
 ---
 
-## ☑️ Listă de verificare pre-implementare
+## ☑️ Listă de verificare înainte de implementare
 
 ### Înainte de `azd provision`
 
 - [ ] Cota verificată pentru regiune
 - [ ] SKU-urile selectate corespunzător
 - [ ] Estimarea costurilor revizuită
-- [ ] Convenția de denumire consistentă
-- [ ] Securitatea/RBAC configurată
+- [ ] Convenție de denumire consecventă
+- [ ] Securitate/RBAC configurate
 
 ### Înainte de `azd deploy`
 
-- [ ] Variabilele de mediu setate
+- [ ] Variabile de mediu setate
 - [ ] Secrete în Key Vault
-- [ ] Șirurile de conexiune verificate
+- [ ] Șiruri de conectare verificate
 - [ ] Verificări de sănătate configurate
 
 ---
 
-## 💰 Ghid pentru selectarea SKU-urilor
+## 💰 Ghid de selecție SKU
 
-| Sarcină de lucru | Dezvoltare | Producție |
-|------------------|------------|-----------|
+| Sarcină | Dezvoltare | Producție |
+|----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
 | Microsoft Foundry Models | Standard | Standard + PTU |
@@ -82,7 +84,7 @@ azd env get-values
 ## 🔗 Navigare
 
 | Direcție | Capitol |
-|----------|---------|
+|-----------|---------|
 | **Anterior** | [Capitolul 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
 | **Următor** | [Capitolul 7: Depanare](../chapter-07-troubleshooting/README.md) |
 
@@ -97,6 +99,6 @@ azd env get-values
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Declinare a responsabilității**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să aveți în vedere că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un om. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot rezulta din utilizarea acestei traduceri.
+**Declinare de responsabilitate**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). În timp ce ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original, în limba sa nativă, ar trebui considerat sursa autorizată. Pentru informații critice, se recomandă traducerea de către un traducător uman profesionist. Nu suntem răspunzători pentru nicio neînțelegere sau interpretare greșită rezultată din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,28 +1,28 @@
-# Guía de Solución de Problemas Específica para IA
+# Guía de solución de problemas específica para IA
 
-**Navegación del Capítulo:**
-- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
-- **📖 Capítulo Actual**: Capítulo 7 - Solución de Problemas y Depuración
-- **⬅️ Anterior**: [Guía de Depuración](debugging.md)
-- **➡️ Próximo Capítulo**: [Capítulo 8: Patrones de Producción y Empresariales](../chapter-08-production/production-ai-practices.md)
-- **🤖 Relacionado**: [Capítulo 2: Desarrollo AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Navegación del capítulo:**
+- **📚 Inicio del curso**: [AZD For Beginners](../../README.md)
+- **📖 Capítulo actual**: Capítulo 7 - Solución de problemas y depuración
+- **⬅️ Anterior**: [Debugging Guide](debugging.md)
+- **➡️ Siguiente capítulo**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
+- **🤖 Relacionado**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-Esta guía integral de solución de problemas aborda problemas comunes al implementar soluciones de IA con AZD, proporcionando soluciones y técnicas de depuración específicas para servicios de IA de Azure.
+Esta completa guía de solución de problemas aborda problemas comunes al desplegar soluciones de IA con AZD, proporcionando soluciones y técnicas de depuración específicas para los servicios de Azure AI.
 
-## Tabla de Contenidos
+## Tabla de contenidos
 
-- [Problemas con el Servicio de Modelos Microsoft Foundry](../../../../docs/chapter-07-troubleshooting)
-- [Problemas con Azure AI Search](../../../../docs/chapter-07-troubleshooting)
-- [Problemas de Despliegue en Container Apps](../../../../docs/chapter-07-troubleshooting)
-- [Errores de Autenticación y Permisos](../../../../docs/chapter-07-troubleshooting)
-- [Fallos en el Despliegue de Modelos](../../../../docs/chapter-07-troubleshooting)
-- [Problemas de Rendimiento y Escalado](../../../../docs/chapter-07-troubleshooting)
-- [Gestión de Costos y Cuotas](../../../../docs/chapter-07-troubleshooting)
-- [Herramientas y Técnicas de Depuración](../../../../docs/chapter-07-troubleshooting)
+- [Microsoft Foundry Models Service Issues](#azure-openai-service-issues)
+- [Azure AI Search Problems](#azure-ai-search-problems)
+- [Container Apps Deployment Issues](#container-apps-deployment-issues)
+- [Authentication and Permission Errors](#authentication-and-permission-errors)
+- [Model Deployment Failures](#model-deployment-failures)
+- [Performance and Scaling Issues](#performance-and-scaling-issues)
+- [Cost and Quota Management](#cost-and-quota-management)
+- [Debugging Tools and Techniques](#debugging-tools-and-techniques)
 
-## Problemas con el Servicio de Modelos Microsoft Foundry
+## Microsoft Foundry Models Service Issues
 
-### Problema: Servicio OpenAI No Disponible en la Región
+### Issue: OpenAI Service Unavailable in Region
 
 **Síntomas:**
 ```
@@ -30,22 +30,22 @@ Error: The requested resource type is not available in the location 'westus'
 ```
 
 **Causas:**
-- Modelos Microsoft Foundry no disponibles en la región seleccionada
-- Cuota agotada en regiones preferidas
+- Microsoft Foundry Models no disponible en la región seleccionada
+- Cuota agotada en las regiones preferidas
 - Restricciones de capacidad regional
 
 **Soluciones:**
 
-1. **Verificar Disponibilidad en la Región:**
+1. **Comprobar disponibilidad de la región:**
 ```bash
-# Lista de regiones disponibles para OpenAI
+# Listar las regiones disponibles para OpenAI
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
   --output table
 ```
 
-2. **Actualizar la Configuración de AZD:**
+2. **Actualizar la configuración de AZD:**
 ```yaml
 # azure.yaml - Force specific region
 infra:
@@ -56,7 +56,7 @@ parameters:
   location: "eastus2"  # Known working region
 ```
 
-3. **Usar Regiones Alternativas:**
+3. **Usar regiones alternativas:**
 ```bicep
 // infra/main.bicep - Multi-region fallback
 @allowed([
@@ -68,7 +68,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### Problema: Cuota de Despliegue de Modelo Excedida
+### Issue: Model Deployment Quota Exceeded
 
 **Síntomas:**
 ```
@@ -77,15 +77,15 @@ Error: Deployment failed due to insufficient quota
 
 **Soluciones:**
 
-1. **Verificar Cuota Actual:**
+1. **Comprobar la cuota actual:**
 ```bash
-# Verificar el uso de la cuota
+# Comprobar el uso de la cuota
 az cognitiveservices usage list \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG
 ```
 
-2. **Solicitar Incremento de Cuota:**
+2. **Solicitar aumento de cuota:**
 ```bash
 # Enviar solicitud de aumento de cuota
 az support tickets create \
@@ -95,7 +95,7 @@ az support tickets create \
   --problem-classification "/providers/Microsoft.Support/services/quota_service_guid/problemClassifications/quota_service_problemClassification_guid"
 ```
 
-3. **Optimizar Capacidad del Modelo:**
+3. **Optimizar la capacidad del modelo:**
 ```bicep
 // Reduce initial capacity
 resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
@@ -113,7 +113,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }
 ```
 
-### Problema: Versión de API Inválida
+### Issue: Invalid API Version
 
 **Síntomas:**
 ```
@@ -122,23 +122,23 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 **Soluciones:**
 
-1. **Usar Versión de API Soportada:**
+1. **Usar una versión de API compatible:**
 ```python
-# Usa la versión soportada más reciente
+# Usar la versión más reciente compatible
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
-2. **Verificar Compatibilidad de la Versión de API:**
+2. **Comprobar compatibilidad de la versión de la API:**
 ```bash
-# Lista las versiones de API soportadas
+# Listar las versiones de API compatibles
 az rest --method get \
   --url "https://management.azure.com/providers/Microsoft.CognitiveServices/operations?api-version=2023-05-01" \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
 ```
 
-## Problemas con Azure AI Search
+## Azure AI Search Problems
 
-### Problema: Nivel de Precio del Servicio de Búsqueda Insuficiente
+### Issue: Search Service Pricing Tier Insufficient
 
 **Síntomas:**
 ```
@@ -147,7 +147,7 @@ Error: Semantic search requires Basic tier or higher
 
 **Soluciones:**
 
-1. **Actualizar el Nivel de Precio:**
+1. **Actualizar el nivel de precios:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -165,7 +165,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-2. **Deshabilitar Búsqueda Semántica (Desarrollo):**
+2. **Deshabilitar la búsqueda semántica (Desarrollo):**
 ```bicep
 // For development environments
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -179,7 +179,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Problema: Fallos en la Creación de Índices
+### Issue: Index Creation Failures
 
 **Síntomas:**
 ```
@@ -188,7 +188,7 @@ Error: Cannot create index, insufficient permissions
 
 **Soluciones:**
 
-1. **Verificar Claves del Servicio de Búsqueda:**
+1. **Verificar las claves del servicio de búsqueda:**
 ```bash
 # Obtener la clave de administrador del servicio de búsqueda
 az search admin-key show \
@@ -196,7 +196,7 @@ az search admin-key show \
   --resource-group YOUR_RG
 ```
 
-2. **Revisar Esquema del Índice:**
+2. **Comprobar el esquema del índice:**
 ```python
 # Validar el esquema del índice
 from azure.search.documents.indexes import SearchIndexClient
@@ -212,7 +212,7 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **Usar Identidad Administrada:**
+3. **Usar identidad administrada:**
 ```bicep
 // Grant search permissions to managed identity
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -226,9 +226,9 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Problemas de Despliegue en Container Apps
+## Container Apps Deployment Issues
 
-### Problema: Fallos en la Construcción del Contenedor
+### Issue: Container Build Failures
 
 **Síntomas:**
 ```
@@ -237,7 +237,7 @@ Error: Failed to build container image
 
 **Soluciones:**
 
-1. **Verificar Sintaxis del Dockerfile:**
+1. **Comprobar la sintaxis del Dockerfile:**
 ```dockerfile
 # Dockerfile - Python AI app example
 FROM python:3.11-slim
@@ -259,7 +259,7 @@ EXPOSE 8000
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-2. **Validar Dependencias:**
+2. **Validar dependencias:**
 ```txt
 # requirements.txt - Pin versions for stability
 fastapi==0.104.1
@@ -271,9 +271,9 @@ azure-search-documents==11.4.0
 azure-cosmos==4.5.1
 ```
 
-3. **Agregar Verificación de Estado (Health Check):**
+3. **Agregar verificación de estado (health check):**
 ```python
-# main.py - Agregar punto final de verificación de salud
+# main.py - Agregar endpoint de comprobación de estado
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -283,7 +283,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Problema: Fallos al Iniciar la Aplicación en el Contenedor
+### Issue: Container App Startup Failures
 
 **Síntomas:**
 ```
@@ -292,7 +292,7 @@ Error: Container failed to start within timeout period
 
 **Soluciones:**
 
-1. **Incrementar Tiempo de Espera para Inicio:**
+1. **Aumentar el tiempo de espera de inicio:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -325,9 +325,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **Optimizar la Carga del Modelo:**
+2. **Optimizar la carga del modelo:**
 ```python
-# Cargar modelos perezosamente para reducir el tiempo de inicio
+# Cargar modelos bajo demanda para reducir el tiempo de inicio
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -355,9 +355,9 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Errores de Autenticación y Permisos
+## Authentication and Permission Errors
 
-### Problema: Permiso Denegado para Identidad Administrada
+### Issue: Managed Identity Permission Denied
 
 **Síntomas:**
 ```
@@ -366,15 +366,15 @@ Error: Authentication failed for Microsoft Foundry Models Service
 
 **Soluciones:**
 
-1. **Verificar Asignaciones de Roles:**
+1. **Verificar asignaciones de roles:**
 ```bash
-# Verificar asignaciones de roles actuales
+# Comprobar las asignaciones de roles actuales
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
 ```
 
-2. **Asignar Roles Requeridos:**
+2. **Asignar los roles requeridos:**
 ```bicep
 // Required role assignments for AI services
 var cognitiveServicesOpenAIUserRole = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd')
@@ -391,7 +391,7 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-3. **Probar Autenticación:**
+3. **Probar la autenticación:**
 ```python
 # Probar la autenticación de identidad administrada
 from azure.identity import DefaultAzureCredential
@@ -406,7 +406,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### Problema: Acceso Denegado al Key Vault
+### Issue: Key Vault Access Denied
 
 **Síntomas:**
 ```
@@ -415,7 +415,7 @@ Error: The user, group or application does not have secrets get permission
 
 **Soluciones:**
 
-1. **Conceder Permisos en Key Vault:**
+1. **Conceder permisos en Key Vault:**
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -434,7 +434,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Usar RBAC en Lugar de Políticas de Acceso:**
+2. **Usar RBAC en lugar de políticas de acceso:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -447,9 +447,9 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## Fallos en el Despliegue de Modelos
+## Model Deployment Failures
 
-### Problema: Versión del Modelo No Disponible
+### Issue: Model Version Not Available
 
 **Síntomas:**
 ```
@@ -458,7 +458,7 @@ Error: Model version 'gpt-4-32k' is not available
 
 **Soluciones:**
 
-1. **Verificar Modelos Disponibles:**
+1. **Comprobar los modelos disponibles:**
 ```bash
 # Listar modelos disponibles
 az cognitiveservices account list-models \
@@ -468,7 +468,7 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **Usar Modelos de Reserva (Fallbacks):**
+2. **Usar alternativas de modelo:**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
@@ -479,8 +479,8 @@ param primaryModel object = {
 
 @description('Fallback model configuration')
 param fallbackModel object = {
-  name: 'gpt-35-turbo'
-  version: '0125'
+  name: 'gpt-4.1'
+  version: '2024-08-06'
 }
 
 // Try primary model first, fallback if unavailable
@@ -497,9 +497,9 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 }
 ```
 
-3. **Validar Modelo Antes del Despliegue:**
+3. **Validar el modelo antes del despliegue:**
 ```python
-# Validación del modelo antes del despliegue
+# Validación previa al despliegue del modelo
 import httpx
 
 async def validate_model_availability(model_name: str, version: str) -> bool:
@@ -519,9 +519,9 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
         return False
 ```
 
-## Problemas de Rendimiento y Escalado
+## Performance and Scaling Issues
 
-### Problema: Respuestas con Latencia Alta
+### Issue: High Latency Responses
 
 **Síntomas:**
 - Tiempos de respuesta > 30 segundos
@@ -530,9 +530,9 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 **Soluciones:**
 
-1. **Implementar Tiempos de Espera en Solicitudes:**
+1. **Implementar tiempos de espera para solicitudes:**
 ```python
-# Configurar los tiempos de espera adecuados
+# Configure los tiempos de espera adecuados
 import httpx
 
 client = httpx.AsyncClient(
@@ -545,9 +545,9 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **Agregar Caché de Respuestas:**
+2. **Agregar caché de respuestas:**
 ```python
-# Caché Redis para respuestas
+# Caché de Redis para respuestas
 import redis.asyncio as redis
 import json
 
@@ -565,7 +565,7 @@ class ResponseCache:
         await self.redis.setex(f"ai_response:{query_hash}", ttl, response)
 ```
 
-3. **Configurar Autoescalado:**
+3. **Configurar autoescalado:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -599,7 +599,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Problema: Errores por Memoria Insuficiente
+### Issue: Memory Out of Errors
 
 **Síntomas:**
 ```
@@ -608,7 +608,7 @@ Error: Container killed due to memory limit exceeded
 
 **Soluciones:**
 
-1. **Incrementar Asignación de Memoria:**
+1. **Aumentar la asignación de memoria:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -627,9 +627,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-2. **Optimizar Uso de Memoria:**
+2. **Optimizar el uso de memoria:**
 ```python
-# Manejo de modelo eficiente en memoria
+# Gestión de modelos eficiente en memoria
 import gc
 import psutil
 
@@ -639,30 +639,30 @@ class MemoryOptimizedAI:
         
     async def process_request(self, request):
         """Process request with memory monitoring."""
-        # Verificar uso de memoria antes de procesar
+        # Comprobar el uso de memoria antes de procesar
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Forzar recolección de basura
+            gc.collect()  # Forzar la recolección de basura
             
         result = await self._process_ai_request(request)
         
-        # Limpiar después de procesar
+        # Limpiar después del procesamiento
         gc.collect()
         return result
 ```
 
-## Gestión de Costos y Cuotas
+## Cost and Quota Management
 
-### Problema: Costos Altos Inesperados
+### Issue: Unexpected High Costs
 
 **Síntomas:**
 - Factura de Azure más alta de lo esperado
-- Uso de tokens excediendo estimaciones
+- Uso de tokens excediendo las estimaciones
 - Alertas de presupuesto activadas
 
 **Soluciones:**
 
-1. **Implementar Controles de Costos:**
+1. **Implementar controles de costos:**
 ```python
 # Seguimiento del uso de tokens
 class TokenTracker:
@@ -681,7 +681,7 @@ class TokenTracker:
         return total_tokens
 ```
 
-2. **Configurar Alertas de Costos:**
+2. **Configurar alertas de costos:**
 ```bicep
 resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
   name: 'ai-workload-budget'
@@ -706,47 +706,44 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-3. **Optimizar Selección de Modelos:**
+3. **Optimizar la selección de modelos:**
 ```python
-# Selección de modelo consciente del costo
-MODEL_COSTS = {
-    'gpt-4.1-mini': 0.00015,  # por cada 1K tokens
-    'gpt-4.1': 0.03,          # por cada 1K tokens
-    'gpt-35-turbo': 0.0015  # por cada 1K tokens
+# Selección de modelos consciente del costo
+MODEL_COST_TIERS = {
+  'gpt-4.1-mini': 'low',
+  'gpt-4.1': 'high'
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
     """Select model based on complexity and budget."""
     if complexity == 'simple' or budget_remaining < 10:
         return 'gpt-4.1-mini'
-    elif complexity == 'medium':
-        return 'gpt-35-turbo'
     else:
         return 'gpt-4.1'
 ```
 
-## Herramientas y Técnicas de Depuración
+## Debugging Tools and Techniques
 
-### Comandos de Depuración de AZD
+### AZD Debugging Commands
 
 ```bash
 # Habilitar registro detallado
 azd up --debug
 
-# Verificar el estado del despliegue
+# Comprobar el estado del despliegue
 azd show
 
-# Ver registros de la aplicación (abre el panel de monitoreo)
+# Ver registros de la aplicación (abre el panel de supervisión)
 azd monitor --logs
 
 # Ver métricas en tiempo real
 azd monitor --live
 
-# Verificar las variables de entorno
+# Comprobar las variables de entorno
 azd env get-values
 ```
 
-### Comandos de Extensión AZD AI para Diagnóstico
+### AZD AI Extension Commands for Diagnostics
 
 Si desplegaste agentes usando `azd ai agent init`, estas herramientas adicionales están disponibles:
 
@@ -754,26 +751,26 @@ Si desplegaste agentes usando `azd ai agent init`, estas herramientas adicionale
 # Asegúrese de que la extensión de agentes esté instalada
 azd extension install azure.ai.agents
 
-# Re-inicializar o actualizar un agente desde un manifiesto
+# Reinicializar o actualizar un agente a partir de un manifiesto
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# Utilice el servidor MCP para permitir que las herramientas de IA consulten el estado del proyecto
+# Use el servidor MCP para que las herramientas de IA consulten el estado del proyecto
 azd mcp start
 
 # Generar archivos de infraestructura para revisión y auditoría
 azd infra generate
 ```
 
-> **Consejo:** Usa `azd infra generate` para escribir IaC en disco y poder inspeccionar exactamente qué recursos se aprovisionaron. Esto es invaluable al depurar problemas de configuración de recursos. Consulta la [referencia AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para detalles completos.
+> **Consejo:** Usa `azd infra generate` para escribir IaC en disco para que puedas inspeccionar exactamente qué recursos se aprovisionaron. Esto es invaluable al depurar problemas de configuración de recursos. Consulta la [referencia del CLI de AZD AI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para más detalles.
 
-### Depuración de Aplicaciones
+### Application Debugging
 
-1. **Registro Estructurado:**
+1. **Registro estructurado:**
 ```python
 import logging
 import json
 
-# Configurar el registro estructurado para aplicaciones de IA
+# Configurar registro estructurado para aplicaciones de IA
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -792,14 +789,14 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **Puntos de Verificación de Estado (Health Check Endpoints):**
+2. **Endpoints de verificación de estado:**
 ```python
 @app.get("/debug/health")
 async def detailed_health_check():
     """Comprehensive health check for debugging."""
     checks = {}
     
-    # Verificar conectividad con OpenAI
+    # Comprobar la conectividad con OpenAI
     try:
         client = AsyncOpenAI(azure_endpoint=AZURE_OPENAI_ENDPOINT)
         await client.models.list()
@@ -807,7 +804,7 @@ async def detailed_health_check():
     except Exception as e:
         checks['openai'] = {'status': 'unhealthy', 'error': str(e)}
     
-    # Verificar servicio de búsqueda
+    # Comprobar el servicio de búsqueda
     try:
         search_client = SearchIndexClient(
             endpoint=AZURE_SEARCH_ENDPOINT,
@@ -821,7 +818,7 @@ async def detailed_health_check():
     return checks
 ```
 
-3. **Monitoreo de Rendimiento:**
+3. **Monitoreo de rendimiento:**
 ```python
 import time
 from functools import wraps
@@ -852,43 +849,43 @@ def monitor_performance(func):
     return wrapper
 ```
 
-## Códigos de Error Comunes y Soluciones
+## Códigos de error comunes y soluciones
 
-| Código de Error | Descripción | Solución |
-|-----------------|-------------|----------|
-| 401 | No autorizado | Verificar claves de API y configuración de identidad administrada |
-| 403 | Prohibido | Verificar asignaciones de roles RBAC |
-| 429 | Límite de tasa alcanzado | Implementar lógica de reintentos con retroceso exponencial |
-| 500 | Error Interno del Servidor | Verificar estado del despliegue del modelo y registros |
-| 503 | Servicio No Disponible | Verificar estado del servicio y disponibilidad regional |
+| Código de error | Descripción | Solución |
+|------------|-------------|----------|
+| 401 | No autorizado | Verifica las claves de API y la configuración de identidad administrada |
+| 403 | Prohibido | Verifica las asignaciones de roles RBAC |
+| 429 | Limitado por tasa | Implementa lógica de reintento con retroceso exponencial |
+| 500 | Error interno del servidor | Verifica el estado de implementación del modelo y los registros |
+| 503 | Servicio no disponible | Verifica la salud del servicio y la disponibilidad regional |
 
-## Próximos Pasos
+## Próximos pasos
 
-1. **Revisar la [Guía de Despliegue de Modelos de IA](../chapter-02-ai-development/ai-model-deployment.md)** para mejores prácticas de despliegue
-2. **Completar [Prácticas de IA en Producción](../chapter-08-production/production-ai-practices.md)** para soluciones listas para empresa
-3. **Unirse al [Discord de Microsoft Foundry](https://aka.ms/foundry/discord)** para soporte comunitario
-4. **Reportar problemas** en el [repositorio GitHub de AZD](https://github.com/Azure/azure-dev) para problemas específicos de AZD
+1. **Revisar [AI Model Deployment Guide](../chapter-02-ai-development/ai-model-deployment.md)** para las mejores prácticas de despliegue
+2. **Completar [Production AI Practices](../chapter-08-production/production-ai-practices.md)** para soluciones listas para empresa
+3. **Únete al [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** para soporte de la comunidad
+4. **Reporta problemas** en el [repositorio AZD de GitHub](https://github.com/Azure/azure-dev) para problemas específicos de AZD
 
 ## Recursos
 
-- [Solución de Problemas del Servicio de Modelos Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
-- [Solución de Problemas en Container Apps](https://learn.microsoft.com/azure/container-apps/troubleshooting)
-- [Solución de Problemas en Azure AI Search](https://learn.microsoft.com/azure/search/search-monitor-logs)
+- [Microsoft Foundry Models Service Troubleshooting](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
+- [Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
+- [Azure AI Search Troubleshooting](https://learn.microsoft.com/azure/search/search-monitor-logs)
 - [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Instala habilidades de solución de problemas de Azure en tu editor: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Navegación del Capítulo:**
-- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
-- **📖 Capítulo Actual**: Capítulo 7 - Solución de Problemas y Depuración
-- **⬅️ Anterior**: [Guía de Depuración](debugging.md)
-- **➡️ Próximo Capítulo**: [Capítulo 8: Patrones de Producción y Empresariales](../chapter-08-production/production-ai-practices.md)
-- **🤖 Relacionado**: [Capítulo 2: Desarrollo AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **📖 Referencia**: [Solución de Problemas del Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+**Navegación del capítulo:**
+- **📚 Inicio del curso**: [AZD For Beginners](../../README.md)
+- **📖 Capítulo actual**: Capítulo 7 - Solución de problemas y depuración
+- **⬅️ Anterior**: [Debugging Guide](debugging.md)
+- **➡️ Siguiente capítulo**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
+- **🤖 Relacionado**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Referencia**: [Resolución de problemas del Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Aviso legal**:  
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por alcanzar la precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. Se debe considerar el documento original en su idioma nativo como la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por un humano. No nos hacemos responsables de ningún malentendido o interpretación errónea derivada del uso de esta traducción.
+**Descargo de responsabilidad**:
+Este documento ha sido traducido utilizando el servicio de traducción por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por lograr la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

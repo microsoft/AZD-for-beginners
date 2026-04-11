@@ -1,85 +1,85 @@
 # 部署指南 - 精通 AZD 部署
 
-**章節導覽：**
-- **📚 課程首頁**: [AZD 入門](../../README.md)
-- **📖 當前章節**: 第 4 章 - 基礎設施即程式碼與部署
-- **⬅️ 上一章**: [第 3 章：設定](../chapter-03-configuration/configuration.md)
-- **➡️ 下一章**: [佈建資源](provisioning.md)
-- **🚀 下一章**: [第 5 章：多代理 AI 解決方案](../../examples/retail-scenario.md)
+**章節導航：**
+- **📚 課程首頁**：[AZD 新手入門](../../README.md)
+- **📖 本章節**：第 4 章 - 基礎架構即程式碼與部署
+- **⬅️ 上一章**：[第 3 章：組態設定](../chapter-03-configuration/configuration.md)
+- **➡️ 下一章**：[資源佈建](provisioning.md)
+- **🚀 下一章節**：[第 5 章：多代理 AI 解決方案](../../examples/retail-scenario.md)
 
-## 簡介
+## 介紹
 
-本綜合指南涵蓋使用 Azure Developer CLI 部署應用程式所需了解的一切，從基礎的一指令佈署，到具自訂鉤子、多環境與 CI/CD 整合的進階生產場景。透過實務範例與最佳實務，掌握完整的部署生命週期。
+本全面指南涵蓋您使用 Azure Developer CLI 部署應用程式所需知道的所有資訊，從基本的單一指令部署到具備自訂掛勾、多環境與 CI/CD 整合的進階生產場景。透過實用範例與最佳實務，掌握完整部署生命週期。
 
 ## 學習目標
 
 完成本指南後，您將能夠：
-- 掌握所有 Azure Developer CLI 的部署指令與工作流程
-- 了解從佈建到監控的完整部署生命週期
-- 實作用於部署前與部署後自動化的自訂部署鉤子
-- 為多個環境配置環境特定參數
-- 設定包含藍綠與金絲雀部署的進階部署策略
-- 將 azd 部署整合至 CI/CD 管線與 DevOps 工作流程
+- 精通所有 Azure Developer CLI 部署指令及工作流程
+- 理解從佈建到監控的完整部署生命週期
+- 實作前後部署自訂掛勾自動化
+- 配置多環境及環境特定參數
+- 建立進階部署策略，包括藍綠及金絲雀部署
+- 將 azd 部署整合到 CI/CD 管線和 DevOps 工作流程
 
 ## 學習成果
 
-完成後，您將能夠：
-- 獨立執行與排解所有 azd 部署工作流程
-- 設計並實作使用鉤子的自訂部署自動化
-- 配置具適當安全性與監控的生產就緒部署
-- 管理複雜的多環境部署情境
-- 優化部署效能並實作回滾策略
-- 將 azd 部署整合進企業級 DevOps 實務
+完成後，您將能：
+- 獨立執行及排除所有 azd 部署工作流程問題
+- 設計與實作自訂部署自動化掛勾
+- 配置具備適當安全性與監控的生產就緒部署
+- 管理複雜的多環境部署場景
+- 優化部署效能並實施回滾策略
+- 將 azd 部署整合進企業 DevOps 實務
 
-## 部署概覽
+## 部署概述
 
-Azure Developer CLI 提供數個部署指令：
-- `azd up` - 完整工作流程（佈建 + 部署）
-- `azd provision` - 僅建立/更新 Azure 資源
-- `azd deploy` - 僅部署應用程式程式碼
+Azure Developer CLI 提供多項部署指令：
+- `azd up` - 完整流程（佈建 + 部署）
+- `azd provision` - 只建立/更新 Azure 資源
+- `azd deploy` - 只部署應用程式程式碼
 - `azd package` - 建置並封裝應用程式
 
 ## 基本部署工作流程
 
 ### 完整部署 (azd up)
-新專案最常見的工作流程：
+新專案最常用的工作流程：
 ```bash
-# 從零開始部署全部
+# 從零開始部署所有內容
 azd up
 
-# 在指定環境下部署
+# 使用特定環境部署
 azd up --environment production
 
 # 使用自訂參數部署
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### 僅基礎設施部署
-當您只需更新 Azure 資源時：
+### 僅基礎架構部署
+只需更新 Azure 資源時使用：
 ```bash
-# 部署/更新基礎設施
+# 供應/更新基礎設施
 azd provision
 
-# 以模擬執行（dry-run）預覽變更
+# 以乾跑方式供應以預覽更改
 azd provision --preview
 
-# 部署特定服務
+# 供應特定服務
 azd provision --service database
 ```
 
 ### 僅程式碼部署
-用於快速的應用程式更新：
+快速更新應用程式時使用：
 ```bash
 # 部署所有服務
 azd deploy
 
 # 預期輸出：
-# 正在部署服務 (azd deploy)
-# - web: 部署中... 完成
-# - api: 部署中... 完成
-# 成功：您的部署已在 2 分 15 秒內完成
+# 部署服務中 (azd deploy)
+# - web：部署中... 完成
+# - api：部署中... 完成
+# 成功：您的部署在 2 分 15 秒內完成
 
-# 部署指定服務
+# 部署特定服務
 azd deploy --service web
 azd deploy --service api
 
@@ -92,10 +92,10 @@ azd show --output json | jq '.services'
 
 ### ✅ 部署驗證
 
-任何部署後，確認成功：
+每次部署後，請驗證成功：
 
 ```bash
-# 檢查所有服務是否正在運行
+# 檢查所有服務是否運行中
 azd show
 
 # 測試健康端點
@@ -105,19 +105,19 @@ API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
 curl -f "$API_URL/health" || echo "❌ API health check failed"
 
-# 監控錯誤（預設在瀏覽器中開啟）
+# 監控錯誤（預設於瀏覽器開啟）
 azd monitor --logs
 ```
 
 **成功標準：**
-- ✅ 所有服務顯示「執行中」狀態
-- ✅ 健康檢查端點回傳 HTTP 200
-- ✅ 最近 5 分鐘內無錯誤日誌
-- ✅ 應用程式能回應測試請求
+- ✅ 所有服務顯示「運行中」狀態
+- ✅ 健康端點回傳 HTTP 200
+- ✅ 最近 5 分鐘無錯誤日誌
+- ✅ 應用程式對測試請求有回應
 
-## 🏗️ 瞭解部署流程
+## 🏗️ 理解部署過程
 
-### 階段 1：預佈建鉤子
+### 階段 1：佈建前掛勾
 ```yaml
 # azure.yaml
 hooks:
@@ -131,13 +131,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### 階段 2：基礎設施佈建
-- 讀取基礎設施範本 (Bicep/Terraform)
+### 階段 2：基礎架構佈建
+- 讀取基礎架構範本（Bicep/Terraform）
 - 建立或更新 Azure 資源
 - 配置網路與安全性
-- 設定監控與記錄
+- 設定監控與日誌
 
-### 階段 3：後佈建鉤子
+### 階段 3：佈建後掛勾
 ```yaml
 hooks:
   postprovision:
@@ -152,10 +152,10 @@ hooks:
 
 ### 階段 4：應用程式封裝
 - 建置應用程式程式碼
-- 建立部署產物
-- 為目標平台打包（容器、ZIP 檔案等）
+- 建立部署工件
+- 封裝適用目標平台（容器、ZIP 檔等）
 
-### 階段 5：部署前鉤子
+### 階段 5：部署前掛勾
 ```yaml
 hooks:
   predeploy:
@@ -169,11 +169,11 @@ hooks:
 ```
 
 ### 階段 6：應用程式部署
-- 將已封裝的應用程式部署到 Azure 服務
-- 更新設定
-- 啟動/重新啟動服務
+- 部署封裝後應用程式至 Azure 服務
+- 更新組態設定
+- 啟動/重啟服務
 
-### 階段 7：部署後鉤子
+### 階段 7：部署後掛勾
 ```yaml
 hooks:
   postdeploy:
@@ -188,7 +188,7 @@ hooks:
 
 ## 🎛️ 部署設定
 
-### 服務特定的部署設定
+### 服務專屬部署設定
 ```yaml
 # azure.yaml
 services:
@@ -218,14 +218,14 @@ services:
     buildCommand: npm install --production
 ```
 
-### 環境特定的設定
+### 環境專屬設定
 ```bash
 # 開發環境
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# 預發布環境
+# 測試環境
 azd env new staging
 azd env set NODE_ENV staging
 azd env set DEBUG false
@@ -238,7 +238,7 @@ azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 進階部署情境
+## 🔧 進階部署場景
 
 ### 多服務應用程式
 ```yaml
@@ -285,7 +285,7 @@ azd up --environment production-blue
 # 測試藍色環境
 ./scripts/test-environment.sh production-blue
 
-# 將流量切換到藍色（手動更新 DNS/負載平衡器）
+# 將流量切換到藍色（手動 DNS/負載平衡器更新）
 ./scripts/switch-traffic.sh production-blue
 
 # 清理綠色環境
@@ -390,11 +390,11 @@ EXPOSE 3000
 CMD ["npm", "start"]
 ```
 
-## ⚡ 效能最佳化
+## ⚡ 效能優化
 
-### 服務特定的部署
+### 服務專屬部署
 ```bash
-# 部署指定服務以加快迭代
+# 部署特定服務以加快迭代速度
 azd deploy --service web
 azd deploy --service api
 
@@ -412,13 +412,13 @@ services:
     outputPath: dist
 ```
 
-### 有效率的程式碼部署
+### 高效程式碼部署
 ```bash
-# 對於僅限程式碼的變更，使用 azd deploy（不要用 azd up）
-# 這會跳過基礎設施的佈建，因此快得多
+# 使用 azd deploy（而非 azd up）進行僅代碼變更
+# 這會跳過基礎設施配置，速度更快
 azd deploy
 
-# 部署特定服務以加快迭代速度
+# 部署特定服務以達到最快迭代速度
 azd deploy --service api
 ```
 
@@ -426,7 +426,7 @@ azd deploy --service api
 
 ### 即時部署監控
 ```bash
-# 即時監控應用程式
+# 實時監控應用程式
 azd monitor --live
 
 # 檢視應用程式日誌
@@ -483,16 +483,16 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 安全性考量
+## 🔐 安全考量
 
 ### 機密管理
 ```bash
-# 將機密安全地儲存
+# 安全地儲存秘密
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# 在 azure.yaml 中引用機密
+# 在 azure.yaml 中參考秘密
 ```
 
 ```yaml
@@ -516,7 +516,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### 身分與存取管理
+### 身份與存取管理
 ```yaml
 services:
   api:
@@ -535,10 +535,10 @@ services:
 
 ### 快速回滾
 ```bash
-# AZD 沒有內建的回滾功能。建議的方法：
+# AZD 沒有內建回滾功能。建議的方法：
 
 # 選項 1：從 Git 重新部署（建議）
-git revert HEAD  # 還原有問題的提交
+git revert HEAD  # 回復有問題的提交
 git push
 azd deploy
 
@@ -548,14 +548,14 @@ azd deploy
 git checkout main
 ```
 
-### 基礎設施回滾
+### 基礎架構回滾
 ```bash
-# 在套用之前預覽基礎設施變更
+# 在應用前預覽基礎設施更改
 azd provision --preview
 
-# 如需回滾基礎設施，請使用版本控制：
-git revert HEAD  # 還原基礎設施變更
-azd provision    # 套用先前的基礎設施狀態
+# 如需基礎設施回滾，請使用版本控制：
+git revert HEAD  # 還原基礎設施更改
+azd provision    # 應用先前的基礎設施狀態
 ```
 
 ### 資料庫遷移回滾
@@ -579,7 +579,7 @@ echo "Database rollback completed"
 # 檢視目前部署狀態
 azd show
 
-# 使用 Application Insights 監控應用程式
+# 使用應用程式洞察監控應用程式
 azd monitor --overview
 
 # 檢視即時指標
@@ -616,12 +616,12 @@ azd env new production-v1
 ./scripts/sync-environments.sh
 ```
 
-### 2. 基礎設施驗證
+### 2. 基礎架構驗證
 ```bash
-# 在部署前預覽基礎架構變更
+# 部署前預覽基礎設施更改
 azd provision --preview
 
-# 使用 ARM/Bicep lint 檢查
+# 使用 ARM/Bicep 語法檢查
 az bicep lint --file infra/main.bicep
 
 # 驗證 Bicep 語法
@@ -657,25 +657,25 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. 文件與記錄
+### 4. 文件與日誌
 ```bash
 # 記錄部署程序
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
-echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
+echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
 ```
 
 ## 下一步
 
-- [佈建資源](provisioning.md) - 深入研究基礎設施管理
-- [部署前規劃](../chapter-06-pre-deployment/capacity-planning.md) - 規劃您的部署策略
+- [資源佈建](provisioning.md) - 深入基礎架構管理
+- [部署前規劃](../chapter-06-pre-deployment/capacity-planning.md) - 計劃您的部署策略
 - [常見問題](../chapter-07-troubleshooting/common-issues.md) - 解決部署問題
-- [最佳實務](../chapter-07-troubleshooting/debugging.md) - 生產就緒的部署策略
+- [最佳實務](../chapter-07-troubleshooting/debugging.md) - 生產就緒部署策略
 
 ## 🎯 實作部署練習
 
 ### 練習 1：增量部署工作流程（20 分鐘）
-<strong>目標</strong>: 掌握完整部署與增量部署之間的差異
+<strong>目標</strong>：掌握完整部署與增量部署的差異
 
 ```bash
 # 初始部署
@@ -686,10 +686,10 @@ azd up
 # 記錄初始部署時間
 echo "Full deployment: $(date)" > deployment-log.txt
 
-# 修改程式碼
+# 作出代碼更改
 echo "// Updated $(date)" >> src/api/src/server.js
 
-# 只部署程式碼（快速）
+# 只部署代碼（快速）
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
@@ -703,16 +703,16 @@ azd down --force --purge
 **成功標準：**
 - [ ] 完整部署耗時 5-15 分鐘
 - [ ] 僅程式碼部署耗時 2-5 分鐘
-- [ ] 程式碼變更反映在已部署的應用程式上
-- [ ] 執行 `azd deploy` 後基礎設施不變
+- [ ] 程式碼變更反映在部署的應用程式
+- [ ] `azd deploy` 後基礎架構不變
 
-<strong>學習成果</strong>: `azd deploy` 就程式碼變更而言，比 `azd up` 快 50-70%
+<strong>學習成果</strong>：針對程式碼變更，`azd deploy` 比 `azd up` 快 50-70%
 
-### 練習 2：自訂部署鉤子（30 分鐘）
-<strong>目標</strong>: 實作部署前與部署後自動化
+### 練習 2：自訂部署掛勾（30 分鐘）
+<strong>目標</strong>：實作部署前後自動化
 
 ```bash
-# 建立部署前的驗證腳本
+# 建立預部署驗證腳本
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
@@ -724,7 +724,7 @@ if ! npm run test:unit; then
     exit 1
 fi
 
-# 檢查是否有未提交的變更
+# 檢查未提交的變更
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -734,7 +734,7 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# 建立部署後的冒煙測試
+# 建立部署後煙霧測試
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
 echo "💨 Running smoke tests..."
@@ -753,7 +753,7 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# 將 hooks 新增到 azure.yaml
+# 新增掛鉤到 azure.yaml
 cat >> azure.yaml << 'EOF'
 
 hooks:
@@ -766,18 +766,18 @@ hooks:
     run: ./scripts/post-deploy-test.sh
 EOF
 
-# 使用 hooks 測試部署
+# 使用掛鉤測試部署
 azd deploy
 ```
 
 **成功標準：**
 - [ ] 部署前腳本在部署前執行
-- [ ] 若測試失敗則中止部署
+- [ ] 測試失敗時中止部署
 - [ ] 部署後冒煙測試驗證健康狀態
-- [ ] 鉤子以正確順序執行
+- [ ] 掛勾按正確順序執行
 
 ### 練習 3：多環境部署策略（45 分鐘）
-<strong>目標</strong>: 實作分階段部署工作流程（開發 → 測試/預備 → 生產）
+<strong>目標</strong>：實作分階段部署工作流程（開發 → 測試 → 生產）
 
 ```bash
 # 建立部署腳本
@@ -788,7 +788,7 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# 步驟 1: 部署到開發環境
+# 第一步：部署到開發環境
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
@@ -797,7 +797,7 @@ azd up --no-prompt
 echo "Running dev tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# 步驟 2: 部署到預備環境
+# 第二步：部署到中繼環境
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
@@ -806,7 +806,7 @@ azd up --no-prompt
 echo "Running staging tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# 步驟 3: 部署到生產環境需人工批准
+# 第三步：生產環境手動審批
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -841,23 +841,23 @@ azd env new production
 **成功標準：**
 - [ ] 開發環境部署成功
 - [ ] 測試環境部署成功
-- [ ] 生產需要手動核准
-- [ ] 所有環境具有可運作的健康檢查
-- [ ] 如有需要可回滾
+- [ ] 生產環境需人工核准
+- [ ] 所有環境均有運作中健康檢查
+- [ ] 可視需要回滾
 
 ### 練習 4：回滾策略（25 分鐘）
-<strong>目標</strong>: 使用 Git 實作並測試部署回滾
+<strong>目標</strong>：使用 Git 實作並測試部署回滾
 
 ```bash
 # 部署 v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# 儲存 v1 的提交雜湊值
+# 儲存 v1 提交雜湊值
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# 部署包含破壞性變更的 v2
+# 部署有破壞性更改的 v2
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
@@ -883,7 +883,7 @@ fi
 **成功標準：**
 - [ ] 能偵測部署失敗
 - [ ] 回滾腳本自動執行
-- [ ] 應用程式恢復到可運作狀態
+- [ ] 應用程式回復工作狀態
 - [ ] 回滾後健康檢查通過
 
 ## 📊 部署指標追蹤
@@ -905,11 +905,11 @@ echo "
 📊 Deployment Metrics:"
 echo "Duration: ${DURATION}s"
 echo "Timestamp: $(date)"
-echo "Environment: $(azd env show --output json | jq -r '.name')"
+echo "Environment: $(azd env get-value AZURE_ENV_NAME)"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
 # 記錄到檔案
-echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
+echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
 EOF
 
 chmod +x track-deployment.sh
@@ -920,29 +920,29 @@ chmod +x track-deployment.sh
 
 **分析您的指標：**
 ```bash
-# 檢視部署記錄
+# 檢視部署歷史
 cat deployment-metrics.csv
 
 # 計算平均部署時間
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
-## 延伸資源
+## 附加資源
 
 - [Azure Developer CLI 部署參考](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Azure App Service 部署](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Azure Container Apps 部署](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Azure 容器應用部署](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
 - [Azure Functions 部署](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
-<strong>導覽</strong>
-- <strong>上一課</strong>: [您的第一個專案](../chapter-01-foundation/first-project.md)
-- <strong>下一課</strong>: [佈建資源](provisioning.md)
+<strong>導航</strong>
+- <strong>上一課程</strong>：[您的第一個專案](../chapter-01-foundation/first-project.md)
+- <strong>下一課程</strong>：[資源佈建](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免責聲明**:
-本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們力求準確，但請注意自動翻譯可能包含錯誤或不準確之處。原始文件的原文版本應視為具權威性的來源。對於關鍵資訊，建議採用專業人工翻譯。我們不對因使用本翻譯而產生的任何誤解或曲解承擔責任。
+**免責聲明**：
+本文件是使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於確保準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的原文版本應被視為權威來源。對於重要資訊，建議採用專業人工翻譯。我們不對因使用本翻譯而產生的任何誤解或誤譯承擔責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

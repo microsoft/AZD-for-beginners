@@ -1,26 +1,28 @@
 # Bereitstellung von KI-Modellen mit Azure Developer CLI
 
 **Kapitel-Navigation:**
-- **📚 Kursübersicht**: [AZD Für Anfänger](../../README.md)
-- **📖 Aktuelles Kapitel**: Kapitel 2 - KI-zentrierte Entwicklung
-- **⬅️ Zurück**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Weiter**: [AI Workshop Lab](ai-workshop-lab.md)
+- **📚 Kursübersicht**: [AZD für Einsteiger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 2 - KI-orientierte Entwicklung
+- **⬅️ Vorheriges**: [Microsoft Foundry-Integration](microsoft-foundry-integration.md)
+- **➡️ Nächstes**: [KI-Workshop-Lab](ai-workshop-lab.md)
 - **🚀 Nächstes Kapitel**: [Kapitel 3: Konfiguration](../chapter-03-configuration/configuration.md)
 
-Dieser Leitfaden bietet umfassende Anleitungen zur Bereitstellung von KI-Modellen mit AZD-Templates und deckt alles ab, von der Modellauswahl bis hin zu Produktionsbereitstellungsmustern.
+Dieser Leitfaden bietet umfassende Anweisungen zur Bereitstellung von KI-Modellen mithilfe von AZD-Vorlagen und deckt alles ab, von der Modellauswahl bis hin zu Produktionsbereitstellungs‑mustern.
+
+> **Validierungshinweis (2026-03-25):** Der AZD-Workflow in diesem Leitfaden wurde gegen `azd` `1.23.12` geprüft. Für KI-Bereitstellungen, die länger dauern als das standardmäßige Bereitstellungsfenster des Dienstes, unterstützen aktuelle AZD-Versionen `azd deploy --timeout <seconds>`.
 
 ## Inhaltsverzeichnis
 
-- [Strategie zur Modellauswahl](../../../../docs/chapter-02-ai-development)
-- [AZD-Konfiguration für KI-Modelle](../../../../docs/chapter-02-ai-development)
-- [Bereitstellungsmuster](../../../../docs/chapter-02-ai-development)
-- [Modellverwaltung](../../../../docs/chapter-02-ai-development)
-- [Produktionsüberlegungen](../../../../docs/chapter-02-ai-development)
-- [Überwachung und Beobachtbarkeit](../../../../docs/chapter-02-ai-development)
+- [Modellauswahl-Strategie](#modellauswahl-strategie)
+- [AZD-Konfiguration für KI-Modelle](#azd-konfiguration-für-ki-modelle)
+- [Bereitstellungsmuster](#bereitstellungsmuster)
+- [Modellverwaltung](#modellverwaltung)
+- [Produktionsüberlegungen](#produktionsüberlegungen)
+- [Überwachung und Beobachtbarkeit](#überwachung-und-beobachtbarkeit)
 
-## Strategie zur Modellauswahl
+## Modellauswahl-Strategie
 
-### Microsoft Foundry-Modelle
+### Microsoft Foundry Modelle Modelle
 
 Wählen Sie das richtige Modell für Ihren Anwendungsfall:
 
@@ -41,9 +43,9 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
@@ -52,18 +54,18 @@ services:
 
 ### Kapazitätsplanung für Modelle
 
-| Modelltyp | Anwendungsfall | Empfohlene Kapazität | Kostenüberlegungen |
+| Modeltyp | Anwendungsfall | Empfohlene Kapazität | Kostenüberlegungen |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Chat, Fragen & Antworten | 10-50 TPM | Kosteneffizient für die meisten Workloads |
-| gpt-4.1 | Komplexe Schlussfolgerungen | 20-100 TPM | Höhere Kosten, für Premium-Funktionen verwenden |
-| Text-embedding-ada-002 | Suche, RAG | 30-120 TPM | Wesentlich für semantische Suche |
-| Whisper | Sprache-zu-Text | 10-50 TPM | Audioverarbeitungs-Workloads |
+| gpt-4.1-mini | Chat, Q&A | 10-50 TPM | Kosteneffektiv für die meisten Workloads |
+| gpt-4.1 | Komplexes Schlussfolgern | 20-100 TPM | Höhere Kosten, für Premium‑Funktionen verwenden |
+| text-embedding-3-large | Suche, RAG | 30-120 TPM | Starke Standardwahl für semantische Suche und Abruf |
+| Whisper | Sprache-zu-Text | 10-50 TPM | Audioverarbeitungsaufgaben |
 
 ## AZD-Konfiguration für KI-Modelle
 
 ### Bicep-Template-Konfiguration
 
-Erstellen Sie Modellbereitstellungen mittels Bicep-Templates:
+Erstellen Sie Modellbereitstellungen über Bicep‑Vorlagen:
 
 ```bicep
 // infra/main.bicep
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -131,12 +133,12 @@ Konfigurieren Sie Ihre Anwendungsumgebung:
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
 ## Bereitstellungsmuster
 
-### Muster 1: Einzelregion-Bereitstellung
+### Muster 1: Bereitstellung in einer Region
 
 ```yaml
 # azure.yaml - Single region
@@ -151,10 +153,10 @@ services:
 
 Am besten geeignet für:
 - Entwicklung und Tests
-- Anwendungen für einen Markt
+- Anwendungen für einen einzelnen Markt
 - Kostenoptimierung
 
-### Muster 2: Mehrregionen-Bereitstellung
+### Muster 2: Multiregionale Bereitstellung
 
 ```bicep
 // Multi-region deployment
@@ -215,11 +217,11 @@ Verfolgen Sie Modellversionen in Ihrer AZD-Konfiguration:
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
@@ -227,7 +229,7 @@ Verfolgen Sie Modellversionen in Ihrer AZD-Konfiguration:
 
 ### Modellaktualisierungen
 
-Verwenden Sie AZD-Hooks für Modellaktualisierungen:
+Verwenden Sie AZD‑Hooks für Modellaktualisierungen:
 
 ```bash
 #!/bin/bash
@@ -238,6 +240,9 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# Wenn die Bereitstellung länger als das Standard-Timeout dauert
+azd deploy --timeout 1800
 ```
 
 ### A/B-Tests
@@ -268,10 +273,10 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### Kapazitätsplanung
 
-Berechnen Sie die benötigte Kapazität basierend auf Nutzungsmustern:
+Berechnen Sie die erforderliche Kapazität basierend auf Nutzungs‑mustern:
 
 ```python
-# Beispiel für die Kapazitätsberechnung
+# Beispiel zur Kapazitätsberechnung
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -283,7 +288,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Anwendungsbeispiel
+# Beispielverwendung
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -293,9 +298,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Auto-Scaling-Konfiguration
+### Auto‑Scaling-Konfiguration
 
-Konfigurieren Sie Auto-Scaling für Container Apps:
+Konfigurieren Sie Auto‑Scaling für Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -365,9 +370,9 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ## Überwachung und Beobachtbarkeit
 
-### Application Insights-Integration
+### Integration von Application Insights
 
-Konfigurieren Sie die Überwachung für KI-Workloads:
+Konfigurieren Sie die Überwachung für KI‑Workloads:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -405,7 +410,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### Benutzerdefinierte Metriken
 
-Verfolgen Sie KI-spezifische Metriken:
+Verfolgen Sie KI‑spezifische Metriken:
 
 ```python
 # Benutzerdefinierte Telemetrie für KI-Modelle
@@ -440,12 +445,12 @@ class AITelemetry:
         )
 ```
 
-### Health-Checks
+### Gesundheitsprüfungen
 
-Implementieren Sie die Gesundheitsüberwachung für KI-Dienste:
+Implementieren Sie die Überwachung des Dienstestatus von KI‑Diensten:
 
 ```python
-# Endpunkte für Gesundheitsprüfungen
+# Health-Check-Endpunkte
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -473,14 +478,14 @@ async def check_ai_models():
 
 ## Nächste Schritte
 
-1. **Überprüfen Sie die [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** für Integrationsmuster von Diensten
-2. **Schließen Sie das [AI Workshop Lab](ai-workshop-lab.md)** für praktische Erfahrungen ab
-3. **Implementieren Sie [Production AI Practices](production-ai-practices.md)** für Unternehmensbereitstellungen
-4. **Erkunden Sie den [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** für häufige Probleme
+1. **Überprüfen Sie den [Microsoft Foundry Integrationsleitfaden](microsoft-foundry-integration.md)** für Service‑Integrationsmuster
+2. **Schließen Sie das [KI-Workshop-Lab](ai-workshop-lab.md)** für praktische Erfahrung ab
+3. **Implementieren Sie [Produktions-KI-Praktiken](production-ai-practices.md)** für Unternehmenseinsätze
+4. **Erkunden Sie den [KI-Fehlerbehebungsleitfaden](../chapter-07-troubleshooting/ai-troubleshooting.md)** für häufige Probleme
 
 ## Ressourcen
 
-- [Verfügbarkeit der Microsoft Foundry-Modelle](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Verfügbarkeit von Microsoft Foundry-Modellen](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Azure Developer CLI-Dokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Skalierung von Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Kostenoptimierung für KI-Modelle](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
@@ -488,15 +493,15 @@ async def check_ai_models():
 ---
 
 **Kapitel-Navigation:**
-- **📚 Kursübersicht**: [AZD Für Anfänger](../../README.md)
-- **📖 Aktuelles Kapitel**: Kapitel 2 - KI-zentrierte Entwicklung
-- **⬅️ Zurück**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Weiter**: [AI Workshop Lab](ai-workshop-lab.md)
+- **📚 Kursübersicht**: [AZD für Einsteiger](../../README.md)
+- **📖 Aktuelles Kapitel**: Kapitel 2 - KI-orientierte Entwicklung
+- **⬅️ Vorheriges**: [Microsoft Foundry-Integration](microsoft-foundry-integration.md)
+- **➡️ Nächstes**: [KI-Workshop-Lab](ai-workshop-lab.md)
 - **🚀 Nächstes Kapitel**: [Kapitel 3: Konfiguration](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Haftungsausschluss:
-Dieses Dokument wurde mithilfe des KI-Übersetzungsdienstes [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache ist als maßgebliche Quelle zu betrachten. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die aus der Verwendung dieser Übersetzung entstehen.
+**Haftungsausschluss**:
+Dieses Dokument wurde mithilfe des KI-Übersetzungsdienstes [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir um Genauigkeit bemüht sind, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ausgangssprache sollte als maßgebliche Quelle betrachtet werden. Bei kritischen Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir haften nicht für Missverständnisse oder Fehlinterpretationen, die sich aus der Verwendung dieser Übersetzung ergeben.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

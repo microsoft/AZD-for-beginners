@@ -1,21 +1,23 @@
-# Chapter 6: Perancangan & Pengesahan Pra-Penerapan
+# Chapter 6: Perancangan & Pengesahan Sebelum Pelaksanaan
 
-**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 1 jam | **⭐ Kerumitan**: Sederhana
+**📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Tempoh**: 1 jam | **⭐ Tahap Kesukaran**: Sederhana
 
 ---
 
 ## Gambaran Keseluruhan
 
-Bab ini merangkumi langkah-langkah penting untuk perancangan dan pengesahan sebelum menerapkan aplikasi anda. Belajar untuk mengelakkan kesilapan mahal dengan perancangan kapasiti yang tepat, pemilihan SKU, dan semakan pra-penerapan.
+Bab ini merangkumi langkah-langkah penting perancangan dan pengesahan sebelum melaksanakan aplikasi anda. Pelajari cara mengelakkan kesilapan mahal dengan perancangan kapasiti yang betul, pemilihan SKU, dan pemeriksaan awal.
+
+> Disahkan dengan `azd 1.23.12` pada Mac 2026.
 
 ## Objektif Pembelajaran
 
-Dengan menyiapkan bab ini, anda akan:
-- Menjalankan semakan pra-penerapan sebelum penerapan
+Dengan menyelesaikan bab ini, anda akan:
+- Melakukan pemeriksaan awal sebelum pelaksanaan
 - Merancang kapasiti dan menganggarkan keperluan sumber
 - Memilih SKU yang sesuai untuk pengoptimuman kos
 - Mengkonfigurasi Application Insights untuk pemantauan
-- Memahami corak koordinasi pasukan
+- Memahami corak penyelarasan pasukan
 
 ---
 
@@ -23,21 +25,21 @@ Dengan menyiapkan bab ini, anda akan:
 
 | # | Pelajaran | Penerangan | Masa |
 |---|-----------|------------|------|
-| 1 | [Semakan Pra-penerapan](preflight-checks.md) | Mengesahkan konfigurasi sebelum penerapan | 15 min |
+| 1 | [Pemeriksaan Awal](preflight-checks.md) | Mengesahkan konfigurasi sebelum pelaksanaan | 15 min |
 | 2 | [Perancangan Kapasiti](capacity-planning.md) | Menganggarkan keperluan sumber | 20 min |
 | 3 | [Pemilihan SKU](sku-selection.md) | Memilih tier harga yang sesuai | 15 min |
 | 4 | [Application Insights](application-insights.md) | Mengkonfigurasi pemantauan | 20 min |
-| 5 | [Corak Koordinasi](coordination-patterns.md) | Aliran kerja penerapan pasukan | 15 min |
+| 5 | [Corak Penyelarasan](coordination-patterns.md) | Aliran kerja pelaksanaan pasukan | 15 min |
 
 ---
 
-## 🚀 Mula Pantas
+## 🚀 Mula Dengan Cepat
 
 ```bash
 # Semak kuota langganan
 az vm list-usage --location eastus --output table
 
-# Pratonton penyebaran (tiada sumber dicipta)
+# Pratonton penyebaran (tiada sumber dibuat)
 azd provision --preview
 
 # Sahkan sintaks Bicep
@@ -49,7 +51,7 @@ azd env get-values
 
 ---
 
-## ☑️ Senarai Semak Pra-Penerapan
+## ☑️ Senarai Semak Sebelum Pelaksanaan
 
 ### Sebelum `azd provision`
 
@@ -63,8 +65,8 @@ azd env get-values
 
 - [ ] Pembolehubah persekitaran ditetapkan
 - [ ] Rahsia dalam Key Vault
-- [ ] Rantai sambungan disahkan
-- [ ] Semakan kesihatan dikonfigurasi
+- [ ] Rentetan sambungan disahkan
+- [ ] Pemeriksaan kesihatan dikonfigurasi
 
 ---
 
@@ -82,7 +84,7 @@ azd env get-values
 ## 🔗 Navigasi
 
 | Arah | Bab |
-|-------|--------|
+|-------|-----|
 | **Sebelumnya** | [Bab 5: Multi-Ejen](../chapter-05-multi-agent/README.md) |
 | **Seterusnya** | [Bab 7: Penyelesaian Masalah](../chapter-07-troubleshooting/README.md) |
 
@@ -91,12 +93,12 @@ azd env get-values
 ## 📖 Sumber Berkaitan
 
 - [Panduan Konfigurasi](../chapter-03-configuration/configuration.md)
-- [Panduan Penerapan](../chapter-04-infrastructure/deployment-guide.md)
-- [Isu Biasa](../chapter-07-troubleshooting/common-issues.md)
+- [Panduan Pelaksanaan](../chapter-04-infrastructure/deployment-guide.md)
+- [Isu Umum](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya hendaklah dianggap sebagai sumber yang sahih. Untuk maklumat yang penting, terjemahan profesional oleh manusia adalah disarankan. Kami tidak bertanggungjawab terhadap sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidakakuratan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan profesional oleh manusia adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

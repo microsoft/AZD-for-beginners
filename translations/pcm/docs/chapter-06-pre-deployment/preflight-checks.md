@@ -1,4 +1,4 @@
-# Pre-Flight Checks wey you go run before AZD Deployments
+# Pre-Flight Checks for AZD Deployments
 
 **Chapter Navigation:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
@@ -9,58 +9,58 @@
 
 ## Introduction
 
-This comprehensive guide dey give pre-deployment validation scripts and procedures make your Azure Developer CLI deployments fit start well. You go learn how to set up automated checks for authentication, resource availability, quotas, security compliance, and performance requirements to avoid deployment wahala and make deployment success high.
+This comprehensive guide provides pre-deployment validation scripts and procedures to ensure successful Azure Developer CLI deployments before they begin. Learn to implement automated checks for authentication, resource availability, quotas, security compliance, and performance requirements to prevent deployment failures and optimize deployment success rates.
 
 ## Learning Goals
 
-By finishing this guide, you go:
+By completing this guide, you will:
 - Master automated pre-deployment validation techniques and scripts
-- Understand full checking strategies for authentication, permissions, and quotas
+- Understand comprehensive checking strategies for authentication, permissions, and quotas
 - Implement resource availability and capacity validation procedures
-- Configure security and compliance checks for company policies
+- Configure security and compliance checks for organizational policies
 - Design cost estimation and budget validation workflows
 - Create custom pre-flight check automation for CI/CD pipelines
 
 ## Learning Outcomes
 
-When you don finish, you go fit:
-- Create and run comprehensive pre-flight validation scripts
+Upon completion, you will be able to:
+- Create and execute comprehensive pre-flight validation scripts
 - Design automated checking workflows for different deployment scenarios
 - Implement environment-specific validation procedures and policies
 - Configure proactive monitoring and alerting for deployment readiness
-- Troubleshoot pre-deployment issues and apply corrective actions
+- Troubleshoot pre-deployment issues and implement corrective actions
 - Integrate pre-flight checks into DevOps pipelines and automation workflows
 
 ## Table of Contents
 
-- [Overview](../../../../docs/chapter-06-pre-deployment)
-- [Automated Pre-flight Script](../../../../docs/chapter-06-pre-deployment)
-- [Manual Validation Checklist](../../../../docs/chapter-06-pre-deployment)
-- [Environment Validation](../../../../docs/chapter-06-pre-deployment)
-- [Resource Validation](../../../../docs/chapter-06-pre-deployment)
-- [Security & Compliance Checks](../../../../docs/chapter-06-pre-deployment)
-- [Performance & Capacity Planning](../../../../docs/chapter-06-pre-deployment)
-- [Troubleshooting Common Issues](../../../../docs/chapter-06-pre-deployment)
+- [Overview](#overview)
+- [Automated Pre-flight Script](#automated-pre-flight-script)
+- [Manual Validation Checklist](#codeblock1)
+- [Environment Validation](#✅-backup-recovery)
+- [Resource Validation](#production-environment-validation)
+- [Security & Compliance Checks](#security--compliance-checks)
+- [Performance & Capacity Planning](#performance--capacity-planning)
+- [Troubleshooting Common Issues](#troubleshooting-common-issues)
 
 ---
 
 ## Overview
 
-Pre-flight checks na important validations wey you dey do before deployment to make sure:
+Pre-flight checks are essential validations performed before deploying to ensure:
 
-- **Resource availability** and quotas for the regions wey you dey target
-- **Authentication and permissions** don set correct
-- **Template validity** and parameters correct
-- **Network connectivity** and dependencies dey work
-- **Security compliance** with organisation policy
-- **Cost estimation** dey inside budget
+- **Resource availability** and quotas in target regions
+- **Authentication and permissions** are properly configured
+- **Template validity** and parameter correctness
+- **Network connectivity** and dependencies
+- **Security compliance** with organizational policies
+- **Cost estimation** within budget constraints
 
 ### When to Run Pre-flight Checks
 
-- **Before first deployment** to new environment
-- **After big template changes**
+- **Before first deployment** to a new environment
+- **After significant template changes**
 - **Before production deployments**
-- **When you change Azure regions**
+- **When changing Azure regions**
 - **As part of CI/CD pipelines**
 
 ---
@@ -100,7 +100,7 @@ param(
     [switch]$Detailed
 )
 
-# Di color dem dey use for output
+# Color code wey dem dey use for output
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -194,7 +194,7 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # Show roles wey di current user get
+        # Find roles wey the current user get
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
@@ -242,10 +242,10 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # Check di compute quota dem
+        # Check compute quotas dem
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # Check di specific quota dem
+        # Check specific quotas dem
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
         if ($coreQuota) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
@@ -257,7 +257,7 @@ function Test-QuotasAndLimits {
             }
         }
         
-        # Check App Service limit dem
+        # Check App Service limits dem
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
             if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
@@ -271,7 +271,7 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # Check storage account limit dem
+        # Check storage account limits dem
         $storageAccounts = az storage account list --output json | ConvertFrom-Json
         $accountCount = ($storageAccounts | Measure-Object).Count
         if ($accountCount -lt 200) {
@@ -292,7 +292,7 @@ function Test-QuotasAndLimits {
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # Test di Azure endpoints
+    # Test Azure endpoints dem
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -330,12 +330,12 @@ function Test-TemplateValidation {
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # Parse di azure.yaml
+        # Make e parse azure.yaml
         try {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # Check say services correct
+            # Make sure services valid
             if ($azureYaml.services) {
                 $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 NEW: Try infrastructure preview (safe dry-run)
+    # 🧪 NEW: Try di infrastructure preview (dry-run wey safe)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -415,7 +415,7 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # Check if service dey for di region
+        # Check if service dey available for region
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
@@ -446,7 +446,7 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Basic cost estimation (you go need Azure Pricing API to get accurate estimates)
+    # Basic cost estimation (we go need Azure Pricing API for correct estimates)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
@@ -470,7 +470,7 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # Check for common security practices
+    # Check if dem follow common security practices
     try {
         # Check if Key Vault don configure
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # Check if dem dey use managed identity
+        # Check if dem use managed identity
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -565,7 +565,7 @@ Invoke-PreflightCheck
 
 ```bash
 #!/bin/bash
-# Bash version wey dey do pre-flight checks for Unix/Linux systems
+# Bash version wey dey run pre-flight checks for Unix/Linux systems
 
 set -euo pipefail
 
@@ -576,7 +576,7 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No color
 
-# Global variables dem
+# Global variable dem
 ENVIRONMENT_NAME=""
 LOCATION=""
 RESOURCE_GROUP=""
@@ -606,7 +606,7 @@ print_status() {
 check_prerequisites() {
     echo -e "${BLUE}=== Prerequisites Check ===${NC}"
     
-    # Check if AZD don install
+    # Check say AZD don install
     if command -v azd >/dev/null 2>&1; then
         local azd_version=$(azd version --output json | jq -r '.azd.version')
         print_status "AZD CLI installed" "success" "Version: $azd_version"
@@ -615,7 +615,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # Check if Azure CLI don install
+    # Check say Azure CLI don install
     if command -v az >/dev/null 2>&1; then
         local az_version=$(az version --output json | jq -r '."azure-cli"')
         print_status "Azure CLI installed" "success" "Version: $az_version"
@@ -624,7 +624,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # Check if jq don install
+    # Check say jq don install
     if command -v jq >/dev/null 2>&1; then
         print_status "jq installed" "success"
     else
@@ -637,7 +637,7 @@ check_prerequisites() {
 check_authentication() {
     echo -e "\n${BLUE}=== Authentication Check ===${NC}"
     
-    # Check if AZD don authenticate
+    # Check say AZD don authenticate
     if azd auth login --check-status >/dev/null 2>&1; then
         local principal_name=$(azd auth login --check-status --output json 2>/dev/null | jq -r '.principalName // "Unknown"')
         print_status "AZD authentication" "success" "User: $principal_name"
@@ -646,7 +646,7 @@ check_authentication() {
         return 1
     fi
     
-    # Check if Azure CLI don authenticate
+    # Check say Azure CLI don authenticate
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -665,7 +665,7 @@ check_template_validation() {
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
-        # Small YAML validation
+        # Small YAML check
         if python3 -c "import yaml; yaml.safe_load(open('azure.yaml'))" 2>/dev/null; then
             print_status "azure.yaml parsing" "success"
         else
@@ -677,7 +677,7 @@ check_template_validation() {
         return 1
     fi
     
-    # Check infrastructure files dem
+    # Check infrastructure file dem
     if [[ -d "infra" ]]; then
         local bicep_count=$(find infra -name "*.bicep" | wc -l)
         if [[ $bicep_count -gt 0 ]]; then
@@ -729,7 +729,7 @@ check_regional_availability() {
 }
 
 main() {
-    # Parse command line arguments
+    # Parse di command line args
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -755,7 +755,7 @@ main() {
         esac
     done
     
-    # Make sure required parameters dey
+    # Validate say required parameters dey
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -768,7 +768,7 @@ main() {
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
     
-    # Run checks
+    # Run all the checks
     local all_passed=true
     
     check_prerequisites || all_passed=false
@@ -800,61 +800,61 @@ main "$@"
 
 ### Pre-Deployment Checklist
 
-Print this checklist and check each item before you deploy:
+Print this checklist and verify each item before deployment:
 
 #### ✅ Environment Setup
 - [ ] AZD CLI installed and updated to latest version
 - [ ] Azure CLI installed and authenticated
 - [ ] Correct Azure subscription selected
-- [ ] Environment name unique and follow naming conventions
-- [ ] Target resource group identified or fit be created
+- [ ] Environment name is unique and follows naming conventions
+- [ ] Target resource group identified or can be created
 
 #### ✅ Authentication & Permissions
 - [ ] Successfully authenticated with `azd auth login`
-- [ ] User get Contributor role on target subscription/resource group
-- [ ] Service principal configured for CI/CD (if e dey)
+- [ ] User has Contributor role on target subscription/resource group
+- [ ] Service principal configured for CI/CD (if applicable)
 - [ ] No expired certificates or credentials
 
 #### ✅ Template Validation
-- [ ] `azure.yaml` dey and na valid YAML
-- [ ] All services wey dey for azure.yaml get corresponding source code
-- [ ] Bicep templates for `infra/` directory dey
-- [ ] `main.bicep` compile without errors (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Infrastructure preview dey run well (`azd provision --preview`)
-- [ ] All required parameters get default values or dem go provide dem
-- [ ] No hardcoded secrets inside templates
+- [ ] `azure.yaml` exists and is valid YAML
+- [ ] All services defined in azure.yaml have corresponding source code
+- [ ] Bicep templates in `infra/` directory are present
+- [ ] `main.bicep` compiles without errors (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Infrastructure preview runs successfully (`azd provision --preview`)
+- [ ] All required parameters have default values or will be provided
+- [ ] No hardcoded secrets in templates
 
 #### ✅ Resource Planning
-- [ ] Target Azure region don select and validate
-- [ ] Required Azure services dey for the target region
-- [ ] Sufficient quotas dey for the resources wey you plan
-- [ ] Check say no resource naming conflicts dey
-- [ ] Dependencies between resources don understand
+- [ ] Target Azure region selected and validated
+- [ ] Required Azure services available in target region
+- [ ] Sufficient quotas available for planned resources
+- [ ] Resource naming conflicts checked
+- [ ] Dependencies between resources understood
 
 #### ✅ Network & Security
-- [ ] Network connectivity to Azure endpoints don verify
-- [ ] Firewall/proxy settings don configure if e necessary
-- [ ] Key Vault don set for secrets management
-- [ ] Managed identities dey use where e possible
-- [ ] HTTPS enforcement don enable for web applications
+- [ ] Network connectivity to Azure endpoints verified
+- [ ] Firewall/proxy settings configured if needed
+- [ ] Key Vault configured for secrets management
+- [ ] Managed identities used where possible
+- [ ] HTTPS enforcement enabled for web applications
 
 #### ✅ Cost Management
-- [ ] Cost estimates don calculate using Azure Pricing Calculator
-- [ ] Budget alerts don configure if e necessary
-- [ ] Appropriate SKUs don select for environment type
-- [ ] Reserved capacity don consider for production workloads
+- [ ] Cost estimates calculated using Azure Pricing Calculator
+- [ ] Budget alerts configured if required
+- [ ] Appropriate SKUs selected for environment type
+- [ ] Reserved capacity considered for production workloads
 
 #### ✅ Monitoring & Observability
-- [ ] Application Insights don configure in templates
-- [ ] Log Analytics workspace don plan
-- [ ] Alert rules don define for critical metrics
-- [ ] Health check endpoints don implement for applications
+- [ ] Application Insights configured in templates
+- [ ] Log Analytics workspace planned
+- [ ] Alert rules defined for critical metrics
+- [ ] Health check endpoints implemented in applications
 
 #### ✅ Backup & Recovery
-- [ ] Backup strategy don define for data resources
-- [ ] Recovery time objectives (RTO) don document
-- [ ] Recovery point objectives (RPO) don document
-- [ ] Disaster recovery plan dey for production
+- [ ] Backup strategy defined for data resources
+- [ ] Recovery time objectives (RTO) documented
+- [ ] Recovery point objectives (RPO) documented
+- [ ] Disaster recovery plan in place for production
 
 ---
 
@@ -864,26 +864,26 @@ Print this checklist and check each item before you deploy:
 
 ```bash
 #!/bin/bash
-# Validation dem wey specific to development environment
+# Checks wey special for development environment
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # Check if configuration dem dey friendly for development
+    # Check for settings wey dey good for development
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # Check if auto-shutdown configuration dem dey
+    # Check for settings wey dey auto-shutdown
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # Make sure development database configuration dem correct
+    # Make sure say development database settings correct
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -896,19 +896,19 @@ validate_dev_environment() {
 
 ```bash
 #!/bin/bash
-# Validations wey dey specific to production environment
+# Validations wey spesifik to production environment
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # Check if high availability configurations dey
+    # Check whether high availability configurations dey
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # Check if backup configurations dey
+    # Check whether backup configurations dey
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
@@ -922,7 +922,7 @@ validate_prod_environment() {
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # Check if security configurations dey
+    # Check whether security configurations dey
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -990,7 +990,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # Collect storage accounts wey dey for di subscription
+    # Find storage accounts wey dey for di subscription
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -998,7 +998,7 @@ def check_storage_limits(location: str) -> bool:
         return False
     
     account_count = len(accounts)
-    max_accounts = 250  # Na di default Azure limit
+    max_accounts = 250  # Default limit wey Azure get
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1043,7 +1043,7 @@ def main():
     all_passed &= check_storage_limits(location)
     all_passed &= check_network_limits(location)
     
-    # Tori
+    # Small gist
     print(f"\n=== Quota Check Summary ===")
     if all_passed:
         print("✅ All quota checks passed - sufficient capacity available")
@@ -1064,7 +1064,7 @@ if __name__ == "__main__":
 
 ```bash
 #!/bin/bash
-# Check security an make sure AZD deployments dey follow rules
+# Make sure AZD deployments dey secure and dey follow compliance
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Check say dem dey force HTTPS
+    # Check if dem dey enforce HTTPS
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1095,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Check if minimum TLS version dey met
+    # Check the minimum TLS version wey dem set
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1103,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Check if public access get restriction
+    # Check if dem restrict public access
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1111,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Check if dem get network security groups
+    # Check if network security groups dey
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1124,7 +1124,7 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # Check say data dey encrypted
+    # Check if dem encrypt data
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
@@ -1138,7 +1138,7 @@ check_compliance_requirements() {
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # Check if backup an retention policies dey
+    # Check if dem get backup and retention policies
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1295,13 +1295,13 @@ steps:
 ### ✅ Pre-flight Check Best Practices
 
 1. **Automate Where Possible**
-   - Put checks inside CI/CD pipelines
-   - Use scripts so validations fit repeat well
-   - Store results for audit trail
+   - Integrate checks into CI/CD pipelines
+   - Use scripts for repeatable validations
+   - Store results for audit trails
 
 2. **Environment-Specific Validation**
    - Different checks for dev/staging/prod
-   - Right security requirements for each environment
+   - Appropriate security requirements per environment
    - Cost optimization for non-production environments
 
 3. **Comprehensive Coverage**
@@ -1312,26 +1312,26 @@ steps:
 
 4. **Clear Reporting**
    - Color-coded status indicators
-   - Detailed error messages with how-to-fix steps
-   - Summary reports for quick look
+   - Detailed error messages with remediation steps
+   - Summary reports for quick assessment
 
 5. **Fail Fast**
    - Stop deployment if critical checks fail
-   - Give clear guidance to fix am
-   - Make am easy to run the checks again
+   - Provide clear guidance for resolution
+   - Enable easy re-running of checks
 
 ### Common Pre-flight Pitfalls
 
-1. **Skipping validation** for quick deployments
-2. **Insufficient permissions** check before deployment
-3. **Ignoring quota limits** until deployment kolo
+1. **Skipping validation** for "quick" deployments
+2. **Insufficient permissions** checking before deployment
+3. **Ignoring quota limits** until deployment fails
 4. **Not validating templates** in CI/CD pipelines
 5. **Missing security validation** for production environments
-6. **Wrong cost estimation** wey go cause budget surprise
+6. **Inadequate cost estimation** leading to budget surprises
 
 ---
 
-**Pro Tip**: Run pre-flight checks as separate job for your CI/CD pipeline before the real deployment job. E go help catch problems early and give faster feedback to developers.
+**Pro Tip**: Run pre-flight checks as a separate job in your CI/CD pipeline before the actual deployment job. This allows you to catch issues early and provides faster feedback to developers.
 
 ---
 
@@ -1342,6 +1342,6 @@ steps:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dis dokument na AI translation service wey dem use translate am — Co-op Translator (https://github.com/Azure/co-op-translator). Even though we dey try make everything correct, abeg sabi say automated translation fit get errors or wrong meaning. Di original dokument for im original language na di correct source. If na important information, better make person wey sabi translate am manually do am. We no dey liable for any misunderstanding or wrong interpretation wey fit come from dis translation.
+**Disclaimer**:
+Dis document don be translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg sabi say automated translations fit get errors or inaccuracies. Di original document wey dey im native language suppose be di authoritative source. For critical information, we recommend say you use professional human translation. We no dey liable for any misunderstandings or misinterpretations wey fit arise from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

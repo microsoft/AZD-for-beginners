@@ -1,40 +1,40 @@
-# 3. टेम्पलेटलाई विघटन गर्नुहोस्
+# 3. टेम्प्लेट विखण्डन गर्नुहोस्
 
 !!! tip "यस मोड्युलको अन्त्यसम्म तपाईं सक्षम हुनुहुनेछ"
 
-    - [ ] GitHub Copilot लाई Azure सहयोगका लागि MCP सर्भरहरूसँग सक्रिय गर्नुहोस्
-    - [ ] AZD टेम्पलेटको फोल्डर संरचना र कम्पोनेन्टहरू बुझ्नुहोस्
-    - [ ] इन्फ्रास्ट्रक्चर-एज-कोड (Bicep) संगठन पद्धतिहरू अन्वेषण गर्नुहोस्
-    - [ ] **Lab 3:** GitHub Copilot प्रयोग गरी रिपोजिटरी आर्किटेक्चर अन्वेषण र बुझ्नुहोस्
+    - [ ] Azure सहयोगका लागि MCP सर्भरहरू संग GitHub Copilot सक्रिय गर्नुहोस्
+    - [ ] AZD टेम्प्लेट फोल्डर संरचना र कम्पोनेंटहरू बुझ्नुहोस्
+    - [ ] infrastructure-as-code (Bicep) संगठनात्मक ढाँचाहरू अन्वेषण गर्नुहोस्
+    - [ ] **Lab 3:** GitHub Copilot प्रयोग गरेर रिपोजिटोरी आर्किटेक्चरको अन्वेषण र बुझाइ 
 
 ---
 
 
-With AZD templates and the Azure Developer CLI (`azd`) we can quickly jumpstart our AI development journey with standardized repositories that provide sample code, infrastructure and configuration files - in the form of a ready-to-deploy _starter_ project.
+AZD टेम्प्लेटहरू र Azure Developer CLI (`azd`) सँग हामी छिटो हाम्रो AI विकास यात्रा सुरु गर्न सक्छौं मानकीकृत रिपोजिटोरीमार्फत जुन नमुना कोड, पूर्वाधार र कन्फिगरेसन फाइलहरू प्रदान गर्दछ - तैयार-परिनियोजनको लागि _स्टार्टर_ परियोजनाको रूपमा।
 
-**तर अब, हामीले परियोजना संरचना र कोडबेस बुझ्न आवश्यक छ - र AZD टेम्पलेटलाई अनुकूलन गर्न सक्षम हुनुपर्छ - कुनै पूर्व अनुभव वा AZD को बुझाइ बिना!**
+**तर अब, हामीले परियोजना संरचना र कोडबेस बुझ्न आवश्यक छ - र AZD टेम्प्लेटलाई कुनै पनि पूर्व अनुभव वा AZD को बुझाइ बिना अनुकूलित गर्न सक्षम हुनुपर्छ!**
 
 ---
 
-## 1. Activate GitHub Copilot
+## 1. GitHub Copilot सक्रिय गर्नुहोस्
 
-### 1.1 Install GitHub Copilot Chat
+### 1.1 GitHub Copilot Chat इन्स्टल गर्नुहोस्
 
-It's time to explore [Agent Mode सहित GitHub Copilot](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode). Now, we can use natural language to describe our task at a high level, and get assistance in execution. For this lab, we'll use the [Copilot Free योजना](https://github.com/github-copilot/signup) which has a monthly limit for completions and chat interactions.
+अब समय भएको छ [GitHub Copilot with Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) अन्वेषण गर्ने। अब, हामी उच्च स्तरमा हाम्रो कार्य प्राकृतिक भाषामा वर्णन गर्न सक्छौं, र कार्यान्वयनमा सहायता पाउन सक्छौं। यस ल्याबका लागि, हामी [Copilot Free plan](https://github.com/github-copilot/signup) प्रयोग गर्नेछौं जसमा completions र chat अन्तरक्रियाहरूको मासिक सीमा छ।
 
-The extension can be installed from the marketplace, but should already be available in your Codespaces environment. _Click `Open Chat` from the Copilot icon drop-down - and type a prompt like `What can you do?`_ - you may be prompted to log in. **GitHub Copilot Chat तयार छ**.
+यो एक्सटेन्सन मार्केटप्लेसबाट इन्स्टल गर्न सकिन्छ, र यो प्रायः Codespaces वा dev container वातावरणहरूमा पहिले नै उपलब्ध हुन्छ। _Copilot आइकन ड्रप-डाउनबाट `Open Chat` क्लिक गर्नुहोस् - र `What can you do?` जस्तै प्रॉम्प्ट टाइप गर्नुहोस्_ - तपाईंलाई लगइन गर्न भनिन सक्छ। **GitHub Copilot Chat तयार छ**।
 
-### 1.2. Install MCP Servers
+### 1.2. MCP सर्भरहरू इन्स्टल गर्नुहोस्
 
-For Agent mode to be effective, it needs access to the right tools to help it retrieve knowledge or take actions. This is where MCP servers can help. We'll configure the following servers:
+Agent mode प्रभावकारी हुनको लागि, यसलाई सही उपकरणहरू आवश्यक पर्छ जसले ज्ञान प्राप्त गर्न वा कार्यहरू लिन मद्दत गर्छ। यहाँ MCP सर्भरहरूले मद्दत पुर्याउँछन्। हामी निम्न सर्भरहरू कन्फिगर गर्नेछौं:
 
-1. [Azure MCP सर्भर](../../../../../workshop/docs/instructions)
-1. [Microsoft Docs MCP सर्भर](../../../../../workshop/docs/instructions)
+1. [Azure MCP Server](../../../../../workshop/docs/instructions)
+1. [Microsoft Docs MCP Server](../../../../../workshop/docs/instructions)
 
-To activate these:
+यी सक्रिय गर्न:
 
-1. Create a file called `.vscode/mcp.json` if it does not exist
-1. Copy the following into that file - and start the servers!
+1. `.vscode/mcp.json` नामक फाइल बनाउनुहोस् यदि त्यो फाइल छैन भने
+1. त्यस फाइलमा तलको सामग्री कपी गर्नुहोस् - र सर्भरहरू सुरु गर्नुहोस्!
    ```json title=".vscode/mcp.json"
    {
       "servers": {
@@ -55,9 +55,9 @@ To activate these:
    }
    ```
 
-??? warning "तपाईंलाई `npx` इन्स्टल गरिएको छैन भन्ने त्रुटि आउन सक्छ (समाधानका लागि विस्तार गर्न क्लिक गर्नुहोस्)"
+??? warning "तपाईंलाई `npx` इन्स्टल नभएको त्रुटि आउन सक्छ (समाधानका लागि विस्तारमा क्लिक गर्नुहोस्)"
 
-      To fix,this open the `.devcontainer/devcontainer.json` file and add this line to the features section. Then rebuild the container. You should now have `npx` installed.
+      समाधानका लागि, `.devcontainer/devcontainer.json` फाइल खोल्नुहोस् र features सेक्सनमा यो लाइन थप्नुहोस्। त्यसपछि कन्टेनर पुनः निर्माण गर्नुहोस्। अब तपाईंलाई `npx` इन्स्टल हुनेछ।
 
       ```title="" linenums="0"
          "features": {
@@ -68,213 +68,215 @@ To activate these:
 
 ---
 
-### 1.3. Test GitHub Copilot Chat
+### 1.3. GitHub Copilot Chat परीक्षण गर्नुहोस्
 
-**पहिले VS Code कमान्ड लाइनबाट Azure मा प्रमाणित गर्न `az login` प्रयोग गर्नुहोस्।**
+**पहिले `azd auth login` प्रयोग गरेर VS Code कमाण्डलाइनबाट Azure सँग प्रमाणीकरण गर्नुहोस्। Azure CLI आदेशहरू सिधै चलाउने योजना भएमा `az login` पनि प्रयोग गर्नुहोस्।**
 
-You should now be able to query your Azure subscription status, and ask questions about deployed resources or configuration. Try these prompts:
+अब तपाईं आफ्नो Azure सदस्यता स्थिति सोध्न सक्षम हुनुहुन्छ, र डिप्लोय भएका स्रोतहरू वा कन्फिगरेसन बारे प्रश्न गर्न सक्नुहुन्छ। यी प्रॉम्प्टहरू प्रयास गर्नुहोस्:
 
 1. `List my Azure resource groups`
 1. `#foundry list my current deployments`
 
-You can also ask questions about Azure documentation and get responses grounded in the Microsoft Docs MCP server. Try these prompts:
+तपाईं Azure कागजातहरू बारे प्रश्न सोध्न सक्नुहुन्छ र Microsoft Docs MCP सर्भरमा आधारित प्रतिक्रियाहरू पाउन सक्नुहुन्छ। यी प्रॉम्प्टहरू प्रयास गर्नुहोस्:
 
 1. `#microsoft_docs_search What is Azure Developer CLI?`
 1. `#microsoft_docs_search Show me a Python tutorial to chat with deployed model`
 
-Or you can ask for code snippets to complete a task. Try this prompt.
+वा कुनै कार्य पूरा गर्न कोड स्निपेटहरू माग्न सक्नुहुन्छ। यो प्रॉम्प्ट प्रयास गर्नुहोस्।
 
 1. `Give me a Python code example that uses AAD for an interactive chat client`
 
-In `Ask` mode, this will provide code that you can copy-paste and try out. In `Agent` mode, this might go a step further and create the relevant resources for you - including setup scripts and documentation - to help you execute that task.
+`Ask` मोडमा, यसले कोड प्रदान गर्नेछ जुन तपाईं कपी-पेस्ट गरेर प्रयास गर्न सक्नुहुन्छ। `Agent` मोडमा, यसले यो अझ कदम अगाडि बढाएर सम्बन्धित स्रोतहरू सिर्जना गर्न सक्छ - सेटअप स्क्रिप्टहरू र कागजातहरू सहित - तपाईंलाई उक्त कार्य सम्पन्न गर्न सहयोग पुर्याउन।
 
-**तपाईं अब टेम्पलेट रिपोजिटरी अन्वेषण सुरु गर्न तयार हुनुहुन्छ**
-
----
-
-## 2. वास्तुकला विघटन गर्नुहोस्
-
-??? prompt "ASK: docs/images/architecture.png मा अनुप्रयोगको वास्तुकला 1 अनुच्छेदमा व्याख्या गर्नुहोस्"
-
-      यो अनुप्रयोग Azure मा बनाइएको AI-समर्थित च्याट अनुप्रयोग हो जसले आधुनिक एजेन्ट-आधारित वास्तुकलाको प्रदर्शन गर्दछ। समाधानको केन्द्रमा मुख्य अनुप्रयोग कोड होस्ट गर्ने Azure Container App हुन्छ, जुन प्रयोगकर्ताको इनपुट प्रक्रियाकरण गर्छ र AI एजेन्ट मार्फत बौद्धिक उत्तरहरू उत्पन्न गर्छ।
-      
-      वास्तुकलाले AI क्षमताहरूको आधारको रूपमा Microsoft Foundry Project लाई प्रयोग गर्छ र Azure AI Services सँग जडान हुन्छ जसले आधारभूत भाषा मोडेलहरू (जस्तै gpt-4.1-mini) र एजेन्ट कार्यक्षमता प्रदान गर्छ। प्रयोगकर्ताको अन्तरक्रियाहरू React-आधारित फ्रन्टएन्डबाट FastAPI ब्याकएन्डमा बग्छन्, जसले सन्दर्भगत उत्तरहरू उत्पन्न गर्न AI एजेन्ट सेवासँग संवाद गर्छ।
-      
-      प्रणालीले फाइल सर्च वा Azure AI Search सेवा मार्फत ज्ञान पुन:प्राप्ति क्षमताहरू समावेश गर्छ, जसले एजेन्टलाई अपलोड गरिएको कागजातहरूबाट जानकारी पहुँच र उद्धरण गर्न अनुमति दिन्छ। अपरेशनल उत्कृष्टताका लागि, वास्तुकलामा Application Insights र Log Analytics Workspace मार्फत व्यापक निगरानी समावेश छ ट्रेसिङ, लगिङ, र प्रदर्शन अनुकूलनको लागि।
-      
-      Azure Storage अनुप्रयोग डेटा र फाइल अपलोडका लागि ब्लब स्टोरेज प्रदान गर्छ, जबकि Managed Identity ले क्रेडेन्सियलहरू भण्डार नगरी Azure स्रोतहरूबीच सुरक्षित पहुँच सुनिश्चित गर्दछ। समग्र समाधान स्केलेबिलिटी र मैनटेनेबिलिटीका लागि डिजाइन गरिएको छ, जहाँ कन्टेनराइज्ड अनुप्रयोगले माग अनुसार स्वचालित रूपमा स्केल गर्छ र Azure को व्यवस्थापित सेवाहरू मार्फत बिल्ट-इन सुरक्षा, निगरानी, र CI/CD क्षमताहरू प्रदान गर्दछ।
-
-![वास्तुकला](../../../../../translated_images/ne/architecture.48d94861e6e6cdc0.webp)
+**अब तपाईं टेम्प्लेट रिपोजिटोरी अन्वेषण सुरु गर्न सुसज्जित हुनुहुन्छ**
 
 ---
 
-## 3. Repository Structure
+## 2. आर्किटेक्चर विखण्डन गर्नुहोस्
 
-!!! prompt "ASK: टेम्पलेट फोल्डर संरचना व्याख्या गर्नुहोस्। दृश्यात्मक पदानुक्रमिक रेखाचित्रबाट सुरु गर्नुहोस्।"
+??? prompt "पूछ्नुहोस्: docs/images/architecture.png मा एप्लिकेसन आर्किटेक्चरलाई १ परिच्छेदमा व्याख्या गर्नुहोस्"
 
-??? info "ANSWER: दृश्यात्मक पदानुक्रमिक रेखाचित्र"
+      यो एप्लिकेसन Azure मा आधारित AI-समर्थित च्याट एप्लिकेसन हो जसले आधुनिक एजेन्ट-आधारित आर्किटेक्चर प्रदर्शन गर्दछ। यस समाधानको केन्द्रमा Azure Container App छ जुन मुख्य एप्लिकेसन कोड होस्ट गर्छ, जुन प्रयोगकर्ता इनपुट प्रसंस्करण र AI एजेन्ट मार्फत बुद्धिमानी प्रतिक्रिया उत्पन्न गर्दछ।
+      
+      आर्किटेक्चर Microsoft Foundry Project मा आधारित छ जसले Azure AI सेवाहरूसँग जडान गर्छ जसले आधारभूत भाषा मोडेलहरू (जस्तै gpt-4.1-mini) र एजेन्ट कार्यक्षमता प्रदान गर्दछ। प्रयोगकर्ता अन्तरक्रियाहरू React-आधारित फ्रन्टएन्डबाट FastAPI ब्याकएन्डमा जान्छ जुन AI एजेन्ट सेवासँग सन्दर्भगत प्रतिक्रियाहरू उत्पन्न गर्न सञ्चार गर्छ।
+      
+      प्रणालीले ज्ञान पुनःप्राप्ति क्षमता समावेश गर्दछ जसले फाइल खोज वा Azure AI Search सेवा मार्फत एजेन्टलाई अपलोड गरिएका कागजातहरूबाट जानकारी पहुँच र उद्धरण गर्न सक्षम बनाउँछ।
+      
+      परिचालन उत्कृष्टताका लागि, आर्किटेक्चर Application Insights र Log Analytics Workspace मार्फत व्यापक अनुगमन समावेश गर्दछ जसले ट्रेसिङ, लगिङ, र प्रदर्शन सुधार गर्दछ।
+      
+      Azure Storage एप्लिकेसन डाटाका लागि blob storage प्रदान गर्दछ, भने Managed Identity ले क्रेडेन्सियलहरू भण्डारण नगरी Azure स्रोतहरूको सुरक्षित पहुँच सुनिश्चित गर्दछ। सम्पूर्ण समाधान तान्न र मर्मत गर्नको लागि डिजाइन गरिएको छ, जसमा कन्टेनराइज्ड एप्लिकेसन मागअनुसार स्वचालित रूपमा स्केल हुन्छ र Azure का प्रबन्धित सेवाहरू मार्फत सुरक्षा, अनुगमन, र CI/CD क्षमता प्रदान गर्दछ।
+
+![Architecture](../../../../../translated_images/ne/architecture.48d94861e6e6cdc0.webp)
+
+---
+
+## 3. रिपोजिटोरी संरचना
+
+!!! prompt "पूछ्नुहोस्: टेम्प्लेट फोल्डर संरचना व्याख्या गर्नुहोस्। بصری पदानुक्रमात्मक तालिका बाट सुरु गर्नुहोस्।"
+
+??? info "उत्तर: بصری पदानुक्रमात्मक तालिका"
 
       ```bash title="" 
       get-started-with-ai-agents/
       ├── 📋 Configuration & Setup
-      │   ├── azure.yaml                    # Azure Developer CLI configuration
-      │   ├── docker-compose.yaml           # Local development containers
-      │   ├── pyproject.toml                # Python project configuration
-      │   ├── requirements-dev.txt          # Development dependencies
-      │   └── .devcontainer/                # VS Code dev container setup
+      │   ├── azure.yaml                    # Azure Developer CLI कन्फिगरेसन
+      │   ├── docker-compose.yaml           # स्थानीय विकास कन्टेनरहरू
+      │   ├── pyproject.toml                # Python परियोजना कन्फिगरेसन
+      │   ├── requirements-dev.txt          # विकास निर्भरता
+      │   └── .devcontainer/                # VS Code dev container सेटअप
       │
       ├── 🏗️ Infrastructure (infra/)
-      │   ├── main.bicep                    # Main infrastructure template
-      │   ├── api.bicep                     # API-specific resources
-      │   ├── main.parameters.json          # Infrastructure parameters
-      │   └── core/                         # Modular infrastructure components
-      │       ├── ai/                       # AI service configurations
-      │       ├── host/                     # Hosting infrastructure
-      │       ├── monitor/                  # Monitoring and logging
-      │       ├── search/                   # Azure AI Search setup
-      │       ├── security/                 # Security and identity
-      │       └── storage/                  # Storage account configs
+      │   ├── main.bicep                    # मुख्य पूर्वाधार टेम्प्लेट
+      │   ├── api.bicep                     # API-विशिष्ट स्रोतहरू
+      │   ├── main.parameters.json          # पूर्वाधार प्यारामिटरहरू
+      │   └── core/                         # मोड्युलर पूर्वाधार कम्पोनेंटहरू
+      │       ├── ai/                       # AI सेवा कन्फिगरेसनहरू
+      │       ├── host/                     # होस्टिंग पूर्वाधार
+      │       ├── monitor/                  # अनुगमन र लगिङ
+      │       ├── search/                   # Azure AI Search सेटअप
+      │       ├── security/                 # सुरक्षा र पहिचान
+      │       └── storage/                  # स्टोरेज खाता कन्फिग
       │
       ├── 💻 Application Source (src/)
-      │   ├── api/                          # Backend API
-      │   │   ├── main.py                   # FastAPI application entry
-      │   │   ├── routes.py                 # API route definitions
-      │   │   ├── search_index_manager.py   # Search functionality
-      │   │   ├── data/                     # API data handling
-      │   │   ├── static/                   # Static web assets
-      │   │   └── templates/                # HTML templates
-      │   ├── frontend/                     # React/TypeScript frontend
-      │   │   ├── package.json              # Node.js dependencies
-      │   │   ├── vite.config.ts            # Vite build configuration
-      │   │   └── src/                      # Frontend source code
-      │   ├── data/                         # Sample data files
-      │   │   └── embeddings.csv            # Pre-computed embeddings
-      │   ├── files/                        # Knowledge base files
-      │   │   ├── customer_info_*.json      # Customer data samples
-      │   │   └── product_info_*.md         # Product documentation
-      │   ├── Dockerfile                    # Container configuration
-      │   └── requirements.txt              # Python dependencies
+      │   ├── api/                          # ब्याकएन्ड API
+      │   │   ├── main.py                   # FastAPI एप्लिकेसन प्रवेश
+      │   │   ├── routes.py                 # API मार्ग परिभाषा
+      │   │   ├── search_index_manager.py   # खोज कार्यक्षमता
+      │   │   ├── data/                     # API डाटा ह्यान्डलिङ
+      │   │   ├── static/                   # स्थिर वेब सम्पत्ति
+      │   │   └── templates/                # HTML टेम्प्लेटहरू
+      │   ├── frontend/                     # React/TypeScript फ्रन्टएन्ड
+      │   │   ├── package.json              # Node.js निर्भरता
+      │   │   ├── vite.config.ts            # Vite बिल्ड कन्फिगरेसन
+      │   │   └── src/                      # फ्रन्टएन्ड स्रोत कोड
+      │   ├── data/                         # नमुना डाटा फाइलहरू
+      │   │   └── embeddings.csv            # पूर्व-गणना गरिएको एम्बेडिङहरू
+      │   ├── files/                        # ज्ञान आधार फाइलहरू
+      │   │   ├── customer_info_*.json      # ग्राहक डाटा नमूना
+      │   │   └── product_info_*.md         # उत्पादन कागजातहरू
+      │   ├── Dockerfile                    # कन्टेनर कन्फिगरेसन
+      │   └── requirements.txt              # Python निर्भरता
       │
       ├── 🔧 Automation & Scripts (scripts/)
-      │   ├── postdeploy.sh/.ps1           # Post-deployment setup
-      │   ├── setup_credential.sh/.ps1     # Credential configuration
-      │   ├── validate_env_vars.sh/.ps1    # Environment validation
-      │   └── resolve_model_quota.sh/.ps1  # Model quota management
+      │   ├── postdeploy.sh/.ps1           # पोस्ट-डिप्लोयमेन्ट सेटअप
+      │   ├── setup_credential.sh/.ps1     # क्रेडेन्सियल कन्फिगरेसन
+      │   ├── validate_env_vars.sh/.ps1    # वातावरण मान्यता
+      │   └── resolve_model_quota.sh/.ps1  # मोडेल कोटा व्यवस्थापन
       │
       ├── 🧪 Testing & Evaluation
-      │   ├── tests/                        # Unit and integration tests
+      │   ├── tests/                        # युनिट र इंटिग्रेशन परीक्षण
       │   │   └── test_search_index_manager.py
-      │   ├── evals/                        # Agent evaluation framework
-      │   │   ├── evaluate.py               # Evaluation runner
-      │   │   ├── eval-queries.json         # Test queries
+      │   ├── evals/                        # एजेन्ट मूल्याङ्कन फ्रेमवर्क
+      │   │   ├── evaluate.py               # मूल्याङ्कन रनर
+      │   │   ├── eval-queries.json         # परीक्षण क्वेरीज
       │   │   └── eval-action-data-path.json
-      │   ├── sandbox/                      # Development playground
-      │   │   ├── 1-quickstart.py           # Getting started examples
-      │   │   └── aad-interactive-chat.py   # Authentication examples
-      │   └── airedteaming/                 # AI safety evaluation
-      │       └── ai_redteaming.py          # Red team testing
+      │   ├── sandbox/                      # विकास खेलमैदान
+      │   │   ├── 1-quickstart.py           # सुरु गर्न उदाहरणहरू
+      │   │   └── aad-interactive-chat.py   # प्रमाणीकरण उदाहरणहरू
+      │   └── airedteaming/                 # AI सुरक्षा मूल्याङ्कन
+      │       └── ai_redteaming.py          # रेड टिम परीक्षण
       │
       ├── 📚 Documentation (docs/)
-      │   ├── deployment.md                 # Deployment guide
-      │   ├── local_development.md          # Local setup instructions
-      │   ├── troubleshooting.md            # Common issues & fixes
-      │   ├── azure_account_setup.md        # Azure prerequisites
-      │   └── images/                       # Documentation assets
+      │   ├── deployment.md                 # परिनियोजन मार्गदर्शिका
+      │   ├── local_development.md          # स्थानीय सेटअप निर्देशहरू
+      │   ├── troubleshooting.md            # सामान्य समस्या र समाधानहरू
+      │   ├── azure_account_setup.md        # Azure पूर्वापेक्षाहरू
+      │   └── images/                       # कागजात सम्पत्ति
       │
       └── 📄 Project Metadata
-         ├── README.md                     # Project overview
-         ├── CODE_OF_CONDUCT.md           # Community guidelines
-         ├── CONTRIBUTING.md              # Contribution guide
-         ├── LICENSE                      # License terms
-         └── next-steps.md                # Post-deployment guidance
+         ├── README.md                     # परियोजना अवलोकन
+         ├── CODE_OF_CONDUCT.md           # समुदाय दिशा-निर्देश
+         ├── CONTRIBUTING.md              # योगदान मार्गदर्शिका
+         ├── LICENSE                      # अनुमति सर्तहरू
+         └── next-steps.md                # पोस्ट-डिप्लोयमेन्ट मार्गदर्शन
       ```
 
-### 3.1. मुख्य एप्लिकेसन वास्तुकला
+### 3.1. कोर एप्लिकेसन आर्किटेक्चर
 
-यो टेम्पलेटले **फुल-स्ट्याक वेब अनुप्रयोग** ढाँचालाई अनुसरण गर्दछ, जसमा:
+यो टेम्प्लेटले **पूर्ण-स्ट्याक वेब एप्लिकेसन** ढाँचालाई अनुसरण गर्दछ:
 
-- **Backend**: Python FastAPI र Azure AI एकीकरण
-- **Frontend**: TypeScript/React र Vite बिल्ड सिस्टम
-- **Infrastructure**: क्लाउड स्रोतहरूको लागि Azure Bicep टेम्पलेटहरू
-- **Containerization**: निरन्तर डिप्लोयमेन्टका लागि Docker
+- **ब्याकएन्ड**: Python FastAPI सँग Azure AI एकीकरण
+- **फ्रन्टएन्ड**: TypeScript/React सँग Vite बिल्ड प्रणाली
+- **पूर्वाधार**: Azure Bicep टेम्प्लेटहरू क्लाउड स्रोतहरूको लागि
+- **कन्टेनराइजेशन**: स्थिर परिनियोजनको लागि Docker
 
-### 3.2 इन्फ्रा एज़ कोड (Bicep)
+### 3.2 पूर्वाधार रूपमा कोड (bicep)
 
-इन्फ्रास्ट्रक्चर तहले मोड्युलर रूपमा व्यवस्थित **Azure Bicep** टेम्पलेटहरू प्रयोग गर्दछ:
+पूर्वाधार तह **Azure Bicep** टेम्प्लेटहरू प्रयोग गर्छ जुन मोड्युलर रुपमा संरचित छन्:
 
-   - **`main.bicep`**: सबै Azure स्रोतहरू समन्वय गर्छ
-   - **`core/` modules**: विभिन्न सेवाहरूका लागि पुन:प्रयोगयोग्य कम्पोनेन्टहरू
-      - AI सेवाहरू (Microsoft Foundry Models, AI Search)
-      - कन्टेनर होस्टिङ (Azure Container Apps)
-      - निगरानी (Application Insights, Log Analytics)
+   - **`main.bicep`**: सबै Azure स्रोतहरू समन्वय गर्दछ
+   - **`core/` मोड्युलहरू**: विभिन्न सेवाहरूका लागि पुन: प्रयोगयोग्य कम्पोनेंटहरू
+      - AI सेवा (Microsoft Foundry मोडलहरू, AI Search)
+      - कन्टेनर होस्टिंग (Azure Container Apps)
+      - अनुगमन (Application Insights, Log Analytics)
       - सुरक्षा (Key Vault, Managed Identity)
 
-### 3.3 Application Source (`src/`)
+### 3.3 एप्लिकेसन स्रोत (`src/`)
 
-**Backend API (`src/api/`)**:
+**ब्याकएन्ड API (`src/api/`)**:
 
-- FastAPI-आधारित REST API
+- FastAPI आधारिक REST API
 - Foundry Agents एकीकरण
-- ज्ञान पुन:प्राप्तिका लागि Search index व्यवस्थापन
-- फाइल अपलोड र प्रक्रिया गर्ने क्षमताहरू
+- ज्ञान पुनःप्राप्तिका लागि खोज सूची व्यवस्थापन
+- फाइल अपलोड र प्रक्रिया गर्ने क्षमता
 
-**Frontend (`src/frontend/`)**:
+**फ्रन्टएन्ड (`src/frontend/`)**:
 
 - आधुनिक React/TypeScript SPA
-- तीव्र विकास र अनुकूलन गरिएका बिल्डहरूको लागि Vite
+- छिटो विकास र अनुकूलित बिल्डका लागि Vite
 - एजेन्ट अन्तरक्रियाका लागि च्याट इन्टरफेस
 
-**Knowledge Base (`src/files/`)**:
+**ज्ञान आधार (`src/files/`)**:
 
-- नमूना ग्राहक र उत्पादन डेटा
-- फाइल-आधारित ज्ञान पुन:प्राप्ति प्रदर्शन गर्दछ
+- नमुना ग्राहक र उत्पादन डाटा
+- फाइल-आधारित ज्ञान पुनःप्राप्ति प्रदर्शन गर्छ
 - JSON र Markdown ढाँचाका उदाहरणहरू
 
 
-### 3.4 DevOps & Automation
+### 3.4 देवओप्स र अटोमेसन
 
-**Scripts (`scripts/`)**:
+**स्क्रिप्टहरू (`scripts/`)**:
 
 - क्रस-प्लेटफर्म PowerShell र Bash स्क्रिप्टहरू
-- वातावरण मान्यकरण र सेटअप
+- वातावरण मान्यता र सेटअप
 - पोस्ट-डिप्लोयमेन्ट कन्फिगरेसन
 - मोडेल कोटा व्यवस्थापन
 
-**Azure Developer CLI Integration**:
+**Azure Developer CLI एकीकरण**:
 
-- `azure.yaml` विन्यास `azd` वर्कफ्लोहरूको लागि
-- स्वचालित प्रोविजनिङ र डिप्लोयमेन्ट
-- वातावरण भेरिएबल व्यवस्थापन
+- `azure.yaml` कन्फिगरेसन `azd` वर्कफलोका लागि
+- स्वचालित प्रावधान र परिनियोजन
+- वातावरण चर व्यवस्थापन
 
 ### 3.5 परीक्षण र गुणस्तर आश्वासन
 
-**Evaluation Framework (`evals/`)**:
+**मूल्याङ्कन फ्रेमवर्क (`evals/`)**:
 
 - एजेन्ट प्रदर्शन मूल्याङ्कन
-- क्वेरी-उत्तर गुणस्तर परीक्षण
+- क्वेरी-प्रतिक्रिया गुणस्तर परीक्षण
 - स्वचालित मूल्याङ्कन पाइपलाइन
 
-**AI Safety (`airedteaming/`)**:
+**AI सुरक्षा (`airedteaming/`)**:
 
-- AI सुरक्षा लागि रेड टोली परीक्षण
+- AI सुरक्षाका लागि रेड टीम परीक्षण
 - सुरक्षा कमजोरी स्क्यानिङ
-- जिम्मेवार AI अभ्यासहरू
+- जिम्मेवार AI अभ्यास
 
 ---
 
 ## 4. बधाई छ 🏆
 
-तपाईंले सफलतापूर्वक GitHub Copilot Chat लाई MCP सर्भरहरूसँग प्रयोग गरेर रिपोजिटरी अन्वेषण गर्नुभयो।
+तपाईंले सफलतापूर्वक GitHub Copilot Chat MCP सर्भरहरूसँग प्रयोग गरेर रिपोजिटोरी अन्वेषण गर्नुभयो।
 
-- [X] GitHub Copilot लाई Azure का लागि सक्रिय गरियो
-- [X] एप्लिकेसन वास्तुकला बुझियो
-- [X] AZD टेम्पलेट संरचना अन्वेषण गरियो
+- [X] Azure का लागि GitHub Copilot सक्रिय गरियो
+- [X] एप्लिकेसन आर्किटेक्चर बुझियो
+- [X] AZD टेम्प्लेट संरचना अन्वेषण गरियो
 
-यसले तपाईंलाई यस टेम्पलेटका लागि _infrastructure as code_ एसेटहरूको अनुभूति दिन्छ। अब, हामी AZD को कन्फिगरेसन फाइल हेर्नेछौं।
+यसले तपाईंलाई यस टेम्प्लेटका _infrastructure as code_ स्रोतहरूको धारणा दिन्छ। अर्कोमा, हामी AZD को कन्फिगरेसन फाइल हेरौं।
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-अस्वीकरण:
-यो दस्तावेज AI अनुवाद सेवा Co-op Translator (https://github.com/Azure/co-op-translator) प्रयोग गरेर अनुवाद गरिएको हो। हामी शुद्धताका लागि प्रयत्न गर्छौं, तथापि कृपया ध्यान दिनुहोस् कि स्वचालित अनुवादमा त्रुटि वा अशुद्धता हुनसक्छ। मूल दस्तावेजलाई यसको मूल भाषामा नै अधिकारिक स्रोत मान्नुपर्छ। महत्त्वपूर्ण जानकारीका लागि पेशेवर मानव अनुवाद सिफारिश गरिन्छ। यस अनुवादको प्रयोगबाट हुने कुनै पनि गलतफहमी वा भ्रामक व्याख्याका लागि हामी जिम्मेवार छैनौं।
+**अस्वीकरण**:  
+यस दस्तावेजलाई AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरी अनुवाद गरिएको छ। हामी शुद्धताको लागि प्रयास गर्छौं, तर कृपया बुझ्नुहोस् कि स्वचालित अनुवादमा त्रुटि वा असत्यता हुन सक्छ। मूल दस्तावेज आफ्नो मूल भाषामा आधिकारिक स्रोत मानिनु पर्छ। महत्वपूर्ण जानकारीको लागि पेशेवर मानव अनुवाद सिफारिश गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलतफहमी वा गलत व्याख्याका लागि हामी जिम्मेवार हुनेछैनौं।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

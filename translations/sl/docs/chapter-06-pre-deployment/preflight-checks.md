@@ -1,73 +1,73 @@
-# Pre-Flight preverjanja za AZD razmestitve
+# Pre-flight preverjanja za AZD namestitve
 
-**Navigacija po poglavjih:**
-- **📚 Domača stran tečaja**: [AZD za začetnike](../../README.md)
-- **📖 Trenutno poglavje**: Poglavje 6 - Validacija in načrtovanje pred razmestitvijo
+**Navigacija poglavij:**
+- **📚 Domov tečaja**: [AZD za začetnike](../../README.md)
+- **📖 Trenutno poglavje**: Poglavje 6 - Preverjanje in načrtovanje pred nameščanjem
 - **⬅️ Prejšnje**: [Izbira SKU](sku-selection.md)
-- **➡️ Naslednje poglavje**: [Poglavje 7: Odpravljanje težav](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 Povezano**: [Poglavje 4: Vodnik za razmestitev](../chapter-04-infrastructure/deployment-guide.md)
+- **➡️ Naslednje poglavje**: [Poglavje 7: Odpravljanje napak](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 Povezano**: [Poglavje 4: Vodnik za nameščanje](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Uvod
 
-Ta obsežen vodič zagotavlja skripte in postopke za preverjanje pred razmestitvijo, da zagotovite uspešne razmestitve z Azure Developer CLI, še preden se začnejo. Naučite se uvesti avtomatizirane preglede za avtentikacijo, razpoložljivost virov, kvote, skladnost z varnostnimi zahtevami in zahteve glede zmogljivosti, da preprečite napake pri razmestitvi in optimizirate stopnjo uspešnosti razmestitev.
+Ta obsežen vodič zagotavlja skripte in postopke za preverjanje pred nameščanjem, da se zagotovi uspešna namestitev z Azure Developer CLI, še preden se začne. Naučite se izvajati avtomatizirane preglede za avtentikacijo, razpoložljivost virov, kvote, skladnost z varnostnimi zahtevami in zahteve glede zmogljivosti, da preprečite neuspehe pri nameščanju in optimizirate stopnjo uspešnih namestitev.
 
 ## Cilji učenja
 
 Z dokončanjem tega vodiča boste:
-- Obvladali tehnike in skripte za avtomatizirano preverjanje pred razmestitvijo
+- Obvladali avtomatizirane tehnike preverjanja pred nameščanjem in skripte
 - Razumeli celovite strategije preverjanja za avtentikacijo, dovoljenja in kvote
-- Uvedli postopke preverjanja razpoložljivosti virov in kapacitet
+- Uvedli postopke za preverjanje razpoložljivosti in zmogljivosti virov
 - Konfigurirali varnostne in skladnostne preglede glede na organizacijske politike
-- Načrtovali delovne procese za oceno stroškov in preverjanje proračuna
-- Ustvarili prilagojeno avtomatizacijo pre-flight pregledov za CI/CD cevovode
+- Oblikovali delovne tokove za oceno stroškov in preverjanje proračuna
+- Ustvarili lastno avtomatizacijo pre-flight preverjanj za CI/CD cevovode
 
 ## Rezultati učenja
 
 Po zaključku boste sposobni:
-- Ustvariti in izvesti obsežne skripte za pre-flight validacijo
-- Oblikovati avtomatizirane delovne tokove preverjanja za različne scenarije razmestitve
-- Uvesti postopke in politike validacije, specifične za okolje
-- Konfigurirati proaktivno spremljanje in obveščanje glede pripravljenosti za razmestitev
-- Odpravljati težave pred razmestitvijo in izvajati korektivne ukrepe
-- Integrirati pre-flight preglede v DevOps cevovode in avtomatizacijske delovne tokove
+- Ustvariti in izvajati obsežne skripte za pre-flight preverjanje
+- Načrtovati avtomatizirane delovne tokove preverjanja za različne scenarije nameščanja
+- Uvesti postopke in politike preverjanja, specifične za okolje
+- Konfigurirati proaktivno spremljanje in opozarjanje za pripravljenost na nameščanje
+- Odpravljati težave pred nameščanjem in sprejeti korektivne ukrepe
+- Integrirati pre-flight preverjanja v DevOps cevovode in avtomatizacijske tokove
 
-## Vsebina
+## Kazalo vsebine
 
-- [Pregled](../../../../docs/chapter-06-pre-deployment)
-- [Avtomatizirana pre-flight skripta](../../../../docs/chapter-06-pre-deployment)
-- [Ročni kontrolni seznam](../../../../docs/chapter-06-pre-deployment)
-- [Validacija okolja](../../../../docs/chapter-06-pre-deployment)
-- [Validacija virov](../../../../docs/chapter-06-pre-deployment)
-- [Varnostni in skladnostni pregledi](../../../../docs/chapter-06-pre-deployment)
-- [Načrtovanje zmogljivosti in kapacitet](../../../../docs/chapter-06-pre-deployment)
-- [Odpravljanje pogostih težav](../../../../docs/chapter-06-pre-deployment)
+- [Pregled](#pregled)
+- [Avtomatiziran pre-flight skript](#avtomatiziran-pre-flight-skript)
+- [Ročni kontrolni seznam za preverjanje](#codeblock1)
+- [Preverjanje okolja](#✅-varnostno-kopiranje-in-obnovitev)
+- [Preverjanje virov](#preverjanje-produkcijskega-okolja)
+- [Preverjanja varnosti in skladnosti](#security--compliance-checks)
+- [Načrtovanje zmogljivosti in kapacitet](#performance--capacity-planning)
+- [Odpravljanje pogostih težav](#troubleshooting-common-issues)
 
 ---
 
 ## Pregled
 
-Pre-flight pregledi so bistvene validacije, izvedene pred razmestitvijo, da se zagotovi:
+Pre-flight preverjanja so ključna preverjanja, izvedena pred nameščanjem, da se zagotovi:
 
-- **Razpoložljivost virov** in kvote v ciljnjih regijah
+- **Razpoložljivost virov** in kvote v ciljnih regijah
 - **Avtentikacija in dovoljenja** so pravilno konfigurirana
 - **Veljavnost predlog** in pravilnost parametrov
-- **Omrežna povezanost** in odvisnosti
-- **Varnostna skladnost** z organizacijskimi politikami
+- **Omrežna povezljivost** in odvisnosti
+- **Skladnost z varnostnimi politikami** organizacije
 - **Ocena stroškov** v okviru proračuna
 
-### Kdaj izvesti pre-flight preglede
+### Kdaj izvajati pre-flight preverjanja
 
-- **Pred prvo razmestitvijo** v novo okolje
+- **Pred prvo namestitvijo** v novo okolje
 - **Po pomembnih spremembah predlog**
-- **Pred produkcijskimi razmestitvami**
+- **Pred produkcijskimi namestitvami**
 - **Ko spreminjate Azure regije**
 - **Kot del CI/CD cevovodov**
 
 ---
 
-## Avtomatizirana pre-flight skripta
+## Avtomatiziran pre-flight skript
 
-### PowerShell Pre-flight Checker
+### Preverjevalnik pre-flight za PowerShell
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -257,7 +257,7 @@ function Test-QuotasAndLimits {
             }
         }
         
-        # Preveri omejitve App Service
+        # Preveri omejitve storitve App Service
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
             if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
@@ -271,7 +271,7 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # Preveri omejitve shranjevalnega računa
+        # Preveri omejitve shranjevalnih računov
         $storageAccounts = az storage account list --output json | ConvertFrom-Json
         $accountCount = ($storageAccounts | Measure-Object).Count
         if ($accountCount -lt 200) {
@@ -292,7 +292,7 @@ function Test-QuotasAndLimits {
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # Preizkusi končne točke Azure
+    # Preizkusi Azure končne točke
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -330,12 +330,12 @@ function Test-TemplateValidation {
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # Razčleni azure.yaml
+        # Analiziraj azure.yaml
         try {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # Validiraj storitve
+            # Preveri storitve
             if ($azureYaml.services) {
                 $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
@@ -354,13 +354,13 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # Preveri prisotnost datotek infrastrukture
+    # Preveri prisotnost infrastrukturnih datotek
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # Validiraj main.bicep, če obstaja
+            # Preveri main.bicep, če obstaja
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 NOVO: Preizkus predogleda infrastrukture (varen suhi zagon)
+    # 🧪 NOVO: Preizkus predogleda infrastrukture (varen poskusni zagon)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -470,7 +470,7 @@ function Test-CostEstimation {
 function Test-SecurityCompliance {
     Write-Host "`n${Blue}=== Security & Compliance Check ===${Reset}"
     
-    # Preveri običajne varnostne prakse
+    # Preveri pogoste varnostne prakse
     try {
         # Preveri, ali je Key Vault konfiguriran
         if (Select-String -Path "infra/*.bicep" -Pattern "Microsoft.KeyVault" -Quiet) {
@@ -516,7 +516,7 @@ function Invoke-PreflightCheck {
     $allPassed = $true
     $results = @{}
     
-    # Zaženi vse preglede
+    # Zaženi vsa preverjanja
     $results["Prerequisites"] = Test-Prerequisites
     $results["Authentication"] = Test-Authentication
     $results["Permissions"] = Test-Permissions
@@ -557,15 +557,15 @@ function Invoke-PreflightCheck {
     }
 }
 
-# Zaženi predhodni pregled
+# Zaženi predzagonski pregled
 Invoke-PreflightCheck
 ```
 
-### Bash Pre-flight Checker
+### Preverjevalnik pre-flight za Bash
 
 ```bash
 #!/bin/bash
-# Bash različica predhodnih preverjanj za sisteme Unix/Linux
+# Bash različica predzagonskih preverjanj za sisteme Unix/Linux
 
 set -euo pipefail
 
@@ -683,7 +683,7 @@ check_template_validation() {
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # Preveri veljavnost main.bicep, če obstaja
+            # Validiraj main.bicep, če obstaja
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -729,7 +729,7 @@ check_regional_availability() {
 }
 
 main() {
-    # Analiziraj argumente ukazne vrstice
+    # Razčleni argumente ukazne vrstice
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -796,71 +796,71 @@ main "$@"
 
 ---
 
-## Ročni kontrolni seznam
+## Ročni kontrolni seznam za preverjanje
 
-### Kontrolni seznam pred razmestitvijo
+### Kontrolni seznam pred nameščanjem
 
-Natisnite ta kontrolni seznam in preverite vsak element pred razmestitvijo:
+Natisnite ta kontrolni seznam in preverite vsak element pred nameščanjem:
 
 #### ✅ Nastavitev okolja
 - [ ] AZD CLI nameščen in posodobljen na najnovejšo različico
 - [ ] Azure CLI nameščen in prijavljen
 - [ ] Izbrana pravilna naročnina Azure
-- [ ] Ime okolja je enolično in sledi pravilom poimenovanja
+- [ ] Ime okolja je edinstveno in sledi pravilom poimenovanja
 - [ ] Ciljna skupina virov je določena ali jo je mogoče ustvariti
 
 #### ✅ Avtentikacija in dovoljenja
 - [ ] Uspešno prijavljen z `azd auth login`
-- [ ] Uporabnik ima vlogo Contributor na ciljni naročnini/skupini virov
+- [ ] Uporabnik ima vlogo Contributor v ciljni naročnini/skupini virov
 - [ ] Service principal konfiguriran za CI/CD (če je primerno)
 - [ ] Brez poteklih certifikatov ali poverilnic
 
-#### ✅ Validacija predlog
+#### ✅ Preverjanje predlog
 - [ ] `azure.yaml` obstaja in je veljaven YAML
 - [ ] Vse storitve, definirane v azure.yaml, imajo ustrezno izvorno kodo
 - [ ] Bicep predloge v imeniku `infra/` so prisotne
 - [ ] `main.bicep` se prevede brez napak (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Predogled infrastrukture se uspešno zažene (`azd provision --preview`)
+- [ ] 🧪 Predogled infrastrukture teče uspešno (`azd provision --preview`)
 - [ ] Vsi zahtevani parametri imajo privzete vrednosti ali bodo zagotovljeni
 - [ ] V predlogah ni trdo kodiranih skrivnosti
 
 #### ✅ Načrtovanje virov
-- [ ] Izbrana in preverjena ciljna Azure regija
-- [ ] Zahtevane Azure storitve so na voljo v ciljni regiji
-- [ ] Dovolj kvot za načrtovane vire
-- [ ] Preverjene konflikte imen virov
-- [ ] Odnosi odvisnosti med viri so razumljeni
+- [ ] Izbrana in preverjena ciljna regija Azure
+- [ ] Zahtevane storitve Azure so na voljo v ciljni regiji
+- [ ] Na voljo so zadostne kvote za načrtovane vire
+- [ ] Preverjene morebitne konflikte imen virov
+- [ ] Razumevanje odvisnosti med viri
 
 #### ✅ Omrežje in varnost
-- [ ] Omrežna povezljivost z Azure končnimi točkami preverjena
-- [ ] Nastavitve požarnega zidu/proxy-ja konfigurirane, če je potrebno
+- [ ] Preverjena omrežna povezljivost do Azure končnih točk
+- [ ] Nastavitve požarnega zidu/proxyja konfigurirane po potrebi
 - [ ] Key Vault konfiguriran za upravljanje skrivnosti
-- [ ] Uporabljene upravljane identitete, kjer je mogoče
-- [ ] Omogočeno striktno HTTPS za spletne aplikacije
+- [ ] Kjer je mogoče, uporabljene upravljane identitete
+- [ ] Omogočeno prisilno uporabo HTTPS za spletne aplikacije
 
 #### ✅ Upravljanje stroškov
 - [ ] Ocene stroškov izračunane z Azure Pricing Calculator
-- [ ] Opozorila proračuna konfigurirana, če je potrebno
-- [ ] Izbrane ustrezne SKU za tip okolja
-- [ ] Rezervirana kapaciteta upoštevana za produkcijska delovna obremenitev
+- [ ] Opozorila proračuna konfigurirana po potrebi
+- [ ] Izbrani ustrezni SKU-ji za tip okolja
+- [ ] Rezervirana kapaciteta upoštevana za produkcijske obremenitve
 
-#### ✅ Spremljanje in opazljivost
+#### ✅ Nadzor in opazovanje
 - [ ] Application Insights konfiguriran v predlogah
-- [ ] Delovno območje Log Analytics načrtovano
-- [ ] Pravila opozoril definirana za kritične meritve
+- [ ] Načrtovan Log Analytics delovni prostor
+- [ ] Definirane pravila opozoril za kritične meritve
 - [ ] V aplikacijah implementirane končne točke za preverjanje zdravja
 
 #### ✅ Varnostno kopiranje in obnovitev
-- [ ] Strategija varnostnega kopiranja določena za podatkovne vire
-- [ ] Cilji časa obnove (RTO) dokumentirani
-- [ ] Cilji točke obnove (RPO) dokumentirani
-- [ ] Na voljo načrt obnovitve po nesreči za produkcijo
+- [ ] Opredeljena strategija varnostnega kopiranja za podatkovne vire
+- [ ] Dokumentirani cilji časa obnove (RTO)
+- [ ] Dokumentirani cilji točke obnove (RPO)
+- [ ] Na voljo načrt obnovitve po katastrofi za produkcijo
 
 ---
 
-## Validacija okolja
+## Preverjanje okolja
 
-### Validacija razvojnega okolja
+### Preverjanje razvojnega okolja
 
 ```bash
 #!/bin/bash
@@ -876,14 +876,14 @@ validate_dev_environment() {
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # Preveri konfiguracije za samodejni izklop
+    # Preveri konfiguracije samodejnega izklopa
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # Preveri konfiguracije baze podatkov za razvojno okolje
+    # Preveri konfiguracije razvojne baze podatkov
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -892,7 +892,7 @@ validate_dev_environment() {
 }
 ```
 
-### Validacija produkcijskega okolja
+### Preverjanje produkcijskega okolja
 
 ```bash
 #!/bin/bash
@@ -901,28 +901,28 @@ validate_dev_environment() {
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # Preveri konfiguracije visoke razpoložljivosti
+    # Preverjanje konfiguracij za visoko razpoložljivost
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # Preveri nastavitve varnostnega kopiranja
+    # Preverjanje konfiguracij za varnostno kopiranje
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # Preveri nastavitve spremljanja
+    # Preverjanje nastavitve spremljanja
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # Preveri varnostne nastavitve
+    # Preverjanje varnostnih konfiguracij
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -933,7 +933,7 @@ validate_prod_environment() {
 
 ---
 
-## Validacija virov
+## Preverjanje virov
 
 ### Skripta za preverjanje kvot
 
@@ -990,7 +990,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # Pridobi račune za shranjevanje v naročnini
+    # Pridobi shranjevalne račune v naročnini
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -998,7 +998,7 @@ def check_storage_limits(location: str) -> bool:
         return False
     
     account_count = len(accounts)
-    max_accounts = 250  # Privzeta omejitev Azure
+    max_accounts = 250  # Privzeta omejitev za Azure
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1011,7 +1011,7 @@ def check_network_limits(location: str) -> bool:
     """Check network-related limits"""
     print(f"\n=== Network Limits Check ({location}) ===")
     
-    # Preveri navidezna omrežja
+    # Preveri virtualna omrežja
     vnets = run_command(['az', 'network', 'vnet', 'list'])
     if vnets is not None:
         vnet_count = len(vnets)
@@ -1058,13 +1058,13 @@ if __name__ == "__main__":
 
 ---
 
-## Varnostni in skladnostni pregledi
+## Preverjanja varnosti in skladnosti
 
 ### Skripta za varnostno preverjanje
 
 ```bash
 #!/bin/bash
-# Preverjanje varnosti in skladnosti pri uvajanju AZD
+# Preverjanje varnosti in skladnosti za nameščanja AZD
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
@@ -1079,7 +1079,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Preveri uporabo upravljene identitete
+    # Preveri uporabo upravljane identitete
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Preveri prisilno uporabo HTTPS
+    # Preveri obvezno uporabo HTTPS
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1111,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Preveri mrežne varnostne skupine
+    # Preveri skupine omrežne varnosti
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1177,7 +1177,7 @@ main "$@"
 
 ---
 
-## Integracija z CI/CD
+## Integracija s CI/CD
 
 ### Integracija z GitHub Actions
 
@@ -1292,56 +1292,56 @@ steps:
 
 ## Povzetek najboljših praks
 
-### ✅ Najboljše prakse pre-flight pregledov
+### ✅ Najboljše prakse za pre-flight preverjanja
 
 1. **Avtomatizirajte, kjer je mogoče**
-   - Integrirajte preglede v CI/CD cevovode
-   - Uporabljajte skripte za ponovljive preverjave
+   - Integrirajte preverjanja v CI/CD cevovode
+   - Uporabljajte skripte za ponovljiva preverjanja
    - Shranjujte rezultate za revizijske sledi
 
-2. **Validacija, specifična za okolje**
-   - Različni pregledi za dev/staging/prod
-   - Ustrezne varnostne zahteve za posamezno okolje
+2. **Preverjanja, specifična za okolje**
+   - Različna preverjanja za razvojno/staging/produkcijsko okolje
+   - Ustrezne varnostne zahteve za vsako okolje
    - Optimizacija stroškov za neprodukcijska okolja
 
 3. **Celovito pokritje**
    - Avtentikacija in dovoljenja
-   - Kvote virov in razpoložljivost
-   - Validacija predlog in sintakse
+   - Kvote in razpoložljivost virov
+   - Preverjanje predlog in sintakse
    - Varnostne in skladnostne zahteve
 
 4. **Jasno poročanje**
    - Barvno kodirani indikatorji stanja
-   - Podrobna sporočila o napakah z ukrepi za odpravo
+   - Podrobna sporočila o napakah z navodili za odpravo
    - Povzetna poročila za hitro oceno
 
-5. **Prekini hitro ob kritičnih napakah**
-   - Ustavi razmestitev, če kritični pregledi ne uspejo
-   - Navedite jasna navodila za rešitev
-   - Omogočite enostaven ponovni zagon pregledov
+5. **Hitro zaznavanje napak (Fail Fast)**
+   - Ustavite nameščanje, če kritična preverjanja ne uspejo
+   - Navedite jasna navodila za odpravo
+   - Omogočite enostavno ponovno izvajanje preverjanj
 
-### Pogoste pasti pri pre-flight pregledih
+### Pogoste pasti pri pre-flight preverjanjih
 
-1. **Preskakovanje preverjanj** zaradi "hitrih" razmestitev
-2. **Nezadostno preverjanje dovoljenj** pred razmestitvijo
-3. **Prezreti omejitve kvot** do trenutka, ko razmestitev ne uspe
+1. **Preskakovanje preverjanja** za "hitra" nameščanja
+2. **Nezadostno preverjanje dovoljenj** pred nameščanjem
+3. **Ignoriranje omejitev kvot** dokler nameščanje ne spodleti
 4. **Nepreverjanje predlog** v CI/CD cevovodih
-5. **Manjkajoča varnostna preverjanja** za produkcijska okolja
-6. **Neustrezno ocenjevanje stroškov**, kar vodi do nepričakovanih stroškov v proračunu
+5. **Manjkajoče varnostno preverjanje** za produkcijska okolja
+6. **Neustrezna ocena stroškov**, ki vodi do presenečenj v proračunu
 
 ---
 
-**Nasvet**: Zaženite pre-flight preglede kot ločeno opravilo v vašem CI/CD cevovodu pred dejanskim opravilo razmestitve. To vam omogoča zgodnje odkrivanje težav in hitrejše povratne informacije razvijalcem.
+**Nasvet**: Zaženite pre-flight preverjanja kot ločen opravek v vašem CI/CD cevovodu pred dejanskim opravilom nameščanja. To vam omogoča zgodnje odkrivanje težav in hitrejšo povratno informacijo razvijalcem.
 
 ---
 
 **Navigacija**
 - **Prejšnja lekcija**: [Izbira SKU](sku-selection.md)
-- **Naslednja lekcija**: [Hitri povzetek](../../resources/cheat-sheet.md)
+- **Naslednja lekcija**: [Hiter pregled](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Izjava o omejitvi odgovornosti:
-Ta dokument je bil preveden z uporabo storitve za samodejni prevod z umetno inteligenco Co-op Translator (https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da lahko samodejni prevodi vsebujejo napake ali netočnosti. Izvirni dokument v originalnem jeziku velja za avtoritativni vir. Za kritične informacije priporočamo strokovni prevod, opravljen s strani človeškega prevajalca. Ne prevzemamo odgovornosti za morebitne nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+**Omejitev odgovornosti**:
+Ta dokument je bil preveden z uporabo AI prevajalske storitve [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da lahko avtomatizirani prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku naj velja za avtoritativni vir. Za kritične informacije priporočamo strokovni človeški prevod. Ne odgovarjamo za morebitne nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

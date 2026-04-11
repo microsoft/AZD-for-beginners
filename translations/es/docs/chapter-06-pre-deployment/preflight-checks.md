@@ -1,73 +1,73 @@
-# Comprobaciones previas al despliegue para implementaciones con AZD
+# Comprobaciones previas al despliegue para implementaciones de AZD
 
 **Navegación del capítulo:**
-- **📚 Inicio del curso**: [AZD Para Principiantes](../../README.md)
+- **📚 Inicio del curso**: [AZD para principiantes](../../README.md)
 - **📖 Capítulo actual**: Capítulo 6 - Validación y planificación previas al despliegue
-- **⬅️ Anterior**: [SKU Selection](sku-selection.md)
-- **➡️ Capítulo siguiente**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 Relacionado**: [Chapter 4: Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
+- **⬅️ Anterior**: [Selección de SKU](sku-selection.md)
+- **➡️ Siguiente capítulo**: [Capítulo 7: Resolución de problemas](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 Relacionado**: [Capítulo 4: Guía de despliegue](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Introducción
 
-Esta guía completa proporciona scripts y procedimientos de validación previos al despliegue para garantizar implementaciones exitosas con Azure Developer CLI antes de que comiencen. Aprenda a implementar comprobaciones automatizadas para autenticación, disponibilidad de recursos, cuotas, cumplimiento de seguridad y requisitos de rendimiento para prevenir fallos de despliegue y optimizar las tasas de éxito de implementación.
+Esta guía integral proporciona scripts y procedimientos de validación previos al despliegue para garantizar implementaciones exitosas con Azure Developer CLI antes de que comiencen. Aprenda a implementar comprobaciones automatizadas para autenticación, disponibilidad de recursos, cuotas, cumplimiento de seguridad y requisitos de rendimiento para prevenir fallos de despliegue y optimizar las tasas de éxito.
 
 ## Objetivos de aprendizaje
 
-Al completar esta guía, podrás:
-- Dominar técnicas y scripts automatizados de validación previa al despliegue
-- Entender estrategias de comprobación completas para autenticación, permisos y cuotas
-- Implementar procedimientos de validación de disponibilidad y capacidad de recursos
-- Configurar comprobaciones de seguridad y cumplimiento para políticas organizacionales
-- Diseñar flujos de trabajo de estimación de costos y validación de presupuesto
-- Crear automatización personalizada de comprobaciones previas para canalizaciones CI/CD
+Al completar esta guía, usted:
+- Dominará técnicas y scripts automatizados de validación previa al despliegue
+- Comprenderá estrategias de comprobación completas para autenticación, permisos y cuotas
+- Implementará procedimientos de validación de disponibilidad y capacidad de recursos
+- Configurará comprobaciones de seguridad y cumplimiento para políticas organizacionales
+- Diseñará flujos de trabajo de estimación de costos y validación de presupuestos
+- Creará automatizaciones personalizadas de comprobaciones previas al despliegue para canalizaciones CI/CD
 
 ## Resultados de aprendizaje
 
-Al finalizar, podrás:
+Al finalizar, podrá:
 - Crear y ejecutar scripts completos de validación previa al vuelo
-- Diseñar flujos de trabajo de comprobación automatizados para distintos escenarios de despliegue
+- Diseñar flujos de trabajo de comprobación automatizados para diferentes escenarios de despliegue
 - Implementar procedimientos y políticas de validación específicas por entorno
 - Configurar monitoreo proactivo y alertas para la preparación del despliegue
-- Solucionar problemas previos al despliegue e implementar acciones correctivas
-- Integrar comprobaciones previas en canalizaciones y flujos de automatización DevOps
+- Resolver problemas previos al despliegue e implementar acciones correctivas
+- Integrar las comprobaciones previas al despliegue en canalizaciones DevOps y flujos de automatización
 
-## Tabla de contenidos
+## Tabla de contenido
 
-- [Overview](../../../../docs/chapter-06-pre-deployment)
-- [Automated Pre-flight Script](../../../../docs/chapter-06-pre-deployment)
-- [Manual Validation Checklist](../../../../docs/chapter-06-pre-deployment)
-- [Environment Validation](../../../../docs/chapter-06-pre-deployment)
-- [Resource Validation](../../../../docs/chapter-06-pre-deployment)
-- [Security & Compliance Checks](../../../../docs/chapter-06-pre-deployment)
-- [Performance & Capacity Planning](../../../../docs/chapter-06-pre-deployment)
-- [Troubleshooting Common Issues](../../../../docs/chapter-06-pre-deployment)
+- [Resumen](#resumen)
+- [Script automatizado previo al despliegue](#script-automatizado-previo-al-despliegue)
+- [Lista de verificación manual](#codeblock1)
+- [Validación del entorno](#✅-respaldo-y-recuperación)
+- [Validación de recursos](#validación-del-entorno-de-producción)
+- [Controles de seguridad y cumplimiento](#security--compliance-checks)
+- [Planificación de rendimiento y capacidad](#performance--capacity-planning)
+- [Solución de problemas comunes](#troubleshooting-common-issues)
 
 ---
 
-## Overview
+## Resumen
 
-Las comprobaciones previas al despliegue son validaciones esenciales realizadas antes de desplegar para asegurar:
+Las comprobaciones previas al despliegue son validaciones esenciales realizadas antes del despliegue para asegurar:
 
-- **Disponibilidad de recursos** y cuotas en las regiones de destino
-- **Autenticación y permisos** configurados correctamente
+- **Disponibilidad de recursos** y cuotas en las regiones objetivo
+- **Autenticación y permisos** están correctamente configurados
 - **Validez de plantillas** y corrección de parámetros
 - **Conectividad de red** y dependencias
 - **Cumplimiento de seguridad** con las políticas organizacionales
 - **Estimación de costos** dentro de los límites del presupuesto
 
-### Cuándo ejecutar las comprobaciones previas
+### Cuándo ejecutar las comprobaciones previas al despliegue
 
-- **Antes del primer despliegue** a un nuevo entorno
-- **Tras cambios significativos en plantillas**
+- **Antes del primer despliegue** a un entorno nuevo
+- **Después de cambios significativos en las plantillas**
 - **Antes de despliegues a producción**
-- **Cuando se cambian regiones de Azure**
+- **Al cambiar regiones de Azure**
 - **Como parte de canalizaciones CI/CD**
 
 ---
 
-## Script automatizado de pre-despliegue
+## Script automatizado previo al despliegue
 
-### PowerShell Pre-flight Checker
+### Comprobador previo al despliegue de PowerShell
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -177,7 +177,7 @@ function Test-Authentication {
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # Validar acceso a la suscripción
+        # Validar el acceso a la suscripción
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -210,14 +210,14 @@ function Test-Permissions {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # Probar la creación de grupos de recursos (si se especifica)
+        # Probar la creación del grupo de recursos (si se especifica)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # Probar la capacidad de crear un grupo de recursos
+                # Probar la capacidad para crear un grupo de recursos
                 try {
                     az group create --name "preflight-test-rg" --location $Location --output none
                     az group delete --name "preflight-test-rg" --yes --output none
@@ -271,7 +271,7 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # Comprobar los límites de cuentas de almacenamiento
+        # Comprobar los límites de la cuenta de almacenamiento
         $storageAccounts = az storage account list --output json | ConvertFrom-Json
         $accountCount = ($storageAccounts | Measure-Object).Count
         if ($accountCount -lt 200) {
@@ -292,7 +292,7 @@ function Test-QuotasAndLimits {
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # Probar los puntos finales de Azure
+    # Probar los endpoints de Azure
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -326,7 +326,7 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # Comprobar si azure.yaml existe
+    # Comprobar si existe azure.yaml
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
@@ -354,7 +354,7 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # Comprobar archivos de infraestructura
+    # Comprobar si hay archivos de infraestructura
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
@@ -384,7 +384,7 @@ function Test-TemplateValidation {
     # 🧪 NUEVO: Probar la vista previa de la infraestructura (simulación segura)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -446,7 +446,7 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Estimación básica de costos (se necesitaría la API de precios de Azure para estimaciones precisas)
+    # Estimación básica de costes (se necesitaría la API de precios de Azure para estimaciones precisas)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
@@ -488,7 +488,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # Comprobar que HTTPS esté forzado
+        # Comprobar si se fuerza HTTPS
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -557,11 +557,11 @@ function Invoke-PreflightCheck {
     }
 }
 
-# Ejecutar la verificación previa al vuelo
+# Ejecutar la comprobación previa
 Invoke-PreflightCheck
 ```
 
-### Bash Pre-flight Checker
+### Comprobador previo al despliegue de Bash
 
 ```bash
 #!/bin/bash
@@ -714,7 +714,7 @@ check_regional_availability() {
         return 1
     fi
     
-    # Comprobar la disponibilidad del servicio
+    # Comprobar disponibilidad del servicio
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
     for service in "${services[@]}"; do
@@ -729,7 +729,7 @@ check_regional_availability() {
 }
 
 main() {
-    # Analizar argumentos de la línea de comandos
+    # Analizar los argumentos de la línea de comandos
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -790,20 +790,20 @@ main() {
     fi
 }
 
-# Ejecutar función principal
+# Ejecutar la función principal
 main "$@"
 ```
 
 ---
 
-## Lista de verificación de validación manual
+## Lista de verificación manual
 
 ### Lista de verificación previa al despliegue
 
 Imprima esta lista de verificación y verifique cada elemento antes del despliegue:
 
 #### ✅ Configuración del entorno
-- [ ] AZD CLI instalado y actualizado a la última versión
+- [ ] AZD CLI instalado y actualizado a la versión más reciente
 - [ ] Azure CLI instalado y autenticado
 - [ ] Suscripción de Azure correcta seleccionada
 - [ ] El nombre del entorno es único y sigue las convenciones de nomenclatura
@@ -811,50 +811,50 @@ Imprima esta lista de verificación y verifique cada elemento antes del desplieg
 
 #### ✅ Autenticación y permisos
 - [ ] Autenticado con éxito con `azd auth login`
-- [ ] El usuario tiene el rol Contributor en la suscripción/grupo de recursos objetivo
+- [ ] El usuario tiene el rol de Contributor en la suscripción/grupo de recursos objetivo
 - [ ] Principal de servicio configurado para CI/CD (si aplica)
-- [ ] No hay certificados o credenciales caducadas
+- [ ] No hay certificados ni credenciales vencidos
 
 #### ✅ Validación de plantillas
 - [ ] `azure.yaml` existe y es YAML válido
-- [ ] Todos los servicios definidos en azure.yaml tienen el código fuente correspondiente
-- [ ] Las plantillas Bicep en el directorio `infra/` están presentes
+- [ ] Todos los servicios definidos en `azure.yaml` tienen código fuente correspondiente
+- [ ] Plantillas Bicep en el directorio `infra/` están presentes
 - [ ] `main.bicep` compila sin errores (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 La vista previa de infraestructura se ejecuta correctamente (`azd provision --preview`)
-- [ ] Todos los parámetros requeridos tienen valores predeterminados o se proporcionarán
-- [ ] No hay secretos embebidos en las plantillas
+- [ ] 🧪 La vista previa de la infraestructura se ejecuta correctamente (`azd provision --preview`)
+- [ ] Todos los parámetros requeridos tienen valores predeterminados o serán proporcionados
+- [ ] No hay secretos codificados en las plantillas
 
 #### ✅ Planificación de recursos
 - [ ] Región de Azure objetivo seleccionada y validada
 - [ ] Servicios de Azure requeridos disponibles en la región objetivo
 - [ ] Cuotas suficientes disponibles para los recursos planificados
-- [ ] Conflictos de nombres de recursos comprobados
+- [ ] Conflictos de nombres de recursos verificados
 - [ ] Dependencias entre recursos entendidas
 
 #### ✅ Red y seguridad
 - [ ] Conectividad de red a los puntos finales de Azure verificada
-- [ ] Configuración de firewall/proxy realizada si es necesario
+- [ ] Configuración de firewall/proxy configurada si es necesario
 - [ ] Key Vault configurado para la gestión de secretos
 - [ ] Identidades administradas usadas cuando sea posible
-- [ ] Se habilita el uso obligatorio de HTTPS en aplicaciones web
+- [ ] Aplicación de HTTPS habilitada para aplicaciones web
 
 #### ✅ Gestión de costos
 - [ ] Estimaciones de costos calculadas usando Azure Pricing Calculator
-- [ ] Alertas de presupuesto configuradas si se requiere
-- [ ] SKUs apropiadas seleccionadas según el tipo de entorno
+- [ ] Alertas de presupuesto configuradas si es necesario
+- [ ] SKUs apropiados seleccionados para el tipo de entorno
 - [ ] Capacidad reservada considerada para cargas de trabajo de producción
 
 #### ✅ Monitoreo y observabilidad
 - [ ] Application Insights configurado en las plantillas
-- [ ] Espacio de trabajo de Log Analytics planificado
+- [ ] Espacio de trabajo Log Analytics planificado
 - [ ] Reglas de alerta definidas para métricas críticas
-- [ ] Endpoints de comprobación de estado implementados en las aplicaciones
+- [ ] Puntos finales de verificación de estado implementados en las aplicaciones
 
-#### ✅ Copia de seguridad y recuperación
-- [ ] Estrategia de copias de seguridad definida para recursos de datos
+#### ✅ Respaldo y recuperación
+- [ ] Estrategia de respaldo definida para recursos de datos
 - [ ] Objetivos de tiempo de recuperación (RTO) documentados
 - [ ] Objetivos de punto de recuperación (RPO) documentados
-- [ ] Plan de recuperación ante desastres establecido para producción
+- [ ] Plan de recuperación ante desastres implementado para producción
 
 ---
 
@@ -869,7 +869,7 @@ Imprima esta lista de verificación y verifique cada elemento antes del desplieg
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # Comprobar configuraciones favorables para el desarrollo
+    # Comprobar configuraciones amigables para el desarrollo
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
@@ -990,7 +990,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # Obtener las cuentas de almacenamiento en la suscripción
+    # Obtener cuentas de almacenamiento en la suscripción
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -1079,7 +1079,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Comprobar el uso de identidades administradas
+    # Comprobar el uso de identidad administrada
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1103,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Comprobar las restricciones de acceso público
+    # Comprobar restricciones de acceso público
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1111,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Comprobar los grupos de seguridad de red
+    # Comprobar grupos de seguridad de red
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1292,56 +1292,56 @@ steps:
 
 ## Resumen de mejores prácticas
 
-### ✅ Mejores prácticas para comprobaciones previas
+### ✅ Mejores prácticas para comprobaciones previas al despliegue
 
-1. **Automatiza cuando sea posible**
-   - Integra las comprobaciones en las canalizaciones CI/CD
-   - Usa scripts para validaciones repetibles
-   - Almacena resultados para auditorías
+1. **Automatizar cuando sea posible**
+   - Integrar las comprobaciones en las canalizaciones CI/CD
+   - Usar scripts para validaciones repetibles
+   - Almacenar resultados para auditorías
 
-2. **Validación específica del entorno**
-   - Comprobaciones diferentes para desarrollo/preproducción/producción
+2. **Validación específica por entorno**
+   - Comprobaciones diferentes para dev/staging/prod
    - Requisitos de seguridad apropiados por entorno
    - Optimización de costos para entornos no productivos
 
 3. **Cobertura integral**
    - Autenticación y permisos
-   - Cuotas de recursos y disponibilidad
-   - Validación de plantillas y sintaxis
+   - Cuotas y disponibilidad de recursos
+   - Validación y sintaxis de plantillas
    - Requisitos de seguridad y cumplimiento
 
 4. **Informes claros**
-   - Indicadores de estado por colores
+   - Indicadores de estado con códigos de color
    - Mensajes de error detallados con pasos de remediación
    - Informes resumidos para una evaluación rápida
 
-5. **Fallar rápido**
-   - Detener el despliegue si fallan comprobaciones críticas
+5. **Detenerse rápidamente ante fallos críticos**
+   - Detener el despliegue si las comprobaciones críticas fallan
    - Proporcionar orientación clara para la resolución
-   - Permitir la re-ejecución sencilla de las comprobaciones
+   - Permitir la reejecución sencilla de las comprobaciones
 
-### Errores comunes en las comprobaciones previas
+### Errores comunes en las comprobaciones previas al despliegue
 
-1. **Omitir la validación** para despliegues "rápidos"
-2. **Comprobación de permisos insuficiente** antes del despliegue
-3. **Ignorar los límites de cuota** hasta que falle el despliegue
+1. **Omitir la validación** por despliegues "rápidos"
+2. **Comprobaciones de permisos insuficientes** antes del despliegue
+3. **Ignorar límites de cuota** hasta que falle el despliegue
 4. **No validar plantillas** en las canalizaciones CI/CD
 5. **Falta de validación de seguridad** para entornos de producción
-6. **Estimación de costos inadecuada** que conduce a sorpresas en el presupuesto
+6. **Estimación de costos insuficiente** que conduce a sorpresas en el presupuesto
 
 ---
 
-**Consejo profesional**: Ejecuta las comprobaciones previas como un trabajo separado en tu canalización CI/CD antes del trabajo de despliegue real. Esto te permite detectar problemas temprano y proporciona retroalimentación más rápida a los desarrolladores.
+**Consejo profesional**: Ejecute las comprobaciones previas al despliegue como un trabajo separado en su canalización CI/CD antes del trabajo de despliegue real. Esto le permite detectar problemas temprano y proporciona retroalimentación más rápida a los desarrolladores.
 
 ---
 
 **Navegación**
-- **Lección anterior**: [SKU Selection](sku-selection.md)
-- **Próxima lección**: [Cheat Sheet](../../resources/cheat-sheet.md)
+- **Lección anterior**: [Selección de SKU](sku-selection.md)
+- **Siguiente lección**: [Hoja de referencia](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Aviso legal:
-Este documento ha sido traducido mediante el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por una persona. No nos hacemos responsables de malentendidos o interpretaciones erróneas que puedan surgir del uso de esta traducción.
+**Descargo de responsabilidad**:
+Este documento ha sido traducido usando el servicio de traducción automática por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la exactitud, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por un humano. No nos hacemos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

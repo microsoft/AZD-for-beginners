@@ -1,71 +1,71 @@
-# Kontrole przedwdrożeniowe dla wdrożeń AZD
+# Kontrole Przedstartowe dla Wdrożeń AZD
 
 **Nawigacja rozdziału:**
-- **📚 Strona kursu**: [AZD dla początkujących](../../README.md)
-- **📖 Bieżący rozdział**: Rozdział 6 - Walidacja i planowanie przed wdrożeniem
+- **📚 Strona główna kursu**: [AZD dla początkujących](../../README.md)
+- **📖 Obecny rozdział**: Rozdział 6 - Walidacja i planowanie przed wdrożeniem
 - **⬅️ Poprzedni**: [Wybór SKU](sku-selection.md)
 - **➡️ Następny rozdział**: [Rozdział 7: Rozwiązywanie problemów](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 Powiązane**: [Rozdział 4: Przewodnik wdrożeniowy](../chapter-04-infrastructure/deployment-guide.md)
+- **🔧 Powiązane**: [Rozdział 4: Przewodnik po wdrożeniu](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Wprowadzenie
 
-Ten obszerny przewodnik zawiera skrypty i procedury walidacji przedwdrożeniowej, aby zapewnić pomyślne wdrożenia Azure Developer CLI przed ich rozpoczęciem. Naucz się wdrażać zautomatyzowane kontrole uwierzytelniania, dostępności zasobów, limitów, zgodności z politykami bezpieczeństwa oraz wymagań dotyczących wydajności, aby zapobiegać awariom wdrożeń i optymalizować wskaźniki sukcesu wdrożeń.
+Ten kompleksowy przewodnik zawiera skrypty oraz procedury walidacji przed wdrożeniem, które zapewniają pomyślne wdrożenia za pomocą Azure Developer CLI zanim się rozpoczną. Naucz się wdrażać automatyczne kontrole uwierzytelniania, dostępności zasobów, limitów, zgodności z politykami bezpieczeństwa oraz wymagań wydajnościowych, aby zapobiegać niepowodzeniom wdrożeń i optymalizować współczynnik sukcesu.
 
 ## Cele nauki
 
-Po ukończeniu tego przewodnika będziesz:
-- Opanowywać zautomatyzowane techniki i skrypty walidacji przedwdrożeniowej
-- Rozumieć kompleksowe strategie kontroli uwierzytelniania, uprawnień i limitów
-- Wdrażać procedury walidacji dostępności zasobów i pojemności
-- Konfigurować kontrole bezpieczeństwa i zgodności z politykami organizacji
-- Projektować przepływy pracy do szacowania kosztów i walidacji budżetu
-- Tworzyć niestandardową automatyzację kontroli przedwdrożeniowych dla pipeline’ów CI/CD
+Po ukończeniu tego przewodnika będziesz mógł:
+- Opanować techniki i skrypty automatycznej walidacji przed wdrożeniem
+- Zrozumieć kompleksowe strategie kontrolne uwierzytelniania, uprawnień i limitów
+- Wdrożyć procedury walidacji dostępności i pojemności zasobów
+- Skonfigurować kontrole bezpieczeństwa i zgodności dla polityk organizacji
+- Zaprojektować procesy szacowania kosztów i walidacji budżetu
+- Tworzyć własną automatyzację kontroli przedstartowych dla pipeline’ów CI/CD
 
 ## Efekty nauczania
 
-Po ukończeniu będziesz w stanie:
-- Tworzyć i uruchamiać kompleksowe skrypty walidacji przedwdrożeniowej
-- Projektować zautomatyzowane przepływy kontroli dla różnych scenariuszy wdrożeń
-- Wdrażać procedury walidacji i polityki specyficzne dla środowiska
+Po ukończeniu będziesz potrafił:
+- Tworzyć i wykonywać kompleksowe skrypty walidacji przedstartowej
+- Projektować automatyczne procesy kontroli dla różnych scenariuszy wdrożeń
+- Wdrażać procedury i polityki walidacji specyficzne dla środowisk
 - Konfigurować proaktywne monitorowanie i alertowanie gotowości do wdrożenia
-- Rozwiązywać problemy przedwdrożeniowe i wdrażać działania naprawcze
-- Integrować kontrole przedwdrożeniowe z pipeline’ami DevOps i automatyzacją
+- Rozwiązywać problemy przed wdrożeniem i wdrażać działania korygujące
+- Integruj kontrole przedstartowe z pipeline’ami DevOps i automatyzacją
 
 ## Spis treści
 
-- [Przegląd](../../../../docs/chapter-06-pre-deployment)
-- [Zautomatyzowany skrypt przedwdrożeniowy](../../../../docs/chapter-06-pre-deployment)
-- [Ręczna lista kontrolna walidacji](../../../../docs/chapter-06-pre-deployment)
-- [Walidacja środowiska](../../../../docs/chapter-06-pre-deployment)
-- [Walidacja zasobów](../../../../docs/chapter-06-pre-deployment)
-- [Kontrole bezpieczeństwa i zgodności](../../../../docs/chapter-06-pre-deployment)
-- [Planowanie wydajności i pojemności](../../../../docs/chapter-06-pre-deployment)
-- [Rozwiązywanie typowych problemów](../../../../docs/chapter-06-pre-deployment)
+- [Przegląd](#przegląd)
+- [Automatyczny skrypt przedstartowy](#automatyczny-skrypt-przedstartowy)
+- [Ręczna lista kontrolna walidacji](#codeblock1)
+- [Walidacja środowiska](#✅-kopia-zapasowa-i-odzyskiwanie)
+- [Walidacja zasobów](#walidacja-środowiska-produkcyjnego)
+- [Kontrole bezpieczeństwa i zgodności](#security--compliance-checks)
+- [Planowanie wydajności i pojemności](#performance--capacity-planning)
+- [Rozwiązywanie typowych problemów](#troubleshooting-common-issues)
 
 ---
 
 ## Przegląd
 
-Kontrole przedwdrożeniowe to niezbędne walidacje wykonywane przed wdrożeniem w celu zapewnienia:
+Kontrole przedstartowe to niezbędne walidacje wykonywane przed wdrożeniem, aby zapewnić:
 
-- **Dostępności zasobów** i limitów w docelowych regionach
-- **Uwierzytelniania i uprawnień** poprawnie skonfigurowanych
-- **Poprawności szablonów** i poprawności parametrów
-- **Łączności sieciowej** i zależności
-- **Zgodności z politykami bezpieczeństwa** organizacji
-- **Szacowania kosztów** mieszczącego się w ograniczeniach budżetowych
+- **Dostępność zasobów** oraz limity w docelowych regionach
+- **Prawidłową konfigurację uwierzytelniania i uprawnień**
+- **Poprawność szablonów** i parametrów
+- **Łączność sieciową** i zależności
+- **Zgodność z politykami bezpieczeństwa**
+- **Szacowanie kosztów** w ramach budżetu
 
-### Kiedy uruchamiać kontrole przedwdrożeniowe
+### Kiedy wykonać kontrole przedstartowe
 
-- **Przed pierwszym wdrożeniem** do nowego środowiska
-- **Po znaczących zmianach w szablonach**
-- **Przed wdrożeniami do produkcji**
-- **Podczas zmiany regionów Azure**
-- **Jako część pipeline’ów CI/CD**
+- **Przed pierwszym wdrożeniem** w nowym środowisku
+- **Po istotnych zmianach w szablonach**
+- **Przed wdrożeniami produkcyjnymi**
+- **Przy zmianie regionów Azure**
+- **W ramach pipeline’ów CI/CD**
 
 ---
 
-## Zautomatyzowany skrypt przedwdrożeniowy
+## Automatyczny skrypt przedstartowy
 
 ### PowerShell Pre-flight Checker
 
@@ -163,7 +163,7 @@ function Test-Authentication {
     Write-Host "`n${Blue}=== Authentication Check ===${Reset}"
     
     try {
-        # Sprawdź uwierzytelnienie AZD
+        # Sprawdź uwierzytelnianie AZD
         $azdAuth = azd auth login --check-status --output json 2>$null | ConvertFrom-Json
         if ($azdAuth.status -eq "Logged-in") {
             Write-Status "AZD authentication" "Success" "User: $($azdAuth.principalName)"
@@ -173,11 +173,11 @@ function Test-Authentication {
             return $false
         }
         
-        # Sprawdź uwierzytelnienie Azure CLI
+        # Sprawdź uwierzytelnianie Azure CLI
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # Sprawdź dostęp do subskrypcji
+        # Zwaliduj dostęp do subskrypcji
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -194,7 +194,7 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # Pobierz przypisania ról bieżącego użytkownika
+        # Pobierz przypisania ról aktualnego użytkownika
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
@@ -217,7 +217,7 @@ function Test-Permissions {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # Przetestuj możliwość utworzenia grupy zasobów
+                # Przetestuj możliwość tworzenia grupy zasobów
                 try {
                     az group create --name "preflight-test-rg" --location $Location --output none
                     az group delete --name "preflight-test-rg" --yes --output none
@@ -245,7 +245,7 @@ function Test-QuotasAndLimits {
         # Sprawdź limity obliczeniowe
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # Sprawdź określone limity
+        # Sprawdź konkretne limity
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
         if ($coreQuota) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
@@ -257,7 +257,7 @@ function Test-QuotasAndLimits {
             }
         }
         
-        # Sprawdź limity App Service
+        # Sprawdź limity usługi App Service
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
             if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
@@ -271,7 +271,7 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # Sprawdź limity konta Storage
+        # Sprawdź limity konta magazynu
         $storageAccounts = az storage account list --output json | ConvertFrom-Json
         $accountCount = ($storageAccounts | Measure-Object).Count
         if ($accountCount -lt 200) {
@@ -285,7 +285,7 @@ function Test-QuotasAndLimits {
     }
     catch {
         Write-Status "Quota check failed" "Warning" $_.Exception.Message
-        return $true # Nieblokujące
+        return $true # Niewstrzymujący
     }
 }
 
@@ -326,7 +326,7 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # Sprawdź, czy azure.yaml istnieje
+    # Sprawdź, czy istnieje plik azure.yaml
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
@@ -335,7 +335,7 @@ function Test-TemplateValidation {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # Sprawdź usługi
+            # Zwaliduj usługi
             if ($azureYaml.services) {
                 $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
@@ -354,7 +354,7 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # Sprawdź, czy istnieją pliki infrastruktury
+    # Sprawdź obecność plików infrastruktury
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 NOWE: Przetestuj podgląd infrastruktury (bezpieczna symulacja)
+    # 🧪 NOWOŚĆ: Test podglądu infrastruktury (bezpieczne suche uruchomienie)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -446,7 +446,7 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Podstawowa estymacja kosztów (dla dokładnych szacunków potrzebne byłoby Azure Pricing API)
+    # Podstawowa estymacja kosztów (dla dokładnych wycen potrzebne API cen Azure)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
@@ -516,7 +516,7 @@ function Invoke-PreflightCheck {
     $allPassed = $true
     $results = @{}
     
-    # Wykonaj wszystkie sprawdzenia
+    # Uruchom wszystkie testy
     $results["Prerequisites"] = Test-Prerequisites
     $results["Authentication"] = Test-Authentication
     $results["Permissions"] = Test-Permissions
@@ -557,7 +557,7 @@ function Invoke-PreflightCheck {
     }
 }
 
-# Uruchom sprawdzenie wstępne
+# Uruchom kontrolę wstępną
 Invoke-PreflightCheck
 ```
 
@@ -565,7 +565,7 @@ Invoke-PreflightCheck
 
 ```bash
 #!/bin/bash
-# Wersja w Bash kontroli wstępnych dla systemów Unix/Linux
+# Wersja bashowych testów wstępnych dla systemów Unix/Linux
 
 set -euo pipefail
 
@@ -637,7 +637,7 @@ check_prerequisites() {
 check_authentication() {
     echo -e "\n${BLUE}=== Authentication Check ===${NC}"
     
-    # Sprawdź uwierzytelnienie AZD
+    # Sprawdź uwierzytelnianie AZD
     if azd auth login --check-status >/dev/null 2>&1; then
         local principal_name=$(azd auth login --check-status --output json 2>/dev/null | jq -r '.principalName // "Unknown"')
         print_status "AZD authentication" "success" "User: $principal_name"
@@ -646,7 +646,7 @@ check_authentication() {
         return 1
     fi
     
-    # Sprawdź uwierzytelnienie Azure CLI
+    # Sprawdź uwierzytelnianie Azure CLI
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -683,7 +683,7 @@ check_template_validation() {
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # Zwaliduj main.bicep, jeśli istnieje
+            # Zwaliduj main.bicep jeśli istnieje
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +706,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # Sprawdź, czy lokalizacja jest prawidłowa
+    # Sprawdź czy lokalizacja jest prawidłowa
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -729,7 +729,7 @@ check_regional_availability() {
 }
 
 main() {
-    # Parsuj argumenty wiersza poleceń
+    # Parsuj argumenty z linii poleceń
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -755,7 +755,7 @@ main() {
         esac
     done
     
-    # Zwaliduj wymagane parametry
+    # Waliduj wymagane parametry
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -768,7 +768,7 @@ main() {
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
     
-    # Uruchom kontrole
+    # Uruchom testy
     local all_passed=true
     
     check_prerequisites || all_passed=false
@@ -790,7 +790,7 @@ main() {
     fi
 }
 
-# Uruchom funkcję main
+# Uruchom funkcję główną
 main "$@"
 ```
 
@@ -800,61 +800,61 @@ main "$@"
 
 ### Lista kontrolna przed wdrożeniem
 
-Wydrukuj tę listę kontrolną i zweryfikuj każdy punkt przed wdrożeniem:
+Wydrukuj tę listę kontrolną i sprawdź każdy punkt przed wdrożeniem:
 
 #### ✅ Konfiguracja środowiska
 - [ ] AZD CLI zainstalowany i zaktualizowany do najnowszej wersji
-- [ ] Azure CLI zainstalowany i uwierzytelniony
-- [ ] Wybrana poprawna subskrypcja Azure
-- [ ] Nazwa środowiska jest unikalna i zgodna z konwencjami nazewnictwa
+- [ ] Azure CLI zainstalowany i zalogowany
+- [ ] Wybrana prawidłowa subskrypcja Azure
+- [ ] Nazwa środowiska unikalna i zgodna z konwencjami nazewnictwa
 - [ ] Docelowa grupa zasobów zidentyfikowana lub możliwa do utworzenia
 
 #### ✅ Uwierzytelnianie i uprawnienia
-- [ ] Pomyślnie uwierzytelniono przy użyciu `azd auth login`
-- [ ] Użytkownik ma rolę Contributor w docelowej subskrypcji/grupie zasobów
-- [ ] Service principal skonfigurowany dla CI/CD (jeśli dotyczy)
-- [ ] Brak wygasłych certyfikatów lub poświadczeń
+- [ ] Pomyślnie uwierzytelniony za pomocą `azd auth login`
+- [ ] Użytkownik ma rolę Contributor na docelowej subskrypcji/grupie zasobów
+- [ ] Skonfigurowany principal serwisowy dla CI/CD (jeśli dotyczy)
+- [ ] Brak przeterminowanych certyfikatów lub poświadczeń
 
 #### ✅ Walidacja szablonów
-- [ ] `azure.yaml` istnieje i jest poprawnym YAML
+- [ ] `azure.yaml` istnieje i jest poprawnym plikiem YAML
 - [ ] Wszystkie usługi zdefiniowane w azure.yaml mają odpowiadający kod źródłowy
 - [ ] Szablony Bicep w katalogu `infra/` są obecne
 - [ ] `main.bicep` kompiluje się bez błędów (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Podgląd infrastruktury uruchamia się pomyślnie (`azd provision --preview`)
+- [ ] 🧪 Podgląd infrastruktury działa poprawnie (`azd provision --preview`)
 - [ ] Wszystkie wymagane parametry mają wartości domyślne lub zostaną dostarczone
-- [ ] Brak zaszyfrowanych (hardcoded) sekretów w szablonach
+- [ ] Brak zaszyfrowanych sekretów w szablonach
 
 #### ✅ Planowanie zasobów
-- [ ] Wybrano i zweryfikowano docelowy region Azure
+- [ ] Wybrany i zweryfikowany docelowy region Azure
 - [ ] Wymagane usługi Azure dostępne w docelowym regionie
-- [ ] Wystarczające limity (kwoty) dostępne dla planowanych zasobów
-- [ ] Sprawdzone konflikty nazw zasobów
-- [ ] Zrozumiane zależności między zasobami
+- [ ] Dostępne wystarczające limity na zaplanowane zasoby
+- [ ] Sprawdzenie konfliktów nazewnictwa zasobów
+- [ ] Znane zależności między zasobami
 
 #### ✅ Sieć i bezpieczeństwo
-- [ ] Zweryfikowano łączność sieciową z punktami końcowymi Azure
-- [ ] Ustawienia zapory/proxy skonfigurowane w razie potrzeby
-- [ ] Key Vault skonfigurowany do zarządzania sekretami
-- [ ] Wykorzystywane tożsamości zarządzane tam, gdzie to możliwe
-- [ ] Wymuszanie HTTPS włączone dla aplikacji webowych
+- [ ] Zweryfikowana łączność sieciowa do punktów końcowych Azure
+- [ ] Skonfigurowane ustawienia zapory/proxy jeśli potrzebne
+- [ ] Skonfigurowany Key Vault do zarządzania sekretami
+- [ ] Używane zarządzane tożsamości tam, gdzie możliwe
+- [ ] Wymuszanie HTTPS dla aplikacji webowych włączone
 
 #### ✅ Zarządzanie kosztami
-- [ ] Oszacowania kosztów obliczone przy użyciu Azure Pricing Calculator
-- [ ] Alerty budżetowe skonfigurowane w razie potrzeby
-- [ ] Odpowiednie SKU wybrane dla typu środowiska
-- [ ] Rozważona rezerwa pojemności dla obciążeń produkcyjnych
+- [ ] Oszacowanie kosztów wykonane przy użyciu Azure Pricing Calculator
+- [ ] Skonfigurowane alerty budżetowe jeśli wymagane
+- [ ] Wybrane odpowiednie SKU dla typu środowiska
+- [ ] Uwzględniona rezerwacja pojemności dla produkcji
 
 #### ✅ Monitorowanie i obserwowalność
-- [ ] Application Insights skonfigurowany w szablonach
-- [ ] Workspace Log Analytics zaplanowany
-- [ ] Reguły alertów zdefiniowane dla krytycznych metryk
-- [ ] Punkty końcowe health check zaimplementowane w aplikacjach
+- [ ] Skonfigurowany Application Insights w szablonach
+- [ ] Planowane środowisko Log Analytics
+- [ ] Zdefiniowane reguły alertów dla krytycznych metryk
+- [ ] Zaimplementowane endpointy health check w aplikacjach
 
-#### ✅ Kopie zapasowe i odzyskiwanie
-- [ ] Zdefiniowana strategia tworzenia kopii zapasowych dla zasobów danych
-- [ ] Udokumentowane cele czasu odzyskiwania (RTO)
-- [ ] Udokumentowane cele punktu odzyskiwania (RPO)
-- [ ] Plan odzyskiwania po awarii wdrożony dla produkcji
+#### ✅ Kopia zapasowa i odzyskiwanie
+- [ ] Zdefiniowana strategia backupu dla zasobów danych
+- [ ] Udokumentowane cele czasowe odzyskiwania (RTO)
+- [ ] Udokumentowane cele punktowe odzyskiwania (RPO)
+- [ ] Plan odzyskiwania katastrof dla produkcji
 
 ---
 
@@ -864,12 +864,12 @@ Wydrukuj tę listę kontrolną i zweryfikuj każdy punkt przed wdrożeniem:
 
 ```bash
 #!/bin/bash
-# Walidacje specyficzne dla środowiska deweloperskiego
+# Specyficzne walidacje środowiska deweloperskiego
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # Sprawdź konfiguracje przyjazne dla środowiska deweloperskiego
+    # Sprawdź konfiguracje przyjazne dla deweloperów
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
@@ -883,7 +883,7 @@ validate_dev_environment() {
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # Zwaliduj konfiguracje baz danych dla środowiska deweloperskiego
+    # Waliduj konfiguracje bazy danych dla środowiska deweloperskiego
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -896,33 +896,33 @@ validate_dev_environment() {
 
 ```bash
 #!/bin/bash
-# Weryfikacje specyficzne dla środowiska produkcyjnego
+# Walidacje specyficzne dla środowiska produkcyjnego
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # Sprawdzenie konfiguracji wysokiej dostępności
+    # Sprawdź konfiguracje wysokiej dostępności
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # Sprawdzenie konfiguracji kopii zapasowych
+    # Sprawdź konfiguracje kopii zapasowych
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # Walidacja konfiguracji monitoringu
+    # Waliduj ustawienia monitoringu
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # Sprawdzenie konfiguracji bezpieczeństwa
+    # Sprawdź konfiguracje bezpieczeństwa
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -935,7 +935,7 @@ validate_prod_environment() {
 
 ## Walidacja zasobów
 
-### Skrypt walidacji limitów (Quota Validation Script)
+### Skrypt walidacji limitów
 
 ```python
 #!/usr/bin/env python3
@@ -990,7 +990,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # Pobierz konta magazynu w subskrypcji
+    # Pobierz konta magazynowe w subskrypcji
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -1038,7 +1038,7 @@ def main():
     
     all_passed = True
     
-    # Uruchom sprawdzenia
+    # Uruchom kontrole
     all_passed &= check_compute_quotas(location)
     all_passed &= check_storage_limits(location)
     all_passed &= check_network_limits(location)
@@ -1064,14 +1064,14 @@ if __name__ == "__main__":
 
 ```bash
 #!/bin/bash
-# Weryfikacja bezpieczeństwa i zgodności wdrożeń AZD
+# Walidacja bezpieczeństwa i zgodności dla wdrożeń AZD
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
     
     local issues_found=0
     
-    # Sprawdzenie użycia Key Vault
+    # Sprawdź użycie Key Vault
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1079,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Sprawdzenie użycia tożsamości zarządzanej
+    # Sprawdź użycie zarządzanej tożsamości
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Sprawdzenie wymuszania HTTPS
+    # Sprawdź wymuszenie HTTPS
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1095,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Sprawdzenie minimalnej wersji TLS
+    # Sprawdź minimalną wersję TLS
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1103,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Sprawdzenie ograniczeń dostępu publicznego
+    # Sprawdź ograniczenia dostępu publicznego
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1111,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Sprawdzenie grup zabezpieczeń sieciowych
+    # Sprawdź grupy zabezpieczeń sieci
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1124,21 +1124,21 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # Sprawdzenie szyfrowania danych
+    # Sprawdź szyfrowanie danych
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # Sprawdzenie rejestrowania audytu
+    # Sprawdź rejestrowanie audytu
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # Sprawdzenie polityk kopii zapasowych i przechowywania
+    # Sprawdź polityki kopii zapasowych i przechowywania
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1292,46 +1292,46 @@ steps:
 
 ## Podsumowanie najlepszych praktyk
 
-### ✅ Najlepsze praktyki kontroli przedwdrożeniowych
+### ✅ Najlepsze praktyki kontroli przedstartowej
 
 1. **Automatyzuj tam, gdzie to możliwe**
-   - Integruj kontrole z pipeline’ami CI/CD
+   - Integruj kontrole w pipeline’y CI/CD
    - Używaj skryptów do powtarzalnych walidacji
-   - Przechowuj wyniki dla ścieżek audytu
+   - Przechowuj wyniki do celów audytu
 
 2. **Walidacja specyficzna dla środowiska**
-   - Różne kontrole dla dev/staging/prod
+   - Różne kontrole dla środowisk dev/staging/produkcyjnego
    - Odpowiednie wymagania bezpieczeństwa dla każdego środowiska
    - Optymalizacja kosztów dla środowisk nieprodukcyjnych
 
 3. **Kompleksowe pokrycie**
    - Uwierzytelnianie i uprawnienia
-   - Limity zasobów i dostępność
+   - Limity i dostępność zasobów
    - Walidacja szablonów i składni
-   - Wymagania dotyczące bezpieczeństwa i zgodności
+   - Wymagania bezpieczeństwa i zgodności
 
-4. **Czytelne raportowanie**
-   - Wskaźniki statusu oznaczone kolorami
+4. **Jasne raportowanie**
+   - Wskaźniki statusu z kolorami
    - Szczegółowe komunikaty o błędach z krokami naprawczymi
    - Raporty podsumowujące do szybkiej oceny
 
-5. **Fail Fast**
-   - Zatrzymaj wdrożenie, jeśli krytyczne kontrole zakończą się niepowodzeniem
-   - Zapewnij jasne wskazówki dotyczące rozwiązania problemu
-   - Umożliw łatwe ponowne uruchomienie kontroli
+5. **Fail Fast (szybka porażka)**
+   - Zatrzymanie wdrożenia przy krytycznych błędach
+   - Jasne wskazówki do rozwiązania problemu
+   - Łatwe ponowne uruchomienie kontroli
 
-### Typowe pułapki przedwdrożeniowe
+### Typowe pułapki przedstartowe
 
-1. **Pominięcie walidacji** dla „szybkich” wdrożeń
-2. **Niewystarczające sprawdzenie uprawnień** przed wdrożeniem
-3. **Ignorowanie limitów quota** do momentu, gdy wdrożenie się nie powiedzie
+1. **Pominięcie walidacji** przy „szybkich” wdrożeniach
+2. **Niewystarczająca kontrola uprawnień** przed wdrożeniem
+3. **Ignorowanie limitów** aż do niepowodzenia wdrożenia
 4. **Brak walidacji szablonów** w pipeline’ach CI/CD
-5. **Brak walidacji bezpieczeństwa** dla środowisk produkcyjnych
-6. **Niedokładne oszacowanie kosztów** prowadzące do niespodzianek budżetowych
+5. **Brak kontroli bezpieczeństwa** w środowiskach produkcyjnych
+6. **Niewłaściwe szacowanie kosztów** prowadzące do niespodzianek budżetowych
 
 ---
 
-**Wskazówka**: Uruchamiaj kontrole przedwdrożeniowe jako oddzielne zadanie w pipeline’ie CI/CD przed właściwym zadaniem wdrożeniowym. Pozwala to wykryć problemy wcześnie i zapewnia szybszą informację zwrotną dla deweloperów.
+**Praktyczna wskazówka**: Uruchamiaj kontrole przedstartowe jako osobne zadanie w swoim pipeline CI/CD przed właściwym zadaniem wdrożenia. Pozwoli to wcześnie wykrywać problemy i zapewni szybszą informację zwrotną dla deweloperów.
 
 ---
 
@@ -1342,6 +1342,6 @@ steps:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Zastrzeżenie:
-Niniejszy dokument został przetłumaczony przy użyciu usługi tłumaczenia AI Co-op Translator (https://github.com/Azure/co-op-translator). Choć dokładamy starań, aby tłumaczenie było jak najbardziej poprawne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w języku źródłowym należy uznać za wersję autorytatywną. W przypadku informacji istotnych zaleca się skorzystanie z profesjonalnego, ludzkiego tłumaczenia. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z użycia tego tłumaczenia.
+**Zastrzeżenie**:  
+Ten dokument został przetłumaczony za pomocą usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż staramy się zapewnić dokładność, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku źródłowym powinien być uważany za autorytatywne źródło. W przypadku informacji istotnych zaleca się skorzystanie z profesjonalnego tłumaczenia wykonywanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

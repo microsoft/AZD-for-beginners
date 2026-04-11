@@ -1,41 +1,41 @@
-# آماده‌سازی منابع Azure با AZD
+# Provisioning Azure Resources with AZD
 
 **ناوبری فصل:**
-- **📚 صفحهٔ دوره**: [AZD For Beginners](../../README.md)
-- **📖 فصل جاری**: فصل 4 - Infrastructure as Code & Deployment
+- **📚 صفحهٔ دوره**: [AZD برای مبتدیان](../../README.md)
+- **📖 فصل جاری**: فصل ۴ - زیرساخت به‌عنوان کد و استقرار
 - **⬅️ قبلی**: [راهنمای استقرار](deployment-guide.md)
-- **➡️ فصل بعد**: [فصل 5: راه‌حل‌های چندعاملهٔ هوش مصنوعی](../../examples/retail-scenario.md)
-- **🔧 مرتبط**: [فصل 6: اعتبارسنجی پیش از استقرار](../chapter-06-pre-deployment/capacity-planning.md)
+- **➡️ فصل بعد**: [فصل ۵: راه‌حل‌های هوش مصنوعی چندعامل](../../examples/retail-scenario.md)
+- **🔧 مرتبط**: [فصل ۶: اعتبارسنجی پیش از استقرار](../chapter-06-pre-deployment/capacity-planning.md)
 
-## معرفی
+## مقدمه
 
-این راهنمای جامع همه چیزهایی را که برای تهیه و مدیریت منابع Azure با استفاده از Azure Developer CLI نیاز دارید پوشش می‌دهد. بیاموزید چگونه الگوهای Infrastructure as Code (IaC) را از ایجاد سادهٔ منابع تا معماری‌های پیشرفتهٔ سازمانی با استفاده از Bicep، ARM templates، Terraform، و Pulumi پیاده‌سازی کنید.
+این راهنمای جامع همهٔ آنچه را که برای تأمین و مدیریت منابع Azure با استفاده از Azure Developer CLI نیاز دارید پوشش می‌دهد. بیاموزید چگونه الگوهای زیرساخت به‌عنوان کد (IaC) را از ایجاد منابع پایه تا معماری‌های پیشرفته و سطح سازمانی با استفاده از Bicep، ARM templates، Terraform و Pulumi پیاده‌سازی کنید.
 
 ## اهداف یادگیری
 
 با تکمیل این راهنما، شما قادر خواهید بود:
-- تسلط بر اصول Infrastructure as Code و تهیهٔ منابع Azure
-- درک ارائه‌دهندگان مختلف IaC که توسط Azure Developer CLI پشتیبانی می‌شوند
-- طراحی و پیاده‌سازی قالب‌های Bicep برای معماری‌های رایج برنامه‌ها
-- پیکربندی پارامترها، متغیرها و تنظیمات مخصوص محیط‌های مختلف
-- پیاده‌سازی الگوهای پیشرفتهٔ زیرساخت از جمله شبکه و امنیت
-- مدیریت چرخهٔ عمر منابع، به‌روزرسانی‌ها و حل وابستگی‌ها
+- اصول زیرساخت به‌عنوان کد و تأمین منابع Azure را به‌خوبی یاد بگیرید
+- ارائه‌دهندگان مختلف IaC که توسط Azure Developer CLI پشتیبانی می‌شوند را درک کنید
+- قالب‌های Bicep را برای معماری‌های رایج برنامه طراحی و پیاده‌سازی کنید
+- پارامترها، متغیرها و تنظیمات مخصوص هر محیط را پیکربندی کنید
+- الگوهای پیشرفتهٔ زیرساخت از جمله شبکه و امنیت را پیاده‌سازی کنید
+- چرخهٔ عمر منابع، به‌روزرسانی‌ها و حل وابستگی‌ها را مدیریت کنید
 
 ## نتایج یادگیری
 
-پس از اتمام، شما خواهید توانست:
-- طراحی و تهیهٔ زیرساخت Azure با استفاده از Bicep و ARM templates
-- پیکربندی معماری‌های پیچیدهٔ چندسرویسی با وابستگی‌های صحیح منابع
-- پیاده‌سازی قالب‌های پارامتردهی‌شده برای چندین محیط و پیکربندی
-- عیب‌یابی مشکلات تهیهٔ زیرساخت و رفع خطاهای استقرار
-- اعمال اصول Azure Well-Architected Framework در طراحی زیرساخت
-- مدیریت به‌روزرسانی‌های زیرساخت و پیاده‌سازی استراتژی‌های نسخه‌بندی زیرساخت
+پس از اتمام، شما قادر خواهید بود:
+- زیرساخت Azure را با استفاده از قالب‌های Bicep و ARM طراحی و تأمین کنید
+- معماری‌های پیچیدهٔ چندخدمتی را با وابستگی‌های درست منابع پیکربندی کنید
+- قالب‌های پارامتری‌شده را برای چند محیط و پیکربندی پیاده‌سازی کنید
+- مشکلات تأمین زیرساخت را عیب‌یابی کرده و خطاهای استقرار را برطرف کنید
+- اصول چارچوب Azure Well-Architected را در طراحی زیرساخت اعمال کنید
+- به‌روزرسانی‌های زیرساخت را مدیریت کرده و راهبردهای نسخه‌بندی زیرساخت را پیاده‌سازی کنید
 
-## مرور کلی تهیهٔ زیرساخت
+## مروری بر تأمین زیرساخت
 
-Azure Developer CLI از چندین ارائه‌دهنده Infrastructure as Code (IaC) پشتیبانی می‌کند:
-- **Bicep** (توصیه‌شده) - زبان حوزه‌محور Azure
-- **ARM Templates** - JSON-based Azure Resource Manager templates
+Azure Developer CLI از چندین ارائه‌دهندهٔ زیرساخت به‌عنوان کد (IaC) پشتیبانی می‌کند:
+- **Bicep** (توصیه‌شده) - زبان ویژهٔ Azure
+- **ARM Templates** - قالب‌های Azure Resource Manager بر پایهٔ JSON
 - **Terraform** - ابزار زیرساخت چندابری
 - **Pulumi** - زیرساخت به‌عنوان کد مدرن با زبان‌های برنامه‌نویسی
 
@@ -49,12 +49,12 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### خدمات رایج Azure برای برنامه‌ها
+### سرویس‌های رایج Azure برای برنامه‌ها
 - **محاسبات**: App Service, Container Apps, Functions, Virtual Machines
 - **ذخیره‌سازی**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **شبکه**: Virtual Network, Application Gateway, CDN
 - **امنیت**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
+- **هوش مصنوعی/یادگیری ماشین**: Cognitive Services, OpenAI, Machine Learning
 
 ## قالب‌های زیرساخت Bicep
 
@@ -179,7 +179,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### ساخت منابع شرطی
+#### ایجاد شرطی منابع
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -200,7 +200,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ تهیهٔ پایگاه‌داده
+## 🗃️ تهیهٔ پایگاه داده
 
 ### Cosmos DB
 ```bicep
@@ -298,7 +298,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 مدیریت امنیت و اسرار
+## 🔒 امنیت و مدیریت اسرار
 
 ### یکپارچه‌سازی Key Vault
 ```bicep
@@ -342,7 +342,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### پیکربندی هویت مدیریت‌شده
+### پیکربندی Managed Identity
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -368,7 +368,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 شبکه و ارتباطات
+## 🌍 شبکه‌بندی و اتصال
 
 ### پیکربندی شبکهٔ مجازی
 ```bicep
@@ -496,7 +496,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 مانیتورینگ و قابلیت مشاهده
+## 📊 پایش و قابلیت رؤیت
 
 ### Application Insights
 ```bicep
@@ -527,7 +527,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### معیارها و هشدارهای سفارشی
+### متریک‌ها و هشدارهای سفارشی
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -561,7 +561,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 پیکربندی‌های خاص محیط
+## 🔧 پیکربندی‌های مخصوص محیط
 
 ### فایل‌های پارامتر برای محیط‌های مختلف
 ```json
@@ -617,7 +617,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### تهیهٔ شرطی منابع
+### تأمین منابع شرطی
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,9 +649,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 الگوهای پیشرفتهٔ تهیه
+## 🚀 الگوهای پیشرفتهٔ تامین
 
-### استقرار چندمنطقه‌ای
+### استقرار در چند منطقه
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -759,38 +759,37 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ### پیش‌نمایش تغییرات زیرساخت قبل از استقرار
 
-قابلیت `azd provision --preview` به شما اجازه می‌دهد تا قبل از استقرار واقعی منابع، **شبیه‌سازی تهیهٔ زیرساخت** را انجام دهید. این قابلیت از نظر هدفی مشابه `terraform plan` یا `bicep what-if` است و یک **نمای آزمایشی (dry-run)** از تغییراتی که روی محیط Azure شما اعمال خواهد شد ارائه می‌دهد.
+قابلیت `azd provision --preview` به شما اجازه می‌دهد تا پیش از استقرار واقعی منابع، فرآیند **شبیه‌سازی تأمین زیرساخت** را انجام دهید. این ویژگی از نظر مفهوم مشابه `terraform plan` یا `bicep what-if` است و یک **نمای اجرای آزمایشی** از تغییراتی که قرار است در محیط Azure شما انجام شود ارائه می‌دهد.
 
 #### 🛠️ چه کاری انجام می‌دهد
-- **الگوهای IaC شما را تحلیل می‌کند** (Bicep یا Terraform)
-- **پیش‌نمایشی از تغییرات منابع را نمایش می‌دهد**: additions, deletions, updates
+- **قالب‌های IaC شما را تحلیل می‌کند** (Bicep یا Terraform)
+- **پیش‌نمایشی از تغییرات منابع نشان می‌دهد**: افزودن‌ها، حذف‌ها، به‌روزرسانی‌ها
 - **تغییرات را اعمال نمی‌کند** — فقط خواندنی است و اجرای آن ایمن است
 
-#### � موارد استفاده
+#### موارد استفاده
 ```bash
 # پیش‌نمایش تغییرات زیرساخت قبل از استقرار
 azd provision --preview
 
-# پیش‌نمایش با خروجی مفصل
-azd provision --preview --output json
-
-# پیش‌نمایش برای محیط خاص
-azd provision --preview --environment production
+# پیش‌نمایش برای محیط مشخص
+azd provision --preview -e production
 ```
 
 این فرمان به شما کمک می‌کند:
-- **اعتبارسنجی تغییرات زیرساخت** قبل از ثبت منابع
-- **کشف پیکربندی‌های نادرست در اوایل** چرخه توسعه
+- **اعتبارسنجی تغییرات زیرساخت** قبل از تخصیص منابع
+- **کشف پیکربندی‌های نادرست در مراحل اولیه** چرخهٔ توسعه
 - **همکاری ایمن** در محیط‌های تیمی
-- **اطمینان از استقرار با حداقل امتیازات** بدون شگفتی
+- **اطمینان از استقرار با کمترین اختیارات لازم** بدون شگفتی
 
-این ویژگی به‌ویژه زمانی مفید است که:
-- کار با محیط‌های پیچیدهٔ چندسرویسی
+این قابلیت به‌ویژه مفید است هنگامی که:
+- کار با محیط‌های پیچیدهٔ چندخدمتی
 - اعمال تغییرات در زیرساخت تولید
 - اعتبارسنجی تغییرات قالب قبل از تأیید PR
 - آموزش اعضای جدید تیم دربارهٔ الگوهای زیرساخت
 
 ### نمونهٔ خروجی پیش‌نمایش
+خروجی دقیق پیش‌نمایش بسته به ارائه‌دهنده و ساختار پروژه متفاوت است، اما نتیجه باید به‌وضوح تغییرات پیشنهادی را قبل از اعمال هر چیزی شناسایی کند.
+
 ```bash
 $ azd provision --preview
 
@@ -809,13 +808,12 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
 ```
 
-## �🔄 به‌روزرسانی‌ها و مهاجرت‌های منابع
+## �🔄 به‌روزرسانی‌ها و مهاجرت منابع
 
 ### به‌روزرسانی ایمن منابع
 ```bash
@@ -825,12 +823,12 @@ azd provision --preview
 # پس از تأیید پیش‌نمایش، تغییرات را اعمال کنید
 azd provision --confirm-with-no-prompt
 
-# برای بازگشت، از Git برای برگرداندن تغییرات زیرساخت استفاده کنید:
+# برای بازگردانی، از Git برای بازگرداندن تغییرات زیرساخت استفاده کنید:
 git revert HEAD  # آخرین کامیت زیرساخت را برگردانید
 azd provision    # وضعیت قبلی زیرساخت را اعمال کنید
 ```
 
-### مهاجرت‌های پایگاه‌داده
+### مهاجرت‌های پایگاه داده
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -872,7 +870,7 @@ var naming = {
 }
 ```
 
-### 2. استراتژی برچسب‌گذاری
+### 2. راهبرد برچسب‌گذاری
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -916,19 +914,19 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## گام‌های بعد
+## مراحل بعدی
 
-- [برنامه‌ریزی پیش از استقرار](../chapter-06-pre-deployment/capacity-planning.md) - اعتبارسنجی در دسترس‌بودن منابع
-- [مسائل رایج](../chapter-07-troubleshooting/common-issues.md) - رفع اشکال مشکلات زیرساخت
-- [راهنمای اشکال‌زدایی](../chapter-07-troubleshooting/debugging.md) - عیب‌یابی مشکلات تهیه
-- [انتخاب SKU](../chapter-06-pre-deployment/sku-selection.md) - انتخاب سطوح سرویس مناسب
+- [برنامه‌ریزی پیش از استقرار](../chapter-06-pre-deployment/capacity-planning.md) - اعتبارسنجی در دسترس بودن منابع
+- [مشکلات رایج](../chapter-07-troubleshooting/common-issues.md) - عیب‌یابی مشکلات زیرساخت
+- [راهنمای اشکال‌زدایی](../chapter-07-troubleshooting/debugging.md) - اشکال‌زدایی مشکلات پروویژن
+- [انتخاب SKU](../chapter-06-pre-deployment/sku-selection.md) - انتخاب لایه‌های مناسب سرویس
 
 ## منابع اضافی
 
 - [مستندات Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [قالب‌های Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [مرکز معماری Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [چارچوب Well-Architected برای Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [چارچوب Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
@@ -939,6 +937,6 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-سلب مسئولیت:
-این سند با استفاده از سرویس ترجمهٔ هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطا یا عدم دقت باشند. سند اصلی به زبان اصلی آن باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حیاتی، ترجمهٔ حرفه‌ای انسانی توصیه می‌شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرستی که از استفاده از این ترجمه ناشی شود، مسئولیتی نداریم.
+**Disclaimer**:
+این سند با استفاده از سرویس ترجمهٔ هوش مصنوعی [Co-op Translator](https://github.com/Azure/co-op-translator) ترجمه شده است. در حالی که ما در تلاش برای دقت هستیم، لطفاً توجه داشته باشید که ترجمه‌های خودکار ممکن است حاوی خطاها یا نادرستی‌هایی باشند. نسخهٔ اصلی سند به زبان بومی آن باید به‌عنوان منبع معتبر در نظر گرفته شود. برای اطلاعات حساس یا حیاتی، ترجمهٔ حرفه‌ای توسط انسان توصیه می‌شود. ما در قبال هرگونه سوءتفاهم یا تفسیر نادرست ناشی از استفاده از این ترجمه مسئولیتی نداریم.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

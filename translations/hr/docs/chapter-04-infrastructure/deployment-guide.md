@@ -1,60 +1,60 @@
-# Vodič za implementaciju - Ovladavanje AZD implementacijama
+# Vodič za Raspoređivanje - Ovladavanje AZD Raspoređivanjima
 
-**Navigacija kroz poglavlja:**
+**Navigacija poglavljem:**
 - **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
-- **📖 Trenutno poglavlje**: Poglavlje 4 - Infrastruktura kao kod & implementacija
+- **📖 Trenutno poglavlje**: Poglavlje 4 - Infrastruktura kao kod i raspoređivanje
 - **⬅️ Prethodno poglavlje**: [Poglavlje 3: Konfiguracija](../chapter-03-configuration/configuration.md)
-- **➡️ Sljedeće**: [Zadavanje resursa](provisioning.md)
-- **🚀 Sljedeće poglavlje**: [Poglavlje 5: AI rješenja s više agenata](../../examples/retail-scenario.md)
+- **➡️ Sljedeće**: [Provisioning Resources](provisioning.md)
+- **🚀 Sljedeće poglavlje**: [Poglavlje 5: Višestruka AI rješenja](../../examples/retail-scenario.md)
 
 ## Uvod
 
-Ovaj sveobuhvatni vodič pokriva sve što trebate znati o implementaciji aplikacija koristeći Azure Developer CLI, od osnovnih implementacija jednim naredbom do naprednih produkcijskih scenarija s prilagođenim hooksima, višestrukim okruženjima i integracijom CI/CD-a. Ovladajte kompletnim životnim ciklusom implementacije uz praktične primjere i najbolje prakse.
+Ovaj sveobuhvatni vodič pokriva sve što trebate znati o raspoređivanju aplikacija koristeći Azure Developer CLI, od osnovnih raspoređivanja jednim naredbom do naprednih produkcijskih scenarija s prilagođenim kukicama, višestrukim okruženjima i integracijom CI/CD. Ovladajte kompletnim životnim ciklusom raspoređivanja uz praktične primjere i najbolje prakse.
 
 ## Ciljevi učenja
 
 Nakon dovršetka ovog vodiča, moći ćete:
-- Ovladati svim azd naredbama i radnim tokovima vezanim uz implementaciju
-- Razumjeti cjelokupni životni ciklus implementacije od zadavanja resursa do nadzora
-- Implementirati prilagođene hooks za automatizaciju prije i poslije deploya
-- Konfigurirati višestruka okruženja s parametrima specifičnim za okoliš
-- Postaviti napredne strategije implementacije uključujući blue-green i canary implementacije
-- Integrirati azd implementacije s CI/CD cijevima i DevOps radnim tokovima
+- Ovladati svim Azure Developer CLI naredbama i tijekovima rada za raspoređivanje
+- Razumjeti kompletan životni ciklus raspoređivanja od provisioninga do nadzora
+- Implementirati prilagođene kukice za automatizaciju prije i poslije raspoređivanja
+- Konfigurirati višestruka okruženja s parametrima specifičnim za okruženje
+- Postaviti napredne strategije raspoređivanja uključujući blue-green i canary raspoređivanja
+- Integrirati azd raspoređivanja s CI/CD cjevovodima i DevOps tijekovima rada
 
 ## Ishodi učenja
 
 Po dovršetku, moći ćete:
-- Samostalno izvoditi i rješavati probleme svih azd radnih tokova implementacije
-- Dizajnirati i implementirati prilagođenu automatizaciju implementacije koristeći hooks
-- Konfigurirati produkcijske implementacije s prikladnom sigurnošću i nadzorom
-- Upravljati složenim scenarijima implementacije u više okruženja
-- Optimizirati izvedbu implementacije i implementirati strategije povratka (rollback)
-- Integrirati azd implementacije u korporativne DevOps prakse
+- Neovisno izvršavati i otklanjati poteškoće u svim azd tijekovima rada za raspoređivanje
+- Dizajnirati i implementirati prilagođenu automatizaciju raspoređivanja pomoću kukica
+- Konfigurirati produkcijska raspoređivanja s odgovarajućom sigurnošću i nadzorom
+- Upravljati složenim scenarijima raspoređivanja za višestruka okruženja
+- Optimizirati izvedbu raspoređivanja i implementirati strategije povrata
+- Integrirati azd raspoređivanja u korporativne DevOps prakse
 
-## Pregled implementacije
+## Pregled raspoređivanja
 
-Azure Developer CLI pruža nekoliko naredbi za implementaciju:
-- `azd up` - Kompletan radni tok (zadavanje + implementacija)
-- `azd provision` - Stvaranje/azuriranje Azure resursa samo
-- `azd deploy` - Implementacija samo aplikacijskog koda
+Azure Developer CLI pruža nekoliko naredbi za raspoređivanje:
+- `azd up` - Kompletan tijek rada (provision + deploy)
+- `azd provision` - Samo kreiranje/azuriranje Azure resursa
+- `azd deploy` - Samo raspoređivanje aplikacijskog koda
 - `azd package` - Izgradnja i pakiranje aplikacija
 
-## Osnovni radni tokovi implementacije
+## Osnovni tijekovi rada raspoređivanja
 
-### Kompletna implementacija (azd up)
-Najčešći radni tok za nove projekte:
+### Kompletno raspoređivanje (azd up)
+Najčešći tijek rada za nove projekte:
 ```bash
-# Postavi sve iz početka
+# Postavi sve od početka
 azd up
 
 # Postavi sa specifičnim okruženjem
 azd up --environment production
 
-# Postavi sa prilagođenim parametrima
+# Postavi s prilagođenim parametrima
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Implementacija samo infrastrukture
+### Raspoređivanje samo infrastrukture
 Kad trebate samo ažurirati Azure resurse:
 ```bash
 # Nabava/azuriranje infrastrukture
@@ -67,57 +67,57 @@ azd provision --preview
 azd provision --service database
 ```
 
-### Implementacija samo koda
-Za brza ažuriranja aplikacije:
+### Raspoređivanje samo koda
+Za brze ažuriranja aplikacije:
 ```bash
-# Postavite sve usluge
+# Postavi sve usluge
 azd deploy
 
 # Očekivani izlaz:
 # Postavljanje usluga (azd deploy)
-# - web: Postavljanje... Završeno
-# - api: Postavljanje... Završeno
-# USPJEH: Vaša implementacija završila je za 2 minute i 15 sekundi
+# - web: Postavljanje... Gotovo
+# - api: Postavljanje... Gotovo
+# USPJEH: Vaša implementacija je završila za 2 minute i 15 sekundi
 
-# Postavite određenu uslugu
+# Postavi određenu uslugu
 azd deploy --service web
 azd deploy --service api
 
-# Postavljanje s prilagođenim argumentima izgradnje
+# Postavi s prilagođenim argumentima za izgradnju
 azd deploy --service api --build-arg NODE_ENV=production
 
-# Provjerite implementaciju
+# Provjeri implementaciju
 azd show --output json | jq '.services'
 ```
 
-### ✅ Provjera implementacije
+### ✅ Provjera raspoređivanja
 
-Nakon svake implementacije, provjerite uspjeh:
+Nakon bilo kojeg raspoređivanja, provjerite uspjeh:
 
 ```bash
-# Provjerite rade li sve usluge
+# Provjerite rade li svi servisi
 azd show
 
-# Testirajte zdravstvene krajnje točke
+# Testirajte health endpointove
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
 curl -f "$WEB_URL/health" || echo "❌ Web health check failed"
 curl -f "$API_URL/health" || echo "❌ API health check failed"
 
-# Pratite pogreške (po defaultu se otvara u pregledniku)
+# Pratite greške (po defaultu se otvara u pregledniku)
 azd monitor --logs
 ```
 
 **Kriteriji uspjeha:**
 - ✅ Sve usluge prikazuju status "Running"
-- ✅ Health endpointi vraćaju HTTP 200
-- ✅ Nema zapisnika pogrešaka u zadnjih 5 minuta
+- ✅ Zdravstvene točke vraćaju HTTP 200
+- ✅ Nema logova o pogreškama u zadnjih 5 minuta
 - ✅ Aplikacija odgovara na testne zahtjeve
 
-## 🏗️ Razumijevanje procesa implementacije
+## 🏗️ Razumijevanje procesa raspoređivanja
 
-### Faza 1: Pre-Provision hooksi
+### Faza 1: Kukice prije provisioninga
 ```yaml
 # azure.yaml
 hooks:
@@ -131,13 +131,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Faza 2: Zadavanje infrastrukture
-- Čita predloške infrastrukture (Bicep/Terraform)
-- Stvara ili ažurira Azure resurse
+### Faza 2: Provisioning infrastrukture
+- Čita infrastrukturne predloške (Bicep/Terraform)
+- Kreira ili ažurira Azure resurse
 - Konfigurira mrežu i sigurnost
-- Postavlja nadzor i zapisivanje
+- Postavlja nadzor i bilježenje
 
-### Faza 3: Post-Provision hooksi
+### Faza 3: Kukice poslije provisioninga
 ```yaml
 hooks:
   postprovision:
@@ -152,10 +152,10 @@ hooks:
 
 ### Faza 4: Pakiranje aplikacije
 - Izgrađuje aplikacijski kod
-- Stvara artefakte za implementaciju
-- Pakira za ciljnu platformu (kontejnere, ZIP datoteke itd.)
+- Kreira artefakte za raspoređivanje
+- Pakuje za ciljnu platformu (kontejneri, ZIP datoteke itd.)
 
-### Faza 5: Pre-Deploy hooksi
+### Faza 5: Kukice prije raspoređivanja
 ```yaml
 hooks:
   predeploy:
@@ -168,12 +168,12 @@ hooks:
       npm run db:migrate
 ```
 
-### Faza 6: Implementacija aplikacije
-- Implementira pakirane aplikacije u Azure usluge
+### Faza 6: Raspoređivanje aplikacije
+- Raspoređuje pakirane aplikacije na Azure usluge
 - Ažurira konfiguracijske postavke
 - Pokreće/ponovno pokreće usluge
 
-### Faza 7: Post-Deploy hooksi
+### Faza 7: Kukice poslije raspoređivanja
 ```yaml
 hooks:
   postdeploy:
@@ -186,9 +186,9 @@ hooks:
       curl https://${WEB_URL}/health
 ```
 
-## 🎛️ Konfiguracija implementacije
+## 🎛️ Konfiguracija raspoređivanja
 
-### Postavke implementacije specifične za uslugu
+### Postavke raspoređivanja specifične za uslugu
 ```yaml
 # azure.yaml
 services:
@@ -218,9 +218,9 @@ services:
     buildCommand: npm install --production
 ```
 
-### Konfiguracije specifične za okruženje
+### Postavke specifične za okruženje
 ```bash
-# Okruženje za razvoj
+# Razvojno okruženje
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
@@ -231,16 +231,16 @@ azd env set NODE_ENV staging
 azd env set DEBUG false
 azd env set LOG_LEVEL info
 
-# Okruženje za proizvodnju
+# Produkcijsko okruženje
 azd env new production
 azd env set NODE_ENV production
 azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 Napredni scenariji implementacije
+## 🔧 Napredni scenariji raspoređivanja
 
-### Višestruke usluge u aplikacijama
+### Aplikacije s više usluga
 ```yaml
 # Complex application with multiple services
 services:
@@ -276,24 +276,24 @@ services:
     host: function
 ```
 
-### Blue-green implementacije
+### Blue-Green raspoređivanja
 ```bash
-# Kreiraj plavo okruženje
+# Kreirajte plavo okruženje
 azd env new production-blue
 azd up --environment production-blue
 
-# Testiraj plavo okruženje
+# Testirajte plavo okruženje
 ./scripts/test-environment.sh production-blue
 
-# Preusmjeri promet na plavo (ručna DNS/podešavanja balansiranje opterećenja)
+# Prebacite promet na plavo (ručno ažuriranje DNS/load balancera)
 ./scripts/switch-traffic.sh production-blue
 
-# Očisti zeleno okruženje
+# Očistite zeleno okruženje
 azd env select production-green
 azd down --force
 ```
 
-### Canary implementacije
+### Canary raspoređivanja
 ```yaml
 # azure.yaml - Configure traffic splitting
 services:
@@ -307,7 +307,7 @@ services:
         percentage: 10
 ```
 
-### Implementacije u fazama
+### Etapna raspoređivanja
 ```bash
 #!/bin/bash
 # deploy-staged.sh
@@ -338,9 +338,9 @@ if [[ $confirm == [yY] ]]; then
 fi
 ```
 
-## 🐳 Implementacije kontejnera
+## 🐳 Raspoređivanje kontejnera
 
-### Implementacije kontejnerskih aplikacija
+### Raspoređivanja Container aplikacija
 ```yaml
 services:
   api:
@@ -364,7 +364,7 @@ services:
       maxReplicas: 10
 ```
 
-### Optimizacija višefaznog Dockerfile-a
+### Optimizacija Dockerfile u više faza
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -392,13 +392,13 @@ CMD ["npm", "start"]
 
 ## ⚡ Optimizacija izvedbe
 
-### Implementacije specifične za uslugu
+### Raspoređivanja specifična za uslugu
 ```bash
-# Postavite specifičnu uslugu za bržu iteraciju
+# Deployajte određenu uslugu za bržu iteraciju
 azd deploy --service web
 azd deploy --service api
 
-# Postavite sve usluge
+# Deployajte sve usluge
 azd deploy
 ```
 
@@ -412,19 +412,19 @@ services:
     outputPath: dist
 ```
 
-### Efikasne implementacije koda
+### Učinkovita raspoređivanja koda
 ```bash
 # Koristite azd deploy (ne azd up) za promjene samo u kodu
-# Ovo preskače postavljanje infrastrukture i mnogo je brže
+# Ovo preskače provisioniranje infrastrukture i mnogo je brže
 azd deploy
 
-# Implementirajte određenu uslugu za najbržu iteraciju
+# Rasporedite određenu uslugu za najbržu iteraciju
 azd deploy --service api
 ```
 
-## 🔍 Nadzor implementacije
+## 🔍 Praćenje raspoređivanja
 
-### Nadzor implementacije u stvarnom vremenu
+### Praćenje u stvarnom vremenu
 ```bash
 # Nadzirite aplikaciju u stvarnom vremenu
 azd monitor --live
@@ -432,11 +432,11 @@ azd monitor --live
 # Pregledajte zapise aplikacije
 azd monitor --logs
 
-# Provjerite status implementacije
+# Provjerite status postavljanja
 azd show
 ```
 
-### Health checkovi
+### Provjere zdravlja
 ```yaml
 # azure.yaml - Configure health checks
 services:
@@ -450,14 +450,14 @@ services:
       retries: 3
 ```
 
-### Validacija nakon implementacije
+### Validacija nakon raspoređivanja
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
 
 echo "Validating deployment..."
 
-# Provjeri zdravlje aplikacije
+# Provjeri stanje aplikacije
 WEB_URL=$(azd show --output json | jq -r '.services.web.endpoint')
 API_URL=$(azd show --output json | jq -r '.services.api.endpoint')
 
@@ -483,9 +483,9 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 Sigurnosni aspekti
+## 🔐 Sigurnosne napomene
 
-### Upravljanje tajnama (secrets)
+### Upravljanje tajnama
 ```bash
 # Sigurno pohranite tajne
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
@@ -505,7 +505,7 @@ services:
         value: ${JWT_SECRET}
 ```
 
-### Mrežna sigurnost
+### Sigurnost mreže
 ```yaml
 # azure.yaml - Configure network security
 infra:
@@ -516,7 +516,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### Upravljanje identitetima i pristupom
+### Upravljanje identitetom i pristupom
 ```yaml
 services:
   api:
@@ -531,14 +531,14 @@ services:
           - external-api-key
 ```
 
-## 🚨 Strategije povratka (rollback)
+## 🚨 Strategije povrata
 
-### Brzi povratak
+### Brzi povrat
 ```bash
-# AZD nema ugrađenu funkciju poništavanja. Preporučeni pristupi:
+# AZD nema ugrađenu funkciju vraćanja promjena. Preporučeni pristupi:
 
 # Opcija 1: Ponovno postavljanje iz Gita (preporučeno)
-git revert HEAD  # Vratite problematični commit
+git revert HEAD  # Vrati problematični commit
 git push
 azd deploy
 
@@ -548,20 +548,20 @@ azd deploy
 git checkout main
 ```
 
-### Povratak infrastrukture
+### Povrat infrastrukture
 ```bash
 # Pregledajte promjene infrastrukture prije primjene
 azd provision --preview
 
-# Za vraćanje infrastrukture upotrijebite kontrolu verzija:
-git revert HEAD  # Poništi promjene infrastrukture
-azd provision    # Primijeni prethodno stanje infrastrukture
+# Za povrat infrastrukture koristite kontrolu verzija:
+git revert HEAD  # Poništite promjene infrastrukture
+azd provision    # Primijenite prethodno stanje infrastrukture
 ```
 
-### Povratak migracije baze podataka
+### Povrat migracije baze podataka
 ```bash
 #!/bin/bash
-# scripts/rollback-database.sh
+# skripte/rollback-baza-podataka.sh
 
 echo "Rolling back database migrations..."
 npm run db:rollback
@@ -572,9 +572,9 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 Metrike implementacije
+## 📊 Mjerenje performansi raspoređivanja
 
-### Praćenje izvedbe implementacije
+### Praćenje performansi raspoređivanja
 ```bash
 # Pogledajte trenutni status implementacije
 azd show
@@ -582,7 +582,7 @@ azd show
 # Pratite aplikaciju pomoću Application Insights
 azd monitor --overview
 
-# Pogledajte uživo metrike
+# Pogledajte žive metrike
 azd monitor --live
 ```
 
@@ -605,14 +605,14 @@ hooks:
 
 ## 🎯 Najbolje prakse
 
-### 1. Dosljednost okruženja
+### 1. Konzistentnost okruženja
 ```bash
 # Koristite dosljedno imenovanje
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Održavajte podudarnost okoline
+# Održavajte paritetu okoline
 ./scripts/sync-environments.sh
 ```
 
@@ -621,10 +621,10 @@ azd env new production-v1
 # Pregledajte promjene infrastrukture prije implementacije
 azd provision --preview
 
-# Koristite ARM/Bicep linting
+# Koristite ARM/Bicep provjeru sintakse
 az bicep lint --file infra/main.bicep
 
-# Provjerite valjanost Bicep sintakse
+# Validirajte Bicep sintaksu
 az bicep build --file infra/main.bicep
 ```
 
@@ -657,74 +657,74 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. Dokumentacija i zapisivanje
+### 4. Dokumentiranje i bilježenje
 ```bash
 # Dokumentirajte postupke implementacije
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
-echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
+echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
 ```
 
 ## Sljedeći koraci
 
-- [Zadavanje resursa](provisioning.md) - Detaljni prikaz upravljanja infrastrukturom
-- [Planiranje prije implementacije](../chapter-06-pre-deployment/capacity-planning.md) - Planirajte svoju strategiju implementacije
-- [Uobičajeni problemi](../chapter-07-troubleshooting/common-issues.md) - Rješavanje problema s implementacijom
-- [Najbolje prakse](../chapter-07-troubleshooting/debugging.md) - Strategije implementacije spremne za produkciju
+- [Provisioning Resources](provisioning.md) - Detaljni pregled upravljanja infrastrukturom
+- [Pre-Deployment Planning](../chapter-06-pre-deployment/capacity-planning.md) - Planirajte svoju strategiju raspoređivanja
+- [Common Issues](../chapter-07-troubleshooting/common-issues.md) - Riješite probleme s raspoređivanjem
+- [Best Practices](../chapter-07-troubleshooting/debugging.md) - Strategije raspoređivanja spremne za produkciju
 
-## 🎯 Praktične vježbe implementacije
+## 🎯 Praktične vježbe raspoređivanja
 
-### Vježba 1: Inkrementalni radni tok implementacije (20 minuta)
-**Cilj**: Ovladati razlikom između pune i inkrementalne implementacije
+### Vježba 1: Inkrementalni tijek rada raspoređivanja (20 minuta)
+**Cilj**: Savladati razliku između potpunih i inkrementalnih raspoređivanja
 
 ```bash
-# Početno postavljanje
+# Početna implementacija
 mkdir deployment-practice && cd deployment-practice
 azd init --template todo-nodejs-mongo
 azd up
 
-# Zabilježi vrijeme početnog postavljanja
+# Zabilježite početno vrijeme implementacije
 echo "Full deployment: $(date)" > deployment-log.txt
 
-# Napravi promjenu u kodu
+# Napravite promjenu u kodu
 echo "// Updated $(date)" >> src/api/src/server.js
 
-# Postavi samo kod (brzo)
+# Implementirajte samo kod (brzo)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
-# Usporedi vremena
+# Usporedite vremena
 cat deployment-log.txt
 
-# Očisti nakon sebe
+# Očistite okolinu
 azd down --force --purge
 ```
 
 **Kriteriji uspjeha:**
-- [ ] Puna implementacija traje 5-15 minuta
-- [ ] Implementacija samo koda traje 2-5 minuta
-- [ ] Promjene koda su vidljive u implementiranoj aplikaciji
-- [ ] Infrastruktura je nepromijenjena nakon `azd deploy`
+- [ ] Potpuno raspoređivanje traje 5-15 minuta
+- [ ] Raspoređivanje samo koda traje 2-5 minuta
+- [ ] Promjene koda su vidljive u raspoređenoj aplikaciji
+- [ ] Infrastruktura ostaje nepromijenjena nakon `azd deploy`
 
 **Ishod učenja**: `azd deploy` je 50-70% brži od `azd up` za promjene koda
 
-### Vježba 2: Prilagođeni hooks za implementaciju (30 minuta)
-**Cilj**: Implementirati automatizaciju prije i poslije deploya
+### Vježba 2: Prilagođene kukice raspoređivanja (30 minuta)
+**Cilj**: Implementirati automatizaciju prije i poslije raspoređivanja
 
 ```bash
-# Kreiraj skriptu za validaciju prije implementacije
+# Kreirajte skriptu za validaciju prije implementacije
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
 echo "⚠️ Running pre-deployment checks..."
 
-# Provjeri prolazak testova
+# Provjerite prolaze li testovi
 if ! npm run test:unit; then
     echo "❌ Tests failed! Aborting deployment."
     exit 1
 fi
 
-# Provjeri ima li nepohranjenih promjena
+# Provjerite ima li nepredanih promjena
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -734,7 +734,7 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# Kreiraj test funkcionalnosti nakon implementacije
+# Kreirajte post-implementacijski smoke test
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
 echo "💨 Running smoke tests..."
@@ -753,7 +753,7 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# Dodaj hookove u azure.yaml
+# Dodajte hookove u azure.yaml
 cat >> azure.yaml << 'EOF'
 
 hooks:
@@ -766,21 +766,21 @@ hooks:
     run: ./scripts/post-deploy-test.sh
 EOF
 
-# Testiraj implementaciju s hookovima
+# Testirajte implementaciju s hookovima
 azd deploy
 ```
 
 **Kriteriji uspjeha:**
-- [ ] Skripta prije implementacije pokreće se prije deploya
-- [ ] Implementacija se prekida ako testovi ne prođu
-- [ ] Post-deploy smoke test potvrđuje zdravlje sustava
-- [ ] Hooks se izvršavaju u ispravnom redoslijedu
+- [ ] Skripta prije raspoređivanja izvršava se prije samog raspoređivanja
+- [ ] Raspoređivanje se prekida ako testovi ne uspiju
+- [ ] Post-raspoređivanje smoke test potvrđuje zdravlje
+- [ ] Kukice se izvršavaju u ispravnom redoslijedu
 
-### Vježba 3: Strategija implementacije u više okruženja (45 minuta)
-**Cilj**: Implementirati radni tok fazne implementacije (dev → staging → produkcija)
+### Vježba 3: Strategija raspoređivanja za višestruka okruženja (45 minuta)
+**Cilj**: Implementirati etapni tijek rada raspoređivanja (dev → staging → produkcija)
 
 ```bash
-# Kreiraj skriptu za implementaciju
+# Napravi skriptu za implementaciju
 cat > deploy-staged.sh << 'EOF'
 #!/bin/bash
 set -e
@@ -788,7 +788,7 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# Korak 1: Implementiraj na razvojno okruženje
+# Korak 1: Implementiraj u razvojno okruženje
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
@@ -797,7 +797,7 @@ azd up --no-prompt
 echo "Running dev tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# Korak 2: Implementiraj na testno okruženje
+# Korak 2: Implementiraj u testno okruženje
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
@@ -806,7 +806,7 @@ azd up --no-prompt
 echo "Running staging tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# Korak 3: Ručna odobrenja za produkciju
+# Korak 3: Ručno odobrenje za produkciju
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -839,41 +839,41 @@ azd env new production
 ```
 
 **Kriteriji uspjeha:**
-- [ ] Implementacija u dev okruženju uspješna
-- [ ] Implementacija u staging okruženju uspješna
-- [ ] Za produkciju je potrebna ručna potvrda
-- [ ] Sva okruženja imaju funkcionalne health checkove
-- [ ] Mogućnost povratka ako je potrebno
+- [ ] Dev okruženje se uspješno raspoređuje
+- [ ] Staging okruženje uspješno se raspoređuje
+- [ ] Za produkciju je potrebna ručna odobrenja
+- [ ] Sva okruženja imaju funkcionalne zdravstvene provjere
+- [ ] Moguć je povrat ako je potrebno
 
-### Vježba 4: Strategija povratka (rollback) (25 minuta)
-**Cilj**: Implementirati i testirati povratak implementacije koristeći Git
+### Vježba 4: Strategija povrata (25 minuta)
+**Cilj**: Implementirati i testirati povrat raspoređivanja koristeći Git
 
 ```bash
-# Implementiraj v1
+# Implementirati v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# Spremi hash v1 commita
+# Spremi v1 hash commit-a
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# Implementiraj v2 s breaking promjenom
+# Implementirati v2 s prekidajućom promjenom
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
 azd deploy
 
-# Otkrivanje pogreške i povratak na prethodnu verziju
+# Otkriti neuspjeh i vratiti promjene
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # Povratak na prethodnu verziju koristeći git
+    # Vratiti promjene koristeći git
     git revert HEAD --no-edit
     
-    # Povratak okruženja
+    # Vratiti okruženje
     azd env set APP_VERSION "1.0.0"
     
-    # Ponovno implementiraj v1
+    # Ponovno implementirati v1
     azd deploy
     
     echo "✅ Rolled back to v1.0.0"
@@ -881,17 +881,17 @@ fi
 ```
 
 **Kriteriji uspjeha:**
-- [ ] Moguće je detektirati neuspjehe implementacije
-- [ ] Skripta za rollback se automatski izvršava
-- [ ] Aplikacija se vraća u radno stanje
-- [ ] Health checkovi prolaze nakon rollbacka
+- [ ] Moguće je detektirati neuspjehe raspoređivanja
+- [ ] Skripta za povrat se automatski izvršava
+- [ ] Aplikacija se vraća u ispravno stanje
+- [ ] Zdravstvene provjere prođu nakon povrata
 
-## 📊 Praćenje metrika implementacije
+## 📊 Praćenje metrika raspoređivanja
 
-### Pratite izvedbu svoje implementacije
+### Pratite performanse svog raspoređivanja
 
 ```bash
-# Napravite skriptu za metrike implementacije
+# Kreiraj skriptu za metrike implementacije
 cat > track-deployment.sh << 'EOF'
 #!/bin/bash
 START_TIME=$(date +%s)
@@ -905,44 +905,44 @@ echo "
 📊 Deployment Metrics:"
 echo "Duration: ${DURATION}s"
 echo "Timestamp: $(date)"
-echo "Environment: $(azd env show --output json | jq -r '.name')"
+echo "Environment: $(azd env get-value AZURE_ENV_NAME)"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
-# Zapis u datoteku
-echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
+# Zabilježi u datoteku
+echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
 EOF
 
 chmod +x track-deployment.sh
 
-# Koristite je
+# Koristi to
 ./track-deployment.sh
 ```
 
 **Analizirajte svoje metrike:**
 ```bash
-# Pogledajte povijest implementacije
+# Pogledajte povijest rasporeda
 cat deployment-metrics.csv
 
-# Izračunajte prosječno vrijeme implementacije
+# Izračunajte prosječno vrijeme rasporeda
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
 ## Dodatni resursi
 
-- [Reference za Azure Developer CLI implementaciju](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Implementacija Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Implementacija Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Implementacija Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Azure Developer CLI Referenca za raspoređivanje](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Azure App Service Raspoređivanje](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Azure Container Apps Raspoređivanje](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Azure Functions Raspoređivanje](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
 **Navigacija**
 - **Prethodna lekcija**: [Vaš prvi projekt](../chapter-01-foundation/first-project.md)
-- **Sljedeća lekcija**: [Zadavanje resursa](provisioning.md)
+- **Sljedeća lekcija**: [Provisioning Resources](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Odricanje od odgovornosti**:
-Ovaj je dokument preveden koristeći AI servis za prijevod [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Ne snosimo odgovornost za bilo kakve nesporazume ili pogrešne interpretacije proizašle iz korištenja ovog prijevoda.
+**Izjava o odricanju od odgovornosti**:
+Ovaj dokument je preveden korištenjem AI prijevodnog servisa [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati službenim i autoritativnim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Ne snosimo odgovornost za bilo kakva nesporazumevanja ili pogrešne tumačenja koja proizlaze iz korištenja ovog prijevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

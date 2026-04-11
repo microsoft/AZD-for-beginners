@@ -1,26 +1,28 @@
-# AI మోడల్ డిప్లాయ్‌మెంట్ Azure Developer CLI తో
+# Azure Developer CLI తో AI మోడల్ డిప్లాయ్‌మెంట్
 
 **అధ్యాయం నావిగేషన్:**
-- **📚 కోర్సు హోమ్**: [AZD ప్రారంభికులకు](../../README.md)
+- **📚 కోర్సు హోమ్**: [AZD ప్రారంభకులకు](../../README.md)
 - **📖 ప్రస్తుత అధ్యాయం**: అధ్యాయం 2 - AI-ముఖ్య అభివృద్ధి
 - **⬅️ మునుపటి**: [Microsoft Foundry ఇంటిగ్రేషన్](microsoft-foundry-integration.md)
-- **➡️ తదుపరి**: [AI వర్క్‌షాప్ ల్యాబ్](ai-workshop-lab.md)
+- **➡️ తరువాతి**: [AI వర్క్‌షాప్ ల్యాబ్](ai-workshop-lab.md)
 - **🚀 తదుపరి అధ్యాయం**: [అధ్యాయం 3: కాన్ఫిగరేషన్](../chapter-03-configuration/configuration.md)
 
-ఈ గైడ్ AZD టెంప్లేట్లు ఉపయోగించి AI మోడల్స్‌ను డిప్లాయ్ చేయడానికి సమగ్ర సూచనలను అందిస్తుంది, మోడల్ ఎంపిక నుండి ప్రొడక్షన్ డిప్లాయ్‌మెంట్ నమూనాలంతా కవర్ చేస్తుంది.
+ఈ గైడ్ AZD టెంప్లేట్స్ ఉపయోగించి AI మోడల్స్ డిప్లాయ్ చేయడానికి సమగ్ర సూచనలను అందిస్తుంది, మోడల్ ఎంపిక నుండి ప్రొడక్షన్ డిప్లాయ్‌మెంట్ ప్యాటర్న్లు వరకు అన్నిటినీ కవర్ చేస్తుంది.
 
-## టేబుల్ ఆఫ్ కంటెంట్స్
+> **పరిశీలన గమనిక (2026-03-25):** ఈ గైడ్‌లోని AZD వర్క్‌ఫ్లోను `azd` `1.23.12` కు సరిపోల్చి తనిఖీ చేశారు. డిఫాల్ట్ సర్వీస్ డిప్లాయ్‌మెంట్ విండో కంటే ఎక్కువ సమయం తీసుకునే AI డిప్లాయ్‌మెంట్స్ కోసం, ప్రస్తుత AZD విడుదలలు `azd deploy --timeout <seconds>` ను మద్దతు ఇస్తాయి.
+
+## విషయ సూచిక
 
 - [మోడల్ ఎంపిక వ్యూహం](#మోడల్-ఎంపిక-వ్యూహం)
 - [AI మోడల్స్ కోసం AZD కాన్ఫిగరేషన్](#ai-మోడల్స్-కోసం-azd-కాన్ఫిగరేషన్)
-- [డిప్లాయ్‌మెంట్ నమూనాలు](#డిప్లాయ్‌మెంట్-నమూనాలు)
+- [డిప్లాయ్‌మెంట్ ప్యాటర్న్లు](#డిప్లాయ్‌మెంట్-ప్యాటర్న్లు)
 - [మోడల్ నిర్వహణ](#మోడల్-నిర్వహణ)
 - [ప్రొడక్షన్ పరిగణనలు](#ప్రొడక్షన్-పరిగణనలు)
-- [మానిటరింగ్ మరియు ఆబ్సర్వబిలిటీ](#మానిటరింగ్-మరియు-ఆబ్సర్వబిలిటీ)
+- [మానిటరింగ్ మరియు ఆబ్జర్వబిలిటీ](#మానిటరింగ్-మరియు-ఆబ్జర్వబిలిటీ)
 
 ## మోడల్ ఎంపిక వ్యూహం
 
-### Microsoft Foundry Models Models
+### Microsoft Foundry మోడల్స్
 
 మీ వినియోగ కేసు కోసం సరైన మోడల్‌ను ఎంచుకోండి:
 
@@ -41,29 +43,29 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
         ]
 ```
 
-### మోడల్ సామర్థ్య ప్లానింగ్
+### మోడల్ సామర్థ్య ప్రణాళిక
 
-| Model Type | Use Case | Recommended Capacity | Cost Considerations |
+| మోడల్ రకం | ఉపయోగ సందర్భం | శిఫార్సు సామర్థ్యం | ఖర్చు పరిగణనలు |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | చాట్, ప్రశ్న-జవాబు | 10-50 TPM | ఎక్కువ భాగమైన వర్క్‌లోడ్స్ కోసం ఖర్చులో సమర్థవంతం |
-| gpt-4.1 | సంక్లిష్ట తర్కం | 20-100 TPM | ఎక్కువ ఖర్చు, ప్రీమియం ఫీచర్ల కోసం ఉపయోగించడం మంచిది |
-| Text-embedding-ada-002 | శోధన, RAG | 30-120 TPM | సెమాంటిక్ శోధన కోసం అవసరమైనది |
-| Whisper | స్పీచ్-టు-టెక్స్ట్ | 10-50 TPM | ఆడియో ప్రాసెసింగ్ వర్క్ లోడ్స్ కోసం |
+| gpt-4.1-mini | చాట్, Q&A | 10-50 TPM | చాలా వర్క్‌లోడ్స్‌కు ఖర్చు-ప్రభావవంతం |
+| gpt-4.1 | సంక్లిష్ట తర్కాత్మక పనులు | 20-100 TPM | ఎక్కువ ఖర్చు, ప్రీమియం లక్షణాలకు ఉపయోగించండి |
+| text-embedding-3-large | శోధన, RAG | 30-120 TPM | సెమాంటిక్ శోధన మరియు రిట్రీవల్ కోసం బలమైన డిఫాల్ట్ ఎంపిక |
+| Whisper | స్పీచ్-టు-టెక్స్ట్ | 10-50 TPM | ఆడియో ప్రాసెసింగ్ వర్క్‌లోడ్స్ కోసం |
 
 ## AI మోడల్స్ కోసం AZD కాన్ఫిగరేషన్
 
-### Bicep టెంప్లేట్ కాన్ఫిగరేషన్
+### Bicep Template Configuration
 
-Bicep టెంప్లేట్ల ద్వారా మోడల్ డిప్లాయ్‌మెంట్స్ సృష్టించండి:
+Bicep టెంప్లేట్స్ ద్వారా మోడల్ డిప్లాయ్‌మెంట్స్ సృష్టించండి:
 
 ```bicep
 // infra/main.bicep
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -122,21 +124,21 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
-### ఎన్విరాన్‌మెంట్ వేరియబుల్స్
+### పర్యావరణ వేరియబుల్స్
 
-మీ అప్లికేషన్ ఎన్విరాన్‌మెంట్‌ను కాన్ఫిగర్ చేయండి:
+మీ అప్లికేషన్ పర్యావరణాన్ని కాన్ఫిగర్ చేయండి:
 
 ```bash
 # .env కాన్ఫిగరేషన్
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## డిప్లాయ్‌మెంట్ నమూనాలు
+## డిప్లాయ్‌మెంట్ ప్యాటర్న్లు
 
-### Pattern 1: Single-Region Deployment
+### ప్యాటర్న్ 1: ఒకే-రీజియన్ డిప్లాయ్‌మెంట్
 
 ```yaml
 # azure.yaml - Single region
@@ -149,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-ఉత్తమంగా:
-- డెవలప్‌మెంట్ మరియు టెస్టింగ్
-- ఒకే మార్కెట్ అప్లికేషన్లు
+అందుకు ఉత్తమం:
+- డెవలప్‌మెంట్ మరియు పరీక్షలు
+- ఒకే-మార్కెట్ అప్లికేషన్లు
 - ఖర్చు ఆప్టిమైజేషన్
 
-### Pattern 2: Multi-Region Deployment
+### ప్యాటర్న్ 2: బహు-రీజియన్ డిప్లాయ్‌మెంట్
 
 ```bicep
 // Multi-region deployment
@@ -167,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-ఉత్తమంగా:
+అందుకు ఉత్తమం:
 - గ్లోబల్ అప్లికేషన్లు
-- ఉన్నత అందుబాటుకావలసిన అవసరాలు
+- ఎక్కువ అందుబాటుదల అవసరాలు
 - లోడ్ పంపిణీ
 
-### Pattern 3: Hybrid Deployment
+### ప్యాటర్న్ 3: హైబ్రిడ్ డిప్లాయ్‌మెంట్
 
-Microsoft Foundry మోడల్స్‌ను ఇతర AI సర్వీసులతో కలిపి ఉపయోగించండి:
+Microsoft Foundry మోడల్స్‌ను ఇతర AI సేవలతో కలపండి:
 
 ```bicep
 // Hybrid AI services
@@ -207,7 +209,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### వెర్షన్ కంట్రోల్
 
-మీ AZD కాన్ఫిగరేషన్‌లో మోడల్ వెర్షన్‌లను ట్రాక్ చేయండి:
+మీ AZD కాన్ఫిగరేషన్‌లో మోడల్ వెర్షన్లను ట్రాక్ చేయండి:
 
 ```json
 {
@@ -215,19 +217,19 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
 ```
 
-### మోడల్ అప్‌డేట్స్
+### మోడల్ నవీకరణలు
 
-మోడల్ అప్డేట్స్ కోసం AZD hooks ఉపయోగించండి:
+మోడల్ నవీకరణలకు AZD hooks ను ఉపయోగించండి:
 
 ```bash
 #!/bin/bash
@@ -238,11 +240,14 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# డిప్లాయ్‌మెంట్ డిఫాల్ట్ టైమౌట్ కన్నా ఎక్కువ సమయం తీసుకుంటే
+azd deploy --timeout 1800
 ```
 
 ### A/B టెస్టింగ్
 
-అన్ని మోడల్ వెర్షన్‌లను డిప్లాయ్ చేయండి:
+బహు మోడల్ వెర్షన్లను డిప్లాయ్ చేయండి:
 
 ```bicep
 param enableABTesting bool = false
@@ -266,12 +271,12 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ## ప్రొడక్షన్ పరిగణనలు
 
-### సామర్థ్య ప్లానింగ్
+### సామర్థ్య ప్రణాళిక
 
-ఉపయోగ నమూనాల ఆధారంగా అవసరమైన సామర్థ్యాన్ని లెక్కించండి:
+వినియోగ ప్యాటర్న్ల ఆధారంగా అవసరమైన సామర్థ్యాన్ని లెక్కించండి:
 
 ```python
-# సామర్థ్య లెక్కింపు ఉదాహరణ
+# ధార్యత గణన ఉదాహరణ
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -283,7 +288,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# ఉపయోగానికి ఉదాహరణ
+# ఉదాహరణ వినియోగం
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -333,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### ఖర్చు ఆప్టిమైజేషన్
 
-ఖర్చుల నియంత్రణలను అమలు చేయండి:
+ఖర్చు నియంత్రణలను అమలు చేయండి:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -363,7 +368,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## మానిటరింగ్ మరియు ఆబ్సర్వబిలిటీ
+## మానిటరింగ్ మరియు ఆబ్జర్వబిలిటీ
 
 ### Application Insights ఇంటిగ్రేషన్
 
@@ -405,10 +410,10 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### కస్టమ్ మెట్రిక్స్
 
-AI-ఐస్పెసిఫిక్ మెట్రిక్స్‌ను ట్రాక్ చేయండి:
+AI-స్పెసిఫిక్ మెట్రిక్స్‌ను ట్రాక్ చేయండి:
 
 ```python
-# కృత్రిమ మేధస్సు మోడల్స్ కోసం అనుకూల టెలిమెట్రీ
+# AI మోడళ్ల కోసం అనుకూలమైన టెలిమెట్రీ
 import logging
 from applicationinsights import TelemetryClient
 
@@ -440,12 +445,12 @@ class AITelemetry:
         )
 ```
 
-### హెల్త్ చెక్లు
+### ఆరోగ్య తనిఖీలు
 
 AI సర్వీస్ ఆరోగ్య మానిటరింగ్‌ను అమలు చేయండి:
 
 ```python
-# ఆరోగ్య తనిఖీ ఎండ్పాయింట్లు
+# ఆరోగ్య తనిఖీ ఎండ్‌పాయింట్లు
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -473,30 +478,30 @@ async def check_ai_models():
 
 ## తదుపరి దశలు
 
-1. **[Microsoft Foundry ఇంటిగ్రేషన్ గైడ్](microsoft-foundry-integration.md)** ను సేవా ఇంటిగ్రేషన్ నమూనాల కోసం సమీక్షించండి
-2. **[AI వర్క్‌షాప్ ల్యాబ్](ai-workshop-lab.md)** ను హ్యాండ్స్-ఆన్ అనుభవం కోసం పూర్తిచేయండి
-3. **[ప్రొడక్షన్ AI పద్ధతులు](production-ai-practices.md)** ను సంస్థల డిప్లాయ్‌మెంట్స్ కోసం అమలు చేయండి
-4. **సాధారణ సమస్యల కోసం [AI ట్రబుల్ష్యూటింగ్ గైడ్](../chapter-07-troubleshooting/ai-troubleshooting.md)** ను అన్వేషించండి
+1. **[Microsoft Foundry ఇంటిగ్రేషన్ గైడ్](microsoft-foundry-integration.md)ని సమీక్షించండి** సర్వీస్ ఇంటిగ్రేషన్ ప్యాటర్న్ల కోసం
+2. **[AI వర్క్‌షాప్ ల్యాబ్](ai-workshop-lab.md)ను పూర్తి చేయండి** హ్యాండ్స్-ఆన్ అనుభవం కోసం
+3. **[ప్రొడక్షన్ AI ప్రాక్టీసెస్](production-ai-practices.md)ను అమలు చేయండి** ఎంటర్ప్రైజ్ డిప్లాయ్‌మెంట్స్ కోసం
+4. **[AI ట్రబుల్షూటింగ్ గైడ్](../chapter-07-troubleshooting/ai-troubleshooting.md)ని ఇన్వెస్టిగేట్ చేయండి** సాధారణ సమస్యల కోసం
 
-## రిసోర్సెస్
+## వనరులు
 
-- [Microsoft Foundry Models Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps Scaling](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [AI Model Cost Optimization](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Microsoft Foundry మోడల్స్ - మోడల్ అందుబాటుదనం](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI డాక్యుమెంటేషన్](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Container Apps స్కేలింగ్](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [AI మోడల్ ఖర్చు ఆప్టిమైజేషన్](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **అధ్యాయం నావిగేషన్:**
-- **📚 కోర్సు హోమ్**: [AZD ప్రారంభికులకు](../../README.md)
+- **📚 కోర్సు హోమ్**: [AZD ప్రారంభకులకు](../../README.md)
 - **📖 ప్రస్తుత అధ్యాయం**: అధ్యాయం 2 - AI-ముఖ్య అభివృద్ధి
 - **⬅️ మునుపటి**: [Microsoft Foundry ఇంటిగ్రేషన్](microsoft-foundry-integration.md)
-- **➡️ తదుపరి**: [AI వర్క్‌షాప్ ల్యాబ్](ai-workshop-lab.md)
+- **➡️ తరువాతి**: [AI వర్క్‌షాప్ ల్యాబ్](ai-workshop-lab.md)
 - **🚀 తదుపరి అధ్యాయం**: [అధ్యాయం 3: కాన్ఫిగరేషన్](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-ఈ పత్రం AI అనువాద సేవ [Co-op Translator](https://github.com/Azure/co-op-translator) ఉపయోగించి అనువదించబడింది. మేము ఖచ్చితత్వానికి శ్రమించగా కూడా, ఆటోమేటెడ్ అనువాదాల్లో తప్పులు లేదా లోపాలు ఉండవచ్చు. మూల భాషలో ఉన్న అసలు పత్రాన్ని అధికారిక మూలంగా పరిగణించాలి. ముఖ్యమైన సమాచారానికి ప్రొఫెషనల్ మానవ అనువాదం చేయించుకోవాలని సిఫార్సు చేయబడును. ఈ అనువాదాన్ని ఉపయోగించడతొ కలిగే ఏవైనా అపార్థాలు లేదా తప్పుదోషాల కోసం మేము బాధ్యులు కాదు.
+**నిరాకరణ**:
+ఈ పత్రాన్ని [Co-op Translator](https://github.com/Azure/co-op-translator) అనే AI అనువాద సేవ ద్వారా అనువదించబడింది. మేము ఖచ్చితత్వానికి ప్రయత్నించినప్పటికీ, ఆటోమేటెడ్ అనువాదాల్లో పొరపాట్లు లేదా అసమర్థతలు ఉండవచ్చు. మూల భాషలో ఉన్న ఒరిజినల్ పత్రాన్ని అధికారిక మూలంగా పరిగణించాలి. కీలకమైన సమాచారానికి, నిపుణులైన మానవ అనువాదాన్ని సిఫార్సు చేయబడుతుంది. ఈ అనువాదం వాడకంతో ఏర్పడిన ఏవైనా అవగాహనా లోపాలు లేదా తప్పుల కోసం మేము బాధ్యులు కాదు.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

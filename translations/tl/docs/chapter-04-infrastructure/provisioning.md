@@ -1,45 +1,45 @@
-# Pagpo-provision ng mga Resource sa Azure gamit ang AZD
+# Provisioning Azure Resources with AZD
 
 **Chapter Navigation:**
-- **📚 Tahanan ng Kurso**: [AZD Para sa mga Nagsisimula](../../README.md)
-- **📖 Kasalukuyang Kabanata**: Kabanata 4 - Imprastruktura bilang Code at Pag-deploy
-- **⬅️ Nakaraang**: [Gabay sa Pag-deploy](deployment-guide.md)
-- **➡️ Susunod na Kabanata**: [Kabanata 5: Mga Multi-Agent na Solusyon sa AI](../../examples/retail-scenario.md)
-- **🔧 Kaugnay**: [Kabanata 6: Paunang Pagpapatibay bago Pag-deploy](../chapter-06-pre-deployment/capacity-planning.md)
+- **📚 Course Home**: [AZD Para sa Mga Nagsisimula](../../README.md)
+- **📖 Current Chapter**: Kabanata 4 - Infrastructure as Code & Deployment
+- **⬅️ Previous**: [Deployment Guide](deployment-guide.md)
+- **➡️ Next Chapter**: [Kabanata 5: Multi-Agent AI Solutions](../../examples/retail-scenario.md)
+- **🔧 Related**: [Kabanata 6: Pre-Deployment Validation](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Panimula
 
-Saklaw ng komprehensibong gabay na ito ang lahat ng kailangan mong malaman tungkol sa pagpo-provision at pamamahala ng mga resource sa Azure gamit ang Azure Developer CLI. Matutunan kung paano magpatupad ng mga pattern ng Imprastruktura bilang Code (IaC) mula sa pangunahing paglikha ng resource hanggang sa mga advanced na imprastrukturang pang-enterprise gamit ang Bicep, ARM templates, Terraform, at Pulumi.
+Ang komprehensibong gabay na ito ay sumasaklaw sa lahat ng kailangan mong malaman tungkol sa pagpo-provision at pamamahala ng mga Azure resource gamit ang Azure Developer CLI. Matutunan kung paano ipatupad ang mga pattern ng Infrastructure as Code (IaC) mula sa basic na paglikha ng resource hanggang sa advanced na enterprise-grade na arkitektura ng infrastruktura gamit ang Bicep, ARM templates, Terraform, at Pulumi.
 
 ## Mga Layunin sa Pagkatuto
 
 Sa pagkumpleto ng gabay na ito, ikaw ay:
-- Magiging bihasa sa mga prinsipyo ng Imprastruktura bilang Code at pagpo-provision ng mga resource sa Azure
-- Mauunawaan ang maramihang IaC provider na sinusuportahan ng Azure Developer CLI
-- Makakagawa at makakapagdisenyo ng mga Bicep template para sa mga karaniwang arkitektura ng aplikasyon
-- Makakapag-configure ng mga parameter ng resource, variable, at mga setting na partikular sa kapaligiran
-- Makakapagpatupad ng mga advanced na pattern ng imprastruktura kasama ang networking at seguridad
-- Pamamahalaan ang lifecycle ng resource, mga pag-update, at pag-resolve ng dependency
+- Maging bihasa sa mga prinsipyo ng Infrastructure as Code at pagpo-provision ng Azure resource
+- Maunawaan ang iba't ibang IaC provider na sinusuportahan ng Azure Developer CLI
+- Magdisenyo at magpatupad ng mga Bicep template para sa karaniwang arkitektura ng aplikayson
+- I-configure ang mga parameter ng resource, variable, at mga environment-specific na setting
+- Ipatupad ang mga advanced na pattern ng infrastruktura kabilang ang networking at seguridad
+- Pamahalaan ang lifecycle ng resource, mga update, at paglutas ng dependency
 
-## Mga Kinalabasan ng Pagkatuto
+## Mga Resulta ng Pagkatuto
 
-Kapag natapos, magagawa mong:
-- Magdisenyo at mag-provision ng imprastruktura sa Azure gamit ang Bicep at ARM templates
-- Mag-configure ng mga kumplikadong arkitektura ng multi-service na may wastong mga dependency ng resource
-- Magpatupad ng mga parameterized na template para sa maramihang kapaligiran at konfigurasyon
-- Mag-troubleshoot ng mga isyu sa pagpo-provision ng imprastruktura at mag-resolve ng mga pagkabigo sa deployment
-- Mag-apply ng mga prinsipyo ng Azure Well-Architected Framework sa disenyo ng imprastruktura
-- Pamahalaan ang mga pag-update ng imprastruktura at magpatupad ng mga estratehiya sa versioning ng imprastruktura
+Sa pagtatapos, magagawa mong:
+- Magdisenyo at mag-provision ng Azure infrastruktura gamit ang Bicep at ARM templates
+- I-configure ang kumplikadong multi-service na arkitektura na may tamang mga dependency ng resource
+- Magpatupad ng mga parameterized na template para sa iba't ibang environment at konfigurasyon
+- Mag-troubleshoot ng mga isyu sa pagpo-provision ng infrastruktura at lutasin ang mga pagkabigo sa deployment
+- Ilapat ang mga prinsipyo ng Azure Well-Architected Framework sa disenyo ng infrastruktura
+- Pamahalaan ang mga update ng infrastruktura at magpatupad ng mga estratehiya sa versioning ng infrastruktura
 
-## Pangkalahatang-ideya ng Pagpo-provision ng Imprastruktura
+## Pangkalahatang-ideya ng Pagpo-provision ng Infrastrukturang
 
-Sinusuportahan ng Azure Developer CLI ang maramihang Infrastructure as Code (IaC) provider:
-- **Bicep** (inirerekomenda) - Ang domain-specific language ng Azure
-- **ARM Templates** - Mga template ng Azure Resource Manager na nakabase sa JSON
-- **Terraform** - Tool para sa imprastruktura sa maraming cloud
-- **Pulumi** - Modernong infrastructure as code gamit ang mga programming language
+Sinusuportahan ng Azure Developer CLI ang maraming Infrastructure as Code (IaC) provider:
+- **Bicep** (inirerekomenda) - domain-specific language ng Azure
+- **ARM Templates** - JSON-based na mga template ng Azure Resource Manager
+- **Terraform** - multi-cloud na tool para sa infrastruktura
+- **Pulumi** - modernong infrastructure as code gamit ang mga programming language
 
-## Pag-unawa sa mga Resource ng Azure
+## Pag-unawa sa mga Azure Resource
 
 ### Hirarkiya ng Resource
 ```
@@ -49,14 +49,14 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Mga Karaniwang Serbisyo ng Azure para sa mga Aplikasyon
+### Karaniwang Serbisyo ng Azure para sa mga Aplikasyon
 - **Compute**: App Service, Container Apps, Functions, Virtual Machines
 - **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Networking**: Virtual Network, Application Gateway, CDN
 - **Security**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
-## Mga Bicep Template ng Imprastruktura
+## Mga Bicep Template para sa Infrastrukturang
 
 ### Pangunahing Estruktura ng Bicep Template
 ```bicep
@@ -128,9 +128,9 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Mga Advanced na Pattern sa Bicep
+### Mga Advanced na Pattern ng Bicep
 
-#### Modular na Imprastruktura
+#### Modular na Infrastrukturang
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -179,7 +179,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Kondisyunal na Paglikha ng Resource
+#### Kondisyonal na Paglikha ng Resource
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -298,7 +298,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 Seguridad at Pamamahala ng mga Lihim
+## 🔒 Seguridad at Pamamahala ng Mga Sekreto
 
 ### Integrasyon ng Key Vault
 ```bicep
@@ -342,7 +342,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Konfigurasyon ng Managed Identity
+### Pag-configure ng Managed Identity
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -368,9 +368,9 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 Networking at Konektibidad
+## 🌍 Networking at Konektividad
 
-### Virtual Network Configuration
+### Pag-configure ng Virtual Network
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -433,7 +433,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### Application Gateway with SSL
+### Application Gateway na may SSL
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -496,7 +496,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Pagmamanman at Pagmamasid
+## 📊 Monitoring at Observability
 
 ### Application Insights
 ```bicep
@@ -527,7 +527,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Mga Pasadyang Metric at Mga Alerto
+### Custom na Metrics at Alerts
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -561,9 +561,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Mga Konfigurasyong Espesipiko sa Kapaligiran
+## 🔧 Mga Konfigurasyon na Espesipiko sa Kapaligiran
 
-### Mga Parameter File para sa Iba't ibang Kapaligiran
+### Mga Parameter File para sa Iba't Ibang Environment
 ```json
 // infra/main.parameters.dev.json
 {
@@ -617,7 +617,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Kondisyunal na Pagpo-provision ng Resource
+### Kondisyonal na Pagpo-provision ng Resource
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -651,7 +651,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 
 ## 🚀 Mga Advanced na Pattern ng Pagpo-provision
 
-### Pag-deploy sa Maramihang Rehiyon
+### Multi-Region Deployment
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -719,7 +719,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### Pagsusuri ng Imprastruktura
+### Pagsusuri ng Infrastrukturang
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -755,42 +755,41 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 Paunang Pagtingin at Pagpapatibay ng Imprastruktura (BAGO)
+## 🧪 Preview at Pagpapatunay ng Infrastrukturang (BAGO)
 
-### Suriin ang mga Pagbabago sa Imprastruktura Bago ang Pag-deploy
+### I-preview ang Mga Pagbabago sa Infrastrukturang Bago ang Deployment
 
-Pinahihintulutan ka ng tampok na `azd provision --preview` na **i-simulate ang pagpo-provision ng imprastruktura** bago aktwal na mag-deploy ng mga resource. Kahawig ito sa diwa ng `terraform plan` o `bicep what-if`, na nagbibigay sa iyo ng isang **dry-run na pagtingin** kung anong mga pagbabago ang gagawin sa iyong Azure na kapaligiran.
+Ang `azd provision --preview` feature ay nagpapahintulot sa iyo na **isimulate ang pagpo-provision ng infrastruktura** bago aktwal na i-deploy ang mga resource. Katulad ito ng `terraform plan` o `bicep what-if`, na nagbibigay sa iyo ng isang **dry-run na view** ng mga pagbabagong gagawin sa iyong Azure environment.
 
 #### 🛠️ Ano ang Ginagawa Nito
-- **Sinusuri ang iyong mga IaC template** (Bicep o Terraform)
-- **Ipinapakita ang paunang-tingin ng mga pagbabago sa resource**: mga karagdagan, pagbura, pag-update
-- **Hindi inaaplay ang mga pagbabago** — read-only ito at ligtas patakbuhin
+- **Ina-analyze ang iyong IaC templates** (Bicep o Terraform)
+- **Ipinapakita ang preview ng mga pagbabago sa resource**: pagdaragdag, pagtanggal, pag-update
+- **Hindi ina-apply ang mga pagbabago** — read-only ito at ligtas patakbuhin
 
-#### � Mga Gamit
+#### Mga Kaso ng Paggamit
 ```bash
-# Suriin muna ang mga pagbabago sa imprastruktura bago mag-deploy
+# I-preview ang mga pagbabago sa imprastraktura bago i-deploy
 azd provision --preview
 
-# Suriin na may detalyadong output
-azd provision --preview --output json
-
-# Suriin para sa tukoy na kapaligiran
-azd provision --preview --environment production
+# I-preview para sa isang partikular na kapaligiran
+azd provision --preview -e production
 ```
 
-Tinutulungan ka ng utos na ito:
-- **I-validate ang mga pagbabago sa imprastruktura** bago mag-commit ng mga resource
-- **Matiyak ang pagkuha ng maling konfigurasyon nang maaga** sa siklo ng pag-develop
-- **Makipagtulungan nang ligtas** sa mga kapaligiran ng koponan
-- **Siguraduhin ang least-privilege deployments** nang walang hindi inaasahang mangyari
+Tinutulungan ka ng utos na ito na:
+- **I-validate ang mga pagbabago sa infrastruktura** bago mag-commit ng mga resource
+- **Makuha ang mga maling konfigurasyon nang maaga** sa development cycle
+- **Makipagtulungan nang ligtas** sa mga team environment
+- **Matiyak ang least-privilege deployments** nang walang mga sorpresa
 
-Partikular na kapaki-pakinabang ito kapag:
-- Nagtatrabaho sa kumplikadong mga kapaligiran na maraming serbisyo
-- Gumagawa ng mga pagbabago sa production na imprastruktura
-- Nivi-validate ang mga pagbabago sa template bago ang pag-apruba ng PR
-- Sinasanay ang mga bagong miyembro ng koponan sa mga pattern ng imprastruktura
+Partikular na kapaki-pakinabang kapag:
+- Nagtatrabaho sa kumplikadong multi-service na mga environment
+- Gumagawa ng mga pagbabago sa production infrastruktura
+- Vavalidate ang mga pagbabago sa template bago ang PR approval
+- Sinasanay ang mga bagong miyembro ng team sa mga pattern ng infrastruktura
 
-### Halimbawa ng Paunang-tingin na Output
+### Halimbawa ng Preview na Output
+Nag-iiba ang eksaktong preview na output depende sa provider at istruktura ng proyekto, ngunit ang resulta ay dapat malinaw na tukuyin ang mga iminungkahing pagbabago bago ilapat ang anumang bagay.
+
 ```bash
 $ azd provision --preview
 
@@ -809,25 +808,24 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
 ```
 
-## �🔄 Mga Pag-update at Migrasyon ng Resource
+## 🔄 Pag-update at Migrasyon ng mga Resource
 
 ### Ligtas na Pag-update ng Resource
 ```bash
 # I-preview muna ang mga pagbabago sa imprastruktura (INIREREKOMENDA)
 azd provision --preview
 
-# Ipatupad ang mga pagbabago pagkatapos ng kumpirmasyon ng preview
+# Ilapat ang mga pagbabago pagkatapos makumpirma ang preview
 azd provision --confirm-with-no-prompt
 
-# Para sa rollback, gamitin ang Git para i-revert ang mga pagbabago sa imprastruktura:
-git revert HEAD  # I-revert ang huling commit ng imprastruktura
-azd provision    # Ipatupad ang naunang estado ng imprastruktura
+# Para sa rollback, gamitin ang Git upang ibalik ang mga pagbabago sa imprastruktura:
+git revert HEAD  # Ibalik ang huling commit ng imprastruktura
+azd provision    # Ilapat ang nakaraang estado ng imprastruktura
 ```
 
 ### Migrasyon ng Database
@@ -859,9 +857,9 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🎯 Mga Pinakamahusay na Gawi
+## 🎯 Mga Pinakamahusay na Kasanayan
 
-### 1. Mga Konbensiyon sa Pagpapangalan ng Resource
+### 1. Mga Kumbensyon sa Pangalan ng Resource
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -916,12 +914,12 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## Susunod na mga Hakbang
+## Mga Susunod na Hakbang
 
-- [Pagpaplano bago Pag-deploy](../chapter-06-pre-deployment/capacity-planning.md) - I-validate ang availability ng resource
-- [Karaniwang Mga Isyu](../chapter-07-troubleshooting/common-issues.md) - Mag-troubleshoot ng mga problema sa imprastruktura
+- [Pagpaplano Bago ang Deployment](../chapter-06-pre-deployment/capacity-planning.md) - I-validate ang availability ng resource
+- [Karaniwang Mga Isyu](../chapter-07-troubleshooting/common-issues.md) - Mag-troubleshoot ng mga problema sa infrastruktura
 - [Gabay sa Pag-debug](../chapter-07-troubleshooting/debugging.md) - I-debug ang mga isyu sa pagpo-provision
-- [Pagpili ng SKU](../chapter-06-pre-deployment/sku-selection.md) - Pumili ng angkop na service tiers
+- [Pagpili ng SKU](../chapter-06-pre-deployment/sku-selection.md) - Piliin ang angkop na mga service tier
 
 ## Karagdagang Mga Mapagkukunan
 
@@ -933,12 +931,12 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 **Navigation**
-- **Nakaraang Aralin**: [Gabay sa Pag-deploy](deployment-guide.md)
-- **Susunod na Aralin**: [Pagpaplano ng Kapasidad](../chapter-06-pre-deployment/capacity-planning.md)
+- **Previous Lesson**: [Deployment Guide](deployment-guide.md)
+- **Next Lesson**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Paunawa:
-Isinalin ang dokumentong ito gamit ang serbisyong AI para sa pagsasalin na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kaming maging tumpak, pakitandaan na ang mga awtomatikong salin ay maaaring maglaman ng mga pagkakamali o hindi tumpak na impormasyon. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na opisyal na sanggunian. Para sa mahahalagang impormasyon, inirerekomenda ang propesyonal na pagsasalin ng tao. Hindi kami mananagot sa anumang hindi pagkakaunawaan o maling interpretasyon na magmumula sa paggamit ng salin na ito.
+**Paunawa**:
+Ang dokumentong ito ay isinalin gamit ang serbisyong AI para sa pagsasalin na [Co-op Translator](https://github.com/Azure/co-op-translator). Bagaman nagsusumikap kami para sa katumpakan, mangyaring tandaan na ang mga awtomatikong pagsasalin ay maaaring maglaman ng mga pagkakamali o kamalian. Ang orihinal na dokumento sa orihinal nitong wika ang dapat ituring na awtoritatibong sanggunian. Para sa kritikal na impormasyon, inirerekomenda ang propesyonal na pagsasalin na ginawa ng tao. Hindi kami mananagot sa anumang mga hindi pagkakaunawaan o maling interpretasyon na maaaring magmula sa paggamit ng pagsasaling ito.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

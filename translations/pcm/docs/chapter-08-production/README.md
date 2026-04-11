@@ -6,11 +6,13 @@
 
 ## Overview
 
-Dis chapter dey cover deployment patterns wey ready for enterprise, how to harden security, monitoring, an how to optimize cost for production AI workloads.
+Dis chapter dey cover enterprise-ready deployment patterns, how to harden security, monitoring, and how to optimize cost for production AI workloads.
+
+> Dem validate am wit `azd 1.23.12` for March 2026.
 
 ## Learning Objectives
 
-By finishing dis chapter, you go:
+By completing this chapter, you go:
 - Deploy multi-region resilient applications
 - Implement enterprise security patterns
 - Configure comprehensive monitoring
@@ -21,21 +23,21 @@ By finishing dis chapter, you go:
 
 ## 📚 Lessons
 
-| # | Leson | Deskripsion | Taem |
+| # | Lekshon | Tori | Time |
 |---|--------|-------------|------|
-| 1 | [Production AI Practices](production-ai-practices.md) | Deployment patterns wey enterprise dey use | 90 min |
+| 1 | [Production AI Practices](production-ai-practices.md) | Enterprise deployment patterns | 90 min |
 
 ---
 
 ## 🚀 Production Checklist
 
-- [ ] Deploy for many regions make e dey resilient
-- [ ] Use managed identity for authentication (no keys)
-- [ ] Use Application Insights for monitoring
-- [ ] Cost budgets and alerts don set
-- [ ] Security scanning don enable
+- [ ] Multi-region deployment for resilience
+- [ ] Managed identity for authentication (no keys)
+- [ ] Application Insights for monitoring
+- [ ] Cost budgets and alerts configured
+- [ ] Security scanning enabled
 - [ ] CI/CD pipeline integration
-- [ ] Get disaster recovery plan
+- [ ] Disaster recovery plan
 
 ---
 
@@ -45,15 +47,15 @@ By finishing dis chapter, you go:
 
 ```mermaid
 graph LR
-    Gateway[API Gatewey] --> AI[AI Sabis] --> Models[Microsoft Foundry model dem]
+    Gateway[API Gatewey] --> AI[AI Sabis] --> Models[Microsoft Foundry Model dem]
     Gateway --> Auth[Auth Sabis]
-    AI --> Data[Data Sto]
+    AI --> Data[Data Stɔ]
 ```
 ### Pattern 2: Event-Driven AI
 
 ```mermaid
 graph LR
-    EventGrid[Grid wey dey handle events] --> Functions[Function dem] --> Pipeline[Pipeline wey dey run AI]
+    EventGrid[Grid wey dey handle events] --> Functions[Function dem] --> Pipeline[AI pipeline]
 ```
 ---
 
@@ -86,7 +88,7 @@ properties: {
 | Reserved capacity | 20-40% |
 
 ```bash
-# Put alert dem for budget
+# Put budget alert dem
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -103,9 +105,9 @@ az consumption budget create \
 azd monitor --logs
 
 # Check di Application Insights
-azd monitor
+azd monitor --overview
 
-# See di metrics
+# View di metrics
 az monitor metrics list --resource <resource-id>
 ```
 
@@ -130,6 +132,6 @@ az monitor metrics list --resource <resource-id>
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dis document na AI translation wey dem do with Co-op Translator (https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg note say machine translations fit get mistakes or no too correct. Di original document for im own language suppose be di main authority. If na serious or critical information, make you use professional human translator. We no dey liable for any misunderstanding or wrong interpretation wey fit follow from dis translation.
+**Disclaimer**:
+Dis document don translate by AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg sabi say automated translations fit get errors or mistakes. Di original document for im own native language suppose be di authoritative source. For critical information, we recommend say una use professional human translation. We no dey liable for any misunderstandings or wrong interpretations wey fit come from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

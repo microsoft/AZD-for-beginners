@@ -8,6 +8,8 @@
 
 This chapter introduces Azure Developer CLI (azd) fundamentals. You'll learn core concepts, install the tools, and deploy your first application to Azure.
 
+> Validated against `azd 1.23.12` in March 2026.
+
 ## Learning Objectives
 
 By completing this chapter, you will:
@@ -28,13 +30,32 @@ By completing this chapter, you will:
 
 ---
 
+## ✅ Start Here: Validate Your Setup
+
+Before you begin, confirm that your local machine is ready for the Chapter 1 template:
+
+**Windows:**
+```powershell
+.\validate-setup.ps1
+```
+
+**macOS / Linux:**
+```bash
+bash ./validate-setup.sh
+```
+
+If the script reports missing tools, fix those first and then continue with the chapter.
+
+---
+
 ## 🚀 Quick Start
 
 ```bash
 # Check installation
 azd version
 
-# Login to Azure
+# Authenticate for AZD
+# Optional: az login if you plan to run Azure CLI commands directly
 azd auth login
 
 # Deploy your first app

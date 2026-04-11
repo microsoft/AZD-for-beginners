@@ -1,73 +1,73 @@
-# Pre-Flight provjere za AZD implementacije
+# Provjere prije pokretanja za AZD implementacije
 
-**Navigacija poglavljima:**
+**Navigacija poglavljem:**
 - **📚 Početna stranica tečaja**: [AZD za početnike](../../README.md)
 - **📖 Trenutno poglavlje**: Poglavlje 6 - Validacija i planiranje prije implementacije
-- **⬅️ Prethodno**: [Odabir SKU-a](sku-selection.md)
+- **⬅️ Prethodno**: [Odabir SKU](sku-selection.md)
 - **➡️ Sljedeće poglavlje**: [Poglavlje 7: Rješavanje problema](../chapter-07-troubleshooting/common-issues.md)
 - **🔧 Povezano**: [Poglavlje 4: Vodič za implementaciju](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Uvod
 
-Ovaj sveobuhvatni vodič pruža skripte za validaciju prije implementacije i postupke kako biste osigurali uspješne Azure Developer CLI implementacije prije njihovog pokretanja. Naučite kako implementirati automatizirane provjere za autentifikaciju, dostupnost resursa, kvote, sigurnosnu usklađenost i zahtjeve za performansama kako biste spriječili neuspjehe implementacije i optimizirali stopu uspjeha implementacija.
+Ovaj sveobuhvatni vodič pruža skripte i postupke validacije prije implementacije za uspješne Azure Developer CLI implementacije prije nego što započnu. Naučite kako implementirati automatizirane provjere za autentifikaciju, dostupnost resursa, kvote, usklađenost s politikama sigurnosti i zahtjeve za izvedbu kako biste spriječili neuspjehe implementacije i optimizirali stope uspjeha implementacije.
 
 ## Ciljevi učenja
 
 Nakon završetka ovog vodiča, moći ćete:
-- Savladati automatizirane tehnike i skripte za validaciju prije implementacije
-- Razumjeti sveobuhvatne strategije provjere za autentifikaciju, dozvole i kvote
-- Implementirati postupke za provjeru dostupnosti resursa i kapaciteta
-- Konfigurirati sigurnosne i usklađenosne provjere za organizacijske politike
-- Dizajnirati radne tokove za procjenu troškova i provjeru proračuna
-- Kreirati prilagođenu automatizaciju pre-flight provjera za CI/CD pipelineove
+- Savladati tehnike i skripte automatizirane validacije prije implementacije
+- Razumjeti cjelovite strategije provjere autentifikacije, dopuštenja i kvota
+- Implementirati postupke validacije dostupnosti i kapaciteta resursa
+- Konfigurirati sigurnosne provjere i usklađenost s politikama organizacije
+- Dizajnirati procjenu troškova i tijekove rada za validaciju proračuna
+- Kreirati prilagođenu automatizaciju provjera prije implementacije za CI/CD pipelineove
 
 ## Ishodi učenja
 
-Po završetku bit ćete sposobni:
-- Kreirati i izvršavati sveobuhvatne skripte za pre-flight validaciju
-- Dizajnirati automatizirane radne tokove provjere za različite scenarije implementacije
-- Implementirati validacijske postupke i politike specifične za okruženje
-- Konfigurirati proaktivno nadgledanje i obavještavanje za spremnost implementacije
-- Rješavati probleme prije implementacije i provoditi korektivne mjere
-- Integrirati pre-flight provjere u DevOps pipelineove i automatizacijske tijekove
+Nakon završetka, moći ćete:
+- Kreirati i izvršavati opsežne skripte za validaciju prije pokretanja
+- Dizajnirati automatizirane tijekove rada provjere za različite scenarije implementacije
+- Implementirati postupke i politike validacije specifične za okruženje
+- Konfigurirati proaktivno praćenje i upozorenja za spremnost implementacije
+- Riješiti probleme prije implementacije i provesti korektivne mjere
+- Integrirati provjere prije pokretanja u DevOps pipelineove i tijekove automatizacije
 
 ## Sadržaj
 
-- [Pregled](../../../../docs/chapter-06-pre-deployment)
-- [Automatizirani pre-flight skript](../../../../docs/chapter-06-pre-deployment)
-- [Ručni kontrolni popis](../../../../docs/chapter-06-pre-deployment)
-- [Validacija okruženja](../../../../docs/chapter-06-pre-deployment)
-- [Validacija resursa](../../../../docs/chapter-06-pre-deployment)
-- [Sigurnosne i usklađenosne provjere](../../../../docs/chapter-06-pre-deployment)
-- [Planiranje performansi i kapaciteta](../../../../docs/chapter-06-pre-deployment)
-- [Rješavanje uobičajenih problema](../../../../docs/chapter-06-pre-deployment)
+- [Pregled](#pregled)
+- [Automatizirana skripta za provjeru prije pokretanja](#automatizirana-skripta-za-provjeru-prije-pokretanja)
+- [Popis za ručnu validaciju](#codeblock1)
+- [Validacija okruženja](#✅-backup-i-oporavak)
+- [Validacija resursa](#validacija-proizvodnog-okruženja)
+- [Provjere sigurnosti i usklađenosti](#security--compliance-checks)
+- [Planiranje izvedbe i kapaciteta](#performance--capacity-planning)
+- [Rješavanje uobičajenih problema](#troubleshooting-common-issues)
 
 ---
 
 ## Pregled
 
-Pre-flight provjere su ključne provjere koje se izvode prije implementacije kako bi se osiguralo:
+Provjere prije pokretanja su ključne validacije koje se izvode prije implementacije kako bi se osiguralo:
 
-- **Dostupnost resursa** i kvote u ciljanim regijama
-- **Autentifikacija i dozvole** su ispravno konfigurirane
-- **Ispravnost predložaka** i točnost parametara
+- **Dostupnost resursa** i kvote u ciljnim regijama
+- **Ispravna konfiguracija autentifikacije i dopuštenja**
+- **Ispravnost predložaka** i parametara
 - **Mrežna povezanost** i ovisnosti
-- **Sigurnosna usklađenost** s organizacijskim politikama
-- **Procjena troškova** unutar ograničenja proračuna
+- **Sigurnosna usklađenost** s politikama organizacije
+- **Procjena troškova** unutar proračunskih ograničenja
 
-### Kada pokrenuti pre-flight provjere
+### Kada pokrenuti provjere prije pokretanja
 
 - **Prije prve implementacije** u novo okruženje
-- **Nakon značajnih izmjena predložaka**
-- **Prije produkcijskih implementacija**
+- **Nakon značajnih promjena u predlošcima**
+- **Prije implementacija u proizvodno okruženje**
 - **Prilikom promjene Azure regija**
 - **Kao dio CI/CD pipelineova**
 
 ---
 
-## Automatizirani pre-flight skript
+## Automatizirana skripta za provjeru prije pokretanja
 
-### PowerShell pre-flight provjera
+### PowerShell provjeritelj prije pokretanja
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -100,7 +100,7 @@ param(
     [switch]$Detailed
 )
 
-# Kodiranje boja za izlaz
+# Bojanje izlaza
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -128,7 +128,7 @@ function Write-Status {
 function Test-Prerequisites {
     Write-Host "${Blue}=== Prerequisites Check ===${Reset}"
     
-    # Provjeri instalaciju AZD
+    # Provjeri instalaciju AZD-a
     try {
         $azdVersion = azd version --output json | ConvertFrom-Json
         Write-Status "AZD CLI installed" "Success" "Version: $($azdVersion.azd.version)"
@@ -138,7 +138,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Provjeri instalaciju Azure CLI
+    # Provjeri instalaciju Azure CLI-ja
     try {
         $azVersion = az version --output json | ConvertFrom-Json
         Write-Status "Azure CLI installed" "Success" "Version: $($azVersion.'azure-cli')"
@@ -148,7 +148,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Provjeri verziju PowerShella
+    # Provjeri verziju PowerShell-a
     if ($PSVersionTable.PSVersion.Major -ge 7) {
         Write-Status "PowerShell version" "Success" "Version: $($PSVersionTable.PSVersion)"
     }
@@ -163,7 +163,7 @@ function Test-Authentication {
     Write-Host "`n${Blue}=== Authentication Check ===${Reset}"
     
     try {
-        # Provjeri autentikaciju AZD-a
+        # Provjeri AZD autentifikaciju
         $azdAuth = azd auth login --check-status --output json 2>$null | ConvertFrom-Json
         if ($azdAuth.status -eq "Logged-in") {
             Write-Status "AZD authentication" "Success" "User: $($azdAuth.principalName)"
@@ -173,11 +173,11 @@ function Test-Authentication {
             return $false
         }
         
-        # Provjeri autentikaciju Azure CLI-a
+        # Provjeri Azure CLI autentifikaciju
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # Provjeri pristup pretplati
+        # Validiraj pristup pretplati
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -194,7 +194,7 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # Dohvati dodjele uloga trenutačnog korisnika
+        # Dohvati uloge trenutačnog korisnika
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
@@ -210,14 +210,14 @@ function Test-Permissions {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # Testiraj stvaranje grupe resursa (ako je navedeno)
+        # Testiraj kreiranje resursne grupe (ako je navedeno)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # Provjeri mogućnost stvaranja grupe resursa
+                # Testiraj sposobnost kreiranja resursne grupe
                 try {
                     az group create --name "preflight-test-rg" --location $Location --output none
                     az group delete --name "preflight-test-rg" --yes --output none
@@ -245,7 +245,7 @@ function Test-QuotasAndLimits {
         # Provjeri kvote za računalne resurse
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # Provjeri određene kvote
+        # Provjeri specifične kvote
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
         if ($coreQuota) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
@@ -257,7 +257,7 @@ function Test-QuotasAndLimits {
             }
         }
         
-        # Provjeri ograničenja usluge App Service
+        # Provjeri ograničenja App Service-a
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
             if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
@@ -285,7 +285,7 @@ function Test-QuotasAndLimits {
     }
     catch {
         Write-Status "Quota check failed" "Warning" $_.Exception.Message
-        return $true # Neblokirajuće
+        return $true # Ne blokira
     }
 }
 
@@ -330,12 +330,12 @@ function Test-TemplateValidation {
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # Parsaj azure.yaml
+        # Parsiraj azure.yaml
         try {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # Provjeri usluge
+            # Validiraj usluge
             if ($azureYaml.services) {
                 $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
@@ -354,13 +354,13 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # Provjeri postoje li datoteke infrastrukture
+    # Provjeri infrastrukturalne datoteke
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # Provjeri main.bicep ako postoji
+            # Validiraj main.bicep ako postoji
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 NOVO: Testiraj pregled infrastrukture (sigurna simulacija - dry-run)
+    # 🧪 NOVO: Testiraj pregled infrastrukture (siguran probni prijelaz)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -446,11 +446,11 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Osnovna procjena troškova (za točne procjene potreban je Azure Pricing API)
+    # Osnovna procjena troškova (za točne procjene bilo bi potrebno Azure Pricing API)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # Provjeri postoji li proračun
+    # Provjeri postoji li budžet
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # Provjeri korištenje upravljanih identiteta
+        # Provjeri korištenje upravljanog identiteta
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +488,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # Provjeri prisiljavanje HTTPS-a
+        # Provjeri provođenje HTTPS-a
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -561,11 +561,11 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash pre-flight provjera
+### Bash provjeritelj prije pokretanja
 
 ```bash
 #!/bin/bash
-# Bash verzija pre-flight provjera za Unix/Linux sustave
+# Bash verzija provjere prije pokretanja za Unix/Linux sustave
 
 set -euo pipefail
 
@@ -637,7 +637,7 @@ check_prerequisites() {
 check_authentication() {
     echo -e "\n${BLUE}=== Authentication Check ===${NC}"
     
-    # Provjeri autentikaciju AZD-a
+    # Provjeri AZD autentikaciju
     if azd auth login --check-status >/dev/null 2>&1; then
         local principal_name=$(azd auth login --check-status --output json 2>/dev/null | jq -r '.principalName // "Unknown"')
         print_status "AZD authentication" "success" "User: $principal_name"
@@ -646,7 +646,7 @@ check_authentication() {
         return 1
     fi
     
-    # Provjeri autentikaciju Azure CLI-ja
+    # Provjeri Azure CLI autentikaciju
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -714,7 +714,7 @@ check_regional_availability() {
         return 1
     fi
     
-    # Provjeri dostupnost servisa
+    # Provjeri dostupnost usluge
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
     for service in "${services[@]}"; do
@@ -729,7 +729,7 @@ check_regional_availability() {
 }
 
 main() {
-    # Parsiranje argumenata naredbenog retka
+    # Parsiraj argumente naredbenog retka
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -755,7 +755,7 @@ main() {
         esac
     done
     
-    # Validiraj obavezne parametre
+    # Validiraj potrebne parametre
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -796,7 +796,7 @@ main "$@"
 
 ---
 
-## Ručni kontrolni popis
+## Popis za ručnu validaciju
 
 ### Popis za provjeru prije implementacije
 
@@ -804,63 +804,63 @@ Ispišite ovaj popis i provjerite svaki stavak prije implementacije:
 
 #### ✅ Postavljanje okruženja
 - [ ] AZD CLI instaliran i ažuriran na najnoviju verziju
-- [ ] Azure CLI instaliran i prijavljen
-- [ ] Ispravna Azure pretplata odabrana
+- [ ] Azure CLI instaliran i autentificiran
+- [ ] Odabrana ispravna Azure pretplata
 - [ ] Naziv okruženja je jedinstven i slijedi konvencije imenovanja
-- [ ] Ciljana grupa resursa identificirana ili se može stvoriti
+- [ ] Ciljna grupa resursa identificirana ili se može kreirati
 
-#### ✅ Autentifikacija i dozvole
-- [ ] Uspješno prijavljeno pomoću `azd auth login`
+#### ✅ Autentifikacija i dopuštenja
+- [ ] Uspješno autentificirani s `azd auth login`
 - [ ] Korisnik ima ulogu Contributor na ciljnoj pretplati/grupi resursa
-- [ ] Service principal konfiguriran za CI/CD (ako je primjenjivo)
-- [ ] Nema isteklih certifikata ili vjerodajnica
+- [ ] Servisni principal konfiguriran za CI/CD (ako je primjenjivo)
+- [ ] Nema istekljih certifikata ili vjerodajnica
 
 #### ✅ Validacija predložaka
-- [ ] `azure.yaml` postoji i je ispravan YAML
-- [ ] Svi servisi definirani u `azure.yaml` imaju odgovarajući izvorni kod
-- [ ] Bicep predlošci u direktoriju `infra/` prisutni su
-- [ ] `main.bicep` se kompajlira bez grešaka (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Pregled infrastrukture se uspješno izvršava (`azd provision --preview`)
+- [ ] Datoteka `azure.yaml` postoji i ispravnog je YAML formata
+- [ ] Sve usluge definirane u azure.yaml imaju pripadajući izvorni kod
+- [ ] Bicep predlošci u direktoriju `infra/` postoje
+- [ ] `main.bicep` se kompajlira bez pogrešaka (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Pregled infrastrukture uspješno se izvršava (`azd provision --preview`)
 - [ ] Svi potrebni parametri imaju zadane vrijednosti ili će biti osigurani
-- [ ] Nema hardkodiranih tajni u predlošcima
+- [ ] Nema tvrdokodiranih tajni u predlošcima
 
 #### ✅ Planiranje resursa
-- [ ] Ciljana Azure regija odabrana i provjerena
-- [ ] Potrebni Azure servisi dostupni u ciljnoj regiji
-- [ ] Dostupne dovoljne kvote za planirane resurse
-- [ ] Provjereni konflikti imena resursa
-- [ ] Ovisnosti između resursa razumljene
+- [ ] Ciljna Azure regija odabrana i potvrđena
+- [ ] Potrebne Azure usluge dostupne u ciljnoj regiji
+- [ ] Dovoljno kvota dostupno za planirane resurse
+- [ ] Provjerene moguće kolizije imena resursa
+- [ ] Razumljive ovisnosti između resursa
 
 #### ✅ Mreža i sigurnost
-- [ ] Mrežna povezanost s Azure endpointima provjerena
-- [ ] Postavke vatrozida/proxyja konfigurirane ako je potrebno
+- [ ] Provjerena mrežna povezanost prema Azure krajnjim točkama
+- [ ] Konfigurirani firewall/proxy postavke po potrebi
 - [ ] Key Vault konfiguriran za upravljanje tajnama
-- [ ] Managed identities koriste se gdje je moguće
-- [ ] Omogućeno prisilno korištenje HTTPS-a za web-aplikacije
+- [ ] Koristene upravljane identitete gdje je moguće
+- [ ] Omogućeno provjeravanje HTTPS-a za web aplikacije
 
 #### ✅ Upravljanje troškovima
-- [ ] Procjene troškova izračunate pomoću Azure Pricing Calculator
-- [ ] Upozorenja proračuna konfigurirana ako je potrebno
-- [ ] Odabrani odgovarajući SKU-ovi za tip okruženja
+- [ ] Procjena troškova izračunata korištenjem Azure kalkulatora cijena
+- [ ] Konfigurirana upozorenja na proračun ako je potrebno
+- [ ] Odabrani odgovarajući SKU-ovi prema tipu okruženja
 - [ ] Razmotrena rezervirana kapaciteta za produkcijska opterećenja
 
-#### ✅ Nadgledanje i opažanje
+#### ✅ Praćenje i uvidi
 - [ ] Application Insights konfiguriran u predlošcima
-- [ ] Log Analytics workspace planiran
-- [ ] Pravila upozorenja definirana za kritične metrike
-- [ ] Endpointi za provjeru zdravlja implementirani u aplikacijama
+- [ ] Planiran Log Analytics workspace
+- [ ] Definirane pravila upozorenja za kritične metrike
+- [ ] Implementirane točke za provjeru zdravlja u aplikacijama
 
-#### ✅ Sigurnosne kopije i oporavak
-- [ ] Strategija sigurnosnog kopiranja definirana za podatkovne resurse
-- [ ] Recovery time objectives (RTO) dokumentirani
-- [ ] Recovery point objectives (RPO) dokumentirani
-- [ ] Plan oporavka od katastrofa uspostavljen za produkciju
+#### ✅ Backup i oporavak
+- [ ] Definirana strategija backup-a za podatkovne resurse
+- [ ] Dokumentirani ciljevi vremena oporavka (RTO)
+- [ ] Dokumentirani ciljevi točke oporavka (RPO)
+- [ ] Plan za oporavak od katastrofa uspostavljen za proizvodnju
 
 ---
 
 ## Validacija okruženja
 
-### Validacija razvojnog okruženja
+### Validacija razvojog okruženja
 
 ```bash
 #!/bin/bash
@@ -883,7 +883,7 @@ validate_dev_environment() {
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # Provjeri konfiguracije razvojne baze podataka
+    # Validiraj konfiguracije razvojne baze podataka
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -892,7 +892,7 @@ validate_dev_environment() {
 }
 ```
 
-### Validacija produkcijskog okruženja
+### Validacija proizvodnog okruženja
 
 ```bash
 #!/bin/bash
@@ -901,28 +901,28 @@ validate_dev_environment() {
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # Provjeri konfiguracije visoke dostupnosti
+    # Provjera konfiguracija visoke dostupnosti
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # Provjeri konfiguracije sigurnosnih kopija
+    # Provjera konfiguracija sigurnosnih kopija
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # Provjeri postavke nadzora
+    # Validacija postavki nadzora
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # Provjeri sigurnosne konfiguracije
+    # Provjera sigurnosnih konfiguracija
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -935,7 +935,7 @@ validate_prod_environment() {
 
 ## Validacija resursa
 
-### Skripta za provjeru kvota
+### Skripta za validaciju kvota
 
 ```python
 #!/usr/bin/env python3
@@ -998,7 +998,7 @@ def check_storage_limits(location: str) -> bool:
         return False
     
     account_count = len(accounts)
-    max_accounts = 250  # Zadano Azure ograničenje
+    max_accounts = 250  # Zadana Azure granica
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1058,20 +1058,20 @@ if __name__ == "__main__":
 
 ---
 
-## Sigurnosne i usklađenosne provjere
+## Provjere sigurnosti i usklađenosti
 
-### Skripta za sigurnosnu provjeru
+### Skripta za validaciju sigurnosti
 
 ```bash
 #!/bin/bash
-# Provjera sigurnosti i usklađenosti za AZD implementacije
+# Validacija sigurnosti i usklađenosti za AZD implementacije
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
     
     local issues_found=0
     
-    # Provjeri upotrebu Key Vaulta
+    # Provjera upotrebe Key Vaulta
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1079,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Provjeri upotrebu upravljanih identiteta
+    # Provjera upotrebe upravljanog identiteta
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Provjeri obvezno korištenje HTTPS-a
+    # Provjera zahtjeva za HTTPS
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1095,7 +1095,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Provjeri minimalnu verziju TLS-a
+    # Provjera minimalne TLS verzije
     if grep -r "minimumTlsVersion.*'TLS1_2'" infra/ >/dev/null 2>&1; then
         echo "✅ Minimum TLS 1.2 configuration detected"
     else
@@ -1103,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Provjeri ograničenja javnog pristupa
+    # Provjera ograničenja javnog pristupa
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1111,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Provjeri mrežne sigurnosne grupe
+    # Provjera mrežnih sigurnosnih grupa
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1124,21 +1124,21 @@ check_security_practices() {
 check_compliance_requirements() {
     echo -e "\n=== Compliance Requirements Check ==="
     
-    # Provjeri šifriranje podataka
+    # Provjera enkripcije podataka
     if grep -r "encryption\|encryptionAtRest\|transparentDataEncryption" infra/ >/dev/null 2>&1; then
         echo "✅ Encryption configurations detected"
     else
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # Provjeri revizijsko evidentiranje
+    # Provjera audit zapisa
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # Provjeri politike sigurnosnog kopiranja i zadržavanja
+    # Provjera pravila sigurnosne kopije i zadržavanja
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1146,7 +1146,7 @@ check_compliance_requirements() {
     fi
 }
 
-# Glavna izvedba
+# Glavna izvršna funkcija
 main() {
     echo "🔒 Security and Compliance Validation"
     echo "📁 Checking infra/ directory for security best practices"
@@ -1179,7 +1179,7 @@ main "$@"
 
 ## Integracija s CI/CD
 
-### Integracija s GitHub Actions
+### Integracija GitHub Actions
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1238,7 +1238,7 @@ jobs:
         path: preflight-results.json
 ```
 
-### Integracija s Azure DevOps
+### Integracija Azure DevOps
 
 ```yaml
 trigger: none
@@ -1292,56 +1292,56 @@ steps:
 
 ## Sažetak najboljih praksi
 
-### ✅ Najbolje prakse za pre-flight provjere
+### ✅ Najbolje prakse za provjere prije pokretanja
 
 1. **Automatizirajte gdje je moguće**
    - Integrirajte provjere u CI/CD pipelineove
-   - Koristite skripte za ponovljive provjere
-   - Spremite rezultate za revizijske zapise
+   - Koristite skripte za ponovljive validacije
+   - Pohranite rezultate za revizijske tragove
 
 2. **Validacija specifična za okruženje**
-   - Različite provjere za razvoj/test/produkciju
-   - Primjereni sigurnosni zahtjevi po okruženju
+   - Različite provjere za razvoj/staging/produkciju
+   - Primjerene sigurnosne zahtjeve po okruženju
    - Optimizacija troškova za neprodukcijska okruženja
 
-3. **Sveobuhvatno pokriće**
-   - Autentifikacija i dozvole
+3. **Sveobuhvatno pokrivanje**
+   - Autentifikacija i dopuštenja
    - Kvote i dostupnost resursa
-   - Validacija predložaka i sintaksa
-   - Zahtjevi za sigurnost i usklađenost
+   - Validacija predložaka i sintakse
+   - Zahtjevi sigurnosti i usklađenosti
 
 4. **Jasno izvještavanje**
-   - Indikatori statusa kodirani bojama
-   - Detaljne poruke o pogreškama s koracima za otklanjanje
-   - Sažeci za brzu procjenu
+   - Statusni indikatori s bojama
+   - Detaljne poruke o pogreškama s uputama za ispravak
+   - Sažetci za brzu procjenu
 
-5. **Rano zaustavljanje**
-   - Zaustavite implementaciju ako kritične provjere ne uspiju
-   - Pružite jasne upute za rješenje
-   - Omogućite jednostavno ponavljanje provjera
+5. **Brzi prekid u slučaju grešaka**
+   - Prekinite implementaciju ako kritične provjere ne prođu
+   - Osigurajte jasne upute za rješavanje
+   - Omogućite jednostavno ponovno pokretanje provjera
 
-### Uobičajene zamke kod pre-flight provjera
+### Uobičajene zamke u provjerama prije pokretanja
 
-1. **Preskakanje validacije** radi "brze" implementacije
-2. **Neodgovarajuća provjera dozvola** prije implementacije
-3. **Zanemarivanje ograničenja kvota** dok implementacija ne zakaže
-4. **Neprovjeravanje predložaka** u CI/CD pipelineovima
-5. **Nedostatak sigurnosne provjere** za produkcijska okruženja
-6. **Neodgovarajuća procjena troškova** koja vodi do iznenađenja u proračunu
+1. **Preskakanje validacije** radi "brzih" implementacija
+2. **Nedovoljna provjera dopuštenja** prije implementacije
+3. **Ignoriranje ograničenja kvota** do neuspjeha implementacije
+4. **Nevalidiranje predložaka** u CI/CD pipelineovima
+5. **Nedostatak sigurnosne validacije** za produkcijska okruženja
+6. **Neadekvatna procjena troškova** što dovodi do iznenađenja u proračunu
 
 ---
 
-**Savjet**: Pokrenite pre-flight provjere kao zaseban zadatak u vašem CI/CD pipelineu prije stvarnog zadatka za implementaciju. To vam omogućuje rano otkrivanje problema i pruža brže povratne informacije developerima.
+**Savjet stručnjaka**: Pokrenite provjere prije pokretanja kao zaseban posao u vašem CI/CD pipelineu prije stvarnog posla implementacije. Ovo vam omogućuje rano otkrivanje problema i pruža brže povratne informacije developerima.
 
 ---
 
 **Navigacija**
-- **Prethodna lekcija**: [Odabir SKU-a](sku-selection.md)
-- **Sljedeća lekcija**: [Kratki podsjetnik](../../resources/cheat-sheet.md)
+- **Prethodna lekcija**: [Odabir SKU](sku-selection.md)
+- **Sljedeća lekcija**: [Prečac](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Odricanje odgovornosti:
-Ovaj dokument preveden je pomoću AI usluge prevođenja Co-op Translator (https://github.com/Azure/co-op-translator). Iako nastojimo postići točnost, imajte na umu da automatizirani prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati mjerodavnim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Ne snosimo odgovornost za bilo kakve nesporazume ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
+**Odricanje od odgovornosti**:  
+Ovaj dokument je preveden pomoću AI usluge za prijevod [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo biti precizni, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Ne snosimo odgovornost za bilo kakve nesporazume ili pogrešne interpretacije proizašle iz korištenja ovog prijevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

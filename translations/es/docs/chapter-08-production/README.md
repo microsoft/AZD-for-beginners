@@ -4,18 +4,20 @@
 
 ---
 
-## Resumen
+## Visión general
 
-Este capítulo cubre patrones de despliegue listos para empresas, endurecimiento de seguridad, monitoreo y optimización de costos para cargas de trabajo de IA en producción.
+Este capítulo cubre patrones de despliegue listos para la empresa, endurecimiento de seguridad, monitoreo y optimización de costos para cargas de trabajo de IA en producción.
 
-## Objetivos de Aprendizaje
+> Validado con `azd 1.23.12` en marzo de 2026.
 
-Al completar este capítulo, usted:
-- Desplegará aplicaciones resilientes multi-región
-- Implementará patrones de seguridad empresariales
-- Configurará monitoreo integral
-- Optimizará costos a gran escala
-- Configurará pipelines CI/CD con AZD
+## Objetivos de aprendizaje
+
+Al completar este capítulo, podrás:
+- Desplegar aplicaciones resilientes en múltiples regiones
+- Implementar patrones de seguridad empresariales
+- Configurar monitoreo integral
+- Optimizar costos a escala
+- Configurar pipelines de CI/CD con AZD
 
 ---
 
@@ -23,41 +25,41 @@ Al completar este capítulo, usted:
 
 | # | Lección | Descripción | Tiempo |
 |---|--------|-------------|------|
-| 1 | [Prácticas de IA en Producción](production-ai-practices.md) | Patrones de despliegue empresarial | 90 min |
+| 1 | [Prácticas de IA en Producción](production-ai-practices.md) | Patrones de despliegue empresariales | 90 min |
 
 ---
 
-## 🚀 Lista de Verificación para Producción
+## 🚀 Lista de verificación de producción
 
-- [ ] Despliegue multi-región para resiliencia
+- [ ] Despliegue multirregión para resiliencia
 - [ ] Identidad administrada para autenticación (sin claves)
 - [ ] Application Insights para monitoreo
-- [ ] Presupuestos y alertas de costos configurados
+- [ ] Presupuestos de costos y alertas configurados
 - [ ] Escaneo de seguridad habilitado
-- [ ] Integración de pipeline CI/CD
+- [ ] Integración de pipelines de CI/CD
 - [ ] Plan de recuperación ante desastres
 
 ---
 
-## 🏗️ Patrones de Arquitectura
+## 🏗️ Patrones de arquitectura
 
-### Patrón 1: Microservicios de IA
+### Patrón 1: IA de microservicios
 
 ```mermaid
 graph LR
-    Gateway[API Gateway] --> AI[Servicio de IA] --> Models[Modelos de Microsoft Foundry]
+    Gateway[Pasarela de API] --> AI[Servicio de IA] --> Models[Modelos de Microsoft Foundry]
     Gateway --> Auth[Servicio de Autenticación]
-    AI --> Data[Almacén de Datos]
+    AI --> Data[Almacén de datos]
 ```
-### Patrón 2: IA basada en eventos
+### Patrón 2: IA orientada a eventos
 
 ```mermaid
 graph LR
-    EventGrid[Cuadrícula de Eventos] --> Functions[Funciones] --> Pipeline[Tubería de IA]
+    EventGrid[Cuadrícula de eventos] --> Functions[Funciones] --> Pipeline[Canalización de IA]
 ```
 ---
 
-## 🔐 Mejores Prácticas de Seguridad
+## 🔐 Mejores prácticas de seguridad
 
 ```bicep
 // Use managed identity
@@ -76,17 +78,17 @@ properties: {
 
 ---
 
-## 💰 Optimización de Costos
+## 💰 Optimización de costos
 
-| Estrategia | Ahorro |
+| Estrategia | Ahorros |
 |----------|---------|
-| Escalado a cero (Container Apps) | 60-80% |
+| Escalar a cero (Container Apps) | 60-80% |
 | Usar niveles de consumo para desarrollo | 50-70% |
 | Escalado programado | 30-50% |
 | Capacidad reservada | 20-40% |
 
 ```bash
-# Configurar alertas de presupuesto
+# Establecer alertas de presupuesto
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -96,14 +98,14 @@ az consumption budget create \
 
 ---
 
-## 📊 Configuración de Monitoreo
+## 📊 Configuración de monitoreo
 
 ```bash
 # Transmitir registros
 azd monitor --logs
 
-# Consultar Application Insights
-azd monitor
+# Comprobar Application Insights
+azd monitor --overview
 
 # Ver métricas
 az monitor metrics list --resource <resource-id>
@@ -115,21 +117,21 @@ az monitor metrics list --resource <resource-id>
 
 | Dirección | Capítulo |
 |-----------|---------|
-| **Anterior** | [Capítulo 7: Solución de Problemas](../chapter-07-troubleshooting/README.md) |
-| **Curso Completo** | [Inicio del Curso](../../README.md) |
+| **Anterior** | [Capítulo 7: Solución de problemas](../chapter-07-troubleshooting/README.md) |
+| **Curso completado** | [Inicio del curso](../../README.md) |
 
 ---
 
-## 📖 Recursos Relacionados
+## 📖 Recursos relacionados
 
-- [Guía de Agentes de IA](../chapter-02-ai-development/agents.md)
+- [Guía de agentes de IA](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Soluciones Multi-Agente](../chapter-05-multi-agent/README.md)
-- [Ejemplo de Microservicios](../../examples/microservices/README.md)
+- [Ejemplo de microservicios](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Descargo de responsabilidad**:
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la exactitud, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por humanos. No nos hacemos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
+**Disclaimer**:
+Este documento ha sido traducido utilizando el servicio de traducción por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la exactitud, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por un humano. No nos hacemos responsables de malentendidos o interpretaciones erróneas que surjan del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

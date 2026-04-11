@@ -6,42 +6,44 @@
 
 ## Visão Geral
 
-Este capítulo aborda padrões avançados de arquitetura multi-agente, orquestração de agentes e implementações de IA prontas para produção em cenários complexos.
+Este capítulo aborda padrões avançados de arquitetura multi-agente, orquestração de agentes, e implementações de IA prontas para produção para cenários complexos.
+
+> Validado contra `azd 1.23.12` em março de 2026.
 
 ## Objetivos de Aprendizagem
 
-Ao completar este capítulo, você vai:
+Ao concluir este capítulo, você irá:
 - Compreender padrões de arquitetura multi-agente
-- Implementar sistemas coordenados de agentes de IA
+- Implementar sistemas de agentes de IA coordenados
 - Implementar comunicação entre agentes
 - Construir soluções multi-agente prontas para produção
 
 ---
 
-## 📚 Lições
+## 📚 Aulas
 
-| # | Lição | Descrição | Tempo |
+| # | Aula | Descrição | Tempo |
 |---|--------|-------------|------|
-| 1 | [Solução Multi-Agente para Retalho](../../examples/retail-scenario.md) | Passo a passo de implementação completa | 90 min |
+| 1 | [Solução Multi-Agente para Varejo](../../examples/retail-scenario.md) | Passo a passo da implementação completa | 90 min |
 | 2 | [Padrões de Coordenação](../chapter-06-pre-deployment/coordination-patterns.md) | Estratégias de orquestração de agentes | 30 min |
-| 3 | [Implementação com ARM Template](../../examples/retail-multiagent-arm-template/README.md) | Implementação com um clique | 30 min |
+| 3 | [Implementação com Template ARM](../../examples/retail-multiagent-arm-template/README.md) | Implementação com um clique | 30 min |
 
 ---
 
-## 🚀 Começo Rápido
+## 🚀 Início Rápido
 
 ```bash
-# Opção 1: Implantar a partir de um modelo
+# Opção 1: Efetuar a implementação a partir de um modelo
 azd init --template agent-openai-python-prompty
 azd up
 
-# Opção 2: Implantar a partir de um manifesto de agente (requer a extensão azure.ai.agents)
+# Opção 2: Efetuar a implementação a partir de um manifesto de agente (requer a extensão azure.ai.agents)
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Qual abordagem?** Use `azd init --template` para começar com um exemplo funcional. Use `azd ai agent init` quando tiver o seu próprio manifesto de agente. Veja o [referência do AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para detalhes completos.
+> **Qual abordagem?** Use `azd init --template` para começar a partir de um exemplo funcional. Use `azd ai agent init` quando tiver o seu próprio manifesto de agente. Veja a [referência AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) para detalhes completos.
 
 ---
 
@@ -49,28 +51,28 @@ azd up
 
 ```mermaid
 graph TD
-    Orchestrator[Agente Orquestrador<br/>Encaminha pedidos, gere fluxo de trabalho] --> Customer[Agente do Cliente<br/>Consultas do utilizador, preferências]
+    Orchestrator[Agente Orquestrador<br/>Encaminha pedidos, gere o fluxo de trabalho] --> Customer[Agente do Cliente<br/>Consultas do utilizador, preferências]
     Orchestrator --> Inventory[Agente de Inventário<br/>Níveis de stock, encomendas]
 ```
 ---
 
-## 🎯 Solução em Destaque: Multi-Agente para Retalho
+## 🎯 Solução em Destaque: Multi-Agente para Varejo
 
-A [Solução Multi-Agente para Retalho](../../examples/retail-scenario.md) demonstra:
+A [Solução Multi-Agente para Varejo](../../examples/retail-scenario.md) demonstra:
 
-- **Agente de Cliente**: Gere interações e preferências do utilizador
-- **Agente de Inventário**: Gere stock e processamento de encomendas
+- **Agente de Cliente**: Gerencia interações e preferências do utilizador
+- **Agente de Inventário**: Gere stock e processamento de pedidos
 - **Orquestrador**: Coordena entre agentes
-- **Memória Partilhada**: Gestão do contexto entre agentes
+- **Memória Partilhada**: Gestão de contexto entre agentes
 
-### Serviços Usados
+### Serviços Utilizados
 
 | Serviço | Finalidade |
 |---------|------------|
-| Modelos Microsoft Foundry | Compreensão de linguagem |
+| Microsoft Foundry Models | Compreensão de linguagem |
 | Azure AI Search | Catálogo de produtos |
 | Cosmos DB | Estado e memória dos agentes |
-| Container Apps | Alojamento dos agentes |
+| Container Apps | Hospedagem dos agentes |
 | Application Insights | Monitorização |
 
 ---
@@ -88,11 +90,11 @@ A [Solução Multi-Agente para Retalho](../../examples/retail-scenario.md) demon
 
 - [Guia de Agentes de IA](../chapter-02-ai-development/agents.md)
 - [Práticas de IA para Produção](../chapter-08-production/production-ai-practices.md)
-- [Resolução de Problemas em IA](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Resolução de Problemas de IA](../chapter-07-troubleshooting/ai-troubleshooting.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Aviso Legal**:
-Este documento foi traduzido utilizando o serviço de tradução automática [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, por favor, tenha em atenção que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autorizada. Para informações críticas, é recomendada a tradução profissional feita por um humano. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas resultantes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, por favor esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações erradas resultantes da utilização desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

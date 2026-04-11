@@ -1,48 +1,50 @@
-# Microsoft Foundry Integrasjon med AZD
+# Microsoft Foundry-integrasjon med AZD
 
 **Kapittelnavigasjon:**
-- **📚 Kurs Hjem**: [AZD For Nybegynnere](../../README.md)
-- **📖 Nåværende Kapittel**: Kapittel 2 - AI-Først Utvikling
-- **⬅️ Forrige Kapittel**: [Kapittel 1: Ditt Første Prosjekt](../chapter-01-foundation/first-project.md)
-- **➡️ Neste**: [AI Modell Distribusjon](ai-model-deployment.md)
-- **🚀 Neste Kapittel**: [Kapittel 3: Konfigurasjon](../chapter-03-configuration/configuration.md)
+- **📚 Kursoversikt**: [AZD For Beginners](../../README.md)
+- **📖 Gjeldende kapittel**: Kapittel 2 - AI-First-utvikling
+- **⬅️ Forrige kapittel**: [Kapittel 1: Ditt første prosjekt](../chapter-01-foundation/first-project.md)
+- **➡️ Neste**: [Distribuering av AI-modeller](ai-model-deployment.md)
+- **🚀 Neste kapittel**: [Kapittel 3: Konfigurasjon](../chapter-03-configuration/configuration.md)
 
 ## Oversikt
 
-Denne guiden viser hvordan man integrerer Microsoft Foundry-tjenester med Azure Developer CLI (AZD) for strømlinjeformede AI-applikasjonsdistribusjoner. Microsoft Foundry tilbyr en omfattende plattform for bygging, distribusjon og administrasjon av AI-applikasjoner, mens AZD forenkler infrastruktur- og distribusjonsprosessen.
+Denne guiden viser hvordan du integrerer Microsoft Foundry-tjenester med Azure Developer CLI (AZD) for effektiv distribusjon av AI-applikasjoner. Microsoft Foundry tilbyr en omfattende plattform for å bygge, distribuere og administrere AI-applikasjoner, mens AZD forenkler infrastrukturen og distribusjonsprosessen.
 
 ## Hva er Microsoft Foundry?
 
 Microsoft Foundry er Microsofts enhetlige plattform for AI-utvikling som inkluderer:
 
-- **Modellkatalog**: Tilgang til toppmoderne AI-modeller
+- **Modellkatalog**: Tilgang til AI-modeller i verdensklasse
 - **Prompt Flow**: Visuell designer for AI-arbeidsflyter
 - **Microsoft Foundry Portal**: Integrert utviklingsmiljø for AI-applikasjoner
-- **Distribusjonsalternativer**: Flere hosting- og skaleringsmuligheter
-- **Sikkerhet og Trygghet**: Innebygde ansvarlige AI-funksjoner
+- **Distribueringsmuligheter**: Flere hosting- og skaleringstilbud
+- **Sikkerhet og ansvarlighet**: Innebygde ansvarlige AI-funksjoner
 
-## AZD + Microsoft Foundry: Bedre Sammen
+## AZD + Microsoft Foundry: Bedre sammen
 
-| Funksjon | Microsoft Foundry | AZD Integrasjonsfordel |
+| Funksjon | Microsoft Foundry | AZD-integrasjonsfordel |
 |---------|-----------------|------------------------|
-| **Modell Distribusjon** | Manuell portal distribusjon | Automatiserte, repeterbare distribusjoner |
-| **Infrastruktur** | Klikk-gjennom provisjonering | Infrastruktur som kode (Bicep) |
-| **Miljøhåndtering** | Fokus på enkeltmiljø | Multi-miljø (dev/staging/prod) |
-| **CI/CD Integrasjon** | Begrenset | Innebygd GitHub Actions støtte |
-| **Kostnadshåndtering** | Grunnleggende overvåking | Miljøspesifikk kostnadsoptimalisering |
+| **Modellutrulling** | Manuell portalutrulling | Automatiserte, repeterbare utrullinger |
+| **Infrastruktur** | Klikk-gjennom-provisjonering | Infrastruktur som kode (Bicep) |
+| **Miljøhåndtering** | Fokus på enkeltmiljø | Flere miljøer (dev/staging/prod) |
+| **CI/CD-integrasjon** | Begrenset | Innfødt støtte for GitHub Actions |
+| **Kostnadshåndtering** | Enkel overvåkning | Miljøspesifikk kostnadsoptimalisering |
 
 ## Forutsetninger
 
-- Azure-abonnement med passende tillatelser
+- Azure-abonnement med nødvendige tillatelser
 - Azure Developer CLI installert
 - Tilgang til Microsoft Foundry Models-tjenester
 - Grunnleggende kjennskap til Microsoft Foundry
 
-## Kjerne Integrasjonsmønstre
+> **Gjeldende AZD-baseline:** Disse eksemplene ble testet mot `azd` `1.23.12`. For AI-agent-arbeidsflyten, bruk nåværende forhåndsvisningsutgivelse av utvidelsen og kontroller den installerte versjonen før du starter.
 
-### Mønster 1: Microsoft Foundry Models Integrasjon
+## Kjerneintegrasjonsmønstre
 
-**Brukstilfelle**: Distribuer chatteapplikasjoner med Microsoft Foundry Models
+### Mønster 1: Microsoft Foundry Models-integrasjon
+
+**Brukstilfelle**: Distribuer chat-applikasjoner med Microsoft Foundry Models-modeller
 
 ```yaml
 # azure.yaml
@@ -75,12 +77,12 @@ resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
 // Deploy GPT model
 resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAIAccount
-  name: 'gpt-35-turbo'
+  name: 'gpt-4.1-mini'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-35-turbo'
-      version: '0613'
+      name: 'gpt-4.1-mini'
+      version: '2024-07-18'
     }
     scaleSettings: {
       scaleType: 'Standard'
@@ -90,9 +92,9 @@ resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05
 }
 ```
 
-### Mønster 2: AI Søk + RAG Integrasjon
+### Mønster 2: AI-søk + RAG-integrasjon
 
-**Brukstilfelle**: Distribusjon av retrieval-augmented generation (RAG) applikasjoner
+**Brukstilfelle**: Distribuer applikasjoner med retrieval-augmented generation (RAG)
 
 ```bicep
 // Azure AI Search
@@ -120,9 +122,9 @@ resource searchConnection 'Microsoft.Search/searchServices/dataConnections@2023-
 }
 ```
 
-### Mønster 3: Dokumentintelligens Integrasjon
+### Mønster 3: Dokumentintelligens-integrasjon
 
-**Brukstilfelle**: Dokumentbehandling og analyse-arbeidsflyter
+**Brukstilfelle**: Arbeidsflyter for dokumentbehandling og analyse
 
 ```bicep
 // Document Intelligence service
@@ -155,7 +157,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
 
 ## 🔧 Konfigurasjonsmønstre
 
-### Miljøvariabler Oppsett
+### Miljøvariabler
 
 **Produksjonskonfigurasjon:**
 ```bash
@@ -165,8 +167,8 @@ azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
 # Modellkonfigurasjoner
-azd env set AZURE_OPENAI_MODEL "gpt-35-turbo"
-azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-ada-002"
+azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
+azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-3-large"
 
 # Ytelsesinnstillinger
 azd env set AZURE_OPENAI_CAPACITY 30
@@ -178,10 +180,10 @@ azd env set AZURE_SEARCH_SKU "standard"
 # Kostnadsoptimaliserte innstillinger for utvikling
 azd env set AZURE_OPENAI_CAPACITY 10
 azd env set AZURE_SEARCH_SKU "basic"
-azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Gratisnivå
+azd env set AZURE_DOCUMENT_INTELLIGENCE_SKU "F0"  # Gratis nivå
 ```
 
-### Sikker Konfigurasjon med Key Vault
+### Sikker konfigurasjon med Key Vault
 
 ```bicep
 // Key Vault for secrets
@@ -216,14 +218,14 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-## Distribusjonsarbeidsflyter
+## Distribueringsarbeidsflyter
 
-### AZD Utvidelser for Foundry
+### AZD-utvidelser for Foundry
 
-AZD tilbyr utvidelser som tilfører AI-spesifikke funksjoner for arbeid med Microsoft Foundry-tjenester:
+AZD tilbyr utvidelser som legger til AI-spesifikke funksjoner for Microsoft Foundry-tjenester:
 
 ```bash
-# Installer Foundry-agentsutvidelsen
+# Installer Foundry-agentutvidelsen
 azd extension install azure.ai.agents
 
 # Installer finjusteringsutvidelsen
@@ -233,12 +235,17 @@ azd extension install azure.ai.finetune
 azd extension install azure.ai.models
 
 # List opp installerte utvidelser
-azd extension list
+azd extension list --installed
+
+# Undersøk den nåværende installerte versjonen av agentutvidelsen
+azd extension show azure.ai.agents
 ```
 
-### Agent-Først Distribusjon med `azd ai`
+AI-utvidelsene er fortsatt i rask utvikling i forhåndsvisning. Hvis en kommando fungerer annerledes enn her, oppgrader den relevant utvidelsen før du feilsøker selve prosjektet.
 
-Hvis du har en agentmanifest, bruk `azd ai agent init` for å lage et prosjekt koblet til Foundry Agent Service:
+### Agent-først distribusjon med `azd ai`
+
+Hvis du har et agentmanifest, bruk `azd ai agent init` for å sette opp et prosjekt koblet til Foundry Agent Service:
 
 ```bash
 # Initialiser fra en agentmanifest
@@ -248,20 +255,25 @@ azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 azd up
 ```
 
-Se [AZD AI CLI Kommandoer](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full kommandooversikt og flagg.
+Nylige forhåndsvisningsutgivelser av `azure.ai.agents` har også lagt til malbasert initialisering for `azd ai agent init`. Hvis du følger nyere agenteksempler, sjekk utvidelsens hjelpefunksjon for nøyaktige flagg tilgjengelig i din installerte versjon.
 
-### Distribusjon med Én Kommando
+Se [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full kommandoreferanse og flagg.
+
+### Distribusjon med enkeltkommando
 
 ```bash
-# Distribuer alt med en kommando
+# Distribuer alt med én kommando
 azd up
 
-# Eller distribuer inkrementelt
-azd provision  # Infrastruktur kun
-azd deploy     # Applikasjon kun
+# Eller distribuer trinnvis
+azd provision  # Kun infrastruktur
+azd deploy     # Kun applikasjon
+
+# For langvarige AI-appdistribusjoner i azd 1.23.11+
+azd deploy --timeout 1800
 ```
 
-### Miljøspesifikke Distribusjoner
+### Miljøspesifikke distribusjoner
 
 ```bash
 # Utviklingsmiljø
@@ -278,9 +290,9 @@ azd env set AZURE_OPENAI_CAPACITY 100
 azd up
 ```
 
-## Overvåking og Observabilitet
+## Overvåkning og observabilitet
 
-### Application Insights Integrasjon
+### Integrasjon med Application Insights
 
 ```bicep
 // Application Insights for AI application monitoring
@@ -313,7 +325,7 @@ resource customMetrics 'Microsoft.Insights/components/analyticsItems@2015-05-01'
 }
 ```
 
-### Kostnadsovervåking
+### Kostnadsovervåkning
 
 ```bicep
 // Budget alert for AI services
@@ -341,9 +353,9 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-## 🔐 Sikkerhetsbeste Praksis
+## 🔐 Sikkerhetsanbefalinger
 
-### Administrert Identitetskonfigurasjon
+### Administrert identitetskonfigurasjon
 
 ```bicep
 // Managed identity for the web application
@@ -390,7 +402,7 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 
 ## Ytelsesoptimalisering
 
-### Caching-strategier
+### Cache-strategier
 
 ```yaml
 # azure.yaml - Redis cache integration
@@ -420,7 +432,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 }
 ```
 
-### Autoskaleringskonfigurasjon
+### Autoskalering
 
 ```bicep
 // Container App with auto-scaling
@@ -454,17 +466,17 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-## Feilsøking Vanlige Problemer
+## Feilsøking av vanlige problemer
 
-### Problem 1: OpenAI Kvote Overskredet
+### Problem 1: OpenAI-kvote overskredet
 
 **Symptomer:**
-- Distribusjon feiler med kvotafeil
-- 429 feil i applikasjonslogger
+- Distribusjon mislykkes med kvotafeil
+- 429-feil i applikasjonslogger
 
 **Løsninger:**
 ```bash
-# Sjekk gjeldende kvotabruk
+# Sjekk nåværende kvotabruk
 az cognitiveservices usage list --location eastus
 
 # Prøv en annen region
@@ -479,25 +491,25 @@ azd deploy
 ### Problem 2: Autentiseringsfeil
 
 **Symptomer:**
-- 401/403 feil ved kall til AI-tjenester
+- 401/403-feil ved kall til AI-tjenester
 - "Access denied" meldinger
 
 **Løsninger:**
 ```bash
-# Bekreft rolleoppgaver
+# Verifiser rolleoppdragelser
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Sjekk administrert identitetskonfigurasjon
+# Sjekk konfigurering av administrert identitet
 az webapp identity show --name YOUR_APP --resource-group YOUR_RG
 
-# Valider tilgang til Key Vault
+# Validere tilgang til Key Vault
 az keyvault secret show --vault-name YOUR_KV --name openai-api-key
 ```
 
-### Problem 3: Modell Distribusjonsproblemer
+### Problem 3: Modellutrullingsproblemer
 
 **Symptomer:**
-- Modeller ikke tilgjengelige i distribusjon
+- Modeller ikke tilgjengelig i distribusjon
 - Spesifikke modellversjoner feiler
 
 **Løsninger:**
@@ -509,45 +521,45 @@ az cognitiveservices model list --location eastus
 # Sjekk modellens kapasitetskrav
 ```
 
-## Eksempelskjemaer
+## Eksempelmaler
 
-### RAG Chat Applikasjon (Python)
+### RAG Chat-applikasjon (Python)
 
 **Repository**: [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
 **Tjenester**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-**Beskrivelse**: Den mest populære Azure AI-eksempelen — en produksjonsklar RAG chat-app som lar deg stille spørsmål over dine egne dokumenter. Bruker GPT-4.1-mini for chat, text-embedding-ada-002 for embedding, og Azure AI Search for søk. Støtter multimodale dokumenter, taleinndata/-utdata, Microsoft Entra autentisering, og Application Insights sporing.
+**Beskrivelse**: Den mest populære Azure AI-eksempelkoden — en produksjonsklar RAG chat-app som lar deg stille spørsmål om dine egne dokumenter. Bruker GPT-4.1-mini for chat, text-embedding-3-large for embedding og Azure AI Search for oppslag. Støtter multimodale dokumenter, taleinn-/utdata, Microsoft Entra-autentisering og Application Insights-sporing.
 
-**Rask Start**:
+**Kom raskt i gang**:
 ```bash
 azd init --template azure-search-openai-demo
 azd up
 ```
 
-### RAG Chat Applikasjon (.NET)
+### RAG Chat-applikasjon (.NET)
 
 **Repository**: [azure-search-openai-demo-csharp](https://github.com/Azure-Samples/azure-search-openai-demo-csharp)
 
 **Tjenester**: Azure OpenAI + Azure AI Search + Azure Container Apps + Semantic Kernel
 
-**Beskrivelse**: .NET/C# ekvivalent til Python RAG chat-eksempel. Bygget med ASP.NET Core Minimal API og Blazor WebAssembly frontend. Inkluderer stemmechat, GPT-4o-mini visjonsstøtte, og en følgesvenn .NET MAUI Blazor Hybrid desktop/mobil klient.
+**Beskrivelse**: .NET/C#-versjonen av Python RAG chat-eksemplet. Bygget med ASP.NET Core Minimal API og Blazor WebAssembly frontend. Inkluderer talechat, GPT-4o-mini synsstøtte og en følgesvenn .NET MAUI Blazor Hybrid desktop/mobil-klient.
 
-**Rask Start**:
+**Kom raskt i gang**:
 ```bash
 azd init --template azure-search-openai-demo-csharp
 azd up
 ```
 
-### RAG Chat Applikasjon (Java)
+### RAG Chat-applikasjon (Java)
 
 **Repository**: [azure-search-openai-demo-java](https://github.com/Azure-Samples/azure-search-openai-demo-java)
 
 **Tjenester**: Azure OpenAI + Azure AI Search + Azure Container Apps / AKS + Langchain4J + Azure Cosmos DB
 
-**Beskrivelse**: Java-versjon av RAG chat-eksempel som bruker Langchain4J for AI-orkestrering. Støtter mikrotjeneste-eventdrevet arkitektur, flere søkstrategier (tekst, vektor, hybrid), dokumentopplasting med Azure Document Intelligence, og distribusjon på enten Azure Container Apps eller Azure Kubernetes Service.
+**Beskrivelse**: Java-versjon av RAG chat-eksemplet som bruker Langchain4J for AI-orkestrering. Støtter mikroservicehendelsesdrevet arkitektur, flere søkestrategier (tekst, vektor, hybrid), dokumentopplasting med Azure Document Intelligence og distribusjon på enten Azure Container Apps eller Azure Kubernetes Service.
 
-**Rask Start**:
+**Kom raskt i gang**:
 ```bash
 azd init --template azure-search-openai-demo-java
 azd up
@@ -559,23 +571,23 @@ azd up
 
 **Tjenester**: Azure OpenAI + Azure AI Foundry + Prompty + Azure AI Search + Azure Container Apps + Azure Cosmos DB
 
-**Beskrivelse**: Helhetlig retail RAG copilot med Azure AI Foundry og Prompty. En Contoso Outdoor forhandler chatbot som baserer svar på produktkatalog- og kundebestillingsdata. Demonstrerer komplett GenAIOps arbeidsflyt — prototype med Prompty, evaluer med AI-assisterte evaluatorer, og distribuer via AZD til Container Apps.
+**Beskrivelse**: Helhetlig retail RAG copilot som bruker Azure AI Foundry og Prompty. En chatbot for Contoso Outdoor-forhandler som baserer svar på produktkatalog- og kundebestillingsdata. Demonstrerer hele GenAIOps-arbeidsflyten — prototype med Prompty, evaluering med AI-assisterte evaluatorer, og distribusjon via AZD til Container Apps.
 
-**Rask Start**:
+**Kom raskt i gang**:
 ```bash
 azd init --template contoso-chat
 azd up
 ```
 
-### Kreativ Skriving Multi-Agent Applikasjon
+### Creative Writing Multi-Agent Application
 
 **Repository**: [contoso-creative-writer](https://github.com/Azure-Samples/contoso-creative-writer)
 
 **Tjenester**: Azure OpenAI + Azure AI Agent Service + Bing Grounding + Azure AI Search + Azure Container Apps
 
-**Beskrivelse**: Multi-agent eksempel som demonstrerer AI-agent orkestrering med Prompty. Bruker en forskningsagent (Bing Grounding i Azure AI Agent Service), en produktagent (Azure AI Search), en skriveagent, og en redaktøragent for å samarbeide om godt undersøkte artikler. Inkluderer CI/CD med evaluering i GitHub Actions.
+**Beskrivelse**: Multi-agent-eksempel som demonstrerer AI-agentorkestrering med Prompty. Bruker en forskningsagent (Bing Grounding i Azure AI Agent Service), en produktagent (Azure AI Search), en forfatteragent og en redaktøragent for å samarbeide om velresearchede artikler. Inkluderer CI/CD med evaluering i GitHub Actions.
 
-**Rask Start**:
+**Kom raskt i gang**:
 ```bash
 azd init --template contoso-creative-writer
 azd up
@@ -587,37 +599,37 @@ azd up
 
 **Tjenester**: Azure OpenAI + Azure Functions + Azure Static Web Apps + Azure Cosmos DB for NoSQL + LangChain.js
 
-**Beskrivelse**: Fullt serverløs RAG chatbot som bruker LangChain.js med Azure Functions for API og Azure Static Web Apps for hosting. Bruker Azure Cosmos DB som både vektorlager og chatthistorikkdatabase. Støtter lokal utvikling med Ollama for kostnadsfri testing.
+**Beskrivelse**: Fullt serverløs RAG-chatbot som bruker LangChain.js med Azure Functions for API og Azure Static Web Apps for hosting. Bruker Azure Cosmos DB som både vektorlager og chatthistorikkdatabase. Støtter lokal utvikling med Ollama for kostnadsfri testing.
 
-**Rask Start**:
+**Kom raskt i gang**:
 ```bash
 azd init --template serverless-chat-langchainjs
 azd up
 ```
 
-### Chat med Dine Data Løsningsakselerator
+### Chat med Your Data Solution Accelerator
 
 **Repository**: [chat-with-your-data-solution-accelerator](https://github.com/Azure-Samples/chat-with-your-data-solution-accelerator)
 
 **Tjenester**: Azure OpenAI + Azure AI Search + Azure App Service + Azure Document Intelligence + Azure Functions + Azure Cosmos DB / PostgreSQL
 
-**Beskrivelse**: Enterprise-grad RAG løsningsakselerator med administrasjonsportal for dokumentopplasting/administrasjon, flere orkestratorvalg (Semantic Kernel, LangChain, Prompt Flow), tale-til-tekst, Microsoft Teams integrasjon, og valg av PostgreSQL eller Cosmos DB backend. Designet som et tilpassbart startpunkt for produksjons-RAG scenarier.
+**Beskrivelse**: Enterprise-grad RAG løsningsakselerator med adminportal for dokumentopplasting/-håndtering, flere orkestreringsvalg (Semantic Kernel, LangChain, Prompt Flow), tale-til-tekst, Microsoft Teams-integrasjon og valg mellom PostgreSQL eller Cosmos DB som backend. Designet som et tilpassbart utgangspunkt for produksjons-RAG-scenarier.
 
-**Rask Start**:
+**Kom raskt i gang**:
 ```bash
 azd init --template chat-with-your-data-solution-accelerator
 azd up
 ```
 
-### AI Reiseagenter — Multi-Agent MCP Orkestrering
+### AI-reiseagenter — Multi-Agent MCP Orkestrering
 
 **Repository**: [azure-ai-travel-agents](https://github.com/Azure-Samples/azure-ai-travel-agents)
 
-**Tjenester**: Azure OpenAI + Azure AI Foundry + Azure Container Apps + MCP Servers (.NET, Python, Java, TypeScript)
+**Tjenester**: Azure OpenAI + Azure AI Foundry + Azure Container Apps + MCP Servere (.NET, Python, Java, TypeScript)
 
-**Beskrivelse**: Referanseapplikasjon for multi-agent AI-orkestrering som bruker tre rammeverk (LangChain.js, LlamaIndex.TS og Microsoft Agent Framework). Har MCP (Model Context Protocol) servere i fire språk distribuert som serverløse Azure Container Apps med OpenTelemetry overvåking.
+**Beskrivelse**: Referanseapplikasjon for multi-agent AI-orkestrering som bruker tre rammeverk (LangChain.js, LlamaIndex.TS og Microsoft Agent Framework). Inkluderer MCP (Model Context Protocol)-servere i fire språk distribuert som serverløse Azure Container Apps med OpenTelemetry-overvåkning.
 
-**Rask Start**:
+**Kom raskt i gang**:
 ```bash
 azd init --template azure-ai-travel-agents
 azd up
@@ -627,31 +639,31 @@ azd up
 
 **Repository**: [azd-ai-starter](https://github.com/Azure/azd-ai-starter)
 
-**Tjenester**: Azure AI Tjenester + Azure OpenAI
+**Tjenester**: Azure AI Services + Azure OpenAI
 
-**Beskrivelse**: Minimal Bicep-mal som distribuerer Azure AI-tjenester med konfigurerte maskinlæringsmodeller. Et lettvekts startpunkt når du bare trenger Azure AI-infrastruktur uten full applikasjonsstabel.
+**Beskrivelse**: Minimal Bicep-mal som distribuerer Azure AI-tjenester med konfigurerte maskinlæringsmodeller. Et lettvekts utgangspunkt når du bare trenger Azure AI-infrastruktur uten full applikasjonsstabel.
 
-**Rask Start**:
+**Kom raskt i gang**:
 ```bash
 azd init --template azd-ai-starter
 azd up
 ```
 
-> **Bla gjennom flere maler**: Besøk [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) for 80+ AI-spesifikke AZD-maler på tvers av språk og scenarier.
+> **Utforsk flere maler**: Besøk [Awesome AZD AI Template Gallery](https://azure.github.io/awesome-azd/?tags=ai) for 80+ AI-spesifikke AZD-maler på tvers av språk og scenarier.
 
-## Neste Steg
+## Neste steg
 
-1. **Prøv Eksemplene**: Start med en forhåndsbygget mal som matcher ditt brukstilfelle
-2. **Tilpass for Dine Behov**: Endre infrastruktur og applikasjonskode
-3. **Legg til Overvåking**: Implementer omfattende observabilitet
-4. **Optimaliser Kostnader**: Finjuster konfigurasjoner for ditt budsjett
-5. **Sikre Distribusjonen**: Implementer bedrifts-sikkerhetsmønstre
-6. **Skaler til Produksjon**: Legg til flerregion- og høy-tilgjengelighetsfunksjoner
+1. **Prøv eksemplene**: Start med en forhåndsbygget mal som passer ditt brukstilfelle
+2. **Tilpass etter dine behov**: Endre infrastruktur og applikasjonskode
+3. **Legg til overvåkning**: Implementer omfattende observabilitet
+4. **Optimaliser kostnader**: Finjuster konfigurasjoner etter budsjett
+5. **Sikre distribusjonen**: Implementer sikkerhetsmønstre for bedriften
+6. **Skaler til produksjon**: Legg til flerregion- og høytilgjengelighetsfunksjoner
 
-## 🎯 Praktiske Øvelser
+## 🎯 Praktiske øvelser
 
 ### Øvelse 1: Distribuer Microsoft Foundry Models Chat App (30 minutter)
-**Mål**: Distribuer og test en produksjonsklar AI chat-applikasjon
+**Mål**: Distribuer og test en produksjonsklar AI-chatapplikasjon
 
 ```bash
 # Initialiser mal
@@ -676,20 +688,20 @@ azd monitor
 azd down --force --purge
 ```
 
-**Suksesskriterier:**
+**Kriterier for suksess:**
 - [ ] Distribusjon fullføres uten kvotafeil
-- [ ] Kan få tilgang til chatgrensesnitt i nettleser
+- [ ] Kan få tilgang til chattegrensesnitt i nettleser
 - [ ] Kan stille spørsmål og få AI-drevne svar
 - [ ] Application Insights viser telemetridata
-- [ ] Ryddet opp ressurser uten feil
+- [ ] Ressurser ryddes opp etter bruk
 
-**Estimert Kostnad**: 50-100 NOK for 30 minutter testing
+**Estimert kostnad**: $5-10 for 30 minutter testing
 
-### Øvelse 2: Konfigurer Multi-Modell Distribusjon (45 minutter)
-**Mål**: Distribuer flere AI-modeller med forskjellige konfigurasjoner
+### Øvelse 2: Konfigurer multi-modell distribusjon (45 minutter)
+**Mål**: Distribuer flere AI-modeller med ulike konfigurasjoner
 
 ```bash
-# Opprett tilpasset Bicep-konfigurasjon
+# Opprett egendefinert Bicep-konfigurasjon
 cat > infra/ai-models.bicep << 'EOF'
 param openAiAccountName string
 param location string
@@ -718,12 +730,12 @@ resource gpt4omini 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01'
 // Text embedding for search
 resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'text-embedding-ada-002'
+  name: 'text-embedding-3-large'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     scaleSettings: {
       scaleType: 'Standard'
@@ -734,18 +746,18 @@ resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01'
 }
 EOF
 
-# Distribuer og verifiser
+# Distribuer og bekreft
 azd provision
 azd show
 ```
 
-**Suksesskriterier:**
+**Kriterier for suksess:**
 - [ ] Flere modeller distribuert vellykket
-- [ ] Forskjellige kapasitetsinnstillinger brukt
-- [ ] Modeller tilgjengelige via API
-- [ ] Kan kalle begge modeller fra applikasjon
+- [ ] Ulike kapasitetsinnstillinger brukt
+- [ ] Modeller tilgjengelig via API
+- [ ] Kan kalle begge modeller fra applikasjonen
 
-### Øvelse 3: Implementer Kostnadsovervåking (20 minutter)
+### Øvelse 3: Implementer kostnadsovervåkning (20 minutter)
 **Mål**: Sett opp budsjettvarsler og kostnadssporing
 
 ```bash
@@ -783,27 +795,26 @@ EOF
 # Distribuer budsjettvarsel
 azd provision
 
-# Sjekk gjeldende kostnader
+# Sjekk nåværende kostnader
 az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-date $(date +%Y-%m-%d)
 ```
 
-**Suksesskriterier:**
+**Kriterier for suksess:**
 - [ ] Budsjettvarsel opprettet i Azure
 - [ ] E-postvarsler konfigurert
-- [ ] Kan se kostnadsdata i Azure Portal
-- [ ] Budsjettgrenser satt passende
+- [ ] Kan se kostnadsdata i Azure-portalen
+- [ ] Budsjettgrenser satt korrekt
 
-## 💡 Ofte Stilte Spørsmål
+## 💡 Ofte stilte spørsmål
 
 <details>
-<summary><strong>Hvordan reduserer jeg Microsoft Foundry Models-kostnader under utvikling?</strong></summary>
+<summary><strong>Hvordan kan jeg redusere Microsoft Foundry Models-kostnader under utvikling?</strong></summary>
 
-1. **Bruk Gratisnivået**: Microsoft Foundry Models tilbyr 50 000 tokens/måned gratis
-2. **Reduser Kapasitet**: Sett kapasitet til 10 TPM i stedet for 30+ for utvikling
+1. **Bruk gratisnivå**: Microsoft Foundry Models tilbyr 50 000 tokens/måned gratis
+2. **Reduser kapasitet**: Sett kapasitet til 10 TPM i stedet for 30+ for utvikling
 3. **Bruk azd down**: Frigjør ressurser når du ikke utvikler aktivt
-4. **Cache Svar**: Implementer Redis-cache for gjentatte spørringer
-5. **Bruk Prompt Engineering**: Reduser tokenbruk med effektive prompts
-
+4. **Cache svar**: Implementer Redis-cache for gjentatte spørringer
+5. **Bruk Prompt Engineering**: Reduser token-bruken med effektive promptstillinger
 ```bash
 # Utviklingskonfigurasjon
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -824,14 +835,14 @@ azd env set ENABLE_RESPONSE_CACHE true
 **OpenAI API**:
 - Raskere tilgang til nye modeller
 - Enklere oppsett
-- Lavere inngangsbarriere
+- Lavere terskel for å komme i gang
 - Kun offentlig internett
 
-For produksjonsapper, **anbefales Microsoft Foundry Models**.
+For produksjonsapper anbefales **Microsoft Foundry Models**.
 </details>
 
 <details>
-<summary><strong>Hvordan håndterer jeg Microsoft Foundry Models-feil for overskredet kvote?</strong></summary>
+<summary><strong>Hvordan håndterer jeg feil når Microsoft Foundry Models kvoten er overskredet?</strong></summary>
 
 ```bash
 # Sjekk gjeldende kvote
@@ -841,7 +852,7 @@ az cognitiveservices usage list --location eastus2
 azd env set AZURE_LOCATION westus2
 azd up
 
-# Reduser kapasitet midlertidig
+# Reduser kapasiteten midlertidig
 azd env set AZURE_OPENAI_CAPACITY 10
 azd provision
 
@@ -896,27 +907,27 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 ```
 </details>
 
-## Community and Support
+## Fellesskap og Support
 
-- **Microsoft Foundry Discord**: [#Azure channel](https://discord.gg/microsoft-azure)
-- **AZD GitHub**: [Issues and discussions](https://github.com/Azure/azure-dev)
-- **Microsoft Learn**: [Official documentation](https://learn.microsoft.com/azure/ai-studio/)
-- **Agent Skills**: [Microsoft Foundry skill on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Installer Azure + Foundry-agentferdigheter i redigereren din med `npx skills add microsoft/github-copilot-for-azure`
+- **Microsoft Foundry Discord**: [#Azure-kanalen](https://discord.gg/microsoft-azure)
+- **AZD GitHub**: [Saker og diskusjoner](https://github.com/Azure/azure-dev)
+- **Microsoft Learn**: [Offisiell dokumentasjon](https://learn.microsoft.com/azure/ai-studio/)
+- **Agent Skills**: [Microsoft Foundry skill på skills.sh](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry) - Installer Azure + Foundry agent-funksjoner i redigeringsprogrammet ditt med `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 2 - AI-First Development
-- **⬅️ Previous Chapter**: [Chapter 1: Your First Project](../chapter-01-foundation/first-project.md)
-- **➡️ Next**: [AI Model Deployment](ai-model-deployment.md)
-- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+**Kapittelnavigasjon:**
+- **📚 Kurs Hjem**: [AZD For Nybegynnere](../../README.md)
+- **📖 Nåværende Kapittel**: Kapittel 2 - AI-først Utvikling
+- **⬅️ Forrige Kapittel**: [Kapittel 1: Ditt Første Prosjekt](../chapter-01-foundation/first-project.md)
+- **➡️ Neste**: [Distribusjon av AI-modeller](ai-model-deployment.md)
+- **🚀 Neste Kapittel**: [Kapittel 3: Konfigurasjon](../chapter-03-configuration/configuration.md)
 
-**Need Help?** Join our community discussions or open an issue in the repository. The Azure AI + AZD community is here to help you succeed!
+**Trenger du hjelp?** Bli med i fellesskapsdiskusjoner eller åpne en sak i arkivet. Azure AI + AZD-fellesskapet er her for å hjelpe deg å lykkes!
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på sitt opprinnelige språk bør betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår som følge av bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi gjør vårt beste for nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på dets opprinnelige språk bør betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

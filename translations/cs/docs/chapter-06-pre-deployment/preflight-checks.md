@@ -1,73 +1,73 @@
-# Přednasazovací kontroly pro nasazení pomocí AZD
+# Kontroly před nasazením pro nasazení AZD
 
-**Navigace kapitol:**
-- **📚 Domov kurzu**: [AZD pro začátečníky](../../README.md)
-- **📖 Aktuální kapitola**: Kapitola 6 - Přednasazovací ověření a plánování
+**Navigace kapitolami:**
+- **📚 Domů kurzu**: [AZD pro začátečníky](../../README.md)
+- **📖 Aktuální kapitola**: Kapitola 6 - Validace a plánování před nasazením
 - **⬅️ Předchozí**: [Výběr SKU](sku-selection.md)
 - **➡️ Další kapitola**: [Kapitola 7: Řešení problémů](../chapter-07-troubleshooting/common-issues.md)
 - **🔧 Související**: [Kapitola 4: Průvodce nasazením](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Úvod
 
-Tento komplexní průvodce poskytuje skripty a postupy pro přednasazovací ověření, které zajistí úspěšná nasazení pomocí Azure Developer CLI ještě před jejich zahájením. Naučíte se implementovat automatizované kontroly autentizace, dostupnosti zdrojů, kvót, souladu se zabezpečením a požadavků na výkon, abyste předešli selháním nasazení a optimalizovali úspěšnost nasazení.
+Tento komplexní průvodce poskytuje skripty a postupy pro validaci před nasazením, aby byla zajištěna úspěšná nasazení Azure Developer CLI ještě před jejich začátkem. Naučte se implementovat automatizované kontroly autentizace, dostupnosti zdrojů, kvót, souladu s bezpečnostními pravidly a výkonových požadavků, které zabrání selháním nasazení a optimalizují úspěšnost nasazení.
 
 ## Cíle učení
 
 Po dokončení tohoto průvodce budete:
-- Ovládat techniky a skripty pro automatizované přednasazovací ověření
-- Rozumět komplexním strategiím kontroly autentizace, oprávnění a kvót
-- Implementovat postupy ověření dostupnosti zdrojů a kapacit
-- Nakonfigurovat kontroly zabezpečení a souladu se zásadami organizace
-- Navrhnout postupy odhadů nákladů a ověření rozpočtu
-- Vytvořit vlastní automatizaci přednasazovacích kontrol pro CI/CD pipeline
+- Ovládat techniky a skripty pro automatizovanou validaci před nasazením
+- Rozumět komplexním strategiím kontrol autentizace, oprávnění a kvót
+- Implementovat postupy pro validaci dostupnosti a kapacity zdrojů
+- Nastavovat kontroly bezpečnosti a souladu s organizačními politikami
+- Navrhovat pracovní postupy pro odhad nákladů a validaci rozpočtu
+- Vytvářet vlastní automatizace kontrol před nasazením pro CI/CD pipeline
 
-## Výsledky učení
+## Výstupy učení
 
 Po dokončení budete schopni:
-- Vytvořit a spouštět komplexní skripty přednasazovacího ověření
-- Navrhnout automatizované pracovní toky kontrol pro různé scénáře nasazení
-- Implementovat ověření specifické pro prostředí a příslušné zásady
-- Nakonfigurovat proaktivní monitorování a upozornění připravenosti nasazení
-- Řešit problémy před nasazením a implementovat nápravná opatření
-- Integrovat přednasazovací kontroly do DevOps pipeline a automatizačních workflow
+- Vytvářet a spouštět komplexní skripty pro validaci před nasazením
+- Navrhovat automatizované pracovní postupy kontrol pro různé scénáře nasazení
+- Implementovat postupy a politiky validace specifické pro prostředí
+- Nastavit proaktivní monitorování a upozornění připravenosti nasazení
+- Řešit problémy před nasazením a provádět nápravná opatření
+- Integrovat kontroly před nasazením do DevOps pipeline a automatizačních pracovních postupů
 
 ## Obsah
 
-- [Přehled](../../../../docs/chapter-06-pre-deployment)
-- [Automatizovaný přednasazovací skript](../../../../docs/chapter-06-pre-deployment)
-- [Ruční kontrolní seznam](../../../../docs/chapter-06-pre-deployment)
-- [Ověření prostředí](../../../../docs/chapter-06-pre-deployment)
-- [Ověření zdrojů](../../../../docs/chapter-06-pre-deployment)
-- [Kontroly zabezpečení a souladu](../../../../docs/chapter-06-pre-deployment)
-- [Plánování výkonu a kapacity](../../../../docs/chapter-06-pre-deployment)
-- [Řešení běžných problémů](../../../../docs/chapter-06-pre-deployment)
+- [Přehled](#přehled)
+- [Automatizovaný pre-flight skript](#automatizovaný-pre-flight-skript)
+- [Kontrolní seznam manuální validace](#codeblock1)
+- [Validace prostředí](#✅-zálohování-a-obnova)
+- [Validace zdrojů](#validace-produkčního-prostředí)
+- [Bezpečnostní a soulady kontroly](#security--compliance-checks)
+- [Plánování výkonu a kapacity](#performance--capacity-planning)
+- [Řešení běžných problémů](#troubleshooting-common-issues)
 
 ---
 
 ## Přehled
 
-Přednasazovací kontroly jsou zásadní ověření prováděná před nasazením, aby se zajistilo:
+Kontroly před nasazením jsou nezbytné validace prováděné před nasazením, aby bylo zajištěno:
 
-- **Dostupnost zdrojů** a kvóty v cílových oblastech
+- **Dostupnost zdrojů** a kvóty v cílových regionech
 - **Autentizace a oprávnění** jsou správně nakonfigurovány
-- **Platnost šablon** a správnost parametrů
+- **Platnost šablony** a správnost parametrů
 - **Síťová konektivita** a závislosti
-- **Soulad se zabezpečením** a zásadami organizace
+- **Soulad bezpečnosti** s organizačními pravidly
 - **Odhad nákladů** v rámci rozpočtových omezení
 
-### Kdy spouštět přednasazovací kontroly
+### Kdy spustit kontroly před nasazením
 
 - **Před prvním nasazením** do nového prostředí
 - **Po významných změnách šablon**
 - **Před nasazením do produkce**
-- **Při změně oblastí Azure**
+- **Při změně Azure regionů**
 - **Jako součást CI/CD pipeline**
 
 ---
 
-## Automatizovaný přednasazovací skript
+## Automatizovaný pre-flight skript
 
-### PowerShell přednasazovací ověřovač
+### PowerShell Pre-flight kontrolor
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -148,7 +148,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Zkontrolovat verzi PowerShellu
+    # Zkontrolovat verzi PowerShell
     if ($PSVersionTable.PSVersion.Major -ge 7) {
         Write-Status "PowerShell version" "Success" "Version: $($PSVersionTable.PSVersion)"
     }
@@ -177,7 +177,7 @@ function Test-Authentication {
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # Ověřit přístup k předplatnému
+        # Ověřit přístup k odběru
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -210,14 +210,14 @@ function Test-Permissions {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # Otestovat vytvoření skupiny prostředků (pokud je specifikováno)
+        # Otestovat vytvoření skupiny prostředků (pokud je uvedena)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # Otestovat schopnost vytvořit skupinu prostředků
+                # Otestovat možnost vytvoření skupiny prostředků
                 try {
                     az group create --name "preflight-test-rg" --location $Location --output none
                     az group delete --name "preflight-test-rg" --yes --output none
@@ -242,7 +242,7 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # Zkontrolovat kvóty výpočetních prostředků
+        # Zkontrolovat kvóty výpočetních zdrojů
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
         # Zkontrolovat konkrétní kvóty
@@ -285,14 +285,14 @@ function Test-QuotasAndLimits {
     }
     catch {
         Write-Status "Quota check failed" "Warning" $_.Exception.Message
-        return $true # Nezablokující
+        return $true # Neblokující
     }
 }
 
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # Otestovat koncové body Azure
+    # Otestovat Azure endpointy
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -310,7 +310,7 @@ function Test-NetworkConnectivity {
         }
     }
     
-    # Otestovat rozlišení DNS
+    # Otestovat DNS rozlišení
     try {
         $dnsResult = Resolve-DnsName "management.azure.com" -ErrorAction Stop
         Write-Status "DNS resolution" "Success" "Resolved successfully"
@@ -330,7 +330,7 @@ function Test-TemplateValidation {
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # Parsovat azure.yaml
+        # Analyzovat azure.yaml
         try {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
@@ -354,7 +354,7 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # Zkontrolovat přítomnost souborů infrastruktury
+    # Zkontrolovat soubory infrastruktury
     if (Test-Path "infra") {
         $bicepFiles = Get-ChildItem -Path "infra" -Filter "*.bicep" -Recurse
         if ($bicepFiles.Count -gt 0) {
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 NOVÉ: Otestovat náhled infrastruktury (bezpečný suchý běh)
+    # 🧪 NOVÉ: Testovat náhled infrastruktury (bezpečný zkušební běh)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -446,7 +446,7 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Základní odhad nákladů (pro přesné odhady by bylo potřeba Azure Pricing API)
+    # Základní odhad nákladů (pro přesné odhady by bylo potřeba použít Azure Pricing API)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
@@ -504,7 +504,7 @@ function Test-SecurityCompliance {
     }
 }
 
-# Hlavní spuštění
+# Hlavní vykonání
 function Invoke-PreflightCheck {
     Write-Host "${Green}AZD Pre-flight Check${Reset}" -ForegroundColor Green
     Write-Host "Environment: $EnvironmentName"
@@ -527,7 +527,7 @@ function Invoke-PreflightCheck {
     $results["CostEstimation"] = Test-CostEstimation
     $results["SecurityCompliance"] = Test-SecurityCompliance
     
-    # Souhrn
+    # Shrnutí
     Write-Host "`n${Blue}=== Pre-flight Check Summary ===${Reset}"
     
     $passedCount = 0
@@ -557,24 +557,24 @@ function Invoke-PreflightCheck {
     }
 }
 
-# Spustit předběžnou kontrolu
+# Spustit předletovou kontrolu
 Invoke-PreflightCheck
 ```
 
-### Bash přednasazovací ověřovač
+### Bash Pre-flight kontrolor
 
 ```bash
 #!/bin/bash
-# Bashová verze předběžných kontrol pro systémy Unix/Linux
+# Bash verze předběžných kontrol pro Unix/Linux systémy
 
 set -euo pipefail
 
-# Kódy barev
+# Barevné kódy
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # Žádná barva
+NC='\033[0m' # Bez barvy
 
 # Globální proměnné
 ENVIRONMENT_NAME=""
@@ -606,7 +606,7 @@ print_status() {
 check_prerequisites() {
     echo -e "${BLUE}=== Prerequisites Check ===${NC}"
     
-    # Zkontrolovat instalaci AZD
+    # Kontrola instalace AZD
     if command -v azd >/dev/null 2>&1; then
         local azd_version=$(azd version --output json | jq -r '.azd.version')
         print_status "AZD CLI installed" "success" "Version: $azd_version"
@@ -615,7 +615,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # Zkontrolovat instalaci Azure CLI
+    # Kontrola instalace Azure CLI
     if command -v az >/dev/null 2>&1; then
         local az_version=$(az version --output json | jq -r '."azure-cli"')
         print_status "Azure CLI installed" "success" "Version: $az_version"
@@ -624,7 +624,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # Zkontrolovat instalaci jq
+    # Kontrola instalace jq
     if command -v jq >/dev/null 2>&1; then
         print_status "jq installed" "success"
     else
@@ -637,7 +637,7 @@ check_prerequisites() {
 check_authentication() {
     echo -e "\n${BLUE}=== Authentication Check ===${NC}"
     
-    # Zkontrolovat autentizaci AZD
+    # Kontrola autentizace AZD
     if azd auth login --check-status >/dev/null 2>&1; then
         local principal_name=$(azd auth login --check-status --output json 2>/dev/null | jq -r '.principalName // "Unknown"')
         print_status "AZD authentication" "success" "User: $principal_name"
@@ -646,7 +646,7 @@ check_authentication() {
         return 1
     fi
     
-    # Zkontrolovat autentizaci Azure CLI
+    # Kontrola autentizace Azure CLI
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -661,7 +661,7 @@ check_authentication() {
 check_template_validation() {
     echo -e "\n${BLUE}=== Template Validation ===${NC}"
     
-    # Zkontrolovat azure.yaml
+    # Kontrola azure.yaml
     if [[ -f "azure.yaml" ]]; then
         print_status "azure.yaml found" "success"
         
@@ -677,13 +677,13 @@ check_template_validation() {
         return 1
     fi
     
-    # Zkontrolovat soubory infrastruktury
+    # Kontrola souborů infrastruktury
     if [[ -d "infra" ]]; then
         local bicep_count=$(find infra -name "*.bicep" | wc -l)
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # Validovat main.bicep, pokud existuje
+            # Validace main.bicep, pokud existuje
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +706,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # Zkontrolovat, zda je umístění platné
+    # Kontrola platnosti lokace
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -714,7 +714,7 @@ check_regional_availability() {
         return 1
     fi
     
-    # Zkontrolovat dostupnost služby
+    # Kontrola dostupnosti služby
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
     for service in "${services[@]}"; do
@@ -729,7 +729,7 @@ check_regional_availability() {
 }
 
 main() {
-    # Zpracovat argumenty příkazové řádky
+    # Zpracování argumentů příkazové řádky
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -755,7 +755,7 @@ main() {
         esac
     done
     
-    # Ověřit požadované parametry
+    # Validace požadovaných parametrů
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -768,7 +768,7 @@ main() {
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
     
-    # Spustit kontroly
+    # Spuštění kontrol
     local all_passed=true
     
     check_prerequisites || all_passed=false
@@ -790,81 +790,81 @@ main() {
     fi
 }
 
-# Spustit hlavní funkci
+# Spuštění hlavní funkce
 main "$@"
 ```
 
 ---
 
-## Ruční kontrolní seznam
+## Kontrolní seznam manuální validace
 
 ### Kontrolní seznam před nasazením
 
-Vytiskněte tento kontrolní seznam a ověřte každý bod před nasazením:
+Vytiskněte si tento seznam a ověřte každý bod před nasazením:
 
 #### ✅ Nastavení prostředí
 - [ ] AZD CLI nainstalován a aktualizován na nejnovější verzi
-- [ ] Azure CLI nainstalován a přihlášen
-- [ ] Vybráno správné předplatné Azure
-- [ ] Název prostředí je jedinečný a vyhovuje konvencím pojmenování
-- [ ] Cílová resource group identifikována nebo ji lze vytvořit
+- [ ] Azure CLI nainstalován a autentizován
+- [ ] Vybrán správný Azure subscription
+- [ ] Název prostředí je unikátní a odpovídá konvencím pojmenování
+- [ ] Cílová skupina zdrojů identifikována nebo může být vytvořena
 
 #### ✅ Autentizace a oprávnění
-- [ ] Úspěšné přihlášení pomocí `azd auth login`
-- [ ] Uživatel má roli Contributor na cílovém předplatném/resource group
-- [ ] Service principal nakonfigurován pro CI/CD (pokud platí)
+- [ ] Úspěšně autentizován pomocí `azd auth login`
+- [ ] Uživatel má roli Přispěvatele (Contributor) na cílové předplatné/skupinu zdrojů
+- [ ] Konfigurován servisní principal pro CI/CD (pokud platí)
 - [ ] Žádné expirované certifikáty nebo přihlašovací údaje
 
 #### ✅ Validace šablon
 - [ ] Soubor `azure.yaml` existuje a je platný YAML
 - [ ] Všechny služby definované v azure.yaml mají odpovídající zdrojový kód
-- [ ] Bicep šablony v adresáři `infra/` jsou přítomny
-- [ ] `main.bicep` se zkompiluje bez chyb (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Náhled infrastruktury proběhne úspěšně (`azd provision --preview`)
-- [ ] Všechny požadované parametry mají výchozí hodnoty nebo budou poskytnuty
-- [ ] Žádné pevně zakódované tajné hodnoty v šablonách
+- [ ] Bicep šablony ve složce `infra/` jsou přítomny
+- [ ] `main.bicep` se překládá bez chyb (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Náhled infrastruktury probíhá úspěšně (`azd provision --preview`)
+- [ ] Všechny vyžadované parametry mají výchozí hodnoty nebo budou zadány
+- [ ] Žádná tajemství nejsou pevně zakódována ve šablonách
 
 #### ✅ Plánování zdrojů
-- [ ] Cílová oblast Azure vybrána a ověřena
-- [ ] Požadované služby Azure dostupné v cílové oblasti
-- [ ] Dostatečné kvóty dostupné pro plánované zdroje
-- [ ] Zkontrolovány konflikty pojmenování zdrojů
-- [ ] Závislosti mezi zdroji pochopeny
+- [ ] Cílový Azure region vybrán a ověřen
+- [ ] Požadované Azure služby jsou dostupné v cílovém regionu
+- [ ] Dostatečné kvóty jsou k dispozici pro plánované zdroje
+- [ ] Zkontrolovány konflikty názvů zdrojů
+- [ ] Pochopeny závislosti mezi zdroji
 
-#### ✅ Síť a zabezpečení
-- [ ] Síťová konektivita k Azure endpointům ověřena
-- [ ] Nastavení firewallu/proxy nakonfigurováno, pokud je potřeba
+#### ✅ Síť a bezpečnost
+- [ ] Ověřena síťová konektivita k Azure endpointům
+- [ ] Nakonfigurovány nastavení firewallu/proxy, pokud jsou potřeba
 - [ ] Key Vault nakonfigurován pro správu tajemství
-- [ ] Použity spravované identity tam, kde je to možné
-- [ ] Vynucení HTTPS povoleno pro webové aplikace
+- [ ] Používány spravované identity, kde je to možné
+- [ ] Povolení HTTPS pro webové aplikace aktivováno
 
-#### ✅ Správa nákladů
+#### ✅ Řízení nákladů
 - [ ] Odhady nákladů vypočteny pomocí Azure Pricing Calculator
-- [ ] Upozornění rozpočtu nakonfigurováno, pokud je potřeba
+- [ ] Nastaveny upozornění na rozpočet, pokud je požadováno
 - [ ] Vybrány vhodné SKU pro typ prostředí
-- [ ] Zvážena rezervovaná kapacita pro produkční zátěže
+- [ ] Zvážena rezervovaná kapacita pro produkční zatížení
 
-#### ✅ Monitorování a pozorovatelnost
+#### ✅ Monitorování a sledovatelnost
 - [ ] Application Insights nakonfigurován v šablonách
-- [ ] Plánován pracovní prostor Log Analytics
-- [ ] Definovány pravidla upozornění pro kritické metriky
-- [ ] V aplikacích implementovány endpointy pro kontrolu stavu
+- [ ] Naplánován Log Analytics workspace
+- [ ] Definována pravidla upozornění pro kritické metriky
+- [ ] Implementovány endpointy pro kontrolu stavu aplikací
 
 #### ✅ Zálohování a obnova
-- [ ] Definována strategie zálohování pro datové zdroje
-- [ ] Recovery time objectives (RTO) zdokumentovány
-- [ ] Recovery point objectives (RPO) zdokumentovány
-- [ ] Plán obnovy po havárii pro produkci je připraven
+- [ ] Definována strategie záloh pro datové zdroje
+- [ ] Dokumentovány cíle doby obnovení (RTO)
+- [ ] Dokumentovány cíle bodu obnovení (RPO)
+- [ ] Plán obnovy po havárii připraven pro produkci
 
 ---
 
-## Ověření prostředí
+## Validace prostředí
 
-### Ověření vývojového prostředí
+### Validace vývojového prostředí
 
 ```bash
 #!/bin/bash
-# Validace specifická pro vývojové prostředí
+# Validace specifické pro vývojové prostředí
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
@@ -883,7 +883,7 @@ validate_dev_environment() {
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # Validace konfigurací databáze pro vývojové prostředí
+    # Ověření konfigurací vývojové databáze
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -892,11 +892,11 @@ validate_dev_environment() {
 }
 ```
 
-### Ověření produkčního prostředí
+### Validace produkčního prostředí
 
 ```bash
 #!/bin/bash
-# Validace specifická pro produkční prostředí
+# Validace specifické pro produkční prostředí
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
@@ -908,7 +908,7 @@ validate_prod_environment() {
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # Kontrola konfigurací zálohování
+    # Kontrola konfigurací záloh
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
@@ -933,9 +933,9 @@ validate_prod_environment() {
 
 ---
 
-## Ověření zdrojů
+## Validace zdrojů
 
-### Skript pro ověření kvót
+### Skript pro kontrolu kvót
 
 ```python
 #!/usr/bin/env python3
@@ -990,7 +990,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # Získat účty úložiště v předplatném
+    # Získat úložiště účtů v předplatném
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -1038,7 +1038,7 @@ def main():
     
     all_passed = True
     
-    # Spustit kontroky
+    # Spustit kontroly
     all_passed &= check_compute_quotas(location)
     all_passed &= check_storage_limits(location)
     all_passed &= check_network_limits(location)
@@ -1058,9 +1058,9 @@ if __name__ == "__main__":
 
 ---
 
-## Kontroly zabezpečení a souladu
+## Bezpečnostní a soulady kontroly
 
-### Skript pro ověření zabezpečení
+### Skript pro bezpečnostní validaci
 
 ```bash
 #!/bin/bash
@@ -1071,7 +1071,7 @@ check_security_practices() {
     
     local issues_found=0
     
-    # Kontrola použití Key Vaultu
+    # Kontrola použití Key Vault
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1111,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Kontrola síťových bezpečnostních skupin
+    # Kontrola skupin zabezpečení sítě
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1146,7 +1146,7 @@ check_compliance_requirements() {
     fi
 }
 
-# Hlavní provedení
+# Hlavní spuštění
 main() {
     echo "🔒 Security and Compliance Validation"
     echo "📁 Checking infra/ directory for security best practices"
@@ -1292,56 +1292,56 @@ steps:
 
 ## Shrnutí osvědčených postupů
 
-### ✅ Osvědčené postupy pro přednasazovací kontroly
+### ✅ Nejlepší postupy pro kontroly před nasazením
 
 1. **Automatizujte, kde je to možné**
    - Integrujte kontroly do CI/CD pipeline
-   - Používejte skripty pro opakovatelná ověření
-   - Ukládejte výsledky pro auditní stopy
+   - Používejte skripty pro opakovatelné validace
+   - Uchovávejte výsledky pro auditní stopy
 
-2. **Ověření specifické pro prostředí**
-   - Rozdílné kontroly pro dev/staging/prod
-   - Vhodné bezpečnostní požadavky pro každé prostředí
-   - Optimalizace nákladů pro neprodukční prostředí
+2. **Validace specifická pro prostředí**
+   - Různé kontroly pro vývoj/staging/produkci
+   - Vhodné bezpečnostní požadavky podle prostředí
+   - Optimalizace nákladů u neprodukčních prostředí
 
 3. **Komplexní pokrytí**
    - Autentizace a oprávnění
    - Kvóty a dostupnost zdrojů
    - Validace šablon a syntaxe
-   - Požadavky na zabezpečení a soulad
+   - Bezpečnostní a soulady požadavky
 
 4. **Jasné reportování**
-   - Stavové indikátory s barevným označením
-   - Podrobné chybové zprávy s kroky nápravy
-   - Souhrnné zprávy pro rychlé zhodnocení
+   - Barevně kódované indikátory stavu
+   - Detailní chybové zprávy s kroky nápravy
+   - Shrnutí výsledků pro rychlé zhodnocení
 
-5. **Fail Fast**
-   - Zastavit nasazení, pokud kritické kontroly selžou
-   - Poskytnout jasné pokyny k řešení
-   - Umožnit snadné opětovné spuštění kontrol
+5. **Rychlé selhání**
+   - Zastavte nasazení při kritických selháních kontrol
+   - Poskytněte jasné návody na řešení
+   - Umožněte snadné opakování kontrol
 
-### Běžné problémy při přednasazovacích kontrolách
+### Časté problémy před nasazením
 
-1. **Přeskakování ověření** kvůli „rychlým“ nasazením
+1. **Přeskakování validace** u „rychlých“ nasazení
 2. **Nedostatečná kontrola oprávnění** před nasazením
 3. **Ignorování limitů kvót** až do selhání nasazení
-4. **Neověřování šablon** v CI/CD pipeline
-5. **Chybějící bezpečnostní ověření** pro produkční prostředí
-6. **Nedostatečný odhad nákladů** vedoucí k nepříjemným překvapením v rozpočtu
+4. **Nevalidování šablon** v CI/CD pipeline
+5. **Chybějící bezpečnostní validace** pro produkční prostředí
+6. **Nedostatečný odhad nákladů**, což vede k překvapením v rozpočtu
 
 ---
 
-**Užitečný tip**: Spouštějte přednasazovací kontroly jako samostatný úkol ve vaší CI/CD pipeline před samotným nasazením. To vám umožní odhalit problémy včas a poskytne vývojářům rychlejší zpětnou vazbu.
+**Užitečný tip**: Spouštějte kontroly před nasazením jako samostatnou úlohu ve vašem CI/CD pipeline před samotným úkolem nasazení. To vám umožní odhalit problémy včas a poskytne vývojářům rychlejší zpětnou vazbu.
 
 ---
 
 **Navigace**
 - **Předchozí lekce**: [Výběr SKU](sku-selection.md)
-- **Další lekce**: [Rychlý přehled](../../resources/cheat-sheet.md)
+- **Další lekce**: [Pomůcka](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Prohlášení o vyloučení odpovědnosti:
-Tento dokument byl přeložen pomocí AI překladatelské služby Co-op Translator (https://github.com/Azure/co-op-translator). Přestože usilujeme o přesnost, vezměte prosím na vědomí, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho původním jazyce by měl být považován za rozhodující zdroj. Pro zásadní informace se doporučuje profesionální lidský překlad. Nejsme odpovědni za žádná nedorozumění nebo chybné výklady vyplývající z použití tohoto překladu.
+**Prohlášení o vyloučení odpovědnosti**:  
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o přesnost, mějte, prosím, na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro zásadní informace se doporučuje profesionální lidský překlad. Neručíme za jakékoliv nedorozumění nebo nesprávné výklady vzniklé použitím tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

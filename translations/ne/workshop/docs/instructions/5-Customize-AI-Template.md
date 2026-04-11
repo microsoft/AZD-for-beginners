@@ -1,81 +1,81 @@
-# 5. टेम्पलेट अनुकूलन गर्नुहोस्
+# 5. टेम्प्लेट अनुकूलित गर्नुहोस्
 
-!!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
+!!! tip "यस मोड्युलको अन्त्यसम्म तपाईं सक्षम हुनुहुनेछ"
 
-    - [ ] पूर्वनिर्धारित AI एजेन्ट क्षमताहरू अन्वेषण गरियो
-    - [ ] तपाईंको आफ्नै इन्डेक्ससँग AI सर्च थपियो
-    - [ ] ट्रेसिङ मेट्रिक्स सक्रिय र विश्लेषण गरियो
-    - [ ] मूल्याङ्कन रन सञ्चालन गरियो
-    - [ ] रेड-टिमिङ स्क्यान सञ्चालन गरियो
-    - [ ] **Lab 5: अनुकूलन योजना बनाइयो** 
+    - [ ] पूर्वनिर्धारित AI एजेन्ट क्षमता अनुसंधान गर्ने
+    - [ ] आफ्नो आफ्नै सूचीसहित AI खोज थप्ने
+    - [ ] ट्रेसिङ मेट्रिक्स सक्रिय र विश्लेषण गर्ने
+    - [ ] मूल्याङ्कन रन सञ्चालन गर्ने
+    - [ ] रेड-टीमिङ स्क्यान सञ्चालन गर्ने
+    - [ ] **प्रयोगशाला 5: अनुकूलन योजना तयार पार्ने** 
 
 ---
 
-## 5.1 AI Agent Capabilities
+## 5.1 AI एजेन्ट क्षमता
 
-!!! success "We completed this in Lab 01"
+!!! success "हामीले यो प्रयोगशाला 01 मा पूरा गर्यौं"
 
-- **File Search**: ज्ञान पुनःप्राप्तिका लागि OpenAI को बिल्ट-इन फाइल सर्च
-- **Citations**: जवाफहरूमा स्वचालित स्रोत श्रेय
-- **Customizable Instructions**: एजेन्टको व्यवहार र व्यक्तित्व परिमार्जन गर्न सकिन्छ
-- **Tool Integration**: अनुकूल क्षमताहरूका लागि विस्तारयोग्य उपकरण प्रणाली
+- **फाइल खोजी**: ज्ञान पुनःप्राप्तिका लागि OpenAI को बिल्ट-इन फाइल खोजी
+- **स्रोत सूचनाहरु**: प्रतिक्रियाहरूमा स्वचालित स्रोत सन्दर्भ
+- **अनुकूलनयोग्य निर्देशनहरू**: एजेन्टको व्यवहार र व्यक्तित्व परिमार्जन गर्ने
+- **उपकरण एकीकरण**: अनुकूलन क्षमता को लागि विस्तार योग्य उपकरण प्रणाली
 
 ---
 
 ## 5.2 ज्ञान पुनःप्राप्ति विकल्पहरू
 
-!!! task "To complete this we need to make changes and redeploy"    
+!!! task "यसलाई पूरा गर्न हामीले परिवर्तनहरू गर्न र पुनर्संचालन गर्न आवश्यक छ"    
     
     ```bash title=""
-    # Set environment variables
+    # वातावरण चर सेट गर्नुहोस्
     azd env set USE_AZURE_AI_SEARCH_SERVICE true
     azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
-    # Upload data and create my index
+    # डेटा अपलोड गरेर मेरो सूची बनाउनुहोस्
 
     ```
 
 ---
 
-**OpenAI File Search (Default):**
+**OpenAI फाइल खोज (पूर्वनिर्धारित):**
 
-- Foundry एजेन्टहरूमा बिल्ट-इन
-- स्वचालित दस्तावेज प्रोसेसिङ र इन्डेक्सिङ
-- थप कन्फिगरेसन आवश्यक छैन
+- Foundry एजेन्टहरूमा नै बिल्ट-इन
+- स्वचालित कागजात प्रक्रिया र सूचीकरण
+- कुनै अतिरिक्त कन्फिगरेसन आवश्यक छैन
 
-**Azure AI Search (Optional):**
+**Azure AI खोज (वैकल्पिक):**
 
-- हाइब्रिड सेम्यान्टिक र भेक्टर सर्च
-- अनुकूलित इन्डेक्स व्यवस्थापन
-- उन्नत सर्च क्षमता
-- आवश्यक: `USE_AZURE_AI_SEARCH_SERVICE=true`
+- हाइब्रिड सेम्यान्टिक र भेक्टर खोज
+- अनुकूलित सूची व्यवस्थापन
+- उन्नत खोज क्षमता
+- `USE_AZURE_AI_SEARCH_SERVICE=true` आवश्यक
 
 ---
 
-## 5.3 [ट्रेसिङ र निगरानी](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [ट्रेसिङ र अनुगमन](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "To complete this we need to make changes and redeploy"    
+!!! task "यसलाई पूरा गर्न हामीले परिवर्तनहरू गर्न र पुनर्संचालन गर्न आवश्यक छ"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
     azd deploy
     ```
 
-**Tracing:**
+**ट्रेसिङ:**
 
 - OpenTelemetry एकीकरण
 - अनुरोध/प्रतिक्रिया ट्र्याकिङ
 - प्रदर्शन मेट्रिक्स
 - Microsoft Foundry पोर्टलमा उपलब्ध
 
-**Logging:**
+**लगिङ:**
 
 - Container Apps मा अनुप्रयोग लगहरू
-- सम्बन्धित ID हरू सहित संरचित लगिङ
-- रियल-टाइम र ऐतिहासिक लग हेर्ने सुविधा
+- सम्बन्धित IDs सहित संरचित लगिङ
+- रियल-टाइम र ऐतिहासिक लग अवलोकन
 
 ---
 
@@ -83,74 +83,72 @@
 
 **स्थानीय मूल्याङ्कन:**
 
-- गुणस्तर मूल्याङ्कनका लागि बिल्ट-इन इवालुएटरहरू
-- अनुकूलित मूल्याङ्कन स्क्रिप्टहरू
-- प्रदर्शन बेन्चमार्किङ
+- गुणस्तर मूल्याङ्कनको लागि बिल्ट-इन मूल्याङ्ककहरू
+- अनुकूलन मूल्याङ्कन स्क्रिप्टहरू
+- प्रदर्शन मापन
 
-**निरन्तर निगरानी:**
+**लगातार अनुगमन:**
 
-- प्रत्यक्ष अन्तरक्रिया हरूको स्वचालित मूल्याङ्कन
-- गुणस्तर मेट्रिक्स ट्र्याकिङ
-- प्रदर्शन रिग्रेसन पत्ता लगाउने
+- प्रत्यक्ष अन्तरक्रियाहरूको स्वचालित मूल्याङ्कन
+- गुणस्तर मेट्रिक्स अनुगमन
+- प्रदर्शन रिग्रेसन पहिचान
 
 **CI/CD एकीकरण:**
 
 - GitHub Actions वर्कफ्लो
 - स्वचालित परीक्षण र मूल्याङ्कन
-- साँख्यिकीय तुलना परीक्षण
+- सांख्यिक तुलना परीक्षण
 
 ---
 
-## 5.5 [AI रेड-टिमिङ एजेन्ट](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [AI रेड टीमिङ एजेन्ट](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**AI रेड टिमिङ:**
+**AI रेड टीमिङ:**
 
-- स्वचालित सुरक्षा स्क्यानिंग
+- स्वचालित सुरक्षा स्क्यानिङ
 - AI प्रणालीहरूको जोखिम मूल्याङ्कन
-- धेरै श्रेणीहरूमा सुरक्षा मूल्याङ्कन
+- धेरै वर्गहरूमा सुरक्षा मूल्याङ्कन
 
 **प्रमाणीकरण:**
 
-- Azure सेवाहरूका लागि Managed Identity
-- वैकल्पिक Azure App Service प्रमाणीकरण
-- डेभलपमेन्टका लागि बेसिक प्रमाणीकरण फलब्याक
+- Azure सेवाहरूका लागि प्रबन्धित पहिचान
+- वैकल्पिक Azure एप सेवा प्रमाणीकरण
+- विकासका लागि बेसिक प्रमाणीकरण ब्याकअप
 
+!!! quote "यस प्रयोगशालाको अन्त्यसम्म तपाईंले पाइसक्नु पर्ने कुरा"
+    - [ ] तपाईंको परिदृश्य आवश्यकताहरू परिभाषित गर्नुभएको
+    - [ ] अनुकूलित वातावरण चरहरू (कन्फिग)
+    - [ ] अनुकूलित एजेन्ट निर्देशनहरू (कार्य)
+    - [ ] अनुकूलित टेम्प्लेट लागू गर्नुहोस् (एप)
+    - [ ] पोस्ट-डिप्लोयमेन्ट कार्यहरू पूरा गर्ने (म्यानुअल)
+    - [ ] परीक्षण मूल्याङ्कन सञ्चालन गर्ने
 
-
-!!! quote "BY THE END OF THIS LAB YOU SHOULD HAVE"
-    - [ ] तपाईंको परिदृश्य आवश्यकताहरू परिभाषित गर्नुहोस्
-    - [ ] env भेरिएबलहरू अनुकूलित गर्नुहोस् (config)
-    - [ ] एजेन्ट निर्देशनहरू अनुकूलित गर्नुहोस् (task)
-    - [ ] अनुकूलित टेम्पलेट तैनाथ गर्नुहोस् (app)
-    - [ ] पोस्ट-डिप्लोयमेन्ट कार्यहरू पूरा गर्नुहोस् (manual)
-    - [ ] परीक्षण मूल्याङ्कन चलाउनुहोस्
-
-यो उदाहरणले दुई विशेषज्ञ एजेन्टहरू र बहु मोडल तैनाथीहरूसहित उद्यम खुद्रा प्रयोग केसका लागि टेम्पलेट कसरी अनुकूलन गर्ने देखाउँछ।
+यस उदाहरणले दुई विशेषज्ञ एजेन्ट र थुप्रै मोडल डिप्लोयमेन्टहरू सहित एक एन्त्रप्राइज खुद्रा प्रयोग केसको लागि टेम्प्लेट अनुकूलन देखाउँदछ।
 
 ---
 
-## 5.6 तपाईंका लागि अनुकूलन गर्नुहोस्!
+## 5.6 तपाईंका लागि अनुकूलित गर्नुहोस्!
 
 ### 5.6.1. परिदृश्य आवश्यकताहरू
 
-#### **एजेन्ट तैनाथीहरू:** 
+#### **एजेन्ट डिप्लोयमेन्टहरू:** 
 
-   - Shopper Agent: ग्राहकहरूलाई उत्पादनहरू फेला पार्न र तुलना गर्न मद्दत गर्छ
-   - Loyalty Agent: ग्राहक पुरस्कार र प्रचार व्यवस्थापन गर्छ
+   - ग्राहक एजेन्ट: ग्राहकहरूलाई उत्पादनहरू पत्ता लगाउन र तुलना गर्न मद्दत गर्ने
+   - वफादारी एजेन्ट: ग्राहक पुरस्कार र प्रचार व्यवस्थापन गर्ने
 
-#### **मोडेल तैनाथीहरू:**
+#### **मोडल डिप्लोयमेन्टहरू:**
 
-   - `gpt-4.1`: प्राथमिक च्याट मोडेल
-   - `o3`: जटिल प्रश्नहरूको लागि reasoning मोडेल
-   - `gpt-4.1-nano`: सरल अन्तरक्रियाका लागि हल्का मोडेल
-   - `text-embedding-3-large`: सर्चका लागि उच्च-गुणस्तर एम्बेडिङ
+   - `gpt-4.1`: प्रमुख च्याट मोडल
+   - `o3`: जटिल प्रश्नहरूको लागि तर्क मोडल
+   - `gpt-4.1-nano`: सरल अन्तरक्रियाको लागि हल्का मोडल
+   - `text-embedding-3-large`: खोजको लागि उच्च गुणस्तर_embeddings
 
 #### **विशेषताहरू:**
 
-   - ट्रेसिङ र निगरानी सक्षम गरिएको
-   - उत्पादन सूचीका लागि AI सर्च
-   - गुणस्तर सुनिश्चितताका लागि मूल्याङ्कन फ्रेमवर्क
-   - सुरक्षा प्रमाणिकरणका लागि रेड-टिमिङ
+   - ट्रेसिङ र अनुगमन सक्षम
+   - उत्पादन सूचीको लागि AI खोज
+   - गुणस्तर आश्वासनको लागि मूल्याङ्कन फ्रेमवर्क
+   - सुरक्षा मान्यताको लागि रेड टीमिङ
 
 ---
 
@@ -159,15 +157,15 @@
 
 #### 5.6.2.1. पूर्व-डिप्लोयमेन्ट कन्फिग
 
-सेटअप स्क्रिप्ट सिर्जना गर्नुहोस् (`setup-retail.sh`)
+सेटअप स्क्रिप्ट बनाउनुहोस् (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
-# पर्यावरण नाम सेट गर्नुहोस्
+# वातावरण नाम सेट गर्नुहोस्
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# क्षेत्र कन्फिगर गर्नुहोस् (मोडेल उपलब्धताका आधारमा छनौट गर्नुहोस्)
+# क्षेत्र कन्फिगर गर्नुहोस् (मोडेल उपलब्धतामा आधारित चयन गर्नुहोस्)
 azd env set AZURE_LOCATION "eastus2"
 
 # सबै वैकल्पिक सेवाहरू सक्षम गर्नुहोस्
@@ -175,21 +173,21 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# प्राथमिक च्याट मोडेल कन्फिगर गर्नुहोस् (gpt-4.1 सबैभन्दा नजिक उपलब्ध मोडलको रूपमा)
+# प्राथमिक च्याट मोडेल कन्फिगर गर्नुहोस् (gpt-4.1 लाई gpt-4.1 सँग सबैभन्दा नजिक उपलब्ध मोडेलको रूपमा)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# उन्नत खोजको लागि इम्बेडिङ मोडेल कन्फिगर गर्नुहोस्
+# सुधारिएको खोजको लागि एम्बेडिङ मोडेल कन्फिगर गर्नुहोस्
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# एजेन्ट नाम सेट गर्नुहोस् (पहिलो एजेन्ट सिर्जना हुनेछ)
+# एजेंट नाम सेट गर्नुहोस् (पहिलो एजेंट सिर्जना हुनेछ)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# खोज सूचकांक कन्फिगर गर्नुहोस्
+# खोज इन्डेक्स कन्फिगर गर्नुहोस्
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -200,7 +198,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 #### 5.6.2.2: एजेन्ट निर्देशनहरू
 
-सिर्जना गर्नुहोस् `custom-agents/shopper-agent-instructions.md`:
+`custom-agents/shopper-agent-instructions.md` बनाउनुहोस्:
 
 ```markdown
 # Shopper Agent Instructions
@@ -223,7 +221,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-सिर्जना गर्नुहोस् `custom-agents/loyalty-agent-instructions.md`:
+`custom-agents/loyalty-agent-instructions.md` बनाउनुहोस्:
 
 ```markdown
 # Loyalty Agent Instructions
@@ -250,7 +248,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 #### 5.6.2.3: डिप्लोयमेन्ट स्क्रिप्ट
 
-सिर्जना गर्नुहोस् `deploy-retail.sh`:
+`deploy-retail.sh` बनाउनुहोस्:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -270,12 +268,12 @@ if ! az account show &> /dev/null; then
     exit 1
 fi
 
-# पर्यावरण सेटअप गर्नुहोस्
+# वातावरण सेट अप गर्नुहोस्
 echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# छानिएको क्षेत्रमा कोटा जाँच्नुहोस्
+# चयन गरिएको क्षेत्रको कोटा जाँच्नुहोस्
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -291,16 +289,16 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# अवसंरचना र अनुप्रयोग तैनाथ गर्नुहोस्
+# पूर्वाधार र अनुप्रयोग तैनात गर्नुहोस्
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# तैनाती आउटपुटहरू समात्नुहोस्
+# तैनाती आउटपुटहरू कैद गर्नुहोस्
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# वेब एपको URL प्राप्त गर्नुहोस्
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# वेब अनुप्रयोग URL प्राप्त गर्नुहोस्
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -323,14 +321,14 @@ echo "4. Test both agents with sample queries"
 
 #### 5.6.2.4: पोस्ट-डिप्लोयमेन्ट कन्फिग
 
-सिर्जना गर्नुहोस् `configure-retail-agents.sh`:
+`configure-retail-agents.sh` बनाउनुहोस्:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🔧 Configuring retail agents..."
 
-# परिनियोजन जानकारी प्राप्त गर्नुहोस्
+# वितरण जानकारी प्राप्त गर्नुहोस्
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
@@ -378,21 +376,21 @@ echo "
 "
 ```
 
-### 5.6.3: परीक्षण र प्रमाणिकरण
+### 5.6.3: परीक्षण र मान्यता
 
-सिर्जना गर्नुहोस् `test-retail-deployment.sh`:
+`test-retail-deployment.sh` बनाउनुहोस्:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🧪 Testing retail deployment..."
 
-# पर्यावरण चरहरू सेट भएका छन् भनी जाँच गर्नुहोस्
+# वातावरण चर सेट गरिएको छ कि छैन जाँच गर्नुहोस्
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# वेब अनुप्रयोगको उपलब्धता परीक्षण गर्नुहोस्
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# वेब अनुप्रयोग उपलब्धता परीक्षण गर्नुहोस्
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -405,7 +403,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# कन्फिगर गरिएको छ भने मूल्याङ्कन चलाउनुहोस्
+# कन्फिगर गरिएको भए मूल्यांकन चलाउनुहोस्
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -429,42 +427,42 @@ Next steps:
 
 ---
 
-### 5.6.4 अपेक्षित नतिजाहरू
+### 5.6.4 अपेक्षित परिणामहरू
 
-After following this implementation guide, you will have:
+यस कार्यान्वयन मार्गनिर्देशन पछ्याएपछि, तपाईंले:
 
-1. **तैनाथ गरिएको पूर्वाधार:**
+1. **डिप्लोय गरिएको पूर्वाधार:**
 
-      - Microsoft Foundry परियोजना मोडेल तैनाथीहरूसहित
+      - मोडल डिप्लोयमेन्टसहित Microsoft Foundry प्रोजेक्ट
       - वेब अनुप्रयोग होस्ट गर्ने Container Apps
-      - उत्पादन सूचीका लागि AI Search सेवा
-      - निगरानीका लागि Application Insights
+      - उत्पादन सूचीका लागि AI खोज सेवा
+      - अनुगमनको लागि Application Insights
 
 2. **प्रारम्भिक एजेन्ट:**
 
-      - Shopper Agent आधारभूत निर्देशनहरूसँग कन्फिगर गरिएको
-      - फाइल सर्च क्षमता सक्षम गरिएको
-      - ट्रेसिङ र निगरानी कन्फिगर गरिएको
+      - आधारभूत निर्देशनहरूसँग कन्फिगर गरिएको ग्राहक एजेन्ट
+      - फाइल खोज क्षमतासँग सक्षम
+      - ट्रेसिङ र अनुगमन कन्फिगर गरिएको
 
-3. **अनुकूलनका लागि तयार:**
+3. **अनुकूलनको लागि तयार:**
 
-      - Loyalty Agent थप्नको लागि फ्रेमवर्क
-      - अनुकूल निर्देशन टेम्पलेटहरू
-      - परीक्षण र प्रमाणिकरण स्क्रिप्टहरू
-      - निगरानी र मूल्याङ्कन सेटअप
+      - वफादारी एजेन्ट थप्ने फ्रेमवर्क
+      - अनुकूलन निर्देशन टेम्प्लेटहरू
+      - परीक्षण र मान्यता स्क्रिप्टहरू
+      - अनुगमन र मूल्याङ्कन सेटअप
 
-4. **उत्पादन तयारी:**
+4. **उत्पादन तत्परता:**
 
-      - रेड-टिमिङ सहित सुरक्षा स्क्यानिङ
-      - प्रदर्शन निगरानी
-      - गुणवत्ता मूल्याङ्कन फ्रेमवर्क
-      - स्केलेबल आर्किटेक्चर
+      - रेड टीमिङ मार्फत सुरक्षा स्क्यानिङ
+      - प्रदर्शन अनुगमन
+      - गुणस्तर मूल्याङ्कन फ्रेमवर्क
+      - स्केलेबल संरचना
 
-यो उदाहरणले देखाउँछ कि AZD टेम्पलेटलाई कसरी विशिष्ट उद्यम परिदृश्यहरूका लागि विस्तार र अनुकूलन गर्न सकिन्छ, सुरक्षा, निगरानी र स्केलेबिलिटीको उत्कृष्ट अभ्यासहरू कायम राख्दै।
+यस उदाहरणले कसरी AZD टेम्प्लेटलाई विशिष्ट एन्त्रप्राइज परिदृश्यहरूको लागि विस्तार गरी अनुकूलित गर्न सकिन्छ भन्ने देखाउँदछ, जबकि सुरक्षा, अनुगमन, र स्केलेबिलिटीका उत्तम अभ्यासहरू कायम राखिन्छ।
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**अस्वीकरण**:
-यो दस्तावेज AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरेर अनुवाद गरिएको हो। हामी शुद्धताको लागि प्रयासरत भए तापनि, कृपया ध्यान दिनुहोस् कि स्वचालित अनुवादमा त्रुटि वा अशुद्धता हुनसक्छ। मूल भाषामा रहेको दस्तावेजलाई अधिकारिक स्रोत मानिनु पर्छ। महत्वपूर्ण जानकारीका लागि व्यावसायिक मानवीय अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलतफहमी वा गलत व्याख्याका लागि हामी जिम्मेवार छैनौं।
+**अस्वीकरण**:  
+यो दस्तावेज एआई अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) प्रयोग गरेर अनुवाद गरिएको हो। हामी शुद्धताको लागि प्रयासरत छौं, तर कृपया ध्यान दिनुहोस् कि स्वचालित अनुवादमा त्रुटिहरू वा अशुद्धताहरू हुन सक्छन्। मूल दस्तावेज यसको आफैंको भाषा में आधिकारिक स्रोत मानिनुपर्छ। महत्वपूर्ण जानकारीको लागि, पेशेवर मानवीय अनुवाद सिफारिस गरिन्छ। यस अनुवादको प्रयोगबाट उत्पन्न कुनै पनि गलतफहमी वा गलत व्याख्याहरूको लागि हामी जिम्मेवार छैनौं।
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,102 +1,104 @@
-# AI agenti s Azure Developer CLI
+# Agenti AI s Azure Developer CLI
 
-**Navigace kapitoly:**
-- **📚 Domů kurz**: [AZD For Beginners](../../README.md)
+**Navigace kapitolou:**
+- **📚 Domovská stránka kurzu**: [AZD pro začátečníky](../../README.md)
 - **📖 Aktuální kapitola**: Kapitola 2 - Vývoj orientovaný na AI
 - **⬅️ Předchozí**: [Integrace Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Další**: [Nasazení modelu AI](ai-model-deployment.md)
-- **🚀 Pokročilé**: [Řešení s více agenty](../../examples/retail-scenario.md)
+- **➡️ Další**: [Nasazení AI modelu](ai-model-deployment.md)
+- **🚀 Pokročilé**: [Víceagentní řešení](../../examples/retail-scenario.md)
 
 ---
 
 ## Úvod
 
-AI agenti jsou autonomní programy, které vnímají své prostředí, činí rozhodnutí a vykonávají akce k dosažení konkrétních cílů. Na rozdíl od jednoduchých chatbotů, které odpovídají na podněty, agenti mohou:
+Agenti AI jsou autonomní programy, které mohou vnímat své prostředí, rozhodovat se a podnikat kroky k dosažení specifických cílů. Na rozdíl od jednoduchých chatbotů, kteří reagují na podněty, agenti mohou:
 
-- **Používat nástroje** - volat API, prohledávat databáze, spouštět kód
-- **Plánovat a uvažovat** - rozdělit složité úlohy na kroky
-- **Učit se z kontextu** - uchovávat paměť a přizpůsobovat chování
-- **Spolupracovat** - pracovat s ostatními agenty (systémy s více agenty)
+- **Používat nástroje** - Volat API, hledat v databázích, vykonávat kód
+- **Plánovat a uvažovat** - Rozdělit složité úkoly na kroky
+- **Učit se z kontextu** - Udržovat paměť a přizpůsobovat chování
+- **Spolupracovat** - Pracovat s jinými agenty (víceagentní systémy)
 
-Tento průvodce ukazuje, jak nasadit AI agenty do Azure pomocí Azure Developer CLI (azd).
+Tento průvodce vám ukáže, jak nasadit AI agenty do Azure pomocí Azure Developer CLI (azd).
+
+> **Poznámka k validaci (2026-03-25):** Tento průvodce byl ověřen s verzemi `azd` `1.23.12` a `azure.ai.agents` `0.1.18-preview`. Zkušenost s `azd ai` je stále v režimu preview, proto zkontrolujte nápovědu rozšíření, pokud se parametry na vašem zařízení liší.
 
 ## Cíle učení
 
 Po dokončení tohoto průvodce budete:
 - Rozumět tomu, co jsou AI agenti a jak se liší od chatbotů
-- Nasazovat předpřipravené šablony AI agentů pomocí AZD
-- Konfigurovat Foundry agenty pro vlastní agenty
-- Implementovat základní vzory agentů (použití nástrojů, RAG, multi-agent)
+- Nasadit předpřipravené šablony AI agentů pomocí AZD
+- Konfigurovat Foundry Agenty pro vlastní agenty
+- Implementovat základní agentní vzory (použití nástrojů, RAG, víceagentní)
 - Monitorovat a ladit nasazené agenty
 
-## Výstupy učení
+## Výsledky učení
 
 Po dokončení budete schopni:
-- Nasadit aplikace AI agentů do Azure jedním příkazem
-- Konfigurovat nástroje a schopnosti agenta
+- Nasadit aplikace AI agentů do Azure jediným příkazem
+- Konfigurovat nástroje a schopnosti agentů
 - Implementovat retrieval-augmented generation (RAG) s agenty
-- Navrhnout architektury s více agenty pro komplexní pracovní postupy
-- Řešit běžné problémy při nasazení agentů
+- Navrhovat víceagentní architektury pro složité pracovní postupy
+- Řešit běžné problémy s nasazením agentů
 
 ---
 
-## 🤖 Co odlišuje agenta od chatbota?
+## 🤖 Čím se agent liší od chatbota?
 
-| Funkce | Chatbot | AI agent |
-|---------|---------|----------|
-| **Chování** | Odpovídá na podněty | Provádí autonomní akce |
+| Vlastnost | Chatbot | AI Agent |
+|-----------|---------|----------|
+| **Chování** | Reaguje na podněty | Provádí autonomní akce |
 | **Nástroje** | Žádné | Může volat API, vyhledávat, spouštět kód |
-| **Paměť** | Pouze v rámci relace | Trvalá paměť napříč relacemi |
-| **Plánování** | Jedna odpověď | Vícekrokové uvažování |
-| **Spolupráce** | Jeden subjekt | Může spolupracovat s jinými agenty |
+| **Paměť** | Pouze relace | Trvalá paměť napříč relacemi |
+| **Plánování** | Jednorázová odpověď | Vícekrokové uvažování |
+| **Spolupráce** | Jednotlivý subjekt | Může spolupracovat s dalšími agenty |
 
 ### Jednoduchá analogie
 
-- **Chatbot** = Užitečná osoba odpovídající na dotazy u informační přepážky
-- **AI agent** = Osobní asistent, který může volat, domluvit schůzky a dokončit úkoly za vás
+- **Chatbot** = Pomocná osoba odpovídající na otázky na informačním stole
+- **AI Agent** = Osobní asistent, který může volat, rezervovat schůzky a plnit úkoly za vás
 
 ---
 
-## 🚀 Rychlý start: Nasadíte svého prvního agenta
+## 🚀 Rychlý start: Nasazení vašeho prvního agenta
 
-### Možnost 1: Šablona Foundry agentů (Doporučeno)
+### Možnost 1: Šablona Foundry Agentů (doporučeno)
 
 ```bash
-# Inicializovat šablonu AI agentů
+# Inicializujte šablonu AI agentů
 azd init --template get-started-with-ai-agents
 
 # Nasadit do Azure
 azd up
 ```
+  
+**Co se nasadí:**  
+- ✅ Foundry Agenti  
+- ✅ Microsoft Foundry modely (gpt-4.1)  
+- ✅ Azure AI Search (pro RAG)  
+- ✅ Azure Container Apps (webové rozhraní)  
+- ✅ Application Insights (monitorování)  
 
-**Co se nasadí:**
-- ✅ Foundry Agents
-- ✅ Microsoft Foundry Models (gpt-4.1)
-- ✅ Azure AI Search (pro RAG)
-- ✅ Azure Container Apps (webové rozhraní)
-- ✅ Application Insights (monitorování)
-
-**Čas:** ~15-20 minut
-**Cena:** ~$100-150/month (vývoj)
+**Čas:** ~15-20 minut  
+**Cena:** ~$100-150/měsíc (vývoj)  
 
 ### Možnost 2: OpenAI Agent s Prompty
 
 ```bash
-# Inicializovat šablonu agenta založenou na Prompty
+# Inicializujte šablonu agenta založenou na Prompty
 azd init --template agent-openai-python-prompty
 
 # Nasadit do Azure
 azd up
 ```
+  
+**Co se nasadí:**  
+- ✅ Azure Functions (serverless spuštění agenta)  
+- ✅ Microsoft Foundry modely  
+- ✅ Konfigurační soubory Prompty  
+- ✅ Ukázková implementace agenta  
 
-**Co se nasadí:**
-- ✅ Azure Functions (serverless vykonávání agenta)
-- ✅ Microsoft Foundry Models
-- ✅ Prompty konfigurační soubory
-- ✅ Ukázková implementace agenta
-
-**Čas:** ~10-15 minut
-**Cena:** ~$50-100/month (vývoj)
+**Čas:** ~10-15 minut  
+**Cena:** ~$50-100/měsíc (vývoj)  
 
 ### Možnost 3: RAG Chat Agent
 
@@ -107,105 +109,108 @@ azd init --template azure-search-openai-demo
 # Nasadit do Azure
 azd up
 ```
+  
+**Co se nasadí:**  
+- ✅ Microsoft Foundry modely  
+- ✅ Azure AI Search s ukázkovými daty  
+- ✅ Pipeline pro zpracování dokumentů  
+- ✅ Chat rozhraní s citacemi  
 
-**Co se nasadí:**
-- ✅ Microsoft Foundry Models
-- ✅ Azure AI Search s ukázkovými daty
-- ✅ Pipeline pro zpracování dokumentů
-- ✅ Chat rozhraní s citacemi
+**Čas:** ~15-25 minut  
+**Cena:** ~$80-150/měsíc (vývoj)  
 
-**Čas:** ~15-25 minut
-**Cena:** ~$80-150/month (vývoj)
+### Možnost 4: AZD AI Agent Init (Předběžný náhled založený na manifestu nebo šabloně)
 
-### Možnost 4: AZD AI Agent Init (na základě manifestu)
-
-Pokud máte soubor s manifestem agenta, můžete použít příkaz `azd ai` pro vygenerování projektu Foundry Agent Service přímo:
+Pokud máte manifest agenta, můžete použít příkaz `azd ai` k vytvoření projektu Foundry Agent Service přímo. Nedávné preview verze přidaly také podporu inicializace založené na šablonách, takže přesný způsob průchodu promptem se může mírně lišit v závislosti na vaší verzi rozšíření.
 
 ```bash
-# Nainstalovat rozšíření AI agentů
+# Nainstalujte rozšíření pro AI agenty
 azd extension install azure.ai.agents
 
-# Inicializovat z manifestu agenta
+# Volitelné: ověřte nainstalovanou náhledovou verzi
+azd extension show azure.ai.agents
+
+# Inicializujte z manifestu agenta
 azd ai agent init -m agent-manifest.yaml
 
 # Nasadit do Azure
 azd up
 ```
-
+  
 **Kdy použít `azd ai agent init` vs `azd init --template`:**
 
-| Přístup | Nejlepší pro | Jak to funguje |
-|----------|----------|------|
-| `azd init --template` | Zahájení z funkční ukázkové aplikace | Naklonuje celé repozitář šablony s kódem + infrastrukturou |
+| Přístup | Nejlepší pro | Jak funguje |
+|---------|--------------|-------------|
+| `azd init --template` | Začátek s funkční ukázkou | Klonuje kompletní šablonu s kódem + infrastrukturou |
 | `azd ai agent init -m` | Vytváření z vlastního manifestu agenta | Vytvoří strukturu projektu z definice agenta |
 
-> **Tip:** Použijte `azd init --template` při učení (Možnosti 1-3 výše). Použijte `azd ai agent init`, když vytváříte produkční agenty s vlastními manifesty. Viz [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pro kompletní reference.
+> **Tip:** Používejte `azd init --template` při učení (možnosti 1-3 výše). Používejte `azd ai agent init` při tvorbě produkčních agentů s vlastními manifesty. Viz [AZD AI CLI příkazy](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) pro úplnou referenci.
 
 ---
 
 ## 🏗️ Vzory architektury agentů
 
-### Vzor 1: Jediný agent s nástroji
+### Vzor 1: Jeden agent s nástroji
 
-Nejjednodušší vzor agenta - jeden agent, který může používat více nástrojů.
+Nejjednodušší vzor agenta – jeden agent, který může používat více nástrojů.
 
 ```mermaid
 graph TD
-    UI[Uživatelské rozhraní] --> Agent[AI agent<br/>gpt-4.1]
+    UI[Uživatelské rozhraní] --> Agent[AI Agent<br/>gpt-4.1]
     Agent --> Search[Nástroj pro vyhledávání]
-    Agent --> Database[Databázový nástroj]
+    Agent --> Database[Nástroj pro databázi]
     Agent --> API[Nástroj API]
-```
-**Ideální pro:**
-- Zákaznickou podporu
-- Výzkumné asistenty
-- Agenty pro analýzu dat
+```  
+**Nejlepší pro:**  
+- Zákaznickou podporu  
+- Výzkumné asistenty  
+- Agenty pro analýzu dat  
 
-**AZD šablona:** `azure-search-openai-demo`
+**Šablona AZD:** `azure-search-openai-demo`
 
 ### Vzor 2: RAG Agent (Retrieval-Augmented Generation)
 
-Agent, který před generováním odpovědí vyhledává relevantní dokumenty.
+Agent, který před generováním odpovědí nejprve vyhledá relevantní dokumenty.
 
 ```mermaid
 graph TD
-    Query[Uživatelský dotaz] --> RAG[RAG agent]
-    RAG --> Vector[Vektorové vyhledávání]
+    Query[Uživatelský dotaz] --> RAG[RAG Agent]
+    RAG --> Vector[Vectorové vyhledávání]
     RAG --> LLM[LLM<br/>gpt-4.1]
     Vector -- Dokumenty --> LLM
     LLM --> Response[Odpověď s citacemi]
-```
-**Ideální pro:**
-- Firemní znalostní báze
-- Systémy pro dotazy nad dokumenty
-- Compliance a právní výzkum
+```  
+**Nejlepší pro:**  
+- Podnikové znalostní báze  
+- Systémy pro otázky a odpovědi s dokumenty  
+- Právní a compliance výzkum  
 
-**AZD šablona:** `azure-search-openai-demo`
+**Šablona AZD:** `azure-search-openai-demo`
 
-### Vzor 3: Systém více agentů
+### Vzor 3: Víceagentní systém
 
-Více specializovaných agentů spolupracujících na komplexních úkolech.
+Více specializovaných agentů spolupracujících na složitých úkolech.
 
 ```mermaid
 graph TD
-    Orchestrator[Orchestrační agent] --> Research[Výzkumný agent<br/>gpt-4.1]
-    Orchestrator --> Writer[Agent pro psaní<br/>gpt-4.1-mini]
-    Orchestrator --> Reviewer[Agent pro recenzi<br/>gpt-4.1]
-```
-**Ideální pro:**
-- Generování komplexního obsahu
-- Vícekrokové pracovní postupy
-- Úkoly vyžadující různou odbornost
+    Orchestrator[Orchestrátor Agent] --> Research[Agent Výzkumu<br/>gpt-4.1]
+    Orchestrator --> Writer[Agent Psaní<br/>gpt-4.1-mini]
+    Orchestrator --> Reviewer[Agent Recenze<br/>gpt-4.1]
+```  
+**Nejlepší pro:**  
+- Složité generování obsahu  
+- Vícekrokové pracovní postupy  
+- Úkoly vyžadující různé expertízy  
 
-**Další informace:** [Multi-Agent Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md)
+**Více informací:** [Víceagentní koordinační vzory](../chapter-06-pre-deployment/coordination-patterns.md)
 
 ---
 
 ## ⚙️ Konfigurace nástrojů agenta
 
-Agentům přidává sílu, když mohou používat nástroje. Zde je návod, jak nakonfigurovat běžné nástroje:
+Agenti jsou silní, když mohou používat nástroje. Takto nakonfigurujete běžné nástroje:
 
-### Konfigurace nástrojů ve Foundry agentech
+### Konfigurace nástrojů ve Foundry Agentech
 
 ```python
 # agent_config.py
@@ -236,7 +241,7 @@ agent = project_client.agents.create_agent(
     tools=[search_tool, CodeInterpreterTool()]
 )
 ```
-
+  
 ### Konfigurace prostředí
 
 ```bash
@@ -246,38 +251,38 @@ azd env set AGENT_INSTRUCTIONS "You are a helpful assistant..."
 azd env set ENABLE_CODE_INTERPRETER "true"
 azd env set ENABLE_FILE_SEARCH "true"
 
-# Nasadit pomocí aktualizované konfigurace
+# Nasadit s aktualizovanou konfigurací
 azd deploy
 ```
-
+  
 ---
 
 ## 📊 Monitorování agentů
 
-### Integrace Application Insights
+### Integrace s Application Insights
 
-Všechny šablony AZD agentů zahrnují Application Insights pro monitorování:
+Všechny AZD šablony agentů obsahují Application Insights pro monitorování:
 
 ```bash
 # Otevřít monitorovací panel
 azd monitor --overview
 
-# Zobrazit živé protokoly
+# Zobrazit živé záznamy
 azd monitor --logs
 
 # Zobrazit živé metriky
 azd monitor --live
 ```
-
-### Klíčové metriky k sledování
+  
+### Klíčové metriky ke sledování
 
 | Metrika | Popis | Cíl |
-|--------|-------------|--------|
-| Prodleva odpovědi | Čas k vygenerování odpovědi | < 5 sekund |
-| Využití tokenů | Tokeny na požadavek | Sledovat kvůli nákladům |
-| Úspěšnost volání nástrojů | % úspěšných volání nástrojů | > 95% |
+|---------|-------|-----|
+| Latence odpovědi | Čas generování odpovědi | < 5 sekund |
+| Spotřeba tokenů | Tokeny na požadavek | Sledujte kvůli nákladům |
+| Úspěšnost volání nástrojů | % úspěšných vykonání nástrojů | > 95% |
 | Míra chyb | Neúspěšné požadavky agenta | < 1% |
-| Spokojenost uživatelů | Hodnocení | > 4.0/5.0 |
+| Spokojenost uživatelů | Hodnocení zpětné vazby | > 4.0/5.0 |
 
 ### Vlastní logování pro agenty
 
@@ -286,7 +291,7 @@ import os
 from azure.monitor.opentelemetry import configure_azure_monitor
 from opentelemetry import trace
 
-# Nakonfigurujte Azure Monitor pomocí OpenTelemetry
+# Nakonfigurujte Azure Monitor s OpenTelemetry
 configure_azure_monitor(
     connection_string=os.environ["APPLICATIONINSIGHTS_CONNECTION_STRING"]
 )
@@ -302,30 +307,30 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
             "latency_ms": latency_ms
         })
 ```
-
+  
 > **Poznámka:** Nainstalujte požadované balíčky: `pip install azure-monitor-opentelemetry opentelemetry`
 
 ---
 
-## 💰 Úvahy o nákladech
+## 💰 Náklady
 
 ### Odhadované měsíční náklady podle vzoru
 
 | Vzor | Vývojové prostředí | Produkce |
-|---------|-----------------|------------|
-| Jediný agent | $50-100 | $200-500 |
+|-------|------------------|----------|
+| Jeden agent | $50-100 | $200-500 |
 | RAG agent | $80-150 | $300-800 |
-| Multi-agent (2-3 agenti) | $150-300 | $500-1,500 |
-| Enterprise multi-agent | $300-500 | $1,500-5,000+ |
+| Víceagentní (2-3 agenti) | $150-300 | $500-1,500 |
+| Podnikový víceagentní | $300-500 | $1,500-5,000+ |
 
-### Tipy pro optimalizaci nákladů
+### Tipy na optimalizaci nákladů
 
-1. **Používejte gpt-4.1-mini pro jednoduché úlohy**
+1. **Používejte gpt-4.1-mini pro jednoduché úkoly**  
    ```bash
    azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
    ```
-
-2. **Implementujte cachování pro opakované dotazy**
+  
+2. **Implementujte cache pro opakované dotazy**  
    ```python
    from functools import lru_cache
    
@@ -333,23 +338,23 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
    def get_cached_response(query_hash):
        return agent.run(query_hash)
    ```
-
-3. **Nastavte limity tokenů na spuštění**
+  
+3. **Nastavte limity tokenů na běh**  
    ```python
-   # Nastavte max_completion_tokens při spuštění agenta, nikoli při jeho vytváření
+   # Nastavte max_completion_tokens při spouštění agenta, ne během tvorby
    run = project_client.agents.create_run(
        thread_id=thread.id,
        agent_id=agent.id,
-       max_completion_tokens=1000  # Omezte délku odpovědi
+       max_completion_tokens=1000  # Omezit délku odpovědi
    )
    ```
-
-4. **Škálujte na nulu, když není v použití**
+  
+4. **Škálujte na nulu, když agent není používán**  
    ```bash
-   # Container Apps se automaticky škálují na nulu
+   # Kontejnerové aplikace se automaticky škálují na nulu
    azd env set MIN_REPLICAS "0"
    ```
-
+  
 ---
 
 ## 🔧 Řešení problémů s agenty
@@ -357,10 +362,10 @@ def log_agent_interaction(user_query, agent_response, tools_used, latency_ms):
 ### Běžné problémy a řešení
 
 <details>
-<summary><strong>❌ Agent neodpovídá na volání nástrojů</strong></summary>
+<summary><strong>❌ Agent nereaguje na volání nástrojů</strong></summary>
 
 ```bash
-# Zkontrolujte, zda jsou nástroje správně zaregistrovány
+# Zkontrolujte, zda jsou nástroje správně registrovány
 azd show
 
 # Ověřte nasazení OpenAI
@@ -371,15 +376,15 @@ az cognitiveservices account deployment list \
 # Zkontrolujte protokoly agenta
 azd monitor --logs
 ```
-
-**Běžné příčiny:**
-- Nesoulad v signatuře funkce nástroje
-- Chybějící požadovaná oprávnění
-- API endpoint není dostupný
+  
+**Běžné příčiny:**  
+- Nesoulad ve funkčním podpisu nástroje  
+- Chybějící potřebná oprávnění  
+- API endpoint není přístupný  
 </details>
 
 <details>
-<summary><strong>❌ Vysoká latence v odpovědích agenta</strong></summary>
+<summary><strong>❌ Vysoká latence v odezvách agenta</strong></summary>
 
 ```bash
 # Zkontrolujte Application Insights kvůli úzkým místům
@@ -389,18 +394,18 @@ azd monitor --live
 azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
 azd deploy
 ```
-
-**Tipy pro optimalizaci:**
-- Používejte streamované odpovědi
-- Implementujte cachování odpovědí
-- Snižte velikost kontextového okna
+  
+**Tipy na optimalizaci:**  
+- Použijte streamování odpovědí  
+- Implementujte cache odpovědí  
+- Zmenšete velikost kontextového okna  
 </details>
 
 <details>
-<summary><strong>❌ Agent vrací nepřesné nebo vymyšlené informace</strong></summary>
+<summary><strong>❌ Agent vrací nesprávné nebo halucinované informace</strong></summary>
 
 ```python
-# Vylepšit pomocí lepších systémových promptů
+# Vylepšit pomocí lepších systémových výzev
 instructions = """
 You are a helpful assistant. IMPORTANT:
 - Only answer based on provided context
@@ -419,10 +424,10 @@ agent = project_client.agents.create_agent(
 </details>
 
 <details>
-<summary><strong>❌ Překročeny limity tokenů (token limit exceeded)</strong></summary>
+<summary><strong>❌ Chyby překročení limitu tokenů</strong></summary>
 
 ```python
-# Implementovat správu kontextového okna
+# Implementujte správu kontextového okna
 def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
     """Keep only recent messages within token limit."""
     import tiktoken
@@ -445,7 +450,7 @@ def truncate_context(messages, max_tokens=8000, model="gpt-4.1"):
 
 ## 🎓 Praktická cvičení
 
-### Cvičení 1: Nasadit základního agenta (20 minut)
+### Cvičení 1: Nasazení základního agenta (20 minut)
 
 **Cíl:** Nasadit svého prvního AI agenta pomocí AZD
 
@@ -455,45 +460,48 @@ azd init --template get-started-with-ai-agents
 
 # Krok 2: Přihlaste se do Azure
 azd auth login
+# Pokud pracujete napříč tenanty, přidejte --tenant-id <tenant-id>
 
-# Krok 3: Proveďte nasazení
+# Krok 3: Nasazení
 azd up
 
 # Krok 4: Otestujte agenta
 # Očekávaný výstup po nasazení:
 #   Nasazení dokončeno!
 #   Koncový bod: https://<app-name>.<region>.azurecontainerapps.io
-# Otevřete adresu URL zobrazenou ve výstupu a zkuste položit otázku
+# Otevřete URL zobrazenou ve výstupu a zkuste položit otázku
 
-# Krok 5: Zobrazit monitorování
+# Krok 5: Prohlédněte si monitorování
 azd monitor --overview
 
 # Krok 6: Úklid
 azd down --force --purge
 ```
+  
+**Kritéria úspěchu:**  
+- [ ] Agent odpovídá na otázky  
+- [ ] Přístup k monitorovacímu dashboardu přes `azd monitor`  
+- [ ] Zdroje úspěšně vyčištěny  
 
-**Kritéria úspěchu:**
-- [ ] Agent odpovídá na dotazy
-- [ ] Má přístup k monitorovacímu panelu přes `azd monitor`
-- [ ] Prostředky byly úspěšně odstraněny
-
-### Cvičení 2: Přidat vlastní nástroj (30 minut)
+### Cvičení 2: Přidání vlastního nástroje (30 minut)
 
 **Cíl:** Rozšířit agenta o vlastní nástroj
 
-1. Nasadit šablonu agenta:
+1. Nasadíte šablonu agenta:  
    ```bash
    azd init --template get-started-with-ai-agents
    azd up
    ```
-2. Vytvořte novou funkci nástroje ve svém kódu agenta:
+  
+2. Vytvoříte novou funkci nástroje v kódu agenta:  
    ```python
    def get_weather(location: str) -> str:
        """Get current weather for a location."""
        # Volání API na službu počasí
        return f"Weather in {location}: Sunny, 72°F"
    ```
-3. Zaregistrujte nástroj u agenta:
+  
+3. Zaregistrujete nástroj u agenta:  
    ```python
    from azure.ai.projects.models import FunctionTool
 
@@ -515,24 +523,25 @@ azd down --force --purge
        tools=[weather_tool]
    )
    ```
-4. Znovu nasadit a otestovat:
+  
+4. Znovu nasadíte a otestujete:  
    ```bash
    azd deploy
    # Zeptej se: "Jaké je počasí v Seattlu?"
-   # Očekává se: Agent zavolá get_weather("Seattle") a vrátí informace o počasí
+   # Očekávané: Agent zavolá get_weather("Seattle") a vrátí informace o počasí
    ```
+  
+**Kritéria úspěchu:**  
+- [ ] Agent rozpozná dotazy týkající se počasí  
+- [ ] Nástroj je správně volán  
+- [ ] Odpověď obsahuje informace o počasí  
 
-**Kritéria úspěchu:**
-- [ ] Agent rozpozná dotazy týkající se počasí
-- [ ] Nástroj je volán správně
-- [ ] Odpověď obsahuje informace o počasí
-
-### Cvičení 3: Vytvořit RAG agenta (45 minut)
+### Cvičení 3: Vytvoření RAG agenta (45 minut)
 
 **Cíl:** Vytvořit agenta, který odpovídá na otázky z vašich dokumentů
 
 ```bash
-# Krok 1: Nasadit RAG šablonu
+# Krok 1: Nasadit šablonu RAG
 azd init --template azure-search-openai-demo
 azd up
 
@@ -540,30 +549,30 @@ azd up
 # Umístěte soubory PDF/TXT do adresáře data/ a pak spusťte:
 python scripts/prepdocs.py
 
-# Krok 3: Otestujte pomocí doménově specifických otázek
+# Krok 3: Testujte s otázkami specifickými pro doménu
 # Otevřete URL webové aplikace z výstupu azd up
-# Pokládejte otázky o svých nahraných dokumentech
-# Odpovědi by měly obsahovat citace jako [doc.pdf]
+# Ptejte se na otázky týkající se vašich nahraných dokumentů
+# Odpovědi by měly obsahovat odkazy na citace jako [doc.pdf]
 ```
-
-**Kritéria úspěchu:**
-- [ ] Agent odpovídá z nahraných dokumentů
-- [ ] Odpovědi obsahují citace
-- [ ] Žádné vymyšlené informace u otázek mimo rozsah
+  
+**Kritéria úspěchu:**  
+- [ ] Agent odpovídá na základě nahraných dokumentů  
+- [ ] Odpovědi obsahují citace  
+- [ ] Nedochází k halucinacím na otázky mimo rozsah  
 
 ---
 
 ## 📚 Další kroky
 
-Nyní, když rozumíte AI agentům, prozkoumejte tyto pokročilé témata:
+Nyní, když rozumíte agentům AI, prozkoumejte tyto pokročilé témata:
 
 | Téma | Popis | Odkaz |
-|-------|-------------|------|
-| **Multi-Agent Systems** | Vytvářejte systémy s více spolupracujícími agenty | [Retail Multi-Agent Example](../../examples/retail-scenario.md) |
-| **Coordination Patterns** | Naučte se vzory orchestrací a komunikace | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) |
-| **Production Deployment** | Nasazení agentů připravené pro produkci | [Production AI Practices](../chapter-08-production/production-ai-practices.md) |
-| **Agent Evaluation** | Testujte a vyhodnocujte výkonnost agentů | [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md) |
-| **AI Workshop Lab** | Prakticky: Připravte své AI řešení pro AZD | [AI Workshop Lab](ai-workshop-lab.md) |
+|-------|--------|-------|
+| **Víceagentní systémy** | Stavba systémů s více spolupracujícími agenty | [Příklad retail víceagentního systému](../../examples/retail-scenario.md) |
+| **Koordinační vzory** | Naučte se orchestraci a komunikační vzory | [Koordinační vzory](../chapter-06-pre-deployment/coordination-patterns.md) |
+| **Produkční nasazení** | Nasazení agentů připravené pro produkci | [Produkční AI praktiky](../chapter-08-production/production-ai-practices.md) |
+| **Hodnocení agentů** | Testování a hodnocení výkonu agenta | [Řešení problémů s AI](../chapter-07-troubleshooting/ai-troubleshooting.md) |
+| **AI workshop lab** | Praktické: Připravte své AI řešení pro AZD | [AI workshop lab](ai-workshop-lab.md) |
 
 ---
 
@@ -571,34 +580,34 @@ Nyní, když rozumíte AI agentům, prozkoumejte tyto pokročilé témata:
 
 ### Oficiální dokumentace
 - [Azure AI Agent Service](https://learn.microsoft.com/azure/ai-services/agents/)
-- [Azure AI Foundry Agent Service Quickstart](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
+- [Azure AI Foundry Agent Service Rychlý start](https://learn.microsoft.com/azure/ai-services/agents/quickstart)
 - [Semantic Kernel Agent Framework](https://learn.microsoft.com/semantic-kernel/)
 
 ### Šablony AZD pro agenty
-- [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents)
+- [Začněte s AI agenty](https://github.com/Azure-Samples/get-started-with-ai-agents)
 - [Agent OpenAI Python Prompty](https://github.com/Azure-Samples/agent-openai-python-prompty)
 - [Azure Search OpenAI Demo](https://github.com/Azure-Samples/azure-search-openai-demo)
 
 ### Komunitní zdroje
-- [Awesome AZD - Agent Templates](https://azure.github.io/awesome-azd/?tags=ai-agents)
+- [Awesome AZD - Šablony agentů](https://azure.github.io/awesome-azd/?tags=ai-agents)
 - [Azure AI Discord](https://discord.gg/microsoft-azure)
 - [Microsoft Foundry Discord](https://discord.gg/nTYy5BXMWG)
 
-### Dovednosti agentů pro váš editor
-- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Nainstalujte znovupoužitelné dovednosti AI agentů pro vývoj v Azure v GitHub Copilot, Cursor nebo jakémkoli podporovaném agentovi. Obsahuje dovednosti pro [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [nasazení](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy) a [diagnostiku](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):
+### Agent Skills pro váš editor
+- [**Microsoft Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Instalujte znovupoužitelné AI agentní dovednosti pro vývoj v Azure v GitHub Copilot, Cursor nebo v libovolném podporovaném agentovi. Obsahuje dovednosti pro [Azure AI](https://skills.sh/microsoft/github-copilot-for-azure/azure-ai), [Microsoft Foundry](https://skills.sh/microsoft/github-copilot-for-azure/microsoft-foundry), [nasazení](https://skills.sh/microsoft/github-copilot-for-azure/azure-deploy) a [diagnostiku](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics):  
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
-
+  
 ---
 
-**Navigace**
-- **Předchozí lekce**: [Integrace Microsoft Foundry](microsoft-foundry-integration.md)
-- **Další lekce**: [Nasazení modelu AI](ai-model-deployment.md)
+**Navigace**  
+- **Předchozí lekce**: [Integrace Microsoft Foundry](microsoft-foundry-integration.md)  
+- **Další lekce**: [Nasazení AI modelu](ai-model-deployment.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Prohlášení o vyloučení odpovědnosti**:
-Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). Ačkoli usilujeme o přesnost, mějte prosím na paměti, že automatizované překlady mohou obsahovat chyby nebo nepřesnosti. Původní dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro kritické informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za jakákoliv nedorozumění nebo chybné výklady vyplývající z použití tohoto překladu.
+**Prohlášení o omezení odpovědnosti**:
+Tento dokument byl přeložen pomocí služby umělé inteligence pro překlad [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho původním jazyce by měl být považován za autoritativní zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Nejsme odpovědní za žádné nedorozumění nebo nesprávné interpretace vzniklé z použití tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

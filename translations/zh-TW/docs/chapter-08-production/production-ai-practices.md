@@ -1,41 +1,41 @@
-# 使用 AZD 部署生產級 AI 工作負載的最佳實務
+# 使用 AZD 的生產 AI 工作負載最佳實踐
 
 **章節導覽：**
-- **📚 課程首頁**: [AZD 初學者指南](../../README.md)
+- **📚 課程首頁**: [AZD 新手入門](../../README.md)
 - **📖 目前章節**: 第 8 章 - 生產與企業模式
-- **⬅️ 前一章**: [第 7 章：疑難排解](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ 另有相關**: [AI 工作坊實驗室](ai-workshop-lab.md)
-- **🎯 完成課程**: [AZD 初學者指南](../../README.md)
+- **⬅️ 上一章節**: [第 7 章：故障排除](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ 相關章節**: [AI 工作坊實驗室](ai-workshop-lab.md)
+- **🎯 課程結束**: [AZD 新手入門](../../README.md)
 
 ## 概覽
 
-本指南提供使用 Azure Developer CLI (AZD) 部署生產就緒 AI 工作負載的完整最佳實務。根據 Microsoft Foundry Discord 社群的回饋與實際客戶部署經驗，這些做法針對生產 AI 系統中最常見的挑戰提出解決方案。
+本指南提供使用 Azure Developer CLI（AZD）部署生產就緒 AI 工作負載的全面最佳實踐。這些實踐基於 Microsoft Foundry Discord 社群的回饋及真實客戶部署案例，針對生產 AI 系統中最常見的挑戰提出解決方案。
 
-## 處理的主要挑戰
+## 主要挑戰
 
-根據我們的社群投票結果，開發者面臨的主要挑戰如下：
+根據社群投票結果，開發者面臨的主要挑戰如下：
 
-- **45%** 在多服務 AI 部署上遇到困難
-- **38%** 在憑證與密鑰管理方面有問題  
-- **35%** 覺得生產可用性與擴充困難
+- **45%** 為多服務 AI 部署感到困難
+- **38%** 在憑證與密鑰管理上遇到問題  
+- **35%** 覺得生產就緒與擴展困難
 - **32%** 需要更好的成本優化策略
-- **29%** 需要改進監控與除錯
+- **29%** 需要改進監控與故障排除
 
-## 生產級 AI 的架構模式
+## 生產 AI 的架構模式
 
 ### 模式 1：微服務 AI 架構
 
-<strong>使用時機</strong>：具有多種能力的複雜 AI 應用
+<strong>使用時機</strong>：具有多種功能的複雜 AI 應用
 
 ```mermaid
 graph TD
-    Frontend[網站前端] --- Gateway[API 網關] --- LB[負載平衡器]
+    Frontend[網頁前端] --- Gateway[API 閘道] --- LB[負載平衡器]
     Gateway --> Chat[聊天服務]
     Gateway --> Image[影像服務]
     Gateway --> Text[文字服務]
-    Chat --> OpenAI[Microsoft Foundry 模型]
+    Chat --> OpenAI[微軟 Foundry 模型]
     Image --> Vision[電腦視覺]
-    Text --> DocIntel[文件智慧]
+    Text --> DocIntel[文件智能]
 ```
 **AZD 實作**：
 
@@ -109,46 +109,46 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## 關於 AI 代理健康狀態的思考
+## 考慮 AI 代理健康狀態
 
-當傳統的網站應用程式出現故障時，症狀通常很明顯：頁面無法載入、API 回傳錯誤或部署失敗。AI 驅動的應用程式可能也會以相同方式故障——但它們也可能以更細微、不會產生明顯錯誤訊息的方式表現異常。
+傳統網頁應用故障時，常見症狀包括：頁面無法載入、API 回傳錯誤或部署失敗。AI 驅動的應用可能同樣會遇到這些問題，但也可能以更細微且沒有明顯錯誤訊息的方式異常。
 
-本節幫助你建立監控 AI 工作負載的心智模型，讓你在情況不對時知道該往哪裡查看。
+本節協助你構建監控 AI 工作負載的心智模型，讓你知道在異常情況下應該從何處著手。
 
-### 代理健康與傳統應用健康的差異
+### 代理健康與傳統應用健康的不同
 
-傳統應用要麼能運作，要麼不能。AI 代理看起來可能能運作，但會產生差的結果。把代理健康想成兩層：
+傳統應用是「正常工作」或「不工作」；AI 代理則可能表面正常，但生成結果很差。可將代理健康視為兩層：
 
-| 層級 | 觀察重點 | 檢查位置 |
-|-------|--------------|---------------|
-| <strong>基礎設施健康</strong> | 服務是否在執行？資源是否已佈建？端點是否可達？ | `azd monitor`、Azure Portal 資源健康、容器/應用程式日誌 |
-| <strong>行為健康</strong> | 代理回應是否準確？回應是否及時？模型呼叫是否正確？ | Application Insights 追蹤、模型呼叫延遲指標、回應品質日誌 |
+| 層級 | 監控重點 | 觀察位置 |
+|-------|----------|----------|
+| <strong>基礎設施健康</strong> | 服務是否運行？資源是否已佈建？端點是否可達？ | `azd monitor`、Azure 入口網站資源健康、容器/應用日誌 |
+| <strong>行為健康</strong> | 代理是否正確回應？回應是否及時？模型是否被正確調用？ | Application Insights 追蹤、模型調用延遲指標、回應品質日誌 |
 
-基礎設施健康是熟悉的面向——對任何 azd 應用都一樣。行為健康是 AI 工作負載所新增的層面。
+基礎設施健康是所有 azd 應用共有的監控層；行為健康是 AI 工作負載特有的新層。
 
-### 當 AI 應用表現異常時該查看的地方
+### 當 AI 應用異常時應檢查的位置
 
-如果你的 AI 應用未產生預期結果，以下是概念性的檢查清單：
+若 AI 應用未達預期結果，以下是一份概念性檢查清單：
 
-1. **從基本檢查開始。** 應用程式是否在執行？能否連到其相依服務？像任何應用程式一樣檢查 `azd monitor` 和資源健康。
-2. **檢查模型連線。** 應用程式是否成功呼叫 AI 模型？模型呼叫失敗或逾時是 AI 應用問題最常見的原因，通常會顯示在應用程式日誌中。
-3. **查看模型收到的內容。** AI 的回應取決於輸入（提示與任何擷取到的上下文）。如果輸出錯誤，通常是輸入有問題。檢查你的應用程式是否傳送了正確的資料給模型。
-4. **檢閱回應延遲。** AI 模型呼叫比一般 API 呼叫更慢。如果應用程式感覺遲緩，檢查模型回應時間是否增加——這可能表示節流、容量限制或區域層級的擁塞。
-5. **注意成本訊號。** 代幣使用量或 API 呼叫的意外激增可能表示迴圈、錯誤設定的提示或過度重試。
+1. <strong>先檢查基本狀態</strong>。應用是否運行？是否可連接依賴？使用 `azd monitor` 和資源健康檢查，跟其他應用相同方式。
+2. <strong>檢查模型連接</strong>。應用是否成功呼叫 AI 模型？模型調用失敗或逾時是 AI 應用問題最常見的原因，會顯示在應用日誌中。
+3. <strong>查看模型接收到的資料</strong>。AI 回應依賴輸入（prompt 與任何擷取到的上下文）。輸出錯誤大多因輸入錯誤。確認應用是否送出正確資料給模型。
+4. <strong>檢查回應延遲</strong>。AI 模型調用比一般 API 較慢。若應用感覺遲緩，檢查是否模型回應時間變長，這可能表示被限流、容量不足或區域堵塞。
+5. <strong>關注成本訊號</strong>。意外的 token 用量或 API 調用激增可能是迴圈、prompt 設定錯誤或重試過多的徵兆。
 
-你不需要一開始就精通可觀察性工具。關鍵是：AI 應用多了一層需監控的行為面向，而 azd 內建的監控（`azd monitor`）提供一個調查兩個層面的起點。
+你不需要立刻精通觀察工具。關鍵是 AI 應用有額外的行為監控層，azd 內建監控 (`azd monitor`) 是調查兩層問題的起點。
 
 ---
 
-## 安全最佳實務
+## 安全最佳實踐
 
 ### 1. 零信任安全模型
 
 <strong>實作策略</strong>：
-- 未經驗證不得進行服務間通訊
-- 所有 API 呼叫使用 Managed Identities
-- 使用 private endpoints 進行網路隔離
-- 最小權限存取控制
+- 未授權不得進行服務間通訊
+- 所有 API 調用使用受管身份
+- 網路隔離，採用私用端點
+- 最小權限存取控管
 
 ```bicep
 // Managed Identity for each service
@@ -169,9 +169,9 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. 安全的機密管理
+### 2. 安全密鑰管理
 
-**Key Vault 整合範式**：
+**Key Vault 整合模式**：
 
 ```bicep
 // Key Vault with proper access policies
@@ -206,7 +206,7 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 
 ### 3. 網路安全
 
-**Private Endpoint 設定**：
+<strong>私用端點設定</strong>：
 
 ```bicep
 // Virtual Network for AI services
@@ -264,11 +264,11 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## 效能與擴充
+## 性能與擴展
 
-### 1. 自動調整策略
+### 1. 自動擴展策略
 
-**Container Apps 自動擴充**：
+**Container Apps 自動擴展**：
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -314,7 +314,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 2. 快取策略
 
-**針對 AI 回應的 Redis 快取**：
+**Redis 快取 AI 回應**：
 
 ```bicep
 // Redis Premium for production workloads
@@ -344,7 +344,7 @@ var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${r
 
 ### 3. 負載平衡與流量管理
 
-**搭配 WAF 的 Application Gateway**：
+**搭配 WAF 的應用閘道**：
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -382,9 +382,9 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 
 ## 💰 成本優化
 
-### 1. 資源適當調整
+### 1. 資源尺寸調整
 
-<strong>環境專屬設定</strong>：
+<strong>環境特定配置</strong>：
 
 ```bash
 # 開發環境
@@ -445,12 +445,12 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. 代幣使用優化
+### 3. Token 使用優化
 
 **OpenAI 成本管理**：
 
 ```typescript
-// 應用程式層級的 token 最佳化
+// 應用層級的代幣優化
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -460,7 +460,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // 截斷上下文，而不是使用者輸入
+      // 截斷上下文，不截斷使用者輸入
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -468,7 +468,7 @@ class TokenOptimizer {
   }
   
   private estimateTokens(text: string): number {
-    // 粗略估計：1 個 token ≈ 4 個字元
+    // 粗略估計：1 個代幣 ≈ 4 個字元
     return Math.ceil(text.length / 4);
   }
 }
@@ -476,7 +476,7 @@ class TokenOptimizer {
 
 ## 監控與可觀察性
 
-### 1. 全方位 Application Insights
+### 1. 全面 Application Insights
 
 ```bicep
 // Application Insights with advanced features
@@ -521,9 +521,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. AI 專屬監控
+### 2. AI 特定監控
 
-**AI 指標的自訂儀表板**：
+**AI 指標自訂儀表板**：
 
 ```json
 // Dashboard configuration for AI workloads
@@ -552,7 +552,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. 健檢與可用性監控
+### 3. 健康檢查與正常運作監控
 
 ```bicep
 // Application Insights availability tests
@@ -623,7 +623,7 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 
 ## 災難復原與高可用性
 
-### 1. 多區域部署
+### 1. 跨區域部署
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -685,7 +685,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. 數據備份與復原
+### 2. 資料備份與復原
 
 ```bicep
 // Backup configuration for critical data
@@ -782,7 +782,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup AZD
-        uses: Azure/setup-azd@v1.0.0
+        uses: Azure/setup-azd@v2
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -802,7 +802,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup AZD
-        uses: Azure/setup-azd@v1.0.0
+        uses: Azure/setup-azd@v2
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -819,7 +819,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. 基礎設施驗證
+### 2. 基礎建設驗證
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -827,7 +827,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# 檢查所有必要的服務是否正在執行
+# 檢查所有必要的服務是否正在運行
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -840,85 +840,85 @@ done
 # 驗證 OpenAI 模型部署
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
-if [[ ! $models == *"gpt-35-turbo"* ]]; then
-    echo "ERROR: Required model gpt-35-turbo not deployed"
+if [[ ! $models == *"gpt-4.1-mini"* ]]; then
+  echo "ERROR: Required model gpt-4.1-mini not deployed"
     exit 1
 fi
 
-# 測試 AI 服務連線
+# 測試 AI 服務連線性
 echo "Testing AI service connectivity..."
 python scripts/test_connectivity.py
 
 echo "Infrastructure validation completed successfully!"
 ```
 
-## 生產就緒檢查清單
+## 生產就緒檢查表
 
 ### 安全 ✅
-- [ ] 所有服務使用 Managed Identities
-- [ ] 機密儲存在 Key Vault
-- [ ] 已設定 private endpoints
-- [ ] 已實作網路安全群組
-- [ ] 以最小權限實作 RBAC
-- [ ] 在公開端點啟用 WAF
+- [ ] 所有服務皆使用受管身份
+- [ ] 密鑰存於 Key Vault
+- [ ] 私用端點已配置
+- [ ] 網路安全群組已實施
+- [ ] RBAC 採用最小權限
+- [ ] WAF 已啟用於公開端點
 
-### 效能 ✅
-- [ ] 已設定自動調整
-- [ ] 已實作快取
-- [ ] 已設定負載平衡
+### 性能 ✅
+- [ ] 配置自動擴展
+- [ ] 實施快取
+- [ ] 設定負載平衡
 - [ ] 靜態內容使用 CDN
 - [ ] 資料庫連線池
-- [ ] Token 使用優化
+- [ ] 優化 Token 使用
 
 ### 監控 ✅
-- [ ] 已設定 Application Insights
-- [ ] 已定義自訂指標
-- [ ] 已設定警示規則
-- [ ] 已建立儀表板
-- [ ] 已實作健康檢查
-- [ ] 已設定日誌保留政策
+- [ ] 設定 Application Insights
+- [ ] 定義自訂指標
+- [ ] 設定警示規則
+- [ ] 建立儀表板
+- [ ] 實施健康檢查
+- [ ] 日誌保留政策
 
 ### 可靠性 ✅
-- [ ] 多區域部署
+- [ ] 跨區域部署
 - [ ] 備份與復原計畫
-- [ ] 已實作斷路器
-- [ ] 已設定重試策略
+- [ ] 實施熔斷器
+- [ ] 配置重試策略
 - [ ] 優雅降級
 - [ ] 健康檢查端點
 
 ### 成本管理 ✅
-- [ ] 已設定預算警示
-- [ ] 資源適當調整
-- [ ] 已套用開發/測試折扣
-- [ ] 已購買預留實例
+- [ ] 設定預算警示
+- [ ] 資源尺寸調整
+- [ ] 套用測試/開發折扣
+- [ ] 購買預留實例
 - [ ] 成本監控儀表板
-- [ ] 定期成本檢討
+- [ ] 定期成本檢視
 
-### 合規性 ✅
-- [ ] 已符合資料區域性要求
-- [ ] 已啟用稽核日誌
-- [ ] 已套用合規性政策
-- [ ] 已實作安全基準
+### 合規 ✅
+- [ ] 符合資料駐留需求
+- [ ] 啟用稽核記錄
+- [ ] 套用合規策略
+- [ ] 實施安全基準
 - [ ] 定期安全評估
-- [ ] 事件回應計畫
+- [ ] 事件應變計畫
 
-## 效能基準
+## 性能基準
 
 ### 典型生產指標
 
 | 指標 | 目標 | 監控方式 |
 |--------|--------|------------|
 | <strong>回應時間</strong> | < 2 秒 | Application Insights |
-| <strong>可用性</strong> | 99.9% | 可用性監控 |
-| <strong>錯誤率</strong> | < 0.1% | 應用程式日誌 |
-| <strong>代幣使用</strong> | < $500/month | 成本管理 |
-| <strong>同時使用者</strong> | 1000+ | 壓力測試 |
-| <strong>復原時間</strong> | < 1 hour | 災難復原測試 |
+| <strong>可用性</strong> | 99.9% | 正常運作監控 |
+| <strong>錯誤率</strong> | < 0.1% | 應用日誌 |
+| **Token 使用量** | < $500/月 | 成本管理 |
+| <strong>同時使用者數</strong> | 1000+ | 負載測試 |
+| <strong>復原時間</strong> | < 1 小時 | 災難復原測試 |
 
-### 壓力測試
+### 負載測試
 
 ```bash
-# 用於 AI 應用的負載測試腳本
+# AI 應用程式的負載測試腳本
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -926,37 +926,40 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 社群最佳實務
+## 🤝 社群最佳實踐
 
-根據 Microsoft Foundry Discord 社群回饋：
+根據 Microsoft Foundry Discord 社群反饋：
 
-### 社群的首要建議：
+### 社群頂尖建議：
 
-1. **從小開始，逐步擴展**：以基本的 SKU 起步，並根據實際使用情況再擴充
-2. <strong>全面監控</strong>：從第一天起就建立完整的監控
-3. <strong>自動化安全</strong>：使用基礎設施即程式碼以維持一致的安全性
-4. <strong>充分測試</strong>：在你的管線中納入 AI 專屬測試
-5. <strong>成本規劃</strong>：及早監控代幣使用並設定預算警示
+1. **小規模起步，逐步擴展**：先使用基礎 SKU，根據實際使用量擴展
+2. <strong>全面監控</strong>：從第一天開始就建立完整監控制度
+3. <strong>自動化安全</strong>：採用基礎建設即代碼確保安全一致性
+4. <strong>徹底測試</strong>：在管線中加入 AI 特定測試
+5. <strong>成本規劃</strong>：早期監控 Token 使用率並設定預算警示
 
-### 常見陷阱避免：
+### 常見錯誤避免：
 
-- ❌ 在程式碼中硬編 API 金鑰
-- ❌ 未建立適當的監控
+- ❌ 將 API 金鑰硬編碼於程式碼
+- ❌ 未建立妥善監控
 - ❌ 忽略成本優化
-- ❌ 未測試故障情境
-- ❌ 未部署健康檢查就上線
+- ❌ 未測試失效情境
+- ❌ 部署未包含健康檢查
 
-## AZD AI CLI 指令與擴充套件
+## AZD AI CLI 命令與擴充
 
-AZD 包含一組不斷擴充的 AI 專屬指令與擴充套件，可簡化生產級 AI 工作流程。這些工具縮短了本地開發與 AI 工作負載生產部署之間的差距。
+AZD 提供不斷增加的 AI 特定命令與擴充套件，使生產 AI 工作流程更順暢。這些工具橋接本地開發與生產部署的差距。
 
-### AZD 的 AI 擴充套件
+### AZD AI 擴充
 
-AZD 使用擴充系統來新增 AI 專屬功能。安裝與管理擴充套件：
+AZD 使用擴充系統加入 AI 特有功能。可透過以下指令安裝與管理擴充：
 
 ```bash
-# 列出所有可用的擴充功能（包括 AI）
+# 列出所有可用的擴充功能（包含 AI）
 azd extension list
+
+# 檢查已安裝擴充功能的詳細資訊
+azd extension show azure.ai.agents
 
 # 安裝 Foundry agents 擴充功能
 azd extension install azure.ai.agents
@@ -971,81 +974,81 @@ azd extension install azure.ai.models
 azd extension upgrade --all
 ```
 
-**可用的 AI 擴充套件：**
+**可用的 AI 擴充：**
 
-| Extension | Purpose | Status |
+| 擴充 | 用途 | 狀態 |
 |-----------|---------|--------|
-| `azure.ai.agents` | Foundry Agent Service 管理 | 預覽 |
-| `azure.ai.finetune` | Foundry 模型微調 | 預覽 |
-| `azure.ai.models` | Foundry 自訂模型 | 預覽 |
+| `azure.ai.agents` | Foundry 代理服務管理 | 預覽版 |
+| `azure.ai.finetune` | Foundry 模型微調 | 預覽版 |
+| `azure.ai.models` | Foundry 自訂模型 | 預覽版 |
 | `azure.coding-agent` | 程式碼代理設定 | 可用 |
 
 ### 使用 `azd ai agent init` 初始化代理專案
 
-`azd ai agent init` 指令會搭建與 Microsoft Foundry Agent Service 整合的生產就緒 AI 代理專案：
+`azd ai agent init` 命令可建立已整合 Microsoft Foundry 代理服務的生產就緒 AI 代理專案：
 
 ```bash
 # 從代理清單初始化一個新的代理專案
 azd ai agent init -m <manifest-path-or-uri>
 
-# 初始化並指定特定的 Foundry 專案為目標
+# 初始化並指定特定的 Foundry 專案
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
 # 使用自訂來源目錄初始化
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
-# 以 Container Apps 作為主機
+# 選擇容器應用程式作為主機
 azd ai agent init -m agent-manifest.yaml --host containerapp
 ```
 
 **主要參數：**
 
-| Flag | Description |
-|------|-------------|
-| `-m, --manifest` | 要加入專案的 agent manifest 的路徑或 URI |
-| `-p, --project-id` | 用於你的 azd 環境的既有 Microsoft Foundry 專案 ID |
-| `-s, --src` | 下載代理定義的目錄（預設為 `src/<agent-id>`） |
-| `--host` | 覆寫預設主機（例如：`containerapp`） |
-| `-e, --environment` | 要使用的 azd 環境 |
+| 參數 | 說明 |
+|------|-------|
+| `-m, --manifest` | 要加入專案的代理描述檔路徑或 URI |
+| `-p, --project-id` | 現有 Microsoft Foundry 專案 ID，對應你的 azd 環境 |
+| `-s, --src` | 下載代理定義的資料夾（預設為 `src/<agent-id>`） |
+| `--host` | 覆寫預設主機（例如 `containerapp`） |
+| `-e, --environment` | 使用的 azd 環境 |
 
-<strong>生產提示</strong>：使用 `--project-id` 直接連接到既有的 Foundry 專案，從一開始就將你的代理程式碼與雲端資源連結。
+<strong>生產建議</strong>：使用 `--project-id` 直接連接現有 Foundry 專案，從一開始就將代理程式碼與雲端資源綁定。
 
-### 使用 `azd mcp` 的模型上下文協定 (MCP)
+### 使用 `azd mcp` 的模型上下文協定（MCP）
 
-AZD 包含內建的 MCP 伺服器支援（Alpha），使 AI 代理與工具可以透過標準化協定與你的 Azure 資源互動：
+AZD 內建 MCP 伺服器支援（Alpha），讓 AI 代理與工具可透過標準協定存取 Azure 資源：
 
 ```bash
-# 為您的專案啟動 MCP 伺服器
+# 啟動專案的 MCP 伺服器
 azd mcp start
 
-# 管理 MCP 操作的工具授權
-azd mcp consent
+# 檢視目前 Copilot 工具執行的同意規則
+azd copilot consent list
 ```
 
-MCP 伺服器會將你的 azd 專案內容（環境、服務與 Azure 資源）暴露給 AI 驅動的開發工具。這可支援：
+MCP 伺服器讓你的 azd 專案內容（環境、服務和 Azure 資源）對 AI 開發工具公開。這實現以下功能：
 
-- **AI 協助的部署**：讓程式碼代理查詢你的專案狀態並觸發部署
-- <strong>資源探索</strong>：AI 工具能發現你的專案使用了哪些 Azure 資源
-- <strong>環境管理</strong>：代理可在開發/測試/生產環境間切換
+- **AI 輔助部署**：讓程式碼代理查詢專案狀態並觸發部署
+- <strong>資源探索</strong>：AI 工具可發現專案使用的 Azure 資源
+- <strong>環境管理</strong>：代理可切換開發/測試/生產環境
 
-### 使用 `azd infra generate` 產生基礎設施
+### 使用 `azd infra generate` 產生基礎建設
 
-針對生產級 AI 工作負載，你可以產生並自訂基礎設施即程式碼，而不是依賴自動佈建：
+對生產 AI 工作負載，你可以產生並自訂基礎建設即代碼，而非仰賴自動佈建：
 
 ```bash
 # 從您的專案定義產生 Bicep/Terraform 檔案
 azd infra generate
 ```
 
-此操作會將 IaC 寫入磁碟，讓你可以：
-- 在部署前審查並稽核基礎設施
-- 新增自訂安全政策（網路規則、private endpoints）
-- 與既有的 IaC 審查流程整合
-- 將基礎設施變更與應用程式程式碼分開版本控制
+這會將 IaC 寫入硬碟，讓你能：
+- 部署前審核及稽核基礎建設
+- 加入自訂安全政策（網路規則、私用端點）
+- 整合現有 IaC 審查流程
+- 將基礎建設變更與應用程式代碼分開版本控制
 
-### 生產生命週期掛鉤
+### 生產生命週期掛勾
 
-AZD 的掛鉤讓你在部署生命週期的每個階段注入自訂邏輯——這對生產級 AI 工作流程至關重要：
+AZD 掛勾允許你在部署生命週期每個階段注入自訂邏輯，對生產 AI 工作流程至關重要：
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1074,84 +1077,85 @@ services:
 ```
 
 ```bash
-# 在開發期間手動執行特定的掛勾
+# 在開發過程中手動運行特定的掛鉤
 azd hooks run predeploy
 ```
 
-**建議的 AI 工作負載生產掛鉤：**
+**AI 工作負載推薦的生產掛勾：**
 
-| Hook | Use Case |
+| 掛勾 | 適用案例 |
 |------|----------|
-| `preprovision` | 驗證訂閱配額以確保 AI 模型容量 |
-| `postprovision` | 設定 private endpoints，部署模型權重 |
-| `predeploy` | 執行 AI 安全測試，驗證提示範本 |
-| `postdeploy` | 簡易測試代理回應，驗證模型連線 |
+| `preprovision` | 驗證 AI 模型容量訂閱限制 |
+| `postprovision` | 配置私用端點，部署模型權重 |
+| `predeploy` | 執行 AI 安全測試，驗證提示模板 |
+| `postdeploy` | 煙霧測試代理回應，確認模型連通性 |
 
-### CI/CD 管線設定
+### CI/CD 管線配置
 
-使用 `azd pipeline config` 將你的專案連接到 GitHub Actions 或 Azure Pipelines，並使用安全的 Azure 認證：
+使用 `azd pipeline config` 連結專案至 GitHub Actions 或 Azure Pipelines，附帶安全 Azure 認證：
 
 ```bash
-# 設定 CI/CD 管線（互動式）
+# 配置 CI/CD 管道（互動式）
 azd pipeline config
 
-# 使用特定提供者進行設定
+# 使用特定提供者配置
 azd pipeline config --provider github
 ```
 
-此指令會：
-- 建立具最小權限存取的服務主體
-- 設定聯合憑證（不儲存的祕密）
-- 生成或更新你的管線定義檔
-- 在你的 CI/CD 系統中設定所需的環境變數
+此命令會：
+- 建立最小權限的服務主體
+- 配置聯邦認證（無需存儲密鑰）
+- 建立或更新你的管線定義檔
+- 在 CI/CD 系統中設定必要環境變數
 
-**使用 pipeline config 的生產工作流程：**
+**生產流程搭配管線配置：**
 
 ```bash
 # 1. 設定生產環境
 azd env new production
 azd env set AZURE_OPENAI_CAPACITY 100
 
-# 2. 設定管線
+# 2. 配置管線
 azd pipeline config --provider github
 
-# 3. 管線會在每次推送到 main 分支時執行 azd deploy
+# 3. 每次推送到主分支時，管線執行 azd 部署
 ```
 
 ### 使用 `azd add` 新增元件
 
-逐步向既有專案新增 Azure 服務：
+逐步新增 Azure 服務至既有專案：
 
 ```bash
 # 以互動方式新增一個服務元件
 azd add
 ```
 
-這對擴展生產 AI 應用特別有用——例如向既有部署新增向量搜尋服務、新的代理端點或監控元件。
+這對擴展現有生產 AI 應用非常有用，例如新增向量搜尋服務、新代理端點或監控元件等。
 
-## 其他資源
-- **Azure Well-Architected Framework**: [AI 工作負載指引](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Microsoft Foundry Documentation**: [官方文件](https://learn.microsoft.com/azure/ai-studio/)
+## 附加資源
+- **Azure 架構良善框架**: [AI 工作負載指導](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Microsoft Foundry 文件**: [官方文件](https://learn.microsoft.com/azure/ai-studio/)
 - <strong>社群範本</strong>: [Azure Samples](https://github.com/Azure-Samples)
-- **Discord 社群**: [#Azure channel](https://discord.gg/microsoft-azure)
-- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 個針對 Azure AI、Foundry、部署、成本最佳化與診斷的開放代理技能。安裝到你的編輯器：
+- **Discord 社群**: [#Azure 頻道](https://discord.gg/microsoft-azure)
+- **Azure 代理技能**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 個適用於 Azure AI、Foundry、部署、成本優化及診斷的開放代理技能。在您的編輯器中安裝：
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**章節導覽：**
-- **📚 課程首頁**: [AZD For Beginners](../../README.md)
-- **📖 目前章節**: 第 8 章 - 生產與企業模式
-- **⬅️ 上一章**: [第 7 章：疑難排解](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ 相關連結**: [AI Workshop Lab](ai-workshop-lab.md)
-- **� 課程完成**: [AZD For Beginners](../../README.md)
+**章節導航：**
+- **📚 課程首頁**: [AZD 新手入門](../../README.md)
+- **📖 本章節**: 第 8 章 - 生產與企業模式
+- **⬅️ 上一章**: [第 7 章：除錯](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ 相關章節**: [AI 工作坊實作](ai-workshop-lab.md)
+- **� 課程結束**: [AZD 新手入門](../../README.md)
 
-<strong>記得</strong>：生產環境的 AI 工作負載需要謹慎規劃、監控，並持續優化。從這些模式開始，並依據你的特定需求進行調整。
+<strong>提醒</strong>：生產環境的 AI 工作負載需要細心規劃、監控與持續優化。請先從這些模式開始，並依您的具體需求進行調整。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**: 本文件已使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於維持準確性，但請注意，自動翻譯可能包含錯誤或不精確之處。原始文件的母語版本應被視為具權威性的來源。對於重要資訊，建議採用專業人工翻譯。我們不對因使用本翻譯而產生的任何誤解或誤釋負責。
+**免責聲明**：  
+本文件是使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯的。雖然我們努力確保翻譯的準確性，但請注意，自動翻譯可能包含錯誤或不準確之處。原始文件的原文版本應視為權威來源。對於重要資訊，建議採用專業人工翻譯。我們不對因使用此翻譯所產生的任何誤解或誤釋承擔責任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

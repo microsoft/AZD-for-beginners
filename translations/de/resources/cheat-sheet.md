@@ -1,43 +1,43 @@
 # Command Cheat Sheet - Wichtige AZD-Befehle
 
 **Schnellreferenz für alle Kapitel**
-- **📚 Kursübersicht**: [AZD für Anfänger](../README.md)
-- **📖 Schnellstart**: [Kapitel 1: Grundlage & Schnellstart](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 KI-Befehle**: [Kapitel 2: KI-zentrierte Entwicklung (empfohlen für KI-Entwickler)](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **📚 Kursübersicht**: [AZD für Einsteiger](../README.md)
+- **📖 Schnellstart**: [Kapitel 1: Grundlagen & Schnellstart](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 KI-Befehle**: [Kapitel 2: KI-zentrierte Entwicklung](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
 - **🔧 Erweitert**: [Kapitel 4: Infrastruktur als Code](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## Einführung
 
-Dieses umfassende Spickzettel bietet eine Schnellreferenz für die am häufigsten verwendeten Azure Developer CLI-Befehle, nach Kategorien mit praktischen Beispielen organisiert. Ideal für schnelle Nachschläge während der Entwicklung, Fehlerbehebung und dem täglichen Betrieb mit azd-Projekten.
+Dieses umfassende Cheat Sheet bietet eine Schnellreferenz für die am häufigsten verwendeten Azure Developer CLI-Befehle, nach Kategorien mit praktischen Beispielen organisiert. Perfekt für schnelle Nachschläge während der Entwicklung, Fehlerbehebung und dem täglichen Betrieb mit azd-Projekten.
 
 ## Lernziele
 
-Durch die Nutzung dieses Spickzettels werden Sie:
-- Sofortigen Zugriff auf essentielle Azure Developer CLI-Befehle und deren Syntax haben
-- Die Befehle nach funktionalen Kategorien und Anwendungsfällen verstehen
-- Praktische Beispiele für typische Entwicklungs- und Bereitstellungsszenarien nachschlagen können
-- Befehle zur Fehlerdiagnose für schnelle Problemlösungen finden
-- Erweiterte Konfigurations- und Anpassungsoptionen effizient nutzen können
-- Befehle zur Verwaltung von Umgebungen und Workflows für mehrere Umgebungen finden
+Durch die Nutzung dieses Cheat Sheets werden Sie:
+- Sofortigen Zugriff auf wichtige Azure Developer CLI-Befehle und deren Syntax haben
+- Die Organisation von Befehlen nach funktionalen Kategorien und Anwendungsfällen verstehen
+- Praktische Beispiele für gängige Entwicklungs- und Bereitstellungsszenarien nachschlagen
+- Auf Fehlerbehebungsbefehle für schnelle Problemlösungen zugreifen
+- Erweiterte Konfigurations- und Anpassungsoptionen effizient finden
+- Befehle zur Verwaltung von Umgebungen und Multi-Umgebungs-Workflows finden
 
 ## Lernergebnisse
 
-Bei regelmäßiger Nutzung dieses Spickzettels werden Sie in der Lage sein:
-- azd-Befehle sicher auszuführen, ohne ständig die vollständige Dokumentation zu konsultieren
-- Häufige Probleme schnell mit passenden Diagnosebefehlen zu lösen
+Bei regelmäßiger Nutzung dieses Cheat Sheets werden Sie in der Lage sein:
+- azd-Befehle sicher auszuführen, ohne ständig die vollständige Dokumentation zu Rate zu ziehen
+- Häufige Probleme schnell mit geeigneten Diagnosebefehlen zu lösen
 - Mehrere Umgebungen und Bereitstellungsszenarien effizient zu verwalten
-- Erweiterte azd-Funktionen und Konfigurationsoptionen nach Bedarf anzuwenden
-- Bereitstellungsprobleme systematisch mit passenden Befehlssequenzen zu beheben
+- Erweiterte azd-Funktionen und Konfigurationsoptionen bei Bedarf anzuwenden
+- Bereitstellungsprobleme mit systematischen Befehlssequenzen zu beheben
 - Workflows durch effektive Nutzung von azd-Abkürzungen und Optionen zu optimieren
 
-## Erste Befehle
+## Befehle zum Einstieg
 
 ### Authentifizierung
 ```bash
 # Bei Azure über AZD anmelden
 azd auth login
 
-# Bei der Azure CLI anmelden (AZD verwendet dies im Hintergrund)
+# Beim Azure CLI anmelden (AZD verwendet dies im Hintergrund)
 az login
 
 # Aktuelles Konto prüfen
@@ -50,7 +50,7 @@ azd config set defaults.subscription "your-subscription-id"
 # Von AZD abmelden
 azd auth logout
 
-# Von der Azure CLI abmelden
+# Vom Azure CLI abmelden
 az logout
 ```
 
@@ -92,10 +92,10 @@ azd up --parameter location=westus2
 # Azure-Ressourcen bereitstellen
 azd provision
 
-# 🧪 Vorschau der Infrastrukturänderungen
+# 🧪 Vorschau auf Infrastrukturänderungen
 azd provision --preview
-# Zeigt eine Trockenlaufansicht dessen, welche Ressourcen erstellt, geändert oder gelöscht würden
-# Ähnlich wie 'terraform plan' oder 'bicep what-if' - sicher auszuführen, es werden keine Änderungen vorgenommen
+# Zeigt eine Dry-Run-Ansicht dessen, welche Ressourcen erstellt/geändert/gelöscht würden
+# Ähnlich wie 'terraform plan' oder 'bicep what-if' - gefahrlos ausführbar, es werden keine Änderungen angewendet.
 ```
 
 ### Nur Anwendung
@@ -111,12 +111,12 @@ azd deploy --service api
 azd deploy --all
 ```
 
-### Erstellen und Verpacken
+### Erstellen und Paketieren
 ```bash
 # Anwendungen erstellen
 azd package
 
-# Einen bestimmten Dienst erstellen
+# Bestimmten Dienst erstellen
 azd package --service api
 ```
 
@@ -134,8 +134,8 @@ azd env new staging --location westus2
 # Umgebung auswählen
 azd env select production
 
-# Aktuelle Umgebung anzeigen
-azd env show
+# Verfügbare Umgebungen anzeigen
+azd env list
 
 # Umgebungszustand aktualisieren
 azd env refresh
@@ -162,9 +162,9 @@ azd env unset DEBUG
 ### Globale Konfiguration
 ```bash
 # Alle Konfigurationen auflisten
-azd config list
+azd config show
 
-# Globale Standardwerte festlegen
+# Globale Standardwerte setzen
 azd config set defaults.location eastus2
 azd config set defaults.subscription "sub-id"
 
@@ -194,19 +194,19 @@ azd show --output json
 # Azure-Portal-Überwachungs-Dashboard öffnen
 azd monitor
 
-# Application Insights Live-Metriken öffnen
+# Live-Metriken von Application Insights öffnen
 azd monitor --live
 
-# Application Insights-Logs-Blade öffnen
+# Logs-Blade von Application Insights öffnen
 azd monitor --logs
 
-# Application Insights-Übersicht öffnen
+# Übersicht von Application Insights öffnen
 azd monitor --overview
 ```
 
-### Container-Protokolle anzeigen
+### Container-Logs anzeigen
 ```bash
-# Protokolle über die Azure CLI anzeigen (für Container-Apps)
+# Protokolle über die Azure CLI anzeigen (für Container Apps)
 az containerapp logs show --name <app-name> --resource-group <rg-name>
 
 # Protokolle in Echtzeit verfolgen
@@ -218,7 +218,7 @@ azd monitor --logs
 
 ### Log Analytics-Abfragen
 ```bash
-# Zugriff auf Log Analytics über das Azure-Portal
+# Auf Log Analytics über das Azure-Portal zugreifen
 azd monitor --logs
 
 # Protokolle mit der Azure CLI abfragen
@@ -237,7 +237,7 @@ azd down
 # Löschen ohne Bestätigung erzwingen
 azd down --force
 
-# Weichgelöschte Ressourcen endgültig löschen
+# Weichgelöschte Ressourcen bereinigen
 azd down --purge
 
 # Vollständige Bereinigung
@@ -253,12 +253,12 @@ azd version
 azd version
 
 # Aktuelle Konfiguration anzeigen
-azd config list
+azd config show
 ```
 
-## 🔧 Fortgeschrittene Befehle
+## 🔧 Erweiterte Befehle
 
-### Pipeline und CI/CD
+### Pipelines und CI/CD
 ```bash
 # GitHub Actions konfigurieren
 azd pipeline config
@@ -277,14 +277,14 @@ azd infra generate
 
 # 🧪 Infrastrukturvorschau & Planung
 azd provision --preview
-# Simuliert die Bereitstellung der Infrastruktur, ohne sie tatsächlich bereitzustellen
+# Simuliert die Bereitstellung der Infrastruktur, ohne zu deployen
 # Analysiert Bicep-/Terraform-Vorlagen und zeigt:
-# - Hinzuzufügende Ressourcen (grün +)
-# - Zu ändernde Ressourcen (gelb ~)
-# - Zu löschende Ressourcen (rot -)
-# Sicher ausführbar - es werden keine tatsächlichen Änderungen an der Azure-Umgebung vorgenommen
+# - Ressourcen, die hinzugefügt werden (grün +)
+# - Ressourcen, die geändert werden (gelb ~)
+# - Ressourcen, die gelöscht werden (rot -)
+# Sicher auszuführen - es werden keine tatsächlichen Änderungen an der Azure-Umgebung vorgenommen
 
-# Infrastruktur aus azure.yaml erzeugen
+# Infrastruktur aus azure.yaml synthetisieren
 azd infra synth
 ```
 
@@ -304,34 +304,34 @@ azd show --output json | jq '.services'
 
 ### AZD-Erweiterungen
 ```bash
-# Liste alle verfügbaren Erweiterungen auf (einschließlich KI)
+# Alle verfügbaren Erweiterungen auflisten (einschließlich KI)
 azd extension list
 
-# Installiere die Foundry Agents-Erweiterung
+# Die Foundry Agents-Erweiterung installieren
 azd extension install azure.ai.agents
 
-# Installiere die Feinabstimmungs-Erweiterung
+# Die Feinabstimmungs-Erweiterung installieren
 azd extension install azure.ai.finetune
 
-# Installiere die Erweiterung für benutzerdefinierte Modelle
+# Die Erweiterung für benutzerdefinierte Modelle installieren
 azd extension install azure.ai.models
 
-# Aktualisiere alle installierten Erweiterungen
+# Alle installierten Erweiterungen aktualisieren
 azd extension upgrade --all
 ```
 
-### KI-Agentenbefehle
+### KI-Agent-Befehle
 ```bash
-# Ein Agent-Projekt aus einem Manifest initialisieren
+# Ein Agentenprojekt aus einem Manifest initialisieren
 azd ai agent init -m <manifest-path-or-uri>
 
-# Ein bestimmtes Foundry-Projekt angeben
+# Auf ein bestimmtes Foundry-Projekt abzielen
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
 # Das Quellverzeichnis des Agenten angeben
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
-# Ein Hosting-Ziel auswählen
+# Ein Hosting-Ziel wählen
 azd ai agent init -m agent-manifest.yaml --host containerapp
 ```
 
@@ -340,8 +340,8 @@ azd ai agent init -m agent-manifest.yaml --host containerapp
 # Starten Sie den MCP-Server für Ihr Projekt
 azd mcp start
 
-# Verwalten Sie die Zustimmungen von Tools für MCP-Operationen
-azd mcp consent
+# Verwalten Sie die Zustimmung von Tools für MCP-Operationen
+azd copilot consent list
 ```
 
 ### Infrastrukturgenerierung
@@ -349,7 +349,7 @@ azd mcp consent
 # Generiere IaC-Dateien aus deiner Projektdefinition
 azd infra generate
 
-# Erzeuge Infrastruktur aus azure.yaml
+# Generiere Infrastruktur aus azure.yaml
 azd infra synth
 ```
 
@@ -374,7 +374,7 @@ azd deploy
 azd monitor --live
 ```
 
-### Mehrere-Umgebungen-Workflow
+### Multi-Umgebungs-Workflow
 ```bash
 # Umgebungen einrichten
 azd env new dev
@@ -403,7 +403,7 @@ export AZD_DEBUG=true
 azd show
 
 # Konfiguration validieren
-azd config list
+azd config show
 
 # Überwachungs-Dashboard für Protokolle öffnen
 azd monitor --logs
@@ -420,17 +420,17 @@ azd show --output json
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Telemetrie deaktivieren für eine sauberere Ausgabe
+# Telemetrie deaktivieren für sauberere Ausgabe
 export AZD_DISABLE_TELEMETRY=true
 
 # Aktuelle Konfiguration prüfen
-azd config list
+azd config show
 
 # Authentifizierungsstatus prüfen
 az account show
 ```
 
-### Vorlagen-Debugging
+### Template-Debugging
 ```bash
 # Verfügbare Vorlagen mit Details auflisten
 azd template list --output json
@@ -454,17 +454,17 @@ find . -type f  # Linux/macOS
 cd $(azd root)
 
 # azd-Konfigurationsverzeichnis anzeigen
-echo $AZD_CONFIG_DIR  # Normalerweise ~/.azd
+echo $AZD_CONFIG_DIR  # Üblicherweise ~/.azd
 ```
 
 ## 🎨 Ausgabeformatierung
 
 ### JSON-Ausgabe
 ```bash
-# JSON-Ausgabe zum Skripten erhalten
+# JSON-Ausgabe für Skripting abrufen
 azd show --output json
 azd env list --output json
-azd config list --output json
+azd config show --output json
 
 # Mit jq parsen
 azd show --output json | jq '.services.web.endpoint'
@@ -480,14 +480,14 @@ azd env list --output table
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 Gängige Befehlskombinationen
+## 🔧 Häufige Befehlskombinationen
 
 ### Health-Check-Skript
 ```bash
 #!/bin/bash
 # Kurzer Gesundheitscheck
 azd show
-azd env show
+azd env get-values
 azd monitor --logs
 ```
 
@@ -496,7 +496,7 @@ azd monitor --logs
 #!/bin/bash
 # Validierung vor der Bereitstellung
 azd show
-azd provision --preview  # Änderungen vor der Bereitstellung ansehen
+azd provision --preview  # Änderungen vor der Bereitstellung anzeigen
 az account show
 ```
 
@@ -543,7 +543,7 @@ export LOG_LEVEL="info"
 
 ## 🚨 Notfallbefehle
 
-### Schnelle Lösungen
+### Schnelllösungen
 ```bash
 # Authentifizierung zurücksetzen
 az account clear
@@ -561,22 +561,22 @@ azd show --output json
 
 ### Wiederherstellungsbefehle
 ```bash
-# Von fehlgeschlagener Bereitstellung wiederherstellen - bereinigen und neu bereitstellen
+# Nach fehlgeschlagener Bereitstellung wiederherstellen - bereinigen und neu bereitstellen
 azd down --force --purge
 azd up
 
-# Nur Infrastruktur neu bereitstellen
+# Nur die Infrastruktur neu bereitstellen
 azd provision
 
-# Nur Anwendung neu bereitstellen
+# Nur die Anwendung neu bereitstellen
 azd deploy
 ```
 
 ## 💡 Profi-Tipps
 
-### Aliasnamen für schnelleren Workflow
+### Aliase für schnellere Workflows
 ```bash
-# Fügen Sie es Ihrer .bashrc oder .zshrc hinzu.
+# Füge es deiner .bashrc- oder .zshrc-Datei hinzu
 alias azdup='azd up'
 alias azdm='azd monitor --live'
 alias azds='azd show --output json'
@@ -585,7 +585,7 @@ alias azde='azd env'
 
 ### Funktionskürzel
 ```bash
-# Schneller Wechsel der Umgebung
+# Schnelles Wechseln der Umgebung
 azd-env() {
     azd env select $1 && azd show
 }
@@ -598,7 +598,7 @@ azd-deploy-watch() {
 # Status der Umgebung
 azd-status() {
     echo "Current environment:"
-    azd env show
+    azd env get-values
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }
@@ -617,7 +617,7 @@ azd up --help
 azd env --help
 azd config --help
 
-# Versions- und Build-Informationen anzeigen
+# Version- und Build-Informationen anzeigen
 azd version
 azd version --output json
 ```
@@ -633,21 +633,21 @@ azd template show <template-name> --docs
 
 ---
 
-**Tipp**: Setzen Sie ein Lesezeichen für dieses Spickzettel und verwenden Sie `Ctrl+F`, um schnell die Befehle zu finden, die Sie benötigen!
+**Tipp**: Lesezeichen für dieses Cheat Sheet setzen und `Ctrl+F` verwenden, um schnell die benötigten Befehle zu finden!
 
 ---
 
 **Navigation**
-- **Vorherige Lektion**: [Preflight-Checks](../docs/pre-deployment/preflight-checks.md)
+- **Vorherige Lektion**: [Preflight-Prüfungen](../docs/pre-deployment/preflight-checks.md)
 - **Nächste Lektion**: [Glossar](glossary.md)
 
 ---
 
-> **💡 Möchten Sie Azure-Befehlsunterstützung in Ihrem Editor?** Installieren Sie [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) mit `npx skills add microsoft/github-copilot-for-azure` — 37 Skills für KI, Foundry, Bereitstellung, Diagnostik und mehr.
+> **💡 Möchten Sie Hilfe zu Azure-Befehlen in Ihrem Editor?** Installieren Sie [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) mit `npx skills add microsoft/github-copilot-for-azure` — 37 Skills für KI, Foundry, Bereitstellung, Diagnostik und mehr.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Haftungsausschluss:
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst Co-op Translator (https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ausgangssprache ist als maßgebliche Quelle zu betrachten. Bei wichtigen Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir haften nicht für Missverständnisse oder Fehlinterpretationen, die sich aus der Verwendung dieser Übersetzung ergeben.
+**Haftungsausschluss**:
+Dieses Dokument wurde mithilfe des KI-Übersetzungsdienstes [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner ursprünglichen Sprache ist als maßgebliche Quelle zu betrachten. Bei kritischen Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir haften nicht für Missverständnisse oder Fehlinterpretationen, die sich aus der Verwendung dieser Übersetzung ergeben.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

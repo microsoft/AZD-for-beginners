@@ -1,111 +1,111 @@
-# ကွန်ဖိဂျာရှင်း လမ်းညွှန်
+# ဖွဲ့စည်းမှု လမ်းညွှန်
 
-**အခန်း လမ်းပြခွဲ:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
-- **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
+**အခန်း လမ်းကြောင်း:**
+- **📚 သင်တန်း မူလစာမျက်နှာ**: [AZD အခြေခံများ](../../README.md)
+- **📖 လက်ရှိ အခန်း**: အခန်း 3 - ဖွဲ့စည်းမှုနှင့် အတည်ပြုခြင်း
+- **⬅️ ယခင်**: [သင်၏ ပထမစီမံကိန်း](first-project.md)
+- **➡️ နောက်တစ်ခု**: [တပ်ဆင်ခြင်း လမ်းညွှန်](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 နောက်အခန်း**: [အခန်း ၄: အင်ဖရာစထာ ကို ကုဒ်ဖြင့်](../chapter-04-infrastructure/deployment-guide.md)
 
 ## နိဒါန်း
 
-ဒီလမ်းညွှန်မှာ Azure Developer CLI (azd) ကို ကောင်းမွန်စွာ ဖွံ့ဖြိုးရေးနှင့် ထုတ်လွှတ်ရေး ဝန်ကြီးပိုင်လုပ်ငန်းစဉ်များအတွက် သတ်မှတ်ပုံ၊ ပတ်ဝန်းကျင်စီမံခန့်ခွဲမှု၊ အတည်ပြုမှု နည်းလမ်းများနှင့် လုံခြုံပြီး ထိရောက်စွာ Azure ကို ထုတ်လွှတ်နိုင်ရန် လက်တွေ့အသုံးချနိယာမများအားလုံးကို ကာဗာပြထားပါတယ်။
+ဤ တိကျပြည့်စုံသော လမ်းညွှန်အုပ်စုသည် Azure Developer CLI ကို ဖွဲ့စည်းရေးနှင့် တပ်ဆင်ရေးလုပ်ငန်းစဉ်များအတွက် ထိရောက်စွာ အသုံးပြုနိုင်အောင် ဆက်တင်ဆိုင်ရာ အားလုံးကို ဖုံးလွှမ်းသည်။ သင်သည် ဖွဲ့စည်းမှု အဆင့်စဉ်၊ ပတ်ဝန်းကျင် စီမံခန့်ခွဲမှု၊ အတည်ပြုခြင်း နည်းလမ်းများနှင့် လုံခြုံစိတ်ချစေသော အဆင့်မြင့် ဖွဲ့စည်းမှု ပုံစံများအား လေ့လာသင်ယူမည် ဖြစ်သည်။
 
 ## သင်ယူရမည့် ရည်မှန်းချက်များ
 
-ဒီသင်ခန်းစာအဆုံးသတ်သောအခါ သင်သည်:
-- azd ကွန်ဖိဂျာရှင်း အဆင့်ဆက်ကို ကျွမ်းကျင်စွာ နားလည်ပြီး ဆက်တင်များ၏ ဦးစားထားမှုကို သိရှိထားမည်
-- Global နှင့် project-specific ဆက်တင်များကို ထိရောက်စွာ ဖန်တီးပြင်ပေးနိုင်မည်
-- မတူညီသည့် ဆက်တင်များရှိသော ဧကာပတ်များစွာကို စီမံနိုင်မည်
-- လုံခြုံသော အတည်ပြုခြင်းနှင့် အာဏာပိုင်ထားမှု ပုံစံများကို ဆောင်ရွက်နိုင်မည်
-- အဆင့်မြင့် ကွန်ဖိဂျာရှင်း ပုံစံများကို လက်တွေ့အသုံးပြုနိုင်မည်
+ဤသင်ခန်းစာ၏ အဆုံးတွင် သင်သည်:
+- azd ဖွဲ့စည်းမှု အဆင့်စဉ်ကို ကျွမ်းကျင်စွာ လေ့လာပြီး ဆက်တင်များ အဓိကတန်ဖိုးအလိုက် ဘယ်လို ဦးစားပေးနေသည်ကို နားလည်နိုင်သည်
+- ကမ္ဘာလုံးဆိုင်ရာနှင့် ပရောဂျက်အလိုက် အထူးပြု ဆက်တင်များကို ထိရောက်စွာ ဖွဲ့စည်းနိုင်သည်
+- မတူညီသော ဆက်တင်များရှိသည့် ပတ်ဝန်းကျင်များကို စီမံနိုင်သည်
+- လုံခြုံစိတ်ချစိတ်ချရသော အတည်ပြုခြင်းနှင့် အခြားအရာများကို အကောင်အထည်ဖော်နိုင်သည်
+- စိတ်ရှုပ်ထွေးသော တာဝန်များ အတွက် အဆင့်မြင့် ဖွဲ့စည်းမှု ပုံစံများကို နားလည်နိုင်သည်
 
 ## သင်ယူပြီးရလဒ်များ
 
-ဒီသင်ခန်းစာကိုပြီးမြောက်လျှင် သင်သည်:
-- ဖွံ့ဖြိုးရေးလုပ်ငန်းစဉ်အတွက် azd ကို အကောင်းဆုံး ဖော်ဆောင်နိုင်အောင် ကွန်ဖိဂျာလုပ်ပေးနိုင်မည်
-- မတူညီသော ထုတ်လွှတ်ရေး ပတ်ဝန်းကျင်များစီမံနိုင်မည်
-- လုံခြုံသော ကွန်ဖိဂျာရှင်း စီမံခန့်ခွဲမှု များကို အကောင်အထည်ဖော်နိုင်မည်
-- ကွန်ဖိဂျာရှင်းဆိုင်ရာ ပြဿနာများကို ဖြေရှင်းနိုင်မည်
-- အဖွဲ့အစည်းလိုအပ်ချက်များအတွက် azd ကို မှန်ကန်စွာ စိတ်ကြိုက်ပြင်ဆင်နိုင်မည်
+ဤသင်ခန်းစာပြီးဆုံးချိန်တွင် သင်သည်:
+- ဖွံ့ဖြိုးရေးလုပ်ငန်းစဉ်များအတွက် azd ကို ထိရောက်စွာ ဖွဲ့စည်းနိုင်မည်
+- အစိတ်အပိုင်းများစွာပါသော တပ်ဆင်ရေး ပတ်ဝန်းကျင်များကို စီမံထိန်းသိမ်းနိုင်မည်
+- လုံခြုံစိတ်ချစေသော ဖွဲ့စည်းမှု စီမံခန့်ခွဲမှု အလေ့အထများကို အကောင်အထည်ဖော်နိုင်မည်
+- ဖွဲ့စည်းမှု နှင့် ပတ်သက်သည့် ပြဿနာများကို ဖြေရှင်းနိုင်မည်
+- အဖွဲ့အစည်း အလိုအပ်ချက်အရ azd အပြုအမူကို ကိုယ်ပိုင်ပြင်ဆင်နိုင်မည်
 
-ဒီလမ်းညွှန်မှာ Azure Developer CLI ကို ဖွံ့ဖြိုးရေးနှင့် ထုတ်လွှတ်ရေး အလုပ်စဉ်များအတွက် လိုအပ်သော ကွန်ဖိဂျာရှင်းနည်းလမ်းများအားလုံးကို ဖော်ပြထားသည်။
+ဤ တိကျပြည့်စုံသော လမ်းညွှန်အုပ်စုသည် Azure Developer CLI ကို ဖွဲ့စည်းရေးနှင့် တပ်ဆင်ရေးလုပ်ငန်းစဉ်များအတွက် ထိရောက်စွာ အသုံးပြုနိုင်အောင် ဆက်တင်ဆိုင်ရာ အားလုံးကို ဖုံးလွှမ်းသည်။
 
-## azd Project အတွင်း AI Agent များကို နားလည်ခြင်း
+## azd ပရောဂျက်အတွင်း AI ကိုယ်စားလှယ်များကို နားလည်ခြင်း
 
-AI agent များနဲ့ မိတ်ဆက်နေသူနေသူများအတွက် azd โลกထဲမှာ သူတို့ကို ဘယ်လိုထည့်သွင်းစဉ်းစားရမလဲဆိုတာ လွယ်ကူစွာရှင်းပြထားပါတယ်။
+AI agent များနှင့် ပတ်သက်ပြီး အသစ်ဖြစ်ပါက azd ဆိုင်ရာ ပတ်ဝန်းကျင်အတွင်း ၎င်းတို့ကို စဉ်းစားရန် ရိုးရှင်းသော နည်းလမ်းကို အောက်တွင် ဖော်ပြထားသည်။
 
-### Agent ဆိုတာဘာလဲ?
+### ကိုယ်စားလှယ် ဆိုတာဘာလဲ?
 
-Agent သည် တောင်းဆိုချက် တစ်ခုခု လက်ခံနိုင်၍ မေးခွန်းများကို ဆင်ခြင်စဉ်းစားပြီး လုပ်ဆောင်ချက်များ ပြုလုပ်တတ်သော ဆော့ဖ်ဝဲ အပိုင်းတစ်ခု ဖြစ်သည်။ အများအားဖြင့် AI မော်ဒယ်ကို ခေါ်ယူခြင်း၊ ဒေတာရှာဖွေခြင်း သို့မဟုတ် အခြားဝန်ဆောင်မှုများကို ခေါ်ယူခြင်းဖြင့် လုပ်ဆောင်တတ်သည်။ azd project အတွင်း မှာ agent သည် သင့် web frontend သို့မဟုတ် API backend နှင့် လိုက်ဖက်သော အခြား **service** တစ်ခုအဖြစ် ရှိသည်။
+ကိုယ်စားလှယ်သည် တောင်းဆိုချက်တစ်ခုကို လက်ခံကာ အကြံပြုချက်ပေးနိုင်ပြီး လုပ်ဆောင်ချက်များကို ဆောင်ရွက်သည့် ဆော့ဖ်ဝဲ တစ်စိတ်တစ်ပိုင်းဖြစ်သည်။ ယခုပုံစံတွင် အများအားဖြင့် AI မော်ဒယ်ကို ခေါ်ယူခြင်း၊ ဒေတာရှာဖွေခြင်း သို့မဟုတ် အခြားဝန်ဆောင်မှုများကို ဖိတ်ခေါ်ခြင်းတို့ကို လုပ်ဆောင်တတ်သည်။ azd ပရောဂျက်တစ်ခုတွင်း  ကိုယ်စားလှယ်သည် သင်၏ ဝက်ဘ် ဖရန့်အင် သို့မဟုတ် API နောက်ခံနှင့် အတူတူ **ဝန်ဆောင်မှု** တစ်ခုတည်းသာ ဖြစ်သည်။
 
-### Agent များသည် azd Project ဖွဲ့စည်းမှုတွင် ဘယ်လို ထည့်သွင်းသလဲ
+### ကိုယ်စားလှယ်များသည် azd ပရောဂျက် ဖွဲ့စည်းပုံတွင် ဘယ်လို တင်ဆက်လဲ
 
-azd project သည် အလှည့်အပြောင်းသုံးအလွှာဖြင့် ဖွဲ့စည်းထားသည်။ အဆိုပါအလွှာများမှာ **infrastructure**, **code**, နှင့် **configuration** ဖြစ်သည်။ Agent များကို တစ်ခြား service များလိုပဲ အဆိုပါအလွှာများထဲသို့ ထည့်သွင်းနိုင်သည်။
+azd ပရောဂျက်သည် သုံးလွှာဖြင့် ဖွဲ့စည်းထားသည် - **အင်ဖရာစထာ**, **ကုဒ်**, နှင့် **ဖွဲ့စည်းမှု**။ ကိုယ်စားလှယ်များသည် အခြား ဝန်ဆောင်မှုများကဲ့သို့ ထိုအထပ်များထဲသို့ ဆက်သွယ်ထည့်သွင်းထားသည်။
 
-| Layer | သာမန် အက်ပ်ပလီကေးရှင်းအတွက် လုပ်ဆောင်ချက် | Agent အတွက် လုပ်ဆောင်ချက် |
+| Layer | What It Does for a Traditional App | What It Does for an Agent |
 |-------|-------------------------------------|---------------------------|
-| **Infrastructure** (`infra/`) | 웹 အက်ပ်နှင့် ဒေတာဘေ့စ်ကို ပံ့ပိုးပေးသည် | AI မော်ဒယ် endpoint, search index သို့မဟုတ် agent ကို ဟော့စ်လုပ်ပေးမည့် host ကို ပံ့ပိုးပေးသည် |
-| **Code** (`src/`) | သင့် frontend နှင့် API ရောတရာ ကုဒ်များ ပါဝင်သည် | သင့် agent လိုဂစ်နှင့် prompt นิยามများ ပါဝင်သည် |
-| **Configuration** (`azure.yaml`) | သင့် services များနှင့် ၎င်းတို့၏ hosting ရည်မှန်းချက်များကို စာရင်းပြုစုသည် | Agent ကို service တစ်ခုအဖြစ် စာရင်းပြုစုပြီး ၎င်း၏ ကုဒ်နှင့် host ကို ပြထားသည် |
+| **အင်ဖရာစထာ** (`infra/`) | ဝက်ဘ်အက်ပ်နှင့် ဒေတာဘေ့စ်ကို တည်ဆောက်ပေးသည် | AI မော်ဒယ် endpoint, ရှာဖွေမှု index သို့မဟုတ် ကိုယ်စားလှယ် ကို ဟိုစ့် ပြုလုပ်ရန် host ကို တည်ဆောက်ပေးသည် |
+| **ကုဒ်** (`src/`) | ရှေ့ပိုင်း အင်တာဖေ့စ်နှင့် API ရင်းမြစ်ကုဒ်များပါဝင်သည် | သင့် ကိုယ်စားလှယ် လိုဂစ်နှင့် prompt သတ်မှတ်ချက်များ ပါဝင်သည် |
+| **ဖွဲ့စည်းမှု** (`azure.yaml`) | သင့် ဝန်ဆောင်မှုများနှင့် ၎င်းတို့ကို မည်နေရာတွင် ဟိုစ့် လုပ်မည်ကို စာရင်းပြုစုထားသည် | သင့် ကိုယ်စားလှယ်ကို ဝန်ဆောင်မှုတစ်ခုအဖြစ် စာရင်းပြုစုပြီး ၎င်း၏ ကုဒ်နှင့် ဟိုစ့်ကို ညွှန်ပြထားသည် |
 
-### `azure.yaml` ရဲ့ အခန်းကဏ္ဍ
+### `azure.yaml` ၏ အခန်းကဏ္ဍ
 
-ယခုအချိန်တွင် သင် syntax ကို မှတ်မိထားရန် မလိုပါဘူး။ သဘောတရားအရ `azure.yaml` သည် azd ကို ပြောလိုက်တဲ့ ဖိုင်ဖြစ်သည် - "ဤတွင် ကျွန်ုပ်၏ အက်ပ်ဟာ ဘယ် service များဖြင့် ဖွဲ့စည်းထားပြီး ၎င်းတို့၏ ကုဒ်ကို ဘယ်မှာတွေ့ရမည်ကို ပြထားသည်" ဆိုတာကို ဖော်ပြသည်။
+ယခုအချိန်တွင် syntax ကို မှတ်မိရန် မလိုအပ်ပါ။ အယူအဆအားဖြင့် `azure.yaml` သည် azd သို့ အောက်ပါအရာများကို ပြောပြသည့် ဖိုင်ဖြစ်သည် - *"ဤမှာ ကျွန်ုပ်၏ အက်ပလီကေးရှင်းကို ဖွဲ့စည်းသည့် ဝန်ဆောင်မှုများ ရှိပြီး ၎င်းတို့၏ ကုဒ်ကို ရှာမည့် နေရာများ ဖြစ်သည်။"*
 
-သင့် project တွင် AI agent တစ်ခု ပါဝင်ပါက `azure.yaml` သည် အဲဒီ agent ကို service တစ်ခုအဖြစ် စာရင်းထဲ သွင်းထားမည်ဖြစ်သည်။ azd သည် ထိုစာရင်းအရ သင့် agent အတွက် သင့်တော်သော infrastructure (ဥပမာ Microsoft Foundry Models endpoint သို့မဟုတ် agent ကို ဟော့စ်ပေးမည့် Container App အတိုင်း) ကို ပံ့ပိုးပေးပြီး agent ကုဒ်ကို deploy လုပ်ပေးနိုင်သည် - web app သို့မဟုတ် API အတွက် လုပ်သလိုပဲ။
+သင့် ပရောဂျက်တွင် AI ကိုယ်စားလှယ်ပါဝင်ပါက `azure.yaml` သည် ၎င်းကို ဝန်ဆောင်မှုတစ်ခုအဖြစ်သာ စာရင်းပြုစုသည်။ ထို့နောက် azd သည် အမှန်တကယ် အင်ဖရာစထာ (ဥပမာ Microsoft Foundry Models endpoint သို့မဟုတ် ကိုယ်စားလှယ်ကို ဟိုစ့် ဆောင်ရန် Container App) ကို တည်ဆောက်ပေးရန်နှင့် သင့် ကိုယ်စားလှယ် ကုဒ်ကို တပ်ဆင်ပေးရန် သိရှိသွားမည်ဖြစ်သည် — ဝက်ဘ်အက်ပ် သို့မဟုတ် API အတွက် လုပ်သည့် နည်းလမ်းတူပင် ဖြစ်သည်။
 
-ဒါကြောင့် မူလကျကျ တစ်ခုခု အသစ်လုံးဝ လေ့လာရန် မလိုဘူး။ azd က web service ကို မည်သို့ စီမံခန့်ခွဲသည်ကို နားလည်ထားလျှင် agent ကို မည်သို့ စီမံခန့်ခွဲသည်ကိုလည်း နားလည်ထားပြီ ဖြစ်ပါတယ်။
+ဒီအရာကြောင့် အခြေခံအဆင့်တွင် သင်သင်ယူရန် အသစ်အဆန်း အရာ မရှိပါ။ azd သည် ဝက်ဘ် ဝန်ဆောင်မှုကို ပြုလုပ်သည့်နည်းလမ်းကို နားလည်ပြီးသားဖြစ်လျှင် ကိုယ်စားလှယ်ကို မည်သို့ စီမံကြောင်းလည်း နားလည်ထားပါပြီ။
 
-## ကွန်ဖိဂျာရှင်း အဆင့်ဆက်
+## ဖွဲ့စည်းမှု အဆင့်စဉ်
 
-azd သည် အဆင့်ဆက်ထားသော configuration စနစ်ကို အသုံးပြုသည်။
-1. **Command-line flags** (အမြင့်ဆုံး ဦးစားပေးချက်)
-2. **Environment variables**
-3. **Local project configuration** (`.azd/config.json`)
-4. **Global user configuration** (`~/.azd/config.json`)
-5. **Default values** (အနိမ့်ဆုံး ဦးစားပေးချက်)
+azd သည် အဆင့်လိုက် ဖွဲ့စည်းမှု စနစ်ကို အသုံးပြုသည်။
+1. **ကွန်မန်ဒ်လိုင်း အလံများ** (အမြင့်ဆုံး ဦးစားပေး)
+2. **ပတ်ဝန်းကျင် အပြောင်းအလဲများ (environment variables)**
+3. **ဒေသဆိုင်ရာ ပရောဂျက် ဖွဲ့စည်းမှု** (`.azd/config.json`)
+4. **ကမ္ဘာလုံးဆိုင်ရာ အသုံးပြုသူ ဖွဲ့စည်းမှု** (`~/.azd/config.json`)
+5. **ပုံမှန်တန်ဖိုးများ** (အနိမ့်ဆုံး ဦးစားပေး)
 
-## Global Configuration
+## ကမ္ဘာလုံးဆိုင်ရာ ဖွဲ့စည်းမှု
 
-### Global Defaults သတ်မှတ်ခြင်း
+### ကမ္ဘာလုံးဆိုင်ရာ ပုံမှန်များ သတ်မှတ်ခြင်း
 ```bash
-# ပုံမှန် စာရင်းကို သတ်မှတ်ပါ
+# ပုံသတ်ထားသော စာရင်းကို သတ်မှတ်ပါ
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 
-# ပုံမှန် တည်နေရာကို သတ်မှတ်ပါ
+# ပုံသတ်ထားသော တည်နေရာကို သတ်မှတ်ပါ
 azd config set defaults.location "eastus2"
 
-# ပုံမှန် အရင်းအမြစ်အုပ်စု အမည်ပေးနည်းကို သတ်မှတ်ပါ
+# ပုံသတ်ထားသော ရင်းမြစ်အုပ်စု နာမည်ပုံစံကို သတ်မှတ်ပါ
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# ကမ္ဘာလုံးဆိုင်ရာ ပြင်ဆင်ချက်အားလုံးကို ကြည့်ပါ
-azd config list
+# ကမ္ဘာလုံးဆိုင်ရာ ဖွဲ့စည်းပုံအားလုံးကို ကြည့်ရှုပါ
+azd config show
 
-# ပြင်ဆင်ချက်တစ်ခုကို ဖယ်ရှားပါ
+# ဖွဲ့စည်းပုံကို ဖျက်ပါ
 azd config unset defaults.location
 ```
 
-### Common Global Settings
+### ပုံမှန် ကမ္ဘာလုံးဆိုင်ရာ ဆက်တင်များ
 ```bash
-# ဖွံ့ဖြိုးရေး နှစ်သက်ချက်များ
-azd config set alpha.enable true                    # အယ်လ်ဖာ အင်္ဂါရပ်များကို ဖွင့်ပါ
-azd config set telemetry.enabled false             # တယ်လီမက်ထရီကို ပိတ်ပါ
-azd config set output.format json                  # အထွက်ဖော်မက်ကို သတ်မှတ်ပါ
+# ဖွံ့ဖြိုးရေး ကြိုက်နှစ်သက်ချက်များ
+azd config set alpha.enable true                    # Alpha အင်္ဂါရပ်များကို ဖွင့်ရန်
+azd config set telemetry.enabled false             # Telemetry ကို ပိတ်ရန်
+azd config set output.format json                  # အထွက် ပုံစံကို သတ်မှတ်ပါ
 
 # လုံခြုံရေး ဆက်တင်များ
-azd config set auth.useAzureCliCredential true     # အတည်ပြုရေးအတွက် Azure CLI ကို အသုံးပြုပါ
-azd config set tls.insecure false                  # TLS စစ်ဆေးမှုကို တင်းကြပ်စေပါ
+azd config set auth.useAzureCliCredential true     # အတည်ပြုရန် Azure CLI ကို အသုံးပြုပါ
+azd config set tls.insecure false                  # TLS အတည်ပြုမှုကို အတင်းအကျပ် အကောင်အထည်ဖော်ပါ
 
-# စွမ်းဆောင်ရည် ဆက်ညှိခြင်း
-azd config set provision.parallelism 5             # တစ်ပြိုင်တည်း အရင်းအမြစ်များ ဖန်တီးခြင်း
-azd config set deploy.timeout 30m                  # တပ်ဆင်ခြင်း အချိန်ကုန်သတ်မှတ်ချက်
+# စွမ်းဆောင်ရည် ချိန်ညှိခြင်း
+azd config set provision.parallelism 5             # တပြိုင်နက် အရင်းအမြစ် ဖန်တီးခြင်း
+azd config set deploy.timeout 30m                  # တပ်ဆင်ခြင်း အချိန်ကန့်သတ်
 ```
 
-## 🏗️ Project Configuration
+## 🏗️ ပရောဂျက် ဖွဲ့စည်းမှု
 
-### `azure.yaml` ဖိုင် ပုံစံ
-`azure.yaml` ဖိုင်သည် သင့် azd project ၏ မူလစက်ကြွယ် ဖြစ်သည်:
+### `azure.yaml` ဖွဲ့စည်းပုံ
+`azure.yaml` ဖိုင်သည် azd ပရောဂျက်၏ နှလုံးသားဖြစ်သည်:
 
 ```yaml
 # Minimum configuration
@@ -181,9 +181,9 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Service Configuration ရွေးချယ်စရာများ
+### ဝန်ဆောင်မှု ဖွဲ့စည်းမှု ရွေးချယ်စရာများ
 
-#### Host Types
+#### ဟိုစ့် အမျိုးအစားများ
 ```yaml
 services:
   web-static:
@@ -202,7 +202,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Language-Specific Settings
+#### ဘာသာစကား အထူးဆိုင်ရာ ဆက်တင်များ
 ```yaml
 services:
   node-app:
@@ -228,9 +228,9 @@ services:
 
 ## 🌟 ပတ်ဝန်းကျင် စီမံခန့်ခွဲမှု
 
-### Environment များ ဖန်တီးခြင်း
+### ပတ်ဝန်းကျင်များ ဖန်တီးခြင်း
 ```bash
-# ပတ်ဝန်းကျင်အသစ်တစ်ခု ဖန်တီးပါ
+# ပတ်ဝန်းကျင်အသစ် တစ်ခု ဖန်တီးပါ
 azd env new development
 
 # သတ်မှတ်ထားသော တည်နေရာဖြင့် ဖန်တီးပါ
@@ -240,8 +240,8 @@ azd env new staging --location "westus2"
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Environment Configuration
-ထို environment တစ်ခုချင်းစီတွင် `.azure/<env-name>/config.json` ထဲမှာ ကိုယ့်ပိုင် configuration ရှိပါသည်:
+### ပတ်ဝန်းကျင် ဖွဲ့စည်းမှု
+ပတ်ဝန်းကျင်တိုင်းတွင် ၎င်း၏ ကိုယ်ပိုင် ဖွဲ့စည်းမှုကို `.azure/<env-name>/config.json` တွင် သိမ်းဆည်းထားသည်:
 
 ```json
 {
@@ -263,37 +263,37 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 }
 ```
 
-### Environment Variables
+### ပတ်ဝန်းကျင် အပြောင်းအလဲများ
 ```bash
-# ပတ်ဝန်းကျင်အလိုက် သတ်မှတ်ထားသည့် ပြောင်းလဲနိုင်သော တန်ဖိုးများကို သတ်မှတ်ပါ
+# ပတ်ဝန်းကျင်အလိုက် သတ်မှတ်ရမည့် ဗားရီးယာများကို သတ်မှတ်ပါ
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# ပတ်ဝန်းကျင် ပြောင်းလဲနိုင်သော တန်ဖိုးများကို ကြည့်ရှုပါ
+# ပတ်ဝန်းကျင်ဗားရီးယာများကို ကြည့်ပါ
 azd env get-values
 
-# မျှော်မှန်းထားသည့် ထွက်ရလဒ်:
+# မျှော်လင့်ရသော ထုတ်လွှင့်ချက်:
 # DATABASE_URL=postgresql://user:pass@host:5432/db
 # API_KEY=secret-api-key
 # DEBUG=true
 
-# ပတ်ဝန်းကျင် ပြောင်းလဲနိုင်သော တန်ဖိုးကို ဖယ်ရှားပါ
+# ပတ်ဝန်းကျင်ဗားရီးယာကို ဖယ်ရှားပါ
 azd env unset DEBUG
 
 # ဖယ်ရှားမှုကို အတည်ပြုပါ
 azd env get-values | grep DEBUG
-# (ဘာမှ မပြန်လာပါ)
+# (ဘာမှ မပြန်လာသင့်ပါ)
 ```
 
-### Environment Templates
-တူညီသော environment စက်ရုံတည်ဆောက်ရေးအတွက် `.azure/env.template` ဖိုင်ကို ဖန်တီးပါ:
+### ပတ်ဝန်းကျင် တမ်းပလိတ်များ
+ပတ်ဝန်းကျင် တူညီမှုရှိစေရန် `.azure/env.template` ကို ဖန်တီးပါ:
 ```bash
-# လိုအပ်သော ပြောင်းလဲသော တန်ဖိုးများ
+# လိုအပ်သော ပြောင်းလဲနိုင်သော တန်ဖိုးများ
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# အက်ပလီကေးရှင်း ဆက်တင်များ
+# အပလီကေးရှင်း ဆက်တင်များ
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
@@ -303,45 +303,45 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 အတည်ပြုမှု (Authentication) ဖော်ပြချက်
+## 🔐 အတည်ပြုခြင်း ဖွဲ့စည်းမှု
 
-### Azure CLI ပေါင်းသင်းမှု
+### Azure CLI ပူးပေါင်းမှု
 ```bash
-# Azure CLI အတွက် အကောင့်အချက်အလက်များကို အသုံးပြုပါ (ပုံမှန်)
+# Azure CLI လက်မှတ်များကို အသုံးပြုပါ (ပုံမှန်)
 azd config set auth.useAzureCliCredential true
 
-# သတ်မှတ်ထားသော tenant ဖြင့် ဝင်ပါ
+# သတ်မှတ်ထားသည့် tenant ဖြင့် အကောင့်ဝင်ပါ
 az login --tenant <tenant-id>
 
 # ပုံမှန် subscription ကို သတ်မှတ်ပါ
 az account set --subscription <subscription-id>
 ```
 
-### Service Principal အတည်ပြုမှု
-CI/CD pipeline များအတွက်:
+### Service Principal ဖြင့် အတည်ပြုခြင်း
+CI/CD လိုင်းများအတွက်:
 ```bash
-# ပတ်ဝန်းကျင်တန်ဖိုးများကို သတ်မှတ်ပါ
+# ပတ်ဝန်းကျင် တန်ဖိုးများကို သတ်မှတ်ပါ
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# သို့မဟုတ် တိုက်ရိုက် ဖွဲ့စည်းပါ
+# သို့မဟုတ် တိုက်ရိုက် ဖွဲ့စည်းပြင်ဆင်ပါ
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### Managed Identity
-Azure မှ ဟော့စ်ထားသော environment များအတွက်:
+Azure တွင် ဟိုစ့် ထားသော ပတ်ဝန်းကျင်များအတွက်:
 ```bash
-# Managed Identity အတည်ပြုမှုကို ဖွင့်ပါ
+# စီမံထားသော identity အတည်ပြုမှုကို ဖွင့်ပါ
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ အခြေခံအင်ဖရာ ဖော်ပြချက်
+## 🏗️ အင်ဖရာစထာ ဖွဲ့စည်းမှု
 
-### Bicep Parameters
-အင်ဖရာ ပမာဏများကို `infra/main.parameters.json` ထဲ၌ သတ်မှတ်ပါ:
+### Bicep ပါရာမီတာများ
+အင်ဖရာစထာ ပါရာမီတာများကို `infra/main.parameters.json` တွင် ပြင်ဆင်ပါ:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -363,8 +363,8 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 }
 ```
 
-### Terraform Configuration
-Terraform project များအတွက် `infra/terraform.tfvars` တွင် ဖော်ပြပါ:
+### Terraform ဖွဲ့စည်းမှု
+Terraform ပရောဂျက်များအတွက် `infra/terraform.tfvars` တွင် ပြင်ဆင်ပါ:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -372,9 +372,9 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 ထုတ်လွှတ်မှု (Deployment) ဆက်တင်များ
+## 🚀 တပ်ဆင်ရေး ဖွဲ့စည်းမှု
 
-### Build Configuration
+### ဆောက်လုပ်မှု ဖွဲ့စည်းမှု
 ```yaml
 # In azure.yaml
 services:
@@ -397,7 +397,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Docker Configuration
+### Docker ဖွဲ့စည်းမှု
 ```yaml
 services:
   api:
@@ -411,19 +411,19 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
-Example `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+ဥပမာ `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 အဆင့်မြင့် ကွန်ဖိဂျာရှင်း
+## 🔧 အဆင့်မြင့် ဖွဲ့စည်းမှု
 
-### Custom Resource Naming
+### စိတ်ကြိုက် အရင်းအမြစ် အမည်ပေးခြင်း
 ```bash
-# နာမည်ပေး စည်းကမ်းများ သတ်မှတ်ပါ
+# နာမည်ပေးစည်းမျဉ်းများ သတ်မှတ်ပါ
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### Network Configuration
+### နက်ဝပ် ဖွဲ့စည်းမှု
 ```yaml
 # In azure.yaml
 infra:
@@ -434,7 +434,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Monitoring Configuration
+### စောင့်ကြည့်မှု ဖွဲ့စည်းမှု
 ```yaml
 # In azure.yaml
 monitoring:
@@ -446,9 +446,9 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 ပတ်ဝန်းကျင် အလိုက် အထူး ဆက်တင်များ
+## 🎯 ပတ်ဝန်းကျင်အလိုက် အထူး ဖွဲ့စည်းမှုများ
 
-### Development Environment
+### ဖွံ့ဖြိုးရေး ပတ်ဝန်းကျင်
 ```bash
 # .azure/ဖွံ့ဖြိုးရေး/.env
 DEBUG=true
@@ -457,7 +457,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Staging Environment
+### စမ်းသပ်ပတ်ဝန်းကျင်
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -466,31 +466,31 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### Production Environment
+### ထုတ်လုပ်ရေး ပတ်ဝန်းကျင်
 ```bash
-# .azure/ထုတ်လုပ်မှု/.env
+# .azure/production/.env
 DEBUG=false
 LOG_LEVEL=error
 ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 ကွန်ဖိဂျာရှင်း စစ်ဆေးခြင်း
+## 🔍 ဖွဲ့စည်းမှု တိကျမှု စစ်ဆေးရေး
 
-### Validate Configuration
+### ဖွဲ့စည်းမှု စစ်ဆေးပါ
 ```bash
-# ဖွဲ့စည်းမှု ဖိုင်၏ သဒ္ဒါကို စစ်ဆေးပါ
+# ဆက်တင်ဖိုင်၏ ပုံစံကို စစ်ဆေးပါ
 azd config validate
 
-# ပတ်ဝန်းကျင် ကိရိယာများ (environment variables) ကို စမ်းသပ်ပါ
+# ပတ်ဝန်းကျင် မူလတန်ဖိုးများကို စမ်းသပ်ပါ
 azd env get-values
 
-# အခြေခံအဆောက်အဦ (infrastructure) ကို အတည်ပြုပါ
+# အခြေခံအဆောက်အအုံကို အတည်ပြုပါ
 azd provision --dry-run
 ```
 
-### Configuration Scripts
-`scripts/` ထဲတွင် validation script များ ဖန်တီးပါ:
+### ဖွဲ့စည်းမှု Script များ
+စစ်ဆေးရေး script များကို `scripts/` တွင် ဖန်တီးပါ:
 
 ```bash
 #!/bin/bash
@@ -498,13 +498,13 @@ azd provision --dry-run
 
 echo "Validating configuration..."
 
-# လိုအပ်သော ပတ်ဝန်းကျင် သတ်မှတ်တန်ဖိုးများကို စစ်ဆေးပါ
+# လိုအပ်သော ပတ်ဝန်းကျင်တန်ဖိုးများကို စစ်ဆေးပါ
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# azure.yaml ၏ သဒ္ဒါကို စစ်ဆေးပါ
+# azure.yaml ရဲ့ စာလုံးပုံစံကို စစ်ဆေးပါ
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -513,9 +513,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 အကောင်းဆုံးလေ့ကျင့်ချက်များ
+## 🎓 အကောင်းဆုံး လုပ်ထုံးလုပ်နည်းများ
 
-### 1. Environment Variables ကို အသုံးပြုပါ
+### 1. ပတ်ဝန်းကျင် အပြောင်းအလဲများကို အသုံးပြုပါ
 ```yaml
 # Good: Use environment variables
 database:
@@ -526,7 +526,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Configuration ဖိုင်များကို စုပုံအုပ်ချုပ်ပါ
+### 2. ဖွဲ့စည်းရေး ဖိုင်များကို စုပေါင်းစီမံပါ
 ```
 .azure/
 ├── config.json              # Global project config
@@ -542,16 +542,16 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Version Control စဉ်းစားချက်များ
+### 3. ဗားရှင်း ထိန်းချုပ်မှု အတွက် စဉ်းစားရန်အချက်များ
 ```bash
 # .gitignore
-.azure/*/config.json         # ပတ်ဝန်းကျင် ဖိုင်များ (အရင်းအမြစ် ID များ ပါဝင်နိုင်သည်)
-.azure/*/.env               # ပတ်ဝန်းကျင် ပြောင်းလဲနိုင်သော တန်ဖိုးများ (လျှို့ဝှက်ချက်များ ပါရှိနိုင်သည်)
+.azure/*/config.json         # ပတ်ဝန်းကျင် ဆက်တင်များ (ရင်းမြစ် ID များ ပါဝင်သည်)
+.azure/*/.env               # ပတ်ဝန်းကျင် ပြောင်းလဲနိုင်သော တန်ဖိုးများ (လျှို့ဝှက်များ ပါဝင်နိုင်သည်)
 .env                        # ဒေသခံ ပတ်ဝန်းကျင် ဖိုင်
 ```
 
-### 4. Configuration များကို မှတ်တမ်းတင်ထားပါ
-သင့် configuration ကို `CONFIG.md` မှာ စာရွက် တစ်ခုအဖြစ် မှတ်တမ်းတင်ထားပါ:
+### 4. ဖွဲ့စည်းမှု စာတမ်းများ
+သင့် ဖွဲ့စည်းမှုကို `CONFIG.md` တွင် မှတ်တမ်းတင်ပါ:
 ```markdown
 # Configuration Guide
 
@@ -568,24 +568,24 @@ database:
 
 ## 🎯 လက်တွေ့ လေ့ကျင့်ခန်းများ
 
-### လေ့ကျင့်ခန်း 1: မျိုးစုံ Environment Configuration (15 မိနစ်)
+### လေ့ကျင့်ခန်း 1: မျိုးစုံ ပတ်ဝန်းကျင် ဖွဲ့စည်းမှု (15 မိနစ်)
 
-**ရည်ရွယ်ချက်**: မတူညီသည့် ဆက်တင်များဖြင့် environment သုံးခု ဖန်တီးပြီး ချိန်ညှိပါ
+**ရည်ရွယ်ချက်**: အဆင့်မတူသော ဆက်တင်များဖြင့် ပတ်ဝန်းကျင် သုံးခုကို ဖန်တီးပြီး ပြင်ဆင်ပါ
 
 ```bash
-# ဖွံ့ဖြိုးရေး ပတ်ဝန်းကျင် တည်ဆောက်ပါ
+# ဖွံ့ဖြိုးရေး ပတ်ဝန်းကျင်ကို ဖန်တီးပါ
 azd env new dev
 azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# စမ်းသပ်ရန် ပတ်ဝန်းကျင် တည်ဆောက်ပါ
+# စတေဂျင်း ပတ်ဝန်းကျင်ကို ဖန်တီးပါ
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 50
 
-# ထုတ်လုပ်ရေး ပတ်ဝန်းကျင် တည်ဆောက်ပါ
+# ထုတ်လုပ်မှု ပတ်ဝန်းကျင်ကို ဖန်တီးပါ
 azd env new production
 azd env set LOG_LEVEL error
 azd env set ENABLE_TELEMETRY true
@@ -597,63 +597,61 @@ azd env select staging && azd env get-values
 azd env select production && azd env get-values
 ```
 
-**အောင်မြင်မှု များအတွက် မီတာ**
+**အောင်မြင်မှု အခြေခံညွှန်းချက်များ:**
+- [ ] ပတ်ဝန်းကျင် သုံးခုကို အောင်မြင်စွာ ဖန်တီးထားသည်
+- [ ] ပတ်ဝန်းကျင် များတိုင်းအတွက် ထူးခြားသော ဖွဲ့စည်းမှုရှိသည်
+- [ ] အမှားများဖြစ်စေခြင်းမရှိဘဲ ပတ်ဝန်းကျင်များအကြား ပြောင်းလဲနိုင်သည်
+- [ ] `azd env list` သည် ပတ်ဝန်းကျင် သုံးခုလုံးကို ပြသသည်
 
-- [ ] environment သုံးခုကို အောင်မြင်စွာ ဖန်တီးထားပါ
-- [ ] environment တိုင်းသည် သီးခြား ဆက်တင်ရှိသည်
-- [ ] environment များအကြား အပြောင်းလုပ်ရာတွင် အမှားမဖြစ်စေ
-- [ ] `azd env list` သည် environment သုံးခုအားလုံးကို ပြပါ
+### လေ့ကျင့်ခန်း 2: လျှို့ဝှက်မှု စီမံခန့်ခွဲမှု (10 မိနစ်)
 
-### လေ့ကျင့်ခန်း 2: ဆိုးရွားမြင်သာသော ဒေတာများ စီမံခြင်း (10 မိနစ်)
-
-**ရည်ရွယ်ချက်**: သတင်းအချက်အလက်နှင့် ဆိုးရွားသော ဒေတာများကို လုံခြုံစွာ စီမံရန် လေ့ကျင့်ပါ
+**ရည်ရွယ်ချက်**: ထိခိုက်နိုင်သော ဒေတာများနှင့် လုံခြုံစိတ်ချစေသော ဖွဲ့စည်းမှုကို လေ့ကျင့်ပါ
 
 ```bash
-# လျှို့ဝှက်ချက်များ သတ်မှတ်ပါ (ထွက်ရလာမှုတွင် မပြပါ)
+# လျှို့ဝှက်ချက်များ သတ်မှတ်ပါ (အထွက်တွင် မပြပါ)
 azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 
-# လျှို့ဝှက်မဟုတ်သော ဆက်တင်များ သတ်မှတ်ပါ
+# လျှို့ဝှက်မဟုတ်သော ဆက်တင်ကို သတ်မှတ်ပါ
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# ပတ်ဝန်းကျင်ကို ကြည့်ပါ (လျှို့ဝှက်ချက်များကို ဖျက်ပယ်ထားရမည်)
+# ပတ်ဝန်းကျင်ကို ကြည့်ပါ (လျှို့ဝှက်ချက်များကို ဖုံးအုပ်ထားရမည်)
 azd env get-values
 
 # လျှို့ဝှက်ချက်များ သိမ်းဆည်းထားကြောင်း အတည်ပြုပါ
-azd env get DB_PASSWORD  # တကယ့်တန်ဖိုးကို ပြသသင့်သည်
+azd env get DB_PASSWORD  # အစစ်တန်ဖိုးကို ပြသသင့်သည်
 ```
 
-**အောင်မြင်မှု များအတွက် မီတာ**
+**အောင်မြင်မှု အခြေခံညွှန်းချက်များ:**
+- [ ] လျှို့ဝှက်ချက်များကို terminal တွင် ပြသခြင်းမရှိဘဲ သိမ်းဆည်းထားသည်
+- [ ] `azd env get-values` သည် ဖျောက်ထားသော လျှို့ဝှက်ချက်များကို ပြသသည်
+- [ ] တစ်ခုချင်း `azd env get <SECRET_NAME>` သည် အမှန်တကယ် တန်ဖိုးကို ရယူနိုင်သည်
 
-- [ ] Secrets များကို terminal တွင် ပြသခြင်းမရှိစေဘဲ သိမ်းဆည်းထားနိုင်ပါ
-- [ ] `azd env get-values` သည် ရုပ်ပုံမှန်ထားသည့် secrets များကို ဖျော့ဖျော့ပြပါ
-- [ ] တစ်ခုချင်း `azd env get <SECRET_NAME>` သည် အမှန်တန်ဖိုးကို ရယူနိုင်စေပါ
+## နောက်တိုးဆက်အရာများ
 
-## နောက်ထပ် လုပ်ဆောင်ရန်များ
+- [သင်၏ ပထမစီမံကိန်း](first-project.md) - ဖွဲ့စည်းမှုကို လက်တွေ့ အသုံးပြုပါ
+- [တပ်ဆင်ခြင်း လမ်းညွှန်](../chapter-04-infrastructure/deployment-guide.md) - တပ်ဆင်ရေးအတွက် ဖွဲ့စည်းမှုကို အသုံးပြုပါ
+- [ရင်းမြစ်များ ပံ့ပိုးခြင်း](../chapter-04-infrastructure/provisioning.md) - ထုတ်လုပ်ရေး အသင့် ဖွဲ့စည်းမှုများ
 
-- [Your First Project](first-project.md) - ကျင့်သုံးဖို့ configuration ကို အသုံးချပါ
-- [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md) - ထုတ်လွှတ်ရေးအတွက် configuration ကို အသုံးပြုပါ
-- [Provisioning Resources](../chapter-04-infrastructure/provisioning.md) - ထုတ်လုပ်မှု အသင့် configuration များ
+## ကိုးကားချက်များ
 
-## ေရးရာအရင်းအမြစ်များ
-
-- [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Environment Variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [azd ဖွဲ့စည်းမှု ကိုးကားချက်](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml ပုံစံ (Schema)](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [ပတ်ဝန်းကျင် အပြောင်းအလဲများ (Environment Variables)](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**အခန်း လမ်းပြခွဲ:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 3 - Configuration & Authentication
-- **⬅️ Previous**: [Your First Project](first-project.md)
-- **➡️ Next Chapter**: [Chapter 4: Infrastructure as Code](../chapter-04-infrastructure/deployment-guide.md)
-- **Next Lesson**: [Your First Project](first-project.md)
+**အခန်း လမ်းကြောင်း:**
+- **📚 သင်တန်း မူလစာမျက်နှာ**: [AZD အခြေခံများ](../../README.md)
+- **📖 လက်ရှိ အခန်း**: အခန်း 3 - ဖွဲ့စည်းမှုနှင့် အတည်ပြုခြင်း
+- **⬅️ ယခင်**: [သင်၏ ပထမစီမံကိန်း](first-project.md)
+- **➡️ နောက်တစ်ခု**: [အခန်း ၄: အင်ဖရာစထာ ကို ကုဒ်ဖြင့်](../chapter-04-infrastructure/deployment-guide.md)
+- **နောက်သင်ခန်းစာ**: [သင်၏ ပထမစီမံကိန်း](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-ဒီစာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးစားပေမယ့် အလိုအလျောက် ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း သတိပြုပါ။ မူလစာတမ်းကို မူရင်း ဘာသာစကားဖြင့်သာ ထိရောက်သော အရင်းအမြစ်အဖြစ် ယူဆသင့်သည်။ အရေးပါသော အချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် ဘာသာပြန်သူတစ်ဦး၏ ဘာသာပြန်မှုကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းကြောင့် ဖြစ်ပေါ်လာနိုင်သည့် နားမလည်မှုများ သို့မဟုတ် အဓိပ္ပာယ်မှားယူမှုများအတွက် ကျွန်ုပ်တို့ တာဝန်မယူပါ။
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန် ဝန်ဆောင်မှုဖြစ်သည့် [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှန်ကန်မှုအတွက် ကြိုးပမ်းပါသေးသော်လည်း၊ အလိုအလျှောက် ဘာသာပြန်ချက်များတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း သတိပြုပါ။ မူလစာရွက်စာတမ်းကို မူလဘာသာဖြင့် အာဏာပိုင် အရင်းမြစ်အဖြစ်ယူဆရမည်။ အရေးကြီးသော သတင်းအချက်အလက်များအတွက် လူ့ပရော်ဖက်ရှင်နယ် ဘာသာပြန်သူ၏ ဘာသာပြန်ချက်ကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုရာတွင် ဖြစ်ပေါ်လာမည့် နားမလည်မှုများ သို့မဟုတ် မှားဖော်ပြချက်များအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါ။
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

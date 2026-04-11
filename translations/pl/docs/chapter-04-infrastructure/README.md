@@ -1,20 +1,22 @@
 # Rozdział 4: Infrastruktura jako kod i wdrażanie
 
-**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 1-1.5 godz. | **⭐ Złożoność**: Średniozaawansowany
+**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 1-1,5 godziny | **⭐ Poziom trudności**: Średniozaawansowany
 
 ---
 
 ## Przegląd
 
-Ten rozdział omawia wzorce Infrastructure as Code (IaC) ze szablonami Bicep, prowizjonowanie zasobów oraz strategie wdrażania z użyciem Azure Developer CLI.
+Ten rozdział obejmuje wzorce Infrastruktur jako Kod (IaC) z szablonami Bicep, udostępnianie zasobów oraz strategie wdrażania przy użyciu Azure Developer CLI.
+
+> Sprawdzone z `azd 1.23.12` w marcu 2026.
 
 ## Cele nauki
 
-Po ukończeniu tego rozdziału będziesz:
-- Zrozumiesz strukturę i składnię szablonów Bicep
-- Prowizjonować zasoby Azure za pomocą `azd provision`
+Po ukończeniu tego rozdziału będziesz potrafił:
+- Zrozumieć strukturę i składnię szablonów Bicep
+- Udostępniać zasoby Azure za pomocą `azd provision`
 - Wdrażać aplikacje za pomocą `azd deploy`
-- Wdrażać strategie wdrażania typu blue-green i rolling
+- Wdrażać strategie wdrażania blue-green i rolling
 
 ---
 
@@ -22,27 +24,27 @@ Po ukończeniu tego rozdziału będziesz:
 
 | # | Lekcja | Opis | Czas |
 |---|--------|-------------|------|
-| 1 | [Prowizjonowanie zasobów](provisioning.md) | Zarządzanie zasobami Azure za pomocą AZD | 45 min |
-| 2 | [Przewodnik wdrażania](deployment-guide.md) | Strategie wdrażania aplikacji | 45 min |
+| 1 | [Udostępnianie zasobów](provisioning.md) | Zarządzanie zasobami Azure za pomocą AZD | 45 min |
+| 2 | [Przewodnik po wdrażaniu](deployment-guide.md) | Strategie wdrażania aplikacji | 45 min |
 
 ---
 
 ## 🚀 Szybki start
 
 ```bash
-# Zainicjalizuj z szablonu
+# Inicjalizuj z szablonu
 azd init --template azure-functions-python-v2-http
 
-# Podejrzyj, co zostanie utworzone
+# Podgląd tego, co zostanie utworzone
 azd provision --preview
 
-# Tylko przygotuj infrastrukturę
+# Wdróż tylko infrastrukturę
 azd provision
 
-# Tylko wdroż kod
+# Wdróż tylko kod
 azd deploy
 
-# Lub oba razem
+# Lub obie opcje razem
 azd up
 ```
 
@@ -69,11 +71,11 @@ my-project/
 
 | Polecenie | Opis |
 |---------|-------------|
-| `azd init` | Zainicjalizuj projekt |
-| `azd provision` | Utwórz zasoby Azure |
-| `azd deploy` | Wdróż kod aplikacji |
+| `azd init` | Inicjalizacja projektu |
+| `azd provision` | Tworzenie zasobów Azure |
+| `azd deploy` | Wdrażanie kodu aplikacji |
 | `azd up` | provision + deploy |
-| `azd down` | Usuń wszystkie zasoby |
+| `azd down` | Usunięcie wszystkich zasobów |
 
 ---
 
@@ -95,6 +97,6 @@ my-project/
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Zastrzeżenie:
-Niniejszy dokument został przetłumaczony przy użyciu usługi tłumaczenia z wykorzystaniem sztucznej inteligencji Co-op Translator (https://github.com/Azure/co-op-translator). Chociaż dokładamy starań, aby zapewnić poprawność, prosimy pamiętać, że tłumaczenia automatyczne mogą zawierać błędy lub nieścisłości. Wersja oryginalna dokumentu w jego języku źródłowym powinna być traktowana jako dokument wiążący. W przypadku informacji o znaczeniu krytycznym zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez tłumacza. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+**Zastrzeżenie**:  
+Niniejszy dokument został przetłumaczony za pomocą usługi tłumaczeniowej AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dokładamy starań, aby tłumaczenie było precyzyjne, prosimy pamiętać, że automatyczne tłumaczenia mogą zawierać błędy lub niedokładności. Oryginalny dokument w języku źródłowym należy uznać za autorytatywne źródło. W przypadku informacji krytycznych zaleca się skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

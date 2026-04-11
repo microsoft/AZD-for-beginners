@@ -1,43 +1,43 @@
-# 1. Select a Template
+# 1. Изаберите шаблон
 
-!!! tip "НА КРАЈУ ОВОГ МОДУЛА БИЋЕТЕ У СТАЊУ ДА"
+!!! tip "НА КРАЈУ ОВОГ МОДУЛА МОЋИ ЋЕТЕ БИТИ У СТАЊУ"
 
     - [ ] Описати шта су AZD шаблони
     - [ ] Открити и користити AZD шаблоне за AI
-    - [ ] Започети са шаблоном AI агената
-    - [ ] **Лаб 1:** AZD Quickstart са GitHub Codespaces
+    - [ ] Започети са AI Agents шаблоном
+    - [ ] **Лаб 1:** AZD брзи почетак у Codespaces или у dev контејнеру
 
 ---
 
-## 1. A Builder Analogy
+## 1. Аналогија градитеља
 
-Building a modern enterprise-ready AI application _from scratch_ can be daunting. It's a little bit like building your new home on your own, brick by brick. Yes, it can be done! But it is not the most effective way to get the desired end result! 
+Изградња модерне, спремне за предузеће AI апликације _од нуле_ може бити застрашујућа. То је мало као да сами градите нову кућу, цигла по циглу. Да, може се урадити! Али то није најефикаснији начин да се постигне жељени крајњи резултат!
 
-Instead, we often start with an existing _design blueprint_, and work with an architect to customize it to our personal requirements. And that's exactly the approachto take when building intelligent applications. First, find a good design architecture that fits your problem space. Then work with a solution architect to customize and develop the solution for your specific scenario.
+Уместо тога, често почнемо са постојећим _дизајн планом_, и радимо са архитектом да га прилагодимо нашим личним захтевима. И управо такав приступ треба применити када градите интелигентне апликације. Прво, нађите добру архитектуру дизајна која одговара вашем проблемском простору. Затим радите са solution архитектом да прилагодите и развијете решење за ваш специфичан сценарио.
 
-But where can we find these design blueprints? And how do we find an architect that is willing to teach us how to customize and deploy these blueprints on our own? In this workshop, we answer those questions by introducing you to three technologies:
+Али где можемо наћи ове дизајн планове? И како наћи архитекта који је спреман да нас научи како да прилагодимо и деплојујемо те планове сами? У овом радионичарском материјалу одговарамо на та питања представљајући вам три технологије:
 
-1. [Azure Developer CLI](https://aka.ms/azd) - an open-source tool that accelerates the developer path in going from local development (build) to cloud deployment (ship).
-1. [Microsoft Foundry Templates](https://ai.azure.com/templates) - standardized open-source repositories containing sample code, infrastructure and configuration files for deploying an AI solution architecture.
-1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - a coding agent grounded in Azure knowledge, that can guide us in navigating the codebase and making changes - using natural language.
+1. [Azure Developer CLI](https://aka.ms/azd) - алат отвореног кода који убрзава развојни пут од локалног развоја (build) до облачне деплојације (ship).
+1. [Microsoft Foundry Templates](https://ai.azure.com/templates) - стандардизована отворена репозиторија која садржи пример кода, инфраструктуру и конфигурационе датотеке за деплој архитектуре AI решења.
+1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - кодинг агент базиран на Azure знању, који може да нас води кроз кодну базу и помаже нам у прављењу промена користећи природни језик.
 
-With these tools in hand, we can now _discover_ the right template, _deploy_ it to validate it works, and _customize_ it to suit our specific scenarios. Let's dive in and learn how these work.
+Са овим алатима у рукама, сада можемо да _откријемо_ прави шаблон, _деплојујемо_ га да проверимо да ли ради, и _прилагодимо_ га да одговара нашим специфичним сценаријима. Хајде да заронимо и научимо како ово функционише.
 
 
 ---
 
 ## 2. Azure Developer CLI
 
-The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (or `azd`) is an open-source commandline tool that can speed up your code-to-cloud journey with a set of developer-friendly commands that work consistently across your IDE (development) and CI/CD (devops) environments.
+The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (или `azd`) је алат отвореног кода који може убрзати ваш пут од кода до облака са скупом пријатељских команди за развојне програмере које раде доследно у вашем IDE-у (развој) и CI/CD (devops) окружењима.
 
-With `azd`, your deployment journey can be as simple as:
+Са `azd`, ваше путовање деплоја може бити једноставно као:
 
-- `azd init` - Initializes a new AI project from an existing AZD template.
-- `azd up` - Provisions infrastructure and deploy your application in one step.
-- `azd monitor` - Get real-time monitoring and diagnostics for your deployed application.
-- `azd pipeline config` - Setup CI/CD pipelines to automate deployment to Azure.
+- `azd init` - Иницира нови AI пројекат из постојећег AZD шаблона.
+- `azd up` - Провиђује инфраструктуру и деплојује вашу апликацију у једном кораку.
+- `azd monitor` - Добијајте мониторинг у реалном времену и дијагностику за вашу деплојевану апликацију.
+- `azd pipeline config` - Подешава CI/CD цевоводе да аутоматизују деплоy у Azure.
 
-**🎯 | ВЕЖБА**: <br/> Истражите командну линију `azd` у вашем GitHub Codespaces окружењу сада. Почните тако што ћете откуцати ову команду да бисте видели шта алат може да уради:
+**🎯 | ВЕЖБА**: <br/> Истражите `azd` командни алат у вашем тренутном окружењу радионице сада. То може бити GitHub Codespaces, dev контејнер, или локална копија са инсталираним претпоставкама. Почните тако што ћете откуцати ову команду да видите шта алат може да уради:
 
 ```bash title="" linenums="0"
 azd help
@@ -47,60 +47,60 @@ azd help
 
 ---
 
-## 3. The AZD Template
+## 3. AZD шаблон
 
-For `azd` to achieve this, it needs to know the infrastructure to provision, the configuration settings to enforce, and the application to deploy. This is where [AZD templates](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp) come in. 
+Да би `azd` постигао ово, он треба да зна инфраструктуру коју треба провиђити, конфигурационе поставке које треба применити, и апликацију коју треба деплојовати. Овде улазе [AZD templates](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp).
 
-AZD templates are open-source repositories that combine sample code with infrastructure and configuraton files required for deploying the solution architecture.
-By using an _Infrastructure-as-Code_ (IaC) approach, they allow template resource definitions and configuration settings to be version-controller (just like the app source code) - creating reusable and consistent workflows across users of that project.
+AZD шаблони су репозиторијуми отвореног кода који комбинују пример кода са инфраструктурним и конфигурационим датотекама потребним за деплој архитектуре решења.
+Коришћењем приступа _Инфраструктура-као-Код_ (IaC), они омогућавају да дефиниције ресурса шаблона и конфигурационе поставке буду верзионисане (као и изворни код апликације) - стварајући поновљиве и доследне токове рада међу корисницима тог пројекта.
 
-When creating or reusing an AZD template for _your_ scenario, consider these questions:
+Када креирате или поново користите AZD шаблон за _ваш_ сценарио, размислите о следећим питањима:
 
-1. What are you building? → Is there a template that has starter code for that scenario?
-1. How is your solution architected? → Is there a template that has the necessary resources?
-1. How is your solution deployed? → Think `azd deploy` with pre/post-processing hooks!
-1. How can you optimize it further? → Think built-in monitoring and automation pipelines!
+1. Шта градите? → Да ли постоји шаблон који садржи почетни код за тај сценарио?
+1. Како је ваше решење архитектонски постављено? → Да ли постоји шаблон који има неопходне ресурсе?
+1. Како се ваше решење деплојује? → Размислите о `azd deploy` са hook-овима за пре/пост обраду!
+1. Како га можете даље оптимизовати? → Размислите о уграђеном мониторингу и аутоматизационим цевоводима!
 
 **🎯 | ВЕЖБА**: <br/> 
-Visit the [Awesome AZD](https://azure.github.io/awesome-azd/) gallery and use the filters to explore the 250+ templates currently available. See if you can find on that aligns to _your_ scenario requirements.
+Посетите галерију [Awesome AZD](https://azure.github.io/awesome-azd/) и користите филтере да истражите 250+ шаблона који су тренутно доступни. Проверите да ли можете да пронађете онај који одговара захтевима вашег сценарија.
 
 ![Код](../../../../../translated_images/sr/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 
-## 4. AI App Templates
+## 4. AI апликацијски шаблони
 
-For AI-powered applications, Microsoft provides specialized templates featuring **Microsoft Foundry** and **Foundry Agents**. These templates accelerate your path to building intelligent, production-ready applications.
+За AI-погонске апликације, Microsoft обезбеђује специјализоване шаблоне који укључују **Microsoft Foundry** и **Foundry Agents**. Ови шаблони убрзавају ваш пут ка изградњи интелигентних, спремних за производњу апликација.
 
-### Microsoft Foundry & Foundry Agents Templates
+### Microsoft Foundry & Foundry Agents шаблони
 
-Select a template below to deploy. Each template is available on [Awesome AZD](https://azure.github.io/awesome-azd/) and can be initialized with a single command.
+Изаберите шаблон испод за деплој. Сваки шаблон је доступан на [Awesome AZD](https://azure.github.io/awesome-azd/) и може се иницијализовати једном командом.
 
 | Шаблон | Опис | Команда за деплој |
 |----------|-------------|----------------|
-| **[AI Chat with RAG](https://azure.github.io/awesome-azd/?tags=ai&tags=rag)** | Апликација за ћаскање са Retrieval Augmented Generation користећи Microsoft Foundry | `azd init -t azure-samples/azure-search-openai-demo` |
-| **[Foundry Agent Service Starter](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Правите AI агенте помоћу Foundry Agents за аутономно извршавање задатака | `azd init -t azure-samples/foundry-agent-service-starter` |
-| **[Multi-Agent Orchestration](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Координишите више Foundry агената за сложене радне токове | `azd init -t azure-samples/multi-agent-orchestration` |
-| **[AI Document Intelligence](https://azure.github.io/awesome-azd/?tags=ai&tags=document)** | Извлачење и анализа докумената помоћу Microsoft Foundry модела | `azd init -t azure-samples/ai-document-processing` |
-| **[Conversational AI Bot](https://azure.github.io/awesome-azd/?tags=ai&tags=bot)** | Изградите интелигентне чатботове са интеграцијом Microsoft Foundry | `azd init -t azure-samples/ai-chat-protocol` |
-| **[AI Image Generation](https://azure.github.io/awesome-azd/?tags=ai&tags=dalle)** | Генеришите слике помоћу DALL-E преко Microsoft Foundry | `azd init -t azure-samples/ai-image-generation` |
+| **[AI Chat with RAG](https://azure.github.io/awesome-azd/?tags=ai&tags=rag)** | Чат апликација са Retrieval Augmented Generation која користи Microsoft Foundry | `azd init -t azure-samples/azure-search-openai-demo` |
+| **[Foundry Agent Service Starter](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Градите AI агенте уз Foundry Agents за аутономно извршавање задатака | `azd init -t azure-samples/foundry-agent-service-starter` |
+| **[Multi-Agent Orchestration](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Координира више Foundry Agents за сложене токове рада | `azd init -t azure-samples/multi-agent-orchestration` |
+| **[AI Document Intelligence](https://azure.github.io/awesome-azd/?tags=ai&tags=document)** | Извлачење и анализа докумената уз Microsoft Foundry моделе | `azd init -t azure-samples/ai-document-processing` |
+| **[Conversational AI Bot](https://azure.github.io/awesome-azd/?tags=ai&tags=bot)** | Изградња интелигентних четботова са интеграцијом Microsoft Foundry | `azd init -t azure-samples/ai-chat-protocol` |
+| **[AI Image Generation](https://azure.github.io/awesome-azd/?tags=ai&tags=dalle)** | Генеришите слике користећи DALL-E преко Microsoft Foundry | `azd init -t azure-samples/ai-image-generation` |
 | **[Semantic Kernel Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=semantic-kernel)** | AI агенти који користе Semantic Kernel са Foundry Agents | `azd init -t azure-samples/semantic-kernel-agent` |
-| **[AutoGen Multi-Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=autogen)** | Системи са више агената користећи AutoGen оквир | `azd init -t azure-samples/autogen-multi-agent` |
+| **[AutoGen Multi-Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=autogen)** | Вишеагентски системи који користе AutoGen оквир | `azd init -t azure-samples/autogen-multi-agent` |
 
-### Quick Start
+### Брзи почетак
 
-1. **Browse templates**: Visit [https://azure.github.io/awesome-azd/](https://azure.github.io/awesome-azd/) and filter by `AI`, `Agents`, or `Microsoft Foundry`
-2. **Select your template**: Choose one that matches your use case
-3. **Initialize**: Run the `azd init` command for your chosen template
-4. **Deploy**: Run `azd up` to provision and deploy
+1. **Прегледајте шаблоне**: Посетите [https://azure.github.io/awesome-azd/](https://azure.github.io/awesome-azd/) и филтрирајте по `AI`, `Agents`, или `Microsoft Foundry`
+2. **Изаберите ваш шаблон**: Одаберите онај који одговара вашем случају употребе
+3. **Иницијализујте**: Покрените `azd init` команду за изабрани шаблон
+4. **Деплојујте**: Покрените `azd up` да провиђујете и деплојујете
 
 **🎯 | ВЕЖБА**: <br/>
-Select one of the templates above based on your scenario:
+Изаберите један од горе наведених шаблона на основу вашег сценарија:
 
-- **Building a chatbot?** → Start with **AI Chat with RAG** or **Conversational AI Bot**
-- **Need autonomous agents?** → Try **Foundry Agent Service Starter** or **Multi-Agent Orchestration**
-- **Processing documents?** → Use **AI Document Intelligence**
-- **Want AI coding assistance?** → Explore **Semantic Kernel Agent** or **AutoGen Multi-Agent**
+- **Градите четбот?** → Почните са **AI Chat with RAG** или **Conversational AI Bot**
+- **Потребни су аутономни агенти?** → Испробајте **Foundry Agent Service Starter** или **Multi-Agent Orchestration**
+- **Обрађујете документе?** → Користите **AI Document Intelligence**
+- **Желите AI помоћ при кодирању?** → Истражите **Semantic Kernel Agent** или **AutoGen Multi-Agent**
 
 ```bash title="Example: Deploy the AI Chat with RAG template" linenums="0"
 azd init -t azure-samples/azure-search-openai-demo
@@ -108,11 +108,11 @@ azd up
 ```
 
 !!! info "Истражите више шаблона"
-    The [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) contains 250+ templates. Use the filters to find templates matching your specific requirements for language, framework, and Azure services.
+    Галерија [Awesome AZD](https://azure.github.io/awesome-azd/) садржи 250+ шаблона. Користите филтере да бисте пронашли шаблоне који одговарају вашим специфичним захтевима за језик, оквир и Azure услуге.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Одрицање одговорности**:
-Овај документ је преведен помоћу AI преводилачке услуге [Co-op Translator](https://github.com/Azure/co-op-translator). Иако се трудимо да превод буде тачан, имајте у виду да аутоматизовани преводи могу садржати грешке или нетачности. Оригинални документ на његовом изворном језику треба сматрати меродавним извором. За критичне информације препоручује се професионалан превод који обавља човек. Нисмо одговорни за било какве неспоразуме или погрешна тумачења која произилазе из коришћења овог превода.
+**Одрицање од одговорности**:
+Овај документ је преведен помоћу услуге за превод засноване на вештачкој интелигенцији [Co-op Translator](https://github.com/Azure/co-op-translator). Иако настојимо да будемо тачни, имајте у виду да аутоматски преводи могу садржати грешке или нетачности. Изворни документ на свом оригиналном језику треба сматрати ауторитетним извором. За критичне информације препоручује се професионални превод од стране стручног преводиоца. Не сносимо одговорност за било какве неспоразуме или погрешна тумачења која произилазе из употребе овог превода.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

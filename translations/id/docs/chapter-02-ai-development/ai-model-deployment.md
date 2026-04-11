@@ -1,28 +1,30 @@
-# Penerapan Model AI dengan Azure Developer CLI
+# Penyebaran Model AI dengan Azure Developer CLI
 
 **Navigasi Bab:**
-- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
-- **📖 Bab Saat Ini**: Bab 2 - Pengembangan Berorientasi AI
-- **⬅️ Sebelumnya**: [Integrasi Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Selanjutnya**: [Lab Workshop AI](ai-workshop-lab.md)
-- **🚀 Bab Berikutnya**: [Bab 3: Konfigurasi](../chapter-03-configuration/configuration.md)
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 2 - AI-First Development
+- **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
-Panduan ini memberikan instruksi komprehensif untuk menerapkan model AI menggunakan template AZD, mencakup segala hal dari pemilihan model hingga pola penerapan produksi.
+Panduan ini memberikan instruksi komprehensif untuk menyebarkan model AI menggunakan template AZD, mencakup semuanya dari pemilihan model hingga pola penyebaran produksi.
+
+> **Catatan validasi (2026-03-25):** Alur kerja AZD dalam panduan ini diperiksa terhadap `azd` `1.23.12`. Untuk penyebaran AI yang memerlukan waktu lebih lama daripada jendela penyebaran layanan default, rilis AZD saat ini mendukung `azd deploy --timeout <seconds>`.
 
 ## Daftar Isi
 
 - [Strategi Pemilihan Model](#strategi-pemilihan-model)
 - [Konfigurasi AZD untuk Model AI](#konfigurasi-azd-untuk-model-ai)
-- [Pola Penerapan](#pola-penerapan)
+- [Pola Penyebaran](#pola-penyebaran)
 - [Manajemen Model](#manajemen-model)
 - [Pertimbangan Produksi](#pertimbangan-produksi)
 - [Pemantauan dan Observabilitas](#pemantauan-dan-observabilitas)
 
 ## Strategi Pemilihan Model
 
-### Model Microsoft Foundry
+### Microsoft Foundry Models Models
 
-Pilih model yang tepat untuk kasus penggunaan Anda:
+Choose the right model for your use case:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -41,9 +43,9 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
@@ -54,16 +56,16 @@ services:
 
 | Model Type | Use Case | Recommended Capacity | Cost Considerations |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Obrolan, Tanya Jawab | 10-50 TPM | Hemat biaya untuk sebagian besar beban kerja |
+| gpt-4.1-mini | Obrolan, Tanya jawab | 10-50 TPM | Efisien biaya untuk sebagian besar beban kerja |
 | gpt-4.1 | Penalaran kompleks | 20-100 TPM | Biaya lebih tinggi, gunakan untuk fitur premium |
-| Text-embedding-ada-002 | Pencarian, RAG | 30-120 TPM | Penting untuk pencarian semantik |
-| Whisper | Transkripsi suara | 10-50 TPM | Beban kerja pemrosesan audio |
+| text-embedding-3-large | Pencarian, RAG | 30-120 TPM | Pilihan default yang kuat untuk pencarian semantik dan pengambilan |
+| Whisper | Ucapan ke teks | 10-50 TPM | Beban kerja pemrosesan audio |
 
 ## Konfigurasi AZD untuk Model AI
 
-### Konfigurasi Template Bicep
+### Bicep Template Configuration
 
-Buat penerapan model melalui template Bicep:
+Create model deployments through Bicep templates:
 
 ```bicep
 // infra/main.bicep
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -124,19 +126,19 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Variabel Lingkungan
 
-Konfigurasikan lingkungan aplikasi Anda:
+Configure your application environment:
 
 ```bash
 # konfigurasi .env
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## Pola Penerapan
+## Pola Penyebaran
 
-### Pola 1: Penerapan Satu Wilayah
+### Pola 1: Single-Region Deployment
 
 ```yaml
 # azure.yaml - Single region
@@ -149,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Cocok untuk:
+Paling cocok untuk:
 - Pengembangan dan pengujian
 - Aplikasi untuk satu pasar
 - Optimasi biaya
 
-### Pola 2: Penerapan Multi-Wilayah
+### Pola 2: Multi-Region Deployment
 
 ```bicep
 // Multi-region deployment
@@ -167,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Cocok untuk:
+Paling cocok untuk:
 - Aplikasi global
-- Persyaratan ketersediaan tinggi
+- Kebutuhan ketersediaan tinggi
 - Distribusi beban
 
-### Pola 3: Penerapan Hibrida
+### Pola 3: Hybrid Deployment
 
-Gabungkan Model Microsoft Foundry dengan layanan AI lainnya:
+Combine Microsoft Foundry Models with other AI services:
 
 ```bicep
 // Hybrid AI services
@@ -207,7 +209,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Kontrol Versi
 
-Lacak versi model dalam konfigurasi AZD Anda:
+Track model versions in your AZD configuration:
 
 ```json
 {
@@ -215,11 +217,11 @@ Lacak versi model dalam konfigurasi AZD Anda:
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
@@ -227,7 +229,7 @@ Lacak versi model dalam konfigurasi AZD Anda:
 
 ### Pembaruan Model
 
-Gunakan hook AZD untuk pembaruan model:
+Use AZD hooks for model updates:
 
 ```bash
 #!/bin/bash
@@ -238,11 +240,14 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# Jika penerapan memakan waktu lebih lama dari batas waktu default
+azd deploy --timeout 1800
 ```
 
 ### Pengujian A/B
 
-Terapkan beberapa versi model:
+Deploy multiple model versions:
 
 ```bicep
 param enableABTesting bool = false
@@ -268,7 +273,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### Perencanaan Kapasitas
 
-Hitung kapasitas yang diperlukan berdasarkan pola penggunaan:
+Calculate required capacity based on usage patterns:
 
 ```python
 # Contoh perhitungan kapasitas
@@ -293,9 +298,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Konfigurasi Penskalakan Otomatis
+### Konfigurasi Auto-scaling
 
-Konfigurasikan penskalakan otomatis untuk Container Apps:
+Configure auto-scaling for Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -333,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Optimasi Biaya
 
-Terapkan kontrol biaya:
+Implement cost controls:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -367,7 +372,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Integrasi Application Insights
 
-Konfigurasikan pemantauan untuk beban kerja AI:
+Configure monitoring for AI workloads:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -405,10 +410,10 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### Metrik Kustom
 
-Lacak metrik khusus AI:
+Track AI-specific metrics:
 
 ```python
-# Telemetri khusus untuk model AI
+# Telemetri kustom untuk model AI
 import logging
 from applicationinsights import TelemetryClient
 
@@ -442,7 +447,7 @@ class AITelemetry:
 
 ### Pemeriksaan Kesehatan
 
-Terapkan pemantauan kesehatan layanan AI:
+Implement AI service health monitoring:
 
 ```python
 # Endpoint pemeriksaan kesehatan
@@ -474,29 +479,29 @@ async def check_ai_models():
 ## Langkah Selanjutnya
 
 1. **Tinjau [Panduan Integrasi Microsoft Foundry](microsoft-foundry-integration.md)** untuk pola integrasi layanan
-2. **Selesaikan [Lab Workshop AI](ai-workshop-lab.md)** untuk pengalaman praktis
-3. **Terapkan [Praktik AI Produksi](production-ai-practices.md)** untuk penerapan perusahaan
+2. **Selesaikan [Lab Workshop AI](ai-workshop-lab.md)** untuk pengalaman langsung
+3. **Terapkan [Praktik AI Produksi](production-ai-practices.md)** untuk penyebaran perusahaan
 4. **Jelajahi [Panduan Pemecahan Masalah AI](../chapter-07-troubleshooting/ai-troubleshooting.md)** untuk masalah umum
 
 ## Sumber Daya
 
-- [Ketersediaan Model Microsoft Foundry](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Ketersediaan Model Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Dokumentasi Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Penskalakan Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Skalasi Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Optimasi Biaya Model AI](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **Navigasi Bab:**
-- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
-- **📖 Bab Saat Ini**: Bab 2 - Pengembangan Berorientasi AI
-- **⬅️ Sebelumnya**: [Integrasi Microsoft Foundry](microsoft-foundry-integration.md)
-- **➡️ Selanjutnya**: [Lab Workshop AI](ai-workshop-lab.md)
-- **🚀 Bab Berikutnya**: [Bab 3: Konfigurasi](../chapter-03-configuration/configuration.md)
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 2 - AI-First Development
+- **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
+- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk akurasi, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidaktepatan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat krusial, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul akibat penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berusaha untuk akurat, harap diperhatikan bahwa terjemahan otomatis dapat mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang penting, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

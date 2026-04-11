@@ -1,47 +1,47 @@
-# AZD ಬಳಸಿ Azure ಸಂಪನ್ಮೂಲಗಳ ಒದಗಿಕೆ
+# AZD ಬಳಸಿ ಅಜೂರ್ ಸಂಪನ್ಮೂಲಗಳನ್ನು ಪ್ರಾವೇಶಿಕೆ ಮಾಡುವುದು
 
-**ಅಧ್ಯಾಯ ನ್ಯಾವಿಗೇಶನ್:**
-- **📚 ಕೋರ್ಸ್ ಮನೆ**: [AZD ಆರಂಭಿಕರಿಗಾಗಿ](../../README.md)
-- **📖 ಪ್ರಸ್ತುತ ಅಧ್ಯಾಯ**: ಅಧ್ಯಾಯ 4 - ಕೋಡ್ ಮೂಲಕ ಮೂಲಸೌಕರ್ಯ ಮತ್ತು ನಿಯೋಜನೆ
-- **⬅️ ಹಿಂದಿನದು**: [ನಿಯೋಜನೆ ಮಾರ್ಗದರ್ಶಿ](deployment-guide.md)
+**ಅಧ್ಯಾಯ ನಾವಿಗೇಶನ್:**
+- **📚 ಕೋರ್ಸ್ ಹೋಮ್**: [ಆರಂಭಿಕರಿಗಾಗಿ AZD](../../README.md)
+- **📖 ಪ್ರಸ್ತುತ ಅಧ್ಯಾಯ**: ಅಧ್ಯಾಯ 4 - ಸಂಕೇತಿತ ಮೂಲಸೌಕರ್ಯ ಮತ್ತು ನಿಯೋಜನೆ
+- **⬅️ ಹಿಂದಿನ**: [ನಿಯೋಜನೆ ಮಾರ್ಗದರ್ಶಿ](deployment-guide.md)
 - **➡️ ಮುಂದಿನ ಅಧ್ಯಾಯ**: [ಅಧ್ಯಾಯ 5: ಬಹು-ಏಜೆಂಟ್ AI ಪರಿಹಾರಗಳು](../../examples/retail-scenario.md)
-- **🔧 ಸಂಬಂಧಿಸಿದವು**: [ಅಧ್ಯಾಯ 6: ನಿಯೋಜನೆ ಮೊದಲು ಪರಿಶೀಲನೆ](../chapter-06-pre-deployment/capacity-planning.md)
+- **🔧 ಸಂಬಂಧಿಸಿದ**: [ಅಧ್ಯಾಯ 6: ಪ್ರೀ-ನಿಯೋಜನೆ ಪರಿಶೀಲನೆ](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## ಪರಿಚಯ
 
-ಈ ಸಮಗ್ರ ಮಾರ್ಗದರ್ಶನವು Azure Developer CLI ಬಳಸಿ Azure ಸಂಪನ್ಮೂಲಗಳನ್ನು ಒದಗಿಸುವುದು ಮತ್ತು ನಿರ್ವಹಿಸುವುದರ ಕುರಿತು ನಿಮಗೆ ಬೇಕಾದ ಎಲ್ಲದರನ್ನೂ ಒಳಗೊಂಡಿದೆ. Bicep, ARM ಟೆಂಪ್ಲೇಟುಗಳು, Terraform, ಮತ್ತು Pulumi ಬಳಸಿ ಮೂಲಸೌಕರ್ಯವನ್ನು ಕೋಡ್ (IaC) ಮಾದರಿಗಳಿಂದ ಮೂಲಸೌಕರ್ಯ ರಚನೆದಿಂದ ವಿಸ್ತಾರವಾದ ಎಂಟರ್‌ಪ್ರೈಸ್ಗ್ರೇಡ್ ಇಂಜಿನಿಯರ್‌ಡ್ ವಿನ್ಯಾಸಗಳವರೆಗೆ ಅನುಷ್ಠಾನಗೊಳಿಸುವುದನ್ನು ಕಲಿಯಿರಿ.
+ಈ ಸಮಗ್ರ ಮಾರ್ಗದರ್ಶಿ ಅಜೂರ್ ಡೆವೆಲಪರ್ CLI ಬಳಸಿ ಅಜೂರ್ ಸಂಪನ್ಮೂಲಗಳ ಪ್ರಾವೇಶಿಕೆ ಮತ್ತು ನಿರ್ವಹಣೆಗೆ ಬೇಕಾದ ಎಲ್ಲವನ್ನೂ ಒಳಗೊಂಡಿದೆ. ಬೈಸೆಪ್, ARM ಟೆಂಪ್ಲೇಟುಗಳು, ಟೆರೆಫಾರ್ಮ್ ಮತ್ತು ಪ್ಯುಲಮಿ ಬಳಸಿ ಮೂಲಸೌಕರ್ಯವನ್ನು ಸಂಕೇತವಾಗಿ (Infrastructure as Code - IaC) ರಚಿಸುವ ನಿರ್ವಹಣೆಯ ಹಂತಗಳನ್ನು ತಿಳಿಯಿರಿ.
 
-## ಅಧ್ಯಯನ ಗುರಿಗಳು
+## ಕಲಿಕೆಯ ಗುರಿಗಳು
 
-ಈ ಮಾರ್ಗದರ್ಶನವನ್ನು ಪೂರ್ಣಗೊಳಿಸಿದಾಗ, ನೀವು:
-- ಮೂಲಸೌಕರ್ಯವನ್ನು ಕೋಡ್(principles) ತತ್ವಗಳನ್ನು ಮತ್ತು Azure ಸಂಪನ್ಮೂಲ ಒದಗಿಕೆಯನ್ನು ನಿಪುಣಗೊಳಿಸಿ
-- Azure Developer CLI ಬೆಂಬಲಿಸುವ ಅನೇಕ IaC ಪ್ರೊವೈಡರ್‌ಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಿ
-- ಸಾಮಾನ್ಯ ಅಪ್ಲಿಕೇಶನ್ ವಾಸ್ತುಶಿಲ್ಪಕ್ಕಾಗಿ Bicep ಟೆಂಪ್ಲೇಟುಗಳನ್ನು ವಿನ್ಯಾಸಗೊಳಿಸಿ ಮತ್ತು ಅನುಷ್ಠಾನಗೊಳಿಸಿ
-- ಸಂಪನ್ಮೂಲ ಪರಾಮಿತಿ, ಚರಗಳು, ಮತ್ತು ಪರಿಸರ-विशಿಷ್ಟ ಸಂಯೋಜನೆಗಳನ್ನು ಸಂರಚಿಸಿ
-- ನೆಟ್ವರ್ಕಿಂಗ್ ಮತ್ತು ಭದ್ರತೆ ಸೇರಿದಂತೆ ಹೆಚ್ಚಿನ ಮೂಲಸೌಕರ್ಯ ಮಾದರಿಗಳನ್ನು ಅನುಷ್ಠಾನಗೊಳಿಸಿ
-- ಸಂಪನ್ಮೂಲದ ಜೀವನಚಕ್ರ, ಅಪ್ಡೇಟ್‌ಗಳು, ಮತ್ತು ಅವಲಂಬನೆ ನಿವಾರಣೆಯನ್ನು ನಿರ್ವಹಿಸಿ
+ಈ ಮಾರ್ಗದರ್ಶಿಯನ್ನು ಪೂರ್ಣಗೊಳಿಸುವ ಮೂಲಕ ನೀವು:
+- ಮೂಲಸೌಕರ್ಯ ಸಂಹಿತಾ ತತ್ವಗಳನ್ನು ಮತ್ತು ಅಜೂರ್ ಸಂಪನ್ಮೂಲ ಪ್ರಾವೇಶಿಕೆಯನ್ನು ಪರಿಣತಿ ಮಾಡಿಕೊಳ್ಳುವಿರಿ
+- ಅಜೂರ್ ಡೆವೆಲಪರ್ CLI ಬೆಂಬಲಿಸುವ ವಿವಿಧ IaC ಪೂರೈಕೆದಾರರನ್ನು ಅವಗಾಹಿಸಿಕೊಳ್ಳುವಿರಿ
+- ಸಾಮಾನ್ಯ ಪ್ರಾಯೋಜಕ ವಾಸ್ತುಶಿಲ್ಪಗಳಿಗೆ ಬೈಸೆಪ್ ಟೆಂಪ್ಲೇಟುಗಳನ್ನು ವಿನ್ಯಾಸಗೊಳಿಸುವುದು ಮತ್ತು ಅನುಷ್ಠಾನಗೊಳಿಸುವುದು
+- ಸಂಪನ್ಮೂಲ ಪ್ಯಾರಾಮೀಟರ್ಸ್, ಚರ, ಮತ್ತು ಪರಿಸರ-ವಿಶಿಷ್ಟ ಸೆಟ್ಟಿಂಗ್ಸ್ ಅನ್ನು ಸಂರಚಿಸುವುದು
+- ಜಾಲತಾಣ ಮತ್ತು ಭದ್ರತೆ ಸೇರಿದಂತೆ ಜಟಿಲ ಮೂಲಸೌಕರ್ಯ ಮಾದರಿಗಳನ್ನು ಅನುಷ್ಠಾನಗೊಳಿಸುವುದು
+- ಸಂಪನ್ಮೂಲಗಳ ಜೀವನಚಕ್ರ, ನವೀಕರಣಗಳು ಹಾಗೂ ಅವಲಂಬನೆಯ ಪರಿಹಾರವನ್ನು ನಿರ್ವಹಿಸುವುದು
 
-## ಅಧ್ಯಯನ ಫಲಿತಾಂಶಗಳು
+## ಕಲಿಕೆಯ ಫಲಿತಾಂಶಗಳು
 
-ಸಮಾಪ್ತಿಯ ನಂತರ, ನೀವು ಸಾಧ್ಯ:
-- Bicep ಮತ್ತು ARM ಟೆಂಪ್ಲೇಟುಗಳನ್ನು ಬಳಸಿ Azure ಮೂಲಸೌಕರ್ಯವನ್ನು ವಿನ್ಯಾಸಗೊಳಿಸು ಮತ್ತು ಒದಗಿಸು
-- ಸೂಕ್ತ ಸಂಪನ್ಮೂಲ ಅವಲಂಬನೆಗಳೊಂದಿಗೆ ಸංකೀರ್ಣ ಬಹು-ಸೇವಾ ವಾಸ್ತುಶಿಲ್ಪಗಳನ್ನು ಸಂರಚಿಸು
-- ಹಲವು ಪರಿಸರ ಮತ್ತು ಸಂರಚನೆಗಳಿಗೆ ಪರಾಮೀಟರ್‌ಕೃತ ಟೆಂಪ್ಲೇಟುಗಳನ್ನು ಅನುಷ್ಠಾನಗೊಳಿಸು
-- ಮೂಲಸೌಕರ್ಯ ಒದಗಿಸುವಿಕೆಯಲ್ಲಿ ಸಮಸ್ಯೆಗಳ ಪರಿಹಾರ ಮತ್ತು ನಿಯೋಜನೆ ವೈಫಲ್ಯಗಳನ್ನು ಪರಿಹರಿಸು
-- ಮೂಲಸೌಕರ್ಯ ವಿನ್ಯಾಸಕ್ಕೆ Azure ಸುಸಜ್ಜಿತ ವಾಸ್ತುಶಿಲ್ಪ ತತ್ವಗಳನ್ನು ಅನ್ವಯಿಸು
-- ಮೂಲಸೌಕರ್ಯ ಅಪ್ಡೇಟ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸು ಮತ್ತು ವರ್ಜನಿಂಗ್ ತಂತ್ರಗಳನ್ನು ಅನುಷ್ಠಾನಗೊಳಿಸು
+ಪೂರ್ಣಗೊಳಿಸುವ ನಂತರ, ನೀವು:
+- ಬೈಸೆಪ್ ಮತ್ತು ARM ಟೆಂಪ್ಲೇಟುಗಳನ್ನು ಬಳಸಿಕೊಂಡು ಅಜೂರ್ ಮೂಲಸೌಕರ್ಯವನ್ನು ವಿನ್ಯಾಸಗೊಳಿಸಿ ಪ್ರಾವೇಶಿಕೆ ಮಾಡಬಹುದು
+- ಸರಿಯಾದ ಸಂಪನ್ಮೂಲ ಅವಲಂಬನಗಳೊಂದಿಗೆ ಸಂಕೀರ್ಣ ಬಹು-ಸೇವಾ ವಾಸ್ತುಶಿಲ್ಪಗಳನ್ನು ಸಂರಚಿಸಲು ಶಕ್ತರಾಗಿರುತ್ತೀರಿ
+- ವಿವಿಧ ಪರಿಸರಗಳು ಮತ್ತು ಸಂರಚನೆಗಳಿಗೆ ಪ್ಯಾರಾಮೀಟರ್ ಮಾಡಲಾದ ಟೆಂಪ್ಲೇಟುಗಳನ್ನು ಅನುಷ್ಠಾನಗೊಳಿಸಬಹುದು
+- ಮೂಲಸೌಕರ್ಯ ಪ್ರಾವೇಶಿಕೆಯ ಸಮಸ್ಯೆಗಳನ್ನು ಪತ್ತೆಮಾಡಿ ನಿಯೋಜನೆ ವೈಫಲ್ಯಗಳನ್ನು ಪರಿಹರಿಸಬಹುದು
+- ಅಜೂರ್ ಉತ್ತಮ ವಾಸ್ತುಶಿಲ್ಪ ತತ್ವಗಳನ್ನು ಮೂಲಸೌಕರ್ಯ ವಿನ್ಯಾಸಕ್ಕೆ ಅನ್ವಯಿಸಬಹುದು
+- ಮೂಲಸೌಕರ್ಯ ನವೀಕರಣಗಳನ್ನು ನಿರ್ವಹಿಸಿ ವಾಸ್ತುಶಿಲ್ಪ ಪ್ರಮಾಣೀಕರಣ ತಂತ್ರಗಳನ್ನು ಅನುಷ್ಠಾನಗೊಳಿಸಬಹುದು
 
-## ಮೂಲಸೌಕರ್ಯ ಒದಗಿಸುವಿಕೆಗೆ ಅವಲೋಕನ
+## ಮೂಲಸೌಕರ್ಯ ಪ್ರಾವೇಶಿಕೆ ಪರಿಗಣನೆ
 
-Azure Developer CLI ಹಲವಾರು Infrastructure as Code (IaC) ಪ್ರೊವೈಡರ್‌ಗಳನ್ನು ಬೆಂಬಲಿಸುತ್ತದೆ:
-- **Bicep** (ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ) - Azure ಗಾಗಿ ಡೊಮೇನ್-ನಿರ್ದಿಷ್ಟ ಭಾಷೆ
-- **ARM Templates** - JSON ಆಧಾರಿತ Azure Resource Manager ಟೆಂಪ್ಲೇಟುಗಳು
-- **Terraform** - ಬಹು-ಮೇಘ ಮೂಲಸೌಕರ್ಯ ಉಪಕರಣ
-- **Pulumi** - ಪ್ರೋಗ್ರಾಮಿಂಗ್ ಭಾಷೆಗಳೊಂದಿಗೆ ಆಧುನಿಕ ಮೂಲಸೌಕರ್ಯ ಅನ್ನು ಕೋಡ್ ಆಗಿ
+ಅಜೂರ್ ಡೆವೆಲಪರ್ CLI ಹಲವು Infrastructure as Code (IaC) ಪೂರೈಕೆದಾರರನ್ನು ಬೆಂಬಲಿಸುತ್ತದೆ:
+- **ಬೈಸೆಪ್** (ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ) - ಅಜೂರ್-ನಿಖರ ಡೊಮೇನ್-ವಿಶಿಷ್ಟ ಭಾಷೆ
+- **ARM ಟೆಂಪ್ಲೇಟುಗಳು** - JSON ಆಧಾರಿತ ಅಜೂರ್ Resource Manager ಟೆಂಪ್ಲೇಟುಗಳು
+- **ಟೆರೆಫಾರ್ಮ್** - ಬಹು-ಮೇಘ ಮೂಲಸೌಕರ್ಯ ಸಾಧನ
+- **ಪ್ಯುಲಮಿ** - ಪ್ರೋಗ್ರಾಮಿಂಗ್ ಭಾಷೆಗಳನ್ನು ಬಳಸಿಕೊಂಡು ಆಧುನಿಕ ಮೂಲಸೌಕರ್ಯ ಸಂಹಿತಿ
 
-## Azure ಸಂಪನ್ಮೂಲಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದು
+## ಅಜೂರ್ ಸಂಪನ್ಮೂಲಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದು
 
-### ಸಂಪನ್ಮೂಲ ಹೈರಾರ್ಕಿ
+### ಸಂಪನ್ಮೂಲ ವರ್ಗೀಕರಣ
 ```
 Azure Account
 └── Subscriptions
@@ -49,16 +49,16 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಗೆ ಸಾಮಾನ್ಯ Azure ಸೇವೆಗಳು
-- **Compute**: App Service, Container Apps, Functions, Virtual Machines
-- **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Networking**: Virtual Network, Application Gateway, CDN
-- **Security**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
+### ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಸಾಮಾನ್ಯ ಅಜೂರ್ ಸೇವೆಗಳು
+- **ಕಂಪ್ಯೂಟ್**: ಅಪ್ಲಿಕೇಶನ್ ಸರ್ವೀಸ್, ಕಂಟೈನರ್ ಅಪ್ಸ್, ಫಂಕ್ಷನ್‌ಗಳು, ವರ್ಚುವಲ್ ಮಶೀನಗಳು
+- **ಸ್ಟೋರೆಜ್**: ಸ್ಟೋರೆಜ್ ಖಾತೆ, ಕಾಸ್ಮೋಸ್ ಡಿಬಿ, ಎಸ್‌ಕ್ಯೂಎಲ್ ಡೇಟಾಬೇಸ್, ಪೋಸ್ಟ್‌ಗ್ರೆಸ್ಎಸ್‌ಕ್ಯೂಎಲ್
+- **ಜಾಲತಾಣ**: ವರ್ಚುವಲ್ ನೆಟ್‌ವರ್ಕ್, ಅಪ್ಲಿಕೇಶನ್ ಗೇಟ್ವೇ, CDN
+- **ಭದ್ರತೆ**: ಕೀ ವಾಲ್ಟ್, ಅಪ್ಲಿಕೇಶನ್ ಇನ್ಸೈಟ್ಸ್, ಲಾಗ್ ಅನಾಲಿಟಿಕ್ಸ್
+- **ಎಐ/ಎಂಎಲ್**: ಕಾಯಾಗ್ನಿಟಿವ್ ಸೇವೆಗಳು, ಓಪನ್‌ಎಐ, ಮಷೀನ್ ಲರ್ನಿಂಗ್
 
-## Bicep ಮೂಲಸೌಕರ್ಯ ಟೆಂಪ್ಲೇಟುಗಳು
+## ಬೈಸೆಪ್ ಮೂಲಸೌಕರ್ಯ ಟೆಂಪ್ಲೇಟುಗಳು
 
-### ಮೂಲ Bicep ಟೆಂಪ್ಲೇಟ್ ರಚನೆ
+### ಮೂಲ ಬೈಸೆಪ್ ಟೆಂಪ್ಲೇಟು ರಚನೆ
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -128,9 +128,9 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### ಪ್ರಗತಿಶೀಲ Bicep ಮಾದರಿಗಳು
+### ನೈಪುಣ್ಯ ಬೈಸೆಪ್ ಮಾದರಿಗಳು
 
-#### ಮೋಡ್ಯೂಲರ್ ಮೂಲಸೌಕರ್ಯ
+#### ಮಾಯಾಜಾಲ ಮೂಲಸೌಕರ್ಯ
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -179,7 +179,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### ಶರತಾಪೂರ್ಣ ಸಂಪನ್ಮೂಲ ರಚನೆ
+#### ಶರತುದಾರಿ ಸಂಪನ್ಮೂಲ ರಚನೆ
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -200,9 +200,9 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ ಡೇಟಾಬೇಸ್ ಒದಗಿಕೆ
+## 🗃️ ಡೇಟಾಬೇಸ್ ಪ್ರಾವೇಶಿಕೆ
 
-### Cosmos DB
+### ಕಾಸ್ಮೋಸ್ ಡಿಬಿ
 ```bicep
 resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
   name: '${applicationName}-cosmos-${resourceToken}'
@@ -251,7 +251,7 @@ resource todoContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/conta
 }
 ```
 
-### PostgreSQL
+### ಪೋಸ್ಟ್‌ಗ್ರೆಸ್‌ಎಸ್‌ಕ್ಯೂಎಲ್
 ```bicep
 resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' = {
   name: '${applicationName}-postgres-${resourceToken}'
@@ -300,7 +300,7 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 
 ## 🔒 ಭದ್ರತೆ ಮತ್ತು ರಹಸ್ಯ ನಿರ್ವಹಣೆ
 
-### Key Vault ಏಕೀಕರಣ
+### ಕೀ ವಾಲ್ಟ್ ಸಂಯೋಜನೆ
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -342,7 +342,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### ನಿರ್ವಹಿಸಲ್ಪಟ್ಟ ಐಡೆಂಟಿಟಿ ಸಂರಚನೆ
+### ನಿಗದಿತ ಐಡೆಂಟಿಟಿ ಸಂರಚನೆ
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -368,9 +368,9 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 ನೆಟ್ವರ್ಕಿಂಗ್ ಮತ್ತು ಸಂಪರ್ಕತೆ
+## 🌍 ಜಾಲತಾಣ ಮತ್ತು ಸಂಪರ್ಕತೆ
 
-### ವರ್ಚುವಲ್ ನೆಟ್ವರ್ಕ್ ಸಂರಚನೆ
+### ವರ್ಚುವಲ್ ನೆಟ್‌ವರ್ಕ್ ಸಂರಚನೆ
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -433,7 +433,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### SSL ಜೊತೆಗೆ Application Gateway
+### SSL ನೊಂದಿಗೆ ಅಪ್ಲಿಕೇಶನ್ ಗೇಟ್ವೇ
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -496,9 +496,9 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 ನಿಗಾ ಮತ್ತು ಗಮನಾರ್ಹತೆ
+## 📊 ಸಂಚರಣೆ ಮತ್ತು ಗಮನಾರ್ಹತೆ
 
-### Application Insights
+### ಅಪ್ಲಿಕೇಶನ್ ಇನ್ಸೈಟ್ಸ್
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
   name: '${applicationName}-logs-${resourceToken}'
@@ -527,7 +527,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### ಕಸ್ಟಮ್ ಮೇಟ್ರಿಕ್‌ಗಳು ಮತ್ತು ಅಲರ್ಟ್‌ಗಳು
+### ಕಸ್ಟಮ್ ಮೆಟ್ರಿಕ್ಸ್ ಮತ್ತು ಎಚ್ಚರಿಕೆಗಳು
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -561,9 +561,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 ಪರಿಸರ-ಪ್ರತ್ಯೇಕ ಸಂರಚನೆಗಳು
+## 🔧 ಪರಿಸರ-ವಿಶಿಷ್ಟ ಸಂರಚನೆಗಳು
 
-### ವಿಭಿನ್ನ ಪರಿಸರಗಳಿಗೆ ಪರಾಮೀಟರ್ ಫೈಲ್‌ಗಳು
+### ವಿಭಿನ್ನ ಪರಿಸರಗಳಿಗೆ ಪ್ಯಾರಾಮೀಟರ್ ಫೈಲ್‌ಗಳು
 ```json
 // infra/main.parameters.dev.json
 {
@@ -617,7 +617,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### ಶರತಾಪೂರ್ಣ ಸಂಪನ್ಮೂಲ ಒದಗಿಕೆ
+### ಶರತುದಾರಿಯಾದ ಸಂಪನ್ಮೂಲ ಪ್ರಾವೇಶಿಕೆ
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,9 +649,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 ಉನ್ನತ ಒದಗಿಸುವಿಕೆ ಮಾದರಿಗಳು
+## 🚀 ನೈಪುಣ್ಯ ಪ್ರಾವೇಶಿಕೆ ಮಾದರಿಗಳು
 
-### ಬಹು-ಪ್ರಾಂತ್ಯ ನಿಯೋಜನೆ
+### ಬಹು-ಪ್ರದೇಶ ನಿಯೋಜನೆ
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -719,7 +719,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### ಮೂಲಸೌಕರ್ಯ ಪರೀಕ್ಷಣೆ
+### ಮೂಲಸೌಕರ್ಯ ಮಾನದಂಡ ಪರಿಶೀಲನೆ
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -755,42 +755,41 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 ಮೂಲಸೌಕರ್ಯ ಪೂರ್ವದೃಶ್ಯ & ಮಾನ್ಯತೆ (ಹೊಸದು)
+## 🧪 ಮೂಲಸೌಕರ್ಯ ಪೂರ್ವದೃಶ್ಯ & ಪರಿಶೀಲನೆ (ಹೊಸದು)
 
-### ನಿಯೋಜನೆಕ್ಕೂ ಮುನ್ನ ಮೂಲಸೌಕರ್ಯ ಬದಲಾವಣೆಗಳ ಪೂರ್ವದೃಶ್ಯ
+### ನಿಯೋಜನೆಯ ಮೊದಲು ಮೂಲಸೌಕರ್ಯ ಬದಲಾವಣೆಗಳ ಪೂರ್ವದೃಶ್ಯ
 
-`azd provision --preview` ವೈಶಿಷ್ಟ್ಯವು ಸಂಪನ್ಮೂಲಗಳನ್ನು ವಾಸ್ತವವಾಗಿ ನಿಯೋಜಿಸುವ ಮೊದಲು **ಮೂಲಸೌಕರ್ಯ ಒದಗಿಕೆಯನ್ನು ನಕಲಿ ರೂಪದಲ್ಲಿ ಅನುಕರಿಸಲು** ಬಿಡುತ್ತದೆ. ಇದು `terraform plan` ಅಥವಾ `bicep what-if` ರ روحಕ್ಕೆ ಹೊಂದಿರುಂತೆ, ನಿಮ್ಮ Azure ಪರಿಸರದಲ್ಲಿ 어떤 ಬದಲಾವಣೆಗಳನ್ನು ಮಾಡಲಾಗುತ್ತದೆ ಎಂಬುದರ **ಡ್ರೈ-ರನ್ ದೃಶ್ಯವನ್ನು** ನೀಡುತ್ತದೆ.
+`azd provision --preview` ವೈಶಿಷ್ಟ್ಯವು ಸಂಪನ್ಮೂಲಗಳನ್ನು ನಿಭಾಯಿಸುವ ಮೊದಲು ಮೂಲಸೌಕರ್ಯ ಪ್ರಾವೇಶಿಕೆಯನ್ನು **ಅನುಕರಿಸುವುದನ್ನು** ಅನುಮತಿಸುತ್ತದೆ. ಇದು `terraform plan` ಅಥವಾ `bicep what-if` ಮಾದರಿಯಂತೆ, ನಿಮ್ಮ ಅಜೂರ್ ಪರಿಸರಕ್ಕೆ ಯಾವ ಬದಲಾವಣೆಗಳು ಆಗಲಿವೆ ಎಂಬುದರ **ಸರಳ ದೃಷ್ಠಾಂತವನ್ನು** ನೀಡುತ್ತದೆ.
 
-#### 🛠️ ಅದು ಏನು ಮಾಡುತ್ತದೆ
-- **ನಿಮ್ಮ IaC ಟೆಂಪ್ಲೇಟುಗಳನ್ನು ವಿಶ್ಲೇಷಿಸುತ್ತದೆ** (Bicep ಅಥವಾ Terraform)
-- **ಸಂಪನ್ಮೂಲ ಬದಲಾವಣೆಗಳ ಪೂರ್ವದೃಶ್ಯವನ್ನು ತೋರಿಸುತ್ತದೆ**: ಸೇರ್ಪಡೆಗಳು, ಅಳಿಸುತ್ತವೆ, ಅಪ್ಡೇಟ್‌ಗಳು
-- **ಬದಲಾವಣೆಗಳನ್ನು ಅನ್ವಯಿಸದು** — ಇದು ಓದ-only ಆಗಿದ್ದು, ನಡೆಸಲು ಸುರಕ್ಷಿತವಾಗಿದೆ
+#### 🛠️ ಇದು ಮಾಡುವುದೇನು
+- ನಿಮ್ಮ IaC ಟೆಂಪ್ಲೇಟುಗಳನ್ನು (ಬೈಸೆಪ್ ಅಥವಾ ಟೆರೆಫಾರ್ಮ್) ವಿಶ್ಲೇಷಿಸುತ್ತದೆ
+- ಸಂಪನ್ಮೂಲ ಬದಲಾವಣೆಗಳ ಪೂರ್ವದೃಶ್ಯವನ್ನು ತೋರಿಸುತ್ತದೆ: ಸೇರ್ಪಡೆ, ಅಳಿಸುವಿಕೆ, ನವೀಕರಣ
+- ಬದಲಾವಣೆಗಳನ್ನು ಜಾರಿಗೊಳಿಸುವುದಿಲ್ಲ — ಓದಿಕೆಗೆ ಮಾತ್ರ ಮತ್ತು ಸುರಕ್ಷಿತವಾಗಿದೆ
 
-#### � ಬಳಕೆ ಪ್ರಕರಣಗಳು
+#### ಬಳಕೆಯ ಸಂದರ್ಭದಲ್ಲಿ
 ```bash
-# ಡಿಪ್ಲಾಯ್ ಮಾಡುವ ಮೊದಲು ಮೂಲಸೌಕರ್ಯ ಬದಲಾವಣೆಗಳನ್ನು ಪೂರ್ವದೃಶ್ಯ ಮಾಡಿ
+# ನಿಯೋಜನೆಯ ಮೊದಲು ಮೂಲಸೌಕರ್ಯ ಬದಲಾವಣೆಗಳನ್ನು ಪೂರ್ವದೃಶ್ಯ ಮಾಡಿ
 azd provision --preview
 
-# ವಿವರವಾದ ಫಲಿತಾಂಶದೊಂದಿಗೆ ಪೂರ್ವದೃಶ್ಯ
-azd provision --preview --output json
-
-# ನಿರ್ದಿಷ್ಟ ಪರಿಸರಕ್ಕಾಗಿ ಪೂರ್ವದೃಶ್ಯ
-azd provision --preview --environment production
+# ವಿಶೇಷ ಪರಿಸರಕ್ಕಾಗಿ ಪೂರ್ವದೃಶ್ಯ
+azd provision --preview -e production
 ```
 
-ಈ ಕಮಾಂಡ್ ನಿಮಗೆ ಸಹಾಯ ಮಾಡುತ್ತದೆ:
-- **ಸಂಪನ್ಮೂಲ ಬದಲಾವಣೆಗಳನ್ನು ಮಾನ್ಯೀಕರಿಸಲು** ನಿಯೋಜನೆಯ ಮುನ್ನ
-- **ಡಿವೆಲಪ್ಮೆಂಟ್ ಚಕ್ರದ ಆರಂಭದಲ್ಲಿ ತಪ್ಪು ಸಂರಚನೆಗಳನ್ನು ಹಿಡಿಯಲು**
-- **ತಂಡ ಪರಿಸರಗಳಲ್ಲಿ ಸುರಕ್ಷಿತವಾಗಿ ಸಹಕಾರ ಮಾಡಲು**
-- **ಎಚ್ಚರಿಕೆಯಿಲ್ಲದ ನಿಯೋಜನೆಗಳಿಂದ ತಪ್ಪಿಸಲು ಕನಿಷ್ಠ-ಅಧಿಕಾರ ತಂತ್ರಗಳನ್ನು ಖಾತ್ರಿಪಡಿಸಲು**
+ಈ ಕಮ್ಯಾಂಡ್ ಸಹಾಯ ಮಾಡುತ್ತದೆ:
+- ಸಂಪನ್ಮೂಲಗಳನ್ನು ನಿಯೋಜಿಸುವ ಮೊದಲು ಮೂಲಸೌಕರ್ಯ ಬದಲಾವಣೆಗಳನ್ನು **ಪರಿಶೀಲಿಸಲು**
+- ಅಭಿವೃದ್ಧಿ ಚಟುವಟಿಕೆಯಲ್ಲಿ ಬೇಗನೆ **ತಪ್ಪು ಸಂರಚನೆಗಳನ್ನು ಪತ್ತೆಹಚ್ಚಲು**
+- ತಂಡದ ಪರಿಸರಗಳಲ್ಲಿ **ಸುರಕ್ಷಿತ ಸಹಕಾರ ಮಾಡಿಕೊಳ್ಳಲು**
+- ಅಲೈಕೆ ಇಲ್ಲದ ಅತ್ಯಲ್ಪ-ಸಮರ್ಥ ನಿಯೋಜನೆಗಳನ್ನು **ಖಚಿತಪಡಿಸಲು**
 
-ಇದು ವಿಶೇಷವಾಗಿ ಉಪಯುಕ್ತವಾಗುತ್ತದೆ যখন:
-- ಸಂಕೀರ್ಣ ಬಹು-ಸೇವಾ ಪರಿಸರಗಳೊಂದಿಗೆ ಕೆಲಸ ಮಾಡುತ್ತಿರುವಾಗ
-- ಉತ್ಪಾದನೆ ಮೂಲಸೌಕರ್ಯಕ್ಕೆ ಬದಲಾವಣೆಗಳನ್ನು ಮಾಡುತ್ತಿರುವಾಗ
-- PR ಅಳುಕುಮಾಡುವ ಮೊದಲು ಟೆಂಪ್ಲೇಟು ಬದಲಾವಣೆಗಳನ್ನು ಮಾನ್ಯೀಕರಿಸುವಾಗ
-- ಹೊಸ ತಂಡದ ಸದಸ್ಯರಿಗೆ ಮೂಲಸೌಕರ್ಯ ಮಾದರಿಗಳ ಮೇಲೆ ತರಬೇತಿ ನೀಡುತ್ತಿರುವಾಗ
+ಇದು ವಿಶೇಷವಾಗಿ ಉಪಯುಕ್ತವಾಗುತ್ತದೆ:
+- ಸಂಕೀರ್ಣ ಬಹು-ಸೇವಾ ಪರಿಸರಗಳಲ್ಲಿ ಕೆಲಸ ಮಾಡುವಾಗ
+- ಉತ್ಪಾದನಾ ಮೂಲಸೌಕರ್ಯದಲ್ಲಿ ಬದಲಾವಣೆಗಳನ್ನು ಮಾಡುವಾಗ
+- PR ಅನುಮೋದನೆಗೂ ಮುನ್ನ ಟೆಂಪ್ಲೇಟ್ ಬದಲಾವಣೆಗಳನ್ನು ಪರಿಶೀಲಿಸುವಾಗ
+- ಹೊಸ ತಂಡದ ಸದಸ್ಯರಿಗೆ ಮೂಲಸೌಕರ್ಯ ಮಾದರಿಗಳನ್ನು ಸಹಾಯವಾಗಿ ತರಬೇತಿ ನೀಡುವಾಗ
 
-### ನಿರೂಪಣೆಯ ಪೂರ್ವದೃಶ್ಯ ಉದಾಹರಣೆ
+### ಉದಾಹರಣೆಯ ಪೂರ್ವದೃಶ್ಯ ಔಟ್‌ಪುಟ್
+ನಿಖರ ಪೂರ್ವದೃಶ್ಯ ಔಟ್‌ಪುಟ್ ಪೂರೈಕೆದಾರ ಮತ್ತು ಪ್ರಾಜೆಕ್ಟ್ ರಚನೆಯಂತೆ ವ್ಯತ್ಯಾಸವಾಗಬಹುದು, ಆದರೆ ಫಲಿತಾಂಶವು ಯಾವುದೇ ಬದಲಾವಣೆ ಜಾರಿಗೊಳಿಸುವ ಮೊದಲು ಸ್ಪಷ್ಟವಾಗಿ ಗೊತ್ತಾಗಬೇಕು.
+
 ```bash
 $ azd provision --preview
 
@@ -809,28 +808,27 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
 ```
 
-## �🔄 ಸಂಪನ್ಮೂಲ ನವೀಕರಣಗಳು ಮತ್ತು ಸ್ಥಳಾಂತರಗಳು
+## �🔄 ಸಂಪನ್ಮೂಲ ನವೀಕರಣಗಳು ಮತ್ತು ಬದಲಾವಣೆಗಳು
 
-### ಸುರಕ್ಷಿತ ಸಂಪನ್ಮೂಲ ಅಪ್ಡೇಟ್‌ಗಳು
+### ಸುರಕ್ಷಿತ ಸಂಪನ್ಮೂಲ ನವೀಕರಣಗಳು
 ```bash
-# ಇನ್ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಬದಲಾವಣೆಗಳನ್ನು ಮೊದಲು ಪೂರ್ವದೃಶ್ಯ ಮಾಡಿ (ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ)
+# ಮೂಲಸೌಕರ್ಯ ಬದಲಾವಣೆಗಳನ್ನು ಮೊದಲು ಪೂರ್ವವೀಕ್ಷಣೆ ಮಾಡಿ (ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ)
 azd provision --preview
 
-# ಪೂರ್ವದೃಶ್ಯದ ದೃಢೀಕರಣದ ನಂತರ ಬದಲಾವಣೆಗಳನ್ನು ಅನ್ವಯಿಸಿ
+# ಪೂರ್ವವೀಕ್ಷಣೆ ದೃಢೀಕರಣದ ನಂತರ ಬದಲಾವಣೆಗಳನ್ನು ಅನ್ವಯಿಸಿ
 azd provision --confirm-with-no-prompt
 
-# ರೋಲ್‌ಬ್ಯಾಕ್‌ಗಾಗಿ, ಇನ್ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಬದಲಾವಣೆಗಳನ್ನು ಹಿಂದಿರಿಗೊಳಿಸಲು Git ಅನ್ನು ಬಳಸಿ:
-git revert HEAD  # geçen ಇನ್ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಕಮಿಟ್ ಅನ್ನು ಹಿಂದಿರಿಗೊಳಿಸಿ
-azd provision    # ಹಿಂದಿನ ಇನ್ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಸ್ಥಿತಿಯನ್ನು ಅನ್ವಯಿಸಿ
+# ಹಿಂತೆಗೆದುಕೊಳ್ಳಲು, ಮೂಲಸೌಕರ್ಯ ಬದಲಾವಣೆಗಳನ್ನು ರದ್ದುಗೊಳಿಸಲು Git ಅನ್ನು ಬಳಸಿರಿ:
+git revert HEAD  # ಕೊನೆಯ ಮೂಲಸೌಕರ್ಯ ಕಮಿಟ್ ಅನ್ನು ಹಿಂತೆಗೆದುಕೊಳ್ಳಿ
+azd provision    # ಹಿಂದಿನ ಮೂಲಸೌಕರ್ಯ ಸ್ಥಿತಿಯನ್ನು ಅನ್ವಯಿಸಿ
 ```
 
-### ಡೇಟಾಬೇಸ್ ಸ್ಥಳಾಂತರಗಳು
+### ಡೇಟಾಬೇಸ್ ಬದಲಾವಣೆಗಳು
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -861,7 +859,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🎯 ಉತ್ತಮ ಅಭ್ಯಾಸಗಳು
 
-### 1. ಸಂಪನ್ಮೂಲ ಹೆಸರುಕರಣ ಕಾನ್ಸೆನ್ಶನ್ಸ್
+### 1. ಸಂಪನ್ಮೂಲ ಹೆಸರಿನ ನಿಯಮಗಳು
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -872,7 +870,7 @@ var naming = {
 }
 ```
 
-### 2. ಟ್ಯಾಗಿಂಗ್ ರಣನೀತಿ
+### 2. ಟ್ಯಾಗಿಂಗ್ ತಂತ್ರಜ್ಞಾನ
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -885,7 +883,7 @@ var commonTags = {
 }
 ```
 
-### 3. ಪರಾಮೀಟರ್ ಮಾನ್ಯತೆ
+### 3. ಪ್ಯಾರಾಮೀಟರ್ ಪರಿಶೀಲನೆ
 ```bicep
 @description('Environment name')
 @minLength(3)
@@ -901,7 +899,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. ಔಟ್‌ಪುಟ್ ಅನ್ನು ಸಂಘಟಿಸುವುದು
+### 4. ಔಟ್‌ಪುಟ್ ಕೈಗಾರಿಕೆ
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -918,27 +916,27 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## ಮುಂದಿನ ಹಂತಗಳು
 
-- [ನಿಯೋಜನೆ ಮೊದಲು ಯೋಜನೆ](../chapter-06-pre-deployment/capacity-planning.md) - ಸಂಪನ್ಮೂಲ ಲಭ್ಯತೆಯನ್ನು ಪರಿಶೀಲಿಸಿ
-- [ಸಾಮಾನ್ಯ ಸಮಸ್ಯೆಗಳು](../chapter-07-troubleshooting/common-issues.md) - ಮೂಲಸೌಕರ್ಯ ಸಮಸ್ಯೆಗಳನ್ನು ತಿದ್ದುಮಾಡಿ
-- [ಡಿಬಗ್ಗಿಂಗ್ ಗೈಡ್](../chapter-07-troubleshooting/debugging.md) - ಒದಗಿಸುವಿಕೆಗೆ ಸಂಬಂಧಿಸಿದ ಸಮಸ್ಯೆಗಳನ್ನು ಡಿಬಗ್ ಮಾಡಿ
-- [SKU ಆಯ್ಕೆ](../chapter-06-pre-deployment/sku-selection.md) - ಸೂಕ್ತ ಸೇವಾ ಟಿಯರ್‌ಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ
+- [ನಿಯೋಜನೆಗೂ ಮುನ್ನ ಯೋಜನೆ](../chapter-06-pre-deployment/capacity-planning.md) - ಸಂಪನ್ಮೂಲ ಲಭ್ಯತೆ ಪರಿಶೀಲನೆ
+- [ಸಾಮಾನ್ಯ ಸಮಸ್ಯೆಗಳು](../chapter-07-troubleshooting/common-issues.md) - ಮೂಲಸೌಕರ್ಯ ಸಮಸ್ಯೆಗಳನ್ನು ಪರಿಶೋಧಿಸಿ ಪರಿಹರಿಸುವುದು
+- [ದೋಷನಿಜರಣೆ ಮಾರ್ಗದರ್ಶಿ](../chapter-07-troubleshooting/debugging.md) - ಪ್ರಾವೇಶಿಕೆ ಸಮಸ್ಯೆಗಳನ್ನು ಡಿಬಗ್ ಮಾಡುವುದು
+- [SKU ಆಯ್ಕೆ](../chapter-06-pre-deployment/sku-selection.md) - ಸರಿಯಾದ ಸೇವಾ ತರಗತಿಗಳನ್ನು ಆಯ್ಕೆ ಮಾಡಿಕೊಳ್ಳಿ
 
 ## ಹೆಚ್ಚುವರಿ ಸಂಪನ್ಮೂಲಗಳು
 
-- [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [ಅಜೂರ್ ಬೈಸೆಪ್ ಡಾಕ್ಯುಮೆಂಟೇಷನ್](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [ಅಜೂರ್ ರಿಸೋರ್ಸ್ ಮ್ಯಾನೇಜರ್ ಟೆಂಪ್ಲೇಟುಗಳು](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [ಅಜೂರ್ ವಾಸ್ತುಶಿಲ್ಪ ಕೇಂದ್ರ](https://learn.microsoft.com/en-us/azure/architecture/)
+- [ಅಜೂರ್ ಉತ್ತಮ ವಾಸ್ತುಶಿಲ್ಪ ಚಟುವಟಿಕೆ](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**ನ್ಯಾವಿಗೇಶನ್**
+**ನಾವಿಗೇಶನ್**
 - **ಹಿಂದಿನ ಪಾಠ**: [ನಿಯೋಜನೆ ಮಾರ್ಗದರ್ಶಿ](deployment-guide.md)
-- **ಮುಂದಿನ ಪಾಠ**: [ಸಾಮರ್ಥ್ಯ ಯೋಜನೆ](../chapter-06-pre-deployment/capacity-planning.md)
+- **ಮುಂದಿನ ಪಾಠ**: [ಕ್ಷಮತಾ ಯೋಜನೆ](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-ನಿರಾಕರಣೆ:
-ಈ ದಾಖಲೆ AI ಅನುವಾದ ಸೇವೆ [Co-op Translator](https://github.com/Azure/co-op-translator) ಬಳಸಿ ಅನುವಾದಿಸಲಾಗಿದೆ. ನಾವು ಶುದ್ಧತೆಗಾಗಿ ಪ್ರಯತ್ನಿಸುತ್ತಿದ್ದರೂ, ಸ್ವಯಂಚಾಲಿತ ಅನುವಾದಗಳಲ್ಲಿ ದೋಷಗಳು ಅಥವಾ ಅನಿಖಲತೆಗಳು ಇರಬಹುದು ಎಂಬುದನ್ನು ದಯವಿಟ್ಟು ಗಮನಿಸಿ. ಮೂಲ ಭಾಷೆಯಲ್ಲಿರುವ ಮೂಲ ದಾಖಲೆ ಅನ್ನು ಅಧಿಕೃತ ಆಧಾರದಾಗಿ ಪರಿಗಣಿಸಬೇಕು. ಗಂಭೀರ ಮಾಹಿತಿಗಾಗಿ ವೃತ್ತಿಪರ ಮಾನವ ಅನುವಾದವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಅನುವಾದದ ಬಳಕೆಯಿಂದ ಉಂಟಾಗುವ ಯಾವುದೇ ತಪ್ಪು ಅರ್ಥಗೈಕೆಗಳು ಅಥವಾ ತಪ್ಪಾದ ವ್ಯಾಖ್ಯಾನಗಳಿಗೆ ನಾವು ಜವಾಬ್ದಾರರಲ್ಲ.
+**ಸೇವೆ ನಿರാകರಣೆ**:  
+ಈ ಡಾಕ್ಯುಮೆಂಟ್ ಅನ್ನು AI ಅನುವಾದ ಸೇವೆ [Co-op Translator](https://github.com/Azure/co-op-translator) ಬಳಸಿ ಅನುವಾದಿಸಲಾಗಿದೆ. ನಾವು ನಿಖರತೆಗೆ ಪ್ರಯತ್ನಿಸುತ್ತಿದ್ದರೂ ಸಹ, ಸ್ವಯಂಚಾಲಿತ ಅನುವಾದಗಳಲ್ಲಿ ತಪ್ಪುಗಳು ಅಥವಾ ಅಸ್ಪಷ್ಟತೆಗಳು ಇರಬಹುದು ಎಂಬ ತಿಳಿವಳಿಕೆ ಇರಲಿ. ಮೂಲ ಡಾಕ್ಯುಮೆಂಟ್ ಅದರ ಸ್ಥಳೀಯ ಭಾಷೆಯಲ್ಲಿ ಅಧಿಕೃತ ಮೂಲವಾಗಿಯೇ ಪರಿಗಣಿಸಲಾಗಬೇಕು. ಮಹತ್ವಪೂರ್ಣ ಮಾಹಿತಿಗಾಗಿ, ವೃತ್ತಿಪರ ಮಾನವ ಅನುವಾದವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಅನುವಾದ ಬಳಸುವುದರಿಂದ ಉಂಟಾಗುವ ಯಾವುದೇ ತಪ್ಪು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವಿಕೆಗಳಿಗೆ ನಾವು ಹೊಣೆಗಾರರಲ್ಲ.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

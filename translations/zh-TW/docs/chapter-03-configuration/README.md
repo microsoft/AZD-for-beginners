@@ -1,29 +1,31 @@
-# 第 3 章: 設定與驗證
+# 第三章：設定與驗證
 
-**📚 課程**: [AZD 初學者指南](../../README.md) | **⏱️ 時長**: 45-60 分鐘 | **⭐ 複雜度**: 中等
+**📚 課程**: [AZD 新手入門](../../README.md) | **⏱️ 時間**: 45-60 分鐘 | **⭐ 難度**: 中階
 
 ---
 
 ## 概覽
 
-本章涵蓋 Azure Developer CLI 部署的環境設定、驗證模式與安全最佳實務。
+本章涵蓋環境設定、驗證模式，以及 Azure 開發者 CLI 部署的安全最佳實務。
+
+> 已於 2026 年 3 月使用 `azd 1.23.12` 驗證通過。
 
 ## 學習目標
 
-完成本章後，你將能：
-- 掌握 AZD 的設定層級
-- 管理多個環境 (dev, staging, prod)
-- 使用託管身分識別實作安全驗證
-- 設定環境特定的設定
+完成本章後，您將能夠：
+- 精通 AZD 的設定階層
+- 管理多個環境（開發、測試、正式）
+- 實作使用受控身份的安全驗證
+- 設定環境專屬參數
 
 ---
 
-## 📚 Lessons
+## 📚 課程列表
 
 | # | 課程 | 說明 | 時間 |
 |---|--------|-------------|------|
-| 1 | [設定指南](configuration.md) | 環境設定與管理 | 30 分鐘 |
-| 2 | [驗證與安全性](authsecurity.md) | 託管身分識別與 RBAC 模式 | 30 分鐘 |
+| 1 | [設定指南](configuration.md) | 環境建立與管理 | 30 分鐘 |
+| 2 | [驗證與安全](authsecurity.md) | 受控身份與角色基礎存取控制模式 | 30 分鐘 |
 
 ---
 
@@ -42,46 +44,50 @@ azd env select prod
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
-# 檢視設定
+# 檢視設定檔
 azd env get-values
 ```
 
 ---
 
-## 🔧 設定層級
+## 🔧 設定階層
 
-AZD 以此順序套用設定 (後者會覆蓋前者):
+AZD 依此順序套用設定（後者會覆蓋前者）：
 
-1. **預設值** (built into templates)
-2. **azure.yaml** (專案設定)
-3. **環境變數** (`azd env set`)
-4. **命令列旗標** (`--location eastus`)
+1. <strong>預設值</strong>（內建於範本中）
+2. **azure.yaml**（專案設定）
+3. <strong>環境變數</strong>（`azd env set`）
+4. <strong>指令列參數</strong>（`--location eastus`）
 
 ---
 
 ## 🔐 安全最佳實務
 
 ```bash
-# 使用託管身分識別（建議）
+# 使用受管身份（推薦）
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# 檢查驗證狀態
-azd auth whoami
+# 檢查 AZD 認證狀態
+azd auth status
+
+# 選擇性：如果您計劃執行 az 指令，請驗證 Azure CLI 上下文
 az account show
 
-# 如有需要，請重新驗證
+# 如有需要，重新進行身份驗證
 azd auth login
+
+# 選擇性：更新 Azure CLI 的 az 指令認證
 az login
 ```
 
 ---
 
-## 🔗 導覽
+## 🔗 導航
 
 | 方向 | 章節 |
 |-----------|---------|
-| **上一章** | [第 2 章: AI 開發](../chapter-02-ai-development/README.md) |
-| **下一章** | [第 4 章: 基礎建設](../chapter-04-infrastructure/README.md) |
+| <strong>上一章</strong> | [第二章：AI 開發](../chapter-02-ai-development/README.md) |
+| <strong>下一章</strong> | [第四章：基礎建設](../chapter-04-infrastructure/README.md) |
 
 ---
 
@@ -93,6 +99,6 @@ az login
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-免責聲明：
-本文件係使用 AI 翻譯服務 Co-op Translator（https://github.com/Azure/co-op-translator）翻譯而成。儘管我們努力追求準確，但請注意，自動翻譯可能包含錯誤或不精確之處。原始語言版本應被視為具權威性的參考來源。若為重要資訊，建議採用專業人工翻譯。我們對因使用此翻譯而產生的任何誤解或曲解概不負責。
+**免責聲明**：  
+本文件係使用 AI 翻譯服務 [Co-op Translator](https://github.com/Azure/co-op-translator) 進行翻譯。雖然我們致力於準確性，請注意自動翻譯可能包含錯誤或不準確之處。原文檔以其母語版本為權威來源。對於重要資訊，建議採用專業人工翻譯。我們不對使用此翻譯所導致之任何誤解或誤譯負責。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

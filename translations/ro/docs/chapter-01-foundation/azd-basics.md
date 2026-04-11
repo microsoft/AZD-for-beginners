@@ -1,120 +1,120 @@
-# AZD Basics - Înțelegerea Azure Developer CLI
+# AZD Basics - Understanding Azure Developer CLI
 
-# Bazele AZD - Concepte de bază și fundamente
+# AZD Basics - Core Concepts and Fundamentals
 
-**Navigare capitole:**
-- **📚 Acasă curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitol curent**: Capitolul 1 - Fundament și Start Rapid
-- **⬅️ Anterior**: [Prezentare curs](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Următor**: [Instalare și Configurare](installation.md)
-- **🚀 Capitol următor**: [Capitolul 2: Dezvoltare AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD For Beginners](../../README.md)
+- **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
+- **⬅️ Previous**: [Course Overview](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Next**: [Installation & Setup](installation.md)
+- **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-## Introducere
+## Introduction
 
-Această lecție vă introduce în Azure Developer CLI (azd), un instrument de linie de comandă puternic care accelerează parcursul dvs. de la dezvoltarea locală la implementarea în Azure. Veți învăța conceptele fundamentale, caracteristicile de bază și veți înțelege cum azd simplifică implementarea aplicațiilor cloud-native.
+Această lecție te introduce în Azure Developer CLI (azd), un instrument puternic de linie de comandă care accelerează trecerea ta de la dezvoltarea locală la implementarea în Azure. Vei învăța conceptele fundamentale, caracteristicile cheie și vei înțelege cum azd simplifică implementarea aplicațiilor cloud-native.
 
-## Obiective de învățare
+## Learning Goals
 
-La finalul acestei lecții, veți:
+La sfârșitul acestei lecții, vei:
 - Înțelege ce este Azure Developer CLI și scopul său principal
 - Învăța conceptele de bază ale șabloanelor, mediilor și serviciilor
-- Explora caracteristici cheie, inclusiv dezvoltarea bazată pe șabloane și Infrastructura ca și Cod
+- Explora caracteristicile cheie, inclusiv dezvoltarea bazată pe șabloane și Infrastructure as Code
 - Înțelege structura proiectului azd și fluxul de lucru
-- Fi pregătiți să instalați și să configurați azd pentru mediul dvs. de dezvoltare
+- Fi pregătit să instalezi și să configurezi azd pentru mediul tău de dezvoltare
 
-## Rezultate de învățare
+## Learning Outcomes
 
-După completarea acestei lecții, veți putea:
+După finalizarea acestei lecții, vei putea:
 - Explica rolul azd în fluxurile moderne de dezvoltare cloud
-- Identifica componentele structurii unui proiect azd
-- Descrie modul în care șabloanele, mediile și serviciile funcționează împreună
+- Identifica componentele unei structuri de proiect azd
+- Descrie cum funcționează împreună șabloanele, mediile și serviciile
 - Înțelege beneficiile Infrastructure as Code cu azd
-- Recunoaște diferite comenzi azd și scopurile lor
+- Recunoaște diferite comenzi azd și scopul lor
 
-## Ce este Azure Developer CLI (azd)?
+## What is Azure Developer CLI (azd)?
 
-Azure Developer CLI (azd) este un instrument de linie de comandă proiectat să accelereze parcursul dvs. de la dezvoltarea locală la implementarea în Azure. Simplifică procesul de construire, implementare și gestionare a aplicațiilor cloud-native pe Azure.
+Azure Developer CLI (azd) este un instrument de linie de comandă conceput pentru a-ți accelera trecerea de la dezvoltarea locală la implementarea în Azure. Simplifică procesul de construire, implementare și gestionare a aplicațiilor cloud-native în Azure.
 
-### Ce puteți implementa cu azd?
+### What Can You Deploy with azd?
 
-azd suportă o gamă largă de sarcini de lucru—și lista continuă să crească. Astăzi, puteți folosi azd pentru a implementa:
+azd acceptă o gamă largă de tipuri de workload—and lista continuă să crească. Astăzi, poți folosi azd pentru a implementa:
 
-| Tip sarcină de lucru | Exemple | Același flux de lucru? |
-|---------------------|----------|------------------------|
-| **Aplicații tradiționale** | Aplicații web, API-uri REST, site-uri statice | ✅ `azd up` |
-| **Servicii și microservicii** | Aplicații container, Aplicații funcții, backend-uri multi-serviciu | ✅ `azd up` |
-| **Aplicații alimentate de AI** | Aplicații chat cu modele Microsoft Foundry, soluții RAG cu AI Search | ✅ `azd up` |
-| **Agenți inteligenți** | Agenți găzduiți Foundry, orchestrări multi-agente | ✅ `azd up` |
+| Workload Type | Examples | Same Workflow? |
+|---------------|----------|----------------|
+| **Traditional applications** | Web apps, REST APIs, static sites | ✅ `azd up` |
+| **Services and microservices** | Container Apps, Function Apps, multi-service backends | ✅ `azd up` |
+| **AI-powered applications** | Chat apps with Microsoft Foundry Models, RAG solutions with AI Search | ✅ `azd up` |
+| **Intelligent agents** | Foundry-hosted agents, multi-agent orchestrations | ✅ `azd up` |
 
-Ideea cheie este că **ciclul de viață azd rămâne același indiferent ce implementați**. Inițializați un proiect, aprovizionați infrastructura, implementați codul, monitorizați aplicația și curățați resursele—fie că este un site simplu sau un agent AI sofisticat.
+Ideea principală este că **ciclul de viață azd rămâne același indiferent de ceea ce implementezi**. Inițializezi un proiect, provizionezi infrastructura, implementezi codul, monitorizezi aplicația și cureți resursele—fie că este un site simplu sau un agent AI sofisticat.
 
-Această continuitate este intenționată. azd tratează capabilitățile AI ca un alt tip de serviciu pe care aplicația dvs. îl poate folosi, nu ca ceva fundamental diferit. Un endpoint de chat susținut de modelele Microsoft Foundry este, din perspectiva azd, doar un alt serviciu de configurat și implementat.
+Această continuitate este intenționată. azd tratează capabilitățile AI ca un alt tip de serviciu pe care aplicația ta îl poate utiliza, nu ca ceva fundamental diferit. Un endpoint de chat susținut de Microsoft Foundry Models este, din perspectiva azd, doar un alt serviciu de configurat și implementat.
 
-### 🎯 De ce să folosiți AZD? O comparație din lumea reală
+### 🎯 Why Use AZD? A Real-World Comparison
 
-Să comparăm implementarea unui simplu web app cu o bază de date:
+Să comparăm implementarea unei aplicații web simple cu o bază de date:
 
-#### ❌ FĂRĂ AZD: Implementare manuală Azure (peste 30 de minute)
+#### ❌ WITHOUT AZD: Manual Azure Deployment (30+ minutes)
 
 ```bash
-# Pasul 1: Creează grupul de resurse
+# Pasul 1: Creați un grup de resurse
 az group create --name myapp-rg --location eastus
 
-# Pasul 2: Creează planul App Service
+# Pasul 2: Creați un plan App Service
 az appservice plan create --name myapp-plan \
   --resource-group myapp-rg \
   --sku B1 --is-linux
 
-# Pasul 3: Creează aplicația web
+# Pasul 3: Creați o aplicație web
 az webapp create --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --plan myapp-plan \
   --runtime "NODE:18-lts"
 
-# Pasul 4: Creează contul Cosmos DB (10-15 minute)
+# Pasul 4: Creați un cont Cosmos DB (10-15 minute)
 az cosmosdb create --name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --kind MongoDB
 
-# Pasul 5: Creează baza de date
+# Pasul 5: Creați o bază de date
 az cosmosdb mongodb database create \
   --account-name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --name tododb
 
-# Pasul 6: Creează colecția
+# Pasul 6: Creați o colecție
 az cosmosdb mongodb collection create \
   --account-name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --database-name tododb \
   --name todos
 
-# Pasul 7: Obține șirul de conectare
+# Pasul 7: Obțineți șirul de conexiune
 CONN_STR=$(az cosmosdb keys list \
   --name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --type connection-strings \
   --query "connectionStrings[0].connectionString" -o tsv)
 
-# Pasul 8: Configurează setările aplicației
+# Pasul 8: Configurați setările aplicației
 az webapp config appsettings set \
   --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --settings MONGODB_URI="$CONN_STR"
 
-# Pasul 9: Activează logarea
+# Pasul 9: Activați înregistrarea jurnalelor
 az webapp log config --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --application-logging filesystem \
   --detailed-error-messages true
 
-# Pasul 10: Configurează Application Insights
+# Pasul 10: Configurați Application Insights
 az monitor app-insights component create \
   --app myapp-insights \
   --location eastus \
   --resource-group myapp-rg
 
-# Pasul 11: Leagă App Insights de aplicația web
+# Pasul 11: Conectați App Insights la aplicația web
 INSTRUMENTATION_KEY=$(az monitor app-insights component show \
   --app myapp-insights \
   --resource-group myapp-rg \
@@ -125,105 +125,105 @@ az webapp config appsettings set \
   --resource-group myapp-rg \
   --settings APPINSIGHTS_INSTRUMENTATIONKEY="$INSTRUMENTATION_KEY"
 
-# Pasul 12: Compilează aplicația local
+# Pasul 12: Construiți aplicația local
 npm install
 npm run build
 
-# Pasul 13: Creează pachetul de implementare
+# Pasul 13: Creați pachetul de implementare
 zip -r app.zip . -x "*.git*" "node_modules/*"
 
-# Pasul 14: Publică aplicația
+# Pasul 14: Implementați aplicația
 az webapp deployment source config-zip \
   --resource-group myapp-rg \
   --name myapp-web-unique123 \
   --src app.zip
 
-# Pasul 15: Așteaptă și roagă-te să funcționeze 🙏
-# (Fără validare automată, este necesară testarea manuală)
+# Pasul 15: Așteptați și rugați-vă să funcționeze 🙏
+# (Fără validare automată, este necesară testare manuală)
 ```
 
-**Probleme:**
-- ❌ Peste 15 comenzi de reținut și executat în ordine
-- ❌ 30-45 minute de lucru manual
-- ❌ Ușor să apară greșeli (greseli de tastare, parametri incorecți)
-- ❌ Stringuri de conexiune expuse în istoricul terminalului
-- ❌ Fără rollback automat dacă ceva eșuează
-- ❌ Greu de replicat pentru membrii echipei
-- ❌ Diferit de fiecare dată (nereproducibil)
+**Problems:**
+- ❌ 15+ commands to remember and execute in order
+- ❌ 30-45 minutes of manual work
+- ❌ Easy to make mistakes (typos, wrong parameters)
+- ❌ Connection strings exposed in terminal history
+- ❌ No automated rollback if something fails
+- ❌ Hard to replicate for team members
+- ❌ Different every time (not reproducible)
 
-#### ✅ CU AZD: Implementare automatizată (5 comenzi, 10-15 minute)
+#### ✅ WITH AZD: Automated Deployment (5 commands, 10-15 minutes)
 
 ```bash
-# Pasul 1: Inițializați din șablon
+# Pasul 1: Inițializare din șablon
 azd init --template todo-nodejs-mongo
 
 # Pasul 2: Autentificare
 azd auth login
 
-# Pasul 3: Creați mediul
+# Pasul 3: Creare mediu
 azd env new dev
 
-# Pasul 4: Previzualizați modificările (opțional, dar recomandat)
+# Pasul 4: Previzualizare modificări (opțional, dar recomandat)
 azd provision --preview
 
-# Pasul 5: Implementați totul
+# Pasul 5: Implementare completă
 azd up
 
 # ✨ Gata! Totul este implementat, configurat și monitorizat
 ```
 
-**Beneficii:**
-- ✅ **5 comenzi** față de 15+ pași manuali
-- ✅ **10-15 minute** timp total (în mare parte așteptare Azure)
-- ✅ **Zero erori** - automatizat și testat
-- ✅ **Secrete gestionate securizat** prin Key Vault
-- ✅ **Rollback automat** la eșecuri
-- ✅ **Complet reproducibil** - același rezultat de fiecare dată
-- ✅ **Pregătit pentru echipă** - oricine poate implementa cu aceleași comenzi
-- ✅ **Infrastructură ca și Cod** - șabloane Bicep sub controlul versiunii
-- ✅ **Monitorizare integrată** - Application Insights configurat automat
+**Benefits:**
+- ✅ **5 commands** vs. 15+ manual steps
+- ✅ **10-15 minutes** total time (mostly waiting for Azure)
+- ✅ **Fewer manual mistakes** - consistent, template-driven workflow
+- ✅ **Secure secret handling** - many templates use Azure-managed secret storage
+- ✅ **Repeatable deployments** - same workflow every time
+- ✅ **Fully reproducible** - same result every time
+- ✅ **Team-ready** - anyone can deploy with same commands
+- ✅ **Infrastructure as Code** - version controlled Bicep templates
+- ✅ **Built-in monitoring** - Application Insights configured automatically
 
-### 📊 Reducerea timpului & erorilor
+### 📊 Time & Error Reduction
 
-| Metriă | Implementare manuală | Implementare AZD | Îmbunătățire |
-|:-------|:--------------------|:-----------------|:-------------|
-| **Comenzi** | 15+ | 5 | 67% mai puține |
-| **Timp** | 30-45 min | 10-15 min | 60% mai rapid |
-| **Rată erori** | ~40% | <5% | Reducere de 88% |
-| **Consistență** | Scăzută (manual) | 100% (automatizat) | Perfectă |
-| **Integrare echipă** | 2-4 ore | 30 minute | 75% mai rapid |
-| **Timp rollback** | Peste 30 min (manual) | 2 min (automatizat) | 93% mai rapid |
+| Metric | Manual Deployment | AZD Deployment | Improvement |
+|:-------|:------------------|:---------------|:------------|
+| **Commands** | 15+ | 5 | 67% fewer |
+| **Time** | 30-45 min | 10-15 min | 60% faster |
+| **Error Rate** | ~40% | <5% | 88% reduction |
+| **Consistency** | Low (manual) | 100% (automated) | Perfect |
+| **Team Onboarding** | 2-4 hours | 30 minutes | 75% faster |
+| **Rollback Time** | 30+ min (manual) | 2 min (automated) | 93% faster |
 
-## Concepte de bază
+## Core Concepts
 
-### Șabloane
-Șabloanele sunt fundația azd. Ele conțin:
-- **Cod aplicație** - Codul sursă și dependențele
-- **Definiții infrastructură** - Resurse Azure definite în Bicep sau Terraform
-- **Fișiere de configurare** - Setări și variabile de mediu
-- **Scripturi de implementare** - Fluxuri de lucru automatizate pentru implementare
+### Templates
+Șabloanele sunt fundamentul azd. Ele conțin:
+- **Application code** - Codul sursă și dependențele tale
+- **Infrastructure definitions** - Resurse Azure definite în Bicep sau Terraform
+- **Configuration files** - Setări și variabile de mediu
+- **Deployment scripts** - Fluxuri de lucru automate de implementare
 
-### Medii
-Mediile reprezintă țintele diferite de implementare:
-- **Dezvoltare** - Pentru testare și dezvoltare
+### Environments
+Mediile reprezintă diferite ținte de implementare:
+- **Development** - Pentru testare și dezvoltare
 - **Staging** - Mediu pre-producție
-- **Producție** - Mediu live de producție
+- **Production** - Mediu de producție live
 
-Fiecare mediu menține:
-- Grupul de resurse Azure propriu
-- Setări de configurare
-- Starea implementării
+Fiecare mediu își menține propriul:
+- Azure resource group
+- Configuration settings
+- Deployment state
 
-### Servicii
-Serviciile sunt blocurile de construcție ale aplicației dvs.:
-- **Frontend** - Aplicații web, SPA
+### Services
+Serviciile sunt blocurile de bază ale aplicației tale:
+- **Frontend** - Aplicații web, SPA-uri
 - **Backend** - API-uri, microservicii
-- **Bază de date** - Soluții de stocare a datelor
-- **Stocare** - Stocare de fișiere și blob-uri
+- **Database** - Soluții de stocare a datelor
+- **Storage** - Stocare de fișiere și blob-uri
 
-## Caracteristici cheie
+## Key Features
 
-### 1. Dezvoltare bazată pe șabloane
+### 1. Template-Driven Development
 ```bash
 # Răsfoiește șabloanele disponibile
 azd template list
@@ -233,52 +233,52 @@ azd init --template <template-name>
 ```
 
 ### 2. Infrastructure as Code
-- **Bicep** - Limbaj specific domeniului Azure
+- **Bicep** - Limbajul specific domeniului al Azure
 - **Terraform** - Instrument multi-cloud pentru infrastructură
-- **Șabloane ARM** - Șabloane Azure Resource Manager
+- **ARM Templates** - Șabloane Azure Resource Manager
 
-### 3. Fluxuri de lucru integrate
+### 3. Integrated Workflows
 ```bash
 # Flux complet de implementare
-azd up            # Provisionare + Implementare, acest lucru este automat pentru configurarea inițială
+azd up            # Provisionare + Implementare — proces automat pentru configurarea inițială
 
-# 🧪 NOU: Previzualizați schimbările în infrastructură înainte de implementare (SIGUR)
-azd provision --preview    # Simulează implementarea infrastructurii fără a face modificări
+# 🧪 NOU: Previzualizați modificările infrastructurii înainte de implementare (SIGUR)
+azd provision --preview    # Simulați implementarea infrastructurii fără a face modificări
 
-azd provision     # Creează resurse Azure dacă actualizezi infrastructura, folosește aceasta
-azd deploy        # Implementarea codului aplicației sau reimplementarea codului aplicației după actualizare
-azd down          # Curățare resurse
+azd provision     # Creați resurse Azure — dacă actualizați infrastructura, folosiți această opțiune
+azd deploy        # Implementați codul aplicației sau reimplementați-l după actualizare
+azd down          # Curățați resursele
 ```
 
-#### 🛡️ Planificare sigură a infrastructurii cu previzualizare
+#### 🛡️ Safe Infrastructure Planning with Preview
 Comanda `azd provision --preview` este un schimbător de joc pentru implementări sigure:
-- **Analiză dry-run** - Arată ce va fi creat, modificat sau șters
-- **Riscuri zero** - Nu se fac modificări reale în Azure
-- **Colaborare în echipă** - Distribuiți rezultatele previzualizării înainte de implementare
-- **Estimare costuri** - Înțelegeți costurile resurselor înainte de angajament
+- **Analiză fără aplicare** - Arată ce va fi creat, modificat sau șters
+- **Risc zero** - Nu se fac schimbări reale în mediul tău Azure
+- **Colaborare în echipă** - Partajează rezultatele preview înainte de implementare
+- **Estimare a costurilor** - Înțelege costul resurselor înainte de a te angaja
 
 ```bash
-# Exemplu de flux de lucru pentru previzualizare
-azd provision --preview           # Vezi ce se va schimba
-# Revizuiește rezultatul, discută cu echipa
-azd provision                     # Aplică modificările cu încredere
+# Exemplu de flux de previzualizare
+azd provision --preview           # Vedeți ce se va schimba
+# Revizuiți rezultatul, discutați cu echipa
+azd provision                     # Aplicați modificările cu încredere
 ```
 
-### 📊 Vizual: Fluxul de lucru AZD Development
+### 📊 Visual: AZD Development Workflow
 
 ```mermaid
 graph LR
-    A[azd init] -->|Initializează proiectul| B[azd auth login]
+    A[azd init] -->|Inițializează proiectul| B[azd auth login]
     B -->|Autentifică| C[azd env new]
-    C -->|Creează mediu| D{Primul deployment?}
+    C -->|Creează mediu| D{Prima implementare?}
     D -->|Da| E[azd up]
     D -->|Nu| F[azd provision --preview]
     F -->|Revizuiește modificările| G[azd provision]
-    E -->|Provisionează și deployează| H[Resurse în execuție]
+    E -->|Provisionează și implementează| H[Resurse active]
     G -->|Actualizează infrastructura| H
     H -->|Monitorizează| I[azd monitor]
-    I -->|Fă modificări în cod| J[azd deploy]
-    J -->|Redeploy doar codul| H
+    I -->|Efectuează modificări în cod| J[azd deploy]
+    J -->|Reimplementare doar a codului| H
     H -->|Curățare| K[azd down]
     
     style A fill:#e1f5fe
@@ -287,48 +287,48 @@ graph LR
     style H fill:#c5e1a5
     style K fill:#ffcdd2
 ```
-**Explicația fluxului de lucru:**
-1. **Init** - Începeți cu un șablon sau proiect nou
-2. **Auth** - Autentificare în Azure
-3. **Environment** - Creați un mediu de implementare izolat
-4. **Preview** - 🆕 Întotdeauna previzualizați schimbările infrastructurii prima dată (practică sigură)
-5. **Provision** - Creați/actualizați resurse Azure
-6. **Deploy** - Împingeți codul aplicației
-7. **Monitor** - Observați performanța aplicației
-8. **Iterate** - Faceți modificări și redeplasați codul
-9. **Cleanup** - Eliminați resursele când ați terminat
+**Workflow Explanation:**
+1. **Init** - Începe cu un șablon sau proiect nou
+2. **Auth** - Autentifică-te cu Azure
+3. **Environment** - Creează un mediu de implementare izolat
+4. **Preview** - 🆕 Previzualizează întotdeauna schimbările de infrastructură mai întâi (practică sigură)
+5. **Provision** - Creează/actualizează resursele Azure
+6. **Deploy** - Trimite codul aplicației
+7. **Monitor** - Observează performanța aplicației
+8. **Iterate** - Fă modificări și redeploy codul
+9. **Cleanup** - Elimină resursele când ai terminat
 
-### 4. Gestionarea mediului
+### 4. Environment Management
 ```bash
-# Creați și gestionați mediile
+# Creează și gestionează medii
 azd env new <environment-name>
 azd env select <environment-name>
 azd env list
 ```
 
-### 5. Extensii și comenzi AI
+### 5. Extensions and AI Commands
 
-azd folosește un sistem de extensii pentru a adăuga capabilități dincolo de CLI de bază. Acesta este deosebit de util pentru sarcini AI:
+azd folosește un sistem de extensii pentru a adăuga capabilități dincolo de CLI-ul de bază. Acest lucru este deosebit de util pentru workload-urile AI:
 
 ```bash
 # Listează extensiile disponibile
 azd extension list
 
-# Instalează extensia agenților Foundry
+# Instalează extensia Foundry agents
 azd extension install azure.ai.agents
 
-# Inițializează un proiect agent AI dintr-un manifest
+# Inițializează un proiect de agent AI dintr-un manifest
 azd ai agent init -m agent-manifest.yaml
 
 # Pornește serverul MCP pentru dezvoltare asistată de AI (Alpha)
 azd mcp start
 ```
 
-> Extensiile sunt detaliate în [Capitolul 2: Dezvoltare AI-First](../chapter-02-ai-development/agents.md) și în referința [Comenzilor AI AZD CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
+> Extensions are covered in detail in [Chapter 2: AI-First Development](../chapter-02-ai-development/agents.md) and the [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) reference.
 
-## 📁 Structura proiectului
+## 📁 Project Structure
 
-O structură tipică a proiectului azd:
+O structură tipică de proiect azd:
 ```
 my-app/
 ├── .azd/                    # azd configuration
@@ -348,7 +348,7 @@ my-app/
 └── README.md
 ```
 
-## 🔧 Fișiere de configurare
+## 🔧 Configuration Files
 
 ### azure.yaml
 Fișierul principal de configurare al proiectului:
@@ -374,7 +374,7 @@ hooks:
 ```
 
 ### .azure/config.json
-Configurare specifică mediului:
+Configurație specifică mediului:
 ```json
 {
   "version": 1,
@@ -388,67 +388,67 @@ Configurare specifică mediului:
 }
 ```
 
-## 🎪 Fluxuri de lucru comune cu exerciții practice
+## 🎪 Common Workflows with Hands-On Exercises
 
-> **💡 Sfat de învățare:** Urmați aceste exerciții în ordine pentru a vă dezvolta abilitațile AZD în mod progresiv.
+> **💡 Learning Tip:** Urmează aceste exerciții în ordine pentru a-ți construi progresiv abilitățile AZD.
 
-### 🎯 Exercițiul 1: Inițializați primul proiect
+### 🎯 Exercise 1: Initialize Your First Project
 
-**Scop:** Creați un proiect AZD și explorați structura sa
+**Goal:** Creează un proiect AZD și explorează-i structura
 
-**Pași:**
+**Steps:**
 ```bash
 # Folosește un șablon dovedit
 azd init --template todo-nodejs-mongo
 
 # Explorează fișierele generate
-ls -la  # Vizualizează toate fișierele, inclusiv cele ascunse
+ls -la  # Afișează toate fișierele, inclusiv cele ascunse
 
 # Fișiere cheie create:
-# - azure.yaml (configurația principală)
-# - infra/ (codul infrastructurii)
+# - azure.yaml (configurație principală)
+# - infra/ (cod pentru infrastructură)
 # - src/ (codul aplicației)
 ```
 
-**✅ Reușită:** Aveți directoarele azure.yaml, infra/ și src/
+**✅ Success:** Ai directoarele azure.yaml, infra/ și src/
 
 ---
 
-### 🎯 Exercițiul 2: Implementați în Azure
+### 🎯 Exercise 2: Deploy to Azure
 
-**Scop:** Completați o implementare end-to-end
+**Goal:** Completează implementarea end-to-end
 
-**Pași:**
+**Steps:**
 ```bash
-# 1. Autentificare
+# 1. Autentifică-te
 az login && azd auth login
 
-# 2. Creează mediul
+# 2. Creează un mediu
 azd env new dev
 azd env set AZURE_LOCATION eastus
 
 # 3. Previzualizează modificările (RECOMANDAT)
 azd provision --preview
 
-# 4. Deplasează totul
+# 4. Publică totul
 azd up
 
 # 5. Verifică implementarea
 azd show    # Vizualizează URL-ul aplicației tale
 ```
 
-**Timp estimat:** 10-15 minute  
-**✅ Reușită:** URL-ul aplicației se deschide în browser
+**Expected Time:** 10-15 minutes  
+**✅ Success:** URL-ul aplicației se deschide în browser
 
 ---
 
-### 🎯 Exercițiul 3: Medii multiple
+### 🎯 Exercise 3: Multiple Environments
 
-**Scop:** Implementați în dev și staging
+**Goal:** Deploy în dev și staging
 
-**Pași:**
+**Steps:**
 ```bash
-# Deja există dev, creează staging
+# Avem deja dev, creează staging
 azd env new staging
 azd env set AZURE_LOCATION westus2
 azd up
@@ -458,113 +458,115 @@ azd env list
 azd env select dev
 ```
 
-**✅ Reușită:** Două grupuri de resurse separate în portalul Azure
+**✅ Success:** Două grupuri de resurse separate în Azure Portal
 
 ---
 
-### 🛡️ Resetare completă: `azd down --force --purge`
+### 🛡️ Clean Slate: `azd down --force --purge`
 
-Când trebuie să resetați complet:
+Când ai nevoie să resetezi complet:
 
 ```bash
 azd down --force --purge
 ```
 
-**Ce face:**
-- `--force`: Fără solicitări de confirmare
-- `--purge`: Șterge tot starea locală și resursele Azure
+**What it does:**
+- `--force`: No confirmation prompts
+- `--purge`: Deletes all local state and Azure resources
 
-**Folosiți când:**
-- Implementarea a eșuat pe parcurs
-- Schimbarea proiectelor
-- Aveți nevoie de un început curat
+**Use when:**
+- Deployment failed mid-way
+- Switching projects
+- Need fresh start
 
 ---
 
-## 🎪 Referință flux de lucru original
+## 🎪 Original Workflow Reference
 
-### Începerea unui proiect nou
+### Starting a New Project
 ```bash
-# Metoda 1: Folosește un șablon existent
+# Metoda 1: Utilizați șablonul existent
 azd init --template todo-nodejs-mongo
 
-# Metoda 2: Pornește de la zero
+# Metoda 2: Începeți de la zero
 azd init
 
-# Metoda 3: Folosește directorul curent
+# Metoda 3: Utilizați directorul curent
 azd init .
 ```
 
-### Ciclu de dezvoltare
+### Development Cycle
 ```bash
-# Configurați mediul de dezvoltare
+# Configurează mediul de dezvoltare
 azd auth login
 azd env new dev
 azd env select dev
 
-# Implementați totul
+# Implementează totul
 azd up
 
-# Faceți modificări și reimplementați
+# Fă modificări și reimplementează
 azd deploy
 
-# Curățați după ce ați terminat
-azd down --force --purge # Comanda din Azure Developer CLI este un **reset complet** pentru mediul dvs.—deosebit de utilă atunci când depanați implementări eșuate, curățați resurse orfane sau pregătiți o reimplementare de la zero.
+# Curăță când ai terminat
+azd down --force --purge # comanda din Azure Developer CLI este o **resetare completă** pentru mediul tău — deosebit de utilă când depanezi implementări eșuate, cureți resurse orfane sau pregătești o nouă implementare.
 ```
 
-## Înțelegerea `azd down --force --purge`
-Comanda `azd down --force --purge` este o metodă puternică pentru a elimina complet mediul azd și toate resursele asociate. Iată o defalcare a fiecărui flag:
+## Understanding `azd down --force --purge`
+Comanda `azd down --force --purge` este o metodă puternică de a demonta complet mediul tău azd și toate resursele asociate. Iată o defalcare a ceea ce face fiecare flag:
 ```
 --force
 ```
-- Sare peste solicitările de confirmare.
-- Util în automatizări sau scripturi unde nu este posibil input manual.
-- Asigură continuarea demolării fără întreruperi, chiar dacă CLI detectează inconsistențe.
+- Omite prompturile de confirmare.
+- Util pentru automatizare sau scripting unde inputul manual nu este fezabil.
+- Asigură că demontarea continuă fără întrerupere, chiar dacă CLI detectează inconsistențe.
 
 ```
 --purge
 ```
-Șterge **toate metadatele asociate**, inclusiv:
-Starea mediului  
-Folderul local `.azure`  
-Informații cache ale implementărilor  
-Împiedică azd să „-își amintească-” implementările anterioare, ceea ce poate cauza probleme ca grupuri de resurse nepotrivite sau referințe vechi în registru.
+Șterge **toată metadata asociată**, inclusiv:
+Starea mediului
+Folderul local `.azure`
+Informații de implementare în cache
+Previne ca azd să "țină minte" implementările anterioare, ceea ce poate cauza probleme precum grupuri de resurse nepotrivite sau referințe învechite la registre.
 
-### De ce să folosiți ambele?
-Când întâmpinați probleme cu `azd up` din cauza stării persistente sau a implementărilor parțiale, această combinație asigură un **start curat**.
 
-Este deosebit de utilă după ștergeri manuale de resurse în portalul Azure sau când schimbați șabloanele, mediile sau convențiile de denumire a grupurilor de resurse.
+### Why use both?
+Când ai întâmpinat probleme cu `azd up` din cauza stării persistente sau a implementărilor parțiale, acest combo asigură un **punct de pornire curat**.
 
-### Gestionarea mediilor multiple
+Este deosebit de util după ștergeri manuale de resurse în portalul Azure sau când schimbi șabloane, medii sau convenții de denumire pentru grupurile de resurse.
+
+
+### Managing Multiple Environments
 ```bash
-# Creează mediul de testare
+# Creați mediul de staging
 azd env new staging
 azd env select staging
 azd up
 
-# Revino la dev
+# Comutați înapoi la dev
 azd env select dev
 
-# Compară mediile
+# Comparați mediile
 azd env list
 ```
 
-## 🔐 Autentificare și credențiale
+## 🔐 Authentication and Credentials
 
-Înțelegerea autentificării este crucială pentru implementări reușite cu azd. Azure folosește metode multiple de autentificare, iar azd valorifică același lanț de credențiale folosit și de alte instrumente Azure.
+Înțelegerea autentificării este crucială pentru implementările reușite cu azd. Azure folosește mai multe metode de autentificare, iar azd valorifică același lanț de credențiale folosit de alte unelte Azure.
 
-### Autentificare Azure CLI (`az login`)
+### Azure CLI Authentication (`az login`)
 
-Înainte de a folosi azd, trebuie să vă autentificați în Azure. Metoda cea mai comună este folosirea Azure CLI:
+Înainte de a folosi azd, trebuie să te autentifici cu Azure. Cea mai comună metodă este folosirea Azure CLI:
 
 ```bash
-# Autentificare interactivă (deschide browser-ul)
+# Autentificare interactivă (deschide browserul)
 az login
 
 # Autentificare cu un tenant specific
 az login --tenant <tenant-id>
 
-# Autentificare cu principal de serviciu
+# Autentificare cu principalul de serviciu
 az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
 
 # Verifică starea curentă a autentificării
@@ -577,31 +579,31 @@ az account list --output table
 az account set --subscription <subscription-id>
 ```
 
-### Flux de autentificare
-1. **Login interactiv**: Deschide browserul implicit pentru autentificare
+### Authentication Flow
+1. **Interactive Login**: Deschide browserul tău implicit pentru autentificare
 2. **Device Code Flow**: Pentru medii fără acces la browser
-3. **Service Principal**: Pentru automatizare și scenarii CI/CD
-4. **Managed Identity**: Pentru aplicații găzduite Azure
+3. **Service Principal**: Pentru scenarii de automatizare și CI/CD
+4. **Managed Identity**: Pentru aplicații găzduite în Azure
 
-### Lanțul DefaultAzureCredential
+### DefaultAzureCredential Chain
 
-`DefaultAzureCredential` este un tip de credential care oferă o experiență simplificată de autentificare încercând automat mai multe surse de credențiale într-o ordine specifică:
+`DefaultAzureCredential` este un tip de credențial care oferă o experiență simplificată de autentificare prin încercarea automată a mai multor surse de credențiale într-o ordine specifică:
 
-#### Ordinea lanțului de credențiale
+#### Credential Chain Order
 ```mermaid
 graph TD
-    A[DefaultAzureCredential] --> B[Variabile de Mediu]
-    B --> C[Identitate Workload]
-    C --> D[Identitate Administrată]
+    A[Acreditare Azure implicită] --> B[Variabile de mediu]
+    B --> C[Identitate workload]
+    C --> D[Identitate gestionată]
     D --> E[Visual Studio]
     E --> F[Visual Studio Code]
     F --> G[Azure CLI]
     G --> H[Azure PowerShell]
-    H --> I[Navigare Interactivă]
+    H --> I[Browser interactiv]
 ```
-#### 1. Variabile de mediu
+#### 1. Environment Variables
 ```bash
-# Setează variabilele de mediu pentru principalul serviciu
+# Setați variabilele de mediu pentru principalul de serviciu
 export AZURE_CLIENT_ID="<app-id>"
 export AZURE_CLIENT_SECRET="<password>"
 export AZURE_TENANT_ID="<tenant-id>"
@@ -611,37 +613,37 @@ export AZURE_TENANT_ID="<tenant-id>"
 Folosit automat în:
 - Azure Kubernetes Service (AKS) cu Workload Identity
 - GitHub Actions cu federare OIDC
-- Alte scenarii federate de identitate
+- Alte scenarii de identitate federată
 
 #### 3. Managed Identity
-Pentru resurse Azure ca:
-- Mașini Virtuale
+Pentru resurse Azure precum:
+- Virtual Machines
 - App Service
 - Azure Functions
-- Instanțe de containere
+- Container Instances
 
 ```bash
-# Verifică dacă rulează pe o resursă Azure cu identitate administrată
+# Verifică dacă rulează pe o resursă Azure cu identitate gestionată
 az account show --query "user.type" --output tsv
-# Returnează: "servicePrincipal" dacă utilizează identitate administrată
+# Returnează: "servicePrincipal" dacă folosește identitate gestionată
 ```
 
-#### 4. Integrarea instrumentelor pentru dezvoltatori
-- **Visual Studio**: Folosește automat contul autentificat
+#### 4. Developer Tools Integration
+- **Visual Studio**: Folosește automat contul conectat
 - **VS Code**: Folosește credențialele extensiei Azure Account
-- **Azure CLI**: Folosește credențialele `az login` (cel mai comun pentru dezvoltare locală)
+- **Azure CLI**: Folosește credențialele `az login` (cel mai comun pentru dezvoltarea locală)
 
-### Configurarea autentificării AZD
+### AZD Authentication Setup
 
 ```bash
-# Metoda 1: Folosiți Azure CLI (Recomandat pentru dezvoltare)
+# Metoda 1: Utilizați Azure CLI (recomandat pentru dezvoltare)
 az login
 azd auth login  # Folosește acreditările Azure CLI existente
 
-# Metoda 2: Autentificare directă azd
-azd auth login --use-device-code  # Pentru medii fără interfață
+# Metoda 2: Autentificare directă cu azd
+azd auth login --use-device-code  # Pentru medii fără interfață grafică
 
-# Metoda 3: Verifică starea autentificării
+# Metoda 3: Verificați starea autentificării
 azd auth login --check-status
 
 # Metoda 4: Deconectare și reautentificare
@@ -649,22 +651,22 @@ azd auth logout
 azd auth login
 ```
 
-### Cele mai bune practici pentru autentificare
+### Authentication Best Practices
 
-#### Pentru dezvoltare locală
+#### For Local Development
 ```bash
 # 1. Autentificare cu Azure CLI
 az login
 
-# 2. Verifică abonamentul corect
+# 2. Verificați abonamentul corect
 az account show
 az account set --subscription "Your Subscription Name"
 
-# 3. Folosește azd cu acreditările existente
+# 3. Utilizați azd cu acreditările existente
 azd auth login
 ```
 
-#### Pentru pipeline-uri CI/CD
+#### For CI/CD Pipelines
 ```yaml
 # GitHub Actions example
 - name: Azure Login
@@ -680,15 +682,15 @@ azd auth login
     azd up --no-prompt
 ```
 
-#### Pentru medii de producție
-- Folosiți **Managed Identity** când rulați pe resurse Azure
-- Folosiți **Service Principal** pentru scenarii de automatizare
-- Evitați stocarea credențialelor în cod sau fișiere de configurare
-- Folosiți **Azure Key Vault** pentru configurații sensibile
+#### For Production Environments
+- Folosește **Managed Identity** când rulezi pe resurse Azure
+- Folosește **Service Principal** pentru scenarii de automatizare
+- Evită stocarea credențialelor în cod sau fișiere de configurare
+- Folosește **Azure Key Vault** pentru configurații sensibile
 
-### Probleme comune de autentificare și soluții
+### Common Authentication Issues and Solutions
 
-#### Problemă: "No subscription found"
+#### Issue: "No subscription found"
 ```bash
 # Soluție: Setează abonamentul implicit
 az account list --output table
@@ -696,59 +698,59 @@ az account set --subscription "<subscription-id>"
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 ```
 
-#### Problemă: "Insufficient permissions"
+#### Issue: "Insufficient permissions"
 ```bash
 # Soluție: Verificați și atribuiți rolurile necesare
 az role assignment list --assignee $(az account show --query user.name --output tsv)
 
 # Roluri comune necesare:
 # - Contributor (pentru gestionarea resurselor)
-# - Administrator Acces Utilizatori (pentru atribuirea rolurilor)
+# - User Access Administrator (pentru atribuirea rolurilor)
 ```
 
-#### Problemă: "Token expired"
+#### Issue: "Token expired"
 ```bash
-# Soluție: Re-autentificare
+# Soluție: Reautentificare
 az logout
 az login
 azd auth logout
 azd auth login
 ```
 
-### Autentificare în diferite scenarii
+### Authentication in Different Scenarios
 
-#### Dezvoltare locală
+#### Local Development
 ```bash
 # Cont de dezvoltare personală
 az login
 azd auth login
 ```
 
-#### Dezvoltare în echipă
+#### Team Development
 ```bash
-# Folosește un tenant specific pentru organizație
+# Folosiți un tenant specific pentru organizație
 az login --tenant contoso.onmicrosoft.com
 azd auth login
 ```
 
-#### Scenarii multi-tenant
+#### Multi-tenant Scenarios
 ```bash
 # Comută între chiriași
 az login --tenant tenant1.onmicrosoft.com
-# Deploy către chiriașul 1
+# Publică pentru chiriașul 1
 azd up
 
 az login --tenant tenant2.onmicrosoft.com  
-# Deploy către chiriașul 2
+# Publică pentru chiriașul 2
 azd up
 ```
 
-### Considerații de securitate
-1. **Stocarea acreditărilor**: Nu stocați niciodată acreditările în codul sursă  
-2. **Limitarea domeniului**: Folosiți principiul celui mai mic privilegiu pentru principalii de serviciu  
-3. **Rotirea tokenurilor**: Rotiți regulat secretele principalului de serviciu  
-4. **Urmărirea auditului**: Monitorizați activitățile de autentificare și implementare  
-5. **Securitatea rețelei**: Folosiți puncte finale private atunci când este posibil  
+### Security Considerations
+1. **Stocarea credențialelor**: Nu stoca niciodată credențialele în codul sursă
+2. **Limitarea accesului**: Folosește principiul privilegiului minim pentru service principals
+3. **Rotirea token-urilor**: Rotează regulat secretele service principal-urilor
+4. **Jurnal de audit**: Monitorizează activitățile de autentificare și de implementare
+5. **Securitate rețea**: Folosește endpoint-uri private când este posibil
 
 ### Depanarea autentificării
 
@@ -758,39 +760,39 @@ azd auth login --check-status
 az account show
 az account get-access-token
 
-# Comenzi de diagnostic comune
+# Comenzi comune de diagnosticare
 whoami                          # Contextul utilizatorului curent
-az ad signed-in-user show      # Detalii utilizator Azure AD
-az group list                  # Testare acces resurse
+az ad signed-in-user show      # Detalii despre utilizatorul Azure AD
+az group list                  # Testează accesul la resurse
 ```
-  
+
 ## Înțelegerea `azd down --force --purge`
 
-### Descoperire  
+### Descoperire
 ```bash
 azd template list              # Răsfoiește șabloane
 azd template show <template>   # Detalii șablon
 azd init --help               # Opțiuni de inițializare
 ```
-  
-### Managementul proiectului  
+
+### Gestionarea proiectului
 ```bash
 azd show                     # Prezentare generală a proiectului
-azd env show                 # Mediu actual
-azd config list             # Setări de configurare
+azd env list                # Mediile disponibile și cel selectat implicit
+azd config show            # Setări de configurare
 ```
-  
-### Monitorizare  
+
+### Monitorizare
 ```bash
-azd monitor                  # Deschide monitorizarea portalului Azure
+azd monitor                  # Deschide monitorizarea din portalul Azure
 azd monitor --logs           # Vizualizează jurnalele aplicației
-azd monitor --live           # Vizualizează metrici în timp real
+azd monitor --live           # Vizualizează metricile în timp real
 azd pipeline config          # Configurează CI/CD
 ```
-  
+
 ## Cele mai bune practici
 
-### 1. Folosiți nume semnificative  
+### 1. Folosește nume semnificative
 ```bash
 # Bun
 azd env new production-east
@@ -800,57 +802,57 @@ azd init --template web-app-secure
 azd env new env1
 azd init --template template1
 ```
-  
-### 2. Folosiți șabloane  
-- Începeți cu șabloane existente  
-- Personalizați după nevoile dvs.  
-- Creați șabloane reutilizabile pentru organizația dvs.  
 
-### 3. Izolarea mediului  
-- Folosiți medii separate pentru dev/staging/producție  
-- Nu implementați niciodată direct în producție de pe mașina locală  
-- Folosiți pipeline-uri CI/CD pentru implementările în producție  
+### 2. Folosește șabloane
+- Începe cu șabloane existente
+- Personalizează pentru nevoile tale
+- Creează șabloane reutilizabile pentru organizația ta
 
-### 4. Managementul configurației  
-- Folosiți variabile de mediu pentru date sensibile  
-- Păstrați configurația în controlul versiunilor  
-- Documentați setările specifice mediului  
+### 3. Izolarea mediilor
+- Folosește medii separate pentru dev/staging/prod
+- Nu implementa niciodată direct în producție de pe mașina locală
+- Folosește pipeline-uri CI/CD pentru implementările în producție
+
+### 4. Managementul configurației
+- Folosește variabile de mediu pentru date sensibile
+- Păstrează configurația în controlul versiunilor
+- Documentează setările specifice mediilor
 
 ## Progresul în învățare
 
-### Începători (Săptămânile 1-2)  
-1. Instalați azd și autentificați-vă  
-2. Implementați un șablon simplu  
-3. Înțelegeți structura proiectului  
-4. Învățați comenzile de bază (up, down, deploy)  
+### Începător (Săptămâna 1-2)
+1. Instalează azd și autentifică-te
+2. Implementează un șablon simplu
+3. Înțelege structura proiectului
+4. Învață comenzile de bază (up, down, deploy)
 
-### Intermediari (Săptămânile 3-4)  
-1. Personalizați șabloanele  
-2. Gestionați mai multe medii  
-3. Înțelegeți codul infrastructurii  
-4. Configurați pipeline-uri CI/CD  
+### Intermediar (Săptămâna 3-4)
+1. Personalizează șabloanele
+2. Gestionează medii multiple
+3. Înțelege codul infrastructurii
+4. Configurează pipeline-uri CI/CD
 
-### Avansați (Săptămâna 5+)  
-1. Creați șabloane personalizate  
-2. Modele avansate de infrastructură  
-3. Implementări multi-regiune  
-4. Configurații de nivel enterprise  
+### Avansat (Săptămâna 5+)
+1. Creează șabloane personalizate
+2. Modele avansate de infrastructură
+3. Implementări multi-regiune
+4. Configurații pentru nivel enterprise
 
 ## Pașii următori
 
-**📖 Continuați Învățarea Capitoului 1:**  
-- [Instalare și Configurare](installation.md) - Instalați și configurați azd  
-- [Primul Dvs. Proiect](first-project.md) - Tutorial practic complet  
-- [Ghidul de Configurare](configuration.md) - Opțiuni avansate de configurare  
+**📖 Continuă învățarea Capitolului 1:**
+- [Instalare și configurare](installation.md) - Instalează și configurează azd
+- [Primul tău proiect](first-project.md) - Finalizează tutorialul practic
+- [Ghid de configurare](configuration.md) - Opțiuni avansate de configurare
 
-**🎯 Pregătit pentru următorul capitol?**  
-- [Capitolul 2: Dezvoltare AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md) - Începeți să construiți aplicații AI  
+**🎯 Ești gata pentru capitolul următor?**
+- [Capitolul 2: Dezvoltare centrată pe AI](../chapter-02-ai-development/microsoft-foundry-integration.md) - Începe să construiești aplicații AI
 
 ## Resurse suplimentare
 
-- [Prezentarea CLI pentru Dezvoltatori Azure](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)  
-- [Galerie de Șabloane](https://azure.github.io/awesome-azd/)  
-- [Exemple Comunitare](https://github.com/Azure-Samples)  
+- [Prezentare generală Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
+- [Galeria de șabloane](https://azure.github.io/awesome-azd/)
+- [Exemple din comunitate](https://github.com/Azure-Samples)
 
 ---
 
@@ -858,62 +860,61 @@ azd init --template template1
 
 ### Întrebări generale
 
-**Î: Care e diferența între AZD și Azure CLI?**
+**Î: Care este diferența dintre AZD și Azure CLI?**
 
-R: Azure CLI (`az`) este pentru gestionarea resurselor individuale Azure. AZD (`azd`) este pentru gestionarea aplicațiilor întregi:  
+R: Azure CLI (`az`) este pentru gestionarea resurselor Azure individuale. AZD (`azd`) este pentru gestionarea aplicațiilor întregi:
 
 ```bash
-# Azure CLI - Management la nivel scăzut al resurselor
+# Azure CLI - gestionare la nivel scăzut a resurselor
 az webapp create --name myapp --resource-group rg
 az sql server create --name myserver --resource-group rg
-# ...multe alte comenzi necesare
+# ...sunt necesare multe alte comenzi
 
-# AZD - Management la nivel de aplicație
+# AZD - gestionare la nivel de aplicație
 azd up  # Desfășoară întreaga aplicație cu toate resursele
 ```
-  
-**Gândiți-vă așa:**  
-- `az` = Operarea pe cărămizi Lego individuale  
-- `azd` = Lucrul cu seturi complete Lego  
+
+**Gândește-te astfel:**
+- `az` = Operarea pe cărămizi Lego individuale
+- `azd` = Lucrul cu seturi complete de Lego
 
 ---
 
 **Î: Trebuie să știu Bicep sau Terraform pentru a folosi AZD?**
 
-R: Nu! Începeți cu șabloane:  
+R: Nu! Începe cu șabloane:
 ```bash
-# Folosiți un șablon existent - nu este necesară cunoașterea IaC
+# Utilizați șablonul existent - nu sunt necesare cunoștințe IaC
 azd init --template todo-nodejs-mongo
 azd up
 ```
-  
-Puteți învăța Bicep mai târziu pentru a personaliza infrastructura. Șabloanele oferă exemple funcționale din care să învățați.  
+
+Poți învăța Bicep mai târziu pentru a personaliza infrastructura. Șabloanele oferă exemple funcționale din care să înveți.
 
 ---
 
-**Î: Cât costă să rulez șabloanele AZD?**
+**Î: Cât costă rularea șabloanelor AZD?**
 
-R: Costurile variază în funcție de șablon. Majoritatea șabloanelor de dezvoltare costă 50-150 $/lună:  
+R: Costurile variază în funcție de șablon. Majoritatea șabloanelor de dezvoltare costă $50-150/lună:
 
 ```bash
-# Previzualizează costurile înainte de implementare
+# Previzualizați costurile înainte de implementare
 azd provision --preview
 
-# Curăță întotdeauna când nu este utilizat
+# Curățați întotdeauna când nu le folosiți
 azd down --force --purge  # Elimină toate resursele
 ```
-  
-**Sfat profesional:** Folosiți nivelurile gratuite când sunt disponibile:  
-- App Service: nivelul F1 (gratuit)  
-- Modelele Microsoft Foundry: Azure OpenAI 50.000 token-uri gratuite pe lună  
-- Cosmos DB: nivel gratuit 1000 RU/s  
+
+**Sfat profesionist:** Folosește nivelurile gratuite acolo unde sunt disponibile:
+- App Service: nivel F1 (gratuit)
+- Microsoft Foundry Models: Azure OpenAI 50,000 tokens/month free
+- Cosmos DB: 1000 RU/s nivel gratuit
 
 ---
 
 **Î: Pot folosi AZD cu resurse Azure existente?**
 
-R: Da, dar este mai ușor să începeți de la zero. AZD funcționează cel mai bine când gestionează ciclul complet de viață. Pentru resurse existente:  
-
+R: Da, dar e mai ușor să începi de la zero. AZD funcționează cel mai bine când gestionează întregul ciclu de viață. Pentru resurse existente:
 ```bash
 # Opțiunea 1: Importă resurse existente (avansat)
 azd init
@@ -923,35 +924,33 @@ azd init
 azd init --template matching-your-stack
 azd up  # Creează un mediu nou
 ```
-  
+
 ---
 
-**Î: Cum împart proiectul cu colegii?**
+**Î: Cum îmi partajez proiectul cu colegii?**
 
-R: Comitați proiectul AZD în Git (dar NU și folderul .azure):  
-
+R: Commită proiectul AZD în Git (dar NU folderul .azure):
 ```bash
 # Deja în .gitignore în mod implicit
 .azure/        # Conține secrete și date de mediu
 *.env          # Variabile de mediu
 
-# Membrii echipei apoi:
+# Membrii echipei atunci:
 git clone <your-repo>
 azd auth login
 azd env new <their-name>-dev
 azd up
 ```
-  
-Toată lumea primește infrastructura identică din aceleași șabloane.  
+
+Toată lumea primește aceeași infrastructură din aceleași șabloane.
 
 ---
 
 ### Întrebări de depanare
 
-**Î: „azd up” a eșuat pe jumătate. Ce fac?**
+**Î: „azd up” a eșuat la jumătate. Ce fac?**
 
-R: Verificați eroarea, remediați-o, apoi reîncercați:  
-
+R: Verifică eroarea, corecteaz-o, apoi încearcă din nou:
 ```bash
 # Vizualizați jurnalele detaliate
 azd show
@@ -962,45 +961,43 @@ azd show
 azd env set AZURE_LOCATION "westus2"  # Încercați o regiune diferită
 
 # 2. Dacă există un conflict de nume al resursei:
-azd down --force --purge  # Curățați totul
-azd up  # Reîncercați
+azd down --force --purge  # Porniți de la zero
+azd up  # Încercați din nou
 
 # 3. Dacă autentificarea a expirat:
 az login
 azd auth login
 azd up
 ```
-  
-**Cea mai comună problemă:** Subscripția Azure selectată greșit  
+
+**Cea mai frecventă problemă:** A fost selectat abonamentul Azure greșit
 ```bash
 az account list --output table
 az account set --subscription "<correct-subscription>"
 ```
-  
+
 ---
 
-**Î: Cum pot implementa doar schimbările de cod fără reprovisionare?**
+**Î: Cum pot implementa doar modificările de cod fără reprovisionare?**
 
-R: Folosiți `azd deploy` în loc de `azd up`:  
-
+R: Folosește `azd deploy` în loc de `azd up`:
 ```bash
-azd up          # Prima dată: provisioning + deploy (lent)
+azd up          # Prima dată: provisionare + implementare (lent)
 
 # Fă modificări în cod...
 
-azd deploy      # Data viitoare: doar deploy (rapid)
+azd deploy      # Următoarele ori: doar implementare (rapid)
 ```
-  
-Compararea vitezei:  
-- `azd up`: 10-15 minute (provisionare infrastructură)  
-- `azd deploy`: 2-5 minute (doar codul)  
+
+Comparație de viteză:
+- `azd up`: 10-15 minute (provisionează infrastructura)
+- `azd deploy`: 2-5 minute (doar codul)
 
 ---
 
 **Î: Pot personaliza șabloanele de infrastructură?**
 
-R: Da! Editați fișierele Bicep din `infra/`:  
-
+R: Da! Editează fișierele Bicep din `infra/`:
 ```bash
 # După azd init
 cd infra/
@@ -1012,44 +1009,42 @@ azd provision --preview
 # Aplică modificările
 azd provision
 ```
-  
-**Sfat:** Începeți cu puțin – modificați mai întâi SKU-urile:  
+
+**Sfat:** Începe cu pași mici - schimbă mai întâi SKU-urile:
 ```bicep
 // infra/main.bicep
 sku: {
   name: 'B1'  // Change to 'P1V2' for production
 }
 ```
-  
+
 ---
 
 **Î: Cum șterg tot ce a creat AZD?**
 
-R: O singură comandă elimină toate resursele:  
-
+R: O comandă elimină toate resursele:
 ```bash
 azd down --force --purge
 
-# Aceasta șterge:
+# Acest lucru șterge:
 # - Toate resursele Azure
-# - Grupul de resurse
+# - Grup de resurse
 # - Starea mediului local
-# - Datele cache ale implementării
+# - Date de implementare stocate în cache
 ```
-  
-**Rulați întotdeauna când:**  
-- Ați terminat testarea unui șablon  
-- Treci la un alt proiect  
-- Vrei să începi de la zero  
 
-**Economii de cost:** Ștergerea resurselor neutilizate elimină costurile  
+**Rulează întotdeauna această comandă când:**
+- Ai terminat testarea unui șablon
+- Treci la un alt proiect
+- Vrei să începi de la zero
+
+**Economii:** Ștergerea resurselor neutilizate = costuri $0
 
 ---
 
-**Î: Ce fac dacă am șters din greșeală resurse în Azure Portal?**
+**Î: Ce se întâmplă dacă am șters accidental resurse în Azure Portal?**
 
-R: Starea AZD se poate dezechilibra. Abordare cu reset complet:  
-
+R: Starea AZD se poate desincroniza. Abordare de curățare completă:
 ```bash
 # 1. Elimină starea locală
 azd down --force --purge
@@ -1057,18 +1052,17 @@ azd down --force --purge
 # 2. Începe de la zero
 azd up
 
-# Alternativă: Lasă AZD să detecteze și să repare
+# Alternativă: Lasă AZD să detecteze și să remedieze
 azd provision  # Va crea resursele lipsă
 ```
-  
+
 ---
 
 ### Întrebări avansate
 
-**Î: Pot folosi AZD în pipeline-urile CI/CD?**
+**Î: Pot folosi AZD în pipeline-uri CI/CD?**
 
-R: Da! Exemplu GitHub Actions:  
-
+R: Da! Exemplu GitHub Actions:
 ```yaml
 # .github/workflows/deploy.yml
 name: Deploy with AZD
@@ -1096,42 +1090,40 @@ jobs:
       - name: Deploy
         run: azd up --no-prompt
 ```
-  
+
 ---
 
 **Î: Cum gestionez secretele și datele sensibile?**
 
-R: AZD se integrează automat cu Azure Key Vault:  
-
+R: AZD se integrează automat cu Azure Key Vault:
 ```bash
 # Secretele sunt stocate în Key Vault, nu în cod
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
 
-# AZD face automat:
+# AZD în mod automat:
 # 1. Creează Key Vault
 # 2. Stochează secretul
-# 3. Acordă acces aplicației prin Identitate Gestionată
-# 4. Injecție la rulare
+# 3. Acordă aplicației acces prin identitate gestionată
+# 4. Injectează la rulare
 ```
-  
-**Nu comitați niciodată:**  
-- folderul `.azure/` (conține date de mediu)  
-- fișiere `.env` (secrete locale)  
-- string-uri de conexiune  
+
+**Nu comite niciodată:**
+- folderul `.azure/` (conține date despre mediu)
+- fișierele `.env` (secrete locale)
+- șirurile de conexiune
 
 ---
 
 **Î: Pot implementa în mai multe regiuni?**
 
-R: Da, creați câte un mediu pentru fiecare regiune:  
-
+R: Da, creează un mediu per regiune:
 ```bash
-# Mediu East US
+# Mediu în Estul SUA
 azd env new prod-eastus
 azd env set AZURE_LOCATION eastus
 azd up
 
-# Mediu West Europe
+# Mediu în Vestul Europei
 azd env new prod-westeurope
 azd env set AZURE_LOCATION westeurope
 azd up
@@ -1139,60 +1131,59 @@ azd up
 # Fiecare mediu este independent
 azd env list
 ```
-  
-Pentru aplicații multi-regiune adevărate, personalizați șabloanele Bicep pentru a implementa simultan în mai multe regiuni.  
+
+Pentru aplicații cu adevărat multi-regiune, personalizează șabloanele Bicep pentru a implementa simultan în mai multe regiuni.
 
 ---
 
-**Î: Unde pot primi ajutor dacă întâmpin probleme?**
+**Î: Unde pot obține ajutor dacă sunt blocat?**
 
-1. **Documentația AZD:** https://learn.microsoft.com/azure/developer/azure-developer-cli/  
-2. **Probleme GitHub:** https://github.com/Azure/azure-dev/issues  
-3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - canalul #azure-developer-cli  
-4. **Stack Overflow:** Tag-ul `azure-developer-cli`  
-5. **Acest curs:** [Ghid de depanare](../chapter-07-troubleshooting/common-issues.md)  
+1. **Documentația AZD:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
+2. **Probleme GitHub:** https://github.com/Azure/azure-dev/issues
+3. **Discord:** [Azure Discord](https://discord.gg/microsoft-azure) - canalul #azure-developer-cli
+4. **Stack Overflow:** Tag `azure-developer-cli`
+5. **Acest curs:** [Ghid de depanare](../chapter-07-troubleshooting/common-issues.md)
 
-**Sfat profesional:** Înainte să întrebați, rulați:  
+**Sfat util:** Înainte de a întreba, rulează:
 ```bash
-azd show       # Arată starea curentă
-azd version    # Arată versiunea ta
+azd show       # Afișează starea curentă
+azd version    # Afișează versiunea ta
 ```
-  
-Includeți aceste informații în întrebare pentru un ajutor mai rapid.  
+Include aceste informații în întrebarea ta pentru ajutor mai rapid.
 
 ---
 
 ## 🎓 Ce urmează?
 
-Acum înțelegeți elementele fundamentale AZD. Alegeți-vă calea:
+Acum înțelegi elementele fundamentale AZD. Alege-ți calea:
 
-### 🎯 Pentru începători:  
-1. **Următorul pas:** [Instalare și Configurare](installation.md) - Instalați AZD pe mașina dvs.  
-2. **Apoi:** [Primul dvs. proiect](first-project.md) - Implementați prima aplicație  
-3. **Exersați:** Completați toate cele 3 exerciții din această lecție  
+### 🎯 Pentru începători:
+1. **Următorul:** [Instalare și configurare](installation.md) - Instalează AZD pe mașina ta
+2. **Apoi:** [Primul tău proiect](first-project.md) - Implementează prima ta aplicație
+3. **Practică:** Finalizează toate cele 3 exerciții din această lecție
 
-### 🚀 Pentru dezvoltatori AI:  
-1. **Săriți la:** [Capitolul 2: Dezvoltare AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)  
-2. **Implementați:** Începeți cu `azd init --template get-started-with-ai-chat`  
-3. **Învățați:** Construiți în timp ce implementați  
+### 🚀 Pentru dezvoltatorii AI:
+1. **Sari la:** [Capitolul 2: Dezvoltare centrată pe AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+2. **Implementează:** Începe cu `azd init --template get-started-with-ai-chat`
+3. **Învață:** Construiește în timp ce implementezi
 
-### 🏗️ Pentru dezvoltatori experimentați:  
-1. **Revizuiți:** [Ghidul de configurație](configuration.md) - Setări avansate  
-2. **Explorați:** [Infrastructură ca Cod](../chapter-04-infrastructure/provisioning.md) - Detaliu Bicep  
-3. **Construiți:** Creați șabloane personalizate pentru stack-ul dvs.  
+### 🏗️ Pentru dezvoltatori experimentați:
+1. **Revizuiește:** [Ghid de configurare](configuration.md) - Setări avansate
+2. **Explorează:** [Infrastructură ca Cod](../chapter-04-infrastructure/provisioning.md) - aprofundare Bicep
+3. **Construiește:** Creează șabloane personalizate pentru stack-ul tău
 
 ---
 
-**Navigare capitole:**  
-- **📚 Acasă curs:** [AZD Pentru Începători](../../README.md)  
-- **📖 Capitolul curent:** Capitolul 1 - Fundamente & Start rapid  
-- **⬅️ Anterior:** [Prezentarea cursului](../../README.md#-chapter-1-foundation--quick-start)  
-- **➡️ Următor:** [Instalare și Configurare](installation.md)  
-- **🚀 Capitolul următor:** [Capitolul 2: Dezvoltare AI-First](../chapter-02-ai-development/microsoft-foundry-integration.md)
+**Navigare capitol:**
+- **📚 Pagina cursului**: [AZD pentru începători](../../README.md)
+- **📖 Capitolul curent**: Capitolul 1 - Fundamente & Start rapid  
+- **⬅️ Anterior**: [Prezentare curs](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Următorul**: [Instalare și configurare](installation.md)
+- **🚀 Capitolul următor**: [Capitolul 2: Dezvoltare centrată pe AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Declinare a responsabilității**:  
-Acest document a fost tradus utilizând serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un traducător uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite rezultate din utilizarea acestei traduceri.
+**Declinare de responsabilitate**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autorizată. Pentru informații critice, se recomandă o traducere profesională realizată de un traducător uman. Nu suntem răspunzători pentru eventualele neînțelegeri sau interpretări eronate rezultate din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,52 +1,52 @@
 # 5. Prilagodite predložak
 
-!!! tip "NA KRAJU OVOG MODULA BIT ĆETE U MOGUĆNOSTI"
+!!! tip "NA KRAJU OVOG MODULA MOĆI ĆETE"
 
-    - [ ] Istražene zadane sposobnosti AI agenta
-    - [ ] Dodan AI pretraživanje s vlastitim indeksom
-    - [ ] Aktivirani i analizirani Tracing metrički podaci
-    - [ ] Izvršen evaluacijski tijek rada
-    - [ ] Izvršen red-teaming skeniranje
-    - [ ] **Laboratorij 5: Izgrađen plan prilagodbe** 
+    - [ ] Istražiti zadane mogućnosti AI agenta
+    - [ ] Dodati AI pretraživanje s vlastitim indeksom
+    - [ ] Aktivirati i analizirati metrike praćenja
+    - [ ] Izvršiti evaluacijski radni tijek
+    - [ ] Izvesti skeniranje crvenog tima
+    - [ ] **Laboratorij 5: Izraditi plan prilagodbe** 
 
 ---
 
-## 5.1 Sposobnosti AI agenta
+## 5.1 Mogućnosti AI agenta
 
-!!! success "Ovo smo završili u Laboratoriju 01"
+!!! success "Ovo smo dovršili u Lab 01"
 
-- **Pretraživanje datoteka**: Ugrađeno OpenAI pretraživanje datoteka za dohvat znanja
+- **Pretraživanje datoteka**: Ugrađeno OpenAI pretraživanje datoteka za dohvaćanje znanja
 - **Citati**: Automatsko navođenje izvora u odgovorima
-- **Prilagodive upute**: Modificirajte ponašanje i osobnost agenta
+- **Prilagodljive upute**: Mijenjanje ponašanja i osobnosti agenta
 - **Integracija alata**: Proširivi sustav alata za prilagođene mogućnosti
 
 ---
 
 ## 5.2 Opcije dohvaćanja znanja
 
-!!! task "Za dovršetak trebamo napraviti promjene i ponovno implementirati"    
+!!! task "Za dovršetak moramo izvršiti promjene i ponovno implementirati"    
     
     ```bash title=""
-    # Postavi varijable okoline
+    # Postavljanje varijabli okoline
     azd env set USE_AZURE_AI_SEARCH_SERVICE true
     azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
-    # Učitaj podatke i kreiraj svoj indeks
+    # Učitavanje podataka i kreiranje mog indeksa
 
     ```
 
 ---
 
-**OpenAI pretraživanje datoteka (zadano):**
+**OpenAI Pretraživanje datoteka (zadano):**
 
-- Ugrađeno u Foundry Agente
+- Ugrađeno u Foundry agente
 - Automatska obrada i indeksiranje dokumenata
 - Nije potrebna dodatna konfiguracija
 
-**Azure AI pretraživanje (opcionalno):**
+**Azure AI Search (opcionalno):**
 
 - Hibridno semantičko i vektorsko pretraživanje
 - Upravljanje prilagođenim indeksima
@@ -57,7 +57,7 @@
 
 ## 5.3 [Praćenje i nadzor](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "Za dovršetak trebamo napraviti promjene i ponovno implementirati"    
+!!! task "Za dovršetak moramo izvršiti promjene i ponovno implementirati"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
@@ -68,14 +68,14 @@
 
 - Integracija OpenTelemetry
 - Praćenje zahtjeva/odgovora
-- Metrički podaci o izvedbi
+- Metrike performansi
 - Dostupno u Microsoft Foundry portalu
 
-**Zapisivanje:**
+**Dnevnički zapisi:**
 
-- Zapisi aplikacije u Container Apps
-- Strukturirano zapisivanje sa korelacijskim ID-ovima
-- Pregled zapisa u realnom vremenu i povijesno
+- Dnevnici aplikacije u Container Apps
+- Strukturirano zapisivanje s ID-evima korelacije
+- Pregled u stvarnom vremenu i povijesni uvidi
 
 ---
 
@@ -84,46 +84,48 @@
 **Lokalna evaluacija:**
 
 - Ugrađeni evaluatori za procjenu kvalitete
-- Prilagođeni evaluacijski skripti
-- Benchmarking izvedbe
+- Prilagođeni skripti za evaluaciju
+- Benchmarking performansi
 
 **Kontinuirani nadzor:**
 
-- Automatska evaluacija živih interakcija
-- Praćenje metrika kvalitete
-- Detekcija regresije u izvedbi
+- Automatska evaluacija interakcija u stvarnom vremenu
+- Praćenje metričkih kvaliteta
+- Otkrivanje regresije performansi
 
-**Integracija CI/CD:**
+**Integracija CI/CD-a:**
 
-- GitHub Actions tijek rada
+- Radni tok u GitHub Actions
 - Automatizirano testiranje i evaluacija
-- Statističko usporedno testiranje
+- Statističko uspoređivanje testova
 
 ---
 
-## 5.5 [AI Red Teaming Agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [Agent za crveni tim (Red Teaming)](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**AI Red Teaming:**
+**AI crveni tim:**
 
 - Automatizirano sigurnosno skeniranje
 - Procjena rizika za AI sustave
-- Sigurnosna evaluacija kroz više kategorija
+- Procjena sigurnosti u više kategorija
 
-**Autentikacija:**
+**Autentifikacija:**
 
-- Upravljani identitet za Azure servise
-- Opcionalna Azure App Service autentikacija
-- Basic auth rezervna opcija za razvoj
+- Managed Identity za Azure usluge
+- Opcionalna autentifikacija Azure App Servicea
+- Osnovno autentifikacijsko vraćanje za razvoj
 
-!!! quote "NA KRAJU OVOG LABORATORIJA TREBALI BISTE IMATI"
-    - [ ] Definirane zahtjeve vašeg scenarija
-    - [ ] Prilagođene env varijable (konfiguracija)
-    - [ ] Prilagođene upute za agenta (zadaci)
-    - [ ] Implementiran prilagođeni predložak (aplikacija)
-    - [ ] Dovršene aktivnosti nakon implementacije (ručno)
-    - [ ] Pokrenutu test evaluaciju
 
-Ovaj primjer demonstrira prilagodbu predloška za poslovni maloprodajni slučaj s dva specijalizirana agenta i višestrukim implementacijama modela.
+
+!!! quote "NA KRAJU OVOG LABOSA TREBALI BISTE IMATI"
+    - [ ] Definirane zahtjeve scenarija
+    - [ ] Prilagođene varijable okoline (konfiguracija)
+    - [ ] Prilagođene upute agenta (zadatak)
+    - [ ] Implementirani prilagođeni predložak (aplikacija)
+    - [ ] Dovršene radnje nakon implementacije (ručno)
+    - [ ] Pokrenutu evaluaciju testa
+
+Ovaj primjer pokazuje prilagodbu predloška za slučaj upotrebe maloprodaje s dva specijalizirana agenta i više implementacija modela.
 
 ---
 
@@ -131,24 +133,24 @@ Ovaj primjer demonstrira prilagodbu predloška za poslovni maloprodajni slučaj 
 
 ### 5.6.1. Zahtjevi scenarija
 
-#### **Implementacije agenata:** 
+#### **Implementacije agenta:** 
 
-   - Shopper Agent: Pomaže kupcima pronaći i usporediti proizvode
-   - Loyalty Agent: Upravljanje nagradama i promocijama za kupce
+   - Agent za kupce: Pomaže kupcima u pronalaženju i usporedbi proizvoda
+   - Agent za lojalnost: Upravljanje nagradama i promocijama kupaca
 
 #### **Implementacije modela:**
 
    - `gpt-4.1`: Primarni model za chat
-   - `o3`: Model rezoniranja za složene upite
+   - `o3`: Model rezoniranja za složenije upite
    - `gpt-4.1-nano`: Lagan model za jednostavne interakcije
-   - `text-embedding-3-large`: Kvalitetne ugradnje za pretraživanje
+   - `text-embedding-3-large`: Kvalitetni embeddings za pretraživanje
 
 #### **Značajke:**
 
    - Omogućeno praćenje i nadzor
    - AI pretraživanje kataloga proizvoda
-   - Okvir za evaluaciju kvalitete
-   - Red teaming za sigurnosnu validaciju
+   - Okvir za evaluaciju za osiguranje kvalitete
+   - Crveni tim za provjeru sigurnosti
 
 ---
 
@@ -157,7 +159,7 @@ Ovaj primjer demonstrira prilagodbu predloška za poslovni maloprodajni slučaj 
 
 #### 5.6.2.1. Konfiguracija prije implementacije
 
-Napravite skriptu za postavljanje (`setup-retail.sh`)
+Izradite skriptu za podešavanje (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -165,7 +167,7 @@ Napravite skriptu za postavljanje (`setup-retail.sh`)
 # Postavi ime okruženja
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Konfiguriraj regiju (izaberi na temelju dostupnosti modela)
+# Konfiguriraj regiju (odaberi prema dostupnosti modela)
 azd env set AZURE_LOCATION "eastus2"
 
 # Omogući sve opcionalne usluge
@@ -173,18 +175,18 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Konfiguriraj primarni chat model (gpt-4.1 kao najbliži dostupni model gpt-4.1)
+# Konfiguriraj primarni chat model (gpt-4.1 kao najbliži dostupan model gpt-4.1)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Konfiguriraj model za ugradnju za poboljšanu pretragu
+# Konfiguriraj embedding model za poboljšano pretraživanje
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Postavi ime agenta (kreirat će prvog agenta)
+# Postavi ime agenta (stvorit će prvog agenta)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
 # Konfiguriraj indeks pretraživanja
@@ -196,9 +198,9 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2: Upute za agente
+#### 5.6.2.2: Upute agenta
 
-Napravite `custom-agents/shopper-agent-instructions.md`:
+Izradite `custom-agents/shopper-agent-instructions.md`:
 
 ```markdown
 # Shopper Agent Instructions
@@ -221,7 +223,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-Napravite `custom-agents/loyalty-agent-instructions.md`:
+Izradite `custom-agents/loyalty-agent-instructions.md`:
 
 ```markdown
 # Loyalty Agent Instructions
@@ -246,9 +248,9 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: Skripta za implementaciju
+#### 5.6.2.3: Skripta implementacije
 
-Napravite `deploy-retail.sh`:
+Izradite `deploy-retail.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -289,16 +291,16 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Postavi infrastrukturu i aplikaciju
+# Implementiraj infrastrukturu i aplikaciju
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Zabilježi izlaze postave
+# Snimi izlaze implementacije
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
 # Dohvati URL web aplikacije
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -321,7 +323,7 @@ echo "4. Test both agents with sample queries"
 
 #### 5.6.2.4: Konfiguracija nakon implementacije
 
-Napravite `configure-retail-agents.sh`:
+Izradite `configure-retail-agents.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -378,7 +380,7 @@ echo "
 
 ### 5.6.3: Testiranje i validacija
 
-Napravite `test-retail-deployment.sh`:
+Izradite `test-retail-deployment.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -390,7 +392,7 @@ echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
 # Testirajte dostupnost web aplikacije
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -403,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Pokrenite evaluaciju ako je konfigurirana
+# Pokrenite evaluaciju ako je konfigurirano
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -427,42 +429,42 @@ Next steps:
 
 ---
 
-### 5.6.4 Očekivani rezultati
+### 5.6.4 Očekivani ishodi
 
 Nakon praćenja ovog vodiča za implementaciju, imat ćete:
 
 1. **Implementiranu infrastrukturu:**
 
       - Microsoft Foundry projekt s implementacijama modela
-      - Container Apps za hosting web aplikacije
+      - Container Apps koji hostaju web aplikaciju
       - AI Search servis za katalog proizvoda
       - Application Insights za nadzor
 
 2. **Početnog agenta:**
 
-      - Shopper Agent konfiguriran s osnovnim uputama
+      - Agent za kupce konfiguriran s osnovnim uputama
       - Omogućena mogućnost pretraživanja datoteka
       - Konfigurirano praćenje i nadzor
 
 3. **Spremno za prilagodbu:**
 
-      - Okvir za dodavanje Loyalty Agenta
+      - Okvir za dodavanje agenta za lojalnost
       - Predlošci za prilagođene upute
       - Skripte za testiranje i validaciju
-      - Postavke nadzora i evaluacije
+      - Postavljanje nadzora i evaluacije
 
 4. **Spremnost za produkciju:**
 
-      - Sigurnosno skeniranje s red teamingom
-      - Praćenje izvedbe
+      - Sigurnosno skeniranje s crvenim timom
+      - Nadzor performansi
       - Okvir za evaluaciju kvalitete
       - Skalabilna arhitektura
 
-Ovaj primjer demonstrira kako se AZD predložak može proširiti i prilagoditi za specifične poslovne scenarije, uz održavanje najboljih praksi za sigurnost, nadzor i skalabilnost.
+Ovaj primjer pokazuje kako se AZD predložak može proširiti i prilagoditi za specifične enterprise scenarije uz održavanje najboljih praksi za sigurnost, nadzor i skalabilnost.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Odricanje od odgovornosti**:
-Ovaj dokument je preveden korištenjem AI prevoditeljske usluge [Co-op Translator](https://github.com/Azure/co-op-translator). Iako nastojimo biti točni, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na izvornom jeziku treba smatrati autoritativnim izvorom. Za važne informacije preporučuje se profesionalni ljudski prijevod. Ne snosimo odgovornost za bilo kakva nesporazumevanja ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
+Ovaj dokument preveden je pomoću AI usluge za prijevod [Co-op Translator](https://github.com/Azure/co-op-translator). Iako težimo točnosti, imajte na umu da automatski prijevodi mogu sadržavati pogreške ili netočnosti. Izvorni dokument na njegovom izvornom jeziku treba smatrati autoritativnim izvorom. Za kritične informacije preporučuje se profesionalni ljudski prijevod. Ne snosimo odgovornost za bilo kakva nesporazume ili pogrešna tumačenja koja proizlaze iz korištenja ovog prijevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

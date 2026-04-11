@@ -1,4 +1,4 @@
-# Kapitel 6: Planung und Validierung vor der Bereitstellung
+# Kapitel 6: Planung vor der Bereitstellung & Validierung
 
 **📚 Kurs**: [AZD für Einsteiger](../../README.md) | **⏱️ Dauer**: 1 Stunde | **⭐ Komplexität**: Mittel
 
@@ -6,38 +6,40 @@
 
 ## Überblick
 
-Dieses Kapitel behandelt wesentliche Planungs- und Validierungsschritte vor der Bereitstellung Ihrer Anwendung. Lernen Sie, kostspielige Fehler zu vermeiden durch richtige Kapazitätsplanung, SKU-Auswahl und Preflight-Prüfungen.
+Dieses Kapitel behandelt wesentliche Planungs- und Validierungsschritte vor der Bereitstellung Ihrer Anwendung. Lernen Sie, kostspielige Fehler durch richtige Kapazitätsplanung, SKU-Auswahl und Preflight-Checks zu vermeiden.
+
+> Validiert gegen `azd 1.23.12` im März 2026.
 
 ## Lernziele
 
 Nach Abschluss dieses Kapitels werden Sie:
-- Preflight-Prüfungen vor der Bereitstellung durchführen
-- Kapazität planen und Ressourcenanforderungen schätzen
+- Preflight-Checks vor der Bereitstellung ausführen
+- Kapazität planen und Ressourcenanforderungen abschätzen
 - Geeignete SKUs zur Kostenoptimierung auswählen
 - Application Insights für die Überwachung konfigurieren
 - Muster der Teamkoordination verstehen
 
 ---
 
-## 📚 Lessons
+## 📚 Lektionen
 
 | # | Lektion | Beschreibung | Zeit |
 |---|--------|-------------|------|
-| 1 | [Preflight-Prüfungen](preflight-checks.md) | Konfiguration vor der Bereitstellung validieren | 15 min |
-| 2 | [Kapazitätsplanung](capacity-planning.md) | Ressourcenanforderungen schätzen | 20 min |
-| 3 | [SKU-Auswahl](sku-selection.md) | Geeignete Preisklassen auswählen | 15 min |
+| 1 | [Preflight Checks](preflight-checks.md) | Konfiguration vor der Bereitstellung validieren | 15 min |
+| 2 | [Capacity Planning](capacity-planning.md) | Ressourcenanforderungen abschätzen | 20 min |
+| 3 | [SKU Selection](sku-selection.md) | Geeignete Preisklassen auswählen | 15 min |
 | 4 | [Application Insights](application-insights.md) | Überwachung konfigurieren | 20 min |
-| 5 | [Koordinationsmuster](coordination-patterns.md) | Workflows für Team-Bereitstellungen | 15 min |
+| 5 | [Coordination Patterns](coordination-patterns.md) | Team-Deploy-Workflows | 15 min |
 
 ---
 
 ## 🚀 Schnellstart
 
 ```bash
-# Abonnementquoten prüfen
+# Abonnementkontingente prüfen
 az vm list-usage --location eastus --output table
 
-# Bereitstellungsvorschau (keine Ressourcen werden erstellt)
+# Bereitstellung in Vorschau (keine Ressourcen erstellt)
 azd provision --preview
 
 # Bicep-Syntax validieren
@@ -53,24 +55,24 @@ azd env get-values
 
 ### Vor `azd provision`
 
-- [ ] Kontingent für die Region überprüft
+- [ ] Kontingent für Region überprüft
 - [ ] SKUs angemessen ausgewählt
-- [ ] Kostenschätzung geprüft
-- [ ] Namenskonvention einheitlich
+- [ ] Kostenabschätzung überprüft
+- [ ] Namenskonvention konsistent
 - [ ] Sicherheit/RBAC konfiguriert
 
 ### Vor `azd deploy`
 
 - [ ] Umgebungsvariablen gesetzt
-- [ ] Geheimnisse im Key Vault hinterlegt
+- [ ] Geheimnisse im Key Vault
 - [ ] Verbindungszeichenfolgen überprüft
-- [ ] Health-Checks konfiguriert
+- [ ] Health Checks konfiguriert
 
 ---
 
 ## 💰 Leitfaden zur SKU-Auswahl
 
-| Arbeitslast | Entwicklung | Produktiv |
+| Workload | Development | Production |
 |----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
@@ -83,20 +85,20 @@ azd env get-values
 
 | Richtung | Kapitel |
 |-----------|---------|
-| **Vorheriges** | [Kapitel 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Nächstes** | [Kapitel 7: Fehlerbehebung](../chapter-07-troubleshooting/README.md) |
+| **Vorherige** | [Kapitel 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
+| **Nächste** | [Kapitel 7: Fehlerbehebung](../chapter-07-troubleshooting/README.md) |
 
 ---
 
 ## 📖 Verwandte Ressourcen
 
-- [Konfigurationsanleitung](../chapter-03-configuration/configuration.md)
-- [Bereitstellungsleitfaden](../chapter-04-infrastructure/deployment-guide.md)
+- [Konfigurationshandbuch](../chapter-03-configuration/configuration.md)
+- [Bereitstellungsanleitung](../chapter-04-infrastructure/deployment-guide.md)
 - [Häufige Probleme](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Haftungsausschluss:
-Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ursprungssprache ist als maßgebliche Quelle zu betrachten. Bei kritischen Informationen empfehlen wir eine professionelle menschliche Übersetzung. Wir haften nicht für Missverständnisse oder Fehlinterpretationen, die aus der Nutzung dieser Übersetzung entstehen.
+**Haftungsausschluss**:
+Dieses Dokument wurde mit dem KI-Übersetzungsdienst [Co-op Translator](https://github.com/Azure/co-op-translator) übersetzt. Obwohl wir uns um Genauigkeit bemühen, beachten Sie bitte, dass automatisierte Übersetzungen Fehler oder Ungenauigkeiten enthalten können. Das Originaldokument in seiner Ausgangssprache ist als maßgebliche Quelle zu betrachten. Für kritische Informationen wird eine professionelle menschliche Übersetzung empfohlen. Wir übernehmen keine Haftung für Missverständnisse oder Fehlinterpretationen, die sich aus der Verwendung dieser Übersetzung ergeben.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

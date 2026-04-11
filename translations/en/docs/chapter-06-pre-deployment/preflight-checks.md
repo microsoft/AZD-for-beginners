@@ -33,14 +33,14 @@ Upon completion, you will be able to:
 
 ## Table of Contents
 
-- [Overview](../../../../docs/chapter-06-pre-deployment)
-- [Automated Pre-flight Script](../../../../docs/chapter-06-pre-deployment)
-- [Manual Validation Checklist](../../../../docs/chapter-06-pre-deployment)
-- [Environment Validation](../../../../docs/chapter-06-pre-deployment)
-- [Resource Validation](../../../../docs/chapter-06-pre-deployment)
-- [Security & Compliance Checks](../../../../docs/chapter-06-pre-deployment)
-- [Performance & Capacity Planning](../../../../docs/chapter-06-pre-deployment)
-- [Troubleshooting Common Issues](../../../../docs/chapter-06-pre-deployment)
+- [Overview](#overview)
+- [Automated Pre-flight Script](#automated-pre-flight-script)
+- [Manual Validation Checklist](#codeblock1)
+- [Environment Validation](#✅-backup-recovery)
+- [Resource Validation](#production-environment-validation)
+- [Security & Compliance Checks](#security--compliance-checks)
+- [Performance & Capacity Planning](#performance--capacity-planning)
+- [Troubleshooting Common Issues](#troubleshooting-common-issues)
 
 ---
 
@@ -70,7 +70,7 @@ Pre-flight checks are essential validations performed before deploying to ensure
 ### PowerShell Pre-flight Checker
 
 ```powershell
-#Shebang to run PowerShell
+#!/usr/bin/env pwsh
 <#
 .SYNOPSIS
     Comprehensive pre-flight checks for AZD deployments
@@ -384,7 +384,7 @@ function Test-TemplateValidation {
     # 🧪 NEW: Test infrastructure preview (safe dry-run)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -1342,6 +1342,6 @@ steps:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
+**Disclaimer**:
 This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

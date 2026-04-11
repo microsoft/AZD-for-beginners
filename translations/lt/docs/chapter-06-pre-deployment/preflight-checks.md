@@ -1,73 +1,73 @@
-# Priešdiegimo patikros AZD diegimams
+# Priešskrydžio patikrinimai AZD diegimams
 
-**Skyriaus naršymas:**
-- **📚 Kurso pradžia**: [AZD pradedantiesiems](../../README.md)
-- **📖 Esamas skyrius**: 6 skyrius - Prieš diegimą skirtas patikrinimas ir planavimas
+**Skyriaus navigacija:**
+- **📚 Kurso pradžia**: [AZD Pradedantiesiems](../../README.md)
+- **📖 Dabartinis skyrius**: 6 skyriaus - priešdiegiamos patikros ir planavimas
 - **⬅️ Ankstesnis**: [SKU pasirinkimas](sku-selection.md)
-- **➡️ Kitas skyrius**: [7 skyrius: Trikčių šalinimas](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 Susiję**: [4 skyrius: Diegimo vadovas](../chapter-04-infrastructure/deployment-guide.md)
+- **➡️ Kitas skyrius**: [7 skyrius: trikčių šalinimas](../chapter-07-troubleshooting/common-issues.md)
+- **🔧 Susiję**: [4 skyrius: diegimo vadovas](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Įvadas
 
-Šis išsamus vadovas pateikia priešdiegiamosios validacijos scenarijus ir procedūras, skirtas užtikrinti sėkmingus Azure Developer CLI diegimus prieš pradedant diegimą. Išmokite įdiegti automatizuotus patikrinimus autentifikacijai, išteklių prieinamumui, kvotoms, saugumo atitikčiai ir našumo reikalavimams, kad būtų išvengta diegimo klaidų ir padidintas diegimo sėkmės rodiklis.
+Šis išsamus vadovas pateikia priešdiegiamos patikros scenarijus ir procedūras, kad užtikrintų sėkmingus Azure Developer CLI diegimus prieš jiems pradedant. Išmokite įgyvendinti automatizuotus autentifikacijos, išteklių prieinamumo, limitų, saugumo atitikimo ir veikimo reikalavimų patikrinimus, kad išvengtumėte diegimo klaidų ir optimizuotumėte diegimo sėkmės rodiklius.
 
 ## Mokymosi tikslai
 
 Baigę šį vadovą jūs:
-- Įvaldysite automatizuotus priešdiegiamosios validacijos metodus ir scenarijus
-- Suprasite išsamias tikrinimo strategijas autentifikacijai, leidimams ir kvotoms
-- Įdiegsite išteklių prieinamumo ir talpos patikros procedūras
-- Konfigūruosite saugumo ir atitikties patikrinimus organizacijos politikoms
-- Sukursite kaštų įvertinimo ir biudžeto patvirtinimo darbo eigas
-- Sukursite pasirinktines priešdiegiamosios patikros automatizacijas CI/CD vamzdynams
+- Valdysite automatizuotas priešdiegiamos patikros technikas ir scenarijus
+- Suprasite išsamias autentifikacijos, leidimų ir limitų tikrinimo strategijas
+- Įgyvendinsite išteklių prieinamumo ir pajėgumų vertinimo procedūras
+- Konfigūruosite saugumo ir atitikimo patikrinimus organizaciniams reikalavimams
+- Sukursite kaštų įvertinimo ir biudžeto vertinimo darbo eigas
+- Kūrsite pritaikytą priešskrydžio patikrų automatizavimą CI/CD kanaluose
 
 ## Mokymosi rezultatai
 
-Įgiję įgūdžių, galėsite:
-- Kurti ir vykdyti išsamius priešdiegiamosios validacijos scenarijus
-- Kurti automatizuotas tikrinimo darbo eigas skirtingiems diegimo scenarijams
-- Įgyvendinti aplinkai specifines validacijos procedūras ir politikas
-- Konfigūruoti proaktyvų stebėjimą ir įspėjimus diegimo pasirengimui
-- Spręsti priešdiegiamosios problemas ir taikyti taisomąsias priemones
-- Integruoti priešdiegiamas patikras į DevOps vamzdynus ir automatizavimo darbo eigas
+Baigę mokymus galėsite:
+- Kurti ir vykdyti išsamius priešskrydžio validacijos scenarijus
+- Projektuoti automatizuotas tikrinimo darbo eigas skirtingoms diegimo situacijoms
+- Įgyvendinti aplinkai pritaikytas validacijos procedūras ir politiką
+- Konfigūruoti proaktyvų monitoringą ir įspėjimus diegimo pasirengimui
+- Trikčių šalinimą prieš diegimą ir atlikti korekcinius veiksmus
+- Integruoti priešskrydžio patikras į DevOps kanalus ir automatizavimo darbo eigas
 
 ## Turinys
 
-- [Apžvalga](../../../../docs/chapter-06-pre-deployment)
-- [Automatizuotas priešdiegiamosios patikros skriptas](../../../../docs/chapter-06-pre-deployment)
-- [Rankinio patikrinimo kontrolinis sąrašas](../../../../docs/chapter-06-pre-deployment)
-- [Aplinkos patikra](../../../../docs/chapter-06-pre-deployment)
-- [Išteklių patikra](../../../../docs/chapter-06-pre-deployment)
-- [Saugumo ir atitikties patikrinimai](../../../../docs/chapter-06-pre-deployment)
-- [Našumo ir talpos planavimas](../../../../docs/chapter-06-pre-deployment)
-- [Dažniausios problemos ir jų sprendimas](../../../../docs/chapter-06-pre-deployment)
+- [Apžvalga](#apžvalga)
+- [Automatizuotas priešskrydžio scenarijus](#automatizuotas-priešskrydžio-scenarijus)
+- [Rankinė validacijos kontrolinė lapas](#codeblock1)
+- [Aplinkos validacija](#✅-atsarginės-kopijos-ir-atkūrimas)
+- [Išteklių validacija](#gamybos-aplinkos-validacija)
+- [Saugumo ir atitikimo patikrinimai](#security--compliance-checks)
+- [Veikimo ir pajėgumų planavimas](#performance--capacity-planning)
+- [Dažniausiai pasitaikančių problemų trikčių šalinimas](#troubleshooting-common-issues)
 
 ---
 
 ## Apžvalga
 
-Priešdiegiamosios patikros yra būtini tikrinimai, atliekami prieš diegimą, siekiant užtikrinti:
+Priešskrydžio patikros yra būtinos validacijos, atliekamos prieš diegiant, siekiant užtikrinti:
 
-- **Išteklų prieinamumą** ir kvotas tiksliniuose regionuose
-- **Autentifikacija ir leidimai** yra tinkamai sukonfigūruoti
+- **Išteklių prieinamumą** ir limitus tikslo regionuose
+- **Autentifikaciją ir leidimus** tinkamai sukonfigūruotus
 - **Šablonų galiojimą** ir parametrų teisingumą
 - **Tinklo ryšį** ir priklausomybes
-- **Saugumo atitiktį** organizacijos politikoms
-- **Kaštų įvertinimą** pagal biudžeto ribas
+- **Saugumo atitikimą** organizacinių politikų reikalavimams
+- **Biudžeto ribose esančius kaštų įvertinimus**
 
-### Kada vykdyti priešdiegiamas patikras
+### Kada vykdyti priešskrydžio patikras
 
-- **Prieš pirmą diegimą** į naują aplinką
+- **Prieš pirmąjį diegimą** naujoje aplinkoje
 - **Po reikšmingų šablonų pakeitimų**
-- **Prieš diegimą į gamybą**
+- **Prieš gamybinius diegimus**
 - **Keičiant Azure regionus**
-- **Kaip CI/CD vamzdynų dalį**
+- **Kaip CI/CD kanalų dalį**
 
 ---
 
-## Automatizuotas priešdiegiamosios patikros skriptas
+## Automatizuotas priešskrydžio scenarijus
 
-### PowerShell priešdiegiamosios patikros tikrintuvas
+### PowerShell priešskrydžio tikrintuvas
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -100,7 +100,7 @@ param(
     [switch]$Detailed
 )
 
-# Spalvų kodavimas išvestyje
+# Išvesties spalvų kodavimas
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -177,7 +177,7 @@ function Test-Authentication {
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # Patikrinti prenumeratos prieigą
+        # Patvirtinti prenumeratos prieigą
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -210,14 +210,14 @@ function Test-Permissions {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # Išbandyti išteklių grupės kūrimą (jei nurodyta)
+        # Išbandyti resurso grupės kūrimą (jei nurodyta)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
                 Write-Status "Resource group access" "Success" "Resource group '$ResourceGroup' exists"
             }
             else {
-                # Patikrinti galimybę sukurti išteklių grupę
+                # Išbandyti gebėjimą sukurti resurso grupę
                 try {
                     az group create --name "preflight-test-rg" --location $Location --output none
                     az group delete --name "preflight-test-rg" --yes --output none
@@ -242,10 +242,10 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # Patikrinti skaičiavimo kvotas
+        # Patikrinti kompiuterių kvotas
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
-        # Patikrinti konkrečias kvotas
+        # Patikrinti specifines kvotas
         $coreQuota = $computeUsage | Where-Object { $_.name.value -eq "cores" }
         if ($coreQuota) {
             $usagePercent = [math]::Round(($coreQuota.currentValue / $coreQuota.limit) * 100, 2)
@@ -257,7 +257,7 @@ function Test-QuotasAndLimits {
             }
         }
         
-        # Patikrinti App Service ribas
+        # Patikrinti App Service apribojimus
         try {
             $appServiceUsage = az appservice list-locations --sku S1 --output json | ConvertFrom-Json
             if ($appServiceUsage | Where-Object { $_.name -eq $Location }) {
@@ -271,7 +271,7 @@ function Test-QuotasAndLimits {
             Write-Status "App Service quota check" "Warning" "Could not verify App Service limits"
         }
         
-        # Patikrinti saugojimo paskyros ribas
+        # Patikrinti saugyklos paskyros apribojimus
         $storageAccounts = az storage account list --output json | ConvertFrom-Json
         $accountCount = ($storageAccounts | Measure-Object).Count
         if ($accountCount -lt 200) {
@@ -285,7 +285,7 @@ function Test-QuotasAndLimits {
     }
     catch {
         Write-Status "Quota check failed" "Warning" $_.Exception.Message
-        return $true # Neužblokuojantis
+        return $true # Nepavojinga blokavimui
     }
 }
 
@@ -310,7 +310,7 @@ function Test-NetworkConnectivity {
         }
     }
     
-    # Išbandyti DNS rezoliuciją
+    # Išbandyti DNS sprendimą
     try {
         $dnsResult = Resolve-DnsName "management.azure.com" -ErrorAction Stop
         Write-Status "DNS resolution" "Success" "Resolved successfully"
@@ -326,16 +326,16 @@ function Test-NetworkConnectivity {
 function Test-TemplateValidation {
     Write-Host "`n${Blue}=== Template Validation ===${Reset}"
     
-    # Patikrinti ar azure.yaml egzistuoja
+    # Patikrinti, ar egzistuoja azure.yaml
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # Perskaityti azure.yaml
+        # Analizuoti azure.yaml
         try {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # Patikrinti paslaugas
+            # Patvirtinti paslaugas
             if ($azureYaml.services) {
                 $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
@@ -360,7 +360,7 @@ function Test-TemplateValidation {
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # Patikrinti main.bicep, jei jis egzistuoja
+            # Patvirtinti main.bicep, jei jis egzistuoja
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 NAUJA: Išbandyti infrastruktūros peržiūrą (saugus bandomasis vykdymas)
+    # 🧪 NAUJA: Išbandyti infrastruktūros peržiūrą (saugus sausas paleidimas)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -403,7 +403,7 @@ function Test-RegionalAvailability {
     Write-Host "`n${Blue}=== Regional Availability Check ===${Reset}"
     
     try {
-        # Patikrinti, ar pasirinktas regionas yra galiojantis
+        # Patikrinti, ar vieta yra galiojanti
         $locations = az account list-locations --output json | ConvertFrom-Json
         $validLocation = $locations | Where-Object { $_.name -eq $Location -or $_.displayName -eq $Location }
         
@@ -446,11 +446,11 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Pagrindinis išlaidų įvertinimas (tiksliems skaičiavimams reikėtų Azure Pricing API)
+    # Pagrindinė kainų sąmata (tiksliam įvertinimui reikėtų Azure kainodaros API)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
-    # Patikrinti, ar biudžetas egzistuoja
+    # Patikrinti, ar yra biudžetas
     try {
         $budgets = az consumption budget list --output json 2>$null | ConvertFrom-Json
         if ($budgets -and $budgets.Count -gt 0) {
@@ -488,7 +488,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # Patikrinti, ar HTTPS yra privalomas
+        # Patikrinti HTTPS taikymą
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -516,7 +516,7 @@ function Invoke-PreflightCheck {
     $allPassed = $true
     $results = @{}
     
-    # Paleisti visus patikrinimus
+    # Vykdyti visas patikras
     $results["Prerequisites"] = Test-Prerequisites
     $results["Authentication"] = Test-Authentication
     $results["Permissions"] = Test-Permissions
@@ -557,15 +557,15 @@ function Invoke-PreflightCheck {
     }
 }
 
-# Paleisti priešskrydžio patikrinimą
+# Vykdyti išankstinę patikrą
 Invoke-PreflightCheck
 ```
 
-### Bash priešdiegiamosios patikros tikrintuvas
+### Bash priešskrydžio tikrintuvas
 
 ```bash
 #!/bin/bash
-# Bash versija parengiamųjų patikrinimų Unix/Linux sistemoms
+# Bash versija prieš skrydžio patikrinimams Unix/Linux sistemose
 
 set -euo pipefail
 
@@ -574,7 +574,7 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # Be spalvų
+NC='\033[0m' # Be spalvos
 
 # Globalūs kintamieji
 ENVIRONMENT_NAME=""
@@ -683,7 +683,7 @@ check_template_validation() {
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # Patikrinti main.bicep, jei egzistuoja
+            # Patvirtinti main.bicep, jei egzistuoja
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +706,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # Patikrinti, ar vieta yra galiojanti
+    # Patikrinti, ar vieta galioja
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -714,7 +714,7 @@ check_regional_availability() {
         return 1
     fi
     
-    # Patikrinti paslaugos prieinamumą
+    # Patikrinti paslaugų prieinamumą
     local services=("Microsoft.Web" "Microsoft.Sql" "Microsoft.Storage" "Microsoft.KeyVault")
     
     for service in "${services[@]}"; do
@@ -729,7 +729,7 @@ check_regional_availability() {
 }
 
 main() {
-    # Analizuoti komandų eilutės argumentus
+    # Išanalizuoti komandų eilutės argumentus
     while [[ $# -gt 0 ]]; do
         case $1 in
             --environment-name)
@@ -755,7 +755,7 @@ main() {
         esac
     done
     
-    # Patikrinti reikiamus parametrus
+    # Patvirtinti privalomus parametrus
     if [[ -z "$ENVIRONMENT_NAME" || -z "$LOCATION" ]]; then
         echo "Usage: $0 --environment-name <name> --location <location> [--resource-group <rg>] [--detailed]"
         exit 1
@@ -768,7 +768,7 @@ main() {
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
     
-    # Vykdyti patikrinimus
+    # Vykdyti patikras
     local all_passed=true
     
     check_prerequisites || all_passed=false
@@ -790,100 +790,100 @@ main() {
     fi
 }
 
-# Paleisti pagrindinę funkciją
+# Vykdyti pagrindinę funkciją
 main "$@"
 ```
 
 ---
 
-## Rankinio patikrinimo kontrolinis sąrašas
+## Rankinė validacijos kontrolinė lapas
 
-### Prieš diegimą skirtas kontrolinis sąrašas
+### Priešdiegiama kontrolinė lapas
 
 Atspausdinkite šį kontrolinį sąrašą ir patikrinkite kiekvieną punktą prieš diegimą:
 
-#### ✅ Aplinkos nustatymas
-- [ ] AZD CLI įdiegtas ir atnaujintas iki naujausios versijos
-- [ ] Azure CLI įdiegtas ir autentifikuotas
-- [ ] Pasirinkta teisinga Azure prenumerata
-- [ ] Aplinkos pavadinimas yra unikalus ir atitinka pavadinimų konvencijas
-- [ ] Tikslinė išteklių grupė identifikuota arba gali būti sukurta
+#### ✅ Aplinkos paruošimas
+- [ ] Įdiegta ir atnaujinta AZD CLI į naujausią versiją
+- [ ] Įdiegta Azure CLI ir atlikta autentifikacija
+- [ ] Pasirinkta tinkama Azure prenumerata
+- [ ] Aplinkos pavadinimas yra unikalus ir atitinka vardinimo taisykles
+- [ ] Nustatytas arba gali būti sukurtas tikslinis išteklių grupės pavadinimas
 
 #### ✅ Autentifikacija ir leidimai
-- [ ] Sėkmingai autentifikuota su `azd auth login`
-- [ ] Vartotojui priskirtas Contributor vaidmuo tikslinei prenumeratai/išteklių grupei
-- [ ] Service principal sukonfigūruotas CI/CD (jei taikoma)
+- [ ] Sėkmingai autentifikuota naudojant `azd auth login`
+- [ ] Vartotojas turi „Contributor“ rolę tikslo prenumeratoje / išteklių grupėje
+- [ ] Konfigūruotas paslaugų principalas CI/CD (jei taikoma)
 - [ ] Nėra pasibaigusių sertifikatų ar kredencialų
 
 #### ✅ Šablonų validacija
 - [ ] `azure.yaml` egzistuoja ir yra galiojantis YAML
-- [ ] Visos azure.yaml faile apibrėžtos paslaugos turi atitinkamą šaltinio kodą
-- [ ] Bicep šablonai kataloge `infra/` yra pateikti
+- [ ] Visi azure.yaml apibrėžti servisai turi atitinkamus šaltinio kodus
+- [ ] `infra/` kataloge yra Bicep šablonai
 - [ ] `main.bicep` kompiliuojasi be klaidų (`az bicep build --file infra/main.bicep`)
 - [ ] 🧪 Infrastruktūros peržiūra vykdoma sėkmingai (`azd provision --preview`)
-- [ ] Visi privalomi parametrai turi numatytąsias reikšmes arba bus pateikti
-- [ ] Šablonuose nėra įkoduotų slaptų reikšmių
+- [ ] Visi privalomi parametrai turi numatytas reikšmes arba bus pateikti
+- [ ] Nėra šablonuose užkoduotų slaptų duomenų
 
 #### ✅ Išteklių planavimas
-- [ ] Pasirinktas ir patikrintas tikslinis Azure regionas
-- [ ] Reikalingos Azure paslaugos prieinamos tiksliniame regione
-- [ ] Planuojamiems ištekliams yra pakankamos kvotos
+- [ ] Pasirinktas ir patvirtintas tikslinis Azure regionas
+- [ ] Regionas palaiko reikalingas Azure paslaugas
+- [ ] Pakankamai limitų suplanuotiems ištekliams
 - [ ] Patikrinti išteklių pavadinimų konfliktai
 - [ ] Suprastos priklausomybės tarp išteklių
 
 #### ✅ Tinklas ir saugumas
-- [ ] Patvirtintas tinklo ryšys su Azure galiniais taškais
-- [ ] Ugniasienės/proxy nustatymai sukonfigūruoti, jei reikia
-- [ ] Key Vault sukonfigūruotas slaptųjų duomenų valdymui
-- [ ] Kur įmanoma, naudojamos valdomos tapatybės
-- [ ] Žiniatinklio programoms įjungtas HTTPS reikalavimas
+- [ ] Patikrintas ryšys su Azure galiniais taškais
+- [ ] Konfigūruoti ugniasienės / proxy nustatymai, jei reikia
+- [ ] Key Vault naudojamas slaptų duomenų valdymui
+- [ ] Naudojamos valdomos tapatybės, kur įmanoma
+- [ ] Įjungtas HTTPS reikalavimas tinklalapėms
 
-#### ✅ Išlaidų valdymas
-- [ ] Kaštų įvertinimai apskaičiuoti naudojant Azure Pricing Calculator
-- [ ] Biudžeto įspėjimai sukonfigūruoti, jei reikia
-- [ ] Tinkami SKU pasirinkti aplinkos tipui
-- [ ] Apsvarstyta rezervuota talpa produkcinėms apkrovoms
+#### ✅ Kaštų valdymas
+- [ ] Kaštų įvertinimai atlikti naudojant Azure kainų skaičiuoklę
+- [ ] Suplanuoti biudžeto įspėjimai, jei reikalinga
+- [ ] Pasirinkti tinkami SKU aplinkos tipui
+- [ ] Apsvarstytas rezervuotas pajėgumas gamybiniams darbo krūviams
 
-#### ✅ Stebėjimas ir observabilumas
-- [ ] Application Insights sukonfigūruotas šablonuose
-- [ ] Log Analytics darbo sritis suplanuota
-- [ ] Apibrėžtos įspėjimo taisyklės kritiniams metrikams
-- [ ] Programėlėse įdiegti sveikatos patikros galiniai taškai
+#### ✅ Monitoringo ir stebėjimo valdymas
+- [ ] Programos Insights konfigūruotas šablonuose
+- [ ] Suplanuota Log Analytics darbo erdvė
+- [ ] Apibrėžtos įspėjimų taisyklės kritiniams metrikoms
+- [ ] Įgyvendinti sveikatos tikrinimo galiniai taškai programose
 
 #### ✅ Atsarginės kopijos ir atkūrimas
 - [ ] Apibrėžta atsarginių kopijų strategija duomenų ištekliams
-- [ ] Užfiksuoti atkūrimo laiko tikslai (RTO)
-- [ ] Užfiksuoti atkūrimo taško tikslai (RPO)
-- [ ] Parengtas katastrofų atkūrimo planas produkcijai
+- [ ] Dokumentuoti atkūrimo laiko tikslai (RTO)
+- [ ] Dokumentuoti atkūrimo taško tikslai (RPO)
+- [ ] Veikiantis nelaimių atkūrimo planas gamyboje
 
 ---
 
-## Aplinkos patikra
+## Aplinkos validacija
 
-### Vystymo aplinkos patikra
+### Kūrimo aplinkos validacija
 
 ```bash
 #!/bin/bash
-# Kūrimo aplinkos specifinės patikros
+# Tikrinimai, būdingi kūrimo aplinkai
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # Patikrinti, ar konfigūracijos palankios kūrimui
+    # Patikrinkite, ar konfigūracijos yra draugiškos kūrimui
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # Patikrinti automatinio išjungimo konfigūracijas
+    # Patikrinkite automatinio išjungimo konfigūracijas
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # Patikrinti kūrimo aplinkos duomenų bazės konfigūracijas
+    # Patvirtinkite kūrimo duomenų bazės konfigūracijas
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -892,7 +892,7 @@ validate_dev_environment() {
 }
 ```
 
-### Produkcinės aplinkos patikra
+### Gamybos aplinkos validacija
 
 ```bash
 #!/bin/bash
@@ -915,7 +915,7 @@ validate_prod_environment() {
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # Patikrinti stebėjimo sąranką
+    # Patvirtinti stebėjimo sistemą
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
@@ -933,9 +933,9 @@ validate_prod_environment() {
 
 ---
 
-## Išteklių patikra
+## Išteklių validacija
 
-### Kvotų patikros skriptas
+### Limitų validacijos scenarijus
 
 ```python
 #!/usr/bin/env python3
@@ -990,7 +990,7 @@ def check_storage_limits(location: str) -> bool:
     """Check storage account limits"""
     print(f"\n=== Storage Limits Check ({location}) ===")
     
-    # Gauti saugojimo paskyras prenumeratoje
+    # Gauti saugyklos paskyras prenumeratoje
     accounts = run_command(['az', 'storage', 'account', 'list'])
     
     if accounts is None:
@@ -998,7 +998,7 @@ def check_storage_limits(location: str) -> bool:
         return False
     
     account_count = len(accounts)
-    max_accounts = 250  # Numatytasis Azure limitas
+    max_accounts = 250  # Numatytoji Azure riba
     
     usage_percent = (account_count / max_accounts) * 100
     status = "✅" if usage_percent < 80 else "⚠️" if usage_percent < 95 else "❌"
@@ -1017,7 +1017,7 @@ def check_network_limits(location: str) -> bool:
         vnet_count = len(vnets)
         print(f"✅ Virtual Networks: {vnet_count}/1000")
     
-    # Patikrinti viešuosius IP adresus
+    # Patikrinti viešus IP adresus
     public_ips = run_command(['az', 'network', 'public-ip', 'list'])
     if public_ips is not None:
         ip_count = len(public_ips)
@@ -1058,20 +1058,20 @@ if __name__ == "__main__":
 
 ---
 
-## Saugumo ir atitikties patikrinimai
+## Saugumo ir atitikimo patikrinimai
 
-### Saugumo patikros skriptas
+### Saugumo validacijos scenarijus
 
 ```bash
 #!/bin/bash
-# Saugumo ir atitikties patikrinimas AZD diegimams
+# AZD diegimų saugumo ir atitikties patikra
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
     
     local issues_found=0
     
-    # Patikrinti Key Vault naudojimą
+    # Patikrinti, ar naudojama Key Vault
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1079,7 +1079,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Patikrinti valdomos tapatybės naudojimą
+    # Patikrinti, ar naudojama valdoma tapatybė
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1087,7 +1087,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Patikrinti HTTPS taikymą
+    # Patikrinti, ar taikomas HTTPS reikalavimas
     if grep -r "httpsOnly.*true\|requireHttps.*true" infra/ >/dev/null 2>&1; then
         echo "✅ HTTPS enforcement detected"
     else
@@ -1103,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Patikrinti viešo prieigos apribojimus
+    # Patikrinti viešojo prieigos apribojimus
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1131,14 +1131,14 @@ check_compliance_requirements() {
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # Patikrinti audito žurnavimą
+    # Patikrinti auditavimo žurnalus
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
         echo "⚠️  Audit logging not found - consider enabling for compliance"
     fi
     
-    # Patikrinti atsarginių kopijų ir saugojimo politikas
+    # Patikrinti atsarginių kopijų ir saugojimo politiką
     if grep -r "backup.*Policy\|retentionPolicy\|retention.*Days" infra/ >/dev/null 2>&1; then
         echo "✅ Backup and retention policies detected"
     else
@@ -1290,58 +1290,58 @@ steps:
 
 ---
 
-## Geriausios praktikos santrauka
+## Geriausių praktikų santrauka
 
-### ✅ Geriausios priešdiegiamosios patikros praktikos
+### ✅ Priešskrydžio patikrų geriausios praktikos
 
-1. **Automatizuokite, kur įmanoma**
-   - Integruokite patikras į CI/CD vamzdynus
-   - Naudokite scenarijus kartotinams tikrinimams
-   - Išsaugokite rezultatus audito įrašams
+1. **Automatizuokite kuo galima daugiau**
+   - Integruokite patikras į CI/CD kanalus
+   - Naudokite scenarijus pasikartojančioms validacijoms
+   - Saugykite rezultatus audito tikslais
 
 2. **Aplinkai pritaikyta validacija**
-   - Skirtingi tikrinimai vystymo/testavimo/produkcijos aplinkoms
-   - Tinkami saugumo reikalavimai kiekvienai aplinkai
-   - Išlaidų optimizavimas neprodukcinėms aplinkoms
+   - Skirtingos patikros kūrimo / testavimo / gamybos aplinkoms
+   - Atitinkami saugumo reikalavimai kiekvienai aplinkai
+   - Kaštų optimizavimas ne gamybos aplinkoms
 
-3. **Išsami aprėptis**
+3. **Išsamus aprėptis**
    - Autentifikacija ir leidimai
-   - Išteklių kvotos ir prieinamumas
+   - Išteklių limitai ir prieinamumas
    - Šablonų validacija ir sintaksė
-   - Saugumo ir atitikties reikalavimai
+   - Saugumo ir atitikimo reikalavimai
 
-4. **Aiškus ataskaitų teikimas**
-   - Būsenos indikatoriai su spalvų kodavimu
-   - Išsamios klaidų žinutės su pataisymo veiksmais
-   - Santraukos ataskaitos greitam įvertinimui
+4. **Aiškus ataskaitų pateikimas**
+   - Spalvomis žymimi statusai
+   - Išsamios klaidų žinutės su sprendimo žingsniais
+   - Santraukos ataskaitos greitam vertinimui
 
-5. **Greitai nutraukti procesą (Fail Fast)**
-   - Nutraukti diegimą, jei kritiniai tikrinimai nepavyksta
-   - Pateikti aiškias instrukcijas sprendimui
-   - Palengvinti patikrinimų pakartotinį vykdymą
+5. **Greitas klaidų nustatymas**
+   - Nutraukti diegimą, jei kritinės patikros nepavyksta
+   - Pateikti aiškias rekomendacijas sprendimui
+   - Užtikrinti lengvą patikros pakartotinį paleidimą
 
-### Dažniausios priešdiegiamosios klaidos
+### Dažniausios priešskrydžio klaidos
 
-1. Praleisti patikrinimai dėl "greitų" diegimų
-2. Nepakankamas leidimų tikrinimas prieš diegimą
-3. Kvotų ribų ignoravimas iki diegimo klaidos
-4. Šablonų nepatikrinimas CI/CD grandinėse
-5. Trūkstama saugumo patikra produkcijos aplinkoms
-6. Neišsamus kaštų įvertinimas, sukeliantis biudžeto netikėtumus
-
----
-
-**Naudingas patarimas**: Vykdykite priešdiegiamas patikras kaip atskirą užduotį savo CI/CD vamzdynuose prieš faktinę diegimo užduotį. Tai leidžia anksti aptikti problemas ir suteikia greitesnį grįžtamąjį ryšį kūrėjams.
+1. **Praleidžiama validacija** dėl „greitų“ diegimų
+2. **Nepakankami leidimai** prieš diegimą
+3. **Limitų nepaisymas** iki kol nutinka diegimo klaidos
+4. **Šablonų nevalidavimas** CI/CD kanaluose
+5. **Saugumo patikros praleidimas** gamybos aplinkose
+6. **Netinkamas kaštų įvertinimas** sukeliantis biudžeto netikėtumus
 
 ---
 
-**Naršymas**
+**Profesionalus patarimas**: vykdykite priešskrydžio patikras kaip atskirą užduotį savo CI/CD kanale prieš pagrindinę diegimo užduotį. Tai leidžia ankstyviau aptikti problemas ir suteikia greitesnį grįžtamąjį ryšį kūrėjams.
+
+---
+
+**Navigacija**
 - **Ankstesnė pamoka**: [SKU pasirinkimas](sku-selection.md)
-- **Kita pamoka**: [Atmintinė](../../resources/cheat-sheet.md)
+- **Kita pamoka**: [Santrauka](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Atsakomybės apribojimas**:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo pradinėje kalboje turėtų būti laikomas autentišku šaltiniu. Dėl svarbios ar kritinės informacijos rekomenduojamas profesionalus žmogaus atliktas vertimas. Mes neatsakome už jokius nesusipratimus ar neteisingus aiškinimus, kilusius dėl šio vertimo naudojimo.
+**Atsakomybės apribojimas**:  
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors siekiame tikslumo, prašome atkreipti dėmesį, kad automatiniai vertimai gali turėti klaidų arba netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas autoritetingu šaltiniu. Kritinei informacijai rekomenduojama naudoti profesionalų žmogaus vertimą. Mes neatsakome už bet kokius nesusipratimus ar neteisingą interpretavimą, kilusius dėl šio vertimo naudojimo.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

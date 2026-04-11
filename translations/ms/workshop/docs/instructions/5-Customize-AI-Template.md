@@ -1,30 +1,30 @@
-# 5. Sesuaikan Templat
+# 5. Sesuaikan Template
 
-!!! tip "PADA AKHIR MODUL INI ANDA AKAN DAPAT"
+!!! tip "PADA AKHIR MODUL INI ANDA AKAN MAMPU"
 
-    - [ ] Meneroka Keupayaan Ejen AI lalai
+    - [ ] Meneroka Kebolehan Ejen AI lalai
     - [ ] Menambah Carian AI dengan indeks anda sendiri
     - [ ] Mengaktifkan dan menganalisis metrik Penjejakan
-    - [ ] Melaksanakan larian penilaian
-    - [ ] Melaksanakan pengimbasan red-teaming
-    - [ ] **Makmal 5: Membina Pelan Penyesuaian**
+    - [ ] Melaksanakan menjalankan penilaian
+    - [ ] Melaksanakan imbasan red-teaming
+    - [ ] **Makmal 5: Membina Pelan Penyesuaian** 
 
 ---
 
-## 5.1 Keupayaan Ejen AI
+## 5.1 Kebolehan Ejen AI
 
-!!! success "Kami telah menyelesaikan ini dalam Makmal 01"
+!!! success "Kami telah menyelesaikannya dalam Makmal 01"
 
 - **Carian Fail**: Carian fail terbina dalam OpenAI untuk pengambilan pengetahuan
-- **Sitat**: Perpautan sumber automatik dalam respons
-- **Arahan Boleh Disesuaikan**: Mengubah perilaku dan personaliti ejen
-- **Integrasi Alat**: Sistem alat boleh kembangkan untuk keupayaan tersuai
+- **Sitrasi**: Penyerahan sumber secara automatik dalam jawapan
+- **Arahan Boleh Disesuaikan**: Mengubah suai tingkah laku dan personaliti ejen
+- **Integrasi Alat**: Sistem alat yang boleh dikembangkan untuk kebolehan khusus
 
 ---
 
 ## 5.2 Pilihan Pengambilan Pengetahuan
 
-!!! task "Untuk melengkapkan ini kita perlu membuat perubahan dan melaksanakan semula"    
+!!! task "Untuk melengkapkan ini, kita perlu membuat perubahan dan menyebarkan semula"    
     
     ```bash title=""
     # Tetapkan pembolehubah persekitaran
@@ -43,21 +43,21 @@
 **Carian Fail OpenAI (Lalai):**
 
 - Terbina dalam Foundry Agents
-- Pemprosesan dokumen dan pengindeksan automatik
+- Pemprosesan dan pengindeksan dokumen automatik
 - Tiada konfigurasi tambahan diperlukan
 
 **Carian AI Azure (Pilihan):**
 
-- Carian sintaks hibrid dan vektor
-- Pengurusan indeks tersuai
-- Keupayaan carian lanjut
+- Carian semantik hibrid dan vektor
+- Pengurusan indeks khusus
+- Kebolehan carian lanjutan
 - Memerlukan `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
 ## 5.3 [Penjejakan & Pemantauan](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "Untuk melengkapkan ini kita perlu membuat perubahan dan melaksanakan semula"    
+!!! task "Untuk melengkapkan ini, kita perlu membuat perubahan dan menyebarkan semula"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
@@ -75,7 +75,7 @@
 
 - Log aplikasi dalam Container Apps
 - Logging berstruktur dengan ID korelasi
-- Melihat log masa nyata dan sejarah
+- Paparan log masa nyata dan sejarah
 
 ---
 
@@ -84,14 +84,14 @@
 **Penilaian Tempatan:**
 
 - Penilai terbina dalam untuk penilaian kualiti
-- Skrip penilaian tersuai
-- Penanda aras prestasi
+- Skrip penilaian khusus
+- Penandaarasan prestasi
 
 **Pemantauan Berterusan:**
 
-- Penilaian automatik interaksi semasa
+- Penilaian automatik interaksi langsung
 - Penjejakan metrik kualiti
-- Pengesanan regresi prestasi
+- Pengecaman regresi prestasi
 
 **Integrasi CI/CD:**
 
@@ -105,25 +105,25 @@
 
 **Red Teaming AI:**
 
-- Pengimbasan keselamatan automatik
+- Imbasan keselamatan automatik
 - Penilaian risiko untuk sistem AI
-- Penilaian keselamatan di pelbagai kategori
+- Penilaian keselamatan merentas pelbagai kategori
 
 **Pengesahan:**
 
 - Managed Identity untuk perkhidmatan Azure
-- Pengesahan Azure App Service pilihan
-- Kemasukan fallback pengesahan asas untuk pembangunan
+- Pilihan pengesahan Azure App Service
+- Kembali kepada basic auth untuk pembangunan
 
-!!! quote "PADA AKHIR MAKMAL INI ANDA SEPATUTNYA TELAH"
-    - [ ] Mendefinisikan keperluan senario anda
-    - [ ] Menyesuaikan pembolehubah persekitaran (konfig)
+!!! quote "PADA AKHIR MAKAMAL INI ANDA SEPATUTNYA MEMPUNYAI"
+    - [ ] Menetapkan keperluan senario anda
+    - [ ] Menyesuaikan pembolehubah persekitaran (konfigurasi)
     - [ ] Menyesuaikan arahan ejen (tugas)
-    - [ ] Melaksanakan templat yang disesuaikan (app)
-    - [ ] Menyelesaikan tugas pasca-pelaksanaan (manual)
+    - [ ] Menyebarkan template yang disesuaikan (aplikasi)
+    - [ ] Melengkapkan tugas selepas penyebaran (manual)
     - [ ] Menjalankan penilaian ujian
 
-Contoh ini menunjukkan penyesuaian templat untuk kes penggunaan runcit perusahaan dengan dua ejen khusus dan pelbagai pelaksanaan model.
+Contoh ini menunjukkan penyesuaian template untuk kes penggunaan runcit perusahaan dengan dua ejen khusus dan beberapa penyebaran model.
 
 ---
 
@@ -131,17 +131,17 @@ Contoh ini menunjukkan penyesuaian templat untuk kes penggunaan runcit perusahaa
 
 ### 5.6.1. Keperluan Senario
 
-#### **Pelaksanaan Ejen:** 
+#### **Penempatan Ejen:** 
 
    - Ejen Pembeli: Membantu pelanggan mencari dan membandingkan produk
    - Ejen Kesetiaan: Mengurus ganjaran dan promosi pelanggan
 
-#### **Pelaksanaan Model:**
+#### **Penempatan Model:**
 
    - `gpt-4.1`: Model sembang utama
    - `o3`: Model penaakulan untuk pertanyaan kompleks
    - `gpt-4.1-nano`: Model ringan untuk interaksi mudah
-   - `text-embedding-3-large`: Embeddings berkualiti tinggi untuk carian
+   - `text-embedding-3-large`: Embedding berkualiti tinggi untuk carian
 
 #### **Ciri-ciri:**
 
@@ -155,9 +155,9 @@ Contoh ini menunjukkan penyesuaian templat untuk kes penggunaan runcit perusahaa
 ### 5.6.2 Pelaksanaan Senario
 
 
-#### 5.6.2.1. Konfigurasi Pra-Pelaksanaan
+#### 5.6.2.1. Konfigurasi Pra-Penyebaran
 
-Buat skrip penyediaan (`setup-retail.sh`)
+Cipta skrip persediaan (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -165,7 +165,7 @@ Buat skrip penyediaan (`setup-retail.sh`)
 # Tetapkan nama persekitaran
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Konfigurasikan wilayah (pilih berdasarkan ketersediaan model)
+# Konfigurasikan rantau (pilih berdasarkan ketersediaan model)
 azd env set AZURE_LOCATION "eastus2"
 
 # Aktifkan semua perkhidmatan pilihan
@@ -179,12 +179,12 @@ azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Konfigurasikan model embedding untuk carian yang lebih baik
+# Konfigurasikan model embedding untuk carian yang dipertingkatkan
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Tetapkan nama ejen (akan mencipta ejen pertama)
+# Tetapkan nama agen (akan mencipta agen pertama)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
 # Konfigurasikan indeks carian
@@ -198,7 +198,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 #### 5.6.2.2: Arahan Ejen
 
-Buat `custom-agents/shopper-agent-instructions.md`:
+Cipta `custom-agents/shopper-agent-instructions.md`:
 
 ```markdown
 # Shopper Agent Instructions
@@ -221,7 +221,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-Buat `custom-agents/loyalty-agent-instructions.md`:
+Cipta `custom-agents/loyalty-agent-instructions.md`:
 
 ```markdown
 # Loyalty Agent Instructions
@@ -246,9 +246,9 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: Skrip Pelaksanaan
+#### 5.6.2.3: Skrip Penyebaran
 
-Buat `deploy-retail.sh`:
+Cipta `deploy-retail.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -289,16 +289,16 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Laksanakan infrastruktur dan aplikasi
+# Lancarkan infrastruktur dan aplikasi
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Tangkap output pelaksanaan
+# Tangkap output penyebaran
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
 # Dapatkan URL aplikasi web
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -319,16 +319,16 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Konfigurasi Pasca-Pelaksanaan
+#### 5.6.2.4: Konfigurasi Pasca-Penyebaran
 
-Buat `configure-retail-agents.sh`:
+Cipta `configure-retail-agents.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🔧 Configuring retail agents..."
 
-# Dapatkan maklumat pengedaran
+# Dapatkan maklumat penyebaran
 PROJECT_ENDPOINT=$(azd env get-values | grep AZURE_EXISTING_AIPROJECT_ENDPOINT | cut -d'=' -f2 | tr -d '"')
 AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | tr -d '"')
 
@@ -378,19 +378,19 @@ echo "
 
 ### 5.6.3: Ujian dan Pengesahan
 
-Buat `test-retail-deployment.sh`:
+Cipta `test-retail-deployment.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🧪 Testing retail deployment..."
 
-# Sahkan pembolehubah persekitaran telah ditetapkan
+# Sahkan pembolehubah persekitaran ditetapkan
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
 # Uji ketersediaan aplikasi web
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -427,42 +427,42 @@ Next steps:
 
 ---
 
-### 5.6.4 Hasil Dijangka
+### 5.6.4 Hasil Dijangkakan
 
 Selepas mengikuti panduan pelaksanaan ini, anda akan mempunyai:
 
-1. **Infrastruktur Dilaksanakan:**
+1. **Infrastruktur Disebarkan:**
 
-      - Projek Microsoft Foundry dengan pelaksanaan model
-      - Container Apps yang menghoskan aplikasi web
+      - Projek Microsoft Foundry dengan penempatan model
+      - Container Apps yang menjadi hos aplikasi web
       - Perkhidmatan Carian AI untuk katalog produk
       - Application Insights untuk pemantauan
 
-2. **Ejen Permulaan:**
+2. **Ejen Awal:**
 
-      - Ejen Pembeli dikonfigurasikan dengan arahan asas
-      - Keupayaan carian fail diaktifkan
-      - Penjejakan dan pemantauan dikonfigurasikan
+      - Ejen Pembeli dikonfigurasi dengan arahan asas
+      - Kebolehan carian fail diaktifkan
+      - Penjejakan dan pemantauan dikonfigurasi
 
-3. **Sedia Untuk Penyesuaian:**
+3. **Bersedia Untuk Penyesuaian:**
 
       - Rangka kerja untuk menambah Ejen Kesetiaan
-      - Templat arahan tersuai
+      - Template arahan tersuai
       - Skrip ujian dan pengesahan
-      - Setup pemantauan dan penilaian
+      - Persediaan pemantauan dan penilaian
 
-4. **Kesediaan Pengeluaran:**
+4. **Kesiapsiagaan Pengeluaran:**
 
-      - Pengimbasan keselamatan dengan red teaming
+      - Imbasan keselamatan dengan red teaming
       - Pemantauan prestasi
       - Rangka kerja penilaian kualiti
-      - Seni bina boleh diskalakan
+      - Seni bina boleh skala
 
-Contoh ini menunjukkan bagaimana templat AZD boleh dilanjutkan dan disesuaikan untuk senario perusahaan tertentu sambil mengekalkan amalan terbaik untuk keselamatan, pemantauan, dan kebolehpindahan.
+Contoh ini menunjukkan bagaimana templat AZD boleh diperluas dan disesuaikan untuk senario perusahaan tertentu sambil mengekalkan amalan terbaik untuk keselamatan, pemantauan, dan skala.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:  
-Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila ambil perhatian bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya harus dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan manusia profesional adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan perkhidmatan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Walaupun kami berusaha untuk ketepatan, sila maklum bahawa terjemahan automatik mungkin mengandungi kesilapan atau ketidaktepatan. Dokumen asal dalam bahasa asalnya hendaklah dianggap sebagai sumber yang sahih. Untuk maklumat penting, terjemahan profesional oleh manusia adalah disyorkan. Kami tidak bertanggungjawab atas sebarang salah faham atau salah tafsir yang timbul daripada penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

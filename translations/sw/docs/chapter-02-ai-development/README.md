@@ -1,20 +1,22 @@
-# Sura 2: Uundaji wa Kwanza wa AI
+# Sura 2: Maendeleo ya Kwanza ya AI
 
-**📚 Kozi**: [AZD For Beginners](../../README.md) | **⏱️ Muda**: 1-2 masaa | **⭐ Ugumu**: Wastani
+**📚 Kozi**: [AZD For Beginners](../../README.md) | **⏱️ Muda**: 1-2 saa | **⭐ Ugumu**: Wastani
 
 ---
 
 ## Muhtasari
 
-Sura hii inazingatia kusambaza programu zenye nguvu za AI kwa kutumia Azure Developer CLI na huduma za Microsoft Foundry. Kutoka kwa programu rahisi za chat za AI hadi maajenti wenye akili walioboresha kwa zana.
+Sura hii inalenga katika kuweka mienendo ya programu zinazoendeshwa na AI kwa kutumia Azure Developer CLI na huduma za Microsoft Foundry. Kuanzia programu rahisi za mazungumzo za AI hadi maajenti wenye akili yenye zana.
+
+> **Kumbusho la uthibitisho (2026-03-25):** Mtiririko wa amri na mwongozo wa ugani katika sura hii ulipitiwa dhidi ya `azd` `1.23.12` na toleo la awali la ugani wa wakala wa AI `azure.ai.agents` `0.1.18-preview`. Ikiwa uko kwenye toleo la zamani la AZD, sasisha kwanza kisha endelea na mazoezi.
 
 ## Malengo ya Kujifunza
 
-Kwa kumaliza sura hii, utakuwa umeweza:
-- Sambaza programu za AI kwa kutumia kiolezo za AZD zilizotengenezwa
-- Elewa uunganishaji wa Microsoft Foundry na AZD
-- Sanidi na ubinafsishe maajenti wa AI pamoja na zana
-- Sambaza programu za RAG (Retrieval-Augmented Generation)
+Kwa kumaliza sura hii, utapenda:
+- Weka programu za AI kwa kutumia templates za AZD zilizojengwa tayari
+- Elewa ujumuishaji wa Microsoft Foundry na AZD
+- Sanidi na rekebisha maajenti wa AI pamoja na zana
+- Weka programu za RAG (Retrieval-Augmented Generation)
 
 ---
 
@@ -22,17 +24,17 @@ Kwa kumaliza sura hii, utakuwa umeweza:
 
 | # | Somo | Maelezo | Muda |
 |---|--------|-------------|------|
-| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Unganisha AZD na huduma za Foundry | 30 min |
-| 2 | [AI Agents Guide](agents.md) | Sambaza maajenti yenye akili kwa zana | 45 min |
-| 3 | [AI Model Deployment](ai-model-deployment.md) | Sambaza na sanidi mifano ya AI | 30 min |
-| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Vitendo: Fanya suluhisho lako la AI liwe tayari kwa AZD | 60 min |
+| 1 | [Microsoft Foundry Integration](microsoft-foundry-integration.md) | Unganisha AZD na huduma za Foundry | 30 dak |
+| 2 | [AI Agents Guide](agents.md) | Weka maajenti wenye akili pamoja na zana | 45 dak |
+| 3 | [AI Model Deployment](ai-model-deployment.md) | Weka na sanidi mifano ya AI | 30 dak |
+| 4 | [AI Workshop Lab](ai-workshop-lab.md) | Vitendo: Fanya suluhisho lako la AI kuwa tayari kwa AZD | 60 dak |
 
 ---
 
 ## 🚀 Anza Haraka
 
 ```bash
-# Chaguo 1: Programu ya mazungumzo ya RAG
+# Chaguo 1: Programu ya Gumzo ya RAG
 azd init --template azure-search-openai-demo
 azd up
 
@@ -40,54 +42,54 @@ azd up
 azd init --template get-started-with-ai-agents
 azd up
 
-# Chaguo 3: Programu ya mazungumzo ya haraka
+# Chaguo 3: Programu ya Gumzo ya Haraka
 azd init --template openai-chat-app-quickstart
 azd up
 ```
 
 ---
 
-## 🤖 Mifano Maarufu ya AI
+## 🤖 Violezo vya AI vilivyopendekezwa
 
-| Template | Description | Services |
+| Kiolezo | Maelezo | Huduma |
 |----------|-------------|----------|
-| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat ya RAG yenye marejeo | OpenAI + AI Search |
-| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Maajenti ya AI yenye zana | AI Agent Service |
-| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Chat ya msingi ya AI | OpenAI + Container Apps |
+| [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Mazungumzo ya RAG yenye rejea | OpenAI + AI Search |
+| [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Wakala wa AI pamoja na zana | AI Agent Service |
+| [openai-chat-app-quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart) | Mazungumzo ya msingi ya AI | OpenAI + Container Apps |
 
 ---
 
-## 💰 Ufahamu wa Gharama
+## 💰 Uelewa wa Gharama
 
-| Environment | Estimated Monthly Cost |
+| Mazingira | Gharama Inayokadiriwa kwa Mwezi |
 |-------------|----------------------|
 | Development | $80-150 |
 | Staging | $150-300 |
 | Production | $300-3,500+ |
 
-**Vidokezo:** Endesha `azd down` baada ya kupima ili kuepuka malipo.
+**Ushauri:** Endesha `azd down` baada ya majaribio ili kuepuka malipo.
 
 ---
 
-## 🔗 Uvinjari
+## 🔗 Urambazaji
 
 | Mwelekeo | Sura |
 |-----------|---------|
-| **Iliyopita** | [Chapter 1: Foundation](../chapter-01-foundation/README.md) |
-| **Inayofuata** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
-| **Ruka hadi** | [Chapter 8: Production Patterns](../chapter-08-production/README.md) |
+| **Iliyotangulia** | [Sura 1: Msingi](../chapter-01-foundation/README.md) |
+| **Ifuatayo** | [Sura 3: Usanidi](../chapter-03-configuration/README.md) |
+| **Ruka hadi** | [Sura 8: Mifumo ya Uzalishaji](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Rasilimali Zinazohusiana
 
-- [AI Troubleshooting](../chapter-07-troubleshooting/ai-troubleshooting.md)
-- [Production AI Practices](../chapter-08-production/production-ai-practices.md)
+- [Utatuzi wa matatizo ya AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
+- [Mbinu za AI kwa Uzalishaji](../chapter-08-production/production-ai-practices.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Agalizo:
-Waraka huu umetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuhakikisha usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokukamilika. Waraka asili katika lugha yake ya asili unapaswa kuchukuliwa kama chanzo rasmi. Kwa taarifa muhimu, tunapendekeza tafsiri ya kitaalamu ya mtu. Hatuwajibiki kwa kutoelewana au tafsiri potofu zinazotokana na matumizi ya tafsiri hii.
+**Kauli ya kutowajibika**:
+Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Wakati tunajitahidi kuwa sahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au ukosefu wa usahihi. Nyaraka ya awali kwa lugha yake ya asili inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, inashauriwa kutumia tafsiri ya kitaalamu iliyofanywa na mwanadamu. Hatuwajibiki kwa kutoelewana au tafsiri potofu zitakazotokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

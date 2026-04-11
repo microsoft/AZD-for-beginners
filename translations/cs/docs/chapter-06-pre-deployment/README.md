@@ -6,15 +6,17 @@
 
 ## Přehled
 
-Tato kapitola pokrývá základní kroky plánování a ověřování před nasazením vaší aplikace. Naučíte se vyhnout drahým chybám díky správnému plánování kapacity, výběru SKU a předběžným kontrolám.
+Tato kapitola pokrývá základní kroky plánování a ověřování před nasazením vaší aplikace. Naučte se, jak se vyhnout nákladným chybám pomocí správného plánování kapacity, výběru SKU a předběžných kontrol.
 
-## Cíle učení
+> Ověřeno s `azd 1.23.12` v březnu 2026.
+
+## Výukové cíle
 
 Po dokončení této kapitoly budete:
-- Spustit předběžné kontroly před nasazením
-- Plánovat kapacitu a odhadnout požadavky na zdroje
+- Provádět předběžné kontroly před nasazením
+- Plánovat kapacitu a odhadovat potřeby zdrojů
 - Vybrat vhodné SKU pro optimalizaci nákladů
-- Nakonfigurovat Application Insights pro monitorování
+- Konfigurovat Application Insights pro monitorování
 - Pochopit vzory koordinace týmu
 
 ---
@@ -23,27 +25,27 @@ Po dokončení této kapitoly budete:
 
 | # | Lekce | Popis | Čas |
 |---|--------|-------------|------|
-| 1 | [Předběžné kontroly](preflight-checks.md) | Ověřit konfiguraci před nasazením | 15 min |
-| 2 | [Plánování kapacity](capacity-planning.md) | Odhadnout požadavky na zdroje | 20 min |
-| 3 | [Výběr SKU](sku-selection.md) | Vybrat vhodné cenové hladiny | 15 min |
-| 4 | [Application Insights](application-insights.md) | Nastavit monitorování | 20 min |
-| 5 | [Vzory koordinace](coordination-patterns.md) | Týmové pracovní postupy nasazení | 15 min |
+| 1 | [Předběžné kontroly](preflight-checks.md) | Ověření konfigurace před nasazením | 15 min |
+| 2 | [Plánování kapacity](capacity-planning.md) | Odhad potřebných zdrojů | 20 min |
+| 3 | [Výběr SKU](sku-selection.md) | Výběr vhodných cenových úrovní | 15 min |
+| 4 | [Application Insights](application-insights.md) | Konfigurace monitorování | 20 min |
+| 5 | [Koordinační vzory](coordination-patterns.md) | Pracovní postupy týmu při nasazení | 15 min |
 
 ---
 
 ## 🚀 Rychlý start
 
 ```bash
-# Zkontrolovat kvóty předplatného
+# Zkontrolujte kvóty odběru
 az vm list-usage --location eastus --output table
 
-# Náhled nasazení (nebudou vytvořeny žádné prostředky)
+# Náhled nasazení (nejsou vytvořeny žádné zdroje)
 azd provision --preview
 
-# Ověřit syntaxi Bicep
+# Ověřte syntaxi Bicep
 az bicep build --file infra/main.bicep
 
-# Zkontrolovat konfiguraci prostředí
+# Zkontrolujte konfiguraci prostředí
 azd env get-values
 ```
 
@@ -53,24 +55,24 @@ azd env get-values
 
 ### Před `azd provision`
 
-- [ ] Kvóta ověřena pro region
-- [ ] SKUs vybrány vhodně
-- [ ] Odhad nákladů zkontrolován
-- [ ] Konvence pojmenování konzistentní
-- [ ] Bezpečnost/RBAC nakonfigurována
+- [ ] Ověřena kvóta pro oblast
+- [ ] Vhodně vybrané SKU
+- [ ] Přehodnocen nákladový odhad
+- [ ] Konzistentní pojmenovací konvence
+- [ ] Konfigurace zabezpečení/RBAC
 
 ### Před `azd deploy`
 
-- [ ] Proměnné prostředí nastaveny
-- [ ] Tajná data v Key Vault
-- [ ] Řetězce připojení ověřeny
-- [ ] Kontroly stavu nakonfigurovány
+- [ ] Nastavené proměnné prostředí
+- [ ] Tajemství v Key Vault
+- [ ] Ověřené připojovací řetězce
+- [ ] Nastaveny kontroly stavu
 
 ---
 
 ## 💰 Průvodce výběrem SKU
 
-| Zatížení | Vývoj | Produkce |
+| Zátěž | Vývoj | Produkce |
 |----------|-------------|------------|
 | Container Apps | Consumption | Dedicated D4 |
 | App Service | B1/B2 | P1v3+ |
@@ -83,8 +85,8 @@ azd env get-values
 
 | Směr | Kapitola |
 |-----------|---------|
-| **Předchozí** | [Kapitola 5: Multi-Agent](../chapter-05-multi-agent/README.md) |
-| **Další** | [Kapitola 7: Řešení problémů](../chapter-07-troubleshooting/README.md) |
+| **Předchozí** | [Kapitola 5: Multi-agent](../chapter-05-multi-agent/README.md) |
+| **Další** | [Kapitola 7: Odstraňování problémů](../chapter-07-troubleshooting/README.md) |
 
 ---
 
@@ -97,6 +99,6 @@ azd env get-values
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Tento dokument byl přeložen pomocí služby AI překladu [Co-op Translator](https://github.com/Azure/co-op-translator). Přestože usilujeme o přesnost, mějte prosím na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro kritické informace se doporučuje využít profesionální lidský překlad. Nejsme odpovědní za žádná nedorozumění nebo mylné výklady vzniklé v důsledku použití tohoto překladu.
+**Prohlášení o vyloučení odpovědnosti**:  
+Tento dokument byl přeložen pomocí AI překladatelské služby [Co-op Translator](https://github.com/Azure/co-op-translator). I když usilujeme o přesnost, mějte, prosím, na paměti, že automatické překlady mohou obsahovat chyby nebo nepřesnosti. Originální dokument v jeho původním jazyce by měl být považován za závazný zdroj. Pro důležité informace se doporučuje profesionální lidský překlad. Neneseme odpovědnost za jakékoliv nedorozumění nebo mylné výklady vyplývající z použití tohoto překladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

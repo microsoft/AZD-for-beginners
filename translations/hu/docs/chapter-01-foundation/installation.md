@@ -1,83 +1,83 @@
-# Telepítési és Beállítási Útmutató
+# Telepítési és beállítási útmutató
 
 **Fejezet navigáció:**
-- **📚 Tanfolyam kezdőlap**: [AZD Kezdőknek](../../README.md)
-- **📖 Jelenlegi fejezet**: 1. fejezet - Alapok és Gyorskezdés
-- **⬅️ Előző**: [AZD Alapok](azd-basics.md)
+- **📚 Tanfolyam kezdőlapja**: [AZD kezdőknek](../../README.md)
+- **📖 Jelenlegi fejezet**: 1. fejezet - Alapok és gyors kezdés
+- **⬅️ Előző**: [AZD alapok](azd-basics.md)
 - **➡️ Következő**: [Az első projekted](first-project.md)
 - **🚀 Következő fejezet**: [2. fejezet: AI-első fejlesztés](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Bevezetés
 
-Ez az átfogó útmutató végigvezeti az Azure Developer CLI (azd) telepítésén és beállításán a rendszereden. Megtanulod a különféle telepítési módszereket különböző operációs rendszerekhez, a hitelesítés beállítását és az első konfigurációkat, hogy fejlesztői környezeted készen álljon az Azure-alapú telepítésekre.
+Ez az átfogó útmutató végigvezeti az Azure Developer CLI (azd) telepítésén és konfigurálásán a rendszereden. Megismerheted az operációs rendszeredhez tartozó különféle telepítési módszereket, az autentikáció beállítását és az első konfigurációt, hogy fejlesztői környezeted felkészüljön az Azure telepítésekre.
 
 ## Tanulási célok
 
-A tananyag elvégzése után:
-- Sikeresen telepíted az Azure Developer CLI-t az operációs rendszereden
-- Többféle módszerrel állítod be az Azure hitelesítést
-- Beállítod a fejlesztői környezeted szükséges előfeltételeit
-- Megérted a különböző telepítési lehetőségeket és hogy mikor melyiket érdemes használni
-- Hibaelhárítod a gyakori telepítési és beállítási problémákat
+A lecke végére képes leszel:
+- Sikeresen telepíteni az Azure Developer CLI-t az operációs rendszereden
+- Többféle módszerrel autentikálni az Azure-ral
+- Bekonfigurálni a fejlesztői környezeted a szükséges előfeltételekkel
+- Megérteni a különböző telepítési lehetőségeket és, hogy mikor melyiket érdemes használni
+- Hibakeresni a gyakori telepítési és beállítási problémákat
 
-## Tanulási eredmények
+## Elvárt tanulási eredmények
 
-A tananyag elvégzése után képes leszel:
-- Az azd telepítésére a platformodnak megfelelő módszerrel
-- Az azd auth login használatával hitelesíteni az Azure-hoz
-- Ellenőrizni a telepítés helyességét és az alap azd parancsokat kipróbálni
-- A fejlesztői környezetet optimálisan beállítani az azd használatához
-- Önállóan megoldani a gyakori telepítési problémákat
+A lecke elvégzése után képes leszel:
+- Az azd telepítése a platformodnak megfelelő módszerrel
+- Autentikálás az Azure-ral az azd auth login használatával
+- Telepítés ellenőrzése és alap azd parancsok tesztelése
+- Fejlesztői környezet konfigurálása az azd optimális használatához
+- Gyakori telepítési problémák önálló megoldása
 
-Ez az útmutató segít az Azure Developer CLI telepítésében és konfigurálásában függetlenül az operációs rendszeredtől vagy fejlesztői környezetedtől.
+Ez az útmutató segít az Azure Developer CLI telepítésében és konfigurálásában a rendszereden, függetlenül az operációs rendszeredtől vagy fejlesztői környezetedtől.
 
 ## Előfeltételek
 
 Az azd telepítése előtt győződj meg róla, hogy rendelkezel:
 - **Azure előfizetéssel** - [Ingyenes fiók létrehozása](https://azure.microsoft.com/free/)
-- **Azure CLI** - Hitelesítéshez és erőforráskezeléshez
+- **Azure CLI** - Autentikációhoz és erőforráskezeléshez
 - **Git** - Sablonok klónozásához és verziókezeléshez
-- **Docker** (opcionális) - Konténeres alkalmazásokhoz
+- **Docker** (opcionális) - Konténerizált alkalmazásokhoz
 
-## Telepítési Módszerek
+## Telepítési módok
 
 ### Windows
 
-#### 1. Opció: PowerShell (ajánlott)
+#### 1. opció: Windows csomagkezelő (ajánlott)
+```cmd
+winget install microsoft.azd
+```
+
+#### 2. opció: PowerShell telepítő script
 ```powershell
-# Futtassa rendszergazdaként vagy emelt szintű jogosultságokkal
+# Hasznos, ha a winget nem elérhető
 powershell -ex AllSigned -c "Invoke-RestMethod 'https://aka.ms/install-azd.ps1' | Invoke-Expression"
 ```
 
-#### 2. Opció: Windows Csomagkezelő (winget)
-```cmd
-winget install Microsoft.Azd
-```
-
-#### 3. Opció: Chocolatey
+#### 3. opció: Chocolatey
 ```cmd
 choco install azd
 ```
 
-#### 4. Opció: Kézi telepítés
-1. Töltsd le a legújabb kiadást a [GitHubról](https://github.com/Azure/azure-dev/releases)
-2. Csomagold ki a `C:\Program Files\azd\` könyvtárba
+#### 4. opció: Kézi telepítés
+1. Töltsd le a legfrissebb kiadást a [GitHub-ról](https://github.com/Azure/azure-dev/releases)
+2. Csomagold ki a `C:\Program Files\azd\` helyre
 3. Add hozzá a PATH környezeti változóhoz
 
 ### macOS
 
-#### 1. Opció: Homebrew (ajánlott)
+#### 1. opció: Homebrew (ajánlott)
 ```bash
 brew tap azure/azd
 brew install azd
 ```
 
-#### 2. Opció: Telepítő script
+#### 2. opció: Telepítő script
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### 3. Opció: Kézi telepítés
+#### 3. opció: Kézi telepítés
 ```bash
 # Letöltés és telepítés
 curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.com/Azure/azure-dev/releases/latest/download --verbose
@@ -85,42 +85,37 @@ curl -fsSL https://aka.ms/install-azd.sh | bash -s -- --base-url https://github.
 
 ### Linux
 
-#### 1. Opció: Telepítő script (ajánlott)
+#### 1. opció: Telepítő script (ajánlott)
 ```bash
 curl -fsSL https://aka.ms/install-azd.sh | bash
 ```
 
-#### 2. Opció: Csomagkezelők
+#### 2. opció: Csomagkezelők
 
-**Ubuntu/Debian:**
+**Kézi telepítés a kiadási fájlokból:**
 ```bash
-# Microsoft csomagtároló hozzáadása
-curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-
-# Azd telepítése
-sudo apt-get update
-sudo apt-get install azd
-```
-
-**RHEL/CentOS/Fedora:**
-```bash
-# Microsoft csomagtár hozzáadása
-sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-sudo dnf config-manager --add-repo https://packages.microsoft.com/yumrepos/azure-cli
-sudo dnf install azd
+# Töltse le a legújabb archívumot a Linux architektúrájához innen:
+# https://github.com/Azure/azure-dev/releases
+# Ezután csomagolja ki, és adja hozzá az azd binárist az útvonalához (PATH).
 ```
 
 ### GitHub Codespaces
 
-Az azd előre telepítve érhető el a GitHub Codespaces-ben. Egyszerűen hozz létre egy codespace-et és azonnal használhatod az azd-t.
+Néhány Codespace és fejlesztői konténer környezet már tartalmazza az `azd`-t, de ezt ellenőrizni kell, nem feltételezni:
+
+```bash
+azd version
+```
+
+Ha hiányzik az `azd`, telepítsd a környezethez tartozó szabványos scripttel.
 
 ### Docker
 
 ```bash
-# Futtassa azd-t egy konténerben
+# Az azd futtatása konténerben
 docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest
 
-# Hozzon létre egy alias-t a könnyebb használathoz
+# Alias létrehozása a könnyebb használathoz
 alias azd='docker run --rm -it -v $(pwd):/workspace mcr.microsoft.com/azure-dev-cli-tools:latest azd'
 ```
 
@@ -132,7 +127,7 @@ A telepítés után ellenőrizd, hogy az azd megfelelően működik:
 # Verzió ellenőrzése
 azd version
 
-# Súgó megtekintése
+# Segítség megtekintése
 azd --help
 
 # Elérhető sablonok listázása
@@ -144,60 +139,93 @@ Várt kimenet:
 azd version 1.x.x (commit xxxxxx)
 ```
 
-**Megjegyzés**: A verziószám eltérő lehet. Ellenőrizd az [Azure Developer CLI kiadásokat](https://github.com/Azure/azure-dev/releases) a legfrissebb verzióért.
+**Megjegyzés**: A konkrét verziószám változhat. Nézd meg a legfrissebb verziót az [Azure Developer CLI kiadások](https://github.com/Azure/azure-dev/releases) oldalon.
 
-**✅ Telepítés sikerességi ellenőrző lista:**
-- [ ] Az `azd version` parancs hiba nélkül megjeleníti a verziószámot
-- [ ] Az `azd --help` megjeleníti a parancsdokumentációt
-- [ ] Az `azd template list` mutatja az elérhető sablonokat
-- [ ] Az `az account show` mutatja az Azure előfizetésedet
-- [ ] Tudsz teszt könyvtárat létrehozni és sikeresen futtatni az `azd init`-et
+**✅ Telepítési sikeresség ellenőrzőlista:**
+- [ ] Az `azd version` verziószámot mutat hibák nélkül
+- [ ] Az `azd --help` megjeleníti a parancs dokumentációt
+- [ ] Az `azd template list` listázza a rendelkezésre álló sablonokat
+- [ ] Tudsz új teszt mappát létrehozni és sikeresen futtatni az `azd init` parancsot
 
-**Ha minden ellenőrzés sikeres, folytathatsz a [Az első projekteddel](first-project.md)!**
+**Ha minden ellenőrzés sikeres, folytathatsz a [Az első projekted](first-project.md) leckével!**
 
-## Hitelesítés beállítása
+## Autentikáció beállítása
 
-### Azure CLI hitelesítés (ajánlott)
+### Ajánlott kezdő beállítás
+
+AZD-alapú munkafolyamatokhoz jelentkezz be az `azd auth login` paranccsal.
+
 ```bash
-# Az Azure CLI telepítése, ha még nincs telepítve
+# Szükséges az olyan AZD parancsokhoz, mint az azd up
+azd auth login
+
+# Az AZD hitelesítési állapotának ellenőrzése
+azd auth login --check-status
+```
+
+Az Azure CLI bejelentkezést csak akkor használd, ha saját magad futtatsz `az` parancsokat a tanfolyam során.
+
+### Azure CLI autentikáció (opcionális)
+```bash
+# Telepítse az Azure CLI-t, ha még nincs telepítve
 # Windows: winget install Microsoft.AzureCLI
 # macOS: brew install azure-cli
-# Linux: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+# Linux: tekintse meg az Azure CLI telepítési dokumentációját a disztribúciójához
 
-# Bejelentkezés az Azure-ba
+# Jelentkezzen be az Azure-ba
 az login
 
 # Hitelesítés ellenőrzése
 az account show
 ```
 
-### Eszközkódos hitelesítés
-Ha fej nélküli rendszeren vagy böngésző problémád van:
+### Melyik bejelentkezési folyamatot használd?
+
+- Használd az `azd auth login`-t, ha az AZD kezdő útvonalat követed, és főleg az `azd` parancsokat használod.
+- Használd az `az login`-t is, ha szeretnél közvetlenül Azure CLI parancsokat futtatni, például `az account show` vagy erőforrásokat ellenőrizni.
+- Ha egy gyakorlat mind az `azd`, mind az `az` parancsokat tartalmaz, akkor mindkét bejelentkezést egyszer futtasd a kezdésnél.
+
+### Eszköz kódos autentikáció
+Ha fej nélküli rendszeren vagy böngésző problémáid vannak:
 ```bash
-az login --use-device-code
+azd auth login --use-device-code
 ```
 
-### Szolgáltatásazonosító (CI/CD)
-Automatizált környezetekhez:
+### Szolgáltatás alapú hitelesítés (CI/CD)
+Automatizált környezetekben:
 ```bash
-az login --service-principal \
-  --username <client-id> \
-  --password <client-secret> \
-  --tenant <tenant-id>
+azd auth login \
+  --client-id <client-id> \
+  --client-secret <client-secret> \
+  --tenant-id <tenant-id>
+```
+
+### Teljes beállítás ellenőrzése
+
+Ha gyorsan szeretnéd ellenőrizni a készenlétet az 1. fejezet megkezdése előtt:
+
+**Windows:**
+```powershell
+.\validate-setup.ps1
+```
+
+**macOS / Linux:**
+```bash
+bash ./validate-setup.sh
 ```
 
 ## Konfiguráció
 
 ### Globális konfiguráció
 ```bash
-# Állítsa be az alapértelmezett előfizetést
+# Alapértelmezett előfizetés beállítása
 azd config set defaults.subscription <subscription-id>
 
-# Állítsa be az alapértelmezett helyet
+# Alapértelmezett hely beállítása
 azd config set defaults.location eastus2
 
 # Az összes konfiguráció megtekintése
-azd config list
+azd config show
 ```
 
 ### Környezeti változók
@@ -218,14 +246,14 @@ export AZD_DEBUG=true  # Hibakeresési naplózás engedélyezése
 Telepítsd az Azure Developer CLI bővítményt:
 1. Nyisd meg a VS Code-ot
 2. Menj a Bővítményekhez (Ctrl+Shift+X)
-3. Keresd meg az "Azure Developer CLI"-t
+3. Keresd meg az "Azure Developer CLI" kifejezést
 4. Telepítsd a bővítményt
 
 Funkciók:
-- IntelliSense az azure.yaml fájlhoz
-- Integrált terminálparancsok
+- IntelliSense az azure.yaml-hoz
+- Integrált terminál parancsokkal
 - Sablon böngészés
-- Telepítésfigyelés
+- Telepítés figyelése
 
 ### GitHub Codespaces
 Hozz létre egy `.devcontainer/devcontainer.json` fájlt:
@@ -242,21 +270,21 @@ Hozz létre egy `.devcontainer/devcontainer.json` fájlt:
 
 ### IntelliJ/JetBrains
 1. Telepítsd az Azure plugint
-2. Állítsd be az Azure hitelesítő adatokat
-3. Használd az integrált terminált az azd parancsok futtatásához
+2. Konfiguráld az Azure hitelesítési adatokat
+3. Használj integrált terminált az azd parancsokhoz
 
-## 🐛 Telepítési hibakeresés
+## 🐛 Telepítési hibák elhárítása
 
 ### Gyakori problémák
 
-#### Hozzáférés megtagadva (Windows)
+#### Jogosultság megtagadva (Windows)
 ```powershell
 # Futtassa a PowerShellt rendszergazdaként
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
 #### PATH problémák
-Add hozzá kézzel az azd-t a PATH-hoz:
+Add hozzá manuálisan az azd-t a PATH-hoz:
 
 **Windows:**
 ```cmd
@@ -282,40 +310,41 @@ azd config set http.insecure true
 #### Verzióütközések
 ```bash
 # Régi telepítések eltávolítása
-# Windows: winget uninstall Microsoft.Azd
+# Windows: winget uninstall microsoft.azd
 # macOS: brew uninstall azd
-# Linux: sudo apt remove azd
+# Linux: távolítsa el az előző azd binárist vagy szimbolikus linket az újratelepítés előtt
 
 # Konfiguráció tisztítása
 rm -rf ~/.azd
 ```
 
 ### További segítség
+
 ```bash
-# Hibakeresési naplózás engedélyezése
+# Engedélyezze a hibakeresési naplózást
 export AZD_DEBUG=true
 azd <command> --debug
 
-# Aktuális konfiguráció megtekintése
-azd config list
+# Nézze meg a jelenlegi konfigurációt
+azd config show
 
-# Aktuális telepítési állapot megtekintése
+# Nézze meg az aktuális telepítési állapotot
 azd show
 ```
 
 ## azd frissítése
 
-### Automatikus frissítések
-Az azd értesít, amikor frissítés elérhető:
+### Frissítés ellenőrzése
+Az azd figyelmeztet, ha újabb kiadás érhető el, és megtekintheted a jelenlegi verziót a következővel:
 ```bash
-azd version --check-for-updates
+azd version
 ```
 
-### Manuális frissítések
+### Kézi frissítés
 
 **Windows (winget):**
 ```cmd
-winget upgrade Microsoft.Azd
+winget upgrade microsoft.azd
 ```
 
 **macOS (Homebrew):**
@@ -331,36 +360,36 @@ curl -fsSL https://aka.ms/install-azd.sh | bash
 ## 💡 Gyakran Ismételt Kérdések
 
 <details>
-<summary><strong>Miben különbözik az azd az az CLI-től?</strong></summary>
+<summary><strong>Mi a különbség az azd és az az CLI között?</strong></summary>
 
 **Azure CLI (az)**: Alacsony szintű eszköz az egyedi Azure erőforrások kezelésére
 - `az webapp create`, `az storage account create`
-- Egyszerre egy erőforrás
-- Infrastrukturális menedzsment fókusz
+- Egy erőforrás egyszerre
+- Infrastruktúra kezelési fókusz
 
-**Azure Developer CLI (azd)**: Magas szintű eszköz komplett alkalmazás telepítésekhez
-- `azd up` az egész alkalmazást az összes erőforrással telepíti
-- Sablonalapú munkafolyamatok
-- Fejlesztői termelékenység fókusz
+**Azure Developer CLI (azd)**: Magas szintű eszköz teljes alkalmazás telepítésekhez
+- `azd up` az egész alkalmazás összes erőforrásával telepítve
+- Sablon alapú munkafolyamatok
+- Fejlesztői produktivitás fókusz
 
-**Mindkettőre szükség van**: azd az az CLI-t használja hitelesítésre
+**Mindkettőre szükséged van**: azd használja az az CLI-t az autentikációhoz
 </details>
 
 <details>
 <summary><strong>Használhatom az azd-t meglévő Azure erőforrásokkal?</strong></summary>
 
-Igen! Lehetőségeid:
-1. Importáld a meglévő erőforrásokat az azd környezetekbe
-2. Hivatkozz meglévő erőforrásokra a Bicep sablonjaidban
-3. Használj azd-t új telepítésekhez a meglévő infrastruktúra mellett
+Igen! Megteheted:
+1. Meglévő erőforrások importálása az azd környezetekbe
+2. Meglévő erőforrásokra hivatkozás Bicep sablonokban
+3. Új telepítések végrehajtása az azd használatával a meglévő infrastruktúrával együtt
 
-Részletekért lásd a [Konfigurációs Útmutatót](configuration.md).
+Részletekért lásd: [Konfigurációs útmutató](configuration.md).
 </details>
 
 <details>
-<summary><strong>Működik az azd Azure Government vagy Azure China környezettel?</strong></summary>
+<summary><strong>Működik az azd az Azure Government vagy Azure China környezetekben?</strong></summary>
 
-Igen, állítsd be a felhőt:
+Igen, konfiguráld a felhőt:
 ```bash
 # Azure Kormányzat
 az cloud set --name AzureUSGovernment
@@ -373,57 +402,57 @@ az login
 </details>
 
 <details>
-<summary><strong>Használhatom az azd-t CI/CD folyamatokban?</strong></summary>
+<summary><strong>Használhatom az azd-t CI/CD pipeline-okban?</strong></summary>
 
-Természetesen! Az azd automatizálásra készült:
+Abszolút! Az azd az automatizálásra lett tervezve:
 - GitHub Actions integráció
 - Azure DevOps támogatás
-- Szolgáltatásazonosító hitelesítés
-- Nem interaktív mód
+- Szolgáltatás alapú hitelesítés
+- Interakció nélküli mód
 
-Lásd a [Telepítési Útmutatót](../chapter-04-infrastructure/deployment-guide.md) a CI/CD mintákért.
+CI/CD mintákért lásd: [Telepítési útmutató](../chapter-04-infrastructure/deployment-guide.md).
 </details>
 
 <details>
 <summary><strong>Mennyibe kerül az azd használata?</strong></summary>
 
-Az azd **teljesen ingyenes** és nyílt forráskódú. Csak az alábbiakért kell fizetni:
-- Az Azure erőforrásokért, amiket telepítesz
-- Az Azure fogyasztási díjakért (számítási kapacitás, tárolás stb.)
+Az azd **teljesen ingyenes** és nyílt forráskódú. Csak az alábbiakért fizetsz:
+- Az Azure-ban telepített erőforrásokért
+- Azure fogyasztás (számítási kapacitás, tárolás stb.) költségeiért
 
-Használd az `azd provision --preview` parancsot a költségek becsléséhez telepítés előtt.
+Használd az `azd provision --preview` parancsot a költségek előzetes becslésére.
 </details>
 
 ## Következő lépések
 
-1. **Befejezni a hitelesítést**: Győződj meg róla, hogy hozzáférsz az Azure előfizetésedhez
-2. **Próbáld ki az első telepítést**: Kövesd az [Első Projekt Útmutatót](first-project.md)
+1. **Autentikáció befejezése**: Győződj meg róla, hogy hozzáférsz az Azure előfizetésedhez
+2. **Kezdd el az első telepítést**: Kövesd az [Első projekt útmutatót](first-project.md)
 3. **Fedezd fel a sablonokat**: Böngészd az elérhető sablonokat az `azd template list` paranccsal
-4. **Állítsd be az IDE-det**: Készítsd el a fejlesztői környezetet
+4. **Állítsd be az IDE-det**: Konfiguráld a fejlesztői környezetedet
 
 ## Támogatás
 
-Ha problémákba ütközöl:
+Ha problémába ütközöl:
 - [Hivatalos dokumentáció](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/)
-- [Probléma bejelentése](https://github.com/Azure/azure-dev/issues)
+- [Hibabejelentés](https://github.com/Azure/azure-dev/issues)
 - [Közösségi beszélgetések](https://github.com/Azure/azure-dev/discussions)
 - [Azure támogatás](https://azure.microsoft.com/support/)
-- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) – Szerezz Azure parancs javaslatokat közvetlenül a szerkesztődbe a `npx skills add microsoft/github-copilot-for-azure` segítségével
+- [**Azure Agent Skills**](https://skills.sh/microsoft/github-copilot-for-azure) - Szerezz Azure parancs útmutatást közvetlenül a szerkesztődben az `npx skills add microsoft/github-copilot-for-azure` parancs segítségével
 
 ---
 
 **Fejezet navigáció:**
-- **📚 Tanfolyam kezdőlap**: [AZD Kezdőknek](../../README.md)
-- **📖 Jelenlegi fejezet**: 1. fejezet - Alapok és Gyorskezdés
-- **⬅️ Előző**: [AZD Alapok](azd-basics.md) 
+- **📚 Tanfolyam kezdőlapja**: [AZD kezdőknek](../../README.md)
+- **📖 Jelenlegi fejezet**: 1. fejezet - Alapok és gyors kezdés
+- **⬅️ Előző**: [AZD alapok](azd-basics.md)
 - **➡️ Következő**: [Az első projekted](first-project.md)
 - **🚀 Következő fejezet**: [2. fejezet: AI-első fejlesztés](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-**✅ Telepítés befejezve!** Folytasd az [Az első projekteddel](first-project.md), hogy elkezdhess az azd-vel dolgozni.
+**✅ Telepítés kész!** Folytasd az [Az első projekted](first-project.md) leckével, hogy elkezdhesd az azd használatát.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Jogi nyilatkozat**:
-Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordító szolgáltatás segítségével készült. Bár a pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az anyanyelvén tekintendő hiteles forrásnak. Kritikus információk esetén professzionális, emberi fordítás ajánlott. Nem vállalunk felelősséget a fordítás használatából eredő félreértésekért vagy téves értelmezésekért.
+Ezt a dokumentumot az AI fordító szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) használatával fordítottuk le. Bár az pontosságra törekszünk, kérjük, vegye figyelembe, hogy az automatikus fordítás hibákat vagy pontatlanságokat tartalmazhat. Az eredeti dokumentum anyanyelvű változata tekintendő hiteles forrásnak. Kritikus információk esetén szakmai emberi fordítást javaslunk. Nem vállalunk felelősséget az ebből az átiratból eredő félreértésekért vagy téves értelmezésekért.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

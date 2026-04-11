@@ -1,73 +1,73 @@
-# Έλεγχοι προ-εκκίνησης για αναπτύξεις AZD
+# Προέλεγχοι για αναπτύξεις AZD
 
 **Πλοήγηση Κεφαλαίου:**
-- **📚 Αρχική του μαθήματος**: [AZD για αρχάριους](../../README.md)
-- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 6 - Επαλήθευση & Σχεδιασμός πριν την ανάπτυξη
+- **📚 Αρχική Μαθήματος**: [AZD για Αρχάριους](../../README.md)
+- **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 6 - Επικύρωση & Σχεδιασμός πριν την Ανάπτυξη
 - **⬅️ Προηγούμενο**: [Επιλογή SKU](sku-selection.md)
 - **➡️ Επόμενο Κεφάλαιο**: [Κεφάλαιο 7: Αντιμετώπιση προβλημάτων](../chapter-07-troubleshooting/common-issues.md)
 - **🔧 Σχετικό**: [Κεφάλαιο 4: Οδηγός Ανάπτυξης](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Εισαγωγή
 
-Αυτός ο ολοκληρωμένος οδηγός παρέχει σενάρια και διαδικασίες επαλήθευσης πριν την ανάπτυξη για να διασφαλίσει επιτυχημένες αναπτύξεις με το Azure Developer CLI πριν αυτές ξεκινήσουν. Μάθετε να υλοποιείτε αυτοματοποιημένους ελέγχους για αυθεντικοποίηση, διαθεσιμότητα πόρων, όρια (quotas), συμμόρφωση ασφαλείας και απαιτήσεις απόδοσης για να αποτρέψετε αποτυχίες ανάπτυξης και να βελτιστοποιήσετε τα ποσοστά επιτυχίας ανάπτυξης.
+Αυτός ο ολοκληρωμένος οδηγός παρέχει σενάρια και διαδικασίες προ-επικύρωσης πριν την ανάπτυξη για να διασφαλίσει επιτυχημένες αναπτύξεις με το Azure Developer CLI πριν ξεκινήσουν. Μάθετε να υλοποιείτε αυτοματοποιημένους ελέγχους για έλεγχο ταυτότητας, διαθεσιμότητα πόρων, ποσοστώσεις, συμμόρφωση ασφαλείας και απαιτήσεις απόδοσης για να αποτρέψετε αποτυχίες ανάπτυξης και να βελτιστοποιήσετε τα ποσοστά επιτυχίας των αναπτύξεων.
 
-## Στόχοι Εκμάθησης
+## Στόχοι Μάθησης
 
 Με την ολοκλήρωση αυτού του οδηγού, θα:
-- Μαθαίνετε τεχνικές και σενάρια αυτοματοποιημένης επαλήθευσης πριν την ανάπτυξη
-- Κατανοείτε ολοκληρωμένες στρατηγικές ελέγχου για αυθεντικοποίηση, δικαιώματα και όρια
-- Υλοποιείτε διαδικασίες επαλήθευσης διαθεσιμότητας πόρων και χωρητικότητας
-- Διαμορφώνετε ελέγχους ασφάλειας και συμμόρφωσης για οργανωτικές πολιτικές
-- Σχεδιάζετε ροές εργασίας εκτίμησης κόστους και επαλήθευσης προϋπολογισμού
-- Δημιουργείτε προσαρμοσμένη αυτοματοποίηση προ-ελέγχων για pipelines CI/CD
+- Εξειδικευτείτε σε αυτοματοποιημένες τεχνικές και σενάρια προ-επικύρωσης
+- Κατανοήσετε ολοκληρωμένες στρατηγικές ελέγχου για έλεγχο ταυτότητας, δικαιώματα και ποσοστώσεις
+- Υλοποιήσετε διαδικασίες επικύρωσης διαθεσιμότητας και χωρητικότητας πόρων
+- Διαμορφώσετε ελέγχους ασφάλειας και συμμόρφωσης με τις πολιτικές της οργάνωσης
+- Σχεδιάσετε ροές εργασίας εκτίμησης κόστους και επικύρωσης προϋπολογισμού
+- Δημιουργήσετε προσαρμοσμένη αυτοματοποίηση προ-ελέγχων για CI/CD pipelines
 
-## Μαθησιακά Αποτελέσματα
+## Αποτελέσματα Μάθησης
 
 Μετά την ολοκλήρωση, θα μπορείτε να:
-- Δημιουργείτε και εκτελείτε ολοκληρωμένα σενάρια προ-ελέγχου
-- Σχεδιάζετε αυτοματοποιημένες ροές ελέγχου για διαφορετικά σενάρια ανάπτυξης
-- Υλοποιείτε διαδικασίες και πολιτικές επαλήθευσης ειδικές ανά περιβάλλον
-- Διαμορφώνετε προληπτική παρακολούθηση και ειδοποίηση για ετοιμότητα ανάπτυξης
-- Εντοπίζετε και επιλύετε προβλήματα πριν την ανάπτυξη και εφαρμόζετε διορθωτικές ενέργειες
-- Ενσωματώνετε προ-ελέγχους σε DevOps pipelines και ροές εργασίας αυτοματοποίησης
+- Δημιουργείτε και να εκτελείτε ολοκληρωμένα σενάρια επικύρωσης προ-εκκίνησης
+- Σχεδιάζετε αυτοματοποιημένες ροές ελέγχων για διάφορα σενάρια ανάπτυξης
+- Υλοποιείτε διαδικασίες και πολιτικές επικύρωσης ειδικές για κάθε περιβάλλον
+- Διαμορφώνετε προληπτική παρακολούθηση και ειδοποίηση για την ετοιμότητα ανάπτυξης
+- Αντιμετωπίζετε προβλήματα πριν την ανάπτυξη και εφαρμόζετε διορθωτικές ενέργειες
+- Ενσωματώνετε τους προελέγχους σε DevOps pipelines και ροές αυτοματοποίησης
 
-## Table of Contents
+## Πίνακας Περιεχομένων
 
-- [Overview](../../../../docs/chapter-06-pre-deployment)
-- [Automated Pre-flight Script](../../../../docs/chapter-06-pre-deployment)
-- [Manual Validation Checklist](../../../../docs/chapter-06-pre-deployment)
-- [Environment Validation](../../../../docs/chapter-06-pre-deployment)
-- [Resource Validation](../../../../docs/chapter-06-pre-deployment)
-- [Security & Compliance Checks](../../../../docs/chapter-06-pre-deployment)
-- [Performance & Capacity Planning](../../../../docs/chapter-06-pre-deployment)
-- [Troubleshooting Common Issues](../../../../docs/chapter-06-pre-deployment)
+- [Overview](#overview)
+- [Automated Pre-flight Script](#αυτοματοποιημένο-σενάριο-προ-ελέγχου)
+- [Manual Validation Checklist](#codeblock1)
+- [Environment Validation](#✅-backup-ανάκτηση)
+- [Resource Validation](#επικύρωση-περιβάλλοντος-παραγωγής)
+- [Security & Compliance Checks](#security--compliance-checks)
+- [Performance & Capacity Planning](#performance--capacity-planning)
+- [Troubleshooting Common Issues](#troubleshooting-common-issues)
 
 ---
 
 ## Overview
 
-Pre-flight checks are essential validations performed before deploying to ensure:
+Οι προ-έλεγχοι είναι ουσιώδεις επικυρώσεις που πραγματοποιούνται πριν την ανάπτυξη για να διασφαλίσουν:
 
-- **Resource availability** and quotas in target regions
-- **Authentication and permissions** are properly configured
-- **Template validity** and parameter correctness
-- **Network connectivity** and dependencies
-- **Security compliance** with organizational policies
-- **Cost estimation** within budget constraints
+- **Διαθεσιμότητα πόρων** και ποσοστώσεις στις στοχευμένες περιοχές
+- **Έλεγχος ταυτότητας και δικαιώματα** είναι σωστά διαμορφωμένα
+- **Εγκυρότητα προτύπων** και σωστότητα παραμέτρων
+- **Συνδεσιμότητα δικτύου** και εξαρτήσεις
+- **Συμμόρφωση ασφάλειας** με τις πολιτικές της οργάνωσης
+- **Εκτίμηση κόστους** εντός ορίων προϋπολογισμού
 
-### When to Run Pre-flight Checks
+### Πότε να Εκτελέσετε Προελέγχους
 
-- **Before first deployment** to a new environment
-- **After significant template changes**
-- **Before production deployments**
-- **When changing Azure regions**
-- **As part of CI/CD pipelines**
+- **Πριν την πρώτη ανάπτυξη** σε ένα νέο περιβάλλον
+- **Μετά από σημαντικές αλλαγές σε πρότυπα**
+- **Πριν από αναπτύξεις σε παραγωγή**
+- **Όταν αλλάζετε περιοχές Azure**
+- **Ως μέρος pipelines CI/CD**
 
 ---
 
-## Automated Pre-flight Script
+## Αυτοματοποιημένο Σενάριο Προ-ελέγχου
 
-### PowerShell Pre-flight Checker
+### PowerShell Προ-έλεγχος
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -138,7 +138,7 @@ function Test-Prerequisites {
         return $false
     }
     
-    # Έλεγχος εγκατάστασης του Azure CLI
+    # Έλεγχος εγκατάστασης Azure CLI
     try {
         $azVersion = az version --output json | ConvertFrom-Json
         Write-Status "Azure CLI installed" "Success" "Version: $($azVersion.'azure-cli')"
@@ -163,7 +163,7 @@ function Test-Authentication {
     Write-Host "`n${Blue}=== Authentication Check ===${Reset}"
     
     try {
-        # Έλεγχος πιστοποίησης AZD
+        # Έλεγχος αυθεντικοποίησης AZD
         $azdAuth = azd auth login --check-status --output json 2>$null | ConvertFrom-Json
         if ($azdAuth.status -eq "Logged-in") {
             Write-Status "AZD authentication" "Success" "User: $($azdAuth.principalName)"
@@ -173,11 +173,11 @@ function Test-Authentication {
             return $false
         }
         
-        # Έλεγχος πιστοποίησης του Azure CLI
+        # Έλεγχος αυθεντικοποίησης Azure CLI
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # Επαλήθευση πρόσβασης στη συνδρομή
+        # Επικύρωση πρόσβασης στη συνδρομή
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -242,7 +242,7 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # Έλεγχος ορίων υπολογιστικών πόρων
+        # Έλεγχος ορίων υπολογισμού
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
         # Έλεγχος συγκεκριμένων ορίων
@@ -285,7 +285,7 @@ function Test-QuotasAndLimits {
     }
     catch {
         Write-Status "Quota check failed" "Warning" $_.Exception.Message
-        return $true # Μη μπλοκαριστικό
+        return $true # Μη αποκλειστικό
     }
 }
 
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 ΝΕΟ: Δοκιμή προεπισκόπησης υποδομής (ασφαλής δοκιμή χωρίς επιπτώσεις)
+    # 🧪 ΝΕΟ: Δοκιμή προεπισκόπησης υποδομής (ασφαλής προσομοιωμένη εκτέλεση)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -415,7 +415,7 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # Έλεγχος διαθεσιμότητας υπηρεσιών στην περιοχή
+        # Έλεγχος διαθεσιμότητας υπηρεσίας στην περιοχή
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # Έλεγχος χρήσης διαχειριζόμενης ταυτότητας
+        # Έλεγχος για χρήση διαχειριζόμενης ταυτότητας
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -561,15 +561,15 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Bash Pre-flight Checker
+### Bash Προ-έλεγχος
 
 ```bash
 #!/bin/bash
-# Bash έκδοση των προκαταρκτικών ελέγχων για συστήματα Unix/Linux
+# Έκδοση σε Bash των ελέγχων πριν την εκτέλεση για συστήματα Unix/Linux
 
 set -euo pipefail
 
-# Κωδικοί χρώματος
+# Κωδικοί χρωμάτων
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -615,7 +615,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # Έλεγχος εγκατάστασης Azure CLI
+    # Έλεγχος εγκατάστασης του Azure CLI
     if command -v az >/dev/null 2>&1; then
         local az_version=$(az version --output json | jq -r '."azure-cli"')
         print_status "Azure CLI installed" "success" "Version: $az_version"
@@ -624,7 +624,7 @@ check_prerequisites() {
         return 1
     fi
     
-    # Έλεγχος εγκατάστασης jq
+    # Έλεγχος εγκατάστασης του jq
     if command -v jq >/dev/null 2>&1; then
         print_status "jq installed" "success"
     else
@@ -637,7 +637,7 @@ check_prerequisites() {
 check_authentication() {
     echo -e "\n${BLUE}=== Authentication Check ===${NC}"
     
-    # Έλεγχος ταυτότητας AZD
+    # Έλεγχος πιστοποίησης AZD
     if azd auth login --check-status >/dev/null 2>&1; then
         local principal_name=$(azd auth login --check-status --output json 2>/dev/null | jq -r '.principalName // "Unknown"')
         print_status "AZD authentication" "success" "User: $principal_name"
@@ -646,7 +646,7 @@ check_authentication() {
         return 1
     fi
     
-    # Έλεγχος ταυτότητας Azure CLI
+    # Έλεγχος πιστοποίησης του Azure CLI
     if az account show >/dev/null 2>&1; then
         local subscription_name=$(az account show --query 'name' --output tsv)
         print_status "Azure CLI authentication" "success" "Subscription: $subscription_name"
@@ -683,7 +683,7 @@ check_template_validation() {
         if [[ $bicep_count -gt 0 ]]; then
             print_status "Infrastructure templates" "success" "$bicep_count Bicep files found"
             
-            # Επικύρωση main.bicep εάν υπάρχει
+            # Επικύρωση του main.bicep εάν υπάρχει
             if [[ -f "infra/main.bicep" ]]; then
                 if az bicep build --file "infra/main.bicep" --stdout >/dev/null 2>&1; then
                     print_status "Bicep template validation" "success" "main.bicep is valid"
@@ -706,7 +706,7 @@ check_template_validation() {
 check_regional_availability() {
     echo -e "\n${BLUE}=== Regional Availability Check ===${NC}"
     
-    # Έλεγχος αν η τοποθεσία είναι έγκυρη
+    # Έλεγχος εάν η τοποθεσία είναι έγκυρη
     if az account list-locations --query "[?name=='$LOCATION' || displayName=='$LOCATION']" --output tsv | grep -q .; then
         print_status "Azure region" "success" "Location '$LOCATION' is valid"
     else
@@ -796,80 +796,80 @@ main "$@"
 
 ---
 
-## Manual Validation Checklist
+## Χειροκίνητη Λίστα Ελέγχου
 
-### Pre-Deployment Checklist
+### Λίστα Ελέγχου πριν την Ανάπτυξη
 
-Print this checklist and verify each item before deployment:
+Εκτυπώστε αυτή τη λίστα ελέγχου και επαληθεύστε κάθε στοιχείο πριν την ανάπτυξη:
 
-#### ✅ Environment Setup
-- [ ] AZD CLI installed and updated to latest version
-- [ ] Azure CLI installed and authenticated
-- [ ] Correct Azure subscription selected
-- [ ] Environment name is unique and follows naming conventions
-- [ ] Target resource group identified or can be created
+#### ✅ Ρύθμιση Περιβάλλοντος
+- [ ] Το AZD CLI είναι εγκατεστημένο και ενημερωμένο στην τελευταία έκδοση
+- [ ] Το Azure CLI είναι εγκατεστημένο και έχει γίνει έλεγχος ταυτότητας
+- [ ] Επιλεγμένη η σωστή συνδρομή Azure
+- [ ] Το όνομα του περιβάλλοντος είναι μοναδικό και ακολουθεί τις συμβάσεις ονοματοδοσίας
+- [ ] Ο προοριζόμενος resource group έχει εντοπιστεί ή μπορεί να δημιουργηθεί
 
-#### ✅ Authentication & Permissions
-- [ ] Successfully authenticated with `azd auth login`
-- [ ] User has Contributor role on target subscription/resource group
-- [ ] Service principal configured for CI/CD (if applicable)
-- [ ] No expired certificates or credentials
+#### ✅ Έλεγχος ταυτότητας & Δικαιώματα
+- [ ] Επιτυχής έλεγχος ταυτότητας με `azd auth login`
+- [ ] Ο χρήστης έχει ρόλο Contributor στη στοχευμένη συνδρομή/ομάδα πόρων
+- [ ] Service principal διαμορφωμένο για CI/CD (αν ισχύει)
+- [ ] Δεν υπάρχουν ληγμένα πιστοποιητικά ή διαπιστευτήρια
 
-#### ✅ Template Validation
-- [ ] `azure.yaml` exists and is valid YAML
-- [ ] All services defined in azure.yaml have corresponding source code
-- [ ] Bicep templates in `infra/` directory are present
-- [ ] `main.bicep` compiles without errors (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Infrastructure preview runs successfully (`azd provision --preview`)
-- [ ] All required parameters have default values or will be provided
-- [ ] No hardcoded secrets in templates
+#### ✅ Επικύρωση Προτύπων
+- [ ] Το `azure.yaml` υπάρχει και είναι έγκυρο YAML
+- [ ] Όλες οι υπηρεσίες που ορίζονται στο azure.yaml έχουν αντίστοιχο πηγαίο κώδικα
+- [ ] Τα Bicep πρότυπα στον κατάλογο `infra/` υπάρχουν
+- [ ] Το `main.bicep` μεταγλωττίζεται χωρίς σφάλματα (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Η προεπισκόπηση υποδομής εκτελείται επιτυχώς (`azd provision --preview`)
+- [ ] Όλες οι απαιτούμενες παράμετροι έχουν προεπιλεγμένες τιμές ή θα παρέχονται
+- [ ] Δεν υπάρχουν σκληροκωδικοποιημένα μυστικά στα πρότυπα
 
-#### ✅ Resource Planning
-- [ ] Target Azure region selected and validated
-- [ ] Required Azure services available in target region
-- [ ] Sufficient quotas available for planned resources
-- [ ] Resource naming conflicts checked
-- [ ] Dependencies between resources understood
+#### ✅ Σχεδιασμός Πόρων
+- [ ] Επιλεγμένη και επικυρωμένη η στοχευμένη περιοχή Azure
+- [ ] Οι απαιτούμενες υπηρεσίες Azure είναι διαθέσιμες στην στοχευμένη περιοχή
+- [ ] Διαθέσιμες επαρκείς ποσοστώσεις για τους προγραμματισμένους πόρους
+- [ ] Ελέγχθηκαν συγκρούσεις ονοματοδοσίας πόρων
+- [ ] Κατανοούνται οι εξαρτήσεις μεταξύ πόρων
 
-#### ✅ Network & Security
-- [ ] Network connectivity to Azure endpoints verified
-- [ ] Firewall/proxy settings configured if needed
-- [ ] Key Vault configured for secrets management
-- [ ] Managed identities used where possible
-- [ ] HTTPS enforcement enabled for web applications
+#### ✅ Δίκτυο & Ασφάλεια
+- [ ] Επαληθεύτηκε η συνδεσιμότητα δικτύου προς τα endpoints του Azure
+- [ ] Οι ρυθμίσεις firewall/proxy έχουν διαμορφωθεί εάν χρειάζεται
+- [ ] Το Key Vault έχει διαμορφωθεί για διαχείριση μυστικών
+- [ ] Χρησιμοποιούνται managed identities όπου είναι δυνατόν
+- [ ] Η επιβολή HTTPS ενεργοποιήθηκε για τις web εφαρμογές
 
-#### ✅ Cost Management
-- [ ] Cost estimates calculated using Azure Pricing Calculator
-- [ ] Budget alerts configured if required
-- [ ] Appropriate SKUs selected for environment type
-- [ ] Reserved capacity considered for production workloads
+#### ✅ Διαχείριση Κόστους
+- [ ] Οι εκτιμήσεις κόστους υπολογίστηκαν χρησιμοποιώντας το Azure Pricing Calculator
+- [ ] Οι ειδοποιήσεις προϋπολογισμού διαμορφώθηκαν εάν απαιτείται
+- [ ] Επιλέχθηκαν κατάλληλα SKU για τον τύπο περιβάλλοντος
+- [ ] Λήφθηκε υπόψη η δεσμευμένη χωρητικότητα για παραγωγικά φορτία
 
-#### ✅ Monitoring & Observability
-- [ ] Application Insights configured in templates
-- [ ] Log Analytics workspace planned
-- [ ] Alert rules defined for critical metrics
-- [ ] Health check endpoints implemented in applications
+#### ✅ Παρακολούθηση & Παρατηρησιμότητα
+- [ ] Το Application Insights έχει διαμορφωθεί στα πρότυπα
+- [ ] Ο χώρος εργασίας Log Analytics έχει σχεδιαστεί
+- [ ] Ορίστηκαν κανόνες ειδοποιήσεων για κρίσιμες μετρήσεις
+- [ ] Υλοποιήθηκαν endpoints ελέγχου κατάστασης στις εφαρμογές
 
-#### ✅ Backup & Recovery
-- [ ] Backup strategy defined for data resources
-- [ ] Recovery time objectives (RTO) documented
-- [ ] Recovery point objectives (RPO) documented
-- [ ] Disaster recovery plan in place for production
+#### ✅ Backup & Ανάκτηση
+- [ ] Ορίστηκε στρατηγική backup για πόρους δεδομένων
+- [ ] Τα Recovery Time Objectives (RTO) τεκμηριώθηκαν
+- [ ] Τα Recovery Point Objectives (RPO) τεκμηριώθηκαν
+- [ ] Υπάρχει σχέδιο ανάκαμψης καταστροφών για την παραγωγή
 
 ---
 
-## Environment Validation
+## Επικύρωση Περιβάλλοντος
 
-### Development Environment Validation
+### Επικύρωση Περιβάλλοντος Ανάπτυξης
 
 ```bash
 #!/bin/bash
-# Ειδικοί έλεγχοι για το περιβάλλον ανάπτυξης
+# Ελέγχοι ειδικοί για το περιβάλλον ανάπτυξης
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # Έλεγχος για ρυθμίσεις φιλικές στην ανάπτυξη
+    # Έλεγχος για ρυθμίσεις φιλικές προς την ανάπτυξη
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
@@ -883,7 +883,7 @@ validate_dev_environment() {
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # Επαλήθευση ρυθμίσεων βάσης δεδομένων ανάπτυξης
+    # Επικύρωση ρυθμίσεων βάσης δεδομένων ανάπτυξης
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -892,7 +892,7 @@ validate_dev_environment() {
 }
 ```
 
-### Production Environment Validation
+### Επικύρωση Περιβάλλοντος Παραγωγής
 
 ```bash
 #!/bin/bash
@@ -915,7 +915,7 @@ validate_prod_environment() {
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # Επαλήθευση ρυθμίσεων παρακολούθησης
+    # Επαλήθευση ρύθμισης παρακολούθησης
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
@@ -933,9 +933,9 @@ validate_prod_environment() {
 
 ---
 
-## Resource Validation
+## Επικύρωση Πόρων
 
-### Quota Validation Script
+### Σενάριο Επικύρωσης Ποσοστώσεων
 
 ```python
 #!/usr/bin/env python3
@@ -1058,20 +1058,20 @@ if __name__ == "__main__":
 
 ---
 
-## Security & Compliance Checks
+## Έλεγχοι Ασφάλειας & Συμμόρφωσης
 
-### Security Validation Script
+### Σενάριο Επικύρωσης Ασφάλειας
 
 ```bash
 #!/bin/bash
-# Επικύρωση ασφάλειας και συμμόρφωσης για αναπτύξεις AZD
+# Επαλήθευση ασφάλειας και συμμόρφωσης για αναπτύξεις AZD
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
     
     local issues_found=0
     
-    # Έλεγχος για χρήση Key Vault
+    # Έλεγχος για χρήση του Key Vault
     if grep -r "Microsoft.KeyVault" infra/ >/dev/null 2>&1; then
         echo "✅ Key Vault detected in infrastructure"
     else
@@ -1131,7 +1131,7 @@ check_compliance_requirements() {
         echo "⚠️  Encryption configurations not found - ensure data is encrypted"
     fi
     
-    # Έλεγχος για καταγραφή ελέγχων
+    # Έλεγχος για καταγραφή ελέγχου
     if grep -r "Microsoft.Insights.*auditingSettings\|diagnosticSettings" infra/ >/dev/null 2>&1; then
         echo "✅ Audit logging configurations detected"
     else
@@ -1177,9 +1177,9 @@ main "$@"
 
 ---
 
-## Integration with CI/CD
+## Ενσωμάτωση με CI/CD
 
-### GitHub Actions Integration
+### Ενσωμάτωση GitHub Actions
 
 ```yaml
 name: AZD Pre-flight Checks
@@ -1238,7 +1238,7 @@ jobs:
         path: preflight-results.json
 ```
 
-### Azure DevOps Integration
+### Ενσωμάτωση Azure DevOps
 
 ```yaml
 trigger: none
@@ -1290,48 +1290,48 @@ steps:
 
 ---
 
-## Best Practices Summary
+## Περίληψη Βέλτιστων Πρακτικών
 
-### ✅ Pre-flight Check Best Practices
+### ✅ Βέλτιστες Πρακτικές Προ-ελέγχων
 
-1. **Automate Where Possible**
-   - Integrate checks into CI/CD pipelines
-   - Use scripts for repeatable validations
-   - Store results for audit trails
+1. **Αυτοματοποιήστε όπου είναι δυνατόν**
+   - Ενσωματώστε τους ελέγχους σε pipelines CI/CD
+   - Χρησιμοποιήστε scripts για επαναλαμβανόμενους ελέγχους
+   - Αποθηκεύστε τα αποτελέσματα για αρχεία ελέγχου (audit trails)
 
-2. **Environment-Specific Validation**
-   - Different checks for dev/staging/prod
-   - Appropriate security requirements per environment
-   - Cost optimization for non-production environments
+2. **Επικύρωση ειδική για το περιβάλλον**
+   - Διάφοροι έλεγχοι για dev/staging/prod
+   - Κατάλληλες απαιτήσεις ασφάλειας ανά περιβάλλον
+   - Βελτιστοποίηση κόστους για μη-παραγωγικά περιβάλλοντα
 
-3. **Comprehensive Coverage**
-   - Authentication and permissions
-   - Resource quotas and availability
-   - Template validation and syntax
-   - Security and compliance requirements
+3. **Πλήρης Κάλυψη**
+   - Έλεγχος ταυτότητας και δικαιωμάτων
+   - Ποσοστώσεις πόρων και διαθεσιμότητα
+   - Επικύρωση προτύπων και σύνταξη
+   - Απαιτήσεις ασφάλειας και συμμόρφωσης
 
-4. **Clear Reporting**
-   - Color-coded status indicators
-   - Detailed error messages with remediation steps
-   - Summary reports for quick assessment
+4. **Σαφής Αναφορά**
+   - Δείκτες κατάστασης με χρωματική κωδικοποίηση
+   - Λεπτομερή μηνύματα σφάλματος με βήματα αποκατάστασης
+   - Συνοπτικές αναφορές για γρήγορη αξιολόγηση
 
-5. **Fail Fast**
-   - Stop deployment if critical checks fail
-   - Provide clear guidance for resolution
-   - Enable easy re-running of checks
+5. **Αποτυχία γρήγορα**
+   - Διακόψτε την ανάπτυξη εάν αποτύχουν κρίσιμοι έλεγχοι
+   - Παρέχετε σαφείς οδηγίες για επίλυση
+   - Επιτρέψτε εύκολη επανεκτέλεση των ελέγχων
 
-### Common Pre-flight Pitfalls
+### Συνήθη Σφάλματα Προ-ελέγχων
 
-1. **Skipping validation** for "quick" deployments
-2. **Insufficient permissions** checking before deployment
-3. **Ignoring quota limits** until deployment fails
-4. **Not validating templates** in CI/CD pipelines
-5. **Missing security validation** for production environments
-6. **Inadequate cost estimation** leading to budget surprises
+1. **Παράβλεψη επικύρωσης** για "γρήγορες" αναπτύξεις
+2. **Ανεπαρκείς έλεγχοι δικαιωμάτων** πριν την ανάπτυξη
+3. **Αγνόηση ορίων ποσοστώσεων** μέχρι να αποτύχει η ανάπτυξη
+4. **Μη επικύρωση προτύπων** στα pipelines CI/CD
+5. **Έλλειψη ελέγχου ασφάλειας** για παραγωγικά περιβάλλοντα
+6. **Ανεπαρκής εκτίμηση κόστους** που οδηγεί σε απρόβλεπτες υπερβάσεις προϋπολογισμού
 
 ---
 
-**Συμβουλή**: Εκτελέστε τους προ-ελέγχους ως ξεχωριστή εργασία στο CI/CD pipeline σας πριν από την πραγματική εργασία ανάπτυξης. Αυτό σας επιτρέπει να εντοπίζετε προβλήματα νωρίς και παρέχει ταχύτερη ανατροφοδότηση στους προγραμματιστές.
+**Συμβουλή**: Εκτελέστε τους προελέγχους ως ξεχωριστή εργασία στο CI/CD pipeline πριν την πραγματική εργασία ανάπτυξης. Αυτό σας επιτρέπει να εντοπίζετε προβλήματα νωρίς και να παρέχετε ταχύτερη ανατροφοδότηση στους προγραμματιστές.
 
 ---
 
@@ -1342,6 +1342,6 @@ steps:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Αποποίηση ευθυνών:
-Αυτό το έγγραφο έχει μεταφραστεί με χρήση υπηρεσίας μετάφρασης τεχνητής νοημοσύνης Co-op Translator (https://github.com/Azure/co-op-translator). Παρόλο που καταβάλλουμε προσπάθειες για την ακρίβεια, να έχετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν λάθη ή ανακρίβειες. Το πρωτότυπο έγγραφο στην αρχική του γλώσσα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται μετάφραση από επαγγελματία μεταφραστή. Δεν ευθυνόμαστε για τυχόν παρερμηνείες ή παρανοήσεις που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+**Αποποίηση ευθύνης**:
+Αυτό το έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης με τεχνητή νοημοσύνη [Co-op Translator](https://github.com/Azure/co-op-translator). Παρότι προσπαθούμε για ακρίβεια, παρακαλούμε να λάβετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στην αρχική του γλώσσα πρέπει να θεωρείται η επίσημη πηγή. Για κρίσιμες πληροφορίες συνιστάται επαγγελματική μετάφραση από ανθρώπινο μεταφραστή. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

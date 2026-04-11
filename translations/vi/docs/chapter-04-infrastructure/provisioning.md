@@ -1,47 +1,47 @@
-# Cấp phát Tài nguyên Azure với AZD
+# Provisioning Azure Resources with AZD
 
-**Điều Hướng Chương:**
-- **📚 Trang khóa học**: [AZD cho Người mới bắt đầu](../../README.md)
-- **📖 Chương Hiện tại**: Chương 4 - Hạ tầng như mã & Triển khai
-- **⬅️ Trước**: [Hướng dẫn Triển khai](deployment-guide.md)
-- **➡️ Chương Tiếp theo**: [Chương 5: Giải pháp AI Đa Tác nhân](../../examples/retail-scenario.md)
-- **🔧 Liên quan**: [Chương 6: Xác thực Trước Triển khai](../chapter-06-pre-deployment/capacity-planning.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD Dành cho Người Mới](../../README.md)
+- **📖 Current Chapter**: Chương 4 - Hạ tầng như Mã & Triển khai
+- **⬅️ Previous**: [Hướng dẫn Triển khai](deployment-guide.md)
+- **➡️ Next Chapter**: [Chương 5: Giải pháp AI đa tác nhân](../../examples/retail-scenario.md)
+- **🔧 Related**: [Chương 6: Xác thực trước Triển khai](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Giới thiệu
 
-Hướng dẫn toàn diện này bao gồm mọi thứ bạn cần biết về việc cấp phát và quản lý tài nguyên Azure bằng Azure Developer CLI. Học cách triển khai các mẫu Hạ tầng như Mã (IaC) từ việc tạo tài nguyên cơ bản đến các kiến trúc hạ tầng cấp doanh nghiệp nâng cao bằng Bicep, ARM templates, Terraform và Pulumi.
+Hướng dẫn toàn diện này bao phủ mọi thứ bạn cần biết về việc cấp phát và quản lý tài nguyên Azure bằng Azure Developer CLI. Học cách triển khai các mô hình Hạ tầng như Mã (IaC) từ việc tạo tài nguyên cơ bản đến các kiến trúc hạ tầng cấp doanh nghiệp nâng cao sử dụng Bicep, ARM templates, Terraform và Pulumi.
 
 ## Mục tiêu học tập
 
-Hoàn thành hướng dẫn này, bạn sẽ:
-- Thành thạo các nguyên tắc Hạ tầng như Mã và cấp phát tài nguyên Azure
+Khi hoàn thành hướng dẫn này, bạn sẽ:
+- Thông thạo các nguyên tắc Hạ tầng như Mã và cấp phát tài nguyên Azure
 - Hiểu các nhà cung cấp IaC khác nhau được Azure Developer CLI hỗ trợ
-- Thiết kế và triển khai các mẫu Bicep cho các kiến trúc ứng dụng phổ biến
-- Cấu hình tham số tài nguyên, biến và các cài đặt theo môi trường
-- Thực hiện các mô hình hạ tầng nâng cao bao gồm mạng và bảo mật
+- Thiết kế và triển khai mẫu Bicep cho các kiến trúc ứng dụng phổ biến
+- Cấu hình tham số tài nguyên, biến và các thiết lập theo môi trường
+- Triển khai các mẫu hạ tầng nâng cao bao gồm mạng và bảo mật
 - Quản lý vòng đời tài nguyên, cập nhật và giải quyết phụ thuộc
 
 ## Kết quả học tập
 
-Sau khi hoàn thành, bạn sẽ có thể:
+Khi hoàn thành, bạn sẽ có khả năng:
 - Thiết kế và cấp phát hạ tầng Azure bằng Bicep và ARM templates
-- Cấu hình kiến trúc nhiều dịch vụ phức tạp với phụ thuộc tài nguyên phù hợp
-- Triển khai các mẫu có tham số hóa cho nhiều môi trường và cấu hình
-- Khắc phục sự cố cấp phát hạ tầng và giải quyết lỗi triển khai
+- Cấu hình kiến trúc đa dịch vụ phức tạp với phụ thuộc tài nguyên phù hợp
+- Triển khai các mẫu có tham số cho nhiều môi trường và cấu hình
+- Gỡ rối các vấn đề cấp phát hạ tầng và khắc phục thất bại khi triển khai
 - Áp dụng các nguyên tắc của Azure Well-Architected Framework vào thiết kế hạ tầng
-- Quản lý cập nhật hạ tầng và triển khai chiến lược phiên bản hạ tầng
+- Quản lý cập nhật hạ tầng và triển khai các chiến lược version hóa hạ tầng
 
-## Tổng quan về Cấp phát Hạ tầng
+## Tổng quan Cấp phát Hạ tầng
 
 Azure Developer CLI hỗ trợ nhiều nhà cung cấp Hạ tầng như Mã (IaC):
-- **Bicep** (được khuyến nghị) - ngôn ngữ đặc thù miền của Azure
-- **ARM Templates** - mẫu Azure Resource Manager định dạng JSON
-- **Terraform** - công cụ hạ tầng đa đám mây
-- **Pulumi** - hạ tầng dưới dạng mã hiện đại với ngôn ngữ lập trình
+- **Bicep** (khuyến nghị) - Ngôn ngữ chuyên biệt theo miền của Azure
+- **ARM Templates** - Mẫu Azure Resource Manager dạng JSON
+- **Terraform** - Công cụ hạ tầng đa đám mây
+- **Pulumi** - Hạ tầng như mã hiện đại với ngôn ngữ lập trình
 
 ## Hiểu về Tài nguyên Azure
 
-### Cấu trúc phân cấp Tài nguyên
+### Cấu trúc phân cấp tài nguyên
 ```
 Azure Account
 └── Subscriptions
@@ -49,7 +49,7 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Các Dịch vụ Azure Thông dụng cho Ứng dụng
+### Các dịch vụ Azure phổ biến cho ứng dụng
 - **Tính toán**: App Service, Container Apps, Functions, Virtual Machines
 - **Lưu trữ**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **Mạng**: Virtual Network, Application Gateway, CDN
@@ -128,9 +128,9 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Mô hình Bicep Nâng cao
+### Các Mô hình Bicep Nâng cao
 
-#### Hạ tầng theo mô-đun
+#### Hạ tầng Mô-đun
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -200,7 +200,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Cấp phát Cơ sở Dữ liệu
+## 🗃️ Cấp phát Cơ sở dữ liệu
 
 ### Cosmos DB
 ```bicep
@@ -496,7 +496,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Giám sát và Khả năng Quan sát
+## 📊 Giám sát và Khả năng quan sát
 
 ### Application Insights
 ```bicep
@@ -527,7 +527,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### Metric và Cảnh báo Tùy chỉnh
+### Số liệu tùy chỉnh và Cảnh báo
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -561,9 +561,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Cấu hình Riêng cho Môi trường
+## 🔧 Cấu hình theo Môi trường
 
-### Tệp Tham số cho các Môi trường Khác nhau
+### Tệp tham số cho các Môi trường khác nhau
 ```json
 // infra/main.parameters.dev.json
 {
@@ -649,9 +649,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Mô hình Cấp phát Nâng cao
+## 🚀 Các Mẫu Cấp phát Nâng cao
 
-### Triển khai Đa vùng
+### Triển khai đa vùng
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -755,42 +755,41 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 Xem trước & Xác thực Hạ tầng (MỚI)
+## 🧪 Xem trước & Xác thực Hạ tầng (NEW)
 
-### Xem trước Thay đổi Hạ tầng Trước khi Triển khai
+### Xem trước thay đổi Hạ tầng trước khi Triển khai
 
-Tính năng `azd provision --preview` cho phép bạn **mô phỏng việc cấp phát hạ tầng** trước khi thực sự triển khai các tài nguyên. Nó tương tự về tinh thần với `terraform plan` hoặc `bicep what-if`, cung cấp cho bạn một **chế độ chạy thử (dry-run)** về những thay đổi sẽ được thực hiện trên môi trường Azure của bạn.
+Lệnh `azd provision --preview` cho phép bạn **mô phỏng việc cấp phát hạ tầng** trước khi thực sự triển khai tài nguyên. Nó tương tự về tinh thần với `terraform plan` hoặc `bicep what-if`, cung cấp cho bạn một **chế độ chạy giả (dry-run)** về những thay đổi sẽ được thực hiện đối với môi trường Azure của bạn.
 
 #### 🛠️ Nó làm gì
 - **Phân tích các mẫu IaC của bạn** (Bicep hoặc Terraform)
-- **Hiển thị xem trước các thay đổi tài nguyên**: thêm, xóa, cập nhật
-- **Không áp dụng thay đổi** — chỉ đọc và an toàn khi chạy
+- **Hiển thị bản xem trước các thay đổi tài nguyên**: thêm, xóa, cập nhật
+- **Không áp dụng thay đổi** — chỉ đọc và an toàn để chạy
 
-#### � Các trường hợp sử dụng
+#### Trường hợp sử dụng
 ```bash
 # Xem trước các thay đổi hạ tầng trước khi triển khai
 azd provision --preview
 
-# Xem trước với đầu ra chi tiết
-azd provision --preview --output json
-
 # Xem trước cho môi trường cụ thể
-azd provision --preview --environment production
+azd provision --preview -e production
 ```
 
 Lệnh này giúp bạn:
-- **Xác thực các thay đổi hạ tầng** trước khi cấp phát tài nguyên
+- **Xác thực các thay đổi hạ tầng** trước khi áp dụng tài nguyên
 - **Phát hiện cấu hình sai sớm** trong chu trình phát triển
 - **Cộng tác an toàn** trong môi trường nhóm
-- **Đảm bảo triển khai theo nguyên tắc ít quyền nhất** mà không bất ngờ
+- **Đảm bảo triển khai theo nguyên tắc quyền tối thiểu** mà không bị bất ngờ
 
 Nó đặc biệt hữu ích khi:
-- Làm việc với môi trường phức tạp nhiều dịch vụ
-- Thực hiện thay đổi trên hạ tầng sản xuất
+- Làm việc với các môi trường đa dịch vụ phức tạp
+- Thay đổi hạ tầng sản xuất
 - Xác thực các sửa đổi mẫu trước khi phê duyệt PR
-- Đào tạo thành viên mới trong nhóm về các mẫu hạ tầng
+- Đào tạo thành viên mới trong đội về các mẫu hạ tầng
 
 ### Ví dụ Kết quả Xem trước
+Kết quả xem trước chính xác thay đổi tùy theo nhà cung cấp và cấu trúc dự án, nhưng kết quả nên xác định rõ các thay đổi đề xuất trước khi bất cứ điều gì được áp dụng.
+
 ```bash
 $ azd provision --preview
 
@@ -809,7 +808,6 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
@@ -819,18 +817,18 @@ The following resources will be destroyed:
 
 ### Cập nhật Tài nguyên An toàn
 ```bash
-# Trước tiên hãy xem trước các thay đổi cơ sở hạ tầng (ĐƯỢC KHUYẾN NGHỊ)
+# Xem trước các thay đổi hạ tầng trước (ĐƯỢC KHUYẾN NGHỊ)
 azd provision --preview
 
 # Áp dụng các thay đổi sau khi xác nhận bản xem trước
 azd provision --confirm-with-no-prompt
 
-# Để khôi phục trạng thái trước, sử dụng Git để hoàn nguyên các thay đổi cơ sở hạ tầng:
-git revert HEAD  # Hoàn nguyên commit cơ sở hạ tầng cuối cùng
-azd provision    # Áp dụng trạng thái cơ sở hạ tầng trước đó
+# Để quay lại (rollback), sử dụng Git để hoàn tác các thay đổi hạ tầng:
+git revert HEAD  # Hoàn tác commit hạ tầng cuối cùng
+azd provision    # Áp dụng trạng thái hạ tầng trước đó
 ```
 
-### Di cư Cơ sở Dữ liệu
+### Di cư Cơ sở dữ liệu
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -861,7 +859,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🎯 Thực hành tốt nhất
 
-### 1. Quy ước đặt tên Tài nguyên
+### 1. Quy tắc đặt tên Tài nguyên
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -901,7 +899,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Tổ chức Đầu ra
+### 4. Tổ chức đầu ra
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -918,27 +916,27 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Bước tiếp theo
 
-- [Lập kế hoạch Trước Triển khai](../chapter-06-pre-deployment/capacity-planning.md) - Xác thực khả năng sẵn có của tài nguyên
-- [Các Vấn đề Thường gặp](../chapter-07-troubleshooting/common-issues.md) - Khắc phục sự cố hạ tầng
+- [Lập kế hoạch trước triển khai](../chapter-06-pre-deployment/capacity-planning.md) - Xác thực tính khả dụng của tài nguyên
+- [Sự cố phổ biến](../chapter-07-troubleshooting/common-issues.md) - Khắc phục các vấn đề hạ tầng
 - [Hướng dẫn Gỡ lỗi](../chapter-07-troubleshooting/debugging.md) - Gỡ lỗi các vấn đề cấp phát
 - [Lựa chọn SKU](../chapter-06-pre-deployment/sku-selection.md) - Chọn hạng dịch vụ phù hợp
 
 ## Tài nguyên bổ sung
 
 - [Tài liệu Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Mẫu Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [Trung tâm Kiến trúc Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Khuôn khổ Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Khung Well-Architected của Azure](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
-**Điều hướng**
-- **Bài Học Trước**: [Hướng dẫn Triển khai](deployment-guide.md)
-- **Bài Học Tiếp theo**: [Lập Kế hoạch Công suất](../chapter-06-pre-deployment/capacity-planning.md)
+**Navigation**
+- **Bài trước**: [Hướng dẫn Triển khai](deployment-guide.md)
+- **Bài tiếp theo**: [Lập kế hoạch công suất](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Miễn trừ trách nhiệm:
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ ban đầu nên được coi là nguồn chính thức. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm đối với bất kỳ hiểu sai hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+**Miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ ban đầu nên được coi là nguồn có thẩm quyền. Đối với thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm cho bất kỳ hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

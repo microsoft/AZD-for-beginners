@@ -1,30 +1,30 @@
 # 5. تخصيص قالب
 
-!!! tip "بنهاية هذه الوحدة ستكون قادرًا على"
+!!! tip "بحلول نهاية هذه الوحدة ستكون قادرًا على"
 
     - [ ] استكشاف قدرات وكلاء الذكاء الاصطناعي الافتراضية
-    - [ ] إضافة بحث الذكاء الاصطناعي باستخدام الفهرس الخاص بك
+    - [ ] إضافة AI Search مع الفهرس الخاص بك
     - [ ] تفعيل وتحليل مقاييس التتبع
     - [ ] تنفيذ تشغيل تقييم
-    - [ ] تنفيذ فحص الفريق الأحمر
+    - [ ] إجراء مسح red-teaming
     - [ ] **المختبر 5: وضع خطة تخصيص** 
 
 ---
 
 ## 5.1 قدرات وكلاء الذكاء الاصطناعي
 
-!!! success "أكملنا هذا في المختبر 01"
+!!! success "لقد أكملنا هذا في المختبر 01"
 
-- **بحث في الملفات**: OpenAI's built-in file search for knowledge retrieval
-- **الاستشهادات**: نسب المصادر تلقائيًا في الردود
+- **بحث الملفات**: OpenAI's built-in file search for knowledge retrieval
+- **الاستشهادات**: إسناد المصادر تلقائيًا في الردود
 - **تعليمات قابلة للتخصيص**: تعديل سلوك الوكيل وشخصيته
-- **تكامل الأدوات**: نظام أدوات قابل للتوسيع لإضافة قدرات مخصصة
+- **تكامل الأدوات**: نظام أدوات قابل للتمديد لإمكانيات مخصصة
 
 ---
 
 ## 5.2 خيارات استرجاع المعرفة
 
-!!! task "لإكمال هذا نحتاج إلى إجراء تغييرات وإعادة النشر"    
+!!! task "لإكمال ذلك نحتاج إلى إجراء تغييرات وإعادة النشر"    
     
     ```bash title=""
     # Set environment variables
@@ -40,16 +40,16 @@
 
 ---
 
-**OpenAI File Search (Default):**
+**OpenAI File Search (الافتراضي):**
 
-- مدمج في وكلاء Foundry
-- معالجة المستندات والفهرسة تلقائيًا
-- لا حاجة لتكوين إضافي
+- Built-in to Foundry Agents
+- Automatic document processing and indexing
+- No additional configuration required
 
-**Azure AI Search (Optional):**
+**Azure AI Search (اختياري):**
 
-- بحث هجين دلالي ومتجه
-- إدارة فهرس مخصص
+- بحث هجيني دلالي ومتجه
+- إدارة فهرس مخصصة
 - قدرات بحث متقدمة
 - يتطلب `USE_AZURE_AI_SEARCH_SERVICE=true`
 
@@ -57,75 +57,75 @@
 
 ## 5.3 [التتبع والمراقبة](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "لإكمال هذا نحتاج إلى إجراء تغييرات وإعادة النشر"    
+!!! task "لإكمال ذلك نحتاج إلى إجراء تغييرات وإعادة النشر"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
     azd deploy
     ```
 
-التتبع:
+**التتبع:**
 
 - تكامل OpenTelemetry
 - تتبع الطلب/الاستجابة
 - مقاييس الأداء
 - متاح في بوابة Microsoft Foundry
 
-التسجيل:
+**التسجيل:**
 
 - سجلات التطبيق في Container Apps
-- تسجيل منظم مع معرفات الارتباط
-- عرض السجلات في الوقت الحقيقي والتاريخي
+- تسجيل منظم مع معرّفات الترابط
+- عرض السجلات في الوقت الفعلي والتاريخية
 
 ---
 
 ## 5.4 [تقييم الوكيل](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
-التقييم المحلي:
+**التقييم المحلي:**
 
-- مقَيّمات مدمجة لتقييم الجودة
+- مقيّمات مدمجة لتقييم الجودة
 - نصوص تقييم مخصصة
-- قياس أداء
+- مقارنة معيارية للأداء
 
-المراقبة المستمرة:
+**المراقبة المستمرة:**
 
 - تقييم تلقائي للتفاعلات الحية
 - تتبع مقاييس الجودة
-- كشف تراجعات الأداء
+- اكتشاف تدهور الأداء
 
-تكامل CI/CD:
+**تكامل CI/CD:**
 
 - سير عمل GitHub Actions
 - اختبار وتقييم آلي
-- اختبار المقارنة الإحصائية
+- اختبارات المقارنة الإحصائية
 
 ---
 
-## 5.5 [وكيل الفريق الأحمر للذكاء الاصطناعي](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [وكيل Red Teaming للذكاء الاصطناعي](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-اختبار الفريق الأحمر للذكاء الاصطناعي:
+**Red Teaming للذكاء الاصطناعي:**
 
-- مسح أمني آلي
+- فحص أمني آلي
 - تقييم المخاطر لأنظمة الذكاء الاصطناعي
 - تقييم السلامة عبر فئات متعددة
 
-المصادقة:
+**المصادقة:**
 
 - Managed Identity لخدمات Azure
-- مصادقة Azure App Service اختيارية
+- مصادقة اختيارية لـ Azure App Service
 - الرجوع إلى المصادقة الأساسية أثناء التطوير
 
 
 
-!!! quote "بنهاية هذا المختبر يجب أن تكون قد"
+!!! quote "بحلول نهاية هذا المختبر يجب أن يكون لديك"
     - [ ] حدد متطلبات السيناريو الخاص بك
-    - [ ] تخصيص متغيرات البيئة (التكوين)
-    - [ ] تخصيص تعليمات الوكيل (المهمة)
-    - [ ] نشر القالب المخصص (التطبيق)
+    - [ ] تخصيص متغيرات البيئة (config)
+    - [ ] تخصيص تعليمات الوكيل (task)
+    - [ ] نشر القالب المخصص (app)
     - [ ] إكمال مهام ما بعد النشر (يدوي)
     - [ ] تشغيل تقييم تجريبي
 
-يوضح هذا المثال تخصيص القالب لحالة استخدام مؤسسية في مجال البيع بالتجزئة مع وكيلين متخصصين ونشر عدة نماذج.
+يوضح هذا المثال كيفية تخصيص القالب لحالة استخدام في تجارة التجزئة للمؤسسات مع وكيلين متخصصين ونشر نماذج متعددة.
 
 ---
 
@@ -135,8 +135,8 @@
 
 #### **نشر الوكلاء:** 
 
-   - Shopper Agent: يساعد العملاء في العثور على المنتجات ومقارنتها
-   - Loyalty Agent: يدير مكافآت وعروض العملاء
+   - وكيل المتسوق: يساعد العملاء في العثور على المنتجات ومقارنتها
+   - وكيل الولاء: يدير مكافآت العملاء والعروض الترويجية
 
 #### **نشر النماذج:**
 
@@ -150,7 +150,7 @@
    - تم تمكين التتبع والمراقبة
    - AI Search لفهرس المنتجات
    - إطار تقييم لضمان الجودة
-   - اختبار الفريق الأحمر من أجل التحقق الأمني
+   - Red teaming للتحقق من الأمان
 
 ---
 
@@ -175,13 +175,13 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# تكوين نموذج المحادثة الأساسي (gpt-4.1 كالأقرب المتاح إلى gpt-4.1)
+# تكوين نموذج الدردشة الأساسي (gpt-4.1 كالأقرب المتاح إلى gpt-4.1)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# تكوين نموذج التضمين لتحسين البحث
+# تكوين نموذج التضمين لتحسين نتائج البحث
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
@@ -198,7 +198,7 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2: تعليمات الوكلاء
+#### 5.6.2.2: تعليمات الوكيل
 
 Create `custom-agents/shopper-agent-instructions.md`:
 
@@ -300,7 +300,7 @@ echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
 # الحصول على عنوان URL لتطبيق الويب
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -337,7 +337,7 @@ AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | t
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# تعليمات للتكوين اليدوي
+# إرشادات للتكوين اليدوي
 echo "
 🤖 Agent Configuration:
 
@@ -392,7 +392,7 @@ echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
 # اختبار توفر تطبيق الويب
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -405,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# شغّل التقييم إذا تم تكوينه
+# تشغيل التقييم إذا تم تكوينه
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -436,35 +436,35 @@ Next steps:
 1. **البنية التحتية المنشورة:**
 
       - مشروع Microsoft Foundry مع نشر النماذج
-      - Container Apps تستضيف تطبيق الويب
+      - استضافة تطبيق الويب على Container Apps
       - خدمة AI Search لفهرس المنتجات
       - Application Insights للمراقبة
 
 2. **الوكيل الأولي:**
 
-      - Shopper Agent مُكوّن بتعليمات أساسية
-      - تم تمكين قدرة البحث في الملفات
+      - تم تكوين وكيل المتسوق بتعليمات أساسية
+      - تم تمكين قدرة بحث الملفات
       - تم تكوين التتبع والمراقبة
 
 3. **جاهز للتخصيص:**
 
-      - إطار لإضافة Loyalty Agent
+      - إطار عمل لإضافة وكيل الولاء
       - قوالب تعليمات مخصصة
-      - سكربتات الاختبار والتحقق
+      - نصوص الاختبار والتحقق
       - إعداد المراقبة والتقييم
 
-4. **الجاهزية للإنتاج:**
+4. **جاهزية للإنتاج:**
 
-      - فحص أمني باستخدام فريق الاختبار الأحمر
+      - فحص أمني باستخدام red teaming
       - مراقبة الأداء
       - إطار تقييم الجودة
-      - بنية قابلة للتوسع
+      - معمارية قابلة للتوسع
 
 يوضح هذا المثال كيف يمكن توسيع قالب AZD وتخصيصه لسيناريوهات مؤسسية محددة مع الحفاظ على أفضل الممارسات للأمان والمراقبة وقابلية التوسع.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-إخلاء المسؤولية:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية Co-op Translator (https://github.com/Azure/co-op-translator). بينما نسعى إلى الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المعتمد. للمعلومات الحرجة، يُنصح بالاستعانة بترجمة بشرية محترفة. لا نتحمل أي مسؤولية عن أي سوء فهم أو تأويل ينشأ عن استخدام هذه الترجمة.
+**إخلاء المسؤولية**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى إلى الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المعتمد. بالنسبة للمعلومات الحرجة، يُنصح بالاستعانة بترجمة احترافية بشرية. لن نكون مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

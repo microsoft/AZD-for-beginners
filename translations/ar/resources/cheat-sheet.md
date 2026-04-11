@@ -1,46 +1,46 @@
-# ورقة غش للأوامر - أوامر AZD الأساسية
+# ورقة الغش للأوامر - أوامر AZD الأساسية
 
 **مرجع سريع لجميع الفصول**
-- **📚 Course Home**: [AZD للمبتدئين](../README.md)
-- **📖 Quick Start**: [الفصل 1: الأساس والبدء السريع](../README.md#-chapter-1-foundation--quick-start)
-- **🤖 AI Commands**: [الفصل 2: تطوير يركز على الذكاء الاصطناعي (موصى به لمطوري الذكاء الاصطناعي)](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
-- **🔧 Advanced**: [الفصل 4: البنية التحتية ككود](../README.md#️-chapter-4-infrastructure-as-code--deployment)
+- **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../README.md)
+- **📖 بداية سريعة**: [الفصل 1: الأساس والبداية السريعة](../README.md#-chapter-1-foundation--quick-start)
+- **🤖 أوامر الذكاء الاصطناعي**: [الفصل 2: التطوير الموجه بالذكاء الاصطناعي](../README.md#-chapter-2-ai-first-development-recommended-for-ai-developers)
+- **🔧 متقدم**: [الفصل 4: البنية التحتية ككود](../README.md#️-chapter-4-infrastructure-as-code--deployment)
 
 ## المقدمة
 
-تقدم ورقة الغش هذه مرجعًا سريعًا لأوامر Azure Developer CLI الأكثر استخدامًا، منظمة حسب الفئات مع أمثلة عملية. مثالية للبحث السريع أثناء التطوير، واستكشاف الأخطاء وإصلاحها، والعمليات اليومية مع مشاريع azd.
+توفر ورقة الغش الشاملة هذه مرجعًا سريعًا لأكثر أوامر Azure Developer CLI استخدامًا، منظمة حسب الفئة مع أمثلة عملية. مثالية للبحث السريع أثناء التطوير، واستكشاف الأخطاء وإصلاحها، والعمليات اليومية مع مشاريع azd.
 
 ## أهداف التعلم
 
-باستخدام ورقة الغش هذه، سوف:
-- تحصل على وصول فوري إلى أوامر azd الأساسية وبناء الجملة
-- تفهم تنظيم الأوامر حسب الفئات الوظيفية وحالات الاستخدام
-- ترجع إلى أمثلة عملية لسيناريوهات التطوير والنشر الشائعة
-- تصل إلى أوامر استكشاف الأخطاء وإصلاحها لحل المشكلات بسرعة
-- تجد خيارات التكوين والتخصيص المتقدمة بكفاءة
-- تحدد أوامر إدارة البيئة وسير العمل متعدد البيئات
+باستخدام ورقة الغش هذه، ستتمكن من:
+- الوصول الفوري إلى أوامر Azure Developer CLI الأساسية وتركيبها
+- فهم تنظيم الأوامر حسب الفئات الوظيفية وحالات الاستخدام
+- الرجوع إلى أمثلة عملية لسيناريوهات التطوير والنشر الشائعة
+- الوصول إلى أوامر استكشاف الأخطاء لإيجاد حلول سريعة للمشكلات
+- العثور على خيارات التكوين والتخصيص المتقدمة بكفاءة
+- تحديد أوامر إدارة البيئات وتدفقات العمل متعددة البيئات
 
-## نتائج التعلم
+## مخرجات التعلم
 
-من خلال الرجوع المنتظم إلى ورقة الغش هذه، ستكون قادرًا على:
-- تنفيذ أوامر azd بثقة دون الحاجة إلى الرجوع إلى الوثائق الكاملة
+بالرجوع المنتظم إلى ورقة الغش هذه، ستتمكن من:
+- تنفيذ أوامر azd بثقة دون الحاجة للرجوع إلى الوثائق الكاملة
 - حل المشكلات الشائعة بسرعة باستخدام أوامر التشخيص المناسبة
-- إدارة بيئات ونماذج نشر متعددة بكفاءة
+- إدارة عدة بيئات وسيناريوهات نشر بكفاءة
 - تطبيق ميزات azd المتقدمة وخيارات التكوين حسب الحاجة
-- استكشاف مشكلات النشر باستخدام تسلسلات أوامر منهجية
-- تحسين سير العمل من خلال الاستخدام الفعال لاختصارات وخيارات azd
+- استكشاف مشكلات النشر باستخدام تسلسل أوامر منظم
+- تحسين سير العمل من خلال الاستخدام الفعال لاختصارات azd والخيارات
 
-## أوامر البدء
+## أوامر بدء الاستخدام
 
 ### المصادقة
 ```bash
 # تسجيل الدخول إلى Azure عبر AZD
 azd auth login
 
-# تسجيل الدخول إلى Azure CLI (يستخدم AZD هذا ضمنيًا)
+# تسجيل الدخول إلى Azure CLI (تستخدم AZD هذا في الخلفية)
 az login
 
-# تحقق من الحساب الحالي
+# التحقق من الحساب الحالي
 az account show
 
 # تعيين الاشتراك الافتراضي
@@ -59,14 +59,14 @@ az logout
 # تصفح القوالب المتاحة
 azd template list
 
-# التهيئة من قالب
+# تهيئة من قالب
 azd init --template todo-nodejs-mongo
 azd init --template <template-name>
 
-# التهيئة في الدليل الحالي
+# تهيئة في الدليل الحالي
 azd init .
 
-# التهيئة باسم مخصص
+# تهيئة باسم مخصص
 azd init --template todo-nodejs-mongo my-awesome-app
 ```
 
@@ -74,7 +74,7 @@ azd init --template todo-nodejs-mongo my-awesome-app
 
 ### سير عمل النشر الكامل
 ```bash
-# نشر كل شيء (التهيئة + النشر)
+# نشر كل شيء (تهيئة + نشر)
 azd up
 
 # نشر مع تعطيل مطالبات التأكيد
@@ -83,7 +83,7 @@ azd up --confirm-with-no-prompt
 # نشر إلى بيئة محددة
 azd up --environment production
 
-# نشر باستخدام معلمات مخصصة
+# نشر بمعلمات مخصصة
 azd up --parameter location=westus2
 ```
 
@@ -94,8 +94,8 @@ azd provision
 
 # 🧪 معاينة تغييرات البنية التحتية
 azd provision --preview
-# يعرض معاينة (تشغيل تجريبي) لما سيتم إنشاؤه/تعديله/حذفه من الموارد
-# مماثل لـ 'terraform plan' أو 'bicep what-if' - آمن للتشغيل، لن يتم تطبيق أي تغييرات
+# يعرض معاينة تجريبية لما سيتم إنشاؤه/تعديله/حذفه من الموارد
+# مماثل لأمر 'terraform plan' أو 'bicep what-if' - آمن للتشغيل، لن يتم تطبيق أي تغييرات
 ```
 
 ### التطبيق فقط
@@ -120,7 +120,7 @@ azd package
 azd package --service api
 ```
 
-## 🌍 إدارة البيئات
+## 🌍 إدارة البيئة
 
 ### عمليات البيئة
 ```bash
@@ -134,8 +134,8 @@ azd env new staging --location westus2
 # اختر البيئة
 azd env select production
 
-# عرض البيئة الحالية
-azd env show
+# عرض البيئات المتاحة
+azd env list
 
 # تحديث حالة البيئة
 azd env refresh
@@ -157,12 +157,12 @@ azd env get-values
 azd env unset DEBUG
 ```
 
-## ⚙️ أوامر التهيئة
+## ⚙️ أوامر التكوين
 
-### التهيئة العامة
+### التكوين العام
 ```bash
-# عرض جميع الإعدادات
-azd config list
+# قائمة جميع التكوينات
+azd config show
 
 # تعيين الإعدادات الافتراضية العامة
 azd config set defaults.location eastus2
@@ -171,13 +171,13 @@ azd config set defaults.subscription "sub-id"
 # إزالة التكوين
 azd config unset defaults.location
 
-# إعادة تعيين جميع الإعدادات
+# إعادة تعيين جميع التكوينات
 azd config reset
 ```
 
-### تهيئة المشروع
+### تكوين المشروع
 ```bash
-# التحقق من صحة ملف azure.yaml
+# التحقق من ملف azure.yaml
 azd config validate
 
 # عرض معلومات المشروع
@@ -191,7 +191,7 @@ azd show --output json
 
 ### لوحة المراقبة
 ```bash
-# افتح لوحة المراقبة في بوابة Azure
+# افتح لوحة معلومات المراقبة في بوابة Azure
 azd monitor
 
 # افتح المقاييس الحية في Application Insights
@@ -221,7 +221,7 @@ azd monitor --logs
 # الوصول إلى تحليلات السجلات عبر بوابة Azure
 azd monitor --logs
 
-# استعلام السجلات باستخدام Azure CLI
+# الاستعلام عن السجلات باستخدام Azure CLI
 az monitor log-analytics query \
   --workspace <workspace-id> \
   --analytics-query "AppTraces | where TimeGenerated > ago(1h)"
@@ -234,10 +234,10 @@ az monitor log-analytics query \
 # إزالة جميع موارد Azure
 azd down
 
-# الحذف القسري دون تأكيد
+# حذف قسري دون تأكيد
 azd down --force
 
-# إزالة نهائية للموارد المحذوفة مؤقتًا
+# حذف نهائي للموارد المحذوفة مؤقتًا
 azd down --purge
 
 # تنظيف كامل
@@ -246,21 +246,21 @@ azd down --force --purge
 
 ### التحديثات
 ```bash
-# التحقق من تحديثات azd
+# التحقق من وجود تحديثات azd
 azd version
 
 # الحصول على الإصدار الحالي
 azd version
 
 # عرض التكوين الحالي
-azd config list
+azd config show
 ```
 
 ## 🔧 أوامر متقدمة
 
 ### خطوط الأنابيب وCI/CD
 ```bash
-# تكوين إجراءات GitHub
+# تكوين GitHub Actions
 azd pipeline config
 
 # تكوين Azure DevOps
@@ -272,57 +272,57 @@ azd pipeline show
 
 ### إدارة البنية التحتية
 ```bash
-# إنشاء قوالب البنية التحتية
+# توليد قوالب البنية التحتية
 azd infra generate
 
 # 🧪 معاينة وتخطيط البنية التحتية
 azd provision --preview
-# يحاكي توفير البنية التحتية دون النشر
-# يحلل قوالب Bicep/Terraform ويعرض:
-# - الموارد التي ستُضاف (أخضر +)
-# - الموارد التي ستُعدل (أصفر ~)
-# - الموارد التي ستُحذف (أحمر -)
-# آمن للتشغيل - لا تُجرى تغييرات فعلية على بيئة Azure
+# يحاكي توفير البنية التحتية دون نشرها
+# يقوم بتحليل قوالب Bicep/Terraform ويعرض:
+# - الموارد التي ستُضاف (باللون الأخضر +)
+# - الموارد التي سيتم تعديلها (باللون الأصفر ~)
+# - الموارد التي سيتم حذفها (باللون الأحمر -)
+# آمن للتشغيل - لا تُجرى أي تغييرات فعلية على بيئة Azure
 
-# توليف البنية التحتية من azure.yaml
+# توليد البنية التحتية من azure.yaml
 azd infra synth
 ```
 
 ### معلومات المشروع
 ```bash
-# إظهار حالة المشروع ونقاط النهاية
+# عرض حالة المشروع ونقاط النهاية
 azd show
 
-# إظهار معلومات المشروع التفصيلية بصيغة JSON
+# عرض معلومات المشروع التفصيلية بصيغة JSON
 azd show --output json
 
-# الحصول على نقاط النهاية للخدمة
+# الحصول على نقاط نهاية الخدمة
 azd show --output json | jq '.services'
 ```
 
 ## 🤖 أوامر الذكاء الاصطناعي والملحقات
 
-### امتدادات AZD
+### ملحقات AZD
 ```bash
-# سرد جميع الإضافات المتاحة (بما في ذلك الذكاء الاصطناعي)
+# اعرض جميع الإضافات المتاحة (بما في ذلك الذكاء الاصطناعي)
 azd extension list
 
-# تثبيت إضافة وكلاء Foundry
+# ثبت امتداد وكلاء Foundry
 azd extension install azure.ai.agents
 
-# تثبيت إضافة الضبط الدقيق
+# ثبت امتداد الضبط الدقيق
 azd extension install azure.ai.finetune
 
-# تثبيت إضافة النماذج المخصصة
+# ثبت امتداد النماذج المخصصة
 azd extension install azure.ai.models
 
-# ترقية جميع الإضافات المثبتة
+# قم بترقية جميع الإضافات المثبتة
 azd extension upgrade --all
 ```
 
 ### أوامر وكلاء الذكاء الاصطناعي
 ```bash
-# تهيئة مشروع وكيل من ملف البيان
+# تهيئة مشروع وكيل من ملف المانيفست
 azd ai agent init -m <manifest-path-or-uri>
 
 # استهداف مشروع Foundry محدد
@@ -337,16 +337,16 @@ azd ai agent init -m agent-manifest.yaml --host containerapp
 
 ### خادم MCP (ألفا)
 ```bash
-# قم بتشغيل خادم MCP لمشروعك
+# ابدأ خادم MCP لمشروعك
 azd mcp start
 
-# قم بإدارة موافقة الأداة لعمليات MCP
-azd mcp consent
+# إدارة موافقة الأداة لعمليات MCP
+azd copilot consent list
 ```
 
 ### توليد البنية التحتية
 ```bash
-# توليد ملفات البنية التحتية ككود من تعريف مشروعك
+# إنشاء ملفات البنية التحتية كرمز من تعريف مشروعك
 azd infra generate
 
 # توليد البنية التحتية من azure.yaml
@@ -355,7 +355,7 @@ azd infra synth
 
 ---
 
-## 🎯 تدفقات العمل السريعة
+## 🎯 مسارات عمل سريعة
 
 ### سير عمل التطوير
 ```bash
@@ -367,7 +367,7 @@ cd my-project
 azd env new dev
 azd up
 
-# قم بإجراء تغييرات وأعد النشر
+# أجرِ التغييرات وأعد النشر
 azd deploy
 
 # افتح لوحة المراقبة
@@ -381,20 +381,20 @@ azd env new dev
 azd env new staging  
 azd env new production
 
-# نشر إلى بيئة التطوير
+# النشر إلى بيئة التطوير
 azd env select dev
 azd up
 
-# اختبار والترقية إلى بيئة المعاينة
+# الاختبار والترقية إلى بيئة المعاينة
 azd env select staging
 azd up
 
-# نشر إلى بيئة الإنتاج
+# النشر إلى الإنتاج
 azd env select production
 azd up
 ```
 
-### سير عمل استكشاف الأخطاء
+### سير عمل استكشاف الأخطاء وإصلاحها
 ```bash
 # تمكين وضع التصحيح
 export AZD_DEBUG=true
@@ -402,29 +402,29 @@ export AZD_DEBUG=true
 # التحقق من حالة النشر
 azd show
 
-# التحقق من التكوين
-azd config list
+# التحقق من صحة التكوين
+azd config show
 
-# فتح لوحة المراقبة للسجلات
+# افتح لوحة المراقبة لعرض السجلات
 azd monitor --logs
 
 # التحقق من حالة الموارد
 azd show --output json
 ```
 
-## 🔍 أوامر تصحيح الأخطاء
+## 🔍 أوامر التصحيح
 
 ### معلومات التصحيح
 ```bash
-# تفعيل مخرجات التصحيح
+# تمكين إخراج التصحيح
 export AZD_DEBUG=true
 azd <command> --debug
 
-# تعطيل جمع القياسات عن بعد للحصول على مخرجات أنظف
+# تعطيل القياس عن بُعد للحصول على مخرجات أنظف
 export AZD_DISABLE_TELEMETRY=true
 
 # التحقق من التكوين الحالي
-azd config list
+azd config show
 
 # التحقق من حالة المصادقة
 az account show
@@ -432,7 +432,7 @@ az account show
 
 ### تصحيح القوالب
 ```bash
-# عرض القوالب المتاحة مع التفاصيل
+# قائمة القوالب المتاحة مع التفاصيل
 azd template list --output json
 
 # عرض معلومات القالب
@@ -442,13 +442,13 @@ azd template show <template-name>
 azd template validate <template-name>
 ```
 
-## 📁 أوامر الملفات والدلائل
+## 📁 أوامر الملفات والمجلدات
 
 ### هيكل المشروع
 ```bash
-# عرض هيكل الدليل الحالي
+# عرض بنية الدليل الحالي
 tree /f  # ويندوز
-find . -type f  # لينكس/ماك أو إس
+find . -type f  # لينوكس / ماك أو إس
 
 # انتقل إلى جذر مشروع azd
 cd $(azd root)
@@ -461,10 +461,10 @@ echo $AZD_CONFIG_DIR  # عادةً ~/.azd
 
 ### مخرجات JSON
 ```bash
-# احصل على مخرجات JSON للبرمجة النصية
+# الحصول على مخرجات JSON للبرمجة النصية
 azd show --output json
 azd env list --output json
-azd config list --output json
+azd config show --output json
 
 # حلل باستخدام jq
 azd show --output json | jq '.services.web.endpoint'
@@ -480,14 +480,14 @@ azd env list --output table
 azd show --output json | jq '.services | keys'
 ```
 
-## 🔧 تراكيب أوامر شائعة
+## 🔧 تركيبات الأوامر الشائعة
 
-### سكربت فحص الحالة
+### نص فحص الصحة
 ```bash
 #!/bin/bash
-# فحص صحي سريع
+# فحص سريع للحالة
 azd show
-azd env show
+azd env get-values
 azd monitor --logs
 ```
 
@@ -511,7 +511,7 @@ for env in dev staging production; do
 done
 ```
 
-### سكربت تنظيف الموارد
+### نص تنظيف الموارد
 ```bash
 #!/bin/bash
 # تنظيف البيئات القديمة
@@ -561,7 +561,7 @@ azd show --output json
 
 ### أوامر الاسترداد
 ```bash
-# استعادة بعد فشل النشر - تنظيف وإعادة النشر
+# استعادة النشر الفاشل - تنظيف وإعادة نشر
 azd down --force --purge
 azd up
 
@@ -574,9 +574,9 @@ azd deploy
 
 ## 💡 نصائح احترافية
 
-### الأسماء المستعارة لتسريع سير العمل
+### اختصارات للتسريع في سير العمل
 ```bash
-# أضف إلى ملف .bashrc أو .zshrc الخاص بك
+# أضفها إلى ملف .bashrc أو .zshrc الخاص بك
 alias azdup='azd up'
 alias azdm='azd monitor --live'
 alias azds='azd show --output json'
@@ -598,7 +598,7 @@ azd-deploy-watch() {
 # حالة البيئة
 azd-status() {
     echo "Current environment:"
-    azd env show
+    azd env get-values
     echo "Services:"
     azd show --output json | jq -r '.services | keys[]'
 }
@@ -627,13 +627,13 @@ azd version --output json
 # افتح الوثائق في المتصفح
 azd docs
 
-# عرض وثائق القالب
+# اعرض وثائق القالب
 azd template show <template-name> --docs
 ```
 
 ---
 
-**نصيحة**: اضف صفحة الغش هذه إلى المفضلة واستخدم `Ctrl+F` للعثور سريعًا على الأوامر التي تحتاجها!
+**نصيحة**: احفظ هذه الورقة في المفضلة واستخدم `Ctrl+F` للعثور بسرعة على الأوامر التي تحتاجها!
 
 ---
 
@@ -643,11 +643,11 @@ azd template show <template-name> --docs
 
 ---
 
-> **💡 هل تريد مساعدة بأوامر Azure في محررك؟** قم بتثبيت [مهارات وكيل Microsoft Azure](https://skills.sh/microsoft/github-copilot-for-azure) باستخدام `npx skills add microsoft/github-copilot-for-azure` — 37 مهارة للذكاء الاصطناعي، وFoundry، والنشر، والتشخيص، والمزيد.
+> **💡 هل تريد مساعدة بأوامر Azure داخل محررك؟** Install [Microsoft Azure Agent Skills](https://skills.sh/microsoft/github-copilot-for-azure) with `npx skills add microsoft/github-copilot-for-azure` — 37 مهارة للذكاء الاصطناعي وFoundry والنشر والتشخيص والمزيد.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-إخلاء المسؤولية:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المعتمد. للمعلومات الحساسة أو الحرجة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير خاطئ قد ينشأ عن استخدام هذه الترجمة.
+**إخلاء المسؤولية**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم بأن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر المعتمد. للمعلومات الحرجة، يُنصح بالاعتماد على ترجمة بشرية مهنية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة ناتجة عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

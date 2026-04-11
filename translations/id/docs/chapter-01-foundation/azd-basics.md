@@ -1,13 +1,13 @@
 # AZD Basics - Memahami Azure Developer CLI
 
-# AZD Basics - Konsep Inti dan Fundamental
+# AZD Basics - Konsep Inti dan Dasar
 
 **Chapter Navigation:**
 - **📚 Course Home**: [AZD Untuk Pemula](../../README.md)
 - **📖 Current Chapter**: Bab 1 - Dasar & Mulai Cepat
 - **⬅️ Previous**: [Ikhtisar Kursus](../../README.md#-chapter-1-foundation--quick-start)
 - **➡️ Next**: [Instalasi & Pengaturan](installation.md)
-- **🚀 Next Chapter**: [Bab 2: Pengembangan Berbasis AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **🚀 Next Chapter**: [Bab 2: Pengembangan Berfokus AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ## Pendahuluan
 
@@ -17,17 +17,17 @@ Pelajaran ini memperkenalkan Anda pada Azure Developer CLI (azd), sebuah alat ba
 
 Pada akhir pelajaran ini, Anda akan:
 - Memahami apa itu Azure Developer CLI dan tujuan utamanya
-- Mempelajari konsep inti templat, lingkungan, dan layanan
-- Menjelajahi fitur kunci termasuk pengembangan berbasis templat dan Infrastruktur sebagai Kode
+- Mempelajari konsep inti tentang template, lingkungan, dan layanan
+- Menjelajahi fitur utama termasuk pengembangan berbasis template dan Infrastruktur sebagai Kode
 - Memahami struktur proyek azd dan alur kerjanya
-- Siap menginstal dan mengonfigurasi azd untuk lingkungan pengembangan Anda
+- Siap untuk menginstal dan mengkonfigurasi azd untuk lingkungan pengembangan Anda
 
 ## Hasil Pembelajaran
 
 Setelah menyelesaikan pelajaran ini, Anda akan dapat:
 - Menjelaskan peran azd dalam alur kerja pengembangan cloud modern
 - Mengidentifikasi komponen struktur proyek azd
-- Mendeskripsikan bagaimana templat, lingkungan, dan layanan bekerja bersama
+- Mendeskripsikan bagaimana template, lingkungan, dan layanan bekerja bersama
 - Memahami manfaat Infrastruktur sebagai Kode dengan azd
 - Mengenali berbagai perintah azd dan tujuannya
 
@@ -35,24 +35,24 @@ Setelah menyelesaikan pelajaran ini, Anda akan dapat:
 
 Azure Developer CLI (azd) adalah alat baris perintah yang dirancang untuk mempercepat perjalanan Anda dari pengembangan lokal ke penerapan di Azure. Ini menyederhanakan proses membangun, menerapkan, dan mengelola aplikasi cloud-native di Azure.
 
-### Apa yang Bisa Anda Terapkan dengan azd?
+### Apa yang Dapat Anda Sebarkan dengan azd?
 
 azd mendukung berbagai jenis beban kerja—dan daftar terus berkembang. Saat ini, Anda dapat menggunakan azd untuk menerapkan:
 
 | Workload Type | Examples | Same Workflow? |
 |---------------|----------|----------------|
-| **Traditional applications** | Web apps, REST APIs, static sites | ✅ `azd up` |
-| **Services and microservices** | Container Apps, Function Apps, multi-service backends | ✅ `azd up` |
-| **AI-powered applications** | Chat apps with Microsoft Foundry Models, RAG solutions with AI Search | ✅ `azd up` |
-| **Intelligent agents** | Foundry-hosted agents, multi-agent orchestrations | ✅ `azd up` |
+| **Aplikasi tradisional** | Aplikasi web, REST API, situs statis | ✅ `azd up` |
+| **Layanan dan mikroservis** | Container Apps, Function Apps, backend multi-layanan | ✅ `azd up` |
+| **Aplikasi bertenaga AI** | Aplikasi obrolan dengan Microsoft Foundry Models, solusi RAG dengan AI Search | ✅ `azd up` |
+| **Agen cerdas** | Agen yang dihosting Foundry, orkestrasi multi-agen | ✅ `azd up` |
 
-Inti pemikirannya adalah bahwa **siklus hidup azd tetap sama terlepas dari apa yang Anda terapkan**. Anda menginisialisasi proyek, menyediakan infrastruktur, menerapkan kode Anda, memantau aplikasi, dan membersihkan—baik itu situs web sederhana atau agen AI yang canggih.
+Inti pemahaman adalah bahwa **siklus hidup azd tetap sama terlepas dari apa yang Anda terapkan**. Anda menginisialisasi proyek, memprovisikan infrastruktur, menerapkan kode Anda, memantau aplikasi, dan membersihkan—baik itu situs web sederhana atau agen AI yang canggih.
 
-Keterusan ini memang dirancang sedemikian rupa. azd memperlakukan kemampuan AI sebagai jenis layanan lain yang dapat digunakan aplikasi Anda, bukan sesuatu yang secara mendasar berbeda. Endpoint obrolan yang didukung oleh Microsoft Foundry Models, dari perspektif azd, hanyalah layanan lain yang perlu dikonfigurasi dan diterapkan.
+Kontinuitas ini memang dirancang demikian. azd memperlakukan kemampuan AI sebagai jenis layanan lain yang dapat digunakan aplikasi Anda, bukan sesuatu yang secara mendasar berbeda. Endpoint obrolan yang didukung oleh Microsoft Foundry Models, dari perspektif azd, hanyalah layanan lain yang harus dikonfigurasi dan diterapkan.
 
 ### 🎯 Mengapa Menggunakan AZD? Perbandingan Dunia Nyata
 
-Mari bandingkan penerapan aplikasi web sederhana dengan basis data:
+Mari kita bandingkan penerapan aplikasi web sederhana dengan database:
 
 #### ❌ TANPA AZD: Penerapan Azure Manual (30+ menit)
 
@@ -60,12 +60,12 @@ Mari bandingkan penerapan aplikasi web sederhana dengan basis data:
 # Langkah 1: Buat grup sumber daya
 az group create --name myapp-rg --location eastus
 
-# Langkah 2: Buat Rencana App Service
+# Langkah 2: Buat App Service Plan
 az appservice plan create --name myapp-plan \
   --resource-group myapp-rg \
   --sku B1 --is-linux
 
-# Langkah 3: Buat Aplikasi Web
+# Langkah 3: Buat Web App
 az webapp create --name myapp-web-unique123 \
   --resource-group myapp-rg \
   --plan myapp-plan \
@@ -76,7 +76,7 @@ az cosmosdb create --name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
   --kind MongoDB
 
-# Langkah 5: Buat basis data
+# Langkah 5: Buat database
 az cosmosdb mongodb database create \
   --account-name myapp-cosmos-unique123 \
   --resource-group myapp-rg \
@@ -114,7 +114,7 @@ az monitor app-insights component create \
   --location eastus \
   --resource-group myapp-rg
 
-# Langkah 11: Hubungkan Application Insights ke Aplikasi Web
+# Langkah 11: Hubungkan Application Insights ke Web App
 INSTRUMENTATION_KEY=$(az monitor app-insights component show \
   --app myapp-insights \
   --resource-group myapp-rg \
@@ -132,29 +132,29 @@ npm run build
 # Langkah 13: Buat paket penyebaran
 zip -r app.zip . -x "*.git*" "node_modules/*"
 
-# Langkah 14: Terapkan aplikasi
+# Langkah 14: Sebarkan aplikasi
 az webapp deployment source config-zip \
   --resource-group myapp-rg \
   --name myapp-web-unique123 \
   --src app.zip
 
-# Langkah 15: Tunggu dan berdoa semoga berhasil 🙏
+# Langkah 15: Tunggu dan berdoa agar berhasil 🙏
 # (Tidak ada validasi otomatis, pengujian manual diperlukan)
 ```
 
 **Masalah:**
 - ❌ 15+ perintah untuk diingat dan dijalankan secara berurutan
-- ❌ 30-45 menit kerja manual
-- ❌ Mudah melakukan kesalahan (salah ketik, parameter yang salah)
+- ❌ 30-45 menit pekerjaan manual
+- ❌ Mudah membuat kesalahan (typo, parameter yang salah)
 - ❌ String koneksi terekspos di riwayat terminal
-- ❌ Tidak ada rollback otomatis jika terjadi kegagalan
+- ❌ Tidak ada rollback otomatis jika sesuatu gagal
 - ❌ Sulit direplikasi oleh anggota tim
 - ❌ Berbeda setiap kali (tidak dapat direproduksi)
 
 #### ✅ DENGAN AZD: Penerapan Otomatis (5 perintah, 10-15 menit)
 
 ```bash
-# Langkah 1: Inisialisasi dari templat
+# Langkah 1: Inisialisasi dari template
 azd init --template todo-nodejs-mongo
 
 # Langkah 2: Otentikasi
@@ -163,48 +163,48 @@ azd auth login
 # Langkah 3: Buat lingkungan
 azd env new dev
 
-# Langkah 4: Pratinjau perubahan (opsional tetapi disarankan)
+# Langkah 4: Pratinjau perubahan (opsional namun disarankan)
 azd provision --preview
 
 # Langkah 5: Terapkan semuanya
 azd up
 
-# ✨ Selesai! Semuanya telah diterapkan, dikonfigurasi, dan dipantau
+# ✨ Selesai! Semua sudah diterapkan, dikonfigurasi, dan dipantau
 ```
 
 **Manfaat:**
 - ✅ **5 perintah** vs. 15+ langkah manual
 - ✅ **10-15 menit** total waktu (sebagian besar menunggu Azure)
-- ✅ **Tanpa kesalahan** - otomatis dan teruji
-- ✅ **Rahasia dikelola dengan aman** via Key Vault
-- ✅ **Rollback otomatis** saat kegagalan
-- ✅ **Sepenuhnya dapat direproduksi** - hasil sama setiap kali
-- ✅ **Siap tim** - siapa pun dapat menerapkan dengan perintah yang sama
-- ✅ **Infrastruktur sebagai Kode** - templat Bicep dikendalikan versi
+- ✅ **Lebih sedikit kesalahan manual** - alur kerja konsisten berbasis template
+- ✅ **Penanganan rahasia yang aman** - banyak template menggunakan penyimpanan rahasia yang dikelola Azure
+- ✅ **Penerapan yang dapat diulang** - alur kerja yang sama setiap kali
+- ✅ **Sepenuhnya dapat direproduksi** - hasil yang sama setiap kali
+- ✅ **Siap untuk tim** - siapa pun dapat menerapkan dengan perintah yang sama
+- ✅ **Infrastruktur sebagai Kode** - template Bicep yang dikendalikan versi
 - ✅ **Pemantauan bawaan** - Application Insights dikonfigurasi otomatis
 
 ### 📊 Pengurangan Waktu & Kesalahan
 
 | Metric | Manual Deployment | AZD Deployment | Improvement |
 |:-------|:------------------|:---------------|:------------|
-| **Perintah** | 15+ | 5 | 67% fewer |
-| **Waktu** | 30-45 min | 10-15 min | 60% faster |
-| **Tingkat Kesalahan** | ~40% | <5% | 88% reduction |
-| **Konsistensi** | Low (manual) | 100% (automated) | Perfect |
-| **Pengenalan Tim** | 2-4 hours | 30 minutes | 75% faster |
-| **Waktu Rollback** | 30+ min (manual) | 2 min (automated) | 93% faster |
+| **Perintah** | 15+ | 5 | 67% lebih sedikit |
+| **Waktu** | 30-45 menit | 10-15 menit | 60% lebih cepat |
+| **Tingkat Kesalahan** | ~40% | <5% | 88% pengurangan |
+| **Konsistensi** | Rendah (manual) | 100% (otomatis) | Sempurna |
+| **Pengenalan Tim** | 2-4 jam | 30 menit | 75% lebih cepat |
+| **Waktu Rollback** | 30+ menit (manual) | 2 menit (otomatis) | 93% lebih cepat |
 
 ## Konsep Inti
 
-### Templat
-Templat adalah fondasi azd. Mereka berisi:
+### Template
+Template adalah fondasi azd. Mereka berisi:
 - **Kode aplikasi** - Kode sumber dan dependensi Anda
 - **Definisi infrastruktur** - Sumber daya Azure yang didefinisikan dalam Bicep atau Terraform
 - **Berkas konfigurasi** - Pengaturan dan variabel lingkungan
-- **Skrip penerapan** - Alur kerja penerapan otomatis
+- **Skrip deployment** - Alur kerja deployment otomatis
 
 ### Lingkungan
-Lingkungan mewakili target penerapan yang berbeda:
+Lingkungan mewakili target deployment yang berbeda:
 - **Development** - Untuk pengujian dan pengembangan
 - **Staging** - Lingkungan pra-produksi
 - **Production** - Lingkungan produksi langsung
@@ -212,55 +212,55 @@ Lingkungan mewakili target penerapan yang berbeda:
 Setiap lingkungan mempertahankan sendiri:
 - Azure resource group
 - Pengaturan konfigurasi
-- Status penerapan
+- Status deployment
 
 ### Layanan
 Layanan adalah blok bangunan aplikasi Anda:
 - **Frontend** - Aplikasi web, SPA
 - **Backend** - API, mikroservis
-- **Basis data** - Solusi penyimpanan data
-- **Penyimpanan** - Penyimpanan file dan blob
+- **Database** - Solusi penyimpanan data
+- **Storage** - Penyimpanan file dan blob
 
 ## Fitur Utama
 
-### 1. Pengembangan Berbasis Templat
+### 1. Pengembangan Berbasis Template
 ```bash
-# Jelajahi templat yang tersedia
+# Telusuri template yang tersedia
 azd template list
 
-# Inisialisasi dari templat
+# Inisialisasi dari template
 azd init --template <template-name>
 ```
 
 ### 2. Infrastruktur sebagai Kode
-- **Bicep** - Bahasa domain-spesifik Azure
-- **Terraform** - Alat infrastruktur multi-cloud
-- **ARM Templates** - templat Azure Resource Manager
+- **Bicep** - bahasa domain-spesifik Azure
+- **Terraform** - alat infrastruktur multi-cloud
+- **ARM Templates** - template Azure Resource Manager
 
 ### 3. Alur Kerja Terintegrasi
 ```bash
 # Alur kerja penyebaran lengkap
-azd up            # Penyediaan + Penyebaran ini berjalan tanpa campur tangan untuk pengaturan pertama kali
+azd up            # Penyediaan + Penyebaran ini tanpa intervensi untuk pengaturan pertama
 
 # 🧪 BARU: Pratinjau perubahan infrastruktur sebelum penyebaran (AMAN)
-azd provision --preview    # Simulasikan penyebaran infrastruktur tanpa membuat perubahan
+azd provision --preview    # Simulasikan penyebaran infrastruktur tanpa melakukan perubahan
 
-azd provision     # Buat sumber daya Azure, jika Anda memperbarui infrastruktur gunakan ini
-azd deploy        # Sebarkan kode aplikasi atau sebarkan ulang kode aplikasi setelah pembaruan
+azd provision     # Buat sumber daya Azure; jika Anda memperbarui infrastruktur, gunakan ini
+azd deploy        # Terapkan kode aplikasi atau terapkan ulang kode aplikasi setelah pembaruan
 azd down          # Bersihkan sumber daya
 ```
 
-#### 🛡️ Perencanaan Infrastruktur Aman dengan Preview
-Perintah `azd provision --preview` mengubah permainan untuk penerapan yang aman:
-- **Analisis dry-run** - Menunjukkan apa yang akan dibuat, dimodifikasi, atau dihapus
-- **Tanpa risiko** - Tidak ada perubahan nyata yang dilakukan ke lingkungan Azure Anda
-- **Kolaborasi tim** - Bagikan hasil preview sebelum penerapan
-- **Estimasi biaya** - Memahami biaya sumber daya sebelum berkomitmen
+#### 🛡️ Perencanaan Infrastruktur Aman dengan Pratinjau
+Perintah `azd provision --preview` mengubah permainan untuk deployment yang aman:
+- **Analisis dry-run** - Menampilkan apa yang akan dibuat, diubah, atau dihapus
+- **Tanpa risiko** - Tidak ada perubahan nyata yang dilakukan pada lingkungan Azure Anda
+- **Kolaborasi tim** - Bagikan hasil pratinjau sebelum penerapan
+- **Perkiraan biaya** - Pahami biaya sumber daya sebelum berkomitmen
 
 ```bash
 # Contoh alur kerja pratinjau
 azd provision --preview           # Lihat apa yang akan berubah
-# Tinjau hasilnya, diskusikan dengan tim
+# Tinjau hasil, diskusikan dengan tim
 azd provision                     # Terapkan perubahan dengan percaya diri
 ```
 
@@ -270,15 +270,15 @@ azd provision                     # Terapkan perubahan dengan percaya diri
 graph LR
     A[azd init] -->|Inisialisasi proyek| B[azd auth login]
     B -->|Otentikasi| C[azd env new]
-    C -->|Buat lingkungan| D{Penyebaran pertama?}
+    C -->|Buat lingkungan| D{Penerapan pertama?}
     D -->|Ya| E[azd up]
     D -->|Tidak| F[azd provision --preview]
     F -->|Tinjau perubahan| G[azd provision]
-    E -->|Menyediakan & menerapkan| H[Sumber daya berjalan]
+    E -->|Menyediakan & menerapkan| H[Sumber daya aktif]
     G -->|Memperbarui infrastruktur| H
     H -->|Pantau| I[azd monitor]
     I -->|Lakukan perubahan kode| J[azd deploy]
-    J -->|Deploy ulang kode saja| H
+    J -->|Terapkan ulang hanya kode| H
     H -->|Bersihkan| K[azd down]
     
     style A fill:#e1f5fe
@@ -288,19 +288,19 @@ graph LR
     style K fill:#ffcdd2
 ```
 **Penjelasan Alur Kerja:**
-1. **Init** - Mulai dengan templat atau proyek baru
-2. **Auth** - Autentikasi dengan Azure
-3. **Environment** - Buat lingkungan penerapan terisolasi
-4. **Preview** - 🆕 Selalu preview perubahan infrastruktur terlebih dahulu (praktik aman)
+1. **Init** - Mulai dengan template atau proyek baru
+2. **Auth** - Otentikasi dengan Azure
+3. **Environment** - Buat lingkungan deployment terisolasi
+4. **Preview** - 🆕 Selalu pratinjau perubahan infrastruktur terlebih dahulu (praktik aman)
 5. **Provision** - Buat/perbarui sumber daya Azure
 6. **Deploy** - Dorong kode aplikasi Anda
-7. **Monitor** - Amati kinerja aplikasi
+7. **Monitor** - Amati performa aplikasi
 8. **Iterate** - Lakukan perubahan dan terapkan ulang kode
 9. **Cleanup** - Hapus sumber daya saat selesai
 
 ### 4. Manajemen Lingkungan
 ```bash
-# Buat dan kelola lingkungan
+# Membuat dan mengelola lingkungan
 azd env new <environment-name>
 azd env select <environment-name>
 azd env list
@@ -314,21 +314,21 @@ azd menggunakan sistem ekstensi untuk menambahkan kemampuan di luar CLI inti. In
 # Daftar ekstensi yang tersedia
 azd extension list
 
-# Pasang ekstensi Foundry agents
+# Pasang ekstensi agen Foundry
 azd extension install azure.ai.agents
 
 # Inisialisasi proyek agen AI dari manifes
 azd ai agent init -m agent-manifest.yaml
 
-# Mulai server MCP untuk pengembangan yang dibantu AI (Alpha)
+# Mulai server MCP untuk pengembangan berbantuan AI (Alfa)
 azd mcp start
 ```
 
-> Ekstensi dibahas secara rinci di [Bab 2: Pengembangan Berbasis AI](../chapter-02-ai-development/agents.md) dan referensi [Perintah AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
+> Ekstensi dibahas secara rinci di [Bab 2: Pengembangan Berfokus AI](../chapter-02-ai-development/agents.md) dan referensi [Perintah AZD AI CLI](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions).
 
 ## 📁 Struktur Proyek
 
-Struktur proyek azd yang khas:
+Struktur proyek azd yang tipikal:
 ```
 my-app/
 ├── .azd/                    # azd configuration
@@ -390,33 +390,33 @@ Konfigurasi spesifik lingkungan:
 
 ## 🎪 Alur Kerja Umum dengan Latihan Praktis
 
-> **💡 Tips Pembelajaran:** Ikuti latihan ini secara berurutan untuk membangun keterampilan AZD Anda secara bertahap.
+> **💡 Tip Pembelajaran:** Ikuti latihan-latihan ini secara berurutan untuk membangun keterampilan AZD Anda secara bertahap.
 
 ### 🎯 Latihan 1: Inisialisasi Proyek Pertama Anda
 
-**Tujuan:** Membuat proyek AZD dan menjelajahi strukturnya
+**Tujuan:** Buat proyek AZD dan jelajahi strukturnya
 
 **Langkah-langkah:**
 ```bash
-# Gunakan templat yang sudah terbukti
+# Gunakan templat yang terbukti
 azd init --template todo-nodejs-mongo
 
 # Jelajahi file yang dihasilkan
-ls -la  # Lihat semua file termasuk file tersembunyi
+ls -la  # Lihat semua file termasuk yang tersembunyi
 
-# File utama yang dibuat:
+# File kunci yang dibuat:
 # - azure.yaml (konfigurasi utama)
 # - infra/ (kode infrastruktur)
 # - src/ (kode aplikasi)
 ```
 
-**✅ Berhasil:** Anda memiliki azure.yaml, infra/, dan src/ directories
+**✅ Sukses:** Anda memiliki azure.yaml, direktori infra/, dan src/
 
 ---
 
-### 🎯 Latihan 2: Menerapkan ke Azure
+### 🎯 Latihan 2: Deploy ke Azure
 
-**Tujuan:** Menyelesaikan penerapan ujung ke ujung
+**Tujuan:** Selesaikan deployment ujung ke ujung
 
 **Langkah-langkah:**
 ```bash
@@ -433,18 +433,18 @@ azd provision --preview
 # 4. Terapkan semuanya
 azd up
 
-# 5. Verifikasi penerapan
+# 5. Verifikasi penyebaran
 azd show    # 6. Lihat URL aplikasi Anda
 ```
 
 **Perkiraan Waktu:** 10-15 menit  
-**✅ Berhasil:** URL aplikasi terbuka di browser
+**✅ Sukses:** URL aplikasi terbuka di peramban
 
 ---
 
-### 🎯 Latihan 3: Banyak Lingkungan
+### 🎯 Latihan 3: Beberapa Lingkungan
 
-**Tujuan:** Menerapkan ke dev dan staging
+**Tujuan:** Deploy ke dev dan staging
 
 **Langkah-langkah:**
 ```bash
@@ -458,13 +458,13 @@ azd env list
 azd env select dev
 ```
 
-**✅ Berhasil:** Dua grup sumber daya terpisah di Azure Portal
+**✅ Sukses:** Dua resource group terpisah di Azure Portal
 
 ---
 
-### 🛡️ Bersih Total: `azd down --force --purge`
+### 🛡️ Reset Bersih: `azd down --force --purge`
 
-Ketika Anda perlu melakukan reset sepenuhnya:
+Saat Anda perlu me-reset sepenuhnya:
 
 ```bash
 azd down --force --purge
@@ -475,9 +475,9 @@ azd down --force --purge
 - `--purge`: Menghapus semua state lokal dan sumber daya Azure
 
 **Gunakan ketika:**
-- Penerapan gagal di tengah jalan
+- Deployment gagal di tengah jalan
 - Beralih proyek
-- Butuh awal yang baru
+- Perlu mulai baru
 
 ---
 
@@ -485,7 +485,7 @@ azd down --force --purge
 
 ### Memulai Proyek Baru
 ```bash
-# Metode 1: Gunakan templat yang sudah ada
+# Metode 1: Gunakan template yang ada
 azd init --template todo-nodejs-mongo
 
 # Metode 2: Mulai dari awal
@@ -502,39 +502,39 @@ azd auth login
 azd env new dev
 azd env select dev
 
-# Sebarkan semuanya
+# Terapkan semuanya
 azd up
 
-# Buat perubahan dan lakukan penyebaran ulang
+# Lakukan perubahan dan terapkan ulang
 azd deploy
 
 # Bersihkan setelah selesai
-azd down --force --purge # Perintah di Azure Developer CLI adalah **reset keras** untuk lingkungan Anda—terutama berguna ketika Anda sedang memecahkan masalah penyebaran yang gagal, membersihkan sumber daya yang terlantar, atau mempersiapkan penyebaran ulang yang baru.
+azd down --force --purge # Perintah di Azure Developer CLI adalah **reset penuh** untuk lingkungan Anda—sangat berguna ketika Anda sedang memecahkan masalah penerapan yang gagal, membersihkan sumber daya terlantar, atau mempersiapkan penerapan ulang yang bersih.
 ```
 
 ## Memahami `azd down --force --purge`
-Perintah `azd down --force --purge` adalah cara yang kuat untuk sepenuhnya meruntuhkan lingkungan azd Anda dan semua sumber daya terkait. Berikut rincian apa yang dilakukan setiap flag:
+Perintah `azd down --force --purge` adalah cara yang kuat untuk sepenuhnya menghancurkan lingkungan azd Anda dan semua sumber daya terkait. Berikut rincian apa yang dilakukan setiap flag:
 ```
 --force
 ```
-- Melewatkan prompt konfirmasi.
+- Melewati prompt konfirmasi.
 - Berguna untuk otomatisasi atau skrip di mana input manual tidak memungkinkan.
-- Memastikan proses penghentian berjalan tanpa gangguan, bahkan jika CLI mendeteksi ketidakkonsistenan.
+- Memastikan proses teardown berjalan tanpa gangguan, bahkan jika CLI mendeteksi ketidakkonsistenan.
 
 ```
 --purge
 ```
-Menghapus **seluruh metadata terkait**, termasuk:
-Environment state
-Local `.azure` folder
-Cached deployment info
-Mencegah azd dari "mengingat" penerapan sebelumnya, yang dapat menyebabkan masalah seperti grup sumber daya yang tidak cocok atau referensi registry yang usang.
+Menghapus **semua metadata terkait**, termasuk:
+Status lingkungan
+Folder lokal `.azure`
+Informasi deployment yang di-cache
+Mencegah azd dari "mengingat" deployment sebelumnya, yang dapat menyebabkan masalah seperti resource group yang tidak cocok atau referensi registry yang usang.
 
 
 ### Mengapa menggunakan keduanya?
-Ketika Anda menemui masalah dengan `azd up` karena state yang tersisa atau penerapan parsial, kombinasi ini memastikan sebuah **bersih total**.
+Ketika Anda menemui jalan buntu dengan `azd up` karena state yang tersisa atau deployment yang sebagian, kombinasi ini memastikan sebuah **reset bersih**.
 
-Ini sangat membantu setelah penghapusan sumber daya manual di portal Azure atau saat mengganti templat, lingkungan, atau konvensi penamaan grup sumber daya.
+Ini sangat membantu setelah penghapusan sumber daya secara manual di portal Azure atau saat beralih template, lingkungan, atau konvensi penamaan resource group.
 
 
 ### Mengelola Banyak Lingkungan
@@ -551,43 +551,43 @@ azd env select dev
 azd env list
 ```
 
-## 🔐 Otentikasi dan Kredensial
+## 🔐 Autentikasi dan Kredensial
 
-Memahami otentikasi sangat penting untuk keberhasilan penerapan azd. Azure menggunakan beberapa metode otentikasi, dan azd memanfaatkan rantai kredensial yang sama yang digunakan oleh alat Azure lainnya.
+Memahami autentikasi sangat penting untuk keberhasilan deployment azd. Azure menggunakan beberapa metode autentikasi, dan azd memanfaatkan rantai kredensial yang sama yang digunakan oleh alat Azure lainnya.
 
-### Otentikasi Azure CLI (`az login`)
+### Azure CLI Authentication (`az login`)
 
-Sebelum menggunakan azd, Anda perlu melakukan otentikasi ke Azure. Metode yang paling umum adalah menggunakan Azure CLI:
+Sebelum menggunakan azd, Anda perlu melakukan autentikasi dengan Azure. Metode yang paling umum adalah menggunakan Azure CLI:
 
 ```bash
-# Login interaktif (membuka browser)
+# Masuk interaktif (membuka browser)
 az login
 
-# Login dengan tenant tertentu
+# Masuk dengan penyewa tertentu
 az login --tenant <tenant-id>
 
-# Login dengan service principal
+# Masuk dengan service principal
 az login --service-principal -u <app-id> -p <password> --tenant <tenant-id>
 
-# Periksa status login saat ini
+# Periksa status masuk saat ini
 az account show
 
-# Tampilkan langganan yang tersedia
+# Daftar langganan yang tersedia
 az account list --output table
 
 # Tetapkan langganan default
 az account set --subscription <subscription-id>
 ```
 
-### Alur Otentikasi
+### Alur Autentikasi
 1. **Login Interaktif**: Membuka browser default Anda untuk autentikasi
 2. **Device Code Flow**: Untuk lingkungan tanpa akses browser
-3. **Service Principal**: Untuk otomatisasi dan skenario CI/CD
-4. **Managed Identity**: Untuk aplikasi yang dihosting di Azure
+3. **Service Principal**: Untuk skenario otomatisasi dan CI/CD
+4. **Managed Identity**: Untuk aplikasi yang di-host di Azure
 
 ### Rantai DefaultAzureCredential
 
-`DefaultAzureCredential` adalah tipe kredensial yang menyediakan pengalaman otentikasi yang disederhanakan dengan secara otomatis mencoba beberapa sumber kredensial dalam urutan tertentu:
+`DefaultAzureCredential` adalah tipe kredensial yang memberikan pengalaman autentikasi yang disederhanakan dengan secara otomatis mencoba beberapa sumber kredensial dalam urutan tertentu:
 
 #### Urutan Rantai Kredensial
 ```mermaid
@@ -603,7 +603,7 @@ graph TD
 ```
 #### 1. Variabel Lingkungan
 ```bash
-# Atur variabel lingkungan untuk service principal
+# Atur variabel lingkungan untuk prinsipal layanan
 export AZURE_CLIENT_ID="<app-id>"
 export AZURE_CLIENT_SECRET="<password>"
 export AZURE_TENANT_ID="<tenant-id>"
@@ -617,7 +617,7 @@ Digunakan secara otomatis di:
 
 #### 3. Managed Identity
 Untuk sumber daya Azure seperti:
-- Mesin Virtual
+- Virtual Machines
 - App Service
 - Azure Functions
 - Container Instances
@@ -633,12 +633,12 @@ az account show --query "user.type" --output tsv
 - **VS Code**: Menggunakan kredensial ekstensi Azure Account
 - **Azure CLI**: Menggunakan kredensial `az login` (paling umum untuk pengembangan lokal)
 
-### Pengaturan Otentikasi AZD
+### Pengaturan Autentikasi AZD
 
 ```bash
 # Metode 1: Gunakan Azure CLI (Disarankan untuk pengembangan)
 az login
-azd auth login  # Menggunakan kredensial Azure CLI yang sudah ada
+azd auth login  # Menggunakan kredensial Azure CLI yang ada
 
 # Metode 2: Otentikasi azd langsung
 azd auth login --use-device-code  # Untuk lingkungan tanpa antarmuka pengguna
@@ -651,14 +651,14 @@ azd auth logout
 azd auth login
 ```
 
-### Praktik Terbaik Otentikasi
+### Praktik Terbaik Autentikasi
 
 #### Untuk Pengembangan Lokal
 ```bash
-# 1. Masuk dengan Azure CLI
+# 1. Masuk menggunakan Azure CLI
 az login
 
-# 2. Pastikan langganan yang benar
+# 2. Verifikasi langganan yang benar
 az account show
 az account set --subscription "Your Subscription Name"
 
@@ -683,29 +683,29 @@ azd auth login
 ```
 
 #### Untuk Lingkungan Produksi
-- Gunakan **Managed Identity** saat berjalan di sumber daya Azure
+- Gunakan **Managed Identity** saat berjalan pada sumber daya Azure
 - Gunakan **Service Principal** untuk skenario otomatisasi
 - Hindari menyimpan kredensial dalam kode atau berkas konfigurasi
-- Gunakan **Azure Key Vault** untuk konfigurasi yang sensitif
+- Gunakan **Azure Key Vault** untuk konfigurasi sensitif
 
-### Masalah Otentikasi Umum dan Solusinya
+### Masalah Autentikasi Umum dan Solusinya
 
-#### Masalah: "Tidak ditemukan langganan"
+#### Masalah: "Tidak ada subscription yang ditemukan"
 ```bash
-# Solusi: Tetapkan langganan default
+# Solusi: Atur langganan default
 az account list --output table
 az account set --subscription "<subscription-id>"
 azd env set AZURE_SUBSCRIPTION_ID "<subscription-id>"
 ```
 
-#### Masalah: "Izin tidak cukup"
+#### Masalah: "Izin tidak mencukupi"
 ```bash
 # Solusi: Periksa dan tetapkan peran yang diperlukan
 az role assignment list --assignee $(az account show --query user.name --output tsv)
 
 # Peran yang umum diperlukan:
-# - Contributor (untuk pengelolaan sumber daya)
-# - User Access Administrator (untuk penetapan peran)
+# - Kontributor (untuk pengelolaan sumber daya)
+# - Administrator Akses Pengguna (untuk penetapan peran)
 ```
 
 #### Masalah: "Token kedaluwarsa"
@@ -717,23 +717,23 @@ azd auth logout
 azd auth login
 ```
 
-### Otentikasi dalam Berbagai Skenario
+### Autentikasi dalam Berbagai Skenario
 
 #### Pengembangan Lokal
 ```bash
-# akun pengembangan diri
+# Akun pengembangan pribadi
 az login
 azd auth login
 ```
 
 #### Pengembangan Tim
 ```bash
-# Gunakan tenant tertentu untuk organisasi
+# Gunakan tenant tertentu untuk organisasi.
 az login --tenant contoso.onmicrosoft.com
 azd auth login
 ```
 
-#### Skenario Multi-tenant
+#### Skenario Multi-penyewa
 ```bash
 # Beralih antar penyewa
 az login --tenant tenant1.onmicrosoft.com
@@ -746,16 +746,16 @@ azd up
 ```
 
 ### Pertimbangan Keamanan
-1. **Credential Storage**: Jangan pernah menyimpan kredensial di kode sumber
-2. **Scope Limitation**: Gunakan prinsip hak paling sedikit untuk prinsipal layanan
-3. **Token Rotation**: Rotasi secara berkala rahasia prinsipal layanan
-4. **Audit Trail**: Pantau aktivitas autentikasi dan penyebaran
-5. **Network Security**: Gunakan endpoint privat bila memungkinkan
+1. **Penyimpanan Kredensial**: Jangan pernah menyimpan kredensial dalam kode sumber
+2. **Pembatasan Cakupan**: Gunakan prinsip hak istimewa minimal untuk service principal
+3. **Rotasi Token**: Secara berkala putar rahasia service principal
+4. **Jejak Audit**: Pantau aktivitas autentikasi dan penyebaran
+5. **Keamanan Jaringan**: Gunakan private endpoints bila memungkinkan
 
 ### Pemecahan Masalah Autentikasi
 
 ```bash
-# Memecahkan masalah autentikasi
+# Memecahkan masalah otentikasi
 azd auth login --check-status
 az account show
 az account get-access-token
@@ -770,16 +770,16 @@ az group list                  # Uji akses sumber daya
 
 ### Penemuan
 ```bash
-azd template list              # Jelajahi templat
+azd template list              # Telusuri templat
 azd template show <template>   # Detail templat
 azd init --help               # Opsi inisialisasi
 ```
 
 ### Manajemen Proyek
 ```bash
-azd show                     # Ikhtisar proyek
-azd env show                 # Lingkungan saat ini
-azd config list             # Pengaturan konfigurasi
+azd show                     # Gambaran proyek
+azd env list                # Lingkungan yang tersedia dan default yang dipilih
+azd config show            # Pengaturan konfigurasi
 ```
 
 ### Pemantauan
@@ -804,25 +804,25 @@ azd init --template template1
 ```
 
 ### 2. Manfaatkan Template
-- Mulai dengan template yang ada
+- Mulai dengan template yang sudah ada
 - Sesuaikan dengan kebutuhan Anda
 - Buat template yang dapat digunakan ulang untuk organisasi Anda
 
 ### 3. Isolasi Lingkungan
 - Gunakan lingkungan terpisah untuk dev/staging/prod
-- Jangan pernah menyebarkan langsung ke produksi dari mesin lokal
-- Gunakan pipeline CI/CD untuk penyebaran produksi
+- Jangan pernah melakukan deploy langsung ke produksi dari mesin lokal
+- Gunakan CI/CD pipelines untuk penyebaran produksi
 
 ### 4. Manajemen Konfigurasi
 - Gunakan variabel lingkungan untuk data sensitif
 - Simpan konfigurasi di version control
-- Dokumentasikan pengaturan spesifik lingkungan
+- Dokumentasikan pengaturan khusus lingkungan
 
 ## Progres Pembelajaran
 
 ### Pemula (Minggu 1-2)
-1. Pasang azd dan lakukan autentikasi
-2. Sebarkan template sederhana
+1. Instal azd dan autentikasi
+2. Deploy template sederhana
 3. Pahami struktur proyek
 4. Pelajari perintah dasar (up, down, deploy)
 
@@ -833,15 +833,15 @@ azd init --template template1
 4. Siapkan pipeline CI/CD
 
 ### Lanjutan (Minggu 5+)
-1. Buat template khusus
+1. Buat template kustom
 2. Pola infrastruktur tingkat lanjut
 3. Penyebaran multi-region
-4. Konfigurasi kelas perusahaan
+4. Konfigurasi tingkat enterprise
 
-## Langkah Selanjutnya
+## Langkah Berikutnya
 
 **📖 Lanjutkan Pembelajaran Bab 1:**
-- [Instalasi & Pengaturan](installation.md) - Pasang azd dan konfigurasikan
+- [Instalasi & Penyiapan](installation.md) - Pasang azd dan konfigurasikan
 - [Proyek Pertama Anda](first-project.md) - Selesaikan tutorial praktis
 - [Panduan Konfigurasi](configuration.md) - Opsi konfigurasi lanjutan
 
@@ -862,25 +862,25 @@ azd init --template template1
 
 **Q: Apa perbedaan antara AZD dan Azure CLI?**
 
-A: Azure CLI (`az`) digunakan untuk mengelola sumber daya Azure individual. AZD (`azd`) digunakan untuk mengelola seluruh aplikasi:
+A: Azure CLI (`az`) digunakan untuk mengelola sumber daya Azure individual. AZD (`azd`) digunakan untuk mengelola keseluruhan aplikasi:
 
 ```bash
 # Azure CLI - Manajemen sumber daya tingkat rendah
 az webapp create --name myapp --resource-group rg
 az sql server create --name myserver --resource-group rg
-# ...banyak perintah tambahan yang diperlukan
+# ...banyak perintah tambahan diperlukan
 
 # AZD - Manajemen tingkat aplikasi
-azd up  # Menerapkan seluruh aplikasi beserta semua sumber dayanya
+azd up  # Menerapkan seluruh aplikasi dengan semua sumber daya
 ```
 
 **Pikirkan seperti ini:**
-- `az` = Mengoperasikan potongan Lego satu per satu
+- `az` = Mengoperasikan bata Lego individual
 - `azd` = Bekerja dengan set Lego lengkap
 
 ---
 
-**Q: Apakah saya perlu mengetahui Bicep atau Terraform untuk menggunakan AZD?**
+**Q: Perlukah saya mengetahui Bicep atau Terraform untuk menggunakan AZD?**
 
 A: Tidak! Mulai dengan template:
 ```bash
@@ -889,25 +889,25 @@ azd init --template todo-nodejs-mongo
 azd up
 ```
 
-Anda bisa mempelajari Bicep nanti untuk menyesuaikan infrastruktur. Template menyediakan contoh yang berfungsi untuk dipelajari.
+Anda dapat mempelajari Bicep nanti untuk menyesuaikan infrastruktur. Template menyediakan contoh kerja untuk dipelajari.
 
 ---
 
-**Q: Berapa biaya untuk menjalankan template AZD?**
+**Q: Berapa biaya menjalankan template AZD?**
 
 A: Biaya bervariasi tergantung template. Sebagian besar template pengembangan berbiaya $50-150/bulan:
 
 ```bash
-# Pratinjau biaya sebelum menerapkan
+# Pratinjau biaya sebelum menyebarkan
 azd provision --preview
 
 # Selalu bersihkan saat tidak digunakan
 azd down --force --purge  # Menghapus semua sumber daya
 ```
 
-**Tip pro:** Gunakan tingkatan gratis bila tersedia:
+**Tip pro:** Gunakan tier gratis jika tersedia:
 - App Service: F1 (Free) tier
-- Microsoft Foundry Models: Azure OpenAI 50,000 tokens/month free
+- Microsoft Foundry Models: Azure OpenAI 50,000 tokens/bulan gratis
 - Cosmos DB: 1000 RU/s free tier
 
 ---
@@ -917,34 +917,34 @@ azd down --force --purge  # Menghapus semua sumber daya
 A: Ya, tetapi lebih mudah memulai dari awal. AZD bekerja paling baik ketika mengelola seluruh siklus hidup. Untuk sumber daya yang sudah ada:
 
 ```bash
-# Opsi 1: Impor sumber daya yang sudah ada (lanjutan)
+# Opsi 1: Impor sumber daya yang ada (lanjutan)
 azd init
-# Kemudian ubah infra/ untuk merujuk ke sumber daya yang sudah ada
+# Kemudian modifikasi infra/ untuk merujuk ke sumber daya yang ada
 
-# Opsi 2: Mulai dari awal (disarankan)
+# Opsi 2: Mulai dari awal (direkomendasikan)
 azd init --template matching-your-stack
 azd up  # Membuat lingkungan baru
 ```
 
 ---
 
-**Q: Bagaimana cara saya berbagi proyek dengan rekan tim?**
+**Q: Bagaimana cara membagikan proyek saya dengan rekan tim?**
 
 A: Commit proyek AZD ke Git (tetapi JANGAN folder .azure):
 
 ```bash
-# Sudah ada di .gitignore secara default
+# Secara default sudah ada di .gitignore
 .azure/        # Berisi rahasia dan data lingkungan
 *.env          # Variabel lingkungan
 
-# Anggota tim saat itu:
+# Anggota tim kemudian:
 git clone <your-repo>
 azd auth login
 azd env new <their-name>-dev
 azd up
 ```
 
-Semua orang mendapatkan infrastruktur yang identik dari template yang sama.
+Semua orang mendapat infrastruktur identik dari template yang sama.
 
 ---
 
@@ -952,10 +952,10 @@ Semua orang mendapatkan infrastruktur yang identik dari template yang sama.
 
 **Q: "azd up" gagal di tengah jalan. Apa yang harus saya lakukan?**
 
-A: Periksa kesalahan, perbaiki, lalu coba lagi:
+A: Periksa error, perbaiki, lalu coba lagi:
 
 ```bash
-# Lihat log rinci
+# Lihat log terperinci
 azd show
 
 # Perbaikan umum:
@@ -963,17 +963,17 @@ azd show
 # 1. Jika kuota terlampaui:
 azd env set AZURE_LOCATION "westus2"  # Coba wilayah lain
 
-# 2. Jika terjadi konflik nama sumber daya:
+# 2. Jika konflik nama sumber daya:
 azd down --force --purge  # Mulai dari awal
 azd up  # Coba lagi
 
-# 3. Jika otentikasi kedaluwarsa:
+# 3. Jika autentikasi kedaluwarsa:
 az login
 azd auth login
 azd up
 ```
 
-**Masalah yang paling umum:** Langganan Azure yang salah dipilih
+**Masalah yang paling umum:** Subscription Azure yang dipilih salah
 ```bash
 az account list --output table
 az account set --subscription "<correct-subscription>"
@@ -981,14 +981,14 @@ az account set --subscription "<correct-subscription>"
 
 ---
 
-**Q: Bagaimana saya menyebarkan hanya perubahan kode tanpa penyediaan ulang?**
+**Q: Bagaimana cara saya hanya mendeploy perubahan kode tanpa reprovisioning?**
 
-A: Gunakan `azd deploy` alih-alih `azd up`:
+A: Gunakan `azd deploy` bukan `azd up`:
 
 ```bash
-azd up          # Pertama kali: penyediaan + penyebaran (lambat)
+azd up          # Pertama kali: penyiapan + penyebaran (lambat)
 
-# Lakukan perubahan kode...
+# Buat perubahan kode...
 
 azd deploy      # Kali berikutnya: hanya penyebaran (cepat)
 ```
@@ -1006,7 +1006,7 @@ A: Ya! Edit file Bicep di `infra/`:
 ```bash
 # Setelah azd init
 cd infra/
-code main.bicep  # Edit di VS Code
+code main.bicep  # Sunting di VS Code
 
 # Pratinjau perubahan
 azd provision --preview
@@ -1015,7 +1015,7 @@ azd provision --preview
 azd provision
 ```
 
-**Tip:** Mulailah dari yang kecil - ubah SKU terlebih dahulu:
+**Tip:** Mulai kecil - ubah SKU terlebih dahulu:
 ```bicep
 // infra/main.bicep
 sku: {
@@ -1025,9 +1025,9 @@ sku: {
 
 ---
 
-**Q: Bagaimana cara saya menghapus semua yang dibuat AZD?**
+**Q: Bagaimana cara menghapus semua yang dibuat AZD?**
 
-A: Satu perintah menghapus semua sumber daya:
+A: Satu perintah menghapus semua resource:
 
 ```bash
 azd down --force --purge
@@ -1044,22 +1044,22 @@ azd down --force --purge
 - Beralih ke proyek lain
 - Ingin memulai dari awal
 
-**Penghematan biaya:** Menghapus sumber daya yang tidak terpakai = $0 biaya
+**Penghematan biaya:** Menghapus resource yang tidak terpakai = $0 biaya
 
 ---
 
-**Q: Bagaimana jika saya tidak sengaja menghapus sumber daya di Azure Portal?**
+**Q: Bagaimana jika saya tidak sengaja menghapus resource di Azure Portal?**
 
-A: Status AZD bisa tidak sinkron. Pendekatan bersih:
+A: State AZD bisa tidak sinkron. Pendekatan mulai bersih:
 
 ```bash
-# 1. Hapus state lokal
+# 1. Hapus status lokal
 azd down --force --purge
 
 # 2. Mulai dari awal
 azd up
 
-# Alternative: Biarkan AZD mendeteksi dan memperbaiki
+# Alternatif: Biarkan AZD mendeteksi dan memperbaiki
 azd provision  # Akan membuat sumber daya yang hilang
 ```
 
@@ -1067,7 +1067,7 @@ azd provision  # Akan membuat sumber daya yang hilang
 
 ### Pertanyaan Lanjutan
 
-**Q: Bisakah saya menggunakan AZD di pipeline CI/CD?**
+**Q: Bisakah saya menggunakan AZD dalam pipeline CI/CD?**
 
 A: Ya! Contoh GitHub Actions:
 
@@ -1101,7 +1101,7 @@ jobs:
 
 ---
 
-**Q: Bagaimana saya menangani rahasia dan data sensitif?**
+**Q: Bagaimana cara menangani secret dan data sensitif?**
 
 A: AZD terintegrasi dengan Azure Key Vault secara otomatis:
 
@@ -1112,41 +1112,41 @@ azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)"
 # AZD secara otomatis:
 # 1. Membuat Key Vault
 # 2. Menyimpan rahasia
-# 3. Memberikan aplikasi akses melalui Identitas Terkelola
-# 4. Menyuntikkan saat runtime
+# 3. Memberikan akses aplikasi melalui Identitas Terkelola
+# 4. Menyuntikkan pada runtime
 ```
 
 **Jangan pernah commit:**
-- `.azure/` folder (berisi data lingkungan)
-- `.env` files (rahasia lokal)
+- folder `.azure/` (berisi data lingkungan)
+- file `.env` (secret lokal)
 - Connection strings
 
 ---
 
-**Q: Bisakah saya melakukan penyebaran ke beberapa wilayah?**
+**Q: Bisakah saya mendeploy ke banyak region?**
 
-A: Ya, buat lingkungan per wilayah:
+A: Ya, buat environment per region:
 
 ```bash
-# Lingkungan AS Timur
+# Lingkungan Timur AS
 azd env new prod-eastus
 azd env set AZURE_LOCATION eastus
 azd up
 
-# Lingkungan Eropa Barat
+# Lingkungan Barat Eropa
 azd env new prod-westeurope
 azd env set AZURE_LOCATION westeurope
 azd up
 
-# Setiap lingkungan bersifat mandiri
+# Setiap lingkungan bersifat independen
 azd env list
 ```
 
-Untuk aplikasi multi-wilayah sejati, sesuaikan template Bicep untuk menyebarkan ke beberapa wilayah secara bersamaan.
+Untuk aplikasi multi-region sejati, sesuaikan template Bicep untuk mendeploy ke beberapa region secara bersamaan.
 
 ---
 
-**Q: Di mana saya bisa mendapatkan bantuan jika saya mengalami kendala?**
+**Q: Di mana saya bisa mendapatkan bantuan jika terjebak?**
 
 1. **Dokumentasi AZD:** https://learn.microsoft.com/azure/developer/azure-developer-cli/
 2. **GitHub Issues:** https://github.com/Azure/azure-dev/issues
@@ -1159,7 +1159,7 @@ Untuk aplikasi multi-wilayah sejati, sesuaikan template Bicep untuk menyebarkan 
 azd show       # Menampilkan status saat ini
 azd version    # Menampilkan versi Anda
 ```
-Sertakan info ini dalam pertanyaan Anda untuk bantuan yang lebih cepat.
+Sertakan info ini dalam pertanyaan Anda untuk mendapatkan bantuan lebih cepat.
 
 ---
 
@@ -1168,32 +1168,32 @@ Sertakan info ini dalam pertanyaan Anda untuk bantuan yang lebih cepat.
 Sekarang Anda memahami dasar-dasar AZD. Pilih jalur Anda:
 
 ### 🎯 Untuk Pemula:
-1. **Selanjutnya:** [Instalasi & Pengaturan](installation.md) - Pasang AZD di mesin Anda
-2. **Kemudian:** [Proyek Pertama Anda](first-project.md) - Sebarkan aplikasi pertama Anda
-3. **Latihan:** Selesaikan semua 3 latihan di pelajaran ini
+1. **Selanjutnya:** [Instalasi & Penyiapan](installation.md) - Instal AZD di mesin Anda
+2. **Kemudian:** [Proyek Pertama Anda](first-project.md) - Deploy aplikasi pertama Anda
+3. **Latihan:** Selesaikan semua 3 latihan dalam pelajaran ini
 
 ### 🚀 Untuk Pengembang AI:
 1. **Langsung ke:** [Bab 2: Pengembangan Berfokus AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
-2. **Sebarkan:** Mulai dengan `azd init --template get-started-with-ai-chat`
-3. **Belajar:** Bangun sambil melakukan penyebaran
+2. **Deploy:** Mulai dengan `azd init --template get-started-with-ai-chat`
+3. **Pelajari:** Bangun sambil Anda mendeploy
 
 ### 🏗️ Untuk Pengembang Berpengalaman:
 1. **Tinjau:** [Panduan Konfigurasi](configuration.md) - Pengaturan lanjutan
-2. **Jelajahi:** [Infrastruktur sebagai Kode](../chapter-04-infrastructure/provisioning.md) - Pendalaman Bicep
+2. **Jelajahi:** [Infrastructure as Code](../chapter-04-infrastructure/provisioning.md) - Pendalaman Bicep
 3. **Bangun:** Buat template kustom untuk stack Anda
 
 ---
 
 **Navigasi Bab:**
-- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
-- **📖 Bab Saat Ini**: Bab 1 - Pondasi & Mulai Cepat  
-- **⬅️ Sebelumnya**: [Ikhtisar Kursus](../../README.md#-chapter-1-foundation--quick-start)
-- **➡️ Berikutnya**: [Instalasi & Pengaturan](installation.md)
+- **📚 Beranda Kursus**: [AZD For Beginners](../../README.md)
+- **📖 Bab Saat Ini**: Bab 1 - Dasar & Mulai Cepat  
+- **⬅️ Sebelumnya**: [Course Overview](../../README.md#-chapter-1-foundation--quick-start)
+- **➡️ Berikutnya**: [Instalasi & Penyiapan](installation.md)
 - **🚀 Bab Berikutnya**: [Bab 2: Pengembangan Berfokus AI](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya mencapai akurasi, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul akibat penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan penerjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya menjaga ketepatan, harap diperhatikan bahwa terjemahan otomatis dapat mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

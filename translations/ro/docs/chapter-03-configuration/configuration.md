@@ -1,74 +1,74 @@
-# Ghid de Configurare
+# Ghid de configurare
 
-**Navigare Capitol:**
-- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitolul Curent**: Capitolul 3 - Configurare & Autentificare
-- **⬅️ Anterior**: [Primul Tău Proiect](first-project.md)
-- **➡️ Următor**: [Ghid de Implementare](../chapter-04-infrastructure/deployment-guide.md)
-- **🚀 Capitolul Următor**: [Capitolul 4: Infrastructură ca și Cod](../chapter-04-infrastructure/deployment-guide.md)
+**Navigare în capitole:**
+- **📚 Pagina cursului**: [AZD pentru începători](../../README.md)
+- **📖 Capitolul curent**: Capitolul 3 - Configurare și autentificare
+- **⬅️ Anterior**: [Primul tău proiect](first-project.md)
+- **➡️ Următor**: [Ghid de implementare](../chapter-04-infrastructure/deployment-guide.md)
+- **🚀 Următorul capitol**: [Capitolul 4: Infrastructură ca Cod](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Introducere
 
-Acest ghid cuprinzător acoperă toate aspectele configurării Azure Developer CLI pentru fluxuri de lucru optime de dezvoltare și implementare. Vei învăța despre ierarhia configurației, managementul mediilor, metodele de autentificare și tiparele avansate de configurare care permit implementări Azure eficiente și sigure.
+Acest ghid cuprinzător acoperă toate aspectele configurării Azure Developer CLI pentru fluxuri de dezvoltare și implementare optime. Vei învăța despre ierarhia de configurare, gestionarea mediilor, metodele de autentificare și modele avansate de configurare care permit implementări Azure eficiente și sigure.
 
-## Obiective de Învățare
+## Obiective de învățare
 
-La finalul acestei lecții, vei:
-- Stăpâni ierarhia configurației azd și vei înțelege cum sunt prioritizate setările
-- Configura setările globale și cele specifice proiectului eficient
+Până la sfârșitul acestei lecții, vei:
+- Stăpâni ierarhia de configurare azd și înțelege cum sunt prioritizate setările
+- Configura eficient setări globale și specifice proiectului
 - Gestiona mai multe medii cu configurații diferite
-- Implementa tipare sigure de autentificare și autorizare
-- Înțelege tipare avansate de configurare pentru scenarii complexe
+- Implementa modele securizate de autentificare și autorizare
+- Înțelege modele avansate de configurare pentru scenarii complexe
 
-## Rezultate de Învățare
+## Rezultatele învățării
 
-După parcurgerea acestei lecții, vei putea:
-- Configura azd pentru fluxuri optime de dezvoltare
-- Configura și gestiona mai multe medii de implementare
-- Implementa practici sigure de management al configurației
+După finalizarea acestei lecții, vei putea:
+- Configura azd pentru fluxuri de lucru de dezvoltare optime
+- Configura și gestiona multiple medii de implementare
+- Implementa practici sigure de gestionare a configurațiilor
 - Depana probleme legate de configurare
-- Personaliza comportamentul azd pentru cerințe organizaționale specifice
+- Personaliza comportamentul azd pentru cerințe specifice organizației
 
-Acest ghid cuprinzător acoperă toate aspectele configurării Azure Developer CLI pentru fluxuri de lucru optime de dezvoltare și implementare.
+Acest ghid cuprinzător acoperă toate aspectele configurării Azure Developer CLI pentru fluxuri de dezvoltare și implementare optime.
 
-## Înțelegerea Agenților AI într-un Proiect azd
+## Înțelegerea agenților AI într-un proiect azd
 
-Dacă ești nou în ceea ce privește agenții AI, iată o modalitate simplă de a-i înțelege în lumea azd.
+Dacă ești nou în privința agenților AI, iată o modalitate simplă de a-i înțelege în lumea azd.
 
-### Ce Este un Agent?
+### Ce este un agent?
 
-Un agent este un software care poate primi o solicitare, să o analizeze și să acționeze — de multe ori apelând un model AI, căutând date sau invocând alte servicii. Într-un proiect azd, un agent este doar un alt **serviciu** alături de frontend-ul web sau backend-ul API.
+Un agent este o bucată de software care poate primi o cerere, raționa asupra ei și întreprinde acțiuni — adesea apelând un model AI, căutând date sau invocând alte servicii. Într-un proiect azd, un agent este pur și simplu un alt serviciu alături de front-end-ul web sau backend-ul API.
 
-### Cum se Integrează Agenții în Structura Proiectului azd
+### Cum se integrează agenții în structura unui proiect azd
 
-Un proiect azd este alcătuit din trei straturi: **infrastructură**, **cod** și **configurație**. Agenții se conectează la aceste straturi în același mod ca orice alt serviciu:
+Un proiect azd este compus din trei straturi: **infrastructură**, **cod** și **configurare**. Agenții se conectează la aceste straturi în același mod în care o face orice alt serviciu:
 
-| Strat | Ce Face pentru o Aplicație Tradițională | Ce Face pentru un Agent |
-|-------|-----------------------------------------|------------------------|
-| **Infrastructură** (`infra/`) | Provoacă o aplicație web și o bază de date | Provoacă un endpoint de model Microsoft Foundry, un index de căutare sau un host pentru agent |
-| **Cod** (`src/`) | Conține codul sursă pentru frontend și API | Conține logica agentului și definițiile prompturilor |
-| **Configurație** (`azure.yaml`) | Listează serviciile și gazdele lor | Listează agentul ca serviciu, arătând locația codului și a hostului |
+| Layer | What It Does for a Traditional App | What It Does for an Agent |
+|-------|-------------------------------------|---------------------------|
+| **Infrastructure** (`infra/`) | Provisionează o aplicație web și o bază de date | Provisionează un endpoint pentru modelul AI, un index de căutare sau un host pentru agent |
+| **Code** (`src/`) | Conține codul sursă pentru frontend și API | Conține logica agentului și definițiile prompt-urilor |
+| **Configuration** (`azure.yaml`) | Listează serviciile tale și țintele lor de hosting | Listează agentul tău ca serviciu, indicând spre codul și host-ul său |
 
 ### Rolul fișierului `azure.yaml`
 
-Nu trebuie să memorezi sintaxa acum. Conceptual, `azure.yaml` este fișierul în care îi spui azd: *„Iată serviciile care compun aplicația mea și unde să găsești codul lor.”*
+Nu trebuie să memorezi sintaxa chiar acum. Conceptual, `azure.yaml` este fișierul în care îi spui azd: "Iată serviciile care alcătuiesc aplicația mea și iată unde să găsească codul lor."
 
-Când proiectul tău include un agent AI, `azure.yaml` listează pur și simplu agentul ca unul dintre servicii. Azd știe astfel să provoace infrastructura potrivită (cum ar fi un endpoint Microsoft Foundry Models sau o aplicație Container pentru găzduirea agentului) și să implementeze codul agentului — exact ca pentru o aplicație web sau API.
+Când proiectul tău include un agent AI, `azure.yaml` pur și simplu îl listează pe acel agent ca unul dintre servicii. azd va ști astfel să provisioneze infrastructura potrivită (cum ar fi un endpoint Microsoft Foundry Models sau o Container App pentru a găzdui agentul) și să-ți implementeze codul agentului — la fel cum ar face pentru o aplicație web sau un API.
 
-Asta înseamnă că nu este nimic fundamental nou de învățat. Dacă înțelegi cum azd gestionează un serviciu web, înțelegi deja cum gestionează un agent.
+Acest lucru înseamnă că nu există nimic fundamental nou de învățat. Dacă înțelegi cum gestionează azd un serviciu web, înțelegi deja cum gestionează un agent.
 
-## Ierarhia Configurației
+## Ierarhia de configurare
 
 azd folosește un sistem ierarhic de configurare:
-1. **Flaguri din linia de comandă** (prioritate maximă)
+1. **Flag-uri din linia de comandă** (cea mai înaltă prioritate)
 2. **Variabile de mediu**
-3. **Configurație locală de proiect** (`.azd/config.json`)
-4. **Configurație globală a utilizatorului** (`~/.azd/config.json`)
-5. **Valori implicite** (prioritate minimă)
+3. **Configurația locală a proiectului** (`.azd/config.json`)
+4. **Configurația globală a utilizatorului** (`~/.azd/config.json`)
+5. **Valori implicite** (cea mai mică prioritate)
 
-## Configurație Globală
+## Configurare globală
 
-### Setarea Valorilor Implicite Globale
+### Setarea valorilor implicite globale
 ```bash
 # Setează abonamentul implicit
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -76,33 +76,33 @@ azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 # Setează locația implicită
 azd config set defaults.location "eastus2"
 
-# Setează convenția implicită de denumire a grupului de resurse
+# Setează convenția implicită de denumire pentru grupurile de resurse
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# Vizualizează toată configurația globală
-azd config list
+# Afișează întreaga configurație globală
+azd config show
 
 # Elimină o configurație
 azd config unset defaults.location
 ```
 
-### Setări Comune Globale
+### Setări globale comune
 ```bash
 # Preferințe de dezvoltare
-azd config set alpha.enable true                    # Activează funcțiile alfa
+azd config set alpha.enable true                    # Activează funcționalitățile alfa
 azd config set telemetry.enabled false             # Dezactivează telemetria
 azd config set output.format json                  # Setează formatul de ieșire
 
 # Setări de securitate
 azd config set auth.useAzureCliCredential true     # Folosește Azure CLI pentru autentificare
-azd config set tls.insecure false                  # Impune verificarea TLS
+azd config set tls.insecure false                  # Forțează verificarea TLS
 
-# Optimizare performanță
-azd config set provision.parallelism 5             # Crearea paralelă a resurselor
+# Ajustări de performanță
+azd config set provision.parallelism 5             # Creare paralelă a resurselor
 azd config set deploy.timeout 30m                  # Timeout pentru implementare
 ```
 
-## 🏗️ Configurație Proiect
+## 🏗️ Configurarea proiectului
 
 ### Structura azure.yaml
 Fișierul `azure.yaml` este inima proiectului tău azd:
@@ -181,9 +181,9 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Opțiuni de Configurare pentru Servicii
+### Opțiuni de configurare a serviciilor
 
-#### Tipuri de Host
+#### Tipuri de gazdă
 ```yaml
 services:
   web-static:
@@ -202,7 +202,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Setări Specifice Limbajului
+#### Setări specifice limbajului
 ```yaml
 services:
   node-app:
@@ -226,22 +226,22 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 Managementul Mediilor
+## 🌟 Gestionarea mediilor
 
-### Crearea Mediilor
+### Crearea mediilor
 ```bash
 # Creează un mediu nou
 azd env new development
 
-# Creează cu o locație specifică
+# Creează la o locație specifică
 azd env new staging --location "westus2"
 
 # Creează din șablon
 azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
-### Configurația Mediului
-Fiecare mediu are propria configurație în `.azure/<nume-mediu>/config.json`:
+### Configurația mediului
+Fiecare mediu are propria configurație în `.azure/<env-name>/config.json`:
 
 ```json
 {
@@ -263,14 +263,14 @@ Fiecare mediu are propria configurație în `.azure/<nume-mediu>/config.json`:
 }
 ```
 
-### Variabile de Mediu
+### Variabile de mediu
 ```bash
 # Setează variabile specifice mediului
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
 azd env set API_KEY "secret-api-key"
 azd env set DEBUG "true"
 
-# Vizualizează variabilele de mediu
+# Afișează variabilele de mediu
 azd env get-values
 
 # Ieșire așteptată:
@@ -283,17 +283,17 @@ azd env unset DEBUG
 
 # Verifică eliminarea
 azd env get-values | grep DEBUG
-# (ar trebui să nu returneze nimic)
+# (nu ar trebui să returneze nimic)
 ```
 
-### Șabloane pentru Medii
-Creează `.azure/env.template` pentru configurare consistentă a mediului:
+### Șabloane de mediu
+Creează `.azure/env.template` pentru o configurare consistentă a mediului:
 ```bash
-# Variabile necesare
+# Variabile obligatorii
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# Setările aplicației
+# Setări ale aplicației
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
@@ -303,9 +303,9 @@ DEBUG=false
 LOG_LEVEL=info
 ```
 
-## 🔐 Configurare Autentificare
+## 🔐 Configurarea autentificării
 
-### Integrare Azure CLI
+### Integrarea cu Azure CLI
 ```bash
 # Folosește acreditările Azure CLI (implicit)
 azd config set auth.useAzureCliCredential true
@@ -318,30 +318,30 @@ az account set --subscription <subscription-id>
 ```
 
 ### Autentificare prin Service Principal
-Pentru pipeline-uri CI/CD:
+Pentru pipeline-urile CI/CD:
 ```bash
-# Setează variabile de mediu
+# Setați variabilele de mediu
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# Sau configurează direct
+# Sau configurați direct
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Identitate Administrată
-Pentru medii găzduite în Azure:
+### Identitate administrată
+Pentru mediile găzduite în Azure:
 ```bash
-# Activarea autentificării prin identitate gestionată
+# Activează autentificarea prin identitate gestionată
 azd config set auth.useMsi true
 azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
-## 🏗️ Configurare Infrastructură
+## 🏗️ Configurarea infrastructurii
 
 ### Parametri Bicep
-Configurează parametrii infrastructurii în `infra/main.parameters.json`:
+Configurează parametrii de infrastructură în `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -364,7 +364,7 @@ Configurează parametrii infrastructurii în `infra/main.parameters.json`:
 ```
 
 ### Configurare Terraform
-Pentru proiecte Terraform, configurează în `infra/terraform.tfvars`:
+Pentru proiectele Terraform, configurează în `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -372,9 +372,9 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Configurare Implementare
+## 🚀 Configurarea implementării
 
-### Configurare Build
+### Configurația build-ului
 ```yaml
 # In azure.yaml
 services:
@@ -397,7 +397,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Configurare Docker
+### Configurarea Docker
 ```yaml
 services:
   api:
@@ -413,17 +413,17 @@ services:
 ```
 Exemplu `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
-## 🔧 Configurare Avansată
+## 🔧 Configurare avansată
 
-### Nomenclatură Personalizată a Resurselor
+### Denumirea personalizată a resurselor
 ```bash
-# Setează convențiile de denumire
+# Stabilește convențiile de denumire
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
 ```
 
-### Configurare Rețea
+### Configurarea rețelei
 ```yaml
 # In azure.yaml
 infra:
@@ -434,7 +434,7 @@ infra:
     enablePrivateEndpoints: true
 ```
 
-### Configurare Monitorizare
+### Configurarea monitorizării
 ```yaml
 # In azure.yaml
 monitoring:
@@ -446,18 +446,18 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Configurații Specifice Mediului
+## 🎯 Configurații specifice mediilor
 
-### Mediu de Dezvoltare
+### Mediu de dezvoltare
 ```bash
-# .azure/development/.env
+# .azure/dezvoltare/.env
 DEBUG=true
 LOG_LEVEL=debug
 ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Mediu de Testare
+### Mediu de staging
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -466,18 +466,18 @@ ENABLE_MONITORING=true
 USE_PRODUCTION_APIS=true
 ```
 
-### Mediu de Producție
+### Mediu de producție
 ```bash
-# .azure/production/.env
+# .azure/producție/.env
 DEBUG=false
 LOG_LEVEL=error
 ENABLE_MONITORING=true
 ENABLE_SECURITY_HEADERS=true
 ```
 
-## 🔍 Validarea Configurației
+## 🔍 Validarea configurației
 
-### Validare Configurație
+### Validarea configurației
 ```bash
 # Verifică sintaxa configurației
 azd config validate
@@ -489,7 +489,7 @@ azd env get-values
 azd provision --dry-run
 ```
 
-### Scripturi de Configurație
+### Scripturi de configurare
 Creează scripturi de validare în `scripts/`:
 
 ```bash
@@ -504,7 +504,7 @@ if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   exit 1
 fi
 
-# Validează sintaxa azure.yaml
+# Validează sintaxa fișierului azure.yaml
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -513,9 +513,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Cele Mai Bune Practici
+## 🎓 Practici recomandate
 
-### 1. Folosește Variabile de Mediu
+### 1. Folosește variabile de mediu
 ```yaml
 # Good: Use environment variables
 database:
@@ -526,7 +526,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Organizează Fișierele de Configurație
+### 2. Organizează fișierele de configurare
 ```
 .azure/
 ├── config.json              # Global project config
@@ -542,16 +542,16 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Considerații privind Controlul Versiunii
+### 3. Considerații legate de versionare
 ```bash
 # .gitignore
-.azure/*/config.json         # Configurări de mediu (conțin ID-uri de resurse)
+.azure/*/config.json         # Configurații de mediu (conțin ID-uri de resurse)
 .azure/*/.env               # Variabile de mediu (pot conține secrete)
-.env                        # Fișier local de mediu
+.env                        # Fișier de mediu local
 ```
 
-### 4. Documentația Configurației
-Documentează configurația în `CONFIG.md`:
+### 4. Documentația configurației
+Documentează-ți configurația în `CONFIG.md`:
 ```markdown
 # Configuration Guide
 
@@ -566,26 +566,26 @@ Documentează configurația în `CONFIG.md`:
 - Production: Uses production database, error logging only
 ```
 
-## 🎯 Exerciții Practice
+## 🎯 Exerciții practice
 
-### Exercițiul 1: Configurare Multi-Medii (15 minute)
+### Exercițiul 1: Configurare multi-mediu (15 minute)
 
 **Scop**: Creează și configurează trei medii cu setări diferite
 
 ```bash
-# Creează mediu de dezvoltare
+# Creează mediul de dezvoltare
 azd env new dev
 azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# Creează mediu de testare
+# Creează mediul de preproducție
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
 azd env set APP_INSIGHTS_SAMPLING 50
 
-# Creează mediu de producție
+# Creează mediul de producție
 azd env new production
 azd env set LOG_LEVEL error
 azd env set ENABLE_TELEMETRY true
@@ -597,61 +597,61 @@ azd env select staging && azd env get-values
 azd env select production && azd env get-values
 ```
 
-**Criterii de Succes:**
+**Criterii de succes:**
 - [ ] Trei medii create cu succes
 - [ ] Fiecare mediu are o configurație unică
-- [ ] Se poate comuta între medii fără erori
+- [ ] Poți comuta între medii fără erori
 - [ ] `azd env list` afișează toate cele trei medii
 
-### Exercițiul 2: Managementul Secretelor (10 minute)
+### Exercițiul 2: Gestionarea secretelor (10 minute)
 
 **Scop**: Exersează configurarea sigură cu date sensibile
 
 ```bash
-# Setează secrete (nu sunt afișate în output)
+# Setați secretele (nu sunt afișate în ieșire)
 azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 
-# Setează configurarea non-secretă
+# Setați configurația non-secretă
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# Vizualizează mediul (secretele ar trebui să fie redactate)
+# Vizualizați mediul (secretele ar trebui redactate)
 azd env get-values
 
-# Verifică dacă secretele sunt stocate
-azd env get DB_PASSWORD  # Ar trebui să arate valoarea reală
+# Verificați că secretele sunt stocate
+azd env get DB_PASSWORD  # Ar trebui să afișeze valoarea reală
 ```
 
-**Criterii de Succes:**
+**Criterii de succes:**
 - [ ] Secrete stocate fără a fi afișate în terminal
 - [ ] `azd env get-values` afișează secretele redactate
-- [ ] Comanda individuală `azd env get <SECRET_NAME>` returnează valoarea reală
+- [ ] `azd env get <SECRET_NAME>` individual recuperează valoarea reală
 
-## Pașii Următori
+## Pașii următori
 
-- [Primul Tău Proiect](first-project.md) - Aplică configurația în practică
-- [Ghid de Implementare](../chapter-04-infrastructure/deployment-guide.md) - Folosește configurația pentru implementare
-- [Provisionarea Resurselor](../chapter-04-infrastructure/provisioning.md) - Configurații gata de producție
+- [Primul tău proiect](first-project.md) - Aplică configurația în practică
+- [Ghid de implementare](../chapter-04-infrastructure/deployment-guide.md) - Folosește configurația pentru implementare
+- [Provisionarea resurselor](../chapter-04-infrastructure/provisioning.md) - Configurații pregătite pentru producție
 
 ## Referințe
 
-- [Referință Configurație azd](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Schema azure.yaml](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
-- [Variabile de Mediu](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
+- [azd Configuration Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [azure.yaml Schema](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/azure-yaml-schema)
+- [Environment Variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference/environment-variables)
 
 ---
 
-**Navigare Capitol:**
-- **📚 Acasă Curs**: [AZD Pentru Începători](../../README.md)
-- **📖 Capitolul Curent**: Capitolul 3 - Configurare & Autentificare
-- **⬅️ Anterior**: [Primul Tău Proiect](first-project.md)
-- **➡️ Capitolul Următor**: [Capitolul 4: Infrastructură ca și Cod](../chapter-04-infrastructure/deployment-guide.md)
-- **Lecția Următoare**: [Primul Tău Proiect](first-project.md)
+**Navigare în capitole:**
+- **📚 Pagina cursului**: [AZD pentru începători](../../README.md)
+- **📖 Capitolul curent**: Capitolul 3 - Configurare și autentificare
+- **⬅️ Anterior**: [Primul tău proiect](first-project.md)
+- **➡️ Următorul capitol**: [Capitolul 4: Infrastructură ca Cod](../chapter-04-infrastructure/deployment-guide.md)
+- **Următoarea lecție**: [Primul tău proiect](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Declinare a responsabilității**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care rezultă din utilizarea acestei traduceri.
+**Declinare de responsabilitate**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original, în limba sa nativă, trebuie considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un traducător uman. Nu răspundem pentru eventualele neînțelegeri sau interpretări greșite care pot rezulta din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

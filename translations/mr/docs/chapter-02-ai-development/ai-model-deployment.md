@@ -1,28 +1,30 @@
-# Azure Developer CLI सह AI मॉडेल तैनाती
+# AI मॉडेल तैनाती Azure Developer CLI सह
 
-**प्रकरण नेव्हिगेशन:**
-- **📚 कोर्स होम**: [AZD For Beginners](../../README.md)
-- **📖 वर्तमान प्रकरण**: प्रकरण 2 - AI-प्रथम विकास
-- **⬅️ मागील**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ पुढील**: [AI Workshop Lab](ai-workshop-lab.md)
+**अध्याय नेव्हिगेशन:**
+- **📚 कोर्स मुख्यपृष्ठ**: [AZD नवशिक्यांसाठी](../../README.md)
+- **📖 सध्याचे प्रकरण**: प्रकरण 2 - AI-प्रथम विकास
+- **⬅️ मागील**: [Microsoft Foundry एकत्रीकरण](microsoft-foundry-integration.md)
+- **➡️ पुढे**: [AI वर्कशॉप लॅब](ai-workshop-lab.md)
 - **🚀 पुढील प्रकरण**: [प्रकरण 3: कॉन्फिगरेशन](../chapter-03-configuration/configuration.md)
 
-हा मार्गदर्शक AZD टेंप्लेट्स वापरून AI मॉडेल तैनात करण्यासाठी संपूर्ण सूचना प्रदान करतो, जेथे मॉडेल निवडण्यापासून ते उत्पादन तैनातीच्या पॅटर्न्स पर्यंत सर्व काही समाविष्ट आहे.
+हे मार्गदर्शक AZD टेम्पलेट्सचा वापर करून AI मॉडेल तैनात करण्यासाठी सविस्तर सूचनांचे पालन करते, जे मॉडेल निवडीपासून उत्पादन तैनाती पॅटर्नपर्यंत सर्वकाही समाविष्ट करते.
 
-## आशय सूची
+> **वैधता नोट (2026-03-25):** या मार्गदर्शकातील AZD वर्कफ्लोची तपासणी `azd` `1.23.12` विरुद्ध केली गेली. ज्या AI तैनातींसाठी डीफॉल्ट सर्व्हिस तैनाती विंडोपेक्षा जास्त वेळ लागतो, सध्याच्या AZD प्रकाशनांमध्ये `azd deploy --timeout <seconds>` समर्थन आहे.
 
-- [मॉडेल निवड धोरण](../../../../docs/chapter-02-ai-development)
-- [AI मॉडेलसाठी AZD कॉन्फिगरेशन](../../../../docs/chapter-02-ai-development)
-- [तैनातीचे पॅटर्न्स](../../../../docs/chapter-02-ai-development)
-- [मॉडेल व्यवस्थापन](../../../../docs/chapter-02-ai-development)
-- [उत्पादन विचारधारा](../../../../docs/chapter-02-ai-development)
-- [निरीक्षण आणि परीक्षण](../../../../docs/chapter-02-ai-development)
+## विषयसूची
+
+- [मॉडेल निवड धोरण](#मॉडेल-निवड-धोरण)
+- [AI मॉडेलसाठी AZD कॉन्फिगरेशन](#ai-मॉडेलसाठी-azd-कॉन्फिगरेशन)
+- [तैनाती नमुने](#तैनाती-नमुने)
+- [मॉडेल व्यवस्थापन](#मॉडेल-व्यवस्थापन)
+- [उत्पादन विचार](#उत्पादन-विचार)
+- [मॉनिटरिंग आणि निरीक्षण](#मॉनिटरिंग-आणि-निरीक्षण)
 
 ## मॉडेल निवड धोरण
 
-### Microsoft Foundry मॉडेल्स
+### Microsoft Foundry मॉडेल्स मॉडेल्स
 
-आपल्या वापर प्रकरणासाठी योग्य मॉडेल निवडा:
+आपल्या वापरासाठी योग्य मॉडेल निवडा:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -41,29 +43,29 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
         ]
 ```
 
-### मॉडेल क्षमतेची योजना
+### मॉडेल क्षमता नियोजन
 
-| मॉडेल प्रकार | वापर प्रकरण | शिफारस केलेली क्षमता | खर्च विचारधारा |
-|--------------|-------------|----------------------|----------------|
-| gpt-4.1-mini | चॅट, प्रश्नोत्तरे | 10-50 TPM | बहुतेक कार्यभारांसाठी खर्च-प्रभावी |
-| gpt-4.1 | जटिल विचार | 20-100 TPM | उच्च खर्च, प्रीमियम वैशिष्ट्यांसाठी वापर |
-| Text-embedding-ada-002 | शोध, RAG | 30-120 TPM | अर्थपूर्ण शोधासाठी आवश्यक |
-| Whisper | स्पीच-टू-टेक्स्ट | 10-50 TPM | ऑडिओ प्रक्रिया कार्यभारांसाठी |
+| मॉडेल प्रकार | उपयोग प्रकरण | शिफारस केलेली क्षमता | खर्चाचे विचार |
+|------------|----------|---------------------|-------------------|
+| gpt-4.1-mini | चॅट, प्रश्नोत्तरे | 10-50 TPM | अधिकांश वर्कलोडसाठी खर्च-कुशल |
+| gpt-4.1 | सखोल तर्क | 20-100 TPM | जास्त खर्च, प्रीमियम वैशिष्ट्यांसाठी वापरा |
+| text-embedding-3-large | शोध, RAG | 30-120 TPM | सामांतिक शोध व पुनर्प्राप्तीसाठी मजबूत डीफॉल्ट निवड |
+| Whisper | स्पीच-टू-टेक्स्ट | 10-50 TPM | ऑडिओ प्रक्रिया वर्कलोडसाठी |
 
 ## AI मॉडेलसाठी AZD कॉन्फिगरेशन
 
-### बिसेप टेंप्लेट कॉन्फिगरेशन
+### Bicep टेम्पलेट कॉन्फिगरेशन
 
-बिसेप टेंप्लेट्सद्वारे मॉडेल तैनाती तयार करा:
+Bicep टेम्पलेट्सद्वारे मॉडेल तैनाती तयार करा:
 
 ```bicep
 // infra/main.bicep
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -122,21 +124,21 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
-### पर्यावरण चल
+### पर्यावरण व्हेरिएबल्स
 
-आपल्या अनुप्रयोगाच्या पर्यावरणाची रचना करा:
+आपल्या अनुप्रयोगाचे पर्यावरण कॉन्फिगर करा:
 
 ```bash
-# .env संरचना
+# .env कॉन्फिगरेशन
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
-## तैनातीचे पॅटर्न्स
+## तैनाती नमुने
 
-### पॅटर्न 1: सिंगल-प्रदेश तैनात
+### नमुना 1: सिंगल-रीजन तैनाती
 
 ```yaml
 # azure.yaml - Single region
@@ -149,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-सर्वोत्तम आहे:
-- विकास आणि चाचणीसाठी
-- एकल बाजार अनुप्रयोगांसाठी
-- खर्च अनुकूलनासाठी
+साठी उत्तम:
+- विकास व चाचणी
+- एकल-बाजार अनुप्रयोग
+- खर्च अनुकूलन
 
-### पॅटर्न 2: बहु-प्रदेश तैनात
+### नमुना 2: बहु-रीजन तैनाती
 
 ```bicep
 // Multi-region deployment
@@ -167,12 +169,12 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-सर्वोत्तम आहे:
-- जागतिक अनुप्रयोगांसाठी
-- उच्च उपलब्धता आवश्यकतांसाठी
-- लोड वितरणासाठी
+साठी उत्तम:
+- जागतिक अनुप्रयोग
+- उच्च उपलब्धता आवश्यकता
+- लोड वितरण
 
-### पॅटर्न 3: हायब्रिड तैनात
+### नमुना 3: हायब्रिड तैनाती
 
 Microsoft Foundry मॉडेल्स इतर AI सेवांसह एकत्र करा:
 
@@ -215,19 +217,19 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
 ```
 
-### मॉडेल अपडेट्स
+### मॉडेल अद्यतने
 
-मॉडेल अपडेट्ससाठी AZD हुक्स वापरा:
+मॉडेल अद्यतनांसाठी AZD हुक्स वापरा:
 
 ```bash
 #!/bin/bash
@@ -238,11 +240,14 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# जर तैनाती डीफॉल्ट टाइमआउटपेक्षा जास्त वेळ घेत असेल
+azd deploy --timeout 1800
 ```
 
 ### A/B चाचणी
 
-अनेक मॉडेल आवृत्त्या तैनात करा:
+एकाधिक मॉडेल आवृत्त्या तैनात करा:
 
 ```bicep
 param enableABTesting bool = false
@@ -264,14 +269,14 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## उत्पादन विचारधारा
+## उत्पादन विचार
 
-### क्षमता योजना
+### क्षमता नियोजन
 
-वापर पॅटर्न्सवर आधारित आवश्यक क्षमता गणना करा:
+वापर नमुन्यांवर आधारित आवश्यक क्षमता काढा:
 
 ```python
-# क्षमता गणनेचा उदाहरण
+# क्षमता गणनेचे उदाहरण
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -283,7 +288,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# उदाहरण वापर
+# वापराचे उदाहरण
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -295,7 +300,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### ऑटो-स्केलिंग कॉन्फिगरेशन
 
-कंटेनर अ‍ॅप्ससाठी ऑटो-स्केलिंग कॉन्फिगर करा:
+Container Apps साठी ऑटो-स्केलिंग कॉन्फिगर करा:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -363,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## निरीक्षण आणि परीक्षण
+## मॉनिटरिंग आणि निरीक्षण
 
-### अनुप्रयोग अंतर्दृष्टी एकत्रीकरण
+### Application Insights एकत्रीकरण
 
-AI कार्यभारांसाठी निरीक्षण कॉन्फिगर करा:
+AI वर्कलोडसाठी मॉनिटरिंग कॉन्फिगर करा:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -408,7 +413,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 AI-विशिष्ट मेट्रिक्स ट्रॅक करा:
 
 ```python
-# AI मॉडेल्ससाठी सानुकूल टेलिमेट्री
+# एआय मॉडेल्ससाठी सानुकूल टेलिमेट्री
 import logging
 from applicationinsights import TelemetryClient
 
@@ -440,9 +445,9 @@ class AITelemetry:
         )
 ```
 
-### हेल्थ तपासण्या
+### हेल्थ चेक्स
 
-AI सेवा आरोग्य निरीक्षण लागू करा:
+AI सेवेचे आरोग्य मॉनिटरिंग लागू करा:
 
 ```python
 # आरोग्य तपासणी एंडपॉइंट्स
@@ -455,7 +460,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # OpenAI कनेक्शन तपासा
+        # OpenAI कनेक्शनची चाचणी
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -471,32 +476,32 @@ async def check_ai_models():
         raise HTTPException(status_code=503, detail=f"Health check failed: {str(e)}")
 ```
 
-## पुढील टप्पे
+## पुढील पावले
 
-1. **[Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** वाचा सेवा एकत्रीकरण पॅटर्नसाठी
-2. **[AI Workshop Lab](ai-workshop-lab.md)** पूर्ण करा प्रत्यक्ष अनुभवासाठी
-3. **[Production AI Practices](production-ai-practices.md)** अंमलात आणा एंटरप्राइझ तैनातीसाठी
-4. **[AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** तपासा सामान्य समस्या
+1. **समीक्षा करा [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** सेवा एकत्रीकरण नमुन्यांसाठी
+2. **पूर्ण करा [AI Workshop Lab](ai-workshop-lab.md)** प्रत्यक्ष अनुभवासाठी
+3. **अंमलात आणा [Production AI Practices](production-ai-practices.md)** एंटरप्राइझ तैनातींसाठी
+4. **शोधा [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** सामान्य समस्यांसाठी
 
-## साधने
+## संसाधने
 
-- [Microsoft Foundry Models मॉडेल उपलब्धता](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI दस्तऐवज](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [कंटेनर अ‍ॅप्स स्केलिंग](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Microsoft Foundry Models Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Azure Developer CLI दस्तऐवजीकरण](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [Container Apps स्केलिंग](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [AI मॉडेल खर्च अनुकूलन](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**प्रकरण नेव्हिगेशन:**
-- **📚 कोर्स होम**: [AZD For Beginners](../../README.md)
-- **📖 वर्तमान प्रकरण**: प्रकरण 2 - AI-प्रथम विकास
-- **⬅️ मागील**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ पुढील**: [AI Workshop Lab](ai-workshop-lab.md)
+**अध्याय नेव्हिगेशन:**
+- **📚 कोर्स मुख्यपृष्ठ**: [AZD नवशिक्यांसाठी](../../README.md)
+- **📖 सध्याचे प्रकरण**: प्रकरण 2 - AI-प्रथम विकास
+- **⬅️ मागील**: [Microsoft Foundry एकत्रीकरण](microsoft-foundry-integration.md)
+- **➡️ पुढे**: [AI वर्कशॉप लॅब](ai-workshop-lab.md)
 - **🚀 पुढील प्रकरण**: [प्रकरण 3: कॉन्फिगरेशन](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**अस्वीकरण**:  
-हा दस्तऐवज AI भाषांतर सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) वापरून भाषांतरित केला आहे. आम्ही अचूकतेसाठी प्रयत्नशील आहोत, तरी कृपया लक्षात घ्या की स्वयंचलित भाषांतरांमध्ये त्रुटी किंवा अचूकता नसणे शक्य आहे. मूळ दस्तऐवज त्याच्या मूळ भाषेत अधिकृत स्रोत मानले जावे. महत्त्वाच्या माहितीकरिता व्यावसायिक मानवी भाषांतर शिफारसीय आहे. या भाषांतराच्या वापरातून झालेल्या कोणत्याही गैरसमजुतीं किंवा चुकीच्या अर्थव्यवस्थेसाठी आम्ही जबाबदार नाही.
+**Disclaimer**:
+हा दस्तऐवज AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) वापरून अनुवादित केला गेला आहे. आम्ही अचूकतेसाठी प्रयत्न करतो, परंतु कृपया लक्षात ठेवा की स्वयंचलित अनुवादांमध्ये त्रुटी किंवा चुका असू शकतात. मूळ दस्तऐवज त्याच्या मूळ भाषेतच अधिकारप्राप्त स्रोत मानला जावा. महत्त्वाच्या माहितीच्या बाबतीत व्यावसायिक मानवी अनुवाद करण्याची शिफारस केली जाते. या अनुवादाच्या वापरामुळे उद्भवणाऱ्या कोणत्याही गैरसमजुतींसाठी किंवा चुकीच्या अर्थनिर्णयासाठी आम्ही जबाबदार नाही.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

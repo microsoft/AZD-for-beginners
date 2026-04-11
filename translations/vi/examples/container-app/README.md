@@ -1,15 +1,15 @@
-# Ví dụ Triển khai Ứng dụng Container với AZD
+# Container App Deployment Examples with AZD
 
 This directory contains comprehensive examples for deploying containerized applications to Azure Container Apps using Azure Developer CLI (AZD). These examples demonstrate real-world patterns, best practices, and production-ready configurations.
 
-## 📚 Mục lục
+## 📚 Table of Contents
 
-- [Tổng quan](#overview)
-- [Yêu cầu](#prerequisites)
-- [Ví dụ Bắt đầu Nhanh](#quick-start-examples)
-- [Ví dụ sản xuất](#production-examples)
-- [Các mẫu nâng cao](#advanced-patterns)
-- [Các thực tiễn tốt nhất](#các-thực-tiễn-tốt-nhất)
+- [Overview](#overview)
+- [Prerequisites](#prerequisites)
+- [Quick Start Examples](#quick-start-examples)
+- [Production Examples](#production-examples)
+- [Advanced Patterns](#advanced-patterns)
+- [Best Practices](#best-practices)
 
 ## Overview
 
@@ -35,8 +35,10 @@ az version
 # Kiểm tra Docker (để xây dựng ảnh tùy chỉnh)
 docker --version
 
-# Đăng nhập vào Azure
+# Xác thực cho các triển khai AZD
 azd auth login
+
+# Tùy chọn: đăng nhập vào Azure CLI nếu bạn định chạy các lệnh az trực tiếp
 az login
 ```
 
@@ -71,7 +73,7 @@ services:
 # Khởi tạo từ mẫu
 azd init --template todo-python-mongo
 
-# Cung cấp hạ tầng và triển khai
+# Thiết lập cơ sở hạ tầng và triển khai
 azd up
 
 # Kiểm tra việc triển khai
@@ -167,9 +169,9 @@ azd show --output json | jq -r '.services.web.endpoint' | xargs start
 
 ## Production Examples
 
-### Ví dụ 1: Kiến trúc Microservices
+### Example 1: Microservices Architecture
 
-**Kịch bản**: Ứng dụng thương mại điện tử với nhiều microservices
+**Scenario**: E-commerce application with multiple microservices
 
 **Directory Structure:**
 ```
@@ -231,11 +233,11 @@ azd up
 azd monitor --overview
 ```
 
-### Ví dụ 2: Ứng dụng Container hỗ trợ AI
+### Example 2: AI-Powered Container App
 
-**Kịch bản**: Ứng dụng chat AI với tích hợp Microsoft Foundry Models
+**Scenario**: AI chat application with Microsoft Foundry Models integration
 
-**Tệp: src/ai-chat/app.py**
+**File: src/ai-chat/app.py**
 ```python
 from flask import Flask, request, jsonify
 from azure.identity import DefaultAzureCredential
@@ -268,7 +270,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
 ```
 
-**Tệp: azure.yaml**
+**File: azure.yaml**
 ```yaml
 name: ai-chat-app
 services:
@@ -278,7 +280,7 @@ services:
     host: containerapp
 ```
 
-**Tệp: infra/main.bicep**
+**File: infra/main.bicep**
 ```bicep
 param location string = resourceGroup().location
 param environmentName string
@@ -320,7 +322,7 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**Lệnh triển khai:**
+**Deployment Commands:**
 ```bash
 # Thiết lập môi trường
 azd init --template ai-chat-app
@@ -339,9 +341,9 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Ví dụ 3: Trình làm việc nền với xử lý hàng đợi
+### Example 3: Background Worker with Queue Processing
 
-**Kịch bản**: Hệ thống xử lý đơn hàng với hàng đợi tin nhắn
+**Scenario**: Order processing system with message queue
 
 **Directory Structure:**
 ```
@@ -360,7 +362,7 @@ queue-worker/
     └── worker/
 ```
 
-**Tệp: src/worker/processor.py**
+**File: src/worker/processor.py**
 ```python
 import os
 from azure.storage.queue import QueueClient
@@ -388,7 +390,7 @@ if __name__ == '__main__':
     process_orders()
 ```
 
-**Tệp: azure.yaml**
+**File: azure.yaml**
 ```yaml
 name: order-processing
 services:
@@ -411,7 +413,7 @@ azd init
 # Triển khai với cấu hình hàng đợi
 azd up
 
-# Điều chỉnh quy mô worker dựa trên độ dài hàng đợi
+# Tăng/giảm số lượng worker dựa trên độ dài hàng đợi
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -422,16 +424,16 @@ az containerapp update \
 
 ## Advanced Patterns
 
-### Mẫu 1: Triển khai Blue-Green
+### Pattern 1: Blue-Green Deployment
 
 ```bash
-# Tạo phiên bản mới không nhận lưu lượng
+# Tạo bản sửa đổi mới không nhận lưu lượng
 azd deploy api --revision-suffix blue --no-traffic
 
-# Kiểm tra phiên bản mới
+# Kiểm tra bản sửa đổi mới
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Chia lưu lượng (20% tới blue, 80% tới current)
+# Chia lưu lượng (20% tới blue, 80% tới phiên hiện tại)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -444,9 +446,9 @@ az containerapp ingress traffic set \
   --revision-weight blue=100
 ```
 
-### Mẫu 2: Triển khai Canary với AZD
+### Pattern 2: Canary Deployment with AZD
 
-**Tệp: .azure/dev/config.json**
+**File: .azure/dev/config.json**
 ```json
 {
   "deploymentStrategy": "canary",
@@ -458,7 +460,7 @@ az containerapp ingress traffic set \
 }
 ```
 
-**Tập lệnh triển khai:**
+**Deployment Script:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
@@ -466,10 +468,10 @@ az containerapp ingress traffic set \
 # Triển khai phiên bản mới với 10% lưu lượng
 azd deploy api --revision-mode multiple
 
-# Giám sát các chỉ số
+# Theo dõi số liệu
 azd monitor --service api --duration 5m
 
-# Tăng lưu lượng dần dần
+# Tăng dần lưu lượng
 for i in {20..100..10}; do
   echo "Increasing traffic to $i%"
   az containerapp revision set-traffic \
@@ -481,9 +483,9 @@ for i in {20..100..10}; do
 done
 ```
 
-### Mẫu 3: Triển khai đa vùng
+### Pattern 3: Multi-Region Deployment
 
-**Tệp: azure.yaml**
+**File: azure.yaml**
 ```yaml
 name: global-app
 services:
@@ -497,7 +499,7 @@ services:
       - southeastasia
 ```
 
-**Tệp: infra/multi-region.bicep**
+**File: infra/multi-region.bicep**
 ```bicep
 param regions array = ['eastus', 'westeurope', 'southeastasia']
 
@@ -529,16 +531,16 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 
 **Deployment:**
 ```bash
-# Triển khai đến tất cả các vùng
+# Triển khai tới tất cả các khu vực
 azd up
 
 # Xác minh các điểm cuối
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### Mẫu 4: Tích hợp Dapr
+### Pattern 4: Dapr Integration
 
-**Tệp: infra/app/dapr-enabled.bicep**
+**File: infra/app/dapr-enabled.bicep**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
   name: 'dapr-app'
@@ -563,7 +565,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-**Mã ứng dụng với Dapr:**
+**Application Code with Dapr:**
 ```python
 from flask import Flask
 from dapr.clients import DaprClient
@@ -580,7 +582,7 @@ def create_order():
             value={'status': 'pending'}
         )
         
-        # Xuất bản sự kiện
+        # Phát hành sự kiện
         client.publish_event(
             pubsub_name='pubsub',
             topic_name='orders',
@@ -590,9 +592,9 @@ def create_order():
     return {'status': 'created'}
 ```
 
-## Các thực tiễn tốt nhất
+## Best Practices
 
-### 1. Tổ chức tài nguyên
+### 1. Resource Organization
 
 ```bash
 # Sử dụng quy ước đặt tên nhất quán
@@ -603,7 +605,7 @@ azd env set AZURE_LOCATION "eastus"
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. Thực tiễn bảo mật tốt nhất
+### 2. Security Best Practices
 
 ```bicep
 // Always use managed identity
@@ -642,7 +644,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
 }
 ```
 
-### 3. Tối ưu hiệu năng
+### 3. Performance Optimization
 
 ```yaml
 # azure.yaml with performance settings
@@ -662,10 +664,10 @@ services:
             concurrent: 100
 ```
 
-### 4. Giám sát và khả năng quan sát
+### 4. Monitoring and Observability
 
 ```bash
-# Bật Application Insights
+# Kích hoạt Application Insights
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
 # Xem nhật ký theo thời gian thực
@@ -685,16 +687,16 @@ az monitor metrics alert create \
   --description "Alert when CPU exceeds 80%"
 ```
 
-### 5. Tối ưu chi phí
+### 5. Cost Optimization
 
 ```bash
-# Thu nhỏ xuống 0 khi không sử dụng
+# Thu nhỏ về 0 khi không sử dụng
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# Sử dụng spot instances cho môi trường phát triển
+# Sử dụng Spot instances cho môi trường phát triển
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
 # Thiết lập cảnh báo ngân sách
@@ -705,9 +707,9 @@ az consumption budget create \
   --threshold 80
 ```
 
-### 6. Tích hợp CI/CD
+### 6. CI/CD Integration
 
-**Ví dụ GitHub Actions:**
+**GitHub Actions Example:**
 ```yaml
 name: Deploy to Azure Container Apps
 
@@ -737,7 +739,7 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Tham khảo các lệnh phổ biến
+## Common Commands Reference
 
 ```bash
 # Khởi tạo dự án ứng dụng container mới
@@ -749,10 +751,10 @@ azd up
 # Chỉ triển khai mã ứng dụng (bỏ qua hạ tầng)
 azd deploy
 
-# Chỉ chuẩn bị hạ tầng
+# Chỉ cấp phát hạ tầng
 azd provision
 
-# Xem các tài nguyên đã triển khai
+# Xem các tài nguyên đã được triển khai
 azd show
 
 # Xem nhật ký theo thời gian thực bằng azd monitor hoặc Azure CLI
@@ -766,9 +768,9 @@ azd monitor --overview
 azd down --force --purge
 ```
 
-## Khắc phục sự cố
+## Troubleshooting
 
-### Vấn đề: Container không khởi động được
+### Issue: Container fails to start
 
 ```bash
 # Kiểm tra nhật ký bằng Azure CLI
@@ -785,7 +787,7 @@ docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Vấn đề: Không thể truy cập endpoint của ứng dụng container
+### Issue: Can't access container app endpoint
 
 ```bash
 # Xác minh cấu hình ingress
@@ -801,15 +803,15 @@ az containerapp ingress update \
   --external true
 ```
 
-### Vấn đề: Hiệu năng kém
+### Issue: Performance problems
 
 ```bash
-# Kiểm tra việc sử dụng tài nguyên
+# Kiểm tra mức sử dụng tài nguyên
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Mở rộng tài nguyên
+# Tăng quy mô tài nguyên
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -817,13 +819,13 @@ az containerapp update \
   --memory 4Gi
 ```
 
-## Tài nguyên và ví dụ bổ sung
-- [Ví dụ Microservices](./microservices/README.md)
-- [Ví dụ Simple Flash API](./simple-flask-api/README.md)
-- [Tài liệu Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
-- [Thư viện mẫu AZD](https://azure.github.io/awesome-azd/)
-- [Ví dụ Container Apps](https://github.com/Azure-Samples/container-apps-samples)
-- [Mẫu Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+## Additional Resources and Examples
+- [Microservices Example](./microservices/README.md)
+- [Simple Flash API Example](./simple-flask-api/README.md)
+- [Azure Container Apps Documentation](https://learn.microsoft.com/azure/container-apps/)
+- [AZD Templates Gallery](https://azure.github.io/awesome-azd/)
+- [Container Apps Samples](https://github.com/Azure-Samples/container-apps-samples)
+- [Bicep Templates](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ## Contributing
 
@@ -837,11 +839,11 @@ To contribute new container app examples:
 
 ---
 
-**Cần trợ giúp?** Tham gia cộng đồng [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) để được hỗ trợ và giải đáp thắc mắc.
+**Need Help?** Join the [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) community for support and questions.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Miễn trừ trách nhiệm**:
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực để đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa sai sót hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ nguyên bản nên được coi là nguồn có thẩm quyền. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm đối với bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
+Văn bản này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa sai sót hoặc không chính xác. Văn bản gốc bằng ngôn ngữ gốc nên được coi là nguồn chính thức. Đối với thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

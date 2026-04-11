@@ -1,118 +1,117 @@
-# 1. ಟೆಂಪ್ಲೇಟು ಆಯ್ಕೆಮಾಡಿ
+# 1. ಟೆಂಪ್ಲೇಟ್ನ ಆಯ್ಕೆ
 
-!!! tip "ಈ ಘಟಕದ ಅಂತ್ಯಕ್ಕೆ ನೀವು ಈ ಕೆಳಗಿನವುಗಳನ್ನು ಮಾಡಲು ಸಾಧ್ಯವಾಗುತ್ತದೆ"
+!!! tip "ಈ ಮೋಡ್ಯೂಲ್ ಮುಗಿದಾಗ ನೀವು ಸಾಮರ್ಥ್ಯ ಹೊಂದಿರುವಿರಿ"
 
-    - [ ] AZD ಟೆಂಪ್ಲೇಟುಗಳು ಏನೆಂದು ವಿವರಿಸಿ
-    - [ ] AI සඳහා AZD ಟೆಂಪ್ಲೇಟುಗಳನ್ನು ಕಂಡುಹಿಡಿದು ಮತ್ತು ಬಳಸುವುದು
-    - [ ] AI ಏಜೆಂಟ್ ಟೆಂಪ್ಲೇಟಿನಿಂದ ಪ್ರಾರಂಭಿಸುವುದು
-    - [ ] **ಲ್ಯಾಬ್ 1:** GitHub Codespaces ಜೊತೆಗೆ AZD ತ್ವರಿತಪ್ರಾರಂಭ
-
----
-
-## 1. ನಿರ್ಮಾಪಕನ ಉಪಮೆ
-
-ಆಧುನಿಕ ನಿಗಮ-ತಯಾರಿಗಾಗುವ AI ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು _ಶೂನ್ಯದಿಂದ_ ನಿರ್ಮಿಸುವುದು ಭಾರೀ ಭೀತಿ ಮೂಡಿಸುವಂತಿದೆ. ಇದು ಸ್ವಲ್ಪ ನಿಮ್ಮ ಹೊಸ ಮನೆyiನನ್ನು ನೀವು ತಾನೇ, ಇಟ್ಟಿಗೆ ಇಟ್ಟಿಗೆಯಾಗಿ ಕಟ್ಟಿಕೊಂಡು ಹೋಗುತ್ತಿರುವಂತೆಯೇ. ಹೌದು, ಅದು ಸಾಧ್ಯವೇ! ಆದರೆ ಅದು ಬೇಕಾದ ಅಂತಿಮ ಫಲಿತಾಂಶವನ್ನು ಪಡೆಯಲು ಅತ್ಯಂತ ಪರಿಣಾಮಕಾರಿಯಾದ ಮಾರ್ಗವಲ್ಲ!
-
-ಬದಲಾಗಿ, ನಾವು ಸಾಮಾನ್ಯವಾಗಿ ಈಗಾಗಲೇ ಇರುವ _ಡಿಸೈನ್ ಬ್ಲೂಪ್ರಿಂಟ್_ ನಿಂದ ಪ್ರಾರಂಭಿಸಿ, ಅದನ್ನು ನಮ್ಮ ವೈಯಕ್ತಿಕ ಅವಶ್ಯಕತೆಗಳಿಗೆ ಅನುಗುಣವಾಗಿ ಕಸ್ಟಮೈಸ್ ಮಾಡಲು ಆರ್ಕಿಟೆಕ್ಟ್ ಜೊತೆಗೆ ಕೆಲಸ ಮಾಡುತ್ತೇವೆ. ಮತ್ತು ಬುದ್ಧಿವಂತ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ನಿರ್ಮಿಸುವಾಗ ಇದೇ ಕ್ರಮವನ್ನು ಅನುಸರಿಸಬೇಕು. ಮೊದಲು, ನಿಮ್ಮ ಸಮಸ್ಯಾ ಕ್ಷೇತ್ರಕ್ಕೆ ಹೊಂದಿಕೊಳ್ಳುವ ಉತ್ತಮ ವಿನ್ಯಾಸ ವಾಸ್ತುಶಿಲ್ಪವನ್ನು ಹುಡುಕಿ. ನಂತರ ನಿಮ್ಮ ನಿರ್ದಿಷ್ಟ ದೃಶ್ಯಾವಳಿಗೆ ಪರಿಹಾರವನ್ನು ಕಸ್ಟಮೈಸ್ ಮತ್ತು ಅಭಿವೃದ್ಧಿಪಡಿಸಲು ಸಲೂಶನ್ ಆರ್ಕಿಟೆಕ್ಟ್ ಜೊತೆಗೆ ಕೆಲಸ ಮಾಡಿ.
-
-ಆದರೆ ನಾವು ಈ ರಚನಾ ಬ್ಲೂಪ್ರಿಂಟ್ಗಳನ್ನು ಎಲ್ಲಿಂದ ಕಂಡುಹಿಡಿಯಬಹುದು? ಮತ್ತು ನಿಮ್ಮ ಸ್ವಂತವಾಗಿ ಈ ಬ್ಲೂಪ್ರಿಂಟ್‌ಗಳನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡಿ ನಿಯೋಜಿಸುವುದನ್ನು ಕಲಿಸಲು ಇಚ್ಛಿಸುವ ಆರ್ಕಿಟೆಕ್ಟನ್ನು ನಾವು ಹೇಗೆ ಕಂಡುಹಿಡಿಯಬಹುದು? ಈ ವರ್ಕ್‌ಶಾಪ್‌ನಲ್ಲಿ, ನಾವು ಈ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸುತ್ತೇವೆ ಮತ್ತು ನಿಮಗೆ ಮೂರು ತಂತ್ರಜ್ಞಾನಗಳನ್ನು ಪರಿಚಯಿಸುತ್ತೇವೆ:
-
-1. [Azure Developer CLI](https://aka.ms/azd) - ಒಂದು ಮುಕ್ತಮೂಲ ಸಾಧನ, ಇದು ಸ್ಥಳೀಯ ಅಭಿವೃದ್ಧಿ (build) ರಿಂದ ಕ್ಲೌಡ್ ನಿಯೋಜನೆ (ship) ಗೆ ಡೆವಲಪರ್ ಮಾರ್ಗವನ್ನು ವೇಗಗೊಳಿಸುತ್ತದೆ.
-1. [Microsoft Foundry Templates](https://ai.azure.com/templates) - AI ಪರಿಹಾರ ವಾಸ್ತುಶಿಲ್ಪವನ್ನು ನಿಯೋಜಿಸಲು ಅಗತ್ಯವಿರುವ ಮಾದರಿ ಕೋಡ್, ಮೂಲಸೌಕರ್ಯ ಮತ್ತು ಸಂರಚನಾ ಫೈಲ್‌ಗಳನ್ನು ಹೊಂದಿರುವ ಮಾನಕೃತ ಮುಕ್ತಮೂಲ ರೆಪೊಜಿಟೋರಿಗಳು.
-1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - ಆಜೂರ್ ಜ್ಞಾನದಲ್ಲಿ ನೆಲಿಸಿಕೊಂಡಿರುವ ಒಂದು ಕೋಡಿಂಗ್ ಏಜೆಂಟ್, ಇದು ನೈಸರ್ಗಿಕ ಭಾಷೆಯನ್ನು ಬಳಸಿ ಕೋಡ್‌ಬೇಸ್‌ನಲ್ಲಿ ನ್ಯಾವಿಗೇಟ್ ಮಾಡಿ ಬದಲಾವಣೆಗಳನ್ನು ಮಾಡಲು ಮಾರ್ಗದರ್ಶನ ನೀಡಬಹುದು.
-
-ಈ ಉಪಕರಣಗಳನ್ನು ಹೊಂದಿರುವುದರಿಂದ, ನಾವು ಈಗ ಸರಿಯಾದ ಟೆಂಪ್ಲೇಟನ್ನು _ಹುಡುಕಿ_, ಅದು ಸರಿ ಕೆಲಸ ಮಾಡುವುದೆಂದು ಪರಿಶೀಲಿಸಲು ಅದನ್ನು _ನಿಯೋಜಿಸಿ_, ಮತ್ತು ನಮ್ಮ ನಿರ್ದಿಷ್ಟ ದೃಶ್ಯಾವಳಿಗೆ ಅನುಗುಣವಾಗಿ ಅದನ್ನು _ಅನುಕೂಲಗೊಳಿಸಬಹುದು_. ಬನ್ನಿ, ಇವು ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತವೆ ಎಂದು ತಿಳಿಯೋಣ.
+    - [ ] AZD ಟೆಂಪ್ಲೇಟ್ಗಳು ಏನು ಎಂದು ವಿವರಿಸಿ
+    - [ ] AI ಕ್ಕೆ AZD ಟೆಂಪ್ಲೇಟ್ಗಳನ್ನು ಹುಡುಕಿ ಮತ್ತು ಬಳಸಿ
+    - [ ] AI ಏಜೆಂಟ್‌ಗಳು ಟೆಂಪ್ಲೇಟ್ನೊಂದಿಗೆ ಪ್ರಾರಂಭಿಸಿ
+    - [ ] **ಲ್ಯಾಬ್ 1:** ಕೋಡ್ಸ್ಪೇಸ್ಗಳಲ್ಲಿ ಅಥವಾ ಡೆವ್ ಕಾಂಟೇನರ್‌ನಲ್ಲಿ AZD ಕ್ವಿಕ್‌ಸ್ಟಾರ್ಟ್
 
 ---
 
-## 2. Azure Developer CLI
+## 1. ನಿರ್ಮಾಪಕ ಸಮಾನತೆ
 
-The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (ಅಥವಾ `azd`) ಒಂದು ಮುಕ್ತಮೂಲ ಕಮಾಂಡ್‌ಲೈನ್ ಸಾಧನ, ಇದು ನಿಮ್ಮ ಕೋಡ್-ಟು-ಕ್ಲೌಡ್ ಪ್ರಯಾಣವನ್ನು ವೇಗಗೊಳಿಸಲು IDE (ಅಭಿವೃದ್ಧಿ) ಮತ್ತು CI/CD (ಡೆವ್ಓಪ್ಸ್) ಪರಿಸರಗಳಲ್ಲಿ ನಿತ್ಯವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುವ ಡೆವಲಪರ್-ಸ್ನೇಹಿ ಕಮಾಂಡ್‌ಗಳ ಸೆಟ್ ಅನ್ನು ಒದಗಿಸುತ್ತದೆ.
+ನವೀಕರಿಸಿದ ಎಂಟರ್‌ಪ್ರೈಸ್-ಸಿದ್ಧ AI ಅಪ್ಲಿಕೇಶನ್‌‌ವನ್ನು _ಆರಂಭದಿಂದ_ ನಿರ್ಮಿಸುವುದು ಭಯಾನಕವಾಗಬಹುದು. ಇದು ನಿಮ್ಮ ಹೊಸ ಮನೆ ಅನ್ನು ಒಂದು ಒಂದು ಇಟ್ಟಿಗೆ ಹಾಕಿ ಹೋಲುತ್ತದೆ. ಹೌದು, ಅದು ಸಾಧ್ಯ! ಆದರೆ ಅದು ಆದರ್ಶ ಅಂತಿಮ ಫಲಿತಾಂಶ ಪಡೆಯಲು ಅತ್ಯಂತ ಪರಿಣಾಮಕಾರಿ ವಿಧಾನವಲ್ಲ!
 
-`azd` ಬಳಸಿ, ನಿಮ್ಮ ನಿಯೋಜನೆ ಪ್ರಯಾಣವು ಹೀಗಿರಬಹುದು:
+ಬದಲಿಗೆ, ನಾವು ಸಾಮಾನ್ಯವಾಗಿ ಮೊದಲೇ ಇರುವ _ಡಿಸೈನ್ ಬ್ಲೂಪ್ರಿಂಟ್_ ನಿಂದ ಪ್ರಾರಂಭಿಸಿ, ಅಂದಾಜುಕಾರನೊಂದಿಗೆ ಕೆಲಸ ಮಾಡಿ ಅದನ್ನು ನಮ್ಮ ವೈಯಕ್ತಿಕ ಅಗತ್ಯಗಳಿಗೆ ಹೊಂದಿಸುತ್ತೇವೆ. ಬುದ್ಧಿವಂತ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ನಿರ್ಮಿಸುವಾಗ ಇದೇ ನೈಜ ವಿಧಾನ. ಮೊದಲು, ನಿಮ್ಮ ಸಮಸ್ಯಾ ಕ್ಷೇತ್ರಕ್ಕೆ ತಕ್ಕ ಸೂಕ್ತ ಡಿಸೈನ್ ಆರ್ಕಿಟೆಕ್ಚರ್ ಅನ್ನು ಹುಡುಕಿ. ನಂತರ ಸೊಲ್ಯೂಷನ್ ಆರ್ಕಿಟೆಕ್ಟ್ ಜೊತೆಗೆ ಕೆಲಸ ಮಾಡಿ ಅದನ್ನು ನಿಮ್ಮ ವಿಶೇಷ ಸಂದರ್ಭಕ್ಕೆ ಹೊಂದಿಸಿ ಅಭಿವೃದ್ಧಿಪಡಿಸಿ.
 
-- `azd init` - υπάρ_existing AZD ಟೆಂಪ್ಲೇಟಿನಿಂದ ಹೊಸ AI ಪ್ರಾಜೆಕ್ಟ್ ಅನ್ನು ಪ್ರಾರಂಭಿಸುತ್ತದೆ.
-- `azd up` - ಮೂಲಸೌಕರ್ಯವನ್ನು ಒದಗಿಸಿ ಮತ್ತು ನಿಮ್ಮ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಒಂದೇ ಹೆಜ್ಜೆಯಲ್ಲಿ ನಿಯೋಜಿಸುತ್ತದೆ.
-- `azd monitor` - ನಿಮ್ಮ ನಿಯೋಜಿಸಲಾದ ಅಪ್ಲಿಕೇಶನ್‌ಗಾಗಿ ರಿಯಲ್-ಟೈಮ್ ಮಾನಿಟರಿಂಗ್ ಮತ್ತು ಡೈಯಾಗ್ನೋಸ್ಟಿಕ್ಸ್ ಪಡೆಯಿರಿ.
-- `azd pipeline config` - Azure ಗೆ ನಿಯೋಜನೆಯನ್ನು ಸ್ವಯಂಚಾಲಿತಗೊಳಿಸಲು CI/CD ಪೈಪ್‌ಲೈನ್‌ಗಳನ್ನು ಹೊಂದಿಸಿ.
+ಆದರೆ ಈ ಡಿಸೈನ್ ಬ್ಲೂಪ್ರಿಂಟ್‌ಗಳನ್ನು ನಾವು ಎಲ್ಲಿಂದ ಹುಡುಕಬಹುದು? ಮತ್ತು ನಮ್ಮಲ್ಲಿಗೆ ಬ್ಲೂಪ್ರಿಂಟ್‌ಗಳನ್ನು ಕಸ್ಟಮೈಸ್ ಮಾಡುವುದು ಮತ್ತು ಡಿಪ್ಲಾಯ್ ಮಾಡುವುದಕ್ಕೆ ತರಬೇತಿ ನೀಡುವ ಆರ್ಕಿಟೆಕ್ಟ್ ಅನ್ನು ಹೇಗೆ ಕಂಡುಹಿಡಿಯಬಹುದು? ಈ ವರ್ಕ್‌ಶಾಪ್‌ನಲ್ಲಿ, ನಾವು ಈ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರ ನೀಡುತ್ತೇವೆ ಮೂರು տեխնಾಲಜಿಗಳ ಪರಿಚಯ ನೀಡುವುದರಿಂದ:
 
-**🎯 | ವ್ಯಾಯಾಮ**: <br/> Explore the `azd` commandline tool in your GitHub Codespaces environment now. Start by typing this command to see what the tool can do:
+1. [Azure Developer CLI](https://aka.ms/azd) - ಸ್ಥಳೀಯ ಅಭಿವೃದ್ಧಿಯಿಂದ (ಬಿಲ್ಡ್) ಕ್ಲೌಡ್ ಡಿಪ್ಲಾಯ್‌ಮೆಂಟ್ (ಶಿಪ್) ಗೆ ವೇಗವನ್ನು ಸಹಾಯ ಮಾಡುವ ಓಪನ್-ಸೋರ್ಸ್ ಉಪಕರಣ.
+1. [Microsoft Foundry Templates](https://ai.azure.com/templates) - AI ಪರಿಹಾರ ಆರ್ಕಿಟೆಕ್ಚರ್ ಡಿಪ್ಲಾಯ್ಮೆಂಟ್ ಗಾಗಿ نمೂನಾ ಕೋಡ್, ಇನ್‌ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಮತ್ತು ಸಂರಚನಾ ಕಡತಗಳನ್ನು ಹೊಂದಿರುವ ಮಾನ್ಯತೆ ಪಡೆದ ಓಪನ್-ಸೋರ್ಸ್ ರೆಪೊಗಳು.
+1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - ಆಜ್ಯುರ್ ಜ್ಞಾನಾದಾರಿತ ಕೋಡಿಂಗ್ ಏಜೆಂಟ್, ಇದು ಕೋಡ್‌ಬೇಸ್‌ನಲ್ಲಿ ಮಾರ್ಗದರ್ಶನ ನೀಡುತ್ತದೆ ಮತ್ತು ಸಹಜ ಭಾಷೆಯ ಮೂಲಕ ಬದಲಾವಣೆಗಳನ್ನು ಮಾಡಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ.
+
+ಈ ಉಪಕರಣಗಳೊಂದಿಗೆ, ನಾವು ಈಗ _ದೊಂದೆಂದ ಮತ್ತು_ ಸರಿಯಾದ ಟೆಂಪ್ಲೇಟನ್ನು _ಡಿಪ್ಲಾಯ್_ ಮಾಡಿ ಅದು ಕಾರ್ಯನಿರ್ವಹಿಸುವುದನ್ನು ಪರಿಶೀಲಿಸಬಹುದು ಮತ್ತು ನಮ್ಮ ವಿಶೇಷ ಪರಿಸ್ಥಿತಿಗಳಿಗೆ _ಕಸ್ಟಮೈಸ್_ ಮಾಡಬಹುದು. ಬನ್ನಿ ಈ ಮೂಲಕ ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ ಎಂದು ಅಧ್ಯಯನ ಮಾಡೋಣ.
+
+---
+
+## 2. ಅಜ್ಯುರ್ ಡೆವಲಪರ್ CLI
+
+[Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (ಅಥವಾ `azd`) ಒಂದು ಓಪನ್-ಸೋರ್ಸ್ ಕಮಾಂಡ್‌ಲೈನ್ ಉಪಕರಣವಾಗಿದ್ದು ನಿಮ್ಮ ಕೋಡ್-ನಿಂದ-ಕ್ಲೌಡ್ ಪ್ರಯಾಣವನ್ನು ವೇಗಗೊಳಿಸಲು ಡೆವಲಪರ್-ಪ್ರಿಯ ಕಮಾಂಡ್‌ಗಳ ಸಮೂಹವನ್ನು ಒದಗಿಸುತ್ತದೆ, ಇದು ನಿಮ್ಮ IDE (ಅಭಿವೃದ್ಧಿ) ಮತ್ತು CI/CD (ಡೆವ್‌ಓಪ್ಸ್) ಪರಿಸರಗಳಲ್ಲಿ ಸತತವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ.
+
+`azd` ಉಪಯೋಗಿಸಿ, ನಿಮ್ಮ ಡಿಪ್ಲಾಯ್‌ಮೆಂಟ್ ಪ್ರಕ್ರಿಯೆ ಅದ್ಭುತವಾಗಿ ಸರಳವಾಗಬಹುದು:
+
+- `azd init` - ಇದ್ದ AZD ಟೆಂಪ್ಲೇಟನಿಂದ ನೂತನ AI ಯೋಜನೆಯನ್ನು ಪ್ರಾರಂಭಿಸುತ್ತದೆ.
+- `azd up` - ಒಂದು ಹೆಜ್ಜೆಯಲ್ಲಿ ಇನ್‌ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಒದಗಿಸಿ ನಿಮ್ಮ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಡಿಪ್ಲಾಯ್ ಮಾಡಿ.
+- `azd monitor` - ನಿಮ್ಮ ಡಿಪ್ಲಾಯ್ ಆಗಿರುವ ಅಪ್ಲಿಕೇಶನ್‌ಗೆ ರಿಯಲ್ಟೈಮ್ ಮോണಿಟರಿಂಗ್ ಮತ್ತು ಡಯಾಗ್ನೋಸ್ಟಿಕ್ಸ್ ಒದಗಿಸಿ.
+- `azd pipeline config` - ಆಜ್ಯುರ್‌ಗೆ ಡಿಪ್ಲಾಯ್ ಮಾಡಲು CI/CD ಪೈಪ್‌ಲೈನ್ಗಳನ್ನು ಸ್ವಯಂಕ್ರಿಯಗೊಳಿಸಿ.
+
+**🎯 | ಅಭ್ಯಾಸ**: <br/> ಈಗ ನಿಮ್ಮ ಅಲ್ಲಿ ಇರುವ ವರ್ಕ್‌ಶಾಪ್ ಪರಿಸರದಲ್ಲಿ `azd` ಕಮಾಂಡ್‌ಲೈನ್ ಉಪಕರಣವನ್ನು ಬಗ್ಗೆ ಅನ್ವೇಷಿಸಿ. ಇದರಲ್ಲಿ GitHub Codespaces, ಡೆವ್ ಕಂಟೇನರ್, ಅಥವಾ ಪೂರ್ವಾಪೇಕ್ಷಿತ ವ್ಯವಸ್ಥಿತ ಸ್ಥಳೀಯ ಕ್ಲೋನ್ ಇಲ್ಲಬಹುದು. ಈ ಕಮಾಂಡ್ ಅನ್ನು ಟೈಪ್ ಮಾಡಿ ಉಪಕರಣ ಏನು ಮಾಡುತ್ತದೆ ಎಂದು ನೋಡಿ:
 
 ```bash title="" linenums="0"
 azd help
 ```
 
-![ಪ್ರವಾಹ](../../../../../translated_images/kn/azd-flow.19ea67c2f81eaa66.webp)
+![Flow](../../../../../translated_images/kn/azd-flow.19ea67c2f81eaa66.webp)
 
 ---
 
 ## 3. AZD ಟೆಂಪ್ಲೇಟು
 
-For `azd` to achieve this, it needs to know the infrastructure to provision, the configuration settings to enforce, and the application to deploy. This is where [AZD templates](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp) come in. 
+`azd` ಈ ಕಾರ್ಯಗಳನ್ನು ಮಾಡಲು, ಇದಕ್ಕೆ ಯಾವ ಇನ್‌ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಒದಗಿಸಬೇಕು, ಯಾವ ಸಂರಚನಾ ಸೆಟ್ಟಿಂಗ್ಗಳನ್ನು ಜೋಡಿಸಬೇಕು ಮತ್ತು ಅಪ್ಲಿಕೇಶನ್ ಯಾವುದು ಡಿಪ್ಲಾಯ್ ಮಾಡಬೇಕು ಎಂಬುದನ್ನು ತಿಳಿದುಕೊಳ್ಳಬೇಕು. ಈ ಸ್ಥಳದಲ್ಲಿ [AZD ಟೆಂಪ್ಲೇಟ್ಗಳು](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp) ಸಹಾಯ ಮಾಡುತ್ತವೆ.
 
-AZD ಟೆಂಪ್ಲೇಟುಗಳು ಮಾದರಿ ಕೋಡ್ ಅನ್ನು ಅನ್ನು ಮೂಲسازی ಮತ್ತು ಸಂರಚನಾ ಫೈಲ್‌ಗಳೊಂದಿಗೆ ಸಂಯೋಜಿಸುವ ಮುಕ್ತಮೂಲ ರೆಪೊಜಿಟೋರಿಗಳಾಗಿವೆ, ಅವು AI ಪರಿಹಾರ ವಾಸ್ತುಶಿಲ್ಪವನ್ನು ನಿಯೋಜಿಸಲು ಅಗತ್ಯವಾಗುತ್ತದೆ.
-By using an _Infrastructure-as-Code_ (IaC) approach, they allow template resource definitions and configuration settings to be version-controller (just like the app source code) - creating reusable and consistent workflows across users of that project.
+AZD ಟೆಂಪ್ಲೇಟುಗಳು نمೂನಾ ಕೋಡ್, ಇನ್‌ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್ ಮತ್ತು ಸಂರಚನಾ ಕಡತಗಳನ್ನು ಹೊಂದಿರುವ ಓಪನ್-ಸೋರ್ಸ್ ರೆಪೊಗಳು ಆಗಿವೆ, ಅವುಗಳು ಪರಿಹಾರ ಆರ್ಕಿಟೆಕ್ಚರ್ ಡಿಪ್ಲಾಯ್ ಮಾಡಲು ಬೇಕಾಗುತ್ತವೆ.
+_ಇನ್‌ಫ್ರಾಸ್ಟ್ರಕ್ಚರ್-ಅಸ್-ಕೋಡ್_ (IaC) ವಿಧಾನವನ್ನು ಬಳಸುತ್ತಾ, ಇವು ಪರಿಕಲ್ಪನೆ ಸಂಪನ್ಮೂಲ ವ್ಯಾಖ್ಯಾನಗಳು ಮತ್ತು ಸಂರಚನಾ ಸೆಟ್ಟಿಂಗ್ಗಳನ್ನು ಆವೃತ್ತಿ-ನಿಯಂತ್ರಣದಡಿ ಇಟ್ಟುಕೊಳ್ಳಲು (ಅಪ್ರಯೋಜಿತ ಕೋಡ್‌ನಂತೆ) ಅನುಮತಿಸುತ್ತವೆ - ಪೆÇעקטಿನ ಬಳಕೆದಾರರ ನಡುವೆ ಪುನರ್‍ಬಳವೆಯಾದ ಮತ್ತು ಸಕಾಲಿಕ ಕಾರ್ಯಪ್ರವಾಹವನ್ನು ಸೃಷ್ಟಿಯಾಗುತ್ತದೆ.
 
-When creating or reusing an AZD template for _your_ scenario, consider these questions:
+ನಿಮ್ಮ _ಪರಿಸ್ಥಿತಿಗೆ_ AZD ಟೆಂಪ್ಲೇಟು ರಚಿಸಲು ಅಥವಾ ಮರುಬಳಕೆ ಮಾಡಲು ಈ ಪ್ರಶ್ನೆಗಳನ್ನು ಪರಿಗಣಿಸಿ:
 
-1. What are you building? → ಆ ದೃಶ್ಯಾವಳಿಗೆ ಸ್ಟಾರ್ಟರ್ ಕೋಡ್ ಇರುವ ಟೆಂಪ್ಲೇಟು ಇದೆಯೇ?
-1. How is your solution architected? → ಅಗತ್ಯ ಸಂಪನ್ಮೂಲಗಳಿರುವ ಟೆಂಪ್ಲೇಟು ಇದೆಯೇ?
-1. How is your solution deployed? → ಪೂರ್ವ/ಪೋಸ್ಟ್ ಪ್ರೋಸೆಸಿಂಗ್ ಹುಕ್‌ಗಳೊಂದಿಗೆ `azd deploy` ಅನ್ನು ವಿಚಾರಿಸಿ!
-1. How can you optimize it further? → ನಿರ್ಮಿತ ಮಾನಿಟರಿಂಗ್ ಮತ್ತು ಸ್ವಯಂಚಾಲಿತ ಪೈಪ್‌ಲೈನ್ಗಳನ್ನು ಪರಿಗಣಿಸಿ!
+1. ನೀವು ಏನು ನಿರ್ಮಿಸುತ್ತಿದ್ದೀರಿ? → ಈ ಸಂದರ್ಭಕ್ಕೆ ಪ್ರಾರಂಭ ಕೋಡ್ ಇರುವ ಟೆಂಪ್ಲೇಟು ಇದೆಯೇ?
+1. ನಿಮ್ಮ ಪರಿಹಾರವನ್ನು ಹೇಗೆ ವಿನ್ಯಾಸಗೊಳ್ಳುತ್ತದೆ? → ಅಗತ್ಯ ಸಂಪನ್ಮೂಲಗಳಿರುವ ಟೆಂಪ್ಲೇಟು ಇದೆಯೇ?
+1. ನಿಮ್ಮ ಪರಿಹಾರವನ್ನು ಹೇಗೆ ಡಿಪ್ಲಾಯ್ ಮಾಡಲಾಗುತ್ತದೆ? → `azd deploy` ಜೊತೆಗೆ ಪೂರ್ವ/ಪೋಸ್ಟ್ ಪ್ರೊಸೆಸಿಂಗ್ ಹೂಕಳು ಇದ್ದರೆ ಹೇಗೆ?
+1. ಇದನ್ನು ಇನ್ನೂ ಹೆಚ್ಚು ಸುಧಾರಿಸಲು ಹೇಗೆ? → ಸ್ವಯಂಚಾಲಿತ ಮോണಿಟರಿಂಗ್ ಮತ್ತು ಪೈಪ್‌ಲೈನ್ಗಳನ್ನು ಭಾವಿಸಿ!
 
-**🎯 | ವ್ಯಾಯಾಮ**: <br/> 
-Visit the [Awesome AZD](https://azure.github.io/awesome-azd/) gallery and use the filters to explore the 250+ templates currently available. See if you can find on that aligns to _your_ scenario requirements.
+**🎯 | ಅಭ್ಯಾಸ**: <br/> 
+[Awesome AZD](https://azure.github.io/awesome-azd/) ಗ್ಯಾಲರಿಗೆ ಭೇಟಿ ನೀಡಿ ಮತ್ತು 250+ ಟೆಂಪ್ಲೇಟುಗಳ ಪೈಕಿ ನಿಮ್ಮ ಪರಿಸ್ಥಿತಿಗೆ ಸೂಕ್ತವಿರುವುದನ್ನು ಹುಡುಕಿ. ಫಿಲ್ಟರ್‌ಗಳಿಂದ ನಿಮ್ಮ ಅಗತ್ಯಗಳಿಗೆ ಹೊಂದಿಕೆಯಾಗುವ ಟೆಂಪ್ಲೇಟುಗಳನ್ನು ಅನ್ವೇಷಿಸಿ.
 
-![ಕೋಡ್](../../../../../translated_images/kn/azd-code-to-cloud.2d9503d69d3400da.webp)
+![Code](../../../../../translated_images/kn/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 
 ## 4. AI ಅಪ್ಲಿಕೇಶನ್ ಟೆಂಪ್ಲೇಟುಗಳು
 
-For AI-powered applications, Microsoft provides specialized templates featuring **Microsoft Foundry** and **Foundry Agents**. These templates accelerate your path to building intelligent, production-ready applications.
+AI ಅನುದಾನಿತ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಗಾಗಿ, ಮೈಕ್ರೋಸಾಫ್ಟ್ **Microsoft Foundry** ಮತ್ತು **Foundry Agents** ಐಶ್ವರ್ಯವನ್ನು ಹೊಂದಿದ ವಿಶಿಷ್ಟ ಟೆಂಪ್ಲೇಟುಗಳನ್ನು ಒದಗಿಸುತ್ತದೆ. ಈ ಟೆಂಪ್ಲೇಟುಗಳು ಬುದ್ಧಿವಂತ, ಉತ್ಪಾದನೆಗೆ ಸಿದ್ಧ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ನಿರ್ಮಿಸುವ ಪಥವನ್ನು ತ್ವರಿತಗೊಳಿಸುತ್ತವೆ.
 
-### Microsoft Foundry & Foundry Agents Templates
+### Microsoft Foundry & Foundry Agents ಟೆಂಪ್ಲೇಟುಗಳು
 
-Select a template below to deploy. Each template is available on [Awesome AZD](https://azure.github.io/awesome-azd/) and can be initialized with a single command.
+ಡಿಪ್ಲಾಯ್ ಮಾಡಲು ಕೆಳಗಿನ ಟೆಂಪ್ಲೇಟು ಆಯ್ಕೆಮಾಡಿ. ಪ್ರತಿಯೊಂದು ಟೆಂಪ್ಲೇಟು [Awesome AZD](https://azure.github.io/awesome-azd/) ನಲ್ಲಿ ಲಭ್ಯವಿದ್ದು ಒಂದೇ ಕಮಾಂಡ್ ಮೂಲಕ ಪ್ರಾರಂಭಿಸಬಹುದು.
 
-| ಟೆಂಪ್ಲೇಟು | ವಿವರಣೆ | ನಿಯೋಜನೆ ಕಮಾಂಡ್ |
+| ಟೆಂಪ್ಲೇಟು | ವಿವರಣೆ | ಡಿಪ್ಲಾಯ್ ಕಮಾಂಡ್ |
 |----------|-------------|----------------|
-| **[RAG ಜೊತೆ AI ಚಾಟ್](https://azure.github.io/awesome-azd/?tags=ai&tags=rag)** | Microsoft Foundry ಬಳಸಿಕೊಂಡು Retrieval Augmented Generation ಮೂಲಕ ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್ | `azd init -t azure-samples/azure-search-openai-demo` |
-| **[Foundry Agent Service Starter](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | ಸ್ವಯಂಚಾಲಿತ ಕಾರ್ಯ ನಿರ್ವಹಣೆಗೆ Foundry Agents ಬಳಸಿ AI ಏಜೆಂಟ್‌ಗಳನ್ನು ನಿರ್ಮಿಸಿ | `azd init -t azure-samples/foundry-agent-service-starter` |
-| **[Multi-Agent Orchestration](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | ಸಂಕೀರ್ಣ ಕಾರ್ಯವಿಧಾನಗಳಿಗೆ ಹಲವಾರು Foundry ಏಜೆಂಟ್‌ಗಳನ್ನು ಸಂಯೋಜಿಸಿ | `azd init -t azure-samples/multi-agent-orchestration` |
-| **[AI Document Intelligence](https://azure.github.io/awesome-azd/?tags=ai&tags=document)** | Microsoft Foundry ಮಾದರಿಗಳೊಂದಿಗೆ ದಾಖಲೆಗಳನ್ನು ಹೊರತೆಗೆಯಿರಿ ಮತ್ತು ವಿಶ್ಲೇಷಿಸಿ | `azd init -t azure-samples/ai-document-processing` |
-| **[Conversational AI Bot](https://azure.github.io/awesome-azd/?tags=ai&tags=bot)** | Microsoft Foundry ಏಕೀಕರಣದೊಂದಿಗೆ ಬುದ್ಧಿವಂತ ಚಾಟ್‌ಬಾಟ್‌ಗಳನ್ನು ನಿರ್ಮಿಸಿ | `azd init -t azure-samples/ai-chat-protocol` |
-| **[AI Image Generation](https://azure.github.io/awesome-azd/?tags=ai&tags=dalle)** | Microsoft Foundry ಮೂಲಕ DALL-E ಬಳಸಿ ಚಿತ್ರಗಳನ್ನು ರಚಿಸಿ | `azd init -t azure-samples/ai-image-generation` |
-| **[Semantic Kernel Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=semantic-kernel)** | Foundry Agents ಜೊತೆಗೆ Semantic Kernel ಬಳಸಿ AI ಏಜೆಂಟ್‌ಗಳು | `azd init -t azure-samples/semantic-kernel-agent` |
-| **[AutoGen Multi-Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=autogen)** | AutoGen ಫ್ರೇಮ್‌ವರ್ಕ್ ಬಳಸಿಕೊಂಡು ಬಹು-ಏಜೆಂಟ್ ವ್ಯವಸ್ಥೆಗಳು | `azd init -t azure-samples/autogen-multi-agent` |
+| **[RAG ಸಹಿತ AI ಚಾಟ್](https://azure.github.io/awesome-azd/?tags=ai&tags=rag)** | Microsoft Foundry ಬಳಸಿ ರಿಟೀವಲ್ ಆಗ್ಗ್ಮೆಂಟೆಡ್ ಜನರೇಶನ್ ಹೊಂದಿರುವ ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್ | `azd init -t azure-samples/azure-search-openai-demo` |
+| **[Foundry ಏಜೆಂಟ್ ಸೇವಾ ಸ್ಟಾರ್ಟರ್](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Foundry Agents ಬಳಸಿ ಸ್ವತಂತ್ರ ಕಾರ್ಯ ನಿರ್ವಹಣೆಗೆ AI ಏಜೆಂಟ್‌ಗಳನ್ನು ನಿರ್ಮಿಸಿ | `azd init -t azure-samples/foundry-agent-service-starter` |
+| **[ಬಹು ಏಜೆಂಟ್ ಸಂಘಟನೆ](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | ಸಂಕೀರ್ಣ ಕಾರ್ಯಪ್ರವಾಹಗಳಿಗಾಗಿ ಹಲವು Foundry ಏಜೆಂಟ್‌ಗಳನ್ನು ಸಂಯೋಜಿಸಿ | `azd init -t azure-samples/multi-agent-orchestration` |
+| **[AI ಡಾಕ್ಯುಮೆಂಟ್ ಬುದ್ದಿವಂತಿಕೆ](https://azure.github.io/awesome-azd/?tags=ai&tags=document)** | Microsoft Foundry ಮಾದರಿಗಳೊಂದಿಗೆ ಡಾಕ್ಯುಮೆಂಟ್‌ಗಳನ್ನು ತೆಗೆಯಿರಿ ಮತ್ತು ವಿಶ್ಲೇಷಿಸಿ | `azd init -t azure-samples/ai-document-processing` |
+| **[ಸಂವಾದಾತ್ಮಕ AI ಬಾಟ್](https://azure.github.io/awesome-azd/?tags=ai&tags=bot)** | Microsoft Foundry ಸಂಯೋಜನೆಯೊಂದಿಗೆ ಬುದ್ಧಿವಂತ ಚಾಟ್‌ಬಾಟ್‌ಗಳನ್ನು ನಿರ್ಮಿಸಿ | `azd init -t azure-samples/ai-chat-protocol` |
+| **[AI ಚಿತ್ರ ರಚನೆ](https://azure.github.io/awesome-azd/?tags=ai&tags=dalle)** | Microsoft Foundry ಮೂಲಕ DALL-E ಬಳಸಿ ಚಿತ್ರಗಳನ್ನು ರಚಿಸಿ | `azd init -t azure-samples/ai-image-generation` |
+| **[ಸೆಮ್ಯಾಂಟಿಕ್ ಕರ್ಣೆಲ್ ಏಜೆಂಟ್](https://azure.github.io/awesome-azd/?tags=ai&tags=semantic-kernel)** | Foundry ಏಜೆಂಟ್‌ಗಳೊಂದಿಗೆ ಸೆಮ್ಯಾಂಟಿಕ್ ಕರ್ಣೆಲ್ ಬಳಸಿ AI ಏಜೆಂಟ್‌ಗಳು | `azd init -t azure-samples/semantic-kernel-agent` |
+| **[AutoGen ಬಹು ಏಜೆಂಟ್](https://azure.github.io/awesome-azd/?tags=ai&tags=autogen)** | AutoGen ಫ್ರೇಮ್ವರ್ಕ್ ಬಳಸಿ ಬಹು ಏಜೆಂಟ್‌ ವ್ಯವಸ್ಥೆಗಳು | `azd init -t azure-samples/autogen-multi-agent` |
 
 ### ತ್ವರಿತ ಪ್ರಾರಂಭ
 
-1. **ಟೆಂಪ್ಲೇಟುಗಳನ್ನು ಬ್ರೌಸ್ ಮಾಡಿ**: Visit [https://azure.github.io/awesome-azd/](https://azure.github.io/awesome-azd/) ಮತ್ತು `AI`, `Agents`, ಅಥವಾ `Microsoft Foundry` ಮೂಲಕ ಫಿಲ್ಟರ್ ಮಾಡಿ
-2. **ನಿಮ್ಮ ಟೆಂಪ್ಲೇಟನ್ನು ಆಯ್ಕೆಮಾಡಿ**: ನಿಮ್ಮ ಬಳಕೆದ ಪ್ರಕರಣಕ್ಕೆ ಹೊಂದುವ ಒಂದು ಆಯ್ಕೆಮಾಡಿ
-3. **ಆರಂಭಿಸಿ**: ನಿಮ್ಮ ಆಯ್ಕೆದ ಟೆಂಪ್ಲೇಟಿಗಾಗಿ `azd init` ಕಮಾಂಡ್ ಅನ್ನು ಚಲಾಯಿಸಿ
-4. **ನಿಯೋಜಿಸಿ**: ಪ್ರೊವಿಷನ್ ಮಾಡಿ ಮತ್ತು ನಿಯೋಜಿಸಲು `azd up` ಅನ್ನು ಚಲಾಯಿಸಿ
+1. **ಟೆಂಪ್ಲೇಟುಗಳನ್ನು ಅನ್ವೇಷಿಸಿ**: [https://azure.github.io/awesome-azd/](https://azure.github.io/awesome-azd/) ಗೆ ಹೋಗಿ ಮತ್ತು `AI`, `Agents`, ಅಥವಾ `Microsoft Foundry` ಮೂಲಕ ಫಿಲ್ಟರ್ ಮಾಡಿ
+2. **ನಿಮ್ಮ ಟೆಂಪ್ಲೇಟನ್ನು ಆಯ್ಕೆಮಾಡಿ**: ನಿಮ್ಮ ಬಳಕೆಮುಖಕ್ಕೆ ಹೊಂದುವುದನ್ನು ಆರಿಸಿ
+3. **ಪ್ರಾರಂಭಿಸಿ**: ಆರಿಸಿದ ಟೆಂಪ್ಲೇಟಿಗಾಗಿ `azd init` ಕಮಾಂಡ್ ಆನ್‌ ಮಾಡಿ
+4. **ಡಿಪ್ಲಾಯ್ ಮಾಡಿ**: ಪ್ರೋವಿಷನ್ ಮಾಡಿ ಮತ್ತು ಡಿಪ್ಲಾಯ್ ಮಾಡಲು `azd up` ರನ್ನು ನಡೆಸಿ
 
-**🎯 | ವ್ಯಾಯಾಮ**: <br/>
-Select one of the templates above based on your scenario:
+**🎯 | ಅಭ್ಯಾಸ**: <br/>
+ನಿಮ್ಮ ಪರಿಸ್ಥಿತಿಯ ಪ್ರಕಾರ, ಮೇಲಿನ ಟೆಂಪ್ಲೇಟುಗಳಲ್ಲಿ ಯಾವುದಾದರೂ ಆಯ್ಕೆಮಾಡಿ:
 
-- **ಚಾಟ್‌ಬಾಟ್ ನಿರ್ಮಿಸುತ್ತಿದ್ದೀರಾ?** → **RAG ಜೊತೆ AI ಚಾಟ್** ಅಥವಾ **ಸಂವಾದಾತ್ಮಕ AI ಬಾಟ್** ನಿಂದ ಪ್ರಾರಂಭಿಸಿ
-- **ಸ್ವಯಂಚಾಲಿತ ಏಜೆಂಟ್‌ಗಳ ಅಗತ್ಯವಿದೆಯೇ?** → **Foundry Agent Service Starter** ಅಥವಾ **Multi-Agent Orchestration** ಅನ್ನು ಪ್ರಯತ್ನಿಸಿ
-- **ದಾಖಲೆಗಳನ್ನು ಸಂಸ್ಕರಿಸುತ್ತಿದ್ದೀರಾ?** → **AI Document Intelligence** ಬಳಸಿ
-- **AI ಕೋಡಿಂಗ್ ಸಹಾಯ ಬೇಕೆ?** → **Semantic Kernel Agent** ಅಥವಾ **AutoGen Multi-Agent** ಅನ್ನು ಪರಿಶೀಲಿಸಿ
+- **ಚಾಟ್‌ಬಾಟ್ ನಿರ್ಮಿಸುತ್ತಿದ್ದೀರಾ?** → **RAG ಸಹಿತ AI ಚಾಟ್** ಅಥವಾ **ಸಂವಾದಾತ್ಮಕ AI ಬಾಟ್** ರಿಂದ ಪ್ರಾರಂಭಿಸಿ
+- **ಸ್ವತಂತ್ರ ಏಜೆಂಟ್‌ಗಳು ಬೇಕಾಗಿದೆಯೇ?** → **Foundry ಏಜೆಂಟ್ ಸೇವಾ ಸ್ಟಾರ್ಟರ್** ಅಥವಾ **ಬಹು ಏಜೆಂಟ್ ಸಂಘಟನೆ** ಪ್ರಯತ್ನಿಸಿ
+- **ಡಾಕ್ಯುಮೆಂಟ್ ಪ್ರಕ್ರಿಯೆಗೆ?** → **AI ಡಾಕ್ಯುಮೆಂಟ್ ಬುದ್ದಿವಂತಿಕೆ** ಬಳಸಿ
+- **AI ಕೋಡಿಂಗ್ ಸಹಾಯ ಬೇಕೇ?** → **ಸೆಮ್ಯಾಂಟಿಕ್ ಕರ್ಣೆಲ್ ಏಜೆಂಟ್** ಅಥವಾ **AutoGen ಬಹು ಏಜೆಂಟ್** ಅನ್ವೇಷಿಸಿ
 
 ```bash title="Example: Deploy the AI Chat with RAG template" linenums="0"
 azd init -t azure-samples/azure-search-openai-demo
 azd up
 ```
 
-!!! info "ಹೆಚ್ಚಿನ ಟೆಂಪ್ಲೇಟುಗಳನ್ನು ಅನ್ವೇಷಿಸಿ"
-    The [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) contains 250+ templates. Use the filters to find templates matching your specific requirements for language, framework, and Azure services.
+!!! info "ಇನ್ನಷ್ಟು ಟೆಂಪ್ಲೇಟುಗಳನ್ನು ಅನ್ವೇಷಿಸಿ"
+    [Awesome AZD ಗ್ಯಾಲರಿ](https://azure.github.io/awesome-azd/) ನಲ್ಲಿ 250+ ಟೆಂಪ್ಲೇಟುಗಳಿವೆ. ನಿಮ್ಮ ವಿಶೇಷ ಅವಶ್ಯಕತೆಗಳಿಗೆ ಸರಿಹೊಂದುವ ಭಾಷೆ, ಫ್ರೇಮ್ವರ್ಕ್ ಮತ್ತು ಆಜ್ಯುರ್ ಸೇವೆಗಳಿಗೆ ಫಿಲ್ಟರ್ ಅನ್ನು ಬಳಸಿ ಟೆಂಪ್ಲೇಟುಗಳನ್ನು ಹುಡುಕಿ.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-ಜವಾಬ್ದಾರಿ ನಿರಾಕರಣೆ:
-
-ಈ ದಾಖಲೆವನ್ನು AI ಅನುವಾದ ಸೇವೆ Co-op Translator (https://github.com/Azure/co-op-translator) ಬಳಸಿ ಅನುವಾದಿಸಲಾಗಿದೆ. ನಾವು ನಿಖರತೆಯನ್ನು ಸಾಧಿಸಲು ಪ್ರಯತ್ನಿಸಿದರೂ, ಸ್ವಯಂಚಾಲಿತ ಅನುವಾದಗಳಲ್ಲಿ ದೋಷಗಳು ಅಥವಾ ಸರಿಯಾದದ್ದಲ್ಲದ ಅಂಶಗಳಿರಬಲ್ಲವೊಂದು ದಯವಿಟ್ಟು ಗಮನದಲ್ಲಿರಿಸಿಕೊಳ್ಳಿ. ಮೂಲ ಭಾಷೆಯಲ್ಲಿರುವ ಮೂಲ ದಾಖಲೆಅನ್ನು ಅಧಿಕಾರಪೂರ್ಣ ಮೂಲವೆಂದು ಪರಿಗಣಿಸಬೇಕು. ಗಂಭೀರ ಅಥವಾ ಅತ್ಯಾವಶ್ಯಕ ಮಾಹಿತಿಗಾಗಿ ವೃತ್ತಿಪರ ಮಾನವ ಅನುವಾದವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಅನುವಾದವನ್ನು ಬಳಸುವುದರಿಂದ ಉಂಟಾಗುವ ಯಾವುದೇ ತಪ್ಪು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವಿಕೆಗಳು ಅಥವಾ ತಪ್ಪು ವಿವರಣೆಗಳಿಗಾಗಿ ನಾವು ಹೊಣೆಗಾರರಲ್ಲ.
+**ನಿರಾಕರಣೆ**:  
+ಈ ದಸ್ತಾವೇಜును AI ಅನುವಾದ ಸೇವೆ [Co-op Translator](https://github.com/Azure/co-op-translator) ಬಳಸಿ ಅನುವಾದಿಸಲಾಗಿದೆ. ನಾವು ನಿಖರತೆಗಾಗಿ ಪ್ರಯತ್ನಿಸುವುದಾದರೂ, ಸ್ವಯಂಚಾಲಿತ ಅನುವಾದಗಳಲ್ಲಿ ದೋಷಗಳು ಅಥವಾ ತಪ್ಪುಗಳು ಇದ್ದು ಮುಗಿಯಬಹುದು ಎಂದು ದಯವಿಟ್ಟು ಗಮನಿಸಿ. ಮೂಲ ಭಾಷೆಯಲ್ಲಿನ ಪ್ರಾಮಾಣಿಕ ದಸ್ತಾವೇಜೇ ಅಧಿಕೃತ ಮೂಲ ಎಂದು ಪರಿಗಣಿಸಬೇಕು. ಸಮಸ್ತ ಮಾಹಿತಿಗಾಗಿ, ವೃತ್ತಿಪರ ಮಾನವ ಅನುವಾದವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಅನುವಾದದ ಬಳಕೆಯಿಂದ ಉಂಟಾಗುವ ಯಾವುದೇ ತಪ್ಪು ಸಂಪ್ರತ್ಯಯಗಳು ಅಥವಾ ಅರ್ಥಬದಲಾಗುಗಳಿಗೆ ನಾವು ಹೊಣೆಗಾರರಾಗುವುದಿಲ್ಲ.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

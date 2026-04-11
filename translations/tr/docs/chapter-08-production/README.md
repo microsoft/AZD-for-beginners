@@ -6,16 +6,18 @@
 
 ## Genel Bakış
 
-Bu bölüm, üretim AI iş yükleri için kurumsal düzeyde dağıtım desenlerini, güvenlik sertleştirmesini, izlemeyi ve maliyet optimizasyonunu kapsar.
+Bu bölüm, üretim AI iş yükleri için kurumsal düzeyde dağıtım desenleri, güvenlik sertleştirme, izleme ve maliyet optimizasyonunu kapsar.
+
+> `azd 1.23.12` ile Mart 2026'da doğrulandı.
 
 ## Öğrenme Hedefleri
 
-Bu bölümü tamamladığınızda şunları yapabileceksiniz:
-- Çok bölgeli dayanıklı uygulamalar dağıtmak
-- Kurumsal güvenlik desenlerini uygulamak
-- Kapsamlı izlemeyi yapılandırmak
-- Ölçekte maliyetleri optimize etmek
-- AZD ile CI/CD boru hatları kurmak
+Bu bölümü tamamladığınızda:
+- Çok bölgeli dayanıklı uygulamalar dağıtın
+- Kurumsal güvenlik desenlerini uygulayın
+- Kapsamlı izleme yapılandırın
+- Ölçekli maliyet optimizasyonu yapın
+- AZD ile CI/CD boru hatları kurun
 
 ---
 
@@ -29,8 +31,8 @@ Bu bölümü tamamladığınızda şunları yapabileceksiniz:
 
 ## 🚀 Üretim Kontrol Listesi
 
-- [ ] Çok bölgeli dağıtım (dayanıklılık için)
-- [ ] Yönetilen kimlik ile kimlik doğrulama (anahtar yok)
+- [ ] Dayanıklılık için çok bölgeli dağıtım
+- [ ] Kimlik doğrulama için yönetilen kimlik (anahtar yok)
 - [ ] İzleme için Application Insights
 - [ ] Maliyet bütçeleri ve uyarılar yapılandırıldı
 - [ ] Güvenlik taraması etkinleştirildi
@@ -80,13 +82,13 @@ properties: {
 
 | Strateji | Tasarruf |
 |----------|---------|
-| Sıfıra ölçeklendirme (Container Apps) | 60-80% |
-| Geliştirme için tüketim katmanlarını kullanma | 50-70% |
-| Zamanlanmış ölçeklendirme | 30-50% |
-| Ayrılmış kapasite | 20-40% |
+| Sıfıra ölçekleme (Container Apps) | 60-80% |
+| Geliştirme için tüketim katmanlarını kullan | 50-70% |
+| Zamanlanmış ölçekleme | 30-50% |
+| Rezerve kapasite | 20-40% |
 
 ```bash
-# Bütçe uyarıları ayarla
+# Bütçe uyarılarını ayarla
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -96,14 +98,14 @@ az consumption budget create \
 
 ---
 
-## 📊 İzleme Kurulumu
+## 📊 İzleme Yapılandırması
 
 ```bash
-# Günlükleri canlı izle
+# Günlükleri gerçek zamanlı izle
 azd monitor --logs
 
 # Application Insights'ı kontrol et
-azd monitor
+azd monitor --overview
 
 # Metrikleri görüntüle
 az monitor metrics list --resource <resource-id>
@@ -116,13 +118,13 @@ az monitor metrics list --resource <resource-id>
 | Yön | Bölüm |
 |-----------|---------|
 | **Önceki** | [Bölüm 7: Sorun Giderme](../chapter-07-troubleshooting/README.md) |
-| **Kurs Tamamlandı** | [Kurs Ana Sayfa](../../README.md) |
+| **Kurs Tamamlandı** | [Kurs Ana Sayfası](../../README.md) |
 
 ---
 
 ## 📖 İlgili Kaynaklar
 
-- [AI Ajanları Kılavuzu](../chapter-02-ai-development/agents.md)
+- [AI Ajanları Rehberi](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Çok Ajanlı Çözümler](../chapter-05-multi-agent/README.md)
 - [Mikroservis Örneği](../../examples/microservices/README.md)
@@ -130,6 +132,6 @@ az monitor metrics list --resource <resource-id>
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstermemize rağmen, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi ana dilindeki versiyonu yetkili kaynak olarak kabul edilmelidir. Önemli bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
+**Feragatname**:
+Bu belge AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi ana dilindeki sürümü yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımından kaynaklanan herhangi bir yanlış anlama veya yanlış yorumlamadan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

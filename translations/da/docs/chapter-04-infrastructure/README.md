@@ -1,20 +1,22 @@
 # Kapitel 4: Infrastruktur som kode & Udrulning
 
-**📚 Course**: [AZD for begyndere](../../README.md) | **⏱️ Duration**: 1-1,5 timer | **⭐ Complexity**: Mellem
+**📚 Kursus**: [AZD For Beginners](../../README.md) | **⏱️ Varighed**: 1-1,5 timer | **⭐ Kompleksitet**: Mellem
 
 ---
 
 ## Oversigt
 
-Dette kapitel dækker Infrastructure as Code (IaC)-mønstre med Bicep-skabeloner, ressourceprovisionering og udrulningsstrategier ved brug af Azure Developer CLI.
+Dette kapitel dækker Infrastruktur som kode (IaC)-mønstre med Bicep-skabeloner, oprettelse af ressourcer og udrulningsstrategier ved hjælp af Azure Developer CLI.
+
+> Valideret mod `azd 1.23.12` i marts 2026.
 
 ## Læringsmål
 
-Ved at gennemføre dette kapitel vil du:
-- Forstå Bicep-skabelons struktur og syntaks
+Efter at have gennemført dette kapitel vil du:
+- Forstå Bicep-skabelonens struktur og syntaks
 - Oprette Azure-ressourcer med `azd provision`
 - Udrulle applikationer med `azd deploy`
-- Implementer blue-green- og rullende udrulningsstrategier
+- Implementere blue-green og rullende udrulningsstrategier
 
 ---
 
@@ -22,8 +24,8 @@ Ved at gennemføre dette kapitel vil du:
 
 | # | Lektion | Beskrivelse | Tid |
 |---|--------|-------------|------|
-| 1 | [Provisionering af ressourcer](provisioning.md) | Azure-ressourcehåndtering med AZD | 45 min |
-| 2 | [Udrulningsguide](deployment-guide.md) | Strategier for applikationsudrulning | 45 min |
+| 1 | [Provisioning af ressourcer](provisioning.md) | Azure-ressourcestyring med AZD | 45 min |
+| 2 | [Udrulningsvejledning](deployment-guide.md) | Strategier for udrulning af applikationer | 45 min |
 
 ---
 
@@ -36,7 +38,7 @@ azd init --template azure-functions-python-v2-http
 # Forhåndsvis hvad der vil blive oprettet
 azd provision --preview
 
-# Opsæt kun infrastruktur
+# Provisionér kun infrastrukturen
 azd provision
 
 # Udrul kun kode
@@ -65,7 +67,7 @@ my-project/
 
 ---
 
-## 🔧 Væsentlige kommandoer
+## 🔧 Vigtige kommandoer
 
 | Kommando | Beskrivelse |
 |---------|-------------|
@@ -82,19 +84,19 @@ my-project/
 | Retning | Kapitel |
 |-----------|---------|
 | **Forrige** | [Kapitel 3: Konfiguration](../chapter-03-configuration/README.md) |
-| **Næste** | [Kapitel 5: Multi-agentløsninger](../chapter-05-multi-agent/README.md) |
+| **Næste** | [Kapitel 5: Multi-Agent-løsninger](../chapter-05-multi-agent/README.md) |
 
 ---
 
 ## 📖 Relaterede ressourcer
 
 - [Tjek før udrulning](../chapter-06-pre-deployment/README.md)
-- [Eksempler på container-apps](../../examples/container-app/README.md)
-- [Eksempel på database-app](../../examples/database-app/README.md)
+- [Eksempler på Container App](../../examples/container-app/README.md)
+- [Eksempel på databaseapplikation](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfraskrivelse:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi stræber efter nøjagtighed, bedes du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument i dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales en professionel menneskelig oversættelse. Vi kan ikke holdes ansvarlige for misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+**Ansvarsfraskrivelse**:
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi stræber efter nøjagtighed, bedes du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument i sit oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel, menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

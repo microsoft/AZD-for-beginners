@@ -1,28 +1,30 @@
-# AI Model Deployment wit Azure Developer CLI
+# How to Deploy AI Models wit Azure Developer CLI
 
-**Chapter Navigation:**
+**How to waka between chapters:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 2 - AI-First Development
-- **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **📖 Dis Chapter**: Chapter 2 - AI-First Development
+- **⬅️ Back**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
-Dis guide dey give complete instructions on how to deploy AI models using AZD templates, and e cover everything from how to choose model to how to deploy for production.
+Dis guide dey give full instructions on how to deploy AI models using AZD templates, e cover everything from how to pick model reach production deployment patterns.
+
+> **Validation note (2026-03-25):** The AZD workflow for dis guide dem don check am against `azd` `1.23.12`. For AI deployments wey go take longer pass the default service deployment window, current AZD releases dey support `azd deploy --timeout <seconds>`.
 
 ## Table of Contents
 
-- [Model Selection Strategy](../../../../docs/chapter-02-ai-development)
-- [AZD Configuration for AI Models](../../../../docs/chapter-02-ai-development)
-- [Deployment Patterns](../../../../docs/chapter-02-ai-development)
-- [Model Management](../../../../docs/chapter-02-ai-development)
-- [Production Considerations](../../../../docs/chapter-02-ai-development)
-- [Monitoring and Observability](../../../../docs/chapter-02-ai-development)
+- [Model Selection Strategy](#model-selection-strategy)
+- [AZD Configuration for AI Models](#azd-configuration-for-ai-models)
+- [Deployment Patterns](#deployment-patterns)
+- [Model Management](#model-management)
+- [Production Considerations](#production-considerations)
+- [Monitoring and Observability](#monitoring-and-observability)
 
 ## Model Selection Strategy
 
 ### Microsoft Foundry Models Models
 
-Choose di correct model for wetin you want do:
+Choose the correct model wey fit your use case:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -41,9 +43,9 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
@@ -54,16 +56,16 @@ services:
 
 | Model Type | Use Case | Recommended Capacity | Cost Considerations |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Chat, Q&A | 10-50 TPM | Cost-effective for most workloads |
-| gpt-4.1 | Complex reasoning | 20-100 TPM | Higher cost, use for premium features |
-| Text-embedding-ada-002 | Search, RAG | 30-120 TPM | Essential for semantic search |
-| Whisper | Speech-to-text | 10-50 TPM | Audio processing workloads |
+| gpt-4.1-mini | Chat, Q&A | 10-50 TPM | E cheap well-well for most workloads |
+| gpt-4.1 | Complex reasoning | 20-100 TPM | Cost go high, use am for premium features |
+| text-embedding-3-large | Search, RAG | 30-120 TPM | Beta default choice for semantic search and retrieval |
+| Whisper | Speech-to-text | 10-50 TPM | For audio processing workloads |
 
 ## AZD Configuration for AI Models
 
 ### Bicep Template Configuration
 
-Create model deployments through Bicep templates:
+Make model deployments with Bicep templates:
 
 ```bicep
 // infra/main.bicep
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -124,14 +126,14 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 
 ### Environment Variables
 
-Set up your application environment variables:
+Arrange your application environment:
 
 ```bash
-# .env konfigureshon
+# Di .env setup
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
 ## Deployment Patterns
@@ -149,9 +151,9 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-Best for:
+Beta for:
 - Development and testing
-- Single-market applications
+- Applications wey dey for one market
 - Cost optimization
 
 ### Pattern 2: Multi-Region Deployment
@@ -167,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-Best for:
+Beta for:
 - Global applications
 - High availability requirements
 - Load distribution
 
 ### Pattern 3: Hybrid Deployment
 
-Combine Microsoft Foundry Models with other AI services:
+Mix Microsoft Foundry Models wit other AI services:
 
 ```bicep
 // Hybrid AI services
@@ -207,7 +209,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### Version Control
 
-Track model versions inside your AZD configuration:
+Keep track model versions for your AZD configuration:
 
 ```json
 {
@@ -215,11 +217,11 @@ Track model versions inside your AZD configuration:
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
@@ -227,7 +229,7 @@ Track model versions inside your AZD configuration:
 
 ### Model Updates
 
-Use AZD hooks to perform model updates:
+Use AZD hooks when you dey update model:
 
 ```bash
 #!/bin/bash
@@ -238,11 +240,14 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# If di deployment dey take pass di default timeout
+azd deploy --timeout 1800
 ```
 
 ### A/B Testing
 
-Deploy multiple model versions to run A/B tests:
+Deploy different model versions make you test A/B:
 
 ```bicep
 param enableABTesting bool = false
@@ -268,7 +273,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 
 ### Capacity Planning
 
-Calculate the capacity wey you go need based on how users dey use am:
+Calculate how much capacity you need based on how people dey use am:
 
 ```python
 # Example wey dey show how to calculate capacity
@@ -283,7 +288,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# Example how to use am
+# Example wey show how to use am
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -295,7 +300,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### Auto-scaling Configuration
 
-Configure auto-scaling for Container Apps:
+Set auto-scaling for Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -333,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Cost Optimization
 
-Put cost controls for reduce spending:
+Put cost controls so you fit manage spending:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -367,7 +372,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Application Insights Integration
 
-Set up monitoring for your AI workloads:
+Set monitoring for AI workloads:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -405,7 +410,7 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 
 ### Custom Metrics
 
-Track metrics wey relate to AI workloads:
+Monitor metrics wey relate to AI:
 
 ```python
 # Telemetry wey dem customize for AI models
@@ -442,10 +447,10 @@ class AITelemetry:
 
 ### Health Checks
 
-Implement health monitoring for AI services:
+Set health monitoring for AI service:
 
 ```python
-# Endpoints wey dey check service health
+# Endpoints wey dey check say system dey fine
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -455,7 +460,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # Test if OpenAI connection dey work
+        # Check if OpenAI connection dey work
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -473,10 +478,10 @@ async def check_ai_models():
 
 ## Next Steps
 
-1. **Review the [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** for service integration patterns
-2. **Complete the [AI Workshop Lab](ai-workshop-lab.md)** for hands-on experience
-3. **Implement [Production AI Practices](production-ai-practices.md)** for enterprise deployments
-4. **Explore the [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** for common issues
+1. **Check the [Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** for service integration patterns
+2. **Finish the [AI Workshop Lab](ai-workshop-lab.md)** to get hands-on experience
+3. **Put [Production AI Practices](production-ai-practices.md)** for enterprise deployments
+4. **Check the [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** for common issues
 
 ## Resources
 
@@ -487,16 +492,16 @@ async def check_ai_models():
 
 ---
 
-**Chapter Navigation:**
+**How to waka between chapters:**
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chapter 2 - AI-First Development
-- **⬅️ Previous**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **📖 Dis Chapter**: Chapter 2 - AI-First Development
+- **⬅️ Back**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ Next**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Abeg note:
-Dis document na AI translate do am wit de help of [Co-op Translator] (https://github.com/Azure/co-op-translator). Even though we dey try make everything correct, abeg sabi say automatic translation fit get mistakes or wrong parts. Di original document for im own language na di main correct source. If na important information, make professional human translator check am. We no go responsible for any misunderstanding or wrong interpretation wey fit follow from using dis translation.
+**Disclaimer**:
+Dis dokument don translate with AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am accurate, abeg note say automated translations fit get errors or inaccuracies. Di original dokument for e native language suppose be di authoritative source. For critical information, we recommend make professional human translator do am. We no go liable for any misunderstanding or misinterpretation wey come from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

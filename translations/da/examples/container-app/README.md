@@ -1,29 +1,29 @@
-# Container-app-implementeringseksempler med AZD
+# Eksempler på implementering af Container Apps med AZD
 
-Denne mappe indeholder omfattende eksempler på implementering af containeriserede applikationer til Azure Container Apps ved hjælp af Azure Developer CLI (AZD). Disse eksempler demonstrerer virkelighedsnære mønstre, bedste praksis og produktionsklare konfigurationer.
+Dette bibliotek indeholder omfattende eksempler på implementering af containeriserede applikationer til Azure Container Apps ved hjælp af Azure Developer CLI (AZD). Disse eksempler demonstrerer virkelige mønstre, bedste praksis og produktionsklare konfigurationer.
 
 ## 📚 Indholdsfortegnelse
 
-- [Oversigt](#overview)
+- [Oversigt](#oversigt)
 - [Forudsætninger](#forudsætninger)
-- [Hurtigstart-eksempler](#hurtigstart-eksempler)
-- [Produktions-eksempler](#produktions-eksempler)
+- [Hurtigstartseksempler](#hurtigstartseksempler)
+- [Produktionseksempler](#produktionseksempler)
 - [Avancerede mønstre](#avancerede-mønstre)
 - [Bedste praksis](#bedste-praksis)
 
-## Overview
+## Oversigt
 
-Azure Container Apps er en fuldt administreret serverløs containerplatform, som gør det muligt at køre mikrotjenester og containeriserede applikationer uden at administrere infrastruktur. Når det kombineres med AZD, får du:
+Azure Container Apps er en fuldt administreret serverløs containerplatform, der giver dig mulighed for at køre mikrotjenester og containeriserede applikationer uden at administrere infrastruktur. Når det kombineres med AZD, får du:
 
 - **Forenklet implementering**: En enkelt kommando implementerer containere med infrastruktur
 - **Automatisk skalering**: Skaler til nul og ud baseret på HTTP-trafik eller begivenheder
-- **Integreret netværk**: Indbygget serviceopdagelse og trafikfordeling
+- **Integreret netværk**: Indbygget serviceopdagelse og trafikopdeling
 - **Administreret identitet**: Sikker autentificering til Azure-ressourcer
 - **Omkostningsoptimering**: Betal kun for de ressourcer, du bruger
 
 ## Forudsætninger
 
-Før du går i gang, sørg for at du har:
+Før du går i gang, skal du sikre dig, at du har:
 
 ```bash
 # Kontroller AZD-installation
@@ -35,23 +35,25 @@ az version
 # Kontroller Docker (til at bygge brugerdefinerede billeder)
 docker --version
 
-# Log ind på Azure
+# Autentificer til AZD-udrulninger
 azd auth login
+
+# Valgfrit: log ind på Azure CLI, hvis du planlægger at køre az-kommandoer direkte
 az login
 ```
 
 **Påkrævede Azure-ressourcer:**
 - Aktiv Azure-abonnement
-- Rettigheder til at oprette resource groups
+- Tilladelser til at oprette resourcegrupper
 - Adgang til Container Apps-miljøet
 
-## Hurtigstart-eksempler
+## Hurtigstartseksempler
 
-### 1. Simple Web API (Python Flask)
+### 1. Simpelt Web-API (Python Flask)
 
-Deployér et grundlæggende REST-API med Azure Container Apps.
+Implementer et grundlæggende REST-API med Azure Container Apps.
 
-**Eksempel: Python Flask API**
+**Eksempel: Python Flask-API**
 
 ```yaml
 # azure.yaml
@@ -79,15 +81,15 @@ azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-**Vigtige funktioner:**
-- Autoskalering fra 0 til 10 replikaer
+**Nøglefunktioner:**
+- Automatisk skalering fra 0 til 10 replikaer
 - Sundhedstjek og liveness-kontroller
 - Indsprøjtning af miljøvariabler
 - Integration med Application Insights
 
-### 2. Node.js Express API
+### 2. Node.js Express-API
 
-Deployér en Node.js-backend med MongoDB-integration.
+Implementer en Node.js-backend med MongoDB-integration.
 
 ```bash
 # Initialiser Node.js API-skabelon
@@ -100,7 +102,7 @@ azd env set COLLECTION_NAME todos
 # Udrul
 azd up
 
-# Se logfiler via Azure Monitor
+# Vis logfiler via Azure Monitor
 azd monitor --logs
 ```
 
@@ -147,15 +149,15 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 3. Static Frontend + API Backend
+### 3. Statisk frontend + API-backend
 
-Deployér en full-stack-applikation med React-frontend og API-backend.
+Implementer en fullstack-applikation med React-front-end og API-backend.
 
 ```bash
 # Initialiser full-stack-skabelon
 azd init --template todo-csharp-sql-swa-func
 
-# Gennemgå konfigurationen
+# Gennemgå konfiguration
 cat azure.yaml
 
 # Udrul begge tjenester
@@ -165,7 +167,7 @@ azd up
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
-## Produktions-eksempler
+## Produktionseksempler
 
 ### Eksempel 1: Mikrotjenestearkitektur
 
@@ -213,7 +215,7 @@ services:
 
 **Implementering:**
 ```bash
-# Initialiser projektet
+# Initialiser projekt
 azd init
 
 # Indstil produktionsmiljø
@@ -227,13 +229,13 @@ azd env set MAX_REPLICAS 50
 # Udrul alle tjenester
 azd up
 
-# Overvåg udrulning
+# Overvåg udrulningen
 azd monitor --overview
 ```
 
-### Eksempel 2: AI-drevet Container-app
+### Eksempel 2: AI-drevet Container App
 
-**Scenarie**: AI-chatapplikation med integration til Microsoft Foundry Models
+**Scenarie**: AI-chatapplikation med Microsoft Foundry Models-integration
 
 **Fil: src/ai-chat/app.py**
 ```python
@@ -244,7 +246,7 @@ import openai
 
 app = Flask(__name__)
 
-# Brug administreret identitet til sikker adgang
+# Brug administreret identitet for sikker adgang
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -322,7 +324,7 @@ module aiChatApp './app/container-app.bicep' = {
 
 **Implementeringskommandoer:**
 ```bash
-# Opsæt miljø
+# Opsæt miljøet
 azd init --template ai-chat-app
 azd env new dev
 
@@ -341,7 +343,7 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
 
 ### Eksempel 3: Baggrundsarbejder med købehandling
 
-**Scenarie**: Ordrebehandlingssystem med beskedkø
+**Scenarie**: Ordrebehandlingssystem med meddelelseskø
 
 **Mappestruktur:**
 ```
@@ -378,10 +380,10 @@ def process_orders():
     while True:
         messages = queue_client.receive_messages(max_messages=10)
         for message in messages:
-            # Behandl ordre
+            # Behandl bestilling
             print(f"Processing order: {message.content}")
             
-            # Komplet besked
+            # Fuldfør besked
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -411,7 +413,7 @@ azd init
 # Udrul med køkonfiguration
 azd up
 
-# Skaler worker baseret på kølængde
+# Skaler antal arbejdere baseret på køens længde
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -431,7 +433,7 @@ azd deploy api --revision-suffix blue --no-traffic
 # Test den nye revision
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Fordel trafikken (20% til blå, 80% til den nuværende)
+# Fordel trafikken (20% til blå, 80% til nuværende)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -458,15 +460,15 @@ az containerapp ingress traffic set \
 }
 ```
 
-**Implementeringsscript:**
+**Udrulningsscript:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
 
-# Udrul ny revision med 10% trafik
+# Udrul ny revision med 10% af trafikken
 azd deploy api --revision-mode multiple
 
-# Overvåg metrikker
+# Overvåg målinger
 azd monitor --service api --duration 5m
 
 # Øg trafikken gradvist
@@ -532,7 +534,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 # Udrul til alle regioner
 azd up
 
-# Bekræft endepunkter
+# Bekræft slutpunkter
 azd show --output json | jq '.services.api.endpoints'
 ```
 
@@ -580,7 +582,7 @@ def create_order():
             value={'status': 'pending'}
         )
         
-        # Udgiv begivenhed
+        # Udsend begivenhed
         client.publish_event(
             pubsub_name='pubsub',
             topic_name='orders',
@@ -603,7 +605,7 @@ azd env set AZURE_LOCATION "eastus"
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. Bedste sikkerhedspraksis
+### 2. Sikkerhedspraksis
 
 ```bicep
 // Always use managed identity
@@ -662,13 +664,13 @@ services:
             concurrent: 100
 ```
 
-### 4. Overvågning og observerbarhed
+### 4. Overvågning og observabilitet
 
 ```bash
 # Aktivér Application Insights
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
-# Se logfiler i realtid
+# Se logs i realtid
 azd monitor --logs
 # Eller brug Azure CLI til Container Apps:
 az containerapp logs show --name api --resource-group rg-myapp --follow
@@ -676,7 +678,7 @@ az containerapp logs show --name api --resource-group rg-myapp --follow
 # Overvåg målinger
 azd monitor --live
 
-# Opret alarmer
+# Opret advarsler
 az monitor metrics alert create \
   --name high-cpu-alert \
   --resource-group rg-myapp \
@@ -697,7 +699,7 @@ az containerapp update \
 # Brug spot-instanser til udviklingsmiljøer
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# Opret budgetalarmer
+# Opsæt budgetadvarsler
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
@@ -737,19 +739,19 @@ jobs:
           AZURE_LOCATION: ${{ secrets.AZURE_LOCATION }}
 ```
 
-## Almindelige kommandoer - reference
+## Almindelige kommandoer
 
 ```bash
-# Initialiser et nyt containerapp-projekt
+# Initialiser nyt container app-projekt
 azd init --template <template-name>
 
 # Udrul infrastruktur og applikation
 azd up
 
-# Udrul kun applikationskoden (spring infrastrukturen over)
+# Udrul kun applikationskoden (spring infrastruktur over)
 azd deploy
 
-# Opsæt kun infrastrukturen
+# Provisioner kun infrastrukturen
 azd provision
 
 # Vis udrullede ressourcer
@@ -768,7 +770,7 @@ azd down --force --purge
 
 ## Fejlfinding
 
-### Problem: Containeren starter ikke
+### Problem: Container starter ikke
 
 ```bash
 # Kontroller logfiler ved hjælp af Azure CLI
@@ -785,16 +787,16 @@ docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Problem: Kan ikke få adgang til container-app-endpoint
+### Problem: Kan ikke få adgang til containerapp-endpointet
 
 ```bash
-# Bekræft ingress-konfiguration
+# Kontroller ingress-konfigurationen
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# Kontroller om intern ingress er aktiveret
+# Kontroller, om intern ingress er aktiveret
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
@@ -804,12 +806,12 @@ az containerapp ingress update \
 ### Problem: Ydelsesproblemer
 
 ```bash
-# Kontroller ressourceudnyttelse
+# Kontroller ressourceudnyttelsen
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Skaler ressourcer op
+# Skaler ressourcerne op
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -818,22 +820,22 @@ az containerapp update \
 ```
 
 ## Yderligere ressourcer og eksempler
-- [Mikrotjenester-eksempel](./microservices/README.md)
+- [Mikrotjenesteksempel](./microservices/README.md)
 - [Simpelt Flask-API-eksempel](./simple-flask-api/README.md)
 - [Azure Container Apps-dokumentation](https://learn.microsoft.com/azure/container-apps/)
-- [AZD-skabelon-galleri](https://azure.github.io/awesome-azd/)
+- [AZD-skabelongalleri](https://azure.github.io/awesome-azd/)
 - [Container Apps-eksempler](https://github.com/Azure-Samples/container-apps-samples)
 - [Bicep-skabeloner](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ## Bidrag
 
-For at bidrage med nye container-app-eksempler:
+For at bidrage med nye containerapp-eksempler:
 
 1. Opret en ny undermappe med dit eksempel
-2. Inkludér komplette `azure.yaml`, `infra/` og `src/` filer
+2. Inkluder komplette `azure.yaml`, `infra/`, og `src/` filer
 3. Tilføj en omfattende README med implementeringsinstruktioner
 4. Test implementeringen med `azd up`
-5. Indsend en pull request
+5. Send en pull request
 
 ---
 
@@ -843,5 +845,5 @@ For at bidrage med nye container-app-eksempler:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument i dets oprindelige sprog bør betragtes som den autoritative kilde. For kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på originalsproget bør betragtes som den autoritative kilde. Til kritisk information anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

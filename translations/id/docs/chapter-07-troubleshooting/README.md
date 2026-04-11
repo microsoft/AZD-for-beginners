@@ -1,4 +1,4 @@
-# Bab 7: Pemecahan Masalah & Debugging
+# Chapter 7: Pemecahan Masalah & Debugging
 
 **📚 Kursus**: [AZD Untuk Pemula](../../README.md) | **⏱️ Durasi**: 1-1.5 jam | **⭐ Kompleksitas**: Menengah
 
@@ -6,13 +6,15 @@
 
 ## Ikhtisar
 
-Bab ini membantu Anda mendiagnosis dan menyelesaikan masalah umum saat bekerja dengan Azure Developer CLI. Mulai dari kegagalan penyebaran hingga masalah khusus AI.
+Bab ini membantu Anda mendiagnosis dan menyelesaikan masalah umum saat bekerja dengan Azure Developer CLI. Dari kegagalan penyebaran hingga masalah khusus AI.
+
+> Tervalidasi terhadap `azd 1.23.12` pada Maret 2026.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan bab ini, Anda akan:
 - Mendiagnosis kegagalan penyebaran AZD yang umum
-- Debug masalah otentikasi dan izin
+- Men-debug masalah otentikasi dan izin
 - Menyelesaikan masalah konektivitas layanan AI
 - Menggunakan Azure Portal dan CLI untuk pemecahan masalah
 
@@ -22,9 +24,9 @@ Dengan menyelesaikan bab ini, Anda akan:
 
 | # | Pelajaran | Deskripsi | Waktu |
 |---|--------|-------------|------|
-| 1 | [Masalah Umum](common-issues.md) | Masalah yang sering ditemui | 30 menit |
-| 2 | [Panduan Debugging](debugging.md) | Strategi debugging langkah demi langkah | 45 menit |
-| 3 | [Pemecahan Masalah AI](ai-troubleshooting.md) | Masalah khusus AI | 30 menit |
+| 1 | [Masalah Umum](common-issues.md) | Masalah yang sering ditemui | 30 min |
+| 2 | [Panduan Debugging](debugging.md) | Strategi debugging langkah-demi-langkah | 45 min |
+| 3 | [Pemecahan Masalah AI](ai-troubleshooting.md) | Masalah khusus AI | 30 min |
 
 ---
 
@@ -32,9 +34,13 @@ Dengan menyelesaikan bab ini, Anda akan:
 
 ### Masalah Otentikasi
 ```bash
+# Diperlukan untuk alur kerja AZD
 azd auth login
+
+# Opsional jika Anda juga menggunakan perintah Azure CLI secara langsung
 az login
-azd auth whoami
+
+azd auth status
 ```
 
 ### Kegagalan Penyediaan
@@ -60,23 +66,23 @@ azd up
 
 ---
 
-## 📋 Referensi Kode Kesalahan
+## 📋 Referensi Kode Error
 
-| Kesalahan | Penyebab | Solusi |
+| Error | Penyebab | Solusi |
 |-------|-------|----------|
-| `AuthenticationError` | Belum masuk | `azd auth login` |
-| `ResourceNotFound` | Sumber daya hilang | Periksa nama sumber daya |
-| `QuotaExceeded` | Batas langganan | Minta peningkatan kuota |
+| `AuthenticationError` | Tidak masuk | `azd auth login` |
+| `ResourceNotFound` | Sumber daya tidak ditemukan | Periksa nama sumber daya |
+| `QuotaExceeded` | Batas langganan | Ajukan peningkatan kuota |
 | `InvalidTemplate` | Kesalahan sintaks Bicep | `az bicep build` |
 | `Conflict` | Sumber daya sudah ada | Gunakan nama baru atau hapus |
-| `Forbidden` | Izin tidak cukup | Periksa peran RBAC |
+| `Forbidden` | Izin tidak mencukupi | Periksa peran RBAC |
 
 ---
 
 ## 🔄 Reset dan Pemulihan
 
 ```bash
-# Reset lembut (pertahankan sumber daya, deploy ulang kode)
+# Reset lunak (pertahankan sumber daya, terapkan ulang kode)
 azd deploy --force
 
 # Reset keras (hapus semuanya, mulai dari awal)
@@ -95,7 +101,7 @@ azd up
 
 ---
 
-## 📖 Sumber Terkait
+## 📖 Sumber Daya Terkait
 
 - [Pemeriksaan Pra-Penyebaran](../chapter-06-pre-deployment/preflight-checks.md)
 - [Panduan Konfigurasi](../chapter-03-configuration/configuration.md)
@@ -104,6 +110,6 @@ azd up
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Penafian:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya mencapai akurasi, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas segala kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya menjaga ketepatan, harap disadari bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

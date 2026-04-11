@@ -1,73 +1,73 @@
-# Pemeriksaan Pra-Penyebaran untuk Penyebaran AZD
+# Pemeriksaan Pra-Penerbangan untuk Penerapan AZD
 
 **Navigasi Bab:**
-- **📚 Beranda Kursus**: [AZD untuk Pemula](../../README.md)
-- **📖 Bab Saat Ini**: Bab 6 - Validasi & Perencanaan Pra-Penyebaran
+- **📚 Beranda Kursus**: [AZD Untuk Pemula](../../README.md)
+- **📖 Bab Saat Ini**: Bab 6 - Validasi & Perencanaan Pra-Penerapan
 - **⬅️ Sebelumnya**: [Pemilihan SKU](sku-selection.md)
 - **➡️ Bab Berikutnya**: [Bab 7: Pemecahan Masalah](../chapter-07-troubleshooting/common-issues.md)
-- **🔧 Terkait**: [Bab 4: Panduan Penyebaran](../chapter-04-infrastructure/deployment-guide.md)
+- **🔧 Terkait**: [Bab 4: Panduan Penerapan](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Pendahuluan
 
-Panduan komprehensif ini menyediakan skrip dan prosedur validasi pra-penyebaran untuk memastikan keberhasilan penyebaran Azure Developer CLI sebelum dimulai. Pelajari cara mengimplementasikan pemeriksaan otomatis untuk autentikasi, ketersediaan sumber daya, kuota, kepatuhan keamanan, dan persyaratan kinerja untuk mencegah kegagalan penyebaran dan mengoptimalkan tingkat keberhasilan penyebaran.
+Panduan komprehensif ini menyediakan skrip dan prosedur validasi pra-penerapan untuk memastikan keberhasilan penerapan Azure Developer CLI sebelum dimulai. Pelajari cara mengimplementasikan pemeriksaan otomatis untuk autentikasi, ketersediaan sumber daya, kuota, kepatuhan keamanan, dan persyaratan kinerja untuk mencegah kegagalan penerapan dan mengoptimalkan tingkat keberhasilan penerapan.
 
 ## Tujuan Pembelajaran
 
 Dengan menyelesaikan panduan ini, Anda akan:
-- Menguasai teknik dan skrip validasi pra-penyebaran otomatis
-- Memahami strategi pemeriksaan komprehensif untuk autentikasi, izin, dan kuota
+- Menguasai teknik dan skrip validasi pra-penerapan otomatis
+- Memahami strategi pemeriksaan menyeluruh untuk autentikasi, izin, dan kuota
 - Mengimplementasikan prosedur validasi ketersediaan dan kapasitas sumber daya
 - Mengonfigurasi pemeriksaan keamanan dan kepatuhan untuk kebijakan organisasi
 - Merancang alur kerja estimasi biaya dan validasi anggaran
-- Membuat otomasi pemeriksaan pra-penerbangan khusus untuk pipeline CI/CD
+- Membuat otomasi pemeriksaan pra-penerbangan kustom untuk pipeline CI/CD
 
 ## Hasil Pembelajaran
 
-Setelah menyelesaikan, Anda akan mampu:
-- Membuat dan menjalankan skrip validasi pra-penerbangan yang komprehensif
-- Merancang alur kerja pemeriksaan otomatis untuk berbagai skenario penyebaran
-- Mengimplementasikan prosedur dan kebijakan validasi sesuai lingkungan
-- Mengonfigurasi pemantauan proaktif dan pemberitahuan kesiapan penyebaran
-- Memecahkan masalah pra-penyebaran dan menerapkan tindakan korektif
-- Mengintegrasikan pemeriksaan pra-penerbangan ke dalam pipeline DevOps dan alur otomasi
+Setelah selesai, Anda akan dapat:
+- Membuat dan mengeksekusi skrip validasi pra-penerbangan yang komprehensif
+- Merancang alur kerja pemeriksaan otomatis untuk berbagai skenario penerapan
+- Mengimplementasikan prosedur dan kebijakan validasi spesifik lingkungan
+- Mengonfigurasi pemantauan proaktif dan pemberitahuan untuk kesiapan penerapan
+- Memecahkan masalah pra-penerapan dan menerapkan tindakan korektif
+- Mengintegrasikan pemeriksaan pra-penerbangan ke dalam pipeline DevOps dan alur kerja otomasi
 
 ## Daftar Isi
 
-- [Ikhtisar](../../../../docs/chapter-06-pre-deployment)
-- [Skrip Pra-Penerbangan Otomatis](../../../../docs/chapter-06-pre-deployment)
-- [Daftar Periksa Validasi Manual](../../../../docs/chapter-06-pre-deployment)
-- [Validasi Lingkungan](../../../../docs/chapter-06-pre-deployment)
-- [Validasi Sumber Daya](../../../../docs/chapter-06-pre-deployment)
-- [Pemeriksaan Keamanan & Kepatuhan](../../../../docs/chapter-06-pre-deployment)
-- [Perencanaan Kinerja & Kapasitas](../../../../docs/chapter-06-pre-deployment)
-- [Pemecahan Masalah Umum](../../../../docs/chapter-06-pre-deployment)
+- [Ikhtisar](#ikhtisar)
+- [Skrip Pra-penerbangan Otomatis](#skrip-pra-penerbangan-otomatis)
+- [Daftar Periksa Validasi Manual](#codeblock1)
+- [Validasi Lingkungan](#✅-cadangan-pemulihan)
+- [Validasi Sumber Daya](#validasi-lingkungan-produksi)
+- [Pemeriksaan Keamanan & Kepatuhan](#security--compliance-checks)
+- [Perencanaan Kinerja & Kapasitas](#performance--capacity-planning)
+- [Pemecahan Masalah Umum](#troubleshooting-common-issues)
 
 ---
 
 ## Ikhtisar
 
-Pemeriksaan pra-penyebaran adalah validasi penting yang dilakukan sebelum melakukan penyebaran untuk memastikan:
+Pemeriksaan pra-penerbangan adalah validasi penting yang dilakukan sebelum penerapan untuk memastikan:
 
-- **Ketersediaan sumber daya** dan kuota di region target
+- **Ketersediaan sumber daya** dan kuota di wilayah target
 - **Autentikasi dan izin** dikonfigurasi dengan benar
 - **Validitas template** dan ketepatan parameter
 - **Konektivitas jaringan** dan dependensi
 - **Kepatuhan keamanan** dengan kebijakan organisasi
-- **Estimasi biaya** sesuai batas anggaran
+- **Estimasi biaya** dalam batas anggaran
 
-### Kapan Menjalankan Pemeriksaan Pra-Penerbangan
+### Kapan Menjalankan Pemeriksaan Pra-penerbangan
 
-- **Sebelum penyebaran pertama** ke lingkungan baru
+- **Sebelum penerapan pertama** ke lingkungan baru
 - **Setelah perubahan template signifikan**
-- **Sebelum penyebaran produksi**
-- **Saat mengganti region Azure**
+- **Sebelum penerapan produksi**
+- **Saat mengganti wilayah Azure**
 - **Sebagai bagian dari pipeline CI/CD**
 
 ---
 
-## Skrip Pra-Penerbangan Otomatis
+## Skrip Pra-penerbangan Otomatis
 
-### Pemeriksa Pra-Penerbangan PowerShell
+### Pemeriksa Pra-penerbangan PowerShell
 
 ```powershell
 #!/usr/bin/env pwsh
@@ -100,7 +100,7 @@ param(
     [switch]$Detailed
 )
 
-# Pengkodean warna untuk output
+# Pewarnaan keluaran
 $Red = "`e[31m"
 $Green = "`e[32m"
 $Yellow = "`e[33m"
@@ -163,7 +163,7 @@ function Test-Authentication {
     Write-Host "`n${Blue}=== Authentication Check ===${Reset}"
     
     try {
-        # Periksa otentikasi AZD
+        # Periksa autentikasi AZD
         $azdAuth = azd auth login --check-status --output json 2>$null | ConvertFrom-Json
         if ($azdAuth.status -eq "Logged-in") {
             Write-Status "AZD authentication" "Success" "User: $($azdAuth.principalName)"
@@ -173,7 +173,7 @@ function Test-Authentication {
             return $false
         }
         
-        # Periksa otentikasi Azure CLI
+        # Periksa autentikasi Azure CLI
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
@@ -194,7 +194,7 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # Ambil penugasan peran pengguna saat ini
+        # Dapatkan penugasan peran pengguna saat ini
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
@@ -330,7 +330,7 @@ function Test-TemplateValidation {
     if (Test-Path "azure.yaml") {
         Write-Status "azure.yaml found" "Success"
         
-        # Urai azure.yaml
+        # Parsir azure.yaml
         try {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
@@ -384,7 +384,7 @@ function Test-TemplateValidation {
     # 🧪 BARU: Uji pratinjau infrastruktur (dry-run aman)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -446,7 +446,7 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Perkiraan biaya dasar (akan membutuhkan Azure Pricing API untuk estimasi yang akurat)
+    # Estimasi biaya dasar (memerlukan Azure Pricing API untuk perkiraan yang akurat)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # Periksa penggunaan identitas terkelola
+        # Periksa penggunaan managed identity
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +488,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # Periksa penegakan HTTPS
+        # Periksa penerapan HTTPS
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -561,11 +561,11 @@ function Invoke-PreflightCheck {
 Invoke-PreflightCheck
 ```
 
-### Pemeriksa Pra-Penerbangan Bash
+### Pemeriksa Pra-penerbangan Bash
 
 ```bash
 #!/bin/bash
-# Versi Bash dari pemeriksaan pra-penerbangan untuk sistem Unix/Linux
+# Versi Bash dari pemeriksaan awal untuk sistem Unix/Linux
 
 set -euo pipefail
 
@@ -798,19 +798,19 @@ main "$@"
 
 ## Daftar Periksa Validasi Manual
 
-### Daftar Periksa Pra-Penyebaran
+### Daftar Periksa Pra-Penerapan
 
-Cetak daftar periksa ini dan verifikasi setiap item sebelum penyebaran:
+Cetak daftar periksa ini dan verifikasi setiap item sebelum penerapan:
 
 #### ✅ Pengaturan Lingkungan
 - [ ] AZD CLI terpasang dan diperbarui ke versi terbaru
-- [ ] Azure CLI terpasang dan telah diautentikasi
+- [ ] Azure CLI terpasang dan terautentikasi
 - [ ] Langganan Azure yang benar dipilih
 - [ ] Nama lingkungan unik dan mengikuti konvensi penamaan
 - [ ] Grup sumber daya target diidentifikasi atau dapat dibuat
 
 #### ✅ Autentikasi & Izin
-- [ ] Berhasil diautentikasi dengan `azd auth login`
+- [ ] Berhasil terautentikasi dengan `azd auth login`
 - [ ] Pengguna memiliki peran Contributor pada langganan/grup sumber daya target
 - [ ] Service principal dikonfigurasi untuk CI/CD (jika berlaku)
 - [ ] Tidak ada sertifikat atau kredensial yang kedaluwarsa
@@ -819,39 +819,39 @@ Cetak daftar periksa ini dan verifikasi setiap item sebelum penyebaran:
 - [ ] `azure.yaml` ada dan merupakan YAML yang valid
 - [ ] Semua layanan yang didefinisikan di azure.yaml memiliki kode sumber yang sesuai
 - [ ] Template Bicep di direktori `infra/` ada
-- [ ] `main.bicep` dikompilasi tanpa kesalahan (`az bicep build --file infra/main.bicep`)
-- [ ] 🧪 Pratinjau infrastruktur berjalan berhasil (`azd provision --preview`)
-- [ ] Semua parameter yang diperlukan memiliki nilai default atau akan diberikan
+- [ ] `main.bicep` mengompilasi tanpa kesalahan (`az bicep build --file infra/main.bicep`)
+- [ ] 🧪 Pratinjau infrastruktur berhasil dijalankan (`azd provision --preview`)
+- [ ] Semua parameter yang diperlukan memiliki nilai default atau akan disediakan
 - [ ] Tidak ada rahasia yang di-hardcode dalam template
 
 #### ✅ Perencanaan Sumber Daya
-- [ ] Region Azure target dipilih dan divalidasi
-- [ ] Layanan Azure yang diperlukan tersedia di region target
-- [ ] Kuota yang cukup tersedia untuk sumber daya yang direncanakan
+- [ ] Wilayah Azure target dipilih dan divalidasi
+- [ ] Layanan Azure yang dibutuhkan tersedia di wilayah target
+- [ ] Kuota cukup tersedia untuk sumber daya yang direncanakan
 - [ ] Konflik penamaan sumber daya diperiksa
-- [ ] Ketergantungan antar sumber daya dipahami
+- [ ] Dependensi antar sumber daya dipahami
 
 #### ✅ Jaringan & Keamanan
 - [ ] Konektivitas jaringan ke endpoint Azure diverifikasi
 - [ ] Pengaturan firewall/proxy dikonfigurasi jika diperlukan
 - [ ] Key Vault dikonfigurasi untuk manajemen rahasia
-- [ ] Managed identities digunakan jika memungkinkan
+- [ ] Managed identities digunakan bila memungkinkan
 - [ ] Penegakan HTTPS diaktifkan untuk aplikasi web
 
 #### ✅ Manajemen Biaya
 - [ ] Estimasi biaya dihitung menggunakan Azure Pricing Calculator
-- [ ] Pemberitahuan anggaran dikonfigurasi jika diperlukan
+- [ ] Peringatan anggaran dikonfigurasi jika diperlukan
 - [ ] SKU yang sesuai dipilih untuk tipe lingkungan
-- [ ] Kapasitas cadangan dipertimbangkan untuk beban kerja produksi
+- [ ] Kapasitas terpesan dipertimbangkan untuk beban kerja produksi
 
 #### ✅ Pemantauan & Observabilitas
 - [ ] Application Insights dikonfigurasi dalam template
-- [ ] Log Analytics workspace direncanakan
-- [ ] Aturan alert didefinisikan untuk metrik kritis
+- [ ] Ruang kerja Log Analytics direncanakan
+- [ ] Aturan peringatan ditentukan untuk metrik kritis
 - [ ] Endpoint pemeriksaan kesehatan diimplementasikan dalam aplikasi
 
 #### ✅ Cadangan & Pemulihan
-- [ ] Strategi backup ditentukan untuk sumber daya data
+- [ ] Strategi cadangan ditentukan untuk sumber daya data
 - [ ] Recovery time objectives (RTO) didokumentasikan
 - [ ] Recovery point objectives (RPO) didokumentasikan
 - [ ] Rencana pemulihan bencana tersedia untuk produksi
@@ -864,12 +864,12 @@ Cetak daftar periksa ini dan verifikasi setiap item sebelum penyebaran:
 
 ```bash
 #!/bin/bash
-# Validasi spesifik lingkungan pengembangan
+# Validasi khusus lingkungan pengembangan
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # Periksa konfigurasi yang ramah untuk pengembangan
+    # Periksa konfigurasi yang ramah pengembangan
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
@@ -883,7 +883,7 @@ validate_dev_environment() {
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # Validasi konfigurasi database pengembangan
+    # Validasi konfigurasi basis data pengembangan
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -896,7 +896,7 @@ validate_dev_environment() {
 
 ```bash
 #!/bin/bash
-# Validasi spesifik untuk lingkungan produksi
+# Validasi khusus untuk lingkungan produksi
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
@@ -1292,9 +1292,9 @@ steps:
 
 ## Ringkasan Praktik Terbaik
 
-### ✅ Praktik Terbaik Pemeriksaan Pra-Penerbangan
+### ✅ Praktik Terbaik Pemeriksaan Pra-penerbangan
 
-1. **Otomatiskan Bila Memungkinkan**
+1. **Otomatisasikan Bila Memungkinkan**
    - Integrasikan pemeriksaan ke dalam pipeline CI/CD
    - Gunakan skrip untuk validasi yang dapat diulang
    - Simpan hasil untuk jejak audit
@@ -1302,7 +1302,7 @@ steps:
 2. **Validasi Spesifik Lingkungan**
    - Pemeriksaan berbeda untuk dev/staging/prod
    - Persyaratan keamanan yang sesuai per lingkungan
-   - Optimasi biaya untuk lingkungan non-produksi
+   - Optimisasi biaya untuk lingkungan non-produksi
 
 3. **Cakupan Komprehensif**
    - Autentikasi dan izin
@@ -1312,36 +1312,36 @@ steps:
 
 4. **Pelaporan yang Jelas**
    - Indikator status berwarna
-   - Pesan kesalahan terperinci dengan langkah perbaikan
+   - Pesan kesalahan terperinci dengan langkah remediasi
    - Laporan ringkasan untuk penilaian cepat
 
 5. **Gagal Cepat**
-   - Hentikan penyebaran jika pemeriksaan kritis gagal
+   - Hentikan penerapan jika pemeriksaan kritis gagal
    - Berikan panduan jelas untuk penyelesaian
-   - Memungkinkan pengulangan pemeriksaan dengan mudah
+   - Memungkinkan pengeulangan pemeriksaan dengan mudah
 
-### Perangkap Umum Pra-Penerbangan
+### Kesalahan Umum Pra-penerbangan
 
-1. **Melewatkan validasi** untuk penyebaran "cepat"
-2. **Pemeriksaan izin yang tidak memadai** sebelum penyebaran
-3. **Mengabaikan batas kuota** sampai penyebaran gagal
-4. **Tidak memvalidasi template** di pipeline CI/CD
+1. **Melewatkan validasi** untuk "cepat" penerapan
+2. **Pemeriksaan izin yang tidak memadai** sebelum penerapan
+3. **Mengabaikan batas kuota** hingga penerapan gagal
+4. **Tidak memvalidasi template** dalam pipeline CI/CD
 5. **Kurangnya validasi keamanan** untuk lingkungan produksi
-6. **Estimasi biaya yang tidak memadai** menyebabkan kejutan anggaran
+6. **Estimasi biaya yang tidak memadai** yang menyebabkan kejutan anggaran
 
 ---
 
-**Pro Tip**: Jalankan pemeriksaan pra-penerbangan sebagai pekerjaan terpisah dalam pipeline CI/CD Anda sebelum pekerjaan penyebaran yang sebenarnya. Ini memungkinkan Anda menangkap masalah lebih awal dan memberikan umpan balik lebih cepat kepada pengembang.
+**Pro Tip**: Jalankan pemeriksaan pra-penerbangan sebagai pekerjaan terpisah di pipeline CI/CD Anda sebelum pekerjaan penerapan sebenarnya. Ini memungkinkan Anda menangkap masalah lebih awal dan memberikan umpan balik lebih cepat kepada pengembang.
 
 ---
 
 **Navigasi**
 - **Pelajaran Sebelumnya**: [Pemilihan SKU](sku-selection.md)
-- **Pelajaran Berikutnya**: [Cheat Sheet](../../resources/cheat-sheet.md)
+- **Pelajaran Berikutnya**: [Panduan Singkat](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Penafian**:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya mencapai akurasi, harap diperhatikan bahwa terjemahan otomatis dapat mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi yang bersifat kritis, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk akurat, harap diketahui bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber yang berwenang. Untuk informasi penting, disarankan terjemahan profesional oleh manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau salah tafsir yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,20 +1,22 @@
-# Capitolul 2: Dezvoltare centrată pe AI
+# Capitolul 2: Dezvoltare AI-First
 
-**📚 Curs**: [AZD For Beginners](../../README.md) | **⏱️ Durată**: 1-2 ore | **⭐ Complexitate**: Intermediar
+**📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 1-2 ore | **⭐ Complexitate**: Intermediar
 
 ---
 
 ## Prezentare generală
 
-Acest capitol se concentrează pe implementarea aplicațiilor bazate pe AI folosind Azure Developer CLI și serviciile Microsoft Foundry. De la aplicații simple de chat AI la agenți inteligenți cu instrumente.
+Acest capitol se concentrează pe implementarea aplicațiilor cu capabilități AI folosind Azure Developer CLI și serviciile Microsoft Foundry. De la aplicații simple de chat AI până la agenți inteligenți cu instrumente.
+
+> **Notă de validare (2026-03-25):** Fluxul de comenzi și ghidarea extensiei din acest capitol au fost verificate față de `azd` `1.23.12` și versiunea curentă de preview a extensiei agent AI `azure.ai.agents` `0.1.18-preview`. Dacă utilizați o versiune mai veche a AZD, actualizați mai întâi și apoi continuați cu exercițiile.
 
 ## Obiective de învățare
 
-Parcurgând acest capitol, veți:
-- Implementați aplicații AI folosind șabloane AZD predefinite
-- Înțelegeți integrarea Microsoft Foundry cu AZD
-- Configurați și personalizați agenți AI cu instrumente
-- Implementați aplicații RAG (Generare augmentată prin recuperare)
+După parcurgerea acestui capitol, veți:
+- Implementa aplicații AI folosind șabloane AZD predefinite
+- Înțelege integrarea Microsoft Foundry cu AZD
+- Configura și personaliza agenți AI cu instrumente
+- Implementa aplicații RAG (Retrieval-Augmented Generation)
 
 ---
 
@@ -22,10 +24,10 @@ Parcurgând acest capitol, veți:
 
 | # | Lecție | Descriere | Timp |
 |---|--------|-------------|------|
-| 1 | [Integrarea Microsoft Foundry](microsoft-foundry-integration.md) | Conectați AZD la serviciile Foundry | 30 min |
+| 1 | [Integrarea Microsoft Foundry](microsoft-foundry-integration.md) | Conectați AZD cu serviciile Foundry | 30 min |
 | 2 | [Ghid agenți AI](agents.md) | Implementați agenți inteligenți cu instrumente | 45 min |
-| 3 | [Implementare modele AI](ai-model-deployment.md) | Implementați și configurați modele AI | 30 min |
-| 4 | [Laborator AI](ai-workshop-lab.md) | Laborator practic: Pregătiți soluția AI pentru AZD | 60 min |
+| 3 | [Implementarea modelului AI](ai-model-deployment.md) | Implementați și configurați modele AI | 30 min |
+| 4 | [Laborator workshop AI](ai-workshop-lab.md) | Practic: Pregătiți soluția AI pentru AZD | 60 min |
 
 ---
 
@@ -36,7 +38,7 @@ Parcurgând acest capitol, veți:
 azd init --template azure-search-openai-demo
 azd up
 
-# Opțiunea 2: Agenți IA
+# Opțiunea 2: Agenți AI
 azd init --template get-started-with-ai-agents
 azd up
 
@@ -49,7 +51,7 @@ azd up
 
 ## 🤖 Șabloane AI recomandate
 
-| Șablon | Descriere | Servicii |
+| Template | Descriere | Servicii |
 |----------|-------------|----------|
 | [azure-search-openai-demo](https://github.com/Azure-Samples/azure-search-openai-demo) | Chat RAG cu citări | OpenAI + AI Search |
 | [get-started-with-ai-agents](https://github.com/Azure-Samples/get-started-with-ai-agents) | Agent AI cu instrumente | AI Agent Service |
@@ -73,13 +75,13 @@ azd up
 
 | Direcție | Capitol |
 |-----------|---------|
-| **Anterior** | [Capitolul 1: Fundamente](../chapter-01-foundation/README.md) |
-| **Următorul** | [Capitolul 3: Configurare](../chapter-03-configuration/README.md) |
-| **Sari la** | [Capitolul 8: Tipare de producție](../chapter-08-production/README.md) |
+| **Anterior** | [Capitolul 1: Fundație](../chapter-01-foundation/README.md) |
+| **Următor** | [Capitolul 3: Configurare](../chapter-03-configuration/README.md) |
+| **Sari la** | [Capitolul 8: Modele de producție](../chapter-08-production/README.md) |
 
 ---
 
-## 📖 Resurse conexe
+## 📖 Resurse relevante
 
 - [Depanare AI](../chapter-07-troubleshooting/ai-troubleshooting.md)
 - [Practici AI pentru producție](../chapter-08-production/production-ai-practices.md)
@@ -88,6 +90,6 @@ azd up
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Declinare de responsabilitate:
-Acest document a fost tradus folosind serviciul de traducere AI Co-op Translator (https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original, în limba sa nativă, trebuie considerat sursa autorizată. Pentru informații critice se recomandă o traducere profesională realizată de un traducător uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.
+**Declinare de responsabilitate**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații critice, se recomandă o traducere profesională realizată de un traducător uman. Nu ne asumăm răspunderea pentru orice neînțelegeri sau interpretări eronate care decurg din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

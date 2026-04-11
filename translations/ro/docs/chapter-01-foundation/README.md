@@ -1,20 +1,22 @@
-# Capitolul 1: Fundamente & Pornire rapidă
+# Capitolul 1: Fundamente & Pornire Rapidă
 
-**📚 Curs**: [AZD For Beginners](../../README.md) | **⏱️ Durată**: 30-45 minute | **⭐ Complexitate**: Începător
+**📚 Curs**: [AZD pentru începători](../../README.md) | **⏱️ Durata**: 30-45 de minute | **⭐ Complexitate**: Începător
 
 ---
 
 ## Prezentare generală
 
-Acest capitol introduce elementele fundamentale ale Azure Developer CLI (azd). Vei învăța conceptele de bază, cum să instalezi instrumentele și să implementezi prima ta aplicație în Azure.
+Acest capitol prezintă fundamentele Azure Developer CLI (azd). Veți învăța conceptele de bază, veți instala instrumentele și veți implementa prima aplicație în Azure.
+
+> Validat cu `azd 1.23.12` în martie 2026.
 
 ## Obiective de învățare
 
-După finalizarea acestui capitol, vei:
-- Să înțelegi ce este Azure Developer CLI și în ce se diferențiază de Azure CLI
-- Să instalezi și să configurezi AZD pe platforma ta
-- Să implementezi prima aplicație în Azure cu `azd up`
-- Să elimini resursele cu `azd down`
+Prin parcurgerea acestui capitol, veți:
+- Înțelegeți ce este Azure Developer CLI și cum se diferențiază de Azure CLI
+- Instalați și configurați AZD pe platforma dvs.
+- Implementați prima aplicație în Azure cu `azd up`
+- Eliminați resursele cu `azd down`
 
 ---
 
@@ -24,7 +26,25 @@ După finalizarea acestui capitol, vei:
 |---|--------|-------------|------|
 | 1 | [Bazele AZD](azd-basics.md) | Concepte de bază, terminologie și structura proiectului | 15 min |
 | 2 | [Instalare & Configurare](installation.md) | Ghiduri de instalare specifice platformei | 10 min |
-| 3 | [Primul tău proiect](first-project.md) | Practic: Implementați o aplicație web în Azure | 20 min |
+| 3 | [Primul tău proiect](first-project.md) | Exercițiu practic: Implementați o aplicație web în Azure | 20 min |
+
+---
+
+## ✅ Începeți aici: Verificați configurația
+
+Înainte de a începe, confirmați că mașina dvs. locală este pregătită pentru șablonul Capitolului 1:
+
+**Windows:**
+```powershell
+.\validate-setup.ps1
+```
+
+**macOS / Linux:**
+```bash
+bash ./validate-setup.sh
+```
+
+Dacă scriptul raportează instrumente lipsă, remediați acele lipsuri mai întâi, apoi continuați cu capitolul.
 
 ---
 
@@ -34,7 +54,8 @@ După finalizarea acestui capitol, vei:
 # Verificați instalarea
 azd version
 
-# Conectați-vă la Azure
+# Autentificați-vă pentru AZD
+# Opțional: folosiți az login dacă intenționați să rulați direct comenzi Azure CLI
 azd auth login
 
 # Implementați prima aplicație
@@ -65,8 +86,8 @@ azd down --force --purge # Curăță resursele
 
 | Direcție | Capitol |
 |-----------|---------|
-| **Următorul** | [Capitolul 2: Dezvoltare orientată pe AI](../chapter-02-ai-development/README.md) |
-| **Sari la** | [Capitolul 3: Configurare](../chapter-03-configuration/README.md) |
+| **Următor** | [Capitolul 2: Dezvoltare orientată pe AI](../chapter-02-ai-development/README.md) |
+| **Sări la** | [Capitolul 3: Configurare](../chapter-03-configuration/README.md) |
 
 ---
 
@@ -79,6 +100,6 @@ azd down --force --purge # Curăță resursele
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Declinare de responsabilitate**:
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un traducător uman. Nu ne asumăm responsabilitatea pentru orice neînțelegeri sau interpretări greșite care decurg din utilizarea acestei traduceri.
+**Declinare a responsabilității**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autoritară. Pentru informații critice, se recomandă o traducere profesională realizată de un traducător uman. Nu ne asumăm răspunderea pentru orice neînțelegeri sau interpretări eronate rezultate din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

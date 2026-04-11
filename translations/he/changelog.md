@@ -1,1075 +1,1178 @@
-# יומן שינויים - AZD למתחילים
+# רשימת שינויים - AZD למתחילים
 
-## مقدמה
+## مقدمة
 
-יומן שינויים זה מתעד את כל השינויים, העדכונים והשיפורים הבולטים במאגר AZD למתחילים. אנו פועלים לפי עקרונות ניהול גרסאות סמנטי ושומרים על יומן זה כדי לסייע למשתמשים להבין מה השתנה בין גרסאות.
+רשימת שינויים זו מתעדת את כל השינויים הבולטים, העדכונים והשיפורים במאגר AZD למתחילים. אנו פועלים לפי עקרונות גרסאות סמנטיות ושומרים על הרשימה הזו כדי לסייע למשתמשים להבין מה השתנה בין הגרסאות.
 
 ## מטרות למידה
 
-על ידי סקירת יומן השינויים הזה, תוכל:
-- להישאר מעודכן לגבי תכונות ותוספות תוכן חדשות
-- להבין שיפורים שנעשו במסמכים קיימים
-- לעקוב אחר תיקוני שגיאות ותיקונים להבטחת דיוק
+בדיקה של רשימת השינויים תאפשר לך:
+- להישאר מעודכן בתוספות של תכונות ותוכן חדשים
+- להבין שיפורים שנעשו לתיעוד הקיים
+- לעקוב אחר תיקוני באגים ותיקונים להבטחת דיוק
 - לעקוב אחר התפתחות חומרי הלמידה לאורך הזמן
 
 ## תוצאות למידה
 
-לאחר סקירת פרטי יומן השינויים, תוכל:
-- לזהות תוכן ומשאבים חדשים העומדים לרשות הלמידה
+לאחר בדיקת הערכים ברשימת השינויים, תוכל:
+- לזהות תוכן ומשאבים חדשים הזמינים ללמידה
 - להבין אילו חלקים עודכנו או שופרו
-- לתכנן את מסלול הלמידה שלך בהתבסס על החומרים העדכניים ביותר
+- לתכנן את מסלול הלמידה שלך על בסיס החומרים העדכניים ביותר
 - לתרום משוב והצעות לשיפורים עתידיים
 
 ## היסטוריית גרסאות
 
-### [v3.18.0] - 16-03-2026
+### [v3.19.1] - 2026-03-27
 
-#### פקודות CLI של AZD AI, אימות תוכן והרחבת תבניות
-**גרסה זו מוסיפה כיסוי פקודות `azd ai`, `azd extension` ו-`azd mcp` בכל הפרקים הקשורים ל-AI, מתקנת קישורים שבורים וקוד מיושן ב-agents.md, מעדכנת גיליון רמאויות, ומשפצת את סעיף תבניות דוגמה עם תיאורים מאומתים ותבניות Azure AI AZD חדשות.**
+#### הבהרת התחלת מתחילים, אימות הגדרות וניקוי פקודות AZD סופיות
+**גרסה זו ממשיכה את סריקת האימות של AZD 1.23 עם מעבר תיעודי הממוקד במתחילים: היא מבהירה את הנחיית האימות הראשונית ב-AZD, מוסיפה סקריפטים לאימות ההגדרות המקומיות, מאמתת פקודות מפתח מול AZD CLI החי ומסירה את הפניות האחרונות לפקודות ישנות שמקורן באנגלית מחוץ לרשימת השינויים.**
 
 #### נוסף
-- **🤖 כיסוי פקודות CLI של AZD AI** ב-7 קבצים (לשעבר רק בפרק 8):
-  - `docs/chapter-01-foundation/azd-basics.md` — סעיף חדש "הרחבות ופקודות AI" המציג את `azd extension`, `azd ai agent init` ו-`azd mcp`
-  - `docs/chapter-02-ai-development/agents.md` — אפשרות 4: `azd ai agent init` עם טבלת השוואה (תבנית לעומת גישת מניפסט)
-  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — תתי-סעיפים "הרחבות AZD ל-Foundry" ו"הפעלה ראשונה של סוכן"
-  - `docs/chapter-05-multi-agent/README.md` — התחלה מהירה מציגה כעת גם נתיבי פריסה מבוססי תבנית ומניפסט
-  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — סעיף הפריסה כולל כעת אפשרות `azd ai agent init`
-  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — תת-סעיף "פקודות הרחבת AI של AZD לאבחון"
-  - `resources/cheat-sheet.md` — סעיף חדש "פקודות AI והרחבות" עם `azd extension`, `azd ai agent init`, `azd mcp`, ו-`azd infra generate`
-- **📦 תבניות דוגמה חדשות של AZD AI** ב-`microsoft-foundry-integration.md`:
-  - **azure-search-openai-demo-csharp** — שיחת RAG .NET עם Blazor WebAssembly, Semantic Kernel ותמיכה בשיחת קול
-  - **azure-search-openai-demo-java** — שיחת RAG ב-Java באמצעות Langchain4J עם אפשרויות פריסה ACA/AKS
-  - **contoso-creative-writer** — אפליקציית כתיבה יצירתית רב-סוכנית עם Azure AI Agent Service, Bing Grounding ו-Prompty
-  - **serverless-chat-langchainjs** — RAG ללא שרת עם Azure Functions + LangChain.js + Cosmos DB בתמיכה בפיתוח מקומי Ollama
-  - **chat-with-your-data-solution-accelerator** — מאיץ RAG ארגוני עם פורטל ניהול, אינטגרציה ל-Teams ואפשרויות PostgreSQL/Cosmos DB
-  - **azure-ai-travel-agents** — אפליקציית התייחסות רב-סוכנית MCP עם שרתים ב-.NET, Python, Java ו-TypeScript
-  - **azd-ai-starter** — תבנית התחלה מיקרית לתשתית Azure AI ב-Bicep
-  - **🔗 קישור לגלריית AZD AI מצוינת** — הפניה ל[גלריית awesome-azd AI](https://azure.github.io/awesome-azd/?tags=ai) (80+ תבניות)
+- **🧪 סקריפטים לאימות הגדרות למתחילים** עם `validate-setup.ps1` ו`validate-setup.sh` כדי לאפשר למתלמדים לאשר את הכלים הנדרשים לפני תחילת פרק 1
+- **✅ שלבי אימות הגדרות מוקדם** בקבצי README הראשי ושל פרק 1 כדי לתפוס דרישות חסרות לפני `azd up`
+
+#### שונה
+- **🔐 הנחיית זיהוי למתחילים** עכשיו מטפלת באופן עקבי בפקודה `azd auth login` כנתיב העיקרי לזיקות AZD, כאשר `az login` מוזכר כאופציונלי אלא אם משתמשים ישירות בפקודות Azure CLI
+- **📚 זרימת התחלת פרק 1** מפנה כעת את המתלמדים לוודא את ההגדרות המקומיות לפני ההתקנה, האימות וצעדים ראשונים של פריסה
+- **🛠️ הודעות האימות** מפרידות כעת בבירור בין דרישות חסומות לבין אזהרות Azure CLI אופציונליות לנתיב המתחילים ב-AZD בלבד
+- **📖 תיעוד הקונפיגורציה, פתרון בעיות ודוגמאות** מבדילים כעת בין אימות דרוש של AZD לבין כניסה אופציונלית באמצעות Azure CLI כאשר בעבר הוצגו שניהם ללא הקשר
 
 #### תוקן
-- **🔗 ניווט ב-agents.md**: הקישורים הקודמים/הבא כעת מתאימים לסדר השיעורים ב-README של פרק 2 (אינטגרציית Microsoft Foundry → סוכנים → פריסה של מודל AI)
-- **🔗 קישורים שבורים ב-agents.md**: `production-ai-practices.md` תוקן ל-`../chapter-08-production/production-ai-practices.md` (3 מופעים)
-- **📦 קוד מיושן ב-agents.md**: הוחלף `opencensus` ב-`azure-monitor-opentelemetry` + OpenTelemetry SDK
-- **🐛 API לא תקין ב-agents.md**: הועבר `max_tokens` מ-`create_agent()` ל-`create_run()` תחת השם `max_completion_tokens`
-- **🔢 ספירת טוקנים ב-agents.md**: הוחלף הערכת `len//4` גסה ב-`tiktoken.encoding_for_model()`
-- **azure-search-openai-demo**: תוקנו שירותים מ-"Cognitive Search + App Service" ל-"Azure AI Search + Azure Container Apps" (מארח ברירת מחדל שונה באוקטובר 2024)
-- **contoso-chat**: תיאור מעודכן התואם לפועל בהתאם ל-Azure AI Foundry + Prompty, תואם את הכותרת וערימת הטכנולוגיה במאגר
+- **📋 הפניות לפקודות מקור באנגלית שנותרו** עודכנו לצורות AZD הנוכחיות, כולל `azd config show` בדף קיצורי הדרך ו`azd monitor --overview` כשכוונת תצוגת Application Insights היתה
+- **🧭 טענות למתחילים בפרק 1** מומתנו כדי להימנע מהבטחות יתר על הליך ללא שגיאות או החזרה אוטומטית בכמעט כל התבניות ומשאבי Azure
+- **🔎 אימות CLI חי** אישר תמיכה נוכחית בפקודות `azd env get-values`, `azd template list`, `azd extension list --installed`, `azd copilot consent list`, `azd mcp start`, `azd provision --preview`, `azd monitor --logs` ו-`azd down --force --purge`
 
-#### הוסר
-- **ai-document-processing**: הוסרה הפניה לתבנית בלתי פעילה (המאגר אינו נגיש לציבור כתבנית AZD)
+#### קבצים עודכנו
+- `README.md`
+- `changelog.md`
+- `docs/chapter-01-foundation/README.md`
+- `docs/chapter-01-foundation/azd-basics.md`
+- `docs/chapter-01-foundation/installation.md`
+- `docs/chapter-01-foundation/first-project.md`
+- `docs/chapter-03-configuration/README.md`
+- `docs/chapter-07-troubleshooting/README.md`
+- `examples/container-app/README.md`
+- `examples/database-app/README.md`
+- `resources/cheat-sheet.md`
+- `validate-setup.ps1`
+- `validate-setup.sh`
+
+---
+
+### [v3.19.0] - 2026-03-26
+
+#### אימות AZD 1.23.12, הרחבת סביבת הסדנה ורענון מודל AI
+**גרסה זו מבצעת סריקת אימות תיעוד נגד `azd` בגירסה `1.23.12`, מעדכנת דוגמאות פקודות AZD מיושנות, מרעננת הנחיות מודל AI לברירות מחדל עדכניות ומרחיבה את הוראות הסדנה מעבר ל-GitHub Codespaces כדי לתמוך גם במכולות פיתוח ובהעתקים מקומיים.**
+
+#### נוסף
+- **✅ הערות אימות בכל הפרקים העיקריים ותיעוד הסדנה** כדי להבהיר את קו הבסיס הנבדק ב-AZD למתלמדים העובדים עם גרסאות CLI חדשות או ישנות יותר
+- **⏱️ הנחיות ל-timeout פריסות ארוכות של אפליקציות AI** באמצעות `azd deploy --timeout 1800`
+- **🔎 שלבי בדיקת הרחבות** עם `azd extension show azure.ai.agents` בתיעוד זרימת AI
+- **🌐 הנחיות סביבת סדנה רחבות יותר** המכסות GitHub Codespaces, מכולות פיתוח והעתקים מקומיים עם MkDocs
+
+#### שונה
+- **📚 דפי README מבוא לפרקים** מציינים כעת באופן עקבי אימות נגד `azd 1.23.12` בכל החלקים של יסוד, קונפיגורציה, תשתית, סוכנים מרובים, טרום פריסה, פתרון תקלות וייצור
+- **🛠️ הפניות לפקודות AZD** עודכנו לצורות הנוכחיות בכל התיעוד:
+  - `azd config list` → `azd config show`
+  - `azd env show` → `azd env list` או `azd env get-value(s)` תלוי בהקשר
+  - `azd auth whoami` → `azd auth status`
+  - `azd monitor` → `azd monitor --overview` כאשר כוונת תצוגה של Application Insights
+- **🧪 דוגמאות תצוגה מוקדמת לפריסה** פושטו לשימוש נתמך נוכחי כמו `azd provision --preview` ו-`azd provision --preview -e production`
+- **🧭 זרימת הסדנה** עודכנה כדי לאפשר למתלמדים להשלים מעבדות ב-Codespaces, במכולת פיתוח או בהעתק מקומי במקום להניח הרצה רק ב-Codespaces
+- **🔐 הנחיית אימות** מעדיפה כעת `azd auth login` לזרימות עבודה ב-AZD, כאשר `az login` מוצג כאופציונלי כאשר משתמשים ישירות בפקודות Azure CLI
+
+#### תוקן
+- **🪟 פקודות התקנה ל-Windows** מותאמות לאיות הנכון של `winget` במדריך ההתקנה
+- **🐧 הנחיות התקנה ל-Linux** תוקנו כדי למנוע הוראות מנגנון ניהול חבילות `azd` ספציפיות להפצה לא נתמכת ולהפנות לנכסים של שחרורים במידת הצורך
+- **📦 דוגמאות מודלי AI** מרועננות מברירות מחדל ישנות כמו `gpt-35-turbo` ו-`text-embedding-ada-002` לדוגמאות עדכניות כגון `gpt-4.1-mini`, `gpt-4.1` ו-`text-embedding-3-large`
+- **📋 קטעי פריסה ואבחון** תוקנו לשימוש בפקודות מצב וסביבה נוכחיות בלוגים, סקריפטים ושלבי פתרון בעיות
+- **⚙️ הנחיות GitHub Actions** עודכנו מ-`Azure/setup-azd@v1.0.0` ל-`Azure/setup-azd@v2`
+- **🤖 הנחיות הסכמה ל-MCP/Copilot** עודכנו מ-`azd mcp consent` ל-`azd copilot consent list`
 
 #### שופר
-- **📝 תרגילים ב-agents.md**: תרגיל 1 מציג כעת פלט צפוי ושלב `azd monitor`; תרגיל 2 כולל את כל קוד ההרשמה של `FunctionTool`; תרגיל 3 מחליף הנחיות מועטות קונקרטיות בפקודות `prepdocs.py`
-- **📚 משאבים ב-agents.md**: עדכון קישורי התיעוד למסמכי Azure AI Agent Service וההתחלה המהירה הנוכחיים
-- **📋 טבלת שלבים הבאים ב-agents.md**: הוסף קישור לסדנת AI להשלמת כיסוי הפרק
+- **🧠 הנחיות פרק AI** מסבירות כעת טוב יותר התנהגות `azd ai` רגישת תצוגה מוקדמת, התחברות לפי דייר, שימוש נוכחי בהרחבות והמלצות פריסה מעודכנות של מודלים
+- **🧪 הוראות סדנה** משתמשות כעת בדוגמאות גרסה ריאליסטיות יותר ושפה ברורה יותר להגדרת סביבה למעבדות מעשיות
+- **📈 תיעוד ייצור ופתרון תקלות** מתואם טוב יותר עם ניהול ניטור נוכחי, מודל גיבוי ודוגמאות סדרות עלות
 
 #### קבצים עודכנו
+- `docs/chapter-01-foundation/README.md`
 - `docs/chapter-01-foundation/azd-basics.md`
+- `docs/chapter-01-foundation/installation.md`
+- `docs/chapter-02-ai-development/README.md`
 - `docs/chapter-02-ai-development/agents.md`
+- `docs/chapter-02-ai-development/ai-model-deployment.md`
+- `docs/chapter-02-ai-development/ai-workshop-lab.md`
 - `docs/chapter-02-ai-development/microsoft-foundry-integration.md`
+- `docs/chapter-03-configuration/README.md`
+- `docs/chapter-03-configuration/configuration.md`
+- `docs/chapter-04-infrastructure/README.md`
+- `docs/chapter-04-infrastructure/deployment-guide.md`
+- `docs/chapter-04-infrastructure/provisioning.md`
 - `docs/chapter-05-multi-agent/README.md`
-- `docs/chapter-06-pre-deployment/coordination-patterns.md`
+- `docs/chapter-06-pre-deployment/README.md`
+- `docs/chapter-06-pre-deployment/preflight-checks.md`
+- `docs/chapter-07-troubleshooting/README.md`
 - `docs/chapter-07-troubleshooting/ai-troubleshooting.md`
-- `resources/cheat-sheet.md`
+- `docs/chapter-07-troubleshooting/common-issues.md`
+- `docs/chapter-08-production/README.md`
+- `docs/chapter-08-production/production-ai-practices.md`
+- `workshop/README.md`
+- `workshop/docs/index.md`
+- `workshop/docs/instructions/1-Select-AI-Template.md`
+- `workshop/docs/instructions/2-Validate-AI-Template.md`
+- `workshop/docs/instructions/3-Deconstruct-AI-Template.md`
+- `workshop/docs/instructions/5-Customize-AI-Template.md`
 
 ---
 
-### [v3.17.0] - 05-02-2026
+### [v3.18.0] - 2026-03-16
 
-#### שיפור ניווט בקורס
-**גרסה זו משפרת את ניווט הפרקים בקובץ README.md עם טבלת פורמט משופרת.**
-
-#### שונה
-- **טבלת מפת הקורס**: משופרת עם קישורים ישירים לשיעורים, אומדני משך והערכות מורכבות
-- **ניקוי תיקיות**: הוסרו תיקיות ישנות מיותרות (deployment/, getting-started/, pre-deployment/, troubleshooting/)
-- **אימות קישורים**: אומתו כל 21+ הקישורים הפנימיים בטבלת מפת הקורס
-
-### [v3.16.0] - 05-02-2026
-
-#### עדכוני שם מוצר
-**גרסה זו מעדכנת הפניות למותג Microsoft העדכני ביותר.**
-
-#### שונה
-- **Microsoft Foundry → Microsoft Foundry**: כל ההפניות עודכנו בכל קבצי הלא-תרגום
-- **Azure AI Agent Service → Foundry Agents**: שם השירות עודכן כדי לשקף את המיתוג הנוכחי
-
-#### קבצים עודכנו
-- `README.md` - דף הנחיתה הראשי של הקורס
-- `changelog.md` - היסטוריית גרסאות
-- `course-outline.md` - מבנה הקורס
-- `docs/chapter-02-ai-development/agents.md` - מדריך סוכני AI
-- `examples/README.md` - תיעוד דוגמאות
-- `workshop/README.md` - דף הנחיתה של הסדנה
-- `workshop/docs/index.md` - אינדקס הסדנה
-- `workshop/docs/instructions/*.md` - כל קבצי ההוראות של הסדנה
-
----
-
-### [v3.15.0] - 05-02-2026
-
-#### שינוי מבנה מאגר משמעותי: שמות תיקיות מבוססי פרקים
-**גרסה זו מארגנת מחדש את התיעוד לתיקיות פרקים ייעודיות לניווט ברור יותר.**
-
-#### שינוי שמות תיקיות
-תיקיות ישנות הוחלפו בתיקיות ממוספרות פרקים:
-- `docs/getting-started/` → `docs/chapter-01-foundation/` + `docs/chapter-03-configuration/`
-- `docs/microsoft-foundry/` → `docs/chapter-02-ai-development/` + `docs/chapter-08-production/`
-- `docs/deployment/` → `docs/chapter-04-infrastructure/`
-- `docs/pre-deployment/` → `docs/chapter-06-pre-deployment/`
-- `docs/troubleshooting/` → `docs/chapter-07-troubleshooting/`
-- נוספה חדשה: `docs/chapter-05-multi-agent/`
-
-#### העברות קבצים
-| קובץ | מ- | ל- |
-|------|------|---|
-| azd-basics.md | getting-started/ | chapter-01-foundation/ |
-| installation.md | getting-started/ | chapter-01-foundation/ |
-| first-project.md | getting-started/ | chapter-01-foundation/ |
-| configuration.md | getting-started/ | chapter-03-configuration/ |
-| authsecurity.md | getting-started/ | chapter-03-configuration/ |
-| microsoft-foundry-integration.md | microsoft-foundry/ | chapter-02-ai-development/ |
-| agents.md | microsoft-foundry/ | chapter-02-ai-development/ |
-| ai-model-deployment.md | microsoft-foundry/ | chapter-02-ai-development/ |
-| ai-workshop-lab.md | microsoft-foundry/ | chapter-02-ai-development/ |
-| production-ai-practices.md | microsoft-foundry/ | chapter-08-production/ |
-| deployment-guide.md | deployment/ | chapter-04-infrastructure/ |
-| provisioning.md | deployment/ | chapter-04-infrastructure/ |
-| כל קבצי pre-deployment | pre-deployment/ | chapter-06-pre-deployment/ |
-| כל קבצי troubleshooting | troubleshooting/ | chapter-07-troubleshooting/ |
+#### פקודות AZD AI CLI, אימות תוכן והרחבת תבניות
+**גרסה זו מוסיפה כיסוי פקודות `azd ai`, `azd extension` ו-`azd mcp` בכל פרקי ה-AI, מתקן קישורים שבורים וקוד מיושן בקובץ agents.md, מעדכנת את דף הקיצורים, ומשדרגת את פרק תבניות הדוגמה עם תיאורים מאומתים ותבניות AZD חדשות של Azure AI.**
 
 #### נוסף
-- **📚 קבצי README לפרקים**: נוצרו README.md בכל תיקיית פרק עם:
-  - מטרות הלמידה ומשך
-  - טבלת שיעורים עם תיאורים
-  - פקודות התחלה מהירה
-  - ניווט לפרקים אחרים
-
-#### שונה
-- **🔗 עדכון כל הקישורים הפנימיים**: 78+ נתיבים עודכנו בכל קבצי התיעוד
-- **🗺️ README.md הראשי**: מפת קורס עודכנה עם מבנה הפרקים החדש
-- **📝 examples/README.md**: עדכון הפניות צולבות לתיקיות פרקים
-
-#### הוסר
-- מבנה תיקיות ישן (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/)
-
----
-
-### [v3.14.0] - 05-02-2026
-
-#### שינוי מבנה המאגר: ניווט פרקים
-**גרסה זו הוסיפה קבצי README לניווט בין פרקים (הוחלף ב-v3.15.0).**
-
----
-
-### [v3.13.0] - 05-02-2026
-
-#### מדריך חדש לסוכני AI
-**גרסה זו מוסיפה מדריך מקיף לפריסת סוכני AI עם Azure Developer CLI.**
-
-#### נוסף
-- **🤖 docs/microsoft-foundry/agents.md**: מדריך מלא המכסה:
-  - מה הם סוכני AI וכיצד הם שונים מצ'אטבוטים
-  - שלוש תבניות התחלה מהירה לסוכנים (Foundry Agents, Prompty, RAG)
-  - דפוסי ארכיטקטורת סוכן (סוכן יחיד, RAG, רב-סוכני)
-  - קונפיגורציית כלים והתאמה אישית
-  - מעקב ניטור ומדדים
-  - שיקולי עלויות ואופטימיזציה
-  - תרחישי פתרון בעיות נפוצים
-  - שלושה תרגילים מעשיים עם קריטריוני הצלחה
-
-#### מבנה תוכן
-- **הקדמה**: מושגי סוכן למתחילים
-- **התחלה מהירה**: פריסת סוכנים עם `azd init --template get-started-with-ai-agents`
-- **דפוסי ארכיטקטורה**: דיאגרמות חזותיות של דפוסי סוכן
-- **קונפיגורציה**: הגדרת כלי עבודה ומשתני סביבה
-- **ניטור**: אינטגרציה עם Application Insights
-- **תרגילים**: למידה הדרגתית מעשית (20-45 דקות כל אחד)
-
----
-
-### [v3.12.0] - 05-02-2026
-
-#### עדכון סביבת DevContainer
-**גרסה זו מעדכנת את קונפיגורציית מיכל הפיתוח עם כלים מודרניים ומחדלי ברירת מחדל מותאמים לחווית הלמידה ב-AZD.**
-
-#### שונה
-- **🐳 תמונת בסיס**: הועלתה מ-`python:3.12-bullseye` ל-`python:3.12-bookworm` (גרסת הדביאן היציבה האחרונה)
-- **📛 שם המיכל**: שונה מ-"Python 3" ל-"AZD for Beginners" לצורך בהירות
-
-#### נוסף
-- **🔧 תכונות חדשות במכולת פיתוח (Dev Container)**:
-  - `azure-cli` עם תמיכה ב-Bicep מופעלת
-  - `node:20` (גרסת LTS לתבניות AZD)
-  - `github-cli` לניהול תבניות
-  - `docker-in-docker` לפריסות אפליקציות במכולות
-
-- **🔌 העברת פורטים (Port Forwarding)**: פורטים מוגדרים מראש לפיתוח שכיח:
-  - 8000 (תצוגה מקדימה ל-MkDocs)
-  - 3000 (אפליקציות ווב)
-  - 5000 (Python Flask)
-  - 8080 (ממשקי API)
-
-- **🧩 תוספות חדשות ל-VS Code**:
-  - `ms-python.vscode-pylance` - אינטיליסנס משודרג לפייתון
-  - `ms-azuretools.vscode-azurefunctions` - תמיכה ב-Azure Functions
-  - `ms-azuretools.vscode-docker` - תמיכה בדוקר
-  - `ms-azuretools.vscode-bicep` - תמיכה בשפת Bicep
-  - `ms-azure-devtools.azure-resource-groups` - ניהול משאבי Azure
-  - `yzhang.markdown-all-in-one` - עריכת Markdown
-  - `DavidAnson.vscode-markdownlint` - בדיקת Markdown
-  - `bierner.markdown-mermaid` - תמיכה בדיאגרמות Mermaid
-  - `redhat.vscode-yaml` - תמיכה ב-YAML (ל-azure.yaml)
-  - `eamodio.gitlens` - ויזואליזציית Git
-  - `mhutchie.git-graph` - היסטוריית Git
-
-- **⚙️ הגדרות VS Code**: הוספת הגדרות ברירת מחדל למתורגמנה פייתון, עיצוב בשמירה וגזירת רווחים
-
-- **📦 עדכון קובץ requirements-dev.txt**:
-  - הוספת תוסף דחיסת MkDocs
-  - הוספת pre-commit לאיכות הקוד
-  - הוספת חבילות Azure SDK (azure-identity, azure-mgmt-resource)
+- **🤖 כיסוי פקודות AZD AI CLI** ב-7 קבצים (בעבר רק בפרק 8):
+  - `docs/chapter-01-foundation/azd-basics.md` — פרק חדש "הרחבות ופקודות AI" שמציג `azd extension`, `azd ai agent init` ו-`azd mcp`
+  - `docs/chapter-02-ai-development/agents.md` — אפשרות 4: `azd ai agent init` עם טבלה משווה (תבנית מול גישת מניי)
+  - `docs/chapter-02-ai-development/microsoft-foundry-integration.md` — תת-פרקים "הרחבות AZD עבור Foundry" ו-"פריסת סוכן ראשון"
+  - `docs/chapter-05-multi-agent/README.md` — התחלה מהירה מציגה כעת גם נתיבי פריסה מבוססי תבנית ומניי
+  - `docs/chapter-06-pre-deployment/coordination-patterns.md` — חלק הפריסה כולל כעת את אפשרות `azd ai agent init`
+  - `docs/chapter-07-troubleshooting/ai-troubleshooting.md` — תת-פרק "פקודות הרחבת AZD AI לאבחון"
+  - `resources/cheat-sheet.md` — פרק חדש "פקודות AI והרחבות" עם `azd extension`, `azd ai agent init`, `azd mcp`, ו-`azd infra generate`
+- **📦 תבניות לדוגמה חדשות של AZD AI** ב-`microsoft-foundry-integration.md`:
+  - **azure-search-openai-demo-csharp** — שיחת RAG ב-.NET עם Blazor WebAssembly, Semantic Kernel ותמיכה בשיחה קולית
+  - **azure-search-openai-demo-java** — שיחת RAG בג'אווה עם Langchain4J ואפשרויות פריסה ב-ACA/AKS
+  - **contoso-creative-writer** — אפליקציית כתיבה יצירתית מרובת סוכנים עם Azure AI Agent Service, Bing Grounding ו-Prompty
+  - **serverless-chat-langchainjs** — RAG ללא שרתים בעזרת Azure Functions + LangChain.js + Cosmos DB עם תמיכה בפיתוח מקומי ב-Ollama
+  - **chat-with-your-data-solution-accelerator** — מאיץ RAG ארגוני עם פורטל מנהל, אינטגרציה ל-Teams ואפשרויות PostgreSQL/Cosmos DB
+  - **azure-ai-travel-agents** — אפליקציית ייחוס ארכיטקטורת MCP עם שרתים ב-.NET, Python, Java ו-TypeScript
+  - **azd-ai-starter** — תבנית התחלה מינימלית Bicep לתשתית Azure AI
+  - **🔗 קישור לגלריה מדהימה של AZD AI** — הפניה ל-[גלריית awesome-azd AI](https://azure.github.io/awesome-azd/?tags=ai) (מעל 80 תבניות)
 
 #### תוקן
-- **פקודת Post-Create**: כעת מאמתת את ההתקנה של AZD ושל Azure CLI בעת הפעלת המכולה
+- **🔗 ניווט ב-agents.md**: קישורי הקודם/הבא תואמים כעת את סדר השיעורים ב-README של פרק 2 (Microsoft Foundry Integration → Agents → AI Model Deployment)
+- **🔗 קישורים שבורים ב-agents.md**: `production-ai-practices.md` תוקן ל-`../chapter-08-production/production-ai-practices.md` (3 מקרים)
+- **📦 קוד מיושן ב-agents.md**: החלפת `opencensus` ב-`azure-monitor-opentelemetry` + OpenTelemetry SDK
+- **🐛 API לא חוקי ב-agents.md**: העברת הפרמטר `max_tokens` מ-`create_agent()` ל-`create_run()` כ-`max_completion_tokens`
+- **🔢 ספירת טוקנים ב-agents.md**: החלפת הערכת `len//4` גסה ב-`tiktoken.encoding_for_model()`
+- **azure-search-openai-demo**: תיקון שירותים מ-"Cognitive Search + App Service" ל-"Azure AI Search + Azure Container Apps" (מארח כברירת מחדל שונה באוקטובר 2024)
+- **contoso-chat**: עדכון תיאור להתייחסות ל-Azure AI Foundry ו-Prompty, תואם את הכותרת והערימת הטכנולוגיה במאגר
+
+#### הוסר
+- **ai-document-processing**: הוסר הפניה לתבנית לא פעילה (המאגר אינו נגיש בפומבי כתבנית AZD)
+
+#### שופר
+- **📝 תרגילי agents.md**: תרגיל 1 מציג כעת את הפלט הצפוי ושלב `azd monitor`; תרגיל 2 כולל קוד רישום מלא של `FunctionTool`; תרגיל 3 מחליף הנחיות מעורפלות בפקודות קונקרטיות של `prepdocs.py`  
+- **📚 משאבי agents.md**: קישורי תיעוד עודכנו למסמכי Azure AI Agent Service הנוכחיים ולהתחלה מהירה  
+- **📋 טבלת שלבים הבאים ב-agents.md**: נוסף קישור לסדנת AI Workshop לכיסוי כולל של הפרק  
+
+#### קבצים עודכנו  
+- `docs/chapter-01-foundation/azd-basics.md`  
+- `docs/chapter-02-ai-development/agents.md`  
+- `docs/chapter-02-ai-development/microsoft-foundry-integration.md`  
+- `docs/chapter-05-multi-agent/README.md`  
+- `docs/chapter-06-pre-deployment/coordination-patterns.md`  
+- `docs/chapter-07-troubleshooting/ai-troubleshooting.md`  
+- `resources/cheat-sheet.md`  
+
+---
+
+### [v3.17.0] - 2026-02-05
+
+#### שיפור הניווט בקורס  
+**גרסה זו משפרת את הניווט בפרקי README.md עם פורמט טבלה משודרג.**
+
+#### שונה  
+- **טבלת מפת הקורס**: משודרגת עם קישורים ישירים לשיעורים, הערכות זמן ודירוגי מורכבות  
+- **ניקוי תיקיות**: הוסרו תיקיות ישנות מיותרות (deployment/, getting-started/, pre-deployment/, troubleshooting/)  
+- **בדיקת קישורים**: אימות של 21+ קישורים פנימיים בטבלת מפת הקורס  
+
+### [v3.16.0] - 2026-02-05
+
+#### עדכוני שמות מוצר  
+**גרסה זו מעדכנת הפניות למותג מיקרוסופט העדכני.**
+
+#### שונה  
+- **Microsoft Foundry → Microsoft Foundry**: כל ההפניות עודכנו בקבצים שאינם תרגום  
+- **Azure AI Agent Service → Foundry Agents**: שם השירות עודכן לשקף את המיתוג העדכני  
+
+#### קבצים עודכנו  
+- `README.md` - דף הנחיתה הראשי של הקורס  
+- `changelog.md` - היסטוריית גרסאות  
+- `course-outline.md` - מבנה הקורס  
+- `docs/chapter-02-ai-development/agents.md` - מדריך סוכני AI  
+- `examples/README.md` - תיעוד דוגמאות  
+- `workshop/README.md` - דף הנחיתה של הסדנה  
+- `workshop/docs/index.md` - אינדקס הסדנה  
+- `workshop/docs/instructions/*.md` - כל קבצי ההוראות בסדנה  
+
+---
+
+### [v3.15.0] - 2026-02-05
+
+#### שינויים משמעותיים במבנה המאגר: תיקיות מבוססות פרקים  
+**גרסה זו מפרקת את התיעוד לתיקיות מקצה ייעודיות לפרקים לשם ניווט ברור יותר.**
+
+#### שינוי שמות תיקיות  
+תיקיות ישנות הוחלפו בתיקיות ממוספרות לפי הפרק:  
+- `docs/getting-started/` → `docs/chapter-01-foundation/` + `docs/chapter-03-configuration/`  
+- `docs/microsoft-foundry/` → `docs/chapter-02-ai-development/` + `docs/chapter-08-production/`  
+- `docs/deployment/` → `docs/chapter-04-infrastructure/`  
+- `docs/pre-deployment/` → `docs/chapter-06-pre-deployment/`  
+- `docs/troubleshooting/` → `docs/chapter-07-troubleshooting/`  
+- נוסף חדש: `docs/chapter-05-multi-agent/`  
+
+#### העברת קבצים  
+| קובץ | מ-| ל-|  
+|------|------|---|  
+| azd-basics.md | getting-started/ | chapter-01-foundation/ |  
+| installation.md | getting-started/ | chapter-01-foundation/ |  
+| first-project.md | getting-started/ | chapter-01-foundation/ |  
+| configuration.md | getting-started/ | chapter-03-configuration/ |  
+| authsecurity.md | getting-started/ | chapter-03-configuration/ |  
+| microsoft-foundry-integration.md | microsoft-foundry/ | chapter-02-ai-development/ |  
+| agents.md | microsoft-foundry/ | chapter-02-ai-development/ |  
+| ai-model-deployment.md | microsoft-foundry/ | chapter-02-ai-development/ |  
+| ai-workshop-lab.md | microsoft-foundry/ | chapter-02-ai-development/ |  
+| production-ai-practices.md | microsoft-foundry/ | chapter-08-production/ |  
+| deployment-guide.md | deployment/ | chapter-04-infrastructure/ |  
+| provisioning.md | deployment/ | chapter-04-infrastructure/ |  
+| כל קבצי pre-deployment | pre-deployment/ | chapter-06-pre-deployment/ |  
+| כל קבצי troubleshooting | troubleshooting/ | chapter-07-troubleshooting/ |  
+
+#### נוסף  
+- **📚 קבצי README לפרקים**: נוצר README.md בכל תיקיית פרק עם:  
+  - מטרות למידה ואורך זמן  
+  - טבלת שיעורים עם תיאורים  
+  - פקודות התחלה מהירה  
+  - ניווט לפרקים אחרים  
+
+#### שונה  
+- **🔗 עדכון כל הקישורים הפנימיים**: 78+ נתיבי קישורים עודכנו בכל קבצי התיעוד  
+- **🗺️ README.md הראשי**: מפת הקורס עודכנה למבנה הפרקי החדש  
+- **📝 examples/README.md**: עדכון הפניות חוצות לתיקיות הפרקים  
+
+#### הוסר  
+- מבנה תיקיות ישן (getting-started/, microsoft-foundry/, deployment/, pre-deployment/, troubleshooting/, ai-foundry/)  
+
+---
+
+### [v3.14.0] - 2026-02-05
+
+#### שיפור ניווט בפרקים במאגר  
+**גרסה זו הוסיפה קבצי README ניווט לפרקים (מוחלף ב-v3.15.0).**
+
+---
+
+### [v3.13.0] - 2026-02-05
+
+#### מדריך חדש לסוכני AI  
+**גרסה זו מוסיפה מדריך מקיף לפריסת סוכני AI עם Azure Developer CLI.**
+
+#### נוסף  
+- **🤖 docs/microsoft-foundry/agents.md**: מדריך מלא המכסה:  
+  - מהו סוכן AI וכיצד הוא שונה מצ’אטבוט  
+  - שלושה תבניות התחלה מהירה לסוכנים (Foundry Agents, Prompty, RAG)  
+  - דפוסי ארכיטקטורה לסוכנים (סוכן בודד, RAG, סוכנים מרובים)  
+  - הגדרת כלים והתאמה אישית  
+  - ניטור ומעקב אחרי מדדים  
+  - שיקולי עלויות ואופטימיזציה  
+  - תרחישי פתרון תקלות נפוצים  
+  - שלושה תרגילים מעשיים עם קריטריונים להצלחה  
+
+#### מבנה תוכן  
+- **הקדמה**: מושגי סוכנים למתחילים  
+- **התחלה מהירה**: פריסת סוכנים עם `azd init --template get-started-with-ai-agents`  
+- **דפוסי ארכיטקטורה**: דיאגרמות ויזואליות של דפוסי סוכנים  
+- **הגדרות**: התקנת כלים ומשתני סביבה  
+- **ניטור**: אינטגרציה עם Application Insights  
+- **תרגילים**: למידה הדרגתית מעשית (20-45 דקות כל אחד)  
+
+---
+
+### [v3.12.0] - 2026-02-05
+
+#### עדכון סביבת DevContainer  
+**גרסה זו מעדכנת את תצורת מיכל הפיתוח עם כלים מודרניים וערכי ברירת מחדל טובים יותר לחוויית לימוד AZD.**
+
+#### שונה  
+- **🐳 תמונת בסיס**: שודרג מ-`python:3.12-bullseye` ל-`python:3.12-bookworm` (גרסת Debian יציבה אחרונה)  
+- **📛 שם המיכל**: שונה מ-"Python 3" ל-"AZD for Beginners" לשם בהירות  
+
+#### נוסף  
+- **🔧 תכונות חדשות במיכל פיתוח**:  
+  - `azure-cli` עם תומך Bicep מופעל  
+  - `node:20` (גרסת LTS לתבניות AZD)  
+  - `github-cli` לניהול תבניות  
+  - `docker-in-docker` לפריסות Container Apps  
+
+- **🔌 ניתוב פורטים**: פורטים מוגדרים מראש לפיתוח נפוץ:  
+  - 8000 (תצוגת מקדימי MkDocs)  
+  - 3000 (אפליקציות ווב)  
+  - 5000 (Python Flask)  
+  - 8080 (APIs)  
+
+- **🧩 הרחבות חדשות ל-VS Code**:  
+  - `ms-python.vscode-pylance` - אינטיליסנס משופר לפייתון  
+  - `ms-azuretools.vscode-azurefunctions` - תמיכה ב-Azure Functions  
+  - `ms-azuretools.vscode-docker` - תמיכה בדוקר  
+  - `ms-azuretools.vscode-bicep` - תמיכה בשפת Bicep  
+  - `ms-azure-devtools.azure-resource-groups` - ניהול משאבים של Azure  
+  - `yzhang.markdown-all-in-one` - עריכת Markdown  
+  - `DavidAnson.vscode-markdownlint` - בדיקת Markdown  
+  - `bierner.markdown-mermaid` - תמיכה בדיאגרמות Mermaid  
+  - `redhat.vscode-yaml` - תמיכה ב-YAML (ל-azure.yaml)  
+  - `eamodio.gitlens` - ויזואליזצית Git  
+  - `mhutchie.git-graph` - היסטוריית Git  
+
+- **⚙️ הגדרות VS Code**: נוספו הגדרות ברירת מחדל עבור מפרש פייתון, עיצוב שמירה, וסינון רווחים מיותרים  
+
+- **📦 עדכון requirements-dev.txt**:  
+  - הוסף תוסף דחיסה MkDocs  
+  - הוסיף pre-commit לאיכות קוד  
+  - הוספת חבילת Azure SDK (azure-identity, azure-mgmt-resource)  
+
+#### תוקן  
+- **פקודת Post-Create**: בודקת כעת התקנת AZD ו-Azure CLI עם הפעלת המיכל  
 
 ---
 
 ### [v3.11.0] - 2026-02-05
 
-#### שדרוג README ידידותי למתחילים  
-**גרסה זו משפרת משמעותית את README.md כדי שיהיה נגיש יותר למתחילים ומוסיפה משאבים חיוניים למפתחים בתחום ה-AI.**
+#### שדרוג README למתחילים  
+**גרסה זו משפרת מאוד את README.md להיות נגיש יותר למתחילים ומוסיפה משאבים חיוניים למפתחי AI.**
 
-#### נוסף
-- **🆚 השוואת Azure CLI מול AZD**: הסבר ברור מתי להשתמש בכלי עם דוגמאות מעשיות  
-- **🌟 קישורים מעולים ל-AZD**: קישורים ישירים לגלריית תבניות קהילתית ומשאבי תרומה:  
-  - [גלריית AZD מעולה](https://azure.github.io/awesome-azd/) - מעל 200 תבניות מוכנות לפריסה  
-  - [שליחת תבנית](https://github.com/Azure/awesome-azd/issues) - תרומת קהילה  
-- **🎯 מדריך התחלה מהירה**: קטע פשוט עם 3 שלבים להתחלה (התקן → התחבר → פרוס)  
-- **📊 טבלת ניווט מבוססת ניסיון**: הדרכה ברורה היכן להתחיל בהתאם לניסיון המפתח
+#### נוסף  
+- **🆚 השוואה בין Azure CLI ל-AZD**: הסבר ברור מתי להשתמש בכל כלי עם דוגמאות פרקטיות  
+- **🌟 קישורים מעולים ל-AZD**: קישורים ישירים לגלריית תבניות וקהילה לתרומות:  
+  - [גלריית Awesome AZD](https://azure.github.io/awesome-azd/) - 200+ תבניות מוכנות לפריסה  
+  - [שלח תבנית](https://github.com/Azure/awesome-azd/issues) - תרומת הקהילה  
+- **🎯 מדריך התחלה מהירה**: שלושה שלבים פשוטים להתחלה (התקנה → כניסה → פריסה)  
+- **📊 טבלת ניווט לפי ניסיון**: הנחיות ברורות איפה להתחיל לפי רמת מפתח  
 
-#### שונה
-- **מבנה README**: ארגון מחדש לחשיפת מידע הדרגתית - חשיבות ראשונה למידע כללי  
-- **קטע מבוא**: ניסוח מחדש להסבר "הקסם של `azd up`" למתחילים מוחלטים  
-- **הסרת תוכן כפול**: הסרת מדור פתרון בעיות כפול  
-- **פקודות פתרון בעיות**: תיקון הפניה ל- `azd logs` לשימוש ב-`azd monitor --logs` תקף
+#### שונה  
+- **מבנה README**: ארגון מחדש להצגת מידע באופן הדרגתי – מידע מרכזי ראשון  
+- **מדור Introduction**: נוסח מחדש להסבר "הקסם של `azd up`" למתחילים גמורים  
+- **הסרת תוכן כפול**: בוטלה המדור כפול של פתרון תקלות  
+- **פקודות פתרון תקלות**: תוקנו הפניות של `azd logs` לשימוש ב`azd monitor --logs`  
 
-#### תוקן
-- **🔐 פקודות אימות**: הוספת `azd auth login` ו-`azd auth logout` ל-cheat-sheet.md  
-- **הסרת הפניות ל`azd logs` לא תקינות** בקטע פתרון הבעיות ב-README
+#### תוקן  
+- **🔐 פקודות אימות**: נוספו `azd auth login` ו-`azd auth logout` ל-cheat-sheet.md  
+- **הסרת הפניות בלתי תקינות**: הושמטו הפניות נותרות ל-`azd logs` במדור פתרון תקלות ב-README  
 
-#### הערות
-- **טווח יישום**: שינויים ב-README.md הראשי וב-resources/cheat-sheet.md  
-- **קהל יעד**: שיפורים המכוונים במיוחד למפתחים חדשים ב-AZD
+#### הערות  
+- **טווח**: שינויים בוצעו ב-README.md הראשי וב-resources/cheat-sheet.md  
+- **קהל יעד**: שיפורים מיועדים במיוחד למפתחים המתחילים עם AZD  
 
 ---
 
 ### [v3.10.0] - 2026-02-05
 
-#### עדכון דיוק פקודות Azure Developer CLI  
-**גרסה זו מתיקה פקודות AZD לא קיימות בתיעוד, ומבטיחה שכל דוגמאות הקוד משתמשות בסינטקס תקף של Azure Developer CLI.**
+#### תיקון דיוק פקודות Azure Developer CLI  
+**גרסה זו מתקן מקרים של פקודות AZD בלתי קיימות בתיעוד, ומבטיחה שכל דוגמאות הקוד משתמשות בסינטקס תקני של Azure Developer CLI.**
 
-#### תוקן
-- **🔧 הסרת פקודות AZD לא קיימות**: ביקורת מקיפה ותיקון פקודות לא תקינות:  
-  - `azd logs` (לא קיימת) → הוחלפה ב-`azd monitor --logs` או חלופות Azure CLI  
+#### תוקן  
+- **🔧 הסרת פקודות AZD שלא קיימות**: בדיקה מקיפה ותיקון פקודות שגויות:  
+  - `azd logs` (לא קיימת) → הוחלף ב-`azd monitor --logs` או חלופות Azure CLI  
   - תת-פקודות `azd service` (לא קיימות) → הוחלפו ב-`azd show` ו-Azure CLI  
   - `azd infra import/export/validate` (לא קיימות) → הוסרו או הוחלפו בפקודות תקינות  
   - דגלים `azd deploy --rollback/--incremental/--parallel/--detect-changes` (לא קיימים) → הוסרו  
-  - דגלים `azd provision --what-if/--rollback` (לא קיימים) → עודכנו לשימוש ב-`--preview`  
+  - דגלים `azd provision --what-if/--rollback` (לא קיימים) → עודכנו ל-`--preview`  
   - `azd config validate` (לא קיימת) → הוחלפה ב-`azd config list`  
-  - `azd info`, `azd history`, `azd metrics` (לא קיימות) → הוסרו
+  - `azd info`, `azd history`, `azd metrics` (לא קיימות) → הוסרו  
 
-- **📚 קבצים עם תיקוני פקודות**:  
-  - `resources/cheat-sheet.md`: שדרוג כולל של הפניות לפקודות  
-  - `docs/deployment/deployment-guide.md`: תיקון אסטרטגיות פריסה והרצה לאחור  
-  - `docs/troubleshooting/debugging.md`: תיקון קטעי ניתוח יומנים  
-  - `docs/troubleshooting/common-issues.md`: עדכון פקודות פתרון בעיות  
-  - `docs/troubleshooting/ai-troubleshooting.md`: תיקון קטע דיבאג AZD  
-  - `docs/getting-started/azd-basics.md`: תיקוני פקודות ניטור  
-  - `docs/getting-started/first-project.md`: עדכון דוגמאות ניטור ודיבאג  
+- **📚 קבצים עודכנו עם תיקוני פקודות**:  
+  - `resources/cheat-sheet.md`: תיקון נרחב ברפרנס פקודות  
+  - `docs/deployment/deployment-guide.md`: תיקון אסטרטגיות Rollback ופריסה  
+  - `docs/troubleshooting/debugging.md`: תיקון מדורי ניתוח לוגים  
+  - `docs/troubleshooting/common-issues.md`: עדכון פקודות פתרון תקלות  
+  - `docs/troubleshooting/ai-troubleshooting.md`: תיקון מדור דיבוג AZD  
+  - `docs/getting-started/azd-basics.md`: תיקון פקודות ניטור  
+  - `docs/getting-started/first-project.md`: עדכון דוגמאות ניטור ודיבוג  
   - `docs/getting-started/installation.md`: תיקון דוגמאות עזרה וגרסה  
-  - `docs/pre-deployment/application-insights.md`: תיקוני פקודות צפייה ביומנים  
-  - `docs/pre-deployment/coordination-patterns.md`: תיקוני פקודות דיבאג סוכן
+  - `docs/pre-deployment/application-insights.md`: תיקון פקודות צפייה בלוגים  
+  - `docs/pre-deployment/coordination-patterns.md`: תיקון פקודות דיבוג סוכן  
 
-- **📝 עדכון הפניה לגרסאות**:  
-  - `docs/getting-started/installation.md`: שינוי גרסת `1.5.0` קשיחה ל-`1.x.x` עם קישור לשחרורים
+- **📝 עדכון גרסת הפנייה**:  
+  - בקובץ `docs/getting-started/installation.md`: גרסת `1.5.0` קבועה הוחלפה ב`1.x.x` עם קישור לגרסאות  
 
-#### שונה
-- **אסטרטגיות הרצה לאחור**: עדכון לתיעוד בשימוש בהרצה לאחור מבוססת Git (אין הרצה לאחור מקורית ב-AZD)  
-- **צפייה ביומנים**: החלפת הפניות ל-`azd logs` ב-`azd monitor --logs`, `azd monitor --live`, ופקודות Azure CLI  
-- **קטע ביצועים**: הסרת דגלים לא קיימים לפריסה מקבילית/הדרגתית, מתן חלופות תקפות
+#### שונה  
+- **אסטרטגיות Rollback**: התיעוד עודכן לשימוש ב-Git עבור Rollback (AZD אינו תומך ב-Rollback מקורי)  
+- **צפייה בלוגים**: הפניות ל-`azd logs` הוחלפו ב-`azd monitor --logs`, `azd monitor --live`, ופקודות Azure CLI  
+- **מדור ביצועים**: הוסרו דגלים לא קיימים לפריסה מקבילה/מדרגתית, וניתנו חלופות תקינות  
 
-#### פרטי טכני
-- **פקודות AZD תקפות**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`  
-- **דגלים תקפים ל-azd monitor**: `--live`, `--logs`, `--overview`  
-- **תכונות מוסרות**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
+#### פרטים טכניים
+- **פקודות AZD תקפות**: `init`, `up`, `auth`, `deploy`, `down`, `provision`, `publish`, `completion`, `config`, `env`, `show`, `version`, `monitor`
+- **דגלים תקפים לפקודת azd monitor**: `--live`, `--logs`, `--overview`
+- **תכונות שהוסרו**: `azd logs`, `azd service`, `azd infra import/export/validate`, `azd history`, `azd metrics`, `azd info`, `azd config validate`
 
 #### הערות
-- **אימות**: פקודות אומתו נגד Azure Developer CLI גרסה v1.23.x
+- **אימות**: פקודות אומתו מול Azure Developer CLI v1.23.x
 
 ---
 
 ### [v3.9.0] - 2026-02-05
 
-#### השלמת סדנה ועדכון איכות התיעוד  
-**גרסה זו משלימה מודולי סדנה אינטראקטיביים, מתקן את כל קישורי התיעוד השבורים ומשפר את איכות התוכן הכוללת עבור מפתחי AI המשתמשים ב-Microsoft AZD.**
+#### עדכון השלמת סדנאות ואיכות תיעוד
+**גרסה זו משלימה את מודולי הסדנה האינטראקטיביים, מתקנת את כל קישורי התיעוד השבורים, ומשפרת את איכות התוכן הכוללת עבור מפתחי AI המשתמשים ב-Microsoft AZD.**
 
 #### נוסף
-- **📝 CONTRIBUTING.md**: מסמך להנחיות תרומה חדש עם:  
-  - הוראות ברורות לדיווח על בעיות והצעות שינויים  
-  - תקני תיעוד לתוכן חדש  
-  - הנחיות לדוגמאות קוד וקונבנציות להודעות מסירת קוד  
-  - מידע על שותפות קהילתית
+- **📝 CONTRIBUTING.md**: מסמך הנחיות חדש לתרומה הכולל:
+  - הוראות ברורות לדיווח על בעיות ולהצעת שינויים
+  - תקני תיעוד לתוכן חדש
+  - הנחיות לדוגמאות קוד וקונבנציות הודעות קומיט
+  - מידע על מעורבות הקהילה
 
 #### הושלם
-- **🎯 מודול סדנה 7 (סיכום)**: מודול סיכום מלא הכולל:  
-  - סיכום כולל של הישגי הסדנה  
-  - מדור מושגים מרכזיים המכסה AZD, תבניות ומייקרוסופט פאונדרי  
-  - המלצות להמשך מסלול לימוד  
-  - תרגילי אתגר עם דרגות קושי  
-  - משוב תמיכה וקישורים לקהילה
+- **🎯 מודול סדנה 7 (סיכום)**: מודול סיכום מלא הכולל:
+  - סיכום מקיף של הישגי הסדנה
+  - סעיף מושגים מרכזיים המכסה AZD, תבניות ו-Microsoft Foundry
+  - המלצות להמשך מסלול הלמידה
+  - תרגילי אתגר בסדנה עם דירוגי קושי
+  - משוב מהקהילה וקישורי תמיכה
 
-- **📚 מודול סדנה 3 (פירוק)**: עדכון יעדים לימודיים עם:  
-  - הפעלת GitHub Copilot עם שרתי MCP  
-  - הבנת מבנה תיקיית תבניות AZD  
-  - דפוסי תשתית כקוד (Bicep)  
-  - הנחיות מעשיות במעבדות
+- **📚 מודול סדנה 3 (פירוק)**: עדכון מטרות הלמידה הכוללות:
+  - מדריך הפעלה של GitHub Copilot עם שרתי MCP
+  - הבנת מבנה תיקיית תבניות AZD
+  - דפוסי ארגון תשתית-כקוד (Bicep)
+  - הנחיות למעבדות מעשיות
 
-- **🔧 מודול סדנה 6 (פירוק)**: הושלם עם:  
-  - ניקוי משאבים וניהול עלויות  
-  - שימוש ב-`azd down` לשחרור תשתית בטוחה  
-  - הוראות שחזור שירותי קוגניטיב מחוקים ברכות  
-  - מסלולי חקירה לבונוס עבור GitHub Copilot ו- Azure Portal
+- **🔧 מודול סדנה 6 (פירוק)**: הושלם עם:
+  - מטרות ניקוי משאבים וניהול עלויות
+  - שימוש ב-`azd down` לאבטחת פירוק תשתית
+  - הנחיות לשחזור שירותי קוגניציה שנמחקו ברכות
+  - נקודות חקר נוספות ל-GitHub Copilot ו-Azure Portal
 
 #### תוקן
-- **🔗 תיקוני קישורים שבורים**: טיפול ב-15+ קישורים פנימיים שבורים בתיעוד:  
-  - `docs/ai-foundry/ai-model-deployment.md`: תיקון נתיבים ל-microsoft-foundry-integration.md  
-  - `docs/troubleshooting/ai-troubleshooting.md`: תיקון נתיבים ל-ai-model-deployment.md ול-production-ai-practices.md  
-  - `docs/getting-started/first-project.md`: החלפת cicd-integration.md לא קיימת ב-deployment-guide.md  
-  - `examples/retail-scenario.md`: תיקון קישורי FAQ ומדריך פתרון בעיות  
-  - `examples/container-app/microservices/README.md`: תיקון נתיבי בית הקורס ומדריך פריסה  
-  - `resources/faq.md` ו-`resources/glossary.md`: עדכון הפניות לפרק AI  
-  - `course-outline.md`: תיקון הפניות למדריך מורה ומעבדות סדנת AI
+- **🔗 תיקוני קישורים שבורים**: פתרון למעלה מ-15 קישורים פנימיים שבורים בתיעוד:
+  - `docs/ai-foundry/ai-model-deployment.md`: תוקנו הנתיבים ל-microsoft-foundry-integration.md
+  - `docs/troubleshooting/ai-troubleshooting.md`: תוקנו הנתיבים ל-ai-model-deployment.md ול-production-ai-practices.md
+  - `docs/getting-started/first-project.md`: הוחלף cicd-integration.md הלא קיים ב-deployment-guide.md
+  - `examples/retail-scenario.md`: תוקנו נתיבי FAQ ומדריך פתרון תקלות
+  - `examples/container-app/microservices/README.md`: תוקנו נתיבי מדריך הקורס ומדריך הפריסה
+  - `resources/faq.md` ו-`resources/glossary.md`: עודכנו הפניות לפרק AI
+  - `course-outline.md`: תוקנו הפניות למדריך המדריכים ולמעבדות סדנת AI
 
-- **📅 באנר מצב הסדנה**: עדכון מ-"בתהליך בנייה" למצב סדנה פעילה עם תאריך פברואר 2026
+- **📅 באנר סטטוס הסדנה**: עודכן מ"בהקמה" לסטטוס סדנה פעילה עם תאריך פברואר 2026
 
-- **🔗 ניווט סדנה**: תיקון קישורי ניווט שבורים ב-README של הסדנה המפנים לתיקיית lab-1-azd-basics לא קיימת
+- **🔗 ניווט הסדנה**: תוקנו קישורי ניווט שבורים בקובץ README.md של הסדנה שפנו לתיקיית lab-1-azd-basics שלא קיימת
 
 #### שונה
-- **הצגת הסדנה**: הסרת אזהרת "בתהליך בנייה" והפיכת הסדנה למלאה ומוכנה לשימוש  
-- **עקביות ניווט**: הבטחת כל מודולי הסדנה כוללים ניווט בין-מודולי תקין  
-- **הפניות מסלול לימוד**: עדכון הפניות בין הפרקים לשימוש בנתיבי microsoft-foundry נכונים
+- **הצגת הסדנה**: הוסר האזהרה "בהקמה", הסדנה מלא ולמוכנות לשימוש
+- **עקביות בנווט**: הקפדה שכל מודולי הסדנה כוללים ניווט בין מודולים תקין
+- **הפניות למסלולי למידה**: עודכנו הפניות בין הפרקים לשימוש בנתיבים נכונים ל-microsoft-foundry
 
 #### אומת
-- ✅ כל קבצי Markdown באנגלית כוללים קישורים פנימיים תקינים  
-- ✅ מודולי הסדנה 0-7 שלמים עם מטרות לימוד  
-- ✅ ניווט בין פרקים ומודולים עובר כהלכה  
-- ✅ תוכן מתאים למפתחי AI המשתמשים ב-Microsoft AZD  
-- ✅ שפה ומבנה ידידותיים למתחילים נשמרו לאורך כל התוכן  
+- ✅ כל קבצי markdown באנגלית כוללים קישורים פנימיים תקינים
+- ✅ מודולי סדנה 0-7 הושלמו עם מטרות למידה
+- ✅ ניווט בין פרקים ומודולים פועל כראוי
+- ✅ התוכן מתאים למפתחי AI המשתמשים ב-Microsoft AZD
+- ✅ שפה ומבנה ידידותיים למתחילים נשמרו לאורך כל הדרך
 - ✅ CONTRIBUTING.md מספק הנחיות ברורות לתורמים בקהילה
 
-#### מימוש טכני
-- **אימות קישורים**: סקריפט PowerShell אוטומטי אימת את כל קבצי ה-md הפנימיים  
-- **בדיקת תוכן**: סקירה ידנית של שלמות הסדנה וידידותיות למתחילים  
-- **מערכת ניווט**: יישום עקבי של תבניות ניווט בין פרקים ומודולים
+#### יישום טכני
+- **אימות קישורים**: סקריפט PowerShell אוטומטי בודק את כל הקישורים הפנימיים ב-.md
+- **בדיקת תוכן**: סקירה ידנית של סיום הסדנה וההתאמה למתחילים
+- **מערכת ניווט**: דפוסי ניווט עקביים בפרקים ומודולים
 
 #### הערות
-- **טווח יישום**: שינויים הוחלו על התיעוד באנגלית בלבד  
-- **תרגומים**: תיקיות תרגום לא עודכנו בגרסה זו (תיאום תרגום אוטומטי יתבצע מאוחר יותר)  
-- **משך הסדנה**: הסדנה המלאה מספקת 3-4 שעות של לימוד מעשי
+- **טווח השינויים**: שינויים בוצעו בתיעוד באנגלית בלבד
+- **תרגומים**: תיקיות תרגום לא עודכנו בגרסה זו (סינכרון תרגום אוטומטי יבוצע מאוחר יותר)
+- **משך הסדנה**: סדנה מלאה מספקת כעת 3-4 שעות של למידה מעשית
 
 ---
 
 ### [v3.8.0] - 2025-11-19
 
-#### תיעוד מתקדם: ניטור, אבטחה ודפוסי תיאום רב-סוכני  
-**גרסה זו מוסיפה שיעורי A מקיפים על שילוב Application Insights, דפוסי אימות ואבטחה, ותיאום רב-סוכני בפריסות ייצור.**
+#### תיעוד מתקדם: ניטור, אבטחה ודפוסי ריבוי-סוכנים
+**גרסה זו מוסיפה שיעורים מקיפים ברמת A על אינטגרציית Application Insights, דפוסי אימות, ותיאום ריבוי-סוכנים לפריסות ייצור.**
 
 #### נוסף
-- **📊 שיעור שילוב Application Insights**: ב-`docs/pre-deployment/application-insights.md`:  
-  - פריסת AZD עם הפעלה אוטומטית  
-  - תבניות Bicep שלמות ל-Application Insights + Log Analytics  
-  - אפליקציות Python עובדות עם טלמטריה מותאמת (מעל 1,200 שורות)  
-  - דפוסי ניטור AI/LLM (מעקב אסימון ועלויות Microsoft Foundry Models)  
-  - 6 דיאגרמות Mermaid (ארכיטקטורה, מעקב מבוזר, זרימת טלמטריה)  
-  - 3 תרגילים מעשיים (התראות, לוחות בקרה, ניטור AI)  
-  - דוגמאות שאילתות Kusto ואסטרטגיות חיסכון בעלויות  
-  - הזרמת מדדים חיים ודיבוג בזמן אמת  
-  - זמן לימוד 40-50 דקות עם דפוסים מוכנים לייצור
+- **📊 שיעור אינטגרציית Application Insights**: ב- `docs/pre-deployment/application-insights.md`:
+  - פריסת AZD עם הפרוביזיה אוטומטית
+  - תבניות Bicep מלאות ל-Application Insights + Log Analytics
+  - אפליקציות Python עובדות עם טלמטריה מותאמת (מעל 1,200 שורות)
+  - דפוסי ניטור AI/LLM (מעקב טוקנים/עלויות במודלי Microsoft Foundry)
+  - 6 דיאגרמות Mermaid (ארכיטקטורה, מעקב מבוזר, זרימת טלמטריה)
+  - 3 תרגילים מעשיים (התראות, לוחות בקרה, ניטור AI)
+  - דוגמאות שאילתות Kusto ואסטרטגיות אופטימיזציה
+  - סטרימינג של מטריקות חיות ודיבוג בזמן אמת
+  - כ-40-50 דקות זמן למידה עם דפוסים מוכנים לייצור
 
-- **🔐 שיעור דפוסי אימות ואבטחה**: ב-`docs/getting-started/authsecurity.md`:  
-  - 3 דפוסי אימות (מחרוזות חיבור, Key Vault, זהות מנוהלת)  
-  - תבניות תשתית Bicep מלאות לפריסות מאובטחות  
-  - קוד אפליקציית Node.js עם שילוב Azure SDK  
-  - 3 תרגילים שלמים (הפעלת זהות מנוהלת, זהות מוקנית למשתמש, סיבוב Key Vault)  
-  - שיטות עבודה מומלצות לאבטחה וקונפיגורציות RBAC  
-  - מדריך פתרון בעיות וניתוח עלויות  
+- **🔐 שיעור דפוסי אימות ואבטחה**: ב- `docs/getting-started/authsecurity.md`:
+  - 3 דפוסי אימות (מחרוזות חיבור, Key Vault, זהות מנוהלת)
+  - תבניות תשתית Bicep מלאות לפריסות מאובטחות
+  - קוד אפליקציית Node.js עם אינטגרציית Azure SDK
+  - 3 תרגילים מלאים (הפעלת זהות מנוהלת, זהות מוקצה למשתמש, סיבוב Key Vault)
+  - שיטות אבטחה מומלצות וקונפיגורציות RBAC
+  - מדריך פתרון תקלות וניתוח עלויות
   - דפוסי אימות ללא סיסמה מוכנים לייצור
 
-- **🤖 שיעור דפוסי תיאום רב-סוכני**: ב-`docs/pre-deployment/coordination-patterns.md`:  
-  - 5 דפוסי תיאום (רציף, מקביל, היררכי, מבוסס אירועים, קונצנזוס)  
-  - מימוש שירות אורקסטרטור מלא (Python/Flask, מעל 1,500 שורות)  
-  - מימושים מתמחים ל-3 סוכנים (מחקר, כותב, עורך)  
-  - שילוב Service Bus לתור מסרים  
-  - ניהול מצבים ב-Cosmos DB למערכות מבוזרות  
-  - 6 דיאגרמות Mermaid המציגות אינטראקציות סוכנים  
-  - 3 תרגילים מתקדמים (ניהול timeout, לוגיקת retry, מעגל הפסק)  
-  - ניתוח עלויות ($240-565 בחודש) עם אסטרטגיות אופטימיזציה  
-  - שילוב Application Insights לניטור
+- **🤖 שיעור דפוסי תיאום ריבוי-סוכנים**: ב- `docs/pre-deployment/coordination-patterns.md`:
+  - 5 דפוסי תיאום (רציף, מקביל, היררכי, מונחה אירועים, קונסנסוס)
+  - יישום שירות אורקסטרציה מלא (Python/Flask, מעל 1,500 שורות)
+  - 3 יישומים ייחודיים לסוכנים (Research, Writer, Editor)
+  - אינטגרציית Service Bus לתורי הודעות
+  - ניהול מצב ב-Cosmos DB למערכות מבוזרות
+  - 6 דיאגרמות Mermaid המציגות אינטראקציות בין סוכנים
+  - 3 תרגילים מתקדמים (ניהול timeout, לוגיקת retry, breaker)
+  - פירוט עלויות ($240-565 לחודש) עם אסטרטגיות אופטימיזציה
+  - אינטגרציית Application Insights לניטור
 
-#### משודרג
-- **פרק לפני פריסה**: כולל מעתה דפוסי ניטור ותיאום מקיפים  
-- **פרק התחלה**: משודרג בדפוסי אימות מקצועיים  
-- **מוכנות לייצור**: כיסוי מלא מאבטחה להתבוננות  
-- **תכנית הקורס**: עודכנה להפניות לשיעורים החדשים בפרקים 3 ו-6
+#### שופר
+- **פרק לפני פריסה**: כולל כעת דפוסי ניטור ותיאום מקיפים
+- **פרק התחלה מהירה**: שופר עם דפוסי אימות מקצועיים
+- **מוכנות לייצור**: כיסוי מלא מאבטחה ועד לתצפיתיות
+- **מתווה הקורס**: עודכן לכלול הפניות לשיעורים חדשים בפרקים 3 ו-6
 
 #### שונה
-- **התקדמות בלמידה**: אינטגרציה טובה יותר של אבטחה וניטור לאורך הקורס  
-- **איכות התיעוד**: סטנדרטים עקביים של דרגת A (95-97%) בשיעורים החדשים  
+- **התקדמות הלמידה**: אינטגרציה טובה יותר של אבטחה וניטור לאורך כל הקורס
+- **איכות התיעוד**: שמירת סטנדרטים ברמת A עקבית (95-97%) בשיעורים החדשים
 - **דפוסי ייצור**: כיסוי מלא מקצה לקצה לפריסות ארגוניות
 
-#### משופר
-- **חוויית מפתח**: נתיב ברור מפיתוח לניטור ייצור  
-- **סטנדרטים של אבטחה**: תבניות מקצועיות לאימות וניהול סודות  
-- **תצפיתיות**: אינטגרציה מלאה של Application Insights עם AZD  
-- **עומסי עבודה מבוססי בינה מלאכותית**: ניטור מיוחד לדגמי Microsoft Foundry ולמערכות מרובות סוכנים  
+#### שופר
+- **חווית המפתח**: מסלול ברור מהפיתוח לניטור ייצור
+- **סטנדרטים אבטחתיים**: דפוסים מקצועיים לניהול אימות וסודיות
+- **תצפיתיות**: אינטגרציית Application Insights מלאה עם AZD
+- **עומסי עבודה AI**: ניטור ייעודי למודלי Microsoft Foundry ולמערכות רב-סוכנים
 
-#### מאומת  
-- ✅ כל השיעורים כוללים קוד עובד מלא (לא קטעים בלבד)  
-- ✅ דיאגרמות Mermaid ללמידה ויזואלית (19 סה"כ ב-3 שיעורים)  
-- ✅ תרגילים מעשיים עם שלבי אימות (9 סה"כ)  
-- ✅ תבניות Bicep מוכנות לייצור הניתנות לפריסה באמצעות `azd up`  
-- ✅ ניתוח עלויות ואסטרטגיות אופטימיזציה  
-- ✅ מדריכי פתרון בעיות ופרקטיקות מומלצות  
-- ✅ נקודות בדיקה עם פקודות אימות  
+#### אומת
+- ✅ כל השיעורים כוללים קוד עבודה מלא (לא קטעים בלבד)
+- ✅ דיאגרמות Mermaid ללימוד ויזואלי (19 סה"כ בשלושה שיעורים)
+- ✅ תרגילים מעשיים עם שלבי אימות (9 סה"כ)
+- ✅ תבניות Bicep מוכנות לפריסה בפקודת `azd up`
+- ✅ ניתוח עלויות ואסטרטגיות אופטימיזציה
+- ✅ מדריכי פתרון בעיות ושיטות עבודה מומלצות
+- ✅ נקודות ידע עם פקודות אימות
 
-#### תוצאות דירוג התיעוד  
-- **docs/pre-deployment/application-insights.md**: - מדריך ניטור מקיף  
-- **docs/getting-started/authsecurity.md**: - תבניות אבטחה מקצועיות  
-- **docs/pre-deployment/coordination-patterns.md**: - ארכיטקטורות מתקדמות מרובות סוכנים  
-- **תכולה כוללת חדשה**: - עמידה עקבית בסטנדרטים איכותיים גבוהים  
+#### תוצאות דירוג תיעוד
+- **docs/pre-deployment/application-insights.md**: - מדריך ניטור מקיף
+- **docs/getting-started/authsecurity.md**: - דפוסי אבטחה מקצועיים
+- **docs/pre-deployment/coordination-patterns.md**: - ארכיטקטורות ריבוי-סוכנים מתקדמות
+- **תוכן חדש כולל**: - סטנדרטים איכותיים ועקביים
 
-#### יישום טכני  
-- **Application Insights**: Log Analytics + טלמטריה מותאמת + מעקב מבוזר  
-- **אימות**: Managed Identity + Key Vault + תבניות RBAC  
-- **מרובת סוכנים**: Service Bus + Cosmos DB + Container Apps + תזמור  
-- **ניטור**: מדדים חיים + שאילתות Kusto + התרעות + לוחות בקרה  
-- **ניהול עלויות**: אסטרטגיות דגימה, מדיניות שמירה, בקרות תקציב  
+#### יישום טכני
+- **Application Insights**: Log Analytics + טלמטריה מותאמת + מעקב מבוזר
+- **אימות**: זהות מנוהלת + Key Vault + דפוסי RBAC
+- **ריבוי סוכנים**: Service Bus + Cosmos DB + Container Apps + אורקסטרציה
+- **ניטור**: מטריקות חיות + שאילתות Kusto + התראות + לוחות בקרה
+- **ניהול עלויות**: דגימה, מדיניות שמירה, בקרת תקציב
 
 ### [v3.7.0] - 2025-11-19
 
-#### שיפורי איכות תיעוד ודוגמה חדשה לדגמי Microsoft Foundry  
-**גרסה זו משפרת את איכות התיעוד במאגר ומוסיפה דוגמה מלאה לפריסת דגמי Microsoft Foundry עם ממשק שיחה gpt-4.1.**
+#### שיפור איכות תיעוד ודוגמה חדשה למודלי Microsoft Foundry
+**גרסה זו משפרת את איכות התיעוד במאגר ומוסיפה דוגמה מלאה לפריסת Microsoft Foundry Models עם ממשק שיחה gpt-4.1.**
 
-#### נוסף  
-- **🤖 דוגמת שיחה בדגמי Microsoft Foundry**: פריסת gpt-4.1 מלאה עם מימוש עובד ב-`examples/azure-openai-chat/`:  
-  - תשתית מלאה של דגמי Microsoft Foundry (פריסת מודל gpt-4.1)  
-  - ממשק שיחה שורת פקודה בפייתון עם היסטוריית שיחות  
-  - אינטגרציה עם Key Vault לאחסון מאובטח של מפתחות API  
-  - מעקב שימוש במטבעות והערכת עלויות  
-  - הגבלת קצב וטיפול בשגיאות  
-  - README מקיף עם מדריך פריסה של 35-45 דקות  
-  - 11 קבצים מוכנים לייצור (תבניות Bicep, אפליקציית פייתון, קונפיגורציה)  
-- **📚 תרגילי תיעוד**: נוספו תרגולים מעשיים למדריך הקונפיגורציה:  
-  - תרגיל 1: קונפיגורציה מול סביבת ריבוי (15 דקות)  
-  - תרגיל 2: תרגול ניהול סודות (10 דקות)  
-  - קריטריוני הצלחה ברורים ושלבי אימות  
-- **✅ אימות פריסה**: נוספה קטע אימות למדריך הפריסה:  
-  - נהלי בדיקת בריאות  
-  - רשימת קריטריוני הצלחה  
-  - פלט צפוי לכל פקודות הפריסה  
-  - עזר המהיר לפתרון תקלות  
+#### נוסף
+- **🤖 דוגמת שיחה במודלי Microsoft Foundry**: פריסת gpt-4.1 מלאה עם מימוש עובד ב-`examples/azure-openai-chat/`:
+  - תשתית מלאה של Microsoft Foundry Models (פריסת דגם gpt-4.1)
+  - ממשק שורת פקודה לפייתון עם היסטוריית שיחות
+  - אינטגרציה ל-Key Vault לאחסון מאובטח של מפתח API
+  - מעקב שימוש בטוקנים ואומדן עלויות
+  - מגבלות קצב וטיפול בשגיאות
+  - README מקיף עם מדריך פריסה 35-45 דקות
+  - 11 קבצים מוכנים לייצור (תבניות Bicep, אפליקציית Python, קונפיגורציה)
+- **📚 תרגילי תיעוד**: נוספו תרגילים מעשיים למדריך הקונפיגורציה:
+  - תרגיל 1: קונפיגורציה במערכות מרובות (15 דקות)
+  - תרגיל 2: תרגול ניהול סודות (10 דקות)
+  - קריטריוני הצלחה ברורים ושלבי אימות
+- **✅ אימות פריסה**: נוספה פסקת אימות למדריך הפריסה:
+  - נהלים לבדיקת בריאות
+  - רשימת קריטריוני הצלחה
+  - תוצאות צפויות לכל פקודות הפריסה
+  - רפרנס מהיר לפתרון תקלות
 
-#### משופר  
-- **examples/README.md**: שודרג לאיכות דרגה A (93%):  
-  - נוספה azure-openai-chat לכל הקטעים הרלוונטיים  
-  - שונה מספר הדוגמאות המקומיות מ-3 ל-4  
-  - נוסף לטבלת דוגמאות יישומי AI  
-  - משולב ב-Quick Start למשתמשים בינוניים  
-  - נוסף בקטגוריית תבניות Microsoft Foundry  
-  - שודרגו קטעי התאמת טכנולוגיה ומטריצה להשוואות  
-- **איכות התיעוד**: שודרג מ-B+ (87%) ל-A- (92%) בתיקיית docs:  
-  - נוסף פלט צפוי לדוגמאות פקודות קריטיות  
-  - נכללו שלבי אימות לשינויים בקונפיגורציה  
-  - חיזוק למידה מעשית עם תרגילים פרקטיים  
+#### שופר
+- **examples/README.md**: עודכן לאיכות ברמת A (93%):
+  - הוסיף azure-openai-chat לכל הסעיפים הרלוונטיים
+  - עודכן מספר הדוגמאות המקומיות מ-3 ל-4
+  - נוסף לטבלת דוגמאות אפליקציות AI
+  - משולב ב-Quick Start למשתמשים בינוניים
+  - נוסף לסעיף תבניות Microsoft Foundry
+  - עודכן במטריצת השוואה ובסעיפי מציאת טכנולוגיה
+- **איכות התיעוד**: השתפר מ-B+ (87%) ל-A- (92%) בתיקיית Docs:
+  - נוסף פלט צפוי לדוגמאות פקודות קריטיות
+  - כלל שלבי אימות לשינויים בקונפיגורציה
+  - שופר הלמידה המעשית עם תרגילים שימושיים
 
-#### שונה  
-- **התקדמות למידה**: שילוב טוב יותר של דוגמאות AI ללומדים בינוניים  
-- **מבנה תיעוד**: תרגילים עם תוצרים ברורים ונגישים יותר  
-- **תהליך אימות**: הוספת קריטריוני הצלחה מפורשים לזרימות עבודה מרכזיות  
+#### שונה
+- **התקדמות הלמידה**: אינטגרציה טובה יותר של דוגמאות AI ללומדים בינוניים
+- **מבנה התיעוד**: תרגילים מעשיים יותר עם תוצאות ברורות
+- **תהליך אימות**: נוספו קריטריוני הצלחה מפורשים לזרמי עבודה מרכזיים
 
-#### משופר  
-- **חוויית מפתח**: פריסת דגמי Microsoft Foundry דורשת עכשיו 35-45 דקות (לעומת 60-90 לאלטרנטיבות מורכבות)  
-- **שקיפות עלויות**: הערכות עלות ברורות ($50-200/חודש) לדוגמת דגמי Microsoft Foundry  
-- **נתיב למידה**: למפתחי AI נקודת כניסה ברורה עם azure-openai-chat  
-- **סטנדרטי תיעוד**: פלטים וקריטריוני אימות עקביים  
+#### שופר
+- **חווית מפתח**: פריסת Microsoft Foundry Models אורכת כעת 35-45 דקות (לעומת 60-90 אלטרנטיבות מורכבות)
+- **שקיפות עלויות**: אומדני עלות ברורים ($50-200 בחודש) לדוגמת Microsoft Foundry Models
+- **מסלול הלמידה**: למפתחי AI נקודת כניסה ברורה עם azure-openai-chat
+- **סטנדרטים בתיעוד**: פלטים צפויים עקביים ושלבי אימות
 
-#### מאומת  
-- ✅ דוגמת דגמי Microsoft Foundry פונקציונלית במלואה עם `azd up`  
-- ✅ כל 11 קבצי המימוש תחבירית תקינים  
-- ✅ הוראות ה-README תואמות לניסיון הפריסה בפועל  
-- ✅ קישורים בתיעוד מעודכנים ב-8+ מיקומים  
-- ✅ אינדקס דוגמאות משקף במדויק 4 דוגמאות מקומיות  
-- ✅ אין קישורים חיצוניים כפולים בטבלאות  
-- ✅ כל הפניות הניווט תקינות  
+#### אומת
+- ✅ דוגמת Microsoft Foundry Models עובדת במלואה עם `azd up`
+- ✅ כל 11 קבצי המימוש תקינים תחבירית
+- ✅ הוראות README תואמות לניסיון הפריסה בפועל
+- ✅ קישורי התיעוד עודכנו ב-8+ מיקומים
+- ✅ מדד הדוגמאות מעדכן במדוייק 4 דוגמאות מקומיות
+- ✅ ללא כפילויות בקישורים חיצוניים בטבלאות
+- ✅ כל הפניות ניווט נכונות
 
-#### יישום טכני  
-- **ארכיטקטורת דגמי Microsoft Foundry**: gpt-4.1 + Key Vault + Container Apps  
-- **אבטחה**: מוכנות Managed Identity, סודות ב-Key Vault  
-- **ניטור**: אינטגרציית Application Insights  
-- **ניהול עלויות**: מעקב אחר מטבעות ואופטימיזציה של שימוש  
-- **פריסה**: פקודת `azd up` אחת להגדרה מלאה  
+#### יישום טכני
+- **ארכיטקטורת Microsoft Foundry Models**: gpt-4.1 + Key Vault + דפוס Container Apps
+- **אבטחה**: מוכנות לזהות מנוהלת, סודות ב-Key Vault
+- **ניטור**: אינטגרציית Application Insights
+- **ניהול עלויות**: מעקב טוקנים ואופטימיזציית שימוש
+- **פריסה**: פקודת `azd up` אחת לפריסה מלאה
 
 ### [v3.6.0] - 2025-11-19
 
-#### עדכון גדול: דוגמאות פריסת Container App  
-**גרסה זו מציגה דוגמאות פריסה מקיפות, מוכנות לייצור של יישומי Container באמצעות Azure Developer CLI (AZD), עם תיעוד מלא ושילוב בנתיב הלמידה.**
+#### עדכון משמעותי: דוגמאות לפריסת אפליקציות Container
+**גרסה זו מציגה דוגמאות פריסה מקיפות, מוכנות לייצור, של אפליקציות container בעזרת Azure Developer CLI (AZD), עם תיעוד מלא ואינטגרציה במסגרת מסלול הלמידה.**
 
-#### נוסף  
-- **🚀 דוגמאות ל-Container App**: דוגמאות מקומיות חדשות בתיקייה `examples/container-app/`:  
-  - [מדריך ראשי](examples/container-app/README.md): סקירה מקיפה של פריסות מכולות, התחלה מהירה, ייצור ותבניות מתקדמות  
-  - [API פשוט בפלסק](../../examples/container-app/simple-flask-api): API REST ידידותי למתחילים עם scale-to-zero, בדיקות בריאות, ניטור ופתרון תקלות  
-  - [ארכיטקטורת מיקרוסרביסים](../../examples/container-app/microservices): פריסת מיקרוסרביסים מוכנה לייצור (שער API, מוצר, הזמנה, משתמש, התראות), מסרים אסינכרוניים, Service Bus, Cosmos DB, Azure SQL, מעקב מבוזר, פריסה blue-green/canary  
-- **פרקטיקות מומלצות**: אבטחה, ניטור, אופטימיזציה של עלויות והנחיות CI/CD לעומסי עבודה במכולות  
-- **דוגמאות קוד**: קבצי `azure.yaml` מלאים, תבניות Bicep, ומימושי שירותים ב- Python, Node.js, C#, Go  
-- **בדיקות ופתרון תקלות**: תרחישי בדיקה מקצה לקצה, פקודות ניטור, מדריכי פתרון תקלות  
+#### נוסף
+- **🚀 דוגמאות אפליקציית Container**: דוגמאות מקומיות חדשות ב- `examples/container-app/`:
+  - [מדריך המאסטר](examples/container-app/README.md): סקירה מלאה של פריסות מבוססות container, התחלה מהירה, ייצור ודפוסים מתקדמים
+  - [API Flask פשוט](../../examples/container-app/simple-flask-api): API REST למתחילים עם scale-to-zero, בדיקות בריאות, ניטור ופתרון תקלות
+  - [ארכיטקטורת Microservices](../../examples/container-app/microservices): פריסה מוכנה לייצור של שירותים מרובים (API Gateway, מוצר, הזמנה, משתמש, התראות), הודעות אסינכרוניות, Service Bus, Cosmos DB, Azure SQL, מעקב מבוזר, פריסת blue-green/canary
+- **שיטות עבודה מומלצות**: אבטחה, ניטור, אופטימיזציית עלויות, והנחיות CI/CD לעומסי עבודה מבוססי container
+- **דוגמאות קוד**: `azure.yaml` מלא, תבניות Bicep, ויישומי שירותים במגוון שפות (Python, Node.js, C#, Go)
+- **בדיקות ופתרון תקלות**: תרחישי בדיקה מקצה לקצה, פקודות ניטור ומדריך פתרון תקלות
 
-#### שונה  
-- **README.md**: עודכן כדי לכלול ולקשר לדוגמאות חדשות של container app תחת "דוגמאות מקומיות - יישומי מכולות"  
-- **examples/README.md**: עודכן להבליט דוגמאות container app, להוסיף פריטי מטריצת השוואה, ולעדכן הפניות טכנולוגיה/ארכיטקטורה  
-- **תוכן הקורס ומדריך הלמידה**: עודכן כדי להפנות לדוגמאות container app החדשות ולתבניות הפריסה בפרקים הרלוונטיים  
+#### שונה
+- **README.md**: עודכן לכלול דוגמאות חדשות לאפליקציות מכולה תחת "דוגמאות מקומיות - אפליקציות מכולה"
+- **examples/README.md**: עודכן להדגיש דוגמאות אפליקציות מכולה, להוסיף רשומות מטריצת השוואה ולעדכן הפניות לטכנולוגיה/ארכיטקטורה
+- **קורס ומדריך לימוד**: עודכן להפנות לדוגמאות חדשות של אפליקציות מכולה ודפוסי פרסום רלוונטיים בפרקים המתאימים
 
-#### מאומת  
-- ✅ כל הדוגמאות החדשות ניתנות לפריסה עם `azd up` ועומדות בפרקטיקות מומלצות  
-- ✅ קישורי צולב בתיעוד והניווט מעודכנים  
-- ✅ הדוגמאות כוללות תרחישים למתחילים ומתקדמים, כולל מיקרוסרביסים בייצור  
+#### אומת
+- ✅ כל הדוגמאות החדשות ניתנות לפריסה עם `azd up` ועומדות בטובות הנוהגים
+- ✅ עדכון קישורים וניווט בתיעוד
+- ✅ דוגמאות מכסות תרחישים למתחילים עד למתקדמים, כולל מיקרו-שירותים בייצור
 
-#### הערות  
-- **טווח**: תיעוד ודוגמאות באנגלית בלבד  
-- **שלבים הבאים**: הרחבה בתבניות מכולות מתקדמות ואוטומציה ב-CI/CD בגרסאות עתידיות  
+#### הערות
+- **תחום**: תיעוד ודוגמאות באנגלית בלבד
+- **צעדים הבאים**: הרחבה עם דפוסי מכולה מתקדמים נוספים ואוטומציה של CI/CD במהדורות עתידיות
 
 ### [v3.5.0] - 2025-11-19
 
-#### מיתוג מחודש למוצר: Microsoft Foundry  
-**גרסה זו מיישמת החלפת שם מוצר מקיפה מ-"Microsoft Foundry" ל-"Microsoft Foundry" בכל התיעוד באנגלית, משקפת את המיתוג הרשמי של מיקרוסופט.**
+#### מיתוג מוצר מחדש: Microsoft Foundry
+**גרסה זו מבצעת שינוי מקיף בשם המוצר מ-"Microsoft Foundry" ל-"Microsoft Foundry" בכל התיעוד באנגלית, המשקף מחויבות Microsoft למיתוג חדש רשמי.**
 
-#### שונה  
-- **🔄 עדכון שם מוצר**: מיתוג מחודש מלא מ-"Microsoft Foundry" ל-"Microsoft Foundry"  
-  - כל ההפניות בתיעוד האנגלי ב`docs/` עודכנו  
-  - שינוי שם התיקייה: `docs/ai-foundry/` → `docs/microsoft-foundry/`  
-  - שינוי שם הקובץ: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`  
-  - סך הכל: 23 הפניות תוכן ב-7 קבצי תיעוד עודכנו  
+#### שונתה
+- **🔄 עדכון שם מוצר**: מיתוג מחדש מלא מ-"Microsoft Foundry" ל-"Microsoft Foundry"
+  - עדכון כל ההפניות בתיעוד האנגלי בתיקיית `docs/`
+  - שינוי שם תיקייה: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+  - שינוי שם קובץ: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+  - סה"כ: 23 הפניות תוכן עודכנו ב-7 קבצי תיעוד
 
-- **📁 שינויים במבנה התיקיות**:  
-  - `docs/ai-foundry/` שונה ל-`docs/microsoft-foundry/`  
-  - כל ההפניות הצולבות עודכנו לשקף את מבנה התיקיות החדש  
-  - קישורי ניווט נאמתו בכל התיעוד  
+- **📁 שינויים במבנה תיקיות**:
+  - `docs/ai-foundry/` שונה ל-`docs/microsoft-foundry/`
+  - כל ההפניות החוצות עודכנו לשקף את מבנה התיקיות החדש
+  - קישורי ניווט אומתו בכל התיעוד
 
-- **📄 שינויי שמות קבצים**:  
-  - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`  
-  - כל הקישורים הפנימיים עודכנו לשם הקובץ החדש  
+- **📄 שינויי שמות קבצים**:
+  - `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+  - כל הקישורים הפנימיים עודכנו להפנות לשם הקובץ החדש
 
-#### קבצים מעודכנים  
-- **תיעוד פרקים** (7 קבצים):  
-  - `docs/microsoft-foundry/ai-model-deployment.md` - 3 עדכוני קישורי ניווט  
-  - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 עדכוני הפניות לשם מוצר  
-  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - כבר משתמש ב-Microsoft Foundry (מעודכנים קודמים)  
-  - `docs/microsoft-foundry/production-ai-practices.md` - 3 הפניות עודכנו (סקירה, משוב קהילה, תיעוד)  
-  - `docs/getting-started/azd-basics.md` - 4 עדכוני קישורים מצולבים  
-  - `docs/getting-started/first-project.md` - 2 עדכוני קישורי ניווט לפרקים  
-  - `docs/getting-started/installation.md` - 2 עדכוני קישורי פרקים הבאים  
-  - `docs/troubleshooting/ai-troubleshooting.md` - 3 עדכוני הפניות (ניווט, קהילת Discord)  
-  - `docs/troubleshooting/common-issues.md` - 1 עדכון קישור ניווט  
-  - `docs/troubleshooting/debugging.md` - 1 עדכון קישור ניווט  
+#### קבצים עודכנו
+- **תיעוד פרקים** (7 קבצים):
+  - `docs/microsoft-foundry/ai-model-deployment.md` - 3 עדכוני קישורי ניווט
+  - `docs/microsoft-foundry/ai-workshop-lab.md` - 4 הפניות לשם מוצר עודכנו
+  - `docs/microsoft-foundry/microsoft-foundry-integration.md` - כבר זאת השימוש בשם Microsoft Foundry (מעדכונים קודמים)
+  - `docs/microsoft-foundry/production-ai-practices.md` - 3 הפניות עודכנו (סקירה כללית, משוב קהילה, תיעוד)
+  - `docs/getting-started/azd-basics.md` - 4 קישורים חוצי הפניות עודכנו
+  - `docs/getting-started/first-project.md` - 2 קישורי ניווט פרקים עודכנו
+  - `docs/getting-started/installation.md` - 2 קישורי פרקים הבאים עודכנו
+  - `docs/troubleshooting/ai-troubleshooting.md` - 3 הפניות עודכנו (ניווט, קהילת דיסקורד)
+  - `docs/troubleshooting/common-issues.md` - 1 קישור ניווט עודכן
+  - `docs/troubleshooting/debugging.md` - 1 קישור ניווט עודכן
 
-- **קבצי מבנה קורס** (2 קבצים):  
-  - `README.md` - 17 הפניות עודכנו (סקירת הקורס, כותרות פרקים, סעיף תבניות, תובנות קהילה)  
-  - `course-outline.md` - 14 הפניות עודכנו (סקירה, מטרות למידה, משאבי פרקים)  
+- **קבצי מבנה קורס** (2 קבצים):
+  - `README.md` - 17 הפניות עודכנו (סקירת קורס, כותרות פרקים, חלק תבניות, תובנות קהילה)
+  - `course-outline.md` - 14 הפניות עודכנו (סקירה כללית, מטרות למידה, משאבי פרקים)
 
-#### מאומת  
-- ✅ לא נותרו הפניות נתיב תיקיות "ai-foundry" בתיעוד באנגלית  
-- ✅ לא נותרו הפניות שם מוצר "Microsoft Foundry" בתיעוד באנגלית  
-- ✅ כל קישורי הניווט תקינים במבנה התיקיות החדש  
-- ✅ שמות הקבצים והתיקיות שונו בהצלחה  
-- ✅ הפניות צולבות בין פרקים נאמתו  
+#### אומת
+- ✅ לא נשארו הפניות לנתיב תיקייה "ai-foundry" בתיעוד באנגלית
+- ✅ לא נשארו הפניות לשם מוצר "Microsoft Foundry" בתיעוד באנגלית
+- ✅ כל קישורי הניווט תקינים במבנה התיקיות החדש
+- ✅ שינוי שמות הקבצים והתיקיות הושלם בהצלחה
+- ✅ אימות הפניות חוצות בין הפרקים
 
-#### הערות  
-- **טווח**: שינויים הוחלו רק בתיעוד האנגלי בתיקיית `docs/`  
-- **תרגומים**: תיקיות תרגום (`translations/`) לא עודכנו בגרסה זו  
-- **סדנה**: חומרים בסדנה (`workshop/`) לא עודכנו בגרסה זו  
-- **דוגמאות**: ייתכן שקבצי דוגמה עדיין מכילים שמות ישנים (יטופל בעדכון עתידי)  
-- **קישורים חיצוניים**: כתובות URL חיצוניות וקישורי מאגר GitHub נשארו ללא שינוי  
+#### הערות
+- **תחום**: שינויים הוחלו רק בתיעוד האנגלי בתיקיית `docs/`
+- **תרגומים**: תיקיות תרגום (`translations/`) לא עודכנו בגרסה זו
+- **סדנה**: חומרי סדנה (`workshop/`) לא עודכנו בגרסה זו
+- **דוגמאות**: ייתכן שקבצי דוגמאות עדיין מפנים לשמות ישנים (יטופלו בעדכון עתידי)
+- **קישורים חיצוניים**: כתובות URL חיצוניות וקישורי רפוזיטורי GitHub נשמרו ללא שינוי
 
-#### מדריך העברה לתורמים  
-אם יש לכם סניפים מקומיים או תיעוד המתייחס למבנה הישן:  
-1. עדכנו הפניות תיקיות: `docs/ai-foundry/` → `docs/microsoft-foundry/`  
-2. עדכנו הפניות קבצים: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`  
-3. החליפו שם מוצר: "Microsoft Foundry" → "Microsoft Foundry"  
-4. וודאו שכל קישורי התיעוד הפנימיים עובדים  
+#### מדריך מעבר לתורמים
+אם יש לך סניפים מקומיים או תיעוד שמפנה למבנה הישן:
+1. עדכן הפניות לתיקיות: `docs/ai-foundry/` → `docs/microsoft-foundry/`
+2. עדכן הפניות לקבצים: `azure-ai-foundry-integration.md` → `microsoft-foundry-integration.md`
+3. החלף שם מוצר: "Microsoft Foundry" → "Microsoft Foundry"
+4. אמת שכל קישורי התיעוד הפנימיים עובדים עדיין
 
 ---
 
 ### [v3.4.0] - 2025-10-24
 
-#### סקירת תשתית ושיפורים באימות  
-**גרסה זו מציגה תמיכה מקיפה בתצוגה מקדימה חדשה של Azure Developer CLI ומשפרת את חוויית המשתמש בסדנה.**
+#### שיפורים בתצוגה מקדימה של תשתית ואימות
+**גרסה זו מציגה תמיכה מלאה בתכונת תצוגה מקדימה חדשה של Azure Developer CLI ומשפרת חוויית משתמש בסדנה.**
 
-#### נוסף  
-- **🧪 תיעוד הפקודה azd provision --preview**: כיסוי מקיף של יכולת הצגת תשתית בתצוגה מוקדמת  
-  - הפניות פקודות ודוגמאות שימוש בגליון עזר  
-  - אינטגרציה מפורטת במדריך פרוביזיה עם מקרי שימוש ויתרונות  
-  - אינטגרציית בדיקת מקדימה לבדיקת פריסה בטוחה יותר  
-  - עדכוני מדריך התחלה המקדמים פריסת זהירות ראשונה  
-- **🚧 באנר מצב סדנה**: באנר HTML מקצועי המציין מצב פיתוח הסדנה  
-  - עיצוב גרדיאנט עם סמלוני בנייה לתקשורת ברורה למשתמש  
-  - חותמת זמן עדכון אחרונה לשקיפות  
-  - עיצוב רספונסיבי למכשירים ניידים ושולחניים  
+#### נוספו
+- **🧪 תיעוד פקודת azd provision --preview**: סיקור מקיף של אפשרות התצוגה המקדימה החדשה לתשתית
+  - הפניה לפקודה ודוגמאות שימוש בכרטיס תקציר
+  - שילוב מפורט במדריך פריסות עם מקרי שימוש ויתרונות
+  - שילוב בדיקות לפני הטיסה לאימות פריסה בטוחה יותר
+  - עדכוני מדריך התחלה עם נוהלי פריסה בטיחותיים קודם כל
+- **🚧 באנר סטטוס לסדנה**: באנר HTML מקצועי המציין את מצב הפיתוח של הסדנה
+  - עיצוב גרדיאנט עם אינדיקטורים לבנייה לתקשורת ברורה למשתמש
+  - חותמת זמן עדכון אחרון לשקיפות
+  - עיצוב רספונסיבי לנייד לכל סוגי המכשירים
 
-#### משופר  
-- **בטיחות תשתית**: פונקציונליות תצוגה מוקדמת משולבת ברחבי תיעוד הפריסה  
-- **אימות לפני פריסה**: סקריפטים אוטומטיים כוללים כעת בדיקת תצוגה מוקדמת  
-- **זרימת עבודה למפתחים**: רצפי פקודות עודכנו לכלול תצוגה מוקדמת כפרקטיקה מיטבית  
-- **חוויית סדנה**: ציפיות ברורות לגבי מצב פיתוח התוכן  
+#### שודרגו
+- **בטיחות התשתית**: תפקוד התצוגה המשולב לאורך כל תיעוד הפריסה
+- **אימות לפני פריסה**: סקריפטים אוטומטיים כוללים בדיקת תצוגה מקדימה
+- **זרימת עבודה למפתחים**: עדכון רצפי פקודות כולל תצוגה מקדימה כהמלצה
+- **חוויית סדנה**: הגדרת ציפיות ברורה למשתמשי הסדנה לגבי מצב הפיתוח
 
-#### שונה  
-- **פרקטיקות פריסה מיטביות**: זרימת עבודה מבוססת תצוגה מוקדמת היא מומלצת כגישה ראשונית  
-- **זרימת תיעוד**: אימות תשתית הועבר מוקדם יותר בתהליך הלמידה  
-- **הצגת סדנה**: תקשורת מקצועית עם לוח זמנים לפיתוח ברור  
+#### שונתה
+- **נוהלי פריסה מיטביים**: זרימת עבודה בהובלת תצוגה מקדימה כגישה מומלצת
+- **זרימת תיעוד**: אימות תשתית הועבר לשלב מוקדם יותר בתהליך הלמידה
+- **הצגת הסדנה**: תקשורת סטטוס מקצועית עם לוח זמנים ברור לפיתוח
 
-#### משופר  
-- **גישה בטיחותית ראשונה**: שינויים בתשתית ניתנים לאימות לפני פריסה  
-- **שיתוף פעולה צוותי**: תוצאות תצוגה מוקדמת ניתנות לשיתוף לסקירה ואישור  
-- **מודעות לעלויות**: הבנה טובה יותר של עלויות משאבים לפני פרוביזיה  
-- **הפחתת סיכונים**: הקטנת כשלי פריסה באמצעות אימות מראש  
+#### שופר
+- **גישה בטיחותית ראשונה**: שינויי התשתית ניתנים לאימות טרם פריסה
+- **שיתוף פעולה צוותי**: תוצאות תצוגה מקדימה ניתנות לשיתוף לסקירה ואישור
+- **מודעות לעלות**: הבנה טובה יותר של עלויות משאבים לפני הפריסה
+- **הפחתת סיכונים**: הפחתת כישלונות פריסה בעזרת אימות מראש
 
-#### יישום טכני  
-- **אינטגרציה רב-מסמכית**: תיעוד תצוגת המקדימה ב-4 קבצים מרכזיים  
-- **תבניות פקודות**: תחביר ודוגמאות אחידים לאורך כל התיעוד  
-- **אינטגרציית פרקטיקות מיטביות**: תצוגה מוקדמת משולבת בזרימות האימות והסקריפטים  
-- **סימנים חזותיים**: סימוני NEW ברורים לזיהוי הפיצ'ר  
+#### יישום טכני
+- **שילוב רב-קבצי**: תיעוד תכונת תצוגה מקדימה ב-4 קבצים מרכזיים
+- **דפוסי פקודות**: תחביר עקבי ודוגמאות לאורך כל התיעוד
+- **שילוב נוהלי מיטב**: תצוגת תצוגה מקדימה כלולה בזרימות אימות וסקריפטים
+- **סמנים ויזואליים**: סימוני תכונה חדשה ברורים לזיהוי קל
 
-#### תשתית סדנה  
-- **תקשורת מצב**: באנר HTML מקצועי עם עיצוב גרדיאנט  
-- **חוויית משתמש**: מצב פיתוח ברור מונע בלבול  
-- **הצגה מקצועית**: שומרת על אמינות המאגר תוך קביעת ציפיות  
-- **שקיפות לוח זמנים**: חותמת זמן עדכון אוקטובר 2025 לאחריות  
+#### תשתית לסדנה
+- **תקשורת סטטוס**: באנר HTML מקצועי עם עיצוב גרדיאנט
+- **חוויית משתמש**: מצב פיתוח ברור למניעת בלבול
+- **הצגה מקצועית**: שומר על אמינות מאגר הקוד תוך קביעת ציפיות
+- **שקיפות לוח זמנים**: חותמת זמן עדכון אחרונה אוקטובר 2025 לאחריות
 
 ### [v3.3.0] - 2025-09-24
 
-#### חומרים משופרים לסדנה וחוויית למידה אינטראקטיבית  
-**גרסה זו מציגה חומרים מקיפים לסדנה עם מדריכים אינטראקטיביים בדפדפן ונתיבי למידה מובנים.**
+#### הרחבת חומרי סדנה וחוויית למידה אינטראקטיבית
+**גרסה זו מוסיפה חומרי סדנה מקיפים עם מדריכים אינטראקטיביים בדפדפן ונתיבי למידה מובנים.**
 
-#### נוסף  
-- **🎥 מדריך סדנה אינטראקטיבית**: חוויית סדנה בדפדפן עם יכולת תצוגה מקדימה של MkDocs  
-- **📝 הוראות סדנה מובנות**: מסלול למידה מונחה בן 7 שלבים מהגילוי ועד ההתאמה האישית  
-  - 0-הקדמה: סקירת הסדנה והגדרות  
-  - 1-בחירת-תבנית-AI: תהליך גילוי ובחירת תבנית  
-  - 2-אימות-תבנית-AI: הליכי פריסה ואימות  
-  - 3-פירוק-תבנית-AI: הבנת ארכיטקטורת התבנית  
-  - 4-הגדרת-תבנית-AI: הגדרה והתאמה אישית  
-  - 5-התאמת-תבנית-AI: שינויים מתקדמים ואיטרציות  
-  - 6-פירוק-תשתית: ניקוי וניהול משאבים  
-  - 7-סיום: סיכום והשלבים הבאים  
-- **🛠️ כלים לסדנה**: הגדרת MkDocs עם ערכת נושא Material לחוויית למידה משופרת  
-- **🎯 מסלול למידה מעשי**: מתודולוגיה בשלושה שלבים (גילוי → פריסה → התאמה אישית)  
-- **📱 אינטגרציה עם GitHub Codespaces**: הקמת סביבת פיתוח משולבת  
+#### נוספו
+- **🎥 מדריך סדנה אינטראקטיבי**: חוויית סדנה בדפדפן עם יכולת תצוגה מקדימה MkDocs
+- **📝 הוראות סדנה מובנות**: מסלול למידה בן 7 שלבים מלווה מגילוי עד התאמה אישית
+  - 0-הקדמה: סקירת הסדנה והגדרתה
+  - 1-בחירת תבנית AI: גילוי תבניות ותהליך בחירה
+  - 2-אימות תבנית AI: הליכי פריסה ואימות
+  - 3-פירוק תבנית AI: הבנת ארכיטקטורת התבנית
+  - 4-הגדרת תבנית AI: קונפיגורציה והתאמה אישית
+  - 5-התאמת תבנית AI: שינויים מתקדמים וגרסאות
+  - 6-פירוק תשתית: ניקיון וניהול משאבים
+  - 7-סיכום: סיכום וצעדים הבאים
+- **🛠️ כלי סדנה**: תצורת MkDocs עם ערכת נושא Material לחוויית למידה משופרת
+- **🎯 מסלול למידה פרקטי**: מתודולוגיה בת 3 שלבים (גילוי → פריסה → התאמה אישית)
+- **📱 אינטגרציה עם GitHub Codespaces**: הקמת סביבת פיתוח חלקה
 
-#### משודרג  
-- **מעבדת סדנת AI**: מורחבת עם חוויית למידה מובנית של 2-3 שעות  
-- **תיעוד הסדנה**: הצגה מקצועית עם ניווט וסיוע חזותי  
-- **התקדמות בלמידה**: הנחייה צעד-אחר-צעד ברורה מבחירת תבנית ועד פריסה לייצור  
-- **חוויית מפתח**: כלים משולבים לשיפור תהליכי פיתוח  
+#### שודרגו
+- **מעבדת AI לסדנה**: הורחבה לחוויית למידה מובנית של 2-3 שעות
+- **תיעוד סדנה**: הצגה מקצועית עם ניווט ועזרים ויזואליים
+- **התקדמות למידה**: הדרכה צעד-אחר-צעד ממבחר תבניות ועד פריסת ייצור
+- **חוויית מפתח**: כלים משולבים לזרימות פיתוח חלקות
 
-#### משופר  
-- **נגישות**: ממשק בדפדפן עם פונקציות חיפוש, העתקה והחלפת ערכת נושא  
-- **למידה בקצב אישי**: מבנה סדנה גמיש המותאם לקצבי למידה שונים  
-- **יישום מעשי**: תרחישים של פריסת תבניות AI בעולם האמיתי  
-- **אינטגרציה קהילתית**: שילוב Discord לתמיכה ושיתוף פעולה בסדנה  
+#### שופר
+- **נגישות**: ממשק בדפדפן עם חיפוש, העתקה והחלפת ערכות נושא
+- **לימוד בקצב אישי**: מבנה סדנה גמיש התומך בקצבי למידה משתנים
+- **יישום מעשי**: תרחישי פריסת תבניות AI מהעולם האמיתי
+- **אינטגרציה קהילתית**: חיבור ל-Discord לתמיכה ושיתוף פעולה בסדנה
 
-#### תכונות הסדנה  
-- **חיפוש מובנה**: גילוי מהיר של מילות מפתח ושיעורים  
-- **העתקת בלוקים של קוד**: פונקציונליות העתקה בעת ריחוף עבור כל דוגמאות הקוד  
-- **החלפת ערכת נושא**: תמיכה במצב כהה/באור לפי העדפות המשתמש  
-- **משאבים חזותיים**: צילומי מסך ודיאגרמות להעמקת ההבנה  
-- **אינטגרציית עזרה**: גישה ישירה ל-Discord לתמיכה קהילתית  
+#### תכונות סדנה
+- **חיפוש מובנה**: גילוי מהיר של מילות מפתח ושיעורים
+- **העתקת קטעי קוד**: מעבר עם העכבר להעתקה בכל הדוגמאות
+- **החלפת ערכת נושא**: מצב כהה/בהיר לתמיכה בהעדפות משתמש
+- **נכסים ויזואליים**: צילומי מסך ותרשימים להעמקת ההבנה
+- **אינטגרציית עזרה**: גישה ישירה ל-Discord עבור תמיכה קהילתית
 
-### [v3.2.0] - 2025-09-17  
+### [v3.2.0] - 2025-09-17
 
-#### ארגון ניווט מחדש ומערכת למידה מבוססת פרקים  
-**גרסה זו מציגה מבנה למידה מקיף מבוסס פרקים תוך שיפור הניווט לאורך כל המאגר.**  
+#### ארגון ניווט ושיטת למידה מבוססת פרקים
+**גרסה זו מציגה מבנה למידה מקיף המבוסס על פרקים לצד ניווט משופר ברחבי המאגר כולו.**
 
-#### נוסף  
-- **📚 מערכת למידה מבוססת פרקים**: ארגון מחדש של כל הקורס ל-8 פרקים מתקדמים  
-  - פרק 1: יסודות והתחלה מהירה (⭐ - 30-45 דקות)  
-  - פרק 2: פיתוח מבוסס AI (⭐⭐ - 1-2 שעות)  
-  - פרק 3: הגדרה ואימות (⭐⭐ - 45-60 דקות)  
-  - פרק 4: תשתית כקוד ופריסה (⭐⭐⭐ - 1-1.5 שעות)  
-  - פרק 5: פתרונות AI רב-סוכנים (⭐⭐⭐⭐ - 2-3 שעות)  
-  - פרק 6: אימות ותכנון לפני הפריסה (⭐⭐ - שעה)  
-  - פרק 7: פתרון בעיות וניפוי שגיאות (⭐⭐ - 1-1.5 שעות)  
-  - פרק 8: דפוסי ייצור ועסקים (⭐⭐⭐⭐ - 2-3 שעות)  
-- **📚 מערכת ניווט מקיפה**: כותרות ותחתיות ניווט עקביות בכל התיעוד  
-- **🎯 מעקב התקדמות**: רשימת בדיקה להשלמת הקורס ומערכת אימות למידה  
-- **🗺️ הנחיית מסלול למידה**: נקודות כניסה ברורות לרמות ניסיון ומטרות שונות  
-- **🔗 ניווט צולב**: פרקים קשורים ותנאים מוקדמים מקושרים בבירור  
+#### נוספו
+- **📚 שיטת למידה מבוססת פרקים**: ארגון מחודש של הקורס ל-8 פרקים מתקדמים
+  - פרק 1: יסודות והתחלה מהירה (⭐ - 30-45 דקות)
+  - פרק 2: פיתוח ממוקד AI (⭐⭐ - 1-2 שעות)
+  - פרק 3: קונפיגורציה ואימות (⭐⭐ - 45-60 דקות)
+  - פרק 4: תשתית כקוד ופריסה (⭐⭐⭐ - 1-1.5 שעות)
+  - פרק 5: פתרונות AI מרובי סוכנים (⭐⭐⭐⭐ - 2-3 שעות)
+  - פרק 6: אימות ותכנון לפני פריסה (⭐⭐ - שעה)
+  - פרק 7: פתרון תקלות ודיבוג (⭐⭐ - 1-1.5 שעות)
+  - פרק 8: דפוסי ייצור וארגוניים (⭐⭐⭐⭐ - 2-3 שעות)
+- **📚 מערכת ניווט מקיפה**: כותרות עליונות ותחתונות אחידות לכל התיעוד
+- **🎯 מעקב התקדמות**: רשימת בדיקה להשלמת הקורס ומערכת אימות למידה
+- **🗺️ הנחיית מסלולי למידה**: נקודות כניסה ברורות לפי רמות ניסיון ומטרות
+- **🔗 ניווט חוצה הפניות**: פרקים קשורים ותנאי מוקדם מקושרים בבירור
 
-#### משודרג  
-- **מבנה README**: הפכה לפלטפורמת למידה מובנית עם ארגון מבוסס פרקים  
-- **ניווט בתיעוד**: כל דף כולל עכשיו הקשר פרקי והנחיית התקדמות  
-- **ארגון תבניות**: דוגמאות ותבניות ממוינות לפרקי למידה מתאימים  
-- **אינטגרציית משאבים**: דפי רמאות, שאלות נפוצות ומדריכי לימוד מחוברים לפרקים רלוונטיים  
-- **שילוב סדנאות**: מעבדות מעשיות מקושרות למספר מטרות למידה בפרקים  
+#### שודרגו
+- **מבנה README**: הפך לפלטפורמת למידה מסודרת עם ארגון לפי פרקים
+- **ניווט תיעוד**: כל עמוד כולל הקשר פרקי והנחיות התקדמות
+- **ארגון תבניות**: דוגמאות ותבניות ממופים לפרקי הלמידה המתאימים
+- **שילוב משאבים**: גיליונות רמאות, שאלות נפוצות ומדריכי לימוד מקושרים לפרקים מתאימים
+- **שילוב סדנה**: מעבדות מעשיות מפולחות למטרות לימוד במספר פרקים
 
-#### שונה  
-- **התקדמות בלמידה**: מעבר מתיעוד ליניארי ללמידה גמישה מבוססת פרקים  
-- **מיקום הגדרות**: מדריך ההגדרות הוזז לפרק 3 לזרימה לימודית טובה יותר  
-- **אינטגרציית תוכן AI**: שילוב טוב יותר של תוכן AI לאורך מסלול הלמידה  
-- **תוכן ייצור**: דפוסים מתקדמים מאוגדים בפרק 8 ללומדי ארגונים  
+#### שונתה
+- **התקדמות למידה**: ממתודולוגיית תיעוד לינארית ללמידה גמישה ומבוססת פרקים
+- **מיקום הקונפיגורציה**: מדריך הקונפיגורציה הועבר לפרק 3 לזרימת למידה טובה יותר
+- **אינטגרציית תוכן AI**: שילוב טוב יותר של תוכן AI לאורך מסלול הלמידה
+- **תוכן ייצור**: דפוסים מתקדמים מתרכזים בפרק 8 ללומדי ארגונים
 
-#### משופר  
-- **חוויית משתמש**: צלילי ניווט ברורים וסימני התקדמות בפרקים  
-- **נגישות**: דפוסי ניווט עקביים לקלות מעבר בקורס  
-- **הצגה מקצועית**: מבנה קורס בסגנון אקדמי מתאים להכשרה אקדמית ועסקית  
-- **יעילות למידה**: הקטנת זמן למציאת תוכן רלוונטי באמצעות ארגון משופר  
+#### שופר
+- **חוויית משתמש**: נתיבי ניווט ברורים וקווי התקדמות בפרקים
+- **נגישות**: דפוסי ניווט עקביים להקלת מעבר בקורס
+- **הצגה מקצועית**: מבנה קורס בסגנון אקדמי מותאם ללמידה אקדמית ועסקית
+- **יעילות למידה**: צמצום זמן למציאת תוכן רלוונטי באמצעות ארגון משופר
 
-#### יישום טכני  
-- **כותרות ניווט**: סטנדרטיזציה של ניווט פרקי ב-40+ קבצי תיעוד  
-- **ניווט תחתית**: הנחיית התקדמות עקבית וסימון השלמת פרקים  
-- **קישורים צולבים**: מערכת קישורים פנימית מקיפה המחברת מושגים קשורים  
-- **מיפוי פרקים**: תבניות ודוגמאות מקושרות במדויק למטרות למידה  
+#### יישום טכני
+- **כותרות ניווט**: ניווט מבוסס פרקים סטנדרטי ב-40+ קבצי תיעוד
+- **ניווט תחתון**: הוראות התקדמות ונתוני השלמת הפרק עקביים
+- **קישורים פנימיים**: מערכת קישורים מפורטת המחברת מושגים קשורים
+- **מיפוי פרקים**: תבניות ודוגמאות משויכות בבירור למטרות למידה
 
-#### שיפור מדריך לימוד  
-- **📚 מטרות למידה מקיפות**: מדריך לימוד ארוג מחדש בהתאמה ל-8 פרקים  
-- **🎯 הערכה מבוססת פרקים**: כל פרק כולל מטרות למידה ותרגילים מעשיים  
-- **📋 מעקב התקדמות**: לוח זמנים שבועי ללמידה עם תוצאות מדידות ורשימות בדיקה  
-- **❓ שאלות הערכה**: שאלות אימות ידע לכל פרק עם תוצרי מקצועיות  
-- **🛠️ תרגילים מעשיים**: פעילויות מעשיות עם תרחישי פריסה וניפוי באגים  
-- **📊 התקדמות מיומנויות**: התקדמות ברורה מיסודות לדפוסי ארגוני עם מיקוד בקריירה  
-- **🎓 מערכת הסמכה**: תוצרי פיתוח מקצועי והכרה קהילתית  
-- **⏱️ ניהול לוח זמנים**: תוכנית למידה מובנית לעשרה שבועות עם אימות אבני דרך  
+#### שיפור מדריך לימוד
+- **📚 יעדי למידה מקיפים**: ארגון מחודש של מדריך הלימוד ל-8 פרקים
+- **🎯 הערכה מבוססת פרקים**: כל פרק כולל יעדי למידה ותרגילים מעשיים
+- **📋 מעקב התקדמות**: לוח זמנים שבועי עם תוצאות מדידות ורשימות בדיקה
+- **❓ שאלות הערכה**: שאלות אימות ידע לכל פרק עם תוצאות מקצועיות
+- **🛠️ תרגילים מעשיים**: פעילויות מעשיות עם תרחישי פריסה ופתרון תקלות
+- **📊 התקדמות מיומנויות**: קידום ברור מתפיסות בסיס לדפוסי ארגון עם דגש על פיתוח קריירה
+- **🎓 מסגרת הסמכה**: תוצאות פיתוח מקצועי ומערכת הכרה קהילתית
+- **⏱️ ניהול לוח זמנים**: תוכנית למידה מסודרת ל-10 שבועות עם אימות אבן דרך
 
-### [v3.1.0] - 2025-09-17  
+### [v3.1.0] - 2025-09-17
 
-#### שיפור פתרונות AI רב-סוכנים  
-**גרסה זו משפרת את פתרון הקמעונאות הרב-סוכני עם שמות סוכנים טובים יותר ותיעוד משופר.**  
+#### שיפור פתרונות AI מרובי סוכנים
+**גרסה זו משפרת את פתרון המולטיאג'נט למסחר קמעונאי עם שמות סוכנים ברורים יותר ותיעוד משודרג.**
 
-#### שונה  
-- **טרמינולוגיית רב-סוכנים**: החלפת "סוכן קורה" ב"סוכן לקוח" בכל פתרון רב-סוכני לקמעונאות להבנה ברורה יותר  
-- **ארכיטקטורת סוכן**: עדכון כל התיעוד, תבניות ARM ודוגמאות קוד לשימוש עקבי בשם "סוכן לקוח"  
-- **דוגמאות הגדרה**: מודרניזציה של תבניות הגדרת סוכן עם שמות מעודכנים  
-- **עקביות תיעודית**: הבטחת כל ההפניות עם שמות סוכנים מקצועיים ומתארים  
+#### שונתה
+- **טרמינולוגיית סוכנים מרובי-סוכנים**: הוחלף "סוכן קורה" ב-"סוכן לקוח" לאורך כל פתרון המולטיאג'נט הקמעונאי להבנת טובה יותר
+- **ארכיטקטורת סוכן**: עדכון כל התיעוד, תבניות ARM ודוגמאות קוד לשימוש עקבי בשם "סוכן לקוח"
+- **דוגמאות קונפיגורציה**: עידכון דפוסי קונפיגורציה עם שמות מעודכנים
+- **עקביות התיעוד**: הבטחת כל ההפניות משתמשות בשמות סוכנים מקצועיים ותיאוריים
 
-#### משודרג  
-- **חבילת תבנית ARM**: עדכון retail-multiagent-arm-template עם הפניות לסוכן לקוח  
-- **דיאגרמות ארכיטקטורה**: רענון דיאגרמות Mermaid עם שמות סוכנים מעודכנים  
-- **דוגמאות קוד**: מחלקות פייתון ודוגמאות יישום משתמשות כעת בשמו של CustomerAgent  
-- **משתני סביבה**: עדכון כל סקריפטי הפריסה לשימוש בתבניות CUSTOMER_AGENT_NAME  
+#### שופר
+- **חבילת תבניות ARM**: עדכון retail-multiagent-arm-template עם הפניות לסוכן לקוח
+- **דיאגרמות ארכיטקטורה**: רענון דיאגרמות Mermaid עם שמות סוכנים מעודכנים
+- **דוגמאות קוד**: מחלקות Python ודוגמאות יישום משתמשות כעת בשם CustomerAgent
+- **משתני סביבה**: עדכון כל סקריפטי הפריסה לשימוש בקונבנציות CUSTOMER_AGENT_NAME
 
-#### משופר  
-- **חוויית מפתח**: תפקידים ואחריות של סוכן ברורים יותר בתיעוד  
-- **מוכנות לייצור**: התאמה טובה יותר לדפוסי שמות ארגוניים  
-- **חומרי למידה**: שמות סוכנים אינטואיטיביים יותר לצרכים חינוכיים  
-- **שימושיות תבנית**: פישוט הבנת פונקציות הסוכן ותבניות הפריסה  
+#### שופר
+- **חווית מפתח**: תפקידים ואחריות של סוכנים מתועדים בצורה ברורה יותר
+- **מוכנות לייצור**: התאמה טובה יותר לקונבנציות שם בארגונים
+- **חומרי למידה**: שמות סוכנים אינטואיטיביים יותר לצורכי חינוך
+- **שימושיות התבנית**: הבנה פשוטה יותר של פונקציות הסוכן ודפוסי פריסה
 
-#### פרטים טכניים  
-- דיאגרמות ארכיטקטורת Mermaid מעודכנות עם הפניות CustomerAgent  
-- החלפת שמות CoraAgent לשמות CustomerAgent בדוגמאות פייתון  
-- שינוי הקונפיגורציה JSON בתבניות ARM לסוג סוכן "customer"  
-- עדכון משתני סביבה מ-CORA_AGENT_* ל-CUSTOMER_AGENT_*  
-- רענון כל פקודות הפריסה והגדרות המכולות  
+#### פרטים טכניים
+- עדכון דיאגרמות Mermaid של הארכיטקטורה עם הפניות ל-CustomerAgent
+- החלפת שמות מחלקות CoraAgent ל-CustomerAgent בדוגמאות Python
+- שינוי קונפיגורציות JSON של תבניות ARM לשימוש בסוג סוכן "customer"
+- עדכון משתני סביבה מ-CORA_AGENT_* ל-CUSTOMER_AGENT_*
+- רענון כל פקודות הפריסה והגדרות המכולות
 
-### [v3.0.0] - 2025-09-12  
+### [v3.0.0] - 2025-09-12
 
-#### שינויים משמעותיים - מיקוד במפתחי AI ואינטגרציית Microsoft Foundry  
-**גרסה זו משנה את המאגר למשאב למידה מקיף ממוקד AI עם אינטגרציית Microsoft Foundry.**  
+#### שינויים מרכזיים - מיקוד במפתחי AI ואינטגרציה עם Microsoft Foundry
+**גרסה זו הופכת את המאגר למשאב למידה מקיף ממוקד AI עם אינטגרציה של Microsoft Foundry.**
 
-#### נוסף  
-- **🤖 מסלול למידה AI-ראשוני**: ארגון מחדש מלא המעדיף מפתחי ומהנדסי AI  
-- **מדריך אינטגרציית Microsoft Foundry**: תיעוד מקיף לחיבור AZD לשירותי Microsoft Foundry  
-- **דפוסי פריסת מודלי AI**: מדריך מפורט לבחירת מודלים, הגדרות ואסטרטגיות פריסה לייצור  
-- **מעבדת סדנת AI**: סדנה מעשית של 2-3 שעות להמרת יישומי AI לפתרונות פרוסים עם AZD  
-- **טכניקות ייצור AI מיטביות**: דפוסי ארגוני מוכנים להרחבה, ניטור והבטחת עומסי AI  
-- **מדריך פתרון בעיות AI**: תיעוד כולל לתקלות במודלי Microsoft Foundry, שירותים קוגניטיביים ופריסת AI  
-- **גלריית תבניות AI**: אוסף מובלט של תבניות Microsoft Foundry עם דירוגי מורכבות  
-- **חומרי סדנה**: מבנה סדנה מלא עם מעבדות מעשיות וחומרי עזר  
+#### נוסף
+- **🤖 מסלול למידה ממוקד AI**: מבנה מחודש המעדיף מפתחי ומהנדסי AI
+- **מדריך אינטגרציה Microsoft Foundry**: תיעוד מעמיק לחיבור AZD לשירותי Microsoft Foundry
+- **דפוסי פריסת מודלים של AI**: מדריך מפורט לבחירת מודלים, קונפיגורציה ופריסה בייצור
+- **מעבדת סדנת AI**: סדנה מעשית 2-3 שעות להמרת יישומי AI לפתרונות פריסה ב-AZD
+- **שיטות עבודה מומלצות לפריסת AI בייצור**: דפוסים ארגוניים להרחבה, ניטור ואבטחת עומסי AI
+- **מדריך פתרון תקלות AI**: פתרון תקלות מקיף למודלים Microsoft Foundry, Cognitive Services ונושאי פריסה
+- **גלריית תבניות AI**: אוסף מובלט של תבניות Microsoft Foundry עם דירוגי מורכבות
+- **חומרי סדנה**: מבנה סדנה מלא עם מעבדות מעשיות וחומרי עזר
 
-#### משודרג  
-- **מבנה README**: ממוקד מפתח AI עם 45% עניין קהילתי מה-Discord של Microsoft Foundry  
-- **מסלולי למידה**: מסלול ייעודי למפתח AI לצד מסלולים מסורתיים לסטודנטים ומהנדסי DevOps  
-- **המלצות תבניות**: תבניות AI נבחרות כולל azure-search-openai-demo, contoso-chat, ו-openai-chat-app-quickstart  
-- **אינטגרציה קהילתית**: תמיכה קהילתית משופרת ב-Discord עם ערוצים ודיונים ייעודיים ל-AI  
+#### משופר
+- **מבנה README**: מיקוד במפתחי AI עם 45% נתוני עניין מהקהילה ב-Microsoft Foundry Discord
+- **מסלולי למידה**: מסלול ייעודי למפתחי AI לצד מסלולים רגילים לסטודנטים ומהנדסי DevOps
+- **המלצות תבניות**: תבניות AI מובלטות כולל azure-search-openai-demo, contoso-chat, ו-openai-chat-app-quickstart
+- **אינטגרציית קהילה**: שיפור תמיכת קהילה ב-Discord עם ערוצי AI ודיונים ייעודיים
 
-#### אבטחה ומיקוד ייצור  
-- **דפוסי זהות מנוהלת**: אימות והגדרות אבטחה ספציפיות ל-AI  
-- **אופטימיזציית עלויות**: מעקב שימוש בטוקנים ובקרות תקציב לעומסי AI  
-- **פריסה מרובת אזורים**: אסטרטגיות פריסה גלובלית של יישומי AI  
-- **ניטור ביצועים**: מדדים ייעודיים ל-AI ואינטגרציה עם Application Insights  
+#### אבטחה ומיקוד בייצור
+- **דפוסי זהות מנוהלת**: קונפיגורציות אבטחה ואימות ייעודיות ל-AI
+- **אופטימיזציית עלויות**: מעקב אחר שימוש בטוקנים ובקרת תקציב לעומסי AI
+- **פריסת אזורים מרובות**: אסטרטגיות לפריסת יישומי AI גלובליים
+- **ניטור ביצועים**: מדדים ייעודיים ל-AI ואינטגרציה עם Application Insights
 
-#### איכות תיעוד  
-- **מבנה קורס ליניארי**: התקדמות הגיונית ממתחילים לדפוסי פריסת AI מתקדמים  
-- **כתובות URL מאומתות**: כל הקישורים החיצוניים תקינים ונגישים  
-- **הפניה מלאה**: כל הקישורים הפנימיים מאומתים ופעילים  
-- **מוכנות לייצור**: דפוסי פריסה ארגוניים עם דוגמאות מהעולם האמיתי  
+#### איכות תיעוד
+- **מבנה קורס ליניארי**: התקדמות הגיונית מדפוסי פריסת AI למתחילים ועד מתקדמים
+- **כתובות URL תקפות**: כל הקישורים החיצוניים למאגר מאומתים ונגישים
+- **רפרנס מלא**: כל הקישורים הפנימיים בתיעוד מאומתים ופועלים
+- **מוכנות לייצור**: דפוסי פריסה ארגוניים עם דוגמאות מהעולם האמיתי
 
-### [v2.0.0] - 2025-09-09  
+### [v2.0.0] - 2025-09-09
 
-#### שינויים משמעותיים - ארגון מחדש של המאגר והעצמה מקצועית  
-**גרסה זו מהווה מהפכה משמעותית במבנה המאגר ובהצגת התוכן.**  
+#### שינויים מרכזיים - ארגון מחדש של המאגר ושדרוג מקצועי
+**גרסה זו מייצגת מהפכה משמעותית במבנה התוכן והצגת המסמכים.**
 
-#### נוסף  
-- **מסגרת למידה מובנית**: כל דפי התיעוד כוללים כעת הקדמה, מטרות למידה ותוצרים לומדים  
-- **מערכת ניווט**: הוספת קישורי שיעור קודם/הבא לכל התיעוד להתקדמות למידה מונחית  
-- **מדריך לימוד**: study-guide.md מקיף עם מטרות למידה, תרגולים וחומרי הערכה  
-- **הצגה מקצועית**: הסרת אייקוני אימוג’י לשיפור הנגישות והמראה המקצועי  
-- **מבנה תוכן משופר**: ארגון וזרימה טובים יותר של חומרי הלמידה  
+#### נוסף
+- **מסגרת למידה מאורגנת**: כל דפי התיעוד כוללים כעת מבוא, מטרות למידה ותוצאות למידה
+- **מערכת ניווט**: נוספו קישורי שיעורים קודמים/בהמשך בכל התיעוד להתקדמות מוקלטת
+- **מדריך לימוד**: study-guide.md מקיף עם יעדי למידה, תרגולים וחומרי הערכה
+- **הצגה מקצועית**: הוסר כל אמוג’י לשיפור נגישות ומראה מקצועי
+- **מבנה תוכן משופר**: ארגון וזרימה משופרת של חומרי למידה
 
-#### שונה  
-- **פורמט תיעוד**: סטנדרטיזציה של כל התיעוד עם מבנה למידה עקבי  
-- **זרימת ניווט**: יישום התקדמות לוגית לאורך חומרי הלמידה  
-- **הצגת תוכן**: הסרת אלמנטים דקורטיביים לטובת עיצוב ברור ומקצועי  
-- **מבנה קישורים**: עדכון כל הקישורים הפנימיים לתמיכה במערכת ניווט חדשה  
+#### שונה
+- **פורמט תיעוד**: אחידות מבנה התיעוד עם מבנה ממוקד למידה
+- **זרימת ניווט**: יישום התקדמות הגיונית בכל חומרי הלמידה
+- **הצגת תוכן**: הסרת אלמנטים דקורטיביים לטובת עיצוב ברור ומקצועי
+- **מבנה קישורים**: עדכון קישורים פנימיים לתמיכה במערכת ניווט חדשה
 
-#### משופר  
-- **נגישות**: הסרת תלות באימוג’י לשיפור התאימות לקוראי מסך  
-- **מראה מקצועי**: הצגה נקיה בסגנון אקדמי המתאים ללמידה ארגונית  
-- **חוויית למידה**: גישה מובנית עם מטרות ותוצרים ברורים לכל שיעור  
-- **ארגון תוכן**: זרימה לוגית וקשר טוב יותר בין נושאים קשורים  
+#### שופר
+- **נגישות**: הסרת תלות באמוג’ים לשיפור תאימות קוראי מסך
+- **מראה מקצועי**: עיצוב נקי וסטנדרטי המתאים ללמידה ארגונית
+- **חווית למידה**: גישה מובנית עם יעדים ותוצאות ברורים בכל שיעור
+- **ארגון תוכן**: זרימה הגיונית וקישורים חכמים בין נושאים קשורים
 
-### [v1.0.0] - 2025-09-09  
+### [v1.0.0] - 2025-09-09
 
-#### שחרור ראשוני - מאגר למידה מקיף ל-AZD  
+#### שחרור ראשוני - מאגר למידה מקיף של AZD
 
-#### נוסף  
-- **מבנה תיעוד מרכזי**  
-  - סדרת מדריכים מלאה למתחילים  
-  - תיעוד פריסה והקמה מקיף  
-  - משאבי פתרון בעיות מדריכים לניפוי שגיאות  
-  - כלי אימות לפני פריסה ותהליכים  
+#### נוסף
+- **מבנה תיעוד ליבה**
+  - סדרת מדריכים להתחלה פשוטה
+  - תיעוד פריסה והספקה מפורט
+  - משאבי פתרון תקלות והכוונות דיבוג
+  - כלים ופרוטוקולי אימות לפני פריסה
 
-- **מודול התחלה**  
-  - יסודות AZD: מושגים מרכזיים וטרמינולוגיה  
-  - מדריך התקנה: הוראות הגדרה לפלטפורמות שונות  
-  - מדריך הגדרות: הקמת סביבה ואימות  
-  - מדריך פרויקט ראשון: למידה פרקטית שלב אחר שלב  
+- **מודול התחלה**
+  - יסודות AZD: מושגים ומונחים מרכזיים
+  - מדריך התקנה: הוראות פלטפורמה ספציפית
+  - מדריך קונפיגורציה: הגדרת סביבה ואימות
+  - הדרכת פרויקט ראשון: למידה מעשית שלב-אחר-שלב
 
-- **מודול פריסה והקמה**  
-  - מדריך פריסה: תיעוד תהליך עבודה מלא  
-  - מדריך הפעלה: תשתית כקוד עם Bicep  
-  - טכניקות מיטביות לפריסות ייצור  
-  - דפוסי ארכיטקטורה רב-שירותית  
+- **מודול פריסה והספקה**
+  - מדריך פריסה: תיעוד תהליך מלא
+  - מדריך הספקה: תשתית כקוד עם Bicep
+  - שיטות עבודה מומלצות לפריסות בייצור
+  - דפוסי ארכיטקטורה לשירותים מרובים
 
-- **מודול אימות לפני פריסה**  
-  - תכנון קיבולת: אימות זמינות משאבי Azure  
-  - בחירת SKU: מדריך מלא לבחירת שכבת שירות  
-  - בדיקות טרום טיסה: סקריפטים לאימות אוטומטי (PowerShell ו-Bash)  
-  - הערכת עלויות ותכנון תקציב  
+- **מודול אימות לפני פריסה**
+  - תכנון קיבולת: אימות זמינות משאבי Azure
+  - בחירת SKU: מדריך מלא לרמות שירות
+  - בדיקות מקדימות: סקריפטים לאימות אוטומטי (PowerShell ו-Bash)
+  - הערכת עלויות ותכנון תקציב
 
-- **מודול פתרון בעיות**  
-  - בעיות נפוצות: תקלות ופתרונות שכיחים  
-  - מדריך ניפוי שגיאות: שיטות מובנות לפתרון תקלות  
-  - טכניקות וכלים מתקדמים לאבחון  
-  - ניטור ביצועים ואופטימיזציה  
+- **מודול פתרון תקלות**
+  - בעיות נפוצות: תקלות ופתרונות מוכרים
+  - מדריך דיבוג: שיטות פתרון שיטתי
+  - טכניקות וכלים לאבחון מתקדם
+  - ניטור ביצועים ואופטימיזציה
 
-- **משאבים והפניות**  
-  - דף רשימת פקודות: הפניה מהירה לפקודות מרכזיות  
-  - מילון מונחים: הגדרות ומונחים מקיפים  
-  - שאלות נפוצות: תשובות מפורטות לשאלות שכיחות  
-  - קישורים למשאבים חיצוניים וחיבורים קהילתיים  
+- **משאבים ורפרנסים**
+  - גיליון פקודות: הפניות מהירות לפקודות חיוניות
+  - מילון מונחים: הגדרות מלאות של מונחים ואקרונימים
+  - שאלות נפוצות: תשובות מפורטות לשאלות בסיסיות
+  - קישורים חיצוניים וחיבורי קהילה
 
-- **דוגמאות ותבניות**  
-  - דוגמת יישום ווב פשוט  
-  - תבנית פריסת אתר סטטי  
-  - הגדרת יישום מכולות  
-  - דפוסי אינטגרציה עם בסיס נתונים  
-  - דוגמאות ארכיטקטורת מיקרו-שירותים  
-  - יישומי פונקציות ללא שרת  
+- **דוגמאות ותבניות**
+  - דוגמה ליישום ווב פשוט
+  - תבנית פריסה לאתר סטטי
+  - קונפיגורציית יישום מכולה
+  - דפוסי אינטגרציה למסדי נתונים
+  - דוגמאות לארכיטקטורת מיקרו-שירותים
+  - יישומי פונקציות ללא שרתים
 
-#### תכונות  
-- **תמיכה רב-פלטפורמית**: מדריכים להתקנה והגדרה ב-Windows, macOS ו-Linux  
-- **רמות מיומנות שונות**: תוכן מותאם מסטודנטים למפתחים מקצועיים  
-- **מיקוד מעשי**: דוגמאות ועולמות תוכן מהחיים האמיתיים  
-- **כיסוי מקיף**: משאיפות בסיסיות עד דפוסי ארגוני מתקדמים  
-- **גישה אבטחה ראשונה**: שיטות מיטביות לאבטחה משולבות לאורך כל התהליך  
-- **אופטימיזציית עלויות**: הדרכה לפריסות חסכוניות וניהול משאבים  
+#### תכונות
+- **תמיכה רב-פלטפורמית**: הוראות התקנה והגדרה ל-Windows, macOS ו-Linux
+- **רמות מיומנות שונות**: תוכן לתלמידים ומפתחי מקצועיים
+- **מיקוד מעשי**: דוגמאות מעשיות ותסריטים מהעולם האמיתי
+- **כיסוי מקיף**: מהיסודות ועד דפוסי ארגונים מתקדמים
+- **גישה עם מיקוד באבטחה**: שילוב שיטות עבודה מיטביות לאורך כל התהליך
+- **אופטימיזציית עלויות**: הנחיות לפריסות וכלכלת משאבים
 
-#### איכות תיעוד  
-- **דוגמאות קוד מפורטות**: דוגמאות מעשיות ונבדקות  
-- **הוראות צעד-אחר-צעד**: הדרכה ברורה ופעולה  
-- **טיפול שגיאות מקיף**: פתרון בעיות לתקלות נפוצות  
-- **אינטגרציית שיטות מיטביות**: תקנים והמלצות מהתחום  
-- **תאימות לגרסאות**: מעודכן עם שירותי Azure האחרונים ותכונות azd  
+#### איכות תיעוד
+- **דוגמאות קוד מפורטות**: דוגמאות קוד מעשיות ובדוקות
+- **הנחיות שלב-אחר-שלב**: הדרכה ברורה וניתנת ליישום
+- **טיפול שגיאות מקיף**: פתרון בעיות נפוצות
+- **שילוב שיטות עבודה מומלצות**: תקנים והמלצות מקצועיות
+- **תאימות גרסאות**: עדכון שוטף לשירותי Azure ופקודות azd
 
-## שיפורים עתידיים מתוכננים  
+## שיפורים עתידיים מתוכננים
 
-### גרסה 3.1.0 (מתוכננת)  
+### גרסה 3.1.0 (מתוכנן)
 #### הרחבת פלטפורמת AI
-- **תמיכה מרובת-דגמים**: תבניות אינטגרציה עבור Hugging Face, Azure Machine Learning ודגמים מותאמים אישית  
-- **מסגרות סוכני AI**: תבניות לפריסות LangChain, Semantic Kernel ו-AutoGen  
-- **תבניות RAG מתקדמות**: אפשרויות מסדי נתונים וקטוריים מעבר ל-Azure AI Search (Pinecone, Weaviate, וכו')  
-- **תצפית AI**: ניטור משופר לביצועי דגם, שימוש בטוקנים ואיכות התגובה  
+- **תמיכה במודלים מרובים**: דפוסי אינטגרציה ל-Hugging Face, Azure Machine Learning ומודלים מותאמים אישית
+- **מסגרות סוכני AI**: תבניות לפריסות LangChain, Semantic Kernel, ו-AutoGen
+- **דפוסי RAG מתקדמים**: אפשרויות למסדי וקטורים מעבר ל-Azure AI Search (כגון Pinecone, Weaviate)
+- **תצפית AI**: ניטור משופר לביצועי מודלים, שימוש בטוקנים ואיכות תגובות
 
-#### חווית מפתח  
-- **תוסף VS Code**: חווית פיתוח משולבת של AZD + Microsoft Foundry  
-- **אינטגרציית GitHub Copilot**: יצירת תבניות AZD בהנחיית AI  
-- **מדריכים אינטראקטיביים**: תרגילי קידוד מעשיים עם אימות אוטומטי לתרחישי AI  
-- **תוכן וידאו**: מדריכי וידאו משלימים ללומדים ויזואליים המתמקדים בפריסות AI  
+#### חווית מפתח
+- **הרחבת VS Code**: חווית פיתוח משולבת AZD + Microsoft Foundry
+- **אינטגרציה עם GitHub Copilot**: יצירת תבניות AZD בעזרת AI
+- **הדרכות אינטראקטיביות**: תרגילי קוד מעשיים עם אימות אוטומטי לתרחישי AI
+- **תוכן וידאו**: הדרכות וידאו משלימות ללומדים ויזואליים ביותר
 
-### גרסה 4.0.0 (מתוכננת)  
-#### תבניות AI ארגוניות  
-- **מסגרת ניהול**: ניהול דגמי AI, תאימות ושרשרות ביקורת  
-- **AI רב-דיירים**: תבניות לשירות לקוחות מרובים עם שירותי AI מבודדים  
-- **פריסת AI בקצה**: אינטגרציה עם Azure IoT Edge ואירועי מכולות  
-- **AI ענן היברידי**: תבניות פריסה רב-ענניות והיברידיות לעומסי AI  
+### גרסה 4.0.0 (מתוכנן)
+#### דפוסי AI לארגונים
+- **מסגרת ממשל**: ניהול מודלים, תאימות ושרשרות ביקורת
+- **AI מרובת שוכרים**: דפוסים לשרת לקוחות מרובים עם שירותי AI מבודדים
+- **פריסת AI בגבולות**: אינטגרציה עם Azure IoT Edge ומכולות
+- **AI ענן היברידי**: דפוסי פריסה מרובי עננים והיברידיים לעומסי AI
 
-#### תכונות מתקדמות  
-- **אוטומציה של צינור AI**: אינטגרציית MLOps עם צינורות Azure Machine Learning  
-- **אבטחה מתקדמת**: תבניות אמון-אפס, נקודות קצה פרטיות והגנה מתקדמת מפני איומים  
-- **אופטימיזציית ביצועים**: כיוונון מתקדם ואסטרטגיות סקלינג ליישומי AI בעלי קצב גבוה  
-- **הפצה גלובלית**: תבניות הפצת תוכן ואחסון מטמון בקצה ליישומי AI  
+#### תכונות מתקדמות
+- **אוטומציה למעברי AI**: אינטגרציית MLOps עם צינורות Azure Machine Learning
+- **אבטחה מתקדמת**: דפוסי Zero-trust, נקודות קצה פרטיות והגנה מתקדמת מפני איומים
+- **אופטימיזציית ביצועים**: כוונון והרחבה מתקדמת ליישומי AI בעלי תפוקה גבוהה
+- **הפצה גלובלית**: דפוסי הפצה ו-cache בקצה ליישומי AI
 
-### גרסה 3.0.0 (מתוכננת) - הוחלפה על ידי הגרסה הנוכחית  
-#### תוספות מוצעות - מיושמות כעת בגרסה 3.0.0  
-- ✅ **תוכן ממוקד AI**: אינטגרציה מקיפה עם Microsoft Foundry (הושלם)  
-- ✅ **מדריכים אינטראקטיביים**: סדנת AI מעשית (הושלם)  
-- ✅ **מודול אבטחה מתקדם**: תבניות אבטחה ספציפיות ל-AI (הושלם)  
-- ✅ **אופטימיזציית ביצועים**: אסטרטגיות כיוונון לעומסי AI (הושלם)  
+### גרסה 3.0.0 (מתוכנן) - הוחלפה בגרסה נוכחית
+#### הוספות מוצעות - יושמו בגרסה v3.0.0
+- ✅ **תוכן ממוקד AI**: אינטגרציית Microsoft Foundry מקיפה (הושלם)
+- ✅ **הדרכות אינטראקטיביות**: מעבדת סדנת AI מעשית (הושלם)
+- ✅ **מודול אבטחה מתקדם**: דפוסי אבטחה ייעודיים ל-AI (הושלם)
+- ✅ **אופטימיזציית ביצועים**: אסטרטגיות כוונון לעומסי AI (הושלם)
 
-### גרסה 2.1.0 (מתוכננת) - יושם חלקית בגרסה 3.0.0  
-#### שיפורים מינוריים - חלק הושלם בגרסה הנוכחית  
-- ✅ **דוגמאות נוספות**: תרחישי פריסת AI (הושלם)  
-- ✅ **שאלות נפוצות מורחבות**: שאלות ופתרון בעיות ספציפיות ל-AI (הושלם)  
-- **אינטגרציית כלים**: מדריכים משופרים לאינטגרציה עם IDE ועורכים  
-- ✅ **הרחבת ניטור**: תבניות ניטור והתראות ספציפיות ל-AI (הושלם)  
+### גרסה 2.1.0 (מתוכנן) - יושם חלקית בגרסה v3.0.0
+#### שיפורים קטנים - חלקם הושלמו בגרסה הנוכחית
+- ✅ **דוגמאות נוספות**: תרחישי פריסה ממוקדים AI (הושלם)
+- ✅ **שאלות נפוצות מורחבות**: שאלות ופתרונות ייעודיים ל-AI (הושלם)
+- **אינטגרציית כלים**: מדריכים משופרים לשילוב IDE ועורכים
+- ✅ **הרחבת ניטור**: דפוסי ניטור והתראות ל-AI (הושלם)
 
-#### עדיין מתוכנן לגרסה עתידית  
-- **תיעוד מותאם לנייד**: עיצוב רספונסיבי ללמידה במובייל  
-- **גישה לא מקוונת**: חבילות תיעוד להורדה  
-- **אינטגרציית IDE משופרת**: תוסף VS Code ל-AZD + תזרימי עבודה של AI  
-- **לוח מחוונים קהילתי**: מדדי קהילה בזמן אמת ומעקב אחר תרומות  
+#### עדיין מתוכנן לשחרור עתידי
+- **תיעוד מותאם לנייד**: עיצוב רספונסיבי ללמידה במובייל
+- **גישה לא מקוונת**: חבילות תיעוד להורדה
+- **שדרוג אינטגרציית IDE**: הרחבת VS Code לזרימות עבודה של AZD + AI
+- **לוח קהילה**: מדדים בזמן אמת ומעקב תרומה של הקהילה
 
-## השתתפות ביומן השינויים  
+## תרומה ליומן השינויים
 
-### דיווח שינויים  
-בעת תרומה למאגר זה, יש לוודא שהרשומות ביומן כוללות:  
+### דיווח שינויים
+בעת תרומה למאגר, יש לוודא שפרטי השינויים כוללים:
 
-1. **מספר גרסה**: בהתאם לגרסאות סמאנטיות (עיקרי.משני.תיקון)  
-2. **תאריך**: תאריך שחרור או עדכון בפורמט YYYY-MM-DD  
-3. **קטגוריה**: נוסף, שונה, מיושן, הוסר, תוקן, אבטחה  
-4. **תיאור ברור**: תיאור תמציתי של השינויים  
-5. **הערכת השפעה**: כיצד השינויים משפיעים על משתמשים קיימים  
+1. **מספר גרסה**: לפי גרסאות סמנטיות (ראשי.משני.תיקון)
+2. **תאריך**: תאריך שחרור או עדכון בפורמט YYYY-MM-DD
+3. **קטגוריה**: נוסף, שונה, מיושן, הוסר, תוקן, אבטחה
+4. **תיאור ברור**: תיאור תמציתי של השינוי
+5. **הערכת השפעה**: כיצד השינויים משפיעים על משתמשים קיימים
 
-### קטגוריות שינויים  
+### קטגוריות שינויים
 
-#### נוסף  
-- תכונות חדשות, מדורי תיעוד או יכולות  
-- דוגמאות, תבניות או משאבי למידה חדשים  
-- כלים, סקריפטים או תוספות נוספות  
+#### נוסף
+- תכונות חדשות, סעיפי תיעוד או יכולות
+- דוגמאות, תבניות או משאבי למידה חדשים
+- כלים, סקריפטים או יישומונים נוספים
 
-#### שונה  
-- שינויים בפונקציונליות קיימת או בתיעוד  
-- עדכונים לשיפור בהירות או דיוק  
-- ארגון מחדש של תוכן או מבנה  
+#### שונה
+- שינויים בפונקציונליות קיימת או בתיעוד
+- עדכונים לשיפור בהירות או דיוק
+- ארגון מחדש של תוכן או מבנה
 
-#### מיושן  
-- תכונות או גישות הנפסלות בהדרגה  
-- חלקי תיעוד המתוכננים להסרה  
-- שיטות עם חלופות טובות יותר  
+#### מיושן
+- תכונות או שיטות שמודחות בהדרגה
+- סעיפי תיעוד המתוכננים להסרה
+- שיטות עם חלופות משופרות
 
-#### הוסר  
-- תכונות, תיעוד או דוגמאות שאינן רלוונטיות יותר  
-- מידע מיושן או גישות שהוסרו  
-- תוכן מיותר או משולב  
+#### הוסר
+- תכונות, תיעוד או דוגמאות שאינן רלוונטיות עוד
+- מידע מיושן או שיטות מיושנות
+- תוכן כפול או משולב
 
-#### תוקן  
-- תיקונים לשגיאות בתיעוד או בקוד  
-- פתרון בעיות או באגים שדווחו  
-- שיפורים בדיוק או בתפקוד  
+#### תוקן
+- תיקוני שגיאות בתיעוד או בקוד
+- פתרון בעיות שדווחו
+- שיפורים בדיוק או בפונקציונליות
 
-#### אבטחה  
-- שיפורים או תיקונים בתחום האבטחה  
-- עדכונים לשיטות עבודה מומלצות באבטחה  
-- פתרון פרצות אבטחה  
+#### אבטחה
+- שיפורים או תיקוני אבטחה
+- עדכונים לשיטות אבטחה מיטביות
+- טיפול בפרצות אבטחה
 
-### קווים מנחים לגרסאות סמנטיות  
+### הנחיות גרסאות סמנטיות
 
-#### גרסה עיקרית (X.0.0)  
-- שינויים משבשים המחייבים פעולה מצד המשתמש  
-- ארגון מחדש משמעותי של תוכן או מבנה  
-- שינויים המשנים גישה או מתודולוגיה בסיסית  
+#### גרסה ראשית (X.0.0)
+- שינויים מהותיים שדורשים פעולה מצד המשתמש
+- ארגון מחדש משמעותי של תוכן או מבנה
+- שינויים שמשנים את הגישה או המתודולוגיה הבסיסית
 
-#### גרסה משנית (X.Y.0)  
-- תכונות או תוספות תוכן חדשות  
-- שיפורים המאפשרים תאימות לאחור  
-- דוגמאות, כלים או משאבים נוספים  
+#### גרסה משנית (X.Y.0)
+- תכונות או תוספות תוכן חדשות
+- שיפורים שעומדים בתאימות לאחור
+- דוגמאות, כלים או משאבים נוספים
 
-#### גרסת תיקון (X.Y.Z)  
-- תיקוני באגים  
-- שיפורים קטנים בתוכן קיים  
-- הבהרות ושיפורים זוטרים  
+#### גרסת תיקון (X.Y.Z)
+- תיקוני באגים ותיקונים
+- שיפורים קלים לתוכן קיים
+- הבהרות והרחבות קטנות
 
-## משוב והצעות מהקהילה  
+## משוב והצעות מהקהילה
 
-אנו מעודדים משוב מהקהילה לשיפור משאב הלמידה הזה:  
+אנו מעודדים משוב קהילתי לשיפור משאב הלמידה הזה:
 
-### כיצד לספק משוב  
-- **סוגיות GitHub**: דיווח בעיות או הצעות לשיפור (מוזמנות סוגיות AI ספציפיות)  
-- **דיונים ב-Discord**: שיתוף רעיונות והשתתפות בקהילת Microsoft Foundry  
-- **בקשות משיכה**: תרומה לשיפורים ישירים בתוכן, במיוחד תבניות והדרכות AI  
-- **Microsoft Foundry ב-Discord**: השתתפות בצ׳אנל #Azure לדיונים על AZD + AI  
-- **פורומי קהילה**: השתתפות בדיוני מפתחים רחבים יותר ב-Azure  
+### כיצד לספק משוב
+- **בעיות ב-GitHub**: דיווח על תקלות או הצעות לשיפור (ברוכים הבאים גם בעיות ייעודיות ל-AI)
+- **דיונים ב-Discord**: שיתוף רעיונות והשתתפות בקהילת Microsoft Foundry
+- **בקשות משיכה (Pull Requests)**: תרומה לשיפורים ישירים של תוכן, במיוחד תבניות AI ומדריכים
+- **Microsoft Foundry ב-Discord**: השתתפות בערוץ #Azure לדיוני AZD + AI
+- **פורומי קהילה**: השתתפות בדיונים רחבים יותר על פיתוח Azure
 
-### קטגוריות משוב  
-- **דיוק תוכן AI**: תיקונים לאינטגרציה עם שירותי AI ומידע פריסתי  
-- **חווית למידה**: הצעות לשיפור זרימת הלמידה של מפתחים AI  
-- **תוכן חסר ב-AI**: בקשות לתבניות, דפוסים או דוגמאות נוספות ל-AI  
-- **נגישות**: שיפורים לצרכים למידתיים מגוונים  
-- **אינטגרציית כלים ל-AI**: הצעות לשיפור תזרימי עבודה לפיתוח AI  
-- **דפוסי AI לפרודקשן**: בקשות לדפוסי פריסה ארגוניים ל-AI  
+### קטגוריות משוב
+- **דיוק תוכן AI**: תיקונים לשילוב שירותי AI ופריסתם
+- **חווית למידה**: הצעות לזרימה משופרת ללומדי AI
+- **תכני AI חסרים**: בקשות לתבניות, דפוסים או דוגמאות נוספות
+- **נגישות**: שיפורים לצרכי למידה מגוונים
+- **אינטגרציית כלי AI**: הצעות לשילוב טוב יותר של זרימות עבודה AI
+- **דפוסי פריסת AI בייצור**: בקשות לדפוסי פריסה ארגוניים
 
-### התחייבות לתגובה  
-- **תגובה לסוגיות**: תוך 48 שעות לבעיות שדווחו  
-- **בקשות תכונות**: הערכה תוך שבוע  
-- **תרומות קהילתיות**: סקירה תוך שבוע  
-- **בעיות אבטחה**: טיפול מיידי בעדיפות גבוהה  
+### התחייבות תגובה
+- **תגובה לבעיה**: תוך 48 שעות לדיווחים
+- **בקשות תכונה**: הערכה תוך שבוע
+- **תרומות קהילתיות**: סקירה תוך שבוע
+- **בעיות אבטחה**: טיפול מידי ודחוף
 
-## לוח זמנים לתחזוקה  
+## לוח זמנים לתחזוקה
 
-### עדכונים שוטפים  
-- **סקירות חודשיות**: בדיקת דיוק תוכן ואימות קישורים  
-- **עדכונים רבעוניים**: תוספות תוכן ושיפורים משמעותיים  
-- **סקירות חצי שנתיות**: ארגון מחדש מקיף ושדרוג  
-- **שחרורים שנתיים**: עדכוני גרסה עיקריים עם שיפורים מהותיים  
+### עדכונים שוטפים
+- **סקירות חודשיות**: דיוק תוכן ואימות קישורים
+- **עדכונים רבעוניים**: תוספות תוכן ושיפורים משמעותיים
+- **סקירות חצי-שנתיות**: ארגון מחדש כולל ושדרוגים
+- **שחרורים שנתיים**: גרסאות ראשיות עם שיפורים משמעותיים
 
-### ניטור ואבטחת איכות  
-- **בדיקות אוטומטיות**: אימות קבוע של דוגמאות קוד וקישורים  
-- **שילוב משוב מהקהילה**: הכללה שוטפת של הצעות משתמשים  
-- **עדכוני טכנולוגיה**: התאמה לשירותי Azure וגרסאות azd העדכניות  
-- **בדיקות נגישות**: סקירה שוטפת של עקרונות עיצוב כוללניים  
+### ניטור ואבטחת איכות
+- **בדיקות אוטומטיות**: אימות דוגמאות קוד וקישורים
+- **שילוב משוב קהילתי**: הטמעה שוטפת של הצעות משתמשים
+- **עדכוני טכנולוגיה**: התאמה לשירותי Azure האחרונים ופקודות azd
+- **בדיקות נגישות**: סקירה תקופתית לעקרונות עיצוב כוללניים
 
-## מדיניות תמיכה בגרסאות  
+## מדיניות תמיכה בגרסאות
 
-### תמיכה בגרסה הנוכחית  
-- **גרסה עיקרית חדשה**: תמיכה מלאה עם עדכונים שוטפים  
-- **גרסה עיקרית קודמת**: עדכוני אבטחה ותיקונים קריטיים ל-12 חודשים  
+### תמיכה בגרסה נוכחית
+- **גרסה עיקרית אחרונה**: תמיכה מלאה עם עדכונים שוטפים  
+- **גרסה עיקרית קודמת**: עדכוני אבטחה ותיקונים קריטיים למשך 12 חודשים  
 - **גרסאות ישנות**: תמיכת קהילה בלבד, ללא עדכונים רשמיים  
 
 ### הנחיות הגירה  
-עם יציאת גירסאות עיקריות, אנו מספקים:  
-- **מדריכי הגירה**: הוראות שלב-אחר-שלב למעבר  
-- **הערות תאימות**: פרטים על שינויים שבורים  
-- **תמיכה בכלים**: סקריפטים או כלים לסיוע בהגירה  
+בעת שחרור גרסאות עיקריות, אנו מספקים:  
+- **מדריכי הגירה**: הוראות מעבר שלב אחר שלב  
+- **הערות תאימות**: פרטים אודות שינויים שמכילים שיבושים  
+- **תמיכה בכלים**: סקריפטים או כלי עזר להקלת ההגירה  
 - **תמיכת קהילה**: פורומים ייעודיים לשאלות הגירה  
 
 ---
 
 **ניווט**  
-- **השיעור הקודם**: [מדריך לימוד](resources/study-guide.md)  
-- **השיעור הבא**: חזרה ל-[קובץ README ראשי](README.md)  
+- **שיעור קודם**: [מדריך לימוד](resources/study-guide.md)  
+- **שיעור הבא**: חזרה ל-[README ראשי](README.md)  
 
-**הישאר מעודכן**: עקוב אחר מאגר זה לקבלת התראות על שחרורים חדשים ועדכונים חשובים בחומרי הלמידה.
+**השאר מעודכן**: עקבו אחר מאגר זה לקבלת התראות על שחרורים חדשים ועדכונים חשובים לחומרי הלמידה.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**כתב ויתור**:  
-מסמך זה תורגם באמצעות שירות תרגום מבוסס בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו שואפים לדיוק, יש להיות מודעים לכך שתרגומים אוטומטיים עלולים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפתו המקורית יש להיחשב למקור הרשמי. למידע קריטי מומלץ לבצע תרגום מקצועי על ידי אדם. אנו לא אחראים לאי הבנות או לפרשנויות שגויות הנובעות מהשימוש בתרגום זה.
+**כתב ויתור**:
+מסמך זה תורגם באמצעות שירות תרגום בינה מלאכותית [Co-op Translator](https://github.com/Azure/co-op-translator). בעוד שאנו שואפים לדיוק, יש לקחת בחשבון כי תרגומים אוטומטיים עלולים להכיל שגיאות או אי דיוקים. המסמך המקורי בשפה המקורית שלו נחשב למקור הסמכותי. למידע קריטי מומלץ תרגום מקצועי על ידי אדם. אנו לא נישא באחריות על אי הבנות או פירושים שגויים הנובעים משימוש בתרגום זה.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

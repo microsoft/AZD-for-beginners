@@ -1,53 +1,53 @@
-# How to deploy Microsoft SQL Database and Web App wit AZD
+# How to Deploy Microsoft SQL Database and Web App wit AZD
 
-⏱️ **Estimated Time**: 20-30 minutes | 💰 **Estimated Cost**: ~$15-25/month | ⭐ **Complexity**: Medium
+⏱️ **Time wey e go take**: 20-30 minutes | 💰 **Estimated Cost**: ~$15-25/month | ⭐ **Complexity**: Medium
 
-Dis **complete, working example** dey show how to use the [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) to deploy a Python Flask web application wit a Microsoft SQL Database go Azure. All code dey inside and dem don test am—no external dependencies needed.
+Dis **complete, wey dey work example** show how you go take use the [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) deploy Python Flask web application wey get Microsoft SQL Database for Azure. All code dey inside and dem don test am—no extra dependency wey you need.
 
 ## Wetin You Go Learn
 
-By completing this example, you go:
+By finishin dis example, you go:
 - Deploy multi-tier application (web app + database) using infrastructure-as-code
 - Configure secure database connections without hardcoding secrets
-- Monitor application health wit Application Insights
-- Manage Azure resources sharp-sharp with AZD CLI
+- Monitor application health with Application Insights
+- Manage Azure resources sharply with AZD CLI
 - Follow Azure best practices for security, cost optimization, and observability
 
 ## Scenario Overview
-- **Web App**: Python Flask REST API wit database connectivity
-- **Database**: Azure SQL Database wit sample data
+- **Web App**: Python Flask REST API wey get database connectivity
+- **Database**: Azure SQL Database with sample data
 - **Infrastructure**: Provisioned using Bicep (modular, reusable templates)
-- **Deployment**: Fully automated wit `azd` commands
+- **Deployment**: Fully automated with `azd` commands
 - **Monitoring**: Application Insights for logs and telemetry
 
 ## Prerequisites
 
 ### Required Tools
 
-Before you start, make sure say you get these tools installed:
+Before you start, make sure say you don install these tools:
 
 1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 or higher)
    ```sh
    az --version
-   # Wetin e suppose show: azure-cli 2.50.0 wey pass dat
+   # Output wey dem expect: azure-cli 2.50.0 or pass am
    ```
 
 2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 or higher)
    ```sh
    azd version
-   # Wetin we dey expect as output: azd version 1.0.0 wey pass dat
+   # Wetin we dey expect as output: azd version 1.0.0 or anything wey higher
    ```
 
 3. **[Python 3.8+](https://www.python.org/downloads/)** (for local development)
    ```sh
    python --version
-   # Wetin suppose comot: Python 3.8 or pass
+   # Wetin dem expect: Python 3.8 or pass
    ```
 
 4. **[Docker](https://www.docker.com/get-started)** (optional, for local containerized development)
    ```sh
    docker --version
-   # Wetin suppose show: Docker version 20.10 or pass
+   # Wetin suppose show: Docker version 20.10 or wey pass
    ```
 
 ### Azure Requirements
@@ -71,23 +71,23 @@ Dis example go deploy two-tier architecture wey get web application and SQL data
 
 ```mermaid
 graph TD
-    Browser[Browser wey user dey use] <--> WebApp[Azure Web App<br/>Flask API<br/>/health<br/>/products]
-    WebApp -- Connection wey secure<br/>E don encrypt --> SQL[Azure SQL Database<br/>Table wey get products<br/>Sample data]
+    Browser[Browser wey person dey use] <--> WebApp[Azure Web App<br/>Flask API<br/>/health<br/>/products]
+    WebApp -- Secure konnection<br/>Encrypted --> SQL[Azure SQL Database<br/>Table wey get products<br/>Sample data]
 ```
 **Resource Deployment:**
 - **Resource Group**: Container for all resources
 - **App Service Plan**: Linux-based hosting (B1 tier for cost efficiency)
-- **Web App**: Python 3.11 runtime wit Flask application
-- **SQL Server**: Managed database server wit TLS 1.2 minimum
+- **Web App**: Python 3.11 runtime with Flask application
+- **SQL Server**: Managed database server wey use TLS 1.2 minimum
 - **SQL Database**: Basic tier (2GB, good for development/testing)
 - **Application Insights**: Monitoring and logging
-- **Log Analytics Workspace**: Centralized log storage
+- **Log Analytics Workspace**: Central log storage
 
-**Analogy**: Think say dis be like restaurant (web app) wey get walk-in freezer (database). Customers order from the menu (API endpoints), and the kitchen (Flask app) go carry ingredients (data) comot for the freezer. The restaurant manager (Application Insights) dey track everything wey happen.
+**Analogy**: Make you reason am like restaurant (web app) wey get walk-in freezer (database). Customers dey order from menu (API endpoints), and kitchen (Flask app) dey collect ingredients (data) from the freezer. Restaurant manager (Application Insights) dey watch everything wey dey happen.
 
 ## Folder Structure
 
-All files dey inside dis example—no external dependencies required:
+All files dey this example—no extra dependencies required:
 
 ```
 examples/database-app/
@@ -114,11 +114,11 @@ examples/database-app/
         └── Dockerfile          # Container definition
 ```
 
-**What Each File Does:**
+**Wetin Each File Dey Do:**
 - **azure.yaml**: Tells AZD wetin to deploy and where
-- **infra/main.bicep**: Orchestrates all Azure resources
+- **infra/main.bicep**: Orchestrate all Azure resources
 - **infra/resources/*.bicep**: Individual resource definitions (modular for reuse)
-- **src/web/app.py**: Flask application wit database logic
+- **src/web/app.py**: Flask application with database logic
 - **requirements.txt**: Python package dependencies
 - **Dockerfile**: Containerization instructions for deployment
 
@@ -131,10 +131,10 @@ git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/database-app
 ```
 
-**✓ Success Check**: Make sure you see `azure.yaml` and `infra/` folder:
+**✓ Success Check**: Make sure say you dey see `azure.yaml` and `infra/` folder:
 ```sh
 ls
-# E suppose get: README.md, azure.yaml, infra/, src/
+# We dey expect: README.md, azure.yaml, infra/, src/
 ```
 
 ### Step 2: Authenticate with Azure
@@ -143,7 +143,7 @@ ls
 azd auth login
 ```
 
-Dis one go open your browser for Azure authentication. Sign in wit your Azure credentials.
+Dis go open your browser make you sign in to Azure. Use your Azure credentials to sign in.
 
 **✓ Success Check**: You suppose see:
 ```
@@ -156,11 +156,11 @@ Logged in to Azure.
 azd init
 ```
 
-**Wetn go happen**: AZD go create local configuration for your deployment.
+**Wetin go happen**: AZD go create local configuration for your deployment.
 
 **Prompts wey you go see**:
-- **Environment name**: Enter short name (e.g., `dev`, `myapp`)
-- **Azure subscription**: Choose your subscription from the list
+- **Environment name**: Put short name (e.g., `dev`, `myapp`)
+- **Azure subscription**: Choose your subscription from list
 - **Azure location**: Choose region (e.g., `eastus`, `westeurope`)
 
 **✓ Success Check**: You suppose see:
@@ -174,7 +174,7 @@ SUCCESS: New project initialized!
 azd provision
 ```
 
-**Wetn go happen**: AZD go deploy all infrastructure (e fit take 5-8 minutes):
+**Wetin go happen**: AZD go deploy all infrastructure (e fit take 5-8 minutes):
 1. Creates resource group
 2. Creates SQL Server and Database
 3. Creates App Service Plan
@@ -182,7 +182,7 @@ azd provision
 5. Creates Application Insights
 6. Configures networking and security
 
-**You go dey prompted for**:
+**You go be asked for**:
 - **SQL admin username**: Enter username (e.g., `sqladmin`)
 - **SQL admin password**: Enter strong password (save am!)
 
@@ -201,11 +201,11 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 azd deploy
 ```
 
-**Wetn go happen**: AZD go build and deploy your Flask application:
+**Wetin go happen**: AZD go build and deploy your Flask application:
 1. Packages the Python application
 2. Builds the Docker container
 3. Pushes to Azure Web App
-4. Initializes the database wit sample data
+4. Initializes the database with sample data
 5. Starts the application
 
 **✓ Success Check**: You suppose see:
@@ -223,7 +223,7 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 azd browse
 ```
 
-Dis one go open your deployed web app for browser for `https://app-<unique-id>.azurewebsites.net`
+Dis one go open your deployed web app for browser at `https://app-<unique-id>.azurewebsites.net`
 
 **✓ Success Check**: You suppose see JSON output:
 ```json
@@ -240,7 +240,7 @@ Dis one go open your deployed web app for browser for `https://app-<unique-id>.a
 
 ### Step 7: Test the API Endpoints
 
-**Health Check** (make sure database connection dey):
+**Health Check** (verify database connection):
 ```sh
 curl https://app-<your-id>.azurewebsites.net/health
 ```
@@ -277,36 +277,36 @@ curl https://app-<your-id>.azurewebsites.net/products
 curl https://app-<your-id>.azurewebsites.net/products/1
 ```
 
-**✓ Success Check**: All endpoints go return JSON data without errors.
+**✓ Success Check**: All endpoints suppose return JSON data without errors.
 
 ---
 
-**🎉 Congratulations!** You don successfully deploy web application wit database go Azure using AZD.
+**🎉 Congrats!** You don deploy web app with database go Azure using AZD.
 
 ## Configuration Deep-Dive
 
 ### Environment Variables
 
-Secrets dey managed securely via Azure App Service configuration—**no ever hardcode am for source code**.
+Secrets dey managed securely via Azure App Service configuration—**no ever hardcode secrets for source code**.
 
 **Configured Automatically by AZD**:
-- `SQL_CONNECTION_STRING`: Database connection wit encrypted credentials
+- `SQL_CONNECTION_STRING`: Database connection with encrypted credentials
 - `APPLICATIONINSIGHTS_CONNECTION_STRING`: Monitoring telemetry endpoint
 - `SCM_DO_BUILD_DURING_DEPLOYMENT`: Enables automatic dependency installation
 
-**Where Secrets Dem Dey Stored**:
-1. During `azd provision`, you go give SQL credentials via secure prompts
+**Where Secrets Dey Stored**:
+1. During `azd provision`, you go provide SQL credentials via secure prompts
 2. AZD go store dem for your local `.azure/<env-name>/.env` file (git-ignored)
 3. AZD go inject dem into Azure App Service configuration (encrypted at rest)
 4. Application go read dem via `os.getenv()` at runtime
 
 ### Local Development
 
-For local testing, create `.env` file from the sample:
+For local testing, create `.env` file from sample:
 
 ```sh
 cp .env.sample .env
-# Edit .env make e get your local database connection
+# Edit .env, put your local database connection inside am
 ```
 
 **Local Development Workflow**:
@@ -325,17 +325,17 @@ python app.py
 **Test locally**:
 ```sh
 curl http://localhost:8000/health
-# Wetin we expect: {"status": "fine", "database": "don connect"}
+# Wetin e suppose be: {"status": "fine", "database": "don connect"}
 ```
 
 ### Infrastructure as Code
 
-All Azure resources dem dey define for **Bicep templates** (`infra/` folder):
+All Azure resources dey define for **Bicep templates** (`infra/` folder):
 
-- **Modular Design**: Each resource type get im own file for reusability
+- **Modular Design**: Each resource type get im own file make e reusable
 - **Parameterized**: You fit customize SKUs, regions, naming conventions
-- **Best Practices**: E follow Azure naming standards and security defaults
-- **Version Controlled**: Infrastructure changes dey tracked for Git
+- **Best Practices**: Follow Azure naming standards and security defaults
+- **Version Controlled**: Infrastructure changes dey tracked in Git
 
 **Customization Example**:
 To change the database tier, edit `infra/resources/sql-database.bicep`:
@@ -349,22 +349,22 @@ sku: {
 
 ## Security Best Practices
 
-Dis example dey follow Azure security best practices:
+Dis example follow Azure security best practices:
 
 ### 1. **No Secrets in Source Code**
 - ✅ Credentials dey stored in Azure App Service configuration (encrypted)
 - ✅ `.env` files dey excluded from Git via `.gitignore`
-- ✅ Secrets dey pass via secure parameters during provisioning
+- ✅ Secrets dey passed via secure parameters during provisioning
 
 ### 2. **Encrypted Connections**
 - ✅ TLS 1.2 minimum for SQL Server
-- ✅ HTTPS-only enforced for Web App
+- ✅ HTTPS-only dey enforced for Web App
 - ✅ Database connections dey use encrypted channels
 
 ### 3. **Network Security**
 - ✅ SQL Server firewall configured to allow Azure services only
-- ✅ Public network access restricted (you fit lock am more with Private Endpoints)
-- ✅ FTPS disabled on Web App
+- ✅ Public network access dey restricted (you fit lock am more with Private Endpoints)
+- ✅ FTPS dey disabled on Web App
 
 ### 4. **Authentication & Authorization**
 - ⚠️ **Current**: SQL authentication (username/password)
@@ -378,7 +378,7 @@ Dis example dey follow Azure security best practices:
 
 ### 5. **Auditing & Compliance**
 - ✅ Application Insights dey log all requests and errors
-- ✅ SQL Database auditing enabled (you fit configure am for compliance)
+- ✅ SQL Database auditing enabled (fit configure for compliance)
 - ✅ All resources tagged for governance
 
 **Security Checklist Before Production**:
@@ -412,7 +412,7 @@ Dis example dey follow Azure security best practices:
    # Stop di web app (database still dey charge)
    az webapp stop --name <app-name> --resource-group <rg-name>
    
-   # Start am again wen you need am
+   # Restart wen you need am
    az webapp start --name <app-name> --resource-group <rg-name>
    ```
 
@@ -423,13 +423,13 @@ Dis example dey follow Azure security best practices:
    Dis one go remove ALL resources and stop charges.
 
 4. **Development vs. Production SKUs**:
-   - **Development**: Basic tier (wey dem use for dis example)
+   - **Development**: Basic tier (wey dem use for this example)
    - **Production**: Standard/Premium tier wit redundancy
 
 **Cost Monitoring**:
 - View costs for [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement)
-- Set up cost alerts make e no shock you
-- Tag all resources wit `azd-env-name` for tracking
+- Set up cost alerts make you no get surprise
+- Tag all resources with `azd-env-name` for tracking
 
 **Free Tier Alternative**:
 For learning, you fit modify `infra/resources/app-service-plan.bicep`:
@@ -445,9 +445,9 @@ sku: {
 
 ### Application Insights Integration
 
-Dis example include **Application Insights** for full monitoring:
+Dis example include **Application Insights** for proper monitoring:
 
-**Wetin Dem Monitor**:
+**Wetin Dem Dey Monitor**:
 - ✅ HTTP requests (latency, status codes, endpoints)
 - ✅ Application errors and exceptions
 - ✅ Custom logging from Flask app
@@ -500,7 +500,7 @@ requests
 
 **View Live Metrics**:
 1. Application Insights → Live Metrics
-2. See requests, failures, and performance in real-time
+2. See requests, failures, and performance for real-time
 
 **Set Up Alerts**:
 Create alerts for critical events:
@@ -521,98 +521,101 @@ az monitor metrics alert create \
 ## Troubleshooting
 ### Common Wahala and How to Solve Dem
 
-#### 1. `azd provision` no go, e dey show "Location not available"
+#### 1. `azd provision` fails with "Location not available"
 
-**Wetin dey happen**:
+**Wetin Dey Happen**:
 ```
 Error: The subscription is not registered for the resource type 'components' in the location 'centralus'.
 ```
 
-**How to fix am**:
+**How to Fix Am**:
 Pick another Azure region or register the resource provider:
 ```sh
 az provider register --namespace Microsoft.Insights
 ```
 
-#### 2. SQL Connection No Connect During Deployment
+#### 2. SQL Connection Dey Fail During Deployment
 
-**Wetin dey happen**:
+**Wetin Dey Happen**:
 ```
 pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]TCP Provider...')
 ```
 
-**How to fix am**:
-- Make sure SQL Server firewall allow Azure services (e fit don configure automatically)
-- Check say the SQL admin password na correct one wey you enter during `azd provision`
+**How to Fix Am**:
+- Make sure say SQL Server firewall dey allow Azure services (e dey configure am automatically)
+- Check say the SQL admin password enter correct during `azd provision`
 - Make sure SQL Server don fully provision (fit take 2-3 minutes)
 
 **Check Connection**:
 ```sh
 # For Azure Portal, waka go SQL Database → Query editor
-# Try connect with your login details
+# Try connect wit your credentials
 ```
 
-#### 3. Web App dey show "Application Error"
+#### 3. Web App Dey Show "Application Error"
 
-**Wetin dey happen**:
+**Wetin Dey Happen**:
 Browser dey show generic error page.
 
-**How to fix am**:
-Check di application logs:
+**How to Fix Am**:
+Check the application logs:
 ```sh
-# See di latest logs
+# See di logs wey don happen recently
 az webapp log tail --name <app-name> --resource-group <rg-name>
 ```
 
-**Tin wey dey usually cause am**:
-- Environment variables no dey (check App Service → Configuration)
+**Wetin dey usually cause am**:
+- Environment variables no set (check App Service → Configuration)
 - Python package installation fail (check deployment logs)
 - Database initialization error (check SQL connectivity)
 
-#### 4. `azd deploy` no work, e dey show "Build Error"
+#### 4. `azd deploy` Dey Fail with "Build Error"
 
-**Wetin dey happen**:
+**Wetin Dey Happen**:
 ```
 Error: Failed to build project
 ```
 
-**How to fix am**:
-- Make sure `requirements.txt` no get syntax errors
-- Check say Python 3.11 dey specified inside `infra/resources/web-app.bicep`
-- Make sure Dockerfile get correct base image
+**How to Fix Am**:
+- Make sure `requirements.txt` get no syntax errors
+- Check say Python 3.11 dey specified in `infra/resources/web-app.bicep`
+- Verify Dockerfile get correct base image
 
-**Debug for local machine**:
+**Debug locally**:
 ```sh
 cd src/web
 docker build -t test-app .
 docker run -p 8000:8000 test-app
 ```
 
-#### 5. "Unauthorized" When you dey run AZD commands
+#### 5. "Unauthorized" When Running AZD Commands
 
-**Wetin dey happen**:
+**Wetin Dey Happen**:
 ```
 ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have authorization
 ```
 
-**How to fix am**:
-Login again with Azure:
+**How to Fix Am**:
+Log in again to Azure:
 ```sh
+# Na compulsory for AZD workflows
 azd auth login
+
+# E no compulsory if you dey also use Azure CLI commands directly
 az login
 ```
 
 Make sure say you get the correct permissions (Contributor role) on the subscription.
 
-#### 6. Database Costs Too High
+#### 6. Database Costs Wey High
 
-**Wetin dey happen**:
-Azure bill wey you no expect.
+**Wetin Dey Happen**:
+You get unexpected Azure bill.
 
-**How to fix am**:
-- Check if you forget to run `azd down` after testing
+**How to Fix Am**:
+- Check say you no forget to run `azd down` after testing
 - Make sure SQL Database dey use Basic tier (no be Premium)
-- Review costs for Azure Cost Management
+- Review costs in Azure Cost Management
 - Set up cost alerts
 
 ### How to Get Help
@@ -632,23 +635,23 @@ az webapp show --name <app-name> --resource-group <rg-name> --query state
 az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
 ```
 
-**Need more help?**
+**Need More Help?**
 - [AZD Troubleshooting Guide](../../docs/chapter-07-troubleshooting/common-issues.md)
 - [Azure App Service Troubleshooting](https://learn.microsoft.com/azure/app-service/troubleshoot-diagnostic-logs)
 - [Azure SQL Troubleshooting](https://learn.microsoft.com/azure/azure-sql/database/troubleshoot-common-errors-issues)
 
 ## Practical Exercises
 
-### Exercise 1: Make sure your deployment dey work (Beginner)
+### Exercise 1: Make Sure Say Your Deployment Dey Work (Beginner)
 
 **Goal**: Confirm say all resources don deploy and the application dey work.
 
 **Steps**:
-1. List all resources for your resource group:
+1. List all resources wey dey your resource group:
    ```sh
    az resource list --resource-group rg-<env-name> --output table
    ```
-   **Expected**: 6-7 resources (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
+   **Wetin You Suppose See**: 6-7 resources (Web App, SQL Server, SQL Database, App Service Plan, Application Insights, Log Analytics)
 
 2. Test all API endpoints:
    ```sh
@@ -657,26 +660,26 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    curl https://app-<your-id>.azurewebsites.net/products
    curl https://app-<your-id>.azurewebsites.net/products/1
    ```
-   **Expected**: All return valid JSON without errors
+   **Wetin You Suppose See**: All go return valid JSON without error
 
 3. Check Application Insights:
-   - Go Application Insights for Azure Portal
+   - Go to Application Insights inside Azure Portal
    - Go to "Live Metrics"
-   - Refresh your browser for the web app
-   **Expected**: You go see requests wey dey appear for real-time
+   - Refresh your browser on the web app
+   **Wetin You Suppose See**: You go see requests dey appear in real-time
 
-**Success Criteria**: All 6-7 resources dey, all endpoints dey return data, Live Metrics dey show activity.
+**How You Go Know Say Na Success**: All 6-7 resources dey, all endpoints dey return data, Live Metrics dey show activity.
 
 ---
 
-### Exercise 2: Add New API Endpoint (Intermediate)
+### Exercise 2: Add a New API Endpoint (Intermediate)
 
-**Goal**: Extend the Flask app with one new endpoint.
+**Goal**: Add one new endpoint to the Flask application.
 
-**Starter Code**: Current endpoints for `src/web/app.py`
+**Starter Code**: Current endpoints in `src/web/app.py`
 
 **Steps**:
-1. Edit `src/web/app.py` and add new endpoint after the `get_product()` function:
+1. Edit `src/web/app.py` and add a new endpoint after the `get_product()` function:
    ```python
    @app.route('/products/search/<keyword>')
    def search_products(keyword):
@@ -719,9 +722,9 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    ```sh
    curl https://app-<your-id>.azurewebsites.net/products/search/laptop
    ```
-   **Expected**: Returns products wey match "laptop"
+   **Wetin You Suppose See**: Go return products wey match "laptop"
 
-**Success Criteria**: New endpoint dey work, e return filtered results, e go show for Application Insights logs.
+**How You Go Know Say Na Success**: New endpoint dey work, dey return filtered results, dey show for Application Insights logs.
 
 ---
 
@@ -730,15 +733,15 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 **Goal**: Set up proactive monitoring with alerts.
 
 **Steps**:
-1. Create alert for HTTP 500 errors:
+1. Create an alert for HTTP 500 errors:
    ```sh
-   # Make we get Application Insights resource ID
+   # Find di Application Insights resource ID
    AI_ID=$(az monitor app-insights component show \
      --app appi-<your-id> \
      --resource-group rg-<env-name> \
      --query id -o tsv)
    
-   # Make alert
+   # Make di alert
    az monitor metrics alert create \
      --name "High-Error-Rate" \
      --resource-group rg-<env-name> \
@@ -755,22 +758,22 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
    ```
 
-3. Check if the alert fire:
+3. Check if the alert fired:
    - Azure Portal → Alerts → Alert Rules
-   - Check your email (if you don configure am)
+   - Check your email (if you configure am)
 
-**Success Criteria**: Alert rule don create, e trigger on errors, notifications dey reach you.
+**How You Go Know Say Na Success**: Alert rule don create, e go trigger on errors, notifications don reach you.
 
 ---
 
-### Exercise 4: Database Schema Changes (Advanced)
+### Exercise 4: Make Database Schema Changes (Advanced)
 
-**Goal**: Add one new table and modify the application make e use am.
+**Goal**: Add a new table and modify the application to use am.
 
 **Steps**:
 1. Connect to SQL Database via Azure Portal Query Editor
 
-2. Create new `categories` table:
+2. Create a new `categories` table:
    ```sql
    CREATE TABLE categories (
        id INT PRIMARY KEY IDENTITY(1,1),
@@ -787,17 +790,17 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    UPDATE products SET category_id = 1; -- Set all to Electronics
    ```
 
-3. Update `src/web/app.py` make e include category info for responses
+3. Update `src/web/app.py` make e include category information in responses
 
 4. Deploy and test
 
-**Success Criteria**: New table dey, products dey show category info, application still dey work.
+**How You Go Know Say Na Success**: New table dey, products dey show category information, application still dey work.
 
 ---
 
 ### Exercise 5: Implement Caching (Expert)
 
-**Goal**: Add Azure Redis Cache to make performance better.
+**Goal**: Add Azure Redis Cache to improve performance.
 
 **Steps**:
 1. Add Redis Cache to `infra/main.bicep`
@@ -805,7 +808,7 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 3. Measure performance improvement with Application Insights
 4. Compare response times before/after caching
 
-**Success Criteria**: Redis don deploy, caching dey work, response times improve by >50%.
+**How You Go Know Say Na Success**: Redis don deploy, caching dey work, response times don improve by >50%.
 
 **Hint**: Start with [Azure Cache for Redis documentation](https://learn.microsoft.com/azure/azure-cache-for-redis/).
 
@@ -827,13 +830,13 @@ azd down
 Type `y` to confirm.
 
 **✓ Success Check**: 
-- All resources don delete from Azure Portal
-- No ongoing charges
+- All resources don delete for Azure Portal
+- No more ongoing charges
 - Local `.azure/<env-name>` folder fit delete
 
 **Alternative** (keep infrastructure, delete data):
 ```sh
-# Comot only di resource group (leave AZD config)
+# Comot na only di resource group (no touch AZD config)
 az group delete --name rg-<env-name> --yes
 ```
 ## Learn More
@@ -852,7 +855,7 @@ az group delete --name rg-<env-name> --yes
 
 ### Advanced Topics
 - **Managed Identity**: Remove passwords and use Azure AD authentication
-- **Private Endpoints**: Secure database connections inside virtual network
+- **Private Endpoints**: Secure database connections within a virtual network
 - **CI/CD Integration**: Automate deployments with GitHub Actions or Azure DevOps
 - **Multi-Environment**: Set up dev, staging, and production environments
 - **Database Migrations**: Use Alembic or Entity Framework for schema versioning
@@ -869,7 +872,7 @@ az group delete --name rg-<env-name> --yes
 
 **AZD vs. Azure Portal**:
 - ✅ AZD: Repeatable, version-controlled, automatable
-- ⚠️ Portal: Manual clicks, hard to reproduce
+- ⚠️ Portal: Manual clicks, difficult to reproduce
 
 **Think of AZD as**: Docker Compose for Azure—simplified configuration for complex deployments.
 
@@ -877,17 +880,17 @@ az group delete --name rg-<env-name> --yes
 
 ## Frequently Asked Questions
 
-**Q: I fit use different programming language?**  
-A: Yes! Replace `src/web/` with Node.js, C#, Go, or any language. Update `azure.yaml` and Bicep as needed.
+**Q: Fit I use different programming language?**  
+A: Yes! Replace `src/web/` with Node.js, C#, Go, or any language. Update `azure.yaml` and Bicep accordingly.
 
 **Q: How I go add more databases?**  
-A: Add another SQL Database module inside `infra/main.bicep` or use PostgreSQL/MySQL from Azure Database services.
+A: Add another SQL Database module in `infra/main.bicep` or use PostgreSQL/MySQL from Azure Database services.
 
-**Q: I fit use this for production?**  
-A: This one na starting point. For production, add: managed identity, private endpoints, redundancy, backup strategy, WAF, and better monitoring.
+**Q: Fit I use this for production?**  
+A: This na starting point. For production, add: managed identity, private endpoints, redundancy, backup strategy, WAF, and enhanced monitoring.
 
-**Q: Wetin if I wan use containers instead of code deployment?**  
-A: Check the [Container Apps Example](../../../../examples/container-app) wey dey use Docker containers everywhere.
+**Q: Wetin if I want to use containers instead of code deployment?**  
+A: Check out the [Container Apps Example](../../../../examples/container-app) wey dey use Docker containers throughout.
 
 **Q: How I go connect to the database from my local machine?**  
 A: Add your IP to the SQL Server firewall:
@@ -900,12 +903,12 @@ az sql server firewall-rule create \
   --end-ip-address <your-ip>
 ```
 
-**Q: I fit use existing database instead of creating new one?**  
-A: Yes, change `infra/main.bicep` to reference the existing SQL Server and update the connection string parameters.
+**Q: Fit I use existing database instead of create new one?**  
+A: Yes, modify `infra/main.bicep` to reference an existing SQL Server and update the connection string parameters.
 
 ---
 
-> **Note:** This example dey show best practices for deploying web app with database using AZD. E include working code, good documentation, and practical exercises to help you learn. For production deployments, review security, scaling, compliance, and cost requirements wey concern your organization.
+> **Note:** Dis example dey show best practices for deploying a web app with a database using AZD. E include working code, full documentation, and practical exercises to help learning. For production deployments, review security, scaling, compliance, and cost requirements wey concern your organization.
 
 **📚 Course Navigation:**
 - ← Previous: [Container Apps Example](../../../../examples/container-app)
@@ -915,7 +918,6 @@ A: Yes, change `infra/main.bicep` to reference the existing SQL Server and updat
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Abeg read:
-
-Dis document don translate by AI translation service [Co-op Translator] (https://github.com/Azure/co-op-translator). Even though we try make am correct, abeg sabi say machine translation fit get mistakes or wrong parts. Di original document for im original language na di correct source. If na important information, make you use professional human translation. We no go responsible for any misunderstanding or wrong interpretation wey fit come from using dis translation.
+**Disclaimer**:
+Dis document don translate with AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg sabi say automated translations fit get errors or mistakes. Di original document for im native language suppose be di authoritative source. For critical information, we recommend say professional human translation make dem do am. We no dey liable for any misunderstandings or misinterpretations wey fit arise from di use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

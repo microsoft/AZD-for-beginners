@@ -1,6 +1,6 @@
-# Capítulo 8: Padrões de Produção & Empresariais
+# Capítulo 8: Padrões de Produção e Empresariais
 
-**📚 Curso**: [AZD Para Iniciantes](../../README.md) | **⏱️ Duração**: 2-3 horas | **⭐ Complexidade**: Avançado
+**📚 Curso**: [AZD Para Principiantes](../../README.md) | **⏱️ Duração**: 2-3 horas | **⭐ Complexidade**: Avançado
 
 ---
 
@@ -8,13 +8,15 @@
 
 Este capítulo aborda padrões de implantação prontos para empresas, reforço de segurança, monitorização e otimização de custos para cargas de trabalho de IA em produção.
 
+> Validado com `azd 1.23.12` em março de 2026.
+
 ## Objetivos de Aprendizagem
 
-Ao concluir este capítulo, você irá:
-- Implementar aplicações resilientes multi-região
-- Aplicar padrões de segurança empresariais
+Ao completar este capítulo, você irá:
+- Implantar aplicações resilientes multi-região
+- Implementar padrões de segurança empresarial
 - Configurar monitorização abrangente
-- Otimizar custos em escala
+- Otimizar custos em larga escala
 - Configurar pipelines CI/CD com AZD
 
 ---
@@ -23,13 +25,13 @@ Ao concluir este capítulo, você irá:
 
 | # | Lição | Descrição | Tempo |
 |---|--------|-------------|------|
-| 1 | [Práticas de IA em Produção](production-ai-practices.md) | Padrões de implementação empresarial | 90 min |
+| 1 | [Práticas de IA em Produção](production-ai-practices.md) | Padrões de implantação empresarial | 90 min |
 
 ---
 
 ## 🚀 Lista de Verificação para Produção
 
-- [ ] Implementação multi-região para resiliência
+- [ ] Implantação multi-região para resiliência
 - [ ] Identidade gerida para autenticação (sem chaves)
 - [ ] Application Insights para monitorização
 - [ ] Orçamentos e alertas de custos configurados
@@ -41,19 +43,19 @@ Ao concluir este capítulo, você irá:
 
 ## 🏗️ Padrões de Arquitetura
 
-### Padrão 1: IA com Microserviços
+### Padrão 1: IA de Microserviços
 
 ```mermaid
 graph LR
-    Gateway[API Gateway] --> AI[Serviço de IA] --> Models[Modelos Microsoft Foundry]
+    Gateway[Gateway de API] --> AI[Serviço de IA] --> Models[Modelos Microsoft Foundry]
     Gateway --> Auth[Serviço de Autenticação]
     AI --> Data[Armazenamento de Dados]
 ```
-### Padrão 2: IA Orientada por Eventos
+### Padrão 2: IA Orientada a Eventos
 
 ```mermaid
 graph LR
-    EventGrid[Event Grid] --> Functions[FUnções] --> Pipeline[Pipline IA]
+    EventGrid[Event Grid] --> Functions[Funções] --> Pipeline[Pipeline de IA]
 ```
 ---
 
@@ -80,9 +82,9 @@ properties: {
 
 | Estratégia | Poupança |
 |----------|---------|
-| Escalar até zero (Container Apps) | 60-80% |
-| Utilizar níveis de consumo para desenvolvimento | 50-70% |
-| Escalonamento agendado | 30-50% |
+| Dimensionar para zero (Aplicações em Contentor) | 60-80% |
+| Usar níveis de consumo para dev | 50-70% |
+| Escalonamento programado | 30-50% |
 | Capacidade reservada | 20-40% |
 
 ```bash
@@ -103,7 +105,7 @@ az consumption budget create \
 azd monitor --logs
 
 # Verificar o Application Insights
-azd monitor
+azd monitor --overview
 
 # Ver métricas
 az monitor metrics list --resource <resource-id>
@@ -131,5 +133,5 @@ az monitor metrics list --resource <resource-id>
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Aviso Legal**:  
-Este documento foi traduzido utilizando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, por favor, esteja ciente de que traduções automáticas podem conter erros ou imprecisões. O documento original, na sua língua nativa, deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se a tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações incorretas resultantes do uso desta tradução.
+Este documento foi traduzido utilizando o serviço de tradução automática [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos por garantir a precisão, por favor tenha em conta que as traduções automáticas podem conter erros ou imprecisões. O documento original na sua língua nativa deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se a tradução profissional humana. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações erradas decorrentes do uso desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

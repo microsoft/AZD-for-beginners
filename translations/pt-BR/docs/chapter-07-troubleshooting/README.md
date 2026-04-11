@@ -1,29 +1,31 @@
-# Capítulo 7: Solução de Problemas & Depuração
+# Capítulo 7: Solução de Problemas e Depuração
 
-**📚 Curso**: [AZD For Beginners](../../README.md) | **⏱️ Duração**: 1-1,5 horas | **⭐ Complexidade**: Intermediário
+**📚 Curso**: [AZD para Iniciantes](../../README.md) | **⏱️ Duração**: 1-1.5 horas | **⭐ Complexidade**: Intermediário
 
 ---
 
-## Visão geral
+## Visão Geral
 
-Este capítulo ajuda você a diagnosticar e resolver problemas comuns ao trabalhar com o Azure Developer CLI. De falhas de implantação a problemas específicos de IA.
+Este capítulo ajuda você a diagnosticar e resolver problemas comuns ao trabalhar com Azure Developer CLI. De falhas de implantação a problemas específicos de IA.
+
+> Validado contra `azd 1.23.12` em março de 2026.
 
 ## Objetivos de Aprendizagem
 
-Ao completar este capítulo, você irá:
+Ao concluir este capítulo, você irá:
 - Diagnosticar falhas comuns de implantação do AZD
 - Depurar problemas de autenticação e permissões
-- Resolver problemas de conectividade de serviços de IA
-- Usar o Azure Portal e CLI para solução de problemas
+- Resolver problemas de conectividade com serviços de IA
+- Usar o Azure Portal e a CLI para solução de problemas
 
 ---
 
-## 📚 Aulas
+## 📚 Lições
 
-| # | Aula | Descrição | Tempo |
+| # | Lição | Descrição | Tempo |
 |---|--------|-------------|------|
-| 1 | [Problemas Comuns](common-issues.md) | Problemas frequentemente encontrados | 30 min |
-| 2 | [Guia de Depuração](debugging.md) | Estratégias passo a passo para depuração | 45 min |
+| 1 | [Problemas Comuns](common-issues.md) | Problemas comumente encontrados | 30 min |
+| 2 | [Guia de Depuração](debugging.md) | Estratégias de depuração passo a passo | 45 min |
 | 3 | [Solução de Problemas de IA](ai-troubleshooting.md) | Problemas específicos de IA | 30 min |
 
 ---
@@ -32,9 +34,13 @@ Ao completar este capítulo, você irá:
 
 ### Problemas de Autenticação
 ```bash
+# Obrigatório para fluxos de trabalho do AZD
 azd auth login
+
+# Opcional se você também estiver usando comandos do Azure CLI diretamente
 az login
-azd auth whoami
+
+azd auth status
 ```
 
 ### Falhas de Provisionamento
@@ -62,14 +68,14 @@ azd up
 
 ## 📋 Referência de Códigos de Erro
 
-| Error | Cause | Solution |
+| Erro | Causa | Solução |
 |-------|-------|----------|
-| `AuthenticationError` | Não autenticado | `azd auth login` |
+| `AuthenticationError` | Não logado | `azd auth login` |
 | `ResourceNotFound` | Recurso ausente | Verifique os nomes dos recursos |
 | `QuotaExceeded` | Limites da assinatura | Solicitar aumento de cota |
 | `InvalidTemplate` | Erro de sintaxe do Bicep | `az bicep build` |
-| `Conflict` | Recurso existe | Use um novo nome ou exclua |
-| `Forbidden` | Permissões insuficientes | Verifique funções RBAC |
+| `Conflict` | Recurso já existe | Use um novo nome ou exclua |
+| `Forbidden` | Permissões insuficientes | Verifique as funções do RBAC |
 
 ---
 
@@ -90,20 +96,20 @@ azd up
 
 | Direction | Chapter |
 |-----------|---------|
-| **Previous** | [Capítulo 6: Pré-Implantação](../chapter-06-pre-deployment/README.md) |
-| **Next** | [Capítulo 8: Produção](../chapter-08-production/README.md) |
+| **Anterior** | [Capítulo 6: Pré-Implantação](../chapter-06-pre-deployment/README.md) |
+| **Próximo** | [Capítulo 8: Produção](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Recursos Relacionados
 
-- [Verificações pré-implantação](../chapter-06-pre-deployment/preflight-checks.md)
+- [Verificações Pré-Implantação](../chapter-06-pre-deployment/preflight-checks.md)
 - [Guia de Configuração](../chapter-03-configuration/configuration.md)
-- [Issues do AZD no GitHub](https://github.com/Azure/azure-dev/issues)
+- [Issues do GitHub do AZD](https://github.com/Azure/azure-dev/issues)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Isenção de responsabilidade**:
-Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos pela precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autorizada. Para informações críticas, recomenda-se tradução profissional por um tradutor humano. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
+**Disclaimer**:
+Este documento foi traduzido usando o serviço de tradução por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Embora nos esforcemos para garantir a precisão, esteja ciente de que traduções automatizadas podem conter erros ou imprecisões. O documento original em seu idioma nativo deve ser considerado a fonte autoritativa. Para informações críticas, recomenda-se tradução profissional realizada por um tradutor humano. Não nos responsabilizamos por quaisquer mal-entendidos ou interpretações equivocadas decorrentes do uso desta tradução.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

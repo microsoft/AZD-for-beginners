@@ -1,79 +1,81 @@
-# AZD AI Geliştiricileri Atölyesi
+# AZD for AI Geliştiricileri Atölyesi
+
+> Mart 2026'da `azd 1.23.12` ile doğrulandı.
 
 > [!IMPORTANT]  
-> **Bu atölye yerel tarayıcınızda önizleyebileceğiniz bir atölye rehberiyle donatılmıştır. Başlamak için, repo üzerinde GitHub Codespaces başlatmalısınız — ardından etkin bir VS Code terminali görünene kadar bekleyin ve yazın:**  
+> **Bu atölye, yerel tarayıcınızda önizleyebileceğiniz bir atölye kılavuzuyla donatılmıştır. Başlamak için depoyu GitHub Codespaces'te, bir geliştirme konteynerinde veya MkDocs yüklü yerel bir kopyada açın—sonra etkin bir VS Code terminali görünce bekleyin ve yazın:**  
 > `mkdocs serve > /dev/null 2>&1 &`  
-> **Önizleme sayfasını bir tarayıcıda açmak için bir açılır ileti görmelisiniz.**
+> **Önizleme sayfasını tarayıcıda açmak için bir açılır ileti görmelisiniz.**
 
-Azure Developer CLI (AZD) öğrenmeye yönelik, AI uygulama dağıtımına odaklanan uygulamalı atölyeye hoş geldiniz. Bu atölye, AZD şablonlarını 3 adımda uygulamalı olarak anlamanıza yardımcı olur:
+Azure Developer CLI (AZD) öğrenmeye yönelik ve AI uygulama dağıtımına odaklanan uygulamalı atölyeye hoş geldiniz. Bu atölye, AZD şablonlarını uygulamalı olarak 3 adımda anlamanıza yardımcı olur:
 
-1. **Discovery** - sizin için doğru şablonu bulun.
-1. **Deployment** - dağıtımı yapın ve çalıştığını doğrulayın
-1. **Customization** - değiştirin ve kendi halinize getirin!
+1. **Keşif** - sizin için doğru şablonu bulun.
+1. **Dağıtım** - dağıtın ve çalıştığını doğrulayın
+1. **Özelleştirme** - değiştirin ve yineleyerek size uygun hale getirin!
 
-Bu atölye boyunca, uçtan uca geliştirme yolculuğunuzu kolaylaştırmak için temel geliştirici araçları ve iş akışları ile de tanıştırılacaksınız.
+Bu atölye boyunca, uçtan uca geliştirme sürecinizi kolaylaştırmaya yardımcı olmak için temel geliştirici araçları ve iş akışlarıyla da tanıştırılacaksınız.
 
 | | | 
 |:---|:---|
-| **📚 Course Home**| [Yeni Başlayanlar için AZD](../README.md)|
-| **📖 Documentation** | [AI şablonlarıyla başlarken](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI Templates** | [Microsoft Foundry Şablonları](https://ai.azure.com/templates) |
-|**🚀 Next Steps** | [Meydan Okumayı Kabul Et](../../../../workshop/docs) |
+| **📚 Kurs Ana Sayfası**| [AZD Yeni Başlayanlar](../README.md)|
+| **📖 Dokümantasyon** | [AI şablonları ile başlayın](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️AI Şablonları** | [Microsoft Foundry Şablonları](https://ai.azure.com/templates) |
+|**🚀 Sonraki Adımlar** | [Meydan Okumayı Kabul Et](#workshop-challenge) |
 | | |
 
 ## Atölye Genel Bakışı
 
 **Süre:** 3-4 saat  
-**Seviye:** Başlangıçtan Orta Düzeye  
-**Ön Koşullar:** Azure, AI kavramları, VS Code ve komut satırı araçlarına aşinalık.
+**Seviye:** Başlangıç - Orta Düzey  
+**Önkoşullar:** Azure, AI kavramları, VS Code ve komut satırı araçlarına aşinalık.
 
-Bu uygulamalı bir atölyedir; öğrenirken yaparak ilerlersiniz. Egzersizleri tamamladıktan sonra, Güvenlik ve Verimlilik en iyi uygulamalarına kadar öğrenme yolculuğunuza devam etmek için AZD Yeni Başlayanlar müfredatını gözden geçirmenizi öneririz.
+Bu, yaparak öğrenmeniz için tasarlanmış uygulamalı bir atölyedir. Alıştırmaları tamamladıktan sonra, Güvenlik ve Verimlilik en iyi uygulamalarına yönelik öğrenme yolculuğunuza devam etmek için AZD Yeni Başlayanlar müfredatını gözden geçirmenizi öneririz.
 
-| Time| Module  | Objective |
+| Süre| Modül  | Hedef |
 |:---|:---|:---|
-| 15 mins | Giriş | Temeli atın, hedefleri anlayın |
-| 30 mins | AI Şablonunu Seçin | Seçenekleri inceleyin ve başlangıç şablonunu seçin | 
-| 30 mins | AI Şablonunu Doğrulayın | Varsayılan çözümü Azure'a dağıtın |
-| 30 mins | AI Şablonunu Parçalarına Ayırın | Yapıyı ve yapılandırmayı keşfedin |
-| 30 mins | AI Şablonunu Yapılandırın | Mevcut özellikleri etkinleştirip deneyin |
-| 30 mins | AI Şablonunu Özelleştirin | Şablonu ihtiyaçlarınıza uyarlayın |
-| 30 mins | Altyapıyı Kaldırın | Temizlik yapın ve kaynakları serbest bırakın |
-| 15 mins | Kapanış ve Sonraki Adımlar | Öğrenme kaynakları, Atölye meydan okuması |
+| 15 dakika | Giriş | Sahneyi hazırlayın, hedefleri anlayın |
+| 30 dakika | AI Şablonu Seç | Seçenekleri keşfedin ve başlangıç şablonunu seçin | 
+| 30 dakika | AI Şablonunu Doğrula | Varsayılan çözümü Azure'a dağıtın |
+| 30 dakika | AI Şablonunu İnceleme | Yapıyı ve yapılandırmayı keşfedin |
+| 30 dakika | AI Şablonunu Yapılandırma | Kullanılabilir özellikleri etkinleştirin ve deneyin |
+| 30 dakika | AI Şablonunu Özelleştirme | Şablonu ihtiyaçlarınıza göre uyarlayın |
+| 30 dakika | Altyapıyı Kaldırma | Temizlik yapın ve kaynakları serbest bırakın |
+| 15 dakika | Kapanış ve Sonraki Adımlar | Öğrenme kaynakları, Atölye meydan okuması |
 | | |
 
 ## Neler Öğreneceksiniz
 
-AZD Şablonunu, Microsoft Foundry üzerinde uçtan uca geliştirme için çeşitli yetenekleri ve araçları keşfetmenize olanak tanıyan bir öğrenme oyun alanı olarak düşünün. Bu atölyenin sonunda, bu bağlamdaki çeşitli araçlar ve kavramlar hakkında sezgisel bir anlayışa sahip olmanız beklenir.
+AZD Şablonunu, Microsoft Foundry üzerinde uçtan uca geliştirme için çeşitli yetenekleri ve araçları keşfetmek amacıyla bir öğrenme kum havuzu (sandbox) olarak düşünün. Bu atölyenin sonunda, bu bağlamdaki çeşitli araçlar ve kavramlar hakkında sezgisel bir anlayışa sahip olmalısınız.
 
-| Concept  | Objective |
+| Kavram  | Hedef |
 |:---|:---|
 | **Azure Developer CLI** | Araç komutlarını ve iş akışlarını anlayın|
-| **AZD Templates**| Proje yapısını ve yapılandırmayı anlayın|
+| **AZD Şablonları**| Proje yapısını ve yapılandırmasını anlayın|
 | **Azure AI Agent**| Microsoft Foundry projesini sağlama ve dağıtma  |
-| **Azure AI Search**| Agentlarla bağlam mühendisliğini etkinleştirin |
-| **Observability**| İzleme, monitörleme ve değerlendirmeleri keşfedin |
-| **Red Teaming**| Saldırgan testleri ve azaltma yöntemlerini keşfedin |
+| **Azure AI Search**| Ajanlarla bağlam mühendisliğini etkinleştirin |
+| **Gözlenebilirlik**| İz sürme, izleme ve değerlendirmeleri keşfedin |
+| **Red Teaming**| Düşmanca testleri ve hafifletmeleri keşfedin |
 | | |
 
 ## Atölye Modülleri
 
-Başlamaya hazır mısınız? Atölye modüllerinde gezinin:
+Başlamaya hazır mısınız? Atölye modülleri arasında gezin:
 
-- [Modül 1: AI Şablonunu Seçin](instructions/1-Select-AI-Template.md)
-- [Modül 2: AI Şablonunu Doğrulayın](instructions/2-Validate-AI-Template.md) 
-- [Modül 3: AI Şablonunu Parçalarına Ayırın](instructions/3-Deconstruct-AI-Template.md)
-- [Modül 4: AI Şablonunu Yapılandırın](instructions/4-Configure-AI-Template.md)
-- [Modül 5: AI Şablonunu Özelleştirin](instructions/5-Customize-AI-Template.md)
-- [Modül 6: Altyapıyı Kaldırın](instructions/6-Teardown-Infrastructure.md)
+- [Modül 1: AI Şablonu Seç](instructions/1-Select-AI-Template.md)
+- [Modül 2: AI Şablonunu Doğrula](instructions/2-Validate-AI-Template.md) 
+- [Modül 3: AI Şablonunu İnceleme](instructions/3-Deconstruct-AI-Template.md)
+- [Modül 4: AI Şablonunu Yapılandırma](instructions/4-Configure-AI-Template.md)
+- [Modül 5: AI Şablonunu Özelleştirme](instructions/5-Customize-AI-Template.md)
+- [Modül 6: Altyapıyı Kaldırma](instructions/6-Teardown-Infrastructure.md)
 - [Modül 7: Kapanış ve Sonraki Adımlar](instructions/7-Wrap-up.md)
 
-## Geri bildiriminiz mi var?
+## Geri bildiriminiz var mı?
 
 Bu depoda bir issue açın (etiketleyin `Workshop`) veya bize [Discord](https://aka.ms/foundry/discord) üzerinden katılın ve `#get-help` kanalına gönderin
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Sorumluluk Reddi:
-Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluğa özen göstersek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen dikkate alın. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanılması sonucu ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumdan sorumlu değiliz.
+**Feragatname**:
+Bu belge [Co-op Translator](https://github.com/Azure/co-op-translator) adlı yapay zeka çeviri hizmeti kullanılarak çevrilmiştir. Doğruluk için çaba göstersek de, otomatik çevirilerin hatalar veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belge, kendi dilindeki hâliyle yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucunda ortaya çıkabilecek herhangi bir yanlış anlama veya yanlış yorumdan sorumlu değiliz.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

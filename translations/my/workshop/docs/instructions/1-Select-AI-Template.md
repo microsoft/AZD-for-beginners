@@ -1,42 +1,42 @@
-# 1. နမူနာရွေးချယ်ပါ
+# 1. Template တစ်ခု ရွေးချယ်ပါ
 
-!!! tip "BY THE END OF THIS MODULE YOU WILL BE ABLE TO"
+!!! tip "ဤမော်ジュူး အဆုံးတွင် သင် လုပ်နိုင်မည့်အရာများ"
 
-    - [ ] AZD templates ဆိုတာဘာလဲ ဆိုတာ ဖော်ပြနိုင်ပါသည်
-    - [ ] AI အတွက် AZD templates များကို ရှာဖွေ အသုံးပြုနိုင်ပါသည်
-    - [ ] AI Agents template ဖြင့် စတင်လုပ်ဆောင်နိုင်ပါသည်
-    - [ ] **Lab 1:** GitHub Codespaces ဖြင့် AZD Quickstart
+    - [ ] AZD ပုံစံများ ဆိုတာဘာလဲ ဆိုတာ ဖော်ပြနိုင်မည်
+    - [ ] AI အတွက် AZD ပုံစံများကို ရှာဖွေ အသုံးပြုနိုင်မည်
+    - [ ] AI Agents ပုံစံနှင့် စတင် လေ့လာနိုင်မည်
+    - [ ] **Lab 1:** Codespaces သို့မဟုတ် dev container တွင် AZD Quickstart
 
 ---
 
-## 1. ဆောက်လုပ်သူ ဆင်တူချက်
+## 1. ဆောက်လုပ်သူနှင့် နှိုင်းယှဉ်ချက်
 
-အဆင့်မြင့်၊ စီးပွားရေးအသင့် AI အက်ပလီကေးရှင်းတစ်ခုကို _အစစကနေ_ တည်ဆောက်ခြင်းသည် အလွန်ရှုပ်ထွေးနိုင်သည်။ ၎င်းကို သင်၏ ကိုယ်ပိုင် အိမ်ကို လက်ဖြင့် ရိုးခြင်းစီ တည်ဆောက်သလိုတစ်စိတ်တစ်ပိုင်းတည်းဖြင့် ဆောက်လုပ်နေသလို ဖြစ်သည်။ ဟုတ်ပါတယ်၊ လုပ်နိုင်ပါသည်! သို့သော် မလိုလားအပ်သည့် နည်းလမ်းဖြင့် ရည်မှန်းထားသည့် ဂိုးရလဒ်ကို ရယူရန် အကောင်းဆုံးနည်းလမ်း မဟုတ်ပါ။
+စဉ်ဆက်မပြတ် အနောက်ဧရိယာ အသစ်တည်ဆောက်ရန်လိုအပ်သည့် မော်ဒန် စီးပွားရေး အသင့် AI အက်ပလီကေးရှင်းကို _အစမှ စတင်_ မှာတည်ဆောက်ဖို့ အခြေအနေသည် အတော်ခက်ခဲနိုင်သည်။ ဒါဟာ ကိုယ့်အိမ်ကို ကိုယ့်ဘက်က ဘရစ်ရေ့း ညီမျှတစွာ တည်ဆောက်နေသလို ဖြစ်နိုင်ပါတယ်။ ဟုတ်ပါတယ်၊ ပြုလုပ်လို့ ရပါတယ်။ သို့သော် လိုချင်တဲ့ အပြီးရလဒ်ရဖို့ အထိရောက်ဆုံးနည်းလမ်း မဟုတ်ပါဘူး။
 
-မဟုတ်ရင် ထပ်မံစဉ်းစားပါက၊ ကျွန်ုပ်တို့သည် အများအားဖြင့် ရှိပြီးသား _ဒီဇိုင်း အချက်ပြဇယား_ တစ်ခုမှ စတင်ပြီး အာကာကိုအတည်ပြုသူ (architect) တစ်ယောက်နှင့် ပူးပေါင်းကာ ကိုယ့်လိုအပ်ချက်များအတိုင်း ကိုက်ညီစေရန် ပြုပြင်ပြီး တီထွင်ကြသည်။ ၎င်းသည် စျေးပေါသော နည်းလမ်းဖြစ်သည်။ အကောင်အထည်ဖော်လိုသော အင်တယ်လီဂျင့် အက်ပလီကေးရှင်းများကို ဖန်တီးရာတွင်လည်း တစ်ခုတည်းသော လမ်းကြောင်းအဖြစ် အထူးသင့်တော်သည်။ ပထမဦးဆုံး သင့်ပြဿနာနယ်ပယ်နှင့် ကိုက်ညီသည့် ကောင်းသော ဒီဇိုင်း ဖွဲ့စည်းပုံကို ရှာပါ။ ထို့နောက် ချက်ချင်း ပေ့ါဖိုလ်ရှင်နယ် အင်တာချိတ်ဆက်သူ (solution architect) တစ်ဦးနှင့် ပူးပေါင်းကာ သင့်ရည်မှန်းချက်အတွက် တပ်ဆင်၊ အပြင်ဆင် ထားပါ။
+မဟုတ်ရင်၊ ကျွန်တော်တို့ အများအားဖြင့် ရှိပြီးသား _ဒီဇိုင်း အကွက်ပြကျမ်း_ တစ်ခုနဲ့ စတင်ပြီး အောက်စီတက္ဘ်နောက်တွေကို ကိုယ့်လိုအပ်ချက်အရ ပြင်ဆင်ရန် ကြံဆလိုက်တယ်။ အဲဒါကို ဆောက်လှရေး အင်ဂျင်နီယာနဲ့ ပြင်ဆင်သလိုပင် အချက်အလက်ပိုင်ဆိုင်မှုအဖြစ် လုပ်ဆောင်ရပါတယ်။ ဉပမာအားဖြင့် ဉာဏ်ရည်ပြည့်ဝသော ထုတ်ကုန်များ တည်ဆောက်လိုတဲ့အခါ၌လည်း အဲဒီနည်းလမ်းကို သုံးပါ။ အရင်ဆုံး သင့်ပြဿနာဧရိယာနှင့် ကိုက်ညီတဲ့ ดีဇိုင်းစနစ်ကို ရှာပါ။ ထို့နောက် ဖြေရှင်းချက် အင်ဂျင်နီယာနှင့် တွေ့ဆုံပြီး သင့်အခြေအနေအတွက် အထူးပြင်ဆင်ပါ။
 
-သို့သော် ဤဒီဇိုင်း အချက်ပြဇယားများကို ဘယ်မှာ ရနိုင်မလဲ? နဲ့ ဤဇယားများကို ကိုယ်တိုင်စိတ်ကြိုက် ပြင်ဆင်၍ ပို့စ်လုပ်ပေးနိုင်မည့် အင်ဂျင်နီယာတစ်ဦးကို မည်သို့ရှာမလဲ? ဤworkshop တွင် ကျွန်ုပ်တို့သည် အောက်ပါနည်းပညာသုံးခုကို စိတ်ချယုံကြည်စွာ မိတ်ဆက်ပေးကာ အဆိုပါ မေးခွန်းများကို ဖြေကြားပေးပါမည်။
+ဒါပေမယ့် ဒီဒီဇိုင်းပြဇပုံများကို ဘယ်မှာ ရှာမလဲ? ပြင်ဆင်နည်းလမ်းတွေကို သင်ကိုယ်တိုင် သင်ကြားပေးနိုင်မယ့် အင်ဂျင်နီယာကို ဘယ်လိုရှာမလဲ? ဤ workshop တွင် အောက်ပါ နည်းပညာသုံးခုကို မိတ်ဆက်ပြီး အဖြေတွေကို ပေးမှာ ဖြစ်ပါတယ်။
 
-1. [Azure Developer CLI](https://aka.ms/azd) - ဒေသတွင်းဖွံ့ဖြိုးရေးမှ cloud သို့ (build → ship) တက်လာရန် developer အလိုအပ်ချက်များကို လျင်မြန်စေသော open-source ကိရိယာ။
-1. [Microsoft Foundry Templates](https://ai.azure.com/templates) - AI solution architecture တပ်ဆင်ရန် လိုအပ်သော ဥပမာကုဒ်၊ အင်ဖရီစထက်ချာနှင့် ဖိုင်များ ပါဝင်သည့် စံတော်ချိန် open-source အရင်းအမြစ်များ။
-1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - Azure အချက်အလက်အပေါ် အခြေခံထားသော ကွန်ပျူတာ ကူညီရေးဂျင့်၊ ၎င်းသည် ကုဒ်ဘေ့(စ်)ကို လမ်းပြကာ ပြင်ဆင်ရန် သဘာဝဘာသာစကားဖြင့် လမ်းညွှန်ပေးနိုင်သည်။
+1. [Azure Developer CLI](https://aka.ms/azd) - လော့ခ်စ်-အော့ပင်စွဲ ရိုးရှင်းတဲ့ အရာတစ်ခုဖြစ်ပြီး local ဖန်တီးမှု (build) မှ cloud သို့ တင်ပို့ခြင်း (ship) အထိ developer အတွက် လမ်းကြောင်းကို မြန်ဆန်စေသည်။
+1. [Microsoft Foundry Templates](https://ai.azure.com/templates) - sample ကုဒ်၊ လုပ်ငန်းအင်ဖြာစထရတ်ချာနှင့် ဖိုင်များပါဝင်ပြီး AI ဖြေရှင်းချက် စီမံခန့်ခွဲမှု အတွက် စံနမူနာ open-source repository များ။
+1. [GitHub Copilot Agent Mode](https://code.visualstudio.com/docs/copilot/chat/chat-agent-mode) - Azure ဗဟုသုတနှင့် အခြေခံထားသော ကုဒ်ရေးခြင်း အိပ်များကို ဦးဆောင်ပေးနိုင်သည့် coding agent တစ်ခုဖြစ်ပြီး codebase ကို လမ်းပြပေးခြင်း၊ ပြင်ဆင်မှုများ ပြုလုပ်ရာတွင် သဘာဝဘာသာဖြင့် ညွှန်ကြားနိုင်သည်။
 
-ဤကိရိယာများကို ကိုင်ဆောင်ထားလျှင် သင်သည် သင့်လိုအပ်ချက်နှင့် ကိုက်ညီသည့် တမ်းပလိတ်ကို _ရှာဖွေရန်_၊ ၎င်းကို အမှန်တကယ္ လည်ပတ်ကြောင်း _deploy_ ပြုလုပ်ရန်၊ နှင့် သင့်ရည်ရွယ်ချက်အတိုင်း _စိတ်ကြိုက်ပြင်ဆင်_ ရန် လုပ်ဆောင်နိုင်ပါပြီ။ အခု တက်ပါစို့၊ ၎င်းများကို ဘယ်လို အသုံးပြုရသည်ကို သင်ယူလိုက်ကြပါစို့။
+ဤကိရိယာများနှင့်အတူ အမှန်တကယ် သင့်လိုအပ်သည့် template ကို _ရှာဖွေ_၊ အလုပ်လုပ်မှုကို _deploy_ လုပ်ပြီး စစ်ဆေး၊ ထို့နောက် သင့် အခြေအနေများအတွက် _ပြင်ဆင်_ လုပ်နိုင်ပါပြီ။ အခုတော့ ယင်းတို့ ဘယ်လို လုပ်ဆောင်ကြောင်း သင်ယူကြမယ်။
 
 ---
 
 ## 2. Azure Developer CLI
 
-The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (or `azd`) သည် open-source command-line ကိရိယာတစ်ခုဖြစ်ပြီး သင့် code-to-cloud ခရီးကို IDE (development) နှင့် CI/CD (devops) ပတ်ဝန်းကျင်များတွင် အမြဲတမ်း တူညီစွာ လုပ်ဆောင်ပေးနိုင်သည့် developer-friendly command များဖြင့် အရှိန်မြှင့်ပေးနိုင်ပါသည်။
+The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) (or `azd`) သည် open-source command-line ကိရိယာတစ်ခုဖြစ်ပြီး IDE (development) နှင့် CI/CD (devops) ပတ်ဝန်းကျင်များတွင် တစ်ခုတည်းတည်းလုပ်ဆောင်နိုင်သည့် developer-friendly command များဖြင့် သင့် code-to-cloud ခရီးကို မြန်ဆန်စေနိုင်သည်။
 
-`azd` ဖြင့် သင့် deployment ခရီးစဉ်ကို အလွန် ရိုးရှင်းစွာ အောက်ပါအတိုင်း ပြုလုပ်နိုင်သည် -
+`azd` ဖြင့် သင့် deployment ခရီးကို အလွယ်တကူ အောက်ပါအတိုင်း ပြုလုပ်နိုင်ပါသည်။
 
-- `azd init` - ရှိပြီးသား AZD template မှ အသစ်သော AI project တစ်ခုကို စတင် initialize ပြုလုပ်သည်။
-- `azd up` - Infrastructure ကို provision ပြုလုပ်ကာ သင့် application ကို တစ်ချက်တည်းတွင် deploy လုပ်ပေးသည်။
-- `azd monitor` - သင့်တပ်ဆင်ပြီးသော application အတွက် အချိန်နှင့်တပြေးညီ မော်နီတာနှင့် ပြဿနာဖော်ထုတ်မှုရယူရန်။
-- `azd pipeline config` - Azure သို့ စက်တင် အလိုအလျောက်ပို့ရန် CI/CD pipeline များကို သတ်မှတ်ပေးရန်။
+- `azd init` - ရှိပြီးသား AZD ပုံစံမှ AI ပရိုက်ဂျက်အသစ်ကို စတင်ဖန်တီးသည်။
+- `azd up` - အဆောက်အအုံ ကို provision လုပ်၍ သင့် application ကို တစ်ချက်တည်း နဲ့ deploy လုပ်ပေးသည်။
+- `azd monitor` - သင့် deployed application အတွက် အချိန်နဲ့တပြေးညီ စောင့်ကြည့်မှုနှင့် ဗဟိုပြု ပြသာနာရှာဖွေမှုကို ရယူရန်။
+- `azd pipeline config` - Azure သို့ လွယ်ကူစွာ အလိုအလျောက် တင်ပို့ရန် CI/CD pipeline များကို သတ်မှတ်ရန်။
 
-**🎯 | EXERCISE**: <br/> သင့် GitHub Codespaces ပတ်ဝန်းကျင်တွင် `azd` command-line ကိရိယာကို လေ့လာပါ။ ကိရိယာ၏ လုပ်ဆောင်နိုင်ချက်ကို ကြည့်ရန် ဤ command ကို ရိုက်ထည့်ပြီး စတင်ပါ။
+**🎯 | EXERCISE**: <br/> လက်ရှိ workshop ပတ်ဝန်းကျင်တွင် `azd` command-line ကိရိယာကို ရှာဖွေ လေ့လာပါ။ ၎င်းသည် GitHub Codespaces, dev container သို့မဟုတ် prerequisite များတပ်ဆင်ထားသော local clone တစ်ခု ဖြစ်နိုင်သည်။ ကိရိယာ၏ လုပ်ဆောင်ချက်များကို ကြည့်ရှုရန် အောက်ပါ command ကို ရိုက်ထည့်ပါ။
 
 ```bash title="" linenums="0"
 azd help
@@ -46,71 +46,72 @@ azd help
 
 ---
 
-## 3. The AZD Template
+## 3. AZD ပုံစံ
 
-`azd` သည် ၎င်းကို ရရှိစေရန် provisioning လုပ်ရမည့် infrastructure၊ အဖွဲ့အစည်းတစ်ခုတည်း သတ်မှတ်ရန် configuration အချို့နှင့် deploy ပြုလုပ်ရန် application ကို အချက်ရွက်အဖြစ် သိထားရန် လိုအပ်သည်။ ၎င်းအတွက် [AZD templates](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp) များ ပါဝင်သည်။
+`azd` သည် မည်သည့် infrastructure ကို provision လုပ်မည်၊ မည်သည့် configuration ကို သတ်မှတ်မည်နှင့် မည်သည့် application ကို deploy လုပ်မည်ဆိုတာကို သိရှိရမည်။ ဤနေရာတွင် [AZD templates](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/azd-templates?tabs=csharp) များ ပါဝင်သည်။
 
-AZD templates သည် နမူနာကုဒ်များနှင့် solution architecture ကို တပ်ဆင်ရန် လိုအပ်သော infrastructure နှင့် configuration ဖိုင်များကို ပေါင်းစည်းထားသော open-source repository များပင် ဖြစ်သည်။ _Infrastructure-as-Code_ (IaC) နည်းစနစ်ကို အသုံးပြုခြင်းဖြင့် template resource သတ်မှတ်ချက်များနှင့် configuration ဆက်တင်များကို application source code ကဲ့သို့ ဗားရှင်းထိန်းချုပ်နိုင်၍ အကြောင်းအရာတူညီသည့် workflow များကို ပြန်လည်အသုံးပြုနိုင်စေသည်။
+AZD ပုံစံများသည် sample ကုဒ်များနှင့် deployment အင်ဖရာစထရတ္ချာနှင့် configuration ဖိုင်များကို ပေါင်းစည်းထားသည့် open-source repository များဖြစ်သည်။
+_Infrastructure-as-Code_ (IaC) နည်းလမ်းကို အသုံးပြုခြင်းအားဖြင့် template resource သတ်မှတ်ချက်များနှင့် configuration ဆက်တင်များကို မူရင်း app source code ကဲ့သို့ version-control အောက်တွင် ထိန်းသိမ်းနိုင်ခြင်းဖြင့် ထပ်မံအသုံးပြုနိုင်၍ အသုံးပြုသူများအကြား တိကျပြီး တူညီသော workflow များကို ဖန်တီးပေးသည်။
 
-သင်၏ သီးသန့် အခြေအနေအတွက် AZD template တစ်ခုကို ဖန်တီးသို့မဟုတ် သုံးဆောင်ရန် လျှောက်လွှာစဉ်ကာလတွင် အောက်ပါမေးခွန်းများကို စဉ်းစားပါ -
+သင့်၏ အခြေအနေအတွက် AZD ပုံစံတစ်ခုကို ဖန်တီးရန် သို့မဟုတ် ပြန်အသုံးပြုရန် အပြီးတွင် အောက်ပါ မေးခွန်းများကို စဉ်းစားပါ။
 
-1. သင် ဘာကို ဆောက်လုပ်နေပါသလဲ? → ဤအခြေအနေအတွက် စတင်ကုဒ် ပါသော template ရှိပါသလား?
-1. သင့်ဖြေရှင်းချက်ကို ဘယ်သို့ ဖွဲ့စည်းထားသလဲ? → လိုအပ်သော resource များပါဝင်သည့် template ရှိပါသလား?
-1. သင့်ဖြေရှင်းချက်ကို မည်သို့ deploy လုပ်မည်နည်း? → pre/post-processing hooks တွေပါသော `azd deploy` ကို စဉ်းစားပါ!
-1. ဘယ်လို ပို၍ အထူးပြုနိုင်မလဲ? → built-in monitoring နှင့် automation pipeline များကို စဉ်းစားပါ!
+1. မင်းဘာကို တည်ဆောက်နေတယ်လဲ? → အဲဒီအခြေအနေအတွက် starter ကုဒ်ပါဝင်သည့် ပုံစံ ရှိပါသလား?
+1. မင်းရဲ့ ဖြေရှင်းချက်ကို ဘယ်လိုဒီဇိုင်းထားထားလဲ? → လိုအပ်သည့် resource များပါဝင်သည့် ပုံစံ ရှိပါသလား?
+1. မင်းရဲ့ ဖြေရှင်းချက်ကို ဘယ်လို deploy လုပ်မလဲ? → pre/post-processing hooks များနှင့်အတူ `azd deploy` အကြောင်းကို စဉ်းစားပါ!
+1. နောက်ထပ် ဘာတွေကောင်းမြင်အောင် အဆင်ပြေစေမလဲ? → built-in monitoring နှင့် automation pipeline များကို စဉ်းစားပါ!
 
 **🎯 | EXERCISE**: <br/> 
-[Awesome AZD](https://azure.github.io/awesome-azd/) ဂယ်လရီကို သွားရောက်ပြီး filter များကို အသုံးပြုကာ လက်ရှိတွင် ရရှိနိုင်သည့် 250+ templates များကို ရှာဖွေပါ။ သင့်အခြေအနေ တိုက်ညီသည့် တမ်းပလိတ်ကို ရှာနိုင်ပါစေလျှင် စိစစ်ကြည့်ပါ။
+[Awesome AZD](https://azure.github.io/awesome-azd/) ဂိတ်လီရီကို သွားရောက်ပြီး filter များကို အသုံးပြု၍ လက်ရှိ များစွာရှိသည့် 250+ template များကို ရှာဖွေကြည့်ပါ။ သင့် အခြေအနေလိုအပ်ချက်နှင့် ကိုက်ညီသောတစ်ခု ရနိုင်မရှိ စစ်ဆေးပါ။
 
 ![ကုဒ်](../../../../../translated_images/my/azd-code-to-cloud.2d9503d69d3400da.webp)
 
 ---
 
-## 4. AI အက်ပလီကေးရှင်း နမူနာများ
+## 4. AI အက်ပ်ပလီကေးရှင်း ပုံစံများ
 
-AI အားဖြင့် လုပ်ဆောင်သည့် အက်ပလီကေးရှင်းများအတွက် Microsoft သည် **Microsoft Foundry** နှင့် **Foundry Agents** ပါဝင်သည့် အထူးပြု templates များကို ပံ့ပိုးပေးသည်။ ဤ templates များသည် သင့်ကို အင်တယ်လီဂျင့်၊ ထုတ်လုပ်နိုင်သော အက်ပလီကေးရှင်းများ ဖန်တီးရန် လမ်းကြောင်းကို အမြန်တိုးမြှင့်ပေးသည်။
+AI လက်ဆောင်ထားသော applications များအတွက် Microsoft သည် **Microsoft Foundry** နှင့် **Foundry Agents** ပါဝင်သည့် အထူးပြု template များကို ကမ်းလှမ်းပေးသည်။ ဤပုံစံများက သင့်အား အသိမမောင်း၍ အသုံးချနိုင်သည့်၊ ထုတ်လုပ်ရန် အသင့်ရှိသော အက်ပလီကေးရှင်းများ တည်ဆောက်ရန် လမ်းကြောင်းကို မြန်ဆန်စေပါသည်။
 
 ### Microsoft Foundry & Foundry Agents Templates
 
-အောက်ပါတွင် တပ်ဆင်ရန် template တစ်ခုကို ရွေးပါ။ တစ်ခုချင်းစီကို [Awesome AZD](https://azure.github.io/awesome-azd/) တွင် ရနိုင်ပြီး တစ်ချက်သာဖြင့် initialize ပြုလုပ်နိုင်ပါသည်။
+အောက်ပါ ပုံစံများထဲမှ တစ်ခုကို ရွေးချယ်၍ deploy လုပ်နိုင်သည်။ တစ်ခုချင်းစီကို [Awesome AZD](https://azure.github.io/awesome-azd/) တွင် ရနိုင်ပြီး တစ်ချက်ဆင့် `azd init` command ဖြင့် သင်၏ပရိုက်ဂျက်ကို initialize လုပ်နိုင်သည်။
 
-| နမူနာ | ဖော်ပြချက် | တပ်ဆင် အမိန့် |
+| Template | Description | Deploy Command |
 |----------|-------------|----------------|
-| **[RAG ဖြင့် AI စကားဝိုင်း](https://azure.github.io/awesome-azd/?tags=ai&tags=rag)** | Microsoft Foundry ကို အသုံးပြု၍ Retrieval Augmented Generation ဖြင့် စကားဝိုင်း အက်ပလီကေးရှင်း | `azd init -t azure-samples/azure-search-openai-demo` |
-| **[Foundry Agent ဝန်ဆောင်မှု စတင်နမူနာ](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Foundry Agents များဖြင့် ကိုယ်တိုင်းတာ အလိုအလျောက် လုပ်ငန်းများ လုပ်ဆောင်နိုင်သော AI agent များ ဖန်တီးရန် | `azd init -t azure-samples/foundry-agent-service-starter` |
-| **[Multi-Agent ဆက်လက်ညှိနှိုင်းမှု](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | ဇာတ်လမ်းရှုပ်ထွေးသော workflow များအတွက် Foundry Agents များကို ညှိနှိုင်းရန် | `azd init -t azure-samples/multi-agent-orchestration` |
-| **[AI စာရွက်စာတမ်း အသိပညာ](https://azure.github.io/awesome-azd/?tags=ai&tags=document)** | Microsoft Foundry မော်ဒယ်များကို အသုံးပြု၍ စာရွက်စာတမ်းများကို သိမြင်၍ အသုံးချရန် | `azd init -t azure-samples/ai-document-processing` |
-| **[စကားပြော AI ဘော့](https://azure.github.io/awesome-azd/?tags=ai&tags=bot)** | Microsoft Foundry ဖြင့် ပေါင်းစည်းထားသော ပညာစကားပြောဘော့များ တည်ဆောက်ရန် | `azd init -t azure-samples/ai-chat-protocol` |
-| **[AI ပုံဖန်တီးမှု](https://azure.github.io/awesome-azd/?tags=ai&tags=dalle)** | Microsoft Foundry မှတဆင့် DALL-E အသုံးပြု၍ ပုံများ ဖန်တီးရန် | `azd init -t azure-samples/ai-image-generation` |
-| **[Semantic Kernel Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=semantic-kernel)** | Foundry Agents နှင့် တွဲဖက် အသုံးပြုသော Semantic Kernel အေပၚ အေဂျင့်များ | `azd init -t azure-samples/semantic-kernel-agent` |
-| **[AutoGen Multi-Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=autogen)** | AutoGen framework ကို အသုံးပြုသည့် မျိုးစုံ agent စနစ်များ | `azd init -t azure-samples/autogen-multi-agent` |
+| **[AI Chat with RAG](https://azure.github.io/awesome-azd/?tags=ai&tags=rag)** | Microsoft Foundry ကို အသုံးပြုပြီး Retrieval Augmented Generation ဖြင့် စကားပြော အက်ပလီကေးရှင်း | `azd init -t azure-samples/azure-search-openai-demo` |
+| **[Foundry Agent Service Starter](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | Foundry Agents ဖြင့် အလိုအလျောက် လုပ်ငန်းများ အတွက် AI agents တည်ဆောက်ရန် စတาร์တာပုံစံ | `azd init -t azure-samples/foundry-agent-service-starter` |
+| **[Multi-Agent Orchestration](https://azure.github.io/awesome-azd/?tags=ai&tags=agents)** | ရှုပ်ထွေးသော workflow များအတွက် မျိုးစုံ Foundry Agents များကို လုပ်ကိုင်စည်းလုံးစေခြင်း | `azd init -t azure-samples/multi-agent-orchestration` |
+| **[AI Document Intelligence](https://azure.github.io/awesome-azd/?tags=ai&tags=document)** | Microsoft Foundry မော်ဒယ်များနှင့် စာရွက်စာတမ်းများကို ထုတ်ယူ စစ်တမ်းခွဲခြင်း | `azd init -t azure-samples/ai-document-processing` |
+| **[Conversational AI Bot](https://azure.github.io/awesome-azd/?tags=ai&tags=bot)** | Microsoft Foundry ပေါင်းစည်းထားသည့် အဖြေပြောစရာ chatbot များ တည်ဆောက်ရန် | `azd init -t azure-samples/ai-chat-protocol` |
+| **[AI Image Generation](https://azure.github.io/awesome-azd/?tags=ai&tags=dalle)** | Microsoft Foundry မှ DALL-E ကို အသုံးပြုပြီး ပုံများ ဖန်တီးခြင်း | `azd init -t azure-samples/ai-image-generation` |
+| **[Semantic Kernel Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=semantic-kernel)** | Foundry Agents နှင့် ပေါင်းစပ်သည့် Semantic Kernel အသုံးပြုသော AI agents များ | `azd init -t azure-samples/semantic-kernel-agent` |
+| **[AutoGen Multi-Agent](https://azure.github.io/awesome-azd/?tags=ai&tags=autogen)** | AutoGen framework ကို အသုံးပြုသော မျိုးစုံ agent စနစ်များ | `azd init -t azure-samples/autogen-multi-agent` |
 
-### အလျင်အမြန် စတင်ခြင်း
+### အမြန်စတင်
 
-1. **Browse templates**: [https://azure.github.io/awesome-azd/](https://azure.github.io/awesome-azd/) သို့ သွား၍ `AI`, `Agents`, သို့မဟုတ် `Microsoft Foundry` ဖြင့် စစ်ထုတ်ပါ
-2. **Select your template**: သင့်အသုံးအဆောင်နှင့် ကိုက်ညီသည့် တစ်ခုကို ရွေးပါ
-3. **Initialize**: ရွေးချယ်ထားသည့် template အတွက် `azd init` command ကို အလုပ်ပေးပါ
-4. **Deploy**: Provision ပြုလုပ်ကာ deploy လုပ်ရန် `azd up` ကို အလုပ်ပေးပါ
+1. **ပုံစံများကို ကြည့်ရှုပါ**: [https://azure.github.io/awesome-azd/](https://azure.github.io/awesome-azd/) ကို သွားရောက်၍ `AI`, `Agents`, သို့မဟုတ် `Microsoft Foundry` ဖြင့် filter ထားပါ
+2. **သင့်ပုံစံကို ရွေးချယ်ပါ**: သင့် အမှုအတွက် ကိုက်ညီသည့် တစ်ခုကို ရွေးပါ
+3. **Initialize လုပ်ပါ**: ရွေးချယ်ထားသော ပုံစံအတွက် `azd init` command ကို အလုပ်ပေးပါ
+4. **Deploy လုပ်ပါ**: provision လုပ်၍ deploy အောင် `azd up` ကို 실행 အုပ်ပါ
 
 **🎯 | EXERCISE**: <br/>
-အပေါ်ပါ template များထဲမှ သင့် အခြေအနေအပေါ် မူတည်၍ တစ်ခုကို ရွေးပါ။
+အထက် ဖော်ပြထားသော ပုံစံများထဲမှ သင့် အခြေအနေအရ တစ်ခုကို ရွေးချယ်ပါ။
 
-- **စကားပြောဘော့ တည်ဆောက်နေပါသလား?** → **RAG ဖြင့် AI စကားဝိုင်း** သို့မဟုတ် **စကားပြော AI ဘော့** ဖြင့် စတင်ပါ
-- **ကိုယ်တိုင် အလိုအလျောက် အလုပ်လုပ်နိုင်သော agent များလိုပါသလား?** → **Foundry Agent ဝန်ဆောင်မှု စတင်နမူနာ** သို့မဟုတ် **Multi-Agent ဆက်လက်ညှိနှိုင်းမှု** ကို စမ်းကြည့်ပါ
-- **စာရွက်စာတမ်းများကို ပြုစုကူးယူနေရပါသလား?** → **AI စာရွက်စာတမ်း အသိပညာ** ကို အသုံးပြုပါ
-- **AI ကူညီရေးသားမှုဆိုင်ရာ အကူအညီလိုပါသလား?** → **Semantic Kernel Agent** သို့မဟုတ် **AutoGen Multi-Agent** ကို စူးစမ်းပါ
+- **chatbot တည်ဆောက်မလား?** → **AI Chat with RAG** သို့မဟုတ် **Conversational AI Bot** ဖြင့် စတင်ပါ
+- **အလိုအလျောက် agents လိုအပ်ပါသလား?** → **Foundry Agent Service Starter** သို့မဟုတ် **Multi-Agent Orchestration** ကို စမ်းကြည့်ပါ
+- **စာရွက်စာတမ်းများကို ကောက်ယူ ဆန်းစစ်လိုပါသလား?** → **AI Document Intelligence** ကို အသုံးပြုပါ
+- **AI ကုဒ်ရေးရာ အကူအညီ လိုချင်ပါသလား?** → **Semantic Kernel Agent** သို့မဟုတ် **AutoGen Multi-Agent** ကို စူးစမ်းပါ
 
 ```bash title="Example: Deploy the AI Chat with RAG template" linenums="0"
 azd init -t azure-samples/azure-search-openai-demo
 azd up
 ```
 
-!!! info "Explore More Templates"
-    The [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) တွင် 250+ templates များပါရှိသည်။ ဘာသာစကား၊ framework နှင့် Azure services အလိုက် သင့်လိုအပ်ချက်နှင့် ကိုက်ညီသည့် template များ ရှာဖွေရန် filters များကို အသုံးပြုပါ။
+!!! info "နမူနာများကို ပိုမိုရှာဖွေပါ"
+    The [Awesome AZD Gallery](https://azure.github.io/awesome-azd/) contains 250+ templates. Use the filters to find templates matching your specific requirements for language, framework, and Azure services.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-အသိပေးချက်:
-ဤစာရွက်ကို AI ဘာသာပြန်ဝန်ဆောင်မှုဖြစ်သည့် [Co-op Translator](https://github.com/Azure/co-op-translator) ကို အသုံးပြု၍ ဘာသာပြန်ထားပါသည်။ ကျွန်ုပ်တို့သည် တိကျမှုကို ကြိုးစားသော်လည်း အလိုအလျောက် ဘာသာပြန်မှုများတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ပါသည်ဆိုတာ ကျေးဇူးပြု၍ အသိထားပါ။ မူလစာရွက်ကို မူလဘာသာစကားဖြင့် ရှိသမျှ စာတမ်းကိုသာ တာဝန်ခံ အရင်းအမြစ်အဖြစ် ယူဆသင့်ပါသည်။ အရေးကြီးသော အချက်အလက်များအတွက် ပရော်ဖက်ရှင်နယ် လူသား ဘာသာပြန်ကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုခြင်းကြောင့် ဖြစ်ပေါ်နိုင်သည့် နားလည်မှု အမှားများ သို့မဟုတ် အဓိပ္ပာယ် မမှန်ကန်မှုများအတွက် ကျွန်ုပ်တို့သည် တာဝန်မယူပါကြောင်း သတိပေးပါသည်။
+**တာဝန်ပယ်ချခြင်း**:
+ဤစာရွက်စာတမ်းကို AI ဘာသာပြန်ဝန်ဆောင်မှု [Co-op Translator](https://github.com/Azure/co-op-translator) ဖြင့် ဘာသာပြန်ထားခြင်း ဖြစ်ပါသည်။ ကျွန်တော်တို့သည် တိကျမှန်ကန်မှုအပေါ် မျိုးမြင်သမျှ ကြိုးစားနေသော်လည်း၊ အလိုအလျောက် ဘာသာပြန်ခြင်းများတွင် အမှားများ သို့မဟုတ် မှားယွင်းချက်များ ပါဝင်နိုင်ကြောင်း သိရှိထားရန် လိုအပ်ပါသည်။ မူရင်းစာတမ်းကို ထိုဘာသာစကားဖြင့် မူရင်းအတိုင်း အတည်ပြု အရင်းအမြစ်အဖြစ် တွက်ချက်သင့်ပါသည်။ အရေးပါသော အချက်အလက်များအတွက် သက်ဆိုင်ရာ ပရော်ဖက်ရှင်နယ် လူသားဘာသာပြန် အကူအညီကို အကြံပြုပါသည်။ ဤဘာသာပြန်ချက်ကို အသုံးပြုထားမှ ဖြစ်ပေါ်လာသည့် နားမလည်မှုများ သို့မဟုတ် မှားလွဲဖော်ပြချက်များအပေါ် ကျွန်တော်တို့ သာမန် တာဝန်မခံပါကြောင်း အကြောင်းကြားပါသည်။
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

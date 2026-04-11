@@ -1,47 +1,47 @@
-# توفير موارد Azure باستخدام AZD
+# Provisioning Azure Resources with AZD
 
-**تنقل الفصل:**
-- **📚 الصفحة الرئيسية للدورة**: [AZD للمبتدئين](../../README.md)
+**Chapter Navigation:**
+- **📚 Course Home**: [AZD للمبتدئين](../../README.md)
 - **📖 الفصل الحالي**: الفصل 4 - البنية التحتية كرمز والنشر
-- **⬅️ السابق**: [دليل النشر](deployment-guide.md)
-- **➡️ الفصل التالي**: [الفصل 5: حلول الذكاء الاصطناعي متعددة الوكلاء](../../examples/retail-scenario.md)
-- **🔧 ذات صلة**: [الفصل 6: التحقق قبل النشر](../chapter-06-pre-deployment/capacity-planning.md)
+- **⬅️ Previous**: [دليل النشر](deployment-guide.md)
+- **➡️ Next Chapter**: [الفصل 5: حلول الذكاء الاصطناعي متعددة الوكلاء](../../examples/retail-scenario.md)
+- **🔧 Related**: [الفصل 6: التحقق قبل النشر](../chapter-06-pre-deployment/capacity-planning.md)
 
-## مقدمة
+## المقدمة
 
-يغطي هذا الدليل الشامل كل ما تحتاج لمعرفته حول توفير وإدارة موارد Azure باستخدام Azure Developer CLI. تعلّم كيفية تنفيذ أنماط البنية التحتية كرمز (IaC) من إنشاء الموارد الأساسية إلى هندسات بنية تحتية متقدمة بمستوى الشركات باستخدام Bicep وARM Templates وTerraform وPulumi.
+يغطي هذا الدليل الشامل كل ما تحتاج معرفته حول توفير وإدارة موارد Azure باستخدام Azure Developer CLI. تعلّم كيفية تنفيذ أنماط البنية التحتية كرمز (IaC) من إنشاء الموارد الأساسية إلى بنى تحتية متقدمة على مستوى المؤسسات باستخدام Bicep وARM templates وTerraform وPulumi.
 
 ## أهداف التعلم
 
 بإكمال هذا الدليل، ستتمكن من:
 - إتقان مبادئ البنية التحتية كرمز وتوفير موارد Azure
-- فهم مزودي IaC المتعدّدين المدعومين بواسطة Azure Developer CLI
-- تصميم وتنفيذ قوالب Bicep لهندسات التطبيقات الشائعة
-- تكوين معلمات الموارد والمتغيرات وإعدادات خاصة بالبيئة
-- تنفيذ أنماط بنية متقدمة بما في ذلك الشبكات والأمان
-- إدارة دورة حياة الموارد والتحديثات وحل تبعياتها
+- فهم مزودي IaC المتعددين المدعومين من Azure Developer CLI
+- تصميم وتنفيذ قوالب Bicep لهياكل التطبيقات الشائعة
+- تكوين معلمات الموارد، والمتغيرات، وإعدادات خاصة بالبيئة
+- تنفيذ أنماط بنية متقدمة تشمل الشبكات والأمان
+- إدارة دورة حياة الموارد والتحديثات وحل الاعتماديات
 
 ## مخرجات التعلم
 
 عند الانتهاء، ستكون قادرًا على:
-- تصميم وتوفير بنية Azure باستخدام Bicep وARM Templates
-- تكوين معماريات متعددة الخدمات المعقدة مع تبعيات الموارد المناسبة
-- تنفيذ قوالب بمتحولات لبيئات وتكوينات متعددة
-- استكشاف مشكلات توفير البنية التحتية وحل إخفاقات النشر
-- تطبيق مبادئ إطار Azure للهندسة الجيدة على تصميم البنية التحتية
-- إدارة تحديثات البنية التحتية وتنفيذ استراتيجيات إصدار البنية التحتية
+- تصميم وتوفير بنية Azure التحتية باستخدام Bicep وARM templates
+- تكوين هياكل متعددة الخدمات المعقدة مع اعتماديات موارد صحيحة
+- تنفيذ قوالب معلمة لبيئات وتكوينات متعددة
+- استكشاف مشكلات توفير البنية التحتية وإصلاح فشل النشر
+- تطبيق مبادئ إطار العمل Azure Well-Architected على تصميم البنية التحتية
+- إدارة تحديثات البنية التحتية وتنفيذ استراتيجيات إصدار للبنية التحتية
 
 ## نظرة عامة على توفير البنية التحتية
 
-يدعم Azure Developer CLI مزودي بنية تحتية كرمز (IaC) متعدّدين:
-- **Bicep** (مُوصى به) - لغة متخصصة لنطاق Azure
-- **ARM Templates** - قوالب Azure Resource Manager بصيغة JSON
+يدعم Azure Developer CLI عدة مزودين للبنية التحتية كرمز (IaC):
+- **Bicep** (موصى به) - لغة مخصصة للنطاق الخاص بـ Azure
+- **ARM Templates** - قوالب Azure Resource Manager مبنية على JSON
 - **Terraform** - أداة بنية تحتية متعددة السحابات
-- **Pulumi** - بنية تحتية كرمز حديثة باستخدام لغات البرمجة
+- **Pulumi** - البنية التحتية كرمز الحديثة باستخدام لغات برمجة
 
 ## فهم موارد Azure
 
-### تسلسل الموارد
+### هيكلية الموارد
 ```
 Azure Account
 └── Subscriptions
@@ -54,11 +54,11 @@ Azure Account
 - **التخزين**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
 - **الشبكات**: Virtual Network, Application Gateway, CDN
 - **الأمان**: Key Vault, Application Insights, Log Analytics
-- **الذكاء الاصطناعي/التعلم الآلي**: Cognitive Services, OpenAI, Machine Learning
+- **الذكاء الاصطناعي/التعلّم الآلي**: Cognitive Services, OpenAI, Machine Learning
 
 ## قوالب Bicep للبنية التحتية
 
-### هيكل قالب Bicep الأساسي
+### بنية قالب Bicep الأساسية
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -179,7 +179,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### إنشاء الموارد المشروطة
+#### إنشاء موارد شرطي
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -298,9 +298,9 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 الأمان وإدارة الأسرار
+## 🔒 إدارة الأمان والأسرار
 
-### التكامل مع Key Vault
+### تكامل Key Vault
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -561,7 +561,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 تكوينات مخصصة للبيئات
+## 🔧 تكوينات خاصة بالبيئة
 
 ### ملفات المعلمات لبيئات مختلفة
 ```json
@@ -617,7 +617,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### توفير الموارد المشروطة
+### توفير موارد مشروطة
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,7 +649,7 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 أنماط التوفير المتقدمة
+## 🚀 أنماط توفير متقدمة
 
 ### النشر متعدد المناطق
 ```bicep
@@ -755,42 +755,41 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 معاينة البنية التحتية والتحقق (جديد)
+## 🧪 معاينة والتحقق من البنية التحتية (جديد)
 
 ### معاينة تغييرات البنية التحتية قبل النشر
 
-تسمح ميزة `azd provision --preview` لك بـ **محاكاة توفير البنية التحتية** قبل نشر الموارد فعليًا. إنها مماثلة في الفكرة لأمر `terraform plan` أو `bicep what-if`، مما يمنحك **عرضًا تجريبيًا** للتغييرات التي ستُجرى على بيئة Azure الخاصة بك.
+تتيح لك ميزة `azd provision --preview` **محاكاة توفير البنية التحتية** قبل نشر الموارد فعليًا. إنها مشابهة في المبدأ لـ `terraform plan` أو `bicep what-if`، مما يمنحك **عرضًا تجريبيًا لما ستكون عليه التغييرات** في بيئة Azure الخاصة بك.
 
-#### 🛠️ ما الذي يفعله
+#### 🛠️ ما يفعله
 - **يحلل قوالب IaC الخاصة بك** (Bicep أو Terraform)
-- **يعرض معاينة لتغييرات الموارد**: إضافات، عمليات حذف، تحديثات
-- **لا يطبق التغييرات** — إنه للقراءة فقط وآمن للتشغيل
+- **يعرض معاينة لتغييرات الموارد**: إضافات، حذوفات، تحديثات
+- **لا يقوم بتطبيق التغييرات** — هو للقراءة فقط وآمن للتشغيل
 
-#### � حالات الاستخدام
+#### حالات الاستخدام
 ```bash
-# معاينة تغييرات البنية التحتية قبل النشر
+# معاينة التغييرات في البنية التحتية قبل النشر
 azd provision --preview
 
-# معاينة مع مخرجات مفصلة
-azd provision --preview --output json
-
 # معاينة لبيئة محددة
-azd provision --preview --environment production
+azd provision --preview -e production
 ```
 
-يساعدك هذا الأمر على:
-- **التحقق من تغييرات البنية التحتية** قبل تنفيذها
-- **اكتشاف التهيئات الخاطئة مبكرًا** في دورة التطوير
+تساعدك هذه الميزة على:
+- **التحقق من تغييرات البنية التحتية** قبل الالتزام بالموارد
+- **التقاط الأخطاء في التكوين مبكرًا** خلال دورة التطوير
 - **التعاون بأمان** في بيئات الفريق
-- **ضمان عمليات نشر بأقل امتيازات ممكنة** دون مفاجآت
+- **ضمان عمليات نشر بأقل امتيازات** دون مفاجآت
 
-أنه مفيد بشكل خاص عندما:
+تكون هذه الميزة مفيدة بشكل خاص عندما:
 - العمل مع بيئات متعددة الخدمات ومعقدة
 - إجراء تغييرات على بنية الإنتاج
-- التحقق من تعديلات القوالب قبل الموافقة على PR
+- التحقق من تعديلات القوالب قبل الموافقة على طلب السحب (PR)
 - تدريب أعضاء الفريق الجدد على أنماط البنية التحتية
 
-### مثال على مخرجات المعاينة
+### مثال لمخرجات المعاينة
+تختلف مخرجات المعاينة الدقيقة حسب المزود وهيكل المشروع، لكن يجب أن تُظهر النتيجة بوضوح التغييرات المقترحة قبل تطبيق أي شيء.
+
 ```bash
 $ azd provision --preview
 
@@ -809,13 +808,12 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
 ```
 
-## �🔄 تحديثات الموارد والترحيل
+## �🔄 تحديثات الموارد والترحيلات
 
 ### تحديثات الموارد الآمنة
 ```bash
@@ -825,8 +823,8 @@ azd provision --preview
 # طبق التغييرات بعد تأكيد المعاينة
 azd provision --confirm-with-no-prompt
 
-# للتراجع، استخدم Git لإلغاء تغييرات البنية التحتية:
-git revert HEAD  # تراجع عن آخر التزام في البنية التحتية
+# للرجوع، استخدم Git للتراجع عن تغييرات البنية التحتية:
+git revert HEAD  # تراجع عن آخر التزام للبنية التحتية
 azd provision    # طبق حالة البنية التحتية السابقة
 ```
 
@@ -872,7 +870,7 @@ var naming = {
 }
 ```
 
-### 2. استراتيجية الوسم
+### 2. استراتيجية الوسوم
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -918,9 +916,9 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## الخطوات التالية
 
-- [التخطيط قبل النشر](../chapter-06-pre-deployment/capacity-planning.md) - التحقق من توافر الموارد
-- [المشكلات الشائعة](../chapter-07-troubleshooting/common-issues.md) - استكشاف مشكلات البنية التحتية وإصلاحها
-- [دليل التصحيح](../chapter-07-troubleshooting/debugging.md) - تصحيح مشكلات التوفير
+- [التخطيط قبل النشر](../chapter-06-pre-deployment/capacity-planning.md) - التحقق من توفر الموارد
+- [المشاكل الشائعة](../chapter-07-troubleshooting/common-issues.md) - استكشاف مشكلات البنية التحتية وإصلاحها
+- [دليل تصحيح الأخطاء](../chapter-07-troubleshooting/debugging.md) - استكشاف مشكلات التزويد وإصلاحها
 - [اختيار SKU](../chapter-06-pre-deployment/sku-selection.md) - اختيار مستويات الخدمة المناسبة
 
 ## موارد إضافية
@@ -928,17 +926,17 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 - [توثيق Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 - [قوالب Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [مركز هندسة Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [إطار Azure للهندسة الجيدة](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [إطار عمل Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **التنقل**
 - **الدرس السابق**: [دليل النشر](deployment-guide.md)
-- **الدرس التالي**: [التخطيط للسعة](../chapter-06-pre-deployment/capacity-planning.md)
+- **الدرس التالي**: [تخطيط السعة](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-إخلاء المسؤولية:
-تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يُرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار الوثيقة الأصلية بلغتها الأصلية المصدر المعتمد. بالنسبة للمعلومات الحرجة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.
+**إخلاء المسؤولية**:
+تمت ترجمة هذا المستند باستخدام خدمة الترجمة الآلية [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الموثوق. بالنسبة للمعلومات الحساسة، يُنصح بالاستعانة بترجمة بشرية محترفة. نحن غير مسؤولين عن أي سوء فهم أو تفسير خاطئ ينشأ عن استخدام هذه الترجمة.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

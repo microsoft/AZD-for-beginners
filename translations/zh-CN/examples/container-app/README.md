@@ -1,6 +1,6 @@
 # 使用 AZD 的容器应用部署示例
 
-此目录包含使用 Azure Developer CLI (AZD) 将容器化应用部署到 Azure Container Apps 的完整示例。这些示例展示了真实场景模式、最佳实践以及生产就绪的配置。
+This directory contains comprehensive examples for deploying containerized applications to Azure Container Apps using Azure Developer CLI (AZD). These examples demonstrate real-world patterns, best practices, and production-ready configurations.
 
 ## 📚 目录
 
@@ -13,43 +13,45 @@
 
 ## Overview
 
-Azure Container Apps 是一个完全托管的无服务器容器平台，可让您在无需管理基础设施的情况下运行微服务和容器化应用。结合 AZD，您将获得：
+Azure Container Apps is a fully managed serverless container platform that enables you to run microservices and containerized applications without managing infrastructure. When combined with AZD, you get:
 
-- <strong>简化的部署</strong>：单条命令即可部署容器及其基础设施
-- <strong>自动伸缩</strong>：可根据 HTTP 流量或事件从零扩展
-- <strong>集成网络</strong>：内置服务发现和流量拆分
-- <strong>托管标识</strong>：对 Azure 资源的安全认证
-- <strong>成本优化</strong>：仅为您使用的资源付费
+- **Simplified Deployment**: Single command deploys containers with infrastructure
+- **Automatic Scaling**: Scale to zero and scale out based on HTTP traffic or events
+- **Integrated Networking**: Built-in service discovery and traffic splitting
+- **Managed Identity**: Secure authentication to Azure resources
+- **Cost Optimization**: Pay only for resources you use
 
 ## 先决条件
 
-在开始之前，请确保您具备：
+在开始之前，请确保您拥有：
 
 ```bash
-# 检查是否已安装 AZD
+# 检查 AZD 是否已安装
 azd version
 
-# 检查 Azure CLI
+# 检查 Azure CLI 是否已安装
 az version
 
 # 检查 Docker（用于构建自定义镜像）
 docker --version
 
-# 登录到 Azure
+# 为 AZD 部署进行身份验证
 azd auth login
+
+# 可选：如果您计划直接运行 az 命令，请登录 Azure CLI
 az login
 ```
 
 **所需的 Azure 资源：**
-- 有效的 Azure 订阅
-- 资源组创建权限
+- 活跃的 Azure 订阅
+- 创建资源组的权限
 - Container Apps 环境访问权限
 
 ## 快速入门示例
 
 ### 1. 简单 Web API（Python Flask）
 
-使用 Azure Container Apps 部署一个基本的 REST API。
+Deploy a basic REST API with Azure Container Apps.
 
 **示例：Python Flask API**
 
@@ -79,15 +81,17 @@ azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
-**主要特性：**
-- 自动伸缩，从 0 到 10 个副本
+**关键特性：**
+- 自动伸缩（从 0 到 10 个副本）
 - 健康探针和存活检查
 - 环境变量注入
-- Application Insights 集成
+- 集成 Application Insights
 
 ### 2. Node.js Express API
 
-部署一个带有 MongoDB 集成的 Node.js 后端。
+Deploy a Node.js backend with MongoDB integration.
+
+部署带有 MongoDB 集成的 Node.js 后端。
 
 ```bash
 # 初始化 Node.js API 模板
@@ -149,7 +153,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 
 ### 3. 静态前端 + API 后端
 
-部署一个包含 React 前端和 API 后端的全栈应用。
+Deploy a full-stack application with React frontend and API backend.
+
+部署一个具有 React 前端和 API 后端的全栈应用。
 
 ```bash
 # 初始化全栈模板
@@ -161,7 +167,7 @@ cat azure.yaml
 # 部署两个服务
 azd up
 
-# 打开应用
+# 打开应用程序
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
@@ -219,7 +225,7 @@ azd init
 # 设置生产环境
 azd env new production
 
-# 配置生产设置
+# 配置生产环境设置
 azd env set ENVIRONMENT production
 azd env set MIN_REPLICAS 2
 azd env set MAX_REPLICAS 50
@@ -233,7 +239,7 @@ azd monitor --overview
 
 ### 示例 2：AI 驱动的容器应用
 
-<strong>场景</strong>：集成 Microsoft Foundry 模型的 AI 聊天应用
+<strong>场景</strong>：与 Microsoft Foundry 模型集成的 AI 聊天应用
 
 **文件：src/ai-chat/app.py**
 ```python
@@ -244,7 +250,7 @@ import openai
 
 app = Flask(__name__)
 
-# 使用托管身份进行安全访问
+# 使用托管标识进行安全访问
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -339,9 +345,9 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### 示例 3：带队列处理的后台工作者
+### 示例 3：带队列处理的后台工作器
 
-<strong>场景</strong>：带消息队列的订单处理系统
+<strong>场景</strong>：具有消息队列的订单处理系统
 
 **目录结构：**
 ```
@@ -381,7 +387,7 @@ def process_orders():
             # 处理订单
             print(f"Processing order: {message.content}")
             
-            # 完整消息
+            # 完成消息
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -411,7 +417,7 @@ azd init
 # 使用队列配置部署
 azd up
 
-# 根据队列长度缩放工作进程数
+# 根据队列长度扩展工作进程
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -425,10 +431,10 @@ az containerapp update \
 ### 模式 1：蓝绿部署
 
 ```bash
-# 创建新的修订版本，不分配流量
+# 创建不接收流量的新修订
 azd deploy api --revision-suffix blue --no-traffic
 
-# 测试新的修订版本
+# 测试新修订
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
 # 拆分流量（20% 到蓝色，80% 到当前）
@@ -463,7 +469,7 @@ az containerapp ingress traffic set \
 #!/bin/bash
 # deploy-canary.sh
 
-# 以10%的流量部署新修订
+# 将新修订部署并分配10%的流量
 azd deploy api --revision-mode multiple
 
 # 监控指标
@@ -599,7 +605,7 @@ def create_order():
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# 为资源打标签以便进行成本跟踪
+# 为资源打标签以进行成本跟踪
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
@@ -670,7 +676,7 @@ azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
 # 实时查看日志
 azd monitor --logs
-# 或使用用于容器应用的 Azure CLI：
+# 或者使用用于容器应用的 Azure CLI：
 az containerapp logs show --name api --resource-group rg-myapp --follow
 
 # 监控指标
@@ -688,16 +694,16 @@ az monitor metrics alert create \
 ### 5. 成本优化
 
 ```bash
-# 不使用时缩容到零
+# 在不使用时缩容到零
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# 在开发环境中使用抢占式实例
+# 在开发环境使用抢占式实例
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# 设置预算提醒
+# 设置预算警报
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
@@ -743,7 +749,7 @@ jobs:
 # 初始化新的容器应用项目
 azd init --template <template-name>
 
-# 部署基础设施和应用程序
+# 部署基础设施和应用
 azd up
 
 # 仅部署应用代码（跳过基础设施）
@@ -755,11 +761,11 @@ azd provision
 # 查看已部署的资源
 azd show
 
-# 使用 azd monitor 或 Azure CLI 流式查看日志
+# 使用 azd monitor 或 Azure CLI 实时查看日志
 azd monitor --logs
 # az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
-# 监控应用程序
+# 监控应用
 azd monitor --overview
 
 # 清理资源
@@ -794,7 +800,7 @@ az containerapp show \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# 检查内部 Ingress 是否已启用
+# 检查是否启用了内部 Ingress
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
@@ -804,12 +810,12 @@ az containerapp ingress update \
 ### 问题：性能问题
 
 ```bash
-# 检查资源利用情况
+# 检查资源利用率
 az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# 扩展资源
+# 扩容资源
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -817,7 +823,7 @@ az containerapp update \
   --memory 4Gi
 ```
 
-## 附加资源和示例
+## 其他资源和示例
 - [微服务示例](./microservices/README.md)
 - [简单 Flash API 示例](./simple-flask-api/README.md)
 - [Azure Container Apps 文档](https://learn.microsoft.com/azure/container-apps/)
@@ -829,19 +835,19 @@ az containerapp update \
 
 要贡献新的容器应用示例：
 
-1. 创建包含您示例的新子目录
+1. 创建一个包含您示例的新子目录
 2. 包含完整的 `azure.yaml`、`infra/` 和 `src/` 文件
-3. 添加包含部署说明的完整 README
+3. 添加包含部署说明的详尽 README
 4. 使用 `azd up` 测试部署
 5. 提交拉取请求
 
 ---
 
-**需要帮助？** 加入 [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) 社区以获取支持和问题解答。
+**需要帮助？** 加入 [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) 社区以获取支持和提出问题。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免责声明**:
-本文档已使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们努力确保准确性，但请注意，自动翻译可能包含错误或不准确之处。原始语言的原文应被视为权威来源。对于重要信息，建议采用专业人工翻译。因使用本翻译而导致的任何误解或曲解，我们不承担任何责任。
+本文件已使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。应将原始文档的母语版本视为权威来源。对于关键信息，建议使用专业人工翻译。对于因使用本翻译而产生的任何误解或误释，我们概不负责。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

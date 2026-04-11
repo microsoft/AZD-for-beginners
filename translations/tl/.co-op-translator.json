@@ -12,8 +12,8 @@
     "language_code": "tl"
   },
   "README.md": {
-    "original_hash": "32ab3c56b8d6d89ea698306a6f6e5eb8",
-    "translation_date": "2026-03-27T00:49:51+00:00",
+    "original_hash": "c947dfc9c55b17f8f90b1a0f3f815a42",
+    "translation_date": "2026-03-31T16:46:59+00:00",
     "source_file": "README.md",
     "language_code": "tl"
   },
@@ -30,8 +30,8 @@
     "language_code": "tl"
   },
   "changelog.md": {
-    "original_hash": "b0bbb0f5954b88bec833f8bd0624dc96",
-    "translation_date": "2026-03-19T10:46:55+00:00",
+    "original_hash": "fb80e7751bcc279c56d08c2082725b2d",
+    "translation_date": "2026-03-31T17:01:22+00:00",
     "source_file": "changelog.md",
     "language_code": "tl"
   },
@@ -42,62 +42,62 @@
     "language_code": "tl"
   },
   "docs/chapter-01-foundation/README.md": {
-    "original_hash": "e70e969588ee5c1971f580e962c28416",
-    "translation_date": "2026-02-11T17:54:55+00:00",
+    "original_hash": "88d5c7035b26412c875b242609c0205e",
+    "translation_date": "2026-03-31T18:51:38+00:00",
     "source_file": "docs/chapter-01-foundation/README.md",
     "language_code": "tl"
   },
   "docs/chapter-01-foundation/azd-basics.md": {
-    "original_hash": "8198b54bc80f34eec93a934dcda55a79",
-    "translation_date": "2026-03-19T13:16:53+00:00",
+    "original_hash": "c1dcb04cb937007cecc93bfe4764c81c",
+    "translation_date": "2026-03-31T18:42:50+00:00",
     "source_file": "docs/chapter-01-foundation/azd-basics.md",
     "language_code": "tl"
   },
   "docs/chapter-01-foundation/first-project.md": {
-    "original_hash": "678f7f99e38640b0f83c2734a3cce16c",
-    "translation_date": "2026-03-19T13:23:32+00:00",
+    "original_hash": "c898efe5a4aca578617d4c8b3ac4b422",
+    "translation_date": "2026-03-31T18:49:45+00:00",
     "source_file": "docs/chapter-01-foundation/first-project.md",
     "language_code": "tl"
   },
   "docs/chapter-01-foundation/installation.md": {
-    "original_hash": "947b28d413437d494e9de9f0f44fe0e9",
-    "translation_date": "2026-03-19T13:02:41+00:00",
+    "original_hash": "fae2b628a15559c6ac4578f2fe89f3da",
+    "translation_date": "2026-03-31T18:27:53+00:00",
     "source_file": "docs/chapter-01-foundation/installation.md",
     "language_code": "tl"
   },
   "docs/chapter-02-ai-development/README.md": {
-    "original_hash": "f11ea77439cb32a9c186ec72013ced4e",
-    "translation_date": "2026-02-11T14:56:15+00:00",
+    "original_hash": "fb77a3616d8b4c792b8e3ba4542918ec",
+    "translation_date": "2026-03-31T17:57:00+00:00",
     "source_file": "docs/chapter-02-ai-development/README.md",
     "language_code": "tl"
   },
   "docs/chapter-02-ai-development/agents.md": {
-    "original_hash": "19a3d0a2a6930d6791f32d44d22dbdc6",
-    "translation_date": "2026-03-19T12:06:16+00:00",
+    "original_hash": "a9c8e638e43e906d601f8931a70463ab",
+    "translation_date": "2026-03-31T17:47:38+00:00",
     "source_file": "docs/chapter-02-ai-development/agents.md",
     "language_code": "tl"
   },
   "docs/chapter-02-ai-development/ai-model-deployment.md": {
-    "original_hash": "939e5d6056dbc564a94a09f821018b94",
-    "translation_date": "2026-03-19T12:08:14+00:00",
+    "original_hash": "15982c7a2a3eebfa730785f4ab35a430",
+    "translation_date": "2026-03-31T17:50:26+00:00",
     "source_file": "docs/chapter-02-ai-development/ai-model-deployment.md",
     "language_code": "tl"
   },
   "docs/chapter-02-ai-development/ai-workshop-lab.md": {
-    "original_hash": "24d4c84eeaa98096fd31b5aa2028f05e",
-    "translation_date": "2026-03-19T12:11:48+00:00",
+    "original_hash": "f9f84ea0f688681ad418c523776d34f2",
+    "translation_date": "2026-03-31T17:55:02+00:00",
     "source_file": "docs/chapter-02-ai-development/ai-workshop-lab.md",
     "language_code": "tl"
   },
   "docs/chapter-02-ai-development/microsoft-foundry-integration.md": {
-    "original_hash": "ccb3fc7a6a36677a5b85eca9d6576471",
-    "translation_date": "2026-03-19T12:17:00+00:00",
+    "original_hash": "182f15ea3e476ffadd05d563507b55ac",
+    "translation_date": "2026-03-31T18:01:47+00:00",
     "source_file": "docs/chapter-02-ai-development/microsoft-foundry-integration.md",
     "language_code": "tl"
   },
   "docs/chapter-03-configuration/README.md": {
-    "original_hash": "5c633d5e0550107a27341b8cd3958608",
-    "translation_date": "2026-02-11T17:00:34+00:00",
+    "original_hash": "689e064921c4699f56e4fb6ddff09228",
+    "translation_date": "2026-03-31T18:23:27+00:00",
     "source_file": "docs/chapter-03-configuration/README.md",
     "language_code": "tl"
   },
@@ -108,38 +108,38 @@
     "language_code": "tl"
   },
   "docs/chapter-03-configuration/configuration.md": {
-    "original_hash": "49f3a14e5b096b9e9a38a644afb7d2fa",
-    "translation_date": "2026-03-19T12:49:39+00:00",
+    "original_hash": "f9c65cbda81ed6679de2879a252b554c",
+    "translation_date": "2026-03-31T18:21:37+00:00",
     "source_file": "docs/chapter-03-configuration/configuration.md",
     "language_code": "tl"
   },
   "docs/chapter-04-infrastructure/README.md": {
-    "original_hash": "434ef208f9249e0cc6ef656149906f56",
-    "translation_date": "2026-02-11T19:00:05+00:00",
+    "original_hash": "c5ff79211ef3c2e6e811b28a5db13450",
+    "translation_date": "2026-03-31T19:18:19+00:00",
     "source_file": "docs/chapter-04-infrastructure/README.md",
     "language_code": "tl"
   },
   "docs/chapter-04-infrastructure/deployment-guide.md": {
-    "original_hash": "992e0cf2414c2d32f38516f963260bdf",
-    "translation_date": "2026-03-19T13:36:53+00:00",
+    "original_hash": "fd479f75c255cdf42085dac8ec41c0f7",
+    "translation_date": "2026-03-31T19:16:25+00:00",
     "source_file": "docs/chapter-04-infrastructure/deployment-guide.md",
     "language_code": "tl"
   },
   "docs/chapter-04-infrastructure/provisioning.md": {
-    "original_hash": "1a4fafd8c95844e8533ca515a6799d6e",
-    "translation_date": "2026-02-11T18:41:30+00:00",
+    "original_hash": "4b889c8e23a6003f6554e1919fea1a51",
+    "translation_date": "2026-03-31T19:09:00+00:00",
     "source_file": "docs/chapter-04-infrastructure/provisioning.md",
     "language_code": "tl"
   },
   "docs/chapter-05-multi-agent/README.md": {
-    "original_hash": "4d17f5f7ce30272743c28deafc33e0a0",
-    "translation_date": "2026-03-19T13:25:20+00:00",
+    "original_hash": "066dea0137688e60b9d9b2db89e1a880",
+    "translation_date": "2026-03-31T18:54:13+00:00",
     "source_file": "docs/chapter-05-multi-agent/README.md",
     "language_code": "tl"
   },
   "docs/chapter-06-pre-deployment/README.md": {
-    "original_hash": "4edfcf0cc9d034c5814c7d4269134bc0",
-    "translation_date": "2026-03-19T12:37:41+00:00",
+    "original_hash": "73b2f9123fd826475a758a4bf224b321",
+    "translation_date": "2026-03-31T18:08:27+00:00",
     "source_file": "docs/chapter-06-pre-deployment/README.md",
     "language_code": "tl"
   },
@@ -162,8 +162,8 @@
     "language_code": "tl"
   },
   "docs/chapter-06-pre-deployment/preflight-checks.md": {
-    "original_hash": "c25a51ebc6200cf92992d26d0a025f7e",
-    "translation_date": "2026-02-11T15:49:38+00:00",
+    "original_hash": "62a54f345cbca600fb5d830f53cfbcc7",
+    "translation_date": "2026-03-31T18:06:50+00:00",
     "source_file": "docs/chapter-06-pre-deployment/preflight-checks.md",
     "language_code": "tl"
   },
@@ -174,20 +174,20 @@
     "language_code": "tl"
   },
   "docs/chapter-07-troubleshooting/README.md": {
-    "original_hash": "5684d34392aa9df8d791cbc6f0584937",
-    "translation_date": "2026-02-11T18:37:15+00:00",
+    "original_hash": "3d3cb2480e9636a584f7c9bf667ffb9d",
+    "translation_date": "2026-03-31T19:07:11+00:00",
     "source_file": "docs/chapter-07-troubleshooting/README.md",
     "language_code": "tl"
   },
   "docs/chapter-07-troubleshooting/ai-troubleshooting.md": {
-    "original_hash": "578e865757a62302a586d12543ec3798",
-    "translation_date": "2026-03-19T13:30:40+00:00",
+    "original_hash": "edfadec08b7c72dfa46edaec6fe0c4c6",
+    "translation_date": "2026-03-31T19:05:32+00:00",
     "source_file": "docs/chapter-07-troubleshooting/ai-troubleshooting.md",
     "language_code": "tl"
   },
   "docs/chapter-07-troubleshooting/common-issues.md": {
-    "original_hash": "b9a8749f22848cbd0c0eb676c782c8d8",
-    "translation_date": "2026-02-11T18:13:04+00:00",
+    "original_hash": "394d8f06b522e7fd90f097e4f8badd66",
+    "translation_date": "2026-03-31T19:00:59+00:00",
     "source_file": "docs/chapter-07-troubleshooting/common-issues.md",
     "language_code": "tl"
   },
@@ -198,14 +198,14 @@
     "language_code": "tl"
   },
   "docs/chapter-08-production/README.md": {
-    "original_hash": "9ded75cd99433c47d34417653bb34957",
-    "translation_date": "2026-03-19T12:44:26+00:00",
+    "original_hash": "629ed979a3cdfdda1ab5639f1e938377",
+    "translation_date": "2026-03-31T18:16:13+00:00",
     "source_file": "docs/chapter-08-production/README.md",
     "language_code": "tl"
   },
   "docs/chapter-08-production/production-ai-practices.md": {
-    "original_hash": "ff776167cca3a0bee71a5218e6723708",
-    "translation_date": "2026-03-19T12:42:26+00:00",
+    "original_hash": "9dfbd9bf67d55844e93d1a7818c8f39a",
+    "translation_date": "2026-03-31T18:14:04+00:00",
     "source_file": "docs/chapter-08-production/production-ai-practices.md",
     "language_code": "tl"
   },
@@ -222,8 +222,8 @@
     "language_code": "tl"
   },
   "examples/container-app/README.md": {
-    "original_hash": "9dc1ac76412535ec86744a0a480213dd",
-    "translation_date": "2026-03-19T11:33:20+00:00",
+    "original_hash": "d85519c1f0a653c1d0c25030dbbcf655",
+    "translation_date": "2026-03-31T17:34:16+00:00",
     "source_file": "examples/container-app/README.md",
     "language_code": "tl"
   },
@@ -240,8 +240,8 @@
     "language_code": "tl"
   },
   "examples/database-app/README.md": {
-    "original_hash": "1765a94ee8f44ef0bd4398775165bd97",
-    "translation_date": "2026-03-19T11:51:10+00:00",
+    "original_hash": "0166fcb5a833768e593fbfd62b2087bb",
+    "translation_date": "2026-03-31T17:41:15+00:00",
     "source_file": "examples/database-app/README.md",
     "language_code": "tl"
   },
@@ -264,8 +264,8 @@
     "language_code": "tl"
   },
   "resources/cheat-sheet.md": {
-    "original_hash": "0feee9125eb86de2465412b7ae1a399d",
-    "translation_date": "2026-03-19T10:55:03+00:00",
+    "original_hash": "1712ea9dc2e12e751ac09d08fbc876be",
+    "translation_date": "2026-03-31T17:14:19+00:00",
     "source_file": "resources/cheat-sheet.md",
     "language_code": "tl"
   },
@@ -288,14 +288,14 @@
     "language_code": "tl"
   },
   "workshop/README.md": {
-    "original_hash": "af2afcb3043ef4c80f6c3c9194fd404a",
-    "translation_date": "2026-02-11T13:21:06+00:00",
+    "original_hash": "f28c384d31ed0dc72b4500a31fdbcdbb",
+    "translation_date": "2026-03-31T17:03:55+00:00",
     "source_file": "workshop/README.md",
     "language_code": "tl"
   },
   "workshop/docs/index.md": {
-    "original_hash": "3822126e47bdcb9b07c3a2a7efe5e0b8",
-    "translation_date": "2026-02-11T13:41:14+00:00",
+    "original_hash": "911db39170b1e9ca55b9dccac5b28bf3",
+    "translation_date": "2026-03-31T17:16:10+00:00",
     "source_file": "workshop/docs/index.md",
     "language_code": "tl"
   },
@@ -306,20 +306,20 @@
     "language_code": "tl"
   },
   "workshop/docs/instructions/1-Select-AI-Template.md": {
-    "original_hash": "872de195552d12ee78c4c32c608c7cb2",
-    "translation_date": "2026-02-11T13:56:20+00:00",
+    "original_hash": "aae1218e5db7f2e2325b0e7cbbd6528f",
+    "translation_date": "2026-03-31T17:27:54+00:00",
     "source_file": "workshop/docs/instructions/1-Select-AI-Template.md",
     "language_code": "tl"
   },
   "workshop/docs/instructions/2-Validate-AI-Template.md": {
-    "original_hash": "0ee97b6f1a4b6fe4cbc92c282c46377c",
-    "translation_date": "2026-03-19T11:28:33+00:00",
+    "original_hash": "4df8313347638a2019a82e162f2e58f7",
+    "translation_date": "2026-03-31T17:25:37+00:00",
     "source_file": "workshop/docs/instructions/2-Validate-AI-Template.md",
     "language_code": "tl"
   },
   "workshop/docs/instructions/3-Deconstruct-AI-Template.md": {
-    "original_hash": "5e1ef450b099000f93f3ba2ffbc408ad",
-    "translation_date": "2026-03-19T11:25:10+00:00",
+    "original_hash": "b78906b5709fa191d9a5f16d93074ffd",
+    "translation_date": "2026-03-31T17:21:11+00:00",
     "source_file": "workshop/docs/instructions/3-Deconstruct-AI-Template.md",
     "language_code": "tl"
   },
@@ -330,8 +330,8 @@
     "language_code": "tl"
   },
   "workshop/docs/instructions/5-Customize-AI-Template.md": {
-    "original_hash": "e189b6b006a90eb5020134fdf58b03ac",
-    "translation_date": "2026-03-19T11:22:36+00:00",
+    "original_hash": "177f217e8256ecf24d79ca8e52309a45",
+    "translation_date": "2026-03-31T17:19:27+00:00",
     "source_file": "workshop/docs/instructions/5-Customize-AI-Template.md",
     "language_code": "tl"
   },

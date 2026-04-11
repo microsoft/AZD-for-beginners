@@ -80,7 +80,7 @@ azd config set defaults.location "eastus2"
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
 # View all global configuration
-azd config list
+azd config show
 
 # Remove a configuration
 azd config unset defaults.location
@@ -545,7 +545,7 @@ database:
 ### 3. Version Control Considerations
 ```bash
 # .gitignore
-.azure/*/config.json         # Environment configurations (contain resource IDs)
+.azure/*/config.json         # Environment configs (contain resource IDs)
 .azure/*/.env               # Environment variables (may contain secrets)
 .env                        # Local environment file
 ```
@@ -653,5 +653,5 @@ azd env get DB_PASSWORD  # Should show actual value
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

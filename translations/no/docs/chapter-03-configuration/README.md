@@ -1,17 +1,19 @@
 # Kapittel 3: Konfigurasjon og autentisering
 
-**📚 Kurs**: [AZD For Beginners](../../README.md) | **⏱️ Varighet**: 45-60 minutter | **⭐ Kompleksitet**: Middels
+**📚 Kurs**: [AZD for nybegynnere](../../README.md) | **⏱️ Varighet**: 45-60 minutter | **⭐ Vanskelighetsgrad**: Middels
 
 ---
 
 ## Oversikt
 
-Dette kapitlet dekker miljøkonfigurasjon, autentiseringsmønstre og sikkerhetsanbefalinger for Azure Developer CLI-distribusjoner.
+Dette kapittelet dekker miljøkonfigurasjon, autentiseringsmønstre og sikkerhetsanbefalinger for Azure Developer CLI-distribusjoner.
+
+> Validert mot `azd 1.23.12` i mars 2026.
 
 ## Læringsmål
 
-Ved å fullføre dette kapitlet vil du:
-- Beherske AZD-konfigurasjonshierarkiet
+Ved å fullføre dette kapittelet vil du:
+- Mestre AZD-konfigurasjonens hierarki
 - Administrere flere miljøer (dev, staging, prod)
 - Implementere sikker autentisering med administrerte identiteter
 - Konfigurere miljøspesifikke innstillinger
@@ -21,13 +23,13 @@ Ved å fullføre dette kapitlet vil du:
 ## 📚 Leksjoner
 
 | # | Leksjon | Beskrivelse | Tid |
-|---|--------|-------------|------|
+|---|---------|-------------|-----|
 | 1 | [Konfigurasjonsguide](configuration.md) | Miljøoppsett og administrasjon | 30 min |
-| 2 | [Autentisering og sikkerhet](authsecurity.md) | Administrert identitet og RBAC-mønstre | 30 min |
+| 2 | [Autentisering og sikkerhet](authsecurity.md) | Administrerte identiteter og RBAC-mønstre | 30 min |
 
 ---
 
-## 🚀 Rask start
+## 🚀 Kom raskt i gang
 
 ```bash
 # Opprett flere miljøer
@@ -35,10 +37,10 @@ azd env new dev
 azd env new staging
 azd env new prod
 
-# Bytt miljø
+# Bytt miljøer
 azd env select prod
 
-# Angi miljøvariabler
+# Sett miljøvariabler
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
@@ -52,25 +54,29 @@ azd env get-values
 
 AZD bruker innstillinger i denne rekkefølgen (senere overstyrer tidligere):
 
-1. **Standardverdier** (innebygd i maler)
+1. **Standardverdier** (bygget inn i maler)
 2. **azure.yaml** (prosjektkonfigurasjon)
 3. **Miljøvariabler** (`azd env set`)
 4. **Kommandolinjeflagg** (`--location eastus`)
 
 ---
 
-## 🔐 Beste sikkerhetspraksis
+## 🔐 Sikkerhetsanbefalinger
 
 ```bash
-# Bruk administrert identitet (anbefales)
+# Bruk administrert identitet (anbefalt)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Kontroller autentiseringsstatus
-azd auth whoami
+# Sjekk AZD-autentiseringsstatus
+azd auth status
+
+# Valgfritt: verifiser Azure CLI-kontekst hvis du planlegger å kjøre az-kommandoer
 az account show
 
 # Autentiser på nytt om nødvendig
 azd auth login
+
+# Valgfritt: oppdater Azure CLI-autentisering for az-kommandoer
 az login
 ```
 
@@ -78,10 +84,10 @@ az login
 
 ## 🔗 Navigasjon
 
-| Direction | Chapter |
-|-----------|---------|
-| **Previous** | [Kapittel 2: AI-utvikling](../chapter-02-ai-development/README.md) |
-| **Next** | [Kapittel 4: Infrastruktur](../chapter-04-infrastructure/README.md) |
+| Retning | Kapittel |
+|---------|----------|
+| **Forrige** | [Kapittel 2: AI-utvikling](../chapter-02-ai-development/README.md) |
+| **Neste** | [Kapittel 4: Infrastruktur](../chapter-04-infrastructure/README.md) |
 
 ---
 
@@ -94,5 +100,5 @@ az login
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på originalspråket bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det originale dokumentet på dets opprinnelige språk bør betraktes som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for misforståelser eller feiltolkninger som følge av bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

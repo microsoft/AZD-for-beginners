@@ -1,18 +1,20 @@
-# Capitolul 8: Modele de Producție și Enterprise
+# Capitolul 8: Modele pentru Producție și Întreprinderi
 
-**📚 Curs**: [AZD Pentru Începători](../../README.md) | **⏱️ Durată**: 2-3 ore | **⭐ Complexitate**: Avansat
+**📚 Curs**: [AZD For Beginners](../../README.md) | **⏱️ Durată**: 2-3 hours | **⭐ Complexitate**: Avansat
 
 ---
 
-## Prezentare Generală
+## Prezentare generală
 
-Acest capitol acoperă modele de implementare pregătite pentru mediul enterprise, întărirea securității, monitorizarea și optimizarea costurilor pentru sarcini de lucru AI în producție.
+Acest capitol acoperă modele de implementare pregătite pentru întreprinderi, consolidarea securității, monitorizarea și optimizarea costurilor pentru sarcini AI de producție.
 
-## Obiective de Învățare
+> Validat cu `azd 1.23.12` în martie 2026.
 
-Prin finalizarea acestui capitol, vei:
-- Implementa aplicații reziliente multi-regiune
-- Implementa modele de securitate enterprise
+## Obiective de învățare
+
+Prin finalizarea acestui capitol, veți:
+- Desfășura aplicații reziliente în mai multe regiuni
+- Implementa modele de securitate pentru întreprinderi
 - Configura monitorizare completă
 - Optimiza costurile la scară
 - Configura pipeline-uri CI/CD cu AZD
@@ -22,12 +24,12 @@ Prin finalizarea acestui capitol, vei:
 ## 📚 Lecții
 
 | # | Lecție | Descriere | Durată |
-|---|--------|-----------|--------|
-| 1 | [Practici AI de Producție](production-ai-practices.md) | Modele de implementare enterprise | 90 min |
+|---|--------|-------------|------|
+| 1 | [Practici AI pentru producție](production-ai-practices.md) | Modele de implementare pentru întreprinderi | 90 min |
 
 ---
 
-## 🚀 Lista de Verificare pentru Producție
+## 🚀 Lista de verificare pentru producție
 
 - [ ] Implementare multi-regiune pentru reziliență
 - [ ] Identitate gestionată pentru autentificare (fără chei)
@@ -39,25 +41,25 @@ Prin finalizarea acestui capitol, vei:
 
 ---
 
-## 🏗️ Modele de Arhitectură
+## 🏗️ Modele de arhitectură
 
-### Modelul 1: Microservicii AI
+### Model 1: Microservicii AI
 
 ```mermaid
 graph LR
-    Gateway[API Gateway] --> AI[Serviciu AI] --> Models[Modele Microsoft Foundry]
-    Gateway --> Auth[Serviciu Autentificare]
-    AI --> Data[Stocare Date]
+    Gateway[Poartă API] --> AI[Serviciu AI] --> Models[Modele Microsoft Foundry]
+    Gateway --> Auth[Serviciu de autentificare]
+    AI --> Data[Depozit de date]
 ```
-### Modelul 2: AI bazat pe Evenimente
+### Model 2: AI orientat pe evenimente
 
 ```mermaid
 graph LR
-    EventGrid[Grila de Evenimente] --> Functions[Funcții] --> Pipeline[Flux de AI]
+    EventGrid[Grilă de evenimente] --> Functions[Funcții] --> Pipeline[Flux AI]
 ```
 ---
 
-## 🔐 Cele Mai Bune Practici de Securitate
+## 🔐 Cele mai bune practici de securitate
 
 ```bicep
 // Use managed identity
@@ -76,17 +78,17 @@ properties: {
 
 ---
 
-## 💰 Optimizarea Costurilor
+## 💰 Optimizarea costurilor
 
 | Strategie | Economii |
-|-----------|----------|
+|----------|---------|
 | Scalare la zero (Container Apps) | 60-80% |
-| Folosirea nivelurilor de consum pentru dezvoltare | 50-70% |
+| Utilizați niveluri pe consum pentru dezvoltare | 50-70% |
 | Scalare programată | 30-50% |
 | Capacitate rezervată | 20-40% |
 
 ```bash
-# Setează alerte pentru buget
+# Setați alertele de buget
 az consumption budget create \
   --budget-name "AI-Budget" \
   --amount 500 \
@@ -96,14 +98,14 @@ az consumption budget create \
 
 ---
 
-## 📊 Configurarea Monitorizării
+## 📊 Configurare monitorizare
 
 ```bash
-# Flux de jurnale
+# Transmite jurnalele
 azd monitor --logs
 
 # Verifică Application Insights
-azd monitor
+azd monitor --overview
 
 # Vizualizează metrici
 az monitor metrics list --resource <resource-id>
@@ -114,22 +116,22 @@ az monitor metrics list --resource <resource-id>
 ## 🔗 Navigare
 
 | Direcție | Capitol |
-|----------|---------|
+|-----------|---------|
 | **Anterior** | [Capitolul 7: Depanare](../chapter-07-troubleshooting/README.md) |
-| **Curs Finalizat** | [Pagina Cursului](../../README.md) |
+| **Curs complet** | [Pagina cursului](../../README.md) |
 
 ---
 
-## 📖 Resurse Aferente
+## 📖 Resurse conexe
 
-- [Ghid Agenți AI](../chapter-02-ai-development/agents.md)
+- [Ghid agenților AI](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
-- [Soluții Multi-Agent](../chapter-05-multi-agent/README.md)
-- [Exemplu Microservicii](../../examples/microservices/README.md)
+- [Soluții multi-agent](../chapter-05-multi-agent/README.md)
+- [Exemplu de microservicii](../../examples/microservices/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Declinare a responsabilității**:  
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă trebuie considerat sursa autorizată. Pentru informații esențiale, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite rezultate din folosirea acestei traduceri.
+**Declinare de responsabilitate**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autorizată. Pentru informații critice, se recomandă traducerea profesională realizată de un traducător uman. Nu suntem răspunzători pentru niciun fel de neînțelegeri sau interpretări greșite care rezultă din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

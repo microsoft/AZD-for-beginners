@@ -1,30 +1,30 @@
-# 5. Tilpass en Mal
+# 5. Tilpass en mal
 
-!!! tip "ETTER DETTE MODULEN VIL DU KUNNE"
+!!! tip "PÅ SLUTTEN AV DETTE MODULEN VIL DU KUNNE"
 
-    - [ ] Utforsket standard AI-agentfunksjoner
+    - [ ] Utforsket standard AI-agentkapasiteter
     - [ ] Lagt til AI-søk med din egen indeks
-    - [ ] Aktivert og analysert sporingmetrics
+    - [ ] Aktivert og analysert sporing-metrikker
     - [ ] Utført en evalueringskjøring
     - [ ] Utført en red-teaming-skanning
-    - [ ] **Lab 5: Bygget en tilpasningsplan** 
+    - [ ] **Lab 5: Laget en tilpasningsplan**
 
 ---
 
-## 5.1 AI-agentfunksjoner
+## 5.1 AI-agentkapasiteter
 
 !!! success "Vi fullførte dette i Lab 01"
 
-- **Fil-søk**: OpenAIs innebygde filsøk for kunnskapsinnhenting
-- **Siteringer**: Automatisk kildehenvisning i svar
+- **Fil-søk**: OpenAIs innebygde fil-søk for kunnskapsinnhenting
+- **Siteringer**: Automatisk kildeangivelse i svar
 - **Tilpassbare instruksjoner**: Endre agentens oppførsel og personlighet
-- **Verktøyintegrasjon**: Utvidbart verktøysystem for egne funksjoner
+- **Verktøyintegrasjon**: Utvidbart verktøysystem for egne kapasiteter
 
 ---
 
 ## 5.2 Alternativer for kunnskapsinnhenting
 
-!!! task "For å fullføre dette må vi gjøre endringer og distribuere på nytt"    
+!!! task "For å fullføre dette må vi gjøre endringer og deployere på nytt"    
     
     ```bash title=""
     # Sett miljøvariabler
@@ -40,24 +40,24 @@
 
 ---
 
-**OpenAI Fil-søk (Standard):**
+**OpenAI File Search (standard):**
 
 - Innebygd i Foundry-agenter
-- Automatisk dokumentbehandling og indeksering
+- Automatisk dokumentprosessering og indeksering
 - Ingen ekstra konfigurasjon nødvendig
 
-**Azure AI Search (Valgfritt):**
+**Azure AI Search (valgfritt):**
 
 - Hybrid semantisk og vektorsøk
-- Egen indekshåndtering
+- Egendefinert indeksadministrasjon
 - Avanserte søkefunksjoner
 - Krever `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
-## 5.3 [Sporing og Overvåking](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [Sporing og overvåking](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "For å fullføre dette må vi gjøre endringer og distribuere på nytt"    
+!!! task "For å fullføre dette må vi gjøre endringer og deployere på nytt"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
@@ -67,8 +67,8 @@
 **Sporing:**
 
 - OpenTelemetry-integrasjon
-- Forespørsels-/responssporing
-- Ytelsesmetrikk
+- Sporing av forespørsler/svar
+- Ytelsesmetrikker
 - Tilgjengelig i Microsoft Foundry-portalen
 
 **Logging:**
@@ -79,85 +79,83 @@
 
 ---
 
-## 5.4 [Agent Evaluering](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
+## 5.4 [Agentevaluering](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
 **Lokal evaluering:**
 
-- Innebygde vurderingsverktøy for kvalitetsvurdering
-- Egendefinerte evalueringsskripter
+- Innebygde evaluatorer for kvalitetsvurdering
+- Egne evalueringsskript
 - Ytelsesmåling
 
 **Kontinuerlig overvåking:**
 
-- Automatisk evaluering av levende interaksjoner
-- Kvalitetsmetrikkeroppfølging
-- Oppdagelse av ytelsesregresjon
+- Automatisk evaluering av live-interaksjoner
+- Sporing av kvalitetsmetrikker
+- Oppdagelse av ytelsesregresjoner
 
 **CI/CD-integrasjon:**
 
 - GitHub Actions workflow
-- Automatisk testing og evaluering
-- Statistisk sammenligningstest
+- Automatisert testing og evaluering
+- Statistisk sammenligningstesting
 
 ---
 
-## 5.5 [AI Red Teaming Agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [AI Red Teaming-agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
 **AI Red Teaming:**
 
-- Automatisk sikkerhetsskanning
+- Automatisert sikkerhetsskanning
 - Risikoanalyse for AI-systemer
-- Sikkerhetsevaluering på flere områder
+- Sikkerhetsevaluering på tvers av flere kategorier
 
 **Autentisering:**
 
 - Administrert identitet for Azure-tjenester
-- Valgfri Azure App Service-autentisering
-- Basic auth fallback for utvikling
+- Valgfri autentisering via Azure App Service
+- Basic auth som fallback under utvikling
 
-
-
-!!! quote "ETTER DENNE LABBEN SKAL DU HA"
-    - [ ] Definert dine scenariokrav
+!!! quote "PÅ SLUTTEN AV DENNE LABBEN BØR DU HA"
+    - [ ] Definert dine scenario-krav
     - [ ] Tilpasset miljøvariabler (konfig)
     - [ ] Tilpasset agentinstruksjoner (oppgave)
-    - [ ] Distribuert den tilpassede malen (app)
-    - [ ] Fullført oppgaver etter distribusjon (manuelt)
-    - [ ] Kjørt en testevaluering
+    - [ ] Deployert den tilpassede malen (app)
+    - [ ] Fullført oppgaver etter deployering (manuell)
+    - [ ] Kjørt en test-evaluering
 
-Dette eksempelet viser hvordan man tilpasser malen for en bedriftsforhandlerbruk med to spesialiserte agenter og flere modellutrullinger.
+Dette eksemplet demonstrerer tilpasning av malen for en bedriftsløsning innen detaljhandel med to spesialiserte agenter og flere modell-distribusjoner.
 
 ---
 
-## 5.6 Tilpass den for deg!
+## 5.6 Tilpass det for deg!
 
-### 5.6.1. Scenariokrav
+### 5.6.1 Scenario-krav
 
-#### **Agentdistribusjoner:** 
+#### **Agentdistribusjoner:**
 
-   - Shopper Agent: Hjelper kunder med å finne og sammenligne produkter
-   - Loyalty Agent: Administrerer kundelojalitet og kampanjer
+   - Shopper Agent: Hjelper kunder å finne og sammenligne produkter
+   - Loyalty Agent: Håndterer kundelojalitet og kampanjer
 
 #### **Modelldistribusjoner:**
 
    - `gpt-4.1`: Primær chatmodell
    - `o3`: Resonneringsmodell for komplekse spørsmål
    - `gpt-4.1-nano`: Lettvektsmodell for enkle interaksjoner
-   - `text-embedding-3-large`: Høykvalitets embedding for søk
+   - `text-embedding-3-large`: Høy-kvalitets embeddings for søk
 
 #### **Funksjoner:**
 
    - Sporing og overvåking aktivert
    - AI Search for produktkatalog
-   - Evalueringsrammeverk for kvalitetssikring
+   - Evalueringsrammeverk for kvalitetskontroll
    - Red teaming for sikkerhetsvalidering
 
 ---
 
-### 5.6.2 Scenarioimplementering
+### 5.6.2 Scenario-implementering
 
 
-#### 5.6.2.1. Forhåndskonfigurasjon før distribusjon
+#### 5.6.2.1. Forhåndskonfigurasjon før deployering
 
 Lag et oppsettskript (`setup-retail.sh`)
 
@@ -181,7 +179,7 @@ azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Konfigurer innebygget modell for forbedret søk
+# Konfigurer innebyggingsmodell for forbedret søk
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
@@ -248,7 +246,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: Distribusjonsskript
+#### 5.6.2.3: Deployeringsskript
 
 Lag `deploy-retail.sh`:
 
@@ -270,7 +268,7 @@ if ! az account show &> /dev/null; then
     exit 1
 fi
 
-# Sett opp miljø
+# Konfigurer miljø
 echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
@@ -295,12 +293,12 @@ fi
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Ta vare på distribusjonsutdata
+# Fang distribusjonsutdata
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
-# Hent webapp-URLen
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# Hent URL for nettappen
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -321,7 +319,7 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Konfigurasjon etter distribusjon
+#### 5.6.2.4: Konfigurasjon etter deployering
 
 Lag `configure-retail-agents.sh`:
 
@@ -337,7 +335,7 @@ AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | t
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# Instruksjoner for manuell konfigurering
+# Instruksjoner for manuell konfigurasjon
 echo "
 🤖 Agent Configuration:
 
@@ -387,12 +385,12 @@ Lag `test-retail-deployment.sh`:
 
 echo "🧪 Testing retail deployment..."
 
-# Sjekk at miljøvariabler er satt
+# Verifiser at miljøvariabler er satt
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Test tilgjengelighet for nettapplikasjon
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# Test tilgjengeligheten til nettapplikasjonen
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -405,7 +403,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Kjør evaluering hvis konfigurert
+# Kjør evaluering dersom konfigurert
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -433,38 +431,38 @@ Next steps:
 
 Etter å ha fulgt denne implementeringsveiledningen vil du ha:
 
-1. **Distribuert infrastruktur:**
+1. **Deployert infrastruktur:**
 
-      - Microsoft Foundry-prosjekt med modellutrullinger
+      - Microsoft Foundry-prosjekt med modelldistribusjoner
       - Container Apps som hoster webapplikasjonen
       - AI Search-tjeneste for produktkatalog
       - Application Insights for overvåking
 
-2. **Første agent:**
+2. **Initial agent:**
 
       - Shopper Agent konfigurert med grunnleggende instruksjoner
       - Fil-søk aktivert
       - Sporing og overvåking konfigurert
 
-3. **Klar til tilpasning:**
+3. **Klar for tilpasning:**
 
       - Rammeverk for å legge til Loyalty Agent
-      - Tilpassede instruksjonsmaler
-      - Skripter for testing og validering
+      - Maler for tilpassede instruksjoner
+      - Tester- og valideringsskript
       - Oppsett for overvåking og evaluering
 
 4. **Klar for produksjon:**
 
       - Sikkerhetsskanning med red teaming
       - Ytelsesovervåking
-      - Kvalitetsevalueringsrammeverk
+      - Evalueringsrammeverk for kvalitet
       - Skalerbar arkitektur
 
-Dette eksempelet demonstrerer hvordan AZD-malen kan utvides og tilpasses for spesifikke bedriftsbrukstilfeller samtidig som beste praksis for sikkerhet, overvåking og skalerbarhet opprettholdes.
+Dette eksemplet viser hvordan AZD-malen kan utvides og tilpasses spesifikke bedrifts-scenarier samtidig som beste praksis for sikkerhet, overvåking og skalerbarhet opprettholdes.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:  
-Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi streber etter nøyaktighet, vær oppmerksom på at automatiserte oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på originalspråket skal anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
+Dette dokumentet er oversatt ved hjelp av AI-oversettelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selv om vi etterstreber nøyaktighet, vennligst vær oppmerksom på at automatiske oversettelser kan inneholde feil eller unøyaktigheter. Det opprinnelige dokumentet på dets opprinnelige språk bør anses som den autoritative kilden. For kritisk informasjon anbefales profesjonell menneskelig oversettelse. Vi er ikke ansvarlige for eventuelle misforståelser eller feiltolkninger som oppstår ved bruk av denne oversettelsen.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

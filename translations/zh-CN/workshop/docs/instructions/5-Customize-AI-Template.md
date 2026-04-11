@@ -2,23 +2,23 @@
 
 !!! tip "在本模块结束时您将能够"
 
-    - [ ] 探索默认的 AI 代理能力
-    - [ ] 使用您自己的索引添加 AI 搜索
-    - [ ] 激活并分析跟踪指标
+    - [ ] 探索默认 AI 代理功能
+    - [ ] 为 AI 搜索添加自定义索引
+    - [ ] 启用并分析跟踪指标
     - [ ] 执行评估运行
     - [ ] 执行红队扫描
-    - [ ] **实验 5：制定自定义计划** 
+    - [ ] **实验 5：构建自定义计划** 
 
 ---
 
 ## 5.1 AI 代理功能
 
-!!! success "我们在实验01中已完成此项"
+!!! success "我们在 Lab 01 中完成了此内容"
 
 - <strong>文件搜索</strong>：OpenAI 内置的文件搜索，用于知识检索
-- <strong>引文</strong>：响应中的自动来源归属
-- <strong>可自定义指令</strong>：修改代理行为和个性
-- <strong>工具集成</strong>：用于自定义功能的可扩展工具系统
+- <strong>引用</strong>：响应中的自动来源归属
+- <strong>可定制指令</strong>：修改代理行为和个性
+- <strong>工具集成</strong>：可扩展的工具系统以实现自定义功能
 
 ---
 
@@ -43,12 +43,12 @@
 **OpenAI File Search (Default):**
 
 - 内置于 Foundry Agents
-- 自动的文档处理和索引
+- 自动文档处理和索引
 - 无需额外配置
 
 **Azure AI Search (Optional):**
 
-- 语义与向量混合搜索
+- 混合语义与向量搜索
 - 自定义索引管理
 - 高级搜索功能
 - 需要 `USE_AZURE_AI_SEARCH_SERVICE=true`
@@ -71,10 +71,10 @@
 - 性能指标
 - 可在 Microsoft Foundry 门户中使用
 
-**日志：**
+**日志记录：**
 
 - Container Apps 中的应用日志
-- 带关联 ID 的结构化日志
+- 带有关联 ID 的结构化日志
 - 实时和历史日志查看
 
 ---
@@ -83,20 +83,20 @@
 
 **本地评估：**
 
-- 用于质量评估的内置评估器
+- 内置评估器用于质量评估
 - 自定义评估脚本
 - 性能基准测试
 
 **持续监控：**
 
-- 对实时交互的自动评估
+- 实时交互的自动评估
 - 质量指标跟踪
 - 性能回归检测
 
 **CI/CD 集成：**
 
 - GitHub Actions 工作流
-- 自动化测试和评估
+- 自动化测试与评估
 - 统计比较测试
 
 ---
@@ -111,13 +111,13 @@
 
 **身份验证：**
 
-- Azure 服务的托管身份
+- Azure 服务的托管标识
 - 可选的 Azure App Service 身份验证
 - 开发时的基本身份验证回退
 
 
 
-!!! quote "在本实验结束时您应已拥有"
+!!! quote "在本实验结束时您应该已经具备"
     - [ ] 定义您的场景需求
     - [ ] 自定义环境变量（配置）
     - [ ] 自定义代理指令（任务）
@@ -125,7 +125,7 @@
     - [ ] 完成部署后任务（手动）
     - [ ] 运行测试评估
 
-此示例演示了如何为企业零售用例自定义模板，包含两个专用代理和多个模型部署。
+此示例演示了如何为企业零售用例定制模板，包含两个专业化代理和多个模型部署。
 
 ---
 
@@ -135,7 +135,7 @@
 
 #### **代理部署：** 
 
-   - Shopper Agent：帮助客户查找和比较产品
+   - Shopper Agent：帮助客户查找并比较产品
    - Loyalty Agent：管理客户奖励和促销
 
 #### **模型部署：**
@@ -159,7 +159,7 @@
 
 #### 5.6.2.1. 部署前配置
 
-创建一个设置脚本（`setup-retail.sh`）
+创建一个设置脚本 (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -175,7 +175,7 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# 配置主要聊天模型（gpt-4.1 作为最接近 gpt-4.1 的可用模型）
+# 配置主聊天模型（gpt-4.1，作为最接近 gpt-4.1 的可用模型）
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
@@ -198,9 +198,9 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2：代理指令
+#### 5.6.2.2: 代理指令
 
-创建 `custom-agents/shopper-agent-instructions.md`:
+创建 `custom-agents/shopper-agent-instructions.md`：
 
 ```markdown
 # Shopper Agent Instructions
@@ -223,7 +223,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-创建 `custom-agents/loyalty-agent-instructions.md`:
+创建 `custom-agents/loyalty-agent-instructions.md`：
 
 ```markdown
 # Loyalty Agent Instructions
@@ -248,9 +248,9 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3：部署脚本
+#### 5.6.2.3: 部署脚本
 
-创建 `deploy-retail.sh`:
+创建 `deploy-retail.sh`：
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -300,7 +300,7 @@ echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
 # 获取 Web 应用的 URL
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -321,9 +321,9 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4：部署后配置
+#### 5.6.2.4: 部署后配置
 
-创建 `configure-retail-agents.sh`:
+创建 `configure-retail-agents.sh`：
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -378,9 +378,9 @@ echo "
 "
 ```
 
-### 5.6.3：测试和验证
+### 5.6.3：测试与验证
 
-创建 `test-retail-deployment.sh`:
+创建 `test-retail-deployment.sh`：
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -392,7 +392,7 @@ echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
 # 测试 Web 应用的可用性
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -431,40 +431,40 @@ Next steps:
 
 ### 5.6.4 预期结果
 
-按照此实施指南，您将获得：
+按照本实施指南操作后，您将获得：
 
 1. **已部署的基础设施：**
 
-      - Microsoft Foundry 项目，具有模型部署
+      - 带有模型部署的 Microsoft Foundry 项目
       - 托管 Web 应用的 Container Apps
       - 用于产品目录的 AI Search 服务
       - 用于监控的 Application Insights
 
 2. **初始代理：**
 
-      - Shopper Agent 配置了基本指令
-      - 启用文件搜索功能
+      - 配置了基础指令的 Shopper Agent
+      - 启用了文件搜索功能
       - 配置了跟踪与监控
 
-3. **准备进行自定义：**
+3. **准备定制：**
 
-      - 可添加 Loyalty Agent 的框架
+      - 用于添加 Loyalty Agent 的框架
       - 自定义指令模板
-      - 测试和验证脚本
-      - 监控和评估设置
+      - 测试与验证脚本
+      - 监控与评估设置
 
 4. **生产就绪：**
 
-      - 通过红队进行安全扫描
+      - 使用红队的安全扫描
       - 性能监控
       - 质量评估框架
-      - 可扩展的架构
+      - 可扩展架构
 
-此示例演示了如何在保持安全、监控和可扩展性最佳实践的同时，扩展和自定义 AZD 模板以适应特定的企业场景。
+此示例演示了如何在保持安全、监控和可扩展性最佳实践的同时，扩展并定制 AZD 模板以适应特定的企业场景。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免责声明**:  
-本文件已使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们力求准确，但请注意，自动翻译可能包含错误或不准确之处。应以原始文档的母语版本为权威来源。对于重要信息，建议采用专业人工翻译。我们不对因使用本翻译而导致的任何误解或曲解承担责任。
+**免责声明**:
+本文档已使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻译。虽然我们努力确保准确性，但请注意自动翻译可能包含错误或不准确之处。原始文档的母语版本应被视为权威来源。对于重要信息，建议使用专业人工翻译。我们不对因使用本翻译而产生的任何误解或错误解释承担责任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

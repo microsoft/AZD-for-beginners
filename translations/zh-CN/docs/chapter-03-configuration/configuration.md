@@ -1,24 +1,24 @@
 # 配置指南
 
-**章节导航:**
-- **📚 课程主页**: [AZD 初学者](../../README.md)
+**章节导航：**
+- **📚 课程主页**: [AZD 初学者指南](../../README.md)
 - **📖 当前章节**: 第3章 - 配置与身份验证
-- **⬅️ 上一个**: [你的第一个项目](first-project.md)
-- **➡️ 下一个**: [部署指南](../chapter-04-infrastructure/deployment-guide.md)
+- **⬅️ 上一章**: [你的第一个项目](first-project.md)
+- **➡️ 下一章**: [部署指南](../chapter-04-infrastructure/deployment-guide.md)
 - **🚀 下一章**: [第4章：基础设施即代码](../chapter-04-infrastructure/deployment-guide.md)
 
-## 简介
+## 介绍
 
-本综合指南涵盖了配置 Azure Developer CLI 以实现最佳开发和部署工作流的各个方面。您将了解配置层级、环境管理、身份验证方法以及支持高效且安全的 Azure 部署的高级配置模式。
+本全面指南涵盖配置 Azure 开发者 CLI（Azure Developer CLI）以实现最佳开发和部署工作流的各个方面。您将了解配置层级、环境管理、身份验证方法以及能够实现高效且安全的 Azure 部署的高级配置模式。
 
 ## 学习目标
 
-完成本课后，您将能够：
-- 掌握 azd 的配置层级并理解设置的优先级
-- 有效配置全局和项目特定的设置
+在本课结束时，您将能够：
+- 掌握 azd 配置层级并了解设置的优先级
+- 有效配置全局和项目特定设置
 - 管理具有不同配置的多个环境
 - 实现安全的身份验证和授权模式
-- 了解复杂场景的高级配置模式
+- 理解用于复杂场景的高级配置模式
 
 ## 学习成果
 
@@ -29,42 +29,42 @@
 - 排查与配置相关的问题
 - 根据特定组织需求自定义 azd 行为
 
-本综合指南涵盖了配置 Azure Developer CLI 以实现最佳开发和部署工作流的各个方面。
+本全面指南涵盖配置 Azure 开发者 CLI（Azure Developer CLI）以实现最佳开发和部署工作流的各个方面。
 
-## 了解 azd 项目中的 AI 代理
+## 在 azd 项目中理解 AI 代理
 
-如果您对 AI 代理不熟悉，以下是一个在 azd 世界中理解它们的简单方式。
+如果你对 AI 代理不熟悉，下面是一个简单的理解方式。
 
-### 代理是什么？
+### 什么是代理？
 
-代理是一段可以接收请求、进行推理并采取行动的软件——通常通过调用 AI 模型、检索数据或调用其他服务来实现。在 azd 项目中，代理只是与您的 Web 前端或 API 后端并列的另一个 <strong>服务</strong>。
+代理是一段可以接收请求、进行推理并采取行动的软件——通常通过调用 AI 模型、查找数据或调用其他服务。在 azd 项目中，代理只是与你的 Web 前端或 API 后端并列的另一个服务。
 
 ### 代理如何融入 azd 项目结构
 
-azd 项目由三层组成：**infrastructure**、**code** 和 **configuration**。代理以与其他服务相同的方式接入这些层：
+一个 azd 项目由三层组成：<strong>基础设施</strong>、<strong>代码</strong> 和 <strong>配置</strong>。代理以与其他服务相同的方式插入这些层：
 
-| 层 | 对传统应用的作用 | 对代理的作用 |
+| 层级 | 它为传统应用做什么 | 它为代理做什么 |
 |-------|-------------------------------------|---------------------------|
-| **Infrastructure** (`infra/`) | 提供 Web 应用和数据库 | 提供 AI 模型端点、搜索索引或代理主机 |
-| **Code** (`src/`) | 包含您的前端和 API 源代码 | 包含您的代理逻辑和提示定义 |
-| **Configuration** (`azure.yaml`) | 列出您的服务及其托管目标 | 将代理列为服务，指向其代码和主机 |
+| <strong>基础设施</strong> (`infra/`) | 为 Web 应用和数据库提供资源 | 为 AI 模型端点、搜索索引或代理主机提供资源 |
+| <strong>代码</strong> (`src/`) | 包含你的前端和 API 源代码 | 包含你的代理逻辑和提示定义 |
+| <strong>配置</strong> (`azure.yaml`) | 列出你的服务及其托管目标 | 将你的代理列为服务，指向其代码和主机 |
 
 ### `azure.yaml` 的作用
 
-您现在不需要记住语法。从概念上讲，`azure.yaml` 是告诉 azd 的文件：*“这是构成我应用的服务，以及在哪里可以找到它们的代码。”*
+你现在不需要记住语法。从概念上讲，`azure.yaml` 是你告诉 azd 的文件：“这是构成我应用的服务，以及在哪里可以找到它们的代码。”
 
-当您的项目包含 AI 代理时，`azure.yaml` 只需将该代理列为服务之一。azd 随后就知道要配置正确的基础设施（例如 Microsoft Foundry Models 端点或用于托管代理的 Container App）并部署您的代理代码——就像它对 Web 应用或 API 所做的那样。
+当你的项目包含 AI 代理时，`azure.yaml` 只需将该代理列为其中一个服务。azd 随后就知道要提供正确的基础设施（例如 Microsoft Foundry Models 端点或用于托管代理的 Container App）并部署你的代理代码——就像为 Web 应用或 API 部署一样。
 
-这意味着没有本质上的新内容要学习。如果您了解 azd 如何管理 Web 服务，那么您已经了解它如何管理代理。
+这意味着没有根本上需要学习的新东西。如果你理解 azd 如何管理 Web 服务，你已经理解它如何管理代理。
 
 ## 配置层级
 
 azd 使用分层配置系统：
-1. <strong>命令行标志</strong>（最高优先级）
+1. <strong>命令行标志</strong>（优先级最高）
 2. <strong>环境变量</strong>
 3. <strong>本地项目配置</strong> (`.azd/config.json`)
 4. <strong>全局用户配置</strong> (`~/.azd/config.json`)
-5. <strong>默认值</strong>（最低优先级）
+5. <strong>默认值</strong>（优先级最低）
 
 ## 全局配置
 
@@ -80,7 +80,7 @@ azd config set defaults.location "eastus2"
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
 # 查看所有全局配置
-azd config list
+azd config show
 
 # 删除配置
 azd config unset defaults.location
@@ -89,13 +89,13 @@ azd config unset defaults.location
 ### 常见的全局设置
 ```bash
 # 开发偏好
-azd config set alpha.enable true                    # 启用 alpha 功能
+azd config set alpha.enable true                    # 启用 Alpha 功能
 azd config set telemetry.enabled false             # 禁用遥测
 azd config set output.format json                  # 设置输出格式
 
 # 安全设置
 azd config set auth.useAzureCliCredential true     # 使用 Azure CLI 进行身份验证
-azd config set tls.insecure false                  # 强制 TLS 验证
+azd config set tls.insecure false                  # 强制执行 TLS 验证
 
 # 性能调优
 azd config set provision.parallelism 5             # 并行创建资源
@@ -104,8 +104,8 @@ azd config set deploy.timeout 30m                  # 部署超时
 
 ## 🏗️ 项目配置
 
-### `azure.yaml` 结构
-`azure.yaml` 文件是您 azd 项目的核心：
+### azure.yaml 结构
+`azure.yaml` 文件是你的 azd 项目的核心：
 
 ```yaml
 # Minimum configuration
@@ -202,7 +202,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### 特定语言的设置
+#### 语言特定设置
 ```yaml
 services:
   node-app:
@@ -230,7 +230,7 @@ services:
 
 ### 创建环境
 ```bash
-# 创建一个新环境
+# 创建新环境
 azd env new development
 
 # 在特定位置创建
@@ -241,7 +241,7 @@ azd env new production --subscription "prod-sub-id" --location "eastus"
 ```
 
 ### 环境配置
-每个环境在 `.azure/<env-name>/config.json` 中有自己的配置：
+每个环境都有自己的配置，位于 `.azure/<env-name>/config.json`：
 
 ```json
 {
@@ -283,7 +283,7 @@ azd env unset DEBUG
 
 # 验证已删除
 azd env get-values | grep DEBUG
-# (应不返回任何内容)
+# (应该不返回任何内容)
 ```
 
 ### 环境模板
@@ -293,7 +293,7 @@ azd env get-values | grep DEBUG
 AZURE_SUBSCRIPTION_ID=
 AZURE_LOCATION=
 
-# 应用设置
+# 应用程序设置
 DATABASE_NAME=
 API_BASE_URL=
 STORAGE_ACCOUNT_NAME=
@@ -310,28 +310,28 @@ LOG_LEVEL=info
 # 使用 Azure CLI 凭据（默认）
 azd config set auth.useAzureCliCredential true
 
-# 使用特定租户登录
+# 使用指定租户登录
 az login --tenant <tenant-id>
 
 # 设置默认订阅
 az account set --subscription <subscription-id>
 ```
 
-### 服务主体身份验证
-适用于 CI/CD 管道：
+### 服务主体认证
+用于 CI/CD 管道：
 ```bash
 # 设置环境变量
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 export AZURE_TENANT_ID="your-tenant-id"
 
-# 或直接配置
+# 或者直接配置
 azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
 ### 托管身份
-适用于 Azure 托管的环境：
+针对 Azure 托管的环境：
 ```bash
 # 启用托管标识身份验证
 azd config set auth.useMsi true
@@ -364,7 +364,7 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 ```
 
 ### Terraform 配置
-对于 Terraform 项目，在 `infra/terraform.tfvars` 中配置：
+对于 Terraform 项目，在 `infra/terraform.tfvars` 中进行配置：
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -457,7 +457,7 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### 暂存环境
+### 预发布环境
 ```bash
 # .azure/staging/.env
 DEBUG=false
@@ -498,7 +498,7 @@ azd provision --dry-run
 
 echo "Validating configuration..."
 
-# 检查必需的环境变量
+# 检查所需的环境变量
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
@@ -545,13 +545,13 @@ database:
 ### 3. 版本控制注意事项
 ```bash
 # .gitignore
-.azure/*/config.json         # 环境配置 (包含资源 ID)
-.azure/*/.env               # 环境变量 (可能包含机密)
+.azure/*/config.json         # 环境配置（包含资源 ID）
+.azure/*/.env               # 环境变量（可能包含敏感信息）
 .env                        # 本地环境文件
 ```
 
 ### 4. 配置文档
-在 `CONFIG.md` 中记录您的配置：
+在 `CONFIG.md` 中记录你的配置：
 ```markdown
 # Configuration Guide
 
@@ -600,12 +600,12 @@ azd env select production && azd env get-values
 **成功标准：**
 - [ ] 成功创建三个环境
 - [ ] 每个环境具有独特的配置
-- [ ] 能够无错误地在环境之间切换
+- [ ] 能够在环境之间切换且无错误
 - [ ] `azd env list` 显示所有三个环境
 
-### 练习 2：密钥管理（10 分钟）
+### 练习 2：机密管理（10 分钟）
 
-<strong>目标</strong>：练习带有敏感数据的安全配置
+<strong>目标</strong>：练习使用敏感数据的安全配置
 
 ```bash
 # 设置机密（不会在输出中显示）
@@ -616,7 +616,7 @@ azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# 查看环境（机密应被掩盖）
+# 查看环境（机密应被屏蔽）
 azd env get-values
 
 # 验证机密已存储
@@ -624,15 +624,15 @@ azd env get DB_PASSWORD  # 应显示实际值
 ```
 
 **成功标准：**
-- [ ] 在存储秘密时不在终端显示
-- [ ] `azd env get-values` 显示已遮蔽的秘密
-- [ ] 单个 `azd env get <SECRET_NAME>` 检索实际值
+- [ ] 机密已存储且不会在终端中显示
+- [ ] `azd env get-values` 显示已脱敏的机密
+- [ ] 单个 `azd env get <SECRET_NAME>` 可检索实际值
 
 ## 下一步
 
 - [你的第一个项目](first-project.md) - 在实践中应用配置
-- [部署指南](../chapter-04-infrastructure/deployment-guide.md) - 使用配置进行部署
-- [资源预配](../chapter-04-infrastructure/provisioning.md) - 生产就绪的配置
+- [部署指南](../chapter-04-infrastructure/deployment-guide.md) - 在部署中使用配置
+- [资源配置](../chapter-04-infrastructure/provisioning.md) - 生产就绪的配置
 
 ## 参考资料
 
@@ -642,16 +642,16 @@ azd env get DB_PASSWORD  # 应显示实际值
 
 ---
 
-**章节导航:**
-- **📚 课程主页**: [AZD 初学者](../../README.md)
+**章节导航：**
+- **📚 课程主页**: [AZD 初学者指南](../../README.md)
 - **📖 当前章节**: 第3章 - 配置与身份验证
-- **⬅️ 上一个**: [你的第一个项目](first-project.md)
+- **⬅️ 上一章**: [你的第一个项目](first-project.md)
 - **➡️ 下一章**: [第4章：基础设施即代码](../chapter-04-infrastructure/deployment-guide.md)
 - <strong>下一课</strong>: [你的第一个项目](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**免责声明**:
-本文件已使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 进行翻译。尽管我们致力于准确性，但请注意自动翻译可能包含错误或不准确之处。原始语言的原文应被视为权威来源。对于重要信息，建议使用专业人工翻译。因使用本翻译而产生的任何误解或误读，我们概不负责。
+**Disclaimer**:
+本文件使用 AI 翻译服务 [Co-op Translator](https://github.com/Azure/co-op-translator) 翻译。尽管我们力求准确，但请注意自动翻译可能包含错误或不准确之处。应将原始语言的原文视为权威来源。对于关键信息，建议使用专业人工翻译。对于因使用本翻译而产生的任何误解或曲解，我们不承担任何责任。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,79 +1,81 @@
-# AZD for AI Developers Workshop
+# AZD pre AI vývojárov Workshop
+
+> Overené na `azd 1.23.12` v marci 2026.
 
 > [!IMPORTANT]  
-> **Tento workshop obsahuje sprievodcu workshopom, ktorého ukážku si môžete pozrieť vo vašom lokálnom prehliadači. Na začatie musíte spustiť GitHub Codespaces na repozitári—potom počkajte, kým neuvidíte aktívny terminál VS Code a napíšte:**  
+> **Tento workshop je vybavený sprievodcom workshopom, ktorého náhľad si môžete zobraziť vo svojom lokálnom prehliadači. Ak chcete začať, otvorte repozitár v GitHub Codespaces, vývojovom kontajneri alebo lokálnej kópii s nainštalovaným MkDocs—potom počkajte, kým sa zobrazí aktívny terminál VS Code a zadajte:**  
 > `mkdocs serve > /dev/null 2>&1 &`  
-> **Mali by ste vidieť vyskakovacie dialógové okno na otvorenie náhľadovej stránky v prehliadači.**
+> **Mali by ste vidieť vyskakovacie okno na otvorenie stránky s náhľadom v prehliadači.**
 
-Vitajte v praktickom workshope na učenie sa Azure Developer CLI (AZD) so zameraním na nasadzovanie AI aplikácií. Tento workshop vám pomôže získať praktické pochopenie AZD šablón v 3 krokoch:
+Vitajte v praktickom workshope na učenie Azure Developer CLI (AZD) so zameraním na nasadenie AI aplikácií. Tento workshop vám pomôže získať praktické pochopenie AZD šablón v 3 krokoch:
 
-1. **Discovery** - find the template that is right for you.
-1. **Deployment** - deploy and validate that it works
-1. **Customization** - modify and iterate to make it yours!
+1. **Objavovanie** - nájdite šablónu, ktorá vám vyhovuje.
+1. **Nasadenie** - nasadte a overte, že funguje
+1. **Prispôsobenie** - upravte a iterujte, aby bola vaša!
 
-Počas tohto workshopu sa tiež oboznámite so základnými nástrojmi a pracovnými postupmi pre vývojárov, aby ste si zjednodušili svoju end-to-end vývojovú cestu.
+Počas trvania workshopu budete tiež oboznámení s kľúčovými nástrojmi a pracovnými tokmi pre vývojárov, aby ste zefektívnili svoju end-to-end vývojovú cestu.
 
 | | | 
 |:---|:---|
-| **📚 Course Home**| [AZD For Beginners](../README.md)|
-| **📖 Documentation** | [Get started with AI templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
-| **🛠️AI Templates** | [Microsoft Foundry Templates](https://ai.azure.com/templates) |
-|**🚀 Next Steps** | [Take The Challenge](../../../../workshop/docs) |
+| **📚 Domov kurzu**| [AZD pre začiatočníkov](../README.md)|
+| **📖 Dokumentácia** | [Začíname so šablónami AI](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started)|
+| **🛠️ AI šablóny** | [Microsoft Foundry Šablóny](https://ai.azure.com/templates) |
+|**🚀 Ďalšie kroky** | [Prijmite výzvu](#workshop-challenge) |
 | | |
 
-## Workshop Overview
+## Prehľad Workshopu
 
-**Duration:** 3-4 hours  
-**Level:** Beginner to Intermediate  
-**Prerequisites:** Familiarity with Azure, AI concepts, VS Code & command-line tools.
+**Trvanie:** 3-4 hodiny  
+**Úroveň:** Začiatočník až mierne pokročilý  
+**Predpoklady:** Znalosť Azure, AI konceptov, VS Code a nástrojov príkazového riadku.
 
-Toto je praktický workshop, kde sa učíte praxou. Po dokončení cvičení odporúčame prejsť kurz AZD For Beginners, aby ste pokračovali vo svojom učení v oblasti bezpečnosti a produktivity a osvojili si osvedčené postupy.
+Toto je praktický workshop, kde sa učíte priamo praxou. Po dokončení cvičení odporúčame preskúmať kurz AZD pre začiatočníkov, aby ste pokračovali vo vzdelávacej ceste zameranej na bezpečnosť a najlepšie postupy produktivity.
 
-| Time| Module  | Objective |
+| Čas| Modul  | Cieľ |
 |:---|:---|:---|
-| 15 mins | Introduction | Set the stage, understand the goals |
-| 30 mins | Select AI Template | Explore options and pick starter | 
-| 30 mins | Validate AI Template | Deploy default solution to Azure |
-| 30 mins | Deconstruct AI Template | Explore structure and configuration |
-| 30 mins | Configure AI Template | Activate and try available features |
-| 30 mins | Customize AI Template | Adapt the template to your needs |
-| 30 mins | Teardown Infrastructure | Cleanup and release resources |
-| 15 mins | Wrap-Up & Next Steps | Learning resources, Workshop challenge |
+| 15 min | Úvod | Nastaviť základy, pochopiť ciele |
+| 30 min | Výber AI šablóny | Preskúmať možnosti a vybrať začiatok | 
+| 30 min | Overenie AI šablóny | Nasadiť predvolenú riešenie do Azure |
+| 30 min | Rozobratie AI šablóny | Preskúmať štruktúru a konfiguráciu |
+| 30 min | Konfigurácia AI šablóny | Aktivovať a vyskúšať dostupné funkcie |
+| 30 min | Prispôsobenie AI šablóny | Prispôsobiť šablónu podľa vlastných potrieb |
+| 30 min | Likvidácia infraštruktúry | Upratanie a uvoľnenie zdrojov |
+| 15 min | Zhrnutie & ďalšie kroky | Vzdelávacie zdroje, Výzva workshopu |
 | | |
 
-## What You'll Learn
+## Čo sa naučíte
 
-Think of the AZD Template as a learning sandbox to explore various capabilities and tools for end-to-end development on Microsoft Foundry. By the end of this workshop, you should have an intuitive sense for various tools and concepts in this context.
+Myslite na AZD šablónu ako na učebný pieskoviskový priestor na preskúmanie rôznych schopností a nástrojov pre end-to-end vývoj na Microsoft Foundry. Po skončení tohto workshopu by ste mali intuitívne rozumieť rôznym nástrojom a konceptom v tomto kontexte.
 
-| Concept  | Objective |
+| Koncept  | Cieľ |
 |:---|:---|
-| **Azure Developer CLI** | Understand tool commands and workflows|
-| **AZD Templates**| Understand project structure and config|
-| **Azure AI Agent**| Provision & deploy Microsoft Foundry project  |
-| **Azure AI Search**| Enable context engineering with agents |
-| **Observability**| Explore tracing, monitoring and evaluations |
-| **Red Teaming**| Explore adversarial testing and mitigations |
+| **Azure Developer CLI** | Pochopiť príkazy nástroja a pracovné toky|
+| **AZD šablóny**| Pochopiť štruktúru projektu a konfiguráciu|
+| **Azure AI agent**| Poskytnúť & nasadiť projekt Microsoft Foundry  |
+| **Azure AI Search**| Umožniť inžinierstvo kontextu s agentmi |
+| **Pozorovateľnosť**| Preskúmať trasovanie, monitorovanie a hodnotenia |
+| **Red Teaming**| Preskúmať adversariálne testovanie a mitigácie |
 | | |
 
-## Workshop Modules
+## Moduly Workshopu
 
-Ready to get started? Navigate through the workshop modules:
+Pripravení začať? Prechádzajte modulmi workshopu:
 
 - [Modul 1: Výber AI šablóny](instructions/1-Select-AI-Template.md)
-- [Modul 2: Validácia AI šablóny](instructions/2-Validate-AI-Template.md) 
-- [Modul 3: Dekonštrukcia AI šablóny](instructions/3-Deconstruct-AI-Template.md)
+- [Modul 2: Overenie AI šablóny](instructions/2-Validate-AI-Template.md) 
+- [Modul 3: Rozobratie AI šablóny](instructions/3-Deconstruct-AI-Template.md)
 - [Modul 4: Konfigurácia AI šablóny](instructions/4-Configure-AI-Template.md)
 - [Modul 5: Prispôsobenie AI šablóny](instructions/5-Customize-AI-Template.md)
-- [Modul 6: Uvoľnenie infraštruktúry](instructions/6-Teardown-Infrastructure.md)
-- [Modul 7: Zhrnutie a ďalšie kroky](instructions/7-Wrap-up.md)
+- [Modul 6: Likvidácia infraštruktúry](instructions/6-Teardown-Infrastructure.md)
+- [Modul 7: Zhrnutie & ďalšie kroky](instructions/7-Wrap-up.md)
 
-## Have feedback?
+## Máte spätnú väzbu?
 
-Post an issue on this repo (tag it `Workshop`) or join us on [Discord](https://aka.ms/foundry/discord) and post to our `#get-help` channel
+Vložte issue do tohto repozitára (označte ju `Workshop`) alebo sa pridajte k nám na [Discord](https://aka.ms/foundry/discord) a prispievajte do kanála `#get-help`
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vylúčenie zodpovednosti**:
-Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa usilujeme o presnosť, berte prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Pôvodný dokument v jeho pôvodnom jazyku by mal byť považovaný za rozhodujúci zdroj. Pre kritické informácie odporúčame profesionálny ľudský preklad. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne výklady vyplývajúce z použitia tohto prekladu.
+**Zrieknutie sa zodpovednosti**:  
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, majte prosím na pamäti, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Originálny dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre dôležité informácie je odporúčaný profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,21 +1,23 @@
-# Rozdział 8: Wzorce Produkcyjne i Korporacyjne
+# Rozdział 8: Wzorce produkcyjne i korporacyjne
 
-**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 2-3 godziny | **⭐ Stopień trudności**: Zaawansowany
+**📚 Kurs**: [AZD dla początkujących](../../README.md) | **⏱️ Czas trwania**: 2-3 godziny | **⭐ Poziom trudności**: Zaawansowany
 
 ---
 
 ## Przegląd
 
-Ten rozdział obejmuje wzorce wdrożeń gotowych do zastosowań korporacyjnych, zabezpieczenia, monitorowanie i optymalizację kosztów dla produkcyjnych obciążeń AI.
+Ten rozdział omawia wzorce wdrożeń gotowych do zastosowań korporacyjnych, zabezpieczanie, monitorowanie oraz optymalizację kosztów dla produkcyjnych obciążeń AI.
+
+> Zweryfikowano za pomocą `azd 1.23.12` w marcu 2026.
 
 ## Cele nauki
 
 Po ukończeniu tego rozdziału będziesz potrafił:
-- Wdrażać aplikacje odporne wieloregionowo
-- Implementować korporacyjne wzorce bezpieczeństwa
-- Konfigurować kompleksowe monitorowanie
+- Wdrażać odporne aplikacje wieloregionowe
+- Implementować wzorce zabezpieczeń korporacyjnych
+- Konfigurować wszechstronne monitorowanie
 - Optymalizować koszty na dużą skalę
-- Ustawiać rurociągi CI/CD z AZD
+- Ustawiać potoki CI/CD za pomocą AZD
 
 ---
 
@@ -23,23 +25,23 @@ Po ukończeniu tego rozdziału będziesz potrafił:
 
 | # | Lekcja | Opis | Czas |
 |---|--------|-------------|------|
-| 1 | [Praktyki produkcji AI](production-ai-practices.md) | Wzorce wdrożeń korporacyjnych | 90 min |
+| 1 | [Praktyki produkcyjne AI](production-ai-practices.md) | Wzorce wdrożeń korporacyjnych | 90 min |
 
 ---
 
 ## 🚀 Lista kontrolna produkcji
 
 - [ ] Wdrożenie wieloregionowe dla odporności
-- [ ] Zarządzana tożsamość dla uwierzytelniania (bez kluczy)
+- [ ] Zarządzana tożsamość do uwierzytelniania (bez kluczy)
 - [ ] Application Insights do monitorowania
-- [ ] Skonfigurowane budżety kosztów i alerty
+- [ ] Skonfigurowane budżety i alerty kosztów
 - [ ] Włączone skanowanie bezpieczeństwa
-- [ ] Integracja z rurociągiem CI/CD
+- [ ] Integracja potoku CI/CD
 - [ ] Plan odzyskiwania po awarii
 
 ---
 
-## 🏗️ Wzorce architektury
+## 🏗️ Wzorce architektoniczne
 
 ### Wzorzec 1: Microservices AI
 
@@ -49,11 +51,11 @@ graph LR
     Gateway --> Auth[Usługa Uwierzytelniania]
     AI --> Data[Magazyn Danych]
 ```
-### Wzorzec 2: AI sterowane zdarzeniami
+### Wzorzec 2: AI zdarzeniowy
 
 ```mermaid
 graph LR
-    EventGrid[Siatka zdarzeń] --> Functions[Funkcje] --> Pipeline[Potok AI]
+    EventGrid[Event Grid] --> Functions[Funkcje] --> Pipeline[Potok AI]
 ```
 ---
 
@@ -81,8 +83,8 @@ properties: {
 | Strategia | Oszczędności |
 |----------|--------------|
 | Skalowanie do zera (Container Apps) | 60-80% |
-| Używanie planów konsumpcyjnych na dewelopment | 50-70% |
-| Planowane skalowanie | 30-50% |
+| Użycie warstw konsumpcyjnych w dev | 50-70% |
+| Skalowanie zaplanowane | 30-50% |
 | Zarezerwowana pojemność | 20-40% |
 
 ```bash
@@ -103,7 +105,7 @@ az consumption budget create \
 azd monitor --logs
 
 # Sprawdź Application Insights
-azd monitor
+azd monitor --overview
 
 # Zobacz metryki
 az monitor metrics list --resource <resource-id>
@@ -122,7 +124,7 @@ az monitor metrics list --resource <resource-id>
 
 ## 📖 Powiązane zasoby
 
-- [Przewodnik po agentach AI](../chapter-02-ai-development/agents.md)
+- [Przewodnik agentów AI](../chapter-02-ai-development/agents.md)
 - [Application Insights](../chapter-06-pre-deployment/application-insights.md)
 - [Rozwiązania wieloagentowe](../chapter-05-multi-agent/README.md)
 - [Przykład mikroserwisów](../../examples/microservices/README.md)
@@ -130,6 +132,6 @@ az monitor metrics list --resource <resource-id>
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Zastrzeżenie**:
-Dokument ten został przetłumaczony przy użyciu automatycznej usługi tłumaczeniowej [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dążymy do dokładności, prosimy mieć na uwadze, że tłumaczenia automatyczne mogą zawierać błędy lub niedokładności. Oryginalny dokument w języku źródłowym powinien być uważany za autorytatywne źródło. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonanego przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
+**Zastrzeżenie**:  
+Dokument ten został przetłumaczony przy użyciu usługi tłumaczenia AI [Co-op Translator](https://github.com/Azure/co-op-translator). Chociaż dążymy do jak największej dokładności, prosimy mieć na uwadze, że automatyczne tłumaczenia mogą zawierać błędy lub nieścisłości. Oryginalny dokument w języku źródłowym powinien być uważany za źródło autorytatywne. W przypadku informacji krytycznych zalecane jest skorzystanie z profesjonalnego tłumaczenia wykonane przez człowieka. Nie ponosimy odpowiedzialności za jakiekolwiek nieporozumienia lub błędne interpretacje wynikające z korzystania z tego tłumaczenia.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

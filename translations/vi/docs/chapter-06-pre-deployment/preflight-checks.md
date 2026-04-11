@@ -1,71 +1,71 @@
-# Kiểm tra trước khi triển khai AZD
+# Kiểm tra trước khi triển khai cho AZD
 
-**Điều hướng chương:**
-- **📚 Trang khóa học**: [AZD Dành cho Người Mới](../../README.md)
-- **📖 Chương hiện tại**: Chương 6 - Xác thực và Lập kế hoạch trước khi triển khai
-- **⬅️ Trước**: [Chọn SKU](sku-selection.md)
+**Điều hướng Chương:**
+- **📚 Trang Khóa học**: [AZD cho người mới bắt đầu](../../README.md)
+- **📖 Chương hiện tại**: Chương 6 - Xác thực & Lập kế hoạch trước khi triển khai
+- **⬅️ Trước**: [Lựa chọn SKU](sku-selection.md)
 - **➡️ Chương tiếp theo**: [Chương 7: Khắc phục sự cố](../chapter-07-troubleshooting/common-issues.md)
 - **🔧 Liên quan**: [Chương 4: Hướng dẫn triển khai](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Giới thiệu
 
-Hướng dẫn toàn diện này cung cấp các script và quy trình xác thực trước khi triển khai để đảm bảo các triển khai bằng Azure Developer CLI thành công trước khi bắt đầu. Học cách triển khai các kiểm tra tự động về xác thực, khả năng tài nguyên, hạn mức, tuân thủ bảo mật và yêu cầu hiệu năng để ngăn ngừa lỗi triển khai và tối ưu hóa tỷ lệ thành công triển khai.
+Hướng dẫn toàn diện này cung cấp các kịch bản và thủ tục xác thực trước khi triển khai để đảm bảo triển khai bằng Azure Developer CLI thành công trước khi bắt đầu. Học cách triển khai các kiểm tra tự động cho xác thực, khả dụng tài nguyên, hạn mức, tuân thủ bảo mật và yêu cầu hiệu năng nhằm ngăn ngừa lỗi triển khai và tối ưu tỷ lệ thành công triển khai.
 
 ## Mục tiêu học tập
 
-Sau khi hoàn thành hướng dẫn này, bạn sẽ:
-- Thành thạo các kỹ thuật và script xác thực trước khi triển khai tự động
-- Hiểu các chiến lược kiểm tra toàn diện cho xác thực, quyền hạn và hạn mức
-- Triển khai quy trình xác thực khả năng sẵn có và công suất tài nguyên
-- Cấu hình kiểm tra bảo mật và tuân thủ cho các chính sách tổ chức
+Hoàn thành hướng dẫn này, bạn sẽ:
+- Thành thạo các kỹ thuật và kịch bản xác thực tự động trước khi triển khai
+- Hiểu các chiến lược kiểm tra toàn diện cho xác thực, quyền truy cập và hạn mức
+- Triển khai thủ tục xác thực khả dụng tài nguyên và dung lượng
+- Cấu hình kiểm tra bảo mật và tuân thủ cho chính sách tổ chức
 - Thiết kế quy trình ước tính chi phí và xác thực ngân sách
-- Tạo tự động hóa kiểm tra trước khi triển khai tùy chỉnh cho CI/CD
+- Tạo tự động hóa kiểm tra trước khi triển khai tùy chỉnh cho pipeline CI/CD
 
 ## Kết quả học tập
 
-Khi hoàn thành, bạn sẽ có khả năng:
-- Tạo và thực thi các script xác thực trước khi triển khai toàn diện
-- Thiết kế các workflow kiểm tra tự động cho các kịch bản triển khai khác nhau
-- Triển khai các quy trình và chính sách xác thực theo từng môi trường
-- Cấu hình giám sát chủ động và cảnh báo cho tình trạng sẵn sàng triển khai
+Khi hoàn thành, bạn sẽ có thể:
+- Tạo và thực thi các kịch bản xác thực trước khi bay toàn diện
+- Thiết kế quy trình kiểm tra tự động cho các kịch bản triển khai khác nhau
+- Triển khai thủ tục và chính sách xác thực theo môi trường
+- Cấu hình giám sát và cảnh báo chủ động cho độ sẵn sàng triển khai
 - Khắc phục sự cố trước khi triển khai và thực hiện các hành động khắc phục
-- Tích hợp kiểm tra trước khi triển khai vào pipeline DevOps và workflow tự động
+- Tích hợp kiểm tra trước khi triển khai vào pipeline DevOps và quy trình tự động hóa
 
 ## Mục lục
 
-- [Tổng quan](../../../../docs/chapter-06-pre-deployment)
-- [Kịch bản kiểm tra tự động](../../../../docs/chapter-06-pre-deployment)
-- [Danh sách kiểm tra thủ công](../../../../docs/chapter-06-pre-deployment)
-- [Xác thực môi trường](../../../../docs/chapter-06-pre-deployment)
-- [Xác thực tài nguyên](../../../../docs/chapter-06-pre-deployment)
-- [Kiểm tra bảo mật & tuân thủ](../../../../docs/chapter-06-pre-deployment)
-- [Lập kế hoạch hiệu năng & công suất](../../../../docs/chapter-06-pre-deployment)
-- [Khắc phục sự cố phổ biến](../../../../docs/chapter-06-pre-deployment)
+- [Tổng quan](#tổng-quan)
+- [Kịch bản kiểm tra tự động trước khi triển khai](#kịch-bản-kiểm-tra-tự-động-trước-khi-triển-khai)
+- [Danh sách kiểm tra xác thực thủ công](#codeblock1)
+- [Xác thực môi trường](#✅-sao-lưu-khôi-phục)
+- [Xác thực tài nguyên](#xác-thực-môi-trường-sản-xuất)
+- [Kiểm tra bảo mật & tuân thủ](#security--compliance-checks)
+- [Kế hoạch hiệu năng & dung lượng](#performance--capacity-planning)
+- [Khắc phục sự cố thường gặp](#troubleshooting-common-issues)
 
 ---
 
 ## Tổng quan
 
-Các kiểm tra trước khi triển khai là những xác thực cần thiết được thực hiện trước khi triển khai để đảm bảo:
+Kiểm tra trước khi triển khai là các xác thực thiết yếu được thực hiện trước khi triển khai để đảm bảo:
 
-- **Khả năng sẵn có tài nguyên** và hạn mức ở các vùng mục tiêu
-- **Xác thực và quyền hạn** được cấu hình đúng
-- **Tính hợp lệ của template** và độ chính xác của tham số
+- **Khả dụng tài nguyên** và hạn mức ở các vùng mục tiêu
+- **Xác thực và quyền truy cập** được cấu hình đúng
+- **Tính hợp lệ của mẫu** và tính chính xác của tham số
 - **Kết nối mạng** và các phụ thuộc
 - **Tuân thủ bảo mật** theo chính sách tổ chức
-- **Ước tính chi phí** nằm trong giới hạn ngân sách
+- **Ước tính chi phí** trong giới hạn ngân sách
 
 ### Khi nào chạy kiểm tra trước khi triển khai
 
-- **Trước lần triển khai đầu tiên** tới một môi trường mới
-- **Sau khi thay đổi lớn template**
-- **Trước triển khai vào môi trường production**
+- **Trước lần triển khai đầu tiên** vào môi trường mới
+- **Sau khi thay đổi lớn trong mẫu**
+- **Trước các triển khai vào môi trường production**
 - **Khi thay đổi vùng Azure**
 - **Như một phần của pipeline CI/CD**
 
 ---
 
-## Kịch bản kiểm tra tự động
+## Kịch bản kiểm tra tự động trước khi triển khai
 
 ### Trình kiểm tra PowerShell trước khi triển khai
 
@@ -177,7 +177,7 @@ function Test-Authentication {
         $azAccount = az account show --output json | ConvertFrom-Json
         Write-Status "Azure CLI authentication" "Success" "Subscription: $($azAccount.name)"
         
-        # Xác minh quyền truy cập đăng ký
+        # Xác thực quyền truy cập đăng ký
         $subscriptionId = $azAccount.id
         $subscription = az account subscription show --subscription-id $subscriptionId --output json | ConvertFrom-Json
         Write-Status "Subscription access" "Success" "State: $($subscription.state)"
@@ -194,7 +194,7 @@ function Test-Permissions {
     Write-Host "`n${Blue}=== Permissions Check ===${Reset}"
     
     try {
-        # Lấy các phân công vai trò của người dùng hiện tại
+        # Lấy các gán vai trò của người dùng hiện tại
         $roleAssignments = az role assignment list --assignee (az account show --query user.name --output tsv) --output json | ConvertFrom-Json
         
         $hasContributor = $roleAssignments | Where-Object { 
@@ -210,7 +210,7 @@ function Test-Permissions {
             Write-Status "Required permissions" "Warning" "May need Contributor role for deployment"
         }
         
-        # Kiểm tra tạo nhóm tài nguyên (nếu được chỉ định)
+        # Thử tạo nhóm tài nguyên (nếu được chỉ định)
         if ($ResourceGroup) {
             $rgExists = az group exists --name $ResourceGroup --output tsv
             if ($rgExists -eq "true") {
@@ -242,7 +242,7 @@ function Test-QuotasAndLimits {
     Write-Host "`n${Blue}=== Quotas and Limits Check ===${Reset}"
     
     try {
-        # Kiểm tra hạn mức tính toán
+        # Kiểm tra hạn mức compute
         $computeUsage = az vm list-usage --location $Location --output json | ConvertFrom-Json
         
         # Kiểm tra các hạn mức cụ thể
@@ -292,7 +292,7 @@ function Test-QuotasAndLimits {
 function Test-NetworkConnectivity {
     Write-Host "`n${Blue}=== Network Connectivity Check ===${Reset}"
     
-    # Kiểm tra các điểm cuối Azure
+    # Kiểm tra các endpoint Azure
     $endpoints = @(
         "https://management.azure.com/",
         "https://login.microsoftonline.com/",
@@ -335,7 +335,7 @@ function Test-TemplateValidation {
             $azureYaml = Get-Content "azure.yaml" -Raw | ConvertFrom-Yaml
             Write-Status "azure.yaml parsing" "Success"
             
-            # Xác minh các dịch vụ
+            # Xác thực các dịch vụ
             if ($azureYaml.services) {
                 $serviceCount = ($azureYaml.services | Get-Member -MemberType NoteProperty).Count
                 Write-Status "Services defined" "Success" "$serviceCount services found"
@@ -360,7 +360,7 @@ function Test-TemplateValidation {
         if ($bicepFiles.Count -gt 0) {
             Write-Status "Infrastructure templates" "Success" "$($bicepFiles.Count) Bicep files found"
             
-            # Xác minh main.bicep nếu nó tồn tại
+            # Xác thực main.bicep nếu nó tồn tại
             if (Test-Path "infra/main.bicep") {
                 try {
                     az bicep build --file "infra/main.bicep" --stdout | Out-Null
@@ -381,10 +381,10 @@ function Test-TemplateValidation {
         return $false
     }
     
-    # 🧪 MỚI: Kiểm tra bản xem trước hạ tầng (thử chạy an toàn)
+    # 🧪 MỚI: Kiểm tra bản xem trước hạ tầng (chạy thử an toàn)
     try {
         Write-Status "Infrastructure preview test" "Info" "Running safe dry-run validation..."
-        $previewResult = azd provision --preview --output json 2>$null
+        $previewResult = azd provision --preview 2>$null
         if ($LASTEXITCODE -eq 0) {
             Write-Status "Infrastructure preview" "Success" "Preview completed - no deployment errors detected"
         }
@@ -403,7 +403,7 @@ function Test-RegionalAvailability {
     Write-Host "`n${Blue}=== Regional Availability Check ===${Reset}"
     
     try {
-        # Kiểm tra xem vị trí có hợp lệ không
+        # Kiểm tra xem vị trí (location) có hợp lệ không
         $locations = az account list-locations --output json | ConvertFrom-Json
         $validLocation = $locations | Where-Object { $_.name -eq $Location -or $_.displayName -eq $Location }
         
@@ -415,7 +415,7 @@ function Test-RegionalAvailability {
             return $false
         }
         
-        # Kiểm tra tính khả dụng của dịch vụ trong khu vực
+        # Kiểm tra sự khả dụng của dịch vụ trong khu vực
         $services = @("Microsoft.Web", "Microsoft.Sql", "Microsoft.Storage", "Microsoft.KeyVault")
         
         foreach ($service in $services) {
@@ -446,7 +446,7 @@ function Test-RegionalAvailability {
 function Test-CostEstimation {
     Write-Host "`n${Blue}=== Cost Estimation Check ===${Reset}"
     
-    # Ước tính chi phí cơ bản (cần Azure Pricing API để có ước tính chính xác)
+    # Ước tính chi phí cơ bản (cần Azure Pricing API để ước tính chính xác)
     Write-Status "Cost estimation" "Info" "Use Azure Pricing Calculator for detailed estimates"
     Write-Status "Monitoring setup" "Info" "Set up Azure Cost Management alerts"
     
@@ -480,7 +480,7 @@ function Test-SecurityCompliance {
             Write-Status "Key Vault usage" "Warning" "Consider using Key Vault for secrets"
         }
         
-        # Kiểm tra việc sử dụng định danh được quản lý
+        # Kiểm tra việc sử dụng Managed Identity
         if (Select-String -Path "infra/*.bicep" -Pattern "managedIdentity|SystemAssigned" -Quiet) {
             Write-Status "Managed Identity" "Success" "Managed Identity detected"
         }
@@ -488,7 +488,7 @@ function Test-SecurityCompliance {
             Write-Status "Managed Identity" "Warning" "Consider using Managed Identity"
         }
         
-        # Kiểm tra việc bắt buộc HTTPS
+        # Kiểm tra việc bắt buộc sử dụng HTTPS
         if (Select-String -Path "infra/*.bicep" -Pattern "httpsOnly.*true|requireHttps.*true" -Quiet) {
             Write-Status "HTTPS enforcement" "Success" "HTTPS enforcement detected"
         }
@@ -557,7 +557,7 @@ function Invoke-PreflightCheck {
     }
 }
 
-# Chạy kiểm tra trước khi chạy
+# Chạy kiểm tra trước khi khởi chạy
 Invoke-PreflightCheck
 ```
 
@@ -574,7 +574,7 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # Không màu
+NC='\033[0m' # Không có màu
 
 # Biến toàn cục
 ENVIRONMENT_NAME=""
@@ -768,7 +768,7 @@ main() {
     echo "Time: $(date '+%Y-%m-%d %H:%M:%S')"
     echo ""
     
-    # Thực hiện các kiểm tra
+    # Chạy các kiểm tra
     local all_passed=true
     
     check_prerequisites || all_passed=false
@@ -800,61 +800,61 @@ main "$@"
 
 ### Danh sách kiểm tra trước khi triển khai
 
-In danh sách này và xác minh từng mục trước khi triển khai:
+In danh sách kiểm tra này và xác minh từng mục trước khi triển khai:
 
-#### ✅ Cài đặt môi trường
-- [ ] AZD CLI đã được cài và cập nhật lên phiên bản mới nhất
-- [ ] Azure CLI đã được cài và xác thực
-- [ ] Đã chọn đúng đăng ký Azure
+#### ✅ Thiết lập môi trường
+- [ ] AZD CLI được cài và cập nhật lên phiên bản mới nhất
+- [ ] Azure CLI được cài và đã xác thực
+- [ ] Đã chọn đúng subscription Azure
 - [ ] Tên môi trường là duy nhất và tuân theo quy ước đặt tên
-- [ ] Nhóm tài nguyên đích đã được xác định hoặc có thể tạo được
+- [ ] Nhóm tài nguyên mục tiêu đã được xác định hoặc có thể được tạo
 
-#### ✅ Xác thực & Quyền hạn
-- [ ] Đã xác thực thành công với `azd auth login`
-- [ ] Người dùng có vai trò Contributor trên đăng ký/nhóm tài nguyên mục tiêu
+#### ✅ Xác thực & Quyền
+- [ ] Đã xác thực thành công bằng `azd auth login`
+- [ ] Người dùng có vai trò Contributor trên subscription/nhóm tài nguyên mục tiêu
 - [ ] Service principal được cấu hình cho CI/CD (nếu áp dụng)
 - [ ] Không có chứng chỉ hoặc thông tin xác thực hết hạn
 
-#### ✅ Xác thực template
+#### ✅ Xác thực mẫu
 - [ ] `azure.yaml` tồn tại và là YAML hợp lệ
 - [ ] Tất cả dịch vụ được định nghĩa trong azure.yaml có mã nguồn tương ứng
 - [ ] Các template Bicep trong thư mục `infra/` tồn tại
-- [ ] `main.bicep` biên dịch không lỗi (`az bicep build --file infra/main.bicep`)
+- [ ] `main.bicep` biên dịch mà không có lỗi (`az bicep build --file infra/main.bicep`)
 - [ ] 🧪 Bản xem trước hạ tầng chạy thành công (`azd provision --preview`)
 - [ ] Tất cả tham số bắt buộc có giá trị mặc định hoặc sẽ được cung cấp
-- [ ] Không có bí mật được khai báo cố định trong template
+- [ ] Không có bí mật được mã hóa cứng trong các mẫu
 
 #### ✅ Lập kế hoạch tài nguyên
 - [ ] Đã chọn và xác thực vùng Azure mục tiêu
-- [ ] Các dịch vụ Azure cần thiết có sẵn ở vùng mục tiêu
-- [ ] Có đủ hạn mức (quota) cho các tài nguyên dự kiến
-- [ ] Đã kiểm tra xung đột tên tài nguyên
+- [ ] Dịch vụ Azure cần thiết có sẵn ở vùng mục tiêu
+- [ ] Có đủ hạn mức cho các tài nguyên dự kiến
+- [ ] Kiểm tra xung đột tên tài nguyên
 - [ ] Các phụ thuộc giữa các tài nguyên đã được hiểu rõ
 
 #### ✅ Mạng & Bảo mật
-- [ ] Đã xác minh kết nối mạng tới các endpoint Azure
-- [ ] Cài đặt tường lửa/proxy được cấu hình nếu cần
+- [ ] Đã kiểm tra kết nối mạng tới các endpoint Azure
+- [ ] Đã cấu hình cài đặt firewall/proxy nếu cần
 - [ ] Key Vault được cấu hình để quản lý bí mật
 - [ ] Sử dụng managed identities khi có thể
-- [ ] Bật ép buộc HTTPS cho các ứng dụng web
+- [ ] Bắt buộc HTTPS được bật cho các ứng dụng web
 
 #### ✅ Quản lý chi phí
-- [ ] Ước tính chi phí đã được tính bằng Azure Pricing Calculator
+- [ ] Ước tính chi phí được tính bằng Azure Pricing Calculator
 - [ ] Cảnh báo ngân sách được cấu hình nếu cần
 - [ ] Đã chọn SKU phù hợp cho loại môi trường
-- [ ] Xem xét dung lượng đặt trước cho workloads production
+- [ ] Xem xét dung lượng đặt trước cho workload production
 
-#### ✅ Giám sát & Khả năng quan sát
-- [ ] Application Insights được cấu hình trong template
+#### ✅ Giám sát & Quan sát
+- [ ] Application Insights được cấu hình trong các mẫu
 - [ ] Đã lên kế hoạch cho Log Analytics workspace
-- [ ] Đã định nghĩa quy tắc cảnh báo cho các chỉ số quan trọng
-- [ ] Các endpoint kiểm tra sức khỏe được triển khai trong ứng dụng
+- [ ] Các quy tắc cảnh báo được định nghĩa cho các chỉ số quan trọng
+- [ ] Điểm kiểm tra sức khỏe (health check endpoints) được triển khai trong ứng dụng
 
-#### ✅ Sao lưu & Phục hồi
-- [ ] Đã xác định chiến lược sao lưu cho tài nguyên dữ liệu
-- [ ] Mục tiêu thời gian phục hồi (RTO) được ghi nhận
-- [ ] Mục tiêu điểm phục hồi (RPO) được ghi nhận
-- [ ] Kế hoạch phục hồi thảm họa sẵn sàng cho môi trường production
+#### ✅ Sao lưu & Khôi phục
+- [ ] Chiến lược sao lưu được xác định cho các tài nguyên dữ liệu
+- [ ] Mục tiêu thời gian khôi phục (RTO) được ghi chép
+- [ ] Mục tiêu điểm khôi phục (RPO) được ghi chép
+- [ ] Kế hoạch khôi phục thảm họa cho môi trường production đã sẵn sàng
 
 ---
 
@@ -864,26 +864,26 @@ In danh sách này và xác minh từng mục trước khi triển khai:
 
 ```bash
 #!/bin/bash
-# Các kiểm tra dành riêng cho môi trường phát triển
+# Xác thực đặc thù cho môi trường phát triển
 
 validate_dev_environment() {
     echo "=== Development Environment Validation ==="
     
-    # Kiểm tra các cấu hình phù hợp cho phát triển
+    # Kiểm tra các cấu hình thân thiện với môi trường phát triển
     if grep -q "sku.*Free\|sku.*F1\|sku.*Basic" infra/*.bicep; then
         echo "✓ Development-appropriate SKUs detected"
     else
         echo "⚠ Consider using lower-cost SKUs for development"
     fi
     
-    # Kiểm tra các cấu hình tắt máy tự động
+    # Kiểm tra các cấu hình tự động tắt
     if grep -q "autoShutdown\|deallocate" infra/*.bicep; then
         echo "✓ Auto-shutdown configuration found"
     else
         echo "ℹ Consider adding auto-shutdown for cost savings"
     fi
     
-    # Kiểm tra các cấu hình cơ sở dữ liệu cho môi trường phát triển
+    # Xác thực các cấu hình cơ sở dữ liệu cho môi trường phát triển
     if grep -q "Basic\|S0\|S1" infra/*.bicep; then
         echo "✓ Development database tiers configured"
     else
@@ -892,37 +892,37 @@ validate_dev_environment() {
 }
 ```
 
-### Xác thực môi trường production
+### Xác thực môi trường sản xuất
 
 ```bash
 #!/bin/bash
-# Các kiểm tra dành riêng cho môi trường sản xuất
+# Các kiểm tra đặc thù cho môi trường sản xuất
 
 validate_prod_environment() {
     echo "=== Production Environment Validation ==="
     
-    # Kiểm tra cấu hình tính sẵn sàng cao
+    # Kiểm tra các cấu hình tính sẵn sàng cao
     if grep -q "zoneRedundant.*true\|Premium\|Standard_GRS" infra/*.bicep; then
         echo "✓ High availability configurations detected"
     else
         echo "⚠ Consider enabling high availability for production"
     fi
     
-    # Kiểm tra cấu hình sao lưu
+    # Kiểm tra các cấu hình sao lưu
     if grep -q "backup\|retention\|pointInTimeRestore" infra/*.bicep; then
         echo "✓ Backup configurations found"
     else
         echo "⚠ Ensure backup strategies are implemented"
     fi
     
-    # Xác minh thiết lập giám sát
+    # Xác thực thiết lập giám sát
     if grep -q "Microsoft.Insights\|Application_Type.*web" infra/*.bicep; then
         echo "✓ Monitoring and observability configured"
     else
         echo "⚠ Add comprehensive monitoring for production"
     fi
     
-    # Kiểm tra cấu hình bảo mật
+    # Kiểm tra các cấu hình bảo mật
     if grep -q "Microsoft.KeyVault\|managedIdentity\|httpsOnly.*true" infra/*.bicep; then
         echo "✓ Security best practices implemented"
     else
@@ -935,7 +935,7 @@ validate_prod_environment() {
 
 ## Xác thực tài nguyên
 
-### Kịch bản kiểm tra hạn mức
+### Kịch bản xác thực hạn mức
 
 ```python
 #!/usr/bin/env python3
@@ -1011,13 +1011,13 @@ def check_network_limits(location: str) -> bool:
     """Check network-related limits"""
     print(f"\n=== Network Limits Check ({location}) ===")
     
-    # Kiểm tra mạng ảo
+    # Kiểm tra các mạng ảo
     vnets = run_command(['az', 'network', 'vnet', 'list'])
     if vnets is not None:
         vnet_count = len(vnets)
         print(f"✅ Virtual Networks: {vnet_count}/1000")
     
-    # Kiểm tra địa chỉ IP công cộng
+    # Kiểm tra các địa chỉ IP công cộng
     public_ips = run_command(['az', 'network', 'public-ip', 'list'])
     if public_ips is not None:
         ip_count = len(public_ips)
@@ -1038,7 +1038,7 @@ def main():
     
     all_passed = True
     
-    # Chạy kiểm tra
+    # Thực hiện kiểm tra
     all_passed &= check_compute_quotas(location)
     all_passed &= check_storage_limits(location)
     all_passed &= check_network_limits(location)
@@ -1064,7 +1064,7 @@ if __name__ == "__main__":
 
 ```bash
 #!/bin/bash
-# Xác minh bảo mật và tuân thủ cho các triển khai AZD
+# Kiểm tra bảo mật và tuân thủ cho các triển khai AZD
 
 check_security_practices() {
     echo "=== Security Best Practices Check ==="
@@ -1079,7 +1079,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Kiểm tra việc sử dụng danh tính được quản lý
+    # Kiểm tra việc sử dụng Managed Identity
     if grep -r "managedIdentity\|SystemAssigned\|UserAssigned" infra/ >/dev/null 2>&1; then
         echo "✅ Managed Identity configuration detected"
     else
@@ -1103,7 +1103,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Kiểm tra các hạn chế truy cập công khai
+    # Kiểm tra các hạn chế truy cập công cộng
     if grep -r "allowBlobPublicAccess.*false\|publicNetworkAccess.*Disabled" infra/ >/dev/null 2>&1; then
         echo "✅ Public access restrictions detected"
     else
@@ -1111,7 +1111,7 @@ check_security_practices() {
         ((issues_found++))
     fi
     
-    # Kiểm tra các nhóm bảo mật mạng
+    # Kiểm tra các nhóm bảo mật mạng (Network Security Groups)
     if grep -r "Microsoft.Network/networkSecurityGroups" infra/ >/dev/null 2>&1; then
         echo "✅ Network Security Groups detected"
     else
@@ -1290,58 +1290,58 @@ steps:
 
 ---
 
-## Tóm tắt các thực hành tốt nhất
+## Tóm tắt Thực hành tốt nhất
 
 ### ✅ Thực hành tốt nhất cho kiểm tra trước khi triển khai
 
 1. **Tự động hóa khi có thể**
    - Tích hợp các kiểm tra vào pipeline CI/CD
-   - Sử dụng script cho các xác thực có thể lặp lại
-   - Lưu kết quả để phục vụ theo dõi và kiểm toán
+   - Sử dụng script cho các xác thực lặp lại
+   - Lưu kết quả để làm hồ sơ kiểm toán
 
-2. **Xác thực theo môi trường**
+2. **Xác thực theo từng môi trường**
    - Các kiểm tra khác nhau cho dev/staging/prod
-   - Yêu cầu bảo mật phù hợp theo từng môi trường
-   - Tối ưu chi phí cho môi trường phi sản xuất
+   - Yêu cầu bảo mật phù hợp cho từng môi trường
+   - Tối ưu chi phí cho môi trường không phải production
 
 3. **Phủ sóng toàn diện**
-   - Xác thực và quyền hạn
-   - Hạn mức và khả năng sẵn có tài nguyên
-   - Xác thực template và cú pháp
+   - Xác thực và quyền truy cập
+   - Hạn mức tài nguyên và khả dụng
+   - Xác thực mẫu và cú pháp
    - Yêu cầu bảo mật và tuân thủ
 
 4. **Báo cáo rõ ràng**
-   - Chỉ báo trạng thái mã màu
-   - Thông báo lỗi chi tiết kèm các bước khắc phục
+   - Chỉ báo trạng thái có mã màu
+   - Thông điệp lỗi chi tiết kèm bước khắc phục
    - Báo cáo tóm tắt để đánh giá nhanh
 
-5. **Dừng sớm khi có lỗi**
+5. **Dừng ngay khi gặp lỗi**
    - Dừng triển khai nếu các kiểm tra quan trọng thất bại
-   - Cung cấp hướng dẫn rõ ràng để khắc phục
-   - Cho phép dễ dàng chạy lại các kiểm tra
+   - Cung cấp hướng dẫn rõ ràng để giải quyết
+   - Cho phép chạy lại các kiểm tra một cách dễ dàng
 
-### Những cạm bẫy phổ biến trước khi triển khai
+### Những cạm bẫy thường gặp trong kiểm tra trước khi triển khai
 
-1. **Bỏ qua xác thực** vì muốn triển khai "nhanh"
-2. **Kiểm tra quyền hạn không đầy đủ** trước khi triển khai
+1. **Bỏ qua việc xác thực** để có triển khai "nhanh"
+2. **Kiểm tra quyền không đầy đủ** trước khi triển khai
 3. **Bỏ qua giới hạn hạn mức** cho đến khi triển khai thất bại
-4. **Không xác thực template** trong pipeline CI/CD
+4. **Không xác thực mẫu** trong pipeline CI/CD
 5. **Thiếu kiểm tra bảo mật** cho môi trường production
 6. **Ước tính chi phí không đầy đủ** dẫn đến bất ngờ về ngân sách
 
 ---
 
-**Mẹo**: Chạy các kiểm tra trước khi triển khai như một job riêng trong pipeline CI/CD của bạn trước job triển khai thực tế. Điều này giúp bạn phát hiện vấn đề sớm và cung cấp phản hồi nhanh hơn cho các nhà phát triển.
+**Mẹo chuyên gia**: Chạy các kiểm tra trước khi triển khai như một job riêng trong pipeline CI/CD của bạn trước job triển khai thực tế. Điều này cho phép phát hiện sớm các vấn đề và cung cấp phản hồi nhanh hơn cho các nhà phát triển.
 
 ---
 
 **Điều hướng**
-- **Bài học trước**: [Chọn SKU](sku-selection.md)
-- **Bài học tiếp theo**: [Bảng tham khảo nhanh](../../resources/cheat-sheet.md)
+- **Bài trước**: [Lựa chọn SKU](sku-selection.md)
+- **Bài tiếp theo**: [Bảng ghi nhớ](../../resources/cheat-sheet.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Miễn trừ trách nhiệm:
-Văn bản này đã được dịch bằng dịch vụ dịch AI Co-op Translator (https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ nguyên bản nên được coi là nguồn chính thức. Đối với những thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm đối với bất kỳ hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
+**Miễn trừ trách nhiệm**:
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc sai sót. Tài liệu gốc bằng ngôn ngữ gốc của nó nên được coi là nguồn có thẩm quyền. Đối với thông tin quan trọng, khuyến nghị sử dụng bản dịch chuyên nghiệp do người dịch thực hiện. Chúng tôi không chịu trách nhiệm đối với bất kỳ sự hiểu lầm hay diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

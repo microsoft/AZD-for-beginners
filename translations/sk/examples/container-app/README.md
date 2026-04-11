@@ -1,27 +1,27 @@
-# Príklady nasadenia Container App pomocou AZD
+# Príklady nasadenia kontajnerových aplikácií s AZD
 
-Tento adresár obsahuje komplexné príklady nasadenia kontajnerových aplikácií do Azure Container Apps pomocou Azure Developer CLI (AZD). Tieto príklady demonštrujú reálne vzory, osvedčené postupy a konfigurácie pripravené do produkcie.
+Tento adresár obsahuje komplexné príklady nasadenia kontajnerizovaných aplikácií do Azure Container Apps pomocou Azure Developer CLI (AZD). Tieto príklady demonštrujú reálne vzory, osvedčené postupy a produkčne pripravené konfigurácie.
 
 ## 📚 Obsah
 
-- [Prehľad](#overview)
-- [Požiadavky](#prerequisites)
-- [Rýchle spustenie](#quick-start-examples)
-- [Produkčné príklady](#production-examples)
+- [Prehľad](#prehľad)
+- [Predpoklady](#predpoklady)
+- [Rýchle štartovacie príklady](#rýchle-štartovacie-príklady)
+- [Produkčné príklady](#produkčné-príklady)
 - [Pokročilé vzory](#pokročilé-vzory)
-- [Osvedčené postupy](#osvedčené-postupy)
+- [Najlepšie postupy](#najlepšie-postupy)
 
-## Overview
+## Prehľad
 
-Azure Container Apps je plne spravovaná serverless platforma pre kontajnery, ktorá vám umožňuje spúšťať mikroservisy a kontajnerové aplikácie bez správy infraštruktúry. V kombinácii s AZD získate:
+Azure Container Apps je plne spravovaná serverless kontajnerová platforma, ktorá vám umožňuje spúšťať mikroservisy a kontajnerizované aplikácie bez správy infraštruktúry. V kombinácii s AZD získate:
 
-- **Zjednodušené nasadenie**: Jedným príkazom nasadíte kontajnery s infraštruktúrou
-- **Automatické škálovanie**: Škálovanie na nulu a rozširovanie podľa HTTP prevádzky alebo udalostí
-- **Integrované sieťovanie**: Vstavané zisťovanie služieb a rozdeľovanie prevádzky
-- **Spravovaná identita**: Bezpečné overovanie k Azure zdrojom
-- **Optimalizácia nákladov**: Platíte iba za zdroje, ktoré používate
+- **Zjednodušené nasadenie**: Jediný príkaz nasadí kontajnery spolu s infraštruktúrou
+- **Automatické škálovanie**: Škáluje na nulu a škáluje podľa HTTP prevádzky alebo udalostí
+- **Integrovaná sieťová komunikácia**: Vstavaný service discovery a rozdeľovanie prevádzky
+- **Spravovaná identita**: Bezpečná autentifikácia k Azure zdrojom
+- **Optimalizácia nákladov**: Platíte len za použité zdroje
 
-## Prerequisites
+## Predpoklady
 
 Pred začatím sa uistite, že máte:
 
@@ -32,24 +32,26 @@ azd version
 # Skontrolujte Azure CLI
 az version
 
-# Skontrolujte Docker (na zostavovanie vlastných obrazov)
+# Skontrolujte Docker (pre vytváranie vlastných obrazov)
 docker --version
 
-# Prihláste sa do Azure
+# Overte sa pre nasadenia AZD
 azd auth login
+
+# Voliteľné: prihláste sa do Azure CLI, ak plánujete spúšťať príkazy az priamo
 az login
 ```
 
 **Požadované Azure zdroje:**
 - Aktívne predplatné Azure
-- Povolenia na vytváranie skupín prostriedkov
+- Povolenia na vytváranie skupiny prostriedkov
 - Prístup k prostrediu Container Apps
 
-## Quick Start Examples
+## Rýchle štartovacie príklady
 
-### 1. Simple Web API (Python Flask)
+### 1. Jednoduché Web API (Python Flask)
 
-Nasadiť základné REST API do Azure Container Apps.
+Nasadte základné REST API s Azure Container Apps.
 
 **Príklad: Python Flask API**
 
@@ -80,31 +82,31 @@ curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
 **Kľúčové vlastnosti:**
-- Automatické škálovanie od 0 do 10 inštancií
-- Kontroly zdravia a kontroly živosti
-- Vkladanie premenných prostredia
+- Automatické škálovanie od 0 do 10 replík
+- Health probe a liveness check
+- Injekcia environmentálnych premenných
 - Integrácia s Application Insights
 
 ### 2. Node.js Express API
 
-Nasadiť backend v Node.js s integráciou MongoDB.
+Nasadte Node.js backend s integráciou MongoDB.
 
 ```bash
-# Inicializovať šablónu Node.js API
+# Iniciovať šablónu Node.js API
 azd init --template todo-nodejs-mongo
 
-# Nastaviť premenné prostredia
+# Konfigurovať premenné prostredia
 azd env set DATABASE_NAME todosdb
 azd env set COLLECTION_NAME todos
 
 # Nasadiť
 azd up
 
-# Zobraziť denníky cez Azure Monitor
+# Zobraziť logy cez Azure Monitor
 azd monitor --logs
 ```
 
-**Hlavné prvky infraštruktúry:**
+**Zaujímavosti infraštruktúry:**
 ```bicep
 // Bicep snippet from infra/main.bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -147,9 +149,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 3. Static Frontend + API Backend
+### 3. Statický frontend + API backend
 
-Nasadiť full-stack aplikáciu s React frontendom a API backendom.
+Nasadte full-stack aplikáciu s React frontendom a API backendom.
 
 ```bash
 # Inicializovať full-stack šablónu
@@ -165,13 +167,13 @@ azd up
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
-## Production Examples
+## Produkčné príklady
 
-### Príklad 1: Mikroservisná architektúra
+### Príklad 1: Architektúra mikroservisov
 
 **Scenár**: E-commerce aplikácia s viacerými mikroservismi
 
-**Adresárová štruktúra:**
+**Štruktúra adresárov:**
 ```
 microservices-demo/
 ├── azure.yaml
@@ -227,11 +229,11 @@ azd env set MAX_REPLICAS 50
 # Nasadiť všetky služby
 azd up
 
-# Monitorovať nasadenie
+# Sledovať nasadenie
 azd monitor --overview
 ```
 
-### Príklad 2: Container App poháňaný AI
+### Príklad 2: AI-Poháňaná kontajnerová aplikácia
 
 **Scenár**: AI chat aplikácia s integráciou Microsoft Foundry Models
 
@@ -244,7 +246,7 @@ import openai
 
 app = Flask(__name__)
 
-# Použite spravovanú identitu na zabezpečený prístup
+# Použite Managed Identity pre bezpečný prístup
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -253,7 +255,7 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # Získajte kľúč OpenAI z Key Vaultu
+    # Získajte kľúč OpenAI z Key Vault
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
@@ -339,11 +341,11 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Príklad 3: Pozadový worker so spracovaním fronty
+### Príklad 3: Pozadinský worker s spracovaním fronty
 
-**Scenár**: Systém spracovania objednávok s frontou správ
+**Scenár**: Systém spracovania objednávok s message queue
 
-**Adresárová štruktúra:**
+**Štruktúra adresárov:**
 ```
 queue-worker/
 ├── azure.yaml
@@ -381,7 +383,7 @@ def process_orders():
             # Spracovať objednávku
             print(f"Processing order: {message.content}")
             
-            # Dokončiť správu
+            # Kompletná správa
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -425,19 +427,19 @@ az containerapp update \
 ### Vzor 1: Blue-Green nasadenie
 
 ```bash
-# Vytvorte novú revíziu bez priradenej prevádzky
+# Vytvorte novú revíziu bez prevádzky
 azd deploy api --revision-suffix blue --no-traffic
 
 # Otestujte novú revíziu
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Rozdeľte prevádzku (20 % na blue, 80 % na aktuálnu)
+# Rozdeľte prevádzku (20 % na modrú, 80 % na aktuálnu)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# Prepnite úplne na blue
+# Plné prepnutie na modrú
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
@@ -458,12 +460,12 @@ az containerapp ingress traffic set \
 }
 ```
 
-**Skript nasadenia:**
+**Skript na nasadenie:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
 
-# Nasadiť novú revíziu s 10% prevádzky
+# Nasadiť novú revíziu so 10% prevádzky
 azd deploy api --revision-mode multiple
 
 # Monitorovať metriky
@@ -477,7 +479,7 @@ for i in {20..100..10}; do
     --resource-group rg-myapp \
     --revision-weight latest=$i
   
-  sleep 300  # Počkať 5 minút
+  sleep 300  # Čakať 5 minút
 done
 ```
 
@@ -536,7 +538,7 @@ azd up
 azd show --output json | jq '.services.api.endpoints'
 ```
 
-### Vzor 4: Integrácia s Dapr
+### Vzor 4: Integrácia Dapr
 
 **Súbor: infra/app/dapr-enabled.bicep**
 ```bicep
@@ -590,7 +592,7 @@ def create_order():
     return {'status': 'created'}
 ```
 
-## Osvedčené postupy
+## Najlepšie postupy
 
 ### 1. Organizácia zdrojov
 
@@ -599,11 +601,11 @@ def create_order():
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
-# Označujte zdroje pre sledovanie nákladov
+# Označte zdroje na sledovanie nákladov
 azd env set AZURE_TAGS "Environment=Production,CostCenter=Engineering"
 ```
 
-### 2. Bezpečnostné osvedčené postupy
+### 2. Najlepšie bezpečnostné postupy
 
 ```bicep
 // Always use managed identity
@@ -662,7 +664,7 @@ services:
             concurrent: 100
 ```
 
-### 4. Monitorovanie a observabilita
+### 4. Monitorovanie a pozorovateľnosť
 
 ```bash
 # Povoliť Application Insights
@@ -673,7 +675,7 @@ azd monitor --logs
 # Alebo použite Azure CLI pre Container Apps:
 az containerapp logs show --name api --resource-group rg-myapp --follow
 
-# Sledovať metriky
+# Monitorovať metriky
 azd monitor --live
 
 # Vytvoriť upozornenia
@@ -688,16 +690,16 @@ az monitor metrics alert create \
 ### 5. Optimalizácia nákladov
 
 ```bash
-# Škálujte na nulu, keď sa nepoužíva
+# Škálovať na nulu, keď nie je používané
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# Použite spotové inštancie pre vývojové prostredia
+# Použiť spotové inštancie pre vývojové prostredia
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
-# Nastavte rozpočtové upozornenia
+# Nastaviť upozornenia na rozpočet
 az consumption budget create \
   --budget-name myapp-budget \
   --amount 100 \
@@ -740,22 +742,22 @@ jobs:
 ## Referencia bežných príkazov
 
 ```bash
-# Inicializovať nový projekt aplikácie v kontajneri
+# Inicializovať nový projekt kontajnerovej aplikácie
 azd init --template <template-name>
 
 # Nasadiť infraštruktúru a aplikáciu
 azd up
 
-# Nasadiť iba kód aplikácie (preskočiť infraštruktúru)
+# Nasadiť iba aplikačný kód (preskočiť infraštruktúru)
 azd deploy
 
-# Zabezpečiť len infraštruktúru
+# Poskytnúť iba infraštruktúru
 azd provision
 
 # Zobraziť nasadené zdroje
 azd show
 
-# Sledovať logy pomocou azd monitor alebo Azure CLI
+# Streamovať logy pomocou azd monitor alebo Azure CLI
 azd monitor --logs
 # az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
@@ -771,37 +773,37 @@ azd down --force --purge
 ### Problém: Kontajner sa nespustí
 
 ```bash
-# Skontrolujte logy pomocou Azure CLI
+# Skontrolujte záznamy pomocou Azure CLI
 az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
-# Zobrazte udalosti kontajnera
+# Zobraziť udalosti kontajnera
 az containerapp revision show \
   --name api \
   --resource-group rg-myapp \
   --revision latest
 
-# Otestujte lokálne
+# Testujte lokálne
 docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Problém: Nie je možné pristúpiť k endpointu Container App
+### Problém: Nedá sa pristúpiť na endpoint kontajnerovej aplikácie
 
 ```bash
-# Overiť konfiguráciu ingressu
+# Overiť konfiguráciu vstupu
 az containerapp show \
   --name api \
   --resource-group rg-myapp \
   --query properties.configuration.ingress
 
-# Skontrolovať, či je interný ingress povolený
+# Skontrolovať, či je povolený vnútorný vstup
 az containerapp ingress update \
   --name api \
   --resource-group rg-myapp \
   --external true
 ```
 
-### Problém: Výkonové problémy
+### Problém: Výkonnostné problémy
 
 ```bash
 # Skontrolujte využitie zdrojov
@@ -809,7 +811,7 @@ az monitor metrics list \
   --resource $(azd show --output json | jq -r '.services.api.resourceId') \
   --metric "CPUPercentage,MemoryPercentage"
 
-# Navýšte zdroje
+# Zvýšte množstvo zdrojov
 az containerapp update \
   --name api \
   --resource-group rg-myapp \
@@ -821,27 +823,27 @@ az containerapp update \
 - [Príklad mikroservisov](./microservices/README.md)
 - [Jednoduchý Flask API príklad](./simple-flask-api/README.md)
 - [Dokumentácia Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
-- [Galéria šablón AZD](https://azure.github.io/awesome-azd/)
-- [Ukážky Container Apps](https://github.com/Azure-Samples/container-apps-samples)
-- [Šablóny Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+- [Galeria AZD šablón](https://azure.github.io/awesome-azd/)
+- [Príklady Container Apps](https://github.com/Azure-Samples/container-apps-samples)
+- [Bicep šablóny](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-## Prispievanie
+## Príspevky
 
 Ak chcete prispieť novými príkladmi kontajnerových aplikácií:
 
 1. Vytvorte nový podadresár s vaším príkladom
 2. Zahrňte kompletné súbory `azure.yaml`, `infra/` a `src/`
-3. Pridajte podrobný README s inštrukciami na nasadenie
-4. Otestujte nasadenie pomocou `azd up`
-5. Odošlite pull request
+3. Pridajte podrobný README so štartovacími inštrukciami
+4. Otestujte nasadenie príkazom `azd up`
+5. Pošlite pull request
 
 ---
 
-**Potrebujete pomoc?** Pridajte sa do komunity [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) pre podporu a otázky.
+**Potrebujete pomoc?** Pridajte sa ku komunite [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) pre podporu a otázky.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Vyhlásenie o vylúčení zodpovednosti**:
-Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa usilujeme o presnosť, vezmite prosím na vedomie, že automatizované preklady môžu obsahovať chyby alebo nepresnosti. Originálny dokument v jeho pôvodnom jazyku by sa mal považovať za autoritatívny zdroj. Pre dôležité informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za žiadne nedorozumenia alebo mylné interpretácie vyplývajúce z použitia tohto prekladu.
+**Zrieknutie sa zodpovednosti**:  
+Tento dokument bol preložený pomocou AI prekladateľskej služby [Co-op Translator](https://github.com/Azure/co-op-translator). Hoci sa snažíme o presnosť, berte prosím na vedomie, že automatické preklady môžu obsahovať chyby alebo nepresnosti. Originálny dokument v jeho pôvodnom jazyku by mal byť považovaný za autoritatívny zdroj. Pre kritické informácie sa odporúča profesionálny ľudský preklad. Nie sme zodpovední za akékoľvek nedorozumenia alebo nesprávne interpretácie vyplývajúce z použitia tohto prekladu.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

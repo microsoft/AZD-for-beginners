@@ -38,6 +38,8 @@ Microsoft Foundry is Microsoft's unified platform for AI development that includ
 - Access to Microsoft Foundry Models services
 - Basic familiarity with Microsoft Foundry
 
+> **Current AZD baseline:** These examples were reviewed against `azd` `1.23.12`. For the AI agent workflow, use the current preview extension release and check your installed version before you begin.
+
 ## Core Integration Patterns
 
 ### Pattern 1: Microsoft Foundry Models Integration
@@ -75,12 +77,12 @@ resource openAIAccount 'Microsoft.CognitiveServices/accounts@2023-05-01' = {
 // Deploy GPT model
 resource gptDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAIAccount
-  name: 'gpt-35-turbo'
+  name: 'gpt-4.1-mini'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'gpt-35-turbo'
-      version: '0613'
+      name: 'gpt-4.1-mini'
+      version: '2024-07-18'
     }
     scaleSettings: {
       scaleType: 'Standard'
@@ -165,8 +167,8 @@ azd env set AZURE_SEARCH_ENDPOINT "https://your-search.search.windows.net"
 azd env set AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT "https://your-formrec.cognitiveservices.azure.com/"
 
 # Model configurations
-azd env set AZURE_OPENAI_MODEL "gpt-35-turbo"
-azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-ada-002"
+azd env set AZURE_OPENAI_MODEL "gpt-4.1-mini"
+azd env set AZURE_OPENAI_EMBEDDING_MODEL "text-embedding-3-large"
 
 # Performance settings
 azd env set AZURE_OPENAI_CAPACITY 30
@@ -233,8 +235,13 @@ azd extension install azure.ai.finetune
 azd extension install azure.ai.models
 
 # List installed extensions
-azd extension list
+azd extension list --installed
+
+# Inspect the currently installed agent extension version
+azd extension show azure.ai.agents
 ```
+
+The AI extensions are still moving quickly in preview. If a command behaves differently than shown here, upgrade the relevant extension before troubleshooting the project itself.
 
 ### Agent-First Deployment with `azd ai`
 
@@ -248,6 +255,8 @@ azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 azd up
 ```
 
+Recent preview releases of `azure.ai.agents` also added template-based initialization support for `azd ai agent init`. If you are following newer agent samples, check the extension help for the exact flags available in your installed version.
+
 See [AZD AI CLI Commands](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for the full command reference and flags.
 
 ### Single Command Deployment
@@ -259,6 +268,9 @@ azd up
 # Or deploy incrementally
 azd provision  # Infrastructure only
 azd deploy     # Application only
+
+# For long-running AI app deployments in azd 1.23.11+
+azd deploy --timeout 1800
 ```
 
 ### Environment-Specific Deployments
@@ -517,7 +529,7 @@ az cognitiveservices model list --location eastus
 
 **Services**: Azure OpenAI + Azure AI Search + Azure Container Apps + Azure Blob Storage
 
-**Description**: The most popular Azure AI sample — a production-ready RAG chat app that lets you ask questions over your own documents. Uses GPT-4.1-mini for chat, text-embedding-ada-002 for embeddings, and Azure AI Search for retrieval. Supports multimodal documents, speech input/output, Microsoft Entra authentication, and Application Insights tracing.
+**Description**: The most popular Azure AI sample — a production-ready RAG chat app that lets you ask questions over your own documents. Uses GPT-4.1-mini for chat, text-embedding-3-large for embeddings, and Azure AI Search for retrieval. Supports multimodal documents, speech input/output, Microsoft Entra authentication, and Application Insights tracing.
 
 **Quick Start**:
 ```bash
@@ -718,12 +730,12 @@ resource gpt4omini 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01'
 // Text embedding for search
 resource embedding 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01' = {
   parent: openAi
-  name: 'text-embedding-ada-002'
+  name: 'text-embedding-3-large'
   properties: {
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     scaleSettings: {
       scaleType: 'Standard'
@@ -803,7 +815,6 @@ az consumption usage list --start-date $(date -d '7 days ago' +%Y-%m-%d) --end-d
 3. **Use azd down**: Deallocate resources when not actively developing
 4. **Cache Responses**: Implement Redis cache for repeated queries
 5. **Use Prompt Engineering**: Reduce token usage with efficient prompts
-
 ```bash
 # Development configuration
 azd env set AZURE_OPENAI_CAPACITY 10
@@ -831,7 +842,6 @@ For production apps, **Microsoft Foundry Models is recommended**.
 </details>
 
 <details>
-
 <summary><strong>How do I handle Microsoft Foundry Models quota exceeded errors?</strong></summary>
 
 ```bash
@@ -919,5 +929,5 @@ resource openAIRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please note that automated translations may contain errors or inaccuracies. The original document in its native language should be regarded as the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations resulting from the use of this translation.
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

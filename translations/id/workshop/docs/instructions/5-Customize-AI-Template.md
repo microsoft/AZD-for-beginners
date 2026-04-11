@@ -1,24 +1,24 @@
 # 5. Sesuaikan Template
 
-!!! tip "PADA AKHIR MODUL INI ANDA AKAN DAPAT"
+!!! tip "DI AKHIR MODUL INI ANDA AKAN BISA"
 
-    - [ ] Menjelajahi kemampuan Agen AI bawaan
-    - [ ] Menambahkan Pencarian AI dengan indeks Anda sendiri
-    - [ ] Mengaktifkan dan menganalisis metrik Pelacakan
-    - [ ] Menjalankan sesi evaluasi
+    - [ ] Menjelajahi kapabilitas Agen AI bawaan
+    - [ ] Menambahkan AI Search dengan indeks Anda sendiri
+    - [ ] Mengaktifkan dan menganalisis metrik Tracing
+    - [ ] Menjalankan evaluasi
     - [ ] Menjalankan pemindaian red-teaming
     - [ ] **Lab 5: Membangun Rencana Kustomisasi** 
 
 ---
 
-## 5.1 Kemampuan Agen AI
+## 5.1 Kapabilitas Agen AI
 
 !!! success "Kami menyelesaikannya di Lab 01"
 
-- **Pencarian Berkas**: Pencarian berkas bawaan OpenAI untuk pengambilan pengetahuan
+- **Penelusuran Berkas**: Pencarian berkas bawaan OpenAI untuk pengambilan pengetahuan
 - **Sitasi**: Atribusi sumber otomatis dalam respons
 - **Instruksi yang Dapat Disesuaikan**: Memodifikasi perilaku dan kepribadian agen
-- **Integrasi Alat**: Sistem alat yang dapat diperluas untuk kemampuan kustom
+- **Integrasi Alat**: Sistem alat yang dapat diperluas untuk kapabilitas khusus
 
 ---
 
@@ -40,17 +40,17 @@
 
 ---
 
-**OpenAI File Search (Default):**
+**OpenAI File Search (Bawaan):**
 
 - Terintegrasi ke Foundry Agents
-- Pemrosesan dan pengindeksan dokumen otomatis
-- Tidak diperlukan konfigurasi tambahan
+- Pemrosesan dokumen dan pengindeksan otomatis
+- Tidak memerlukan konfigurasi tambahan
 
 **Azure AI Search (Opsional):**
 
 - Pencarian semantik dan vektor hibrid
 - Manajemen indeks kustom
-- Kemampuan pencarian lanjutan
+- Kapabilitas pencarian lanjutan
 - Memerlukan `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
@@ -75,7 +75,7 @@
 
 - Log aplikasi di Container Apps
 - Pencatatan terstruktur dengan ID korelasi
-- Penayangan log waktu-nyata dan historis
+- Tampilan log waktu nyata dan historis
 
 ---
 
@@ -85,17 +85,17 @@
 
 - Evaluator bawaan untuk penilaian kualitas
 - Skrip evaluasi kustom
-- Benchmark kinerja
+- Tolok ukur kinerja
 
 **Pemantauan Berkelanjutan:**
 
-- Evaluasi otomatis terhadap interaksi langsung
+- Evaluasi otomatis dari interaksi langsung
 - Pelacakan metrik kualitas
 - Deteksi regresi kinerja
 
 **Integrasi CI/CD:**
 
-- Workflow GitHub Actions
+- Alur kerja GitHub Actions
 - Pengujian dan evaluasi otomatis
 - Pengujian perbandingan statistik
 
@@ -117,19 +117,19 @@
 
 
 
-!!! quote "PADA AKHIR LAB INI ANDA SEHARUSNYA MEMILIKI"
+!!! quote "DI AKHIR LAB INI ANDA SEHARUSNYA TELAH"
     - [ ] Menentukan kebutuhan skenario Anda
-    - [ ] Menyesuaikan variabel lingkungan (konfigurasi)
-    - [ ] Menyesuaikan instruksi agen (tugas)
-    - [ ] Menerapkan template yang disesuaikan (aplikasi)
-    - [ ] Menyelesaikan tugas pasca-penyebaran (manual)
-    - [ ] Menjalankan evaluasi pengujian
+    - [ ] Menyesuaikan variabel lingkungan (config)
+    - [ ] Menyesuaikan instruksi agen (task)
+    - [ ] Menerapkan template yang disesuaikan (app)
+    - [ ] Menuntaskan tugas pasca-deploy (manual)
+    - [ ] Menjalankan evaluasi uji
 
-This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
+Contoh ini menunjukkan penyesuaian template untuk kasus penggunaan ritel perusahaan dengan dua agen khusus dan beberapa penyebaran model.
 
 ---
 
-## 5.6 Sesuaikan Untuk Anda!
+## 5.6 Sesuaikan untuk Anda!
 
 ### 5.6.1. Persyaratan Skenario
 
@@ -140,16 +140,16 @@ This example demonstrates customizing the template for an enterprise retail use 
 
 #### **Penyebaran Model:**
 
-   - `gpt-4.1`: Model chat utama
-   - `o3`: Model penalaran untuk kueri kompleks
-   - `gpt-4.1-nano`: Model ringan untuk interaksi sederhana
-   - `text-embedding-3-large`: Embedding berkualitas tinggi untuk pencarian
+   - `gpt-4.1`: Primary chat model
+   - `o3`: Reasoning model for complex queries
+   - `gpt-4.1-nano`: Lightweight model for simple interactions
+   - `text-embedding-3-large`: High-quality embeddings for search
 
 #### **Fitur:**
 
    - Pelacakan dan pemantauan diaktifkan
-   - Pencarian AI untuk katalog produk
-   - Kerangka evaluasi untuk penjaminan kualitas
+   - AI Search untuk katalog produk
+   - Kerangka evaluasi untuk jaminan kualitas
    - Red teaming untuk validasi keamanan
 
 ---
@@ -157,14 +157,14 @@ This example demonstrates customizing the template for an enterprise retail use 
 ### 5.6.2 Implementasi Skenario
 
 
-#### 5.6.2.1. Konfigurasi Pra-Penyebaran
+#### 5.6.2.1. Konfigurasi Pra-Penggelaran
 
-Buat skrip setup (`setup-retail.sh`)
+Buat skrip pengaturan (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
-# Tetapkan nama lingkungan
+# Setel nama lingkungan
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
 # Konfigurasikan wilayah (pilih berdasarkan ketersediaan model)
@@ -175,13 +175,13 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Konfigurasikan model chat utama (gpt-4.1 sebagai model yang paling mendekati gpt-4.1 yang tersedia)
+# Konfigurasikan model chat utama (gpt-4.1 sebagai yang paling dekat tersedia dengan gpt-4.1)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Konfigurasikan model embedding untuk pencarian yang ditingkatkan
+# Konfigurasikan model embedding untuk peningkatan pencarian
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
@@ -248,7 +248,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: Skrip Penyebaran
+#### 5.6.2.3: Skrip Penggelaran
 
 Buat `deploy-retail.sh`:
 
@@ -295,12 +295,12 @@ fi
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Ambil keluaran penyebaran
+# Tangkap keluaran penyebaran
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
 # Dapatkan URL aplikasi web
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -321,7 +321,7 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Konfigurasi Pasca-Penyebaran
+#### 5.6.2.4: Konfigurasi Pasca-Penggelaran
 
 Buat `configure-retail-agents.sh`:
 
@@ -387,12 +387,12 @@ Buat `test-retail-deployment.sh`:
 
 echo "🧪 Testing retail deployment..."
 
-# Verifikasi variabel lingkungan telah disetel
+# Periksa bahwa variabel lingkungan sudah diatur
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
 # Uji ketersediaan aplikasi web
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -436,7 +436,7 @@ Setelah mengikuti panduan implementasi ini, Anda akan memiliki:
 1. **Infrastruktur yang Diterapkan:**
 
       - Proyek Microsoft Foundry dengan penyebaran model
-      - Container Apps yang menjadi host aplikasi web
+      - Container Apps yang meng-host aplikasi web
       - Layanan AI Search untuk katalog produk
       - Application Insights untuk pemantauan
 
@@ -460,11 +460,11 @@ Setelah mengikuti panduan implementasi ini, Anda akan memiliki:
       - Kerangka evaluasi kualitas
       - Arsitektur yang dapat diskalakan
 
-This example demonstrates how the AZD template can be extended and customized for specific enterprise scenarios while maintaining best practices for security, monitoring, and scalability.
+Contoh ini menunjukkan bagaimana template AZD dapat diperluas dan disesuaikan untuk skenario perusahaan tertentu sambil mempertahankan praktik terbaik untuk keamanan, pemantauan, dan skalabilitas.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya mencapai akurasi, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber otoritatif. Untuk informasi penting, disarankan menggunakan jasa penerjemah profesional. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang salah yang timbul dari penggunaan terjemahan ini.
+**Penafian**:
+Dokumen ini telah diterjemahkan menggunakan layanan terjemahan AI [Co-op Translator](https://github.com/Azure/co-op-translator). Meskipun kami berupaya untuk akurat, harap diperhatikan bahwa terjemahan otomatis mungkin mengandung kesalahan atau ketidakakuratan. Dokumen asli dalam bahasa aslinya harus dianggap sebagai sumber otoritatif. Untuk informasi yang bersifat kritis, disarankan menggunakan terjemahan profesional oleh penerjemah manusia. Kami tidak bertanggung jawab atas kesalahpahaman atau penafsiran yang salah yang timbul dari penggunaan terjemahan ini.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

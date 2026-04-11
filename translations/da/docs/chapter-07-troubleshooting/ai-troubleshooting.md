@@ -1,28 +1,28 @@
-# AI-specifik fejlsøgningsvejledning
+# AI-specifik fejlfindingsguide
 
 **Kapitelnavigation:**
 - **📚 Kursusforside**: [AZD For Beginners](../../README.md)
-- **📖 Nuværende kapitel**: Kapitel 7 - Fejlsøgning & Debugging
+- **📖 Aktuelt kapitel**: Kapitel 7 - Fejlfinding & Debugging
 - **⬅️ Forrige**: [Debugging Guide](debugging.md)
-- **➡️ Næste kapitel**: [Kapitel 8: Produktion & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
-- **🤖 Relateret**: [Kapitel 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **➡️ Næste kapitel**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
+- **🤖 Relateret**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
 
-Denne omfattende fejlsøgningsvejledning behandler almindelige problemer ved udrulning af AI-løsninger med AZD og giver løsninger og debugging-teknikker specifikt til Azure AI-tjenester.
+Denne omfattende fejlfindingguide adresserer almindelige problemer ved udrulning af AI-løsninger med AZD og giver løsninger og debugging-teknikker specifikt til Azure AI-tjenester.
 
 ## Indholdsfortegnelse
 
 - [Microsoft Foundry Models Service Issues](#azure-openai-service-issues)
-- [Azure AI Search Problems](#azure-ai-search-problems)
-- [Container Apps Deployment Issues](#container-apps-deployment-issues)
-- [Authentication and Permission Errors](#authentication-and-permission-errors)
-- [Model Deployment Failures](#model-deployment-failures)
-- [Performance and Scaling Issues](#performance-and-scaling-issues)
-- [Cost and Quota Management](#cost-and-quota-management)
-- [Debugging Tools and Techniques](#debugging-tools-and-techniques)
+- [Azure AI Search Problems](#problemer-med-azure-ai-search)
+- [Container Apps Deployment Issues](#container-apps-udrulningsproblemer)
+- [Authentication and Permission Errors](#godkendelses-og-tilladelsesfejl)
+- [Model Deployment Failures](#modeludrulningsfejl)
+- [Performance and Scaling Issues](#ydeevne-og-skalaproblemer)
+- [Cost and Quota Management](#omkostnings-og-kvotestyring)
+- [Debugging Tools and Techniques](#fejlsøgningsværktøjer-og-teknikker)
 
-## Microsoft Foundry Models Service Issues
+## Problemer med Microsoft Foundry Models-tjenesten
 
-### Issue: OpenAI Service Unavailable in Region
+### Problem: OpenAI-tjeneste utilgængelig i regionen
 
 **Symptomer:**
 ```
@@ -31,21 +31,21 @@ Error: The requested resource type is not available in the location 'westus'
 
 **Årsager:**
 - Microsoft Foundry Models ikke tilgængelig i den valgte region
-- Kvote udtømt i foretrukne regioner
+- Kvoter udtømte i foretrukne regioner
 - Regionale kapacitetsbegrænsninger
 
 **Løsninger:**
 
 1. **Tjek regions tilgængelighed:**
 ```bash
-# Liste over tilgængelige regioner for OpenAI
+# Vis tilgængelige regioner for OpenAI
 az cognitiveservices account list-skus \
   --kind OpenAI \
   --query "[].locations[]" \
   --output table
 ```
 
-2. **Opdater AZD-konfiguration:**
+2. **Opdater AZD-konfigurationen:**
 ```yaml
 # azure.yaml - Force specific region
 infra:
@@ -68,7 +68,7 @@ parameters:
 param openAiLocation string = 'eastus2'
 ```
 
-### Issue: Model Deployment Quota Exceeded
+### Problem: Kvoten for modeludrulning overskredet
 
 **Symptomer:**
 ```
@@ -77,7 +77,7 @@ Error: Deployment failed due to insufficient quota
 
 **Løsninger:**
 
-1. **Tjek nuværende kvote:**
+1. **Kontroller nuværende kvote:**
 ```bash
 # Kontroller kvoteforbruget
 az cognitiveservices usage list \
@@ -85,9 +85,9 @@ az cognitiveservices usage list \
   --resource-group YOUR_RG
 ```
 
-2. **Anmod om forøgelse af kvote:**
+2. **Anmod om kvoteforhøjelse:**
 ```bash
-# Indsend anmodning om kvoteforhøjelse
+# Send anmodning om øget kvote
 az support tickets create \
   --ticket-name "OpenAI Quota Increase" \
   --description "Need increased quota for production deployment" \
@@ -113,7 +113,7 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }
 ```
 
-### Issue: Invalid API Version
+### Problem: Ugyldig API-version
 
 **Symptomer:**
 ```
@@ -122,13 +122,13 @@ Error: The API version '2023-05-15' is not available for OpenAI
 
 **Løsninger:**
 
-1. **Brug understøttet API-version:**
+1. **Brug en understøttet API-version:**
 ```python
 # Brug den nyeste understøttede version
 AZURE_OPENAI_API_VERSION = "2024-02-15-preview"
 ```
 
-2. **Tjek API-version kompatibilitet:**
+2. **Kontroller API-versionens kompatibilitet:**
 ```bash
 # Liste over understøttede API-versioner
 az rest --method get \
@@ -136,9 +136,9 @@ az rest --method get \
   --query "value[?name.value=='Microsoft.CognitiveServices/accounts/read'].properties.serviceSpecification.metricSpecifications[].supportedApiVersions[]"
 ```
 
-## Azure AI Search Problems
+## Problemer med Azure AI Search
 
-### Issue: Search Service Pricing Tier Insufficient
+### Problem: Søgetjenestens prisniveau utilstrækkeligt
 
 **Symptomer:**
 ```
@@ -147,7 +147,7 @@ Error: Semantic search requires Basic tier or higher
 
 **Løsninger:**
 
-1. **Opgrader prismodel:**
+1. **Opgrader prisniveau:**
 ```bicep
 // infra/main.bicep - Use Basic tier
 resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
@@ -179,7 +179,7 @@ resource searchService 'Microsoft.Search/searchServices@2023-11-01' = {
 }
 ```
 
-### Issue: Index Creation Failures
+### Problem: Fejl ved oprettelse af indeks
 
 **Symptomer:**
 ```
@@ -188,15 +188,15 @@ Error: Cannot create index, insufficient permissions
 
 **Løsninger:**
 
-1. **Bekræft Search Service-nøgler:**
+1. **Bekræft søgetjenestens nøgler:**
 ```bash
-# Hent søgetjenestens administrationsnøgle
+# Hent administrationsnøgle til søgetjenesten
 az search admin-key show \
   --service-name YOUR_SEARCH_SERVICE \
   --resource-group YOUR_RG
 ```
 
-2. **Tjek indeks-skema:**
+2. **Tjek indeksens skema:**
 ```python
 # Valider indeks-skema
 from azure.search.documents.indexes import SearchIndexClient
@@ -212,7 +212,7 @@ def validate_index_schema(index_definition):
             raise ValueError(f"Missing required field: {required}")
 ```
 
-3. **Brug Managed Identity:**
+3. **Brug administreret identitet:**
 ```bicep
 // Grant search permissions to managed identity
 resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -226,9 +226,9 @@ resource searchContributor 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 }
 ```
 
-## Container Apps Deployment Issues
+## Container Apps-udrulningsproblemer
 
-### Issue: Container Build Failures
+### Problem: Fejl ved containerbygning
 
 **Symptomer:**
 ```
@@ -237,7 +237,7 @@ Error: Failed to build container image
 
 **Løsninger:**
 
-1. **Tjek Dockerfile-syntaks:**
+1. **Kontroller Dockerfile-syntaks:**
 ```dockerfile
 # Dockerfile - Python AI app example
 FROM python:3.11-slim
@@ -271,7 +271,7 @@ azure-search-documents==11.4.0
 azure-cosmos==4.5.1
 ```
 
-3. **Tilføj health check:**
+3. **Tilføj helbredstjek:**
 ```python
 # main.py - Tilføj endpoint til sundhedstjek
 from fastapi import FastAPI
@@ -283,7 +283,7 @@ async def health_check():
     return {"status": "healthy"}
 ```
 
-### Issue: Container App Startup Failures
+### Problem: Fejl ved opstart af Container App
 
 **Symptomer:**
 ```
@@ -292,7 +292,7 @@ Error: Container failed to start within timeout period
 
 **Løsninger:**
 
-1. **Forøg startup-timeout:**
+1. **Forøg opstartstimeout:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -327,7 +327,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 2. **Optimer modelloading:**
 ```python
-# Indlæs modeller forsinket for at reducere opstartstid
+# Forsinket indlæsning af modeller for at reducere opstartstiden
 import asyncio
 from contextlib import asynccontextmanager
 
@@ -355,9 +355,9 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 ```
 
-## Authentication and Permission Errors
+## Godkendelses- og tilladelsesfejl
 
-### Issue: Managed Identity Permission Denied
+### Problem: Adgang nægtet for administreret identitet
 
 **Symptomer:**
 ```
@@ -366,9 +366,9 @@ Error: Authentication failed for Microsoft Foundry Models Service
 
 **Løsninger:**
 
-1. **Bekræft rollefordelinger:**
+1. **Bekræft rolletilknytninger:**
 ```bash
-# Kontroller aktuelle rollefordelinger
+# Kontroller de aktuelle rollefordelinger
 az role assignment list \
   --assignee YOUR_MANAGED_IDENTITY_ID \
   --scope /subscriptions/YOUR_SUBSCRIPTION/resourceGroups/YOUR_RG
@@ -391,9 +391,9 @@ resource openAiRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-0
 }
 ```
 
-3. **Test autentificering:**
+3. **Test godkendelse:**
 ```python
-# Test autentificering af administreret identitet
+# Test af administreret identitetsgodkendelse
 from azure.identity import DefaultAzureCredential
 from azure.core.exceptions import ClientAuthenticationError
 
@@ -406,7 +406,7 @@ async def test_authentication():
         print(f"Authentication failed: {e}")
 ```
 
-### Issue: Key Vault Access Denied
+### Problem: Adgang til Key Vault nægtet
 
 **Symptomer:**
 ```
@@ -415,7 +415,7 @@ Error: The user, group or application does not have secrets get permission
 
 **Løsninger:**
 
-1. **Giv Key Vault tilladelser:**
+1. **Giv Key Vault-tilladelser:**
 ```bicep
 resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-01' = {
   parent: keyVault
@@ -434,7 +434,7 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2023-07-
 }
 ```
 
-2. **Brug RBAC i stedet for Access Policies:**
+2. **Brug RBAC i stedet for adgangspolitikker:**
 ```bicep
 resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: keyVault
@@ -447,9 +447,9 @@ resource keyVaultSecretsUserRole 'Microsoft.Authorization/roleAssignments@2022-0
 }
 ```
 
-## Model Deployment Failures
+## Modeludrulningsfejl
 
-### Issue: Model Version Not Available
+### Problem: Modelversion ikke tilgængelig
 
 **Symptomer:**
 ```
@@ -458,9 +458,9 @@ Error: Model version 'gpt-4-32k' is not available
 
 **Løsninger:**
 
-1. **Tjek tilgængelige modeller:**
+1. **Kontroller tilgængelige modeller:**
 ```bash
-# Liste over tilgængelige modeller
+# Vis tilgængelige modeller
 az cognitiveservices account list-models \
   --name YOUR_OPENAI_RESOURCE \
   --resource-group YOUR_RG \
@@ -468,7 +468,7 @@ az cognitiveservices account list-models \
   --output table
 ```
 
-2. **Brug model-fallbacks:**
+2. **Brug modelfallbacks:**
 ```bicep
 // Model deployment with fallback
 @description('Primary model configuration')
@@ -479,8 +479,8 @@ param primaryModel object = {
 
 @description('Fallback model configuration')
 param fallbackModel object = {
-  name: 'gpt-35-turbo'
-  version: '0125'
+  name: 'gpt-4.1'
+  version: '2024-08-06'
 }
 
 // Try primary model first, fallback if unavailable
@@ -499,7 +499,7 @@ resource primaryDeployment 'Microsoft.CognitiveServices/accounts/deployments@202
 
 3. **Valider model før udrulning:**
 ```python
-# Validering af modellen før implementering
+# Modelvalidering før implementering
 import httpx
 
 async def validate_model_availability(model_name: str, version: str) -> bool:
@@ -519,9 +519,9 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
         return False
 ```
 
-## Performance and Scaling Issues
+## Ydeevne- og skalaproblemer
 
-### Issue: High Latency Responses
+### Problem: Høj latenstid i svar
 
 **Symptomer:**
 - Responstider > 30 sekunder
@@ -530,7 +530,7 @@ async def validate_model_availability(model_name: str, version: str) -> bool:
 
 **Løsninger:**
 
-1. **Implementer request timeouts:**
+1. **Implementer anmodnings-timeouts:**
 ```python
 # Konfigurer passende timeouts
 import httpx
@@ -545,9 +545,9 @@ client = httpx.AsyncClient(
 )
 ```
 
-2. **Tilføj response-caching:**
+2. **Tilføj caches til svar:**
 ```python
-# Redis-cache for svar
+# Redis-cache til svar
 import redis.asyncio as redis
 import json
 
@@ -599,7 +599,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### Issue: Memory Out of Errors
+### Problem: Out-of-memory-fejl
 
 **Symptomer:**
 ```
@@ -608,7 +608,7 @@ Error: Container killed due to memory limit exceeded
 
 **Løsninger:**
 
-1. **Øg hukommelsesallokering:**
+1. **Forøg hukommelsesallokering:**
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
   properties: {
@@ -642,7 +642,7 @@ class MemoryOptimizedAI:
         # Kontroller hukommelsesforbruget før behandling
         memory_percent = psutil.virtual_memory().percent
         if memory_percent > self.max_memory_percent:
-            gc.collect()  # Tving hukommelsesoprydning
+            gc.collect()  # Tving oprydning af hukommelsen
             
         result = await self._process_ai_request(request)
         
@@ -651,20 +651,20 @@ class MemoryOptimizedAI:
         return result
 ```
 
-## Cost and Quota Management
+## Omkostnings- og kvotestyring
 
-### Issue: Unexpected High Costs
+### Problem: Uventet høje omkostninger
 
 **Symptomer:**
 - Azure-regning højere end forventet
 - Tokenforbrug overstiger estimater
-- Budgetadvarsler udløst
+- Budgetalarmer udløst
 
 **Løsninger:**
 
 1. **Implementer omkostningskontroller:**
 ```python
-# Sporing af tokenforbrug
+# Overvågning af tokenforbrug
 class TokenTracker:
     def __init__(self, monthly_limit: int = 100000):
         self.monthly_limit = monthly_limit
@@ -709,49 +709,46 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = {
 3. **Optimer valg af model:**
 ```python
 # Omkostningsbevidst modelvalg
-MODEL_COSTS = {
-    'gpt-4.1-mini': 0.00015,  # pr. 1K tokens
-    'gpt-4.1': 0.03,          # pr. 1K tokens
-    'gpt-35-turbo': 0.0015  # pr. 1K tokens
+MODEL_COST_TIERS = {
+  'gpt-4.1-mini': 'low',
+  'gpt-4.1': 'high'
 }
 
 def select_model_by_cost(complexity: str, budget_remaining: float) -> str:
     """Select model based on complexity and budget."""
     if complexity == 'simple' or budget_remaining < 10:
         return 'gpt-4.1-mini'
-    elif complexity == 'medium':
-        return 'gpt-35-turbo'
     else:
         return 'gpt-4.1'
 ```
 
-## Debugging Tools and Techniques
+## Fejlsøgningsværktøjer og -teknikker
 
-### AZD Debugging Commands
+### AZD-fejlsøgningskommandoer
 
 ```bash
 # Aktivér detaljeret logning
 azd up --debug
 
-# Kontroller udrulningsstatus
+# Kontrollér udrulningsstatus
 azd show
 
 # Vis applikationslogfiler (åbner overvågningsdashboard)
 azd monitor --logs
 
-# Vis realtidsmetrikker
+# Vis live-metrikker
 azd monitor --live
 
-# Kontroller miljøvariabler
+# Kontrollér miljøvariabler
 azd env get-values
 ```
 
-### AZD AI Extension Commands for Diagnostics
+### AZD AI-udvidelseskommandoer til diagnostik
 
-If you deployed agents using `azd ai agent init`, these additional tools are available:
+Hvis du udrullede agenter ved hjælp af `azd ai agent init`, er disse yderligere værktøjer tilgængelige:
 
 ```bash
-# Sørg for, at agentudvidelsen er installeret
+# Sørg for, at agents-udvidelsen er installeret
 azd extension install azure.ai.agents
 
 # Geninitialiser eller opdater en agent ud fra et manifest
@@ -764,7 +761,7 @@ azd mcp start
 azd infra generate
 ```
 
-> **Tip:** Use `azd infra generate` to write IaC to disk so you can inspect exactly what resources were provisioned. This is invaluable when debugging resource configuration issues. See the [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full details.
+> **Tip:** Brug `azd infra generate` til at skrive IaC til disk, så du kan inspicere præcis hvilke ressourcer der blev provisioneret. Dette er uvurderligt ved fejlfinding af ressourcekonfigurationsproblemer. Se [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for fulde detaljer.
 
 ### Applikationsfejlsøgning
 
@@ -792,7 +789,7 @@ def log_ai_request(model: str, tokens: int, latency: float, success: bool):
     }))
 ```
 
-2. **Sundhedscheck-endepunkter:**
+2. **Sundhedstjek-endpoints:**
 ```python
 @app.get("/debug/health")
 async def detailed_health_check():
@@ -854,41 +851,41 @@ def monitor_performance(func):
 
 ## Almindelige fejlkoder og løsninger
 
-| Error Code | Beskrivelse | Løsning |
+| Fejlkode | Beskrivelse | Løsning |
 |------------|-------------|----------|
-| 401 | Ikke autoriseret | Tjek API-nøgler og konfiguration af managed identity |
-| 403 | Forbudt | Bekræft RBAC-rollefordelinger |
-| 429 | Ratebegrænset | Implementer retry-logik med eksponentiel backoff |
+| 401 | Uautoriseret | Kontroller API-nøgler og konfiguration af administreret identitet |
+| 403 | Adgang nægtet | Bekræft RBAC-rolle-tildelinger |
+| 429 | Begrænset (rate-limited) | Implementer retry-logik med eksponentiel backoff |
 | 500 | Intern serverfejl | Tjek modeludrulningsstatus og logs |
-| 503 | Tjenesten utilgængelig | Bekræft tjenestens helbred og regional tilgængelighed |
+| 503 | Tjeneste utilgængelig | Kontroller tjenestens helbred og regional tilgængelighed |
 
 ## Næste skridt
 
-1. **Gennemgå [AI Model Deployment Guide](../chapter-02-ai-development/ai-model-deployment.md)** for bedste praksis ved udrulning
-2. **Fuldfør [Production AI Practices](../chapter-08-production/production-ai-practices.md)** for enterprise-klar løsning
-3. **Deltag i [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** for community-support
-4. **Indsend issues** til [AZD GitHub repository](https://github.com/Azure/azure-dev) for AZD-specifikke problemer
+1. **Gennemgå [AI-modeludrulningsvejledning](../chapter-02-ai-development/ai-model-deployment.md)** for bedste praksis ved udrulning
+2. **Gennemfør [Produktions-AI-praksis](../chapter-08-production/production-ai-practices.md)** for enterprise-klarne løsninger
+3. **Deltag i [Microsoft Foundry Discord](https://aka.ms/foundry/discord)** for fællesskabsstøtte
+4. **Indsend issues** til [AZD GitHub-arkivet](https://github.com/Azure/azure-dev) for AZD-specifikke problemer
 
 ## Ressourcer
 
 - [Microsoft Foundry Models Service Troubleshooting](https://learn.microsoft.com/azure/ai-services/openai/troubleshooting)
 - [Container Apps Troubleshooting](https://learn.microsoft.com/azure/container-apps/troubleshooting)
 - [Azure AI Search Troubleshooting](https://learn.microsoft.com/azure/search/search-monitor-logs)
-- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Installer Azure-fejlsøgningsskills i din editor: `npx skills add microsoft/github-copilot-for-azure`
+- [**Azure Diagnostics Agent Skill**](https://skills.sh/microsoft/github-copilot-for-azure/azure-diagnostics) - Installer Azure-fejlfindingsevner i din editor: `npx skills add microsoft/github-copilot-for-azure`
 
 ---
 
 **Kapitelnavigation:**
 - **📚 Kursusforside**: [AZD For Beginners](../../README.md)
-- **📖 Nuværende kapitel**: Kapitel 7 - Fejlsøgning & Debugging
+- **📖 Aktuelt kapitel**: Kapitel 7 - Fejlfinding & Debugging
 - **⬅️ Forrige**: [Debugging Guide](debugging.md)
-- **➡️ Næste kapitel**: [Kapitel 8: Produktion & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
-- **🤖 Relateret**: [Kapitel 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **📖 Reference**: [Azure Developer CLI Troubleshooting](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
+- **➡️ Næste kapitel**: [Chapter 8: Production & Enterprise Patterns](../chapter-08-production/production-ai-practices.md)
+- **🤖 Relateret**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
+- **📖 Reference**: [Fejlfinding for Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/troubleshoot)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Ansvarsfraskrivelse**:
-Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, skal du være opmærksom på, at automatiske oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument på originalsproget bør betragtes som den autoritative kilde. For kritiske oplysninger anbefales professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der opstår som følge af brugen af denne oversættelse.
+Dette dokument er blevet oversat ved hjælp af AI-oversættelsestjenesten [Co-op Translator](https://github.com/Azure/co-op-translator). Selvom vi bestræber os på nøjagtighed, bedes du være opmærksom på, at automatiserede oversættelser kan indeholde fejl eller unøjagtigheder. Det oprindelige dokument i dets originalsprog bør betragtes som den autoritative kilde. For kritisk information anbefales en professionel menneskelig oversættelse. Vi er ikke ansvarlige for eventuelle misforståelser eller fejltolkninger, der måtte opstå som følge af brugen af denne oversættelse.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

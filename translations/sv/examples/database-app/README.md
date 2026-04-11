@@ -1,13 +1,13 @@
 # Distribuera en Microsoft SQL-databas och webbapp med AZD
 
-⏱️ **Beräknad tid**: 20-30 minuter | 💰 **Beräknad kostnad**: ~$15-25/månad | ⭐ **Komplexitet**: Medelsvår
+⏱️ **Beräknad tid**: 20-30 minuter | 💰 **Beräknad kostnad**: ~$15-25/month | ⭐ **Komplexitet**: Medel
 
 Detta **kompletta, fungerande exempel** visar hur du använder [Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/) för att distribuera en Python Flask-webbapplikation med en Microsoft SQL-databas till Azure. All kod ingår och är testad—inga externa beroenden krävs.
 
-## Vad du kommer att lära dig
+## Vad du lär dig
 
-Genom att slutföra detta exempel kommer du att:
-- Distribuera en flerskiktsapplikation (webbapp + databas) med infrastruktur-som-kod
+Genom att genomföra detta exempel kommer du att:
+- Distribuera en flerskiktad applikation (webbapp + databas) med infrastruktur-som-kod
 - Konfigurera säkra databasanslutningar utan att hårdkoda hemligheter
 - Övervaka applikationens hälsa med Application Insights
 - Hantera Azure-resurser effektivt med AZD CLI
@@ -15,16 +15,16 @@ Genom att slutföra detta exempel kommer du att:
 
 ## Översikt av scenariot
 - **Web App**: Python Flask REST-API med databasanslutning
-- **Database**: Azure SQL-databas med exempeldata
+- **Database**: Azure SQL Database med exempeldata
 - **Infrastructure**: Provisioneras med Bicep (modulära, återanvändbara mallar)
-- **Distribution**: Fullt automatiserad med `azd`-kommandon
+- **Deployment**: Fullt automatiserad med `azd`-kommandon
 - **Monitoring**: Application Insights för loggar och telemetri
 
 ## Förutsättningar
 
 ### Nödvändiga verktyg
 
-Innan du börjar, kontrollera att du har dessa verktyg installerade:
+Innan du börjar, kontrollera att du har följande verktyg installerade:
 
 1. **[Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)** (version 2.50.0 eller högre)
    ```sh
@@ -35,7 +35,7 @@ Innan du börjar, kontrollera att du har dessa verktyg installerade:
 2. **[Azure Developer CLI (azd)](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)** (version 1.0.0 eller högre)
    ```sh
    azd version
-   # Förväntat utdata: azd version 1.0.0 eller högre
+   # Förväntad utdata: azd version 1.0.0 eller högre
    ```
 
 3. **[Python 3.8+](https://www.python.org/downloads/)** (för lokal utveckling)
@@ -47,43 +47,43 @@ Innan du börjar, kontrollera att du har dessa verktyg installerade:
 4. **[Docker](https://www.docker.com/get-started)** (valfritt, för lokal containeriserad utveckling)
    ```sh
    docker --version
-   # Förväntad utdata: Docker version 20.10 eller högre
+   # Förväntat utdata: Docker version 20.10 eller högre
    ```
 
 ### Azure-krav
 
-- Ett aktivt **Azure-prenumeration** ([skapa ett gratiskonto](https://azure.microsoft.com/free/))
+- Ett aktivt **Azure-prenumeration** ([create a free account](https://azure.microsoft.com/free/))
 - Behörighet att skapa resurser i din prenumeration
-- **Owner** eller **Contributor**-rollen i prenumerationen eller resursgruppen
+- Roll: **Owner** eller **Contributor** på prenumerationen eller resursgruppen
 
-### Förkunskaper
+### Kunskapsförutsättningar
 
-Detta är ett exempel på **medelnivå**. Du bör vara bekant med:
+Detta är ett exempel på **mellannivå**. Du bör vara bekant med:
 - Grundläggande kommandoradsoperationer
 - Grundläggande molnkoncept (resurser, resursgrupper)
 - Grundläggande förståelse för webbapplikationer och databaser
 
-**Ny på AZD?** Börja med [Getting Started guide](../../docs/chapter-01-foundation/azd-basics.md) först.
+**Ny på AZD?** Börja med [Kom igång-guiden](../../docs/chapter-01-foundation/azd-basics.md) först.
 
 ## Arkitektur
 
-Detta exempel distribuerar en tvåskiktsarkitektur med en webbapplikation och en SQL-databas:
+Detta exempel distribuerar en tvålagsarkitektur med en webbapplikation och en SQL-databas:
 
 ```mermaid
 graph TD
     Browser[Användarens webbläsare] <--> WebApp[Azure Webbapp<br/>Flask-API<br/>/health<br/>/products]
     WebApp -- Säker anslutning<br/>Krypterad --> SQL[Azure SQL-databas<br/>Produkttabell<br/>Exempeldata]
 ```
-**Resursdistribution:**
-- **Resource Group**: Behållare för alla resurser
-- **App Service Plan**: Linux-baserad hosting (B1-tier för kostnadseffektivitet)
+**Distribuering av resurser:**
+- **Resursgrupp**: Behållare för alla resurser
+- **App Service Plan**: Linux-baserad hosting (B1-nivå för kostnadseffektivitet)
 - **Web App**: Python 3.11-runtime med Flask-applikation
 - **SQL Server**: Hanterad databasserver med minst TLS 1.2
-- **SQL Database**: Basic-nivå (2GB, lämplig för utveckling/testning)
+- **SQL Database**: Basic-nivå (2GB, lämplig för utveckling/test)
 - **Application Insights**: Övervakning och loggning
 - **Log Analytics Workspace**: Centraliserad logglagring
 
-**Analogi**: Tänk på detta som en restaurang (webbapp) med ett förråd (databas). Kunder beställer från menyn (API-slutpunkter), och köket (Flask-appen) hämtar ingredienser (data) från förrådet. Restaurangchefen (Application Insights) följer allt som händer.
+**Analogi**: Tänk på detta som en restaurang (webbapp) med ett kylrum (databas). Kunder beställer från menyn (API-endpoints), och köket (Flask-appen) hämtar ingredienser (data) från frysen. Restaurangchefen (Application Insights) följer allting som händer.
 
 ## Mappstruktur
 
@@ -115,14 +115,14 @@ examples/database-app/
 ```
 
 **Vad varje fil gör:**
-- **azure.yaml**: Berättar för AZD vad som ska distribueras och var
+- **azure.yaml**: Talar om för AZD vad som ska distribueras och var
 - **infra/main.bicep**: Orkestrerar alla Azure-resurser
 - **infra/resources/*.bicep**: Individuella resursdefinitioner (modulära för återanvändning)
 - **src/web/app.py**: Flask-applikation med databaslogik
-- **requirements.txt**: Pythonpaketberoenden
-- **Dockerfile**: Instruktioner för containerisering vid distribution
+- **requirements.txt**: Python-paketberoenden
+- **Dockerfile**: Containeriseringsinstruktioner för distribution
 
-## Snabbstart (steg för steg)
+## Snabbstart (Steg-för-steg)
 
 ### Steg 1: Klona och navigera
 
@@ -131,13 +131,13 @@ git clone https://github.com/microsoft/AZD-for-beginners.git
 cd AZD-for-beginners/examples/database-app
 ```
 
-**✓ Kontroll**: Kontrollera att du ser `azure.yaml` och mappen `infra/`:
+**✓ Kontroll**: Verifiera att du ser `azure.yaml` och mappen `infra/`:
 ```sh
 ls
 # Förväntat: README.md, azure.yaml, infra/, src/
 ```
 
-### Steg 2: Autentisera dig mot Azure
+### Steg 2: Autentisera mot Azure
 
 ```sh
 azd auth login
@@ -156,9 +156,9 @@ Logged in to Azure.
 azd init
 ```
 
-**Vad händer**: AZD skapar en lokal konfiguration för din distribution.
+**Vad som händer**: AZD skapar en lokal konfiguration för din distribution.
 
-**Frågor du kommer att se**:
+**Frågor du får**:
 - **Miljönamn**: Ange ett kort namn (t.ex. `dev`, `myapp`)
 - **Azure-prenumeration**: Välj din prenumeration från listan
 - **Azure-region**: Välj en region (t.ex. `eastus`, `westeurope`)
@@ -174,7 +174,7 @@ SUCCESS: New project initialized!
 azd provision
 ```
 
-**Vad händer**: AZD distribuerar all infrastruktur (tar 5–8 minuter):
+**Vad som händer**: AZD distribuerar all infrastruktur (tar 5–8 minuter):
 1. Skapar resursgrupp
 2. Skapar SQL Server och databas
 3. Skapar App Service Plan
@@ -182,9 +182,9 @@ azd provision
 5. Skapar Application Insights
 6. Konfigurerar nätverk och säkerhet
 
-**Du kommer att bli ombedd att ange**:
-- **SQL admin username**: Ange ett användarnamn (t.ex. `sqladmin`)
-- **SQL admin password**: Ange ett starkt lösenord (spara detta!)
+**Du kommer bli ombedd att ange**:
+- **SQL-adminanvändarnamn**: Ange ett användarnamn (t.ex. `sqladmin`)
+- **SQL-adminlösenord**: Ange ett starkt lösenord (spara detta!)
 
 **✓ Kontroll**: Du bör se:
 ```
@@ -201,10 +201,10 @@ https://portal.azure.com/#@/resource/subscriptions/.../resourceGroups/rg-<env-na
 azd deploy
 ```
 
-**Vad händer**: AZD bygger och distribuerar din Flask-applikation:
-1. Paketera Python-applikationen
+**Vad som händer**: AZD bygger och distribuerar din Flask-applikation:
+1. Paketerar Python-applikationen
 2. Bygger Docker-containern
-3. Pusha till Azure Web App
+3. Pushar till Azure Web App
 4. Initierar databasen med exempeldata
 5. Startar applikationen
 
@@ -272,7 +272,7 @@ curl https://app-<your-id>.azurewebsites.net/products
 ]
 ```
 
-**Hämta enskild produkt**:
+**Hämta enstaka produkt**:
 ```sh
 curl https://app-<your-id>.azurewebsites.net/products/1
 ```
@@ -290,19 +290,19 @@ curl https://app-<your-id>.azurewebsites.net/products/1
 Hemligheter hanteras säkert via Azure App Service-konfiguration—**aldrig hårdkodade i källkoden**.
 
 **Konfigureras automatiskt av AZD**:
-- `SQL_CONNECTION_STRING`: Databasanslutning med krypterade autentiseringsuppgifter
-- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Slutpunkt för övervakningstelemetri
+- `SQL_CONNECTION_STRING`: Databasanslutning med krypterade uppgifter
+- `APPLICATIONINSIGHTS_CONNECTION_STRING`: Telemetri-ändpunkt för övervakning
 - `SCM_DO_BUILD_DURING_DEPLOYMENT`: Aktiverar automatisk installation av beroenden
 
 **Var hemligheter lagras**:
-1. Under `azd provision` anger du SQL-referenser via säkra uppmaningar
-2. AZD lagrar dem i din lokala `.azure/<env-name>/.env`-fil (git-ignorerad)
-3. AZD injicerar dem i Azure App Service-konfigurationen (krypterade i vila)
+1. Under `azd provision` anger du SQL-uppgifter via säkra promptar
+2. AZD lagrar dessa i din lokala `.azure/<env-name>/.env`-fil (som ignoreras av git)
+3. AZD injicerar dem i Azure App Service-konfigurationen (krypterat i vila)
 4. Applikationen läser dem via `os.getenv()` vid körning
 
 ### Lokal utveckling
 
-För lokal testning, skapa en `.env`-fil från exemplaret:
+För lokal testning, skapa en `.env`-fil från mallen:
 
 ```sh
 cp .env.sample .env
@@ -333,8 +333,8 @@ curl http://localhost:8000/health
 Alla Azure-resurser definieras i **Bicep-mallar** (`infra/`-mappen):
 
 - **Modulär design**: Varje resurstyp har sin egen fil för återanvändbarhet
-- **Parameteriserad**: Anpassa SKU:er, regioner, namngivningskonventioner
-- **Bästa praxis**: Följer Azures namngivningsstandarder och säkerhetsstandarder
+- **Parametriserad**: Anpassa SKUs, regioner, namngivningskonventioner
+- **Bästa praxis**: Följer Azures namngivningsstandarder och säkerhetsinställningar
 - **Versionshanterad**: Infrastrukturförändringar spåras i Git
 
 **Exempel på anpassning**:
@@ -347,65 +347,65 @@ sku: {
 }
 ```
 
-## Säkerhetsbästa praxis
+## Säkerhetsriktlinjer
 
-Detta exempel följer Azures säkerhetsbästa praxis:
+Detta exempel följer Azures säkerhetsriktlinjer:
 
-### 1. **Inga hemligheter i källkoden**
-- ✅ Referenser lagras i Azure App Service-konfigurationen (krypterade)
-- ✅ `.env`-filer utesluts från Git via `.gitignore`
-- ✅ Hemligheter skickas via säkra parametrar under provisioning
+### 1. **Inga hemligheter i källkod**
+- ✅ Uppgifter lagras i Azure App Service-konfiguration (krypterat)
+- ✅ `.env`-filer exkluderas från Git via `.gitignore`
+- ✅ Hemligheter skickas via säkra parametrar under provisionering
 
 ### 2. **Krypterade anslutningar**
-- ✅ Minst TLS 1.2 för SQL Server
-- ✅ Endast HTTPS krävs för Web App
+- ✅ TLS 1.2 som minimum för SQL Server
+- ✅ Endast HTTPS tillåtet för Web App
 - ✅ Databasanslutningar använder krypterade kanaler
 
 ### 3. **Nätverkssäkerhet**
-- ✅ SQL Server-brandvägg konfigurerad för att bara tillåta Azure-tjänster
-- ✅ Offentlig nätverksåtkomst begränsad (kan ytterligare stängas av med Private Endpoints)
+- ✅ SQL Server-brandvägg konfigurerad för att tillåta endast Azure-tjänster
+- ✅ Offentlig nätverksåtkomst begränsad (kan ytterligare låsas med privata slutpunkter)
 - ✅ FTPS inaktiverat på Web App
 
-### 4. **Autentisering & Auktorisation**
-- ⚠️ **Aktuellt**: SQL-autentisering (användarnamn/lösenord)
-- ✅ **Produktionsrekommendation**: Använd Azure Managed Identity för lösenordslös autentisering
+### 4. **Autentisering och auktorisering**
+- ⚠️ **Nuvarande**: SQL-autentisering (användarnamn/lösenord)
+- ✅ **Rekommendation för produktion**: Använd Azure Managed Identity för lösenordslös autentisering
 
-**För att uppgradera till Managed Identity** (för produktion):
+För att uppgradera till Managed Identity (för produktion):
 1. Aktivera managed identity på Web App
 2. Ge identiteten SQL-behörigheter
 3. Uppdatera anslutningssträngen för att använda managed identity
-4. Ta bort autentisering baserad på lösenord
+4. Ta bort lösenordsbaserad autentisering
 
-### 5. **Revision & Efterlevnad**
+### 5. **Revision och efterlevnad**
 - ✅ Application Insights loggar alla förfrågningar och fel
-- ✅ Revision för SQL-databasen aktiverad (kan konfigureras för efterlevnad)
+- ✅ SQL Database-revision aktiverad (kan konfigureras för efterlevnad)
 - ✅ Alla resurser taggade för styrning
 
-**Säkerhetschecklista innan produktion**:
+**Säkerhetschecklista före produktion**:
 - [ ] Aktivera Azure Defender för SQL
-- [ ] Konfigurera Private Endpoints för SQL-databasen
+- [ ] Konfigurera privata slutpunkter för SQL Database
 - [ ] Aktivera Web Application Firewall (WAF)
-- [ ] Implementera Azure Key Vault för rotation av hemligheter
+- [ ] Implementera Azure Key Vault för automatisk byte av hemligheter
 - [ ] Konfigurera Azure AD-autentisering
 - [ ] Aktivera diagnostisk loggning för alla resurser
 
 ## Kostnadsoptimering
 
-**Uppskattade månadskostnader** (från och med november 2025):
+**Uppskattade månadskostnader** (per november 2025):
 
 | Resurs | SKU/Nivå | Uppskattad kostnad |
 |----------|----------|----------------|
-| App Service Plan | B1 (Basic) | ~$13/månad |
-| SQL Database | Basic (2GB) | ~$5/månad |
-| Application Insights | Pay-as-you-go | ~$2/månad (låg trafik) |
-| **Totalt** | | **~$20/månad** |
+| App Service Plan | B1 (Basic) | ~$13/month |
+| SQL Database | Basic (2GB) | ~$5/month |
+| Application Insights | Pay-as-you-go | ~$2/month (low traffic) |
+| **Totalt** | | **~$20/month** |
 
 **💡 Tips för kostnadsbesparing**:
 
-1. **Använd gratisnivå för inlärning**:
-   - App Service: F1-tier (gratis, begränsade timmar)
-   - SQL Database: Använd Azure SQL Database serverless
-   - Application Insights: 5GB/månad gratis ingestion
+1. **Använd gratisnivå för lärande**:
+   - App Service: F1-nivå (gratis, begränsade timmar)
+   - SQL Database: Använd Azure SQL Database serverlös
+   - Application Insights: 5GB/månad fri ingestion
 
 2. **Stoppa resurser när de inte används**:
    ```sh
@@ -420,9 +420,9 @@ Detta exempel följer Azures säkerhetsbästa praxis:
    ```sh
    azd down
    ```
-   Detta tar bort ALLA resurser och stoppar avgifter.
+   Detta tar bort ALLA resurser och stoppar kostnaderna.
 
-4. **Utveckling vs. produktion SKU:er**:
+4. **Utveckling vs. produktions-SKU**:
    - **Utveckling**: Basic-nivå (använd i detta exempel)
    - **Produktion**: Standard/Premium-nivå med redundans
 
@@ -432,7 +432,7 @@ Detta exempel följer Azures säkerhetsbästa praxis:
 - Tagga alla resurser med `azd-env-name` för spårning
 
 **Alternativ med gratisnivå**:
-För inlärningssyfte kan du ändra `infra/resources/app-service-plan.bicep`:
+För inlärningsändamål kan du ändra `infra/resources/app-service-plan.bicep`:
 ```bicep
 sku: {
   name: 'F1'  // Free tier
@@ -441,25 +441,25 @@ sku: {
 ```
 **Obs**: Gratisnivån har begränsningar (60 min/dag CPU, ingen always-on).
 
-## Övervakning & Observerbarhet
+## Övervakning och observabilitet
 
 ### Integration med Application Insights
 
 Detta exempel inkluderar **Application Insights** för omfattande övervakning:
 
 **Vad som övervakas**:
-- ✅ HTTP-förfrågningar (latens, statuskoder, slutpunkter)
+- ✅ HTTP-förfrågningar (latens, statuskoder, endpoints)
 - ✅ Applikationsfel och undantag
 - ✅ Anpassad loggning från Flask-appen
 - ✅ Databasanslutningens hälsa
-- ✅ Prestandametriker (CPU, minne)
+- ✅ Prestandamått (CPU, minne)
 
 **Åtkomst till Application Insights**:
 1. Öppna [Azure Portal](https://portal.azure.com)
 2. Navigera till din resursgrupp (`rg-<env-name>`)
 3. Klicka på Application Insights-resursen (`appi-<unique-id>`)
 
-**Användbara frågor** (Application Insights → Logs):
+**Användbara frågor** (Application Insights → Loggar):
 
 **Visa alla förfrågningar**:
 ```kusto
@@ -477,7 +477,7 @@ exceptions
 | project timestamp, type, outerMessage, operation_Name
 ```
 
-**Kontrollera hälsoslutpunkt**:
+**Kontrollera hälsoendpunkt**:
 ```kusto
 requests
 | where name contains "health"
@@ -486,27 +486,27 @@ requests
 
 ### SQL-databasrevision
 
-**Revision av SQL-databasen är aktiverad** för att spåra:
-- Mönster för databasåtkomst
+**Revision för SQL-databasen är aktiverad** för att spåra:
+- Databasåtkomstmönster
 - Misslyckade inloggningsförsök
-- Schemanändringar
+- Schemaändringar
 - Dataåtkomst (för efterlevnad)
 
 **Åtkomst till revisionsloggar**:
 1. Azure Portal → SQL Database → Auditing
-2. Visa loggar i Log Analytics-arbetsytan
+2. Visa loggar i Log Analytics-workspacen
 
 ### Realtidsövervakning
 
-**Visa Live Metrics**:
+**Visa live-metrik**:
 1. Application Insights → Live Metrics
 2. Se förfrågningar, fel och prestanda i realtid
 
 **Ställ in aviseringar**:
 Skapa aviseringar för kritiska händelser:
 - HTTP 500-fel > 5 på 5 minuter
-- Misslyckade databasanslutningar
-- Höga responstider (>2 sekunder)
+- Databasanslutningsfel
+- Höga svarstider (>2 sekunder)
 
 **Exempel på skapande av avisering**:
 ```sh
@@ -521,9 +521,9 @@ az monitor metrics alert create \
 ## Felsökning
 ### Vanliga problem och lösningar
 
-#### 1. `azd provision` misslyckas med "Plats inte tillgänglig"
+#### 1. `azd provision` misslyckas med "Location not available"
 
-**Symtom**:
+**Symptom**:
 ```
 Error: The subscription is not registered for the resource type 'components' in the location 'centralus'.
 ```
@@ -536,25 +536,25 @@ az provider register --namespace Microsoft.Insights
 
 #### 2. SQL-anslutning misslyckas under distribution
 
-**Symtom**:
+**Symptom**:
 ```
 pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]TCP Provider...')
 ```
 
 **Lösning**:
-- Verifiera att SQL Servers brandvägg tillåter Azure-tjänster (konfigureras automatiskt)
-- Kontrollera att SQL-administratörslösenordet angavs korrekt under `azd provision`
-- Säkerställ att SQL Server är fullt provisionerad (kan ta 2-3 minuter)
+- Verifiera att SQL Server-brandväggen tillåter Azure-tjänster (konfigureras automatiskt)
+- Kontrollera att SQL-adminlösenordet angavs korrekt under `azd provision`
+- Se till att SQL Server är helt provisionerad (kan ta 2-3 minuter)
 
 **Verifiera anslutning**:
 ```sh
-# Från Azure-portalen, gå till SQL-databas → Frågeredigeraren
+# Från Azure-portalen, gå till SQL-databasen → frågeredigeraren
 # Försök att ansluta med dina inloggningsuppgifter
 ```
 
-#### 3. Webbappen visar "Applikationsfel"
+#### 3. Webbappen visar "Application Error"
 
-**Symtom**:
+**Symptom**:
 Webbläsaren visar en generisk felsida.
 
 **Lösning**:
@@ -565,13 +565,13 @@ az webapp log tail --name <app-name> --resource-group <rg-name>
 ```
 
 **Vanliga orsaker**:
-- Saknade miljövariabler (kontrollera App Service → Konfiguration)
-- Installation av Python-paket misslyckades (kontrollera distributionsloggarna)
-- Fel vid databasinitialisering (kontrollera SQL-anslutningen)
+- Saknade miljövariabler (kontrollera App Service → Configuration)
+- Installation av Python-paket misslyckades (kontrollera distributionsloggar)
+- Fel vid databasinitiering (kontrollera SQL-anslutning)
 
-#### 4. `azd deploy` misslyckas med "Byggfel"
+#### 4. `azd deploy` misslyckas med "Build Error"
 
-**Symtom**:
+**Symptom**:
 ```
 Error: Failed to build project
 ```
@@ -579,7 +579,7 @@ Error: Failed to build project
 **Lösning**:
 - Se till att `requirements.txt` inte innehåller syntaxfel
 - Kontrollera att Python 3.11 anges i `infra/resources/web-app.bicep`
-- Verifiera att Dockerfile har rätt basbild
+- Verifiera att Dockerfile har rätt basimage
 
 **Felsök lokalt**:
 ```sh
@@ -588,30 +588,33 @@ docker build -t test-app .
 docker run -p 8000:8000 test-app
 ```
 
-#### 5. "Obehörig" vid körning av AZD-kommandon
+#### 5. "Unauthorized" när du kör AZD-kommandon
 
-**Symtom**:
+**Symptom**:
 ```
 ERROR: (Unauthorized) The client '<id>' with object id '<id>' does not have authorization
 ```
 
 **Lösning**:
-Logga in igen på Azure:
+Autentisera om mot Azure:
 ```sh
+# Krävs för AZD-arbetsflöden
 azd auth login
+
+# Valfritt om du också använder Azure CLI-kommandon direkt
 az login
 ```
 
-Verifiera att du har korrekta behörigheter (Contributor-roll) för prenumerationen.
+Verifiera att du har korrekta behörigheter (Contributor-roll) på prenumerationen.
 
-#### 6. Höga kostnader för databasen
+#### 6. Höga databaskostnader
 
-**Symtom**:
-Oväntad Azure-faktura.
+**Symptom**:
+Ov väntad Azure-faktura.
 
 **Lösning**:
 - Kontrollera om du glömde köra `azd down` efter testning
-- Kontrollera att SQL Database använder Basic-tier (inte Premium)
+- Verifiera att SQL Database använder Basic-tier (inte Premium)
 - Granska kostnader i Azure Cost Management
 - Ställ in kostnadsvarningar
 
@@ -627,7 +630,7 @@ azd env get-values
 az webapp show --name <app-name> --resource-group <rg-name> --query state
 ```
 
-**Visa applikationsloggar**:
+**Åtkomst till applikationsloggar**:
 ```sh
 az webapp log download --name <app-name> --resource-group <rg-name> --log-file app-logs.zip
 ```
@@ -662,8 +665,8 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 3. Kontrollera Application Insights:
    - Navigera till Application Insights i Azure-portalen
    - Gå till "Live Metrics"
-   - Uppdatera sidan i webbläsaren för webbappen
-   **Förväntat**: Se förfrågningar som visas i realtid
+   - Ladda om sidan för webbappen i din webbläsare
+   **Förväntat**: Se förfrågningar som dyker upp i realtid
 
 **Framgångskriterier**: Alla 6-7 resurser finns, alla endpoints returnerar data, Live Metrics visar aktivitet.
 
@@ -721,18 +724,18 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
    ```
    **Förväntat**: Returnerar produkter som matchar "laptop"
 
-**Framgångskriterier**: Den nya endpointen fungerar, returnerar filtrerade resultat, visas i Application Insights-loggarna.
+**Framgångskriterier**: Den nya endpointen fungerar, returnerar filtrerade resultat och syns i Application Insights-loggarna.
 
 ---
 
-### Övning 3: Lägg till övervakning och aviseringar (Avancerad)
+### Övning 3: Lägg till övervakning och aviseringar (Avancerat)
 
-**Mål**: Konfigurera proaktiv övervakning med aviseringar.
+**Mål**: Ställ in proaktiv övervakning med aviseringar.
 
 **Steg**:
-1. Skapa en varning för HTTP 500-fel:
+1. Skapa en avisering för HTTP 500-fel:
    ```sh
-   # Hämta Application Insights-resurs-ID
+   # Hämta Application Insights resurs-ID
    AI_ID=$(az monitor app-insights component show \
      --app appi-<your-id> \
      --resource-group rg-<env-name> \
@@ -749,26 +752,26 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
      --description "Alert when >5 failed requests in 5 minutes"
    ```
 
-2. Trigga varningen genom att orsaka fel:
+2. Utlös aviseringen genom att orsaka fel:
    ```sh
    # Begär en icke-existerande produkt
    for i in {1..10}; do curl https://app-<your-id>.azurewebsites.net/products/999; done
    ```
 
-3. Kontrollera om varningen utlöstes:
-   - Azure Portal → Alerts → Alert Rules
+3. Kontrollera om aviseringen utlöste:
+   - Azure-portalen → Aviseringar → Aviseringsregler
    - Kontrollera din e-post (om konfigurerat)
 
-**Framgångskriterier**: Varningregeln är skapad, utlöses vid fel, aviseringar tas emot.
+**Framgångskriterier**: Aviseringsregel är skapad, utlöses vid fel, och aviseringar tas emot.
 
 ---
 
-### Övning 4: Ändringar i databasschema (Avancerad)
+### Övning 4: Ändringar i databasschema (Avancerat)
 
 **Mål**: Lägg till en ny tabell och ändra applikationen för att använda den.
 
 **Steg**:
-1. Anslut till SQL Database via Azure Portal Query Editor
+1. Anslut till SQL-databasen via Query Editor i Azure-portalen
 
 2. Skapa en ny `categories`-tabell:
    ```sql
@@ -791,7 +794,7 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 4. Distribuera och testa
 
-**Framgångskriterier**: Den nya tabellen finns, produkter visar kategoriinformation, applikationen fungerar fortfarande.
+**Framgångskriterier**: Ny tabell finns, produkter visar kategoriinformation, applikationen fungerar fortfarande.
 
 ---
 
@@ -801,19 +804,19 @@ az webapp log download --name <app-name> --resource-group <rg-name> --log-file a
 
 **Steg**:
 1. Lägg till Redis Cache i `infra/main.bicep`
-2. Uppdatera `src/web/app.py` för att cachea produktförfrågningar
+2. Uppdatera `src/web/app.py` för att cachelagra produktförfrågningar
 3. Mät prestandaförbättring med Application Insights
 4. Jämför svarstider före/efter caching
 
 **Framgångskriterier**: Redis är distribuerat, caching fungerar, svarstider förbättras med >50%.
 
-**Tips**: Börja med [Dokumentation för Azure Cache for Redis](https://learn.microsoft.com/azure/azure-cache-for-redis/).
+**Tips**: Börja med [Azure Cache for Redis-dokumentation](https://learn.microsoft.com/azure/azure-cache-for-redis/).
 
 ---
 
 ## Rensa upp
 
-För att undvika löpande kostnader, ta bort alla resurser när du är klar:
+För att undvika fortlöpande kostnader, radera alla resurser när du är klar:
 
 ```sh
 azd down
@@ -826,49 +829,49 @@ azd down
 
 Skriv `y` för att bekräfta.
 
-**✓ Framgångskontroll**: 
-- Alla resurser är borttagna från Azure-portalen
-- Inga löpande kostnader
-- Lokala `.azure/<env-name>`-mappen kan tas bort
+**✓ Kontroll av framgång**: 
+- Alla resurser är raderade från Azure-portalen
+- Inga fortlöpande kostnader
+- Lokal `.azure/<env-name>`-mapp kan raderas
 
-**Alternativ** (behåll infrastruktur, ta bort data):
+**Alternativ** (behåll infrastrukturen, radera data):
 ```sh
-# Ta bort endast resursgruppen (behåll AZD-konfigurationen)
+# Ta bara bort resursgruppen (behåll AZD-konfigurationen)
 az group delete --name rg-<env-name> --yes
 ```
-## Läs mer
+## Lär dig mer
 
 ### Relaterad dokumentation
 - [Azure Developer CLI-dokumentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Azure SQL Database-dokumentation](https://learn.microsoft.com/azure/azure-sql/database/)
-- [Azure App Service-dokumentation](https://learn.microsoft.com/azure/app-service/)
-- [Application Insights-dokumentation](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
-- [Bicep-språkreferens](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+- [Azure SQL Database Documentation](https://learn.microsoft.com/azure/azure-sql/database/)
+- [Azure App Service Documentation](https://learn.microsoft.com/azure/app-service/)
+- [Application Insights Documentation](https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview)
+- [Bicep Language Reference](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
-### Nästa steg i denna kurs
-- **[Exempel på Container Apps](../../../../examples/container-app)**: Distribuera mikrotjänster med Azure Container Apps
-- **[AI-integrationsguide](../../../../docs/ai-foundry)**: Lägg till AI-funktioner i din app
+### Nästa steg i den här kursen
+- **[Container Apps-exempel](../../../../examples/container-app)**: Distribuera mikrotjänster med Azure Container Apps
+- **[AI-integrationsguide](../../../../docs/ai-foundry)**: Lägg till AI-funktionalitet i din app
 - **[Bästa praxis för distribution](../../docs/chapter-04-infrastructure/deployment-guide.md)**: Produktionsdistributionsmönster
 
 ### Avancerade ämnen
 - **Managed Identity**: Ta bort lösenord och använd Azure AD-autentisering
 - **Private Endpoints**: Säkra databasanslutningar inom ett virtuellt nätverk
 - **CI/CD Integration**: Automatisera distributioner med GitHub Actions eller Azure DevOps
-- **Multi-Environment**: Ställ in dev-, staging- och produktionsmiljöer
-- **Database Migrations**: Använd Alembic eller Entity Framework för versionshantering av schema
+- **Flera miljöer**: Ställ in dev, staging och produktionsmiljöer
+- **Databasmigreringar**: Använd Alembic eller Entity Framework för versionshantering av schema
 
-### Jämförelse med andra tillvägagångssätt
+### Jämförelse med andra metoder
 
-**AZD vs. ARM-mallar**:
-- ✅ AZD: Högre abstraktionsnivå, enklare kommandon
-- ⚠️ ARM: Mer detaljerat, mer granulär kontroll
+**AZD vs. ARM Templates**:
+- ✅ AZD: Högre nivå-abstraktion, enklare kommandon
+- ⚠️ ARM: Mer utförlig, detaljerad kontroll
 
 **AZD vs. Terraform**:
 - ✅ AZD: Azure-native, integrerat med Azure-tjänster
 - ⚠️ Terraform: Multi-cloud-stöd, större ekosystem
 
 **AZD vs. Azure Portal**:
-- ✅ AZD: Upprepbart, versionskontrollerat, automatiserbart
+- ✅ AZD: Reproducerbart, versionskontrollerat, automationsbart
 - ⚠️ Portal: Manuella klick, svårt att reproducera
 
 **Tänk på AZD som**: Docker Compose för Azure—förenklad konfiguration för komplexa distributioner.
@@ -877,20 +880,20 @@ az group delete --name rg-<env-name> --yes
 
 ## Vanliga frågor
 
-**F: Kan jag använda ett annat programmeringsspråk?**  
-S: Ja! Ersätt `src/web/` med Node.js, C#, Go eller något annat språk. Uppdatera `azure.yaml` och Bicep därefter.
+**Q: Kan jag använda ett annat programspråk?**  
+A: Ja! Byt ut `src/web/` mot Node.js, C#, Go eller vilket språk som helst. Uppdatera `azure.yaml` och Bicep därefter.
 
-**F: Hur lägger jag till fler databaser?**  
-S: Lägg till en annan SQL Database-modul i `infra/main.bicep` eller använd PostgreSQL/MySQL från Azure Database-tjänster.
+**Q: Hur lägger jag till fler databaser?**  
+A: Lägg till en annan SQL Database-modul i `infra/main.bicep` eller använd PostgreSQL/MySQL från Azure Database-tjänsterna.
 
-**F: Kan jag använda detta i produktion?**  
-S: Detta är en utgångspunkt. För produktion, lägg till: managed identity, private endpoints, redundans, backupstrategi, WAF och förbättrad övervakning.
+**Q: Kan jag använda detta i produktion?**  
+A: Det här är en utgångspunkt. För produktion, lägg till: managed identity, private endpoints, redundans, backupstrategi, WAF och utökad övervakning.
 
-**F: Vad händer om jag vill använda containers istället för koddistribution?**  
-S: Se [Exempel på Container Apps](../../../../examples/container-app) som använder Docker-containrar i hela lösningen.
+**Q: Vad händer om jag vill använda containrar istället för koddistribution?**  
+A: Kolla in [Container Apps-exempel](../../../../examples/container-app) som använder Docker-containrar genomgående.
 
-**F: Hur ansluter jag till databasen från min lokala dator?**  
-S: Lägg till din IP i SQL Servers brandvägg:
+**Q: Hur ansluter jag till databasen från min lokala dator?**  
+A: Lägg till din IP i SQL Server-brandväggen:
 ```sh
 az sql server firewall-rule create \
   --resource-group rg-<env-name> \
@@ -900,21 +903,21 @@ az sql server firewall-rule create \
   --end-ip-address <your-ip>
 ```
 
-**F: Kan jag använda en befintlig databas istället för att skapa en ny?**  
-S: Ja, ändra `infra/main.bicep` för att referera till en befintlig SQL Server och uppdatera anslutningssträngsparametrarna.
+**Q: Kan jag använda en befintlig databas istället för att skapa en ny?**  
+A: Ja, ändra `infra/main.bicep` för att referera till en befintlig SQL Server och uppdatera anslutningssträngens parametrar.
 
 ---
 
-> **Obs:** Detta exempel demonstrerar bästa praxis för att distribuera en webbapp med en databas med AZD. Den inkluderar fungerande kod, omfattande dokumentation och praktiska övningar för att förstärka inlärningen. För produktionsdistributioner, granska säkerhet, skalning, efterlevnad och kostnadskrav som är specifika för din organisation.
+> **Not:** Detta exempel visar bästa praxis för att distribuera en webbapp med en databas med hjälp av AZD. Det innehåller fungerande kod, omfattande dokumentation och praktiska övningar för att förstärka lärandet. För produktionsdistributioner, granska säkerhet, skalning, efterlevnad och kostnadskrav som är specifika för din organisation.
 
 **📚 Kursnavigering:**
-- ← Föregående: [Exempel på Container Apps](../../../../examples/container-app)
+- ← Föregående: [Container Apps-exempel](../../../../examples/container-app)
 - → Nästa: [AI-integrationsguide](../../../../docs/ai-foundry)
 - 🏠 [Kursens startsida](../../README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Ansvarsfriskrivning:
-Detta dokument har översatts med hjälp av AI-översättningstjänsten Co-op Translator (https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet bör du vara medveten om att automatiska översättningar kan innehålla fel eller brister. Det ursprungliga dokumentet på sitt originalspråk ska betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
+**Disclaimer**:
+Detta dokument har översatts med hjälp av AI-översättningstjänsten [Co-op Translator](https://github.com/Azure/co-op-translator). Även om vi strävar efter noggrannhet, var vänlig observera att automatiska översättningar kan innehålla fel eller felaktigheter. Det ursprungliga dokumentet på dess ursprungliga språk bör betraktas som den auktoritativa källan. För kritisk information rekommenderas professionell mänsklig översättning. Vi ansvarar inte för några missförstånd eller feltolkningar som uppstår till följd av användningen av denna översättning.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

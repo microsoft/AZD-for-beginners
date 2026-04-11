@@ -1,235 +1,240 @@
-# 2. ஒரு வார்ப்புருவை சரிபார்க்கவும்
+# 2. டெம்ப்ளேட்டை சரிபார்க்கவும்
 
-!!! tip "இந்த மாட்யூலின் முடிவில் நீங்கள் செய்யக்கூடியவை"
+> `azd 1.23.12` உடன் மார்ச் 2026 இல் சரிபார்க்கப்பட்டது.
 
-    - [ ] AI தீர்வு கட்டமைப்பினை பகுப்பாய்வு செய்ய
-    - [ ] AZD பிரயோகப்படுத்தும் பணிக் குறியீட்டை புரிந்துகொள்ள
-    - [ ] AZD பயன்பாட்டில் உதவ GitHub Copilot ஐ பயன்படுத்துதல்
-    - [ ] **Lab 2:** AI Agents வார்ப்புருவை பிரயோகித்து மற்றும் சரிபார்க்க
+!!! tip "இந்த மாட்யூலின் முடிவில் நீங்கள் இதைச் செய்ய முடியும்"
+
+    - [ ] AI தீர்வு கட்டமைப்பை பகுப்பாய்வு செய்யவும்
+    - [ ] AZD பதிவேற்றும் (deployment) பணிச் செயல்முறையைப் புரிந்துகொள்ளவும்
+    - [ ] AZD பயன்பாட்டிற்கு GitHub Copilot மூலம் உதவி பெறவும்
+    - [ ] **Lab 2:** AI ஏஜென்டுகள் டெம்ப்ளேட் பதிவேற்றி மற்றும் சரிபார்க்கவும்
 
 ---
 
 
-## 1. Introduction
+## 1. அறிமுகம்
 
-The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` is an open-source commandline tool that streamlines the developer workflow when building and deploying applications to Azure. 
+The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` என்பது Azureக்கு பயன்பாடுகளை கட்டமைத்து பதிவேற்றும்போது டெவலப்பர் பணிச்சூழலை எளிமையாக்கும் ஓப்பன்-சோர்ஸ் கட்டளை வரிசை கருவி ஆகும். 
 
-[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _infrastructure-as-code_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **and** deploy your application at one shot!
+[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) என்பது மாதிரிப் பயன்பாட்டு குறியீடு, _infrastructure-as-code_ சொத்துகள் மற்றும் ஒருங்கிணைந்த தீர்வு கட்டமைப்பிற்கு தேவையான `azd` கட்டமைப்பு கோப்புகளை கொண்ட ஸ்டான்டர்டடைஸ் செய்யப்பட்ட ரெப்பொசிடோரிகள் ஆகும். வளங்களை provision செய்வது `azd provision` என்ற கட்டளையை இயக்குவது போன்ற எளிமையாகும் - மேலும் `azd up` ஐ பயன்படுத்துவதன் மூலம் நீங்கள் ஒரே முறையில் வளங்களை provision செய்து உங்கள் பயன்பாட்டை பதிவேற்றவும் செய்யலாம்!
 
-As a result, jumpstarting your application development process can be as simple as finding the right _AZD Starter template_ that comes closest to your application and infrastructure needs - then customizing the repository to suit your scenario requirements.
+இதன் விளைவாக, உங்கள் பயன்பாட்டு மற்றும் அமைப்புத் தேவைகளுக்கு அருகிலிருக்கும் சரியான _AZD Starter template_ ஐ கண்டுபிடித்து, அந்த ரெப்போசியரியை உங்கள் சந்நிவேஷ தேவைகளுக்கேற்ப சீரமைப்பதுதான் பயன்பாட்டுத் தொடக்கத்தை விறுவிறுப்பாக ஆரம்பிப்பதை எளிதாக்கும்.
 
-Before we begin, let's make sure you have the Azure Developer CLI installed.
+முதல் நிலையில், உங்கள் கணினியில் Azure Developer CLI நிறுவப்பட்டுள்ளதா என்பதை உறுதிப்படுத்திக்கொள்வோம்.
 
-1. Open a VS Code terminal and type this command:
+1. VS Code டெர்மினலைத் திறந்து இந்த கட்டளையை تایப் செய்யவும்:
 
       ```bash title="" linenums="0"
       azd version
       ```
 
-1. You should see something like this!
+1. நீங்கள் இதுபோல ஒன்றை காணலாம்!
 
       ```bash title="" linenums="0"
-      azd version 1.19.0 (commit b3d68cea969b2bfbaa7b7fa289424428edb93e97)
+      azd version 1.23.12 (commit <current-build>)
       ```
 
-**You are now ready to select and deploy a template with azd**
+**நீங்கள் இப்போது azd மூலம் டெம்ப்ளேட்டை தேர்ந்தெடுத்து பதிவேற்ற தயாராக உள்ளீர்கள்**
 
 ---
 
-## 2. Template Selection
+## 2. டெம்ப்ளேட் தேர்வு
 
-The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
+Microsoft Foundry தளத்துடன் [ப 추천ப்பட்ட AZD டெம்ப்ளேட்களின் தொகுப்பு](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) உள்ளது, இவை _பல-ஏஜென்ட் வேலைநிரல் தானியக்கம்_ மற்றும் _பல-modal உள்ளடக்க செயலாக்கம்_ போன்ற பொதுவான தீர்வு நிலைகளைக் கவர்ந்து கொள்ளும். நீங்கள் Microsoft Foundry போர்டலைப் பார்க்கவும்தான் இவை கண்டுபிடிக்கலாம்.
 
-1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
-1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
+1. [https://ai.azure.com/templates](https://ai.azure.com/templates) இல் செல்லவும்
+1. உத்திரவாதப்பட்டால் Microsoft Foundry போர்டலில் உள்நுழையவும் - நீங்கள் இதுபோல ஒன்றைப் பார்க்கலாம்.
 
 ![தேர்வு](../../../../../translated_images/ta/01-pick-template.60d2d5fff5ebc374.webp)
 
 
-The **Basic** options are your starter templates:
+**Basic** விருப்பங்கள் உங்கள் ஸ்டார்டர் டெம்ப்ளேட்கள் ஆகும்:
 
-1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) that deploys a basic chat application _with your data_ to Azure Container Apps. Use this to explore a basic AI chatbot scenario.
-1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) that also deploys a standard AI Agent (with the Foundry Agents). Use this to get familiar with agentic AI solutions involving tools and models.
+1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) இது உங்கள் தரவுக்குடன் Azure Container Apps இல் ஒரு அடிப்படை உரையாடல் செயலியை பதிவேற்றும். அடிப்படை AI உரையாடல் சாத்திரத்தைக் காண இதை பயன்படுத்துங்கள்.
+1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) இது Foundry Agents உடனும் ஒரு ரெகுலர் AI ஏஜென்டை deploy செய்யும். கருவிகள் மற்றும் மாடல்களைக் கொண்ட ஏஜென்டு-அம்சமான AI தீர்வுகளை அறிந்து கொள்ள இதைப் பயன்படுத்துங்கள்.
 
-Visit the second link in a new browser tab (or click `Open in GitHub` for the related card). You should see the repository for this AZD Template. Take a minute to explore the README. The application architecture looks like this:
+இரண்டாவது இணைப்பை புதிய உலாவி தாவலில் திறக்கவும் (அல்லது தொடர்புடைய கார்டுக்கான `Open in GitHub` ஐ கிளிக் செய்யவும்). நீங்கள் இந்த AZD டெம்ப்ளேட்டிற்கான ரெப்பொசிடரியை காண்பீர்கள். README-வை ஒரு நிமிடம் ஆராயவும். பயன்பாட்டு கட்டமைப்பு இவ்வாறு உள்ளது:
 
 ![கட்டமைப்பு](../../../../../translated_images/ta/architecture.8cec470ec15c65c7.webp)
 
 ---
 
-## 3. Template Activation
+## 3. டெம்ப்ளேட் செயல்படுத்தல்
 
-Let's try to deploy this template and make sure it is valid. We'll follow the guidelines in the [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) section.
+இந்த டெம்ப்ளேட்டை பதிவேற்ற முயற்சித்து அது செல்லுபடியாகிறதா என்பது உறுதிசெய்வோம். நாம் [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) பகுதியில் உள்ள வழிமுறைகளை பின்பற்றுவோம்.
 
-1. Click [this link](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) - confirm the default action to `Create codespace`
-1. This opens a new browser tab - wait for the GitHub Codespaces session to complete loading
-1. Open the VS Code terminal in Codespaces - type the following command:
+1. டெம்ப்ளேட் ரெப்போசியரிக்கு ஒரு வேலைசூழலை தேர்வு செய்யவும்:
+
+      - **GitHub Codespaces**: இந்த [இணைப்பை](https://github.com/codespaces/new/Azure-Samples/get-started-with-ai-agents) கிளிக் செய்து `Create codespace` ஐ உறுதிப்படுத்தவும்
+      - **உள்ளூர் கிளோன் அல்லது dev container**: `Azure-Samples/get-started-with-ai-agents` ஐ கிளோன் செய்து VS Code இல் திறக்கவும்
+
+1. VS Code டெர்மினல் தயாராகும் வரை காத்திருக்கவும், பிறகு கீழ்காணும் கட்டளையை تایப் செய்யவும்:
 
    ```bash title="" linenums="0"
    azd up
    ```
 
-Complete the workflow steps that this will trigger:
+இந்த கட்டளை தொடங்கும் வேலைப்பதிவுகளை முடிக்கவும்:
 
-1. You will be prompted to log into Azure - follow instructions to authenticate
-1. Enter a unique environment name for you - e.g., I used `nitya-mshack-azd`
-1. This  will create a `.azure/` folder - you will see a subfolder with the env name
-1. You will be prompted to select a subscription name - select the default
-1. You will be prompted for a location - use `East US 2`
+1. உங்களிடம் Azure-க்கு உள்நுழைய வேண்டுமென்று கேட்டால், அத்துடன் அங்கீகாரம் செய்யுங்கள்
+1. உங்களுக்கான ஒரு தனித் சுற்றுச்சூழல் பெயர் கொடுக்கவும் - உதாரணமாக, நான் `nitya-mshack-azd` ஐப் பயன்படுத்தினேன்
+1. இதனால் `.azure/` கோப்புறை உருவாகும் - அந்த சுற்றுச்சூழல் பெயருடன் ஒரு உபகோப்புறை இருக்கும்
+1. ஒரு subscription பெயரை தேர்வு செய்ய கேட்கப்படும் - default ஐ தேர்வு செய்க
+1. ஒரு இடத்தை (location) கேட்கப்படும் - `East US 2` ஐப் பயன்படுத்தவும்
 
-Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
+இப்போது உங்கள் provisioning முடிந்ததும் காத்திருக்கவும். **இது 10-15 நிமிடங்கள் ஆகும்**
 
-1. When done, your console will show a SUCCESS message like this:
+1. முடிந்தபின், உங்கள் கனсолில் SUCCESS செய்தி இதுபோல காணப்படும்:
       ```bash title="" linenums="0"
       SUCCESS: Your up workflow to provision and deploy to Azure completed in 10 minutes 17 seconds.
       ```
-1. Your Azure Portal will now have a provisioned resource group with that env name:
+1. உங்கள் Azure போர்டலில் அந்த env பெயருடன் ஒரு provision செய்யப்பட்ட resource group இப்போது இருக்கும்:
 
-      ![அமைப்பு](../../../../../translated_images/ta/02-provisioned-infra.46c706b14f56e0bf.webp)
+      ![வளமைப்பு](../../../../../translated_images/ta/02-provisioned-infra.46c706b14f56e0bf.webp)
 
-1. **You are now ready to validate the deployed infrastructure and application**.
-
----
-
-## 4. Template Validation
-
-1. Visit Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) page - log in when prompted
-1. Click on RG for your environment name - you see the page above
-
-      - click on the Azure Container Apps resource
-      - click on the Application Url in the _Essentials_ section (top right)
-
-1. You should see a hosted application front-end UI like this:
-
-   ![அப்ளிகேஷன்](../../../../../translated_images/ta/03-test-application.471910da12c3038e.webp)
-
-1. Try asking a couple of [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
-
-      1. Ask: ```What is the capital of France?``` 
-      1. Ask: ```What's the best tent under $200 for two people, and what features does it include?```
-
-1. You should get answers similar to what is shown below. _But how does this work?_ 
-
-      ![அப்ளிகேஷன்](../../../../../translated_images/ta/03-test-question.521c1e863cbaddb6.webp)
+1. **நீங்கள் இப்போது provision செய்யப்பட்ட அமைப்பையும் பயன்பாட்டையும் சரிபார்க்க தயாராக இருக்கிறீர்கள்**.
 
 ---
 
-## 5.  Agent Validation
+## 4. டெம்ப்ளேட் சரிபார்ப்பு
 
-The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Microsoft Foundry project for this template. Let's take a look at what that means.
+1. Azure போர்டல் [Resource Groups](https://portal.azure.com/#browse/resourcegroups) பக்கத்திற்கு செல்லவும் - உள்நுழையும்போது உள்நுழைக
+1. உங்கள் சுற்றுச்சூழல் பெயருக்கு பொருந்தும் RG ஐ கிளிக் செய்யவும் - நீங்கள் மேலே காட்டிய பக்கத்தை காண்பீர்கள்
 
-1. Return to the Azure Portal _Overview_ page for your resource group
+      - Azure Container Apps resource ஐ கிளிக் செய்யவும்
+      - _Essentials_ பகுதியிலுள்ள Application Url ஐ (மேல்புற வலது) கிளிக் செய்யவும்
 
-1. Click on the `Microsoft Foundry` resource in that list
+1. நீங்கள் இந்தப் போல ஒரு ஹோஸ்ட் செய்யப்பட்ட செயலியின் முன்-இணைப்பு UI-யைக் காண்பீர்கள்:
 
-1. You should see this. Click the `Go to Microsoft Foundry Portal` button. 
+   ![செயலி](../../../../../translated_images/ta/03-test-application.471910da12c3038e.webp)
+
+1. சில [மாதிரி கேள்விகள்](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md) கேட்க முயற்சிக்கவும்
+
+      1. கேளுங்கள்: ```பிரான்ஸின் தலைநகரம் எது?``` 
+      1. கேளுங்கள்: ```இரு நபர்களுக்கு $200 க்கும் கீழ் சிறந்த தங்கக்குடன் என்ன உள்ளது, அதன் அம்சங்கள் என்ன?```
+
+1. நீங்கள் கீழே காட்டப்பட்டதைப் போன்ற பதில்களை பெறலாம். _ஆனால் இது எப்படி வேலை செய்கிறது?_ 
+
+      ![செயலி](../../../../../translated_images/ta/03-test-question.521c1e863cbaddb6.webp)
+
+---
+
+## 5. ஏஜென்ட் சரிபார்ப்பு
+
+Azure Container App ஒரு endpoint ஐ தள்ளுகிறது, அது இந்த டெம்ப்ளேட்டிற்கான Microsoft Foundry திட்டத்திலுள்ள AI ஏஜென்டுடன் இணைகிறது. அதற்கான பொருள் என்ன என்று பார்ப்போம்.
+
+1. உங்கள் resource group க்கான Azure போர்டல் _Overview_ பக்கத்திற்கு திரும்பி செல்லவும்
+
+1. அந்த பட்டியலில் உள்ள `Microsoft Foundry` resource ஐ கிளிக் செய்யவும்
+
+1. நீங்கள் இதைப் பார்க்க வேண்டும். `Go to Microsoft Foundry Portal` பொத்தானை கிளிக் செய்யவும். 
    ![Foundry](../../../../../translated_images/ta/04-view-foundry-project.fb94ca41803f28f3.webp)
 
-1. You should see the Foundry Project page for your AI application
-   ![திட்டம்](../../../../../translated_images/ta/05-visit-foundry-portal.d734e98135892d7e.webp)
+1. உங்கள் AI பயன்பாட்டிற்கான Foundry Project பக்கத்தை நீங்கள் காண்பீர்கள்
+   ![Project](../../../../../translated_images/ta/05-visit-foundry-portal.d734e98135892d7e.webp)
 
-1. Click on `Agents` - you see the default Agent provisioned in your project
-   ![முகவர்கள்](../../../../../translated_images/ta/06-visit-agents.bccb263f77b00a09.webp)
+1. `Agents` ஐ கிளிக் செய்யவும் - உங்கள் திட்டத்தில் provision செய்யப்பட்ட முன்கூட்டிய ஏஜென்ட் காண்பீர்கள்
+   ![Agents](../../../../../translated_images/ta/06-visit-agents.bccb263f77b00a09.webp)
 
-1. Select it - and you see the Agent details. Note the following:
+1. அதை தேர்வு செய்தால் - ஏஜென்ட் விவரங்களை நீங்கள் காண்பீர்கள். கவனிக்க வேண்டியது:
 
-      - The agent uses File Search by default (always)
-      - The agent `Knowledge` indicates it has 32 files uploaded (for file search)
-      ![முகவர்கள்](../../../../../translated_images/ta/07-view-agent-details.0e049f37f61eae62.webp)
+      - ஏஜென்ட் இயல்பாக File Search ஐ பயன்படுத்துகிறது (எப்போதும்)
+      - ஏஜென்டின் `Knowledge` பகுதியில் 32 கோப்புகள் பதிவேற்றப்பட்டுள்ளதாக காட்டப்படுகிறது (file search க்கு)
+      ![Agents](../../../../../translated_images/ta/07-view-agent-details.0e049f37f61eae62.webp)
 
-1. Look for the `Data+indexes` option in the left menu and click for details. 
+1. இடதி மெனுவில் `Data+indexes` விருப்பத்தைத் தேடிப் பார்த்து விவரங்களுக்காக கிளிக் செய்யவும். 
 
-      - You should see the 32 data files uploaded for knowledge.
-      - These will correspond to the 12 customer files and 20 product files under `src/files` 
-      ![தரவு](../../../../../translated_images/ta/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
+      - அறிவாணைக்கு பதிவேற்றப்பட்ட 32 தரவு கோப்புகளை நீங்கள் காண்பீர்கள்.
+      - இவை `src/files` கீழ் உள்ள 12 கிராஹக் கோப்புகள் மற்றும் 20 தயாரிப்பு கோப்புகளுக்கு இணையாக இருக்கும்
+      ![Data](../../../../../translated_images/ta/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
-**You validated Agent operation!** 
+**நீங்கள் ஏஜென்ட் செயல்பாட்டை சரிபார்த்துவிட்டீர்கள்!** 
 
-1. The agent responses are grounded in the knowledge in those files. 
-1. You can now ask questions related to that data, and get grounded responses.
-1. Example: `customer_info_10.json` describes the 3 purchases made by "Amanda Perez"
+1. ஏஜென்ட் பதில்கள் அவை அடிப்படையாக கொண்ட கோப்புகளில் உள்ள அறிவணையில் நிலை நிரம்பியவை.
+1. இப்போது நீங்கள் அந்த தரவுகளை சார்ந்த கேள்விகளை கேட்டு நிலையான (grounded) பதில்களைப் பெறலாம்.
+1. எடுத்துக்காட்டு: `customer_info_10.json` இல் "Amanda Perez" என்பவர் செய்த 3 வாங்குபவைகள் விவரிக்கப்பட்டுள்ளன
 
-Revisit the browser tab with the Container App endpoint and ask: `What products does Amanda Perez own?`. You should see something like this:
+Container App endpoint உடைய உலாவி தாவலை மீண்டும் திறந்து கேளுங்கள்: `Amanda Perez எந்த பொருட்களை வைத்துள்ளார்?`. நீங்கள் இதுபோல ஒன்றைப் பார்க்கவேண்டும்:
 
-![தரவு](../../../../../translated_images/ta/09-ask-in-aca.4102297fc465a4d5.webp)
-
----
-
-## 6. Agent Playground
-
-Let's build a bit more intuition for the capabilities of Microsoft Foundry, by taking the Agent for a spin in the Agents Playground. 
-
-1. Return to the `Agents` page in Microsoft Foundry - select the default agent
-1. Click the `Try in Playground` option - you should get a Playground UI like this
-1. Ask the same question: `What products does Amanda Perez own?`
-
-    ![தரவு](../../../../../translated_images/ta/09-ask-in-playground.a1b93794f78fa676.webp)
-
-You get the same (or similar) response - but you also get additional information that you can use to understand the quality, cost, and performance of your agentic app. For example:
-
-1. Note that the response cites data files used to "ground" the response
-1. Hover over any of these file labels - does the data match your query and displayed response?
-
-You also see a _stats_ row below the response. 
-
-1. Hover over any metric - e.g., Safety. You see something like this
-1. Does the assessed rating match your intuition for the response safety level?
-
-      ![தரவு](../../../../../translated_images/ta/10-view-run-info-meter.6cdb89a0eea5531f.webp)
+![Data](../../../../../translated_images/ta/09-ask-in-aca.4102297fc465a4d5.webp)
 
 ---
 
-## 7. Built-in Observability
+## 6. ஏஜென்ட் விளையாட்டு மைதானம்
 
-Observability is about instrumenting your application to generate data that can be used to understand, debug, and optimize, its operations. To get a sense for this:
+Microsoft Foundry-ன் திறமைகளை பற்றி சிறிது கூடுதல் நுணுக்கத்தைப் பெற, Agents Playground இல் ஏஜெண்டை சோதனை செய்யலாம்.
 
-1. Click the `View Run Info` button - you should see this view. This is an example of [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) in action. _You can also get this view by clicking Thread Logs in the top-level menu_.
+1. Microsoft Foundry இல் உள்ள `Agents` பக்கத்திற்கு திரும்பி - இயல்புநிலை ஏஜெண்டை தேர்வு செய்யவும்
+1. `Try in Playground` விருப்பத்தை கிளிக் செய்யவும் - நீங்கள் இதுபோல ஒரு Playground UI-வைப் பெறுவீர்கள்
+1. அதே கேள்வியை கேளுங்கள்: `Amanda Perez எந்த பொருட்களை வைத்துள்ளார்?`
 
-   - Get a sense for the run steps and tools engaged by the agent
-   - Understand total Token count (vs. output tokens usage) for response
-   - Understand the latency and where time is being spent in execution
+    ![Data](../../../../../translated_images/ta/09-ask-in-playground.a1b93794f78fa676.webp)
+
+நீங்கள் அதே (அல்லது சமமான) பதிலை பெறுவீர்கள் - ஆனால் மேலும் சில கூடுதல் தகவல்களும் கிடைக்கும், அவை உங்கள் ஏஜெண்ட்-அடிப்படையிலான செயலியின் தரம், செலவு மற்றும் செயல்திறன் ஆகியவற்றை புரிந்துகொள்ள உதவும். உதாரணமாக:
+
+1. பதில் எந்த தரவு கோப்புகளை "ground" செய்ய பயன்படுத்தப்பட்டது என்பதை குறிப்பிடுகிறது
+1. எந்த கோப்பு லேபிளைப் பற்றி மவுஸ் வைத்தால் - அந்த தரவு உங்கள் கேள்விக்கும் மற்றும் காட்டப்பட்ட பதிலுக்கும் பொருந்துமா என்று சரிபார்க்கவும்
+
+பதிலின் கீழ் ஒரு _புள்ளியியல்_ வரிசையும் (stats row) காணலாம். 
+
+1. எந்த அளவுகோலின் மீது மவுஸ் வைத்தாலோ - உதாரணத்திற்கு Safety - இதுபோல் ஒன்றை நீங்கள் காணலாம்
+1. மதிப்பிடப்பட்ட மதிப்பீடு உங்கள் பதிலின் பாதுகாப்பு நிலைக்கு உங்கள் உணர்வு வெளியீட்டுடன் பொருந்துகிறதா?
+
+      ![Data](../../../../../translated_images/ta/10-view-run-info-meter.6cdb89a0eea5531f.webp)
+
+---
+
+## 7. கட்டமைக்கப்பட்ட துல்லியத்தன்மை (Built-in Observability)
+
+Observability என்பது உங்கள் பயன்பாட்டை குடும்பித்தல்அமைப்பதற்கான கருவிகள் மூலம் தரவை உருவாக்குவதற்கும், அதன் செயல்பாடுகளை புரிந்துகொள்ளவும் பிழைகளை கண்டறியவும் மற்றும் மேம்படுத்தவும் உபயோகப்படுத்தப்படுவதற்கும் ஆகும். இதைப் பார்க்க:
+
+1. `View Run Info` பொத்தானை கிளிக் செய்யவும் - நீங்கள் இதுபோல ஒரு காட்சியை பார்க்க வேண்டும். இது [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) செயல்பாட்டின் ஒரு எடுத்துக்காட்டாகும். _இந்த காட்சியை Thread Logs ஐ மேல்நிலை மெனுவில் கிளிக் செய்வதனால் கூட பெறலாம்_.
+
+   - ஏஜெண்ட் இயக்கத்தில் உள்ள இயக்க படிகளையும் பயன்படுத்தப்பட்ட கருவுகளையும் உணருங்கள்
+   - பதிலுக்கான மொத்த Token எண்ணிக்கையை (உதாரணத்திற்கு output tokens பயன்பாட்டுடன் ஒப்பிடுக) புரிந்து கொள்ளுங்கள்
+   - சேமிப்பும் எவ்வளவு நேரம் செலவாகிறது என்பதையும் செயல்பாட்டில் நேரம் எங்கே செலவாகுகிறது என்பதையும் புரிந்து கொள்ளுங்கள்
 
       ![Agent](../../../../../translated_images/ta/10-view-run-info.b20ebd75fef6a1cc.webp)
 
-1. Click the `Metadata` tab to see additional attributes for the run, that may provide useful context for debugging issues later.   
+1. `Metadata` தாவலை கிளிக் செய்து ரன்னிற்கான கூடுதல் பண்புகளை (attributes) பார்க்கவும், இவை பின்னர் பிழைதீர்க்க உதவக்கூடும்.   
 
       ![Agent](../../../../../translated_images/ta/11-view-run-info-metadata.7966986122c7c2df.webp)
 
 
-1. Click the `Evaluations` tab to see auto-assessments made on the agent response. These include safety evaluations (e.g., Self-harm) and agent-specifc evaluations (e.g., Intent resolution, Task adherence).
+1. `Evaluations` தாவலை கிளிக் செய்து ஏஜெண்ட் பதில்களில் தானாகவே செய்யப்பட்ட மதிப்பீடுகளைப் பார்க்கவும். இதில் பாதுகாப்பு மதிப்பீடுகள் (உதாரணத்திற்கு Self-harm) மற்றும் ஏஜெண்ட்-சார்ந்த மதிப்பீடுகள் (உதாரணத்திற்கு நோக்க தீர்மானம், பணியை பின்பற்றுதல்) அடங்கும்.
 
       ![Agent](../../../../../translated_images/ta/12-view-run-info-evaluations.ef25e4577d70efeb.webp)
 
-1. Last but not least, click the `Monitoring` tab in the sidebar menu.
+1. கடைசியில், சைட்பார் மெனுவில் `Monitoring` தாவலை கிளிக் செய்யவும்.
 
-      - Select `Resource usage` tab in the displayed page - and view the metrics.
-      - Track application usage in terms of costs (tokens) and load (requests).
-      - Track applicaton latency to first byte (input processing) and last byte (output).
+      - காட்டப்பட்ட பக்கத்தில் `Resource usage` தாவலை தேர்வு செய்து மொத்த அளவுகோல்களை பார்க்கவும்.
+      - செலவுகள் (tokens) மற்றும் சுமை (requests) என்ற பொருத்தில் பயன்பாட்டின் பயனைக் கண்காணிக்கவும்.
+      - முதலாவது பைட்டுக்கான தாமதம் (input processing) மற்றும் கடைசி பைட்டுக்கான தாமதம் (output) ஆகியவற்றிற்கு பயன்பாட்டின் latency-யை கண்காணிக்கவும்.
 
       ![Agent](../../../../../translated_images/ta/13-monitoring-resources.5148015f7311807f.webp)
 
 ---
 
-## 8. Environment Variables
+## 8. சுற்றுச்சூழல் மாறிகள் (Environment Variables)
 
-So far, we've walked through the deployment in the browser - and validated that our infrastructure is provisioned and the application is operational. But to work with the application _code-first_, we need to configure our local development environment with the relevant variables required to work with these resources. Using `azd` makes it easy.
+இப்போதுவரை, நாங்கள் உலாவியில் டெம்ப்ளோய்மெண்ட் செய்கைச் செய்து - நமது வளங்கள் provision ஆகியவை மற்றும் செயலி செயல்படுகிறது என்பதை சரிபார்த்துள்ளோம். ஆனால் கோடு-முதலில் (code-first) பணியாற்றுவதற்கு, இந்த வளங்களுடன் பணியாற்ற தேவையான சம்பந்தப்பட்ட மாறிகளை உங்கள் உள்ளூர் மேற்பார்வை சூழலில் அமைக்க வேண்டும். `azd` இதை எளிதாக்குகிறது.
 
-1. The Azure Developer CLI [uses environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) to store and manage configuration settings for  the application deployments.
+1. Azure Developer CLI [சுற்றுச்சூழல் மாறிகளை பயன்படுத்துகிறது](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) என்பது பயன்பாட்டுக் கட்டமைப்புகளுக்கான உள்ளமைவுகளை store மற்றும் நிர்வகிக்க.
 
-1. Environment variables are stored in `.azure/<env-name>/.env` - this scopes them to the `env-name` environment used during deployment and helps you isolate environments between different deployment targets in the same repo.
+1. சுற்றுச்சூழல் மாறிகள் `.azure/<env-name>/.env` இல் சேமிக்கப்படுகின்றன - இது அவற்றை டெம்ப்ளோய்மெண்ட் போது பயன்படுத்தப்படும் `env-name` சுற்றுச்சூழலுக்கு வரையறுக்கிறது மற்றும் ஒருเดียว ரெப்போசிடரியில் வேறுபட்ட deployment இலக்கு இடையே சூழல்களை தனிமைப்படுத்த உதவுகிறது.
 
-1. Environment variables are automatically loaded by the `azd` command whenever it executes a specific command (e.g., `azd up`). Note that `azd` does not automatically read _OS-level_ environment variables (e.g., set in the shell) - instead use `azd set env` and `azd get env` to transfer information within scripts.
+1. `azd` கட்டளை ஒரு குறிப்பிட்ட கட்டளையை இயக்கும் போதெல்லாம் சுற்றுச்சூழல் மாறிகள் தானாக ஏற்கப்படுகின்றன (உதாரணத்திற்கு `azd up`). கவனிக்க: `azd` இயல்பாக OS-நிலையிலான (shell-ல் அமைக்கப்பட்ட) சூழல் மாறிகளை தானாகப் படிக்காது - அதன் இடத்தில் ஸ்கிரிப்டுகளில் தகவலை பரிமாற `azd set env` மற்றும் `azd get env` களைப் பயன்படுத்தவும்.
 
 
-Let's try out a few commands:
+சில கட்டளைகளைச் சோதிக்கலாம்:
 
-1. Get all the environment variables set for `azd` in this environment:
+1. இந்த சுற்றுச்சூழலில் `azd` க்காக அமைக்கப்பட்ட அனைத்து சுற்றுச்சூழல் மாறிகளையும் பெறவும்:
 
       ```bash title="" linenums="0"
       azd env get-values
       ```
       
-      You see something like:
+      நீங்கள் இதுபோல ஒன்றை காணலாம்:
 
       ```bash title="" linenums="0"
       AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
@@ -239,19 +244,19 @@ Let's try out a few commands:
       ...
       ```
 
-1. Get a specific value - e.g., I want to know if we set the `AZURE_AI_AGENT_MODEL_NAME` value
+1. ஒரு குறிப்பிட்ட மதிப்பை பெறவும் - உதாரணம், `AZURE_AI_AGENT_MODEL_NAME` மதிப்பு அமைக்கப்பட்டதா என்பதை தெரிந்து கொள்ள வேண்டும்
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-      You see something like this - it was not set by default!
+      நீங்கள் இதுபோல ஒன்றை காண்கிறீர்கள் - இது இயல்பாக அமைக்கப்படவில்லை!
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
       ```
 
-1. Set a new environment variable for `azd`. Here, we update the agent model name. _Note: any changes made will be immediately reflected in the `.azure/<env-name>/.env` file.
+1. `azd` க்காக ஒரு புதிய சுற்றுச்சூழல் மாறியை அமைக்கவும். இங்கு, ஏஜென்ட் மாடல் பெயரை நாம் புதுப்பிக்கிறோம். _கவனிக்க: எந்த மாற்றங்களும் `.azure/<env-name>/.env` கோப்பில் உடனுக்குடன் பிரதிபலிக்கப்படும்._
 
       ```bash title="" linenums="0"
       azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
@@ -259,35 +264,35 @@ Let's try out a few commands:
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-      Now, we should find the value is set:
+      இப்போது, மதிப்பு அமைக்கப்பட்டதாக நாம் காண்கிறோம்:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
 
-1. Note that some resources are persistent (e.g., model deployments) and will require more than just an `azd up` to force the redeployment. Let's try tearing down the original deployment and redeploying with changed env vars.
+1. சில வளங்கள் நிலைத்தவை (உதாரணத்திற்கு மாடல் deployments) என்பதால் அவற்றை மீண்டும் deploy செய்ய `azd up` மட்டும் போதாது. அடிப்படை deployment ஐ நீக்கி மாற்றிய மார்க் மாறிகளுடன் மீண்டும் deploy செய்து பார்க்கலாம்.
 
-1. **Refresh** If you had previously deployed infrastructure using an azd template - you can _refresh_ the state of your local environment variables based on the current state of your Azure deployment using this command:
+1. **Refresh** முந்தையதாக azd டெம்ப்ளேட் பயன்படுத்தி நீங்கள் வளங்களை deploy செய்திருந்தால் - உள்ளூர் சுற்றுச்சூழல் மாறிகளின் நிலையை உங்கள் Azure deployment இன் நடப்பில் உள்ளது போல புதுப்பிக்க (refresh) நீங்கள் இந்த கட்டளையை பயன்படுத்தலாம்:
 
       ```bash title="" linenums="0"
       azd env refresh
       ```
 
-      இது இரண்டு அல்லது அதற்கு மேற்பட்ட உள்ளூர் மேம்பாட்டு சூழல்கள் (எ.கா., பல டெவலப்பர்கள் கொண்ட குழு) இடையே சூழல் மாறிலிகளை _ஒத்திசைவு_ செய்யும் ஒரு சக்திவாய்ந்த வழி - அனுப்பப்பட்ட அடித்தள அமைப்பு சூழல் மாறிலிகளின் நிலைக்கு நம்பகமான ஆதாரமாக செயல்பட அனுமதிக்கிறது. குழு உறுப்பினர்கள் மாறிலிகளை _புதுப்பித்தாலே_ மீண்டும் ஒத்திசைவில் திரும்பலாம்.
+      இது இரண்டு அல்லது அதற்கு மேற்பட்ட உள்ளூர் டெவலப்பிங் சூழல்களில் சூழல் மாறிலிகளை _ஒத்திசைவு_ செய்வதற்கான ஒரு சக்திவாய்ந்த வழி (உதா., பல டெவலப்பர்கள் கொண்ட குழு) - வெளியீடு செய்யப்பட்ட கட்டமைப்பு env மாறிலிகள் நிலைமைக்கான உண்மையான ஆதாரமாக செயல்பட அனுமதிக்கிறது. குழு உறுப்பினர்கள் மாறிலிகளை வெறும் _புதுப்பித்து_ மீண்டும் ஒத்திசைவு அடையலாம்.
 
 ---
 
-## 9. வாழ்த்துகள் 🏆
+## 9. வாழ்த்துக்கள் 🏆
 
-நீங்கள் இப்போது ஒரு தொடக்கம் முதல் முடிவுவரை (end-to-end) பணிச்சுழற்சியை முடித்துள்ளீர்கள், இதில் நீங்கள்:
+நீங்கள் தற்போது ஒரு தொடக்கம்-முடிவுக் வேலைநடத்தை முடித்துள்ளீர்கள், இதில் நீங்கள்:
 
-- [X] நீங்கள் பயன்படுத்த விரும்பும் AZD Template ஐத் தேர்ந்தெடுத்தீர்கள்
-- [X] GitHub Codespaces மூலம் Template ஐ துவக்கியீர்கள் 
-- [X] Template ஐ வெளியிட்டும் அது சரியாக செயல்படுகிறதா என்பதை சரிபார்த்தீர்கள்
+- [X] நீங்கள் பயன்படுத்த விரும்பும் AZD வார்ப்புருவை தேர்வு செய்தீர்கள்
+- [X] ஆதரிக்கப்படும் வளர்ச்சி சூழலில் வார்ப்புருவை திறந்தீர்கள்
+- [X] வார்ப்புருவை வெளியிட்டு அது வேலை செய்கிறதென்பதை சரிபார்த்தீர்கள்
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-புறக்கணிப்பு:
-இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவை [Co-op Translator](https://github.com/Azure/co-op-translator) மூலம் மொழிபெயர்க்கப்பட்டுள்ளது. நாங்கள் துல்லியத்தைக் காத்துக் கொள்வதற்கு முயற்சித்தாலும், தானியம் மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறுகள் இருக்கக்கூடும் என்பதை தயவுசெய்து அறியுங்கள். மூல ஆவணத்தை அதன் சொந்த மொழியில் இருக்கும் பதிப்பே அதிகாரபூர்வமாகக் கருதவும். முக்கியமான தகவல்களின் போது தொழில்முறை மனித மொழிபெயர்ப்பு பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பினால் ஏற்பட்ட بأي தவறான புரிதல்களுக்கு உதவிகளுக்கு நாங்கள் பொறுப்பாளர்கள் அல்ல என்பதை குறிப்பிடுகிறோம்.
+**Disclaimer**:
+இந்த ஆவணம் AI மொழிபெயர்ப்பு சேவை [Co-op Translator](https://github.com/Azure/co-op-translator) பயன்படுத்தி மொழிபெயர்க்கப்பட்டது. நாங்கள் துல்லியத்திற்காக முயற்சித்தாலும், தானியங்கி மொழிபெயர்ப்புகளில் பிழைகள் அல்லது தவறான தகவல்கள் இருக்கக்கூடும் என்பதை கவனிக்கவும். அசல் ஆவணம் அதன் சொந்த மொழியில் அதிகாரப்பூர்வ மூலமாகக் கருதப்பட வேண்டும். முக்கியமான தகவல்களுக்காக, தொழில்முறை மனித மொழிபெயர்ப்பு பரிந்துரைக்கப்படுகிறது. இந்த மொழிபெயர்ப்பைப் பயன்படுத்தியதனால் ஏற்படும் எந்த தவறான புரிதலுக்கோ அல்லது தவறான விளக்கத்திற்கோ நாங்கள் பொறுப்பேற்கமாட்டோம்.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,52 +1,54 @@
-# AI Workshop Lab: Making Your AI Solutions AZD-Deployable
+# AI Workshop Lab: Làm cho Giải pháp AI của Bạn Có Thể Triển Khai Bằng AZD
 
 **Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: Chương 2 - Phát triển lấy AI làm trung tâm
-- **⬅️ Previous**: [AI Model Deployment](ai-model-deployment.md)
-- **➡️ Next**: [Production AI Best Practices](production-ai-practices.md)
-- **🚀 Next Chapter**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
+- **📚 Trang Khóa Học**: [AZD For Beginners](../../README.md)
+- **📖 Chương Hiện Tại**: Chương 2 - Phát Triển Ưu Tiên AI
+- **⬅️ Trước**: [AI Model Deployment](ai-model-deployment.md)
+- **➡️ Tiếp**: [Production AI Best Practices](production-ai-practices.md)
+- **🚀 Chương Tiếp Theo**: [Chapter 3: Configuration](../chapter-03-configuration/configuration.md)
 
-## Workshop Overview
+## Tổng Quan Workshop
 
-Phòng thí nghiệm thực hành này hướng dẫn các nhà phát triển qua quy trình chuyển một mẫu AI hiện có và triển khai nó bằng Azure Developer CLI (AZD). Bạn sẽ học các mẫu thiết yếu cho các triển khai AI trong sản xuất sử dụng dịch vụ Microsoft Foundry.
+Phòng thí nghiệm thực hành này hướng dẫn các nhà phát triển qua quy trình lấy một mẫu AI hiện có và triển khai nó bằng Azure Developer CLI (AZD). Bạn sẽ học các mẫu thiết yếu cho các triển khai AI trong môi trường production sử dụng các dịch vụ Microsoft Foundry.
 
-**Duration:** 2-3 hours  
-**Level:** Intermediate  
-**Prerequisites:** Basic Azure knowledge, familiarity with AI/ML concepts
+> **Ghi chú xác thực (2026-03-25):** Workshop này đã được rà soát với `azd` `1.23.12`. Nếu cài đặt AZD cục bộ của bạn cũ hơn, hãy cập nhật AZD trước khi bắt đầu để quy trình xác thực, mẫu và triển khai khớp với các bước dưới đây.
 
-## 🎓 Learning Objectives
+**Thời lượng:** 2-3 giờ  
+**Cấp độ:** Trung cấp  
+**Yêu cầu trước:** Kiến thức cơ bản về Azure, quen thuộc với các khái niệm AI/ML
 
-By the end of this workshop, you will be able to:
-- ✅ Convert an existing AI application to use AZD templates
-- ✅ Configure Microsoft Foundry services with AZD
-- ✅ Implement secure credential management for AI services
-- ✅ Deploy production-ready AI applications with monitoring
-- ✅ Troubleshoot common AI deployment issues
+## 🎓 Mục Tiêu Học Tập
 
-## Prerequisites
+Kết thúc workshop này, bạn sẽ có khả năng:
+- ✅ Chuyển một ứng dụng AI hiện có sang sử dụng các mẫu AZD
+- ✅ Cấu hình dịch vụ Microsoft Foundry bằng AZD
+- ✅ Thực hiện quản lý thông tin đăng nhập an toàn cho các dịch vụ AI
+- ✅ Triển khai ứng dụng AI sẵn sàng cho production với giám sát
+- ✅ Khắc phục sự cố triển khai AI phổ biến
 
-### Required Tools
-- [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) installed
-- [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) installed
-- [Git](https://git-scm.com/) installed
-- Code editor (VS Code recommended)
+## Yêu Cầu Trước
 
-### Azure Resources
-- Azure subscription with contributor access
-- Access to Microsoft Foundry Models services (or ability to request access)
-- Resource group creation permissions
+### Công Cụ Cần Thiết
+- [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) đã cài đặt
+- [Azure CLI](https://docs.microsoft.com/cli/azure/install-azure-cli) đã cài đặt
+- [Git](https://git-scm.com/) đã cài đặt
+- Trình soạn thảo mã (khuyến nghị VS Code)
 
-### Knowledge Prerequisites
-- Basic understanding of Azure services
-- Familiarity with command-line interfaces
-- Basic AI/ML concepts (APIs, models, prompts)
+### Tài Nguyên Azure
+- Subscription Azure với quyền contributor
+- Truy cập dịch vụ Microsoft Foundry Models (hoặc khả năng yêu cầu truy cập)
+- Quyền tạo resource group
 
-## Lab Setup
+### Kiến Thức Yêu Cầu
+- Hiểu biết cơ bản về các dịch vụ Azure
+- Quen thuộc với giao diện dòng lệnh
+- Khái niệm AI/ML cơ bản (APIs, mô hình, prompts)
 
-### Step 1: Environment Preparation
+## Thiết Lập Lab
 
-1. **Verify tool installations:**
+### Bước 1: Chuẩn Bị Môi Trường
+
+1. **Xác minh cài đặt công cụ:**
 ```bash
 # Kiểm tra cài đặt AZD
 azd version
@@ -54,22 +56,26 @@ azd version
 # Kiểm tra Azure CLI
 az --version
 
-# Đăng nhập vào Azure
-az login
+# Đăng nhập vào Azure cho các workflow AZD
 azd auth login
+
+# Chỉ đăng nhập vào Azure CLI nếu bạn dự định chạy các lệnh az trong quá trình chẩn đoán
+az login
 ```
 
-2. **Clone the workshop repository:**
+Nếu bạn làm việc trên nhiều tenant hoặc subscription của bạn không được phát hiện tự động, thử lại với `azd auth login --tenant-id <tenant-id>`.
+
+2. **Clone kho lưu trữ workshop:**
 ```bash
 git clone https://github.com/Azure-Samples/azure-search-openai-demo
 cd azure-search-openai-demo
 ```
 
-## Module 1: Understanding AZD Structure for AI Applications
+## Module 1: Hiểu Cấu Trúc AZD cho Ứng dụng AI
 
-### Anatomy of an AI AZD Template
+### Cấu Trúc của một Mẫu AZD cho AI
 
-Explore the key files in an AI-ready AZD template:
+Khám phá các tệp chính trong một mẫu AZD sẵn sàng cho AI:
 
 ```
 azure-search-openai-demo/
@@ -86,99 +92,101 @@ azure-search-openai-demo/
 └── .azure/               # AZD environment files
 ```
 
-### **Lab Exercise 1.1: Explore the Configuration**
+### **Bài Tập Lab 1.1: Khám Phá Cấu Hình**
 
-1. **Examine the azure.yaml file:**
+1. **Xem xét tệp azure.yaml:**
 ```bash
 cat azure.yaml
 ```
 
-**What to look for:**
-- Service definitions for AI components
-- Environment variable mappings
-- Host configurations
+**Những điều cần chú ý:**
+- Định nghĩa dịch vụ cho các thành phần AI
+- Bản đồ biến môi trường
+- Cấu hình host
 
-2. **Review the main.bicep infrastructure:**
+2. **Xem lại main.bicep cho hạ tầng:**
 ```bash
 cat infra/main.bicep
 ```
 
-**Key AI patterns to identify:**
-- Microsoft Foundry Models service provisioning
-- Cognitive Search integration
-- Secure key management
-- Network security configurations
+**Các mẫu AI chính cần xác định:**
+- Cung cấp dịch vụ Microsoft Foundry Models
+- Tích hợp Cognitive Search
+- Quản lý khóa an toàn
+- Cấu hình bảo mật mạng
 
-### **Discussion Point:** Why These Patterns Matter for AI
+### **Điểm Thảo Luận:** Tại Sao Các Mẫu Này Quan Trọng Cho AI
 
-- **Service Dependencies**: AI apps often require multiple coordinated services
-- **Security**: API keys and endpoints need secure management
-- **Scalability**: AI workloads have unique scaling requirements
-- **Cost Management**: AI services can be expensive if not properly configured
+- **Phụ thuộc dịch vụ**: Ứng dụng AI thường yêu cầu nhiều dịch vụ phối hợp
+- **Bảo mật**: API keys và endpoints cần được quản lý an toàn
+- **Khả năng mở rộng**: Workload AI có yêu cầu scale riêng
+- **Quản lý chi phí**: Dịch vụ AI có thể tốn kém nếu không cấu hình đúng
 
-## Module 2: Deploy Your First AI Application
+## Module 2: Triển Khai Ứng Dụng AI Đầu Tiên của Bạn
 
-### Step 2.1: Initialize the Environment
+### Bước 2.1: Khởi Tạo Môi Trường
 
-1. **Create a new AZD environment:**
+1. **Tạo một môi trường AZD mới:**
 ```bash
 azd env new myai-workshop
 ```
 
-2. **Set required parameters:**
+2. **Đặt các tham số cần thiết:**
 ```bash
-# Đặt khu vực Azure ưu tiên của bạn
+# Đặt vùng Azure ưa thích của bạn
 azd env set AZURE_LOCATION eastus
 
 # Tùy chọn: Chọn mô hình OpenAI cụ thể
-azd env set AZURE_OPENAI_MODEL gpt-35-turbo
+azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
 ```
 
-### Step 2.2: Deploy the Infrastructure and Application
+### Bước 2.2: Triển Khai Hạ Tầng và Ứng Dụng
 
-1. **Deploy with AZD:**
+1. **Triển khai với AZD:**
 ```bash
 azd up
 ```
 
-**What happens during `azd up`:**
-- ✅ Provisions Microsoft Foundry Models service
-- ✅ Creates Cognitive Search service
-- ✅ Sets up App Service for the web application
-- ✅ Configures networking and security
-- ✅ Deploys application code
-- ✅ Sets up monitoring and logging
+**Điều gì xảy ra trong quá trình `azd up`:**
+- ✅ Cung cấp dịch vụ Microsoft Foundry Models
+- ✅ Tạo dịch vụ Cognitive Search
+- ✅ Thiết lập App Service cho ứng dụng web
+- ✅ Cấu hình mạng và bảo mật
+- ✅ Triển khai mã ứng dụng
+- ✅ Thiết lập giám sát và logging
 
-2. **Monitor the deployment progress** and note the resources being created.
+2. **Theo dõi tiến trình triển khai** và ghi lại các tài nguyên đang được tạo.
 
-### Step 2.3: Verify Your Deployment
+### Bước 2.3: Xác Minh Triển Khai
 
-1. **Check the deployed resources:**
+1. **Kiểm tra các tài nguyên đã triển khai:**
 ```bash
 azd show
 ```
 
-2. **Open the deployed application:**
+2. **Mở ứng dụng đã triển khai:**
 ```bash
-azd show --output json | grep "webAppUrl"
+azd show
 ```
 
-3. **Test the AI functionality:**
-   - Navigate to the web application
-   - Try sample queries
-   - Verify AI responses are working
+Mở endpoint web được hiển thị trong đầu ra của `azd show`.
 
-### **Lab Exercise 2.1: Troubleshooting Practice**
+3. **Kiểm tra chức năng AI:**
+   - Điều hướng đến ứng dụng web
+   - Thử các truy vấn mẫu
+   - Xác nhận phản hồi AI hoạt động
 
-**Scenario**: Your deployment succeeded but the AI isn't responding.
+### **Bài Tập Lab 2.1: Thực Hành Khắc Phục Sự Cố**
 
-**Common issues to check:**
-1. **OpenAI API keys**: Verify they're correctly set
-2. **Model availability**: Check if your region supports the model
-3. **Network connectivity**: Ensure services can communicate
-4. **RBAC permissions**: Verify the app can access OpenAI
+**Kịch bản**: Việc triển khai của bạn thành công nhưng AI không phản hồi.
 
-**Debugging commands:**
+**Các vấn đề phổ biến cần kiểm tra:**
+1. **OpenAI API keys**: Xác minh chúng được thiết lập đúng
+2. **Tính khả dụng của mô hình**: Kiểm tra xem vùng của bạn có hỗ trợ mô hình hay không
+3. **Kết nối mạng**: Đảm bảo các dịch vụ có thể giao tiếp
+4. **Quyền RBAC**: Xác minh ứng dụng có thể truy cập OpenAI
+
+**Lệnh gỡ rối:**
 ```bash
 # Kiểm tra biến môi trường
 azd env get-values
@@ -190,22 +198,22 @@ az webapp log tail --name YOUR_APP_NAME --resource-group YOUR_RG
 az cognitiveservices account deployment list --name YOUR_OPENAI_NAME --resource-group YOUR_RG
 ```
 
-## Module 3: Customizing AI Applications for Your Needs
+## Module 3: Tùy Chỉnh Ứng Dụng AI cho Nhu Cầu của Bạn
 
-### Step 3.1: Modify the AI Configuration
+### Bước 3.1: Thay Đổi Cấu Hình AI
 
-1. **Update the OpenAI model:**
+1. **Cập nhật mô hình OpenAI:**
 ```bash
-# Chuyển sang mô hình khác (nếu có sẵn trong khu vực của bạn)
+# Chuyển sang một mô hình khác (nếu có sẵn ở khu vực của bạn)
 azd env set AZURE_OPENAI_MODEL gpt-4.1
 
 # Triển khai lại với cấu hình mới
 azd deploy
 ```
 
-2. **Add additional AI services:**
+2. **Thêm các dịch vụ AI bổ sung:**
 
-Edit `infra/main.bicep` to add Document Intelligence:
+Chỉnh sửa `infra/main.bicep` để thêm Document Intelligence:
 
 ```bicep
 // Add to main.bicep
@@ -222,18 +230,18 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 }
 ```
 
-### Step 3.2: Environment-Specific Configurations
+### Bước 3.2: Cấu Hình Theo Môi Trường
 
-**Best Practice**: Different configurations for development vs production.
+**Thực hành tốt nhất**: Các cấu hình khác nhau cho development và production.
 
-1. **Create a production environment:**
+1. **Tạo một môi trường production:**
 ```bash
 azd env new myai-production
 ```
 
-2. **Set production-specific parameters:**
+2. **Đặt các tham số riêng cho production:**
 ```bash
-# Môi trường sản xuất thường sử dụng các SKU ở mức cao hơn
+# Môi trường sản xuất thường sử dụng SKU cao hơn
 azd env set AZURE_OPENAI_SKU S0
 azd env set AZURE_SEARCH_SKU standard
 
@@ -241,45 +249,45 @@ azd env set AZURE_SEARCH_SKU standard
 azd env set ENABLE_PRIVATE_ENDPOINTS true
 ```
 
-### **Lab Exercise 3.1: Cost Optimization**
+### **Bài Tập Lab 3.1: Tối Ưu Chi Phí**
 
-**Challenge**: Configure the template for cost-effective development.
+**Thử thách**: Cấu hình mẫu để tiết kiệm chi phí cho môi trường phát triển.
 
-**Tasks:**
-1. Identify which SKUs can be set to free/basic tiers
-2. Configure environment variables for minimal cost
-3. Deploy and compare costs with the production configuration
+**Nhiệm vụ:**
+1. Xác định SKU nào có thể đặt ở mức miễn phí/cơ bản
+2. Cấu hình biến môi trường để tối thiểu chi phí
+3. Triển khai và so sánh chi phí với cấu hình production
 
-**Solution hints:**
-- Use F0 (free) tier for Cognitive Services when possible
-- Use Basic tier for Search Service in development
-- Consider using Consumption plan for Functions
+**Gợi ý giải pháp:**
+- Sử dụng tier F0 (miễn phí) cho Cognitive Services khi có thể
+- Sử dụng tier Basic cho Search Service trong phát triển
+- Xem xét sử dụng Consumption plan cho Functions
 
-## Module 4: Security and Production Best Practices
+## Module 4: Bảo Mật và Thực Hành Tốt Nhất Cho Production
 
-### Step 4.1: Secure Credential Management
+### Bước 4.1: Quản Lý Thông Tin Đăng Nhập An Toàn
 
-**Current challenge**: Many AI apps hardcode API keys or use insecure storage.
+**Vấn đề hiện tại**: Nhiều ứng dụng AI hardcode API keys hoặc sử dụng lưu trữ không an toàn.
 
-**AZD Solution**: Managed Identity + Key Vault integration.
+**Giải pháp AZD**: Managed Identity + tích hợp Key Vault.
 
-1. **Review the security configuration in your template:**
+1. **Xem lại cấu hình bảo mật trong mẫu của bạn:**
 ```bash
 # Tìm cấu hình Key Vault và Managed Identity
 grep -r "keyVault\|managedIdentity" infra/
 ```
 
-2. **Verify Managed Identity is working:**
+2. **Xác minh Managed Identity hoạt động:**
 ```bash
-# Kiểm tra xem ứng dụng web có cấu hình định danh đúng hay không
+# Kiểm tra xem ứng dụng web có cấu hình danh tính chính xác hay không
 az webapp identity show --name YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-### Step 4.2: Network Security
+### Bước 4.2: Bảo Mật Mạng
 
-1. **Enable private endpoints** (if not already configured):
+1. **Kích hoạt private endpoints** (nếu chưa được cấu hình):
 
-Add to your bicep template:
+Thêm vào mẫu bicep của bạn:
 ```bicep
 // Private endpoint for OpenAI
 resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' = {
@@ -302,18 +310,18 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-### Step 4.3: Monitoring and Observability
+### Bước 4.3: Giám Sát và Khả Năng Quan Sát
 
-1. **Configure Application Insights:**
+1. **Cấu hình Application Insights:**
 ```bash
 # Application Insights nên được cấu hình tự động
 # Kiểm tra cấu hình:
 az monitor app-insights component show --app YOUR_APP_NAME --resource-group YOUR_RG
 ```
 
-2. **Set up AI-specific monitoring:**
+2. **Thiết lập giám sát chuyên biệt cho AI:**
 
-Add custom metrics for AI operations:
+Thêm các metric tùy chỉnh cho các hoạt động AI:
 ```bicep
 // In your web app configuration
 resource webApp 'Microsoft.Web/sites@2023-01-01' = {
@@ -334,44 +342,44 @@ resource webApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-### **Lab Exercise 4.1: Security Audit**
+### **Bài Tập Lab 4.1: Kiểm Toán Bảo Mật**
 
-**Task**: Review your deployment for security best practices.
+**Nhiệm vụ**: Xem xét triển khai của bạn theo các thực hành bảo mật tốt nhất.
 
-**Checklist:**
-- [ ] No hardcoded secrets in code or configuration
-- [ ] Managed Identity used for service-to-service authentication
-- [ ] Key Vault stores sensitive configuration
-- [ ] Network access is properly restricted
-- [ ] Monitoring and logging are enabled
+**Danh sách kiểm tra:**
+- [ ] Không có bí mật được hardcode trong mã hoặc cấu hình
+- [ ] Sử dụng Managed Identity cho xác thực giữa các dịch vụ
+- [ ] Key Vault lưu trữ cấu hình nhạy cảm
+- [ ] Truy cập mạng được hạn chế đúng cách
+- [ ] Giám sát và logging được bật
 
-## Module 5: Converting Your Own AI Application
+## Module 5: Chuyển Đổi Ứng Dụng AI Của Bạn
 
-### Step 5.1: Assessment Worksheet
+### Bước 5.1: Bảng Đánh Giá
 
-**Before converting your app**, answer these questions:
+**Trước khi chuyển đổi ứng dụng của bạn**, trả lời các câu hỏi sau:
 
-1. **Application Architecture:**
-   - What AI services does your app use?
-   - What compute resources does it need?
-   - Does it require a database?
-   - What are the dependencies between services?
+1. **Kiến trúc ứng dụng:**
+   - Ứng dụng của bạn sử dụng những dịch vụ AI nào?
+   - Nó cần tài nguyên compute nào?
+   - Có cần cơ sở dữ liệu không?
+   - Các phụ thuộc giữa các dịch vụ là gì?
 
-2. **Security Requirements:**
-   - What sensitive data does your app handle?
-   - What compliance requirements do you have?
-   - Do you need private networking?
+2. **Yêu cầu bảo mật:**
+   - Ứng dụng của bạn xử lý dữ liệu nhạy cảm nào?
+   - Bạn có yêu cầu tuân thủ nào không?
+   - Có cần mạng riêng tư không?
 
-3. **Scaling Requirements:**
-   - What's your expected load?
-   - Do you need auto-scaling?
-   - Are there regional requirements?
+3. **Yêu cầu scale:**
+   - Tải dự kiến của bạn là bao nhiêu?
+   - Có cần auto-scaling không?
+   - Có yêu cầu vùng (region) nào không?
 
-### Step 5.2: Create Your AZD Template
+### Bước 5.2: Tạo Mẫu AZD cho Bạn
 
-**Follow this pattern to convert your app:**
+**Làm theo mẫu này để chuyển đổi ứng dụng của bạn:**
 
-1. **Create the basic structure:**
+1. **Tạo cấu trúc cơ bản:**
 ```bash
 mkdir my-ai-app-azd
 cd my-ai-app-azd
@@ -380,7 +388,7 @@ cd my-ai-app-azd
 azd init --template minimal
 ```
 
-2. **Create azure.yaml:**
+2. **Tạo azure.yaml:**
 ```yaml
 # Metadata
 name: my-ai-app
@@ -403,9 +411,9 @@ hooks:
     run: echo "Preparing AI models..."
 ```
 
-3. **Create infrastructure templates:**
+3. **Tạo template hạ tầng:**
 
-**infra/main.bicep** - Main template:
+**infra/main.bicep** - Template chính:
 ```bicep
 @description('Primary location for all resources')
 param location string = resourceGroup().location
@@ -423,7 +431,7 @@ module openAI 'modules/openai.bicep' = {
 }
 ```
 
-**infra/modules/openai.bicep** - OpenAI module:
+**infra/modules/openai.bicep** - Module OpenAI:
 ```bicep
 @description('Name of the OpenAI service')
 param name string
@@ -447,107 +455,107 @@ output endpoint string = openAIAccount.properties.endpoint
 output name string = openAIAccount.name
 ```
 
-### **Lab Exercise 5.1: Template Creation Challenge**
+### **Bài Tập Lab 5.1: Thử Thách Tạo Mẫu**
 
-**Challenge**: Create an AZD template for a document processing AI app.
+**Thử thách**: Tạo một mẫu AZD cho một ứng dụng AI xử lý tài liệu.
 
-**Requirements:**
-- Microsoft Foundry Models for content analysis
-- Document Intelligence for OCR
-- Storage Account for document uploads
-- Function App for processing logic
-- Web app for user interface
+**Yêu cầu:**
+- Microsoft Foundry Models cho phân tích nội dung
+- Document Intelligence cho OCR
+- Storage Account cho tải lên tài liệu
+- Function App cho logic xử lý
+- Web app cho giao diện người dùng
 
-**Bonus points:**
-- Add proper error handling
-- Include cost estimation
-- Set up monitoring dashboards
+**Điểm thưởng:**
+- Thêm xử lý lỗi hợp lý
+- Bao gồm ước tính chi phí
+- Thiết lập dashboard giám sát
 
-## Module 6: Troubleshooting Common Issues
+## Module 6: Khắc Phục Sự Cố Thường Gặp
 
-### Common Deployment Issues
+### Các Vấn Đề Triển Khai Thường Gặp
 
-#### Issue 1: OpenAI Service Quota Exceeded
-**Symptoms:** Deployment fails with quota error
-**Solutions:**
+#### Vấn Đề 1: Vượt Quota Dịch Vụ OpenAI
+**Triệu chứng:** Triển khai thất bại với lỗi quota
+**Giải pháp:**
 ```bash
-# Kiểm tra các hạn ngạch hiện tại
+# Kiểm tra hạn mức hiện tại
 az cognitiveservices usage list --location eastus
 
-# Yêu cầu tăng hạn ngạch hoặc thử khu vực khác
+# Yêu cầu tăng hạn mức hoặc thử khu vực khác
 azd env set AZURE_LOCATION westus2
 azd up
 ```
 
-#### Issue 2: Model Not Available in Region
-**Symptoms:** AI responses fail or model deployment errors
-**Solutions:**
+#### Vấn Đề 2: Mô Hình Không Có Sẵn ở Vùng
+**Triệu chứng:** Phản hồi AI thất bại hoặc lỗi triển khai mô hình
+**Giải pháp:**
 ```bash
-# Kiểm tra sự sẵn có của mô hình theo khu vực
+# Kiểm tra tính khả dụng của mô hình theo khu vực
 az cognitiveservices model list --location eastus
 
 # Cập nhật lên mô hình có sẵn
-azd env set AZURE_OPENAI_MODEL gpt-35-turbo-16k
+azd env set AZURE_OPENAI_MODEL gpt-4.1-mini
 azd deploy
 ```
 
-#### Issue 3: Permission Issues
-**Symptoms:** 403 Forbidden errors when calling AI services
-**Solutions:**
+#### Vấn Đề 3: Vấn Đề Quyền
+**Triệu chứng:** Lỗi 403 Forbidden khi gọi dịch vụ AI
+**Giải pháp:**
 ```bash
 # Kiểm tra phân công vai trò
 az role assignment list --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 
-# Thêm vai trò còn thiếu
+# Thêm các vai trò còn thiếu
 az role assignment create \
   --assignee YOUR_PRINCIPAL_ID \
   --role "Cognitive Services OpenAI User" \
   --scope /subscriptions/YOUR_SUB/resourceGroups/YOUR_RG
 ```
 
-### Performance Issues
+### Vấn Đề Hiệu Năng
 
-#### Issue 4: Slow AI Responses
-**Investigation steps:**
-1. Check Application Insights for performance metrics
-2. Review OpenAI service metrics in Azure portal
-3. Verify network connectivity and latency
+#### Vấn Đề 4: Phản Hồi AI Chậm
+**Các bước điều tra:**
+1. Kiểm tra Application Insights cho các metric hiệu năng
+2. Xem lại metrics dịch vụ OpenAI trong Azure portal
+3. Xác minh kết nối mạng và độ trễ
 
-**Solutions:**
-- Implement caching for common queries
-- Use appropriate OpenAI model for your use case
-- Consider read replicas for high-load scenarios
+**Giải pháp:**
+- Triển khai caching cho các truy vấn thường gặp
+- Sử dụng mô hình OpenAI phù hợp với trường hợp sử dụng
+- Xem xét read replicas cho các kịch bản tải cao
 
-### **Lab Exercise 6.1: Debugging Challenge**
+### **Bài Tập Lab 6.1: Thử Thách Gỡ Rối**
 
-**Scenario**: Your deployment succeeded, but the application returns 500 errors.
+**Kịch bản**: Việc triển khai của bạn thành công, nhưng ứng dụng trả về lỗi 500.
 
-**Debugging tasks:**
-1. Check application logs
-2. Verify service connectivity
-3. Test authentication
-4. Review configuration
+**Nhiệm vụ gỡ rối:**
+1. Kiểm tra logs ứng dụng
+2. Xác minh kết nối giữa các dịch vụ
+3. Kiểm tra xác thực
+4. Xem lại cấu hình
 
-**Tools to use:**
-- `azd show` for deployment overview
-- Azure portal for detailed service logs
-- Application Insights for application telemetry
+**Công cụ sử dụng:**
+- `azd show` để xem tổng quan triển khai
+- Azure portal để xem logs chi tiết của dịch vụ
+- Application Insights cho telemetry ứng dụng
 
-## Module 7: Monitoring and Optimization
+## Module 7: Giám Sát và Tối Ưu
 
-### Step 7.1: Set Up Comprehensive Monitoring
+### Bước 7.1: Thiết Lập Giám Sát Toàn Diện
 
-1. **Create custom dashboards:**
+1. **Tạo dashboard tùy chỉnh:**
 
-Navigate to Azure portal and create a dashboard with:
-- OpenAI request count and latency
-- Application error rates
-- Resource utilization
-- Cost tracking
+Đi đến Azure portal và tạo một dashboard với:
+- Số lượng và độ trễ yêu cầu OpenAI
+- Tỷ lệ lỗi ứng dụng
+- Sử dụng tài nguyên
+- Theo dõi chi phí
 
-2. **Set up alerts:**
+2. **Thiết lập cảnh báo:**
 ```bash
-# Cảnh báo tỷ lệ lỗi cao
+# Cảnh báo về tỷ lệ lỗi cao
 az monitor metrics alert create \
   --name "AI-App-High-Error-Rate" \
   --resource-group YOUR_RG \
@@ -556,122 +564,123 @@ az monitor metrics alert create \
   --description "Alert when error rate is high"
 ```
 
-### Step 7.2: Cost Optimization
+### Bước 7.2: Tối Ưu Chi Phí
 
-1. **Analyze current costs:**
+1. **Phân tích chi phí hiện tại:**
 ```bash
 # Sử dụng Azure CLI để lấy dữ liệu chi phí
 az consumption usage list --start-date 2024-01-01 --end-date 2024-01-31
 ```
 
-2. **Implement cost controls:**
-- Set up budget alerts
-- Use autoscaling policies
-- Implement request caching
-- Monitor token usage for OpenAI
+2. **Thực hiện kiểm soát chi phí:**
+- Thiết lập cảnh báo ngân sách
+- Sử dụng chính sách autoscaling
+- Triển khai caching cho các yêu cầu
+- Giám sát sử dụng token cho OpenAI
 
-### **Lab Exercise 7.1: Performance Optimization**
+### **Bài Tập Lab 7.1: Tối Ưu Hiệu Năng**
 
-**Task**: Optimize your AI application for both performance and cost.
+**Nhiệm vụ**: Tối ưu ứng dụng AI của bạn cho cả hiệu năng và chi phí.
 
-**Metrics to improve:**
-- Reduce average response time by 20%
-- Reduce monthly costs by 15%
-- Maintain 99.9% uptime
+**Các chỉ số cần cải thiện:**
+- Giảm thời gian phản hồi trung bình 20%
+- Giảm chi phí hàng tháng 15%
+- Duy trì 99.9% thời gian hoạt động
 
-**Strategies to try:**
-- Implement response caching
-- Optimize prompts for token efficiency
-- Use appropriate compute SKUs
-- Set up proper autoscaling
+**Chiến lược để thử:**
+- Triển khai caching phản hồi
+- Tối ưu prompts để tiết kiệm token
+- Sử dụng SKU compute phù hợp
+- Thiết lập autoscaling hợp lý
 
-## Final Challenge: End-to-End Implementation
+## Thử Thách Cuối: Triển Khai End-to-End
 
-### Challenge Scenario
+### Kịch Bản Thử Thách
 
-You're tasked with creating a production-ready AI-powered customer service chatbot with these requirements:
+Bạn được giao nhiệm vụ tạo một chatbot dịch vụ khách hàng sẵn sàng cho production với các yêu cầu sau:
 
-**Functional Requirements:**
-- Web interface for customer interactions
-- Integration with Microsoft Foundry Models for responses
-- Document search capability using Cognitive Search
-- Integration with existing customer database
-- Multi-language support
+**Yêu cầu chức năng:**
+- Giao diện web cho tương tác khách hàng
+- Tích hợp với Microsoft Foundry Models cho phản hồi
+- Khả năng tìm kiếm tài liệu bằng Cognitive Search
+- Tích hợp với cơ sở dữ liệu khách hàng hiện có
+- Hỗ trợ đa ngôn ngữ
 
-**Non-Functional Requirements:**
-- Handle 1000 concurrent users
-- 99.9% uptime SLA
-- SOC 2 compliance
-- Cost under $500/month
-- Deploy to multiple environments (dev, staging, prod)
+**Yêu cầu phi chức năng:**
+- Xử lý 1000 người dùng đồng thời
+- SLA 99.9% uptime
+- Tuân thủ SOC 2
+- Chi phí dưới $500/tháng
+- Triển khai tới nhiều môi trường (dev, staging, prod)
 
-### Implementation Steps
+### Các Bước Triển Khai
 
-1. **Design the architecture**
-2. **Create the AZD template**
-3. **Implement security measures**
-4. **Set up monitoring and alerting**
-5. **Create deployment pipelines**
-6. **Document the solution**
+1. **Thiết kế kiến trúc**
+2. **Tạo mẫu AZD**
+3. **Thực hiện các biện pháp bảo mật**
+4. **Thiết lập giám sát và cảnh báo**
+5. **Tạo pipeline triển khai**
+6. **Tài liệu hóa giải pháp**
 
-### Evaluation Criteria
+### Tiêu Chí Đánh Giá
 
-- ✅ **Functionality**: Does it meet all requirements?
-- ✅ **Security**: Are best practices implemented?
-- ✅ **Scalability**: Can it handle the load?
-- ✅ **Maintainability**: Is the code and infrastructure well-organized?
-- ✅ **Cost**: Does it stay within budget?
+- ✅ **Chức năng**: Có đáp ứng tất cả yêu cầu không?
+- ✅ **Bảo mật**: Có thực hiện các thực hành tốt không?
+- ✅ **Khả năng mở rộng**: Có chịu được tải không?
+- ✅ **Dễ bảo trì**: Mã và hạ tầng có tổ chức tốt không?
+- ✅ **Chi phí**: Có nằm trong ngân sách không?
 
-## Additional Resources
+## Tài Nguyên Bổ Sung
 
-### Microsoft Documentation
+### Tài Liệu Microsoft
 - [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
 - [Microsoft Foundry Models Service Documentation](https://learn.microsoft.com/azure/cognitive-services/openai/)
 - [Microsoft Foundry Documentation](https://learn.microsoft.com/azure/ai-studio/)
 
-### Sample Templates
-- [Microsoft Foundry Models Chat App](https://github.com/Azure-Samples/azure-search-openai-demo)
-- [OpenAI Chat App Quickstart](https://github.com/Azure-Samples/openai-chat-app-quickstart)
+### Mẫu Ví Dụ
+- [Ứng dụng Chat Microsoft Foundry Models](https://github.com/Azure-Samples/azure-search-openai-demo)
+- [Hướng dẫn nhanh Ứng dụng Chat OpenAI](https://github.com/Azure-Samples/openai-chat-app-quickstart)
 - [Contoso Chat](https://github.com/Azure-Samples/contoso-chat)
 
-### Community Resources
+### Tài nguyên cộng đồng
 - [Microsoft Foundry Discord](https://discord.gg/microsoft-azure)
-- [Azure Developer CLI GitHub](https://github.com/Azure/azure-dev)
-- [Awesome AZD Templates](https://azure.github.io/awesome-azd/)
+- [Azure Developer CLI trên GitHub](https://github.com/Azure/azure-dev)
+- [Mẫu AZD tuyệt vời](https://azure.github.io/awesome-azd/)
 
-## 🎓 Completion Certificate
+## 🎓 Chứng nhận hoàn thành
 
-Congratulations! You've completed the AI Workshop Lab. You should now be able to:
-- ✅ Chuyển đổi các ứng dụng AI hiện có thành mẫu AZD
-- ✅ Triển khai các ứng dụng AI sẵn sàng cho môi trường production
-- ✅ Thực hiện các biện pháp bảo mật tốt nhất cho khối lượng công việc AI
-- ✅ Giám sát và tối ưu hiệu suất ứng dụng AI
-- ✅ Khắc phục sự cố triển khai thường gặp
+Chúc mừng! Bạn đã hoàn thành Lab Hội thảo AI. Bây giờ bạn nên có khả năng:
+
+- ✅ Chuyển đổi các ứng dụng AI hiện có thành các mẫu AZD
+- ✅ Triển khai các ứng dụng AI sẵn sàng cho môi trường sản xuất
+- ✅ Thực hiện các thực hành bảo mật tốt nhất cho khối lượng công việc AI
+- ✅ Giám sát và tối ưu hóa hiệu suất ứng dụng AI
+- ✅ Khắc phục các sự cố triển khai thường gặp
 
 ### Bước tiếp theo
-1. Áp dụng các mẫu này vào các dự án AI của bạn
-2. Đóng góp các mẫu trở lại cộng đồng
-3. Tham gia Discord Microsoft Foundry để được hỗ trợ liên tục
+1. Áp dụng các mẫu này cho các dự án AI của bạn
+2. Đóng góp các mẫu trở lại cho cộng đồng
+3. Tham gia Microsoft Foundry Discord để được hỗ trợ liên tục
 4. Khám phá các chủ đề nâng cao như triển khai đa vùng
 
 ---
 
-**Phản hồi hội thảo**: Giúp chúng tôi cải thiện hội thảo này bằng cách chia sẻ trải nghiệm của bạn trong the [Kênh Discord Microsoft Foundry #Azure](https://discord.gg/microsoft-azure).
+**Phản hồi về Hội thảo**: Giúp chúng tôi cải thiện hội thảo này bằng cách chia sẻ trải nghiệm của bạn trong [kênh #Azure của Microsoft Foundry Discord](https://discord.gg/microsoft-azure).
 
 ---
 
 **Điều hướng chương:**
-- **📚 Trang chính khóa học**: [AZD For Beginners](../../README.md)
+- **📚 Trang khóa học**: [AZD For Beginners](../../README.md)
 - **📖 Chương hiện tại**: Chương 2 - Phát triển ưu tiên AI
-- **⬅️ Trước**: [Triển khai Mô hình AI](ai-model-deployment.md)
+- **⬅️ Trước đó**: [Triển khai mô hình AI](ai-model-deployment.md)
 - **➡️ Tiếp theo**: [Thực hành tốt nhất cho AI trong sản xuất](production-ai-practices.md)
 - **🚀 Chương tiếp theo**: [Chương 3: Cấu hình](../chapter-03-configuration/configuration.md)
 
-**Cần giúp đỡ?** Tham gia cộng đồng của chúng tôi để nhận hỗ trợ và thảo luận về AZD và triển khai AI.
+**Cần trợ giúp?** Tham gia cộng đồng của chúng tôi để được hỗ trợ và thảo luận về AZD và việc triển khai AI.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Miễn trừ trách nhiệm**:
-Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi cố gắng đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc thông tin không chính xác. Tài liệu gốc bằng ngôn ngữ nguyên bản của nó nên được coi là nguồn có thẩm quyền. Đối với thông tin quan trọng, khuyến nghị sử dụng dịch vụ dịch thuật chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc giải thích sai nào phát sinh từ việc sử dụng bản dịch này.
+Tài liệu này đã được dịch bằng dịch vụ dịch thuật AI [Co-op Translator](https://github.com/Azure/co-op-translator). Mặc dù chúng tôi nỗ lực đảm bảo độ chính xác, xin lưu ý rằng các bản dịch tự động có thể chứa lỗi hoặc không chính xác. Tài liệu gốc bằng ngôn ngữ ban đầu của nó nên được coi là nguồn tham khảo có thẩm quyền. Đối với thông tin quan trọng, nên sử dụng dịch vụ dịch thuật chuyên nghiệp do con người thực hiện. Chúng tôi không chịu trách nhiệm về bất kỳ hiểu lầm hoặc diễn giải sai nào phát sinh từ việc sử dụng bản dịch này.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

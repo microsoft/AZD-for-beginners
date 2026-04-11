@@ -1,74 +1,74 @@
-# Konfiguratsiooni juhend
+# Konfiguratsioonijuht
 
-**Peatüki navigeerimine:**
+**Peatüki navigatsioon:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
 - **📖 Praegune peatükk**: Peatükk 3 - Konfiguratsioon ja autentimine
 - **⬅️ Eelmine**: [Teie esimene projekt](first-project.md)
-- **➡️ Järgmine**: [Juurutamise juhend](../chapter-04-infrastructure/deployment-guide.md)
+- **➡️ Järgmine**: [Käivitamise juhend](../chapter-04-infrastructure/deployment-guide.md)
 - **🚀 Järgmine peatükk**: [Peatükk 4: Infrastruktuur koodina](../chapter-04-infrastructure/deployment-guide.md)
 
 ## Sissejuhatus
 
-See põhjalik juhend käsitleb kõiki Azure Developer CLI konfigureerimise aspekte optimaalsete arendus- ja juurutusprotsesside tarbeks. Õpite tundma konfiguratsiooni hierarhiat, keskkondade haldust, autentimismeetodeid ja arenenud konfiguratsiooni mustreid, mis võimaldavad tõhusat ja turvalist Azure'i juurutust.
+See põhjalik juhend käsitleb kõiki Azure Developer CLI optimaalse arendus- ja juurutustöövoo konfiguratsiooni aspekte. Õpite konfiguratsioonihierarhiat, keskkonna haldust, autentimismeetodeid ja arenenud konfiguratsioonimustreid, mis võimaldavad tõhusaid ja turvalisi Azure'i juurutusi.
 
 ## Õpieesmärgid
 
-Selle õppetunni lõpuks:
-- Omate täielikku ülevaadet azd konfiguratsiooni hierarhiast ja teadlikkust seadete prioriteedist
-- Oskate tõhusalt seadistada globaalseid ja projektipõhiseid sätteid
-- Haldate mitut keskkonda erinevate konfiguratsioonidega
+Selle tunni lõpuks:
+- Valdate azd konfiguratsioonihierarhiat ja mõistate, kuidas seadeid prioritiseeritakse
+- Konfigureerite globaalseid ja projekti-spetsiifilisi seadeid tõhusalt
+- Haldate mitut erineva konfiguratsiooniga keskkonda
 - Rakendate turvalisi autentimise ja autoriseerimise mustreid
-- Mõistate arenenud konfiguratsiooni mustreid keerukate stsenaariumide jaoks
+- Mõistate keerukate stsenaariumide arenenud konfiguratsioonimustreid
 
 ## Õpitulemused
 
-Pärast selle õppetunni läbimist suudate:
-- Konfigureerida azd optimaalsete arendusprotsesside tarbeks
+Pärast selle tunni läbimist saate:
+- Konfigureerida azd optimaalseks arendustöövoogudeks
 - Seada üles ja hallata mitut juurutuskeskkonda
-- Rakendada turvalisi konfiguratsiooni haldamise tavasid
-- Lahendada konfiguratsiooni seotud probleeme
-- Kohandada azd käitumist vastavalt konkreetsetele organisatsiooninõuetele
+- Rakendada turvalisi konfiguratsioonihalduspraktikaid
+- Lahendada konfiguratsiooniga seotud probleeme
+- Kohandada azd käitumist konkreetsete organisatsiooninõuete jaoks
 
-See põhjalik juhend käsitleb kõiki Azure Developer CLI konfigureerimise aspekte optimaalsete arendus- ja juurutusprotsesside tarbeks.
+See põhjalik juhend käsitleb kõiki Azure Developer CLI optimaalse arendus- ja juurutustöövoo konfiguratsiooni aspekte.
 
-## AI agendide mõistmine azd projektis
+## AI agentide mõistmine azd projektis
 
-Kui AI agendid on teile uued, siis siin on lihtne viis neid azd maailmas ette kujutada.
+Kui AI agentide kontseptsioon on teile uus, siis siin on lihtne viis nende mõistmiseks azd maailmas.
 
 ### Mis on agent?
 
-Agent on tarkvaratükk, mis suudab vastu võtta päringu, sellele mõelda ja toiminguid teha—tavaliselt AI mudeli kutsumise, andmete otsimise või teiste teenuste kasutamise kaudu. Azd projektis on agent lihtsalt üks **teenus** teie veebiliidese või API tagaosa kõrval.
+Agent on tarkvarakomponent, mis saab päringu, analüüsib seda ja võtab meetmeid — sageli kutsudes AI mudelit, otsides andmeid või kasutades muid teenuseid. Azd projektis on agent lihtsalt üks **teenus** naast oma veebiliidese või API-tagaosa teenuse kõrval.
 
-### Kuidas agendid sobituvad azd projekti struktuuri
+### Kuidas agent sobitub azd projekti struktuuri
 
-Azd projekt koosneb kolmest kihist: **infrastruktuur**, **kood** ja **konfiguratsioon**. Agendid integreeruvad nendesse kihtidesse samamoodi nagu teised teenused:
+Azd projekt koosneb kolmest kihist: **infrastruktuur**, **kood** ja **konfiguratsioon**. Agendid ühenduvad nendesse kihtidesse nagu iga teine teenus:
 
-| Kiht | Mis see teeb traditsioonilise rakenduse jaoks | Mis see teeb agendi jaoks |
-|-------|---------------------------------------------|---------------------------|
-| **Infrastruktuur** (`infra/`) | Varustab veebirakendus ja andmebaasi | Varustab AI mudeli lõpp-punkti, otsinguindeksi või agendi hosti |
-| **Kood** (`src/`) | Sisaldab teie esipaneeli ja API lähtekoodi | Sisaldab teie agendi loogikat ja üleskutse definitsioone |
-| **Konfiguratsioon** (`azure.yaml`) | Loetleb teie teenused ja nende majutuse sihtmärgid | Loetleb teie agendi teenusena, osutades selle koodile ja hostile |
+| Kiht | Traditsioonilise rakenduse roll | Agendi roll |
+|-------|-------------------------------------|---------------------------|
+| **Infrastruktuur** (`infra/`) | Veebirakenduse ja andmebaasi propageerimine | AI mudeli lõpp-punkti, otsinguindeksi või agendi hosti propageerimine |
+| **Kood** (`src/`) | Teie frontend'i ja API lähtekood | Teie agendi loogika ja promptide määratlused |
+| **Konfiguratsioon** (`azure.yaml`) | Teenuste ja nende majutamise sihtkohtade loetelu | Agent teenusena koos koodi ja hosti näitamisega |
 
 ### `azure.yaml` roll
 
-Te ei pea süntaksit praegu pähe õppima. Kontseptuaalselt on `azure.yaml` fail, kus ütlete azd-le: *"Siin on teenused, mis moodustavad minu rakenduse, ja siin asub nende kood."*
+Teil ei ole vaja süntaksit praegu pähe õppida. Kontseptuaalselt on `azure.yaml` fail, kuhu ütlete azd-le: *„Siin on minu rakenduse moodustavad teenused ja kus nende kood paikneb.“*
 
-Kui teie projekt sisaldab AI agenti, loetleb `azure.yaml` lihtsalt selle agendi teenusena. Seejärel teab azd õigete infrastruktuuride (näiteks Microsoft Foundry mudelite lõpp-punkt või konteinerirakendus agendi majutamiseks) loomist ja teie agendi koodi juurutamist – täpselt nii nagu veebirakenduse või API puhul.
+Kui teie projekt sisaldab AI agenti, loetleb `azure.yaml` selle lihtsalt teenuste hulgas. Seejärel teab azd, millist infrastruktuuri luua (näiteks Microsoft Foundry Models lõpp-punkt või Container App agendi majutamiseks) ja juurutada teie agendi kood — täpselt nagu veebirakenduse või API puhul.
 
-See tähendab, et põhimõtteliselt pole midagi uut õppida. Kui teate, kuidas azd haldab veebiteenust, mõistate juba, kuidas see haldab agenti.
+See tähendab, et sisuliselt pole midagi uut õppida. Kui mõistate, kuidas azd haldab veebiteenust, mõistate ka, kuidas ta haldab agenti.
 
-## Konfiguratsiooni hierarhia
+## Konfiguratsioonihierarhia
 
 azd kasutab hierarhilist konfiguratsioonisüsteemi:
-1. **Käsurealipud** (kõrgeim prioriteet)
+1. **Käsurea lipud** (kõrgeim prioriteet)
 2. **Keskkonnamuutujad**
-3. **Kohalik projekti konfiguratsioon** (`.azd/config.json`)
-4. **Globaalne kasutajakonfiguratsioon** (`~/.azd/config.json`)
-5. **Vaikimisi väärtused** (kõrgeim prioriteet)
+3. **Paikne projekti konfiguratsioon** (`.azd/config.json`)
+4. **Globaalne kasutaja konfiguratsioon** (`~/.azd/config.json`)
+5. **Vaikimisi väärtused** (madalaim prioriteet)
 
 ## Globaalne konfiguratsioon
 
-### Globaalsete vaikimisi väärtuste seadistamine
+### Globaalse vaikeseadete määramine
 ```bash
 # Määra vaikimisi tellimus
 azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
@@ -76,35 +76,35 @@ azd config set defaults.subscription "12345678-1234-1234-1234-123456789abc"
 # Määra vaikimisi asukoht
 azd config set defaults.location "eastus2"
 
-# Määra vaikimisi ressursigrupi nimetamise tava
+# Määra vaikimisi ressursirühma nimetamise konventsioon
 azd config set defaults.resourceGroupName "rg-{env-name}-{location}"
 
-# Vaata kogu globaalseid seadeid
-azd config list
+# Vaata kogu globaalset konfiguratsiooni
+azd config show
 
 # Eemalda konfiguratsioon
 azd config unset defaults.location
 ```
 
-### Üldised globaalsed sätted
+### Üldised globaalsed seaded
 ```bash
-# Arendusvalikud
+# Arenduse eelistused
 azd config set alpha.enable true                    # Luba alfa funktsioonid
 azd config set telemetry.enabled false             # Keela telemeetria
-azd config set output.format json                  # Määra väljundi formaat
+azd config set output.format json                  # Sea väljundi formaat
 
 # Turvaseaded
 azd config set auth.useAzureCliCredential true     # Kasuta Azure CLI autentimiseks
-azd config set tls.insecure false                  # Nõua TLS kontrollimist
+azd config set tls.insecure false                  # Nõua TLS kontrolli
 
-# Jõudluse optimeerimine
-azd config set provision.parallelism 5             # Ressursside paralleelne loomine
-azd config set deploy.timeout 30m                  # Paigaldusaja ületamise aeg
+# Jõudluse häälestamine
+azd config set provision.parallelism 5             # Resursside paralleelne loomine
+azd config set deploy.timeout 30m                  # Deploymendi ajalõpp
 ```
 
 ## 🏗️ Projekti konfiguratsioon
 
-### `azure.yaml` struktuur
+### azure.yaml struktuur
 `azure.yaml` fail on teie azd projekti süda:
 
 ```yaml
@@ -181,7 +181,7 @@ pipeline:
     - AZURE_CLIENT_SECRET
 ```
 
-### Teenuste konfiguratsiooni valikud
+### Teenuse konfiguratsioonivõimalused
 
 #### Host tüübid
 ```yaml
@@ -202,7 +202,7 @@ services:
     host: springapp             # Azure Spring Apps
 ```
 
-#### Keele-spetsiifilised sätted
+#### Keele-spetsiifilised seaded
 ```yaml
 services:
   node-app:
@@ -226,7 +226,7 @@ services:
     startCommand: java -jar target/app.jar
 ```
 
-## 🌟 Keskkondade haldus
+## 🌟 Keskkonna haldus
 
 ### Keskkondade loomine
 ```bash
@@ -263,7 +263,7 @@ Igal keskkonnal on oma konfiguratsioon failis `.azure/<env-name>/config.json`:
 }
 ```
 
-### Keskkonnamuutujad
+### Keskkonna muutujad
 ```bash
 # Määra keskkonnaspetsiifilised muutujad
 azd env set DATABASE_URL "postgresql://user:pass@host:5432/db"
@@ -273,10 +273,10 @@ azd env set DEBUG "true"
 # Vaata keskkonnamuutujaid
 azd env get-values
 
-# Oodatav väljund:
-# DATABASE_URL=postgresql://kasutaja:parool@host:5432/andmebaas
+# Oodatud väljund:
+# DATABASE_URL=postgresql://user:pass@host:5432/db
 # API_KEY=salajane-api-võti
-# DEBUG=tõene
+# DEBUG=jah
 
 # Eemalda keskkonnamuutuja
 azd env unset DEBUG
@@ -287,7 +287,7 @@ azd env get-values | grep DEBUG
 ```
 
 ### Keskkonna mallid
-Loo fail `.azure/env.template`, et keskkondade seadistamine oleks ühtlane:
+Looge `.azure/env.template` ühtlase keskkonnaseadistuse jaoks:
 ```bash
 # Nõutavad muutujad
 AZURE_SUBSCRIPTION_ID=
@@ -307,17 +307,17 @@ LOG_LEVEL=info
 
 ### Azure CLI integratsioon
 ```bash
-# Kasutage Azure CLI mandaate (vaikimisi)
+# Kasuta Azure CLI volitusi (vaikimisi)
 azd config set auth.useAzureCliCredential true
 
-# Logi sisse konkreetse üürniku kaudu
+# Logi sisse kindla üürniku alt
 az login --tenant <tenant-id>
 
-# Määra vaikimisi tellimus
+# Sea vaikimisi tellimus
 az account set --subscription <subscription-id>
 ```
 
-### Teenusprintsiipi autentimine
+### Teenuskontoga autentimine
 CI/CD torujuhtmete jaoks:
 ```bash
 # Määra keskkonnamuutujad
@@ -330,8 +330,8 @@ azd config set auth.clientId "your-client-id"
 azd config set auth.tenantId "your-tenant-id"
 ```
 
-### Halatud identiteet
-Azure'is majutatud keskkondade jaoks:
+### Hallatav identiteet
+Azure'i majutatud keskkondade jaoks:
 ```bash
 # Luba hallatud identiteedi autentimine
 azd config set auth.useMsi true
@@ -340,8 +340,8 @@ azd config set auth.msiClientId "your-managed-identity-client-id"
 
 ## 🏗️ Infrastruktuuri konfiguratsioon
 
-### Bicep parameetrid
-Seadista infrastruktuuri parameetrid failis `infra/main.parameters.json`:
+### Bicepi parameetrid
+Seadistage infrastruktuuri parameetrid failis `infra/main.parameters.json`:
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
@@ -364,7 +364,7 @@ Seadista infrastruktuuri parameetrid failis `infra/main.parameters.json`:
 ```
 
 ### Terraform konfiguratsioon
-Terraform projektide jaoks seadista failis `infra/terraform.tfvars`:
+Terraform projektide jaoks seadistage `infra/terraform.tfvars`:
 ```hcl
 environment_name = "${AZURE_ENV_NAME}"
 location = "${AZURE_LOCATION}"
@@ -372,7 +372,7 @@ app_service_sku = "B1"
 database_sku = "GP_Gen5_2"
 ```
 
-## 🚀 Juurutuse konfiguratsioon
+## 🚀 Juurutamise konfiguratsioon
 
 ### Koostamise konfiguratsioon
 ```yaml
@@ -397,7 +397,7 @@ services:
       PYTHONPATH: src
 ```
 
-### Dockeri konfiguratsioon
+### Docker konfiguratsioon
 ```yaml
 services:
   api:
@@ -411,13 +411,13 @@ services:
         NODE_ENV: production
         API_VERSION: v1.0.0
 ```
-Näiteks `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
+Näidis `Dockerfile`: https://github.com/Azure-Samples/deepseek-go/blob/main/azure.yaml 
 
 ## 🔧 Arendatud konfiguratsioon
 
-### Kohandatud ressursside nimetamine
+### Kohandatud ressursinimede määramine
 ```bash
-# Määrake nimetamisreeglid
+# Määra nimetamisstandardsused
 azd config set naming.resourceGroup "rg-{project}-{env}-{location}"
 azd config set naming.storageAccount "{project}{env}sa"
 azd config set naming.keyVault "kv-{project}-{env}"
@@ -446,9 +446,9 @@ monitoring:
     retentionDays: 30
 ```
 
-## 🎯 Keskkonnaspetsiifilised konfiguratsioonid
+## 🎯 Keskkonnapõhised konfiguratsioonid
 
-### Arendus keskkond
+### Arenduskeskkond
 ```bash
 # .azure/arendus/.env
 DEBUG=true
@@ -457,9 +457,9 @@ ENABLE_HOT_RELOAD=true
 MOCK_EXTERNAL_APIS=true
 ```
 
-### Stage keskkond
+### Eelprodutsentsikeskkond
 ```bash
-# .azure/staging/.env
+# .azure/ajutine/.env
 DEBUG=false
 LOG_LEVEL=info
 ENABLE_MONITORING=true
@@ -468,7 +468,7 @@ USE_PRODUCTION_APIS=true
 
 ### Tootmiskeskkond
 ```bash
-# .azure/tootmine/.env
+# .azure/production/.env
 DEBUG=false
 LOG_LEVEL=error
 ENABLE_MONITORING=true
@@ -490,7 +490,7 @@ azd provision --dry-run
 ```
 
 ### Konfiguratsiooni skriptid
-Loo valideerimisskriptid kaustas `scripts/`:
+Looge valideerimisskriptid kataloogis `scripts/`:
 
 ```bash
 #!/bin/bash
@@ -498,13 +498,13 @@ Loo valideerimisskriptid kaustas `scripts/`:
 
 echo "Validating configuration..."
 
-# Kontrolli vajalikke keskkonnamuutujaid
+# Kontrolli nõutud keskkonnamuutujaid
 if [ -z "$AZURE_SUBSCRIPTION_ID" ]; then
   echo "Error: AZURE_SUBSCRIPTION_ID not set"
   exit 1
 fi
 
-# Kontrolli azure.yaml süntaksit
+# Kontrolli azure.yaml sünaksit
 if ! azd config validate; then
   echo "Error: Invalid azure.yaml configuration"
   exit 1
@@ -513,9 +513,9 @@ fi
 echo "Configuration validation passed!"
 ```
 
-## 🎓 Parimad tavad
+## 🎓 Parimad praktikad
 
-### 1. Kasuta keskkonnamuutujaid
+### 1. Kasutage keskkonnamuutujaid
 ```yaml
 # Good: Use environment variables
 database:
@@ -526,7 +526,7 @@ database:
   connectionString: "Server=myserver;Database=mydb;User=myuser;Password=mypassword"
 ```
 
-### 2. Korralda konfiguratsioonifailid
+### 2. Korraldage konfiguratsioonifailid
 ```
 .azure/
 ├── config.json              # Global project config
@@ -542,11 +542,11 @@ database:
     └── .env                # Production environment variables
 ```
 
-### 3. Versioonihalduse kaalutlused
+### 3. Versioonikontrolli kaalutlused
 ```bash
 # .gitignore
 .azure/*/config.json         # Keskkonna konfiguratsioonid (sisaldavad ressursi ID-sid)
-.azure/*/.env               # Keskkonnaparameetrid (võivad sisaldada salasõnu)
+.azure/*/.env               # Keskkonna muutujad (võivad sisaldada salasõnu)
 .env                        # Kohalik keskkonna fail
 ```
 
@@ -568,18 +568,18 @@ Dokumenteerige oma konfiguratsioon failis `CONFIG.md`:
 
 ## 🎯 Praktilised harjutused
 
-### Harjutus 1: Mitmekeskkondade konfiguratsioon (15 minutit)
+### Harjutus 1: Mitmekeskkonnaline konfiguratsioon (15 minutit)
 
 **Eesmärk**: Loo ja konfigureeri kolm erineva seadistusega keskkonda
 
 ```bash
-# Loo arenduskeskkond
+# Loo arendus keskkond
 azd env new dev
 azd env set LOG_LEVEL debug
 azd env set ENABLE_TELEMETRY false
 azd env set APP_INSIGHTS_SAMPLING 100
 
-# Loo testkeskkond
+# Loo staging keskkond
 azd env new staging
 azd env set LOG_LEVEL info
 azd env set ENABLE_TELEMETRY true
@@ -597,18 +597,18 @@ azd env select staging && azd env get-values
 azd env select production && azd env get-values
 ```
 
-**Edu kriteeriumid:**
-- [ ] Kolm keskkonda edukalt loodud
-- [ ] Igal keskkonnal on unikaalne konfiguratsioon
-- [ ] Keskkondade vahel saab ilma vigadeta vahetada
-- [ ] Käsk `azd env list` kuvab kõik kolm keskkonda
+**Edukuse kriteeriumid:**
+- [ ] Loodi edukalt kolm keskkonda
+- [ ] Igal keskkonnal on eraldiseisev konfiguratsioon
+- [ ] Võimalus keskkondade vahel vigadeta vahetada
+- [ ] `azd env list` kuvab kõik kolm keskkonda
 
 ### Harjutus 2: Saladuste haldamine (10 minutit)
 
-**Eesmärk**: Praktiseeri turvalist konfiguratsiooni tundlike andmetega
+**Eesmärk**: Harjuta turvalist konfiguratsiooni tundliku andmete haldamisega
 
 ```bash
-# Määra saladused (mitte väljundis kuvamiseks)
+# Määra saladused (tulemustes ei kuvata)
 azd env set DB_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 
@@ -616,23 +616,23 @@ azd env set API_KEY "sk-$(openssl rand -hex 16)" --secret
 azd env set DB_HOST "mydb.postgres.database.azure.com"
 azd env set DB_NAME "production_db"
 
-# Vaata keskkonda (saladusi peaks varjama)
+# Vaata keskkonda (saladusi tuleks varjata)
 azd env get-values
 
-# Kinnita, et saladused on salvestatud
+# Kontrolli, et saladused on salvestatud
 azd env get DB_PASSWORD  # Peaks näitama tegelikku väärtust
 ```
 
-**Edu kriteeriumid:**
-- [ ] Saladused salvestatud ilma terminalis kuvamata
-- [ ] `azd env get-values` näitab punktiiriga varjatud saladusi
-- [ ] Individuaalne käsk `azd env get <SECRET_NAME>` tagastab tegeliku väärtuse
+**Edukuse kriteeriumid:**
+- [ ] Saladused salvestati ilma terminalis kuvamata
+- [ ] `azd env get-values` kuvab tsenseeritud saladusi
+- [ ] Individuaalne `azd env get <SECRET_NAME>` tagastab reaalse väärtuse
 
 ## Järgmised sammud
 
-- [Teie esimene projekt](first-project.md) - Rakendage konfiguratsioon praktikas
-- [Juurutamise juhend](../chapter-04-infrastructure/deployment-guide.md) - Kasutage konfiguratsiooni juurutamiseks
-- [Ressursside loomine](../chapter-04-infrastructure/provisioning.md) - Tootmisvalmis konfiguratsioonid
+- [Teie esimene projekt](first-project.md) - Rakenda konfiguratsiooni praktikas
+- [Käivitamise juhend](../chapter-04-infrastructure/deployment-guide.md) - Kasuta konfiguratsiooni juurutamiseks
+- [Ressursside valmis seadmine](../chapter-04-infrastructure/provisioning.md) - Tootmiskõlblikud konfiguratsioonid
 
 ## Viited
 
@@ -642,7 +642,7 @@ azd env get DB_PASSWORD  # Peaks näitama tegelikku väärtust
 
 ---
 
-**Peatüki navigeerimine:**
+**Peatüki navigatsioon:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
 - **📖 Praegune peatükk**: Peatükk 3 - Konfiguratsioon ja autentimine
 - **⬅️ Eelmine**: [Teie esimene projekt](first-project.md)
@@ -652,6 +652,6 @@ azd env get DB_PASSWORD  # Peaks näitama tegelikku väärtust
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Loaavaldus**:
-See dokument on tõlgitud kasutades tehisintellekti tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüame täpsust, palun arvestage, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument oma emakeeles on autoriteetne allikas. Kriitilise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta tekkida võivate arusaamatuste või valesti mõistmiste eest, mis võivad tuleneda selle tõlke kasutamisest.
+**Vastutusest loobumine**:  
+See dokument on tõlgitud kasutades AI tõlketeenust [Co-op Translator](https://github.com/Azure/co-op-translator). Kuigi püüame täpsust, palun pidage meeles, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Originaaldokument selle emakeeles tuleks pidada usaldusväärseks allikaks. Kriitilise teabe puhul soovitatakse professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tekkida võivate arusaamatuste või valesti mõistmiste eest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,31 +1,31 @@
-# Production AI Workload Best Practices with AZD
+# AZD を用いたプロダクション AI ワークロードのベストプラクティス
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD For Beginners](../../README.md)
-- **📖 Current Chapter**: 第8章 - 本番環境とエンタープライズパターン
-- **⬅️ Previous Chapter**: [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ Also Related**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🎯 Course Complete**: [AZD For Beginners](../../README.md)
+**章ナビゲーション:**
+- **📚 Course Home**: [AZD 入門](../../README.md)
+- **📖 Current Chapter**: 第8章 - プロダクション＆エンタープライズパターン
+- **⬅️ Previous Chapter**: [第7章: トラブルシューティング](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Also Related**: [AI ワークショップラボ](ai-workshop-lab.md)
+- **🎯 Course Complete**: [AZD 入門](../../README.md)
 
-## Overview
+## 概要
 
-このガイドは、Azure Developer CLI (AZD) を使用して本番対応の AI ワークロードをデプロイするための包括的なベストプラクティスを提供します。Microsoft Foundry Discord コミュニティからのフィードバックと実際の顧客導入に基づき、これらのプラクティスは本番 AI システムで最も一般的な課題に対応します。
+本ガイドは Azure Developer CLI (AZD) を使用したプロダクション対応の AI ワークロードをデプロイするための包括的なベストプラクティスを提供します。Microsoft Foundry Discord コミュニティからのフィードバックおよび実際の顧客の導入に基づき、これらのプラクティスはプロダクション AI システムで最も一般的な課題に対応します。
 
-## Key Challenges Addressed
+## 対処する主要な課題
 
-コミュニティ投票の結果に基づき、開発者が直面する主な課題は次のとおりです:
+コミュニティの投票結果に基づくと、開発者が直面する主要な課題は次の通りです:
 
-- **45%** がマルチサービスの AI デプロイに苦労している
-- **38%** が資格情報とシークレット管理に問題を抱えている  
-- **35%** が本番準備とスケーリングを困難と感じている
-- **32%** がコスト最適化戦略をより必要としている
-- **29%** が監視とトラブルシューティングの改善を求めている
+- **45%** マルチサービスの AI デプロイに苦労している
+- **38%** 資格情報とシークレット管理に問題がある  
+- **35%** 本番対応やスケーリングが難しい
+- **32%** コスト最適化戦略が不十分
+- **29%** 監視とトラブルシューティングの改善が必要
 
-## Architecture Patterns for Production AI
+## プロダクション AI のアーキテクチャパターン
 
-### Pattern 1: Microservices AI Architecture
+### パターン1: マイクロサービス型 AI アーキテクチャ
 
-**When to use**: 複数の機能を持つ複雑な AI アプリケーション向け
+<strong>使用時</strong>: 複数の機能を持つ複雑な AI アプリケーション
 
 ```mermaid
 graph TD
@@ -33,7 +33,7 @@ graph TD
     Gateway --> Chat[チャットサービス]
     Gateway --> Image[画像サービス]
     Gateway --> Text[テキストサービス]
-    Chat --> OpenAI[Microsoft Foundry のモデル]
+    Chat --> OpenAI[マイクロソフト Foundry モデル]
     Image --> Vision[コンピュータビジョン]
     Text --> DocIntel[ドキュメントインテリジェンス]
 ```
@@ -60,9 +60,9 @@ services:
     host: containerapp
 ```
 
-### Pattern 2: Event-Driven AI Processing
+### パターン2: イベント駆動型 AI 処理
 
-**When to use**: バッチ処理、ドキュメント分析、非同期ワークフロー
+<strong>使用時</strong>: バッチ処理、ドキュメント分析、非同期ワークフロー
 
 ```bicep
 // Event Hub for AI processing pipeline
@@ -109,43 +109,43 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Thinking About AI Agent Health
+## AI エージェントの健全性について考える
 
-従来のウェブアプリが壊れたとき、症状はおなじみのものです: ページがロードされない、API がエラーを返す、またはデプロイが失敗する。AI 搭載アプリケーションはこれらの同じ方法で壊れる可能性があります—しかし、明確なエラーメッセージを生成しない、より微妙な不具合を起こすこともあります。
+従来の Web アプリが壊れるとき、症状は馴染み深いものです: ページが読み込まれない、API がエラーを返す、デプロイが失敗する。AI 搭載アプリケーションは同じ方法で壊れることもありますが、明確なエラーメッセージを出さないより微妙な不具合を起こすこともあります。
 
-このセクションは、AI ワークロードを監視するためのメンタルモデルを構築するのに役立ちます。問題が発生したときにどこを確認すべきかがわかるようになります。
+このセクションでは、AI ワークロードを監視するためのメンタルモデルを構築するのに役立つ情報を提供します。問題があるときにどこを見ればよいかが分かります。
 
-### How Agent Health Differs from Traditional App Health
+### エージェントの健全性が従来のアプリの健全性と異なる点
 
-従来のアプリは動作するかしないかのどちらかです。AI エージェントは動作しているように見えても、結果が悪いことがあります。エージェントのヘルスは二つの層で考えてください:
+従来のアプリは動作するかしないかのどちらかです。AI エージェントは動作しているように見えても、結果が悪い場合があります。エージェントの健全性は二層で考えてください:
 
-| Layer | What to Watch | Where to Look |
+| 層 | 監視項目 | 調査先 |
 |-------|--------------|---------------|
-| **Infrastructure health** | サービスは稼働しているか？リソースはプロビジョニングされているか？エンドポイントは到達可能か？ | `azd monitor`, Azure Portal resource health, コンテナ/アプリのログ |
-| **Behavior health** | エージェントは正確に応答しているか？応答はタイムリーか？モデルは正しく呼び出されているか？ | Application Insights のトレース、モデル呼び出しのレイテンシメトリクス、応答品質ログ |
+| <strong>インフラの健全性</strong> | サービスは起動していますか？リソースはプロビジョニングされていますか？エンドポイントに到達できますか？ | `azd monitor`、Azure ポータルのリソース ヘルス、コンテナ/アプリのログ |
+| <strong>振る舞いの健全性</strong> | エージェントは正確に応答していますか？応答は適時ですか？モデルが正しく呼び出されていますか？ | Application Insights のトレース、モデル呼び出しのレイテンシ指標、レスポンス品質ログ |
 
-Infrastructure health は馴染みのあるものです—azd アプリ全般で同じです。Behavior health は AI ワークロードがもたらす新しい層です。
+インフラの健全性は馴染みのあるものです—どの azd アプリでも同じです。振る舞いの健全性は、AI ワークロードが導入する新しい層です。
 
-### Where to Look When AI Apps Don't Behave as Expected
+### AI アプリが期待通りに動作しないときに見るべき場所
 
-AI アプリケーションが期待通りの結果を出さない場合、以下は概念的なチェックリストです:
+AI アプリケーションが期待した結果を出していない場合、概念的なチェックリストは次の通りです:
 
-1. **基本から始める。** アプリは稼働していますか？依存関係に到達できますか？他のアプリと同様に `azd monitor` とリソースヘルスを確認してください。
-2. **モデル接続を確認する。** アプリケーションは AI モデルを正常に呼び出していますか？失敗やタイムアウトしたモデル呼び出しは AI アプリの問題の最も一般的な原因であり、アプリケーションログに表示されます。
-3. **モデルが受け取ったものを確認する。** AI の応答は入力（プロンプトや取得されたコンテキスト）に依存します。出力が間違っている場合、入力が間違っていることが多いです。アプリがモデルに正しいデータを送っているか確認してください。
-4. **応答レイテンシをレビューする。** AI モデル呼び出しは通常の API 呼び出しより遅いです。アプリが重く感じる場合、モデルの応答時間が増加していないか確認してください—スロットリング、キャパシティの限界、またはリージョンレベルの混雑を示すことがあります。
-5. **コストのシグナルに注意する。** トークン使用量や API 呼び出しの予期しないスパイクは、ループ、誤設定されたプロンプト、または過剰なリトライを示している可能性があります。
+1. **基本から確認する。** アプリは動作していますか？依存先に到達できますか？どのアプリでも行うように `azd monitor` とリソースのヘルスを確認してください。
+2. **モデル接続を確認する。** アプリケーションは AI モデルを正常に呼び出していますか？失敗またはタイムアウトしたモデル呼び出しは AI アプリ問題の最も一般的な原因で、アプリケーションログに現れます。
+3. **モデルが受け取ったものを確認する。** AI の応答は入力（プロンプトと取得したコンテキスト）に依存します。出力が間違っている場合、入力が間違っていることが多いです。アプリケーションがモデルに正しいデータを送っているか確認してください。
+4. **応答のレイテンシを確認する。** AI モデル呼び出しは通常の API 呼び出しより遅いです。アプリが遅く感じる場合、モデル応答時間が増加していないか確認してください—スロットリング、容量制限、リージョンレベルの混雑を示す可能性があります。
+5. **コストに関する信号を監視する。** 予期しないトークン使用量や API 呼び出しの急増は、ループ、誤設定されたプロンプト、過剰なリトライを示すことがあります。
 
-すぐに可観測性ツールを完全に習得する必要はありません。重要なポイントは、AI アプリケーションには監視すべき行動層が追加されることであり、azd の組み込み監視（`azd monitor`）が両方の層を調査するための出発点を提供するということです。
+すぐに可観測性ツールの専門家になる必要はありません。重要なのは、AI アプリケーションには監視すべき追加の振る舞いの層があり、azd の組み込み監視（`azd monitor`）が両方の層を調査するための出発点を提供することです。
 
 ---
 
-## Security Best Practices
+## セキュリティのベストプラクティス
 
-### 1. Zero-Trust Security Model
+### 1. ゼロトラスト セキュリティモデル
 
-**Implementation Strategy**:
-- 認証なしのサービス間通信は行わない
+<strong>実装戦略</strong>:
+- 認証なしのサービス間通信を許可しない
 - すべての API 呼び出しにマネージド ID を使用
 - プライベートエンドポイントによるネットワーク分離
 - 最小権限のアクセス制御
@@ -169,9 +169,9 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. Secure Secret Management
+### 2. セキュアなシークレット管理
 
-**Key Vault Integration Pattern**:
+**Key Vault 統合パターン**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -204,9 +204,9 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-### 3. Network Security
+### 3. ネットワークセキュリティ
 
-**Private Endpoint Configuration**:
+<strong>プライベートエンドポイント構成</strong>:
 
 ```bicep
 // Virtual Network for AI services
@@ -264,11 +264,11 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Performance and Scaling
+## パフォーマンスとスケーリング
 
-### 1. Auto-Scaling Strategies
+### 1. オートスケーリング戦略
 
-**Container Apps Auto-scaling**:
+**Container Apps のオートスケーリング**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -312,9 +312,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. Caching Strategies
+### 2. キャッシュ戦略
 
-**Redis Cache for AI Responses**:
+**AI レスポンス向けの Redis キャッシュ**:
 
 ```bicep
 // Redis Premium for production workloads
@@ -342,9 +342,9 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Load Balancing and Traffic Management
+### 3. 負荷分散とトラフィック管理
 
-**Application Gateway with WAF**:
+**WAF を備えた Application Gateway**:
 
 ```bicep
 // Application Gateway with Web Application Firewall
@@ -380,11 +380,11 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 💰 Cost Optimization
+## 💰 コスト最適化
 
-### 1. Resource Right-Sizing
+### 1. リソースの適正化
 
-**Environment-Specific Configurations**:
+<strong>環境別設定</strong>:
 
 ```bash
 # 開発環境
@@ -404,7 +404,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Cost Monitoring and Budgets
+### 2. コスト監視と予算
 
 ```bicep
 // Cost management and budgets
@@ -445,12 +445,12 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. Token Usage Optimization
+### 3. トークン使用量の最適化
 
-**OpenAI Cost Management**:
+**OpenAI コスト管理**:
 
 ```typescript
-// アプリケーションレベルのトークン最適化
+// アプリケーションレベルでのトークン最適化
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -474,9 +474,9 @@ class TokenOptimizer {
 }
 ```
 
-## Monitoring and Observability
+## 監視と可観測性
 
-### 1. Comprehensive Application Insights
+### 1. 包括的な Application Insights
 
 ```bicep
 // Application Insights with advanced features
@@ -521,9 +521,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. AI-Specific Monitoring
+### 2. AI 向けの監視
 
-**Custom Dashboards for AI Metrics**:
+**AI 指標のカスタムダッシュボード**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -552,7 +552,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Health Checks and Uptime Monitoring
+### 3. ヘルスチェックと稼働時間監視
 
 ```bicep
 // Application Insights availability tests
@@ -621,9 +621,9 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Disaster Recovery and High Availability
+## 災害復旧と高可用性
 
-### 1. Multi-Region Deployment
+### 1. マルチリージョン展開
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -685,7 +685,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Data Backup and Recovery
+### 2. データのバックアップとリカバリ
 
 ```bicep
 // Backup configuration for critical data
@@ -736,9 +736,9 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 }
 ```
 
-## DevOps and CI/CD Integration
+## DevOps と CI/CD 統合
 
-### 1. GitHub Actions Workflow
+### 1. GitHub Actions ワークフロー
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -782,7 +782,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup AZD
-        uses: Azure/setup-azd@v1.0.0
+        uses: Azure/setup-azd@v2
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -802,7 +802,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup AZD
-        uses: Azure/setup-azd@v1.0.0
+        uses: Azure/setup-azd@v2
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -819,7 +819,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. Infrastructure Validation
+### 2. インフラ検証
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -827,7 +827,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# 必要なすべてのサービスが稼働しているか確認する
+# すべての必須サービスが稼働しているか確認する
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -840,8 +840,8 @@ done
 # OpenAIモデルのデプロイを検証する
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
-if [[ ! $models == *"gpt-35-turbo"* ]]; then
-    echo "ERROR: Required model gpt-35-turbo not deployed"
+if [[ ! $models == *"gpt-4.1-mini"* ]]; then
+  echo "ERROR: Required model gpt-4.1-mini not deployed"
     exit 1
 fi
 
@@ -852,70 +852,70 @@ python scripts/test_connectivity.py
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Production Readiness Checklist
+## 本番準備チェックリスト
 
-### Security ✅
-- [ ] All services use managed identities
-- [ ] Secrets stored in Key Vault
-- [ ] Private endpoints configured
-- [ ] Network security groups implemented
-- [ ] RBAC with least privilege
-- [ ] WAF enabled on public endpoints
+### セキュリティ ✅
+- [ ] すべてのサービスがマネージド ID を使用している
+- [ ] シークレットは Key Vault に格納されている
+- [ ] プライベートエンドポイントが構成されている
+- [ ] ネットワークセキュリティグループが実装されている
+- [ ] 最小権限の RBAC が設定されている
+- [ ] パブリックエンドポイントに WAF が有効化されている
 
-### Performance ✅
-- [ ] Auto-scaling configured
-- [ ] Caching implemented
-- [ ] Load balancing setup
-- [ ] CDN for static content
-- [ ] Database connection pooling
-- [ ] Token usage optimization
+### パフォーマンス ✅
+- [ ] オートスケーリングが構成されている
+- [ ] キャッシュが実装されている
+- [ ] 負荷分散が設定されている
+- [ ] 静的コンテンツ用の CDN がある
+- [ ] データベース接続プーリングがある
+- [ ] トークン使用量の最適化がなされている
 
-### Monitoring ✅
-- [ ] Application Insights configured
-- [ ] Custom metrics defined
-- [ ] Alerting rules setup
-- [ ] Dashboard created
-- [ ] Health checks implemented
-- [ ] Log retention policies
+### 監視 ✅
+- [ ] Application Insights が構成されている
+- [ ] カスタムメトリクスが定義されている
+- [ ] アラートルールが設定されている
+- [ ] ダッシュボードが作成されている
+- [ ] ヘルスチェックが実装されている
+- [ ] ログ保持ポリシーがある
 
-### Reliability ✅
-- [ ] Multi-region deployment
-- [ ] Backup and recovery plan
-- [ ] Circuit breakers implemented
-- [ ] Retry policies configured
-- [ ] Graceful degradation
-- [ ] Health check endpoints
+### 信頼性 ✅
+- [ ] マルチリージョン展開が行われている
+- [ ] バックアップとリカバリ計画がある
+- [ ] サーキットブレーカーが実装されている
+- [ ] リトライポリシーが構成されている
+- [ ] グレースフルデグラデーションがある
+- [ ] ヘルスチェック用エンドポイントがある
 
-### Cost Management ✅
-- [ ] Budget alerts configured
-- [ ] Resource right-sizing
-- [ ] Dev/test discounts applied
-- [ ] Reserved instances purchased
-- [ ] Cost monitoring dashboard
-- [ ] Regular cost reviews
+### コスト管理 ✅
+- [ ] 予算アラートが設定されている
+- [ ] リソースの適正化が行われている
+- [ ] 開発/テスト割引が適用されている
+- [ ] リザーブドインスタンスが購入されている
+- [ ] コスト監視ダッシュボードがある
+- [ ] 定期的なコストレビューが行われている
 
-### Compliance ✅
-- [ ] Data residency requirements met
-- [ ] Audit logging enabled
-- [ ] Compliance policies applied
-- [ ] Security baselines implemented
-- [ ] Regular security assessments
-- [ ] Incident response plan
+### コンプライアンス ✅
+- [ ] データ居住要件が満たされている
+- [ ] 監査ログが有効になっている
+- [ ] コンプライアンスポリシーが適用されている
+- [ ] セキュリティベースラインが実装されている
+- [ ] 定期的なセキュリティ評価が行われている
+- [ ] インシデント対応計画がある
 
-## Performance Benchmarks
+## パフォーマンスベンチマーク
 
-### Typical Production Metrics
+### 典型的なプロダクション指標
 
-| Metric | Target | Monitoring |
+| 指標 | 目標 | 監視方法 |
 |--------|--------|------------|
-| **Response Time** | < 2 seconds | Application Insights |
-| **Availability** | 99.9% | Uptime monitoring |
-| **Error Rate** | < 0.1% | Application logs |
-| **Token Usage** | < $500/month | Cost management |
-| **Concurrent Users** | 1000+ | Load testing |
-| **Recovery Time** | < 1 hour | Disaster recovery tests |
+| <strong>応答時間</strong> | < 2 秒 | Application Insights |
+| <strong>可用性</strong> | 99.9% | 稼働時間監視 |
+| <strong>エラー率</strong> | < 0.1% | アプリケーションログ |
+| <strong>トークン使用量</strong> | < $500/月 | コスト管理 |
+| <strong>同時ユーザー数</strong> | 1000+ | 負荷テスト |
+| <strong>復旧時間</strong> | < 1 時間 | 災害復旧テスト |
 
-### Load Testing
+### 負荷テスト
 
 ```bash
 # AIアプリケーションの負荷テスト用スクリプト
@@ -926,126 +926,129 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Community Best Practices
+## 🤝 コミュニティのベストプラクティス
 
 Microsoft Foundry Discord コミュニティのフィードバックに基づく:
 
-### Top Recommendations from the Community:
+### コミュニティからの主な推奨事項:
 
-1. **小さく始めて、段階的にスケールする**: 基本的な SKU から開始し、実際の使用状況に基づいてスケールアップする
+1. <strong>小さく始めて段階的に拡張する</strong>: 基本的な SKU から始め、実際の使用状況に基づいてスケールアップする
 2. <strong>すべてを監視する</strong>: 初日から包括的な監視を設定する
-3. <strong>セキュリティを自動化する</strong>: 一貫したセキュリティのために Infrastructure as Code を使用する
-4. <strong>徹底的にテストする</strong>: パイプラインに AI 固有のテストを含める
+3. <strong>セキュリティを自動化する</strong>: 一貫したセキュリティのためにインフラをコード化する
+4. <strong>徹底的にテストする</strong>: パイプラインに AI 特有のテストを含める
 5. <strong>コストを見越して計画する</strong>: トークン使用量を監視し、早期に予算アラートを設定する
 
-### Common Pitfalls to Avoid:
+### 避けるべき一般的な落とし穴:
 
-- ❌ コードに API キーをハードコーディングする
+- ❌ コード内に API キーをハードコーディングする
 - ❌ 適切な監視を設定していない
 - ❌ コスト最適化を無視する
 - ❌ 障害シナリオをテストしていない
 - ❌ ヘルスチェックなしでデプロイする
 
-## AZD AI CLI Commands and Extensions
+## AZD AI CLI コマンドと拡張機能
 
-AZD には、プロダクション AI ワークフローを簡素化する AI 固有のコマンドと拡張機能が増えています。これらのツールはローカル開発と本番デプロイのギャップを埋めます。
+AZD にはプロダクション AI ワークフローを効率化する AI 専用のコマンドと拡張機能のセットが拡張されています。これらのツールはローカル開発とプロダクションデプロイのギャップを埋めます。
 
-### AZD Extensions for AI
+### AI 向けの AZD 拡張機能
 
-AZD は拡張システムを使用して AI 固有の機能を追加します。拡張機能は次のコマンドでインストールおよび管理します:
+AZD は拡張システムを使用して AI 特有の機能を追加します。次のコマンドで拡張機能をインストールおよび管理します:
 
 ```bash
-# 利用可能なすべての拡張機能を一覧表示する（AI を含む）
+# 利用可能な拡張機能をすべて一覧表示（AIを含む）
 azd extension list
 
-# Foundry Agents 拡張機能をインストールする
+# インストール済み拡張機能の詳細を確認
+azd extension show azure.ai.agents
+
+# Foundry agents 拡張機能をインストール
 azd extension install azure.ai.agents
 
-# ファインチューニング拡張機能をインストールする
+# ファインチューニング拡張機能をインストール
 azd extension install azure.ai.finetune
 
-# カスタムモデル拡張機能をインストールする
+# カスタムモデル拡張機能をインストール
 azd extension install azure.ai.models
 
-# インストールされているすべての拡張機能をアップグレードする
+# インストール済みのすべての拡張機能をアップグレード
 azd extension upgrade --all
 ```
 
-**Available AI extensions:**
+**利用可能な AI 拡張機能:**
 
-| Extension | Purpose | Status |
+| 拡張 | 目的 | ステータス |
 |-----------|---------|--------|
-| `azure.ai.agents` | Foundry Agent Service management | Preview |
-| `azure.ai.finetune` | Foundry model fine-tuning | Preview |
-| `azure.ai.models` | Foundry custom models | Preview |
-| `azure.coding-agent` | Coding agent configuration | Available |
+| `azure.ai.agents` | Foundry Agent Service の管理 | プレビュー |
+| `azure.ai.finetune` | Foundry モデルのファインチューニング | プレビュー |
+| `azure.ai.models` | Foundry カスタムモデル | プレビュー |
+| `azure.coding-agent` | コーディングエージェントの設定 | 利用可能 |
 
-### Initializing Agent Projects with `azd ai agent init`
+### `azd ai agent init` でエージェントプロジェクトを初期化する
 
-`azd ai agent init` コマンドは、Microsoft Foundry Agent Service と統合された本番対応の AI エージェントプロジェクトをスキャフォールドします:
+`azd ai agent init` コマンドは Microsoft Foundry Agent Service と統合されたプロダクション対応の AI エージェントプロジェクトをスキャフォールドします:
 
 ```bash
 # エージェントマニフェストから新しいエージェントプロジェクトを初期化する
 azd ai agent init -m <manifest-path-or-uri>
 
-# 特定のFoundryプロジェクトを初期化し、ターゲットに設定する
+# 特定のFoundryプロジェクトを初期化してターゲットにする
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
-# カスタムのソースディレクトリを指定して初期化する
+# カスタムのソースディレクトリで初期化する
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
-# Container Appsをホストとしてターゲットにする
+# Container Apps をホストとしてターゲットにする
 azd ai agent init -m agent-manifest.yaml --host containerapp
 ```
 
-**Key flags:**
+**主なフラグ:**
 
-| Flag | Description |
+| フラグ | 説明 |
 |------|-------------|
-| `-m, --manifest` | Path or URI to an agent manifest to add to your project |
-| `-p, --project-id` | Existing Microsoft Foundry Project ID for your azd environment |
-| `-s, --src` | Directory to download the agent definition (defaults to `src/<agent-id>`) |
-| `--host` | Override the default host (e.g., `containerapp`) |
-| `-e, --environment` | The azd environment to use |
+| `-m, --manifest` | プロジェクトに追加するエージェントマニフェストへのパスまたは URI |
+| `-p, --project-id` | azd 環境に対する既存の Microsoft Foundry プロジェクト ID |
+| `-s, --src` | エージェント定義をダウンロードするディレクトリ（デフォルトは `src/<agent-id>`） |
+| `--host` | デフォルトのホストを上書き（例: `containerapp`） |
+| `-e, --environment` | 使用する azd 環境 |
 
-**Production tip**: `--project-id` を使用して既存の Foundry プロジェクトに直接接続すると、エージェントコードとクラウドリソースを最初からリンクしたままにできます。
+<strong>本番向けのヒント</strong>: `--project-id` を使用して既存の Foundry プロジェクトに直接接続し、エージェントコードとクラウドリソースを最初からリンクさせてください。
 
-### Model Context Protocol (MCP) with `azd mcp`
+### Model Context Protocol (MCP) と `azd mcp`
 
-AZD には組み込みの MCP サーバーサポート（Alpha）が含まれており、AI エージェントやツールが標準化されたプロトコルを通じて Azure リソースと対話できるようにします:
+AZD は MCP サーバーサポート（Alpha）を内蔵しており、AI エージェントおよびツールが標準化されたプロトコルを通じて Azure リソースとやり取りできるようにします:
 
 ```bash
-# プロジェクトのMCPサーバーを起動する
+# プロジェクト用のMCPサーバーを起動する
 azd mcp start
 
-# MCP操作のためのツールの同意を管理する
-azd mcp consent
+# ツール実行に関する現在のCopilot同意ルールを確認する
+azd copilot consent list
 ```
 
-MCP サーバーはあなたの azd プロジェクトのコンテキスト—環境、サービス、Azure リソース—を AI 搭載の開発ツールに公開します。これにより次のことが可能になります:
+MCP サーバーは azd プロジェクトのコンテキスト—環境、サービス、および Azure リソース—を AI 搭載の開発ツールに公開します。これにより次が可能になります:
 
-- **AI 支援のデプロイ**: コーディングエージェントがプロジェクトの状態を問い合わせ、デプロイをトリガーできるようにする
-- <strong>リソースの発見</strong>: AI ツールがプロジェクトで使用されている Azure リソースを発見できる
-- <strong>環境管理</strong>: エージェントが dev/staging/production 環境を切り替えられる
+- **AI 支援のデプロイ**: コーディングエージェントがプロジェクトの状態を照会し、デプロイをトリガーできるようにする
+- <strong>リソースの検出</strong>: AI ツールがプロジェクトで使用されている Azure リソースを発見できる
+- <strong>環境管理</strong>: エージェントが開発/ステージング/本番環境を切り替えられる
 
-### Infrastructure Generation with `azd infra generate`
+### `azd infra generate` によるインフラ生成
 
-本番 AI ワークロード向けに、自動プロビジョニングに頼る代わりにインフラストラクチャをコードとして生成しカスタマイズできます:
+プロダクション AI ワークロードでは、自動プロビジョニングに依存する代わりに Infrastructure as Code を生成してカスタマイズできます:
 
 ```bash
-# プロジェクト定義から Bicep/Terraform ファイルを生成する
+# プロジェクト定義からBicep/Terraformファイルを生成する
 azd infra generate
 ```
 
-これにより IaC をディスクに書き出すので、次のことが可能になります:
+これにより IaC をディスクに書き出すので、次のことができます:
 - デプロイ前にインフラをレビューおよび監査する
-- カスタムセキュリティポリシー（ネットワークルール、プライベートエンドポイント）を追加する
+- カスタムのセキュリティポリシー（ネットワークルール、プライベートエンドポイント）を追加する
 - 既存の IaC レビュー プロセスに統合する
 - アプリケーションコードとは別にインフラの変更をバージョン管理する
 
-### Production Lifecycle Hooks
+### プロダクションライフサイクルフック
 
-AZD のフックを使うと、デプロイライフサイクルの各段階でカスタムロジックを注入できます—これは本番 AI ワークフローにとって重要です:
+AZD のフックを使うと、デプロイメントライフサイクルのあらゆる段階にカスタムロジックを挿入できます—これはプロダクション AI ワークフローにとって重要です:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1078,63 +1081,63 @@ services:
 azd hooks run predeploy
 ```
 
-**Recommended production hooks for AI workloads:**
+**AI ワークロード向けの推奨プロダクションフック:**
 
-| Hook | Use Case |
+| フック | 利用ケース |
 |------|----------|
-| `preprovision` | AI モデル容量のサブスクリプションクォータを検証する |
-| `postprovision` | プライベートエンドポイントを構成し、モデルの重みをデプロイする |
+| `preprovision` | AI モデル容量に対するサブスクリプションのクォータを検証する |
+| `postprovision` | プライベートエンドポイントを構成し、モデルウェイトをデプロイする |
 | `predeploy` | AI セーフティテストを実行し、プロンプトテンプレートを検証する |
-| `postdeploy` | エージェントの応答をスモークテストし、モデル接続を確認する |
+| `postdeploy` | エージェントの応答をスモークテストし、モデル接続性を検証する |
 
-### CI/CD Pipeline Configuration
+### CI/CD パイプライン構成
 
-`azd pipeline config` を使用して、プロジェクトを GitHub Actions または Azure Pipelines にセキュアな Azure 認証で接続します:
+`azd pipeline config` を使用して、セキュアな Azure 認証でプロジェクトを GitHub Actions や Azure Pipelines に接続します:
 
 ```bash
-# CI/CDパイプラインを設定する（対話式）
+# CI/CD パイプラインを設定する（対話式）
 azd pipeline config
 
 # 特定のプロバイダーで設定する
 azd pipeline config --provider github
 ```
 
-このコマンドは次を行います:
-- 最小権限アクセスを持つサービスプリンシパルを作成する
-- フェデレーテッド資格情報を構成する（保存されたシークレットは不要）
+このコマンドは:
+- 最小権限アクセスのサービスプリンシパルを作成する
+- フェデレーテッド認証情報を構成する（保存されたシークレットなし）
 - パイプライン定義ファイルを生成または更新する
 - CI/CD システムに必要な環境変数を設定する
 
-**Production workflow with pipeline config:**
+**パイプライン構成による本番ワークフロー:**
 
 ```bash
 # 1. 本番環境をセットアップする
 azd env new production
 azd env set AZURE_OPENAI_CAPACITY 100
 
-# 2. パイプラインを設定する
+# 2. パイプラインを構成する
 azd pipeline config --provider github
 
-# 3. パイプラインは main ブランチへの各プッシュで azd deploy を実行する
+# 3. パイプラインは main へのすべてのプッシュで azd deploy を実行する
 ```
 
-### Adding Components with `azd add`
+### `azd add` でコンポーネントを追加
 
-既存のプロジェクトに Azure サービスを段階的に追加します:
+既存プロジェクトに Azure サービスを段階的に追加します:
 
 ```bash
-# 新しいサービスコンポーネントを対話的に追加する
+# 対話形式で新しいサービスコンポーネントを追加する
 azd add
 ```
 
-これは本番 AI アプリケーションを拡張する際に特に有用です—例えば、ベクター検索サービス、新しいエージェントエンドポイント、または既存のデプロイに監視コンポーネントを追加するなどです。
+これはプロダクション AI アプリケーションを拡張する際に特に有用です—例えば、ベクタ検索サービスの追加、新しいエージェントエンドポイントの追加、既存デプロイへの監視コンポーネントの追加など。
 
-## Additional Resources
-- **Azure Well-Architected Framework**: [AI ワークロードに関するガイダンス](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Microsoft Foundry ドキュメント**: [公式ドキュメント](https://learn.microsoft.com/azure/ai-studio/)
-- **コミュニティ テンプレート**: [Azure サンプル](https://github.com/Azure-Samples)
-- **Discord コミュニティ**: [#Azure チャンネル](https://discord.gg/microsoft-azure)
-- **Azure 向けエージェントスキル**: [skills.sh の microsoft/github-copilot-for-azure](https://skills.sh/microsoft/github-copilot-for-azure) - Azure AI、Foundry、デプロイ、コスト最適化、および診断のための37件のオープンエージェントスキル。エディタにインストールしてください:
+## 追加リソース
+- **Azure Well-Architected Framework**: [AI ワークロード ガイダンス](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Microsoft Foundry Documentation**: [公式ドキュメント](https://learn.microsoft.com/azure/ai-studio/)
+- **Community Templates**: [Azure サンプル](https://github.com/Azure-Samples)
+- **Discord Community**: [#Azure チャンネル](https://discord.gg/microsoft-azure)
+- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - Azure AI、Foundry、デプロイ、コスト最適化、診断向けの 37 件の公開エージェント スキル。エディタにインストールしてください：
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
@@ -1142,17 +1145,17 @@ azd add
 ---
 
 **章のナビゲーション:**
-- **📚 コース ホーム**: [初心者向け AZD](../../README.md)
-- **📖 現在の章**: 第8章 - 本番およびエンタープライズのパターン
-- **⬅️ 前の章**: [第7章: トラブルシューティング](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ 関連項目**: [AI ワークショップラボ](ai-workshop-lab.md)
-- **� コース完了**: [初心者向け AZD](../../README.md)
+- **📚 Course Home**: [AZD 入門](../../README.md)
+- **📖 Current Chapter**: 第8章 - 本番稼働 & エンタープライズのパターン
+- **⬅️ Previous Chapter**: [第7章: トラブルシューティング](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ Also Related**: [AI ワークショップ ラボ](ai-workshop-lab.md)
+- **� Course Complete**: [AZD 入門](../../README.md)
 
-<strong>覚えておいてください</strong>: 本番環境のAIワークロードには、慎重な計画、監視、および継続的な最適化が必要です。これらのパターンから始め、特定の要件に合わせて適応してください。
+<strong>覚えておいてください</strong>: 本番の AI ワークロードには綿密な計画、監視、および継続的な最適化が必要です。これらのパターンから始めて、特定の要件に合わせて調整してください。
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **免責事項**:
-この文書はAI翻訳サービス [Co-opトランスレーター](https://github.com/Azure/co-op-translator) を使用して翻訳されました。正確性には努めていますが、自動翻訳には誤りや不正確さが含まれる可能性があることをご承知おきください。原文（原言語の文書）を信頼できる情報源と見なしてください。重要な情報については、専門の人間による翻訳をお勧めします。本翻訳の使用に起因するいかなる誤解や誤訳についても当方は責任を負いません。
+本ドキュメントは AI 翻訳サービス [Co-op 翻訳](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を期していますが、自動翻訳には誤りや不正確な箇所が含まれる可能性があることにご注意ください。原文（元の言語での文書）を権威ある情報源として扱ってください。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の使用に起因するいかなる誤解や誤訳についても、当社は責任を負いません。
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

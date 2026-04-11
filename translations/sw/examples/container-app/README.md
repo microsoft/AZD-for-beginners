@@ -1,55 +1,57 @@
-# Mifano ya Utekelezaji wa Container App na AZD
+# Mifano ya Usambazaji wa Container App kwa AZD
 
-Kumbukumbu hii ina mifano kamili ya kupeleka programu zilizomo kwenye kontena kwa Azure Container Apps kwa kutumia Azure Developer CLI (AZD). Mifano hizi zinaonyesha mifano ya ulimwengu halisi, mbinu bora, na usanidi unaofaa uzalishaji.
+Hii saraka ina mifano kamili ya kusambaza programu zilizohifadhiwa kwenye kontena kwa Azure Container Apps kwa kutumia Azure Developer CLI (AZD). Mifano hii inaonyesha mifumo ya vitendo, mbinu bora, na usanidi tayari kwa uzalishaji.
 
-## 📚 Yaliyomo
+## 📚 Jedwali la Yaliyomo
 
-- [Muhtasari](#overview)
-- [Vigezo vinavyotakiwa](#prerequisites)
-- [Mifano ya Kuanzia Haraka](#quick-start-examples)
-- [Mifano ya Uzalishaji](#production-examples)
-- [Mitindo ya Juu](#advanced-patterns)
-- [Mbinu Bora](#best-practices)
+- [Muhtasari](#muhtasari)
+- [Mahitaji](#mahitaji)
+- [Mifano ya Kuanzia Haraka](#mifano-ya-kuanzia-haraka)
+- [Mifano ya Uzalishaji](#mifano-ya-uzalishaji)
+- [Mbinu Zinazoendelea](#mbinu-zinazoendelea)
+- [Mbinu Bora](#mbinu-bora)
 
-## Overview
+## Muhtasari
 
-Azure Container Apps ni jukwaa la kontena lisilo na seva lililosimamiwa kikamilifu linalokuwezesha kuendesha microservices na programu zilizomo kwenye kontena bila kusimamia miundombinu. Ukiunganisha na AZD, unapata:
+Azure Container Apps ni jukwaa la kontena lisilo na seva linalosimamiwa kikamilifu ambalo linakuwezesha kuendesha microservices na programu zilizohifadhiwa kwenye kontena bila kusimamia miundombinu. Ukichanganya na AZD, unapata:
 
-- **Uwekaji Rahisi**: Amri moja inaweka kontena pamoja na miundombinu
-- **Ukipanua Kiotomatiki**: Panua hadi sifuri na kutanua kulingana na trafiki ya HTTP au matukio
-- **Mitandao Iliyounganishwa**: Ugunduzi wa huduma uliojengwa ndani na mgawanyo wa trafiki
-- **Utambulisho Ulisimamiwa**: Uthibitisho salama kwa rasilimali za Azure
+- **Usambazaji Uliorahisishwa**: Amri moja husambaza kontena pamoja na miundombinu
+- **Ukipima Moja kwa Moja**: Inapima kutoka sifuri na kupanua kulingana na trafiki ya HTTP au matukio
+- **Mitandao Iliyoshirikishwa**: Ugunduzi wa huduma uliowekwa na kugawanya trafiki
+- **Utambulisho Usimamiliwa**: Uthibitishaji salama kwa rasilimali za Azure
 - **Uboreshaji wa Gharama**: Lipa tu kwa rasilimali unazotumia
 
-## Prerequisites
+## Mahitaji
 
 Kabla ya kuanza, hakikisha una:
 
 ```bash
-# Angalia usakinishaji wa AZD
+# Angalia usanikishaji wa AZD
 azd version
 
 # Angalia Azure CLI
 az version
 
-# Angalia Docker (kwa ajili ya kujenga picha za kontena zilizobinafsishwa)
+# Angalia Docker (kwa ajili ya kujenga picha zilizobinafsishwa)
 docker --version
 
-# Ingia kwenye Azure
+# Thibitisha kwa ajili ya uanzishaji wa AZD
 azd auth login
+
+# Hiari: ingia katika Azure CLI ikiwa unapanga kuendesha amri za az moja kwa moja
 az login
 ```
 
-**Rasilimali Zinazohitajika za Azure:**
-- Usajili wa Azure unaoendelea
-- Ruhusa za kuunda vikundi vya rasilimali
+**Rasilimali za Azure Zinazohitajika:**
+- Usajili wa Azure unaotumika
+- Idhini za kuunda resource group
 - Ufikiaji wa mazingira ya Container Apps
 
-## Quick Start Examples
+## Mifano ya Kuanzia Haraka
 
-### 1. Simple Web API (Python Flask)
+### 1. API Rahisi ya Wavuti (Python Flask)
 
-Weka API ya msingi ya REST kwa Azure Container Apps.
+Sambaza API rahisi ya REST kwa Azure Container Apps.
 
 **Mfano: API ya Python Flask**
 
@@ -65,32 +67,32 @@ services:
     host: containerapp
 ```
 
-**Hatua za Uwekaji:**
+**Hatua za Usambazaji:**
 
 ```bash
-# Anzisha kutoka kwenye kiolezo
+# Anzisha kutoka kwa kiolezo
 azd init --template todo-python-mongo
 
-# Tayarisha miundombinu na sambaza
+# Sanidi miundombinu na upeleke programu
 azd up
 
-# Jaribu usambazaji
+# Jaribu utekelezaji
 azd show
 curl $(azd show --output json | jq -r '.services.api.endpoint')/health
 ```
 
 **Sifa Muhimu:**
-- Kuinua kiotomatiki kutoka 0 hadi nakala 10
-- Vipimo vya afya na ukaguzi wa uhai
-- Uingizaji wa vigezo vya mazingira
-- Uunganisho na Application Insights
+- Kujipanua kwa moja kwa moja kutoka 0 hadi nakala 10
+- Upimaji wa afya na ukaguzi wa uhai
+- Kuingizwa kwa vigezo vya mazingira
+- Uunganisho wa Application Insights
 
-### 2. Node.js Express API
+### 2. API ya Node.js Express
 
-Weka backend ya Node.js yenye uunganisho na MongoDB.
+Sambaza backend ya Node.js iliyo na uunganisho wa MongoDB.
 
 ```bash
-# Anzisha kiolezo cha API ya Node.js
+# Anzisha templeti ya API ya Node.js
 azd init --template todo-nodejs-mongo
 
 # Sanidi vigezo vya mazingira
@@ -147,12 +149,12 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 3. Static Frontend + API Backend
+### 3. Frontend Imara + Backend ya API
 
-Weka programu kamili ya stack yenye frontend ya React na backend ya API.
+Sambaza programu kamili yenye frontend ya React na backend ya API.
 
 ```bash
-# Anzisha kiolezo cha stack kamili
+# Anzisha kiolezo la full-stack
 azd init --template todo-csharp-sql-swa-func
 
 # Kagua usanidi
@@ -165,11 +167,11 @@ azd up
 azd show --output json | jq -r '.services.web.endpoint' | xargs start
 ```
 
-## Production Examples
+## Mifano ya Uzalishaji
 
-### Mfano 1: Miundo ya microservices
+### Mfano 1: Mimari ya Microservices
 
-**Senario**: Programu ya biashara ya mtandaoni yenye microservices nyingi
+**Senario**: Programu ya e-commerce yenye microservices nyingi
 
 **Muundo wa Saraka:**
 ```
@@ -191,7 +193,7 @@ microservices-demo/
     └── payment-service/
 ```
 
-**azure.yaml Configuration:**
+**Usanidi wa azure.yaml:**
 ```yaml
 name: microservices-ecommerce
 services:
@@ -211,7 +213,7 @@ services:
     host: containerapp
 ```
 
-**Uwekaji:**
+**Usambazaji:**
 ```bash
 # Anzisha mradi
 azd init
@@ -231,9 +233,9 @@ azd up
 azd monitor --overview
 ```
 
-### Mfano 2: Container App Inayotumia AI
+### Mfano 2: Container App Inayoendeshwa na AI
 
-**Senario**: Programu ya mazungumzo ya AI yenye uunganisho na Microsoft Foundry Models
+**Senario**: Programu ya chat ya AI yenye uunganisho na Microsoft Foundry Models
 
 **Faili: src/ai-chat/app.py**
 ```python
@@ -244,7 +246,7 @@ import openai
 
 app = Flask(__name__)
 
-# Tumia Utambulisho uliosimamiwa kwa ufikiaji salama
+# Tumia Utambulisho Ulioendeshwa kwa upatikanaji salama
 credential = DefaultAzureCredential()
 vault_url = "https://{vault-name}.vault.azure.net"
 client = SecretClient(vault_url=vault_url, credential=credential)
@@ -253,7 +255,7 @@ client = SecretClient(vault_url=vault_url, credential=credential)
 def chat():
     user_message = request.json.get('message')
     
-    # Pata ufunguo wa OpenAI kutoka Key Vault
+    # Pata ufunguo wa OpenAI kutoka Hazina ya Funguo
     openai_key = client.get_secret("openai-api-key").value
     openai.api_key = openai_key
     
@@ -320,7 +322,7 @@ module aiChatApp './app/container-app.bicep' = {
 }
 ```
 
-**Amri za Uwekaji:**
+**Amri za Usambazaji:**
 ```bash
 # Sanidi mazingira
 azd init --template ai-chat-app
@@ -339,9 +341,9 @@ curl -X POST $(azd show --output json | jq -r '.services.api.endpoint')/api/chat
   -d '{"message": "Hello, how are you?"}'
 ```
 
-### Mfano 3: Mfanyakazi wa Mandharinyuma na Usindika Foleni
+### Mfano 3: Mfanyakazi wa Mandharinyuma na Usindikaji wa Foleni
 
-**Senario**: Mfumo wa usindikaji wa maagizo unaotumia foleni ya ujumbe
+**Senario**: Mfumo wa usindikaji wa maagizo wenye foleni ya ujumbe
 
 **Muundo wa Saraka:**
 ```
@@ -378,10 +380,10 @@ def process_orders():
     while True:
         messages = queue_client.receive_messages(max_messages=10)
         for message in messages:
-            # Kusindika agizo
+            # Shughulikia agizo
             print(f"Processing order: {message.content}")
             
-            # Kukamilisha ujumbe
+            # Kamilisha ujumbe
             queue_client.delete_message(message)
 
 if __name__ == '__main__':
@@ -403,7 +405,7 @@ services:
     host: containerapp
 ```
 
-**Uwekaji:**
+**Usambazaji:**
 ```bash
 # Anzisha
 azd init
@@ -411,7 +413,7 @@ azd init
 # Sambaza kwa usanidi wa foleni
 azd up
 
-# Rekebisha idadi ya wafanyakazi kulingana na urefu wa foleni
+# Panga idadi ya wafanyakazi kulingana na urefu wa foleni
 az containerapp update \
   --name worker \
   --resource-group rg-order-processing \
@@ -420,9 +422,9 @@ az containerapp update \
   --scale-rule-metadata queueName=orders accountName=storageaccount
 ```
 
-## Advanced Patterns
+## Mbinu Zinazoendelea
 
-### Mfano 1: Uwekaji wa Blue-Green
+### Mfano 1: Usambazaji wa Blue-Green
 
 ```bash
 # Unda marekebisho mapya bila trafiki
@@ -431,20 +433,20 @@ azd deploy api --revision-suffix blue --no-traffic
 # Jaribu marekebisho mapya
 curl https://api--blue.nicegrass-12345.eastus.azurecontainerapps.io/health
 
-# Gawanya trafiki (20% kwa blue, 80% kwa toleo la sasa)
+# Gawanya trafiki (20% kwa bluu, 80% kwa toleo la sasa)
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight latest=80 blue=20
 
-# Fanya uhamisho kamili kwenda blue
+# Hamisho kamili kwenda bluu
 az containerapp ingress traffic set \
   --name api \
   --resource-group rg-myapp \
   --revision-weight blue=100
 ```
 
-### Mfano 2: Uwekaji wa Canary kwa AZD
+### Mfano 2: Usambazaji wa Canary kwa AZD
 
 **Faili: .azure/dev/config.json**
 ```json
@@ -458,18 +460,18 @@ az containerapp ingress traffic set \
 }
 ```
 
-**Script ya Uwekaji:**
+**Skripti ya Usambazaji:**
 ```bash
 #!/bin/bash
 # deploy-canary.sh
 
-# Sambaza toleo jipya kwa 10% ya trafiki
+# Weka toleo jipya kwa 10% ya trafiki
 azd deploy api --revision-mode multiple
 
 # Fuatilia vipimo
 azd monitor --service api --duration 5m
 
-# Ongeza trafiki taratibu
+# Ongeza trafiki kwa taratibu
 for i in {20..100..10}; do
   echo "Increasing traffic to $i%"
   az containerapp revision set-traffic \
@@ -481,7 +483,7 @@ for i in {20..100..10}; do
 done
 ```
 
-### Mfano 3: Uwekaji wa Mikoa Nyingi
+### Mfano 3: Usambazaji wa Mikoa Nyingi
 
 **Faili: azure.yaml**
 ```yaml
@@ -527,12 +529,12 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-**Uwekaji:**
+**Usambazaji:**
 ```bash
-# Sambaza katika mikoa yote
+# Weka katika mikoa yote
 azd up
 
-# Thibitisha vituo vya mwisho
+# Thibitisha endpoints
 azd show --output json | jq '.services.api.endpoints'
 ```
 
@@ -590,12 +592,12 @@ def create_order():
     return {'status': 'created'}
 ```
 
-## Best Practices
+## Mbinu Bora
 
-### 1. Mpangilio wa Rasilimali
+### 1. Muundo wa Rasilimali
 
 ```bash
-# Tumia kanuni thabiti za kupeana majina
+# Tumia kanuni thabiti za utoaji wa majina
 azd env set AZURE_ENV_NAME "myapp-prod"
 azd env set AZURE_LOCATION "eastus"
 
@@ -662,10 +664,10 @@ services:
             concurrent: 100
 ```
 
-### 4. Ufuatiliaji na Uwezo wa Kuonekana
+### 4. Ufuatiliaji na Uwezo wa Kuchunguza
 
 ```bash
-# Wezesha Application Insights
+# Washa Application Insights
 azd env set APPLICATIONINSIGHTS_CONNECTION_STRING "InstrumentationKey=..."
 
 # Tazama logi kwa wakati halisi
@@ -694,7 +696,7 @@ az containerapp update \
   --resource-group rg-myapp \
   --min-replicas 0
 
-# Tumia instansi za spot kwa mazingira ya maendeleo
+# Tumia spot instances kwa mazingira ya maendeleo
 azd env set CONTAINER_APP_REPLICA_TYPE "Spot"
 
 # Sanidi arifa za bajeti
@@ -749,13 +751,13 @@ azd up
 # Sambaza tu msimbo wa programu (ruka miundombinu)
 azd deploy
 
-# Tayarisha miundombinu pekee
+# Tayarisha miundombinu tu
 azd provision
 
 # Tazama rasilimali zilizosambazwa
 azd show
 
-# Tiririsha kumbukumbu za matukio (logs) kwa kutumia azd monitor au Azure CLI
+# Onyesha kumbukumbu kwa wakati halisi kwa kutumia azd monitor au Azure CLI
 azd monitor --logs
 # az containerapp logs show --name <service-name> --resource-group <rg-name> --follow
 
@@ -766,12 +768,12 @@ azd monitor --overview
 azd down --force --purge
 ```
 
-## Troubleshooting
+## Utatuzi wa Matatizo
 
 ### Tatizo: Kontena haianzi
 
 ```bash
-# Angalia kumbukumbu (logs) kwa kutumia Azure CLI
+# Angalia logi kwa kutumia Azure CLI
 az containerapp logs show --name api --resource-group rg-myapp --tail 100
 
 # Tazama matukio ya kontena
@@ -780,12 +782,12 @@ az containerapp revision show \
   --resource-group rg-myapp \
   --revision latest
 
-# Jaribu kwenye mashine ya ndani
+# Jaribu kwa mashine ya ndani
 docker build -t api:local ./src/api
 docker run -p 8000:8000 api:local
 ```
 
-### Tatizo: Huwezi kufikia endpoint ya Container App
+### Tatizo: Huwezi kufikia endpoint ya container app
 
 ```bash
 # Thibitisha usanidi wa ingress
@@ -817,31 +819,31 @@ az containerapp update \
   --memory 4Gi
 ```
 
-## Vyanzo na Mifano ya Ziada
+## Rasilimali Zingine na Mifano
 - [Mfano wa Microservices](./microservices/README.md)
-- [Mfano Rahisi la Flash API](./simple-flask-api/README.md)
+- [Mfano Rahisi wa Flash API](./simple-flask-api/README.md)
 - [Nyaraka za Azure Container Apps](https://learn.microsoft.com/azure/container-apps/)
-- [Gallery ya Templates za AZD](https://azure.github.io/awesome-azd/)
+- [Makusanyo ya Violezo vya AZD](https://azure.github.io/awesome-azd/)
 - [Mifano ya Container Apps](https://github.com/Azure-Samples/container-apps-samples)
-- [Templates za Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+- [Violezo vya Bicep](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 
 ## Kuchangia
 
 Ili kuchangia mifano mpya ya container app:
 
-1. Tengeneza saraka ndogo mpya kwa mfano wako
+1. Tengeneza saraka ndogo mpya yenye mfano wako
 2. Jumuisha faili kamili za `azure.yaml`, `infra/`, na `src/`
-3. Ongeza README kamili yenye maelekezo ya uwekeaji
-4. Jaribu uwekeaji kwa `azd up`
-5. Wasilisha pull request
+3. Ongeza README kamili yenye maelekezo ya usambazaji
+4. Jaribu usambazaji kwa `azd up`
+5. Tuma pull request
 
 ---
 
-**Unahitaji Msaada?** Jiunge na jamii ya [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) kwa msaada na maswali.
+**Unahitaji Msaada?** Jiunge na jumuiya ya [Microsoft Foundry Discord](https://discord.gg/microsoft-azure) kwa msaada na maswali.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Angalizo**:
-Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuwa sahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwa sahihi. Hati asili katika lugha yake inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu iliyofanywa na mtafsiri wa binadamu inahimizwa. Hatubebwi dhamana kwa kutokuelewana au tafsiri zisizofaa zinazotokana na matumizi ya tafsiri hii.
+**Ukosefu wa dhamana**:
+Nyaraka hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kuwa sahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au upotovu. Nyaraka ya asili katika lugha yake ya mzaliwa inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa taarifa muhimu, inapendekezwa kutumia tafsiri ya kitaalamu iliyofanywa na mtafsiri binafsi. Hatuwezi kuwajibika kwa maelewano potofu au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

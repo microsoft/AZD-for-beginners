@@ -1,42 +1,44 @@
-# 4. fejezet: Infrastruktúra mint kód és telepítés
+# 4. fejezet: Infrastruktúra kód formájában és telepítés
 
-**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 1–1,5 óra | **⭐ Nehézség**: Középhaladó
+**📚 Tanfolyam**: [AZD kezdőknek](../../README.md) | **⏱️ Időtartam**: 1-1,5 óra | **⭐ Nehézségi fok**: Középhaladó
 
 ---
 
 ## Áttekintés
 
-Ez a fejezet az Infrastruktúra mint kód (IaC) mintákat tárgyalja Bicep sablonokkal, erőforrások előállításával és telepítési stratégiákkal az Azure Developer CLI használatával.
+Ez a fejezet az Infrastructure as Code (IaC) mintákat, Bicep sablonokat, erőforrás előállítást és telepítési stratégiákat tárgyalja az Azure Developer CLI használatával.
+
+> Validálva az `azd 1.23.12` verzióval, 2026 márciusában.
 
 ## Tanulási célok
 
-A fejezet elvégzése után:
-- Megérti a Bicep sablon szerkezetét és szintaxisát
-- Azure-erőforrásokat hoz létre `azd provision` segítségével
-- Alkalmazásokat telepít `azd deploy` segítségével
-- Megvalósít blue-green és rolling telepítési stratégiákat
+A fejezet elvégzése után képes leszel:
+- Megérteni a Bicep sablon szerkezetét és szintaxisát
+- Azure erőforrások előállítása `azd provision` segítségével
+- Alkalmazások telepítése `azd deploy` használatával
+- Kék-zöld és gördülő telepítési stratégiák megvalósítása
 
 ---
 
-## 📚 Leckék
+## 📚 Tananyagok
 
 | # | Lecke | Leírás | Idő |
 |---|--------|-------------|------|
-| 1 | [Erőforrások biztosítása](provisioning.md) | Azure erőforrás-kezelés AZD-vel | 45 perc |
-| 2 | [Telepítési útmutató](deployment-guide.md) | Alkalmazás telepítési stratégiák | 45 perc |
+| 1 | [Erőforrások előállítása](provisioning.md) | Azure erőforráskezelés AZD-vel | 45 perc |
+| 2 | [Telepítési útmutató](deployment-guide.md) | Alkalmazástelepítési stratégiák | 45 perc |
 
 ---
 
-## 🚀 Gyors indítás
+## 🚀 Gyors kezdés
 
 ```bash
 # Inicializálás sablonból
 azd init --template azure-functions-python-v2-http
 
-# Előnézet arról, mi lesz létrehozva
+# Előnézet a létrehozandóról
 azd provision --preview
 
-# Csak az infrastruktúra biztosítása
+# Csak az infrastruktúra előkészítése
 azd provision
 
 # Csak a kód telepítése
@@ -48,7 +50,7 @@ azd up
 
 ---
 
-## 📁 AZD projekt felépítése
+## 📁 AZD projekt struktúrája
 
 ```
 my-project/
@@ -65,14 +67,14 @@ my-project/
 
 ---
 
-## 🔧 Alapvető parancsok
+## 🔧 Fontos parancsok
 
 | Parancs | Leírás |
 |---------|-------------|
 | `azd init` | Projekt inicializálása |
-| `azd provision` | Azure-erőforrások létrehozása |
+| `azd provision` | Azure erőforrások létrehozása |
 | `azd deploy` | Alkalmazáskód telepítése |
-| `azd up` | erőforrások létrehozása + telepítés |
+| `azd up` | erőforrás előállítása + telepítés |
 | `azd down` | Minden erőforrás törlése |
 
 ---
@@ -86,15 +88,15 @@ my-project/
 
 ---
 
-## 📖 Kapcsolódó források
+## 📖 Kapcsolódó anyagok
 
 - [Telepítés előtti ellenőrzések](../chapter-06-pre-deployment/README.md)
-- [Konténeres alkalmazás példák](../../examples/container-app/README.md)
-- [Adatbázis-alkalmazás példa](../../examples/database-app/README.md)
+- [Konténer alkalmazás példák](../../examples/container-app/README.md)
+- [Adatbázis alkalmazás példa](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Felelősségkizárás:
-Ezt a dokumentumot a [Co-op Translator](https://github.com/Azure/co-op-translator) mesterséges intelligencia alapú fordító szolgáltatásával fordítottuk. Bár mindent megteszünk a pontosságért, kérjük, vegye figyelembe, hogy az automatizált fordítások hibákat vagy pontatlanságokat tartalmazhatnak. A dokumentum eredeti nyelvű változatát kell tekinteni a hiteles forrásnak. Kritikus jelentőségű információk esetén professzionális, emberi fordítást javaslunk. A fordítás használatából eredő bármely félreértésért vagy téves értelmezésért nem vállalunk felelősséget.
+**Jogi nyilatkozat**:  
+Ez a dokumentum az [Co-op Translator](https://github.com/Azure/co-op-translator) AI fordítási szolgáltatás segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum anyanyelvi változatát kell tekinteni a hiteles forrásnak. Kritikus információk esetén profi, emberi fordítást javasolt kérni. Nem vállalunk felelősséget az ebből eredő félreértésekért vagy félreértelmezésekért.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

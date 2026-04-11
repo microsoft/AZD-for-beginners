@@ -1,61 +1,61 @@
-# 5. Customize una plantilla
+# 5. Customize a Template
 
 !!! tip "AL FINAL DE ESTE MÓDULO PODRÁS"
 
-    - [ ] Explorar las capacidades predeterminadas del Agente de IA
-    - [ ] Agregar AI Search con tu propio índice
-    - [ ] Activar y analizar métricas de seguimiento
-    - [ ] Ejecutar una evaluación
-    - [ ] Ejecutar un escaneo de red-teaming
-    - [ ] **Laboratorio 5: Construir un Plan de Personalización**
+    - [ ] Exploró las capacidades predeterminadas del Agente de IA
+    - [ ] Añadió AI Search con tu propio índice
+    - [ ] Activó y analizó métricas de seguimiento
+    - [ ] Ejecutó una ejecución de evaluación
+    - [ ] Ejecutó un escaneo de red-teaming
+    - [ ] **Laboratorio 5: Construyó un Plan de Personalización** 
 
 ---
 
-## 5.1 Capacidades del Agente de IA
+## 5.1 AI Agent Capabilities
 
-!!! success "Lo completamos en el Laboratorio 01"
+!!! success "Completamos esto en el Laboratorio 01"
 
-- **Búsqueda de archivos**: búsqueda integrada de archivos de OpenAI para recuperación de conocimiento
-- **Citas**: atribución automática de fuentes en las respuestas
-- **Instrucciones personalizables**: modificar el comportamiento y la personalidad del agente
-- **Integración de herramientas**: sistema extensible de herramientas para capacidades personalizadas
+- **File Search**: Búsqueda de archivos incorporada de OpenAI para recuperación de conocimientos
+- **Citations**: Atribución automática de fuentes en las respuestas
+- **Customizable Instructions**: Modificar el comportamiento y la personalidad del agente
+- **Tool Integration**: Sistema de herramientas extensible para capacidades personalizadas
 
 ---
 
-## 5.2 Opciones de recuperación de conocimiento
+## 5.2 Knowledge Retrieval Options
 
 !!! task "Para completar esto necesitamos hacer cambios y volver a desplegar"    
     
     ```bash title=""
-    # Configurar variables de entorno
+    # Set environment variables
     azd env set USE_AZURE_AI_SEARCH_SERVICE true
     azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
     azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
     azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
-    # Cargar datos y crear mi índice
+    # Upload data and create my index
 
     ```
 
 ---
 
-**Búsqueda de archivos OpenAI (predeterminada):**
+**OpenAI File Search (Default):**
 
-- Integrada en Foundry Agents
-- Procesamiento automático de documentos y creación de índices
+- Incorporado en Foundry Agents
+- Procesamiento e indexación automática de documentos
 - No se requiere configuración adicional
 
-**Azure AI Search (opcional):**
+**Azure AI Search (Optional):**
 
-- Búsqueda semántica e híbrida vectorial
-- Gestión personalizada del índice
-- Capacidades avanzadas de búsqueda
+- Búsqueda semántica e híbrida por vectores
+- Gestión personalizada de índices
+- Capacidades de búsqueda avanzadas
 - Requiere `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
-## 5.3 [Seguimiento y Monitoreo](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
+## 5.3 [Tracing & Monitoring](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
 !!! task "Para completar esto necesitamos hacer cambios y volver a desplegar"    
     
@@ -64,108 +64,110 @@
     azd deploy
     ```
 
-**Seguimiento:**
+**Tracing:**
 
-- Integración OpenTelemetry
+- Integración con OpenTelemetry
 - Seguimiento de solicitudes/respuestas
-- Métricas de desempeño
-- Disponible en el portal Microsoft Foundry
+- Métricas de rendimiento
+- Disponible en el portal de Microsoft Foundry
 
-**Registro de eventos:**
+**Logging:**
 
-- Logs de aplicación en Container Apps
+- Registros de la aplicación en Container Apps
 - Registro estructurado con IDs de correlación
-- Visualización en tiempo real y histórica
+- Visualización de registros en tiempo real e históricos
 
 ---
 
-## 5.4 [Evaluación del Agente](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
+## 5.4 [Agent Evaluation](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
-**Evaluación local:**
+**Local Evaluation:**
 
-- Evaluadores incorporados para evaluación de calidad
-- Scripts personalizados de evaluación
-- Benchmarking de desempeño
+- Evaluadores integrados para la evaluación de calidad
+- Scripts de evaluación personalizados
+- Benchmarking de rendimiento
 
-**Monitoreo continuo:**
+**Continuous Monitoring:**
 
 - Evaluación automática de interacciones en vivo
 - Seguimiento de métricas de calidad
 - Detección de regresiones de rendimiento
 
-**Integración CI/CD:**
+**CI/CD Integration:**
 
-- Flujo de trabajo GitHub Actions
-- Pruebas y evaluaciones automatizadas
+- Flujo de trabajo de GitHub Actions
+- Pruebas y evaluación automatizadas
 - Pruebas de comparación estadística
 
 ---
 
-## 5.5 [Agente de Red Teaming de IA](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
+## 5.5 [AI Red Teaming Agent](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**Red Teaming de IA:**
+**AI Red Teaming:**
 
-- Escaneo automatizado de seguridad
+- Escaneo de seguridad automatizado
 - Evaluación de riesgos para sistemas de IA
 - Evaluación de seguridad en múltiples categorías
 
-**Autenticación:**
+**Authentication:**
 
-- Identidad gestionada para servicios Azure
+- Managed Identity para servicios de Azure
 - Autenticación opcional de Azure App Service
 - Autenticación básica como alternativa para desarrollo
 
-!!! quote "AL FINAL DE ESTE LABORATORIO DEBERÍAS HABER"
-    - [ ] Definido los requisitos de tu escenario
-    - [ ] Personalizado variables de entorno (config)
-    - [ ] Personalizado instrucciones del agente (tarea)
-    - [ ] Desplegado la plantilla personalizada (app)
-    - [ ] Completado tareas post-despliegue (manual)
-    - [ ] Ejecutado una evaluación de prueba
 
-Este ejemplo demuestra cómo personalizar la plantilla para un caso de uso empresarial minorista con dos agentes especializados y múltiples despliegues de modelo.
+
+!!! quote "AL FINAL DE ESTE LAB DEBERÍAS TENER"
+    - [ ] Definido tus requisitos de escenario
+    - [ ] Variables de entorno personalizadas (config)
+    - [ ] Instrucciones del agente personalizadas (tarea)
+    - [ ] Desplegada la plantilla personalizada (app)
+    - [ ] Completadas las tareas posteriores al despliegue (manual)
+    - [ ] Ejecutada una evaluación de prueba
+
+This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
 
 ---
 
-## 5.6 ¡Personalízalo para ti!
+## 5.6 Customize It For You!
 
-### 5.6.1. Requisitos del escenario
+### 5.6.1. Scenario Requirements
 
-#### **Despliegues del Agente:**
+#### **Agent Deployments:** 
 
-   - Agente Comprador: ayuda a los clientes a encontrar y comparar productos
-   - Agente de Lealtad: gestiona recompensas y promociones para clientes
+   - Shopper Agent: Ayuda a los clientes a encontrar y comparar productos
+   - Loyalty Agent: Gestiona las recompensas y promociones de clientes
 
-#### **Despliegues del modelo:**
+#### **Model Deployments:**
 
-   - `gpt-4.1`: modelo principal para chat
-   - `o3`: modelo de razonamiento para consultas complejas
-   - `gpt-4.1-nano`: modelo liviano para interacciones simples
-   - `text-embedding-3-large`: embeddings de alta calidad para búsqueda
+   - `gpt-4.1`: Modelo de chat principal
+   - `o3`: Modelo de razonamiento para consultas complejas
+   - `gpt-4.1-nano`: Modelo ligero para interacciones simples
+   - `text-embedding-3-large`: Embeddings de alta calidad para búsqueda
 
-#### **Características:**
+#### **Features:**
 
    - Seguimiento y monitoreo habilitados
-   - AI Search para catálogo de productos
+   - AI Search para el catálogo de productos
    - Marco de evaluación para aseguramiento de calidad
    - Red teaming para validación de seguridad
 
 ---
 
-### 5.6.2 Implementación del escenario
+### 5.6.2 Scenario Implementation
 
 
-#### 5.6.2.1. Configuración previa al despliegue
+#### 5.6.2.1. Pre-Deployment Config
 
-Crea un script de configuración (`setup-retail.sh`)
+Create a setup script (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
-# Establecer nombre del entorno
+# Establecer el nombre del entorno
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Configurar región (elegir según la disponibilidad del modelo)
+# Configurar la región (elegir según la disponibilidad del modelo)
 azd env set AZURE_LOCATION "eastus2"
 
 # Habilitar todos los servicios opcionales
@@ -173,21 +175,21 @@ azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Configurar modelo principal de chat (gpt-4.1 como el más cercano disponible a gpt-4.1)
+# Configurar el modelo principal de chat (gpt-4.1 como el más cercano disponible a gpt-4.1)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Configurar modelo de incrustación para búsqueda mejorada
+# Configurar el modelo de embeddings para búsqueda mejorada
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Establecer nombre del agente (creará el primer agente)
+# Establecer el nombre del agente (creará el primer agente)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# Configurar índice de búsqueda
+# Configurar el índice de búsqueda
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -196,9 +198,9 @@ echo "Recommended quota: 300,000+ TPM across all models"
 
 ---
 
-#### 5.6.2.2: Instrucciones del Agente
+#### 5.6.2.2: Agent Instructions
 
-Crea `custom-agents/shopper-agent-instructions.md`:
+Create `custom-agents/shopper-agent-instructions.md`:
 
 ```markdown
 # Shopper Agent Instructions
@@ -221,7 +223,7 @@ You are a helpful shopping assistant for an enterprise retail company. Your role
 You have access to our complete product catalog including specifications, pricing, reviews, and inventory levels.
 ```
 
-Crea `custom-agents/loyalty-agent-instructions.md`:
+Create `custom-agents/loyalty-agent-instructions.md`:
 
 ```markdown
 # Loyalty Agent Instructions
@@ -246,9 +248,9 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: Script de despliegue
+#### 5.6.2.3: Deployment Script
 
-Crea `deploy-retail.sh`:
+Create `deploy-retail.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -273,7 +275,7 @@ echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Verificar cuota en la región seleccionada
+# Comprobar la cuota en la región seleccionada
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -289,16 +291,16 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
     exit 1
 fi
 
-# Desplegar infraestructura y aplicación
+# Desplegar la infraestructura y la aplicación
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Capturar salidas del despliegue
+# Capturar las salidas del despliegue
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
 # Obtener la URL de la aplicación web
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -319,9 +321,9 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Configuración post-despliegue
+#### 5.6.2.4: Post-Deployment Config
 
-Crea `configure-retail-agents.sh`:
+Create `configure-retail-agents.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
@@ -376,21 +378,21 @@ echo "
 "
 ```
 
-### 5.6.3: Pruebas y validación
+### 5.6.3: Testing and Validation
 
-Crea `test-retail-deployment.sh`:
+Create `test-retail-deployment.sh`:
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
 echo "🧪 Testing retail deployment..."
 
-# Verificar que las variables de entorno estén configuradas
+# Verificar que las variables de entorno estén establecidas
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Probar la disponibilidad de la aplicación web
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# Comprobar la disponibilidad de la aplicación web
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -427,42 +429,42 @@ Next steps:
 
 ---
 
-### 5.6.4 Resultados esperados
+### 5.6.4 Expected Outcomes
 
-Después de seguir esta guía de implementación, tendrás:
+After following this implementation guide, you will have:
 
-1. **Infraestructura desplegada:**
+1. **Deployed Infrastructure:**
 
-      - Proyecto Microsoft Foundry con despliegues de modelos
-      - Container Apps alojando la aplicación web
-      - Servicio AI Search para catálogo de productos
-      - Application Insights para monitoreo
+      - Microsoft Foundry project with model deployments
+      - Container Apps hosting the web application
+      - AI Search service for product catalog
+      - Application Insights for monitoring
 
-2. **Agente inicial:**
+2. **Initial Agent:**
 
-      - Agente Comprador configurado con instrucciones básicas
-      - Capacidad de búsqueda de archivos habilitada
-      - Seguimiento y monitoreo configurados
+      - Shopper Agent configured with basic instructions
+      - File search capability enabled
+      - Tracing and monitoring configured
 
-3. **Listo para personalización:**
+3. **Ready for Customization:**
 
-      - Marco para agregar Agente de Lealtad
-      - Plantillas de instrucciones personalizadas
-      - Scripts para pruebas y validación
-      - Configuración para monitoreo y evaluación
+      - Framework for adding Loyalty Agent
+      - Custom instruction templates
+      - Testing and validation scripts
+      - Monitoring and evaluation setup
 
-4. **Preparado para producción:**
+4. **Production Readiness:**
 
-      - Escaneo de seguridad con red teaming
-      - Monitoreo de rendimiento
-      - Marco de evaluación de calidad
-      - Arquitectura escalable
+      - Security scanning with red teaming
+      - Performance monitoring
+      - Quality evaluation framework
+      - Scalable architecture
 
-Este ejemplo demuestra cómo la plantilla AZD puede ser extendida y personalizada para escenarios empresariales específicos manteniendo las mejores prácticas de seguridad, monitoreo y escalabilidad.
+This example demonstrates how the AZD template can be extended and customized for specific enterprise scenarios while maintaining best practices for security, monitoring, and scalability.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Aviso**:
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por un humano. No nos hacemos responsables de malentendidos o interpretaciones erróneas derivados del uso de esta traducción.
+**Disclaimer**:
+Este documento ha sido traducido utilizando el servicio de traducción por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por traductores humanos. No nos hacemos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

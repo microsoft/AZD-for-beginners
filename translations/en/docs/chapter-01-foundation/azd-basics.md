@@ -175,9 +175,9 @@ azd up
 **Benefits:**
 - ✅ **5 commands** vs. 15+ manual steps
 - ✅ **10-15 minutes** total time (mostly waiting for Azure)
-- ✅ **Zero errors** - automated and tested
-- ✅ **Secrets managed securely** via Key Vault
-- ✅ **Automatic rollback** on failures
+- ✅ **Fewer manual mistakes** - consistent, template-driven workflow
+- ✅ **Secure secret handling** - many templates use Azure-managed secret storage
+- ✅ **Repeatable deployments** - same workflow every time
 - ✅ **Fully reproducible** - same result every time
 - ✅ **Team-ready** - anyone can deploy with same commands
 - ✅ **Infrastructure as Code** - version controlled Bicep templates
@@ -600,7 +600,7 @@ graph TD
     F --> G[Azure CLI]
     G --> H[Azure PowerShell]
     H --> I[Interactive Browser]
-```
+```)
 #### 1. Environment Variables
 ```bash
 # Set environment variables for service principal
@@ -778,8 +778,8 @@ azd init --help               # Initialization options
 ### Project Management
 ```bash
 azd show                     # Project overview
-azd env show                 # Current environment
-azd config list             # Configuration settings
+azd env list                # Available environments and selected default
+azd config show            # Configuration settings
 ```
 
 ### Monitoring
@@ -901,7 +901,7 @@ A: Costs vary by template. Most development templates cost $50-150/month:
 # Preview costs before deploying
 azd provision --preview
 
-# Always clean up when not using
+# Always cleanup when not using
 azd down --force --purge  # Removes all resources
 ```
 
@@ -1195,5 +1195,5 @@ You now understand AZD fundamentals. Choose your path:
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

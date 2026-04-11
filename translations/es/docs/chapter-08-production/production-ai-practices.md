@@ -1,43 +1,43 @@
-# Buenas Prácticas para Cargas de Trabajo de IA en Producción con AZD
+# Mejores prácticas para cargas de trabajo de IA en producción con AZD
 
-**Navegación del Capítulo:**
-- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
-- **📖 Capítulo Actual**: Capítulo 8 - Patrones para Producción y Empresas
-- **⬅️ Capítulo Anterior**: [Capítulo 7: Solución de Problemas](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ También Relacionado**: [Laboratorio de Taller de IA](ai-workshop-lab.md)
-- **🎯 Curso Completo**: [AZD Para Principiantes](../../README.md)
+**Navegación del capítulo:**
+- **📚 Inicio del curso**: [AZD Para Principiantes](../../README.md)
+- **📖 Capítulo actual**: Capítulo 8 - Patrones de producción y empresariales
+- **⬅️ Capítulo anterior**: [Capítulo 7: Resolución de problemas](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ También relacionado**: [Laboratorio de IA](ai-workshop-lab.md)
+- **🎯 Curso completo**: [AZD Para Principiantes](../../README.md)
 
-## Visión General
+## Descripción general
 
-Esta guía proporciona las mejores prácticas completas para desplegar cargas de trabajo de IA listas para producción utilizando Azure Developer CLI (AZD). Basado en la retroalimentación de la comunidad de Microsoft Foundry Discord y despliegues reales de clientes, estas prácticas abordan los desafíos más comunes en sistemas de IA en producción.
+Esta guía proporciona mejores prácticas integrales para desplegar cargas de trabajo de IA listas para producción usando Azure Developer CLI (AZD). Basadas en la retroalimentación de la comunidad de Discord de Microsoft Foundry y despliegues de clientes en el mundo real, estas prácticas abordan los desafíos más comunes en sistemas de IA en producción.
 
-## Principales Desafíos Abordados
+## Principales desafíos abordados
 
-Según los resultados de nuestra encuesta comunitaria, estos son los principales retos que enfrentan los desarrolladores:
+Según los resultados de nuestra encuesta comunitaria, estos son los principales desafíos que enfrentan los desarrolladores:
 
-- **45%** tienen dificultades con despliegues de IA multinivel
+- **45%** tienen problemas con implementaciones de IA con múltiples servicios
 - **38%** tienen problemas con la gestión de credenciales y secretos  
 - **35%** encuentran difícil la preparación para producción y el escalado
 - **32%** necesitan mejores estrategias de optimización de costos
-- **29%** requieren mejor monitoreo y solución de problemas
+- **29%** requieren mejor monitoreo y resolución de problemas
 
-## Patrones de Arquitectura para IA en Producción
+## Patrones de arquitectura para IA en producción
 
-### Patrón 1: Arquitectura de Microservicios para IA
+### Patrón 1: Arquitectura de IA basada en microservicios
 
-**Cuándo usarlo**: Aplicaciones complejas de IA con múltiples capacidades
+**Cuándo usarlo**: Aplicaciones de IA complejas con múltiples capacidades
 
 ```mermaid
 graph TD
-    Frontend[Interfaz Web] --- Gateway[API Gateway] --- LB[Balanceador de carga]
-    Gateway --> Chat[Servicio de Chat]
-    Gateway --> Image[Servicio de Imágenes]
-    Gateway --> Text[Servicio de Texto]
-    Chat --> OpenAI[Modelos Microsoft Foundry]
+    Frontend[Frontend web] --- Gateway[Pasarela de API] --- LB[Balanceador de carga]
+    Gateway --> Chat[Servicio de chat]
+    Gateway --> Image[Servicio de imágenes]
+    Gateway --> Text[Servicio de texto]
+    Chat --> OpenAI[Modelos de Microsoft Foundry]
     Image --> Vision[Visión por computadora]
-    Text --> DocIntel[Inteligencia documental]
+    Text --> DocIntel[Inteligencia de documentos]
 ```
-**Implementación con AZD**:
+**Implementación en AZD**:
 
 ```yaml
 # azure.yaml
@@ -60,7 +60,7 @@ services:
     host: containerapp
 ```
 
-### Patrón 2: Procesamiento de IA basado en Eventos
+### Patrón 2: Procesamiento de IA orientado a eventos
 
 **Cuándo usarlo**: Procesamiento por lotes, análisis de documentos, flujos de trabajo asíncronos
 
@@ -109,46 +109,46 @@ resource functionApp 'Microsoft.Web/sites@2023-01-01' = {
 }
 ```
 
-## Consideraciones sobre la Salud del Agente de IA
+## Pensando en la salud de los agentes de IA
 
-Cuando una aplicación web tradicional falla, los síntomas son familiares: una página no carga, una API devuelve un error, o un despliegue falla. Las aplicaciones impulsadas por IA pueden fallar de todas esas mismas maneras—pero también pueden comportarse de forma errática de formas más sutiles que no producen mensajes de error evidentes.
+Cuando una aplicación web tradicional se rompe, los síntomas son familiares: una página no carga, una API devuelve un error o un despliegue falla. Las aplicaciones impulsadas por IA pueden romperse de todas esas mismas maneras, pero también pueden comportarse mal de formas más sutiles que no producen mensajes de error obvios.
 
-Esta sección ayuda a construir un modelo mental para monitorear cargas de trabajo de IA para que sepas dónde buscar cuando algo no parece estar bien.
+Esta sección te ayuda a construir un modelo mental para monitorear cargas de trabajo de IA para que sepas dónde buscar cuando las cosas no parecen estar bien.
 
-### Cómo la Salud del Agente Difere de la Salud de una Aplicación Tradicional
+### Cómo la salud del agente difiere de la salud de una aplicación tradicional
 
-Una aplicación tradicional o funciona o no. Un agente de IA puede parecer que funciona pero producir malos resultados. Piensa en la salud del agente en dos capas:
+Una aplicación tradicional funciona o no funciona. Un agente de IA puede aparentar funcionar pero producir resultados pobres. Piensa en la salud del agente en dos capas:
 
-| Capa | Qué Vigilar | Dónde Buscar |
-|-------|-------------|--------------|
-| **Salud de infraestructura** | ¿Está el servicio funcionando? ¿Están los recursos aprovisionados? ¿Son accesibles los endpoints? | `azd monitor`, salud del recurso en Azure Portal, registros de contenedores/aplicaciones |
-| **Salud de comportamiento** | ¿Responde el agente con precisión? ¿Son oportunas las respuestas? ¿Se llama correctamente al modelo? | Rastreos en Application Insights, métricas de latencia de llamadas al modelo, registros de calidad de respuesta |
+| Capa | Qué vigilar | Dónde buscar |
+|-------|--------------|---------------|
+| **Salud de la infraestructura** | ¿Está corriendo el servicio? ¿Se han aprovisionado los recursos? ¿Son alcanzables los endpoints? | `azd monitor`, estado de recursos del Azure Portal, registros de contenedores/aplicaciones |
+| **Salud del comportamiento** | ¿Responde el agente con precisión? ¿Son las respuestas oportunas? ¿Se está llamando correctamente al modelo? | trazas de Application Insights, métricas de latencia de llamadas al modelo, registros de calidad de respuesta |
 
-La salud de infraestructura es familiar—es la misma para cualquier aplicación azd. La salud de comportamiento es la nueva capa que introducen las cargas de trabajo de IA.
+La salud de la infraestructura es familiar: es la misma para cualquier app azd. La salud del comportamiento es la nueva capa que introducen las cargas de trabajo de IA.
 
-### Dónde Buscar Cuando las Aplicaciones de IA No Se Comportan Como se Espera
+### Dónde buscar cuando las aplicaciones de IA no se comportan como se espera
 
-Si tu aplicación de IA no está produciendo los resultados que esperas, aquí tienes una lista conceptual de verificación:
+Si tu aplicación de IA no está produciendo los resultados que esperas, aquí tienes una lista de verificación conceptual:
 
-1. **Empieza con lo básico.** ¿Está la aplicación funcionando? ¿Puede acceder a sus dependencias? Revisa `azd monitor` y la salud de los recursos tal como harías con cualquier aplicación.
-2. **Verifica la conexión al modelo.** ¿Tu aplicación está llamando exitosamente al modelo de IA? Las llamadas fallidas o con tiempo de espera agotado al modelo son la causa más común de problemas en aplicaciones de IA y aparecerán en los registros de tu aplicación.
-3. **Observa lo que recibió el modelo.** Las respuestas de IA dependen de la entrada (el prompt y cualquier contexto recuperado). Si la salida es incorrecta, generalmente la entrada es la errónea. Verifica si tu aplicación está enviando los datos correctos al modelo.
-4. **Revisa la latencia de la respuesta.** Las llamadas a modelos de IA son más lentas que las llamadas típicas a APIs. Si tu aplicación se siente lenta, verifica si los tiempos de respuesta del modelo han aumentado—esto puede indicar limitaciones de capacidad, estrangulamiento o congestión a nivel regional.
-5. **Vigila señales de costos.** Picos inesperados en el uso de tokens o llamadas a APIs pueden indicar un bucle, un prompt mal configurado o reintentos excesivos.
+1. **Empieza por lo básico.** ¿La aplicación está ejecutándose? ¿Puede alcanzar sus dependencias? Revisa `azd monitor` y el estado de los recursos tal como lo harías con cualquier aplicación.
+2. **Revisa la conexión con el modelo.** ¿Tu aplicación está llamando correctamente al modelo de IA? Las llamadas al modelo que fallan o agotan el tiempo son la causa más común de problemas en aplicaciones de IA y aparecerán en los registros de tu aplicación.
+3. **Observa qué recibió el modelo.** Las respuestas de IA dependen de la entrada (el prompt y cualquier contexto recuperado). Si la salida está mal, la entrada suele estar mal. Verifica si tu aplicación está enviando los datos correctos al modelo.
+4. **Revisa la latencia de las respuestas.** Las llamadas a modelos de IA son más lentas que las llamadas API típicas. Si tu app se siente lenta, verifica si los tiempos de respuesta del modelo han aumentado: esto puede indicar limitación de tasa, límites de capacidad o congestión a nivel de región.
+5. **Vigila las señales de costo.** Picos inesperados en el uso de tokens o en las llamadas API pueden indicar un bucle, un prompt mal configurado o reintentos excesivos.
 
-No necesitas dominar las herramientas de observabilidad de inmediato. La idea clave es que las aplicaciones de IA tienen una capa adicional de comportamiento que monitorear, y el monitoreo incorporado de azd (`azd monitor`) te da un punto de partida para investigar ambas capas.
+No necesitas dominar las herramientas de observabilidad de inmediato. La idea clave es que las aplicaciones de IA tienen una capa adicional de comportamiento que monitorear, y el monitoreo integrado de azd (`azd monitor`) te brinda un punto de partida para investigar ambas capas.
 
 ---
 
-## Mejores Prácticas de Seguridad
+## Mejores prácticas de seguridad
 
-### 1. Modelo de Seguridad Zero-Trust
+### 1. Modelo de seguridad Zero-Trust
 
-**Estrategia de Implementación**:
-- No hay comunicación servicio a servicio sin autenticación
-- Todas las llamadas API usan identidades gestionadas
+**Estrategia de implementación**:
+- No hay comunicación servicio-a-servicio sin autenticación
+- Todas las llamadas API usan identidades administradas
 - Aislamiento de red con endpoints privados
-- Controles de acceso de menor privilegio
+- Controles de acceso con privilegios mínimos
 
 ```bicep
 // Managed Identity for each service
@@ -169,9 +169,9 @@ resource openAIUserRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-### 2. Gestión Segura de Secretos
+### 2. Gestión segura de secretos
 
-**Patrón de Integración con Key Vault**:
+**Patrón de integración con Key Vault**:
 
 ```bicep
 // Key Vault with proper access policies
@@ -204,9 +204,9 @@ resource openAIKeySecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01' = {
 }
 ```
 
-### 3. Seguridad de Red
+### 3. Seguridad de red
 
-**Configuración de Endpoint Privado**:
+**Configuración de endpoints privados**:
 
 ```bicep
 // Virtual Network for AI services
@@ -264,11 +264,11 @@ resource openAIPrivateEndpoint 'Microsoft.Network/privateEndpoints@2023-04-01' =
 }
 ```
 
-## Rendimiento y Escalabilidad
+## Rendimiento y escalado
 
-### 1. Estrategias de Auto-escala
+### 1. Estrategias de autoescalado
 
-**Auto-escalado para Aplicaciones de Contenedor**:
+**Autoescalado de Container Apps**:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -312,9 +312,9 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-### 2. Estrategias de Caché
+### 2. Estrategias de caché
 
-**Redis Cache para Respuestas de IA**:
+**Redis Cache para respuestas de IA**:
 
 ```bicep
 // Redis Premium for production workloads
@@ -342,7 +342,7 @@ resource redisCache 'Microsoft.Cache/redis@2023-04-01' = {
 var cacheConnectionString = '${redisCache.properties.hostName}:6380,password=${redisCache.listKeys().primaryKey},ssl=True,abortConnect=False'
 ```
 
-### 3. Balanceo de Carga y Gestión de Tráfico
+### 3. Balanceo de carga y gestión del tráfico
 
 **Application Gateway con WAF**:
 
@@ -380,11 +380,11 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 💰 Optimización de Costos
+## 💰 Optimización de costos
 
-### 1. Dimensionamiento Adecuado de Recursos
+### 1. Dimensionamiento adecuado de recursos
 
-**Configuraciones Especificas para el Entorno**:
+**Configuraciones específicas por entorno**:
 
 ```bash
 # Entorno de desarrollo
@@ -404,7 +404,7 @@ azd env set CONTAINER_CPU 2.0
 azd env set CONTAINER_MEMORY 4.0
 ```
 
-### 2. Monitoreo de Costos y Presupuestos
+### 2. Monitoreo de costos y presupuestos
 
 ```bicep
 // Cost management and budgets
@@ -445,12 +445,12 @@ resource budget 'Microsoft.Consumption/budgets@2023-05-01' = {
 }
 ```
 
-### 3. Optimización del Uso de Tokens
+### 3. Optimización del uso de tokens
 
-**Gestión de Costos en OpenAI**:
+**Gestión de costes de OpenAI**:
 
 ```typescript
-// Optimización de tokens a nivel de aplicación
+// Optimización de tokens a nivel de la aplicación
 class TokenOptimizer {
   private readonly maxTokens = 4000;
   private readonly reserveTokens = 500;
@@ -460,7 +460,7 @@ class TokenOptimizer {
     const estimatedTokens = this.estimateTokens(userInput + context);
     
     if (estimatedTokens > availableTokens) {
-      // Truncar contexto, no la entrada del usuario
+      // Trunca el contexto, no la entrada del usuario
       context = this.truncateContext(context, availableTokens - this.estimateTokens(userInput));
     }
     
@@ -474,9 +474,9 @@ class TokenOptimizer {
 }
 ```
 
-## Monitoreo y Observabilidad
+## Monitoreo y observabilidad
 
-### 1. Application Insights Integral
+### 1. Application Insights integral
 
 ```bicep
 // Application Insights with advanced features
@@ -521,9 +521,9 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 2. Monitoreo Específico para IA
+### 2. Monitoreo específico para IA
 
-**Paneles Personalizados para Métricas de IA**:
+**Paneles personalizados para métricas de IA**:
 
 ```json
 // Dashboard configuration for AI workloads
@@ -552,7 +552,7 @@ resource aiMetricAlerts 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### 3. Comprobaciones de Salud y Monitoreo de Disponibilidad
+### 3. Comprobaciones de salud y monitoreo de disponibilidad
 
 ```bicep
 // Application Insights availability tests
@@ -621,9 +621,9 @@ resource availabilityTest 'Microsoft.Insights/webtests@2022-06-15' = {
 }
 ```
 
-## Recuperación ante Desastres y Alta Disponibilidad
+## Recuperación ante desastres y alta disponibilidad
 
-### 1. Despliegue Multi-Región
+### 1. Despliegue multirregional
 
 ```yaml
 # azure.yaml - Multi-region configuration
@@ -685,7 +685,7 @@ resource trafficManager 'Microsoft.Network/trafficManagerProfiles@2022-04-01' = 
 }
 ```
 
-### 2. Respaldo y Recuperación de Datos
+### 2. Copia de seguridad y recuperación de datos
 
 ```bicep
 // Backup configuration for critical data
@@ -736,9 +736,9 @@ resource backupPolicy 'Microsoft.DataProtection/backupVaults/backupPolicies@2023
 }
 ```
 
-## Integración DevOps y CI/CD
+## DevOps e integración CI/CD
 
-### 1. Flujo de Trabajo con GitHub Actions
+### 1. Flujo de trabajo de GitHub Actions
 
 ```yaml
 # .github/workflows/deploy-ai-app.yml
@@ -782,7 +782,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup AZD
-        uses: Azure/setup-azd@v1.0.0
+        uses: Azure/setup-azd@v2
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -802,7 +802,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup AZD
-        uses: Azure/setup-azd@v1.0.0
+        uses: Azure/setup-azd@v2
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -819,7 +819,7 @@ jobs:
           python scripts/health_check.py --env production
 ```
 
-### 2. Validación de Infraestructura
+### 2. Validación de infraestructura
 
 ```bash
 # scripts/validate_infrastructure.sh
@@ -827,7 +827,7 @@ jobs:
 
 echo "Validating AI infrastructure deployment..."
 
-# Verificar si todos los servicios requeridos están en ejecución
+# Comprobar si todos los servicios requeridos se están ejecutando
 services=("openai" "search" "storage" "keyvault")
 for service in "${services[@]}"; do
     echo "Checking $service..."
@@ -837,11 +837,11 @@ for service in "${services[@]}"; do
     fi
 done
 
-# Validar implementaciones del modelo OpenAI
+# Validar los despliegues de modelos de OpenAI
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
-if [[ ! $models == *"gpt-35-turbo"* ]]; then
-    echo "ERROR: Required model gpt-35-turbo not deployed"
+if [[ ! $models == *"gpt-4.1-mini"* ]]; then
+  echo "ERROR: Required model gpt-4.1-mini not deployed"
     exit 1
 fi
 
@@ -852,73 +852,73 @@ python scripts/test_connectivity.py
 echo "Infrastructure validation completed successfully!"
 ```
 
-## Lista de Verificación para Preparación a Producción
+## Lista de verificación de preparación para producción
 
 ### Seguridad ✅
-- [ ] Todos los servicios usan identidades gestionadas
+- [ ] Todos los servicios usan identidades administradas
 - [ ] Secretos almacenados en Key Vault
 - [ ] Endpoints privados configurados
 - [ ] Grupos de seguridad de red implementados
-- [ ] RBAC con menor privilegio
+- [ ] RBAC con privilegios mínimos
 - [ ] WAF habilitado en endpoints públicos
 
 ### Rendimiento ✅
-- [ ] Auto-escalado configurado
+- [ ] Autoescalado configurado
 - [ ] Caché implementada
 - [ ] Balanceo de carga configurado
 - [ ] CDN para contenido estático
 - [ ] Pooling de conexiones de base de datos
-- [ ] Optimización de uso de tokens
+- [ ] Optimización del uso de tokens
 
 ### Monitoreo ✅
 - [ ] Application Insights configurado
 - [ ] Métricas personalizadas definidas
-- [ ] Reglas de alerta configuradas
-- [ ] Panel creado
+- [ ] Reglas de alertas configuradas
+- [ ] Dashboard creado
 - [ ] Comprobaciones de salud implementadas
 - [ ] Políticas de retención de registros
 
-### Confiabilidad ✅
-- [ ] Despliegue en múltiples regiones
-- [ ] Plan de respaldo y recuperación
-- [ ] Cortacircuitos implementados
-- [ ] Políticas de reintento configuradas
+### Fiabilidad ✅
+- [ ] Despliegue multirregional
+- [ ] Plan de copia de seguridad y recuperación
+- [ ] Interruptores de circuito implementados
+- [ ] Políticas de reintentos configuradas
 - [ ] Degradación elegante
-- [ ] Endpoints de chequeo de salud
+- [ ] Endpoints de comprobación de estado
 
-### Gestión de Costos ✅
+### Gestión de costos ✅
 - [ ] Alertas de presupuesto configuradas
 - [ ] Dimensionamiento adecuado de recursos
-- [ ] Descuentos para desarrollo/pruebas aplicados
-- [ ] Instancias reservadas compradas
-- [ ] Panel de monitoreo de costos
+- [ ] Descuentos para desarrollo/prueba aplicados
+- [ ] Instancias reservadas adquiridas
+- [ ] Dashboard de monitoreo de costos
 - [ ] Revisiones regulares de costos
 
 ### Cumplimiento ✅
 - [ ] Requisitos de residencia de datos cumplidos
-- [ ] Registro de auditorías habilitado
+- [ ] Registro de auditoría habilitado
 - [ ] Políticas de cumplimiento aplicadas
 - [ ] Líneas base de seguridad implementadas
 - [ ] Evaluaciones de seguridad regulares
-- [ ] Plan de respuesta ante incidentes
+- [ ] Plan de respuesta a incidentes
 
-## Puntos de Referencia en Rendimiento
+## Referencias de rendimiento
 
-### Métricas Típicas de Producción
+### Métricas típicas de producción
 
 | Métrica | Objetivo | Monitoreo |
-|--------|---------|-----------|
-| **Tiempo de Respuesta** | < 2 segundos | Application Insights |
-| **Disponibilidad** | 99.9% | Monitoreo de uptime |
-| **Tasa de Errores** | < 0.1% | Registros de aplicación |
-| **Uso de Tokens** | < $500/mes | Gestión de costos |
-| **Usuarios Concurrentes** | 1000+ | Pruebas de carga |
-| **Tiempo de Recuperación** | < 1 hora | Pruebas de recuperación ante desastres |
+|--------|--------|------------|
+| **Tiempo de respuesta** | < 2 segundos | Application Insights |
+| **Disponibilidad** | 99.9% | Monitoreo de disponibilidad |
+| **Tasa de error** | < 0.1% | Registros de la aplicación |
+| **Uso de tokens** | < $500/mes | Gestión de costos |
+| **Usuarios concurrentes** | 1000+ | Pruebas de carga |
+| **Tiempo de recuperación** | < 1 hora | Pruebas de recuperación ante desastres |
 
-### Pruebas de Carga
+### Pruebas de carga
 
 ```bash
-# Script de prueba de carga para aplicaciones de IA
+# Script de pruebas de carga para aplicaciones de IA
 python scripts/load_test.py \
   --endpoint https://your-ai-app.azurewebsites.net \
   --concurrent-users 100 \
@@ -926,39 +926,42 @@ python scripts/load_test.py \
   --ramp-up 60
 ```
 
-## 🤝 Mejores Prácticas de la Comunidad
+## 🤝 Mejores prácticas de la comunidad
 
-Basado en la retroalimentación de la comunidad de Microsoft Foundry Discord:
+Basado en los comentarios de la comunidad de Microsoft Foundry en Discord:
 
-### Principales Recomendaciones de la Comunidad:
+### Principales recomendaciones de la comunidad:
 
-1. **Comienza Pequeño, Escala Gradualmente**: Empieza con SKUs básicos y escala según el uso real
-2. **Monitorea Todo**: Configura monitoreo integral desde el primer día
-3. **Automatiza la Seguridad**: Usa infraestructura como código para una seguridad consistente
-4. **Prueba Exhaustivamente**: Incluye pruebas específicas para IA en tu pipeline
-5. **Planifica los Costos**: Monitorea el uso de tokens y configura alertas de presupuesto temprano
+1. **Comienza pequeño, escala gradualmente**: Empieza con SKUs básicos y escala según el uso real
+2. **Monitorea todo**: Configura monitoreo completo desde el primer día
+3. **Automatiza la seguridad**: Usa infraestructura como código para una seguridad consistente
+4. **Prueba a fondo**: Incluye pruebas específicas de IA en tu pipeline
+5. **Planifica los costos**: Monitorea el uso de tokens y configura alertas de presupuesto temprano
 
-### Errores Comunes a Evitar:
+### Errores comunes a evitar:
 
-- ❌ Incluir claves API en el código
-- ❌ No configurar monitoreo adecuado
+- ❌ Incrustar claves API en el código
+- ❌ No configurar un monitoreo apropiado
 - ❌ Ignorar la optimización de costos
 - ❌ No probar escenarios de fallo
-- ❌ Desplegar sin chequeos de salud
+- ❌ Desplegar sin comprobaciones de salud
 
-## Comandos y Extensiones AI de AZD CLI
+## Comandos y extensiones CLI de AZD para IA
 
-AZD incluye un conjunto creciente de comandos y extensiones específicas para IA que simplifican los flujos de trabajo de IA en producción. Estas herramientas cierran la brecha entre el desarrollo local y el despliegue en producción para cargas de trabajo de IA.
+AZD incluye un conjunto creciente de comandos y extensiones específicos para IA que agilizan los flujos de trabajo de IA en producción. Estas herramientas cierran la brecha entre el desarrollo local y el despliegue en producción para cargas de trabajo de IA.
 
-### Extensiones AZD para IA
+### Extensiones de AZD para IA
 
-AZD utiliza un sistema de extensiones para añadir capacidades específicas de IA. Instala y gestiona las extensiones con:
+AZD utiliza un sistema de extensiones para agregar capacidades específicas de IA. Instala y administra extensiones con:
 
 ```bash
-# Listar todas las extensiones disponibles (incluyendo IA)
+# Enumera todas las extensiones disponibles (incluyendo IA)
 azd extension list
 
-# Instalar la extensión de agentes de Foundry
+# Inspeccionar los detalles de la extensión instalada
+azd extension show azure.ai.agents
+
+# Instalar la extensión Foundry Agents
 azd extension install azure.ai.agents
 
 # Instalar la extensión de ajuste fino
@@ -971,81 +974,81 @@ azd extension install azure.ai.models
 azd extension upgrade --all
 ```
 
-**Extensiones AI disponibles:**
+**Extensiones de IA disponibles:**
 
 | Extensión | Propósito | Estado |
-|-----------|-----------|--------|
-| `azure.ai.agents` | Gestión del Servicio Foundry Agent | Vista previa |
-| `azure.ai.finetune` | Ajuste fino de modelos Foundry | Vista previa |
-| `azure.ai.models` | Modelos personalizados Foundry | Vista previa |
-| `azure.coding-agent` | Configuración de agente de codificación | Disponible |
+|-----------|---------|--------|
+| `azure.ai.agents` | Gestión del servicio Foundry Agent | Preview |
+| `azure.ai.finetune` | Ajuste fino de modelos de Foundry | Preview |
+| `azure.ai.models` | Modelos personalizados de Foundry | Preview |
+| `azure.coding-agent` | Configuración del agente de codificación | Available |
 
-### Inicializando Proyectos de Agentes con `azd ai agent init`
+### Inicialización de proyectos de agente con `azd ai agent init`
 
-El comando `azd ai agent init` crea la estructura para un proyecto de agente de IA listo para producción integrado con Microsoft Foundry Agent Service:
+El comando `azd ai agent init` genera la estructura de un proyecto de agente de IA listo para producción integrado con Microsoft Foundry Agent Service:
 
 ```bash
-# Inicializar un nuevo proyecto de agente desde un manifiesto de agente
+# Inicializar un nuevo proyecto de agente a partir de un manifiesto de agente
 azd ai agent init -m <manifest-path-or-uri>
 
-# Inicializar y seleccionar un proyecto Foundry específico
+# Inicializar y apuntar a un proyecto Foundry específico
 azd ai agent init -m agent-manifest.yaml --project-id <foundry-project-id>
 
 # Inicializar con un directorio de origen personalizado
 azd ai agent init -m agent-manifest.yaml --src ./agents/my-agent
 
-# Seleccionar Container Apps como el host
+# Apuntar a Container Apps como anfitrión
 azd ai agent init -m agent-manifest.yaml --host containerapp
 ```
 
 **Flags clave:**
 
-| Flag | Descripción |
+| Bandera | Descripción |
 |------|-------------|
-| `-m, --manifest` | Ruta o URI a un manifiesto de agente para agregar a tu proyecto |
-| `-p, --project-id` | ID del Proyecto Foundry existente para tu entorno azd |
+| `-m, --manifest` | Ruta o URI a un manifiesto de agente para añadir a tu proyecto |
+| `-p, --project-id` | ID de proyecto existente de Microsoft Foundry para tu entorno azd |
 | `-s, --src` | Directorio para descargar la definición del agente (por defecto `src/<agent-id>`) |
-| `--host` | Sobrescribe el host por defecto (por ejemplo, `containerapp`) |
-| `-e, --environment` | El entorno azd a usar |
+| `--host` | Anular el host predeterminado (p. ej., `containerapp`) |
+| `-e, --environment` | El entorno azd a utilizar |
 
-**Consejo de producción**: Usa `--project-id` para conectar directamente a un proyecto Foundry existente, manteniendo el código de tu agente y los recursos en la nube vinculados desde el inicio.
+**Consejo para producción**: Usa `--project-id` para conectarte directamente a un proyecto Foundry existente, manteniendo tu código de agente y los recursos en la nube vinculados desde el inicio.
 
 ### Protocolo de Contexto de Modelo (MCP) con `azd mcp`
 
-AZD incluye soporte integrado para servidor MCP (Alfa), permitiendo que agentes y herramientas de IA interactúen con tus recursos de Azure a través de un protocolo estandarizado:
+AZD incluye soporte integrado de servidor MCP (Alpha), lo que permite que agentes y herramientas de IA interactúen con tus recursos de Azure a través de un protocolo estandarizado:
 
 ```bash
-# Inicie el servidor MCP para su proyecto
+# Iniciar el servidor MCP para su proyecto
 azd mcp start
 
-# Administre el consentimiento de herramientas para las operaciones MCP
-azd mcp consent
+# Revisar las reglas actuales de consentimiento de Copilot para la ejecución de herramientas
+azd copilot consent list
 ```
 
-El servidor MCP expone el contexto de tu proyecto azd—entornos, servicios y recursos de Azure—a herramientas de desarrollo impulsadas por IA. Esto permite:
+El servidor MCP expone el contexto de tu proyecto azd—entornos, servicios y recursos de Azure—a las herramientas de desarrollo impulsadas por IA. Esto permite:
 
-- **Despliegue asistido por IA**: Permite que agentes de codificación consulten el estado de tu proyecto y disparen despliegues
+- **Despliegue asistido por IA**: Permite que agentes de codificación consulten el estado de tu proyecto y desencadenen despliegues
 - **Descubrimiento de recursos**: Las herramientas de IA pueden descubrir qué recursos de Azure usa tu proyecto
-- **Gestión de entornos**: Los agentes pueden cambiar entre entornos dev/staging/producción
+- **Gestión de entornos**: Los agentes pueden cambiar entre entornos de desarrollo/preproducción/producción
 
-### Generación de Infraestructura con `azd infra generate`
+### Generación de infraestructura con `azd infra generate`
 
-Para cargas de trabajo de IA en producción, puedes generar y personalizar Infraestructura como Código en lugar de confiar en el aprovisionamiento automático:
+Para cargas de trabajo de IA en producción, puedes generar y personalizar Infrastructure as Code en lugar de confiar en el aprovisionamiento automático:
 
 ```bash
-# Generar archivos Bicep/Terraform desde la definición de su proyecto
+# Generar archivos Bicep/Terraform a partir de la definición de tu proyecto
 azd infra generate
 ```
 
 Esto escribe IaC en disco para que puedas:
 - Revisar y auditar la infraestructura antes de desplegar
-- Añadir políticas de seguridad personalizadas (reglas de red, endpoints privados)
-- Integrar con procesos existentes de revisión de IaC
-- Controlar versiones de cambios de infraestructura por separado del código de aplicación
+- Agregar políticas de seguridad personalizadas (reglas de red, endpoints privados)
+- Integrar con procesos de revisión de IaC existentes
+- Controlar por versiones los cambios de infraestructura por separado del código de la aplicación
 
-### Ganchos del Ciclo de Vida de Producción
+### Hooks del ciclo de vida de producción
 
-Los hooks de AZD te permiten inyectar lógica personalizada en cada etapa del ciclo de vida del despliegue—crucial para flujos de trabajo de IA en producción:
+Los hooks de AZD te permiten inyectar lógica personalizada en cada etapa del ciclo de vida del despliegue—crítico para flujos de trabajo de IA en producción:
 
 ```yaml
 # azure.yaml - Production hooks example
@@ -1074,25 +1077,25 @@ services:
 ```
 
 ```bash
-# Ejecutar un hook específico manualmente durante el desarrollo
+# Ejecutar un gancho específico manualmente durante el desarrollo
 azd hooks run predeploy
 ```
 
-**Ganchos recomendados para IA en producción:**
+**Hooks recomendados para producción en cargas de trabajo de IA:**
 
-| Gancho | Caso de Uso |
-|--------|-------------|
-| `preprovision` | Validar cuotas de suscripción para capacidad del modelo IA |
-| `postprovision` | Configurar endpoints privados, desplegar pesos del modelo |
-| `predeploy` | Ejecutar pruebas de seguridad IA, validar plantillas de prompt |
-| `postdeploy` | Prueba básica de respuestas del agente, verificar conectividad del modelo |
+| Hook | Caso de uso |
+|------|----------|
+| `preprovision` | Validar cuotas de suscripción para la capacidad de modelos de IA |
+| `postprovision` | Configurar endpoints privados, desplegar pesos de modelos |
+| `predeploy` | Ejecutar pruebas de seguridad de IA, validar plantillas de prompt |
+| `postdeploy` | Pruebas de humo de las respuestas del agente, verificar conectividad con el modelo |
 
-### Configuración de Pipeline CI/CD
+### Configuración de pipeline CI/CD
 
 Usa `azd pipeline config` para conectar tu proyecto a GitHub Actions o Azure Pipelines con autenticación segura de Azure:
 
 ```bash
-# Configurar pipeline de CI/CD (interactivo)
+# Configurar la canalización CI/CD (interactiva)
 azd pipeline config
 
 # Configurar con un proveedor específico
@@ -1100,12 +1103,12 @@ azd pipeline config --provider github
 ```
 
 Este comando:
-- Crea un principal de servicio con acceso de menor privilegio
+- Crea un principal de servicio con acceso de mínimo privilegio
 - Configura credenciales federadas (sin secretos almacenados)
 - Genera o actualiza tu archivo de definición de pipeline
-- Configura variables de entorno necesarias en tu sistema CI/CD
+- Establece las variables de entorno requeridas en tu sistema CI/CD
 
-**Flujo de trabajo de producción con config de pipeline:**
+**Flujo de trabajo de producción con la configuración del pipeline:**
 
 ```bash
 # 1. Configurar el entorno de producción
@@ -1115,44 +1118,44 @@ azd env set AZURE_OPENAI_CAPACITY 100
 # 2. Configurar la canalización
 azd pipeline config --provider github
 
-# 3. La canalización ejecuta azd deploy en cada push a main
+# 3. La canalización ejecuta azd deploy en cada push a la rama main
 ```
 
-### Añadiendo Componentes con `azd add`
+### Añadir componentes con `azd add`
 
-Agrega de forma incremental servicios de Azure a un proyecto existente:
+Agrega servicios de Azure de forma incremental a un proyecto existente:
 
 ```bash
-# Agregue un nuevo componente de servicio de forma interactiva
+# Agregar un nuevo componente de servicio de forma interactiva
 azd add
 ```
 
-Esto es particularmente útil para ampliar aplicaciones IA en producción—por ejemplo, añadiendo un servicio de búsqueda vectorial, un nuevo endpoint de agente o un componente de monitoreo a un despliegue ya existente.
+Esto es particularmente útil para ampliar aplicaciones de IA en producción—por ejemplo, añadir un servicio de búsqueda vectorial, un nuevo endpoint de agente o un componente de monitoreo a un despliegue existente.
 
-## Recursos Adicionales
-- **Marco Bien Arquitectado de Azure**: [Guía de cargas de trabajo de IA](https://learn.microsoft.com/azure/well-architected/ai/)
-- **Documentación de Microsoft Foundry**: [Documentos oficiales](https://learn.microsoft.com/azure/ai-studio/)
-- **Plantillas de la Comunidad**: [Ejemplos de Azure](https://github.com/Azure-Samples)
-- **Comunidad de Discord**: [Canal #Azure](https://discord.gg/microsoft-azure)
-- **Habilidades de Agente para Azure**: [microsoft/github-copilot-for-azure en skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 habilidades de agente abiertas para Azure AI, Foundry, despliegue, optimización de costos y diagnóstico. Instálalas en tu editor:
+## Recursos adicionales
+- **Azure Well-Architected Framework**: [Guía para cargas de trabajo de IA](https://learn.microsoft.com/azure/well-architected/ai/)
+- **Microsoft Foundry Documentation**: [Documentación oficial](https://learn.microsoft.com/azure/ai-studio/)
+- **Community Templates**: [Ejemplos de Azure](https://github.com/Azure-Samples)
+- **Discord Community**: [Canal #Azure](https://discord.gg/microsoft-azure)
+- **Agent Skills for Azure**: [microsoft/github-copilot-for-azure on skills.sh](https://skills.sh/microsoft/github-copilot-for-azure) - 37 habilidades de agente abiertas para Azure AI, Foundry, despliegue, optimización de costos y diagnóstico. Instálalas en tu editor:
   ```bash
   npx skills add microsoft/github-copilot-for-azure
   ```
 
 ---
 
-**Navegación del Capítulo:**
-- **📚 Inicio del Curso**: [AZD Para Principiantes](../../README.md)
-- **📖 Capítulo Actual**: Capítulo 8 - Patrones de Producción y Empresariales
-- **⬅️ Capítulo Anterior**: [Capítulo 7: Solución de Problemas](../chapter-07-troubleshooting/debugging.md)
-- **⬅️ También Relacionado**: [Taller Práctico de IA](ai-workshop-lab.md)
-- **� Curso Completo**: [AZD Para Principiantes](../../README.md)
+**Chapter Navigation:**
+- **📚 Inicio del curso**: [AZD para Principiantes](../../README.md)
+- **📖 Capítulo actual**: Capítulo 8 - Patrones de producción y empresariales
+- **⬅️ Capítulo anterior**: [Capítulo 7: Resolución de problemas](../chapter-07-troubleshooting/debugging.md)
+- **⬅️ También relacionado**: [Taller de IA](ai-workshop-lab.md)
+- **� Curso completado**: [AZD para Principiantes](../../README.md)
 
-**Recuerda**: Las cargas de trabajo de IA en producción requieren una planificación cuidadosa, monitoreo y optimización continua. Comienza con estos patrones y adáptalos a tus requisitos específicos.
+**Recuerda**: Las cargas de trabajo de IA en producción requieren una planificación cuidadosa, supervisión y optimización continua. Comienza con estos patrones y adáptalos a tus requisitos específicos.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Aviso Legal**:
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o imprecisiones. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por un humano. No nos hacemos responsables por malentendidos o interpretaciones erróneas que puedan derivarse del uso de esta traducción.
+**Descargo de responsabilidad**:
+Este documento ha sido traducido utilizando el servicio de traducción de IA [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la exactitud, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción humana profesional. No somos responsables de ningún malentendido o interpretación errónea que resulte del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

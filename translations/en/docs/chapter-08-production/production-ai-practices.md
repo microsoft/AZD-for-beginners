@@ -782,7 +782,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup AZD
-        uses: Azure/setup-azd@v1.0.0
+        uses: Azure/setup-azd@v2
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -802,7 +802,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Setup AZD
-        uses: Azure/setup-azd@v1.0.0
+        uses: Azure/setup-azd@v2
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -840,8 +840,8 @@ done
 # Validate OpenAI model deployments
 echo "Validating OpenAI model deployments..."
 models=$(az cognitiveservices account deployment list --name $AZURE_OPENAI_NAME --resource-group $AZURE_RESOURCE_GROUP --query "[].name" -o tsv)
-if [[ ! $models == *"gpt-35-turbo"* ]]; then
-    echo "ERROR: Required model gpt-35-turbo not deployed"
+if [[ ! $models == *"gpt-4.1-mini"* ]]; then
+  echo "ERROR: Required model gpt-4.1-mini not deployed"
     exit 1
 fi
 
@@ -958,6 +958,9 @@ AZD uses an extension system to add AI-specific capabilities. Install and manage
 # List all available extensions (including AI)
 azd extension list
 
+# Inspect installed extension details
+azd extension show azure.ai.agents
+
 # Install the Foundry agents extension
 azd extension install azure.ai.agents
 
@@ -1018,8 +1021,8 @@ AZD includes built-in MCP server support (Alpha), enabling AI agents and tools t
 # Start the MCP server for your project
 azd mcp start
 
-# Manage tool consent for MCP operations
-azd mcp consent
+# Review current Copilot consent rules for tool execution
+azd copilot consent list
 ```
 
 The MCP server exposes your azd project context—environments, services, and Azure resources—to AI-powered development tools. This enables:
@@ -1154,5 +1157,5 @@ This is particularly useful for expanding production AI applications—for examp
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

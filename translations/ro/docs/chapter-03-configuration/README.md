@@ -1,18 +1,20 @@
 # Capitolul 3: Configurare și Autentificare
 
-**📚 Course**: [AZD pentru Începători](../../README.md) | **⏱️ Durată**: 45-60 minutes | **⭐ Complexitate**: Intermediar
+**📚 Curs**: [AZD pentru Începători](../../README.md) | **⏱️ Durată**: 45-60 minutes | **⭐ Complexitate**: Intermediar
 
 ---
 
 ## Prezentare generală
 
-Acest capitol acoperă configurarea mediului, tiparele de autentificare și cele mai bune practici de securitate pentru implementările Azure Developer CLI.
+Acest capitol acoperă configurarea mediului, tiparele de autentificare și bunele practici de securitate pentru implementările cu Azure Developer CLI.
+
+> Validat cu `azd 1.23.12` în martie 2026.
 
 ## Obiective de învățare
 
-Parcurgând acest capitol, veți:
+La finalizarea acestui capitol, veți:
 - Stăpâniți ierarhia de configurare AZD
-- Gestionați medii multiple (dev, staging, prod)
+- Gestionați mai multe medii (dev, staging, prod)
 - Implementați autentificare sigură cu identități gestionate
 - Configurați setări specifice mediului
 
@@ -21,9 +23,9 @@ Parcurgând acest capitol, veți:
 ## 📚 Lecții
 
 | # | Lecție | Descriere | Timp |
-|---|--------|-------------|------|
+|---|--------|-----------|------|
 | 1 | [Ghid de configurare](configuration.md) | Configurarea și gestionarea mediului | 30 min |
-| 2 | [Autentificare & Securitate](authsecurity.md) | Tipare pentru identități gestionate și RBAC | 30 min |
+| 2 | [Autentificare & Securitate](authsecurity.md) | Tipare pentru identitate gestionată și RBAC | 30 min |
 
 ---
 
@@ -38,7 +40,7 @@ azd env new prod
 # Comutați între medii
 azd env select prod
 
-# Setați variabilele de mediu
+# Setați variabile de mediu
 azd env set AZURE_LOCATION eastus
 azd env set SKU_NAME P1v3
 
@@ -50,27 +52,31 @@ azd env get-values
 
 ## 🔧 Ierarhia de configurare
 
-AZD aplică setările în această ordine (elementele ulterioare suprascriu pe cele anterioare):
+AZD aplică setările în această ordine (cele ulterioare suprascriu pe cele anterioare):
 
-1. **Valorile implicite** (încorporate în șabloane)
+1. **Valorile implicite** (incluse în șabloane)
 2. **azure.yaml** (configurarea proiectului)
 3. **Variabile de mediu** (`azd env set`)
-4. **Flag-uri din linia de comandă** (`--location eastus`)
+4. **Opțiuni din linia de comandă** (`--location eastus`)
 
 ---
 
-## 🔐 Cele mai bune practici de securitate
+## 🔐 Bune practici de securitate
 
 ```bash
-# Utilizați identitatea gestionată (recomandat)
+# Utilizați identitate administrată (recomandat)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Verificați starea autentificării
-azd auth whoami
+# Verificați starea autentificării AZD
+azd auth status
+
+# Opțional: verificați contextul Azure CLI dacă intenționați să rulați comenzi az
 az account show
 
 # Reautentificați-vă dacă este necesar
 azd auth login
+
+# Opțional: reîmprospătați autentificarea Azure CLI pentru comenzile az
 az login
 ```
 
@@ -87,12 +93,12 @@ az login
 
 ## 📖 Resurse conexe
 
-- [Verificări înainte de implementare](../chapter-06-pre-deployment/README.md)
+- [Verificări pre-implementare](../chapter-06-pre-deployment/README.md)
 - [Depanare](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Declinare de responsabilitate:
-Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original, în limba sa nativă, trebuie considerat sursa autorizată. Pentru informații critice, se recomandă o traducere profesională realizată de un traducător uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări eronate care pot apărea din utilizarea acestei traduceri.
+**Disclaimer**:
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim pentru acuratețe, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa nativă ar trebui considerat sursa autorizată. Pentru informații critice, se recomandă o traducere profesională realizată de un traducător uman. Nu ne asumăm răspunderea pentru eventualele neînțelegeri sau interpretări greșite care rezultă din utilizarea acestei traduceri.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

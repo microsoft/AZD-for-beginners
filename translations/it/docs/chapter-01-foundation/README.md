@@ -1,4 +1,4 @@
-# Capitolo 1: Fondamenti e Avvio Rapido
+# Capitolo 1: Fondamenti & Avvio Rapido
 
 **📚 Corso**: [AZD per principianti](../../README.md) | **⏱️ Durata**: 30-45 minuti | **⭐ Complessità**: Principiante
 
@@ -6,12 +6,14 @@
 
 ## Panoramica
 
-Questo capitolo introduce i fondamenti di Azure Developer CLI (azd). Imparerai i concetti chiave, installerai gli strumenti e distribuirai la tua prima applicazione su Azure.
+Questo capitolo introduce i fondamenti di Azure Developer CLI (azd). Imparerai i concetti principali, installerai gli strumenti e distribuirai la tua prima applicazione su Azure.
+
+> Validato con `azd 1.23.12` a marzo 2026.
 
 ## Obiettivi di apprendimento
 
-Al termine di questo capitolo, sarai in grado di:
-- Comprendere cos'è Azure Developer CLI e in cosa differisce da Azure CLI
+Al completamento di questo capitolo, sarai in grado di:
+- Comprendere cos'è Azure Developer CLI e come si differenzia da Azure CLI
 - Installare e configurare AZD sulla tua piattaforma
 - Distribuire la tua prima applicazione su Azure con `azd up`
 - Ripulire le risorse con `azd down`
@@ -22,9 +24,27 @@ Al termine di questo capitolo, sarai in grado di:
 
 | # | Lezione | Descrizione | Tempo |
 |---|--------|-------------|------|
-| 1 | [Basi di AZD](azd-basics.md) | Concetti fondamentali, terminologia e struttura del progetto | 15 min |
-| 2 | [Installazione e Configurazione](installation.md) | Guide di installazione specifiche per piattaforma | 10 min |
-| 3 | [Il tuo primo progetto](first-project.md) | Esercitazione pratica: Distribuire un'app web su Azure | 20 min |
+| 1 | [Nozioni di base di AZD](azd-basics.md) | Concetti fondamentali, terminologia e struttura del progetto | 15 min |
+| 2 | [Installazione e configurazione](installation.md) | Guide di installazione specifiche per piattaforma | 10 min |
+| 3 | [Il tuo primo progetto](first-project.md) | Esercitazione pratica: distribuire un'app web su Azure | 20 min |
+
+---
+
+## ✅ Inizia Qui: valida la tua configurazione
+
+Prima di iniziare, verifica che la tua macchina locale sia pronta per il template del Capitolo 1:
+
+**Windows:**
+```powershell
+.\validate-setup.ps1
+```
+
+**macOS / Linux:**
+```bash
+bash ./validate-setup.sh
+```
+
+Se lo script segnala strumenti mancanti, correggili prima e poi continua con il capitolo.
 
 ---
 
@@ -34,7 +54,8 @@ Al termine di questo capitolo, sarai in grado di:
 # Verifica l'installazione
 azd version
 
-# Accedi ad Azure
+# Autenticati per AZD
+# Opzionale: esegui az login se prevedi di eseguire comandi Azure CLI direttamente
 azd auth login
 
 # Distribuisci la tua prima app
@@ -65,20 +86,20 @@ azd down --force --purge # Pulisce le risorse
 
 | Direzione | Capitolo |
 |-----------|---------|
-| **Successivo** | [Capitolo 2: Sviluppo AI-First](../chapter-02-ai-development/README.md) |
-| **Vai a** | [Capitolo 3: Configurazione](../chapter-03-configuration/README.md) |
+| **Next** | [Capitolo 2: Sviluppo AI-First](../chapter-02-ai-development/README.md) |
+| **Skip to** | [Capitolo 3: Configurazione](../chapter-03-configuration/README.md) |
 
 ---
 
 ## 📖 Risorse correlate
 
-- [Cheat sheet comandi](../../resources/cheat-sheet.md)
-- [Domande frequenti](../../resources/faq.md)
+- [Scheda dei comandi](../../resources/cheat-sheet.md)
+- [FAQ](../../resources/faq.md)
 - [Glossario](../../resources/glossary.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Esclusione di responsabilità**:
-Questo documento è stato tradotto utilizzando il servizio di traduzione automatica di intelligenza artificiale [Co-op Translator](https://github.com/Azure/co-op-translator). Pur impegnandoci per l'accuratezza, si prega di tenere presente che le traduzioni automatiche possono contenere errori o inesattezze. Il documento originale nella sua lingua d'origine deve essere considerato la fonte autorevole. Per informazioni critiche si raccomanda una traduzione professionale effettuata da un traduttore umano. Non siamo responsabili per eventuali malintesi o interpretazioni errate derivanti dall'uso di questa traduzione.
+**Dichiarazione di non responsabilità**:
+Questo documento è stato tradotto utilizzando il servizio di traduzione automatica [Co-op Translator](https://github.com/Azure/co-op-translator). Sebbene ci impegniamo per l'accuratezza, si prega di tenere presente che le traduzioni automatiche possono contenere errori o inesattezze. Il documento originale nella sua lingua originale dovrebbe essere considerato la fonte autorevole. Per informazioni critiche, si raccomanda una traduzione professionale eseguita da un traduttore umano. Non siamo responsabili per eventuali fraintendimenti o interpretazioni errate derivanti dall'uso di questa traduzione.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

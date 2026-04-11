@@ -1,13 +1,15 @@
 # AI-modelimplementatie met Azure Developer CLI
 
-**Hoofdstuk-navigatie:**
-- **📚 Cursus Startpagina**: [AZD For Beginners](../../README.md)
-- **📖 Huidig Hoofdstuk**: Hoofdstuk 2 - AI-first ontwikkeling
-- **⬅️ Vorige**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Volgende**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
+**Hoofdstuknavigatie:**
+- **📚 Cursusstartpagina**: [AZD voor Beginners](../../README.md)
+- **📖 Huidig hoofdstuk**: Hoofdstuk 2 - AI-first ontwikkeling
+- **⬅️ Vorige**: [Microsoft Foundry-integratie](microsoft-foundry-integration.md)
+- **➡️ Volgende**: [AI Workshop-lab](ai-workshop-lab.md)
+- **🚀 Volgend hoofdstuk**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
 
-Deze gids biedt uitgebreide instructies voor het implementeren van AI-modellen met AZD-sjablonen, en behandelt alles van modelkeuze tot productie-implementatiepatronen.
+Deze gids biedt uitgebreide instructies voor het implementeren van AI-modellen met behulp van AZD-sjablonen, en behandelt alles van modelselectie tot productie-implementatiepatronen.
+
+> **Validatienotitie (2026-03-25):** De AZD-workflow in deze gids is gecontroleerd tegen `azd` `1.23.12`. Voor AI-implementaties die langer duren dan het standaardservice-implementatieraamwerk ondersteunen huidige AZD-versies `azd deploy --timeout <seconds>`.
 
 ## Inhoudsopgave
 
@@ -15,14 +17,14 @@ Deze gids biedt uitgebreide instructies voor het implementeren van AI-modellen m
 - [AZD-configuratie voor AI-modellen](#azd-configuratie-voor-ai-modellen)
 - [Implementatiepatronen](#implementatiepatronen)
 - [Modelbeheer](#modelbeheer)
-- [Productieoverwegingen](#productieoverwegingen)
+- [Overwegingen voor productie](#overwegingen-voor-productie)
 - [Monitoring en observeerbaarheid](#monitoring-en-observeerbaarheid)
 
 ## Strategie voor modelselectie
 
-### Microsoft Foundry-modellen
+### Microsoft Foundry Models Modellen
 
-Kies het juiste model voor uw use-case:
+Kies het juiste model voor uw gebruiksscenario:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -41,9 +43,9 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
@@ -52,11 +54,11 @@ services:
 
 ### Capaciteitsplanning voor modellen
 
-| Modeltype | Use-case | Aanbevolen capaciteit | Kostenoverwegingen |
+| Modeltype | Gebruiksscenario | Aanbevolen capaciteit | Kostenoverwegingen |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | Chat, Q&A | 10-50 TPM | Kosteneffectief voor de meeste workloads |
-| gpt-4.1 | Complexe redenering | 20-100 TPM | Hogere kosten, gebruik voor premium functies |
-| Text-embedding-ada-002 | Zoeken, RAG | 30-120 TPM | Essentieel voor semantische zoekopdrachten |
+| gpt-4.1-mini | Chat, V&A | 10-50 TPM | Kosten-efficiënt voor de meeste workloads |
+| gpt-4.1 | Complexe redenering | 20-100 TPM | Hogere kosten, gebruik voor premiumfuncties |
+| text-embedding-3-large | Zoekopdrachten, RAG | 30-120 TPM | Sterke standaardkeuze voor semantische zoekopdrachten en ophalen |
 | Whisper | Spraak-naar-tekst | 10-50 TPM | Audioverwerkingsworkloads |
 
 ## AZD-configuratie voor AI-modellen
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -127,11 +129,11 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 Configureer uw applicatieomgeving:
 
 ```bash
-# Configuratie van .env
+# .env-configuratie
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
 ## Implementatiepatronen
@@ -151,7 +153,7 @@ services:
 
 Geschikt voor:
 - Ontwikkeling en testen
-- Applicaties voor één markt
+- Toepassingen voor één markt
 - Kostenoptimalisatie
 
 ### Patroon 2: Implementatie in meerdere regio's
@@ -168,13 +170,13 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 ```
 
 Geschikt voor:
-- Wereldwijde applicaties
-- Hoge beschikbaarheidseisen
-- Verdeling van belasting
+- Wereldwijde toepassingen
+- Vereisten voor hoge beschikbaarheid
+- Verdeling van de belasting
 
 ### Patroon 3: Hybride implementatie
 
-Combineer Microsoft Foundry-modellen met andere AI-diensten:
+Combineer Microsoft Foundry Models met andere AI-diensten:
 
 ```bicep
 // Hybrid AI services
@@ -215,11 +217,11 @@ Volg modelversies in uw AZD-configuratie:
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
@@ -238,6 +240,9 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# Als de uitrol langer duurt dan de standaard time-out
+azd deploy --timeout 1800
 ```
 
 ### A/B-testen
@@ -264,7 +269,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## Productieoverwegingen
+## Overwegingen voor productie
 
 ### Capaciteitsplanning
 
@@ -293,9 +298,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### Configuratie van autoscaling
+### Autoschaalconfiguratie
 
-Configureer autoscaling voor Container Apps:
+Configureer autoschaal voor Container Apps:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -333,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### Kostenoptimalisatie
 
-Implementeer kostenbeheersmaatregelen:
+Implementeer kostenbeheersing:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -442,7 +447,7 @@ class AITelemetry:
 
 ### Gezondheidscontroles
 
-Implementeer gezondheidsmonitoring voor AI-diensten:
+Implementeer health monitoring voor AI-diensten:
 
 ```python
 # Healthcheck-eindpunten
@@ -473,30 +478,30 @@ async def check_ai_models():
 
 ## Volgende stappen
 
-1. **Bekijk de [Microsoft Foundry Integratiehandleiding](microsoft-foundry-integration.md)** voor service-integratiepatronen
-2. **Voltooi de [AI Workshop Lab](ai-workshop-lab.md)** voor praktische ervaring
-3. **Implementeer de [Production AI Practices](production-ai-practices.md)** voor bedrijfsimplementaties
-4. **Bekijk de [AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** voor veelvoorkomende problemen
+1. **Beoordeel de [Microsoft Foundry-integratiehandleiding](microsoft-foundry-integration.md)** voor service-integratiepatronen
+2. **Voltooi het [AI Workshop-lab](ai-workshop-lab.md)** voor praktische ervaring
+3. **Implementeer [Productie AI-praktijken](production-ai-practices.md)** voor enterprise-implementaties
+4. **Bekijk de [AI-probleemoplossingsgids](../chapter-07-troubleshooting/ai-troubleshooting.md)** voor veelvoorkomende problemen
 
 ## Bronnen
 
-- [Beschikbaarheid van Microsoft Foundry-modellen](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [Beschikbaarheid van Microsoft Foundry Models](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Documentatie Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Schaalbaarheid van Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Schaalopties voor Container Apps](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [Kostenoptimalisatie voor AI-modellen](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**Hoofdstuk-navigatie:**
-- **📚 Cursus Startpagina**: [AZD For Beginners](../../README.md)
-- **📖 Huidig Hoofdstuk**: Hoofdstuk 2 - AI-first ontwikkeling
-- **⬅️ Vorige**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
-- **➡️ Volgende**: [AI Workshop Lab](ai-workshop-lab.md)
-- **🚀 Volgend Hoofdstuk**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
+**Hoofdstuknavigatie:**
+- **📚 Cursusstartpagina**: [AZD voor Beginners](../../README.md)
+- **📖 Huidig hoofdstuk**: Hoofdstuk 2 - AI-first ontwikkeling
+- **⬅️ Vorige**: [Microsoft Foundry-integratie](microsoft-foundry-integration.md)
+- **➡️ Volgende**: [AI Workshop-lab](ai-workshop-lab.md)
+- **🚀 Volgend hoofdstuk**: [Hoofdstuk 3: Configuratie](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vrijwaring**:
-Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, wees u ervan bewust dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het document in de oorspronkelijke taal moet als gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, houd er rekening mee dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de originele taal moet als de gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

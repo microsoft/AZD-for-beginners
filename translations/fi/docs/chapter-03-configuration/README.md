@@ -1,20 +1,22 @@
-# Luku 3: Konfigurointi & Todennus
+# Luku 3: Konfigurointi ja todennus
 
-**📚 Kurssi**: [AZD For Beginners](../../README.md) | **⏱️ Kesto**: 45-60 minuuttia | **⭐ Vaikeustaso**: Keskitaso
+**📚 Kurssi**: [AZD For Beginners](../../README.md) | **⏱️ Kesto**: 45-60 minuuttia | **⭐ Vaikeusaste**: Keskitaso
 
 ---
 
 ## Yleiskatsaus
 
-Tässä luvussa käsitellään ympäristökonfiguraatiota, todennusmalleja ja turvallisuuden parhaita käytäntöjä Azure Developer CLI -käyttöönottoja varten.
+Tässä luvussa käsitellään ympäristön konfigurointia, todennusmalleja ja tietoturvan parhaita käytäntöjä Azure Developer CLI -käyttöönottoja varten.
+
+> Vahvistettu versiolla `azd 1.23.12` maaliskuussa 2026.
 
 ## Oppimistavoitteet
 
 Tämän luvun suorittamisen jälkeen osaat:
-- Ymmärtää AZD:n konfiguraatiohierarkian
+- Hallita AZD:n konfigurointihierarkia
 - Hallita useita ympäristöjä (dev, staging, prod)
-- Ota käyttöön turvallinen todentaminen hallinnoiduilla identiteeteillä
-- Määrittää ympäristökohtaiset asetukset
+- Toteuttaa turvallisen todennuksen hallittujen identiteettien avulla
+- Konfiguroida ympäristökohtaisia asetuksia
 
 ---
 
@@ -22,12 +24,12 @@ Tämän luvun suorittamisen jälkeen osaat:
 
 | # | Oppitunti | Kuvaus | Aika |
 |---|--------|-------------|------|
-| 1 | [Configuration Guide](configuration.md) | Ympäristön asennus ja hallinta | 30 min |
-| 2 | [Authentication & Security](authsecurity.md) | Hallinnoitu identiteetti ja RBAC-mallit | 30 min |
+| 1 | [Konfigurointiohje](configuration.md) | Ympäristön määritys ja hallinta | 30 min |
+| 2 | [Todennus & Tietoturva](authsecurity.md) | Hallittujen identiteettien ja RBAC-mallien käytännöt | 30 min |
 
 ---
 
-## 🚀 Nopea aloitus
+## 🚀 Pikakäynnistys
 
 ```bash
 # Luo useita ympäristöjä
@@ -35,7 +37,7 @@ azd env new dev
 azd env new staging
 azd env new prod
 
-# Vaihda ympäristöjä
+# Vaihda ympäristöjen välillä
 azd env select prod
 
 # Aseta ympäristömuuttujat
@@ -48,29 +50,33 @@ azd env get-values
 
 ---
 
-## 🔧 Konfiguraatiohierarkia
+## 🔧 Konfigurointihierarkia
 
-AZD ottaa asetukset käyttöön tässä järjestyksessä (myöhemmät korvaavat aiemmat):
+AZD soveltaa asetuksia tässä järjestyksessä (myöhemmät korvaavat aiemmat):
 
-1. **Oletusarvot** (sisäänrakennettu malleihin)
+1. **Oletusarvot** (sisäänrakennettuna malleihin)
 2. **azure.yaml** (projektin konfiguraatio)
 3. **Ympäristömuuttujat** (`azd env set`)
-4. **Komentorivivaihtoehdot** (`--location eastus`)
+4. **Komentorivivalitsimet** (`--location eastus`)
 
 ---
 
-## 🔐 Turvallisuuden parhaat käytännöt
+## 🔐 Tietoturvan parhaat käytännöt
 
 ```bash
-# Käytä hallinnoitua identiteettiä (suositeltu)
+# Käytä hallittua identiteettiä (suositeltavaa)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Tarkista todennuksen tila
-azd auth whoami
+# Tarkista AZD:n todennuksen tila
+azd auth status
+
+# Valinnainen: varmista Azure CLI -konteksti, jos aiot suorittaa az-komentoja
 az account show
 
-# Todenna uudelleen tarvittaessa
+# Kirjaudu uudelleen tarvittaessa
 azd auth login
+
+# Valinnainen: päivitä Azure CLI -todennus az-komentoja varten
 az login
 ```
 
@@ -78,21 +84,21 @@ az login
 
 ## 🔗 Navigointi
 
-| Direction | Chapter |
+| Suunta | Luku |
 |-----------|---------|
-| **Edellinen** | [Chapter 2: AI Development](../chapter-02-ai-development/README.md) |
-| **Seuraava** | [Chapter 4: Infrastructure](../chapter-04-infrastructure/README.md) |
+| **Previous** | [Luku 2: AI-kehitys](../chapter-02-ai-development/README.md) |
+| **Next** | [Luku 4: Infrastruktuuri](../chapter-04-infrastructure/README.md) |
 
 ---
 
-## 📖 Aiheeseen liittyvät materiaalit
+## 📖 Aiheeseen liittyvät resurssit
 
-- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
-- [Troubleshooting](../chapter-07-troubleshooting/common-issues.md)
+- [Ennen käyttöönottoa tehtävät tarkistukset](../chapter-06-pre-deployment/README.md)
+- [Vianetsintä](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Vastuuvapauslauseke:
-Tämä asiakirja on käännetty käyttäen tekoälypohjaista käännöspalvelua Co-op Translator (https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset voivat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää auktoritatiivisena lähteenä. Kriittisten tietojen osalta suositellaan ammattimaisen ihmiskääntäjän tekemää käännöstä. Emme ole vastuussa tästä käännöksestä johtuvista väärinymmärryksistä tai virheellisistä tulkinnoista.
+**Vastuuvapauslauseke**:
+Tämä asiakirja on käännetty käyttämällä tekoälypohjaista käännöspalvelua [Co-op Translator](https://github.com/Azure/co-op-translator). Vaikka pyrimme tarkkuuteen, huomioithan, että automaattiset käännökset saattavat sisältää virheitä tai epätarkkuuksia. Alkuperäistä asiakirjaa sen alkuperäisellä kielellä tulisi pitää auktoriteettina. Tärkeissä asioissa suositellaan ammattimaista ihmiskäännöstä. Emme ole vastuussa tämän käännöksen käytöstä johtuvista väärinymmärryksistä tai virhetulkinnoista.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

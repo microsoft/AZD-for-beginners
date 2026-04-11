@@ -1,45 +1,45 @@
-# Παροχή πόρων Azure με το AZD
+# Provisioning Azure Resources with AZD
 
 **Πλοήγηση Κεφαλαίου:**
-- **📚 Αρχική Μαθήματος**: [AZD για Αρχάριους](../../README.md)
+- **📚 Αρχική Μαθήματος**: [AZD Για Αρχάριους](../../README.md)
 - **📖 Τρέχον Κεφάλαιο**: Κεφάλαιο 4 - Υποδομή ως Κώδικας & Ανάπτυξη
-- **⬅️ Προηγούμενο**: [Οδηγός Ανάπτυξης](deployment-guide.md)
-- **➡️ Επόμενο Κεφάλαιο**: [Κεφάλαιο 5: Λύσεις AI πολλαπλών πρακτόρων](../../examples/retail-scenario.md)
-- **🔧 Σχετικό**: [Κεφάλαιο 6: Επικύρωση πριν την Ανάπτυξη](../chapter-06-pre-deployment/capacity-planning.md)
+- **⬅️ Προηγούμενο**: [Deployment Guide](deployment-guide.md)
+- **➡️ Επόμενο Κεφάλαιο**: [Κεφάλαιο 5: Λύσεις Πολυ-Πρακτόρων AI](../../examples/retail-scenario.md)
+- **🔧 Σχετικό**: [Κεφάλαιο 6: Έλεγχος πριν την Ανάπτυξη](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## Εισαγωγή
 
-Αυτός ο ολοκληρωμένος οδηγός καλύπτει όσα πρέπει να γνωρίζετε για την παροχή και τη διαχείριση πόρων Azure χρησιμοποιώντας το Azure Developer CLI. Μάθετε να εφαρμόζετε μοτίβα Υποδομής ως Κώδικα (IaC) από τη βασική δημιουργία πόρων έως προηγμένες αρχιτεκτονικές υποδομής επιχειρησιακού επιπέδου χρησιμοποιώντας Bicep, ARM templates, Terraform και Pulumi.
+Αυτός ο ολοκληρωμένος οδηγός καλύπτει ό,τι χρειάζεστε για την προμήθεια και τη διαχείριση πόρων Azure χρησιμοποιώντας το Azure Developer CLI. Μάθετε να εφαρμόζετε πρότυπα Υποδομής ως Κώδικας (IaC) από τη βασική δημιουργία πόρων μέχρι προηγμένες αρχιτεκτονικές υποδομής επιχειρησιακού επιπέδου χρησιμοποιώντας Bicep, ARM templates, Terraform και Pulumi.
 
 ## Στόχοι Μάθησης
 
 Με την ολοκλήρωση αυτού του οδηγού, θα:
-- Εξειδικευτείτε στις αρχές της Υποδομής ως Κώδικα και στην παροχή πόρων Azure
+- Κατακτήσετε τις αρχές της Υποδομής ως Κώδικα και την προμήθεια πόρων στο Azure
 - Κατανοήσετε πολλούς παρόχους IaC που υποστηρίζονται από το Azure Developer CLI
 - Σχεδιάσετε και υλοποιήσετε πρότυπα Bicep για κοινές αρχιτεκτονικές εφαρμογών
-- Διαμορφώσετε παραμέτρους πόρων, μεταβλητές και ρυθμίσεις ειδικές για περιβάλλον
+- Διαμορφώσετε παραμέτρους πόρων, μεταβλητές και ρυθμίσεις ανά περιβάλλον
 - Εφαρμόσετε προηγμένα μοτίβα υποδομής συμπεριλαμβανομένων δικτύωσης και ασφάλειας
-- Διαχειριστείτε τον κύκλο ζωής πόρων, ενημερώσεις και επίλυση εξαρτήσεων
+- Διαχειριστείτε τον κύκλο ζωής των πόρων, ενημερώσεις και επίλυση εξαρτήσεων
 
-## Μαθησιακά Αποτελέσματα
+## Αποτελέσματα Μάθησης
 
-Με την ολοκλήρωση, θα είστε σε θέση να:
-- Σχεδιάσετε και παρέχετε υποδομή Azure χρησιμοποιώντας Bicep και ARM templates
-- Διαμορφώσετε πολύπλοκες αρχιτεκτονικές πολλαπλών υπηρεσιών με σωστές εξαρτήσεις πόρων
-- Εφαρμόσετε παραμετροποιημένα πρότυπα για πολλαπλά περιβάλλοντα και ρυθμίσεις
-- Εντοπίσετε και να επιλύσετε προβλήματα παροχής υποδομής και αποτυχίες ανάπτυξης
-- Εφαρμόσετε τις αρχές του Azure Well-Architected Framework στο σχεδιασμό υποδομής
-- Διαχειριστείτε ενημερώσεις υποδομής και εφαρμόσετε στρατηγικές έκδοσης υποδομής
+Μετά την ολοκλήρωση, θα μπορείτε να:
+- Σχεδιάζετε και να προμηθεύετε υποδομή Azure χρησιμοποιώντας Bicep και ARM templates
+- Διαμορφώνετε σύνθετες πολυ-υπηρεσιακές αρχιτεκτονικές με σωστές εξαρτήσεις πόρων
+- Εφαρμόζετε παραμετροποιημένα πρότυπα για πολλαπλά περιβάλλοντα και ρυθμίσεις
+- Εντοπίζετε προβλήματα προμήθειας υποδομής και να επιλύετε αποτυχίες ανάπτυξης
+- Εφαρμόζετε τις αρχές του Azure Well-Architected Framework στο σχεδιασμό υποδομής
+- Διαχειρίζεστε ενημερώσεις υποδομής και να υλοποιείτε στρατηγικές έκδοσης υποδομής
 
-## Επισκόπηση Παροχής Υποδομής
+## Επισκόπηση Προμήθειας Υποδομής
 
 Το Azure Developer CLI υποστηρίζει πολλούς παρόχους Υποδομής ως Κώδικα (IaC):
-- **Bicep** (συνιστάται) - γλώσσα ειδικού τομέα της Azure
-- **ARM Templates** - πρότυπα Azure Resource Manager βασισμένα σε JSON
-- **Terraform** - εργαλείο υποδομής πολλαπλών cloud
-- **Pulumi** - σύγχρονη υποδομή ως κώδικας με γλώσσες προγραμματισμού
+- **Bicep** (συνιστάται) - γλώσσα ειδικού τομέα για το Azure
+- **ARM Templates** - JSON-based Azure Resource Manager templates
+- **Terraform** - Εργαλείο υποδομής πολλαπλών cloud
+- **Pulumi** - Σύγχρονη υποδομή ως κώδικας με γλώσσες προγραμματισμού
 
-## Κατανόηση των Πόρων Azure
+## Κατανόηση Πόρων Azure
 
 ### Ιεραρχία Πόρων
 ```
@@ -49,12 +49,12 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Συνηθισμένες Υπηρεσίες Azure για Εφαρμογές
-- **Υπολογιστική**: App Service, Container Apps, Functions, Εικονικές Μηχανές
-- **Αποθήκευση**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Δικτύωση**: Virtual Network, Application Gateway, CDN
-- **Ασφάλεια**: Key Vault, Application Insights, Log Analytics
-- **Τεχνητή Νοημοσύνη/Μηχανική Μάθηση**: Cognitive Services, OpenAI, Machine Learning
+### Κοινές Υπηρεσίες Azure για Εφαρμογές
+- **Compute**: App Service, Container Apps, Functions, Virtual Machines
+- **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
+- **Networking**: Virtual Network, Application Gateway, CDN
+- **Security**: Key Vault, Application Insights, Log Analytics
+- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
 ## Πρότυπα Υποδομής Bicep
 
@@ -128,9 +128,9 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### Προηγμένα Σχέδια Bicep
+### Προχωρημένα Μοτίβα Bicep
 
-#### Μοδουλική Υποδομή
+#### Ενδομονάδα Υποδομής
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -179,7 +179,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### Υπό όρους Δημιουργία Πόρων
+#### Υποθετική Δημιουργία Πόρων
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -200,7 +200,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 }
 ```
 
-## 🗃️ Παροχή Βάσεων Δεδομένων
+## 🗃️ Προμήθεια Βάσεων Δεδομένων
 
 ### Cosmos DB
 ```bicep
@@ -342,7 +342,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Διαμόρφωση Διαχειριζόμενης Ταυτότητας
+### Διαμόρφωση Managed Identity
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -496,7 +496,7 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 Παρακολούθηση και Παρατηρησιμότητα
+## 📊 Παρακολούθηση και Επισκοπία
 
 ### Application Insights
 ```bicep
@@ -561,7 +561,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 Ρυθμίσεις ανά Περιβάλλον
+## 🔧 Ρυθμίσεις Ανά Περιβάλλον
 
 ### Αρχεία Παραμέτρων για Διάφορα Περιβάλλοντα
 ```json
@@ -617,7 +617,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Υπό Όρους Παροχή Πόρων
+### Υπό όρους Προμήθεια Πόρων
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,9 +649,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Προηγμένα Σχέδια Παροχής
+## 🚀 Προχωρημένα Μοτίβα Προμήθειας
 
-### Ανάπτυξη σε Πολλές Περιοχές
+### Ανάπτυξη σε Πολλαπλές Περιοχές
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -759,38 +759,37 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ### Προεπισκόπηση Αλλαγών Υποδομής πριν την Ανάπτυξη
 
-Η εντολή `azd provision --preview` σας επιτρέπει να **προσομοιώσετε την παροχή υποδομής** πριν από την πραγματική ανάπτυξη πόρων. Είναι παρόμοιο στο πνεύμα με το `terraform plan` ή το `bicep what-if`, παρέχοντας μια **προεπισκόπηση χωρίς εκτέλεση** των αλλαγών που θα γίνουν στο περιβάλλον Azure σας.
+Η εντολή `azd provision --preview` σας επιτρέπει να **προσομοιώσετε την προμήθεια υποδομής** πριν από την πραγματική ανάπτυξη πόρων. Είναι παρεμφερές σε πνεύμα με `terraform plan` ή `bicep what-if`, προσφέροντας μια **προεπισκόπηση χωρίς εκτέλεση** του τι αλλαγές θα γίνουν στο περιβάλλον Azure σας.
 
 #### 🛠️ Τι Κάνει
 - **Αναλύει τα πρότυπα IaC σας** (Bicep ή Terraform)
-- **Δείχνει προεπισκόπηση αλλαγών πόρων**: προσθήκες, διαγραφές, ενημερώσεις
-- **Δεν εφαρμόζει τις αλλαγές** — είναι μόνο για ανάγνωση και ασφαλές να εκτελεστεί
+- **Εμφανίζει προεπισκόπηση αλλαγών πόρων**: προσθήκες, διαγραφές, ενημερώσεις
+- **Δεν εφαρμόζει αλλαγές** — είναι μόνο για ανάγνωση και ασφαλές στη χρήση
 
-#### � Περιπτώσεις Χρήσης
+#### Περιστάσεις Χρήσης
 ```bash
-# Προεπισκόπηση αλλαγών στην υποδομή πριν την ανάπτυξη
+# Προεπισκόπηση αλλαγών στην υποδομή πριν από την ανάπτυξη
 azd provision --preview
 
-# Προεπισκόπηση με λεπτομερή έξοδο
-azd provision --preview --output json
-
 # Προεπισκόπηση για συγκεκριμένο περιβάλλον
-azd provision --preview --environment production
+azd provision --preview -e production
 ```
 
 Αυτή η εντολή σας βοηθά να:
-- **Επικυρώσετε τις αλλαγές υποδομής** πριν δεσμεύσετε πόρους
-- **Εντοπίσετε λανθασμένες ρυθμίσεις νωρίς** στον κύκλο ανάπτυξης
-- **Συνεργαστείτε με ασφάλεια** σε περιβάλλοντα ομάδας
-- **Εξασφαλίσετε αναπτύξεις με ελάχιστα προνόμια** χωρίς εκπλήξεις
+- **Επικυρώνετε αλλαγές υποδομής** πριν δεσμεύσετε πόρους
+- **Εντοπίζετε λάθη διαμόρφωσης νωρίς** στον κύκλο ανάπτυξης
+- **Συνεργάζεστε με ασφάλεια** σε ομαδικά περιβάλλοντα
+- **Εξασφαλίζετε αναπτύξεις με το ελάχιστο απαραίτητο προνόμιο** χωρίς εκπλήξεις
 
-Είναι ιδιαίτερα χρήσιμο όταν:
-- Εργάζεστε με πολύπλοκα περιβάλλοντα πολλαπλών υπηρεσιών
+Είναι ιδιαίτερα χρήσιμη όταν:
+- Δουλεύετε με σύνθετα περιβάλλοντα πολλαπλών υπηρεσιών
 - Κάνετε αλλαγές σε υποδομή παραγωγής
 - Επικυρώνετε τροποποιήσεις προτύπων πριν την έγκριση PR
-- Εκπαιδεύετε νέα μέλη ομάδας στα πρότυπα υποδομής
+- Εκπαιδεύετε νέα μέλη ομάδας στα μοτίβα υποδομής
 
 ### Παράδειγμα Εξόδου Προεπισκόπησης
+Η ακριβής έξοδος προεπισκόπησης διαφέρει ανά πάροχο και δομή έργου, αλλά το αποτέλεσμα θα πρέπει να εντοπίζει ξεκάθαρα τις προτεινόμενες αλλαγές πριν εφαρμοστεί οτιδήποτε.
+
 ```bash
 $ azd provision --preview
 
@@ -809,28 +808,27 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
 ```
 
-## �🔄 Ενημερώσεις και Μεταφορές Πόρων
+## �🔄 Ενημερώσεις Πόρων και Μεταφορές
 
 ### Ασφαλείς Ενημερώσεις Πόρων
 ```bash
-# Προεπισκόπηση των αλλαγών στην υποδομή πρώτα (ΣΥΝΙΣΤΑΤΑΙ)
+# Προελέγξτε πρώτα τις αλλαγές στην υποδομή (ΣΥΝΙΣΤΑΤΑΙ)
 azd provision --preview
 
 # Εφαρμόστε τις αλλαγές μετά την επιβεβαίωση της προεπισκόπησης
 azd provision --confirm-with-no-prompt
 
 # Για επαναφορά, χρησιμοποιήστε το Git για να αναιρέσετε τις αλλαγές στην υποδομή:
-git revert HEAD  # Αναίρεση του τελευταίου commit στην υποδομή
+git revert HEAD  # Αναίρεση του τελευταίου commit της υποδομής
 azd provision    # Εφαρμόστε την προηγούμενη κατάσταση της υποδομής
 ```
 
-### Μεταφορές Βάσης Δεδομένων
+### Μεταφορές Βάσεων Δεδομένων
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -861,7 +859,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🎯 Καλές Πρακτικές
 
-### 1. Συμβάσεις Ονομασίας Πόρων
+### 1. Συμβάσεις Ονοματοδοσίας Πόρων
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -872,7 +870,7 @@ var naming = {
 }
 ```
 
-### 2. Στρατηγική ετικετών
+### 2. Στρατηγική Επισήμανσης (Tagging)
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -901,7 +899,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Οργάνωση Εξόδου
+### 4. Οργάνωση Εξόδων
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -918,27 +916,27 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Επόμενα Βήματα
 
-- [Προγραμματισμός πριν την ανάπτυξη](../chapter-06-pre-deployment/capacity-planning.md) - Επικυρώστε τη διαθεσιμότητα πόρων
-- [Συνηθισμένα Προβλήματα](../chapter-07-troubleshooting/common-issues.md) - Αντιμετώπιση προβλημάτων υποδομής
-- [Οδηγός Εντοπισμού Σφαλμάτων](../chapter-07-troubleshooting/debugging.md) - Εντοπισμός προβλημάτων παροχής
-- [Επιλογή SKU](../chapter-06-pre-deployment/sku-selection.md) - Επιλέξτε τα κατάλληλα επίπεδα υπηρεσιών
+- [Σχεδιασμός πριν την ανάπτυξη](../chapter-06-pre-deployment/capacity-planning.md) - Επικυρώστε τη διαθεσιμότητα πόρων
+- [Κοινά Προβλήματα](../chapter-07-troubleshooting/common-issues.md) - Εντοπίστε προβλήματα υποδομής
+- [Οδηγός Αποσφαλμάτωσης](../chapter-07-troubleshooting/debugging.md) - Αποσφαλμάτωση θεμάτων προμήθειας
+- [Επιλογή SKU](../chapter-06-pre-deployment/sku-selection.md) - Επιλέξτε κατάλληλες κατηγορίες υπηρεσιών
 
 ## Πρόσθετοι Πόροι
 
-- [Τεκμηρίωση Azure Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Πρότυπα Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Κέντρο Αρχιτεκτονικής Azure](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Πλαίσιο Azure Well-Architected](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **Πλοήγηση**
-- **Προηγούμενο Μάθημα**: [Οδηγός Ανάπτυξης](deployment-guide.md)
-- **Επόμενο Μάθημα**: [Σχεδιασμός Χωρητικότητας](../chapter-06-pre-deployment/capacity-planning.md)
+- **Προηγούμενο Μάθημα**: [Deployment Guide](deployment-guide.md)
+- **Επόμενο Μάθημα**: [Capacity Planning](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Αποποίηση ευθυνών:
-Το παρόν έγγραφο έχει μεταφραστεί με τη χρήση της υπηρεσίας μετάφρασης τεχνητής νοημοσύνης [Co-op Translator](https://github.com/Azure/co-op-translator). Παρά τις προσπάθειές μας για ακρίβεια, λάβετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στη γλώσσα του πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες συνιστάται επαγγελματική μετάφραση από επαγγελματία μεταφραστή. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
+**Αποποίηση ευθυνών**:
+Το παρόν έγγραφο έχει μεταφραστεί χρησιμοποιώντας την υπηρεσία μετάφρασης τεχνητής νοημοσύνης [Co-op Translator](https://github.com/Azure/co-op-translator). Παρότι επιδιώκουμε την ακρίβεια, παρακαλούμε λάβετε υπόψη ότι οι αυτοματοποιημένες μεταφράσεις ενδέχεται να περιέχουν σφάλματα ή ανακρίβειες. Το πρωτότυπο έγγραφο στην αρχική του γλώσσα πρέπει να θεωρείται η αυθεντική πηγή. Για κρίσιμες πληροφορίες, συνιστάται επαγγελματική ανθρώπινη μετάφραση. Δεν φέρουμε ευθύνη για τυχόν παρεξηγήσεις ή λανθασμένες ερμηνείες που προκύπτουν από τη χρήση αυτής της μετάφρασης.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

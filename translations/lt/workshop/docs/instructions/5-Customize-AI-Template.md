@@ -1,30 +1,30 @@
-# 5. Tinkinti šabloną
+# 5. Tinkinkite šabloną
 
-!!! tip "ŠIO MODULIO PABAIGOJE JŪS SUGEBSITE"
+!!! tip "ŠIO MODULIO PABAIGOJE GALĖSITE"
 
-    - [ ] Išnagrinėjote numatytas AI agentų galimybes
+    - [ ] Išnagrinėjote numatytąsias AI agentų galimybes
     - [ ] Pridėjote AI paiešką su savo indeksu
-    - [ ] Aktyvavote ir išanalizavote sekimo metrikas
-    - [ ] Atlikote vertinimo paleidimą
-    - [ ] Atlikote red-teaming skenavimą
-    - [ ] **5 laboratorija: Parengtas suasmeninimo planas** 
+    - [ ] Aktyvavote ir analizavote Tracing metrikas
+    - [ ] Atlikote vertinimo vykdymą
+    - [ ] Atlikote red-teaming nuskaitymą
+    - [ ] **Laboratorija 5: Parengėte pritaikymo planą** 
 
 ---
 
 ## 5.1 AI agentų galimybės
 
-!!! success "Tai atlikta 1 laboratorijoje"
+!!! success "Tai atlikome laboratorijoje 01"
 
 - **Failų paieška**: OpenAI įmontuota failų paieška žinių gavimui
-- **Cituotės**: Automatinis šaltinių nurodymas atsakymuose
+- **Citavimas**: Automatinis šaltinių nurodymas atsakymuose
 - **Pritaikomos instrukcijos**: Keiskite agente elgesį ir asmenybę
-- **Įrankių integracija**: Išplečiamas įrankių sistema pritaikytoms galimybėms
+- **Įrankių integracija**: Išplečiama įrankių sistema pritaikytoms funkcijoms
 
 ---
 
 ## 5.2 Žinių gavimo parinktys
 
-!!! task "Norint tai užbaigti, reikia atlikti pakeitimus ir iš naujo diegti"    
+!!! task "Norint užbaigti, turime atlikti pakeitimus ir iš naujo diegti"    
     
     ```bash title=""
     # Set environment variables
@@ -42,22 +42,22 @@
 
 **OpenAI failų paieška (numatytoji):**
 
-- Įdiegta Foundry agentuose
+- Įmontuota Foundry agentuose
 - Automatinis dokumentų apdorojimas ir indeksavimas
-- Nereikalinga papildoma konfigūracija
+- Nereikia papildomos konfigūracijos
 
-**Azure AI paieška (neprivaloma):**
+**Azure AI Search (pasirenkama):**
 
 - Hibridinė semantinė ir vektorinė paieška
-- Individualus indeksų valdymas
-- Pažangios paieškos galimybės
+- Individualus indekso valdymas
+- Išplėstinės paieškos galimybės
 - Reikalauja `USE_AZURE_AI_SEARCH_SERVICE=true`
 
 ---
 
 ## 5.3 [Sekimas ir stebėsena](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#tracing-and-monitoring)
 
-!!! task "Norint tai užbaigti, reikia atlikti pakeitimus ir iš naujo diegti"    
+!!! task "Norint užbaigti, turime atlikti pakeitimus ir iš naujo diegti"    
     
     ```bash title=""
     azd env set ENABLE_AZURE_MONITOR_TRACING true
@@ -68,128 +68,128 @@
 
 - OpenTelemetry integracija
 - Užklausų/atsakymų sekimas
-- Veikimo metrikos
-- Pasiekiama Microsoft Foundry portale
+- Našumo metrikos
+- Prieinama Microsoft Foundry portale
 
-**Registravimas:**
+**Žurnalavimas:**
 
 - Programos žurnalai Container Apps
-- Struktūrizuotas registravimas su koreliacijos ID
-- Realaus laiko ir istorinių žurnalų peržiūra
+- Struktūruotas žurnalas su koreliacijos ID
+- Realaus laiko ir istorinė žurnalų peržiūra
 
 ---
 
-## 5.4 [Agento vertinimas](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
+## 5.4 [Agentų vertinimas](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#agent-evaluation)
 
 **Vietinis vertinimas:**
 
 - Įmontuoti vertintojai kokybės įvertinimui
-- Individualūs vertinimo scenarijai
-- Našumo palyginimas
+- Tinkinti vertinimo skriptai
+- Našumo etalonavimas
 
 **Nuolatinė stebėsena:**
 
-- Automatinis gyvų sąveikų vertinimas
-- Kokybės metrikų stebėjimas
+- Automatinis tiesioginių sąveikų vertinimas
+- Kokybės metrikų sekimas
 - Našumo regresijos aptikimas
 
 **CI/CD integracija:**
 
 - GitHub Actions darbo eiga
 - Automatizuotas testavimas ir vertinimas
-- Statistinis palyginamasis testavimas
+- Statistiniai palyginamieji testai
 
 ---
 
 ## 5.5 [AI Red Teaming agentas](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/other_features.md#ai-red-teaming-agent)
 
-**AI red-team testavimas:**
+**AI Red Teaming:**
 
 - Automatizuotas saugumo skenavimas
 - Rizikos vertinimas AI sistemoms
-- Saugumo vertinimas keliuose kategorijose
+- Saugumo vertinimas keliomis kategorijomis
 
 **Autentifikacija:**
 
-- Valdomas identitetas Azure paslaugoms
+- Valdoma tapatybė (Managed Identity) Azure paslaugoms
 - Pasirenkama Azure App Service autentifikacija
-- Bazinė autentifikacija kaip atsarginė galimybė kūrimo metu
+- Basic auth kaip atsarginė galimybė vystymui
 
 
 
-!!! quote "ŠIOS LABORATORIJOS PABAIGOJE TURĖTUMĖTE"
-    - [ ] Apibrėžėte savo scenarijaus reikalavimus
-    - [ ] Individualizuoti aplinkos kintamieji (konfigūracija)
-    - [ ] Pritaikytos agento instrukcijos (užduotis)
+!!! quote "LABORATORIJOS PABAIGOJE TURĖTUMĖTE"
+    - [ ] Nustatėte savo scenarijaus reikalavimus
+    - [ ] Pritaikėte aplinkos kintamuosius (konfigūracija)
+    - [ ] Pritaikėte agentų instrukcijas (užduotis)
     - [ ] Išdiegėte pritaikytą šabloną (programa)
     - [ ] Atlikote poįdiegimo užduotis (rankiniu būdu)
-    - [ ] Paleidote bandomą vertinimą
+    - [ ] Paleidote testinį vertinimą
 
 This example demonstrates customizing the template for an enterprise retail use case with two specialized agents and multiple model deployments.
 
 ---
 
-## 5.6 Pritaikykite sau!
+## 5.6 Pritaikykite tai sau!
 
 ### 5.6.1. Scenarijaus reikalavimai
 
 #### **Agentų diegimai:** 
 
-   - Pirkėjo agentas: padeda klientams rasti ir palyginti produktus
-   - Lojalumo agentas: valdo klientų atlygius ir akcijas
+   - Pirkėjo agentas: Padeda klientams rasti ir palyginti produktus
+   - Lojalumo agentas: Valdo klientų atlygius ir akcijas
 
 #### **Modelių diegimai:**
 
    - `gpt-4.1`: Pagrindinis pokalbių modelis
-   - `o3`: Loginio mąstymo modelis sudėtingoms užklausoms
+   - `o3`: Samprotavimo modelis sudėtingoms užklausoms
    - `gpt-4.1-nano`: Lengvas modelis paprastoms sąveikoms
-   - `text-embedding-3-large`: Aukštos kokybės vektoriai paieškai
+   - `text-embedding-3-large`: Aukštos kokybės embedding'ai paieškai
 
 #### **Funkcijos:**
 
-   - Įjungtas sekimas ir stebėsena
+   - Sekimas (Tracing) ir stebėsena įjungti
    - AI paieška produktų katalogui
    - Vertinimo sistema kokybės užtikrinimui
-   - Red-teaming saugumo patikrai
+   - Red teaming saugumo patikrai
 
 ---
 
 ### 5.6.2 Scenarijaus įgyvendinimas
 
 
-#### 5.6.2.1. Konfigūracija prieš diegimą
+#### 5.6.2.1. Priešdiegiminė konfigūracija
 
-Sukurkite paruošiamąjį scenarijų (`setup-retail.sh`)
+Sukurkite nustatymo skriptą (`setup-retail.sh`)
 
 ```bash title="" linenums="0"
 #!/bin/bash
 
-# Nustatykite aplinkos pavadinimą
+# Nustatyti aplinkos pavadinimą
 azd env set AZURE_ENV_NAME "retail-ai-agents"
 
-# Konfigūruokite regioną (pasirinkite pagal modelio prieinamumą)
+# Konfigūruoti regioną (pasirinkite pagal modelio prieinamumą)
 azd env set AZURE_LOCATION "eastus2"
 
-# Įgalinkite visas neprivalomas paslaugas
+# Įjungti visas pasirenkamas paslaugas
 azd env set USE_APPLICATION_INSIGHTS true
 azd env set USE_AZURE_AI_SEARCH_SERVICE true
 azd env set ENABLE_AZURE_MONITOR_TRACING true
 
-# Konfigūruokite pagrindinį pokalbių modelį (gpt-4.1 kaip artimiausias prieinamas gpt-4.1)
+# Konfigūruoti pagrindinį pokalbio modelį (gpt-4.1 kaip artimiausias prieinamas gpt-4.1)
 azd env set AZURE_AI_AGENT_MODEL_NAME "gpt-4.1"
 azd env set AZURE_AI_AGENT_MODEL_FORMAT "OpenAI"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_NAME "chat-primary"
 azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
 
-# Konfigūruokite įterpimo modelį geresnei paieškai
+# Konfigūruoti įterpimo modelį geresnei paieškai
 azd env set AZURE_AI_EMBED_MODEL_NAME "text-embedding-3-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_NAME "embeddings-large"
 azd env set AZURE_AI_EMBED_DEPLOYMENT_CAPACITY 75
 
-# Nustatykite agento pavadinimą (bus sukurtas pirmasis agentas)
+# Nustatyti agento vardą (sukurs pirmą agentą)
 azd env set AZURE_AI_AGENT_NAME "shopper-agent"
 
-# Konfigūruokite paieškos indeksą
+# Konfigūruoti paieškos indeksą
 azd env set AZURE_AI_SEARCH_INDEX_NAME "retail-products"
 
 echo "Environment configured for retail deployment"
@@ -248,7 +248,7 @@ You have access to loyalty program rules, current promotions, customer tier info
 
 ---
 
-#### 5.6.2.3: Diegimo scenarijus
+#### 5.6.2.3: Diegimo skriptas
 
 Sukurkite `deploy-retail.sh`:
 
@@ -258,7 +258,7 @@ set -e
 
 echo "🚀 Starting Enterprise Retail AI Agents deployment..."
 
-# Patikrinti išankstines sąlygas
+# Patikrinti išankstinius reikalavimus
 echo "📋 Validating prerequisites..."
 if ! command -v azd &> /dev/null; then
     echo "❌ Azure Developer CLI (azd) is required"
@@ -275,7 +275,7 @@ echo "🔧 Configuring deployment environment..."
 chmod +x setup-retail.sh
 ./setup-retail.sh
 
-# Patikrinti kvotą pasirinktame regione
+# Patikrinti kvotą pasirinktoje regione
 echo "📊 Checking quota availability..."
 LOCATION=$(azd env get-values | grep AZURE_LOCATION | cut -d'=' -f2 | tr -d '"')
 echo "Deploying to region: $LOCATION"
@@ -295,12 +295,12 @@ fi
 echo "🏗️  Deploying Azure infrastructure..."
 azd up
 
-# Surinkti diegimo išvestis
+# Užfiksuoti diegimo išvestis
 echo "📝 Capturing deployment information..."
 azd show > deployment-info.txt
 
 # Gauti žiniatinklio programos URL
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 
 if [ ! -z "$APP_URL" ]; then
     echo "✅ Deployment completed successfully!"
@@ -321,7 +321,7 @@ echo "4. Test both agents with sample queries"
 
 ---
 
-#### 5.6.2.4: Konfigūracija po diegimo
+#### 5.6.2.4: Po diegimo konfigūracija
 
 Sukurkite `configure-retail-agents.sh`:
 
@@ -337,7 +337,7 @@ AGENT_ID=$(azd env get-values | grep AZURE_EXISTING_AGENT_ID | cut -d'=' -f2 | t
 echo "Project Endpoint: $PROJECT_ENDPOINT"
 echo "Primary Agent ID: $AGENT_ID"
 
-# Instrukcijos rankiniam nustatymui
+# Instrukcijos rankiniam konfigūravimui
 echo "
 🤖 Agent Configuration:
 
@@ -378,7 +378,7 @@ echo "
 "
 ```
 
-### 5.6.3: Testavimas ir tikrinimas
+### 5.6.3: Testavimas ir patvirtinimas
 
 Sukurkite `test-retail-deployment.sh`:
 
@@ -387,12 +387,12 @@ Sukurkite `test-retail-deployment.sh`:
 
 echo "🧪 Testing retail deployment..."
 
-# Įsitikinkite, kad aplinkos kintamieji nustatyti
+# Patikrinkite, ar aplinkos kintamieji yra nustatyti
 echo "📋 Checking environment configuration..."
 azd env get-values | grep -E "(AZURE_AI_|USE_|ENABLE_)"
 
-# Patikrinti žiniatinklio programos prieinamumą
-APP_URL=$(azd show --output json | jq -r '.services.api_and_frontend.project.target.url // empty')
+# Patikrinkite žiniatinklio programos prieinamumą
+APP_URL=$(azd env get-values | grep '^APP_URL=' | cut -d'=' -f2- | tr -d '"')
 if [ ! -z "$APP_URL" ]; then
     echo "🌐 Testing web application at: $APP_URL"
     HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL")
@@ -405,7 +405,7 @@ else
     echo "❌ Could not retrieve web application URL"
 fi
 
-# Vykdyti vertinimą, jei sukonfigūruota
+# Vykdykite vertinimą, jei sukonfigūruota
 if [ -f "evals/evaluate.py" ]; then
     echo "📊 Running agent evaluation..."
     cd evals
@@ -431,12 +431,12 @@ Next steps:
 
 ### 5.6.4 Tikėtini rezultatai
 
-Po šios įgyvendinimo gairės atlikimo turėsite:
+Laikydamiesi šio diegimo vadovo, jūs turėsite:
 
 1. **Išdiegta infrastruktūra:**
 
       - Microsoft Foundry projektas su modelių diegimais
-      - Container Apps talpinančios žiniatinklio programą
+      - Container Apps, talpinantis žiniatinklio programą
       - AI Search paslauga produktų katalogui
       - Application Insights stebėsenai
 
@@ -444,27 +444,27 @@ Po šios įgyvendinimo gairės atlikimo turėsite:
 
       - Pirkėjo agentas sukonfigūruotas su pagrindinėmis instrukcijomis
       - Įjungta failų paieškos galimybė
-      - Nustatytas sekimas ir stebėsena
+      - Sekimas (Tracing) ir stebėsena sukonfigūruoti
 
-3. **Paruošta pritaikymui:**
+3. **Pasiruošta pritaikymui:**
 
-      - Sąranka Lojalumo agentui pridėti
-      - Individualių instrukcijų šablonai
-      - Testavimo ir tikrinimo scenarijai
+      - Sistema Lojalumo agento pridėjimui
+      - Pritaikytų instrukcijų šablonai
+      - Testavimo ir patikros skriptai
       - Stebėsenos ir vertinimo nustatymai
 
 4. **Parengta gamybai:**
 
-      - Saugumo skenavimas naudojant red-teaming
-      - Našumo stebėsena
+      - Saugumo skenavimas su red teaming
+      - Veikimo stebėsena
       - Kokybės vertinimo sistema
-      - Keičiamo masto architektūra
+      - Išplečiama architektūra
 
-Šis pavyzdys parodo, kaip AZD šabloną galima išplėsti ir pritaikyti konkretiems įmonių scenarijams, tuo pačiu išlaikant geriausias praktikų principus saugumui, stebėsenai ir mastelio keitimui.
+Šis pavyzdys parodo, kaip AZD šabloną galima išplėsti ir pritaikyti konkretiems įmonių scenarijams, tuo pačiu išlaikant geriausias saugumo, stebėsenos ir skalavimo praktikas.
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Atsakomybės apribojimas**:
-Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalus dokumentas jo gimtąja kalba turėtų būti laikomas pagrindiniu šaltiniu. Dėl svarbios informacijos rekomenduojame pasinaudoti profesionalaus vertėjo paslaugomis. Mes neatsakome už jokius nesusipratimus ar neteisingas interpretacijas, kylančias dėl šio vertimo naudojimo.
+**Disclaimer**:
+Šis dokumentas buvo išverstas naudojant dirbtinio intelekto vertimo paslaugą [Co-op Translator](https://github.com/Azure/co-op-translator). Nors stengiamės užtikrinti tikslumą, atkreipkite dėmesį, kad automatizuoti vertimai gali turėti klaidų ar netikslumų. Originalų dokumentą jo gimtąja kalba reikėtų laikyti autoritetingu šaltiniu. Dėl svarbios informacijos rekomenduojamas profesionalus žmogaus vertimas. Mes neatsakome už jokius nesusipratimus ar neteisingus aiškinimus, kilusius dėl šio vertimo naudojimo.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

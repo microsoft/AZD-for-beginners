@@ -1,47 +1,47 @@
-# AZD ഉപയോഗിച്ച് Azure റിസോഴ്‌സുകൾ പ്രൊവിഷൻ ചെയ്യൽ
+# AZD ഉപയോഗിച്ച് Azure റിസോഴ്സുകൾ പ്രൊവിഷൻ ചെയ്യൽ
 
 **അദ്ധ്യായ നാവിഗേഷൻ:**
-- **📚 കോഴ്‌സ് ഹോം**: [AZD തുടക്കക്കാർക്കുള്ളത്](../../README.md)
-- **📖 നിലവിലെ അദ്ധ്യായം**: അദ്ധ്യായം 4 - ഇൻഫ്രാസ്ട്രക്ചർ ആസ് കോഡ് & ഡിപ്ലോയ്‌മെന്റ്
-- **⬅️ മുൻപത്തെ**: [ഡिप്ലോയ്മെന്റ് ഗൈഡ്](deployment-guide.md)
-- **➡️ അടുത്ത അദ്ധ്യായം**: [അദ്ധ്യായം 5: മൾട്ടി-ഏജന്റ് AI പരിഹാരങ്ങൾ](../../examples/retail-scenario.md)
-- **🔧 ബന്ധപ്പെട്ടു**: [അദ്ധ്യായം 6: പ്രീ-ഡിപ്ലോയ്മെന്റ് പരിശോധന](../chapter-06-pre-deployment/capacity-planning.md)
+- **📚 കോഴ്‌സ് ഹോം**: [AZD For Beginners](../../README.md)
+- **📖 നിലവിലെ അദ്ധ്യായം**: അദ്ധ്യായം 4 - ഇൻഫ്രാസ്ട്രക്ചർ അസ്കോഡ് & ഡിപ്ലോയ്മെന്റ്
+- **⬅️ മുൻപത്തെ**: [ഡിപ്ലോയ്മെന്റ് ഗൈഡ്](deployment-guide.md)
+- **➡️ അടുത്ത അദ്ധ്യായം**: [അദ്ധ്യായം 5: മൾട്ടി-എജന്റ് എഐ സൊല്യൂഷൻസ്](../../examples/retail-scenario.md)
+- **🔧 ബന്ധപ്പെട്ടത്**: [അദ്ധ്യായം 6: പ്രീ-ഡിപ്ലോയ്മെന്റ് വാലിഡേഷൻ](../chapter-06-pre-deployment/capacity-planning.md)
 
 ## പരിചയം
 
-ഈ സമഗ്ര ഗൈഡ് Azure Developer CLI ഉപയോഗിച്ച് Azure റിസോഴ്‌സുകൾ പ്രൊവിഷൻ ചെയ്യാനും മാനേജ് ചെയ്യാനും നിങ്ങൾക്കാവശ്യമായ എല്ലാ കാര്യങ്ങളും ഉൾക്കൊള്ളുന്നു. അടിസ്ഥാന റിസോഴ്‌സ് സൃഷ്ടിയിലൂടെ മുതൽ Bicep, ARM templates, Terraform, Pulumi എന്നിവ ഉപയോഗിച്ച് കോർപ്പറേറ്റും എന്റർപ്രൈസ്-ഗ്രേഡ് ഇൻഫ്രാസ്ട്രക്ചർ ആർക്കിടെക്ചറുകൾ വരെ Infrastructure as Code (IaC) പാറ്റേണുകൾ നടപ്പാക്കുന്നത് പഠിക്കാം.
+Azure Developer CLI ഉപയോഗിച്ച് Azure റിസോഴ്സുകൾ പ്രൊവിഷൻ ചെയ്യുന്നതും മാനേജ്മെന്റും ചെയ്യുന്നതുമായി ബന്ധപ്പെട്ട എല്ലാ വിഷങ്ങളെയും ഈ സമഗ്ര മാർഗനിർദ്ദേശം ഉൾക്കൊള്ളുന്നു. Bicep, ARM ടെംപ്ലേറ്റുകൾ, ടെറാഫോം, പുലുമി എന്നിവ ഉപയോഗിച്ച് അടിസ്ഥാന റിസോഴ്സ് സൃഷ്ടിയിൽ നിന്ന് പ്രഗത്ഭ എന്റർപ്രൈസ്-ഗ്രേഡ് ഇൻഫ്രാസ്ട്രക്ചർ ആർക്കിടെക്ചറുകൾ വരെ ഇൻഫ്രാസ്ട്രക്ചർ അസ്കോഡ് (IaC) പാറ്റേണുകൾ നടപ്പിലാക്കുന്നത് പഠിക്കുക.
 
 ## പഠന ലക്ഷ്യങ്ങൾ
 
-By completing this guide, you will:
-- Infrastructure as Code ന്റെ സിദ്ധാന്തങ്ങളും Azure റിസോഴ്‌സ് പ്രൊവിഷനിംഗും ആഴത്തിൽ പഠിക്കുക
-- Azure Developer CLI പിന്തുണയ്ക്കുന്ന വിവിധ IaC പ്രൊവൈഡറുകൾ മനസ്സിലാക്കുക
-- സാധാരണ ആപ്ലിക്കേഷൻ ആർക്കിടെക്ചറുകൾക്കായി Bicep ടെംപ്ലേറ്റുകൾ രൂപകൽപ്പന ചെയ്ത് നടപ്പാക്കുക
-- റിസോഴ്‌സ് പാരാമീറ്ററുകൾ, വേരിയബിളുകൾ, പരിസ്ഥിതി-നിര്ദിഷ്ട ക്രമീകരണങ്ങൾ കോൺഫിഗർ ചെയ്യുക
-- നെറ്റ്വർക്കിംഗ്, സുരക്ഷ എന്നിവ ഉൾപ്പെടുന്ന ആഡ്വാൻസ്ഡ് ഇൻഫ്രാസ്ട്രക്ചർ പാറ്റേണുകൾ നടപ്പാക്കുക
-- റിസോഴ്‌സ് ലൈഫ്‌സൈക്കിൾ, അപ്‌ഡേറ്റുകൾ, ഡിപ്പെൻഡൻസി പരിഹാരം മാനേജ് ചെയ്യുക
+ഈ മാർഗനിർദ്ദേശം പൂർണമാക്കുമ്പോൾ, നിങ്ങൾ ആകും:
+- ഇൻഫ്രാസ്ട്രക്ചർ അസ്കോഡ് അടിസ്ഥാനങ്ങൾയും Azure റിസോഴ്‌സ് പ്രൊവിഷനിംഗും ആസ്വദിക്കുക
+- Azure Developer CLI പിന്തുണക്കുന്ന പല IaC പ്രൊവൈഡറുകളേയും മനസ്സിലാക്കുക
+- സാധാരണ അപ്ലിക്കേഷൻ ആർക്കിടെക്ചറുകൾക്കായി Bicep ടെംപ്ലേറ്റുകൾ രൂപകല്പന ചെയ്യുകയും നടപ്പിലാക്കുകയും ചെയ്യുക
+- റിസോഴ്‌സ് പാരാമീറ്ററുകൾ, വേരിയബിളുകൾ, പരിസ്ഥിതി-സ്വഭാവമുള്ള ക്രമീകരണങ്ങൾ ക്രമീകരിക്കുക
+- നെറ്റ്വർകിംഗ്, സുരക്ഷ ഉൾപ്പെടെയുള്ള മെച്ചപ്പെട്ട ഇൻഫ്രാസ്ട്രക്ചർ പാറ്റേണുകൾ നടപ്പിലാക്കുക
+- റിസോഴ്‌സ് ലൈഫ്‌സൈകിള്‍, അപ്‌ഡേറ്റുകൾ, ഡിപ്പെൻഡൻസി പരിഹാരം മാനേജ് ചെയ്യുക
 
 ## പഠന ഫലങ്ങൾ
 
-Upon completion, you will be able to:
-- Bicep, ARM ടेम്പ്ലേറ്റുകൾ ഉപയോഗിച്ച് Azure ഇൻഫ്രാസ്ട്രക്ചർ രൂപകൽപ്പന ചെയ്യാനും പ്രൊവിഷൻ ചെയ്യാനും സാധിക്കാം
-- ശരിയായ റിസോഴ്‌സ് ആശ്രയങ്ങളോടുകൂടെ സങ്കീർണ്ണ മൾട്ടി-സെർവിസ് ആർക്കിടെക്ചറുകൾ കോൺഫിഗർ ചെയ്യുക
-- നിരവധി പരിസ്ഥിതികൾക്കും കോൺഫിഗറേഷനുകൾക്കുമുള്ള പാരാമറ്ററൈസ്ഡ് ടെംപ്ലേറ്റുകൾ നടപ്പിലാക്കുക
-- ഇൻഫ്രാസ്ട്രക്ചർ പ്രൊവിഷനിംഗ് പ്രശ്നങ്ങൾ പരിഹരിച്ച് ഡിപ്ലോയ്മെന്റ് പരാജയങ്ങൾ പരിഹരിക്കാൻ കഴിയും
-- Azure Well-Architected Framework ന്റെ സിദ്ധാന്തങ്ങൾ ഇൻഫ്രാസ്ട്രക്ചർ രൂപകൽപ്പനയില്‍ പ്രയോഗിക്കുക
-- ഇൻഫ്രാസ്ട്രക്ചർ അപ്‌ഡേറ്റുകൾ കൈകാര്യം ചെയ്യുകയും ഇൻഫ്രാസ്ട്രക്ചർ വേർഷണിംഗ് തന്ത്രങ്ങൾ നടപ്പാക്കുകയും ചെയ്യുക
+പഠനം പൂർത്തിയാക്കിയതിനു ശേഷം, നിങ്ങൾക്കും കഴിയും:
+- Bicep, ARM ടെംപ്ലേറ്റുകൾ ഉപയോഗിച്ച് Azure ഇൻഫ്രാസ്ട്രക്ചർ രൂപകൽപ്പന ചെയ്യുകയും പ്രൊവിഷൻ ചെയ്യുകയും ചെയ്യുക
+- യോജിച്ച റിസോഴ്‌സ് ഡിപ്പെൻഡൻസികളോടെ സങ്കീർണ്ണ മൾട്ടി-സർവിസ് ആർക്കിടെക്ചറുകൾ ക്രമീകരിക്കുക
+- നിരവധി പരിസ്ഥിതികള്‍ക്കും ക്രമീകരണങ്ങൾക്കും പാരാമീറ്ററൈസ്ഡ് ടെംപ്ലേറ്റുകൾ നടപ്പിലാക്കുക
+- ഇൻഫ്രാസ്ട്രക്ചർ പ്രൊവിഷനിംഗ് പ്രശ്നങ്ങൾ പരിശീലിച്ച് ഡിപ്ലോയ്മെന്റ് പരാജയങ്ങൾ പരിഹരിക്കുക
+- Azure സുസ്ഥിരമായ ആർക്കിടെക്ചർ ഫ്രെയിംവർക്ക് തത്വങ്ങൾ ഇൻഫ്രാസ്ട്രക്ചർ ഡിസൈനിൽ പ്രയോഗിക്കുക
+- ഇൻഫ്രാസ്ട്രക്ചർ അപ്‌ഡേറ്റുകൾ മാനേജ് ചെയ്യുകയും ഇൻഫ്രാസ്ട്രക്ചർ വേർഷനിംഗ് രീതികള്‍ നടപ്പിലാക്കുകയും ചെയ്യുക
 
 ## ഇൻഫ്രാസ്ട്രക്ചർ പ്രൊവിഷനിംഗ് അവലോകനം
 
-Azure Developer CLI പല Infrastructure as Code (IaC) പ്രൊവൈഡറുകളും പിന്തുണയ്ക്കുന്നു:
-- **Bicep** (ശുപാർശ ചെയ്യപ്പെടുന്നു) - Azure ന്റെ ഡൊമെയ്ൻ-സ്പെസിഫിക് ഭാഷ
-- **ARM Templates** - JSON-ആധാരമാക്കിയ Azure Resource Manager ടെംപ്ലേറ്റുകൾ
+Azure Developer CLI പല ഇൻഫ്രാസ്ട്രക്ട്ചർ അസ്കോഡ് (IaC) പ്രൊവൈഡറുകളും പിന്തുണയ്ക്കുന്നു:
+- **Bicep** (ശുപാർശ ചെയ്തു) - Azureന്റെ ഡൊമെയ്ൻ-സ്പസിഫിക് ലാംഗ്വേജ്
+- **ARM Templates** - JSON-അടിസ്ഥാനപ്പെട്ട Azure റിസോഴ്‌സ് മാനേജർ ടെംപ്ലേറ്റുകൾ
 - **Terraform** - മൾട്ടി-ക്ലൗഡ് ഇൻഫ്രാസ്ട്രക്ചർ ടൂൾ
-- **Pulumi** - പ്രോഗ്രാമിങ് ഭാഷകൾ ഉപയോഗിച്ച് ആധുനിക Infrastructure as Code
+- **Pulumi** - പ്രോഗ്രാമിങ് ഭാഷകളോടുകൂടിയ ആധുനിക ഇൻഫ്രാസ്ട്രക്ചർ അസ്കോഡ്
 
 ## Azure റിസോഴ്‌സുകൾ മനസ്സിലാക്കൽ
 
-### റിസോഴ്‌സ് ശ്രേണിക്രമം
+### റിസോഴ്‌സ് ക്രമക്രമം
 ```
 Azure Account
 └── Subscriptions
@@ -49,12 +49,12 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### അപ്ലിക്കേഷനുകൾക്കുള്ള പൊതുവായ Azure സേവനങ്ങൾ
-- **Compute**: App Service, Container Apps, Functions, Virtual Machines
-- **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Networking**: Virtual Network, Application Gateway, CDN
-- **Security**: Key Vault, Application Insights, Log Analytics
-- **AI/ML**: Cognitive Services, OpenAI, Machine Learning
+### ആപ്ലിക്കേഷനുകൾക്കുള്ള പൊതുവായ Azure സേവനങ്ങൾ
+- **കമ്പ്യൂട്ട്**: ആപ് സർവീസ്, കണ്ടെയ്‌നർ ആപ്‌സ്, ഫങ്ഷൻസ്, വർച്ച്വൽ മെഷീനുകൾ
+- **സ്റ്റോറേജ്**: സ്റ്റോറേജ് അക്കൗണ്ട്, കോസ്‌മോസ് ഡിബി, SQL ഡാറ്റാബേസ്, പോസ്റ്റ്‌ഗ്രെഎസ്‌എൽ
+- **നെറ്റ്വർകിംഗ്**: വർച്ച്വൽ നെറ്റ്‌വർക്ക്, അപ്ലിക്കേഷൻ ഗേറ്റ്വേ, CDN
+- **സുരക്ഷ**: കീ വാൾറ്റ്, അപ്ലിക്കേഷൻ ഇൻസൈറ്റ്‌സ്, ലോഗ് അനാലിറ്റിക്സ്
+- **AI/ML**: കോഗ്നിറ്റീവ് സർവീസസ്, ഓപ്പൺAI, മഷീൻ ലേണിംഗ്
 
 ## Bicep ഇൻഫ്രാസ്ട്രക്ചർ ടെംപ്ലേറ്റുകൾ
 
@@ -128,9 +128,9 @@ output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
 output WEB_NAME string = webApp.name
 ```
 
-### അഡ്വാൻസ്ഡ് Bicep പാറ്റേണുകൾ
+### പ്രഗത്ഭ Bicep പാറ്റേണുകൾ
 
-#### മോള്യൂലാർ ഇൻഫ്രാസ്ട്രക്ചർ
+#### മിയ്യൂളാർ ഇൻഫ്രാസ്ട്രക്ചർ
 ```bicep
 // infra/modules/app-service.bicep
 @description('App Service configuration')
@@ -179,7 +179,7 @@ module webAppModule 'modules/app-service.bicep' = {
 }
 ```
 
-#### നിബന്ധനാപരമായ റിസോഴ്‌സ് സൃഷ്ടി
+#### നിബന്ധനാപൂർണ്ണ റിസോഴ്‌സ് സൃഷ്ടി
 ```bicep
 @description('Whether to create a database')
 param createDatabase bool = true
@@ -202,7 +202,7 @@ resource database 'Microsoft.Sql/servers/databases@2021-11-01' = if (createDatab
 
 ## 🗃️ ഡാറ്റാബേസ് പ്രൊവിഷനിംഗ്
 
-### Cosmos DB
+### കോസ്‌മോസ് DB
 ```bicep
 resource cosmosAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
   name: '${applicationName}-cosmos-${resourceToken}'
@@ -251,7 +251,7 @@ resource todoContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/conta
 }
 ```
 
-### PostgreSQL
+### പോസ്റ്റ്‌ഗ്രെഎസ്‌എൽ
 ```bicep
 resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' = {
   name: '${applicationName}-postgres-${resourceToken}'
@@ -298,9 +298,9 @@ resource firewallRule 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2
 }
 ```
 
-## 🔒 സുരക്ഷയും രഹസ്യങ്ങളുടെയും മാനേജ്മെന്റ്
+## 🔒 സുരക്ഷയും രഹസ്യ മാനേജ്മെന്റും
 
-### Key Vault ഇന്റഗ്രേഷൻ
+### കീ വാൾറ്റ് ഇന്റഗ്രേഷൻ
 ```bicep
 resource keyVault 'Microsoft.KeyVault/vaults@2023-02-01' = {
   name: '${applicationName}-kv-${resourceToken}'
@@ -342,7 +342,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Managed Identity കോൺഫിഗറേഷൻ
+### മാനേജ്ഡ് ഐഡന്റിറ്റി കോൺഫിഗറേഷൻ
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -368,9 +368,9 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 }
 ```
 
-## 🌍 നെറ്റ്വർക്കിംഗ് மற்றும் കണക്ടിവിറ്റി
+## 🌍 നെറ്റ്വർകിംഗ് & കണക്ടിവിറ്റി
 
-### Virtual Network കോൺഫിഗറേഷൻ
+### വർച്ച്വൽ നെറ്റ്‌വർക്ക് കോൺഫിഗറേഷൻ
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -433,7 +433,7 @@ resource privateDnsZoneLink 'Microsoft.Network/privateDnsZones/virtualNetworkLin
 }
 ```
 
-### SSL ഉള്ള Application Gateway
+### SSL ഈടാക്കിയ അപ്ലിക്കേഷൻ ഗേറ്റ്വേ
 ```bicep
 resource publicIP 'Microsoft.Network/publicIPAddresses@2023-04-01' = {
   name: '${applicationName}-agw-pip-${resourceToken}'
@@ -496,9 +496,9 @@ resource applicationGateway 'Microsoft.Network/applicationGateways@2023-04-01' =
 }
 ```
 
-## 📊 നിരീക്ഷണവും ഓബ്‌സർവബിലിറ്റിയും
+## 📊 മോണിറ്ററിംഗ് & പ്രേക്ഷണക്ഷമത
 
-### Application Insights
+### അപ്ലിക്കേഷൻ ഇൻസൈറ്റ്‌സ്
 ```bicep
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
   name: '${applicationName}-logs-${resourceToken}'
@@ -527,7 +527,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 output APPLICATION_INSIGHTS_CONNECTION_STRING string = applicationInsights.properties.ConnectionString
 ```
 
-### കസ്റ്റം മെട്രിക്സ് & അലേർട്ടുകൾ
+### കസ്റ്റം മെട്രിക്‌സ് & അലേർട്ടുകൾ
 ```bicep
 resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   name: '${applicationName}-cpu-alert'
@@ -561,9 +561,9 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-## 🔧 പരിസ്ഥിതിയില്‍ പ്രത്യേകമായ കോൺഫിഗറേഷനുകൾ
+## 🔧 പരിസ്ഥിതി-സ്വഭാവമുള്ള ക്രമീകരണങ്ങൾ
 
-### വിവിധ പരിസ്ഥിതികൾക്കുള്ള പാരാമീറ്റർ ഫയലുകൾ
+### വ്യത്യസ്ത പരിസ്ഥിതികൾക്കായുള്ള പാരാമീറ്റർ ഫയലുകൾ
 ```json
 // infra/main.parameters.dev.json
 {
@@ -617,7 +617,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### നിബന്ധനാപരമായ റിസോഴ്‌സ് പ്രൊവിഷനിംഗ്
+### നിബന്ധനാപൂർണ്ണ റിസോഴ്‌സ് പ്രൊവിഷനിംഗ്
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,9 +649,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 അഡ്വാൻസ്ഡ് പ്രൊവിഷനിംഗ് പാറ്റേണുകൾ
+## 🚀 പ്രഗത്ഭ പ്രൊവിഷനിംഗ് പാറ്റേണുകൾ
 
-### മൾട്ടി-റീജിയൻ ഡിപ്ലോയ്‌മെന്റ്
+### മൾട്ടി-റീജിയൺ ഡിപ്ലോയ്മെന്റ്
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -755,42 +755,41 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 ഇൻഫ്രാസ്ട്രക്ചർ പ്രിവ്യൂ & സ്ഥിരീകരണം (പുതിയത്)
+## 🧪 ഇൻഫ്രാസ്ട്രക്ചർ പ്രിവ്യു & വാലിഡേഷൻ (പുതിയത്)
 
-### ഡിപ്ലോയ്‌മെന്റിന് മുമ്പ് ഇൻഫ്രാസ്ട്രക്ചർ മാറ്റങ്ങൾ പ്രിവ്യൂ ചെയ്യുക
+### ഡിപ്ലോയ്മെന്റ് മുമ്പ് ഇൻഫ്രാസ്ട്രക്ചർ മാറ്റങ്ങൾ പ്രിവ്യൂ ചെയ്‌യുക
 
-The `azd provision --preview` feature lets you **ഇൻഫ്രാസ്ട്രക്ചർ പ്രൊവിഷനിംഗ് അനുകൃതിചെയ്യുക** before actually deploying resources. It's similar in spirit to `terraform plan` or `bicep what-if`, giving you a **ഡ്രൈ-റൺ കാഴ്ച** of what changes would be made to your Azure environment.
+`azd provision --preview` ഫീച്ചർ സ്രഷ്ടിക്കുന്ന പദവി മുതലിൽ **ഇൻഫ്രാസ്ട്രക്ചർ പ്രൊവിഷനിംഗ് സിമുലേറ്റ്** ചെയ്യാൻ നിങ്ങള്ക്ക് അനുവദിക്കുന്നു. ഇത് `terraform plan` അല്ലെങ്കിൽ `bicep what-if` എന്നതുപോലെയാണ്, നിങ്ങളുടെ Azure പരിസ്ഥിതിയിലെ എന്ത് മാറ്റങ്ങൾ സംഭവിക്കുമെന്നതിനൊരു **ഡ്രൈ-റൺ കാഴ്ച** നൽകുന്നു.
 
-#### 🛠️ ഇത് എന്താണ് ചെയ്യുന്നത്
-- **നിങ്ങളുടെ IaC ടെംപ്ലേറ്റുകൾ വിശകലനം ചെയ്യുന്നു** (Bicep or Terraform)
-- **റിസോഴ്‌സ് മാറ്റങ്ങളുടെ പ്രിവ്യൂ കാണിക്കുന്നു**: ആഡ് ചെയ്യലുകൾ, നീക്കലുകൾ, അപ്ഡേറ്റുകൾ
-- **മാറ്റങ്ങൾ പ്രയോഗിക്കുന്നില്ല** — ഇത് റീഡ്-ഒൺലിയും പ്രവർത്തിപ്പിക്കാൻ സുരക്ഷിതവുമാണ്
+#### 🛠️ ഇത് ചെയ്യുന്നത്
+- **നിങ്ങളുടെ IaC ടെംപ്ലേറ്റുകൾ വിശകലനം ചെയ്യുന്നു** (Bicep അല്ലെങ്കിൽ Terraform)
+- **റിസോഴ്‌സ് മാറ്റങ്ങളുടെ പ്രിവ്യൂ കാണിക്കുന്നു**: കൂട്ടിച്ചേർക്കൽ, നീക്കം, അപ്ഡേറ്റുകൾ
+- **മാറ്റങ്ങൾ നടപ്പിലാക്കാറില്ല** — ഇത് വായിച്ചറിയാനുള്ളതാണ്, സുരക്ഷിതവും പ്രവർത്തിക്കാനും കഴിയുന്നതാണ്
 
-#### � ഉപയോഗ കേസുകൾ
+#### ഉപയോഗം
 ```bash
-# ഡിപ്ലോയ് ചെയ്യുന്നതിന് മുമ്പ് അടിസ്ഥാന സൗകര്യത്തിലെ മാറ്റങ്ങൾ മുൻകൂട്ടി കാണുക
+# വിന്യാസം നടപ്പാക്കുന്നതിനുമുമ്പ് ഫെച് ഘടന മാറ്റങ്ങൾ
 azd provision --preview
 
-# വിശദമായ ഔട്ട്പുട്ടോടുകൂടി മുൻകൂട്ടി കാണുക
-azd provision --preview --output json
-
-# നിശ്ചിത പരിസ്ഥിതിക്ക് വേണ്ടി മുൻകൂട്ടി കാണുക
-azd provision --preview --environment production
+# പ്രത്യേക പരിസ്ഥിതിക്ക് ഫ്രിവ്യൂ
+azd provision --preview -e production
 ```
 
-This command helps you:
-- **റിസോഴ്‌സ് കമ്മിറ്റ് ചെയ്യുന്നതിന് മുൻപ് ഇൻഫ്രാസ്ട്രക്ചർ മാറ്റങ്ങൾ സാധൂകരിക്കുക**
-- **ഡെവലപ്‌മെന്റ് ചക്രത്തിൽ തെറ്റായ കോൺഫിഗറേഷൻ നേരത്തെ പിടികൂടുക**
-- **ടീം പരിസരങ്ങളിൽ സുരക്ഷിതമായി സഹകരിക്കുക**
-- **അപ്രതീക്ഷിതത്വങ്ങളില്ലാതെ കുറഞ്ഞ-പ്രിവിലേജ് ഡിപ്ലോയ്മെന്റുകൾ ഉറപ്പുവരുത്തുക**
+ഈ കമാൻഡ് സഹായിക്കുന്നു:
+- **റിസോഴ്‌സ് സൃഷ്ടിക്കുന്നതിന് മുമ്പ് ഇൻഫ്രാസ്ട്രക്ചർ മാറ്റങ്ങൾ സാധുത പരിശോധന ചെയ്യുക**
+- **ഡവലപ്പ്മെന്റ് ചക്രത്തിൽ പിശകുകൾ നേരത്തെ പിടികൂടുക**
+- **ടീം പരിസ്ഥിതികളിൽ സുരക്ഷിതമായി സഹകരിക്കുക**
+- **അപ്രതീക്ഷിതത്വം ഇല്ലാതെ ഏറ്റവും കുറഞ്ഞ അധികാരത്തിലൂടെ ഡിപ്ലോയ്മെന്റ് ഉറപ്പാക്കുക**
 
-It's especially useful when:
-- സങ്കീർണ്ണ മൾട്ടി-സെർവിസ് പരിസ്ഥിതികളിൽ പ്രവർത്തിക്കുമ്പോൾ
-- പ്രൊഡക്ഷൻ ഇൻഫ്രാസ്ട്രക്ചറിൽ മാറ്റങ്ങൾ വരുത്തുമ്പോൾ
-- PR അംഗീകാരത്തിന് മുമ്പ് ടെംപ്ലേറ്റ് തിരുത്തലുകൾ സാധൂകരിക്കുമ്പോൾ
-- ഇൻഫ്രാസ്ട്രക്ചർ പാറ്റേണുകൾ സംബന്ധിച്ച് പുതിയ ടീമ്സഭാക്കളെ പരിശീലിപ്പിക്കുമ്പോളായി
+വിശേഷിച്ച് ഇത് ഉപയോഗപ്രദമാണ്:
+- സങ്കീർണ്ണ മൾട്ടി-സർവിസ് പരിസ്ഥിതികളിൽ പ്രവർത്തിക്കുമ്പോൾ
+- ഉൽപ്പാദന ഇൻഫ്രാസ്ട്രക്ചറിൽ മാറ്റങ്ങൾ ചെയ്യുമ്പോൾ
+- ടെംപ്ലേറ്റ് മാറ്റങ്ങൾ PR അംഗീകാരം előtt പരിശോദിക്കുമ്പോൾ
+- പുതിയ ടീം അംഗങ്ങൾക്ക് ഇൻഫ്രാസ്ട്രക്ചർ പാറ്റേണുകൾ പരിശീലിപ്പിക്കുമ്പോൾ
 
-### Example Preview Output
+### ഉദാഹരണ പ്രിവ്യൂ ഔട്ട്പുട്ട്
+കൃത്യമായ പ്രിവ്യൂ ഔട്ട്പുട്ട് പ്രൊവൈഡർ, പ്രോജക്റ്റ് ഘടന അനുസരിച്ച് വ്യത്യാസമുണ്ടാകാം, എന്നാല്‍ ഫലം ഡയലേക്ക് പ്രപോസ്ഡ് മാറ്റങ്ങൾ വ്യക്തമായി തിരിച്ചറിയണം.
+
 ```bash
 $ azd provision --preview
 
@@ -809,28 +808,27 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
 ```
 
-## �🔄 റിസോഴ്‌സ് അപ്ഡേറ്റുകളും മൈഗ്രേഷനുകളും
+## 🔄 റിസോഴ്‌സ് അപ്‌ഡേറ്റ് & മൈഗ്രേഷൻസ്
 
-### സുരക്ഷിതമായ റിസോഴ്‌സ് അപ്ഡേറ്റുകൾ
+### സുരക്ഷിത റിസോഴ്‌സ് അപ്‌ഡേറ്റുകൾ
 ```bash
-# മുൻപരീക്ഷണമായി ഇൻഫ്രാസ്ട്രക്ഷർ മാറ്റങ്ങൾ ആദ്യം പ്രിവ്യൂ ചെയ്യുക (ശിപാർശ ചെയ്യുന്നു)
+# അടിസ്ഥാനസംഗ്രഹം മാറ്റങ്ങൾ ആദ്യം മുമ്പോട്ട് കാണുക (സംശോധന നിർദ്ദേശിച്ചിരിക്കുന്നു)
 azd provision --preview
 
-# പ്രിവ്യൂ സ്ഥിരീകരിച്ചതിന് ശേഷം മാറ്റങ്ങൾ പ്രയോഗിക്കുക
+# മുമ്പോട്ടുള്ള സ്ഥിരീകരണത്തിന് ശേഷം മാറ്റങ്ങൾ പ്രയോജനം ചെയ്യുക
 azd provision --confirm-with-no-prompt
 
-# റോൾബാക്ക് ചെയ്യാൻ Git ഉപയോഗിച്ച് ഇൻഫ്രാസ്ട്രക്ഷർ മാറ്റങ്ങൾ തിരിച്ചു മടക്കുക:
-git revert HEAD  # അവസാന ഇൻഫ്രാസ്ട്രക്ഷർ കമ്മിറ്റ് തിരിച്ചു മടക്കുക
-azd provision    # മുന്‍പുള്ള ഇൻഫ്രാസ്ട്രക്ഷർ നില പ്രയോഗിക്കുക
+# തിരിച്ചുപോയികാനുള്ളതിന്, Git ഉപയോഗിച്ച് അടിസ്ഥാനസംഗ്രഹം മാറ്റങ്ങൾ മടക്കി വെക്കുക:
+git revert HEAD  # അവസാനത്തെ അടിസ്ഥാനസംഗ്രഹം കമ്മിറ്റ് മടക്കി വെക്കുക
+azd provision    # മുമ്പത്തെ അടിസ്ഥാനസംഗ്രഹം നില പ്രയോജനം ചെയ്യുക
 ```
 
-### ഡാറ്റാബേസ് മൈഗ്രേഷനുകൾ
+### ഡാറ്റാബേസ് മൈഗ്രേഷൻസ്
 ```bicep
 resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
   name: 'database-migration'
@@ -859,9 +857,9 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🎯 മികച്ച രീതികൾ
+## 🎯 മികച്ച പ്രാക്ടീസുകൾ
 
-### 1. റിസോഴ്‌സ് നാമകരണം മാനദണ്ഡങ്ങൾ
+### 1. റിസോഴ്‌സ് നെയ്മിംഗ് കൺവെൻഷനുകൾ
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -872,7 +870,7 @@ var naming = {
 }
 ```
 
-### 2. ടാഗിംഗ് തന്ത്രം
+### 2. ടാഗിംഗ് സ്ട്രാറ്റജി
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -885,7 +883,7 @@ var commonTags = {
 }
 ```
 
-### 3. പാരാമീറ്റർ സാധൂകരണം
+### 3. പാരാമീറ്റർ കാര്യക്ഷമത പരിശോധന
 ```bicep
 @description('Environment name')
 @minLength(3)
@@ -901,7 +899,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. ഔട്ട്‌പുട്ട് സംഘടന
+### 4. ഔട്ട്പുട്ട് സംഘടന
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -916,29 +914,29 @@ output DATABASE_NAME string = database.name
 output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${keyVault.name};SecretName=database-connection-string)'
 ```
 
-## അടുത്ത ഘട്ടങ്ങൾ
+## അടുത്ത ചുവട്
 
-- [പ്രീ-ഡിപ്ലോയ്മെന്റ് പ്ലാനിംഗ്](../chapter-06-pre-deployment/capacity-planning.md) - റിസോഴ്‌സ് ലഭ്യത സ്ഥിരീകരിക്കുക
+- [പ്രീ-ഡിപ്ലോയ്മെന്റ് പ്ലാനിംഗ്](../chapter-06-pre-deployment/capacity-planning.md) - റിസോഴ്‌സ് ലഭ്യത സാധുത പരിശോധിക്കുക
 - [സാധാരണ പ്രശ്നങ്ങൾ](../chapter-07-troubleshooting/common-issues.md) - ഇൻഫ്രാസ്ട്രക്ചർ പ്രശ്നങ്ങൾ പരിഹരിക്കുക
-- [ഡീബഗിംഗ് ഗൈഡ്](../chapter-07-troubleshooting/debugging.md) - പ്രൊവിഷനിംഗ് പ്രശ്നങ്ങൾ ഡീബഗ് ചെയ്യുക
-- [SKU തിരഞ്ഞെടുക്കൽ](../chapter-06-pre-deployment/sku-selection.md) - തക്ക സര്‍വീസ് ടിയറുകൾ തിരഞ്ഞെടുക്കുക
+- [ഡീബഗ് ഗൈഡ്](../chapter-07-troubleshooting/debugging.md) - പ്രൊവിഷനിംഗ് പ്രശ്നങ്ങൾ ഡീബഗ് ചെയ്യുക
+- [SKU തിരഞ്ഞെടുക്കൽ](../chapter-06-pre-deployment/sku-selection.md) - അനുയോജ്യ സർവീസ് ടിയറുകൾ തിരഞ്ഞെടുക്കുക
 
-## അധിക വിഭവങ്ങൾ
+## അധിക റസോഴ്‌സുകൾ
 
-- [Azure Bicep Documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager Templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
-- [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)
-- [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
+- [Azure Bicep ഡോക്യുമെന്റേഷൻ](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
+- [Azure Resource Manager ടെംപ്ലേറ്റുകൾ](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure ആർക്കിടെക്ചർ സെന്റർ](https://learn.microsoft.com/en-us/azure/architecture/)
+- [Azure സുസ്ഥിരമായ ആർക്കിടെക്ചർ ഫ്രെയിംവർക്ക്](https://learn.microsoft.com/en-us/azure/well-architected/)
 
 ---
 
 **നാവിഗേഷൻ**
 - **മുൻപത്തെ പാഠം**: [ഡിപ്ലോയ്മെന്റ് ഗൈഡ്](deployment-guide.md)
-- **അടുത്ത പാഠം**: [കപ്പാസിറ്റി പ്ലാനിംഗ്](../chapter-06-pre-deployment/capacity-planning.md)
+- **അടുത്ത പാഠം**: [ക്യാപാസിറ്റി പ്ലാനിംഗ്](../chapter-06-pre-deployment/capacity-planning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-ഡിസ്‌ക്ലെയിമർ:
-ഈ രേഖ AI പരിഭാഷാ servizio [Co-op Translator](https://github.com/Azure/co-op-translator) ഉപയോഗിച്ച് പരിഭാഷപ്പെടുത്തിയതാണ്. നാം ശരിയായ വിധത്തിലാക്കാൻ ശ്രമിക്കുമ്പോഴും, ഓട്ടോമേറ്റഡ് പരിഭാഷകളിൽ പിശകുകൾ അല്ലെങ്കിൽ അസാധുതകൾ ഉണ്ടാകാമെന്ന് ദയവായി ശ്രദ്ധിക്കുക. യഥാർത്ഥമായി മൗലികഭാഷയിൽ ഉള്ള ഡോക്യുമെന്റ് പ്രാമാണിക സ്രോതസ്സായി കണക്കാക്കപ്പെടും. നിർണായക വിവരങ്ങൾക്ക്, പ്രൊഫഷണൽ മനുഷ്യപരിഭാഷ ശിപാർശ ചെയ്യപ്പെടുന്നു. ഈ പരിഭാഷ ഉപയോഗിച്ചതിലൂടെ ഉണ്ടാകുന്ന ഏതെങ്കിലും തെറ്റിദ്ധാരണങ്ങൾക്കും തെറ്റായ വ്യാഖ്യാനങ്ങൾക്കും ഞങ്ങൾ ഉത്തരവാദികളല്ല.
+**പ്രത്യാഖ്യാനം**:  
+ഈ ദസ്താവേജ് AI പരിഭാഷാ സേവനം [Co-op Translator](https://github.com/Azure/co-op-translator) ഉപയോഗിച്ച് പരിഭാഷപ്പെടുത്തിയതാണ്. നാം കൃത്യത стремിക്കുന്നു എങ്കിലും, യന്ത്രപരിഭാഷകളിൽ പിഴവ് അല്ലെങ്കിൽ അച്ചടക്കസമ്മതത്വമില്ലാതാകാം. പ്രാഥമിക ഭാഷയിലെ യഥാർത്ഥ ദസ്താവേജ് അധികാരസ്രോതസ്സായി പരിഗണിക്കപ്പെടണം. പ്രധാനപ്പെട്ട വിവരങ്ങൾക്കായി, പ്രൊഫഷണൽ മനുഷ്യ പരിഭാഷ ശുപാർശ ചെയ്യപ്പെടുന്നു. ഈ പരിഭാഷ ഉപയോഗിക്കുന്നതിൽ ഉണ്ടാകുന്ന quaisquer തെറ്റിദ്ധാരണകൾക്കും ദയവായി ഞങ്ങളെ ഉത്തരവാദികളാക്കരുത്.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

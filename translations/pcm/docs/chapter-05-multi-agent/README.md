@@ -1,47 +1,49 @@
-# Chaptah 5: Multi-Agent AI Solutions
+# Chapta 5: Multi-Agent AI Solushon
 
-**📚 Kọs**: [AZD For Beginners](../../README.md) | **⏱️ Taim**: 2-3 awa | **⭐ Level**: Advanced
+**📚 Kors**: [AZD For Beginners](../../README.md) | **⏱️ Taim**: 2-3 hours | **⭐ Kompleksiti**: Advanced
 
 ---
 
-## Wetin dis chaptah go cover
+## Wetin dis chapta dey cover
 
-Dis chaptah dey cover advanced multi-agent architecture patterns, agent orchestration, an how to deploy AI wey ready for production for complex situations.
+Dis chapta go cover advanced multi-agent architecture patterns, how to orchestrate agents, and how to deploy AI wey ready for production for complex situations.
+
+> We don validate wit `azd 1.23.12` for March 2026.
 
 ## Wetin you go learn
 
-If you finish dis chaptah, you go:
+As you finish dis chapta, you go:
 - Sabi multi-agent architecture patterns
 - Fit deploy coordinated AI agent systems
-- Set up how agent dem go dey communicate
+- Implement how agents go dey communicate wit each oda
 - Build multi-agent solutions wey ready for production
 
 ---
 
-## 📚 Leson dem
+## 📚 Lekshon
 
-| # | Leson | Tok | Taim |
+| # | Lekshan | Description | Taim |
 |---|--------|-------------|------|
-| 1 | [Retail Multi-Agent Solution](../../examples/retail-scenario.md) | Complete implementation walkthrough | 90 min |
-| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Agent orchestration strategies | 30 min |
-| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | One-click deployment | 30 min |
+| 1 | [Retail Multi-Agent Solution](../../examples/retail-scenario.md) | Full step-by-step implementation walkthrough | 90 min |
+| 2 | [Coordination Patterns](../chapter-06-pre-deployment/coordination-patterns.md) | Strategi wey dem dey use to coordinate agents | 30 min |
+| 3 | [ARM Template Deployment](../../examples/retail-multiagent-arm-template/README.md) | Deploy wit one click | 30 min |
 
 ---
 
-## 🚀 How to start sharp-sharp
+## 🚀 Quick Start
 
 ```bash
-# Option 1: Use template take deploy am
+# Option 1: Make you deploy from one template
 azd init --template agent-openai-python-prompty
 azd up
 
-# Option 2: Use agent manifest take deploy am (you go need azure.ai.agents extension)
+# Option 2: Make you deploy from agent manifest (you go need azure.ai.agents extension)
 azd extension install azure.ai.agents
 azd ai agent init -m agent-manifest.yaml
 azd up
 ```
 
-> **Which approach?** Use `azd init --template` to start from a working sample. Use `azd ai agent init` when you have your own agent manifest. See the [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full details.
+> **Which approach?** Make you use `azd init --template` to start from one working sample. Use `azd ai agent init` when you get your own agent manifest. Check the [AZD AI CLI reference](../chapter-08-production/production-ai-practices.md#azd-ai-cli-commands-and-extensions) for full details.
 
 ---
 
@@ -49,25 +51,25 @@ azd up
 
 ```mermaid
 graph TD
-    Orchestrator[Orchestrator Agent<br/>E dey route requests, e dey manage di workflow] --> Customer[Customer Agent<br/>User questions, wetin dem prefer]
-    Orchestrator --> Inventory[Inventory Agent<br/>How stock dey, orders]
+    Orchestrator[Orchestrator Ajent<br/>Dey route request dem, dey manage di workflow] --> Customer[Customer Ajent<br/>User question dem, wetin dem prefer]
+    Orchestrator --> Inventory[Inventory Ajent<br/>Stock level dem, orders]
 ```
 ---
 
-## 🎯 Solution we dem highlight: Retail Multi-Agent
+## 🎯 Solution wey dem highlight: Retail Multi-Agent
 
-Di [Retail Multi-Agent Solution](../../examples/retail-scenario.md) dey show:
+The [Retail Multi-Agent Solution](../../examples/retail-scenario.md) show how e dey work:
 
-- **Customer Agent**: Dey handle user interactions an preferences
-- **Inventory Agent**: Dey manage stock an process orders
+- **Customer Agent**: Dey handle user interactions and preferences
+- **Inventory Agent**: Dey manage stock and order processing
 - **Orchestrator**: Dey coordinate between agents
-- **Shared Memory**: Management of cross-agent context wey dem share
+- **Shared Memory**: Dey manage cross-agent context
 
-### Services We Dem Use
+### Services Wey Dem Dey Use
 
 | Service | Wetin e dey do |
-|---------|---------|
-| Microsoft Foundry Models | Language understanding |
+|---------|----------------|
+| Microsoft Foundry Models | Understand language |
 | Azure AI Search | Product catalog |
 | Cosmos DB | Agent state and memory |
 | Container Apps | Agent hosting |
@@ -77,7 +79,7 @@ Di [Retail Multi-Agent Solution](../../examples/retail-scenario.md) dey show:
 
 ## 🔗 Navigation
 
-| Direction | Chaptah |
+| Direction | Chapter |
 |-----------|---------|
 | **Previous** | [Chapter 4: Infrastructure](../chapter-04-infrastructure/README.md) |
 | **Next** | [Chapter 6: Pre-Deployment](../chapter-06-pre-deployment/README.md) |
@@ -93,6 +95,6 @@ Di [Retail Multi-Agent Solution](../../examples/retail-scenario.md) dey show:
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dis document don translate wit AI translation service Co-op Translator (https://github.com/Azure/co-op-translator). Even tho we dey try make everything correct, abeg note say automated translations fit get errors or inaccuracies. The original document for im original language suppose be the main source. For critical information, we recommend make professional human translation do am. We no go responsible for any misunderstanding or misinterpretation wey fit arise from using this translation.
+**Disclaimer**:
+Dis document don translate using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). Even though we dey try make am correct, abeg note say automated translations fit get errors or inaccurate parts. Di original document for im native language suppose be di authoritative source. For critical information, e better make professional human translation handle am. We no dey liable for any misunderstandings or misinterpretations wey fit arise from di use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

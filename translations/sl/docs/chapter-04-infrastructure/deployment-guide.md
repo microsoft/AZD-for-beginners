@@ -1,101 +1,101 @@
-# Vodnik za uvajanje - Obvladovanje uvajanj AZD
+# Vodnik za uvajanje - Obvladovanje AZD uvajanj
 
-**Navigacija poglavij:**
+**Navigacija po poglavjih:**
 - **📚 Domov tečaja**: [AZD za začetnike](../../README.md)
-- **📖 Trenutno poglavje**: Poglavje 4 - Infrastruktura kot koda & uvajanje
+- **📖 Trenutno poglavje**: Poglavje 4 - Infrastruktura kot koda in uvajanje
 - **⬅️ Prejšnje poglavje**: [Poglavje 3: Konfiguracija](../chapter-03-configuration/configuration.md)
-- **➡️ Naslednje**: [Zagotavljanje virov](provisioning.md)
-- **🚀 Naslednje poglavje**: [Poglavje 5: Rešitve večagentne AI](../../examples/retail-scenario.md)
+- **➡️ Naslednje**: [Provisioniranje virov](provisioning.md)
+- **🚀 Naslednje poglavje**: [Poglavje 5: Rešitve AI z več agenti](../../examples/retail-scenario.md)
 
 ## Uvod
 
-Ta obsežen vodnik pokriva vse, kar morate vedeti o uvajanju aplikacij z uporabo Azure Developer CLI, od osnovnih uvajanj z enim ukazom do naprednih produkcijskih scenarijev s prilagojenimi hooki, več okolji in integracijo CI/CD. Obvladujte celoten življenjski cikel uvajanja z uporabnimi primeri in najboljšimi praksami.
+Ta obsežen vodnik zajema vse, kar morate vedeti o uvajanju aplikacij z uporabo Azure Developer CLI, od osnovnih enoprispevnih ukazov do naprednih produkcijskih scenarijev s prilagojenimi hooks, več okolji in integracijo CI/CD. Obvladajte celoten življenjski cikel uvajanja z uporabnimi primeri in najboljšimi praksami.
 
 ## Cilji učenja
 
-S tem vodnikom boste:
-- Obvladali vse ukaze in poteke za uvajanje Azure Developer CLI
-- Razumeli celoten življenjski cikel uvajanja od zagotavljanja do spremljanja
-- Uvedli prilagojene hooke za avtomatizacijo pred in po uvajanju
-- Konfigurirali več okolij z parametri specifičnimi za okolje
-- Nastavili napredne strategije uvajanja, vključno z blue-green in canary uvajanji
-- Integrirali azd uvajanja v CI/CD pipeline in DevOps poteke
+Z zaključkom tega vodnika boste:
+- Obvladali vse ukaze in poteke dela za uvajanje v Azure Developer CLI
+- Razumeli celoten življenjski cikel uvajanja od provisioniranja do spremljanja
+- Implementirali prilagojene hooks za avtomatizacijo pred in po uvajanju
+- Konfigurirali več okolij z nastavitvami, specifičnimi za okolje
+- Vzpostavili napredne strategije uvajanja, vključno z blue-green in canary uvajanji
+- Integrirali azd uvajanja s CI/CD cevovodi in DevOps poteki dela
 
-## Rezultati učenja
+## Učni izidi
 
-Po zaključku boste lahko:
-- Neodvisno izvajali in odpravljali težave pri vseh potekih uvajanja z azd
-- Oblikovali in uresničili prilagojeno avtomatizacijo uvajanja z uporabo hookov
-- Konfigurirali produkcijsko pripravljena uvajanja z ustrezno varnostjo in spremljanjem
-- Upravljali kompleksne scenarije uvajanja z več okolji
-- Optimizirali uspešnost uvajanja in uvedli strategije za povrnitev
-- Integrirali azd uvajanja v podjetniške DevOps prakse
+Po zaključku boste sposobni:
+- Samostojno izvajati in odpravljati napake v vseh azd potekih uvajanja
+- Načrtovati in implementirati prilagojeno avtomatizacijo uvajanja z uporabo hooks
+- Konfigurirati uvajanja pripravljena za produkcijo z ustrezno varnostjo in spremljanjem
+- Upravljati kompleksne scenarije uvajanja z več okolji
+- Optimizirati zmogljivost uvajanja in uvesti strategije povrnitve (rollback)
+- Integrirati azd uvajanja v podjetniške DevOps prakse
 
 ## Pregled uvajanja
 
 Azure Developer CLI zagotavlja več ukazov za uvajanje:
-- `azd up` - Celovit potek (provision + deploy)
+- `azd up` - Celoten potek (provisioniranje + uvajanje)
 - `azd provision` - Ustvari/posodobi le Azure vire
-- `azd deploy` - Uvaja samo kodo aplikacije
-- `azd package` - Gradi in pakira aplikacije
+- `azd deploy` - Uvede samo kodo aplikacije
+- `azd package` - Sestavi in zapakira aplikacije
 
 ## Osnovni poteki uvajanja
 
-### Celovito uvajanje (azd up)
+### Celotno uvajanje (azd up)
 Najpogostejši potek za nove projekte:
 ```bash
-# Vzpostavi vse od začetka
+# Namesti vse od začetka
 azd up
 
-# Vzpostavi v določenem okolju
+# Namesti z določenim okoljem
 azd up --environment production
 
-# Vzpostavi z parametri po meri
+# Namesti z prilagojenimi parametri
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
-### Samo uvajanje infrastrukture
-Ko morate posodobiti le Azure vire:
+### Uvajanje samo infrastrukture
+Ko morate posodobiti samo Azure vire:
 ```bash
-# Vzpostavitev/posodobitev infrastrukture
+# Vzpostavi/posodobi infrastrukturo
 azd provision
 
-# Vzpostavitev v načinu simulacije za predogled sprememb
+# Vzpostavi s suhim zagonom za predogled sprememb
 azd provision --preview
 
-# Vzpostavitev določenih storitev
+# Vzpostavi določene storitve
 azd provision --service database
 ```
 
-### Samo uvajanje kode
-Za hitro posodobitev aplikacije:
+### Uvajanje samo kode
+Za hitre posodobitve aplikacije:
 ```bash
-# Razmestitev vseh storitev
+# Razmestite vse storitve
 azd deploy
 
-# Pričakovan izhod:
+# Pričakovani izhod:
 # Razmestitev storitev (azd deploy)
 # - web: Razmestitev... Končano
 # - api: Razmestitev... Končano
-# USPEH: Vaša razmestitev je bila zaključena v 2 minutah in 15 sekundah
+# USPEH: Vaša razmestitev je bila dokončana v 2 minutah in 15 sekundah
 
 # Razmestite določeno storitev
 azd deploy --service web
 azd deploy --service api
 
-# Razmestite z lastnimi argumenti gradnje
+# Razmestite z lastnimi argumenti za gradnjo
 azd deploy --service api --build-arg NODE_ENV=production
 
 # Preverite razmestitev
 azd show --output json | jq '.services'
 ```
 
-### ✅ Preverjanje uspešnosti uvajanja
+### ✅ Preverjanje uvajanja
 
-Po vsakem uvajanju preverite uspeh:
+Po vsakem uvajanju preverite uspešnost:
 
 ```bash
-# Preverite, ali so vse storitve zagnane
+# Preverite, ali vse storitve delujejo
 azd show
 
 # Preizkusite končne točke za preverjanje stanja
@@ -110,14 +110,14 @@ azd monitor --logs
 ```
 
 **Kriteriji uspeha:**
-- ✅ Vse storitve kažejo status "Running"
-- ✅ Končne točke za stanje vračajo HTTP 200
-- ✅ V zadnjih 5 minutah ni napak v dnevnikih
+- ✅ Vse storitve prikazujejo status "Running"
+- ✅ Health endpoints vračajo HTTP 200
+- ✅ V zadnjih 5 minutah ni dnevnikov napak
 - ✅ Aplikacija odgovarja na testne zahteve
 
 ## 🏗️ Razumevanje procesa uvajanja
 
-### Faza 1: Pred-provizijski hooki
+### Faza 1: Hooki pred provisioniranjem
 ```yaml
 # azure.yaml
 hooks:
@@ -131,13 +131,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Faza 2: Zagotavljanje infrastrukture
+### Faza 2: Provisioniranje infrastrukture
 - Bere predloge infrastrukture (Bicep/Terraform)
 - Ustvari ali posodobi Azure vire
 - Konfigurira omrežje in varnost
-- Nastavi spremljanje in beleženje
+- Vzpostavi spremljanje in beleženje
 
-### Faza 3: Post-provizijski hooki
+### Faza 3: Hooki po provisioniranju
 ```yaml
 hooks:
   postprovision:
@@ -151,11 +151,11 @@ hooks:
 ```
 
 ### Faza 4: Pakiranje aplikacije
-- Gradi izvorno kodo aplikacije
+- Sestavi kodo aplikacije
 - Ustvari artefakte za uvajanje
-- Pakira za ciljno platformo (vsebniki, ZIP datoteke itd.)
+- Pakira za ciljno platformo (kontejnerji, ZIP datoteke itd.)
 
-### Faza 5: Pred-uvozni hooki
+### Faza 5: Hooki pred uvajanjem
 ```yaml
 hooks:
   predeploy:
@@ -169,11 +169,11 @@ hooks:
 ```
 
 ### Faza 6: Uvajanje aplikacije
-- Uvaža zapakirane aplikacije v Azure storitve
-- Posodablja nastavitve konfiguracije
-- Zažene/predela storitve
+- Uvede zapakirane aplikacije v Azure storitve
+- Posodobi nastavitve konfiguracije
+- Zažene/ponovno zažene storitve
 
-### Faza 7: Post-uvozni hooki
+### Faza 7: Hooki po uvajanju
 ```yaml
 hooks:
   postdeploy:
@@ -188,7 +188,7 @@ hooks:
 
 ## 🎛️ Konfiguracija uvajanja
 
-### Nastavitve uvajanja za posamezno storitev
+### Nastavitve uvajanja po storitvi
 ```yaml
 # azure.yaml
 services:
@@ -218,7 +218,7 @@ services:
     buildCommand: npm install --production
 ```
 
-### Konfiguracije specifične za okolje
+### Nastavitve specifične za okolje
 ```bash
 # Razvojno okolje
 azd env set NODE_ENV development
@@ -288,7 +288,7 @@ azd up --environment production-blue
 # Preusmeri promet na modro (ročna posodobitev DNS/uravnoteževalnika obremenitve)
 ./scripts/switch-traffic.sh production-blue
 
-# Očisti zeleno okolje
+# Počisti zeleno okolje
 azd env select production-green
 azd down --force
 ```
@@ -307,7 +307,7 @@ services:
         percentage: 10
 ```
 
-### Staged uvajanja
+### Stopnjevana uvajanja
 ```bash
 #!/bin/bash
 # deploy-staged.sh
@@ -338,9 +338,9 @@ if [[ $confirm == [yY] ]]; then
 fi
 ```
 
-## 🐳 Uvajanje vsebnikov
+## 🐳 Uvajanja kontejnerjev
 
-### Uvajanje Container App aplikacij
+### Uvajanje aplikacij v kontejnerjih
 ```yaml
 services:
   api:
@@ -364,7 +364,7 @@ services:
       maxReplicas: 10
 ```
 
-### Optimizacija večstopenjskega Dockerfile-a
+### Optimizacija večstopenjskega Dockerfile
 ```dockerfile
 # Dockerfile
 FROM node:18-alpine AS base
@@ -390,15 +390,15 @@ EXPOSE 3000
 CMD ["npm", "start"]
 ```
 
-## ⚡ Optimizacija uspešnosti
+## ⚡ Optimizacija zmogljivosti
 
-### Uvajanja specifična za storitev
+### Uvajanja po storitvah
 ```bash
-# Namestite določeno storitev za hitrejše iteracije
+# Razporedi storitev po izbiri za hitrejše iteracije
 azd deploy --service web
 azd deploy --service api
 
-# Namestite vse storitve
+# Razporedi vse storitve
 azd deploy
 ```
 
@@ -414,7 +414,7 @@ services:
 
 ### Učinkovita uvajanja kode
 ```bash
-# Za spremembe samo v kodi uporabite azd deploy (ne azd up)
+# Uporabite azd deploy (ne azd up) za spremembe, ki so samo v kodi
 # To preskoči zagotavljanje infrastrukture in je veliko hitrejše
 azd deploy
 
@@ -429,14 +429,14 @@ azd deploy --service api
 # Spremljaj aplikacijo v realnem času
 azd monitor --live
 
-# Oglej si dnevnike aplikacije
+# Prikaži dnevnike aplikacije
 azd monitor --logs
 
-# Preveri stanje razmestitve
+# Preveri stanje uvajanja
 azd show
 ```
 
-### Preverjanja zdravja
+### Zdravstvene preveritve
 ```yaml
 # azure.yaml - Configure health checks
 services:
@@ -483,11 +483,11 @@ npm run test:integration
 echo "✅ Deployment validation completed successfully"
 ```
 
-## 🔐 Varnostne zadeve
+## 🔐 Varnostna vprašanja
 
 ### Upravljanje skrivnosti
 ```bash
-# Shranjujte skrivnosti varno
+# Skrivnosti varno shranjujte
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
@@ -531,13 +531,13 @@ services:
           - external-api-key
 ```
 
-## 🚨 Strategije povrnitve
+## 🚨 Strategije povrnitve (rollback)
 
-### Hiter povratek
+### Hitro povrnitev (rollback)
 ```bash
-# AZD nima vgrajenega mehanizma za povrnitev (rollback). Priporočeni pristopi:
+# AZD nima vgrajene možnosti povrnitve. Priporočeni pristopi:
 
-# Možnost 1: Ponovna razmestitev iz Git (priporočeno)
+# Možnost 1: Ponovna razmestitev iz Gita (priporočeno)
 git revert HEAD  # Razveljavite problematični commit
 git push
 azd deploy
@@ -553,9 +553,9 @@ git checkout main
 # Predogled sprememb infrastrukture pred uporabo
 azd provision --preview
 
-# Za povrnitev infrastrukture uporabite nadzor različic:
-git revert HEAD  # Razveljavite spremembe infrastrukture
-azd provision    # Uporabite prejšnje stanje infrastrukture
+# Za povrnitev infrastrukture uporabite sistem za upravljanje različic:
+git revert HEAD  # Razveljavi spremembe infrastrukture
+azd provision    # Uporabi prejšnje stanje infrastrukture
 ```
 
 ### Povrnitev migracije baze podatkov
@@ -572,21 +572,21 @@ npm run db:validate
 echo "Database rollback completed"
 ```
 
-## 📊 Metrični podatki uvajanja
+## 📊 Meritve uvajanja
 
-### Spremljajte uspešnost uvajanja
+### Spremljajte zmogljivost uvajanja
 ```bash
-# Prikaži trenutno stanje uvajanja
+# Ogled trenutnega stanja nameščanja
 azd show
 
-# Spremljaj aplikacijo z Application Insights
+# Spremljajte aplikacijo z Application Insights
 azd monitor --overview
 
-# Prikaži meritve v živo
+# Ogled metrik v živo
 azd monitor --live
 ```
 
-### Zbiranje po meri metrik
+### Zbiranje prilagojenih metrik
 ```yaml
 # azure.yaml - Configure custom metrics
 hooks:
@@ -605,18 +605,18 @@ hooks:
 
 ## 🎯 Najboljše prakse
 
-### 1. Doslednost okolij
+### 1. Konsistentnost okolij
 ```bash
 # Uporabljajte dosledno poimenovanje
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Ohranjajte skladnost okolij
+# Vzdržujte skladnost okolij
 ./scripts/sync-environments.sh
 ```
 
-### 2. Preverjanje infrastrukture
+### 2. Validacija infrastrukture
 ```bash
 # Predogled sprememb infrastrukture pred uvajanjem
 azd provision --preview
@@ -659,23 +659,23 @@ hooks:
 
 ### 4. Dokumentacija in beleženje
 ```bash
-# Dokumentirajte postopke uvajanja
+# Dokumentirajte postopke nameščanja
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
-echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
+echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
 ```
 
 ## Naslednji koraki
 
-- [Zagotavljanje virov](provisioning.md) - Poglobljen vpogled v upravljanje infrastrukture
+- [Provisioniranje virov](provisioning.md) - Poglobljen vpogled v upravljanje infrastrukture
 - [Načrtovanje pred uvajanjem](../chapter-06-pre-deployment/capacity-planning.md) - Načrtujte svojo strategijo uvajanja
-- [Pogoste težave](../chapter-07-troubleshooting/common-issues.md) - Rešite težave pri uvajanju
-- [Najboljše prakse](../chapter-07-troubleshooting/debugging.md) - Strategije za produkcijsko pripravljena uvajanja
+- [Pogoste težave](../chapter-07-troubleshooting/common-issues.md) - Odpravljajte težave pri uvajanju
+- [Najboljše prakse](../chapter-07-troubleshooting/debugging.md) - Strategije uvajanja primerne za produkcijo
 
-## 🎯 Praktične vaje uvajanja
+## 🎯 Praktične vaje za uvajanje
 
-### Vaja 1: Inkremenčni potek uvajanja (20 minut)
-**Cilj**: Obvladati razliko med celovitim in inkrementalnim uvajanjem
+### Vaja 1: Inkrementalni potek uvajanja (20 minut)
+**Cilj**: Obvladati razliko med popolnimi in inkrementalnimi uvajanji
 
 ```bash
 # Začetna namestitev
@@ -689,7 +689,7 @@ echo "Full deployment: $(date)" > deployment-log.txt
 # Naredi spremembo kode
 echo "// Updated $(date)" >> src/api/src/server.js
 
-# Uvedi samo kodo (hitro)
+# Namesti samo kodo (hitro)
 time azd deploy
 echo "Code-only deployment: $(date)" >> deployment-log.txt
 
@@ -701,18 +701,18 @@ azd down --force --purge
 ```
 
 **Kriteriji uspeha:**
-- [ ] Celovito uvajanje traja 5-15 minut
-- [ ] Uvajanje samo kode traja 2-5 minut
-- [ ] Spremembe kode se odražajo v uvoženi aplikaciji
+- [ ] Celotno uvajanje traja 5–15 minut
+- [ ] Uvajanje samo kode traja 2–5 minut
+- [ ] Spremembe kode so vidne v nameščeni aplikaciji
 - [ ] Infrastruktura ostane nespremenjena po `azd deploy`
 
-**Rezultat učenja**: `azd deploy` je 50-70% hitrejši od `azd up` za spremembe kode
+**Učni izid**: `azd deploy` je 50–70 % hitrejši od `azd up` za spremembe kode
 
-### Vaja 2: Prilagojeni hooki uvajanja (30 minut)
-**Cilj**: Uvesti avtomatizacijo pred in po uvajanju
+### Vaja 2: Prilagojeni hooks za uvajanje (30 minut)
+**Cilj**: Implementirati avtomatizacijo pred in po uvajanju
 
 ```bash
-# Ustvari skripto za preverjanje pred uvajanjem
+# Ustvari preverjevalno skripto pred namestitvijo
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
@@ -724,7 +724,7 @@ if ! npm run test:unit; then
     exit 1
 fi
 
-# Preveri, ali obstajajo spremembe brez commita
+# Preveri neoddane spremembe
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -734,7 +734,7 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# Ustvari osnovni preizkus po uvajanju
+# Ustvari osnovni preizkus po nameščanju
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
 echo "💨 Running smoke tests..."
@@ -753,7 +753,7 @@ EOF
 
 chmod +x scripts/post-deploy-test.sh
 
-# Dodaj hooke v azure.yaml
+# Dodaj sprožilce v azure.yaml
 cat >> azure.yaml << 'EOF'
 
 hooks:
@@ -766,21 +766,21 @@ hooks:
     run: ./scripts/post-deploy-test.sh
 EOF
 
-# Preizkusi uvajanje s hooki
+# Preizkusi nameščanje s sprožilci
 azd deploy
 ```
 
 **Kriteriji uspeha:**
-- [ ] Skripta pred uvajanjem teče pred samim uvajanjem
+- [ ] Skript pred uvajanjem se zažene pred uvajanjem
 - [ ] Uvajanje se prekine, če testi ne uspejo
-- [ ] Post-uvozni smoke test preveri zdravje
-- [ ] Hooki se izvedejo v pravilnem vrstnem redu
+- [ ] Post-deploy smoke test potrdi zdravstveno stanje
+- [ ] Hooki se izvajajo v pravem vrstnem redu
 
 ### Vaja 3: Strategija uvajanja za več okolij (45 minut)
-**Cilj**: Uvesti večstopenjski potek uvajanja (dev → staging → production)
+**Cilj**: Implementirati stopnjevan potek uvajanja (dev → staging → production)
 
 ```bash
-# Ustvari skripto za uvajanje
+# Ustvari skripto za nameščanje
 cat > deploy-staged.sh << 'EOF'
 #!/bin/bash
 set -e
@@ -788,7 +788,7 @@ set -e
 echo "🚀 Staged Deployment Workflow"
 echo "=============================="
 
-# Korak 1: Uvajanje v razvojno okolje
+# Korak 1: Namesti v razvojno okolje
 echo "
 🛠️ Step 1: Deploying to development..."
 azd env select dev
@@ -797,7 +797,7 @@ azd up --no-prompt
 echo "Running dev tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# Korak 2: Uvajanje v prehodno (staging) okolje
+# Korak 2: Namesti v predprodukcijsko okolje
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
@@ -806,7 +806,7 @@ azd up --no-prompt
 echo "Running staging tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# Korak 3: Ročno odobritev za produkcijsko okolje
+# Korak 3: Ročno odobritev za produkcijo
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -834,30 +834,30 @@ azd env new dev
 azd env new staging
 azd env new production
 
-# Zaženi uvajanje v fazah
+# Zaženi fazno nameščanje
 ./deploy-staged.sh
 ```
 
 **Kriteriji uspeha:**
-- [ ] Okolje Dev se uspešno uvaja
-- [ ] Okolje Staging se uspešno uvaja
-- [ ] Za produkcijo je zahtevano ročno odobritev
-- [ ] Vsa okolja imajo delujoča preverjanja zdravja
-- [ ] Možna je povrnitev, če je potrebno
+- [ ] Dev okolje se uspešno uvaja
+- [ ] Staging okolje se uspešno uvaja
+- [ ] Za produkcijo je zahtevano ročno odobrenje
+- [ ] Vsa okolja imajo delujoča zdravstvena preverjanja
+- [ ] Možnost povrnitve, če je potrebno
 
 ### Vaja 4: Strategija povrnitve (25 minut)
-**Cilj**: Uvesti in testirati povrnitev uvajanja z uporabo Gita
+**Cilj**: Implementirati in preizkusiti povrnitev uvajanja z uporabo Gita
 
 ```bash
-# Razmestitev v1
+# Namesti v1
 azd env set APP_VERSION "1.0.0"
 azd up
 
-# Shrani hash commita za v1
+# Shrani hash commita v1
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# Razmestitev v2 z nezdružljivo spremembo
+# Namesti v2 z nezdružljivo spremembo
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
@@ -867,13 +867,13 @@ azd deploy
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # Povrnitev z uporabo Gita
+    # Povrnitev z uporabo gita
     git revert HEAD --no-edit
     
-    # Povrnitev okolja
+    # Povrni okolje
     azd env set APP_VERSION "1.0.0"
     
-    # Ponovna razmestitev v1
+    # Ponovno namesti v1
     azd deploy
     
     echo "✅ Rolled back to v1.0.0"
@@ -881,14 +881,14 @@ fi
 ```
 
 **Kriteriji uspeha:**
-- [ ] Zaznajo lahko napake pri uvajanju
-- [ ] Skripta za povrnitev se izvede samodejno
+- [ ] Zaznati neuspehe uvajanja
+- [ ] Skript za povrnitev se izvede samodejno
 - [ ] Aplikacija se vrne v delujoče stanje
-- [ ] Preverjanja zdravja uspejo po povrnitvi
+- [ ] Zdravstvena preverjanja so uspešna po povrnitvi
 
-## 📊 Spremljanje metrik uvajanja
+## 📊 Sledenje metrik uvajanja
 
-### Spremljajte uspešnost uvajanja
+### Spremljajte zmogljivost svojega uvajanja
 
 ```bash
 # Ustvari skripto za metrike uvajanja
@@ -905,11 +905,11 @@ echo "
 📊 Deployment Metrics:"
 echo "Duration: ${DURATION}s"
 echo "Timestamp: $(date)"
-echo "Environment: $(azd env show --output json | jq -r '.name')"
+echo "Environment: $(azd env get-value AZURE_ENV_NAME)"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
 # Zapiši v datoteko
-echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
+echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
 EOF
 
 chmod +x track-deployment.sh
@@ -920,29 +920,29 @@ chmod +x track-deployment.sh
 
 **Analizirajte svoje metrike:**
 ```bash
-# Ogled zgodovine nameščanj
+# Ogled zgodovine uvajanj
 cat deployment-metrics.csv
 
-# Izračunaj povprečen čas nameščanja
+# Izračun povprečnega časa uvajanja
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
 ## Dodatni viri
 
-- [Azure Developer CLI Deployment Reference](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
-- [Azure App Service Deployment](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
-- [Azure Container Apps Deployment](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
-- [Azure Functions Deployment](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
+- [Referenca Azure Developer CLI za uvajanje](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
+- [Uvajanje v Azure App Service](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
+- [Uvajanje Azure Container Apps](https://learn.microsoft.com/en-us/azure/container-apps/deploy-artifact)
+- [Uvajanje Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-deployment-slots)
 
 ---
 
 **Navigacija**
-- **Prejšnja lekcija**: [Your First Project](../chapter-01-foundation/first-project.md)
-- **Naslednja lekcija**: [Zagotavljanje virov](provisioning.md)
+- **Prejšnja lekcija**: [Vaš prvi projekt](../chapter-01-foundation/first-project.md)
+- **Naslednja lekcija**: [Provisioniranje virov](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Omejitev odgovornosti**:
-Ta dokument je bil preveden z uporabo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da lahko samodejni prevodi vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku naj velja za avtoritativni vir. Za ključne informacije je priporočljiv strokovni človeški prevod. Ne odgovarjamo za kakršne koli nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
+**Izjava o omejitvi odgovornosti**:
+Ta dokument je bil preveden s pomočjo storitve za prevajanje z umetno inteligenco [Co-op Translator](https://github.com/Azure/co-op-translator). Čeprav si prizadevamo za natančnost, upoštevajte, da avtomatizirani prevodi lahko vsebujejo napake ali netočnosti. Izvirni dokument v njegovem izvirnem jeziku velja za avtoritativni vir. Za ključne informacije priporočamo strokoven človeški prevod. Ne odgovarjamo za morebitne nesporazume ali napačne razlage, ki izhajajo iz uporabe tega prevoda.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

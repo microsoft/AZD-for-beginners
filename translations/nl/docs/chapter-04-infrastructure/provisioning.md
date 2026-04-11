@@ -1,47 +1,47 @@
 # Provisioning van Azure-resources met AZD
 
-**Chapter Navigation:**
-- **📚 Course Home**: [AZD Voor Beginners](../../README.md)
-- **📖 Current Chapter**: Hoofdstuk 4 - Infrastructuur als Code & Implementatie
-- **⬅️ Previous**: [Implementatiegids](deployment-guide.md)
-- **➡️ Next Chapter**: [Hoofdstuk 5: Multi-agent AI-oplossingen](../../examples/retail-scenario.md)
-- **🔧 Related**: [Hoofdstuk 6: Pre-deployment validatie](../chapter-06-pre-deployment/capacity-planning.md)
+**Hoofdstuknavigatie:**
+- **📚 Cursus Startpagina**: [AZD Voor Beginners](../../README.md)
+- **📖 Huidig Hoofdstuk**: Hoofdstuk 4 - Infrastructure as Code & Implementatie
+- **⬅️ Vorige**: [Implementatiegids](deployment-guide.md)
+- **➡️ Volgend Hoofdstuk**: [Hoofdstuk 5: Multi-Agent AI-oplossingen](../../examples/retail-scenario.md)
+- **🔧 Gerelateerd**: [Hoofdstuk 6: Pre-implementatievalidatie](../chapter-06-pre-deployment/capacity-planning.md)
 
-## Introductie
+## Inleiding
 
-Deze uitgebreide gids behandelt alles wat je moet weten over het provisionen en beheren van Azure-resources met behulp van de Azure Developer CLI. Leer hoe je Infrastructure as Code (IaC)-patronen implementeert, van basisresourcecreatie tot geavanceerde infrastructuurarchitecturen op ondernemingsniveau met Bicep, ARM-templates, Terraform en Pulumi.
+Deze uitgebreide gids behandelt alles wat je moet weten over het provisionen en beheren van Azure-resources met de Azure Developer CLI. Leer hoe je Infrastructure as Code (IaC)-patronen implementeert, van basisresourcecreatie tot geavanceerde enterprise-infrastructuurarchitecturen met Bicep, ARM-sjablonen, Terraform en Pulumi.
 
 ## Leerdoelen
 
 Na het voltooien van deze gids zul je:
-- De principes van Infrastructure as Code beheersen en het provisionen van Azure-resources
-- Inzicht hebben in meerdere IaC-providers die door Azure Developer CLI worden ondersteund
-- Bicep-templates ontwerpen en implementeren voor veelvoorkomende applicatiearchitecturen
+- De principes van Infrastructure as Code en het provisionen van Azure-resources beheersen
+- Meerdere IaC-aanbieders begrijpen die door Azure Developer CLI worden ondersteund
+- Bicep-sjablonen ontwerpen en implementeren voor veelvoorkomende applicatiearchitecturen
 - Resourceparameters, variabelen en omgevingsspecifieke instellingen configureren
 - Geavanceerde infrastructuurpatronen implementeren, inclusief netwerken en beveiliging
 - De levenscyclus van resources, updates en afhankelijkheidsresolutie beheren
 
-## Leeruitkomsten
+## Leerresultaten
 
-Na afronding ben je in staat om:
-- Azure-infrastructuur te ontwerpen en te provisionen met Bicep en ARM-templates
-- Complexe multi-service-architecturen te configureren met juiste resource-afhankelijkheden
-- Geparametriseerde templates te implementeren voor meerdere omgevingen en configuraties
-- Problemen bij infrastructuurprovisioning te verhelpen en deployment-fouten op te lossen
-- Principes van het Azure Well-Architected Framework toe te passen bij infrastructuurontwerp
-- Infrastructuurupdates te beheren en versiestrategieën voor infrastructuur te implementeren
+Na voltooiing kun je:
+- Azure-infrastructuur ontwerpen en provisionen met Bicep en ARM-sjablonen
+- Complexe multi-servicearchitecturen configureren met correcte resourceafhankelijkheden
+- Géparametriseerde sjablonen implementeren voor meerdere omgevingen en configuraties
+- Problemen bij het provisionen van infrastructuur oplossen en implementatiefouten verhelpen
+- Principes van het Azure Well-Architected Framework toepassen op infrastructuurontwerp
+- Infrastructuurupdates beheren en strategieën voor versiebeheer van infrastructuur implementeren
 
-## Overzicht van infrastructuurprovisioning
+## Overzicht van infrastructuurvoorziening
 
-Azure Developer CLI ondersteunt meerdere Infrastructure as Code (IaC)-providers:
+Azure Developer CLI ondersteunt meerdere Infrastructure as Code (IaC)-aanbieders:
 - **Bicep** (aanbevolen) - Azure's domeinspecifieke taal
-- **ARM Templates** - JSON-gebaseerde Azure Resource Manager-templates
+- **ARM Templates** - JSON-gebaseerde Azure Resource Manager-sjablonen
 - **Terraform** - Multi-cloud infrastructuurtool
-- **Pulumi** - Moderne Infrastructure as Code met programmeertalen
+- **Pulumi** - Moderne infrastructure as code met programmeertalen
 
-## Azure-resources begrijpen
+## Inzicht in Azure-resources
 
-### Resource Hiërarchie
+### Resource-hiërarchie
 ```
 Azure Account
 └── Subscriptions
@@ -49,16 +49,16 @@ Azure Account
         └── Resources (App Service, Storage, Database, etc.)
 ```
 
-### Veelvoorkomende Azure-services voor applicaties
-- **Compute**: App Service, Container Apps, Functions, Virtual Machines
-- **Storage**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
-- **Networking**: Virtual Network, Application Gateway, CDN
-- **Security**: Key Vault, Application Insights, Log Analytics
+### Gangbare Azure-diensten voor toepassingen
+- **Compute**: App Service, Container Apps, Functions, Virtuele machines
+- **Opslag**: Storage Account, Cosmos DB, SQL Database, PostgreSQL
+- **Netwerken**: Virtueel netwerk, Application Gateway, CDN
+- **Beveiliging**: Key Vault, Application Insights, Log Analytics
 - **AI/ML**: Cognitive Services, OpenAI, Machine Learning
 
-## Bicep-infrastructuurtemplates
+## Bicep-infrastructuursjablonen
 
-### Basisstructuur van een Bicep-template
+### Basisstructuur van een Bicep-sjabloon
 ```bicep
 // infra/main.bicep
 @description('The name of the environment')
@@ -342,7 +342,7 @@ resource databaseConnectionSecret 'Microsoft.KeyVault/vaults/secrets@2023-02-01'
 }
 ```
 
-### Configuratie van Managed Identity
+### Configuratie van beheerde identiteit
 ```bicep
 resource webApp 'Microsoft.Web/sites@2022-03-01' = {
   name: '${applicationName}-web-${resourceToken}'
@@ -370,7 +370,7 @@ resource webApp 'Microsoft.Web/sites@2022-03-01' = {
 
 ## 🌍 Netwerken en connectiviteit
 
-### Configuratie van Virtual Network
+### Configuratie van virtueel netwerk
 ```bicep
 resource vnet 'Microsoft.Network/virtualNetworks@2023-04-01' = {
   name: '${applicationName}-vnet-${resourceToken}'
@@ -617,7 +617,7 @@ resource cpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 }
 ```
 
-### Voorwaardelijke resourceprovisioning
+### Voorwaardelijke resourcevoorziening
 ```bicep
 @description('Environment type (dev, staging, prod)')
 @allowed(['dev', 'staging', 'prod'])
@@ -649,9 +649,9 @@ resource prodStorage 'Microsoft.Storage/storageAccounts@2023-01-01' = if (enviro
 }
 ```
 
-## 🚀 Geavanceerde provisioningpatronen
+## 🚀 Geavanceerde voorzieningspatronen
 
-### Multi-regio-implementatie
+### Multi-regio implementatie
 ```bicep
 @description('Primary region')
 param primaryLocation string = 'eastus2'
@@ -719,7 +719,7 @@ resource trafficManager 'Microsoft.Network/trafficmanagerprofiles@2022-04-01' = 
 }
 ```
 
-### Testen van infrastructuur
+### Infrastructuurtesten
 ```bicep
 // infra/test/main.test.bicep
 param location string = resourceGroup().location
@@ -755,42 +755,41 @@ resource testScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 }
 ```
 
-## 🧪 Infrastructuurvoorvertoning & validatie (NIEUW)
+## 🧪 Infrastructuurvoorbeeld & validatie (NIEUW)
 
 ### Voorbeeld van infrastructuurwijzigingen vóór implementatie
 
-De `azd provision --preview` functie laat je **infrastructuurprovisioning simuleren** voordat je daadwerkelijk resources implementeert. Het is vergelijkbaar met `terraform plan` of `bicep what-if` en geeft je een **dry-run-weergave** van welke wijzigingen in je Azure-omgeving zouden worden doorgevoerd.
+De `azd provision --preview`-functie stelt je in staat om de infrastructuurvoorziening te **simuleren** voordat je daadwerkelijk resources implementeert. Het is vergelijkbaar met `terraform plan` of `bicep what-if` en geeft je een **dry-run-weergave** van welke wijzigingen in je Azure-omgeving zouden worden doorgevoerd.
 
 #### 🛠️ Wat het doet
-- **Analyseert je IaC-templates** (Bicep of Terraform)
-- **Toont een preview van resourcewijzigingen**: toevoegingen, verwijderingen, updates
+- **Analyseert je IaC-sjablonen** (Bicep of Terraform)
+- **Toont een voorbeeld van resourcewijzigingen**: toevoegingen, verwijderingen, updates
 - **Past geen wijzigingen toe** — het is alleen-lezen en veilig om uit te voeren
 
-#### � Gebruiksscenario's
+#### Gebruiksscenario's
 ```bash
-# Bekijk infrastructuurwijzigingen voor implementatie
+# Bekijk infrastructuurwijzigingen vóór implementatie
 azd provision --preview
 
-# Bekijk met gedetailleerde uitvoer
-azd provision --preview --output json
-
-# Bekijk voor een specifieke omgeving
-azd provision --preview --environment production
+# Voorvertoning voor een specifieke omgeving
+azd provision --preview -e production
 ```
 
-Deze opdracht helpt je:
-- **Infrastructuurwijzigingen valideren** voordat je resources inzet
-- **Configuratiefouten vroeg ontdekken** in de ontwikkelcyclus
+Dit commando helpt je:
+- **Infrastructuurwijzigingen valideren** voordat je resources commit
+- **Misconfiguraties vroegtijdig opsporen** in de ontwikkelingscyclus
 - **Veilig samenwerken** in teamomgevingen
-- **Zorgdragen voor minst-rechten-implementaties** zonder verrassingen
+- **Zorgen voor least-privilege-implementaties** zonder verrassingen
 
 Het is vooral nuttig wanneer:
-- Je werkt met complexe multi-service-omgevingen
+- Je werkt met complexe multi-serviceomgevingen
 - Je wijzigingen aanbrengt in productie-infrastructuur
-- Je template-wijzigingen wilt valideren vóór PR-goedkeuring
+- Je sjabloonwijzigingen valideert voordat een PR wordt goedgekeurd
 - Je nieuwe teamleden traint in infrastructuurpatronen
 
 ### Voorbeeld van preview-uitvoer
+De exacte preview-uitvoer varieert per aanbieder en projectstructuur, maar het resultaat moet duidelijk de voorgestelde wijzigingen identificeren voordat er iets wordt toegepast.
+
 ```bash
 $ azd provision --preview
 
@@ -809,7 +808,6 @@ The following resources will be modified:
 The following resources will be destroyed:
   - azurerm_storage_account.old_storage
 
-📊 Estimated monthly cost: $45.67
 ⚠️  Warning: 1 resource will be replaced
 
 ✅ Preview completed successfully!
@@ -819,13 +817,13 @@ The following resources will be destroyed:
 
 ### Veilige resource-updates
 ```bash
-# Bekijk eerst infrastructuurwijzigingen (AANBEVOLEN)
+# Bekijk infrastructuurwijzigingen eerst (AANBEVOLEN)
 azd provision --preview
 
 # Pas wijzigingen toe na bevestiging van de voorvertoning
 azd provision --confirm-with-no-prompt
 
-# Voor het terugdraaien, gebruik Git om infrastructuurwijzigingen ongedaan te maken:
+# Gebruik Git om infrastructuurwijzigingen terug te draaien bij een rollback:
 git revert HEAD  # Draai de laatste infrastructuurcommit terug
 azd provision    # Herstel de vorige infrastructuurtoestand
 ```
@@ -861,7 +859,7 @@ resource migrationScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
 
 ## 🎯 Beste praktijken
 
-### 1. Conventies voor het benoemen van resources
+### 1. Conventies voor resource-namen
 ```bicep
 var naming = {
   resourceGroup: 'rg-${applicationName}-${environmentName}-${location}'
@@ -872,7 +870,7 @@ var naming = {
 }
 ```
 
-### 2. Tagging-strategie
+### 2. Strategie voor tags
 ```bicep
 var commonTags = {
   'azd-env-name': environmentName
@@ -901,7 +899,7 @@ param location string
 param appServiceSku string = 'B1'
 ```
 
-### 4. Organisatie van uitvoer
+### 4. Organisatie van outputs
 ```bicep
 // Service endpoints
 output WEB_URL string = 'https://${webApp.properties.defaultHostName}'
@@ -918,15 +916,15 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 
 ## Volgende stappen
 
-- [Pre-deploymentplanning](../chapter-06-pre-deployment/capacity-planning.md) - Valideer resourcebeschikbaarheid
+- [Pre-implementatieplanning](../chapter-06-pre-deployment/capacity-planning.md) - Valideer resourcebeschikbaarheid
 - [Veelvoorkomende problemen](../chapter-07-troubleshooting/common-issues.md) - Los infrastructuurproblemen op
-- [Debuggids](../chapter-07-troubleshooting/debugging.md) - Debug provisioningproblemen
-- [SKU-selectie](../chapter-06-pre-deployment/sku-selection.md) - Kies geschikte servicetiers
+- [Debuggids](../chapter-07-troubleshooting/debugging.md) - Debug provisioning-problemen
+- [SKU-selectie](../chapter-06-pre-deployment/sku-selection.md) - Kies passende servicetiers
 
 ## Aanvullende bronnen
 
 - [Azure Bicep-documentatie](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
-- [Azure Resource Manager-templates](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
+- [Azure Resource Manager-sjablonen](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/)
 - [Azure Architectuurcentrum](https://learn.microsoft.com/en-us/azure/architecture/)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/)
 
@@ -939,6 +937,6 @@ output DATABASE_CONNECTION_STRING_KEY string = '@Microsoft.KeyVault(VaultName=${
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
-Dit document is vertaald met behulp van de AI-vertalingsdienst Co-op Translator (https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, dient u er rekening mee te houden dat automatische vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de originele taal geldt als de gezaghebbende bron. Voor belangrijke/ kritieke informatie raden wij een professionele menselijke vertaling aan. Wij zijn niet aansprakelijk voor misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
+**Vrijwaring**:
+Dit document is vertaald met behulp van de AI-vertalingsdienst [Co-op Translator](https://github.com/Azure/co-op-translator). Hoewel we naar nauwkeurigheid streven, dient u zich ervan bewust te zijn dat geautomatiseerde vertalingen fouten of onnauwkeurigheden kunnen bevatten. Het oorspronkelijke document in de brontaal moet als gezaghebbende bron worden beschouwd. Voor kritieke informatie wordt professionele menselijke vertaling aanbevolen. Wij zijn niet aansprakelijk voor eventuele misverstanden of verkeerde interpretaties die voortvloeien uit het gebruik van deze vertaling.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

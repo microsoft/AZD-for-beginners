@@ -1,89 +1,89 @@
-# Juhtimisjuhend - AZD juurutuste valdamine
+# Juurutusjuhend - AZD juurutuste valdamine
 
-**Peatüki navigatsioon:**
+**Peatükkide navigatsioon:**
 - **📚 Kursuse avaleht**: [AZD algajatele](../../README.md)
-- **📖 Praegune peatükk**: Peatükk 4 - Infrastruktur kui kood & juurutus
+- **📖 Praegune peatükk**: Peatükk 4 - Infrastruktuur kui kood & juurutus
 - **⬅️ Eelmine peatükk**: [Peatükk 3: Konfiguratsioon](../chapter-03-configuration/configuration.md)
-- **➡️ Järgmine**: [Ressursside proviisorimine](provisioning.md)
-- **🚀 Järgmine peatükk**: [Peatükk 5: Mitme-agendi AI lahendused](../../examples/retail-scenario.md)
+- **➡️ Järgmine**: [Ressursside loomine](provisioning.md)
+- **🚀 Järgmine peatükk**: [Peatükk 5: Mitmeagendi AI lahendused](../../examples/retail-scenario.md)
 
 ## Sissejuhatus
 
-See põhjalik juhend käsitleb kõike, mida peate teadma rakenduste juurutamiseks kasutades Azure Developer CLI-d, alates lihtsatest ühe käsuga juurutustest kuni keerukate tootmistsenaariumiteni kohandatud konksude, mitme keskkonna ja CI/CD integratsiooniga. Valdage kogu juurutustsükkel praktiliste näidete ja parimate tavade abil.
+See põhjalik juhend käsitleb kõike, mida peate teadma rakenduste juurutamiseks Azure Developer CLI-ga, alustades lihtsatest ühe-käsuga juurutustest kuni keerukate tootmistingimuste stsenaariumiteni, kus kasutatakse kohandatud konksusid, mitut keskkonda ja CI/CD integratsiooni. Valdage kogu juurutustsükkel praktiliste näidete ja parimate tavade abil.
 
-## Õppe eesmärgid
+## Õpieesmärgid
 
-Selle juhendi läbimisel saate:
-- Valdada kõiki Azure Developer CLI juurutuskäske ja töövooge
-- Mõista kogu juurutustsüklit alates proviisorisamisest kuni jälgimiseni
-- Rakendada kohandatud juurutuskonksusid enne ja pärast juurutust automatiseerimiseks
-- Konfigureerida mitmeid keskkondi nee-rakenduspõhiste parameetritega
-- Seadistada täiustatud juurutusstrateegiad, sealhulgas sinine-roheline ja kanarilendud
-- Integreerida azd juurutused CI/CD torujuhtmete ja DevOpsi töövoogudega
+Selle juhendi läbimisel:
+- Valdate kõiki Azure Developer CLI juurutuskäske ja töövooge
+- Mõistate juurutustsükli täielikku ulatust alates ressursside loomise staadiumist kuni jälgimiseni
+- Rakendate kohandatud juurutuskonkse eeljuhisteks ja järelmeetmeteks
+- Konfigureerite mitut keskkonda koos keskkonnapõhiste parameetritega
+- Seate üles täiustatud juurutusstrateegiad, sealhulgas sinakas-roheline ja kanarilinnu juurutused
+- Integreerite azd juurutused CI/CD torujuhtmetesse ja DevOps töövoogudesse
 
 ## Õpitulemused
 
-Juhendi lõpetamisel oskate:
-- Ise sõltumatult käivitada ja tõrkeotsida kõiki azd juurutustöövooge
-- Kavandada ja rakendada kohandatud juurutusautomatiseerimist konksude abil
-- Konfigureerida tootmiskõlblikke juurutusi õige turvalisuse ja jälgimisega
-- Hallata keerukaid mitmekeskkonna juurutustsenaariume
-- Optimeerida juurutustulemuslikkust ja rakendada tagasikerimise strateegiaid
-- Integreerida azd juurutused ettevõtte DevOps-tavadesse
+Pärast juhendi läbitöötamist oskate:
+- Käivitada ja tõrkeotsingut teha kõigis azd juurutustöövoogudes iseseisvalt
+- Kujundada ja rakendada kohandatud juurutusautomaatikat konksude abil
+- Konfigureerida tootmisküpsed juurutused nõuetekohase turvalisuse ja jälgimisega
+- Hallata keerukaid mitme keskkonna juurutusstsenaariume
+- Optimeerida juurutuse jõudlust ja rakendada tagasipööramise strateegiaid
+- Integreerida azd juurutused ettevõtte DevOps praktikatesse
 
 ## Juurutuse ülevaade
 
-Azure Developer CLI pakub mitu juurutuskäsku:
-- `azd up` - Täielik töövoog (proviisor + juurutus)
-- `azd provision` - Ainult Azure ressursside loomine/uuring
-- `azd deploy` - Ainult rakenduskoodi juurutus
-- `azd package` - Rakenduste ehitamine ja paki koostamine
+Azure Developer CLI pakub mitmeid juurutuskäske:
+- `azd up` - Täielik töövoog (ressursside loomine + juurutus)
+- `azd provision` - Loo/värskenda ainult Azure ressursse
+- `azd deploy` - Juuruta ainult rakenduse kood
+- `azd package` - Koosta ja paki rakendused
 
 ## Põhilised juurutustöövood
 
 ### Täielik juurutus (azd up)
-Kõige tavalisem töövoog uute projektide jaoks:
+Kõige tavalisem töövoog uutele projektidele:
 ```bash
-# Rakendage kõik nullist
+# Paigalda kõik nullist
 azd up
 
-# Rakendage konkreetse keskkonnaga
+# Paigalda konkreetse keskkonnaga
 azd up --environment production
 
-# Rakendage kohandatud parameetritega
+# Paigalda kohandatud parameetritega
 azd up --parameter location=westus2 --parameter sku=P1v2
 ```
 
 ### Ainult infrastruktuuri juurutus
-Kui vaja ainult Azure ressursse uuendada:
+Kui on vaja vaid Azure ressursse uuendada:
 ```bash
-# Infrastruktuuri ettevalmistamine/uuendamine
+# Taristu pakkumine/uuendamine
 azd provision
 
-# Ettevalmistus kuivkatsega muudatuste eelvaatamiseks
+# Taristu pakkumine kuivjooksuga muudatuste eelvaatamiseks
 azd provision --preview
 
-# Spetsiifiliste teenuste ettevalmistamine
+# Spetsiifiliste teenuste pakkumine
 azd provision --service database
 ```
 
 ### Ainult koodi juurutus
-Kiirete rakenduseuuenduste jaoks:
+Kiirete rakenduse uuenduste jaoks:
 ```bash
-# Paigalda kõik teenused
+# Paigaldage kõik teenused
 azd deploy
 
-# Oodatud väljund:
+# Oodatav väljund:
 # Teenuste paigaldamine (azd deploy)
 # - veeb: Paigaldamine... Valmis
 # - api: Paigaldamine... Valmis
-# EDU: Teie paigaldus lõpetati 2 minuti 15 sekundiga
+# EDU: Teie paigaldus lõppes 2 minuti ja 15 sekundiga
 
 # Paigalda konkreetne teenus
 azd deploy --service web
 azd deploy --service api
 
-# Paigalda kohandatud ehitussätetega
+# Paigalda kohandatud ehitussuvanditega
 azd deploy --service api --build-arg NODE_ENV=production
 
 # Kontrolli paigaldust
@@ -92,10 +92,10 @@ azd show --output json | jq '.services'
 
 ### ✅ Juurutuse kontrollimine
 
-Pärast igat juurutust kontrollige edukust:
+Pärast iga juurutust kontrollige edukust:
 
 ```bash
-# Kontrolli, et kõik teenused töötavad
+# Kontrolli, kas kõik teenused töötavad
 azd show
 
 # Testi tervise lõpp-punkte
@@ -110,14 +110,14 @@ azd monitor --logs
 ```
 
 **Edukuse kriteeriumid:**
-- ✅ Kõik teenused näitavad olekut "Töötab"
+- ✅ Kõik teenused näitavad "Running" olekut
 - ✅ Tervise lõpp-punktid tagastavad HTTP 200
-- ✅ Viimase 5 minuti jooksul puuduvad vealogid
+- ✅ Viimase 5 minuti jooksul vigu ei ole logitud
 - ✅ Rakendus reageerib testipäringutele
 
 ## 🏗️ Juurutuse protsessi mõistmine
 
-### Faas 1: Eel-proviisorimise konksud
+### Etapp 1: Eelprovisioonikonksud
 ```yaml
 # azure.yaml
 hooks:
@@ -131,13 +131,13 @@ hooks:
       ./scripts/setup-secrets.sh
 ```
 
-### Faas 2: Infrastrukturiproviisorisam
+### Etapp 2: Infrastruktuuri loomine
 - Loeb infrastruktuuri malle (Bicep/Terraform)
-- Loob või uuendab Azure ressursse
-- Konfigureerib võrgustiku ja turvalisuse
-- Seadistab jälgimise ja logimise
+- Loodab või uuendab Azure ressursse
+- Konfigureerib võrguühenduse ja turve
+- Seab üles jälgimise ja logimise
 
-### Faas 3: Pärast proviisorisamise konksud
+### Etapp 3: Järelprovisioonikonksud
 ```yaml
 hooks:
   postprovision:
@@ -150,12 +150,12 @@ hooks:
       ./scripts/configure-app-settings.ps1
 ```
 
-### Faas 4: Rakenduse pakendamine
-- Ehitatakse rakenduskood
-- Luua juurutusartefaktid
-- Pakitakse sihtplatvormi jaoks (konteinerid, ZIP-failid jne)
+### Etapp 4: Rakenduse pakkimine
+- Koostab rakenduse koodi
+- Loob juurutusartefaktid
+- Pakib sihtplatvormi jaoks (konteinerid, ZIP-failid jne)
 
-### Faas 5: Eel-juurutuse konksud
+### Etapp 5: Eeljuhistuse konksud
 ```yaml
 hooks:
   predeploy:
@@ -168,12 +168,12 @@ hooks:
       npm run db:migrate
 ```
 
-### Faas 6: Rakenduse juurutus
+### Etapp 6: Rakenduse juurutus
 - Juurutab pakitud rakendused Azure teenustesse
-- Uuendab konfiguratsiooniseadeid
+- Uuendab konfiguratsiooni seadistusi
 - Käivitab/taaskäivitab teenuseid
 
-### Faas 7: Pärast juurutuse konksud
+### Etapp 7: Järgjuhistuse konksud
 ```yaml
 hooks:
   postdeploy:
@@ -188,7 +188,7 @@ hooks:
 
 ## 🎛️ Juurutuse konfiguratsioon
 
-### Teenuse-põhised juurutussätted
+### Teenusele spetsiifilised juurutussätted
 ```yaml
 # azure.yaml
 services:
@@ -218,14 +218,14 @@ services:
     buildCommand: npm install --production
 ```
 
-### Keskkonna-spetsiifilised konfiguratsioonid
+### Keskkonnale spetsiifilised konfiguratsioonid
 ```bash
 # Arenduskeskkond
 azd env set NODE_ENV development
 azd env set DEBUG true
 azd env set LOG_LEVEL debug
 
-# Eelvaatluskeskkond
+# Testkeskkond
 azd env new staging
 azd env set NODE_ENV staging
 azd env set DEBUG false
@@ -238,9 +238,9 @@ azd env set DEBUG false
 azd env set LOG_LEVEL error
 ```
 
-## 🔧 Täiustatud juurutusskenaarid
+## 🔧 Täiustatud juurutusstsenaariumid
 
-### Mitme-teenuse rakendused
+### Mitmeteenuselised rakendused
 ```yaml
 # Complex application with multiple services
 services:
@@ -276,7 +276,7 @@ services:
     host: function
 ```
 
-### Sinine-roheline juurutus
+### Sinakas-rohelised juurutused
 ```bash
 # Loo sinine keskkond
 azd env new production-blue
@@ -285,7 +285,7 @@ azd up --environment production-blue
 # Testi sinist keskkonda
 ./scripts/test-environment.sh production-blue
 
-# Suuna liiklus sinisele (käsitsi DNS/i koormuse tasakaalustaja uuendus)
+# Suuna liiklus sinisele (manuaalne DNS-/koormusejaoturi värskendus)
 ./scripts/switch-traffic.sh production-blue
 
 # Puhasta roheline keskkond
@@ -293,7 +293,7 @@ azd env select production-green
 azd down --force
 ```
 
-### Kanarilennu juurutus
+### Kanarilinnu juurutused
 ```yaml
 # azure.yaml - Configure traffic splitting
 services:
@@ -307,7 +307,7 @@ services:
         percentage: 10
 ```
 
-### Etappide kaupa juurutused
+### Etapiviisilised juurutused
 ```bash
 #!/bin/bash
 # deploy-staged.sh
@@ -338,9 +338,9 @@ if [[ $confirm == [yY] ]]; then
 fi
 ```
 
-## 🐳 Konteinerite juurutus
+## 🐳 Konteinerite juurutused
 
-### Konteinerirakenduse juurutused
+### Container App juurutused
 ```yaml
 services:
   api:
@@ -390,19 +390,19 @@ EXPOSE 3000
 CMD ["npm", "start"]
 ```
 
-## ⚡ Tulemuslikkuse optimeerimine
+## ⚡ Jõudluse optimeerimine
 
-### Teenuspõhised juurutused
+### Teenusele spetsiifilised juurutused
 ```bash
-# Paiguta konkreetne teenus kiirema iteratsiooni jaoks
+# Paigalda konkreetne teenus kiirema iteratsiooni jaoks
 azd deploy --service web
 azd deploy --service api
 
-# Paiguta kõik teenused
+# Paigalda kõik teenused
 azd deploy
 ```
 
-### Ehitusvahemälu kasutamine
+### Koostamise vahemällu salvestamine
 ```yaml
 # azure.yaml - Configure build commands
 services:
@@ -414,8 +414,8 @@ services:
 
 ### Tõhusad koodi juurutused
 ```bash
-# Kasutage koodimuudatuste puhul azd deploy (mitte azd up)
-# See vahele jätab infrastruktuuri loomise ja on palju kiirem
+# Kasutage ainult koodi muudatuste puhul azd deploy (mitte azd up)
+# See vahele jätab infrastruktuuri loomise ning on palju kiirem
 azd deploy
 
 # Kiireima iteratsiooni jaoks kasutage konkreetse teenuse juurutamist
@@ -426,13 +426,13 @@ azd deploy --service api
 
 ### Reaalajas juurutuse jälgimine
 ```bash
-# Rakenduse reaalajas jälgimine
+# Jälgi rakendust reaalajas
 azd monitor --live
 
 # Vaata rakenduse logisid
 azd monitor --logs
 
-# Kontrolli juurutamise staatust
+# Kontrolli juurutamise olekut
 azd show
 ```
 
@@ -450,7 +450,7 @@ services:
       retries: 3
 ```
 
-### Pärast juurutuse valideerimine
+### Pärast juurutust valideerimine
 ```bash
 #!/bin/bash
 # scripts/validate-deployment.sh
@@ -487,12 +487,12 @@ echo "✅ Deployment validation completed successfully"
 
 ### Saladuste haldamine
 ```bash
-# Salvestage saladused turvaliselt
+# Hoidke saladused turvaliselt
 azd env set DATABASE_PASSWORD "$(openssl rand -base64 32)" --secret
 azd env set JWT_SECRET "$(openssl rand -base64 64)" --secret
 azd env set API_KEY "your-api-key" --secret
 
-# Viita saladustele failis azure.yaml
+# Viidake saladustele failis azure.yaml
 ```
 
 ```yaml
@@ -505,7 +505,7 @@ services:
         value: ${JWT_SECRET}
 ```
 
-### Võrguturvalisus
+### Võrguturve
 ```yaml
 # azure.yaml - Configure network security
 infra:
@@ -516,7 +516,7 @@ infra:
       - "198.51.100.0/24" # VPN IP range
 ```
 
-### Identiteedi ja juurdepääsu haldamine
+### Identiteedi ja ligipääsu haldus
 ```yaml
 services:
   api:
@@ -531,37 +531,37 @@ services:
           - external-api-key
 ```
 
-## 🚨 Tagasikerimise strateegiad
+## 🚨 Tagasipööramise strateegiad
 
-### Kiire tagasikerimine
+### Kiire tagasipööramine
 ```bash
-# AZD-l puudub sisseehitatud tagasikerimine. Soovitatavad lähenemised:
+# AZD-l puudub sisseehitatud tagasipööramine. Soovitatud lähenemised:
 
-# Variant 1: Ümberpaigaldamine Git-ist (soovitatav)
-git revert HEAD  # Probleemse commit'i tagasipööramine
+# Valik 1: Taaspaigalda Git-ist (soovitatav)
+git revert HEAD  # Tagasi võta probleeme tekitav commit
 git push
 azd deploy
 
-# Variant 2: Spetsiifilise commit'i ümberpaigaldamine
+# Valik 2: Taaspaigalda konkreetne commit
 git checkout <previous-commit-hash>
 azd deploy
 git checkout main
 ```
 
-### Infrastruktuuri tagasikerimine
+### Infrastruktuuri tagasipööramine
 ```bash
-# Eelvaade infrastruktuurimuudatustele enne nende rakendamist
+# Vaadake infrastruktuuri muudatusi enne rakendamist
 azd provision --preview
 
-# Infrastruktuuri tagasipööramiseks kasuta versioonihaldust:
+# Infrastruktuuri tagasipööramiseks kasutage versioonikontrolli:
 git revert HEAD  # Võta infrastruktuuri muudatused tagasi
-azd provision    # Rakenda varasem infrastruktuuri seisund
+azd provision    # Rakenda eelmise infrastruktuuri olek
 ```
 
-### Andmebaasi migratsiooni tagasikerimine
+### Andmebaasi migratsiooni tagasipööramine
 ```bash
 #!/bin/bash
-# skriptid/tagasi-võta-andmebaas.sh
+# skriptid/tagasi-pööramine-andmebaas.sh
 
 echo "Rolling back database migrations..."
 npm run db:rollback
@@ -574,15 +574,15 @@ echo "Database rollback completed"
 
 ## 📊 Juurutuse mõõdikud
 
-### Jälgi juurutustulemuslikkust
+### Jälgi juurutuse jõudlust
 ```bash
-# Vaata praegust juurutamise olekut
+# Vaata praegust kasutuselevõtu staatust
 azd show
 
 # Jälgi rakendust Application Insightsiga
 azd monitor --overview
 
-# Vaata reaalajas metrikat
+# Vaata reaalajas mõõdikuid
 azd monitor --live
 ```
 
@@ -603,32 +603,32 @@ hooks:
         -d "{\"timestamp\": $DEPLOY_TIME, \"service_count\": $SERVICE_COUNT}"
 ```
 
-## 🎯 Parimad tavad
+## 🎯 Parimad praktikad
 
-### 1. Keskkondade järjepidevus
+### 1. Keskkonna ühtlus
 ```bash
-# Kasutage järjepidevat nimetamist
+# Kasuta järjepidevat nimekujundust
 azd env new dev-$(whoami)
 azd env new staging-$(git rev-parse --short HEAD)
 azd env new production-v1
 
-# Säilitage keskkondade vastavus
+# Säilita keskkondade vastavus
 ./scripts/sync-environments.sh
 ```
 
-### 2. Infrastrukturikontroll
+### 2. Infrastruktuuri valideerimine
 ```bash
-# Enne juurutamist eelvaade infrastruktuuri muudatustele
+# Enne kasutuselevõttu eelvaata infrastruktuuri muudatusi
 azd provision --preview
 
-# Kasuta ARM/Bicep lintimist
+# Kasuta ARM/Bicep-süntaksi kontrolli
 az bicep lint --file infra/main.bicep
 
-# Kontrolli Bicep süntaksit
+# Kontrolli Bicep-süntaksit
 az bicep build --file infra/main.bicep
 ```
 
-### 3. Testimise integreerimine
+### 3. Testimise integratsioon
 ```yaml
 hooks:
   predeploy:
@@ -657,25 +657,25 @@ hooks:
       npm run test:smoke
 ```
 
-### 4. Dokumenteerimine ja logimine
+### 4. Dokumentatsioon ja logimine
 ```bash
 # Dokumenteerige juurutusprotseduurid
 echo "# Deployment Log - $(date)" >> DEPLOYMENT.md
-echo "Environment: $(azd env show --output json | jq -r '.name')" >> DEPLOYMENT.md
+echo "Environment: $(azd env get-value AZURE_ENV_NAME)" >> DEPLOYMENT.md
 echo "Services deployed: $(azd show --output json | jq -r '.services | keys | join(", ")')" >> DEPLOYMENT.md
 ```
 
 ## Järgmised sammud
 
-- [Ressursside proviisorimine](provisioning.md) - Süvaülevaade infrastruktuuri haldusest
-- [Enne juurutust planeerimine](../chapter-06-pre-deployment/capacity-planning.md) - Planeerige juurutusstrateegiat
-- [Levinud probleemid](../chapter-07-troubleshooting/common-issues.md) - Lahendage juurutusprobleeme
-- [Parimad tavad](../chapter-07-troubleshooting/debugging.md) - Tootmiskõlblikud juurutusstrateegiad
+- [Ressursside loomine](provisioning.md) - Süvitsi infrastruktuuri haldamisse
+- [Eeljuurutuse planeerimine](../chapter-06-pre-deployment/capacity-planning.md) - Planeeri oma juurutusstrateegia
+- [Tavalised probleemid](../chapter-07-troubleshooting/common-issues.md) - Lahenda juurutusprobleeme
+- [Parimad praktikad](../chapter-07-troubleshooting/debugging.md) - Tootmisküpsed juurutusstrateegiad
 
-## 🎯 Praktikalised juurutuse ülesanded
+## 🎯 Praktilised juurutusharjutused
 
-### Ülesanne 1: Inkrementaalne juurutustöövoog (20 minutit)
-**Eesmärk**: Valdada erinevust täielike ja inkrementaalsete juurutuste vahel
+### Harjutus 1: Samm-sammuline juurutustöövoog (20 minutit)
+**Eesmärk**: Saada selgust täis- ja etapiviisilise juurutuse erinevustes
 
 ```bash
 # Esialgne juurutamine
@@ -696,35 +696,35 @@ echo "Code-only deployment: $(date)" >> deployment-log.txt
 # Võrrelge aegu
 cat deployment-log.txt
 
-# Puhastage üles
+# Puhastage
 azd down --force --purge
 ```
 
 **Edukuse kriteeriumid:**
-- [ ] Täielik juurutus võtab 5-15 minutit
-- [ ] Ainult koodi juurutus võtab 2-5 minutit
+- [ ] Täisjuurutus kestab 5-15 minutit
+- [ ] Ainult koodi juurutus kestab 2-5 minutit
 - [ ] Koodimuudatused kajastuvad juurutatud rakenduses
-- [ ] Infrastruktur ei muutu pärast `azd deploy` käivitamist
+- [ ] Pärast `azd deploy` infrastruktuur ei muutu
 
-**Õpitulemus**: `azd deploy` on 50-70% kiirem kui `azd up` koodimuudatuste korral
+**Õpitulemus**: `azd deploy` on koodimuuduste puhul 50-70% kiirem kui `azd up`
 
-### Ülesanne 2: Kohandatud juurutuskonksud (30 minutit)
-**Eesmärk**: Rakendada enne ja pärast juurutust automatiseerimine
+### Harjutus 2: Kohandatud juurutuskonksude rakendamine (30 minutit)
+**Eesmärk**: Rakenda eeljuhiseid ja järelmeetmeid juurutuse automatiseerimiseks
 
 ```bash
-# Loo eelpainutuse valideerimisskript
+# Loo eeldeploy'i valideerimisskript
 mkdir -p scripts
 cat > scripts/pre-deploy-check.sh << 'EOF'
 #!/bin/bash
 echo "⚠️ Running pre-deployment checks..."
 
-# Kontrolli, kas testid õnnestuvad
+# Kontrolli, kas testid läbivad
 if ! npm run test:unit; then
     echo "❌ Tests failed! Aborting deployment."
     exit 1
 fi
 
-# Kontrolli, kas on muutmata muudatusi
+# Kontrolli, kas on muudatusi, mida ei ole commititud
 if [[ -n $(git status -s) ]]; then
     echo "⚠️ Warning: Uncommitted changes detected"
 fi
@@ -734,7 +734,7 @@ EOF
 
 chmod +x scripts/pre-deploy-check.sh
 
-# Loo järelepainutuse suitsutest
+# Loo postdeploy'i suitsetest
 cat > scripts/post-deploy-test.sh << 'EOF'
 #!/bin/bash
 echo "💨 Running smoke tests..."
@@ -766,18 +766,18 @@ hooks:
     run: ./scripts/post-deploy-test.sh
 EOF
 
-# Testi paigaldust konksudega
+# Testi deploy'd konksudega
 azd deploy
 ```
 
 **Edukuse kriteeriumid:**
-- [ ] Eel-juurutus skript käivitatakse enne juurutust
+- [ ] Enne juurutust käivitatakse skript
 - [ ] Juurutus katkestatakse, kui testid ebaõnnestuvad
-- [ ] Pärast juurutust toimuv suitsutest kontrollib tervist
+- [ ] Pärast juurutust tehakse tervisestarditest
 - [ ] Konksud käivitatakse õiges järjekorras
 
-### Ülesanne 3: Mitmekeskkonna juurutusstrateegia (45 minutit)
-**Eesmärk**: Rakendada etapiviisiline juurutustöövoog (dev → staging → production)
+### Harjutus 3: Mitmekeskkonna juurutusstrateegia (45 minutit)
+**Eesmärk**: Rakenda etapiviisiline juurutustöövoog (arendus → testimine → tootmine)
 
 ```bash
 # Loo juurutusskript
@@ -797,7 +797,7 @@ azd up --no-prompt
 echo "Running dev tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# Samm 2: Juuruta katsekeskkonda
+# Samm 2: Juuruta testkeskkonda
 echo "
 🔍 Step 2: Deploying to staging..."
 azd env select staging
@@ -806,7 +806,7 @@ azd up --no-prompt
 echo "Running staging tests..."
 curl -f $(azd show --output json | jq -r '.services.web.endpoint')/health
 
-# Samm 3: Tootmiseks käsitsi kinnitamine
+# Samm 3: Käsitsi kinnitamine tootmises
 echo "
 ✅ Dev and staging deployments successful!"
 read -p "Deploy to production? (yes/no): " confirm
@@ -834,19 +834,19 @@ azd env new dev
 azd env new staging
 azd env new production
 
-# Käivita etapiviisiline juurutus
+# Käivita etappide kaupa juurutus
 ./deploy-staged.sh
 ```
 
 **Edukuse kriteeriumid:**
 - [ ] Arenduskeskkond juurutatakse edukalt
-- [ ] Staging keskkond juurutatakse edukalt
-- [ ] Tootmisse minekuks on vajalik manuaalne kinnitamine
-- [ ] Kõik keskkonnad omavad töökindlaid tervisekontrolle
-- [ ] Võimalus vajadusel tagasikerimiseks
+- [ ] Testkeskkond juurutatakse edukalt
+- [ ] Tootmisse minekuks on vajalik käsitsi heakskiit
+- [ ] Kõikidel keskkondadel toimivad tervisekontrollid
+- [ ] Vajadusel võimalik tagasipööramine
 
-### Ülesanne 4: Tagasikerimise strateegia (25 minutit)
-**Eesmärk**: Rakendada ja testida juurutuse tagasikerimist kasutades Giti
+### Harjutus 4: Tagasipööramise strateegia (25 minutit)
+**Eesmärk**: Rakenda ja testi juurutuse tagasipööramist Git'i abil
 
 ```bash
 # Paigalda v1
@@ -857,20 +857,20 @@ azd up
 V1_COMMIT=$(git rev-parse HEAD)
 echo "v1 commit: $V1_COMMIT"
 
-# Paigalda v2 purustava muudatusega
+# Paigalda v2 katkise muudatusega
 echo "throw new Error('Intentional break')" >> src/api/src/server.js
 git add . && git commit -m "v2 with intentional break"
 azd env set APP_VERSION "2.0.0"
 azd deploy
 
-# Tuvasta rike ja tagasipööre
+# Tuvasta tõrge ja tagasi pöörata
 if ! curl -f $(azd show --output json | jq -r '.services.api.endpoint')/health; then
     echo "❌ v2 deployment failed! Rolling back..."
     
-    # Tagasipööre git abil
+    # Tagasi pööramine git'i abil
     git revert HEAD --no-edit
     
-    # Keskkonna tagasipööre
+    # Tagasi pööramine keskkonnas
     azd env set APP_VERSION "1.0.0"
     
     # Paigalda uuesti v1
@@ -881,14 +881,14 @@ fi
 ```
 
 **Edukuse kriteeriumid:**
-- [ ] Suudetakse tuvastada juurutamise ebaõnnestumisi
-- [ ] Tagasikerimise skript käivitub automaatselt
+- [ ] Juurutuse ebaõnnestumised tuvastatakse
+- [ ] Tagasipööramise skript käivitub automaatselt
 - [ ] Rakendus taastub töökorda
-- [ ] Tervisekontrollid läbivad pärast tagasikerimist
+- [ ] Tagasipööramise järel läbivad tervisekontrollid
 
 ## 📊 Juurutuse mõõdikute jälgimine
 
-### Jälgi oma juurutustulemuslikkust
+### Jälgi oma juurutuse jõudlust
 
 ```bash
 # Loo juurutusmõõdikute skript
@@ -905,11 +905,11 @@ echo "
 📊 Deployment Metrics:"
 echo "Duration: ${DURATION}s"
 echo "Timestamp: $(date)"
-echo "Environment: $(azd env show --output json | jq -r '.name')"
+echo "Environment: $(azd env get-value AZURE_ENV_NAME)"
 echo "Services: $(azd show --output json | jq -r '.services | keys | join(", ")')"
 
 # Logi faili
-echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env show --output json | jq -r '.name')" >> deployment-metrics.csv
+echo "$(date +%Y-%m-%d,%H:%M:%S),$DURATION,$(azd env get-value AZURE_ENV_NAME)" >> deployment-metrics.csv
 EOF
 
 chmod +x track-deployment.sh
@@ -923,11 +923,11 @@ chmod +x track-deployment.sh
 # Vaata juurutamise ajalugu
 cat deployment-metrics.csv
 
-# Arvuta keskmine juurutamisaeg
+# Arvuta keskmine juurutamise aeg
 awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-metrics.csv
 ```
 
-## Täiendavad ressursid
+## Lisamaterjalid
 
 - [Azure Developer CLI juurutuse viide](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/reference)
 - [Azure App Service juurutus](https://learn.microsoft.com/en-us/azure/app-service/deploy-local-git)
@@ -937,12 +937,12 @@ awk -F',' '{sum+=$2; count++} END {print "Average: " sum/count "s"}' deployment-
 ---
 
 **Navigatsioon**
-- **Eelmine õppetund**: [Teie esimene projekt](../chapter-01-foundation/first-project.md)
-- **Järgmine õppetund**: [Ressursside proviisorimine](provisioning.md)
+- **Eelmine õppetund**: [Sinu esimene projekt](../chapter-01-foundation/first-project.md)
+- **Järgmine õppetund**: [Ressursside loomine](provisioning.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Vastutusest loobumine**:  
-See dokument on tõlgitud tehisintellekti tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame täpsust, tuleb arvestada, et automatiseeritud tõlked võivad sisaldada vigu või ebatäpsusi. Algkeeles dokumenti tuleks pidada autoriteetseks allikaks. Kriitilise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta selle tõlke kasutamisest tingitud arusaamatuste või väärarusaamade eest.
+See dokument on tõlgitud AI tõlketeenuse [Co-op Translator](https://github.com/Azure/co-op-translator) abil. Kuigi püüame täpsust, palun pidage meeles, et automaatsed tõlked võivad sisaldada vigu või ebatäpsusi. Algne dokument selle emakeeles tuleks lugeda autoriteetseks allikaks. Olulise teabe puhul soovitatakse kasutada professionaalset inimtõlget. Me ei vastuta tõlgendamisest tekkivate arusaamatuste ega valesti tõlgendamise eest.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

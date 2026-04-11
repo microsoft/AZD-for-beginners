@@ -1,28 +1,30 @@
-# AI മോഡൽ ഡിപ്പ്ലോയ്മെന്റ് with Azure Developer CLI
+# എഐ മോഡൽ ഡിപ്പ്ലോയ്മെന്റ് ആസ്യൂർ ഡെവലപ്പർ CLI ഉപയോഗിച്ച്
 
 **അധ്യായ നാവിഗേഷൻ:**
-- **📚 കോഴ്‌സ് ഹോം**: [AZD For Beginners](../../README.md)
-- **📖 ഇപ്പോഴത്തെ അധ്യായം**: അധ്യായം 2 - AI-ഫസ്റ്റ് ഡെവലപ്പ്‌മെന്റ്
-- **⬅️ മുമ്പ്**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **📚 കോഴ്സ് ഹോം**: [AZD For Beginners](../../README.md)
+- **📖 നിലവിലെ അധ്യായം**: അധ്യായം 2 - എഐ-ഫസ്റ്റ് ഡെവലപ്മെന്റ്
+- **⬅️ കഴിഞ്ഞത്**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ അടുത്തത്**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 അടുത്ത അധ്യായം**: [അധ്യായം 3: കോൺഫിഗറേഷൻ](../chapter-03-configuration/configuration.md)
 
-AZD ടെംപ്ലേറ്റുകൾ ഉപയോഗിച്ച് AI മോഡലുകൾ ഡിപ്പ്ലോയ്മെന്റ് ചെയ്യുന്നതിനുള്ള സമഗ്ര മാർഗ്ഗനിർദ്ദേശങ്ങൾ നൽകിയതാണ് ഈ ഗൈഡ്, മോഡൽ തിരഞ്ഞെടുപ്പ് മുതൽ പ്രൊഡക്ഷൻ ഡിപ്പ്ലോയ്മെന്റ് പാറ്റേണുകൾ വരെ എല്ലാം ഉൾപ്പെട്ടതാണ്.
+ഈ ഗൈഡ് AZD ടെംപ്ലേറ്റുകൾ ഉപയോഗിച്ച് എഐ മോഡലുകൾ ഡിപ്പ്ലോയ് ചെയ്യുന്നതിനുള്ള സമഗ്രമായ നിർദ്ദേശങ്ങൾ നൽകുന്നു, മോഡൽ തിരഞ്ഞെടുപ്പിൽ നിന്ന് ഉത്പാദന ഡിപ്പ്ലോയ്മെന്റ് പാറ്റേണുകൾ വരെ എല്ലാം ഉൾക്കൊള്ളുന്നു.
 
-## ഉള്ളടക്കങ്ങൾ
+> **പൊരുത്തം സൂചന (2026-03-25):** ഈ ഗൈഡ്中的 AZD പ്രവൃത്തി പ്രക്രിയ `azd` `1.23.12` ന് എതിരെ പരിശോദിച്ചു. ഡീഫോൾട്ട് സർവീസ് ഡിപ്പ്ലോയ്മെന്റ് വിൻഡോകളിനെക്കാൾ കൂടുതൽ സമയം എടുക്കുന്ന എഐ ഡിപ്പ്ലോയ്മെന്റുകൾക്കായി, നിലവിലെ AZD റിലീസുകൾ `azd deploy --timeout <seconds>` പിന്തുണയ്ക്കുന്നു.
+
+## ഉള്ളടക്കങ്ങളുടെ പട്ടിക
 
 - [മോഡൽ തിരഞ്ഞെടുപ്പ് തന്ത്രം](#മോഡൽ-തിരഞ്ഞെടുപ്പ്-തന്ത്രം)
-- [AI മോഡലുകൾക്ക് AZD കോൺഫിഗറേഷൻ](#ai-മോഡലുകൾക്കുള്ള-azd-കോൺഫിഗറേഷൻ)
+- [എഐ മോഡലുകളുടെ AZD കോൺഫിഗറേഷൻ](#എഐ-മോഡലുകൾക്കുള്ള-azd-കോൺഫിഗറേഷൻ)
 - [ഡിപ്പ്ലോയ്മെന്റ് പാറ്റേണുകൾ](#ഡിപ്പ്ലോയ്മെന്റ്-പാറ്റേണുകൾ)
 - [മോഡൽ മാനേജ്മെന്റ്](#മോഡൽ-മാനേജ്മെന്റ്)
-- [പ്രൊഡക്ഷൻ പരിഗണനകൾ](#പ്രൊഡക്ഷൻ-പരിഗണനകൾ)
-- [മോണിറ്ററിംഗ് & അവബോധം](#മോണിറ്ററിംഗ്-അവബോധം)
+- [ഉത്പാദന പരിഗണനകൾ](#ഉത്പാദന-പരിഗണനകൾ)
+- [മൊനിറ്ററിംഗ് ആൻഡ് ഒബ്സർവബിലിറ്റി](#മൊനിറ്ററിംഗ്-ആൻഡ്-ഒബ്സർവബിലിറ്റി)
 
 ## മോഡൽ തിരഞ്ഞെടുപ്പ് തന്ത്രം
 
 ### Microsoft Foundry മോഡലുകൾ
 
-നിങ്ങളുടെ ഉപയോഗത്തിനായി ശരിയായ മോഡൽ തിരഞ്ഞെടുക്കുക:
+നിങ്ങളുടെ ഉപയോക്തൃ കേസിനായി ശരിയായ മോഡൽ തിരഞ്ഞെടുക്കുക:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -41,29 +43,29 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
         ]
 ```
 
-### മോഡൽ ശേഷി പദ്ധതി
+### മോഡൽ ശേഷി പദ്ധതിയിടൽ
 
-| മോഡൽ തരം | ഉപയോഗ കേസ് | ശിപാർശ ചെയ്ത ശേഷി | ചെലവ് പരിഗണനകൾ |
-|------------|------------|---------------------|-------------------|
-| gpt-4.1-mini | ചാറ്റ്, Q&A | 10-50 TPM | ഭൂരിഭാഗം വർക്ക്‌ലോഡുകൾക്ക് ചെലവ് കാര്യക്ഷമം |
-| gpt-4.1 | സങ്കീർണ്ണമായ നിലവിളി | 20-100 TPM | ഉയർന്ന ചെലവ്, പ്രിമിയം ഫീച്ചറുകൾക്ക് ഉപയോഗിക്കുക |
-| Text-embedding-ada-002 | സെർച്ച്, RAG | 30-120 TPM | സെമാന്റിക് സെർച്ചിന് ആവശ്യമാണ് |
-| Whisper | സ്പീച്ച്-ടു-ടെക്സ്റ്റ് | 10-50 TPM | ഓഡിയോ പ്രോസസ്സിംഗ് വർക്ക്ലോഡുകൾ |
+| മോഡൽ തരം | ഉപയോഗ കേസ് | ശുപാർശ ചെയ്ത ശേഷി | ചെലവ് പരിഗണനകൾ |
+|------------|----------|---------------------|-------------------|
+| gpt-4.1-mini | ചാറ്റ്, ചോദ്യം-ഉത്തരം | 10-50 TPM | ഭൂരിഭാഗം തന്ത്രങ്ങൾക്കുള്ള ചെലവ്-പ്രവർത്തകമാണ് |
+| gpt-4.1 | സങ്കീർണം തർക്കം | 20-100 TPM | ഉയർന്ന ചെലവ്, പ്രീമിയം ഫീച്ചറുകൾക്കായി ഉപയോഗിക്കുക |
+| text-embedding-3-large | തിരയൽ, RAG | 30-120 TPM | സെമാന്റിക് തിരയലിനും തിരിച്ചെടുക്കലിനും ശക്തമായ ഡീഫോൾട്ട് തിരഞ്ഞെടുപ്പ് |
+| Whisper | വാക്കിൽ നിന്ന് ടെക്സ്റ്റ് | 10-50 TPM | ഓഡിയോ പ്രോസസ്സിംഗ് തന്ത്രങ്ങൾ |
 
-## AI മോഡലുകൾക്കുള്ള AZD കോൺഫിഗറേഷൻ
+## എഐ മോഡലുകൾക്കുള്ള AZD കോൺഫിഗറേഷൻ
 
-### Bicep ടെംപ്ലേറ്റ് കോൺഫിഗറേഷൻ
+### ബൈസിപ്പ് ടെംപ്ലേറ്റ് കോൺഫിഗറേഷൻ
 
-Bicep ടെംപ്ലേറ്റുകൾ മുഖേന മോഡൽ ഡിപ്പ്ലോയ്മെന്റുകൾ സൃഷ്ടിക്കുക:
+ബൈസിപ്പ് ടെംപ്ലേറ്റുകൾ വഴി മോഡൽ ഡിപ്പ്ലോയ്മെന്റുകൾ സൃഷ്ടിക്കുക:
 
 ```bicep
 // infra/main.bicep
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -122,21 +124,21 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 }]
 ```
 
-### എന്റർവയോൺമെന്റ് വേരിയബിളുകൾ
+### പരിസ്ഥിതി ചവ്രങ്ങൾ
 
-നിങ്ങളുടെ ആപ്പ്ലിക്കേഷൻ പരിസ്ഥിതി കോൺഫിഗർ ചെയ്യുക:
+നിങ്ങളുടെ അപ്ലിക്കേഷന്റെ പരിസ്ഥിതി ക്രമീകരിക്കുക:
 
 ```bash
 # .env കോൺഫിഗറേഷൻ
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
 ## ഡിപ്പ്ലോയ്മെന്റ് പാറ്റേണുകൾ
 
-### പാറ്റേൺ 1: സിങ്കിൾ-റിയോണൽ ഡിപ്പ്ലോയ്മെന്റ്
+### പാറ്റേൺ 1: ഏക-പ്രദേശ ഡിപ്പ്ലോയ്മെന്റ്
 
 ```yaml
 # azure.yaml - Single region
@@ -149,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-ഉത്തമം:
-- ഡെവലപ്പ്‌മെന്റ് & ടെസ്റ്റിംഗ്
-- സിങ്കിൾ-മാർക്കറ്റ് ആപ്പ്ലിക്കേഷനുകൾ
-- ചെലവ് അനുകൂലീകരണം
+ശ്രേഷ്ഠം:
+- വികസനവും പരിശോധനയും
+- ഏക വിപണി അപ്ലിക്കേഷനുകൾ
+- ചെലവ് മെച്ചപ്പെടുത്തൽ
 
-### പാറ്റേൺ 2: മൾട്ടി-റിയോണൽ ഡിപ്പ്ലോയ്മെന്റ്
+### പാറ്റേൺ 2: ബഹു-പ്രദേശ ഡിപ്പ്ലോയ്മെന്റ്
 
 ```bicep
 // Multi-region deployment
@@ -167,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-ഉത്തമം:
-- ഗ്ലോബൽ ആപ്പ്ലിക്കേഷനുകൾ
-- ഉയർന്ന ലഭ്യത ആവശ്യങ്ങൾ
-- ലോഡ് വിതരണ നിയന്ത്രണം
+ശ്രേഷ്ഠം:
+- ആഗോള അപ്ലിക്കേഷനുകൾ
+- ഉയർന്ന ലഭ്യത ആവശ്യകതകൾ
+- ലോഡ് വിതരണവും
 
 ### പാറ്റേൺ 3: ഹൈബ്രിഡ് ഡിപ്പ്ലോയ്മെന്റ്
 
-Microsoft Foundry മോഡലുകളും മറ്റ് AI സേവനങ്ങളും സംയോജിപ്പിക്കുക:
+Microsoft Foundry മോഡലുകൾ മറ്റ് എഐ സേവനങ്ങളുമായി സംയോജിപ്പിക്കുക:
 
 ```bicep
 // Hybrid AI services
@@ -205,9 +207,9 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ## മോഡൽ മാനേജ്മെന്റ്
 
-### വേർഷൻ കൺട്രോൾ
+### പതിപ്പ് നിയന്ത്രണം
 
-നിങ്ങളുടെ AZD കോൺഫിഗറന്സിൽ മോഡൽ വേർഷനുകൾ നിരീക്ഷിക്കുക:
+നിങ്ങളുടെ AZD കോൺഫിഗറേഷനിൽ മോഡൽ പതിപ്പുകൾ ട്രാക്ക് ചെയ്യുക:
 
 ```json
 {
@@ -215,11 +217,11 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
@@ -227,7 +229,7 @@ resource documentIntelligence 'Microsoft.CognitiveServices/accounts@2023-05-01' 
 
 ### മോഡൽ അപ്ഡേറ്റുകൾ
 
-AZD ഹുക്കുകൾ മോഡൽ അപ്ഡേറ്റുകൾക്കായി ഉപയോഗിക്കുക:
+മോഡൽ അപ്ഡേറ്റുകൾക്കായി AZD ഹുക്കുകൾ ഉപയോഗിക്കുക:
 
 ```bash
 #!/bin/bash
@@ -238,11 +240,14 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# ഡിപ്പ്ലോയ്മെന്റ് ഡിഫോൾട്ട് ടൈംഔട്ടിൽ നിന്ന് കൂടുതലായാൽ
+azd deploy --timeout 1800
 ```
 
-### A/B ടെസ്റ്റിംഗ്
+### എ/ബി ടെസ്റ്റിംഗ്
 
-പല മോഡൽ വേർഷനുകളും ഡിപ്പ്ലോയ് ചെയ്യുക:
+பல മോഡൽ പതിപ്പുകൾ ഡിപ്പ്ലോയ് ചെയ്യുക:
 
 ```bicep
 param enableABTesting bool = false
@@ -264,14 +269,14 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 }
 ```
 
-## പ്രൊഡക്ഷൻ പരിഗണനകൾ
+## ഉത്പാദന പരിഗണനകൾ
 
-### ശേഷി പദ്ധതി
+### ശേഷി പദ്ധതിയിടൽ
 
-ഉപയോഗ പാറ്റേണുകൾ അടിസ്ഥാനമാക്കി ആവശ്യമായ ശേഷിയൊരുക്കുക:
+ഉപയോഗ പതിപ്പുകളുടെ അടിസ്ഥാനത്തിൽ ആവശ്യമായ ശേഷി കണക്കുകൂട്ടുക:
 
 ```python
-# ശേഷി കണക്കാക്കൽ ഉദാഹരണം
+# ശേഷിയുടയുള്ള കണക്കാക്കൽ ഉദാഹരണം
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -293,9 +298,9 @@ required_capacity = calculate_required_capacity(
 print(f"Required capacity: {required_capacity} TPM")
 ```
 
-### ഓട്ടോ-സ്കെയിലിങ് കോൺഫിഗറേഷൻ
+### ഓട്ടോ-സ്കെയ്ലിംഗ് കോൺഫിഗറേഷൻ
 
-കണ്ടെയ്‌നർ ആപ്പുകൾക്കായി ഓട്ടോ-സ്കെയിലിങ് ക്രമീകരിക്കുക:
+കണ്ടെയ്നർ ആപ്ലിക്കേഷനുകൾക്കായി ഓട്ടോ-സ്കെയ്ലിംഗ് ക്രമീകരിക്കുക:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -331,9 +336,9 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 }
 ```
 
-### ചെലവ് അനുകൂലീകരണം
+### ചെലവ് മെച്ചപ്പെടുത്തൽ
 
-ചെലവ് നിയന്ത്രണങ്ങൾ നടപ്പിലാക്കുക:
+ചിലവ് നിയന്ത്രണങ്ങൾ നടപ്പിലാക്കുക:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -363,11 +368,11 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 }
 ```
 
-## മോണിറ്ററിംഗ് & അവബോധം
+## മൊനിറ്ററിംഗ് ആൻഡ് ഒബ്സർവബിലിറ്റി
 
-### ആപ്പ്ലിക്കേഷൻ ഇൻസൈറ്റ്സ് ഇന്റഗ്രേഷൻ
+### അപ്ലിക്കേഷൻ ഇൻസൈറ്റ്‌സ് ഇന്റഗ്രേഷൻ
 
-AI വർക്ക്ലോഡുകൾക്കുള്ള നിരീക്ഷണം ക്രമീകരിക്കുക:
+എഐ തൊഴിലുകൾക്കുള്ള മോണിറ്ററിംഗ് ക്രമീകരിക്കുക:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -403,12 +408,12 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### കസ്റ്റം മെട്രിക്സ്
+### കസ്റ്റം മെട്രിക്ക്സ്
 
-AI പ്രത്യേക മെട്രിക്‌സുകൾ നിരീക്ഷിക്കുക:
+എഐ-സ്പെസിഫിക് മെട്രിക്കുകൾ ട്രാക്ക് ചെയ്യുക:
 
 ```python
-# എഐ മോഡലുകൾക്കായുള്ള കസ്റ്റം ടെലിമെട്രി
+# എ.ഐ. മാതൃകകൾക്കായുള്ള കസ്റ്റം ടെലിമെട്രി
 import logging
 from applicationinsights import TelemetryClient
 
@@ -440,12 +445,12 @@ class AITelemetry:
         )
 ```
 
-### ഹെൽത്ത് ചെക്കുകൾ
+### ഹെൽത്ത് ചെക്ക്‌സ്
 
-AI സേവനങ്ങളുടെ ഹെൽത്ത് മോണിറ്ററിംഗ് നടപ്പിലാക്കുക:
+എഐ സേവന ഹെൽത്ത് മോണിറ്ററിംഗ് നടപ്പിലാക്കുക:
 
 ```python
-# ആരോഗ്യം പരിശോധിക്കുന്ന എൻഡ്‌പോയിന്റുകൾ
+# ആരോഗ്യ പരിശോധന എൻഡ്‌പോയിന്റുകൾ
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -455,7 +460,7 @@ app = FastAPI()
 async def check_ai_models():
     """Check AI model availability."""
     try:
-        # OpenAI ബന്ധം പരീക്ഷിക്കുക
+        # OpenAI കണക്ഷൻ പരീക്ഷിക്കുക
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 f"{AZURE_OPENAI_ENDPOINT}/openai/deployments",
@@ -473,30 +478,30 @@ async def check_ai_models():
 
 ## അടുത്ത ഘട്ടങ്ങൾ
 
-1. **[Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** സേവന ഇന്റഗ്രേഷൻ പാറ്റേണുകൾ അവലോകനം ചെയ്യുക
-2. **[AI Workshop Lab](ai-workshop-lab.md)** ഹാൻഡ്സ്-ഓൺ അനുഭവത്തിനായി പൂര്‍ത്തിയാക്കുക
+1. **[Microsoft Foundry Integration Guide](microsoft-foundry-integration.md)** സേവന സംയോജനം പാറ്റേണുകൾ അവലോകനം ചെയ്യുക
+2. **[AI Workshop Lab](ai-workshop-lab.md)** മുഖാവ് പ്രവൃത്തിക്കായി പൂർണ്ണമാക്കുക
 3. **[Production AI Practices](production-ai-practices.md)** എന്റർപ്രൈസ് ഡിപ്പ്ലോയ്മെന്റുകൾക്കായി നടപ്പിലാക്കുക
-4. **[AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** സാധാരണ പ്രശ്നങ്ങൾക്കായി പഠനം നടത്തുക
+4. **[AI Troubleshooting Guide](../chapter-07-troubleshooting/ai-troubleshooting.md)** സാധാരണ പ്രശ്നങ്ങൾക്കും പരിഹാരങ്ങൾക്കും അന്വേഷിക്കുക
 
-## റിസോഴ്സുകൾ
+## വിഭവങ്ങൾ
 
-- [Microsoft Foundry Models Model Availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
-- [Azure Developer CLI Documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps Scaling](https://learn.microsoft.com/azure/container-apps/scale-app)
-- [AI Model Cost Optimization](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
+- [Microsoft Foundry Models Model ലഭ്യത](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
+- [ആസ്യൂർ ഡെവലപ്പർ CLI ഡോക്യുമെന്റേഷൻ](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
+- [കണ്ടെയ്നർ ആപ്ലിക്കേഷനുകളുടെ സ്കെയ്ലിംഗ്](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [എഐ മോഡൽ ചെലവ് മെച്ചപ്പെടുത്തൽ](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
 **അധ്യായ നാവിഗേഷൻ:**
-- **📚 കോഴ്‌സ് ഹോം**: [AZD For Beginners](../../README.md)
-- **📖 ഇപ്പോഴത്തെ അധ്യായം**: അധ്യായം 2 - AI-ഫസ്റ്റ് ഡെവലപ്പ്‌മെന്റ്
-- **⬅️ മുമ്പ്**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
+- **📚 കോഴ്സ് ഹോം**: [AZD For Beginners](../../README.md)
+- **📖 നിലവിലെ അധ്യായം**: അധ്യായം 2 - എഐ-ഫസ്റ്റ് ഡെവലപ്മെന്റ്
+- **⬅️ കഴിഞ്ഞത്**: [Microsoft Foundry Integration](microsoft-foundry-integration.md)
 - **➡️ അടുത്തത്**: [AI Workshop Lab](ai-workshop-lab.md)
 - **🚀 അടുത്ത അധ്യായം**: [അധ്യായം 3: കോൺഫിഗറേഷൻ](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**ഡി‌സ്‌ക്ലെയിമർ**:  
-ഈ ഡോക്യുമെന്റ് AI വിവർത്തന സേവനം [Co-op Translator](https://github.com/Azure/co-op-translator) ഉപയോഗിച്ച് വിവർത്തനം ചെയ്തതാണ്. ഞങ്ങൾ കൃത്യതക്ക് ശ്രമിക്കുന്നുവെങ്കിലും, സ്വയം പ്രവർത്തിക്കുന്ന വിവർത്തനങ്ങളിൽ പിശകുകൾ അല്ലെങ്കിൽ തെറ്റുകൾ ഉണ്ടാകാൻ സാധ്യതയുണ്ടെന്ന് ദയവായി ശ്രദ്ധിക്കുക. മാതൃഭാഷയിലുള്ള ഒറിജിനൽ ഡോക്യുമെന്റാണ് പ്രാമാണികമായ സ്രോതസ്സ് ആയി കണക്കാക്കേണ്ടത്. നിർണ്ണായകമായ വിവരങ്ങൾക്ക് പ്രൊഫഷണൽ മാനുഷിക വിവർത്തനം ശുപാർശ ചെയ്യുന്നു. ഈ വിവർത്തനം ഉപയോഗിച്ചതിലൂടെയുണ്ടാകുന്ന വെറും തെറ്റായ മനസിലാക്കലുകൾക്കോ തെറ്റായി വ്യാഖ്യാനിക്കലുകൾക്കോ ഞങ്ങൾ ഉത്തരവാദികളല്ല.
+**സമ്മതിമൊഴി**:  
+ഈ രേഖ [Co-op Translator](https://github.com/Azure/co-op-translator) എന്ന AI ترجمة സേവനം ഉപയോഗിച്ച് വിവർത്തനം ചെയ്തതാണ്. ഞങ്ങൾ കൃത്യതയ്ക്കായി പരിശ്രമിച്ചിരുന്നെങ്കിലും, സ്വയംക뀄തമായ വിവർത്തനങ്ങളിൽ പിഴവുകളോ അക്രമങ്ങളോ ഉണ്ടാകാവുന്നുണ്ടെന്ന് ദയവായി ശ്രദ്ധിക്കുക. തന്റെ സ്വന്തം ഭാഷയിലുള്ള സാധാരണ രേഖ തന്നെ അധികാരപത്രമായി പരിഗണിക്കേണ്ടതാണ്. നിർണായക വിവരങ്ങൾക്ക്, പ്രൊഫഷണൽ മനുഷ്യ വിവർത്തനം നിർദ്ദേശിക്കപ്പെടുന്നു. ഈ വിവർത്തനത്തിന്റെ ഉപയോഗത്തിൽനിന്നും ഏതു തെറ്റായ ധാരണകൾക്കും തെറ്റായ വ്യാഖ്യാനങ്ങൾക്കും ഞങ്ങൾ ഉത്തരവാദികളല്ല.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

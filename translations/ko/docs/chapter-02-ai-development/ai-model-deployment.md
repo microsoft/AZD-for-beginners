@@ -1,13 +1,15 @@
-# Azure Developer CLI를 사용한 AI 모델 배포
+# Azure Developer CLI로 AI 모델 배포
 
-**챕터 내비게이션:**
+**챕터 탐색:**
 - **📚 코스 홈**: [AZD 초보자용](../../README.md)
 - **📖 현재 챕터**: 챕터 2 - AI 우선 개발
 - **⬅️ 이전**: [Microsoft Foundry 통합](microsoft-foundry-integration.md)
-- **➡️ 다음**: [AI 워크샵 실습](ai-workshop-lab.md)
+- **➡️ 다음**: [AI 워크숍 랩](ai-workshop-lab.md)
 - **🚀 다음 챕터**: [챕터 3: 구성](../chapter-03-configuration/configuration.md)
 
-이 가이드는 AZD 템플릿을 사용하여 AI 모델을 배포하는 포괄적인 지침을 제공하며, 모델 선택부터 프로덕션 배포 패턴까지 모두 다룹니다.
+이 가이드는 모델 선택부터 프로덕션 배포 패턴에 이르기까지 AZD 템플릿을 사용한 AI 모델 배포에 대한 포괄적인 지침을 제공합니다.
+
+> **검증 참고(2026-03-25):** 이 가이드의 AZD 워크플로우는 `azd` `1.23.12`와 비교하여 확인되었습니다. 기본 서비스 배포 시간보다 오래 걸리는 AI 배포의 경우, 현재 AZD 릴리스는 `azd deploy --timeout <seconds>`를 지원합니다.
 
 ## 목차
 
@@ -20,9 +22,9 @@
 
 ## 모델 선택 전략
 
-### Microsoft Foundry 모델
+### Microsoft Foundry 모델 모델
 
-사용 사례에 맞는 적절한 모델을 선택하세요:
+사용 사례에 맞는 올바른 모델을 선택하세요:
 
 ```yaml
 # azure.yaml - Model configuration
@@ -41,9 +43,9 @@ services:
             "format": "OpenAI"
           },
           {
-            "name": "text-embedding-ada-002",
-            "version": "2",
-            "deployment": "text-embedding-ada-002", 
+            "name": "text-embedding-3-large",
+            "version": "1",
+            "deployment": "text-embedding-3-large", 
             "capacity": 30,
             "format": "OpenAI"
           }
@@ -52,12 +54,12 @@ services:
 
 ### 모델 용량 계획
 
-| 모델 유형 | 사용 사례 | 권장 용량 | 비용 고려사항 |
+| Model Type | Use Case | Recommended Capacity | Cost Considerations |
 |------------|----------|---------------------|-------------------|
-| gpt-4.1-mini | 채팅, Q&A | 10-50 TPM | 대부분 작업에 비용 효율적 |
+| gpt-4.1-mini | 채팅, Q&A | 10-50 TPM | 대부분의 워크로드에 비용 효율적 |
 | gpt-4.1 | 복잡한 추론 | 20-100 TPM | 더 높은 비용, 프리미엄 기능에 사용 |
-| Text-embedding-ada-002 | 검색, RAG | 30-120 TPM | 의미 기반 검색에 필수적 |
-| Whisper | 음성-텍스트 변환 | 10-50 TPM | 오디오 처리 작업 |
+| text-embedding-3-large | 검색, RAG | 30-120 TPM | 의미 기반 검색 및 검색에 강력한 기본 선택 |
+| Whisper | 음성-텍스트 변환 | 10-50 TPM | 오디오 처리 워크로드 |
 
 ## AI 모델용 AZD 구성
 
@@ -82,11 +84,11 @@ param openAiModelDeployments array = [
     }
   }
   {
-    name: 'text-embedding-ada-002'
+    name: 'text-embedding-3-large'
     model: {
       format: 'OpenAI'
-      name: 'text-embedding-ada-002'
-      version: '2'
+      name: 'text-embedding-3-large'
+      version: '1'
     }
     sku: {
       name: 'Standard'
@@ -131,12 +133,12 @@ resource deployment 'Microsoft.CognitiveServices/accounts/deployments@2023-05-01
 AZURE_OPENAI_ENDPOINT=https://your-openai-resource.openai.azure.com/
 AZURE_OPENAI_API_VERSION=2024-02-15-preview
 AZURE_OPENAI_CHAT_DEPLOYMENT=gpt-4.1-mini
-AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-ada-002
+AZURE_OPENAI_EMBED_DEPLOYMENT=text-embedding-3-large
 ```
 
 ## 배포 패턴
 
-### 패턴 1: 단일 지역 배포
+### 패턴 1: 단일 리전 배포
 
 ```yaml
 # azure.yaml - Single region
@@ -149,12 +151,12 @@ services:
       AZURE_OPENAI_CHAT_DEPLOYMENT: gpt-4.1-mini
 ```
 
-적합 대상:
+다음에 적합:
 - 개발 및 테스트
 - 단일 시장 애플리케이션
 - 비용 최적화
 
-### 패턴 2: 다중 지역 배포
+### 패턴 2: 다중 리전 배포
 
 ```bicep
 // Multi-region deployment
@@ -167,14 +169,14 @@ resource openAiMultiRegion 'Microsoft.CognitiveServices/accounts@2023-05-01' = [
 }]
 ```
 
-적합 대상:
+다음에 적합:
 - 글로벌 애플리케이션
-- 높은 가용성 요구사항
+- 높은 가용성 요구 사항
 - 부하 분산
 
 ### 패턴 3: 하이브리드 배포
 
-Microsoft Foundry 모델과 다른 AI 서비스를 결합:
+Microsoft Foundry 모델을 다른 AI 서비스와 결합하세요:
 
 ```bicep
 // Hybrid AI services
@@ -215,11 +217,11 @@ AZD 구성에서 모델 버전을 추적하세요:
     "chat": {
       "name": "gpt-4.1-mini",
       "version": "2024-07-18",
-      "fallback": "gpt-35-turbo"
+      "fallback": "gpt-4.1"
     },
     "embedding": {
-      "name": "text-embedding-ada-002",
-      "version": "2"
+      "name": "text-embedding-3-large",
+      "version": "1"
     }
   }
 }
@@ -227,7 +229,7 @@ AZD 구성에서 모델 버전을 추적하세요:
 
 ### 모델 업데이트
 
-AZD 훅을 사용하여 모델을 업데이트하세요:
+모델 업데이트에 AZD 훅을 사용하세요:
 
 ```bash
 #!/bin/bash
@@ -238,6 +240,9 @@ az cognitiveservices account list-models \
   --name $AZURE_OPENAI_ACCOUNT_NAME \
   --resource-group $AZURE_RESOURCE_GROUP \
   --query "[?name=='gpt-4.1-mini']"
+
+# 배포가 기본 타임아웃보다 오래 걸리는 경우
+azd deploy --timeout 1800
 ```
 
 ### A/B 테스트
@@ -271,7 +276,7 @@ resource chatDeployment 'Microsoft.CognitiveServices/accounts/deployments@2023-0
 사용 패턴에 따라 필요한 용량을 계산하세요:
 
 ```python
-# 용량 계산 예제
+# 용량 계산 예시
 def calculate_required_capacity(
     requests_per_minute: int,
     avg_prompt_tokens: int,
@@ -283,7 +288,7 @@ def calculate_required_capacity(
     total_tpm = requests_per_minute * total_tokens_per_request
     return int(total_tpm * (1 + safety_margin))
 
-# 사용 예제
+# 사용 예시
 required_capacity = calculate_required_capacity(
     requests_per_minute=10,
     avg_prompt_tokens=500,
@@ -295,7 +300,7 @@ print(f"Required capacity: {required_capacity} TPM")
 
 ### 자동 확장 구성
 
-Container Apps의 자동 확장을 구성하세요:
+Container Apps에 대한 자동 확장을 구성하세요:
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -333,7 +338,7 @@ resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
 
 ### 비용 최적화
 
-비용 관리를 구현하세요:
+비용 제어를 구현하세요:
 
 ```bicep
 @description('Enable cost management alerts')
@@ -367,7 +372,7 @@ resource budgetAlert 'Microsoft.Consumption/budgets@2023-05-01' = if (enableCost
 
 ### Application Insights 통합
 
-AI 워크로드 모니터링을 구성하세요:
+AI 워크로드에 대한 모니터링을 구성하세요:
 
 ```bicep
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
@@ -403,12 +408,12 @@ resource aiMetrics 'Microsoft.Insights/components/analyticsItems@2020-02-02' = {
 }
 ```
 
-### 맞춤 지표
+### 사용자 정의 메트릭
 
-AI 전용 지표를 추적하세요:
+AI 관련 지표를 추적하세요:
 
 ```python
-# AI 모델을 위한 맞춤형 텔레메트리
+# AI 모델용 사용자 정의 텔레메트리
 import logging
 from applicationinsights import TelemetryClient
 
@@ -440,12 +445,12 @@ class AITelemetry:
         )
 ```
 
-### 상태 점검
+### 상태 검사
 
 AI 서비스 상태 모니터링을 구현하세요:
 
 ```python
-# 상태 점검 엔드포인트
+# 상태 확인 엔드포인트
 from fastapi import FastAPI, HTTPException
 import httpx
 
@@ -473,30 +478,30 @@ async def check_ai_models():
 
 ## 다음 단계
 
-1. <strong>[Microsoft Foundry 통합 가이드](microsoft-foundry-integration.md)</strong>를 검토하여 서비스 통합 패턴 확인
-2. <strong>[AI 워크샵 실습](ai-workshop-lab.md)</strong>을 완료하여 실습 경험 쌓기
-3. <strong>[프로덕션 AI 실행 가이드](production-ai-practices.md)</strong>를 구현하여 기업 배포 준비
-4. <strong>[AI 문제 해결 가이드](../chapter-07-troubleshooting/ai-troubleshooting.md)</strong>를 탐색하여 일반 문제 해결
+1. **[Microsoft Foundry 통합 가이드](microsoft-foundry-integration.md)을 검토하세요** 서비스 통합 패턴을 위해
+2. **[AI 워크숍 랩](ai-workshop-lab.md)을 완료하세요** 실습 경험을 위해
+3. **[프로덕션 AI 관행](production-ai-practices.md)을 구현하세요** 엔터프라이즈 배포를 위해
+4. **[AI 문제 해결 가이드](../chapter-07-troubleshooting/ai-troubleshooting.md)를 살펴보세요** 일반적인 문제에 대해
 
 ## 리소스
 
 - [Microsoft Foundry 모델 가용성](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)
 - [Azure Developer CLI 문서](https://learn.microsoft.com/azure/developer/azure-developer-cli/)
-- [Container Apps 확장](https://learn.microsoft.com/azure/container-apps/scale-app)
+- [Container Apps 스케일링](https://learn.microsoft.com/azure/container-apps/scale-app)
 - [AI 모델 비용 최적화](https://learn.microsoft.com/azure/ai-services/openai/how-to/manage-costs)
 
 ---
 
-**챕터 내비게이션:**
+**챕터 탐색:**
 - **📚 코스 홈**: [AZD 초보자용](../../README.md)
 - **📖 현재 챕터**: 챕터 2 - AI 우선 개발
 - **⬅️ 이전**: [Microsoft Foundry 통합](microsoft-foundry-integration.md)
-- **➡️ 다음**: [AI 워크샵 실습](ai-workshop-lab.md)
+- **➡️ 다음**: [AI 워크숍 랩](ai-workshop-lab.md)
 - **🚀 다음 챕터**: [챕터 3: 구성](../chapter-03-configuration/configuration.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**면책 조항**:  
-이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 노력하고 있으나, 자동 번역에는 오류나 부정확성이 포함될 수 있음을 유의하시기 바랍니다. 원본 문서의 원어 버전이 권위 있는 출처로 간주되어야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 본 번역의 사용으로 발생하는 오해나 오해석에 대해 당사는 책임을 지지 않습니다.
+**Disclaimer**:
+이 문서는 AI 번역 서비스 [Co-op Translator](https://github.com/Azure/co-op-translator)를 사용하여 번역되었습니다. 정확성을 위해 노력하고 있지만, 자동 번역은 오류나 부정확성이 포함될 수 있음을 유의하시기 바랍니다. 원문(원어) 문서를 권위 있는 출처로 간주해야 합니다. 중요한 정보의 경우, 전문적인 인간 번역을 권장합니다. 본 번역의 사용으로 인해 발생하는 오해나 잘못된 해석에 대해 당사는 책임을 지지 않습니다.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
