@@ -1001,58 +1001,58 @@ If you have local branches or documentation referencing the old structure:
 - **Best Practices Integration**: 業界標準と推奨事項の統合
 - **Version Compatibility**: 最新の Azure サービスと azd 機能に対応
 
-## Planned Future Enhancements
+## 計画されている将来の拡張
 
-### Version 3.1.0 (Planned)
-#### AI Platform Expansion
+### バージョン 3.1.0 (計画中)
+#### AI プラットフォームの拡張
 - **Multi-Model Support**: Hugging Face、Azure Machine Learning、カスタムモデルとの統合パターン
 - **AI Agent Frameworks**: LangChain、Semantic Kernel、AutoGen のデプロイ用テンプレート
 - **Advanced RAG Patterns**: Azure AI Search 以外のベクトルデータベースオプション (Pinecone, Weaviate など)
 - **AI Observability**: モデル性能、トークン使用量、応答品質の監視強化
 
-#### Developer Experience
+#### 開発者体験
 - **VS Code Extension**: AZD + Microsoft Foundry の統合開発体験
 - **GitHub Copilot Integration**: AZD テンプレート生成の AI 支援
 - **Interactive Tutorials**: AI シナリオ向けの自動検証付きハンズオンコーディング演習
 - **Video Content**: AI 展開に焦点を当てた視覚学習者向け補助ビデオチュートリアル
 
-### Version 4.0.0 (Planned)
-#### Enterprise AI Patterns
+### バージョン 4.0.0 (計画中)
+#### エンタープライズ AI パターン
 - **Governance Framework**: AI モデルのガバナンス、コンプライアンス、監査トレイル
 - **Multi-Tenant AI**: 分離された AI サービスで複数顧客に対応するパターン
 - **Edge AI Deployment**: Azure IoT Edge およびコンテナ インスタンスとの統合
 - **Hybrid Cloud AI**: AI ワークロードのマルチクラウドおよびハイブリッド展開パターン
 
-#### Advanced Features
+#### 高度な機能
 - **AI Pipeline Automation**: Azure Machine Learning パイプラインとの MLOps 統合
 - **Advanced Security**: ゼロトラスト パターン、プライベート エンドポイント、高度な脅威保護
 - **Performance Optimization**: 高スループット AI アプリケーション向けの高度なチューニングとスケーリング戦略
 - **Global Distribution**: AI アプリケーション向けのコンテンツ配信とエッジキャッシュのパターン
 
-### Version 3.0.0 (Planned) - Superseded by Current Release
-#### Proposed Additions - Now Implemented in v3.0.0
+### バージョン 3.0.0 (計画中) - 現在のリリースに置き換えられました
+#### 提案された追加 - v3.0.0 で実装済み
 - ✅ **AI-Focused Content**: 包括的な Microsoft Foundry 統合 (完了)
 - ✅ **Interactive Tutorials**: ハンズオン AI ワークショップ ラボ (完了)
 - ✅ **Advanced Security Module**: AI 固有のセキュリティ パターン (完了)
 - ✅ **Performance Optimization**: AI ワークロードのチューニング戦略 (完了)
 
-### Version 2.1.0 (Planned) - Partially Implemented in v3.0.0
-#### Minor Enhancements - Some Completed in Current Release
+### バージョン 2.1.0 (計画中) - v3.0.0 で一部実装済み
+#### マイナーな強化 - 現在のリリースで一部完了
 - ✅ **Additional Examples**: AI に焦点を当てたデプロイ シナリオの追加 (完了)
 - ✅ **Extended FAQ**: AI 固有の質問とトラブルシューティング (完了)
 - **Tool Integration**: 強化された IDE とエディタ統合ガイド
 - ✅ **Monitoring Expansion**: AI 固有のモニタリングとアラート パターン (完了)
 
-#### Still Planned for Future Release
+#### 将来のリリースに向けて計画中
 - **Mobile-Friendly Documentation**: モバイル学習向けのレスポンシブデザイン
 - **Offline Access**: ダウンロード可能なドキュメントパッケージ
 - **Enhanced IDE Integration**: AZD + AI ワークフロー向けの VS Code 拡張
 - **Community Dashboard**: リアルタイムのコミュニティ指標と貢献トラッキング
 
-## Contributing to the Changelog
+## 変更ログへの貢献
 
-### Reporting Changes
-When contributing to this repository, please ensure changelog entries include:
+### 変更の報告
+このリポジトリに貢献する際は、変更ログのエントリに以下が含まれていることを確認してください:
 
 1. **Version Number**: セマンティック バージョニングに従う (major.minor.patch)
 2. **Date**: リリースまたは更新日 (YYYY-MM-DD 形式)
@@ -1060,67 +1060,67 @@ When contributing to this repository, please ensure changelog entries include:
 4. **Clear Description**: 変更内容の簡潔な説明
 5. **Impact Assessment**: 既存ユーザーへの影響
 
-### Change Categories
+### 変更カテゴリ
 
-#### Added
+#### 追加
 - 新機能、ドキュメントセクション、または機能強化
 - 新しい例、テンプレート、学習リソース
 - 追加ツール、スクリプト、ユーティリティ
 
-#### Changed
+#### 変更
 - 既存機能やドキュメントの変更
 - 明確性や正確性を向上させる更新
 - コンテンツや構成の再編成
 
-#### Deprecated
+#### 廃止予定
 - 段階的に廃止される機能やアプローチ
 - 削除予定のドキュメントセクション
 - より良い代替手段がある手法
 
-#### Removed
+#### 削除
 - もはや関連性のない機能、ドキュメント、例
 - 古くなった情報や非推奨のアプローチ
 - 冗長または統合されたコンテンツ
 
-#### Fixed
+#### 修正
 - ドキュメントやコードの誤りの修正
 - 報告された問題や欠陥の解決
 - 正確性や機能性の改善
 
-#### Security
+#### セキュリティ
 - セキュリティに関連する改善や修正
 - セキュリティベストプラクティスの更新
 - セキュリティ脆弱性の解決
 
-### Semantic Versioning Guidelines
+### セマンティック バージョニング ガイドライン
 
-#### Major Version (X.0.0)
+#### メジャーバージョン (X.0.0)
 - ユーザー側の対応が必要な破壊的変更
 - コンテンツや構成の大幅な再構築
 - 基本的なアプローチや方法論を変更する変更
 
-#### Minor Version (X.Y.0)
+#### マイナーバージョン (X.Y.0)
 - 新機能やコンテンツの追加
 - 後方互換性を維持する強化
 - 追加の例、ツール、リソース
 
-#### Patch Version (X.Y.Z)
+#### パッチバージョン (X.Y.Z)
 - バグ修正と訂正
 - 既存コンテンツへの小さな改善
 - 明確化や小規模な強化
 
-## Community Feedback and Suggestions
+## コミュニティフィードバックと提案
 
-We actively encourage community feedback to improve this learning resource:
+私たちはこの学習リソースを改善するためにコミュニティフィードバックを積極的に歓迎します:
 
-### How to Provide Feedback
+### フィードバックの提供方法
 - **GitHub Issues**: 問題を報告するか改善を提案 (AI 固有の問題も歓迎)
 - **Discord Discussions**: アイデアを共有し Microsoft Foundry コミュニティと交流
 - **Pull Requests**: コンテンツへの直接的な改善を貢献、特に AI テンプレートとガイド
 - **Microsoft Foundry Discord**: AZD + AI に関する #Azure チャンネルに参加
 - **Community Forums**: より広範な Azure 開発者コミュニティで議論に参加
 
-### Feedback Categories
+### フィードバックカテゴリ
 - **AI Content Accuracy**: AI サービス統合とデプロイ情報の修正
 - **Learning Experience**: AI 開発者の学習フロー改善の提案
 - **Missing AI Content**: 追加の AI テンプレート、パターン、例の要望
@@ -1128,29 +1128,29 @@ We actively encourage community feedback to improve this learning resource:
 - **AI Tool Integration**: より良い AI 開発ワークフロー統合の提案
 - **Production AI Patterns**: エンタープライズ向け AI デプロイ パターンの要望
 
-### Response Commitment
+### 対応コミットメント
 - **Issue Response**: 報告された問題に 48 時間以内に対応
 - **Feature Requests**: 1 週間以内に評価
 - **Community Contributions**: 1 週間以内にレビュー
 - **Security Issues**: 優先度を高めて即時対応
 
-## Maintenance Schedule
+## メンテナンススケジュール
 
-### Regular Updates
+### 定期的な更新
 - **Monthly Reviews**: コンテンツの正確性とリンクの検証
 - **Quarterly Updates**: 主要なコンテンツ追加と改善
 - **Semi-Annual Reviews**: 包括的な再構築と強化
 - **Annual Releases**: 重要な改善を伴うメジャーリリース
 
-### Monitoring and Quality Assurance
+### モニタリングと品質保証
 - **Automated Testing**: コード例とリンクの定期的検証
 - **Community Feedback Integration**: ユーザー提案の定期的な反映
 - **Technology Updates**: 最新の Azure サービスと azd リリースに合わせた整合
 - **Accessibility Audits**: 包摂的デザイン原則の定期的レビュー
 
-## Version Support Policy
+## バージョンサポートポリシー
 
-### Current Version Support
+### 現在のバージョンサポート
 - <strong>最新のメジャーバージョン</strong>: 定期的なアップデートによる完全なサポート
 - <strong>前のメジャーバージョン</strong>: 12か月間のセキュリティアップデートと重要な修正
 - <strong>レガシーバージョン</strong>: コミュニティサポートのみ、公式の更新なし
