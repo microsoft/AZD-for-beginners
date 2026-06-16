@@ -1,26 +1,26 @@
-# 2. Validar una Plantilla
+# 2. Validate a Template
 
-> Validado contra `azd 1.23.12` en marzo de 2026.
+> Validated against `azd 1.25.6` in June 2026.
 
 !!! tip "AL FINAL DE ESTE MÓDULO PODRÁS"
 
     - [ ] Analizar la arquitectura de la solución de IA
-    - [ ] Comprender el flujo de despliegue de AZD
+    - [ ] Entender el flujo de trabajo de despliegue con AZD
     - [ ] Usar GitHub Copilot para obtener ayuda sobre el uso de AZD
-    - [ ] **Lab 2:** Implementar y validar la plantilla de Agentes de IA
+    - [ ] **Laboratorio 2:** Desplegar y validar la plantilla AI Agents
 
 ---
 
 
-## 1. Introducción
+## 1. Introduction
 
-El [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) o `azd` es una herramienta de línea de comandos de código abierto que simplifica el flujo de trabajo del desarrollador al crear y desplegar aplicaciones en Azure. 
+The [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/) or `azd` is an open-source commandline tool that streamlines the developer workflow when building and deploying applications to Azure. 
 
-[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) son repositorios estandarizados que incluyen código de muestra de la aplicación, activos de _infraestructura como código_, y archivos de configuración de `azd` para una arquitectura de solución coherente. Provisionar la infraestructura se vuelve tan simple como un comando `azd provision` - mientras que usar `azd up` te permite aprovisionar la infraestructura **y** desplegar tu aplicación de una sola vez.
+[AZD Templates](https://learn.microsoft.com/azure/developer/azure-developer-cli/azd-templates) are standardized repositories that include sample application code, _infrastructure-as-code_ assets, and `azd` configuration files for a cohesive solution architecture. Provisioning the infrastructure becomes as simple as an `azd provision` command - while using `azd up` allows you to provision infrastructure **and** deploy your application at one shot!
 
-Como resultado, iniciar el proceso de desarrollo de tu aplicación puede ser tan simple como encontrar la _AZD Starter template_ adecuada que se acerque más a tus necesidades de aplicación e infraestructura - y luego personalizar el repositorio para adaptar el escenario a tus requisitos.
+As a result, jumpstarting your application development process can be as simple as finding the right _AZD Starter template_ that comes closest to your application and infrastructure needs - then customizing the repository to suit your scenario requirements.
 
-Antes de comenzar, asegúrate de tener instalado el Azure Developer CLI.
+Before we begin, let's make sure you have the Azure Developer CLI installed.
 
 1. Open a VS Code terminal and type this command:
 
@@ -31,27 +31,27 @@ Antes de comenzar, asegúrate de tener instalado el Azure Developer CLI.
 1. You should see something like this!
 
       ```bash title="" linenums="0"
-      azd version 1.23.12 (commit <current-build>)
+      azd version 1.25.6 (commit <current-build>)
       ```
 
-**Ahora estás listo para seleccionar e implementar una plantilla con azd**
+**You are now ready to select and deploy a template with azd**
 
 ---
 
-## 2. Selección de plantilla
+## 2. Template Selection
 
-La plataforma Microsoft Foundry incluye un [conjunto de plantillas AZD recomendadas](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) que cubren escenarios de solución populares como _automatización de flujos de trabajo multiagente_ y _procesamiento de contenido multimodal_. También puedes descubrir estas plantillas visitando el portal de Microsoft Foundry.
+The Microsoft Foundry platform comes with a [set of recommended AZD templates](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/ai-template-get-started) that cover popular solution scenarios like _multi-agent workflow atomation_ and _multi-modal content processing_. You can also discover these templates by visiting the Microsoft Foundry portal.
 
 1. Visit [https://ai.azure.com/templates](https://ai.azure.com/templates)
 1. Log into the Microsoft Foundry portal when prompted - you will see something like this.
 
-![Seleccionar](../../../../../translated_images/es/01-pick-template.60d2d5fff5ebc374.webp)
+![Elegir](../../../../../translated_images/es/01-pick-template.60d2d5fff5ebc374.webp)
 
 
 The **Basic** options are your starter templates:
 
-1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) que despliega una aplicación de chat básica _con tus datos_ en Azure Container Apps. Úsala para explorar un escenario básico de chatbot de IA.
-1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) que también despliega un Agente de IA estándar (con los Foundry Agents). Úsalo para familiarizarte con soluciones con agentes de IA que implican herramientas y modelos.
+1. [ ] [Get Started with AI Chat](https://github.com/Azure-Samples/get-started-with-ai-chat) that deploys a basic chat application _with your data_ to Azure Container Apps. Use this to explore a basic AI chatbot scenario.
+1. [X] [Get Started with AI Agents](https://github.com/Azure-Samples/get-started-with-ai-agents) that also deploys a standard AI Agent (with the Foundry Agents). Use this to get familiar with agentic AI solutions involving tools and models.
 
 Visit the second link in a new browser tab (or click `Open in GitHub` for the related card). You should see the repository for this AZD Template. Take a minute to explore the README. The application architecture looks like this:
 
@@ -59,9 +59,9 @@ Visit the second link in a new browser tab (or click `Open in GitHub` for the re
 
 ---
 
-## 3. Activación de la plantilla
+## 3. Template Activation
 
-Intentemos desplegar esta plantilla y asegurarnos de que es válida. Seguiremos las indicaciones en la sección [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started).
+Let's try to deploy this template and make sure it is valid. We'll follow the guidelines in the [Getting Started](https://github.com/Azure-Samples/get-started-with-ai-agents?tab=readme-ov-file#getting-started) section.
 
 1. Choose a working environment for the template repository:
 
@@ -92,11 +92,11 @@ Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
       ![Infraestructura](../../../../../translated_images/es/02-provisioned-infra.46c706b14f56e0bf.webp)
 
-1. **Ahora estás listo para validar la infraestructura y la aplicación desplegadas**.
+1. **You are now ready to validate the deployed infrastructure and application**.
 
 ---
 
-## 4. Validación de la plantilla
+## 4. Template Validation
 
 1. Visit Azure Portal [Resource Groups](https://portal.azure.com/#browse/resourcegroups) page - log in when prompted
 1. Click on RG for your environment name - you see the page above
@@ -110,8 +110,8 @@ Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
 1. Try asking a couple of [sample questions](https://github.com/Azure-Samples/get-started-with-ai-agents/blob/main/docs/sample_questions.md)
 
-      1. Pregunta: ```What is the capital of France?``` 
-      1. Pregunta: ```What's the best tent under $200 for two people, and what features does it include?```
+      1. Ask: ```What is the capital of France?``` 
+      1. Ask: ```What's the best tent under $200 for two people, and what features does it include?```
 
 1. You should get answers similar to what is shown below. _But how does this work?_ 
 
@@ -119,9 +119,9 @@ Now, you wait for the provisioning to complete. **This takes 10-15 minutes**
 
 ---
 
-## 5.  Validación del Agente
+## 5.  Agent Validation
 
-La Azure Container App despliega un endpoint que se conecta con el Agente de IA aprovisionado en el proyecto Microsoft Foundry para esta plantilla. Veamos qué significa eso.
+The Azure Container App deploys an endpoint that connects to the AI Agent provisioned in the Microsoft Foundry project for this template. Let's take a look at what that means.
 
 1. Return to the Azure Portal _Overview_ page for your resource group
 
@@ -148,11 +148,11 @@ La Azure Container App despliega un endpoint que se conecta con el Agente de IA 
       - These will correspond to the 12 customer files and 20 product files under `src/files` 
       ![Datos](../../../../../translated_images/es/08-visit-data-indexes.5a4cc1686fa0d19a.webp)
 
-**¡Has validado el funcionamiento del Agente!** 
+**You validated Agent operation!** 
 
-1. Las respuestas del agente están fundamentadas en el conocimiento de esos archivos. 
-1. Ahora puedes hacer preguntas relacionadas con esos datos y obtener respuestas fundamentadas.
-1. Ejemplo: `customer_info_10.json` describe las 3 compras realizadas por "Amanda Perez"
+1. The agent responses are grounded in the knowledge in those files. 
+1. You can now ask questions related to that data, and get grounded responses.
+1. Example: `customer_info_10.json` describes the 3 purchases made by "Amanda Perez"
 
 Revisit the browser tab with the Container App endpoint and ask: `What products does Amanda Perez own?`. You should see something like this:
 
@@ -160,9 +160,9 @@ Revisit the browser tab with the Container App endpoint and ask: `What products 
 
 ---
 
-## 6. Playground del Agente
+## 6. Agent Playground
 
-Desarrollemos un poco más de intuición sobre las capacidades de Microsoft Foundry, probando el Agente en el Playground de Agentes. 
+Let's build a bit more intuition for the capabilities of Microsoft Foundry, by taking the Agent for a spin in the Agents Playground. 
 
 1. Return to the `Agents` page in Microsoft Foundry - select the default agent
 1. Click the `Try in Playground` option - you should get a Playground UI like this
@@ -170,29 +170,29 @@ Desarrollemos un poco más de intuición sobre las capacidades de Microsoft Foun
 
     ![Datos](../../../../../translated_images/es/09-ask-in-playground.a1b93794f78fa676.webp)
 
-Obtienes la misma (o similar) respuesta - pero también obtienes información adicional que puedes usar para entender la calidad, el coste y el rendimiento de tu aplicación agentiva. Por ejemplo:
+You get the same (or similar) response - but you also get additional information that you can use to understand the quality, cost, and performance of your agentic app. For example:
 
-1. Observa que la respuesta cita archivos de datos usados para "fundamentar" la respuesta
-1. Pasa el cursor por cualquiera de estas etiquetas de archivo - ¿coinciden los datos con tu consulta y la respuesta mostrada?
+1. Note that the response cites data files used to "ground" the response
+1. Hover over any of these file labels - does the data match your query and displayed response?
 
-También verás una fila de _stats_ debajo de la respuesta. 
+You also see a _stats_ row below the response. 
 
-1. Pasa el cursor por cualquier métrica - por ejemplo, Safety. Verás algo como esto
-1. ¿La valoración evaluada coincide con tu intuición sobre el nivel de seguridad de la respuesta?
+1. Hover over any metric - e.g., Safety. You see something like this
+1. Does the assessed rating match your intuition for the response safety level?
 
       ![Datos](../../../../../translated_images/es/10-view-run-info-meter.6cdb89a0eea5531f.webp)
 
 ---
 
-## 7. Observabilidad integrada
+## 7. Built-in Observability
 
-La observabilidad trata de instrumentar tu aplicación para generar datos que puedan usarse para comprender, depurar y optimizar sus operaciones. Para hacerte una idea de esto:
+Observability is about instrumenting your application to generate data that can be used to understand, debug, and optimize, its operations. To get a sense for this:
 
 1. Click the `View Run Info` button - you should see this view. This is an example of [Agent tracing](https://learn.microsoft.com/en-us/azure/ai-foundry/how-to/develop/trace-agents-sdk#view-trace-results-in-the-azure-ai-foundry-agents-playground) in action. _You can also get this view by clicking Thread Logs in the top-level menu_.
 
-   - Hazte una idea de los pasos de ejecución y las herramientas empleadas por el agente
-   - Entiende el conteo total de Tokens (vs. uso de tokens de salida) para la respuesta
-   - Comprende la latencia y dónde se está pasando el tiempo en la ejecución
+   - Get a sense for the run steps and tools engaged by the agent
+   - Understand total Token count (vs. output tokens usage) for response
+   - Understand the latency and where time is being spent in execution
 
       ![Agente](../../../../../translated_images/es/10-view-run-info.b20ebd75fef6a1cc.webp)
 
@@ -215,9 +215,9 @@ La observabilidad trata de instrumentar tu aplicación para generar datos que pu
 
 ---
 
-## 8. Variables de entorno
+## 8. Environment Variables
 
-Hasta ahora, hemos recorrido el despliegue en el navegador y validado que nuestra infraestructura está aprovisionada y la aplicación está operativa. Pero para trabajar con la aplicación _desde el código_, necesitamos configurar nuestro entorno de desarrollo local con las variables relevantes necesarias para trabajar con estos recursos. Usar `azd` lo facilita.
+So far, we've walked through the deployment in the browser - and validated that our infrastructure is provisioned and the application is operational. But to work with the application _code-first_, we need to configure our local development environment with the relevant variables required to work with these resources. Using `azd` makes it easy.
 
 1. The Azure Developer CLI [uses environment variables](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/manage-environment-variables?tabs=bash) to store and manage configuration settings for  the application deployments.
 
@@ -234,7 +234,7 @@ Let's try out a few commands:
       azd env get-values
       ```
       
-      Verás algo como:
+      You see something like:
 
       ```bash title="" linenums="0"
       AZURE_AI_AGENT_DEPLOYMENT_NAME="gpt-4.1-mini"
@@ -250,13 +250,13 @@ Let's try out a few commands:
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
       ```
       
-      Verás algo como esto - ¡no estaba establecido por defecto!
+      You see something like this - it was not set by default!
 
       ```bash title="" linenums="0"
       ERROR: key 'AZURE_AI_AGENT_MODEL_NAME' not found in the environment values
       ```
 
-1. Set a new environment variable for `azd`. Here, we update the agent model name. _Nota: cualquier cambio realizado se reflejará de inmediato en el archivo `.azure/<env-name>/.env`._
+1. Set a new environment variable for `azd`. Here, we update the agent model name. _Note: any changes made will be immediately reflected in the `.azure/<env-name>/.env` file.
 
       ```bash title="" linenums="0"
       azd env set AZURE_AI_AGENT_MODEL_NAME gpt-4.1
@@ -264,7 +264,7 @@ Let's try out a few commands:
       azd env set AZURE_AI_AGENT_DEPLOYMENT_CAPACITY 150
       ```
 
-      Ahora, deberíamos encontrar que el valor está establecido:
+      Now, we should find the value is set:
 
       ```bash title="" linenums="0"
       azd env get-value AZURE_AI_AGENT_MODEL_NAME 
@@ -278,21 +278,21 @@ Let's try out a few commands:
       azd env refresh
       ```
 
-      Esta es una forma poderosa de _sincronizar_ las variables de entorno entre dos o más entornos de desarrollo locales (p. ej., un equipo con varios desarrolladores) - permitiendo que la infraestructura implementada sirva como la fuente de verdad para el estado de las variables de entorno. Los miembros del equipo simplemente _actualizan_ las variables para volver a sincronizarse.
+      Esta es una forma poderosa de _sincronizar_ las variables de entorno entre dos o más entornos de desarrollo locales (p. ej., un equipo con varios desarrolladores) - permitiendo que la infraestructura desplegada sirva como la fuente de la verdad para el estado de las variables de entorno. Los miembros del equipo simplemente _actualizan_ las variables para volver a sincronizarse.
 
 ---
 
-## 9. Felicitaciones 🏆
+## 9. ¡Felicidades 🏆
 
 Acabas de completar un flujo de trabajo de extremo a extremo en el que:
 
-- [X] Seleccionaste la plantilla AZD que deseas usar
+- [X] Seleccionaste la plantilla AZD que querías usar
 - [X] Abriste la plantilla en un entorno de desarrollo compatible
 - [X] Desplegaste la plantilla y validaste que funciona
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Este documento ha sido traducido usando el servicio de traducción por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la exactitud, tenga en cuenta que las traducciones automáticas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por un traductor humano. No nos responsabilizamos por malentendidos o interpretaciones erróneas que surjan del uso de esta traducción.
+**Descargo de responsabilidad**:
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional humana. No somos responsables de cualquier malentendido o interpretación errónea que surja del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

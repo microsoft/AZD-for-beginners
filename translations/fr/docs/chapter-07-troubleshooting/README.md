@@ -1,14 +1,14 @@
-# Chapitre 7 : Résolution des problèmes et débogage
+# Chapitre 7 : Dépannage & Debugging
 
-**📚 Cours** : [AZD Pour débutants](../../README.md) | **⏱️ Durée** : 1-1,5 heures | **⭐ Complexité** : Intermédiaire
+**📚 Cours** : [AZD Pour Débutants](../../README.md) | **⏱️ Durée** : 1-1.5 heures | **⭐ Complexité** : Intermédiaire
 
 ---
 
 ## Aperçu
 
-Ce chapitre vous aide à diagnostiquer et résoudre les problèmes courants lors de l'utilisation d'Azure Developer CLI. Des échecs de déploiement aux problèmes spécifiques à l'IA.
+Ce chapitre vous aide à diagnostiquer et résoudre les problèmes courants lors de l'utilisation de Azure Developer CLI. Des échecs de déploiement aux problèmes spécifiques à l'IA.
 
-> Validé avec `azd 1.23.12` en mars 2026.
+> Validé avec `azd 1.25.6` en juin 2026.
 
 ## Objectifs d'apprentissage
 
@@ -16,7 +16,7 @@ En complétant ce chapitre, vous allez :
 - Diagnostiquer les échecs courants de déploiement AZD
 - Déboguer les problèmes d'authentification et de permissions
 - Résoudre les problèmes de connectivité des services IA
-- Utiliser Azure Portal et CLI pour la résolution des problèmes
+- Utiliser le portail Azure et la CLI pour le dépannage
 
 ---
 
@@ -30,14 +30,14 @@ En complétant ce chapitre, vous allez :
 
 ---
 
-## 🚨 Résolutions rapides
+## 🚨 Correctifs rapides
 
 ### Problèmes d'authentification
 ```bash
-# Requis pour les workflows AZD
+# Nécessaire pour les workflows AZD
 azd auth login
 
-# Optionnel si vous utilisez également les commandes Azure CLI directement
+# Optionnel si vous utilisez également directement les commandes Azure CLI
 az login
 
 azd auth status
@@ -72,7 +72,7 @@ azd up
 |--------|-------|----------|
 | `AuthenticationError` | Non connecté | `azd auth login` |
 | `ResourceNotFound` | Ressource manquante | Vérifiez les noms des ressources |
-| `QuotaExceeded` | Limites d’abonnement | Demandez une augmentation de quota |
+| `QuotaExceeded` | Limites d'abonnement | Demandez une augmentation du quota |
 | `InvalidTemplate` | Erreur de syntaxe Bicep | `az bicep build` |
 | `Conflict` | Ressource existante | Utilisez un nouveau nom ou supprimez |
 | `Forbidden` | Permissions insuffisantes | Vérifiez les rôles RBAC |
@@ -110,6 +110,6 @@ azd up
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer la précision, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant foi. Pour les informations critiques, une traduction professionnelle humaine est recommandée. Nous déclinons toute responsabilité en cas de malentendus ou de mauvaises interprétations découlant de l'utilisation de cette traduction.
+**Avertissement** :
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforçions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue native doit être considéré comme la source faisant autorité. Pour les informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous ne saurions être tenus responsables des malentendus ou erreurs d'interprétation découlant de l'utilisation de cette traduction.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

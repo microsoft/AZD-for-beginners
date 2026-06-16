@@ -29,6 +29,7 @@ graph TD
     Foundry --> KV[Azure Key Vault<br/>OpenAI API Key<br/>Endpoint URL]
     Foundry -. Managed Identity .-> KV
 ```
+
 ## Prerequisites
 
 ### Required
@@ -121,11 +122,11 @@ azd show
 ### Step 2: Test OpenAI API
 
 ```bash
-# 获取OpenAI端点和密钥
+# Get OpenAI endpoint and key
 OPENAI_ENDPOINT=$(azd env get-value AZURE_OPENAI_ENDPOINT)
 OPENAI_KEY=$(azd env get-value AZURE_OPENAI_API_KEY)
 
-# 测试API调用
+# Test API call
 curl "$OPENAI_ENDPOINT/openai/deployments/gpt-4.1/chat/completions?api-version=2024-08-01-preview" \
   -H "Content-Type: application/json" \
   -H "api-key: $OPENAI_KEY" \
@@ -518,7 +519,7 @@ azd down --force --purge
 
 2. **Implement RAG** - Add document search with Azure AI Search
    ```python
-   # Integrate Azure Cognitive Search
+   # Integrate Azure AI Search
    # Upload documents and create vector index
    ```
 
@@ -582,5 +583,5 @@ azd down --force --purge
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Disclaimer**:
-This document has been translated using the AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
+This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

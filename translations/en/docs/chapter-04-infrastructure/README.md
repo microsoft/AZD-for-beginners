@@ -8,7 +8,7 @@
 
 This chapter covers Infrastructure as Code (IaC) patterns with Bicep templates, resource provisioning, and deployment strategies using Azure Developer CLI.
 
-> Validated against `azd 1.23.12` in March 2026.
+> Validated against `azd 1.25.6` in June 2026.
 
 ## Learning Objectives
 
@@ -26,6 +26,7 @@ By completing this chapter, you will:
 |---|--------|-------------|------|
 | 1 | [Provisioning Resources](provisioning.md) | Azure resource management with AZD | 45 min |
 | 2 | [Deployment Guide](deployment-guide.md) | Application deployment strategies | 45 min |
+| 3 | [Authoring Your Own Template](custom-templates.md) | Build and publish reusable azd templates | 30 min |
 
 ---
 

@@ -280,7 +280,7 @@ Physically separate locations within an Azure region that provide redundancy and
 
 | Acronym | Full Form | Description |
 |---------|-----------|-------------|
-| AAD | Azure Active Directory | Identity and access management service |
+| AAD | Azure Active Directory (now Microsoft Entra ID) | Identity and access management service |
 | ACR | Azure Container Registry | Container image registry service |
 | AKS | Azure Kubernetes Service | Managed Kubernetes service |
 | API | Application Programming Interface | Set of protocols for building software |
@@ -321,7 +321,7 @@ Physically separate locations within an Azure region that provide redundancy and
 | NoSQL DB | Azure Cosmos DB | `cosmosdb` |
 | Storage | Azure Storage Account | `storage` |
 | Cache | Azure Cache for Redis | `redis` |
-| Search | Azure Cognitive Search | `search` |
+| Search | Azure AI Search | `search` |
 | Messaging | Azure Service Bus | `servicebus` |
 
 ---
@@ -365,6 +365,6 @@ Physically separate locations within an Azure region that provide redundancy and
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Disclaimer:
+**Disclaimer**:
 This document has been translated using AI translation service [Co-op Translator](https://github.com/Azure/co-op-translator). While we strive for accuracy, please be aware that automated translations may contain errors or inaccuracies. The original document in its native language should be considered the authoritative source. For critical information, professional human translation is recommended. We are not liable for any misunderstandings or misinterpretations arising from the use of this translation.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

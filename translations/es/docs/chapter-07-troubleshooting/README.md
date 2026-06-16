@@ -1,19 +1,19 @@
-# Capítulo 7: Resolución de problemas y depuración
+# Capítulo 7: Resolución de Problemas y Depuración
 
-**📚 Curso**: [AZD para Principiantes](../../README.md) | **⏱️ Duración**: 1-1.5 horas | **⭐ Complejidad**: Intermedio
+**📚 Course**: [AZD para Principiantes](../../README.md) | **⏱️ Duration**: 1-1.5 horas | **⭐ Complexity**: Intermedio
 
 ---
 
 ## Resumen
 
-Este capítulo te ayuda a diagnosticar y resolver problemas comunes al trabajar con Azure Developer CLI. Desde fallos en el despliegue hasta problemas específicos de IA.
+Este capítulo te ayudará a diagnosticar y resolver problemas comunes al trabajar con Azure Developer CLI. Desde fallos de despliegue hasta problemas específicos de IA.
 
-> Validado con `azd 1.23.12` en marzo de 2026.
+> Validado con `azd 1.25.6` en junio de 2026.
 
-## Objetivos de aprendizaje
+## Objetivos de Aprendizaje
 
 Al completar este capítulo, podrás:
-- Diagnosticar fallos comunes en despliegues con AZD
+- Diagnosticar fallos comunes de despliegue de AZD
 - Depurar problemas de autenticación y permisos
 - Resolver problemas de conectividad con servicios de IA
 - Usar Azure Portal y la CLI para la resolución de problemas
@@ -24,26 +24,26 @@ Al completar este capítulo, podrás:
 
 | # | Lección | Descripción | Tiempo |
 |---|--------|-------------|------|
-| 1 | [Problemas Comunes](common-issues.md) | Problemas que se encuentran con frecuencia | 30 min |
+| 1 | [Problemas Comunes](common-issues.md) | Problemas frecuentes | 30 min |
 | 2 | [Guía de Depuración](debugging.md) | Estrategias de depuración paso a paso | 45 min |
 | 3 | [Resolución de Problemas de IA](ai-troubleshooting.md) | Problemas específicos de IA | 30 min |
 
 ---
 
-## 🚨 Soluciones rápidas
+## 🚨 Soluciones Rápidas
 
 ### Problemas de Autenticación
 ```bash
 # Requerido para los flujos de trabajo de AZD
 azd auth login
 
-# Opcional si también está utilizando directamente los comandos de Azure CLI
+# Opcional si también utiliza comandos de Azure CLI directamente
 az login
 
 azd auth status
 ```
 
-### Errores de Aprovisionamiento
+### Fallas de Aprovisionamiento
 ```bash
 azd show
 azd monitor --logs
@@ -71,21 +71,21 @@ azd up
 | Error | Causa | Solución |
 |-------|-------|----------|
 | `AuthenticationError` | No ha iniciado sesión | `azd auth login` |
-| `ResourceNotFound` | Recurso faltante | Verificar nombres de recursos |
+| `ResourceNotFound` | Recurso no encontrado | Compruebe los nombres de los recursos |
 | `QuotaExceeded` | Límites de suscripción | Solicitar aumento de cuota |
-| `InvalidTemplate` | Error de sintaxis en Bicep | `az bicep build` |
-| `Conflict` | El recurso existe | Usar un nombre nuevo o eliminar |
-| `Forbidden` | Permisos insuficientes | Verificar roles RBAC |
+| `InvalidTemplate` | Error de sintaxis de Bicep | `az bicep build` |
+| `Conflict` | El recurso existe | Use un nombre nuevo o elimínelo |
+| `Forbidden` | Permisos insuficientes | Compruebe los roles de RBAC |
 
 ---
 
-## 🔄 Restablecimiento y recuperación
+## 🔄 Restablecimiento y Recuperación
 
 ```bash
-# Reinicio suave (conservar recursos, volver a desplegar el código)
+# Restablecimiento suave (mantener los recursos, volver a desplegar el código)
 azd deploy --force
 
-# Reinicio completo (eliminar todo, empezar desde cero)
+# Restablecimiento completo (eliminar todo, empezar de cero)
 azd down --force --purge
 azd up
 ```
@@ -96,20 +96,20 @@ azd up
 
 | Dirección | Capítulo |
 |-----------|---------|
-| **Anterior** | [Capítulo 6: Pre-Despliegue](../chapter-06-pre-deployment/README.md) |
-| **Siguiente** | [Capítulo 8: Producción](../chapter-08-production/README.md) |
+| **Previous** | [Capítulo 6: Pre-despliegue](../chapter-06-pre-deployment/README.md) |
+| **Next** | [Capítulo 8: Producción](../chapter-08-production/README.md) |
 
 ---
 
 ## 📖 Recursos Relacionados
 
-- [Comprobaciones previas al despliegue](../chapter-06-pre-deployment/preflight-checks.md)
+- [Comprobaciones Previas al Despliegue](../chapter-06-pre-deployment/preflight-checks.md)
 - [Guía de Configuración](../chapter-03-configuration/configuration.md)
 - [Problemas de AZD en GitHub](https://github.com/Azure/azure-dev/issues)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Si bien nos esforzamos por la precisión, tenga en cuenta que las traducciones automáticas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por un traductor humano. No somos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
+**Descargo de responsabilidad**:
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional humana. No somos responsables de cualquier malentendido o interpretación errónea que surja del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

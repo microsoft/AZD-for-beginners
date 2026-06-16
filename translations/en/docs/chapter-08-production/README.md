@@ -8,7 +8,7 @@
 
 This chapter covers enterprise-ready deployment patterns, security hardening, monitoring, and cost optimization for production AI workloads.
 
-> Validated against `azd 1.23.12` in March 2026.
+> Validated against `azd 1.25.6` in June 2026.
 
 ## Learning Objectives
 
@@ -51,12 +51,14 @@ graph LR
     Gateway --> Auth[Auth Service]
     AI --> Data[Data Store]
 ```
+
 ### Pattern 2: Event-Driven AI
 
 ```mermaid
 graph LR
     EventGrid[Event Grid] --> Functions[Functions] --> Pipeline[AI Pipeline]
 ```
+
 ---
 
 ## 🔐 Security Best Practices

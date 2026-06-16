@@ -1,11 +1,11 @@
-# Modèles d'authentification et identité gérée
+# Modèles d'Authentification et Identité Gérée
 
-⏱️ **Temps estimé**: 45-60 minutes | 💰 **Impact sur le coût**: Gratuit (aucun frais supplémentaires) | ⭐ **Complexité**: Intermédiaire
+⏱️ **Durée estimée** : 45-60 minutes | 💰 **Impact Coût** : Gratuit (pas de frais supplémentaires) | ⭐ **Complexité** : Intermédiaire
 
-**📚 Parcours d'apprentissage:**
-- ← Précédent: [Gestion de la configuration](configuration.md) - Gestion des variables d'environnement et des secrets
-- 🎯 **Vous êtes ici**: Authentification et sécurité (Identité gérée, Key Vault, modèles sécurisés)
-- → Suivant: [Premier projet](first-project.md) - Construire votre première application AZD
+**📚 Parcours d'apprentissage :**
+- ← Précédent : [Configuration Management](configuration.md) - Gestion des variables d'environnement et des secrets
+- 🎯 **Vous êtes ici** : Authentification & Sécurité (Identité gérée, Key Vault, modèles sécurisés)
+- → Suivant : [First Project](first-project.md) - Créez votre première application AZD
 - 🏠 [Accueil du cours](../../README.md)
 
 ---
@@ -13,18 +13,18 @@
 ## Ce que vous apprendrez
 
 En complétant cette leçon, vous allez :
-- Comprendre les modèles d'authentification Azure (clés, chaînes de connexion, identité gérée)
-- Implémenter **l'identité gérée** pour une authentification sans mot de passe
-- Sécuriser les secrets avec l'intégration **Azure Key Vault**
-- Configurer le **contrôle d'accès basé sur les rôles (RBAC)** pour les déploiements AZD
-- Appliquer les meilleures pratiques de sécurité dans Container Apps et les services Azure
-- Migrer de l'authentification par clé à l'authentification basée sur l'identité
+- Comprendre les modèles d’authentification Azure (clés, chaînes de connexion, identité gérée)
+- Implémenter **l'Identité Gérée** pour une authentification sans mot de passe
+- Sécuriser les secrets avec l’intégration **Azure Key Vault**
+- Configurer **le contrôle d'accès en fonction du rôle (RBAC)** pour les déploiements AZD
+- Appliquer les bonnes pratiques de sécurité dans Container Apps et les services Azure
+- Migrer d’une authentification basée sur clé vers une authentification basée sur identité
 
-## Pourquoi l'identité gérée est importante
+## Pourquoi l'Identité Gérée est importante
 
-### Le problème : authentification traditionnelle
+### Le problème : Authentification traditionnelle
 
-**Avant l'identité gérée :**
+**Avant l'Identité Gérée :**
 ```javascript
 // ❌ RISQUE DE SÉCURITÉ : Secrets codés en dur dans le code
 const connectionString = "Server=mydb.database.windows.net;User=admin;Password=P@ssw0rd123";
@@ -33,17 +33,17 @@ const cosmosKey = "C2x7B9n4M1p8Q5w3E6r0T2y5U8i1O4p7...";
 ```
 
 **Problèmes :**
-- 🔴 **Secrets exposés** dans le code, les fichiers de configuration, les variables d'environnement
-- 🔴 **La rotation des identifiants** nécessite des modifications du code et un redéploiement
-- 🔴 **Cauchemars d'audit** - qui a accédé à quoi, quand ?
-- 🔴 **Dispersion** - des secrets répartis sur plusieurs systèmes
-- 🔴 **Risques de conformité** - échec des audits de sécurité
+- 🔴 **Secrets exposés** dans le code, les fichiers de configuration, variables d'environnement
+- 🔴 **Rotation des identifiants** nécessite des modifications du code et redéploiements
+- 🔴 **Cauchemars d’audit** - qui a accédé à quoi, quand ?
+- 🔴 **Dispersion** - secrets éparpillés dans plusieurs systèmes
+- 🔴 **Risques de conformité** - échec aux audits de sécurité
 
-### La solution : identité gérée
+### La solution : Identité Gérée
 
-**Après l'identité gérée :**
+**Après l'Identité Gérée :**
 ```javascript
-// ✅ SÉCURISÉ: Aucun secret dans le code
+// ✅ SÉCURISÉ : Aucun secret dans le code
 const credential = new DefaultAzureCredential();
 const client = new BlobServiceClient(
   "https://mystorageaccount.blob.core.windows.net",
@@ -53,59 +53,60 @@ const client = new BlobServiceClient(
 
 **Avantages :**
 - ✅ **Aucun secret** dans le code ou la configuration
-- ✅ **Rotation automatique** - prise en charge par Azure
-- ✅ **Traçabilité complète** dans les journaux Azure AD
-- ✅ **Sécurité centralisée** - gestion via le Portail Azure
-- ✅ **Conforme aux exigences** - respecte les normes de sécurité
+- ✅ **Rotation automatique** – Azure s’en charge
+- ✅ **Traçabilité complète** dans les journaux Microsoft Entra ID
+- ✅ **Sécurité centralisée** – gestion via le portail Azure
+- ✅ **Prêt pour la conformité** – conforme aux standards de sécurité
 
-**Analogie**: L'authentification traditionnelle ressemble à porter plusieurs clés physiques pour différentes portes. L'identité gérée, c'est comme un badge de sécurité qui accorde automatiquement l'accès en fonction de qui vous êtes—pas de clés à perdre, copier ou faire tourner.
+**Analogie** : L’authentification traditionnelle, c’est comme porter plusieurs clés physiques pour différentes portes. L’Identité Gérée, c’est comme avoir un badge de sécurité qui donne automatiquement accès selon qui vous êtes — pas de clés à perdre, copier ou faire tourner.
 
 ---
 
-## Vue d'ensemble de l'architecture
+## Vue d’ensemble de l'architecture
 
-### Flux d'authentification avec l'identité gérée
+### Flux d'authentification avec Identité Gérée
 
 ```mermaid
 sequenceDiagram
-    participant App as Votre application<br/>(Application conteneurisée)
-    participant MI as Identité gérée<br/>(Azure AD)
+    participant App as Votre application<br/>(Application conteneur)
+    participant MI as Identité gérée<br/>(Microsoft Entra ID)
     participant KV as Coffre de clés
     participant Storage as Stockage Azure
     participant DB as Azure SQL
     
-    App->>MI: Demander un jeton d'accès<br/>(automatique)
-    MI->>MI: Vérifier l'identité<br/>(aucun mot de passe requis)
+    App->>MI: Demander un jeton d’accès<br/>(automatique)
+    MI->>MI: Vérifier l’identité<br/>(pas de mot de passe nécessaire)
     MI-->>App: Retourner le jeton<br/>(valide 1 heure)
     
-    App->>KV: Récupérer le secret<br/>(en utilisant le jeton)
-    KV->>KV: Vérifier les autorisations RBAC
+    App->>KV: Obtenir un secret<br/>(avec le jeton)
+    KV->>KV: Vérifier les permissions RBAC
     KV-->>App: Retourner la valeur du secret
     
-    App->>Storage: Téléverser un blob<br/>(en utilisant le jeton)
-    Storage->>Storage: Vérifier les autorisations RBAC
+    App->>Storage: Télécharger un blob<br/>(avec le jeton)
+    Storage->>Storage: Vérifier les permissions RBAC
     Storage-->>App: Succès
     
-    App->>DB: Interroger les données<br/>(en utilisant le jeton)
-    DB->>DB: Vérifier les autorisations SQL
+    App->>DB: Interroger les données<br/>(avec le jeton)
+    DB->>DB: Vérifier les permissions SQL
     DB-->>App: Retourner les résultats
     
-    Note over App,DB: Toutes les authentifications sont sans mot de passe !
+    Note over App,DB: Toute l’authentification sans mot de passe !
 ```
-### Types d'identités gérées
+
+### Types d’Identités Gérées
 
 ```mermaid
 graph TB
-    MI[Identité gérée]
-    SystemAssigned[Identité attribuée par le système]
-    UserAssigned[Identité attribuée par l'utilisateur]
+    MI[Identité Gérée]
+    SystemAssigned[Identité Assignée par le Système]
+    UserAssigned[Identité Assignée par l'Utilisateur]
     
     MI --> SystemAssigned
     MI --> UserAssigned
     
     SystemAssigned --> SA1[Cycle de vie lié à la ressource]
     SystemAssigned --> SA2[Création/suppression automatique]
-    SystemAssigned --> SA3[Idéal pour une seule ressource]
+    SystemAssigned --> SA3[Idéal pour une ressource unique]
     
     UserAssigned --> UA1[Cycle de vie indépendant]
     UserAssigned --> UA2[Création/suppression manuelle]
@@ -114,14 +115,15 @@ graph TB
     style SystemAssigned fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
     style UserAssigned fill:#4CAF50,stroke:#388E3C,stroke-width:2px,color:#fff
 ```
-| Fonctionnalité | Assignée au système | Assignée à l'utilisateur |
-|---------|----------------|---------------|
+
+| Fonctionnalité | Assignée au système | Assignée par l’utilisateur |
+|----------------|---------------------|----------------------------|
 | **Cycle de vie** | Liée à la ressource | Indépendante |
 | **Création** | Automatique avec la ressource | Création manuelle |
-| **Suppression** | Supprimée avec la ressource | Persiste après la suppression de la ressource |
+| **Suppression** | Supprimée avec la ressource | Persiste après suppression de la ressource |
 | **Partage** | Une seule ressource | Plusieurs ressources |
-| **Cas d'utilisation** | Scénarios simples | Scénarios complexes multi-ressources |
-| **Par défaut AZD** | ✅ Recommandée | Optionnel |
+| **Cas d’utilisation** | Scénarios simples | Scénarios multi-ressources complexes |
+| **Défaut AZD** | ✅ Recommandée | Optionnelle |
 
 ---
 
@@ -129,39 +131,39 @@ graph TB
 
 ### Outils requis
 
-Vous devriez déjà avoir installé les éléments suivants lors des leçons précédentes :
+Vous devriez déjà avoir ces outils installés grâce aux leçons précédentes :
 
 ```bash
-# Vérifier l'Azure Developer CLI
+# Vérifier Azure Developer CLI
 azd version
-# ✅ Attendu: azd version 1.0.0 ou supérieure
+# ✅ Attendu : version azd 1.0.0 ou supérieure
 
-# Vérifier l'Azure CLI
+# Vérifier Azure CLI
 az --version
-# ✅ Attendu: azure-cli version 2.50.0 ou supérieure
+# ✅ Attendu : azure-cli 2.50.0 ou supérieure
 ```
 
 ### Exigences Azure
 
 - Abonnement Azure actif
-- Autorisations pour :
+- Permissions pour :
   - Créer des identités gérées
-  - Attribuer des rôles RBAC
+  - Assigner des rôles RBAC
   - Créer des ressources Key Vault
   - Déployer des Container Apps
 
-### Prérequis de connaissances
+### Connaissances préalables
 
-Vous devriez avoir complété :
-- [Guide d'installation](installation.md) - Configuration d'AZD
-- [Notions de base AZD](azd-basics.md) - Concepts de base
-- [Gestion de la configuration](configuration.md) - Variables d'environnement
+Vous devez avoir complété :
+- [Guide d'installation](installation.md) - Configuration AZD
+- [Bases AZD](azd-basics.md) - Concepts de base
+- [Gestion de configuration](configuration.md) - Variables d’environnement
 
 ---
 
 ## Leçon 1 : Comprendre les modèles d'authentification
 
-### Modèle 1 : Chaînes de connexion (Ancien - À éviter)
+### Modèle 1 : Chaînes de connexion (Hérité - à éviter)
 
 **Comment ça marche :**
 ```bash
@@ -172,12 +174,12 @@ SQL_CONNECTION_STRING="Server=myserver.database.windows.net;User=admin;Password=
 ```
 
 **Problèmes :**
-- ❌ Secrets visibles dans les variables d'environnement
-- ❌ Enregistrés dans les systèmes de déploiement
-- ❌ Difficiles à faire pivoter
-- ❌ Pas de traçabilité des accès
+- ❌ Secrets visibles dans les variables d’environnement
+- ❌ Journalisés dans les systèmes de déploiement
+- ❌ Difficile à faire tourner
+- ❌ Pas de piste d’audit des accès
 
-**Quand l'utiliser :** Uniquement pour le développement local, jamais en production.
+**Quand l’utiliser :** seulement en développement local, jamais en production.
 
 ---
 
@@ -203,19 +205,19 @@ env: [
 ```
 
 **Avantages :**
-- ✅ Secrets stockés de manière sécurisée dans Key Vault
+- ✅ Secrets stockés de façon sécurisée dans Key Vault
 - ✅ Gestion centralisée des secrets
-- ✅ Rotation sans modifications du code
+- ✅ Rotation sans modification du code
 
-**Limites :**
-- ⚠️ Utilisation toujours basée sur des clés/mots de passe
-- ⚠️ Nécessité de gérer l'accès au Key Vault
+**Limitations :**
+- ⚠️ Utilisation toujours de clés/mots de passe
+- ⚠️ Nécessité de gérer l’accès à Key Vault
 
-**Quand l'utiliser :** Étape de transition entre les chaînes de connexion et l'identité gérée.
+**Quand l’utiliser :** étape de transition des chaînes de connexion vers l’identité gérée.
 
 ---
 
-### Modèle 3 : Identité gérée (Meilleure pratique)
+### Modèle 3 : Identité Gérée (Meilleure pratique)
 
 **Comment ça marche :**
 ```bicep
@@ -237,9 +239,9 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-**Code de l'application :**
+**Code de l’application :**
 ```javascript
-// Pas besoin de secrets !
+// Aucun secret nécessaire !
 const { DefaultAzureCredential } = require('@azure/identity');
 const { BlobServiceClient } = require('@azure/storage-blob');
 
@@ -251,21 +253,74 @@ const blobServiceClient = new BlobServiceClient(
 ```
 
 **Avantages :**
-- ✅ Aucun secret dans le code/la configuration
+- ✅ Aucun secret dans le code/la config
 - ✅ Rotation automatique des identifiants
 - ✅ Traçabilité complète
 - ✅ Permissions basées sur RBAC
-- ✅ Conforme aux exigences
+- ✅ Conforme aux standards
 
-**Quand l'utiliser :** Toujours, pour les applications en production.
+**Quand l’utiliser :** toujours, pour les applications en production.
 
 ---
 
-## Leçon 2 : Implémenter l'identité gérée avec AZD
+### Modèle 4 : Principaux de service (CI/CD & Automatisation)
 
-### Mise en œuvre étape par étape
+L’identité gérée est la référence *pour les ressources tournant à l’intérieur d’Azure*. Mais qu’en est-il des processus tournant **en dehors** d’Azure — comme une pipeline CI/CD sur un agent build, ou un script sur votre portable qui ne peut pas utiliser votre connexion interactive ? C’est là qu’intervient un **principal de service** : une identité non-humaine avec ses propres identifiants, qu’un processus automatisé peut utiliser.
 
-Construisons une Container App sécurisée qui utilise l'identité gérée pour accéder à Azure Storage et Key Vault.
+**Comment ça marche :**
+
+Créer un principal de service scoped à un groupe de ressources (principe du moindre privilège) :
+
+```bash
+az ad sp create-for-rbac \
+  --name "myapp-cicd" \
+  --role contributor \
+  --scopes /subscriptions/<sub-id>/resourceGroups/<rg-name>
+```
+
+Cela imprime un ID client, un secret client, et un ID locataire. azd peut se connecter avec eux de manière non interactive :
+
+```bash
+azd auth login \
+  --client-id "<appId>" \
+  --client-secret "<password>" \
+  --tenant-id "<tenant>"
+```
+
+**Préférez des identifiants fédérés (OIDC) aux secrets.** Au lieu d’un secret client à longue durée, configurez un identifiant fédéré pour que la pipeline échange un jeton temporaire — pas de secret à divulguer ou faire tourner :
+
+```bash
+azd auth login \
+  --client-id "<appId>" \
+  --federated-credential-provider "github" \
+  --tenant-id "<tenant>"
+```
+
+> `azd pipeline config` configure cela automatiquement pour vous. Voir les démonstrations CI/CD dans [Chapitre 8](../chapter-08-production/production-ai-practices.md).
+
+**Avantages :**
+- ✅ Fonctionne hors d’Azure (agents build, sur site, autres clouds)
+- ✅ Peut être scindé à un seul groupe de ressources avec un rôle
+- ✅ Variante fédérée (OIDC) n’utilise pas de secret stocké
+
+**Inconvénients :**
+- ⚠️ Variante basée sur secret nécessite un stockage et une rotation soigneux
+- ⚠️ Un secret divulgué donne tous les droits du principal — maintenez les scopes stricts
+
+**Quand l’utiliser :** pipelines CI/CD et automatisations ne pouvant pas utiliser l’identité gérée. Privilégiez toujours la variante **fédérée/OIDC** plutôt qu’un secret client, et préférez l’identité gérée dès que la charge de travail tourne dans Azure.
+
+**Stockage sécurisé des identifiants :**
+- Ne jamais commiter les secrets — utiliser le magasin secret de la pipeline (secrets GitHub Actions, groupes de variables Azure DevOps / Key Vault).
+- Limiter le principal de service au plus petit rôle et groupe de ressources nécessaire.
+- Définir une expiration et faire tourner, ou éliminer le secret avec OIDC.
+
+---
+
+## Leçon 2 : Implémentation de l'Identité Gérée avec AZD
+
+### Implémentation étape par étape
+
+Construisons une Container App sécurisée qui utilise l’identité gérée pour accéder à Azure Storage et Key Vault.
 
 ### Structure du projet
 
@@ -302,7 +357,7 @@ services:
 # Enable managed identity (AZD handles this automatically)
 ```
 
-### 2. Infrastructure : activer l'identité gérée
+### 2. Infrastructure : Activer l'identité gérée
 
 **Fichier : `infra/main.bicep`**
 
@@ -441,7 +496,7 @@ output id string = containerApp.id
 output url string = 'https://${containerApp.properties.configuration.ingress.fqdn}'
 ```
 
-### 4. Module d'attribution de rôle RBAC
+### 4. Module d'assignation des rôles RBAC
 
 **Fichier : `infra/core/role-assignment.bicep`**
 
@@ -463,7 +518,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 output id string = roleAssignment.id
 ```
 
-### 5. Code de l'application avec identité gérée
+### 5. Code applicatif avec identité gérée
 
 **Fichier : `src/app.js`**
 
@@ -476,7 +531,7 @@ const { SecretClient } = require('@azure/keyvault-secrets');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// 🔑 Initialiser les informations d'identification (fonctionne automatiquement avec l'identité gérée)
+// 🔑 Initialiser les identifiants (fonctionne automatiquement avec l'identité gérée)
 const credential = new DefaultAzureCredential();
 
 // Configuration du stockage Azure
@@ -486,7 +541,7 @@ const blobServiceClient = new BlobServiceClient(
   credential  // Aucune clé nécessaire !
 );
 
-// Configuration de Key Vault
+// Configuration du Key Vault
 const keyVaultName = process.env.AZURE_KEY_VAULT_NAME;
 const secretClient = new SecretClient(
   `https://${keyVaultName}.vault.azure.net`,
@@ -498,7 +553,7 @@ app.get('/health', (req, res) => {
   res.json({ status: 'healthy', authentication: 'managed-identity' });
 });
 
-// Téléverser un fichier dans le stockage Blob
+// Télécharger un fichier dans le stockage blob
 app.post('/upload', async (req, res) => {
   try {
     const containerClient = blobServiceClient.getContainerClient('uploads');
@@ -520,7 +575,7 @@ app.post('/upload', async (req, res) => {
   }
 });
 
-// Récupérer un secret depuis Key Vault
+// Obtenir un secret depuis le Key Vault
 app.get('/secret/:name', async (req, res) => {
   try {
     const secretName = req.params.name;
@@ -537,7 +592,7 @@ app.get('/secret/:name', async (req, res) => {
   }
 });
 
-// Lister les conteneurs Blob (démontre l'accès en lecture)
+// Lister les conteneurs blob (démontre l'accès en lecture)
 app.get('/containers', async (req, res) => {
   try {
     const containers = [];
@@ -604,7 +659,7 @@ curl $APP_URL/health
 }
 ```
 
-**Test de téléversement de blob :**
+**Test de l’upload de blob :**
 ```bash
 curl -X POST $APP_URL/upload
 ```
@@ -618,7 +673,7 @@ curl -X POST $APP_URL/upload
 }
 ```
 
-**Test de la liste des conteneurs :**
+**Test de la liste des containers :**
 ```bash
 curl $APP_URL/containers
 ```
@@ -636,21 +691,21 @@ curl $APP_URL/containers
 
 ## Rôles RBAC Azure courants
 
-### IDs des rôles intégrés pour l'identité gérée
+### Identifiants de rôle intégrés pour Identité Gérée
 
-| Service | Nom du rôle | ID du rôle | Autorisations |
-|---------|-----------|---------|-------------|
-| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Lire les blobs et les conteneurs |
+| Service | Nom du rôle | ID du rôle | Permissions |
+|---------|-------------|------------|-------------|
+| **Storage** | Storage Blob Data Reader | `2a2b9908-6b94-4a3d-8e5a-a7d8f8cc8a12` | Lecture des blobs et containers |
 | **Storage** | Storage Blob Data Contributor | `ba92f5b4-2d11-453d-a403-e96b0029c9fe` | Lire, écrire, supprimer des blobs |
-| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Lire, écrire, supprimer des messages de file d'attente |
-| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Lire les secrets |
+| **Storage** | Storage Queue Data Contributor | `974c5e8b-45b9-4653-ba55-5f855dd0fb88` | Lire, écrire, supprimer des messages de queue |
+| **Key Vault** | Key Vault Secrets User | `4633458b-17de-408a-b874-0445c86b69e6` | Lecture des secrets |
 | **Key Vault** | Key Vault Secrets Officer | `b86a8fe4-44ce-4948-aee5-eccb2c155cd7` | Lire, écrire, supprimer des secrets |
-| **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Lire les données Cosmos DB |
-| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Lire, écrire des données Cosmos DB |
+| **Cosmos DB** | Cosmos DB Built-in Data Reader | `00000000-0000-0000-0000-000000000001` | Lecture des données Cosmos DB |
+| **Cosmos DB** | Cosmos DB Built-in Data Contributor | `00000000-0000-0000-0000-000000000002` | Lire, écrire les données Cosmos DB |
 | **SQL Database** | SQL DB Contributor | `9b7fa17d-e63e-47b0-bb0a-15c516ac86ec` | Gérer les bases de données SQL |
-| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Envoyer, recevoir et gérer les messages |
+| **Service Bus** | Azure Service Bus Data Owner | `090c5cfd-751d-490a-894a-3ce6f1109419` | Envoyer, recevoir, gérer les messages |
 
-### Comment trouver les ID de rôle
+### Comment trouver les identifiants de rôle
 
 ```bash
 # Lister tous les rôles intégrés
@@ -667,13 +722,13 @@ az role definition list --name "Storage Blob Data Contributor"
 
 ## Exercices pratiques
 
-### Exercice 1 : Activer l'identité gérée pour une application existante ⭐⭐ (Moyen)
+### Exercice 1 : Activer l'Identité Gérée pour une application existante ⭐⭐ (Moyen)
 
-**Objectif**: Ajouter l'identité gérée à un déploiement Container App existant
+**Objectif** : Ajouter une identité gérée à un déploiement Container App existant
 
-**Scénario**: Vous avez une Container App utilisant des chaînes de connexion. Convertissez-la pour utiliser l'identité gérée.
+**Scénario** : Vous avez une Container App utilisant des chaînes de connexion. Convertissez-la en identité gérée.
 
-**Point de départ**: Container App avec cette configuration:
+**Point de départ** : Container App avec cette configuration :
 
 ```bicep
 // ❌ Current: Using connection string
@@ -685,9 +740,9 @@ env: [
 ]
 ```
 
-**Étapes**:
+**Étapes** :
 
-1. **Activer l'identité gérée dans Bicep :**
+1. **Activer l’identité gérée dans Bicep :**
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
@@ -699,7 +754,7 @@ resource containerApp 'Microsoft.App/containerApps@2023-05-01' = {
 }
 ```
 
-2. **Accorder l'accès au Storage :**
+2. **Accorder l'accès Storage :**
 
 ```bicep
 // Get storage account reference
@@ -719,7 +774,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-3. **Mettre à jour le code de l'application :**
+3. **Mettre à jour le code applicatif :**
 
 **Avant (chaîne de connexion) :**
 ```javascript
@@ -742,7 +797,8 @@ const blobServiceClient = new BlobServiceClient(
 );
 ```
 
-4. **Mettre à jour les variables d'environnement :**
+4. **Mettre à jour les variables d’environnement :**
+
 ```bicep
 env: [
   {
@@ -759,15 +815,15 @@ env: [
 # Redéployer
 azd up
 
-# Vérifier que cela fonctionne toujours
+# Tester que cela fonctionne toujours
 curl https://myapp.azurecontainerapps.io/upload
 ```
 
 **✅ Critères de réussite :**
-- ✅ L'application se déploie sans erreurs
-- ✅ Les opérations Storage fonctionnent (téléversement, liste, téléchargement)
-- ✅ Aucune chaîne de connexion dans les variables d'environnement
-- ✅ Identité visible dans le Portail Azure sous le volet "Identity"
+- ✅ L’application se déploie sans erreur
+- ✅ Les opérations Storage fonctionnent (upload, liste, téléchargement)
+- ✅ Pas de chaînes de connexion dans les variables d’environnement
+- ✅ Identité visible dans Azure Portal sous l’onglet "Identité"
 
 **Vérification :**
 
@@ -779,26 +835,26 @@ az containerapp show \
   --query "identity.type"
 # ✅ Attendu : "SystemAssigned"
 
-# Vérifier l'attribution du rôle
+# Vérifier l'attribution de rôle
 az role assignment list \
   --assignee $(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv) \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.Storage/storageAccounts/mystorageaccount
-# ✅ Attendu : Affiche le rôle "Storage Blob Data Contributor"
+# ✅ Attendu : Montre le rôle "Storage Blob Data Contributor"
 ```
 
-**Temps**: 20-30 minutes
+**Durée** : 20-30 minutes
 
 ---
 
-### Exercice 2 : Accès multi-service avec identité assignée par l'utilisateur ⭐⭐⭐ (Avancé)
+### Exercice 2 : Accès multiservice avec identité assignée par l’utilisateur ⭐⭐⭐ (Avancé)
 
-**Objectif**: Créer une identité assignée par l'utilisateur partagée entre plusieurs Container Apps
+**Objectif** : Créer une identité assignée par l’utilisateur partagée entre plusieurs Container Apps
 
-**Scénario**: Vous avez 3 microservices qui doivent tous accéder au même compte Storage et au Key Vault.
+**Scénario** : Vous avez 3 microservices qui ont tous besoin d’accéder au même compte Storage et Key Vault.
 
-**Étapes**:
+**Étapes** :
 
-1. **Créer une identité assignée par l'utilisateur :**
+1. **Créer une identité assignée par l’utilisateur :**
 
 **Fichier : `infra/core/identity.bicep`**
 
@@ -818,7 +874,7 @@ output principalId string = userAssignedIdentity.properties.principalId
 output clientId string = userAssignedIdentity.properties.clientId
 ```
 
-2. **Attribuer des rôles à l'identité assignée par l'utilisateur :**
+2. **Assigner les rôles à l’identité assignée par l’utilisateur :**
 
 ```bicep
 // In main.bicep
@@ -855,7 +911,7 @@ resource kvRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' =
 }
 ```
 
-3. **Assigner l'identité à plusieurs Container Apps :**
+3. **Assigner l’identité à plusieurs Container Apps :**
 
 ```bicep
 resource apiGateway 'Microsoft.App/containerApps@2023-05-01' = {
@@ -897,12 +953,12 @@ resource orderService 'Microsoft.App/containerApps@2023-05-01' = {
 ```javascript
 const { DefaultAzureCredential, ManagedIdentityCredential } = require('@azure/identity');
 
-// Pour une identité attribuée par l'utilisateur, spécifiez l'ID du client
+// Pour l'identité assignée par l'utilisateur, spécifiez l'ID client
 const credential = new ManagedIdentityCredential(
-  process.env.AZURE_CLIENT_ID  // ID client de l'identité attribuée par l'utilisateur
+  process.env.AZURE_CLIENT_ID  // ID client de l'identité assignée par l'utilisateur
 );
 
-// Ou utilisez DefaultAzureCredential (détecte automatiquement)
+// Ou utilisez DefaultAzureCredential (détection automatique)
 const credential = new DefaultAzureCredential();
 
 const blobServiceClient = new BlobServiceClient(
@@ -916,7 +972,7 @@ const blobServiceClient = new BlobServiceClient(
 ```bash
 azd up
 
-# Vérifier que tous les services peuvent accéder au stockage
+# Tester que tous les services peuvent accéder au stockage
 curl https://api-gateway.azurecontainerapps.io/upload
 curl https://product-service.azurecontainerapps.io/upload
 curl https://order-service.azurecontainerapps.io/upload
@@ -924,27 +980,27 @@ curl https://order-service.azurecontainerapps.io/upload
 
 **✅ Critères de réussite :**
 - ✅ Une identité partagée entre 3 services
-- ✅ Tous les services peuvent accéder au Storage et au Key Vault
-- ✅ L'identité persiste si vous supprimez un service
+- ✅ Tous les services peuvent accéder au Storage et Key Vault
+- ✅ L’identité persiste si on supprime un service
 - ✅ Gestion centralisée des permissions
 
-**Avantages de l'identité assignée par l'utilisateur :**
-- Une identité unique à gérer
-- Permissions cohérentes entre les services
-- Survit à la suppression d'un service
-- Mieux pour les architectures complexes
+**Avantages de l’identité assignée par l’utilisateur :**
+- Identité unique à gérer
+- Permissions cohérentes entre services
+- Persiste après suppression d’un service
+- Mieux adapté aux architectures complexes
 
-**Temps**: 30-40 minutes
+**Durée** : 30-40 minutes
 
 ---
 
-### Exercice 3 : Mettre en place la rotation des secrets Key Vault ⭐⭐⭐ (Avancé)
+### Exercice 3 : Implémenter la rotation des secrets Key Vault ⭐⭐⭐ (Avancé)
 
-**Objectif**: Stocker les clés d'API tierces dans Key Vault et y accéder via l'identité gérée
+**Objectif** : Stocker les clés d’API tierces dans Key Vault et y accéder via identité gérée
 
-**Scénario**: Votre application doit appeler une API externe (OpenAI, Stripe, SendGrid) qui nécessite des clés d'API.
+**Scénario** : Votre app doit appeler une API externe (OpenAI, Stripe, SendGrid) nécessitant des clés API.
 
-**Étapes**:
+**Étapes** :
 
 1. **Créer un Key Vault avec RBAC :**
 
@@ -980,10 +1036,10 @@ output uri string = keyVault.properties.vaultUri
 2. **Stocker les secrets dans Key Vault :**
 
 ```bash
-# Récupérer le nom du coffre de clés
+# Obtenir le nom du coffre de clés
 KV_NAME=$(azd env get-values | grep AZURE_KEY_VAULT_NAME | cut -d '=' -f2 | tr -d '"')
 
-# Stocker les clés d'API tierces
+# Stocker les clés API tierces
 az keyvault secret set \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
@@ -1019,7 +1075,7 @@ class Config {
   }
 
   async getSecret(secretName) {
-    // Vérifier d'abord le cache
+    // Vérifier le cache en premier
     if (this.cache[secretName]) {
       return this.cache[secretName];
     }
@@ -1051,7 +1107,7 @@ class Config {
 module.exports = new Config();
 ```
 
-4. **Utiliser les secrets dans l'application :**
+4. **Utiliser les secrets dans l’application :**
 
 **Fichier : `src/app.js`**
 
@@ -1100,19 +1156,19 @@ app.listen(3000, () => {
 ```bash
 azd up
 
-# Vérifier que les clés API fonctionnent
+# Tester que les clés API fonctionnent
 curl -X POST https://myapp.azurecontainerapps.io/chat \
   -H "Content-Type: application/json" \
   -d '{"message":"Hello AI"}'
 ```
 
 **✅ Critères de réussite :**
-- ✅ Aucune clé d'API dans le code ou les variables d'environnement
+- ✅ Aucune clé API dans le code ou les variables d'environnement
 - ✅ L'application récupère les clés depuis Key Vault
 - ✅ Les API tierces fonctionnent correctement
-- ✅ Possibilité de faire tourner les clés sans modifications du code
+- ✅ Rotation des clés possible sans modification du code
 
-**Faire tourner un secret :**
+**Rotation d'un secret :**
 
 ```bash
 # Mettre à jour le secret dans le coffre de clés
@@ -1127,26 +1183,26 @@ az containerapp revision restart \
   --resource-group rg-myapp
 ```
 
-**Temps**: 25-35 minutes
+**Temps** : 25-35 minutes
 
 ---
 
-## Point de contrôle des connaissances
+## Point de vérification des connaissances
 
 ### 1. Modèles d'authentification ✓
 
-Vérifiez votre compréhension :
+Testez votre compréhension :
 
-- [ ] **Q1** : Quels sont les trois principaux modèles d'authentification ? 
-  - **A**: Chaînes de connexion (héritées), Références Key Vault (transition), Identité gérée (meilleure pratique)
+- [ ] **Q1** : Quels sont les trois principaux modèles d'authentification ?  
+  - **R** : Chaînes de connexion (héritées), références Key Vault (transition), identité managée (meilleure)
 
-- [ ] **Q2** : Pourquoi l'identité gérée est-elle meilleure que les chaînes de connexion ?
-  - **A**: Pas de secrets dans le code, rotation automatique, traçabilité complète, permissions via RBAC
+- [ ] **Q2** : Pourquoi l'identité managée est-elle meilleure que les chaînes de connexion ?  
+  - **R** : Pas de secrets dans le code, rotation automatique, traçabilité complète, permissions RBAC
 
-- [ ] **Q3** : Quand utiliser une identité assignée par l'utilisateur plutôt qu'assignée au système ?
-  - **A**: Lors du partage d'une identité entre plusieurs ressources ou lorsque le cycle de vie de l'identité est indépendant de celui des ressources
+- [ ] **Q3** : Quand utiliser une identité utilisateur assignée plutôt que système assignée ?  
+  - **R** : Lorsqu'on partage l'identité entre plusieurs ressources ou lorsque le cycle de vie de l'identité est indépendant de celui de la ressource
 
-**Vérification pratique :**
+**Vérification pratique :**  
 ```bash
 # Vérifiez quel type d'identité votre application utilise
 az containerapp show \
@@ -1161,25 +1217,25 @@ az role assignment list \
 
 ---
 
-### 2. RBAC et autorisations ✓
+### 2. RBAC et permissions ✓
 
-Vérifiez votre compréhension :
+Testez votre compréhension :
 
-- [ ] **Q1** : Quel est l'ID du rôle pour "Storage Blob Data Contributor" ?
-  - **A**: `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
+- [ ] **Q1** : Quel est l'ID du rôle "Storage Blob Data Contributor" ?  
+  - **R** : `ba92f5b4-2d11-453d-a403-e96b0029c9fe`
 
-- [ ] **Q2** : Quelles autorisations fournit « Key Vault Secrets User » ?
-  - **A**: Accès en lecture seule aux secrets (ne peut pas créer, mettre à jour ou supprimer)
+- [ ] **Q2** : Quelles permissions fournit le rôle "Key Vault Secrets User" ?  
+  - **R** : Accès en lecture seule aux secrets (ne peut pas créer, mettre à jour ou supprimer)
 
-- [ ] **Q3** : Comment accorder à une Container App l'accès à Azure SQL ?
-  - **A**: Attribuer le rôle « SQL DB Contributor » ou configurer l'authentification Azure AD pour SQL
+- [ ] **Q3** : Comment accorder l'accès Azure SQL à une Container App ?  
+  - **R** : Assigner le rôle "SQL DB Contributor" ou configurer l'authentification Microsoft Entra ID pour SQL
 
-**Vérification pratique :**
+**Vérification pratique :**  
 ```bash
 # Trouver un rôle spécifique
 az role definition list --name "Storage Blob Data Contributor"
 
-# Vérifier quels rôles sont assignés à votre identité
+# Vérifier les rôles assignés à votre identité
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID --output table
 ```
@@ -1188,29 +1244,30 @@ az role assignment list --assignee $PRINCIPAL_ID --output table
 
 ### 3. Intégration Key Vault ✓
 
-Test your understanding:
-- [ ] **Q1**: Comment activer RBAC pour Key Vault au lieu des stratégies d'accès ?
-  - **A**: Set `enableRbacAuthorization: true` in Bicep
+Testez votre compréhension :
 
-- [ ] **Q2**: Quelle bibliothèque du SDK Azure gère l'authentification par identité gérée ?
-  - **A**: `@azure/identity` avec la classe `DefaultAzureCredential`
+- [ ] **Q1** : Comment activer RBAC pour Key Vault au lieu des policies d'accès ?  
+  - **R** : Définir `enableRbacAuthorization: true` dans Bicep
 
-- [ ] **Q3**: Combien de temps les secrets Key Vault restent-ils en cache ?
-  - **A**: Dépend de l'application ; implémentez votre propre stratégie de mise en cache
+- [ ] **Q2** : Quelle bibliothèque Azure SDK gère l’authentification par identité managée ?  
+  - **R** : `@azure/identity` avec la classe `DefaultAzureCredential`
 
-**Hands-On Verification:**
+- [ ] **Q3** : Combien de temps les secrets Key Vault restent-ils en cache ?  
+  - **R** : Dépend de l’application ; mettez en place votre propre stratégie de cache
+
+**Vérification pratique :**  
 ```bash
-# Tester l'accès au Key Vault
+# Testez l'accès au coffre de clés
 az keyvault secret show \
   --vault-name $KV_NAME \
   --name "OpenAI-ApiKey" \
   --query "value"
 
-# Vérifier que le RBAC est activé
+# Vérifiez que RBAC est activé
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
-# ✅ Attendu : true
+# ✅ Attendu : vrai
 ```
 
 ---
@@ -1219,55 +1276,55 @@ az keyvault show \
 
 ### ✅ À FAIRE :
 
-1. **Utilisez toujours l'identité gérée en production**
+1. **Toujours utiliser l'identité managée en production**  
    ```bicep
    identity: {
      type: 'SystemAssigned'
    }
    ```
 
-2. **Utilisez des rôles RBAC au moindre privilège**
-   - Utilisez "Reader" roles lorsque possible
-   - Évitez "Owner" ou "Contributor" sauf si nécessaire
+2. **Utiliser les rôles RBAC au moindre privilège**  
+   - Utiliser les rôles "Reader" quand c’est possible  
+   - Éviter "Owner" ou "Contributor" sauf si nécessaire
 
-3. **Stockez les clés tierces dans Key Vault**
+3. **Stocker les clés tierces dans Key Vault**  
    ```javascript
    const apiKey = await secretClient.getSecret('ThirdPartyApiKey');
    ```
 
-4. **Activez la journalisation d'audit**
+4. **Activer la journalisation d'audit**  
    ```bicep
    diagnosticSettings: {
      logs: [{ category: 'AuditEvent', enabled: true }]
    }
    ```
 
-5. **Utilisez des identités différentes pour dev/staging/prod**
+5. **Utiliser des identités différentes pour dev/staging/prod**  
    ```bash
    azd env new dev
    azd env new staging
    azd env new prod
    ```
 
-6. **Renouvelez régulièrement les secrets**
-   - Définissez des dates d'expiration sur les secrets Key Vault
-   - Automatisez la rotation avec Azure Functions
+6. **Faire une rotation régulière des secrets**  
+   - Définir des dates d'expiration sur les secrets Key Vault  
+   - Automatiser la rotation avec Azure Functions
 
 ### ❌ À NE PAS FAIRE :
 
-1. **Ne stockez jamais les secrets en dur dans le code**
+1. **Ne jamais coder en dur les secrets**  
    ```javascript
    // ❌ MAUVAIS
    const apiKey = "sk-proj-xxxxxxxxxxxxx";
    ```
 
-2. **N'utilisez pas de chaînes de connexion en production**
+2. **Ne pas utiliser de chaînes de connexion en production**  
    ```javascript
    // ❌ MAUVAIS
    BlobServiceClient.fromConnectionString(process.env.STORAGE_CONNECTION_STRING)
    ```
 
-3. **Ne donnez pas de permissions excessives**
+3. **Ne pas accorder de permissions excessives**  
    ```bicep
    // ❌ BAD - too much access
    roleDefinitionId: 'Owner'
@@ -1276,7 +1333,7 @@ az keyvault show \
    roleDefinitionId: 'Storage Blob Data Reader'
    ```
 
-4. **Ne journalisez pas les secrets**
+4. **Ne pas consigner les secrets dans les logs**  
    ```javascript
    // ❌ MAUVAIS
    console.log('API Key:', apiKey);
@@ -1285,7 +1342,7 @@ az keyvault show \
    console.log('API Key retrieved successfully');
    ```
 
-5. **Ne partagez pas les identités de production entre environnements**
+5. **Ne pas partager les identités de production entre environnements**  
    ```bicep
    // ❌ BAD - same identity for dev and prod
    // ✅ GOOD - separate identities per environment
@@ -1295,15 +1352,15 @@ az keyvault show \
 
 ## Guide de dépannage
 
-### Problème : « Non autorisé » lors de l'accès à Azure Storage
+### Problème : "Unauthorized" lors de l'accès à Azure Storage
 
-**Symptômes:**
+**Symptômes :**  
 ```
 Error: Unauthorized (403)
 AuthorizationPermissionMismatch: This request is not authorized to perform this operation
 ```
-
-**Diagnostic:**
+  
+**Diagnostic :**
 
 ```bash
 # Vérifier si l'identité gérée est activée
@@ -1317,12 +1374,12 @@ az containerapp show \
 PRINCIPAL_ID=$(az containerapp show --name myapp --resource-group rg-myapp --query "identity.principalId" -o tsv)
 az role assignment list --assignee $PRINCIPAL_ID
 
-# Attendu : On devrait voir "Storage Blob Data Contributor" ou un rôle similaire
+# Attendu : Doit voir "Storage Blob Data Contributor" ou un rôle similaire
 ```
+  
+**Solutions :**
 
-**Solutions:**
-
-1. **Attribuer le rôle RBAC correct :**
+1. **Accorder le rôle RBAC correct :**  
 ```bash
 STORAGE_ID=$(az storage account show --name mystorageaccount --resource-group rg-myapp --query "id" -o tsv)
 az role assignment create \
@@ -1330,54 +1387,54 @@ az role assignment create \
   --role "Storage Blob Data Contributor" \
   --scope $STORAGE_ID
 ```
-
-2. **Attendre la propagation (peut prendre 5-10 minutes) :**
+  
+2. **Attendre la propagation (peut prendre 5-10 minutes) :**  
 ```bash
-# Vérifier l'état de l'attribution du rôle
+# Vérifier le statut de l'attribution du rôle
 az role assignment list --assignee $PRINCIPAL_ID --scope $STORAGE_ID
 ```
-
-3. **Vérifier que le code de l'application utilise les informations d'identification correctes :**
+  
+3. **Vérifier que le code de l’application utilise le bon identifiant :**  
 ```javascript
 // Assurez-vous d'utiliser DefaultAzureCredential
 const credential = new DefaultAzureCredential();
 ```
-
+  
 ---
 
-### Problème : Accès refusé à Key Vault
+### Problème : accès refusé à Key Vault
 
-**Symptômes:**
+**Symptômes :**  
 ```
 Error: Forbidden (403)
 The user, group or application does not have secrets get permission
 ```
-
-**Diagnostic:**
+  
+**Diagnostic :**
 
 ```bash
-# Vérifier que le RBAC du Key Vault est activé
+# Vérifier que l'ABAC du Key Vault est activé
 az keyvault show \
   --name $KV_NAME \
   --query "properties.enableRbacAuthorization"
 # ✅ Attendu : vrai
 
-# Vérifier les attributions de rôle
+# Vérifier les affectations de rôle
 az role assignment list \
   --assignee $PRINCIPAL_ID \
   --scope /subscriptions/{sub-id}/resourceGroups/rg-myapp/providers/Microsoft.KeyVault/vaults/$KV_NAME
 ```
+  
+**Solutions :**
 
-**Solutions:**
-
-1. **Activer RBAC sur Key Vault :**
+1. **Activer RBAC sur Key Vault :**  
 ```bash
 az keyvault update \
   --name $KV_NAME \
   --enable-rbac-authorization true
 ```
-
-2. **Attribuer le rôle Key Vault Secrets User :**
+  
+2. **Accorder le rôle Key Vault Secrets User :**  
 ```bash
 KV_ID=$(az keyvault show --name $KV_NAME --query "id" -o tsv)
 az role assignment create \
@@ -1385,47 +1442,47 @@ az role assignment create \
   --role "Key Vault Secrets User" \
   --scope $KV_ID
 ```
-
+  
 ---
 
 ### Problème : DefaultAzureCredential échoue en local
 
-**Symptômes:**
+**Symptômes :**  
 ```
 Error: DefaultAzureCredential failed to retrieve a token
 CredentialUnavailableError: No credential available
 ```
-
-**Diagnostic:**
+  
+**Diagnostic :**
 
 ```bash
-# Vérifier si vous êtes connecté
+# Vérifiez si vous êtes connecté
 az account show
 
-# Vérifier l'authentification de l'Azure CLI
+# Vérifiez l'authentification Azure CLI
 az ad signed-in-user show
 ```
+  
+**Solutions :**
 
-**Solutions:**
-
-1. **Se connecter à Azure CLI :**
+1. **Se connecter à Azure CLI :**  
 ```bash
 az login
 ```
-
-2. **Définir l'abonnement Azure :**
+  
+2. **Définir l’abonnement Azure :**  
 ```bash
 az account set --subscription "Your Subscription Name"
 ```
-
-3. **Pour le développement local, utilisez des variables d'environnement :**
+  
+3. **Pour le développement local, utiliser des variables d’environnement :**  
 ```bash
 export AZURE_TENANT_ID="your-tenant-id"
 export AZURE_CLIENT_ID="your-client-id"
 export AZURE_CLIENT_SECRET="your-client-secret"
 ```
-
-4. **Ou utilisez un autre mode d'authentification en local :**
+  
+4. **Ou utiliser un autre type d’identifiant localement :**  
 ```javascript
 const { DefaultAzureCredential, AzureCliCredential } = require('@azure/identity');
 
@@ -1434,30 +1491,30 @@ const credential = process.env.NODE_ENV === 'production'
   ? new DefaultAzureCredential()
   : new AzureCliCredential();
 ```
-
+  
 ---
 
-### Problème : L'attribution de rôle prend trop de temps à se propager
+### Problème : Assignation de rôle trop longue à se propager
 
-**Symptômes:**
-- Rôle attribué avec succès
-- Toujours des erreurs 403
+**Symptômes :**  
+- Rôle assigné avec succès  
+- Erreurs 403 persistantes  
 - Accès intermittent (parfois fonctionne, parfois non)
 
-**Explication:**
-Les modifications RBAC d'Azure peuvent prendre 5-10 minutes pour se propager globalement.
+**Explication :**  
+Les changements RBAC Azure peuvent prendre 5-10 minutes à se propager globalement.
 
-**Solution:**
+**Solution :**
 
 ```bash
-# Attendez et réessayez
+# Attendre et réessayer
 echo "Waiting for RBAC propagation..."
-sleep 300  # Attendez 5 minutes
+sleep 300  # Attendre 5 minutes
 
 # Tester l'accès
 curl https://myapp.azurecontainerapps.io/upload
 
-# Si cela échoue encore, redémarrez l'application
+# Si cela échoue toujours, redémarrez l'application
 az containerapp revision restart \
   --name myapp \
   --resource-group rg-myapp
@@ -1465,82 +1522,82 @@ az containerapp revision restart \
 
 ---
 
-## Considérations de coûts
+## Considérations sur les coûts
 
-### Coûts liés à l'identité gérée
+### Coûts de l’identité managée
 
 | Ressource | Coût |
 |----------|------|
-| **Identité gérée** | 🆓 **GRATUIT** - Aucun frais |
-| **Attributions de rôles RBAC** | 🆓 **GRATUIT** - Aucun frais |
-| **Requêtes de jetons Azure AD** | 🆓 **GRATUIT** - Inclus |
-| **Opérations Key Vault** | $0.03 per 10,000 operations |
-| **Stockage Key Vault** | $0.024 per secret per month |
+| **Identité managée** | 🆓 **GRATUIT** - Sans frais |
+| **Assignations de rôle RBAC** | 🆓 **GRATUIT** - Sans frais |
+| **Requêtes token Microsoft Entra ID** | 🆓 **GRATUIT** - Inclus |
+| **Opérations Key Vault** | 0,03 $ par 10 000 opérations |
+| **Stockage Key Vault** | 0,024 $ par secret par mois |
 
-**L'identité gérée permet d'économiser de l'argent en :**
-- ✅ Éliminant les opérations Key Vault pour l'authentification service-à-service
-- ✅ Réduisant les incidents de sécurité (aucun identifiant divulgué)
+**L'identité managée fait économiser de l’argent en :**  
+- ✅ Éliminant les opérations Key Vault pour l’authentification service-à-service  
+- ✅ Réduisant les incidents de sécurité (pas de credentials divulgués)  
 - ✅ Diminuant la charge opérationnelle (pas de rotation manuelle)
 
-**Exemple de comparaison des coûts (mensuel) :**
+**Exemple de comparaison de coûts (mensuel) :**
 
-| Scénario | Chaînes de connexion | Identité gérée | Économies |
-|----------|-------------------|-----------------|---------|
-| Petite application (1M de requêtes) | ~$50 (Key Vault + ops) | ~$0 | $50/month |
-| Application moyenne (10M de requêtes) | ~$200 | ~$0 | $200/month |
-| Grande application (100M de requêtes) | ~$1,500 | ~$0 | $1,500/month |
+| Scénario | Chaînes de connexion | Identité managée | Économies |
+|----------|---------------------|-----------------|----------|
+| Petite app (1M requêtes) | ~50 $ (Key Vault + ops) | ~0 $ | 50 $/mois |
+| Application moyenne (10M requêtes) | ~200 $ | ~0 $ | 200 $/mois |
+| Grande app (100M requêtes) | ~1 500 $ | ~0 $ | 1 500 $/mois |
 
 ---
 
 ## En savoir plus
 
 ### Documentation officielle
-- [Azure Managed Identity](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)
-- [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)
-- [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)
-- [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)
+- [Azure Managed Identity](https://learn.microsoft.com/entra/identity/managed-identities-azure-resources/overview)  
+- [Azure RBAC](https://learn.microsoft.com/azure/role-based-access-control/overview)  
+- [Azure Key Vault](https://learn.microsoft.com/azure/key-vault/general/overview)  
+- [DefaultAzureCredential](https://learn.microsoft.com/dotnet/api/azure.identity.defaultazurecredential)  
 
-### Documentation du SDK
-- [@azure/identity (Node.js)](https://www.npmjs.com/package/@azure/identity)
-- [Azure.Identity (C#)](https://www.nuget.org/packages/Azure.Identity/)
-- [azure-identity (Python)](https://pypi.org/project/azure-identity/)
+### Documentation SDK
+- [@azure/identity (Node.js)](https://www.npmjs.com/package/@azure/identity)  
+- [Azure.Identity (C#)](https://www.nuget.org/packages/Azure.Identity/)  
+- [azure-identity (Python)](https://pypi.org/project/azure-identity/)  
 
-### Étapes suivantes dans ce cours
-- ← Précédent : [Gestion de la configuration](configuration.md)
-- → Suivant : [Premier projet](first-project.md)
-- 🏠 [Accueil du cours](../../README.md)
+### Prochaines étapes dans ce cours
+- ← Précédent : [Gestion de la configuration](configuration.md)  
+- → Suivant : [Premier projet](first-project.md)  
+- 🏠 [Accueil du cours](../../README.md)  
 
-### Exemples associés
-- [Exemple de chat Microsoft Foundry Models](../../../../examples/azure-openai-chat) - Utilise l'identité gérée pour Microsoft Foundry Models
-- [Exemple de microservices](../../../../examples/microservices) - Modèles d'authentification multi-service
+### Exemples liés
+- [Exemple avec Microsoft Foundry Models Chat](../../../../examples/azure-openai-chat) - Utilise identité managée pour Microsoft Foundry Models  
+- [Exemple Microservices](../../../../examples/microservices) - Modèles d'authentification multi-service  
 
 ---
 
 ## Résumé
 
-**Vous avez appris :**
-- ✅ Trois modèles d'authentification (chaînes de connexion, Key Vault, identité gérée)
-- ✅ Comment activer et configurer l'identité gérée dans AZD
-- ✅ Attributions de rôles RBAC pour les services Azure
-- ✅ Intégration de Key Vault pour les secrets tiers
-- ✅ Identités attribuées par l'utilisateur vs attribuées par le système
-- ✅ Bonnes pratiques de sécurité et dépannage
+**Vous avez appris :**  
+- ✅ Trois modèles d’authentification (chaînes de connexion, Key Vault, identité managée)  
+- ✅ Comment activer et configurer l’identité managée dans AZD  
+- ✅ Assignations de rôle RBAC pour les services Azure  
+- ✅ Intégration Key Vault pour les secrets tiers  
+- ✅ Identités utilisateur assignées vs système assignées  
+- ✅ Bonnes pratiques de sécurité et dépannage  
 
-**Points clés :**
-1. **Utilisez toujours l'identité gérée en production** - Pas de secrets, rotation automatique
-2. **Utilisez des rôles RBAC au moindre privilège** - Accordez uniquement les permissions nécessaires
-3. **Stockez les clés tierces dans Key Vault** - Gestion centralisée des secrets
-4. **Séparez les identités par environnement** - Isolation dev, staging, prod
-5. **Activez la journalisation d'audit** - Suivez qui a accédé à quoi
+**Points clés :**  
+1. **Toujours utiliser l’identité managée en production** - Pas de secrets, rotation automatique  
+2. **Utiliser les rôles RBAC au moindre privilège** - Accorder uniquement les permissions nécessaires  
+3. **Stocker les clés tierces dans Key Vault** - Gestion centralisée des secrets  
+4. **Séparer les identités selon l’environnement** - Isolation dev, staging, prod  
+5. **Activer la journalisation d’audit** - Suivre qui accède à quoi  
 
-**Étapes suivantes :**
-1. Complétez les exercices pratiques ci-dessus
-2. Migrez une application existante des chaînes de connexion vers l'identité gérée
-3. Construisez votre premier projet AZD avec la sécurité dès le premier jour : [Premier projet](first-project.md)
+**Prochaines étapes :**  
+1. Terminer les exercices pratiques ci-dessus  
+2. Migrer une application existante des chaînes de connexion à l’identité managée  
+3. Construire votre premier projet AZD avec la sécurité intégrée dès le premier jour : [Premier projet](first-project.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-Avertissement :
-Ce document a été traduit à l'aide du service de traduction automatique Co-op Translator (https://github.com/Azure/co-op-translator). Bien que nous fassions tout notre possible pour garantir l'exactitude, veuillez noter que les traductions automatiques peuvent contenir des erreurs ou des inexactitudes. Le document original, dans sa langue d'origine, doit être considéré comme la source faisant foi. Pour les informations critiques, une traduction humaine professionnelle est recommandée. Nous déclinons toute responsabilité pour tout malentendu ou toute interprétation erronée résultant de l'utilisation de cette traduction.
+**Avertissement** :
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforçions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue native doit être considéré comme la source faisant autorité. Pour les informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous ne saurions être tenus responsables des malentendus ou erreurs d'interprétation découlant de l'utilisation de cette traduction.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

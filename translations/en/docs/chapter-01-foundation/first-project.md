@@ -232,6 +232,29 @@ azd monitor --logs
 azd monitor --live
 ```
 
+### ✅ Verify Your Deployment
+
+Before moving on, run through this quick checklist to confirm everything actually works—don't assume "deploy succeeded" means "app works":
+
+```bash
+# 1. Confirm the endpoint exists and is reachable
+azd show
+
+# 2. Smoke-test the endpoint (expects HTTP 200)
+curl -I "$(azd show --output json | jq -r '.services.web.endpoint')"
+
+# 3. Check the health endpoint if your app exposes one
+curl "$(azd show --output json | jq -r '.services.web.endpoint')/health"
+```
+
+**Deployment is verified when:**
+- ✅ `azd show` lists a reachable endpoint URL
+- ✅ The URL opens in your browser without errors
+- ✅ Core features work (add/complete/delete a todo)
+- ✅ `azd monitor --logs` shows requests arriving with no unexpected errors
+
+If any check fails, jump to [Chapter 7: Troubleshooting](../chapter-07-troubleshooting/README.md).
+
 ## Step 6: Make Changes and Redeploy
 
 Let's make a change and see how easy it is to update:
@@ -531,9 +554,8 @@ azd init --template todo-java-mongo
 - **📚 Course Home**: [AZD For Beginners](../../README.md)
 - **📖 Current Chapter**: Chapter 1 - Foundation & Quick Start
 - **⬅️ Previous**: [Installation & Setup](installation.md)
-- **➡️ Next**: [Configuration](configuration.md)
+- **➡️ Next**: [Bring Your Own App](bring-your-own-app.md)
 - **🚀 Next Chapter**: [Chapter 2: AI-First Development](../chapter-02-ai-development/microsoft-foundry-integration.md)
-- **Next Lesson**: [Deployment Guide](../chapter-04-infrastructure/deployment-guide.md)
 
 ---
 

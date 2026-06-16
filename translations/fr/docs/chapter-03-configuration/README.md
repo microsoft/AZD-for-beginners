@@ -6,17 +6,17 @@
 
 ## Aperçu
 
-Ce chapitre couvre la configuration de l'environnement, les modèles d'authentification et les meilleures pratiques de sécurité pour les déploiements Azure Developer CLI.
+Ce chapitre traite de la configuration de l’environnement, des modèles d’authentification et des meilleures pratiques de sécurité pour les déploiements Azure Developer CLI.
 
-> Validé avec `azd 1.23.12` en mars 2026.
+> Validé avec `azd 1.25.6` en juin 2026.
 
-## Objectifs d'apprentissage
+## Objectifs d’apprentissage
 
 En terminant ce chapitre, vous allez :
 - Maîtriser la hiérarchie de configuration AZD
 - Gérer plusieurs environnements (dev, staging, prod)
 - Mettre en œuvre une authentification sécurisée avec des identités gérées
-- Configurer des paramètres spécifiques à l'environnement
+- Configurer des paramètres spécifiques à l’environnement
 
 ---
 
@@ -24,8 +24,8 @@ En terminant ce chapitre, vous allez :
 
 | # | Leçon | Description | Durée |
 |---|--------|-------------|-------|
-| 1 | [Guide de Configuration](configuration.md) | Configuration et gestion de l'environnement | 30 min |
-| 2 | [Authentification & Sécurité](authsecurity.md) | Identité gérée et modèles RBAC | 30 min |
+| 1 | [Guide de Configuration](configuration.md) | Configuration et gestion de l’environnement | 30 min |
+| 2 | [Authentification & Sécurité](authsecurity.md) | Modèles d’identité gérée et RBAC | 30 min |
 
 ---
 
@@ -37,7 +37,7 @@ azd env new dev
 azd env new staging
 azd env new prod
 
-# Changer d'environnement
+# Changer d'environnements
 azd env select prod
 
 # Définir des variables d'environnement
@@ -52,11 +52,11 @@ azd env get-values
 
 ## 🔧 Hiérarchie de Configuration
 
-AZD applique les paramètres dans cet ordre (le plus tard écrase le plus tôt) :
+AZD applique les paramètres dans cet ordre (le dernier remplace le précédent) :
 
 1. **Valeurs par défaut** (intégrées dans les modèles)
 2. **azure.yaml** (configuration du projet)
-3. **Variables d'environnement** (`azd env set`)
+3. **Variables d’environnement** (`azd env set`)
 4. **Options en ligne de commande** (`--location eastus`)
 
 ---
@@ -64,19 +64,19 @@ AZD applique les paramètres dans cet ordre (le plus tard écrase le plus tôt) 
 ## 🔐 Meilleures Pratiques de Sécurité
 
 ```bash
-# Utilisez une identité gérée (recommandé)
+# Utiliser l'identité gérée (recommandé)
 azd env set AZURE_USE_MANAGED_IDENTITY true
 
-# Vérifiez le statut d'authentification AZD
+# Vérifier le statut d'authentification AZD
 azd auth status
 
-# Optionnel : vérifiez le contexte Azure CLI si vous prévoyez d’exécuter des commandes az
+# Optionnel : vérifier le contexte Azure CLI si vous prévoyez d'exécuter des commandes az
 az account show
 
-# Ré-authentifiez-vous si nécessaire
+# Ré-authentifier si nécessaire
 azd auth login
 
-# Optionnel : actualisez l'authentification Azure CLI pour les commandes az
+# Optionnel : actualiser l'authentification Azure CLI pour les commandes az
 az login
 ```
 
@@ -93,12 +93,12 @@ az login
 
 ## 📖 Ressources Associées
 
-- [Vérifications avant Déploiement](../chapter-06-pre-deployment/README.md)
+- [Vérifications Pré-Déploiement](../chapter-06-pre-deployment/README.md)
 - [Dépannage](../chapter-07-troubleshooting/common-issues.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Avertissement** :  
-Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforcions d'assurer l'exactitude, veuillez noter que les traductions automatiques peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue d'origine doit être considéré comme la source faisant foi. Pour les informations critiques, une traduction humaine professionnelle est recommandée. Nous déclinons toute responsabilité en cas de malentendus ou d'interprétations erronées résultant de l'utilisation de cette traduction.
+**Avertissement** :
+Ce document a été traduit à l'aide du service de traduction automatique [Co-op Translator](https://github.com/Azure/co-op-translator). Bien que nous nous efforçions d'assurer l'exactitude, veuillez noter que les traductions automatisées peuvent contenir des erreurs ou des inexactitudes. Le document original dans sa langue native doit être considéré comme la source faisant autorité. Pour les informations critiques, il est recommandé de recourir à une traduction professionnelle réalisée par un humain. Nous ne saurions être tenus responsables des malentendus ou erreurs d'interprétation découlant de l'utilisation de cette traduction.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->

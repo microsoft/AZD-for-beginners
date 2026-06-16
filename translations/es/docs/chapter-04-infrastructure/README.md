@@ -6,26 +6,27 @@
 
 ## Descripción general
 
-Este capítulo cubre patrones de Infraestructura como Código (IaC) con plantillas Bicep, aprovisionamiento de recursos y estrategias de despliegue usando Azure Developer CLI.
+This chapter covers Infrastructure as Code (IaC) patterns with Bicep templates, resource provisioning, and deployment strategies using Azure Developer CLI.
 
-> Validado contra `azd 1.23.12` en marzo de 2026.
+> Validado con `azd 1.25.6` en junio de 2026.
 
 ## Objetivos de aprendizaje
 
-Al completar este capítulo, usted:
-- Comprender la estructura y sintaxis de las plantillas Bicep
-- Aprovisionar recursos de Azure con `azd provision`
+Al completar este capítulo, podrás:
+- Entender la estructura y la sintaxis de las plantillas Bicep
+- Provisionar recursos de Azure con `azd provision`
 - Desplegar aplicaciones con `azd deploy`
-- Implementar estrategias de despliegue blue-green y rodante
+- Implementar estrategias de despliegue blue-green y rolling
 
 ---
 
 ## 📚 Lecciones
 
-| # | Lección | Descripción | Tiempo |
+| # | Lesson | Description | Time |
 |---|--------|-------------|------|
-| 1 | [Provisionamiento de recursos](provisioning.md) | Gestión de recursos de Azure con AZD | 45 min |
-| 2 | [Guía de despliegue](deployment-guide.md) | Estrategias de despliegue de aplicaciones | 45 min |
+| 1 | [Provisioning Resources](provisioning.md) | Azure resource management with AZD | 45 min |
+| 2 | [Deployment Guide](deployment-guide.md) | Application deployment strategies | 45 min |
+| 3 | [Authoring Your Own Template](custom-templates.md) | Build and publish reusable azd templates | 30 min |
 
 ---
 
@@ -38,7 +39,7 @@ azd init --template azure-functions-python-v2-http
 # Previsualizar lo que se creará
 azd provision --preview
 
-# Provisionar solo la infraestructura
+# Aprovisionar solo la infraestructura
 azd provision
 
 # Desplegar solo el código
@@ -69,9 +70,9 @@ my-project/
 
 ## 🔧 Comandos esenciales
 
-| Comando | Descripción |
+| Command | Description |
 |---------|-------------|
-| `azd init` | Inicializar el proyecto |
+| `azd init` | Inicializar proyecto |
 | `azd provision` | Crear recursos de Azure |
 | `azd deploy` | Desplegar el código de la aplicación |
 | `azd up` | provisionar + desplegar |
@@ -81,22 +82,22 @@ my-project/
 
 ## 🔗 Navegación
 
-| Dirección | Capítulo |
+| Direction | Chapter |
 |-----------|---------|
-| **Anterior** | [Capítulo 3: Configuración](../chapter-03-configuration/README.md) |
-| **Siguiente** | [Capítulo 5: Soluciones multi-agente](../chapter-05-multi-agent/README.md) |
+| **Previous** | [Chapter 3: Configuration](../chapter-03-configuration/README.md) |
+| **Next** | [Chapter 5: Multi-Agent Solutions](../chapter-05-multi-agent/README.md) |
 
 ---
 
 ## 📖 Recursos relacionados
 
-- [Comprobaciones previas al despliegue](../chapter-06-pre-deployment/README.md)
-- [Ejemplos de aplicaciones en contenedores](../../examples/container-app/README.md)
-- [Ejemplo de aplicación de base de datos](../../examples/database-app/README.md)
+- [Pre-Deployment Checks](../chapter-06-pre-deployment/README.md)
+- [Container App Examples](../../examples/container-app/README.md)
+- [Database App Example](../../examples/database-app/README.md)
 
 ---
 
 <!-- CO-OP TRANSLATOR DISCLAIMER START -->
-**Disclaimer**:
-Este documento ha sido traducido utilizando el servicio de traducción por IA [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por lograr la máxima precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional realizada por un humano. No nos hacemos responsables de ningún malentendido o interpretación errónea que surja del uso de esta traducción.
+**Descargo de responsabilidad**:
+Este documento ha sido traducido utilizando el servicio de traducción automática [Co-op Translator](https://github.com/Azure/co-op-translator). Aunque nos esforzamos por la precisión, tenga en cuenta que las traducciones automatizadas pueden contener errores o inexactitudes. El documento original en su idioma nativo debe considerarse la fuente autorizada. Para información crítica, se recomienda una traducción profesional humana. No somos responsables de cualquier malentendido o interpretación errónea que surja del uso de esta traducción.
 <!-- CO-OP TRANSLATOR DISCLAIMER END -->
